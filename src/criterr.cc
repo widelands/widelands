@@ -61,8 +61,7 @@ void critical_error(const char* str) {
 
 		  // Register the resposible mouse funtions
 		  // They should already be registered. or else backup the move functions and restore them
-		  // in case of a return
-		  // TODO
+		  // in case of a return. But this shouldn't be needed in the game
 //		  g_ip.register_mcf(menue_lclick, Input::BUT1);
 //		  g_ip.register_mcf(menue_rclick, Input::BUT2);
 //	     g_ip.register_mmf(menue_mmf);
