@@ -65,6 +65,11 @@ class Interactive_Player : public Interactive_Base {
       
       // Visibility for drawing
       std::vector<bool>* get_visibility(void);
+     
+      // For ware production statistics (only needed for the interactive player)
+      void ware_produced(uint id);
+      void next_ware_production_period( void );
+      const std::vector<uint>* get_ware_production_statistics( int ware );
       
    private:
       Game*		m_game;
@@ -74,6 +79,10 @@ class Interactive_Player : public Interactive_Base {
 
       UIUniqueWindowRegistry	m_mainmenu;
       UIUniqueWindowRegistry	m_fieldaction;
+
+      std::vector<uint> m_current_statistics;
+      std::vector< std::vector<uint> > m_ware_productions; 
+      uint  m_last_stats_update;    
 };
 
 

@@ -20,6 +20,7 @@
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
+#include "interactive_player.h"
 #include "map.h"
 #include "player.h"
 #include "productionsite.h"
@@ -687,6 +688,13 @@ void ProductionSite::program_act(Game* g)
 
 			WareInstance* item = new WareInstance(wareid,  get_owner()->get_tribe()->get_ware_descr(wareid));
 			item->init(g);
+
+         // For statistics, inform the user that a ware was produced
+         // Ware statistics are only cached for the interactive user
+         // since other tribes would have other types of wares
+         if(g->get_ipl()->get_player_number()==get_owner()->get_player_number()) 
+            g->get_ipl()->ware_produced(wareid); 
+         
 			m_workers[0]->set_carried_item(g,item);
 
 			// get the worker to drop the item off

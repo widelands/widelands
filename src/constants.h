@@ -52,4 +52,7 @@
 // Maxi numbers of players in a game
 #define MAX_PLAYERS		8
 
+// How often are statistics to be sampled
+#define STATISTICS_SAMPLE_TIME 30000
+
 #endif

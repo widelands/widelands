@@ -17,28 +17,31 @@
  *
  */
 
-#ifndef __S__GAME_INTERACTIVE_PLAYER_DATA_PACKET_H
-#define __S__GAME_INTERACTIVE_PLAYER_DATA_PACKET_H
+#ifndef __S__WARE_STATISTICS_MENU_H
+#define __S__WARE_STATISTICS_MENU_H
 
-#include "game_data_packet.h"
+#include "filesystem.h"
+#include "ui_unique_window.h"
 
-class FileRead;
-class FileWrite;
-class Game;
+class Interactive_Player;
+class UITextarea;
+class UIButton;
+class WUIPlot_Area;
 
-/*
- * Informations about the interactive player. Mostly scrollpos, 
- * player number and so on
- */
-class Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
+class Ware_Statistics_Menu : public UIUniqueWindow {
    public:
-      virtual ~Game_Interactive_Player_Data_Packet();
+      Ware_Statistics_Menu(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
+      virtual ~Ware_Statistics_Menu(void);
 
-      virtual void Read(FileRead*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
-      virtual void Write(FileWrite*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
-
-   private: 
-      void Read_Version1(FileRead*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
+ 
+   private:
+      Interactive_Player* m_parent;
+      UITextarea* m_name, *m_gametime;   
+      WUIPlot_Area* m_plot;
+   
+   private:
+      void clicked(int);
+      void cb_changed_to(int, bool);
 };
 
 #endif

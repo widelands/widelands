@@ -22,6 +22,7 @@
 #include "filesystem.h"
 #include "game.h"
 #include "graphic.h"
+#include "interactive_player.h"
 #include "player.h"
 #include "profile.h"
 #include "queue_cmd_ids.h"
@@ -219,6 +220,12 @@ bool Worker::run_createitem(Game* g, State* state, const WorkerAction* act)
 	item->init(g);
 
 	set_carried_item(g, item);
+
+   // For statistics, inform the user that a ware was produced
+   // Ware statistics are only cached for the interactive user
+   // since other tribes would have other types of wares
+   if(g->get_ipl()->get_player_number()==get_owner()->get_player_number()) 
+      g->get_ipl()->ware_produced(wareid); 
 
 	state->ivar1++;
 	schedule_act(g, 10);
@@ -1425,7 +1432,7 @@ Load graphics (other than animations).
 */
 void Worker_Descr::load_graphics()
 {
-	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname, false);
+	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname, true);
 }
 
 

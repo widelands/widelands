@@ -188,6 +188,7 @@ public:
 	virtual int get_w() const;
 	virtual int get_h() const;
 
+   virtual void draw_line(int x1, int y1, int x2, int y2, RGBColor color);
 	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr);
 	virtual void fill_rect(int x, int y, int w, int h, RGBColor clr);
 	virtual void brighten_rect(int x, int y, int w, int h, int factor);

@@ -244,7 +244,59 @@ int RenderTargetImpl::get_h() const
 	return m_bitmap->h;
 }
 
+/*
+ * Render Target: draw line
+ *
+ * This functions draws a (not horizontal or vertical) 
+ * line in the target, using Bresenham's algorithm
+ *
+ * This function is still quite slow, since it draws
+ * every pixel as a rectangle. So use it with care
+ */
+void RenderTargetImpl::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
+{
+   int dx=x2-x1;      /* the horizontal distance of the line */
+   int dy=y2-y1;      /* the vertical distance of the line */
+   int dxabs=abs(dx);
+   int dyabs=abs(dy);
+   int sdx= dx < 0 ? -1 : 1;
+   int sdy= dy < 0 ? -1 : 1; 
+   int x=dyabs>>1;
+   int y=dxabs>>1;
+   int px=x1;
+   int py=y1;
 
+   draw_rect(px,py,1,1,color);
+
+   if (dxabs>=dyabs) /* the line is more horizontal than vertical */
+   {
+      for(int i=0;i<dxabs;i++)
+      {
+         y+=dyabs;
+         if (y>=dxabs)
+         {
+            y-=dxabs;
+            py+=sdy;
+         }
+         px+=sdx;
+         draw_rect(px,py,1,1,color);
+      }
+   }
+   else /* the line is more vertical than horizontal */
+   {
+      for(int i=0;i<dyabs;i++)
+      {
+         x+=dxabs;
+         if (x>=dyabs)
+         {
+            x-=dyabs;
+            px+=sdx;
+         }
+         py+=sdy;
+         draw_rect(px,py,1,1,color);
+      }
+   }
+}
 /*
 ===============
 RenderTargetImpl::draw_rect

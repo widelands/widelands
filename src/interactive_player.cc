@@ -34,6 +34,8 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "overlay_manager.h"
+#include "tribe.h"
+#include "ware_statistics_menu.h"
 
 /*
 ==============================================================================
@@ -51,6 +53,7 @@ public:
 
 private:
    UIUniqueWindowRegistry m_saveload;
+   UIUniqueWindowRegistry m_wares_statistics;
 	Interactive_Player	*m_player;
    void clicked(int);
 };
@@ -74,18 +77,30 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    b=new UIButton(this, 5, 30, get_inner_w()-10, 20, 0, 2);
    b->set_title("Load Game");
    b->clickedid.set(this, &GameMainMenu::clicked);
-  
+
+   b=new UIButton(this, 5, 55, get_inner_w()-10, 20, 0, 3);
+   b->set_title("Wares Statistics");
+   b->clickedid.set(this, &GameMainMenu::clicked);
+   
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 void GameMainMenu::clicked(int n) {
-   if(n==1) {
-      // Save
-      new Game_Main_Menu_Save_Game(m_player, &m_saveload);
-   } else {
-      // Load
-      new Game_Main_Menu_Load_Game(m_player, &m_saveload);
+   switch(n) {
+      case 1:
+         // Save
+         new Game_Main_Menu_Save_Game(m_player, &m_saveload);
+         break;
+      case 2:
+         // Load
+         new Game_Main_Menu_Load_Game(m_player, &m_saveload);
+         break;
+
+      case 3:
+         // Wares statistics
+         new Ware_Statistics_Menu(m_player, &m_wares_statistics);
+         break;
    }
 }
 
@@ -160,6 +175,7 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	// Speed info
 	m_label_speed = new UITextarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
 
+   m_last_stats_update = 0;
 }
 
 /*
@@ -195,6 +211,13 @@ void Interactive_Player::think()
 		snprintf(buf, sizeof(buf), "%ix", speed);
 
 	m_label_speed->set_text(buf);
+
+   // Reset our statistics counting
+   if(m_game->get_gametime()-m_last_stats_update > STATISTICS_SAMPLE_TIME) { 
+      next_ware_production_period();
+      m_last_stats_update = m_game->get_gametime();
+   }
+   
 }
 
 
@@ -218,9 +241,54 @@ void Interactive_Player::start()
 
    // Recalc whole map for changed owner stuff
    get_map()->recalc_whole_map();
+
+   m_last_stats_update = m_game->get_gametime();
+   next_ware_production_period();
 }
 
+/*
+ * A ware was produced 
+ */
+void Interactive_Player::ware_produced( uint wareid ) {
+   if( m_ware_productions.size() != (uint)get_player()->get_tribe()->get_nrwares() ) { 
+      m_ware_productions.resize( get_player()->get_tribe()->get_nrwares() );
+      m_current_statistics.resize( get_player()->get_tribe()->get_nrwares() );
+   }
+   
+   assert( wareid < (uint)get_player()->get_tribe()->get_nrwares() );
+   
+   m_current_statistics[wareid]++;
+}
 
+/*
+ * void next_ware_production_period() 
+ *
+ * Set the next production period
+ */
+void Interactive_Player::next_ware_production_period( void ) {
+   if( m_ware_productions.size() != (uint)get_player()->get_tribe()->get_nrwares() ) { 
+      m_ware_productions.resize( get_player()->get_tribe()->get_nrwares() );
+      m_current_statistics.resize( get_player()->get_tribe()->get_nrwares() );
+   }
+
+   log("(STATS) Wrapping wares production statistics:\n");
+   for(uint i = 0; i < m_ware_productions.size(); i++) {
+      m_ware_productions[i].push_back( m_current_statistics[i] );
+      log("(STATS) %i units of %s produced!\n", m_current_statistics[i], get_player()->get_tribe()->get_ware_descr(i)->get_descname());
+      m_current_statistics[i] = 0;
+   }
+   
+   log("(STATS) Done.\n");
+}
+
+/*
+ * Get current ware production statistics
+ */
+const std::vector<uint>* Interactive_Player::get_ware_production_statistics( int ware ) {
+   assert( ware < (int)m_ware_productions.size()) ;
+
+   return &m_ware_productions[ware];
+}
 
 /** Interactive_Player::exit_game_btn(void *a)
  *
