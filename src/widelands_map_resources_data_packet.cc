@@ -54,7 +54,6 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
       for(int i=0; i<nr_res; i++) {
          int id=fr->Unsigned16();
          buffer=fr->CString();
-         log("Getting resources: %s\n", buffer);
          int res=world->get_resource(buffer);
          if(res==-1) throw wexception("Resource '%s' exists in map, not in world!", buffer);
          smap[id]=res;
