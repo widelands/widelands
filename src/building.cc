@@ -39,6 +39,7 @@
 #define BUILDING_LEAVE_INTERVAL		1000
 #define CARRIER_SPAWN_INTERVAL		2500
 #define CONSTRUCTIONSITE_STEP_TIME	30000
+#define STATISTICS_VECTOR_LENGTH	10
 
 
 /*
@@ -1856,7 +1857,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
 
 			if (endp && *endp)
 				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
-		} 
+		}
       else if (cmd[0] == "consume") {
          if(cmd.size() != 2)
             throw wexception("Line %i: Usage: consume <ware>", idx);
@@ -1905,7 +1906,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
          // dynamically allocate animations here
          Section* s = prof->get_safe_section(cmd[1].c_str());
          act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
-         
+
          if (cmd[1] == "idle")
             throw wexception("Idle animation is default, no calling senseful!");
 
@@ -1915,7 +1916,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
 
          if (act.iparam2 <= 0)
             throw wexception("animation duration must be positive");
-			
+
       }
 		else
 			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
@@ -1985,7 +1986,7 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
    }
 
    if(is_only_production_site()) {
-      // Are we only a production site? 
+      // Are we only a production site?
       // If not, we might not have a worker
       m_worker_name = sglobal->get_safe_string("worker");
    } else {
@@ -1999,7 +2000,7 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
 		try
 		{
 			program = new ProductionProgram(string);
-			program->parse(directory, prof, string, this, encdata); 
+			program->parse(directory, prof, string, this, encdata);
 			m_programs[program->get_name()] = program;
 		}
 		catch(std::exception& e)
@@ -2069,6 +2070,7 @@ ProductionSite::ProductionSite(ProductionSite_Descr* descr)
 	m_program_phase = 0;
 	m_program_timer = false;
 	m_program_time = 0;
+	m_statistics_changed = true;
 }
 
 
@@ -2081,10 +2083,9 @@ ProductionSite::~ProductionSite()
 {
 }
 
-
 /*
 ===============
-ProductionSite::get_statistics_string
+ProductionSite::get_statistic_string
 
 Display whether we're occupied.
 ===============
@@ -2093,10 +2094,64 @@ std::string ProductionSite::get_statistics_string()
 {
 	if (!m_worker)
 		return "(not occupied)";
-
-	return "%%%%"; // TODO: implement percentage counter
+	if (m_statistics_changed)
+       calc_statistics();
+	return m_statistics_buf;
 }
 
+/*
+===============
+ProductionSite::calc_statistic
+
+Calculate statistic.
+===============
+*/
+void ProductionSite::calc_statistics() {
+   std::vector<bool>::const_iterator pos;
+   uint i=0;
+   uint ok=0;
+   uint lastOk=0;
+
+   for (pos=m_statistics.begin();pos<m_statistics.end();pos++) {
+      if (*pos) {
+         ok++;
+         if (i>=STATISTICS_VECTOR_LENGTH/2)
+            lastOk++;
+      }
+      i++;
+   }
+   double percOk = (ok*100) / STATISTICS_VECTOR_LENGTH;
+   double lastPercOk = (lastOk*100) / (STATISTICS_VECTOR_LENGTH/2);
+
+   const char* trendBuf;
+   if (lastPercOk > percOk)
+      trendBuf = "UP";
+   else if (lastPercOk < percOk)
+      trendBuf = "DOWN";
+   else
+      trendBuf = "=";
+
+   if (percOk > 0 && percOk < 100)
+     snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%% %s",percOk,trendBuf);
+   else
+     snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%",percOk);
+   molog("stat: lastOk: %.0f%% percOk: %.0f%% trend: %s\n",lastPercOk,percOk,trendBuf);
+   m_statistics_changed = false;
+}
+
+
+/*
+===============
+ProductionSite::add_statistic_value
+
+Add a value to statistic vector.
+===============
+*/
+void ProductionSite::add_statistics_value(bool val) {
+   m_statistics_changed = true;
+   m_statistics.erase(m_statistics.begin(),m_statistics.begin()+1);
+   m_statistics.push_back(val);
+}
 
 /*
 ===============
@@ -2123,6 +2178,11 @@ void ProductionSite::init(Editor_Game_Base *g)
          m_input_queues.push_back(wq);
          //         wq->set_callback(&ConstructionSite::wares_queue_callback, this);
          wq->init((Game*)g, g->get_safe_ware_id((*inputs)[i].get_ware()->get_name()), (*inputs)[i].get_max());
+      }
+
+      //Initialize statistics vector
+      for (uint i=0;i<STATISTICS_VECTOR_LENGTH;i++) {
+         m_statistics.push_back(false);
       }
    }
 }
@@ -2262,114 +2322,142 @@ Advance the program state if applicable.
 void ProductionSite::act(Game *g, uint data)
 {
 	if (m_program_timer && (int)(g->get_gametime() - m_program_time) >= 0) {
-		const ProductionAction* action = m_program->get_action(m_program_ip);
+		if (!m_program)
+		{
+			m_program = get_descr()->get_program("work");
+			m_program_ip = 0;
+			m_program_phase = 0;
+		}
+
+		if (m_program_ip >= m_program->get_size()) {
+			program_end(g, true);
+			return;
+		}
 
 		m_program_timer = false;
-		m_program_needs_restart=false;
 
-      molog("PSITE: program %s#%i\n", m_program->get_name().c_str(), m_program_ip);
-
-      if(m_anim!=get_descr()->get_idle_anim()) {
+      if (m_anim != get_descr()->get_idle_anim()) {
          // Restart idle animation, which is the default
          start_animation(g, get_descr()->get_idle_anim());
       }
 
-
-      switch(action->type) {
-         case ProductionAction::actSleep:
-            molog("  Sleep(%i)\n", action->iparam1);
-
-            program_step();
-            m_program_timer = true;
-            m_program_time = schedule_act(g, action->iparam1);
-            break;
-
-         case ProductionAction::actAnimate:
-            molog("  Animate(%i,%i)\n", action->iparam1, action->iparam2);
-
-            start_animation(g, action->iparam1);
-
-            program_step();
-            m_program_timer = true;
-            m_program_time = schedule_act(g, action->iparam2);
-            break;
-
-         case ProductionAction::actWorker:
-            molog("  Worker(%s)\n", action->sparam1.c_str());
-
-            m_worker->update_task_buildingwork(g);
-            break;
-
-         case ProductionAction::actConsume:
-            molog("  Consume(%s)\n", action->sparam1.c_str());
-            for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
-               if(!strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(), action->sparam1.c_str())) {
-                  WaresQueue* wq=m_input_queues[i];
-                  if(wq->get_filled())
-						{
-                     wq->set_filled(wq->get_filled()-1);
-							wq->update(g);
-						}
-                  else
-						{
-							molog("   Consume failed, program restart\n");
-							program_restart();
-						}
-                  break;
-               }
-            }
-            molog("  Consume done!\n");
-            program_step();
-            m_program_timer=true;
-            m_program_time=schedule_act(g, 10);
-            break;
-
-         case ProductionAction::actCheck:
-            molog("  Checking(%s)\n", action->sparam1.c_str());
-
-            for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
-               if(!strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(), action->sparam1.c_str())) {
-                  WaresQueue* wq=m_input_queues[i];
-                  if(wq->get_filled())
-                  {
-                     // okay, do nothing
-                     molog("    okay\n");
-                  }
-                  else
-                  {
-                     molog("   Checking failed, program restart\n");
-                     program_restart();
-                  }
-                  break;
-               }
-            }
-
-				molog("  Check done!\n");
-
-            program_step();
-            m_program_timer = true;
-            m_program_time = schedule_act(g, 10);
-            break;
-
-         case ProductionAction::actProduce:
-            {
-            molog("  Produce(%s)\n", action->sparam1.c_str());
-
-            int wareid = g->get_safe_ware_id(action->sparam1.c_str());
-
-            WareInstance* item = new WareInstance(wareid);
-            item->init(g);
-            m_worker->set_carried_item(g,item);
-
-				// get the worker to drop the item off
-				// get_building_work() will advance the program
-            m_worker->update_task_buildingwork(g);
-            }
-            break;
-      }
+		program_act(g);
    }
 
    Building::act(g, data);
+}
+
+
+/*
+===============
+ProductionSite::program_act
+
+Perform the current program action.
+
+Pre: The program is running and in a valid state.
+Post: (Potentially indirect) scheduling for the next step has been done.
+===============
+*/
+void ProductionSite::program_act(Game* g)
+{
+	const ProductionAction* action = m_program->get_action(m_program_ip);
+
+	molog("PSITE: program %s#%i\n", m_program->get_name().c_str(), m_program_ip);
+
+	switch(action->type) {
+		case ProductionAction::actSleep:
+			molog("  Sleep(%i)\n", action->iparam1);
+
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, action->iparam1);
+			return;
+
+		case ProductionAction::actAnimate:
+			molog("  Animate(%i,%i)\n", action->iparam1, action->iparam2);
+
+			start_animation(g, action->iparam1);
+
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, action->iparam2);
+			return;
+
+		case ProductionAction::actWorker:
+			molog("  Worker(%s)\n", action->sparam1.c_str());
+
+			m_worker->update_task_buildingwork(g);
+			return;
+
+		case ProductionAction::actConsume:
+			molog("  Consume(%s)\n", action->sparam1.c_str());
+			for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
+				if(!strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(), action->sparam1.c_str())) {
+					WaresQueue* wq=m_input_queues[i];
+					if(wq->get_filled())
+					{
+						wq->set_filled(wq->get_filled()-1);
+						wq->update(g);
+					}
+					else
+					{
+						molog("   Consume failed, program restart\n");
+						program_end(g, false);
+						return;
+					}
+					break;
+				}
+			}
+			molog("  Consume done!\n");
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, 10);
+			return;
+
+		case ProductionAction::actCheck:
+			molog("  Checking(%s)\n", action->sparam1.c_str());
+
+			for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
+				if(!strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(), action->sparam1.c_str())) {
+					WaresQueue* wq=m_input_queues[i];
+					if(wq->get_filled())
+					{
+						// okay, do nothing
+						molog("    okay\n");
+					}
+					else
+					{
+						molog("   Checking failed, program restart\n");
+						program_end(g, false);
+						return;
+					}
+					break;
+				}
+			}
+
+			molog("  Check done!\n");
+
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, 10);
+			return;
+
+		case ProductionAction::actProduce:
+			{
+			molog("  Produce(%s)\n", action->sparam1.c_str());
+
+			int wareid = g->get_safe_ware_id(action->sparam1.c_str());
+
+			WareInstance* item = new WareInstance(wareid);
+			item->init(g);
+			m_worker->set_carried_item(g,item);
+
+			// get the worker to drop the item off
+			// get_building_work() will advance the program
+			m_worker->update_task_buildingwork(g);
+			return;
+			}
+	}
 }
 
 
@@ -2403,6 +2491,15 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 {
 	assert(w == m_worker);
 
+	// If unsuccessful: Check if we need to abort current program
+	if (!success && m_program && m_program_ip < m_program->get_size())
+	{
+		const ProductionAction* action = m_program->get_action(m_program_ip);
+
+		if (action->type == ProductionAction::actWorker)
+			program_end(g, false);
+	}
+
 	// Default actions first
 	WareInstance* item = w->fetch_carried_item(g);
 
@@ -2426,14 +2523,10 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 	// Start program if we haven't already done so
 	if (!m_program)
 	{
-		m_program = get_descr()->get_program("work");
-		m_program_ip = 0;
-		m_program_phase = 0;
 		m_program_timer = true;
-		m_program_needs_restart=false;
       m_program_time = schedule_act(g, 10);
 	}
-	else
+	else if (m_program_ip < m_program->get_size())
 	{
 		const ProductionAction* action = m_program->get_action(m_program_ip);
 
@@ -2471,26 +2564,32 @@ Advance the program to the next step, but does not schedule anything.
 */
 void ProductionSite::program_step()
 {
-	if(m_program_needs_restart) return;
-
-   m_program_ip = (m_program_ip + 1) % m_program->get_size();
+   m_program_ip++;
 	m_program_phase = 0;
 }
 
+
 /*
 ===============
-ProductionSite::program_restart()
+ProductionSite::program_end
 
-The program needs to restart (maybe because of failure). all further 
-schedules are ignored
+Ends the current program now and updates the productivity statistics.
+
+Pre: Any program is running.
+Post: No program is running, acting is scheduled.
 ===============
 */
-void ProductionSite::program_restart() {
-   m_program_ip=0;
-   m_program_phase=0;
-   m_program_timer=false;
-   m_program_time=0;
-   m_program_needs_restart=true;
+void ProductionSite::program_end(Game* g, bool success)
+{
+	molog("ProductionSite: program ends (%s)\n", success ? "success" : "failure");
+
+	m_program = 0;
+	m_program_ip = 0;
+   m_program_phase = 0;
+   m_program_timer = true;
+   m_program_time = schedule_act(g, 10);
+
+	add_statistics_value(success);
 }
 
 
@@ -2730,7 +2829,7 @@ void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware, Work
 
 	assert(w);
 	assert(w->get_location(g) == psite);
-      
+
    g->conquer_area(psite->get_owner()->get_player_number(), psite->get_position(), psite->get_descr());
 }
 
@@ -2744,7 +2843,7 @@ Advance the program state if applicable.
 */
 void MilitarySite::act(Game *g, uint data)
 {
-   // TODO: do all kinds of stuff, but if you do nothing, let ProductionSite::act() 
+   // TODO: do all kinds of stuff, but if you do nothing, let ProductionSite::act()
    // handle all this. Also note, that some ProductionSite commands rely, that ProductionSite::act()
    // is not called for a certain period (like cmdAnimation). This should be reworked.
    // Maybe a new queueing system like MilitaryAct could be introduced.
@@ -2811,7 +2910,7 @@ Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *
 			descr = new MilitarySite_Descr(tribe, name);
 		else
 			throw wexception("Unknown building type '%s'", type);
-		
+
 		descr->parse(directory, &prof, encdata);
 	}
 	catch(std::exception &e) {

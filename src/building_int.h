@@ -168,7 +168,9 @@ public:
 	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
-   virtual void set_economy(Economy* e);
+	virtual void set_economy(Economy* e);
+
+	virtual void calc_statistics();
 
    inline std::vector<WaresQueue*>* get_warequeues(void) { return &m_input_queues; }
 
@@ -179,8 +181,10 @@ private:
 	void request_worker(Game* g);
 	static void request_worker_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
+	void program_act(Game* g);
 	void program_step();
-   void program_restart();
+	void program_end(Game* g, bool success);
+	void add_statistics_value(bool val);
 
 private:
 	Request*		m_worker_request;
@@ -193,8 +197,10 @@ private:
 	int								m_program_phase;	// micro-step index (instruction dependent)
 	bool								m_program_timer;	// execute next instruction based on pointer
 	int								m_program_time;	// timer time
-   bool                       m_program_needs_restart; // program shall be restarted on next act()
    std::vector<WaresQueue*>   m_input_queues;   //  input queues for all inputs
+	std::vector<bool>          m_statistics;
+	bool                       m_statistics_changed;
+	char                       m_statistics_buf[40];
 };
 
 class MilitarySite_Descr : public ProductionSite_Descr {
@@ -223,7 +229,7 @@ class MilitarySite_Descr : public ProductionSite_Descr {
 
 class MilitarySite : public ProductionSite {
 	MO_DESCR(MilitarySite_Descr);
-   
+
    public:
       MilitarySite(MilitarySite_Descr* descr);
       virtual ~MilitarySite();
