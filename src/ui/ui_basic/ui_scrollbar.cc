@@ -289,6 +289,8 @@ void UIScrollbar::draw(RenderTarget* dst)
 {
 	uint knobpos = get_knob_pos();
 
+   if(m_steps==1) return; // don't draw a not doing scrollbar
+   
 	if (m_horizontal)
 	{
 		draw_button(dst, Minus, 0, 0, Size, get_h());

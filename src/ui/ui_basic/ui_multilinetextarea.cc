@@ -134,7 +134,19 @@ Redraw the textarea
 */
 void UIMultiline_Textarea::draw(RenderTarget* dst)
 {
-	// Let the font handler worry about all the complicated stuff..
-	g_font->draw_string(dst, 0, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w());
+   if (m_text.length())
+   {
+      int x = 0;
+      int y = 0;
+
+      // Only HAlignment allowed
+      if (m_align & Align_HCenter)
+         x += get_w()/2;
+      else if (m_align & Align_Right)
+         x += get_w();
+
+      // Let the font handler worry about all the complicated stuff..
+      g_font->draw_string(dst, x, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w());
+   }
 }
 

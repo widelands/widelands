@@ -46,29 +46,20 @@ Widelands_Map_Loader::~Widelands_Map_Loader(void) {
  * the get_info() functions (_width, _nrplayers..)
  */
 int Widelands_Map_Loader::preload_map() {
-   ALIVE();
    assert(get_state()!=STATE_LOADED);
 
-   ALIVE();
    // Load elemental data block
    Widelands_Map_Elemental_Data_Packet mp;
-   ALIVE();
    FileRead fr;
-   ALIVE();
 
-   ALIVE();
    fr.Open(g_fs, m_filename.c_str());
-   ALIVE();
    mp.Pre_Read(&fr, m_map);
-   ALIVE();
    
    if(!exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
-   ALIVE();
    
    set_state(STATE_PRELOADED);
-   ALIVE();
 
    return 0;
 }

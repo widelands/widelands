@@ -19,7 +19,7 @@
 
 #include "ui_window.h"
 #include "ui_modal_messagebox.h"
-#include "ui_textarea.h"
+#include "ui_multilinetextarea.h"
 #include "ui_button.h"
 #include "system.h"
 #include "graphic.h"
@@ -27,10 +27,10 @@
 UIModal_Message_Box::UIModal_Message_Box(UIPanel* parent, std::string caption, std::string text, MB_Type type) :
    UIWindow(parent, 0, 0, 20, 20, caption.c_str()) {
 
-   set_inner_size(320, 100);
+   set_inner_size(320, 160);
    set_pos((parent->get_inner_w()-320)/2, (parent->get_inner_h()-100)/2);
 
-   new UITextarea(this, 5, 5, get_inner_w()-10, get_inner_h()-70, text.c_str(), Align_Center);
+   new UIMultiline_Textarea(this, 5, 5, get_inner_w()-10, get_inner_h()-70, text.c_str(), Align_Center);
 
    if(type==OK) {
       UIButton* but= new UIButton(this, (get_inner_w()-60)/2, get_inner_h()-30, 60, 20, 0, 0);
@@ -61,6 +61,6 @@ bool UIModal_Message_Box::handle_mouseclick(uint btn, bool down, int mx, int my)
       end_modal(0);
       return true;
    } else
-      return UIWindow::handle_mouseclick(btn,down,mx,my);
+      return false; // we're not dragable 
 }
    

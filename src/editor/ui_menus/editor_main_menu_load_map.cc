@@ -112,14 +112,10 @@ void Main_Menu_Load_Map::clicked(int id) {
       UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, "Load Map Error!!", s, UIModal_Message_Box::OK);
       mbox->run();
       delete mbox;
-      return; // don't do post stuff
    }
    
-   ALIVE();
    m_parent->get_editor()->postload();
-   ALIVE();
    m_parent->get_editor()->load_graphics();
-   ALIVE();
    
    // Tell the user interface that the map has changed
    m_parent->map_changed();
