@@ -2218,8 +2218,20 @@ Worker::dropoff_update
 */
 void Worker::dropoff_update(Game* g, State* state)
 {
+	std::string signal = get_signal();
+
+	if (signal.size()) {
+		molog("[dropoff]: Interrupted by signal '%s'\n", signal.c_str());
+		pop_task(g);
+		return;
+	}
+
 	WareInstance* item = get_carried_item(g);
 	BaseImmovable* location = g->get_map()->get_immovable(get_position());
+	PlayerImmovable* ploc = get_location(g);
+
+	assert(ploc && ploc->get_type() == BUILDING);
+	assert(location && (ploc == location || ploc->get_base_flag() == location));
 
 	// Deliver the item
 	if (item)
