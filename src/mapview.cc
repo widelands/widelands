@@ -25,8 +25,8 @@
 
 /* class Map_View 
  *
- * this implements a view of a card. it's used
- * to render a valid card on the screen
+ * this implements a view of a map. it's used
+ * to render a valid map on the screen
  *
  * Depends: class Map
  * 			g_gr
@@ -54,7 +54,7 @@ Map_View::~Map_View(void) {
 /** void Map_View::draw(void) 
  *
  * This is the guts!! this function draws the whole
- * card the user can see. we spend a lot of time
+ * map the user can see. we spend a lot of time
  * in this function
  *
  * Args: None

@@ -27,7 +27,7 @@
 /** class Interactive_Player
  *
  * This is the interactive player. this one is 
- * responsible to show the correct card
+ * responsible to show the correct map
  * to the player and draws the user interface, 
  * cares for input and so on.
  *

@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef __S__CARDSELECTMENUE_H
-#define __S__CARDSELECTMENUE_H
+#ifndef __S__MAPSELECTMENUE_H
+#define __S__MAPSELECTMENUE_H
 
 
-void card_select_menue(void);
+void map_select_menue(void);
 
 
 #endif

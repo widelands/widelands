@@ -72,8 +72,8 @@ widelands_SOURCES=main.cc \
 						window.cc \
 						checkbox.cc \
 						listselect.cc \
-						cardselectmenue.h \
-						cardselectmenue.cc \
+						mapselectmenue.h \
+						mapselectmenue.cc \
 						s2map.h \
 						s2map.cc \
 						criterr.h \

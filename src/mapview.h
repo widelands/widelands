@@ -25,8 +25,8 @@
 
 /* class Map_View 
  *
- * this implements a view of a card. it's used
- * to render a valid card on the screen
+ * this implements a view of a map. it's used
+ * to render a valid map on the screen
  *
  * Depends: class Map
  * 			g_gr

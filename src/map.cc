@@ -116,7 +116,7 @@ int Map::load_wlmf(const char* file) {
 		  set_size(hd.width, hd.height);
 
 		  
-		  // now, read in the fields, one at a time and init the card
+		  // now, read in the fields, one at a time and init the map 
 		  FieldDescr fd;
 		  int y;
 		  Pic *td, *tr;

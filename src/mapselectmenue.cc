@@ -18,7 +18,7 @@
  */
 
 #include "os.h"
-#include "cardselectmenue.h"
+#include "mapselectmenue.h"
 #include "ui.h"
 #include "font.h"
 #include "fileloc.h"
@@ -30,14 +30,14 @@
 #include "criterr.h"
 #include "mainmenue.h"
 
-/** void card_select_menue(void) 
+/** void map_select_menue(void) 
  *
- *	Here, you chose a card out of a given listbox
+ *	Here, you chose a map out of a given listbox
  *
  * Args:	None
  * Returns:	nothing
  */
-void card_select_menue(void) {
+void map_select_menue(void) {
 		  bool* bexit= new bool(false);
 		  bool* bselect= new bool(false);
 		  

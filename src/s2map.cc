@@ -26,7 +26,7 @@
 #include "fileloc.h"
 
 // TEMP
-#include <iostream.h>
+// #include <iostream.h>
 
 /** int Map::load_s2mf(const char* filen) 
  *
@@ -65,7 +65,7 @@ int Map::load_s2mf(const char* filen) {
 		  hd.width=header.w;
 		  hd.height=header.h;
 		  hd.version=WLMF_VERSION;
-		  strcpy(hd.descr, "Bluebyte Settlers II Card. No comment defined!");
+		  strcpy(hd.descr, "Bluebyte Settlers II Map. No comment defined!");
 		 
 		  const char* buf;
 		  switch(header.uses_world) {
@@ -483,9 +483,9 @@ int Map::load_s2mf(const char* filen) {
 													 break;
 								}
 #endif
-								//a_CardGetField(x,y)->takes_building=c;
-								//a_CardGetField(x,y)->orig_takes_building=c;
-								//if(c==0x68 || c==0x78) a_CardGetField(x,y)->zeroed_by++;
+								//a_MapGetField(x,y)->takes_building=c;
+								//a_MapGetField(x,y)->orig_takes_building=c;
+								//if(c==0x68 || c==0x78) a_MapGetField(x,y)->zeroed_by++;
 								// ret->get_field(x,y)->takes_building=c;
 								read++;
 					 }
@@ -522,7 +522,7 @@ int Map::load_s2mf(const char* filen) {
 
 		  // S E C T I O N 11  -------- STARTING_POINT
 		  // I don't know what this does. It really identifies some points
-		  //  (6 on new cards, 1 on old)
+		  //  (6 on new maps, 1 on old)
 		  //  But this points don't make sense....
 		  //  We skip it.
 		  // New section??
@@ -629,7 +629,7 @@ int Map::load_s2mf(const char* filen) {
 		  for(y=0; y<hd.height; y++) {
 					 for(x=0; x<hd.width; x++) {
 								file.read(&c, sizeof(unsigned char));
-//								a_CardGetField(x,y)->bergflanken=c;
+//								a_MapGetField(x,y)->bergflanken=c;
 								read++;
 					 }
 		  }
@@ -683,36 +683,36 @@ int Map::load_s2mf(const char* filen) {
 		  
 /*		  for(y=0; y<hd.height; y++) {
 					 for(x=0; x<hd.width; x++) {
-								if(a_CardGetField(x,y)->can_build_way== 0x80) {
+								if(a_MapGetField(x,y)->can_build_way== 0x80) {
 										  a_BuildingSet(x, y, TYPE_HQ, STATE_FINISH);
 										  continue;
 								}
 
-								c=a_CardGetField(x,y)->bob;
+								c=a_MapGetField(x,y)->bob;
 								
-								if(a_CardGetField(x,y)->takes_building==0x78) {
+								if(a_MapGetField(x,y)->takes_building==0x78) {
 										  switch(c) {
 													 case BOB_STONE1:
-																a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("stones1"));
+																a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("stones1"));
 																continue;
 													 case BOB_STONE2:
-																a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("stones2"));
+																a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("stones2"));
 																continue;
 													 case BOB_STONE3:
-																a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("stones3"));
+																a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("stones3"));
 																continue;
 													 case BOB_STONE4:
-																a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("stones4"));
+																a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("stones4"));
 																continue;
 													 case BOB_STONE5:
-																a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("stones5"));
+																a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("stones5"));
 																continue;
 													 case BOB_STONE6:
-																a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("stones6"));
+																a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("stones6"));
 																continue;
 
 													 default:
-																// Silently ignoring. S2 card format is strange... or not understood
+																// Silently ignoring. S2 maps format is strange... or not understood
 																break;
 										  }
 								}
@@ -723,204 +723,204 @@ int Map::load_s2mf(const char* filen) {
 													 break;
 
 										  case BOB_PEBBLE1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("pebble1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("pebble1"));
 													 break;
 										  case BOB_PEBBLE2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("pebble2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("pebble2"));
 													 break;
 										  case BOB_PEBBLE3:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("pebble3"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("pebble3"));
 													 break;
 										  case BOB_PEBBLE4:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("pebble4"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("pebble4"));
 													 break;
 										  case BOB_PEBBLE5:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("pebble5"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("pebble5"));
 													 break;
 										  case BOB_PEBBLE6:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("pebble6"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("pebble6"));
 													 break;
 
 										  case BOB_MUSHROOM1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("mushroom1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("mushroom1"));
 													 break;
 										  case BOB_MUSHROOM2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("mushroom2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("mushroom2"));
 													 break;
 
 										  case BOB_DEADTREE1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("deadtree1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("deadtree1"));
 													 break;
 										  case BOB_DEADTREE2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("deadtree2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("deadtree2"));
 													 break;
 										  case BOB_DEADTREE3:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("deadtree3"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("deadtree3"));
 													 break;
 										  case BOB_DEADTREE4:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("deadtree4"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("deadtree4"));
 													 break;
 
 									  case BOB_TREE1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree1"));
 													 break;
 										  case BOB_TREE2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree2"));
 													 break;
 										  case BOB_TREE3:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree3"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree3"));
 													 break;
 										  case BOB_TREE4:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree4"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree4"));
 													 break;
 										  case BOB_TREE5:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree5"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree5"));
 													 break;
 										  case BOB_TREE6:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree6"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree6"));
 													 break;
 										  case BOB_TREE7:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree7"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree7"));
 													 break;
 										  case BOB_TREE8:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree8"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree8"));
 													 break;
 										  case BOB_TREE9:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree9"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree9"));
 													 break;
 										  case BOB_TREE10:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree10"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree10"));
 													 break;
 										  case BOB_TREE11:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree11"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree11"));
 													 break;
 										  case BOB_TREE12:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree12"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree12"));
 													 break;
 										  case BOB_TREE13:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree13"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree13"));
 													 break;
 										  case BOB_TREE14:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree14"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree14"));
 													 break;
 										  case BOB_TREE15:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree15"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree15"));
 													 break;
 										  case BOB_TREE16:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree16"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree16"));
 													 break;
 										  case BOB_TREE17:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree17"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree17"));
 													 break;
 										  case BOB_TREE18:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree18"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree18"));
 													 break;
 										  case BOB_TREE19:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree19"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree19"));
 													 break;
 										  case BOB_TREE20:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree20"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree20"));
 													 break;
 										  case BOB_TREE21:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree21"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree21"));
 													 break;
 										  case BOB_TREE22:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree22"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree22"));
 													 break;
 										  case BOB_TREE23:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree23"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree23"));
 													 break;
 										  case BOB_TREE24:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree24"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree24"));
 													 break;
 										  case BOB_TREE25:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree25"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree25"));
 													 break;
 										  case BOB_TREE26:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree26"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree26"));
 													 break;
 										  case BOB_TREE27:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree27"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree27"));
 													 break;
 										  case BOB_TREE28:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree28"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree28"));
 													 break;
 										  case BOB_TREE29:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree29"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree29"));
 													 break;
 										  case BOB_TREE30:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree30"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree30"));
 													 break;
 										  case BOB_TREE31:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree31"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree31"));
 													 break;
 										  case BOB_TREE32:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("tree32"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("tree32"));
 													 break;
 
 										  case BOB_GRASS1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("grass1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("grass1"));
 													 break;
 										  case BOB_GRASS2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("grass2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("grass2"));
 													 break;
 										  case BOB_GRASS3:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("grass3"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("grass3"));
 													 break;
 
 										  case BOB_STANDING_STONES1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("sstones1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("sstones1"));
 													 break;
 										  case BOB_STANDING_STONES2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("sstones2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("sstones2"));
 													 break;
 										  case BOB_STANDING_STONES3:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("sstones3"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("sstones3"));
 													 break;
 										  case BOB_STANDING_STONES4:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("sstones4"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("sstones4"));
 													 break;
 										  case BOB_STANDING_STONES5:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("sstones5"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("sstones5"));
 													 break;
 										  case BOB_STANDING_STONES6:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("sstones6"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("sstones6"));
 													 break;
 										  case BOB_STANDING_STONES7:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("sstones7"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("sstones7"));
 													 break;
 
 										  case BOB_SKELETON1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("skeleton1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("skeleton1"));
 													 break;
 										  case BOB_SKELETON2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("skeleton2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("skeleton2"));
 													 break;
 										  case BOB_SKELETON3:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("skeleton3"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("skeleton3"));
 													 break;
 													 
 										  case BOB_CACTUS1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("cactus1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("cactus1"));
 													 break;
 										  case BOB_CACTUS2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("cactus2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("cactus2"));
 													 break;
 													 
 										  case BOB_BUSH1:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("bush1"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("bush1"));
 													 break;
 										  case BOB_BUSH2:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("bush2"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("bush2"));
 													 break;
 										  case BOB_BUSH3:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("bush3"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("bush3"));
 													 break;
 										  case BOB_BUSH4:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("bush4"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("bush4"));
 													 break;
 										  case BOB_BUSH5:
-													 a_FieldSetBob(a_CardGetField(x,y), a_BobsLoad("bush5"));
+													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("bush5"));
 													 break;
 
 											  default:

@@ -44,9 +44,9 @@
 
 /** struct Map_Header
  *
- * This is the header of a widelands card format
+ * This is the header of a widelands map format
  * it's designed to be fastly read to give the user informations 
- * about the card while browsing it. 
+ * about the map while browsing it. 
  *   --> no pointers (oh wonder!) 
  */
 struct MapDescrHeader {

@@ -16,7 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-#include "cardselectmenue.h"
+#include "mapselectmenue.h"
 #include "singlepmenue.h"
 #include "graphic.h"
 #include "input.h"
@@ -33,7 +33,7 @@
 /** void single_player_menue(void) 
  *
  * This takes care for the single player menue, chosing campaign or
- * single player card and so on, so on.
+ * single player maps and so on, so on.
  *
  * Args:	None
  * Returns:	nothing
@@ -64,7 +64,7 @@ void single_player_menue(void) {
 		  Button* b;
 		  b=win->create_button(60, 170, 170, 20, 1);
 		  b->register_func(menue_butclick_func, brunsc);
-		  b->set_pic(g_fh.get_string("Single Card", 0));
+		  b->set_pic(g_fh.get_string("Single Map", 0));
 
 		  b=win->create_button(60, 210, 170, 20, 1);
 		  b->register_func(menue_butclick_func, brunc);
@@ -93,7 +93,7 @@ void single_player_menue(void) {
 		  }
 		  else if(*brunsc) {
 					 g_ui.delete_all_windows();
-					 card_select_menue();
+					 map_select_menue();
 		  }
 		  else if(*brunc) {
 					 g_ui.delete_all_windows();
