@@ -38,7 +38,9 @@ class Logic_Bob_Descr : virtual public File_Descr {
    protected:
       enum {
          BOB_GROWING=0,
-         BOB_DIMINISHING
+         BOB_DIMINISHING,
+         BOB_BORING,
+         BOB_CRITTER
       };
       
       Logic_Bob_Descr(const char* name);
@@ -90,6 +92,20 @@ class Diminishing_Bob_Descr : virtual public Logic_Bob_Descr {
       ushort stock;
 };
 
+// 
+// Borings
+// 
+class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
+   public:
+      Boring_Bob_Descr(const char* name);
+      virtual ~Boring_Bob_Descr(void);
+
+      virtual int construct(Profile* p, Section *s);
+      virtual int write(Binary_file* f);
+
+   private:
+      ushort ttl; // time to life
+};
 
 // global ware fabric objekt!
 extern Fabric<Logic_Bob_Descr> bobf;

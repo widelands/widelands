@@ -35,7 +35,9 @@ wtfcreate_SOURCES=main.cc \
                   write_tribefile.h \
                   write_tribefile.cc \
                   pic_descr.cc \
-                  pic_descr.h
+                  pic_descr.h \
+                  parse_bobs.h \
+                  parse_bobs.cc
 
 #  uncomment the following if widelands requires the math library
 #widelands_LDADD=-lm

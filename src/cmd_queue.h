@@ -35,8 +35,10 @@
 
 // ---------------------- BEGINN OF CMDS ----------------------------------
 enum {
-   CMD_LOAD_MAP = 0,
-   CMD_WARP_BUILDING
+   SKIP = 0,
+   CMD_LOAD_MAP = 1,
+   CMD_WARP_BUILDING,
+   CMD_CREATE_BOB
 };
 // ---------------------- END    OF CMDS ----------------------------------
 

@@ -23,6 +23,7 @@
 #include "worker_descr.h"
 #include "logic_bob_descr.h"
 #include "parse.h"
+#include "parse_bobs.h"
 
 #define OK        0
 #define ERROR     1
@@ -454,88 +455,6 @@ int parse_root_conf(Tribe_Header* ph, Regent_Descr* pregent) {
 
    return OK;
 }
-
-int parse_bobs(void) {
-   // Enumerate the subdirs
-   char* dir= new char[strlen(g_dirname)+strlen(BOBS_DIR)+2];
-
-   strcpy(dir, g_dirname);
-   strcat(dir, SSEPERATOR);
-   strcat(dir, BOBS_DIR);
-
-   DIR* d=opendir(dir);
-   if(!d) {
-      cerr << dir << ": dir not found or read error!" << endl;
-   }
-   struct dirent *file;
-   Profile* p;
-   Section* s;
-   const char* type; 
-   Logic_Bob_Descr* bob;
-   int retval;
-   
-   // first turn: care for diminishings!
-   while((file=readdir(d))) {
-      if(!strcmp(file->d_name, ".") || !strcmp(file->d_name, "..")) continue;
-      char* filename= new char[strlen(file->d_name)+strlen(dir)+strlen(CONF_NAME)+2];
-
-      strcpy(filename, dir);
-      strcat(filename, file->d_name);
-      filename[strlen(dir)+strlen(file->d_name)]=SEPERATOR;
-      filename[strlen(dir)+strlen(file->d_name)+1]='\0';
-      strcat(filename, CONF_NAME);
-
-      // Parse file, check if it is a diminishing bob
-      p=new Profile(cout , filename, true);
-
-      s=p->get_next_section(NULL);
-      type=s->get_string("type", 0);
-      if(!type) {
-         delete p;
-         sec_missing(filename, "type");
-         delete[] filename;
-         delete[] dir;
-         closedir(d);
-         return ERROR;
-      }
-
-      if(!strcmp(type, "diminishing")) {
-         bob=new Diminishing_Bob_Descr(file->d_name);
-      } else if(!strcmp(type, "growing")) {
-         bob=new Growing_Bob_Descr(file->d_name);
-      } else {
-         delete p;
-         sec_missing(filename, "type");
-         cerr << "In file <" << filename << ">:" << endl
-            << "\ttype \"" << type << "\" is not valid for tribe files! (either diminishing or growing)" << endl;
-         delete[] filename;
-         delete[] dir;
-         closedir(d);
-         return ERROR;
-      }
-      
-      if((retval=bob->construct(p,s))) {
-         delete p;
-         inform_over_construct_error(filename, bob, retval);
-         delete[] filename;
-         delete[] dir;
-         closedir(d);
-      }
- 
-
-      bobf.add(bob);
-
-      delete p;
-      delete[] filename;
-   }
-    
-   closedir(d);
-   
-   delete[] dir;
-
-   return 0;
-}
-
 
 int parse(Buildings_Descr* buildings, Tribe_Header* header, Regent_Descr* regent) {
    int retval=OK;

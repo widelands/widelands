@@ -44,17 +44,17 @@ Map::Map(void) {
  * cleanups
  */
 Map::~Map(void) {
-		  if(fields) {
-					 // WARNING: if Field has to free something, we have to do
-					 // it here manually!!!
-					 free(fields);
-		  }
+   if(fields) {
+      // WARNING: if Field has to free something, we have to do
+      // it here manually!!!
+      free(fields);
+   }
 
-        if(starting_pos) {
-           free(starting_pos);
-        }
+   if(starting_pos) {
+      free(starting_pos);
+   }
 
-		  if(w) delete w;
+   if(w) delete w;
 }
 
 /** void Map::set_size(uint w, uint h)
@@ -67,13 +67,13 @@ Map::~Map(void) {
  * Returns: Nothing
  */
 void Map::set_size(uint w, uint h) {
-		  hd.width=w;
-		  hd.height=h;
+   hd.width=w;
+   hd.height=h;
 
-		  if(fields) {
-					 fields = (Field*) realloc(fields, sizeof(Field)*hd.height*hd.width);
-		  }
-		  else fields = (Field*) malloc(sizeof(Field)*hd.height*hd.width);
+   if(fields) {
+      fields = (Field*) realloc(fields, sizeof(Field)*hd.height*hd.width);
+   }
+   else fields = (Field*) malloc(sizeof(Field)*hd.height*hd.width);
 
 }
 
@@ -91,66 +91,68 @@ void Map::set_size(uint w, uint h) {
 
 // TODO: This function is not working!!
 int Map::load_wlmf(const char* file, Cmd_Queue* q) {
-		  Binary_file f;
+   Binary_file f;
 
-		  f.open(file, File::READ);
-		  if(f.get_state() != File::OPEN) {
-					 return ERR_FAILED;
-		  }
+   f.open(file, File::READ);
+   if(f.get_state() != File::OPEN) {
+      return ERR_FAILED;
+   }
 
-		  // read header:
-		  f.read(&hd, sizeof(hd));
+   // read header:
+   f.read(&hd, sizeof(hd));
 
-		  // check version
-		  if(WLMF_VERSIONMAJOR(hd.version) > WLMF_VERSIONMAJOR(WLMF_VERSION)) {
-					 return ERR_FAILED;
-		  }
-		  if(WLMF_VERSIONMAJOR(hd.version) == WLMF_VERSIONMAJOR(WLMF_VERSION)) {
-					 if(WLMF_VERSIONMINOR(hd.version) > WLMF_VERSIONMINOR(WLMF_VERSION)) {
-								return ERR_FAILED;
-					 }
-		  }
+   // check version
+   if(WLMF_VERSIONMAJOR(hd.version) > WLMF_VERSIONMAJOR(WLMF_VERSION)) {
+      return ERR_FAILED;
+   }
+   if(WLMF_VERSIONMAJOR(hd.version) == WLMF_VERSIONMAJOR(WLMF_VERSION)) {
+      if(WLMF_VERSIONMINOR(hd.version) > WLMF_VERSIONMINOR(WLMF_VERSION)) {
+         return ERR_FAILED;
+      }
+   }
 
-		  // ignore the player descriptions, probably the user has chnanged them.
-		  // as long as the game knows how many players are around, everything is ok
-		  PlayerDescr pl;
-		  for(uint i=0; i<hd.nplayers; i++) {
-					 f.read(&pl, sizeof(pl));
-		  }
+   // ignore the player descriptions, probably the user has chnanged them.
+   // as long as the game knows how many players are around, everything is ok
+   PlayerDescr pl;
+   for(uint i=0; i<hd.nplayers; i++) {
+      f.read(&pl, sizeof(pl));
+   }
 
-		  set_size(hd.width, hd.height);
+   set_size(hd.width, hd.height);
 
 
-		  // now, read in the fields, one at a time and init the map
-		  FieldDescr fd;
-		  uint y;
-		  Pic *td, *tr;
-		  for(y=0; y<hd.height; y++) {
-					 for(uint x=0; x<hd.width; x++) {
-								f.read(&fd, sizeof(fd));
+   // now, read in the fields, one at a time and init the map
+   FieldDescr fd;
+   uint y;
+   Terrain_Descr *td, *tr;
+   for(y=0; y<hd.height; y++) {
+      for(uint x=0; x<hd.width; x++) {
+         f.read(&fd, sizeof(fd));
 
-								// TEMP
-								tr=w->get_texture(fd.tex_r);
-								if(!tr) {
-										  //cerr << "Texture number " << fd.tex_r << " not found in file. Defaults to 0" << endl;
-										  tr=w->get_texture(0);
-								}
-								td=w->get_texture(fd.tex_d);
-								if(!td) {
-										  // cerr << "Texture number " << fd.tex_d << " not found in file. Defaults to 0" << endl;
-										  td=w->get_texture(0);
-								}
-								// TEMP end
+         // TEMP
+         tr=w->get_terrain(fd.tex_r);
+         if(!tr) {
+            //cerr << "Texture number " << fd.tex_r << " not found in file. Defaults to 0" << endl;
+            tr=w->get_terrain(0);
+            assert(0); // we should never be here!  
+         }
+         td=w->get_terrain(fd.tex_d);
+         if(!td) {
+            // cerr << "Texture number " << fd.tex_d << " not found in file. Defaults to 0" << endl;
+            td=w->get_terrain(0);
+            assert(0); // we should never be here!  
+         }
+         // TEMP end
 
-								Field* f=get_field(x,y);
-								f->set_height((uchar)fd.height);
-								f->set_texr(tr);
-								f->set_texd(td);
-                        f->hook_instance(0); 
-					 }
-		  }
+         Field* f=get_field(x,y);
+         f->set_height((uchar)fd.height);
+         f->set_terrainr(tr);
+         f->set_terraind(td);
+         f->hook_instance(0); 
+      }
+   }
 
-		  return RET_OK;
+   return RET_OK;
 }
 
 /** 
@@ -158,24 +160,24 @@ int Map::load_wlmf(const char* file, Cmd_Queue* q) {
  */
 int Map::load_map_header(const char* file) {
    int ret=RET_OK;
-   
+
    if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
-	{
-		// It ends like a wide lands map file. try to load
-		// it as such
+   {
+      // It ends like a wide lands map file. try to load
+      // it as such
       // TODO: do this
-		// ret = load_wlmf(file, q);
-	}
-	else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
-	{
-		// it is a S2 Map file. load it as such
-		ret = load_s2mf_header(file);
-	}
-	else
-	{
-		assert(0);
-		return ERR_FAILED;
-	}
+      // ret = load_wlmf(file, q);
+   }
+   else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+   {
+      // it is a S2 Map file. load it as such
+      ret = load_s2mf_header(file);
+   }
+   else
+   {
+      assert(0);
+      return ERR_FAILED;
+   }
 
    return ret;
 }
@@ -189,34 +191,34 @@ int Map::load_map_header(const char* file) {
  */
 int Map::load_map(const char* file, Cmd_Queue* q)
 {
-	int ret;
+   int ret;
 
-	if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
-	{
-		// It ends like a wide lands map file. try to load
-		// it as such
-		ret = load_wlmf(file, q);
-	}
-	else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
-	{
-		// it is a S2 Map file. load it as such
-		ret = load_s2mf(file, q);
-	}
-	else
-	{
-		assert(0);
-		return ERR_FAILED;
-	}
+   if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+   {
+      // It ends like a wide lands map file. try to load
+      // it as such
+      ret = load_wlmf(file, q);
+   }
+   else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+   {
+      // it is a S2 Map file. load it as such
+      ret = load_s2mf(file, q);
+   }
+   else
+   {
+      assert(0);
+      return ERR_FAILED;
+   }
 
-	if (ret != RET_OK)
-		return ret;
+   if (ret != RET_OK)
+      return ret;
 
-	// post process the map
-	for(uint y=0; y<hd.height; y++)
-		for(uint x=0; x<hd.width; x++)
-			recalc_brightness(x, y);
+   // post process the map
+   for(uint y=0; y<hd.height; y++)
+      for(uint x=0; x<hd.width; x++)
+         recalc_brightness(x, y);
 
-	return RET_OK;
+   return RET_OK;
 }
 
 /** Map::recalc_brightness(int fx, int fy)
@@ -225,35 +227,35 @@ int Map::load_map(const char* file, Cmd_Queue* q)
  */
 void Map::recalc_brightness(int fx, int fy)
 {
-	Field *f, *n;
-	int dx, dy;
-	int l, r, tl, tr, bl, br;
+   Field *f, *n;
+   int dx, dy;
+   int l, r, tl, tr, bl, br;
 
-	f = get_field(fx, fy);
+   f = get_field(fx, fy);
 
-	// left
-	get_ln(fx, fy, f, &dx, &dy, &n);
-	l = f->get_height() - n->get_height();
+   // left
+   get_ln(fx, fy, f, &dx, &dy, &n);
+   l = f->get_height() - n->get_height();
 
-	// right
-	get_rn(fx, fy, f, &dx, &dy, &n);
-	r = f->get_height() - n->get_height();
+   // right
+   get_rn(fx, fy, f, &dx, &dy, &n);
+   r = f->get_height() - n->get_height();
 
-	// top-left
-	get_tln(fx, fy, f, &dx, &dy, &n);
-	tl = f->get_height() - n->get_height();
+   // top-left
+   get_tln(fx, fy, f, &dx, &dy, &n);
+   tl = f->get_height() - n->get_height();
 
-	// top-right
-	get_rn(dx, dy, n, &dx, &dy, &n);
-	tr = f->get_height() - n->get_height();
+   // top-right
+   get_rn(dx, dy, n, &dx, &dy, &n);
+   tr = f->get_height() - n->get_height();
 
-	// bottom-left
-	get_bln(fx, fy, f, &dx, &dy, &n);
-	bl = f->get_height() - n->get_height();
+   // bottom-left
+   get_bln(fx, fy, f, &dx, &dy, &n);
+   bl = f->get_height() - n->get_height();
 
-	// bottom-right
-	get_rn(dx, dy, n, &dx, &dy, &n);
-	br = f->get_height() - n->get_height();
+   // bottom-right
+   get_rn(dx, dy, n, &dx, &dy, &n);
+   br = f->get_height() - n->get_height();
 
-	f->set_brightness(l, r, tl, tr, bl, br);
+   f->set_brightness(l, r, tl, tr, bl, br);
 }

@@ -700,7 +700,7 @@ int Search_Building_Descr::construct(Profile* p, Section *s) {
       // name of bob is now in temp, write it
       to_lower(temp);
       memcpy(&bobs[i*30], temp, strlen(temp) < 30 ? strlen(temp) : 29);
-      needl.add_need(&bobs[i*30], Tribe_File_Need_List::IS_SOME_BOB);
+      needl.add_need(&bobs[i*30], Need_List_Descr::IS_SOME_BOB);
       z=0;
    }
 
@@ -832,7 +832,7 @@ int Plant_Building_Descr::construct(Profile* p, Section *s) {
       to_lower(temp);
       memcpy(&bobs[i*30], temp, strlen(temp) < 30 ? strlen(temp) : 29);
       z=0;
-      needl.add_need(&bobs[i*30], Tribe_File_Need_List::IS_GROWING_BOB);
+      needl.add_need(&bobs[i*30], Need_List_Descr::IS_GROWING_BOB);
    }
 
    return OK;
@@ -950,13 +950,13 @@ int Grow_Building_Descr::construct(Profile* p, Section *s) {
    while(str[n]!=' ' && str[n]!='\t' && n<i) n++;
    memcpy(plant_bob, str, n < 30 ? n : 29 );
    to_lower(plant_bob);
-   needl.add_need(plant_bob, Tribe_File_Need_List::IS_GROWING_BOB);
+   needl.add_need(plant_bob, Need_List_Descr::IS_GROWING_BOB);
 
    n=i+1;
    while((str[n]==' ' || str[n]=='\t') && n<strlen(str)) n++;
    memcpy(search_bob, str+n, strlen(str)-n < 30 ? strlen(str)-n : 29); 
    to_lower(search_bob);
-   needl.add_need(search_bob, Tribe_File_Need_List::IS_DIMINISHING_BOB);
+   needl.add_need(search_bob, Need_List_Descr::IS_DIMINISHING_BOB);
 
 
    return OK;
@@ -1092,7 +1092,7 @@ int Dig_Building_Descr::construct(Profile* p, Section *s) {
    }
    memcpy(resource, str, strlen(str) < sizeof(resource) ? strlen(str) : sizeof(resource)-1);
    to_lower(resource);
-   needl.add_need(resource, Tribe_File_Need_List::IS_RESOURCE);
+   needl.add_need(resource, Need_List_Descr::IS_RESOURCE);
 
    return OK;
 }

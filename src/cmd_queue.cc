@@ -39,6 +39,7 @@ Cmd_Queue::~Cmd_Queue(void) {
 
 // Queue a new command
 void Cmd_Queue::queue(uchar sender, ushort cmd, ulong arg1, ulong arg2, void* arg3) {
+   cerr << "queue: ncmds:" << ncmds << endl;
    if(ncmds == MAX_CMDS-1) run_queue();
    
    cmds[ncmds].sender=sender;
@@ -55,10 +56,16 @@ int Cmd_Queue::run_queue(void) {
    uint i=0, temp=0;
    Cmd* c;
    Instance* inst;
+   ushort cmd;
+   
+   cerr << "running queue! ncmds:" << ncmds << endl;
+
    while(i<ncmds) {
       c=&cmds[i];
+      cmd=c->cmd;
+      c->cmd=SKIP;
       
-      switch(c->cmd) {
+      switch(cmd) {
          case CMD_LOAD_MAP:
             // arg3 is file name of map
             g->map = new Map();
@@ -82,6 +89,19 @@ int Cmd_Queue::run_queue(void) {
             inst->set_next_acting_frame(g->get_frame()+temp);
             break;
 
+         case CMD_CREATE_BOB:
+            // create a bob in a instance 
+            // arg1==bob_index
+            // arg2 unused!
+            // arg3=pointer to point struct where to build the bobs
+            temp=g->hinst->get_free_inst_id();
+            inst=g->hinst->get_inst(temp);
+            g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
+            temp=g->get_map()->get_world()->get_bob_descr(c->arg1)->create_instance(inst);
+            inst->set_owned_by(SENDER_LOADER);
+            inst->set_next_acting_frame(g->get_frame()+temp);
+            break;
+            
          default:
             cerr << "Unknown Queue_Cmd: " << c->cmd << endl;
             break;
@@ -95,7 +115,9 @@ int Cmd_Queue::run_queue(void) {
       i++;
    }
 
+   cerr << "queue ends1!: ncmds" << ncmds << endl;
    ncmds=0;
+   cerr << "queue ends2!: ncmds" << ncmds << endl;
 
    return RET_OK;
 }

@@ -7,12 +7,17 @@ CXXFLAGS= $(EXTRA_FLAGS)
 EXTRA_DIST=README
 
 bin_PROGRAMS=wwfcreate 
-wwfcreate_LDADD =@SDL_LIBS@ ../src/profile.o ../src/growablearray.o ../src/myfile.o
+wwfcreate_LDADD =@SDL_LIBS@ ../wtfcreate/file_descr.o ../wtfcreate/pic_descr.o ../wtfcreate/parse_bobs.o ../wtfcreate/logic_bob_descr.o ../wtfcreate/need_list.o ../wtfcreate/bob_descr.o ../src/md5file.o ../src/myfile.o ../src/md5.o ../src/helper.o ../src/profile.o ../src/growablearray.o ../src/pic.o 
 wwfcreate_SOURCES=main.cc \
-						confreader.h \
-						confreader.cc \
-						picturereader.cc \
-						picturereader.h
+                  parse.cc \
+                  parse.h \
+                  wwfcreate.h \
+                  write_worldfile.cc \
+                  write_worldfile.h \
+                  resource_descr.h \
+                  resource_descr.cc \
+                  terrain_descr.h \
+                  terrain_descr.cc 
 
 #  uncomment the following if widelands requires the math library
 #widelands_LDADD=-lm

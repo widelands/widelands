@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002 by the Widelands Development Team  
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,13 @@
  *
  */
 
-#ifndef __PICTUREREADER_H
-#define __PICTUREREADER_H
 
-struct PictureInfo;
-class Binary_file;
+#ifndef __S__WRITE_TRIBEFILE_H
+#define __S__WRITE_TRIBEFILE_H
 
-class Picture_Reader
-{
-	char dir[1024];
-	void read_bmp(Binary_file* file, PictureInfo* pic, ushort** data);
-public:
-	Picture_Reader(const char* picdir);
-	~Picture_Reader();
-	void read_picture(const char* name, PictureInfo* pic, ushort** data);
-};
+#include "../src/md5file.h"
 
-#endif //__PICTUREREADER_H
+int write_worldfile(MD5_Binary_file* f,  char* name, char* author, char* descr);
+
+#endif
 

@@ -465,7 +465,7 @@ void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint 
    //            cerr << count << ":" << hex << clr << endl;
 //               clr=pic->data[i];
                if(x>=0 && y>=0) {
-                  if( (x<dst->get_w()) && (y<dst->get_h()) ) {
+                  if( (((uint)x)<dst->get_w()) && (((uint)y)<dst->get_h()) ) {
                      dst->pixels[y*dst->pitch + x]=clr; //pic->data[i];
                   }
                }

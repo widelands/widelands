@@ -21,14 +21,58 @@
 
 #include "graphic.h"
 #include "myfile.h"
-#
-// class Binary_file;
-class Bob;
-//class Pic;
-struct Anim;
-struct BobDesc;
-struct ResourceDesc;
-struct TerrainType;
+#include "descr_maintainer.h"
+#include "bob.h"
+
+struct World_Descr_Header {
+   char name[30];
+   char author[30];
+   char descr[1024];
+};
+
+class Resource_Descr {
+   friend class Descr_Maintainer<Resource_Descr>;
+
+   public:
+      Resource_Descr(void) { }
+      ~Resource_Descr(void) { }
+
+      int read(Binary_file* f) {
+         f->read(name, 30);
+         f->read(&minh, sizeof(uchar));
+         f->read(&maxh, sizeof(uchar));
+         f->read(&importance, sizeof(uchar));
+         return RET_OK;
+      }
+   private:
+      char name[30];
+      uchar minh, maxh, importance;
+};
+
+class Terrain_Descr {
+   friend class Descr_Maintainer<Terrain_Descr>;
+
+   public:
+      Terrain_Descr(void) { ntex=0; tex=0; curtex=0; }
+      ~Terrain_Descr(void) { 
+         if(ntex) {
+            uint i;
+            for(i=0; i<ntex; i++) 
+               delete tex[i];
+            delete[] tex;
+         }
+      }
+
+      inline Pic* get_texture(void) { return tex[curtex]; }
+      int read(Binary_file* f);
+
+   private:
+      char name[30];
+      uchar is;
+      Pic** tex;
+      ushort ntex;
+      ushort curtex;
+};
 
 /** class World
   *
@@ -37,43 +81,35 @@ struct TerrainType;
   */
 class World
 {
-	char			author[64];
-	char			name[32];
-	Anim*			anim;
-	BobDesc*		bob;
-	Pic**			texture;
-	ResourceDesc*	resource;
-	TerrainType*	terrain;
-	uint			animCount;
-	uint			bobCount;
-	uint			textureCount;
-	uint			resourceCount;
-	uint			terrainCount;
-	void			read_header(Binary_file*);
-	void			read_bobs(Binary_file*);
-	void			read_textures(Binary_file*);
-	void			read_anims(Binary_file*);
-	void			read_terrains(Binary_file*);
-	void			read_resources(Binary_file*);
-public:
-					World(const char* file);
-					~World();
-	Bob*			create_bob(uint n);
-	Pic*			get_texture(uint n);
-	Anim*			get_anim(uint n);
-	ResourceDesc*	get_resource(uint n);
-	TerrainType*	get_terrain(uint n);
-	uint			resources();
-	uint			terrains();
-	uint			bobs();
-	const char*		get_author()
-	{
-		return author;
-	}
-	const char*		get_name()
-	{
-		return name;
-	}
+   public:
+      enum {
+         OK = 0,
+         ERR_WRONGVERSION
+      };
+
+      World(void);
+		~World();
+      int load_world(const char*);
+      
+      inline const char* get_name(void) { return hd.name; }
+      inline const char* get_author(void) { return hd.author; }
+      inline const char* get_descr(void) { return hd.descr; }
+      
+      inline Terrain_Descr* get_terrain(uint i) { return ters.get(i); }
+      inline ushort get_bob(const char* l) { return bobs.get_index(l); }
+      inline Logic_Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
+
+   private:
+      Descr_Maintainer<Logic_Bob_Descr> bobs;
+      Descr_Maintainer<Resource_Descr> res;
+      Descr_Maintainer<Terrain_Descr> ters;
+      World_Descr_Header hd;
+
+      // Functions
+      int parse_header(Binary_file* f);
+      int parse_resources(Binary_file* f);
+      int parse_bobs(Binary_file* f);
+      int parse_terrains(Binary_file* f);
 };
 
 #endif

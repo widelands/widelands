@@ -66,7 +66,6 @@ widelands_SOURCES=main.cc \
 						world.h \
 						bob.cc \
 						bob.h \
-						worldfiletypes.h \
 						button.cc \
 						textarea.cc \
 						multiline_textarea.cc \
@@ -111,7 +110,7 @@ widelands_SOURCES=main.cc \
                   worker.h \
                   worker.cc
 
-# TO INCLUDE IN CVS: ab instances.h
+# TO INCLUDE IN CVS: current
 
 
 #  uncomment the following if widelands requires the math library

@@ -57,12 +57,12 @@ int Worker_Descr::read(Binary_file* f) {
    walk_se.set_hotspot(sx, sy);
    walk_w.set_hotspot(sx, sy);
    
-   read_anim(&walk_ne, f);
-   read_anim(&walk_e, f);
-   read_anim(&walk_se, f);
-   read_anim(&walk_sw, f);
-   read_anim(&walk_w, f);
-   read_anim(&walk_nw, f);
+   walk_ne.read(f);
+   walk_e.read(f);
+   walk_se.read(f);
+   walk_sw.read(f);
+   walk_w.read(f);
+   walk_nw.read(f);
 
    return RET_OK;
 }
@@ -79,29 +79,29 @@ int Soldier_Descr::read(Binary_file* f) {
 
    attack_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    attack_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&attack_l, f);
+   attack_l.read(f);
    attack1_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    attack1_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&attack1_l, f);
+   attack1_l.read(f);
    evade_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    evade_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&evade_l, f);
+   evade_l.read(f);
    evade1_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    evade1_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&evade1_l, f);
+   evade1_l.read(f);
 
    attack_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    attack_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&attack_r, f);
+   attack_r.read(f);
    attack1_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    attack1_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&attack1_r, f);
+   attack1_r.read(f);
    evade_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    evade_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&evade_r, f);
+   evade_r.read(f);
    evade1_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    evade1_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&evade1_r, f);
+   evade1_r.read(f);
      
    return RET_OK;
 }
@@ -110,14 +110,14 @@ int Soldier_Descr::read(Binary_file* f) {
 int Has_Working_Worker_Descr::read(Binary_file* f) {
    working.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    working.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&working, f);
+   working.read(f);
    return RET_OK;
 }
 
 int Has_Working1_Worker_Descr::read(Binary_file* f) {
    working1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    working1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&working1, f);
+   working1.read(f);
    return RET_OK;
 }
 int Has_Walk1_Worker_Descr::read(Binary_file* f) {
@@ -134,12 +134,12 @@ int Has_Walk1_Worker_Descr::read(Binary_file* f) {
    walk_se1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
    walk_w1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
    
-   read_anim(&walk_ne1, f);
-   read_anim(&walk_e1, f);
-   read_anim(&walk_se1, f);
-   read_anim(&walk_sw1, f);
-   read_anim(&walk_w1, f);
-   read_anim(&walk_nw1, f);
+   walk_ne1.read(f);
+   walk_e1.read(f);
+   walk_se1.read(f);
+   walk_sw1.read(f);
+   walk_w1.read(f);
+   walk_nw1.read(f);
 
    return RET_OK;
 }

@@ -120,16 +120,16 @@ class Field {
 private:
 	uchar height;
 	char brightness;
-	Pic *texr, *texd;
+	Terrain_Descr *terr, *terd;
    Instance* inst; // TODO: at the moment every field can only have one object associated with it
    
 public:
 	inline uchar get_height() const { return height; }
 
-	inline Pic *get_texr() const { return texr; }
-	inline Pic *get_texd() const { return texd; }
-	inline void set_texr(Pic *p) { texr = p; }
-	inline void set_texd(Pic *p) { texd = p; }
+	inline Terrain_Descr *get_terr() const { return terr; }
+	inline Terrain_Descr *get_terd() const { return terd; }
+	inline void set_terrainr(Terrain_Descr *p) { terr = p; }
+	inline void set_terraind(Terrain_Descr *p) { terd = p; }
 
    inline void hook_instance(Instance* obj) { inst=obj; }
    inline Instance* get_inst(void) { return inst; }
@@ -175,11 +175,12 @@ class Map {
 					 inline const char* get_author(void) { return hd.author; }
 					 inline const char* get_name(void) { return hd.name; }
 					 inline const char* get_descr(void) { return hd.descr; }
-					 inline const char* get_world(void) { return hd.uses_world; }
+					 inline const char* get_world_name(void) { return hd.uses_world; }
 					 inline const ushort get_version(void) { return hd.version; }
 					 inline ushort get_nplayers(void) { return hd.nplayers; }
 					 inline uint get_w(void) { return hd.width; }
 					 inline uint get_h(void) { return hd.height; }
+                inline World* get_world(void) { return w; }
 
 					// Field logic
 					inline Field *get_field(const int x, const int y);

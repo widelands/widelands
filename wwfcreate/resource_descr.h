@@ -17,49 +17,37 @@
  *
  */
 
-#ifndef __S__NEED_LIST_H
-#define __S__NEED_LIST_H
+#ifndef __S__RESOURCE_DESCR_H
+#define __S__RESOURCE_DESCR_H
 
-#include <iostream>
 #include "../src/myfile.h"
+#include "../src/profile.h"
 #include "../src/helper.h"
+#include "../wtfcreate/fabric.h"
+#include "../wtfcreate/file_descr.h"
+   
+//
+// This is the class used to describe resources
+class Resource_Descr : virtual public File_Descr {
+   friend class Fabric<Resource_Descr>;
 
-/*
- * This is the need list, valid for tribe files
- */
-class Need_List_Descr  {
+   protected:
+      Resource_Descr(const char* name);
+
    public:
-      enum Type {
-         IS_GROWING_BOB,
-         IS_DIMINISHING_BOB,
-         IS_CRITTER_BOB,
-         IS_RESOURCE,
-         IS_SOME_BOB,
-         IS_BORING_BOB
-      };
-         
-      Need_List_Descr(void);
-      ~Need_List_Descr(void);
+      virtual ~Resource_Descr(void);
+      const char* get_name(void) { return name; }
 
-      void add_provide(const char* name, Type is_a);
-      void add_need(const char* name, Type is_a);
-      int validate(ostream& out, ostream& err);
-      int write_needs(Binary_file* f);
-      int write_provides(Binary_file* f);
+      virtual int construct(Profile* p, Section *s);
+      virtual int write(Binary_file* f);
 
-   private:
-      struct Need {
-         Type is;
-         char name[30];
-      };
-      Need* needs;
-      ushort nneeds;
-      Need* provides;
-      ushort nprovides;
+   private: 
+      char name[30];
+      uchar minh, maxh, importance;
 };
 
-extern Need_List_Descr needl;
-
+// global ware fabric objekt!
+extern Fabric<Resource_Descr> resf;
 
 #endif
 

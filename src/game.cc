@@ -28,6 +28,9 @@
 #include "tribe.h"
 #include "game.h"
 
+
+Game* g_game;
+
 /** class Game
  *
  * This game handels one game. This class is not a all portabel,
@@ -73,7 +76,6 @@ int Game::set_map(const char* mapname) {
  */
 #include "ui.h"
 #include "fileloc.h"
-#include "worldfiletypes.h"
 #include "myfile.h"
 #include "graphic.h"
 void Game::run(void) {
@@ -83,6 +85,8 @@ void Game::run(void) {
    assert(str);
    assert(!tribe->load(str));
    // TEMP
+
+   g_game=this;
 
    // run the cmd queue, so all the load cmds are worked through
    queue->run_queue();

@@ -139,7 +139,7 @@ void MapSelectMenu::map_selected(int id)
 			sprintf(buf, "%i", m.get_nplayers());
 			tanplayers->set_text(buf);
 			tadescr->set_text(m.get_descr());
-			taworld->set_text(m.get_world());
+			taworld->set_text(m.get_world_name());
          ok->set_enabled(true);
 		} else {
 			taname->set_text("(bad map file)");

@@ -27,7 +27,7 @@
 //
 class Building_HQ : public Map_Object {
    public:
-      Building_HQ(void) { } 
+      Building_HQ(ushort n) : Map_Object(n) { } 
       virtual ~Building_HQ(void) { }
 
       int act(Game* g);
@@ -53,7 +53,6 @@ class NeedWares_List {
       List* list;
 };
 
-
 /*
  * Common to all buildings!
  */
@@ -65,18 +64,42 @@ class Building_Descr {
       virtual int read(Binary_file* f);
       virtual int create_instance(Instance*)=0;
      
-      // TEMP
-      inline Animation* get_idle(void) { return &idle; }
-      // TEMP END
-   
+      // TODO: think about this. is this a good way to do it?
+      inline char* get_name(void) { return name; }
+      inline Animation* get_idle_anim(void) { return &idle; }
+      inline bool get_is_enabled(void) { return is_enabled; }
+      inline ushort get_see_area(void) { return see_area; }
+
+      // for Has_Needs_Building
+      virtual NeedWares_List* get_needs(uint*, bool*) { assert(0); return 0; }
+ 
+      // for Has_Products_Building
+      virtual Need_List* get_products(uint*, bool*) { assert(0);  return 0;}
+
+      // Is_a building
+      virtual uchar get_is_a(void) { return (uchar(-1)) ; }  
+
+      // for buildable_building
+      virtual char* get_category(void) { assert(0); return 0; }
+      virtual ushort get_build_time(void) { assert(0); return 0; }
+      virtual Need_List* get_build_cost(uint*) { assert(0); return 0; }
+      virtual Animation* get_build_anim(void) { assert(0); return 0; }
+
+      // for working
+      Animation* get_working_anim(void) { assert(0); return 0; }
+     
+
+      // for military buildings
+      virtual ushort get_conquers(void) { return 0; }
+
+      // TODO: add non abstract buildings
+
    protected:
       //      int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew=0, ushort* eh=0);
 
    private: 
       char name[30];
       ushort see_area;
-      ushort w, h;
-      ushort hsx, hsy;
       bool is_enabled;
 
    protected: // for size
@@ -92,6 +115,9 @@ class Has_Needs_Building_Descr : virtual public Building_Descr {
       virtual ~Has_Needs_Building_Descr(void) { }
 
       virtual int read(Binary_file* f);
+      
+      // functions
+      NeedWares_List* get_needs(uint* n, bool* b) { *n=nneeds; *b=needs_or; return &needs; }
 
    private:
       bool needs_or; // or needs_and?
@@ -110,7 +136,7 @@ class Has_Products_Building_Descr : virtual public Building_Descr {
       virtual int read(Binary_file* f);
 
    protected:
-      bool products_ored(void) { return products_or; }
+      Need_List* get_products(uint* n, bool* b) { *n=nproducts; *b=products_or; return &products; }
 
    private:
       bool products_or;
@@ -129,13 +155,15 @@ class Has_Is_A_Building_Descr : virtual public Building_Descr {
          IS_A_MEDIUM = 2,
          IS_A_BIG = 3,
          IS_A_MINE = 4,
-         IS_A_PORT = 5
+         IS_A_PORT = 5,
+         IS_A_NOTHING =6
       };
 
       Has_Is_A_Building_Descr(void) { }
       ~Has_Is_A_Building_Descr(void) { }
 
       virtual int read(Binary_file* f);
+      uchar get_is_a(void) { return is_a; }  
 
    private:
       ushort is_a; // size of building
@@ -150,6 +178,12 @@ class Buildable_Building_Descr : virtual public Building_Descr {
       virtual ~Buildable_Building_Descr(void) { }
 
       virtual int read(Binary_file* f);
+
+      char* get_category(void) { return category; }
+      ushort get_build_time(void) { return build_time; }
+      Need_List* get_build_cost(uint* n) { *n=ncost; return &cost; }
+      Animation* get_build_anim(void) { return &build; }
+
 
    private:
       char category[30];
@@ -169,6 +203,8 @@ class Working_Building_Descr : virtual public Building_Descr {
       virtual ~Working_Building_Descr(void) { }
 
       virtual int read(Binary_file* f);
+      
+      Animation* get_working_anim(void) { return &working; }
 
    private:
       Animation working;
@@ -402,6 +438,8 @@ class HQ_Descr : virtual public Boring_Building_Descr {
 
       int read(Binary_file* f);
       int create_instance(Instance*);
+      
+      ushort get_conquers(void) { return conquers; }
 
    private:
       ushort conquers;

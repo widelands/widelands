@@ -21,24 +21,24 @@
 #include <iostream>
 #include "need_list.h"
 
-Tribe_File_Need_List needl;
+Need_List_Descr needl;
 
 
 /*
  * This is the need list, valid for tribe files
 */
-Tribe_File_Need_List::Tribe_File_Need_List(void) {
+Need_List_Descr::Need_List_Descr(void) {
    needs=0;
    nneeds=0;
    provides=0;
    nprovides=0;
 };
-Tribe_File_Need_List::~Tribe_File_Need_List(void) {
+Need_List_Descr::~Need_List_Descr(void) {
    if(nneeds) free(needs);
    if(nprovides) free(provides);
 }
 
-void Tribe_File_Need_List::add_need(const char* name, Type is_a) {
+void Need_List_Descr::add_need(const char* name, Type is_a) {
    uint i;
    for(i=0; i<nneeds; i++) 
       if(!strcasecmp(name, needs[i].name)) return ; // already in list
@@ -55,7 +55,7 @@ void Tribe_File_Need_List::add_need(const char* name, Type is_a) {
    memcpy(needs[nneeds-1].name, name, strlen(name) < sizeof(needs[nneeds-1].name) ? strlen(name) : sizeof(needs[nneeds-1].name)-1);
 }
 
-void Tribe_File_Need_List::add_provide(const char* name, Type is_a) {
+void Need_List_Descr::add_provide(const char* name, Type is_a) {
    
    uint i;
    for(i=0; i<nprovides; i++) 
@@ -74,7 +74,7 @@ void Tribe_File_Need_List::add_provide(const char* name, Type is_a) {
    memcpy(provides[nprovides-1].name, name, strlen(name) < sizeof(provides[nprovides-1].name) ? strlen(name) : sizeof(provides[nprovides-1].name)-1);
 }
 
-int Tribe_File_Need_List::validate(ostream& out, ostream& err) {
+int Need_List_Descr::validate(ostream& out, ostream& err) {
    
    uint i, z;
    Need* n;
@@ -106,13 +106,34 @@ int Tribe_File_Need_List::validate(ostream& out, ostream& err) {
    }
   
    for(i=0; i<nneeds; i++) {
-      out << "<" << needs[i].name << "> is needed by this tribe!" << endl;
+      out << "<" << needs[i].name << "> is needed" << endl;
    }   
    out << "Need List finished. please validate it!" << endl;
    return 0;
 }
+
+int Need_List_Descr::write_provides(Binary_file *f) {
+   // out magic
+   f->write("ProvidesList\0", 13);
    
-int Tribe_File_Need_List::write(Binary_file *f) {
+   // out number of needs
+   f->write(&nprovides, sizeof(nprovides));
+   
+   int i, z;
+   ushort is_a;
+   for(i=0; i<nprovides; i++) {
+      for(z=0; z<10; z++) {
+         if(provides[i].is==z) {
+            is_a=z;
+            f->write(&is_a, sizeof(is_a));
+            f->write(provides[i].name, sizeof(provides[i].name));
+         }
+      }
+   }
+            
+   return 0;
+}   
+int Need_List_Descr::write_needs(Binary_file *f) {
    // out magic
    f->write("NeedList\0", 9);
    

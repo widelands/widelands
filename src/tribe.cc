@@ -31,34 +31,6 @@
 #include "tribe.h"
 
 //
-// this is a function which reads a animation from a file
-//
-int read_anim(Animation* a, Binary_file* f) {
-   ushort npics;
-   f->read(&npics, sizeof(ushort));
-
-   uint i;
-   char* buf;
-   ushort buf_size=15000;
-   buf=(char*) malloc(buf_size);
-   
-   ushort size;
-   for(i=0; i<npics; i++) {
-      f->read(&size, sizeof(ushort));
-      if(size > buf_size) {
-         buf_size=size;
-         buf=(char*) realloc(buf, buf_size);
-      }
-      f->read(buf, size);
-      a->add_pic(size, (ushort*) buf);
-   }
-  
-   free(buf);
-   
-   return RET_OK;
-}
-
-//
 // Tribe_Descr class
 // 
 Tribe_Descr::Tribe_Descr(void) {

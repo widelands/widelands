@@ -1,4 +1,4 @@
-SUBDIRS= src wffcreate wwfcreate wtfcreate
+SUBDIRS= src wffcreate wtfcreate wwfcreate
 
 EXTRA_DIST=pics fonts worlds maps tribes
 

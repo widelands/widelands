@@ -55,7 +55,7 @@ int Building_HQ::act(Game* g) {
    
 
    next_acting_frame=g->get_frame()+10;
-   cur_pic=g->get_player_tribe(owned_by)->get_building_descr(0)->get_idle()->get_pic(0);
+   cur_pic=g->get_player_tribe(owned_by)->get_building_descr(idx)->get_idle_anim()->get_pic(0);
 
    return RET_OK;
 }
@@ -70,6 +70,7 @@ int Building_Descr::read(Binary_file *f) {
    f->read(&temp, sizeof(uchar));
    is_enabled=temp;
    f->read(&see_area, sizeof(ushort));
+   uint w, h, hsx, hsy;
    f->read(&w, sizeof(ushort));
    f->read(&h, sizeof(ushort));
    f->read(&hsx, sizeof(ushort));
@@ -78,7 +79,7 @@ int Building_Descr::read(Binary_file *f) {
    idle.set_dimensions(w, h);
    idle.set_hotspot(hsx, hsy);
 
-   read_anim(&idle, f);
+   idle.read(f);
 
    return RET_OK;
 }
@@ -121,7 +122,7 @@ int Buildable_Building_Descr::read(Binary_file *f) {
      build.set_dimensions(idle.get_w(), idle.get_h());
      build.set_hotspot(idle.get_hsx(), idle.get_hsy());
      
-     read_anim(&build, f); 
+     build.read(f);
      
      return RET_OK;
 }
@@ -130,7 +131,7 @@ int Working_Building_Descr::read(Binary_file *f) {
    working.set_dimensions(idle.get_w(), idle.get_h());
    working.set_hotspot(idle.get_w(), idle.get_h());
    
-   read_anim(&working, f);
+   working.read(f);
 
    return RET_OK;
 }
@@ -363,13 +364,13 @@ int Cannon_Descr::read(Binary_file *f) {
    fire_nw.set_dimensions(idle.get_w(), idle.get_h());
    fire_nw.set_hotspot(idle.get_hsx(), idle.get_hsy());
 
-   read_anim(&projectile, f);
-   read_anim(&fire_ne, f);
-   read_anim(&fire_e, f);
-   read_anim(&fire_se, f);
-   read_anim(&fire_sw, f);
-   read_anim(&fire_w, f);
-   read_anim(&fire_nw, f);
+   projectile.read(f);
+   fire_ne.read(f);
+   fire_e.read(f);
+   fire_se.read(f);
+   fire_sw.read(f);
+   fire_w.read(f);
+   fire_nw.read(f);
 
    return RET_OK;
 }
@@ -392,7 +393,7 @@ int HQ_Descr::read(Binary_file *f) {
 int HQ_Descr::create_instance(Instance* inst) {
    cerr << "HQ_Descr::create_instance() not yet implemented: TODO!" << endl;
 
-   inst->obj=new Building_HQ();
+   inst->obj=new Building_HQ(0);
 
    return 10; // act in 10 frames again 
 }

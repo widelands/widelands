@@ -22,207 +22,212 @@
 //#include "worldfiletypes.h"
 #include "bob.h"
 #include "myfile.h"
+#include "md5file.h"
+#include "worlddata.h"
 
-/** World(const char* file)
-  * Creates a new world from the file.
-  */
-World::World(const char* file)
+// 
+// class World
+// 
+World::World(void)
 {
-	name[0] = 0;
-	author[0] = 0;
-	bobCount = textureCount = animCount = resourceCount = terrainCount = 0;
-	bob = NULL;
-	texture = NULL;
-	anim = NULL;
-	resource = NULL;
-	terrain = NULL;
-	//
-	Binary_file wwf; 
-	wwf.open(file, File::READ);
-	if (wwf.get_state() == File::CLOSE)
-		return;
-	read_header(&wwf);
-
-/* TODO
- * these are skipped for now; mapeditor will need them
- *
-	ResourceDesc res;
-	for (uint i=0; i<resourceCount; i++)
-		wwf.read(&res, sizeof(ResourceDesc));
-	// same for terrain
-	TerrainType terrain;
-	for (uint j=0; j<terrainCount; j++)
-		wwf.read(&terrain, sizeof(TerrainType));
-**/
-	
-	read_resources(&wwf);
-	read_terrains(&wwf);
-	read_bobs(&wwf);
-	read_textures(&wwf);
-	read_anims(&wwf);
 }
 
-/** void read_header(Binary_file*)
-  * Reads the world header.
-  */
-void World::read_header(Binary_file* file)
-{
-	WorldFileHeader head;
-	file->read(&head, sizeof(WorldFileHeader));
-	// TODO: this should be handled gracefully
-	assert(head.version == WLWF_VERSION);
-	bobCount = head.bobs;
-	textureCount = head.pictures;
-	animCount = head.anims;
-	terrainCount = head.terrains;
-	resourceCount = head.resources;
-	strcpy(name, head.name);
-	strcpy(author, head.author);
+World::~World(void) {
+
 }
 
-/** void read_bobs(Binary_file*)
-  * Reads the bob descriptions.
-  */
-void World::read_bobs(Binary_file* file)
-{
-	if (!bobCount)
-		return;
-	bob = new BobDesc[bobCount];
-	for (uint i=0; i<bobCount; i++)
-		file->read(&bob[i], sizeof(BobDesc));
+// 
+// This loads a sane world file
+//
+int World::load_world(const char* name) {
+   MD5_Binary_file f;
+   f.open(name, File::READ);
+   if(f.get_state() != File::OPEN) return ERR_FAILED;
+
+   int retval;
+   
+   // read header, skip need list (this is already done)
+   if((retval=parse_header(&f))) return retval;
+
+   if((retval=parse_resources(&f))) return retval;
+
+   if((retval=parse_terrains(&f))) return retval;
+  
+   if((retval=parse_bobs(&f))) return retval;
+  
+   // checksum check 
+   uchar* sum=(uchar*) f.get_chksum();
+   uchar  sum_read[16];
+   f.read(sum_read, 16);
+   uint i;
+   for(i=0; i<16; i++) {
+      // cerr << hex << (int) sum[i] << ":" << (int) sum_read[i] << endl;
+      if(sum[i] != sum_read[i]) return ERR_FAILED; // chksum inval
+   }
+   
+   return RET_OK;
+} 
+
+// 
+// down here: Private functions for loading
+// 
+
+//
+//function for loading the header of a worlds file
+//skips the provides list also
+int World::parse_header(Binary_file* f) {
+   char buf[1024];
+   
+   // read magic
+   f->read(buf, 5);
+   if(strcasecmp(buf, "WLwf\0")) return ERR_FAILED;
+
+   // read version
+   ushort given_vers;
+   f->read(&given_vers, sizeof(ushort));
+   if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLWF_VERSION)) return ERR_WRONGVERSION;
+   if(VERSION_MAJOR(given_vers)==VERSION_MAJOR(WLWF_VERSION)) 
+      if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLWF_VERSION)) return ERR_WRONGVERSION;
+   
+   // read name, skip author and description
+   f->read(hd.name, sizeof(hd.name));
+   f->read(hd.author, sizeof(hd.author)); // author
+   f->read(hd.descr, 1024); // description
+
+   // skip provides list
+   // read magic
+   f->read(buf, 13);
+   if(strcasecmp(buf, "ProvidesList\0")) return ERR_FAILED;
+   ushort nprovides=0;
+   f->read(&nprovides, sizeof(ushort));
+
+   uint i;
+   ushort is_a;
+   for(i=0; i<nprovides; i++) {
+      f->read(&is_a, sizeof(ushort));
+      f->read(buf, 30);
+   }
+
+   return OK;
 }
 
-/** void read_textures(Binary_file*)
-  * Reads the textures.
-  */
-void World::read_textures(Binary_file* file)
-{
-	if (!textureCount)
-		return;
-	texture = new Pic*[textureCount];
-	for (uint i=0; i<textureCount; i++)
-	{
-		PictureInfo inf;
-		file->read(&inf, sizeof(PictureInfo));
-		ushort* pixel = new ushort[inf.height*inf.width];
-		file->read(pixel, inf.height*inf.width*sizeof(ushort));
-		texture[i] = new Pic();
-		texture[i]->create(inf.width, inf.height, pixel);
-		delete pixel;
-	}
+int World::parse_resources(Binary_file* f) {
+   char buf[1024];
+
+   f->read(buf, 10);
+   if(strcasecmp(buf, "Resources\0")) return ERR_FAILED;
+
+   ushort nres;
+   f->read(&nres, sizeof(ushort));
+
+   uint i;
+   Resource_Descr* r;
+   for(i=0; i<nres; i++) {
+      r=new Resource_Descr();
+      res.add(r);
+      r->read(f);
+   }
+
+   return RET_OK;
 }
 
-/** void read_anims(Binary_file*)
-  * Reads the animations.
-  */
-void World::read_anims(Binary_file* file)
-{
-	if (!animCount)
-		return;
-	anim = new Anim[animCount];
-	for (uint i=0; i<animCount; i++)
-	{
-		file->read(&anim[i].pics, sizeof(uint));
-		anim[i].pic = new uint[anim[i].pics];
-		file->read(anim[i].pic, anim[i].pics*sizeof(uint));
-	}
+int World::parse_terrains(Binary_file* f) {
+   char buf[1024];
+
+   f->read(buf, 9);
+   if(strcasecmp(buf, "Terrains\0")) return ERR_FAILED;
+
+   ushort nters;
+   f->read(&nters, sizeof(ushort));
+
+   uint i;
+   Terrain_Descr* t;
+   for(i=0; i<nters; i++) {
+      t=new Terrain_Descr();
+      ters.add(t);
+      t->read(f);
+   }
+
+   return RET_OK;
 }
 
-/** void read_terrains(Binary_file*)
-  * Reads the terrain types.
-  */
-void World::read_terrains(Binary_file* file)
-{
-	if (!terrainCount)
-		return;
-	terrain = new TerrainType[terrainCount];
-	for (uint i=0; i<terrainCount; i++)
-		file->read(&terrain[i], sizeof(TerrainType));
+int World::parse_bobs(Binary_file* f) {
+   char buf[1024];
+
+   f->read(buf, 5);
+   if(strcasecmp(buf, "Bobs\0")) return ERR_FAILED;
+
+   ushort nbobs;
+   f->read(&nbobs, sizeof(ushort));
+   Logic_Bob_Descr* b;
+   uchar id;
+   uint i;
+
+   for(i=0; i<nbobs; i++) {
+      f->read(&id, sizeof(uchar)); 
+      switch(id) {
+         case Logic_Bob_Descr::BOB_DIMINISHING:
+            b=new Diminishing_Bob_Descr();
+            break;
+               
+         case Logic_Bob_Descr::BOB_BORING:
+            b=new Boring_Bob_Descr();
+            break;
+
+         case Logic_Bob_Descr::BOB_GROWING:
+         case Logic_Bob_Descr::BOB_CRITTER:
+         default:
+            // illegal bob for worlsd
+            return ERR_FAILED;
+            break;
+      }
+      bobs.add(b);
+      b->read(f);
+   }
+
+   return RET_OK;
 }
 
-/** void read_resources(Binary_file*)
-  * Reads the resource descriptions.
-  */
-void World::read_resources(Binary_file* file)
-{
-	if (!resourceCount)
-		return;
-	resource = new ResourceDesc[resourceCount];
-	for (uint i=0; i<resourceCount; i++)
-		file->read(&resource[i], sizeof(ResourceDesc));
+
+// 
+// Down here: subclasses of world
+// 
+
+// 
+// read a terrain description in
+// 
+int Terrain_Descr::read(Binary_file* f) {
+   // for the moment, we skip a lot of stuff, since it is not yet needed
+   f->read(name, 30);
+   f->read(&is, sizeof(uchar));
+   
+   char buf[100];
+  
+   // skip def resource
+//   f->read(&def_res, sizeof(uchar));
+//   f->read(&def_stock, sizeof(ushort));
+   // skip maxh, minh
+//   f->read(&minh, sizeof(uchar));
+//   f->read(&maxh, sizeof(uchar));
+   f->read(buf, 5);
+   
+   // skip resources
+   uchar nres;
+   f->read(&nres, sizeof(uchar));
+   f->read(buf, nres*sizeof(uchar));
+   
+   f->read(&ntex, sizeof(ushort));
+   
+   char *buf1=(char*) malloc(sizeof(ushort)*TEXTURE_W*TEXTURE_H);
+   uint i;
+   tex=new Pic*[ntex];
+   for(i=0; i<ntex; i++) {
+      tex[i]=new Pic();
+      f->read(buf1, sizeof(ushort)*TEXTURE_W*TEXTURE_H);
+      tex[i]->create(TEXTURE_W, TEXTURE_H, (ushort*)buf1);
+   }
+   free(buf1);
+
+   return RET_OK;
 }
 
-/** ~World()
-  * Armageddon.
-  */
-World::~World()
-{
-	if (texture)
-		delete[] texture;	//?
-	if (bob)
-		delete[] bob;
-	if (resource)
-		delete[] resource;
-	if (terrain)
-		delete[] terrain;
-
-	for (uint i=0; i<animCount; i++)
-		delete anim[i].pic;
-	if (anim)
-		delete[] anim;
-}
-
-/** Bob* create_bob(uint n)
-  * Returns a new instance of bob n.
-  */
-Bob* World::create_bob(uint n)
-{
-	if (n < bobCount)
-		return new Bob(&bob[n], this);
-	return NULL;
-}
-
-/** Pic* get_texture(uint n)
-  * Returns texture n.
-  */
-Pic* World::get_texture(uint n)
-{
-	if (n < textureCount)
-		return texture[n];
-	return NULL;
-}
-
-/** Anim* get_anim(uint n)
-  * Returns animation n.
-  */
-Anim* World::get_anim(uint n)
-{
-	if (n < animCount)
-		return &anim[n];
-	return NULL;
-}
-
-ResourceDesc* World::get_resource(uint n)
-{
-	return &resource[n];
-}
-
-TerrainType* World::get_terrain(uint n)
-{
-	return &terrain[n];
-}
-
-inline uint World::resources()
-{
-	return resourceCount;
-}
-
-inline uint World::terrains()
-{
-	return terrainCount;
-}
-
-inline uint World::bobs()
-{
-	return bobCount;
-}

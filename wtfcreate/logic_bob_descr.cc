@@ -140,6 +140,9 @@ int Logic_Bob_Descr::create_bob(Profile* p, Section* s, const char* def_suffix, 
    }
 
    if((hsx >= w) || (hsy >= h)) {
+      strcpy(err_sec, s->get_name());
+      strcpy(err_key, key_name);
+      strcpy(err_msg, "Hot spot is not valid. check the size of the pictures!");
       return Bob_Descr::ERR_INVAL_HOT_SPOT;
    }
 
@@ -151,7 +154,7 @@ int Logic_Bob_Descr::create_bob(Profile* p, Section* s, const char* def_suffix, 
 Growing_Bob_Descr::Growing_Bob_Descr(const char* gname) : Logic_Bob_Descr(gname) {
    zmem(ends_in, sizeof(ends_in));
    growing_speed=0;
-   needl.add_provide(get_name(), Tribe_File_Need_List::IS_GROWING_BOB);
+   needl.add_provide(get_name(), Need_List_Descr::IS_GROWING_BOB);
 }
 Growing_Bob_Descr::~Growing_Bob_Descr(void) {
 }
@@ -172,7 +175,7 @@ int Growing_Bob_Descr::construct(Profile* p, Section* s) {
    }
    memcpy(ends_in, str, strlen(str) < (sizeof(ends_in)-1) ? strlen(str) : sizeof(ends_in)-1);
    to_lower(ends_in);
-   needl.add_need(ends_in, Tribe_File_Need_List::IS_DIMINISHING_BOB);
+   needl.add_need(ends_in, Need_List_Descr::IS_DIMINISHING_BOB);
 
 
    growing_speed=s->get_int("growing_speed", 0);
@@ -207,7 +210,7 @@ int Growing_Bob_Descr::write(Binary_file* f) {
 Diminishing_Bob_Descr::Diminishing_Bob_Descr(const char* gname) : Logic_Bob_Descr(gname) {
    zmem(ends_in, sizeof(ends_in));
    stock=0;
-   needl.add_provide(get_name(), Tribe_File_Need_List::IS_DIMINISHING_BOB);
+   needl.add_provide(get_name(), Need_List_Descr::IS_DIMINISHING_BOB);
 }
 Diminishing_Bob_Descr::~Diminishing_Bob_Descr(void) {
 }
@@ -225,7 +228,7 @@ int Diminishing_Bob_Descr::construct(Profile* p, Section* s) {
    if(str) {
       memcpy(ends_in, str, strlen(str) < (sizeof(ends_in)-1) ? strlen(str) : sizeof(ends_in)-1);
       to_lower(ends_in);
-      needl.add_need(ends_in, Tribe_File_Need_List::IS_SOME_BOB);
+      needl.add_need(ends_in, Need_List_Descr::IS_SOME_BOB);
    }
 
    stock=s->get_int("stock", 0);
@@ -252,6 +255,44 @@ int Diminishing_Bob_Descr::write(Binary_file* f) {
    // write ours 
    f->write(&stock, sizeof(ushort));
    f->write(ends_in, 30);
+
+   return OK;
+}
+
+// 
+// Boring
+// 
+Boring_Bob_Descr::Boring_Bob_Descr(const char* gname) : Logic_Bob_Descr(gname) {
+   ttl=0;
+   needl.add_provide(get_name(), Need_List_Descr::IS_BORING_BOB);
+}
+Boring_Bob_Descr::~Boring_Bob_Descr(void) {
+}
+int Boring_Bob_Descr::construct(Profile* p, Section* s) {
+   int retval;
+
+   // cerr << "Parsing Boring_Bob_Descr!" << endl;
+
+   retval=Logic_Bob_Descr::construct(p,s);
+   if(retval) return retval;
+
+   ttl=s->get_int("life_time", 0);
+
+   return OK;
+}
+int Boring_Bob_Descr::write(Binary_file* f) {
+
+  // cerr << "Boring_Bob_Descr::write()!" << endl;
+  
+   // write type
+   uchar type=BOB_BORING;
+   f->write(&type, sizeof(uchar));
+   
+   // write bob common informations
+   Logic_Bob_Descr::write(f);
+  
+   // write ours 
+   f->write(&ttl, sizeof(ushort));
 
    return OK;
 }

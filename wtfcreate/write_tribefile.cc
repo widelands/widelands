@@ -138,7 +138,7 @@ int write_tribefile(MD5_Binary_file* f,  Buildings_Descr* buildings, Tribe_Heade
    write_header(f, header);
 
    // write needlist
-   needl.write(f);
+   needl.write_needs(f);
   
    // write regent data
    regent->write(f);

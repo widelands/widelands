@@ -20,85 +20,135 @@
 #include "widelands.h"
 #include "world.h"
 #include "bob.h"
+#include "game.h"
 
-/** Bob(BobDesc*, World*)
-  * This constructor creates a bob. Only worlds will create bobs.
-  */
-Bob::Bob(BobDesc* bob, World* w)
-{
-	this->world = w;
-	this->desc = *bob;
-	this->lastAct = 0;
+//
+// this is a function which reads a animation from a file
+//
+int Animation::read(Binary_file* f) {
+   ushort npics;
+   f->read(&npics, sizeof(ushort));
+
+   uint i;
+   char* buf;
+   ushort buf_size=15000;
+   buf=(char*) malloc(buf_size);
+   
+   ushort size;
+   for(i=0; i<npics; i++) {
+      f->read(&size, sizeof(ushort));
+      if(size > buf_size) {
+         buf_size=size;
+         buf=(char*) realloc(buf, buf_size);
+      }
+      f->read(buf, size);
+      add_pic(size, (ushort*) buf);
+   }
+  
+   free(buf);
+   
+   return RET_OK;
+}
+   
+// 
+// class Diminishing_Bob
+//
+int Diminishing_Bob::act(Game* g) {
+   cur_pic=g->get_map()->get_world()->get_bob_descr(idx)->get_anim()->get_pic(0);
+
+   return RET_OK;
 }
 
-/** Pic* get_pic(int timekey)
-  * Returns the actual animation frame needed to paint the bob.
-  */
-Pic* Bob::get_pic(int timekey)
-{
-	int key = 0;
-	switch (desc.animKey)
-	{
-	case ANIM_STOCK:
-		key = desc.stock;
-		break;
-	case ANIM_TIME:
-		// this scale allows 1 per second as slowest animation; hm.
-		// are there slower anims?
-		key = (timekey * desc.animFactor) / 1000;
-		break;
-	
-	case ANIM_NONE:
-	// suppress warnings
-	default:
-		break;
-		
-	}
-	Anim* anim = world->get_anim(desc.anim);
-	key %= anim->pics;
-	return world->get_texture(anim->pic[key]);
+//
+// class Boring_Bob
+// 
+int Boring_Bob::act(Game* g) {
+   cur_pic=g->get_map()->get_world()->get_bob_descr(idx)->get_anim()->get_pic(0);
+
+   return RET_OK;
 }
 
-/** ~Bob()
-  * Does nothing.
-  */
-Bob::~Bob()
-{
+// DOWN HERE: DECRIPTION CLASSES
+// 
+// class Logic_Bob_Descr
+//
+int Logic_Bob_Descr::read(Binary_file* f) {
+   f->read(name, 30);
+
+   ushort h, w, hsx, hsy;
+
+   f->read(&w, sizeof(ushort));
+   f->read(&h, sizeof(ushort));
+   f->read(&hsx, sizeof(ushort));
+   f->read(&hsy, sizeof(ushort));
+
+   anim.set_dimensions(w,h);
+   anim.set_hotspot(hsx, hsy);
+
+   anim.read(f);
+
+
+   return RET_OK;
 }
 
-/** int consume()
-  * Decreases the resources in the bob's stock by 1.
-  * Returns the new stock size.
-  */
-int Bob::consume()
-{
-	if (!desc.stock)
-		return 0;
-	return --desc.stock;
+//
+// class Boring_Bob_Descr
+//
+int Boring_Bob_Descr::read(Binary_file* f) {
+   Logic_Bob_Descr::read(f);
+
+   f->read(&ttl, sizeof(ushort));
+      
+   return RET_OK;
+}
+int Boring_Bob_Descr::create_instance(Instance* inst) {
+   
+   inst->obj=new Boring_Bob(g_game->get_map()->get_world()->get_bob(this->get_name()));
+
+   cerr << "Boring_Bob_Descr::create_instance() TODO!" << endl;
+
+   return RET_OK;
 }
 
-/** Bob* act(int timekey)
-  * Performs bob action. For now, this is nothing but occasional dying.
-  * Returns the bob to take the place of this bob (usually that's just
-  * this bob, but it may be its heir or NULL).
-  */
-Bob* Bob::act(int timekey)
-{
-	if (desc.lifetime)
-	{
-		int secondsAfterUpdate = (lastAct - timekey) / 1000;
-		if ((desc.lifetime -= secondsAfterUpdate) <= 0)
-		{
-			Bob* bob = world->create_bob(desc.heir);
-			delete this;
-			return bob;
-		}
-	}
-	if (desc.stock == 0)
-	{
-			Bob* bob = world->create_bob(desc.heir);
-			delete this;
-			return bob;
-	}
-	return this;
+//
+// class Diminishing_Bob_Descr
+//
+int Diminishing_Bob_Descr::read(Binary_file* f) {
+   Logic_Bob_Descr::read(f);
+   
+   f->read(&stock, sizeof(ushort));
+   // TODO: ends in should be changed!
+   char buf[30];
+   f->read(buf, 30);
+   
+   return RET_OK;
 }
+int Diminishing_Bob_Descr::create_instance(Instance* inst) {
+   inst->obj=new Diminishing_Bob(g_game->get_map()->get_world()->get_bob(this->get_name()));
+   
+   cerr << "Diminishing_Bob_Descr::create_instance() TODO!" << endl;
+
+   return RET_OK;
+}
+
+//
+// class Growing_Bob_Descr
+//
+int Growing_Bob_Descr::read(Binary_file* f) {
+   cerr << "Growing_Bob_Descr::read() TODO!" << endl;
+   return RET_OK;
+}
+int Growing_Bob_Descr::create_instance(Instance* inst) {
+   cerr << "Growing_Bob_Descr::create_instance() TODO!" << endl;
+
+   return RET_OK;
+}
+//
+// class Boring_Bob_Descr
+//
+/*int Critter_Bob_Descr::read(Binary_file* f) {
+   cerr << "Critter_Bob_Descr::read() TODO!" << endl;
+   return RET_OK;
+}*/
+
+

@@ -20,9 +20,8 @@
 #ifndef __S__INSTANCE_H
 #define __S__INSTANCE_H
 
-#include "bob.h"
-
 class Game;
+class Animation_Pic;
 
 //
 // Map_Object is a class representing a base class for all objects. like buildings, animals
@@ -32,7 +31,7 @@ class Map_Object {
    friend class Instance;
 
    public:
-      Map_Object(void) { };
+      Map_Object(ushort n) { idx=n; };
       virtual ~Map_Object(void) { }
 
       inline Animation_Pic* get_cur_pic(void) { return cur_pic; }
@@ -45,6 +44,7 @@ class Map_Object {
       inline void set_next_acting_frame(uint i) { next_acting_frame=i; }
  
    protected:
+      ushort idx;
       uint next_acting_frame;
       Animation_Pic* cur_pic;
       uchar owned_by; // player number

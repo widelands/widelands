@@ -19,11 +19,13 @@
 #ifndef __BOB_H
 #define __BOB_H
 
-#include "worldfiletypes.h"
+// #include "worldfiletypes.h"
 #include "graphic.h"
 #include "pic.h"
+#include "myfile.h"
+#include "instances.h"
 
-class World;
+// class World;
 //class Pic;
 
 class Animation;
@@ -73,6 +75,8 @@ class Animation {
       void set_dimensions(ushort mw, ushort mh) { w=mw; h=mh; }
       void set_hotspot(ushort x, ushort y) { hsx=x; hsy=y; }
 
+      int read(Binary_file*);
+
       // TEMP 
       inline Animation_Pic* get_pic(ushort) { return &pics[0]; }
 
@@ -85,42 +89,100 @@ class Animation {
       Animation_Pic *pics;
 };
 
-/** class Bob
-  *
-  * This class represents a bob.
-  * Depends on World, Pic, world file types.
-  */
-class Bob
-{
-	friend class World;
-	BobDesc desc;
-	World* world;
-	int lastAct;
+//
+// This class describes a in-game Boring bob
+//
+class Boring_Bob : public Map_Object {
+   public:
+      Boring_Bob(ushort n) : Map_Object(n) { } 
+      virtual ~Boring_Bob(void) { }
 
-	/** Bob(BobDesc*, World*)
-	  * This constructor creates a bob. Only worlds will create bobs.
-	  */
-	Bob(BobDesc*, World*);
-public:
-	~Bob();
+      int act(Game* g);
 
-	/** Pic* get_pic(int timekey)
-	  * Returns the actual animation frame needed to paint the bob.
-	  */
-	Pic* get_pic(int timekey);
+   private:
+};
 
-	/** int consume()
-	  * Decreases the resources in the bob's stock by 1.
-	  * Returns the new stock size.
-	  */
-	int consume();
+//
+// This class describes a in-game Diminishing bob
+//
+class Diminishing_Bob : public Map_Object {
+   public:
+      Diminishing_Bob(ushort n) : Map_Object(n) { } 
+      virtual ~Diminishing_Bob(void) { }
 
-	/** Bob* act(int timekey)
-	  * Performs bob action. For now, this is nothing but occasional dying.
-	  * Returns the bob to take the place of this bob (usually that's just
-	  * this bob, but it may be its heir or NULL).
-	  */
-	Bob* act(int timekey);
+      int act(Game* g);
+
+   private:
+};
+
+class Logic_Bob_Descr {
+   public:
+      enum {
+         BOB_GROWING=0,
+         BOB_DIMINISHING,
+         BOB_BORING,
+         BOB_CRITTER
+      };
+
+      Logic_Bob_Descr(void) { }
+      virtual ~Logic_Bob_Descr(void) { }
+
+      virtual int read(Binary_file*);
+      virtual int create_instance(Instance*)=0;
+      const char* get_name(void) { return name; }
+
+      inline Animation* get_anim(void) { return &anim; }
+
+   protected:
+      char name[30];
+      Animation anim;
+};
+
+//
+// Growings
+// 
+class Growing_Bob_Descr : virtual public Logic_Bob_Descr {
+   public:
+      Growing_Bob_Descr(void) { ends_in=0; growing_speed=0; }
+      virtual ~Growing_Bob_Descr(void) {  }
+
+      virtual int read(Binary_file* f);
+      int create_instance(Instance*);
+
+   private:
+      Logic_Bob_Descr* ends_in;
+      ushort growing_speed;
+};
+
+// 
+// Diminishing
+// 
+class Diminishing_Bob_Descr : virtual public Logic_Bob_Descr {
+   public:
+      Diminishing_Bob_Descr(void) { ends_in=0; stock=0; }
+      virtual ~Diminishing_Bob_Descr(void) { }
+
+      virtual int read(Binary_file* f);
+      int create_instance(Instance*);
+
+   private:
+      Logic_Bob_Descr* ends_in;
+      ushort stock;
+};
+
+// 
+// Borings
+// 
+class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
+   public:
+      Boring_Bob_Descr(void) { ttl=0; }
+      virtual ~Boring_Bob_Descr(void) { } 
+
+      virtual int read(Binary_file* f);
+      int create_instance(Instance*);
+
+   private:
+      ushort ttl; // time to life
 };
 
 #endif

@@ -226,10 +226,10 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 
 	memcpy(ptmp, p, sizeof(Point)*3);
 	memcpy(btmp, b, sizeof(int)*3);
-	render_triangle(dst, ptmp, btmp, f->get_texr());
+	render_triangle(dst, ptmp, btmp, f->get_terr()->get_texture());
 
 	// Render bottom triangle
-	render_triangle(dst, p+1, b+1, f->get_texd());
+	render_triangle(dst, p+1, b+1, f->get_terd()->get_texture());
 
    // check if a instance is hooked to this field, if so, draw it
    if(f->get_inst()) {
