@@ -123,6 +123,9 @@ public: // worker-specific tasks
 	void start_task_request(Game* g, Request *req);
 	void update_task_request(Game* g, bool cancel);
 
+	void start_task_buildingwork(Game* g);
+	void update_task_buildingwork(Game* g);
+
 	void start_task_gowarehouse(Game* g);
 	void start_task_dropoff(Game* g, WareInstance* item);
 	void start_task_fetchfromflag(Game* g);
@@ -136,6 +139,9 @@ private: // task details
 	void request_update(Game* g, State* state);
 	void request_signal(Game* g, State* state);
 	void request_mask(Game* g, State* state);
+
+	void buildingwork_update(Game* g, State* state);
+	void buildingwork_signal(Game* g, State* state);
 
 	void gowarehouse_update(Game* g, State* state);
 	void gowarehouse_signal(Game* g, State* state);
@@ -158,6 +164,7 @@ private: // task details
 
 private:
 	static Task taskRequest;
+	static Task taskBuildingwork;
 	static Task taskGowarehouse;
 	static Task taskDropoff;
 	static Task taskFetchfromflag;

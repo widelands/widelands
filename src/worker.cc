@@ -542,6 +542,103 @@ void Worker::update_task_request(Game* g, bool cancel)
 /*
 ==============================
 
+BUILDINGWORK task
+
+Endless loop, in which the worker calls the owning building's
+get_building_work() function to intiate subtasks.
+The signal "update" is used to wake the worker up after a sleeping time
+(initiated by a false return value from get_building_work()).
+
+==============================
+*/
+
+Bob::Task Worker::taskBuildingwork = {
+	"buildingwork",
+
+	(Bob::Ptr)&Worker::buildingwork_update,
+	(Bob::Ptr)&Worker::buildingwork_signal,
+	0
+};
+
+
+/*
+===============
+Worker::start_task_buildingwork
+
+Begin work at a building.
+===============
+*/
+void Worker::start_task_buildingwork(Game* g)
+{
+	push_task(g, &taskBuildingwork);
+}
+
+
+/*
+===============
+Worker::buildingwork_update
+===============
+*/
+void Worker::buildingwork_update(Game* g, State* state)
+{
+	std::string signal = get_signal();
+
+	if (signal == "location") {
+		pop_task(g);
+		return;
+	}
+
+	set_signal("");
+
+	// Get the new job
+	PlayerImmovable* location = get_location(g);
+
+	assert(location);
+	assert(location->get_type() == BUILDING);
+
+	if (!((Building*)location)->get_building_work(g, this, !signal.size())) {
+		molog("[buildingwork]: Nothing to be done.\n");
+		set_animation(g, 0);
+		skip_act(g);
+	}
+}
+
+
+/*
+===============
+Worker::buildingwork_signal
+===============
+*/
+void Worker::buildingwork_signal(Game* g, State* state)
+{
+	std::string signal = get_signal();
+
+	if (signal == "update")
+		set_signal("");
+
+	schedule_act(g, 1);
+}
+
+
+/*
+===============
+Worker::update_task_buildingwork
+
+Wake up the buildingwork task.
+===============
+*/
+void Worker::update_task_buildingwork(Game* g)
+{
+	State* state = get_state();
+
+	if (state->task == &taskBuildingwork)
+		send_signal(g, "update");
+}
+
+
+/*
+==============================
+
 GOWAREHOUSE task
 
 ==============================

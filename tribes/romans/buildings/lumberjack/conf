@@ -4,7 +4,7 @@ type=production		# basic type (warehouse, production, military)
 size=small
 buildable=yes
 buildicon=lumberjack_build.bmp
-#worker=lumberjack
+worker=lumberjack
 
 #input=
 #output=log

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -121,6 +121,11 @@ public:
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual Building *create_object();
+
+	std::string get_worker() const { return m_worker; }
+
+private:
+	std::string		m_worker;	// name of worker type
 };
 
 class ProductionSite : public Building {
@@ -133,8 +138,17 @@ public:
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
+	virtual bool get_building_work(Game* g, Worker* w, bool success);
+
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
+
+private:
+	static void request_worker_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
+
+private:
+	Request*		m_worker_request;
+	Worker*		m_worker;
 };
 
 

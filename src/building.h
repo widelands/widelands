@@ -117,6 +117,7 @@ public:
 	void hide_options();
 
 	virtual bool fetch_from_flag(Game* g);
+	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
 	bool leave_check_and_wait(Game* g, Worker* w);
 

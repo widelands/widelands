@@ -391,6 +391,23 @@ void Building::destroy(Editor_Game_Base* g)
 
 /*
 ===============
+Building::get_building_work [virtual]
+
+This function is called by workers in the buildingwork task.
+Give the worker w a new task.
+success is true if the previous task was finished successfully (without a
+signal).
+Return false if there's nothing to be done.
+===============
+*/
+bool Building::get_building_work(Game* g, Worker* w, bool success)
+{
+	throw wexception("MO(%u): get_building_work() for unknown worker %u", get_serial(), w->get_serial());
+}
+
+
+/*
+===============
 Building::leave_check_and_wait
 
 Return true if the given worker can leave the building immediately.
@@ -1326,9 +1343,11 @@ Parse the additional information necessary for production buildings
 */
 void ProductionSite_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
+	Section* sglobal = prof->get_section("global");
+
 	Building_Descr::parse(directory, prof, encdata);
 
-	// TODO
+	m_worker = sglobal->get_safe_string("worker");
 }
 
 
@@ -1348,6 +1367,8 @@ ProductionSite::ProductionSite
 ProductionSite::ProductionSite(ProductionSite_Descr* descr)
 	: Building(descr)
 {
+	m_worker = 0;
+	m_worker_request = 0;
 }
 
 
@@ -1372,7 +1393,15 @@ void ProductionSite::init(Editor_Game_Base *g)
 {
 	Building::init(g);
 
-	// TODO: request worker
+	// Request worker
+	if (g->is_game() && !m_worker) {
+		int wareid = g->get_safe_ware_id(get_descr()->get_worker().c_str());
+
+		molog("Request worker %s (%i)\n", get_descr()->get_worker().c_str(), wareid);
+
+		m_worker_request = new Request(this, wareid, &ProductionSite::request_worker_callback, this);
+		get_economy()->add_request(m_worker_request);
+	}
 }
 
 
@@ -1385,9 +1414,60 @@ Cleanup after a production site is removed
 */
 void ProductionSite::cleanup(Editor_Game_Base *g)
 {
-	// TODO: release worker, wares
+	// Release worker
+	if (m_worker_request) {
+		get_economy()->remove_request(m_worker_request);
+		delete m_worker_request;
+		m_worker_request = 0;
+	}
+
+	if (m_worker) {
+		m_worker->set_location(0);
+		m_worker = 0;
+	}
 
 	Building::cleanup(g);
+}
+
+
+/*
+===============
+ProductionSite::request_worker_callback [static]
+
+Called when our worker arrives.
+===============
+*/
+void ProductionSite::request_worker_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+{
+	ProductionSite* psite = (ProductionSite*)data;
+
+	assert(w);
+	assert(w->get_location(g) == psite);
+	assert(rq == psite->m_worker_request);
+
+	psite->molog("PSITE: got worker (%u)\n", w->get_serial());
+
+	psite->m_worker = w;
+
+	psite->get_economy()->remove_request(rq);
+	delete rq;
+
+	psite->m_worker_request = 0;
+
+	w->start_task_buildingwork(g);
+}
+
+
+/*
+===============
+ProductionSite::get_building_work
+
+There's currently nothing to do for the worker.
+===============
+*/
+bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
+{
+	return false;
 }
 
 
@@ -1426,14 +1506,14 @@ Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *
 		                                          const EncodeData *encdata)
 {
 	const char *name;
-	
+
 	// name = last element of path
 	const char *slash = strrchr(directory, '/');
 	const char *backslash = strrchr(directory, '\\');
-	
+
 	if (backslash && (!slash || backslash > slash))
 		slash = backslash;
-	
+
 	if (slash)
 		name = slash+1;
 	else
@@ -1442,18 +1522,18 @@ Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *
 	// Open the config file
 	Building_Descr *descr = 0;
 	char fname[256];
-	
+
 	snprintf(fname, sizeof(fname), "%s/conf", directory);
-	
+
 	if (!g_fs->FileExists(fname))
 		return 0;
-	
+
 	try
 	{
 		Profile prof(fname, "global"); // section-less file
 		Section *s = prof.get_safe_section("global");
 		const char *type = s->get_safe_string("type");
-		
+
 		if (!strcasecmp(type, "warehouse"))
 			descr = new Warehouse_Descr(tribe, name);
 		else if (!strcasecmp(type, "production"))
@@ -1464,7 +1544,6 @@ Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *
 			throw wexception("Unknown building type '%s'", type);
 		
 		descr->parse(directory, &prof, encdata);
-		prof.check_used();
 	}
 	catch(std::exception &e) {
 		if (descr)
@@ -1476,14 +1555,14 @@ Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *
 			delete descr;
 		throw;
 	}
-	
+
 	return descr;
 }
 
 
 
 #if 0
-// 
+//
 // Need List
 // 
 int NeedWares_List::read(FileRead* f)
