@@ -70,6 +70,7 @@ void Widelands_Map_Building_Data_Packet::Read(FileRead* fr, Editor_Game_Base* eg
 
                // Get the tribe and the building index
                Player* plr=egbase->get_safe_player(owner);
+               assert(plr); // He must be there
                int index=plr->get_tribe()->get_building_index(name.c_str());
                if(index==-1) 
                   throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n", 

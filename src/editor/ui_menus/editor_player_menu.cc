@@ -202,7 +202,7 @@ void Editor_Player_Menu::update(void) {
          m_plr_make_infrastructure_buts[i]->clickedid.set(this, &Editor_Player_Menu::make_infrastructure_clicked);
          posx+=size+spacing;
       }
-      m_plr_make_infrastructure_buts[i]->set_enabled(start_pos_valid);
+      m_plr_make_infrastructure_buts[i]->set_enabled(0); // TODO enable this again: ->set_enabled(start_pos_valid)
       m_plr_make_infrastructure_buts[i]->set_title("I"); // TODO: come up with a picture for this
       // Allowed buildings
       if(!m_plr_allowed_buildings[i]) {
@@ -210,7 +210,7 @@ void Editor_Player_Menu::update(void) {
          m_plr_allowed_buildings[i]->clickedid.set(this, &Editor_Player_Menu::allowed_buildings_clicked);
          posx+=size+spacing;
       }
-      m_plr_allowed_buildings[i]->set_enabled(start_pos_valid);
+      m_plr_allowed_buildings[i]->set_enabled(0); // TODO enable this again: ->set_enabled(start_pos_valid)
       m_plr_allowed_buildings[i]->set_title("B"); // TODO: come up with a picture for this
   
       posx=spacing;

@@ -61,7 +61,10 @@ public:
 
 
 	bool can_start();
-	
+
+   // Cleanup for load
+   void cleanup_for_load(bool t1, bool t2);
+
 	// in-game logic
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
 

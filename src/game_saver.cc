@@ -22,12 +22,16 @@
 #include "game_saver.h"
 #include "IntPlayer.h"
 #include "map.h"
+#include "overlay_manager.h"
 #include "player.h"
 #include "queue_cmd_factory.h"
 #include "transport.h"
 #include "widelands_map_saver.h"
 #include "widelands_map_loader.h"
 
+
+// Forward declaration. Defined in IntPlayer.cc
+int Int_Player_overlay_callback_function(FCoords& fc, void* data, int);
 
 /*
  * Game Saver, creation and destruction
@@ -63,6 +67,7 @@ void Game_Saver::save(void) throw(wexception) {
    bool done=false;
    for(uint i=1; i<=m_game->get_map()->get_nrplayers(); i++) {
       Player* plr=m_game->get_player(i);
+      if(!plr) continue; 
       fw.Unsigned16(plr->m_economies.size());
       for(uint j=0; j<plr->m_economies.size(); j++) {
          done=false;
@@ -133,6 +138,15 @@ void Game_Saver::save_game_class(FileWrite* fw) throw(wexception) {
    // Map is handled by map saving
 
    // Track pointers are not saved in save games
+
+   // Conquer info
+   fw->Unsigned16(m_game->m_conquer_info.size());
+   for(uint i=0; i<m_game->m_conquer_info.size(); i++) {
+      fw->Unsigned8(m_game->m_conquer_info[i].player);
+      fw->Unsigned16(m_game->m_conquer_info[i].middle_point.x);
+      fw->Unsigned16(m_game->m_conquer_info[i].middle_point.y);
+      fw->Unsigned16(m_game->m_conquer_info[i].area);
+   }
 }
 
 /*
@@ -201,6 +215,12 @@ void Game_Saver::load(void) throw (wexception) {
 
    // Now create the players accordingly
    for(uint i=0; i<m_game->get_map()->get_nrplayers(); i++) {
+      std::string name = m_game->get_map()->get_scenario_player_name(i+1);
+      std::string tribe = m_game->get_map()->get_scenario_player_tribe(i+1);
+      
+      if(name == "" && tribe == "") continue; // doesn't exists
+
+      log("Creating player %i: <%s> with tribe <%s>\n", i+1, m_game->get_map()->get_scenario_player_tribe(i+1).c_str(), m_game->get_map()->get_scenario_player_name(i+1).c_str());
       m_game->add_player(i+1, i==0 ? Player::playerLocal : Player::playerAI, 
             m_game->get_map()->get_scenario_player_tribe(i+1).c_str(),
             m_game->get_map()->get_scenario_player_name(i+1).c_str());      // TODO: this must be saved somewhere 
@@ -212,13 +232,13 @@ void Game_Saver::load(void) throw (wexception) {
    ALIVE();
    m_mol=wml.get_map_object_loader();
    ALIVE();
-
-   m_game->get_map()->recalc_whole_map();
-
-   log(" Loading player economies!\n");
+   
+     log(" Loading player economies!\n");
    Map* map=m_game->get_map();
    for(uint i=1; i<=m_game->get_map()->get_nrplayers(); i++) {
       Player* plr=m_game->get_player(i);
+      if(!plr) continue;
+
       uint nr_economies=fr.Unsigned16();
       assert(nr_economies == plr->m_economies.size());
 
@@ -242,6 +262,13 @@ void Game_Saver::load(void) throw (wexception) {
    ALIVE();
    load_cmd_queue_class(&fr, m_mol);
    ALIVE();
+
+   
+   m_game->get_map()->get_overlay_manager()->show_buildhelp(false);
+   m_game->get_map()->get_overlay_manager()->register_overlay_callback_function(&Int_Player_overlay_callback_function, static_cast<void*>(m_game->ipl));
+
+   m_game->get_map()->recalc_whole_map();
+
 }
 
 void Game_Saver::load_cmd_queue_class(FileRead* fr, Widelands_Map_Map_Object_Loader* mol) throw (wexception) {
@@ -310,5 +337,14 @@ void Game_Saver::load_game_class(FileRead* fr) throw (wexception) {
    // Map is handled by map saving
 
    // Track pointers are not saved in save games
+
+   // Conquer info
+   m_game->m_conquer_info.resize(fr->Unsigned16());
+   for(uint i=0; i<m_game->m_conquer_info.size(); i++) {
+      m_game->m_conquer_info[i].player = fr->Unsigned8();
+      m_game->m_conquer_info[i].middle_point.x = fr->Unsigned16();
+      m_game->m_conquer_info[i].middle_point.y = fr->Unsigned16();
+      m_game->m_conquer_info[i].area = fr->Unsigned16();
+   }
 }
 

@@ -359,6 +359,18 @@ void Game::player_field_notification (const FCoords& fc, losegain_t lg)
 }
 
 /*
+ * Cleanup for load
+ */
+void Game::cleanup_for_load(bool t1, bool t2) {
+   Editor_Game_Base::cleanup_for_load(t1,t2);
+
+   while(cpl.size()) {
+      delete cpl[cpl.size()-1];
+      cpl.pop_back();
+   }
+}
+
+/*
 ===============
 Game::send_player_command
 

@@ -71,7 +71,9 @@ void Widelands_Map_Flag_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase
                // create this, no matter what skip is since we have 
                // to read the data packets. We delete this object
                // later again, if it isn't wanted
-               Flag* flag=Flag::create(egbase, egbase->get_safe_player(owner), Coords(x,y));
+               Player* plr = egbase->get_safe_player(owner);
+               assert(plr);
+               Flag* flag=Flag::create(egbase, plr, Coords(x,y));
 
                // and register it with the object loader for further loading
                ol->register_object(egbase, serial, flag);

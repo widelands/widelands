@@ -76,9 +76,11 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
 
          uchar read_owner=fr->Unsigned8();
          Player* plr_owner=0;
-         if(read_owner) 
+         if(read_owner) { 
             plr_owner=egbase->get_safe_player(read_owner);
-
+            assert(plr_owner); // He must be there
+         }
+         
          Coords pos;
          pos.x=fr->Unsigned16();
          pos.y=fr->Unsigned16();

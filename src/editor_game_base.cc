@@ -568,12 +568,14 @@ Editor_Game_Base::get_save_player()
 
 Returns the correct player, creates it
 with the scenario data when he is not yet created
-This should only happen in the editor.
+This should only happen in the editor. 
+In the game, this is the same as get_player(). If it returns
+zero it means that this player is disabled in the game.
 ================
 */
 Player* Editor_Game_Base::get_safe_player(int n) {
    Player* plr=get_player(n);
-   if(plr) return plr;
+   if(plr || is_game()) return plr;
 
    if(!plr) {
       // Create this player, but check that 
@@ -648,33 +650,34 @@ void Editor_Game_Base::remove_trackpointer(uint serial)
  * make this object ready to load new data
  */
 void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animations) {
-        // Clean all the stuff up, so we can load
-         get_objects()->cleanup(this);
+   // Clean all the stuff up, so we can load
+   get_objects()->cleanup(this);
 
-         // We do not flush the animations in the editor since all tribes are loaded and
-         // animations can not change a lot, or?
-         // TODO: check this when another world is needed
-         if(flush_animations) 
-            g_anim.flush();
-         if(flush_graphics)
-            g_gr->flush(0);
-         
-         int i;
-         for(i=1; i<=MAX_PLAYERS; i++)
-            if (m_players[i-1])
-               remove_player(i);
-         
-         m_map->cleanup();
+   // We do not flush the animations in the editor since all tribes are loaded and
+   // animations can not change a lot, or?
+   // TODO: check this when another world is needed
+   if(flush_animations) 
+      g_anim.flush();
+   if(flush_graphics)
+      g_gr->flush(0);
 
-         /*
-          * if we aren't in the editor, also kill all our tribes
-          * and the cmd queue
-          */
-         if(is_game()) {
-            for(uint i=0; i<m_tribes.size(); i++) 
-               delete m_tribes[0];
-            m_tribes.resize(0);
+   int i;
+   for(i=1; i<=MAX_PLAYERS; i++)
+      if (m_players[i-1]) {
+         remove_player(i);
+         m_players[i-1] = 0;
+      }
 
-            static_cast<Game*>(this)->get_cmdqueue()->flush();
-         }
+   m_map->cleanup();
+
+   m_conquer_info.resize(0);
+
+   if(is_game()) {
+      for(uint i=0; i<m_tribes.size(); i++) {
+         delete m_tribes[i];
+      }
+      m_tribes.resize(0);
+
+      static_cast<Game*>(this)->get_cmdqueue()->flush();
+   }
 }

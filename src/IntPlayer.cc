@@ -187,7 +187,7 @@ Interactive_Player IMPLEMENTATION
 */
 
 // This function is the callback for recalculation of field overlays
-static int Int_Player_overlay_callback_function(FCoords& fc, void* data, int) {
+int Int_Player_overlay_callback_function(FCoords& fc, void* data, int) {
    Interactive_Player* plr=static_cast<Interactive_Player*>(data);
 
    return plr->get_player()->get_buildcaps(fc);

@@ -131,6 +131,8 @@ public:
 protected:
 	void die();
 
+   bool keyboard_free(void) { return !(_focus); }
+
 private:
 	void check_child_death();
 

@@ -2115,9 +2115,6 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	Flag* destflag;
 
 	// Catch the simplest cases
-   log("Transfer %p, m_request: %p, loc: %p, dest: %p\n", this, m_request, location, destination);
-   log("dest->get_economy: %p\n", destination->get_economy());
-   log("loc->get_economy: %p\n", location->get_economy());
 	if (location->get_economy() != 
          destination->get_economy()) {
 		tlog("Economy mismatch -> fail\n");
@@ -2284,8 +2281,6 @@ Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbda
 	m_callbackfn = cbfn;
 	m_callbackdata = cbdata;
 
-   log("Created new request: %p\n", this);
-
    if (m_economy)
       m_economy->add_request(this);
 }
@@ -2345,7 +2340,6 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
             }
             trans->set_idle(fr->Unsigned8());
             m_transfers.push_back(trans);
-            log("Loaded transfer %p in request %p\n", trans, this);
          }   
       }
 
@@ -2477,8 +2471,6 @@ void Request::set_economy(Economy* e)
 
 	m_economy = e;
 
-   log("Set economy, add request!\n");
-
 	if (m_economy && is_open())
 		m_economy->add_request(this);
 }
@@ -2530,8 +2522,6 @@ void Request::set_count(int count)
 		cancel_transfer(m_transfers.size() - 1);
 
 	// Update the economy
-   log("add_request() in set_count()!\n");
-
 	if (m_economy) {
 		if (wasopen && !is_open())
 			m_economy->remove_request(this);
@@ -2673,8 +2663,6 @@ void Request::transfer_fail(Game *g, Transfer* t)
 	t->m_item = 0;
 
    remove_transfer(find_transfer(t));
-   
-	log("Add request in transfer_fail!\n");
    
    if (!wasopen)
 		m_economy->add_request(this);
@@ -3543,8 +3531,6 @@ void Economy::add_wares(int id, int count)
 
 	m_wares.add(id, count);
 
-   log("Economy: add, has now %i of id %i\n", m_wares.stock(id), id);
-
 	// TODO: add to global player inventory?
 }
 void Economy::add_workers(int id, int count)
@@ -3571,8 +3557,6 @@ void Economy::remove_wares(int id, int count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
 	
-   log("Economy: remove, has currently %i of id %i, want to remove %i\n", m_wares.stock(id), id, count);
-
 	m_wares.remove(id, count);
    
 
@@ -3689,9 +3673,6 @@ Important: This must only be called by the Request class.
 */
 void Economy::remove_request(Request* req)
 {
-	log("%p: remove_request(%p) for %u\n", this, req,
-			req->get_target((Game*)get_owner()->get_game())->get_serial());
-
 	RequestList::iterator it = std::find(m_requests.begin(), m_requests.end(), req);
 
 	if (it == m_requests.end()) {
@@ -4152,16 +4133,12 @@ void Economy::balance_requestsupply()
 
    m_request_timer = false;
 
-   log("Called balance requestesupply for economy: %p\n", this);
-
 	rsps.nexttimer = -1;
 
 	if (!egbase->is_game())
 		return;
 
 	g = (Game*)egbase;
-	log("PR t = %i\n", g->get_gametime());
-
 	// Try to fulfill non-idle Requests
 	process_requests(g, &rsps);
 

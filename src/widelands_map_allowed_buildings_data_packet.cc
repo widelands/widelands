@@ -49,8 +49,8 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game
       if(!skip && egbase->is_game()) {
          int i=0;
          for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
-            Player* plr=egbase->get_safe_player(i);
-            assert(plr);
+            Player* plr=egbase->get_player(i);
+            if(!plr) continue;
             Tribe_Descr* t=plr->get_tribe();
             
             int b;
@@ -64,6 +64,7 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game
       int i=0;
       for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
          Player* plr=egbase->get_safe_player(i);
+         if(!plr) continue; // skip this player, is data can not be saved
          Tribe_Descr* t;
          
          assert(plr);
@@ -110,6 +111,7 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Write(FileWrite* fw, Editor_Ga
    int i=0;
    for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
       Player* plr=egbase->get_player(i);
+      if(!plr) continue; // skip this player, is data can not be saved
       Tribe_Descr* t;
       if(plr) 
          t=plr->get_tribe();

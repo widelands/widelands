@@ -185,16 +185,20 @@ void Interactive_Base::think()
 
    // If one of the arrow keys is pressed, 
    // scroll here
-   if(Sys_GetKeyState(KEY_UP)) 		
-      get_mapview()->set_rel_viewpoint(Point(0, -20));
-   if(Sys_GetKeyState(KEY_DOWN)) 		
-      get_mapview()->set_rel_viewpoint(Point(0, 20));
-   if(Sys_GetKeyState(KEY_LEFT)) 		
-      get_mapview()->set_rel_viewpoint(Point(-20, 0));
-   if(Sys_GetKeyState(KEY_RIGHT)) 		
-      get_mapview()->set_rel_viewpoint(Point(20, 0));
+   const uint scrollval = 10;
 
-	// Call game logic here
+   if(keyboard_free()) {
+      if(Sys_GetKeyState(KEY_UP)) 		
+         get_mapview()->set_rel_viewpoint(Point(0, -scrollval));
+      if(Sys_GetKeyState(KEY_DOWN)) 		
+         get_mapview()->set_rel_viewpoint(Point(0, scrollval));
+      if(Sys_GetKeyState(KEY_LEFT)) 		
+         get_mapview()->set_rel_viewpoint(Point(-scrollval, 0));
+      if(Sys_GetKeyState(KEY_RIGHT)) 		
+         get_mapview()->set_rel_viewpoint(Point(scrollval, 0));
+   }
+   
+   // Call game logic here
    // The game advances
 	m_egbase->think();
 

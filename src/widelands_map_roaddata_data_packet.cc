@@ -68,7 +68,10 @@ void Widelands_Map_Roaddata_Data_Packet::Read(FileRead* fr, Editor_Game_Base* eg
 
          assert(!ol->is_object_loaded(r));
 
-         r->set_owner(egbase->get_safe_player(fr->Unsigned8()));
+         Player* plr = egbase->get_safe_player(fr->Unsigned8());
+         assert(plr); 
+         
+         r->set_owner(plr);
          r->m_type=fr->Unsigned32();
          ser=fr->Unsigned32();
          uint ser1=fr->Unsigned32();

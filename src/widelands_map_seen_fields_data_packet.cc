@@ -51,7 +51,8 @@ void Widelands_Map_Seen_Fields_Data_Packet::Read(FileRead* fr, Editor_Game_Base*
             if(!skip) {
                for(uint i=0; i<egbase->get_map()->get_nrplayers(); i++) {
                   Player* plr = egbase->get_safe_player(i+1);
-                  plr->set_area_seen(Coords(x,y), 0, data & ( 1 << i ));
+                  if(plr)
+                     plr->set_area_seen(Coords(x,y), 0, data & ( 1 << i ));
                }
             }
 
