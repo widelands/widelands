@@ -431,6 +431,10 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 	GraphicImpl* gfx = get_graphicimpl();
 	Bitmap* src = gfx->get_picture_bitmap(picture);
 
+	if (!src) {
+		log("RenderTargetImpl::tile: bad picture %u\n", picture);
+		return;
+	}
 
 	// Clipping
 	x += m_offset.x;
