@@ -129,14 +129,16 @@ public:
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual Building *create_object();
 	
-	std::string get_worker() const { return m_worker; }
+	std::string get_worker_name() const { return m_worker_name; }
 	bool is_output(std::string name) const { return m_output.find(name) != m_output.end(); }
 	const std::set<std::string>* get_outputs() const { return &m_output; }
 	const std::vector<Input>* get_inputs() const { return &m_inputs; }
    const ProductionProgram* get_program(std::string name) const;
 
+   virtual bool is_only_production_site(void) { return true; }
+   
 private:
-	std::string					m_worker;	// name of worker type
+	std::string					m_worker_name;	// name of worker type
    std::vector<Input>      m_inputs;
    std::set<std::string>	m_output;	// output wares type names
 	ProgramMap					m_programs;
@@ -183,6 +185,64 @@ private:
 	int								m_program_time;	// timer time
    bool                       m_program_needs_restart; // program shall be restarted on next act()
    std::vector<WaresQueue*>   m_input_queues;   //  input queues for all inputs
+};
+
+class MilitarySite_Descr : public ProductionSite_Descr {
+   public:
+      MilitarySite_Descr(Tribe_Descr *tribe, const char *name); 
+      virtual ~MilitarySite_Descr();
+  
+      virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+      virtual Building *create_object();
+
+      virtual bool is_only_production_site(void) { return false; }
+
+      inline int get_conquer_radius(void) { return m_conquer_radius; }
+      inline int get_max_number_of_soldiers(void) { return m_num_soldiers; }
+      inline int get_max_number_of_medics(void) { return m_num_medics; }
+      inline int get_heal_per_second(void) { return m_heal_per_second; }
+      inline int get_heal_increase_per_medic(void) { return m_heal_incr_per_medic; }
+
+   private:
+      int                     m_conquer_radius;
+      int                     m_num_soldiers;
+      int                     m_num_medics;
+      int                     m_heal_per_second;
+      int                     m_heal_incr_per_medic;
+};
+
+class MilitarySite : public ProductionSite {
+	MO_DESCR(MilitarySite_Descr);
+   
+   public:
+      MilitarySite(MilitarySite_Descr* descr); 
+      virtual ~MilitarySite();
+
+
+      virtual void init(Editor_Game_Base *g);
+      virtual void cleanup(Editor_Game_Base *g);
+      virtual void act(Game *g, uint data);
+
+      virtual void set_economy(Economy* e);
+
+      /*
+      get_soldiersqueue()
+      release_soldier()
+      request_soldier()
+      */
+
+protected:
+	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
+
+private:
+	void request_soldier(Game* g);
+   static void request_soldier_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
+
+   private:
+	Request*		m_soldier_request;
+	Worker*		m_soldier;
+//     Soldier*  
+//  Soldier_Queue    
 };
 
 /*

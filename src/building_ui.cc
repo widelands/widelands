@@ -825,3 +825,75 @@ Window* ProductionSite::create_options_window(Interactive_Player* plr, Window** 
 {
 	return new ProductionSite_Window(plr, this, registry);
 }
+
+
+/*
+==============================================================================
+
+MilitarySite UI IMPLEMENTATION
+
+==============================================================================
+*/
+
+class MilitarySite_Window : public Building_Window {
+public:
+	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, Window** registry);
+	virtual ~MilitarySite_Window();
+
+	inline MilitarySite* get_militarysite() { return (MilitarySite*)get_building(); }
+
+	virtual void think();
+};
+
+
+/*
+===============
+MilitarySite_Window::MilitarySite_Window
+
+Create the window and its panels, add it to the registry.
+===============
+*/
+MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, Window** registry)
+	: Building_Window(parent, ps, registry)
+{
+   // TODO
+   log("TODO: military options window!. must have all functionality of productionsite + soldier options!\n");
+}
+
+
+/*
+===============
+MilitarySite_Window::~MilitarySite_Window
+
+Deinitialize, remove from registry
+===============
+*/
+MilitarySite_Window::~MilitarySite_Window()
+{
+}
+
+
+/*
+===============
+MilitarySite_Window::think
+
+Make sure the window is redrawn when necessary.
+===============
+*/
+void MilitarySite_Window::think()
+{
+	Building_Window::think();
+}
+
+
+/*
+===============
+MilitarySite::create_options_window
+
+Create the production site information window.
+===============
+*/
+Window* MilitarySite::create_options_window(Interactive_Player* plr, Window** registry)
+{
+	return new MilitarySite_Window(plr, this, registry);
+}

@@ -127,6 +127,9 @@ void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, int radius)
       // occupied by another player
 		// Probably the best thing to just don't grab it. Players should fight
 		// for their land.
+      // Too simple. What should be done when too HQ are too close and the area interact.
+      // Also, when one user gets close to another, he might not be able to see a military building
+      // when his land doesn't increase
       //cerr << "warning: already occupied field is claimed by another user!" << endl;
    }
 

@@ -45,14 +45,14 @@ clrkey_b=255
 # for this tribe. This is an important point to balance between
 # different tribes to make sure that they'll stay even
 [startwares]
-plank=30
-log=10
-stone=10
+plank=300
+log=100
+stone=300
 
 [startworkers]
 carrier=20
-builder=4
-lumberjack=6
-forrester=3
-stonecutter=3
-carpenter=3
+builder=20
+lumberjack=80
+forrester=20
+stonecutter=20
+carpenter=20
