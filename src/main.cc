@@ -33,6 +33,7 @@
 #include "options.h"
 #include "setup.h"
 #include "system.h"
+#include "network.h"
 
 LayeredFileSystem *g_fs;
 
@@ -179,7 +180,26 @@ void g_main(int argc, char** argv)
 		  {
 			Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
 			int code=ns->run();
+			
+			NetGame* netgame;
+			
+			if (code==Fullscreen_Menu_NetSetup::HOSTGAME)
+			    netgame=new NetHost();
+			else if (code==Fullscreen_Menu_NetSetup::JOINGAME) {
+			    IPaddress peer;
+
+			    if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
+				    throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
+
+			    netgame=new NetClient(&peer);
+			}
+			else
+			    break;
+			
 			delete ns;
+			
+			netgame->run();
+			delete netgame;
 		  }
 		  break;
 

@@ -216,7 +216,6 @@ void BulldozeConfirm::bulldoze()
          Game* g=static_cast<Game*>(egbase);
          Interactive_Player* player=static_cast<Interactive_Player*>(m_iabase);
 	 g->send_player_bulldoze (todestroy);
-//         g->send_player_command(player->get_player_number(), CMD_BULLDOZE, todestroy->get_serial());
       } else {
          // Editor
          Player* plr=todestroy->get_owner();
@@ -655,7 +654,6 @@ void Building_Window::act_start_stop() {
 	Game* g = m_player->get_game();
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Stopable))
 		g->send_player_start_stop_building (m_building);
-//		g->send_player_command(m_player->get_player_number(), CMD_START_STOP_BUILDING, m_building->get_serial());
 
 	die();
 }
@@ -672,7 +670,6 @@ void Building_Window::act_enhance(int id)
 	Game* g = m_player->get_game();
 	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
 		g->send_player_enhance_building (m_building, id);
-//		g->send_player_command(m_player->get_player_number(), CMD_ENHANCE_BUILDING, m_building->get_serial(), id);
 
 	die();
 }

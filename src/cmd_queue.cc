@@ -31,12 +31,13 @@
 Cmd_Queue::Cmd_Queue(Game *g)
 {
 	m_game = g;
+	nextserial = 0;
 }
 
 Cmd_Queue::~Cmd_Queue(void)
 {
 	while(!m_cmds.empty()) {
-		delete m_cmds.top();
+		delete m_cmds.top().cmd;
 		m_cmds.pop();
 	}
 }
@@ -50,7 +51,12 @@ Insert a new command into the queue; it will be executed at the given time
 */
 void Cmd_Queue::enqueue (BaseCommand* cmd)
 {
-	m_cmds.push(cmd);
+	cmditem ci;
+	
+	ci.cmd=cmd;
+	ci.serial=nextserial++;
+	
+	m_cmds.push(ci);
 }
 
 /** Cmd_Queue::run_queue(int interval)
@@ -68,8 +74,8 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 
 
 	while(!m_cmds.empty()) {
-		BaseCommand* c = m_cmds.top();
-		if (final - c->get_duetime() < 0)
+		BaseCommand* c = m_cmds.top().cmd;
+		if (final - c->get_duetime() <= 0)
 			break;
 
 		m_cmds.pop();

@@ -21,6 +21,8 @@
 #define __S__NETSETUP_H
 
 #include "fullscreen_menu_base.h"
+#include "ui_editbox.h"
+
 
 class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	public:
@@ -33,7 +35,11 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		Fullscreen_Menu_NetSetup ();
 		~Fullscreen_Menu_NetSetup ();
 
-		void not_supported();
+		const char* get_host_address ()
+		{ return hostname->get_text(); }
+	
+	private:
+		UIEdit_Box*	hostname;
 };
 
 #endif

@@ -17,10 +17,17 @@
  *
  */
 
+#ifndef __PLAYERCOMMAND_H__
+#define __PLAYERCOMMAND_H__
+
+
 #include "cmd_queue.h"
 #include "building.h"
 #include "transport.h"
 
+
+class Serializer;
+class Deserializer;
 
 
 // PlayerCommand is for commands issued by players. It has the additional
@@ -34,6 +41,9 @@ class PlayerCommand:public BaseCommand {
 	virtual ~PlayerCommand ();
 	
 	char get_sender() const { return sender; }
+	
+	virtual void serialize (Serializer*)=0;
+	static PlayerCommand* deserialize (Deserializer*);
 };
 
 class Cmd_Bulldoze:public PlayerCommand {
@@ -44,7 +54,10 @@ class Cmd_Bulldoze:public PlayerCommand {
 	Cmd_Bulldoze (int t, int p, PlayerImmovable* pi):PlayerCommand(t,p)
 	{ serial=pi->get_serial(); }
 	
+	Cmd_Bulldoze (Deserializer*);
+	
 	virtual void execute (Game* g);
+	virtual void serialize (Serializer*);
 };
 
 class Cmd_Build:public PlayerCommand {
@@ -56,7 +69,10 @@ class Cmd_Build:public PlayerCommand {
 	Cmd_Build (int t, int p, const Coords& c, int i):PlayerCommand(t,p)
 	{ coords=c; id=i; }
 	
+	Cmd_Build (Deserializer*);
+	
 	virtual void execute (Game* g);
+	virtual void serialize (Serializer*);
 };
 
 class Cmd_BuildFlag:public PlayerCommand {
@@ -67,20 +83,28 @@ class Cmd_BuildFlag:public PlayerCommand {
 	Cmd_BuildFlag (int t, int p, const Coords& c):PlayerCommand(t,p)
 	{ coords=c; }
 	
+	Cmd_BuildFlag (Deserializer*);
+	
 	virtual void execute (Game* g);
+	virtual void serialize (Serializer*);
 };
 
 class Cmd_BuildRoad:public PlayerCommand {
     private:
 	Path* path;
+	
+	Coords start;
+	int nsteps;
+	char* steps;
 
     public:
-	Cmd_BuildRoad (int t, int p, Path* pa):PlayerCommand(t,p)
-	{ path=pa; }
+	Cmd_BuildRoad (int, int, Path*);
+	Cmd_BuildRoad (Deserializer*);
 	
 	virtual ~Cmd_BuildRoad ();
 	
 	virtual void execute (Game* g);
+	virtual void serialize (Serializer*);
 };
 
 class Cmd_FlagAction:public PlayerCommand {
@@ -92,7 +116,10 @@ class Cmd_FlagAction:public PlayerCommand {
 	Cmd_FlagAction (int t, int p, Flag* f, int a):PlayerCommand(t,p)
 	{ serial=f->get_serial(); action=a; }
 	
+	Cmd_FlagAction (Deserializer*);
+	
 	virtual void execute (Game* g);
+	virtual void serialize (Serializer*);
 };
 
 class Cmd_StartStopBuilding:public PlayerCommand {
@@ -103,7 +130,10 @@ class Cmd_StartStopBuilding:public PlayerCommand {
 	Cmd_StartStopBuilding (int t, int p, Building* b):PlayerCommand(t,p)
 	{ serial=b->get_serial(); }
 	
+	Cmd_StartStopBuilding (Deserializer*);
+	
 	virtual void execute (Game* g);
+	virtual void serialize (Serializer*);
 };
 
 class Cmd_EnhanceBuilding:public PlayerCommand {
@@ -115,7 +145,12 @@ class Cmd_EnhanceBuilding:public PlayerCommand {
 	Cmd_EnhanceBuilding (int t, int p, Building* b, int i):PlayerCommand(t,p)
 	{ serial=b->get_serial(); id=i; }
 	
+	Cmd_EnhanceBuilding (Deserializer*);
+	
 	virtual void execute (Game* g);
+	virtual void serialize (Serializer*);
 };
 
+
+#endif
 

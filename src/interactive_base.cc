@@ -459,7 +459,6 @@ void Interactive_Base::finish_build_road()
       if(m_egbase->is_game()) {
          // Build the path as requested 
 	 static_cast<Game*>(m_egbase)->send_player_build_road (m_road_build_player, path);
-//         static_cast<Game*>(m_egbase)->send_player_command(m_road_build_player, CMD_BUILD_ROAD, (int)path, 0, 0);
       } else {
          get_egbase()->get_player(m_road_build_player)->build_road(path);
          delete path;

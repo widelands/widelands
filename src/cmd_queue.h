@@ -35,26 +35,6 @@
 #define SENDER_CMDQUEUE 100   // The Cmdqueue sends itself some action request
 
 
-// ---------------------- BEGINN OF CMDS ----------------------------------
-enum {
-   UNUSED = 0,
-   CMD_ACT,				// arg1 = serialnum, arg2 = user-defined data
-	CMD_DESTROY,		// arg1 = serialnum
-	CMD_INCORPORATE,	// arg1 = serialnum (Worker)
-	CMD_CALL,			// arg1 = fnptr (Cmd_Queue::call_fn), arg2, arg3 = args for function
-   CMD_CHECK_TRIGGER,// arg1 = last checked trigger number or -1 if no trigger was ever checked
-	// Begin commands sent by players
-	CMD_BUILD_FLAG,	// arg1 = x, arg2 = y
-	CMD_BUILD_ROAD,	// arg1 = Path*
-	CMD_BUILD,			// arg1 = x, arg2 = y, arg3 = build_descr idx
-	CMD_BULLDOZE,		// arg1 = serialnum (PlayerImmovable)
-
-	CMD_FLAGACTION,	// arg1 = serialnum of flag, arg2 = action number
-	CMD_START_STOP_BUILDING,  // arg1 = serialnummer of building start/stop building
-   CMD_ENHANCE_BUILDING // enhance this building to another arg1 = serialnummer of building, arg2 = Tribe_Descr::get_building() id of new building
-};
-
-// arg2 of CMD_FLAGACTION is one of these:
 enum {
 	FLAGACTION_GEOLOGIST = 0,	// call a geologist
 };
@@ -77,17 +57,22 @@ class BaseCommand {
 		virtual void execute (Game*)=0;
 		
 		int get_duetime() const { return duetime; }
+		void set_duetime(int t) { duetime=t; }
 };
 
 class Cmd_Queue {
-	struct CmdCompare {
-		bool operator() (const BaseCommand* c1, const BaseCommand* c2) {
-			return c1->get_duetime() > c2->get_duetime();
+	struct cmditem {
+		BaseCommand*	cmd;
+		unsigned long	serial;
+		
+		bool operator< (const cmditem& c) const
+		{
+			if (cmd->get_duetime()==c.cmd->get_duetime())
+				return serial > c.serial;
+			else
+				return cmd->get_duetime() > c.cmd->get_duetime();
 		}
 	};
-
-	typedef std::priority_queue<BaseCommand*, std::vector<BaseCommand*>, CmdCompare> queue_t;
-
 
    public:
 	Cmd_Queue(Game *g);
@@ -97,8 +82,9 @@ class Cmd_Queue {
 	int run_queue (int interval, int* game_time_var);
 
    private:
-	Game *m_game;
-	queue_t m_cmds;
+	Game*				m_game;
+	std::priority_queue<cmditem>	m_cmds;
+	unsigned long			nextserial;
 };
 
 

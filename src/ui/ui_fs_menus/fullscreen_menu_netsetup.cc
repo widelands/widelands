@@ -20,7 +20,6 @@
 #include "fullscreen_menu_netsetup.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
-#include "ui_editbox.h"
 #include "constants.h"
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
@@ -34,11 +33,11 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	UIButton* b;
 
 	b = new UIButton(this, 60, 170, 174, 24, 1, HOSTGAME);
-	b->clicked.set(this, &Fullscreen_Menu_NetSetup::not_supported);
+	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title("Host a New Game");
 
 	b = new UIButton(this, 60, 210, 174, 24, 1, JOINGAME);
-	b->clicked.set(this, &Fullscreen_Menu_NetSetup::not_supported);
+	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title("Join a Game");
 
 	b = new UIButton(this, 60, 250, 174, 24, 0, CANCEL);
@@ -46,8 +45,6 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	b->set_title("Back");
 	
 	// Hostname
-	UIEdit_Box* hostname;
-	
 	hostname=new UIEdit_Box(this, 288, 210, 174, 24, 2, 0);
 	hostname->set_text("localhost");	
 }
@@ -56,7 +53,3 @@ Fullscreen_Menu_NetSetup::~Fullscreen_Menu_NetSetup ()
 {
 }
 
-void Fullscreen_Menu_NetSetup::not_supported()
-{
-	critical_error("This is not yet supported. You can safely click on continue.");
-}

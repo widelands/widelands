@@ -145,7 +145,8 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 
 		const char* string = 0;
 		switch(m_playertype) {
-		case Player::playerLocal: string = "Human"; break;
+		case Player::playerLocal:
+		case Player::playerRemote: string = "Human"; break;
 		case Player::playerAI: string = "Computer"; break;
 		}
 		m_btnPlayerType->set_title(string);

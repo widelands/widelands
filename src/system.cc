@@ -18,6 +18,7 @@
  */
 
 #include <SDL.h>
+#include <SDL/SDL_net.h>
 #include "error.h"
 #include "filesystem.h"
 #include "graphic.h"
@@ -246,6 +247,10 @@ void Sys_Init()
 			if (SDL_Init(SDL_INIT_VIDEO) < 0)
 				throw wexception("Failed to initialize SDL: %s", SDL_GetError());
 		}
+		
+		if (SDLNet_Init()<0)
+			throw wexception("Failed to initialize SDL_net: %s\n", SDLNet_GetError());
+		
 		sys.active = true;
 
 		SDL_ShowCursor(SDL_DISABLE);

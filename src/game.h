@@ -41,6 +41,7 @@ class Computer_Player;
 class Map_Loader;
 class BaseCommand;
 class PlayerCommand;
+class NetGame;
 
 class Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
@@ -51,15 +52,13 @@ public:
 
 	// life cycle
 	bool run_single_player ();
-	bool run_multi_player ();
+	bool run_multi_player (NetGame*);
 
 	void think(void);
 
 
 	bool can_start();
 	
-	inline bool is_multiplayer() { return m_multiplayer; }
-
 	// in-game logic
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
 
@@ -95,7 +94,8 @@ private:
 	void init_player_controllers ();
 	bool run ();
 
-	bool		m_multiplayer;
+	
+	NetGame*	m_netgame;
 	
 	int		m_state;
 	int		m_speed;		// frametime multiplier

@@ -28,6 +28,7 @@
 #include "map_loader.h"
 #include "playercommand.h"
 #include "trigger.h"
+#include "network.h"
 
 
 /** Game::Game(void)
@@ -39,7 +40,7 @@ Game::Game(void)
 	m_state = gs_none;
 	m_speed = 1;
 
-   cmdqueue = new Cmd_Queue(this);
+	cmdqueue = new Cmd_Queue(this);
 
 	m_realtime = Sys_GetTime();
 }
@@ -101,7 +102,7 @@ bool Game::can_start()
 bool Game::run_single_player ()
 {
 	m_state = gs_menu;
-	m_multiplayer = false;
+	m_netgame=0;
 
 	Map_Loader* ml=0;
 	Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, &ml);
@@ -125,22 +126,58 @@ bool Game::run_single_player ()
 }
 
 
-bool Game::run_multi_player ()
+extern uchar g_playercolors[MAX_PLAYERS][12];
+bool Game::run_multi_player (NetGame* ng)
 {
-	return false;
+	m_netgame=ng;
+
+	// temporarily hardcode map
+	Map* map=new Map();
+	Map_Loader* ml = map->get_correct_loader("maps/eden.swd");
+	assert (ml!=0);
+        ml->preload_map(0);
+	set_map (ml->get_map());
+	
+	int pn=ng->get_playernum();
+	
+	add_player (1, (pn==1)?Player::playerLocal:Player::playerRemote, "romans", g_playercolors[0]);
+	add_player (2, (pn==2)?Player::playerLocal:Player::playerRemote, "romans", g_playercolors[1]);
+	add_player (3, Player::playerAI, "romans", g_playercolors[2]);
+
+	m_netgame->begin_game();
+	    
+	g_gr->flush(PicMod_Menu);
+
+	m_state = gs_running;
+	
+	init_player_controllers ();
+
+	// Now first, completly load the map
+	ml->load_map_complete(this, false); // if code==2 is a scenario
+	delete ml;
+
+	return run();
 }
 
 
 void Game::init_player_controllers ()
 {
-	ipl = new Interactive_Player(this, 1);
+	ipl=0;
+	for (int i=1; i<=get_map()->get_nrplayers(); i++)
+		if (get_player(i)->get_type()==Player::playerLocal) {
+		    ipl = new Interactive_Player(this, i);
+		    break;
+		}
+	
+	assert (ipl!=0);
+
 	// inform base, that we have something interactive
 	set_iabase(ipl);
 
 	// set up computer controlled players
-	// FIXME: control which player should actually be controlled by AI
-	for (int i=2; i<=get_map()->get_nrplayers(); i++)
-		cpl.push_back (new Computer_Player(this,i));
+	for (int i=1; i<=get_map()->get_nrplayers(); i++)
+		if (get_player(i)->get_type()==Player::playerAI)
+			cpl.push_back (new Computer_Player(this,i));
 
 }
 
@@ -195,7 +232,6 @@ bool Game::run()
 	// Everything prepared, send the first trigger event
 	// We lie about the sender here. Hey, what is one lie in a lifetime?
 	enqueue_command (new Cmd_CheckTrigger(get_gametime(), -1));
-//	cmdqueue->queue(get_gametime(), SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, -1, 0, 0);
 
 	ipl->run();
 
@@ -223,23 +259,36 @@ bool Game::run()
 //
 void Game::think(void)
 {
-	int frametime = -m_realtime;
-	
-	m_realtime = Sys_GetTime();
-	frametime += m_realtime;
-
-	// prevent frametime escalation in case the game logic is the performance bottleneck
-	if (frametime > 1000)
-		frametime = 1000;
-
-	frametime *= get_speed();
-
-	// Networking: check socket here
+	if (m_netgame!=0)
+	    m_netgame->handle_network ();
 
 	if (m_state == gs_running) {
 		for (unsigned int i=0;i<cpl.size();i++)
-		    cpl[i]->think();
+			cpl[i]->think();
 	
+		int frametime = -m_realtime;
+		m_realtime = Sys_GetTime();
+		frametime += m_realtime;
+		
+		if (m_netgame!=0) {
+			int max_frametime=m_netgame->get_max_frametime();
+			
+			if (frametime>max_frametime)
+			    frametime=max_frametime;	// wait for the next server message
+			else if (max_frametime-frametime>500)
+			    frametime+=(max_frametime-frametime)/2;	// we are too long behind network time, so hurry a little
+		}
+		else
+			frametime *= get_speed();
+		    
+		// maybe we are too fast...
+		if (frametime==0)
+			return;
+
+		// prevent frametime escalation in case the game logic is the performance bottleneck
+		if (frametime > 1000)
+			frametime = 1000;
+
 		cmdqueue->run_queue(frametime, get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
@@ -283,7 +332,10 @@ across the network.
 */
 void Game::send_player_command (PlayerCommand* pc)
 {
-	enqueue_command (pc);
+	if (m_netgame!=0 && get_player(pc->get_sender())->get_type()==Player::playerLocal)
+		m_netgame->send_player_command (pc);
+	else
+		enqueue_command (pc);
 }
 
 void Game::enqueue_command (BaseCommand* cmd)

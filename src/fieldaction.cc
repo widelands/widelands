@@ -530,7 +530,6 @@ void FieldActionWindow::act_buildflag()
       // Game: send command
       Game *g = static_cast<Game*>(egbase); 
       g->send_player_build_flag (m_plr->get_player_number(), m_field);
-//      g->send_player_command(m_plr->get_player_number(), CMD_BUILD_FLAG, m_field.x, m_field.y);
    } else {
       // Editor: Just plain build this flag
       m_plr->build_flag(m_field);
@@ -574,7 +573,6 @@ void FieldActionWindow::act_ripflag()
          // Game
          Game *g = static_cast<Game*>(m_iabase->get_egbase()); 
 	 g->send_player_bulldoze (flag);
-//         g->send_player_command(m_plr->get_player_number(), CMD_BULLDOZE, flag->get_serial());
       } else {
          // Editor
          imm->remove(m_iabase->get_egbase());
@@ -629,7 +627,6 @@ void FieldActionWindow::act_removeroad()
          Game *g = static_cast<Game*>(m_iabase->get_egbase()); 
          Interactive_Player* player=static_cast<Interactive_Player*>(m_iabase);
 	 g->send_player_bulldoze (static_cast<PlayerImmovable*>(imm));
-//         g->send_player_command(player->get_player_number(), CMD_BULLDOZE, imm->get_serial());
       } else {
          Road* road=static_cast<Road*>(imm);
          Player* plr=road->get_owner();
@@ -653,7 +650,6 @@ void FieldActionWindow::act_build(int idx)
       Interactive_Player* m_player=static_cast<Interactive_Player*>(m_iabase);
       Game *g = m_player->get_game();
       g->send_player_build (m_player->get_player_number(), m_field, idx);
-//      g->send_player_command(m_player->get_player_number(), CMD_BUILD, m_field.x, m_field.y, idx);
    } else {
       // Editor
       m_iabase->get_egbase()->warp_building(m_field, m_plr->get_player_number(), idx);
@@ -680,8 +676,6 @@ void FieldActionWindow::act_geologist()
 
    if (imm && imm->get_type() == Map_Object::FLAG)
 	g->send_player_flagaction (static_cast<Flag*>(imm), FLAGACTION_GEOLOGIST);
-//      g->send_player_command(m_player->get_player_number(), CMD_FLAGACTION,
-//            imm->get_serial(), FLAGACTION_GEOLOGIST);
 
    okdialog();
 }
@@ -749,8 +743,6 @@ void show_field_action(Interactive_Base *iabase, Player* player, UIUniqueWindowR
 			if(iabase->get_egbase()->is_game())
 				static_cast<Interactive_Player*>(iabase)->get_game()->
 				    send_player_build_flag(player->get_player_number(), target);
-//            static_cast<Interactive_Player*>(iabase)->get_game()->send_player_command(player->get_player_number(), CMD_BUILD_FLAG, target.x, target.y);
-			// fall through, there is a flag now
 
 		case Map_Object::FLAG:
 			iabase->finish_build_road();

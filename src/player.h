@@ -51,7 +51,7 @@ class Player {
 	public:
 		enum {
 			playerLocal = 0,
-			//playerRemote,
+			playerRemote,
 			playerAI
 		};
 
