@@ -2506,6 +2506,7 @@ void Carrier::road_update(Game* g, State* state)
 		else
 		{
 			// Short delay before we move to pick up
+			molog("[road]: delay (acked for %i)\n", m_acked_ware);
 			state->ivar1 = 1;
 
 			set_animation(g, get_descr()->get_idle_anim());
@@ -2656,6 +2657,7 @@ void Carrier::transport_update(Game* g, State* state)
 			return;
 
 		molog("[transport]: pick up from flag.\n");
+		m_acked_ware = -1;
 
 		flag = road->get_flag((Road::FlagId)state->ivar1);
 		otherflag = road->get_flag((Road::FlagId)(state->ivar1 ^ 1));
@@ -2668,7 +2670,6 @@ void Carrier::transport_update(Game* g, State* state)
 		}
 
 		set_carried_item(g, item);
-		m_acked_ware = -1;
 
 		set_animation(g, get_descr()->get_idle_anim());
 		schedule_act(g, 20);
@@ -2763,7 +2764,8 @@ bool Carrier::notify_ware(Game* g, int flag)
 		return false;
 	}
 
-	// Don't ack if we're currently moving away from that flag
+	// Ack it if we haven't
+	molog("notify_ware(%i)\n", flag);
 	m_acked_ware = flag;
 
 	if (state->task == &taskRoad)
@@ -2834,6 +2836,7 @@ void Carrier::find_pending_item(Game* g)
 	{
 		bool ok = false;
 
+		molog("find_pending_item: flag %i\n", 0);
 		m_acked_ware = 0;
 
 		ok = road->get_flag(Road::FlagStart)->ack_pending_item(g, road->get_flag(Road::FlagEnd));
@@ -2847,6 +2850,7 @@ void Carrier::find_pending_item(Game* g)
 	{
 		bool ok = false;
 
+		molog("find_pending_item: flag %i\n", 1);
 		m_acked_ware = 1;
 
 		ok = road->get_flag(Road::FlagEnd)->ack_pending_item(g, road->get_flag(Road::FlagStart));

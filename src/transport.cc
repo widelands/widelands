@@ -959,27 +959,32 @@ successfully.
 */
 WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 {
-	int i;
+	WareInstance* item;
+	int best_index = -1;
 
-	for(i = 0; i < m_item_filled; i++) {
-		WareInstance* item = m_items[i].item;
-
+	for(int i = 0; i < m_item_filled; i++) {
 		if (m_items[i].nextstep != dest)
 			continue;
 
-		// move the other items up the list and return this one
-		m_item_filled--;
-		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
-
-		item->set_location(g, 0);
-
-		// wake up capacity wait queue
-		wake_up_capacity_queue(g);
-
-		return item;
+		// We prefer to retrieve items that have already been acked
+		if (best_index < 0 || !m_items[i].pending)
+			best_index = i;
 	}
 
-	return 0;
+	if (best_index < 0)
+		return 0;
+
+	// move the other items up the list and return this one
+	item = m_items[best_index].item;
+	m_item_filled--;
+	memmove(&m_items[best_index], &m_items[best_index+1], sizeof(m_items[0]) * (m_item_filled - best_index));
+
+	item->set_location(g, 0);
+
+	// wake up capacity wait queue
+	wake_up_capacity_queue(g);
+
+	return item;
 }
 
 
