@@ -3659,7 +3659,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 			// for the request
 			idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
 
-			if (!supp->is_active()) {
+			if (!supp->is_active(g)) {
 				// If the building wouldn't have to idle, we wait with the request
 				if (idletime < -200) {
 					if (s->nexttimer < 0 || s->nexttimer > (-idletime))

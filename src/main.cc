@@ -164,7 +164,8 @@ void g_main(int argc, char** argv)
 
                            default:
                            case Fullscreen_Menu_SinglePlayer::sp_back:
-                              break; 
+										done = true;
+                              break;
                         }
                      }
                   }
