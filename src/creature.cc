@@ -23,11 +23,10 @@
 #include "building.h"
 #include "bob.h"
 
-Creature::Task::Task(TaskAction a, void* p, bool r)
+Creature::Task::Task(TaskAction a, void* p)
 {
 	this->action = a;
 	this->param = p;
-	this->repeat = r;
 }
 
 Creature::Creature(CreatureDesc* d)
