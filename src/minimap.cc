@@ -50,7 +50,7 @@ MiniMapView::MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactiv
 	m_viewx = m_viewy = 0;
    m_flags = Minimap_Terrain;
 
-	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.png", RGBColor(0,0,255));
+	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.png", true); 
 
    if (!w)
 		w = m_player->get_map()->get_width();
@@ -165,27 +165,27 @@ MiniMap::MiniMap(Interactive_Base *plr, UIUniqueWindowRegistry *reg)
 	//set_cache(false); // testing
 
 	UIButton* b=new UIButton(this, 0, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_color.bmp", RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_color.bmp", true));
 	//b->set_title("col");
 	b->clicked.set(this, &MiniMap::toggle_color);
 
 	b=new UIButton(this, button_width, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_ownedBy.bmp", RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_ownedBy.bmp", true));
 	//b->set_title("own");
 	b->clicked.set(this, &MiniMap::toggle_ownedBy);
 
 	b=new UIButton(this, 2*button_width, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_flags.bmp", RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_flags.bmp", true));
 	//b->set_title("Flags");
 	b->clicked.set(this, &MiniMap::toggle_flags);
 
 	b=new UIButton(this, 0, m_view->get_h()+button_height, button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_roads.bmp", RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_roads.bmp", true));
 	//b->set_title("Roads");
 	b->clicked.set(this, &MiniMap::toggle_roads);
 
 	b=new UIButton(this, button_width, m_view->get_h()+button_height, button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_building.bmp", RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_building.bmp", true));
 	//b->set_title("Buildings");
 	b->clicked.set(this, &MiniMap::toggle_buildings);
 

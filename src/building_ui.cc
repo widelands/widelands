@@ -152,11 +152,11 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Player* parent, Building* building,
 
 	btn = new UIButton(this, 6, 50, 60, 34, 2);
 	btn->clicked.set(this, &BulldozeConfirm::bulldoze);
-	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_ok, RGBColor(0,0,255)));
+	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_ok, true));
 
 	btn = new UIButton(this, 94, 50, 60, 34, 2);
 	btn->clicked.set(this, &BulldozeConfirm::die);
-	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_cancel, RGBColor(0,0,255)));
+	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_cancel, true));
 
 	btn->center_mouse();
 }
@@ -308,7 +308,7 @@ WaresQueueDisplay::WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, W
 	m_cache_filled = m_queue->get_filled();
 	m_display_size = 0;
 
-	m_pic_background = g_gr->get_picture(PicMod_Game, pic_queue_background);
+	m_pic_background = g_gr->get_picture(PicMod_Game, pic_queue_background, false);
 
 	recalc_size();
 
@@ -581,21 +581,21 @@ void Building_Window::setup_capsbuttons()
 			icon = m_building->get_stop_icon();
 		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
 		btn->clicked.set(this, &Building_Window::act_start_stop);
-		btn->set_pic(g_gr->get_picture(PicMod_Game, icon.c_str(), RGBColor(0,0,255)));
+		btn->set_pic(g_gr->get_picture(PicMod_Game, icon.c_str(), true));
 		x += 34;
 	}
    
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
 		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
 		btn->clicked.set(this, &Building_Window::act_bulldoze);
-		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_bulldoze, RGBColor(0,0,255)));
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_bulldoze, true));
 		x += 34;
 	}
 
 	if (m_player->get_display_flag(Interactive_Base::dfDebug)) {
 		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
 		btn->clicked.set(this, &Building_Window::act_debug);
-		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_debug, RGBColor(0,0,255)));
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_debug,true));
 		x += 34;
 	}
 }

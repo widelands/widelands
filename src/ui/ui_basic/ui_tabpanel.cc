@@ -41,10 +41,10 @@ UITab_Panel::UITab_Panel(UIPanel* parent, int x, int y, uint background)
 
 	switch(background) {
 	default:
-	case 0: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.png"); break;
-	case 1: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.png"); break;
-	case 2: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.png"); break;
-	case 3: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.png"); break;
+	case 0: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.png", false); break;
+	case 1: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.png", false); break;
+	case 2: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.png", false); break;
+	case 3: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.png", false); break;
 	}
 
 	m_highlight = -1;

@@ -51,8 +51,6 @@ class Event_Message_Box : public Event {
       inline uint get_pic_id(void) { return m_pic_id; }
       inline void set_pic_position(int i) { m_pic_position=i; }
       inline int  get_pic_position(void) { return m_pic_position; }
-      inline void set_pic_has_clrkey(bool t) {  m_pic_has_clrkey=t; }
-      inline bool get_pic_has_clrkey(void) { return m_pic_has_clrkey; }
       inline void set_is_modal(bool t) {  m_is_modal=t; }
       inline bool get_is_modal(void) { return m_is_modal; }
       void set_button_trigger(int i, Trigger* t, Map*);
@@ -80,7 +78,6 @@ class Event_Message_Box : public Event {
       bool m_is_modal;
       uint m_pic_id;
       int m_pic_position;
-      bool m_pic_has_clrkey;
 
       std::vector<Button_Descr> m_buttons;
       

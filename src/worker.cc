@@ -1093,7 +1093,7 @@ Load graphics (other than animations).
 */
 void Worker_Descr::load_graphics()
 {
-	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname);
+	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname, false);
 }
 
 

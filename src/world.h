@@ -42,7 +42,7 @@ public:
 	Resource_Descr() { }
 	~Resource_Descr() { }
 
-	void parse(Section* s, RGBColor, std::string);
+	void parse(Section* s, std::string);
 
    const char* get_name() const { return m_name.c_str(); }
 	std::string get_indicator(uint amount) const;
@@ -50,7 +50,7 @@ public:
    inline bool is_detectable(void) { return m_is_detectable; }
    inline int get_max_amount(void) { return m_max_amount; }
 
-   std::string get_editor_pic(uint amount, RGBColor* m_clrkey);
+   std::string get_editor_pic(uint amount);
 
 private:
 	struct Indicator {
@@ -67,7 +67,6 @@ private:
 	std::string					m_name;
 	std::vector<Indicator>	m_indicators;
 	std::vector<Editor_Pic>	m_editor_pics;
-   RGBColor                m_clrkey;
 };
 
 class Terrain_Descr {

@@ -59,11 +59,10 @@ int Editor_Set_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_I
 
       if(Editor_Change_Resource_Tool_Callback(c,map,m_cur_res)) {
          // Ok, we're doing something. First remove the current overlays
-         RGBColor clr;
          std::string str;
          if(res) {
-            str=map->get_world()->get_resource(res)->get_editor_pic(f->get_resources_amount(), &clr);
-            int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), clr);
+            str=map->get_world()->get_resource(res)->get_editor_pic(f->get_resources_amount());
+            int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), true);
             map->get_overlay_manager()->remove_overlay(c,picid);
 
          }   
@@ -72,8 +71,8 @@ int Editor_Set_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_I
          } else {
             f->set_resources(m_cur_res,amount);
             // set new overlay
-            str=map->get_world()->get_resource(m_cur_res)->get_editor_pic(amount, &clr);
-            int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), clr);
+            str=map->get_world()->get_resource(m_cur_res)->get_editor_pic(amount);
+            int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), true);
             map->get_overlay_manager()->register_overlay(c,picid,4);
             map->recalc_for_field_area(c,0);
          }

@@ -57,9 +57,10 @@ public:
 	virtual void refresh() = 0;
 
 	virtual void flush(int mod) = 0;
-	virtual uint get_picture(int mod, const char* fname) = 0;
-	virtual uint get_picture(int mod, const char* fname, RGBColor clrkey) = 0;
-	virtual void get_picture_size(uint pic, int* pw, int* ph) = 0;
+	virtual uint get_picture(int mod, const char* fname, bool has_clrkey) = 0;
+   virtual void use_clrkey(uint pic, bool)=0;
+	virtual bool has_clrkey(uint)=0;
+   virtual void get_picture_size(uint pic, int* pw, int* ph) = 0;
 	virtual void flush_picture(uint pic)=0;
    virtual void save_pic_to_file(uint, FileWrite*)=0;
    virtual uint load_pic_from_file(FileRead*, int)=0;

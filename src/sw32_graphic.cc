@@ -1176,7 +1176,7 @@ The picture is placed into the module(s) given by mod.
 Returns 0 (a null-picture) if the picture cannot be loaded.
 ===============
 */
-uint GraphicImpl::get_picture(int mod, const char* fname)
+uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 {
 	uint id;
 
@@ -1232,19 +1232,22 @@ uint GraphicImpl::get_picture(int mod, const char* fname)
 	}
 
 	m_pictures[id].mod |= mod;
-	return id;
+   use_clrkey(id,buse_clrkey);
+	
+   return id;
 }
 
-uint GraphicImpl::get_picture(int mod, const char* fname, RGBColor clrkey)
-{
-	uint id = get_picture(mod, fname);
+void GraphicImpl::use_clrkey(uint id, bool t) {
+   if (id  >= m_pictures.size() || !m_pictures[id].mod)
+      throw wexception("get_picture_size(%i): picture doesn't exist", id);
+   m_pictures[id].bitmap.clrkey = *m_pictures[id].bitmap.pixels;
+   m_pictures[id].bitmap.hasclrkey = t;
+}
 
-	if (id) {
-		m_pictures[id].bitmap.hasclrkey = true;
-		m_pictures[id].bitmap.clrkey = clrkey.pack32();
-	}
-
-	return id;
+bool GraphicImpl::has_clrkey(uint id) {
+   if (id  >= m_pictures.size() || !m_pictures[id].mod)
+      throw wexception("get_picture_size(%i): picture doesn't exist", id);
+   return m_pictures[id].bitmap.hasclrkey;
 }
 
 // TODO: get rid of this function (needs change of font format)

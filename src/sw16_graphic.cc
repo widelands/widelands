@@ -1101,7 +1101,7 @@ The picture is placed into the module(s) given by mod.
 Returns 0 (a null-picture) if the picture cannot be loaded.
 ===============
 */
-uint GraphicImpl::get_picture(int mod, const char* fname)
+uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 {
 	uint id;
 
@@ -1144,28 +1144,34 @@ uint GraphicImpl::get_picture(int mod, const char* fname)
 
 		for(int y = 0; y < cv->h; y++)
 			memcpy(pic->bitmap.pixels + y*cv->w, (Uint8*)cv->pixels + y*cv->pitch, cv->w*2);
+		
 
 		SDL_FreeSurface(cv);
 		SDL_FreeSurface(bmp);
 
 		m_picturemap[pic->u.fname] = id;
-	}
+   }
 
 	m_pictures[id].mod |= mod;
-	return id;
-}
-
-uint GraphicImpl::get_picture(int mod, const char* fname, RGBColor clrkey)
-{
-	uint id = get_picture(mod, fname);
-
-	if (id) {
-		m_pictures[id].bitmap.hasclrkey = true;
-		m_pictures[id].bitmap.clrkey = clrkey.pack16();
-	}
+   use_clrkey(id,buse_clrkey);
 
 	return id;
 }
+	
+void GraphicImpl::use_clrkey(uint id, bool t) {
+   if (id  >= m_pictures.size() || !m_pictures[id].mod)
+      throw wexception("get_picture_size(%i): picture doesn't exist", id);
+   m_pictures[id].bitmap.clrkey = *m_pictures[id].bitmap.pixels;
+   m_pictures[id].bitmap.hasclrkey = t;
+}
+
+bool GraphicImpl::has_clrkey(uint id) {
+   if (id  >= m_pictures.size() || !m_pictures[id].mod)
+      throw wexception("get_picture_size(%i): picture doesn't exist", id);
+   return m_pictures[id].bitmap.hasclrkey;
+}
+
+
 
 // TODO: get rid of this function (needs change of font format)
 uint GraphicImpl::get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey)

@@ -339,23 +339,23 @@ void Overlay_Manager::remove_road_overlay(int jobid) {
  */
 void Overlay_Manager::load_graphics(void) {
    // Load all the needed graphics
-   m_buildhelp_infos[0].picid=g_gr->get_picture(PicMod_Game, "pics/set_flag.png", RGBColor(0,0,255));
+   m_buildhelp_infos[0].picid=g_gr->get_picture(PicMod_Game, "pics/set_flag.png", true);
    g_gr->get_picture_size(m_buildhelp_infos[0].picid, &m_buildhelp_infos[0].hotspot_x, &m_buildhelp_infos[0].hotspot_y); 
    m_buildhelp_infos[0].hotspot_x/=2; m_buildhelp_infos[0].hotspot_y-=1;
    
-   m_buildhelp_infos[1].picid=g_gr->get_picture(PicMod_Game, "pics/small.png", RGBColor(0,0,255));
+   m_buildhelp_infos[1].picid=g_gr->get_picture(PicMod_Game, "pics/small.png", true); 
    g_gr->get_picture_size(m_buildhelp_infos[1].picid, &m_buildhelp_infos[1].hotspot_x, &m_buildhelp_infos[1].hotspot_y); 
    m_buildhelp_infos[1].hotspot_x/=2; m_buildhelp_infos[1].hotspot_y/=2;
   
-   m_buildhelp_infos[2].picid=g_gr->get_picture(PicMod_Game, "pics/medium.png", RGBColor(0,0,255));
+   m_buildhelp_infos[2].picid=g_gr->get_picture(PicMod_Game, "pics/medium.png", true); 
    g_gr->get_picture_size(m_buildhelp_infos[2].picid, &m_buildhelp_infos[2].hotspot_x, &m_buildhelp_infos[2].hotspot_y); 
    m_buildhelp_infos[2].hotspot_x/=2; m_buildhelp_infos[2].hotspot_y/=2;
    
-   m_buildhelp_infos[3].picid=g_gr->get_picture(PicMod_Game, "pics/big.png", RGBColor(0,0,255));
+   m_buildhelp_infos[3].picid=g_gr->get_picture(PicMod_Game, "pics/big.png", true); 
    g_gr->get_picture_size(m_buildhelp_infos[3].picid, &m_buildhelp_infos[3].hotspot_x, &m_buildhelp_infos[3].hotspot_y); 
    m_buildhelp_infos[3].hotspot_x/=2; m_buildhelp_infos[3].hotspot_y/=2;
    
-   m_buildhelp_infos[4].picid=g_gr->get_picture(PicMod_Game, "pics/mine.png", RGBColor(0,0,255));
+   m_buildhelp_infos[4].picid=g_gr->get_picture(PicMod_Game, "pics/mine.png", true); 
    g_gr->get_picture_size(m_buildhelp_infos[4].picid, &m_buildhelp_infos[4].hotspot_x, &m_buildhelp_infos[4].hotspot_y); 
    m_buildhelp_infos[4].hotspot_x/=2; m_buildhelp_infos[4].hotspot_y/=2;
    

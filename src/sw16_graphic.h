@@ -228,8 +228,9 @@ public:
 	virtual void flush(int mod);
 
 	// Pictures
-	virtual uint get_picture(int mod, const char* fname);
-	virtual uint get_picture(int mod, const char* fname, RGBColor clrkey);
+	virtual uint get_picture(int mod, const char* fname, bool);
+   virtual void use_clrkey(uint pic, bool);
+   virtual bool has_clrkey(uint);
    virtual void flush_picture(uint pic);
 	virtual void get_picture_size(uint pic, int* pw, int* ph);
 	virtual uint create_surface(int w, int h);

@@ -418,7 +418,7 @@ Convenience function: Adds a new tab to the main tab panel
 */
 void FieldActionWindow::add_tab(const char* picname, UIPanel* panel)
 {
-	m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname, RGBColor(0,0,255)), panel);
+	m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname, true), panel);
 }
 
 
@@ -431,7 +431,7 @@ void FieldActionWindow::add_button(UIBox* box, const char* picname, void (FieldA
 {
 	UIButton *b = new UIButton(box, 0, 0, 34, 34, 2);
 	b->clicked.set(this, fn);
-	b->set_pic(g_gr->get_picture(PicMod_Game, picname, RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_Game, picname, true));
 
 	box->add(b, UIBox::AlignTop);
 }

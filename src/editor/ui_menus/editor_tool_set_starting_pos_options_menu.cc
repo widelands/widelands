@@ -74,10 +74,10 @@ Editor_Tool_Set_Starting_Pos_Options_Menu::Editor_Tool_Set_Starting_Pos_Options_
    posy+=spacing+width;
    UIButton* b=new UIButton(this, posx, posy, width, height, 1, 1000);
    b->clickedid.set(this, &Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
    b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 1001);
    b->clickedid.set(this, &Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    m_nr_of_players_ta=new UITextarea(this, 0, 0, "5", Align_Left);
    m_nr_of_players_ta->set_pos((get_inner_w()-m_nr_of_players_ta->get_w())/2, posy+5);
    posy+=width+spacing+spacing;
@@ -151,7 +151,7 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::update(void) {
       text+=static_cast<char>(((i+1)/10) + 0x30);
       text+=static_cast<char>(((i+1)%10) + 0x30);
       text+="_pos.png"; 
-      m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture(PicMod_Game, text.c_str(), RGBColor(0,0,255)));
+      m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture(PicMod_Game, text.c_str(), true));
       posy+=size+spacing;
       posx=spacing;
    } 

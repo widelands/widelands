@@ -72,20 +72,20 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
    // hours, first cipher
    b=new UIButton(this, posx, posy, width, height, 1, 2);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
    m_textareas[0]=new UITextarea(this, posx, posy+20, width, height, "9", Align_Center);
    b=new UIButton(this, posx, posy+40, width, height, 1, 3);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    posx+=width+spacing/2;
    // hours second cipher
    b=new UIButton(this, posx, posy, width, height, 1, 4);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
    m_textareas[1]=new UITextarea(this, posx, posy+20, width, height, "9", Align_Center);
    b=new UIButton(this, posx, posy+40, width, height, 1, 5);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    posx+=width+spacing;
 
    // two points
@@ -95,20 +95,20 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
    // minutes, first cipher
    b=new UIButton(this, posx, posy, width, height, 1, 6);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
    m_textareas[2]=new UITextarea(this, posx, posy+20, width, height, "9", Align_Center);
    b=new UIButton(this, posx, posy+40, width, height, 1, 7);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    posx+=width+spacing/2;
    // minutes second cipher
    b=new UIButton(this, posx, posy, width, height, 1, 8);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
    m_textareas[3]=new UITextarea(this, posx, posy+20, width, height, "9", Align_Center);
    b=new UIButton(this, posx, posy+40, width, height, 1, 9);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    posx+=width+spacing;
 
    // two points
@@ -118,20 +118,20 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
    // seconds, first cipher
    b=new UIButton(this, posx, posy, width, height, 1, 10);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
    m_textareas[4]=new UITextarea(this, posx, posy+20, width, height, "9", Align_Center);
    b=new UIButton(this, posx, posy+40, width, height, 1, 11);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    posx+=width+spacing/2;
    // seconds, second cipher
    b=new UIButton(this, posx, posy, width, height, 1, 12);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
    m_textareas[5]=new UITextarea(this, posx, posy+20, width, height, "9", Align_Center);
    b=new UIButton(this, posx, posy+40, width, height, 1, 13);
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    posx+=width+spacing;
 
    posy+=60;

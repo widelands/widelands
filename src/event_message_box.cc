@@ -40,7 +40,6 @@ Event_Message_Box::Event_Message_Box(void) {
    set_is_modal(false);
    set_pic_id(-1);
    set_pic_position(Right);
-   set_pic_has_clrkey(true);
 
    set_nr_buttons(1);
    m_buttons[0].name="Continue";
@@ -111,7 +110,6 @@ void Event_Message_Box::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) 
       bool has_pic=fr->Unsigned8();
       if(has_pic) {
          set_pic_position(fr->Unsigned8());
-         set_pic_has_clrkey(fr->Unsigned8());
          set_pic_id(g_gr->load_pic_from_file(fr, PicMod_Game));
          if(skip)
             g_gr->flush_picture(get_pic_id());
@@ -169,7 +167,6 @@ void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
       // Write picture
       // Pic position
       fw->Unsigned8(get_pic_position());
-      fw->Unsigned8(get_pic_has_clrkey());
       g_gr->save_pic_to_file(get_pic_id(), fw); 
    }
  

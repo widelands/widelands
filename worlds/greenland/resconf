@@ -1,9 +1,4 @@
 # this is for the pictures
-[default]
-clrkey_r=255
-clrkey_g=255
-clrkey_b=255
-
 [none]
 indicator=resi_none
 

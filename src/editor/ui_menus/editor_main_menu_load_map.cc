@@ -136,7 +136,7 @@ void Main_Menu_Load_Map::clicked(int id) {
 
       if(fc.x==-1 && fc.y==-1) continue;
       int w, h;
-      int picid=g_gr->get_picture(PicMod_Game, text.c_str(), RGBColor(0,0,255));
+      int picid=g_gr->get_picture(PicMod_Game, text.c_str(), true);
       g_gr->get_picture_size(picid, &w, &h);
       m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
    }
@@ -150,11 +150,10 @@ void Main_Menu_Load_Map::clicked(int id) {
          int res=f->get_resources();
          int amount=f->get_resources_amount();
          std::string immname="";
-         RGBColor clrkey;
          if(amount) 
-            immname = m_parent->get_editor()->get_map()->get_world()->get_resource(res)->get_editor_pic(amount, &clrkey);
+            immname = m_parent->get_editor()->get_map()->get_world()->get_resource(res)->get_editor_pic(amount);
          if(immname!="") {
-            int picid=g_gr->get_picture(PicMod_Game, immname.c_str(), clrkey); 
+            int picid=g_gr->get_picture(PicMod_Game, immname.c_str(), true); 
             m_parent->get_map()->get_overlay_manager()->register_overlay(Coords(x,y),picid,4);
          } 
       }

@@ -64,7 +64,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
    UITab_Panel* m_tabpanel=new UITab_Panel(this, 0, 0, 1);
    m_tabpanel->set_snapparent(true);
    UIBox* box=new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
-   m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
+   m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , true), box);
 
 
    int width=0;
@@ -74,7 +74,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
 		Bob_Descr* descr = get_parent()->get_map()->get_world()->get_bob_descr(j);
       g_gr->get_picture_size(
             g_gr->get_picture(PicMod_Game, descr->get_picture(),
-                              descr->get_default_encodedata().clrkey), &w, &h);
+                              true), &w, &h);
       if(w>width) width=w;
       if(h>height) height=h;
    }
@@ -92,12 +92,12 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
          xpos=xstart;
          box->resize();
          box=new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
-         m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
+         m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , true), box);
       }
 
 		Bob_Descr* descr = get_parent()->get_map()->get_world()->get_bob_descr(i);
       UICheckbox* cb= new UICheckbox(box, xpos, ypos,
-            g_gr->get_picture(PicMod_Game, descr->get_picture(), descr->get_default_encodedata().clrkey));
+            g_gr->get_picture(PicMod_Game, descr->get_picture(), true));
 
       cb->set_size(width, height);
       cb->set_id(i);

@@ -42,10 +42,10 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UIUniqueW
 
    int bx=60;
    UIButton* b = new UIButton(this, bx, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
    b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
    b=new UIButton(this, bx+20, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
    b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
 
 	if (get_usedefaultpos())

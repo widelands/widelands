@@ -68,7 +68,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
    m_fsd.fieldsel_pos.x=0;
    m_fsd.fieldsel_pos.y=0;
    m_fsd.fieldsel_jobid=0;
-   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, "pics/fsel.png", RGBColor(0,0,255));
+   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, "pics/fsel.png", true);
    m_fsd.fieldsel_radius=0;
 }
 
@@ -117,7 +117,7 @@ void Interactive_Base::set_fieldsel_radius(int n) {
  * Set/Unset fieldsel picture
  */
 void Interactive_Base::set_fieldsel_picture(const char* file) { 
-   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); 
+   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, file, true); 
    set_fieldsel_pos(get_fieldsel_pos()); // redraw
 }   
 void Interactive_Base::unset_fieldsel_picture(void) { 

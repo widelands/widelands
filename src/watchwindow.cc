@@ -79,11 +79,11 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 
 	// UIButtons
 	btn = new UIButton(this, 0, h - 34, 34, 34, 0);
-	btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png", RGBColor(0,0,255)));
+	btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png", true));
 	btn->clicked.set(this, &WatchWindow::toggle_tracking);
 
 	btn = new UIButton(this, 34, h - 34, 34, 34, 0);
-	btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_goto.png", RGBColor(0,0,255)));
+	btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_goto.png", true));
 	btn->clicked.set(this, &WatchWindow::act_mainview_goto);
 
 	// Initial positioning

@@ -167,7 +167,7 @@ void Event_Message_Box_Option_Menu_Picture_Options::clicked(int i) {
       case 2:
          {
             // Load button
-            if((m_picid=g_gr->get_picture(PicMod_Game, m_filename->get_text(), RGBColor(1,1,1)))) {
+            if((m_picid=g_gr->get_picture(PicMod_Game, m_filename->get_text(), true))) {
                m_pic_assigned->set_text("yes");
             } else {
                m_picid=*m_picid_var;

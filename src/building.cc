@@ -197,7 +197,7 @@ void Building_Descr::load_graphics()
 {
 	if (m_buildicon_fname)
 		m_buildicon =
-			g_gr->get_picture(PicMod_Game, m_buildicon_fname, RGBColor(0,0,255));
+			g_gr->get_picture(PicMod_Game, m_buildicon_fname, true); 
 }
 
 /*

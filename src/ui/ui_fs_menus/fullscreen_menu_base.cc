@@ -50,7 +50,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 	// Load background graphics
 	char buf[256];
 	snprintf(buf, sizeof(buf), "pics/%s", bgpic);
-	m_pic_background = g_gr->get_picture(PicMod_Menu, buf);
+	m_pic_background = g_gr->get_picture(PicMod_Menu, buf, false);
 }
 
 

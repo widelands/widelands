@@ -51,7 +51,10 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    m_ls_selected=0;
    m_picid=m_event->get_pic_id();
    m_position=m_event->get_pic_position();
-   m_clrkey=m_event->get_pic_has_clrkey();
+   if(static_cast<int>(m_picid)!=-1) 
+      m_clrkey=g_gr->has_clrkey(m_picid);
+   else
+      m_clrkey=false;
 
    m_buttons[0].name="Continue";
    m_buttons[1].name="Button 1";
@@ -104,11 +107,11 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    // Nur Buttons
    new UITextarea(this, spacing, posy, 130, 20, "Number of Buttons: ", Align_CenterLeft);
    UIButton* b=new UIButton(this, spacing+140, posy, 20, 20, 0, 2); 
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
    m_nr_buttons_ta=new UITextarea(this, spacing+160+spacing, posy,15,20,"1", Align_CenterLeft);
    b=new UIButton(this, spacing+175+spacing, posy, 20, 20, 0, 3);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
   
    // Button name
@@ -125,10 +128,10 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 100, 20, "Select Trigger: ", Align_CenterLeft);
    b=new UIButton(this, spacing+110, posy, 20, 20, 0, 4); 
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
    b=new UIButton(this, spacing+130+spacing, posy, 20, 20, 0, 5);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
   
    // Current Trigger
@@ -232,7 +235,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
                log("Setting pic id to: %i\n", m_picid);
                m_event->set_pic_id(m_picid);
                m_event->set_pic_position(m_position);
-               m_event->set_pic_has_clrkey(m_clrkey);
+               g_gr->use_clrkey(m_event->get_pic_id(), m_clrkey);
             } else {
                int picid=m_event->get_pic_id();
                if(static_cast<int>(picid)!=-1) { 

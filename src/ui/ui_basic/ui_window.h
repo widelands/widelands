@@ -48,8 +48,6 @@
 #define MIDDLE			(MUST_HAVE_NPIX-(CORNER*2))
 
 #define WINDOW_BORDER	20
-#define WINDOW_CLRKEY RGBColor(0, 0, 255)
-
 class UIWindow : public UIPanel {
 public:
 	UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *title);

@@ -47,16 +47,10 @@ Resource_Descr::parse
 Parse a resource description section.
 ==============
 */
-void Resource_Descr::parse(Section *s, RGBColor def_clrkey, std::string basedir)
+void Resource_Descr::parse(Section *s, std::string basedir)
 {
    const char* string;
    
-   m_clrkey.set(
-         s->get_int("clrkey_r", def_clrkey.r()),
-         s->get_int("clrkey_g", def_clrkey.g()),
-         s->get_int("clrkey_b", def_clrkey.b())
-         );
-
    
    m_name = s->get_string("name", s->get_name());
      m_is_detectable=s->get_bool("detectable", true);
@@ -196,7 +190,7 @@ std::string Resource_Descr::get_indicator(uint amount) const
 /*
  * Get the correct editor pic for this amount of this resource
  */
-std::string Resource_Descr::get_editor_pic(uint amount, RGBColor* clrkey) {
+std::string Resource_Descr::get_editor_pic(uint amount) {
 	uint bestmatch = 0;
 
 	assert(m_editor_pics.size());
@@ -241,7 +235,6 @@ std::string Resource_Descr::get_editor_pic(uint amount, RGBColor* clrkey) {
 //	noLog("Resource(%s): Editor_Pic '%s' for amount = %u\n",
 //		m_name.c_str(), m_editor_pics[bestmatch].picname.c_str(), amount);
 
-   *clrkey=m_clrkey;
 	return m_editor_pics[bestmatch].picname;
 }
    
@@ -360,24 +353,16 @@ void World::parse_resources()
 	try
 	{
 		Profile prof(fname);
-      
-      RGBColor clrkey;
-      Section* section=prof.get_section("default");
-      if(section)
-         clrkey.set(
-            section->get_int("clrkey_r", 0),
-            section->get_int("clrkey_g", 0),
-            section->get_int("clrkey_b", 0)
-            );
-            
+      Section* section;
+
       Resource_Descr* descr=new Resource_Descr();
       section=prof.get_safe_section("none");
-      descr->parse(section,clrkey,m_basedir);
+      descr->parse(section,m_basedir);
       m_resources.add(descr);
       
       while((section=prof.get_next_section(0))) {
          descr=new Resource_Descr();
-         descr->parse(section,clrkey,m_basedir);
+         descr->parse(section,m_basedir);
          m_resources.add(descr);
       }
 	}
