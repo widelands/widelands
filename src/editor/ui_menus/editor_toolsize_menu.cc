@@ -21,7 +21,7 @@
 #include "editorinteractive.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
-#include "editor_tools.h"
+#include "editor_tool.h"
 
 /*
 ===============

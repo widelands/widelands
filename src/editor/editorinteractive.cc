@@ -19,7 +19,6 @@
 
 #include "editor.h"
 #include "editorinteractive.h"
-#include "editor_tools.h"
 #include "keycodes.h"
 #include "map.h"
 #include "mapview.h"
@@ -28,7 +27,16 @@
 #include "editor_main_menu.h"
 #include "editor_tool_menu.h"
 #include "editor_toolsize_menu.h"
-
+#include "editor_tools_option_menus.h"
+#include "editor_delete_immovable_tool.h"
+#include "editor_info_tool.h"
+#include "editor_place_immovable_tool.h"
+#include "editor_set_both_terrain_tool.h"
+#include "editor_set_down_terrain_tool.h"
+#include "editor_set_right_terrain_tool.h"
+#include "editor_increase_height_tool.h"
+#include "editor_noise_height_tool.h"
+#
 /**********************************************
  *
  * class EditorInteractive
