@@ -63,13 +63,23 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
       // Now get all the the resources
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
-
             int id=fr->Unsigned8();
             int amount=fr->Unsigned8();
+
+            int set_id, set_amount;
+            // if amount is zero, theres nothing here
+            if(!amount) {
+               set_id=0;
+               set_amount=0;
+            } else {
+               set_id=smap[id];
+               set_amount=amount;
+            }
+               
             // NoLog("[Map Loader] Setting resource of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
-            if(smap[id]==-1) 
+            if(set_id==-1) 
                throw("Unkown resource in map file. It is not in world!\n");
-            egbase->get_map()->get_field(Coords(x,y))->set_resources(smap[id],amount);
+            egbase->get_map()->get_field(Coords(x,y))->set_resources(set_id,set_amount);
          }
       }
       return;
