@@ -81,18 +81,21 @@ public:
 	};
 
 	typedef std::vector<Action> Program;
+	typedef std::map<std::string, Program*> ProgramMap;
 	typedef std::map<std::string, uint> AnimationMap;
 
 public:
 	Immovable_Descr(const char *name);
+	~Immovable_Descr();
 
-	inline const char* get_name(void) { return m_name; }
-	inline int get_size(void) { return m_size; }
-   inline const char* get_picture(void) { return m_picture.c_str(); }
-	inline const Program& get_program() const { return m_program; }
+	inline const char* get_name(void) const { return m_name; }
+	inline int get_size(void) const { return m_size; }
+   inline const char* get_picture(void) const { return m_picture.c_str(); }
+	inline const Program* get_program(std::string name) const;
 	inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
 
 	void parse(const char *directory, Profile *s);
+	void parse_program(std::string directory, Profile* prof, std::string name);
 	uint parse_animation(const char* directory, Profile* s, std::string name);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
@@ -102,7 +105,7 @@ protected:
 	int			m_size;
 	EncodeData	m_default_encodedata;
 
-	Program			m_program;
+	ProgramMap		m_programs;
 	AnimationMap	m_animations;
 };
 
@@ -127,6 +130,8 @@ public:
 
 	void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos);
 
+	void switch_program(Game* g, std::string name);
+
 protected:
 	void set_program_animation(Editor_Game_Base* g);
 	void run_program(Game* g, bool killable);
@@ -137,8 +142,9 @@ protected:
 	uint			m_anim;
 	int			m_animstart;
 
-	uint			m_program_ptr;			// index of next instruction to execute
-	int			m_program_step;		// time of next step
+	const Immovable_Descr::Program*	m_program;
+	uint										m_program_ptr;			// index of next instruction to execute
+	int										m_program_step;		// time of next step
 };
 
 

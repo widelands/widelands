@@ -41,6 +41,7 @@ struct WorkerAction {
 		actWalk,				// iparam1 = walkXXX
 		actAnimation,		// iparam1 = anim id; iparam2 = duration
 		actReturn,			// iparam1 = 0: don't drop item on flag, 1: do drop item on flag
+		actObject,			// sparam1 = object command
 	};
 
 	enum {
@@ -189,6 +190,14 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 			{
 				act.type = WorkerAction::actReturn;
 				act.iparam1 = 1; // drop any item on our owner's flag
+			}
+			else if (cmd[0] == "object")
+			{
+				if (cmd.size() != 2)
+					throw wexception("Usage: object <program name>");
+
+				act.type = WorkerAction::actObject;
+				act.sparam1 = cmd[1];
 			}
 			else
 				throw wexception("unknown command '%s'", cmd[0].c_str());
@@ -1194,6 +1203,33 @@ void Worker::program_update(Game* g, State* state)
 
 				state->ivar1++;
 				start_task_return(g, act->iparam1);
+				return;
+			}
+
+		case WorkerAction::actObject:
+			{
+				Map_Object* obj;
+
+				molog("  Object(%s)\n", act->sparam1.c_str());
+
+				obj = state->objvar1.get(g);
+
+				if (!obj) {
+					molog("  object(nil)\n");
+					set_signal("fail");
+					pop_task(g);
+					return;
+				}
+
+				molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
+
+				if (obj->get_type() == IMMOVABLE)
+					((Immovable*)obj)->switch_program(g, act->sparam1);
+				else
+					throw wexception("MO(%u): [actObject]: bad object type = %i", get_serial(), obj->get_type());
+
+				state->ivar1++;
+				schedule_act(g, 10);
 				return;
 			}
 		}

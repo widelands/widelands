@@ -152,12 +152,15 @@ public:
 	virtual void cleanup(Editor_Game_Base *g);
 	virtual void act(Game *g, uint data);
 
+	virtual void remove_worker(Worker *w);
+
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
 private:
+	void request_worker(Game* g);
 	static void request_worker_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
 	void program_step();

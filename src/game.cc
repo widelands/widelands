@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -181,13 +181,17 @@ bool Game::run(void)
 // running the cmd queue etc.
 // 
 // think(), mmh, i don't know if i like the name
-// 
+//
 void Game::think(void)
 {
 	int lasttime = m_realtime;
 	int frametime;
 	m_realtime = Sys_GetTime();
 	frametime = m_realtime - lasttime;
+
+	// prevent frametime escalation in case the game logic is the performance bottleneck
+	if (frametime > 1000)
+		frametime = 1000;
 
 	frametime *= get_speed();
 

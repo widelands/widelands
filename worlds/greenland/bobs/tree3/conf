@@ -3,6 +3,7 @@ type=immovable
 stock=1
 size=normal
 attrib=tree
+program=fall
 
 [idle]
 pics=tree3_??.bmp
@@ -16,3 +17,6 @@ hot_spot_x=11
 hot_spot_y=48
 
 
+# This program is executed when the lumberjack kills the tree
+[fall]
+0=remove

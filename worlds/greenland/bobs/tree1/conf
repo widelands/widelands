@@ -1,10 +1,10 @@
 [global]
 type="diminishing"
-ends_in=""
 stock=1
 
 size=normal
 attrib=tree
+program=fall
 
 clrkey_r=0
 clrkey_g=0
@@ -15,5 +15,7 @@ shadowclr_b=0
 hot_spot_x=15
 hot_spot_y=51
 
-
+# This program is executed when the lumberjack kills the tree
+[fall]
+0=remove
 

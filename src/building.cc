@@ -1563,12 +1563,8 @@ void ProductionSite::init(Editor_Game_Base *g)
 	Building::init(g);
 
 	// Request worker
-	if (g->is_game() && !m_worker) {
-		int wareid = g->get_safe_ware_id(get_descr()->get_worker().c_str());
-
-		m_worker_request = new Request(this, wareid, &ProductionSite::request_worker_callback, this);
-		get_economy()->add_request(m_worker_request);
-	}
+	if (g->is_game() && !m_worker)
+		request_worker((Game*)g);
 }
 
 
@@ -1589,11 +1585,51 @@ void ProductionSite::cleanup(Editor_Game_Base *g)
 	}
 
 	if (m_worker) {
-		m_worker->set_location(0);
+		Worker* w = m_worker;
+
 		m_worker = 0;
+		w->set_location(0);
 	}
 
 	Building::cleanup(g);
+}
+
+
+/*
+===============
+ProductionSite::remove_worker
+
+Intercept remove_worker() calls to unassign our worker, if necessary.
+===============
+*/
+void ProductionSite::remove_worker(Worker *w)
+{
+	if (m_worker == w) {
+		m_worker = 0;
+
+		request_worker((Game*)get_owner()->get_game());
+	}
+
+	Building::remove_worker(w);
+}
+
+
+/*
+===============
+ProductionSite::request_worker
+
+Issue the worker request
+===============
+*/
+void ProductionSite::request_worker(Game* g)
+{
+	assert(!m_worker);
+	assert(!m_worker_request);
+
+	int wareid = g->get_safe_ware_id(get_descr()->get_worker().c_str());
+
+	m_worker_request = new Request(this, wareid, &ProductionSite::request_worker_callback, this);
+	get_economy()->add_request(m_worker_request);
 }
 
 

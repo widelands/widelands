@@ -126,6 +126,40 @@ Immovable_Descr::Immovable_Descr(const char *name)
 
 /*
 ===============
+Immovable_Descr::~Immovable_Descr
+
+Cleanup
+===============
+*/
+Immovable_Descr::~Immovable_Descr()
+{
+	while(m_programs.size()) {
+		delete m_programs.begin()->second;
+		m_programs.erase(m_programs.begin());
+	}
+}
+
+
+/*
+===============
+Immovable_Descr::get_program
+
+Find the program of the given name.
+===============
+*/
+const Immovable_Descr::Program* Immovable_Descr::get_program(std::string name) const
+{
+	ProgramMap::const_iterator it = m_programs.find(name);
+
+	if (it == m_programs.end())
+		throw wexception("Immovable %s has no program '%s'", get_name(), name.c_str());
+
+	return it->second;
+}
+
+
+/*
+===============
 Immovable_Descr::parse
 
 Parse an immovable from its conf file.
@@ -146,7 +180,6 @@ Default:
 void Immovable_Descr::parse(const char *directory, Profile *prof)
 {
 	Section* global = prof->get_safe_section("global");
-	Section* program = prof->get_section("program");
 	const char* string;
 	char buf[256];
 	char picname[256];
@@ -187,84 +220,131 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 	}
 
 
-	// Parse the program
-	if (program)
+	// Parse the programs
+	while(global->get_next_string("program", &string))
+		parse_program(directory, prof, string);
+
+	if (m_programs.find("program") == m_programs.end()) {
+		Section* program = prof->get_section("program");
+
+		if (program)
+		{
+			log("WARNING: %s: obsolete implicit [program] section; use program=program in [global]\n",
+						directory);
+			parse_program(directory, prof, "program");
+		}
+		else
+		{
+			Program* prog = new Program;
+			Action act;
+
+			act.type = actAnimation;
+			act.iparam1 = parse_animation(directory, prof, "idle");
+			act.iparam2 = -1;
+
+			prog->push_back(act);
+			m_programs["program"] = prog;
+		}
+	}
+}
+
+
+/*
+===============
+Immovable_Descr::parse_program
+
+Parse a program.
+===============
+*/
+void Immovable_Descr::parse_program(std::string directory, Profile* prof, std::string name)
+{
+	Section* s = prof->get_safe_section(name.c_str());
+	Program* prog = 0;
+
+	try
 	{
 		uint line;
 
+		prog = new Program;
+
 		for(line = 0; ; line++) {
-			Action action;
-			std::vector<std::string> command;
-
-			snprintf(buf, sizeof(buf), "%i", line);
-			string = program->get_string(buf, 0);
-
-			if (!string)
-				break;
-
-			split_string(string, &command, " \t\r\n");
-			if (!command.size())
-				continue;
-
-			if (command[0] == "animation")
+			try
 			{
-				if (command.size() != 3) {
-					log("%s:program:%i: %s: Syntax: animation [name] [duration]\n", directory, line, string);
+				std::vector<std::string> command;
+				Action action;
+				char buf[256];
+				const char* string;
+
+				snprintf(buf, sizeof(buf), "%i", line);
+				string = s->get_string(buf, 0);
+
+				if (!string)
+					break;
+
+				split_string(string, &command, " \t\r\n");
+				if (!command.size())
 					continue;
-				}
 
-				action.type = actAnimation;
-				action.iparam1 = parse_animation(directory, prof, command[1]);
-				action.iparam2 = atoi(command[2].c_str());
+				if (command[0] == "animation")
+				{
+					if (command.size() != 3)
+						throw wexception("Syntax: animation [name] [duration]");
 
-				if (action.iparam2 == 0 || action.iparam2 < -1) {
-					log("%s:program:%i: %s: duration out of range (-1, 1..+inf)\n", directory, line,
-							command[2].c_str());
-					action.iparam2 = 1000;
+					action.type = actAnimation;
+					action.iparam1 = parse_animation(directory.c_str(), prof, command[1]);
+					action.iparam2 = atoi(command[2].c_str());
+
+					if (action.iparam2 == 0 || action.iparam2 < -1)
+						throw wexception("duration out of range (-1, 1..+inf) '%s'", command[2].c_str());
 				}
+				else if (command[0] == "transform")
+				{
+					if (command.size() != 2)
+						throw wexception("Syntax: transform [bob name]");
+
+					action.type = actTransform;
+					action.sparam = command[1];
+				}
+				else if (command[0] == "remove")
+				{
+					if (command.size() != 1)
+						throw wexception("Syntax: remove");
+
+					action.type = actRemove;
+				}
+				else
+					throw wexception("Unknown instruction '%s'", command[0].c_str());
+
+				prog->push_back(action);
 			}
-			else if (command[0] == "transform")
+			catch(std::exception& e)
 			{
-				if (command.size() != 2) {
-					log("%s:program:%i: %s: Syntax: transform [bob name]\n", directory, line, string);
-					continue;
-				}
-
-				action.type = actTransform;
-				action.sparam = command[1];
+				log("WARNING: %s:%s:%i: %s\n", directory.c_str(), name.c_str(), line, e.what());
 			}
-			else if (command[0] == "remove")
-			{
-				if (command.size() != 1) {
-					log("%s:program:%i: %s: Syntax: remove\n", directory, line, string);
-					continue;
-				}
-
-				action.type = actRemove;
-			}
-			else
-			{
-				log("%s:program:%i: Unknown instruction %s\n", directory, line, command[0].c_str());
-				continue;
-			}
-
-			m_program.push_back(action);
 		}
+
+		// Fallback (default) program
+		if (!prog->size())
+		{
+			Action act;
+
+			log("WARNING: %s: [%s] is empty, using default\n", directory.c_str(), name.c_str());
+
+			act.type = actAnimation;
+			act.iparam1 = parse_animation(directory.c_str(), prof, "idle");
+			act.iparam2 = -1;
+
+			prog->push_back(act);
+		}
+
+		m_programs[name] = prog;
 	}
-
-	// Fallback (default) program
-	if (!m_program.size())
+	catch(...)
 	{
-		Action act;
+		if (prog)
+			delete prog;
 
-		if (program)
-			log("WARNING: %s: [program] is empty, using default\n", directory);
-
-		act.type = actAnimation;
-		act.iparam1 = parse_animation(directory, prof, "idle");
-		act.iparam2 = -1;
-
-		m_program.push_back(act);
+		throw;
 	}
 }
 
@@ -346,6 +426,7 @@ Immovable::Immovable(Immovable_Descr *descr)
 	: BaseImmovable(descr)
 {
 	m_anim = 0;
+	m_program = 0;
 	m_program_ptr = 0;
 	m_program_step = 0;
 }
@@ -392,7 +473,7 @@ void Immovable::init(Editor_Game_Base *g)
 	set_program_animation(g);
 
 	if (g->is_game())
-		run_program((Game*)g, false);
+		switch_program((Game*)g, "program");
 }
 
 
@@ -420,13 +501,33 @@ Set animation data according to current program state.
 */
 void Immovable::set_program_animation(Editor_Game_Base* g)
 {
-	const Immovable_Descr::Program& prog = get_descr()->get_program();
-	const Immovable_Descr::Action& action = prog[m_program_ptr];
+	const Immovable_Descr::Program* prog = m_program;
+
+	if (!prog)
+		prog = get_descr()->get_program("program");
+
+	const Immovable_Descr::Action& action = (*prog)[m_program_ptr];
 
 	if (action.type == Immovable_Descr::actAnimation) {
 		m_anim = action.iparam1;
 		m_animstart = g->get_gametime();
 	}
+}
+
+
+/*
+===============
+Immovable::switch_program
+
+Switch the currently running program.
+===============
+*/
+void Immovable::switch_program(Game* g, std::string name)
+{
+	m_program = get_descr()->get_program(name);
+	m_program_ptr = 0;
+
+	run_program(g, false);
 }
 
 
@@ -456,14 +557,13 @@ If killable is true, the immovable could kill itself in this function.
 */
 void Immovable::run_program(Game* g, bool killable)
 {
-	const Immovable_Descr::Program& prog = get_descr()->get_program();
 	uint origptr = m_program_ptr; // avoid infinite loops
 
 	do
 	{
-		const Immovable_Descr::Action& action = prog[m_program_ptr];
+		const Immovable_Descr::Action& action = (*m_program)[m_program_ptr];
 
-		m_program_ptr = (m_program_ptr+1) % prog.size();
+		m_program_ptr = (m_program_ptr+1) % m_program->size();
 
 		switch(action.type) {
 		case Immovable_Descr::actAnimation:
@@ -479,7 +579,7 @@ void Immovable::run_program(Game* g, bool killable)
 				Coords c = m_position;
 
 				if (!killable) { // we need to reschedule and remove self from act()
-					m_program_ptr = (m_program_ptr+prog.size()-1) % prog.size();
+					m_program_ptr = (m_program_ptr+m_program->size()-1) % m_program->size();
 					m_program_step = schedule_act(g, 1);
 					return;
 				}
@@ -492,7 +592,7 @@ void Immovable::run_program(Game* g, bool killable)
 
 		case Immovable_Descr::actRemove:
 			if (!killable) {
-				m_program_ptr = (m_program_ptr+prog.size()-1) % prog.size();
+				m_program_ptr = (m_program_ptr+m_program->size()-1) % m_program->size();
 				m_program_step = schedule_act(g, 1);
 				return;
 			}

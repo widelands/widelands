@@ -13,18 +13,11 @@ program=chop
 [chop]
 0=findobject attrib:tree radius:7	# find an object matching the given criteria, put it into the object slot
 1=walk object								# walk to the object in the object slot
-2=animation idle 10000					# play an animation
-3=createitem log							# create & carry the given item
-4=return										# return home
-
-#[chop]
-#0=findobject attrib:tree radius:7	# find an object matching the given criteria, put it into the object slot
-#1=walk object								# walk to the object in the object slot
-#2=animation idle 10000					# play an animation
-#3=object transform						# cause the object transform
-#4=animation idle 2000					# wait for the tree to disappear completely
-#5=createitem log							# create & carry the given item
-#6=return									# return home
+2=animation idle 10000					# play an animation (TODO: hacking animtion)
+3=object fall								# cause the object to change its program (to 'fall')
+4=animation idle 2000					# wait for the tree to disappear
+5=createitem log							# create & carry the given item
+6=return										# return home
 
 # The normal idle animation (non-directional)
 [idle]
