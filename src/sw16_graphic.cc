@@ -616,6 +616,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	minfy = viewofs.y / (FIELD_HEIGHT>>1);
 	maxfx = (viewofs.x + (FIELD_WIDTH>>1) + dst.w) / FIELD_WIDTH;
 	maxfy = (viewofs.y + dst.h) / (FIELD_HEIGHT>>1);
+	maxfx += 1; // because of big buildings
 	maxfy += 10; // necessary because of heights
    minfx -= mri->fieldsel_radius; // to make fieldsel work properly. better than having if()s in every loop
    minfy -= mri->fieldsel_radius;
