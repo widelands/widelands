@@ -41,7 +41,7 @@ constructor
 ===========
 */
 Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent,
-													UIUniqueWindowRegistry* registry, char* title) :
+													UIUniqueWindowRegistry* registry, const char* title) :
    UIUniqueWindow(parent, registry, 100, 100, title)
 {
    m_parent=parent;

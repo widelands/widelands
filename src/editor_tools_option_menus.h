@@ -27,7 +27,7 @@ class Editor_Interactive;
 
 class Editor_Tool_Options_Menu : public UIUniqueWindow {
       public:
-         Editor_Tool_Options_Menu(Editor_Interactive*, UIUniqueWindowRegistry*, char* title);
+         Editor_Tool_Options_Menu(Editor_Interactive*, UIUniqueWindowRegistry*, const char* title);
          ~Editor_Tool_Options_Menu();
 
          inline Editor_Interactive* get_parent() { return m_parent; }
