@@ -65,7 +65,7 @@ int Map::load_s2mf(const char* filen) {
 		  hd.width=header.w;
 		  hd.height=header.h;
 		  hd.version=WLMF_VERSION;
-		  strcpy(hd.descr, "Bluebyte Settlers II Card");
+		  strcpy(hd.descr, "Bluebyte Settlers II Card. No comment defined!");
 		 
 		  const char* buf;
 		  switch(header.uses_world) {

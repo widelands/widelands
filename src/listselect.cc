@@ -166,7 +166,7 @@ void listselect_but_up(Window* par, void* a) {
 
 }
 
-/** void down_up(void *a) 
+/** void listselect_but_down(void *a) 
  *
  * This is the click function for the down button
  *

@@ -290,6 +290,8 @@ class Multiline_Textarea {
 		  Multiline_Textarea& operator=(const Multiline_Textarea&);
 
 		  friend class Window;
+		  friend void multiline_textarea_but_up(Window*,   void*);
+		  friend void multiline_textarea_but_down(Window*, void*);
 
 		  public:
 					 enum Align {
@@ -311,14 +313,15 @@ class Multiline_Textarea {
 		  private:
 					 Multiline_Textarea(const uint, const uint, const uint, const uint, const Align, Pic*, const uint, const uint);
 					 ~Multiline_Textarea(void);
-					 
+					 void move_up(uint i) { firstvis-=i; if(firstvis<0) firstvis=0; draw(); }
+					 void move_down(uint i) { firstvis+=i; if(firstvis+h > lines) firstvis=lines-h; if(firstvis<0) firstvis=0; draw(); }   
 					 void draw(void) const ;
 					 		
 					 // some information funcs
 					 inline uint get_xpos(void) { return x+xp; }
 					 inline uint get_ypos(void) { return y+yp; }
 					 inline uint get_w(void) const { return w; }
-					 inline uint get_h(void) const { return h*g_fh.get_fh(nfont); }
+					 inline uint get_h(void) const { return (g_fh.get_fh(nfont)+2)*h; }
 	
 					 
 		  private: 
@@ -327,6 +330,7 @@ class Multiline_Textarea {
 					 Align al;
 					 Growable_Array *ar;
 					 uint lines;
+					 int firstvis;
 
 					 Pic* bak;
 					 Pic* dp;
@@ -444,7 +448,7 @@ class Window {
 					 Button*   create_button(const uint, const uint, const uint, const uint, const uint);
 					 Checkbox*   create_checkbox(const uint, const uint, const bool b);
 					 Listselect*   create_listselect(const uint, const uint, const uint, const uint);
-					 Multiline_Textarea*   create_multiline_textarea(const uint, const uint, const uint, const uint, const Multiline_Textarea::Align);
+					 Multiline_Textarea*   create_multiline_textarea(const uint, const uint, const uint, const uint, const bool, const Multiline_Textarea::Align);
 					 void set_new_bg(Pic* p);
 
 					 /** static void Window::set_l_border(Pic* p) 

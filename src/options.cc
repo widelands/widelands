@@ -394,7 +394,7 @@ static int consume_options(Options* o) {
 		  static Graphic g; // global graphic class. here defined for whole game
 		  static Input myip; // global input class. here defined for whole game
 
-		  // Graphics, TODO
+		  // Graphics
 		  // set in game resolution (res for menues is fixed)
 		  Game::set_resolution(o->xres, o->yres);
 		  

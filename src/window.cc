@@ -193,16 +193,19 @@ Listselect* Window::create_listselect(const uint px, const uint py, const uint w
 		  return listselect[nlistselect-1];
 }
 
-/** Multiline_Textarea* Window::create_multiline_textarea(const uint px, const uint py, const uint w, const uint h, const Multiline_Textarea::Align a);
+/** Multiline_Textarea* Window::create_multiline_textarea(const uint px, const uint py, const uint w, const uint h, 
+ * 	const bool scrollable, const Multiline_Textarea::Align a);
  *
  * This creates a listselect at the given point
  *
  * Args: px, py	pos in window
  * 		w,h		dimensions
+ * 		scrollable 	is this textarea scrollable?
  * 		a 			alignent of each line in this box
  * Returns: Pointer to listselect-box just created
  */
-Multiline_Textarea*  Window::create_multiline_textarea(const uint px, const uint py, const uint w, const uint h, const Multiline_Textarea::Align a) {
+Multiline_Textarea*  Window::create_multiline_textarea(const uint px, const uint py, const uint w, const uint h, const bool scrollable,
+					 const Multiline_Textarea::Align a) {
 		  uint myw=w;
 		  uint myh=h;
 		  uint add=0;
@@ -213,37 +216,38 @@ Multiline_Textarea*  Window::create_multiline_textarea(const uint px, const uint
 					 add=get_border()>>1;
 		  }
 
-		  multiline_textarea[nmultiline_textarea]=new Multiline_Textarea(px, py, myw, myh, a, winpic, add, add);
-		  multiline_textarea[nmultiline_textarea]->draw();
+		  if(!scrollable) {
+					 multiline_textarea[nmultiline_textarea]=new Multiline_Textarea(px, py, myw, myh, a, winpic, add, add);
+					 multiline_textarea[nmultiline_textarea]->draw();
 
-		  g_gr.register_update_rect(x+multiline_textarea[nmultiline_textarea]->get_xpos(), y+multiline_textarea[nmultiline_textarea]->get_ypos(), 
-								multiline_textarea[nmultiline_textarea]->get_w(), multiline_textarea[nmultiline_textarea]->get_h());
-		  assert(nmultiline_textarea<MAX_TA);
+					 g_gr.register_update_rect(x+multiline_textarea[nmultiline_textarea]->get_xpos(), y+multiline_textarea[nmultiline_textarea]->get_ypos(), 
+										  multiline_textarea[nmultiline_textarea]->get_w(), multiline_textarea[nmultiline_textarea]->get_h());
+					 assert(nmultiline_textarea<MAX_TA);
+		  } else {
+					 multiline_textarea[nmultiline_textarea]=new Multiline_Textarea(px, py, myw-20-Button::get_border(), myh, a, winpic, add, add);
+					 multiline_textarea[nmultiline_textarea]->draw();
 
-/*		  multiline_textarea[nmultiline_textarea]=new Listselect(px, py, myw-20-Button::get_border(), myh, winpic, add, add);
-		  multiline_textarea[nmultiline_textarea]->draw();
+					 g_gr.register_update_rect(x+multiline_textarea[nmultiline_textarea]->get_xpos(), y+multiline_textarea[nmultiline_textarea]->get_ypos(), 
+										  multiline_textarea[nmultiline_textarea]->get_w(), multiline_textarea[nmultiline_textarea]->get_h());
 
-		  g_gr.register_update_rect(x+multiline_textarea[nmultiline_textarea]->get_xpos(), y+multiline_textarea[nmultiline_textarea]->get_ypos(), 
-								multiline_textarea[nmultiline_textarea]->get_w(), multiline_textarea[nmultiline_textarea]->get_h());
+					 assert(nmultiline_textarea<MAX_TA);
 
-		  assert(nmultiline_textarea<MAX_TA);
-
-		  // set the move button
-		  Button* b=create_button(multiline_textarea[nmultiline_textarea]->get_xpos()+myw-20-Button::get_border(), 
-								multiline_textarea[nmultiline_textarea]->get_ypos(),
-								20, 20, 1);
-		  b->register_func(multiline_textarea_but_up, multiline_textarea[nmultiline_textarea]);
-		  b->set_pic(g_fh.get_string("U", 0));
-		  b=create_button(multiline_textarea[nmultiline_textarea]->get_xpos()+myw-20-Button::get_border(), 
-								multiline_textarea[nmultiline_textarea]->get_ypos()+20+Button::get_border(),
-								20, 20, 1);
-		  b->set_pic(g_fh.get_string("D", 0));
-		  b->register_func(multiline_textarea_but_down, multiline_textarea[nmultiline_textarea]);
-*/								
+					 // set the move button
+					 Button* b=create_button(multiline_textarea[nmultiline_textarea]->get_xpos()+myw-20-Button::get_border(), 
+										  multiline_textarea[nmultiline_textarea]->get_ypos(),
+										  20, 20, 1);
+					 b->register_func(multiline_textarea_but_up, multiline_textarea[nmultiline_textarea]);
+					 b->set_pic(g_fh.get_string("U", 0));
+					 b=create_button(multiline_textarea[nmultiline_textarea]->get_xpos()+myw-20-Button::get_border(), 
+										  multiline_textarea[nmultiline_textarea]->get_ypos()+20+Button::get_border(),
+										  20, 20, 1);
+					 b->set_pic(g_fh.get_string("D", 0));
+					 b->register_func(multiline_textarea_but_down, multiline_textarea[nmultiline_textarea]);
+		  }
 		  nmultiline_textarea++;
-		  
+
 		  g_gr.register_update_rect(x+px, y+py, myw, myh);
-		  
+
 		  return multiline_textarea[nmultiline_textarea-1];
 
 }

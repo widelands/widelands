@@ -107,10 +107,8 @@ void card_select_menue(void) {
 		  Textarea* taworld=win->create_textarea(460, 270, 640, Textarea::LEFTA);
 		  win->create_textarea(380, 290, "Players:", Textarea::CENTER);
 		  Textarea* tanplayers=win->create_textarea(460, 290, 640, Textarea::LEFTA);
-		 
-		  // TODO: Add description as multiline text box) 
 		  win->create_textarea(380, 310, "Descr:", Textarea::CENTER);
-		  Textarea* tadescr=win->create_textarea(460, 310, 640, Textarea::CENTER);
+		  Multiline_Textarea* tadescr=win->create_multiline_textarea(460, 310, 180, 90, true, Multiline_Textarea::LEFTA);
 
 		  // Register the resposible mouse funtions
 		  g_ip.register_mcf(menue_lclick, Input::BUT1);
@@ -123,17 +121,17 @@ void card_select_menue(void) {
 					 if(sel->new_selection()) {
 								if(sel->get_selection())
 								{
-								if(m.load_map(sel->get_selection()) == RET_OK) {	
-										  taname->set_text(m.get_name());
-										  taauthor->set_text(m.get_author());
-										  sprintf(buf, "%-4ix%4i", m.get_w(), m.get_h());
-										  tasize->set_text(buf);
-										  taworld->set_text(m.get_world());
-										  sprintf(buf, "%i", m.get_nplayers());
-										  tanplayers->set_text(buf);
-										  tadescr->set_text(m.get_descr());
-										  g_gr.register_update_rect(460, 210, 180, 220);
-								}
+										  if(m.load_map(sel->get_selection()) == RET_OK) {	
+													 taname->set_text(m.get_name());
+													 taauthor->set_text(m.get_author());
+													 sprintf(buf, "%-4ix%4i", m.get_w(), m.get_h());
+													 tasize->set_text(buf);
+													 taworld->set_text(m.get_world());
+													 sprintf(buf, "%i", m.get_nplayers());
+													 tanplayers->set_text(buf);
+													 tadescr->set_text(m.get_descr());
+													 g_gr.register_update_rect(460, 210, 180, 190);
+										  }
 								}
 					 }
 					 if(*bselect) {
@@ -143,7 +141,7 @@ void card_select_menue(void) {
 					 menue_loop();
 		  }		
 
-		  
+
 		  if(*bexit) {
 					 g_ui.delete_window(win);
 					 single_player_menue();
