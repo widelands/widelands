@@ -215,11 +215,8 @@ public:
 
 	// Field/screen coordinates
 	inline void get_basepix(const Coords fc, int *px, int *py);
-	inline void get_basepix(const int fx, const int fy, int *px, int *py);
-	inline void get_pix(const Coords fc, Field * const f, int *px, int *py);
-	inline void get_pix(const int fx, const int fy, Field * const f, int *px, int *py);
+	inline void get_pix(const FCoords fc, int *px, int *py);
 	inline void get_pix(const Coords c, int *px, int *py);
-	inline void get_pix(const int fx, const int fy, int *px, int *py);
 
 	// Pathfinding
 	int findpath(Coords start, Coords end, int persist, Path *path, const CheckStep* checkstep);
@@ -227,12 +224,11 @@ public:
 	bool can_reach_by_water(Coords field);
 
    // change field heights
-   int change_field_height(Coords, int);
-   int change_field_height(int, int, int);
-   int set_field_height(const Coords&, int);
-   int set_field_height(int, int, int);
-   // change terrain of a field, recalculate buildcaps
-   int change_field_terrain(Coords, int, bool, bool);
+   int change_field_height(Coords coords, int delta);
+   int set_field_height(Coords coords, int height);
+
+	// change terrain of a field, recalculate buildcaps
+   int change_field_terrain(Coords coords, int terrain, bool tdown, bool tright);
 
 private:
 	void set_size(uint w, uint h);
@@ -637,11 +633,14 @@ inline void Map::get_brn(const FCoords f, FCoords * const o)
 }
 
 
-/** Map::get_basepix(const int fx, const int fy, int *px, int *py)
- *
- * Calculate the on-screen position of the field without taking height
- * into account.
- */
+/*
+===============
+Map::get_basepix
+
+Calculate the on-screen position of the field without taking height
+into account.
+===============
+*/
 inline void Map::get_basepix(const Coords fc, int *px, int *py)
 {
 	*py = MULTIPLY_WITH_HALF_FIELD_HEIGHT(fc.y);
@@ -650,32 +649,18 @@ inline void Map::get_basepix(const Coords fc, int *px, int *py)
 		*px += FIELD_WIDTH>>1;
 }
 
-inline void Map::get_basepix(const int fx, const int fy, int *px, int *py)
-{
-	get_basepix(Coords(fx, fy), px, py);
-}
-
-inline void Map::get_pix(const Coords fc, Field * const f, int *px, int *py)
+inline void Map::get_pix(const FCoords fc, int *px, int *py)
 {
 	get_basepix(fc, px, py);
-	*py -= MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height());
-}
-
-inline void Map::get_pix(const int fx, const int fy, Field * const f, int *px, int *py)
-{
-	get_pix(Coords(fx, fy), f, px, py);
+	*py -= MULTIPLY_WITH_HEIGHT_FACTOR(fc.field->get_height());
 }
 
 // assumes valid fx/fy!
 inline void Map::get_pix(const Coords fc, int *px, int *py)
 {
-	get_pix(fc, get_field(fc), px, py);
+	get_pix(get_fcoords(fc), px, py);
 }
 
-inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
-{
-	get_pix(fx, fy, get_field(Coords(fx, fy)), px, py);
-}
 
 
 /*

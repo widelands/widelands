@@ -224,7 +224,7 @@ void Map_View::track_fsel(int mx, int my)
 	int fscrx, fscry;
 
 	fsel.field = m_intbase->get_map()->get_field(fsel);
-	m_intbase->get_map()->get_pix(fsel, fsel.field, &fscrx, &fscry);
+	m_intbase->get_map()->get_pix(fsel, &fscrx, &fscry);
 
 	for(;;) {
 		FCoords bln, brn;
@@ -236,8 +236,8 @@ void Map_View::track_fsel(int mx, int my)
 		m_intbase->get_map()->get_bln(fsel, &bln);
 		m_intbase->get_map()->get_brn(fsel, &brn);
 
-		m_intbase->get_map()->get_pix(bln, bln.field, &blscrx, &blscry);
-		m_intbase->get_map()->get_pix(brn, brn.field, &brscrx, &brscry);
+		m_intbase->get_map()->get_pix(bln, &blscrx, &blscry);
+		m_intbase->get_map()->get_pix(brn, &brscrx, &brscry);
 
 		// determine which field the mouse is closer to on the y-axis
 		// bit messy because it has to be aware of map wrap-arounds
@@ -296,7 +296,7 @@ void Map_View::track_fsel(int mx, int my)
 				break;
 		}
 	}
-	
+
 	// Apply the new fieldsel
 	m_intbase->set_fieldsel(fsel);
 }

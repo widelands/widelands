@@ -1732,7 +1732,7 @@ bool Map::can_reach_by_water(Coords field)
 
 /*
 ===========
-Map::change_field_terrain()
+Map::change_field_terrain
 
 changes the given field terrain to another one.
 this happens in the editor and might happen in the game
@@ -1743,7 +1743,8 @@ The fieldcaps need to be recalculated
 returns the radius of changes (which are always 2)
 ===========
 */
-int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright) {
+int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright)
+{
    assert(tdown || tright);
 
    Field* f=get_field(c);
@@ -1780,7 +1781,8 @@ sets the field height to an absolut value. This changes the surrounding
 fields are changed as well
 ===========
 */
-int Map::set_field_height(const Coords& coordinates, int to) {
+int Map::set_field_height(Coords coordinates, int to)
+{
    Field* m_field=get_field(coordinates);
    int val=m_field->get_height();
    int diff=to-val;

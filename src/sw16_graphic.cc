@@ -631,7 +631,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 		int tlposx, tposy;
 
 		// Use linear (non-wrapped) coordinates to calculate on-screen pos
-		map->get_basepix(linear_fx, linear_fy, &posx, &posy);
+		map->get_basepix(Coords(linear_fx, linear_fy), &posx, &posy);
 		posx -= viewofs.x;
 		posy -= viewofs.y;
 
