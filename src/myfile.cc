@@ -342,7 +342,8 @@ int Ascii_file::read_line(char* buf, uint size)
 		return -1;
 	}
 
-	for (uint i=0; i<size; i++)
+	uint i;
+	for (i=0; i<size; i++)
 		if (buf[i]=='\n')
 		{
 			if(i && buf[i-1]=='\r')

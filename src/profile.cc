@@ -18,7 +18,7 @@
  */
 
 #include "profile.h"
-#include "growableArray.h"
+#include "growablearray.h"
 #include "myfile.h"
 #include <string.h>
 #include <stdlib.h>
@@ -68,7 +68,7 @@ Profile::Profile(const char* filename)
 {
 	this->values = new Growable_Array(32, 8);
 	Ascii_file* file = new Ascii_file();
-	file->open(filename, File::For::READ);
+	file->open(filename, File::READ);
 	char line[1024];
 	char inSection[MAX_NAME_LEN];
 	inSection[0] = 0;
@@ -134,7 +134,11 @@ bool Profile::get_boolean(const char* section, const char* name, bool def)
 		return def;
 //	if (atoi(v->val))
 //		return true;		// things like "0001" are true
+#ifdef WIN32
 	strlwr(v->val);
+#else
+#warning Profile::get_boolean :: strlwr??? 
+#endif
 	for (int i=0; i<TRUE_WORDS; i++)
 		if (strcmp(v->val, trueWords[i]))
 			return true;

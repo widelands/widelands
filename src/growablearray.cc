@@ -17,7 +17,7 @@
  *
  */
 
-#include "GrowableArray.h"
+#include "growablearray.h"
 #include <string.h>
 
 Growable_Array::Growable_Array(int size, int inc)
