@@ -1293,7 +1293,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 		pic = &m_pictures[id];
 
 
-      pic->mod = 0; // will be filled in by caller
+      pic->mod = 0; //  will be filled in by caller
 		pic->u.fname = strdup(fname);
 		pic->bitmap.pixels = (uint*)malloc(cv->w*cv->h*4);
 		pic->bitmap.w = cv->w;

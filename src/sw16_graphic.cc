@@ -1227,7 +1227,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 		pic->bitmap.pitch = cv->w;
 		pic->bitmap.hasclrkey = false;
 
-      SDL_LockSurface(cv);  // paranoia
+      SDL_LockSurface(cv);  //  paranoia
 		for(int y = 0; y < cv->h; y++)
 			memcpy(pic->bitmap.pixels + y*cv->w, (Uint8*)cv->pixels + y*cv->pitch, cv->w*2);
       SDL_UnlockSurface(cv);
