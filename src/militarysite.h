@@ -84,6 +84,7 @@ private:
 private:
 	Request* m_soldier_request;
 	Worker*  m_soldier;
+	bool		m_didconquer;
 	//Soldier*
 	//Soldier_Queue
 };

@@ -98,6 +98,7 @@ MilitarySite::MilitarySite
 MilitarySite::MilitarySite(MilitarySite_Descr* descr)
 	: ProductionSite(descr)
 {
+	m_didconquer = false;
 	m_soldier = 0;
 	m_soldier_request = 0;
 }
@@ -199,7 +200,8 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
 	}
 
 	// unconquer land
-	g->unconquer_area(get_owner()->get_player_number(), get_position());
+	if (m_didconquer)
+		g->unconquer_area(get_owner()->get_player_number(), get_position());
 
 	ProductionSite::cleanup(g);
 }
@@ -260,6 +262,7 @@ void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware,
 
 	g->conquer_area(psite->get_owner()->get_player_number(),
 		psite->get_position(), psite->get_descr());
+	psite->m_didconquer = true;
 }
 
 
