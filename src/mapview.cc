@@ -38,7 +38,6 @@ Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Base
 	: Panel(parent, x, y, w, h)
 {
 	m_intbase = player;
-	m_map = player->get_map();
 	
 	vpx = vpy = 0;
 	dragging = false;
@@ -68,7 +67,7 @@ void Map_View::warp_mouse_to_field(Coords c)
 {
 	int x, y;
 
-	m_map->get_pix(c, &x, &y);
+	m_intbase->get_map()->get_pix(c, &x, &y);
 	x -= vpx;
 	y -= vpy;
 	
@@ -132,10 +131,10 @@ void Map_View::set_viewpoint(int x, int y)
 		return;
 
 	vpx=x; vpy=y;
-	while(vpx>(int)(MULTIPLY_WITH_FIELD_WIDTH(m_map->get_width())))			vpx-=(MULTIPLY_WITH_FIELD_WIDTH(m_map->get_width()));
-	while(vpy>(int)(MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_map->get_height())))	vpy-=MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_map->get_height());
-	while(vpx< 0)  vpx+=MULTIPLY_WITH_FIELD_WIDTH(m_map->get_width());
-	while(vpy< 0)  vpy+=MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_map->get_height());
+	while(vpx>(int)(MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width())))			vpx-=(MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width()));
+	while(vpy>(int)(MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height())))	vpy-=MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height());
+	while(vpx< 0)  vpx+=MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width());
+	while(vpy< 0)  vpy+=MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height());
 
 	warpview.call(vpx, vpy);
 }
@@ -215,18 +214,18 @@ void Map_View::track_fsel(int mx, int my)
 		fsel.x -= FIELD_WIDTH>>1;
 	fsel.x = (fsel.x + (FIELD_WIDTH>>1)) / FIELD_WIDTH;
 
-	m_map->normalize_coords(&fsel.x, &fsel.y);
+	m_intbase->get_map()->normalize_coords(&fsel.x, &fsel.y);
 
 	// Now, fsel point to where we'd be if the field's height was 0.
 	// We now recursively move towards the correct field. Because height cannot
 	// be negative, we only need to consider the bottom-left or bottom-right neighbour
-	int mapheight = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_map->get_height());
-	int mapwidth = MULTIPLY_WITH_FIELD_WIDTH(m_map->get_width());
+	int mapheight = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height());
+	int mapwidth = MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width());
 	Field *f;
 	int fscrx, fscry;
 
-	f = m_map->get_field(fsel);
-	m_map->get_pix(fsel.x, fsel.y, f, &fscrx, &fscry);
+	f = m_intbase->get_map()->get_field(fsel);
+	m_intbase->get_map()->get_pix(fsel.x, fsel.y, f, &fscrx, &fscry);
 
 	for(;;) {
 		Field *bln, *brn;
@@ -236,11 +235,11 @@ void Map_View::track_fsel(int mx, int my)
 		int fd, blnd, brnd;
 		int d2;
 
-		m_map->get_bln(fsel.x, fsel.y, f, &blx, &bly, &bln);
-		m_map->get_brn(fsel.x, fsel.y, f, &brx, &bry, &brn);
+		m_intbase->get_map()->get_bln(fsel.x, fsel.y, f, &blx, &bly, &bln);
+		m_intbase->get_map()->get_brn(fsel.x, fsel.y, f, &brx, &bry, &brn);
 
-		m_map->get_pix(blx, bly, bln, &blscrx, &blscry);
-		m_map->get_pix(brx, bry, brn, &brscrx, &brscry);
+		m_intbase->get_map()->get_pix(blx, bly, bln, &blscrx, &blscry);
+		m_intbase->get_map()->get_pix(brx, bry, brn, &brscrx, &brscry);
 
 		// determine which field the mouse is closer to on the y-axis
 		// bit messy because it has to be aware of map wrap-arounds

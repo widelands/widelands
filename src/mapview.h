@@ -63,7 +63,6 @@ public:
    
 private:
    Interactive_Base *m_intbase;
-	Map* m_map;
 	int vpx, vpy;
 	bool dragging;
 };
