@@ -1,21 +1,36 @@
 [global]
-type="diminishing"
-stock=1
-
+type=immovable
 size=normal
-attrib=tree
-program=fall
-
+program=program
+picture=field0t_00.bmp
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
 shadowclr_r=0
 shadowclr_g=0
 shadowclr_b=0
+
+# This program grows the field
+[program]
+0=animation tiny 30000
+1=animation small 45000
+2=animation midd 50000
+3=transform field1
+
+[tiny]
+pics=field0t_??.bmp
+ftp=5
 hot_spot_x=15
-hot_spot_y=51
+hot_spot_y=18
 
-# This program is executed when the lumberjack kills the tree
-[fall]
-0=remove
+[small]
+pics=field0s_??.bmp
+ftp=5
+hot_spot_x=15
+hot_spot_y=18
 
+[midd]
+pics=field0m_??.bmp
+ftp=5
+hot_spot_x=15
+hot_spot_y=18
