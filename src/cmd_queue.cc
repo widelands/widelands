@@ -61,6 +61,7 @@ int Cmd_Queue::run_queue(void) {
       
       switch(c->cmd) {
          case CMD_LOAD_MAP:
+            // arg3 is file name of map
             g->map = new Map();
             if(g->map->load_map((char*)c->arg3, this)) {
                // TODO: make this better
@@ -68,6 +69,11 @@ int Cmd_Queue::run_queue(void) {
             }
             free(c->arg3); c->arg3=0;
             break;
+
+         case CMD_WARP_BUILDING:
+            // create a building in a instance (without build time)
+            // arg1==player number to own the building
+            // arg2==index of building
 
          default:
             cerr << "Unknown Queue_Cmd: " << c->cmd << endl;

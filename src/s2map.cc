@@ -344,12 +344,12 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
 
 		 // S E C T I O N 5  -------- Landscape (rocks, stuff..)
 		  // New section??
-		  section = load_s2mf_section(&file, hd.width, hd.height);
-		  if (!section) {
+		  uchar* bobs;
+        bobs = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!bobs) {
 					 cerr << "Section 5 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  free(section);
 
 		  // S E C T I O N 6  -------- Ways
 		  // This describes where you can put ways
@@ -368,7 +368,19 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
 					 cerr << "Section 6 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  free(section);
+        uint i=0;
+        for(y=0; y<hd.height; y++) {
+           i=y*hd.width;
+           for(x=0; x<hd.width; x++, i++) {
+              // ignore everything but HQs
+              if(section[i]==0x80) {
+                 // cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl; 
+                 q->queue(SENDER_LOADER, CMD_WARP_BUILDING, bobs[i], 0, 0);
+              }
+           }
+        }
+        free(section);
+		  free(bobs);
 
 		  // S E C T I O N 7  -------- Animals
 		  // 0x01 == Bunny

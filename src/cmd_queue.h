@@ -34,7 +34,10 @@
 #define SENDER_EVENT   51 // a map event has been triggered
 
 // ---------------------- BEGINN OF CMDS ----------------------------------
-#define CMD_LOAD_MAP             0
+enum {
+   CMD_LOAD_MAP = 0,
+   CMD_WARP_BUILDING
+};
 // ---------------------- END    OF CMDS ----------------------------------
 
 //
