@@ -10,16 +10,16 @@ program=work
 output=grindstone
 
 [inputs]
-raw_stone=8
-water=8
+raw_stone=4
+water=4
 
 [work]
-0=sleep 30000
+0=sleep 50000
 1=check raw_stone
 2=check water
 3=consume raw_stone
 4=consume water
-5=animation working 23000
+5=animation working 32000
 6=produce grindstone
 
 

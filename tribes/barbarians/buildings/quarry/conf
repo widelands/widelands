@@ -13,8 +13,7 @@ program=work
 1=worker cut
 
 [buildcost]
-trunk=2
-raw_stone=1
+trunk=4
 
 [idle]
 pics=b_quarry_i_??.png  # ???
