@@ -19,7 +19,10 @@
 
 #include "widelands_map_loader.h"
 #include "widelands_map_elemental_data_packet.h"
+#include "widelands_map_data_packet_factory.h"
 #include "filesystem.h"
+#include "map.h"
+#include "world.h"
 
 /*
  * Constructor
@@ -54,7 +57,7 @@ int Widelands_Map_Loader::preload_map() {
    if(!exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
-
+   
    set_state(STATE_PRELOADED);
 
    return 0;
@@ -63,6 +66,40 @@ int Widelands_Map_Loader::preload_map() {
 /*
  * Load the complete map and make sure that it runs without problems
  */
-int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* game) {
+int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase) {
+ 
+   // now, load the world, load the rest infos from the map
+   m_map->load_world();
+   // Postload the world which provides all the immovables found on a map
+   m_map->get_world()->postload(egbase);
+   m_map->set_size(m_map->m_width, m_map->m_height);
+    
+   // Load elemental data block (again)
+   Widelands_Map_Elemental_Data_Packet mp;
+   FileRead fr;
+
+   fr.Open(g_fs, m_filename.c_str());
+   mp.Pre_Read(&fr, m_map);
+ 
+   // ok, now go on and load the rest
+   Widelands_Map_Data_Packet_Factory fac;
+
+   ushort id;
+   Widelands_Map_Data_Packet* pak; 
+   while(!fr.IsEOF()) {
+      id=fr.Unsigned16();
+      pak=fac.create_correct_packet(id);
+      pak->Read(&fr, egbase);
+     delete pak;
+   } 
+
+   //// HACK for debug
+  // m_map->set_nrplayers(1);
+//	m_map->set_starting_pos(1, Coords(24, 24));
+   
+   m_map->recalc_whole_map();
+
+   set_state(STATE_LOADED);
+   
    return 0;
 }

@@ -108,7 +108,8 @@ public:
 	void Close();
 
 	inline int GetSize() const { return length; }
-	void SetFilePos(int pos);
+	inline bool IsEOF() const { if(filepos>=length) return true; return false; }
+   void SetFilePos(int pos);
 
 	inline char Signed8(int pos = -1) { return Deref8(Data(1, pos)); }
 	inline uchar Unsigned8(int pos = -1) { return (uchar)Deref8(Data(1, pos)); }

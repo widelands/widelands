@@ -17,22 +17,16 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_LOADER_H
-#define __S__WIDELANDS_MAP_LOADER_H
+#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
 
-#include <string>
-#include "map.h"
-
-class Widelands_Map_Loader : public Map_Loader {
-   public:
-      Widelands_Map_Loader(const char* file, Map* map);
-      virtual ~Widelands_Map_Loader(void);
-   
-      virtual int preload_map();
-      virtual int load_map_complete(Editor_Game_Base*);
-
-   private:
-      std::string m_filename;
-};
+/*
+ * This file contains the ids (the magic bytes) of all data packets
+ * so that the packet creation fabric can create the right packet 
+ * reader, all IDs are ushorts
+ */
+#define PACKET_HEIGHTS  1
+#define PACKET_TERRAINS 2
 
 #endif
+

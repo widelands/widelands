@@ -45,7 +45,7 @@ void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileRead* fr, Map* map) throw
 
    map->m_width=fr->Unsigned16();
    map->m_height=fr->Unsigned16();
-   map->m_nrplayers=fr->Unsigned8();
+   map->set_nrplayers(fr->Unsigned8()); 
    
    // World name
 	memcpy(buf, fr->Data(WORLD_NAME_LEN), WORLD_NAME_LEN);

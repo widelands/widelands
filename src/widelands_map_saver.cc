@@ -22,6 +22,8 @@
 #include "filesystem.h"
 #include "map.h"
 #include "widelands_map_elemental_data_packet.h"
+#include "widelands_map_heights_data_packet.h"
+#include "widelands_map_terrain_data_packet.h"
 
 /*
  * Constructor
@@ -53,7 +55,17 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    dp->Write(&fw, m_egbase);
    delete dp;
 
+   // now heights
+   dp=new Widelands_Map_Heights_Data_Packet();
+   dp->Write(&fw, m_egbase);
+   delete dp;
 
+   // and terrains
+   dp=new Widelands_Map_Terrain_Data_Packet();
+   dp->Write(&fw, m_egbase);
+   delete dp;
+
+   
    fw.Write(g_fs,m_filename); 
 }
 

@@ -17,22 +17,22 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_LOADER_H
-#define __S__WIDELANDS_MAP_LOADER_H
+#ifndef __S__WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
 
-#include <string>
-#include "map.h"
+#include "widelands_map_data_packet.h"
 
-class Widelands_Map_Loader : public Map_Loader {
+/*
+ * The heights data packet contains the heights of all fields
+ */
+class Widelands_Map_Terrain_Data_Packet : public Widelands_Map_Data_Packet {
    public:
-      Widelands_Map_Loader(const char* file, Map* map);
-      virtual ~Widelands_Map_Loader(void);
-   
-      virtual int preload_map();
-      virtual int load_map_complete(Editor_Game_Base*);
+      virtual ~Widelands_Map_Terrain_Data_Packet();
 
-   private:
-      std::string m_filename;
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
 };
 
+
 #endif
+

@@ -94,6 +94,8 @@ class World
          ERR_WRONGVERSION
       };
 
+      // TODO: Resource names should not be 
+      // hardcoded!!!!!
 		enum Resource {
 			Resource_None = 0,
 			Resource_Coal = 1,
@@ -114,6 +116,7 @@ class World
       inline const char* get_descr(void) { return hd.descr; }
 
       inline Terrain_Descr* get_terrain(uint i) { assert(i<ters.get_nitems()); return ters.get(i); }
+      inline Terrain_Descr* get_terrain(char* str ) { int i=ters.get_index(str); if(i==-1) return 0; return ters.get(i); }
       inline int get_nr_terrains(void) { return ters.get_nitems(); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
 		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }

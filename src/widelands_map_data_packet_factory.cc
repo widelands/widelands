@@ -17,22 +17,18 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_LOADER_H
-#define __S__WIDELANDS_MAP_LOADER_H
+#include "widelands_map_data_packet_factory.h"
+#include "widelands_map_data_packet_ids.h"
+#include "widelands_map_heights_data_packet.h"
+#include "widelands_map_terrain_data_packet.h"
 
-#include <string>
-#include "map.h"
+Widelands_Map_Data_Packet* Widelands_Map_Data_Packet_Factory::create_correct_packet(ushort id) throw(wexception) {
+    switch(id) {
+      case PACKET_HEIGHTS: return new Widelands_Map_Heights_Data_Packet(); break;
+      case PACKET_TERRAINS: return new Widelands_Map_Terrain_Data_Packet(); break;
+      default: throw wexception("Unknown Packet_Data_ID in map file: %i\n", id); break;
+    }
+    // never here
+    return 0;
+}
 
-class Widelands_Map_Loader : public Map_Loader {
-   public:
-      Widelands_Map_Loader(const char* file, Map* map);
-      virtual ~Widelands_Map_Loader(void);
-   
-      virtual int preload_map();
-      virtual int load_map_complete(Editor_Game_Base*);
-
-   private:
-      std::string m_filename;
-};
-
-#endif

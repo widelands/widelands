@@ -17,22 +17,24 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_LOADER_H
-#define __S__WIDELANDS_MAP_LOADER_H
+#ifndef __S__WIDELANDS_MAP_DATA_PACKET_FACTOR_H
+#define __S__WIDELANDS_MAP_DATA_PACKET_FACTOR_H
 
-#include <string>
-#include "map.h"
 
-class Widelands_Map_Loader : public Map_Loader {
+#include "wexception.h"
+#include "types.h"
+
+class Widelands_Map_Data_Packet;
+
+/*
+ * This factory creates the valid map_data packet
+ * classes. This is usefull to add new Packets without
+ * the need to touch any other code than class
+ */
+class Widelands_Map_Data_Packet_Factory {
    public:
-      Widelands_Map_Loader(const char* file, Map* map);
-      virtual ~Widelands_Map_Loader(void);
-   
-      virtual int preload_map();
-      virtual int load_map_complete(Editor_Game_Base*);
-
-   private:
-      std::string m_filename;
+      Widelands_Map_Data_Packet* create_correct_packet(ushort id) throw(wexception);
 };
+
 
 #endif
