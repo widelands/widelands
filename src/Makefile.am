@@ -1,4 +1,4 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 #-g -pg -fprofile-arcs -g # -O3
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -g #-pg -fprofile-arcs -g # -O3
 #EXTRA_FLAGS=@SDL_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2 -O3
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)

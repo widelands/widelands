@@ -40,6 +40,7 @@
 
 #ifdef WIN32
 	#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*
+	#pragma warning(disable : 4786) // identifier longer than 255 chars (STL woes)
 	#pragma warning(disable : 4800) // forcing values to bool is fine to me.
 	#define WIN32_LEAN_AND_MEAN
 	#include <windows.h>
@@ -173,6 +174,7 @@ public:
 	virtual ~wexception() throw();
 	
 	virtual const char *what() const throw();
+	void change(const char *fmt, ...);
 };
 
 #ifdef DEBUG

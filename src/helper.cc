@@ -60,7 +60,20 @@ const char *wexception::what() const throw()
 	return m_string;
 }
 
+void wexception::change(const char *fmt, ...)
+{
+	char buf[256];
+	va_list va;
+	
+	va_start(va, fmt);
+	vsnprintf(buf, sizeof(buf), fmt, va);
+	va_end(va);
+	
+	strcpy(m_string, buf);
+}
+
 void myassert(int line, const char* file, const char* condt) throw(wexception)
 {
 	throw wexception("%s:%i: assertion \"%s\" failed!\n", file, line, condt);
 }
+

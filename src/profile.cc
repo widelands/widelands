@@ -279,14 +279,7 @@ const char *Section::get_string(const char *name, const char *def)
 	Value *v = get_val(name);
 	if (!v)
 		return def;
-   char* retval=v->val;
-   if(retval[0]=='\'' || retval[0]=='\"') {
-      retval++;
-   }
-   if(retval[strlen(retval)-1]=='\'' || retval[strlen(retval)-1]=='\"') {
-      retval[strlen(retval)-1]='\0'; // well, we change the buffer, but this doesn't matter
-   }  
-	return retval;
+	return v->val;
 }
 
 /** Section::get_next_int(const char *name, int *value)
@@ -526,6 +519,14 @@ void Profile::parse(const char *filename, bool section_less_file )
             killcomments(tail);
             rtrim(tail);
             rtrim(p);
+
+				// remove surrounding '' or ""
+				if (tail[0] == '\'' || tail[0] == '\"') {
+					tail++;
+					char *eot = tail+strlen(tail)-1;
+				   if (*eot == '\'' || *eot == '\"')
+						*eot = 0;
+   			}  
 
             if(!section_less_file) {
                if (s) {

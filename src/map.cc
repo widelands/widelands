@@ -888,7 +888,7 @@ public:
 	void push(Map::Pathfield *t)
 	{
 		unsigned slot = m_data.size();
-		m_data.push_back();
+		m_data.push_back(0);
 
 		while(slot > 0) {
 			unsigned parent = (slot - 1) / 2;

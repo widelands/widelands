@@ -184,7 +184,7 @@ void World::parse_bobs(const char *directory)
 		try {
 			descr = Logic_Bob_Descr::create_from_dir(it->c_str());
 		} catch(std::exception &e) {
-			cerr << *it << ": " << e.what() << " (garbage directory?)" << endl;
+			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
 			descr = 0;
 		}
 		if (descr)

@@ -139,8 +139,11 @@ static int parse_conf_file(Options* o)
 {
 	FileRead f;
 	
-	if (!f.TryOpen(g_fs, "config"))
+	try {
+		f.Open(g_fs, "config");
+	} catch(...) {
 		return RET_OK; // yes, this is normal on first startup
+	}
 	
 	Parser p;
 

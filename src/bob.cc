@@ -342,7 +342,7 @@ void Diminishing_Bob_Descr::read(const char *directory, Section *s)
    Logic_Bob_Descr::read(directory, s);
    
    stock = s->get_int("stock", 0);
-	
+		
 	// TODO
 	s->get_string("ends_in", 0);
 }
@@ -670,7 +670,7 @@ Logic_Bob_Descr *Logic_Bob_Descr::create_from_dir(const char *directory)
 	
 	if (!g_fs->FileExists(fname))
 		return 0;
-
+		
 	try
 	{
 		Profile prof(fname, true); // section-less file
@@ -697,8 +697,9 @@ Logic_Bob_Descr *Logic_Bob_Descr::create_from_dir(const char *directory)
 			throw;
 		}
 	}
-	catch(std::exception &e) {
-		throw wexception("Error reading bob %s: %s", directory, e.what());
+	catch(wexception &e) {
+		e.change("Error reading bob %s: %s", directory, e.what());
+		throw;
 	}
 	
 	return bob;
