@@ -46,6 +46,8 @@ Game::Game(void)
 	cmdqueue = new Cmd_Queue(this);
 
 	m_realtime = Sys_GetTime();
+
+   ipl = 0;
 }
 
 /** Game::~Game(void)

@@ -2862,17 +2862,20 @@ log (">>Request::transfer_finish()\n");
 		set_required_time(get_base_required_time(g, 1));
 		m_count--;
 	}
-
+	
+   if (m_requeriments)
+		delete m_requeriments;
+	m_requeriments = 0;
+	
+   // the callback functions are likely to delete us,
+   // therefore we musn't access member variables behind this 
+   // point
 	if (w)
 		(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
 	else
 		(*m_callbackfn)(g, this, m_index, s, m_callbackdata);
 
-	if (m_requeriments)
-		delete m_requeriments;
-	m_requeriments = 0;
 
-	// this may no longer be valid here
 log ("<<Transfer::has_finished()\n");
 }
 

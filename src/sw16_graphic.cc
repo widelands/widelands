@@ -1467,14 +1467,17 @@ GraphicImp::get_road_textures
 returns the road textures 
 ================
 */
-Road_Textures* GraphicImpl::get_road_textures( void ) {
+Bitmap* GraphicImpl::get_road_texture( int roadtex) {
    if(! m_roadtextures ) {
       // Load the road textures
       m_roadtextures = new Road_Textures();
-      m_roadtextures->bm_road_normal = get_picture_bitmap(get_picture(PicMod_Game, ROAD_NORMAL_PIC, 1)); 
-      m_roadtextures->bm_road_busy   = get_picture_bitmap(get_picture(PicMod_Game, ROAD_BUSY_PIC  , 1)); 
+      m_roadtextures->pic_road_normal = get_picture(PicMod_Game, ROAD_NORMAL_PIC, 0); 
+      m_roadtextures->pic_road_busy   = get_picture(PicMod_Game, ROAD_BUSY_PIC  , 0); 
    }
-   return m_roadtextures;
+   if(roadtex == Road_Normal)
+      return get_picture_bitmap(m_roadtextures->pic_road_normal);
+   else 
+      return get_picture_bitmap(m_roadtextures->pic_road_busy);
 }
 
 /*

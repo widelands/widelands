@@ -660,8 +660,10 @@ static void render_road_horiz(Bitmap *dst, const Point& start, const Point& end,
 			if (y < 0 || y >= dsth)
 				continue;
 
-	      ushort *pix = dst->pixels + y*dst->pitch + x;
-			*pix = * (src->pixels + i*src->pitch + sx ) ;
+	      ushort *dpix = dst->pixels + y*dst->pitch + x;
+         ushort *spix = src->pixels + i*src->pitch + sx;
+         
+			*dpix = *spix;
 		}
 	}
 }
@@ -673,7 +675,7 @@ static void render_road_vert(Bitmap *dst, const Point& start, const Point& end, 
 
 	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int centerx = start.x << 16;
-
+			
 	for(int y = start.y, sy = 0; y < end.y; y++, centerx += xdiff, sy ++ ) {
 		if (y < 0 || y >= dsth)
 			continue;
@@ -684,9 +686,11 @@ static void render_road_vert(Bitmap *dst, const Point& start, const Point& end, 
 			if (x < 0 || x >= dstw)
 				continue;
 
-			ushort *pix = dst->pixels + y*dst->pitch + x;
-			*pix = * (src->pixels + sy*src->pitch + i ) ;
-		}
+			ushort *dpix = dst->pixels + y*dst->pitch + x;
+         ushort *spix = src->pixels + sy*src->pitch + i;
+		
+         *dpix = *spix;
+      }
 	}
 }
 
@@ -720,7 +724,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 //	render_r=false; // debug overwrite: just render b triangle
 //	render_b=false; // debug overwrite: just render r triangle
 
-   Road_Textures* rt = get_graphicimpl()->get_road_textures();
+   Bitmap* rt_normal = get_graphicimpl()->get_road_texture(Road_Normal);
+   Bitmap* rt_busy = get_graphicimpl()->get_road_texture(Road_Busy);
 
 	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
 	if(render_r && rtex)
@@ -740,8 +745,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	if (render_r) {
       if (road) {
          switch(road) {
-            case Road_Normal: render_road_horiz(this, l, r, rt->bm_road_normal); break; 
-            case Road_Busy: render_road_horiz(this, l, r, rt->bm_road_busy); break;
+            case Road_Normal: render_road_horiz(this, l, r, rt_normal); break; 
+            case Road_Busy: render_road_horiz(this, l, r, rt_busy); break;
             default: assert(0); break; // never here
          }
       }
@@ -754,8 +759,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	if (render_r || render_b) {
       if (road) {
          switch(road) {
-            case Road_Normal: render_road_vert(this, l, br, rt->bm_road_normal); break; 
-            case Road_Busy: render_road_vert(this, l, br, rt->bm_road_busy); break;
+            case Road_Normal: render_road_vert(this, l, br, rt_normal); break; 
+            case Road_Busy: render_road_vert(this, l, br, rt_busy); break;
             default: assert(0); break; // never here
          }
       }
@@ -767,8 +772,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	if (render_b) {
 		if (road) {
          switch(road) {
-            case Road_Normal: render_road_vert(this, l, bl, rt->bm_road_normal); break; 
-            case Road_Busy: render_road_vert(this, l, bl, rt->bm_road_busy); break;
+            case Road_Normal: render_road_vert(this, l, bl, rt_normal); break; 
+            case Road_Busy: render_road_vert(this, l, bl, rt_busy); break;
             default: assert(0); break; // never here
          }
       }

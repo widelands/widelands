@@ -162,8 +162,8 @@ public:
  * This contains all the road textures needed to render roads
  */
 struct Road_Textures {
-   Bitmap* bm_road_normal;
-   Bitmap* bm_road_busy;
+   uint pic_road_normal;
+   uint pic_road_busy;
 };
 
 /*
@@ -255,7 +255,7 @@ public:
 	Texture* get_maptexture_data(uint id);
 
    // Road textures
-   Road_Textures* get_road_textures( void );
+   Bitmap* get_road_texture( int );
 
 	// Animations
 	virtual void load_animations();

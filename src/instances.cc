@@ -47,8 +47,11 @@ void Cmd_Destroy_Map_Object::Read(FileRead* fr, Editor_Game_Base* egbase, Widela
    
       // Serial
       int fileserial=fr->Unsigned32();
-      assert(mol->is_object_known(fileserial));
-      obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
+      if( fileserial ) {
+         assert(mol->is_object_known(fileserial));
+         obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
+      } else 
+         obj_serial = 0;
    } else
       throw wexception("Unknown version in Cmd_Destroy_Map_Object::Read: %i", version);
 }
@@ -61,8 +64,12 @@ void Cmd_Destroy_Map_Object::Write(FileWrite *fw, Editor_Game_Base* egbase, Wide
    
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(obj_serial);
-   assert(mos->is_object_known(obj));
-   fw->Unsigned32(mos->get_object_file_index(obj)); 
+   if(obj) { // The object might have vanished
+      assert(mos->is_object_known(obj));
+      fw->Unsigned32(mos->get_object_file_index(obj)); 
+   } else 
+      fw->Unsigned32( 0 );
+   
 }
 
 Cmd_Act::Cmd_Act(int t, Map_Object* o, int a) : BaseCommand(t) {
@@ -85,9 +92,13 @@ void Cmd_Act::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
    
       // Serial
       int fileserial=fr->Unsigned32();
-      assert(mol->is_object_known(fileserial));
-      obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
-   
+
+      if( fileserial ) {
+         assert(mol->is_object_known(fileserial));
+         obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
+      } else 
+         obj_serial = 0;
+         
       // arg
       arg=fr->Unsigned32();
 
@@ -103,9 +114,12 @@ void Cmd_Act::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
    
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(obj_serial);
-   assert(mos->is_object_known(obj));
-   fw->Unsigned32(mos->get_object_file_index(obj)); 
-   
+   if( obj ) { // Object might have dissappeared
+      assert(mos->is_object_known(obj));
+      fw->Unsigned32(mos->get_object_file_index(obj)); 
+   } else 
+      fw->Unsigned32( 0 ); 
+
    // And arg
    fw->Unsigned32(arg);
 }

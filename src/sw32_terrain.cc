@@ -927,7 +927,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
 	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
 
-   Road_Textures* rt = get_graphicimpl()->get_road_textures();
+   Bitmap *rt_normal= get_graphicimpl()->get_road_texture( Road_Normal );
+   Bitmap *rt_busy= get_graphicimpl()->get_road_texture( Road_Busy );
 
 	// Render right triangle
 	if(render_r)
@@ -956,8 +957,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	if (render_r) {
       if (road) {
          switch(road) {
-            case Road_Normal: render_road_horiz(this, l, r, rt->bm_road_normal); break; 
-            case Road_Busy: render_road_horiz(this, l, r, rt->bm_road_busy); break;
+            case Road_Normal: render_road_horiz(this, l, r, rt_normal); break; 
+            case Road_Busy: render_road_horiz(this, l, r, rt_busy); break;
             default: assert(0); break; // never here
          }
       }
@@ -970,8 +971,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	if (render_r || render_b) {
       if (road) {
          switch(road) {
-            case Road_Normal: render_road_vert(this, l, br, rt->bm_road_normal); break; 
-            case Road_Busy: render_road_vert(this, l, br, rt->bm_road_busy); break;
+            case Road_Normal: render_road_vert(this, l, br, rt_normal); break; 
+            case Road_Busy: render_road_vert(this, l, br, rt_busy); break;
             default: assert(0); break; // never here
          }
       }
@@ -983,8 +984,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	if (render_b) {
 		if (road) {
          switch(road) {
-            case Road_Normal: render_road_vert(this, l, bl, rt->bm_road_normal); break; 
-            case Road_Busy: render_road_vert(this, l, bl, rt->bm_road_busy); break;
+            case Road_Normal: render_road_vert(this, l, bl, rt_normal); break; 
+            case Road_Busy: render_road_vert(this, l, bl, rt_busy); break;
             default: assert(0); break; // never here
          }
       }

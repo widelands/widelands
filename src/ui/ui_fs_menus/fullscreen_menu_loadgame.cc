@@ -43,7 +43,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer
 	game = g;
 
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, "Choose your map!", Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, "Choose saved game!", Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
