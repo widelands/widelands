@@ -45,7 +45,7 @@ protected:
 	void add_attribute(uint attr);
 
 private:
-	vector<uint>	m_attributes;
+	std::vector<uint>	m_attributes;
 };
 
 

@@ -44,6 +44,7 @@ Graphic *g_graphic = 0;
   it does NOT come from stl in my win32 (i wouldn't have added it, would i?)
   well i'll leave it here, as this part of code will hopefully disappear soon
   */
+
 #if defined(WIN32) && !defined(__GNUC__)
 template <typename T> inline void swap(T& a, T& b)
 {
@@ -51,6 +52,8 @@ template <typename T> inline void swap(T& a, T& b)
    a = b;
    b = temp;
 }
+#else
+using std::swap;
 #endif
 
 struct _go

@@ -54,6 +54,7 @@ class Player {
       Player(Game* g, int type, int plnum, const uchar *playercolor);
       ~Player(void);
 
+		inline Game *get_game() const { return m_game; }
       inline int get_type() const { return m_type; }
 		inline int get_player_number() const { return m_plnum; }
 		inline const uchar *get_playercolor_rgb() const { return m_playercolor; }

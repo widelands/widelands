@@ -830,7 +830,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	// Medium buildings: allow only medium second-order neighbours
 	// Big buildings:  same as big objects
 	uchar building = BUILDCAPS_BIG;
-	vector<ImmovableFound> objectlist;
+	std::vector<ImmovableFound> objectlist;
 	
 	find_immovables(Coords(fx, fy), 2, &objectlist, FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
 	for(uint i = 0; i < objectlist.size(); i++) {
@@ -1055,13 +1055,13 @@ int Map::calc_distance(Coords a, Coords b)
 		{
 			int dx1 = lx - b.x;
 			int dx2 = b.x - (rx - m_width);
-			dist += min(dx1, dx2);
+			dist += std::min(dx1, dx2);
 		}
 		else if (b.x > rx)
 		{
 			int dx1 = b.x - rx;
 			int dx2 = (lx + m_width) - b.x;
-			dist += min(dx1, dx2);
+			dist += std::min(dx1, dx2);
 		}
 	}
 	else
@@ -1071,7 +1071,7 @@ int Map::calc_distance(Coords a, Coords b)
 		{
 			int dx1 = b.x - rx;
 			int dx2 = lx - b.x;
-			dist += min(dx1, dx2);
+			dist += std::min(dx1, dx2);
 		}
 	}
 	
@@ -1140,6 +1140,65 @@ int Map::is_neighbour(const Coords start, const Coords end)
 	}
 	
 	return 0;
+}
+
+/*
+===============
+Map::calc_cost_estimate
+
+Calculates the cost estimate between the two points.
+This function is used mainly for the path-finding estimate.
+===============
+*/
+#define COST_PER_FIELD		2000 // TODO
+ 
+int Map::calc_cost_estimate(Coords a, Coords b)
+{
+	return calc_distance(a, b) * COST_PER_FIELD;
+}
+
+/*
+===============
+Map::calc_cost
+
+Calculate the hard cost of walking from coords in the given direction.
+The cost is in milliseconds it takes to walk.
+
+TODO: slope must impact cost
+===============
+*/
+int Map::calc_cost(Coords coords, int dir)
+{
+	return COST_PER_FIELD;
+}
+
+/*
+===============
+Map::calc_cost
+
+Calculate the cost of walking the given path.
+If either of the forward or backward pointers is set, it will be filled in
+with the cost of walking in said direction.
+===============
+*/
+void Map::calc_cost(const Path &path, int *forward, int *backward)
+{
+	Coords coords = path.get_start();
+		
+	if (forward)
+		*forward = 0;
+	if (backward)
+		*backward = 0;
+	
+	for(int i = 0; i < path.get_nsteps(); i++) {
+		int dir = path.get_step(i);
+		
+		if (forward)
+			*forward += calc_cost(coords, dir);
+		get_neighbour(coords, dir, &coords);
+		if (backward)
+			*backward += calc_cost(coords, get_reverse_dir(dir));
+	}
 }
 
 /*
@@ -1356,12 +1415,8 @@ If forbidden is not 0, the fields in this array will not be considered unpassabl
 
 The function returns the cost of the path (in milliseconds of normal walking
 speed) or -1 if no path has been found.
-
-TODO: terrain impacts movement speed
 ===============
 */
-#define COST_PER_FIELD		2000 // TODO
- 
 int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path,
                   Player *player, bool roadfind, const std::vector<Coords> *forbidden)
 {
@@ -1417,7 +1472,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 	if (!persist)
 		upper_cost_limit = 0;
 	else
-		upper_cost_limit = persist * calc_distance(start, end) * COST_PER_FIELD; // assume 2 secs per field
+		upper_cost_limit = persist * calc_cost_estimate(start, end); // assume 2 secs per field
 	
 	// Actual pathfinding
 	StarQueue Open;
@@ -1426,7 +1481,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 	curpf = m_pathfields + (startf-m_fields);
 	curpf->cycle = m_pathcycle;
 	curpf->real_cost = 0;
-	curpf->estim_cost = calc_distance(start, end) * COST_PER_FIELD;
+	curpf->estim_cost = calc_cost_estimate(start, end);
 	curpf->backlink = Map_Object::IDLE;
 	
 	Open.push(curpf);
@@ -1462,7 +1517,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 			Pathfield *neighbpf;
 			Coords neighb;
 			int cost;
-		
+
 			switch(*direction) {
 			case Map_Object::WALK_NW: get_tln(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
 			case Map_Object::WALK_NE: get_trn(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
@@ -1506,13 +1561,13 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 					continue;
 			}
 			
-			cost = curpf->real_cost + COST_PER_FIELD;
+			cost = curpf->real_cost + calc_cost(Coords(cur.x, cur.y), *direction);
 
 			if (neighbpf->cycle != m_pathcycle) {
 				// add to open list
 				neighbpf->cycle = m_pathcycle;
 				neighbpf->real_cost = cost;
-				neighbpf->estim_cost = calc_distance(neighb, end) * COST_PER_FIELD;
+				neighbpf->estim_cost = calc_cost_estimate(neighb, end);
 				neighbpf->backlink = *direction;
 				Open.push(neighbpf);
 			} else if (neighbpf->cost() > cost+neighbpf->estim_cost) {

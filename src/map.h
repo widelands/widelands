@@ -131,7 +131,7 @@ public:
 	inline uint get_width(void) { return m_width; }
 	inline uint get_height(void) { return m_height; }
 	inline World* get_world(void) { return m_world; }
-									   
+
 	bool find_bobs(Coords coord, uint radius, std::vector<Bob*> *list);
 	bool find_bobs(Coords coord, uint radius, std::vector<Bob*> *list, const FindBob &functor);
 	BaseImmovable *get_immovable(Coords coord);
@@ -149,7 +149,11 @@ public:
 					
 	int calc_distance(Coords a, Coords b);
 	int is_neighbour(const Coords start, const Coords end);
-					
+
+	int calc_cost_estimate(Coords a, Coords b);
+	int calc_cost(Coords coords, int dir);
+	void calc_cost(const Path &path, int *forward, int *backward);
+
 	inline void get_ln(const int fx, const int fy, int *ox, int *oy);
 	inline void get_ln(const Coords f, Coords * const o);
 	inline void get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);

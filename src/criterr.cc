@@ -18,6 +18,9 @@
  */
 
 #include "widelands.h"
+
+#include <stdarg.h>
+
 #include "graphic.h"
 #include "font.h"
 #include "ui.h"

@@ -23,7 +23,15 @@
 #include "instances.h"
 #include "map.h"
 
+class Flag;
 class Road;
+class Economy;
+
+struct Neighbour {
+	Flag	*flag;
+	int	cost;
+};
+typedef std::vector<Neighbour> Neighbour_list;
 
 /*
 Flag represents a flag, obviously.
@@ -36,6 +44,9 @@ Important: Do not access m_roads directly. get_road() and others use
 Map_Object::WALK_xx in all "direction" parameters.
 */
 class Flag : public BaseImmovable {
+	friend class Economy;
+	friend class FlagQueue;
+
 public:
 	Flag();
 	virtual ~Flag();
@@ -47,6 +58,8 @@ public:
 	virtual bool get_passable();
 	
 	inline Player *get_owner() const { return m_owner; }
+	inline Economy *get_economy() const { return m_economy; }
+	void set_economy(Economy *e);
 	
 	inline Building *get_building() { return m_building; }
 	void attach_building(Game *g, Building *building);
@@ -58,6 +71,8 @@ public:
 
 	inline const Coords &get_position() const { return m_position; }
 	
+	void get_neighbours(Neighbour_list *neighbours);
+	
 protected:
 	virtual void init(Game*);
 	virtual void cleanup(Game*);
@@ -66,12 +81,22 @@ protected:
 
 private:
 	Player		*m_owner;
+	Economy		*m_economy;
 	Coords		m_position;
 	Animation	*m_anim;
 	int			m_animstart;
 	
 	Building		*m_building;	// attached building (replaces road WALK_NW)
 	Road			*m_roads[6];	// Map_Object::WALK_xx-1 as index
+	
+	// The following are only used during pathfinding
+	uint			mpf_cycle;
+	int			mpf_heapindex;
+	int			mpf_realcost;	// real cost of getting to this flag
+	Flag*			mpf_backlink;	// flag where we came from
+	int			mpf_estimate;	// estimate of cost to destination
+	
+	inline int cost() const { return mpf_realcost+mpf_estimate; }
 };
 
 /*
@@ -100,10 +125,14 @@ public:
 	virtual int get_size();
 	virtual bool get_passable();
 
+	int get_cost(bool reverse);
+	
 	void presplit(Game *g, Coords split);
 	void postsplit(Game *g, Flag *flag);
 	
 protected:
+	void set_path(Game *g, const Path &path);
+
 	void mark_map(Game *g);
 	void unmark_map(Game *g);
 
@@ -116,7 +145,51 @@ private:
 	int		m_type;		// use Field::Road_XXX
 	Flag		*m_start;
 	Flag		*m_end;
+	int		m_cost_forward;	// cost for walking this road from start to end
+	int		m_cost_backward;	// dito, from end to start
 	Path		m_path;		// path goes from m_start to m_end
+};
+
+
+/*
+Route
+*/
+class Route {
+	friend class Economy;
+
+private:
+	int				m_totalcost;
+	std::vector<Flag*>	m_route;	// includes start and end flags
+};
+
+/*
+Economy represents a network of Flag through which wares can be transported.
+*/
+class Economy {
+public:
+	Economy(Player *player);
+	~Economy();
+
+	inline Player *get_owner() const { return m_owner; }	
+	
+	static void check_merge(Flag *f1, Flag *f2);
+	static void check_split(Flag *f1, Flag *f2);
+	
+	bool find_route(Flag *start, Flag *end, Route *route);	
+	
+	inline int get_nrflags() const { return m_flags.size(); }
+	void add_flag(Flag *flag);
+	void remove_flag(Flag *flag);
+
+private:
+	void do_merge(Economy *e);
+	void do_split(Flag *f);
+
+private:
+	Player	*m_owner;
+	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
+	
+	std::vector<Flag*>	m_flags;
 };
 
 #endif // included_transport_h

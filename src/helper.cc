@@ -18,6 +18,9 @@
  */
 
 #include "widelands.h"
+
+#include <stdarg.h>
+
 #include "helper.h"
 
 void zmem(void* mem, const ulong size) {
