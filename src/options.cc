@@ -422,7 +422,6 @@ static int consume_options(Options* o) {
 					 g_gr.set_mode(MENU_XRES, MENU_YRES, Graphic::MODE_WIN);
 					 g_ip.grab_input(true);
 		  }
-		  g_ip.set_max_cords(MENU_XRES, MENU_YRES);
 
 		  // Dirs
 		  g_fileloc.add_searchdir(o->searchdir0, 0);

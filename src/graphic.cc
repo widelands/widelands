@@ -87,6 +87,7 @@ namespace Graph {
 					 if(xres==x && yres==y && mode==m) return;
 					 if(sc)
 								SDL_FreeSurface(sc);
+					 sc=0;
 
 					 if(m==MODE_FS) {
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE | SDL_FULLSCREEN);

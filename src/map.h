@@ -100,7 +100,7 @@ class Field {
 		  Field& operator=(const Field&);
 
 		  public:
-					 Field(ushort, ushort, uchar, Field*, Field*, Field*, Field*, Field*, Field*); 
+					 Field(ushort, ushort, uchar);
 					 ~Field(void);
 
 					 inline uchar get_height(void) const { return height; }
@@ -115,6 +115,8 @@ class Field {
 					 inline Field* get_bln(void) const { return bln; }
 					 inline Field* get_brn(void) const { return brn; }
 
+					 void set_neighb(Field*, Field*, Field*, Field*, Field*, Field*);
+					 
 		  private: 
 					 Field *ln, *rn, *tln, *trn, *bln, *brn;
 					 

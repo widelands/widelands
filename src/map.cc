@@ -113,12 +113,20 @@ int Map::load_map(const char* file) {
 
 		  // now, read in the fields, one at a time and init the card
 		  FieldDescr fd;
-		  int l, r, t, b;
 		  for(int y=0; y<height; y++) {
 					 for(int x=0; x<width; x++) {
 								f.read(&fd, sizeof(fd));
-		
-								l=x-1; 
+	
+								fields[y*width + x ] = new Field(x, y, fd.height);
+							 			// TODO care for the real fields;
+					 }
+		  }
+		  
+		  int l, r, t, b;
+		  for(int y=0; y<height; y++) {
+					 for(int x=0; x<width; x++) {
+
+		 						l=x-1; 
 								r=x+1;
 								t=y-1; 
 								b=y+1;
@@ -129,19 +137,17 @@ int Map::load_map(const char* file) {
 								if(y==height-1) b=0;
 
 								if(y&1) { // %1
-										  fields[y*width + x] = new Field(x, y, fd.height, fields[y*width + l], fields[y*width + r], 
+										  fields[y*width + x]->set_neighb(fields[y*width + l], fields[y*width + r], 
 																fields[t*width + x],  fields[t*width + r],
 																 fields[b*width + x],  fields[b*width + r]);
 								} else {
-										  fields[y*width + x] = new Field(x, y, fd.height, fields[y*width + l], fields[y*width + r],
+										  fields[y*width + x]->set_neighb(fields[y*width + l], fields[y*width + r],
 																 fields[t*width + l],  fields[t*width + x], 
 																 fields[b*width + l],  fields[b*width + x]);
 										  
 								}
-
-					 			// TODO care for the real fields;
 					 }
 		  }
-		  
+ 
 		  return RET_OK;
 }

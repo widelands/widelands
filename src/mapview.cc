@@ -70,20 +70,21 @@ Map_View::~Map_View(void) {
 void Map_View::draw(void) {
 		  Field *f;
 		  
-		  for(int y=3; y<map->get_h()-1; y++) {
-					 for(int x=3; x<map->get_w()-1; x++) {
+		  for(int y=1; y<map->get_h()-1; y++) {
+					 for(int x=1; x<map->get_w()-1; x++) {
 								f=map->get_field(x,y);
-								if(f->get_ypix()-vpy < (int)g_gr.get_yres() &&
-									f->get_xpix()-vpx < (int)g_gr.get_yres()) 
-										  draw_field(f); 
+								// X-check
+								if(f->get_rn()->get_xpix()-vpx <0) continue;
+								if(f->get_bln()->get_xpix()-vpx >= (int)g_gr.get_xres()) continue;
+								draw_field(f); 
 					 }
 		  }
 
 }
 					 
 void Map_View::draw_field(Field* f) {
-		  draw_polygon(f->get_tln(), f->get_trn(), f, &tmpr);
-		  draw_polygon(f->get_tln(), f, f->get_ln(), &tmpg);
+		  draw_polygon(f->get_bln(), f, f->get_brn(), &tmpr);
+		  draw_polygon(f, f->get_brn(), f->get_rn(), &tmpg);
 }
 
 #define MAX2(a, b) ( (a)>(b) ? (a):  (b)>(a) ? (b):(a) )
@@ -101,12 +102,16 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 		  ystart=MIN3(l->get_ypix()-vpy, r->get_ypix()-vpy, m->get_ypix()-vpy);
 		  ystop=MAX3(l->get_ypix()-vpy, r->get_ypix()-vpy, m->get_ypix()-vpy);
 
+		  // ycheck
+		  if(ystop < 0) return; 
+		  if(ystart > (int)g_gr.get_yres()) return;
+		
+		  // TEMP
+		  if(ystart <0 || ystop >= (int) g_gr.get_yres()) return;
+
 		  get_starts(l,r, m, ystart, ystop);
 
 		  for(y_d=ystart; y_d<ystop; y_d++) {
-					 if(y_d <0) continue;
-					 if(y_d>=(int)g_gr.get_yres()) continue;
-
 					 xstart=(long)g_starts[y_d-ystart].border1;
 					 xstop=(long)g_stops[y_d-ystart].border1;
 
@@ -117,8 +122,8 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 					 }
 
 					 xstart= xstart<0 ? 0 : xstart;
-					 xstop= xstop>=(int)g_gr.get_xres() ? g_gr.get_xres()-1 : xstop;
-
+					 xstop= xstop>= (int)g_gr.get_xres() ? (int)(g_gr.get_xres())-1 : xstop;
+					 
 					 for(x_d=xstart; x_d<xstop; x_d++) {
 								g_gr.set_pixel(x_d, y_d, p->get_pixel(0, 0));
 					 }
@@ -177,7 +182,7 @@ void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int yst
 		  }
 
 		  x=(r->get_xpix()-vpx)<<16;  
-		  for(count=r->get_ypix()-vpy; count <= l->get_ypix()-vpy; count++) {
+		  for(count=r->get_ypix()-vpy; count < l->get_ypix()-vpy; count++) {
 					 // cerr << count << ":" << l->get_ypix()  << endl;
 					 start[count-ystart].border1=x>>16;
 					 x+=slope;

@@ -21,6 +21,7 @@
 #include "game.h"
 #include "map.h"
 #include "input.h"
+#include "cursor.h"
 
 /** class Game
  *
@@ -61,7 +62,7 @@ void Game::run(const char* map, uint nipl) {
 		
 		  // set graphics and input
 		  g_gr.set_mode(xresolution, yresolution, g_gr.get_mode());
-		  g_ip.set_max_cords(xresolution, yresolution);
+		  g_ip.set_max_cords( xresolution-g_cur.get_w(), yresolution-g_cur.get_h());
 
 		  // TEMP
 		  Window* win=g_ui.create_window(0, 0, xresolution, yresolution, Window::FLAT);

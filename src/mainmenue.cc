@@ -56,7 +56,7 @@ void main_menue(void) {
 		  //uint lx=g_gr.get_xres();
 		  //uint ly=g_gr.get_yres();
 		  g_gr.set_mode(MENU_XRES, MENU_YRES, g_gr.get_mode());
-		  g_ip.set_max_cords(MENU_YRES-g_cur.get_w(), MENU_YRES-g_cur.get_h());
+		  g_ip.set_max_cords(MENU_XRES-g_cur.get_w(), MENU_YRES-g_cur.get_h());
 
 		  // make the background window, fill it with the splash screen
 		  Window* win=g_ui.create_window(0, 0, g_gr.get_xres(), g_gr.get_yres(), Window::FLAT);

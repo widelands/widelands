@@ -37,21 +37,13 @@
  * 		mtln, mtrn	top left and top right neighbour fields
  * 		mbln, mbrn  bottom left and bottom right neighbour fields
  */
-Field::Field(ushort x, ushort y, uchar h, Field* mln, Field* mrn, Field* mtln, Field* mtrn,
-					 Field* mbln, Field* mbrn) {
+Field::Field(ushort x, ushort y, uchar h) { 
 		  
 		  height=h;
 		  xpos=x;
 		  ypos=y;
 
-		  ln=mln; 
-		  rn=mrn;
-		  tln=mtln;
-		  trn=mtrn;
-		  bln=mbln;
-		  brn=mbrn;
-
-        ypix=(((y+1)<<FIELD_SW_H)>>1)-(h<<HEIGHT_FACTOR);
+		  ypix=(((y+1)<<FIELD_SW_H)>>1)-(h<<HEIGHT_FACTOR);
 
 		  if((y&1)) { // %2 
 					 xpix=((((x<<1)+1)<<FIELD_SW_W)>>1);
@@ -67,5 +59,15 @@ Field::Field(ushort x, ushort y, uchar h, Field* mln, Field* mrn, Field* mtln, F
  * Cleanups
  */
 Field::~Field(void) {
+}
+					 
+
+void Field::set_neighb(Field* mln, Field* mrn, Field* mtln, Field* mtrn, Field* mbln, Field* mbrn) {
+		  ln=mln; 
+		  rn=mrn;
+		  tln=mtln;
+		  trn=mtrn;
+		  bln=mbln;
+		  brn=mbrn;
 }
 
