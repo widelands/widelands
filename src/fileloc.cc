@@ -239,6 +239,8 @@ void File_Locator::set_def_writedir(const uint id) {
 		  la=LA_SUCCESS;
 }
 
+#include <iostream>
+
 /* void File_Locator::init_filelisting( const int type, const uchar postfix[5] );
  *
  * This functions inits the filelisting. it registeres the prefix and opens the first dir
@@ -258,8 +260,10 @@ void File_Locator::init_filelisting( const int type, const char postfix[5] ) {
 		  nlisttype=type;
 		  ncurdir=0;
 
+		  cerr << dirs[4] << endl;
 		  if(ncurdir<(int) MAX_DIRS) 
 					 open_next_dir();
+		  cerr << ncurdir << endl;
 
 		  if(!curdir) {
 					 la=LA_NOMOREFILES;
@@ -286,6 +290,7 @@ void File_Locator::init_filelisting( const int type, const char postfix[5] ) {
  * Args:	none
  * Returns: Nothing
  */
+#include <errno.h>
 void File_Locator::open_next_dir(void)  {
 		  if(ncurdir<0) return;
 
@@ -294,6 +299,9 @@ void File_Locator::open_next_dir(void)  {
 
 		  retval[0]='\0';
 
+		  if (ncurdir == MAX_DIRS)
+			  return;
+		  
 		  for(; ncurdir<(int)MAX_DIRS; ncurdir++) {
 					 if(dirs[ncurdir][0]=='\0') continue;
 								
@@ -304,21 +312,15 @@ void File_Locator::open_next_dir(void)  {
 					 break;
 		  }
 
-
-		  if (ncurdir == MAX_DIRS)
-			  return;
-
 		  // Try to open the dir
 		  curdir=opendir(retval);
-	
 		  if(!curdir && ncurdir<(int)MAX_DIRS) {
 					 // dir is invalid, but there are others. try them
 					 open_next_dir();
 					 return;
 		  }
-		
-		  ndirstrlen=strlen(retval);
 		  
+		  ndirstrlen=strlen(retval);
 }
 
 /** void File_Locator::end_filelisting(void) 
@@ -375,7 +377,8 @@ const char* File_Locator::get_next_file(void) {
 
 		  // strcat the file and return it
 		  strcat(retval, file->d_name);
-		  
+
+
 		  // Make sure the prefix is valid
 		  /*if(suf[0]!='\0' && strlen(retval)>strlen(suf)) {
 					 uint n=0;
