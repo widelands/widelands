@@ -68,15 +68,17 @@ class UIMultiline_Textarea : public UIPanel {
       inline RGBColor& get_font_clr() { return m_fcolor; }
 
    private:
-	Align				m_align;
-	std::string		m_text;
-   UIScrollbar*		m_scrollbar;
-	ScrollMode     m_scrollmode;
-   int				m_textheight;	///< total height of wrapped text, in pixels
-	int				m_textpos;		///< current scrolling position in pixels (0 is top)
-   std::string    m_fontname;
-   int            m_fontsize;
-   RGBColor       m_fcolor;
+		Align				m_align;
+		std::string		m_text;
+		UIScrollbar*	m_scrollbar;
+		ScrollMode     m_scrollmode;
+		int				m_textheight;	///< total height of wrapped text, in pixels
+		int				m_textpos;		///< current scrolling position in pixels (0 is top)
+		std::string    m_fontname;
+		int            m_fontsize;
+		RGBColor       m_fcolor;
+		uint				m_cache_id;		///picid of the whole textarea surface
+		Widget_Cache   m_cache_mode; 	///set to Widget_Cache_Update if the whole textarea has to be rebuild
 
    protected:
       inline int get_m_textpos(void) { return m_textpos; }

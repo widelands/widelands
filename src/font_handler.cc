@@ -70,35 +70,34 @@ int Font_Handler::get_fontheight(std::string name, int size) {
  */
 // TODO: rename this to draw text 
 void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty,
-		std::string text, Align align, int wrap) {
+		std::string text, Align align, int wrap, Widget_Cache widget_cache, uint *widget_cache_id) {
 	TTF_Font* f = m_font_loader->get_font(font,size);
-
-   // look if text is cached
-    _Cache_Infos  ci = {
-         0,
-         text,
-         f,
-         fg,
-         bg, 
-         0,
-         0,
-      };
-	
-	std::list<_Cache_Infos>::iterator i=find(m_cache.begin(), m_cache.end(), ci);
-      
-      if (i!=m_cache.end())  {
-         // Ok, it is cached, blit it and done
-         do_blit(dst,i->surface_id,dstx,dsty,align,i->w,i->h);
-	 
-	if (i!=m_cache.begin()) {
-		m_cache.push_front (*i);
-		m_cache.erase (i);
-	}
-	 
-         return;
-      }
-
-      // Not cached, we need to create this string
+	//Fontrender takes care of caching
+	if (widget_cache == Widget_Cache_None) {
+		// look if text is cached
+		_Cache_Infos  ci = {
+			0,
+			text,
+			f,
+			fg,
+			bg, 
+			0,
+			0,
+		};
+		
+		std::list<_Cache_Infos>::iterator i=find(m_cache.begin(), m_cache.end(), ci);
+			
+		if (i!=m_cache.end())  {
+			// Ok, it is cached, blit it and done
+			do_blit(dst,i->surface_id,dstx,dsty,align,i->w,i->h);
+			if (i!=m_cache.begin()) {
+				m_cache.push_front (*i);
+				m_cache.erase (i);
+			}
+			return;
+		}
+		
+		// Not cached, we need to create this string
       if( wrap > 0 ) {
          // Assume Multiline 
          ci.surface_id = create_static_long_text_surface(dst, f, fg, bg, text, align, wrap);
@@ -119,6 +118,26 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
  
       // Finally, blit it
       do_blit(dst,ci.surface_id,dstx,dsty,align,ci.w,ci.h);
+	}
+	//Widget gave us an explicit picid
+	else if (widget_cache == Widget_Cache_Use) {
+		int w,h;
+		g_gr->get_picture_size(*widget_cache_id,&w,&h);
+		do_blit(dst,*widget_cache_id,dstx,dsty,align,w,h);
+		return;
+	}
+	//We need to (re)create the picid for the widget
+	else {
+		uint picid;
+		int w,h;
+		if (widget_cache == Widget_Cache_Update)
+			g_gr->free_surface(*widget_cache_id);
+		
+		*widget_cache_id = (wrap > 0	? create_static_long_text_surface(dst, f, fg, bg, text, align, wrap)
+												: create_single_line_text_surface(dst, f, fg, bg, text, align));
+		g_gr->get_picture_size(*widget_cache_id,&w,&h);
+      do_blit(dst,*widget_cache_id,dstx,dsty,align,w,h);
+	}
 }
          
 /*

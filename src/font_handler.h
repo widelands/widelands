@@ -50,6 +50,13 @@ enum Align {
 	Align_BottomRight = Align_Right|Align_Bottom,
 };
 
+enum Widget_Cache {
+	Widget_Cache_None = 0,
+	Widget_Cache_Use = 1,
+	Widget_Cache_New = 2,
+	Widget_Cache_Update = 3
+};
+
 /** class Font_Handler
  *
  * This class generates font Pictures out of strings and returns them
@@ -59,7 +66,7 @@ public:
 	Font_Handler();
    ~Font_Handler();
 	void draw_string(RenderTarget* dst, const std::string font, int size, RGBColor fg, RGBColor bg, int x, int y, std::string text,
-			Align align = Align_CenterLeft, int wrap = -1) ;
+			Align align = Align_CenterLeft, int wrap = -1, Widget_Cache widget_cache = Widget_Cache_None, uint *widget_cache_id = 0) ;
 	void get_size(std::string font, int size, std::string text, int *w, int *h, int wrap = -1);
 	int calc_linewidth(TTF_Font* f, std::string &text);
 	int get_fontheight(std::string font, int size);
@@ -69,7 +76,8 @@ public:
    // This deletes all cached pictures, it is called 
    // from the graphics code before the graphics are flushed,
    // to make sure that everything is forgotten
-   void flush_cache( void );  
+   void flush_cache( void );
+	void delete_widget_cache(uint widget_cache_id);
 
 private:
    struct _Cache_Infos {

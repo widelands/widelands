@@ -36,7 +36,9 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 
 
 	set_align(align);
-
+	
+	m_cache_id = 0;
+   m_cache_mode = Widget_Cache_New;
 	m_textpos = 0;
 	m_textheight = 0;
 	m_scrollmode = ScrollNormal;
@@ -100,6 +102,8 @@ void UIMultiline_Textarea::set_text(const char *text)
 		m_scrollbar->set_steps(m_textheight - get_h());
 		m_scrollbar->set_pos(m_textpos);
 		}
+	if (m_cache_mode != Widget_Cache_New)
+		m_cache_mode = Widget_Cache_Update; 
 	update(0, 0, get_eff_w(), get_h());
 }
 
@@ -151,6 +155,7 @@ void UIMultiline_Textarea::draw(RenderTarget* dst)
          x += get_w();
 		
       // Let the font handler worry about all the complicated stuff..
-      g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), x, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w());
+      g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), x, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w(), m_cache_mode, &m_cache_id);
+   	m_cache_mode = Widget_Cache_Use;
    }
 }
