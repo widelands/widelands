@@ -34,7 +34,7 @@ inline char* ltrim(char* str)
 
 Conf_Reader::Conf_Reader(const char* file)
 {
-	this->conf = new Profile(file);
+	this->conf = new Profile(cerr, file);
 	this->pics = new Growable_Array(32, 8);
 	this->read_header();
 	this->read_resources();
@@ -58,13 +58,21 @@ void Conf_Reader::read_header()
 	memset(&header, 0, sizeof(WorldFileHeader));
 	strcpy(header.magic, WLWF_MAGIC);
 	header.version = WLWF_VERSION;
-	header.bobs = conf->get_int("world", "bobs");
-	header.resources = conf->get_int("world", "resources");
-	header.terrains = conf->get_int("world", "terrains");
+
+	Section *s = conf->get_section("world");
+	if (!s) {
+		strcpy(header.author, "(unknown");
+		strcpy(header.name, "(no name)");
+	} else {
+		header.bobs = s->get_int("bobs");
+		header.resources = s->get_int("resources");
+		header.terrains = s->get_int("terrains");
+		strcpy(header.author, s->get_string("author", "(unknown)"));
+		strcpy(header.name, s->get_string("name", "(no name)"));
+	}
+
 	header.pictures = 0;
 	header.checksum = 0;
-	conf->get_string("world", "author", header.author, "(unknown)");
-	conf->get_string("world", "name", header.name, "(no name)");
 }
 
 void Conf_Reader::read_resources()
@@ -73,10 +81,13 @@ void Conf_Reader::read_resources()
 	for (uint i=0; i<header.resources; i++)
 	{
 		memset(&resource[i], 0, sizeof(ResourceDesc));
-		char sectionName[MAX_NAME_LEN];
+		char sectionName[32];
 		sprintf(sectionName, "resource_%i", i);
-		conf->get_string(sectionName, "name", resource[i].name, "");
-		resource[i].occurence = conf->get_int(sectionName, "occurence");
+		Section *s = conf->get_section(sectionName);
+		if (!s)
+			continue;
+		strcpy(resource[i].name, s->get_string("name", ""));
+		resource[i].occurence = s->get_int("occurence");
 	}
 }
 
@@ -85,17 +96,21 @@ void Conf_Reader::read_terrains()
 	this->terrain = new TerrainType[header.terrains];
 	for (uint i=0; i<header.terrains; i++)
 	{
-		char sectionName[MAX_NAME_LEN];
+		char sectionName[32];
 		sprintf(sectionName, "terrain_%i", i);
-		
+
 		memset(&terrain[i], 0, sizeof(TerrainType));
-		conf->get_string(sectionName, "name", terrain[i].name, sectionName);
+		
+		Section *s = conf->get_section(sectionName);
+		if (!s)
+			continue;
+		strcpy(terrain[i].name, s->get_string("name", sectionName));
 		//terrain[i].attributes = 0;
-		terrain[i].heightMax = conf->get_int(sectionName, "heightMax");
-		terrain[i].heightMin = conf->get_int(sectionName, "heightMin");
+		terrain[i].heightMax = s->get_int("heightMax");
+		terrain[i].heightMin = s->get_int("heightMin");
 		//terrain[i].resources = 0;
-		char resList[MAX_VAL_LEN];
-		conf->get_string(sectionName, "resources", resList, "");
+		char resList[256];
+		strcpy(resList, s->get_string("resources", ""));
 		char* resName = strtok(resList, ",");
 		while (resName)
 		{
@@ -109,7 +124,7 @@ void Conf_Reader::read_terrains()
 			resName = strtok(NULL, ",");
 		};
 		char* picName = new char[1024];
-		conf->get_string(sectionName, "texture", picName, "");
+		strcpy(picName, s->get_string("texture", ""));
 		terrain[i].texture = header.pictures++;
 		pics->add(picName);
 	}
@@ -120,15 +135,19 @@ void Conf_Reader::read_bobs()
 	this->bob = new BobDesc[header.bobs];
 	for (uint i=0; i<header.bobs; i++)
 	{
-		char sectionName[MAX_NAME_LEN];
+		char sectionName[32];
 		sprintf(sectionName, "bob_%i", i);
 
 		memset(&bob[i], 0, sizeof(BobDesc));
-		conf->get_string(sectionName, "name", bob[i].name, sectionName);
-		bob[i].heir = conf->get_int(sectionName, "heir", -1);
-		bob[i].stock = conf->get_int(sectionName, "stock", 1);
-		bob[i].resource = conf->get_int(sectionName, "resource", -1);
-		bob[i].lifetime = conf->get_int(sectionName, "lifetime", 0);
+
+		Section *s = conf->get_section(sectionName);
+		if (!s)
+			continue;
+		strcpy(bob[i].name, s->get_string("name", sectionName));
+		bob[i].heir = s->get_int("heir", -1);
+		bob[i].stock = s->get_int("stock", 1);
+		bob[i].resource = s->get_int("resource", -1);
+		bob[i].lifetime = s->get_int("lifetime", 0);
 		//bob[i].anim = 0;
 		//bob[i].animFactor = conf->get_int(sectionName, "animFactor", -1);
 		//bob[i].animKey = ...
