@@ -21,7 +21,7 @@ shadowclr_g=0
 shadowclr_b=0
 
 [tribe]
-author=Holger Rapp
+author=The Widelands Development Team
 name=Barbarians
 descr=The mighty tribes of the east-lands!
 
@@ -51,35 +51,6 @@ fps=8
 # for this tribe. This is an important point to balance between
 # different tribes to make sure that they'll stay even
 [startwares]
-trunk=200
-raw_stone=800
-water=12
-grindstone=400
-thatchfern=300
-beer=5
-strongbeer=2
-pittabread=100
-fish=100
-meat=100
-snack=10
-meal=15
-ration=5
-coalearth=20
-ironore=10
-goldstone=10
-coal=500
-gold=100
-iron=100
-axe=10
-sharpaxe=10
-broadaxe=10
-bronzeaxe=10
-battleaxe=10
-warriorsaxe=10
-helm=10
-mask=10
-warhelmet=10
-blackwood=1000
 
 [startworkers]
 baker=2

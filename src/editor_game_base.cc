@@ -680,4 +680,6 @@ void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animatio
 
       static_cast<Game*>(this)->get_cmdqueue()->flush();
    }
+   
+   m_iabase->cleanup_for_load();
 }

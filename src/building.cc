@@ -102,8 +102,8 @@ Building* Building_Descr::create(Editor_Game_Base* g, Player* owner,
 	assert(owner);
 
 	Building* b = construct ? create_constructionsite(old) : create_object();
-	b->set_owner(owner);
 	b->m_position = pos;
+	b->set_owner(owner);
 	b->init(g);
 
 	return b;
@@ -538,7 +538,7 @@ Return the animation ID that is used for the building in UI items
 */
 uint Building::get_ui_anim()
 {
-	return get_descr()->get_animation("idle");
+	return get_descr()->get_ui_anim();
 }
 
 

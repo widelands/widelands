@@ -231,6 +231,8 @@ ProductionSite::ProductionSite(ProductionSite_Descr* descr)
 	m_program_time = 0;
 	m_statistics_changed = true;
 	m_post_timer = 50;
+
+   m_last_stat_percent = 0;
 }
 
 
@@ -260,10 +262,11 @@ std::string ProductionSite::get_statistics_string()
       return buf;
    }
 	
-   if (m_stop)
-		return "(stopped)";
 	if (m_statistics_changed)
 		calc_statistics();
+   
+   if (m_stop)
+		return "(stopped)";
 	return m_statistics_buf;
 }
 
@@ -305,7 +308,10 @@ void ProductionSite::calc_statistics()
 		snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%", percOk);
 	molog("stat: lastOk: %.0f%% percOk: %.0f%% trend: %s\n",
 		lastPercOk, percOk, trendBuf);
-	m_statistics_changed = false;
+
+   m_last_stat_percent = (char)percOk;
+
+   m_statistics_changed = false;
 }
 
 

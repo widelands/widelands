@@ -341,8 +341,8 @@ Create all the buttons etc...
 */
 Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
   : UIUniqueWindow(parent,registry,400,270,"Ware Statistics") {
-   m_parent=parent;
-
+   m_parent = parent;
+     
    // First, we must decide about the size
    int nr_wares = parent->get_player()->get_tribe()->get_nrwares();
    int wares_per_row = MIN_WARES_PER_LINE;
@@ -380,7 +380,7 @@ Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueW
          posx += cb->get_w() + spacing;
          dposy = cb->get_h() + spacing;
          set_inner_size(spacing + (cb->get_w() + spacing) *wares_per_row, get_inner_h());
-         m_plot->register_plot_data(cur_ware, m_parent->get_ware_production_statistics(cur_ware), colors[cur_ware]);
+         m_plot->register_plot_data(cur_ware, parent->get_ware_production_statistics(cur_ware), colors[cur_ware]);
       }
       posy += dposy; 
    }

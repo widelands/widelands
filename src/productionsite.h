@@ -91,7 +91,8 @@ public:
 	virtual ~ProductionSite();
 
 	virtual std::string get_statistics_string();
-
+   char get_statistics_percent( void ) { return m_last_stat_percent; }
+   
    virtual int get_building_type(void) { return Building::PRODUCTIONSITE; }
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
@@ -156,6 +157,7 @@ protected:  // TrainingSite must have access to this stuff
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
 	char                     m_statistics_buf[40];
+   char                     m_last_stat_percent;
 };
 
 #endif

@@ -39,7 +39,14 @@ class UIWindow;
  */
 class Interactive_Player : public Interactive_Base {
    friend class Game_Interactive_Player_Data_Packet;
-	
+
+   public:
+      struct Building_Stats {
+         bool is_constructionsite;
+         Coords pos; 
+      };
+      typedef std::vector<std::vector< Building_Stats > > BuildingStats ;
+
    public:
 		Interactive_Player(Game *g, uchar pln);
 		~Interactive_Player(void);
@@ -70,6 +77,14 @@ class Interactive_Player : public Interactive_Base {
       void ware_produced(uint id);
       void next_ware_production_period( void );
       const std::vector<uint>* get_ware_production_statistics( int ware );
+     
+      // For statistics mainly, we keep track of buildings
+      void gain_immovable(PlayerImmovable* );
+      void lose_immovable(PlayerImmovable* );
+      const std::vector< Building_Stats >&  get_building_statistics( int i ) { return m_building_stats[i]; }
+            
+      // For load
+      virtual void cleanup_for_load( void );
       
    private:
       Game*		m_game;
@@ -83,6 +98,8 @@ class Interactive_Player : public Interactive_Base {
       std::vector<uint> m_current_statistics;
       std::vector< std::vector<uint> > m_ware_productions; 
       uint  m_last_stats_update;    
+
+      BuildingStats m_building_stats;
 };
 
 

@@ -63,6 +63,7 @@ public:
 	inline uint get_buildicon() const { return m_buildicon; }
 	inline int get_size(void) const { return m_size; }
 	inline bool get_ismine() const { return m_mine; }
+   virtual uint get_ui_anim() { return get_animation("idle"); }
 
 	inline bool get_stopable() const { return m_stopable;}
 	inline std::string get_stop_icon() const { return m_stop_icon;}

@@ -364,12 +364,18 @@ void Game::set_speed(int speed)
 
 void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 {
-	for (unsigned int i=0;i<cpl.size();i++)
-		if (cpl[i]->get_player_number()==pi->get_owner()->get_player_number())
-			if (lg==GAIN)
-				cpl[i]->gain_immovable (pi);
-			else
-				cpl[i]->lose_immovable (pi);
+   for (unsigned int i=0;i<cpl.size();i++)
+      if (cpl[i]->get_player_number()==pi->get_owner()->get_player_number())
+         if (lg==GAIN)
+            cpl[i]->gain_immovable (pi);
+         else
+            cpl[i]->lose_immovable (pi);
+      
+   if(get_ipl()->get_player_number()==pi->get_owner()->get_player_number())
+      if (lg==GAIN)
+         get_ipl()->gain_immovable (pi);
+      else
+         get_ipl()->lose_immovable (pi);
 }
 
 void Game::player_field_notification (const FCoords& fc, losegain_t lg)

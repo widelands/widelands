@@ -18,7 +18,9 @@
  */
 
 #include "building.h"
+#include "building_statistics_menu.h"
 #include "cmd_queue.h"
+#include "constructionsite.h"
 #include "fieldaction.h"
 #include "font_handler.h"
 #include "game_loader.h"
@@ -54,6 +56,7 @@ public:
 private:
    UIUniqueWindowRegistry m_saveload;
    UIUniqueWindowRegistry m_wares_statistics;
+   UIUniqueWindowRegistry m_buildings_statistics;
 	Interactive_Player	*m_player;
    void clicked(int);
 };
@@ -81,7 +84,11 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    b=new UIButton(this, 5, 55, get_inner_w()-10, 20, 0, 3);
    b->set_title("Wares Statistics");
    b->clickedid.set(this, &GameMainMenu::clicked);
-   
+
+   b=new UIButton(this, 5, 80, get_inner_w()-10, 20, 0, 4);
+   b->set_title("Buildings Statistics");
+   b->clickedid.set(this, &GameMainMenu::clicked);
+    
 	if (get_usedefaultpos())
 		center_to_parent();
 }
@@ -100,6 +107,11 @@ void GameMainMenu::clicked(int n) {
       case 3:
          // Wares statistics
          new Ware_Statistics_Menu(m_player, &m_wares_statistics);
+         break;
+
+      case 4:
+         // Building statistics
+         new Building_Statistics_Menu(m_player, &m_buildings_statistics);
          break;
    }
 }
@@ -271,14 +283,10 @@ void Interactive_Player::next_ware_production_period( void ) {
       m_current_statistics.resize( get_player()->get_tribe()->get_nrwares() );
    }
 
-   log("(STATS) Wrapping wares production statistics:\n");
    for(uint i = 0; i < m_ware_productions.size(); i++) {
       m_ware_productions[i].push_back( m_current_statistics[i] );
-      log("(STATS) %i units of %s produced!\n", m_current_statistics[i], get_player()->get_tribe()->get_ware_descr(i)->get_descname());
       m_current_statistics[i] = 0;
    }
-   
-   log("(STATS) Done.\n");
 }
 
 /*
@@ -424,3 +432,66 @@ std::vector<bool>* Interactive_Player::get_visibility(void) {
    return m_game->get_player(m_player_number)->get_visibility(); 
 }
 
+/*
+ * Gain a immovable
+ */
+void Interactive_Player::gain_immovable( PlayerImmovable* imm ) {
+   if( imm->get_type() != BaseImmovable::BUILDING ) return;
+   Building* b = static_cast<Building*>(imm);
+   
+   std::string name;
+   bool is_constructionsite = false;
+   if(!strcmp(b->get_name(),"constructionsite")) {
+      name = static_cast<ConstructionSite*>(b)->get_building()->get_name();
+      is_constructionsite = true;
+   } else 
+      name = b->get_name();
+   
+   // Get the valid vector for this
+   if( (int)m_building_stats.size() < get_player()->get_tribe()->get_nrbuildings()) 
+      m_building_stats.resize( get_player()->get_tribe()->get_nrbuildings());
+   
+   std::vector<Building_Stats>& stat = m_building_stats[ get_player()->get_tribe()->get_building_index(name.c_str()) ];
+   
+   Building_Stats new_building;
+   new_building.is_constructionsite = is_constructionsite;
+   new_building.pos = b->get_position();
+   stat.push_back( new_building );
+}
+
+/*
+ * Loose a immovable
+ */
+void Interactive_Player::lose_immovable( PlayerImmovable* imm ) {
+   if( imm->get_type() != BaseImmovable::BUILDING ) return;
+   Building* b = static_cast<Building*>(imm);
+
+   std::string name;
+   if(!strcmp(b->get_name(),"constructionsite")) {
+      name = static_cast<ConstructionSite*>(b)->get_building()->get_name();
+   } else 
+      name = b->get_name();
+
+   // Get the valid vector for this
+   if( (int)m_building_stats.size() < get_player()->get_tribe()->get_nrbuildings()) 
+      m_building_stats.resize( get_player()->get_tribe()->get_nrbuildings());
+
+   std::vector<Building_Stats>& stat = m_building_stats[ get_player()->get_tribe()->get_building_index(name.c_str()) ];
+
+   for( uint i = 0; i < stat.size(); i++ ) {
+      if( stat[i].pos == b->get_position() ) {
+         stat.erase( stat.begin() + i );
+         return;
+      }
+   }
+   
+   throw wexception("Interactive_Player::loose_immovable(): A building shoud be removed at the location %i, %i, but nothing"
+         " is known about this building!\n", b->get_position().x, b->get_position().y);
+}
+
+/*
+ * Cleanup, so that we can load
+ */
+void Interactive_Player::cleanup_for_load( void ) {
+   m_building_stats.clear();
+}

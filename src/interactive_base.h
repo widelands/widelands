@@ -94,6 +94,8 @@ class Interactive_Base : public UIPanel {
 		const Coords &get_build_road_end();
 		int get_build_road_end_dir();
 
+      // for loading
+      virtual void cleanup_for_load() { };
 
    private:
       void roadb_add_overlay();

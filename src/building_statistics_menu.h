@@ -17,30 +17,43 @@
  *
  */
 
-#ifndef __S__WARE_STATISTICS_MENU_H
-#define __S__WARE_STATISTICS_MENU_H
+#ifndef __S__BUILDING_STATISTICS_MENU_H
+#define __S__BUILDING_STATISTICS_MENU_H
 
 #include "filesystem.h"
 #include "ui_unique_window.h"
 
 class Interactive_Player;
-class UITextarea;
 class UIButton;
-class WUIPlot_Area;
+class UIProgress_Bar;
+class UITextarea;
+class UITable;
 
-class Ware_Statistics_Menu : public UIUniqueWindow {
+class Building_Statistics_Menu : public UIUniqueWindow {
    public:
-      Ware_Statistics_Menu(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
-      virtual ~Ware_Statistics_Menu(void);
+      Building_Statistics_Menu(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
+      virtual ~Building_Statistics_Menu(void);
 
- 
+      void think(void); 
+      void draw(RenderTarget*);
+
    private:
+      UITable*            m_table;
       Interactive_Player* m_parent;
-      WUIPlot_Area*       m_plot;
+      UIProgress_Bar*     m_progbar;
+      UITextarea*         m_owned, *m_build;
+      uint                m_anim;
+      uint                m_lastupdate;
+      uint                m_end_of_table_y;
+      int                 m_selected;
+      UIButton*           m_btn[6];
+      int                 m_last_building_index;
 
    private:
       void clicked(int);
-      void cb_changed_to(int, bool);
+      void table_changed(int);
+      void update();
+      int validate_pointer(int*,int);
 };
 
 #endif
