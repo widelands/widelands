@@ -31,7 +31,7 @@
  * 			class g_fileloc
  */
 
-/** Map::Map(void) 
+/** Map::Map(void)
  *
  * inits
  */
@@ -40,7 +40,7 @@ Map::Map(void) {
 		  fields=0;
 }
 
-/** Map::~Map(void) 
+/** Map::~Map(void)
  *
  * cleanups
  */
@@ -50,7 +50,7 @@ Map::~Map(void) {
 					 // it here manually!!!
 					 free(fields);
 		  }
-		  
+
 		  if(w) delete w;
 }
 
@@ -168,7 +168,7 @@ int Map::load_wlmf(const char* file) {
 
 		for (y=0; y<hd.height; y++)
 			for (int x=0; x<hd.width; x++)
-				get_field(x,y)->set_normal();
+				get_field(x,y)->set_brightness();
 
 
 		  return RET_OK;

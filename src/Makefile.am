@@ -57,6 +57,8 @@ widelands_SOURCES=main.cc \
 						IntPlayer.h \
 						mapview.h \
 						mapview.cc \
+						minimap.h \
+						minimap.cc \
 						field.cc \
 						profile.cc \
 						profile.h \

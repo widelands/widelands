@@ -38,6 +38,11 @@ class AutoPic : public Pic {
       next = first; first = this;
       filename = mfilename; desw = mdesw; desh = mdesh;
    }
+   AutoPic(const char *mfilename, int r, int g, int b, int mdesw = 0, int mdesh = 0) {
+      next = first; first = this;
+      filename = mfilename; desw = mdesw; desh = mdesh;
+	  set_clrkey(r, g, b);
+   }
    static void load_all();
 };
 

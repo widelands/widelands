@@ -25,7 +25,6 @@
 #define SHADING_GOURAUD	2
 #define SHADING				SHADING_GOURAUD
 #define FILL_TRIANGLES
-#define LIGHT_FACTOR		75
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -159,10 +158,10 @@ void render_triangle(Bitmap *dst, Point* points, Vector* normals, Pic* texture)
 struct _go
 {
    int x;
-   float b;
+   int b; // 16.16 fixed point
 };
 
-int make_triangle_lines(Point* points, float* bright, _go* starts, _go* ends)
+int make_triangle_lines(Point* points, int* bright, _go* starts, _go* ends)
 {
    int ydiff1 = points[1].y - points[0].y;
    int ydiff2 = points[2].y - points[0].y;
@@ -170,9 +169,9 @@ int make_triangle_lines(Point* points, float* bright, _go* starts, _go* ends)
    int xdiff1 = points[1].x - points[0].x;
    int xdiff2 = points[2].x - points[0].x;
    int xdiff3 = points[2].x - points[1].x;
-   float bdiff1 = bright[1] - bright[0];
-   float bdiff2 = bright[2] - bright[0];
-   float bdiff3 = bright[2] - bright[1];
+   int bdiff1 = bright[1] - bright[0];
+   int bdiff2 = bright[2] - bright[0];
+   int bdiff3 = bright[2] - bright[1];
 
    if (!ydiff2)
       // triangle has height 0
@@ -187,7 +186,7 @@ int make_triangle_lines(Point* points, float* bright, _go* starts, _go* ends)
 
    int y;
    int xd1=0, xd2=0, xd3=0;
-   float bd1=0, bd2=0, bd3=0;
+   int bd1=0, bd2=0, bd3=0;
    // upper part of triangle
    for (y=0; y<ydiff1; y++)
    {
@@ -216,32 +215,29 @@ int make_triangle_lines(Point* points, float* bright, _go* starts, _go* ends)
 }
 
 // render_triangle for gouraud shading
-void render_triangle(Bitmap *dst, Point* points, Vector* normals, Pic* texture)
+void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture)
 {
-   static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
-
    if (points[0].y > points[1].y)
    {
       swap<Point>(points[0], points[1]);
-      swap<Vector>(normals[0], normals[1]);
+      swap<int>(bright[0], bright[1]);
    }
    if (points[1].y > points[2].y)
    {
       swap<Point>(points[1], points[2]);
-      swap<Vector>(normals[1], normals[2]);
+      swap<int>(bright[1], bright[2]);
    }
    if (points[0].y > points[1].y)
    {
       swap<Point>(points[0], points[1]);
-      swap<Vector>(normals[0], normals[1]);
+      swap<int>(bright[0], bright[1]);
    }
 
    _go starts[200];		// FEAR!!
    _go ends[200];			// don't use to high triangles
-   float bright[3];
-   bright[0] = normals[0] * sun;
-   bright[1] = normals[1] * sun;
-   bright[2] = normals[2] * sun;
+   bright[0] <<= 16; // convert to 16.16 fixed point
+   bright[1] <<= 16;
+   bright[2] <<= 16;
 
    int ymax = make_triangle_lines(points, bright, starts, ends);
    int ystart = points[0].y < 0 ? -points[0].y : 0;
@@ -255,10 +251,10 @@ void render_triangle(Bitmap *dst, Point* points, Vector* normals, Pic* texture)
 
       int xdiff = ends[y].x - starts[y].x;
       if (!xdiff)
-         xdiff = 0;
-      float bdiff = ends[y].b - starts[y].b;
-      int b = -(int)(65536 * starts[y].b * LIGHT_FACTOR);
-      int bd = -(int)(65536 * LIGHT_FACTOR * bdiff / xdiff);
+         xdiff = 1;
+      int bdiff = ends[y].b - starts[y].b;
+      int b = starts[y].b;
+      int bd = bdiff / xdiff;
 
       int end = ends[y].x < (int)dst->get_w() ? ends[y].x : dst->get_w()-1;
       int start = starts[y].x;

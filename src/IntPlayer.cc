@@ -23,6 +23,7 @@
 #include "IntPlayer.h"
 #include "cursor.h"
 #include "game.h"
+#include "minimap.h"
 
 
 /** class Interactive_Player
@@ -48,6 +49,9 @@ Interactive_Player::Interactive_Player(Game *g)
 	: Panel(0, 0, 0, get_xres(), get_yres())
 {
 	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g->get_map());
+	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
+	minimap = 0;
+	game = g;
 
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
@@ -63,6 +67,9 @@ Interactive_Player::Interactive_Player(Game *g)
 	b->set_pic(g_fh.get_string("MENU", 0));
 
 	b = new Button(this, x+68, y, 34, 34, 2);
+	b->clicked.set(this, &Interactive_Player::minimap_btn);
+	b->set_pic(g_fh.get_string("MAP", 0));
+
 	b = new Button(this, x+102, y, 34, 34, 2);
 }
 
@@ -102,6 +109,25 @@ void Interactive_Player::main_menu_btn()
 	new Window(this, 100, 100, 150, 250, "Menu");
 }
 
+/** Interactive_Player::minimap_btn()
+ *
+ * Handle minimap button by opening the minimap (or closing it if it's
+ * currently open).
+ */
+void Interactive_Player::minimap_btn()
+{
+	if (minimap)
+		delete minimap;
+	else
+	{
+		new MiniMap(this, 200, 150, game->get_map(), &minimap);
+		minimap->warpview.set(this, &Interactive_Player::minimap_warp);
+
+		// make sure the viewpos marker is at the right pos to start with
+		mainview_move(main_mapview->get_vpx(), main_mapview->get_vpy());
+	}
+}
+
 /** Interactive_Player::think()
  *
  * Called once per frame by the UI code
@@ -112,4 +138,38 @@ void Interactive_Player::think()
 
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
 	g_gr.needs_fs_update();
+}
+
+/** Interactive_Player::mainview_move(int x, int y)
+ *
+ * Signal handler for the main view's warpview updates the mini map's
+ * viewpos marker position
+ */
+void Interactive_Player::mainview_move(int x, int y)
+{
+	if (minimap) {
+		int maxx = game->get_map()->get_w() * FIELD_WIDTH;
+		int maxy = game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+
+		x += main_mapview->get_w()>>1;
+		if (x >= maxx) x -= maxx;
+		y += main_mapview->get_h()>>1;
+		if (y >= maxy) y -= maxy;
+
+		minimap->set_view_pos(x, y);
+	}
+}
+
+/** Interactive_Player::minimap_warp(int x, int y)
+ *
+ * Called whenever the player clicks on a location on the minimap.
+ * Warps the main mapview position to the clicked location.
+ */
+void Interactive_Player::minimap_warp(int x, int y)
+{
+	x -= main_mapview->get_w()>>1;
+	if (x < 0) x += game->get_map()->get_w() * FIELD_WIDTH;
+	y -= main_mapview->get_h()>>1;
+	if (y < 0) y += game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+	main_mapview->set_viewpoint(x, y);
 }

@@ -37,9 +37,14 @@ public:
 	Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m);
 	~Map_View();
 
+	UISignal2<int,int> warpview; // x/y in screen coordinates
+
 	// Function to set the viewpoint
-	void set_viewpoint(uint,  uint);
+	void set_viewpoint(int x, int y);
 	void set_rel_viewpoint(int x, int y) { set_viewpoint(vpx+x,  vpy+y); }
+
+	inline int get_vpx() const { return vpx; }
+	inline int get_vpy() const { return vpy; }
 
 	// Drawing
 	void draw(Bitmap *bmp, int ofsx, int ofsx);

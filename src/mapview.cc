@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp
+ * Copyright (C) 2002 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -140,20 +140,29 @@ inline void Map_View::draw_polygon(Bitmap *dst, Field* l, Field* r, Field* m, Pi
 	p[0] = Point(l->get_xpix()-vpx, l->get_ypix()-vpy);
 	p[1] = Point(r->get_xpix()-vpx, r->get_ypix()-vpy);
 	p[2] = Point(m->get_xpix()-vpx, m->get_ypix()-vpy);
-	Vector n[3];
-	n[0] = l->get_normal();
-	n[1] = r->get_normal();
-	n[2] = m->get_normal();
-	render_triangle(dst, p, n, pic);
+	int b[3];
+	b[0] = l->get_brightness();
+	b[1] = r->get_brightness();
+	b[2] = m->get_brightness();
+	render_triangle(dst, p, b, pic);
 }
 
-void Map_View::set_viewpoint(uint x,  uint y)
+/** Map_View::set_viewpoint(int x, int y)
+ *
+ * Set the viewpoint to the given screen coordinates
+ */
+void Map_View::set_viewpoint(int x, int y)
 {
+	if (vpx == x && vpy == y)
+		return;
+
 	vpx=x; vpy=y;
 	while(vpx>FIELD_WIDTH*map->get_w())			vpx-=(FIELD_WIDTH*map->get_w());
 	while(vpy>(FIELD_HEIGHT*map->get_h())>>1)	vpy-=(FIELD_HEIGHT*map->get_h())>>1;
 	while(vpx< 0)  vpx+=(FIELD_WIDTH*map->get_w());
 	while(vpy< 0)  vpy+=(FIELD_HEIGHT*map->get_h())>>1;
+
+	warpview.call(vpx, vpy);
 }
 
 /** Map_View::handle_mouseclick(uint btn, bool down, int x, int y)

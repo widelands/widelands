@@ -678,7 +678,7 @@ int Map::load_s2mf(const char* filen) {
 
 		for(y=0; y<hd.height; y++)
 			for(x=0; x<hd.width; x++)
-				get_field(x,y)->set_normal();
+				get_field(x,y)->set_brightness();
 
 		  
 /*		  for(y=0; y<hd.height; y++) {

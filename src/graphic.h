@@ -306,7 +306,7 @@ class Graphic : public Singleton<Graphic>
    bool bneeds_update;
 };
 
-void render_triangle(Bitmap *dst, Point* points, Vector* normals, Pic* texture);
+void render_triangle(Bitmap *dst, Point* points, int *brightness, Pic* texture);
 void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
       uint src_x, uint src_y, int w, int h);
 

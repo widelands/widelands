@@ -28,8 +28,11 @@
 #define MAIN_WINDOW_HEIGHT 34
 
 class Game;
+class MiniMap;
 
 class Interactive_Player : public Panel {
+		friend MiniMap;
+
 		 Interactive_Player(const Interactive_Player&);
 		 Interactive_Player operator=(const Interactive_Player&);
 
@@ -40,6 +43,7 @@ class Interactive_Player : public Panel {
 					 void start();
 					 void exit_game_btn();
 					 void main_menu_btn();
+					 void minimap_btn();
 
 					 void think();
 
@@ -49,9 +53,13 @@ class Interactive_Player : public Panel {
 					 static inline uint get_yres() { return yresolution; }
 
 		  private:
+					 void mainview_move(int x, int y);
+					 void minimap_warp(int x, int y);
+
 					 static uint xresolution, yresolution;
 					 Game *game;
 					 Map_View* main_mapview;
+					 MiniMap *minimap;
 };
 
 

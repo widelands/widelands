@@ -37,7 +37,7 @@ Field::Field(void) {
 
 }
 
-/** Field::~Field(void) 
+/** Field::~Field(void)
  *
  * Cleanups
  */
@@ -47,7 +47,7 @@ Field::~Field(void) {
 
 void Field::set_neighb(Field* mln, Field* mrn, Field* mtln, Field* mtrn, Field* mbln, Field* mbrn)
 {
-	ln=mln; 
+	ln=mln;
 	rn=mrn;
 	tln=mtln;
 	trn=mtrn;
@@ -55,14 +55,24 @@ void Field::set_neighb(Field* mln, Field* mrn, Field* mtln, Field* mtrn, Field* 
 	brn=mbrn;
 }
 
+#define V3	(float)0.57735 // sqrt(1/3)
+#define LIGHT_FACTOR		75
+
+/** Field::set_brightness()
+ *
+ * Find the normal for this vertex and calculate its brightness from that
+ */
+void Field::set_brightness()
+{
+	static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
+
+	Vector normal;
+
 // find normal
 // more guessed than thought about
 // but hey, results say i'm good at guessing :)
 // perhaps i'll paint an explanation for this someday
 // florian
-void Field::set_normal()
-{
-	// TODO: define flag for "flat" terrains
 #define COS60	0.5
 #define SIN60	0.86603
 #ifdef _MSC_VER
@@ -84,4 +94,12 @@ void Field::set_normal()
 #ifdef _MSC_VER
 #pragma warning(default:4244)
 #endif
+
+	float b = normal * sun;
+	b *= -LIGHT_FACTOR;
+
+	// is this necessary?
+	if (b < -128) b = -128;
+	else if (b > 127) b = 127;
+	brightness = (char)b;
 }

@@ -26,7 +26,13 @@
 #include "growablearray.h"
 #include "auto_pic.h"
 
-class Panel;
+/** class UIObject
+ *
+ * Serves as a base class for UI related objects. The only purpose is
+ * to provide the base class for signal function pointers.
+ */
+class UIObject {
+};
 
 /** class UISignal
  *
@@ -42,33 +48,48 @@ class Panel;
  *		signal.call();
  *		signal1.call(some_int);
  */
-class UISignal {
-	typedef void (Panel::*fnT)();
-	Panel *_pnl;
+class UISignal : public UIObject {
+	typedef void (UIObject::*fnT)();
+	UIObject *_obj;
 	fnT _fn;
 public:
-	UISignal() { _pnl = 0; _fn = 0; }
+	UISignal() { _obj = 0; _fn = 0; }
 	template<class T>
-	void set(Panel *p, void (T::*f)()) {
-		_pnl = p;
+	void set(UIObject *p, void (T::*f)()) {
+		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
-	void call() { if (_fn) (_pnl->*_fn)(); }
+	inline void call() { if (_fn) (_obj->*_fn)(); }
 };
 
 template<class T1>
-class UISignal1 {
-	typedef void (Panel::*fnT)(T1);
-	Panel *_pnl;
+class UISignal1 : public UIObject {
+	typedef void (UIObject::*fnT)(T1);
+	UIObject *_obj;
 	fnT _fn;
 public:
-	UISignal1() { _pnl = 0; _fn = 0; }
+	UISignal1() { _obj = 0; _fn = 0; }
 	template<class T>
-	void set(Panel *p, void (T::*f)(T1)) {
-		_pnl = p;
+	void set(UIObject *p, void (T::*f)(T1)) {
+		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}
-	void call(T1 t1) { if (_fn) (_pnl->*_fn)(t1); }
+	inline void call(T1 t1) { if (_fn) (_obj->*_fn)(t1); }
+};
+
+template<class T1, class T2>
+class UISignal2 : public UIObject {
+	typedef void (UIObject::*fnT)(T1, T2);
+	UIObject *_obj;
+	fnT _fn;
+public:
+	UISignal2() { _obj = 0; _fn = 0; }
+	template<class T>
+	void set(UIObject *p, void (T::*f)(T1, T2)) {
+		_obj = p;
+		_fn = static_cast<fnT>(f);
+	}
+	inline void call(T1 t1, T2 t2) { if (_fn) (_obj->*_fn)(t1, t2); }
 };
 
 /** class Panel
@@ -79,7 +100,7 @@ public:
  * The inner rectangle is the outer rectangle minus the border sizes.
  * Child panel coordinates are always relative to the inner rectangle.
  */
-class Panel {
+class Panel : public UIObject {
 public:
 	enum {
 		pf_handle_mouse = 1,

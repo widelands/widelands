@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2001 by Holger Rapp 
- * 
+ * Copyright (C) 2001 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -45,9 +45,9 @@
 /** struct Map_Header
  *
  * This is the header of a widelands map format
- * it's designed to be fastly read to give the user informations 
- * about the map while browsing it. 
- *   --> no pointers (oh wonder!) 
+ * it's designed to be fastly read to give the user informations
+ * about the map while browsing it.
+ *   --> no pointers (oh wonder!)
  */
 struct MapDescrHeader {
 		  char   magic[6]; // "WLmf\0\0"
@@ -76,11 +76,11 @@ struct PlayerDescr {
 		  ushort force_tribe;
 		  ulong	tribe_checksum;
 } /* size: 64 bytes */;
-		  
+
 /** struct FieldDescr
  *
- * This describes a field like it is in the 
- * Map file! Please note, a real field in 
+ * This describes a field like it is in the
+ * Map file! Please note, a real field in
  * the game will have a different class
  */
 struct FieldDescr {
@@ -92,12 +92,12 @@ struct FieldDescr {
 		  ushort tex_d;
 		  ushort animal;
 		  ushort bob_nr;
-} /* size: 16 bytes */ ;	
+} /* size: 16 bytes */ ;
 
 #ifdef _MSC_VER
 #pragma pack(pop)
 #else
-#pragma pack() 
+#pragma pack()
 #endif
 
 class Building;
@@ -112,7 +112,7 @@ class Bob;
 #define FIELD_HEIGHT  58
 //#define FIELD_HEIGHT 48
 //#define FIELD_WIDTH 48
-#define HEIGHT_MAX    58 
+#define HEIGHT_MAX    58
 #define HEIGHT_FACTOR 6
 class Field {
 		  Field(const Field&);
@@ -130,11 +130,11 @@ class Field {
 
 								ypix=(((y+1)*FIELD_HEIGHT)>>1)-(h*HEIGHT_FACTOR);
 
-								if((y&1)) { // %2 
+								if((y&1)) { // %2
 										  xpix=((((x<<1)+1)*FIELD_WIDTH)>>1);
 								} else {
 										  xpix=(x*FIELD_WIDTH);
-								}			 
+								}
 					 }
 					 inline void set_td(Pic* p) {
 								texd=p;
@@ -156,32 +156,28 @@ class Field {
 					 inline Field* get_trn(void) const { return trn; }
 					 inline Field* get_bln(void) const { return bln; }
 					 inline Field* get_brn(void) const { return brn; }
-		  
+
 					 // get textures
 					 inline Pic* get_texr(void) { return texr; }
 					 inline Pic* get_texd(void) { return texd; }
 
-					 inline Vector get_normal()
-					 {
-						 return normal;
-					 }
-
-					 void set_normal();
+					 inline char get_brightness() const { return brightness; }
+					 void set_brightness();
 
 					 // ----- for class creature
 					 void remove_creature(Creature*) {};
 					 // -----
-					 
-		  private: 
+
+		  private:
 					 Building* building;
 					 Bob* bob;
 					 Field *ln, *rn, *tln, *trn, *bln, *brn;
-					 
+
 					 ushort xpos, ypos;
 					 int	xpix, ypix;
 					 uchar height;
+					 char brightness;
 					 Pic *texr, *texd;
-					 Vector normal;
 };
 
 /** class Map
@@ -200,7 +196,7 @@ class Map {
 					 ~Map(void);
 
 					 int load_map(const char*);
-					 
+
 					 // informational functions
 					 inline const char* get_author(void) { return hd.author; }
 					 inline const char* get_name(void) { return hd.name; }
@@ -245,4 +241,4 @@ class Map {
 					 void set_size(uint, uint);
 };
 
-#endif // __S__MAP_H 
+#endif // __S__MAP_H

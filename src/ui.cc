@@ -593,12 +593,17 @@ void Panel::do_mouseclick(uint btn, bool down, int x, int y)
 	x -= _lborder;
 	y -= _tborder;
 
-	Panel *child = get_mousein(x, y);
-
-	if (child)
-		child->do_mouseclick(btn, down, x-child->_x, y-child->_y);
-	else
+	if (_g_mousegrab == this)
 		handle_mouseclick(btn, down, x, y);
+	else
+	{
+		Panel *child = get_mousein(x, y);
+
+		if (child)
+			child->do_mouseclick(btn, down, x-child->_x, y-child->_y);
+		else
+			handle_mouseclick(btn, down, x, y);
+	}
 }
 
 /** Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
@@ -616,12 +621,17 @@ void Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 	x -= _lborder;
 	y -= _rborder;
 
-	Panel *child = get_mousein(x, y);
-
-	if (child)
-		child->do_mousemove(x-child->_x, y-child->_y, xdiff, ydiff, btns);
-	else
+	if (_g_mousegrab == this)
 		handle_mousemove(x, y, xdiff, ydiff, btns);
+	else
+	{
+		Panel *child = get_mousein(x, y);
+
+		if (child)
+			child->do_mousemove(x-child->_x, y-child->_y, xdiff, ydiff, btns);
+		else
+			handle_mousemove(x, y, xdiff, ydiff, btns);
+	}
 }
 
 /** Panel::ui_trackmouse(int *x, int *y) [static]
