@@ -17,6 +17,7 @@
  *
  */
 
+#include "computer_player.h"
 #include "game.h"
 #include "game_player_info_data_packet.h"
 #include "interactive_player.h"
@@ -66,7 +67,6 @@ void Game_Player_Info_Data_Packet::Read(FileRead* fr, Game* game, Widelands_Map_
             for(uint i=0; i<4; i++) 
                plr->m_playercolor[i] = rgb[i];
          
-            // TODO: create computer players here
             if(type == Player::playerLocal) {
                // The interactive player might still be in existance
                // we do not delete it then, we reuse it
@@ -74,6 +74,8 @@ void Game_Player_Info_Data_Packet::Read(FileRead* fr, Game* game, Widelands_Map_
                   game->ipl = new Interactive_Player(game, plnum);
                   game->set_iabase(game->ipl);
                }
+            } else if (type == Player::playerAI) {
+               game->cpl.push_back(new Computer_Player(game,plnum));
             }
          }
       }

@@ -17,23 +17,25 @@
  *
  */
 
-#ifndef __S__GAME_DATA_PACKET_IDS_H
-#define __S__GAME_DATA_PACKET_IDS_H
+#ifndef __S__GAME_COMPUTER_PLAYER_DATA_PACKET_H
+#define __S__GAME_COMPUTER_PLAYER_DATA_PACKET_H
+
+#include "game_data_packet.h"
+
+class FileRead;
+class FileWrite;
+class Game;
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet
- * reader, all IDs are ushorts
+ * Informations about the computer players.
  */
-#define PACKET_GAME_CLASS_DATA           1
-#define PACKET_PLAYER_INFO_DATA          2
-#define PACKET_MAP_DATA                  3
-#define PACKET_PLAYER_ECONOMIES_DATA     4
-#define PACKET_CMD_QUEUE_DATA            5
-#define PACKET_INTERACTIVE_PLAYER_DATA   6
-#define PACKET_COMPUTER_PLAYER_DATA      7
+class Game_Computer_Player_Data_Packet : public Game_Data_Packet {
+   public:
+      virtual ~Game_Computer_Player_Data_Packet();
 
-#define PACKET_END_OF_GAME_DATA        254
+      virtual void Read(FileRead*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
+      virtual void Write(FileWrite*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
+      
+};
 
 #endif
-

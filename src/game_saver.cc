@@ -19,17 +19,8 @@
 
 #include "filesystem.h"
 #include "game.h"
-#include "game_saver.h"
-#include "interactive_player.h"
-#include "map.h"
-#include "overlay_manager.h"
-#include "player.h"
-#include "queue_cmd_factory.h"
-#include "transport.h"
-#include "widelands_map_saver.h"
-#include "widelands_map_loader.h"
-
 #include "game_cmd_queue_data_packet.h"
+#include "game_computer_player_data_packet.h"
 #include "game_data_packet_ids.h"
 #include "game_game_class_data_packet.h"
 #include "game_map_data_packet.h"
@@ -37,6 +28,7 @@
 #include "game_interactive_player_data_packet.h"
 #include "game_player_economies_data_packet.h"
 #include "game_player_info_data_packet.h"
+#include "game_saver.h"
 
 
 /*
@@ -100,88 +92,13 @@ void Game_Saver::save(void) throw(wexception) {
    delete gp;
    log(" done\n");
 
+   log("Game: Writing Computer Player Data ... ");
+   gp = new Game_Computer_Player_Data_Packet();
+   gp->Write(&fw, m_game, mos); 
+   delete gp;
+   log(" done\n");
+
    delete gmdp; // Deletes our map object saver
 
    fw.Write(g_fs, m_filename.c_str());
 }
-
-/*
-void Game_Saver::load(void) throw (wexception) {
-   FileRead fr;
-   Widelands_Map_Map_Object_Loader* m_mol;
-  
-   fr.Open(g_fs, m_filename.c_str());
-  
-   ALIVE();
-
-   // First of all, save some kind of header.
-   fr.Unsigned32();
-   fr.CString();
-
-   ALIVE();
-
-   // Now write the game
-   load_game_class(&fr);
-
-   ALIVE();
-   // Now Load the map as it would be a normal map saving
-   Widelands_Map_Loader wml(&fr, m_game->get_map());
-   int filepos = fr.GetFilePos();
-   
-   // Preload map
-   wml.preload_map(1);
-   // Reset filepos
-   fr.SetFilePos(filepos);
-
-   // Now create the players accordingly
-   for(uint i=0; i<m_game->get_map()->get_nrplayers(); i++) {
-      std::string name = m_game->get_map()->get_scenario_player_name(i+1);
-      std::string tribe = m_game->get_map()->get_scenario_player_tribe(i+1);
-      
-      if(name == "" && tribe == "") continue; // doesn't exists
-
-      log("Creating player %i: <%s> with tribe <%s>\n", i+1, m_game->get_map()->get_scenario_player_tribe(i+1).c_str(), m_game->get_map()->get_scenario_player_name(i+1).c_str());
-      m_game->add_player(i+1, i==0 ? Player::playerLocal : Player::playerAI, 
-            m_game->get_map()->get_scenario_player_tribe(i+1).c_str(),
-            m_game->get_map()->get_scenario_player_name(i+1).c_str());      // TODO: this must be saved somewhere 
-      m_game->get_player(i+1)->init(m_game,0); 
-   }
-  
-   // Now load the map
-   wml.load_map_complete(m_game, true);
-   ALIVE();
-   m_mol=wml.get_map_object_loader();
-   ALIVE();
-   
-     log(" Loading player economies!\n");
-   Map* map=m_game->get_map();
-   for(uint i=1; i<=m_game->get_map()->get_nrplayers(); i++) {
-      Player* plr=m_game->get_player(i);
-      if(!plr) continue;
-
-      uint nr_economies=fr.Unsigned16();
-      assert(nr_economies == plr->m_economies.size());
-
-      std::vector<Economy*> ecos;
-      ecos.resize(nr_economies);
-
-      for(uint j=0; j<plr->m_economies.size(); j++) {
-         int x=fr.Unsigned16();
-         int y=fr.Unsigned16();
-         Flag* flag=static_cast<Flag*>(map->get_field(Coords(x,y))->get_immovable());
-         assert(flag);
-         ecos[j]=flag->get_economy();
-      }
-      for(uint i=0; i<ecos.size(); i++) { 
-         plr->m_economies[i]=ecos[i];
-         ecos[i]->balance_requestsupply(); // Issue first balance
-      }
-   }
-
-   // Now write the command queue
-   ALIVE();
-   load_cmd_queue_class(&fr, m_mol);
-   ALIVE();
-
-}
-*/
