@@ -95,8 +95,6 @@ widelands_SOURCES=main.cc \
                   widelands.h \
                   building.h \
                   building.cc \
-                  creature.h \
-                  creature.cc \
                   instances.h \
                   instances.cc \
                   ware.h \
