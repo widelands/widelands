@@ -19,6 +19,7 @@
 
 #include "editor_game_base.h"
 #include "font_handler.h"
+#include "graphic.h"
 #include "player.h"
 #include "rendertarget.h"
 #include "tribe.h"
@@ -192,9 +193,18 @@ void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stoc
 		pic = wd->get_menu_pic();
 	}
 
+   // Draw a background
+   int picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png", false);
+   int w, h;
+   g_gr->get_picture_size(picid, &w, &h);
+   
+   dst->blit(x, y, picid); 
+   
+   int posx = x + (w - WARE_MENU_PIC_W)/2;
+   int posy = y + 1;
 	// Draw it
-	dst->blit(x, y, pic);
-	dst->fill_rect(x, y+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, RGBColor(0, 0, 0));
+	dst->blit(posx, posy, pic);
+	dst->fill_rect(posx, posy+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, RGBColor(0, 0, 0));
 
 	char buf[32];
 	snprintf(buf, sizeof(buf), "%i", stock);
