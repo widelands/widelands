@@ -21,9 +21,14 @@
 #define __COMPPLAYER_H
 
 #include "game.h"
+#include <list>
+#include <map>
+#include <string>
 
 class Player;
 class PlayerImmovable;
+class Tribe_Descr;
+class Road;
 
 class Computer_Player {
 	public:
@@ -34,17 +39,86 @@ class Computer_Player {
 		
 		void gain_immovable (PlayerImmovable*);
 		void lose_immovable (PlayerImmovable*);
+		
+		void gain_field (const FCoords&);
+		void lose_field (const FCoords&);
 
-		inline Game *get_game() { return m_game; }
-		inline uchar get_player_number(void) { return m_player_number; }
-		inline Player *get_player() { assert(m_game); return m_game->get_player(m_player_number) ; }
+		inline Game *get_game() { return game; }
+		inline uchar get_player_number(void) { return player_number; }
+		inline Player *get_player() { assert(game); return game->get_player(player_number) ; }
 
 	private:
 		void gain_building (Building*);
 		void lose_building (Building*);
 		
-		Game*		m_game;
-		uchar		m_player_number;
+		void connect_flag_to_another_economy (Flag*);
+		
+		struct BuildableField:FCoords {
+			bool			reachable;
+			
+			unsigned char		unowned_land;
+			
+			unsigned char		trees;
+			unsigned char		stones;
+
+			unsigned char		frontierhouses;
+			unsigned char		lumberjacks;
+			unsigned char		foresters;
+			unsigned char		quarries;
+			
+			BuildableField (const FCoords& fc):FCoords (fc)
+			{
+			    reachable=false;
+			    unowned_land=0;
+			    trees=stones=0;
+			    frontierhouses=lumberjacks=foresters=quarries=0;
+			}
+		};
+		
+		struct MineableField:FCoords {
+			MineableField (const FCoords& fc):FCoords (fc) {}
+		};
+		
+		struct EconomyObserver {
+			Economy*		economy;
+			std::list<Flag*>	flags;
+			
+			EconomyObserver (Economy* e) { economy=e; }
+		};
+		
+		struct BuildingObserver {
+			int			id;
+			bool			is_constructionsite;
+			
+			int			cnt_built;
+			int			cnt_under_construction;
+			
+			int get_total_count()
+			{ return cnt_built + cnt_under_construction; }
+		};
+		
+		Game*				game;
+		Map*				map;
+		
+		uchar				player_number;
+		Player*				player;
+		Tribe_Descr*			tribe;
+		
+		std::map<std::string,BuildingObserver>	buildings;
+		int				total_constructionsites;
+		
+		std::list<FCoords>		unusable_fields;
+		std::list<BuildableField>	buildable_fields;
+		std::list<MineableField>	mineable_fields;
+		std::list<Flag*>		new_flags;
+		std::list<Road*>		roads;
+		std::list<EconomyObserver>	economies;
+		
+		EconomyObserver& get_economy_observer (Economy*);
+		
+		int				delay_frontierhouse;
+		
+		void update_buildable_field (BuildableField&);
 };
 
 

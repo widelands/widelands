@@ -224,35 +224,37 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 	MapRegion mr(m_map, coords, radius);
 	Field* f;
 
-	while((f = mr.next()))
-	{
-      if(conquer) {
-         if (f->get_owned_by() == playernr)
-            continue;
-         if (!f->get_owned_by()) {
-            f->set_owned_by(playernr);
-            continue;
-         }
-
-
-         // TODO: add support here what to do if some fields are already
-         // occupied by another player
-         // Probably the best thing to just don't grab it. Players should fight
-         // for their land.
-         // Too simple. What should be done when too HQ are too close and the area interact.
-         // Also, when one user gets close to another, he might not be able to see a military building
-         // when his land doesn't increase
-         //cerr << "warning: already occupied field is claimed by another user!" << endl;
-      } else {
-         if(f->get_owned_by() != playernr) continue;
-         f->set_owned_by(0);
-      }
-   }
+	while((f = mr.next())) {
+		if(conquer) {
+			if (f->get_owned_by() == playernr)
+				continue;
+			
+			if (!f->get_owned_by()) {
+				f->set_owned_by(playernr);
+				player_field_notification (m_map->get_fcoords(f), GAIN);
+				continue;
+			}
+			// TODO: add support here what to do if some fields are already
+			// occupied by another player
+			// Probably the best thing to just don't grab it. Players should fight
+			// for their land.
+			// Too simple. What should be done when too HQ are too close and the area interact.
+			// Also, when one user gets close to another, he might not be able to see a military building
+			// when his land doesn't increase
+			//cerr << "warning: already occupied field is claimed by another user!" << endl;
+		} else {
+			if(f->get_owned_by() != playernr)
+				continue;
+				
+			player_field_notification (m_map->get_fcoords(f), LOSE);
+			f->set_owned_by(0);
+		}
+	}
 
 	Player *player = get_player(playernr);
 
-   if(is_game()) // For editor all fields are visible and players don't manage view area at the moment (may change)
-      player->set_area_seen(coords, radius+4, true);
+	if(is_game()) // For editor all fields are visible and players don't manage view area at the moment (may change)
+		player->set_area_seen(coords, radius+4, true);
 
 	m_map->recalc_for_field_area(coords, radius);
 }

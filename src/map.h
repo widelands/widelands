@@ -214,7 +214,8 @@ public:
 	inline Field* get_field(const Coords c);
 	inline FCoords get_fcoords(const Coords c);
 	inline void normalize_coords(Coords *c);
-	inline void get_coords(Field * const f, Coords *c);
+	inline FCoords get_fcoords(Field * const f);
+	inline void get_coords(Field * const f, Coords *c) { *c=get_fcoords(f); }
 
 	int calc_distance(Coords a, Coords b);
 	int is_neighbour(const Coords start, const Coords end);
@@ -681,11 +682,16 @@ inline void Map::normalize_coords(Coords* c)
  *
  * Calculate the field coordates from the pointer
  */
-inline void Map::get_coords(Field * const f, Coords *c)
+inline FCoords Map::get_fcoords(Field * const f)
 {
 	int i = f - m_fields;
-	c->x = i % m_width;
-	c->y = i / m_width;
+	FCoords fc;
+	
+	fc.x = i % m_width;
+	fc.y = i / m_width;
+	fc.field = f;
+	
+	return fc;
 }
 
 

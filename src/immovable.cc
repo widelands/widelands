@@ -67,7 +67,7 @@ Only call this during init.
 void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 {
 	Field *f = g->get_map()->get_field(c);
-
+	
 	if (f->immovable) {
 		BaseImmovable *other = f->immovable;
 

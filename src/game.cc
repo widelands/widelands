@@ -331,6 +331,16 @@ void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
 				cpl[i]->lose_immovable (pi);
 }
 
+void Game::player_field_notification (const FCoords& fc, losegain_t lg)
+{
+	for (unsigned int i=0;i<cpl.size();i++)
+		if (cpl[i]->get_player_number()==fc.field->get_owned_by())
+			if (lg==GAIN)
+				cpl[i]->gain_field (fc);
+			else
+				cpl[i]->lose_field (fc);
+}
+
 /*
 ===============
 Game::send_player_command
