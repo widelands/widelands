@@ -22,6 +22,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>
+#ifdef WIN32
+#include <direct.h>
+#endif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -202,7 +205,11 @@ const char* File_Locator::get_new_filename(const char* file, const int type) {
 					 if(type != -1) {
 								strcat(retval, subdirs[type]);
 								// Create the subdir, if it doesn't exists already
+#ifndef WIN32
 								mkdir(retval, 0x1FF);
+#else
+								mkdir(retval);
+#endif
 					 }
 					 strcat(retval, file);
 
