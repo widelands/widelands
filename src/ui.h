@@ -103,8 +103,9 @@ public:
 class Panel : public UIObject {
 public:
 	enum {
-		pf_handle_mouse = 1,
-		pf_think = 2,
+		pf_handle_mouse = 1, // receive mouse events
+		pf_think = 2, // call think() function during run
+		pf_top_on_click = 4, // bring panel on top when clicked inside it
 	};
 
 	Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh);
@@ -139,6 +140,8 @@ public:
 	inline int get_inner_w() const { return _w-(_lborder+_rborder); }
 	inline int get_inner_h() const { return _h-(_tborder+_bborder); }
 
+	void move_to_top();
+
 	// Drawing, visibility
 	virtual void draw(Bitmap *dst, int ofsx, int ofsy);
 	virtual void draw_border(Bitmap *dst, int ofsx, int ofsy);
@@ -159,6 +162,12 @@ public:
 
 	void set_think(bool yes);
 	inline bool get_think() const { return _flags & pf_think; }
+
+	inline void set_top_on_click(bool on) {
+		if (on) _flags |= pf_top_on_click;
+		else _flags &= ~pf_top_on_click;
+	}
+	inline bool get_top_on_click() const { return _flags & pf_top_on_click; }
 
 private:
 	void do_draw(Bitmap *dst, int ofsx, int ofsy);

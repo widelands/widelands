@@ -22,13 +22,19 @@
 #include "fieldaction.h"
 #include "map.h"
 #include "IntPlayer.h"
+#include "watchwindow.h"
 
 class FieldActionWindow : public Window {
 public:
 	FieldActionWindow(Interactive_Player *plr, int fx, int fy, Window **registry);
 	~FieldActionWindow();
 
+	// Action handlers
+	void act_watch();
+
 private:
+	void act(int action);
+
 	Interactive_Player *_player;
 	int _fx, _fy;
 	Window **_registry;
@@ -57,6 +63,8 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, int fx, int fy, Wi
 	Button *b;
 
 	b = new Button(this, 0, 0, 34, 34, 2);
+	b->clicked.set(this, &FieldActionWindow::act_watch);
+	b->set_pic(g_fh.get_string("WATCH", 0));
 
 	b = new Button(this, 34, 0, 34, 34, 2);
 }
@@ -69,6 +77,16 @@ FieldActionWindow::~FieldActionWindow()
 {
 	if (_registry)
 		*_registry = 0;
+}
+
+/** FieldActionWindow::act_watch()
+ *
+ * Open a watch window for the given field and delete self.
+ */
+void FieldActionWindow::act_watch()
+{
+	show_watch_window(_player, _fx, _fy);
+	delete this;
 }
 
 /** show_field_action(Interactive_Player *parent, int fx, int fy, Window **registry)

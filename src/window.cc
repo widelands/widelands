@@ -73,6 +73,7 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
 
 	set_border(WINDOW_BORDER, WINDOW_BORDER, WINDOW_BORDER, WINDOW_BORDER);
 	set_cache(true);
+	set_top_on_click(true);
 }
 
 /** Window::~Window()

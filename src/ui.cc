@@ -256,6 +256,35 @@ void Panel::set_border(uint l, uint r, uint t, uint b)
 	update(0, 0, get_w(), get_h());
 }
 
+/** Panel::move_to_top()
+ *
+ * Make this panel the top-most panel in the parent's Z-order.
+ */
+void Panel::move_to_top()
+{
+	if (!_parent)
+		return;
+
+	// unlink
+	if (_prev)
+		_prev->_next = _next;
+	else
+		_parent->_fchild = _next;
+	if (_next)
+		_next->_prev = _prev;
+	else
+		_parent->_lchild = _prev;
+
+	// relink
+	_prev = 0;
+	_next = _parent->_fchild;
+	_parent->_fchild = this;
+	if (_next)
+		_next->_prev = this;
+	else
+		_parent->_lchild = this;
+}
+
 /** Panel::draw(Bitmap *dst, int ofsx, int ofsy) [virtual]
  *
  * Redraw the panel. Note that all drawing coordinates are relative to the
@@ -599,6 +628,9 @@ bool Panel::do_mouseclick(uint btn, bool down, int x, int y)
 {
 	x -= _lborder;
 	y -= _tborder;
+
+	if (down && (_flags & pf_top_on_click))
+		move_to_top();
 
 	if (_g_mousegrab == this)
 		return handle_mouseclick(btn, down, x, y);
