@@ -8,7 +8,7 @@ CXXFLAGS= $(EXTRA_FLAGS)
 EXTRA_DIST=README
 
 bin_PROGRAMS=wtfcreate
-wtfcreate_LDADD =@SDL_LIBS@  ../src/md5file.o ../src/myfile.o ../src/md5.o ../src/helper.o ../src/profile.o ../src/growablearray.o ../src/pic.o -lefence  
+wtfcreate_LDADD =@SDL_LIBS@  ../src/md5file.o ../src/myfile.o ../src/md5.o ../src/helper.o ../src/profile.o ../src/growablearray.o ../src/pic.o 
 wtfcreate_SOURCES=main.cc \
                   building_descr.h \
                   building_descr.cc \
