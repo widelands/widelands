@@ -39,6 +39,10 @@ WordFile
 #define WLWF_VERSIONMAJOR(a)	(a >> 8)
 #define WLWF_VERSIONMINOR(a)	(a & 0xFF)
 
+#ifdef _MSC_VER
+#pragma pack(push, 1)
+#endif
+
 struct WorldFileHeader
 {
 	char magic[6];			// "WLwf\0\0"
@@ -93,7 +97,7 @@ struct ResourceDesc
 	//?
 };
 
-enum PictureType
+/*enum PictureType
 {
 	PIC_OTHER,
 	PIC_TERRAIN,
@@ -101,13 +105,13 @@ enum PictureType
 	FORCE_DWORD = 0x7FFFFFF		// trying to force this enum to compile
 								// to same size on different compilers;
 								// we'll see if it works
-};
+};*/
 
 struct PictureInfo
 {
 	// name & type: not really needed, but safe, editor- & debugger-friendly
 	char name[16];
-	PictureType type;		// terrain-texture/bob-picture/resource-picture
+//	PictureType type;		// terrain-texture/bob-picture/resource-picture
 	
 	uint width;
 	uint height;
@@ -121,5 +125,9 @@ struct Anim
 	uint pics;
 	uint* pic;
 };
+
+#ifdef _MSC_VER
+#pragma pack(pop)
+#endif
 
 #endif //__WORLDFILETYPES_H

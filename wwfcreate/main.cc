@@ -4,6 +4,7 @@
 #include "../src/worldfiletypes.h"
 #include "../src/myfile.h"
 #include "confreader.h"
+#include "picturereader.h"
 
 #define CONF_NAME		"conf"
 #define PICTURE_DIR		"pics"
@@ -31,7 +32,11 @@ void wwfcreate(Binary_file* output)
 	char confName[1024];
 	strcpy(confName, dirname);
 	strcat(confName, CONF_NAME);
+	char picsName[1024];
+	strcpy(picsName, dirname);
+	strcat(picsName, PICTURE_DIR);
 	Conf_Reader* conf = new Conf_Reader(confName);
+	Picture_Reader* pics = new Picture_Reader(picsName);
 	
 	// first, the header.
 	const WorldFileHeader* head = conf->get_header();
@@ -50,7 +55,15 @@ void wwfcreate(Binary_file* output)
 	{
 		const char* picName = conf->get_texture(m);
 		// read + write pics
-		printf("picture writing not implemented:\t#%i\t(%s)\n", m, picName);
+		PictureInfo info;
+		ushort* pixels;
+		pics->read_picture(picName, &info, &pixels);
+		output->write(&info, sizeof(PictureInfo));
+		output->write(pixels, info.width*info.height*sizeof(ushort));
+		if (!info.name[0])
+			printf("problems with picture #%i (%s)\n", m, picName);
+		delete pixels;
+		//printf("picture writing not implemented:\t#%i\t(%s)\n", m, picName);
 	}
 	delete conf;
 }

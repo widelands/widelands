@@ -23,6 +23,10 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifndef WIN32
+#define strcmpi		strcasecmp
+#endif
+
 #define TRUE_WORDS 3
 char* trueWords[TRUE_WORDS] =
 {
@@ -49,19 +53,10 @@ inline char* ltrim(char* str)
 
 inline char* setEndAt(char* str, char c)
 {
-	int i = 0;
-	while (str[i] != c && str[i])
-		i++;
-	str[i] = 0;
+	char* s = strchr(str, c);
+	if (s)
+		s[0] = 0;
 	return str;
-}
-
-inline char* setStartAfter(char* str, char c)
-{
-	int i = 0;
-	while (str[i] != c && str[i])
-		i++;
-	return strcpy(str, str + i + 1);
 }
 
 Profile::Profile(const char* filename)
@@ -72,10 +67,12 @@ Profile::Profile(const char* filename)
 	char line[1024];
 	char inSection[MAX_NAME_LEN];
 	inSection[0] = 0;
+	uint lineNr = 0;
 	while (file->read_line(line, 1024) >= 0)
 	{
+		lineNr++;
 		ltrim(line);
-		if (line[0] == '#')
+		if (line[0] == '#' || line[0] == 0)
 			continue;
 		else if (line[0] == '[')
 		{
@@ -84,18 +81,21 @@ Profile::Profile(const char* filename)
 		}
 		else
 		{
-			Value* val = new Value();
-			//section:
-			strcpy(val->section, inSection);
-			//name:
-			strncpy(val->name, line, MAX_NAME_LEN);
-			val->name[MAX_NAME_LEN-1] = 0;
-			setEndAt(val->name, '=');
-			//value:
-			setStartAfter(line, '=');
-			strncpy(val->val, line, MAX_VAL_LEN);
-			val->val[MAX_VAL_LEN-1] = 0;
-			values->add(val);
+			char* tail = strchr(line, '=');
+			if (tail)
+			{
+				tail[0] = 0;
+				tail++;
+				Value* val = new Value();
+				strcpy(val->section, inSection);
+				strncpy(val->name, line, MAX_NAME_LEN);
+				val->name[MAX_NAME_LEN-1] = 0;
+				strncpy(val->val, tail, MAX_VAL_LEN);
+				val->val[MAX_VAL_LEN-1] = 0;
+				values->add(val);
+			}
+			else
+				printf("profile %s: error in line #%i\n", filename, lineNr);
 		}
 	}
 	
@@ -112,8 +112,8 @@ Profile::Value* Profile::get_val(const char* section, const char* name)
 	for (int i=0; i<values->elements(); i++)
 	{
 		Value* v = (Value*)values->element_at(i);
-		if (strcmp(v->name, name) == 0)
-			if (strcmp(v->section, section) == 0)
+		if (strcmpi(v->name, name) == 0)
+			if (strcmpi(v->section, section) == 0)
 				return v;
 	}
 	return NULL;
@@ -135,10 +135,10 @@ bool Profile::get_boolean(const char* section, const char* name, bool def)
 //	if (atoi(v->val))
 //		return true;		// things like "0001" are true
 	for (int i=0; i<TRUE_WORDS; i++)
-		if (strcmp(v->val, trueWords[i]))
+		if (strcmpi(v->val, trueWords[i]))
 			return true;
 	for (int j=0; j<FALSE_WORDS; j++)
-		if (strcmp(v->val, falseWords[j]))
+		if (strcmpi(v->val, falseWords[j]))
 			return false;
 	return def;
 }
