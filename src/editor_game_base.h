@@ -126,4 +126,6 @@ class Editor_Game_Base {
 		std::map<uint, void*>		m_trackpointers;
 };
 
+extern const uchar g_playercolors[MAX_PLAYERS][12];
+
 #endif // __S__EDITOR_GAME_BASE_H

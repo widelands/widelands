@@ -528,6 +528,7 @@ uint Soldier::get_level(tAttribute at)
 		case atrAttack:	return m_attack_level;
 		case atrDefense:return m_defense_level;
 		case atrEvade:	return m_evade_level;
+      case atrTotal: return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	}
 	throw wexception ("Soldier::get_level attribute not identified.)");
 }

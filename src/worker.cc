@@ -3223,7 +3223,7 @@ void Worker::fugitive_update(Game* g, State* state)
 		{
 			bool use = false;
 
-			if ((g->logic_rand() % 30) <= (30 - bestdist))
+			if ( (int)((g->logic_rand() % 30)) <= (30 - bestdist))
 				use = true;
 
 			// okay, move towards the flag of this warehouse

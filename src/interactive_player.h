@@ -46,6 +46,15 @@ class Interactive_Player : public Interactive_Base {
          Coords pos; 
       };
       typedef std::vector<std::vector< Building_Stats > > BuildingStats ;
+      struct General_Stats {
+         std::vector< uint > land_size;
+         std::vector< uint > nr_workers;
+         std::vector< uint > nr_buildings;
+         std::vector< uint > nr_wares;
+         std::vector< uint > productivity;
+         std::vector< uint > nr_kills;
+         std::vector< uint > miltary_strength;
+      };
 
    public:
 		Interactive_Player(Game *g, uchar pln);
@@ -82,7 +91,8 @@ class Interactive_Player : public Interactive_Base {
       void gain_immovable(PlayerImmovable* );
       void lose_immovable(PlayerImmovable* );
       const std::vector< Building_Stats >&  get_building_statistics( int i ) { return m_building_stats[i]; }
-            
+      const std::vector< General_Stats>& get_general_statistics( void ) { return m_general_stats; }
+
       // For load
       virtual void cleanup_for_load( void );
       
@@ -96,10 +106,14 @@ class Interactive_Player : public Interactive_Base {
       UIUniqueWindowRegistry	m_fieldaction;
 
       std::vector<uint> m_current_statistics;
-      std::vector< std::vector<uint> > m_ware_productions; 
+      std::vector< std::vector<uint> > m_ware_productions;
       uint  m_last_stats_update;    
 
       BuildingStats m_building_stats;
+      std::vector< General_Stats > m_general_stats;
+
+   private:
+      void sample_statistics( void );
 };
 
 

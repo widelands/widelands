@@ -26,16 +26,20 @@
 #include "game_loader.h"
 #include "game_main_menu_save_game.h"
 #include "game_main_menu_load_game.h"
+#include "general_statistics_menu.h"
 #include "interactive_player.h"
 #include "keycodes.h"
 #include "immovable.h"
 #include "mapview.h"
 #include "player.h"
+#include "productionsite.h"
 #include "ui_editbox.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "overlay_manager.h"
+#include "soldier.h"
+#include "transport.h"
 #include "tribe.h"
 #include "ware_statistics_menu.h"
 
@@ -57,6 +61,7 @@ private:
    UIUniqueWindowRegistry m_saveload;
    UIUniqueWindowRegistry m_wares_statistics;
    UIUniqueWindowRegistry m_buildings_statistics;
+   UIUniqueWindowRegistry m_general_statistics;
 	Interactive_Player	*m_player;
    void clicked(int);
 };
@@ -88,7 +93,11 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    b=new UIButton(this, 5, 80, get_inner_w()-10, 20, 0, 4);
    b->set_title("Buildings Statistics");
    b->clickedid.set(this, &GameMainMenu::clicked);
-    
+   
+   b=new UIButton(this, 5, 105, get_inner_w()-10, 20, 0, 5);
+   b->set_title("Comparative Statistics");
+   b->clickedid.set(this, &GameMainMenu::clicked);
+     
 	if (get_usedefaultpos())
 		center_to_parent();
 }
@@ -112,6 +121,11 @@ void GameMainMenu::clicked(int n) {
       case 4:
          // Building statistics
          new Building_Statistics_Menu(m_player, &m_buildings_statistics);
+         break;
+
+      case 5:
+         // General Statistics 
+         new General_Statistics_Menu(m_player, &m_general_statistics);
          break;
    }
 }
@@ -201,6 +215,120 @@ Interactive_Player::~Interactive_Player(void)
 {
 }
 
+/*
+ * Sample all satistics data
+ */
+void Interactive_Player::sample_statistics( void ) {
+   // Update ware stats
+   next_ware_production_period();
+
+   // Update general stats
+   Map* map = get_game()->get_map(); 
+   std::vector< uint > land_size; land_size.resize( map->get_nrplayers() );
+   std::vector< uint > nr_buildings; nr_buildings.resize( map->get_nrplayers() );
+   std::vector< uint > nr_kills; nr_kills.resize( map->get_nrplayers() );
+   std::vector< uint > miltary_strength; miltary_strength.resize( map->get_nrplayers() );
+   std::vector< uint > nr_workers; nr_workers.resize( map->get_nrplayers() );
+   std::vector< uint > nr_wares; nr_wares.resize( map->get_nrplayers() );
+   std::vector< uint > productivity; productivity.resize( map->get_nrplayers() );
+
+   std::vector< uint > nr_production_sites; nr_production_sites.resize( map->get_nrplayers() );
+
+   // We walk the map, to gain all needed informations
+   for( ushort y = 0; y < map->get_height(); y++) {
+      for(ushort x = 0; x < map->get_width(); x++) {
+         Field* f = map->get_field( Coords( x, y ) );
+
+         // First, ownership of this field
+         if( f->get_owned_by() ) 
+            land_size[ f->get_owned_by()-1 ]++;
+
+         // Get the immovable
+         BaseImmovable* imm = f->get_immovable();
+         if(imm && imm->get_type() == Map_Object::BUILDING) {
+            Building* build = static_cast<Building*>(imm);
+            if( build->get_position() == Coords(x,y)) { // only main location is intresting
+
+               // Ok, count the building
+               nr_buildings[ build->get_owner()->get_player_number() - 1 ]++;
+
+               // If it is a productionsite, add it's productivity
+               if( build->get_building_type() == Building::PRODUCTIONSITE ) {
+                  nr_production_sites[  build->get_owner()->get_player_number() - 1 ]++;
+                  productivity[  build->get_owner()->get_player_number() - 1 ] += static_cast<ProductionSite*>( build )->get_statistics_percent();
+               }
+            }
+         }
+
+
+         // Now, walk the bobs
+         if( f->get_first_bob() ) { 
+            Bob* b = f->get_first_bob();
+            do {
+               if( b->get_bob_type() == Bob::WORKER ) {
+                  Worker* w = static_cast<Worker*>(b);
+
+                  switch( w->get_worker_type() ) {
+                     case Worker_Descr::SOLDIER:
+                        {
+                           Soldier* s = static_cast<Soldier*>(w);
+                           uint calc_level = s->get_level(atrTotal) + 1; // So that level 0 loosers also count something
+                           miltary_strength[ s->get_owner()->get_player_number() -1 ] += calc_level;
+                        }
+                        break;
+
+                     default: break;
+                  }
+
+               }
+            } while( (b = b->get_next_bob() ) ); 
+         }
+      }
+   }
+
+   // Number of workers / wares
+   for( uint i = 0; i < map->get_nrplayers(); i++) {
+      Player* plr = get_game()->get_player(i+1);
+
+      uint wostock = 0;
+      uint wastock = 0;
+
+      for( uint j = 0; plr && j < plr->get_nr_economies(); j++) {
+         Economy* eco = plr->get_economy_by_number( j );
+
+         for( int wareid = 0; wareid < plr->get_tribe()->get_nrwares(); wareid++) 
+            wastock += eco->stock_ware( wareid );
+         for( int workerid = 0; workerid < plr->get_tribe()->get_nrworkers(); workerid++) {
+            if( plr->get_tribe()->get_worker_descr( workerid )->get_worker_type() == Worker_Descr::CARRIER) 
+               continue;
+            wostock += eco->stock_worker( workerid );
+         }
+      }
+      nr_wares[ i ] = wastock;
+      nr_workers[ i ] = wostock;
+   }
+
+   // Now, divide the statistics
+   for( uint i = 0; i < map->get_nrplayers(); i++) {
+      if( productivity[ i ] ) 
+         productivity[ i ] /= nr_production_sites[ i ];
+   }
+
+   // Now, push this on the general statistics
+   m_general_stats.resize( map->get_nrplayers() );
+   for( uint i = 0; i < map->get_nrplayers(); i++) {
+      m_general_stats[i].land_size.push_back( land_size[i] );
+      m_general_stats[i].nr_buildings.push_back( nr_buildings[i] );
+      m_general_stats[i].nr_kills.push_back( nr_kills[i] ); 
+      m_general_stats[i].miltary_strength.push_back( miltary_strength[i] ); 
+      m_general_stats[i].nr_workers.push_back( nr_workers[i] ); 
+      m_general_stats[i].nr_wares.push_back( nr_wares[i]  ); 
+      m_general_stats[i].productivity.push_back( productivity[i] ); 
+   }
+
+   // Update last stats time
+   m_last_stats_update = m_game->get_gametime();
+}
 
 /*
 ===============
@@ -211,25 +339,22 @@ Update the speed display.
 */
 void Interactive_Player::think()
 {
-	Interactive_Base::think();
+   Interactive_Base::think();
 
-	// Draw speed display
-	int speed = m_game->get_speed();
-	char buf[32] = "";
+   // Draw speed display
+   int speed = m_game->get_speed();
+   char buf[32] = "";
 
-	if (!speed)
-		strcpy(buf, "PAUSE");
-	else if (speed > 1)
-		snprintf(buf, sizeof(buf), "%ix", speed);
+   if (!speed)
+      strcpy(buf, "PAUSE");
+   else if (speed > 1)
+      snprintf(buf, sizeof(buf), "%ix", speed);
 
-	m_label_speed->set_text(buf);
+   m_label_speed->set_text(buf);
 
    // Reset our statistics counting
-   if(m_game->get_gametime()-m_last_stats_update > STATISTICS_SAMPLE_TIME) { 
-      next_ware_production_period();
-      m_last_stats_update = m_game->get_gametime();
-   }
-   
+   if(m_game->get_gametime()-m_last_stats_update > STATISTICS_SAMPLE_TIME) 
+      sample_statistics();
 }
 
 
@@ -254,8 +379,7 @@ void Interactive_Player::start()
    // Recalc whole map for changed owner stuff
    get_map()->recalc_whole_map();
 
-   m_last_stats_update = m_game->get_gametime();
-   next_ware_production_period();
+   sample_statistics();
 }
 
 /*
@@ -497,4 +621,5 @@ void Interactive_Player::lose_immovable( PlayerImmovable* imm ) {
  */
 void Interactive_Player::cleanup_for_load( void ) {
    m_building_stats.clear();
+   m_general_stats.clear();
 }

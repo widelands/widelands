@@ -667,6 +667,10 @@ public:
       return false;
    }
 
+   // Informations over this economy
+   int stock_ware( int id ) { return m_wares.stock(id); }
+   int stock_worker( int id ) { return m_workers.stock(id); }
+   
    // Called by cmd queue
    void balance_requestsupply();
 

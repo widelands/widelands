@@ -106,7 +106,8 @@ class Player {
       void remove_economy(Economy*);
       bool has_economy(Economy*);
       int get_economy_number(Economy*); // for savegames
-      Economy* get_economy_by_number(int i) { return m_economies[i]; } // for loading
+      inline Economy* get_economy_by_number(int i) { return m_economies[i]; } // for loading
+      inline uint get_nr_economies( void ) { return m_economies.size(); } 
 
 		// Military stuff
       void drop_soldier(PlayerImmovable* imm, Soldier* worker);

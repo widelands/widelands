@@ -73,7 +73,7 @@ Computer_Player::~Computer_Player ()
 
 void Computer_Player::think ()
 {
-	/* update our fields
+	/* update our fields 
 	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end();) {
 		// check whether we lost ownership of the field
 		if (i->field->get_owned_by()!=player_number) {
@@ -328,7 +328,7 @@ void Computer_Player::think ()
 		roads.push_back (roads.front());
 		roads.pop_front ();
 	}
-   */
+*/  
 }
 
 struct FindFieldUnowned:FindField {

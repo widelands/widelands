@@ -597,7 +597,8 @@ void TrainingSite::find_next_program (Game *g) {
 				case atrAttack:		level += m_pri_attack_mod; break;
 				case atrDefense:	level += m_pri_defense_mod; break;
 				case atrEvade:		level += m_pri_evade_mod; break;
-			}
+            case atrTotal: break;
+         }
 
 			if ((level >= 0) && (level <= MAX_level)) {
 				sprintf (buf, "%s%d", (m_list_upgrades[i]).c_str(), level);
@@ -613,6 +614,7 @@ void TrainingSite::find_next_program (Game *g) {
 				case atrAttack:	m_pri_attack_mod = 0; break;
 				case atrDefense:	m_pri_defense_mod = 0; break;
 				case atrEvade:		m_pri_evade_mod = 0; break;
+            case atrTotal: break;
 			}
 		} else {
 

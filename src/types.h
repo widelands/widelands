@@ -30,7 +30,8 @@ enum tAttribute {
     atrHP = 0,   
     atrAttack,   
     atrDefense,  
-    atrEvade   
+    atrEvade,
+    atrTotal = 100
 };
 
 
