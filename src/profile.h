@@ -73,10 +73,10 @@ public:
 	typedef std::vector<Value> Value_list;
 
 private:
-	Profile	*m_profile;
-	bool		m_used;
-	char		*m_section_name;
-	Value_list m_values;
+	Profile*		m_profile;
+	bool			m_used;
+	char*			m_section_name;
+	Value_list	m_values;
 
 public:
 	Section(Profile *prof, const char *name);
@@ -87,6 +87,7 @@ public:
 
 	Value *get_val(const char *name);
 	Value *get_next_val(const char *name);
+	uint get_num_values() const { return m_values.size(); }
 
 	const char *get_name() const;
 

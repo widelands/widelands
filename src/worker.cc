@@ -183,6 +183,10 @@ void WorkerProgram::parse(Parser* parser, std::string name)
 			throw wexception("Line %i: %s", idx, e.what());
 		}
 	}
+
+	// Check for line numbering problems
+	if (sprogram->get_num_values() != m_actions.size())
+		throw wexception("Line numbers appears to be bad");
 }
 
 

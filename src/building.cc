@@ -1923,6 +1923,10 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
 
 		m_actions.push_back(act);
 	}
+
+	// Check for numbering problems
+	if (sprogram->get_num_values() != m_actions.size())
+		throw wexception("Line numbers appears to be bad");
 }
 
 

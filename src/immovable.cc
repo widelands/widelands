@@ -245,6 +245,10 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 		}
 	}
 
+	if (s->get_num_values() != m_actions.size())
+		log("WARNING: %s:%s: program line numbers appear to be wrong\n",
+			directory.c_str(), m_name.c_str());
+
 	// Fallback (default) program
 	if (!m_actions.size())
 	{
