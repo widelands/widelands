@@ -161,6 +161,8 @@ class Map {
 					
 					int calc_distance(Coords a, Coords b);
 
+					int is_neighbour(const Coords start, const Coords end);
+					
                inline void get_ln(const int fx, const int fy, int *ox, int *oy);
                inline void get_ln(const Coords f, Coords * const o);
 					inline void get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
@@ -186,6 +188,9 @@ class Map {
 					inline void get_brn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 					inline void get_brn(const FCoords f, FCoords * const o);
 
+					void get_neighbour(const Coords f, int dir, Coords * const o);
+					void get_neighbour(const FCoords f, int dir, FCoords * const o);
+					
 					// Field/screen coordinates
 					inline void get_basepix(const Coords fc, int *px, int *py);
 					inline void get_basepix(const int fx, const int fy, int *px, int *py);
@@ -195,7 +200,8 @@ class Map {
 					inline void get_pix(const int fx, const int fy, int *px, int *py);
 
 					// Pathfinding
-					int findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path);
+					int findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path,
+					             Player *player = 0, bool roadfind = false, const std::vector<Coords> *forbidden = 0);
 					
 					bool can_reach_by_water(Coords field);
 					
@@ -230,13 +236,14 @@ class Path {
 	
 public:
 	Path() { m_map = 0; }
+	Path(Map *map, Coords c) : m_map(map), m_start(c), m_end(c) { }
 	
 	inline Map *get_map() const { return m_map; }
 	
 	inline bool is_valid() const { return m_map; }
 	inline const Coords &get_start() const { return m_start; }
 	inline const Coords &get_end() const { return m_end; }
-
+	
 	inline int get_nsteps() const { return m_path.size(); }
 	inline char get_step(int idx) const { return m_path[m_path.size()-idx-1]; }
 	
@@ -247,6 +254,32 @@ private:
 	std::vector<char> m_path;
 };
 
+// CoordPath is an extended path that also caches related Coords
+class CoordPath {
+public:
+	CoordPath(Map *map, Coords c) : m_map(map) { m_coords.push_back(c); }
+	
+	inline Map *get_map() const { return m_map; }
+	inline bool is_valid() const { return m_map; }
+	
+	inline const Coords &get_start() const { return m_coords.front(); }
+	inline const Coords &get_end() const { return m_coords.back(); }
+	inline const std::vector<Coords> &get_coords() const { return m_coords; }
+	
+	inline int get_nsteps() const { return m_path.size(); }
+	inline char get_step(int idx) const { return m_path[idx]; }
+	
+	int get_index(Coords field) const;
+	
+	void truncate(int after);
+	void append(const Path &tail);
+	void append(const CoordPath &tail);
+	
+private:
+	Map *m_map;
+	std::vector<char> m_path;			// directions
+	std::vector<Coords> m_coords;		// m_coords.size() == m_path.size()+1
+};
 
 /*
 ==============================================================================

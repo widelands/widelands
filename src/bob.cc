@@ -480,6 +480,7 @@ void Logic_Bob_Descr::read(const char *directory, Section *s)
 		{
 			add_attribute(Map_Object::ROBUST);
 			add_attribute(Map_Object::BIG);
+			add_attribute(Map_Object::UNPASSABLE);
 		}
 		else
 			throw wexception("Unknown size '%s'. Possible values: none, small, normal, big", string);

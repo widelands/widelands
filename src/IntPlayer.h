@@ -27,6 +27,7 @@ class Player;
 class MiniMap;
 class Map_View;
 class Window;
+class CoordPath;
 
 struct UniqueWindow {
 	Window	*window;
@@ -46,6 +47,9 @@ class Interactive_Player : public Panel {
 	public:
 		Interactive_Player(Game *g, uchar pln);
 		~Interactive_Player(void);
+
+		static int get_xres();
+		static int get_yres();
 
 		void start();
 		void exit_game_btn();
@@ -72,9 +76,17 @@ class Interactive_Player : public Panel {
 		void set_fieldsel(Coords c);
 		void set_fieldsel_freeze(bool yes);
 		
-		static int get_xres();
-		static int get_yres();
-
+		// Road building
+		inline bool is_building_road() const { return m_buildroad; }
+		inline CoordPath *get_build_road() { return m_buildroad; }
+		void start_build_road(Coords start);
+		void abort_build_road();
+		void finish_build_road();
+		bool append_build_road(Coords field);
+		const Coords &get_build_road_start();
+		const Coords &get_build_road_end();
+		int get_build_road_end_dir();
+		
 	private:
 		void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);
@@ -90,6 +102,8 @@ class Interactive_Player : public Panel {
 		
 		Coords	m_fieldsel; // the selected field below the mouse
 		bool		m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
+		
+		CoordPath	*m_buildroad; // path for the new road
 };
 
 

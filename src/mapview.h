@@ -55,7 +55,7 @@ public:
 	// Drawing
 	void draw(Bitmap *bmp, int ofsx, int ofsy);
 	void draw_ground(Bitmap *bmp, int effvpx, int effvpy, bool use_see_area);
-
+	
 	// Event handling
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
@@ -70,6 +70,9 @@ private:
    static AutoPic big_building;
    static AutoPic mine_building;
    static AutoPic setable_flag;
+	static AutoPic pic_roadb_green;
+	static AutoPic pic_roadb_yellow;
+	static AutoPic pic_roadb_red;
 
    Interactive_Player *m_player;
 	Game* m_game;
@@ -79,7 +82,12 @@ private:
    bool show_buildhelp;
 	  
    void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-                 const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, bool, bool);
+                 const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, 
+					  uchar roads, bool render_r, bool render_b);
+	void draw_overlay(Bitmap *dst, FCoords coords, int posx, int posy);
+	void draw_overlay_road(Bitmap *dst, FCoords coords, int posx, int posy);
+	
+	uchar get_overlay_roads(FCoords coords);
 };
 
 

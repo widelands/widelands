@@ -33,6 +33,9 @@ AutoPic Map_View::medium_building("medium.bmp", 0, 0, 255);
 AutoPic Map_View::big_building("big.bmp", 0, 0, 255);
 AutoPic Map_View::mine_building("mine.bmp", 0, 0, 255);
 AutoPic Map_View::setable_flag("set_flag.bmp", 0, 0, 255);
+AutoPic Map_View::pic_roadb_green("roadb_green.bmp", 0, 0, 255);
+AutoPic Map_View::pic_roadb_yellow("roadb_yellow.bmp", 0, 0, 255);
+AutoPic Map_View::pic_roadb_red("roadb_red.bmp", 0, 0, 255);
 
 /*
 ===============
@@ -117,26 +120,8 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 
 	draw_ground(&dst, effvpx, effvpy, use_see_area);
 
-	// Draw the fsel
-	Coords fsel = m_player->get_fieldsel();
-	int x;
-	int y;
-
-	Field *f = m_map->get_field(fsel);
-	m_map->get_pix(fsel.x, fsel.y, f, &x, &y);
-	x -= effvpx;
-	y -= effvpy;
-
-	if (x < -(int)pic_fsel.get_w())
-		x += m_map->get_w() * FIELD_WIDTH;
-	if (y < -(int)pic_fsel.get_h())
-		y += m_map->get_h() * (FIELD_HEIGHT>>1);
-
-	x -= pic_fsel.get_w()>>1;
-	y -= pic_fsel.get_h()>>1;
-	copy_pic(&dst, &pic_fsel, x, y, 0, 0, pic_fsel.get_w(), pic_fsel.get_h());
-
 	// debug: show fsel coordinates
+	Coords fsel = m_player->get_fieldsel();
 	char buf[16];
 	sprintf(buf, "%i %i", fsel.x, fsel.y);
 	Pic *p = g_fh.get_string(buf, 0);
@@ -245,8 +230,14 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
 			}
 			
 			// Render stuff that belongs to ground triangles
-			if (render_b || render_r)
-         	draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, render_r, render_b);
+			if (render_b || render_r) {
+				uchar roads = f->get_roads();
+				
+				if (m_player->is_building_road())
+					roads |= get_overlay_roads(FCoords(fx, fy, f));
+
+         	draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
+			}	
 			
 			// Render stuff that belongs to the field node
 			if (!use_see_area || player->is_field_seen(fx, fy))
@@ -325,50 +316,15 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
 				// draw_ground implies that this doesn't render map objects.
 				// are there any overdraw issues with the current rendering order?
 
-				// draw Map_Objects hooked to this field
+				// Draw Map_Objects hooked to this field
 				Map_Object* obj = f->get_first_object();
 				while(obj) {
 					obj->draw(m_game, dst, posx, posy);
 					obj = obj->get_next_object();
 				}
 
-				// Render buildhelp. 
-				// Note: this could also go before rendering bobs, since this shouldn't interfere with non moving bobs
-				// but so, animals are below the build help, which might reduce weirdness
-				// In other words, it can't go before rendering bobs.
-				if (show_buildhelp && f->get_owned_by() == m_player->get_player_number()) {
-					int buildcaps = m_player->get_player()->get_buildcaps(Coords(fx, fy));
-					
-					if (buildcaps & BUILDCAPS_PORT)
-					{
-						// blah
-					}
-					else if (buildcaps & BUILDCAPS_MINE)
-					{
-						copy_pic(dst, &mine_building, posx-(mine_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(mine_building.get_h()>>1), 
-								0, 0, mine_building.get_w(), mine_building.get_h());
-					}
-					else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
-					{
-						copy_pic(dst, &big_building, posx-(big_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(big_building.get_h()>>1), 
-								0, 0, big_building.get_w(), big_building.get_h());
-					}
-					else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
-					{
-						copy_pic(dst, &medium_building, posx-(medium_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(medium_building.get_h()>>1), 
-								0, 0, medium_building.get_w(), medium_building.get_h());
-					}
-					else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
-					{
-						copy_pic(dst, &small_building, posx-(small_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(small_building.get_h()>>1), 
-								0, 0, small_building.get_w(), small_building.get_h());
-					}
-					else if (buildcaps & BUILDCAPS_FLAG)
-					{
-						copy_pic(dst, &setable_flag, posx-(setable_flag.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(setable_flag.get_h()), 
-								0, 0, setable_flag.get_w(), setable_flag.get_h());
-					}
-				}
+				// Draw build-help etc...
+				draw_overlay(dst, FCoords(fx, fy, f), posx, posy);
 			}
 			
 			// Advance to next field in row
@@ -392,13 +348,16 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
    }
 }
 
-/* void Map_View::draw_field(Bitmap *dst, Field *f, Field *rf, Field *fl, Field *rfl,
- *                           int posx, int rposx, int posy, int blposx, int rblposx, int blposy)
- *
- * Draw the two triangles associated with one field.
- */
+/*
+===============
+Map_View::draw_field
+
+Draw the two triangles and the roads associated with one field.
+===============
+*/
 void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-           const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, bool render_r, bool render_b)
+           const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, 
+			  uchar roads, bool render_r, bool render_b)
 {
 	// points are ordered: right, left, bottom-right, bottom-left
 	// note that as long as render_triangle messes with the arrays, we need to
@@ -429,20 +388,24 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 	Point ptmp[3];
 	int btmp[3];
 
-	memcpy(ptmp, p, sizeof(Point)*3);
-	memcpy(btmp, b, sizeof(int)*3);
-   if(render_r) 
+   if(render_r) {
+		memcpy(ptmp, p, sizeof(Point)*3);
+		memcpy(btmp, b, sizeof(int)*3);
       render_triangle(dst, ptmp, btmp, f->get_terr()->get_texture());
+	}
 
 	// Render bottom triangle
-   if(render_b) 
-      render_triangle(dst, p+1, b+1, f->get_terd()->get_texture());
+   if(render_b) {
+		memcpy(ptmp, p+1, sizeof(Point)*3);
+		memcpy(btmp, b+1, sizeof(int)*3);
+      render_triangle(dst, ptmp, btmp, f->get_terd()->get_texture());
+	}
 	
 	// Render roads
 	ushort color;
-	int road;
+	uchar road;
 	
-	road = f->get_road(Road_East);
+	road = (roads >> Road_East) & Road_Mask;
 	if (render_r && road) {
 		if (road == Road_Normal)
 			color = pack_rgb(192, 192, 192);
@@ -453,7 +416,7 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 		render_road_horiz(dst, p[1], p[0], color);
 	}
 	
-	road = f->get_road(Road_SouthEast);
+	road = (roads >> Road_SouthEast) & Road_Mask;
 	if (road) {
 		if (road == Road_Normal)
 			color = pack_rgb(192, 192, 192);
@@ -464,7 +427,7 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 		render_road_vert(dst, p[1], p[2], color);
 	}
 	
-	road = f->get_road(Road_SouthWest);
+	road = (roads >> Road_SouthWest) & Road_Mask;
 	if (road) {
 		if (road == Road_Normal)
 			color = pack_rgb(192, 192, 192);
@@ -475,6 +438,164 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 		render_road_vert(dst, p[1], p[3], color);
 	}
 }
+
+/*
+===============
+Map_View::draw_overlay
+
+Draw overlay pictures such as buildhelp.
+Note: this is only called for visible fields.
+===============
+*/
+void Map_View::draw_overlay(Bitmap *dst, FCoords coords, int posx, int posy)
+{
+	posy -= coords.field->get_height() * HEIGHT_FACTOR;
+
+	// Render buildhelp. 
+	// Note: this could also go before rendering bobs, since this shouldn't interfere with non moving bobs
+	// but so, animals are below the build help, which might reduce weirdness
+	// In other words, it can't go before rendering bobs.
+	if (show_buildhelp && coords.field->get_owned_by() == m_player->get_player_number()) {
+		int buildcaps = m_player->get_player()->get_buildcaps(coords);
+
+		if (buildcaps & BUILDCAPS_PORT)
+		{
+			// blah
+		}
+		else if (buildcaps & BUILDCAPS_MINE)
+		{
+			copy_pic(dst, &mine_building, posx-(mine_building.get_w()>>1),  posy-(mine_building.get_h()>>1), 
+					0, 0, mine_building.get_w(), mine_building.get_h());
+		}
+		else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
+		{
+			copy_pic(dst, &big_building, posx-(big_building.get_w()>>1), posy-(big_building.get_h()>>1),
+					0, 0, big_building.get_w(), big_building.get_h());
+		}
+		else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
+		{
+			copy_pic(dst, &medium_building, posx-(medium_building.get_w()>>1), posy-(medium_building.get_h()>>1), 
+					0, 0, medium_building.get_w(), medium_building.get_h());
+		}
+		else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
+		{
+			copy_pic(dst, &small_building, posx-(small_building.get_w()>>1), posy-(small_building.get_h()>>1), 
+					0, 0, small_building.get_w(), small_building.get_h());
+		}
+		else if (buildcaps & BUILDCAPS_FLAG)
+		{
+			copy_pic(dst, &setable_flag, posx-(setable_flag.get_w()>>1), posy-(setable_flag.get_h()), 
+					0, 0, setable_flag.get_w(), setable_flag.get_h());
+		}
+	}
+
+	// Draw road building help
+	if (m_player->is_building_road())
+		draw_overlay_road(dst, coords, posx, posy);
+	
+	// Draw the fsel last
+	if (m_player->get_fieldsel() == coords) {
+		copy_pic(dst, &pic_fsel, posx - (pic_fsel.get_w()/2), posy - (pic_fsel.get_h()/2), 
+				0, 0, pic_fsel.get_w(), pic_fsel.get_h());
+	}
+}
+
+
+/*
+===============
+Map_View::draw_overlay_road
+
+Draw the road build help overlay
+===============
+*/
+void Map_View::draw_overlay_road(Bitmap *dst, FCoords coords, int posx, int posy)
+{
+	Coords tail = m_player->get_build_road_end();
+	int dir = m_map->is_neighbour(coords, tail);
+
+	if (dir <= 0)
+		return;
+	
+	int taildir = m_player->get_build_road_end_dir();
+
+	if (dir == taildir) {
+		// this is the last but one field of the road
+		return;
+	}
+	
+	// figure out whether the road could go here
+	int caps = m_player->get_player()->get_buildcaps(coords);
+	
+	if (!(caps & MOVECAPS_WALK)) // need to be able to walk here
+		return;
+	
+	std::vector<Map_Object*> objs; // can't build on robusts
+	if (m_map->find_objects(coords, 0, Map_Object::ROBUST, &objs)) {
+		if (!objs[0]->has_attribute(Map_Object::FLAG))
+			return;
+	}
+	
+	if (m_player->get_build_road()->get_index(coords) >= 0)
+		return; // the road can't cross itself
+	
+	// Finally, the road can go here.
+	Field *ftail = m_map->get_field(tail);
+	int slope = coords.field->get_height() - ftail->get_height();
+	Pic *pic;
+	
+	if (slope < 3)
+		pic = &pic_roadb_green;
+	else if (slope < 5)
+		pic = &pic_roadb_yellow;
+	else
+		pic = &pic_roadb_red;
+
+	copy_pic(dst, pic, posx - (pic->get_w()/2), posy - (pic->get_h()/2), 
+			0, 0, pic->get_w(), pic->get_h());
+}
+
+/*
+===============
+Map_View::get_overlay_roads
+
+Figure out which roads need to be rendered during building
+===============
+*/
+uchar Map_View::get_overlay_roads(FCoords coords)
+{
+	CoordPath *path = m_player->get_build_road();
+	uchar roads;
+	
+	assert(path);
+	
+	int idx = path->get_index(coords);
+	
+	if (idx < 0)
+		return 0; // no additional roads
+	
+	roads = 0;
+	
+	// the road that moves to this field
+	if (idx > 0) {
+		int dir = get_reverse_dir(path->get_step(idx-1));
+		int shift = 2*(dir - Map_Object::WALK_E);
+		
+		if (shift >= 0 && shift <= 4)
+			roads |= Road_Normal << shift;
+	}
+	
+	// the road that leads away from this field
+	if (idx < path->get_nsteps()) {
+		int dir = path->get_step(idx);
+		int shift = 2*(dir - Map_Object::WALK_E);
+		
+		if (shift >= 0 && shift <= 4)
+			roads |= Road_Normal << shift;
+	}
+	
+	return roads;
+}
+
 
 /** Map_View::set_viewpoint(int x, int y)
  *

@@ -21,6 +21,7 @@
 #include "map.h"
 #include "worlddata.h"
 #include "game.h"
+#include "player.h"
 
 /** Map::Pathfield
  *
@@ -818,6 +819,100 @@ int Map::calc_distance(Coords a, Coords b)
 	return dist;
 }
 
+/*
+===============
+Map::is_neighbour
+
+Find out if the two given fields are neighbours.
+If they aren't, the function returns 0. If they are the same, return -1.
+Otherwise, it returns the direction from start to end
+===============
+*/
+int Map::is_neighbour(const Coords start, const Coords end)
+{
+	int dx, dy;
+
+	dy = end.y - start.y;
+	dx = end.x - start.x;
+	if (dx > (int)(hd.width>>1))
+		dx -= hd.width;
+	else if (dx < -(int)(hd.width>>1))
+		dx += hd.width;
+	
+	// end and start are on the same row
+	if (!dy) {
+		switch(dx) {
+		case -1: return Map_Object::WALK_W;
+		case 0: return -1;
+		case 1: return Map_Object::WALK_E;
+		default: return 0;
+		}
+	}
+	
+	if (dy > (int)(hd.height>>1))
+		dy -= hd.height;
+	else if (dy < -(int)(hd.height>>1))
+		dy += hd.height;
+	
+	// end is one row below start
+	if (dy == 1) {
+		if (start.y & 1)
+			dx--;
+		
+		switch(dx) {
+		case -1: return Map_Object::WALK_SW;
+		case 0: return Map_Object::WALK_SE;
+		default: return 0;
+		}
+	}
+	
+	// end is one row above start
+	if (dy == -1) {
+		if (start.y & 1)
+			dx--;
+		
+		switch(dx) {
+		case -1: return Map_Object::WALK_NW;
+		case 0: return Map_Object::WALK_NE;
+		default: return 0;
+		}
+	}
+	
+	return 0;
+}
+
+/*
+===============
+Map::get_neighbour
+
+Get a field's neighbour by direction
+===============
+*/
+void Map::get_neighbour(const Coords f, int dir, Coords * const o)
+{
+	switch(dir) {
+	case Map_Object::WALK_NW: get_tln(f, o); break;
+	case Map_Object::WALK_NE: get_trn(f, o); break;
+	case Map_Object::WALK_E: get_rn(f, o); break;
+	case Map_Object::WALK_SE: get_brn(f, o); break;
+	case Map_Object::WALK_SW: get_bln(f, o); break;
+	case Map_Object::WALK_W: get_ln(f, o); break;
+	}
+}
+
+void Map::get_neighbour(const FCoords f, int dir, FCoords * const o)
+{
+	switch(dir) {
+	case Map_Object::WALK_NW: get_tln(f, o); break;
+	case Map_Object::WALK_NE: get_trn(f, o); break;
+	case Map_Object::WALK_E: get_rn(f, o); break;
+	case Map_Object::WALK_SE: get_brn(f, o); break;
+	case Map_Object::WALK_SW: get_bln(f, o); break;
+	case Map_Object::WALK_W: get_ln(f, o); break;
+	}
+}
+
+
 /** class StarQueue
  *
  * Provides the flexible priority queue to maintain the open list.
@@ -975,33 +1070,44 @@ public:
 
 };
 
-/** Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path)
- *
- * Pathfinding entry-point.
- * Finds a path from startx/starty to endx/endy for a Map_object with the given movecaps.
- *
- * The path is stored in path, in terms of Map_Object::MOVE_* constants.
- * persist tells the function how hard it should try to find a path:
- * If persist is 0, the function will never give up early. Otherwise, the
- * function gives up when it becomes clear that the path must be longer than
- * persist*bird's distance fields long. 
- * [not implement right now]: If the terrain contains lots of hills, the cost
- * calculation will cause the search to terminate earlier than this. If persist==1,
- * findpath() can only find a path if the terrain is completely flat.
- *
- * The function returns the cost of the path (in milliseconds of normal walking
- * speed) or -1 if no path has been found.
- *
- * TODO: terrain impacts movement speed
- */
+/*
+===============
+Map::findpath
+
+Pathfinding entry-point.
+Finds a path from start to end for a Map_Object with the given movecaps.
+
+The path is stored in path, in terms of Map_Object::MOVE_* constants.
+persist tells the function how hard it should try to find a path:
+If persist is 0, the function will never give up early. Otherwise, the
+function gives up when it becomes clear that the path must be longer than
+persist*bird's distance fields long. 
+[not implement right now]: If the terrain contains lots of hills, the cost
+calculation will cause the search to terminate earlier than this. If persist==1,
+findpath() can only find a path if the terrain is completely flat.
+
+If player is not 0, the player's get_buildcaps() function will be used.
+If roadfind is true, special road-finding mode is activated:
+	do not visit fields with robust bobs, however
+	do accept flags on the final field
+If forbidden is not 0, the fields in this array will not be considered unpassable.
+
+The function returns the cost of the path (in milliseconds of normal walking
+speed) or -1 if no path has been found.
+
+TODO: terrain impacts movement speed
+===============
+*/
 #define COST_PER_FIELD		2000 // TODO
  
-int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path)
+int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path,
+                  Player *player, bool roadfind, const std::vector<Coords> *forbidden)
 {
 	Field *startf, *endf;
 	int upper_cost_limit;
 	Field *curf;
 	Coords cur;
+	int caps;
 
 	path->m_path.clear();
 	
@@ -1017,6 +1123,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 	}
 		
 	startf = get_field(start);
+/* // Animals shouldn't be trapped by players building buildings...
 	if (!(startf->get_caps() & movecaps)) {
 		if (!(movecaps & MOVECAPS_SWIM))
 			return -1;
@@ -1024,9 +1131,11 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 		if (!can_reach_by_water(start))
 			return -1;
 	}
+*/
 
 	endf = get_field(end);
-	if (!(endf->get_caps() & movecaps)) {
+	caps = player ? player->get_buildcaps(end) : endf->get_caps();
+	if (!(caps & movecaps)) {
 		if (!(movecaps & MOVECAPS_SWIM))
 			return -1;
 		
@@ -1083,6 +1192,8 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 		else
 			direction = order2;
 
+		int curcaps = player ? player->get_buildcaps(cur) : curf->get_caps();
+		
 		// Check all the 6 neighbours		
 		for(uint i = 6; i; i--, direction++) {
 			Field *neighbf;
@@ -1106,8 +1217,27 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 				continue;
 			
 			// Calculate cost and passability
-			if (!(neighbf->get_caps() & movecaps)) {
-				if (!(curf->get_caps() & movecaps & MOVECAPS_SWIM))
+			caps = player ? player->get_buildcaps(neighb) : neighbf->get_caps();
+			if (!(caps & movecaps)) {
+				if (!(curcaps & movecaps & MOVECAPS_SWIM))
+					continue;
+			}
+			
+			// Special road finding
+			if (roadfind) {
+				std::vector<Map_Object*> objs;
+				if (find_objects(neighb, 0, Map_Object::ROBUST, &objs)) {
+					if (neighb != end || !objs[0]->has_attribute(Map_Object::FLAG))
+						continue;
+				}
+			}
+			
+			// Is the field forbidden?
+			if (forbidden) {
+				int c = forbidden->size()-1;
+				while(c >= 0 && neighb != (*forbidden)[c])
+					c--;
+				if (c >= 0)
 					continue;
 			}
 			
@@ -1201,6 +1331,91 @@ bool Map::can_reach_by_water(Coords field)
 	
 	return false;
 }
+
+
+/*
+==============================================================================
+
+Path/CoordPath IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+CoordPath::get_index
+
+After which step does the field appear in this path?
+Return -1 if field is not part of this path.
+===============
+*/
+int CoordPath::get_index(Coords field) const
+{
+	for(uint i = 0; i < m_coords.size(); i++)
+		if (m_coords[i] == field)
+			return i;
+	
+	return -1;
+}
+
+/*
+===============
+CoordPath::truncate
+
+Truncate the path after the given number of steps
+===============
+*/	
+void CoordPath::truncate(int after)
+{
+	m_path.erase(m_path.begin()+after, m_path.end());
+	m_coords.erase(m_coords.begin()+after+1, m_coords.end());
+}
+
+/*
+===============
+CoordPath::append
+
+Append the given path. Automatically created the necessary coordinates.
+===============
+*/
+void CoordPath::append(const Path &tail)
+{
+	assert(m_map);
+	assert(tail.get_start() == get_end());
+	
+	Coords c = get_end();
+	
+	for(uint i = 0; i < tail.get_nsteps(); i++) {
+		char dir = tail.get_step(i);
+		Coords nc;
+		
+		m_map->get_neighbour(c, dir, &c);
+		m_path.push_back(dir);
+		m_coords.push_back(c);
+	}
+	
+	// debug
+	//log("CoordPath; start %i %i\n", m_coords[0].x, m_coords[0].y);
+	//for(uint i = 0; i < m_path.size(); i++)
+	//	log("  %i -> %i %i\n", m_path[i], m_coords[i+1].x, m_coords[i+1].y);
+}
+
+/*
+===============
+CoordPath::append
+
+Append the given path.
+===============
+*/
+void CoordPath::append(const CoordPath &tail)
+{
+	assert(m_map);
+	assert(tail.get_start() == get_end());
+	
+	m_path.insert(m_path.end(), tail.m_path.begin(), tail.m_path.end());
+	m_coords.insert(m_coords.end(), tail.m_coords.begin()+1, tail.m_coords.end());
+}
+
 
 // 
 // class Map_Region

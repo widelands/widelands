@@ -27,6 +27,7 @@
 #include "fieldaction.h"
 #include "mapview.h"
 #include "IntPlayer.h"
+#include "player.h"
 #include "map.h"
 
 
@@ -60,6 +61,8 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	m_fieldsel.x = m_fieldsel.y = 0;
 	m_fieldsel_freeze = false;
 	
+	m_buildroad = false;
+	
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
 	int y = get_h() - 34;
@@ -82,12 +85,17 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	b->set_pic(g_fh.get_string("BHELP", 0));
 }
 
-/** Interactive_Player::~Interactive_Player(void)
- *
- * cleanups
- */
+/*
+===============
+Interactive_Player::~Interactive_Player
+
+cleanups
+===============
+*/
 Interactive_Player::~Interactive_Player(void)
 {
+	if (m_buildroad)
+		abort_build_road();
 }
 
 /*
@@ -247,6 +255,9 @@ Player has clicked on the given field; bring up the context menu.
 */
 void Interactive_Player::field_action()
 {
+	if (!get_ignore_shadow() && !get_player()->is_field_seen(m_fieldsel))
+		return;			
+
 	// Special case for buildings
 	std::vector<Map_Object*> objs;
 	
@@ -344,4 +355,130 @@ void Interactive_Player::minimap_warp(int x, int y)
 	y -= main_mapview->get_h()>>1;
 	if (y < 0) y += m_game->get_map()->get_h() * (FIELD_HEIGHT>>1);
 	main_mapview->set_viewpoint(x, y);
+}
+
+
+/*
+===============
+Interactive_Player::start_build_road
+
+Begin building a road
+===============
+*/
+void Interactive_Player::start_build_road(Coords start)
+{
+	// create an empty path
+	m_buildroad = new CoordPath(m_game->get_map(), start);
+}
+
+
+/*
+===============
+Interactive_Player::abort_build_road
+
+Stop building the road
+===============
+*/
+void Interactive_Player::abort_build_road()
+{
+	assert(m_buildroad);
+	
+	delete m_buildroad;
+	m_buildroad = 0;
+}
+	
+
+/*
+===============
+Interactive_Player::finish_build_road
+
+Finally build the road
+===============
+*/
+void Interactive_Player::finish_build_road()
+{
+	assert(m_buildroad);
+	
+	// TODO: issue player command
+	
+	delete m_buildroad;
+	m_buildroad = 0;
+}
+
+
+/*
+===============
+Interactive_Player::append_build_road
+
+If field is on the path, remove tail of path. 
+Otherwise append if possible or return false.
+===============
+*/
+bool Interactive_Player::append_build_road(Coords field)
+{
+	assert(m_buildroad);
+
+	int idx = m_buildroad->get_index(field);
+	
+	if (idx >= 0) {
+		m_buildroad->truncate(idx);
+		return true;
+	}
+	
+	// Find a path to the clicked-on field
+	Map *map = m_game->get_map();
+	Path path;
+	
+	if (map->findpath(m_buildroad->get_end(), field, MOVECAPS_WALK, 0, &path, 
+	                  get_player(), true, &m_buildroad->get_coords()) < 0)
+		return false; // couldn't find a path
+	
+	m_buildroad->append(path);
+	
+	return true;
+}
+
+/*
+===============
+Interactive_Player::get_build_road_start
+
+Return the current road-building startpoint
+===============
+*/
+const Coords &Interactive_Player::get_build_road_start()
+{
+	assert(m_buildroad);
+	
+	return m_buildroad->get_start();
+}
+
+/*
+===============
+Interactive_Player::get_build_road_end
+
+Return the current road-building endpoint
+===============
+*/
+const Coords &Interactive_Player::get_build_road_end()
+{
+	assert(m_buildroad);
+	
+	return m_buildroad->get_end();
+}
+
+/*
+===============
+Interactive_Player::get_build_road_end_dir
+
+Return the direction of the last step
+===============
+*/
+int Interactive_Player::get_build_road_end_dir()
+{
+	assert(m_buildroad);
+	
+	if (!m_buildroad->get_nsteps())
+		return 0;
+	
+	return m_buildroad->get_step(m_buildroad->get_nsteps()-1);
 }

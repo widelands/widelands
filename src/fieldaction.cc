@@ -33,10 +33,16 @@ public:
 	FieldActionWindow(Interactive_Player *plr, UniqueWindow *registry);
 	~FieldActionWindow();
 
+	void init();
+	void add_buttons_auto();
+	void add_buttons_road(bool flag);
+	
 	// Action handlers
 	void act_watch();
 	void act_buildflag();
 	void act_ripflag();
+	void act_buildroad();
+	void act_abort_buildroad();
 
 private:
 	void add_button(const char *name, void (FieldActionWindow::*fn)());
@@ -72,39 +78,34 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *regi
 	m_field = FCoords(m_player->get_fieldsel(), f);
 
 	m_player->set_fieldsel_freeze(true);
-	
-	// Add actions
-	std::vector<Map_Object*> objs;
-	
+
 	m_nbuttons = 0;
-	
-	if (m_field.field->get_owned_by() == m_player->get_player_number())
-	{
-		if (m_map->find_objects(m_field, 0, Map_Object::FLAG, &objs))
-		{
-			// Add flag actions
-			Flag *flag = (Flag*)objs[0];
+}
 
-			//add_button("ROAD", &FieldActionWindow::act_buildroad);
+/*
+===============
+FieldActionWindow::~FieldActionWindow
 
-			Building *building = flag->get_building();
+Free allocated resources, remove from registry.
+===============
+*/
+FieldActionWindow::~FieldActionWindow()
+{
+	m_player->set_fieldsel_freeze(false);
+	m_registry->window = 0;
+}
 
-			if (!building || strcasecmp(building->get_name(), "headquarters"))
-				add_button("RIP", &FieldActionWindow::act_ripflag);
-		}
-		else
-		{
-			// Add build actions
-			int buildcaps = m_player->get_player()->get_buildcaps(m_field);
 
-			if (buildcaps & BUILDCAPS_FLAG)
-				add_button("FLAG", &FieldActionWindow::act_buildflag);
-		}
-	}
-	
-	// Common to all fields
-	add_button("WATCH", &FieldActionWindow::act_watch);
+/*
+===============
+FieldActionWindow::init
 
+Initialize after buttons have been registered.
+This mainly deals with mouse placement
+===============
+*/
+void FieldActionWindow::init()
+{
 	set_inner_size(m_nbuttons*34, 34);
 
 	// Move the window away from the current mouse position, i.e.
@@ -125,17 +126,60 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *regi
 	set_mouse_pos(17, 17);
 }
 
+
 /*
 ===============
-FieldActionWindow::~FieldActionWindow
+FieldActionWindow::add_buttons_auto
 
-Free allocated resources, remove from registry.
+Add the buttons you normally get when clicking on a field.
 ===============
 */
-FieldActionWindow::~FieldActionWindow()
+void FieldActionWindow::add_buttons_auto()
 {
-	m_player->set_fieldsel_freeze(false);
-	m_registry->window = 0;
+	// Add actions
+	std::vector<Map_Object*> objs;
+	
+	if (m_field.field->get_owned_by() == m_player->get_player_number())
+	{
+		if (m_map->find_objects(m_field, 0, Map_Object::FLAG, &objs))
+		{
+			// Add flag actions
+			Flag *flag = (Flag*)objs[0];
+
+			add_button("ROAD", &FieldActionWindow::act_buildroad);
+
+			Building *building = flag->get_building();
+
+			if (!building || strcasecmp(building->get_name(), "headquarters"))
+				add_button("RIP", &FieldActionWindow::act_ripflag);
+		}
+		else
+		{
+			// Add build actions
+			int buildcaps = m_player->get_player()->get_buildcaps(m_field);
+
+			if (buildcaps & BUILDCAPS_FLAG)
+				add_button("FLAG", &FieldActionWindow::act_buildflag);
+		}
+	}
+	
+	// Common to all fields
+	add_button("WATCH", &FieldActionWindow::act_watch);
+}
+
+/*
+===============
+FieldActionWindow::add_buttons_road
+
+Buttons used during road building: Set flag here and Abort
+===============
+*/
+void FieldActionWindow::add_buttons_road(bool flag)
+{
+	if (flag)
+		add_button("FLAG", &FieldActionWindow::act_buildflag);
+	
+	add_button("ABORT", &FieldActionWindow::act_abort_buildroad);
 }
 
 
@@ -193,6 +237,9 @@ void FieldActionWindow::act_buildflag()
 	
 	g->send_player_command(m_player->get_player_number(), CMD_BUILD_FLAG, m_field.x, m_field.y);
 	
+	if (m_player->is_building_road())
+		m_player->finish_build_road();
+	
 	okdialog();
 }
 
@@ -214,6 +261,32 @@ void FieldActionWindow::act_ripflag()
 
 /*
 ===============
+FieldActionWindow::act_buildroad
+
+Start road building.
+===============
+*/
+void FieldActionWindow::act_buildroad()
+{
+	m_player->start_build_road(m_field);
+	okdialog();
+}
+
+/*
+===============
+FieldActionWindow::act_abort_buildroad
+
+Abort building a road.
+===============
+*/
+void FieldActionWindow::act_abort_buildroad()
+{
+	m_player->abort_build_road();
+	okdialog();
+}
+
+/*
+===============
 show_field_action
 
 Perform a field action (other than building options).
@@ -222,5 +295,42 @@ Bring up a field action window or continue road building.
 */
 void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
 {
-	new FieldActionWindow(parent, registry);
+	FieldActionWindow *faw;
+
+	if (!parent->is_building_road()) {
+		faw = new FieldActionWindow(parent, registry);
+		faw->add_buttons_auto();
+		faw->init();
+		return;
+	}
+
+	// we're building a road right now	
+	Map *map = parent->get_game()->get_map();
+	Coords target = parent->get_fieldsel();
+	Field *field = map->get_field(target);
+	
+	// if user clicked on the same field again, build a flag	
+	if (target == parent->get_build_road_end()) {
+		faw = new FieldActionWindow(parent, registry);
+		
+		bool flag = false;
+		if (target != parent->get_build_road_start() && 
+		    parent->get_player()->get_buildcaps(target) & BUILDCAPS_FLAG)
+			flag = true;
+		faw->add_buttons_road(flag);
+		faw->init();
+		return;
+	}
+
+	// append or take away from the road
+	if (!parent->append_build_road(target)) {
+		faw = new FieldActionWindow(parent, registry);
+		faw->add_buttons_road(false);
+		faw->init();
+		return;
+	}
+	
+	// did he click on a flag?
+	if (map->find_objects(target, 0, Map_Object::FLAG, 0))
+		parent->finish_build_road();
 }

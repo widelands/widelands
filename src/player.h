@@ -63,6 +63,7 @@ class Player {
 		
 		// See area
 		inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
+		inline bool is_field_seen(Coords c) { return (*seen_fields)[c.y*m_game->get_map()->get_w() + c.x]; }
 		inline bool is_field_seen(int x, int y) { return (*seen_fields)[y*m_game->get_map()->get_w() + x]; }
 		
 		void set_area_seen(int x, int y, uint area, bool on);

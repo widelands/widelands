@@ -104,6 +104,7 @@ public:
    inline void set_owned_by(uint pln) { owned_by = pln; }
    inline uchar get_owned_by(void) { return owned_by; }
 
+	inline int get_roads() const { return roads; }
 	inline int get_road(int dir) const { return (roads >> dir) & Road_Mask; }
 	inline void set_road(int dir, int type) {
 		roads &= ~(Road_Mask << dir); 
