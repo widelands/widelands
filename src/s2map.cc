@@ -27,6 +27,9 @@
 
 // TEMP
 #include <iostream.h>
+#define hex ios::hex
+#define dec ios::dec 
+
 
 /** int Map::load_s2mf(const char* filen) 
  *

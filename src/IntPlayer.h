@@ -31,7 +31,7 @@ class Game;
 class MiniMap;
 
 class Interactive_Player : public Panel {
-		friend MiniMap;
+		friend class MiniMap;
 
 		 Interactive_Player(const Interactive_Player&);
 		 Interactive_Player operator=(const Interactive_Player&);

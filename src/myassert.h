@@ -25,6 +25,9 @@
 #include <stdio.h>
 #include "output.h"
 #include "criterr.h"
+#ifdef assert
+#undef assert
+#endif
 #define assert(condition) myassert(__LINE__, __FILE__, (int)(condition), #condition)
 extern int graph_is_init; 
 

@@ -71,6 +71,10 @@ Section
 
 ==============================================================================
 */
+	
+const char *Section::get_name() const {
+   return sname;
+}
 
 Section::Section(std::ostream &errstream, const char *name, bool supress_error)
 	: err(errstream), values(8, 8)

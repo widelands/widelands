@@ -21,6 +21,7 @@
 #define __S__OUTPUT_H
 
 #include <fstream.h>
+#include <iostream.h>
 
 extern ofstream out;
 extern ofstream err;

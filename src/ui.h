@@ -310,7 +310,7 @@ private:
 class Radiobutton;
 
 class Radiogroup {
-	friend Radiobutton;
+	friend class Radiobutton;
 
 public:
 	Radiogroup();

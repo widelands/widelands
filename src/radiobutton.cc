@@ -29,7 +29,7 @@ Radiobutton
 */
 
 class Radiobutton : public Statebox {
-	friend Radiogroup;
+	friend class Radiogroup;
 
 public:
 	Radiobutton(Panel *parent, int x, int y, Radiogroup *group, int id);

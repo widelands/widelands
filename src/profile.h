@@ -44,7 +44,7 @@ name of the key: you can pass name == 0 to retrieve any unused keys from the
 section.
 */
 class Section {
-	friend Profile;
+	friend class Profile;
 
 	std::ostream &err;
    bool supr_err;
@@ -72,7 +72,7 @@ class Section {
 	void add_val(const char *key, const char *value);
 
 public:
-	inline const char *get_name() const { return sname; }
+	const char *get_name() const; 
 
 	int get_int(const char *name, int def = 0);
 	bool get_boolean(const char *name, bool def = false);
