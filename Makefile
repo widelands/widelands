@@ -10,7 +10,9 @@
 
 # Compile time includes
 # Use the GGZ Gamingzone? Enable for releases.
+ifndef USE_GGZ
 USE_GGZ:=NO
+endif
 
 # Is this a cross compile?
 ifndef CROSS
@@ -56,7 +58,7 @@ endif
 # 
 # COMPILE TIME configuration
 ifeq ($(USE_GGZ),YES) 
-ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ=1
+ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ
 ADD_LDFLAGS:=-lggzmod -lggzcore -lggz
 endif
 

@@ -36,6 +36,7 @@
 #include "game_server_proto.h"
 #include "graphic.h"
 #include "network.h"
+#include "network_ggz.h"
 #include "options.h"
 #include "setup.h"
 #include "system.h"

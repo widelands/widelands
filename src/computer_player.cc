@@ -370,6 +370,9 @@ bool Computer_Player::construct_building ()
 			    if (j->need_stones)
 				    prio+=i->stones_nearby - 6*i->stone_consumers_nearby - 2;
 
+			    if ((j->need_trees || j->need_stones) && j->cnt_built==0 && j->cnt_under_construction==0)
+				    prio*=2;
+
 			    if (!j->need_trees && !j->need_stones) {
 				for (unsigned int k=0; k<j->inputs.size(); k++) {
 				    prio+=6*wares[j->inputs[k]].producers;

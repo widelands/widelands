@@ -23,10 +23,13 @@
 #include "error.h"
 #include "options.h"
 #include "system.h"
-#include "network.h"
+#include "network_ggz.h"
 
 Profile g_options(Profile::err_log);
 
+#ifdef DEBUG
+void init_double_game ();
+#endif
 
 /** options_shutdown()
  *
@@ -61,6 +64,9 @@ static void show_usage(void)
 " --ggz            Starts game as GGZ Gaming Zone client (don't use!)\n"
 " --ggzcore        GGZ embedded mode (TEMPORARY -> make menu button!)\n"
 "\n"
+#ifdef DEBUG
+" --double         Start the game twice (for localhost network testing)\n\n"
+#endif
 " --help           Show this help\n"
 " --version        Show version\n"
 "\n"
@@ -112,6 +118,13 @@ static bool parse_command_line(int argc, char** argv)
 			NetGGZ::ref()->initcore();
 			continue;
 		}
+
+#ifdef DEBUG
+		if (!strcmp(opt, "double")) {
+			init_double_game ();
+			continue;
+		}
+#endif DEBUG
 
 		value = strchr(opt, '=');
 		if (!value) {

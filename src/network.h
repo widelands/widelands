@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004-2005 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,15 +26,6 @@
 #include <SDL/SDL_net.h>
 #include "wexception.h"
 #include "types.h"
-
-#ifdef USE_GGZ
-#define HAVE_GGZ 1
-#endif
-
-#ifdef HAVE_GGZ
-#include <ggzmod.h>
-#include <ggzcore.h>
-#endif
 
 #define WIDELANDS_PORT		7396
 
@@ -278,56 +269,6 @@ class Deserializer {
     
     private:
 	std::queue<unsigned char>	queue;
-};
-
-class NetGGZ {
-    public:
-	NetGGZ();
-	static NetGGZ* ref();
-
-	void init();
-	bool connect();
-
-	bool used();
-	bool host();
-	void data();
-	const char *ip();
-
-	std::list<std::string> tables();
-
-	enum Protocol
-	{
-		op_greeting = 1,
-		op_request_ip = 2,
-		op_reply_ip = 3,
-		op_broadcast_ip = 4
-	};
-
-	void initcore();
-	bool usedcore();
-	void datacore();
-	void join(const char *tablename);
-
-    private:
-#ifdef HAVE_GGZ
-	static void ggzmod_server(GGZMod *mod, GGZModEvent e, void *data);
-	static GGZHookReturn callback_server(unsigned int id, void *data, void *user);
-	static GGZHookReturn callback_room(unsigned int id, void *data, void *user);
-	static GGZHookReturn callback_game(unsigned int id, void *data, void *user);
-#endif
-	void event_server(unsigned int id, void *data);
-	void event_room(unsigned int id, void *data);
-	void event_game(unsigned int id, void *data);
-
-	bool use_ggz;
-	int fd;
-	int channelfd;
-	int gamefd;
-	int tableid;
-	char *ip_address;
-	bool ggzcore_login;
-
-	std::list<std::string> tablelist;
 };
 
 #endif

@@ -24,6 +24,10 @@
 #include "types.h"
 #include "ui_panel.h"
 
+#ifdef DEBUG
+void yield_double_game ();
+#endif
+
 /*
 ==============================================================================
 
@@ -170,6 +174,10 @@ int UIPanel::run()
 
 		if (_flags & pf_child_die)
 			check_child_death();
+
+#ifdef DEBUG
+		yield_double_game ();
+#endif
 	}
 	g_gr->update_fullscreen();
 	end();

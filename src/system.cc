@@ -30,7 +30,7 @@
 #include "font_handler.h"
 
 #include "constants.h"
-#include "network.h"
+#include "network_ggz.h"
 
 Graphic *g_gr = 0;
 
@@ -933,3 +933,55 @@ int Sys_GetGraphicsSystemFromString(std::string str)
 
 	return GFXSYS_SW32;
 }
+
+#ifdef DEBUG
+#include <signal.h>
+
+static int pid_me=0, pid_peer=0;
+
+static volatile int may_run=0;
+
+void signal_handler (int sig)
+{
+	may_run++;
+}
+
+void yield_double_game ()
+{
+	if (may_run>0) {
+		may_run--;
+	        kill (pid_peer, SIGUSR1);
+	}
+
+	if (may_run==0)
+	        usleep (500000);
+
+	// using sleep instead of pause avoids a race condition
+	// and a deadlock during connect
+}
+
+void init_double_game ()
+{
+	if (pid_me!=0)
+		return;
+	
+	pid_me=getpid();
+	pid_peer=fork();
+	
+	assert (pid_peer>=0);
+	
+	if (pid_peer==0) {
+	    pid_peer=pid_me;
+	    pid_me=getpid();
+	    
+	    may_run=1;
+	}
+	
+	signal (SIGUSR1, signal_handler);
+	
+	if (may_run==0)
+	    sleep (500000);
+}
+
+#endif
+

@@ -23,8 +23,9 @@
 #include "ui_editbox.h"
 #include "ui_table.h"
 #include "constants.h"
-#include "network_lan_promotion.h"
 #include "network.h"
+#include "network_lan_promotion.h"
+#include "network_ggz.h"
 
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
