@@ -1,7 +1,6 @@
 Notice: ./configure, make, make install should do well, if you've
 		  got libsdl installed.
 
-		  Make sure to check doc/html/* !!
 		   -- SirVer@gmx.de 
 
 Basic Installation

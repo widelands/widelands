@@ -53,6 +53,8 @@ struct Options {
 		  char mapsdir[MAX_OPT_LENGTH];
 		  char musicsdir[MAX_OPT_LENGTH];
 		  char effectsdir[MAX_OPT_LENGTH];
+		  char fontsdir[MAX_OPT_LENGTH];
+		  char savedir[MAX_OPT_LENGTH];
 		  
 		  // Gameplay
 		  bool swapmouse;
@@ -148,6 +150,8 @@ static int write_conf_file(Options* o) {
 		  f << "MAPSDIR" << "=\"" << o->mapsdir << "\"" << endl;
 		  f << "MUSICSDIR" << "=\"" << o->musicsdir << "\"" << endl;
 		  f << "EFFECTSDIR" << "=\"" << o->effectsdir << "\"" << endl;
+		  f << "FONTSDIR" << "=\"" << o->fontsdir << "\"" << endl;
+		  f << "SAVEDIR" << "=\"" << o->savedir << "\"" << endl;
 		  f << "" << endl;
 		  f << "# Gameplay" << endl;
 		  f << "SWAPMOUSE" << "=" << o->swapmouse << endl;
@@ -206,6 +210,8 @@ static int parse_conf_file(Ascii_file &f, Options* o) {
 		  p.register_string_opt("MAPSDIR", o->mapsdir);
 		  p.register_string_opt("MUSICSDIR", o->musicsdir);
 		  p.register_string_opt("EFFECTSDIR", o->effectsdir);
+		  p.register_string_opt("FONTSDIR", o->fontsdir);
+		  p.register_string_opt("SAVEDIR", o->savedir);
 
 		  p.register_bool_opt("SWAPMOUSE", &o->swapmouse);
 		  p.register_int_opt("MOUSESPEED", &o->mousespeed);
@@ -274,6 +280,8 @@ static int parse_command_line(uint argn, char** argc, Options* o) {
 		  p.register_string_opt("--mapsdir", o->mapsdir);
 		  p.register_string_opt("--musicsdir", o->musicsdir);
 		  p.register_string_opt("--effectsdir", o->effectsdir);
+		  p.register_string_opt("--fontsdir", o->fontsdir);
+		  p.register_string_opt("--savedir", o->savedir);
 
 		  p.register_bool_opt("--swapmouse", &o->swapmouse);
 		  p.register_int_opt("--mousespeed", &o->mousespeed);
@@ -340,7 +348,9 @@ void handle_options(uint argn, char** argc) {
 		  strcpy(o.mapsdir 	 , "maps");
 		  strcpy(o.musicsdir , "musics");
 		  strcpy(o.effectsdir, "effects");
-		  
+		  strcpy(o.fontsdir, "fonts");
+		  strcpy(o.savedir, "save");
+
 		  // Gameplay
 		  o.swapmouse=0;
 		  o.mousespeed=100;
@@ -422,6 +432,8 @@ static int consume_options(Options* o) {
 		  g_fileloc.register_subdir(TYPE_MAP, o->mapsdir);
 		  g_fileloc.register_subdir(TYPE_MUSIC, o->musicsdir);
 		  g_fileloc.register_subdir(TYPE_EFFECT, o->effectsdir);
+		  g_fileloc.register_subdir(TYPE_FONT, o->fontsdir);
+		  g_fileloc.register_subdir(TYPE_SAVE, o->savedir);
 
 		  // Gameplay 
 		  g_ip.swap_buttons(o->swapmouse);

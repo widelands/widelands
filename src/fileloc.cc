@@ -195,6 +195,8 @@ const char* File_Locator::get_new_filename(const char* file, const int type) {
 		  
 		  la=LA_NOTALLOWED;
 
+		  // TODO this doesn't check if the subdir really exists or not.
+		  // it should create it then
 		  for(uint n=def_writedir; n<MAX_DIRS; n++) {
 					 if(dirs[n][0]=='\0') continue;
 								

@@ -31,7 +31,7 @@
 #endif
 #define MAX_DIRS	5
 #define MAX_SUBDIRL	20
-#define MAX_SUBDIRS	10
+#define MAX_SUBDIRS	15
 		  
 #ifdef WIN32
 #define SEP			"\\"
@@ -104,5 +104,7 @@ class File_Locator : public Singleton<File_Locator> {
 #define TYPE_MAP 6
 #define TYPE_MUSIC 7
 #define TYPE_EFFECT 8
+#define TYPE_FONT 9
+#define TYPE_SAVE 10
 
 #endif /* __S__FILE_LOCATOR */
