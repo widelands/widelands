@@ -52,27 +52,16 @@ class Bob_Data_Pic_Descr : public Pic {
  */
 void Bob_Data_Pic_Descr::write(Binary_file* f) {
 
-   cerr << "Bob_Data_Pix_Descr::write()!! TODO!" << endl;
+//   cerr << "Bob_Data_Pix_Descr::write()!! TODO!" << endl;
 
-   /*   bob->npics++;
-   if(bob->npics==1) {
-      bob->pics=(BobPicDescr*) malloc(sizeof(BobPicDescr));
-      if(!bob->pics) return 0;
-   } else {
-      bob->pics=(BobPicDescr*) realloc(bob->pics, sizeof(BobPicDescr)*bob->npics);
-      if(!bob->pics) return 0;
-   }
-  
-   BobPicDescr* pic=&bob->pics[bob->npics-1];
    // normally, the compressed data will be slightly smaller, but make things sure here: use 
    // double size!
-   pic->data=(char*) malloc(get_w()*get_h()*2*2); 
+   ushort* data;
+   data=(ushort*) malloc(get_w()*get_h()*sizeof(ushort)*2); 
    uint i=0;
-   for(i=0; i<get_w()*get_h()*2*2; i++) {
-      pic->data[i]='\0';
+   for(i=0; i<get_w()*get_h()*2; i++) {
+      data[i]='\0';
    }
-   ushort* epixels=(ushort*)pic->data; 
-   
    uint n=0;
    uint count=0;
    int lidx=-1;
@@ -80,32 +69,32 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
    uint npix=get_h()*get_w();
    for(i=0; i<npix; i++) {
       if(has_clrkey() && pixels[i]==get_clrkey()) {
-         epixels[n]|=CMD_TRANS;
+         data[n]|=CMD_TRANS;
          count=0;
          while(pixels[i]==get_clrkey() && i<npix) { count++; i++; }
-         epixels[n]|=count;
+         data[n]|=count;
          n++;
          i--;
 
          // write last count
          if(lidx!=-1) {
          //   cerr << pixc << "x bunte pixel" << endl;
-            epixels[lidx]=pixc;
+            data[lidx]=pixc;
          }
          lidx=-1;
        //  cerr << "Trans: " << count << endl;
       } else if(has_shadow && pixels[i]==shadowclr) {
-         epixels[n]|=CMD_SHAD;
+         data[n]|=CMD_SHAD;
          count=0;
          while(pixels[i]==shadowclr && i<npix) { count++; i++; }
-         epixels[n]|=count;
+         data[n]|=count;
          n++;
          i--;
    
          // write last count
          if(lidx!=-1) {
          //   cerr << pixc << "x bunte pixel" << endl;
-            epixels[lidx]=pixc;
+            data[lidx]=pixc;
          }
          lidx=-1;
        //  cerr << "Shadw: " << count << endl;
@@ -113,18 +102,18 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
          uint idx;
          for(idx=0; idx<4; idx++) {
             if(pixels[i]==play_clr[idx]) {
-               epixels[n]|=CMD_PLCLR;
-               epixels[n]|=idx;
+               data[n]|=CMD_PLCLR;
+               data[n]|=idx;
                count=0;
                n++;
                while(pixels[i]==play_clr[idx] && i<npix) { count++; i++; }
-               epixels[n]=count;
+               data[n]=count;
                n++;
                i--;
                // write last count
                if(lidx!=-1) {
               //    cerr << pixc << "x bunte pixel" << endl;
-                  epixels[lidx]=pixc;
+                  data[lidx]=pixc;
                }
                lidx=-1;
             //   cerr << "PlClr " << idx << ": " << count << endl;
@@ -138,18 +127,17 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
                pixc=0;
                n++;
             }
-            epixels[n]=pixels[i];
+            data[n]=pixels[i];
             n++;
             pixc++;
          }
       }
    } 
-  // cerr << "n ist: " << n << endl;
   
-   pic->data=(char*) malloc(n*2);
-   pic->size=n*2;
+   // data packed, lets write it
+   f->write(data, n*sizeof(ushort));
    
-   return n*2;*/
+   free(data);
 }
 
 void Bob_Data_Pic_Descr::set_shadowclr(ushort clr) { 
@@ -170,11 +158,25 @@ void Bob_Data_Pic_Descr::set_plclr(ushort darkest, ushort dark, ushort middle, u
 // class Bob_Descr!
 //
 
+Bob_Descr::Bob_Descr(void) {
+   npics=0;
+   pics=0;
+}
+
+Bob_Descr::~Bob_Descr(void) {
+   if(npics) {
+      uint i;
+      for(i=0; i<npics; i++) 
+         delete pics[i];
+      free(pics);
+      pics=0;
+   }
+}
 
 // 
 // This function loads a bob from several files and constructs it into a BobDescr
 //
-uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const char* subdir, ushort clrkey, ushort shadowclr, ushort* w, ushort *h) {
+uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const char* subdir, ushort clrkey, ushort shadowclr, ushort* w, ushort *h, bool pl_clr) {
 
    npics=0;
    *w=0;
@@ -200,8 +202,11 @@ uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const ch
       return ERR_INVAL_FILE_NAMES; 
    }
 
+   pics=(Bob_Data_Pic_Descr**) malloc(sizeof(Bob_Data_Pic_Descr*)*99); // ought to be enough
+   
    char one, ten;
    Bob_Data_Pic_Descr* p;
+   uint i=0;
    for(ten='0'; ten<='9'; ten++) {
       buf[nidx]=ten;
       for(one='0'; one<='9'; one++) {
@@ -210,7 +215,10 @@ uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const ch
           // cerr << buf << endl;
 
          // Handle this picture!
-         p=new Bob_Data_Pic_Descr();
+         pics[i]= new Bob_Data_Pic_Descr();
+         p=pics[i];
+         i++;
+
          if(p->load(buf)) {
             delete p;
             break; // file not found or some error
@@ -229,19 +237,20 @@ uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const ch
          npics++;
          p->set_clrkey(clrkey);
          p->set_shadowclr(shadowclr);
-         p->set_plclr(DARKEST_PL_CLR, DARK_PL_CLR, MIDDLE_PL_CLR, LIGHT_PL_CLR);
+         if(pl_clr) p->set_plclr(DARKEST_PL_CLR, DARK_PL_CLR, MIDDLE_PL_CLR, LIGHT_PL_CLR);
    //      p->construct_description(bob);
-
-         delete p;
       }
       if((one-1)!='9') break;
    }
 
    if(!npics) {
       delete[] buf;
+      free(pics);
       return ERR_NOPICS;
    }
    
+  pics=(Bob_Data_Pic_Descr**) realloc(pics, sizeof(Bob_Data_Pic_Descr*)*npics);
+
    delete[] buf;
    return OK;
 }
@@ -251,6 +260,15 @@ uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const ch
  */
 void Bob_Descr::write(Binary_file* f) {
 
-   cerr << "Bob_Descr::write()! TODO!" << endl;
+   // write number of pics
+   ushort temp=npics;
+   f->write(&temp, sizeof(ushort));
+
+   // write all the pics
+   uint i;
+   for(i=0; i<npics; i++) {
+     pics[i]->write(f);
+   }
+  // cerr << "Bob_Descr::write()!" << npics << endl;
 }
 

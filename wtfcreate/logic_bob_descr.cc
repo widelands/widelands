@@ -119,7 +119,7 @@ int Logic_Bob_Descr::create_bob(Profile* p, Section* s, const char* def_suffix, 
 
    //   cerr << g_dirname << subdir << buf << endl;
 
-   uint retval=bob->construct(buf, g_dirname, subdir, clrkey, shadowclr, &w, &h); 
+   uint retval=bob->construct(buf, g_dirname, subdir, clrkey, shadowclr, &w, &h, 0); 
    if(retval) {
       switch (retval) {
          case Bob_Descr::ERROR:

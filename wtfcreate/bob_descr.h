@@ -32,10 +32,7 @@
 #define CMD_PLCLR (2<<14)
 #define CMD_SHAD  (3<<14) 
 
-struct BobPicDescr {
-   ushort size;
-   char* data;
-};
+class Bob_Data_Pic_Descr;
 
 class Bob_Descr {
    public:
@@ -47,7 +44,10 @@ class Bob_Descr {
          ERR_NOPICS,
          ERR_INVAL_HOT_SPOT
       };
-      uint construct(const char* pfile_names, const char* dirname, const char* subdir, ushort clrkey, ushort shadowclr, ushort* w, ushort *h);
+      Bob_Descr(void);
+      ~Bob_Descr(void);
+
+      uint construct(const char* pfile_names, const char* dirname, const char* subdir, ushort clrkey, ushort shadowclr, ushort* w, ushort *h, bool pl_clr);
 
       void write(Binary_file* f);
 
@@ -55,31 +55,7 @@ class Bob_Descr {
 
    private:
       ushort npics;
-      BobPicDescr* pics;
+      Bob_Data_Pic_Descr** pics;
 };
 
-/*
-struct DBobsDescr {
-   char name[30];
-   char ends_in[30];
-   ushort hsx; // hot spot x
-   ushort hsy; // hot spot y
-   ushort width; 
-   ushort height;
-   ushort stock;
-   BobDescr* bob_idle;
-};
-
-struct GBobsDescr {
-   char name[30];
-   char ends_in[30];
-   ushort hsx;
-   ushort hsy;
-   ushort width;
-   ushort height;
-   ushort growing_speed;
-   BobDescr* bob_growing;
-};
-*/
- 
 #endif /* __S__BOB_DESCR_H */
