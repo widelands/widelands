@@ -33,7 +33,7 @@
  *       x, y, w, h		button dimensions
  *       background		number of the button style (0..2)
  */
-Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id)
+Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id, bool forcepressed, bool flat)
 	: Panel(parent, x, y, w, h)
 {
 	set_think(false);
@@ -51,6 +51,8 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 	_enabled = true;
 	
 	m_pic_custom = 0;
+   m_no_automatic_pressed=forcepressed;
+   m_flat=flat;
 }
 
 /*
@@ -146,7 +148,8 @@ Redraw the button
 void Button::draw(RenderTarget* dst)
 {
 	// Draw the background
-	dst->tile(0, 0, get_w(), get_h(), m_pic_background, get_x(), get_y());
+	if(!m_flat) 
+      dst->tile(0, 0, get_w(), get_h(), m_pic_background, get_x(), get_y());
 
 	if (_enabled && _highlighted)
 		dst->brighten_rect(0, 0, get_w(), get_h(), MOUSE_OVER_BRIGHT_FACTOR);
@@ -169,34 +172,55 @@ void Button::draw(RenderTarget* dst)
 	// draw border
 	// a pressed but not highlighted button occurs when the user has pressed
 	// the left mouse button and then left the area of the button
-	RGBColor black(0,0,0);
-	
-	if (!_pressed || !_highlighted)
-	{
-		// top edge
-		dst->brighten_rect(0, 0, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
-		// left edge
-		dst->brighten_rect(0, 2, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
-		// bottom edge
-		dst->fill_rect(2, get_h()-2, get_w()-2, 1, black);
-		dst->fill_rect(1, get_h()-1, get_w()-1, 1, black);
-		// right edge
-		dst->fill_rect(get_w()-2, 2, 1, get_h()-2, black);
-		dst->fill_rect(get_w()-1, 1, 1, get_h()-1, black);
-	}
-	else
-	{
-		// bottom edge
-		dst->brighten_rect(0, get_h()-2, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
-		// right edge
-		dst->brighten_rect(get_w()-2, 0, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
-		// top edge
-		dst->fill_rect(0, 0, get_w()-1, 1, black);
-		dst->fill_rect(0, 1, get_w()-2, 1, black);
-		// left edge
-		dst->fill_rect(0, 0, 1, get_h()-1, black);
-		dst->fill_rect(1, 0, 1, get_h()-2, black);
-	}
+	// or the button stays pressed when it is pressed once
+   RGBColor black(0,0,0);
+
+   if(!m_flat) {
+      // button is a normal one, not flat
+      if ((!m_no_automatic_pressed && (!_pressed || !_highlighted)) 
+            || (m_no_automatic_pressed && !_pressed))
+      {
+         // top edge
+         dst->brighten_rect(0, 0, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
+         // left edge
+         dst->brighten_rect(0, 2, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
+         // bottom edge
+         dst->fill_rect(2, get_h()-2, get_w()-2, 1, black);
+         dst->fill_rect(1, get_h()-1, get_w()-1, 1, black);
+         // right edge
+         dst->fill_rect(get_w()-2, 2, 1, get_h()-2, black);
+         dst->fill_rect(get_w()-1, 1, 1, get_h()-1, black);
+      }
+      else
+      {
+         // bottom edge
+         dst->brighten_rect(0, get_h()-2, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
+         // right edge
+         dst->brighten_rect(get_w()-2, 0, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
+         // top edge
+         dst->fill_rect(0, 0, get_w()-1, 1, black);
+         dst->fill_rect(0, 1, get_w()-2, 1, black);
+         // left edge
+         dst->fill_rect(0, 0, 1, get_h()-1, black);
+         dst->fill_rect(1, 0, 1, get_h()-2, black);
+      }
+   } else {
+      // Button is flat, do not draw borders, instead, if it is pressed, draw 
+      // a box around it
+      if ((!m_no_automatic_pressed && (!_pressed || !_highlighted)) 
+            || (m_no_automatic_pressed && !_pressed)) {
+         // not selected, do nothing
+      } else {
+         // bottom edge
+         dst->fill_rect(0, get_h()-1, get_w(), 1, FLAT_BUTTON_FRAME_CLR);
+         // right edge
+         dst->fill_rect(get_w()-1, 0, 1, get_h(), FLAT_BUTTON_FRAME_CLR);
+         // top edge
+         dst->fill_rect(0, 0, get_w(), 1, FLAT_BUTTON_FRAME_CLR);
+         // left edge
+         dst->fill_rect(0, 0, 1, get_h(), FLAT_BUTTON_FRAME_CLR);
+      }
+   }
 }
 
 /** Button::handle_mousein(bool inside)
@@ -222,18 +246,20 @@ bool Button::handle_mouseclick(uint btn, bool down, int x, int y)
 		return false;
 
 	if (down && _enabled) {
-		grab_mouse(true);
+		if(!m_no_automatic_pressed) 
+         grab_mouse(true);
 		_pressed = true;
-	} else {
-		if (_pressed) {
-			grab_mouse(false);
-			if (_highlighted && _enabled) {
-				clicked.call();
-				clickedid.call(_id);
-			}
-			_pressed = false;
-		}
-	}
+   } else {
+      grab_mouse(false);
+      if (_highlighted && _enabled) {
+         _pressed=false;
+         clicked.call();
+         clickedid.call(_id);
+         _pressed=true;
+      }
+		if(!m_no_automatic_pressed) 
+         _pressed = false;
+   }
 	update(0, 0, get_w(), get_h());
 
 	return true;

@@ -238,10 +238,11 @@ private:
  */
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
 #define MOUSE_OVER_BRIGHT_FACTOR  15
+#define FLAT_BUTTON_FRAME_CLR  RGBColor(229, 161, 2)
 
 class Button : public Panel {
 public:
-	Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id = 0);
+	Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id = 0, bool forcepressed = false, bool flat = false);
 	~Button();
 
 	UISignal clicked;
@@ -258,11 +259,17 @@ public:
 	void handle_mousein(bool inside);
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
+   // sets the graphic to pressed or unpressed, ignoring clicked and clickedid
+   void set_pressed(bool t) { assert(m_no_automatic_pressed); _pressed=t; update(0,0,get_w(),get_h()); }
+   bool get_pressed(void) { assert(m_no_automatic_pressed); return _pressed; }
+   
 private:
-	int _id;
+	bool m_no_automatic_pressed;
+   int _id;
 	bool _highlighted; // mouse is over the button
 	bool _pressed;
 	bool _enabled;
+   bool m_flat;
 	
 	std::string		m_title;		// title string used when _mypic == 0
 
@@ -348,6 +355,42 @@ private:
 	Radiobutton *_buttons; // linked list of buttons (not sorted)
 	int _highestid;
 	int _state; // -1: none
+};
+
+/*
+=============================
+
+class Radiogroup_with_Buttons
+
+This class is exactly the same logic as Radiogroup above, 
+but it uses buttons insted of checkboxes as markers
+
+============================
+*/
+class Radiobutton_Button;
+
+class Radiogroup_with_Buttons {
+   friend class Radiobutton_Button;
+
+   public:
+      Radiogroup_with_Buttons(int, int, bool);
+      ~Radiogroup_with_Buttons();
+
+      UISignal changed;
+      UISignal1<int> changedto;
+
+      int add_button(Panel* parent, int x, int y, int bg, const char*);
+      int add_button(Panel* parent, int x, int y, int bg, uint);
+
+      inline int get_state() const { return _state; }
+      void set_state(int state);
+
+   private:
+      Radiobutton_Button* _buttons;
+      int _highestid;
+      int _state; 
+      int m_button_width, m_button_height;
+      bool m_flat;
 };
 
 /** class Textarea

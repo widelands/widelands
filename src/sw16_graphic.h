@@ -131,11 +131,14 @@ private:
 	unsigned char*		m_pixels;
 	uint					m_frametime;
 	unsigned char*		m_curframe;
-   
+   uint              m_texture_picture;
+
 public:
 	Texture (const char* fnametempl, uint frametime);
 	~Texture ();
-	
+
+   inline uint get_texture_picture(void) { return m_texture_picture; }
+   
 	unsigned char *get_pixels () const { return m_pixels; }
 	unsigned char* get_curpixels() const { return m_curframe; }
 	unsigned short *get_colormap () const { return m_colormap->get_colormap(); }
@@ -282,7 +285,7 @@ private:
 	GameIcons*		m_gameicons;
 };
 
-#define get_graphicimpl() (static_cast<GraphicImpl*>(g_gr))
+#define get_graphicimpl() (static_cast<Renderer_Software16::GraphicImpl*>(g_gr))
 
 
 };

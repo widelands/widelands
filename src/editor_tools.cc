@@ -22,6 +22,8 @@
 #include "editor_tools.h"
 #include "ui.h"
 #include "map.h"
+#include "graphic.h"
+#include "sw16_graphic.h"
 #include <string>
 
 using std::string;
@@ -1012,8 +1014,9 @@ class Editor_Set_Both_Terrain_Tool_Options_Menu : public Window {
       Editor_Interactive* m_parent;
       int* m_terrain;
       Textarea* m_textarea; 
+      Radiogroup_with_Buttons* m_radiogroup;
       
-      void button_clicked(int);
+      void selected(int);
 };
 
 /*
@@ -1024,7 +1027,8 @@ Create all the buttons etc...
 ===============
 */
 Editor_Set_Both_Terrain_Tool_Options_Menu::Editor_Set_Both_Terrain_Tool_Options_Menu(Editor_Interactive *parent, UniqueWindow *registry, int* terrain)
-	: Window(parent, (parent->get_w()-300)/2, (parent->get_h()-100)/2, 210, 70, "Option Menu")
+	//: Window(parent, (parent->get_w()-300)/2, (parent->get_h()-100)/2, 210, 70, "Option Menu")
+	: Window(parent, (parent->get_w()-300)/2, (parent->get_h()-100)/2, 210, 200, "Option Menu")
 {
    m_registry = registry;
 	if (m_registry) {
@@ -1037,18 +1041,46 @@ Editor_Set_Both_Terrain_Tool_Options_Menu::Editor_Set_Both_Terrain_Tool_Options_
 	}
    m_terrain=terrain;
    m_parent=parent;
+    
+   const int space=5;
+   const int xstart=5;
+   const int ystart=15;
+   const int yend=15;
+   int nr_textures=m_parent->get_map()->get_world()->get_nr_terrains();
+   int textures_in_row=(int)(sqrt(nr_textures));
+   if(textures_in_row*textures_in_row<nr_textures) { textures_in_row++; }
+   int i=1;
+  
+   m_radiogroup=new Radiogroup_with_Buttons(TEXTURE_W+1, TEXTURE_H+1, true);
+   set_inner_size((textures_in_row)*(TEXTURE_W+1+space)+xstart, (textures_in_row)*(TEXTURE_H+1+space)+ystart+yend);
+ 
+   int ypos=ystart;
+   int xpos=xstart;
+   int cur_x=0;
+   while(i<=nr_textures) {
+      if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; } 
    
-   new Textarea(this, 3, 5, "Set Both Terrain Tool Options", Align_Left);
-   char buf[250];
-   sprintf(buf, "Current: %i (%s)", *m_terrain, parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
-   m_textarea=new Textarea(this, 50, 25, buf);
+      m_radiogroup->add_button(this, xpos , ypos, 0,  get_graphicimpl()->get_maptexture_data(i)->get_texture_picture());
 
-   Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
-   b->clickedid.set(this, &Editor_Set_Both_Terrain_Tool_Options_Menu::button_clicked);
-   b=new Button(this, 105, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
-   b->clickedid.set(this, &Editor_Set_Both_Terrain_Tool_Options_Menu::button_clicked);
+      xpos+=TEXTURE_W+1+space; 
+      ++cur_x;
+      ++i;
+   }
+   ypos+=TEXTURE_H+1+space+5; 
+  
+   Textarea* ta=new Textarea(this, 0, 5, "Choose Terrain Menu", Align_Left);
+   ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
+
+   char buf[250];
+   sprintf(buf, "Current: %s", parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
+   m_textarea=new Textarea(this, 5, ypos, buf);
+   m_textarea->set_pos((get_inner_w()-m_textarea->get_w())/2, ypos);
+
+   m_radiogroup->changedto.set(this, &Editor_Set_Both_Terrain_Tool_Options_Menu::selected);
+
+   if (m_radiogroup->get_state() < 0)
+      m_radiogroup->set_state(*m_terrain);
+
 }
 
 /*
@@ -1065,29 +1097,22 @@ Editor_Set_Both_Terrain_Tool_Options_Menu::~Editor_Set_Both_Terrain_Tool_Options
 		m_registry->y = get_y();
 		m_registry->window = 0;
 	}
+   delete m_radiogroup;
 }
 
 /*
 ===========
-Editor_Set_Both_Terrain_Tool_Options_Menu::button_clicked()
+Editor_Set_Both_Terrain_Tool_Options_Menu::selected()
 
 called, when one of the up/down buttons is pressed
 id: 0 is up, 1 is down
 ===========
 */
-void Editor_Set_Both_Terrain_Tool_Options_Menu::button_clicked(int n) {
-   int val=*m_terrain;
-   if(n==0) {
-      ++val;
-      if(val>=m_parent->get_map()->get_world()->get_nr_terrains()) val=m_parent->get_map()->get_world()->get_nr_terrains()-1;
-   } else if(n==1) {
-      --val;
-      if(val<0) val=0;
-   }
-   *m_terrain=val;
-   
+void Editor_Set_Both_Terrain_Tool_Options_Menu::selected(int n) {
+   *m_terrain=n;
+
    char buf[250];
-   sprintf(buf, "Current: %i (%s)", *m_terrain, m_parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
+   sprintf(buf, "Current: %s", m_parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
    m_textarea->set_text(buf);
 }
 

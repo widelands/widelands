@@ -122,7 +122,8 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 	m_nrframes = 0;
 	m_pixels = 0;
 	m_frametime = frametime;
-	
+   m_texture_picture=0;
+   
 	// Load the pictures one by one
 	char fname[256];
 	
@@ -150,7 +151,10 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 
 		// Load it
 		SDL_Surface* surf = SDL_LoadBMP(fname);
-		
+		if(!m_texture_picture) {
+         m_texture_picture=get_graphicimpl()->get_picture(PicMod_Game, fname);
+      };
+      
 		if (!surf)
 			break;
 		
@@ -248,7 +252,6 @@ void Texture::animate(uint time)
 
 	m_curframe = &m_pixels[TEXTURE_W*TEXTURE_H*frame];
 }
-
 
 /*
 ==============================================================================
