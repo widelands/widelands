@@ -17,14 +17,18 @@
  *
  */
 
-#include "widelands.h"
-#include "profile.h"
-#include "bob.h"
-#include "worker.h"
+#include "cmd_queue.h"
+#include "filesystem.h"
+#include "game.h"
+#include "graphic.h"
 #include "player.h"
-#include "tribe.h"
+#include "profile.h"
+#include "rendertarget.h"
 #include "transport.h"
-
+#include "util.h"
+#include "wexception.h"
+#include "worker.h"
+#include "world.h"
 
 /*
 ==============================================================================

@@ -20,6 +20,8 @@
 #ifndef __S__CMD_QUEUE_H
 #define __S__CMD_QUEUE_H
 
+#include <queue>
+
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
 #define SENDER_PLAYER1 1 // those are just place holder, a player can send commands with

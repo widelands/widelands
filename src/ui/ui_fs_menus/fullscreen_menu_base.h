@@ -20,7 +20,8 @@
 #ifndef __S__MENUECOMMON_H
 #define __S__MENUECOMMON_H
 
-#include "ui_basic.h"
+#include "types.h"
+#include "ui_panel.h"
 
 #define MENU_XRES	640   ///< Fullscreen Menu Width
 #define MENU_YRES	480   ///< Fullscreen Menu Height

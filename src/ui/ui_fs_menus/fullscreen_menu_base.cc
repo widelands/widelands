@@ -17,11 +17,12 @@
  *
  */
 
-#include "widelands.h"
-#include "options.h"
-#include "ui_basic.h"
-#include "graphic.h"
 #include "fullscreen_menu_base.h"
+#include "graphic.h"
+#include "options.h"
+#include "profile.h"
+#include "rendertarget.h"
+#include "system.h"
 
 /*
 ==============================================================================

@@ -20,6 +20,10 @@
 #ifndef __S__TEXTAREA_H
 #define __S__TEXTAREA_H
 
+#include <string>
+#include "font.h"
+#include "ui_panel.h"
+
 /** 
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed

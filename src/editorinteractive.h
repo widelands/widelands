@@ -20,8 +20,8 @@
 #ifndef __S__EDITORINTERACTIVE_H
 #define __S__EDITORINTERACTIVE_H
 
-#include "mapview.h"
 #include "interactive_base.h"
+#include "ui_unique_window.h"
 
 class Editor;
 class MiniMapView;

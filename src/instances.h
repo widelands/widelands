@@ -20,7 +20,9 @@
 #ifndef __S__INSTANCE_H
 #define __S__INSTANCE_H
 
-#include "field.h"
+#include <map>
+#include <vector>
+#include "types.h"
 
 class Editor_Game_Base;
 class Game;

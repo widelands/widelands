@@ -17,15 +17,15 @@
  *
  */
 
-#include "widelands.h"
-#include "world.h"
-#include "game.h"
-#include "cmd_queue.h"
-#include "player.h"
+#include "animation.h"
 #include "bob.h"
+#include "game.h"
 #include "map.h"
+#include "player.h"
 #include "profile.h"
+#include "rendertarget.h"
 #include "transport.h"
+#include "wexception.h"
 
 
 /*

@@ -20,6 +20,11 @@
 #ifndef included_ui_radiobutton_h
 #define included_ui_radiobutton_h
 
+#include "types.h"
+#include "ui_signal.h"
+
+class UIPanel;
+
 /**
  * A group of radiobuttons. At most one of them is checked at any time.
  * State is -1 if none is checked, otherwise it's the index of the checked button.

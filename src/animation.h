@@ -20,6 +20,11 @@
 #ifndef included_animation_h
 #define included_animation_h
 
+#include <string>
+#include <vector>
+#include "geometry.h"
+#include "rgbcolor.h"
+
 class Profile;
 class Section;
 

@@ -20,8 +20,11 @@
 #ifndef __S__EDITOR_MENUS_H
 #define __S__EDITOR_MENUS_H
 
-#include "ui_basic.h"
 #include "editorinteractive.h"
+#include "ui_unique_window.h"
+
+class UIRadiogroup;
+class UITextarea;
 
 /*
 =============================

@@ -20,6 +20,8 @@
 #ifndef included_ui_progressbar_h
 #define included_ui_progressbar_h
 
+#include "types.h"
+#include "ui_panel.h"
 
 /**
 A very simple panel that displays progress or productivity in percent,

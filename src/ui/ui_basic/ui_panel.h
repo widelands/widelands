@@ -21,6 +21,14 @@
 #ifndef __S__PANEL_H
 #define __S__PANEL_H
 
+#include "ui_object.h"
+#include "types.h"
+
+class RenderTarget;
+
+#define BUTTON_EDGE_BRIGHT_FACTOR 60
+#define MOUSE_OVER_BRIGHT_FACTOR 15
+
 /** 
  * UIPanel is a basic rectangular UI element.
  * The outer rectangle is defined by (_x,_y,_w,_h) and encloses the entire panel,

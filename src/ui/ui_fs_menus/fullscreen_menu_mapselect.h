@@ -20,9 +20,15 @@
 #ifndef __S__MAPSELECTMENUE_H
 #define __S__MAPSELECTMENUE_H
 
+#include "filesystem.h"
 #include "fullscreen_menu_base.h"
-class Map_Loader;
+#include "ui_listselect.h"
+
 class Map;
+class Map_Loader;
+class UIButton;
+class UIMultiline_Textarea;
+class UITextarea;
 
 class Editor_Game_Base;
 

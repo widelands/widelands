@@ -20,12 +20,14 @@
 #ifndef __S__BUTTON_H
 #define __S__BUTTON_H
 
+#include <string>
+#include "rgbcolor.h"
+#include "ui_panel.h"
+#include "ui_signal.h"
+
 /** 
  * This defines a button.
  */
-#define BUTTON_EDGE_BRIGHT_FACTOR 60
-#define MOUSE_OVER_BRIGHT_FACTOR  15
-
 class UIButton : public UIPanel {
 public:
 	UIButton(UIPanel *parent, int x, int y, uint w, uint h, uint background, int id = 0, bool flat = false);

@@ -20,6 +20,8 @@
 #ifndef included_ui_box_h
 #define included_ui_box_h
 
+#include <vector>
+#include "ui_panel.h"
 
 /**
 A layouting panel that holds a number of child panels.

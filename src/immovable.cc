@@ -17,14 +17,17 @@
  *
  */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "profile.h"
+#include "editor_game_base.h"
+#include "error.h"
+#include "field.h"
 #include "game.h"
-#include "map.h"
 #include "immovable.h"
-#include "graphic.h"
-#include "sw16_graphic.h"
+#include "map.h"
+#include "profile.h"
+#include "rendertarget.h"
+#include "util.h"
+#include "wexception.h"
+#include "worker.h"
 
 /*
 ==============================================================================

@@ -20,10 +20,15 @@
 #ifndef __TRIBE_H
 #define __TRIBE_H
 
-#include "bob.h"
-#include "worker.h"
-#include "building.h"
+#include <map>
+#include "animation.h"
 #include "descr_maintainer.h"
+
+class Building_Descr;
+class Editor_Game_Base;
+class Item_Ware_Descr;
+class Worker_Descr;
+class Warehouse;
 
 /*
 Tribes

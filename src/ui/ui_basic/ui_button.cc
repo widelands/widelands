@@ -17,8 +17,11 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
+#include "font.h"
+#include "graphic.h"
+#include "rendertarget.h"
+#include "types.h"
+#include "ui_button.h"
 
 /**
 Initialize a UIButton

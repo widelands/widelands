@@ -16,13 +16,20 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-
-#include "widelands.h"
-#include "editor_game_base.h"
-#include "map.h"
-#include "IntPlayer.h"
-#include "player.h"
    
+#include <set>
+#include "building.h"
+#include "editor_game_base.h"
+#include "graphic.h"
+#include "instances.h"
+#include "interactive_base.h"
+#include "map.h"
+#include "player.h"
+#include "tribe.h"
+#include "wexception.h"
+#include "worker.h"
+#include "world.h"
+
 /*
 ============
 Editor_Game_Base::Editor_Game_Base()

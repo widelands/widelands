@@ -17,8 +17,12 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
+#include <cassert>
+#include "graphic.h"
+#include "rendertarget.h"
+#include "system.h"
+#include "types.h"
+#include "ui_panel.h"
 
 /*
 ==============================================================================

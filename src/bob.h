@@ -20,13 +20,14 @@
 #ifndef __BOB_H
 #define __BOB_H
 
-#include "graphic.h"
-#include "animation.h"
+#include <string>
+#include "geometry.h"
 #include "instances.h"
 
-
-class Profile;
 class Bob;
+class DirAnimations;
+class EncodeData;
+class Profile;
 class Route;
 class Request;
 class Transfer;

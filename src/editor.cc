@@ -17,10 +17,12 @@
  *
  */
 
-#include "widelands.h"
 #include "editor.h"
-#include "map.h"
 #include "editorinteractive.h"
+#include "graphic.h"
+#include "map.h"
+#include "system.h"
+#include "world.h"
 
 /*
 ===========

@@ -20,6 +20,8 @@
 #ifndef WATCHWINDOW_H
 #define WATCHWINDOW_H
 
+#include "geometry.h"
+
 class Interactive_Player;
 
 void show_watch_window(Interactive_Player *parent, Coords coords);

@@ -20,6 +20,10 @@
 #ifndef included_ui_checkbox_h
 #define included_ui_checkbox_h
 
+#include "rgbcolor.h"
+#include "ui_panel.h"
+#include "ui_signal.h"
+
 #define STATEBOX_WIDTH 20
 #define STATEBOX_HEIGHT 20
 

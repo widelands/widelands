@@ -22,10 +22,11 @@
 #ifndef included_building_int_h
 #define included_building_int_h
 
+#include <set>
+#include "types.h"
 
 class Request;
 class WaresQueue;
-
 
 /*
 ConstructionSite

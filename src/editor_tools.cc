@@ -17,15 +17,16 @@
  *
  */
 
-#include "widelands.h"
-#include "editorinteractive.h"
-#include "editor_tools.h"
-#include "ui_basic.h"
-#include "map.h"
-#include "graphic.h"
-#include "sw16_graphic.h"
-#include "editor.h"
 #include <string>
+#include "editor.h"
+#include "editor_tools.h"
+#include "editorinteractive.h"
+#include "field.h"
+#include "geometry.h"
+#include "map.h"
+#include "ui_multilinetextarea.h"
+#include "ui_window.h"
+#include "world.h"
 
 using std::string;
 

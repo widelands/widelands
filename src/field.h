@@ -20,6 +20,9 @@
 #ifndef __S__FIELD_H
 #define __S__FIELD_H
 
+#include <cassert>
+#include "types.h"
+
 // !!!!!!!!!!! remember to change the MULTIPLY_WITH_* macros below too !!!!!!!!!!!!!!!!
 //#define FIELD_WIDTH 58
 //#define FIELD_HEIGHT 58

@@ -25,14 +25,17 @@ What _does_ belong in here:
 Flags, Roads, the logic behind ware pulls and pushes.
 */
 
-#include <stdarg.h>
-
-#include "widelands.h"
+#include <cstdarg>
+#include "cmd_queue.h"
+#include "editor_game_base.h"
+#include "error.h"
 #include "game.h"
 #include "player.h"
+#include "rendertarget.h"
 #include "transport.h"
-#include "building.h"
-
+#include "tribe.h"
+#include "wexception.h"
+#include "worker.h"
 
 /*
 ==============================================================================

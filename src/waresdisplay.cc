@@ -17,15 +17,12 @@
  *
  */
 
-#include "widelands.h"
 #include "editor_game_base.h"
+#include "font.h"
 #include "player.h"
-#include "ware.h"
-
-#include "ui_basic.h"
+#include "rendertarget.h"
 #include "waresdisplay.h"
-
-
+#include "worker.h"
 
 /*
 ==============================================================================

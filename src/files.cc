@@ -19,19 +19,21 @@
 // this originally comes from Return to the Shadows (http://www.rtts.org/)
 // files.cc: provides all the OS abstraction to access files
 
-#include "widelands.h"
-
-#include <stdarg.h>
-
-#include <sys/types.h>
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
+#include <string>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <vector>
+#include "error.h"
+#include "filesystem.h"
 
 #ifdef _WIN32
-#include <io.h>
-
-#define stat _stat
+  #include <io.h>
+  #define stat _stat
 #else
-#include <glob.h>
+  #include <glob.h>
 #endif
 
 /*

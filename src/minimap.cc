@@ -19,11 +19,13 @@
 
  // just testing - philipp
 
-#include "widelands.h"
-#include "minimap.h"
+#include "graphic.h"
+#include "interactive_base.h"
 #include "map.h"
-#include "player.h"
-#include "IntPlayer.h"
+#include "maprenderinfo.h"
+#include "minimap.h"
+#include "rendertarget.h"
+#include "ui_button.h"
 
 /*
 ==============================================================================

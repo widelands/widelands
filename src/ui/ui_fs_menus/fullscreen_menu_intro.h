@@ -21,6 +21,7 @@
 #define __S__INTRO_H
 
 #include "fullscreen_menu_base.h"
+#include "types.h"
 
 /** 
  * Fullscreen Menu with Splash Screen (at the moment).

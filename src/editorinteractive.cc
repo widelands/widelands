@@ -17,16 +17,15 @@
  *
  */
 
-#include "widelands.h"
-#include "editorinteractive.h"
-#include "options.h"
 #include "editor.h"
-#include "map.h"
-#include "player.h"
-#include "minimap.h"
-#include "editor_tools.h"
+#include "editorinteractive.h"
 #include "editor_menus.h"
-
+#include "editor_tools.h"
+#include "keycodes.h"
+#include "map.h"
+#include "mapview.h"
+#include "player.h"
+#include "ui_button.h"
 
 /**********************************************
  *

@@ -17,25 +17,10 @@
  *
  */
 
-#ifndef __S__UI_H
-#define __S__UI_H
+#ifndef UI_SIGNAL_H
+#define UI_SIGNAL_H
 
-#include "graphic.h"
-#include "font.h"
-
-
-/** 
- * Serves as a base class for UI related objects. The only purpose is
- * to provide the base class for signal function pointers.
- */
-class UIObject {
-public:
-	// Yeah right... force a VMT so that MSVC++ gets the pointers-to-members
-	// right *sigh*
-	// OTOH, looking at the gcc assembly, gcc seems to use a less efficient
-	// pointer representation. Can anyone clear this up? -- Nicolai
-	virtual ~UIObject() { }
-};
+#include "ui_object.h"
 
 /**
  * Provides a hook for callback function.
@@ -100,20 +85,4 @@ public:
 	inline void call(T1 t1, T2 t2) { if (_fn) (_obj->*_fn)(t1, t2); }
 };
 
-#include "ui_panel.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_radiobutton.h"
-#include "ui_textarea.h"
-#include "ui_scrollbar.h"
-#include "ui_multilinetextarea.h"
-#include "ui_listselect.h"
-#include "ui_window.h"
-#include "ui_unique_window.h"
-#include "ui_icongrid.h"
-#include "ui_editbox.h"
-#include "ui_box.h"
-#include "ui_tabpanel.h"
-#include "ui_progressbar.h"
-
-#endif /* __S__UI_H */
+#endif /* UI_SIGNAL_H */

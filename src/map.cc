@@ -17,11 +17,12 @@
  *
  */
 
-#include "widelands.h"
+#include <iostream>
+#include "filesystem.h"
 #include "map.h"
-#include "worlddata.h"
-#include "game.h"
 #include "player.h"
+#include "world.h"
+#include "worlddata.h"
 
 using std::cerr;
 using std::endl;

@@ -17,15 +17,15 @@
  *
  */
 
-#include <vector>
-#include "widelands.h"
-#include "ui_basic.h"
+#include "IntPlayer.h"
+#include "bob.h"
 #include "game.h"
 #include "map.h"
 #include "mapview.h"
-#include "IntPlayer.h"
+#include "ui_button.h"
+#include "ui_signal.h"
+#include "ui_window.h"
 #include "watchwindow.h"
-
 
 /*
 ==============================================================================

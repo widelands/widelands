@@ -20,14 +20,13 @@
 Texture implementation and terrain rendering for the 32-bit software renderer.
 */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "map.h"
-#include "world.h"
-
+#include "constants.h"
+#include "error.h"
+#include "field.h"
+#include "filesystem.h"
 #include "sw32_graphic.h"
-
-#include <iostream>
+#include "wexception.h"
+#include "world.h"
 
 using namespace std;
 

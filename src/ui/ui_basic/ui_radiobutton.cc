@@ -17,9 +17,9 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-
+#include "types.h"
+#include "ui_checkbox.h"
+#include "ui_radiobutton.h"
 
 /*
 ==============================================================================

@@ -16,8 +16,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-#include "widelands.h"
-#include "ui_basic.h"
+
+#include "keycodes.h"
+#include "types.h"
+#include "ui_editbox.h"
 
 /*
 =================================================

@@ -25,18 +25,22 @@ buildings directly. Instead, they must send a player command through the Game
 class.
 */
 
-#include "widelands.h"
 #include "IntPlayer.h"
 #include "building.h"
-#include "game.h"
-#include "player.h"
-#include "worker.h"
-#include "fieldaction.h"
-#include "transport.h"
-#include "game_debug_ui.h"
-
 #include "building_int.h"
+#include "cmd_queue.h"
+#include "error.h"
+#include "font.h"
+#include "game_debug_ui.h"
+#include "rendertarget.h"
+#include "transport.h"
+#include "ui_box.h"
+#include "ui_button.h"
+#include "ui_progressbar.h"
+#include "ui_textarea.h"
+#include "ui_window.h"
 #include "waresdisplay.h"
+#include "wexception.h"
 
 
 static const char* pic_ok = "pics/menu_okay.png";

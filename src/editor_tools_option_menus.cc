@@ -17,13 +17,18 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-#include "editor.h"
-#include "editorinteractive.h"
+#include "constants.h"
 #include "editor_tools.h"
 #include "editor_tools_option_menus.h"
-#include "graphic.h"
+#include "editorinteractive.h"
+#include "font.h"
+#include "map.h"
+#include "ui_box.h"
+#include "ui_button.h"
+#include "ui_checkbox.h"
+#include "ui_tabpanel.h"
+#include "ui_textarea.h"
+#include "world.h"
 
 /*
 =================================================

@@ -25,6 +25,7 @@
 #define __S__MD5_H
 
 #include <iostream>
+#include "types.h"
 
 /** 
  *

@@ -17,17 +17,24 @@
  *
  */
 
-#include "widelands.h"
-#include "profile.h"
-#include "tribedata.h"
-#include "tribe.h"
-#include "game.h"
-#include "player.h"
-#include "transport.h"
-
-#include "interactive_base.h"
+#include "building.h"
 #include "building_int.h"
-
+#include "editor_game_base.h"
+#include "error.h"
+#include "filesystem.h"
+#include "font.h"
+#include "game.h"
+#include "graphic.h"
+#include "interactive_base.h"
+#include "map.h"
+#include "player.h"
+#include "profile.h"
+#include "rendertarget.h"
+#include "transport.h"
+#include "tribe.h"
+#include "util.h"
+#include "wexception.h"
+#include "worker.h"
 
 #define BUILDING_LEAVE_INTERVAL		1000
 #define CARRIER_SPAWN_INTERVAL		2500
@@ -790,8 +797,8 @@ uint ConstructionSite::get_built_per64k()
 	thisstep = (thisstep << 16) / CONSTRUCTIONSITE_STEP_TIME;
 	total = (thisstep + (m_work_completed << 16)) / m_work_steps;
 
-	assert(thisstep >= 0 && thisstep <= (1 << 16));
-	assert(total >= 0 && total <= (1 << 16));
+	assert(thisstep <= (1 << 16));
+	assert(total <= (1 << 16));
 
 	return total;
 }

@@ -17,15 +17,11 @@
  *
  */
 
-#include "widelands.h"
-#include "graphic.h"
+#include "interactive_base.h"
 #include "map.h"
-#include "field.h"
 #include "mapview.h"
-#include "game.h"
-#include "player.h"
-#include "IntPlayer.h"
-
+#include "rendertarget.h"
+#include "system.h"
 
 /*
 ===============

@@ -17,11 +17,10 @@
  *
  */
 
-#include "widelands.h"
-#include "profile.h"
-#include "graphic.h"
 #include "animation.h"
-
+#include "constants.h"
+#include "profile.h"
+#include "wexception.h"
 
 /*
 ==============================================================================

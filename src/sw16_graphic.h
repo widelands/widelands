@@ -21,10 +21,17 @@
 #define included_sw16_graphic_h
 
 #include <SDL.h>
+#include <map>
+#include <string>
+#include <vector>
+#include "geometry.h"
+#include "graphic.h"
+#include "rendertarget.h"
+#include "rgbcolor.h"
 
 class AnimationData;
 class EncodeData;
-
+class MapRenderInfo;
 
 namespace Renderer_Software16
 {

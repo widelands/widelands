@@ -20,6 +20,8 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include <vector>
+
 class Profile;
 
 /*

@@ -17,9 +17,12 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-
+#include <algorithm>
+#include "graphic.h"
+#include "rendertarget.h"
+#include "system.h"
+#include "types.h"
+#include "ui_scrollbar.h"
 
 #define SCROLLBAR_AUTOREPEAT_DELAY	200
 #define SCROLLBAR_AUTOREPEAT_TICK	50

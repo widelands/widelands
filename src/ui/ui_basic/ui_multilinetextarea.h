@@ -20,6 +20,12 @@
 #ifndef __S__MULTILINE_TEXTAREA_H
 #define __S__MULTILINE_TEXTAREA_H
 
+#include <string>
+#include "font.h"
+#include "ui_panel.h"
+
+class UIScrollbar;
+
 /** 
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed.

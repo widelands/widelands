@@ -20,18 +20,16 @@
 Management classes and functions of the 16-bit software renderer.
 */
  
-#include "widelands.h"
-#include "options.h"
-#include "graphic.h"
-#include "animation.h"
-#include "game.h"
+#include <SDL_image.h>
+#include "bob.h"
+#include "editor_game_base.h"
+#include "error.h"
+#include "filesystem.h"
 #include "map.h"
+#include "maprenderinfo.h"
 #include "player.h"
-
 #include "sw16_graphic.h"
-
-#include "SDL_image.h"
-
+#include "tribe.h"
 
 namespace Renderer_Software16
 {

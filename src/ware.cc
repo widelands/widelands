@@ -17,14 +17,14 @@
  *
  */
 
-#include "widelands.h"
+#include "animation.h"
+#include "error.h"
+#include "graphic.h"
 #include "profile.h"
-#include "game.h"
 #include "tribe.h"
 #include "ware.h"
+#include "wexception.h"
 #include "worker.h"
-#include "transport.h"
-
 
 /*
 ==============================================================================

@@ -17,14 +17,16 @@
  *
  */
 
-#include "widelands.h"
 #include "editor_menus.h"
-#include "ui_basic.h"
-#include "editor.h"
-#include "editor_tools_option_menus.h"
 #include "editor_tools.h"
+#include "editor_tools_option_menus.h"
+#include "error.h"
 #include "fullscreen_menu_fileview.h"
-#include <string>
+#include "map.h"
+#include "ui_editbox.h"
+#include "ui_multilinetextarea.h"
+#include "ui_radiobutton.h"
+#include "ui_textarea.h"
 
 static const char* EDITOR_README =
 "   README for the Widelands Map Editor\n"

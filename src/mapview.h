@@ -20,8 +20,9 @@
 #ifndef __S__MAPVIEW_H
 #define __S__MAPVIEW_H
 
-#include "graphic.h"
-#include "ui_basic.h"
+#include "geometry.h"
+#include "ui_panel.h"
+#include "ui_signal.h"
 
 class Interactive_Base;
 class Game;

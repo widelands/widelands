@@ -17,13 +17,14 @@
  *
  */
 
-#include "widelands.h"
-#include "profile.h"
+#include <iostream>
+#include "constants.h"
+#include "filesystem.h"
 #include "graphic.h"
+#include "profile.h"
+#include "wexception.h"
 #include "world.h"
-#include "bob.h"
 #include "worlddata.h"
-
 
 using std::cerr;
 using std::endl;

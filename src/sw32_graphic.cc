@@ -20,20 +20,21 @@
 Management classes and functions of the 32-bit software renderer.
 */
 
-#include "widelands.h"
-#include "options.h"
-#include "graphic.h"
-#include "animation.h"
-#include "game.h"
+#include <SDL_image.h>
+#include <string>
+#include "bob.h"
+#include "editor_game_base.h"
+#include "error.h"
+#include "filesystem.h"
 #include "map.h"
+#include "maprenderinfo.h"
 #include "player.h"
-
 #include "sw32_graphic.h"
-
-#include "SDL_image.h"
+#include "tribe.h"
+#include "wexception.h"
 
 #ifdef OPENGL_MODE
-#include <GL/gl.h>
+  #include <GL/gl.h>
 #endif
 
 namespace Renderer_Software32

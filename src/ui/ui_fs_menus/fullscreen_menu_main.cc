@@ -17,11 +17,11 @@
  *
  */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "ui_basic.h"
-#include "fullscreen_menu_base.h"
+#include "constants.h"
+#include "error.h"
 #include "fullscreen_menu_main.h"
+#include "ui_button.h"
+#include "ui_textarea.h"
 
 /*
 ==============================================================================

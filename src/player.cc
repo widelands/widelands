@@ -17,12 +17,12 @@
  *
  */
 
-#include "widelands.h"
-#include "bob.h"
-#include "descr_maintainer.h"
-#include "tribe.h"
+#include "error.h"
+#include "game.h"
 #include "player.h"
 #include "transport.h"
+#include "tribe.h"
+#include "wexception.h"
 
 //
 //

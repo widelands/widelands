@@ -17,10 +17,14 @@
  *
  */
 
-#include "widelands.h"
-#include "graphic.h"
+#include <map>
+#include <string>
+#include "error.h"
+#include "filesystem.h"
 #include "font.h"
-
+#include "graphic.h"
+#include "rendertarget.h"
+#include "wexception.h"
 
 // Font file definitions - deprecated
 // TODO: Replace font files with more standard formats (ttf, bmp?)

@@ -17,14 +17,13 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-#include "playerdescrgroup.h"
-#include "fullscreen_menu_base.h"
-#include "game.h"
-#include "fullscreen_menu_mapselect.h"
 #include "fullscreen_menu_launchgame.h"
+#include "fullscreen_menu_mapselect.h"
+#include "game.h"
 #include "map.h"
+#include "playerdescrgroup.h"
+#include "ui_button.h"
+#include "ui_textarea.h"
 
 /*
 ==============================================================================

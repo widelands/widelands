@@ -20,6 +20,7 @@
 #ifndef __S__WORKER_DESCR_H
 #define __S__WORKER_DESCR_H
 
+#include "animation.h"
 #include "bob.h"
 
 class Building;

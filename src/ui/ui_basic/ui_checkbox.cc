@@ -17,8 +17,10 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
+#include "graphic.h"
+#include "rendertarget.h"
+#include "types.h"
+#include "ui_checkbox.h"
 
 /*
 ==============================================================================

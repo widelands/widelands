@@ -17,18 +17,18 @@
  *
  */
 
-#include "widelands.h"
-#include "options.h"
-#include "ui_basic.h"
-#include "graphic.h"
-#include "game.h"
-#include "minimap.h"
-#include "fieldaction.h"
-#include "mapview.h"
 #include "IntPlayer.h"
+#include "building.h"
+#include "cmd_queue.h"
+#include "fieldaction.h"
+#include "font.h"
+#include "keycodes.h"
+#include "immovable.h"
+#include "mapview.h"
 #include "player.h"
-#include "map.h"
-
+#include "ui_button.h"
+#include "ui_textarea.h"
+#include "ui_unique_window.h"
 
 /*
 ==============================================================================

@@ -20,7 +20,13 @@
 #ifndef __S__PLAYER_DESCR_GROUP
 #define __S__PLAYER_DESCR_GROUP
 
+#include "ui_panel.h"
+#include "ui_signal.h"
+
 class Game;
+class UIButton;
+class UICheckbox;
+class UIPanel;
 
 /** class PlayerDescriptionGroup
  *

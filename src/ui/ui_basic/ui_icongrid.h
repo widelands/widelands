@@ -21,6 +21,10 @@
 #ifndef included_ui_icongrid_h
 #define included_ui_icongrid_h
 
+#include <vector>
+#include "rgbcolor.h"
+#include "ui_panel.h"
+#include "ui_signal.h"
 
 /**
 Arranges clickable pictures of common size in a regular grid.

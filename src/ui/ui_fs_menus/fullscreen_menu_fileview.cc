@@ -17,9 +17,12 @@
  *
  */
 
-#include "widelands.h"
-#include "fullscreen_menu_base.h"
+#include "filesystem.h"
 #include "fullscreen_menu_fileview.h"
+#include "ui_button.h"
+#include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
+#include "ui_unique_window.h"
 
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string title, std::string text)
 	: Fullscreen_Menu_Base("fileviewmenu.jpg")

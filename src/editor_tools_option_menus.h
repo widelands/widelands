@@ -16,14 +16,20 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-// include ui.h before this
 
 #ifndef __S__EDITOR_TOOLS_OPTION_MENUS_H
 #define __S__EDITOR_TOOLS_OPTION_MENUS_H
 
-#include "editor_tools.h"
+#include "ui_unique_window.h"
 
+class Editor_Decrease_Height_Tool;
+class Editor_Increase_Height_Tool;
 class Editor_Interactive;
+class Editor_Noise_Height_Tool;
+class Editor_Place_Immovable_Tool;
+class Editor_Set_Both_Terrain_Tool;
+class Editor_Set_Height_Tool;
+class UITextarea;
 
 class Editor_Tool_Options_Menu : public UIUniqueWindow {
       public:

@@ -20,14 +20,14 @@
 Rendering functions of the 32-bit software renderer.
 */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "animation.h"
-#include "map.h"
-#include "player.h"
-
-#include "sw32_graphic.h"
 #include "editor_game_base.h"
+#include "error.h"
+#include "filesystem.h"
+#include "map.h"
+#include "maprenderinfo.h"
+#include "player.h"
+#include "sw32_graphic.h"
+#include "world.h"
 
 namespace Renderer_Software32
 {

@@ -20,8 +20,10 @@
 #ifndef __S__FONT_H
 #define __S__FONT_H
 
-class RenderTarget;
+#include <map>
+#include "types.h"
 
+class RenderTarget;
 
 enum Align {
 	Align_Left = 0,

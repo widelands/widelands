@@ -17,12 +17,12 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
+#include <cassert>
+#include "font.h"
+#include "graphic.h"
+#include "rendertarget.h"
+#include "system.h"
+#include "ui_window.h"
 
 /* class UIWindow
  *

@@ -20,9 +20,13 @@
 #ifndef __S__LAUNCH_GAME_MENU_H
 #define __S__LAUNCH_GAME_MENU_H 
 
+#include "constants.h"
 #include "fullscreen_menu_base.h"
 
+class Game;
 class PlayerDescriptionGroup;
+class UIButton;
+class UITextarea;
 
 /**
  * Fullscreen menu to select map and to set map options.

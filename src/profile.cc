@@ -17,10 +17,13 @@
  *
  */
 
-#include "widelands.h"
-#include "profile.h"
-
 #include <cstdarg>
+#include <string>
+#include "constants.h"
+#include "error.h"
+#include "filesystem.h"
+#include "profile.h"
+#include "wexception.h"
 
 #define TRUE_WORDS 4
 const char* trueWords[TRUE_WORDS] =

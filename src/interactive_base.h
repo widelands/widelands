@@ -20,14 +20,18 @@
 #ifndef __S__INTBASE_H
 #define __S__INTBASE_H
 
-
-#include "ui_basic.h"
 #include "editor_game_base.h"
+#include "geometry.h"
+#include "graphic.h"
+#include "maprenderinfo.h"
+#include "ui_panel.h"
+#include "ui_unique_window.h"
 
+class Editor_Game_Base;
 class Map;
+class Map_View;
 class MiniMap;
 class MiniMapView;
-class Map_View;
 
 /** class Interactive_Base
  *

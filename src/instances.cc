@@ -17,14 +17,12 @@
  *
  */
 
-#include "widelands.h"
-#include "instances.h"
+#include <cstdarg>
+#include <string>
+#include "cmd_queue.h"
+#include "error.h"
 #include "game.h"
-#include "map.h"
-#include "player.h"
-
-#include <stdarg.h>
-
+#include "instances.h"
 
 /** Object_Manager::~Object_Manager()
  *

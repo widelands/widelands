@@ -20,18 +20,27 @@
 #ifndef included_transport_h
 #define included_transport_h
 
-#include "trackptr.h"
-#include "instances.h"
+#ifdef __GNUC__
+#define PRINTF_FORMAT(b,c) __attribute__ (( __format__ (__printf__,b,c) ))
+#else
+#define PRINTF_FORMAT(b,c)
+#endif
+
+#include <set>
+#include "immovable.h"
 #include "map.h"
+#include "trackptr.h"
+#include "ware.h"
 
-
-class Flag;
-class Road;
-class Request;
-class Transfer;
+class Building;
 class Economy;
-class Item_Ware_Descr;
+class Flag;
 class IdleWareSupply;
+class Item_Ware_Descr;
+class Request;
+class Road;
+class Transfer;
+class Warehouse;
 
 struct Neighbour {
 	Flag	*flag;

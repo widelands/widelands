@@ -20,11 +20,15 @@
 #ifndef __S__PLAYER_H
 #define __S__PLAYER_H
 
-#include "game.h"
+#include "editor_game_base.h"
 #include "map.h"
+#include "rgbcolor.h"
 
-
+class Game;
+class Path;
+class PlayerImmovable;
 class Road;
+class Tribe_Descr;
 
 /** class Player
  *

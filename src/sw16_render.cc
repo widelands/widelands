@@ -20,14 +20,16 @@
 Rendering functions of the 16-bit software renderer.
 */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "animation.h"
-#include "map.h"
-#include "player.h"
-
-#include "sw16_graphic.h"
 #include "editor_game_base.h"
+#include "error.h"
+#include "filesystem.h"
+#include "map.h"
+#include "maprenderinfo.h"
+#include "player.h"
+#include "rgbcolor.h"
+#include "sw16_graphic.h"
+#include "wexception.h"
+#include "world.h"
 
 namespace Renderer_Software16
 {

@@ -17,11 +17,10 @@
  *
  */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "ui_basic.h"
-#include "fullscreen_menu_base.h"
+#include "error.h"
 #include "fullscreen_menu_singleplayer.h"
+#include "ui_button.h"
+#include "ui_textarea.h"
 
 
 Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()

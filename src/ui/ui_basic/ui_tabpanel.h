@@ -20,6 +20,9 @@
 #ifndef included_ui_tabpanel_h
 #define included_ui_tabpanel_h
 
+#include <vector>
+#include "types.h"
+#include "ui_panel.h"
 
 /**
 Provides a tab view; every tab is a panel that can contain any number of

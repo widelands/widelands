@@ -17,8 +17,8 @@
  *
  */
 
-#include "widelands.h"
-#include "map.h"
+#include "field.h"
+#include "geometry.h"
 
 /** class Field
  *

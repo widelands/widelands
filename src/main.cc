@@ -17,24 +17,22 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-#include "options.h"
-#include "setup.h"
+#include "editor.h"
+#include "error.h"
+#include "filesystem.h"
 #include "font.h"
+#include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
 #include "fullscreen_menu_main.h"
-#include "fullscreen_menu_singleplayer.h"
 #include "fullscreen_menu_options.h"
-#include "fullscreen_menu_fileview.h"
+#include "fullscreen_menu_singleplayer.h"
 #include "game.h"
-#include "editor.h"
-
-#include <SDL.h>
-
+#include "graphic.h"
+#include "options.h"
+#include "setup.h"
+#include "system.h"
 
 LayeredFileSystem *g_fs;
-
 
 static void g_shutdown();
 

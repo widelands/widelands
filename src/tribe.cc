@@ -17,16 +17,14 @@
  *
  */
 
-#include "widelands.h"
+#include <iostream>
+#include "editor_game_base.h"
+#include "error.h"
+#include "filesystem.h"
 #include "profile.h"
-#include "graphic.h"
-#include "descr_maintainer.h"
-#include "bob.h"
-#include "tribedata.h"
-#include "ware.h"
-#include "worker.h"
 #include "tribe.h"
-#include "game.h"
+#include "wexception.h"
+#include "worker.h"
 
 using namespace std;
 

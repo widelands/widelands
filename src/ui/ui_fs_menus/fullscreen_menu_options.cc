@@ -17,9 +17,9 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
 #include "fullscreen_menu_options.h"
+#include "ui_button.h"
+#include "ui_textarea.h"
 
 /*
 ==============================================================================

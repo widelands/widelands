@@ -20,13 +20,25 @@
 #ifndef __S__EDITOR_GAME_BASE_H
 #define __S__EDITOR_GAME_BASE_H
 
+#include <cassert>
+#include <map>
+#include <string>
+#include <vector>
+#include "constants.h"
 #include "descr_maintainer.h"
-#include "instances.h"
-#include "tribe.h"
-#include "cmd_queue.h"
+#include "geometry.h"
+#include "types.h"
 #include "ware.h"
 
+class Bob;
+class Building;
+class Building_Descr;
+class Immovable;
 class Interactive_Base;
+class Map;
+class Object_Manager;
+class Player;
+class Tribe_Descr;
 
 class Editor_Game_Base {
    friend class Interactive_Base;

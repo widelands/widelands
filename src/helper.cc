@@ -17,12 +17,13 @@
  *
  */
 
-#include "widelands.h"
-
 #include <cstdarg>
+#include <iostream>
+#include <string>
+#include <vector>
+#include "wexception.h"
 
 using std::cout;
-
 
 /*
 ===============

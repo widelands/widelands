@@ -18,14 +18,18 @@
  */
 // UI classes for real-time game debugging
 
-#include "widelands.h"
-#include "ui_basic.h"
+#include "bob.h"
+#include "field.h"
+#include "graphic.h"
+#include "instances.h"
 #include "interactive_base.h"
-#include "game.h"
-#include "building.h"
-#include "player.h"
-#include "worker.h"
-#include "transport.h"
+#include "map.h"
+#include "ui_button.h"
+#include "ui_listselect.h"
+#include "ui_multilinetextarea.h"
+#include "ui_panel.h"
+#include "ui_tabpanel.h"
+#include "ui_window.h"
 
 /*
 ==============================================================================

@@ -19,12 +19,9 @@
 #ifndef __WORLD_H
 #define __WORLD_H
 
-#include "graphic.h"
-#include "descr_maintainer.h"
 #include "bob.h"
-#include "worlddata.h"
+#include "descr_maintainer.h"
 #include "immovable.h"
-#include "ware.h"
 
 class Section;
 class Editor_Game_Base;

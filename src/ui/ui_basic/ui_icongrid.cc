@@ -17,8 +17,10 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
+#include <cassert>
+#include "graphic.h"
+#include "rendertarget.h"
+#include "types.h"
 #include "ui_icongrid.h"
 
 

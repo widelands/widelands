@@ -16,12 +16,13 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-// you MUST include ui.h before including this
 
 #ifndef included_ui_editbox_h
 #define included_ui_editbox_h
 
 #include <string>
+#include "ui_button.h"
+#include "ui_signal.h"
 
 /**
 a editbox can be clicked, then the user can change

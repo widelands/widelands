@@ -17,10 +17,13 @@
  *
  */
 
-#include "widelands.h"
-#include "game.h"
-#include "s2map.h"
+#include <iostream>
+#include "editor_game_base.h"
+#include "filesystem.h"
 #include "map.h"
+#include "s2map.h"
+#include "types.h"
+#include "world.h"
 
 using std::cerr;
 using std::ios;

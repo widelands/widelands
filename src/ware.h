@@ -20,13 +20,17 @@
 #ifndef __WARE_DESCR_H
 #define __WARE_DESCR_H
 
+#include <map>
+#include <string>
+#include <vector>
+
 class Economy;
 class PlayerImmovable;
+class Profile;
 class Request;
 class Route;
 class Tribe_Descr;
 class Worker_Descr;
-
 
 /*
 Wares

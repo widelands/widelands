@@ -17,10 +17,12 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-
-
+#include <cstdio>
+#include "font.h"
+#include "rendertarget.h"
+#include "rgbcolor.h"
+#include "types.h"
+#include "ui_progressbar.h"
 
 /**
 Initialize the progress bar.

@@ -20,6 +20,9 @@
 #ifndef __S__DESCR_MAINTAINER_H
 #define __S__DESCR_MAINTAINER_H
 
+#include "building.h"
+#include "ware.h"
+
 /*
  * This template is used to have a type save mainting class for Bob_Descr, Worker_Descr 
  * and so on

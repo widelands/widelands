@@ -17,8 +17,10 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
+#include <cassert>
+#include "types.h"
+#include "ui_box.h"
+#include "wexception.h"
 
 /**
 Initialize an empty box

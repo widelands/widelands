@@ -20,11 +20,6 @@
 #ifndef __S__GAME_H
 #define __S__GAME_H
 
-#include "descr_maintainer.h"
-#include "instances.h"
-#include "tribe.h"
-#include "cmd_queue.h"
-#include "ware.h"
 #include "editor_game_base.h"
 
 /** class Game

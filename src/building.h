@@ -21,6 +21,7 @@
 #define __S__BUILDING_H
 
 #include "immovable.h"
+#include "instances.h"
 #include "ware.h"
 
 class Economy;
@@ -28,6 +29,7 @@ class Flag;
 class Interactive_Player;
 class Tribe_Descr;
 class Profile;
+class WareInstance;
 struct EncodeData;
 
 class Building;

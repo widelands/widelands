@@ -20,11 +20,13 @@
 #ifndef __S__EDITOR_TOOLS_H
 #define __S__EDITOR_TOOLS_H
 
-class Editor_Interactive;
-#include "map.h"
-#include "ui_basic.h"
-#include "world.h"
 #include <vector>
+#include "field.h"
+
+class Coords;
+class Editor_Interactive;
+class Field;
+class Map;
 
 #define MAX_TOOL_AREA 6
 

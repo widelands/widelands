@@ -19,9 +19,10 @@
 
 // 2002-02-10	sft+	added config-existing check in handle_options
 
-#include "widelands.h"
+#include "constants.h"
+#include "error.h"
 #include "options.h"
-
+#include "system.h"
 
 Profile g_options(Profile::err_log);
 

@@ -20,13 +20,15 @@
 #ifndef __S__FILE_VIEW_SCREEN_H
 #define __S__FILE_VIEW_SCREEN_H
 
+#include <string>
+#include "fullscreen_menu_base.h"
+
+class UIMultiline_Textarea;
 class UIPanel;
 struct UIUniqueWindowRegistry;
 
 void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string fname);
 void textview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text);
-
-#include "fullscreen_menu_base.h"
 
 /**
  * Shows a Text in a Fullscreen Menu. Waits for the button Ok to be clicked.

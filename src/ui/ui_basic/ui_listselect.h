@@ -21,6 +21,13 @@
 #ifndef __S__LISTSELECT_H
 #define __S__LISTSELECT_H
 
+#include <vector>
+#include "font.h"
+#include "ui_panel.h"
+#include "ui_signal.h"
+
+class UIScrollbar;
+
 /** 
  * This class defines a list-select box.
  */

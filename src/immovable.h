@@ -20,8 +20,8 @@
 #ifndef included_immovable_h
 #define included_immovable_h
 
-#include "instances.h"
 #include "animation.h"
+#include "instances.h"
 
 class Profile;
 class Request;

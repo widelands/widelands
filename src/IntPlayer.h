@@ -21,14 +21,14 @@
 #define __S__INTPLAYER_H
 
 #include "game.h"
-#include "ui_basic.h"
 #include "interactive_base.h"
 
-class Player;
+class CoordPath;
 class MiniMap;
 class Map_View;
+class Player;
+class UITextarea;
 class UIWindow;
-class CoordPath;
 
 /** class Interactive_Player
  *

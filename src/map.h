@@ -20,6 +20,15 @@
 #ifndef __S__MAP_H
 #define __S__MAP_H
 
+#include <vector>
+#include "field.h"
+#include "geometry.h"
+
+class BaseImmovable;
+class FileRead;
+class Player;
+class World;
+
 #define WLMF_VERSION 	0x0001
 
 #define WLMF_SUFFIX		".wmf"
@@ -30,9 +39,6 @@
 
 #define WLMF_VERSIONMAJOR(a)  (a >> 8)
 #define WLMF_VERSIONMINOR(a)  (a & 0xFF)
-
-#include "world.h"
-#include "field.h"
 
 const ushort NUMBER_OF_MAP_DIMENSIONS=15;
 const ushort MAP_DIMENSIONS[] = {

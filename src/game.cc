@@ -17,22 +17,13 @@
  *
  */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "ui_basic.h"
-#include "game.h"
-#include "map.h"
-#include "cmd_queue.h"
-#include "bob.h"
-#include "ware.h"
-#include "worker.h"
-#include "tribe.h"
-#include "player.h"
-#include "fullscreen_menu_launchgame.h"
 #include "IntPlayer.h"
+#include "cmd_queue.h"
+#include "fullscreen_menu_launchgame.h"
+#include "game.h"
+#include "graphic.h"
 #include "player.h"
-#include "building.h"
-
+#include "system.h"
 
 /** Game::Game(void)
  *

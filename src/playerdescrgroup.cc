@@ -17,16 +17,13 @@
  *
  */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "ui_basic.h"
-#include "fullscreen_menu_base.h"
+#include "constants.h"
 #include "game.h"
-#include "fullscreen_menu_mapselect.h"
-#include "fullscreen_menu_launchgame.h"
-#include "map.h"
 #include "player.h"
 #include "playerdescrgroup.h"
+#include "types.h"
+#include "ui_button.h"
+#include "ui_checkbox.h"
 
 // hard-coded playercolors
 uchar g_playercolors[MAX_PLAYERS][12] = {

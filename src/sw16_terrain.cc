@@ -20,14 +20,12 @@
 Texture implementation and terrain rendering for the 16-bit software renderer.
 */
 
-#include "widelands.h"
-#include "graphic.h"
-#include "map.h"
-#include "world.h"
-
+#include "constants.h"
+#include "error.h"
+#include "field.h"
+#include "filesystem.h"
 #include "sw16_graphic.h"
-
-#include <iostream>
+#include "world.h"
 
 using namespace std;
 

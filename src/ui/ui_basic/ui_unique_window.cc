@@ -17,9 +17,8 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-
+#include <cassert>
+#include "ui_unique_window.h"
 
 /*
 ==============================================================================

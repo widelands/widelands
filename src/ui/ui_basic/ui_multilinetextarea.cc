@@ -17,9 +17,10 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
 #include "font.h"
+#include "types.h"
+#include "ui_multilinetextarea.h"
+#include "ui_scrollbar.h"
 
 /**
 Initialize a textarea that supports multiline strings.

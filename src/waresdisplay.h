@@ -16,13 +16,12 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-// you MUST include ui.h before this
 
 #ifndef include_waresdisplay_h
 #define include_waresdisplay_h
 
+#include "ui_panel.h"
 #include "ware.h"
-
 
 class Editor_Game_Base;
 class Player;

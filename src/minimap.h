@@ -20,7 +20,9 @@
 #ifndef MINIMAP_H
 #define MINIMAP_H
 
-#include "ui_basic.h"
+#include "ui_panel.h"
+#include "ui_signal.h"
+#include "ui_unique_window.h"
 
 class Interactive_Base;
 class Player;

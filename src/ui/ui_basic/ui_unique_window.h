@@ -20,6 +20,10 @@
 #ifndef __S__UNIQUE_WINDOW_H
 #define __S__UNIQUE_WINDOW_H
 
+#include <string>
+#include "ui_window.h"
+
+class UIPanel;
 class UIUniqueWindow;
 
 struct UIUniqueWindowRegistry {

@@ -17,13 +17,11 @@
  *
  */
 
-#include "widelands.h"
-#include "game.h"
-#include "map.h"
 #include "cmd_queue.h"
+#include "game.h"
+#include "instances.h"
 #include "player.h"
 #include "worker.h"
-
 
 // 
 // class Cmd_Queue

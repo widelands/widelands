@@ -23,6 +23,10 @@
 #define NUM_RESOLUTIONS		3
 
 #include "fullscreen_menu_base.h"
+#include "system.h"
+#include "types.h"
+#include "ui_checkbox.h"
+#include "ui_radiobutton.h"
 
 /**
  * Fullscreen Optionsmenu. A modal optionsmenu

@@ -21,15 +21,13 @@
 // 2002-02-11	sft+	made setup_searchpaths work PROPERLY for win32
 // 2002-08-07  nh		setup_searchpaths changed for saner default paths
 
-#include "widelands.h"
-#include "graphic.h"
-#include "font.h"
-#include "ui_basic.h"
+#include <string>
+#include "filesystem.h"
 #include "setup.h"
 
 #ifndef WIN32
-#include <sys/stat.h>
-#include <sys/types.h>
+  #include <sys/stat.h>
+  #include <sys/types.h>
 #endif
 
 

@@ -17,8 +17,7 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
+#include "ui_textarea.h"
 
 /**
 Initialize a UITextarea. For non-multiline textareas, the dimensions are set

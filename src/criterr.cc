@@ -17,13 +17,14 @@
  *
  */
 
-#include "widelands.h"
-
 #include <stdarg.h>
-
+#include <stdlib.h>
+#include "error.h"
 #include "graphic.h"
-#include "ui_basic.h"
-
+#include "rendertarget.h"
+#include "ui_button.h"
+#include "ui_textarea.h"
+#include "ui_panel.h"
 
 /*
 ==============================================================================

@@ -20,6 +20,9 @@
 #ifndef __S__SCROLLBAR_H
 #define __S__SCROLLBAR_H
 
+#include "ui_panel.h"
+#include "ui_signal.h"
+
 /** class UIScrollbar
  *
  * This class provides a scrollbar

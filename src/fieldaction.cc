@@ -17,17 +17,22 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
-#include "game.h"
-#include "map.h"
 #include "IntPlayer.h"
+#include "cmd_queue.h"
+#include "fieldaction.h"
+#include "game_debug_ui.h"
+#include "map.h"
 #include "player.h"
 #include "transport.h"
-#include "fieldaction.h"
+#include "tribe.h"
+#include "ui_box.h"
+#include "ui_button.h"
+#include "ui_icongrid.h"
+#include "ui_tabpanel.h"
+#include "ui_unique_window.h"
 #include "watchwindow.h"
-#include "game_debug_ui.h"
 
+class Building_Descr;
 
 /*
 ==============================================================================

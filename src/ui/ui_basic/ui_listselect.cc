@@ -17,8 +17,10 @@
  *
  */
 
-#include "widelands.h"
-#include "ui_basic.h"
+#include "rendertarget.h"
+#include "types.h"
+#include "ui_listselect.h"
+#include "ui_scrollbar.h"
 
 /**
 Initialize a list select panel

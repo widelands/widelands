@@ -17,12 +17,13 @@
  *
  */
 
-#include "widelands.h"
+#include "font.h"
 #include "interactive_base.h"
 #include "map.h"
-#include "options.h"
 #include "mapview.h"
 #include "minimap.h"
+#include "options.h"
+#include "system.h"
 
 /*
 ==============================================================================

@@ -22,7 +22,6 @@
 
 #include "editor_game_base.h"
 
-
 class Editor_Interactive;
 
 class Editor : public Editor_Game_Base {
