@@ -115,17 +115,30 @@ A production site can have one (or more) output wares types (in theory it should
 A production site can have one (or more) input wares types. Every input
   wares type has an associated store.
 */
+class ProductionProgram;
+
 class ProductionSite_Descr : public Building_Descr {
+	typedef std::map<std::string, ProductionProgram*> ProgramMap;
+
 public:
 	ProductionSite_Descr(Tribe_Descr *tribe, const char *name);
+	virtual ~ProductionSite_Descr();
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual Building *create_object();
 
 	std::string get_worker() const { return m_worker; }
+	bool is_input(std::string name) const { return m_input.find(name) != m_input.end(); }
+	bool is_output(std::string name) const { return m_output.find(name) != m_output.end(); }
+	const std::set<std::string>* get_inputs() const { return &m_input; }
+	const std::set<std::string>* get_outputs() const { return &m_output; }
+	const ProductionProgram* get_program(std::string name) const;
 
 private:
-	std::string		m_worker;	// name of worker type
+	std::string					m_worker;	// name of worker type
+	std::set<std::string>	m_input;		// input wares type names
+	std::set<std::string>	m_output;	// output wares type names
+	ProgramMap					m_programs;
 };
 
 class ProductionSite : public Building {
@@ -137,6 +150,7 @@ public:
 
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
+	virtual void act(Game *g, uint data);
 
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
@@ -146,9 +160,17 @@ protected:
 private:
 	static void request_worker_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
+	void program_step();
+
 private:
 	Request*		m_worker_request;
 	Worker*		m_worker;
+
+	const ProductionProgram*	m_program;			// currently running program
+	int								m_program_ip;		// instruction pointer
+	int								m_program_phase;	// micro-step index (instruction dependent)
+	bool								m_program_timer;	// execute next instruction based on pointer
+	int								m_program_time;	// timer time
 };
 
 

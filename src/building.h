@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,14 +49,14 @@ public:
 	Building_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Building_Descr(void);
 
-	inline const char *get_name(void) { return m_name; }
-	inline const char *get_descname() { return m_descname; }
-	inline uint get_idle_anim(void) { return m_idle; }
-	inline bool get_buildable(void) { return m_buildable; }
+	inline const char *get_name(void) const { return m_name; }
+	inline const char *get_descname() const { return m_descname; }
+	inline uint get_idle_anim(void) const { return m_idle; }
+	inline bool get_buildable(void) const { return m_buildable; }
 	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
 	inline uint get_buildicon() const { return m_buildicon; }
-	inline int get_size(void) { return m_size; }
-	inline bool get_ismine() { return m_mine; }
+	inline int get_size(void) const { return m_size; }
+	inline bool get_ismine() const { return m_mine; }
 
 	Building *create(Editor_Game_Base *g, Player *owner, Coords pos, bool construct);
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);

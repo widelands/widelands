@@ -29,6 +29,7 @@ class Profile;
 class Bob;
 class Route;
 class Request;
+class WorkerProgram;
 
 
 /*
@@ -39,8 +40,8 @@ public:
 	Bob_Descr(const char *name);
 	virtual ~Bob_Descr(void);
 
-	inline const char* get_name(void) { return m_name; }
-	inline uint get_idle_anim(void) { return m_idle_anim; }
+	inline const char* get_name(void) const { return m_name; }
+	inline uint get_idle_anim(void) const { return m_idle_anim; }
 
 	Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
 
@@ -75,10 +76,11 @@ public:
 		Object_Ptr		objvar1;
 		std::string		svar1;
 
-		DirAnimations*	diranims;
-		Path*				path;
-		Request*			request;
-		Route*			route;
+		DirAnimations*			diranims;
+		Path*						path;
+		Request*					request;
+		Route*					route;
+		const WorkerProgram*	program;
 	};
 
 protected:

@@ -45,9 +45,12 @@ Workers can be in one of the following meta states:
 - Work: the worker is running his working schedule
 */
 class Worker;
+class WorkerProgram;
 
 class Worker_Descr : public Bob_Descr {
    friend class Tribe_Descr;
+
+	typedef std::map<std::string, WorkerProgram*> ProgramMap;
 
 public:
 	Worker_Descr(Tribe_Descr *tribe, const char *name);
@@ -64,6 +67,7 @@ public:
 	inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
 	inline DirAnimations *get_walkload_anims() { return &m_walkload_anims; }
 	inline int get_ware_id() const { return m_ware_id; }
+	const WorkerProgram* get_program(std::string name) const;
 
 	void set_ware_id(int idx);
 
@@ -80,8 +84,9 @@ protected:
 	uint				m_menu_pic;
 	DirAnimations	m_walk_anims;
 	DirAnimations	m_walkload_anims;
-
 	int				m_ware_id;
+
+	ProgramMap		m_programs;
 };
 
 class Worker : public Bob {
@@ -126,6 +131,8 @@ public: // worker-specific tasks
 	void start_task_buildingwork(Game* g);
 	void update_task_buildingwork(Game* g);
 
+	void start_task_program(Game* g, std::string name);
+
 	void start_task_gowarehouse(Game* g);
 	void start_task_dropoff(Game* g, WareInstance* item);
 	void start_task_fetchfromflag(Game* g);
@@ -142,6 +149,9 @@ private: // task details
 
 	void buildingwork_update(Game* g, State* state);
 	void buildingwork_signal(Game* g, State* state);
+
+	void program_update(Game* g, State* state);
+	void program_signal(Game* g, State* state);
 
 	void gowarehouse_update(Game* g, State* state);
 	void gowarehouse_signal(Game* g, State* state);
@@ -165,6 +175,7 @@ private: // task details
 private:
 	static Task taskRequest;
 	static Task taskBuildingwork;
+	static Task taskProgram;
 	static Task taskGowarehouse;
 	static Task taskDropoff;
 	static Task taskFetchfromflag;

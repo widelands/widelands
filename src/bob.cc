@@ -457,6 +457,7 @@ void Bob::push_task(Game* g, Task* task)
 	state->path = 0;
 	state->request = 0;
 	state->route = 0;
+	state->program = 0;
 
 	m_stack_dirty = true;
 }

@@ -6,19 +6,17 @@ buildable=yes
 buildicon=lumberjack_build.bmp
 worker=lumberjack
 
-input=
+#input=
 output=log
 
 program=work
 
-#subtype=none      # possible values: for warehouse: HQ, port
+#subtype=none		# possible values: for warehouse: HQ, port
 
 [work]
-0=sleep 10000		# sleep the given time
+0=sleep 20000		# sleep the given time
 1=worker chop		# cause the worker to run the 'chop' program
 
-
-# TODO: describe what this guy does
 
 [buildcost]
 plank=2

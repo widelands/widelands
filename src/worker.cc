@@ -29,6 +29,99 @@
 /*
 ==============================================================================
 
+class WorkerProgram
+
+==============================================================================
+*/
+
+struct WorkerAction {
+	enum Type {
+		actCreateItem,		// sparam1 = ware name
+	};
+
+	Type			type;
+	int			iparam1;
+	std::string	sparam1;
+};
+
+class WorkerProgram {
+public:
+	WorkerProgram(std::string name);
+
+	std::string get_name() const { return m_name; }
+	int get_size() const { return m_actions.size(); }
+	const WorkerAction* get_action(int idx) const {
+		assert(idx >= 0 && (uint)idx < m_actions.size());
+		return &m_actions[idx];
+	}
+
+	void parse(std::string directory, Profile* prof, std::string name);
+
+private:
+	std::string						m_name;
+	std::vector<WorkerAction>	m_actions;
+};
+
+
+/*
+===============
+WorkerProgram::WorkerProgram
+
+Initialize a program
+===============
+*/
+WorkerProgram::WorkerProgram(std::string name)
+{
+	m_name = name;
+}
+
+
+/*
+===============
+WorkerProgram::parse
+
+Parse a program
+===============
+*/
+void WorkerProgram::parse(std::string directory, Profile* prof, std::string name)
+{
+	Section* sprogram = prof->get_safe_section(name.c_str());
+
+	for(uint idx = 0; ; ++idx) {
+		char buf[32];
+		const char* string;
+		std::vector<std::string> cmd;
+
+		snprintf(buf, sizeof(buf), "%i", idx);
+		string = sprogram->get_string(buf, 0);
+		if (!string)
+			break;
+
+		split_string(string, &cmd, " \t\r\n");
+		if (!cmd.size())
+			continue;
+
+		WorkerAction act;
+
+		if (cmd[0] == "createitem")
+		{
+			if (cmd.size() != 2)
+				throw wexception("Line %i: Usage: createitem <ware type>", idx);
+
+			act.type = WorkerAction::actCreateItem;
+			act.sparam1 = cmd[1];
+		}
+		else
+			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
+
+		m_actions.push_back(act);
+	}
+}
+
+
+/*
+==============================================================================
+
 Worker IMPLEMENTATION
 
 ==============================================================================
@@ -55,6 +148,11 @@ Worker_Descr::~Worker_Descr(void)
 {
 	if (m_menu_pic_fname)
 		free(m_menu_pic_fname);
+
+	while(m_programs.size()) {
+		delete m_programs.begin()->second;
+		m_programs.erase(m_programs.begin());
+	}
 }
 
 
@@ -83,6 +181,25 @@ void Worker_Descr::set_ware_id(int idx)
 	m_ware_id = idx;
 }
 
+
+/*
+===============
+Worker_Descr::get_program
+
+Get a program from the workers description.
+===============
+*/
+const WorkerProgram* Worker_Descr::get_program(std::string name) const
+{
+	ProgramMap::const_iterator it = m_programs.find(name);
+
+	if (it == m_programs.end())
+		throw wexception("%s has no program '%s'", get_name(), name.c_str());
+
+	return it->second;
+}
+
+
 /*
 ===============
 Worker_Descr::create
@@ -102,6 +219,7 @@ Worker *Worker_Descr::create(Editor_Game_Base *gg, Player *owner, PlayerImmovabl
 	return worker;
 }
 
+
 /*
 ===============
 Worker_Descr::parse
@@ -114,26 +232,42 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	const char *string;
 	char buf[256];
 	char fname[256];
-	Section *s;
+	Section* sglobal;
 
 	Bob_Descr::parse(directory, prof, encdata);
 
-	s = prof->get_safe_section("global");
+	sglobal = prof->get_safe_section("global");
 
-	m_descname = s->get_string("descname", get_name());
-	m_helptext = s->get_string("help", "Doh... someone forgot the help text!");
+	m_descname = sglobal->get_string("descname", get_name());
+	m_helptext = sglobal->get_string("help", "Doh... someone forgot the help text!");
 
 	snprintf(buf, sizeof(buf),	"%s_menu.bmp", get_name());
-	string = s->get_string("menu_pic", buf);
+	string = sglobal->get_string("menu_pic", buf);
 	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 	m_menu_pic_fname = strdup(fname);
 
 	// Read the walking animations
-	s = prof->get_section("walk");
-	m_walk_anims.parse(directory, prof, "walk_??", s, encdata);
+	m_walk_anims.parse(directory, prof, "walk_??", prof->get_section("walk"), encdata);
+	m_walkload_anims.parse(directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
 
-	s = prof->get_section("walkload");
-	m_walkload_anims.parse(directory, prof, "walkload_??", s, encdata);
+	// Read programs
+	while(sglobal->get_next_string("program", &string)) {
+		WorkerProgram* prog = 0;
+
+		try
+		{
+			prog = new WorkerProgram(string);
+			prog->parse(directory, prof, string);
+			m_programs[prog->get_name()] = prog;
+		}
+		catch(std::exception& e)
+		{
+			if (prog)
+				delete prog;
+
+			throw wexception("Parse error in program %s: %s", string, e.what());
+		}
+	}
 }
 
 
@@ -639,6 +773,104 @@ void Worker::update_task_buildingwork(Game* g)
 /*
 ==============================
 
+PROGRAM task
+
+Follow the steps of a configuration-defined program.
+ivar1 is the next action to be performed.
+
+==============================
+*/
+
+Bob::Task Worker::taskProgram = {
+	"program",
+
+	(Bob::Ptr)&Worker::program_update,
+	(Bob::Ptr)&Worker::program_signal,
+	0
+};
+
+
+/*
+===============
+Worker::start_task_program
+
+Start the given program.
+===============
+*/
+void Worker::start_task_program(Game* g, std::string name)
+{
+	State* state;
+
+	push_task(g, &taskProgram);
+
+	state = get_state();
+	state->program = get_descr()->get_program(name);
+	state->ivar1 = 0;
+}
+
+
+/*
+===============
+Worker::program_update
+===============
+*/
+void Worker::program_update(Game* g, State* state)
+{
+	const WorkerAction* act;
+
+	molog("[program]: %s#%i\n", state->program->get_name().c_str(), state->ivar1);
+
+	if (state->ivar1 >= state->program->get_size()) {
+		molog("  End of program\n");
+		pop_task(g);
+		return;
+	}
+
+	act = state->program->get_action(state->ivar1);
+
+	switch(act->type) {
+	case WorkerAction::actCreateItem:
+		{
+			WareInstance* item;
+			int wareid;
+
+			molog("  CreateItem(%s)\n", act->sparam1.c_str());
+
+			item = fetch_carried_item(g);
+			if (item) {
+				molog("  Still carrying an item! Delete it.\n");
+				item->schedule_destroy(g);
+			}
+
+			wareid = g->get_safe_ware_id(act->sparam1.c_str());
+			item = new WareInstance(wareid);
+			item->init(g);
+
+			set_carried_item(g, item);
+
+			state->ivar1++;
+			schedule_act(g, 10);
+			break;
+		}
+	}
+}
+
+
+/*
+===============
+Worker::program_signal
+===============
+*/
+void Worker::program_signal(Game* g, State* state)
+{
+	molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
+	pop_task(g);
+}
+
+
+/*
+==============================
+
 GOWAREHOUSE task
 
 ==============================
@@ -829,7 +1061,9 @@ void Worker::dropoff_update(Game* g, State* state)
 		return;
 	}
 
-	throw wexception("Worker: DropOff: TODO: return into non-warehouse");
+	// Our parent task should know what to do
+	molog("[dropoff]: back in building\n");
+	pop_task(g);
 }
 
 

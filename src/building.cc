@@ -1323,6 +1323,116 @@ Building *Warehouse_Descr::create_object()
 /*
 ==============================================================================
 
+class ProductionProgram
+
+==============================================================================
+*/
+
+struct ProductionAction {
+	enum Type {
+		actSleep,		// iparam1 = sleep time in milliseconds
+		actWorker,		// sparam1 = worker program to run
+	};
+
+	Type			type;
+	int			iparam1;
+	std::string	sparam1;
+};
+
+/*
+class ProductionProgram
+-----------------------
+Holds a series of actions to perform for production.
+*/
+class ProductionProgram {
+public:
+	ProductionProgram(std::string name);
+
+	std::string get_name() const { return m_name; }
+	int get_size() const { return m_actions.size(); }
+	const ProductionAction* get_action(int idx) const {
+		assert(idx >= 0 && (uint)idx < m_actions.size());
+		return &m_actions[idx];
+	}
+
+	void parse(std::string directory, Profile* prof, std::string name);
+
+private:
+	std::string							m_name;
+	std::vector<ProductionAction>	m_actions;
+};
+
+
+/*
+===============
+ProductionProgram::ProductionProgram
+===============
+*/
+ProductionProgram::ProductionProgram(std::string name)
+{
+	m_name = name;
+}
+
+
+/*
+===============
+ProductionProgram::parse
+
+Parse a program.
+===============
+*/
+void ProductionProgram::parse(std::string directory, Profile* prof, std::string name)
+{
+	Section* sprogram = prof->get_safe_section(name.c_str());
+
+	for(uint idx = 0; ; ++idx) {
+		char buf[32];
+		const char* string;
+		std::vector<std::string> cmd;
+
+		snprintf(buf, sizeof(buf), "%i", idx);
+		string = sprogram->get_string(buf, 0);
+		if (!string)
+			break;
+
+		split_string(string, &cmd, " \t\r\n");
+		if (!cmd.size())
+			continue;
+
+		ProductionAction act;
+
+		if (cmd[0] == "sleep")
+		{
+			char* endp;
+
+			if (cmd.size() != 2)
+				throw wexception("Line %i: Usage: sleep <time in ms>", idx);
+
+			act.type = ProductionAction::actSleep;
+			act.iparam1 = strtol(cmd[1].c_str(), &endp, 0);
+
+			if (endp && *endp)
+				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+		}
+		else if (cmd[0] == "worker")
+		{
+			if (cmd.size() != 2)
+				throw wexception("Line %i: Usage: worker <program name>", idx);
+
+			act.type = ProductionAction::actWorker;
+			act.sparam1 = cmd[1];
+		}
+		else
+			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
+
+		m_actions.push_back(act);
+	}
+}
+
+
+/*
+==============================================================================
+
 ProductionSite BUILDING
 
 ==============================================================================
@@ -1331,6 +1441,14 @@ ProductionSite BUILDING
 ProductionSite_Descr::ProductionSite_Descr(Tribe_Descr* tribe, const char* name)
 	: Building_Descr(tribe, name)
 {
+}
+
+ProductionSite_Descr::~ProductionSite_Descr()
+{
+	while(m_programs.size()) {
+		delete m_programs.begin()->second;
+		m_programs.erase(m_programs.begin());
+	}
 }
 
 
@@ -1344,10 +1462,55 @@ Parse the additional information necessary for production buildings
 void ProductionSite_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
 	Section* sglobal = prof->get_section("global");
+	const char* string;
 
 	Building_Descr::parse(directory, prof, encdata);
 
 	m_worker = sglobal->get_safe_string("worker");
+
+	// Get inputs and outputs
+	while(sglobal->get_next_string("input", &string))
+		m_input.insert(string);
+
+	while(sglobal->get_next_string("output", &string))
+		m_output.insert(string);
+
+	// Get programs
+	while(sglobal->get_next_string("program", &string)) {
+		ProductionProgram* program = 0;
+
+		try
+		{
+			program = new ProductionProgram(string);
+			program->parse(directory, prof, string);
+			m_programs[program->get_name()] = program;
+		}
+		catch(std::exception& e)
+		{
+			if (program)
+				delete program;
+
+			throw wexception("Error in program %s: %s", string, e.what());
+		}
+	}
+}
+
+
+/*
+===============
+ProductionSite_Descr::get_program
+
+Get the program of the given name.
+===============
+*/
+const ProductionProgram* ProductionSite_Descr::get_program(std::string name) const
+{
+	ProgramMap::const_iterator it = m_programs.find(name);
+
+	if (it == m_programs.end())
+		throw wexception("%s has no program '%s'", get_name(), name.c_str());
+
+	return it->second;
 }
 
 
@@ -1369,6 +1532,12 @@ ProductionSite::ProductionSite(ProductionSite_Descr* descr)
 {
 	m_worker = 0;
 	m_worker_request = 0;
+
+	m_program = 0;
+	m_program_ip = 0;
+	m_program_phase = 0;
+	m_program_timer = false;
+	m_program_time = 0;
 }
 
 
@@ -1456,14 +1625,107 @@ void ProductionSite::request_worker_callback(Game* g, Request* rq, int ware, Wor
 
 /*
 ===============
+ProductionSite::act
+
+Advance the program state if applicable.
+===============
+*/
+void ProductionSite::act(Game *g, uint data)
+{
+	if (m_program_timer && (int)(g->get_gametime() - m_program_time) >= 0) {
+		const ProductionAction* action = m_program->get_action(m_program_ip);
+
+		m_program_timer = false;
+
+		molog("PSITE: program %s#%i\n", m_program->get_name().c_str(), m_program_ip);
+
+		switch(action->type) {
+		case ProductionAction::actSleep:
+			molog("  Sleep(%i)\n", action->iparam1);
+
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, action->iparam1);
+			break;
+
+		case ProductionAction::actWorker:
+			molog("  Worker\n");
+
+			m_worker->update_task_buildingwork(g);
+			break;
+		}
+	}
+
+	Building::act(g, data);
+}
+
+
+/*
+===============
 ProductionSite::get_building_work
 
 There's currently nothing to do for the worker.
+Note: we assume that the worker is inside the building when this is called.
 ===============
 */
 bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 {
+	// Default actions first
+	WareInstance* item = w->fetch_carried_item(g);
+
+	if (item) {
+		if (!get_descr()->is_output(item->get_ware_descr()->get_name()))
+			molog("PSITE: WARNING: carried item %s is not an output item\n",
+					item->get_ware_descr()->get_name());
+
+		w->start_task_dropoff(g, item);
+		return true;
+	}
+
+	// Start program if we haven't already done so
+	if (!m_program)
+	{
+		m_program = get_descr()->get_program("work");
+		m_program_ip = 0;
+		m_program_phase = 0;
+		m_program_timer = true;
+		m_program_time = schedule_act(g, 10);
+	}
+	else
+	{
+		const ProductionAction* action = m_program->get_action(m_program_ip);
+
+		if (action->type == ProductionAction::actWorker) {
+			if (m_program_phase == 0)
+			{
+				w->start_task_program(g, action->sparam1);
+				m_program_phase++;
+				return true;
+			}
+			else
+			{
+				program_step();
+				m_program_timer = true;
+				m_program_time = schedule_act(g, 10);
+			}
+		}
+	}
+
 	return false;
+}
+
+
+/*
+===============
+ProductionSite::program_step
+
+Advance the program to the next step, but does not schedule anything.
+===============
+*/
+void ProductionSite::program_step()
+{
+	m_program_ip = (m_program_ip + 1) % m_program->get_size();
+	m_program_phase = 0;
 }
 
 
