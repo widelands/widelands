@@ -230,11 +230,11 @@ LaunchGameMenu::LaunchGameMenu(Game *g)
 	// Buttons
 	Button* b;
 
-	b = new Button(this, 410, 406, 174, 24, 0, 0);
+	b = new Button(this, 410, 356, 174, 24, 0, 0);
 	b->clickedid.set(this, &LaunchGameMenu::end_modal);
 	b->set_title("Back");
 
-	m_ok = new Button(this, 410, 436, 174, 24, 2, 1);
+	m_ok = new Button(this, 410, 386, 174, 24, 2, 1);
 	m_ok->clickedid.set(this, &LaunchGameMenu::end_modal);
 	m_ok->set_title("Start game");
 	m_ok->set_enabled(false);

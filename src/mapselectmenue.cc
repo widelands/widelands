@@ -74,17 +74,17 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	// Buttons
 	Button* b;
 
-	b = new Button(this, 410, 406, 174, 24, 0, 0);
+	b = new Button(this, 410, 356, 174, 24, 0, 0);
 	b->clickedid.set(this, &MapSelectMenu::end_modal);
 	b->set_title("Back");
 
-	m_ok = new Button(this, 410, 436, 174, 24, 2, 0);
+	m_ok = new Button(this, 410, 386, 174, 24, 2, 0);
 	m_ok->clicked.set(this, &MapSelectMenu::ok);
 	m_ok->set_title("OK");
 	m_ok->set_enabled(false);
 
 	// Create the list area
-	list = new Listselect(this, 20, 170, 360, 290);
+	list = new Listselect(this, 21, 172, 354, 280);
 	list->selected.set(this, &MapSelectMenu::map_selected);
 
 	// Fill it with the files: Widelands map files
@@ -103,18 +103,18 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	}
 
 	// Info fields
-	new Textarea(this, 450, 210, "Name:", Align_Right);
-	taname = new Textarea(this, 460, 210, 0);
-	new Textarea(this, 450, 230, "Author:", Align_Right);
-	taauthor = new Textarea(this, 460, 230, 0);
-	new Textarea(this, 450, 250, "Size:", Align_Right);
-	tasize = new Textarea(this, 460, 250, 0);
-	new Textarea(this, 450, 270, "World:", Align_Right);
-	taworld = new Textarea(this, 460, 270, 0);
-	new Textarea(this, 450, 290, "Players:", Align_Right);
-	tanplayers = new Textarea(this, 460, 290, 0);
-	new Textarea(this, 450, 310, "Descr:", Align_Right);
-	tadescr = new Multiline_Textarea(this, 460, 310, 180, 80, 0);
+	new Textarea(this, 450, 160, "Name:", Align_Right);
+	taname = new Textarea(this, 460, 160, 0);
+	new Textarea(this, 450, 180, "Author:", Align_Right);
+	taauthor = new Textarea(this, 460, 180, 0);
+	new Textarea(this, 450, 200, "Size:", Align_Right);
+	tasize = new Textarea(this, 460, 200, 0);
+	new Textarea(this, 450, 220, "World:", Align_Right);
+	taworld = new Textarea(this, 460, 220, 0);
+	new Textarea(this, 450, 240, "Players:", Align_Right);
+	tanplayers = new Textarea(this, 460, 240, 0);
+	new Textarea(this, 450, 260, "Descr:", Align_Right);
+	tadescr = new Multiline_Textarea(this, 460, 260, 160, 80, 0);
 }
 
 MapSelectMenu::~MapSelectMenu()

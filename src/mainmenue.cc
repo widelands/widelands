@@ -47,7 +47,7 @@ FileViewScreen::FileViewScreen(const char *text)
 	// Close button
 	Button *b;
 
-	b = new Button(this, 233, 420, 174, 24, 3);
+	b = new Button(this, 233, 420, 174, 24, 0);
 	b->clickedid.set(this, &FileViewScreen::end_modal);
 	b->set_title("Close");
 }
@@ -121,8 +121,8 @@ MainMenu::MainMenu()
 	b->set_title("Exit Game");
 
 	// Text
-	new Textarea(this, MENU_XRES, MENU_YRES, "Version " VERSION, Align_BottomRight);
-	new Textarea(this, 0, MENU_YRES, "(C) 2002 by the Widelands Development Team", Align_Bottom);
+	new Textarea(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right);
+	new Textarea(this, 15, MENU_YRES-29, "(C) 2002 by the Widelands Development Team", Align_TopLeft);
 }
 
 void MainMenu::not_supported()
