@@ -44,7 +44,7 @@ The ConstructionSite's idling animation is the basic construction site marker.
 class ConstructionSite_Descr : public Building_Descr {
 public:
 	ConstructionSite_Descr(Tribe_Descr* tribe, const char* name);
-	
+
 	virtual void parse(const char* directoy, Profile* prof, const EncodeData* encdata);
 	virtual Building* create_object(bool logic);
 };
@@ -55,20 +55,26 @@ class ConstructionSite : public Building {
 public:
 	ConstructionSite(ConstructionSite_Descr* descr, bool logic);
 	virtual ~ConstructionSite();
-	
+
 	virtual int get_size();
-	
+
 	void set_building(Building_Descr* descr);
 	inline Building_Descr* get_building() const { return m_building; }
 
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
-	
-protected:	
+
+protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
+
+	void request_builder(Game* g);
+	virtual void request_success(Game* g, Request* req);
 
 private:
 	Building_Descr*	m_building; // type of building that is being built
+
+	Request*				m_builder_request;
+	Worker*				m_builder;
 };
 
 
@@ -78,7 +84,9 @@ ProductionSite
 Every building that is part of the economics system is a production site.
 
 A production site has a worker.
-A production site always has one (or more) output wares types.
+A production site can have one (or more) output wares types (in theory it should
+  be possible to burn wares for some virtual result such as "mana", or maybe
+  even just for the fun of it, although that's not planned).
 A production site can have one (or more) input wares types. Every input
   wares type has an associated store.
 */
@@ -100,7 +108,7 @@ public:
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
-protected:	
+protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 };
 

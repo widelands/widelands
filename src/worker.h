@@ -50,9 +50,13 @@ public:
 	Worker_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Worker_Descr(void);
 
+	virtual Bob *create_object(bool);
+
 	void load_graphics();
 
 	inline Tribe_Descr *get_tribe() { return m_tribe; }
+	inline std::string get_descname() const { return m_descname; }
+	inline std::string get_helptext() const { return m_helptext; }
 	inline uint get_menu_pic() { return m_menu_pic; }
 	inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
 	inline DirAnimations *get_walkload_anims() { return &m_walkload_anims; }
@@ -67,6 +71,8 @@ protected:
 	static Worker_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata);
 
 	Tribe_Descr*	m_tribe;
+	std::string		m_descname;			// Descriptive name
+	std::string		m_helptext;			// Short (tooltip-like) help text
 	char*				m_menu_pic_fname;
 	uint				m_menu_pic;
 	DirAnimations	m_walk_anims;
@@ -81,6 +87,7 @@ class Worker : public Bob {
 public:
 	enum {
 		State_None = 0,
+		State_IdleLoop,		// infinite idle loop of one animation
 		State_Request,			// fulfilling a ware request
 		State_Fugitive,		// lost our location, trying to get back to warehouse
 		State_GoWarehouse,	// return to warehouse
@@ -93,6 +100,7 @@ public:
 
 	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
 	inline int get_state() const { return m_state; }
+	inline uint get_idle_anim() const { return get_descr()->get_idle_anim(); }
 
 	virtual uint get_movecaps();
 
@@ -106,6 +114,9 @@ public:
 	void change_job_request(bool cancel);
 
 	void set_job_gowarehouse();
+
+	void set_job_idleloop(Game*, uint anim);
+	void stop_job_idleloop(Game*);
 
 	void schedule_incorporate(Game *g);
 	void incorporate(Game *g);
@@ -140,6 +151,8 @@ private:
 	int			m_fugitive_death;	// when are we going to die?
 
 	Object_Ptr	m_gowarehouse;		// the warehouse we're trying to reach
+
+	uint			m_job_anim;			// animation to be used in idleloop
 };
 
 

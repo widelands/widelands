@@ -119,12 +119,14 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 
 	s = prof->get_safe_section("global");
 
+	m_descname = s->get_string("descname", get_name());
+	m_helptext = s->get_string("help", "Doh... someone forgot the help text!");
+
 	snprintf(buf, sizeof(buf),	"%s_menu.bmp", get_name());
 	string = s->get_string("menu_pic", buf);
-	
 	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 	m_menu_pic_fname = strdup(fname);
-	
+
 	// Read the walking animations
 	s = prof->get_section("walk");
 	m_walk_anims.parse(directory, prof, "walk_??", s, encdata);
@@ -303,8 +305,8 @@ Worker::set_job_gowarehouse
 Get the worker to move to the nearest warehouse.
 
 Note: It might be interesting to add the worker to the list of usable wares in
-the economy. On the other hand, S2 did not do that, and we really should give
-those poor workers some rest ;-)
+the economy. On the other hand, S2 did not do that, it's not that simple,
+and we really should give those poor workers some rest ;-)
 ===============
 */
 void Worker::set_job_gowarehouse()
@@ -312,6 +314,38 @@ void Worker::set_job_gowarehouse()
 	m_state = State_GoWarehouse;
 	m_gowarehouse = 0;
 }
+
+
+/*
+===============
+Worker::set_job_idleloop
+
+Loop the same animation over and over again in an idle loop.
+===============
+*/
+void Worker::set_job_idleloop(Game* g, uint anim)
+{
+	assert(m_state == State_None);
+
+	m_state = State_IdleLoop;
+	m_job_anim = anim;
+}
+
+
+/*
+===============
+Worker::stop_job_idleloop
+
+Stop a running idleloop.
+===============
+*/
+void Worker::stop_job_idleloop(Game* g)
+{
+	assert(m_state == State_IdleLoop);
+
+	end_state(g, false);
+}
+
 
 /*
 ===============
@@ -413,6 +447,10 @@ void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 		}
 		return;
 
+	case State_IdleLoop:
+		start_task_idle(g, m_job_anim, -1);
+		return;
+
 	case State_Request:
 		run_state_request(g, prev, success, nexthint);
 		return;
@@ -451,6 +489,7 @@ Worker::end_state
 
 Called by the run_state_XXX functions to indicate the current state has
 finished.
+You can also call this from anywhere else, but do be careful.
 
 In this function, we zero any state before calling any callback functions.
 This is because callback functions might wish to set a new state.
@@ -464,8 +503,11 @@ void Worker::end_state(Game *g, bool success)
 
 	do_end_state(g, oldstate, success);
 
-	// 2ms idling to get task_start_best() called again for the new state
-	start_task_idle(g, get_descr()->get_idle_anim(), 2);
+	// Make sure task_start_best() is called again soon
+	if (get_current_task())
+		interrupt_task(g, false);
+	else
+		start_task_idle(g, get_descr()->get_idle_anim(), 2);
 }
 
 
@@ -484,6 +526,10 @@ void Worker::do_end_state(Game* g, int oldstate, bool success)
 		log("Worker::end_state [State_None]\n");
 		break;
 
+	case State_IdleLoop:
+		log("Worker::end_state [State_IdleLoop]\n");
+		break;
+		
 	case State_Request:
 		{
 			Request *request = m_request;
@@ -868,6 +914,20 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 	return 0;
 }
 
+
+/*
+===============
+Worker_Descr::create_object
+
+Create a generic worker of this type.
+===============
+*/
+Bob* Worker_Descr::create_object(bool logic)
+{
+	return new Worker(this, logic);
+}
+
+
 /*
 ==============================================================================
 
@@ -1128,11 +1188,13 @@ Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *dire
 		Section *s = prof.get_safe_section("global");
 		const char *type = s->get_safe_string("type");
 
-		if (!strcasecmp(type, "carrier"))
+		if (!strcasecmp(type, "generic"))
+			descr = new Worker_Descr(tribe, name);
+		else if (!strcasecmp(type, "carrier"))
 			descr = new Carrier_Descr(tribe, name);
 		else
-			throw wexception("Unknown carrier type '%s' [supported: carrier]", type);
-		
+			throw wexception("Unknown worker type '%s' [supported: carrier]", type);
+
 		descr->parse(directory, &prof, encdata);
 		prof.check_used();
 	}
@@ -1146,7 +1208,7 @@ Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *dire
 			delete descr;
 		throw;
 	}
-	
+
 	return descr;
 }
 

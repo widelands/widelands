@@ -370,7 +370,7 @@ void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point
 {
 	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, 
 	              get_owner()->get_playercolor());
-	
+
 	// TODO: draw wares
 }
 
@@ -619,7 +619,7 @@ void Road::init(Editor_Game_Base *gg)
 	Carrier* carrier = (Carrier*)m_carrier.get(g);
 
 	if (!carrier) {
-		if (!m_carrier_request)
+		if (get_logic() && !m_carrier_request)
 			request_carrier(g);
 	} else {
 		// This happens after a road split. Tell the carrier what's going on
@@ -676,7 +676,7 @@ Only call this if the road can handle a new carrier, and if no request has been
 issued.
 ===============
 */
-void Road::request_carrier(Editor_Game_Base *g)
+void Road::request_carrier(Game* g)
 {
 	assert(!m_carrier.get(g) && !m_carrier_request);
 
@@ -1902,12 +1902,62 @@ bool Economy::process_request(Request *req)
 	return true;
 }
 
+
 /*
 ===============
 Economy::match_requests
 
-The warehouse, a resource has been added. Find any open requests that can be
-fulfilled by this warehouse.
+Find any open requests concerning the give ware id that can be fulfilled by
+this warehouse.
+This is called by match_requests(wh) and by Warehouse code.
+
+Returns the number of initiated transfers.
+===============
+*/
+int Economy::match_requests(Warehouse* wh, int ware)
+{
+	int transfers = 0;
+	int stock;
+
+	if (ware >= (int)m_requests.size())
+		return 0;
+
+	stock = wh->get_wares().stock(ware);
+	if (!stock)
+		return 0;
+
+	for(int idx = 0; idx < m_requests[ware].get_nrrequests(); idx++) {
+		Request *req = m_requests[ware].get_request(idx);
+
+		if (req->get_state() != Request::OPEN)
+			continue;
+
+		// Good, there's a request to fulfill
+		Flag *target_flag = req->get_target_flag(static_cast<Game*>(get_owner()->get_game()));
+		Route route;
+		bool success;
+
+		success = find_route(wh->get_base_flag(), target_flag, &route);
+		if (!success)
+			throw wexception("match_requests(): find_route failed");
+
+		req->start_transfer(static_cast<Game*>(get_owner()->get_game()), wh, &route);
+
+		transfers++;
+		if (!--stock)
+			break; // stock depleted
+	}
+
+	return transfers;
+}
+
+
+/*
+===============
+Economy::match_requests
+
+Find any open requests that can be fulfilled by this warehouse.
+This is usually called by add_warehouse().
 ===============
 */
 int Economy::match_requests(Warehouse *wh)
@@ -1915,36 +1965,8 @@ int Economy::match_requests(Warehouse *wh)
 	const WareList *wl = &wh->get_wares();
 	int transfers = 0;
 
-	for(int ware = 0; ware < wl->get_nrwareids(); ware++) {
-		if (ware >= (int)m_requests.size())
-			continue;
-
-		int stock = wl->stock(ware);
-		if (!stock)
-			continue;
-
-		for(int idx = 0; idx < m_requests[ware].get_nrrequests(); idx++) {
-			Request *req = m_requests[ware].get_request(idx);
-
-			if (req->get_state() != Request::OPEN)
-				continue;
-
-			// Good, there's a request to fulfill
-			Flag *target_flag = req->get_target_flag(static_cast<Game*>(get_owner()->get_game()));
-			Route route;
-			bool success;
-
-			success = find_route(wh->get_base_flag(), target_flag, &route);
-			if (!success)
-				throw wexception("match_requests(): find_route failed");
-
-			req->start_transfer(static_cast<Game*>(get_owner()->get_game()), wh, &route);
-
-			transfers++;
-			if (!--stock)
-				break; // stock depleted
-		}
-	}
+	for(int ware = 0; ware < wl->get_nrwareids(); ware++)
+		transfers += match_requests(wh, ware);
 
 	return transfers;
 }

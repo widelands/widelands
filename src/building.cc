@@ -254,29 +254,29 @@ void Building::init(Editor_Game_Base* g)
 	if (get_size() == BIG) {
 		map->get_ln(m_position, &neighb);
 		set_position(g, neighb);
-		
+
 		map->get_tln(m_position, &neighb);
 		set_position(g, neighb);
-		
+
 		map->get_trn(m_position, &neighb);
 		set_position(g, neighb);
 	}
-	
+
 	// Make sure the flag is there
 	BaseImmovable *imm;
 	Flag *flag;
-	
+
 	map->get_brn(m_position, &neighb);
 	imm = map->get_immovable(neighb);
-	
+
 	if (imm && imm->get_type() == FLAG)
 		flag = (Flag *)imm;
 	else
 		flag = Flag::create(g, get_owner(), neighb, g->is_game());
-	
+
 	m_flag = flag;
 	m_flag->attach_building(g, this);
-	
+
 	// Start the animation
 	start_animation(g, get_descr()->get_idle_anim());
 }
@@ -302,7 +302,7 @@ void Building::cleanup(Editor_Game_Base *g)
 		
 		map->get_ln(m_position, &neighb);
 		unset_position(g, neighb);
-		
+
 		map->get_tln(m_position, &neighb);
 		unset_position(g, neighb);
 		
@@ -350,7 +350,7 @@ ConstructionSite_Descr::ConstructionSite_Descr(Tribe_Descr* tribe, const char* n
 }
 
 
-/*	
+/*
 ===============
 ConstructionSite_Descr::parse
 
@@ -361,7 +361,7 @@ etc...
 void ConstructionSite_Descr::parse(const char* directory, Profile* prof, const EncodeData* encdata)
 {
 	Building_Descr::parse(directory, prof, encdata);
-	
+
 	// TODO
 }
 
@@ -399,6 +399,9 @@ ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr, bool logic)
 	: Building(descr, logic)
 {
 	m_building = 0;
+
+	m_builder = 0;
+	m_builder_request = 0;
 }
 
 
@@ -418,7 +421,7 @@ ConstructionSite::get_size
 
 Override: construction size is always the same size as the building
 ===============
-*/	
+*/
 int ConstructionSite::get_size()
 {
 	return m_building->get_size();
@@ -435,7 +438,7 @@ Set the type of building we're going to build
 void ConstructionSite::set_building(Building_Descr* descr)
 {
 	assert(!m_building);
-	
+
 	m_building = descr;
 }
 
@@ -450,10 +453,14 @@ Initialize the construction site by starting orders
 void ConstructionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
-	
-	// TODO: figure out whether planing is necessary
-	
-	// TODO: order construction material and worker
+
+	if (get_logic()) {
+		// TODO: figure out whether planing is necessary
+
+		// TODO: order construction material
+
+		request_builder((Game*)g);
+	}
 }
 
 
@@ -467,13 +474,64 @@ If construction was finished successfully, place the building at our position.
 */
 void ConstructionSite::cleanup(Editor_Game_Base* g)
 {
-	// TODO: release worker/wares
-	
+	// Release worker
+	if (m_builder_request) {
+		get_economy()->remove_request(m_builder_request);
+		delete m_builder_request;
+		m_builder_request = 0;
+	}
+
+	if (m_builder)
+		m_builder->stop_job_idleloop((Game*)g);
+
+	// TODO: release wares
+
 	Building::cleanup(g);
-	
-	// TODO: if necessary, warp the building here
+
+	// TODO: if necessary, warp the building here and make sure the builder gets home safely
 }
-	
+
+
+/*
+===============
+ConstructionSite::request_builder
+
+Issue a request for the builder.
+===============
+*/
+void ConstructionSite::request_builder(Game* g)
+{
+	assert(!m_builder && !m_builder_request);
+
+	m_builder_request = new Request(this, g->get_safe_ware_id("builder"));
+	get_economy()->add_request(m_builder_request);
+}
+
+
+/*
+===============
+ConstructionSite::request_success
+
+A requested item has been delivered successfully.
+===============
+*/
+void ConstructionSite::request_success(Game* g, Request* req)
+{
+	if (req == m_builder_request) {
+		m_builder = req->get_worker();
+		m_builder->set_job_idleloop(g, m_builder->get_idle_anim());
+
+		// TODO: Make the builder walk around or whatever
+
+		get_economy()->remove_request(m_builder_request);
+		delete m_builder_request;
+		m_builder_request = 0;
+
+		return;
+	}
+
+	Building::request_success(g, req);
+}
 
 
 /*
@@ -551,7 +609,7 @@ Warehouse::Warehouse(Warehouse_Descr *descr, bool logic)
 {
 }
 
-	
+
 /*
 ===============
 Warehouse::Warehouse
@@ -566,6 +624,7 @@ Warehouse::~Warehouse()
 	// will be okay.
 	m_wares.clear();
 }
+
 
 /*
 ===============
@@ -634,6 +693,7 @@ void Warehouse::act(Game *g, uint data)
 	g->get_cmdqueue()->queue(g->get_gametime() + tdelta, SENDER_MAPOBJECT,
 			CMD_ACT, m_serial, 0, 0);
 }
+
 
 /*
 ===============
@@ -722,18 +782,20 @@ Worker *Warehouse::launch_worker(Game *g, int ware)
 ===============
 Warehouse::incorporate_worker
 
-This is the opposite of launch_worker: destroy the worker and add the 
+This is the opposite of launch_worker: destroy the worker and add the
 appropriate ware to our warelist
 ===============
 */
 void Warehouse::incorporate_worker(Game *g, Worker *w)
 {
 	int ware = w->get_ware_id();
-	
+
 	w->remove(g);
-	
+
 	m_wares.add(ware, 1);
 	get_economy()->add_wares(ware, 1);
+
+	get_economy()->match_requests(this, ware);
 }
 
 /*
@@ -940,7 +1002,7 @@ int NeedWares_List::read(FileRead* f)
    
 
    list=(List*) malloc(sizeof(List)*nneeds);
-   
+
    int i;
    for(i=0; i< nneeds; i++) {
       list[i].count = f->Unsigned16();

@@ -1,8 +1,8 @@
 [global]
-descname=Carrier
-help=Carries items along your roads.
-type=carrier
-menu_pic=carrier_menu.bmp
+descname=Builder
+help=Works at construction sites to create a new building.
+type=generic
+menu_pic=builder_menu.bmp
 
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.
@@ -16,7 +16,7 @@ clrkey_r=0
 clrkey_g=0
 clrkey_b=255
 hot_spot_x=5
-hot_spot_y=13
+hot_spot_y=16
 
 # Walking empty-handed
 [walk]
@@ -24,7 +24,7 @@ clrkey_r=0
 clrkey_g=0
 clrkey_b=255
 hot_spot_x=5
-hot_spot_y=13
+hot_spot_y=16
 
 # Walking with a ware
 [walkload]
@@ -32,4 +32,4 @@ clrkey_r=0
 clrkey_g=0
 clrkey_b=255
 hot_spot_x=5
-hot_spot_y=13
+hot_spot_y=16

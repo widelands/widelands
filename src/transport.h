@@ -149,7 +149,7 @@ protected:
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
-	void request_carrier(Editor_Game_Base *g);
+	void request_carrier(Game* g);
 
 	virtual void request_success(Game* g, Request* req);
 
@@ -215,7 +215,7 @@ public:
 	Request(PlayerImmovable *target, int ware);
 	~Request();
 
-	inline PlayerImmovable* get_target(Game*g) { return (PlayerImmovable*)m_target.get(g); }
+	inline PlayerImmovable* get_target(Game* g) { return (PlayerImmovable*)m_target.get(g); }
 	inline int get_ware() const { return m_ware; }
 	inline int get_state() const { return m_state; }
 
@@ -250,13 +250,13 @@ class RequestList {
 public:
 	RequestList();
 	~RequestList();
-	
+
 	void add(Request *req);
 	void remove(Request *req);
 
 	inline int get_nrrequests() const { return m_requests.size(); }
 	inline Request* get_request(int idx) const { return m_requests[idx]; }
-	
+
 private:
 	std::vector<Request*>	m_requests;
 };
@@ -294,10 +294,10 @@ public:
 	
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
-	
+
 	bool find_route(Flag *start, Flag *end, Route *route, int cost_cutoff = -1);
 	Warehouse *find_nearest_warehouse(Flag *base, Route *route);
-	
+
 	inline int get_nrflags() const { return m_flags.size(); }
 	void add_flag(Flag *flag);
 	void remove_flag(Flag *flag);
@@ -311,6 +311,9 @@ public:
 	void add_request(Request *req);
 	void remove_request(Request *req);
 
+	int match_requests(Warehouse* wh, int ware);
+	int match_requests(Warehouse *wh);
+
 private:
 	void do_remove_flag(Flag *f);
 
@@ -318,16 +321,15 @@ private:
 	void do_split(Flag *f);
 
 	bool process_request(Request *req);
-	int match_requests(Warehouse *wh);
 
 private:
 	Player	*m_owner;
 	std::vector<Flag*>		m_flags;
-	WareList						m_wares;	// virtual storage with all wares in this Economy
+	WareList						m_wares;		// virtual storage with all wares in this Economy
 	std::vector<Warehouse*>	m_warehouses;
-	
+
 	std::vector<RequestList>	m_requests; // requests by ware id
-	
+
 	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
 };
 
