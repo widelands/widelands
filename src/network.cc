@@ -191,6 +191,8 @@ void NetHost::handle_network ()
 			continue;
 		}
 		
+		SDLNet_TCP_AddSocket (sockset, sock);
+		
 		const char* tribe=pl->get_tribe()->get_name();
 		
 		game->remove_player (i);
@@ -244,6 +246,8 @@ void NetHost::handle_network ()
 
 			PlayerCommand* cmd=cmds.front();
 			cmds.pop ();
+			
+			log ("player command from player %d\n", cmd->get_sender());
 	    
 			serializer->putchar (NETCMD_PLAYERCOMMAND);
 			cmd->serialize (serializer);
