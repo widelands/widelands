@@ -692,3 +692,424 @@ int Editor_Noise_Height_Tool::tool_options_dialog(Editor_Interactive* parent) {
 }
 
 
+/*
+=============================
+
+class Editor_Set_Down_Terrain_Tool_Options_Menu
+
+this is the option menu for this tool
+
+=============================
+*/
+class Editor_Set_Down_Terrain_Tool_Options_Menu : public Window {
+   public:
+      Editor_Set_Down_Terrain_Tool_Options_Menu(Editor_Interactive*, UniqueWindow*, int*);
+      virtual ~Editor_Set_Down_Terrain_Tool_Options_Menu();
+
+   private:
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+      int* m_terrain;
+      Textarea* m_textarea; 
+      
+      void button_clicked(int);
+};
+
+/*
+===============
+Editor_Set_Down_Terrain_Tool_Options_Menu::Editor_Set_Down_Terrain_Tool_Options_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Set_Down_Terrain_Tool_Options_Menu::Editor_Set_Down_Terrain_Tool_Options_Menu(Editor_Interactive *parent, UniqueWindow *registry, int* terrain)
+	: Window(parent, (parent->get_w()-300)/2, (parent->get_h()-100)/2, 210, 70, "Option Menu")
+{
+   m_registry = registry;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
+	}
+   m_terrain=terrain;
+   m_parent=parent;
+   
+   new Textarea(this, 3, 5, "Set Down Terrain Tool Options", Align_Left);
+   char buf[250];
+   sprintf(buf, "Current: %i (%s)", *m_terrain, parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
+   m_textarea=new Textarea(this, 50, 25, buf);
+
+   Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Set_Down_Terrain_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 105, 40, 20, 20, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Set_Down_Terrain_Tool_Options_Menu::button_clicked);
+}
+
+/*
+===============
+Editor_Set_Down_Terrain_Tool_Options_Menu::~Editor_Set_Down_Terrain_Tool_Options_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Set_Down_Terrain_Tool_Options_Menu::~Editor_Set_Down_Terrain_Tool_Options_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Set_Down_Terrain_Tool_Options_Menu::button_clicked()
+
+called, when one of the up/down buttons is pressed
+id: 0 is up, 1 is down
+===========
+*/
+void Editor_Set_Down_Terrain_Tool_Options_Menu::button_clicked(int n) {
+   int val=*m_terrain;
+   if(n==0) {
+      ++val;
+      if(val>=m_parent->get_map()->get_world()->get_nr_terrains()) val=m_parent->get_map()->get_world()->get_nr_terrains()-1;
+   } else if(n==1) {
+      --val;
+      if(val<0) val=0;
+   }
+   *m_terrain=val;
+   
+   char buf[250];
+   sprintf(buf, "Current: %i (%s)", *m_terrain, m_parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
+   m_textarea->set_text(buf);
+}
+
+/*
+=============================
+
+class Editor_Set_Down_Terrain_Tool
+
+=============================
+*/
+
+/*
+===========
+Editor_Set_Down_Terrain_Tool::handle_click()
+
+decrease the height of the current field by one,
+this decreases the height of the surrounding fields also
+if this is needed.
+===========
+*/
+int Editor_Set_Down_Terrain_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
+  
+   while(mrc.next(&mx, &my)) { 
+      map->change_field_terrain(mx,my,m_terrain,true, false);
+   }
+   return 0;
+}
+
+/*
+===========
+Editor_Set_Down_Terrain_Tool::tool_options_dialog()
+
+Calls the Tool Option dialog
+===========
+*/
+int Editor_Set_Down_Terrain_Tool::tool_options_dialog(Editor_Interactive* parent) {
+   if (m_w.window)
+      delete m_w.window;
+   else
+      new Editor_Set_Down_Terrain_Tool_Options_Menu(parent, &m_w, &m_terrain);
+   return 0;
+}
+
+
+/*
+=============================
+
+class Editor_Set_Right_Terrain_Tool_Options_Menu
+
+this is the option menu for this tool
+
+=============================
+*/
+class Editor_Set_Right_Terrain_Tool_Options_Menu : public Window {
+   public:
+      Editor_Set_Right_Terrain_Tool_Options_Menu(Editor_Interactive*, UniqueWindow*, int*);
+      virtual ~Editor_Set_Right_Terrain_Tool_Options_Menu();
+
+   private:
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+      int* m_terrain;
+      Textarea* m_textarea; 
+      
+      void button_clicked(int);
+};
+
+/*
+===============
+Editor_Set_Right_Terrain_Tool_Options_Menu::Editor_Set_Right_Terrain_Tool_Options_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Set_Right_Terrain_Tool_Options_Menu::Editor_Set_Right_Terrain_Tool_Options_Menu(Editor_Interactive *parent, UniqueWindow *registry, int* terrain)
+	: Window(parent, (parent->get_w()-300)/2, (parent->get_h()-100)/2, 210, 70, "Option Menu")
+{
+   m_registry = registry;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
+	}
+   m_terrain=terrain;
+   m_parent=parent;
+   
+   new Textarea(this, 2, 5, "Set Right Terrain Tool Options", Align_Left);
+   char buf[250];
+   sprintf(buf, "Current: %i (%s)", *m_terrain, parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
+   m_textarea=new Textarea(this, 50, 25, buf);
+
+   Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Set_Right_Terrain_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 105, 40, 20, 20, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Set_Right_Terrain_Tool_Options_Menu::button_clicked);
+}
+
+/*
+===============
+Editor_Set_Right_Terrain_Tool_Options_Menu::~Editor_Set_Right_Terrain_Tool_Options_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Set_Right_Terrain_Tool_Options_Menu::~Editor_Set_Right_Terrain_Tool_Options_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Set_Right_Terrain_Tool_Options_Menu::button_clicked()
+
+called, when one of the up/down buttons is pressed
+id: 0 is up, 1 is down
+===========
+*/
+void Editor_Set_Right_Terrain_Tool_Options_Menu::button_clicked(int n) {
+   int val=*m_terrain;
+   if(n==0) {
+      ++val;
+      if(val>=m_parent->get_map()->get_world()->get_nr_terrains()) val=m_parent->get_map()->get_world()->get_nr_terrains()-1;
+   } else if(n==1) {
+      --val;
+      if(val<0) val=0;
+   }
+   *m_terrain=val;
+   
+   char buf[250];
+   sprintf(buf, "Current: %i (%s)", *m_terrain, m_parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
+   m_textarea->set_text(buf);
+}
+
+/*
+=============================
+
+class Editor_Set_Right_Terrain_Tool
+
+=============================
+*/
+
+/*
+===========
+Editor_Set_Right_Terrain_Tool::handle_click()
+
+decrease the height of the current field by one,
+this decreases the height of the surrounding fields also
+if this is needed.
+===========
+*/
+int Editor_Set_Right_Terrain_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
+  
+   while(mrc.next(&mx, &my)) {
+      map->change_field_terrain(mx,my,m_terrain,false,true);
+   }
+   return 0;
+}
+
+/*
+===========
+Editor_Set_Right_Terrain_Tool::tool_options_dialog()
+
+Calls the Tool Option dialog
+===========
+*/
+int Editor_Set_Right_Terrain_Tool::tool_options_dialog(Editor_Interactive* parent) {
+   if (m_w.window)
+      delete m_w.window;
+   else
+      new Editor_Set_Right_Terrain_Tool_Options_Menu(parent, &m_w, &m_terrain);
+   return 0;
+}
+
+/*
+=============================
+
+class Editor_Set_Both_Terrain_Tool_Options_Menu
+
+this is the option menu for this tool
+
+=============================
+*/
+class Editor_Set_Both_Terrain_Tool_Options_Menu : public Window {
+   public:
+      Editor_Set_Both_Terrain_Tool_Options_Menu(Editor_Interactive*, UniqueWindow*, int*);
+      virtual ~Editor_Set_Both_Terrain_Tool_Options_Menu();
+
+   private:
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+      int* m_terrain;
+      Textarea* m_textarea; 
+      
+      void button_clicked(int);
+};
+
+/*
+===============
+Editor_Set_Both_Terrain_Tool_Options_Menu::Editor_Set_Both_Terrain_Tool_Options_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Set_Both_Terrain_Tool_Options_Menu::Editor_Set_Both_Terrain_Tool_Options_Menu(Editor_Interactive *parent, UniqueWindow *registry, int* terrain)
+	: Window(parent, (parent->get_w()-300)/2, (parent->get_h()-100)/2, 210, 70, "Option Menu")
+{
+   m_registry = registry;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
+	}
+   m_terrain=terrain;
+   m_parent=parent;
+   
+   new Textarea(this, 3, 5, "Set Both Terrain Tool Options", Align_Left);
+   char buf[250];
+   sprintf(buf, "Current: %i (%s)", *m_terrain, parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
+   m_textarea=new Textarea(this, 50, 25, buf);
+
+   Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Set_Both_Terrain_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 105, 40, 20, 20, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Set_Both_Terrain_Tool_Options_Menu::button_clicked);
+}
+
+/*
+===============
+Editor_Set_Both_Terrain_Tool_Options_Menu::~Editor_Set_Both_Terrain_Tool_Options_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Set_Both_Terrain_Tool_Options_Menu::~Editor_Set_Both_Terrain_Tool_Options_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Set_Both_Terrain_Tool_Options_Menu::button_clicked()
+
+called, when one of the up/down buttons is pressed
+id: 0 is up, 1 is down
+===========
+*/
+void Editor_Set_Both_Terrain_Tool_Options_Menu::button_clicked(int n) {
+   int val=*m_terrain;
+   if(n==0) {
+      ++val;
+      if(val>=m_parent->get_map()->get_world()->get_nr_terrains()) val=m_parent->get_map()->get_world()->get_nr_terrains()-1;
+   } else if(n==1) {
+      --val;
+      if(val<0) val=0;
+   }
+   *m_terrain=val;
+   
+   char buf[250];
+   sprintf(buf, "Current: %i (%s)", *m_terrain, m_parent->get_map()->get_world()->get_terrain(*m_terrain)->get_name());
+   m_textarea->set_text(buf);
+}
+
+/*
+=============================
+
+class Editor_Set_Both_Terrain_Tool
+
+=============================
+*/
+
+/*
+===========
+Editor_Set_Both_Terrain_Tool::handle_click()
+
+decrease the height of the current field by one,
+this decreases the height of the surrounding fields also
+if this is needed.
+===========
+*/
+int Editor_Set_Both_Terrain_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
+  
+   while(mrc.next(&mx, &my)) { 
+      map->change_field_terrain(mx,my,m_terrain,true,true);
+   }
+   return 0;
+}
+
+/*
+===========
+Editor_Set_Both_Terrain_Tool::tool_options_dialog()
+
+Calls the Tool Option dialog
+===========
+*/
+int Editor_Set_Both_Terrain_Tool::tool_options_dialog(Editor_Interactive* parent) {
+   if (m_w.window)
+      delete m_w.window;
+   else
+      new Editor_Set_Both_Terrain_Tool_Options_Menu(parent, &m_w, &m_terrain);
+   return 0;
+}
+

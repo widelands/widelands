@@ -156,7 +156,73 @@ class Editor_Noise_Height_Tool : public Editor_Tool {
       int m_lower_value;
 };
 
+/*
+=============================
+class Editor_Set_Down_Terrain_Tool
 
+this decreases the height of a field by a value
+=============================
+*/
+class Editor_Set_Down_Terrain_Tool : public Editor_Tool {
+   public:
+      Editor_Set_Down_Terrain_Tool() { m_terrain=5; }
+      virtual ~Editor_Set_Down_Terrain_Tool() { }
+  
+      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int tool_options_dialog(Editor_Interactive* parent);
+      virtual bool has_options(void) { return true; }
+      
+      virtual const char* get_name(void) { return "Set Down Terrain"; }
+      
+   private:
+      UniqueWindow m_w;
+      int m_terrain;
+};
 
+/*
+=============================
+class Editor_Set_Right_Terrain_Tool
+
+this decreases the height of a field by a value
+=============================
+*/
+class Editor_Set_Right_Terrain_Tool : public Editor_Tool {
+   public:
+      Editor_Set_Right_Terrain_Tool() { m_terrain=5; }
+      virtual ~Editor_Set_Right_Terrain_Tool() { }
+  
+      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int tool_options_dialog(Editor_Interactive* parent);
+      virtual bool has_options(void) { return true; }
+      
+      virtual const char* get_name(void) { return "Set Right Terrain"; }
+      
+   private:
+      UniqueWindow m_w;
+      int m_terrain;
+};
+
+/*
+=============================
+class Editor_Set_Both_Terrain_Tool
+
+this decreases the height of a field by a value
+=============================
+*/
+class Editor_Set_Both_Terrain_Tool : public Editor_Tool {
+   public:
+      Editor_Set_Both_Terrain_Tool() { m_terrain=5; }
+      virtual ~Editor_Set_Both_Terrain_Tool() { }
+  
+      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int tool_options_dialog(Editor_Interactive* parent);
+      virtual bool has_options(void) { return true; }
+      
+      virtual const char* get_name(void) { return "Set Both Terrains"; }
+      
+   private:
+      UniqueWindow m_w;
+      int m_terrain;
+};
 
 #endif // __S__EDITOR_TOOLS_H

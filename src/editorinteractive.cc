@@ -60,7 +60,7 @@ Create all the buttons etc...
 ===============
 */
 Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *registry, Editor_Interactive::Editor_Tools* tools)
-	: Window(parent, (parent->get_w()-102)/2, (parent->get_h()-136)/2, 350, 200, "Tool Menu")
+	: Window(parent, (parent->get_w()-350)/2, (parent->get_h()-400)/2, 350, 400, "Tool Menu")
 {
 	m_registry = registry;
 	if (m_registry) {
@@ -83,12 +83,12 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *reg
       char buf[32];
       m_radioselect->add_button(this, 5, y);
       sprintf(buf, "%s", m_tools->tools[i]->get_name());
+      new Textarea(this, 55, y+10, buf, Align_VCenter);
       if(m_tools->tools[i]->has_options()) {
          Button* b = new Button(this, 30, y+3, 14, 14, 0, i);
          b->set_title("O");
          b->clickedid.set(this, &Editor_Tool_Menu::options_button_clicked);
       }
-      new Textarea(this, 60, y+10, buf, Align_VCenter);
    }
    m_radioselect->set_state(m_tools->current_tool);
 
@@ -166,7 +166,7 @@ Create all the buttons etc...
 ===============
 */
 Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UniqueWindow *registry)
-	: Window(parent, (parent->get_w()-102)/2, (parent->get_h()-136)/2, 160, 65, "Tool Menu")
+	: Window(parent, (parent->get_w()-102)/2, (parent->get_h()-136)/2, 160, 65, "Toolsize Menu")
 {
    m_registry = registry;
    if (m_registry) {
@@ -292,6 +292,9 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Decrease_Height_Tool());
    tools.tools.push_back(new Editor_Set_Height_Tool());
    tools.tools.push_back(new Editor_Noise_Height_Tool());
+   tools.tools.push_back(new Editor_Set_Right_Terrain_Tool());
+   tools.tools.push_back(new Editor_Set_Down_Terrain_Tool());
+   tools.tools.push_back(new Editor_Set_Both_Terrain_Tool());
 }
 
 /****************************************
@@ -407,6 +410,15 @@ the function of the currently selected tool
 void Editor_Interactive::field_clicked() {
    Map* m=get_map();
    tools.tools[tools.current_tool]->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
+
+   // Some things have changed, map is informed, logic is informed. But overlays may still be wrong. Recalc them
+   Map_Region_Coords mrc(m_maprenderinfo.fieldsel, m_maprenderinfo.fieldsel_radius, m);
+   Map_Region mr(m_maprenderinfo.fieldsel, m_maprenderinfo.fieldsel_radius, m);
+   FCoords f;
+   while((f.field=mr.next())) {
+      mrc.next(&f.x, &f.y);
+      recalc_overlay(f);
+   }
 }
 
 /*
@@ -418,7 +430,7 @@ toggles the buildhelp on the map
 */
 void Editor_Interactive::toggle_buildhelp(void)
 {
-	m_maprenderinfo.show_buildhelp = !m_maprenderinfo.show_buildhelp;
+   m_maprenderinfo.show_buildhelp = !m_maprenderinfo.show_buildhelp;
 }
 
 /*

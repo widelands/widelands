@@ -98,6 +98,7 @@ class World
       inline const char* get_descr(void) { return hd.descr; }
 
       inline Terrain_Descr* get_terrain(uint i) { assert(i<ters.get_nitems()); return ters.get(i); }
+      inline int get_nr_terrains(void) { return ters.get_nitems(); } 
       inline int get_bob(const char* l) { return bobs.get_index(l); }
 		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
       inline int get_immovable_index(const char* l) { return immovables.get_index(l); }

@@ -1579,6 +1579,48 @@ bool Map::can_reach_by_water(Coords field)
 
 /*
 ===========
+Map::change_field_terrain()
+
+changes the given field terrain to another one.
+this happens in the editor and might happen in the game
+too if some kind of land increasement is implemented (like
+drying swamps). 
+The fieldcaps need to be recalculated
+===========
+*/
+void Map::change_field_terrain(int mx, int my, int terrain, bool tdown, bool tright) {
+   assert(tdown || tright);
+   
+   Field* f=get_field(mx,my);
+
+   Terrain_Descr* ter=get_world()->get_terrain(terrain);
+   
+   if(tdown)
+      f->set_terraind(ter);
+   if(tright)
+      f->set_terrainr(ter);
+
+   Map_Region mr(mx,my,1,this);
+   Map_Region_Coords mrc(mx,my,1,this);
+   FCoords fcord;
+   while((fcord.field=mr.next())) {
+      mrc.next(&fcord.x,&fcord.y);
+      recalc_fieldcaps_pass1(fcord.x, fcord.y, fcord.field);
+   } 
+   mr.init(mx,my,1,this);
+   mrc.init(mx,my,1,this);
+   while((fcord.field=mr.next())) {
+      mrc.next(&fcord.x,&fcord.y);
+      recalc_fieldcaps_pass2(fcord.x, fcord.y, fcord.field);
+   }   
+}
+
+void Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright) {
+   change_field_terrain(c.x, c.y, terrain, tdown, tright);
+}
+
+/*
+===========
 Map::set_field_height()
 
 sets the field height to an absolut value. This changes the surrounding

@@ -196,6 +196,9 @@ public:
    void change_field_height(int, int, int);
    void set_field_height(const Coords&, int);
    void set_field_height(int, int, int);
+   // change terrain of a field, recalculate buildcaps
+   void change_field_terrain(int, int, int, bool, bool);
+   void change_field_terrain(Coords, int, bool, bool);
 
 private:
 	void set_size(uint w, uint h);
@@ -697,8 +700,10 @@ class Map_Region {
    public:
 		Map_Region() { }
       Map_Region(Coords coords, int area, Map* m) { init(coords, area, m); }
+      Map_Region(int x, int y, int area, Map* m) { init(Coords(x,y), area, m); }
       ~Map_Region() { }
 		 
+      void init(int mx, int my, int area, Map* m) { init(Coords(mx,my), area, m); }
 		void init(Coords coords, int area, Map *m);      
       Field* next(void);
 
@@ -722,8 +727,10 @@ class Map_Region_Coords {
    public:
 		Map_Region_Coords() { }
       Map_Region_Coords(Coords coords, int area, Map* m) { init(coords, area, m); }
+      Map_Region_Coords(int x, int y, int area, Map* m) { init(Coords(x,y), area, m); }
       ~Map_Region_Coords() { }
 
+      void init(int mx, int my, int area, Map* m) { init(Coords(mx,my), area, m); }
 		void init(Coords coords, int area, Map *m);
 		int next(int*, int*);
 
