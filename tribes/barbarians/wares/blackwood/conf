@@ -14,6 +14,6 @@ pics=idle.png
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
-hot_spot_x=6
-hot_spot_y=12
+hot_spot_x=10
+hot_spot_y=17
 

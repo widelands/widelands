@@ -42,7 +42,7 @@ defense_level_0_pic=defense_level0.png
 # SOLDIER SPECIFIC STUFF ENDS HERE
 
 [buildcost]
-axe=1000
+axe=1
 carrier=1
 
 # Here come the animations
