@@ -112,9 +112,11 @@ void Map_View::draw_field(Field* f) {
 void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 		  int ystart, ystop;
 		  long xstart, xstop;
+		  long xstart_h, xstop_h;
 		  int x_d, y_d;
 		  int temp;
-		  
+		  long mh, h;
+
 		  ystart=MIN3(l->get_ypix()-vpy, r->get_ypix()-vpy, m->get_ypix()-vpy);
 		  ystop=MAX3(l->get_ypix()-vpy, r->get_ypix()-vpy, m->get_ypix()-vpy);
 
@@ -128,14 +130,27 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 		  
 		  p->get_fpixel();			 
 		  for(y_d= ystart<0 ? 0 : ystart; y_d<ystop; y_d++) {
-					 xstart=(long)g_starts[y_d-ystart].border1;
-					 xstop=(long)g_stops[y_d-ystart].border1;
+					 xstart=(long)g_starts[y_d-ystart].edge;
+					 xstop=(long)g_stops[y_d-ystart].edge;
+					 xstart_h=(long)g_starts[y_d-ystart].h;
+					 xstop_h=(long)g_stops[y_d-ystart].h;
 
 					 if(xstart>xstop) {
 								temp=xstop;
 								xstop=xstart;
 								xstart=temp;
+					 
+								temp=xstop_h;
+								xstop_h=xstart_h;
+								xstart_h=temp;
+
 					 } 
+
+					 if(ystop-ystart) {
+								mh=(xstop_h-xstart_h)<<16;
+								mh/=(ystop-ystart);
+					 }
+					 h=xstart_h<<16;
 
 					 if(xstart<0) {
 								xstart= 0 ;
@@ -147,7 +162,7 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 								
 					 g_gr.set_cpixel(xstart-1, y_d);
 					 for(x_d=xstart; x_d<xstop; x_d++) {
-								g_gr.set_npixel(p->get_npixel());
+								g_gr.set_npixel(Graph::bright_up_clr(p->get_npixel(), h>>(16-HEIGHT_CLR_FACTOR)));
 					 }
 
 		  }
@@ -194,6 +209,7 @@ void Map_View::get_starts(const Field* l, const Field* r, const Field* m, int ys
 void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int ystart) {
 		  long slope=0, x;
 		  long count=0;   
+		  long hslope=0, h;
 		  int ystop;
 
 		  // check, if this saves cycles
@@ -201,26 +217,33 @@ void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int yst
 		  //		  if(r->get_ypix()-vpy <0 && l->get_ypix()-vpy <0) return;
 		  //		  if(r->get_ypix()-vpy >= (int)g_gr.get_yres() && l->get_ypix()-vpy >= (int)g_gr.get_yres()) return;
 
-		  		  slope=((l->get_xpix()-vpx)-(r->get_xpix()-vpx))<<16;
+		  slope=(l->get_xpix()-r->get_xpix())<<16;
+		  hslope=(l->get_height()-r->get_height())<<16;
 
-					  if((r->get_ypix()-vpy)-(l->get_ypix()-vpy)) {
-					  slope/=(l->get_ypix()-vpy)-(r->get_ypix()-vpy);
-					  } else { 
-					  slope=0;
-					  }
+		  if(r->get_ypix()-l->get_ypix()) {
+					 slope/=(l->get_ypix()-r->get_ypix());
+					 hslope/=(l->get_ypix()-r->get_ypix());
+		  } else { 
+					 slope=0;
+					 hslope=0;
+		  }
 
-					  x=(r->get_xpix()-vpx)<<16; 
-					  count=r->get_ypix()-vpy;
+		  x=(r->get_xpix()-vpx)<<16; 
+		  h=r->get_height()<<16;
+		  
+		  count=r->get_ypix()-vpy;
 
-					  if(count-ystart<0) { x+=slope*(ystart-count); count=ystart; }
-					  ystop=l->get_ypix()-vpy < (int) g_gr.get_yres()  ? l->get_ypix()-vpy : g_gr.get_yres();
+		  if(count-ystart<0) { x+=slope*(ystart-count); count=ystart; }
+		  ystop=l->get_ypix()-vpy < (int) g_gr.get_yres()  ? l->get_ypix()-vpy : g_gr.get_yres();
 
-					  while(count < ystop) {
-					  start[count-ystart].border1=x>>16;
-					  x+=slope;
-					  count++; 
-					  }
-					  
+		  while(count < ystop) {
+					 start[count-ystart].edge=x>>16;
+					 start[count-ystart].h=h>>16;
+					 x+=slope;
+					 h+=hslope;
+					 count++; 
+		  }
+
 /*
 		  const Field* left = MIN2(r->get_xpix(), l->get_xpix()) == l->get_xpix() ? l : r;
 		  const Field* right = MAX2(r->get_xpix(), l->get_xpix()) == l->get_xpix() ? l : r;

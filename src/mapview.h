@@ -50,8 +50,8 @@ class Map_View {
 
 		  private:
 					 struct __starts {
-								float border1;
-								float border2;
+								long edge;
+								long h;
 					 } g_starts[500], g_stops[500];
 
 					 Map* map;

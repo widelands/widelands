@@ -94,6 +94,7 @@ struct FieldDescr {
 #define FIELD_SW_H    6
 #define HEIGHT_MAX    54 
 #define HEIGHT_FACTOR 3
+#define HEIGHT_CLR_FACTOR 2
 class Field {
 		  Field(const Field&);
 		  Field& operator=(const Field&);

@@ -73,9 +73,9 @@ namespace Graph {
 		  inline ushort bright_up_clr(const ushort clr, const ushort factor) {
 					 static uchar r, g, b;
 					 unpack_rgb(clr, &r, &g, &b);
-					 r= ((char) r+factor) > 255 ? 255 : r+factor;
-					 g= ((char) g+factor) > 255 ? 255 : g+factor;
-					 b= ((char) b+factor) > 255 ? 255 : b+factor;
+					 r= ((long) r+factor) > 255 ? 255 : r+factor;
+					 g= ((long) g+factor) > 255 ? 255 : g+factor;
+					 b= ((long) b+factor) > 255 ? 255 : b+factor;
 					 return pack_rgb(r, g, b);
 		  }
 		 
