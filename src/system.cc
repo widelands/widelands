@@ -33,15 +33,14 @@ Notes on the implementation
 ---------------------------
 
 Mouse:
-The mouse that is seen by the OS and SDL is always in the center of the screen.
-Our own virtual mouse is moved independently.
-Obviously, we draw the mouse ourselves.
-This is no longer true. we now use SDL's Relative Coordinates, since they now work
-properly. the old code ist still around (as comment), since relative mouse movements won't
-work on MacOS (e.g).
-
-Internally, mouse position is kept with sub-pixel accuracy to make mouse speed
+When in GrabInput mode (default), the system and SDL mouse cursor is not
+connected to the internal mouse position. We rely on SDL to provide the correct
+relative movement information even when the mouse cursor is close to the window
+border. We don't not use the absolute mouse position provided by SDL at all.
+The internal mouse position is kept with sub-pixel accuracy to make mouse speed
 work.
+
+When GrabInput mode is off
 */
 
 static struct {
@@ -50,23 +49,31 @@ static struct {
 
 	FILE		*frecord;
 	FILE		*fplayback;
-	
+
 	// Input
+	bool		input_grab;		// config options
 	bool		mouse_swapped;
 	float		mouse_speed;
+
 	uint		mouse_buttons;
-	float		mouse_x;
-	float		mouse_y;
-	int		mouse_maxx, mouse_maxy;
+	int		mouse_x;			// mouse position seen by the outside
+	int		mouse_y;
+	int		mouse_maxx;
+	int		mouse_maxy;
 	bool		mouse_locked;
-	
+
+	float		mouse_internal_x;		// internal state (only used in non-playback)
+	float		mouse_internal_y;
+	int		mouse_internal_compx;
+	int		mouse_internal_compy;
+
 	// Graphics
 	int		gfx_system;
 	int		gfx_w;
 	int		gfx_h;
 	bool		gfx_fullscreen;
 } sys;
-	
+
 static char sys_recordname[256] = "";
 static char sys_playbackname[256] = "";
 
@@ -104,7 +111,7 @@ Returns the position in the playback file
 static int get_playback_offset()
 {
 	assert(sys.fplayback);
-	
+
 	return ftell(sys.fplayback);
 }
 
@@ -124,7 +131,7 @@ Simple wrapper functions to make stdio file access less painful
 static void write_record_char(char v)
 {
 	assert(sys.frecord);
-	
+
 	if (fwrite(&v, sizeof(v), 1, sys.frecord) != 1)
 		throw wexception("Write of 1 byte to record failed.");
 	fflush(sys.frecord);
@@ -135,17 +142,17 @@ static char read_record_char()
 	char v;
 
 	assert(sys.fplayback);
-	
+
 	if (fread(&v, sizeof(v), 1, sys.fplayback) != 1)
 		throw wexception("Read of 1 byte from record failed.");
-	
+
 	return v;
 }
 
 static void write_record_int(int v)
 {
 	assert(sys.frecord);
-	
+
 	v = Little32(v);
 	if (fwrite(&v, sizeof(v), 1, sys.frecord) != 1)
 		throw wexception("Write of 4 bytes to record failed.");
@@ -157,10 +164,10 @@ static int read_record_int()
 	int v;
 
 	assert(sys.fplayback);
-	
+
 	if (fread(&v, sizeof(v), 1, sys.fplayback) != 1)
 		throw wexception("Read of 4 bytes from record failed.");
-	
+
 	return Little32(v);
 }
 
@@ -172,9 +179,9 @@ static void write_record_code(uchar code)
 static void read_record_code(uchar code)
 {
 	uchar filecode;
-	
+
 	filecode = read_record_char();
-	
+
 	if (filecode != code)
 		throw wexception("%08X: Bad code %02X during playback (%02X expected). Mismatching executable versions?",
 						get_playback_offset()-1, filecode, code);
@@ -193,7 +200,7 @@ void Sys_Init()
 	sys.should_die = false;
 	sys.frecord = 0;
 	sys.fplayback = 0;
-	
+
 	try
 	{
 		// Open record file if necessary
@@ -201,26 +208,29 @@ void Sys_Init()
 			sys.frecord = fopen(sys_recordname, "wb");
 			if (!sys.frecord)
 				throw wexception("Failed to open record file %s", sys_recordname);
-			
+
 			write_record_int(RFC_MAGIC);
 		}
-		
+
 		if (sys_playbackname[0]) {
 			sys.fplayback = fopen(sys_playbackname, "rb");
 			if (!sys.fplayback)
 				throw wexception("Failed to open playback file %s", sys_playbackname);
-			
+
 			if (read_record_int() != RFC_MAGIC)
 				throw wexception("Playback file has wrong magic number");
 		}
 
 		// Input
+		sys.input_grab = false;
 		sys.mouse_swapped = false;
 		sys.mouse_locked = false;
 		sys.mouse_speed = 1.0;
 		sys.mouse_buttons = 0;
 		sys.mouse_x = sys.mouse_y = 0;
 		sys.mouse_maxx = sys.mouse_maxy = 0;
+		sys.mouse_internal_x = sys.mouse_internal_y = 0;
+		sys.mouse_internal_compx = sys.mouse_internal_compy = 0;
 
 		Section *s = g_options.pull_section("global");
 
@@ -235,13 +245,12 @@ void Sys_Init()
 			throw wexception("Failed to initialize SDL: %s", SDL_GetError());
 #endif
 		sys.active = true;
-		
+
 		SDL_ShowCursor(SDL_DISABLE);
-		if (!sys.fplayback)
-			SDL_WM_GrabInput(SDL_GRAB_ON);
+		Sys_SetInputGrab(s->get_bool("inputgrab", true));
 		SDL_EnableUNICODE(1); // useful for e.g. chat messages
 		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
-		
+
 		// Graphics
 		sys.gfx_system = GFXSYS_NONE;
 	}
@@ -260,7 +269,7 @@ void Sys_Init()
 ===============
 Sys_Shutdown
 
-Shutdown the system	
+Shutdown the system
 ===============
 */
 void Sys_Shutdown()
@@ -273,7 +282,7 @@ void Sys_Shutdown()
 
 	SDL_Quit();
 	sys.active = false;
-	
+
 	if (sys.frecord) {
 		fclose(sys.frecord);
 		sys.frecord = 0;
@@ -311,7 +320,7 @@ Sys_ShouldDie
 
 Returns true if an external entity wants us to quit
 ===============
-*/	
+*/
 bool Sys_ShouldDie()
 {
 	return sys.should_die;
@@ -327,20 +336,46 @@ Return the current time, in milliseconds
 int Sys_GetTime()
 {
 	int time;
-	
+
 	if (sys.fplayback) {
 		read_record_code(RFC_GETTIME);
 		time = read_record_int();
 	} else
 		time = SDL_GetTicks();
-	
+
 	if (sys.frecord) {
 		write_record_code(RFC_GETTIME);
 		write_record_int(time);
 	}
-		
+
 	return time;
 }
+
+
+/*
+===============
+Sys_DoWarpMouse
+
+Warp the SDL mouse cursor to the given position.
+Store the delta in sys.mouse_internal_compx/y, so that the resulting motion
+event can be eliminated.
+===============
+*/
+static void Sys_DoWarpMouse(int x, int y)
+{
+	int curx, cury;
+
+	SDL_GetMouseState(&curx, &cury);
+
+	if (curx == x && cury == y)
+		return;
+
+	sys.mouse_internal_compx += curx - x;
+	sys.mouse_internal_compy += cury - y;
+
+	SDL_WarpMouse(x, y);
+}
+
 
 /*
 ===============
@@ -363,11 +398,11 @@ restart:
 	if (sys.fplayback)
 	{
 		uchar code = read_record_char();
-		
+
 		if (code == RFC_EVENT)
 		{
 			code = read_record_char();
-			
+
 			switch(code) {
 			case RFC_KEYDOWN:
 			case RFC_KEYUP:
@@ -375,13 +410,13 @@ restart:
 				ev->key.keysym.sym = (SDLKey)read_record_int();
 				ev->key.keysym.unicode = read_record_int();
 				break;
-			
+
 			case RFC_MOUSEBUTTONDOWN:
 			case RFC_MOUSEBUTTONUP:
 				ev->type = (code == RFC_MOUSEBUTTONUP) ? SDL_MOUSEBUTTONUP : SDL_MOUSEBUTTONDOWN;
 				ev->button.button = read_record_char();
 				break;
-			
+
 			case RFC_MOUSEMOTION:
 				ev->type = SDL_MOUSEMOTION;
 				ev->motion.x = read_record_int();
@@ -389,27 +424,89 @@ restart:
 				ev->motion.xrel = read_record_int();
 				ev->motion.yrel = read_record_int();
 				break;
-			
+
 			case RFC_QUIT:
 				ev->type = SDL_QUIT;
 				break;
-			
+
 			default:
 				throw wexception("%08X: Unknown event type %02X in playback.", get_playback_offset()-1, code);
 			}
-			
+
 			haveevent = true;
 		}
 		else if (code == RFC_ENDEVENTS)
 		{
 			haveevent = false;
 		}
-		else 
+		else
 			throw wexception("%08X: Bad code %02X in event playback.", get_playback_offset()-1, code);
 	}
 	else
+	{
 		haveevent = SDL_PollEvent(ev);
-	
+
+		if (haveevent)
+		{
+			// We edit mouse motion events in here, so that differences caused by
+			// GrabInput or mouse speed settings are invisible to the rest of the code
+			switch(ev->type) {
+			case SDL_MOUSEMOTION:
+				ev->motion.xrel += sys.mouse_internal_compx;
+				ev->motion.yrel += sys.mouse_internal_compy;
+				sys.mouse_internal_compx = sys.mouse_internal_compy = 0;
+
+				if (sys.input_grab)
+				{
+					float xlast = sys.mouse_internal_x;
+					float ylast = sys.mouse_internal_y;
+
+					sys.mouse_internal_x += ev->motion.xrel * sys.mouse_speed;
+					sys.mouse_internal_y += ev->motion.yrel * sys.mouse_speed;
+
+					ev->motion.xrel = (int)sys.mouse_internal_x - (int)xlast;
+					ev->motion.yrel = (int)sys.mouse_internal_y - (int)ylast;
+
+					if (sys.mouse_locked)
+					{
+						// mouse is locked; so don't move the cursor
+						sys.mouse_internal_x = xlast;
+						sys.mouse_internal_y = ylast;
+					}
+					else
+					{
+						if (sys.mouse_internal_x < 0)
+							sys.mouse_internal_x = 0;
+						else if (sys.mouse_internal_x >= sys.mouse_maxx-1)
+							sys.mouse_internal_x = sys.mouse_maxx-1;
+						if (sys.mouse_internal_y < 0)
+							sys.mouse_internal_y = 0;
+						else if (sys.mouse_internal_y >= sys.mouse_maxy-1)
+							sys.mouse_internal_y = sys.mouse_maxy-1;
+					}
+
+					ev->motion.x = (int)sys.mouse_internal_x;
+					ev->motion.y = (int)sys.mouse_internal_y;
+				}
+				else
+				{
+					int xlast = sys.mouse_x;
+					int ylast = sys.mouse_y;
+
+					if (sys.mouse_locked)
+					{
+						Sys_SetMousePos(xlast, ylast);
+
+						ev->motion.x = xlast;
+						ev->motion.y = ylast;
+					}
+				}
+
+				break;
+			}
+		}
+	}
+
 	if (sys.frecord)
 	{
 		if (haveevent)
@@ -422,14 +519,14 @@ restart:
 				write_record_int(ev->key.keysym.sym);
 				write_record_int(ev->key.keysym.unicode);
 				break;
-			
+
 			case SDL_MOUSEBUTTONDOWN:
 			case SDL_MOUSEBUTTONUP:
 				write_record_char(RFC_EVENT);
 				write_record_char((ev->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
 				write_record_char(ev->button.button);
 				break;
-			
+
 			case SDL_MOUSEMOTION:
 				write_record_char(RFC_EVENT);
 				write_record_char(RFC_MOUSEMOTION);
@@ -438,31 +535,31 @@ restart:
 				write_record_int(ev->motion.xrel);
 				write_record_int(ev->motion.yrel);
 				break;
-			
+
 			case SDL_QUIT:
 				write_record_char(RFC_EVENT);
 				write_record_char(RFC_QUIT);
 				break;
-			
+
 			default:
 				goto restart; // can't really do anything useful with this command
 			}
 		}
 		else
 		{
-			// Implement the throttle to avoid very quick inner mainloops when 
+			// Implement the throttle to avoid very quick inner mainloops when
 			// recoding a session
 			if (throttle && !sys.fplayback)
 			{
 				static int lastthrottle = 0;
 				int time = SDL_GetTicks();
-				
+
 				if (time - lastthrottle < 10)
 					goto restart;
-				
+
 				lastthrottle = time;
 			}
-			
+
 			write_record_char(RFC_ENDEVENTS);
 		}
 	}
@@ -487,7 +584,7 @@ restart:
 			}
 		}
 	}
-	
+
 	return haveevent;
 }
 
@@ -503,7 +600,7 @@ void Sys_HandleInput(InputCallback *cb)
 {
 	bool gotevents = false;
 	SDL_Event ev;
-	
+
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
 	if (sys.fplayback) {
@@ -513,7 +610,7 @@ void Sys_HandleInput(InputCallback *cb)
 				if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
 					sys.should_die = true;
 				break;
-			
+
 			case SDL_QUIT:
 				sys.should_die = true;
 				break;
@@ -524,12 +621,12 @@ void Sys_HandleInput(InputCallback *cb)
 	// Usual event queue
 	while(Sys_PollEvent(&ev, !gotevents)) {
 		int button;
-	
+
 		gotevents = true;
-		
+
 		// CAREFUL: Record files do not save the entire SDL_Event structure.
 		// Therefore, playbacks are incomplete. When you change the following
-		// code so that it uses previously unused fields in SDL_Event, 
+		// code so that it uses previously unused fields in SDL_Event,
 		// please also take a look at Sys_PollEvent()
 
 		switch(ev.type) {
@@ -557,14 +654,14 @@ void Sys_HandleInput(InputCallback *cb)
 				}
 				break;
 			}
-			
+
 			if (cb && cb->key) {
 				int c;
-	
+
 				c = ev.key.keysym.unicode;
 				if (c < 32 || c >= 128)
 					c = 0;
-			
+
 				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, (char)c);
 			}
 			break;
@@ -576,72 +673,33 @@ void Sys_HandleInput(InputCallback *cb)
 				if (button == MOUSE_LEFT) button = MOUSE_RIGHT;
 				else if (button == MOUSE_RIGHT) button = MOUSE_LEFT;
 			}
-			
+
 			if (ev.type == SDL_MOUSEBUTTONDOWN)
 				sys.mouse_buttons |= 1 << button;
 			else
 				sys.mouse_buttons &= ~(1 << button);
-			
+
 			if (cb && cb->mouse_click)
 				cb->mouse_click(ev.type == SDL_MOUSEBUTTONDOWN, button, sys.mouse_buttons,
 				                (int)sys.mouse_x, (int)sys.mouse_y);
 			break;
 
-		case SDL_MOUSEMOTION:
-         {
-            /* 
-             * This code might still be needed, if someone ports widelands to Mac
-             * or so.
-             *
-             * Leave it there for the moment!
-             *
-             * Holger
-             *
-             int centerx = sys.mouse_maxx / 2;
-             int centery = sys.mouse_maxy / 2;
+		case SDL_MOUSEMOTION: {
+			// All the interesting stuff is now in Sys_PollEvent()
+			int xdiff = ev.motion.xrel;
+			int ydiff = ev.motion.yrel;
 
-             if (ev.motion.x == centerx && ev.motion.y == centery)
-             break;
+			sys.mouse_x = ev.motion.x;
+			sys.mouse_y = ev.motion.y;
 
-             int mxd = ev.motion.x - centerx;
-             int myd = ev.motion.y - centery;
+			if (!xdiff && !ydiff)
+				break;
 
-             SDL_WarpMouse(centerx, centery); // doesn't hurt playback
-             */
-            int mxd = ev.motion.xrel;
-            int myd = ev.motion.yrel;
-            float xlast = sys.mouse_x;
-            float ylast = sys.mouse_y;
+			if (cb && cb->mouse_move)
+				cb->mouse_move(sys.mouse_buttons, sys.mouse_x, sys.mouse_y, xdiff, ydiff);
 
-            sys.mouse_x += mxd * sys.mouse_speed;
-            sys.mouse_y += myd * sys.mouse_speed;
-
-            int xdiff = (int)sys.mouse_x - (int)xlast;
-            int ydiff = (int)sys.mouse_y - (int)ylast;
-
-            if (sys.mouse_locked) {
-               // mouse is locked; so don't move the cursor
-					sys.mouse_x = xlast;
-					sys.mouse_y = ylast;
-				}
-				else
-				{
-					if (sys.mouse_x < 0)
-						sys.mouse_x = 0;
-					else if (sys.mouse_x >= sys.mouse_maxx-1)
-						sys.mouse_x = sys.mouse_maxx-1;
-					if (sys.mouse_y < 0)
-						sys.mouse_y = 0;
-					else if (sys.mouse_y >= sys.mouse_maxy-1)
-						sys.mouse_y = sys.mouse_maxy-1;
-				}
-
-            if (!xdiff && !ydiff)
-					break;
-
-            if (cb && cb->mouse_move)
-               cb->mouse_move(sys.mouse_buttons, (int)sys.mouse_x, (int)sys.mouse_y, xdiff, ydiff);
-         } break;
+			break;
+		}
 
 		case SDL_QUIT:
 			sys.should_die = true;
@@ -651,7 +709,7 @@ void Sys_HandleInput(InputCallback *cb)
 			break;
 		}
 	}
-}	
+}
 
 /*
 ===============
@@ -675,6 +733,7 @@ int Sys_GetMouseY()
 	return (int)sys.mouse_y;
 }
 
+
 /*
 ===============
 Sys_SetMousePos
@@ -687,7 +746,41 @@ void Sys_SetMousePos(int x, int y)
 {
 	sys.mouse_x = x;
 	sys.mouse_y = y;
+
+	if (!sys.input_grab)
+		Sys_DoWarpMouse(x, y); // sync mouse positions
 }
+
+
+/*
+===============
+Sys_SetInputGrab
+
+Changes input grab mode.
+===============
+*/
+void Sys_SetInputGrab(bool grab)
+{
+	if (sys.fplayback)
+		return; // ignore in playback mode
+
+	sys.input_grab = grab;
+
+	if (grab)
+	{
+		SDL_WM_GrabInput(SDL_GRAB_ON);
+
+		sys.mouse_internal_x = sys.mouse_x;
+		sys.mouse_internal_y = sys.mouse_y;
+	}
+	else
+	{
+		SDL_WM_GrabInput(SDL_GRAB_OFF);
+
+		Sys_DoWarpMouse(sys.mouse_x, sys.mouse_y);
+	}
+}
+
 
 /*
 ===============
@@ -698,6 +791,7 @@ void Sys_SetMouseSwap(bool swap)
 {
 	sys.mouse_swapped = swap;
 }
+
 
 /*
 ===============
@@ -710,7 +804,7 @@ void Sys_SetMouseSpeed(float speed)
 		speed = 1.0;
 	sys.mouse_speed = speed;
 }
-	
+
 /*
 ===============
 Sys_SetMaxMouseCoords [kludge]
@@ -769,7 +863,7 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 	sys.gfx_w = w;
 	sys.gfx_h = h;
 	sys.gfx_fullscreen = fullscreen;
-		
+
 	switch(system)
 		{
 		case GFXSYS_SW16:

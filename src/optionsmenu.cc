@@ -43,13 +43,15 @@ class OptionsMenu : public BaseMenu {
 public:
 	OptionsMenu();
 
-	inline bool get_fullscreen() const { return fullscreen->get_state(); }
-	inline uint get_xres() const { return resolutions[resolution.get_state()].width; }
-	inline uint get_yres() const { return resolutions[resolution.get_state()].height; }
+	inline bool get_fullscreen() const { return m_fullscreen->get_state(); }
+	inline bool get_inputgrab() const { return m_inputgrab->get_state(); }
+	inline uint get_xres() const { return resolutions[m_resolution.get_state()].width; }
+	inline uint get_yres() const { return resolutions[m_resolution.get_state()].height; }
 
 private:
-	Checkbox *fullscreen;
-	Radiogroup resolution;
+	Checkbox*	m_fullscreen;
+	Checkbox*	m_inputgrab;
+	Radiogroup	m_resolution;
 
 	struct res {
 		int width;
@@ -68,7 +70,7 @@ OptionsMenu::OptionsMenu()
 	: BaseMenu("optionsmenu.jpg")
 {
 	Section *s = g_options.pull_section("global");
-	
+
 	// Menu title
 	new Textarea(this, MENU_XRES/2, 140, "Options", Align_HCenter);
 
@@ -84,26 +86,31 @@ OptionsMenu::OptionsMenu()
 	b->set_title("Apply");
 
 	// Fullscreen mode
-	fullscreen = new Checkbox(this, 100, 180);
-	fullscreen->set_state(s->get_bool("fullscreen", false));
+	m_fullscreen = new Checkbox(this, 100, 180);
+	m_fullscreen->set_state(s->get_bool("fullscreen", false));
 	new Textarea(this, 125, 190, "Fullscreen", Align_VCenter);
 
-	// In-game resolution
-	new Textarea(this, 100, 230, "In-game resolution", Align_VCenter);
+	// input grab
+	m_inputgrab = new Checkbox(this, 100, 205);
+	m_inputgrab->set_state(s->get_bool("inputgrab", true));
+	new Textarea(this, 125, 215, "Grab Input", Align_VCenter);
 
-	int y = 240;
+	// In-game resolution
+	new Textarea(this, 100, 255, "In-game resolution", Align_VCenter);
+
+	int y = 265;
 	int i;
 	for(i = 0; i < NUM_RESOLUTIONS; i++, y+= 25) {
 		char buf[16];
-		resolution.add_button(this, 100, y);
+		m_resolution.add_button(this, 100, y);
 		sprintf(buf, "%ix%i", resolutions[i].width, resolutions[i].height);
 		new Textarea(this, 125, y+10, buf, Align_VCenter);
 
 		if (Interactive_Player::get_xres() == resolutions[i].width)
-			resolution.set_state(i);
+			m_resolution.set_state(i);
 	}
-	if (resolution.get_state() < 0)
-		resolution.set_state(0);
+	if (m_resolution.get_state() < 0)
+		m_resolution.set_state(0);
 }
 
 /** options_menu()
@@ -117,10 +124,12 @@ void options_menu()
 
 	if (code == om_ok) {
 		Section *s = g_options.pull_section("global");
-	
+
 		s->set_int("xres", om->get_xres());
 		s->set_int("yres", om->get_yres());
 		s->set_bool("fullscreen", om->get_fullscreen());
+		s->set_bool("inputgrab", om->get_inputgrab());
+		Sys_SetInputGrab(om->get_inputgrab());
 	}
 
 	delete om;

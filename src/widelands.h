@@ -482,6 +482,7 @@ int Sys_GetMouseX();
 int Sys_GetMouseY();
 void Sys_SetMousePos(int x, int y);
 
+void Sys_SetInputGrab(bool grab);
 void Sys_SetMouseSwap(bool swap);
 void Sys_SetMouseSpeed(float speed);
 
