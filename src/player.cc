@@ -72,7 +72,7 @@ void Player::init_for_game(Game* game)
 
 	get_tribe()->load_warehouse_with_start_wares(game, wh);
 
-   //	Add starting wares
+   /*	Add starting wares
 	wh->create_wares(game->get_safe_ware_id("carrier"), 20);
 	wh->create_wares(game->get_safe_ware_id("builder"), 4);
 	wh->create_wares(game->get_safe_ware_id("lumberjack"), 6);
@@ -82,6 +82,7 @@ void Player::init_for_game(Game* game)
 	wh->create_wares(game->get_safe_ware_id("plank"), 30);
 	wh->create_wares(game->get_safe_ware_id("log"), 10);
 	wh->create_wares(game->get_safe_ware_id("stone"), 30);
+   */
 }
 
 /*

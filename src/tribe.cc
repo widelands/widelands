@@ -26,6 +26,9 @@
 #include "ware.h"
 #include "worker.h"
 #include "tribe.h"
+#include "game.h"
+
+using namespace std;
 
 //
 // Tribe_Descr class
@@ -41,9 +44,10 @@ Tribe_Descr::Tribe_Descr(const char* name)
 		snprintf(directory, sizeof(directory), "tribes/%s", name);
 		
 		m_default_encdata.clear();
-		parse_root_conf(directory);
+      parse_wares(directory);
 		parse_buildings(directory);
 		parse_workers(directory);
+      parse_root_conf(directory);
 	}
 	catch(std::exception &e)
 	{
@@ -144,11 +148,32 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 		m_anim_flag = g_anim.get(directory, s, 0, &m_default_encdata);
 
       // default wares
-      s = prof.get_section("start_wares");
-	}
-	catch(std::exception &e) {
-		throw wexception("%s: %s", fname, e.what());
-	}
+      s = prof.get_section("startwares");
+	   Section::Value* value;
+      
+      while((value=s->get_next_val(0))) {
+         int idx = m_wares.get_index(value->get_name());
+         if(idx == -1) 
+            throw wexception("In section [startwares], ware %s is not know!", value->get_name());
+
+         std::string name=value->get_name();
+         m_startwares[name]=value->get_int();
+      }
+
+      // default workers
+      s = prof.get_section("startworkers");
+      while((value=s->get_next_val(0))) {
+         int idx = m_workers.get_index(value->get_name());
+         if(idx == -1) 
+            throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
+
+         std::string name=value->get_name();
+         m_startworkers[name]=value->get_int();
+      }
+   }
+   catch(std::exception &e) {
+      throw wexception("%s: %s", fname, e.what());
+   }
 }
 	
 
@@ -218,6 +243,68 @@ void Tribe_Descr::parse_workers(const char *directory)
 }
 
 /*
+===============
+Tribe_Descr::parse_wares
+
+Parse the wares belonging to this tribe, adding it to the games warelist. This is delayed until the game starts,
+and is called by the Game class
+===============
+*/
+void Tribe_Descr::parse_wares(const char* directory)
+{
+   Descr_Maintainer<Ware_Descr>* wares=&m_wares;
+   char subdir[256];
+	filenameset_t dirs;
+
+	snprintf(subdir, sizeof(subdir), "%s/wares", directory);
+
+	g_fs->FindFiles(subdir, "*", &dirs);
+
+	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+		char fname[256];
+
+		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
+
+		if (!g_fs->FileExists(fname))
+			continue;
+
+		const char *name;
+		const char *slash = strrchr(it->c_str(), '/');
+		const char *backslash = strrchr(it->c_str(), '\\');
+
+		if (backslash && (!slash || backslash > slash))
+			slash = backslash;
+
+		if (slash)
+			name = slash+1;
+		else
+			name = it->c_str();
+
+		if (wares->get_index(name) >= 0)
+			log("Ware %s is already known in world init\n", it->c_str());
+
+		Item_Ware_Descr* descr = 0;
+
+		try
+		{
+			descr = Item_Ware_Descr::create_from_dir(name, it->c_str());
+		}
+		catch(std::exception& e)
+		{
+			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
+		}
+		catch(...)
+		{
+			cerr << it->c_str() << ": Unknown exception" << endl;
+		}
+
+		if (descr)
+			wares->add(descr);
+	}
+}
+
+
+/*
 ===========
 void Tribe_Descr::load_warehouse_with_start_wares()
 
@@ -226,6 +313,13 @@ the conf files
 ===========
 */
 void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* game, Warehouse* wh) {
-
+   std::map<std::string, int>::iterator cur;
+   
+   for(cur=m_startwares.begin(); cur!=m_startwares.end(); cur++) {
+      wh->create_wares(game->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
+   }
+   for(cur=m_startworkers.begin(); cur!=m_startworkers.end(); cur++) {
+      wh->create_wares(game->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
+   } 
 }
       

@@ -1,0 +1,16 @@
+[global]
+descname=Log
+help=Logs are produced by lumberjacks and refined into planks in a sawmill.
+menu_pic=log_menu.png
+queue_full_pic=log_queue_full.png
+queue_empty_pic=log_queue_empty.png
+
+# The "animation" used when the item rests on a flag
+[idle]
+pics=log_idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=6
+hot_spot_y=7
+

@@ -154,10 +154,10 @@ bool Game::run(void)
 				ipl->move_view_to(c.x, c.y);
 		}
 
+      
 		load_graphics();
 
 		ipl->run();
-
 		get_objects()->cleanup(this);
 	   delete ipl;
 

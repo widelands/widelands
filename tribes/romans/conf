@@ -21,7 +21,7 @@ shadowclr_b=0
 [tribe]
 author=Widelands Development Team
 name=Testtribe
-descr=This is a testtribe. It is similar to the S2-Tribes to test the tribe configuration style and tools
+descr=This is a the Empire. It is mostly uncompleted, but it is mainly for testing.
 
 [regent]
 pic_big=pics/regent_big.bmp
@@ -40,3 +40,19 @@ hot_spot_y=31
 clrkey_r=255
 clrkey_g=0
 clrkey_b=255
+
+# This are the default wares for a skirmish (non mission) game
+# for this tribe. This is an important point to balance between
+# different tribes to make sure that they'll stay even
+[startwares]
+plank=30
+log=10
+stone=10
+
+[startworkers]
+carrier=20
+builder=4
+lumberjack=6
+forrester=3
+stonecutter=3
+

@@ -287,17 +287,25 @@ Collects all wares from world and tribes and puts them into a global list
 */
 void Editor_Game_Base::init_wares()
 {
-	World *world = m_map->get_world();
-	
-	world->parse_wares(&m_wares);
-	
 	for(int pid = 1; pid <= MAX_PLAYERS; pid++) {
 		Player *plr = get_player(pid);
 		if (!plr)
 			continue;
-		
+	
+      // TODO: BUG different wares with same name (different tribes)
+      // do not get inserted ok
 		Tribe_Descr *tribe = plr->get_tribe();
-		
+	   for(int i=0; i < tribe->get_nrwares(); i++) {
+         Ware_Descr* ware = tribe->get_ware_descr(i);
+         if(!ware) 
+            continue;
+
+         int idx = m_wares.get_index(ware->get_name());
+         Ware_Descr* m_ware=new Item_Ware_Descr(*(static_cast<Item_Ware_Descr*>(ware)));
+         if(idx < 0)
+            idx = m_wares.add(m_ware);
+      }
+      
 		for(int i = 0; i < tribe->get_nrworkers(); i++) {
 			Worker_Descr *worker = tribe->get_worker_descr(i);
 			if (!worker)

@@ -106,8 +106,6 @@ class World
       inline int get_nr_immovables(void) { return immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
 
-		void parse_wares(Descr_Maintainer<Ware_Descr> *wares);
-
    private:
 		std::string				m_basedir;	// base directory, where the main conf file resides
       World_Descr_Header	hd;

@@ -242,66 +242,6 @@ void World::parse_bobs()
 }
 
 
-/*
-===============
-World::parse_wares
-
-Parse the wares belonging to the world. This is delayed until the game starts,
-and is called by the Game class
-===============
-*/
-void World::parse_wares(Descr_Maintainer<Ware_Descr> *wares)
-{
-	char subdir[256];
-	filenameset_t dirs;
-
-	snprintf(subdir, sizeof(subdir), "%s/wares", m_basedir.c_str());
-
-	g_fs->FindFiles(subdir, "*", &dirs);
-
-	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
-		char fname[256];
-
-		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
-
-		if (!g_fs->FileExists(fname))
-			continue;
-
-		const char *name;
-		const char *slash = strrchr(it->c_str(), '/');
-		const char *backslash = strrchr(it->c_str(), '\\');
-
-		if (backslash && (!slash || backslash > slash))
-			slash = backslash;
-
-		if (slash)
-			name = slash+1;
-		else
-			name = it->c_str();
-
-		if (wares->get_index(name) >= 0)
-			log("Ware %s is already known in world init\n", it->c_str());
-
-		Item_Ware_Descr* descr = 0;
-
-		try
-		{
-			descr = Item_Ware_Descr::create_from_dir(name, it->c_str());
-		}
-		catch(std::exception& e)
-		{
-			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
-		}
-		catch(...)
-		{
-			cerr << it->c_str() << ": Unknown exception" << endl;
-		}
-
-		if (descr)
-			wares->add(descr);
-	}
-}
-
 
 /*
 ==============================================================================
