@@ -1,0 +1,90 @@
+##### Order does matter here, since this file should stay compatible with S2
+
+[steppe]
+# default test texture=tex0.bmp
+resources=wasser
+is=green
+
+[berg1]
+# texture=tex1??.bmp
+resources=kohle, eisen, gold, granit 
+is=mountain
+
+[schnee]
+# texture=tex2.bmp
+resources=
+is=dead
+
+[sumpf]
+# texture=tex3.bmp
+def_res=wasser
+def_stock=0
+is=unpassable
+
+[strand]
+# texture=tex4.bmp
+resources=
+is=dry
+
+[wasser]
+# texture=tex5.bmp
+resources=
+def_res=fisch
+def_stock=10 
+is=water
+
+[wiese1]
+# texture=tex6.bmp
+def_res=wasser
+def_stock=0
+is=green
+
+[wiese2]
+# texture=tex7.bmp
+def_res=wasser
+def_stock=0
+is=green
+
+[wiese3]
+# texture=tex8.bmp
+def_res=wasser
+def_stock=0
+is=green
+
+[berg2]
+# texture=tex9.bmp
+resources=kohle, eisen, gold, granit
+is=mountain
+
+[berg3]
+# texture=tex10.bmp
+resources=kohle, eisen, gold, granit
+is=mountain
+
+[berg4]
+# texture=tex11.bmp
+resources=kohle, eisen, gold, granit
+is=mountain
+
+[steppe_kahl]
+# texture=tex12.bmp
+def_res=wasser
+def_stock=0
+is=green
+
+[wiese4]
+# texture=tex13.bmp
+def_res=wasser
+def_stock=0
+is=green
+
+[lava]
+# texture=tex14.bmp
+resources=
+is=acid
+
+[bergwiese]
+# texture=tex15.bmp
+resources=
+is=green
+
