@@ -325,7 +325,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    const int ystart=15;
    const int yend=15;
    int nr_textures=get_parent()->get_map()->get_world()->get_nr_terrains();
-   int textures_in_row=(int)(sqrt(nr_textures));
+   int textures_in_row=(int)(sqrt((float)nr_textures));
    if(textures_in_row*textures_in_row<nr_textures) { textures_in_row++; }
    int i=1;
 
@@ -420,7 +420,7 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    const int ystart=15;
    const int yend=15;
    int nr_immovables=get_parent()->get_map()->get_world()->get_nr_immovables();
-   int immovables_in_row=(int)(sqrt(nr_immovables));
+   int immovables_in_row=(int)(sqrt((float)nr_immovables));
    if(immovables_in_row*immovables_in_row<nr_immovables) { immovables_in_row++; }
    if(immovables_in_row>max_items_in_tab) immovables_in_row=max_items_in_tab;
 

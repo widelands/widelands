@@ -17,16 +17,14 @@
  *
  */
 
-#include <iostream>
+#include <algorithm>
+
 #include "filesystem.h"
 #include "map.h"
 #include "player.h"
 #include "world.h"
 #include "worlddata.h"
 
-using std::cerr;
-using std::endl;
-using std::min;
 
 /*
 ==============================================================================
@@ -478,7 +476,7 @@ struct FindBobsCallback {
 		Bob *bob;
 
 		for(bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-			if (m_list && find(m_list->begin(), m_list->end(), bob) != m_list->end())
+			if (m_list && std::find(m_list->begin(), m_list->end(), bob) != m_list->end())
 				continue;
 
 			if (m_functor.accept(bob)) {
@@ -1310,13 +1308,13 @@ int Map::calc_distance(Coords a, Coords b)
 		{
 			int dx1 = lx - b.x;
 			int dx2 = b.x - (rx - m_width);
-			dist += min(dx1, dx2);
+			dist += std::min(dx1, dx2);
 		}
 		else if (b.x > rx)
 		{
 			int dx1 = b.x - rx;
 			int dx2 = (lx + m_width) - b.x;
-			dist += min(dx1, dx2);
+			dist += std::min(dx1, dx2);
 		}
 	}
 	else
@@ -1326,11 +1324,9 @@ int Map::calc_distance(Coords a, Coords b)
 		{
 			int dx1 = b.x - rx;
 			int dx2 = lx - b.x;
-			dist += min(dx1, dx2);
+			dist += std::min(dx1, dx2);
 		}
 	}
-
-//	cerr << a.x << "," << a.y << " -> " << b.x << "," << b.y << " : " << dist << endl;
 
 	return dist;
 }
