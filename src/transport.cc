@@ -3106,6 +3106,7 @@ public:
 	{
 		unsigned slot = t->mpf_heapindex;
 
+		assert(slot < m_data.size());
 		assert(m_data[slot] == t);
 
 		while(slot > 0) {
@@ -3131,19 +3132,19 @@ public:
 		unsigned r = node*2 + 2;
 		if (m_data[node]->mpf_heapindex != (int)node) {
 			fprintf(stderr, "%s: mpf_heapindex integrity!\n", str);
-			exit(-1);
+			abort();
 		}
 		if (l < m_data.size()) {
 			if (m_data[node]->cost() > m_data[l]->cost()) {
 				fprintf(stderr, "%s: Integrity failure\n", str);
-				exit(-1);
+				abort();
 			}
 			debug(l, str);
 		}
 		if (r < m_data.size()) {
 			if (m_data[node]->cost() > m_data[r]->cost()) {
 				fprintf(stderr, "%s: Integrity failure\n", str);
-				exit(-1);
+				abort();
 			}
 			debug(r, str);
 		}
