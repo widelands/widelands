@@ -59,9 +59,6 @@ Input::Input(void) {
 		  maxx=maxy=0;
 
 		  SDL_ShowCursor(0);
-		  levx=maxx>>1;
-		  levy=maxy>>1;
-		  SDL_WarpMouse(levx, levy);
 }
 
 /** Input::~Input(void) 
@@ -93,6 +90,9 @@ Input::~Input(void) {
  */
 void Input::set_max_cords(unsigned int x, const unsigned int y) {
 		  maxx=x; maxy=y;
+		  levx=maxx>>1;
+		  levy=maxy>>1;
+		  SDL_WarpMouse(levx, levy);
 }
 
 /** void Input::register_mmf(const MOUSE_MOVE_FUNCTION f, void* a= 0)
