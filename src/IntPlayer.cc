@@ -139,7 +139,8 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	// Speed info
 	m_label_speed = new UITextarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
 
-   m_road_overlay_jobid=0; 
+   m_road_buildhelp_overlay_jobid=0;
+   m_jobid=0;
 }
 
 /*
@@ -197,9 +198,7 @@ void Interactive_Player::start()
 
 	mapw = 0;
 	maph = 0; 
-	m_maprenderinfo.overlay_roads = 0;
 
-   map_changed();
    get_map()->get_overlay_manager()->show_buildhelp(false);
    get_map()->get_overlay_manager()->register_overlay_callback_function(&Int_Player_overlay_callback_function, static_cast<void*>(this));
 
@@ -505,9 +504,10 @@ void Interactive_Player::roadb_add_overlay()
 	//log("Add overlay\n");
 
 	Map* map = m_game->get_map();
-	int mapwidth = map->get_width();
 
 	// preview of the road
+   assert(!m_jobid);
+   m_jobid=get_map()->get_overlay_manager()->get_a_job_id();
 	for(int idx = 0; idx < m_buildroad->get_nsteps(); idx++)	{
 		uchar dir = m_buildroad->get_step(idx);
 		Coords c = m_buildroad->get_coords()[idx];
@@ -519,14 +519,16 @@ void Interactive_Player::roadb_add_overlay()
 
 		int shift = 2*(dir - Map_Object::WALK_E);
 
-		m_maprenderinfo.overlay_roads[c.y*mapwidth + c.x] |= Road_Normal << shift;
+      uchar set_to= get_map()->get_overlay_manager()->get_road_overlay(c);
+      set_to|=  Road_Normal << shift;
+      get_map()->get_overlay_manager()->register_road_overlay(c, set_to, m_jobid);
 	}
 
 	// build hints
 	FCoords endpos = map->get_fcoords(m_buildroad->get_end());
 
-   assert(!m_road_overlay_jobid);
-   m_road_overlay_jobid= get_map()->get_overlay_manager()->get_a_job_id();
+   assert(!m_road_buildhelp_overlay_jobid);
+   m_road_buildhelp_overlay_jobid= get_map()->get_overlay_manager()->get_a_job_id();
 	for(int dir = 1; dir <= 6; dir++) {
 		FCoords neighb;
 		int caps;
@@ -566,7 +568,7 @@ void Interactive_Player::roadb_add_overlay()
 
       assert(name!="");
 
-      get_map()->get_overlay_manager()->register_overlay(neighb,  g_gr->get_picture(PicMod_Game, name.c_str(), RGBColor(0,0,255)),7, Coords(-1,-1), m_road_overlay_jobid);
+      get_map()->get_overlay_manager()->register_overlay(neighb,  g_gr->get_picture(PicMod_Game, name.c_str(), RGBColor(0,0,255)),7, Coords(-1,-1), m_road_buildhelp_overlay_jobid);
 	}
 }
 
@@ -582,19 +584,14 @@ void Interactive_Player::roadb_remove_overlay()
 	assert(m_buildroad);
 
 	//log("Remove overlay\n");
-
-	Map* map = m_game->get_map();
-	int mapwidth = map->get_width();
-
-	// preview of the road
-	for(int idx = 0; idx <= m_buildroad->get_nsteps(); idx++)	{
-		Coords c = m_buildroad->get_coords()[idx];
-
-		m_maprenderinfo.overlay_roads[c.y*mapwidth + c.x] = 0;
-	}
+	
+   // preview of the road
+   if(m_jobid) 
+       get_map()->get_overlay_manager()->remove_road_overlay(m_jobid);
+   m_jobid=0;
 
 	// build hints
-   if(m_road_overlay_jobid) 
-      get_map()->get_overlay_manager()->remove_overlay(m_road_overlay_jobid);
-   m_road_overlay_jobid=0;
+   if(m_road_buildhelp_overlay_jobid) 
+      get_map()->get_overlay_manager()->remove_overlay(m_road_buildhelp_overlay_jobid);
+   m_road_buildhelp_overlay_jobid=0;
 }

@@ -119,6 +119,8 @@ void Overlay_Manager::cleanup(void) {
       delete m_overlay_fields;
       m_overlay_fields=0;
    }
+   m_overlays.clear();
+   m_road_overlays.clear();
 }
 
 /*
@@ -272,6 +274,57 @@ void Overlay_Manager::remove_overlay(int jobid) {
    while(i!=m_overlays.end()) {
       if(i->second.jobid==jobid) {
          m_overlays.erase(i++);
+      } else {
+         ++i;
+      }
+   }
+}
+
+/* 
+ * Register road overlays
+ */
+void Overlay_Manager::register_road_overlay(Coords c, uchar where, int jobid) {
+   assert(c.x<0xffff);
+   assert(c.y<0xffff);
+
+   Registered_Road_Overlays overlay = { jobid, where };
+
+   int index=(c.y<<8) + c.x;
+
+   std::map<int,Registered_Road_Overlays>::iterator i;
+   i=m_road_overlays.find(index);
+   if(i==m_road_overlays.end()) {
+      m_road_overlays.insert(std::pair<int,Registered_Road_Overlays>(index,overlay));
+   } else {
+      i->second=overlay;
+   }
+}
+
+/*
+ * Remove road overlay
+ */
+void Overlay_Manager::remove_road_overlay(Coords c) {
+   assert(static_cast<uint>(c.x)<=0xffff);
+   assert(static_cast<uint>(c.y)<=0xffff);
+
+   int fieldindex=(c.y<<8)+c.x;
+
+   std::map<int,Registered_Road_Overlays>::iterator i;
+   i=m_road_overlays.find(fieldindex);
+   if(i!=m_road_overlays.end()) {
+      m_road_overlays.erase(i);
+   }
+}
+
+/*
+ * remove all overlays with this jobid
+ */
+void Overlay_Manager::remove_road_overlay(int jobid) {
+   std::map<int, Registered_Road_Overlays>::iterator i=m_road_overlays.begin();
+
+   while(i!=m_road_overlays.end()) {
+      if(i->second.jobid==jobid) {
+         m_road_overlays.erase(i++);
       } else {
          ++i;
       }

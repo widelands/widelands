@@ -81,37 +81,7 @@ cleanups
 */
 Interactive_Base::~Interactive_Base(void)
 {
-	if (m_maprenderinfo.overlay_roads)
-		free(m_maprenderinfo.overlay_roads);
 }
-
-
-/*
-==============
-Interactive_Base::map_changed()
-
-called when the map has changed
-overlays have to be recalculated
-==============
-*/
-void Interactive_Base::map_changed(void) {
-   int mapw;
-   int maph;
-
-   mapw = m_maprenderinfo.egbase->get_map()->get_width();
-   maph = m_maprenderinfo.egbase->get_map()->get_height();
-
-
-   if(!m_maprenderinfo.overlay_roads) {
-      // first time call
-      m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
-      memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
-   } else {
-      m_maprenderinfo.overlay_roads = (uchar*)realloc(m_maprenderinfo.overlay_roads, mapw*maph);
-      memset(m_maprenderinfo.overlay_roads, 0, mapw*maph); // set to zero, either it is in game (to load) or this is editor
-   }
-}
-
 
 /*
 ===============

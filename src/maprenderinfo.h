@@ -53,7 +53,6 @@ enum {
 struct MapRenderInfo {
 	Editor_Game_Base*		egbase;
 	
-	uchar*	overlay_roads; // needs to be ORed with logical road info
 	std::vector<bool>*		visibility; // array of fields, true if the field can be seen
 								// can be 0, in which case the whole map is visible
 };

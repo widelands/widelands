@@ -73,7 +73,8 @@ class Interactive_Player : public Interactive_Base {
       void roadb_add_overlay();
 		void roadb_remove_overlay();
 
-		int      m_road_overlay_jobid;
+      int      m_jobid;
+		int      m_road_buildhelp_overlay_jobid;
 		Game*		m_game;
 		uchar		m_player_number;
 

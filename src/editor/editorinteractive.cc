@@ -131,7 +131,6 @@ void Editor_Interactive::start()
    m_maprenderinfo.egbase = m_editor;
 	m_maprenderinfo.visibility = 0;
 
-   map_changed();
    get_map()->get_overlay_manager()->show_buildhelp(true);
 }
 

@@ -134,9 +134,6 @@ void Main_Menu_New_Map::button_clicked(int n) {
                  
                  m_map->recalc_whole_map();
 
-                 // Tell the user interface that the map has changed
-                 m_parent->map_changed();
-
                  die();
                  return ; 
               }

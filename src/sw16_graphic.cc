@@ -498,7 +498,7 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 ===============
 draw_overlays
 
-Draw build help (buildings and roads) 
+Draw build help, frontier and registered overlays 
 ===============
 */
 static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
@@ -659,7 +659,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 			if (render_b || render_r) {
 				uchar roads = f.field->get_roads();
 
-				roads |= mri->overlay_roads[f.y*mapwidth + f.x];
+				roads |= mri->egbase->get_map()->get_overlay_manager()->get_road_overlay(f);
 
 				dst.draw_field(f.field, r.field, bl.field, br.field, l.field, tr.field,
 						posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);

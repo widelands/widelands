@@ -108,7 +108,6 @@ void Main_Menu_Load_Map::clicked(int id) {
       // we create an empty one from scratch
       m_map->cleanup();
       m_map->create_empty_map();
-      m_parent->map_changed();
 
       std::string s="Map Loading Error!\n\nReason given:\n";
       s+=exe.what();
@@ -120,10 +119,6 @@ void Main_Menu_Load_Map::clicked(int id) {
    m_parent->get_editor()->postload();
    m_parent->get_editor()->load_graphics();
       
-   // Inform user interface about map change. 
-   m_parent->map_changed();
- 
-   
    delete ml;
    }
    die();

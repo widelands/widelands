@@ -90,7 +90,17 @@ class Overlay_Manager {
 
       void recalc_field_overlays(FCoords& f, FCoords* neighbours);
 
-      //      void register_road_overlay(); 
+      // Road overlays are registered like normal overlays and removed like normal overlays
+      // but they use are handled internally completly different. When a road overlay information is requested
+      // the same data as for a field is returned (a uchar which needs to be ANDed) 
+      void register_road_overlay(Coords c, uchar where, int jobid = -1); 
+      void remove_road_overlay(Coords c);
+      void remove_road_overlay(int jobid);
+      inline uchar get_road_overlay(Coords& c) {
+         std::map<int, Registered_Road_Overlays>::iterator i=m_road_overlays.find((c.y<<8)+c.x);
+         if(i!=m_road_overlays.end()) return i->second.where;
+         return 0;
+      }
 
       // functions for border. This could be generalized with "in between overlays"
       // but there do not exist any more (yet?). For now, handling borders for themself
@@ -124,13 +134,18 @@ class Overlay_Manager {
       }
 
    private:
-      // this is always sorted by (x<<8)+y. a unique coordinate which is sortable 
+      // this is always sorted by (y<<8)+x. a unique coordinate which is sortable 
       struct Registered_Overlays {
          int jobid;
          int picid;
          int hotspot_x;
          int hotspot_y;
          int level;
+      };
+
+      struct Registered_Road_Overlays {
+         int jobid;
+         uchar where;
       };
 
       enum {
@@ -148,6 +163,7 @@ class Overlay_Manager {
       };
 
       // data
+      std::map<int, Registered_Road_Overlays> m_road_overlays;           // for road overlays
       std::multimap<int, Registered_Overlays> m_overlays;
       Overlay_Info m_buildhelp_infos[5];              // flag, small, medium, big, mine
       bool m_are_graphics_loaded;
