@@ -42,10 +42,8 @@ int Editor_Tool_Set_Starting_Pos_Callback(FCoords& c, void* data, int) {
       if(i==m_current_player) continue;
       Coords sp=map->get_starting_pos(i);
       if(sp.x==-1 && sp.y==-1) continue;
-      MapRegion mr(map, sp, MIN_PLACE_AROUND_PLAYERS);
-      FCoords fc;
-      while(mr.next(&fc))
-         if(fc.x==c.x && fc.y==c.y) return 0;
+      if(map->calc_distance(sp, c)<MIN_PLACE_AROUND_PLAYERS) 
+         return 0;
    }
 
    int caps=c.field->get_caps();
