@@ -21,15 +21,45 @@
 // 2002-02-11	sft+	made setup_searchpaths work PROPERLY for win32
 // 2002-08-07  nh		setup_searchpaths changed for saner default paths
 
+#include <cerrno>
+#include <cstring>
 #include <string>
+
 #include "filesystem.h"
 #include "setup.h"
+#include "error.h"
 
 #ifndef WIN32
   #include <sys/stat.h>
   #include <sys/types.h>
+  #include <unistd.h>
 #endif
 
+
+#ifdef __linux__
+/*
+==============
+getexename
+
+Read the actual name of the executable from /proc
+==============
+*/
+static std::string getexename()
+{
+	static const char* const s_selfptr = "/proc/self/exe";
+
+	char buf[PATH_MAX];
+	int ret;
+
+	ret = readlink(s_selfptr, buf, sizeof(buf));
+	if (ret == -1) {
+		log("readlink(%s) failed: %s\n", s_selfptr, strerror(errno));
+		return "";
+	}
+
+	return std::string(buf, ret);
+}
+#endif
 
 /** void setup_searchpaths(int argc, char **argv)
  *
@@ -41,19 +71,28 @@ void setup_searchpaths(int argc, char **argv)
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
 
 	// the directory the executable is in is the default game data directory
-	char *exename = strdup(argv[0]);
-	char *slash = strrchr(exename, '/');
-	char *backslash = strrchr(exename, '\\');
+	std::string exename;
 
-	if (backslash && (!slash || backslash > slash))
+#ifdef __linux__
+	exename = getexename();
+	if (!exename.size())
+		exename = argv[0];
+#else
+	exename = argv[0];
+#endif
+
+	std::string::size_type slash = exename.rfind('/');
+	std::string::size_type backslash = exename.rfind('\\');
+
+	if (backslash != std::string::npos && (slash == std::string::npos || backslash > slash))
 		slash = backslash;
-	if (slash) {
-		*slash = 0;
-		if (strcmp(exename, "."))
-			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
-	}
 
-	free(exename);
+	if (slash != std::string::npos) {
+		exename.erase(slash);
+		if (exename != ".") {
+			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
+		}
+	}
 
 	// finally, the user's config directory
 	// TODO: implement this for UIWindows (yes, NT-based ones are actually multi-user)
