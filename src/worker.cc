@@ -26,6 +26,7 @@
 #include "rendertarget.h"
 #include "transport.h"
 #include "util.h"
+#include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"

@@ -1,0 +1,528 @@
+/*
+ * Copyright (C) 2002-2004 by Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#include "constructionsite.h"
+#include "editor_game_base.h"
+#include "error.h"
+#include "game.h"
+#include "graphic.h"
+#include "player.h"
+#include "rendertarget.h"
+#include "transport.h"
+#include "worker.h"
+
+
+static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
+
+
+/*
+===============
+ConstructionSite_Descr::ConstructionSite_Descr
+===============
+*/
+ConstructionSite_Descr::ConstructionSite_Descr(Tribe_Descr* tribe, const char* name)
+	: Building_Descr(tribe, name)
+{
+}
+
+
+/*
+===============
+ConstructionSite_Descr::parse
+
+Parse tribe-specific construction site data, such as graphics, worker type,
+etc...
+===============
+*/
+void ConstructionSite_Descr::parse(const char* directory, Profile* prof, const EncodeData* encdata)
+{
+	Building_Descr::parse(directory, prof, encdata);
+
+	// TODO
+}
+
+
+/*
+===============
+ConstructionSite_Descr::create_object
+
+Allocate a ConstructionSite
+===============
+*/
+Building* ConstructionSite_Descr::create_object()
+{
+	return new ConstructionSite(this);
+}
+
+
+/*
+==============================
+
+IMPLEMENTATION
+
+==============================
+*/
+
+
+/*
+===============
+ConstructionSite::ConstructionSite
+
+Initialize with default values
+===============
+*/
+ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr)
+	: Building(descr)
+{
+	m_building = 0;
+
+	m_builder = 0;
+	m_builder_request = 0;
+
+	m_fetchfromflag = 0;
+
+	m_working = false;
+	m_work_steptime = 0;
+	m_work_completed = 0;
+	m_work_steps = 0;
+}
+
+
+/*
+===============
+ConstructionSite::~ConstructionSite
+===============
+*/
+ConstructionSite::~ConstructionSite()
+{
+}
+
+
+/*
+===============
+ConstructionSite::get_size
+
+Override: construction size is always the same size as the building
+===============
+*/
+int ConstructionSite::get_size()
+{
+	return m_building->get_size();
+}
+
+
+/*
+===============
+ConstructionSite::get_playercaps
+
+Override: Even though construction sites cannot be built themselves, you can
+bulldoze them.
+===============
+*/
+uint ConstructionSite::get_playercaps()
+{
+	uint caps = Building::get_playercaps();
+
+	caps |= 1 << PCap_Bulldoze;
+
+	return caps;
+}
+
+
+/*
+===============
+ConstructionSite::get_ui_anim
+
+Return the animation for the building that is in construction, as this
+should be more useful to the player.
+===============
+*/
+uint ConstructionSite::get_ui_anim()
+{
+	return get_building()->get_idle_anim();
+}
+
+
+/*
+===============
+ConstructionSite::get_census_string
+
+Print the name of the building we build.
+===============
+*/
+std::string ConstructionSite::get_census_string()
+{
+	return get_building()->get_descname();
+}
+
+
+/*
+===============
+ConstructionSite::get_statistics_string
+
+Print completion percentage.
+===============
+*/
+std::string ConstructionSite::get_statistics_string()
+{
+	char buf[40];
+
+	snprintf(buf, sizeof(buf), "%u%% built", (get_built_per64k() * 100) >> 16);
+
+	return std::string(buf);
+}
+
+
+/*
+===============
+ConstructionSite::get_built_per64k
+
+Return the completion "percentage", where 2^16 = completely built,
+0 = nothing built.
+===============
+*/
+uint ConstructionSite::get_built_per64k()
+{
+	uint time = get_owner()->get_game()->get_gametime();
+	uint thisstep = m_working ? (CONSTRUCTIONSITE_STEP_TIME - m_work_steptime + time) : 0;
+	uint total;
+
+	thisstep = (thisstep << 16) / CONSTRUCTIONSITE_STEP_TIME;
+	total = (thisstep + (m_work_completed << 16)) / m_work_steps;
+
+	assert(thisstep <= (1 << 16));
+	assert(total <= (1 << 16));
+
+	return total;
+}
+
+
+/*
+===============
+ConstructionSite::set_building
+
+Set the type of building we're going to build
+===============
+*/
+void ConstructionSite::set_building(Building_Descr* descr)
+{
+	assert(!m_building);
+
+	m_building = descr;
+}
+
+
+/*
+===============
+ConstructionSite::set_economy
+
+Change the economy for the wares queues.
+Note that the workers are dealt with in the PlayerImmovable code.
+===============
+*/
+void ConstructionSite::set_economy(Economy* e)
+{
+	Economy* old = get_economy();
+	uint i;
+
+	if (old) {
+		for(i = 0; i < m_wares.size(); i++)
+			m_wares[i]->remove_from_economy(old);
+	}
+
+	Building::set_economy(e);
+	if (m_builder_request)
+		m_builder_request->set_economy(e);
+
+	if (e) {
+		for(i = 0; i < m_wares.size(); i++)
+			m_wares[i]->add_to_economy(e);
+	}
+}
+
+
+/*
+===============
+ConstructionSite::init
+
+Initialize the construction site by starting orders
+===============
+*/
+void ConstructionSite::init(Editor_Game_Base* g)
+{
+	Building::init(g);
+
+	if (g->is_game()) {
+		uint i;
+
+		// TODO: figure out whether planing is necessary
+
+		// Initialize the wares queues
+		const Building_Descr::BuildCost* bc = m_building->get_buildcost();
+
+		m_wares.resize(bc->size());
+
+		for(i = 0; i < bc->size(); i++) {
+			WaresQueue* wq = new WaresQueue(this);
+
+			m_wares[i] = wq;
+
+			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
+			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
+			wq->init((Game*)g, g->get_safe_ware_id((*bc)[i].name.c_str()), (*bc)[i].amount);
+
+			m_work_steps += (*bc)[i].amount;
+		}
+
+		request_builder((Game*)g);
+	}
+}
+
+
+/*
+===============
+ConstructionSite::cleanup
+
+Release worker and material (if any is left).
+If construction was finished successfully, place the building at our position.
+===============
+*/
+void ConstructionSite::cleanup(Editor_Game_Base* g)
+{
+	// Release worker
+	if (m_builder_request) {
+		delete m_builder_request;
+		m_builder_request = 0;
+	}
+
+	// Cleanup the wares queues
+	for(uint i = 0; i < m_wares.size(); i++) {
+		m_wares[i]->cleanup((Game*)g);
+		delete m_wares[i];
+	}
+	m_wares.clear();
+
+	Building::cleanup(g);
+
+	if (m_work_completed >= m_work_steps)
+	{
+		// Put the real building in place
+		Building* bld = m_building->create(g, get_owner(), m_position, false);
+
+		// Walk the builder home safely
+		m_builder->reset_tasks((Game*)g);
+		m_builder->set_location(bld);
+		m_builder->start_task_gowarehouse((Game*)g);
+	}
+}
+
+
+/*
+===============
+ConstructionSite::burn_on_destroy
+
+Construction sites only burn if some of the work has been completed.
+===============
+*/
+bool ConstructionSite::burn_on_destroy()
+{
+	if (m_work_completed >= m_work_steps)
+		return false; // completed, so don't burn
+
+	if (m_work_completed)
+		return true;
+
+	return false;
+}
+
+
+/*
+===============
+ConstructionSite::request_builder
+
+Issue a request for the builder.
+===============
+*/
+void ConstructionSite::request_builder(Game* g)
+{
+	assert(!m_builder && !m_builder_request);
+
+	m_builder_request = new Request(this, g->get_safe_ware_id("builder"),
+	                                &ConstructionSite::request_builder_callback, this);
+}
+
+
+/*
+===============
+ConstructionSite::request_builder_callback [static]
+
+Called by transfer code when the builder has arrived on site.
+===============
+*/
+void ConstructionSite::request_builder_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+{
+	assert(w);
+
+	ConstructionSite* cs = (ConstructionSite*)data;
+
+	cs->m_builder = w;
+
+	delete rq;
+	cs->m_builder_request = 0;
+
+	w->start_task_buildingwork(g);
+}
+
+
+/*
+===============
+ConstructionSite::fetch_from_flag
+
+Remember the item on the flag. The worker will be sent from get_building_work().
+===============
+*/
+bool ConstructionSite::fetch_from_flag(Game* g)
+{
+	m_fetchfromflag++;
+
+	if (m_builder)
+		m_builder->update_task_buildingwork(g);
+
+	return true;
+}
+
+
+/*
+===============
+ConstructionSite::get_building_work
+
+Called by our builder to get instructions.
+===============
+*/
+bool ConstructionSite::get_building_work(Game* g, Worker* w, bool success)
+{
+	assert(w == m_builder);
+
+	// Check if one step has completed
+	if (m_working) {
+		if ((int)(g->get_gametime() - m_work_steptime) < 0) {
+			w->start_task_idle(g, w->get_idle_anim(), m_work_steptime - g->get_gametime());
+			return true;
+		} else {
+			molog("ConstructionSite::check_work: step %i completed\n", m_work_completed);
+
+			m_work_completed++;
+			if (m_work_completed >= m_work_steps)
+				schedule_destroy(g);
+
+			m_working = false;
+		}
+	}
+
+	// Fetch items from flag
+	if (m_fetchfromflag) {
+		m_fetchfromflag--;
+		w->start_task_fetchfromflag(g);
+		return true;
+	}
+
+	// Check if we've got wares to consume
+	if (m_work_completed < m_work_steps)
+	{
+		for(uint i = 0; i < m_wares.size(); i++) {
+			WaresQueue* wq = m_wares[i];
+
+			if (!wq->get_filled())
+				continue;
+
+			molog("ConstructionSite::check_work: wq has %i/%i, begin work\n",
+						wq->get_filled(), wq->get_size());
+
+			wq->set_filled(wq->get_filled() - 1);
+			wq->set_size(wq->get_size() - 1);
+			wq->update(g);
+
+			m_working = true;
+			m_work_steptime = g->get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
+
+			w->start_task_idle(g, w->get_idle_anim(), CONSTRUCTIONSITE_STEP_TIME);
+			return true;
+		}
+	}
+
+	return false; // sorry, got no work for you
+}
+
+
+/*
+===============
+ConstructionSite::wares_queue_callback [static]
+
+Called by WaresQueue code when an item has arrived
+===============
+*/
+void ConstructionSite::wares_queue_callback(Game* g, WaresQueue* wq, int ware, void* data)
+{
+	ConstructionSite* cs = (ConstructionSite*)data;
+
+	if (!cs->m_working && cs->m_builder)
+		cs->m_builder->update_task_buildingwork(g);
+}
+
+
+/*
+===============
+ConstructionSite::draw
+
+Draw the construction site.
+===============
+*/
+void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coords, Point pos)
+{
+	uint tanim = g->get_gametime() - m_animstart;
+
+	if (coords != m_position)
+		return; // draw big buildings only once
+
+	// Draw the construction site marker
+	dst->drawanim(pos.x, pos.y, m_anim, tanim, get_owner()->get_playercolor());
+
+	// Draw the partially finished building
+	int totaltime;
+	int completedtime;
+	int w, h;
+	int lines;
+	uint anim;
+
+	totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
+	completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+
+	if (m_working)
+		completedtime += CONSTRUCTIONSITE_STEP_TIME + g->get_gametime() - m_work_steptime;
+
+	anim = get_building()->get_idle_anim();
+	g_gr->get_animation_size(anim, tanim, &w, &h);
+
+	lines = completedtime * h / totaltime;
+
+	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor(), 0, h-lines, w, lines);
+
+	// Draw help strings
+	draw_help(g, dst, coords, pos);
+}

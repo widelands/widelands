@@ -27,11 +27,13 @@ class.
 
 #include "IntPlayer.h"
 #include "building.h"
-#include "building_int.h"
 #include "cmd_queue.h"
+#include "constructionsite.h"
 #include "error.h"
 #include "font.h"
 #include "game_debug_ui.h"
+#include "militarysite.h"
+#include "productionsite.h"
 #include "rendertarget.h"
 #include "transport.h"
 #include "ui_box.h"
@@ -39,6 +41,7 @@ class.
 #include "ui_progressbar.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
+#include "warehouse.h"
 #include "waresdisplay.h"
 #include "wexception.h"
 

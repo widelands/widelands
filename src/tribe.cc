@@ -23,6 +23,7 @@
 #include "filesystem.h"
 #include "profile.h"
 #include "tribe.h"
+#include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
 

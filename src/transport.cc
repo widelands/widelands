@@ -34,6 +34,7 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "rendertarget.h"
 #include "transport.h"
 #include "tribe.h"
+#include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
 
