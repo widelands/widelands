@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
+ * Copyright (C) 2002-2004 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@ public:
 	inline bool get_inputgrab() const { return m_inputgrab->get_state(); }
 	inline uint get_xres() const { return resolutions[m_resolution.get_state()].width; }
 	inline uint get_yres() const { return resolutions[m_resolution.get_state()].height; }
+	inline int get_gfxsys() const { return GFXSYS_SW16 + m_gfxsys.get_state(); }
 
    enum {
       om_cancel = 0,
@@ -46,6 +47,7 @@ private:
 	Checkbox*	m_fullscreen;
 	Checkbox*	m_inputgrab;
 	Radiogroup	m_resolution;
+	Radiogroup	m_gfxsys;
 
 	struct res {
 		int width;

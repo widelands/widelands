@@ -69,7 +69,7 @@ inline void unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b)
 inline ushort bright_up_clr(ushort clr, int factor)
 {
    if(!factor) return clr;
-   
+
    int r = ((clr >> 11) << 3);
    int g = ((clr >> 5)  << 2) & 0xFF;
    int b = ((clr)       << 3) & 0xFF;
@@ -91,6 +91,61 @@ end:
        return pack_rgb(r, g, b);
 }
 
+inline void bright_up_clr32(uchar* clr, int factor)
+{
+   int b = clr[0] + factor;
+   int g = clr[1] + factor;
+   int r = clr[2] + factor;
+
+	if (b & 0xFF00) b = (~b) >> 24;
+	if (g & 0xFF00) g = (~g) >> 24;
+	if (r & 0xFF00) r = (~r) >> 24;
+
+	clr[0] = b;
+	clr[1] = g;
+	clr[2] = r;
+}
+
+
+/*
+class RGBColor
+*/
+class RGBColor {
+	enum {
+		Blue = 0,
+		Green,
+		Red
+	};
+
+	uchar		m_color[4];
+
+public:
+	inline RGBColor() { }
+	inline RGBColor(uchar r, uchar g, uchar b) {
+		m_color[Blue] = b; m_color[Green] = g; m_color[Red] = r;
+	}
+
+	inline void set(uchar r, uchar g, uchar b) {
+		m_color[Blue] = b; m_color[Green] = g; m_color[Red] = r;
+	}
+
+	inline uchar r() const { return m_color[Red]; }
+	inline uchar g() const { return m_color[Green]; }
+	inline uchar b() const { return m_color[Blue]; }
+
+	inline ushort pack16() const {
+		return ((m_color[Blue]>>3) + ((m_color[Green]>>2)<<5)+ ((m_color[Red]>>3)<<11) );
+	}
+	inline void unpack16(ushort clr) {
+		m_color[Red] = ((clr<<3)>>11);
+		m_color[Green] = ((clr<<2)>>5);
+		m_color[Blue] = (clr<<3);
+	}
+	inline uint pack32() const { return *(uint*)m_color & 0x00FFFFFF; }
+	inline void unpack32(uint clr) { *(uint*)m_color = clr; }
+};
+
+
 inline ushort blend_color16(ushort old_pixel, ushort aColor)
 {
 	return (((((old_pixel & 0xF800) + (aColor & 0xF800))/2) & 0xF800) +
@@ -98,33 +153,12 @@ inline ushort blend_color16(ushort old_pixel, ushort aColor)
 	        ((((old_pixel & 0x001F) + (aColor & 0x001F))/2) & 0x001F));
 }
 
-
-
-/*
-class RGBColor
-*/
-class RGBColor {
-	uchar m_r, m_g, m_b;
-	
-public:
-	inline RGBColor() { }
-	inline RGBColor(uchar r, uchar g, uchar b) : m_r(r), m_g(g), m_b(b) { }
-	
-	inline void set(uchar r, uchar g, uchar b) { m_r = r; m_g = g; m_b = b; }
-
-	inline uchar r() const { return m_r; }
-	inline uchar g() const { return m_g; }
-	inline uchar b() const { return m_b; }
-	
-	inline ushort pack16() const {
-		return ((m_b>>3) + ((m_g>>2)<<5)+ ((m_r>>3)<<11) );
-	}
-	inline void unpack16(ushort clr) {
-		m_r = ((clr<<3)>>11);
-		m_g = ((clr<<2)>>5);
-		m_b = (clr<<3);
-	}
-};
+inline void blend_color32(uchar* clr1, const RGBColor& clr2)
+{
+	clr1[0] = (clr1[0] + clr2.b()) >> 1;
+	clr1[1] = (clr1[1] + clr2.g()) >> 1;
+	clr1[2] = (clr1[2] + clr2.r()) >> 1;
+}
 
 
 /*
@@ -139,7 +173,7 @@ struct Point
 {
    int x;
    int y;
-	
+
    Point() { }
    Point(int px, int py) : x(px), y(py) { }
 };
@@ -152,7 +186,7 @@ inline Point operator-(Point a, Point b) { return Point(a.x - b.x, a.y - b.y); }
 struct Rect : public Point {
 	int w;
 	int h;
-	
+
 	Rect() { }
 	Rect(int px, int py, int pw, int ph) : Point(px, py), w(pw), h(ph) { }
 };

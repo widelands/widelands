@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,19 +63,20 @@ static void g_init(int argc, char **argv)
 		
 		// Initialize graphics
 		Section *s = g_options.pull_section("global");
-		
-		Sys_InitGraphics(GFXSYS_SW16, 640, 480, s->get_bool("fullscreen", false));
-		
-		// complain about unknown options in the configuration file and on the 
+
+		Sys_InitGraphics(Sys_GetGraphicsSystemFromString(s->get_string("gfxsys", "sw32")),
+						640, 480, s->get_bool("fullscreen", false));
+
+		// complain about unknown options in the configuration file and on the
 		// command line
-		
+
 		// KLUDGE!
 		// Without this, xres and yres get dropped by check_used().
 		// Profile needs support for a Syntax definition to solve this in a sensible way
 		s->get_string("xres");
 		s->get_string("yres");
 		// KLUDGE!
-		
+
 		g_options.check_used();
 	}
 	catch(std::exception &e) {
@@ -96,7 +97,7 @@ static void g_shutdown()
 {
 	// Shutdown subsystems
 	Sys_InitGraphics(GFXSYS_NONE, 0, 0, false);
-	
+
 	if (g_font) {
 		g_font->release();
 		g_font = 0;
@@ -182,6 +183,12 @@ void g_main(int argc, char** argv)
                         s->set_int("yres", om->get_yres());
                         s->set_bool("fullscreen", om->get_fullscreen());
                         s->set_bool("inputgrab", om->get_inputgrab());
+
+								switch(om->get_gfxsys()) {
+								case GFXSYS_SW16: s->set_string("gfxsys", "sw16"); break;
+								case GFXSYS_SW32: s->set_string("gfxsys", "sw32"); break;
+								}
+
                         Sys_SetInputGrab(om->get_inputgrab());
                      }
                      delete om;

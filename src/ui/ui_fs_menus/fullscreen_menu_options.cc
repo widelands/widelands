@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
+ * Copyright (C) 2002-2004 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,4 +79,15 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(int cur_x, int cur_y, bool full
 	}
 	if (m_resolution.get_state() < 0)
 		m_resolution.set_state(0);
+
+	// Graphics system
+	new Textarea(this, 400, 255, "Graphics mode", Align_VCenter);
+
+	m_gfxsys.add_button(this, 400, 265);
+	new Textarea(this, 425, 275, "16 bit software", Align_VCenter);
+
+	m_gfxsys.add_button(this, 400, 290);
+	new Textarea(this, 425, 300, "32 bit software", Align_VCenter);
+
+	m_gfxsys.set_state(Sys_GetGraphicsSystem() - GFXSYS_SW16);
 }

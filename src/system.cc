@@ -851,6 +851,7 @@ Note: Because of the way pictures are handled now, this function must not be
 ===============
 */
 Graphic* SW16_CreateGraphics(int w, int h, bool fullscreen);
+Graphic* SW32_CreateGraphics(int w, int h, bool fullscreen);
 void Font_ReloadAll();
 
 void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
@@ -863,7 +864,7 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 		delete g_gr;
 		g_gr = 0;
 		}
-	
+
 	sys.gfx_system = system;
 	sys.gfx_w = w;
 	sys.gfx_h = h;
@@ -874,6 +875,10 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 		case GFXSYS_SW16:
 			g_gr = SW16_CreateGraphics(w, h, fullscreen);
 			break;
+
+		case GFXSYS_SW32:
+			g_gr = SW32_CreateGraphics(w, h, fullscreen);
+			break;
 		}
 
 	Sys_SetMaxMouseCoords(w, h);
@@ -881,4 +886,33 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 	// Fonts need to reload images...
 	if (g_gr)
 		Font_ReloadAll();
+}
+
+
+/*
+===============
+Sys_GetGraphicsSystem
+
+Return the currently selected graphics system.
+===============
+*/
+int Sys_GetGraphicsSystem()
+{
+	return sys.gfx_system;
+}
+
+
+/*
+===============
+Sys_GetGraphicsSystemFromString
+
+Get the graphics system that corresponds to the given string.
+===============
+*/
+int Sys_GetGraphicsSystemFromString(std::string str)
+{
+	if (str == "sw16")
+		return GFXSYS_SW16;
+
+	return GFXSYS_SW32;
 }

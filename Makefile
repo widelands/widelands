@@ -33,11 +33,11 @@ endif
 
 # additional build flags. if you're not a developer, you don't want
 # to change this
-ADD_CFLAGS:=
+#ADD_CFLAGS:= inherit flags from command line!
 
 # additional link flags. if you're not a developer, you don't want
 # to change this
-ADD_LDFLAGS:=
+#ADD_LDFLAGS:=
 
 # Different build-types:
 #  debug-no-parachute optimized, debugging symbols, disable SDLs parachute
@@ -68,7 +68,7 @@ endif
 ##############################################################################
 # Cross compiling options
 
-ifneq ($(CROSS),NO) 
+ifneq ($(CROSS),NO)
 # CROSS COMPILE, for developer only
 PREFIX:=/usr/local/cross-tools
 TARGET:=i386-mingw32msvc
@@ -92,9 +92,9 @@ BUILD:=$(strip $(BUILD))
 ifeq ($(BUILD),release)
 OPTIMIZE:=yes
 # heavy optimization
-#ADD_CFLAGS:=$(ADD_CFLAGS) -fomit-frame-pointer -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations 
-# !!!! -fomit-frame-pointer breaks execeptions !!!! 
-ADD_CFLAGS:=$(ADD_CFLAGS) -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations 
+#ADD_CFLAGS:=$(ADD_CFLAGS) -fomit-frame-pointer -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations
+# !!!! -fomit-frame-pointer breaks execeptions !!!!
+ADD_CFLAGS:=$(ADD_CFLAGS) -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations
 else
 ifeq ($(BUILD),profile)
 OPTIMIZE:=yes
@@ -142,7 +142,7 @@ LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image
 
 ##############################################################################
 # Building
-all: tags $(OBJECT_DIR)/widelands 
+all: tags $(OBJECT_DIR)/widelands
 	cp $(OBJECT_DIR)/widelands .
 	@echo -ne "\nCongrats. Build seems to be complete. If there was no "
 	@echo -ne "error (ignore file not found errors), you can run the game "
@@ -181,7 +181,7 @@ $(OBJECT_DIR)/%.d: $(OBJECT_DIR) $(filter %/$(notdir $(basename $@)).cc,$(SRC))
 	    sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@' > $@
 
 $(OBJECT_DIR)/%.o:  $(filter %/$(notdir $(basename $@)).cc,$(SRC))
-	$(CXX) $(CXXFLAGS) -c -o $@ $(filter %/$(notdir $(basename $@)).cc,$(SRC)) 
+	$(CXX) $(CXXFLAGS) -c -o $@ $(filter %/$(notdir $(basename $@)).cc,$(SRC))
 
 tags: $(SRC) $(HEADERS)
 	@ if [ -x /usr/bin/ctags ]; then ctags -R || true ; else true; fi

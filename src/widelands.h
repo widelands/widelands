@@ -449,6 +449,7 @@ enum { // use 1<<MOUSE_xxx for bitmasks
 enum { // which graphics subsystem to use
 	GFXSYS_NONE = 0,
 	GFXSYS_SW16,			// software, 16-bit depth
+	GFXSYS_SW32,			// software, 32-bit depth
 };
 
 
@@ -509,3 +510,5 @@ void Sys_MouseLock(bool locked);
 
 // graphics
 void Sys_InitGraphics(int system, int w, int h, bool fullscreen);
+int Sys_GetGraphicsSystem();
+int Sys_GetGraphicsSystemFromString(std::string str);

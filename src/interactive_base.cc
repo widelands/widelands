@@ -45,7 +45,8 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 	// Switch to the new graphics system now, if necessary
    Section *s = g_options.pull_section("global");
 	
-	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
+	Sys_InitGraphics(Sys_GetGraphicsSystemFromString(s->get_string("gfxsys", "sw32")),
+			get_xres(), get_yres(), s->get_bool("fullscreen", false));
 
    memset(&m_maprenderinfo, 0, sizeof(m_maprenderinfo));   
 
@@ -162,8 +163,6 @@ Draw debug overlay when appropriate.
 */
 void Interactive_Base::draw_overlay(RenderTarget* dst)
 {
-	Panel::draw(dst);
-
 	if (get_display_flag(dfDebug))
 	{
 		// Show fsel coordinates

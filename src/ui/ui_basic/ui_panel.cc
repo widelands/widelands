@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -324,7 +324,21 @@ void Panel::draw_border(RenderTarget* dst)
 {
 }
 
-/** 
+
+/*
+===============
+Panel::draw_overlay [virtual]
+
+Draw overlays that appear over all child panels.
+This can be used e.g. for debug information.
+===============
+*/
+void Panel::draw_overlay(RenderTarget* dst)
+{
+}
+
+
+/**
  * Mark a part of a panel for updating.
  */
 void Panel::update(int x, int y, int w, int h)
@@ -530,7 +544,7 @@ void Panel::grab_mouse(bool grab)
 */
 void Panel::set_can_focus(bool yes)
 {
-   
+
 	if (yes) {
 		_flags |= pf_can_focus;
    }	else {
@@ -629,20 +643,22 @@ void Panel::do_draw(RenderTarget* dst)
 	{
 		Rect outerrc;
 		Point outerofs;
-		
+
 		if (dst->enter_window(Rect(_x, _y, _w, _h), &outerrc, &outerofs)) {
 			draw_border(dst);
-			
+
 			Rect innerwindow(_lborder, _tborder, _w-(_lborder+_rborder), _h-(_tborder+_bborder));
-			
+
 			if (dst->enter_window(innerwindow, 0, 0)) {
 				draw(dst);
 
 				// draw back to front
 				for(Panel *child = _lchild; child; child = child->_prev)
 					child->do_draw(dst);
+
+				draw_overlay(dst);
 			}
-			
+
 			dst->set_window(outerrc, outerofs);
 		}
 	}

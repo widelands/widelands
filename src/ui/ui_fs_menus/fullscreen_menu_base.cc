@@ -43,8 +43,9 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 	// Switch graphics mode if necessary
 	Section *s = g_options.pull_section("global");
 
-	Sys_InitGraphics(GFXSYS_SW16, MENU_XRES, MENU_YRES, s->get_bool("fullscreen", false));
-	
+	Sys_InitGraphics(Sys_GetGraphicsSystemFromString(s->get_string("gfxsys", "sw32")),
+			MENU_XRES, MENU_YRES, s->get_bool("fullscreen", false));
+
 	// Load background graphics
 	char buf[256];
 	snprintf(buf, sizeof(buf), "pics/%s", bgpic);
