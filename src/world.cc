@@ -29,27 +29,27 @@ World::World(const char* file)
 	author[0] = 0;
 	bobCount = textureCount = animCount = resourceCount = terrainCount = 0;
 	//
-	Binary_file* wwf = new Binary_file();
-	wwf->open(file, File::READ);
-	if (wwf->get_state() == File::CLOSE)
+	Binary_file wwf; 
+	wwf.open(file, File::READ);
+	if (wwf.get_state() == File::CLOSE)
 		return;
-	read_header(wwf);
+	read_header(&wwf);
 
 /* TODO
  * these are skipped for now; mapeditor will need them
  */
 	ResourceDesc res;
 	for (uint i=0; i<resourceCount; i++)
-		wwf->read(&res, sizeof(ResourceDesc));
+		wwf.read(&res, sizeof(ResourceDesc));
 	// same for terrain
 	TerrainType terrain;
 	for (uint j=0; j<terrainCount; j++)
-		wwf->read(&terrain, sizeof(TerrainType));
+		wwf.read(&terrain, sizeof(TerrainType));
 /**/
 	
-	read_bobs(wwf);
-	read_textures(wwf);
-	read_anims(wwf);
+	read_bobs(&wwf);
+	read_textures(&wwf);
+	read_anims(&wwf);
 }
 
 void World::read_header(Binary_file* file)
@@ -95,6 +95,7 @@ void World::read_textures(Binary_file* file)
 
 void World::read_anims(Binary_file* file)
 {
+	anim=0;
 	if (!animCount)
 		return;
 	anim = new Anim[animCount];
@@ -111,7 +112,7 @@ World::~World()
 	delete[] texture;
 	for (uint i=0; i<animCount; i++)
 		delete anim[i].pic;
-	delete anim;
+	if(anim) delete anim;
 }
 
 Bob* World::create_bob(uint n)
