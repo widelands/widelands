@@ -173,7 +173,7 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
 		g_font->draw_string(dst, 5, 5, buf);
 
 		// Show FPS
-		sprintf(buf, "%4.1f fps (avg: %4.1f fps)",
+		sprintf(buf, "%5.1f fps (avg: %5.1f fps)",
 				1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
 		g_font->draw_string(dst, 75, 5, buf);
 	}
