@@ -21,22 +21,23 @@
 #define __S__OS_H
 
 #ifndef NULL
-#define NULL 0
+	#define NULL 0
 #endif
 
 #ifdef WIN32
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#define SEP			"\\"
-#define CSEP		'\\'
-
-#else
-#include <unistd.h>
-#define strcmpi strcasecmp
-#define strncmpi strncasecmp
-
-#define SEP			"/"
-#define CSEP		'/'
-#endif
+	#define WIN32_LEAN_AND_MEAN
+	#include <windows.h>
+	#define SEP			"\\"
+	#define CSEP		'\\'
+	#ifdef _DEBUG			//chk ths plz
+		#define DEBUG
+	#endif //_DEBUG
+#else //WIN32
+	#include <unistd.h>
+	#define strcmpi strcasecmp
+	#define strncmpi strncasecmp
+	#define SEP			"/"
+	#define CSEP		'/'
+#endif //WIN32
 
 #endif /* __S__OS_H */
