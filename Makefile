@@ -3,12 +3,12 @@
 #####################################################################
 
 # Please edit everything in the general and in the OS specific sections
-# after this, set the first variable to YES and start the build by 
+# after this, set the first variable to YES and start the build by
 # running GNU make
 
 ########################### GLOBAL SECTION ##########################
 # NON CROSS COMPILE
-# 
+#
 #  set this to YES if you're done here
 IS_MAKEFILE_EDITED:=YES
 
@@ -149,9 +149,6 @@ all: tags $(OBJECT_DIR)/widelands
 	@echo -ne "now. just type: './widelands' and enjoy!\n\n"
 	@echo -e "\tTHE WIDELANDS DEVELOPMENT TEAM"
 
-$(OBJECT_DIR):
-	-mkdir $(OBJECT_DIR)
-
 clean:
 	@-rm -rf widelands
 	@-rm -rf *.da src/*.da
@@ -167,21 +164,20 @@ CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 SRC := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.cc))
 HEADERS := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.h))
-OBJ := $(patsubst %.cc,$(OBJECT_DIR)/%.o$,$(notdir $(SRC)))
+OBJ := $(patsubst src/%.cc,$(OBJECT_DIR)/%.o$,$(SRC))
 
-$(OBJECT_DIR)/widelands: $(OBJECT_DIR) $(OBJ) 
+makedirs:
+	-mkdir -p $(OBJECT_DIR) $(patsubst src/%,$(OBJECT_DIR)/%,$(SUBDIRS))
+
+$(OBJECT_DIR)/widelands: makedirs $(OBJ)
 	$(CXX) $(OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
-
-%.h:
 
 -include $(OBJ:.o=.d)
 
-$(OBJECT_DIR)/%.d: $(OBJECT_DIR) $(filter %/$(notdir $(basename $@)).cc,$(SRC))
-	$(CXX) -MM -MG $(CFLAGS) $(filter %/$(notdir $(basename $@)).cc,$(SRC)) | \
-	    sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@' > $@
-
-$(OBJECT_DIR)/%.o:  $(filter %/$(notdir $(basename $@)).cc,$(SRC))
-	$(CXX) $(CXXFLAGS) -c -o $@ $(filter %/$(notdir $(basename $@)).cc,$(SRC))
+$(OBJECT_DIR)/%.o: src/%.cc
+	$(CXX) -pipe $(CXXFLAGS) -MMD -MP -MF $@.d -c -o $@ $<
+	sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@' $@.d > $(OBJECT_DIR)/$*.d
+	rm $@.d
 
 tags: $(SRC) $(HEADERS)
 	@ if [ -x /usr/bin/ctags ]; then ctags -R || true ; else true; fi
