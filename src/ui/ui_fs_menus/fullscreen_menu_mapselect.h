@@ -63,6 +63,11 @@ public:
 	void map_selected(int id);
    void changed(bool);
    void double_clicked(int);
+   void fill_list(void);
+
+   std::string m_curdir;
+   std::string m_basedir;
+   std::string m_parentdir;
 };
 
 

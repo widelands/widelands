@@ -40,7 +40,7 @@ public:
    UISignal1<int> double_clicked;
 
 	void clear();
-   void sort();
+   void sort(int start = -1, int end=-1);
 	void add_entry(const char *name, void *value, bool select = false, int picid = -1);
    void remove_entry(int i);
 

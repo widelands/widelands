@@ -65,7 +65,7 @@ Free allocated resources
 UIListselect::~UIListselect()
 {
 	m_scrollbar = 0;
-	clear();
+   clear();
 }
 
 
@@ -82,6 +82,8 @@ void UIListselect::clear()
 		m_scrollbar->set_steps(1);
 	m_scrollpos = 0;
 	m_selection = -1;
+	m_last_click_time = -10000; 
+   m_last_selection = -1;
 }
 
 
@@ -122,12 +124,20 @@ void UIListselect::add_entry(const char *name, void* value, bool select, int pic
 
 /*
  * Sort the listbox alphabetically. make sure that the current selection stays
- * valid (though it might scroll out of visibility)
+ * valid (though it might scroll out of visibility). 
+ * start and end defines the beginning and the end of a subarea to 
+ * sort, for example you might want to sort directorys for themselves at the
+ * top of list and files at the bottom.
  */
-void UIListselect::sort(void) {
+void UIListselect::sort(int gstart, int gend) {
+   uint start=gstart; 
+   uint stop=gend;
+   if(gstart==-1) start=0;
+   if(gend==-1) stop=m_entries.size();
+   
    Entry *ei, *ej;
-   for(uint i=0; i<m_entries.size(); i++)
-      for(uint j=i; j<m_entries.size(); j++) {
+   for(uint i=start; i<stop; i++)
+      for(uint j=i; j<stop; j++) {
          ei=m_entries[i];
          ej=m_entries[j];
          if(strcmp(ei->name, ej->name) > 0)  {
@@ -245,23 +255,30 @@ void UIListselect::draw(RenderTarget* dst)
  */
 bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)
 {
+   
 	if (btn != 0) // only left-click
 		return false;
 
-	if (down) {
-      // check if doubleclicked
-     
-		y = (y + m_scrollpos) / get_lineheight();
-		if (y >= 0 && y < (int)m_entries.size())
-			select(y);
-	
+   if (down) {
       int time=Sys_GetTime();
-      if(time-m_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1) 
-         double_clicked.call(m_selection);
+
+      // This hick hack is needed if any of the 
+      // callback functions calls clear to forget the last
+      // clicked time.
+      int real_last_click_time=m_last_click_time; 
       
       m_last_selection=m_selection;
       m_last_click_time=time;
-     }
+
+      y = (y + m_scrollpos) / get_lineheight();
+      if (y >= 0 && y < (int)m_entries.size())
+         select(y);
+     
+      // check if doubleclicked
+      if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1) 
+         double_clicked.call(m_selection);
+
+   }
 
 	return true;
 }

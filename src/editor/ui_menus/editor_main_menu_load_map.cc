@@ -249,8 +249,8 @@ void Main_Menu_Load_Map::fill_list(void) {
    }
    delete map;
    
-//   if(m_ls->get_nr_entries())
-  //    m_ls->select(0);
+   if(m_ls->get_nr_entries())
+      m_ls->select(0);
 }
 
 /*
