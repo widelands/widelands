@@ -380,6 +380,17 @@ namespace Graph
 					bneeds_update=true;
 		  }
 
+		  /** void Graphic::screenshot(const char* f) 
+			*
+			* This makes a screenshot of a the current screen
+			*
+			* Args: f 	Filename to use
+			* Returns: Nothing
+			*/
+		  void Graphic::screenshot(const char* f) {
+					 SDL_SaveBMP(sc, f);
+		  }
+		  
 		  /** void Graphic::update(void) 
 			*
 			*	This function updates the registered rects on the screen
@@ -523,4 +534,6 @@ namespace Graph
 			}
 		}		  
 	}
+
 }
+

@@ -36,7 +36,6 @@ widelands_SOURCES=main.cc \
 						font.h \
 						font.cc \
 						errors.h \
-						main.h \
 						setup.cc \
 						setup.h \
 						counter.h \

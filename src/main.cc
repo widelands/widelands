@@ -38,6 +38,32 @@
 int graph_is_init=0; 
 #endif
 
+// TEMP this functions should be removed as soon as possible
+#include "myfile.h"
+int kbdh(const char* str, void* a) {
+		  if(strcmpi(str, "print screen") == 0) {
+					 // we do a screeni
+					 char buf[250];
+					 const char* p;
+					 Binary_file f;
+					 for(uint i=0; i<9999; i++) {
+								sprintf(buf, "s%04i.bmp", i);
+								p=g_fileloc.get_new_filename(buf);
+								f.open(p, File::READ);
+								if(f.get_state() == File::OPEN) {
+										  f.close();
+										  continue;
+								}
+								g_gr.screenshot(p);
+								break;
+					 }
+					 
+		  }
+		  return INPUT_HANDLED;
+}
+// TEMP ENDs
+
+
 /** g_main function 
  * This is the OS Independant main function.
  * 
@@ -61,6 +87,10 @@ inline int g_main(int argn, char** argc)
 	// Setup font handler and user interface for the use in widelands
 	setup_fonthandler();
 	setup_ui();
+
+	// TEMP <-- doesn't really belong here. but we use it anyway
+	g_ip.register_kbdh(kbdh, NULL);	
+	// TEMP Ends
 	
 	// Until now, no window is created, nothing is started, just initialized.
 	// By now, we musn't use the tell_user function any longer!! 

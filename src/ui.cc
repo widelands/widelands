@@ -77,8 +77,8 @@ int User_Interface::handle_click(const uint but, const bool b, const uint x, con
 										  delete_window(p->w);
 										  return INPUT_HANDLED;
 								}
-								// make this the topmost window
-								if(p->w->get_flags() != Window::FLAT) {
+								// make this the topmost window, if button is pressed
+								if(p->w->get_flags() != Window::FLAT && b) {
 										  if(p==first) {
 													 p->next->prev=0;
 													 first=p->next;

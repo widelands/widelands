@@ -274,7 +274,7 @@ namespace Graph
 		void set_mode(const ushort, const ushort, const Mode);
 		void register_update_rect(const ushort, const ushort, const ushort, const ushort);
 		void update(void);
-
+      void screenshot(const char*);
 		void render_triangle(Point* points, Vector* normals, Pic* texture);
 
 		/** Graphic::State Graphic::get_state(void) 
@@ -333,6 +333,7 @@ namespace Graph
 		friend	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort, 
 			  const ushort, const ushort);
 
+		
 	private:
 		ushort* pixels;
 		ushort xres, yres;
