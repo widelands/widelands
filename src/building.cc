@@ -1335,6 +1335,7 @@ struct ProductionAction {
       actConsume,    // sparam1 = consume this ware, has to be an input
       actAnimate,    // sparam1 = activate this animation until timeout
       actProduce,    // sparem1 = ware to produce. the worker carriers it out of the house
+      actCheck,      // sparam1 = ist DAs da?
    };
 
 	Type			type;
@@ -1428,6 +1429,17 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
             throw wexception("Line %i: Ware %s is not in [inputs]\n", idx, cmd[1].c_str());
 
          act.type = ProductionAction::actConsume;
+         act.sparam1 = cmd[1];
+      }  else if (cmd[0] == "check") {
+         if(cmd.size() != 2)
+            throw wexception("Line %i: Usage: checking <ware>", idx);
+
+
+         Section* s=prof->get_safe_section("inputs");
+         if(!s->get_string(cmd[1].c_str(), 0))
+            throw wexception("Line %i: Ware %s is not in [inputs]\n", idx, cmd[1].c_str());
+
+         act.type = ProductionAction::actCheck;
          act.sparam1 = cmd[1];
       } else if (cmd[0] == "produce") {
          if(cmd.size() != 2)
@@ -1853,6 +1865,30 @@ void ProductionSite::act(Game *g, uint data)
                }
             }
             molog("  Consume done!\n");
+            program_step();
+            m_program_timer=true;
+            m_program_time=schedule_act(g, 10);
+            break;
+
+         case ProductionAction::actCheck:
+            molog("  Checking(%s)\n", action->sparam1.c_str());
+            for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
+               if(!strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(), action->sparam1.c_str())) {
+                  WaresQueue* wq=m_input_queues[i];
+                  if(wq->get_filled())
+                  {
+                     // okay, do nothing
+                     molog("    okay\n");
+                  }
+                  else
+                  {
+                     molog("   Checking failed, program restart\n");
+                     program_restart();
+                  }
+                  break;
+               }
+            }
+               molog("  Check done!\n");
             program_step();
             m_program_timer=true;
             m_program_time=schedule_act(g, 10);
