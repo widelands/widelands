@@ -38,6 +38,7 @@ public:
 	virtual ~Worker_Descr(void);
 
 	inline Tribe_Descr *get_tribe() { return m_tribe; }
+	inline Pic *get_menu_pic() { return m_menu_pic; }
 	inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
 	inline DirAnimations *get_walkload_anims() { return &m_walkload_anims; }
 	
@@ -46,6 +47,7 @@ protected:
 	static Worker_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata);
 
 	Tribe_Descr*	m_tribe;
+	Pic*				m_menu_pic;
 	DirAnimations	m_walk_anims;
 	DirAnimations	m_walkload_anims;
 }; 

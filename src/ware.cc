@@ -65,10 +65,13 @@ Item_Ware_Descr::~Item_Ware_Descr
 Item_Ware_Descr::Item_Ware_Descr(const char *name)
 	: Ware_Descr(name)
 {
+	m_menu_pic = 0;
 }
 
 Item_Ware_Descr::~Item_Ware_Descr()
 {
+	if (m_menu_pic)
+		delete m_menu_pic;
 }
 
 /*
@@ -185,6 +188,19 @@ WareList::~WareList()
 
 /*
 ===============
+WareList::operator=
+
+Assignment operator
+===============
+*/
+WareList &WareList::operator=(const WareList &wl)
+{
+	m_wares = wl.m_wares;
+	return *this;
+}
+
+/*
+===============
 WareList::clear
 
 Clear the storage.
@@ -256,13 +272,50 @@ WareList::stock
 Return the number of wares of a given type stored in this storage.
 ===============
 */
-int WareList::stock(int id)
+int WareList::stock(int id) const
 {
 	assert(id >= 0);
 	
-	if (id < (int)m_wares.size())
+	if (id >= (int)m_wares.size())
 		return 0;
 	return m_wares[id];
 }
 
+/*
+===============
+operator==
+operator!=
+
+Two WareLists are only equal when they contain the exact same stock of
+of all wares types.
+===============
+*/
+bool operator==(const WareList &wl1, const WareList &wl2)
+{
+	uint i = 0;
 	
+	while(i < wl1.m_wares.size()) {
+		int count = wl1.m_wares[i];
+		if (i < wl2.m_wares.size()) {
+			if (count != wl2.m_wares[i])
+				return false;
+		} else {
+			if (count) // wl2 has 0 stock per definition
+				return false;
+		}
+		i++;
+	}
+	
+	while(i < wl2.m_wares.size()) {
+		if (wl2.m_wares[i]) // wl1 has 0 stock per definition
+			return false;
+		i++;
+	}
+	
+	return true;
+}
+
+bool operator!=(const WareList &wl1, const WareList &wl2)
+{
+	return !(wl1 == wl2);
+}

@@ -43,10 +43,13 @@ Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
 	: Bob_Descr(name)
 {
 	m_tribe = tribe;
+	m_menu_pic = 0;
 }
 
 Worker_Descr::~Worker_Descr(void)
 {
+	if (m_menu_pic)
+		delete m_menu_pic;
 }
 
 /*
@@ -58,9 +61,24 @@ Parse the worker data from configuration
 */
 void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
+	const char *string;
+	char buf[256];
+	char fname[256];
 	Section *s;
 
 	Bob_Descr::parse(directory, prof, encdata);
+	
+	s = prof->get_safe_section("global");
+
+	snprintf(buf, sizeof(buf),	"%s_menu.bmp", get_name());
+	string = s->get_string("menu_pic", buf);
+	
+	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
+	m_menu_pic = new Pic;
+	m_menu_pic->load(fname);
+	
+	if (m_menu_pic->get_w() != WARE_MENU_PIC_W || m_menu_pic->get_h() != WARE_MENU_PIC_H)
+		throw wexception("%s: menu pic must be %ix%i pixels.", fname, WARE_MENU_PIC_W, WARE_MENU_PIC_H);
 	
 	// Read the walking animations
 	s = prof->get_section("walk");

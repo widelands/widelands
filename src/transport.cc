@@ -262,6 +262,7 @@ void Flag::get_neighbours(Neighbour_list *neighbours)
 			continue;
 
 		Neighbour n;
+		n.road = road;
 		n.flag = road->get_flag_end();
 		if (n.flag != this)
 			n.cost = road->get_cost(true);
@@ -371,10 +372,13 @@ Road::Road()
 {
 	m_type = 0;
 	m_start = m_end = 0;
+	m_carrier_request = 0;
 }
 
 Road::~Road()
 {
+	if (m_carrier_request)
+		delete m_carrier_request;
 }
 
 
@@ -394,6 +398,7 @@ Road *Road::create(Game *g, int type, Flag *start, Flag *end, const Path &path)
 	r->m_type = type;
 	r->m_start = start;
 	r->m_end = end;
+	r->m_economy = start->get_economy();
 	r->set_path(g, path);
 	r->init(g);
 	return r;
@@ -558,7 +563,11 @@ void Road::init(Game *g)
 	// Mark Fields
 	mark_map(g);
 	
-	// TODO: request Carrier
+	// Request Carrier
+	if (!m_carrier.get(g) && !m_carrier_request) {
+		m_carrier_request = new Request(this, g->get_safe_ware_id("carrier"));
+		m_economy->add_request(m_carrier_request);
+	}
 }
 
 
@@ -571,6 +580,15 @@ Cleanup the road
 */
 void Road::cleanup(Game *g)
 {
+	// Release carrier
+	if (m_carrier_request) {
+		m_economy->remove_request(m_carrier_request);
+		delete m_carrier_request;
+		m_carrier_request = 0;
+	}
+	// TODO: release carrier if we have one
+	//if (m_carrier.get(g))
+
 	// Unmark Fields
 	unmark_map(g);
 
@@ -646,10 +664,42 @@ void Road::postsplit(Game *g, Flag *flag)
 	newroad->m_type = m_type;
 	newroad->m_start = flag;
 	newroad->m_end = oldend;
+	newroad->m_economy = m_economy;
 	newroad->set_path(g, secondpath);
-	newroad->init(g);
 	
-	// TODO: reassign carrier(s)
+	// Reassign carrier(s)
+	Carrier *carrier = (Carrier *)m_carrier.get(g);
+	if (carrier) {
+		// TODO: Figure out whether the carrier remains on this road or moves
+		// This largely depends on where the carrier is right now
+	}
+
+	// Initialize the new road
+	newroad->init(g);
+}
+
+/*
+===============
+Road::set_economy
+
+Called whenever the road changes economy as a result of split/merge.
+We need to reassign all wares that currently belong to this road:
+- the carrier(s) [implicitly reassigns the wares that are currently 
+  being carried]
+- all workers that are walking along the road right now
+
+Note: we do not reassign the carrier request. This is handled by the economy.
+===============
+*/
+void Road::set_economy(Economy *e)
+{
+	if (m_economy == e)
+		return;
+	
+	// TODO: reassign carrier
+	// if (m_carrier.get(g))
+	
+	m_economy = e;
 }
 
 /*
@@ -663,6 +713,33 @@ void Road::draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy)
 {
 }
 
+
+/*
+==============================================================================
+
+Request IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+Request::Request
+Request::~Request
+===============
+*/
+Request::Request(BaseImmovable *target, int ware)
+{
+	assert(target->get_type() == Map_Object::ROAD || target->get_type() == Map_Object::BUILDING);
+	
+	m_target = target;
+	m_ware = ware;
+}
+
+Request::~Request()
+{
+	// Request must have been removed from the economy before it's deleted
+}
 
 /*
 ==============================================================================
@@ -1127,6 +1204,33 @@ void Economy::remove_warehouse(Warehouse *wh)
 
 /*
 ===============
+Economy::add_request
+
+Consider the request, try to fulfill it immediately or queue it for later.
+===============
+*/
+void Economy::add_request(Request *req)
+{
+	// TODO: handle new request
+}
+
+/*
+===============
+Economy::remove_request
+
+Remove the request from this economy.
+Only call remove_request() when a request is actually cancelled. That is, 
+_do not_ remove a request when the owning economy changes (split/merge). This
+is handled by the actual split/merge functions.
+===============
+*/
+void Economy::remove_request(Request *req)
+{
+	// TODO: cancel the request
+}
+
+/*
+===============
 Economy::do_merge
 
 Add e's flags to this economy.
@@ -1145,9 +1249,18 @@ void Economy::do_merge(Economy *e)
 		assert(i+1 == e->get_nrflags());
 		
 		Flag *flag = e->m_flags[0];
+		
+		Neighbour_list neighbours;
+		flag->get_neighbours(&neighbours);
+		
+		for(uint i = 0; i < neighbours.size(); i++)
+			neighbours[i].road->set_economy(this);
+		
 		e->remove_flag(flag);
 		add_flag(flag);
 	}
+	
+	// TODO: merge requests and force a check of pending requests
 }
 
 /*
@@ -1176,11 +1289,14 @@ void Economy::do_split(Flag *f)
 
 		//	check all neighbours; if they aren't in the new economy yet, add them
 		// to the list
+		// make sure roads are reassigned, too
 		Neighbour_list neighbours;
 		f->get_neighbours(&neighbours);
 		
 		for(uint i = 0; i < neighbours.size(); i++) {
 			Flag *n = neighbours[i].flag;
+			
+			neighbours[i].road->set_economy(e);
 			
 			if (n->get_economy() == this)
 				open.insert(n);
@@ -1188,4 +1304,6 @@ void Economy::do_split(Flag *f)
 	}
 	
 	log("  split %i flags\n", e->get_nrflags());
+	
+	// TODO: manually split requests (check their owner); check whether they can still be fulfilled
 }

@@ -83,6 +83,7 @@ public:
 	bool get_allow_cheats();
 	
 	inline int get_ware_id(const char *name) { return m_wares.get_index(name); }
+	inline int get_nrwares() const { return m_wares.get_nitems(); }
 	int get_safe_ware_id(const char *name);
 	inline Ware_Descr *get_ware_description(int id) { return m_wares.get(id); }
 	

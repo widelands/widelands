@@ -1,10 +1,15 @@
 
+build-4:
+- added Warehouse options window
+- added ware requests
+
 build-3:
 - added DirAnimations for convenience
 - added Economy code
 - added record/playback code
 - added wares code
 - added worker code
+- use different background images for different menus
 
 build-2:
 - options handling redesigned

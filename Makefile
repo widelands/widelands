@@ -102,7 +102,7 @@ ADD_CFLAGS += -O3
 endif
 
 ifdef DEBUG
-ADD_CFLAGS += -DDEBUG
+ADD_CFLAGS += -g -DDEBUG
 else
 ADD_CFLAGS += -DNDEBUG
 endif

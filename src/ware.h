@@ -42,6 +42,9 @@ the game starts.
 Note that multiple tribes can define a worker with the same name. The different
 "version" of a worker must perform the same job, but they can look differently.
 */
+#define WARE_MENU_PIC_W		24
+#define WARE_MENU_PIC_H		24
+
 class Ware_Descr {
 public:
 	Ware_Descr(const char *name);
@@ -62,9 +65,11 @@ public:
 	
 	virtual bool is_worker();
 
+	inline Pic *get_menu_pic() { return m_menu_pic; }
+	
 	// TODO: actually implement this (parsing from config etc...)
 private:
-	//Pic*		m_menu_pic;
+	Pic*		m_menu_pic;
 };
 
 class Worker_Ware_Descr : public Ware_Descr {
@@ -93,16 +98,23 @@ public:
 	WareList();
 	~WareList();
 	
+	WareList &operator=(const WareList &wl);
+	
 	void clear();
 	
 	void add(int id, int count = 1);
 	void add(const WareList &wl);
 	void remove(int id, int count = 1);
 	void remove(const WareList &wl);
-	int stock(int id);
+	int stock(int id) const;
 	
 private:
 	std::vector<int>	m_wares;
+
+	friend bool operator==(const WareList &wl1, const WareList &wl2);
 };
+
+bool operator==(const WareList &wl1, const WareList &wl2);
+bool operator!=(const WareList &wl1, const WareList &wl2);
 
 #endif

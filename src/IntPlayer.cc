@@ -34,6 +34,63 @@
 /*
 ==============================================================================
 
+GameMainMenu IMPLEMENTATION
+
+==============================================================================
+*/
+
+// The GameMainMenu is a rather dumb window with lots of buttons
+class GameMainMenu : public Window {
+public:
+	GameMainMenu(Interactive_Player *plr, UniqueWindow *registry);
+	virtual ~GameMainMenu();
+
+private:
+	Interactive_Player	*m_player;
+	UniqueWindow			*m_registry;
+};
+
+/*
+===============
+GameMainMenu::GameMainMenu
+
+Create all the buttons etc...
+===============
+*/
+GameMainMenu::GameMainMenu(Interactive_Player *plr, UniqueWindow *registry)
+	: Window(plr, (plr->get_w()-102)/2, (plr->get_h()-136)/2, 102, 136, "Menu")
+{
+	m_registry = registry;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
+	}
+}
+
+/*
+===============
+GameMainMenu::~GameMainMenu
+
+Unregister from the registry pointer
+===============
+*/
+GameMainMenu::~GameMainMenu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+
+/*
+==============================================================================
+
 Interactive_Player IMPLEMENTATION
 
 ==============================================================================
@@ -186,13 +243,19 @@ void Interactive_Player::exit_game_btn()
 	end_modal(0);
 }
 
-/** Interactive_Player::main_menu_btn()
- *
- * Bring up the main menu
- */
+/*
+===============
+Interactive_Player::main_menu_btn
+
+Bring up or close the main menu
+===============
+*/
 void Interactive_Player::main_menu_btn()
 {
-	new Window(this, 100, 100, 150, 250, "Menu");
+	if (m_mainmenu.window)
+		delete m_mainmenu.window;
+	else
+		new GameMainMenu(this, &m_mainmenu);
 }
 
 //
@@ -282,10 +345,13 @@ void Interactive_Player::field_action()
 	show_field_action(this, &m_fieldaction);
 }
 
-/** Interactive_Player::think()
- *
- * Called once per frame by the UI code
- */
+/*
+===============
+Interactive_Player::think
+
+Called once per frame by the UI code
+===============
+*/
 void Interactive_Player::think()
 {
 	// Call game logic here
@@ -294,6 +360,9 @@ void Interactive_Player::think()
    
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
 	g_gr.needs_fs_update();
+	
+	// some of the UI windows need to think()
+	Panel::think();
 }
 
 /*

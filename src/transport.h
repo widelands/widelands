@@ -27,10 +27,12 @@
 
 class Flag;
 class Road;
+class Request;
 class Economy;
 
 struct Neighbour {
 	Flag	*flag;
+	Road	*road;
 	int	cost;
 };
 typedef std::vector<Neighbour> Neighbour_list;
@@ -131,6 +133,7 @@ public:
 	
 	void presplit(Game *g, Coords split);
 	void postsplit(Game *g, Flag *flag);
+	void set_economy(Economy *e);
 	
 protected:
 	void set_path(Game *g, const Path &path);
@@ -147,9 +150,13 @@ private:
 	int		m_type;		// use Field::Road_XXX
 	Flag		*m_start;
 	Flag		*m_end;
+	Economy	*m_economy;
 	int		m_cost_forward;	// cost for walking this road from start to end
 	int		m_cost_backward;	// dito, from end to start
 	Path		m_path;		// path goes from m_start to m_end
+	
+	Object_Ptr	m_carrier;	// our carrier
+	Request		*m_carrier_request;
 };
 
 
@@ -163,6 +170,45 @@ private:
 	int				m_totalcost;
 	std::vector<Flag*>	m_route;	// includes start and end flags
 };
+
+/*
+A Request is issued whenever some object (road or building) needs a ware.
+
+Important: While you must reassign the wares that e.g. a building owns when
+the building moves to another economy (in a split/merge), DO NOT reassign
+requests. Requests are treated in a special way by the Economy split/merge
+code since it can be done more efficiently there.
+*/
+class Request {
+	friend class Economy;
+
+public:
+	Request(BaseImmovable *target, int ware);
+	~Request();
+	
+private:
+	Object_Ptr	m_target;	// who requested it?
+	int			m_ware;		// the ware type
+};
+
+/*
+WareBuffer can be used in Buildings to conveniently store and request wares.
+*/
+/*
+class WareBuffer {
+public:
+	WareBuffer(int ware, int size);
+	~WareBuffer();
+	
+	void add_to_economy(Economy *e);
+	void remove_from_economy(Economy *e);
+
+private:
+	int		m_ware;		// the type of ware that is buffered
+	int		m_size;		// maximum number of items we can hold
+	int		m_amount;	// number of item the buffer currently holds
+};
+*/
 
 /*
 Economy represents a network of Flag through which wares can be transported.
@@ -188,6 +234,9 @@ public:
 	
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);
+	
+	void add_request(Request *req);
+	void remove_request(Request *req);
 	
 private:
 	void do_merge(Economy *e);

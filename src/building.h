@@ -23,6 +23,7 @@
 #include "immovable.h"
 #include "ware.h"
 
+class Economy;
 class Flag;
 class Interactive_Player;
 class Tribe_Descr;
@@ -65,6 +66,8 @@ public:
 	                                       const EncodeData *encdata);
 };
 
+class Window;
+
 class Building : public BaseImmovable {
 	friend class Building_Descr;
 
@@ -83,7 +86,8 @@ public:
 	
 	inline Player *get_owner() { return m_owner; }
 	
-	virtual void show_options(Interactive_Player *plr) = 0;
+	void show_options(Interactive_Player *plr);
+	void hide_options();
 
 	virtual void add_to_economy(Economy *e);
 	virtual void remove_from_economy(Economy *e);
@@ -95,9 +99,12 @@ protected:
 	virtual void cleanup(Game *g);
 
 	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
-
+	
+	virtual Window *create_options_window(Interactive_Player *plr, Window **registry) = 0;
+	
 protected:
 	Player			*m_owner;
+	Window			*m_optionswindow;
 	Coords			m_position;
 	Flag				*m_flag;
 	
@@ -140,13 +147,17 @@ public:
 	virtual void init(Game *g);
 	virtual void cleanup(Game *g);
 
-	virtual void show_options(Interactive_Player *plr);
-
+	virtual void act(Game *g);
+	
 	virtual void add_to_economy(Economy *e);
 	virtual void remove_from_economy(Economy *e);
 
 	inline const WareList &get_wares() const { return m_wares; }
 	void create_wares(int id, int count);
+	void destroy_wares(int id, int count);
+
+protected:	
+	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 	
 private:
 	WareList		m_wares;

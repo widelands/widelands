@@ -133,10 +133,13 @@ Building::Building(Building_Descr *descr)
 {
 	m_owner = 0;
 	m_flag = 0;
+	m_optionswindow = 0;
 }
 
 Building::~Building()
 {
+	if (m_optionswindow)
+		hide_options();
 }
 
 /*
@@ -163,7 +166,7 @@ bool Building::get_passable()
 
 /*
 ===============
-Building::add_to_economy
+Building::add_to_economy [virtual]
 
 Called when a building joins an economy.
 Add all requests, provides etc.. to the economy.
@@ -175,7 +178,7 @@ void Building::add_to_economy(Economy *e)
 
 /*
 ===============
-Building::remove_from_economy
+Building::remove_from_economy [virtual]
 
 Called when a building leaves an economy.
 Remove all requests etc.. from the economy.
@@ -352,6 +355,8 @@ IMPLEMENTATION
 ==============================
 */
 
+#define CARRIER_SPAWN_INTERVAL	2500
+
 /*
 ===============
 Warehouse::Warehouse
@@ -393,6 +398,9 @@ void Warehouse::init(Game* g)
 
 	if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
 		g->conquer_area(get_owner()->get_player_number(), m_position, get_descr()->get_conquers());
+	
+	g->get_cmdqueue()->queue(g->get_gametime()+CARRIER_SPAWN_INTERVAL,
+			SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
 }
 
 /*
@@ -411,14 +419,34 @@ void Warehouse::cleanup(Game *g)
 
 /*
 ===============
-Warehouse::show_options
+Warehouse::act
 
-Show the warehouse information window
+Act regularly to create carriers. According to intelligence, this is some
+highly advanced technology. Not only do the settlers have no problems with
+birth control, they don't even need anybody to procreate. They must have
+built-in DNA samples in those warehouses. And what the hell are they doing,
+killing useless tribesmen! The Borg? Or just like Soilent Green?
+Or maybe I should just stop writing comments that late at night ;-)
 ===============
 */
-void Warehouse::show_options(Interactive_Player *plr)
+void Warehouse::act(Game *g)
 {
-	log("Warehouse::show_options(): not implemented\n");
+	int id = g->get_safe_ware_id("carrier");
+	int stock = m_wares.stock(id);
+	int tdelta = CARRIER_SPAWN_INTERVAL;
+	
+	if (stock < 100) {
+		tdelta -= 4*(100 - stock);
+		create_wares(id, 1);
+	} else if (stock > 100) {
+		tdelta -= 4*(stock - 100);
+		if (tdelta < 10)
+			tdelta = 10;
+		destroy_wares(id, 1);
+	}
+	
+	g->get_cmdqueue()->queue(g->get_gametime() + tdelta, SENDER_MAPOBJECT, 
+			CMD_ACT, m_serial, 0, 0);
 }
 
 /*
@@ -455,6 +483,23 @@ Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::create_wares(int id, int count)
 {
 	m_wares.add(id, count);
+	
+	assert(m_flag);
+	Economy *e = m_flag->get_economy();
+	
+	e->add_wares(id, count);
+}
+
+/*
+===============
+Warehouse::destroy_wares
+
+Magically destroy wares.
+===============
+*/
+void Warehouse::destroy_wares(int id, int count)
+{
+	m_wares.remove(id, count);
 	
 	assert(m_flag);
 	Economy *e = m_flag->get_economy();

@@ -104,6 +104,7 @@ class Interactive_Player : public Panel {
 		
 		Map_View*	main_mapview;
 		
+		UniqueWindow	m_mainmenu;
 		UniqueWindow	m_minimap;
 		UniqueWindow	m_fieldaction;
 		
