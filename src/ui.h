@@ -293,12 +293,15 @@ public:
 
 	UISignal changed;
 	UISignal1<bool> changedto;
+   UISignal2<int,bool> changedtoid;
 
 	void set_enabled(bool enabled);
 
 	inline bool get_state() const { return m_state; }
 	void set_state(bool on);
 
+   inline void set_id(int n) { m_id=n; }
+   
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
 
@@ -307,7 +310,9 @@ public:
 
 private:
 	virtual void clicked() = 0;
-
+   
+   int   m_id;
+   
 	bool	m_custom_picture;		// the statebox displays a custom picture
 	uint	m_pic_graphics;
 
@@ -327,7 +332,7 @@ private:
  */
 class Checkbox : public Statebox {
 public:
-	Checkbox(Panel *parent, int x, int y) : Statebox(parent, x, y) { }
+	Checkbox(Panel *parent, int x, int y, int picid=0) : Statebox(parent, x, y, picid) { }
 
 private:
 	void clicked();

@@ -79,5 +79,15 @@ class Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Men
       void selected(int);
 };
 
+class Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu {
+   public:
+      Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive*, Editor_Place_Immovable_Tool*, UniqueWindow*);
+      virtual ~Editor_Tool_Place_Immovable_Options_Menu() { };
 
+   private:
+      Editor_Place_Immovable_Tool* m_pit;
+      Textarea* m_name;
+      void clicked(int, bool);
+};
+   
 #endif // __S__EDITOR_TOOLS_OPTION_MENUS_H

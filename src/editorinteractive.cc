@@ -84,14 +84,16 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Increase_Height_Tool(new Editor_Decrease_Height_Tool(), sht));
    tools.tools.push_back(new Editor_Noise_Height_Tool(sht));
    tools.tools.push_back(new Editor_Set_Both_Terrain_Tool(new Editor_Set_Down_Terrain_Tool(), new Editor_Set_Right_Terrain_Tool()));
-
+   tools.tools.push_back(new Editor_Place_Immovable_Tool(new Editor_Delete_Immovable_Tool()));
+   
 /*   tools.tools.push_back(new Tool_Info(1, 3, new Editor_Decrease_Height_Tool()));
    tools.tools.push_back(new Tool_Info(1, 2, new Editor_Set_Height_Tool()));
    tools.tools.push_back(new Tool_Info(4, 4, new Editor_Noise_Height_Tool()));
    tools.tools.push_back(new Tool_Info(6, 7, new Editor_Set_Right_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 7, new Editor_Set_Down_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 6, new Editor_Set_Both_Terrain_Tool()));
-  */ select_tool(1, 0);
+  */ 
+   select_tool(1, 0);
 }
 
 /****************************************

@@ -1,3 +1,4 @@
+- added Immovable Tool in editor
 - added Map_Loader support
 - added support for multifield-fieldsels (for editor and to select areas)
 - added height tools in the editor

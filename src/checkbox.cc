@@ -63,6 +63,8 @@ Statebox::Statebox(Panel *parent, int x, int y, uint picid)
 
 	m_clr_highlight.set(100, 100, 80);
 	m_clr_state.set(229, 161, 2);
+
+   m_id=-1;
 }
 
 
@@ -107,7 +109,8 @@ void Statebox::set_state(bool on)
 	m_state = on;
 	changed.call();
 	changedto.call(on);
-	update(0, 0, get_w(), get_h());
+	if(m_id!=-1) changedtoid.call(m_id,on);
+   update(0, 0, get_w(), get_h());
 }
 
 
@@ -122,7 +125,15 @@ void Statebox::draw(RenderTarget* dst)
 {
 	if (m_custom_picture)
 	{
-		dst->blit(0, 0, m_pic_graphics);
+		// center picture
+      int xpos, ypos;
+      int w,h;
+     
+      g_gr->get_picture_size(m_pic_graphics, &w, &h);
+      
+      xpos=(get_inner_w()-w)/2;
+      ypos=(get_inner_h()-h)/2;
+      dst->blit(xpos, ypos, m_pic_graphics);
 
 		if (m_state)
 			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_state);

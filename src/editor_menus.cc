@@ -548,6 +548,13 @@ void Editor_Tool_Menu::changed_to(void) {
          new Editor_Tool_Set_Terrain_Tool_Options_Menu(m_parent,
                static_cast<Editor_Set_Both_Terrain_Tool*>(m_tools->tools[3]),
                &m_options);
+         break;
+
+      case 3:
+         m_parent->select_tool(4,0);
+         new Editor_Tool_Place_Immovable_Options_Menu(m_parent,
+               static_cast<Editor_Place_Immovable_Tool*>(m_tools->tools[4]),
+               &m_options);
       default: break;
    }
 }

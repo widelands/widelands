@@ -90,7 +90,7 @@ MainMenu::MainMenu()
 
 	// Text
 	new Textarea(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right);
-	new Textarea(this, 15, MENU_YRES-29, "(C) 2002 by the Widelands Development Team", Align_TopLeft);
+	new Textarea(this, 15, MENU_YRES-29, "(C) 2002-2003 by the Widelands Development Team", Align_TopLeft);
 }
 
 void MainMenu::not_supported()

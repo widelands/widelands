@@ -24,6 +24,7 @@
 #include "map.h"
 #include "graphic.h"
 #include "sw16_graphic.h"
+#include "editor.h"
 #include <string>
 
 using std::string;
@@ -321,4 +322,70 @@ int Editor_Set_Both_Terrain_Tool::handle_click_impl(const Coords* coordinates, F
       if(i>max) max=i;
    }
    return parent->get_fieldsel_radius()+max;
+}
+
+/*
+=============================
+
+class Editor_Place_Immovable_Tool
+
+=============================
+*/
+
+/*
+===========
+Editor_Place_Immovable_Tool::handle_click_impl()
+
+choses an object to place randomly from all enabled
+and places this on the current field
+===========
+*/
+int Editor_Place_Immovable_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   if(!m_nr_enabled) return parent->get_fieldsel_radius();
+
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
+
+   while(mrc.next(&mx, &my)) {
+      int rand_value=(int) ((double)(m_nr_enabled)*rand()/(RAND_MAX+1.0));
+      int i=0;
+      int j=rand_value+1;
+      while(j) { if(m_immovables_enabled[i]==true) j--; ++i; }
+      Field *f = parent->get_map()->get_field(mx, my);
+      if (f->get_immovable()) {
+         if(f->get_immovable()->get_size() != BaseImmovable::NONE) 
+            continue;
+      }
+      parent->get_editor()->create_immovable(mx,my,i-1);
+   }
+   return parent->get_fieldsel_radius()+2;
+}
+
+/*
+=================================================
+
+class Editor_Delete_Immovable_Tool
+
+=================================================
+*/
+
+/*
+===========
+Editor_Delete_Immovable_Tool::handle_click_impl() 
+
+deletes the immovable at the given location
+===========
+*/
+int Editor_Delete_Immovable_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
+
+   while(mrc.next(&mx, &my)) {
+      Field *f = parent->get_map()->get_field(mx, my);
+      BaseImmovable* mim=f->get_immovable();
+      if (mim) {
+         mim->remove(parent->get_editor());
+      }
+   }
+   return parent->get_fieldsel_radius()+2;
 }

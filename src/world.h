@@ -103,7 +103,7 @@ class World
 		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
       inline int get_nr_bobs(void) { return bobs.get_nitems(); }
       inline int get_immovable_index(const char* l) { return immovables.get_index(l); }
-      inline int get_nr_immovables(void) { return bobs.get_nitems(); }
+      inline int get_nr_immovables(void) { return immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
 
 		void parse_wares(Descr_Maintainer<Ware_Descr> *wares);

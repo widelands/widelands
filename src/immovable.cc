@@ -23,7 +23,8 @@
 #include "game.h"
 #include "map.h"
 #include "immovable.h"
-
+#include "graphic.h"
+#include "sw16_graphic.h"
 
 /*
 ==============================================================================
@@ -118,6 +119,7 @@ Immovable_Descr::Immovable_Descr(const char *name)
 {
 	snprintf(m_name, sizeof(m_name), "%s", name);
 	m_size = BaseImmovable::NONE;
+   m_picture=0;
 }
 
 /*
@@ -134,6 +136,11 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
    m_anim = g_anim.get(directory, s, picname);
+	
+   snprintf(picname, sizeof(picname), "%s/%s_00.bmp", directory, m_name);
+   if (!m_picture)
+      m_picture = get_graphicimpl()->get_picture(PicMod_Game, picname, g_anim.get_animation(m_anim)->encdata.clrkey);
+
 
 	const char *string;
 

@@ -25,6 +25,8 @@
 #include "editor_tools_option_menus.h"
 #include "graphic.h"
 #include "sw16_graphic.h"
+#include "ui_tabpanel.h"
+#include "ui_box.h"
 
 /*
 =================================================
@@ -42,7 +44,7 @@ constructor
 ===========
 */
 Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent, UniqueWindow* registry, char* title) :
-   Window(parent, 100, 100, 100, 100, title) {
+   Window(parent, 150, 150, 100, 100, title) {
    m_registry = registry;
    if (m_registry) {
       if (m_registry->window)
@@ -204,9 +206,6 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Edi
       registry) 
    : Editor_Tool_Options_Menu(parent, registry, "Noise Height Options")
 {
-   Textarea* ta=new Textarea(this, 3, 5, "Noise Height Tool Options", Align_Left);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
-   
    char buf[250];
    sprintf(buf, "Minimum: %i", 10);
    m_textarea_lower=new Textarea(this, 10, 25, buf);
@@ -227,6 +226,9 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Edi
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
 
    set_inner_size(200, 115);
+   
+   Textarea* ta=new Textarea(this, 3, 5, "Noise Height Tool Options", Align_Left);
+   ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
    int posy=70;
    int width=20;
@@ -381,3 +383,94 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n) {
    m_textarea->set_text(buf);
 }
 
+/*
+=================================================
+
+class Editor_Tool_Place_Immovable_Options_Menu
+
+=================================================
+*/
+
+/*
+===========
+Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu
+
+constructor
+===========
+*/
+Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive* parent, Editor_Place_Immovable_Tool* pit,
+      UniqueWindow* registry) :
+   Editor_Tool_Options_Menu(parent, registry, "Immovable Bobs Menu") {
+   const int max_items_in_tab=6;
+   
+   m_pit=pit;
+   
+   const int space=5;
+   const int xstart=5;
+   const int ystart=15;
+   const int yend=15;
+   int nr_immovables=get_parent()->get_map()->get_world()->get_nr_immovables();
+   int immovables_in_row=(int)(sqrt(nr_immovables));
+   if(immovables_in_row*immovables_in_row<nr_immovables) { immovables_in_row++; }
+   if(immovables_in_row>max_items_in_tab) immovables_in_row=max_items_in_tab;
+   
+   
+   TabPanel* m_tabpanel=new TabPanel(this, 0, 0, 1);
+   m_tabpanel->set_snapparent(true);
+   Box* box=new Box(m_tabpanel, 0, 0, Box::Horizontal);
+   m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
+   
+   
+   int width=0;
+   int height=0;
+   for(int j=0; j<nr_immovables; j++) {
+      int w,h;
+      g_gr->get_picture_size(get_parent()->get_map()->get_world()->get_immovable_descr(j)->get_picture(), &w, &h);
+      if(w>width) width=w;
+      if(h>height) height=h;
+   }
+
+   box->set_inner_size((immovables_in_row)*(width+1+space)+xstart, (immovables_in_row)*(height+1+space)+ystart+yend);
+
+   int ypos=ystart;
+   int xpos=xstart;
+   int cur_x=0;
+   int i=0;
+   while(i<nr_immovables) {
+      if(cur_x==immovables_in_row) { 
+         cur_x=0; 
+         ypos=ystart; 
+         xpos=xstart; 
+         box->resize(); 
+         box=new Box(m_tabpanel, 0, 0, Box::Horizontal); 
+         m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
+      }
+
+      Checkbox* cb= new Checkbox(box, xpos, ypos, get_parent()->get_map()->get_world()->get_immovable_descr(i)->get_picture()); 
+      cb->set_size(width, height);
+      cb->set_id(i);
+      cb->set_state(m_pit->is_enabled(i));
+      cb->changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
+      box->add(cb, Align_Left);
+      box->add_space(space);
+      xpos+=width+1+space;
+      ++cur_x;
+      ++i;
+   }
+   ypos+=height+1+space+5;
+
+   m_tabpanel->activate(0);
+   box->resize();
+   m_tabpanel->resize();
+}
+
+/*
+   ===========
+   void Editor_Tool_Place_Immovable_Options_Menu::clicked()
+
+this is called when one of the state boxes is toggled
+===========
+*/
+void Editor_Tool_Place_Immovable_Options_Menu::clicked(int n, bool t) {
+   m_pit->enable_immovable(n,t);
+}
