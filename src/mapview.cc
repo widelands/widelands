@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
+ * Copyright (C) 2002 by Holger Rapp
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ Map_View::~Map_View(void) {
 
 }
 
-/** void Map_View::draw(void) 
+/** void Map_View::draw(void)
  *
  * This is the guts!! this function draws the whole
  * map the user can see. we spend a lot of time
@@ -70,8 +70,8 @@ void Map_View::draw(void)
 	static bool ytrans;
 
 	f=map->get_ffield();
-	if( (f->get_rn()->get_xpix()-vpx >=0) && (f->get_bln()->get_xpix()-vpx < (int)g_gr.get_xres()) ) 
-		draw_field(f); 
+	if( (f->get_rn()->get_xpix()-vpx >=0) && (f->get_bln()->get_xpix()-vpx < (int)g_gr.get_xres()) )
+		draw_field(f);
 
 	for(int i=(map->get_w()*(map->get_h()-1)); --i; )
 	{
@@ -79,8 +79,12 @@ void Map_View::draw(void)
 		// X-check
 		if(f->get_rn()->get_xpix()-vpx <0) continue;
 		if(f->get_bln()->get_xpix()-vpx >= (int)g_gr.get_xres()) continue;
-		draw_field(f); 
-	} 
+		// Y-check
+		if(f->get_ypix()-vpy >= (int)g_gr.get_yres()) continue;
+		if(f->get_bln()->get_ypix()-vpy < 0 &&
+		   f->get_brn()->get_ypix()-vpy < 0) continue;
+		draw_field(f);
+	}
 
 	if(!xtrans && (uint)vpx> map->get_w()*FIELD_WIDTH-g_gr.get_xres())
 	{
@@ -89,7 +93,7 @@ void Map_View::draw(void)
 		xtrans=true;
 		draw();
 		xtrans=false;
-		vpx=ovpx; 
+		vpx=ovpx;
 	}
 
 	if(!ytrans && (uint)vpy> (((map->get_h()-1)*FIELD_HEIGHT)>>1)-g_gr.get_yres())
@@ -99,10 +103,10 @@ void Map_View::draw(void)
 		ytrans=true;
 		draw();
 		ytrans=false;
-		vpy=ovpy; 
+		vpy=ovpy;
 	}
 }
-					 
+
 void Map_View::draw_field(Field* f)
 {
 	// for plain terrain, this param order will avoid swapping in
@@ -125,8 +129,8 @@ inline void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* pic)
 }
 
 void Map_View::set_viewpoint(uint x,  uint y)
-{ 
-	vpx=x; vpy=y; 
+{
+	vpx=x; vpy=y;
 	while(vpx>FIELD_WIDTH*map->get_w())			vpx-=(FIELD_WIDTH*map->get_w());
 	while(vpy>(FIELD_HEIGHT*map->get_h())>>1)	vpy-=(FIELD_HEIGHT*map->get_h())>>1;
 	while(vpx< 0)  vpx+=(FIELD_WIDTH*map->get_w());
