@@ -40,6 +40,7 @@ class.
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_progressbar.h"
+#include "ui_table.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
 #include "warehouse.h"
@@ -47,6 +48,7 @@ class.
 #include "wexception.h"
 #include "worker.h"
 #include "player.h"
+#include "soldier.h"
 #include "tribe.h"
 
 static const char* pic_ok = "pics/menu_okay.png";
@@ -1125,7 +1127,7 @@ MilitarySite UI IMPLEMENTATION
 ==============================================================================
 */
 
-class MilitarySite_Window : public ProductionSite_Window {
+class MilitarySite_Window : public Building_Window {
 public:
 	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UIWindow** registry);
 	virtual ~MilitarySite_Window();
@@ -1133,6 +1135,13 @@ public:
 	inline MilitarySite* get_militarysite() { return (MilitarySite*)get_building(); }
 
 	virtual void think();
+private:
+   void update();
+   
+   Coords          m_ms_location;
+   Interactive_Player* m_parent;
+   UIWindow** m_reg;
+   UITable* m_table;
 };
 
 
@@ -1144,10 +1153,31 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UIWindow** registry)
-	: ProductionSite_Window(parent, ps, registry)
+	: Building_Window(parent, ps, registry)  
 {
-   // TODO
-   log("TODO: military options window!. must have all functionality of productionsite + soldier options!\n");
+   m_parent=parent;
+   m_reg=registry;
+   m_ms_location=ps->get_position();
+   
+	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
+
+   // Soldiers view
+   m_table=new UITable(box, 0, 0, 450, 200, Align_Left, UITable::UP);
+   m_table->add_colum("Name", UITable::STRING, 100);
+   m_table->add_colum("HP Level", UITable::STRING, 75);
+   m_table->add_colum("AT Level", UITable::STRING, 75);
+   m_table->add_colum("DE Level", UITable::STRING, 75);
+   m_table->add_colum("EV Level", UITable::STRING, 75);
+   m_table->add_colum("Level", UITable::STRING, 100); // enough space for scrollbar
+
+   box->add(m_table, UIBox::AlignCenter);
+   
+	box->add_space(8);
+
+	// Add the caps button
+	box->add(create_capsbuttons(box), UIBox::AlignCenter);
+
+   fit_inner(box);
 }
 
 
@@ -1173,8 +1203,59 @@ Make sure the window is redrawn when necessary.
 void MilitarySite_Window::think()
 {
 	Building_Window::think();
+
+   BaseImmovable* imm=m_parent->get_map()->get_field(m_ms_location)->get_immovable();
+   if(imm->get_type()!=Map_Object::BUILDING 
+         || static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
+      // The Site has been removed. Die quickly.
+      die();
+      return;
+   }
+   update();
 }
 
+/*
+==============
+MilitarySite_Window::update()
+
+Update the listselect, maybe there are new
+soldiers
+=============
+*/
+void MilitarySite_Window::update(void) {
+   std::vector<Soldier*>* soldiers=get_militarysite()->get_soldiers();
+
+   uint i;
+   int sel;
+   char buf[200];
+   for(i=0; i<soldiers->size(); i++) {
+      Soldier* s=((*soldiers)[i]);
+      UITable_Entry* e=0;
+      for(sel=0; sel<m_table->get_nr_entries(); sel++) {
+         if(m_table->get_entry(sel)->get_user_data()==s) {
+            // Soldier already in list
+            e=m_table->get_entry(sel);
+            break;
+         } 
+      }
+      if(!e) // add new
+         e= new UITable_Entry(m_table, s);
+      
+      e->set_string(0, s->get_name().c_str());
+      sprintf(buf, "%i / %i", s->get_hp_level(), s->get_max_hp_level());
+      e->set_string(1, buf); 
+      sprintf(buf, "%i / %i", s->get_attack_level(), s->get_max_attack_level());
+      e->set_string(2, buf); 
+      sprintf(buf, "%i / %i", s->get_defense_level(), s->get_max_defense_level());
+      e->set_string(3, buf); 
+      sprintf(buf, "%i / %i", s->get_evade_level(), s->get_max_evade_level());
+      e->set_string(4, buf); 
+      sprintf(buf, "%i / %i", s->get_evade_level()+s->get_attack_level()+ s->get_defense_level()+s->get_hp_level(),
+            s->get_max_evade_level()+s->get_max_defense_level()+s->get_max_attack_level()+s->get_max_hp_level());
+      e->set_string(5, buf); 
+   }
+   m_table->sort();
+}
 
 /*
 ===============

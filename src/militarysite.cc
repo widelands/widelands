@@ -142,8 +142,7 @@ void MilitarySite::init(Editor_Game_Base* g)
 
 	if (g->is_game()) {
 		// Request soldier
-		if(!m_soldiers.size())
-			request_soldier((Game*)g);
+      request_soldier((Game*)g);
 	}
 }
 
@@ -238,9 +237,6 @@ Issue the soldier request
 */
 void MilitarySite::request_soldier(Game* g)
 {
-	assert(!m_soldiers.size());
-	assert(!m_soldier_request);
-
 	int wareid = g->get_safe_ware_id("soldier");
 
 	m_soldier_request =

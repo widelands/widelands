@@ -52,10 +52,10 @@ public:
    uint get_defense_incr_per_level() { return m_defense_incr; }
    uint get_evade_incr_per_level() { return m_evade_incr; }
 
-   uint get_hp_level_pic(uint level) { assert(level<=m_max_hp_level && level>0); return m_hp_pics[level-1]; }
-   uint get_attack_level_pic(uint level) { assert(level<=m_max_attack_level && level>0); return m_attack_pics[level-1]; }
-   uint get_defense_level_pic(uint level) { assert(level<=m_max_defense_level && level>0); return m_defense_pics[level-1]; }
-   uint get_evade_level_pic(uint level) { assert(level<=m_max_evade_level && level>0); return m_evade_pics[level-1]; }
+   uint get_hp_level_pic(uint level) { assert(level<=m_max_hp_level && level>=0); return m_hp_pics[level]; }
+   uint get_attack_level_pic(uint level) { assert(level<=m_max_attack_level && level>=0); return m_attack_pics[level]; }
+   uint get_defense_level_pic(uint level) { assert(level<=m_max_defense_level && level>=0); return m_defense_pics[level]; }
+   uint get_evade_level_pic(uint level) { assert(level<=m_max_evade_level && level>=0); return m_evade_pics[level]; }
 
 protected:
 	virtual Bob *create_object();
@@ -116,6 +116,12 @@ public:
 
    // Draw this soldier
    void draw(Editor_Game_Base* g, RenderTarget* dst, Point pos);
+
+   // Information function from description
+   uint get_max_hp_level(void) { return get_descr()->get_max_hp_level(); }
+   uint get_max_attack_level(void) { return get_descr()->get_max_attack_level(); }
+   uint get_max_defense_level(void) { return get_descr()->get_max_defense_level(); }
+   uint get_max_evade_level(void) { return get_descr()->get_max_evade_level(); }
 
    // information functions
    uint get_current_hitpoints(void) { return m_hp_current; }

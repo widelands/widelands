@@ -67,11 +67,7 @@ public:
 
 	virtual void set_economy(Economy* e);
 
-	/*
-	get_soldiersqueue()
-	release_soldier()
-	request_soldier()
-	*/
+   std::vector<Soldier*>* get_soldiers(void) { return &m_soldiers; }
 
 protected:
 	virtual UIWindow* create_options_window(Interactive_Player* plr,

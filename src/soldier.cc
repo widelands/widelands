@@ -18,6 +18,7 @@
  */
 
 #include "editor_game_base.h"
+#include "error.h"
 #include "game.h"
 #include "graphic.h"
 #include "profile.h"
@@ -113,32 +114,32 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
    m_max_evade_level=sglobal->get_safe_int("max_evade_level");
  
    // Load the filenames
-   m_hp_pics_fn.resize(m_max_hp_level);
-   m_attack_pics_fn.resize(m_max_attack_level);
-   m_defense_pics_fn.resize(m_max_defense_level);
-   m_evade_pics_fn.resize(m_max_evade_level);
+   m_hp_pics_fn.resize(m_max_hp_level+1);
+   m_attack_pics_fn.resize(m_max_attack_level+1);
+   m_defense_pics_fn.resize(m_max_defense_level+1);
+   m_evade_pics_fn.resize(m_max_evade_level+1);
    char buffer[256];
    std::string dir=directory;
    dir+="/";
-   for(i=1; i<=m_max_hp_level; i++) {
+   for(i=0; i<=m_max_hp_level; i++) {
       sprintf(buffer, "hp_level_%i_pic", i);
-      m_hp_pics_fn[i-1]=dir;
-      m_hp_pics_fn[i-1]+=sglobal->get_safe_string(buffer);
+      m_hp_pics_fn[i]=dir;
+      m_hp_pics_fn[i]+=sglobal->get_safe_string(buffer);
    }
-   for(i=1; i<=m_max_attack_level; i++) {
+   for(i=0; i<=m_max_attack_level; i++) {
       sprintf(buffer, "attack_level_%i_pic", i);
-      m_attack_pics_fn[i-1]=dir;
-      m_attack_pics_fn[i-1]+=sglobal->get_safe_string(buffer);
+      m_attack_pics_fn[i]=dir;
+      m_attack_pics_fn[i]+=sglobal->get_safe_string(buffer);
    }
-   for(i=1; i<=m_max_defense_level; i++) {
+   for(i=0; i<=m_max_defense_level; i++) {
       sprintf(buffer, "defense_level_%i_pic", i);
-      m_defense_pics_fn[i-1]=dir;
-      m_defense_pics_fn[i-1]+=sglobal->get_safe_string(buffer);
+      m_defense_pics_fn[i]=dir;
+      m_defense_pics_fn[i]+=sglobal->get_safe_string(buffer);
    }
-   for(i=1; i<=m_max_evade_level; i++) {
+   for(i=0; i<=m_max_evade_level; i++) {
       sprintf(buffer, "evade_level_%i_pic", i);
-      m_evade_pics_fn[i-1]=dir;
-      m_evade_pics_fn[i-1]+=sglobal->get_safe_string(buffer);
+      m_evade_pics_fn[i]=dir;
+      m_evade_pics_fn[i]+=sglobal->get_safe_string(buffer);
    }
 }
 
@@ -146,22 +147,22 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
  * Load the graphics
  */
 void Soldier_Descr::load_graphics(void) {
-   m_hp_pics.resize(m_max_hp_level);
-   m_attack_pics.resize(m_max_attack_level);
-   m_defense_pics.resize(m_max_defense_level);
-   m_evade_pics.resize(m_max_evade_level);
+   m_hp_pics.resize(m_max_hp_level+1);
+   m_attack_pics.resize(m_max_attack_level+1);
+   m_defense_pics.resize(m_max_defense_level+1);
+   m_evade_pics.resize(m_max_evade_level+1);
    uint i;
-   for(i=1; i<=m_max_hp_level; i++) {
-      m_hp_pics[i-1]=g_gr->get_picture(PicMod_Game, m_hp_pics_fn[i-1].c_str(), true);
+   for(i=0; i<=m_max_hp_level; i++) {
+      m_hp_pics[i]=g_gr->get_picture(PicMod_Game, m_hp_pics_fn[i].c_str(), true);
    }
-   for(i=1; i<=m_max_attack_level; i++) {
-      m_attack_pics[i-1]=g_gr->get_picture(PicMod_Game, m_attack_pics_fn[i-1].c_str(), true);
+   for(i=0; i<=m_max_attack_level; i++) {
+      m_attack_pics[i]=g_gr->get_picture(PicMod_Game, m_attack_pics_fn[i].c_str(), true);
    }
-   for(i=1; i<=m_max_defense_level; i++) {
-      m_defense_pics[i-1]=g_gr->get_picture(PicMod_Game, m_defense_pics_fn[i-1].c_str(), true);
+   for(i=0; i<=m_max_defense_level; i++) {
+      m_defense_pics[i]=g_gr->get_picture(PicMod_Game, m_defense_pics_fn[i].c_str(), true);
    }
-   for(i=1; i<=m_max_evade_level; i++) {
-      m_evade_pics[i-1]=g_gr->get_picture(PicMod_Game, m_evade_pics_fn[i-1].c_str(), true);
+   for(i=0; i<=m_max_evade_level; i++) {
+      m_evade_pics[i]=g_gr->get_picture(PicMod_Game, m_evade_pics_fn[i].c_str(), true);
    }
    m_hp_pics_fn.resize(0);
    m_attack_pics_fn.resize(0);
@@ -206,10 +207,10 @@ Soldier::~Soldier()
  * Initialize this soldier
  */
 void Soldier::init(Editor_Game_Base* gg) {
-   m_hp_level=1;
-   m_attack_level=1;
-   m_defense_level=1;
-   m_evade_level=1;
+   m_hp_level=0;
+   m_attack_level=0;
+   m_defense_level=0;
+   m_evade_level=0;
 
    m_hp_max=0;
    m_min_attack=get_descr()->get_min_attack();
