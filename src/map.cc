@@ -295,30 +295,73 @@ void Map::recalc_default_resources(void) {
    uint x,y;
    for(y=0; y<m_height; y++) {
       for(x=0; x<m_width; x++) {
-         MapRegion mr(this, Coords(x,y), 1);
-
-         FCoords f;
+         FCoords f,f1;
+         f=get_fcoords(Coords(x,y));
+         // only on unset fields
+         if(f.field->get_resources()!=0 && f.field->get_resources_amount()) continue; 
          std::map<int,int> m;
          int amount=0;
-         while(mr.next(&f)) {
-            Terrain_Descr* terr=f.field->get_terr();
-            Terrain_Descr* terd=f.field->get_terd();
-            m[terr->get_default_resources()]++;
-            m[terd->get_default_resources()]++;
-            amount+=terr->get_default_resources_amount()+terd->get_default_resources_amount();
-         }
-         f=get_fcoords(Coords(x,y));
-         std::map<int,int>::iterator i=m.begin();
+         Terrain_Descr* terr, *terd;
+         int resd, resr;
+
+         // This field
+         terr=f.field->get_terr();
+         terd=f.field->get_terd();
+         resd=terd->get_default_resources();
+         resr=terr->get_default_resources();
+         m[resd]++;
+         m[resr]++;
+         amount+=terr->get_default_resources_amount()+terd->get_default_resources_amount();
+
+         // If one of the neighbours is unpassable, count its resource stronger
+         // top left neigbour
+         get_neighbour(f, Map_Object::WALK_NW, &f1);
+         terr=f1.field->get_terr();
+         terd=f1.field->get_terd();
+         resd=terd->get_default_resources();
+         resr=terr->get_default_resources();
+         if(terd->get_is()&TERRAIN_UNPASSABLE && resd!=-1) 
+            m[resd]+=3; 
+         else 
+            m[resd]++;
+         if(terr->get_is()&TERRAIN_UNPASSABLE && resr!=-1) 
+            m[resr]+=3;
+         else 
+            m[resr]++;
+         amount+=terr->get_default_resources_amount()+terd->get_default_resources_amount();
+
+         // top right neigbour
+         get_neighbour(f, Map_Object::WALK_NE, &f1);
+         terd=f1.field->get_terd();
+         resd=terd->get_default_resources();
+         if(terd->get_is()&TERRAIN_UNPASSABLE && resd!=-1) 
+            m[resd]+=3; 
+         else 
+            m[resd]++;
+         amount+=terd->get_default_resources_amount();
+
+         // left neighbour
+         get_neighbour(f, Map_Object::WALK_W, &f1);
+         terr=f1.field->get_terr();
+         resr=terr->get_default_resources();
+         if(terr->get_is()&TERRAIN_UNPASSABLE && resr!=-1) 
+            m[resr]+=3;
+         else 
+            m[resr]++;
+         amount+=terr->get_default_resources_amount();
+
          int lv=0;
          int res=0;
+         std::map<int,int>::iterator i=m.begin();
          while(i!=m.end()) {
             if(i->second>lv) {
                lv=i->second;
                res=i->first;
-            }
+            } else if(i->second==lv) {
+            }   
             i++;
          }
-         amount/=12; 
+         amount/=6; 
 
          if(res==-1 || !amount)
             f.field->set_resources(0,0);
