@@ -25,46 +25,8 @@
 #include "optionsmenu.h"
 #include "editor.h"
 #include "editorinteractive.h"
+#include "fileviewscreen.h"
 
-/*
-==============================================================================
-
-FileViewScreen
-
-==============================================================================
-*/
-
-class FileViewScreen : public BaseMenu {
-public:
-	FileViewScreen(const char *text);
-};
-
-FileViewScreen::FileViewScreen(const char *text)
-	: BaseMenu("fileviewmenu.bmp")
-{
-	// Text view
-	new Multiline_Textarea(this, 40, 150, 560, 240, text);
-
-	// Close button
-	Button *b;
-
-	b = new Button(this, 233, 420, 174, 24, 0);
-	b->clickedid.set(this, &FileViewScreen::end_modal);
-	b->set_title("Close");
-}
-
-/** fileview_screen(const char *fname)
- *
- * Display the contents of a text file in a menu screen
- */
-static void fileview_screen(const char *fname)
-{
-	FileRead f;
-	f.Open(g_fs, fname);
-	FileViewScreen *fvs = new FileViewScreen((char*)f.Data(0,0));
-	fvs->run();
-	delete fvs;
-}
 
 /*
 ==============================================================================
@@ -161,11 +123,11 @@ void main_menue(void)
 			break;
 
 		case mm_readme:
-			fileview_screen("README");
+			fileview_screen("README", "README");
 			break;
 
 		case mm_license:
-			fileview_screen("COPYING");
+			fileview_screen("COPYING", "COPYING");
 			break;
 
       case mm_editor: 

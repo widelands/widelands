@@ -34,6 +34,12 @@
 #include "world.h"
 #include "field.h"
 
+const ushort NUMBER_OF_MAP_DIMENSIONS=15;
+const ushort MAP_DIMENSIONS[] = {
+   64, 96, 128, 160, 192, 224, 256, 
+   288, 320, 352, 384, 416, 448, 480,
+   512 };
+
 
 /** struct Map_Header
  *

@@ -22,10 +22,10 @@ SDL_CONFIG:=sdl-config
 
 ifeq ($(CROSS),NO)
 # C compiler
-CC=gcc
+CC=distcc gcc
 
 # c++ compiler
-CXX=g++
+CXX=distcc g++
 
 # additional build flags. if you're not a developer, you don't want
 # to change this

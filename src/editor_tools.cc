@@ -45,7 +45,7 @@ show a simple info dialog with infos about this field
 */
 int Editor_Info_Tool::handle_click(const Coords* coordinates, Field* f, Map* map, Editor_Interactive* parent) {
    Window* w = new Window(parent, 30, 30, 400, 200, "Field Information");
-   Multiline_Textarea* multiline_textarea = new Multiline_Textarea(w, 0, 0, w->get_w(), w->get_h(), 0);
+   Multiline_Textarea* multiline_textarea = new Multiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
 
    string buf;
    char buf1[1024];

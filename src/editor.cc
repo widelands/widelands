@@ -61,6 +61,9 @@ void Editor::run() {
    map->set_world_name("greenland");
    map->load_world();
    map->set_size(64, 64);
+   map->set_name("No Name");
+   map->set_author("Unknown");
+   map->set_description("no description defined");
 
    for(int y=0; y<64; y++) {
       for(int x=0; x<64; x++) {

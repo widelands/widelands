@@ -340,7 +340,8 @@ void Panel::move_to_top()
  */
 void Panel::set_visible(bool on)
 {
-	_flags &= ~pf_visible;
+
+   _flags &= ~pf_visible;
 	if (on)
 		_flags |= pf_visible;
 		
@@ -626,9 +627,10 @@ Panel::set_can_focus
 */
 void Panel::set_can_focus(bool yes)
 {
-	if (yes)
+   
+	if (yes) {
 		_flags |= pf_can_focus;
-	else {
+   }	else {
 		_flags &= ~pf_can_focus;
 		
 		if (_parent && _parent->_focus == this)
@@ -645,7 +647,11 @@ Grab the keyboard focus
 */
 void Panel::focus()
 {
-	assert(get_can_focus());
+
+   // this assert was deleted, because
+   // it happens, that a child can focus, but a parent
+   // can't. but focus is called recursivly
+   // assert(get_can_focus());
 
 	if (!_parent || this == _modal)
 		return;
@@ -680,7 +686,7 @@ void Panel::set_think(bool yes)
  */
 void Panel::die()
 {
-	_flags |= pf_die;
+   _flags |= pf_die;
 
 	for(Panel *p = _parent; p; p = p->_parent) {
 		p->_flags |= pf_child_die;
@@ -707,7 +713,7 @@ void Panel::check_child_death()
 			p->check_child_death();
 	}
 
-	_flags &= ~pf_child_die;
+   _flags &= ~pf_child_die;
 }
 
 /*
