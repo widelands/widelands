@@ -73,7 +73,12 @@ SDL_LIBS_FOR_PLUGINS = @SDL_LIBS_FOR_PLUGINS@
 VERSION = @VERSION@
 src = @src@
 
-SUBDIRS = src 
+SUBDIRS = src
+
+EXTRA_DIST = pics 
+
+EXTRADATADIRS = pics/
+EXTRADATA = pics/*.bmp
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ./src/config.h
@@ -291,7 +296,7 @@ installcheck: installcheck-recursive
 install-exec-am:
 install-exec: install-exec-recursive
 
-install-data-am:
+install-data-am: install-data-local
 install-data: install-data-recursive
 
 install-am: all-am
@@ -345,11 +350,21 @@ dvi-recursive mostlyclean-recursive distclean-recursive clean-recursive \
 maintainer-clean-recursive tags tags-recursive mostlyclean-tags \
 distclean-tags clean-tags maintainer-clean-tags distdir info-am info \
 dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
-install-exec install-data-am install-data install-am install \
-uninstall-am uninstall all-redirect all-am all installdirs-am \
+install-exec install-data-local install-data-am install-data install-am \
+install uninstall-am uninstall all-redirect all-am all installdirs-am \
 installdirs mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
+
+datainstalldirs:
+	   for dir in $(EXTRADATADIRS) ; do \
+				          $(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/$$dir ; \
+							    done
+
+install-data-local: datainstalldirs
+	        for i in $(EXTRADATA); do \
+						         $(INSTALL_DATA) $$i $(DESTDIR)$(pkgdatadir)/$$i; \
+									        done
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
