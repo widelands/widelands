@@ -27,6 +27,7 @@ under windows and compiling widelands.
  - ./configure; make; make install it
    (you will quite definitivly disable debug, since this bloats SDL.dll
    usw ./configure --disable-debug for this)
+ - do the same for SDL_image
  - check out a widelands CVS version or get a build source release
  - unpack it, edit the makefile user variables and run make
  - if there were no problems, you're done. start developing and commit your

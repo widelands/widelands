@@ -20,6 +20,32 @@ information, see the file 'COPYING' or select the License button from the
 main menu.
 
 
+Running the game
+----------------
+
+Widelands requires the SDL and SDL_image libraries to operate. Windows versions
+of these libraries are included in the binary release. Most Linux distributions
+offer precompiled packages for both libraries as well; please refer to your
+distribution documentation to find out how to install them if necessary.
+When all else fails, you can still compile them from source.
+SDL can be obtained from http://www.libsdl.org/, SDL_image can be obtained from
+http://www.libsdl.org/projects/SDL_image/
+
+Once everything is set up, just start the Widelands executable in order to run
+the game.
+
+If the game fails to start right away even though both Widelands and the
+required libraries are properly installed, please make sure that the program
+working directory is set to the directory the Widelands executable resides in.
+On Linux, this is best done by launching Widelands through a shell:
+
+	$ cd /path/to/widelands
+	$ ./widelands
+
+On Windows, you will have to check the shortcut settings if you start Widelands
+via a shortcut.
+
+
 Status
 ------
 
@@ -69,14 +95,14 @@ Linux, simply start Widelands like so:
 
 $ ./widelands --record=filename.rec
 
-On Windows, create a shortcut to the file widelands.exe (right-click on 
+On Windows, create a shortcut to the file widelands.exe (right-click on
 widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click
 on the newly created shortcut and choose Properties). The Target field should
 read something like "c:\games\widelands\widelands.exe". Change this to
 "c:\games\widelands\widelands.exe --record=filename.rec".
 
 A binary file called filename.rec will be created.
-To play it back, perform the same steps as outlined above, but replace 
+To play it back, perform the same steps as outlined above, but replace
 "--record" with "--playback".
 
 Note that while recorded files are platform independent, they generally won't

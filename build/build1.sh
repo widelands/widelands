@@ -27,7 +27,7 @@ widelands/COPYING
 widelands/README
 widelands/widelands
 widelands/widelands.exe
-widelands/SDL.dll
+widelands/*.dll
 widelands/fonts/*
 widelands/maps/*
 widelands/pics/*
@@ -39,7 +39,7 @@ echo
 echo Editing the makefile
 $EDITOR widelands/Makefile
 
-echo 
+echo
 echo Compiling the source now
 
 cd widelands
@@ -53,8 +53,8 @@ cat <<EOF
 If everything went okay, you've now got the following steps left to do:
  1) Copy widelands.exe and SDL.dll into the widelands directory
  2) Build the packages, e.g:
-      tar cjf build-XXX-source.tar.bz2 \`cat source.list\`
-      zip -r build-XXX-binary.zip \`cat binary.list\`
+      tar cjf widelands-XXX-source.tar.bz2 \`cat source.list\`
+      zip -r widelands-XXX-binary.zip \`cat binary.list\`
  3) Test the packages
 
  4) Upload the packages using SourceForge's file system

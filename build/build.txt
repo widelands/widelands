@@ -4,7 +4,7 @@ The Build Process
 I. Building
 -----------
 
-1) Increase the build number (configure.in)
+1) Increase the build number (widelands.h)
 
 2) Commit all changes
 
