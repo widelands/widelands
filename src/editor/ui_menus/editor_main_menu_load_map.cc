@@ -224,6 +224,7 @@ void Main_Menu_Load_Map::fill_list(void) {
       const char *name = pname->c_str();
       if(!strcmp(FS_Filename(name),".")) continue;
       if(!strcmp(FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
+      if(!strcmp(FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
       if(!g_fs->IsDirectory(name)) continue;
 
       m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture(PicMod_Game, "pics/ls_dir.png", true));

@@ -258,3 +258,13 @@ int main(int argc, char** argv)
 	g_main(argc, argv);
 	return 0;
 }
+
+#ifdef __MINGW__
+#undef main
+
+// This is a hack needed for mingw under windows 
+int main(int argc, char** argv) {
+	g_main(argc,argv);
+return 0;
+}
+#endif
