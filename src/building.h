@@ -68,7 +68,7 @@ public:
 
 class Window;
 
-class Building : public BaseImmovable {
+class Building : public PlayerImmovable {
 	friend class Building_Descr;
 
 	MO_DESCR(Building_Descr)
@@ -80,18 +80,15 @@ public:
 	virtual int get_type();	
 	virtual int get_size();
 	virtual bool get_passable();
-	
+
+	virtual Flag *get_base_flag();
+		
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }
-	
-	inline Player *get_owner() { return m_owner; }
 	
 	void show_options(Interactive_Player *plr);
 	void hide_options();
 
-	virtual void add_to_economy(Economy *e);
-	virtual void remove_from_economy(Economy *e);
-	
 protected:
 	void start_animation(Game *g, Animation *anim);
 
@@ -103,7 +100,6 @@ protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry) = 0;
 	
 protected:
-	Player			*m_owner;
 	Window			*m_optionswindow;
 	Coords			m_position;
 	Flag				*m_flag;
@@ -149,13 +145,14 @@ public:
 
 	virtual void act(Game *g);
 	
-	virtual void add_to_economy(Economy *e);
-	virtual void remove_from_economy(Economy *e);
+	virtual void set_economy(Economy *e);
 
 	inline const WareList &get_wares() const { return m_wares; }
 	void create_wares(int id, int count);
 	void destroy_wares(int id, int count);
 
+	Worker *launch_worker(Game *g, int ware);
+	
 protected:	
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 	

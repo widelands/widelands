@@ -92,15 +92,17 @@ public:
 protected: // default tasks
 	void start_task_idle(Game*, Animation* anim, int timeout);
 	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims);
+	void start_task_movepath(Game*, const Path &path, DirAnimations *anims);
 	
 protected: // higher level handling (task-based)
 	inline int get_current_task() { return m_task; }
 	void start_task(Game*, uint task);
 	void end_task(Game*, bool success, uint nexttask);
+	void interrupt_task(Game*);
 	
 	// handler functions
 	virtual int task_begin(Game*);
-	virtual int task_act(Game*);
+	virtual int task_act(Game*, bool interrupt);
 	virtual void task_end(Game*);
 	
 	/** Map_Object::task_start_best(Game*, uint prev, bool success) [virtual]
@@ -143,6 +145,7 @@ protected:
 	uint m_task; // the task we are currently performing
 	bool m_task_acting;
 	bool m_task_switching;
+	bool m_task_interrupt;
 	bool m_lasttask_success;
 	uint m_lasttask;
 	uint m_nexttask;

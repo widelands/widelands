@@ -279,6 +279,8 @@ void Game::init_wares()
 			if (idx < 0)
 				idx = m_wares.add(new Worker_Ware_Descr(worker->get_name()));
 			
+			worker->set_ware_id(idx);
+				
 			Worker_Ware_Descr *descr = (Worker_Ware_Descr*)m_wares.get(idx);
 			descr->add_worker(tribe, worker);
 		}

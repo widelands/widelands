@@ -102,6 +102,8 @@ public:
 	
 	void clear();
 	
+	inline int get_nrwareids() const { return m_wares.size(); } // highest possible ware id
+	
 	void add(int id, int count = 1);
 	void add(const WareList &wl);
 	void remove(int id, int count = 1);

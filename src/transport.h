@@ -47,7 +47,7 @@ Flags also have a store of up to 8 wares.
 Important: Do not access m_roads directly. get_road() and others use 
 Map_Object::WALK_xx in all "direction" parameters.
 */
-class Flag : public BaseImmovable {
+class Flag : public PlayerImmovable {
 	friend class Economy;
 	friend class FlagQueue;
 
@@ -61,9 +61,11 @@ public:
 	virtual int get_size();
 	virtual bool get_passable();
 	
-	inline Player *get_owner() const { return m_owner; }
-	inline Economy *get_economy() const { return m_economy; }
-	void set_economy(Economy *e);
+	virtual Flag *get_base_flag();
+	
+	inline const Coords &get_position() const { return m_position; }
+	
+	virtual void set_economy(Economy *e);
 	
 	inline Building *get_building() { return m_building; }
 	void attach_building(Game *g, Building *building);
@@ -73,9 +75,8 @@ public:
 	void attach_road(int dir, Road *road);
 	void detach_road(int dir);
 
-	inline const Coords &get_position() const { return m_position; }
-	
 	void get_neighbours(Neighbour_list *neighbours);
+	Road *get_road(Flag *flag);
 	
 protected:
 	virtual void init(Game*);
@@ -84,8 +85,6 @@ protected:
 	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
 
 private:
-	Player		*m_owner;
-	Economy		*m_economy;
 	Coords		m_position;
 	Animation	*m_anim;
 	int			m_animstart;
@@ -115,7 +114,7 @@ a road when a flag is inserted.
 
 Every road has one or more Carriers attached to it.
 */
-class Road : public BaseImmovable {
+class Road : public PlayerImmovable {
 public:
 	Road();
 	virtual ~Road();
@@ -124,16 +123,18 @@ public:
 
 	inline Flag *get_flag_start() const { return m_start; }
 	inline Flag *get_flag_end() const { return m_end; }
-		
+
 	virtual int get_type();
 	virtual int get_size();
 	virtual bool get_passable();
 
+	virtual Flag *get_base_flag();
+	
 	int get_cost(bool reverse);
+	inline const Path &get_path() const { return m_path; }
 	
 	void presplit(Game *g, Coords split);
 	void postsplit(Game *g, Flag *flag);
-	void set_economy(Economy *e);
 	
 protected:
 	void set_path(Game *g, const Path &path);
@@ -144,31 +145,45 @@ protected:
 	virtual void init(Game *g);
 	virtual void cleanup(Game *g);
 	
+	virtual void request_success(Request *req);
+	
 	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
 
 private:
 	int		m_type;		// use Field::Road_XXX
 	Flag		*m_start;
 	Flag		*m_end;
-	Economy	*m_economy;
 	int		m_cost_forward;	// cost for walking this road from start to end
 	int		m_cost_backward;	// dito, from end to start
 	Path		m_path;		// path goes from m_start to m_end
-	
+
 	Object_Ptr	m_carrier;	// our carrier
 	Request		*m_carrier_request;
 };
 
 
 /*
-Route
+Route stores a route from flag to flag.
+The number of steps is the number of flags stored minus one.
 */
 class Route {
 	friend class Economy;
 
+public:
+	Route();
+	
+	void clear();
+	bool verify(Game *g);
+	
+	inline int get_totalcost() const { return m_totalcost; }
+	inline int get_nrsteps() const { return m_route.size()-1; }
+	Flag *get_flag(Game *g, int idx);
+	
+	void starttrim(int count);
+	
 private:
 	int				m_totalcost;
-	std::vector<Flag*>	m_route;	// includes start and end flags
+	std::vector<Object_Ptr>		m_route;	// includes start and end flags
 };
 
 /*
@@ -181,14 +196,61 @@ code since it can be done more efficiently there.
 */
 class Request {
 	friend class Economy;
+	friend class RequestList;
 
 public:
-	Request(BaseImmovable *target, int ware);
+	enum {
+		OPEN = 0,	// not fulfilled yet
+		TRANSFER,	// corresponding ware/worker is on its way
+		CLOSED,		// request successful, waiting for its deletion
+	};
+
+	Request(PlayerImmovable *target, int ware);
 	~Request();
+	
+	inline PlayerImmovable* get_target(Game*g) { return (PlayerImmovable*)m_target.get(g); }
+	inline int get_ware() const { return m_ware; }
+	inline int get_state() const { return m_state; }
+	
+	Flag *get_target_flag(Game *g);
+	Economy *get_target_economy(Game *g);
+	
+	void start_transfer(Game *g, Warehouse *wh, Route *route);
+	void start_transfer(Game *g, Worker *worker, Route *route);
+	
+	void check_transfer(Game *g);
+	void cancel_transfer(Game *g);
+	
+	void transfer_finish(Game *g);
+	void transfer_fail(Game *g);
 	
 private:
 	Object_Ptr	m_target;	// who requested it?
 	int			m_ware;		// the ware type
+	
+	int			m_state;
+	union {
+		Worker*	worker;		// worker that is supposed to fulfill the request
+	} m_transfer;
+};
+
+/*
+RequestList is used in the Economy to keep track of requests.
+Maybe we can one day introduce prioritizing of requests.
+*/
+class RequestList {
+public:
+	RequestList();
+	~RequestList();
+	
+	void add(Request *req);
+	void remove(Request *req);
+
+	inline int get_nrrequests() const { return m_requests.size(); }
+	inline Request* get_request(int idx) const { return m_requests[idx]; }
+	
+private:
+	std::vector<Request*>	m_requests;
 };
 
 /*
@@ -214,6 +276,8 @@ private:
 Economy represents a network of Flag through which wares can be transported.
 */
 class Economy {
+	friend class Request;
+
 public:
 	Economy(Player *player);
 	~Economy();
@@ -223,7 +287,7 @@ public:
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
 	
-	bool find_route(Flag *start, Flag *end, Route *route);	
+	bool find_route(Flag *start, Flag *end, Route *route, int cost_cutoff = -1);
 	
 	inline int get_nrflags() const { return m_flags.size(); }
 	void add_flag(Flag *flag);
@@ -242,12 +306,17 @@ private:
 	void do_merge(Economy *e);
 	void do_split(Flag *f);
 
+	bool process_request(Request *req);
+	int match_requests(Warehouse *wh);
+	
 private:
 	Player	*m_owner;
 	std::vector<Flag*>		m_flags;
 	WareList						m_wares;	// virtual storage with all wares in this Economy
 	std::vector<Warehouse*>	m_warehouses;
-		
+	
+	std::vector<RequestList>	m_requests; // requests by ware id
+	
 	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
 };
 

@@ -255,6 +255,8 @@ public:
 	Path(Map *map, Coords c) : m_map(map), m_start(c), m_end(c) { }
 	Path(CoordPath &o);
 	
+	void reverse();
+	
 	inline Map *get_map() const { return m_map; }
 	
 	inline bool is_valid() const { return m_map; }
@@ -263,6 +265,8 @@ public:
 	
 	inline int get_nsteps() const { return m_path.size(); }
 	inline char get_step(int idx) const { return m_path[m_path.size()-idx-1]; }
+	
+	void append(int dir);
 	
 private:
 	Map *m_map;

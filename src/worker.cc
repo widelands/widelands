@@ -22,7 +22,9 @@
 #include "pic.h"
 #include "bob.h"
 #include "worker.h"
+#include "player.h"
 #include "tribe.h"
+#include "transport.h"
 
 
 /*
@@ -44,12 +46,42 @@ Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
 {
 	m_tribe = tribe;
 	m_menu_pic = 0;
+	m_ware_id = -1;
 }
 
 Worker_Descr::~Worker_Descr(void)
 {
 	if (m_menu_pic)
 		delete m_menu_pic;
+}
+
+/*
+===============
+Worker_Descr::set_ware_id
+
+Set the worker's ware id. Called by Game::init_wares.
+===============
+*/
+void Worker_Descr::set_ware_id(int idx)
+{
+	m_ware_id = idx;
+}
+
+/*
+===============
+Worker_Descr::create
+
+Custom creation routing that accounts for the location.
+===============
+*/
+Worker *Worker_Descr::create(Game *g, Player *owner, PlayerImmovable *location, Coords coords)
+{
+	Worker *worker = (Worker*)create_object();
+	worker->set_owner(owner);
+	worker->set_location(location);
+	worker->set_position(g, coords);
+	worker->init(g);
+	return worker;
 }
 
 /*
@@ -107,6 +139,8 @@ Worker::Worker(Worker_Descr *descr)
 	: Bob(descr)
 {
 	m_economy = 0;
+	m_location = 0;
+	m_state = State_None;
 	m_carried_ware = -1;
 }
 
@@ -114,6 +148,162 @@ Worker::~Worker()
 {
 }
 
+/*
+===============
+Worker::get_movecaps
+===============
+*/
+uint Worker::get_movecaps()
+{
+	return MOVECAPS_WALK;
+}
+
+/*
+===============
+Worker::set_location
+
+Change the location. This should be called in the following situations:
+- worker creation (usually, location is a warehouse)
+- worker moves along a route (location is a road and finally building)
+- current location is destroyed (building burnt down etc...)
+===============
+*/
+void Worker::set_location(PlayerImmovable *location)
+{
+	PlayerImmovable *oldlocation = get_location(get_owner()->get_game());
+	
+	if (oldlocation)
+	{
+		assert(m_economy);
+		
+		oldlocation->remove_worker(this);
+	}
+	else
+	{
+		assert(!m_economy);
+	}
+	
+	if (location)
+	{
+		Economy *eco = location->get_economy();
+		
+		if (!m_economy)
+			set_economy(eco);
+		else if (m_economy != eco)
+			throw wexception("Worker::set_location changes economy");
+
+		location->add_worker(this);
+	}
+	else
+	{
+		// Our location has been destroyed, we are now fugitives.
+		// Interrupt whatever we've been doing.
+		if (m_state > State_None)
+			interrupt_task(get_owner()->get_game());
+	
+		set_economy(0);
+	}
+	
+	m_location = location;
+}
+
+/*
+===============
+Worker::set_economy
+
+Change the worker's current economy. This is called:
+- by set_location() when appropriate
+- by the current location, when the location's economy changes
+===============
+*/
+void Worker::set_economy(Economy *economy)
+{
+	if (economy == m_economy)
+		return;
+	
+	if (m_economy) {
+		m_economy->remove_wares(get_descr()->get_ware_id(), 1);
+		
+		if (m_carried_ware >= 0)
+			m_economy->remove_wares(m_carried_ware, 1);
+	}
+	
+	m_economy = economy;
+	
+	if (m_economy) {
+		m_economy->add_wares(get_descr()->get_ware_id(), 1);
+		
+		if (m_carried_ware >= 0)
+			m_economy->add_wares(m_carried_ware, 1);
+	}
+}
+
+/*
+===============
+Worker::set_job_request
+
+Tell the worker to walk the route to the request target
+===============
+*/
+void Worker::set_job_request(Request *req, const Route *route)
+{
+	assert(m_state == State_None);
+	
+	m_state = State_Request;
+	
+	m_request = req;
+	m_route = new Route(*route);
+	
+	// Hmm.. whenever this is called, a CMD_ACT should already be pending,
+	// issued by either Bob::init() or by whatever the guy is currently doing
+}
+
+/*
+===============
+Worker::change_job_request
+
+Called by Economy code when:
+- the request has been cancelled & destroyed (cancel is true)
+- the current route has been broken (cancel is false)
+===============
+*/
+void Worker::change_job_request(bool cancel)
+{
+	assert(m_state == State_Request);
+	
+	throw wexception("TODO: implement change_job_request");
+	// if (cancel) m_request = 0;
+}
+
+/*
+===============
+Worker::init
+
+Initialize the worker
+===============
+*/
+void Worker::init(Game *g)
+{
+	Bob::init(g);
+	
+	// a worker should always start out at a fixed location
+	assert(get_location(g));
+}
+
+/*
+===============
+Worker::cleanup
+
+Remove the worker.
+===============
+*/
+void Worker::cleanup(Game *g)
+{
+	if (get_location(g))
+		set_location(0);
+
+	Bob::cleanup(g);
+}
 
 /*
 ===============
@@ -124,7 +314,185 @@ Give the worker something to do after the last task has finished.
 */
 void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 {
-	start_task_idle(g, get_descr()->get_idle_anim(), -1);
+	switch(m_state) {
+	case State_None:
+		{
+			log("Worker::task_start_best [State_None]\n");
+		
+			// this will be executed once before our creator gets the chance to 
+			// assign a job; therefore, the 1ms grace idling
+			if (prev == TASK_NONE)
+				start_task_idle(g, get_descr()->get_idle_anim(), 1);
+			else {
+				assert(m_economy == 0); // this should only happen to "fugitives", if at all
+			
+				throw wexception("TODO: task_start_best, become fugitive");
+			}
+		}
+		return;
+	
+	case State_Request:
+		log("Worker::task_start_best [State_Request]\n");
+		run_state_request(g, prev, success, nexthint);
+		return;
+	}
+	
+	throw wexception("Worker::task_start_best: unhandled");
+}
+
+/*
+===============
+Worker::end_state
+
+Called by the run_state_XXX functions to indicate the current state has 
+finished.
+
+In this function, we zero any state before calling any callback functions.
+This is because callback functions might wish to set a new state.
+===============
+*/
+void Worker::end_state(Game *g, bool success)
+{
+	int oldstate = m_state;
+	
+	m_state = State_None;
+	
+	switch(oldstate) {
+	case State_None:
+		log("Worker::end_state [State_None]\n");
+		break;
+	
+	case State_Request:
+		{
+			Request *request = m_request;
+		
+			log("Worker::end_state [State_Request] %s\n", success ? "success" : "fail");
+			
+			if (m_route) {
+				delete m_route;
+				m_route = 0;
+			}
+			m_request = 0;
+			
+			if (success)
+				request->transfer_finish(g);
+			else
+				request->transfer_fail(g);
+		}
+		break;
+	
+	default:
+		throw wexception("Worker::end_state: unhandled");
+	}
+
+	// 1ms idling to get task_start_best() called again for the new state
+	start_task_idle(g, get_descr()->get_idle_anim(), 1);
+}
+
+/*
+===============
+Worker::run_state_request
+
+Decide what to do in State_Request.
+===============
+*/
+void Worker::run_state_request(Game *g, uint prev, bool success, uint nexthing)
+{
+	// if our previous task failed, reset to State_None
+	if (!success) {
+		log("Worker: State_Request: previous task failed\n");
+		end_state(g, false);
+		return;
+	}
+
+	PlayerImmovable *location = get_location(g);
+	
+	// We were waiting; now continue on the next step of the route
+	if (prev == TASK_IDLE)
+	{
+		Flag *current = m_route->get_flag(g, 0);
+		assert(current);
+		
+		// We may have to move out of a building
+		if (current != location) {
+			assert(location->get_type() == Map_Object::BUILDING);
+			assert(location->get_base_flag() == current);
+
+			log("Worker: State_Request: move from building to flag\n");
+			
+			Path path(g->get_map(), get_position());
+			path.append(Map_Object::WALK_SE);
+
+			start_task_movepath(g, path, get_descr()->get_walk_anims());
+			return;
+		}
+		
+		// No, move on to the next step if there is one
+		if (m_route->get_nrsteps()) {
+			Flag *dest = m_route->get_flag(g, 1);
+			Road *road = current->get_road(dest);
+			
+			log("Worker: State_Request: move to next flag\n");
+			
+			if (!road)
+				throw wexception("TODO: recalculate route");
+			
+			Path path(road->get_path());
+			
+			if (dest != road->get_flag_end())
+				path.reverse();
+			
+			start_task_movepath(g, path, get_descr()->get_walk_anims());
+			set_location(road);
+			m_route->starttrim(1);
+			return;
+		}
+		
+		delete m_route;
+		m_route = 0;
+		
+		// Finally, we may have to move toward the building
+		PlayerImmovable *target = m_request->get_target(g);
+		
+		if (target->get_type() == Map_Object::BUILDING) {
+			assert(target->get_base_flag() == current);
+			
+			log("Worker: State_Request: move from flag to building\n");
+			
+			Path path(g->get_map(), get_position());
+			path.append(Map_Object::WALK_NW);
+			
+			start_task_movepath(g, path, get_descr()->get_walk_anims());
+			set_location(target);
+			return;
+		}
+		
+		log("Worker: State_Request: finished (road/flag)\n");
+			
+		if (target->get_type() == Map_Object::ROAD)
+			set_location(target);
+		
+		// we're done
+		end_state(g, true);
+		return;
+	}
+	
+	// Check if we've arrived at the target
+	if (location == m_request->get_target(g)) {
+		log("Worker: State_Request: finished (building)\n");
+			
+		end_state(g, true);
+		return;
+	}
+	
+	// Wait a little bit on the flag
+	log("Worker: State_Request: wait on flag\n");
+			
+	Flag *current = m_route->get_flag(g, 0);
+	assert(get_position() == current->get_position());
+	set_location(current);
+	
+	start_task_idle(g, get_descr()->get_idle_anim(), 50);
 }
 
 

@@ -229,8 +229,8 @@ Change to the next task if necessary.
 void Bob::act(Game* g)
 {
 	m_task_acting = true;
-	int tdelta = task_act(g);
-	// a tdelta == 0 is probably NOT what you want - make your intentions clear
+	int tdelta = task_act(g, m_task_interrupt);
+	// a tdelta == 0 is probably NOT what you want if the task continues - make your intentions clear
 	assert(!m_task || tdelta < 0 || tdelta > 0);
 	m_task_acting = false;
 
@@ -264,7 +264,7 @@ void Bob::do_next_task(Game* g)
 		m_task_switching = false;
 
 		do_start_task(g);
-				
+		
 		task_retries++;
 	}
 }
@@ -298,6 +298,8 @@ void Bob::do_start_task(Game* g)
 {
 	assert(m_task);
 
+	m_task_interrupt = false;
+	
 	m_task_acting = true;
 	int tdelta = task_begin(g);
 	// a tdelta == 0 is probably NOT what you want - make your intentions clear
@@ -338,13 +340,28 @@ void Bob::end_task(Game* g, bool success, uint nexttask)
 
 /*
 ===============
+Bob::interrupt_task
+
+Ask the current task to end (with failure) as soon as possible.
+===============
+*/
+void Bob::interrupt_task(Game *g)
+{
+	// cause an interrupt on the next CMD_ACT
+	m_task_interrupt = true;
+	
+	// TODO: call a task-specific interrupt function
+}
+
+/*
+===============
 Bob::start_task_idle
 
 Start an idle phase, using the given animation
 If the timeout is a positive value, the idle phase stops after the given
 time.
 
-This task always succeeds.
+This task always succeeds unless interrupted.
 ===============
 */
 void Bob::start_task_idle(Game* g, Animation* anim, int timeout)
@@ -384,6 +401,24 @@ bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *
 	start_task(g, TASK_MOVEPATH);
 	return true;
 }
+
+/*
+===============
+Bob::start_task_movepath
+
+Start moving along the given path.
+===============
+*/
+void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims)
+{
+	assert(path.get_start() == get_position());
+	
+	task.movepath.path = new Path(path);
+	task.movepath.step = 0;
+	task.movepath.anims = anims;
+	
+	start_task(g, TASK_MOVEPATH);
+}
 		
 /*
 ===============
@@ -411,7 +446,7 @@ int Bob::task_begin(Game* g)
 		return task.idle.timeout;
 		
 	case TASK_MOVEPATH:
-		return task_act(g);
+		return task_act(g, false);
 	}
 
 	cerr << "task_begin: Unhandled task " << m_task << endl;
@@ -426,12 +461,13 @@ Bob::task_act [virtual]
 Calls to this function are scheduled by this function and task_begin().
 
 In this function you may call all the functions available in task_begin().
+If interrupt is true, you should call end_task() without success.
 
 As with task_begin(), you can also schedule another call to task_act() by
 returning a value > 0
 ===============
 */
-int Bob::task_act(Game* g)
+int Bob::task_act(Game* g, bool interrupt)
 {
 	switch(get_current_task()) {
 	case TASK_IDLE:
@@ -442,6 +478,12 @@ int Bob::task_act(Game* g)
 	{
 		if (task.movepath.step)
 			end_walk(g);
+
+		if (interrupt) {
+			log("TASK_MOVEPATH: interrupted\n");
+			end_task(g, false, 0); // failure
+			return 0; // will be ignored
+		}
 		
 		if (task.movepath.step >= task.movepath.path->get_nsteps()) {
 			assert(m_position == task.movepath.path->get_end());
@@ -453,18 +495,17 @@ int Bob::task_act(Game* g)
 	
 		int tdelta = start_walk(g, (WalkingDir)dir, task.movepath.anims->get_animation(dir));
 		if (tdelta < 0) {
+			log("TASK_MOVEPATH: can't walk\n");
 			end_task(g, false, 0); // failure to reach goal
 			return 0;
 		}
 
-		task.movepath.step++;		
+		task.movepath.step++;
 		return tdelta;
 	}
 	}
 
-	cerr << "task_act: Unhandled task " << m_task << endl;
-	assert(!"task_act: Unhandled task ");
-	return -1; // shut up compiler
+	throw wexception("task_act: Unhandled task %i", m_task);
 }
 
 /*

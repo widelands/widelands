@@ -274,3 +274,151 @@ void Immovable::draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy
 	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, posx, posy, 0);
 }
 
+
+/*
+==============================================================================
+
+PlayerImmovable IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+PlayerImmovable::PlayerImmovable
+
+Zero-initialize
+===============
+*/
+PlayerImmovable::PlayerImmovable(Map_Object_Descr *descr)
+	: BaseImmovable(descr)
+{
+	m_owner = 0;
+	m_economy = 0;
+}
+
+/*
+===============
+PlayerImmovable::~PlayerImmovable
+
+Cleanup
+===============
+*/
+PlayerImmovable::~PlayerImmovable()
+{
+	if (m_workers.size())
+		log("Building::~Building: %i workers left!\n", m_workers.size());
+}
+
+/*
+===============
+PlayerImmovable::set_economy
+
+Change the economy, transfer the workers
+===============
+*/
+void PlayerImmovable::set_economy(Economy *e)
+{
+	if (m_economy == e)
+		return;
+
+	for(uint i = 0; i < m_workers.size(); i++)
+		m_workers[i]->set_economy(e);
+	
+	m_economy = e;
+}
+
+/*
+===============
+PlayerImmovable::add_worker
+
+Associate the given worker with this immovable.
+The worker will be transferred along to another economy, and it will be 
+released when the immovable is destroyed.
+This should only be called from Worker::set_location.
+===============
+*/
+void PlayerImmovable::add_worker(Worker *w)
+{
+	m_workers.push_back(w);
+}
+
+/*
+===============
+PlayerImmovable::remove_worker
+
+Disassociate the given worker with this building.
+This should only be called from Worker::set_location.
+===============
+*/
+void PlayerImmovable::remove_worker(Worker *w)
+{
+	for(uint i = 0; i < m_workers.size(); i++) {
+		if (m_workers[i] == w) {
+			if (i < m_workers.size()-1)
+				m_workers[i] = m_workers[m_workers.size()-1];
+			m_workers.pop_back();
+			return;
+		}
+	}
+	
+	throw wexception("PlayerImmovable::remove_worker: not in list");
+}
+
+/*
+===============
+PlayerImmovable::request_success
+
+The given request has completed successfully. You should now remove it from
+the economy and delete it.
+===============
+*/
+void PlayerImmovable::request_success(Request *req)
+{
+	throw wexception("request_success: unhandled");
+}
+
+/*
+===============
+PlayerImmovable::set_owner
+
+Set the immovable's owner. Currently, it can only be set once.
+===============
+*/
+void PlayerImmovable::set_owner(Player *owner)
+{
+	// Change these asserts once you've made really sure that changing owners
+	// works (necessary for military building)
+	assert(!m_owner);
+	assert(owner);
+	
+	m_owner = owner;
+}
+
+/*
+===============
+PlayerImmovable::init
+
+Initialize the immovable.
+===============
+*/
+void PlayerImmovable::init(Game *g)
+{
+	BaseImmovable::init(g);
+}
+
+/*
+===============
+PlayerImmovable::cleanup
+
+Release workers
+===============
+*/
+void PlayerImmovable::cleanup(Game *g)
+{
+	while(m_workers.size())
+		m_workers[0]->set_location(0);
+
+	BaseImmovable::cleanup(g);
+}
+

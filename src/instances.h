@@ -179,8 +179,8 @@ public:
 	inline Object_Ptr(Map_Object* obj) { m_serial = obj->m_serial; }
 	// can use standard copy constructor and assignment operator
 	
-	inline void set(Map_Object* obj) { m_serial = obj->m_serial; }
-	inline Object_Ptr& operator = (Map_Object* obj) { m_serial = obj->m_serial; return *this; }
+	inline void set(Map_Object* obj) { if (obj) m_serial = obj->m_serial; else m_serial = 0; }
+	inline Object_Ptr& operator = (Map_Object* obj) { set(obj); return *this; }
 	
 	// dammit... without a Game object, we can't implement a Map_Object* operator
 	// (would be _really_ nice)

@@ -23,13 +23,23 @@
 #include "bob.h"
 
 class Economy;
+class Request;
+class Route;
+class PlayerImmovable;
 
 /*
 Worker is the base class for all humans (and actually potential non-humans, too) 
 that belong to a tribe.
 
 Every worker can carry one (item) ware.
+
+Workers can be in one of the following meta states:
+- Request: the worker is walking to his job somewhere
+- Idle: the worker is at his job but idling
+- Work: the worker is running his working schedule
 */
+class Worker;
+
 class Worker_Descr : public Bob_Descr {
    friend class Tribe_Descr;
 
@@ -41,7 +51,12 @@ public:
 	inline Pic *get_menu_pic() { return m_menu_pic; }
 	inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
 	inline DirAnimations *get_walkload_anims() { return &m_walkload_anims; }
-	
+	inline int get_ware_id() const { return m_ware_id; }
+
+	void set_ware_id(int idx);
+		
+	Worker *create(Game *g, Player *owner, PlayerImmovable *location, Coords coords);
+
 protected:
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	static Worker_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata);
@@ -50,21 +65,52 @@ protected:
 	Pic*				m_menu_pic;
 	DirAnimations	m_walk_anims;
 	DirAnimations	m_walkload_anims;
+	
+	int				m_ware_id;
 }; 
 
 class Worker : public Bob {
 	MO_DESCR(Worker_Descr);
 
 public:
+	enum {
+		State_None = 0,
+		State_Request,
+	};
+	
 	Worker(Worker_Descr *descr);
 	virtual ~Worker();
+
+	virtual uint get_movecaps();
+	
+	inline PlayerImmovable *get_location(Game *g) { return (PlayerImmovable*)m_location.get(g); }
+	inline Economy *get_economy(Game *g) { return m_economy; }
+
+	void set_location(PlayerImmovable *location);
+	void set_economy(Economy *economy);
+	
+	void set_job_request(Request *req, const Route *route);
+	void change_job_request(bool cancel);
+	
+	inline Route *get_route() { return m_route; }
+	
+	virtual void init(Game *g);
+	virtual void cleanup(Game *g);
 
 protected:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 	
+	void end_state(Game *g, bool success);
+	void run_state_request(Game *g, uint prev, bool success, uint nexthing);
+
 private:
-	Economy*	m_economy;			// Economy this worker is registered in
-	int		m_carried_ware;	// Ware ID (-1 if none carried)
+	Object_Ptr	m_location;			// meta location of the worker, a PlayerImmovable
+	Economy*		m_economy;			// Economy this worker is registered in
+	int			m_state;				// one of State_XXX
+	int			m_carried_ware;	// Ware ID (-1 if none carried)
+	
+	Request		*m_request;			// the request we're supposed to fulfill
+	Route			*m_route;
 };
 
 

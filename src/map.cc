@@ -1693,9 +1693,37 @@ Path::Path(CoordPath &o)
 	m_start = o.get_start();
 	m_end = o.get_end();
 	m_path = o.get_steps();
-	reverse(m_path.begin(), m_path.end()); // Path stores in reversed order!
+	std::reverse(m_path.begin(), m_path.end()); // Path stores in reversed order!
 }
 
+/*
+===============
+Path::reverse
+
+Change the path so that it goes in the opposite direction
+===============
+*/
+void Path::reverse()
+{
+	std::swap(m_start, m_end);
+	std::reverse(m_path.begin(), m_path.end());
+	
+	for(uint i = 0; i < m_path.size(); i++)
+		m_path[i] = get_reverse_dir(m_path[i]);
+}
+
+/*
+===============
+Path::append
+
+Add the given step at the end of the path.
+===============
+*/
+void Path::append(int dir)
+{
+	m_path.insert(m_path.begin(), dir); // stores in reversed order!
+	m_map->get_neighbour(m_end, dir, &m_end);
+}
 
 /*
 ===============

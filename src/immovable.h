@@ -21,9 +21,13 @@
 #define included_immovable_h
 
 #include "instances.h"
-#include "bob.h"
+#include "animation.h"
 
 class Profile;
+class Request;
+class Flag;
+class Economy;
+class Worker;
 
 /*
 BaseImmovable is the base for all non-moving objects (immovables such as trees,
@@ -102,5 +106,45 @@ protected:
 	Animation			*m_anim;
 	int					m_animstart;
 };
+
+
+/*
+PlayerImmovable is an immovable owned by a player that belongs to an economy:
+building, flag or road
+
+A PlayerImmovable can also house a number of workers, which are automatically
+turned into fugitives when the immovable is destroyed, and their economy is also
+adjusted automatically.
+*/
+class PlayerImmovable : public BaseImmovable {
+public:
+	PlayerImmovable(Map_Object_Descr *descr);
+	virtual ~PlayerImmovable();
+
+	inline Player *get_owner() const { return m_owner; }
+	inline Economy *get_economy() const { return m_economy; }
+
+	virtual Flag *get_base_flag() = 0;
+	
+	virtual void set_economy(Economy *e);
+	
+	void add_worker(Worker *w);
+	void remove_worker(Worker *w);
+
+	virtual void request_success(Request *req);
+
+protected:
+	void set_owner(Player *owner);
+	
+	virtual void init(Game *g);
+	virtual void cleanup(Game *g);
+		
+private:
+	Player		*m_owner;
+	Economy		*m_economy;
+	
+	std::vector<Worker*>	m_workers;
+};
+
 
 #endif // included_immovable_h

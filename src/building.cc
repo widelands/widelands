@@ -76,7 +76,7 @@ Building *Building_Descr::create(Game *g, Player *owner, Coords pos)
 	assert(owner);
 	
 	Building *b = create_object();
-	b->m_owner = owner;
+	b->set_owner(owner);
 	b->m_position = pos;
 	b->init(g);
 	
@@ -129,9 +129,8 @@ Implementation
 */
 
 Building::Building(Building_Descr *descr)
-	: BaseImmovable(descr)
+	: PlayerImmovable(descr)
 {
-	m_owner = 0;
 	m_flag = 0;
 	m_optionswindow = 0;
 }
@@ -147,6 +146,7 @@ Building::~Building()
 Building::get_type
 Building::get_size
 Building::get_passable
+Building::get_base_flag
 ===============
 */
 int Building::get_type()
@@ -164,28 +164,9 @@ bool Building::get_passable()
 	return false;
 }
 
-/*
-===============
-Building::add_to_economy [virtual]
-
-Called when a building joins an economy.
-Add all requests, provides etc.. to the economy.
-===============
-*/
-void Building::add_to_economy(Economy *e)
+Flag *Building::get_base_flag()
 {
-}
-
-/*
-===============
-Building::remove_from_economy [virtual]
-
-Called when a building leaves an economy.
-Remove all requests etc.. from the economy.
-===============
-*/
-void Building::remove_from_economy(Economy *e)
-{
+	return m_flag;
 }
 
 /*
@@ -210,7 +191,7 @@ Common building initialization code. You must call this from derived class' init
 */
 void Building::init(Game* g)
 {
-	BaseImmovable::init(g);
+	PlayerImmovable::init(g);
 
 	// Set the building onto the map
 	Map *map = g->get_map();
@@ -241,8 +222,8 @@ void Building::init(Game* g)
 	else
 		flag = Flag::create(g, get_owner(), neighb);
 	
-	flag->attach_building(g, this);
 	m_flag = flag;
+	m_flag->attach_building(g, this);
 	
 	// Start the animation
 	start_animation(g, get_descr()->get_idle_anim());
@@ -257,6 +238,7 @@ Cleanup the building
 */
 void Building::cleanup(Game *g)
 {
+	// Remove from flag
 	m_flag->detach_building(g);
 	
 	// Unset the building
@@ -276,7 +258,7 @@ void Building::cleanup(Game *g)
 		unset_position(g, neighb);
 	}
 	
-	BaseImmovable::cleanup(g);
+	PlayerImmovable::cleanup(g);
 }
 
 /*
@@ -291,10 +273,12 @@ void Building::draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy)
 	if (coords != m_position)
 		return; // draw big buildings only once
 
-	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, posx, posy, m_owner->get_playercolor_rgb());
+	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, posx, posy, 
+			get_owner()->get_playercolor_rgb());
 	
 	// door animation?
 }
+
 
 /*
 ==============================================================================
@@ -451,26 +435,25 @@ void Warehouse::act(Game *g)
 
 /*
 ===============
-Warehouse::add_to_economy
+Warehouse::set_economy
 
-Register our storage with the economy.
+Transfer our registration to the new economy.
 ===============
 */
-void Warehouse::add_to_economy(Economy *e)
+void Warehouse::set_economy(Economy *e)
 {
-	e->add_warehouse(this);
-}
-
-/*
-===============
-Warehouse::remove_from_economy
-
-Unregister our storage with the economy
-===============
-*/
-void Warehouse::remove_from_economy(Economy *e)
-{
-	e->remove_warehouse(this);
+	Economy *old = get_economy();
+	
+	if (old == e)
+		return;
+	
+	if (old)
+		old->remove_warehouse(this);
+	
+	Building::set_economy(e);
+	
+	if (e)
+		e->add_warehouse(this);
 }
 
 /*
@@ -484,10 +467,9 @@ void Warehouse::create_wares(int id, int count)
 {
 	m_wares.add(id, count);
 	
-	assert(m_flag);
-	Economy *e = m_flag->get_economy();
+	assert(get_economy());
 	
-	e->add_wares(id, count);
+	get_economy()->add_wares(id, count);
 }
 
 /*
@@ -501,10 +483,37 @@ void Warehouse::destroy_wares(int id, int count)
 {
 	m_wares.remove(id, count);
 	
-	assert(m_flag);
-	Economy *e = m_flag->get_economy();
+	assert(get_economy());
 	
-	e->add_wares(id, count);
+	get_economy()->add_wares(id, count);
+}
+
+/*
+===============
+Warehouse::launch_worker
+
+Start a worker of a given type. The worker will be assigned a job by the caller.
+===============
+*/
+Worker *Warehouse::launch_worker(Game *g, int ware)
+{
+	assert(m_wares.stock(ware));
+	
+	Ware_Descr *waredescr;
+	Worker_Descr *workerdescr;
+	Worker *worker;
+	 
+	waredescr = g->get_ware_description(ware);
+	assert(waredescr->is_worker());
+	
+	workerdescr = ((Worker_Ware_Descr*)waredescr)->get_worker(get_owner()->get_tribe());
+	
+	worker = workerdescr->create(g, get_owner(), this, m_position);
+	
+	m_wares.remove(ware, 1);
+	get_economy()->remove_wares(ware, 1); // re-added by the worker himself
+	
+	return worker;
 }
 
 /*
