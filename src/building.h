@@ -106,6 +106,8 @@ public:
 	void show_options(Interactive_Player *plr);
 	void hide_options();
 
+	virtual bool fetch_from_flag(Game* g);
+
 protected:
 	void start_animation(Editor_Game_Base *g, uint anim);
 
@@ -167,6 +169,8 @@ public:
 	inline const WareList &get_wares() const { return m_wares; }
 	void create_wares(int id, int count);
 	void destroy_wares(int id, int count);
+
+	virtual bool fetch_from_flag(Game* g);
 
 	Worker* launch_worker(Game* g, int ware);
 	void incorporate_worker(Game *g, Worker *w);

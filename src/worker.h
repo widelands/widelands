@@ -94,6 +94,7 @@ public:
 		State_Fugitive,		// lost our location, trying to get back to warehouse
 		State_GoWarehouse,	// return to warehouse
 		State_DropOff,			// drop an item outside a building and go back inside
+		State_FetchFromFlag,	// fetch an item from the building's flag
 
 		State_Worker_Last		// must be last
 	};
@@ -126,6 +127,7 @@ public:
 	void stop_job_idleloop(Game*);
 
 	void set_job_dropoff(Game*, WareInstance* item);
+	void set_job_fetchfromflag(Game*);
 
 	void schedule_incorporate(Game *g);
 	void incorporate(Game *g);
@@ -148,6 +150,7 @@ protected:
 	void run_state_fugitive(Game *g, uint prev, bool success, uint nexthint);
 	void run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthint);
 	void run_state_dropoff(Game* g, uint prev, bool success, uint nexthint);
+	void run_state_fetchfromflag(Game* g, uint prev, bool success, uint nexthint);
 
 	int run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgoal);
 

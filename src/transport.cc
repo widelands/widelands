@@ -177,6 +177,7 @@ void WareInstance::set_location(Game* g, Map_Object* location)
 		}
 
 		m_flag_dirty = true;
+		m_return_watchdog = false;
 	}
 	else
 	{
@@ -196,9 +197,40 @@ void WareInstance::act(Game* g, uint data)
 {
 	if (!m_request && !m_moving && m_return_watchdog)
 	{
-		molog("WareInstance::act: TODO: return to warehouse\n");
+		Map_Object* location = get_location(g);
+		Warehouse* wh;
 
-		m_return_watchdog = false;
+		assert(!m_move_route);
+		assert(location);
+
+		if (location->get_type() != FLAG)
+			throw wexception("MO(%u): return watchdog called, but location isn't a flag", get_serial());
+
+		m_move_route = new Route;
+		wh = get_economy()->find_nearest_warehouse((Flag*)location, m_move_route);
+
+		if (!wh)
+		{
+			molog("WareInstance: Return watchdog finds no warehouse, reschedule\n");
+
+			delete m_move_route;
+			m_move_route = 0;
+
+			g->get_cmdqueue()->queue(g->get_gametime() + 15000, SENDER_MAPOBJECT,
+					CMD_ACT, m_serial, 0, 0);
+		}
+		else
+		{
+			molog("WareInstance: Begin return to warehouse\n");
+
+			m_moving = true;
+			m_move_destination = wh;
+
+			m_flag_dirty = true;
+			m_return_watchdog = false;
+
+			update(g);
+		}
 	}
 }
 
@@ -265,7 +297,11 @@ void WareInstance::update(Game* g)
 		}
 
 		if (m_flag_dirty) {
-			((Flag*)loc)->update_item(g, this);
+			if (m_moving)
+				((Flag*)loc)->call_carrier(g, this, get_next_move_step(g));
+			else
+				((Flag*)loc)->call_carrier(g, this, 0);
+
 			m_flag_dirty = false;
 		}
 		break;
@@ -324,6 +360,7 @@ void WareInstance::cancel_request(Game* g)
 		m_move_route = 0;
 	}
 
+	m_flag_dirty = true;
 	m_return_watchdog = false;
 
 	update(g);
@@ -356,6 +393,12 @@ bool WareInstance::is_moving(Game* g)
 		return false;
 	}
 
+	// free an empty route
+	if (m_move_route && !m_move_route->get_nrsteps()) {
+		delete m_move_route;
+		m_move_route = 0;
+	}
+
 	if (m_move_route)
 	{
 		PlayerImmovable* reroutestart = 0;
@@ -364,7 +407,7 @@ bool WareInstance::is_moving(Game* g)
 		// If we're on a flag, it should be either the first or second on the route
 		// If we're on the second flag, we finished the first part of the route,
 		// so trim it
-		if (loc->get_type() == Map_Object::FLAG) {
+		if (m_move_route && loc->get_type() == Map_Object::FLAG) {
 			if (loc == m_move_route->get_flag(g, 1))
 			{
 				m_move_route->starttrim(1);
@@ -398,6 +441,8 @@ bool WareInstance::is_moving(Game* g)
 			if (!reroutestart)
 				reroutestart = m_move_route->get_flag(g, 0);
 
+			assert(get_economy() == reroutestart->get_economy());
+
 			if (!get_economy()->find_route(reroutestart->get_base_flag(), target->get_base_flag(), m_move_route))
 				throw wexception("WareInstance::is_moving: Failed to find route within economy");
 		}
@@ -425,6 +470,7 @@ void WareInstance::cancel_moving(Game* g)
 	}
 
 	m_moving = false;
+	m_flag_dirty = true;
 	m_return_watchdog = false;
 
 	if (m_move_route) {
@@ -515,6 +561,8 @@ Flag::Flag(bool logic)
 	m_item_capacity = 8;
 	m_item_filled = 0;
 	m_items = new PendingItem[m_item_capacity];
+
+	m_always_call_for_flag = 0;
 }
 
 
@@ -806,10 +854,10 @@ void Flag::add_item(Game* g, WareInstance* item)
 	pi = &m_items[m_item_filled++];
 	pi->item = item;
 	pi->pending = false;
-	pi->flag = 0;
+	pi->nextstep = 0;
 
 	item->set_location(g, this);
-	item->update(g); // will call update_item() if necessary
+	item->update(g); // will call call_carrier() if necessary
 }
 
 
@@ -817,10 +865,13 @@ void Flag::add_item(Game* g, WareInstance* item)
 ===============
 Flag::has_pending_item
 
-Returns true if an item is currently waiting for a carrier to the given flag.
+Returns true if an item is currently waiting for a carrier to the given Flag.
+
+Note: Due to fetch_from_flag() semantics, this function makes no sense for a
+      building destination.
 ===============
 */
-bool Flag::has_pending_item(Game* g, Flag* destflag)
+bool Flag::has_pending_item(Game* g, Flag* dest)
 {
 	int i;
 
@@ -828,7 +879,7 @@ bool Flag::has_pending_item(Game* g, Flag* destflag)
 		if (!m_items[i].pending)
 			continue;
 
-		if (m_items[i].flag != destflag)
+		if (m_items[i].nextstep != dest)
 			continue;
 
 		return true;
@@ -855,7 +906,7 @@ bool Flag::ack_pending_item(Game* g, Flag* destflag)
 		if (!m_items[i].pending)
 			continue;
 
-		if (m_items[i].flag != destflag)
+		if (m_items[i].nextstep != destflag)
 			continue;
 
 		m_items[i].pending = false;
@@ -863,6 +914,31 @@ bool Flag::ack_pending_item(Game* g, Flag* destflag)
 	}
 
 	return false;
+}
+
+
+/*
+===============
+Flag::wake_up_capacity_queue
+
+Wake one sleeper from the capacity queue.
+===============
+*/
+void Flag::wake_up_capacity_queue(Game* g)
+{
+	while(m_capacity_wait.size()) {
+		Worker* w = (Worker*)m_capacity_wait[0].get(g);
+
+		m_capacity_wait.erase(m_capacity_wait.begin());
+
+		if (!w)
+			continue;
+
+		log("Flag: wake up one from wait queue.\n");
+
+		if (w->wakeup_flag_capacity(g, this))
+			break;
+	}
 }
 
 
@@ -876,14 +952,14 @@ This function may return 0 even if ack_pending_item() has already been called
 successfully.
 ===============
 */
-WareInstance* Flag::fetch_pending_item(Game* g, Flag* destflag)
+WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 {
 	int i;
 
 	for(i = 0; i < m_item_filled; i++) {
 		WareInstance* item = m_items[i].item;
 
-		if (m_items[i].flag != destflag)
+		if (m_items[i].nextstep != dest)
 			continue;
 
 		// move the other items up the list and return this one
@@ -893,19 +969,7 @@ WareInstance* Flag::fetch_pending_item(Game* g, Flag* destflag)
 		item->set_location(g, 0);
 
 		// wake up capacity wait queue
-		while(m_capacity_wait.size()) {
-			Worker* w = (Worker*)m_capacity_wait[0].get(g);
-
-			m_capacity_wait.erase(m_capacity_wait.begin());
-
-			if (!w)
-				continue;
-
-			log("Flag: wake up one from wait queue.\n");
-
-			if (w->wakeup_flag_capacity(g, this))
-				break;
-		}
+		wake_up_capacity_queue(g);
 
 		return item;
 	}
@@ -916,87 +980,98 @@ WareInstance* Flag::fetch_pending_item(Game* g, Flag* destflag)
 
 /*
 ===============
-Flag::update_item
+Flag::call_carrier
 
-Look at the given item and see if something needs to be done with it.
-If an item is going to the flag renotify_flag, the corresponding roads will
-_always_ be renotified, even if there was no change.
+If nextstep is not null, a carrier will be called to move this item to
+the given flag or building.
+If nextstep is null, the internal data will be reset to indicate that the
+item isn't going anywhere right now.
+
+nextstep is compared with the cached data, and a new carrier is only called
+if that data hasn't changed.
+This behaviour is overriden by m_always_call_for_step, which is set by
+update_items() to ensure that new carriers are called when roads are split,
+for example.
 ===============
 */
-void Flag::update_item(Game* g, PendingItem* pi, Flag* renotify_flag)
+void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 {
-	WareInstance* item = pi->item;
+	PendingItem* pi = 0;
+	int i;
 
-	assert(item->get_location(g) == this);
+	// Find the PendingItem entry
+	for(i = 0; i < m_item_filled; i++) {
+		if (m_items[i].item != item)
+			continue;
 
-	molog("Flag::update_item(%u)\n", item->get_serial());
-
-	if (item->is_moving(g))
-	{
-		PlayerImmovable* next = item->get_next_move_step(g);
-
-		assert(next);
-
-		if (next->get_type() == Map_Object::FLAG)
-		{
-			if (next == pi->flag && next != renotify_flag)
-				return; // nothing to do, move along
-
-			pi->flag = (Flag*)next;
-
-			for(int dir = 1; dir <= 6; dir++) {
-				Road* road = get_road(dir);
-				Flag* other;
-				Road::FlagId flagid;
-
-				if (!road)
-					continue;
-
-				if (road->get_flag(Road::FlagStart) == this) {
-					flagid = Road::FlagStart;
-					other = road->get_flag(Road::FlagEnd);
-				} else {
-					flagid = Road::FlagEnd;
-					other = road->get_flag(Road::FlagStart);
-				}
-
-				if (other != next)
-					continue;
-
-				// Yes, this is the road we want; inform it
-				if (road->notify_ware(g, flagid)) {
-					pi->pending = false;
-					return;
-				}
-
-				// If the road doesn't react to the ware immediately, we try other roads:
-				// They might lead to the same flag!
-			}
-
-			// Nothing found, just let it be picked up by somebody
-			pi->pending = true;
-			return;
-		}
-
-		pi->flag = 0;
-
-		if (next->get_type() == Map_Object::BUILDING)
-		{
-			if (next != get_building())
-				throw wexception("Flag::update_item: move to disjoint building");
-
-			molog("Flag::update_item: Tell building to fetch this item\n");
-
-			//get_building()->fetch_from_flag(g);
-			throw wexception("TODO: Building::fetch_from_flag");
-			return;
-		}
-
-		throw("Flag::update_item: can only move to flag or building");
+		pi = &m_items[i];
+		break;
 	}
 
-	// The item is idling for now.
-	pi->flag = 0;
+	assert(pi);
+
+	// Deal with the non-moving case quickly
+	if (!nextstep) {
+		pi->nextstep = 0;
+		pi->pending = false;
+		return;
+	}
+
+	// Find out whether we need to do anything
+	if (pi->nextstep == nextstep && pi->nextstep != m_always_call_for_flag)
+		return; // no update needed
+
+	molog("Flag::call_carrier(%u): Call\n", item->get_serial());
+
+	pi->nextstep = nextstep;
+	pi->pending = false;
+
+	// Deal with the building case
+	if (nextstep == get_building())
+	{
+		molog("Flag::call_carrier(%u): Tell building to fetch this item\n", item->get_serial());
+
+		if (!get_building()->fetch_from_flag(g)) {
+			pi->item->cancel_moving(g);
+			pi->item->update(g);
+		}
+
+		return;
+	}
+
+	// Deal with the normal (flag) case
+	assert(nextstep->get_type() == FLAG);
+
+	for(int dir = 1; dir <= 6; dir++) {
+		Road* road = get_road(dir);
+		Flag* other;
+		Road::FlagId flagid;
+
+		if (!road)
+			continue;
+
+		if (road->get_flag(Road::FlagStart) == this) {
+			flagid = Road::FlagStart;
+			other = road->get_flag(Road::FlagEnd);
+		} else {
+			flagid = Road::FlagEnd;
+			other = road->get_flag(Road::FlagStart);
+		}
+
+		if (other != nextstep)
+			continue;
+
+		// Yes, this is the road we want; inform it
+		if (road->notify_ware(g, flagid))
+			return;
+
+		// If the road doesn't react to the ware immediately, we try other roads:
+		// They might lead to the same flag!
+	}
+
+	// Nothing found, just let it be picked up by somebody
+	pi->pending = true;
+	return;
 }
 
 
@@ -1016,23 +1091,12 @@ Note: When two roads connect the same two flags, and one of these roads
 */
 void Flag::update_items(Game* g, Flag* other)
 {
+	m_always_call_for_flag = other;
+
 	for(int i = 0; i < m_item_filled; i++)
-		update_item(g, &m_items[i], other);
-}
+		m_items[i].item->update(g);
 
-
-/*
-===============
-Flag::update_item
-
-Called by item code when its moving state has changed.
-===============
-*/
-void Flag::update_item(Game* g, WareInstance* item)
-{
-	for(int i = 0; i < m_item_filled; i++)
-		if (m_items[i].item == item)
-			update_item(g, &m_items[i]);
+	m_always_call_for_flag = 0;
 }
 
 
@@ -1647,7 +1711,7 @@ bool Route::verify(Game *g)
 		
 		if (!flag->get_road(next))
 			return false;
-		
+
 		flag = next;
 	}
 
@@ -2542,6 +2606,8 @@ Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
 {
 	int best_totalcost = -1;
 	Warehouse *best_warehouse = 0;
+
+	assert(start->get_economy() == this);
 
 	for(uint i = 0; i < m_warehouses.size(); i++) {
 		Warehouse *wh = m_warehouses[i];

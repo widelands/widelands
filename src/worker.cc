@@ -219,7 +219,7 @@ void Worker::set_location(PlayerImmovable *location)
 		// Our location has been destroyed, we are now fugitives.
 		// Interrupt whatever we've been doing.
 		if (m_state > State_None)
-			interrupt_task(static_cast<Game*>(get_owner()->get_game()), false);
+			end_state(static_cast<Game*>(get_owner()->get_game()), false);
 
 		set_economy(0);
 	}
@@ -398,6 +398,13 @@ void Worker::stop_job_idleloop(Game* g)
 }
 
 
+/*
+===============
+Worker::set_job_dropoff
+
+Walk to the building's flag, drop the given item, and walk back inside.
+===============
+*/
 void Worker::set_job_dropoff(Game* g, WareInstance* item)
 {
 	assert(m_state == State_None);
@@ -405,6 +412,22 @@ void Worker::set_job_dropoff(Game* g, WareInstance* item)
 
 	m_state = State_DropOff;
 	set_carried_item(g, item);
+}
+
+
+/*
+===============
+Worker::set_job_fetchfromflag
+
+Walk to the building's flag, fetch an item from the flag that is destined for
+the building, and walk back inside.
+===============
+*/
+void Worker::set_job_fetchfromflag(Game* g)
+{
+	assert(m_state == State_None);
+
+	m_state = State_FetchFromFlag;
 }
 
 
@@ -543,6 +566,10 @@ void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 		run_state_dropoff(g, prev, success, nexthint);
 		break;
 
+	case State_FetchFromFlag:
+		run_state_fetchfromflag(g, prev, success, nexthint);
+		break;
+
 	default:
 		throw wexception("Worker::task_start_best: unhandled");
 	}
@@ -672,6 +699,10 @@ void Worker::do_end_state(Game* g, int oldstate, bool success)
 		molog("Worker::end_state [State_DropOff]\n");
 		break;
 
+	case State_FetchFromFlag:
+		molog("Worker::end_state [State_FetchFromFlag]\n");
+		break;
+
 	default:
 		throw wexception("Worker::do_end_state: unhandled");
 	}
@@ -722,6 +753,8 @@ void Worker::run_state_request(Game *g, uint prev, bool success, uint nexthing)
 			end_state(g, false);
 			return;
 		}
+
+		assert(get_economy() == location->get_economy());
 
 		if (!m_route)
 			m_route = new Route;
@@ -900,6 +933,7 @@ void Worker::run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthi
 }
 
 
+
 /*
 ===============
 Worker::run_state_dropoff
@@ -985,6 +1019,89 @@ void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
 	}
 
 	throw wexception("Worker: DropOff: TODO: return into non-warehouse");
+}
+
+
+/*
+===============
+Worker::run_state_fetchfromflag
+
+Go to the building's flag, fetch an item for the building, walk it into the
+building and assign back to building.
+===============
+*/
+void Worker::run_state_fetchfromflag(Game *g, uint prev, bool success, uint nexthint)
+{
+	PlayerImmovable* owner = get_location(g);
+	WareInstance* item = get_carried_item(g);
+
+	if (!owner) {
+		molog("Worker: FetchFromFlag: owner disappeared\n");
+		end_state(g, false);
+		return;
+	}
+
+	BaseImmovable* location = g->get_map()->get_immovable(get_position());
+
+	// If we haven't got the item yet, walk onto the flag
+	if (!item) {
+		if (location->get_type() == BUILDING) {
+			molog("Worker: FetchFromFlag: move from building to flag\n");
+
+			// TODO: add building exit throttle
+
+			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
+			return;
+		}
+
+		// This can't happen because of the owner check above
+		if (location->get_type() != FLAG)
+			throw wexception("MO(%u): FetchFromFlag: flag disappeared", get_serial());
+
+		item = ((Flag*)location)->fetch_pending_item(g, owner);
+
+		// The item has decided that it doesn't want to go to us after all
+		// In order to return to the warehouse, we're switching to State_DropOff
+		if (!item) {
+			molog("Worker: FetchFromFlag: item no longer on flag, switch to DropOff\n");
+
+			m_state = State_DropOff;
+			start_task_idle(g, get_descr()->get_idle_anim(), 20);
+			return;
+		}
+
+		set_carried_item(g, item);
+		start_task_idle(g, get_descr()->get_idle_anim(), 20);
+		return;
+	}
+
+	// Go back into the building
+	if (location->get_type() == FLAG) {
+		molog("Worker: FetchFromFlag: return to building\n");
+
+		start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+		return;
+	}
+
+	if (location->get_type() != BUILDING)
+		throw wexception("MO(%u): FetchFromFlag: building disappeared", get_serial());
+
+	assert(location == owner);
+
+	molog("Worker: FetchFromFlag: drop item\n");
+
+	item = fetch_carried_item(g);
+	item->set_location(g, location);
+	item->update(g); // this might remove the item and ack any requests
+
+	// We're back!
+	if (location->has_attribute(WAREHOUSE)) {
+		schedule_incorporate(g); // implicitly adds the ware
+		end_state(g, true);
+		return;
+	}
+
+	throw wexception("Worker: FetchFromFlag: TODO: return into non-warehouse");
 }
 
 

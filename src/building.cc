@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -180,7 +180,7 @@ Building* Building_Descr::create_constructionsite(bool logic)
 	ConstructionSite* csite = (ConstructionSite*)descr->create_object(true);
 	
 	csite->set_building(this);
-	
+
 	return csite;
 }
 
@@ -325,6 +325,25 @@ void Building::cleanup(Editor_Game_Base *g)
 
 	PlayerImmovable::cleanup(g);
 }
+
+
+/*
+===============
+Building::fetch_from_flag [virtual]
+
+This function is called by our base flag to indicate that some item on the
+flag wants to move into this building.
+Return true if we can service that request (even if it is delayed), or false
+otherwise.
+===============
+*/
+bool Building::fetch_from_flag(Game* g)
+{
+	molog("TODO: Implement Building::fetch_from_flag\n");
+
+	return false;
+}
+
 
 /*
 ===============
@@ -808,6 +827,31 @@ void Warehouse::destroy_wares(int id, int count)
 
 	get_economy()->remove_wares(id, count);
 }
+
+
+/*
+===============
+Warehouse::fetch_from_flag
+
+Launch a carrier to fetch an item from our flag.
+===============
+*/
+bool Warehouse::fetch_from_flag(Game* g)
+{
+	int carrierid;
+	Worker* worker;
+
+	carrierid = g->get_ware_id("carrier");
+
+	if (!m_wares.stock(carrierid)) // yep, let's cheat
+		create_wares(carrierid, 1);
+
+	worker = launch_worker(g, carrierid);
+	worker->set_job_fetchfromflag(g);
+
+	return true;
+}
+
 
 /*
 ===============

@@ -117,9 +117,9 @@ class Flag : public PlayerImmovable {
 
 private:
 	struct PendingItem {
-		WareInstance*	item;		// the item itself
-		bool				pending;	// if the item is pending
-		Flag*				flag;		// other flag that this item is sent to
+		WareInstance*		item;			// the item itself
+		bool					pending;		// if the item is pending
+		PlayerImmovable*	nextstep;	// next step that this item is sent to
 	};
 
 public:
@@ -154,10 +154,10 @@ public:
 	void add_item(Game* g, WareInstance* item);
 	bool has_pending_item(Game* g, Flag* destflag);
 	bool ack_pending_item(Game* g, Flag* destflag);
-	WareInstance* fetch_pending_item(Game* g, Flag* destflag);
+	WareInstance* fetch_pending_item(Game* g, PlayerImmovable* dest);
 
+	void call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep);
 	void update_items(Game* g, Flag* other);
-	void update_item(Game* g, WareInstance* item);
 
 protected:
 	virtual void init(Editor_Game_Base*);
@@ -165,7 +165,7 @@ protected:
 
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
-	void update_item(Game* g, PendingItem* pi, Flag* renotify_flag = 0);
+	void wake_up_capacity_queue(Game* g);
 
 private:
 	Coords			m_position;
@@ -179,6 +179,9 @@ private:
 	int				m_item_capacity;	// size of m_items array
 	int				m_item_filled;		// number of items currently on the flag
 	PendingItem*	m_items;				// items currently on the flag
+
+	Flag*				m_always_call_for_flag;	// call_carrier() will always call a carrier when
+														// the destination is the given flag
 
 	std::vector<Object_Ptr>	m_capacity_wait;	// workers waiting for capacity
 
