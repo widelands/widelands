@@ -33,7 +33,7 @@ this decreases the height of a field by a value
 class Editor_Noise_Height_Tool : public Editor_Tool {
    public:
       Editor_Noise_Height_Tool(Editor_Set_Height_Tool* sht) :
-        Editor_Tool(sht,sht) { m_upper_value=MAX_FIELD_HEIGHT/2; m_lower_value=10; m_sht=sht; }
+        Editor_Tool(sht,sht) { m_upper_value=14; m_lower_value=10; m_sht=sht; }
       virtual ~Editor_Noise_Height_Tool() { m_third=m_second=0; } // don't delete this, somone else will care
 
       virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
