@@ -83,7 +83,7 @@ EXTRA_DIST = README
 
 bin_PROGRAMS = wwfcreate 
 wwfcreate_LDADD = @SDL_LIBS@ ../src/profile.o ../src/growablearray.o ../src/myfile.o
-wwfcreate_SOURCES = main.cc 						confreader.h 						confreader.cc
+wwfcreate_SOURCES = main.cc 						confreader.h 						confreader.cc 						picturereader.cc
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../src/config.h
@@ -95,7 +95,7 @@ DEFS = @DEFS@ -I. -I$(srcdir) -I../src
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-wwfcreate_OBJECTS =  main.o confreader.o
+wwfcreate_OBJECTS =  main.o confreader.o picturereader.o
 wwfcreate_DEPENDENCIES =  ../src/profile.o ../src/growablearray.o \
 ../src/myfile.o
 wwfcreate_LDFLAGS = 
@@ -112,7 +112,7 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = tar
 GZIP_ENV = --best
-DEP_FILES =  .deps/confreader.P .deps/main.P
+DEP_FILES =  .deps/confreader.P .deps/main.P .deps/picturereader.P
 SOURCES = $(wwfcreate_SOURCES)
 OBJECTS = $(wwfcreate_OBJECTS)
 

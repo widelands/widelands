@@ -10,7 +10,8 @@ bin_PROGRAMS=wwfcreate
 wwfcreate_LDADD =@SDL_LIBS@ ../src/profile.o ../src/growablearray.o ../src/myfile.o
 wwfcreate_SOURCES=main.cc \
 						confreader.h \
-						confreader.cc
+						confreader.cc \
+						picturereader.cc
 
 #  uncomment the following if widelands requires the math library
 #widelands_LDADD=-lm

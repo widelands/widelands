@@ -73,7 +73,7 @@ SDL_LIBS_FOR_PLUGINS = @SDL_LIBS_FOR_PLUGINS@
 VERSION = @VERSION@
 src = @src@
 
-EXTRA_FLAGS = @SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O2 -g -fprofile-arcs -pg
+EXTRA_FLAGS = @SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -g
 #EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2
 # LDFLAGS=
 CFLAGS = $(EXTRA_FLAGS)
@@ -82,7 +82,7 @@ CXXFLAGS = $(EXTRA_FLAGS)
 # EXTRA_DIST=worlds pics 
 
 bin_PROGRAMS = widelands
-widelands_LDADD = @SDL_LIBS@ # -lefence 
+widelands_LDADD = @SDL_LIBS@
 widelands_SOURCES = main.cc 						unix_m.cc 						os.h 						singleton.h 						fileloc.cc 						fileloc.h 						myfile.h 						myfile.cc 						parser.h 						parser.cc 						options.cc 						options.h 						output.h 						graphic.cc 						pic.cc 						graphic.h 						input.h 						input.cc 						intro.cc 						intro.h 						cursor.cc 						cursor.h 						mainmenue.h 						mainmenue.cc 						ui.cc 						ui.h 						font.h 						font.cc 						errors.h 						main.h 						setup.cc 						setup.h 						counter.h 						counter.cc 						mydirent.cc 						mydirent.h 						singlepmenue.cc 						singlepmenue.h 						menuecommon.cc 						menuecommon.h 						growablearray.cc 						growablearray.h 						mytypes.h 						map.h 						map.cc 						game.cc 						game.h 						IntPlayer.cc 						IntPlayer.h 						mapview.h 						mapview.cc 						field.cc 						profile.cc
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

@@ -79,9 +79,9 @@ void Picture_Reader::read_picture(const char* name, PictureInfo* pic, ushort** d
 		return;
 
 	Binary_file* file = new Binary_file();
-	file->open(filename, File::For::READ);
+	file->open(filename, File::READ);
 	//printf("%s\n", filename);
-	if (file->get_state() != File::State::CLOSE)
+	if (file->get_state() != File::CLOSE)
 	{
 		if (strcmpi(ext, ".bmp") == 0)
 			this->read_bmp(file, pic, data);

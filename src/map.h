@@ -104,8 +104,8 @@ class Field {
 					 ~Field(void);
 
 					 inline uchar get_height(void) const { return height; }
-					 inline ushort	get_xpix(void) const { return xpix; }
-					 inline ushort get_ypix(void) const { return ypix; }
+					 inline int get_xpix(void) const { return xpix; }
+					 inline int get_ypix(void) const { return ypix; }
 
 					 // Get neigbor fields
 					 inline Field* get_ln(void) const { return ln; }
@@ -121,7 +121,7 @@ class Field {
 					 Field *ln, *rn, *tln, *trn, *bln, *brn;
 					 
 					 ushort xpos, ypos;
-					 uint	xpix, ypix;
+					 int	xpix, ypix;
 					 uchar height;
 };
 

@@ -43,7 +43,7 @@ namespace Graph {
 			* Returns: packed value
 			*/
 		  inline ushort pack_rgb(const uchar r, const uchar g, const uchar b) {
-					 return ((b>>3) + ((g>>3)<<5)+ ((r>>3)<<11) );
+					 return ((b>>3) + ((g>>2)<<5)+ ((r>>3)<<11) );
 		  }
 
 		  /** inline void Graph::unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b) ;
@@ -58,7 +58,7 @@ namespace Graph {
 			*/
 		  inline void unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b) {
 					 *r= ((clr<<3)>>11);
-					 *g= ((clr<<3)>>5);
+					 *g= ((clr<<2)>>5);
 					 *b= (clr<<3);
 		  }
 

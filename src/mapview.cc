@@ -104,14 +104,19 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 
 		  // ycheck
 		  if(ystop < 0) return; 
-		  if(ystart > (int)g_gr.get_yres()) return;
+		  if(ystart >= (int)g_gr.get_yres()) return;
 		
 		  // TEMP
-		  if(ystop >= (int) g_gr.get_yres()) return;
+		  // if(ystop >= (int) g_gr.get_yres()) return;
+		  
 					 
 		  get_starts(l,r, m, ystart, ystop);
 					 
+		  ystop= ystop>= (int)g_gr.get_yres() ? (int)(g_gr.get_yres())-1 : ystop;
+					 
 		  for(y_d= ystart<0 ? 0 : ystart; y_d<ystop; y_d++) {
+					 assert(y_d>=0); 
+
 					 xstart=(long)g_starts[y_d-ystart].border1;
 					 xstop=(long)g_stops[y_d-ystart].border1;
 
@@ -123,6 +128,7 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 
 					 xstart= xstart<0 ? 0 : xstart;
 					 xstop= xstop>= (int)g_gr.get_xres() ? (int)(g_gr.get_xres())-1 : xstop;
+								
 					 
 					 for(x_d=xstart; x_d<xstop; x_d++) {
 								g_gr.set_pixel(x_d, y_d, p->get_pixel(0, 0));
@@ -176,7 +182,8 @@ void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int yst
 
 		  // check, if this saves cycles
 		  if(r->get_ypix()-vpy <0 && l->get_ypix()-vpy <0) return;
-								
+		  if(r->get_ypix()-vpy >= (int)g_gr.get_yres() && l->get_ypix()-vpy >= (int)g_gr.get_yres()) return;
+
 		  slope=((l->get_xpix()-vpx)-(r->get_xpix()-vpx))<<16;
 
 		  if((r->get_ypix()-vpy)-(l->get_ypix()-vpy)) {
@@ -185,12 +192,12 @@ void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int yst
 					 slope=0;
 		  }
 
-//		  if(r->get_ypix()-vpy <0 ) cerr << "r kleiner" << endl;
-//		  if(l->get_ypix()-vpy <0 ) cerr << "r kleiner" << endl;
 		  
 		  x=(r->get_xpix()-vpx)<<16; 
 		  count=r->get_ypix()-vpy;
+
 		  if(count-ystart<0) { x+=slope*(ystart-count); count=ystart; }
+
 		  while(count < l->get_ypix()-vpy) {
 					 start[count-ystart].border1=x>>16;
 					 x+=slope;
