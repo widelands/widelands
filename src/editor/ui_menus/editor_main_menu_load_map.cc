@@ -44,7 +44,7 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
-	: UIWindow(parent, 0, 0, 420, 300, "Load Map")
+	: UIWindow(parent, 0, 0, 500, 300, "Load Map")
 {
    m_parent=parent;
 
@@ -86,7 +86,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    // the descriptive areas
    // Name
    posx=get_inner_w()/2+spacing;
-   posy+=40;
+   posy+=20;
    new UITextarea(this, posx, posy, 150, 20, "Name: ", Align_CenterLeft);
    m_name=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
