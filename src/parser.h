@@ -20,6 +20,8 @@
 #ifndef __S__PARSER_H
 #define __S__PARSER_H
 
+#include "mytypes.h"
+
 #define MAX_OPT_LENGTH	255
 #define MAX_OPTS		1024
 /** class Parser
@@ -56,7 +58,7 @@ class Parser {
 								Type type;
 					 } opts[MAX_OPTS];
 					 
-					 unsigned int nopts;
+					 uint nopts;
 
 					 /* don't call this functions */
 					 Parser(const Parser&);

@@ -35,17 +35,17 @@
 
 #include <SDL/SDL_thread.h>
 
-int click(const bool b, const unsigned int x, const unsigned int y, void* ) {
+int click(const bool b, const uint x, const uint y, void* ) {
 		  if(g_ui.handle_click(1, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
 		  return INPUT_HANDLED;
 }
 
-int mcf1(const bool b, const unsigned int x, const unsigned int y, void*) {
+int mcf1(const bool b, const uint x, const uint y, void*) {
 		  if(g_ui.handle_click(2, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
 		  return INPUT_HANDLED;
 }
 
-int mmf(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, 
+int mmf(const uint x, const uint y, const int xdiff, const int ydiff, const bool b1, const bool b2, 
 					 void* ) {
 		  g_gr.register_update_rect(x, y, g_cur.get_w(), g_cur.get_h());
 		  g_gr.register_update_rect(g_ip.get_mplx(), g_ip.get_mply(), g_cur.get_w(), g_cur.get_h());
@@ -78,8 +78,8 @@ void main_menue(void) {
 
 		  // Set to 640x480 so that we know on what we are and the pictures
 		  // look good
-		  //unsigned int lx=g_gr.get_xres();
-		  //unsigned int ly=g_gr.get_yres();
+		  //uint lx=g_gr.get_xres();
+		  //uint ly=g_gr.get_yres();
 		  g_gr.set_mode(640, 480, g_gr.get_mode());
 		  g_ip.set_max_cords(640-g_cur.get_w(), 480-g_cur.get_h());
 

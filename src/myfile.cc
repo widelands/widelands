@@ -326,7 +326,7 @@ int Ascii_file::write(char* buf, int size) {
  *
  * Returns: bytes read or -1
  */
-void Ascii_file::read_line(char* buf, unsigned int size) {
+void Ascii_file::read_line(char* buf, uint size) {
 		  if(get_state() != OPEN) return ;
 
 		  set_state(READS);
@@ -334,7 +334,7 @@ void Ascii_file::read_line(char* buf, unsigned int size) {
 		  char* ret;
 		  ret=fgets(buf, size, f);
 
-		  for(unsigned int i=0; i<size; i++) {
+		  for(uint i=0; i<size; i++) {
 					 if(buf[i]=='\n') {
 								if(i && buf[i-1]=='\r') {
 										  buf[i-1]='\0';

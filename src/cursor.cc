@@ -86,7 +86,7 @@ void Cursor::set_pic(Pic* p) {
 		  pic=p;
 }
 
-/** void Cursor::draw(const unsigned int x, const unsigned int y)
+/** void Cursor::draw(const uint x, const uint y)
  *
  * Draws the current picture at the given location on the screen
  * 
@@ -94,7 +94,7 @@ void Cursor::set_pic(Pic* p) {
  * 		y	y pos of cursor
  * Returns: Nothing
  */
-void Cursor::draw(const unsigned int x, const unsigned int y) {
+void Cursor::draw(const uint x, const uint y) {
 		  if(!show_c) return; 			 
 		  Graph::draw_pic(pic, x, y, 0,0, pic->get_w(), pic->get_h());
 }

@@ -40,14 +40,14 @@ class Button {
 		  Button& operator=(const Button&);
 
 		  public:
-					 Button(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const unsigned int, Pic*, const unsigned int,
-										  const unsigned int);
+					 Button(const uint, const uint, const uint, const uint, const uint, Pic*, const uint,
+										  const uint);
 					 ~Button();
 
 					 void set_pic(Pic*);
 					 int draw();
 
-					 /** static void Button::set_bg(Pic* p, unsigned int n) 
+					 /** static void Button::set_bg(Pic* p, uint n) 
 					  *
 					  * This function associates the picture with a background
 					  *
@@ -55,7 +55,7 @@ class Button {
 					  * 		 n 	number of bg to associate p with
 					  * Returns: Nothing
 					  */
-					 static void set_bg(Pic* p, unsigned int n) { 
+					 static void set_bg(Pic* p, uint n) { 
 								assert(n<3); 
 								Pic* ep;
 								
@@ -65,8 +65,8 @@ class Button {
 								
 							
 								
-								unsigned int mx, my;
-								unsigned short clr;
+								uint mx, my;
+								ushort clr;
 								for(my=0; my<(p->get_h()); my++) {
 										  mx=0;
 										  clr=p->get_pixel(mx, my);
@@ -78,14 +78,14 @@ class Button {
 								}
 					 }
 
-					 /** static unsigned int Button::get_border(void) 
+					 /** static uint Button::get_border(void) 
 					  *
 					  * Returns the width of the borders in pixel
 					  *
 					  * Args: none
 					  * Returns: width in pixel of button borders
 					  */
-					 static unsigned int get_border(void) { return 4; }
+					 static uint get_border(void) { return 4; }
 					
 					 /** void register_func(BUT_FUNC f, void* arg)
 					  *
@@ -115,10 +115,10 @@ class Button {
 					 // some functions to set informations and to get informations
 					 inline void set_bright(const bool b) { if(benlighted!=b) { benlighted=b; needs_draw=true; }  }
 					 inline void set_pressed(const bool b) { if(bpressed!=b) { bpressed=b; needs_draw=true ; } }
-					 inline unsigned int get_xpos(void) { return x+xp; }
-					 inline unsigned int get_ypos(void) { return y+yp; }
-					 inline unsigned int get_w(void) { return w; }
-					 inline unsigned int get_h(void) { return h; }
+					 inline uint get_xpos(void) { return x+xp; }
+					 inline uint get_ypos(void) { return y+yp; }
+					 inline uint get_w(void) { return w; }
+					 inline uint get_h(void) { return h; }
 					 inline bool is_pressed(void) { return bpressed; } 
 					 
 		  private:
@@ -126,7 +126,7 @@ class Button {
 					 bool bpressed;
 					 bool	benlighted;
 					 static Pic bg0, bg1, bg2, bg0e, bg1e, bg2e;
-					 unsigned int x, y, w, h, xp, yp;
+					 uint x, y, w, h, xp, yp;
 					 BUT_FUNC func; 
 					 void* funca;
 					 
@@ -155,33 +155,33 @@ class Textarea {
 								CENTER
 					 };
 					
-					 Textarea(const unsigned int, const unsigned int, const char* , const Align, const unsigned int, const unsigned int, Pic*, const unsigned int,
-										  const unsigned int);
-					 Textarea(const unsigned int, const unsigned int, const unsigned int, const Align, Pic*, const unsigned int, const unsigned int);
+					 Textarea(const uint, const uint, const char* , const Align, const uint, const uint, Pic*, const uint,
+										  const uint);
+					 Textarea(const uint, const uint, const uint, const Align, Pic*, const uint, const uint);
 					 ~Textarea(void);
 					 
 					 void set_text(const char*);
 					 void draw(void) const ;
 					 
-					 /** static void set_font(unsigned int n)
+					 /** static void set_font(uint n)
 					  * This function sets the font to use for textareas
 					  * defaults to zero
 					  *
 					  * Args: n 	font to use
 					  * Returns:	nothing
 					  */
-					 static void set_font(unsigned int n) { nfont=n; }
+					 static void set_font(uint n) { nfont=n; }
 			
 					 // some information funcs
-					 inline unsigned int get_xpos(void) { return x+xp; }
-					 inline unsigned int get_ypos(void) { return y+yp; }
-					 inline unsigned int get_w(void) { return w; }
-					 inline unsigned int get_h(void) { return h; }
+					 inline uint get_xpos(void) { return x+xp; }
+					 inline uint get_ypos(void) { return y+yp; }
+					 inline uint get_w(void) { return w; }
+					 inline uint get_h(void) { return h; }
 	
 					 
 		  private: 
-					 static unsigned int nfont;
-					 unsigned int x, y, w, h, xp, yp;
+					 static uint nfont;
+					 uint x, y, w, h, xp, yp;
 					 Align al;
 					 
 					 Pic* txt;
@@ -252,24 +252,24 @@ class Window {
 					 // The next two functions are there to get the different between asked window size and given window size
 					 // Ex: you want a 100x100 window. Now, the User_Interface class makes sure that border widths and top,bottom heights
 					 // are added to the size and still the window musn't leave the screen on any edges.
-					 inline const static unsigned int get_border(void) { return (CORNER<<1); }
+					 inline const static uint get_border(void) { return (CORNER<<1); }
 
 					 // inline functions to get some informations
-					 inline unsigned int get_xpos(void) { return x; }
-					 inline unsigned int get_ypos(void) { return y; }
-					 inline unsigned int get_w(void) { return w; }
-					 inline unsigned int get_h(void) { return h; }
+					 inline uint get_xpos(void) { return x; }
+					 inline uint get_ypos(void) { return y; }
+					 inline uint get_w(void) { return w; }
+					 inline uint get_h(void) { return h; }
 					 inline Flags get_flags(void) { return myf; }					 
 					 
-					 int handle_click(const unsigned int, const bool, const unsigned int, const unsigned int);
-					 int handle_mm(const unsigned int, const unsigned int, const bool, const bool);
+					 int handle_click(const uint, const bool, const uint, const uint);
+					 int handle_mm(const uint, const uint, const bool, const bool);
 					 void draw(void);	
 					 void set_new_bg(Pic* p);
 					 
 					 // creation functions
-					 Textarea* create_textarea(const unsigned int, const unsigned int, const unsigned int, const Textarea::Align = Textarea::LEFTA);
-					 Textarea* create_textarea(const unsigned int, const unsigned int, const char* ,  Textarea::Align = Textarea::LEFTA);
-					 Button*   create_button(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const unsigned int);
+					 Textarea* create_textarea(const uint, const uint, const uint, const Textarea::Align = Textarea::LEFTA);
+					 Textarea* create_textarea(const uint, const uint, const char* ,  Textarea::Align = Textarea::LEFTA);
+					 Button*   create_button(const uint, const uint, const uint, const uint, const uint);
 
 					 //					 void set_closefunc(...)
 
@@ -278,22 +278,22 @@ class Window {
 
 		  private:
 					 // Only friends can create and destroy and move us!
-					 void set_pos(const unsigned int, const unsigned int); 
-					 Window(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Flags); 
+					 void set_pos(const uint, const uint); 
+					 Window(const uint, const uint, const uint, const uint, const Flags); 
 					 ~Window();
 					 void redraw_win(void);
 					 
-					 unsigned int x, y, w, h;
+					 uint x, y, w, h;
 					 Pic* winpic;
 					 Pic* own_bg;
 					 Flags myf;
 				
 					 // for textareas
-					 unsigned int nta;
+					 uint nta;
 					 Textarea** ta;
 					
 					 // for buttons
-					 unsigned int nbut;
+					 uint nbut;
 					 Button** but;
 
 					 //closefunc dfkj;
@@ -325,12 +325,12 @@ class User_Interface : public Singleton<User_Interface> {
 		  User_Interface(void);
 		  ~User_Interface(void);
 		  
-		  Window* create_window(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Window::Flags=Window::DEFAULT); 
+		  Window* create_window(const uint, const uint, const uint, const uint, const Window::Flags=Window::DEFAULT); 
 		  void delete_window(Window*); 
-		  void move_window(Window*, const unsigned int, const unsigned int);
+		  void move_window(Window*, const uint, const uint);
 		  void draw(void);
-		  int handle_mm(const unsigned int, const unsigned int, const int, const int, const bool, const bool, void*);
-		  int handle_click(const unsigned int, const bool, const unsigned int, const unsigned int, void* );
+		  int handle_mm(const uint, const uint, const int, const int, const bool, const bool, void*);
+		  int handle_click(const uint, const bool, const uint, const uint, void* );
 
 		  private:
 		  struct win_p {

@@ -74,7 +74,7 @@ namespace Graph {
 					 SDL_Quit();
 		  }
 
-		  /** void Graphic::set_mode(const unsigned short x, const unsigned short y, const Mode m)
+		  /** void Graphic::set_mode(const ushort x, const ushort y, const Mode m)
 			*
 			* This function sets a new graphics mode.
 			*
@@ -83,7 +83,7 @@ namespace Graph {
 			* 		m	either windows or fullscreen
 			* Returns: Nothing
 			*/
-		  void Graphic::set_mode(const unsigned short x, const unsigned short y, const Mode m) {
+		  void Graphic::set_mode(const ushort x, const ushort y, const Mode m) {
 					 if(sc)
 								SDL_FreeSurface(sc);
 
@@ -96,7 +96,7 @@ namespace Graph {
 					 mode=m;
 					 xres=x; 
 					 yres=y;
-					 pixels=(unsigned short*) sc->pixels;
+					 pixels=(ushort*) sc->pixels;
 
 					 st=STATE_OK;
 					 
@@ -105,7 +105,7 @@ namespace Graph {
 					 return;
 		  }
 
-		  /** void Graphic::register_update_rect(const unsigned short x, const unsigned short y, const unsigned short w, const unsigned short h);
+		  /** void Graphic::register_update_rect(const ushort x, const ushort y, const ushort w, const ushort h);
 			*
 			* This registers a rect of the screen for update 
 			*
@@ -114,7 +114,7 @@ namespace Graph {
 			* 			w	width
 			* 			h	height
 			*/
-		  void Graphic::register_update_rect(const unsigned short x, const unsigned short y, const unsigned short w, const unsigned short h) {
+		  void Graphic::register_update_rect(const ushort x, const ushort y, const ushort w, const ushort h) {
 					 if(nupr>=MAX_RECTS) { 
 								bneeds_fs_update=true; 
 								return; 
@@ -143,7 +143,7 @@ namespace Graph {
 					 } else {
 	/*							cerr << "##########################" << endl;
 								cerr << nupr << endl;
-								for(unsigned int i=0; i<nupr; i++) 
+								for(uint i=0; i<nupr; i++) 
 										  cerr << upd_rects[i].x << ":" << upd_rects[i].y << ":" << 
 													 upd_rects[i].w << ":" << upd_rects[i].h << endl;
 								cerr << "##########################" << endl;
@@ -154,8 +154,8 @@ namespace Graph {
 					 bneeds_update=false;
 		  }
 		  
-		  /** void draw_pic(Pic* p, const unsigned short d_x_pos, const unsigned short d_y_pos,  const unsigned short p_x_pos, 
-			* 		const unsigned short p_y_pos, const unsigned short i_w, const unsigned short i_h)
+		  /** void draw_pic(Pic* p, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
+			* 		const ushort p_y_pos, const ushort i_w, const ushort i_h)
 			*
 			* 	This functions plots a picture onto the current screen
 			*	
@@ -170,11 +170,11 @@ namespace Graph {
 			* 			i_h		height
 			* 	returns: Nothing
 			*/
-		  void draw_pic(Pic* p, const unsigned short d_x_pos, const unsigned short d_y_pos,  const unsigned short p_x_pos, const unsigned short p_y_pos, 
-								const unsigned short i_w, const unsigned short i_h) {
-					 unsigned int clr;
-					 unsigned int w=i_w;
-					 unsigned int h=i_h; 
+		  void draw_pic(Pic* p, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, const ushort p_y_pos, 
+								const ushort i_w, const ushort i_h) {
+					 uint clr;
+					 uint w=i_w;
+					 uint h=i_h; 
 
 					 if(d_x_pos+w>g_gr.get_xres()) w=g_gr.get_xres()-d_x_pos;
 					 if(d_y_pos+h>g_gr.get_yres()) h=g_gr.get_yres()-d_y_pos;
@@ -183,11 +183,11 @@ namespace Graph {
 								// Slow blit, checking for clrkeys. This could probably speed up by copying
 								// 2 pixels (==4bytes==register width)
 								// in one rush. But this is a nontrivial task
-								for(unsigned long  y=0; y<h; y++) {
+								for(ulong  y=0; y<h; y++) {
 										  clr=p->get_pixel(p_x_pos, p_y_pos+y);
 										  if(clr != p->get_clrkey()) g_gr.set_pixel(d_x_pos, d_y_pos+y, clr);
 										  else g_gr.set_cpixel(d_x_pos, d_y_pos+y);
-										  for(unsigned long x=1; x<w; x++) {
+										  for(ulong x=1; x<w; x++) {
 													 clr=p->get_npixel();
 													 if(clr != p->get_clrkey()) g_gr.set_npixel(clr);
 													 else g_gr.npixel();
@@ -198,11 +198,11 @@ namespace Graph {
 										  // one memcpy and we're settled
 										  memcpy(g_gr.pixels, p->pixels, (p->get_w()*p->get_h()<<1));
 								} else {
-										  unsigned long poffs=p->get_w()*p_y_pos + p_x_pos;
-										  unsigned long doffs=g_gr.get_xres()*d_y_pos + d_x_pos;
+										  ulong poffs=p->get_w()*p_y_pos + p_x_pos;
+										  ulong doffs=g_gr.get_xres()*d_y_pos + d_x_pos;
 
 										  // fast blitting, using memcpy
-										  for(unsigned long y=0; y<h; y++) {
+										  for(ulong y=0; y<h; y++) {
 													 memcpy(g_gr.pixels+doffs, p->pixels+poffs, w<<1); // w*sizeof(short) 
 													 doffs+=g_gr.get_xres();
 													 poffs+=p->get_w();
@@ -211,8 +211,8 @@ namespace Graph {
 					 }
 		  }
 											        
-		  /** void copy_pic(Pic* dst, Pic* src, const unsigned short d_x_pos, const unsigned short d_y_pos,  const unsigned short p_x_pos, 
-			* 		const unsigned short p_y_pos, const unsigned short i_w, const unsigned short i_h)
+		  /** void copy_pic(Pic* dst, Pic* src, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
+			* 		const ushort p_y_pos, const ushort i_w, const ushort i_h)
 			*
 			* 	This functions plots a picture into an other
 			*
@@ -228,32 +228,32 @@ namespace Graph {
 			* 			i_h		height
 			* 	returns: Nothing
 			*/
-		  void copy_pic(Pic* dst, Pic* src, const unsigned short d_x_pos, const unsigned short d_y_pos,  const unsigned short p_x_pos, 
-								const unsigned short p_y_pos, const unsigned short i_w, const unsigned short i_h) {
-					 unsigned short clr;
-					 unsigned int w=i_w;
-					 unsigned int h=i_h; 
+		  void copy_pic(Pic* dst, Pic* src, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
+								const ushort p_y_pos, const ushort i_w, const ushort i_h) {
+					 ushort clr;
+					 uint w=i_w;
+					 uint h=i_h; 
 
 					 if(d_x_pos+w>dst->get_w()) w=dst->get_w()-d_x_pos;
 					 if(d_y_pos+h>dst->get_h()) h=dst->get_h()-d_y_pos;
 
 					if(src->has_clrkey() && (dst->get_clrkey()!=src->get_clrkey())) {
-								for(unsigned long  y=0; y<h; y++) {
+								for(ulong  y=0; y<h; y++) {
 										  clr=src->get_pixel(p_x_pos, p_y_pos+y);
 										  if(clr != src->get_clrkey()) dst->set_pixel(d_x_pos, d_y_pos+y, clr);
 										  else dst->set_cpixel(d_x_pos, d_y_pos+y);
-										  for(unsigned long x=1; x<w; x++) {
+										  for(ulong x=1; x<w; x++) {
 													 clr=src->get_npixel();
 													 if(clr != src->get_clrkey()) dst->set_npixel(clr);
 													 else dst->npixel();
 										  }
 								}
 					 } else {
-								unsigned long soffs=src->get_w()*p_y_pos + p_x_pos;
-								unsigned long doffs=dst->get_w()*d_y_pos + d_x_pos;
+								ulong soffs=src->get_w()*p_y_pos + p_x_pos;
+								ulong doffs=dst->get_w()*d_y_pos + d_x_pos;
 
 								// fast blitting, using memcpy
-								for(unsigned long y=0; y<h; y++) {
+								for(ulong y=0; y<h; y++) {
 										  memcpy(dst->pixels+doffs, src->pixels+soffs, w<<1); // w*sizeof(short) 
 										  doffs+=dst->get_w();
 										  soffs+=src->get_w();

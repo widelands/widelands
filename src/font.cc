@@ -41,7 +41,7 @@
  * Returns: Nothing
  */
 Font_Handler::Font_Handler(void) {
-		  for (unsigned int i=0; i<MAX_FONTS; i++) {
+		  for (uint i=0; i<MAX_FONTS; i++) {
 					 w[i]=0;
 					 h[i]=0;
 					 pics[i]=0;
@@ -56,14 +56,14 @@ Font_Handler::Font_Handler(void) {
  * Returns: Nothing
  */
 Font_Handler::~Font_Handler(void) {
-		  for (unsigned int i=0; i<MAX_FONTS; i++) {
+		  for (uint i=0; i<MAX_FONTS; i++) {
 					 w[i]=0;
 					 h[i]=0;
 					 if(pics[i]) delete pics[i];
 		  }
 }
 
-/** void Font_Handler::set_font(unsigned short f, Graph::Pic * p, unsigned short w, unsigned short h)
+/** void Font_Handler::set_font(ushort f, Graph::Pic * p, ushort w, ushort h)
  *
  * This registers a certain font with the given
  * objects
@@ -74,7 +74,7 @@ Font_Handler::~Font_Handler(void) {
  * 	  	h	height of one char
  *	Returns: Nothing
  */
-void Font_Handler::set_font(unsigned short f, Graph::Pic * p, unsigned short gw, unsigned short gh) {
+void Font_Handler::set_font(ushort f, Graph::Pic * p, ushort gw, ushort gh) {
 // was soll das denn hier? hat keine auswirkung auf das assert
 //		  assert(f<MAX_FONTS && "attempt to register a font with a big number, which is not allowed!");
 		  assert(f<MAX_FONTS);
@@ -85,7 +85,7 @@ void Font_Handler::set_font(unsigned short f, Graph::Pic * p, unsigned short gw,
 		  pics[f]=p;
 }
 		 
-/** Pic* Font_Handler::get_string(const unsigned char* str, const unsigned short f);
+/** Pic* Font_Handler::get_string(const uchar* str, const ushort f);
  *
  * This function constructs a Picture containing the given text and
  * returns it. It just makes ONE line. Not a whole paragraph
@@ -94,19 +94,19 @@ void Font_Handler::set_font(unsigned short f, Graph::Pic * p, unsigned short gw,
  * 		f		Font to use
  * Returns:	Pointer to picture, caller must free it later on
  */
-Pic* Font_Handler::get_string(const char* str, const unsigned short f) {
+Pic* Font_Handler::get_string(const char* str, const ushort f) {
 // siehe oben; keine auswirkung auf das assert
 //		  assert(f<MAX_FONTS && "attempt to get a string with a font with a big number, which is not allowed!");
 		  assert(f<MAX_FONTS);
 		  assert(pics[f]);
 		  
 		  char* buf = new char[strlen(str)+1];
-		  unsigned char c;
-		  unsigned int n=0;
-		  unsigned int x=0;
+		  uchar c;
+		  uint n=0;
+		  uint x=0;
 		  
-		  for(unsigned int i=0; i<strlen(str); i++) {
-					 c=(unsigned char) str[i];
+		  for(uint i=0; i<strlen(str); i++) {
+					 c=(uchar) str[i];
 					 if(c=='\t' || c=='\r' || c=='\n' || c=='\b' || c=='\a') continue;
 					 buf[n]=c;
 					 ++n;
@@ -119,7 +119,7 @@ Pic* Font_Handler::get_string(const char* str, const unsigned short f) {
 		  retval->set_size(strlen(buf)*w[f], h[f]);
 		  retval->set_clrkey(pics[f]->get_clrkey());
 
-		  for(unsigned int j=0; j<strlen(buf); j++) {
+		  for(uint j=0; j<strlen(buf); j++) {
 					 c=buf[j];
 					 if(c < 32  || c > 127) {
 								// c is NOT an international ASCII char, we skip it silently

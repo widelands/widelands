@@ -19,6 +19,7 @@
 
 // 2002-02-10	sft+	added config-existing check in handle_options
 
+#include "mytypes.h"
 #include "options.h"
 #include "parser.h"
 #include "myfile.h"
@@ -85,7 +86,7 @@ struct Options {
 ofstream out, err;
 
 // Declaratiosn
-static int parse_command_line(unsigned int, char**, Options*);
+static int parse_command_line(uint, char**, Options*);
 static int parse_conf_file(Ascii_file&, Options*);
 static int write_conf_file(Options*);
 static void tell_user(const char*);
@@ -242,7 +243,7 @@ static int parse_conf_file(Ascii_file &f, Options* o) {
 		  return RET_OK;
 }
 
-/** static int parse_command_line(unsigned int argn, char** argc, Options* o) 
+/** static int parse_command_line(uint argn, char** argc, Options* o) 
  *
  * Parses the standart cmd line of the program
  *
@@ -252,7 +253,7 @@ static int parse_conf_file(Ascii_file &f, Options* o) {
  * 
  * Returns: RET_OK on success
  */
-static int parse_command_line(unsigned int argn, char** argc, Options* o) {
+static int parse_command_line(uint argn, char** argc, Options* o) {
 		  Parser p;
 		  char output[1024];
 		  
@@ -294,7 +295,7 @@ static int parse_command_line(unsigned int argn, char** argc, Options* o) {
 		  p.register_bool_opt("--help", &o->show_usage);
 		  p.register_bool_opt("--version", &o->show_version);
 		  
-		  for(unsigned int i=1; i<argn; i++) {
+		  for(uint i=1; i<argn; i++) {
 					 if(p.parse_line(argc[i])) {
 								strcpy(output, "Parsing error on arg: ");
 								strcat(output, argc[i]);
@@ -316,7 +317,7 @@ static int parse_command_line(unsigned int argn, char** argc, Options* o) {
  * Args: argn 	number of cmdline args
  * 		argc	cmdline args
  */
-void handle_options(unsigned int argn, char** argc) {
+void handle_options(uint argn, char** argc) {
 		  Ascii_file f;
 		  Options o;
 

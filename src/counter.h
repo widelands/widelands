@@ -21,6 +21,7 @@
 #define __S__COUNTER_H
 
 #include <SDL/SDL.h>
+#include "mytypes.h"
 
 /** class Counter
  *
@@ -39,14 +40,14 @@ class Counter {
 					 void start(void) { ticks=SDL_GetTicks(); is_running=1; }
 					 void pause(const bool b) { is_running=b; }
 					 
-					 inline unsigned long get_ticks(void) { 
+					 inline ulong get_ticks(void) { 
 								if(is_running) return SDL_GetTicks()-ticks;
 								return ticks; 
 					 }
 		  
 		  private:
 					 bool is_running;
-					 unsigned long ticks;
+					 ulong ticks;
 };
 
 #endif /* __S__COUNTER_H */

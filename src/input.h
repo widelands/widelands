@@ -20,11 +20,14 @@
 #ifndef __S__INPUT_H
 #define __S__INPUT_H
 
-typedef int (*MOUSE_CLICK_FUNCTION)(const bool, const unsigned int, const unsigned int, void*);
-typedef int (*MOUSE_MOVE_FUNCTION)(const unsigned int, const unsigned int, const signed int, const signed int, const bool, const bool, void*);
+#include "singleton.h"
+#include "mytypes.h"
+
+
+typedef int (*MOUSE_CLICK_FUNCTION)(const bool, const uint, const uint, void*);
+typedef int (*MOUSE_MOVE_FUNCTION)(const uint, const uint, const signed int, const signed int, const bool, const bool, void*);
 typedef int (*KBD_HANDLER)(const char*, void*);
 
-#include "singleton.h"
 
 /** class Input 
  *
@@ -52,12 +55,12 @@ class Input : public Singleton<Input> {
 					 void register_mmf(const MOUSE_MOVE_FUNCTION, void* = 0);
 					 void register_mcf(const MOUSE_CLICK_FUNCTION, const Button, void* = 0);
 					 void register_kbdh(const KBD_HANDLER, void* = 0);
-					 void set_mouse_pos(const unsigned int, const unsigned int);
+					 void set_mouse_pos(const uint, const uint);
 					 void handle_pending_input(void);
 					 void grab_input(const bool);
 					 void swap_buttons(const bool);
-					 void set_mouse_speed(const unsigned int);
-					 void set_max_cords(const unsigned int, const unsigned int);
+					 void set_mouse_speed(const uint);
+					 void set_max_cords(const uint, const uint);
 
 					 /** inline bool Input::should_die(void) 
 					  *
@@ -69,28 +72,28 @@ class Input : public Singleton<Input> {
 					  */
 					 inline bool should_die(void) { return bshould_die; }
 					 
-					 /** inline unsigned int Input::get_mpx(void) 
+					 /** inline uint Input::get_mpx(void) 
 					  *
 					  * This returns the X mouse pos
 					  * 
 					  * Args: None
 					  * Returns: mouse x cord
 					  */
-					 inline unsigned int get_mpx(void) { return mpx; }
+					 inline uint get_mpx(void) { return mpx; }
 
-					 /** inline unsigned int Input::get_mpy(void) 
+					 /** inline uint Input::get_mpy(void) 
 					  *
 					  * This returns the Y mouse pos
 					  * 
 					  * Args: None
 					  * Returns: mouse y cord
 					  */
-					 inline unsigned int get_mpy(void) { return mpy; }
+					 inline uint get_mpy(void) { return mpy; }
 
 
 					 // functions to get the last mouse position
-					 inline unsigned int get_mplx(void) { return mplx; }
-					 inline unsigned int get_mply(void) { return mply; }
+					 inline uint get_mplx(void) { return mplx; }
+					 inline uint get_mply(void) { return mply; }
 
 					 /** inline bool Input::is_but_pressed(const Button b) 
 					  *
@@ -108,9 +111,9 @@ class Input : public Singleton<Input> {
 					void* mmfa;
 					KBD_HANDLER kbdh;
 					void *kbdha;
-					unsigned int mpx, mpy, mplx, mply;
+					uint mpx, mpy, mplx, mply;
 					float mouse_speed;
-					unsigned int maxx, maxy;
+					uint maxx, maxy;
 					bool buts_swapped;
 					bool input_grabbed;
 					bool b1_pressed, b2_pressed;

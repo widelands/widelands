@@ -20,8 +20,9 @@
 #ifndef __MYTYPES_H
 #define __MYTYPES_H
 
-typedef unsigned char	uchar;
-typedef unsigned short	ushort;
-typedef unsigned int	uint;
+typedef unsigned char uchar;
+typedef unsigned short ushort;
+typedef unsigned int uint;
+typedef unsigned long ulong;
 
 #endif //__MYTYPES_H

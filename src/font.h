@@ -50,28 +50,28 @@ class Font_Handler : public Singleton<Font_Handler> {
 					 ~Font_Handler();
 
 					 
-					 void set_font(const unsigned short, Pic*, const unsigned short, const unsigned short);
-					 Pic* get_string(const char*, const unsigned short);
+					 void set_font(const ushort, Pic*, const ushort, const ushort);
+					 Pic* get_string(const char*, const ushort);
 					 
-					 /** inline unsigned short get_fh(unsigned short f) 
+					 /** inline ushort get_fh(ushort f) 
 					  *
 					  * This function returns the height of the given font
 					  * Args: f	which font to check
 					  * Returns: height
 					  */
-					 inline unsigned short get_fh(unsigned short f) { assert(f<MAX_FONTS); assert(h[f]); return h[f]; }
+					 inline ushort get_fh(ushort f) { assert(f<MAX_FONTS); assert(h[f]); return h[f]; }
 					 
-					 /** inline unsigned short get_fw(unsigned short f) 
+					 /** inline ushort get_fw(ushort f) 
 					  *
 					  * This function returns the width of the given font
 					  * Args: f	which font to check
 					  * Returns: width
 					  */
-					 inline unsigned short get_fw(unsigned short f) { assert(f<MAX_FONTS); assert(w[f]); return w[f]; }
+					 inline ushort get_fw(ushort f) { assert(f<MAX_FONTS); assert(w[f]); return w[f]; }
 					 
 		  private:
-					 unsigned short w[MAX_FONTS];
-					 unsigned short h[MAX_FONTS];
+					 ushort w[MAX_FONTS];
+					 ushort h[MAX_FONTS];
 					 Pic*	pics[MAX_FONTS];
 		  
 };

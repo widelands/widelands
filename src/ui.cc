@@ -51,7 +51,7 @@ Pic Window::top;
 Pic Window::bot;
 Pic Window::bg;
 	
-/** Window::Window(const unsigned int px, const unsigned int py, const unsigned int wi, const unsigned int he, const unsigned int gid, 
+/** Window::Window(const uint px, const uint py, const uint wi, const uint he, const uint gid, 
  * 	const Flags f) 
  *
  * 	This is the constructor with which a window gets created
@@ -62,7 +62,7 @@ Pic Window::bg;
  * 			h	height of window
  * 			f	what window to create
  */
-Window::Window(const unsigned int px, const unsigned int py, const unsigned int wi, const unsigned int he, const Flags f) {
+Window::Window(const uint px, const uint py, const uint wi, const uint he, const Flags f) {
 		  assert(bg.get_w() && r_border.get_w() && l_border.get_w() && top.get_w() && bot.get_w() && "Window class is not fully initalized!");
 
 		  x=px;
@@ -94,7 +94,7 @@ Window::Window(const unsigned int px, const unsigned int py, const unsigned int 
  * Returns: Nothing
  */
 Window::~Window(void) {
-		  unsigned int i;
+		  uint i;
 		  
 		  g_gr.register_update_rect(x, y, w, h);
 		  
@@ -111,7 +111,7 @@ Window::~Window(void) {
 		  
 }
 
-/** void Window::set_pos(unsigned int posx, unsigned int posy)
+/** void Window::set_pos(uint posx, uint posy)
  *
  * This gives the window a new position on the screen
  *
@@ -122,12 +122,12 @@ Window::~Window(void) {
  * 		posy	new ypos
  * Returns: Nothing
  */
-void Window::set_pos(unsigned int posx, unsigned int posy) {
+void Window::set_pos(uint posx, uint posy) {
 		  x=posx; y=posy;
 		  g_gr.register_update_rect(x, y, w, h);
 }
 					 
-/** Textarea Window::create_textarea(const unsigned int px, const unsigned int py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
+/** Textarea Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
  * 
  * This function creates a textarea with a given text. The size will be set through the 
  * text width
@@ -138,11 +138,11 @@ void Window::set_pos(unsigned int posx, unsigned int posy) {
  * 		a	alignment to use 
  * Returns: textarea just created
  */
-Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, const char* t ,  Textarea::Align a) {
+Textarea* Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a) {
 	
-		  unsigned int myw=w;
-		  unsigned int myh=h;
-		  unsigned int add=0;
+		  uint myw=w;
+		  uint myh=h;
+		  uint add=0;
 		  
 		  if(myf!=FLAT) {
 					 myw-=get_border();
@@ -160,7 +160,7 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
 		  return ta[nta-1];
 }
   
-/** Textarea Window::create_textarea(const unsigned int px, const unsigned int py, const unsigend int myw,  Textarea::Align a = Textarea::LEFTA)
+/** Textarea Window::create_textarea(const uint px, const uint py, const unsigend int myw,  Textarea::Align a = Textarea::LEFTA)
  * 
  * This function creates a textarea with a given width. 
  *
@@ -170,9 +170,9 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
  * 		a	alignment to use 
  * Returns: textarea just created
  */
-Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, const unsigned int myw ,  Textarea::Align a) {
+Textarea* Window::create_textarea(const uint px, const uint py, const uint myw ,  Textarea::Align a) {
 
-		  unsigned int add=0;
+		  uint add=0;
 		  if(myf!=FLAT) add=get_border();
 		 
 		  int rw=myw;
@@ -198,9 +198,9 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
  * Returns: Nothing
  */
 void Window::redraw_win(void) {
-		  unsigned int i, j;
-		  unsigned int px=x; 
-		  unsigned int py=y;
+		  uint i, j;
+		  uint px=x; 
+		  uint py=y;
 		
 		  g_gr.register_update_rect(x, y, w, h);
 
@@ -259,8 +259,8 @@ void Window::redraw_win(void) {
 					 Graph::copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, h-j-bot.get_h());
 		  } else {
 					 // has no borders. Simply paste once the pic
-					 unsigned int mw = usebg->get_w() > w ? w : usebg->get_w();
-					 unsigned int mh = usebg->get_h() > h ? h : usebg->get_h();
+					 uint mw = usebg->get_w() > w ? w : usebg->get_w();
+					 uint mh = usebg->get_h() > h ? h : usebg->get_h();
 		 
 					 Graph::copy_pic(winpic, usebg, 0, 0, 0, 0, mw, mh);
 		  }
@@ -275,7 +275,7 @@ void Window::redraw_win(void) {
 					 but[i]->draw();
 }
 					 
-/** Button* Window::create_button(const unsigned int px, const unsigned int py, const unsigned int rw, const unsigned int rh, const unsigned int bg)
+/** Button* Window::create_button(const uint px, const uint py, const uint rw, const uint rh, const uint bg)
  *
  * This functions creates a button on the given point
  *
@@ -284,14 +284,14 @@ void Window::redraw_win(void) {
  * 		bg  background to use
  * Returns: The created button
  */
-Button* Window::create_button(const unsigned int px, const unsigned int py, const unsigned int rw, const unsigned int rh, const unsigned int bg) {
-		  unsigned int add=0;
+Button* Window::create_button(const uint px, const uint py, const uint rw, const uint rh, const uint bg) {
+		  uint add=0;
 		  if(myf!=FLAT) add=get_border();
 		 
 		  int mypx=px;
 		  int mypy=py;
-		  unsigned int myw=rw+Button::get_border();
-		  unsigned int myh=rh+Button::get_border();
+		  uint myw=rw+Button::get_border();
+		  uint myh=rh+Button::get_border();
 
 
 		  if(px+add+rw > w) mypx=w-(add+rw);
@@ -340,7 +340,7 @@ void Window::set_new_bg(Pic* p) {
 		  g_gr.register_update_rect(x, y, w, h);
 }
 					 
-/** int Window::handle_mm(const unsigned int x, const unsigned int y, const bool b1, const bool b2)
+/** int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2)
  *
  * This func cares for mouse movements
  *
@@ -349,8 +349,8 @@ void Window::set_new_bg(Pic* p) {
  * 		b1, b2	state of the mouse buttons
  * Returns: INPUT_HANDLED or -1
  */
-int Window::handle_mm(const unsigned int x, const unsigned int y, const bool b1, const bool b2) {
-		  unsigned int i;
+int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2) {
+		  uint i;
 		  
 		  // check for buttons
 		  for(i=0; i<nbut; i++) {
@@ -373,7 +373,7 @@ int Window::handle_mm(const unsigned int x, const unsigned int y, const bool b1,
 		  return INPUT_HANDLED;
 }
 
-/** int Window::handle_click(const unsigned int pbut, const bool b, const unsigned int x, const unsigned int y) 
+/** int Window::handle_click(const uint pbut, const bool b, const uint x, const uint y) 
  *
  * This cares for mouseclicks into the window
  *
@@ -383,9 +383,9 @@ int Window::handle_mm(const unsigned int x, const unsigned int y, const bool b1,
  *
  * Returns: INPUT_HANDLED, or INPUT_UNHANDLED
  */
-int Window::handle_click(const unsigned int pbut, const bool b, const unsigned int x, const unsigned int y) {
+int Window::handle_click(const uint pbut, const bool b, const uint x, const uint y) {
 		  if(pbut==2) return INPUT_UNHANDLED; // we do not react on this
-		  unsigned int i;
+		  uint i;
 
 		  
 		  // check buttons
@@ -445,7 +445,7 @@ User_Interface::User_Interface(void) {
 		  last=first;
 }
 		  
-/** int User_Interface::handle_click(const unsigned int but, const bool b, const unsigned int x, const unsigned int y, void* a);
+/** int User_Interface::handle_click(const uint but, const bool b, const uint x, const uint y, void* a);
  *
  * This functions cares for clicks on the User_Interface
  *
@@ -455,7 +455,7 @@ User_Interface::User_Interface(void) {
  * 		a 		user defined argument
  * Returns: INPUT_HANDLED / INPUT_UNHANDLED
 */
-int User_Interface::handle_click(const unsigned int but, const bool b, const unsigned int x, const unsigned int y, void* a) {
+int User_Interface::handle_click(const uint but, const bool b, const uint x, const uint y, void* a) {
 
 		  
 		  // Check every window
@@ -477,7 +477,7 @@ int User_Interface::handle_click(const unsigned int but, const bool b, const uns
 }
   
 
-/** int User_Interface::handle_mm(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, void* a);
+/** int User_Interface::handle_mm(const uint x, const uint y, const int xdiff, const int ydiff, const bool b1, const bool b2, void* a);
  *
  * This function cares for a mouse move over the windows. It's also responsible for dragging (read: moving) the
  * windows.
@@ -490,7 +490,7 @@ int User_Interface::handle_click(const unsigned int but, const bool b, const uns
  * 		a	user defined argument
  * Returns: INPUT_HANDLED or -1
  */
-int User_Interface::handle_mm(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, void* a) {
+int User_Interface::handle_mm(const uint x, const uint y, const int xdiff, const int ydiff, const bool b1, const bool b2, void* a) {
 		  if(b1 && dragwin) {
 					 move_window(dragwin, dragwin->get_xpos()+xdiff, dragwin->get_ypos()+ydiff);
 					 return INPUT_HANDLED;
@@ -545,7 +545,7 @@ void User_Interface::draw(void) {
 		  }
 }
 		  
-/** void User_Interface::move_window(Window* win, const unigned int x, const unsigned int y) 
+/** void User_Interface::move_window(Window* win, const unigned int x, const uint y) 
  *
  * This moves a window to the new given coordinates. This is done in User Interface since we have
  * to make sure, that the window won't move outside the screen
@@ -555,11 +555,11 @@ void User_Interface::draw(void) {
  * 		y	new ypos
  * Returns: Nothing
  */
-void User_Interface::move_window(Window* win, const unsigned int x, const unsigned int y) {
+void User_Interface::move_window(Window* win, const uint x, const uint y) {
 		  int myx=x;
 		  int myy=y;
-		  unsigned int mw=win->get_w();
-		  unsigned int mh=win->get_h();
+		  uint mw=win->get_w();
+		  uint mh=win->get_h();
 
 		  if(myx+mw >= g_gr.get_xres()) myx=g_gr.get_xres()-mw;
 		  if(myx<0) return;
@@ -569,8 +569,8 @@ void User_Interface::move_window(Window* win, const unsigned int x, const unsign
 		  win->set_pos(myx, myy);
 }
 
-/** Window* User_Interface::create_window(const unsigned int x, const unsigned int y, const unsigned int w, 
- *   	const unsigned int h, const Window::Flags f=Window::DEFAULT) 
+/** Window* User_Interface::create_window(const uint x, const uint y, const uint w, 
+ *   	const uint h, const Window::Flags f=Window::DEFAULT) 
  *
  * This function creates a window
  *
@@ -581,15 +581,15 @@ void User_Interface::move_window(Window* win, const unsigned int x, const unsign
  * 		f	Flags
  * returns: pt to window 
  */
-Window*  User_Interface::create_window(const unsigned int x, const unsigned int y, const unsigned int w, 
-					 const unsigned int h, const Window::Flags f) {
+Window*  User_Interface::create_window(const uint x, const uint y, const uint w, 
+					 const uint h, const Window::Flags f) {
 		  Window* win;
 		  
-		  unsigned int mw=w;
-		  unsigned int mh=h;
+		  uint mw=w;
+		  uint mh=h;
 		  
 		  if(f!=Window::FLAT) {
-					 unsigned int get_b=Window::get_border();
+					 uint get_b=Window::get_border();
 					 mw+=get_b;
 					 mh+=get_b;
 		  }
@@ -657,9 +657,9 @@ void User_Interface::delete_window(Window* win) {
  * 			class Font_Handler
  */
 
-unsigned int Textarea::nfont=0;
+uint Textarea::nfont=0;
 
-/* Textarea::Textarea(const unsigned int px, const unsigned int py, const char* t, const Align a, const unsigned int winw, const unsigned int winh, Pic* mdp)
+/* Textarea::Textarea(const uint px, const uint py, const char* t, const Align a, const uint winw, const uint winh, Pic* mdp)
  *
  * This creates a textarea out of a fixed string.
  *
@@ -674,14 +674,14 @@ unsigned int Textarea::nfont=0;
  * 		addy	offset from the edge (for frame)
  * Returns: Nothing
  */
-Textarea::Textarea(const unsigned int px, const unsigned int py, const char* t, const Align a, const unsigned int winw, const unsigned int winh, Pic* mdp, const unsigned int addx, const unsigned int addy) {
+Textarea::Textarea(const uint px, const uint py, const char* t, const Align a, const uint winw, const uint winh, Pic* mdp, const uint addx, const uint addy) {
 		 
 		  txt=g_fh.get_string(t, nfont);
 
 		  int myx=px;
 		  int myy=py;
-		  unsigned int myw=txt->get_w();
-		  unsigned int myh=txt->get_h();
+		  uint myw=txt->get_w();
+		  uint myh=txt->get_h();
 		  
 		  if(myx+txt->get_w() > winw) myx=winw-txt->get_w();
 		  if(myx<0) { myx=px; myw=winw-px; }
@@ -702,7 +702,7 @@ Textarea::Textarea(const unsigned int px, const unsigned int py, const char* t, 
 		  draw();
 }
 
-/* Textarea::Textarea(const unsigned int px, const unsigned int py, const unsigned int myw, const Align a, Pic* mdp)
+/* Textarea::Textarea(const uint px, const uint py, const uint myw, const Align a, Pic* mdp)
  *
  * This creates a textarea.
  *
@@ -715,8 +715,8 @@ Textarea::Textarea(const unsigned int px, const unsigned int py, const char* t, 
  * 		addy	offset from the edge (for frame)
  * Returns: Nothing
  */
-Textarea::Textarea(const unsigned int px, const unsigned int py, const unsigned int myw, const Align a, Pic* mdp, const unsigned int addx, 
-					 const unsigned int addy) {
+Textarea::Textarea(const uint px, const uint py, const uint myw, const Align a, Pic* mdp, const uint addx, 
+					 const uint addy) {
 		 
 		  
 		  txt=0; 
@@ -758,7 +758,7 @@ Textarea::~Textarea(void) {
 		  txt=0;
 }
 
-/** void Textarea::draw(const unsigned int xp, const unsigned int yp) const 
+/** void Textarea::draw(const uint xp, const uint yp) const 
  *
  * Draws a textarea into the windows picture
  *
@@ -767,7 +767,7 @@ Textarea::~Textarea(void) {
  */
 void Textarea::draw(void) const {
 		  if(!txt) return;
-		  unsigned int posx, myw;
+		  uint posx, myw;
 		  
 		  myw= w < txt->get_w() ? w : txt->get_w();
 		 
@@ -808,8 +808,8 @@ Pic Button::bg0e;
 Pic Button::bg1e;
 Pic Button::bg2e;
 
-/** Button::Button(const unsigned int mx, const unsigned int my, const unsigned int mw, const unsigned int mh, const unsigned int bg, Pic* mdp, 
- * 		const unsigned int addx, const unsigned int addy);
+/** Button::Button(const uint mx, const uint my, const uint mw, const uint mh, const uint bg, Pic* mdp, 
+ * 		const uint addx, const uint addy);
  *
  * This function finally creates a button
  *
@@ -823,8 +823,8 @@ Pic Button::bg2e;
  * 		addy	offset from the edge (for window borders)
  * Returns: Nothing
  */
-Button::Button(const unsigned int mx, const unsigned int my, const unsigned int mw, const unsigned int mh, const unsigned int bg, Pic* mdp, 
-					 const unsigned int addx, const unsigned int addy) {
+Button::Button(const uint mx, const uint my, const uint mw, const uint mh, const uint bg, Pic* mdp, 
+					 const uint addx, const uint addy) {
 		  assert(bg0.get_w() && bg1.get_w() && bg2.get_w());
 		  
 		  x=mx;
@@ -891,8 +891,8 @@ int Button::draw(void) {
 
 		  needs_draw=false;
 		  
-		  unsigned int j;
-		  unsigned short clr;
+		  uint j;
+		  ushort clr;
 		 
 		  if(!benlighted || bpressed) {
 					 Graph::copy_pic(dp, mybg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
@@ -904,8 +904,8 @@ int Button::draw(void) {
 		  // if we got a picture, draw it
 		  if(myp) {
 					 // we simply center it, without checkin
-					 unsigned int mw = myp->get_w() > w ? w : myp->get_w();
-					 unsigned int mh = myp->get_h() > h ? h : myp->get_h();
+					 uint mw = myp->get_w() > w ? w : myp->get_w();
+					 uint mh = myp->get_h() > h ? h : myp->get_h();
 
 					 Graph::copy_pic(dp, myp, (x+xp+(w>>1))-(mw>>1), (y+yp+(h>>1))-(mh>>1), 0, 0, mw, mh);
 		  }

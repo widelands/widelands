@@ -43,8 +43,8 @@
 File_Locator::File_Locator(void) {
 		  la=LA_SUCCESS;
 		  
-		  for(unsigned int i=0; i<MAX_DIRS; i++) dirs[i][0]='\0';
-		  for(unsigned int j=0; j<MAX_SUBDIRS; j++) subdirs[j][0]='\0';
+		  for(uint i=0; i<MAX_DIRS; i++) dirs[i][0]='\0';
+		  for(uint j=0; j<MAX_SUBDIRS; j++) subdirs[j][0]='\0';
 		  retval[0]='\0';
 		  def_writedir=0;
 
@@ -64,7 +64,7 @@ File_Locator::File_Locator(void) {
 File_Locator::~File_Locator(void) {
 }
 
-/** void File_Locator::add_searchdir(const char* dir, const unsigned int prio)
+/** void File_Locator::add_searchdir(const char* dir, const uint prio)
  *
  * This adds a dir to the directorys to search. the priority
  * is where to add the dir (so MAX_DIRS-1 is lowest, 0 is highest)
@@ -73,7 +73,7 @@ File_Locator::~File_Locator(void) {
  * 		prio	Priority of the dir
  * Returns: Nothing
  */
-void File_Locator::add_searchdir(const char* dir, const unsigned int prio) {
+void File_Locator::add_searchdir(const char* dir, const uint prio) {
 		  if(prio>= MAX_DIRS) {
 					 la=LA_TOOMUCH;
 					 return;
@@ -119,7 +119,7 @@ File_Locator::Last_action File_Locator::get_state(void) const {
  *	
  *	Returns: nothing
  */
-void File_Locator::register_subdir(const unsigned int id, const char* subd) {
+void File_Locator::register_subdir(const uint id, const char* subd) {
 		  if(id>= MAX_SUBDIRS) {
 					 la=LA_TOOMUCH;
 					 return;
@@ -153,7 +153,7 @@ const char* File_Locator::locate_file(const char* file, const int type) {
 		  
 		  struct stat st;
 
-		  for(unsigned int n=0; n<MAX_DIRS; n++) {
+		  for(uint n=0; n<MAX_DIRS; n++) {
 					 if(dirs[n][0]=='\0') continue;
 
 					 strcpy(retval, dirs[n]);
@@ -195,7 +195,7 @@ const char* File_Locator::get_new_filename(const char* file, const int type) {
 		  
 		  la=LA_NOTALLOWED;
 
-		  for(unsigned int n=def_writedir; n<MAX_DIRS; n++) {
+		  for(uint n=def_writedir; n<MAX_DIRS; n++) {
 					 if(dirs[n][0]=='\0') continue;
 								
 					 strcpy(retval, dirs[n]);
@@ -222,7 +222,7 @@ const char* File_Locator::get_new_filename(const char* file, const int type) {
  * Args: id		Directory of this priority should be used as default write dir
  * Returns: Nothing
  */
-void File_Locator::set_def_writedir(const unsigned int id) {
+void File_Locator::set_def_writedir(const uint id) {
 		  if(id >= (int) MAX_DIRS) {
 					 la=LA_NOTALLOWED;
 					 return;
@@ -237,7 +237,7 @@ void File_Locator::set_def_writedir(const unsigned int id) {
 		  la=LA_SUCCESS;
 }
 
-/* void File_Locator::init_filelisting( const int type, const unsigned char postfix[5] );
+/* void File_Locator::init_filelisting( const int type, const uchar postfix[5] );
  *
  * This functions inits the filelisting. it registeres the prefix and opens the first dir
  *
@@ -369,7 +369,7 @@ const char* File_Locator::get_next_file(void) {
 		  
 		  // Make sure the prefix is valid
 		  if(suf[0]!='\0' && strlen(retval)>strlen(suf)) {
-					 unsigned int n=0;
+					 uint n=0;
 					 for(n=strlen(suf)-1; n>0; --n) {
 								if(suf[strlen(suf)-n]!=retval[strlen(retval)-n]) break;
 					 }

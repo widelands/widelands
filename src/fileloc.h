@@ -63,13 +63,13 @@ class File_Locator : public Singleton<File_Locator> {
 					 File_Locator(void);
 					 ~File_Locator(void);
 
-					 void  add_searchdir(const char*, const unsigned int);
+					 void  add_searchdir(const char*, const uint);
 					 const char* locate_file(const char*, const int=-1);
 					 Last_action get_state(void) const;
-					 void register_subdir(const unsigned int, const char*);
+					 void register_subdir(const uint, const char*);
 					
 					 const char* get_new_filename(const char*, const int=-1);
-					 void set_def_writedir(const unsigned int id); 
+					 void set_def_writedir(const uint id); 
 
 					 // Listings of all available files
 					 void init_filelisting( const int, const char[5] );

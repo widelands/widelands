@@ -118,7 +118,7 @@ bool Token::end_of_string(void) {
  * Returns: true if identifier is found, false otherwise
  */
 bool Token::expect_identifier(char* ident) {
-		  unsigned int i=0;
+		  uint i=0;
 		  
 		  forward_to_next_char();
 		  
@@ -171,7 +171,7 @@ bool Token::expect_bool(bool* var) {
  */
 bool Token::expect_int(int* var) {
 		  char buf[20];
-		  unsigned int i=0;
+		  uint i=0;
 		  
 		  while(is_valid_num(str[n])) { 
 					 buf[i++]=str[n++];
@@ -197,7 +197,7 @@ bool Token::expect_int(int* var) {
  * Returns: true if matching var is found, false otherwise
  */
 bool Token::expect_string(char* var) {
-		  unsigned int i=0;
+		  uint i=0;
 		  bool skip=0;
 
 		  
@@ -402,7 +402,7 @@ void	Parser::register_string_opt(const char* opt, char* var) {
 int Parser::parse_line(const char* str) {
 		  char opt[MAX_OPT_LENGTH];
 		  Token p;
-		  unsigned int n;
+		  uint n;
 		  
 		  p.set_line(str);
 		  while(!p.end_of_string()) {

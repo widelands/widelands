@@ -59,7 +59,7 @@ namespace Graph {
 					 return *this;
 		  }
 
-		  /** void Pic::set_size(const unsigned short nw, const unsigned short nh) 
+		  /** void Pic::set_size(const ushort nw, const ushort nh) 
 			*
 			* This functions sets the new size of a pic
 			*
@@ -67,7 +67,7 @@ namespace Graph {
 			* 		 nh	= new height
 			* Returns: nothinh
 			*/
-		  void Pic::set_size(const unsigned short nw, const unsigned short nh) {
+		  void Pic::set_size(const ushort nw, const ushort nh) {
 					 if(pixels) free(pixels);
 					 w=nw;
 					 h=nh;
@@ -79,7 +79,7 @@ namespace Graph {
 					 if(!w) w=2;
 					 if(!h) h=2;
 
-					 pixels=(unsigned short*) malloc(sizeof(short)*w*h);
+					 pixels=(ushort*) malloc(sizeof(short)*w*h);
 
 					 w=nw;
 					 h=nh;
@@ -98,9 +98,9 @@ namespace Graph {
 		  {
 				if(!bhas_clrkey) return;
 
-				unsigned long clear = clrkey;
-				for (unsigned int i=(w*h-2); i; i-=2)
-					*(unsigned long*)&pixels[i] = clear;
+				ulong clear = clrkey;
+				for (uint i=(w*h-2); i; i-=2)
+					*(ulong*)&pixels[i] = clear;
 //					pixels[i] = clear;
 		  }
 
@@ -117,7 +117,7 @@ namespace Graph {
 					 SDL_Surface* bmp=NULL;
 					 int x=0;
 					 int y=0;
-					 unsigned char* bits, R, G, B;
+					 uchar* bits, R, G, B;
 
 					 bmp=SDL_LoadBMP(file);
 					 if(bmp == NULL) { return ERR_FAILED; }
@@ -139,7 +139,7 @@ namespace Graph {
 					 return RET_OK;
 		  }
 
-		/** void Pic::create(PictureInfo* info, unsigned short* data)
+		/** void Pic::create(PictureInfo* info, ushort* data)
 		  *
 		  * This function creates the picture described by the args
 		  *
@@ -147,31 +147,31 @@ namespace Graph {
 		  *			data	the image data
 		  * Returns:		RET_OK or ERR_FAILED
 		  */
-		int Pic::create(PictureInfo* info, unsigned short* data)
+		int Pic::create(PictureInfo* info, ushort* data)
 		{
 			if (info->width < 0 || info->height < 0)
 				return ERR_FAILED;
 			this->set_size(info->width, info->height);
-			for (int y=0; y<info->height; y++)
-				for (int x=0; x<info->width; x++)
+			for (uint y=0; y<info->height; y++)
+				for (uint x=0; x<info->width; x++)
 					set_pixel(x, y, data[x + y*info->width]);
 			return ERR_FAILED;
 		}
 
-		  /** void Pic::set_clrkey(unsigned short dclrkey) 
+		  /** void Pic::set_clrkey(ushort dclrkey) 
 			*
 			* sets the clrkey of this pic
 			*
 			* Args: dclrkey	The clrkey to use
 			* Returns: nothing
 			*/
-		  void Pic::set_clrkey(unsigned short dclrkey) {
+		  void Pic::set_clrkey(ushort dclrkey) {
 					 sh_clrkey=dclrkey;
 					 clrkey= (dclrkey<<16 | dclrkey);
 					 bhas_clrkey=true;
 		  }
 
-		  /** void Pic::set_clrkey(unsigned char r, unsigned char g, unsigned char b) 
+		  /** void Pic::set_clrkey(uchar r, uchar g, uchar b) 
 			*
 			* sets the clrkey of this pic
 			*
@@ -180,8 +180,8 @@ namespace Graph {
 			* 		  b	blue value of clrkey
 			* Returns: nothing
 			*/
-		  void Pic::set_clrkey(unsigned char r, unsigned char g, unsigned char b) { 
-					 unsigned short dclrkey=pack_rgb(r,g,b);
+		  void Pic::set_clrkey(uchar r, uchar g, uchar b) { 
+					 ushort dclrkey=pack_rgb(r,g,b);
 					 sh_clrkey=dclrkey;
 					 clrkey= (dclrkey<<16 & clrkey);
 					 bhas_clrkey=true;

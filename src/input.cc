@@ -80,7 +80,7 @@ Input::~Input(void) {
 		  SDL_ShowCursor(1);
 }
 
-/** void Input::set_max_cords(const unsigned int x, const unsigned int y);
+/** void Input::set_max_cords(const uint x, const uint y);
  *
  * Sets the maximal screen coordinates to allow as xpos and ypos
  *
@@ -88,7 +88,7 @@ Input::~Input(void) {
  * 			y  max ypos
  * Returns: Nothing
  */
-void Input::set_max_cords(unsigned int x, const unsigned int y) {
+void Input::set_max_cords(uint x, const uint y) {
 		  maxx=x; maxy=y;
 		  levx=maxx>>1;
 		  levy=maxy>>1;
@@ -118,7 +118,7 @@ void Input::set_max_cords(unsigned int x, const unsigned int y) {
  * 		a	pointer to userdata
  */
 void Input::register_mcf(const MOUSE_CLICK_FUNCTION f, const Button b, void* a) {
-		  unsigned int n;
+		  uint n;
 		  
 		  if(b==BUT1) n=0;
 		  else n=1;
@@ -174,16 +174,16 @@ void Input::grab_input(const bool b) {
 		  }
 }
 
-/** void Input::set_mouse_speed(const unsigned int s) 
+/** void Input::set_mouse_speed(const uint s) 
  *
  * Sets the mouse speed in per cent
  *
  * Args:	s	mousespeed in per cent
  * Returns: Nothing
  */
-void Input::set_mouse_speed(const unsigned int s)  { if(!s) return; mouse_speed=((float) s/100); }
+void Input::set_mouse_speed(const uint s)  { if(!s) return; mouse_speed=((float) s/100); }
 
-/** void Input::set_mouse_pos(unsigned int x, unsigned int y) 
+/** void Input::set_mouse_pos(uint x, uint y) 
  *
  * Sets the mouse pos
  *
@@ -191,7 +191,7 @@ void Input::set_mouse_speed(const unsigned int s)  { if(!s) return; mouse_speed=
  * 		y	ypos of mouse
  * Returns: Nothing
  */
-void Input::set_mouse_pos(unsigned int x, unsigned int y) { mpx=mplx=x; mpy=mply=y; }
+void Input::set_mouse_pos(uint x, uint y) { mpx=mplx=x; mpy=mply=y; }
 					
 /** void Input::handle_pending_input(void)
  *
@@ -221,7 +221,7 @@ void Input::handle_pending_input(void) {
 		
 								case SDL_MOUSEBUTTONDOWN:
 								case SDL_MOUSEBUTTONUP:
-										  unsigned int but;
+										  uint but;
 										  if(ev.button.button==3) but=1;
 										  else if(ev.button.button==1) but=0;
 										  else break;

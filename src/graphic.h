@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include "errors.h"
 #include "singleton.h"
+#include "mytypes.h"
 
 struct PictureInfo;		// declare here to avoid including, include in pic.cc
 						// (weisst du noch, was ich ueber include-waechter gesagt hab? :)
@@ -35,7 +36,7 @@ struct PictureInfo;		// declare here to avoid including, include in pic.cc
 namespace Graph {
 
 		 
-		  /** inline unsigned short Graph::pack_rgb(const unsigned char r, const unsigned char g, const unsigned char b);
+		  /** inline ushort Graph::pack_rgb(const uchar r, const uchar g, const uchar b);
 			* 
 			* This functions packs a RGB tribble into a short
 			*
@@ -44,11 +45,11 @@ namespace Graph {
 			* 		b	blue value (SUPRISE!)
 			* Returns: packed value
 			*/
-		  inline unsigned short pack_rgb(const unsigned char r, const unsigned char g, const unsigned char b) {
+		  inline ushort pack_rgb(const uchar r, const uchar g, const uchar b) {
 					 return ((b>>3) + ((g>>2)<<5)+ ((r>>3)<<11) );
 		  }
 
-		  /** inline void Graph::unpack_rgb(const unsigned short clr, unsigned char* r, unsigned char* g, unsigned char* b) ;
+		  /** inline void Graph::unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b) ;
 			*	
 			* this unpacks a clr and returns the RGB tribble
 			*
@@ -58,13 +59,13 @@ namespace Graph {
 			*			b		ptr to var to hold blue value
 			* Returns: Nothing
 			*/
-		  inline void unpack_rgb(const unsigned short clr, unsigned char* r, unsigned char* g, unsigned char* b) {
+		  inline void unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b) {
 					 *r= ((clr<<3)>>11);
 					 *g= ((clr<<2)>>5);
 					 *b= (clr<<3);
 		  }
 
-		  /** inline unsigned short Graph::bright_up_clr(const unsigned short clr, const unsigned short factor)
+		  /** inline ushort Graph::bright_up_clr(const ushort clr, const ushort factor)
 			*
 			* This function brights a clr up.
 			*
@@ -72,8 +73,8 @@ namespace Graph {
 			* 			factor	by how much
 			* Returns: Brighter color
 			*/
-		  inline unsigned short bright_up_clr(const unsigned short clr, const unsigned short factor) {
-					 static unsigned char r, g, b;
+		  inline ushort bright_up_clr(const ushort clr, const ushort factor) {
+					 static uchar r, g, b;
 					 unpack_rgb(clr, &r, &g, &b);
 					 r= ((char) r+factor) > 255 ? 255 : r+factor;
 					 g= ((char) g+factor) > 255 ? 255 : g+factor;
@@ -91,39 +92,39 @@ namespace Graph {
 					 Pic(void) { pixels=NULL; w=h=lpix=clrkey=sh_clrkey=bhas_clrkey=0; }
 					 ~Pic(void) { if(pixels) free(pixels); }
 
-					 void set_size(const unsigned short, const unsigned short);
-					 void set_clrkey(const unsigned short);
-					 void set_clrkey(const unsigned char, const unsigned char, const unsigned char);
+					 void set_size(const ushort, const ushort);
+					 void set_clrkey(const ushort);
+					 void set_clrkey(const uchar, const uchar, const uchar);
 					 int  load(const char*);
-					 int  create(PictureInfo*, unsigned short* data);
+					 int  create(PictureInfo*, ushort* data);
 					 void clear_all(void);
 					 Pic& operator=(const Pic&);
 					 Pic(const Pic&);
 
-					 /** inline unsigned int Pic::get_w(void) const 
+					 /** inline uint Pic::get_w(void) const 
 					  * 
 					  * This function returns the width
 					  * Args: none
 					  * returns: width
 					  */
-					 inline unsigned int get_w(void) const { return w; }
+					 inline uint get_w(void) const { return w; }
 
-					 /** inline unsigned int Pic::get_h(void) const
+					 /** inline uint Pic::get_h(void) const
 					  * 
 					  * This function returns the height
 					  * Args: none
 					  * returns: height
 					  */
-					 inline unsigned int get_h(void) const { return h; }
+					 inline uint get_h(void) const { return h; }
 
-					 /** inline unsigned short get_clrkey(void) const
+					 /** inline ushort get_clrkey(void) const
 					  *
 					  * this returns the current colorkey
 					  *
 					  * Args: none
 					  * returns: clrkey
 					  */
-					 inline unsigned short get_clrkey(void) const {
+					 inline ushort get_clrkey(void) const {
 								if(bhas_clrkey) return sh_clrkey;
 								return 0;
 					 }
@@ -140,17 +141,17 @@ namespace Graph {
 					 // optimized pixel get functions
 					 // They are rather simple,
 					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline unsigned short get_pixel(const unsigned int x, const unsigned int y) {
+					 inline ushort get_pixel(const uint x, const uint y) {
 								lpix=(y)*(w) + (x);
 								return pixels[lpix];
 					 }
-					 inline unsigned short get_npixel(void) {
+					 inline ushort get_npixel(void) {
 								return pixels[++lpix];
 					 }
-					 inline unsigned short get_ppixel(void) {
+					 inline ushort get_ppixel(void) {
 								return pixels[--lpix];
 					 }
-					 inline unsigned short get_fpixel(void) {
+					 inline ushort get_fpixel(void) {
 								lpix=0;
 								return pixels[0];
 					 }
@@ -159,54 +160,54 @@ namespace Graph {
 					 inline void npixel(void) { ++lpix; }
 					 inline void ppixel(void) { --lpix; }
 					 inline void fpixel(void) { lpix=0; }
-					 inline void set_cpixel(const unsigned int x, const unsigned int y) { lpix=y*w + x; }
+					 inline void set_cpixel(const uint x, const uint y) { lpix=y*w + x; }
 
 					 // optimized pixel set functions declared inline
 					 // All those functions take either a rgb tribble or 3 chars
 					 // And they are rather simple,
 					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline void set_pixel(const unsigned int x, const unsigned int y, const unsigned char r, const unsigned char g, const unsigned char b) {
+					 inline void set_pixel(const uint x, const uint y, const uchar r, const uchar g, const uchar b) {
 								lpix=(y)*(w) + (x);
 								pixels[lpix] = pack_rgb(r, g, b);
 					 }
-					 inline void set_pixel(const unsigned int x, const unsigned int y, const unsigned short clr) {
+					 inline void set_pixel(const uint x, const uint y, const ushort clr) {
 								lpix=(y)*(w) + (x);
 								pixels[lpix] = clr; 
 					 }
-					 inline void set_npixel(const unsigned short clr) {
+					 inline void set_npixel(const ushort clr) {
 								pixels[++lpix] = clr;
 					 }
-					 inline void set_npixel(const unsigned char r, const unsigned char g, const unsigned char b) {
+					 inline void set_npixel(const uchar r, const uchar g, const uchar b) {
 								pixels[++lpix]= pack_rgb(r, g, b);
 					 }
-					 inline void set_ppixel(const unsigned short clr) {
+					 inline void set_ppixel(const ushort clr) {
 								pixels[--lpix]= clr;
 					 }
-					 inline void set_ppixel(const unsigned char r, const unsigned char g, const unsigned char b) {
+					 inline void set_ppixel(const uchar r, const uchar g, const uchar b) {
 								pixels[--lpix]= pack_rgb(r, g, b);
 					 }
-					 inline void set_fpixel(const unsigned short clr) {
+					 inline void set_fpixel(const ushort clr) {
 								lpix=0;
 								pixels[0] = clr;
 					 }
-					 inline void set_fpixel(const unsigned char r, const unsigned char g, const unsigned char b) {
+					 inline void set_fpixel(const uchar r, const uchar g, const uchar b) {
 								lpix=0;
 								pixels[0] = pack_rgb(r, g, b);
 					 }
 					 
 					 // this function really needs faaast blitting
-					 friend	void copy_pic(Pic*, Pic*, const unsigned short, const unsigned short,  const unsigned short, const unsigned short, 
-										  const unsigned short, const unsigned short);
-					 friend  void draw_pic(Pic*, const unsigned short, const unsigned short,  const unsigned short, const unsigned short, 
-										  const unsigned short, const unsigned short);
+					 friend	void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort, 
+										  const ushort, const ushort);
+					 friend  void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort, 
+										  const ushort, const ushort);
 
 					 private:
 					 bool bhas_clrkey;
-					 unsigned long clrkey;
-					 unsigned short sh_clrkey;
-					 unsigned short* pixels;
-					 unsigned short w, h;
-					 unsigned int lpix;
+					 ulong clrkey;
+					 ushort sh_clrkey;
+					 ushort* pixels;
+					 ushort w, h;
+					 uint lpix;
 		  };
 
 		  /** class Graphic 
@@ -238,8 +239,8 @@ namespace Graph {
 					 Graphic(void);
 					 ~Graphic(void);
 
-					 void set_mode(const unsigned short, const unsigned short, const Mode);
-					 void register_update_rect(const unsigned short, const unsigned short, const unsigned short, const unsigned short);
+					 void set_mode(const ushort, const ushort, const Mode);
+					 void register_update_rect(const ushort, const ushort, const ushort, const ushort);
 					 void update(void);
 
 					 /** Graphic::State Graphic::get_state(void) 
@@ -260,21 +261,21 @@ namespace Graph {
 					  */
 					 inline Mode get_mode(void) {  st=STATE_OK; return mode; }
 
-					 /** inline unsigned int Graphic::get_xres(void) const
+					 /** inline uint Graphic::get_xres(void) const
 					  * 
 					  * This function returns the X Resoultion of the current screen
 					  * Args: none
 					  * returns: XRes
 					  */
-					 inline unsigned int get_xres(void) const { return xres; }
+					 inline uint get_xres(void) const { return xres; }
 
-					 /** inline unsigned int Graphic::get_yres(void) const
+					 /** inline uint Graphic::get_yres(void) const
 					  * 
 					  * This function returns the Y Resoultion of the current screen
 					  * Args: none
 					  * returns: YRes
 					  */
-					 inline unsigned int get_yres(void) const { return yres; }
+					 inline uint get_yres(void) const { return yres; }
 
 					 /** inline void Graphics::needs_fs_update(void) 
 					  *
@@ -297,17 +298,17 @@ namespace Graph {
 					 // optimized pixel get functions
 					 // They are rather simple,
 					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline unsigned short get_pixel(const unsigned int x, const unsigned int y) {
+					 inline ushort get_pixel(const uint x, const uint y) {
 								lpix=(y)*(xres>>1) + (x);
 								return *((Uint16*) sc->pixels + lpix);
 					 }
-					 inline unsigned short get_npixel(void) {
+					 inline ushort get_npixel(void) {
 								return *((Uint16*) sc->pixels + ++lpix);
 					 }
-					 inline unsigned short get_ppixel(void) {
+					 inline ushort get_ppixel(void) {
 								return *((Uint16*) sc->pixels + --lpix);
 					 }
-					 inline unsigned short get_fpixel(void) {
+					 inline ushort get_fpixel(void) {
 								lpix=0;
 								return *((Uint16*) sc->pixels);
 					 }
@@ -316,63 +317,63 @@ namespace Graph {
 					 inline void npixel(void) { ++lpix; }
 					 inline void ppixel(void) { --lpix; }
 					 inline void fpixel(void) { lpix=0; }
-					 inline void set_cpixel(const unsigned int x, const unsigned int y) { lpix=y*xres + x; }
+					 inline void set_cpixel(const uint x, const uint y) { lpix=y*xres + x; }
 
 					 // optimized pixel set functions declared inline
 					 // All those functions take either a rgb tribble or 3 chars
 					 // And they are rather simple,
 					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline void set_pixel(const unsigned int x, const unsigned int y, const unsigned char r, const unsigned char g, const unsigned char b) {
+					 inline void set_pixel(const uint x, const uint y, const uchar r, const uchar g, const uchar b) {
 								lpix=(y)*(xres) + (x);
 								pixels[lpix] = pack_rgb(r, g, b);
 					 }
-					 inline void set_pixel(const unsigned int x, const unsigned int y, const unsigned short clr) {
+					 inline void set_pixel(const uint x, const uint y, const ushort clr) {
 								lpix=(y)*(xres) + (x);
 								pixels[lpix] = clr; 
 					 }
-					 inline void set_npixel(const unsigned short clr) {
+					 inline void set_npixel(const ushort clr) {
 								pixels[++lpix] = clr;
 					 }
-					 inline void set_npixel(const unsigned char r, const unsigned char g, const unsigned char b) {
+					 inline void set_npixel(const uchar r, const uchar g, const uchar b) {
 								pixels[++lpix]= pack_rgb(r, g, b);
 					 }
-					 inline void set_ppixel(const unsigned short clr) {
+					 inline void set_ppixel(const ushort clr) {
 								pixels[--lpix]= clr;
 					 }
-					 inline void set_ppixel(const unsigned char r, const unsigned char g, const unsigned char b) {
+					 inline void set_ppixel(const uchar r, const uchar g, const uchar b) {
 								pixels[--lpix]= pack_rgb(r, g, b);
 					 }
-					 inline void set_fpixel(const unsigned short clr) {
+					 inline void set_fpixel(const ushort clr) {
 								lpix=0;
 								pixels[0] = clr;
 					 }
-					 inline void set_fpixel(const unsigned char r, const unsigned char g, const unsigned char b) {
+					 inline void set_fpixel(const uchar r, const uchar g, const uchar b) {
 								lpix=0;
 								pixels[0] = pack_rgb(r, g, b);
 					 }
 		
 					 
 					 // this function really needs faaast blitting
-					 friend	void draw_pic(Pic*, const unsigned short, const unsigned short,  const unsigned short, const unsigned short, 
-										  const unsigned short, const unsigned short);
+					 friend	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort, 
+										  const ushort, const ushort);
 
 					 private:
-					 unsigned short* pixels;
-					 unsigned short xres, yres;
-					 unsigned int lpix;
+					 ushort* pixels;
+					 ushort xres, yres;
+					 uint lpix;
 					 Mode mode;
 					 SDL_Surface* sc;
 					 State st;
 					 SDL_Rect upd_rects[MAX_RECTS];
-					 unsigned int nupr;
+					 uint nupr;
 					 bool bneeds_fs_update;
 					 bool bneeds_update;
 		  };
 
-		  void draw_pic(Pic*, const unsigned short, const unsigned short,  const unsigned short, const unsigned short, 
-								const unsigned short, const unsigned short);
-		  void copy_pic(Pic*, Pic*, const unsigned short, const unsigned short,  const unsigned short, const unsigned short, 
-								const unsigned short, const unsigned short);
+		  void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort, 
+								const ushort, const ushort);
+		  void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort, 
+								const ushort, const ushort);
 }
 
 using 	Graph::Graphic;
