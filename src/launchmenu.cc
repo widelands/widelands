@@ -282,7 +282,7 @@ void LaunchGameMenu::refresh()
 		else
 		{
 			m_mapname->set_text(m.get_name());
-			maxplayers = m.get_nplayers();
+			maxplayers = m.get_nrplayers();
 		}
 	} else {
 		m_mapname->set_text("(no map)");

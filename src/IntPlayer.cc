@@ -226,9 +226,9 @@ void Interactive_Player::move_view_to(int fx, int fy)
 		((MiniMap *)m_minimap.window)->set_view_pos(x, y);
 	
 	x -= main_mapview->get_w()>>1;
-	if (x < 0) x += m_game->get_map()->get_w() * FIELD_WIDTH;
+	if (x < 0) x += m_game->get_map()->get_width() * FIELD_WIDTH;
 	y -= main_mapview->get_h()>>1;
-	if (y < 0) y += m_game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+	if (y < 0) y += m_game->get_map()->get_height() * (FIELD_HEIGHT>>1);
 	main_mapview->set_viewpoint(x, y);
 }
 
@@ -259,12 +259,12 @@ void Interactive_Player::field_action()
 		return;			
 
 	// Special case for buildings
-	std::vector<Map_Object*> objs;
+	BaseImmovable *imm = m_game->get_map()->get_immovable(m_fieldsel);
 	
-	if (m_game->get_map()->find_objects(m_fieldsel, 0, Map_Object::BUILDING, &objs)) {
-		Building *building = (Building *)objs[0];
+	if (imm && imm->get_type() == Map_Object::BUILDING) {
+		Building *building = (Building *)imm;
 		
-		if (building->get_owned_by() == get_player_number()) {
+		if (building->get_owner()->get_player_number() == get_player_number()) {
 			building->show_options(this);
 			return;
 		}
@@ -331,8 +331,8 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 void Interactive_Player::mainview_move(int x, int y)
 {
 	if (m_minimap.window) {
-		int maxx = m_game->get_map()->get_w() * FIELD_WIDTH;
-		int maxy = m_game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+		int maxx = m_game->get_map()->get_width() * FIELD_WIDTH;
+		int maxy = m_game->get_map()->get_height() * (FIELD_HEIGHT>>1);
 
 		x += main_mapview->get_w()>>1;
 		if (x >= maxx) x -= maxx;
@@ -351,9 +351,9 @@ void Interactive_Player::mainview_move(int x, int y)
 void Interactive_Player::minimap_warp(int x, int y)
 {
 	x -= main_mapview->get_w()>>1;
-	if (x < 0) x += m_game->get_map()->get_w() * FIELD_WIDTH;
+	if (x < 0) x += m_game->get_map()->get_width() * FIELD_WIDTH;
 	y -= main_mapview->get_h()>>1;
-	if (y < 0) y += m_game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+	if (y < 0) y += m_game->get_map()->get_height() * (FIELD_HEIGHT>>1);
 	main_mapview->set_viewpoint(x, y);
 }
 
@@ -399,9 +399,13 @@ void Interactive_Player::finish_build_road()
 {
 	assert(m_buildroad);
 
-	// TODO: send build command
-
-	delete m_buildroad;
+	if (m_buildroad->get_nsteps()) {
+		// awkward... path changes ownership
+		Path *path = new Path(*m_buildroad);
+		m_game->send_player_command(get_player_number(), CMD_BUILD_ROAD, (int)path, 0, 0);
+	} else {
+		delete m_buildroad;
+	}
 	m_buildroad = 0;
 }
 

@@ -67,14 +67,14 @@ void Player::setup()
 {
 	Map *map = m_game->get_map();
 
-	seen_fields = new std::vector<bool>(map->get_w()*map->get_h(), false);
+	seen_fields = new std::vector<bool>(map->get_width()*map->get_height(), false);
 
 	// place the HQ
-	const Coords *c = map->get_starting_pos(m_plnum);
+	const Coords &c = map->get_starting_pos(m_plnum);
 	int idx = get_tribe()->get_building_index("headquarters");
 	if (idx < 0)
 		throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
-	m_game->warp_building(c->x, c->y, m_plnum, idx);
+	m_game->warp_building(c.x, c.y, m_plnum, idx);
 }
 
 /*
@@ -123,7 +123,7 @@ void Player::build_flag(Coords c)
 	int buildcaps = get_buildcaps(c);
 	
 	if (buildcaps & BUILDCAPS_FLAG)
-		Flag::create(m_game, get_player_number(), c);
+		Flag::create(m_game, this, c);
 }
 
 /*
@@ -136,11 +136,79 @@ by the player.
 */
 void Player::rip_flag(Coords c)
 {
-	std::vector<Map_Object*> objs;
+	BaseImmovable *imm = m_game->get_map()->get_immovable(c);
 	
-	if (m_game->get_map()->find_objects(c, 0, Map_Object::FLAG, &objs)) {
-		Map_Object *obj = objs[0];
-		if (obj->get_owned_by() == get_player_number())
-			m_game->get_objects()->free_object(m_game, objs[0]);
+	if (imm && imm->get_type() == Map_Object::FLAG) {
+		if (((Flag *)imm)->get_owner() == this)
+			imm->die(m_game);
 	}
+}
+
+/*
+===============
+Player::build_road
+
+Build a road along the given path.
+Perform sanity checks (ownership, flags).
+
+Note: the diagnostic log messages aren't exactly errors. They might happen
+in some situations over the network.
+===============
+*/
+void Player::build_road(const Path *path)
+{
+	Map *map = m_game->get_map();
+	BaseImmovable *imm;
+	Flag *start, *end;
+	
+	imm = map->get_immovable(path->get_start());
+	if (!imm || imm->get_type() != Map_Object::FLAG) {
+		log("%i: building road, missed start flag\n", get_player_number());
+		return;
+	}
+	start = (Flag *)imm;
+	
+	imm = map->get_immovable(path->get_end());
+	if (!imm || imm->get_type() != Map_Object::FLAG) {
+		log("%i: building road, missed end flag\n", get_player_number());
+		return;
+	}
+	end = (Flag *)imm;
+	
+	// Verify ownership of the path
+	Coords coords = path->get_start();
+	
+	for(uint i = 0; i < path->get_nsteps()-1; i++) {
+		int dir = path->get_step(i);
+		map->get_neighbour(coords, dir, &coords);
+		
+		imm = map->get_immovable(coords);
+		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
+			log("%i: building road, small immovable in the way\n", get_player_number());
+			return;
+		}
+		int caps = get_buildcaps(coords);
+		if (!(caps & MOVECAPS_WALK)) {
+			log("%i: building road, unwalkable\n", get_player_number());
+			return;
+		}
+	}
+	
+	// fine, we can build the road
+	Road::create(m_game, Road_Normal, start, end, *path);
+}
+
+/*
+===============
+Player::remove_road
+
+Remove that road, if it belongs to the player.
+===============
+*/
+void Player::remove_road(Road *road)
+{
+	if (road->get_flag_start()->get_owner() != this)
+		return;
+	
+	road->die(m_game);
 }

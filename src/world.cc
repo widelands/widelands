@@ -25,16 +25,6 @@
 #include "profile.h"
 
 
-static void sec_missing(const char *section)
-{
-	throw wexception("Section '%s' missing", section);
-}
-
-static void key_missing(const char *section, const char *key)
-{
-	throw wexception("Section %s: key '%s' missing", section, key);
-}
-
 void Resource_Descr::parse(Section *s)
 {
 	snprintf(name, sizeof(name), "%s", s->get_name());
@@ -95,23 +85,17 @@ void World::parse_root_conf(const char *directory, const char *name)
 		Profile prof(fname);
 		Section* s;
 
-		s = prof.get_section("world");
-		if(!s)
-			sec_missing("world");
+		s = prof.get_safe_section("world");
 
 		const char* str;
 
 		str = s->get_string("name", name);
 		snprintf(hd.name, sizeof(hd.name), "%s", str);
 
-		str = s->get_string("author", 0);
-		if(!str)
-			key_missing("world", "author");
+		str = s->get_safe_string("author");
 		snprintf(hd.author, sizeof(hd.author), "%s", str);
 
-		str = s->get_string("descr", 0);
-		if (!str)
-			key_missing("world", "descr");
+		str = s->get_safe_string("descr");
 		snprintf(hd.descr, sizeof(hd.descr), "%s", str);
 		
 		prof.check_used();
@@ -190,18 +174,47 @@ void World::parse_bobs(const char *directory)
 	g_fs->FindFiles(subdir, "*", &dirs);
 	
 	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
-		//cerr << "a bob in " << *it << endl;
+		char fname[256];
+	
+		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
+	
+		if (!g_fs->FileExists(fname))
+			continue;
 		
-		Logic_Bob_Descr *descr = 0;
-		try {
-			descr = Logic_Bob_Descr::create_from_dir(it->c_str());
+		const char *name;
+		const char *slash = strrchr(it->c_str(), '/');
+		const char *backslash = strrchr(it->c_str(), '\\');
+
+		if (backslash && (!slash || backslash > slash))
+			slash = backslash;
+
+		if (slash)
+			name = slash+1;
+		else
+			name = it->c_str();
+		
+		try
+		{
+			Profile prof(fname, "global"); // section-less file
+			Section *s = prof.get_safe_section("global");
+			const char *type = s->get_safe_string("type");
+			
+			if (!strcasecmp(type, "critter")) {
+				Bob_Descr *descr;
+				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof);
+				bobs.add(descr);
+			} else {
+				Immovable_Descr *descr = new Immovable_Descr(name);
+				descr->parse(it->c_str(), &prof);
+				immovables.add(descr);
+			}
+			
+			prof.check_used();
 		} catch(std::exception &e) {
 			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
 		} catch(...) {
 			cerr << it->c_str() << ": unknown exception (garbage directory?)" << endl;
 		}
-		if (descr)
-			bobs.add(descr);
 	}
 }
 
@@ -232,9 +245,7 @@ void Terrain_Descr::read(const char *directory, Section *s)
 		m_frametime = 1000 / fps;
 	
    // switch is
-   str = s->get_string("is", 0);
-	if (!str)
-		key_missing(name, "is");
+   str = s->get_safe_string("is");
 
    if(!strcasecmp(str, "dry")) {
       is = TERRAIN_DRY;

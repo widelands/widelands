@@ -23,6 +23,14 @@
 #include "game.h"
 #include "player.h"
 
+/*
+==============================================================================
+
+Map IMPLEMENTATION
+
+==============================================================================
+*/
+
 /** Map::Pathfield
  *
  * Used in pathfinding. For better encapsulation, pathfinding structures
@@ -51,64 +59,204 @@ struct Map::Pathfield {
  * 			class g_fileloc
  */
 
-/** Map::Map(void)
- *
- * inits
- */
+/*
+===============
+Map::Map
+
+inits
+===============
+*/
 Map::Map(void)
 {
-	w=0;
-	fields=0;
-   starting_pos=0;
+	m_nrplayers = 0;
+	m_width = m_height = 0;
+	m_world = 0;
+	m_fields = 0;
+	m_starting_pos = 0;
+
 	m_pathcycle = 0;
 	m_pathfields = 0;
+	
+	m_only_information = true;
 }
 
-/** Map::~Map(void)
- *
- * cleanups
- */
+/*
+===============
+Map::~Map
+
+cleanups
+===============
+*/
 Map::~Map(void)
 {
-   if(fields) {
-      // WARNING: if Field has to free something, we have to do
-      // it here manually!!!
-      free(fields);
-   }
-	if (m_pathfields)
-		free(m_pathfields);
-
-   if(starting_pos) {
-      free(starting_pos);
-   }
-
-   if(w) delete w;
+	clear();
 }
 
-/** void Map::set_size(uint w, uint h)
- *
- * This sets the size of the current map
- *
- * *** PRIAVTE FUNC ****
- *
- * Args:	w, h	size of map
- * Returns: Nothing
- */
+/*
+===============
+Map::clear
+
+Completely reset the map
+===============
+*/
+void Map::clear()
+{
+	if (m_fields)
+      free(m_fields);
+	m_fields = 0;
+	if (m_pathfields)
+		free(m_pathfields);
+	m_pathfields = 0;
+   if (m_starting_pos)
+      free(m_starting_pos);
+	m_starting_pos = 0;
+   if (m_world)
+		delete m_world;
+	m_world = 0;
+	
+	m_nrplayers = 0;
+}
+
+/*
+===============
+Map::set_only_info
+
+Turn only-info mode on or off
+===============
+*/
+void Map::set_only_info(bool yes)
+{
+	if (m_only_information == yes)
+		return;
+	
+	if (yes)
+	{
+		if (m_fields)
+			free(m_fields);
+		m_fields = 0;
+		if (m_pathfields)
+			free(m_pathfields);
+		m_pathfields = 0;
+	}
+	else
+	{
+		if (m_width && m_height) {		
+			m_fields = (Field*) malloc(sizeof(Field)*m_width*m_height);
+			memset(m_fields, 0, sizeof(Field)*m_width*m_height);
+
+			m_pathcycle = 0;
+			m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*m_width*m_height);
+			memset(m_pathfields, 0, sizeof(Pathfield)*m_width*m_height);
+		}
+	}
+	
+	m_only_information = yes;
+}
+
+/*
+===============
+Map::set_size
+
+Resize the map. All information will be lost!
+=============== 
+*/
 void Map::set_size(uint w, uint h)
 {
-   hd.width=w;
-   hd.height=h;
+	clear();
+	
+	m_width = w;
+	m_height = h;
 
-   if(fields)
-		free(fields);
-	fields = (Field*) malloc(sizeof(Field)*hd.height*hd.width);
-	memset(fields, 0, sizeof(Field)*hd.height*hd.width);
+	if (!m_only_information) {
+		m_fields = (Field*) malloc(sizeof(Field)*w*h);
+		memset(m_fields, 0, sizeof(Field)*w*h);
 
-	if (m_pathfields)
-		free(m_pathfields);
-	m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*hd.height*hd.width);
-	memset(m_pathfields, 0, sizeof(Pathfield)*hd.height*hd.width);
+		m_pathcycle = 0;
+		m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*w*h);
+		memset(m_pathfields, 0, sizeof(Pathfield)*w*h);
+	}
 }
+
+/*
+===============
+Map::set_nrplayers
+
+Change the number of players the map supports
+===============
+*/
+void Map::set_nrplayers(uint nrplayers)
+{
+	if (!nrplayers) {
+		if (m_starting_pos)
+			free(m_starting_pos);
+		m_starting_pos = 0;
+		m_nrplayers = 0;
+		return;
+	}
+	
+	m_starting_pos = (Coords*)realloc(m_starting_pos, sizeof(Coords)*nrplayers);
+	while(m_nrplayers < nrplayers)
+		m_starting_pos[m_nrplayers++] = Coords(0, 0);
+	
+	m_nrplayers = nrplayers; // in case the number players got less
+}
+
+/*
+===============
+Map::set_starting_pos
+
+Set the starting coordinates of a player
+===============
+*/
+void Map::set_starting_pos(uint plnum, Coords c)
+{
+	assert(plnum >= 1 && plnum <= m_nrplayers);
+	
+	m_starting_pos[plnum-1] = c;
+}
+
+/*
+===============
+Map::set_author
+Map::set_name
+Map::set_description
+
+Set informational strings
+===============
+*/
+void Map::set_author(const char *string)
+{
+	snprintf(m_author, sizeof(m_author), "%s", string);
+}
+
+void Map::set_name(const char *string)
+{
+	snprintf(m_name, sizeof(m_name), "%s", string);
+}
+
+void Map::set_description(const char *string)
+{
+	snprintf(m_description, sizeof(m_description), "%s", string);
+}
+
+/*
+===============
+Map::set_world_name
+
+Set the world name and load the corresponding world
+===============
+*/
+void Map::set_world_name(const char *string)
+{
+	snprintf(m_worldname, sizeof(m_worldname), "%s", string);
+	
+	if (m_world)
+		delete m_world;
+	
+	m_world = new World;
+	m_world->load_world(m_worldname);
+}
+
 
 /** int Map::load_wlmf(const char* file)
  *
@@ -149,15 +297,15 @@ int Map::load_wlmf(const char* file, Game *game)
       f.Data(sizeof(PlayerDescr));
    }
 
-   set_size(hd.width, hd.height);
+   set_size(m_width, m_height);
 
 
    // now, read in the fields, one at a time and init the map
    FieldDescr *fd;
    uint y;
    Terrain_Descr *td, *tr;
-   for(y=0; y<hd.height; y++) {
-      for(uint x=0; x<hd.width; x++) {
+   for(y=0; y<m_height; y++) {
+      for(uint x=0; x<m_width; x++) {
 			fd = (FieldDescr *)f.Data(sizeof(FieldDescr));
 
          // TEMP
@@ -208,7 +356,8 @@ int Map::load_map_header(const char* file)
    {
       // it is a S2 Map file. load it as such
 		try {
-      	ret = load_s2mf_header(file);
+			load_s2mf_header(file);
+			ret = RET_OK;
 		} catch(std::exception &e) {
 			cerr << "Problem loading map " << file << ": " << e.what() << endl;
 			ret = ERR_FAILED;
@@ -252,16 +401,16 @@ int Map::load_map(const char* file, Game* g)
 		// Post process the map in the necessary two passes
 		Field *f;
 		uint y;
-		for(y=0; y<hd.height; y++) {
-			for(uint x=0; x<hd.width; x++) {
+		for(y=0; y<m_height; y++) {
+			for(uint x=0; x<m_width; x++) {
 				f = get_field(x, y);
 				recalc_brightness(x, y, f);
 				recalc_fieldcaps_pass1(x, y, f);
 			}
 		}
 
-		for(y=0; y<hd.height; y++) {
-			for(uint x=0; x<hd.width; x++) {
+		for(y=0; y<m_height; y++) {
+			for(uint x=0; x<m_width; x++) {
 				f = get_field(x, y);
 				recalc_fieldcaps_pass2(x, y, f);
 			}
@@ -277,38 +426,141 @@ int Map::load_map(const char* file, Game* g)
 
 /*
 ===============
-Map::find_objects
+Map::find_bobs
 
-Find Map_Objects in the given area that have the requested attribute.
-If reverse is true, all objects without the attribute are returned.
-If radius is 0, only the field x/y is checked.
-
+Find Map_Objects in the given area. The functor-version only finds objects for
+which functor.accept() returns true.
 If list is non-zero, pointers to the relevant objects will be stored in the list.
 
 Returns true if objects could be found
 ===============
 */
-bool Map::find_objects(Coords coords, uint radius, uint attribute, std::vector<Map_Object*> *list, bool reverse)
+bool Map::find_bobs(Coords coords, uint radius, std::vector<Bob*> *list)
 {
 	Map_Region mr(coords, radius, this);
 	Field *f;
 	bool found = false;
 	
 	while((f = mr.next())) {
-		Map_Object *obj = f->get_first_object();
+		Bob *bob;
 		
-		while(obj) {
-			bool hasattrib = obj->has_attribute(attribute);
+		for(bob = f->get_first_bob(); bob; bob = bob->get_next_bob()) {
+			if (find(list->begin(), list->end(), bob) != list->end())
+				continue;
 			
-			if (reverse != hasattrib) {
-				if (list) {
-					list->push_back(obj);
-					found = true;
-				} else
-					return true; // no need to look any further
-			}
+			if (!list)
+				return true;
+			
+			list->push_back(bob);
+			found = true;
+		}
+	}
+	
+	return found;
+}
+
+bool Map::find_bobs(Coords coord, uint radius, std::vector<Bob*> *list, const FindBob &functor)
+{
+	Map_Region mr(coord, radius, this);
+	Field *f;
+	bool found = false;
+	
+	while((f = mr.next())) {
+		Bob *bob;
 		
-			obj = obj->get_next_object();
+		for(bob = f->get_first_bob(); bob; bob = bob->get_next_bob()) {
+			if (find(list->begin(), list->end(), bob) != list->end())
+				continue;
+			
+			if (functor.accept(bob)) {
+				if (!list)
+					return true;
+			
+				list->push_back(bob);
+				found = true;
+			}
+		}
+	}
+	
+	return found;
+}
+
+/*
+===============
+Map::get_immovable
+
+Returns the immovable at the given coordinate
+===============
+*/
+BaseImmovable *Map::get_immovable(Coords coord)
+{
+	Field *f = get_field(coord);
+	return f->get_immovable();
+}
+
+/*
+===============
+Map::find_immovables
+
+Find all immovables in the given area. Returns true if an immovable has been found.
+If list is not 0, found immovables are stored in list.
+===============
+*/
+bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list)
+{
+	Map_Region mr(coord, radius, this);
+	Field *f;
+	bool found = false;
+	
+	while((f = mr.next())) {
+		BaseImmovable *imm = f->get_immovable();
+		
+		if (!imm)
+			continue;
+		
+		if (!list)
+			return true; // no need to look any further
+		
+		ImmovableFound imf;
+		imf.object = imm;
+		get_coords(f, &imf.coords);
+		list->push_back(imf);
+		found = true;
+	}
+	
+	return found;
+}
+
+/*
+===============
+Map::find_immovables
+
+Find all immovables in the given area for which functor returns true.
+Returns true if an immovable has been found.
+If list is not 0, found immovables are stored in list.
+===============
+*/
+bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list, const FindImmovable &functor)
+{
+	Map_Region mr(coord, radius, this);
+	Field *f;
+	bool found = false;
+	
+	while((f = mr.next())) {
+		BaseImmovable *imm = f->get_immovable();
+		
+		if (!imm)
+			continue;
+		
+		if (functor.accept(imm)) {
+			if (!list)
+				return true; // no need to look any further
+
+			ImmovableFound imf;
+			imf.object = imm;
+			get_coords(f, &imf.coords);
+			list->push_back(imf);
+			found = true;
 		}
 	}
 	
@@ -454,11 +706,14 @@ void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
 	// === everything below is used to check buildability ===
 		
 	// 3) General buildability check: if a "robust" Map_Object is on this field
-	//    we cannot build anything on it
-	if (find_objects(Coords(fx, fy), 0, Map_Object::ROBUST, 0))
+	//    we cannot build anything on it.
+	//    Exception: we can build flags on roads
+	BaseImmovable *imm = get_immovable(Coords(fx, fy));
+	
+	if (imm && imm->get_type() != Map_Object::ROAD && imm->get_size() >= BaseImmovable::SMALL)
 	{
 		// 3b) [OVERRIDE] check for "unpassable" Map_Objects
-		if (find_objects(Coords(fx, fy), 0, Map_Object::UNPASSABLE, 0))
+		if (!imm->get_passable())
 			f->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 		return;
 	}
@@ -469,7 +724,7 @@ void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
 	if (f->caps & MOVECAPS_WALK)
 	{
 		// 4b) Flags must be at least 1 field apart
-		if (find_objects(Coords(fx, fy), 1, Map_Object::FLAG, 0))
+		if (find_immovables(Coords(fx, fy), 1, 0, FindImmovableType(Map_Object::FLAG)))
 			return;
 		
 		f->caps |= BUILDCAPS_FLAG;
@@ -547,9 +802,11 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	//     - walkable
 	//     - have no water triangles next to them
 	//     - are not blocked by "robust" Map_Objects
+	BaseImmovable *immovable = get_immovable(Coords(fx, fy));
+	
 	if (!(f->caps & MOVECAPS_WALK) ||
 	    cnt_water ||
-	    find_objects(Coords(fx, fy), 0, Map_Object::ROBUST, 0))
+	    (immovable && immovable->get_size() >= BaseImmovable::SMALL))
 		return;
 		
 	// 3) We can only build something if there is a flag on the bottom-right neighbour
@@ -558,7 +815,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	// NOTE: This dependency on the bottom-right neighbour is the reason why the caps
 	// calculation is split into two passes
 	if (!(brn->caps & BUILDCAPS_FLAG) &&
-	    !find_objects(Coords(brnx, brny), 0, Map_Object::FLAG, 0))
+	    !find_immovables(Coords(brnx, brny), 0, 0, FindImmovableType(Map_Object::FLAG)))
 		return;
 	
 	// === passability and flags allow us to build something beyond this point ===
@@ -573,27 +830,31 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	// Medium buildings: allow only medium second-order neighbours
 	// Big buildings:  same as big objects
 	uchar building = BUILDCAPS_BIG;
-	vector<Map_Object*> objectlist;
+	vector<ImmovableFound> objectlist;
 	
-	find_objects(Coords(fx, fy), 2, Map_Object::ROBUST, &objectlist);
+	find_immovables(Coords(fx, fy), 2, &objectlist, FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
 	for(uint i = 0; i < objectlist.size(); i++) {
-		Map_Object *obj = objectlist[i];
-		int dist = calc_distance(Coords(fx, fy), obj->get_position());
+		BaseImmovable *obj = objectlist[i].object;
+		Coords objpos = objectlist[i].coords;
+		int dist = calc_distance(Coords(fx, fy), objpos);
 		
-		if (obj->has_attribute(Map_Object::SMALL))
-		{
+		switch(obj->get_size()) {
+		case BaseImmovable::SMALL:
 			if (dist == 1) {
 		 		if (building > BUILDCAPS_MEDIUM) {
 					// a flag to the bottom-right does not reduce building size (obvious)
-					if (obj->get_position() != Coords(brnx, brny) ||
-					    !obj->has_attribute(Map_Object::FLAG))
+					// additionally, roads going top-right and left from a big building's
+					// flag should be allowed
+					if ((objpos != Coords(brnx, brny) && objpos != Coords(rnx, rny) &&
+					     objpos != Coords(blnx, blny)) ||
+					    (obj->get_type() != Map_Object::FLAG && obj->get_type() != Map_Object::ROAD))
 						building = BUILDCAPS_MEDIUM;
 				}
 			}
-		}
-		else if (!obj->has_attribute(Map_Object::BIG))
-		{
-			if (obj->has_attribute(Map_Object::BUILDING)) {
+			break;
+
+		case BaseImmovable::MEDIUM:
+			if (obj->get_type() == Map_Object::BUILDING) {
 				if (building > BUILDCAPS_MEDIUM)
 					building = BUILDCAPS_MEDIUM;
 			} else {
@@ -602,9 +863,9 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 						building = BUILDCAPS_SMALL;
 				}
 			}
-		}
-		else
-		{
+			break;
+		
+		case BaseImmovable::BIG:
 			if (dist == 2)
 				building = BUILDCAPS_SMALL;
 			else
@@ -761,14 +1022,14 @@ int Map::calc_distance(Coords a, Coords b)
 	
 	// do we fly up or down?
 	dy = b.y - a.y;
-	if (dy > (int)(hd.height>>1)) // wrap-around!
-		dy -= hd.height;
-	else if (dy < -(int)(hd.height>>1))
-		dy += hd.height;
+	if (dy > (int)(m_height>>1)) // wrap-around!
+		dy -= m_height;
+	else if (dy < -(int)(m_height>>1))
+		dy += m_height;
 	
 	dist = abs(dy);
 	
-	if (dist >= hd.width) // no need to worry about x movement at all
+	if (dist >= m_width) // no need to worry about x movement at all
 		return dist;
 	
 	// [lx..rx] is the x-range we can cover simply by walking vertically
@@ -781,11 +1042,11 @@ int Map::calc_distance(Coords a, Coords b)
 	rx = lx + dist;
 	
 	// Allow for wrap-around
-	// Yes, the second is an else if; see the above if (dist >= hd.width)
+	// Yes, the second is an else if; see the above if (dist >= m_width)
 	if (lx < 0)
-		lx += hd.width;
-	else if (rx >= (int)hd.width)
-		rx -= hd.width;
+		lx += m_width;
+	else if (rx >= (int)m_width)
+		rx -= m_width;
 	
 	// Normal, non-wrapping case
 	if (lx <= rx)
@@ -793,13 +1054,13 @@ int Map::calc_distance(Coords a, Coords b)
 		if (b.x < lx)
 		{
 			int dx1 = lx - b.x;
-			int dx2 = b.x - (rx - hd.width);
+			int dx2 = b.x - (rx - m_width);
 			dist += min(dx1, dx2);
 		}
 		else if (b.x > rx)
 		{
 			int dx1 = b.x - rx;
-			int dx2 = (lx + hd.width) - b.x;
+			int dx2 = (lx + m_width) - b.x;
 			dist += min(dx1, dx2);
 		}
 	}
@@ -834,10 +1095,10 @@ int Map::is_neighbour(const Coords start, const Coords end)
 
 	dy = end.y - start.y;
 	dx = end.x - start.x;
-	if (dx > (int)(hd.width>>1))
-		dx -= hd.width;
-	else if (dx < -(int)(hd.width>>1))
-		dx += hd.width;
+	if (dx > (int)(m_width>>1))
+		dx -= m_width;
+	else if (dx < -(int)(m_width>>1))
+		dx += m_width;
 	
 	// end and start are on the same row
 	if (!dy) {
@@ -849,10 +1110,10 @@ int Map::is_neighbour(const Coords start, const Coords end)
 		}
 	}
 	
-	if (dy > (int)(hd.height>>1))
-		dy -= hd.height;
-	else if (dy < -(int)(hd.height>>1))
-		dy += hd.height;
+	if (dy > (int)(m_height>>1))
+		dy -= m_height;
+	else if (dy < -(int)(m_height>>1))
+		dy += m_height;
 	
 	// end is one row below start
 	if (dy == 1) {
@@ -1089,7 +1350,8 @@ findpath() can only find a path if the terrain is completely flat.
 If player is not 0, the player's get_buildcaps() function will be used.
 If roadfind is true, special road-finding mode is activated:
 	do not visit fields with robust bobs, however
-	do accept flags on the final field
+	do accept flags on the final field, and
+	do accept roads where flags can be built as final field
 If forbidden is not 0, the fields in this array will not be considered unpassable.
 
 The function returns the cost of the path (in milliseconds of normal walking
@@ -1148,7 +1410,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 	// This means we clear the array only every 65536 runs
 	m_pathcycle++;
 	if (!m_pathcycle) {
-		memset(m_pathfields, 0, sizeof(Pathfield)*hd.height*hd.width);
+		memset(m_pathfields, 0, sizeof(Pathfield)*m_height*m_width);
 		m_pathcycle++;
 	}
 	
@@ -1161,7 +1423,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 	StarQueue Open;
 	Pathfield *curpf;
 	
-	curpf = m_pathfields + (startf-fields);
+	curpf = m_pathfields + (startf-m_fields);
 	curpf->cycle = m_pathcycle;
 	curpf->real_cost = 0;
 	curpf->estim_cost = calc_distance(start, end) * COST_PER_FIELD;
@@ -1171,7 +1433,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 
 	while((curpf = Open.pop()))
 	{
-		curf = fields + (curpf-m_pathfields);
+		curf = m_fields + (curpf-m_pathfields);
 		
 		get_coords(curf, &cur);
 
@@ -1210,7 +1472,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 			case Map_Object::WALK_W: get_ln(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
 			}
 			
-			neighbpf = m_pathfields + (neighbf-fields);
+			neighbpf = m_pathfields + (neighbf-m_fields);
 			
 			// Is the field Closed already?
 			if (neighbpf->cycle == m_pathcycle && neighbpf->heap_index < 0)
@@ -1225,9 +1487,12 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 			
 			// Special road finding
 			if (roadfind) {
-				std::vector<Map_Object*> objs;
-				if (find_objects(neighb, 0, Map_Object::ROBUST, &objs)) {
-					if (neighb != end || !objs[0]->has_attribute(Map_Object::FLAG))
+				BaseImmovable *imm = get_immovable(neighb);
+				if (imm && imm->get_size() >= BaseImmovable::SMALL) {
+					if (neighb != end)
+						continue;
+					if (!(imm->get_type() == Map_Object::FLAG ||
+					      (imm->get_type() == Map_Object::ROAD && caps & BUILDCAPS_FLAG)))
 						continue;
 				}
 			}
@@ -1288,7 +1553,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 		case Map_Object::WALK_W: get_rn(cur.x, cur.y, curf, &cur.x, &cur.y, &curf); break;
 		}
 
-		curpf = m_pathfields + (curf-fields);
+		curpf = m_pathfields + (curf-m_fields);
 	}
 	
 	return retval;
@@ -1336,10 +1601,69 @@ bool Map::can_reach_by_water(Coords field)
 /*
 ==============================================================================
 
+BaseImmovable search functors
+	
+==============================================================================
+*/
+
+bool FindImmovableSize::accept(BaseImmovable *imm) const
+{
+	int size = imm->get_size();
+	return (m_min <= size && size <= m_max);
+}
+
+bool FindImmovableType::accept(BaseImmovable *imm) const
+{
+	return (m_type == imm->get_type());
+}
+
+/*
+==============================================================================
+
 Path/CoordPath IMPLEMENTATION
 
 ==============================================================================
 */
+
+/*
+===============
+Path::Path
+
+Initialize a Path from a CoordPath
+===============
+*/
+Path::Path(CoordPath &o)
+{
+	m_map = o.get_map();
+	m_start = o.get_start();
+	m_end = o.get_end();
+	m_path = o.get_steps();
+	reverse(m_path.begin(), m_path.end()); // Path stores in reversed order!
+}
+
+
+/*
+===============
+CoordPath::CoordPath
+
+Initialize from a path, calculating the coordinates as needed
+===============
+*/
+CoordPath::CoordPath(const Path &path)
+{
+	m_map = path.get_map();
+	m_coords.push_back(path.get_start());
+	
+	Coords c = path.get_start();
+	
+	for(uint i = 0; i < path.get_nsteps(); i++) {
+		int dir = path.get_step(i);
+		
+		m_path.push_back(dir);
+		m_map->get_neighbour(c, dir, &c);
+		m_coords.push_back(c);
+	}
+}
 
 /*
 ===============
@@ -1369,6 +1693,19 @@ void CoordPath::truncate(int after)
 {
 	m_path.erase(m_path.begin()+after, m_path.end());
 	m_coords.erase(m_coords.begin()+after+1, m_coords.end());
+}
+
+/*
+===============
+CoordPath::starttrim
+
+Opposite of truncate: remove the first n steps of the path.
+===============
+*/
+void CoordPath::starttrim(int before)
+{
+	m_path.erase(m_path.begin(), m_path.begin()+before);
+	m_coords.erase(m_coords.begin(), m_coords.begin()+before);
 }
 
 /*

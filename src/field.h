@@ -72,11 +72,13 @@ enum Roads {
 };
 
 class Terrain_Descr;
-class Map_Object;
+class Bob;
+class BaseImmovable;
 
 class Field {
    friend class Map;
-	friend class Map_Object;
+	friend class Bob;
+	friend class BaseImmovable;
 	
 private:
    uchar height;
@@ -85,7 +87,8 @@ private:
 	uchar owned_by; // 0 = neutral; otherwise: player number
 	uchar roads; // are any roads on this field? [6 bits used]
 	Terrain_Descr *terr, *terd;
-	Map_Object* objects; // linked list, see Map_Object::m_linknext
+	Bob* bobs; // linked list, see Bob::m_linknext
+	BaseImmovable* immovable;
 
 public:
    inline uchar get_height() const { return height; }
@@ -96,7 +99,8 @@ public:
    inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
    inline void set_terraind(Terrain_Descr *p) { assert(p); terd = p; }
 
-	inline Map_Object* get_first_object(void) { return objects; }
+	inline Bob* get_first_bob(void) { return bobs; }
+	inline BaseImmovable* get_immovable() { return immovable; }
 
 	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
    inline char get_brightness() const { return brightness; }

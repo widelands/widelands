@@ -31,6 +31,7 @@
 #include <iostream.h>
 #include <fstream.h>
 
+#include <algorithm>
 #include <exception>
 #include <map>
 #include <queue>

@@ -23,11 +23,6 @@
 #include "cmd_queue.h"
 #include "player.h"
 
-/*
-TODO:
-- try to avoid malloc()ing and free()ing all the time
-- use a better algorithm (heap?)
-*/
 
 // 
 // class Cmd_Queue
@@ -42,6 +37,7 @@ Cmd_Queue::~Cmd_Queue(void)
 {
 	while(!m_cmds.empty()) {
 		const Cmd &c = m_cmds.top();
+		clear_cmd((Cmd *)&c);
 		m_cmds.pop();
 	}
 }
@@ -88,6 +84,7 @@ int Cmd_Queue::run_queue(int interval)
 			
 		m_time = c.time;
 		exec_cmd(&c);
+		clear_cmd((Cmd *)&c);
 		
 		m_cmds.pop();
 	}
@@ -116,16 +113,6 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		break;
 	}
 	
-	case CMD_REMOVE:
-	{
-		// remove a Map_Object safely
-		assert(c->arg1);
-		Map_Object *obj = m_game->get_objects()->get_object(c->arg1);
-		if (obj)
-			m_game->get_objects()->free_object(m_game, obj);
-		break;
-	}
-	
 	case CMD_BUILD_FLAG:
 	{
 		Player *plr = m_game->get_player(c->sender);
@@ -140,8 +127,42 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		break;
 	}
 	
+	case CMD_BUILD_ROAD:
+	{
+		Player *plr = m_game->get_player(c->sender);
+		plr->build_road((Path*)c->arg1);
+		break;
+	}
+	
+	case CMD_REMOVE_ROAD:
+	{
+		assert(c->arg1);
+		Player *plr = m_game->get_player(c->sender);
+		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
+		if (obj && obj->get_type() == Map_Object::ROAD)
+			plr->remove_road((Road*)obj);
+		break;
+	}
+	
 	default:
 		assert(0);
+		break;
+	}
+}
+
+/*
+===============
+Cmd_Queue::clear_cmd
+
+Free dynamically allocated arguments, if any
+===============
+*/
+void Cmd_Queue::clear_cmd(Cmd *c)
+{
+	switch(c->cmd) {
+	case CMD_BUILD_ROAD:
+		if (c->arg1)
+			delete (Path*)c->arg1;
 		break;
 	}
 }

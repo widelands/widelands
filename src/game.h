@@ -86,6 +86,7 @@ public:
 
 	void warp_building(int x, int y, char owner, int idx);
 	void create_bob(int x, int y, int idx);
+	void create_immovable(int x, int y, int idx);
 
 	void conquer_area(uchar playernr, Coords coords, int radius);
 	

@@ -35,10 +35,12 @@
 enum {
    UNUSED = 0,
    CMD_ACT,				// arg1 = serialnum
-	CMD_REMOVE,			// arg1 = serialnum
 	
 	CMD_BUILD_FLAG,	// arg1 = x, arg2 = y
 	CMD_RIP_FLAG,		// arg1 = x, arg2 = y
+	
+	CMD_BUILD_ROAD,	// arg1 = Path*
+	CMD_REMOVE_ROAD,	// arg1 = serialnum
 };
 // ---------------------- END    OF CMDS ----------------------------------
 
@@ -76,6 +78,7 @@ class Cmd_Queue {
 		   
    private:
 		void exec_cmd(const Cmd *c);
+		void clear_cmd(Cmd *c);
 		
       Game *m_game;
 		queue_t m_cmds;

@@ -26,17 +26,6 @@
 class Road;
 
 /*
-Flag_Descr is pretty much a dummy class. It is necessary because of special
-flag attributes
-*/
-class Flag_Descr : public Map_Object_Descr {
-public:
-	Flag_Descr();
-	
-	virtual Map_Object *create_object();
-};
-
-/*
 Flag represents a flag, obviously.
 A flag itself doesn't do much. However, it can have up to 6 roads attached
 to it. Instead of the WALK_NW road, it can also have a building attached to
@@ -46,14 +35,18 @@ Flags also have a store of up to 8 wares.
 Important: Do not access m_roads directly. get_road() and others use 
 Map_Object::WALK_xx in all "direction" parameters.
 */
-class Flag : public Map_Object {
-	MO_DESCR(Flag_Descr);
-
+class Flag : public BaseImmovable {
 public:
-	Flag(Flag_Descr *descr);
+	Flag();
 	virtual ~Flag();
 	
-	static Flag *create(Game *g, int owner, Coords coords);
+	static Flag *create(Game *g, Player *owner, Coords coords);
+	
+	virtual int get_type();
+	virtual int get_size();
+	virtual bool get_passable();
+	
+	inline Player *get_owner() const { return m_owner; }
 	
 	inline Building *get_building() { return m_building; }
 	void attach_building(Game *g, Building *building);
@@ -62,16 +55,23 @@ public:
 	inline Road *get_road(int dir) { return m_roads[dir-1]; }
 	void attach_road(int dir, Road *road);
 	void detach_road(int dir);
+
+	inline const Coords &get_position() const { return m_position; }
 	
 protected:
 	virtual void init(Game*);
 	virtual void cleanup(Game*);
 	
-	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
-	
+	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
+
 private:
-	Building	*m_building;	// attached building (replaces road WALK_NW)
-	Road		*m_roads[6];	// Map_Object::WALK_xx-1 as index
+	Player		*m_owner;
+	Coords		m_position;
+	Animation	*m_anim;
+	int			m_animstart;
+	
+	Building		*m_building;	// attached building (replaces road WALK_NW)
+	Road			*m_roads[6];	// Map_Object::WALK_xx-1 as index
 };
 
 /*
@@ -86,14 +86,32 @@ a road when a flag is inserted.
 
 Every road has one or more Carriers attached to it.
 */
-class Road {
+class Road : public BaseImmovable {
 public:
-	Road(int type, Flag *start, Flag *end, const Path &path);
-	~Road();
+	Road();
+	virtual ~Road();
 
-	void init(Game *g);
-	void cleanup(Game *g);
+	static Road *create(Game *g, int type, Flag *start, Flag *end, const Path &path);
+
+	inline Flag *get_flag_start() const { return m_start; }
+	inline Flag *get_flag_end() const { return m_end; }
+		
+	virtual int get_type();
+	virtual int get_size();
+	virtual bool get_passable();
+
+	void presplit(Game *g, Coords split);
+	void postsplit(Game *g, Flag *flag);
 	
+protected:
+	void mark_map(Game *g);
+	void unmark_map(Game *g);
+
+	virtual void init(Game *g);
+	virtual void cleanup(Game *g);
+	
+	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
+
 private:
 	int		m_type;		// use Field::Road_XXX
 	Flag		*m_start;

@@ -317,10 +317,16 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
 				// are there any overdraw issues with the current rendering order?
 
 				// Draw Map_Objects hooked to this field
-				Map_Object* obj = f->get_first_object();
-				while(obj) {
-					obj->draw(m_game, dst, posx, posy);
-					obj = obj->get_next_object();
+				int realy = posy - f->get_height()*HEIGHT_FACTOR;
+				BaseImmovable *imm = f->get_immovable();
+				
+				if (imm)
+					imm->draw(m_game, dst, FCoords(fx, fy, f), posx, realy);
+				
+				Bob *bob = f->get_first_bob();
+				while(bob) {
+					bob->draw(m_game, dst, posx, realy);
+					bob = bob->get_next_bob();
 				}
 
 				// Draw build-help etc...
@@ -529,9 +535,10 @@ void Map_View::draw_overlay_road(Bitmap *dst, FCoords coords, int posx, int posy
 	if (!(caps & MOVECAPS_WALK)) // need to be able to walk here
 		return;
 	
-	std::vector<Map_Object*> objs; // can't build on robusts
-	if (m_map->find_objects(coords, 0, Map_Object::ROBUST, &objs)) {
-		if (!objs[0]->has_attribute(Map_Object::FLAG))
+	BaseImmovable *imm = m_map->get_immovable(coords); // can't build on robusts
+	if (imm && imm->get_size() >= BaseImmovable::SMALL) {
+		if (!(imm->get_type() == Map_Object::FLAG ||
+		      (imm->get_type() == Map_Object::ROAD && caps & BUILDCAPS_FLAG)))
 			return;
 	}
 	
@@ -607,10 +614,10 @@ void Map_View::set_viewpoint(int x, int y)
 		return;
 
 	vpx=x; vpy=y;
-	while(vpx>(int)(FIELD_WIDTH*m_map->get_w()))			vpx-=(FIELD_WIDTH*m_map->get_w());
-	while(vpy>(int)((FIELD_HEIGHT*m_map->get_h())>>1))	vpy-=(FIELD_HEIGHT*m_map->get_h())>>1;
-	while(vpx< 0)  vpx+=(FIELD_WIDTH*m_map->get_w());
-	while(vpy< 0)  vpy+=(FIELD_HEIGHT*m_map->get_h())>>1;
+	while(vpx>(int)(FIELD_WIDTH*m_map->get_width()))			vpx-=(FIELD_WIDTH*m_map->get_width());
+	while(vpy>(int)((FIELD_HEIGHT*m_map->get_height())>>1))	vpy-=(FIELD_HEIGHT*m_map->get_height())>>1;
+	while(vpx< 0)  vpx+=(FIELD_WIDTH*m_map->get_width());
+	while(vpy< 0)  vpy+=(FIELD_HEIGHT*m_map->get_height())>>1;
 
 	warpview.call(vpx, vpy);
 }
@@ -694,8 +701,8 @@ void Map_View::track_fsel(int mx, int my)
 	// Now, fsel point to where we'd be if the field's height was 0.
 	// We now recursively move towards the correct field. Because height cannot
 	// be negative, we only need to consider the bottom-left or bottom-right neighbour
-	int mapheight = m_map->get_h()*(FIELD_HEIGHT>>1);
-	int mapwidth = m_map->get_w()*FIELD_WIDTH;
+	int mapheight = m_map->get_height()*(FIELD_HEIGHT>>1);
+	int mapwidth = m_map->get_width()*FIELD_WIDTH;
 	Field *f;
 	int fscrx, fscry;
 

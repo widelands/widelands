@@ -75,7 +75,7 @@ MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Player *plr)
 
 	m_viewx = m_viewy = 0;
 
-	set_size(m_map->get_w(), m_map->get_h());
+	set_size(m_map->get_width(), m_map->get_height());
 }
 
 /** MiniMapView::set_view_pos(int x, int y)
@@ -112,11 +112,11 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 		sy = 0;
 
 	ex = dst->get_w() - ofsx;
-	if (ex > (int)m_map->get_w())
-		ex = m_map->get_w();
+	if (ex > (int)m_map->get_width())
+		ex = m_map->get_width();
 	ey = dst->get_h() - ofsy;
-	if (ey > (int)m_map->get_h())
-		ey = m_map->get_h();
+	if (ey > (int)m_map->get_height())
+		ey = m_map->get_height();
 			
 	ushort clr;
 	Field* f;
@@ -155,7 +155,7 @@ bool MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
 
 	if (down) {
 		// make sure x/y is within range
-		if (x >= 0 && x < (int)m_map->get_w() && y > 0 && y < (int)m_map->get_h())
+		if (x >= 0 && x < (int)m_map->get_width() && y > 0 && y < (int)m_map->get_height())
 			warpview.call(x * FIELD_WIDTH, y * (FIELD_HEIGHT>>1));
 	}
 

@@ -48,6 +48,8 @@ Building_Descr::Building_Descr(Tribe_Descr *tribe, const char *name)
 	snprintf(m_name, sizeof(m_name), "%s", name);
 	strcpy(m_descname, m_name);
 	m_buildable = true;
+	m_size = BaseImmovable::SMALL;
+	m_mine = false;
 }
 
 
@@ -62,6 +64,24 @@ Building_Descr::~Building_Descr(void)
 {
 }
 		
+/*
+===============
+Building_Descr::create
+
+Create a building of this type. Does not perform any sanity checks.
+===============
+*/
+Building *Building_Descr::create(Game *g, Player *owner, Coords pos)
+{
+	assert(owner);
+	
+	Building *b = create_object();
+	b->m_owner = owner;
+	b->m_position = pos;
+	b->init(g);
+	
+	return b;
+}
 
 /*
 ===============
@@ -75,21 +95,18 @@ void Building_Descr::parse(const char *directory, Profile *prof, const EncodeDat
 	Section *global = prof->get_safe_section("global");
 	const char *string;
 	
-	add_attribute(Map_Object::ROBUST);
-	add_attribute(Map_Object::BUILDING);
-	add_attribute(Map_Object::UNPASSABLE);
-
 	snprintf(m_descname, sizeof(m_descname), "%s", global->get_safe_string("descname"));
 
 	string = global->get_safe_string("size");
 	if (!strcasecmp(string, "small")) {
-		add_attribute(Map_Object::SMALL);
-	} else if (!strcasecmp(string, "big")) {
-		add_attribute(Map_Object::BIG);
-	} else if (!strcasecmp(string, "mine")) {
-		add_attribute(Map_Object::SMALL);
+		m_size = BaseImmovable::SMALL;
 	} else if (!strcasecmp(string, "medium")) {
-		//
+		m_size = BaseImmovable::MEDIUM;
+	} else if (!strcasecmp(string, "big")) {
+		m_size = BaseImmovable::BIG;
+	} else if (!strcasecmp(string, "mine")) {
+		m_size = BaseImmovable::SMALL;
+		m_mine = true;
 	} else
 		throw wexception("Section [global], unknown size '%s'. Valid values are small, medium, big, mine",
 		                 string);
@@ -110,9 +127,52 @@ Implementation
 
 ==============================
 */
+
 Building::Building(Building_Descr *descr)
-	: Map_Object(descr)
+	: BaseImmovable(descr)
 {
+	m_owner = 0;
+	m_flag = 0;
+}
+
+Building::~Building()
+{
+}
+
+/*
+===============
+Building::get_type
+Building::get_size
+Building::get_passable
+===============
+*/
+int Building::get_type()
+{
+	return BUILDING;
+}
+
+int Building::get_size()
+{
+	return get_descr()->get_size();
+}
+
+bool Building::get_passable()
+{
+	return false;
+}
+
+
+/*
+===============
+Building::start_animation
+
+Start the given animation
+===============
+*/
+void Building::start_animation(Game *g, Animation *anim)
+{
+	m_anim = anim;
+	m_animstart = g->get_gametime();
 }
 
 /*
@@ -124,24 +184,42 @@ Common building initialization code. You must call this from derived class' init
 */
 void Building::init(Game* g)
 {
-	Map_Object::init(g);
+	BaseImmovable::init(g);
+
+	// Set the building onto the map
+	Map *map = g->get_map();
+	Coords neighb;
+	
+	set_position(g, m_position);
+	
+	if (get_size() == BIG) {
+		map->get_ln(m_position, &neighb);
+		set_position(g, neighb);
+		
+		map->get_tln(m_position, &neighb);
+		set_position(g, neighb);
+		
+		map->get_trn(m_position, &neighb);
+		set_position(g, neighb);
+	}
 	
 	// Make sure the flag is there
-	std::vector<Map_Object*> objs;
-	Map *map = g->get_map();
+	BaseImmovable *imm;
 	Flag *flag;
-	Coords brc;
 	
-	map->get_brn(m_pos, &brc);
+	map->get_brn(m_position, &neighb);
+	imm = map->get_immovable(m_position);
 	
-	if (map->find_objects(brc, 0, FLAG, &objs)) {
-		flag = (Flag *)objs[0];
-	} else {
-		flag = Flag::create(g, get_owned_by(), brc);
-	}
+	if (imm && imm->get_type() == FLAG)
+		flag = (Flag *)imm;
+	else
+		flag = Flag::create(g, get_owner(), neighb);
 	
 	flag->attach_building(g, this);
 	m_flag = flag;
+	
+	// Start the animation
+	start_animation(g, get_descr()->get_idle_anim());
 }
 
 /*
@@ -153,13 +231,44 @@ Cleanup the building
 */
 void Building::cleanup(Game *g)
 {
-	Flag *flag = (Flag *)m_flag.get(g);
-	if (flag) // may have been deleted
-		flag->detach_building(g);
+	m_flag->detach_building(g);
 	
-	Map_Object::cleanup(g);
+	// Unset the building
+	unset_position(g, m_position);
+	
+	if (get_size() == BIG) {
+		Map *map = g->get_map();
+		Coords neighb;
+		
+		map->get_ln(m_position, &neighb);
+		unset_position(g, neighb);
+		
+		map->get_tln(m_position, &neighb);
+		unset_position(g, neighb);
+		
+		map->get_trn(m_position, &neighb);
+		unset_position(g, neighb);
+	}
+	
+	BaseImmovable::cleanup(g);
 }
 
+/*
+===============
+Building::draw
+
+Draw the building.
+===============
+*/
+void Building::draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy)
+{
+	if (coords != m_position)
+		return; // draw big buildings only once
+
+	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, posx, posy, m_owner->get_playercolor_rgb());
+	
+	// door animation?
+}
 
 /*
 ==============================================================================
@@ -180,7 +289,7 @@ public:
 	Warehouse_Descr(Tribe_Descr *tribe, const char *name);
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	virtual Map_Object *create_object();
+	virtual Building *create_object();
 	
 	inline int get_subtype() const { return m_subtype; }
 	inline int get_conquers() const { return m_conquers; }
@@ -247,7 +356,6 @@ public:
 	Warehouse(Warehouse_Descr *descr);
 
 	virtual void init(Game *g);
-	virtual void task_start_best(Game *g, uint prev, bool success, uint nexthint);
 
 	virtual void show_options(Interactive_Player *plr);
 };
@@ -273,22 +381,10 @@ Conquer the land around the HQ on init.
 */	
 void Warehouse::init(Game* g)
 {
-	if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
-		g->conquer_area(get_owned_by(), m_pos, get_descr()->get_conquers());
-	
 	Building::init(g);
-}
 
-/*
-===============
-Warehouse::task_start_best
-
-Always idle.
-===============
-*/
-void Warehouse::task_start_best(Game *g, uint prev, bool success, uint nexthint)
-{
-	start_task_idle(g, get_descr()->get_idle_anim(), -1);
+	if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
+		g->conquer_area(get_owner()->get_player_number(), m_position, get_descr()->get_conquers());
 }
 
 /*
@@ -308,7 +404,7 @@ void Warehouse::show_options(Interactive_Player *plr)
 Warehouse_Descr::create_object
 ===============
 */
-Map_Object *Warehouse_Descr::create_object()
+Building *Warehouse_Descr::create_object()
 {
 	return new Warehouse(this);
 }

@@ -20,469 +20,86 @@
 #ifndef __S__BUILDING_H
 #define __S__BUILDING_H
 
-#include "instances.h"
+#include "immovable.h"
 
+class Flag;
 class Interactive_Player;
 class Tribe_Descr;
 class Profile;
 struct EncodeData;
 
+class Building;
+
 /*
  * Common to all buildings!
  */
-class Building_Descr : public Map_Object_Descr { 
-   public:
-      Building_Descr(Tribe_Descr *tribe, const char *name);
-      virtual ~Building_Descr(void);
+class Building_Descr : public Map_Object_Descr {
+public:
+	Building_Descr(Tribe_Descr *tribe, const char *name);
+	virtual ~Building_Descr(void);
 		
-		virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+	inline const char *get_name(void) { return m_name; }
+	inline const char *get_descname() { return m_descname; }
+	inline Animation* get_idle_anim(void) { return &m_idle; }
+	inline bool get_buildable(void) { return m_buildable; }
+	inline int get_size(void) { return m_size; }
 
-		inline const char *get_name(void) { return m_name; }
-		inline const char *get_descname() { return m_descname; }
-		inline Animation* get_idle_anim(void) { return &m_idle; }
-      inline bool get_buildable(void) { return m_buildable; }
+	Building *create(Game *g, Player *owner, Coords pos);
+	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 
-   private: 
-		Tribe_Descr		*m_tribe;			// the tribe this building belongs to
-		char				m_name[15];			// internal codename
-		char				m_descname[30];	// descriptive name for GUI
-		bool				m_buildable;		// the player can build this himself
-		Animation		m_idle;
+protected:
+	virtual Building *create_object() = 0;
 
-	public:
-		static Building_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory,
-		                                       const EncodeData *encdata);
+private: 
+	Tribe_Descr		*m_tribe;			// the tribe this building belongs to
+	char				m_name[15];			// internal codename
+	char				m_descname[30];	// descriptive name for GUI
+	bool				m_buildable;		// the player can build this himself
+	int				m_size;				// size of the building
+	bool				m_mine;
+	Animation		m_idle;
+
+public:
+	static Building_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory,
+	                                       const EncodeData *encdata);
 };
 
+class Building : public BaseImmovable {
+	friend class Building_Descr;
 
-class Building : public Map_Object {
 	MO_DESCR(Building_Descr)
 
 public:
 	Building(Building_Descr *descr);
+	virtual ~Building();
+
+	virtual int get_type();	
+	virtual int get_size();
+	virtual bool get_passable();
 	
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }
 	
+	inline Player *get_owner() { return m_owner; }
+	
+	virtual void show_options(Interactive_Player *plr) = 0;
+
+protected:
+	void start_animation(Game *g, Animation *anim);
+
 	virtual void init(Game *g);
 	virtual void cleanup(Game *g);
 
-	virtual void show_options(Interactive_Player *plr) = 0;
+	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
 
-private:
-	Object_Ptr	m_flag;
+protected:
+	Player			*m_owner;
+	Coords			m_position;
+	Flag				*m_flag;
+	
+	Animation		*m_anim;
+	int				m_animstart;
 };
 
-
-#if 0
-/*
- * Buildings, that have some need wares (means also stock ist valid)
- */
-class NeedWares_List {
-   public:
-      NeedWares_List(void) { list=0; }
-      ~NeedWares_List(void) { if(list) free(list); }
-
-      int read(FileRead *f);
-
-   private:
-      struct List {
-         ushort index;
-         ushort count;
-         ushort stock;
-      };
-      short nneeds;
-      List* list;
-};
-
-class Has_Needs_Building_Descr : virtual public Building_Descr {
-   public:
-      Has_Needs_Building_Descr(void) { }
-      virtual ~Has_Needs_Building_Descr(void) { }
-
-      virtual int read(FileRead* f);
-      
-      // functions
-      NeedWares_List* get_needs(uint* n, bool* b) { *n=nneeds; *b=needs_or; return &needs; }
-
-   private:
-      bool needs_or; // or needs_and?
-      ushort nneeds;
-      NeedWares_List needs;
-};
-
-/*
- * Buildings, that produce something
- */
-class Has_Products_Building_Descr : virtual public Building_Descr {
-   public:
-      Has_Products_Building_Descr(void) { }
-      virtual ~Has_Products_Building_Descr(void) { }
-
-      virtual int read(FileRead* f);
-
-   protected:
-      Need_List* get_products(uint* n, bool* b) { *n=nproducts; *b=products_or; return &products; }
-
-   private:
-      bool products_or;
-      ushort nproducts;
-      Need_List products;      
-};
-
-/*
- * Buildings, that have a is_a argument. This is a workaround for
- * Ports
- */
-class Has_Is_A_Building_Descr : virtual public Building_Descr {
-   public:
-      enum {
-         IS_A_SMALL = 1,
-         IS_A_MEDIUM = 2,
-         IS_A_BIG = 3,
-         IS_A_MINE = 4,
-         IS_A_PORT = 5,
-         IS_A_NOTHING =6
-      };
-
-      Has_Is_A_Building_Descr(void) { }
-      ~Has_Is_A_Building_Descr(void) { }
-
-      virtual int read(FileRead* f);
-      ushort get_is_a(void) { return is_a; }  
-
-   private:
-      ushort is_a; // size of building
-};
-
-/*
- * Buildings, that can be build somewhere
- */
-class Buildable_Building_Descr : virtual public Building_Descr {
-   public:
-      Buildable_Building_Descr(void) { }
-      virtual ~Buildable_Building_Descr(void) { }
-
-      virtual int read(FileRead* f);
-
-      char* get_category(void) { return category; }
-      ushort get_build_time(void) { return build_time; }
-      Need_List* get_build_cost(uint* n) { *n=ncost; return &cost; }
-      Animation* get_build_anim(void) { return &build; }
-
-
-   private:
-      char category[30];
-      ushort build_time;
-      ushort ncost;
-      Need_List cost;
-      Animation build;
-};
-
-/*
- * Buildings that are 'working' (only valid for 
- * workers type=sit) at the moment
- */
-class Working_Building_Descr : virtual public Building_Descr {
-   public:
-      Working_Building_Descr(void) { }
-      virtual ~Working_Building_Descr(void) { }
-
-      virtual int read(FileRead* f);
-      
-      Animation* get_working_anim(void) { return &working; }
-
-   private:
-      Animation working;
-};
-
-/* 
- * Buildings, that are only 'standing around' doing 
- * nothing. e.g military buildings or searcher buildings
- */
-class Boring_Building_Descr : virtual public Building_Descr {
-   public:
-      Boring_Building_Descr(void) { }
-      virtual ~Boring_Building_Descr(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-/*
- * Buildings, inhabitated by diggers
- */
-class Dig_Building_Descr : virtual public Working_Building_Descr,
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr,
-   virtual public Has_Needs_Building_Descr,
-   virtual public Has_Products_Building_Descr {
-
-      public:
-         Dig_Building_Descr(void) { }
-         ~Dig_Building_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         uint worker;
-         char resource[30];
-         uint idle_time;
-         uint working_time;
-   };
-
-/*
- * searcher buildings
- */
-class Search_Building_Descr : virtual public Boring_Building_Descr, 
-   virtual public Buildable_Building_Descr, 
-   virtual public Has_Is_A_Building_Descr,
-   virtual public Has_Needs_Building_Descr,
-   virtual public Has_Products_Building_Descr {
-      public:
-         Search_Building_Descr(void) { bobs=0; }
-         ~Search_Building_Descr(void) { if(bobs) free(bobs);  }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         ushort working_time;
-         ushort idle_time;
-         ushort working_area;
-         uint worker;
-         ushort nbobs;
-         char*  bobs;
-   };
-
-/*
- * Buildings, that are inhabitated by planters
- */
-class Plant_Building_Descr : virtual public Boring_Building_Descr,
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr,
-   virtual public Has_Needs_Building_Descr {
-      public:
-         Plant_Building_Descr(void) { bobs=0;}
-         ~Plant_Building_Descr(void) { if(bobs) free(bobs); }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         ushort working_time;
-         ushort idle_time;
-         ushort working_area;
-         uint worker;
-         ushort nbobs;
-         char*  bobs;
-   };
-
-/*
- * Grow buildings
- */
-class Grow_Building_Descr : virtual public Boring_Building_Descr,
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr,
-   virtual public Has_Needs_Building_Descr,
-   virtual public Has_Products_Building_Descr  {
-      public:
-         Grow_Building_Descr(void) { }
-         ~Grow_Building_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         uint worker;
-         ushort working_area;
-         ushort working_time;
-         ushort idle_time;
-         char plant_bob[30];
-         char search_bob[30];
-   };
-
-/*
- * Now the sit buildings 
- */
-class Sit_Building_Descr : virtual public Working_Building_Descr, 
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr,
-   virtual public Has_Needs_Building_Descr,
-   virtual public Has_Products_Building_Descr {
-      public:
-         Sit_Building_Descr(void) { }
-         ~Sit_Building_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         bool order_worker;
-         uint worker;
-         ushort idle_time;
-         ushort working_time;
-   };
-
-class Sit_Building_Produ_Worker_Descr : virtual public Working_Building_Descr,
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr,
-   virtual public Has_Needs_Building_Descr {
-      public:
-         Sit_Building_Produ_Worker_Descr(void) { }
-         ~Sit_Building_Produ_Worker_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         uint worker;
-         ushort idle_time;
-         ushort working_time;
-         ushort prod_worker;
-   };
-
-/*
- * Science buildings 
- */
-class Science_Building_Descr : virtual public Working_Building_Descr,
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr {
-      public:
-         Science_Building_Descr(void) { }
-         ~Science_Building_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         uint worker; 
-   };
-
-
-/*
- * Military buildings
- */
-class Military_Building_Descr : virtual public Boring_Building_Descr,
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr, 
-   virtual public Has_Needs_Building_Descr {
-      public:
-         Military_Building_Descr::Military_Building_Descr(void) { }
-         Military_Building_Descr::~Military_Building_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         ushort beds;
-         ushort conquers;
-         ushort idle_time;
-         ushort nupgr;
-   };
-
-/*
- * Cannon
- */
-class Cannon_Descr : virtual public Boring_Building_Descr,
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr, 
-   virtual Has_Needs_Building_Descr {
-      public:
-         Cannon_Descr::Cannon_Descr(void) { }
-         Cannon_Descr::~Cannon_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         uint worker;
-         ushort idle_time;
-         ushort projectile_speed;
-         bool fires_balistic;
-         Animation projectile;
-         Animation fire_ne;
-         Animation fire_e;
-         Animation fire_se;
-         Animation fire_sw;
-         Animation fire_w;
-         Animation fire_nw;
-   };
-
-
-// Special buildings!!
-
-//
-// Head quarters, HQ
-// 
-class HQ_Descr : virtual public Boring_Building_Descr {
-   public:
-      HQ_Descr::HQ_Descr(void) { }
-      HQ_Descr::~HQ_Descr(void) { }
-
-      int read(FileRead* f);
-      Map_Object *create_object();
-      
-      ushort get_conquers(void) { return conquers; }
-
-   private:
-      ushort conquers;
-};
-
-//
-// Store
-// 
-class Store_Descr : virtual public Boring_Building_Descr, 
-   virtual public Buildable_Building_Descr, 
-   virtual public Has_Is_A_Building_Descr {
-      public:
-         Store_Descr::Store_Descr(void) { }
-         Store_Descr::~Store_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         // nothing
-   };
-
-//
-// dockyard
-// 
-class Dockyard_Descr :  virtual public Boring_Building_Descr,
-   virtual public Buildable_Building_Descr,
-   virtual public Has_Is_A_Building_Descr,
-   virtual public Has_Needs_Building_Descr {
-      public: 
-         Dockyard_Descr::Dockyard_Descr(void) { }
-         Dockyard_Descr::~Dockyard_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         ushort working_time;
-         ushort idle_time;
-         uint worker;
-   };
-
-//
-// Port
-// 
-class Port_Descr : virtual public Boring_Building_Descr,
-   virtual public Buildable_Building_Descr {
-      public:
-         Port_Descr::Port_Descr(void) { }
-         Port_Descr::~Port_Descr(void) { }
-
-         int read(FileRead* f);
-         Map_Object *create_object();
-
-      private:
-         // nothing
-};
-#endif
 
 #endif // __S__BUILDING_H

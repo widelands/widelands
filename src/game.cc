@@ -21,7 +21,6 @@
 #include "cursor.h"
 #include "map.h"
 #include "cmd_queue.h"
-#include "descr_maintainer.h"
 #include "bob.h"
 #include "ware.h"
 #include "worker.h"
@@ -33,6 +32,7 @@
 #include "mapselectmenue.h"
 #include "IntPlayer.h"
 #include "player.h"
+#include "building.h"
 
 
 /** Game::Game(void)
@@ -207,16 +207,16 @@ bool Game::run(void)
 		ipl = new Interactive_Player(this, 1);
 	  
 		// Prepare the players (i.e. place HQs)
-		for(int i = 1; i <= map->get_nplayers(); i++) {
+		for(int i = 1; i <= map->get_nrplayers(); i++) {
 			Player* player = get_player(i);
 			if (!player)
 				continue;
 
 			player->setup();
 
-			const Coords* c = map->get_starting_pos(i);
+			const Coords &c = map->get_starting_pos(i);
 			if (player->get_type() == Player::playerLocal)
-				ipl->move_view_to(c->x, c->y);
+				ipl->move_view_to(c.x, c.y);
 		}
 		ipl->run();
 		
@@ -282,15 +282,14 @@ void Game::send_player_command(int pid, int cmd, int arg1, int arg2, int arg3)
 void Game::warp_building(int x, int y, char owner, int idx)
 {
 	Building_Descr *descr;
-	Map_Object* obj;
+	Player *player = get_player(owner);
 	
-	assert(get_player(owner));
+	assert(player);
    
-	descr = get_player_tribe(owner)->get_building_descr(idx);
-	if (!descr)
-		throw wexception("warp_building: no description for %i", idx);
+	descr = player->get_tribe()->get_building_descr(idx);
+	assert(descr);
 
- 	obj = m_objects->create_object(this, descr, owner, Coords(x, y));
+	descr->create(this, get_player(owner), Coords(x, y));
 }
 
 /** Game::create_bob(int x, int y, int idx)
@@ -301,14 +300,30 @@ void Game::warp_building(int x, int y, char owner, int idx)
  */
 void Game::create_bob(int x, int y, int idx)
 {
-	Logic_Bob_Descr *descr;
-	Map_Object* obj;
+	Bob_Descr *descr;
 
 	descr = map->get_world()->get_bob_descr(idx);
-	if (!descr)
-		throw wexception("create_bob: no description for %i", idx);
+	assert(descr);
 	
-	obj = m_objects->create_object(this, descr, 0, Coords(x, y));
+	descr->create(this, 0, Coords(x, y));
+}
+
+/*
+===============
+Game::create_immovable
+
+Create an immovable at the given location.
+Does not perform any placability checks.
+===============
+*/
+void Game::create_immovable(int x, int y, int idx)
+{
+	Immovable_Descr *descr;
+
+	descr = map->get_world()->get_immovable_descr(idx);
+	assert(descr);
+	
+	descr->create(this, Coords(x, y));
 }
 
 /*

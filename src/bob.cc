@@ -19,12 +19,12 @@
 
 #include "widelands.h"
 #include "world.h"
-#include "bob.h"
 #include "game.h"
 #include "cmd_queue.h"
+#include "player.h"
+#include "bob.h"
 #include "map.h"
 #include "profile.h"
-
 
 /*
 ==============================================================================
@@ -441,199 +441,641 @@ void Animation::parse(const char *directory, Section *s, const char *picnametemp
 		throw wexception("Animation %s has no frames", pictempl);
 }
 
-// 
-// class Logic_Bob_Descr
-//
-Logic_Bob_Descr::Logic_Bob_Descr(const char *name)
+/*
+==============================================================================
+
+Bob IMPLEMENTATION		
+
+==============================================================================
+*/
+
+/*
+===============
+Bob_Descr::Bob_Descr
+Bob_Descr::~Bob_Descr
+===============
+*/
+Bob_Descr::Bob_Descr(const char *name)
 {
 	snprintf(m_name, sizeof(m_name), "%s", name);
 }
 
-void Logic_Bob_Descr::read(const char *directory, Section *s)
+Bob_Descr::~Bob_Descr(void)
+{
+}
+
+/*
+===============
+Bob_Descr::read
+
+Parse additional information from the config file
+===============
+*/
+void Bob_Descr::read(const char *directory, Section *s)
 {
 	char picname[256];
 	
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
    anim.parse(directory, s, picname);
+}
 
-	const char *string;
-	 
-	string = s->get_string("size", 0);
-	if (string) {
-		if (has_attribute(Map_Object::MOVABLE))
-			throw wexception("Movable bob cannot have a size");
+/*
+===============
+Bob_Descr::create
+
+Create a bob of this type
+===============
+*/
+Bob *Bob_Descr::create(Game *g, Player *owner, Coords coords)
+{
+	Bob *bob = create_object();
+	bob->set_owner(owner);
+	bob->set_position(g, coords);
+	bob->init(g);
+	return bob;
+}
+
+
+/*
+==============================
+
+IMPLEMENTATION
+
+==============================
+*/
+
+/*
+===============
+Bob::Bob
+
+Zero-initialize a map object
+===============
+*/
+Bob::Bob(Bob_Descr* descr)
+	: Map_Object(descr)
+{
+	m_owner = 0;
+	m_position.x = m_position.y = 0; // not linked anywhere
+	m_position.field = 0;
+	m_linknext = 0;
+	m_linkpprev = 0;
+
+	m_anim = 0;
+	m_animstart = 0;
 	
-		if (!strcasecmp(string, "volatile") || !strcasecmp(string, "none"))
-		{
-			// not robust
-		}
-		else if (!strcasecmp(string, "small"))
-		{
-			add_attribute(Map_Object::ROBUST);
-			add_attribute(Map_Object::SMALL);
-		}
-		else if (!strcasecmp(string, "normal") || !strcasecmp(string, "medium"))
-		{
-			add_attribute(Map_Object::ROBUST);
-		}
-		else if (!strcasecmp(string, "big"))
-		{
-			add_attribute(Map_Object::ROBUST);
-			add_attribute(Map_Object::BIG);
-			add_attribute(Map_Object::UNPASSABLE);
-		}
-		else
-			throw wexception("Unknown size '%s'. Possible values: none, small, normal, big", string);
+	m_walking = IDLE;
+	m_walkstart = m_walkend = 0;
+	
+	m_task = 0;
+	m_task_acting = false;
+	m_task_switching = false;
+}
+
+/*
+===============
+Bob::~Bob()
+
+Cleanup an object. Removes map links
+===============
+*/
+Bob::~Bob()
+{
+	if (m_position.field) {
+		log("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not called!\n");
+		*(int *)0 = 0;
 	}
 }
 
 /*
-==============================================================================   
+===============
+Bob::get_type
+===============
+*/
+int Bob::get_type()
+{
+	return BOB;
+}
 
-class Diminishing_Bob
 
-==============================================================================   
+/*
+Objects and tasks
+-----------------
+
+Every object _always_ has a current task which it is doing.
+For a boring object, this task is always an IDLE task, which will be
+reduced to effectively 0 CPU overhead.
+
+For another simple example, look at animals. They have got two states:
+moving or not moving. This is actually represented as two tasks, 
+IDLE and MOVE_PATH, which are both part of the default package that comes
+with Map_Object.
+
+Now there are some important considerations:
+- every object must always have a task, even if it's IDLE
+- be careful as to when you call task handling functions; the comments
+  above each function tell you when you can call them, and which functions
+  you can call from them
+- a task can only end itself; it cannot be ended by someone else
+- there are default, predefined tasks (TASK_IDLE, TASK_MOVEPATH); use them
+- you must call start_task_*() for the default tasks. Do not start them
+  directly!
+
+To implement a new task, you need to create a new task_begin(), task_act()
+and perhaps task_end(). Create a switch()-statement for the new task(s) and
+call the base class' task_*() functions in the default branch.
+Most likely, you'll also want a start_task_*()-type function.
 */
 
-// 
-// Description
-// 
-class Diminishing_Bob_Descr : public Logic_Bob_Descr {
-   public:
-		Diminishing_Bob_Descr(const char *name);
-      virtual ~Diminishing_Bob_Descr(void) { }
+/*
+===============
+Bob::init
 
-      virtual void read(const char *directory, Section *s);
-      Map_Object *create_object();
+Make sure you call this from derived classes!
 
-	private:
-		Logic_Bob_Descr* ends_in;
-		ushort stock;
-		uchar occupies;
-};
-
-Diminishing_Bob_Descr::Diminishing_Bob_Descr(const char *name)
-	: Logic_Bob_Descr(name)
+Initialize the object by setting the initial task.
+===============
+*/
+void Bob::init(Game* g)
 {
-	ends_in=0;
-	stock=0;
-}
+	Map_Object::init(g);
 
-void Diminishing_Bob_Descr::read(const char *directory, Section *s)
-{
-   Logic_Bob_Descr::read(directory, s);
-   
-	stock = s->get_int("stock", 0);
+	// Initialize task system
+	m_lasttask = 0;
+	m_lasttask_success = true;
+	m_nexttask = 0;
 	
-	// TODO
-	s->get_string("ends_in", 0);
+	do_next_task(g);
+}
+
+
+/*
+===============
+Bob::cleanup
+
+Perform Game-related cleanup as necessary.
+===============
+*/
+void Bob::cleanup(Game *g)
+{
+	if (get_current_task())
+		task_end(g); // subtle...
 	
+	if (m_position.field) {
+		m_position.field = 0;
+		*m_linkpprev = m_linknext;
+		if (m_linknext)
+			m_linknext->m_linkpprev = m_linkpprev;
+	}
+	
+	Map_Object::cleanup(g);
 }
 
 
-// 
-// Implementation
-// 
-class Diminishing_Bob : public Map_Object {
-		MO_DESCR(Diminishing_Bob_Descr);
+/*
+===============
+Bob::act
 
-   public:
-		Diminishing_Bob(Diminishing_Bob_Descr* d);
-      virtual ~Diminishing_Bob(void);
-
-		virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
-};
-
-Diminishing_Bob::Diminishing_Bob(Diminishing_Bob_Descr* d)
-	: Map_Object(d)
+Hand the acting over to the task
+ 
+Change to the next task if necessary.
+===============
+*/
+void Bob::act(Game* g)
 {
-} 
+	m_task_acting = true;
+	int tdelta = task_act(g);
+	// a tdelta == 0 is probably NOT what you want - make your intentions clear
+	assert(!m_task || tdelta < 0 || tdelta > 0);
+	m_task_acting = false;
 
-Diminishing_Bob::~Diminishing_Bob()
-{
-}
-
-void Diminishing_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthint)
-{
-	// infinitely idle
-	start_task_idle(g, get_descr()->get_anim(), -1);
-}
-
-Map_Object *Diminishing_Bob_Descr::create_object()
-{
-	return new Diminishing_Bob(this);
+	if (!m_task) {
+		do_next_task(g);
+		return;
+	}
+		
+	if (tdelta > 0)
+		g->get_cmdqueue()->queue(g->get_gametime()+tdelta, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
 }
 
 /*
-==============================================================================   
+===============
+Bob::do_next_task [private]
 
-class Boring_Bob
-
-==============================================================================   
+Try to get the next task running.
+===============
 */
-
-// 
-// Description
-// 
-class Boring_Bob_Descr : public Logic_Bob_Descr {
-   public:
-      Boring_Bob_Descr(const char *name);
-      virtual ~Boring_Bob_Descr(void) { } 
-
-      virtual void read(const char *directory, Section *s);
-      Map_Object *create_object();
-
-   private:
-      ushort ttl; // time to life
-      uchar occupies;
-};
-
-Boring_Bob_Descr::Boring_Bob_Descr(const char *name)
-	: Logic_Bob_Descr(name)
+void Bob::do_next_task(Game* g)
 {
-	ttl = 0;
+	int task_retries = 0;
+	
+	assert(!m_task);
+	
+	while(!m_task) {
+		assert(task_retries < 5); // detect infinite loops early
+	
+		m_task_switching = true;
+		task_start_best(g, m_lasttask, m_lasttask_success, m_nexttask);
+		m_task_switching = false;
+
+		do_start_task(g);
+				
+		task_retries++;
+	}
 }
 
-void Boring_Bob_Descr::read(const char *directory, Section *s)
-{
-	Logic_Bob_Descr::read(directory, s);
+/*
+===============
+Bob::start_task
 
-   ttl = s->get_int("life_time", 0);
+Start the given task.
+
+Only allowed when m_task_switching, i.e. from init() and act().
+Consequently, derived classes can only call this from task_start_best().
+===============
+*/
+void Bob::start_task(Game* g, uint task)
+{
+	assert(m_task_switching);
+	assert(!m_task);
+	
+	m_task = task;
+}
+
+/*
+===============
+Bob::do_start_task [private]
+
+Actually start the task (m_task is set already)
+===============
+*/
+void Bob::do_start_task(Game* g)
+{
+	assert(m_task);
+
+	m_task_acting = true;
+	int tdelta = task_begin(g);
+	// a tdelta == 0 is probably NOT what you want - make your intentions clear
+	assert(!m_task || tdelta < 0 || tdelta > 0);
+	m_task_acting = false;
+	
+	if (m_task && tdelta > 0)
+		g->get_cmdqueue()->queue(g->get_gametime()+tdelta, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+}
+
+/*
+===============
+Bob::end_task
+
+Let the task end itself, indicating success or failure.
+nexttask will be passed to task_start_best() to help the decision.
+
+Only allowed when m_task_acting, i.e. from act() or start_task()
+and thus only from task_begin() and task_act()
+
+Be aware that end_task() calls task_end() which may cleanup some
+structures belonging to your task.
+===============
+*/
+void Bob::end_task(Game* g, bool success, uint nexttask)
+{
+	assert(m_task_acting);
+	assert(m_task);
+
+	task_end(g);
+		
+	m_lasttask = m_task;
+	m_lasttask_success = success;
+	m_nexttask = nexttask;
+	
+	m_task = 0;
+}
+
+/*
+===============
+Bob::start_task_idle
+
+Start an idle phase, using the given animation
+If the timeout is a positive value, the idle phase stops after the given
+time.
+
+This task always succeeds.
+===============
+*/
+void Bob::start_task_idle(Game* g, Animation* anim, int timeout)
+{
+	// timeout == 0 will wait indefinitely - probably NOT what you want (use -1 for infinite)
+	assert(timeout < 0 || timeout > 0);
+
+	set_animation(g, anim);
+	task.idle.timeout = timeout;
+	start_task(g, TASK_IDLE);
+}
+
+/*
+===============
+Bob::start_task_movepath
+
+Start moving to the given destination. persist is the same parameter as
+for Map::findpath().
+anims is an array of 6 animations, one for each direction.
+The order is the canonical NE, E, SE, SW, W, NW (order of the enum)
+
+Returns false if no path could be found.
+
+The task finishes once the goal has been reached. It may fail.
+===============
+*/
+bool Bob::start_task_movepath(Game* g, Coords dest, int persist, Animation **anims)
+{
+	task.movepath.path = new Path;
+
+	if (g->get_map()->findpath(m_position, dest, get_movecaps(), persist, task.movepath.path) < 0) {
+		delete task.movepath.path;
+		return false;
+	}
+	
+	task.movepath.step = 0;
+	memcpy(task.movepath.anims, anims, sizeof(Animation*)*6);
+	
+	start_task(g, TASK_MOVEPATH);
+	return true;
+}
+		
+/*
+===============
+Bob::task_begin [virtual]
+
+This function is called to start a task.
+
+In this function, you may:
+ - call end_task()
+ - call set_animation(), start_walk(), set_position() and similar functions
+ - call task_act() for "array-based" tasks
+ 
+You can schedule a call to task_act() by returning the time, in milliseconds,
+until task_act() should be could. NOTE: this time is relative to the current
+time!
+If you return a value <= 0, task_act() will _never_ be called. This means that
+the task can never end - it will continue till infinity (note that this may
+be changed at a later point, introducing something like interrupt_task).
+===============
+*/
+int Bob::task_begin(Game* g)
+{
+	switch(get_current_task()) {
+	case TASK_IDLE:
+		return task.idle.timeout;
+		
+	case TASK_MOVEPATH:
+		return task_act(g);
+	}
+
+	cerr << "task_begin: Unhandled task " << m_task << endl;
+	assert(!"task_begin: Unhandled task ");
+	return -1; // shut up compiler
+}
+
+/*
+===============
+Bob::task_act [virtual]
+
+Calls to this function are scheduled by this function and task_begin().
+
+In this function you may call all the functions available in task_begin().
+
+As with task_begin(), you can also schedule another call to task_act() by
+returning a value > 0
+===============
+*/
+int Bob::task_act(Game* g)
+{
+	switch(get_current_task()) {
+	case TASK_IDLE:
+		end_task(g, true, 0); // success, no next task
+		return 0; /* will be ignored */
+	
+	case TASK_MOVEPATH:
+	{
+		if (task.movepath.step)
+			end_walk(g);
+		
+		if (task.movepath.step >= task.movepath.path->get_nsteps()) {
+			assert(m_position == task.movepath.path->get_end());
+			end_task(g, true, 0); // success
+			return 0;
+		}
+
+		char dir = task.movepath.path->get_step(task.movepath.step);
+		Animation *a = task.movepath.anims[dir-1];
+	
+		int tdelta = start_walk(g, (WalkingDir)dir, a);
+		if (tdelta < 0) {
+			end_task(g, false, 0); // failure to reach goal
+			return 0;
+		}
+
+		task.movepath.step++;		
+		return tdelta;
+	}
+	}
+
+	cerr << "task_act: Unhandled task " << m_task << endl;
+	assert(!"task_act: Unhandled task ");
+	return -1; // shut up compiler
+}
+
+/*
+===============
+Bob::task_end [virtual]
+
+Called by end_task(). Use it to clean up any structures allocated in
+task_begin() or a start_task_*() type function.
+===============
+*/
+void Bob::task_end(Game*)
+{
+	switch(get_current_task()) {
+	case TASK_MOVEPATH:
+		if (task.movepath.path)
+			delete task.movepath.path;
+		break;
+	}
+}
+
+/*
+===============
+Bob::draw
+
+Draw the map object. 
+posx/posy is the on-bitmap position of the field we're currently on,
+WITHOUT height taken into account.
+
+It LERPs between start and end position when we're walking.
+Note that the current field is actually the field we're walking to, not
+the one we start from.
+===============
+*/
+void Bob::draw(Game *game, Bitmap* dst, int posx, int posy)
+{
+	if (!m_anim)
+		return;
+
+	Map *map = game->get_map();
+	FCoords end;
+	FCoords start;
+	int dummyx, dummyy;
+	int sx, sy;
+	int ex, ey;
+	const uchar *playercolors = 0;
+	
+	if (get_owner())
+		playercolors = get_owner()->get_playercolor_rgb();
+
+	end = m_position;
+	ex = posx;
+	ey = posy;
+
+	sx = ex;
+	sy = ey;
+	
+	switch(m_walking) {
+	case WALK_NW: map->get_brn(end, &start); sx += FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
+	case WALK_NE: map->get_bln(end, &start); sx -= FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
+	case WALK_W: map->get_rn(end, &start); sx += FIELD_WIDTH; break;
+	case WALK_E: map->get_ln(end, &start); sx -= FIELD_WIDTH; break;
+	case WALK_SW: map->get_trn(end, &start); sx += FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
+	case WALK_SE: map->get_tln(end, &start); sx -= FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
+	
+	case IDLE: start.field = 0; break;
+	}
+
+	if (start.field) {
+		sy += end.field->get_height()*HEIGHT_FACTOR;
+		sy -= start.field->get_height()*HEIGHT_FACTOR;
+
+		float f = (float)(game->get_gametime() - m_walkstart) / (m_walkend - m_walkstart);
+		if (f < 0) f = 0;
+		else if (f > 1) f = 1;
+		
+		ex = (int)(f*ex + (1-f)*sx);
+		ey = (int)(f*ey + (1-f)*sy);
+	}
+
+	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, ex, ey, playercolors);
 }
 
 
-// 
-// Implementation
-// 
-class Boring_Bob : public Map_Object {
-		MO_DESCR(Boring_Bob_Descr);
+/*
+===============
+Bob::set_animation
 
-   public:
-      Boring_Bob(Boring_Bob_Descr *d);
-      virtual ~Boring_Bob(void);
-
-		virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
-};
-
-Boring_Bob::Boring_Bob(Boring_Bob_Descr *d)
-	: Map_Object(d)
+Set a looping animation, starting now.
+===============
+*/
+void Bob::set_animation(Game* g, Animation* anim)
 {
+	m_anim = anim;
+	m_animstart = g->get_gametime();
 }
 
-Boring_Bob::~Boring_Bob()
+/*
+===============
+Bob::is_walking
+
+Return true if we're currently walking
+===============
+*/
+bool Bob::is_walking()
 {
+	return m_walking != IDLE;
 }
 
-void Boring_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthint)
+/*
+===============
+Bob::end_walk
+
+Call this from your task_act() function that was scheduled after start_walk().
+===============
+*/
+void Bob::end_walk(Game* g)
 {
-	// infinitely idle
-	start_task_idle(g, get_descr()->get_anim(), -1);
+	m_walking = IDLE;
 }
 
-Map_Object *Boring_Bob_Descr::create_object()
+
+/*
+===============
+Bob::start_walk
+
+Cause the object to walk, honoring passable/impassable parts of the map using movecaps.
+
+Returns the number of milliseconds after which the walk has ended. You must 
+call end_walk() after this time, so schedule a task_act().
+
+Returns a negative value when we can't walk into the requested direction.
+===============
+*/
+int Bob::start_walk(Game *g, WalkingDir dir, Animation *a)
 {
-	return new Boring_Bob(this);
+	FCoords newf;
+	
+	switch(dir) {
+	case IDLE: assert(0); break;
+	case WALK_NW: g->get_map()->get_tln(m_position, &newf); break;
+	case WALK_NE: g->get_map()->get_trn(m_position, &newf); break;
+	case WALK_W: g->get_map()->get_ln(m_position, &newf); break;
+	case WALK_E: g->get_map()->get_rn(m_position, &newf); break;
+	case WALK_SW: g->get_map()->get_bln(m_position, &newf); break;
+	case WALK_SE: g->get_map()->get_brn(m_position, &newf); break;
+	}
+
+	// Move capability check by ANDing with the field caps
+	//
+	// The somewhat crazy check involving MOVECAPS_SWIM should allow swimming objects to
+	// temporarily land.
+	uint movecaps = get_movecaps();
+
+	if (!(m_position.field->get_caps() & movecaps & MOVECAPS_SWIM && newf.field->get_caps() & MOVECAPS_WALK) &&
+	    !(newf.field->get_caps() & movecaps))
+		return -1;
+
+	// Move is go
+	int tdelta = 2000; // :TODO: height-based speed changes
+	
+	m_walking = dir;
+	m_walkstart = g->get_gametime();
+	m_walkend = m_walkstart + tdelta;
+	
+	set_position(g, newf);
+	set_animation(g, a);
+	
+	return tdelta; // yep, we were successful
 }
+
+/*
+===============
+Bob::set_position
+
+Moves the Map_Object to the given position.
+===============
+*/
+void Bob::set_position(Game* g, Coords coords)
+{
+	if (m_position.field) {
+		*m_linkpprev = m_linknext;
+		if (m_linknext)
+			m_linknext->m_linkpprev = m_linkpprev;
+	}
+
+	m_position = FCoords(coords, g->get_map()->get_field(coords));
+	
+	m_linknext = m_position.field->bobs;
+	m_linkpprev = &m_position.field->bobs;
+	if (m_linknext)
+		m_linknext->m_linkpprev = &m_linknext;
+	m_position.field->bobs = this;
+}
+
 
 /*
 ==============================================================================   
@@ -646,13 +1088,13 @@ class Critter_Bob
 // 
 // Description
 // 
-class Critter_Bob_Descr : public Logic_Bob_Descr {
+class Critter_Bob_Descr : public Bob_Descr {
    public:
       Critter_Bob_Descr(const char *name);
       virtual ~Critter_Bob_Descr(void) { } 
 
       virtual void read(const char *directory, Section *s);
-      Map_Object *create_object();
+      Bob *create_object();
 
       inline bool is_swimming(void) { return swimming; }
       inline Animation* get_walk_ne_anim(void) { return &walk_ne; }
@@ -674,16 +1116,14 @@ class Critter_Bob_Descr : public Logic_Bob_Descr {
 };
 
 Critter_Bob_Descr::Critter_Bob_Descr(const char *name)
-	: Logic_Bob_Descr(name)
+	: Bob_Descr(name)
 {
 	stock = swimming = 0;
 }
 
 void Critter_Bob_Descr::read(const char *directory, Section *s)
 {
-	add_attribute(Map_Object::MOVABLE);
-   
-	Logic_Bob_Descr::read(directory, s);
+	Bob_Descr::read(directory, s);
 
 	stock = s->get_int("stock", 0);
    swimming = s->get_bool("swimming", false);
@@ -716,20 +1156,20 @@ void Critter_Bob_Descr::read(const char *directory, Section *s)
 //
 #define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000 // wait up to 12 seconds between moves
 
-class Critter_Bob : public Map_Object {
-		MO_DESCR(Critter_Bob_Descr);
+class Critter_Bob : public Bob {
+	MO_DESCR(Critter_Bob_Descr);
 
-   public:
-      Critter_Bob(Critter_Bob_Descr *d);
-      virtual ~Critter_Bob(void);
+public:
+	Critter_Bob(Critter_Bob_Descr *d);
+	virtual ~Critter_Bob(void);
 
-		uint get_movecaps();
+	uint get_movecaps();
 
-		virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
+	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 };
 
 Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
-	: Map_Object(d)
+	: Bob(d)
 {
 }
 
@@ -756,8 +1196,8 @@ void Critter_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthin
 		// Pick a target at random
 		Coords dst;
 		
-		dst.x = m_pos.x + (rand()%5) - 2;
-		dst.y = m_pos.y + (rand()%5) - 2;
+		dst.x = m_position.x + (rand()%5) - 2;
+		dst.y = m_position.y + (rand()%5) - 2;
 		
 		if (start_task_movepath(g, dst, 3, anims))
 			return;
@@ -770,112 +1210,43 @@ void Critter_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthin
 	start_task_idle(g, get_descr()->get_anim(), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
 }
 
-Map_Object *Critter_Bob_Descr::create_object()
+Bob *Critter_Bob_Descr::create_object()
 {
 	return new Critter_Bob(this);
 }
 
-/*
-==============================================================================   
-
-class Growing_Bob
-
-==============================================================================   
-*/
-
-#if 0 // NOT IMPLEMENTED
-//
-// class Growing_Bob_Descr
-//
-class Growing_Bob_Descr : public Logic_Bob_Descr {
-   public:
-      Growing_Bob_Descr(void) { ends_in=0; growing_speed=0; }
-      virtual ~Growing_Bob_Descr(void) {  }
-
-      virtual int read(FileRead* f);
-      Map_Object *create_object();
-
-   private:
-      Logic_Bob_Descr* ends_in;
-      ushort growing_speed;
-      uchar occupies;
-};
-
-int Growing_Bob_Descr::read(FileRead* f)
-{
-   cerr << "Growing_Bob_Descr::read() TODO!" << endl;
-   return RET_OK;
-}
-
-Map_Object *Growing_Bob_Descr::create_object()
-{
-   cerr << "Growing_Bob_Descr::create_object() TODO!" << endl;
-	
-	return 0; // uh oh
-}
-#endif
-
 
 /*
 ==============================================================================
 
-Logic_Bob factory
+Bob_Descr factory
 
 ==============================================================================
 */
 
-/** Logic_Bob_Descr::create_from_dir(const char *directory) [static]
- *
- * Master factory to read a bob from the given directory and create the
- * appropriate description class.
- *
- * May return 0.
- */
-Logic_Bob_Descr *Logic_Bob_Descr::create_from_dir(const char *directory)
+/*
+===============
+Bob_Descr::create_from_dir(const char *directory) [static]
+ 
+Master factory to read a bob from the given directory and create the
+appropriate description class.
+===============
+*/
+Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, Profile *prof)
 {
-	const char *name;
-	
-	// name = last element of path
-	const char *slash = strrchr(directory, '/');
-	const char *backslash = strrchr(directory, '\\');
-	
-	if (backslash && (!slash || backslash > slash))
-		slash = backslash;
-	
-	if (slash)
-		name = slash+1;
-	else
-		name = directory;
+	Bob_Descr *bob = 0;
 
-	// Open the config file
-	Logic_Bob_Descr *bob = 0;
-	char fname[256];
-	
-	snprintf(fname, sizeof(fname), "%s/conf", directory);
-	
-	if (!g_fs->FileExists(fname))
-		return 0;
-		
 	try
 	{
-		Profile prof(fname, "global"); // section-less file
-		Section *s = prof.get_safe_section("global");
-
+		Section *s = prof->get_safe_section("global");
 		const char *type = s->get_safe_string("type");
 
-		if(!strcasecmp(type, "diminishing")) {
-			bob = new Diminishing_Bob_Descr(name);
-	/*	} else if(!strcasecmp(type, "growing")) {
-			bob = new Growing_Bob_Descr(name);*/
-		} else if(!strcasecmp(type, "boring")) {
-			bob = new Boring_Bob_Descr(name);
-		} else if(!strcasecmp(type, "critter")) {
+		if (!strcasecmp(type, "critter")) {
 			bob = new Critter_Bob_Descr(name);
 		} else
 			throw wexception("Unsupported bob type '%s'", type);
 
 		bob->read(directory, s);
-		prof.check_used();
 	}
 	catch(std::exception &e) {
 		if (bob)

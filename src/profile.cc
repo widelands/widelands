@@ -790,12 +790,12 @@ void Profile::read(const char *filename, const char *global_section)
 						if (global_section)
 							s = create_section(global_section, true);
 						else
-							error("line %i: key %s outside section", linenr, p);
+							throw wexception("line %i: key %s outside section", linenr, p);
 					}
 					if (s) // error() may or may not throw
 						s->create_val(p, tail, true); // may create duplicate
 				} else {
-					error("line %i: syntax error", linenr);
+					throw wexception("line %i: syntax error", linenr);
 				}
 			}
 		}

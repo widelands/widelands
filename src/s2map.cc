@@ -96,83 +96,48 @@ uchar *Map::load_s2mf_section(FileRead *file, int width, int height)
    return section;
 }
 
-//
-// load the header of a S2 map
-//
-int Map::load_s2mf_header(const char* filen)
+/*
+===============
+Map::load_s2mf_header
+
+Load informational data of an S2 map
+===============
+*/
+void Map::load_s2mf_header(const char* filen)
 {
 	FileRead file;
 
-   if(!filen) return ERR_FAILED;
+   assert(filen);
 
    file.Open(g_fs, filen);
 
+	clear();
+	set_only_info(true);
+	
    S2MapDescrHeader header;
    memcpy(&header, file.Data(sizeof(header)), sizeof(header));
 
-   strncpy(hd.author, header.author, 26);
-   hd.author[26]='\0';
-   strcpy(hd.magic, WLMF_MAGIC);
-   strncpy(hd.name, header.name, 20);
-   hd.name[21]='\0';
-   hd.nplayers=header.nplayers;
-   hd.width=header.w;
-   hd.height=header.h;
-   hd.version=WLMF_VERSION;
-   strcpy(hd.descr, "Bluebyte Settlers II Map. No comment defined!");
+	set_size(header.w, header.h);
+	
+	set_author(header.author);
+	set_name(header.name);
+	set_nrplayers(header.nplayers);
+	set_description("Bluebyte Settlers II Map. No comment defined!");
 
-   switch(header.uses_world) {
-      case 0:
-         // green world
-         if(!w || strcmp(w->get_name(), "greenland")) {
-				if (w)
-					delete w;
-					
-            w = new World();
-            w->load_world("greenland");
-            strcpy(hd.uses_world, "greenland");
-         }
-         break;
-
-      case 1:
-         // black world
-         if(!w || strcmp(w->get_name(), "blackland")) {
-				if (w)
-					delete w;
-				
-				w = new World();
-				w->load_world("blackland");
-            strcpy(hd.uses_world, "blackland");
-         }
-         break;
-
-      case 2:
-         // winter world
-         if(!w || strcmp(w->get_name(), "winterland")) {
-				if (w)
-					delete w;
-            
-				w = new World();
-            w->load_world("winterland");
-            strcpy(hd.uses_world, "winterland");
-         }
-         break;
-   }
-
-   // set size
-   set_size(hd.width, hd.height);
-
-	return RET_OK;
+	switch(header.uses_world) {
+	case 0: set_world_name("greenland"); break;
+	case 1: set_world_name("blackland"); break;
+	case 2: set_world_name("winterland"); break;
+	}
 }
 
-/** int Map::load_s2mf(const char* filen)
- *
- * this loads a given file as a settlers 2 map file
- *
- * ***** PRIVATE FUNC ******
- *
- * Args: 	filen		filename to read
- */
+/*
+===============
+Map::load_s2mf [private]
+
+This loads a given file as a settlers 2 map file
+===============
+*/
 void Map::load_s2mf(const char* filen, Game *game)
 {
    uchar *section = 0;
@@ -190,75 +155,35 @@ void Map::load_s2mf(const char* filen, Game *game)
 		FileRead file;
 		file.Open(g_fs, filen);
 
+		clear();
+		set_only_info(false);
+		
 		S2MapDescrHeader header;
 		memcpy(&header, file.Data(sizeof(header)), sizeof(header));
 
-		strncpy(hd.author, header.author, 26);
-		hd.author[26]='\0';
-		strcpy(hd.magic, WLMF_MAGIC);
-		strncpy(hd.name, header.name, 20);
-		hd.name[21]='\0';
-		hd.nplayers=header.nplayers;
-		hd.width=header.w;
-		hd.height=header.h;
-		hd.version=WLMF_VERSION;
-		strcpy(hd.descr, "Bluebyte Settlers II Map. No comment defined!");
-
-		starting_pos = (Coords*)malloc(sizeof(Coords) * hd.nplayers);
-		memset(starting_pos, 0, sizeof(Coords) * hd.nplayers);
+		set_size(header.w, header.h);
+		
+		set_author(header.author);
+		set_name(header.name);
+		set_nrplayers(header.nplayers);
+		set_description("Bluebyte Settlers II Map. No comment defined!");
 
 		switch(header.uses_world) {
-			case 0:
-				// green world
-				if(!w || strcmp(w->get_name(), "greenland")) {
-					if (w)
-						delete w;
-
-					w = new World();
-					w->load_world("greenland");
-					strcpy(hd.uses_world, "greenland");
-				}
-				break;
-
-			case 1:
-				// black world
-				if(!w || strcmp(w->get_name(), "blackland")) {
-					if (w)
-						delete w;
-
-					w = new World();
-					w->load_world("blackland");
-					strcpy(hd.uses_world, "blackland");
-				}
-				break;
-
-			case 2:
-				// winter world
-				if(!w || strcmp(w->get_name(), "winterland")) {
-					if (w)
-						delete w;
-
-					w = new World();
-					w->load_world("winterland");
-					strcpy(hd.uses_world, "winterland");
-				}
-				break;
+		case 0: set_world_name("greenland"); break;
+		case 1: set_world_name("blackland"); break;
+		case 2: set_world_name("winterland"); break;
 		}
-
-
-		// set size
-		set_size(hd.width, hd.height);
 
 		////           S E C T I O N    1 : H E I G H T S
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section Heights not found");
 
-		Field *f = fields;
+		Field *f = m_fields;
 		pc = section;
-		for(y=0; y<hd.height; y++) {
-			for(x=0; x<hd.width; x++, f++, pc++)
+		for(y=0; y<get_height(); y++) {
+			for(x=0; x<get_width(); x++, f++, pc++)
 				f->set_height(*pc);
 		}
 		free(section);
@@ -267,14 +192,14 @@ void Map::load_s2mf(const char* filen, Game *game)
 
 		////				S E C T I O N		2: Landscape
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section Landscape not found");
 
-		f = fields;
+		f = m_fields;
 		pc = section;
-		for(y=0; y<hd.height; y++) {
-			for(x=0; x<hd.width; x++, f++, pc++) {
+		for(y=0; y<get_height(); y++) {
+			for(x=0; x<get_width(); x++, f++, pc++) {
 				char c = *pc;
 				c &= 0x1f;
 				switch((int)c) {
@@ -301,7 +226,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 					case 0x13: c=4; break; // unknown texture!
 					default: c = 7; cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
 				}
-				f->set_terraind(w->get_terrain(c));
+				f->set_terraind(m_world->get_terrain(c));
 			}
 		}
 		free(section);
@@ -310,14 +235,14 @@ void Map::load_s2mf(const char* filen, Game *game)
 
 		// S E C T I O N 3  -------- LANDSCAPE 2
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section Landscape 2 not found");
 
-		f = fields;
+		f = m_fields;
 		pc = section;
-		for(y=0; y<hd.height; y++) {
-			for(x=0; x<hd.width; x++, f++, pc++) {
+		for(y=0; y<get_height(); y++) {
+			for(x=0; x<get_width(); x++, f++, pc++) {
 				char c = *pc;
 				c &= 0x1f;
 				switch((int)c) {
@@ -344,7 +269,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 					case 0x13: c=4; break; // unknown texture!
 					default: c = 7; cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
 				}
-				f->set_terrainr(w->get_terrain(c));
+				f->set_terrainr(m_world->get_terrain(c));
 			}
 		}
 		free(section);
@@ -353,7 +278,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 
 		// S E C T I O N 4  -------- UNKNOWN !!! Skip
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section UNKNOWN not found");
 		free(section);
@@ -361,7 +286,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 
 		// S E C T I O N 5  -------- Landscape (rocks, stuff..)
 		// New section??
-		bobs = load_s2mf_section(&file, hd.width, hd.height);
+		bobs = load_s2mf_section(&file, get_width(), get_height());
 		if (!bobs)
 			throw wexception("Section 5 (bobs) not found");
 
@@ -377,20 +302,18 @@ void Map::load_s2mf(const char* filen, Game *game)
 		//      bob == 6 green
 		//      bob == 6 orange
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section 6 not found");
 		
 		uint i=0;
-		for(y=0; y<hd.height; y++) {
-			i=y*hd.width;
-			for(x=0; x<hd.width; x++, i++) {
+		for(y=0; y<get_height(); y++) {
+			i=y*get_width();
+			for(x=0; x<get_width(); x++, i++) {
 				// ignore everything but HQs
 				if(section[i]==0x80) {
-					if (bobs[i] < hd.nplayers) {
-						starting_pos[bobs[i]].x = x;
-						starting_pos[bobs[i]].y = y;
-					}
+					if (bobs[i] < get_nrplayers())
+						set_starting_pos(bobs[i]+1, Coords(x, y));
 				}
 			}
 		}
@@ -405,13 +328,13 @@ void Map::load_s2mf(const char* filen, Game *game)
 		// 0x05 == duck
 		// 0x06 == sheep
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section 7 (animals) not found");
 		
-		for(y=0; y<hd.height; y++) {
-			i=y*hd.width;
-			for(x=0; x<hd.width; x++, i++) {
+		for(y=0; y<get_height(); y++) {
+			i=y*get_width();
+			for(x=0; x<get_width(); x++, i++) {
 				const char *bobname = 0;
 
 				// ignore everything but HQs
@@ -430,7 +353,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 				}
 
 				if (bobname) {
-					int idx = w->get_bob(bobname);
+					int idx = m_world->get_bob(bobname);
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
 					for(uint z=0; z<CRITTER_PER_DEFINITION; z++)
@@ -443,7 +366,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 
 		// S E C T I O N 8  --------UNKNOWN
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section 8 (unknown) not found");
 		free(section);
@@ -461,13 +384,13 @@ void Map::load_s2mf(const char* filen, Game *game)
 		// 0x68 == trees
 		// 0x78 == no buildings
 		// New section??
-		buildings = load_s2mf_section(&file, hd.width, hd.height);
+		buildings = load_s2mf_section(&file, get_width(), get_height());
 		if (!buildings)
 			throw wexception("Section 9 (buildings) not found");
 
 		// S E C T I O N 10  -------- UNKNOWN
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section 10 (unknown) not found");
 		free(section);
@@ -479,7 +402,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 		//  But this points don't make sense....
 		//  We skip it.
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section 11 (unknown) not found");
 		free(section);
@@ -495,7 +418,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 		// 0x41-47 == cowl 1-7
 		// 0x59-5f == stones 1-7
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section 12 (resources) not found");
 		free(section);
@@ -507,7 +430,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 		// ?? for what is that ??
 		// Skip
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section 13 (unknown) not found");
 		free(section);
@@ -522,7 +445,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 		//  fe == killing field (lava)
 		//
 		// New section??
-		section = load_s2mf_section(&file, hd.width, hd.height);
+		section = load_s2mf_section(&file, get_width(), get_height());
 		if (!section)
 			throw wexception("Section 14 (island id) not found");
 		free(section);
@@ -531,12 +454,12 @@ void Map::load_s2mf(const char* filen, Game *game)
 		file.Close();
 
 		uchar c;
-		for(y=0; y<hd.height; y++) {
-			for(x=0; x<hd.width; x++) {
+		for(y=0; y<get_height(); y++) {
+			for(x=0; x<get_width(); x++) {
 				const char *bobname = 0;
 
-				c=bobs[y*hd.width + x];
-				if(buildings[y*hd.width +x]==0x78) {
+				c=bobs[y*get_width() + x];
+				if(buildings[y*get_width() +x]==0x78) {
 					switch(c) {
 						case BOB_STONE1: bobname = "stones1"; break;
 						case BOB_STONE2: bobname = "stones2"; break;
@@ -547,10 +470,10 @@ void Map::load_s2mf(const char* filen, Game *game)
 						default: break;
 					}
 					if (bobname) {
-						int idx = w->get_bob(bobname);
+						int idx = m_world->get_immovable_index(bobname);
 						if (idx < 0)
-							throw wexception("Missing bob type %s", bobname);
-						game->create_bob(x, y, idx);
+							throw wexception("Missing immovable type %s", bobname);
+						game->create_immovable(x, y, idx);
 						continue;
 					}
 				}
@@ -646,10 +569,10 @@ void Map::load_s2mf(const char* filen, Game *game)
 				}
 
 				if (bobname) {
-					int idx = w->get_bob(bobname);
+					int idx = m_world->get_immovable_index(bobname);
 					if (idx < 0)
-						throw wexception("Missing bob type %s", bobname);
-					game->create_bob(x, y, idx);
+						throw wexception("Missing immovable type %s", bobname);
+					game->create_immovable(x, y, idx);
 				}
 			}
 		}

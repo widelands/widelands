@@ -43,6 +43,7 @@ public:
 	void act_ripflag();
 	void act_buildroad();
 	void act_abort_buildroad();
+	void act_removeroad();
 
 private:
 	void add_button(const char *name, void (FieldActionWindow::*fn)());
@@ -137,14 +138,14 @@ Add the buttons you normally get when clicking on a field.
 void FieldActionWindow::add_buttons_auto()
 {
 	// Add actions
-	std::vector<Map_Object*> objs;
-	
 	if (m_field.field->get_owned_by() == m_player->get_player_number())
 	{
-		if (m_map->find_objects(m_field, 0, Map_Object::FLAG, &objs))
+		BaseImmovable *imm = m_map->get_immovable(m_field);
+	
+		if (imm && imm->get_type() == Map_Object::FLAG)
 		{
 			// Add flag actions
-			Flag *flag = (Flag*)objs[0];
+			Flag *flag = (Flag*)imm;
 
 			add_button("ROAD", &FieldActionWindow::act_buildroad);
 
@@ -160,6 +161,9 @@ void FieldActionWindow::add_buttons_auto()
 
 			if (buildcaps & BUILDCAPS_FLAG)
 				add_button("FLAG", &FieldActionWindow::act_buildflag);
+			
+			if (imm && imm->get_type() == Map_Object::ROAD)
+				add_button("REM", &FieldActionWindow::act_removeroad);
 		}
 	}
 	
@@ -287,6 +291,24 @@ void FieldActionWindow::act_abort_buildroad()
 
 /*
 ===============
+FieldActionWindow::act_removeroad
+
+Remove the road at the given field
+===============
+*/
+void FieldActionWindow::act_removeroad()
+{
+	Game *g = m_player->get_game();
+	BaseImmovable *imm = g->get_map()->get_immovable(m_field);
+	
+	if (imm && imm->get_type() == Map_Object::ROAD)
+		g->send_player_command(m_player->get_player_number(), CMD_REMOVE_ROAD, imm->get_serial());
+	
+	okdialog();
+}
+
+/*
+===============
 show_field_action
 
 Perform a field action (other than building options).
@@ -330,7 +352,20 @@ void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
 		return;
 	}
 	
-	// did he click on a flag?
-	if (map->find_objects(target, 0, Map_Object::FLAG, 0))
-		parent->finish_build_road();
+	// did he click on a flag or a road where a flag can be built?
+	BaseImmovable *imm = map->get_immovable(target);
+	
+	if (imm) {
+		switch(imm->get_type()) {
+		case Map_Object::ROAD:
+			if (!(parent->get_player()->get_buildcaps(target) & BUILDCAPS_FLAG))
+				break;
+			parent->get_game()->send_player_command(parent->get_player_number(), CMD_BUILD_FLAG, target.x, target.y);
+			// fall through, there is a flag now
+				
+		case Map_Object::FLAG:
+			parent->finish_build_road();
+			break;
+		}
+	}
 }

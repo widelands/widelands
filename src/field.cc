@@ -91,6 +91,9 @@ void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 	
 	float b = calc_brightness(l, r, tl, tr, bl, br) - flatbrightness;
 	
+	if (b > 0)
+		b *= 1.5;
+	
 	if (b < -128) b = -128;
 	else if (b > 127) b = 127;
 	brightness = (char)b;

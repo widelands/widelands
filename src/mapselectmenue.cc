@@ -128,11 +128,11 @@ void MapSelectMenu::map_selected(int id)
 			char buf[256];
 			taname->set_text(m.get_name());
 			taauthor->set_text(m.get_author());
-			sprintf(buf, "%-4ix%4i", m.get_w(), m.get_h());
+			sprintf(buf, "%-4ix%4i", m.get_width(), m.get_height());
 			tasize->set_text(buf);
-			sprintf(buf, "%i", m.get_nplayers());
+			sprintf(buf, "%i", m.get_nrplayers());
 			tanplayers->set_text(buf);
-			tadescr->set_text(m.get_descr());
+			tadescr->set_text(m.get_description());
 			taworld->set_text(m.get_world_name());
          m_ok->set_enabled(true);
 		} else {

@@ -24,6 +24,8 @@
 #include "map.h"
 
 
+class Road;
+
 /** class Player
  *
  * Pleease... no more pure virtual nonsense.
@@ -63,20 +65,22 @@ class Player {
 		
 		// See area
 		inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
-		inline bool is_field_seen(Coords c) { return (*seen_fields)[c.y*m_game->get_map()->get_w() + c.x]; }
-		inline bool is_field_seen(int x, int y) { return (*seen_fields)[y*m_game->get_map()->get_w() + x]; }
+		inline bool is_field_seen(Coords c) { return (*seen_fields)[c.y*m_game->get_map()->get_width() + c.x]; }
+		inline bool is_field_seen(int x, int y) { return is_field_seen(Coords(x, y)); }
 		
 		void set_area_seen(int x, int y, uint area, bool on);
 		
-		// Flags
+		// Player commands
 		void build_flag(Coords c);
 		void rip_flag(Coords c);
+		void build_road(const Path *path);
+		void remove_road(Road *road);
 
    private:
       // set functions
       inline void set_field_seen(int i, bool t) { (*seen_fields)[i]=t; }
       inline void set_field_seen(int x, int y, bool t) { 
-			(*seen_fields)[y*m_game->get_map()->get_w() + x]=t; 
+			(*seen_fields)[y*m_game->get_map()->get_width() + x]=t; 
       }
       
 		int m_type;

@@ -23,6 +23,7 @@
 #include "descr_maintainer.h"
 #include "bob.h"
 #include "worlddata.h"
+#include "immovable.h"
 
 class Section;
 
@@ -103,7 +104,9 @@ class World
       
       inline Terrain_Descr* get_terrain(uint i) { assert(i<ters.get_nitems()); return ters.get(i); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
-      inline Logic_Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
+		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
+      inline int get_immovable_index(const char* l) { return immovables.get_index(l); }
+		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
 
       inline void animate(int time) {
          uint i;
@@ -112,7 +115,8 @@ class World
       }
  
    private:
-      Descr_Maintainer<Logic_Bob_Descr> bobs;
+      Descr_Maintainer<Bob_Descr> bobs;
+		Descr_Maintainer<Immovable_Descr> immovables;
       Descr_Maintainer<Resource_Descr> res;
       Descr_Maintainer<Terrain_Descr> ters;
       World_Descr_Header hd;
