@@ -152,6 +152,7 @@ public:
 	void destroy_wares(int id, int count);
 
 	Worker *launch_worker(Game *g, int ware);
+	void incorporate_worker(Game *g, Worker *w);
 	
 protected:	
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);

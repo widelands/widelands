@@ -740,6 +740,7 @@ void Road::request_success(Request *req)
 		m_carrier_request = 0;
 		
 		// TODO: give the carrier its job
+		return;
 	}
 	
 	PlayerImmovable::request_success(req);
@@ -1435,6 +1436,36 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 
 /*
 ===============
+Economy::find_nearest_warehouse
+
+Find the nearest warehouse, starting from the given start flag.
+Returns the best warehouse (or 0 if none can be found) and stores the route to 
+it in the given route.
+===============
+*/
+Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
+{
+	int best_totalcost = -1;
+	Warehouse *best_warehouse = 0;
+	
+	for(uint i = 0; i < m_warehouses.size(); i++) {
+		Warehouse *wh = m_warehouses[i];
+		Route buf_route;
+		
+		if (!find_route(start, wh->get_base_flag(), &buf_route, best_totalcost))
+			continue;
+		
+		best_totalcost = buf_route.get_totalcost();
+		best_warehouse = wh;
+		*route = buf_route;
+	}
+	
+	return best_warehouse;
+}
+
+
+/*
+===============
 Economy::add_flag
 
 Add a flag to the flag array.
@@ -1462,6 +1493,23 @@ void Economy::remove_flag(Flag *flag)
 {
 	assert(flag->get_economy() == this);
 
+	do_remove_flag(flag);
+
+	// automatically delete the economy when it becomes empty.
+	if (!m_flags.size())
+		delete this;
+}
+
+/*
+===============
+Economy::do_remove_flag [private]
+
+Remove the flag, but don't delete the economy automatically.
+This is called from the merge code.
+===============
+*/
+void Economy::do_remove_flag(Flag *flag)
+{
 	flag->set_economy(0);
 
 	// fast remove
@@ -1475,10 +1523,6 @@ void Economy::remove_flag(Flag *flag)
 	}
 	assert(i != m_flags.size());
 	m_flags.pop_back();
-
-	// automatically delete the economy when it becomes empty.
-	if (!m_flags.size())
-		delete this;
 }
 
 /*
@@ -1609,8 +1653,23 @@ void Economy::do_merge(Economy *e)
 
 	log("Economy: merge %i + %i\n", get_nrflags(), e->get_nrflags());
 
-	// Merge requests before flags are merged because flag merger destroys the old
-	// economy
+	// Be careful around here. The last e->remove_flag() will cause the other
+	// economy to delete itself.
+	i = e->get_nrflags();
+	while(i--) {
+		assert(i+1 == e->get_nrflags());
+		
+		Flag *flag = e->m_flags[0];
+		
+		e->do_remove_flag(flag);
+		add_flag(flag);
+	}
+
+	// Merge requests after flags are merged for two reasons:
+	//  a) all flags and buildings must have the correct economy set, 
+	//     or havoc ensues
+	//  b) all offered wares are now joined together, so we can really get
+	//     the closest provider instead of just the first one
 	for(i = 0; i < (int)e->m_requests.size(); i++) {
 		while(e->m_requests[i].get_nrrequests()) {
 			Request *req = e->m_requests[i].get_request(0);
@@ -1629,17 +1688,8 @@ void Economy::do_merge(Economy *e)
 		}
 	}
 	
-	// Be careful around here. The last e->remove_flag() will cause the other
-	// economy to delete itself.
-	i = e->get_nrflags();
-	while(i--) {
-		assert(i+1 == e->get_nrflags());
-		
-		Flag *flag = e->m_flags[0];
-		
-		e->remove_flag(flag);
-		add_flag(flag);
-	}
+	// implicity delete the economy
+	delete e;
 }
 
 /*

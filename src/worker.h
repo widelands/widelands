@@ -75,22 +75,31 @@ class Worker : public Bob {
 public:
 	enum {
 		State_None = 0,
-		State_Request,
+		State_Request,			// fulfilling a ware request
+		State_Fugitive,		// lost our location, trying to get back to warehouse
+		State_GoWarehouse,	// return to warehouse
 	};
 	
 	Worker(Worker_Descr *descr);
 	virtual ~Worker();
 
+	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
+	
 	virtual uint get_movecaps();
 	
 	inline PlayerImmovable *get_location(Game *g) { return (PlayerImmovable*)m_location.get(g); }
-	inline Economy *get_economy(Game *g) { return m_economy; }
+	inline Economy *get_economy() { return m_economy; }
 
 	void set_location(PlayerImmovable *location);
 	void set_economy(Economy *economy);
 	
 	void set_job_request(Request *req, const Route *route);
 	void change_job_request(bool cancel);
+	
+	void set_job_gowarehouse();
+	
+	void schedule_incorporate(Game *g);
+	void incorporate(Game *g);
 	
 	inline Route *get_route() { return m_route; }
 	
@@ -101,16 +110,24 @@ protected:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 	
 	void end_state(Game *g, bool success);
-	void run_state_request(Game *g, uint prev, bool success, uint nexthing);
-
+	void run_state_request(Game *g, uint prev, bool success, uint nexthint);
+	void run_state_fugitive(Game *g, uint prev, bool success, uint nexthint);
+	void run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthint);
+	
+	int run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgoal);
+	
 private:
 	Object_Ptr	m_location;			// meta location of the worker, a PlayerImmovable
 	Economy*		m_economy;			// Economy this worker is registered in
 	int			m_state;				// one of State_XXX
 	int			m_carried_ware;	// Ware ID (-1 if none carried)
+	Route			*m_route;			// used by Request, GoWarehouse
 	
 	Request		*m_request;			// the request we're supposed to fulfill
-	Route			*m_route;
+	
+	int			m_fugitive_death;	// when are we going to die?
+	
+	Object_Ptr	m_gowarehouse;		// the warehouse we're trying to reach
 };
 
 

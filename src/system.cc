@@ -99,6 +99,7 @@ static void write_record_char(char v)
 	
 	if (fwrite(&v, sizeof(v), 1, sys.frecord) != 1)
 		throw wexception("Write of 1 byte to record failed.");
+	fflush(sys.frecord);
 }
 
 static char read_record_char()
@@ -120,6 +121,7 @@ static void write_record_int(int v)
 	v = Little32(v);
 	if (fwrite(&v, sizeof(v), 1, sys.frecord) != 1)
 		throw wexception("Write of 4 bytes to record failed.");
+	fflush(sys.frecord);
 }
 
 static int read_record_int()

@@ -22,6 +22,7 @@
 #include "map.h"
 #include "cmd_queue.h"
 #include "player.h"
+#include "worker.h"
 
 
 // 
@@ -110,6 +111,22 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		if (obj)
 			obj->act(m_game);
 		// the object must queue the next CMD_ACT itself if necessary
+		break;
+	}
+	
+	case CMD_DESTROY:
+	{
+		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
+		if (obj)
+			obj->destroy(m_game);
+		break;
+	}
+	
+	case CMD_INCORPORATE:
+	{
+		Worker *worker = (Worker*)m_game->get_objects()->get_object(c->arg1);
+		if (worker)
+			worker->incorporate(m_game);
 		break;
 	}
 	

@@ -74,13 +74,12 @@ Note that convenient creation functions are defined in class Game.
 
 // If you find a better way to do this that doesn't cost a virtual function or additional
 // member variable, go ahead
-// Note that if you abused virtual inheritance in the *_Descr, you need to use MO_VIRTUAL_DESCR
-// and set that variable in the constructor!
 #define MO_DESCR(type) \
-protected: inline type* get_descr() { return static_cast<type*>(m_descr); }
+protected: inline type* get_descr() const { return static_cast<type*>(m_descr); }
 
-#define MO_VIRTUAL_DESCR(type) \
-protected: type* m_descr; inline type* get_descr() { return m_descr; }
+// would be necessary for virtual inheritance stuff
+//#define MO_VIRTUAL_DESCR(type)
+//protected: type* m_descr; inline type* get_descr() const { return m_descr; }
 
 class Map_Object {
    friend class Object_Manager;
@@ -101,6 +100,7 @@ public:
 	// Some default, globally valid, attributes.
 	// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
 	enum Attribute {
+		WAREHOUSE = 1,		// assume BUILDING
 	};
 		
 	// the enums tell us where we are going
@@ -127,6 +127,8 @@ public:
 	void remove(Game*);
 	virtual void destroy(Game*);
 
+	void schedule_destroy(Game *g);
+	
 	virtual void act(Game*);
 
 protected:	

@@ -288,6 +288,7 @@ public:
 	static void check_split(Flag *f1, Flag *f2);
 	
 	bool find_route(Flag *start, Flag *end, Route *route, int cost_cutoff = -1);
+	Warehouse *find_nearest_warehouse(Flag *base, Route *route);
 	
 	inline int get_nrflags() const { return m_flags.size(); }
 	void add_flag(Flag *flag);
@@ -303,6 +304,8 @@ public:
 	void remove_request(Request *req);
 	
 private:
+	void do_remove_flag(Flag *f);
+	
 	void do_merge(Economy *e);
 	void do_split(Flag *f);
 

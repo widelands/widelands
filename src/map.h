@@ -239,6 +239,13 @@ struct FindImmovableType : public FindImmovable {
 	
 	int m_type;
 };
+struct FindImmovableAttribute : public FindImmovable {
+	FindImmovableAttribute(uint attrib) : m_attrib(attrib) { }
+	
+	virtual bool accept(BaseImmovable *imm) const;
+	
+	int m_attrib;
+};
 
 
 /** class Path

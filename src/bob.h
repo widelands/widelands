@@ -64,6 +64,9 @@ public:
 		// Move along a path. Use start_task_movepath() to invoke this task
 		TASK_MOVEPATH = 2,
 
+		// Move one field without passability checks. Use start_task_forcemove()
+		TASK_FORCEMOVE = 3,
+		
 		// descendants of Map_Objects must use task IDs greater than this
 		TASK_FIRST_USER = 10,
 	};
@@ -93,6 +96,7 @@ protected: // default tasks
 	void start_task_idle(Game*, Animation* anim, int timeout);
 	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims);
 	void start_task_movepath(Game*, const Path &path, DirAnimations *anims);
+	void start_task_forcemove(Game*, int dir, DirAnimations *anims);
 	
 protected: // higher level handling (task-based)
 	inline int get_current_task() { return m_task; }
@@ -123,7 +127,7 @@ private:
 protected: // low level handling
 	void set_animation(Game* g, Animation* anim);
 
-	int start_walk(Game* g, WalkingDir dir, Animation *anim);
+	int start_walk(Game* g, WalkingDir dir, Animation *anim, bool force = false);
 	void end_walk(Game* g);
 	bool is_walking();
 
@@ -160,6 +164,10 @@ protected:
 			DirAnimations *anims;
 			Path* path;
 		} movepath;
+		struct {
+			int dir;
+			DirAnimations *anims;
+		} forcemove;
 	} task;
 };
 

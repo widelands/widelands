@@ -198,6 +198,19 @@ void Map_Object::destroy(Game *g)
 
 /*
 ===============
+Map_Object::schedule_destroy
+
+Schedule the object for immediate destruction.
+This can be used to safely destroy the object from within an act function.
+===============
+*/
+void Map_Object::schedule_destroy(Game *g)
+{
+	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_DESTROY, m_serial);
+}
+
+/*
+===============
 Map_Object::init
 
 Make sure you call this from derived classes!

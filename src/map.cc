@@ -1672,6 +1672,11 @@ bool FindImmovableType::accept(BaseImmovable *imm) const
 	return (m_type == imm->get_type());
 }
 
+bool FindImmovableAttribute::accept(BaseImmovable *imm) const
+{
+	return imm->has_attribute(m_attrib);
+}
+
 /*
 ==============================================================================
 

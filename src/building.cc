@@ -311,6 +311,8 @@ Parse the additional warehouse settings from the given profile and directory
 */
 void Warehouse_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
+	add_attribute(Map_Object::WAREHOUSE);
+
 	Building_Descr::parse(directory, prof, encdata);
 
 	Section *global = prof->get_safe_section("global");
@@ -514,6 +516,24 @@ Worker *Warehouse::launch_worker(Game *g, int ware)
 	get_economy()->remove_wares(ware, 1); // re-added by the worker himself
 	
 	return worker;
+}
+
+/*
+===============
+Warehouse::incorporate_worker
+
+This is the opposite of launch_worker: destroy the worker and add the 
+appropriate ware to our warelist
+===============
+*/
+void Warehouse::incorporate_worker(Game *g, Worker *w)
+{
+	int ware = w->get_ware_id();
+	
+	w->remove(g);
+	
+	m_wares.add(ware, 1);
+	get_economy()->add_wares(ware, 1);
 }
 
 /*

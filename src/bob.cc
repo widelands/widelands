@@ -406,7 +406,7 @@ bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *
 ===============
 Bob::start_task_movepath
 
-Start moving along the given path.
+Start moving along the given, precalculated path.
 ===============
 */
 void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims)
@@ -419,7 +419,22 @@ void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims)
 	
 	start_task(g, TASK_MOVEPATH);
 }
-		
+
+/*
+===============
+Bob::start_task_forcemove
+
+Move into the given direction, without passability checks.
+===============
+*/
+void Bob::start_task_forcemove(Game *g, int dir, DirAnimations *anims)
+{
+	task.forcemove.dir = dir;
+	task.forcemove.anims = anims;
+	
+	start_task(g, TASK_FORCEMOVE);
+}
+	
 /*
 ===============
 Bob::task_begin [virtual]
@@ -447,11 +462,18 @@ int Bob::task_begin(Game* g)
 		
 	case TASK_MOVEPATH:
 		return task_act(g, false);
+	
+	case TASK_FORCEMOVE:
+	{
+		int dir = task.forcemove.dir;
+		int tdelta = start_walk(g, (WalkingDir)dir,
+		                        task.forcemove.anims->get_animation(dir), true);
+		assert(tdelta > 0);
+		return tdelta;
+	}
 	}
 
-	cerr << "task_begin: Unhandled task " << m_task << endl;
-	assert(!"task_begin: Unhandled task ");
-	return -1; // shut up compiler
+	throw wexception("Bob::task_begin: unhandled task");
 }
 
 /*
@@ -503,6 +525,11 @@ int Bob::task_act(Game* g, bool interrupt)
 		task.movepath.step++;
 		return tdelta;
 	}
+	
+	case TASK_FORCEMOVE:
+		end_walk(g);
+		end_task(g, true, 0);
+		return 0;
 	}
 
 	throw wexception("task_act: Unhandled task %i", m_task);
@@ -631,6 +658,7 @@ void Bob::end_walk(Game* g)
 Bob::start_walk
 
 Cause the object to walk, honoring passable/impassable parts of the map using movecaps.
+If force is true, the passability check is skipped.
 
 Returns the number of milliseconds after which the walk has ended. You must 
 call end_walk() after this time, so schedule a task_act().
@@ -638,7 +666,7 @@ call end_walk() after this time, so schedule a task_act().
 Returns a negative value when we can't walk into the requested direction.
 ===============
 */
-int Bob::start_walk(Game *g, WalkingDir dir, Animation *a)
+int Bob::start_walk(Game *g, WalkingDir dir, Animation *a, bool force)
 {
 	FCoords newf;
 	
@@ -650,9 +678,11 @@ int Bob::start_walk(Game *g, WalkingDir dir, Animation *a)
 	// temporarily land.
 	uint movecaps = get_movecaps();
 
-	if (!(m_position.field->get_caps() & movecaps & MOVECAPS_SWIM && newf.field->get_caps() & MOVECAPS_WALK) &&
-	    !(newf.field->get_caps() & movecaps))
-		return -1;
+	if (!force) {
+		if (!(m_position.field->get_caps() & movecaps & MOVECAPS_SWIM && newf.field->get_caps() & MOVECAPS_WALK) &&
+		    !(newf.field->get_caps() & movecaps))
+			return -1;
+	}
 
 	// Move is go
 	int tdelta = 2000; // :TODO: height-based speed changes

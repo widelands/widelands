@@ -35,6 +35,8 @@
 enum {
    UNUSED = 0,
    CMD_ACT,				// arg1 = serialnum
+	CMD_DESTROY,		// arg1 = serialnum
+	CMD_INCORPORATE,	// arg1 = serialnum (Worker)
 	
 	CMD_BUILD_FLAG,	// arg1 = x, arg2 = y
 	CMD_RIP_FLAG,		// arg1 = x, arg2 = y
