@@ -26,6 +26,7 @@
 
 class Editor;
 class MiniMapView;
+class Editor_Tool;
 
 /*
  * This is the EditorInteractive. It is like the InteractivePlayer class,
@@ -42,11 +43,18 @@ class Editor_Interactive : public Interactive_Base {
       void recalc_overlay(FCoords fc);
       void start();
 
+      // gets called when a field is clicked
+      void field_clicked();
+      
    private:
       static const int PANEL_HEIGHT=100;
 
       void exit_game_btn();
-
+   
+      // Tool
+      Editor_Tool* current_tool;
+      
+      // UI ownings
       ToolPanel* m_panel;
       Editor* m_editor;
 };

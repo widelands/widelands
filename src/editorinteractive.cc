@@ -25,6 +25,7 @@
 #include "map.h"
 #include "player.h"
 #include "minimap.h"
+#include "editor_tools.h"
 
 /**********************************************
  *
@@ -46,7 +47,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    Map_View* mm;
    mm = new Map_View(this, 0, 0, get_w(), get_h(), this);
    mm->warpview.set(this, &Editor_Interactive::mainview_move);
-   //     main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
+   mm->fieldclicked.set(this, &Editor_Interactive::field_clicked);
    set_mapview(mm);
      
    // The panel. Tools, infos and gimmicks
@@ -80,6 +81,9 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b = new Button(this, x+102, y, 34, 34, 2);
    //      b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.bmp", RGBColor(0,0,255)));
+
+   // TEMP. set tool
+   current_tool=new Editor_Info_Tool();
 }
 
 /****************************************
@@ -88,6 +92,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
  * cleanup
  */
 Editor_Interactive::~Editor_Interactive() {
+   if(current_tool) delete current_tool;
 }
 
 /*
@@ -178,4 +183,19 @@ void Editor_Interactive::recalc_overlay(FCoords fc)
 void Editor_Interactive::exit_game_btn()
 {
 	end_modal(0);
+}
+
+/*
+===========
+Editor_Interactive::field_clicked()
+
+This functions is called, when a field is clicked. it mainly calls
+the function of the currently selected tool
+===========
+*/
+void Editor_Interactive::field_clicked() {
+   if(current_tool) {
+      Map* m=get_map();
+      current_tool->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
+   }
 }
