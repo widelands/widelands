@@ -1,16 +1,16 @@
 /*
  * Copyright (C) 2002 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -40,7 +40,7 @@ public:
 	inline uint get_idle_anim(void) { return m_idle_anim; }
 
 	Bob *create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic);
-	
+
 protected:
 	virtual Bob *create_object(bool) = 0;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
@@ -77,16 +77,16 @@ protected:
 public:
 	virtual int get_type();
 	virtual uint get_movecaps() { return 0; }
-		
+
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
-	virtual void act(Game*);
-		
+	virtual void act(Game*, uint data);
+
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
 
 	inline void set_owner(Player *player) { m_owner = player; }
 	inline Player *get_owner() { return m_owner; }
-	
+
 	void set_position(Game* g, Coords f);
 	inline const FCoords &get_position() const { return m_position; }
 	inline Bob* get_next_bob(void) { return m_linknext; }
@@ -96,18 +96,18 @@ protected: // default tasks
 	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims);
 	void start_task_movepath(Game*, const Path &path, DirAnimations *anims);
 	void start_task_forcemove(Game*, int dir, DirAnimations *anims);
-	
+
 protected: // higher level handling (task-based)
 	inline int get_current_task() { return m_task; }
 	void start_task(Game*, uint task);
 	void end_task(Game*, bool success, uint nexttask);
 	void interrupt_task(Game*);
-	
+
 	// handler functions
 	virtual int task_begin(Game*);
 	virtual int task_act(Game*, bool interrupt);
 	virtual void task_end(Game*);
-	
+
 	/** Map_Object::task_start_best(Game*, uint prev, bool success) [virtual]
 	 *
 	 * prev is the task that was last run (can be 0 on initial startup).
@@ -137,6 +137,8 @@ protected:
 	Bob* m_linknext; // next object on this field
 	Bob** m_linkpprev;
 
+	uint m_actid; // CMD_ACT counter, used to eliminate spurious act()s
+
 	uint m_anim;
 	int m_animstart; // gametime when the animation was started
 
@@ -144,7 +146,7 @@ protected:
 	int m_walkstart; // start and end time used for interpolation
 	int m_walkend;
 
-	// Task framework variables		
+	// Task framework variables
 	uint m_task; // the task we are currently performing
 	bool m_task_acting;
 	bool m_task_switching;

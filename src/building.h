@@ -149,7 +149,7 @@ public:
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
-	virtual void act(Game *g);
+	virtual void act(Game *g, uint data);
 	
 	virtual void set_economy(Economy *e);
 

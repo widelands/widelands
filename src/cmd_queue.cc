@@ -112,7 +112,7 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		assert(c->arg1);
 		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
 		if (obj)
-			obj->act(m_game);
+			obj->act(m_game, c->arg2);
 		// the object must queue the next CMD_ACT itself if necessary
 		break;
 	}

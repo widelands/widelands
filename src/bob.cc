@@ -5,7 +5,7 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -109,12 +109,14 @@ Bob::Bob(Bob_Descr* descr, bool wl)
 	m_linknext = 0;
 	m_linkpprev = 0;
 
+	m_actid = 0; // this isn't strictly necessary, but it shuts up valgrind and "feels" cleaner
+
 	m_anim = 0;
 	m_animstart = 0;
-	
+
 	m_walking = IDLE;
 	m_walkstart = m_walkend = 0;
-	
+
 	m_task = 0;
 	m_task_acting = false;
 	m_task_switching = false;
@@ -155,7 +157,7 @@ For a boring object, this task is always an IDLE task, which will be
 reduced to effectively 0 CPU overhead.
 
 For another simple example, look at animals. They have got two states:
-moving or not moving. This is actually represented as two tasks, 
+moving or not moving. This is actually represented as two tasks,
 IDLE and MOVE_PATH, which are both part of the default package that comes
 with Map_Object.
 
@@ -189,7 +191,7 @@ void Bob::init(Editor_Game_Base* gg)
    Map_Object::init(gg);
 
    if(get_logic()) {
-      Game* g=static_cast<Game*>(gg); 
+      Game* g=static_cast<Game*>(gg);
       // Initialize task system
       m_lasttask = 0;
       m_lasttask_success = true;
@@ -209,10 +211,10 @@ Perform independant cleanup as necessary.
 void Bob::cleanup(Editor_Game_Base *gg)
 {
    if(get_logic()) {
-      Game* g=static_cast<Game*>(gg); 
+      Game* g=static_cast<Game*>(gg);
       if (get_current_task())
          task_end(g); // subtle...
-   }	
+   }
 
    if (m_position.field) {
       m_position.field = 0;
@@ -229,12 +231,19 @@ void Bob::cleanup(Editor_Game_Base *gg)
 Bob::act
 
 Hand the acting over to the task
- 
+
 Change to the next task if necessary.
 ===============
 */
-void Bob::act(Game* g)
+void Bob::act(Game* g, uint data)
 {
+	// Eliminate spurious calls of act().
+	// These calls are to be expected and perfectly normal, e.g. when a carrier's
+	// idle task is interrupted by the request to pick up a ware from a flag.
+	if (data != m_actid)
+		return;
+
+	// Call the appropriate act function.
 	m_task_acting = true;
 	int tdelta = task_act(g, m_task_interrupt);
 	// a tdelta == 0 is probably NOT what you want if the task continues - make your intentions clear
@@ -245,9 +254,10 @@ void Bob::act(Game* g)
 		do_next_task(g);
 		return;
 	}
-		
+
 	if (tdelta > 0)
-		g->get_cmdqueue()->queue(g->get_gametime()+tdelta, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+		g->get_cmdqueue()->queue(g->get_gametime()+tdelta, SENDER_MAPOBJECT, CMD_ACT, m_serial,
+		                         ++m_actid, 0);
 }
 
 /*
@@ -260,18 +270,18 @@ Try to get the next task running.
 void Bob::do_next_task(Game* g)
 {
 	int task_retries = 0;
-	
+
 	assert(!m_task);
-	
+
 	while(!m_task) {
 		assert(task_retries < 5); // detect infinite loops early
-	
+
 		m_task_switching = true;
 		task_start_best(g, m_lasttask, m_lasttask_success, m_nexttask);
 		m_task_switching = false;
 
 		do_start_task(g);
-		
+
 		task_retries++;
 	}
 }
@@ -290,7 +300,7 @@ void Bob::start_task(Game* g, uint task)
 {
 	assert(m_task_switching);
 	assert(!m_task);
-	
+
 	m_task = task;
 }
 
@@ -306,15 +316,16 @@ void Bob::do_start_task(Game* g)
 	assert(m_task);
 
 	m_task_interrupt = false;
-	
+
 	m_task_acting = true;
 	int tdelta = task_begin(g);
 	// a tdelta == 0 is probably NOT what you want - make your intentions clear
 	assert(!m_task || tdelta < 0 || tdelta > 0);
 	m_task_acting = false;
-	
+
 	if (m_task && tdelta > 0)
-		g->get_cmdqueue()->queue(g->get_gametime()+tdelta, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+		g->get_cmdqueue()->queue(g->get_gametime()+tdelta, SENDER_MAPOBJECT, CMD_ACT, m_serial,
+		                         ++m_actid, 0);
 }
 
 /*
@@ -337,11 +348,11 @@ void Bob::end_task(Game* g, bool success, uint nexttask)
 	assert(m_task);
 
 	task_end(g);
-		
+
 	m_lasttask = m_task;
 	m_lasttask_success = success;
 	m_nexttask = nexttask;
-	
+
 	m_task = 0;
 }
 
@@ -356,7 +367,7 @@ void Bob::interrupt_task(Game *g)
 {
 	// cause an interrupt on the next CMD_ACT
 	m_task_interrupt = true;
-	
+
 	// TODO: call a task-specific interrupt function
 }
 
@@ -423,7 +434,7 @@ void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims)
 	task.movepath.path = new Path(path);
 	task.movepath.step = 0;
 	task.movepath.anims = anims;
-	
+
 	start_task(g, TASK_MOVEPATH);
 }
 
@@ -452,7 +463,7 @@ In this function, you may:
  - call end_task()
  - call set_animation(), start_walk(), set_position() and similar functions
  - call task_act() for "array-based" tasks
- 
+
 You can schedule a call to task_act() by returning the time, in milliseconds,
 until task_act() should be could. NOTE: this time is relative to the current
 time!
@@ -466,10 +477,10 @@ int Bob::task_begin(Game* g)
 	switch(get_current_task()) {
 	case TASK_IDLE:
 		return task.idle.timeout;
-		
+
 	case TASK_MOVEPATH:
 		return task_act(g, false);
-	
+
 	case TASK_FORCEMOVE:
 	{
 		int dir = task.forcemove.dir;
@@ -502,7 +513,7 @@ int Bob::task_act(Game* g, bool interrupt)
 	case TASK_IDLE:
 		end_task(g, true, 0); // success, no next task
 		return 0; /* will be ignored */
-	
+
 	case TASK_MOVEPATH:
 	{
 		if (task.movepath.step)
@@ -513,7 +524,7 @@ int Bob::task_act(Game* g, bool interrupt)
 			end_task(g, false, 0); // failure
 			return 0; // will be ignored
 		}
-		
+
 		if (task.movepath.step >= task.movepath.path->get_nsteps()) {
 			assert(m_position == task.movepath.path->get_end());
 			end_task(g, true, 0); // success
@@ -521,7 +532,7 @@ int Bob::task_act(Game* g, bool interrupt)
 		}
 
 		char dir = task.movepath.path->get_step(task.movepath.step);
-	
+
 		int tdelta = start_walk(g, (WalkingDir)dir, task.movepath.anims->get_animation(dir));
 		if (tdelta < 0) {
 			log("TASK_MOVEPATH: can't walk\n");

@@ -23,32 +23,32 @@
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
 #define SENDER_PLAYER1 1 // those are just place holder, a player can send commands with
-#define SENDER_PLAYER2 2 // it's player number 
-#define SENDER_PLAYER3 3 
-#define SENDER_PLAYER4 4 
-#define SENDER_PLAYER5 5 
-#define SENDER_PLAYER6 6 
+#define SENDER_PLAYER2 2 // it's player number
+#define SENDER_PLAYER3 3
+#define SENDER_PLAYER4 4
+#define SENDER_PLAYER5 5
+#define SENDER_PLAYER6 6
 #define SENDER_PLAYER7 7
 #define SENDER_PLAYER8 8
 
 // ---------------------- BEGINN OF CMDS ----------------------------------
 enum {
    UNUSED = 0,
-   CMD_ACT,				// arg1 = serialnum
+   CMD_ACT,				// arg1 = serialnum, arg2 = user-defined data
 	CMD_DESTROY,		// arg1 = serialnum
 	CMD_INCORPORATE,	// arg1 = serialnum (Worker)
-	
+
 	CMD_BUILD_FLAG,	// arg1 = x, arg2 = y
 	CMD_RIP_FLAG,		// arg1 = x, arg2 = y
-	
+
 	CMD_BUILD_ROAD,	// arg1 = Path*
 	CMD_REMOVE_ROAD,	// arg1 = serialnum
-	
+
 	CMD_BUILD,			// arg1 = x, arg2 = y, arg3 = build_descr idx
 };
 // ---------------------- END    OF CMDS ----------------------------------
 
-// 
+//
 // This is finally the command queue. It is fully widelands specific,
 // it needs to know nearly all modules.
 //
@@ -70,20 +70,20 @@ class Cmd_Queue {
 		}
 	};
 	typedef std::priority_queue<Cmd, std::vector<Cmd>, CmdCompare> queue_t;
-	
+
    public:
       Cmd_Queue(Game *g);
       ~Cmd_Queue(void);
 
 		void queue(int time, char sender, int cmd, int arg1=0, int arg2=0, int arg3=0);
       int run_queue(int interval, int* game_time_var);
-   
+
    private:
 		void exec_cmd(const Cmd *c);
 		void clear_cmd(Cmd *c);
-		
+
       Game *m_game;
 		queue_t m_cmds;
 };
 
-#endif // __S__CMD_QUEUE_H 
+#endif // __S__CMD_QUEUE_H

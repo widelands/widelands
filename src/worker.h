@@ -25,12 +25,13 @@
 class Economy;
 class Request;
 class Route;
+class Road;
 class PlayerImmovable;
 class Pic;
 class Tribe_Descr;
 
 /*
-Worker is the base class for all humans (and actually potential non-humans, too) 
+Worker is the base class for all humans (and actually potential non-humans, too)
 that belong to a tribe.
 
 Every worker can carry one (item) ware.
@@ -50,7 +51,7 @@ public:
 	virtual ~Worker_Descr(void);
 
 	void load_graphics();
-	
+
 	inline Tribe_Descr *get_tribe() { return m_tribe; }
 	inline uint get_menu_pic() { return m_menu_pic; }
 	inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
@@ -58,7 +59,7 @@ public:
 	inline int get_ware_id() const { return m_ware_id; }
 
 	void set_ware_id(int idx);
-		
+
 	Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords, bool logic);
 
 protected:
@@ -70,9 +71,9 @@ protected:
 	uint				m_menu_pic;
 	DirAnimations	m_walk_anims;
 	DirAnimations	m_walkload_anims;
-	
+
 	int				m_ware_id;
-}; 
+};
 
 class Worker : public Bob {
 	MO_DESCR(Worker_Descr);
@@ -83,55 +84,57 @@ public:
 		State_Request,			// fulfilling a ware request
 		State_Fugitive,		// lost our location, trying to get back to warehouse
 		State_GoWarehouse,	// return to warehouse
+
+		State_Worker_Last		// must be last
 	};
-	
-	Worker(Worker_Descr *descr, bool);
+
+	Worker(Worker_Descr *descr, bool ingamelogic);
 	virtual ~Worker();
 
 	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
-	
+
 	virtual uint get_movecaps();
-	
+
 	inline PlayerImmovable *get_location(Editor_Game_Base *g) { return (PlayerImmovable*)m_location.get(g); }
 	inline Economy *get_economy() { return m_economy; }
 
 	void set_location(PlayerImmovable *location);
 	void set_economy(Economy *economy);
-	
+
 	void set_job_request(Request *req, const Route *route);
 	void change_job_request(bool cancel);
-	
+
 	void set_job_gowarehouse();
-	
+
 	void schedule_incorporate(Game *g);
 	void incorporate(Game *g);
-	
+
 	inline Route *get_route() { return m_route; }
-	
+
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
 protected:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
-	
+
 	void end_state(Game *g, bool success);
 	void run_state_request(Game *g, uint prev, bool success, uint nexthint);
 	void run_state_fugitive(Game *g, uint prev, bool success, uint nexthint);
 	void run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthint);
-	
+
 	int run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgoal);
-	
+
 private:
 	Object_Ptr	m_location;			// meta location of the worker, a PlayerImmovable
 	Economy*		m_economy;			// Economy this worker is registered in
 	int			m_state;				// one of State_XXX
 	int			m_carried_ware;	// Ware ID (-1 if none carried)
 	Route			*m_route;			// used by Request, GoWarehouse
-	
+
 	Request		*m_request;			// the request we're supposed to fulfill
-	
+
 	int			m_fugitive_death;	// when are we going to die?
-	
+
 	Object_Ptr	m_gowarehouse;		// the warehouse we're trying to reach
 };
 
@@ -143,27 +146,38 @@ class Carrier_Descr : public Worker_Descr {
 public:
 	Carrier_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Carrier_Descr(void);
-	
+
 protected:
 	virtual Bob *create_object(bool);
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-}; 
+};
 
 class Carrier : public Worker {
 	MO_DESCR(Carrier_Descr);
 
 public:
-	Carrier(Carrier_Descr *descr, bool);
+	enum {
+		State_WorkIdle = State_Worker_Last + 1,	// idling on the road
+		State_WorkFetch,
+	};
+
+	Carrier(Carrier_Descr *descr, bool ingamelogic);
 	virtual ~Carrier();
 
+	//void set_job_work(Road* road);
+
 private:
+	Object_Ptr	m_road;		// the road we work on
+
+	int			m_fetch_flag;	// fetch from start_flag if 0, end_flag if 1; drop at the other flag
 };
+
 
 /*
 class Menu_Worker_Descr : virtual public Worker_Descr {
    friend class Tribe_Descr;
 
-   public: 
+   public:
       Menu_Worker_Descr() : Worker_Descr() { }
       virtual ~Menu_Worker_Descr() { };
 
@@ -173,7 +187,7 @@ class Menu_Worker_Descr : virtual public Worker_Descr {
 
             menu_pic.set_clrkey(clrkey);
             menu_pic.create(24, 24, (ushort*)f->Data(24*24*2));
-            
+
             return RET_OK;
       }
 

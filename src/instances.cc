@@ -136,7 +136,7 @@ void Map_Object_Descr::add_attribute(uint attr)
 /*
 ==============================================================================
 
-Map_Object IMPLEMENTATION		
+Map_Object IMPLEMENTATION
 
 ==============================================================================
 */
@@ -243,7 +243,7 @@ Map_Object::act
 Called when a CMD_ACT triggers.
 ===============
 */
-void Map_Object::act(Game* g)
+void Map_Object::act(Game* g, uint data)
 {
 }
 

@@ -248,7 +248,7 @@ void Building::init(Editor_Game_Base* g)
 	// Set the building onto the map
 	Map *map = g->get_map();
 	Coords neighb;
-	
+
 	set_position(g, m_position);
 	
 	if (get_size() == BIG) {
@@ -523,7 +523,7 @@ void Warehouse_Descr::parse(const char *directory, Profile *prof, const EncodeDa
 		//
 	} else
 		throw wexception("Unsupported warehouse subtype '%s'. Possible values: none, HQ, port", string);
-	
+
 	if (m_subtype == Subtype_HQ)
 		m_conquers = global->get_int("conquers");
 }
@@ -562,7 +562,7 @@ Cleanup
 Warehouse::~Warehouse()
 {
 	// During building cleanup, we're removed from the Economy.
-	// Therefore, the wares can simply be cleared out. The global inventory 
+	// Therefore, the wares can simply be cleared out. The global inventory
 	// will be okay.
 	m_wares.clear();
 }
@@ -573,7 +573,7 @@ Warehouse::init
 
 Conquer the land around the HQ on init.
 ===============
-*/	
+*/
 void Warehouse::init(Editor_Game_Base* gg)
 {
    Building::init(gg);
@@ -581,7 +581,7 @@ void Warehouse::init(Editor_Game_Base* gg)
    if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
       gg->conquer_area(get_owner()->get_player_number(), m_position, get_descr()->get_conquers());
 
-   if(get_logic()) {
+	if(get_logic()) {
       Game* g=static_cast<Game*>(gg);
 
       g->get_cmdqueue()->queue(g->get_gametime()+CARRIER_SPAWN_INTERVAL,
@@ -615,12 +615,12 @@ killing useless tribesmen! The Borg? Or just like Soilent Green?
 Or maybe I should just stop writing comments that late at night ;-)
 ===============
 */
-void Warehouse::act(Game *g)
+void Warehouse::act(Game *g, uint data)
 {
 	int id = g->get_safe_ware_id("carrier");
 	int stock = m_wares.stock(id);
 	int tdelta = CARRIER_SPAWN_INTERVAL;
-	
+
 	if (stock < 100) {
 		tdelta -= 4*(100 - stock);
 		create_wares(id, 1);
@@ -630,8 +630,8 @@ void Warehouse::act(Game *g)
 			tdelta = 10;
 		destroy_wares(id, 1);
 	}
-	
-	g->get_cmdqueue()->queue(g->get_gametime() + tdelta, SENDER_MAPOBJECT, 
+
+	g->get_cmdqueue()->queue(g->get_gametime() + tdelta, SENDER_MAPOBJECT,
 			CMD_ACT, m_serial, 0, 0);
 }
 
@@ -645,15 +645,15 @@ Transfer our registration to the new economy.
 void Warehouse::set_economy(Economy *e)
 {
 	Economy *old = get_economy();
-	
+
 	if (old == e)
 		return;
-	
+
 	if (old)
 		old->remove_warehouse(this);
-	
+
 	Building::set_economy(e);
-	
+
 	if (e)
 		e->add_warehouse(this);
 }
@@ -668,9 +668,9 @@ Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::create_wares(int id, int count)
 {
 	m_wares.add(id, count);
-	
+
 	assert(get_economy());
-	
+
 	get_economy()->add_wares(id, count);
 }
 
@@ -684,10 +684,10 @@ Magically destroy wares.
 void Warehouse::destroy_wares(int id, int count)
 {
 	m_wares.remove(id, count);
-	
+
 	assert(get_economy());
-	
-	get_economy()->add_wares(id, count);
+
+	get_economy()->remove_wares(id, count);
 }
 
 /*
@@ -700,21 +700,21 @@ Start a worker of a given type. The worker will be assigned a job by the caller.
 Worker *Warehouse::launch_worker(Game *g, int ware)
 {
 	assert(m_wares.stock(ware));
-	
+
 	Ware_Descr *waredescr;
 	Worker_Descr *workerdescr;
 	Worker *worker;
-	 
+
 	waredescr = g->get_ware_description(ware);
 	assert(waredescr->is_worker());
-	
+
 	workerdescr = ((Worker_Ware_Descr*)waredescr)->get_worker(get_owner()->get_tribe());
-	
+
 	worker = workerdescr->create(g, get_owner(), this, m_position, g->is_game());
-	
+
 	m_wares.remove(ware, 1);
 	get_economy()->remove_wares(ware, 1); // re-added by the worker himself
-	
+
 	return worker;
 }
 
@@ -959,7 +959,7 @@ int Has_Needs_Building_Descr::read(FileRead *f)
    uchar temp;
    temp = f->Unsigned8();
    needs_or=temp ? true : false;
-   
+
    // read needs
    needs.read(f);
    

@@ -92,7 +92,7 @@ class Map_Object {
 public:
 	enum {
 		BOB,			// class Bob
-		
+
 		// everything below is at least a BaseImmovable
 		IMMOVABLE,
 		BUILDING,
@@ -104,7 +104,7 @@ public:
 	enum Attribute {
 		WAREHOUSE = 1,		// assume BUILDING
 	};
-	
+
 	// the enums tell us where we are going
 	enum WalkingDir {
 		IDLE = 0,
@@ -117,24 +117,24 @@ public:
 	};
 
 protected:
-	Map_Object(Map_Object_Descr *descr, bool logic); 
+	Map_Object(Map_Object_Descr *descr, bool logic);
 	virtual ~Map_Object(void);
 
 public:
 	virtual int get_type() = 0;
-	
+
 	inline int get_serial(void) const { return m_serial; }
 	inline bool has_attribute(uint attr) { return m_descr->has_attribute(attr); }
-	
+
 	void remove(Editor_Game_Base*);
 	virtual void destroy(Editor_Game_Base*);
 
    // The next two functions are really only needed in games.
    // Not in Editor
 	void schedule_destroy(Game *g);
-	virtual void act(Game*);
+	virtual void act(Game*, uint data);
 
-protected:	
+protected:
    // init for editor and game
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
@@ -167,14 +167,14 @@ public:
 	~Object_Manager(void);
 
 	void cleanup(Editor_Game_Base *g);
-		
+
 	inline Map_Object* get_object(uint serial) {
 		objmap_t::iterator it = m_objects.find(serial);
 		if (it == m_objects.end())
 			return 0;
 		return it->second;
 	}
-	
+
 	void insert(Map_Object *obj);
 	void remove(Map_Object *obj);
 
@@ -192,14 +192,14 @@ public:
 	inline Object_Ptr() { m_serial = 0; }
 	inline Object_Ptr(Map_Object* obj) { m_serial = obj->m_serial; }
 	// can use standard copy constructor and assignment operator
-	
+
 	inline void set(Map_Object* obj) { if (obj) m_serial = obj->m_serial; else m_serial = 0; }
 	inline Object_Ptr& operator = (Map_Object* obj) { set(obj); return *this; }
-	
+
 	// dammit... without a Editor_Game_Base object, we can't implement a Map_Object* operator
 	// (would be _really_ nice)
 	Map_Object* get(Editor_Game_Base* g);
-		
+
 private:
 	uint m_serial;
 };
