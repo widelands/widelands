@@ -17,6 +17,7 @@
  *
  */
 
+#include "animation.h"
 #include "constructionsite.h"
 #include "editor_game_base.h"
 #include "error.h"
@@ -26,8 +27,7 @@
 #include "rendertarget.h"
 #include "transport.h"
 #include "worker.h"
-#include "animation.h"
-#include "graphic.h"
+#include "wexception.h"
 
 static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
 
