@@ -13,11 +13,11 @@ stopable=yes
 enhances_to=deeper_oremine
 
 [inputs]
-ration=6
+snack=6
 
 [work]
 0=sleep 18000   # a bit faster
-1=consume ration
+1=consume snack
 2=animation working 18000
 3=mine iron 2 66 5       
 4=produce ironore

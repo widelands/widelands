@@ -12,11 +12,11 @@ stopable=yes
 enhances_to=deep_goldmine
 
 [inputs]
-snack=6
+ration=6
 
 [work]
 0=sleep 20000
-1=consume snack 
+1=consume ration 
 2=animation working 20000
 3=mine gold 2 33 5       
 4=produce goldstone

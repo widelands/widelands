@@ -12,11 +12,11 @@ stopable=yes
 enhances_to=deep_coalmine
 
 [inputs]
-snack=6
+ration=6
 
 [work]
 0=sleep 20000
-1=consume snack 
+1=consume ration 
 2=animation working 20000
 3=mine coal 2 33 5       # mine coal in a radius of 2 up to 25% of total available, 3% chances to hit after this 
 4=produce coalearth
