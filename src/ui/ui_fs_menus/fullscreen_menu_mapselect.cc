@@ -109,9 +109,17 @@ Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-   egbase->set_map(m_maploader->get_map());
-	m_maploader->load_map_complete(egbase);
-   m_map=0;
+	if (m_map)
+	{
+		assert(m_maploader);
+
+		egbase->set_map(m_maploader->get_map());
+		m_maploader->load_map_complete(egbase);
+		m_map = 0;
+
+		delete m_maploader;
+		m_maploader = 0;
+	}
 
 	end_modal(1);
 }
