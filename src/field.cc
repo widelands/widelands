@@ -24,17 +24,19 @@
  *
  * a field like it is represented in the game
  */
-
+// TODO: This is all one evil hack :(
 
 #define V3	(float)0.57735 // sqrt(1/3)
 #define LIGHT_FACTOR		75
 
-/** Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
- *
- * Setup the field's brightness, based upon the slopes.
- * Slopes are calulated as this field's height - neighbour's height.
- */
-void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
+/*
+===============
+calc_brightness
+
+Calculate brightness based upon the slopes.
+===============
+*/
+static float calc_brightness(int l, int r, int tl, int tr, int bl, int br)
 {
 	static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
 
@@ -69,8 +71,26 @@ void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 
 	float b = normal * sun;
 	b *= -LIGHT_FACTOR;
+	
+	return b;
+}
 
-	// is this necessary?
+/*
+===============
+Field::set_brightness
+
+Set the field's brightness based upon the slopes.
+Slopes are calulated as this field's height - neighbour's height.
+===============
+*/
+void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
+{
+	static float flatbrightness = 0; // HACK to normalize flat terrain to zero brightness
+	if (!flatbrightness)
+		flatbrightness = calc_brightness(0, 0, 0, 0, 0, 0);
+	
+	float b = calc_brightness(l, r, tl, tr, bl, br) - flatbrightness;
+	
 	if (b < -128) b = -128;
 	else if (b > 127) b = 127;
 	brightness = (char)b;
