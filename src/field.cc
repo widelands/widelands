@@ -69,18 +69,18 @@ void Field::set_normal()
 // don't warn me about fuckin float conversion i know what i'm doing
 #pragma warning(disable:4244)
 #endif
-	normal = Vector(0, 0, FIELD_WIDTH);
-	normal.x -= (height - ln->height) << HEIGHT_FACTOR;
-	normal.x += (height - rn->height) << HEIGHT_FACTOR;
-	normal.x -= (float)((height - tln->height) << HEIGHT_FACTOR) * COS60;
-	normal.y -= (float)((height - tln->height) << HEIGHT_FACTOR) * SIN60;
-	normal.x += (float)((height - trn->height) << HEIGHT_FACTOR) * COS60;
-	normal.y -= (float)((height - trn->height) << HEIGHT_FACTOR) * SIN60;
-	normal.x -= (float)((height - bln->height) << HEIGHT_FACTOR) * COS60;
-	normal.y += (float)((height - bln->height) << HEIGHT_FACTOR) * SIN60;
-	normal.x += (float)((height - brn->height) << HEIGHT_FACTOR) * COS60;
-	normal.y += (float)((height - brn->height) << HEIGHT_FACTOR) * SIN60;
-	normal.normalize();
+		  normal = Vector(0, 0, FIELD_WIDTH);
+		  normal.x -= (height - ln->height) * HEIGHT_FACTOR;
+		  normal.x += (height - rn->height) * HEIGHT_FACTOR;
+		  normal.x -= (float)((height - tln->height) * HEIGHT_FACTOR) * COS60;
+		  normal.y -= (float)((height - tln->height) * HEIGHT_FACTOR) * SIN60;
+		  normal.x += (float)((height - trn->height) * HEIGHT_FACTOR) * COS60;
+		  normal.y -= (float)((height - trn->height) * HEIGHT_FACTOR) * SIN60;
+		  normal.x -= (float)((height - bln->height) * HEIGHT_FACTOR) * COS60;
+		  normal.y += (float)((height - bln->height) * HEIGHT_FACTOR) * SIN60;
+		  normal.x += (float)((height - brn->height) * HEIGHT_FACTOR) * COS60;
+		  normal.y += (float)((height - brn->height) * HEIGHT_FACTOR) * SIN60;
+		  normal.normalize();
 #ifdef _MSC_VER
 #pragma warning(default:4244)
 #endif

@@ -108,13 +108,12 @@ class Bob;
  *
  * a field like it is represented in the game
  */
-#define FIELD_WIDTH   64
-#define FIELD_HEIGHT  64
+#define FIELD_WIDTH   58
+#define FIELD_HEIGHT  58
 //#define FIELD_HEIGHT 48
 //#define FIELD_WIDTH 48
-#define HEIGHT_MAX    54 
-#define HEIGHT_FACTOR 3
-#define HEIGHT_CLR_FACTOR 2
+#define HEIGHT_MAX    58 
+#define HEIGHT_FACTOR 6
 class Field {
 		  Field(const Field&);
 		  Field& operator=(const Field&);
@@ -129,7 +128,7 @@ class Field {
 								ypos=y;
 								height=h;
 
-								ypix=(((y+1)*FIELD_HEIGHT)>>1)-(h<<HEIGHT_FACTOR);
+								ypix=(((y+1)*FIELD_HEIGHT)>>1)-(h*HEIGHT_FACTOR);
 
 								if((y&1)) { // %2 
 										  xpix=((((x<<1)+1)*FIELD_WIDTH)>>1);
