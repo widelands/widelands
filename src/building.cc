@@ -51,7 +51,8 @@ int NeedWares_List::read(Binary_file* f) {
 // down here: Buildings as Map_Objects
 int Building_HQ::act(Game* g) {
 
-   cerr << "Building HQ should act. Repeating in ten frames!" << endl;
+   // cerr << "Building HQ should act. Repeating in ten frames!" << endl;
+   
 
    next_acting_frame=g->get_frame()+10;
    cur_pic=g->get_player_tribe(owned_by)->get_building_descr(0)->get_idle()->get_pic(0);

@@ -436,15 +436,20 @@ void Graphic::update(void) {
 
 void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint src_x, uint src_y, int w, int h) {
 
-   uint x, y;
+   int x, y;
    Animation_Pic* pic=inst->get_cur_pic();
    Animation* bob=pic->parent;
    ushort cmd;
    ushort count;
    ushort i=0;
    ushort clr;
-   x=0;
-   for(y=0; y<bob->get_h(); ) {
+
+   // TODO: proper hotspot implementation
+   dst_x-=bob->get_w()>>1;
+   dst_y-=bob->get_h()>>1;
+   
+   x=dst_x;
+   for(y=dst_y; y<dst_y+bob->get_h(); ) {
 //      for(x=0; x<bob->get_w(); x++) {
          cmd=((pic->data[i]>> 14) & 0x3);
          count=pic->data[i] & 0x3fff;
@@ -459,12 +464,16 @@ void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint 
                clr=pic->data[i+z];
    //            cerr << count << ":" << hex << clr << endl;
 //               clr=pic->data[i];
-               dst->pixels[y*dst->pitch + x]=clr; //pic->data[i];
+               if(x>=0 && y>=0) {
+                  if( (x<dst->get_w()) && (y<dst->get_h()) ) {
+                     dst->pixels[y*dst->pitch + x]=clr; //pic->data[i];
+                  }
+               }
                ++x;
-               if(x==bob->get_w()) { 
+               if(x==dst_x+bob->get_w()) { 
                   ++y; 
-                  x=0; 
-                  if(y==bob->get_h()) break;
+                  x=dst_x; 
+                  if(y==dst_y+bob->get_h()) break;
                }
             }
             i+=count;
@@ -474,7 +483,7 @@ void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint 
             while(count) {
                ++x;
                   
-               if(x==bob->get_w()) { ++y; x=0; if(y==bob->get_h()) break;}
+               if(x==dst_x+bob->get_w()) { ++y; x=dst_x; if(y==dst_y+bob->get_h()) break;}
                --count;
             }
             continue;
@@ -501,7 +510,7 @@ void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint 
       
       }
    }
-   cerr << "Should write an animation_pic something" << endl;
+//   cerr << y << "Should write an animation_pic something" << endl;
 
 //   assert(0);
 }

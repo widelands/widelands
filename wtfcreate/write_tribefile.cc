@@ -113,10 +113,12 @@ void write_buildings(Binary_file* f, Buildings_Descr* b) {
 
    // write each building
    uint i;
+#if 1
    for(i=0; i<b->nbuilds; i++) {
       b->builds[i]->write(f);
    }
-  
+#endif
+   
 #if 0
    cerr << "################## HQ WRITE START" << endl;
       b->builds[0]->write(f);

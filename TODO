@@ -1,5 +1,6 @@
-WIP == Work in Process
-TIP == Thinking in Process
+-  == not yet done
+*  == finished
+/  == half done
 
 **************************** WIDELANDS WORLD CREATOR ***************
 
@@ -22,8 +23,14 @@ TIP == Thinking in Process
 **************************** WIDELANDS WORK ***********************
 
 - Speed up map rendering
+   - Decide how to save textures (also moving), for faster bright_up 
 - Improve graphics (Special concern for me) 
-- Define bob format
+* Define bob format
+   - Refine bob format
+   - Redo wtfcreate bob writing routine, redo widelands bob blitting
+     routine
+- Change the way, descriptions (buildings, workers..) are saved in 
+  widelands, for working build command
 
 
 

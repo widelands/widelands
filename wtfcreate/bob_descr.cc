@@ -159,7 +159,20 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
          pixc++;
       }
    } 
- 
+
+   // done? last index check
+  // write last count
+   if(lidx!=-1) {
+      cerr << pixc << "x bunte pixel: " ;
+      data[lidx]=pixc;
+      cerr << hex << data[lidx] << " " ;
+      for(uint i=0; i<pixc; i++) {
+         cerr << data[lidx+i+1] << " " ;
+      }
+      cerr << endl << dec;
+   }
+  
+      
    // write the size of the data
    ushort size=n*sizeof(ushort);
    f->write(&size, sizeof(ushort));

@@ -233,7 +233,8 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 
    // check if a instance is hooked to this field, if so, draw it
    if(f->get_inst()) {
-      copy_animation_pic(dst, f->get_inst(), 0, 0, 0, 0, 0, 0); 
+  //    cerr << p[1].x << ":" << p[1].y << endl;
+      copy_animation_pic(dst, f->get_inst(), p[1].x, p[1].y, 0, 0, 0, 0); 
       // cerr << temp << ": Should draw a instance! TODO" << endl;
    }
 
