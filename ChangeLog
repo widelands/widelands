@@ -1,3 +1,8 @@
+- some ui ergonomics (new mapselect dialog, 
+  double click function in listselects)
+- resources and default resources support
+- loading/saving of maps
+- preliminary TT-Font support
 - enhancing buildings support
 - build animation support
 - editor events/trigger
