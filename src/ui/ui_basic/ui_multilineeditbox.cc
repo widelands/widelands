@@ -41,7 +41,6 @@ UIMultiline_Editbox::UIMultiline_Editbox(UIPanel *parent, int x, int y, uint w, 
 
    m_needs_update=false;
    m_cur_pos=get_text().size();
-   if(m_cur_pos<0) m_cur_pos=0;
 
    set_handle_mouse(true);
    set_can_focus(true);
