@@ -74,10 +74,10 @@ struct ProductionAction {
 	enum Type {
 		actSleep,   // iparam1 = sleep time in milliseconds
 		actWorker,  // sparam1 = worker program to run
-		actConsume, // sparam1 = consume this ware, has to be an input
+		actConsume, // sparam1 = consume this ware, has to be an input, iparam1 number to consume
 		actAnimate, // sparam1 = activate this animation until timeout
 		actProduce, // sparem1 = ware to produce. the worker carries it outside
-		actCheck,   // sparam1 = check if the given input ware is available
+		actCheck,   // sparam1 = check if the given input ware is available, iparam1 number to check for
 		actMine,    // iparam1 = mineXXX type to mine for
 		actCall,		// sparam1 = name of sub-program
 		actSet,		// iparam1 = flags to set, iparam2 = flags to unset
@@ -177,8 +177,8 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			if (endp && *endp)
 				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 		} else if (cmd[0] == "consume") {
-			if(cmd.size() != 2)
-				throw wexception("Line %i: Usage: consume <ware>", idx);
+			if(cmd.size() != 2 && cmd.size() != 3)
+				throw wexception("Line %i: Usage: consume <ware> [number]", idx);
 
 
 			Section* s=prof->get_safe_section("inputs");
@@ -188,9 +188,19 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.type = ProductionAction::actConsume;
 			act.sparam1 = cmd[1];
+         int how_many=1;
+         if(cmd.size()==3) {
+            char* endp;
+            how_many = strtol(cmd[2].c_str(), &endp, 0);
+            if (endp && *endp)
+               throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+
+         }
+         act.iparam1 = how_many;
+
 		}  else if (cmd[0] == "check") {
-			if(cmd.size() != 2)
-				throw wexception("Line %i: Usage: checking <ware>", idx);
+			if(cmd.size() != 2 && cmd.size() != 3)
+				throw wexception("Line %i: Usage: checking <ware> [number]", idx);
 
 
 			Section* s=prof->get_safe_section("inputs");
@@ -200,6 +210,16 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.type = ProductionAction::actCheck;
 			act.sparam1 = cmd[1];
+         int how_many=1;
+         if(cmd.size()==3) {
+            char* endp;
+            how_many = strtol(cmd[2].c_str(), &endp, 0);
+            if (endp && *endp)
+               throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+
+         }
+         act.iparam1 = how_many;
+
 		} else if (cmd[0] == "produce") {
 			if(cmd.size() != 2)
 				throw wexception("Line %i: Usage: produce <ware>", idx);
@@ -780,9 +800,9 @@ void ProductionSite::program_act(Game* g)
 				if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
 					action->sparam1.c_str()) == 0) {
 					WaresQueue* wq=m_input_queues[i];
-					if(wq->get_filled())
+					if(wq->get_filled()>=action->iparam1)
 					{
-						wq->set_filled(wq->get_filled()-1);
+						wq->set_filled(wq->get_filled()-action->iparam1);
 						wq->update(g);
 					}
 					else
@@ -807,7 +827,7 @@ void ProductionSite::program_act(Game* g)
 				if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
 					action->sparam1.c_str()) == 0) {
 					WaresQueue* wq = m_input_queues[i];
-					if(wq->get_filled())
+					if(wq->get_filled()>=action->iparam1)
 					{
 						// okay, do nothing
 						molog("    okay\n");

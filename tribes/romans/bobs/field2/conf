@@ -3,7 +3,7 @@ type="diminishing"
 stock=1
 
 size=normal
-attrib=field
+attrib=roman_field
 program=harvest
 
 clrkey_r=0
@@ -15,9 +15,9 @@ shadowclr_b=0
 
 # This program is executed when the farmer harvest the field
 [harvest]
-0=transform field2
+0=remove
 
 [idle]
-pics=field1_??.bmp
+pics=field2_??.bmp
 hot_spot_x=15
 hot_spot_y=18

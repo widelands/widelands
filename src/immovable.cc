@@ -125,7 +125,8 @@ struct ImmovableAction {
 	execute_t	function;
 	int			iparam1;
 	int			iparam2;
-	std::string	sparam;
+	std::string	sparam1;
+   std::string sparam2;
 };
 
 // The ImmovableProgram
@@ -280,12 +281,13 @@ Immovable_Descr::Immovable_Descr
 Initialize with sane defaults
 ===============
 */
-Immovable_Descr::Immovable_Descr(const char *name)
+Immovable_Descr::Immovable_Descr(const char *name, Tribe_Descr* owner_tribe)
 {
 	snprintf(m_name, sizeof(m_name), "%s", name);
 	m_size = BaseImmovable::NONE;
    m_picture="";
 	m_default_encodedata.clear();
+   m_owner_tribe=owner_tribe;
 }
 
 
@@ -747,22 +749,41 @@ void ImmovableProgram::parse_transform(ImmovableAction* act, const ProgramParser
 	if (cmd.size() != 2)
 		throw wexception("Syntax: transform [bob name]");
 
+   std::vector<std::string> list;
+   
+   split_string(cmd[1], &list, ":");
+   if(list.size()==1) {
+      act->sparam1 = cmd[1];
+      act->sparam2 = "world";
+   } else {
+      act->sparam1 = list[1];
+      act->sparam2 = list[0];
+   }
+      
 	act->function = &Immovable::run_transform;
-	act->sparam = cmd[1];
 }
 
 bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& action)
 {
 	Coords c = m_position;
 
+   if(get_descr()->is_world_immovable() && (action.sparam2 != "world")) 
+      throw wexception("Should create tribe-immovable %s, but we are no tribe immovable!\n", action.sparam1.c_str());
+   
 	if (!killable) { // we need to reschedule and remove self from act()
 		m_program_step = schedule_act(g, 1);
 		return true;
 	}
 
+   
+   Tribe_Descr* tribe=0;
+   
+   if(action.sparam2 != "world") 
+      tribe=get_descr()->get_owner_tribe(); // Not a world bob?
+
 	remove(g);
 	// Only use variables on the stack below this point!
-	g->create_immovable(c, action.sparam);
+	g->create_immovable(c, action.sparam1, tribe);
 	return true;
 }
 

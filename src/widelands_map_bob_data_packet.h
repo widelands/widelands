@@ -25,6 +25,9 @@
 /*
  * This data packet contains the various bobs on
  * the map (animals for now)
+ *
+ * Only world animals are valid, no tribe animals are
+ * written
  */
 class Widelands_Map_Bob_Data_Packet : public Widelands_Map_Data_Packet {
    public:

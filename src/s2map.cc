@@ -614,7 +614,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 						int idx = m_map->m_world->get_immovable_index(bobname);
 						if (idx < 0)
 							throw wexception("Missing immovable type %s", bobname);
-						game->create_immovable(Coords(x, y), idx);
+						game->create_immovable(Coords(x, y), idx, 0);
 						continue;
 					}
 				}
@@ -713,7 +713,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					int idx = m_map->m_world->get_immovable_index(bobname);
 					if (idx < 0)
 						throw wexception("Missing immovable type %s", bobname);
-					game->create_immovable(Coords(x, y), idx);
+					game->create_immovable(Coords(x, y), idx, 0);
 				}
 			}
 		}

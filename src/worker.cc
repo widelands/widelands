@@ -25,6 +25,7 @@
 #include "profile.h"
 #include "rendertarget.h"
 #include "transport.h"
+#include "tribe.h"
 #include "util.h"
 #include "warehouse.h"
 #include "wexception.h"
@@ -276,7 +277,22 @@ bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* act)
 
 	molog("  SetDescription: %s\n", act->sparamv[idx].c_str());
 
-	state->ivar2 = g->get_map()->get_world()->get_immovable_index(act->sparamv[idx].c_str());
+   std::vector<std::string> list;
+   split_string(act->sparamv[idx], &list, ":");
+   std::string bob;
+   if(list.size()==1) {
+      state->svar1 = "world";
+      bob=list[0];
+   } else {
+      state->svar1 = "tribe";
+      bob=list[1];
+   }
+      
+   if(state->svar1 == "world") { 
+	state->ivar2 = g->get_map()->get_world()->get_immovable_index(bob.c_str());
+   } else {
+	state->ivar2 = get_descr()->get_tribe()->get_immovable_index(bob.c_str());
+   }
 	if (state->ivar2 < 0) {
 		molog("  WARNING: Unknown immovable %s\n", act->sparamv[idx].c_str());
 		set_signal("fail");
@@ -759,7 +775,10 @@ bool Worker::run_plant(Game* g, State* state, const WorkerAction* act)
 		return true;
 	}
 
-	g->create_immovable(pos, state->ivar2);
+   if(state->svar1 == "world") 
+      g->create_immovable(pos, state->ivar2, 0);
+   else 
+      g->create_immovable(pos, state->ivar2, get_descr()->get_tribe());
 
 	state->ivar1++;
 	schedule_act(g, 10);
@@ -891,7 +910,7 @@ bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
 
 		molog("  Resource: %02X -> plant indicator '%s'\n", res, immname.c_str());
 
-		g->create_immovable(position, immname);
+		g->create_immovable(position, immname, get_descr()->get_tribe());
 	}
 
 	state->ivar1++;
@@ -1064,7 +1083,7 @@ Worker_Descr::~Worker_Descr
 ===============
 */
 Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
-	: Bob_Descr(name)
+	: Bob_Descr(name, tribe)
 {
 	m_tribe = tribe;
 	m_menu_pic = 0;

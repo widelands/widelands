@@ -25,6 +25,10 @@
 /*
  * This data packet contains the various immovables on
  * the map (trees, rocks)
+ *
+ * This packet only handles those bobs defined by the map
+ * the others (fields, player animals, fires ...) must be handled
+ * somewhere else
  */
 class Widelands_Map_Immovable_Data_Packet : public Widelands_Map_Data_Packet {
    public:

@@ -432,10 +432,10 @@ void World::parse_bobs()
 
 			if (!strcasecmp(type, "critter")) {
 				Bob_Descr *descr;
-				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof);
+				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof, 0);
 				bobs.add(descr);
 			} else {
-				Immovable_Descr *descr = new Immovable_Descr(name);
+				Immovable_Descr *descr = new Immovable_Descr(name, 0);
 				descr->parse(it->c_str(), &prof);
 				immovables.add(descr);
 			}
@@ -607,7 +607,3 @@ void Terrain_Descr::load_graphics()
 	if (m_picnametempl)
 		m_texture = g_gr->get_maptexture(m_picnametempl, m_frametime);
 }
-
-/* "attic" -- re-add this in when it's needed
-
-*/

@@ -32,6 +32,7 @@ class Profile;
 class Route;
 class Request;
 class Transfer;
+class Tribe_Descr;
 class WorkerProgram;
 
 
@@ -40,7 +41,7 @@ Bobs are moving map objects: Animals, humans, ships...
 */
 class Bob_Descr : public Map_Object_Descr {
 public:
-	Bob_Descr(const char *name);
+	Bob_Descr(const char *name, Tribe_Descr* tribe);
 	virtual ~Bob_Descr(void);
 
 	inline const char* get_name(void) const { return m_name; }
@@ -49,6 +50,9 @@ public:
 	Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
    inline const char* get_picture(void) const { return m_picture.c_str(); }
    inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
+   
+   inline Tribe_Descr* get_owner_tribe(void) { return m_owner_tribe; }
+   bool is_world_immovable(void) { return !m_owner_tribe; }
 
 protected:
 	virtual Bob *create_object() = 0;
@@ -58,10 +62,10 @@ protected:
 	uint	m_idle_anim; // the default animation
    std::string m_picture;
    EncodeData  m_default_encodedata;
-
+   Tribe_Descr* m_owner_tribe;
 
 public:
-	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof);
+	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof, Tribe_Descr* tribe);
 };
 
 class Bob : public Map_Object {
@@ -125,6 +129,8 @@ public:
 	void set_position(Editor_Game_Base* g, Coords f);
 	inline const FCoords& get_position() const { return m_position; }
 	inline Bob* get_next_bob(void) { return m_linknext; }
+   
+   bool is_world_immovable(void) { return get_descr()->is_world_immovable(); }
 
 public: // default tasks
 	void reset_tasks(Game*);

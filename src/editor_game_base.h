@@ -80,8 +80,8 @@ class Editor_Game_Base {
       Building* warp_building(Coords, char owner, int idx);
 		Building* warp_constructionsite(Coords c, char owner, int idx, int oldid=-1);
       Bob *create_bob(Coords c, int idx);
-      Immovable* create_immovable(Coords c, int idx);
-		Immovable* create_immovable(Coords c, std::string name);
+      Immovable* create_immovable(Coords c, int idx, Tribe_Descr*);
+		Immovable* create_immovable(Coords c, std::string name, Tribe_Descr*);
 
       inline int get_gametime(void) { return m_gametime; }
 		Interactive_Base* get_iabase() { return m_iabase; }

@@ -46,6 +46,7 @@ Tribe_Descr::Tribe_Descr(const char* name)
       parse_wares(directory);
 		parse_buildings(directory);
 		parse_workers(directory);
+      parse_bobs(directory);
       parse_root_conf(directory);
 	}
 	catch(std::exception &e)
@@ -295,6 +296,59 @@ void Tribe_Descr::parse_wares(const char* directory)
 	}
 }
 
+/*
+ * Parse the player bobs (animations, immovables, critters)
+ */
+void Tribe_Descr::parse_bobs(const char* directory) {
+	char subdir[256];
+	filenameset_t dirs;
+
+	snprintf(subdir, sizeof(subdir), "%s/bobs", directory);
+
+	g_fs->FindFiles(subdir, "*", &dirs);
+
+	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+		char fname[256];
+
+		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
+
+		if (!g_fs->FileExists(fname))
+			continue;
+
+		const char *name;
+		const char *slash = strrchr(it->c_str(), '/');
+		const char *backslash = strrchr(it->c_str(), '\\');
+
+		if (backslash && (!slash || backslash > slash))
+			slash = backslash;
+
+		if (slash)
+			name = slash+1;
+		else
+			name = it->c_str();
+
+		try
+		{
+			Profile prof(fname, "global"); // section-less file
+			Section *s = prof.get_safe_section("global");
+			const char *type = s->get_safe_string("type");
+
+			if (!strcasecmp(type, "critter")) {
+				Bob_Descr *descr;
+				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof, this);
+				m_bobs.add(descr);
+			} else {
+				Immovable_Descr *descr = new Immovable_Descr(name, this);
+				descr->parse(it->c_str(), &prof);
+				m_immovables.add(descr);
+			}
+		} catch(std::exception &e) {
+			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
+		} catch(...) {
+			cerr << it->c_str() << ": unknown exception (garbage directory?)" << endl;
+		}
+	}
+}
 
 /*
 ===========

@@ -490,7 +490,7 @@ void Building::cleanup(Editor_Game_Base* g)
 ===============
 Building::burn_on_destroy [virtual]
 
-Return true if a fire should be created when the building is destroyed.
+Return true if a "fire" should be created when the building is destroyed.
 By default, burn always.
 ===============
 */
@@ -513,11 +513,12 @@ void Building::destroy(Editor_Game_Base* g)
 	Coords pos = m_position;
 	bool fire = burn_on_destroy();
 
+   Tribe_Descr* tribe=get_descr()->get_tribe();
 	PlayerImmovable::destroy(g);
 
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
-		g->create_immovable(pos, "fire");
+		g->create_immovable(pos, "destroyed_building", tribe);
 }
 
 

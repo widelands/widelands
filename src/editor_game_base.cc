@@ -521,28 +521,41 @@ Bob *Editor_Game_Base::create_bob(Coords c, int idx)
 Editor_Game_Base::create_immovable
 
 Create an immovable at the given location.
+If tribe is not zero, create a immovable of a player (not a PlayerImmovable
+but an immovable defined by the players tribe)
 Does not perform any placability checks.
 ===============
 */
-Immovable *Editor_Game_Base::create_immovable(Coords c, int idx)
+Immovable *Editor_Game_Base::create_immovable(Coords c, int idx, Tribe_Descr* tribe)
 {
 	Immovable_Descr *descr;
 
-	descr = m_map->get_world()->get_immovable_descr(idx);
+   if(!tribe) 
+      descr = m_map->get_world()->get_immovable_descr(idx);
+   else
+      descr = tribe->get_immovable_descr(idx);
 	assert(descr);
 
 	return descr->create(this, c);
 }
 
-Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name)
+Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name, Tribe_Descr* tribe)
 {
-	int idx = m_map->get_world()->get_immovable_index(name.c_str());
+	int idx;
+   
+   if(!tribe)
+      idx = m_map->get_world()->get_immovable_index(name.c_str());
+   else { 
+      log("ALIVE: %s\n", name.c_str());
+      idx = tribe->get_immovable_index(name.c_str());
+      log("ALIVE: %i\n", idx);
+   }
 
 	if (idx < 0)
-		throw wexception("Editor_Game_Base::create_immovable(%i, %i): %s is not defined",
+		throw wexception("Editor_Game_Base::create_immovable(%i, %i): %s is not defined for",
 								c.x, c.y, name.c_str());
 
-	return create_immovable(c, idx);
+	return create_immovable(c, idx, tribe);
 }
 
 

@@ -21,7 +21,7 @@ program=burn
 6=return										# return home
 
 [burn]
-0=setdescription fire
+0=setdescription tribe:destroyed_building
 1=findobject attrib:tree radius:12
 2=walk object
 3=animation burning 5000  

@@ -23,10 +23,11 @@
 #include "animation.h"
 #include "instances.h"
 
+class Economy;
+class Flag;
 class Profile;
 class Request;
-class Flag;
-class Economy;
+class Tribe_Descr;
 class WaresQueue;
 class Worker;
 
@@ -74,7 +75,7 @@ public:
 	typedef std::map<std::string, uint> AnimationMap;
 
 public:
-	Immovable_Descr(const char *name);
+	Immovable_Descr(const char *name, Tribe_Descr* owner_tribe);
 	~Immovable_Descr();
 
 	inline const char* get_name(void) const { return m_name; }
@@ -88,6 +89,9 @@ public:
 	uint parse_animation(std::string directory, Profile* prof, std::string name);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
+   inline Tribe_Descr* get_owner_tribe(void) { return m_owner_tribe; }
+   bool is_world_immovable(void) { return !m_owner_tribe; }
+
 protected:
    std::string m_picture;
    char			m_name[30];
@@ -96,6 +100,7 @@ protected:
 
 	ProgramMap		m_programs;
 	AnimationMap	m_animations;
+   Tribe_Descr*            m_owner_tribe;       // or zero if this is a world immovable
 };
 
 class Immovable : public BaseImmovable {
@@ -122,6 +127,8 @@ public:
 	void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos);
 
 	void switch_program(Game* g, std::string name);
+   
+   bool is_world_immovable(void) { return get_descr()->is_world_immovable(); }
 
 protected:
 	void set_program_animation(Editor_Game_Base* g);

@@ -12,7 +12,7 @@ program=harvest
 # given direction
 
 [plant]
-0=setdescription field0 # Set a random immovable description
+0=setdescription tribe:field0 # Set a random immovable description
 1=findspace size:any radius:2			# Find space for the description within the given radius
 2=walk coords								# Walk to the target coordinates
 3=animation idle 500						# Play a planting animation
@@ -21,7 +21,7 @@ program=harvest
 6=return										# Go back home
 
 [harvest]
-0=findobject attrib:field radius:2	# find an object matching the given criteria, put it into the object slot
+0=findobject attrib:roman_field radius:2	# find an object matching the given criteria, put it into the object slot
 1=walk object								# walk to the object in the object slot
 2=animation idle 10000				# play an animation 
 3=object harvest								# cause the object to change its program (to 'fall')

@@ -44,7 +44,7 @@ int Editor_Place_Immovable_Tool::handle_click_impl(FCoords& fc, Map* map, Editor
             continue;
       }
 
-		parent->get_editor()->create_immovable(c, get_random_enabled());
+		parent->get_editor()->create_immovable(c, get_random_enabled(), 0);
    }
    return parent->get_fieldsel_radius()+2;
 }

@@ -23,8 +23,10 @@
 #include <map>
 #include <vector>
 #include "animation.h"
+#include "bob.h"
 #include "constants.h"
 #include "descr_maintainer.h"
+#include "immovable.h"
 
 class Building_Descr;
 class Editor_Game_Base;
@@ -65,6 +67,12 @@ class Tribe_Descr {
       inline int get_nrbuildings() { return m_buildings.get_nitems(); }
 		inline int get_building_index(const char *name) { return m_buildings.get_index(name); }
 		inline Building_Descr *get_building_descr(uint idx) { return m_buildings.get(idx); }
+      inline int get_immovable_index(const char* l) { return m_immovables.get_index(l); }
+      inline int get_nr_immovables(void) { return m_immovables.get_nitems(); }
+		inline Immovable_Descr* get_immovable_descr(int index) { return m_immovables.get(index); }
+      inline int get_bob(const char* l) { return m_bobs.get_index(l); }
+		inline Bob_Descr* get_bob_descr(ushort index) { return m_bobs.get(index); }
+      inline int get_nr_bobs(void) { return m_bobs.get_nitems(); }
 
       inline uint get_frontier_anim(void) { return m_anim_frontier; }
 		inline uint get_flag_anim(void) { return m_anim_flag; }
@@ -83,6 +91,8 @@ class Tribe_Descr {
       Descr_Maintainer<Worker_Descr> m_workers;
       Descr_Maintainer<Building_Descr> m_buildings;
       Descr_Maintainer<Item_Ware_Descr> m_wares;
+      Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
+      Descr_Maintainer<Bob_Descr> m_bobs;  // The player critters
 
       std::map<std::string, int> m_startwares;
       std::map<std::string, int> m_startworkers;
@@ -94,6 +104,8 @@ class Tribe_Descr {
 		void parse_buildings(const char *directory);
 		void parse_workers(const char *directory);
 		void parse_wares(const char *wares);
+		void parse_bobs(const char *directory);
+		
 
 };
 

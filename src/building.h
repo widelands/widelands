@@ -76,11 +76,12 @@ public:
 	virtual void load_graphics();
 
 	virtual int get_conquers(void) const { return 0; }
+	
+   inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
 
 protected:
 	virtual Building* create_object() = 0;
 	Building* create_constructionsite(Building_Descr* );
-	inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
 	bool         m_stopable;
 	std::string  m_stop_icon;
 	std::string  m_continue_icon;

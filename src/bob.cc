@@ -25,6 +25,7 @@
 #include "profile.h"
 #include "rendertarget.h"
 #include "transport.h"
+#include "tribe.h"
 #include "wexception.h"
 
 
@@ -42,10 +43,11 @@ Bob_Descr::Bob_Descr
 Bob_Descr::~Bob_Descr
 ===============
 */
-Bob_Descr::Bob_Descr(const char *name)
+Bob_Descr::Bob_Descr(const char *name, Tribe_Descr* owner_tribe)
 {
 	snprintf(m_name, sizeof(m_name), "%s", name);
    m_default_encodedata.clear();
+   m_owner_tribe=owner_tribe;
 }
 
 Bob_Descr::~Bob_Descr(void)
@@ -1106,7 +1108,7 @@ class Critter_Bob
 //
 class Critter_Bob_Descr : public Bob_Descr {
    public:
-      Critter_Bob_Descr(const char *name);
+      Critter_Bob_Descr(const char *name, Tribe_Descr* tribe);
       virtual ~Critter_Bob_Descr(void) { }
 
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
@@ -1120,8 +1122,8 @@ class Critter_Bob_Descr : public Bob_Descr {
       bool				m_swimming;
 };
 
-Critter_Bob_Descr::Critter_Bob_Descr(const char *name)
-	: Bob_Descr(name)
+Critter_Bob_Descr::Critter_Bob_Descr(const char *name, Tribe_Descr* tribe)
+	: Bob_Descr(name, tribe)
 {
 	m_swimming = 0;
 }
@@ -1262,7 +1264,7 @@ Master factory to read a bob from the given directory and create the
 appropriate description class.
 ===============
 */
-Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, Profile *prof)
+Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, Profile *prof, Tribe_Descr* tribe)
 {
 	Bob_Descr *bob = 0;
 
@@ -1272,7 +1274,7 @@ Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, P
 		const char *type = s->get_safe_string("type");
 
 		if (!strcasecmp(type, "critter")) {
-			bob = new Critter_Bob_Descr(name);
+			bob = new Critter_Bob_Descr(name, tribe);
 		} else
 			throw wexception("Unsupported bob type '%s'", type);
 

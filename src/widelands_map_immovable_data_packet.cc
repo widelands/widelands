@@ -46,17 +46,21 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_immovables=fr->Unsigned16();
-      if(nr_immovables>world->get_nr_immovables()) throw wexception("Number of immovables in map (%i) is bigger than in world (%i)",
-            nr_immovables, world->get_nr_immovables());
+      if(nr_immovables>world->get_nr_immovables()) log("WARNING: Number of immovables in map (%i) is bigger than in world (%i)",
+            nr_immovables, world->get_nr_immovables()); // Not necessarily a problem if none of the unknown are placed
 
       // construct ids and map
-      std::map<uchar,Immovable_Descr*> smap;
+      std::map<uchar,int> smap;
       char* buffer;
       for(int i=0; i<nr_immovables; i++) {
          int id=fr->Unsigned16();
          buffer=fr->CString();
-         if(!world->get_immovable_descr(world->get_immovable_index(buffer))) throw wexception("Immovable '%s' exists in map, not in world!", buffer);
-         smap[id]=world->get_immovable_descr(world->get_immovable_index(buffer));
+         if(!world->get_immovable_descr(world->get_immovable_index(buffer))) {
+            log("WARNING: Immovable '%s' exists in map, not in world! skipped!", buffer);
+            smap[id]=-1;
+         } else {
+            smap[id]=world->get_immovable_index(buffer);
+         }
       }
 
       // Now get all the the immovables
@@ -65,7 +69,8 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
             int id=fr->Unsigned16();
             if(id==0xffff) continue; // nothing here
       //      log("[Map Loader] Setting immovable of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
-            egbase->create_immovable(Coords(x, y), id);
+            if(smap[id]==-1) throw wexception("Unknown world immovable in map!\n");
+            egbase->create_immovable(Coords(x, y), smap[id], 0); 
          }
       }
       return;
@@ -111,6 +116,7 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
          // We do not write player immovables or bobs and stuff
          if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
             Immovable* imm=static_cast<Immovable*>(immovable);
+            if(!imm->is_world_immovable()) continue; // Nono, tribe immovables are handled somewhere else
             // write id
             fw->Unsigned16(smap[imm->get_name()]);
          } else {
