@@ -157,6 +157,7 @@ void card_select_menue(void) {
 					 g->run(map, 7);
 					 delete map;
 					 delete g;
+					 main_menue();
 					 return;
 		  } 
 
