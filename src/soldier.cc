@@ -464,7 +464,7 @@ void Soldier::init(Editor_Game_Base* gg) {
 	m_defense=get_descr()->get_defense();
 	m_evade=get_descr()->get_evade();
 	if(gg->is_game()) {
-		Game* g= static_cast<Game*>(g);
+		Game* g= static_cast<Game*>(gg);
 		int range=get_descr()->get_max_hp()-get_descr()->get_min_hp();
 		int value=g->logic_rand() % range;
 		m_hp_max=value;
