@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2002 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -287,12 +287,12 @@ void Flag::get_neighbours(Neighbour_list *neighbours)
 
 		Neighbour n;
 		n.road = road;
-		n.flag = road->get_flag_end();
+		n.flag = road->get_flag(Road::FlagEnd);
 		if (n.flag != this)
-			n.cost = road->get_cost(true);
+			n.cost = road->get_cost(Road::FlagStart);
 		else {
-			n.flag = road->get_flag_start();
-			n.cost = road->get_cost(false);
+			n.flag = road->get_flag(Road::FlagStart);
+			n.cost = road->get_cost(Road::FlagEnd);
 		}
 
 		assert(n.flag != this);
@@ -319,7 +319,7 @@ Road *Flag::get_road(Flag *flag)
 		if (!road)
 			continue;
 
-		if (road->get_flag_start() == flag || road->get_flag_end() == flag)
+		if (road->get_flag(Road::FlagStart) == flag || road->get_flag(Road::FlagEnd) == flag)
 			return road;
 	}
 
@@ -493,7 +493,8 @@ Road::Road(bool logic)
 	: PlayerImmovable(&g_road_descr, logic)
 {
 	m_type = 0;
-	m_start = m_end = 0;
+	m_flags[0] = m_flags[1] = 0;
+	m_flagidx[0] = m_flagidx[1] = -1;
 	m_carrier_request = 0;
 }
 
@@ -521,8 +522,8 @@ Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const 
 	Road *r = new Road(logic);
 	r->set_owner(start->get_owner());
 	r->m_type = type;
-	r->m_start = start;
-	r->m_end = end;
+	r->m_flags[FlagStart] = start;	// m_flagidx is set when attach_road() is called, i.e. in init()
+	r->m_flags[FlagEnd] = end;
 	r->set_path(g, path);
 	r->init(g);
 
@@ -554,7 +555,7 @@ bool Road::get_passable()
 
 Flag *Road::get_base_flag()
 {
-	return m_start;
+	return m_flags[FlagStart];
 }
 
 
@@ -562,18 +563,14 @@ Flag *Road::get_base_flag()
 ===============
 Road::get_cost
 
-Return the cost of getting from start to end.
-If reverse is true, return the cost of getting from end to start.
-The two will be different on slopes.
+Return the cost of getting from fromflag to the other flag.
 ===============
 */
-int Road::get_cost(bool reverse)
+int Road::get_cost(FlagId fromflag)
 {
-	if (!reverse)
-		return m_cost_forward;
-	else
-		return m_cost_backward;
+	return m_cost[fromflag];
 }
+
 
 /*
 ===============
@@ -586,11 +583,11 @@ You have to set start and end flags before calling this function.
 void Road::set_path(Editor_Game_Base *g, const Path &path)
 {
 	assert(path.get_nsteps() >= 2);
-	assert(path.get_start() == m_start->get_position());
-	assert(path.get_end() == m_end->get_position());
+	assert(path.get_start() == m_flags[FlagStart]->get_position());
+	assert(path.get_end() == m_flags[FlagEnd]->get_position());
 
 	m_path = path;
-	g->get_map()->calc_cost(path, &m_cost_forward, &m_cost_backward);
+	g->get_map()->calc_cost(path, &m_cost[FlagStart], &m_cost[FlagEnd]);
 
 	// Figure out where carriers should idle
 	m_idle_index = path.get_nsteps() / 2;
@@ -692,12 +689,15 @@ void Road::init(Editor_Game_Base *gg)
 	int dir;
 
 	dir = m_path.get_step(0);
-	m_start->attach_road(dir, this);
+	m_flags[FlagStart]->attach_road(dir, this);
+	m_flagidx[FlagStart] = dir;
+
 
 	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
-	m_end->attach_road(dir, this);
+	m_flags[FlagEnd]->attach_road(dir, this);
+	m_flagidx[FlagEnd] = dir;
 
-	Economy::check_merge(m_start, m_end);
+	Economy::check_merge(m_flags[FlagStart], m_flags[FlagEnd]);
 
 	// Mark Fields
 	mark_map(g);
@@ -740,15 +740,10 @@ void Road::cleanup(Editor_Game_Base *gg)
 	unmark_map(g);
 
 	// Unlink from flags (also clears the economy)
-	int dir;
+	m_flags[FlagStart]->detach_road(m_flagidx[FlagStart]);
+	m_flags[FlagEnd]->detach_road(m_flagidx[FlagEnd]);
 
-	dir = m_path.get_step(0);
-	m_start->detach_road(dir);
-
-	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
-	m_end->detach_road(dir);
-
-	Economy::check_split(m_start, m_end);
+	Economy::check_split(m_flags[FlagStart], m_flags[FlagEnd]);
 
 	PlayerImmovable::cleanup(g);
 }
@@ -824,12 +819,11 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 {
    Game* g = static_cast<Game*>(gg);
 
-   Flag *oldend = m_end;
+   Flag *oldend = m_flags[FlagEnd];
 	int dir;
 
 	// detach from end
-	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
-	m_end->detach_road(dir);
+	m_flags[FlagEnd]->detach_road(m_flagidx[FlagEnd]);
 
 	// build our new path and the new road's path
 	CoordPath path(m_path);
@@ -842,11 +836,12 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 	secondpath.starttrim(index);
 
 	// change road size and reattach
-	m_end = flag;
+	m_flags[FlagEnd] = flag;
 	set_path(g, path);
 
 	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
-	m_end->attach_road(dir, this);
+	m_flags[FlagEnd]->attach_road(dir, this);
+	m_flagidx[FlagEnd] = dir;
 
 	// recreate road markings
 	mark_map(g);
@@ -855,8 +850,8 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 	Road *newroad = new Road(g->is_game());
 	newroad->set_owner(get_owner());
 	newroad->m_type = m_type;
-	newroad->m_start = flag;
-	newroad->m_end = oldend;
+	newroad->m_flags[FlagStart] = flag; // flagidx will be set on init()
+	newroad->m_flags[FlagEnd] = oldend;
 	newroad->set_path(g, secondpath);
 
 	// Reassign carrier(s)

@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2002 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -127,21 +127,26 @@ PlayerImmovable.
 */
 class Road : public PlayerImmovable {
 public:
+	enum FlagId {
+		FlagStart = 0,
+		FlagEnd = 1
+	};
+
+public:
 	Road(bool);
 	virtual ~Road();
 
-	static Road *create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path, bool);
+	static Road* create(Editor_Game_Base *g, int type, Flag* start, Flag* end, const Path &path, bool);
 
-	inline Flag *get_flag_start() const { return m_start; }
-	inline Flag *get_flag_end() const { return m_end; }
+	inline Flag* get_flag(FlagId flag) const { return m_flags[flag]; }
 
 	virtual int get_type();
 	virtual int get_size();
 	virtual bool get_passable();
 
-	virtual Flag *get_base_flag();
+	virtual Flag* get_base_flag();
 
-	int get_cost(bool reverse);
+	int get_cost(FlagId fromflag);
 	inline const Path &get_path() const { return m_path; }
 	inline int get_idle_index() const { return m_idle_index; }
 
@@ -163,16 +168,15 @@ protected:
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
-	int		m_type;		// use Field::Road_XXX
-	Flag		*m_start;
-	Flag		*m_end;
-	int		m_cost_forward;	// cost for walking this road from start to end
-	int		m_cost_backward;	// dito, from end to start
-	Path		m_path;			// path goes from m_start to m_end
+	int		m_type;			// use Field::Road_XXX
+	Flag*		m_flags[2];		// start and end flag
+	int		m_flagidx[2];	// index of this road in the flag's road array
+	int		m_cost[2];		// cost for walking this road (0 = from start to end, 1 = from end to start)
+	Path		m_path;			// path goes from start to end
 	int		m_idle_index;	// index into path where carriers should idle
 
 	Object_Ptr	m_carrier;	// our carrier
-	Request		*m_carrier_request;
+	Request*		m_carrier_request;
 };
 
 

@@ -1016,7 +1016,7 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 		if (finalgoal->get_type() == Map_Object::ROAD) {
 			Road *finalroad = (Road*)finalgoal;
 
-			if (finalroad->get_flag_end() == current) {
+			if (finalroad->get_flag(Road::FlagEnd) == current) {
 				log("run_route: arrived at end flag of target road\n");
 
 				set_location(finalroad);
@@ -1033,7 +1033,7 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 
 			Path path(road->get_path());
 
-			if (dest != road->get_flag_end())
+			if (dest != road->get_flag(Road::FlagEnd))
 				path.reverse();
 
 			start_task_movepath(g, path, get_descr()->get_walk_anims());

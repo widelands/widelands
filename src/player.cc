@@ -219,7 +219,7 @@ Remove that road, if it belongs to the player.
 */
 void Player::remove_road(Road *road)
 {
-	if (road->get_flag_start()->get_owner() != this)
+	if (road->get_flag(Road::FlagStart)->get_owner() != this)
 		return;
 	
 	road->destroy(m_egbase);
