@@ -847,7 +847,7 @@ void Editor_Game_Base::make_influence_map ()
       }
    }
 
-     // Now create the real influence map !
+   // Now create the real influence map !
    for (int x = 0; x < MAX_X; x++)
    {
       for (int y = 0; y < MAX_Y; y++)
@@ -865,7 +865,7 @@ void Editor_Game_Base::make_influence_map ()
             }
             npl++;
          }
-         m_conquer_map[0][x][y] = npl;
+         m_conquer_map[0][x][y] = best_player;
       }
    }
 }

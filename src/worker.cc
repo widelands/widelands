@@ -2877,8 +2877,10 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	molog("[fetchfromflag]: back home\n");
 
 	item = fetch_carried_item(g);
-	item->set_location(g, location);
-	item->update(g); // this might remove the item and ack any requests
+   if(item) {
+      item->set_location(g, location);
+      item->update(g); // this might remove the item and ack any requests
+   }
 
 	// We're back!
 	if (location->has_attribute(WAREHOUSE)) {

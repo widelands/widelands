@@ -609,6 +609,7 @@ void TrainingSite::find_next_program (Game *g) {
 			} else {
 				m_list_upgrades.pop_back();
 				program_start (g, "Sleep");
+            return; 
 			}
 
 			switch (attrib) {
