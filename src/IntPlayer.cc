@@ -17,30 +17,17 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
+#include "options.h"
 #include "ui.h"
-#include "input.h"
 #include "graphic.h"
-#include "IntPlayer.h"
 #include "cursor.h"
 #include "game.h"
 #include "minimap.h"
 #include "fieldaction.h"
+#include "mapview.h"
+#include "IntPlayer.h"
 
-
-/** class Interactive_Player
- *
- * This is the interactive player. this one is
- * responsible to show the correct map
- * to the player and draws the user interface,
- * cares for input and so on.
- *
- * Depends: g_ip, g_ui, g_gr, g_cur
- */
-
-uint Interactive_Player::xresolution;
-uint Interactive_Player::yresolution;
 
 /** Interactive_Player::Interactive_Player(Game *g)
  *
@@ -90,6 +77,24 @@ Interactive_Player::~Interactive_Player(void)
 {
 }
 
+/*
+===============
+Interactive_Player::get_xres [static]
+Interactive_Player::get_yres [static]
+
+Retrieve in-game resolution from g_options.
+===============
+*/
+int Interactive_Player::get_xres()
+{
+	return g_options.get_safe_section("global")->get_int("xres", 640);
+}
+
+int Interactive_Player::get_yres()
+{
+	return g_options.get_safe_section("global")->get_int("xres", 640);
+}
+
 /** Interactive_Player::start()
  *
  * Set the resolution
@@ -97,7 +102,6 @@ Interactive_Player::~Interactive_Player(void)
 void Interactive_Player::start()
 {
 	g_gr.set_mode(get_xres(), get_yres(), g_gr.get_mode());
-	g_ip.set_max_cords(get_xres()-g_cur.get_w(), get_yres()-g_cur.get_h());
 }
 
 /** Interactive_Player::exit_game_btn(void *a)

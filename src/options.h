@@ -24,7 +24,7 @@
 
 extern Profile g_options;
 
-void handle_options(int argc, char**argv);
-void write_conf_file();
+void options_init(int argc, char**argv);
+void options_shutdown();
 
 #endif /* __S__OPTIONS_H */

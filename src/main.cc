@@ -20,12 +20,10 @@
 #include "widelands.h"
 #include "ui.h"
 #include "options.h"
-#include "input.h"
 #include "cursor.h"
 #include "mainmenue.h"
 #include "setup.h"
 #include "font.h"
-#include "IntPlayer.h"
 
 #include <SDL.h>
 
@@ -33,67 +31,115 @@
 LayeredFileSystem *g_fs;
 
 
-/** g_main function 
- * This is the OS Independant main function.
- * 
- * It makes sure, Options and Commandline is parsed,
- * initializes Graphics and Resource Handler
- *
- * return Exitcode of App
- */
-//#include "md5file.h"
-int g_main(int argc, char** argv)
-{
-	// Create all the subsystems
-	static Graphic g;
-	static Input myip;
-	static Font_Handler f;
-	static Cursor cur;
-	static User_Interface ui;
+static void g_shutdown();
 
+/*
+===============
+g_init
+
+Initialize all subsystems
+===============
+*/
+static void g_init(int argc, char **argv)
+{
 	try
 	{
-	   // Setup filesystem
+		// Create filesystem
 		g_fs = LayeredFileSystem::Create();
 		setup_searchpaths(argc, argv);
 
 		// Handle options
-		handle_options(argc, argv);
+		options_init(argc, argv);
 
-		// Initialize all subsystems after config has been read
-		Section *s = g_options.get_safe_section("global");
-		Interactive_Player::set_resolution(s->get_int("xres", 640), s->get_int("yres", 480));
-		
+		// Create all subsystems after config has been read
+		g_system = new System;
+
+		static Font_Handler f;
+		static Cursor cur;
+
 		AutoPic::load_all();
 
 		setup_fonthandler();
 		setup_ui();
 
-		g_ip.init();
-		g_gr.init();
+		g_graphic = new Graphic; // must be last because of critical_error()
 
 		// complain about unknown options in the configuration file and on the 
 		// command line
-		g_options.check_used();
-
-		// run main_menue
-		main_menue();
-
-		// save options
-		write_conf_file();
 		
-		delete g_fs;
+		// KLUDGE!
+		// Profile needs support for a Syntax definition to solve this in a sensible way
+		Section *s = g_options.get_safe_section("global");
+		s->get_string("xres");
+		s->get_string("yres");
+		// KLUDGE!
+		
+		g_options.check_used();
 	}
-	catch(std::exception &e)
-	{
-		cerr << "Unhandled exception: " << e.what() << endl;
+	catch(std::exception &e) {
+		critical_error("Initialization error: %s", e.what());
+		g_shutdown();
+		exit(-1);
 	}
-	catch(...)
-	{
-		cerr << "Unhandled exception" << endl;
+}
+
+/*
+===============
+g_shutdown
+
+Shutdown all subsystems
+===============
+*/
+static void g_shutdown()
+{
+	// Shutdown subsystems
+	if (g_graphic) {
+		delete g_graphic;
+		g_graphic = 0;
 	}
 	
-	return RET_OK;
+	if (g_system) {
+		delete g_system;
+		g_system = 0;
+	}
+		
+	// Save options
+	options_shutdown();
+		
+	// Destroy filesystem
+	if (g_fs) {
+		delete g_fs;
+		g_fs = 0;
+	}
+}
+
+/*
+===============
+g_main
+
+This is the OS Independant main function.
+
+Control the life-cycle of the game
+===============
+*/
+void g_main(int argc, char** argv)
+{
+	try
+	{
+		g_init(argc, argv);
+
+		main_menue();
+
+		g_shutdown();
+	}
+	catch(std::exception &e) {
+		g_graphic = 0; // paranoia
+		critical_error("Unhandled exception: %s", e.what());
+	}
+	catch(...) {
+		g_graphic = 0;
+		critical_error("Unhandled exception");
+	}
 }
 
 // ** unix, win32 console *****************************************************
@@ -101,7 +147,8 @@ int g_main(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-	return g_main(argc, argv);
+	g_main(argc, argv);
+	return 0;
 }
 
 // ** win32 gui ***************************************************************
@@ -164,12 +211,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR /*cmdLine*/, int)
 	char** args = new char*[ParseCommandLine(cmdLine, NULL)+1];
 	int argcount = ParseCommandLine(cmdLine, args);
 
-	int ret =  g_main(argcount, args);
+	g_main(argcount, args);
 
 	delete[] args;
 	delete[] cmdLine;
 
-	return ret;
+	return 0;
 }
 
 #endif

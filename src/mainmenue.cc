@@ -20,7 +20,6 @@
 #include "widelands.h"
 #include "graphic.h"
 #include "ui.h"
-#include "input.h"
 #include "cursor.h"
 #include "font.h"
 #include "setup.h"

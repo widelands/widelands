@@ -21,7 +21,6 @@
 #include "ui.h"
 #include "mapselectmenue.h"
 #include "font.h"
-#include "input.h"
 #include "menuecommon.h"
 #include "map.h"
 #include "singlepmenue.h"

@@ -14,10 +14,11 @@ widelands_SOURCES=main.cc \
 						options.cc \
 						options.h \
 						graphic.cc \
-						pic.cc \
 						graphic.h \
-						input.h \
-						input.cc \
+						pic.cc \
+						system.cc \
+						system.h \
+						keycodes.h \
 						cursor.cc \
 						cursor.h \
 						mainmenue.h \

@@ -21,22 +21,17 @@
 
 #include "widelands.h"
 #include "options.h"
-#include "config.h"
-#include "graphic.h"
-#include "input.h"
-#include "menuecommon.h"
-#include "IntPlayer.h"
 
 
 Profile g_options(Profile::err_log);
 
 
-/** write_conf_file()
+/** options_shutdown()
  *
  * This overrites the old config file with a new one containing
  * the current options
  */
-void write_conf_file()
+void options_shutdown()
 {
 	// write only used configuration entries to the file to sieve out typos
 	// on the commands line etc..
@@ -114,11 +109,11 @@ static bool parse_command_line(int argc, char** argv)
 	return true;
 }
 
-/** handle_options(int argc, char** argv)
+/** options_init(int argc, char** argv)
  *
  * This function parses the config file and the cmdline.
  */
-void handle_options(int argc, char **argv)
+void options_init(int argc, char **argv)
 {
 	g_options.read("config", "global");
 	

@@ -44,15 +44,16 @@ public:
 	OptionsMenu();
 
 	inline bool get_fullscreen() const { return fullscreen->get_state(); }
-	inline uint get_xres() const { return resolutions[resolution.get_state()].x; }
-	inline uint get_yres() const { return resolutions[resolution.get_state()].y; }
+	inline uint get_xres() const { return resolutions[resolution.get_state()].width; }
+	inline uint get_yres() const { return resolutions[resolution.get_state()].height; }
 
 private:
 	Checkbox *fullscreen;
 	Radiogroup resolution;
 
 	struct res {
-		uint x, y;
+		int width;
+		int height;
 	};
 	static res resolutions[NUM_RESOLUTIONS];
 };
@@ -93,10 +94,10 @@ OptionsMenu::OptionsMenu()
 	for(i = 0; i < NUM_RESOLUTIONS; i++, y+= 25) {
 		char buf[16];
 		resolution.add_button(this, 100, y);
-		sprintf(buf, "%ix%i", resolutions[i].x, resolutions[i].y);
+		sprintf(buf, "%ix%i", resolutions[i].width, resolutions[i].height);
 		new Textarea(this, 125, y+10, buf, Textarea::V_CENTER);
 
-		if (Interactive_Player::get_xres() == resolutions[i].x)
+		if (Interactive_Player::get_xres() == resolutions[i].width)
 			resolution.set_state(i);
 	}
 	if (resolution.get_state() < 0)
@@ -120,7 +121,6 @@ void options_menu()
 		s->set_bool("fullscreen", om->get_fullscreen());
 		
 		g_gr.set_mode(0, 0, om->get_fullscreen() ? Graphic::MODE_FS : Graphic::MODE_WIN);
-		Interactive_Player::set_resolution(om->get_xres(), om->get_yres());
 	}
 
 	delete om;

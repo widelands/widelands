@@ -19,7 +19,6 @@
 
 #include "widelands.h"
 #include "graphic.h"
-#include "input.h"
 #include "mapview.h"
 #include "game.h"
 #include "player.h"
@@ -439,7 +438,7 @@ void Map_View::set_viewpoint(int x, int y)
  */
 bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 {
-	if (btn == 0)
+	if (btn == MOUSE_LEFT)
 	{
 		if (down) {
          track_fsel(x, y);
@@ -447,7 +446,7 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
          fieldclicked.call(fselx, fsely);
 		}
 	}
-	else if (btn == 1)
+	else if (btn == MOUSE_RIGHT)
 	{
 		if (down) {
 			dragging = true;
@@ -467,13 +466,13 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
  */
 void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
-	if (!(btns & 2))
+	if (!(btns & (1<<MOUSE_RIGHT)))
 		dragging = false;
 
 	if (dragging)
 	{
 		set_rel_viewpoint(xdiff, ydiff);
-		g_ip.set_mouse_pos(g_ip.get_mplx(), g_ip.get_mply());
+		g_sys.set_mouse_pos(x-xdiff, y-ydiff);
 	}
 
 	track_fsel(x, y);

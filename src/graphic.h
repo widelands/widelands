@@ -22,7 +22,6 @@
 
 #define 	DEF_CLRKEY	pack_rgb(0,0,255)
 
-#include "singleton.h"
 #include "pic.h"
 
 #include <SDL.h> // need SDL_Rect
@@ -211,12 +210,10 @@ inline float operator * (const Vector& a, const Vector& b)
  *
  * This class is responsible for all graphics stuff. It's
  * modified/optimized to work only for 16bit colordepth and nothing else
- *
- * It's a singleton
  */
 #define MAX_RECTS 20
 
-class Graphic : public Singleton<Graphic>
+class Graphic
 {
    // forbidden functions
    Graphic(const Graphic&);
@@ -239,8 +236,6 @@ class Graphic : public Singleton<Graphic>
    Graphic(void);
    ~Graphic(void);
 
-	void init();
-	
    void set_mode(ushort, ushort, Mode);
    void register_update_rect(const ushort, const ushort, const ushort, const ushort);
    void update(void);
@@ -317,6 +312,11 @@ class Graphic : public Singleton<Graphic>
    bool bneeds_update;
 };
 
+extern Graphic *g_graphic;
+
+#define g_gr (*g_graphic)
+
+
 void render_triangle(Bitmap *dst, Point* points, int *brightness, Pic* texture);
 void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
       uint src_x, uint src_y, int w, int h);
@@ -324,7 +324,5 @@ void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
 class Animation;
 
 void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y);
-
-#define 	g_gr 	Graphic::get_singleton()
 
 #endif /* __S__GRAPHIC_H */

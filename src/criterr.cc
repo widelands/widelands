@@ -90,7 +90,7 @@ void critical_error(const char* str, ...)
 
 	log("Critical Error%s: %s\n", in_criterr ? " (recursive)" : "", buf);
 	
-	if (g_gr.get_state() != Graphic::STATE_OK || in_criterr)
+	if (in_criterr || !g_graphic || g_gr.get_state() != Graphic::STATE_OK)
 	{
 #ifdef WIN32
 		MessageBox(NULL, buf, "Wide Lands", MB_ICONINFORMATION);

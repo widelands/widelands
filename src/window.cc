@@ -19,7 +19,7 @@
 
 #include "widelands.h"
 #include "ui.h"
-#include "input.h"
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -130,8 +130,8 @@ void Window::move_to_mouse()
 {
 	int px, py;
 
-	px = g_ip.get_mpx() - get_w()/2;
-	py = g_ip.get_mpy() - get_h()/2;
+	px = g_sys.get_mouse_x() - get_w()/2;
+	py = g_sys.get_mouse_y() - get_h()/2;
 
 	Panel *parent = get_parent();
 	if (parent) {
@@ -217,7 +217,7 @@ void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
  */
 bool Window::handle_mouseclick(uint btn, bool down, int mx, int my)
 {
-	if (btn == 0)
+	if (btn == MOUSE_LEFT)
 	{
 		if (down) {
 			_dragging = true;
@@ -227,7 +227,7 @@ bool Window::handle_mouseclick(uint btn, bool down, int mx, int my)
 			_dragging = false;
 		}
 	}
-	else if (btn == 1 && down)
+	else if (btn == MOUSE_RIGHT && down)
 		delete this; // is this 100% safe?
 
 	return true;

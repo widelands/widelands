@@ -212,9 +212,8 @@ private:
 
 private:
 	static Panel *ui_trackmouse(int *x, int *y);
-	static int ui_mouseclick(const bool down, const uint x, const uint y, void *a);
-	static int ui_mousemove(const uint x, const uint y, const int xdiff, const int ydiff,
-	                        const bool lbtn, const bool rbtn, void *a);
+	static void ui_mouseclick(bool down, int button, uint btns, int x, int y);
+	static void ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff);
 
 	static Panel *_modal;
 	static Panel *_g_mousegrab;
@@ -566,28 +565,5 @@ private:
 	static AutoPic bot;
 	static AutoPic bg;
 };
-
-/** class User_Interface
- *
- * This class offers a user interface. This means windows, buttons and
- * so on.
- *
- * It's a Singleton.
- *
- * DEPENDS: on all the sub interface classes (Buttons, Textareas, windows a.s.on)
- * 			class Graph::Pic
- * 			func	Graph::draw_pic
- * 			global Object: g_gr
- */
-class User_Interface : public Singleton<User_Interface> {
-	User_Interface(const User_Interface&);
-	User_Interface& operator=(const User_Interface&);
-
-public:
-	User_Interface(void);
-	~User_Interface(void);
-};
-
-#define g_ui	User_Interface::get_singleton()
 
 #endif /* __S__UI_H */

@@ -72,7 +72,7 @@
 /*
 ==============================================================================
 
-Data types
+DATA TYPES
 
 ==============================================================================
 */
@@ -142,7 +142,7 @@ inline float SwapFloat(float x)
 /*
 ==============================================================================
 
-Error handling functions
+ERROR HANDLING FUNCTIONS
 
 ==============================================================================
 */
@@ -233,7 +233,7 @@ public:
 /*
 ==============================================================================
 
-Filesystem access
+FILESYSTEM ACCESS
 
 ==============================================================================
 */
@@ -378,3 +378,89 @@ public:
 // Access all game data files etc.. through this FileSystem
 extern LayeredFileSystem *g_fs;
 
+
+/*
+==============================================================================
+
+SYSTEM ABSTRACTION
+
+==============================================================================
+*/
+
+#include "keycodes.h"
+
+enum { // use 1<<MOUSE_xxx for bitmasks
+	MOUSE_LEFT = 0,
+	MOUSE_MIDDLE,
+	MOUSE_RIGHT
+};
+
+/** class System
+
+All interactions with the OS except for file access and graphics are handled 
+by the System class. Most notably:
+ - timing
+ - input
+ - low-level networking
+
+System will be the one place for complete session playback technology.
+Using a command line option, all input etc.. that passes through System can be
+saved in a file and played back later for intensive and slow profiling and 
+testing (valgrind comes to mind).
+(This is completely independent from recorded games; recorded games consist of
+saved player commands and can be recorded and played back from the GUI)
+
+Note/TODO: Graphics are currently not handled by System, and it is non-essential
+for playback anyway. Additionally, we'll want several rendering backends 
+(software and OpenGL).
+Maybe the graphics backend loader code should be in System, while the actual
+graphics work is done elsewhere.
+
+Mouse: Some mouse functions deal with button mask bits. Bits are simply obtained
+as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right are pressed"
+*/
+class System {
+public:
+	System();
+	~System();
+	
+	bool should_die();
+	
+	// Timing
+	int get_time();
+	
+	// Input
+	struct InputCallback {
+		void (*mouse_click)(bool down, int btn, uint btns, int x, int y);
+		void (*mouse_move)(uint btns, int x, int y, int xdiff, int ydiff);
+		void (*key)(bool down, int code, char c);
+	};
+	
+	void handle_input(InputCallback *cb);
+			
+	uint get_mouse_buttons();
+	int get_mouse_x();
+	int get_mouse_y();
+	void set_mouse_pos(int x, int y);
+	
+	void set_mouse_swap(bool swap);
+	void set_mouse_speed(float speed);
+	
+	// pseudo-private kludge	
+	void set_max_mouse_coords(int x, int y);
+
+private:
+	bool		m_active;
+	bool		m_should_die;
+	
+	// Input
+	bool		m_mouse_swapped;
+	float		m_mouse_speed;
+	uint		m_mouse_buttons;
+	float		m_mouse_x, m_mouse_y;
+	int		m_mouse_maxx, m_mouse_maxy;
+};
+
+extern System *g_system;
+
+#define g_sys	(*g_system)

@@ -22,6 +22,8 @@
 #include "graphic.h"
 #include "bob.h"
 
+Graphic *g_graphic = 0;
+
 /* apparently deprecated -- Nicolai
 // wireframe or filled triangles?
 #define SHADING_FLAT		1
@@ -183,7 +185,6 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture)
  * This functions is responsible for displaying graphics and keeping them up to date
  *
  * It's little strange in it's interface, but it is optimzed for speed, not beauty
- * This is a singleton
  */
 
 /** Graphic::Graphic(void)
@@ -195,12 +196,20 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture)
  */
 Graphic::Graphic(void)
 {
-   sc=NULL;
+	Section *s = g_options.get_safe_section("global");
+	Mode mode;
+   
+	sc=NULL;
    st=STATE_NOT_INIT;
    nupr=0;
    bneeds_fs_update=false;
-
-   SDL_Init(SDL_INIT_VIDEO);
+	
+	if (s->get_bool("fullscreen", true))
+		mode = Graphic::MODE_FS;
+	else
+		mode = Graphic::MODE_WIN;
+	
+	set_mode(640, 480, mode);
 }
 
 /** Graphic::~Graphic(void)
@@ -218,29 +227,8 @@ Graphic::~Graphic(void)
    }
    screenbmp.pixels = 0;
    st = STATE_NOT_INIT;
-
-   SDL_Quit();
 }
 
-/** Graphic::init()
- *
- * Initialize: read in options and stuff
- */
-void Graphic::init()
-{
-	Section *s = g_options.get_safe_section("global");
-
-	Mode mode;
-	
-	if (s->get_bool("fullscreen", true))
-		mode = Graphic::MODE_FS;
-	else
-		mode = Graphic::MODE_WIN;
-	
-	set_mode(640, 480, mode);
-}	
-
-	
 /** void Graphic::set_mode(ushort x, ushort y, Mode m)
  *
  * This function sets a new graphics mode.
@@ -277,12 +265,14 @@ void Graphic::set_mode(ushort x, ushort y, Mode m)
 	
    mode=m;
    screenbmp.w = x;
-   screenbmp.pitch = x;
+   screenbmp.pitch = sc->pitch / (16/8);
    screenbmp.h = y;
    screenbmp.pixels = (ushort*) sc->pixels;
 
    st = STATE_OK;
 
+	g_sys.set_max_mouse_coords(x, y);
+	
    bneeds_fs_update=true;
 
    return;
@@ -297,7 +287,8 @@ void Graphic::set_mode(ushort x, ushort y, Mode m)
  * 			w	width
  * 			h	height
  */
-void Graphic::register_update_rect(const ushort x, const ushort y, const ushort w, const ushort h) {
+void Graphic::register_update_rect(const ushort x, const ushort y, const ushort w, const ushort h)
+{
    if(nupr>=MAX_RECTS) {
       bneeds_fs_update=true;
       return;
@@ -333,18 +324,20 @@ void Graphic::screenshot(const char* f)
  * Args: none
  * Returns: Nothing
  */
-void Graphic::update(void) {
-   if(bneeds_fs_update) {
+void Graphic::update(void)
+{
+//   if(bneeds_fs_update) {
       SDL_UpdateRect(sc, 0, 0, get_xres(), get_yres());
-   } else {
-      /*								cerr << "##########################" << endl;
-                              cerr << nupr << endl;
-                              for(uint i=0; i<nupr; i++)
-                              cerr << upd_rects[i].x << ":" << upd_rects[i].y << ":" <<
-                              upd_rects[i].w << ":" << upd_rects[i].h << endl;
-                              cerr << "##########################" << endl;
-                              */								SDL_UpdateRects(sc, nupr, upd_rects);
-   }
+//    } else {
+//       /*								cerr << "##########################" << endl;
+//                               cerr << nupr << endl;
+//                               for(uint i=0; i<nupr; i++)
+//                               cerr << upd_rects[i].x << ":" << upd_rects[i].y << ":" <<
+//                               upd_rects[i].w << ":" << upd_rects[i].h << endl;
+//                               cerr << "##########################" << endl;
+//                               */
+// 		SDL_UpdateRects(sc, nupr, upd_rects);
+//    }
    nupr=0;
    bneeds_fs_update=false;
    bneeds_update=false;

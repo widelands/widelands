@@ -20,55 +20,50 @@
 #ifndef __S__INTPLAYER_H
 #define __S__INTPLAYER_H
 
-#include "mapview.h"
 #include "ui.h"
-
-#define MAIN_WINDOW_WIDTH 136
-#define MAIN_WINDOW_HEIGHT 34
 
 class Game;
 class MiniMap;
+class Map_View;
 
+/** class Interactive_Player
+ *
+ * This is the interactive player. this one is
+ * responsible to show the correct map
+ * to the player and draws the user interface,
+ * cares for input and so on.
+ */
 class Interactive_Player : public Panel {
-		friend class MiniMap;
+	public:
+		Interactive_Player(Game *g, uchar pln);
+		~Interactive_Player(void);
 
-		 Interactive_Player(const Interactive_Player&);
-		 Interactive_Player operator=(const Interactive_Player&);
+		void start();
+		void exit_game_btn();
+		void main_menu_btn();
+		void minimap_btn();
+		void toggle_buildhelp();
 
-		  public:
-					 Interactive_Player(Game *g, uchar pln);
-					 ~Interactive_Player(void);
+		void field_action(int fx, int fy);
+		void move_view_to(int fx, int fy);
 
-					 void start();
-					 void exit_game_btn();
-					 void main_menu_btn();
-					 void minimap_btn();
-					 void toggle_buildhelp();
+		void think();
 
-					 void field_action(int fx, int fy);
-					 void move_view_to(int fx, int fy);
-
-					 void think();
-
-					 inline Game *get_game() { return game; }
-
-					 // Set the in-game resolution
-					 static void set_resolution(uint x, uint y) { xresolution=x; yresolution=y; }
-					 static inline uint get_xres() { return xresolution; }
-					 static inline uint get_yres() { return yresolution; }
-         
-                inline uchar get_player_number(void) { return player_number; } // for watchwindow
+		inline Game *get_game() { return game; }
+		inline uchar get_player_number(void) { return player_number; } // for watchwindow
+		
+		static int get_xres();
+		static int get_yres();
 					 
-		  private:
-					 void mainview_move(int x, int y);
-					 void minimap_warp(int x, int y);
+	private:
+		void mainview_move(int x, int y);
+		void minimap_warp(int x, int y);
 
-					 static uint xresolution, yresolution;
-					 Game *game;
-					 Map_View* main_mapview;
-					 MiniMap *minimap;
-					 Window *fieldaction;
-                uchar player_number;
+		Game *game;
+		Map_View* main_mapview;
+		MiniMap *minimap;
+		Window *fieldaction;
+		uchar player_number;
 };
 
 

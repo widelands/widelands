@@ -20,7 +20,6 @@
 #include "widelands.h"
 #include "ui.h"
 #include "font.h"
-#include "input.h"
 #include "cursor.h"
 
 /*
@@ -116,11 +115,6 @@ Panel::~Panel()
  */
 int Panel::run()
 {
-	// Setup
-	g_ip.register_mcf(Panel::ui_mouseclick, Input::BUT1, (void *)0);
-	g_ip.register_mcf(Panel::ui_mouseclick, Input::BUT2, (void *)1);
-	g_ip.register_mmf(Panel::ui_mousemove);
-
 	Panel *prevmodal = _modal;
 	_modal = this;
 	_g_mousegrab = 0; // good ol' paranoia
@@ -135,16 +129,22 @@ int Panel::run()
 	g_gr.needs_fs_update();
 	while(_running)
 	{
-		g_ip.handle_pending_input();
-		if (g_ip.should_die())
+		static System::InputCallback icb = {
+			Panel::ui_mouseclick,
+			Panel::ui_mousemove,
+			0 /* key */
+		};
+	
+		g_sys.handle_input(&icb);
+		if (g_sys.should_die())
 			end_modal(-1);
 
 		if (_flags & pf_think)
 			think();
 
-		if(g_gr.does_need_update()) {
+		if (g_gr.does_need_update()) {
 			forefather->do_draw(g_gr.get_screenbmp(), 0, 0);
-			g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
+			g_cur.draw(g_sys.get_mouse_x(), g_sys.get_mouse_y());
 			g_gr.update();
 		}
 
@@ -776,111 +776,47 @@ Panel *Panel::ui_trackmouse(int *x, int *y)
 	return rcv;
 }
 
-/** Panel::ui_mouseclick(const bool down, const uint mx, const uint my, void *a) [static]
- *
- * Input callback function. Pass the mouseclick event to the currently modal
- * panel.
- *
- * Args: down	true if the button was pressed
- *       mx		screen coordinates
- *       my
- *       a		parameter (will be the button number)
- */
-int Panel::ui_mouseclick(const bool down, const uint mx, const uint my, void *a)
+/*
+===============
+Panel::ui_mouseclick
+ 
+Input callback function. Pass the mouseclick event to the currently modal
+panel.
+===============
+*/
+void Panel::ui_mouseclick(bool down, int button, uint btns, int x, int y)
 {
 	Panel *p;
-	int x = mx;
-	int y = my;
 
 	p = ui_trackmouse(&x, &y);
 	if (!p)
-		return 0;
+		return;
 
-	p->do_mouseclick((int)a, down, x, y);
-	return 1;
-}
-
-/** Panel::ui_mousemove(const uint mx, const uint my, const int xdiff, const int ydiff,
- *                      const bool lbtn, const bool rbtn, void *a)
- *
- * Input callback function. Pass the mousemove event to the currently modal
- * panel.
- *
- * Args: mx		screen coordinates
- *       my
- *       xdiff	relative mouse movement
- *       ydiff
- *       lbtn	true if the left button is pressed
- *       rbtn	true if the right button is pressed
- *       a		parameter (unused)
- */
-int Panel::ui_mousemove(const uint mx, const uint my, const int xdiff, const int ydiff,
-	                    const bool lbtn, const bool rbtn, void *a)
-{
-	if (!xdiff && !ydiff)
-		return 0;
-
-	Panel *p;
-	int x = mx;
-	int y = my;
-
-	g_gr.register_update_rect(g_ip.get_mplx(), g_ip.get_mply(), g_cur.get_w(), g_cur.get_h());
-	g_gr.register_update_rect(mx, my, g_cur.get_w(), g_cur.get_h());
-
-	p = ui_trackmouse(&x, &y);
-	if (!p)
-		return 0;
-
-	uint btns = 0;
-	if (lbtn)
-		btns |= 1;
-	if (rbtn)
-		btns |= 2;
-
-	p->do_mousemove(x, y, xdiff, ydiff, btns);
-	return 1;
+	p->do_mouseclick(button, down, x, y);
 }
 
 /*
-==============================================================================
+===============
+Panel::ui_mousemove
 
-User_Interface
-
-==============================================================================
+Input callback function. Pass the mousemove event to the currently modal
+panel.
+===============
 */
-
-/** class User_Interface
- *
- * This class used to offer a user interface. This means windows, buttons and
- * so on. I'll leave it in for a while, maybe it'll be useful for something.
- *
- * It's a Singleton.
- *
- * DEPENDS: on all the sub interface classes (Buttons, Textareas, windows a.s.on)
- * 			class Graph::Pic
- * 			func	Graph::draw_pic
- * 			Initalized g_gr object
- */
-
-/** User_Interface::User_Interface(void)
- *
- * Def Constructor
- *
- * Args: none
- * Returns: Nothing
- */
-User_Interface::User_Interface(void)
+void Panel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 {
-}
+	if (!xdiff && !ydiff)
+		return;
 
-/** User_Interface::~User_Interface(void)
- *
- * Def Destructor
- *
- * Args: none
- * Returns: Nothing
- */
-User_Interface::~User_Interface(void)
-{
+	Panel *p;
+
+	g_gr.register_update_rect(x-xdiff, y-ydiff, g_cur.get_w(), g_cur.get_h());
+	g_gr.register_update_rect(x, y, g_cur.get_w(), g_cur.get_h());
+
+	p = ui_trackmouse(&x, &y);
+	if (!p)
+		return;
+
+	p->do_mousemove(x, y, xdiff, ydiff, btns);
 }
 

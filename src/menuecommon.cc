@@ -19,7 +19,6 @@
 
 #include "widelands.h"
 #include "ui.h"
-#include "input.h"
 #include "graphic.h"
 #include "cursor.h"
 #include "menuecommon.h"
@@ -53,7 +52,6 @@ BaseMenu::BaseMenu(const char *bgpic)
 void BaseMenu::start()
 {
 	g_gr.set_mode(MENU_XRES, MENU_YRES, g_gr.get_mode());
-	g_ip.set_max_cords(MENU_XRES-g_cur.get_w(), MENU_YRES-g_cur.get_h());
 }
 
 /** BaseMenu::draw(Bitmap *dst, int ofsx, int ofsy)
