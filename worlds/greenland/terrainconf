@@ -19,7 +19,7 @@ is=unpassable
 is=dry
 
 [wasser]
-def_resources=fish 10
+def_resources=fish 4
 is=water
 fps=10
 
