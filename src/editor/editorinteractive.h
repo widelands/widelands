@@ -64,6 +64,7 @@ class Editor_Interactive : public Interactive_Base {
       void tool_menu_btn();
       void toolsize_menu_btn();
       void toggle_mainmenu();
+      void toggle_eventmenu();
 
       // Tool
       Editor_Tools tools;
@@ -73,5 +74,6 @@ class Editor_Interactive : public Interactive_Base {
       UIUniqueWindowRegistry m_toolmenu;
       UIUniqueWindowRegistry m_toolsizemenu;
       UIUniqueWindowRegistry m_mainmenu;
+      UIUniqueWindowRegistry m_eventmenu;
 };
 #endif // __S__EDITOR_H

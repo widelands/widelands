@@ -67,7 +67,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
 	m_ok->set_enabled(false);
 
 	// Create the list area
-	list = new UIListselect(this, 21, 172, 354, 280);
+	list = new UIListselect(this, 12, 163, 363, 297);
 	list->selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
 
 	// Fill it with the files: Widelands map files

@@ -27,6 +27,7 @@
 #include "player.h"
 #include "ui_button.h"
 #include "editor_main_menu.h"
+#include "editor_event_menu.h"
 #include "editor_tool_menu.h"
 #include "editor_toolsize_menu.h"
 #include "editor_delete_immovable_tool.h"
@@ -89,6 +90,10 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b = new UIButton(this, x+136, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", RGBColor(0,0,255)));
+
+   b = new UIButton(this, x+170, y, 34, 34, 2);
+   b->clicked.set(this, &Editor_Interactive::toggle_eventmenu);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_event_menu.png", RGBColor(0,0,255)));
 
    // Init Tools
    tools.current_tool_index=1;
@@ -166,6 +171,17 @@ void Editor_Interactive::toggle_mainmenu(void) {
    }
    else {
       new Editor_Main_Menu(this, &m_mainmenu);
+   }
+}
+
+/*
+ * Create the event menu
+ */
+void Editor_Interactive::toggle_eventmenu(void) {
+   if(m_eventmenu.window) {
+      delete m_eventmenu.window;
+   } else {
+      new Editor_Event_Menu(this, &m_eventmenu);
    }
 }
 

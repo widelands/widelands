@@ -34,7 +34,7 @@ Args: parent	parent panel
       align	alignment of text inside the UIListselect
 */
 UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align)
-	: UIPanel(parent, x, y, w-24, h)
+	: UIPanel(parent, x, y, w, h)
 {
 	set_think(false);
 
@@ -43,7 +43,7 @@ UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align 
 	m_scrollpos = 0;
 	m_selection = -1;
 
-	m_scrollbar = new UIScrollbar(parent, x+get_w(), y, 24, h, false);
+	m_scrollbar = new UIScrollbar(parent, x+get_w()-24, y, 24, h, false);
 	m_scrollbar->moved.set(this, &UIListselect::set_scrollpos);
 
 	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
@@ -155,6 +155,8 @@ void UIListselect::draw(RenderTarget* dst)
 	int idx = m_scrollpos / lineheight;
 	int y = 1 + idx*lineheight - m_scrollpos;
 
+   dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
+   
 	while(idx < (int)m_entries.size())
 		{
 		if (y >= get_h())
@@ -164,7 +166,7 @@ void UIListselect::draw(RenderTarget* dst)
 
 		if (idx == m_selection) {
 			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
-			dst->brighten_rect(1, y, get_eff_w()-2, g_fh->get_fontheight(UI_FONT_SMALL), ms_darken_value);
+			dst->brighten_rect(1, y, get_eff_w()-2, g_fh->get_fontheight(UI_FONT_SMALL), -ms_darken_value);
       }
 
 		int x;
