@@ -567,6 +567,9 @@ Abort building a road.
 */
 void FieldActionWindow::act_abort_buildroad()
 {
+	if (!m_player->is_building_road())
+		return;
+
 	m_player->abort_build_road();
 	okdialog();
 }
@@ -618,6 +621,14 @@ Bring up a field action window or continue road building.
 void show_field_action(Interactive_Player *parent, UIUniqueWindowRegistry *registry)
 {
 	FieldActionWindow *faw;
+
+	// Force closing of old fieldaction windows. This is necessary because
+	// show_field_action() does not always open a FieldActionWindow (e.g.
+	// connecting the road we are building to an existing flag)
+	if (registry->window) {
+		delete registry->window;
+		registry->window = 0;
+	}
 
 	if (!parent->is_building_road()) {
 		faw = new FieldActionWindow(parent, registry);
