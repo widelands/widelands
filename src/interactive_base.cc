@@ -24,6 +24,7 @@
 #include "game.h"
 #include "interactive_base.h"
 #include "IntPlayer.h"
+#include "keycodes.h"
 #include "map.h"
 #include "mapview.h"
 #include "minimap.h"
@@ -183,6 +184,17 @@ void Interactive_Base::think()
 	m_frametime = curframe - m_lastframe;
 	m_avg_usframetime = ((m_avg_usframetime * 15) + (m_frametime * 1000)) / 16;
 	m_lastframe = curframe;
+
+   // If one of the arrow keys is pressed, 
+   // scroll here
+   if(Sys_GetKeyState(KEY_UP)) 		
+      get_mapview()->set_rel_viewpoint(Point(0, -20));
+   if(Sys_GetKeyState(KEY_DOWN)) 		
+      get_mapview()->set_rel_viewpoint(Point(0, 20));
+   if(Sys_GetKeyState(KEY_LEFT)) 		
+      get_mapview()->set_rel_viewpoint(Point(-20, 0));
+   if(Sys_GetKeyState(KEY_RIGHT)) 		
+      get_mapview()->set_rel_viewpoint(Point(20, 0));
 
 	// Call game logic here
    // The game advances

@@ -316,26 +316,6 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 				m_maprenderinfo.visibility = 0;
 		}
 		return true;
-
-	case KEY_UP:
-		if (down)
-			get_mapview()->set_rel_viewpoint(Point(0, -20));
-		return true;
-
-	case KEY_DOWN:
-		if (down)
-			get_mapview()->set_rel_viewpoint(Point(0, 20));
-		return true;
-
-	case KEY_LEFT:
-		if (down)
-			get_mapview()->set_rel_viewpoint(Point(-20, 0));
-		return true;
-
-	case KEY_RIGHT:
-		if (down)
-			get_mapview()->set_rel_viewpoint(Point(20, 0));
-		return true;
 	}
 
 	return false;
