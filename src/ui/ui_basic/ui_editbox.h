@@ -39,7 +39,7 @@ class UIEdit_Box : private UIButton {
      UISignal1<int> changedid;
 
      inline const char* get_text() { return m_lasttext.c_str(); }
-     void set_text(const char* text) { m_text=text; set_title(text); }
+     void set_text(const char* text) { m_lasttext=m_text=text; set_title(text); }
      void set_maximum_chars(int n) { m_maxchars=n; }
      int get_maximum_chars(void) { return m_maxchars; }
 

@@ -24,6 +24,7 @@
 #include "ui_button.h"
 #include "editor_main_menu_new_map.h"
 #include "editor_main_menu_map_options.h"
+#include "editor_main_menu_save_map.h"
 #include "error.h"
 #include "fullscreen_menu_fileview.h"
 
@@ -146,7 +147,8 @@ void Editor_Main_Menu::load_btn() {
 }
 
 void Editor_Main_Menu::save_btn() {
-   log("TODO: Editor_Main_Menu::save_btn()\n");
+   new Main_Menu_Save_Map(m_parent);
+   delete this;
 }
 void Editor_Main_Menu::map_options_btn() {
    new Main_Menu_Map_Options(m_parent);
