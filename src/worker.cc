@@ -2206,7 +2206,6 @@ Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *dire
 			throw wexception("Unknown worker type '%s' [supported: carrier]", type);
 
 		descr->parse(directory, &prof, encdata);
-		prof.check_used();
 	}
 	catch(std::exception &e) {
 		if (descr)
