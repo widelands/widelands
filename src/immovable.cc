@@ -381,7 +381,15 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 
 	// Parse attributes
 	while(global->get_next_string("attrib", &string)) {
-		add_attribute(get_attribute_id(string));
+		uint attrib = get_attribute_id(string);
+
+		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
+		{
+			if (attrib != Map_Object::RESI)
+				throw wexception("Bad attribute '%s'", string);
+		}
+
+		add_attribute(attrib);
 	}
 
 
