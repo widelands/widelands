@@ -1,6 +1,6 @@
 [global]
 descname=Meat
-help=It is meat, for miners to eat
+help=Meat contains a lot of energy. It is used in the Inns and Taverns to fix lunch for the miners and in the soldier trainingcamps to keep warriors strong.
 menu_pic=meat_menu.png
 queue_full_pic=meat_queue_full.png
 queue_empty_pic=meat_queue_empty.png
