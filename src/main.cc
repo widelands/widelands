@@ -285,6 +285,17 @@ void g_main(int argc, char** argv)
             }
             break;
          }
+			else if(code == Fullscreen_Menu_NetSetup::GGZGAME) {
+				if(NetGGZ::ref()->host()) netgame = new NetHost();
+				else
+				{
+					while(!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
+
+					IPaddress peer;
+					SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(), WIDELANDS_PORT);
+					netgame = new NetClient(&peer);
+				}
+			}
 			else
 			    break;
 			

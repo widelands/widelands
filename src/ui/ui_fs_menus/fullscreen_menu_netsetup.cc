@@ -30,8 +30,11 @@
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this
 {
-	discovery=new LAN_Game_Finder();
-	discovery->set_callback (discovery_callback, this);
+	if(!NetGGZ::ref()->usedcore())
+	{
+		discovery=new LAN_Game_Finder();
+		discovery->set_callback (discovery_callback, this);
+	}
 	
 	// Text
 	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Begin Network Game", Align_HCenter);
@@ -70,7 +73,10 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 
 Fullscreen_Menu_NetSetup::~Fullscreen_Menu_NetSetup ()
 {
-	delete discovery;
+	if(!NetGGZ::ref()->usedcore())
+	{
+		delete discovery;
+	}
 }
 
 void Fullscreen_Menu_NetSetup::think ()
@@ -109,7 +115,13 @@ void Fullscreen_Menu_NetSetup::game_selected (int sel)
 {
 	LAN_Open_Game* game=(LAN_Open_Game*) (opengames->get_selection());
 	
-	hostname->set_text (game->info.hostname);
+	if(game)
+		hostname->set_text (game->info.hostname);
+	else {
+		UITable_Entry *entry = opengames->get_entry(opengames->get_selection_index());
+		NetGGZ::ref()->join(entry->get_string(1));
+		end_modal(GGZGAME);
+	}
 }
 
 void Fullscreen_Menu_NetSetup::update_game_info (UITable_Entry* entry, const LAN_Game_Info& info)

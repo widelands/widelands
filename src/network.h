@@ -303,18 +303,27 @@ class NetGGZ {
 		op_broadcast_ip = 4
 	};
 
+	void initcore();
+	bool usedcore();
+	void datacore();
+	void join(const char *tablename);
+
     private:
 #ifdef HAVE_GGZ
 	static void ggzmod_server(GGZMod *mod, GGZModEvent e, void *data);
 	static GGZHookReturn callback_server(unsigned int id, void *data, void *user);
 	static GGZHookReturn callback_room(unsigned int id, void *data, void *user);
+	static GGZHookReturn callback_game(unsigned int id, void *data, void *user);
 #endif
-	void initcore();
 	void event_server(unsigned int id, void *data);
 	void event_room(unsigned int id, void *data);
+	void event_game(unsigned int id, void *data);
 
 	bool use_ggz;
 	int fd;
+	int channelfd;
+	int gamefd;
+	int tableid;
 	char *ip_address;
 	bool ggzcore_login;
 

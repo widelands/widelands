@@ -615,6 +615,7 @@ void Sys_HandleInput(InputCallback *cb)
 	SDL_Event ev;
 
 	NetGGZ::ref()->data();
+	NetGGZ::ref()->datacore();
 
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works

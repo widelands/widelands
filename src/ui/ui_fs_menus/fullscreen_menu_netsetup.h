@@ -39,7 +39,8 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 			CANCEL=0,
 			HOSTGAME,
 			JOINGAME,
-			INTERNETGAME
+			INTERNETGAME,
+			GGZGAME
 		};
 		
 		Fullscreen_Menu_NetSetup ();

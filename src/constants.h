@@ -32,7 +32,7 @@
 #define UI_FONT_CLR_FG  RGBColor(255,255,0)
 #define UI_FONT_BIG_CLR UI_FONT_CLR_FG, RGBColor(0,0,0)
 #define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, RGBColor(0,0,0)
-#define PROSA_FONT       "Knights.ttf", 14
+#define PROSA_FONT       "Vera.ttf", 14
 #define PROSA_FONT_CLR_FG   RGBColor(255,255,0)
 
 

@@ -59,6 +59,7 @@ static void show_usage(void)
 " --coredump       Generates a core dump on segfaults instead of using the SDL\n"
 "\n"
 " --ggz            Starts game as GGZ Gaming Zone client (don't use!)\n"
+" --ggzcore        GGZ embedded mode (TEMPORARY -> make menu button!)\n"
 "\n"
 " --help           Show this help\n"
 " --version        Show version\n"
@@ -105,6 +106,10 @@ static bool parse_command_line(int argc, char** argv)
 		}
 		if (!strcmp(opt, "ggz")) {
 			NetGGZ::ref()->init();
+			continue;
+		}
+		if (!strcmp(opt, "ggzcore")) {
+			NetGGZ::ref()->initcore();
 			continue;
 		}
 
