@@ -74,6 +74,10 @@ public:
 /** class Panel
  *
  * Panel is a basic rectangular UI element.
+ * The outer rectangle is defined by (_x,_y,_w,_h) and encloses the entire panel,
+ * including both border and inner area/rectangle.
+ * The inner rectangle is the outer rectangle minus the border sizes.
+ * Child panel coordinates are always relative to the inner rectangle.
  */
 class Panel {
 public:
@@ -103,9 +107,22 @@ public:
 	inline uint get_w() const { return _w; }
 	inline uint get_h() const { return _h; }
 
+	void set_inner_size(uint nw, uint nh);
+	void set_border(uint l, uint r, uint t, uint b);
+
+	inline uint get_lborder() const { return _lborder; }
+	inline uint get_rborder() const { return _rborder; }
+	inline uint get_tborder() const { return _tborder; }
+	inline uint get_bborder() const { return _bborder; }
+
+	inline int get_inner_w() const { return _w-(_lborder+_rborder); }
+	inline int get_inner_h() const { return _h-(_tborder+_bborder); }
+
 	// Drawing, visibility
 	virtual void draw(Bitmap *dst, int ofsx, int ofsy);
+	virtual void draw_border(Bitmap *dst, int ofsx, int ofsy);
 	void update(int x, int y, int w, int h);
+	void update_inner(int x, int y, int w, int h);
 	void set_cache(bool enable);
 
 	// Events
@@ -141,6 +158,7 @@ private:
 
 	int _x, _y;
 	uint _w, _h;
+	uint _lborder, _rborder, _tborder, _bborder;
 
 	bool _running;
 	int _retcode;
@@ -483,7 +501,7 @@ public:
 	void set_new_bg(Pic* p);
 
 	// Drawing and event handlers
-	void draw(Bitmap *dst, int ofsx, int ofsy);
+	void draw_border(Bitmap *dst, int ofsx, int ofsy);
 
 	void handle_mouseclick(uint btn, bool down, int mx, int my);
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);

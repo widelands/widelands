@@ -38,9 +38,6 @@
  * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
  * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
  *
- * TODO: Border handling needs to get better. The correct place to implement borders is probably
- *       Panel.
- *
  * DEPENDS: Graph::Pic
  * 			Graph::draw_pic
  * 			Initalized g_gr object
@@ -58,14 +55,14 @@ AutoPic Window::bg("win_bg.bmp");
  * Initialize a framed window.
  *
  * Args: parent	parent panel
- *       x		coordinates of the window relative to the parent
+ *       x		coordinates of the window relative to the parent (refers to outer rect!)
  *       y
- *       w		size of the window (this includes the border!)
+ *       w		size of the inner rectangle of the window
  *       h
  *       title	string to display in the window title
  */
 Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
-	: Panel(parent, x, y, w, h)
+	: Panel(parent, x, y, w+WINDOW_BORDER*2, h+WINDOW_BORDER*2)
 {
 	_title = 0;
 	_custom_bg = 0;
@@ -74,6 +71,7 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
 	if (title)
 		set_title(title);
 
+	set_border(WINDOW_BORDER, WINDOW_BORDER, WINDOW_BORDER, WINDOW_BORDER);
 	set_cache(true);
 }
 
@@ -122,11 +120,11 @@ void Window::set_new_bg(Pic* p)
 	update(0, 0, get_w(), get_h());
 }
 
-/** Window::draw(Bitmap *dst, int ofsx, int ofsy)
+/** Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
  *
  * Redraw the window frame and background
  */
-void Window::draw(Bitmap *dst, int ofsx, int ofsy)
+void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
 {
 	Pic *usebg = _custom_bg ? _custom_bg : &bg;
 	uint px, py;
@@ -143,7 +141,7 @@ void Window::draw(Bitmap *dst, int ofsx, int ofsy)
 	copy_pic(dst, &bot, ofsx, ofsy+get_h()-CORNER, 0, 0, CORNER, CORNER);
 
 	// top & bottom bar
-	for(px = CORNER; px < get_w()-2*CORNER-MIDDLE; px += MIDDLE) {
+	for(px = CORNER; px < get_w()-CORNER-MIDDLE; px += MIDDLE) {
 		copy_pic(dst, &top, ofsx+px, ofsy, CORNER, 0, MIDDLE, CORNER);
 		copy_pic(dst, &bot, ofsx+px, ofsy+get_h()-CORNER, CORNER, 0, MIDDLE, CORNER);
 	}
@@ -162,7 +160,7 @@ void Window::draw(Bitmap *dst, int ofsx, int ofsy)
 	copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+CORNER, 0, 0, CORNER, CORNER);
 
 	// left & right bars
-	for(py = 2*CORNER; py < get_h()-4*CORNER-MIDDLE; py += MIDDLE) {
+	for(py = 2*CORNER; py < get_h()-2*CORNER-MIDDLE; py += MIDDLE) {
 		copy_pic(dst, &l_border, ofsx, ofsy+py, 0, CORNER, CORNER, MIDDLE);
 		copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+py, 0, CORNER, CORNER, MIDDLE);
 	}

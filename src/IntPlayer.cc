@@ -99,7 +99,7 @@ void Interactive_Player::exit_game_btn()
  */
 void Interactive_Player::main_menu_btn()
 {
-	new Window(this, 100, 100, 150, 250, "Test");
+	new Window(this, 100, 100, 150, 250, "Menu");
 }
 
 /** Interactive_Player::think()

@@ -62,6 +62,8 @@ Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const ui
 	_w = nw;
 	_h = nh;
 
+	_lborder = _rborder = _tborder = _bborder = 0;
+
 	_cache = 0;
 	_needdraw = false;
 
@@ -223,9 +225,41 @@ void Panel::set_pos(const int nx, const int ny)
 	_needdraw = nd;
 }
 
+/** Panel::set_inner_size(uint nw, uint nh)
+ *
+ * Set the size of the inner area (total area minus border)
+ *
+ * Args: nw	new dimensions of the inner area
+ */
+void Panel::set_inner_size(uint nw, uint nh)
+{
+	set_size(nw+_lborder+_rborder, nh+_tborder+_bborder);
+}
+
+/** Panel::set_border(uint l, uint r, uint t, uint b)
+ *
+ * Change the border dimensions.
+ * Note that since position and total size aren't changed, so that the size
+ * and position of the inner area will change.
+ *
+ * Args: l	size of left border, in pixels
+ *       r	size of right border, in pixels
+ *       t	size of top border, in pixels
+ *       b	size of bottom border, in pixels
+ */
+void Panel::set_border(uint l, uint r, uint t, uint b)
+{
+	_lborder = l;
+	_rborder = r;
+	_tborder = t;
+	_bborder = b;
+	update(0, 0, get_w(), get_h());
+}
+
 /** Panel::draw(Bitmap *dst, int ofsx, int ofsy) [virtual]
  *
- * Redraw the panel.
+ * Redraw the panel. Note that all drawing coordinates are relative to the
+ * inner area: you cannot overwrite the panel border in this function.
  *
  * Args: dst	the destination bitmap
  *       ofsx	an offset that should be added to all coordinates
@@ -235,9 +269,21 @@ void Panel::draw(Bitmap *dst, int ofsx, int ofsy)
 {
 }
 
+/** Panel::draw_border(Bitmap *dst, int ofsx, int ofsy) [virtual]
+ *
+ * Redraw the panel border.
+ *
+ * Args: dst	the destination bitmap
+ *       ofsx	an offset that should be added to all coordinates
+ *       ofsy
+ */
+void Panel::draw_border(Bitmap *dst, int ofsx, int ofsy)
+{
+}
+
 /** Panel::update(int x, int y, int w, int h);
  *
- * Mark a part of a panel for updating
+ * Mark a part of a panel for updating.
  *
  * Args: x	coordinates of the rectangle, relative to the panel
  *       y
@@ -253,7 +299,7 @@ void Panel::update(int x, int y, int w, int h)
 	_needdraw = true;
 
 	if (_parent) {
-		_parent->update(x+_x, y+_y, w, h);
+		_parent->update_inner(x+_x, y+_y, w, h);
 	} else {
 		if (x < 0) {
 			w += x;
@@ -275,6 +321,20 @@ void Panel::update(int x, int y, int w, int h)
 
 		g_gr.register_update_rect(x, y, w, h);
 	}
+}
+
+/** Panel::update_inner(int x, int y, int w, int h)
+ *
+ * Mark a part of a panel for updating.
+ *
+ * Args: x	coordinates of the rectangle, relative to the inner rectangle
+ *       y
+ *       w	size of the rectangle
+ *       h
+ */
+void Panel::update_inner(int x, int y, int w, int h)
+{
+	update(x-_lborder, y-_tborder, w, h);
 }
 
 /** Panel::set_cache(bool enable)
@@ -319,7 +379,10 @@ void Panel::think()
 
 /** Panel::handle_mousein(uint x, uint y, bool inside)
  *
- * Called whenever the mouse enters or leaves the panel.
+ * Called whenever the mouse enters or leaves the panel. The inside state
+ * is relative to the outer area of a panel. This means that the mouse
+ * position received in handle_mousemove may be negative while the mouse is
+ * still inside the panel as far as handle_mousein is concerned.
  *
  * Args: inside	true if the cursor has entered the panel
  */
@@ -333,7 +396,7 @@ void Panel::handle_mousein(bool inside)
  *
  * Args: btn	0 = left, 1 = right
  *       down	true if the button was pressed, false if released
- *       x		mouse coordinates relative to the panel
+ *       x		mouse coordinates relative to the inner rectangle
  *       y
  */
 void Panel::handle_mouseclick(uint btn, bool down, int x, int y)
@@ -344,7 +407,7 @@ void Panel::handle_mouseclick(uint btn, bool down, int x, int y)
  *
  * Called when the mouse is moved while inside the panel
  *
- * Args: x		mouse coordinates relative to the panel
+ * Args: x		mouse coordinates relative to the inner rectangle
  *       y
  *       xdiff	relative mouse movement
  *       ydiff
@@ -411,33 +474,56 @@ void Panel::set_think(bool yes)
  */
 void Panel::do_draw(Bitmap *dst, int ofsx, int ofsy)
 {
+	int dx, dy;
+	uint dw, dh;
+
 	if (!_cache)
 	{
-		Bitmap mydst;
-		int dx, dy;
-		uint dw, dh;
-
 		dx = _x+ofsx;
 		dy = _y+ofsy;
 		dw = _w+ofsx;
 		dh = _h+ofsy;
-		if (!mydst.make_partof(dst, dx, dy, dw, dh, &ofsx, &ofsy))
+
+		Bitmap outer;
+		if (!outer.make_partof(dst, dx, dy, dw, dh, &ofsx, &ofsy))
 			return;
 
-		draw(&mydst, ofsx, ofsy);
+		draw_border(&outer, ofsx, ofsy);
+
+		dx = _lborder+ofsx;
+		dy = _tborder+ofsy;
+		dw = _w-(_lborder+_rborder)+ofsx;
+		dh = _h-(_tborder+_bborder)+ofsy;
+
+		Bitmap inner;
+		if (!inner.make_partof(&outer, dx, dy, dw, dh, &ofsx, &ofsy))
+			return;
+
+		draw(&inner, ofsx, ofsy);
 
 		// draw back to front
 		for(Panel *child = _lchild; child; child = child->_prev)
-			child->do_draw(&mydst, ofsx, ofsy);
+			child->do_draw(&inner, ofsx, ofsy);
 	}
 	else
 	{
 		// redraw only if explicitly requested
 		if (_needdraw) {
-			draw(_cache, 0, 0);
+			draw_border(_cache, 0, 0);
 
-			for(Panel *child = _lchild; child; child = child->_prev)
-				child->do_draw(_cache, 0, 0);
+			dx = _lborder;
+			dy = _tborder;
+			dw = _w-(_lborder+_rborder);
+			dh = _h-(_tborder+_bborder);
+
+			Bitmap inner;
+			int iox, ioy;
+			if (inner.make_partof(_cache, dx, dy, dw, dh, &iox, &ioy)) {
+				draw(&inner, iox, ioy);
+
+				for(Panel *child = _lchild; child; child = child->_prev)
+					child->do_draw(&inner, iox, ioy);
+			}
 
 			_needdraw = false;
 		}
@@ -451,7 +537,7 @@ void Panel::do_draw(Bitmap *dst, int ofsx, int ofsy)
  *
  * Return the panel that receives mouse clicks at the given location
  *
- * Args: x	mouse coordinates relative to panel
+ * Args: x	mouse coordinates relative to panel inner rectangle
  *       y
  *
  * Returns: topmost panel at the given coordinates
@@ -504,6 +590,9 @@ void Panel::do_mousein(bool inside)
  */
 void Panel::do_mouseclick(uint btn, bool down, int x, int y)
 {
+	x -= _lborder;
+	y -= _tborder;
+
 	Panel *child = get_mousein(x, y);
 
 	if (child)
@@ -524,6 +613,9 @@ void Panel::do_mouseclick(uint btn, bool down, int x, int y)
  */
 void Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
+	x -= _lborder;
+	y -= _rborder;
+
 	Panel *child = get_mousein(x, y);
 
 	if (child)
