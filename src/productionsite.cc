@@ -175,19 +175,23 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			act.iparam1 = strtol(cmd[1].c_str(), &endp, 0);
 
 			if (endp && *endp)
-				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
-		} else if (cmd[0] == "consume") {
-			if(cmd.size() != 2 && cmd.size() != 3)
-				throw wexception("Line %i: Usage: consume <ware> [number]", idx);
+            throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+      } else if (cmd[0] == "consume") {
+         if(cmd.size() != 2 && cmd.size() != 3)
+            throw wexception("Line %i: Usage: consume <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
+         std::vector<std::string> wares;
+         split_string(cmd[1],&wares,",");
+         uint i;
+         for(i=0; i<wares.size(); i++) {
+            Section* s=prof->get_safe_section("inputs");
+            if(!s->get_string(wares[i].c_str(), 0))
+               throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
+                     cmd[1].c_str());
+         }
 
-			Section* s=prof->get_safe_section("inputs");
-			if(!s->get_string(cmd[1].c_str(), 0))
-				throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
-					cmd[1].c_str());
-
-			act.type = ProductionAction::actConsume;
-			act.sparam1 = cmd[1];
+         act.type = ProductionAction::actConsume;
+         act.sparam1 = cmd[1];
          int how_many=1;
          if(cmd.size()==3) {
             char* endp;
@@ -197,17 +201,19 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
          }
          act.iparam1 = how_many;
-
-		}  else if (cmd[0] == "check") {
+      }  else if (cmd[0] == "check") {
 			if(cmd.size() != 2 && cmd.size() != 3)
-				throw wexception("Line %i: Usage: checking <ware> [number]", idx);
+				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
 
-
-			Section* s=prof->get_safe_section("inputs");
-			if(!s->get_string(cmd[1].c_str(), 0))
-				throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
-					cmd[1].c_str());
-
+         std::vector<std::string> wares;
+         split_string(cmd[1],&wares,",");
+         uint i;
+         for(i=0; i<wares.size(); i++) {
+            Section* s=prof->get_safe_section("inputs");
+            if(!s->get_string(wares[i].c_str(), 0))
+               throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
+                     cmd[1].c_str());
+         }
 			act.type = ProductionAction::actCheck;
 			act.sparam1 = cmd[1];
          int how_many=1;
@@ -855,61 +861,83 @@ void ProductionSite::program_act(Game* g)
 			return;
 
 		case ProductionAction::actConsume:
-			molog("  Consume(%s)\n", action->sparam1.c_str());
-			for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
-				if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
-					action->sparam1.c_str()) == 0) {
-					WaresQueue* wq=m_input_queues[i];
-					if(wq->get_filled()>=action->iparam1)
-					{
-						wq->set_filled(wq->get_filled()-action->iparam1);
-						wq->update(g);
-					}
-					else
-					{
-						molog("   Consume failed, program restart\n");
-						program_end(g, false);
-						return;
-					}
-					break;
-				}
-			}
-			molog("  Consume done!\n");
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
-			return;
+         {
+            std::vector<std::string> wares;
+            split_string(action->sparam1, &wares, ",");
+
+            uint j=0;
+            bool consumed=false;
+            for(j=0; j<wares.size(); j++) {
+               molog("  Consuming(%s)\n", wares[j].c_str());
+
+               for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
+                  if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
+                           wares[j].c_str()) == 0) {
+                     WaresQueue* wq = m_input_queues[i];
+                     if(wq->get_filled()>=action->iparam1)
+                     {
+                        // Okay
+                        wq->set_filled(wq->get_filled()-action->iparam1);
+                        wq->update(g);
+                        consumed=true;
+                        break;
+                     }
+                  }
+               }
+               if(consumed) break;
+            }
+            if(!consumed) {
+               molog("   Consuming failed, program restart\n");
+               program_end(g, false);
+               return;
+            }
+            molog("  Consume done!\n");
+
+            program_step();
+            m_program_timer = true;
+            m_program_time = schedule_act(g, 10);
+            return;
+         }
 
 		case ProductionAction::actCheck:
-			molog("  Checking(%s)\n", action->sparam1.c_str());
+         {
+            std::vector<std::string> wares;
+            split_string(action->sparam1, &wares, ",");
+            
+            uint j=0;
+            bool found=false;
+            for(j=0; j<wares.size(); j++) {
+               molog("  Checking(%s)\n", wares[j].c_str());
 
-			for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
-				if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
-					action->sparam1.c_str()) == 0) {
-					WaresQueue* wq = m_input_queues[i];
-					if(wq->get_filled()>=action->iparam1)
-					{
-						// okay, do nothing
-						molog("    okay\n");
-					}
-					else
-					{
-						molog("   Checking failed, program restart\n");
-						program_end(g, false);
-						return;
-					}
-					break;
-				}
-			}
+               for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
+                  if (strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(),
+                           wares[j].c_str()) == 0) {
+                     WaresQueue* wq = m_input_queues[i];
+                     if(wq->get_filled()>=action->iparam1)
+                     {
+                        // okay, do nothing
+                        molog("    okay\n");
+                        found=true;
+                        break;
+                     }
+                  }
+               }
+               if(found) break;
+            }
+            if(!found) {
+               molog("   Checking failed, program restart\n");
+               program_end(g, false);
+               return;
+            }
+            molog("  Check done!\n");
 
-			molog("  Check done!\n");
-
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
-			return;
-
-		case ProductionAction::actProduce:
+            program_step();
+            m_program_timer = true;
+            m_program_time = schedule_act(g, 10);
+            return;
+         }
+		
+      case ProductionAction::actProduce:
 		{
 			molog("  Produce(%s)\n", action->sparam1.c_str());
 
