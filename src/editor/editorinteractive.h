@@ -39,7 +39,6 @@ class Editor_Interactive : public Interactive_Base {
       inline Editor* get_editor(void) { return m_editor; }
 
       // leaf functions from base class
-      void recalc_overlay(FCoords fc);
       void start();
 
       // gets called when a field is clicked

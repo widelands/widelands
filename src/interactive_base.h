@@ -61,16 +61,15 @@ class Interactive_Base : public UIPanel {
       // after a map change
       void map_changed(void);
   
-      // turn recalculation off (for map and game loading)
-      void never_recalculate(bool t) { m_never_recalculate=t; }
-
       // logic handler func
       void think();
 
-		inline const Coords &get_fieldsel() const { return m_maprenderinfo.fieldsel; }
-		inline bool get_fieldsel_freeze() const { return m_fieldsel_freeze; }
-		void set_fieldsel(Coords c);
+		inline const Coords &get_fieldsel_pos() const { return m_fsd.fieldsel_pos; }
+		inline bool get_fieldsel_freeze() const { return m_fsd.fieldsel_freeze; }
+      inline int get_fieldsel_radius(void) { return m_fsd.fieldsel_radius; }
+		void set_fieldsel_pos(Coords c);
 		void set_fieldsel_freeze(bool yes);
+      void set_fieldsel_radius(int n);
 
 		inline const MapRenderInfo* get_maprenderinfo() const { return &m_maprenderinfo; }
 
@@ -78,11 +77,8 @@ class Interactive_Base : public UIPanel {
 		void move_view_to_point(Point pos);
 		void warp_mouse_to_field(Coords c);
 
-      virtual void recalc_overlay(FCoords fc) = 0;
       virtual void start() = 0;
 
-      void set_fieldsel_radius(int n) { m_maprenderinfo.fieldsel_radius=n; }
-      inline int get_fieldsel_radius(void) { return m_maprenderinfo.fieldsel_radius; }
 
 		uint get_display_flags();
 		void set_display_flags(uint flags);
@@ -93,7 +89,14 @@ class Interactive_Base : public UIPanel {
       Map_View* m_mapview;
       MiniMap* m_mm;
       Editor_Game_Base* m_egbase;
-      bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
+      struct FieldSel_Data {
+         bool		         fieldsel_freeze; // don't change m_fieldsel even if mouse moves
+         Coords            fieldsel_pos;
+         int               fieldsel_radius;
+         int               fieldsel_pic;
+         int               fieldsel_jobid;
+      } m_fsd;
+      
 		uint					m_display_flags;
 
 		uint					m_lastframe;			// system time (milliseconds)
@@ -101,7 +104,6 @@ class Interactive_Base : public UIPanel {
 		uint					m_avg_usframetime;	// in microseconds!
 
       UIUniqueWindowRegistry m_minimap;
-      bool              m_never_recalculate;
 
    protected:
       void toggle_minimap(void);
@@ -111,12 +113,11 @@ class Interactive_Base : public UIPanel {
 
 	   inline void set_mapview(Map_View* w) { m_mapview=w; }
       inline Map_View* get_mapview() { return m_mapview; }
-
-      void set_fsel_picture(const char* file) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); }
-      void unset_fsel_picture(void) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, "pics/fsel.png", RGBColor(0,0,255)); }
-
+		
 		virtual void draw_overlay(RenderTarget* dst);
-      bool              do_never_recalculate(void) { return m_never_recalculate; }
+
+      void unset_fieldsel_picture();
+      void set_fieldsel_picture(const char*);
 
       // map rendering stuff. this is still protected since this is
       // used quite often

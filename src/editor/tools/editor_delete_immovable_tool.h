@@ -34,7 +34,7 @@ class Editor_Delete_Immovable_Tool : public Editor_Tool {
       Editor_Delete_Immovable_Tool() : Editor_Tool(this,this) { }
       ~Editor_Delete_Immovable_Tool() { }
 
-      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_delete.png"; }
 };
 

@@ -24,6 +24,7 @@
 
 #include <vector>
 #include "field.h"
+#include "geometry.h"
 
 class Coords;
 class Editor_Interactive;
@@ -49,10 +50,10 @@ class Editor_Tool {
          if(m_third && m_third!=this) { delete m_third; m_third=0; }
       }
 
-      int handle_click(int n, const Coords* c, Field* f, Map* m, Editor_Interactive* parent) {
-         if(n==0) return this->handle_click_impl(c,f,m,parent);
-         if(n==1) return m_second->handle_click_impl(c,f,m,parent);
-         if(n==2) return m_third->handle_click_impl(c,f,m,parent);
+      int handle_click(int n, FCoords& f , Map* m, Editor_Interactive* parent) {
+         if(n==0) return this->handle_click_impl(f,m,parent);
+         if(n==1) return m_second->handle_click_impl(f,m,parent);
+         if(n==2) return m_third->handle_click_impl(f,m,parent);
          return 0;
       }
       const char* get_fsel(int n) {
@@ -62,7 +63,7 @@ class Editor_Tool {
          return 0;
       }
 
-      virtual int handle_click_impl(const Coords*, Field* field, Map* m, Editor_Interactive* parent) = 0;
+      virtual int handle_click_impl(FCoords& f, Map* m, Editor_Interactive* parent) = 0;
       virtual const char* get_fsel_impl(void) = 0;
 
    protected:

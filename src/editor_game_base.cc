@@ -74,44 +74,6 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 /*
 ===============
-Editor_Game_Base::recalc_for_field
-
-Call this function whenever the field at fx/fy has changed in one of the ways:
- - height has changed
- - robust Map_Object has been added or removed
-
-This performs the steps outlined in the comment above Map::recalc_brightness()
-and recalcs the interactive player's overlay.
-===============
-*/
-void Editor_Game_Base::recalc_for_field(Coords coords, int radius)
-{
-   MapRegion mr;
-	FCoords c;
-
-   // First pass
-   mr.init(m_map, coords, radius+2);
-
-   while(mr.next(&c)) {
-      m_map->recalc_brightness(c);
-      m_map->recalc_fieldcaps_pass1(c);
-   }
-
-
-   // Second pass
-   mr.init(m_map, coords, radius+2);
-
-   while(mr.next(&c)) {
-      m_map->recalc_fieldcaps_pass2(c);
-
-      if (m_iabase)
-         m_iabase->recalc_overlay(c);
-   }
-}
-
-
-/*
-===============
 Editor_Game_Base::unconquer_area
 
 This unconquers a area. This is only possible, when there
@@ -238,7 +200,7 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 
 	player->set_area_seen(coords, radius+4, true);
 
-	recalc_for_field(coords, radius);
+	m_map->recalc_for_field_area(coords, radius);
 }
 
 

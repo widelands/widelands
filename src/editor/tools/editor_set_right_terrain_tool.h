@@ -35,8 +35,8 @@ class Editor_Set_Right_Terrain_Tool : public Editor_Tool, public Set_Terrain {
       Editor_Set_Right_Terrain_Tool() : Editor_Tool(this,this) { }
       virtual ~Editor_Set_Right_Terrain_Tool() { }
 
-      virtual int handle_click_impl(const Coords* c, Field* f, Map* m, Editor_Interactive* e) {
-         return set_terrain(c,f,m,e,true,false);
+      virtual int handle_click_impl(FCoords& fc, Map* m, Editor_Interactive* e) {
+         return set_terrain(fc,m,e,true,false);
       }
 
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_terrain_right.png"; }

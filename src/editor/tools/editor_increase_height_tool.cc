@@ -39,8 +39,8 @@ this increases the height of the surrounding fields also
 if this is needed.
 ===========
 */
-int Editor_Increase_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
+int Editor_Increase_Height_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* parent) {
+   MapRegion mrc(map, fc, parent->get_fieldsel_radius());
 	Coords c;
 
    int max, i;

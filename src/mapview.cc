@@ -176,5 +176,5 @@ void Map_View::track_fsel(int mx, int my)
 	fsel = m_intbase->get_map()->calc_coords(Point(m_viewpoint.x + mx, m_viewpoint.y + my));
 
 	// Apply the new fieldsel
-	m_intbase->set_fieldsel(fsel);
+	m_intbase->set_fieldsel_pos(fsel);
 }

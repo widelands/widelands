@@ -22,7 +22,7 @@
 
 #include "multi_select.h"
 
-class Coords;
+class FCoords;
 class Field;
 class Map;
 class Editor_Interactive;
@@ -43,7 +43,7 @@ class Set_Terrain : public MultiSelect {
       ~Set_Terrain() { }
 
    protected:
-      int set_terrain(const Coords*, Field*, Map*, Editor_Interactive*, bool right, bool down);
+      int set_terrain(FCoords& fc, Map*, Editor_Interactive*, bool right, bool down);
 };
 
 #endif

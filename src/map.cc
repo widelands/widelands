@@ -19,6 +19,7 @@
 
 #include <algorithm>
 
+#include "overlay_manager.h"
 #include "filesystem.h"
 #include "map.h"
 #include "player.h"
@@ -126,6 +127,7 @@ the Map* can't be set to another one.
 */
 int S2_Map_Loader::load_map_complete(Editor_Game_Base* game) {
 
+
    // now, load the world, load the rest infos from the map
    m_map->load_world();
    // Postload the world which provides all the immovables found on a map
@@ -163,6 +165,8 @@ Map::Map(void) {
 	m_starting_pos = 0;
 	m_world = 0;
 
+   m_overlay_manager=0;
+   
    // Paranoia
    cleanup();
 }
@@ -177,7 +181,58 @@ cleanups
 Map::~Map()
 {
    cleanup();
+   if(m_overlay_manager) { 
+      delete m_overlay_manager;
+      m_overlay_manager=0;
+   }
 }
+
+/*
+===============
+Map::recalc_for_field_area
+
+Call this function whenever the field at fx/fy has changed in one of the ways:
+ - height has changed
+ - robust Map_Object has been added or removed
+
+This performs the steps outlined in the comment above Map::recalc_brightness()
+and recalcs the interactive player's overlay.
+===============
+*/
+void Map::recalc_for_field_area(Coords coords, int radius)
+{
+   assert(m_overlay_manager);
+   
+   MapRegion mr;
+   FCoords c;
+
+   // First pass
+   mr.init(this, coords, radius+2);
+
+   while(mr.next(&c)) {
+      recalc_brightness(c);
+      recalc_fieldcaps_pass1(c);
+   }
+
+
+   // Second pass
+   mr.init(this, coords, radius+2);
+   while(mr.next(&c)) {
+      recalc_fieldcaps_pass2(c);
+   }
+
+   // Now only recaluclate the overlays
+   FCoords neighbours[7];
+   mr.init(this, coords, radius+2);
+   while(mr.next(&c)) {
+      int i=0;
+      for(i=1; i<=6; i++) {
+         get_neighbour(c, i, &neighbours[i]);
+      }
+      get_overlay_manager()->recalc_field_overlays(c, neighbours);
+   }
+}
+
 
 /*
 ===========
@@ -190,6 +245,8 @@ a map has been loaded or newly created
 */
 void Map::recalc_whole_map(void)
 {
+   assert(m_overlay_manager);
+
    // Post process the map in the necessary two passes to calculate
    // brightness and building caps
    FCoords f;
@@ -210,6 +267,19 @@ void Map::recalc_whole_map(void)
       for(uint x=0; x<m_width; x++) {
 			f = get_fcoords(Coords(x, y));
          recalc_fieldcaps_pass2(f);
+      }
+   }
+
+   // Now only recaluclate the overlays
+   FCoords neighbours[7];
+   for(y=0; y<m_height; y++) {
+      for(uint x=0; x<m_width; x++) {
+         f = get_fcoords(Coords(x, y));
+         int i=0;
+         for(i=1; i<=6; i++) {
+            get_neighbour(f, i, &neighbours[i]);
+         }
+         get_overlay_manager()->recalc_field_overlays(f, neighbours);
       }
    }
 }
@@ -241,6 +311,8 @@ void Map::cleanup(void) {
 		delete m_world;
 	m_world = 0;
 
+   if(m_overlay_manager) 
+      m_overlay_manager->cleanup();
 }
 
 /*
@@ -283,7 +355,7 @@ void Map::set_size(uint w, uint h)
    assert(!m_fields);
 	assert(!m_pathfields);
 
-	m_width = w;
+   m_width = w;
 	m_height = h;
 
 	m_fields = (Field*) malloc(sizeof(Field)*w*h);
@@ -292,6 +364,13 @@ void Map::set_size(uint w, uint h)
 	m_pathcycle = 0;
 	m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*w*h);
 	memset(m_pathfields, 0, sizeof(Pathfield)*w*h);
+
+   if(!m_overlay_manager) {
+      m_overlay_manager=new Overlay_Manager(w,h);
+   } else {
+      m_overlay_manager->init(w,h);
+   }
+
 }
 
 /*
@@ -2026,15 +2105,7 @@ int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright)
    MapRegion mr;
    FCoords coords;
 
-	mr.init(this,c,2);
-   while(mr.next(&coords)) {
-      recalc_fieldcaps_pass1(coords);
-   }
-
-   mr.init(this,c,2);
-   while(mr.next(&coords)) {
-      recalc_fieldcaps_pass2(coords);
-   }
+   recalc_for_field_area(c,2);
 
    return 2;
 }
@@ -2079,21 +2150,7 @@ int Map::change_field_height(Coords coords, int by)
    check_neighbour_heights(coordinates, &radius);
    radius += 2;
 
-   // First recalculation step
-   MapRegion mr;
-	FCoords c;
-
-	mr.init(this, coordinates, radius);
-	while(mr.next(&c)) {
-      recalc_brightness(c);
-      recalc_fieldcaps_pass1(c);
-   }
-
-   // Second recalculation step
-   mr.init(this, coordinates, radius);
-   while(mr.next(&c)) {
-      recalc_fieldcaps_pass2(c);
-   }
+   recalc_for_field_area(coordinates, radius);
 
    return radius;
 }

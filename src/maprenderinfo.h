@@ -43,20 +43,6 @@ It includes the map itself as well as overlay data (build symbols, road
 building symbols, ...)
 */
 enum {
-	Overlay_Frontier_Base = 0,	// add the player number to mark a border field
-	Overlay_Frontier_Max = 15,
-
-	Overlay_Build_Flag = 16,
-	Overlay_Build_Small,
-	Overlay_Build_Medium,
-	Overlay_Build_Big,
-	Overlay_Build_Mine,
-
-	Overlay_Build_Min = Overlay_Build_Flag,
-	Overlay_Build_Max = Overlay_Build_Mine,
-};
-
-enum {
 	Minimap_Terrain = 1,			// display terrain
 	Minimap_PlayerColor = 2,	// color of owner
 	Minimap_Flags = 4,			// show flags
@@ -66,15 +52,8 @@ enum {
 
 struct MapRenderInfo {
 	Editor_Game_Base*		egbase;
-	Coords					fieldsel; // field selection marker, moved by cursor
-	int						fieldsel_radius; // how many fields around shall the fieldsel mark? important for
-														// edtor or when a area shall be selected in the game
-
-	int 		fsel; // currently selected fieldsel graphic
-	uchar*	overlay_basic; // borders and build help
+	
 	uchar*	overlay_roads; // needs to be ORed with logical road info
-	bool		show_buildhelp;
-
 	std::vector<bool>*		visibility; // array of fields, true if the field can be seen
 								// can be 0, in which case the whole map is visible
 };

@@ -37,7 +37,7 @@ class Editor_Increase_Height_Tool : public Editor_Tool {
         : Editor_Tool(dht, sht) { m_changed_by=1; m_dht=dht; m_sht=sht; }
       virtual ~Editor_Increase_Height_Tool() {  }
 
-      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
 
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_increase_height.png"; }
 

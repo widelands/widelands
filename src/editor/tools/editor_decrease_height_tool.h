@@ -36,7 +36,7 @@ class Editor_Decrease_Height_Tool : public Editor_Tool {
       Editor_Decrease_Height_Tool() : Editor_Tool(this,this) { m_changed_by=1; }
       virtual ~Editor_Decrease_Height_Tool() { }
 
-      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
 
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_decrease_height.png"; }
 

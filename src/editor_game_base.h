@@ -54,7 +54,6 @@ class Editor_Game_Base {
       void unconquer_area(uchar playernr, Coords coords);
       void conquer_area(uchar playernr, Coords coords, Building_Descr*);
       void conquer_area_no_building(uchar playernr, Coords coords, int radius);
-      void recalc_for_field(Coords coords, int radius = 0);
 
       // logic handler func
       virtual void think() = 0;

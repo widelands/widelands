@@ -159,16 +159,6 @@ public:
 };
 
 
-/*
-struct GameIcons
-
-Contains the indices of a number of default icons that are accessed by
-rendermap()
-*/
-struct GameIcons {
-	uint	pics_roadb[3];	// green, yellow, red
-	uint	pics_build[5];	// flag, small, medium, big, mine (same order as Overlay_Build_*)
-};
 
 /*
 class RenderTargetImpl
@@ -261,9 +251,6 @@ public:
 	// Misc functions
 	virtual void screenshot(const char* fname);
 
-	void allocate_gameicons();
-	inline const GameIcons* get_gameicons() const { return m_gameicons; }
-
 	virtual uint get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey);
 	virtual const char* get_maptexture_picture(uint id);
 
@@ -295,8 +282,6 @@ private:
 
 	std::vector<Texture*>		m_maptextures;
 	std::vector<AnimationGfx*>	m_animations;
-
-	GameIcons*		m_gameicons;
 };
 
 #define get_graphicimpl() (static_cast<Renderer_Software16::GraphicImpl*>(g_gr))

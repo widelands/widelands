@@ -191,8 +191,8 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UIUniqueWindowRegi
 	m_player = plr;
 	m_map = m_player->get_game()->get_map();
 
-	Field *f = m_map->get_field(m_player->get_fieldsel());
-	m_field = FCoords(m_player->get_fieldsel(), f);
+	Field *f = m_map->get_field(m_player->get_fieldsel_pos());
+	m_field = FCoords(m_player->get_fieldsel_pos(), f);
 
 	m_player->set_fieldsel_freeze(true);
 
@@ -668,7 +668,7 @@ void show_field_action(Interactive_Player *parent, UIUniqueWindowRegistry *regis
 
 	// we're building a road right now
 	Map *map = parent->get_game()->get_map();
-	Coords target = parent->get_fieldsel();
+	Coords target = parent->get_fieldsel_pos();
 
 	// if user clicked on the same field again, build a flag
 	if (target == parent->get_build_road_end()) {

@@ -25,6 +25,8 @@
 #include "options.h"
 #include "system.h"
 #include "constants.h"
+#include "overlay_manager.h"
+#include "error.h"
 
 /*
 ==============================================================================
@@ -52,7 +54,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 
    memset(&m_maprenderinfo, 0, sizeof(m_maprenderinfo));
 
-   m_fieldsel_freeze = false;
+   m_fsd.fieldsel_freeze = false;
    m_egbase=g;
 	m_display_flags = dfDebug;
 
@@ -63,10 +65,11 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
    m_mapview=0;
    m_mm=0;
 
-   m_never_recalculate=false;
-
-   set_fieldsel_radius(0);
-   unset_fsel_picture(); // set default fsel
+   m_fsd.fieldsel_pos.x=0;
+   m_fsd.fieldsel_pos.y=0;
+   m_fsd.fieldsel_jobid=0;
+   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, "pics/fsel.png", RGBColor(0,0,255));
+   m_fsd.fieldsel_radius=0;
 }
 
 /*
@@ -78,8 +81,6 @@ cleanups
 */
 Interactive_Base::~Interactive_Base(void)
 {
-	if (m_maprenderinfo.overlay_basic)
-		free(m_maprenderinfo.overlay_basic);
 	if (m_maprenderinfo.overlay_roads)
 		free(m_maprenderinfo.overlay_roads);
 }
@@ -101,37 +102,57 @@ void Interactive_Base::map_changed(void) {
    maph = m_maprenderinfo.egbase->get_map()->get_height();
 
 
-   if(!m_maprenderinfo.overlay_basic && !m_maprenderinfo.overlay_roads) {
+   if(!m_maprenderinfo.overlay_roads) {
       // first time call
-      m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
       m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
       memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
    } else {
-      m_maprenderinfo.overlay_basic = (uchar*)realloc(m_maprenderinfo.overlay_basic, mapw*maph);
       m_maprenderinfo.overlay_roads = (uchar*)realloc(m_maprenderinfo.overlay_roads, mapw*maph);
       memset(m_maprenderinfo.overlay_roads, 0, mapw*maph); // set to zero, either it is in game (to load) or this is editor
    }
-
-   for(int y = 0; y < maph; y++)
-      for(int x = 0; x < mapw; x++) {
-         FCoords coords = m_maprenderinfo.egbase->get_map()->get_fcoords(Coords(x,y));
-
-         recalc_overlay(coords);
-      }
-
 }
 
 
 /*
 ===============
-Interactive_Base::set_fieldsel
-
 Change the field selection. Does not honour the freeze!
 ===============
 */
-void Interactive_Base::set_fieldsel(Coords c)
+void Interactive_Base::set_fieldsel_pos(Coords c)
 {
-	m_maprenderinfo.fieldsel = c;
+   // Remove old fieldsel pointer
+   if(m_fsd.fieldsel_jobid) 
+      get_map()->get_overlay_manager()->remove_overlay(m_fsd.fieldsel_jobid);
+	m_fsd.fieldsel_jobid= get_map()->get_overlay_manager()->get_a_job_id();
+   m_fsd.fieldsel_pos=c;
+   // register fieldsel overlay position
+   MapRegion mr(get_map(), c, m_fsd.fieldsel_radius);
+   FCoords fc;
+   while(mr.next(&fc)) { 
+      get_map()->get_overlay_manager()->register_overlay(fc, m_fsd.fieldsel_pic, 7, Coords(-1,-1), m_fsd.fieldsel_jobid);
+   }
+   
+}
+         
+/*
+ * Set the current fieldsel selection radius.
+ */
+void Interactive_Base::set_fieldsel_radius(int n) {
+   m_fsd.fieldsel_radius=n;
+   set_fieldsel_pos(get_fieldsel_pos()); // redraw
+}
+
+/*
+ *  [ protected functions ] 
+ *
+ * Set/Unset fieldsel picture
+ */
+void Interactive_Base::set_fieldsel_picture(const char* file) { 
+   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); 
+   set_fieldsel_pos(get_fieldsel_pos()); // redraw
+}   
+void Interactive_Base::unset_fieldsel_picture(void) { 
+   set_fieldsel_picture("pics/fsel.png");
 }
 
 
@@ -144,7 +165,7 @@ Field selection is frozen while the field action dialog is visible
 */
 void Interactive_Base::set_fieldsel_freeze(bool yes)
 {
-	m_fieldsel_freeze = yes;
+	m_fsd.fieldsel_freeze = yes;
 }
 
 
@@ -208,7 +229,7 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
 	{
 		// Show fsel coordinates
 		char buf[100];
-		Coords fsel = get_fieldsel();
+		Coords fsel = get_fieldsel_pos();
 
 		sprintf(buf, "%3i %3i", fsel.x, fsel.y);
 		g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 5, buf);

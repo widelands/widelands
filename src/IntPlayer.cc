@@ -29,6 +29,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
+#include "overlay_manager.h"
 
 /*
 ==============================================================================
@@ -81,6 +82,14 @@ Interactive_Player IMPLEMENTATION
 ==============================================================================
 */
 
+// This function is the callback for recalculation of field overlays
+int Int_Player_overlay_callback_function(FCoords& fc, void* data) {
+   Interactive_Player* plr=static_cast<Interactive_Player*>(data);
+
+   return plr->get_player()->get_buildcaps(fc);
+}
+
+
 /*
 ===============
 Interactive_Player::Interactive_Player
@@ -129,6 +138,8 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 
 	// Speed info
 	m_label_speed = new UITextarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
+
+   m_road_overlay_jobid=0; 
 }
 
 /*
@@ -183,14 +194,17 @@ void Interactive_Player::start()
 
    m_maprenderinfo.egbase = m_game;
 	m_maprenderinfo.visibility = get_player()->get_visibility();
-	m_maprenderinfo.show_buildhelp = false;
 
 	mapw = 0;
 	maph = 0; 
-	m_maprenderinfo.overlay_basic = 0; 
 	m_maprenderinfo.overlay_roads = 0;
 
    map_changed();
+   get_map()->get_overlay_manager()->show_buildhelp(false);
+   get_map()->get_overlay_manager()->register_overlay_callback_function(&Int_Player_overlay_callback_function, static_cast<void*>(this));
+
+   // Recalc whole map for changed owner stuff
+   get_map()->recalc_whole_map();
 }
 
 
@@ -224,7 +238,7 @@ void Interactive_Player::main_menu_btn()
 //
 void Interactive_Player::toggle_buildhelp(void)
 {
-	m_maprenderinfo.show_buildhelp = !m_maprenderinfo.show_buildhelp;
+   get_map()->get_overlay_manager()->toggle_buildhelp();
 }
 
 /*
@@ -236,11 +250,11 @@ Player has clicked on the given field; bring up the context menu.
 */
 void Interactive_Player::field_action()
 {
-	if (m_maprenderinfo.visibility && !get_player()->is_field_seen(m_maprenderinfo.fieldsel))
+	if (m_maprenderinfo.visibility && !get_player()->is_field_seen(get_fieldsel_pos()))
 		return;
 
 	// Special case for buildings
-	BaseImmovable *imm = m_game->get_map()->get_immovable(m_maprenderinfo.fieldsel);
+	BaseImmovable *imm = m_game->get_map()->get_immovable(get_fieldsel_pos());
 
 	if (imm && imm->get_type() == Map_Object::BUILDING) {
 		Building *building = (Building *)imm;
@@ -511,6 +525,8 @@ void Interactive_Player::roadb_add_overlay()
 	// build hints
 	FCoords endpos = map->get_fcoords(m_buildroad->get_end());
 
+   assert(!m_road_overlay_jobid);
+   m_road_overlay_jobid= get_map()->get_overlay_manager()->get_a_job_id();
 	for(int dir = 1; dir <= 6; dir++) {
 		FCoords neighb;
 		int caps;
@@ -541,7 +557,16 @@ void Interactive_Player::roadb_add_overlay()
 		else
 			icon = 3;
 
-		m_maprenderinfo.overlay_roads[neighb.y*mapwidth + neighb.x] |= icon << Road_Build_Shift;
+      std::string name="";
+      switch(icon) {
+         case 1: name="pics/roadb_green.png"; break;
+         case 2: name="pics/roadb_yellow.png"; break;
+         case 3: name="pics/roadb_red.png"; break;
+      };
+
+      assert(name!="");
+
+      get_map()->get_overlay_manager()->register_overlay(neighb,  g_gr->get_picture(PicMod_Game, name.c_str(), RGBColor(0,0,255)),7, Coords(-1,-1), m_road_overlay_jobid);
 	}
 }
 
@@ -569,68 +594,7 @@ void Interactive_Player::roadb_remove_overlay()
 	}
 
 	// build hints
-	Coords endpos = m_buildroad->get_end();
-
-	for(int dir = 1; dir <= 6; dir++) {
-		Coords neighb;
-
-		map->get_neighbour(endpos, dir, &neighb);
-
-		m_maprenderinfo.overlay_roads[neighb.y*mapwidth + neighb.x] = 0;
-	}
-}
-
-
-
-/*
-===============
-Interactive_Player::recalc_overlay
-
-Recalculate build help and borders for the given field
-===============
-*/
-void Interactive_Player::recalc_overlay(FCoords fc)
-{
-   if(do_never_recalculate()) return;
-   
-   // Only do recalcs after maprenderinfo has been setup
-	if (!m_maprenderinfo.egbase)
-		return;
-
-	Map* map = m_maprenderinfo.egbase->get_map();
-   assert(map); // must be setup
-
-	uchar code = 0;
-	int owner = fc.field->get_owned_by();
-
-	if (owner) {
-		// A border is on every field that is owned by a player and has
-		// neighbouring fields that are not owned by that player
-		for(int dir = 1; dir <= 6; dir++) {
-			FCoords neighb;
-
-			map->get_neighbour(fc, dir, &neighb);
-
-			if (neighb.field->get_owned_by() != owner)
-				code = Overlay_Frontier_Base + owner;
-		}
-
-		// Determine the buildhelp icon for that field
-		if (get_player()->get_player_number() == owner) {
-			int buildcaps = get_player()->get_buildcaps(fc);
-
-			if (buildcaps & BUILDCAPS_MINE)
-				code = Overlay_Build_Mine;
-			else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
-				code = Overlay_Build_Big;
-			else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
-				code = Overlay_Build_Medium;
-			else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
-				code = Overlay_Build_Small;
-			else if (buildcaps & BUILDCAPS_FLAG)
-				code = Overlay_Build_Flag;
-		}
-	}
-
-	m_maprenderinfo.overlay_basic[fc.y*map->get_width() + fc.x] = code;
+   if(m_road_overlay_jobid) 
+      get_map()->get_overlay_manager()->remove_overlay(m_road_overlay_jobid);
+   m_road_overlay_jobid=0;
 }

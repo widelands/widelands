@@ -140,12 +140,11 @@ LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image -lSDL_ttf
 all: makedirs tags $(OBJECT_DIR)/widelands
 	cp $(OBJECT_DIR)/widelands .
 	@echo
-	@echo "    Congrats. Build seems to be complete. If there was no "
-	@echo "    error (ignore file not found errors), you can run the game "
-	@echo "    now. just type: './widelands' and enjoy!"
-	@echo
+	@echo "    Congratulations. Build seems to be completed without error."
+	@echo "    You can run the game now. just type: './widelands' and enjoy!"
+	@echo "    Comments go to widelands-public@lists.sf.net"
+	@echo     
 	@echo "            THE WIDELANDS DEVELOPMENT TEAM"
-	@echo
 
 clean:
 	@-rm -rf widelands

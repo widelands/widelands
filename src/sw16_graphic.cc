@@ -30,6 +30,7 @@ Management classes and functions of the 16-bit software renderer.
 #include "player.h"
 #include "sw16_graphic.h"
 #include "tribe.h"
+#include "overlay_manager.h"
 
 namespace Renderer_Software16
 {
@@ -497,19 +498,17 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 ===============
 draw_overlays
 
-Draw build help (buildings and roads) and the field sel
+Draw build help (buildings and roads) 
 ===============
 */
 static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
-                 FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr, bool draw_fsel)
+                 FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr)
 {
 	int mapwidth = mri->egbase->get_map()->get_width();
-	uchar overlay_basic = mri->overlay_basic[fc.y*mapwidth + fc.x];
 	int icon;
-	uint picid;
-	int w, h;
 
 	// Render frontier
+	uchar overlay_basic = mri->egbase->get_map()->get_overlay_manager()->get_overlay_fields(fc.y*mapwidth + fc.x);
 	if (overlay_basic > Overlay_Frontier_Base && overlay_basic <= Overlay_Frontier_Max)
 	{
 		Player *ownerplayer = mri->egbase->get_player(overlay_basic - Overlay_Frontier_Base);
@@ -520,22 +519,22 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 		dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
 
 		// check to the right
-		ovln = mri->overlay_basic[fcr.y*mapwidth + fcr.x];
+		ovln =  mri->egbase->get_map()->get_overlay_manager()->get_overlay_fields(fcr.y*mapwidth + fcr.x);
 		if (ovln == overlay_basic)
 			dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
 
 		// check to the bottom left
-		ovln = mri->overlay_basic[fcbl.y*mapwidth + fcbl.x];
+		ovln =  mri->egbase->get_map()->get_overlay_manager()->get_overlay_fields(fcbl.y*mapwidth + fcbl.x);
 		if (ovln == overlay_basic)
 			dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
 
 		// check to the bottom right
-		ovln = mri->overlay_basic[fcbr.y*mapwidth + fcbr.x];
+		ovln =  mri->egbase->get_map()->get_overlay_manager()->get_overlay_fields(fcbr.y*mapwidth + fcbr.x);
 		if (ovln == overlay_basic)
 			dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
 	}
 
-	// Draw normal buildhelp
+	/* Draw normal buildhelp 
 	if (mri->show_buildhelp && overlay_basic >= Overlay_Build_Min &&
 	    overlay_basic <= Overlay_Build_Max) {
 		int x, y;
@@ -552,26 +551,16 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 			y = pos.y - (h>>1);
 
 		dst->blit(x, y, picid);
-	}
+	}*/
+   Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_FIELD];
+   int num_overlays=mri->egbase->get_map()->get_overlay_manager()->get_overlays(fc, overlay_info);
 
-	// Draw road build help
-	uchar roads = mri->overlay_roads[fc.y*mapwidth + fc.x];
+   int i;
+   for(i=0; i<num_overlays; i++) {
+      int x = pos.x - overlay_info[i].hotspot_x;
+      int y = pos.y - overlay_info[i].hotspot_y;
 
-	icon = (roads >> Road_Build_Shift) & 3;
-
-	if (icon) {
-		picid = get_graphicimpl()->get_gameicons()->pics_roadb[icon-1];
-		g_gr->get_picture_size(picid, &w, &h);
-
-		dst->blit(pos.x - (w/2), pos.y - (h/2), picid);
-	}
-
-	// Draw the fsel last
-   if (draw_fsel) {
-      picid = mri->fsel;
-      g_gr->get_picture_size(picid, &w, &h);
-
-      dst->blit(pos.x - (w>>1), pos.y - (h>>1), picid);
+      dst->blit(x,y,overlay_info[i].picid);
    }
 }
 
@@ -598,8 +587,6 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	dst.h = m_rect.h;
 	dst.hasclrkey = false; // should be irrelevant
 
-	get_graphicimpl()->allocate_gameicons();
-
 	// Completely clear the window
 	dst.clear();
 
@@ -618,12 +605,10 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	maxfy = (viewofs.y + dst.h) / (FIELD_HEIGHT>>1);
 	maxfx += 1; // because of big buildings
 	maxfy += 10; // necessary because of heights
-   minfx -= mri->fieldsel_radius; // to make fieldsel work properly. better than having if()s in every loop
-   minfy -= mri->fieldsel_radius;
 
 	//log("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
-	int dx = maxfx - minfx + mri->fieldsel_radius + 1;
-	int dy = maxfy - minfy + mri->fieldsel_radius + 1;
+	int dx = maxfx - minfx + 1;
+	int dy = maxfy - minfy + 1;
    int linear_fy = minfy;
 
 	while(dy--) {
@@ -671,7 +656,6 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 			int rposx, brposx, lposx, trposx;
 			bool render_r=true;
 			bool render_b=true;
-         bool draw_fsel=false;
 
 			map->get_rn(f, &r);
 			rposx = posx + FIELD_WIDTH;
@@ -697,10 +681,6 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 						render_r=false;
 				}
 			}
-
-         // Would this be a field where a fsel should be?
-			if (map->calc_distance(f, mri->fieldsel) <= mri->fieldsel_radius)
-				draw_fsel = true;
 
 			// Render stuff that belongs to ground triangles
 			if (render_b || render_r) {
@@ -736,12 +716,11 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
                bob = bob->get_next_bob();
             }
 
-            // Draw buildhelp, road buildhelp and fieldsel
+            // Draw buildhelp, road buildhelp 
             draw_overlays(this, mri, f, wh_pos,
                   r, Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(r.field->get_height())),
                   bl, Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(bl.field->get_height())),
-                  br, Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(br.field->get_height())),
-                  draw_fsel);
+                  br, Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(br.field->get_height())));
          }
 
 
@@ -949,8 +928,6 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 	m_nr_update_rects = 0;
 	m_update_fullscreen = false;
 
-	m_gameicons = 0;
-
 	// Set video mode using SDL
 	int flags = SDL_SWSURFACE;
 
@@ -1131,11 +1108,6 @@ void GraphicImpl::flush(int mod)
 		for(i = 0; i < m_animations.size(); i++)
 			delete m_animations[i];
 		m_animations.resize(0);
-
-		if (m_gameicons) {
-			delete m_gameicons;
-			m_gameicons = 0;
-		}
 	}
 }
 
@@ -1517,39 +1489,6 @@ void GraphicImpl::screenshot(const char* fname)
    SDL_SaveBMP(m_sdlsurface, fname);
 }
 
-
-/*
-===============
-GraphicImpl::allocate_gameicons
-
-Allocate the pictures used by rendermap()
-===============
-*/
-void GraphicImpl::allocate_gameicons()
-{
-	static const char* roadb_names[3] = {
-		"pics/roadb_green.png",
-		"pics/roadb_yellow.png",
-		"pics/roadb_red.png"
-	};
-	static const char* build_names[5] = {
-		"pics/set_flag.png",
-		"pics/small.png",
-		"pics/medium.png",
-		"pics/big.png",
-		"pics/mine.png"
-	};
-
-	if (m_gameicons)
-		return;
-
-	m_gameicons = new GameIcons;
-
-	for(int i = 0; i < 3; i++)
-		m_gameicons->pics_roadb[i] = g_gr->get_picture(PicMod_Game, roadb_names[i], RGBColor(0,0,255));
-	for(int i = 0; i < 5; i++)
-		m_gameicons->pics_build[i] = g_gr->get_picture(PicMod_Game, build_names[i], RGBColor(0,0,255));
-}
 
 
 /*

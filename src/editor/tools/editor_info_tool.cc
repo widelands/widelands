@@ -39,15 +39,17 @@ Editor_Info_Tool::handle_click()
 show a simple info dialog with infos about this field
 ===========
 */
-int Editor_Info_Tool::handle_click_impl(const Coords* coordinates, Field* f, Map* map, Editor_Interactive* parent) {
+int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive* parent) {
    UIWindow* w = new UIWindow(parent, 30, 30, 400, 200, "Field Information");
    UIMultiline_Textarea* multiline_textarea = new UIMultiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
+
+   Field* f=fc.field;
 
    std::string buf;
    char buf1[1024];
 
    buf += "1) Field Infos\n";
-   sprintf(buf1, " Coordinates: (%i/%i)\n", coordinates->x, coordinates->y); buf+=buf1;
+   sprintf(buf1, " Coordinates: (%i/%i)\n", fc.x, fc.y); buf+=buf1;
    sprintf(buf1, " Height: %i\n", f->get_height()); buf+=buf1;
    buf+=" Caps: ";
    switch((f->get_caps() & BUILDCAPS_SIZEMASK)) {

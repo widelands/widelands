@@ -29,6 +29,7 @@ class BaseImmovable;
 class FileRead;
 class Player;
 class World;
+class Overlay_Manager;
 
 #define WLMF_VERSION 	0x0001
 
@@ -142,6 +143,9 @@ public:
    Map();
    ~Map();
 
+   // For overlays
+   inline Overlay_Manager* get_overlay_manager() { return m_overlay_manager; }
+   
    // For loading
    Map_Loader* get_correct_loader(const char*);
    void cleanup(void);
@@ -151,7 +155,7 @@ public:
 
    void load_graphics();
    void recalc_whole_map();
-
+   void recalc_for_field_area(Coords coords, int radius);
 
 	void set_nrplayers(uint nrplayers);
 
@@ -257,8 +261,8 @@ private:
 
 	ushort		m_pathcycle;
 	Pathfield*	m_pathfields;
+   Overlay_Manager* m_overlay_manager;
 
-	//int load_wlmf(const char*, Game*);
 	void recalc_brightness(FCoords coords);
 	void recalc_fieldcaps_pass1(FCoords coords);
 	void recalc_fieldcaps_pass2(FCoords coords);

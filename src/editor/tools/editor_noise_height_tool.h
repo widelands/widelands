@@ -36,7 +36,7 @@ class Editor_Noise_Height_Tool : public Editor_Tool {
         Editor_Tool(sht,sht) { m_upper_value=MAX_FIELD_HEIGHT/2; m_lower_value=10; m_sht=sht; }
       virtual ~Editor_Noise_Height_Tool() { m_third=m_second=0; } // don't delete this, somone else will care
 
-      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
 
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_noise_height.png"; }
 

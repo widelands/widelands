@@ -38,9 +38,9 @@ This changes the terrain in the given area. It randoms through all selected
 terrains.
 ===========
 */
-int Set_Terrain::set_terrain(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent, bool right, bool down) {
+int Set_Terrain::set_terrain(FCoords& fc, Map* map, Editor_Interactive* parent, bool right, bool down) {
    if(!get_nr_enabled()) return parent->get_fieldsel_radius();
-   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
+   MapRegion mrc(map, fc, parent->get_fieldsel_radius());
    Coords c;
 
    int i, j, max;

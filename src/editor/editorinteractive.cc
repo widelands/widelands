@@ -21,6 +21,7 @@
 #include "interactive_base.h"
 #include "editorinteractive.h"
 #include "keycodes.h"
+#include "overlay_manager.h"
 #include "map.h"
 #include "mapview.h"
 #include "player.h"
@@ -115,7 +116,7 @@ Editor_Interactive::~Editor_Interactive() {
       delete tools.tools.back();
       tools.tools.pop_back();
    }
-   unset_fsel_picture(); // reset default fsel
+   unset_fieldsel_picture(); // reset default fsel
 }
 
 /*
@@ -129,62 +130,10 @@ void Editor_Interactive::start()
 {
    m_maprenderinfo.egbase = m_editor;
 	m_maprenderinfo.visibility = 0;
-	m_maprenderinfo.show_buildhelp = true;
 
-   Interactive_Base::map_changed();
+   map_changed();
+   get_map()->get_overlay_manager()->show_buildhelp(true);
 }
-
-/*
-===============
-Editor_Interactive::recalc_overlay
-
-Recalculate build help and borders for the given field
-===============
-*/
-void Editor_Interactive::recalc_overlay(FCoords fc)
-{
-   if(do_never_recalculate()) return;
-   
-   Map* map = m_maprenderinfo.egbase->get_map();
-
-   // Only do recalcs after maprenderinfo has been setup
-   if (!map)
-      return;
-
-   uchar code = 0;
-   int owner = fc.field->get_owned_by();
-
-   // A border is on every field that is owned by a player and has
-   // neighbouring fields that are not owned by that player
-   for(int dir = 1; dir <= 6; dir++) {
-      FCoords neighb;
-
-      map->get_neighbour(fc, dir, &neighb);
-
-      if (neighb.field->get_owned_by() != owner)
-         code = Overlay_Frontier_Base + owner;
-   }
-
-   int buildcaps=fc.field->get_caps();
-   if(owner) {
-      // Determine the buildhelp icon for that field
-      buildcaps = m_editor->get_player(owner)->get_buildcaps(fc);
-   }
-
-   if (buildcaps & BUILDCAPS_MINE)
-      code = Overlay_Build_Mine;
-   else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
-      code = Overlay_Build_Big;
-   else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
-      code = Overlay_Build_Medium;
-   else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
-      code = Overlay_Build_Small;
-   else if (buildcaps & BUILDCAPS_FLAG)
-      code = Overlay_Build_Flag;
-
-   m_maprenderinfo.overlay_basic[fc.y*map->get_width() + fc.x] = code;
-}
-
 
 /*
 ===========
@@ -224,15 +173,8 @@ the function of the currently selected tool
 */
 void Editor_Interactive::field_clicked() {
    Map* m=get_map();
-   int radius=tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, &m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
-
-   // Some things have changed, map is informed, logic is informed. But overlays may still be wrong. Recalc them
-   MapRegion mr(m, m_maprenderinfo.fieldsel, radius);
-   FCoords c;
-
-   while(mr.next(&c)) {
-      recalc_overlay(c);
-   }
+   FCoords cords(get_fieldsel_pos(), m->get_field(get_fieldsel_pos()));
+   tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, cords, m, this);
 }
 
 /*
@@ -244,7 +186,7 @@ toggles the buildhelp on the map
 */
 void Editor_Interactive::toggle_buildhelp(void)
 {
-   m_maprenderinfo.show_buildhelp = !m_maprenderinfo.show_buildhelp;
+   get_map()->get_overlay_manager()->toggle_buildhelp();
 }
 
 /*
@@ -374,7 +316,7 @@ void Editor_Interactive::select_tool(int n, int which) {
    tools.current_tool_index=n;
    tools.use_tool=which;
 
-   set_fsel_picture(tools.tools[n]->get_fsel(which));
+   set_fieldsel_picture(tools.tools[n]->get_fsel(which));
 }
 
 

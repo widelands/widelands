@@ -52,8 +52,6 @@ class Interactive_Player : public Interactive_Base {
 
 		void field_action();
 
-      void recalc_overlay(FCoords fc) ;
-
 		bool handle_key(bool down, int code, char c);
 
 		inline Game *get_game() { return m_game; }
@@ -72,9 +70,10 @@ class Interactive_Player : public Interactive_Base {
 		int get_build_road_end_dir();
 
 	private:
-		void roadb_add_overlay();
+      void roadb_add_overlay();
 		void roadb_remove_overlay();
 
+		int      m_road_overlay_jobid;
 		Game*		m_game;
 		uchar		m_player_number;
 

@@ -38,8 +38,8 @@ class Editor_Set_Both_Terrain_Tool : public Editor_Tool, public Set_Terrain {
         Editor_Tool(sdt, srt) { m_sdt=sdt; m_srt=srt; }
       virtual ~Editor_Set_Both_Terrain_Tool() { }
 
-      virtual int handle_click_impl(const Coords* c, Field* f, Map* m, Editor_Interactive* e) {
-         return set_terrain(c,f,m,e,true,true);
+      virtual int handle_click_impl(FCoords& fc, Map* m, Editor_Interactive* e) {
+         return set_terrain(fc,m,e,true,true);
       }
 
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_terrain_both.png"; }

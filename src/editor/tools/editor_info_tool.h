@@ -34,7 +34,7 @@ class Editor_Info_Tool : public Editor_Tool {
       Editor_Info_Tool() : Editor_Tool(this,this) { }
       virtual ~Editor_Info_Tool() { }
 
-      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_info.png"; }
 };
 
