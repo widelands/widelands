@@ -23,7 +23,7 @@
 #include "types.h"
 
 // TODO: figure out a way to define these portably
-// Currently supported: i386, PowerPC, Sparc
+// Currently supported: i386, PowerPC, Sparc, AMD64
 #if defined (__ppc__) || defined(__powerpc64__)
 #undef P_LITTLE_ENDIAN
 #define P_BIG_ENDIAN
