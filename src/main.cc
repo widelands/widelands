@@ -218,25 +218,7 @@ void g_main(int argc, char** argv)
                case Fullscreen_Menu_Main::mm_options:
                   {
                      Section *s = g_options.pull_section("global");
-                     Fullscreen_Menu_Options *om = new Fullscreen_Menu_Options(s->get_int("xres", 640), s->get_int("yres", 640), s->get_bool("fullscreen", false), s->get_bool("inputgrab", false));
-                     int code = om->run();
-
-                     if (code == Fullscreen_Menu_Options::om_ok) {
-                        Section *s = g_options.pull_section("global");
-
-                        s->set_int("xres", om->get_xres());
-                        s->set_int("yres", om->get_yres());
-                        s->set_bool("fullscreen", om->get_fullscreen());
-                        s->set_bool("inputgrab", om->get_inputgrab());
-
-								switch(om->get_gfxsys()) {
-								case GFXSYS_SW16: s->set_string("gfxsys", "sw16"); break;
-								case GFXSYS_SW32: s->set_string("gfxsys", "sw32"); break;
-                        default: wexception("Unknown graphic system is set!!");
-								}
-
-                        Sys_SetInputGrab(om->get_inputgrab());
-                     }
+                     Options_Ctrl *om = new Options_Ctrl(s);
                      delete om;
                   }
                   break;
