@@ -877,18 +877,10 @@ bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
 	else
 	{
 		uint res = position.field->get_resources();
-		World::Resource wres;
-		std::string immname;
-
-		switch(res & Resource_TypeMask) {
-		default:
-		case 0: wres = World::Resource_None; break;
-		case Resource_Coal: wres = World::Resource_Coal; break;
-		case Resource_Iron: wres = World::Resource_Iron; break;
-		case Resource_Gold: wres = World::Resource_Gold; break;
-		}
-
-		immname = g->get_map()->get_world()->get_resource(wres)->get_indicator(res & Resource_AmountMask);
+      uint amount = position.field->get_resources_amount();
+		
+      std::string immname;
+		immname = g->get_map()->get_world()->get_resource(res)->get_indicator(amount);
 
 		molog("  Resource: %02X -> plant indicator '%s'\n", res, immname.c_str());
 

@@ -91,15 +91,6 @@ enum Roads {
 	Road_SouthWest = 4,
 };
 
-enum {
-	Resource_Coal		= (1 << 4),
-	Resource_Iron		= (2 << 4),
-	Resource_Gold		= (3 << 4),
-	Resource_TypeMask		= 0xF0,
-
-	Resource_AmountMask	= 0x0F,
-};
-
 class Terrain_Descr;
 class Bob;
 class BaseImmovable;
@@ -111,11 +102,12 @@ class Field {
 
 private:
    uchar height;
-	char brightness;
+	char   brightness;
 	uchar caps; // what can we build here, who can walk here [8 bits used]
 	uchar owned_by; // 0 = neutral; otherwise: player number
 	uchar roads; // are any roads on this field? [6 bits used]
-	uchar resources;
+	uchar m_resources;
+   uchar m_res_amount;
 	Terrain_Descr *terr, *terd;
 	Bob* bobs; // linked list, see Bob::m_linknext
 	BaseImmovable* immovable;
@@ -145,8 +137,9 @@ public:
 		roads |= type << dir;
 	}
 
-	inline uchar get_resources() const { return resources; }
-	inline void set_resources(uchar res) { resources = res; }
+	inline uchar get_resources() const { return m_resources; }
+   inline uchar get_resources_amount() const { return m_res_amount; }
+	inline void set_resources(uchar res, uchar amount) { m_resources = res; m_res_amount=amount; }
 
    // note: you must reset this field's + neighbor's brightness when you change the height
    // Map's change_height does this

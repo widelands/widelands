@@ -261,10 +261,16 @@ void World::parse_resources()
 	{
 		Profile prof(fname);
 
-		m_resources[Resource_None].parse(prof.pull_section("none"));
-		m_resources[Resource_Coal].parse(prof.pull_section("coal"));
-		m_resources[Resource_Iron].parse(prof.pull_section("iron"));
-		m_resources[Resource_Gold].parse(prof.pull_section("gold"));
+      Resource_Descr* descr=new Resource_Descr();
+      Section* section=prof.get_safe_section("none");
+      descr->parse(section);
+      m_resources.add(descr);
+      
+      while((section=prof.get_next_section(0))) {
+         descr=new Resource_Descr();
+         descr->parse(section);
+         m_resources.add(descr);
+      }
 	}
 	catch(std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());

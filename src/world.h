@@ -30,6 +30,7 @@ class Editor_Game_Base;
 #define WORLD_NAME_LEN 30
 #define WORLD_AUTHOR_LEN 30
 #define WORLD_DESCR_LEN 1024
+
 struct World_Descr_Header {
    char name[WORLD_NAME_LEN];
    char author[WORLD_AUTHOR_LEN];
@@ -43,7 +44,7 @@ public:
 
 	void parse(Section* s);
 
-	std::string get_name() const { return m_name; }
+   const char* get_name() const { return m_name.c_str(); }
 	std::string get_indicator(uint amount) const;
 
 private:
@@ -95,17 +96,6 @@ class World
          ERR_WRONGVERSION
       };
 
-      // TODO: Resource names should not be 
-      // hardcoded!!!!!
-		enum Resource {
-			Resource_None = 0,
-			Resource_Coal = 1,
-			Resource_Iron = 2,
-			Resource_Gold = 3,
-
-			Num_Resources = 4
-		};
-
       World(const char* name);
 		~World();
       
@@ -130,8 +120,9 @@ class World
       inline int get_nr_immovables(void) { return immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
 
-		const Resource_Descr* get_resource(Resource res) const
-		{ assert(res < Num_Resources); return &m_resources[res]; }
+      inline uchar get_resource(const char* l) { return m_resources.get_index(l); }
+		inline Resource_Descr* get_resource(int res) 
+		{ assert(res < m_resources.get_nitems()); return m_resources.get(res); }
 
    private:
 		std::string				m_basedir;	// base directory, where the main conf file resides
@@ -140,8 +131,7 @@ class World
       Descr_Maintainer<Bob_Descr> bobs;
 		Descr_Maintainer<Immovable_Descr> immovables;
       Descr_Maintainer<Terrain_Descr> ters;
-
-		Resource_Descr	m_resources[Num_Resources];
+		Descr_Maintainer<Resource_Descr>	m_resources;
 
       // Functions
       void parse_root_conf(const char *name);

@@ -29,7 +29,7 @@
 #include "util.h"
 #include "wexception.h"
 #include "worker.h"
-
+#include "world.h"
 
 static const size_t STATISTICS_VECTOR_LENGTH = 10;
 
@@ -81,12 +81,6 @@ struct ProductionAction {
 		actMine,    // iparam1 = mineXXX type to mine for
 		actCall,		// sparam1 = name of sub-program
 		actSet,		// iparam1 = flags to set, iparam2 = flags to unset
-	};
-
-	enum {
-		mineCoal,
-		mineGold,
-		mineIron
 	};
 
 	enum {
@@ -249,16 +243,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 				throw wexception("Usage: mine <resource>");
 
 			act.type = ProductionAction::actMine;
-
-			if (cmd[1] == "coal")
-				act.iparam1 = ProductionAction::mineCoal;
-			else if (cmd[1] == "gold")
-				act.iparam1 = ProductionAction::mineGold;
-			else if (cmd[1] == "iron")
-				act.iparam1 = ProductionAction::mineIron;
-			else
-				throw wexception("Resource must be gold, coal or iron (not '%s')",
-					cmd[1].c_str());
+			act.sparam1=cmd[1]; // what to mine
 		} else if (cmd[0] == "call") {
 			if (cmd.size() != 2)
 				throw wexception("Usage: call <program>");
@@ -849,22 +834,12 @@ void ProductionSite::program_act(Game* g)
 			MapRegion mr;
 			uchar res;
 
-			molog("  Mine %u\n", action->iparam1);
+			molog("  Mine '%s'", action->sparam1.c_str());
 
-			switch(action->iparam1) {
-			case ProductionAction::mineCoal:
-				res = Resource_Coal;
-				break;
-			case ProductionAction::mineGold:
-				res = Resource_Gold;
-				break;
-			case ProductionAction::mineIron:
-				res = Resource_Iron;
-				break;
-			default:
-				throw wexception("ProductionAction::actMine: bad iparam = %u",
-					action->iparam1);
-			}
+         res=map->get_world()->get_resource(action->sparam1.c_str()); 
+         if(static_cast<char>(res)==-1)
+            throw wexception("ProductionAction::actMine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
+                  " with world!!\n",  action->sparam1.c_str());
 
 			// Select one of the fields randomly
 			uint totalres = 0;
@@ -876,19 +851,13 @@ void ProductionSite::program_act(Game* g)
 
 			while((f = mr.next())) {
 				uchar fres = f->get_resources();
-				uint amount;
+				uint amount = f->get_resources_amount();
 
-				if ((fres & Resource_TypeMask) != res)
+            // In the future, we might want to support amount = 0 for
+            // fields that can produce an infinite amount of resources.
+            // Rather -1 or something similar. not 0
+				if (fres != res)
 					amount = 0;
-				else
-				{
-					amount = fres & Resource_AmountMask;
-
-					// In the future, we might want to support amount = 0 for
-					// fields that can produce an infinite amount of resources.
-					if (amount == 0)
-						f->set_resources(0);
-				}
 
 				totalres += amount;
 				totalchance += 8 * amount;
@@ -918,12 +887,10 @@ void ProductionSite::program_act(Game* g)
 
 			while((f = mr.next())) {
 				uchar fres = f->get_resources();
-				uint amount;
+				uint amount = f->get_resources_amount();;
 
-				if ((fres & Resource_TypeMask) != res)
+				if (fres != res)
 					amount = 0;
-				else
-					amount = fres & Resource_AmountMask;
 
 				pick -= 8*amount;
 				if (pick < 0) {
@@ -931,12 +898,7 @@ void ProductionSite::program_act(Game* g)
 
 					amount--;
 
-					if (!amount)
-						fres = 0;
-					else
-						fres = res | amount;
-
-					f->set_resources(fres);
+					f->set_resources(res,amount);
 					break;
 				}
 			}
