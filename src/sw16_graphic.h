@@ -276,6 +276,8 @@ private:
 	typedef std::map<std::string, uint> picmap_t;
 
 	SDL_Surface*			m_sdlsurface;
+	int                  m_screen_pixels_size_in_bytes;
+   bool                 m_lock_sdl_surface;
 	Bitmap					m_screen;
 	RenderTargetImpl*		m_rendertarget;
    SDL_Rect					m_update_rects[MAX_RECTS];

@@ -946,10 +946,18 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 	m_screen.pixels = (uint*)malloc(w*h*sizeof(uint));
 	m_screen.pitch = w;
 #else
-	m_screen.pixels = (uint*)m_sdlsurface->pixels;
-	m_screen.pitch = m_sdlsurface->pitch / sizeof(uint);
+   m_lock_sdl_surface=SDL_MUSTLOCK(m_sdlsurface);
+   m_screen.pitch = m_sdlsurface->pitch / sizeof(uint);
+   if(m_lock_sdl_surface) {
+      m_screen.pixels = (uint*)malloc(w*h*sizeof(uint));
+   } else {
+      m_screen.pixels = (uint*)m_sdlsurface->pixels;
+   }
 #endif
-	m_screen.w = w;
+	
+      
+   m_screen_pixels_size_in_bytes = w*h*sizeof(uint);
+   m_screen.w = w;
 	m_screen.h = h;
 
 	m_rendertarget = new RenderTargetImpl(&m_screen);
@@ -965,9 +973,12 @@ Free the surface
 GraphicImpl::~GraphicImpl()
 {
 #ifdef OPENGL_MODE
-	free(m_screen.pixels);
+   free(m_screen.pixels);
+#else
+   if(m_lock_sdl_surface) 
+      free(m_screen.pixels);
 #endif
-
+   
 	flush(0);
 
 	delete m_rendertarget;
@@ -1101,7 +1112,13 @@ void GraphicImpl::refresh()
 #else
 //	if (m_update_fullscreen)
 		//SDL_UpdateRect(m_sdlsurface, 0, 0, 0, 0);
-		SDL_Flip(m_sdlsurface);
+   if(m_lock_sdl_surface) { 
+      SDL_LockSurface(m_sdlsurface);
+      memcpy(m_sdlsurface->pixels, m_screen.pixels, m_screen_pixels_size_in_bytes);
+      SDL_UnlockSurface(m_sdlsurface);
+   } 
+
+   SDL_Flip(m_sdlsurface);
 //	else
 //		{
 //		SDL_UpdateRects(m_sdlsurface, m_nr_update_rects, m_update_rects);

@@ -287,7 +287,9 @@ private:
 
 	SDL_Surface*			m_sdlsurface;
 	Bitmap					m_screen;
-	RenderTargetImpl*		m_rendertarget;
+	int                  m_screen_pixels_size_in_bytes;
+   bool                 m_lock_sdl_surface;
+   RenderTargetImpl*		m_rendertarget;
    SDL_Rect					m_update_rects[MAX_RECTS];
 	int						m_nr_update_rects;
 	bool						m_update_fullscreen;

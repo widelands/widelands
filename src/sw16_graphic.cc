@@ -914,11 +914,16 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 
 	SDL_WM_SetCaption("Widelands " VERSION, "Widelands");
 
-	m_screen.pixels = (ushort*)m_sdlsurface->pixels;
 	m_screen.w = m_sdlsurface->w;
 	m_screen.h = m_sdlsurface->h;
 	m_screen.pitch = m_sdlsurface->pitch / sizeof(ushort);
-
+   m_screen_pixels_size_in_bytes=w*h*sizeof(ushort);
+   m_lock_sdl_surface=SDL_MUSTLOCK(m_sdlsurface);
+   if(m_lock_sdl_surface) {
+      m_screen.pixels = (ushort*)malloc(w*h*sizeof(ushort));
+   } else {
+      m_screen.pixels = (ushort*)m_sdlsurface->pixels;
+   }
 	m_rendertarget = new RenderTargetImpl(&m_screen);
 }
 
@@ -931,7 +936,10 @@ Free the surface
 */
 GraphicImpl::~GraphicImpl()
 {
-	flush(0);
+	if(m_lock_sdl_surface)
+      free(m_screen.pixels);
+
+   flush(0);
 
 	delete m_rendertarget;
 	SDL_FreeSurface(m_sdlsurface);
@@ -1025,7 +1033,13 @@ Bring the screen uptodate.
 void GraphicImpl::refresh()
 {
 //	if (m_update_fullscreen)
-		SDL_UpdateRect(m_sdlsurface, 0, 0, 0, 0);
+   if(m_lock_sdl_surface) { 
+      SDL_LockSurface(m_sdlsurface);
+      memcpy(m_sdlsurface->pixels, m_screen.pixels, m_screen_pixels_size_in_bytes);
+      SDL_UnlockSurface(m_sdlsurface);
+   } 
+
+   SDL_UpdateRect(m_sdlsurface, 0, 0, 0, 0);
 //	else
 //		{
 //		SDL_UpdateRects(m_sdlsurface, m_nr_update_rects, m_update_rects);
