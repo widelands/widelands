@@ -1596,6 +1596,7 @@ void Road::presplit(Editor_Game_Base *g, Coords split)
 	unmark_map(g);
 }
 
+
 /*
 ===============
 Road::postsplit
@@ -1645,31 +1646,42 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 	newroad->m_flags[FlagEnd] = oldend;
 	newroad->set_path(g, secondpath);
 
-	// Reassign carrier(s)
+	// Find workers on this road that need to be reassigned
 	// The algorithm is pretty simplistic, and has a bias towards keeping
-	// the carrier around; there's obviously nothing wrong with that.
+	// the worker around; there's obviously nothing wrong with that.
 	Carrier *carrier = (Carrier *)m_carrier.get(g);
+	const std::vector<Worker*> workers = get_workers();
+	std::vector<Worker*> reassigned_workers;
 
-	if (carrier) {
-		int index = path.get_index(carrier->get_position());
+	for(std::vector<Worker*>::const_iterator it = workers.begin(); it != workers.end(); ++it) {
+		Worker* w = *it;
+		int index = path.get_index(w->get_position());
+
+		molog("Split: check %u -> index %i\n", w->get_serial(), index);
 
 		if (index < 0)
 		{
-			// Reassign the carrier. Note that the final steps of reassigning
-			// are done in newroad->init()
-			m_carrier = 0;
-			newroad->m_carrier = carrier;
+			reassigned_workers.push_back(w);
+
+			if (carrier == w) {
+				// Reassign the carrier. Note that the final steps of reassigning
+				// are done in newroad->init()
+				m_carrier = 0;
+				newroad->m_carrier = carrier;
+			}
 		}
-		else
-		{
-			// Inform the carrier that something's going on, so that it can
-			// e.g. adjust walking paths
-			carrier->update_task_road(g);
-		}
+
+		// Cause a worker update in any case
+		w->send_signal(g, "road");
 	}
 
 	// Initialize the new road
 	newroad->init(g);
+
+	// Actually reassign workers after the new road has initialized,
+	// so that the reassignment is safe
+	for(std::vector<Worker*>::const_iterator it = reassigned_workers.begin(); it != reassigned_workers.end(); ++it)
+		(*it)->set_location(newroad);
 
 	// Request a new carrier for this road if necessary
 	// This must be done _after_ the new road initializes, otherwise request

@@ -171,6 +171,8 @@ public:
 	virtual void add_worker(Worker *w);
 	virtual void remove_worker(Worker *w);
 
+	const std::vector<Worker*>& get_workers() const { return m_workers; }
+
 protected:
 	void set_owner(Player *owner);
 

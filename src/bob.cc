@@ -740,7 +740,7 @@ void Bob::movepath_update(Game* g, State* state)
 	// We ignore signals when they arrive, but interrupt as soon as possible,
 	// i.e. when the next step has finished
 	if (get_signal().size()) {
-		molog("TASK_MOVEPATH: stop due to signal\n");
+		molog("[movepath]: Interrupted by signal '%s'.\n", get_signal().c_str());
 		pop_task(g);
 		return;
 	}
@@ -755,7 +755,7 @@ void Bob::movepath_update(Game* g, State* state)
 
 	int tdelta = start_walk(g, (WalkingDir)dir, state->diranims->get_animation(dir));
 	if (tdelta < 0) {
-		molog("TASK_MOVEPATH: can't walk\n");
+		molog("[movepath]: Can't walk.\n");
 		set_signal("fail"); // failure to reach goal
 		pop_task(g);
 		return;

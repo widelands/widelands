@@ -450,6 +450,9 @@ void Worker::set_location(PlayerImmovable *location)
 {
 	PlayerImmovable *oldlocation = get_location(get_owner()->get_game());
 
+	if (oldlocation == location)
+		return;
+
 	if (oldlocation)
 	{
 		// Note: even though we have an oldlocation, m_economy may be zero
@@ -760,7 +763,7 @@ void Worker::request_signal(Game* g, State* state)
 	// The caller requested a route update, or the previously calulcated route
 	// failed.
 	// We will recalculate the route on the next update().
-	if (signal == "update" || signal == "fail") {
+	if (signal == "update" || signal == "road" || signal == "fail") {
 		molog("[request]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 		set_signal("");
@@ -2077,7 +2080,7 @@ void Worker::route_update(Game* g, State* state)
 		if (nextstep->get_type() == FLAG) {
 			Road* road = ((Flag*)location)->get_road((Flag*)nextstep);
 
-			molog("[route]: move to next flag\n");
+			molog("[route]: move to next flag via road %u\n", road->get_serial());
 
 			Path path(road->get_path());
 
@@ -2119,6 +2122,9 @@ void Worker::route_update(Game* g, State* state)
 				index = path.get_nsteps();
 			else
 				index = -1;
+
+			molog("[route]: on road %u, to flag %u, index is %i\n", road->get_serial(),
+							nextstep->get_serial(), index);
 
 			if (index >= 0)
 			{
@@ -2162,7 +2168,7 @@ void Worker::route_mask(Game* g, State* state)
 	//molog("[route]: Filter signal '%s'\n", signal.c_str());
 
 	// 'location' and wakeup are allowed to get through
-	if (signal == "location" || signal == "wakeup")
+	if (signal == "road" || signal == "location" || signal == "wakeup")
 		return;
 
 	state->svar1 = signal; // delay the signal
@@ -2427,7 +2433,7 @@ Carrier::~Carrier()
 
 ROAD task
 
-Signal "update" on road split.
+Signal "road" on road split.
 Signal "ware" when a ware has arrived.
 
 ==============================
@@ -2470,7 +2476,7 @@ Called by Road code when the road is split.
 */
 void Carrier::update_task_road(Game* g)
 {
-	send_signal(g, "update");
+	send_signal(g, "road");
 }
 
 
@@ -2533,7 +2539,7 @@ void Carrier::road_signal(Game* g, State* state)
 {
 	std::string signal = get_signal();
 
-	if (signal == "update" || signal == "ware") {
+	if (signal == "road" || signal == "ware") {
 		set_signal(""); // update() will do the rest
 		schedule_act(g, 10);
 		return;
@@ -2727,7 +2733,7 @@ void Carrier::transport_signal(Game* g, State* state)
 {
 	std::string signal = get_signal();
 
-	if (signal == "update") {
+	if (signal == "road") {
 		set_signal("");
 		schedule_act(g, 10);
 		return;
