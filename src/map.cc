@@ -166,6 +166,10 @@ int Map::load_wlmf(const char* file) {
 					 }
 		  }
 
+		for (y=0; y<hd.height; y++)
+			for (int x=0; x<hd.width; x++)
+				get_field(x,y)->set_normal;
+
 
 		  return RET_OK;
 }

@@ -20,9 +20,144 @@
 #include "graphic.h"
 #include <string.h>
 
+// wireframe or filled triangles?
+#define FILL_TRIANGLES
+#define LIGHT_FACTOR		50
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace Graph {
+namespace Graph
+{
+	// bei mir gibt es diese funktion auch im header 'Xutility'
+	// den header gibts aber glaub ich beim linux nicht
+	// egal, inline kostet nichts
+	// florian
+	template <typename T> inline void swap(T& a, T& b)
+	{
+		T temp = a;
+		a = b;
+		b = temp;
+	}
+
+	/* int make_triangle_lines(Vector* points, int* starts, int* ends)
+	 * fills arrays with horizontal start- and end-points of a triangle
+	 * returns number of lines written to the arrays
+	 *
+	 * points are expected to be sorted top-down
+	 * in comments, points 0 1 2 will be 'A' 'B' 'C', the opposite edge for
+	 * point 'A' will be 'a' etc as common in math, but: the points ABC are
+	 * not always labeled in counterclockwise order (as it would be in math),
+	 * they are labeled top-down.
+	 */
+	inline int make_triangle_lines(Point* points, int* starts, int* ends)
+	{
+		int ydiff1 = points[1].y - points[0].y;
+		int ydiff2 = points[2].y - points[0].y;
+		int ydiff3 = points[2].y - points[1].y;
+		int xdiff1 = points[1].x - points[0].x;
+		int xdiff2 = points[2].x - points[0].x;
+		int xdiff3 = points[2].x - points[1].x;
+
+		if (!ydiff2)
+			// triangle has height 0
+			return 0;
+
+		// calculate x for line b at height of point B
+		int midx = points[0].x + (xdiff2 * ydiff1) / ydiff2;
+		// is B left from b?
+		if (points[1].x < midx)
+			// arrays have to be swapped
+			swap<int*>(starts, ends);
+		
+		int y;
+		// upper part of triangle
+		for (y=0; y<ydiff1; y++)
+		{
+			// calculate x for line b at height y
+			starts[y] = points[0].x + (xdiff2 * y) / ydiff2;
+			// calculate x for line c at height y
+			ends[y] = points[0].x + (xdiff1 * y) / ydiff1;
+		}
+		// lower part
+		for (y=0; y<ydiff3; y++)
+		{
+			// calculate x for line b at height y
+			starts[ydiff1 + y] = points[0].x + (xdiff2 * (y + ydiff1)) / ydiff2;
+			// calculate x for line a at height y
+			ends[ydiff1 + y] = points[1].x + (xdiff3 * y) / ydiff3;
+		}
+		return ydiff2;
+	}
+
+#define V3	0.57735
+	void Graphic::render_triangle(Point* points, Vector* normals, Pic* texture)
+	{
+		static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
+
+		if (points[0].y > points[1].y)
+			swap<Point>(points[0], points[1]);
+		if (points[1].y > points[2].y)
+			swap<Point>(points[1], points[2]);
+		if (points[0].y > points[1].y)
+			swap<Point>(points[0], points[1]);
+
+		// flat shading
+		Vector normal = normals[0] + normals[1] + normals[2];
+		normal.normalize();
+		float b = normal * sun;
+		int lfactor = (int)(b * LIGHT_FACTOR);
+
+		int starts[200];		// FEAR!!
+		int ends[200];			// don't use to high triangles
+
+		int ymax = make_triangle_lines(points, starts, ends);
+		int ystart = points[0].y < 0 ? -points[0].y : 0;
+		ymax = ymax + points[0].y <= yres ? ymax : yres-points[0].y-1;
+		for (int y=ystart; y<ymax; y++)
+		{
+			if (starts[y] >= xres)
+				continue;
+			if (ends[y] < 0)
+				continue;
+
+			int start = starts[y] < 0 ? 0 : starts[y];
+			int end = ends[y] < xres ? ends[y] : xres-1;
+#ifdef FILL_TRIANGLES
+			for (int x=start; x<=end; x++)
+			{
+//				pixels[(points[0].y + y)*xres + x] = pack_rgb(clr, clr, clr);
+				uint p = (y % texture->h)*texture->w + (x-starts[y])%texture->w;
+//				uint p = ((points[0].y + y) % texture->h)*texture->w + x%texture->w;
+				pixels[(points[0].y + y)*xres + x] = bright_up_clr2(texture->pixels[p], -lfactor);
+			}
+#else
+			if (y == 0 || y == ymax-1)
+				for (int x=start; x<=end; x++)
+				{
+					uint p = (y % texture->h)*texture->w + (x-starts[y])%texture->w;
+					pixels[(points[0].y + y)*xres + x] = texture->pixels[p];
+				}
+			else
+			{
+					uint p = (y % texture->h)*texture->w + (start-starts[y])%texture->w;
+					pixels[(points[0].y + y)*xres + start] = texture->pixels[p];
+					p = (y % texture->h)*texture->w + (end-starts[y])%texture->w;
+					pixels[(points[0].y + y)*xres + end] = texture->pixels[p];
+			}
+#endif
+
+		}
+/*		for (int i=0; i<20; i++)
+		{
+			int x = points[0].x + i * normals[0].x;
+			int y = points[0].y + i * (normals[0].y - normals[0].z);
+			if (y < 0 || y >= yres)
+				continue;
+			if (x < 0 || x >= xres)
+				continue;
+			pixels[y*xres+x] = 0xF81F;
+		}*/
+	}
 
 		  /** class Graphic
 			*
@@ -88,15 +223,11 @@ namespace Graph {
 								SDL_FreeSurface(sc);
 					 sc=0;
 
-#if defined(WIN32) && defined(_DEBUG)
-					 sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
-#else
 					 if(m==MODE_FS) {
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE | SDL_FULLSCREEN);
 					 } else {
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
 					 }
-#endif
 					 mode=m;
 					 xres=x; 
 					 yres=y;

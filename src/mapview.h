@@ -31,34 +31,23 @@
  * Depends: class Map
  * 			g_gr
  */
-class Map_View {
-		  Map_View(const Map_View&);
-		  Map_View& operator=(const Map_View&);
+class Map_View
+{
+	Map_View(const Map_View&);
+	Map_View& operator=(const Map_View&);
+public:
+	Map_View(Map*);
+	~Map_View(void);
 
-		  public:
-					 Map_View(Map*);
-					 ~Map_View(void);
-
-					 // Function to set the viewpoint
-					 void set_viewpoint(uint,  uint); 
-					
-											 
-					 void set_rel_viewpoint(int x, int y) { set_viewpoint(vpx+x,  vpy+y); }
-
-					 void draw(void);
-
-		  private:
-					 struct __starts {
-								long edge;
-								long h;
-					 } g_starts[700], g_stops[700];
-
-					 Map* map;
-					 int vpx, vpy;
-					 void draw_field(Field*);
-					 void draw_polygon(Field*, Field*, Field*, Pic*);
-					 void get_starts(const Field*, const Field*, const Field*, int, int);
-					 void scanconv(const Field*, const Field*, __starts*, int ystart);
+	// Function to set the viewpoint
+	void set_viewpoint(uint,  uint); 										 
+	void set_rel_viewpoint(int x, int y) { set_viewpoint(vpx+x,  vpy+y); }
+	void draw(void);
+private:
+	Map* map;
+	int vpx, vpy;
+	void draw_field(Field*);
+	void draw_polygon(Field*, Field*, Field*, Pic*);
 };
 
 

@@ -36,7 +36,11 @@
 
 #include "world.h"
 
+#ifdef _MSC_VER
+#pragma pack(push, 1)
+#else
 #pragma pack(1)
+#endif
 
 /** struct Map_Header
  *
@@ -90,7 +94,11 @@ struct FieldDescr {
 		  ushort bob_nr;
 } /* size: 16 bytes */ ;	
 
+#ifdef _MSC_VER
+#pragma pack(pop)
+#else
 #pragma pack() 
+#endif
 
 class Building;
 class Creature;
@@ -154,6 +162,13 @@ class Field {
 					 inline Pic* get_texr(void) { return texr; }
 					 inline Pic* get_texd(void) { return texd; }
 
+					 inline Vector get_normal()
+					 {
+						 return normal;
+					 }
+
+					 void set_normal();
+
 					 // ----- for class creature
 					 void remove_creature(Creature*) {};
 					 // -----
@@ -167,6 +182,7 @@ class Field {
 					 int	xpix, ypix;
 					 uchar height;
 					 Pic *texr, *texd;
+					 Vector normal;
 };
 
 /** class Map

@@ -25,28 +25,7 @@
 #include <string.h>
 #endif
 
-// TEMP
-inline uint bright_up_clr2(const uint clr, const int factor)
-{
-	if (factor == 0)
-		return clr;
-	int r = ((clr << 3) >> 11) & 0xFF;
-	int g = ((clr << 2) >>  5) & 0xFF;
-	int b =  (clr << 3)        & 0xFF;
-	if (factor > 0)
-	{
-		r = (r+factor) > 255 ? 255 : r+factor;
-		g = (g+factor) > 255 ? 255 : g+factor;
-		b = (b+factor) > 255 ? 255 : b+factor;
-	}
-	else
-	{
-		r = (r+factor) < 0 ? 0 : r+factor;
-		g = (g+factor) < 0 ? 0 : g+factor;
-		b = (b+factor) < 0 ? 0 : b+factor;
-	}
-	return Graph::pack_rgb(r, g, b);
-}
+#define PIXEL(x, y)		pixels[(y)*w+(x)]
 
 namespace Graph
 {
@@ -56,13 +35,13 @@ namespace Graph
 		rh += ry;
 		for (uint x=rx+1; x<rw-1; x++)
 		{
-			pixels[w*ry + x] = color;
-			pixels[w*(rh-1) + x] = color;
+			PIXEL(x, ry) = color;
+			PIXEL(x, rh-1) = color;
 		}
 		for (uint y=ry; y<rh; y++)
 		{
-			pixels[y*w + rx] = color;
-			pixels[y*w + rw-1] = color;
+			PIXEL(rx, y) = color;
+			PIXEL(rw-1, y) = color;
 		}
 	}
 
@@ -72,9 +51,9 @@ namespace Graph
 		rh += ry;
 		for (uint y=ry; y<rh; y++)
 		{
-			set_pixel(rx, y, color);
-			for (uint x=rx+1; x<rw; x++)
-				set_npixel((ushort)color);
+			uint p = y * w + rx;
+			for (uint x=rx; x<rw; x++)
+				pixels[p++]= color;
 		}
 	}
 
@@ -86,7 +65,7 @@ namespace Graph
 		{
 			uint p = y * w + rx;
 			for (uint x=rx; x<rw; x++)
-				pixels[p++] = bright_up_clr(pixels[p], factor);
+				pixels[p++]= bright_up_clr(pixels[p], factor);
 		}
 	}
 

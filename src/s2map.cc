@@ -676,6 +676,10 @@ int Map::load_s2mf(const char* filen) {
 		  delete buffer; 
 		  buffer=0;
 
+		for(y=0; y<hd.height; y++)
+			for(x=0; x<hd.width; x++)
+				get_field(x,y)->set_normal();
+
 		  
 /*		  for(y=0; y<hd.height; y++) {
 					 for(x=0; x<hd.width; x++) {
