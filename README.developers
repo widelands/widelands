@@ -39,3 +39,50 @@ the game logic.
 Similar constructs are affected as well. Basically, never use pointer
 arithmetics for decision-making.
 
+A word about triggers and events
+--------------------------------
+Here i'll talk very shortly about triggers and events and how they are implemented.
+
+Triggers are exactly what they sound like: Simple triggers (switches) which can 
+either be on or off. Triggers are checked periodically in the cmdqueue if they
+are set or not. The cmdqueue makes sure that each trigger is checked at least
+once every 10 seconds. So this is the problem with the triggers. For example,
+you have set a Time Trigger, which should go to on after 20 seconds. Now, it
+really gets set after 20-30 seconds; same: it could take up to 10 seconds before
+an event occurs that should be tackled by one trigger; even worse: it could take
+up to 10*number_of_triggers_the_event_needs_to_be_set. 
+
+If you want to implement a new trigger, here is what to do. First, make sure
+that: 
+  1) if your trigger sets/unsets itself in the check function, make sure that it stays
+     set/unset, even if it's condition changes again until it is reset by some
+     event. Than it behave on a check like expected
+  2) if your trigger triggers only once through the whole game, make sure that
+     your reset function assert(0)s and that it's check function never ever
+     changes the state again after this first time.
+
+Ok, now the steps to implement a new Trigger:
+  1) Add its id in src/trigger_ids.h (TRIGGER_<YOUR_TRIGGER_NAME>)
+  2) Add its description, name and id into TRIGGER_DESCRIPTIONS[] in
+      src/trigger_factor.h, update also the functions ther
+  3) Derive a class Trigger_<Your_Trigger_Name> from Trigger (own header and
+     source file, trigger_<your_name_here>.[h|cc]
+  4) Create the Menu class as a modal window (no move, no other actions allowed
+     while open) in
+        src/editor/ui_menus/trigger_<your_trigger_name_here>_option_menu.[cc|h]
+And you're done. Orientate yourself while implementing on the other triggers,
+especially the file read/write functions have to write certain data in certain
+order (especially ID and TRIGGER_VERSION of your trigger)
+
+Events are also what they sound like: Something happens in the game. Events can
+be nearly everything you can imagine (and programm 8) ): change of terrain, new
+land conquered, unhide areas, warp some wares/workers, let the computer attack
+or show a message box to the interactive user are just some possibilitys.
+Events depend on triggers, each event can have one or more triggers attached to
+it, whenever a trigger gets set, all events look at their triggers, and if all
+are in the state the event needs, the event runs itself. If the event can't rerun
+again (a one timer), it deletes itself and frees all triggers that he needed, 
+if the triggers aren't referenced anymore, they also get deleted.
+
+What to do to implement a Trigger:
+ TODO

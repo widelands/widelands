@@ -22,6 +22,8 @@
 #include "instances.h"
 #include "player.h"
 #include "worker.h"
+#include "trigger.h"
+#include "error.h"
 
 //
 // class Cmd_Queue
@@ -136,6 +138,43 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		(*fn)(m_game, c->arg2, c->arg3);
 		break;
 	}
+
+   case CMD_CHECK_TRIGGER:
+   {
+      int trigger_id=c->arg1+1;
+      log("Trigger: looking if check is needed for trigger %i\n", trigger_id);
+      if(trigger_id>= m_game->get_map()->get_number_of_triggers()) {
+         // either we swapped around the end of all triggers
+         // if so, restart. if there are no triggers at all,
+         // requeue in about a 10 seconds to check if this state has changed
+         // (a new trigger could be registered) (this should only happen at the beginning
+         // of the game and should not harm at all, and 30seconds means nearly no CPU time
+         // for non trigger games)
+         if(m_game->get_map()->get_number_of_triggers()) {
+            trigger_id=0;
+         } else {
+            queue(m_game->get_gametime() + 30000, SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, -1, 0, 0);
+            break;
+         }
+      }
+      Trigger* trig=m_game->get_map()->get_trigger(trigger_id); 
+      assert(trig);
+      log("Trigger %s is going to get checked!\n", trig->get_name()); 
+      bool trig_state=trig->is_set();
+      trig->check_set_conditions(m_game);
+      if(trig->is_set()!=trig_state) { 
+         log("Trigger has changed state: %s gone to %i\n", trig->get_name(), trig->is_set());
+         if(trig->is_one_time_trigger()) 
+            m_game->get_map()->unregister_trigger(trig);
+         else {
+            // TEMP: reset the trigger. this will be done by events
+            trig->reset_trigger(m_game);
+         }
+      }
+      // recheck next trigger in the time that all triggers get checked at least once ever 10 seconds
+      queue(m_game->get_gametime() + 10000/m_game->get_map()->get_number_of_triggers(), SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, trigger_id, 0, 0);
+      break;
+   }
 
 	case CMD_BUILD_FLAG:
 	{

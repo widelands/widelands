@@ -32,6 +32,8 @@
 #define SENDER_PLAYER6 6
 #define SENDER_PLAYER7 7
 #define SENDER_PLAYER8 8
+#define SENDER_CMDQUEUE 100   // The Cmdqueue sends itself some action request
+
 
 // ---------------------- BEGINN OF CMDS ----------------------------------
 enum {
@@ -40,7 +42,7 @@ enum {
 	CMD_DESTROY,		// arg1 = serialnum
 	CMD_INCORPORATE,	// arg1 = serialnum (Worker)
 	CMD_CALL,			// arg1 = fnptr (Cmd_Queue::call_fn), arg2, arg3 = args for function
-
+   CMD_CHECK_TRIGGER,// arg1 = last checked trigger number or -1 if no trigger was ever checked
 	// Begin commands sent by players
 	CMD_BUILD_FLAG,	// arg1 = x, arg2 = y
 	CMD_BUILD_ROAD,	// arg1 = Path*

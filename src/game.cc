@@ -152,6 +152,10 @@ bool Game::run(void)
 
 		load_graphics();
 
+      // Everything prepared, send the first trigger event
+      // We lie about the sender here. Hey, what is one lie in a lifetime?
+      cmdqueue->queue(get_gametime(), SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, -1, 0, 0);
+      
 		ipl->run();
 		get_objects()->cleanup(this);
 	   delete ipl;

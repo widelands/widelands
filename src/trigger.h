@@ -42,7 +42,7 @@ class Trigger {
 
       // Toggle the triggers state (if it isn't a one timer)
       // and give it a chance to reinitialize
-      virtual void reset_trigger(void)=0;
+      virtual void reset_trigger(Game*)=0;
       
       // Functions needed by all
       void set_name(const char* name) { m_name=name; }

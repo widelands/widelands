@@ -36,7 +36,7 @@ class Trigger_Time : public Trigger {
       uint get_id(void) { return TRIGGER_TIME; } 
 
       void check_set_conditions(Game*);
-      void reset_trigger(void);
+      void reset_trigger(Game*);
       
       // File Functions
       void Write(FileWrite*);

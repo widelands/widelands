@@ -20,6 +20,7 @@
 #include "trigger_time.h"
 #include "error.h"
 #include "filesystem.h"
+#include "game.h"
 
 static const int TRIGGER_VERSION = 1;
 
@@ -74,14 +75,23 @@ void Trigger_Time::Write(FileWrite* fw) {
 /*
  * check if trigger conditions are done
  */
-void Trigger_Time::check_set_conditions(Game*) {
+void Trigger_Time::check_set_conditions(Game* game) {
+   if(((game->get_gametime()-m_last_start_time)/1000) < m_wait_time) return;
 
+   // Time has come. Set us
+   set_trigger(true);
 }
 
 /*
  * Reset this trigger. This is only valid for non one timers
  */
-void Trigger_Time::reset_trigger(void) {
+void Trigger_Time::reset_trigger(Game* game) {
    assert(!is_one_time_trigger());
-}
 
+   // save new start time
+   // NOTE: if it took a while for an event to note us, 
+   // this time the trigger wasn't counting
+   m_last_start_time=game->get_gametime();
+
+   set_trigger(false);
+}
