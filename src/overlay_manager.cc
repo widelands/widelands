@@ -116,7 +116,7 @@ void Overlay_Manager::cleanup(void) {
    m_callback=0;
 
    if(m_overlay_fields) {
-      delete m_overlay_fields;
+      delete[] m_overlay_fields;
       m_overlay_fields=0;
    }
    m_overlays.clear();
@@ -135,7 +135,7 @@ void Overlay_Manager::init(int w, int h) {
    m_w=w;
    m_h=h;
 
-   m_overlay_fields = (uchar*)malloc(w*h);
+   m_overlay_fields = new uchar[w*h];
 }
 
 /*

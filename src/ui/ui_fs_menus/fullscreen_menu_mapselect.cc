@@ -24,6 +24,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_multilinetextarea.h"
+#include "ui_checkbox.h"
 
 /*
 ==============================================================================
@@ -40,10 +41,17 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
 	egbase = g;
 	m_maploader = 0;
    m_map = new Map;
+   m_is_scenario = false;
 
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, "Choose your map!", Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+
+   // Checkbox
+   UITextarea* ta=new UITextarea(this, MENU_XRES-300, 130, "Load Map as scenario: ", Align_VCenter);
+   UICheckbox* cb=new UICheckbox(this, (ta->get_x()+ta->get_w()+10), 120);
+   cb->changedto.set(this, &Fullscreen_Menu_MapSelect::changed);
+   cb->set_state(m_is_scenario);
 
 	// UIButtons
 	UIButton* b;
@@ -107,6 +115,12 @@ Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
    }
 }
 
+/* 
+ * Gets called when the Checkbox changes
+ */
+void Fullscreen_Menu_MapSelect::changed(bool t) {
+   m_is_scenario=t;
+}
 
 void Fullscreen_Menu_MapSelect::ok()
 {
@@ -122,7 +136,10 @@ void Fullscreen_Menu_MapSelect::ok()
 		m_maploader = 0;
 	}
 
-	end_modal(1);
+   if(m_is_scenario) 
+      end_modal(2);
+   else 
+      end_modal(1);
 }
 
 void Fullscreen_Menu_MapSelect::map_selected(int id)

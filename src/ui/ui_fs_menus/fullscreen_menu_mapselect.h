@@ -51,6 +51,7 @@ class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 
 	Map_Loader*			m_maploader;
 	Map*              m_map;
+   bool              m_is_scenario;
 
 public:
 	Fullscreen_Menu_MapSelect(Editor_Game_Base *g);
@@ -60,6 +61,7 @@ public:
 
 	void ok();
 	void map_selected(int id);
+   void changed(bool);
 };
 
 

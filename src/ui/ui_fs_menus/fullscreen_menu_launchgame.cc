@@ -37,6 +37,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g)
 	: Fullscreen_Menu_Base("launchgamemenu.jpg")
 {
 	m_game = g;
+   m_is_scenario = false;
 
 	// Title
    UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Launch Game", Align_HCenter);
@@ -46,7 +47,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g)
 	UIButton* b;
 
 	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
-	b->clickedid.set(this, &Fullscreen_Menu_LaunchGame::end_modal);
+	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::back);
 	b->set_title("Back");
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 1);
@@ -72,12 +73,24 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g)
 		m_players[i-1] = pdg;
 		y += 30;
 	}
+   // Directly go selecting a map
+   select_map();
 }
 
 void Fullscreen_Menu_LaunchGame::think()
 {
 	m_game->think();
 }
+
+/*
+ * back has been pressed, clean the game up
+ * so that nobody complains
+ */
+void Fullscreen_Menu_LaunchGame::back() {
+   m_game->get_objects()->cleanup(m_game);
+   end_modal(0);
+}
+
 
 void Fullscreen_Menu_LaunchGame::refresh()
 {
@@ -96,7 +109,9 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	// update the player description groups
 	int i;
 	for(i = 0; i < MAX_PLAYERS; i++) {
+      m_players[i]->allow_changes(true);
 		m_players[i]->set_enabled(i < maxplayers);
+      m_players[i]->allow_changes(!m_is_scenario);
    }
 
 	m_ok->set_enabled(m_game->can_start());
@@ -104,8 +119,16 @@ void Fullscreen_Menu_LaunchGame::refresh()
 
 void Fullscreen_Menu_LaunchGame::select_map()
 {
+   // Clean all the stuff up, so we can load
+   // TODO: This needs to be done properly
+   m_game->get_objects()->cleanup(m_game);
+   
    Fullscreen_Menu_MapSelect* msm=new Fullscreen_Menu_MapSelect(m_game);
-   msm->run();
+   if(msm->run()==2)
+      m_is_scenario=true;
+   else 
+      m_is_scenario=false;
+
    delete msm;
    refresh();
 }

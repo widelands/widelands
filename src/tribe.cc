@@ -125,13 +125,6 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 		if (s)
 			m_default_encdata.parse(s);
 
-		// Section [regent]
-		s = prof.get_safe_section("regent");
-
-		s->get_string("name");
-		s->get_string("pic_small");
-		s->get_string("pic_big");
-
 		// Section [frontier]
 		s = prof.get_section("frontier");
 		if (!s)
@@ -321,4 +314,34 @@ void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* game, Wareho
       wh->create_wares(game->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
    }
 }
+
+
+/*
+ * does this tribe exist?
+ */
+bool Tribe_Descr::exists_tribe(std::string name) {
+   std::string buf;
+   buf="tribes/" + name + "/conf";;
+
+   FileRead f;
+   return f.TryOpen(g_fs, buf.c_str());
+}
+
+/*
+ * Returns all tribes that exists 
+ */
+void Tribe_Descr::get_all_tribes(std::vector<std::string>* retval) {
+   retval->resize(0);
+
+   // get all tribes
+   filenameset_t m_tribes;
+   g_fs->FindFiles("tribes", "*", &m_tribes);
+   for(filenameset_t::iterator pname = m_tribes.begin(); pname != m_tribes.end(); pname++) {
+      std::string tribe=*pname;
+      tribe.erase(0,7); // remove 'tribes/'
+      if(Tribe_Descr::exists_tribe(tribe.c_str()))
+         retval->push_back(tribe);
+   }
+}
+
 

@@ -21,6 +21,7 @@
 #define __TRIBE_H
 
 #include <map>
+#include <vector>
 #include "animation.h"
 #include "descr_maintainer.h"
 
@@ -48,7 +49,12 @@ class Tribe_Descr {
       Tribe_Descr(const char* name);
       ~Tribe_Descr(void);
 
-		inline const char *get_name() const { return m_name; }
+      // Static function to check for tribes
+      static bool exists_tribe(std::string);
+      static void get_all_tribes(std::vector<std::string>*);
+		
+      
+      inline const char *get_name() const { return m_name; }
 
 		inline int get_nrworkers() { return m_workers.get_nitems(); }
       inline Worker_Descr* get_worker_descr(uint idx) { return m_workers.get(idx); }

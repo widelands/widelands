@@ -24,6 +24,7 @@
 #include "types.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
+#include "tribe.h"
 
 // hard-coded playercolors
 uchar g_playercolors[MAX_PLAYERS][12] = {
@@ -77,13 +78,21 @@ uchar g_playercolors[MAX_PLAYERS][12] = {
 	}
 };
 
+void PlayerDescriptionGroup::allow_changes(bool t) {
+   m_allow_changes=t;
+   m_btnEnablePlayer->set_visible(t);
+   m_btnPlayerType->set_enabled(t);
+   m_btnPlayerTribe->set_enabled(t);
+}
 
 PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum)
 	: UIPanel(parent, x, y, 300, 20)
 {
 	m_game = game;
 	m_plnum = plnum;
-
+   m_allow_changes=true;
+   m_current_tribe=0;
+   
 	m_enabled = false;
 	set_visible(false);
 
@@ -92,12 +101,19 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	m_btnEnablePlayer->set_state(true);
 	m_btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
 
-	m_btnPlayerType = new UIButton(this, 28, 0, 174, 20, 1);
+	m_btnPlayerType = new UIButton(this, 28, 0, 120, 20, 1);
 	m_btnPlayerType->clicked.set(this, &PlayerDescriptionGroup::toggle_playertype);
 	if (plnum==1)
 		m_playertype = Player::playerLocal;
 	else
 		m_playertype = Player::playerAI;
+
+   
+   m_btnPlayerTribe = new UIButton(this, 156, 0, 120, 20, 1);
+   m_btnPlayerTribe->clicked.set(this, &PlayerDescriptionGroup::toggle_playertribe);
+
+   Tribe_Descr::get_all_tribes(&m_tribes);
+   m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
 }
 
 /** PlayerDescriptionGroup::set_enabled(bool enable)
@@ -107,7 +123,8 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
  */
 void PlayerDescriptionGroup::set_enabled(bool enable)
 {
-	if (enable == m_enabled)
+	if(!m_allow_changes) return;
+   if (enable == m_enabled)
 		return;
 
 	m_enabled = enable;
@@ -121,7 +138,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 	else
 	{
 		if (m_btnEnablePlayer->get_state())
-			m_game->add_player(m_plnum, m_playertype, "romans", g_playercolors[m_plnum-1]);
+			m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), g_playercolors[m_plnum-1]);
 
 		const char* string = 0;
 		switch(m_playertype) {
@@ -143,8 +160,10 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
  */
 void PlayerDescriptionGroup::enable_player(bool on)
 {
-	if (on) {
-		m_game->add_player(m_plnum, m_playertype, "romans", g_playercolors[m_plnum-1]);
+	if(!m_allow_changes) return;
+
+   if (on) {
+		m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), g_playercolors[m_plnum-1]);
 	} else {
 		m_game->remove_player(m_plnum);
 	}
@@ -156,5 +175,14 @@ void PlayerDescriptionGroup::enable_player(bool on)
 void PlayerDescriptionGroup::toggle_playertype()
 {
 	// NOOP: toggling the player type is currently not possible
+}
+
+/*
+ * toggles the tribe the player will play
+ */
+void PlayerDescriptionGroup::toggle_playertribe(void) {
+   ++m_current_tribe;
+   if(m_current_tribe==m_tribes.size()) m_current_tribe=0;
+   m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
 }
 

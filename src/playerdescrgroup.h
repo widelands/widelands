@@ -20,6 +20,8 @@
 #ifndef __S__PLAYER_DESCR_GROUP
 #define __S__PLAYER_DESCR_GROUP
 
+#include <string>
+#include <vector>
 #include "ui_panel.h"
 #include "ui_signal.h"
 
@@ -42,17 +44,23 @@ class PlayerDescriptionGroup : public UIPanel {
 	UICheckbox* m_btnEnablePlayer;
 	int m_playertype;
 	UIButton* m_btnPlayerType;
-
+	UIButton* m_btnPlayerTribe;
+   bool      m_allow_changes;
+   std::vector<std::string> m_tribes;
+   uint      m_current_tribe;
+   
 public:
 	PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum);
 
 	UISignal changed;
 
 	void set_enabled(bool enable);
+   void allow_changes(bool t);
 
 private:
 	void enable_player(bool on);
 	void toggle_playertype();
+	void toggle_playertribe();
 };
 
 

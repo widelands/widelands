@@ -23,11 +23,6 @@ author=Widelands Development Team
 name=Testtribe
 descr=This is a the Empire. It is mostly uncompleted, but it is mainly for testing.
 
-[regent]
-pic_big=pics/regent_big.bmp
-pic_small=pics/regent_small.bmp
-name="Testaffe"
-
 [frontier]
 pics=pics/frontier_??.png
 hot_spot_x=1
