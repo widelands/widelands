@@ -73,23 +73,12 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 	int orig_vpy = vpy;
 	Bitmap dst;
 
-	dst.pitch = bmp->pitch;
-	dst.pixels = bmp->pixels;
-	dst.w = bmp->w;
-	dst.h = bmp->h;
-
-	if (ofsx > 0) {
-		dst.pixels += ofsx;
-		dst.w -= ofsx;
-	} else if (ofsx < 0) {
-		orig_vpx -= ofsx;
-	}
-	if (ofsy > 0) {
-		dst.pixels += ofsy * dst.pitch;
-		dst.h -= ofsy;
-	} else if (ofsy < 0) {
-		orig_vpy -= ofsy;
-	}
+	if (!dst.make_partof(bmp, ofsx, ofsy, get_w(), get_h(), &ofsx, &ofsy))
+		return;
+	if (ofsx < 0)
+		vpx -= ofsx;
+	if (ofsy < 0)
+		vpy -= ofsy;
 
 	// Now draw the view
 	Field *f;
@@ -167,29 +156,32 @@ void Map_View::set_viewpoint(uint x,  uint y)
 	while(vpy< 0)  vpy+=(FIELD_HEIGHT*map->get_h())>>1;
 }
 
-/** Map_View::handle_mouseclick(uint btn, bool down, uint x, uint y)
+/** Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
  *
  * Mouseclicks on the map:
  * Right-click: enable/disable dragging
  * Left-click: field action window
  */
-void Map_View::handle_mouseclick(uint btn, bool down, uint x, uint y)
+void Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	// right-click
 	if (btn == 1)
 	{
-		if (down)
+		if (down) {
 			dragging = true;
-		else
+			grab_mouse(true);
+		} else if (dragging) {
+			grab_mouse(false);
 			dragging = false;
+		}
 	}
 }
 
-/** Map_View::handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
+/** Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
  *
  * Scroll the view according to mouse movement.
  */
-void Map_View::handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
+void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 	if (!(btns & 2))
 		dragging = false;
@@ -198,6 +190,6 @@ void Map_View::handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
 
 	set_rel_viewpoint(xdiff, ydiff);
 	g_gr.needs_fs_update();
-	g_ip.set_mouse_pos(x-xdiff, y-ydiff);
+	g_ip.set_mouse_pos(g_ip.get_mplx(), g_ip.get_mply());
 }
 

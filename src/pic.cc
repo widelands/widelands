@@ -118,6 +118,63 @@ namespace Graph
 		bhas_clrkey=true;
 	}
 
+	/** Bitmap::make_partof(const Bitmap *other, uint x, uint y, uint w, uint h,
+	 *                      int *ofsx, int *ofsy)
+	 *
+	 * Makes this bitmap an alias of a part of another bitmap.
+	 * The given rectangle is automatically clipped. If x and y lie outside of
+	 * the bitmap, subsequent drawing operations need to be offset. The necessary
+	 * offset is returned in the provided pointers.
+	 *
+	 * Args: other	the source bitmap
+	 *       x		coordinates of the rectangle you are going to use
+	 *       y
+	 *       nw
+	 *       nh
+	 *       ofsx	pointers to the offset that is going to be necessary
+	 *       ofsy
+	 *
+	 * Returns: false if the resulting bitmap size is 0. In this case, this
+	 *          bitmap may end up in an invalid state.
+	 */
+	bool Bitmap::make_partof(const Bitmap *other, int x, int y, uint nw, uint nh,
+		                     int *ofsx, int *ofsy)
+	{
+		pitch = other->pitch;
+		sh_clrkey = other->sh_clrkey;
+		bhas_clrkey = other->bhas_clrkey;
+
+		// clipping
+		w = nw;
+		h = nh;
+		*ofsx = 0;
+		*ofsy = 0;
+		if (x < 0) {
+			if (-x >= (int)w)
+				return false;
+			*ofsx = x;
+			w += x;
+			x = 0;
+		} else if (x > (int)other->w)
+			return false;
+		if (x+w > other->w)
+			w = other->w - x;
+
+		if (y < 0) {
+			if (-y >= (int)h)
+				return false;
+			*ofsy = y;
+			h += y;
+			y = 0;
+		} else if (y > (int)other->h)
+			return false;
+		if (y+h > other->h)
+			h = other->h - y;
+
+		pixels = other->pixels + y*pitch + x;
+		return true;
+	}
+
 	/*
 	==========================================================================
 

@@ -32,6 +32,8 @@ Panel
 */
 
 Panel *Panel::_modal = 0;
+Panel *Panel::_g_mousegrab = 0;
+Panel *Panel::_g_mousein = 0;
 
 /** Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh)
  *
@@ -60,6 +62,9 @@ Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const ui
 	_w = nw;
 	_h = nh;
 
+	_cache = 0;
+	_needdraw = false;
+
 	_flags = pf_handle_mouse|pf_think;
 	update(0, 0, _w, _h);
 }
@@ -70,10 +75,26 @@ Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const ui
  */
 Panel::~Panel()
 {
+	update(0, 0, get_w(), get_h());
+
+	if (_cache)
+		delete _cache;
+
+	// Release pointers to this object
+	if (_g_mousegrab == this)
+		_g_mousegrab = 0;
+	if (_g_mousein == this)
+		_g_mousein = 0;
+
+	// Free children
 	while(_fchild)
 		delete _fchild;
 
+	// Unlink
 	if (_parent) {
+		if (_parent->_mousein == this)
+			_parent->_mousein = 0;
+
 		if (_prev)
 			_prev->_next = _next;
 		else
@@ -100,6 +121,7 @@ int Panel::run()
 
 	Panel *prevmodal = _modal;
 	_modal = this;
+	_g_mousegrab = 0; // good ol' paranoia
 
 	Panel *forefather = this;
 	while(forefather->_parent)
@@ -115,7 +137,8 @@ int Panel::run()
 		if (g_ip.should_die())
 			end_modal(-1);
 
-		// call logic code here?
+		if (_flags & pf_think)
+			think();
 
 		if(g_gr.does_need_update()) {
 			forefather->do_draw(g_gr.get_screenbmp(), 0, 0);
@@ -176,6 +199,10 @@ void Panel::set_size(const uint nw, const uint nh)
 
 	if (nw > upw) upw = nw;
 	if (nh > uph) uph = nh;
+
+	if (_cache)
+		_cache->set_size(_w, _h);
+
 	update(0, 0, upw, uph);
 }
 
@@ -188,10 +215,12 @@ void Panel::set_size(const uint nw, const uint nh)
  */
 void Panel::set_pos(const int nx, const int ny)
 {
+	bool nd = _needdraw;
 	update(0, 0, _w, _h);
 	_x = nx;
 	_y = ny;
 	update(0, 0, _w, _h);
+	_needdraw = nd;
 }
 
 /** Panel::draw(Bitmap *dst, int ofsx, int ofsy) [virtual]
@@ -221,6 +250,8 @@ void Panel::update(int x, int y, int w, int h)
 	    y >= (int)_h || y+h <= 0)
 		return;
 
+	_needdraw = true;
+
 	if (_parent) {
 		_parent->update(x+_x, y+_y, w, h);
 	} else {
@@ -243,6 +274,32 @@ void Panel::update(int x, int y, int w, int h)
 			return;
 
 		g_gr.register_update_rect(x, y, w, h);
+	}
+}
+
+/** Panel::set_cache(bool enable)
+ *
+ * Enable/Disable the drawing cache.
+ * When the drawing cache is enabled, draw() is only called after an update()
+ * has been called explicitly. Otherwise, the contents of the panel are copied
+ * from a cached Pic.
+ */
+void Panel::set_cache(bool enable)
+{
+	if (enable)
+	{
+		if (_cache)
+			return;
+		_cache = new Pic;
+		_cache->set_size(_w, _h);
+		_needdraw = true;
+	}
+	else
+	{
+		if (_cache) {
+			delete _cache;
+			_cache = 0;
+		}
 	}
 }
 
@@ -270,7 +327,7 @@ void Panel::handle_mousein(bool inside)
 {
 }
 
-/** Panel::handle_mouseclick(uint btn, bool down, uint x, uint y)
+/** Panel::handle_mouseclick(uint btn, bool down, int x, int y)
  *
  * Called whenever the user clicks into the panel
  *
@@ -279,11 +336,11 @@ void Panel::handle_mousein(bool inside)
  *       x		mouse coordinates relative to the panel
  *       y
  */
-void Panel::handle_mouseclick(uint btn, bool down, uint x, uint y)
+void Panel::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 }
 
-/** Panel::handle_mousemove(uint x, uint y, uint btns)
+/** Panel::handle_mousemove(int x, int y, uint btns)
  *
  * Called when the mouse is moved while inside the panel
  *
@@ -293,7 +350,7 @@ void Panel::handle_mouseclick(uint btn, bool down, uint x, uint y)
  *       ydiff
  *       btns	bitmask of currently pressed buttons: (1<<0) left, (1<<1) right
  */
-void Panel::handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
+void Panel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 }
 
@@ -311,6 +368,25 @@ void Panel::set_handle_mouse(bool yes)
 		_flags |= pf_handle_mouse;
 	else
 		_flags &= ~pf_handle_mouse;
+}
+
+/** Panel::grab_mouse(bool grab)
+ *
+ * Enable/Disable mouse grabbing. If a panel grabs the mouse, all mouse
+ * related events will be sent directly to that panel.
+ * You should only grab the mouse as a response to a mouse event (e.g.
+ * clicking a mouse button)
+ *
+ * Args: grab	true if grabbing is to be enabled
+ */
+void Panel::grab_mouse(bool grab)
+{
+	if (grab) {
+		_g_mousegrab = this;
+	} else {
+		assert(!_g_mousegrab || _g_mousegrab == this);
+		_g_mousegrab = 0;
+	}
 }
 
 /** Panel::set_think(bool yes)
@@ -335,45 +411,43 @@ void Panel::set_think(bool yes)
  */
 void Panel::do_draw(Bitmap *dst, int ofsx, int ofsy)
 {
-	Bitmap mydst;
-	int dx, dy;
+	if (!_cache)
+	{
+		Bitmap mydst;
+		int dx, dy;
+		uint dw, dh;
 
-	dx = _x + ofsx;
-	if (dx >= (int)dst->w || dx <= -(int)_w)
-		return;
-	if (dx < 0) {
-		ofsx = dx;
-		dx = 0;
-	} else
-		ofsx = 0;
+		dx = _x+ofsx;
+		dy = _y+ofsy;
+		dw = _w+ofsx;
+		dh = _h+ofsy;
+		if (!mydst.make_partof(dst, dx, dy, dw, dh, &ofsx, &ofsy))
+			return;
 
-	dy = _y + ofsy;
-	if (dy >= (int)dst->h || dy <= -(int)_h)
-		return;
-	if (dy < 0) {
-		ofsy = dy;
-		dy = 0;
-	} else
-		ofsy = 0;
+		draw(&mydst, ofsx, ofsy);
 
-	mydst.pitch = dst->pitch;
-	mydst.pixels = dst->pixels + dy*mydst.pitch + dx;
+		// draw back to front
+		for(Panel *child = _lchild; child; child = child->_prev)
+			child->do_draw(&mydst, ofsx, ofsy);
+	}
+	else
+	{
+		// redraw only if explicitly requested
+		if (_needdraw) {
+			draw(_cache, 0, 0);
 
-	mydst.w = dst->w - dx;
-	if (mydst.w > _w+ofsx)
-		mydst.w = _w+ofsx;
-	mydst.h = dst->h - dy;
-	if (mydst.h > _h+ofsy)
-		mydst.h = _h+ofsy;
+			for(Panel *child = _lchild; child; child = child->_prev)
+				child->do_draw(_cache, 0, 0);
 
-	draw(&mydst, ofsx, ofsy);
+			_needdraw = false;
+		}
 
-	// draw back to front
-	for(Panel *child = _lchild; child; child = child->_prev)
-		child->do_draw(&mydst, ofsx, ofsy);
+		// now just blit from the cache
+		Graph::copy_pic(dst, _cache, ofsx+_x, ofsy+_y, 0, 0, _w, _h);
+	}
 }
 
-/** Panel::get_mousein(uint x, uint y)
+/** Panel::get_mousein(int x, int y)
  *
  * Return the panel that receives mouse clicks at the given location
  *
@@ -382,15 +456,15 @@ void Panel::do_draw(Bitmap *dst, int ofsx, int ofsy)
  *
  * Returns: topmost panel at the given coordinates
  */
-Panel *Panel::get_mousein(uint x, uint y)
+Panel *Panel::get_mousein(int x, int y)
 {
 	Panel *child;
 
 	for(child = _fchild; child; child = child->_next) {
 		if (!child->get_handle_mouse())
 			continue;
-		if (x < child->_x+child->_w && (int)x >= child->_x &&
-		    y < child->_y+child->_h && (int)y >= child->_y)
+		if (x < child->_x+(int)child->_w && x >= child->_x &&
+		    y < child->_y+(int)child->_h && y >= child->_y)
 			break;
 	}
 
@@ -419,7 +493,7 @@ void Panel::do_mousein(bool inside)
 	handle_mousein(inside);
 }
 
-/** Panel::do_mouseclick(uint btn, bool down, uint x, uint y)
+/** Panel::do_mouseclick(uint btn, bool down, int x, int y)
  *
  * Propagate mouse clicks to the appropriate panel.
  *
@@ -428,7 +502,7 @@ void Panel::do_mousein(bool inside)
  *       x		mouse coordinates relative to panel
  *       y
  */
-void Panel::do_mouseclick(uint btn, bool down, uint x, uint y)
+void Panel::do_mouseclick(uint btn, bool down, int x, int y)
 {
 	Panel *child = get_mousein(x, y);
 
@@ -438,7 +512,7 @@ void Panel::do_mouseclick(uint btn, bool down, uint x, uint y)
 		handle_mouseclick(btn, down, x, y);
 }
 
-/** Panel::do_mousemove(uint x, uint y, uint btns)
+/** Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
  *
  * Propagate mouse movement to the appropriate panel.
  *
@@ -448,7 +522,7 @@ void Panel::do_mouseclick(uint btn, bool down, uint x, uint y)
  *       ydiff
  *       btns	bitmask of pressed buttons
  */
-void Panel::do_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
+void Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 	Panel *child = get_mousein(x, y);
 
@@ -456,6 +530,47 @@ void Panel::do_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
 		child->do_mousemove(x-child->_x, y-child->_y, xdiff, ydiff, btns);
 	else
 		handle_mousemove(x, y, xdiff, ydiff, btns);
+}
+
+/** Panel::ui_trackmouse(int *x, int *y) [static]
+ *
+ * Determine which panel is to receive a mouse event.
+ *
+ * Args: x	mouse coordinates, relative to the screen
+ *       y	converted to coordinates local to the panel
+ *
+ * Returns: the panel which receives the mouse event
+ */
+Panel *Panel::ui_trackmouse(int *x, int *y)
+{
+	Panel *mousein;
+	Panel *rcv = 0;
+
+	if (_g_mousegrab)
+		mousein = rcv = _g_mousegrab;
+	else
+		mousein = _modal;
+
+	for(Panel *p = mousein; p; p = p->_parent) {
+		*x -= p->_x;
+		*y -= p->_y;
+	}
+
+	if (*x >= 0 && *x < (int)mousein->_w &&
+	    *y >= 0 && *y < (int)mousein->_h)
+		rcv = mousein;
+	else
+		mousein = 0;
+
+	if (mousein != _g_mousein) {
+		if (_g_mousein)
+			_g_mousein->do_mousein(false);
+		_g_mousein = mousein;
+		if (_g_mousein)
+			_g_mousein->do_mousein(true);
+	}
+
+	return rcv;
 }
 
 /** Panel::ui_mouseclick(const bool down, const uint mx, const uint my, void *a) [static]
@@ -470,16 +585,15 @@ void Panel::do_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
  */
 int Panel::ui_mouseclick(const bool down, const uint mx, const uint my, void *a)
 {
-	int x = mx - _modal->_x;
-	int y = my - _modal->_y;
+	Panel *p;
+	int x = mx;
+	int y = my;
 
-//	printf("mouse click %i: %i %i (%s)\n", (int)a, x, y, down ? "down" : "up");
-
-	if (x < 0 || x >= (int)_modal->_w ||
-	    y < 0 || y >= (int)_modal->_h)
+	p = ui_trackmouse(&x, &y);
+	if (!p)
 		return 0;
 
-	_modal->do_mouseclick((int)a, down, x, y);
+	p->do_mouseclick((int)a, down, x, y);
 	return 1;
 }
 
@@ -503,15 +617,15 @@ int Panel::ui_mousemove(const uint mx, const uint my, const int xdiff, const int
 	if (!xdiff && !ydiff)
 		return 0;
 
-	int x = mx - _modal->_x;
-	int y = my - _modal->_y;
+	Panel *p;
+	int x = mx;
+	int y = my;
 
-//	printf("mouse move: %i %i\n", x, y);
 	g_gr.register_update_rect(g_ip.get_mplx(), g_ip.get_mply(), g_cur.get_w(), g_cur.get_h());
 	g_gr.register_update_rect(mx, my, g_cur.get_w(), g_cur.get_h());
 
-	if (x < 0 || x >= (int)_modal->_w ||
-	    y < 0 || y >= (int)_modal->_h)
+	p = ui_trackmouse(&x, &y);
+	if (!p)
 		return 0;
 
 	uint btns = 0;
@@ -520,7 +634,7 @@ int Panel::ui_mousemove(const uint mx, const uint my, const int xdiff, const int
 	if (rbtn)
 		btns |= 2;
 
-	_modal->do_mousemove(x, y, xdiff, ydiff, btns);
+	p->do_mousemove(x, y, xdiff, ydiff, btns);
 	return 1;
 }
 

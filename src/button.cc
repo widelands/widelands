@@ -142,7 +142,7 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 {
 	Pic *bg;
 
-	if (!_enabled || !_highlighted || _pressed)
+	if (!_enabled || !_highlighted)
 		bg = _mybg;
 	else
 		bg = _mybge;
@@ -167,7 +167,9 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 
 	// draw border
 #define BLACK 0x000000	//TEMP
-	if (!_pressed)
+	// a pressed but not highlighted button occurs when the user has pressed
+	// the left mouse button and then left the area of the button
+	if (!_pressed || !_highlighted)
 	{
 		// top edge
 		dst->brighten_rect(ofsx, ofsy, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
@@ -204,30 +206,32 @@ void Button::handle_mousein(bool inside)
 {
 	if (inside && _enabled)
 		_highlighted = true;
-	else {
+	else
 		_highlighted = false;
-		_pressed = false;
-	}
 	update(0, 0, get_w(), get_h());
 }
 
-/** Button::handle_mouseclick(uint btn, bool down, uint x, uint y)
+/** Button::handle_mouseclick(uint btn, bool down, int x, int y)
  *
  * Update the pressed status of the button
  */
-void Button::handle_mouseclick(uint btn, bool down, uint x, uint y)
+void Button::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn) // only react on left button
 		return;
 
 	if (down && _enabled) {
+		grab_mouse(true);
 		_pressed = true;
 	} else {
-		if (_pressed && _enabled) {
-			clicked.call();
-			clickedid.call(_id);
+		if (_pressed) {
+			grab_mouse(false);
+			if (_highlighted && _enabled) {
+				clicked.call();
+				clickedid.call(_id);
+			}
+			_pressed = false;
 		}
-		_pressed = false;
 	}
 	update(0, 0, get_w(), get_h());
 }

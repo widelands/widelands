@@ -142,24 +142,21 @@ namespace Graph
 	}
 #endif
 
-	/** struct Bitmap
+	/** class Bitmap
 	 *
 	 * Rectangle of 16bit pixels, can be colorkeyed.
 	 *
 	 * This class provides a common interface for both loaded and run-time
 	 * generated pictures (i.e. class Pic) and the framebuffer.
 	 */
-	struct Bitmap {
-		ushort *pixels;
-		uint w, h;
-		uint pitch; // every row in the bitmap is pitch pixels long
-		ushort sh_clrkey;
-		bool bhas_clrkey;
-
+	class Bitmap {
+	public:
 		Bitmap() { pixels = 0; w = pitch = h = sh_clrkey = bhas_clrkey = 0; }
 
 		inline uint get_w() const { return w; }
 		inline uint get_h() const { return h; }
+		inline uint get_pitch() const { return pitch; }
+		inline ushort *get_pixels() const { return pixels; }
 		inline bool has_clrkey(void) const { return bhas_clrkey; }
 		inline ushort get_clrkey(void) const
 		{
@@ -173,6 +170,20 @@ namespace Graph
 
 		void set_clrkey(const ushort);
 		void set_clrkey(const uchar, const uchar, const uchar);
+
+		bool make_partof(const Bitmap *other, int x, int y, uint nw, uint nh,
+		                 int *ofsx, int *ofsy);
+
+	protected:
+		ushort *pixels;
+		uint w, h;
+		uint pitch; // every row in the bitmap is pitch pixels long
+		ushort sh_clrkey;
+		bool bhas_clrkey;
+
+		friend void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
+	              uint src_x, uint src_y, int w, int h);
+		friend class Graphic;
 	};
 
 	/** class Pic
@@ -333,7 +344,7 @@ namespace Graph
 		  * Args: none
 		  * returns: XRes
 		  */
-		inline uint get_xres(void) const { return screenbmp.w; }
+		inline uint get_xres(void) const { return screenbmp.get_w(); }
 
 		/** inline uint Graphic::get_yres(void) const
 		  *
@@ -341,7 +352,7 @@ namespace Graph
 		  * Args: none
 		  * returns: YRes
 		  */
-		inline uint get_yres(void) const { return screenbmp.h; }
+		inline uint get_yres(void) const { return screenbmp.get_h(); }
 
 		/** inline void Graphics::needs_fs_update(void)
 		  *

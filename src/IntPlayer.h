@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
+ * Copyright (C) 2002 by Holger Rapp
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,7 @@ class Interactive_Player : public Panel {
 
 					 void start();
 					 void exit_game_btn();
+					 void main_menu_btn();
 
 					 void think();
 

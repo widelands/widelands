@@ -222,11 +222,11 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 	}
 }
 
-/** Listselect::handle_mouseclick(uint btn, bool down, uint x, uint y)
+/** Listselect::handle_mouseclick(uint btn, bool down, int x, int y)
  *
  * Handle mouse clicks: select the appropriate entry
  */
-void Listselect::handle_mouseclick(uint btn, bool down, uint x, uint y)
+void Listselect::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn || !down) // only left-click
 		return;

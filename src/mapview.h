@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
+ * Copyright (C) 2002 by Holger Rapp
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,8 +45,8 @@ public:
 	void draw(Bitmap *bmp, int ofsx, int ofsx);
 
 	// Event handling
-	void handle_mouseclick(uint btn, bool down, uint x, uint y);
-	void handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns);
+	void handle_mouseclick(uint btn, bool down, int x, int y);
+	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 private:
 	Map* map;

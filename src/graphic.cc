@@ -247,10 +247,10 @@ namespace Graph
 
 		int ymax = make_triangle_lines(points, bright, starts, ends);
 		int ystart = points[0].y < 0 ? -points[0].y : 0;
-		ymax = ymax + points[0].y <= (int)dst->h ? ymax : dst->h-points[0].y;
+		ymax = ymax + points[0].y <= (int)dst->get_h() ? ymax : dst->get_h()-points[0].y;
 		for (int y=ystart; y<ymax; y++)
 		{
-			if (starts[y].x >= (int)dst->w)
+			if (starts[y].x >= (int)dst->get_w())
 				continue;
 			if (ends[y].x < 0)
 				continue;
@@ -262,15 +262,15 @@ namespace Graph
 			int b = -(int)(65536 * starts[y].b * LIGHT_FACTOR);
 			int bd = -(int)(65536 * LIGHT_FACTOR * bdiff / xdiff);
 
-			int end = ends[y].x < (int)dst->w ? ends[y].x : dst->w-1;
+			int end = ends[y].x < (int)dst->get_w() ? ends[y].x : dst->get_w()-1;
 			int start = starts[y].x;
 			if (start < 0) {
 				b -= bd * start;
 				start = 0;
 			}
 
-			ushort *pix = dst->pixels + (points[0].y + y)*dst->pitch + start;
-			ushort *texp = texture->pixels + (y % texture->h)*texture->w;
+			ushort *pix = dst->get_pixels() + (points[0].y + y)*dst->get_pitch() + start;
+			ushort *texp = texture->get_pixels() + (y % texture->get_h())*texture->get_w();
 			uint tp = start - starts[y].x;
 
 			for(int cnt = end-start; cnt >= 0; cnt--)
@@ -282,7 +282,7 @@ namespace Graph
 
 				// replacing tp %= texture->w with the following conditional
 				// makes this _entire function_ two times faster on my Athlon
-				if (tp == texture->w)
+				if (tp == texture->get_w())
 					tp = 0;
 			}
 		}
@@ -411,7 +411,7 @@ namespace Graph
 			*/
 		  void Graphic::update(void) {
 					 if(bneeds_fs_update) {
-								SDL_UpdateRect(sc, 0, 0, screenbmp.w, screenbmp.h);
+								SDL_UpdateRect(sc, 0, 0, get_xres(), get_yres());
 					 } else {
 /*								cerr << "##########################" << endl;
 								cerr << nupr << endl;
@@ -450,6 +450,7 @@ namespace Graph
 	{
 		if (dst_x < 0) {
 			w += dst_x;
+			src_x -= dst_x;
 			dst_x = 0;
 		}
 		if (dst_x+w > (int)dst->w)
@@ -459,6 +460,7 @@ namespace Graph
 
 		if (dst_y < 0) {
 			h += dst_y;
+			src_y -= dst_y;
 			dst_y = 0;
 		}
 		if (dst_y+h > (int)dst->h)

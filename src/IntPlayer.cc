@@ -56,6 +56,9 @@ Interactive_Player::Interactive_Player(Game *g)
 	b->set_pic(g_fh.get_string("EXIT", 0));
 
 	b = new Button(this, x+34, y, 34, 34, 2);
+	b->clicked.set(this, &Interactive_Player::main_menu_btn);
+	b->set_pic(g_fh.get_string("MENU", 0));
+
 	b = new Button(this, x+68, y, 34, 34, 2);
 	b = new Button(this, x+102, y, 34, 34, 2);
 }
@@ -85,6 +88,15 @@ void Interactive_Player::start()
 void Interactive_Player::exit_game_btn()
 {
 	end_modal(0);
+}
+
+/** Interactive_Player::main_menu_btn()
+ *
+ * Bring up the main menu
+ */
+void Interactive_Player::main_menu_btn()
+{
+	new Window(this, 100, 100, 150, 250, "Test");
 }
 
 /** Interactive_Player::think()
