@@ -146,7 +146,7 @@ public: // worker-specific tasks
 	void start_task_fetchfromflag(Game* g);
 
 	bool start_task_waitforcapacity(Game* g, Flag* flag);
-	void start_task_leavebuilding(Game* g);
+	void start_task_leavebuilding(Game* g, bool changelocation);
 	void start_task_fugitive(Game* g);
 
 	void start_task_geologist(Game* g, int attempts, int radius, std::string subcommand);

@@ -545,7 +545,7 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
 
 	// First of all, make sure we're outside
 	if (imm == owner) {
-		start_task_leavebuilding(g);
+		start_task_leavebuilding(g, false);
 		return true;
 	}
 
@@ -1558,8 +1558,7 @@ void Worker::transfer_update(Game* g, State* state)
 			throw wexception("MO(%u): [transfer]: in building, nextstep is not building's flag", get_serial());
 
 		molog("[transfer]: move from building to flag\n");
-		start_task_leavebuilding(g);
-		set_location(nextstep);
+		start_task_leavebuilding(g, true);
 		return;
 	}
 
@@ -2050,10 +2049,8 @@ Bob::Task Worker::taskGowarehouse = {
 Worker::start_task_gowarehouse
 
 Get the worker to move to the nearest warehouse.
-
-Note: It might be interesting to add the worker to the list of usable wares in
-the economy. On the other hand, S2 did not do that, it's not that simple,
-and we really should give those poor workers some rest ;-)
+The worker is added to the list of usable wares, so he may be reassigned to
+a new task immediately.
 ===============
 */
 void Worker::start_task_gowarehouse(Game* g)
@@ -2196,7 +2193,7 @@ void Worker::dropoff_update(Game* g, State* state)
 
 			// Exit throttle
 			molog("[dropoff]: move from building to flag\n");
-			start_task_leavebuilding(g);
+			start_task_leavebuilding(g, false);
 			return;
 		}
 
@@ -2298,7 +2295,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	if (!item && !state->ivar1) {
 		if (location->get_type() == BUILDING) {
 			molog("[fetchfromflag]: move from building to flag\n");
-			start_task_leavebuilding(g);
+			start_task_leavebuilding(g, false);
 			return;
 		}
 
@@ -2448,6 +2445,9 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 
 WAITLEAVEBUILDING task
 
+ivar1 - 0: don't change location; 1: change location to the flag
+objvar1 - the building we're leaving
+
 ==============================
 */
 
@@ -2466,9 +2466,11 @@ Worker::start_task_leavebuilding
 
 Leave the current building.
 Waits on the buildings leave wait queue if necessary.
+
+If changelocation is true, change the location to the flag once we're outside.
 ===============
 */
-void Worker::start_task_leavebuilding(Game* g)
+void Worker::start_task_leavebuilding(Game* g, bool changelocation)
 {
 	PlayerImmovable* location = get_location(g);
 
@@ -2479,6 +2481,7 @@ void Worker::start_task_leavebuilding(Game* g)
 	// Set the wait task
 	push_task(g, &taskLeavebuilding);
 
+	get_state()->ivar1 = changelocation ? 1 : 0;
 	get_state()->objvar1 = building;
 }
 
@@ -2493,7 +2496,7 @@ void Worker::leavebuilding_update(Game* g, State* state)
 	BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
 	if (!position || position->get_type() != BUILDING) {
-		molog("[leavebuilding]: Left the building successful\n");
+		molog("[leavebuilding]: Left the building successfully\n");
 		pop_task(g);
 		return;
 	}
@@ -2508,8 +2511,13 @@ void Worker::leavebuilding_update(Game* g, State* state)
 		return;
 	}
 
-	molog("[leavebuilding]: Leave\n");
+	molog("[leavebuilding]: Leave (%s)\n", state->ivar1 ? "change location" : "stay in location");
 	start_task_forcemove(g, WALK_SE, get_descr()->get_right_walk_anims(does_carry_ware()));
+
+	if (state->ivar1)
+	{
+		set_location(building->get_base_flag());
+	}
 }
 
 
