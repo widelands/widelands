@@ -46,7 +46,7 @@ void Widelands_Map_Bob_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase)
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_bobs=fr->Unsigned16();
-      if(nr_bobs!=world->get_nr_bobs()) throw wexception("Number of bobs in map (%i) and in world (%i) do not match", 
+      if(nr_bobs>world->get_nr_bobs()) throw wexception("Number of bobs in map (%i) is bigger than in world (%i)", 
             nr_bobs, world->get_nr_bobs());
 
       // construct ids and map

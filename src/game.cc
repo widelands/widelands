@@ -147,6 +147,8 @@ bool Game::run(void)
 				ipl->move_view_to(c.x, c.y);
 		}
 
+      // Prepare the map, set default textures
+      get_map()->recalc_default_resources();
 
 		load_graphics();
 

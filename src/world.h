@@ -76,6 +76,15 @@ class Terrain_Descr {
       inline uchar get_is(void) { return m_is; }
       inline const char* get_name() { return m_name; }
 
+      inline bool is_resource_valid(int res) { 
+         int i=0;
+         for(i=0; i<m_nr_valid_resources; i++)
+            if(m_valid_resources[i]==res) return true;
+         return false;
+      }
+      inline int get_default_resources(void) { return m_default_resources; }
+      inline int get_default_resources_amount(void) { return m_default_amount; }
+
    private:
       char		m_name[30];
 		char*		m_picnametempl;
@@ -85,6 +94,7 @@ class Terrain_Descr {
       uchar*   m_valid_resources;
       uchar    m_nr_valid_resources;
       char     m_default_resources;
+      int      m_default_amount;
 		uint		m_texture; // renderer's texture
 };
 

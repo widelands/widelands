@@ -881,7 +881,7 @@ bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
 		
       std::string immname;
       Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
-      if(rdescr->is_detectable()) { 
+      if(rdescr->is_detectable() && amount) { 
          immname = g->get_map()->get_world()->get_resource(res)->get_indicator(amount);
       } else {
          immname = g->get_map()->get_world()->get_resource(0)->get_indicator(amount);

@@ -156,7 +156,8 @@ public:
    void load_graphics();
    void recalc_whole_map();
    void recalc_for_field_area(Coords coords, int radius);
-
+   void recalc_default_resources(void);
+   
 	void set_nrplayers(uint nrplayers);
 
 	void set_starting_pos(uint plnum, Coords c);

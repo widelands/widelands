@@ -46,7 +46,7 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_immovables=fr->Unsigned16();
-      if(nr_immovables!=world->get_nr_immovables()) throw wexception("Number of immovables in map (%i) and in world (%i) do not match", 
+      if(nr_immovables>world->get_nr_immovables()) throw wexception("Number of immovables in map (%i) is bigger than in world (%i)", 
             nr_immovables, world->get_nr_immovables());
 
       // construct ids and map

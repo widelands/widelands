@@ -46,7 +46,7 @@ void Widelands_Map_Terrain_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_terrains=fr->Unsigned16();
-      if(nr_terrains!=world->get_nr_terrains()) throw wexception("Number of terrains in file (%i) and in world (%i) do not match", 
+      if(nr_terrains>world->get_nr_terrains()) throw wexception("Number of terrains in file (%i) is bigger than in world (%i)", 
             nr_terrains, world->get_nr_terrains());
 
       // construct ids and map

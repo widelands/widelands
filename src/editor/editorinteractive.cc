@@ -319,7 +319,7 @@ void Editor_Interactive::select_tool(int n, int which) {
    // registered overlay callback functions
    get_map()->get_overlay_manager()->register_overlay_callback_function(0,0);
    get_map()->recalc_whole_map();
-
+   
    tools.current_tool_index=n;
    tools.use_tool=which;
 

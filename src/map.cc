@@ -18,7 +18,6 @@
  */
 
 #include <algorithm>
-
 #include "overlay_manager.h"
 #include "filesystem.h"
 #include "map.h"
@@ -281,6 +280,51 @@ void Map::recalc_whole_map(void)
             get_neighbour(f, i, &neighbours[i]);
          }
          get_overlay_manager()->recalc_field_overlays(f, neighbours);
+      }
+   }
+}
+
+/*
+ * recalculates all default resources.
+ *
+ * This just needed for the game, not for 
+ * the editor. Since there, default resources
+ * are not shown.
+ */
+void Map::recalc_default_resources(void) {
+   uint x,y;
+   for(y=0; y<m_height; y++) {
+      for(x=0; x<m_width; x++) {
+         MapRegion mr(this, Coords(x,y), 1);
+
+         FCoords f;
+         std::map<int,int> m;
+         int amount=0;
+         while(mr.next(&f)) {
+            Terrain_Descr* terr=f.field->get_terr();
+            Terrain_Descr* terd=f.field->get_terd();
+            m[terr->get_default_resources()]++;
+            m[terd->get_default_resources()]++;
+            amount+=terr->get_default_resources_amount()+terd->get_default_resources_amount();
+         }
+         f=get_fcoords(Coords(x,y));
+         std::map<int,int>::iterator i=m.begin();
+         int lv=0;
+         int res=0;
+         while(i!=m.end()) {
+            if(i->second>lv) {
+               lv=i->second;
+               res=i->first;
+            }
+            i++;
+         }
+         amount/=12; 
+
+         if(res==-1 || !amount)
+            f.field->set_resources(0,0);
+         else 
+            f.field->set_resources(res,amount);
+
       }
    }
 }

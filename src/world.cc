@@ -54,8 +54,8 @@ void Resource_Descr::parse(Section *s)
    m_name = s->get_string("name", s->get_name());
    if(strcmp(s->get_name(),"none")) { 
       m_max_amount = s->get_safe_int("max_amount");
-      m_is_detectable=s->get_bool("detectable", true);
    }
+   m_is_detectable=s->get_bool("detectable", true);
    while(s->get_next_string("indicator", &string))
    {
       std::vector<std::string> args;
@@ -407,6 +407,7 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer
    m_valid_resources = 0;
    m_nr_valid_resources = 0;
    m_default_resources=-1;
+   m_default_amount=0;
 
 	// Read configuration
 	snprintf(m_name, sizeof(m_name), "%s", s->get_name());
@@ -421,7 +422,8 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer
       int res=resources->get_index(resource.c_str());;
       if(res==-1)
          throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), resource.c_str());
-      m_default_resources=res; 
+      m_default_resources=res;
+      m_default_amount=amount;
    }
    
    // Parse valid resources

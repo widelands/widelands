@@ -14,7 +14,8 @@ output=water
 [work]
 0=sleep 20000
 1=animation working 20000
-2=produce water
+2=mine water
+3=produce water
 
 [buildcost]
 plank=1
