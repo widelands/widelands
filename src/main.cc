@@ -241,81 +241,16 @@ void g_main(int argc, char** argv)
 	}
 }
 
-// ** unix, win32 console *****************************************************
-#if !defined(WIN32) || (defined(WIN32) && defined(_CONSOLE)) || (defined(WIN32) && defined(__GNUC__))
 
+/*
+==============
+main
+
+Cross-platform entry point for SDL applications.
+==============
+*/
 int main(int argc, char** argv)
 {
 	g_main(argc, argv);
 	return 0;
 }
-
-// ** win32 gui ***************************************************************
-#else // WIN32, !_CONSOLE
-
-static int ParseCommandLine(char* cmdline, char** argv)
-{
-	char* bufp = cmdline;
-	int argc = 0;
-
-	while (*bufp)
-	{
-		// skip leading whitespace
-		while (isspace(*bufp))
-			++bufp;
-		// skip arg
-		if (*bufp == '"')
-		{
-			++bufp;
-			if (*bufp)
-			{
-				if (argv)
-					argv[argc] = bufp;
-				++argc;
-			}
-			// skip
-			while (*bufp && (*bufp != '"'))
-				++bufp;
-		}
-		else
-		{
-			if (*bufp)
-			{
-				if (argv)
-					argv[argc] = bufp;
-				++argc;
-			}
-			// skip
-			while (*bufp && ! isspace(*bufp))
-				++bufp;
-		}
-		if (*bufp)
-		{
-			if (argv)
-				*bufp = '\0';
-			++bufp;
-		}
-	}
-	if (argv)
-		argv[argc] = NULL;
-	return argc;
-}
-
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR /*cmdLine*/, int)
-{
-	// param cmdLine and GetCommandLine() are NOT the same
-	char* cmdLine = new char[strlen(GetCommandLine()) + 1];
-	strcpy(cmdLine, GetCommandLine());
-
-	char** args = new char*[ParseCommandLine(cmdLine, NULL)+1];
-	int argcount = ParseCommandLine(cmdLine, args);
-
-	g_main(argcount, args);
-
-	delete[] args;
-	delete[] cmdLine;
-
-	return 0;
-}
-
-#endif
