@@ -19,12 +19,12 @@
 
 #include "widelands.h"
 #include "profile.h"
-#include "pic.h"
 #include "bob.h"
 #include "worker.h"
 #include "player.h"
 #include "tribe.h"
 #include "transport.h"
+#include "pic.h"
 
 
 /*

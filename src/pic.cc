@@ -21,6 +21,9 @@
 
 #include "widelands.h"
 #include "graphic.h"
+#include "pic.h"
+
+#include <SDL.h>
 
 #define PIXEL(x, y)		m_pixels[(y)*m_pitch+(x)]
 
@@ -60,9 +63,9 @@ Bitmap::draw_rect
 Draws the outline of a rectangle
 ===============
 */
-void Bitmap::draw_rect(int rx, int ry, int rw, int rh, uchar r, uchar g, uchar b)
+void Bitmap::draw_rect(int rx, int ry, int rw, int rh, RGBColor clr)
 {
-	ushort color = pack_rgb(r, g, b);
+	ushort color = clr.pack16();
 
 	rx += m_ofsx;
 	ry += m_ofsy;
@@ -102,9 +105,9 @@ Bitmap::fill_rect
 Draws a filled rectangle
 ===============
 */
-void Bitmap::fill_rect(int rx, int ry, int rw, int rh, uchar r, uchar g, uchar b)
+void Bitmap::fill_rect(int rx, int ry, int rw, int rh, RGBColor clr)
 {
-	ushort color = pack_rgb(r, g, b);
+	ushort color = clr.pack16();
    
 	rx += m_ofsx;
 	ry += m_ofsy;
@@ -181,7 +184,7 @@ void Bitmap::clear()
 	// it assumes, that: (2*w*h)%4 == 0.
 	// This function is speedy
 	if (m_w != m_pitch || (m_w & 1 && m_h & 1))
-		fill_rect(0, 0, m_w, m_h, 0, 0, 0);
+		fill_rect(0, 0, m_w, m_h, RGBColor(0, 0, 0));
 	else {
 		int i=(m_w*m_h);
 		assert(!(i&3));

@@ -20,7 +20,6 @@
 #ifndef __TRIBE_H
 #define __TRIBE_H
 
-#include "pic.h"
 #include "bob.h"
 #include "worker.h"
 #include "building.h"

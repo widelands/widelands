@@ -67,6 +67,8 @@ OptionsMenu::res OptionsMenu::resolutions[NUM_RESOLUTIONS] = {
 OptionsMenu::OptionsMenu()
 	: BaseMenu("optionsmenu.bmp")
 {
+	Section *s = g_options.pull_section("global");
+	
 	// Menu title
 	new Textarea(this, MENU_XRES/2, 140, "Options", Align_HCenter);
 
@@ -83,7 +85,7 @@ OptionsMenu::OptionsMenu()
 
 	// Fullscreen mode
 	fullscreen = new Checkbox(this, 100, 180);
-	fullscreen->set_state(g_gr.get_mode() == Graphic::MODE_FS);
+	fullscreen->set_state(s->get_bool("fullscreen", false));
 	new Textarea(this, 125, 190, "Fullscreen", Align_VCenter);
 
 	// In-game resolution
@@ -119,8 +121,6 @@ void options_menu()
 		s->set_int("xres", om->get_xres());
 		s->set_int("yres", om->get_yres());
 		s->set_bool("fullscreen", om->get_fullscreen());
-		
-		g_gr.set_mode(0, 0, om->get_fullscreen() ? Graphic::MODE_FS : Graphic::MODE_WIN);
 	}
 
 	delete om;

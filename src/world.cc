@@ -18,12 +18,12 @@
  */
 
 #include "widelands.h"
+#include "profile.h"
 #include "world.h"
 #include "bob.h"
 #include "graphic.h"
 #include "worlddata.h"
-#include "md5.h"
-#include "profile.h"
+#include "pic.h"
 
 using std::cerr;
 using std::endl;
@@ -242,6 +242,17 @@ void World::parse_wares(Descr_Maintainer<Ware_Descr> *wares)
 // 
 // read a terrain description in
 // 
+Terrain_Descr::~Terrain_Descr()
+{ 
+	if(ntex)
+		{
+		uint i;
+		for(i=0; i<ntex; i++) 
+			delete tex[i];
+		free(tex);
+		}
+}
+
 void Terrain_Descr::read(const char *directory, Section *s)
 {
 	const char *str;

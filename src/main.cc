@@ -62,15 +62,17 @@ static void g_init(int argc, char **argv)
 		g_font = Font::load("fixed_font1");
 		setup_ui();
 		
-		g_graphic = new Graphic; // must be last because of critical_error()
-
+		// Initialize graphics last
+		Section *s = g_options.pull_section("global");
+		
+		Sys_InitGraphics(GFXSYS_SW16, 640, 480, s->get_bool("fullscreen", false));
+		
 		// complain about unknown options in the configuration file and on the 
 		// command line
 		
 		// KLUDGE!
 		// Without this, xres and yres get dropped by check_used().
 		// Profile needs support for a Syntax definition to solve this in a sensible way
-		Section *s = g_options.pull_section("global");
 		s->get_string("xres");
 		s->get_string("yres");
 		// KLUDGE!
@@ -94,10 +96,8 @@ Shutdown all subsystems
 static void g_shutdown()
 {
 	// Shutdown subsystems
-	if (g_graphic) {
-		delete g_graphic;
-		g_graphic = 0;
-	}
+	Sys_InitGraphics(GFXSYS_NONE, 0, 0, false);
+	
 	if (g_font) {
 		g_font->release();
 		g_font = 0;
@@ -131,10 +131,7 @@ void g_main(int argc, char** argv)
 		g_init(argc, argv);
 
 		try {
-			Intro* intr=new Intro;
-         intr->run();
-         delete intr;
-
+			intro();
          main_menue();
 		} catch(std::exception &e) {
 			critical_error("Unhandled exception: %s", e.what());
@@ -143,11 +140,11 @@ void g_main(int argc, char** argv)
 		g_shutdown();
 	}
 	catch(std::exception &e) {
-		g_graphic = 0; // paranoia
+		g_gr = 0; // paranoia
 		critical_error("Unhandled exception: %s", e.what());
 	}
 	catch(...) {
-		g_graphic = 0;
+		g_gr = 0;
 		critical_error("Unhandled exception");
 	}
 }

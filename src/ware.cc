@@ -18,10 +18,10 @@
  */
 
 #include "widelands.h"
-#include "pic.h"
 #include "tribe.h"
 #include "ware.h"
 #include "worker.h"
+#include "pic.h"
 
 
 /*

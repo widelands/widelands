@@ -28,6 +28,7 @@
 
 class Section;
 class Game;
+class Pic;
 
 struct World_Descr_Header {
    char name[30];
@@ -55,14 +56,7 @@ class Terrain_Descr {
    
    public:
       Terrain_Descr(void) { ntex=0; tex=0; curtex=0; m_frametime = FRAME_LENGTH; }
-      ~Terrain_Descr(void) { 
-         if(ntex) {
-            uint i;
-            for(i=0; i<ntex; i++) 
-               delete tex[i];
-            free(tex);
-         }
-      }
+      ~Terrain_Descr(void);
 
       inline Pic* get_texture(void) { return tex[curtex]; }
       inline uchar get_is(void) { return is; }

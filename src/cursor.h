@@ -22,6 +22,7 @@
 
 #include "singleton.h"
 #include "graphic.h"
+#include "pic.h"
 
 /** class Cursor
  *

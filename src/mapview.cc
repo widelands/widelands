@@ -657,7 +657,7 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 	if (!m_player->get_fieldsel_freeze())
 		track_fsel(x, y);
 
-	g_gr.needs_fs_update();
+	g_gr->update_fullscreen();
 }
 
 /*

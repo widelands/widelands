@@ -25,6 +25,8 @@
 #include "graphic.h"
 
 
+Graphic *g_gr = 0;
+
 
 /*
 Notes on the implementation
@@ -53,6 +55,12 @@ static struct {
 	float		mouse_x;
 	float		mouse_y;
 	int		mouse_maxx, mouse_maxy;
+	
+	// Graphics
+	int		gfx_system;
+	int		gfx_w;
+	int		gfx_h;
+	bool		gfx_fullscreen;
 } sys;
 	
 static char sys_recordname[256] = "";
@@ -223,6 +231,9 @@ void Sys_Init()
 		SDL_WM_GrabInput(SDL_GRAB_ON);
 		SDL_EnableUNICODE(1); // useful for e.g. chat messages
 		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+		
+		// Graphics
+		sys.gfx_system = GFXSYS_NONE;
 	}
 	catch(...) {
 		if (sys.active)
@@ -244,6 +255,12 @@ Shutdown the system
 */
 void Sys_Shutdown()
 {
+	if (g_gr)
+		{
+		log("Sys_Shutdown: graphics system not shut down\n");
+		Sys_InitGraphics(GFXSYS_NONE, 0, 0, false);
+		}
+
 	SDL_Quit();
 	sys.active = false;
 	
@@ -520,7 +537,7 @@ void Sys_HandleInput(InputCallback *cb)
 						snprintf(buf, sizeof(buf), "shot%04i.bmp", nr);
 						if (g_fs->FileExists(buf))
 							continue;
-						g_gr.screenshot(buf);
+						g_gr->screenshot(buf);
 						break;
 					}
 				}
@@ -676,3 +693,39 @@ void Sys_SetMaxMouseCoords(int x, int y)
 	sys.mouse_maxy = y;
 }
 
+/*
+===============
+Sys_InitGraphics
+
+Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE) with
+the given resolution.
+Throws an exception on failure.
+===============
+*/
+Graphic* SW16_CreateGraphics(int w, int h, bool fullscreen);
+
+void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
+{
+	if (system == sys.gfx_system && w == sys.gfx_w && h == sys.gfx_h && fullscreen == sys.gfx_fullscreen)
+		return;
+
+	if (g_gr)
+		{
+		delete g_gr;
+		g_gr = 0;
+		}
+	
+	sys.gfx_system = system;
+	sys.gfx_w = w;
+	sys.gfx_h = h;
+	sys.gfx_fullscreen = fullscreen;
+		
+	switch(system)
+		{
+		case GFXSYS_SW16:
+			g_gr = SW16_CreateGraphics(w, h, fullscreen);
+			break;
+		}
+
+	Sys_SetMaxMouseCoords(w, h);
+}

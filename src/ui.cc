@@ -110,12 +110,15 @@ Panel::~Panel()
 	}
 }
 
-/** Panel::run()
- *
- * Enters the event loop; all events will be handled by this panel.
- *
- * Returns: the return code passed to end_modal
- */
+/*
+===============
+Panel::run
+
+Enters the event loop; all events will be handled by this panel.
+
+Returns the return code passed to end_modal
+===============
+*/
 int Panel::run()
 {
 	Panel *prevmodal = _modal;
@@ -129,7 +132,7 @@ int Panel::run()
 	// Loop
 	_running = true;
 	start();
-	g_gr.needs_fs_update();
+	g_gr->update_fullscreen();
 	while(_running)
 	{
 		static InputCallback icb = {
@@ -145,16 +148,16 @@ int Panel::run()
 		if (_flags & pf_think)
 			think();
 
-		if (g_gr.does_need_update()) {
-			forefather->do_draw(g_gr.get_screenbmp());
+		if (g_gr->need_update()) {
+			forefather->do_draw(g_gr->get_render_target());
 			g_cur.draw(Sys_GetMouseX(), Sys_GetMouseY());
-			g_gr.update();
+			g_gr->refresh();
 		}
 
 		if (_flags & pf_child_die)
 			check_child_death();
 	}
-	g_gr.needs_fs_update();
+	g_gr->update_fullscreen();
 	end();
 
 	// Done
@@ -351,8 +354,8 @@ void Panel::update(int x, int y, int w, int h)
 			w += x;
 			x = 0;
 		}
-		if (x+w > (int)g_gr.get_xres())
-			w = g_gr.get_xres() - x;
+		if (x+w > g_gr->get_xres())
+			w = g_gr->get_xres() - x;
 		if (w <= 0)
 			return;
 
@@ -360,12 +363,12 @@ void Panel::update(int x, int y, int w, int h)
 			h += y;
 			y = 0;
 		}
-		if (y+h > (int)g_gr.get_yres())
-			h = g_gr.get_yres() - y;
+		if (y+h > g_gr->get_yres())
+			h = g_gr->get_yres() - y;
 		if (h <= 0)
 			return;
 
-		g_gr.register_update_rect(x, y, w, h);
+		g_gr->update_rectangle(x, y, w, h);
 	}
 }
 
@@ -921,8 +924,8 @@ void Panel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 
 	Panel *p;
 
-	g_gr.register_update_rect(x-xdiff, y-ydiff, g_cur.get_w(), g_cur.get_h());
-	g_gr.register_update_rect(x, y, g_cur.get_w(), g_cur.get_h());
+	g_gr->update_rectangle(x-xdiff, y-ydiff, g_cur.get_w(), g_cur.get_h());
+	g_gr->update_rectangle(x, y, g_cur.get_w(), g_cur.get_h());
 
 	p = ui_trackmouse(&x, &y);
 	if (!p)

@@ -18,7 +18,6 @@
  */
 
 #include "widelands.h"
-#include "pic.h"
 #include "bob.h"
 #include "descr_maintainer.h"
 #include "tribe.h"

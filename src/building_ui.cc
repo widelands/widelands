@@ -158,7 +158,7 @@ void Warehouse_Window::draw(RenderTarget* dst)
 		
 		assert(pic);
 		dst->blit(x, y, pic);
-		dst->fill_rect(x, y+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, 0, 0, 0);
+		dst->fill_rect(x, y+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, RGBColor(0, 0, 0));
 		
 		char buf[32];
 		snprintf(buf, sizeof(buf), "%i", m_warehouse->get_wares().stock(id));

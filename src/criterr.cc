@@ -50,27 +50,27 @@ public:
 };
 
 Critical_Error::Critical_Error(const char *text)
-	: Panel(0, 0, 0, g_gr.get_xres(), g_gr.get_yres())
+	: Panel(0, 0, 0, g_gr->get_xres(), g_gr->get_yres())
 {
 	// Text
-	new Textarea(this, g_gr.get_xres()/2, 150, "!! CRITICAL ERROR !!", Align_HCenter);
-	new Textarea(this, g_gr.get_xres()/2, 200, text, Align_HCenter);
+	new Textarea(this, g_gr->get_xres()/2, 150, "!! CRITICAL ERROR !!", Align_HCenter);
+	new Textarea(this, g_gr->get_xres()/2, 200, text, Align_HCenter);
 
 	// Buttons
 	Button *b;
 
-	b = new Button(this, (g_gr.get_xres()/2)-85, g_gr.get_yres()-200, 174, 24, 1);
+	b = new Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-200, 174, 24, 1);
 	b->clicked.set(this, &Critical_Error::exit);
 	b->set_title("Exit");
 
-	b = new Button(this, (g_gr.get_xres()/2)-85, g_gr.get_yres()-250, 174, 24, 1);
+	b = new Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-250, 174, 24, 1);
 	b->clickedid.set(this, &Critical_Error::end_modal);
 	b->set_title("!! Continue execution !!");
 }
 
 void Critical_Error::draw(RenderTarget* dst)
 {
-	dst->fill_rect(0, 0, get_w(), get_h(), 0, 0, 0);
+	dst->fill_rect(0, 0, get_w(), get_h(), RGBColor(0, 0, 0));
 }
 
 /** void critical_error(const char* str)
@@ -93,7 +93,7 @@ void critical_error(const char* str, ...)
 
 	log("Critical Error%s: %s\n", in_criterr ? " (recursive)" : "", buf);
 	
-	if (in_criterr || !g_graphic || g_gr.get_state() != Graphic::STATE_OK)
+	if (in_criterr || !g_gr)
 	{
 #ifdef WIN32
 		MessageBox(NULL, buf, "Wide Lands", MB_ICONINFORMATION);

@@ -191,7 +191,9 @@ Set the resolution just before going modal
 */
 void Interactive_Player::start()
 {
-	g_gr.set_mode(get_xres(), get_yres(), g_gr.get_mode());
+	Section *s = g_options.pull_section("global");
+	
+	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
 }
 
 
@@ -359,7 +361,7 @@ void Interactive_Player::think()
 	m_game->think();
    
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
-	g_gr.needs_fs_update();
+	g_gr->update_fullscreen();
 	
 	// some of the UI windows need to think()
 	Panel::think();

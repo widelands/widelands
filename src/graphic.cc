@@ -16,23 +16,20 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
+/*
+Old implementation of rendering etc...
+TODO: This should gradually be moved into sw16_*.cc
+*/
 
 #include "widelands.h"
 #include "options.h"
 #include "graphic.h"
 #include "bob.h"
 #include "map.h"
+#include "pic.h"
 
 using std::swap;
 
-Graphic *g_graphic = 0;
-
-// stupid kludge: this function from system.cc must be imported to report
-// resolution changes
-// ideally, the Graphic setup code would go into system.cc, while the actual
-// graphics code goes into different back-end code (e.g. OpenGL, software,
-// and software+MMX)
-void Sys_SetMaxMouseCoords(int x, int y);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -402,168 +399,6 @@ void render_road_vert(Bitmap *dst, Point start, Point end, ushort color)
 }
 
 
-/** class Graphic
- *
- * This functions is responsible for displaying graphics and keeping them up to date
- *
- * It's little strange in it's interface, but it is optimzed for speed, not beauty
- */
-
-/** Graphic::Graphic(void)
- *
- * Default Constructor. Simple Inits
- *
- * Args: none
- * Returns: nothing
- */
-Graphic::Graphic(void)
-{
-	Section *s = g_options.pull_section("global");
-	Mode mode;
-   
-	sc=NULL;
-   st=STATE_NOT_INIT;
-   nupr=0;
-   bneeds_fs_update=false;
-	
-	if (s->get_bool("fullscreen", true))
-		mode = Graphic::MODE_FS;
-	else
-		mode = Graphic::MODE_WIN;
-	
-	set_mode(640, 480, mode);
-}
-
-/** Graphic::~Graphic(void)
- *
- * simple cleanups.
- *
- * Args: none
- * Returns: nothing
- */
-Graphic::~Graphic(void)
-{
-   if(sc) {
-      SDL_FreeSurface(sc);
-      sc=NULL;
-   }
-   screenbmp.m_pixels = 0;
-   st = STATE_NOT_INIT;
-}
-
-/** void Graphic::set_mode(ushort x, ushort y, Mode m)
- *
- * This function sets a new graphics mode.
- *	if x==0 and y==0: ignore resolution, just set the mode (won't create a window)
- *
- * Args:	x	x resolution
- * 		y	y resolution
- * 		m	either windows or fullscreen
- * Returns: Nothing
- */
-void Graphic::set_mode(ushort x, ushort y, Mode m)
-{
-   if (!x && !y) {
-		x = screenbmp.m_w;
-		y = screenbmp.m_h;
-	}
-   if (screenbmp.m_w==x && screenbmp.m_h==y && mode==m)
-		return;
-   if(sc)
-      SDL_FreeSurface(sc);
-   sc=0;
-
-	st = STATE_NOT_INIT;
-
-   if (m == MODE_FS) {
-      sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE | SDL_FULLSCREEN);
-   } else {
-      sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
-   }
-   if (!sc) {
-      critical_error("Couldn't set video mode: %s", SDL_GetError());
-		return;
-	}
-	
-   mode=m;
-   screenbmp.m_w = x;
-   screenbmp.m_pitch = sc->pitch / (16/8);
-   screenbmp.m_h = y;
-   screenbmp.m_pixels = (ushort*) sc->pixels;
-
-   st = STATE_OK;
-
-	Sys_SetMaxMouseCoords(x, y);
-	
-   bneeds_fs_update=true;
-
-   return;
-}
-
-/** void Graphic::register_update_rect(const ushort x, const ushort y, const ushort w, const ushort h);
- *
- * This registers a rect of the screen for update
- *
- * Args: 	x	upper left corner of rect
- * 			y  upper left corner of rect
- * 			w	width
- * 			h	height
- */
-void Graphic::register_update_rect(const ushort x, const ushort y, const ushort w, const ushort h)
-{
-   if(nupr>=MAX_RECTS) {
-      bneeds_fs_update=true;
-      return;
-   }
-
-   upd_rects[nupr].x=x;
-   upd_rects[nupr].y=y;
-   upd_rects[nupr].w=w;
-   upd_rects[nupr].h=h;
-
-   ++nupr;
-
-   bneeds_update=true;
-}
-
-/** void Graphic::screenshot(const char* f)
- *
- * This makes a screenshot of a the current screen
- *
- * Args: f 	Filename to use
- * Returns: Nothing
- */
-void Graphic::screenshot(const char* f)
-{
-	// TODO: this is incorrect; it bypasses the files code
-   SDL_SaveBMP(sc, f);
-}
-
-/** void Graphic::update(void)
- *
- *	This function updates the registered rects on the screen
- *
- * Args: none
- * Returns: Nothing
- */
-void Graphic::update(void)
-{
-//   if(bneeds_fs_update) {
-      SDL_UpdateRect(sc, 0, 0, get_xres(), get_yres());
-//    } else {
-//       /*								cerr << "##########################" << endl;
-//                               cerr << nupr << endl;
-//                               for(uint i=0; i<nupr; i++)
-//                               cerr << upd_rects[i].x << ":" << upd_rects[i].y << ":" <<
-//                               upd_rects[i].w << ":" << upd_rects[i].h << endl;
-//                               cerr << "##########################" << endl;
-//                               */
-// 		SDL_UpdateRects(sc, nupr, upd_rects);
-//    }
-   nupr=0;
-   bneeds_fs_update=false;
-   bneeds_update=false;
-}
 
 /*
 ===============

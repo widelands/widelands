@@ -245,6 +245,8 @@ void Button::draw(RenderTarget* dst)
 	// draw border
 	// a pressed but not highlighted button occurs when the user has pressed
 	// the left mouse button and then left the area of the button
+	RGBColor black(0,0,0);
+	
 	if (!_pressed || !_highlighted)
 	{
 		// top edge
@@ -252,11 +254,11 @@ void Button::draw(RenderTarget* dst)
 		// left edge
 		dst->brighten_rect(0, 2, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
 		// bottom edge
-		dst->fill_rect(2, get_h()-2, get_w()-2, 1, 0, 0, 0);
-		dst->fill_rect(1, get_h()-1, get_w()-1, 1, 0, 0, 0);
+		dst->fill_rect(2, get_h()-2, get_w()-2, 1, black);
+		dst->fill_rect(1, get_h()-1, get_w()-1, 1, black);
 		// right edge
-		dst->fill_rect(get_w()-2, 2, 1, get_h()-2, 0, 0, 0);
-		dst->fill_rect(get_w()-1, 1, 1, get_h()-1, 0, 0, 0);
+		dst->fill_rect(get_w()-2, 2, 1, get_h()-2, black);
+		dst->fill_rect(get_w()-1, 1, 1, get_h()-1, black);
 	}
 	else
 	{
@@ -265,11 +267,11 @@ void Button::draw(RenderTarget* dst)
 		// right edge
 		dst->brighten_rect(get_w()-2, 0, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst->fill_rect(0, 0, get_w()-1, 1, 0, 0, 0);
-		dst->fill_rect(0, 1, get_w()-2, 1, 0, 0, 0);
+		dst->fill_rect(0, 0, get_w()-1, 1, black);
+		dst->fill_rect(0, 1, get_w()-2, 1, black);
 		// left edge
-		dst->fill_rect(0, 0, 1, get_h()-1, 0, 0, 0);
-		dst->fill_rect(1, 0, 1, get_h()-2, 0, 0, 0);
+		dst->fill_rect(0, 0, 1, get_h()-1, black);
+		dst->fill_rect(1, 0, 1, get_h()-2, black);
 	}
 }
 

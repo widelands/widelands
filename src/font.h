@@ -21,6 +21,7 @@
 #define __S__FONT_H
 
 #include "graphic.h"
+#include "pic.h"
 
 
 enum Align {

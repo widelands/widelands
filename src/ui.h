@@ -291,9 +291,7 @@ private:
 #define STATEBOX_HEIGHT 20
 
 class Statebox : public Panel {
-	static uchar dflt_highlightcolor_r;
-	static uchar dflt_highlightcolor_g;
-	static uchar dflt_highlightcolor_b;
+	static RGBColor dflt_highlightcolor;
 
 public:
 	Statebox(Panel *parent, int x, int y);
@@ -434,9 +432,7 @@ private:
  * 			class Button
  */
 class Listselect : public Panel {
-	static uchar dflt_bgcolor_r, dflt_bgcolor_g, dflt_bgcolor_b;
-	static uchar dflt_framecolor_r, dflt_framecolor_g, dflt_framecolor_b;
-	static uchar dflt_selcolor_r, dflt_selcolor_g, dflt_selcolor_b;
+	static RGBColor dflt_bgcolor, dflt_framecolor, dflt_selcolor;
 
 public:
 	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left);
@@ -452,9 +448,9 @@ public:
 	void move_up(int i);
 	void move_down(int i);
 
-	void set_bgcolor(uchar r, uchar g, uchar b);
-	void set_framecolor(uchar r, uchar g, uchar b);
-	void set_selcolor(uchar r, uchar g, uchar b);
+	void set_bgcolor(RGBColor clr);
+	void set_framecolor(RGBColor clr);
+	void set_selcolor(RGBColor clr);
 
 	void select(int i);
 	inline void *get_selection() {
@@ -475,14 +471,14 @@ private:
 		char		name[1];
 	};
 
-	uchar		m_bgcolor_r, m_bgcolor_g, m_bgcolor_b;
-	uchar		m_framecolor_r, m_framecolor_g, m_framecolor_b;
-	uchar		m_selcolor_r, m_selcolor_g, m_selcolor_b;
-	
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
 	int						m_scrollpos;	// in pixels
 	int						m_selection;	// -1 when nothing is selected
+
+	RGBColor					m_bgcolor;
+	RGBColor					m_framecolor;
+	RGBColor					m_selcolor;
 };
 
 /** class Scrollbar

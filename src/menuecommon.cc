@@ -18,6 +18,7 @@
  */
 
 #include "widelands.h"
+#include "options.h"
 #include "ui.h"
 #include "graphic.h"
 #include "cursor.h"
@@ -51,7 +52,9 @@ BaseMenu::BaseMenu(const char *bgpic)
  */
 void BaseMenu::start()
 {
-	g_gr.set_mode(MENU_XRES, MENU_YRES, g_gr.get_mode());
+	Section *s = g_options.pull_section("global");
+
+	Sys_InitGraphics(GFXSYS_SW16, MENU_XRES, MENU_YRES, s->get_bool("fullscreen", false));
 }
 
 /*

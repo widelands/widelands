@@ -20,14 +20,17 @@
 #ifndef __S__GRAPHIC_H
 #define __S__GRAPHIC_H
 
-#define 	DEF_CLRKEY	pack_rgb(0,0,255)
-
-#include "pic.h"
-
-#include <SDL.h> // need SDL_Rect
-
 #define TEXTURE_W          64
 #define TEXTURE_H          TEXTURE_W   // texture have a fixed size and are squares, TEXTURE_H is just defined for easier understandement of the code
+
+
+/*
+==============================================================================
+
+COLOR HANDLING
+
+==============================================================================
+*/
 
 /** inline ushort pack_rgb(const uchar r, const uchar g, const uchar b);
  *
@@ -87,8 +90,41 @@ end:
        return pack_rgb(r, g, b);
 }
 
-/** class Point
+/*
+class RGBColor
 */
+class RGBColor {
+	uchar m_r, m_g, m_b;
+	
+public:
+	inline RGBColor() { }
+	inline RGBColor(uchar r, uchar g, uchar b) : m_r(r), m_g(g), m_b(b) { }
+	
+	inline void set(uchar r, uchar g, uchar b) { m_r = r; m_g = g; m_b = b; }
+	
+	inline uchar r() const { return m_r; }
+	inline uchar g() const { return m_g; }
+	inline uchar b() const { return m_b; }
+	
+	inline ushort pack16() const {
+		return ((m_b>>3) + ((m_g>>2)<<5)+ ((m_r>>3)<<11) );
+	}
+	inline void unpack16(ushort clr) {
+		m_r = ((clr<<3)>>11);
+		m_g = ((clr<<2)>>5);
+		m_b = (clr<<3);
+	}
+};
+
+
+/*
+==============================================================================
+
+class Point
+
+==============================================================================
+*/
+
 struct Point
 {
    int x;
@@ -153,116 +189,117 @@ inline float operator * (const Vector& a, const Vector& b)
    return a.x * b.x + a.y * b.y + a.z * b.z;
 };
 
-/** class Graphic
- *
- * This class is responsible for all graphics stuff. It's
- * modified/optimized to work only for 16bit colordepth and nothing else
- */
-#define MAX_RECTS 20
 
-class Graphic
-{
-   // forbidden functions
-   Graphic(const Graphic&);
-   Graphic& operator=(const Graphic&);
+/*
+==============================================================================
 
-   public:
-   enum Mode
-   {
-      MODE_FS,
-      MODE_WIN
-   };
+Graphics object interfaces
 
-   enum State
-   {
-      STATE_NOT_INIT,
-      STATE_OK,
-      STATE_ERROR
-   };
+==============================================================================
+*/
 
-   Graphic(void);
-   ~Graphic(void);
+class BlitSource;
+class BlitSourceRect;
 
-   void set_mode(ushort, ushort, Mode);
-   void register_update_rect(const ushort, const ushort, const ushort, const ushort);
-   void update(void);
-   void screenshot(const char*);
+/*
+class RenderTarget
 
-   /** Graphic::State Graphic::get_state(void)
-    *
-    * returns the current state of the graphics class
-    *
-    * Args: none
-    * Returns: nothing
-    */
-   State get_state(void) const { return st; }
+This abstract class represents anything that can be rendered to.
 
-   /** inline Mode Graphic::get_mode(void)
-    *
-    * return the current mode (fs or window)
-    *
-    * Args: none
-    * Returns: the current mode
-    */
-   inline Mode get_mode(void) {  st=STATE_OK; return mode; }
+enter_window() is used to obtain a RenderTarget that can be used to draw into
+the given rectangle whle clipping and so on. It returns the new target only if
+the window is actually visible.
+After you're finished rendering into that window, call leave_window() on the
+RenderTarget that was returned from enter_window().
+*/
+class RenderTarget {
+public:
+	virtual RenderTarget* enter_window(int x, int y, int w, int h) = 0;
+	virtual void leave_window() = 0;
 
-   /** inline uint Graphic::get_xres(void) const
-    *
-    * This function returns the X Resoultion of the current screen
-    * Args: none
-    * returns: XRes
-    */
-   inline uint get_xres(void) const { return screenbmp.get_w(); }
+	virtual int get_w() const = 0;
+	virtual int get_h() const = 0;
+	
+	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr) = 0;
+   virtual void fill_rect(int x, int y, int w, int h, RGBColor clr) = 0;
+   virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
+	virtual void clear() = 0;
 
-   /** inline uint Graphic::get_yres(void) const
-    *
-    * This function returns the Y Resoultion of the current screen
-    * Args: none
-    * returns: YRes
-    */
-   inline uint get_yres(void) const { return screenbmp.get_h(); }
-
-   /** inline void Graphics::needs_fs_update(void)
-    *
-    * This functions tells the graphic that it should redraw the whole screen
-    *
-    * Args: None
-    * returns: Nothing
-    */
-   inline void needs_fs_update(void) { bneeds_fs_update=bneeds_update=true; }
-
-   /** inline bool does_need_update(void)
-    *
-    * This returns if the object needs to be updated
-    *
-    * Args: None
-    * Returns: true if the screen should be redrawn
-    */
-   inline bool does_need_update(void) { return bneeds_update; }
-
-   /** inline Bitmap *get_screenbmp()
-    *
-    * Return a Bitmap that contains the screen surface.
-    *
-    * Returns: a Bitmap representing the screen
-    */
-   inline Bitmap *get_screenbmp() { return &screenbmp; }
-
-   private:
-   Bitmap screenbmp;
-   Mode mode;
-   SDL_Surface* sc;
-   State st;
-   SDL_Rect upd_rects[MAX_RECTS];
-   uint nupr;
-   bool bneeds_fs_update;
-   bool bneeds_update;
+	virtual void blit(int dstx, int dsty, BlitSource* src) = 0;
+	virtual void blitrect(int dstx, int dsty, BlitSourceRect* src, 
+	                      int srcx, int srcy, int w, int h) = 0;
 };
 
-extern Graphic *g_graphic;
+/*
+class BlitSource
 
-#define g_gr (*g_graphic)
+This abstract class represents any kind of picture that can be copied into a
+RenderTarget.
 
+TODO: Add a blit-offset feature here (makes sense for animations)?
+*/
+class Bitmap;
+
+class BlitSource {
+	friend class Bitmap;
+
+public:
+	virtual int get_w() const = 0;
+	virtual int get_h() const = 0;
+	
+private:
+	virtual void blit_to_bitmap16(Bitmap* dst, int dstx, int dsty) = 0;
+};
+
+/*
+class BlitSourceRect
+
+This is a more general source for blits into RenderTarget which allows a
+source rectangle to be specified.
+*/
+class BlitSourceRect : public BlitSource {
+	friend class Bitmap;
+
+private:
+	virtual void blit_to_bitmap16rect(Bitmap* dst, int dstx, int dsty, int srcx, int srcy, int w, int h) = 0;
+};
+
+
+
+/*
+==============================================================================
+
+class Graphic
+
+==============================================================================
+*/
+
+/*
+class Graphic
+
+This interface represents the framebuffer / screen.
+*/
+class Graphic {
+public:
+	virtual ~Graphic() { }
+
+	virtual int get_xres() = 0;
+	virtual int get_yres() = 0;
+	virtual RenderTarget* get_render_target() = 0;
+	virtual void update_fullscreen() = 0;
+	virtual void update_rectangle(int x, int y, int w, int h) = 0;
+	virtual bool need_update() = 0;
+	virtual void refresh() = 0;
+	
+	virtual void screenshot(const char* fname) = 0;
+};
+
+extern Graphic* g_gr;
+
+
+// TODO: get rid of the following
+class Bitmap;
+class Pic;
 
 void render_right_triangle(Bitmap*, Point_with_bright*, Point_with_bright*, Point_with_bright*, Pic*, int, int);
 void render_bottom_triangle(Bitmap*, Point_with_bright*, Point_with_bright*, Point_with_bright*, Pic*, int, int);

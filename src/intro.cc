@@ -18,48 +18,48 @@
  */
 
 #include "widelands.h"
+#include "menuecommon.h"
 #include "intro.h"
-#include "graphic.h"
-#include "cursor.h"
 
-static bool end_run; // it's better than making it private static
 
-// 
-// class Intro
-//
-AutoPic Intro::splash("splash.bmp", 640, 480);
+/*
+==============================================================================
 
-Intro::Intro(void) {
-   end_run=false;
+Intro IMPLEMENTATION
+
+==============================================================================
+*/
+
+class Intro : public BaseMenu {
+public:
+	Intro();
+	
+	virtual bool handle_mouseclick(uint btn, bool down, int x, int y);
 };
 
-Intro::~Intro(void) {
-}
-               
-void Intro::run(void) {
-	g_gr.needs_fs_update();
-	while(!end_run)
-	{
-		static InputCallback icb = {
-			&Intro::mclick,
-		   0,
-         0
-      };
-	
-		Sys_HandleInput(&icb);
-
-		if (g_gr.does_need_update()) {
-			g_gr.get_screenbmp()->blit(0, 0, &splash);
-			g_gr.update();
-		}
-	
-      g_gr.needs_fs_update();
-	}
-	// Done
-	
+Intro::Intro()
+	: BaseMenu("splash.bmp")
+{
 }
 
-void Intro::mclick(bool b, int but, uint buts, int x, int y) {
-   if(b)
-      end_run=true;
+bool Intro::handle_mouseclick(uint btn, bool down, int x, int y)
+{
+	if (down)
+		end_modal(0);
+	
+	return true;
+}
+
+
+/*
+===============
+intro
+
+Show the splash screen
+===============
+*/
+void intro()
+{
+	Intro i;
+	i.run();
 }

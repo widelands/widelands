@@ -20,25 +20,7 @@
 #ifndef __S__INTRO_H
 #define __S__INTRO_H
 
-#include "auto_pic.h"
-
-// 
-// This class shows the splash screen, when run(), then exits
-// to continue the real game. It's not really user interface, that's 
-// why it got no base class
-class Intro {
-   public:
-   Intro();
-   ~Intro();
-
-   void run();
-   
-   static void mclick(bool down, int btn, uint btns, int x, int y);
-               
-   private:
-      static AutoPic splash;
-};
-   
+void intro();
 
 #endif // __S__INTRO_H
 

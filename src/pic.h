@@ -25,81 +25,6 @@ class Animation;
 /*
 ==============================================================================
 
-INTERFACES
-
-==============================================================================
-*/
-
-class BlitSource;
-class BlitSourceRect;
-
-/*
-class RenderTarget
-
-This abstract class represents anything that can be rendered to.
-
-enter_window() is used to obtain a RenderTarget that can be used to draw into
-the given rectangle whle clipping and so on. It returns the new target only if
-the window is actually visible.
-After you're finished rendering into that window, call leave_window() on the
-RenderTarget that was returned from enter_window().
-*/
-class RenderTarget {
-public:
-	virtual RenderTarget* enter_window(int x, int y, int w, int h) = 0;
-	virtual void leave_window() = 0;
-
-	virtual int get_w() const = 0;
-	virtual int get_h() const = 0;
-	
-	virtual void draw_rect(int x, int y, int w, int h, uchar r, uchar g, uchar b) = 0;
-   virtual void fill_rect(int x, int y, int w, int h, uchar r, uchar g, uchar b) = 0;
-   virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
-	virtual void clear() = 0;
-
-	virtual void blit(int dstx, int dsty, BlitSource* src) = 0;
-	virtual void blitrect(int dstx, int dsty, BlitSourceRect* src, 
-	                      int srcx, int srcy, int w, int h) = 0;
-};
-
-/*
-class BlitSource
-
-This abstract class represents any kind of picture that can be copied into a
-RenderTarget.
-
-TODO: Add a blit-offset feature here (makes sense for animations)?
-*/
-class Bitmap;
-
-class BlitSource {
-	friend class Bitmap;
-
-public:
-	virtual int get_w() const = 0;
-	virtual int get_h() const = 0;
-	
-private:
-	virtual void blit_to_bitmap16(Bitmap* dst, int dstx, int dsty) = 0;
-};
-
-/*
-class BlitSourceRect
-
-This is a more general source for blits into RenderTarget which allows a
-source rectangle to be specified.
-*/
-class BlitSourceRect : public BlitSource {
-	friend class Bitmap;
-
-private:
-	virtual void blit_to_bitmap16rect(Bitmap* dst, int dstx, int dsty, int srcx, int srcy, int w, int h) = 0;
-};
-
-
-/*
-==============================================================================
-
 IMPLEMENTATIONS
 
 ==============================================================================
@@ -134,8 +59,8 @@ class Bitmap : public RenderTarget, public BlitSourceRect {
 		RenderTarget* enter_window(int x, int y, int w, int h);
 		void leave_window();
       
-		void draw_rect(int x, int y, int w, int h, uchar r, uchar g, uchar b);
-      void fill_rect(int x, int y, int w, int h, uchar r, uchar g, uchar b);
+		void draw_rect(int x, int y, int w, int h, RGBColor clr);
+      void fill_rect(int x, int y, int w, int h, RGBColor clr);
       void brighten_rect(int x, int y, int w, int h, int factor);
       void clear(void);
       

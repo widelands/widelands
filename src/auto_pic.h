@@ -20,6 +20,7 @@
 #ifndef __S__AUTO_PIC_H
 #define __S__AUTO_PIC_H
 
+#include "graphic.h"
 #include "pic.h"
 
 /** class AutoPic

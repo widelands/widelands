@@ -29,9 +29,7 @@ Statebox
 */
 
 AutoPic Statebox::_gr("checkbox.bmp", STATEBOX_WIDTH*2, STATEBOX_HEIGHT);
-uchar Statebox::dflt_highlightcolor_r = 100;
-uchar Statebox::dflt_highlightcolor_g = 100;
-uchar Statebox::dflt_highlightcolor_b = 80;
+RGBColor Statebox::dflt_highlightcolor(100, 100, 80);
 
 
 /** Statebox::Statebox(Panel *parent, int x, int y)
@@ -105,10 +103,10 @@ void Statebox::draw(RenderTarget* dst)
 
 	if (_highlighted)
 	{
-		dst->fill_rect(0, 0, get_w(), 1, dflt_highlightcolor_r, dflt_highlightcolor_g, dflt_highlightcolor_b);
-		dst->fill_rect(0, 0, 1, get_h(), dflt_highlightcolor_r, dflt_highlightcolor_g, dflt_highlightcolor_b);
-		dst->fill_rect(0, get_h()-1, get_w(), 1, dflt_highlightcolor_r, dflt_highlightcolor_g, dflt_highlightcolor_b);
-		dst->fill_rect(get_w()-1, 0, 1, get_h(), dflt_highlightcolor_r, dflt_highlightcolor_g, dflt_highlightcolor_b);
+		dst->fill_rect(0, 0, get_w(), 1, dflt_highlightcolor);
+		dst->fill_rect(0, 0, 1, get_h(), dflt_highlightcolor);
+		dst->fill_rect(0, get_h()-1, get_w(), 1, dflt_highlightcolor);
+		dst->fill_rect(get_w()-1, 0, 1, get_h(), dflt_highlightcolor);
 	}
 }
 

@@ -100,6 +100,6 @@ void Cursor::draw(const uint x, const uint y)
 	if(!show_c)
 		return;
 	
-	g_gr.get_screenbmp()->blit(x, y, pic);
+	g_gr->get_render_target()->blit(x, y, pic);
 }
 

@@ -37,10 +37,6 @@
  *
  * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
  * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
- *
- * DEPENDS: Graph::Pic
- * 			Graph::draw_pic
- * 			Initalized g_gr object
  */
 
 AutoPic Window::l_border("win_l_border.bmp", CORNER, MUST_HAVE_NPIX);
