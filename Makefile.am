@@ -1,6 +1,6 @@
 SUBDIRS= src wffcreate
 
-EXTRA_DIST=pics
+EXTRA_DIST=pics fonts
 
 EXTRADATADIRS=pics/ fonts/
 EXTRADATA=pics/*.bmp fonts/*.wff

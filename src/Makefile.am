@@ -49,7 +49,8 @@ widelands_SOURCES=main.cc \
 						menuecommon.cc \
 						menuecommon.h \
 						growablearray.cc \
-						growablearray.h
+						growablearray.h \
+						mytypes.h
 
 
 #  uncomment the following if widelands requires the math library
