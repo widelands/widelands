@@ -538,53 +538,10 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 			
 	// Draw the fsel last
    if (draw_fsel) {
-      picid = get_graphicimpl()->get_gameicons()->pic_fieldsel;
+      picid = mri->fsel;
       g_gr->get_picture_size(picid, &w, &h);
 
       dst->blit(pos.x - (w>>1), pos.y - (h>>1), picid);
-
-/*
-      int i=mri->fieldsel_radius;
-      while(i--) {
-         int blitx=pos.x, blity=pos.y;
-         int z=i;
-         while(z--) { blitx-=FIELD_WIDTH>>1; blity-=FIELD_HEIGHT>>1; }
-         z=i;
-         while(z--) { 
-            blitx+=FIELD_WIDTH;  
-            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
-         } 
-         z=i;
-         while(z--) {
-            blitx+=FIELD_WIDTH>>1;
-            blity+=FIELD_HEIGHT>>1;
-            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
-         }
-         z=i;
-         while(z--) {
-            blitx-=FIELD_WIDTH>>1;
-            blity+=FIELD_HEIGHT>>1;
-            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
-         }
-         z=i;
-         while(z--) {
-            blitx-=FIELD_WIDTH;
-            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
-         }
-         z=i;
-         while(z--) {
-            blitx-=FIELD_WIDTH>>1;
-            blity-=FIELD_HEIGHT>>1;
-            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
-         }
-         z=i;
-         while(z--) {
-            blitx+=FIELD_WIDTH>>1;
-            blity-=FIELD_HEIGHT>>1;
-            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
-         }
-      }
-      */
    }
 }
 
@@ -1456,7 +1413,6 @@ void GraphicImpl::allocate_gameicons()
 		m_gameicons->pics_roadb[i] = g_gr->get_picture(PicMod_Game, roadb_names[i], RGBColor(0,0,255));
 	for(int i = 0; i < 5; i++)
 		m_gameicons->pics_build[i] = g_gr->get_picture(PicMod_Game, build_names[i], RGBColor(0,0,255));
-	m_gameicons->pic_fieldsel = g_gr->get_picture(PicMod_Game, "pics/fsel.bmp", RGBColor(0,0,255));
 }
 
 

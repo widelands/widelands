@@ -118,7 +118,7 @@ called when the listselect changes
 ===========
 */
 void Editor_Tool_Menu::changed_to_function(int n) {
-   m_parent->select_tool(n);
+   m_parent->select_tool(n, true);
 }
 
 /*
@@ -248,7 +248,6 @@ construct editor sourroundings
 Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    m_editor = e;
 
-
    // The mapview. watch the map!!!
    Map_View* mm;
    mm = new Map_View(this, 0, 0, get_w(), get_h(), this);
@@ -296,6 +295,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Tool_Info(6, 7, new Editor_Set_Right_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 7, new Editor_Set_Down_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 6, new Editor_Set_Both_Terrain_Tool()));
+   select_tool(1, true);
 }
 
 /****************************************
@@ -309,6 +309,7 @@ Editor_Interactive::~Editor_Interactive() {
       delete tools.tools.back();
       tools.tools.pop_back();
    }
+   unset_fsel(); // reset default fsel
 }
 
 /*
@@ -538,7 +539,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
          case KEY_RSHIFT:
             if(!tools.using_linked_tool) {
                tools.using_linked_tool=true;
-               select_tool(tools.tools[tools.current_tool]->f_linked_tool);
+               select_tool(tools.tools[tools.current_tool]->f_linked_tool, false);
             }
             return true;
 
@@ -547,7 +548,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
          case KEY_MODE:
             if(!tools.using_linked_tool) {
                tools.using_linked_tool=true;
-               select_tool(tools.tools[tools.current_tool]->s_linked_tool);
+               select_tool(tools.tools[tools.current_tool]->s_linked_tool, false);
             }
             return true;
       }
@@ -560,7 +561,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
          case KEY_RALT:
          case KEY_MODE:
             if(tools.using_linked_tool) {
-               select_tool(tools.last_tool);
+               select_tool(tools.last_tool, true);
                tools.using_linked_tool=false;
             }
             return true;
@@ -576,12 +577,16 @@ Editor_Interactive::select_tool()
 select a new tool 
 ===========
 */
-void Editor_Interactive::select_tool(int n) {
+void Editor_Interactive::select_tool(int n, bool new_default_tool) {
    tools.last_tool=tools.current_tool;
    tools.current_tool=n;
 
-   
-// TODO: call some kind of 'you've been selected' function
+   set_fsel(tools.tools[n]->tool->get_fsel());
+
+   if(new_default_tool) {
+      tools.last_tool=-1;
+      tools.using_linked_tool=false;
+   }
 }
 
 

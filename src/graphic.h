@@ -248,6 +248,7 @@ struct MapRenderInfo {
    Coords	fieldsel; // field selection marker, moved by cursor
    int fieldsel_radius; // how many fields around shall the fieldsel mark? important for 
                      // edtor or when a area shall be selected in the game
+   int fsel; // currently selected fieldsel graphic
    uchar*	overlay_basic; // borders and build help
 	uchar*	overlay_roads; // needs to be ORed with logical road info
 	bool		show_buildhelp;

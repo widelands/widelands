@@ -63,7 +63,7 @@ class Editor_Interactive : public Interactive_Base {
          std::vector<Tool_Info*> tools;
       };
 
-      void select_tool(int);
+      void select_tool(int, bool);
       int get_selected_tool(void) { return tools.current_tool; } 
    private:
       static const int PANEL_HEIGHT=100;

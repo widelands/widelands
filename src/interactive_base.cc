@@ -57,6 +57,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 	
    
    set_fieldsel_radius(0);
+   unset_fsel(); // set default fsel
 }
 
 /*

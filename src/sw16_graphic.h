@@ -155,7 +155,6 @@ rendermap()
 struct GameIcons {
 	uint	pics_roadb[3];	// green, yellow, red
 	uint	pics_build[5];	// flag, small, medium, big, mine (same order as Overlay_Build_*)
-	uint	pic_fieldsel;
 };
 
 /*
