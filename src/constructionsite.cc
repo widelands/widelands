@@ -528,7 +528,7 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 	lines = h * completedtime * nr_pics / totaltime;
    lines -= h*anim_pic; // This won't work if pictures have various sizes
 
-   log("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
+   // NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
    if(anim_pic) // not the first pic
       dst->drawanim(pos.x, pos.y, anim, tanim-FRAME_LENGTH, get_owner()->get_playercolor()); // draw the prev pic completly
 
