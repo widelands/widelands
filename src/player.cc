@@ -57,7 +57,7 @@ we could use static cast to upcast our Editor_Game_Base object
 but instead, we let us pass the object once again
 ===============
 */
-void Player::init_for_game(Game* game) 
+void Player::init_for_game(Game* game)
 {
 	Map *map = game->get_map();
 
@@ -74,6 +74,7 @@ void Player::init_for_game(Game* game)
 	wh->create_wares(game->get_safe_ware_id("carrier"), 20);
 	wh->create_wares(game->get_safe_ware_id("builder"), 4);
 	wh->create_wares(game->get_safe_ware_id("lumberjack"), 6);
+	wh->create_wares(game->get_safe_ware_id("forrester"), 3);
 
 	wh->create_wares(game->get_safe_ware_id("plank"), 30);
 	wh->create_wares(game->get_safe_ware_id("log"), 10);
@@ -119,9 +120,10 @@ Mark the given area as (un)seen
 void Player::set_area_seen(int x, int y, uint area, bool on)
 {
 	Map_Region_Coords r(Coords(x, y), area, m_egbase->get_map());
+	Coords c;
 
-	while(r.next(&x, &y)) {
-      set_field_seen(x, y, on);
+	while(r.next(&c)) {
+      set_field_seen(c.x, c.y, on);
    }
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -586,27 +586,27 @@ in pixels.
 void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 {
 	Bitmap dst;
-	
+
 	viewofs.x -= m_offset.x;
 	viewofs.y -= m_offset.y;
-	
+
 	dst.pixels = &m_bitmap->pixels[m_rect.y * m_bitmap->pitch + m_rect.x];
 	dst.pitch = m_bitmap->pitch;
 	dst.w = m_rect.w;
 	dst.h = m_rect.h;
 	dst.hasclrkey = false; // should be irrelevant
-	
+
 	get_graphicimpl()->allocate_gameicons();
-	
+
 	// Completely clear the window
 	dst.clear();
-   
+
    Map_Region_Coords fsel_coords_int(mri->fieldsel, mri->fieldsel_radius, mri->egbase->get_map());
-   int next_fieldsel_cord_x, next_fieldsel_cord_y;
-   fsel_coords_int.next(&next_fieldsel_cord_x, &next_fieldsel_cord_y);
-   
+	Coords next_fieldsel_cord;
+   fsel_coords_int.next(&next_fieldsel_cord);
+
 	// Actually draw the map. Loop through fields row by row
-	// For each field, draw ground textures, then roads, then immovables 
+	// For each field, draw ground textures, then roads, then immovables
 	// (and borders), then bobs, then overlay stuff (build icons etc...)
 	//Player *player = m_player->get_player();
 	Map* map = mri->egbase->get_map();
@@ -620,7 +620,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	maxfy = (viewofs.y + dst.h) / (FIELD_HEIGHT>>1);
 	maxfy += 10; // necessary because of heights
    minfx -= mri->fieldsel_radius; // to make fieldsel work properly. better than having if()s in every loop
-   minfy -= mri->fieldsel_radius; 
+   minfy -= mri->fieldsel_radius;
 
 	//log("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
 	int dx = maxfx - minfx + mri->fieldsel_radius + 1;
@@ -650,7 +650,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 		blposx -= viewofs.x;
 		bposy -= viewofs.y;
 
-		// Get linear top-left coordinates 
+		// Get linear top-left coordinates
 		tl_y = linear_fy-1;
 		tl_x = linear_fx - (tl_y&1);
 
@@ -672,11 +672,11 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 		while(count--) {
 			Field *f_br, *f_r, *f_l, *f_tr;
 			int rposx, brposx, lposx, trposx;
-			int r_x, r_y, br_x, br_y, l_x, l_y, tr_x, tr_y; 
+			int r_x, r_y, br_x, br_y, l_x, l_y, tr_x, tr_y;
 			bool render_r=true;
 			bool render_b=true;
          bool draw_fsel=false;
-         
+
 			map->get_rn(fx, fy, f, &r_x, &r_y, &f_r);
 			rposx = posx + FIELD_WIDTH;
 
@@ -703,9 +703,9 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 			}
 
          // Would this be a field where a fsel should be?
-         if(fx==next_fieldsel_cord_x && fy==next_fieldsel_cord_y) {
+         if(fx==next_fieldsel_cord.x && fy==next_fieldsel_cord.y) {
             draw_fsel=true;
-            fsel_coords_int.next(&next_fieldsel_cord_x, &next_fieldsel_cord_y);
+            fsel_coords_int.next(&next_fieldsel_cord);
          }
 
 			// Render stuff that belongs to ground triangles

@@ -36,22 +36,28 @@ class WorkerProgram
 
 struct WorkerAction {
 	enum Type {
-		actCreateItem,		// sparam1 = ware name
-		actFindObject,		// iparam1 = radius predicate, iparam2 = attribute predicate (if >= 0)
-		actWalk,				// iparam1 = walkXXX
-		actAnimation,		// iparam1 = anim id; iparam2 = duration
-		actReturn,			// iparam1 = 0: don't drop item on flag, 1: do drop item on flag
-		actObject,			// sparam1 = object command
+		actCreateItem,			// sparam1 = ware name
+		actSetDescription,	// sparamv = possible bobs
+		actFindObject,			// iparam1 = radius predicate, iparam2 = attribute predicate (if >= 0)
+		actFindSpace,			// iparam1 = radius
+		actWalk,					// iparam1 = walkXXX
+		actAnimation,			// iparam1 = anim id; iparam2 = duration
+		actReturn,				// iparam1 = 0: don't drop item on flag, 1: do drop item on flag
+		actObject,				// sparam1 = object command
+		actPlant,				// plant the selected description
 	};
 
 	enum {
-		walkObject
+		walkObject,			// walk to objvar1
+		walkCoords,			// walk to coords
 	};
 
-	Type			type;
-	int			iparam1;
-	int			iparam2;
-	std::string	sparam1;
+	Type				type;
+	int				iparam1;
+	int				iparam2;
+	std::string		sparam1;
+
+	std::vector<std::string>	sparamv;
 };
 
 class WorkerProgram {
@@ -123,6 +129,16 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 				act.type = WorkerAction::actCreateItem;
 				act.sparam1 = cmd[1];
 			}
+			else if (cmd[0] == "setdescription")
+			{
+				if (cmd.size() < 2)
+					throw wexception("Usage: setdescription <bob name> <bob name> ...");
+
+				act.type = WorkerAction::actSetDescription;
+
+				for(uint i = 1; i < cmd.size(); i++)
+					act.sparamv.push_back(cmd[i]);
+			}
 			else if (cmd[0] == "findobject")
 			{
 				uint i;
@@ -152,6 +168,19 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 				if (act.iparam1 <= 0)
 					throw wexception("findobject: must specify radius");
 			}
+			else if (cmd[0] == "findspace")
+			{
+				char* endp;
+
+				if (cmd.size() != 2)
+					throw wexception("Usage: findspace <radius>");
+
+				act.type = WorkerAction::actFindSpace;
+				act.iparam1 = strtol(cmd[1].c_str(), &endp, 0);
+
+				if ((endp && *endp) || act.iparam1 <= 0)
+					throw wexception("Bad findspace radius %i", act.iparam1);
+			}
 			else if (cmd[0] == "walk")
 			{
 				if (cmd.size() != 2)
@@ -161,6 +190,8 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 
 				if (cmd[1] == "object")
 					act.iparam1 = WorkerAction::walkObject;
+				else if (cmd[1] == "coords")
+					act.iparam1 = WorkerAction::walkCoords;
 				else
 					throw wexception("Bad walk destination '%s'", cmd[1].c_str());
 			}
@@ -198,6 +229,10 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 
 				act.type = WorkerAction::actObject;
 				act.sparam1 = cmd[1];
+			}
+			else if (cmd[0] == "plant")
+			{
+				act.type = WorkerAction::actPlant;
 			}
 			else
 				throw wexception("unknown command '%s'", cmd[0].c_str());
@@ -1013,7 +1048,9 @@ PROGRAM task
 
 Follow the steps of a configuration-defined program.
 ivar1 is the next action to be performed.
+ivar2 is used to store description indices selected by setdescription
 objvar1 is used to store objects found by findobject
+coords is used to store target coordinates found by findspace
 
 ==============================
 */
@@ -1099,6 +1136,25 @@ void Worker::program_update(Game* g, State* state)
 				return;
 			}
 
+		case WorkerAction::actSetDescription:
+			{
+				int idx = g->logic_rand() % act->sparamv.size();
+
+				molog("  SetDescription: %s\n", act->sparamv[idx].c_str());
+
+				state->ivar2 = g->get_map()->get_world()->get_immovable_index(act->sparamv[idx].c_str());
+				if (state->ivar2 < 0) {
+					molog("  WARNING: Unknown immovable %s\n", act->sparamv[idx].c_str());
+					set_signal("fail");
+					pop_task(g);
+					return;
+				}
+
+				state->ivar1++;
+				schedule_act(g, 10);
+				return;
+			}
+
 		case WorkerAction::actFindObject:
 			{
 				std::vector<ImmovableFound> list;
@@ -1126,6 +1182,44 @@ void Worker::program_update(Game* g, State* state)
 				state->ivar1++;
 				schedule_act(g, 10);
 				return;
+			}
+
+		case WorkerAction::actFindSpace:
+			{
+				std::vector<Coords> list;
+				Map* map = g->get_map();
+				World* w = map->get_world();
+				Immovable_Descr* descr;
+
+				molog("  FindSpace(%i): for %i\n", act->iparam1, state->ivar2);
+
+				if (state->ivar2 < 0 || state->ivar2 >= w->get_nr_bobs()) {
+					molog("  WARNING: [actFindSpace]: bad immovable index %i\n", state->ivar2);
+					set_signal("fail");
+					pop_task(g);
+					return;
+				}
+
+				descr = w->get_immovable_descr(state->ivar2);
+
+				// TODO: Hmm... the field predicate should be BUILDCAPS_FLAG *or* BUILDCAPS_SMALL...
+
+				if (!map->find_fields(get_position(), act->iparam1, &list, FindFieldCaps(BUILDCAPS_SMALL))) {
+					molog("  no space found\n");
+					set_signal("fail");
+					pop_task(g);
+					return;
+				}
+
+				// Pick a location at random
+				int sel = g->logic_rand() % list.size();
+
+				state->coords = list[sel];
+
+				molog("  selected %i,%i\n", state->coords.x, state->coords.y);
+
+				state->ivar1++;
+				schedule_act(g, 10);
 			}
 
 		case WorkerAction::actWalk:
@@ -1164,6 +1258,11 @@ void Worker::program_update(Game* g, State* state)
 							throw wexception("MO(%u): [actWalk]: bad object type = %i", get_serial(), obj->get_type());
 						break;
 					}
+
+				case WorkerAction::walkCoords:
+					molog("  coords(%i,%i)\n", state->coords.x, state->coords.y);
+					dest = state->coords;
+					break;
 
 				default:
 					throw wexception("MO(%u): [actWalk]: bad act->iparam1 = %i", get_serial(), act->iparam1);
@@ -1227,6 +1326,27 @@ void Worker::program_update(Game* g, State* state)
 					((Immovable*)obj)->switch_program(g, act->sparam1);
 				else
 					throw wexception("MO(%u): [actObject]: bad object type = %i", get_serial(), obj->get_type());
+
+				state->ivar1++;
+				schedule_act(g, 10);
+				return;
+			}
+
+		case WorkerAction::actPlant:
+			{
+				Coords pos = get_position();
+
+				molog("  Plant: %i at %i,%i\n", state->ivar2, pos.x, pos.y);
+
+				// Check if the map is still free here
+				if (g->get_map()->get_immovable(pos)) {
+					molog("  field no longer free\n");
+					set_signal("fail");
+					pop_task(g);
+					return;
+				}
+
+				g->create_immovable(pos.x, pos.y, state->ivar2);
 
 				state->ivar1++;
 				schedule_act(g, 10);

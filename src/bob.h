@@ -73,9 +73,11 @@ public:
 	struct State {
 		Task*				task;
 		int				ivar1;
+		int				ivar2;
 		Object_Ptr		objvar1;
 		std::string		svar1;
 
+		Coords					coords;
 		DirAnimations*			diranims;
 		Path*						path;
 		Request*					request;

@@ -130,12 +130,12 @@ if this is needed.
 */
 int Editor_Increase_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
- 
+	Coords c;
+
    int max, i;
    max=0;
-   while(mrc.next(&mx, &my)) {
-      i=map->change_field_height(Coords(mx,my), m_changed_by);
+   while(mrc.next(&c)) {
+      i=map->change_field_height(c, m_changed_by);
       if(i>max) max=i;
    }
    return parent->get_fieldsel_radius()+max;
@@ -160,12 +160,12 @@ if this is needed.
 */
 int Editor_Decrease_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
-  
+   Coords c;
+
    int max,i;
    max=0;
-   while(mrc.next(&mx, &my)) {
-      i=map->change_field_height(Coords(mx,my), -m_changed_by);
+   while(mrc.next(&c)) {
+      i=map->change_field_height(c, -m_changed_by);
       if(i>max) max=i;
    }
    return parent->get_fieldsel_radius()+max;
@@ -192,11 +192,11 @@ int Editor_Set_Height_Tool::handle_click_impl(const Coords* coordinates, Field* 
    
 
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
+   Coords c;
    int i, max;
    max=0;
-   while(mrc.next(&mx, &my)) {
-      i=map->set_field_height(mx, my, m_set_to);
+   while(mrc.next(&c)) {
+      i=map->set_field_height(c, m_set_to);
       if(i>max) max=i;
    }
 
@@ -222,13 +222,13 @@ if this is needed.
 */
 int Editor_Noise_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
+   Coords c;
 
    int i, max;
    max=0;
-   while(mrc.next(&mx, &my)) { 
+   while(mrc.next(&c)) {
       int j=m_lower_value+(int) ((double)(m_upper_value-m_lower_value)*rand()/(RAND_MAX+1.0));
-      i=map->set_field_height(Coords(mx,my), j);
+      i=map->set_field_height(c, j);
       if(i>max) max=i;
    }
    return parent->get_fieldsel_radius()+max;
@@ -253,12 +253,12 @@ if this is needed.
 */
 int Editor_Set_Down_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
- 
+   Coords c;
+
    int i, max;
    max=0;
-   while(mrc.next(&mx, &my)) { 
-      i=map->change_field_terrain(mx,my,m_terrain,true, false);
+   while(mrc.next(&c)) {
+      i=map->change_field_terrain(c,m_terrain,true, false);
       if(i>max) max=i;
    }
    return parent->get_fieldsel_radius()+max;
@@ -283,12 +283,12 @@ if this is needed.
 */
 int Editor_Set_Right_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
- 
+   Coords c;
+
    int i, max;
    max=0;
-   while(mrc.next(&mx, &my)) {
-      i=map->change_field_terrain(mx,my,m_terrain,false,true);
+   while(mrc.next(&c)) {
+      i=map->change_field_terrain(c,m_terrain,false,true);
       if(i>max) max=i;
    }
    return parent->get_fieldsel_radius()+max;
@@ -313,12 +313,12 @@ if this is needed.
 */
 int Editor_Set_Both_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
- 
+   Coords c;
+
    int i, max;
    max=0;
-   while(mrc.next(&mx, &my)) { 
-      i=map->change_field_terrain(mx,my,m_terrain,true,true);
+   while(mrc.next(&c)) {
+      i=map->change_field_terrain(c,m_terrain,true,true);
       if(i>max) max=i;
    }
    return parent->get_fieldsel_radius()+max;
@@ -344,19 +344,19 @@ int Editor_Place_Immovable_Tool::handle_click_impl(const Coords* coordinates, Fi
    if(!m_nr_enabled) return parent->get_fieldsel_radius();
 
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
+   Coords c;
 
-   while(mrc.next(&mx, &my)) {
+   while(mrc.next(&c)) {
       int rand_value=(int) ((double)(m_nr_enabled)*rand()/(RAND_MAX+1.0));
       int i=0;
       int j=rand_value+1;
       while(j) { if(m_immovables_enabled[i]==true) j--; ++i; }
-      Field *f = parent->get_map()->get_field(mx, my);
+      Field *f = parent->get_map()->get_field(c);
       if (f->get_immovable()) {
-         if(f->get_immovable()->get_size() != BaseImmovable::NONE) 
+         if(f->get_immovable()->get_size() != BaseImmovable::NONE)
             continue;
       }
-      parent->get_editor()->create_immovable(mx,my,i-1);
+      parent->get_editor()->create_immovable(c.x, c.y, i-1);
    }
    return parent->get_fieldsel_radius()+2;
 }
@@ -378,10 +378,10 @@ deletes the immovable at the given location
 */
 int Editor_Delete_Immovable_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
    Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
-   int mx, my;
+   Coords c;
 
-   while(mrc.next(&mx, &my)) {
-      Field *f = parent->get_map()->get_field(mx, my);
+   while(mrc.next(&c)) {
+      Field *f = parent->get_map()->get_field(c);
       BaseImmovable* mim=f->get_immovable();
       if (mim) {
          mim->remove(parent->get_editor());

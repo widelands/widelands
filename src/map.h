@@ -36,7 +36,7 @@
 
 const ushort NUMBER_OF_MAP_DIMENSIONS=15;
 const ushort MAP_DIMENSIONS[] = {
-   64, 96, 128, 160, 192, 224, 256, 
+   64, 96, 128, 160, 192, 224, 256,
    288, 320, 352, 384, 416, 448, 480,
    512 };
 
@@ -81,6 +81,10 @@ struct FindImmovable {
 struct FindBob {
 	virtual bool accept(Bob *imm) const = 0;
 };
+struct FindField {
+	virtual bool accept(Coords c, Field* f) const = 0;
+};
+
 
 /** class Map
  *
@@ -138,6 +142,7 @@ public:
 	BaseImmovable *get_immovable(Coords coord);
 	bool find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list);
 	bool find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list, const FindImmovable &functor);
+	bool find_fields(Coords coord, uint radius, std::vector<Coords>* list, const FindField& functor);
 
 	// Field logic
 	inline Field* get_field(const Coords c);
@@ -203,7 +208,6 @@ public:
    int set_field_height(const Coords&, int);
    int set_field_height(int, int, int);
    // change terrain of a field, recalculate buildcaps
-   int change_field_terrain(int, int, int, bool, bool);
    int change_field_terrain(Coords, int, bool, bool);
 
 private:
@@ -242,19 +246,26 @@ struct FindImmovableSize : public FindImmovable {
 };
 struct FindImmovableType : public FindImmovable {
 	FindImmovableType(int type) : m_type(type) { }
-	
+
 	virtual bool accept(BaseImmovable *imm) const;
-	
+
 	int m_type;
 };
 struct FindImmovableAttribute : public FindImmovable {
 	FindImmovableAttribute(uint attrib) : m_attrib(attrib) { }
-	
+
 	virtual bool accept(BaseImmovable *imm) const;
 
 	int m_attrib;
 };
 
+struct FindFieldCaps : public FindField {
+	FindFieldCaps(uchar mincaps) : m_mincaps(mincaps) { }
+
+	virtual bool accept(Coords c, Field* f) const;
+
+	uchar m_mincaps;
+};
 
 /** class Path
  *
@@ -697,7 +708,7 @@ inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
 }
 
 // 
-// class Map_Region 
+// class Map_Region
 //
 // This class is init with a center field and
 // a sourrounding. it then returns the next field
@@ -708,9 +719,9 @@ class Map_Region {
       Map_Region(Coords coords, int area, Map* m) { init(coords, area, m); }
       Map_Region(int x, int y, int area, Map* m) { init(Coords(x,y), area, m); }
       ~Map_Region() { }
-		 
+
       void init(int mx, int my, int area, Map* m) { init(Coords(mx,my), area, m); }
-		void init(Coords coords, int area, Map *m);      
+		void init(Coords coords, int area, Map *m);
       Field* next(void);
 
    private:
@@ -723,7 +734,7 @@ class Map_Region {
       Map* _map;
 };
 
-// 
+//
 // class Map_Region_Coords
 //
 // This class is init with a center field and
@@ -738,7 +749,7 @@ class Map_Region_Coords {
 
       void init(int mx, int my, int area, Map* m) { init(Coords(mx,my), area, m); }
 		void init(Coords coords, int area, Map *m);
-		int next(int*, int*);
+		bool next(Coords* pc);
 
    private:
       int backwards;

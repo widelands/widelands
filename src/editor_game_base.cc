@@ -78,28 +78,28 @@ and recalcs the interactive player's overlay.
 void Editor_Game_Base::recalc_for_field(Coords coords, int radius)
 {
    Map_Region_Coords mrc;
-   int x, y;
+	Coords c;
    Field *f;
 
    // First pass
    mrc.init(coords, 2+radius, m_map);
 
-   while(mrc.next(&x, &y)) {
-      f = m_map->get_field(x, y);
-      m_map->recalc_brightness(x, y, f);
-      m_map->recalc_fieldcaps_pass1(x, y, f);
+   while(mrc.next(&c)) {
+      f = m_map->get_field(c);
+      m_map->recalc_brightness(c.x, c.y, f);
+      m_map->recalc_fieldcaps_pass1(c.x, c.y, f);
    }
 
 
    // Second pass
    mrc.init(coords, 2+radius, m_map);
 
-   while(mrc.next(&x, &y)) {
-      f = m_map->get_field(x, y);
-      m_map->recalc_fieldcaps_pass2(x, y, f);
+   while(mrc.next(&c)) {
+      f = m_map->get_field(c);
+      m_map->recalc_fieldcaps_pass2(c.x, c.y, f);
 
       if (m_iabase) {
-         m_iabase->recalc_overlay(FCoords(x, y, f));
+         m_iabase->recalc_overlay(FCoords(c.x, c.y, f));
       }
    }
 

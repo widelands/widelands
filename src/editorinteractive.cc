@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -231,11 +231,9 @@ void Editor_Interactive::field_clicked() {
 
    // Some things have changed, map is informed, logic is informed. But overlays may still be wrong. Recalc them
    Map_Region_Coords mrc(m_maprenderinfo.fieldsel, radius, m);
-   Map_Region mr(m_maprenderinfo.fieldsel, radius, m);
-   FCoords f;
-   while((f.field=mr.next())) {
-      mrc.next(&f.x, &f.y);
-      recalc_overlay(f);
+   Coords c;
+   while(mrc.next(&c)) {
+      recalc_overlay(FCoords(c, m->get_field(c)));
    }
 }
 

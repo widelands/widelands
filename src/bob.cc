@@ -453,6 +453,7 @@ void Bob::push_task(Game* g, Task* task)
 	state = get_state();
 	state->task = task;
 	state->ivar1 = 0;
+	state->ivar2 = 0;
 	state->diranims = 0;
 	state->path = 0;
 	state->request = 0;

@@ -444,16 +444,16 @@ bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound>
 	Map_Region mr(coord, radius, this);
 	Field *f;
 	bool found = false;
-	
+
 	while((f = mr.next())) {
 		BaseImmovable *imm = f->get_immovable();
-		
+
 		if (!imm)
 			continue;
-		
+
 		if (!list)
 			return true; // no need to look any further
-		
+
 		ImmovableFound imf;
 		imf.object = imm;
 		get_coords(f, &imf.coords);
@@ -478,10 +478,10 @@ bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound>
    Map_Region mr(coord, radius, this);
 	Field *f;
 	bool found = false;
-	
+
 	while((f = mr.next())) {
 		BaseImmovable *imm = f->get_immovable();
-		
+
 		if (!imm)
 			continue;
 
@@ -496,7 +496,42 @@ bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound>
 			found = true;
 		}
 	}
-	
+
+	return found;
+}
+
+
+/*
+===============
+Map::find_fields
+
+Fills in a list of coordinates of fields within the given area that functor
+accepts.
+Returns true if a matching field was found.
+
+Note that list can be 0. In that case, the function returns true immediately as
+soon as the first matching field is found.
+===============
+*/
+bool Map::find_fields(Coords coord, uint radius, std::vector<Coords>* list, const FindField& functor)
+{
+   Map_Region_Coords mrc(coord, radius, this);
+	Coords c;
+	bool found = false;
+
+	while(mrc.next(&c)) {
+		Field* f = get_field(c);
+
+		if (functor.accept(c, f))
+		{
+			if (!list)
+				return true; // no need to look any further
+
+			list->push_back(c);
+			found = true;
+		}
+	}
+
 	return found;
 }
 
@@ -816,7 +851,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 			f->caps |= BUILDCAPS_MINE;
 		return;
 	}
-	
+
 	// 6) Can't build anything if there are mountain or desert triangles next to the field
 	if (cnt_mountain || cnt_dry)
 		return;
@@ -1019,7 +1054,7 @@ int Map::is_neighbour(const Coords start, const Coords end)
 	if (dy == 1) {
 		if (start.y & 1)
 			dx--;
-		
+
 		switch(dx) {
 		case -1: return Map_Object::WALK_SW;
 		case 0: return Map_Object::WALK_SE;
@@ -1425,7 +1460,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 		// avoid bias by using different orders when pathfinding
 		static const char order1[6] = { Map_Object::WALK_NW, Map_Object::WALK_NE, 
 			Map_Object::WALK_E, Map_Object::WALK_SE, Map_Object::WALK_SW, Map_Object::WALK_W };
-		static const char order2[6] = { Map_Object::WALK_NW, Map_Object::WALK_W, 
+		static const char order2[6] = { Map_Object::WALK_NW, Map_Object::WALK_W,
 			Map_Object::WALK_SW, Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE };
 		const char *direction;
 		
@@ -1584,45 +1619,37 @@ Map::change_field_terrain()
 changes the given field terrain to another one.
 this happens in the editor and might happen in the game
 too if some kind of land increasement is implemented (like
-drying swamps). 
+drying swamps).
 The fieldcaps need to be recalculated
 
 returns the radius of changes (which are always 2)
 ===========
 */
-int Map::change_field_terrain(int mx, int my, int terrain, bool tdown, bool tright) {
+int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright) {
    assert(tdown || tright);
-   
-   Field* f=get_field(mx,my);
+
+   Field* f=get_field(c);
 
    Terrain_Descr* ter=get_world()->get_terrain(terrain);
-   
+
    if(tdown)
       f->set_terraind(ter);
    if(tright)
       f->set_terrainr(ter);
 
-   Map_Region mr(mx,my,1,this);
-   Map_Region_Coords mrc(mx,my,1,this);
-   FCoords fcord;
-   while((fcord.field=mr.next())) {
-      mrc.next(&fcord.x,&fcord.y);
-      recalc_fieldcaps_pass1(fcord.x, fcord.y, fcord.field);
-   } 
-   mr.init(mx,my,1,this);
-   mrc.init(mx,my,1,this);
-   while((fcord.field=mr.next())) {
-      mrc.next(&fcord.x,&fcord.y);
-      recalc_fieldcaps_pass2(fcord.x, fcord.y, fcord.field);
-   }   
+   Map_Region_Coords mrc(c,1,this);
+   Coords coords;
+   while(mrc.next(&coords)) {
+      recalc_fieldcaps_pass1(coords.x, coords.y, get_field(coords));
+   }
+   mrc.init(c,1,this);
+   while(mrc.next(&coords)) {
+      recalc_fieldcaps_pass2(coords.x, coords.y, get_field(coords));
+   }
 
    return 2;
 }
 
-
-int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright) {
-   return change_field_terrain(c.x, c.y, terrain, tdown, tright);
-}
 
 /*
 ===========
@@ -1657,8 +1684,8 @@ returns the area of fields, that have been changed
 int Map::change_field_height(const Coords& coordinates, int by) {
    Field* m_field=get_field(coordinates);
    int height=m_field->get_height();
-   
-   
+
+
    height+=by;
    m_field->set_height(height);
    int radius=0;
@@ -1666,33 +1693,30 @@ int Map::change_field_height(const Coords& coordinates, int by) {
    check_neighbour_heights(coordinates.x, coordinates.y, m_field, &radius);
    recalc_brightness(coordinates.x,coordinates.y,m_field);
    recalc_fieldcaps_pass1(coordinates.x,coordinates.y,m_field);
- 
-   // First recalculation step 
-   radius+=1; 
-   Map_Region mr(coordinates, radius, this);
-   Map_Region_Coords mrc(coordinates, radius, this); 
-   int x, y;
-   Field* field;
-   while((field=mr.next())) {
-      mrc.next(&x,&y);
-      recalc_brightness(x,y,field);
-      recalc_fieldcaps_pass1(x,y,field);
+
+   // First recalculation step
+   radius+=1;
+   Map_Region_Coords mrc(coordinates, radius, this);
+	Coords c;
+
+	while(mrc.next(&c)) {
+		Field* f = get_field(c);
+
+      recalc_brightness(c.x,c.y,f);
+      recalc_fieldcaps_pass1(c.x,c.y,f);
    }
 
    // seconc recalculation step
-   mr.init(coordinates, radius, this);
-   mrc.init(coordinates, radius, this); 
-   while((field=mr.next())) {
-      mrc.next(&x,&y);
-      recalc_brightness(x,y,field);
-      recalc_fieldcaps_pass2(x,y,field);
+   mrc.init(coordinates, radius, this);
+   while(mrc.next(&c)) {
+      recalc_fieldcaps_pass2(c.x,c.y,get_field(c));
    }
-   
+
    recalc_fieldcaps_pass2(coordinates.x,coordinates.y,m_field);
 
    return radius;
 }
- 
+
 
 int Map::change_field_height(int x, int y, int by) {
    return change_field_height(Coords(x,y), by);
@@ -1719,7 +1743,7 @@ void Map::check_neighbour_heights(int fx, int fy, Field* f, int* area) {
  
    get_tln(m, &tln); 
    get_trn(m, &trn); 
-   get_ln(m, &ln); 
+   get_ln(m, &ln);
    get_rn(m, &rn); 
    get_bln(m, &bln);
    get_brn(m, &brn);
@@ -1761,7 +1785,7 @@ void Map::check_neighbour_heights(int fx, int fy, Field* f, int* area) {
 ==============================================================================
 
 BaseImmovable search functors
-	
+
 ==============================================================================
 */
 
@@ -1780,6 +1804,29 @@ bool FindImmovableAttribute::accept(BaseImmovable *imm) const
 {
 	return imm->has_attribute(m_attrib);
 }
+
+
+/*
+==============================================================================
+
+Field search functors
+
+==============================================================================
+*/
+
+bool FindFieldCaps::accept(Coords c, Field* f) const
+{
+	uchar fieldcaps = f->get_caps();
+
+	if ((fieldcaps & BUILDCAPS_SIZEMASK) < (m_mincaps & BUILDCAPS_SIZEMASK))
+		return false;
+
+	if ((m_mincaps & ~BUILDCAPS_SIZEMASK) & ~(fieldcaps & ~BUILDCAPS_SIZEMASK))
+		return false;
+
+	return true;
+}
+
 
 /*
 ==============================================================================
@@ -2070,13 +2117,13 @@ void Map_Region_Coords::init(Coords coords, int area, Map *m)
 	cx=tlx; cy=tly;
 }
 
-int Map_Region_Coords::next(int* retx, int* rety) {
-   int retval=0;
- 
-   if(_lf) retval=1;
-   *retx=cx;
-   *rety=cy;
-      
+bool Map_Region_Coords::next(Coords* pc) {
+   bool retval = false;
+
+   if(_lf) retval = true;
+   pc->x=cx;
+   pc->y=cy;
+
 
    if(_lf==_tr) {
       if(tly==sy) backwards=true;
@@ -2102,6 +2149,6 @@ int Map_Region_Coords::next(int* retx, int* rety) {
       _map->get_rn(cx, cy, _lf, &cx, &cy, &_lf);
    }
 
-   
+
    return retval;
 }
