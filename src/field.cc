@@ -55,14 +55,14 @@ void Field::set_neighb(Field* mln, Field* mrn, Field* mtln, Field* mtrn, Field* 
 	brn=mbrn;
 }
 
+// find normal
+// more guessed than thought about
+// but hey, results say i'm good at guessing :)
+// perhaps i'll paint an explanation for this someday
+// florian
 void Field::set_normal()
 {
-	// find normal
-	// this is experimental, may be completely stupid;
-	// more guessed than thought about
-	// but hey, results say i'm good at guessing :)
-	// perhaps i'll paint an explanation for this someday
-	// florian
+	// TODO: define flag for "flat" terrains
 #define COS60	0.5
 #define SIN60	0.86603
 #ifdef _MSC_VER

@@ -154,33 +154,34 @@ namespace Graph
 			* Args: file		Path to pic
 			* Returns: RET_OK or ERR_FAILED
 			*/
-		  int Pic::load(const char* file) {
-					 if(!file) return ERR_FAILED;
-					 
-					 SDL_Surface* bmp=NULL;
-					 int x=0;
-					 int y=0;
-					 uchar* bits, R, G, B;
+	int Pic::load(const char* file)
+	{
+		if(!file) return ERR_FAILED;
+		
+		SDL_Surface* bmp = SDL_LoadBMP(file);
+		if(bmp == NULL)
+			return ERR_FAILED;
 
-					 bmp=SDL_LoadBMP(file);
-					 if(bmp == NULL) { return ERR_FAILED; }
+		set_size(bmp->w, bmp->h);
 
-					 set_size(bmp->w, bmp->h);
+		int i=0;
+		for (int y=0; y<h; y++)
+		{
+			uchar* bits = (uchar*)bmp->pixels + y * bmp->pitch;
+			for (int x=0; x<w; x++)
+			{
+				uchar r = *(bits + (bmp->format->Rshift >> 3));
+				uchar g = *(bits + (bmp->format->Gshift >> 3));
+				uchar b = *(bits + (bmp->format->Bshift >> 3));
+				pixels[i++] = pack_rgb(r, g, b);
+				bits += bmp->format->BytesPerPixel;
+			}
+		}
 
-					 for(y=0; y<h; y++) {
-								for(x=0; x<w; x++) {
-										  bits=((Uint8*)bmp->pixels)+y*bmp->pitch+x*bmp->format->BytesPerPixel;
-										  R= (Uint8) *((bits)+bmp->format->Rshift/8);
-										  G= (Uint8) *((bits)+bmp->format->Gshift/8);
-										  B= (Uint8) *((bits)+bmp->format->Bshift/8);
-										  set_pixel(x, y, R, G, B);
-								}
-					 }
+		SDL_FreeSurface(bmp);
 
-					 SDL_FreeSurface(bmp);
-
-					 return RET_OK;
-		  }
+		return RET_OK;
+	}
 
 		/** void Pic::create(const ushort w, const ushort h, ushort* data)
 		  *

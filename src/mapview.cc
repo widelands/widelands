@@ -20,6 +20,9 @@
 #include "mapview.h"
 #include "graphic.h"
 
+#include "os.h"
+#include <iostream.h>
+
 /* class Map_View 
  *
  * this implements a view of a card. it's used

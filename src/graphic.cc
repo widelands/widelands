@@ -21,8 +21,11 @@
 #include <string.h>
 
 // wireframe or filled triangles?
+#define SHADING_FLAT		1
+#define SHADING_GOURAUD	2
+#define SHADING				SHADING_GOURAUD
 #define FILL_TRIANGLES
-#define LIGHT_FACTOR		50
+#define LIGHT_FACTOR		75
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -39,6 +42,9 @@ namespace Graph
 		b = temp;
 	}
 
+#define V3	(float)0.57735
+
+#if SHADING == SHADING_FLAT || !defined(FILL_TRIANGLES)
 	/* int make_triangle_lines(Vector* points, int* starts, int* ends)
 	 * fills arrays with horizontal start- and end-points of a triangle
 	 * returns number of lines written to the arrays
@@ -89,11 +95,12 @@ namespace Graph
 		return ydiff2;
 	}
 
-#define V3	0.57735
+	// render_triangle for flat shading
 	void Graphic::render_triangle(Point* points, Vector* normals, Pic* texture)
 	{
 		static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
 
+		//don't need to swap normals here, they are summed up anyway
 		if (points[0].y > points[1].y)
 			swap<Point>(points[0], points[1]);
 		if (points[1].y > points[2].y)
@@ -101,7 +108,6 @@ namespace Graph
 		if (points[0].y > points[1].y)
 			swap<Point>(points[0], points[1]);
 
-		// flat shading
 		Vector normal = normals[0] + normals[1] + normals[2];
 		normal.normalize();
 		float b = normal * sun;
@@ -112,7 +118,7 @@ namespace Graph
 
 		int ymax = make_triangle_lines(points, starts, ends);
 		int ystart = points[0].y < 0 ? -points[0].y : 0;
-		ymax = ymax + points[0].y <= yres ? ymax : yres-points[0].y-1;
+		ymax = ymax + points[0].y <= yres ? ymax : yres-points[0].y;
 		for (int y=ystart; y<ymax; y++)
 		{
 			if (starts[y] >= xres)
@@ -123,12 +129,14 @@ namespace Graph
 			int start = starts[y] < 0 ? 0 : starts[y];
 			int end = ends[y] < xres ? ends[y] : xres-1;
 #ifdef FILL_TRIANGLES
+			int p = (points[0].y + y) * xres + start;
 			for (int x=start; x<=end; x++)
 			{
 //				pixels[(points[0].y + y)*xres + x] = pack_rgb(clr, clr, clr);
-				uint p = (y % texture->h)*texture->w + (x-starts[y])%texture->w;
-//				uint p = ((points[0].y + y) % texture->h)*texture->w + x%texture->w;
-				pixels[(points[0].y + y)*xres + x] = bright_up_clr2(texture->pixels[p], -lfactor);
+				uint tp = (y % texture->h)*texture->w + (x-starts[y])%texture->w;
+//				uint tp = ((points[0].y + y) % texture->h)*texture->w + x%texture->w;
+//				pixels[p++] = bright_up_clr2(texture->pixels[tp], -lfactor);
+				pixels[p++] = bright_up_clr2(texture->pixels[tp], -lfactor);
 			}
 #else
 			if (y == 0 || y == ymax-1)
@@ -147,18 +155,123 @@ namespace Graph
 #endif
 
 		}
-/*		for (int i=0; i<20; i++)
+	}
+#else
+	struct _go
+	{
+		int x;
+		float b;
+	};
+
+	inline int make_triangle_lines(Point* points, float* bright, _go* starts, _go* ends)
+	{
+		int ydiff1 = points[1].y - points[0].y;
+		int ydiff2 = points[2].y - points[0].y;
+		int ydiff3 = points[2].y - points[1].y;
+		int xdiff1 = points[1].x - points[0].x;
+		int xdiff2 = points[2].x - points[0].x;
+		int xdiff3 = points[2].x - points[1].x;
+		float bdiff1 = bright[1] - bright[0];
+		float bdiff2 = bright[2] - bright[0];
+		float bdiff3 = bright[2] - bright[1];
+
+		if (!ydiff2)
+			// triangle has height 0
+			return 0;
+
+		// calculate x for line b at height of point B
+		int midx = points[0].x + (xdiff2 * ydiff1) / ydiff2;
+		// is B left from b?
+		if (points[1].x < midx)
+			// arrays have to be swapped
+			swap<_go*>(starts, ends);
+		
+		int y;
+		int xd1=0, xd2=0, xd3=0;
+		float bd1=0, bd2=0, bd3=0;
+		// upper part of triangle
+		for (y=0; y<ydiff1; y++)
 		{
-			int x = points[0].x + i * normals[0].x;
-			int y = points[0].y + i * (normals[0].y - normals[0].z);
-			if (y < 0 || y >= yres)
-				continue;
-			if (x < 0 || x >= xres)
-				continue;
-			pixels[y*xres+x] = 0xF81F;
-		}*/
+			starts[y].x = points[0].x + xd2 / ydiff2;
+			starts[y].b = bright[0] + bd2 / ydiff2;
+			ends[y].x = points[0].x + xd1 / ydiff1;
+			ends[y].b = bright[0] + bd1 / ydiff1;
+			xd1 += xdiff1;
+			xd2 += xdiff2;
+			bd1 += bdiff1;
+			bd2 += bdiff2;
+		}
+		// lower part
+		for (y=0; y<ydiff3; y++)
+		{
+			starts[ydiff1 + y].x = points[0].x + xd2 / ydiff2;
+			starts[ydiff1 + y].b = bright[0] + bd2 / ydiff2;
+			ends[ydiff1 + y].x = points[1].x + xd3 / ydiff3;
+			ends[ydiff1 + y].b = bright[1] + bd3 / ydiff3;
+			xd2 += xdiff2;
+			xd3 += xdiff3;
+			bd2 += bdiff2;
+			bd3 += bdiff3;
+		}
+		return ydiff2;
 	}
 
+	// render_triangle for gouraud shading
+	void Graphic::render_triangle(Point* points, Vector* normals, Pic* texture)
+	{
+		static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
+
+		if (points[0].y > points[1].y)
+		{
+			swap<Point>(points[0], points[1]);
+			swap<Vector>(normals[0], normals[1]);
+		}
+		if (points[1].y > points[2].y)
+		{
+			swap<Point>(points[1], points[2]);
+			swap<Vector>(normals[1], normals[2]);
+		}
+		if (points[0].y > points[1].y)
+		{
+			swap<Point>(points[0], points[1]);
+			swap<Vector>(normals[0], normals[1]);
+		}
+
+		_go starts[200];		// FEAR!!
+		_go ends[200];			// don't use to high triangles
+		float bright[3];
+		bright[0] = normals[0] * sun;
+		bright[1] = normals[1] * sun;
+		bright[2] = normals[2] * sun;
+
+		int ymax = make_triangle_lines(points, bright, starts, ends);
+		int ystart = points[0].y < 0 ? -points[0].y : 0;
+		ymax = ymax + points[0].y <= yres ? ymax : yres-points[0].y;
+		for (int y=ystart; y<ymax; y++)
+		{
+			if (starts[y].x >= xres)
+				continue;
+			if (ends[y].x < 0)
+				continue;
+
+			int start = starts[y].x < 0 ? 0 : starts[y].x;
+			int end = ends[y].x < xres ? ends[y].x : xres-1;
+			int p = (points[0].y + y) * xres + start;
+			float xdiff = (float)(end - start);
+			float bdiff = ends[y].b - starts[y].b;
+			float bd = 0;
+			uint tb = (y % texture->h) * texture->w;
+			for (int x=start; x<=end; x++)
+			{
+				uint tp = tb + (x - starts[y].x) % texture->w;
+				float b = starts[y].b + bd / xdiff;
+				int lfactor = (int)(b * LIGHT_FACTOR);	
+				pixels[p++] = bright_up_clr2(texture->pixels[tp], -lfactor);
+				bd += bdiff;
+			}
+		}
+	}
+#endif
 		  /** class Graphic
 			*
 			* This functions is responsible for displaying graphics and keeping them up to date
@@ -289,62 +402,70 @@ namespace Graph
 					 bneeds_update=false;
 		  }
 		  
-		  /** void draw_pic(Pic* p, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
-			* 		const ushort p_y_pos, const ushort i_w, const ushort i_h)
-			*
-			* 	This functions plots a picture onto the current screen
-			*	
-			*	friend to class pic and class Graphic
-			*
-			* 	Args:	p 	picture to plot
-			* 			d_x_pos	xpos on screen
-			* 			d_y_pos	ypos on screen
-			* 			p_x_pos	start xpos in picture
-			* 			p_y_pos	start ypos in picture
-			* 			i_w		width
-			* 			i_h		height
-			* 	returns: Nothing
-			*/
-		  void draw_pic(Pic* p, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, const ushort p_y_pos, 
-								const ushort i_w, const ushort i_h) {
-					 uint clr;
-					 uint w=i_w;
-					 uint h=i_h; 
+	/** void draw_pic(Pic* p, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
+	  * 		const ushort p_y_pos, const ushort i_w, const ushort i_h)
+	  *
+	  * 	This functions plots a picture onto the current screen
+	  *	
+	  *		friend to class pic and class Graphic
+	  *
+	  * 	Args:	p 	picture to plot
+	  * 			d_x_pos	xpos on screen
+	  * 			d_y_pos	ypos on screen
+	  * 			p_x_pos	start xpos in picture
+	  * 			p_y_pos	start ypos in picture
+	  * 			i_w		width
+	  * 			i_h		height
+	  * 	returns: Nothing
+	  */
+	void draw_pic(Pic* p, ushort d_x_pos, ushort d_y_pos, ushort p_x_pos, ushort p_y_pos,
+							ushort w, ushort h)
+	{
+		if (d_x_pos+w > g_gr.xres)
+			w = g_gr.xres - d_x_pos;
+		if (d_y_pos+h > g_gr.yres)
+			h = g_gr.yres - d_y_pos;
 
-					 if(d_x_pos+w>g_gr.get_xres()) w=g_gr.get_xres()-d_x_pos;
-					 if(d_y_pos+h>g_gr.get_yres()) h=g_gr.get_yres()-d_y_pos;
-
-					 if(p->has_clrkey()) {
-								// Slow blit, checking for clrkeys. This could probably speed up by copying
-								// 2 pixels (==4bytes==register width)
-								// in one rush. But this is a nontrivial task
-								for(ulong  y=0; y<h; y++) {
-										  clr=p->get_pixel(p_x_pos, p_y_pos+y);
-										  if(clr != p->get_clrkey()) g_gr.set_pixel(d_x_pos, d_y_pos+y, clr);
-										  else g_gr.set_cpixel(d_x_pos, d_y_pos+y);
-										  for(ulong x=1; x<w; x++) {
-													 clr=p->get_npixel();
-													 if(clr != p->get_clrkey()) g_gr.set_npixel(clr);
-													 else g_gr.npixel();
-										  }
-								}
-					 } else {
-								if(w == g_gr.get_xres() && h == g_gr.get_yres()) {
-										  // one memcpy and we're settled
-										  memcpy(g_gr.pixels, p->pixels, (p->get_w()*p->get_h()<<1));
-								} else {
-										  ulong poffs=p->get_w()*p_y_pos + p_x_pos;
-										  ulong doffs=g_gr.get_xres()*d_y_pos + d_x_pos;
-
-										  // fast blitting, using memcpy
-										  for(ulong y=0; y<h; y++) {
-													 memcpy(g_gr.pixels+doffs, p->pixels+poffs, w<<1); // w*sizeof(short) 
-													 doffs+=g_gr.get_xres();
-													 poffs+=p->get_w();
-										  }
-								}
-					 }
-		  }
+		if (p->has_clrkey())
+		{
+			// Slow blit, checking for clrkeys. This could probably speed up by copying
+			// 2 pixels (==4bytes==register width)
+			// in one rush. But this is a nontrivial task
+			for (uint y=0; y<h; y++)
+			{
+				int sp = (p_y_pos++)*p->w + p_x_pos;
+				int dp = (d_y_pos++)*g_gr.xres + d_x_pos;
+				for (uint x=0; x<w; x++)
+				{
+					ushort clr = p->pixels[sp++];
+					if (clr != p->get_clrkey())
+						g_gr.pixels[dp] = clr;
+					dp++;
+				}				
+			}
+		}
+		else
+		{
+			if(w == g_gr.get_xres() && h == g_gr.get_yres())
+			{
+				// one memcpy and we're settled
+				memcpy(g_gr.pixels, p->pixels, (p->w * p->h) << 1);
+			}
+			else
+			{
+				uint poffs = p->w * p_y_pos + p_x_pos;
+				uint doffs = g_gr.xres * d_y_pos + d_x_pos;
+				int bw = w << 1; // w*sizeof(short)
+				// fast blitting, using memcpy
+				for (uint y=0; y<h; y++)
+				{
+					memcpy (g_gr.pixels+doffs, p->pixels+poffs, bw);
+					doffs += g_gr.xres;
+					poffs += p->w;
+				}
+			}
+		}
+	}
 											        
 		  /** void copy_pic(Pic* dst, Pic* src, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
 			* 		const ushort p_y_pos, const ushort i_w, const ushort i_h)
@@ -363,36 +484,41 @@ namespace Graph
 			* 			i_h		height
 			* 	returns: Nothing
 			*/
-		  void copy_pic(Pic* dst, Pic* src, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
-								const ushort p_y_pos, const ushort i_w, const ushort i_h) {
-					 ushort clr;
-					 uint w=i_w;
-					 uint h=i_h; 
+	void copy_pic(Pic* dst, Pic* src, ushort d_x_pos, ushort d_y_pos,  ushort p_x_pos, 
+		ushort p_y_pos, ushort w, ushort h)
+	{
+		if(d_x_pos + w > dst->w)
+			w = dst->w - d_x_pos;
+		if(d_y_pos + h > dst->h)
+			h = dst->h - d_y_pos;
 
-					 if(d_x_pos+w>dst->get_w()) w=dst->get_w()-d_x_pos;
-					 if(d_y_pos+h>dst->get_h()) h=dst->get_h()-d_y_pos;
+		if (src->has_clrkey() && (dst->get_clrkey() != src->get_clrkey()))
+		{
+			for (uint y=0; y<h; y++)
+			{
+				int sp = (p_y_pos++)*src->w + p_x_pos;
+				int dp = (d_y_pos++)*dst->w + d_x_pos;
+				for (uint x=0; x<w; x++)
+				{
+					ushort clr = src->pixels[sp++];
+					if (clr != src->get_clrkey())
+						dst->pixels[dp] = clr;
+					dp++;
+				}				
+			}
+		}
+		else
+		{
+			uint soffs = src->w * p_y_pos + p_x_pos;
+			uint doffs = dst->w * d_y_pos + d_x_pos;
 
-					if(src->has_clrkey() && (dst->get_clrkey()!=src->get_clrkey())) {
-								for(ulong  y=0; y<h; y++) {
-										  clr=src->get_pixel(p_x_pos, p_y_pos+y);
-										  if(clr != src->get_clrkey()) dst->set_pixel(d_x_pos, d_y_pos+y, clr);
-										  else dst->set_cpixel(d_x_pos, d_y_pos+y);
-										  for(ulong x=1; x<w; x++) {
-													 clr=src->get_npixel();
-													 if(clr != src->get_clrkey()) dst->set_npixel(clr);
-													 else dst->npixel();
-										  }
-								}
-					 } else {
-								ulong soffs=src->get_w()*p_y_pos + p_x_pos;
-								ulong doffs=dst->get_w()*d_y_pos + d_x_pos;
-
-								// fast blitting, using memcpy
-								for(ulong y=0; y<h; y++) {
-										  memcpy(dst->pixels+doffs, src->pixels+soffs, w<<1); // w*sizeof(short) 
-										  doffs+=dst->get_w();
-										  soffs+=src->get_w();
-								}
-					 }		  
-		  }
+			// fast blitting, using memcpy
+			for (uint y=0; y<h; y++)
+			{
+				memcpy(dst->pixels+doffs, src->pixels+soffs, w<<1); // w*sizeof(short) 
+				doffs+=dst->w;
+				soffs+=src->w;
+			}
+		}		  
+	}
 }

@@ -171,65 +171,6 @@ namespace Graph
 		  */
 		inline bool has_clrkey(void) { return bhas_clrkey; }
 					 
-/***/				 private:
-					 // optimized pixel get functions
-					 // They are rather simple,
-					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline ushort get_pixel(const uint x, const uint y) {
-								lpix=(y)*(w) + (x);
-								return pixels[lpix];
-					 }
-					 inline ushort get_npixel(void) {
-								return pixels[++lpix];
-					 }
-					 inline ushort get_ppixel(void) {
-								return pixels[--lpix];
-					 }
-					 inline ushort get_fpixel(void) {
-								lpix=0;
-								return pixels[0];
-					 }
-
-					 // rewinding or forwarding without change
-					 inline void npixel(void) { ++lpix; }
-					 inline void ppixel(void) { --lpix; }
-					 inline void fpixel(void) { lpix=0; }
-					 inline void set_cpixel(const uint x, const uint y) { lpix=y*w + x; }
-
-					 // optimized pixel set functions declared inline
-					 // All those functions take either a rgb tribble or 3 chars
-					 // And they are rather simple,
-					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline void set_pixel(const uint x, const uint y, const uchar r, const uchar g, const uchar b) {
-								lpix=(y)*(w) + (x);
-								pixels[lpix] = pack_rgb(r, g, b);
-					 }
-					 inline void set_pixel(const uint x, const uint y, const ushort clr) {
-								lpix=(y)*(w) + (x);
-								pixels[lpix] = clr; 
-					 }
-					 inline void set_npixel(const ushort clr) {
-								pixels[++lpix] = clr;
-					 }
-					 inline void set_npixel(const uchar r, const uchar g, const uchar b) {
-								pixels[++lpix]= pack_rgb(r, g, b);
-					 }
-					 inline void set_ppixel(const ushort clr) {
-								pixels[--lpix]= clr;
-					 }
-					 inline void set_ppixel(const uchar r, const uchar g, const uchar b) {
-								pixels[--lpix]= pack_rgb(r, g, b);
-					 }
-					 inline void set_fpixel(const ushort clr) {
-								lpix=0;
-								pixels[0] = clr;
-					 }
-					 inline void set_fpixel(const uchar r, const uchar g, const uchar b) {
-								lpix=0;
-								pixels[0] = pack_rgb(r, g, b);
-					 }
-					 
-/***/				 public:
 		// this function really needs faaast blitting
 		friend void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort, 
 		  const ushort, const ushort);
@@ -259,9 +200,11 @@ namespace Graph
 	};
 
 	// hm, floats...
-	// note: think about using fixed point arithmetics
-	struct Vector
+	// tried to be faster with fixed point arithmetics
+	// it was, but i'll try to find other opts first
+	class Vector
 	{
+	public:
 		float x;
 		float y;
 		float z;
@@ -283,7 +226,7 @@ namespace Graph
 			z /= f;
 		}
 	};
-	
+
 	// vector addition
 	inline Vector operator + (const Vector& a, const Vector& b)
 	{
@@ -385,66 +328,6 @@ namespace Graph
 		  * Returns: true if the screen should be redrawn
 		  */
 		inline bool does_need_update(void) { return bneeds_update; }
-
-
-/***/
-					// optimized pixel get functions
-					 // They are rather simple,
-					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline ushort get_pixel(const uint x, const uint y) {
-								lpix=(y)*(xres>>1) + (x);
-								return *((Uint16*) sc->pixels + lpix);
-					 }
-					 inline ushort get_npixel(void) {
-								return *((Uint16*) sc->pixels + ++lpix);
-					 }
-					 inline ushort get_ppixel(void) {
-								return *((Uint16*) sc->pixels + --lpix);
-					 }
-					 inline ushort get_fpixel(void) {
-								lpix=0;
-								return *((Uint16*) sc->pixels);
-					 }
-
-					 // rewinding or forwarding without change
-					 inline void npixel(void) { ++lpix; }
-					 inline void ppixel(void) { --lpix; }
-					 inline void fpixel(void) { lpix=0; }
-					 inline void set_cpixel(const uint x, const uint y) { lpix=y*xres + x; }
-
-					 // optimized pixel set functions declared inline
-					 // All those functions take either a rgb tribble or 3 chars
-					 // And they are rather simple,
-					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline void set_pixel(const uint x, const uint y, const uchar r, const uchar g, const uchar b) {
-								lpix=(y)*(xres) + (x);
-								pixels[lpix] = pack_rgb(r, g, b);
-					 }
-					 inline void set_pixel(const uint x, const uint y, const ushort clr) {
-								lpix=(y)*(xres) + (x);
-								pixels[lpix] = clr; 
-					 }
-					 inline void set_npixel(const ushort clr) {
-								pixels[++lpix] = clr;
-					 }
-					 inline void set_npixel(const uchar r, const uchar g, const uchar b) {
-								pixels[++lpix]= pack_rgb(r, g, b);
-					 }
-					 inline void set_ppixel(const ushort clr) {
-								pixels[--lpix]= clr;
-					 }
-					 inline void set_ppixel(const uchar r, const uchar g, const uchar b) {
-								pixels[--lpix]= pack_rgb(r, g, b);
-					 }
-					 inline void set_fpixel(const ushort clr) {
-								lpix=0;
-								pixels[0] = clr;
-					 }
-					 inline void set_fpixel(const uchar r, const uchar g, const uchar b) {
-								lpix=0;
-								pixels[0] = pack_rgb(r, g, b);
-					 }
-/***/
 					 
 		// this function really needs faaast blitting
 		friend	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort, 
