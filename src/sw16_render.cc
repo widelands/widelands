@@ -284,13 +284,13 @@ void Bitmap::draw_animframe(Point dstpt, const AnimFrame* frame, Rect rc, const 
 			ushort cmd;
 			int count;
 			int clipcount, clipofs;
-			
+
 			cmd = *in++;
 			count = cmd & 0x3fff;
 			cmd = cmd >> 14;
 			
 			//log(" %i - %i\n", cmd, count);
-			
+
 			switch(cmd) {
 			case 0: // normal pixels
 				if (y >= rc.y && x < rc.w) {
@@ -303,21 +303,21 @@ void Bitmap::draw_animframe(Point dstpt, const AnimFrame* frame, Rect rc, const 
 					}
 					if (x+clipcount > rc.w)
 						clipcount -= x+clipcount - rc.w;
-					
+
 					if (clipcount > 0)
 						memcpy(out+clipofs, in+clipofs, clipcount*sizeof(ushort));
 				}
-				
+
 				x += count;
 				out += count;
 				in += count;
 				break;
-			
+
 			case 1: // transparent pixels
 				x += count;
 				out += count;
 				break;
-			
+
 			case 2: // player color
 				if (y >= rc.y && x < rc.w) {
 					for(int i = 0; i < count; i++, x++, in++, out++)
@@ -334,13 +334,12 @@ void Bitmap::draw_animframe(Point dstpt, const AnimFrame* frame, Rect rc, const 
 					out += count;
 				}
 				break;
-			
+
 			case 3: // shadow
 				if (y >= rc.y && x < rc.w) {
 					for(int i = 0; i < count; i++, x++, out++)
-						if (x >= rc.x && x < rc.w) {
-							// TODO: implement this
-						}
+						if (x >= rc.x && x < rc.w)
+							*out = (*out >> 1) & 0x7BEF;
 				} else {
 					x += count;
 					out += count;
@@ -348,7 +347,7 @@ void Bitmap::draw_animframe(Point dstpt, const AnimFrame* frame, Rect rc, const 
 				break;
 			}
 		}
-		
+
 		assert(x == frame->width);
 	}
 }
@@ -373,7 +372,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 {
 	m_nrframes = 0;
 	m_frames = 0;
-	
+
 	for(;;) {
 		char fname[256];
 		int nr = m_nrframes;
@@ -465,44 +464,44 @@ void AnimationGfx::encode(AnimFrame* frame, SDL_Surface* bmp, const EncodeData* 
 	ushort shadowclr = 0;
 	int hasplrclrs = 0;
 	ushort plrclrs[4];
-	
+
 	if (encdata->hasclrkey)
 		clrkey = encdata->clrkey.pack16();
 	if (encdata->hasshadow)
-		shadowclr = encdata->clrkey.pack16();
+		shadowclr = encdata->shadow.pack16();
 	if (encdata->hasplrclrs) {
 		hasplrclrs = 4;
 		for(int i = 0; i < 4; i++)
 			plrclrs[i] = encdata->plrclr[i].pack16();
 	}
-	
+
 	// Ready to encode
    ushort* data = 0;
 	SDL_Surface* surf = 0;
 	uint out;
-	
+
 	try
 	{
 		surf = SDL_DisplayFormat(bmp);
 		data = (ushort*)malloc(surf->w*surf->h*sizeof(ushort)*2);
-		
+
 		assert(surf->w == frame->width && surf->h == frame->height);
-		
+
 		out = 0;
-		
+
 		for(int y = 0; y < frame->height; y++)
 		{
 			ushort* pixels = (ushort*)((Uint8*)surf->pixels + y*surf->pitch);
 			int cmd = -1;
 			int runstart = 0;
 			int count = 0; // runlength
-			
+
 			//log("width: %i\n", frame->width);
-			
+
 			for(int x = 0; x < frame->width; x++, pixels++) {
 				int thiscmd = 0;
 				int clridx = -1;
-				
+
 				// determine the type of pixel
 				if (encdata->hasclrkey && *pixels == clrkey)
 					thiscmd = 1;
@@ -515,40 +514,40 @@ void AnimationGfx::encode(AnimFrame* frame, SDL_Surface* bmp, const EncodeData* 
 							break;
 						}
 				}
-				
+
 				// emit code
 				if (thiscmd != cmd) {
 					if (cmd >= 0) {
 						data[runstart] = (cmd<<14)|count;
-					
+
 						//log(" %i - %i\n", cmd, count);
 					}
-					
+
 					cmd = thiscmd;
 					runstart = out++;
 					count = 0;
 				}
-				
+
 				count++;
-				
+
 				if (cmd == 0) // normal pixel
 					data[out++] = *pixels;
 				else if (cmd == 2) // player color
 					data[out++] = clridx;
 			}
-			
+
 			// finish the last run
 			data[runstart] = (cmd<<14)|count;
-			
+
 			//log(" %i - %i\n", cmd, count);
 		}
-		
+
 		frame->data = (ushort*)malloc(out*sizeof(ushort));
 		memcpy(frame->data, data, out*sizeof(ushort));
-		
+
 		free(data),
 		data = 0;
-		
+
 		SDL_FreeSurface(surf);
 		surf = 0;
 	} catch(...) {

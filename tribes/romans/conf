@@ -14,6 +14,9 @@ plrclr2_b=215
 plrclr3_r=0
 plrclr3_g=210
 plrclr3_b=245
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
 
 [tribe]
 author=Widelands Development Team
