@@ -19,28 +19,38 @@
 
 #include "growablearray.h"
 #include <string.h>
+#include <malloc.h>
 
 Growable_Array::Growable_Array(int size, int inc)
 {
-	this->elementData = new void*[size];
-	this->capacity = size;
 	this->increase = inc;
 	this->elementCount = 0;
+	this->elementData = (void**)malloc(size * sizeof(void*));//new void*[size];
+	this->capacity = size;
+#ifdef G_ARRAY_SAFE
 	memset(this->elementData, 0, this->capacity * sizeof(void*));
+#endif
 }
 
 Growable_Array::~Growable_Array()
 {
-	delete this->elementData;
+	//delete this->elementData;
+	free(this->elementData);
 }
 
-void Growable_Array::flush()
+void Growable_Array::flush(int size)
 {
-	delete[] this->elementData;
-	this->elementData = new void*[this->increase];
-	this->capacity = this->increase;
 	this->elementCount = 0;
-	memset(this->elementData, 0, this->capacity * sizeof(void*));
+	if (size > 0)
+	{
+		free(this->elementData);
+	//	delete[] this->elementData;
+		this->elementData = (void**)malloc(size * sizeof(void*));//new void*[this->increase];
+		this->capacity = size;
+#ifdef G_ARRAY_SAFE
+		memset(this->elementData, 0, this->capacity * sizeof(void*));
+#endif
+	}
 }
 
 void Growable_Array::ensure_capacity(int cap)
@@ -60,10 +70,13 @@ void Growable_Array::grow(int inc)
 		newCapacity += inc;
 	else
 		newCapacity *= 2;
-	void** newData = new void*[newCapacity];
+	void** newData = (void**)malloc(newCapacity * sizeof(void*));//new void*[newCapacity];
+#ifdef G_ARRAY_SAFE
 	memset(newData, 0, newCapacity * sizeof(void*));
+#endif
 	memcpy(newData, this->elementData, this->capacity * sizeof(void*));
-	delete this->elementData;
+	//delete this->elementData;
+	free(this->elementData);
 	this->elementData = newData;
 	this->capacity = newCapacity;
 }
@@ -78,8 +91,8 @@ void Growable_Array::insert_at(int i, void* data)
 {
 	this->ensure_capacity(this->elementCount + 1);
 	int s = sizeof(void*);
-	memmove(&elementData[i+1], &elementData[i], (elementCount - i) * s);
-//	memmove(elementData + (i+1) * s, elementData + i * s, (elementCount - i) * s);
+//	memmove(&elementData[i+1], &elementData[i], (elementCount - i) * s);
+	memmove(elementData + i + 1, elementData + i, (elementCount - i) * s);
 	elementData[i] = data;
 	this->elementCount++;
 }

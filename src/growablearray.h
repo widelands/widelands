@@ -19,6 +19,9 @@
 #ifndef __GROWABLE_ARRAY_H
 #define __GROWABLE_ARRAY_H
 
+// safe mode: set allocated memory to NULL
+#define G_ARRAY_SAFE
+
 class Growable_Array
 {
 	void** elementData;
@@ -29,7 +32,7 @@ class Growable_Array
 public:
 	Growable_Array(int size = 10, int increase = 0);
 	~Growable_Array();
-	void flush();
+	void flush(int size);
 	void ensure_capacity(int cap);
 	void add(void*);
 	void insert_at(int i, void*);

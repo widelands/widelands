@@ -100,7 +100,10 @@ Profile::Profile(const char* filename)
 
 Profile::~Profile()
 {
-	this->values->flush();
+	for (int i=this->values->elements()-1; i>=0; i--)
+		//delete (Value*)values->remove(i);
+		// ich loesch den ja eh gleich, also bin ich mal boese und mach:
+		delete (Value*)values->element_at(i);
 	delete this->values;
 }
 

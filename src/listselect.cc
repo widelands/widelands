@@ -87,13 +87,14 @@ int Listselect::draw(void) {
 					 dp->set_pixel(mx, y+yp, frameclr);
 					 dp->set_pixel(mx, y+yp+this->get_h()-1, frameclr);
 		  }
-		  for(uint my=y+yp; my<y+yp+this->get_h(); my++) {
+		  uint my;
+		  for(my=y+yp; my<y+yp+this->get_h(); my++) {
 					 dp->set_pixel(x+xp, my, frameclr);
 					 dp->set_pixel(x+xp+w-1, my, frameclr);
 		  }
 
 		  // Draw a box into the picture
-		  for(uint my=y+yp+1; my<(y+yp+this->get_h()-1); my++) {
+		  for(my=y+yp+1; my<(y+yp+this->get_h()-1); my++) {
 					 dp->set_pixel(x+xp+1, my, bgclr);
 					 for(uint mx=x+xp+2; mx<(x+xp+w-1); mx++) {
 								dp->set_npixel(bgclr);	

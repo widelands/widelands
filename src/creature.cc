@@ -39,7 +39,7 @@ Creature::Creature(CreatureDesc* d)
 
 Creature::~Creature()
 {
-	this->tasks->flush();
+	this->clear_tasks();
 	delete this->tasks;
 }
 
@@ -56,7 +56,8 @@ void Creature::next_task()
 
 void Creature::clear_tasks()
 {
-	tasks->flush();
+	for (int i=this->tasks->elements()-1; i>=0; i--)
+		delete (Task*)this->tasks->remove(i);
 }
 
 void Creature::live(uint timekey)
@@ -131,12 +132,12 @@ Field* Creature::find_bob_to_consume()
 
 void Creature::work()
 {
-	if (field->building)
+/*	if (field->building)
 	{
 		field->remove_creature(this);
 		field->building->worker_idle(this);
 		field = NULL;
-	}
+	}*/
 }
 
 int Creature::produce(uint timekey)

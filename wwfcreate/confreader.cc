@@ -46,7 +46,8 @@ Conf_Reader::Conf_Reader(const char* file)
 
 Conf_Reader::~Conf_Reader()
 {
-	this->pics->flush();
+	for (int i=this->pics->elements()-1; i>=0; i--)
+		delete[] (char*)this->pics->remove(i);
 	delete this->pics;
 	delete this->resource;
 	delete this->terrain;
