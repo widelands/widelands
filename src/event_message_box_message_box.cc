@@ -122,13 +122,16 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
      UIButton* b;
      posx=spacing;
      posy=get_inner_h()-30;
+     m_trigger.resize(m_event->get_nr_buttons());
      for(int i=0; i<m_event->get_nr_buttons(); i++) {
         posx+=space;
         b=new UIButton(this, posx, posy, but_width, 20, 0, i);
         posx+=but_width;
         b->clickedid.set(this, &Message_Box_Event_Message_Box::clicked);
         b->set_title(m_event->get_button_name(i));
-     } 
+        m_trigger[i]=m_event->get_button_trigger(i);
+     }
+
      
      center_to_parent();
 }
@@ -163,14 +166,12 @@ void Message_Box_Event_Message_Box::clicked(int i) {
       }
    } else {
       // One of the buttons has been pressed
-      if(m_event->get_nr_buttons()<=1) {
-         clicked(-1);
-         return;
-      } else {
-         Trigger_Null* t=m_event->get_button_trigger(i);
-         if(t)
-            t->set_trigger_manually(true);
-      }
+//      NoLog("Button %i has been pressed, nr of buttons: %i!\n", i, m_event->get_nr_buttons());
+      Trigger_Null* t=m_trigger[i];
+      ALIVE();
+      if(t)
+         t->set_trigger_manually(true);
+      ALIVE();
       clicked(-1);
       return;
    }

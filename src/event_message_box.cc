@@ -56,8 +56,9 @@ Event_Message_Box::~Event_Message_Box(void) {
 void Event_Message_Box::cleanup(Editor_Game_Base* g) {  
    uint i=0; 
    for(i=0; i<m_buttons.size(); i++) 
-      if(m_buttons[i].trigger) 
+      if(m_buttons[i].trigger) { 
          set_button_trigger(i, 0, g->get_map());
+      }
    m_buttons.resize(0);
 
      Event::cleanup(g);

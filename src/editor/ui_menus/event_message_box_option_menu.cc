@@ -279,7 +279,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
          {
             // Trigger sel, down
             m_buttons[m_ls_selected].trigger--;
-            if(m_buttons[m_ls_selected].trigger<0) m_buttons[m_ls_selected].trigger=m_null_triggers.size()-1;
+            if(m_buttons[m_ls_selected].trigger<-1) m_buttons[m_ls_selected].trigger=m_null_triggers.size()-1;
             update();
          }
          break;
@@ -290,7 +290,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
             // Trigger sel, up
             m_buttons[m_ls_selected].trigger++;
             if(m_buttons[m_ls_selected].trigger>=static_cast<int>(m_null_triggers.size()))
-               m_buttons[m_ls_selected].trigger=0;
+               m_buttons[m_ls_selected].trigger=-1;
             update();
          }
          break;
@@ -330,12 +330,11 @@ void Event_Message_Box_Option_Menu::update(void) {
    
    m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());
    
-   if(m_nr_buttons!=1) {
-      for(int i=0; i<m_nr_buttons; i++) 
-         if(m_buttons[i].trigger==-1) 
-            m_buttons[i].trigger=0;
-      
-      m_current_trigger_ta->set_text(m_parent->get_map()->get_trigger(m_buttons[m_ls_selected].trigger)->get_name());
+   if(m_nr_buttons && m_null_triggers.size()) {
+      if(m_buttons[m_ls_selected].trigger==-1) 
+         m_current_trigger_ta->set_text("none");
+      else
+         m_current_trigger_ta->set_text(m_parent->get_map()->get_trigger(m_buttons[m_ls_selected].trigger)->get_name());
    } else { 
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;

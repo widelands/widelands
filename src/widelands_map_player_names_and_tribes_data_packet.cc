@@ -53,12 +53,10 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileRead* fr, M
    if(packet_version==CURRENT_PACKET_VERSION) {
      std::string name, tribe;
       int i;
-     log("Nr Players: %i\n", map->get_nrplayers());
       for(i=1; i<=map->get_nrplayers(); i++) {
          name=fr->CString();
          tribe=fr->CString();
          if(!get_scenario_skip()) {
-            log("setting name/tribe of %i to %s/%s\n", i,name.c_str(), tribe.c_str());
             map->set_scenario_player_name(i,name);
             map->set_scenario_player_tribe(i,tribe);
          }

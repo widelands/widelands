@@ -135,7 +135,6 @@ bool Game::run(void)
       set_iabase(ipl);
 
       // Now first, completly load the map
-      log("Loading map complete: %i\n", code);
       ml->load_map_complete(this, code==2); // if code==2 is a scenario
       delete ml;
 

@@ -22,7 +22,9 @@
 
 class Event_Message_Box;
 class Editor_Game_Base;
+class Trigger_Null;
 
+#include <vector>
 #include "ui_window.h"
 
 //
@@ -37,6 +39,7 @@ class Message_Box_Event_Message_Box : public UIWindow {
    private:
       void clicked(int);
       Event_Message_Box* m_event;
+      std::vector<Trigger_Null*> m_trigger;
 };
 
 #endif

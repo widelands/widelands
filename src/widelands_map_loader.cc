@@ -58,24 +58,20 @@ int Widelands_Map_Loader::preload_map(bool scenario) {
 
    fr.Open(g_fs, m_filename.c_str());
    mp.Pre_Read(&fr, m_map);
-   log("Number of players: %i, scenario: %i\n", m_map->get_nrplayers(), scenario);
    
    if(!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
   
-   log("Number of players1: %i\n", m_map->get_nrplayers());
 
    if(fr.Unsigned16()!=PACKET_PLAYER_NAM_TRIB) 
       throw wexception("Wrong packet order in map!\n");
 
    Widelands_Map_Player_Names_And_Tribes_Data_Packet* dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
-   log("Number of players2: %i\n", m_map->get_nrplayers());
    if(!scenario) 
       dp->set_scenario_skip(true);
    else 
       dp->set_scenario_skip(false);
-   log("Number of players3: %i\n", m_map->get_nrplayers());
    dp->Pre_Read(&fr, m_map);
    delete dp;
 
