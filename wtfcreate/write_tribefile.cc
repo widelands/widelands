@@ -116,6 +116,12 @@ void write_buildings(Binary_file* f, Buildings_Descr* b) {
    for(i=0; i<b->nbuilds; i++) {
       b->builds[i]->write(f);
    }
+  
+#if 0
+   cerr << "################## HQ WRITE START" << endl;
+      b->builds[0]->write(f);
+   cerr << "################## HQ_WRITE_ENDS" << endl;
+#endif
 }
 
 void write_checksum(MD5_Binary_file* f) {

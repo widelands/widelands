@@ -230,6 +230,13 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 
 	// Render bottom triangle
 	render_triangle(dst, p+1, b+1, f->get_texd());
+
+   // check if a instance is hooked to this field, if so, draw it
+   if(f->get_inst()) {
+      copy_animation_pic(dst, f->get_inst(), 0, 0, 0, 0, 0, 0); 
+      // cerr << temp << ": Should draw a instance! TODO" << endl;
+   }
+
 }
 
 /** Map_View::set_viewpoint(int x, int y)

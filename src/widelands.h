@@ -112,3 +112,21 @@ void inline tell_user(const char* str) {
       #include <assert.h>
 #endif
 
+/*
+======================================================================================
+
+      COMPILE TIME CONFIGURATION 
+
+======================================================================================
+*/
+
+// a frame is the time between two updates of the game logic
+// this includes: AI, NETWORK, CMD_QUEUES
+// this excludes: the whole User_Interface, this is updated independent from the 
+//   logic frame length (more often)
+#define FRAME_LENGTH 250   
+
+// TODO: make this configurable through conf file or cmdline
+#define MAX_OBJS 50000  // might not be enough
+
+

@@ -22,9 +22,6 @@
 #include "bob.h"
 #include "myfile.h"
 #include "descr_maintainer.h"
-#include "ware.h"
-#include "worker.h"
-#include "building.h"
 #include "tribe.h"
 #include "player.h"
 

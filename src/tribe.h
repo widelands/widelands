@@ -20,6 +20,14 @@
 #ifndef __TRIBE_H
 #define __TRIBE_H
 
+#include "myfile.h"
+#include "pic.h"
+#include "bob.h"
+#include "ware.h"
+#include "worker.h"
+#include "building.h"
+#include "descr_maintainer.h"
+
 /*
  * this class represents a tribe file as it is read out of 
  * a file + the distributing of informations and bobs of 
@@ -36,6 +44,11 @@ class Tribe_Descr {
       ~Tribe_Descr(void);
 
       int load(const char* name);
+
+      inline Ware_Descr* get_ware_descr(uint idx) { return wares.get(idx); }
+      inline Soldier_Descr* get_soldier_descr(uint idx) { return soldiers.get(idx); }
+      inline Worker_Descr* get_worker_descr(uint idx) { return workers.get(idx); }
+      inline Building_Descr* get_building_descr(uint idx) { return buildings.get(idx); }
 
    private:
       char name[30];

@@ -60,7 +60,7 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
    data=(ushort*) malloc(get_w()*get_h()*sizeof(ushort)*2); 
    uint i=0;
    for(i=0; i<get_w()*get_h()*2; i++) {
-      data[i]='\0';
+      data[i]=0;
    }
    uint n=0;
    uint count=0;
@@ -68,6 +68,7 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
    uint pixc=0;
    uint npix=get_h()*get_w();
    for(i=0; i<npix; i++) {
+      // cerr << hex <<  get_clrkey() << endl;
       if(has_clrkey() && pixels[i]==get_clrkey()) {
          data[n]|=CMD_TRANS;
          count=0;
@@ -78,11 +79,16 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
 
          // write last count
          if(lidx!=-1) {
-         //   cerr << pixc << "x bunte pixel" << endl;
+            cerr << pixc << "x bunte pixel: " ;
             data[lidx]=pixc;
+            cerr << hex << data[lidx] << " " ;
+            for(uint i=0; i<pixc; i++) {
+               cerr << data[lidx+i+1] << " " ;
+            }
+            cerr << endl << dec;
          }
          lidx=-1;
-       //  cerr << "Trans: " << count << endl;
+         cerr  << count << " transparente: " << hex << data[n-1] << endl << dec;
       } else if(has_shadow && pixels[i]==shadowclr) {
          data[n]|=CMD_SHAD;
          count=0;
@@ -93,11 +99,16 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
    
          // write last count
          if(lidx!=-1) {
-         //   cerr << pixc << "x bunte pixel" << endl;
+            cerr << pixc << "x bunte pixel: " ;
             data[lidx]=pixc;
+            cerr << hex << data[lidx] << " " ;
+            for(uint i=0; i<pixc; i++) {
+               cerr << data[lidx+i+1] << " " ;
+            }
+            cerr << endl << dec;
          }
          lidx=-1;
-       //  cerr << "Shadw: " << count << endl;
+         cerr << "Shadw: " << count << endl << dec;
       } else if(has_plclr) {
          uint idx;
          for(idx=0; idx<4; idx++) {
@@ -112,11 +123,16 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
                i--;
                // write last count
                if(lidx!=-1) {
-              //    cerr << pixc << "x bunte pixel" << endl;
+                  cerr << pixc << "x bunte pixel: " ;
                   data[lidx]=pixc;
+                  cerr << hex << data[lidx] << " " ;
+                  for(uint i=0; i<pixc; i++) {
+                     cerr << data[lidx+i+1] << " " ;
+                  }
+                  cerr << endl << dec;
                }
                lidx=-1;
-            //   cerr << "PlClr " << idx << ": " << count << endl;
+               cerr << "PlClr " << idx << ": " << count << endl << dec;
                break;
             }
          }
@@ -131,6 +147,16 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
             n++;
             pixc++;
          }
+      } else {
+         // no player color, simple colors
+         if(lidx==-1) {
+            lidx=n;
+            pixc=0;
+            n++;
+         }
+         data[n]=pixels[i];
+         n++;
+         pixc++;
       }
    } 
  
@@ -142,6 +168,8 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
    f->write(data, n*sizeof(ushort));
    
    free(data);
+
+   // exit(0);
 }
 
 void Bob_Data_Pic_Descr::set_shadowclr(ushort clr) { 

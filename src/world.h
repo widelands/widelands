@@ -20,8 +20,9 @@
 #define __WORLD_H
 
 #include "graphic.h"
-
-class Binary_file;
+#include "myfile.h"
+#
+// class Binary_file;
 class Bob;
 //class Pic;
 struct Anim;

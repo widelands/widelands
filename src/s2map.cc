@@ -239,9 +239,11 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
 		  Field *f = fields;
 		  pc = section;
 		  for(y=0; y<hd.height; y++) {
-				for(x=0; x<hd.width; x++, f++, pc++)
-					f->set_height(*pc);
-		  }
+           for(x=0; x<hd.width; x++, f++, pc++) {
+              f->set_height(*pc);
+              f->hook_instance(0); // we bring the field in a acceptable init state 
+           }
+        }
 		  free(section);
 
 		  ////				S E C T I O N		2: Landscape
@@ -376,6 +378,8 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
               if(section[i]==0x80) {
                  // cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl;
                  Point* p = (Point*) malloc(sizeof(Point)); 
+                 p->x=x;
+                 p->y=y;
                  q->queue(SENDER_LOADER, CMD_WARP_BUILDING, bobs[i], 0, p);
               }
            }

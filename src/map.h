@@ -113,13 +113,16 @@ struct Cords {
 //#define FIELD_HEIGHT  58
 #define HEIGHT_FACTOR 5
 
+class Instance;
+
 class Field {
 	friend class Map;
 private:
 	uchar height;
 	char brightness;
 	Pic *texr, *texd;
-
+   Instance* inst; // TODO: at the moment every field can only have one object associated with it
+   
 public:
 	inline uchar get_height() const { return height; }
 
@@ -127,6 +130,9 @@ public:
 	inline Pic *get_texd() const { return texd; }
 	inline void set_texr(Pic *p) { texr = p; }
 	inline void set_texd(Pic *p) { texd = p; }
+
+   inline void hook_instance(Instance* obj) { inst=obj; }
+   inline Instance* get_inst(void) { return inst; }
 
 	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
 	inline char get_brightness() const { return brightness; }

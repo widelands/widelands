@@ -146,6 +146,7 @@ int Map::load_wlmf(const char* file, Cmd_Queue* q) {
 								f->set_height((uchar)fd.height);
 								f->set_texr(tr);
 								f->set_texd(td);
+                        f->hook_instance(0); 
 					 }
 		  }
 

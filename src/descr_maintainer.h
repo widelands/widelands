@@ -37,7 +37,9 @@ template <class T> class Descr_Maintainer {
       void add(T* item);
       ushort get_nitems(void) { return nitems; }
       ushort get_index(const char* name);
-      
+     
+      inline T* get(uint idx) { assert(idx<nitems); return items[idx]; }
+
    private:
       uint n;
       uint nitems;

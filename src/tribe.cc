@@ -28,7 +28,6 @@
 #include "tribedata.h"
 #include "ware.h"
 #include "worker.h"
-#include "building.h"
 #include "tribe.h"
 
 //

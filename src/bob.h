@@ -21,9 +21,17 @@
 
 #include "worldfiletypes.h"
 #include "graphic.h"
+#include "pic.h"
 
 class World;
 //class Pic;
+
+class Animation;
+
+struct Animation_Pic {
+   ushort *data;
+   Animation* parent;
+};
 
 class Animation {
    public:
@@ -37,8 +45,9 @@ class Animation {
       ~Animation(void) { 
          if(npics) {
             uint i; 
-            for(i=0; i<npics; i++)
-               free(pics[i]);
+            for(i=0; i<npics; i++) {
+               free(pics[i].data);
+            }
             free(pics);
          }
       }
@@ -50,25 +59,30 @@ class Animation {
       void add_pic(ushort size, ushort* data) {
          if(!npics) {
             npics=1;
-            pics=(ushort**) malloc(sizeof(ushort*));
+            pics=(Animation_Pic*) malloc(sizeof(Animation_Pic));
          } else {
             npics++;
-            pics=(ushort**) realloc(pics, sizeof(ushort*)*npics);
+            pics=(Animation_Pic*) realloc(pics, sizeof(Animation_Pic*)*npics);
          }
-         pics[npics-1]=(ushort*)malloc(size);
-         memcpy(pics[npics-1], data, size);
+         pics[npics-1].data=(ushort*)malloc(size);
+         pics[npics-1].parent=this;
+         memcpy(pics[npics-1].data, data, size);
       }
 
       void set_flags(uint mflags) { flags=mflags; }
       void set_dimensions(ushort mw, ushort mh) { w=mw; h=mh; }
       void set_hotspot(ushort x, ushort y) { hsx=x; hsy=y; }
-      
+
+      // TEMP 
+      inline Animation_Pic* get_pic(ushort) { return &pics[0]; }
+
+      // TEMP ENDS
    private:
       uint flags;
       ushort w, h;
       ushort hsx, hsy;
       ushort npics;
-      ushort **pics;
+      Animation_Pic *pics;
 };
 
 /** class Bob

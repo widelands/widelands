@@ -426,6 +426,85 @@ void Graphic::update(void) {
    bneeds_update=false;
 }
 
+/** 
+ * This function copys from a bob picture
+ *
+ * TODO: it needs to much information (players etc. etc.)
+ */
+#include "instances.h"
+#include "bob.h"
+
+void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint src_x, uint src_y, int w, int h) {
+
+   uint x, y;
+   Animation_Pic* pic=inst->get_cur_pic();
+   Animation* bob=pic->parent;
+   ushort cmd;
+   ushort count;
+   ushort i=0;
+   ushort clr;
+   x=0;
+   for(y=0; y<bob->get_h(); ) {
+//      for(x=0; x<bob->get_w(); x++) {
+         cmd=((pic->data[i]>> 14) & 0x3);
+         count=pic->data[i] & 0x3fff;
+
+//         cerr << "ALIVE:" << hex << pic->data[i] << ":"  << cmd << ":" << count << endl;
+
+         i++;
+         if(cmd==0) {
+//            cerr << "Should draw " << count << " pixels"; 
+            //   cerr << count << ":" <<  x << ":" << y << endl;
+            for(uint z=0; z<count; z++) {
+               clr=pic->data[i+z];
+   //            cerr << count << ":" << hex << clr << endl;
+//               clr=pic->data[i];
+               dst->pixels[y*dst->pitch + x]=clr; //pic->data[i];
+               ++x;
+               if(x==bob->get_w()) { 
+                  ++y; 
+                  x=0; 
+                  if(y==bob->get_h()) break;
+               }
+            }
+            i+=count;
+            continue;
+         } else if(cmd==1) {
+//            cerr << "Should skip " << count << " pixels!" << endl;
+            while(count) {
+               ++x;
+                  
+               if(x==bob->get_w()) { ++y; x=0; if(y==bob->get_h()) break;}
+               --count;
+            }
+            continue;
+         } else if(cmd==2) {
+//            cerr << "Should draw " << count << " pixels in player color!" << endl;
+            // Player Color. Skip for the moment: TODO!
+           /* while(count) {
+               ++x;
+               if(x==bob->get_w()) { ++y; x=0; }
+               --count;
+            }
+           */ i++;
+            continue;
+         } else if(cmd==3) {
+            // Shadow. Skip for the moment TODO!
+//            cerr << "Should draw " << count << " pixels as shadow!" << endl;
+           /* while(count) {
+               ++x;
+               if(x==bob->get_w()) { ++y; x=0; }
+               --count;
+            }
+           */ continue;
+  //        }
+      
+      }
+   }
+   cerr << "Should write an animation_pic something" << endl;
+
+//   assert(0);
+}
 
 /** void copy_pic(Bitmap +dst, Bitmap *src, const int dst_x, const int dst_y,
 *                const uint src_x, const uint src_y, const uint w, const uint h)

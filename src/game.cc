@@ -19,9 +19,14 @@
 
 #include "widelands.h"
 #include "cursor.h"
-#include "game.h"
 #include "map.h"
 #include "cmd_queue.h"
+#include "descr_maintainer.h"
+#include "bob.h"
+#include "ware.h"
+#include "worker.h"
+#include "tribe.h"
+#include "game.h"
 
 /** class Game
  *
@@ -71,18 +76,12 @@ int Game::set_map(const char* mapname) {
 #include "worldfiletypes.h"
 #include "myfile.h"
 #include "graphic.h"
-#include "descr_maintainer.h"
-#include "bob.h"
-#include "ware.h"
-#include "worker.h"
-#include "building.h"
-#include "tribe.h"
 void Game::run(void) {
    // TEMP
-   Tribe_Descr tribe;
+   tribe= new Tribe_Descr(); 
    const char* str=g_fileloc.locate_file("testtribe.wtf", TYPE_TRIBE);
    assert(str);
-   assert(!tribe.load(str));
+   assert(!tribe->load(str));
    // TEMP
 
    // run the cmd queue, so all the load cmds are worked through
@@ -92,6 +91,7 @@ void Game::run(void) {
    counter.start();
    ipl->run();
    delete ipl;
+   delete tribe;
 }
 
 //
@@ -106,7 +106,19 @@ void Game::think(void) {
    ulong curticks=counter.get_ticks();
    
    while(curticks-lticks > FRAME_LENGTH) {
-      cerr << "Working frame number: " << frame_count << endl;
+//      cerr << "Working frame number: " << frame_count << endl;
+
+      uint i;
+      Instance* inst;
+      for(i=0; i<MAX_OBJS; i++) {
+         inst=hinst->get_inst(i);
+         if(inst->get_state() == Instance::USED) {
+            if(frame_count >= inst->get_next_acting_frame()) {
+               inst->act(this);
+               //        cerr << i << " is acting!" << endl;
+            }
+         }
+      }
 
       queue->run_queue();
       frame_count++;

@@ -20,12 +20,19 @@
 #ifndef __S__BUILDING_H
 #define __S__BUIlDING_H
 
+#include "instances.h"
 
 //
 // This class describes a in-game building
 //
-class Building {
+class Building_HQ : public Map_Object {
+   public:
+      Building_HQ(void) { } 
+      virtual ~Building_HQ(void) { }
 
+      int act(Game* g);
+
+   private:
 };
 
 
@@ -56,6 +63,12 @@ class Building_Descr {
       virtual ~Building_Descr(void) { }
 
       virtual int read(Binary_file* f);
+      virtual int create_instance(Instance*)=0;
+     
+      // TEMP
+      inline Animation* get_idle(void) { return &idle; }
+      // TEMP END
+   
    protected:
       //      int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew=0, ushort* eh=0);
 
@@ -189,6 +202,7 @@ class Dig_Building_Descr : virtual public Working_Building_Descr,
          ~Dig_Building_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          uint worker;
@@ -210,6 +224,7 @@ class Search_Building_Descr : virtual public Boring_Building_Descr,
          ~Search_Building_Descr(void) { if(bobs) free(bobs);  }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          ushort working_time;
@@ -232,6 +247,7 @@ class Plant_Building_Descr : virtual public Boring_Building_Descr,
          ~Plant_Building_Descr(void) { if(bobs) free(bobs); }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          ushort working_time;
@@ -255,6 +271,7 @@ class Grow_Building_Descr : virtual public Boring_Building_Descr,
          ~Grow_Building_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          uint worker;
@@ -278,6 +295,7 @@ class Sit_Building_Descr : virtual public Working_Building_Descr,
          ~Sit_Building_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          bool order_worker;
@@ -295,6 +313,7 @@ class Sit_Building_Produ_Worker_Descr : virtual public Working_Building_Descr,
          ~Sit_Building_Produ_Worker_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          uint worker;
@@ -314,6 +333,7 @@ class Science_Building_Descr : virtual public Working_Building_Descr,
          ~Science_Building_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          uint worker; 
@@ -332,6 +352,7 @@ class Military_Building_Descr : virtual public Boring_Building_Descr,
          Military_Building_Descr::~Military_Building_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          ushort beds;
@@ -352,6 +373,7 @@ class Cannon_Descr : virtual public Boring_Building_Descr,
          Cannon_Descr::~Cannon_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          uint worker;
@@ -379,6 +401,7 @@ class HQ_Descr : virtual public Boring_Building_Descr {
       HQ_Descr::~HQ_Descr(void) { }
 
       int read(Binary_file* f);
+      int create_instance(Instance*);
 
    private:
       ushort conquers;
@@ -395,6 +418,7 @@ class Store_Descr : virtual public Boring_Building_Descr,
          Store_Descr::~Store_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          // nothing
@@ -412,6 +436,7 @@ class Dockyard_Descr :  virtual public Boring_Building_Descr,
          Dockyard_Descr::~Dockyard_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          ushort working_time;
@@ -429,6 +454,7 @@ class Port_Descr : virtual public Boring_Building_Descr,
          Port_Descr::~Port_Descr(void) { }
 
          int read(Binary_file* f);
+         int create_instance(Instance*);
 
       private:
          // nothing

@@ -52,10 +52,9 @@ void Cmd_Queue::queue(uchar sender, ushort cmd, ulong arg1, ulong arg2, void* ar
 // main function, run the queued commands
 int Cmd_Queue::run_queue(void) {
    
-   cerr << "Running queue!" << endl;
-
-   uint i=0;
+   uint i=0, temp=0;
    Cmd* c;
+   Instance* inst;
    while(i<ncmds) {
       c=&cmds[i];
       
@@ -73,6 +72,15 @@ int Cmd_Queue::run_queue(void) {
             // create a building in a instance (without build time)
             // arg1==player number to own the building
             // arg2==index of building
+            // arg3==pointer to point struct where to build the building
+            temp=g->hinst->get_free_inst_id();
+            inst=g->hinst->get_inst(temp);
+            cerr << "Hooking instance: " << ((Point*) c->arg3)->x << ":" << ((Point*) c->arg3)->y << endl;
+            g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
+            temp=g->get_player_tribe(c->arg1)->get_building_descr(c->arg2)->create_instance(inst);
+            inst->set_owned_by(c->arg1);
+            inst->set_next_acting_frame(g->get_frame()+temp);
+            break;
 
          default:
             cerr << "Unknown Queue_Cmd: " << c->cmd << endl;

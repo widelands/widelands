@@ -22,12 +22,8 @@
 #include "myfile.h"
 #include "helper.h"
 #include "myfile.h"
-#include "bob.h"
-#include "ware.h"
-#include "worker.h"
-#include "building.h"
-#include "descr_maintainer.h"
 #include "tribe.h"
+#include "game.h"
 
 // 
 // Need List
@@ -48,6 +44,17 @@ int NeedWares_List::read(Binary_file* f) {
       f->read(&list[i].index, sizeof(ushort));
       f->read(&list[i].stock, sizeof(ushort));
    }
+
+   return RET_OK;
+}
+
+// down here: Buildings as Map_Objects
+int Building_HQ::act(Game* g) {
+
+   cerr << "Building HQ should act. Repeating in ten frames!" << endl;
+
+   next_acting_frame=g->get_frame()+10;
+   cur_pic=g->get_player_tribe(owned_by)->get_building_descr(0)->get_idle()->get_pic(0);
 
    return RET_OK;
 }
@@ -132,6 +139,11 @@ int Boring_Building_Descr::read(Binary_file *f) {
    return RET_OK;
 }
 
+
+// 
+// DOWN HERE: The real buildings, no abstractions
+// 
+
 int Dig_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
    Working_Building_Descr::read(f);
@@ -145,6 +157,11 @@ int Dig_Building_Descr::read(Binary_file *f) {
    f->read(&idle_time, sizeof(ushort));
    f->read(&worker, sizeof(ushort));
    f->read(resource, sizeof(resource));
+
+   return RET_OK;
+}
+int Dig_Building_Descr::create_instance(Instance* inst) {
+   cerr << "Dig_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
 
    return RET_OK;
 }
@@ -168,6 +185,11 @@ int Search_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Search_Building_Descr::create_instance(Instance* inst) {
+   cerr << "Search_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
 
 int Plant_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -187,6 +209,12 @@ int Plant_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Plant_Building_Descr::create_instance(Instance* inst) {
+   cerr << "Plant_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int Grow_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -206,6 +234,12 @@ int Grow_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Grow_Building_Descr::create_instance(Instance* inst) {
+   cerr << "Grow_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int Sit_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -225,6 +259,12 @@ int Sit_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Sit_Building_Descr::create_instance(Instance* inst) {
+   cerr << "Sit_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int Sit_Building_Produ_Worker_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -241,6 +281,12 @@ int Sit_Building_Produ_Worker_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Sit_Building_Produ_Worker_Descr::create_instance(Instance* inst) {
+   cerr << "Sit_Building_Produ_Worker_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int Science_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -252,6 +298,12 @@ int Science_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Science_Building_Descr::create_instance(Instance* inst) {
+   cerr << "Science_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int Military_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -268,6 +320,12 @@ int Military_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Military_Building_Descr::create_instance(Instance* inst) {
+   cerr << "Military_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int Cannon_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -314,6 +372,12 @@ int Cannon_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Cannon_Descr::create_instance(Instance* inst) {
+   cerr << "Cannon_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int HQ_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -324,6 +388,14 @@ int HQ_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int HQ_Descr::create_instance(Instance* inst) {
+   cerr << "HQ_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   inst->obj=new Building_HQ();
+
+   return 10; // act in 10 frames again 
+}
+
 
 int Store_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -335,6 +407,12 @@ int Store_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Store_Descr::create_instance(Instance* inst) {
+   cerr << "Store_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int Dockyard_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -350,6 +428,12 @@ int Dockyard_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Dockyard_Descr::create_instance(Instance* inst) {
+   cerr << "Dockyard_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 int Port_Descr::read(Binary_file *f) {
 
@@ -361,5 +445,11 @@ int Port_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
+int Port_Descr::create_instance(Instance* inst) {
+   cerr << "Port_Descr::create_instance() not yet implemented: TODO!" << endl;
+
+   return RET_OK;
+}
+
 
 

@@ -20,15 +20,6 @@
 #ifndef __S__GAME_H
 #define __S__GAME_H
 
-// a frame is the time between two updates of the game logic
-// this includes: AI, NETWORK, CMD_QUEUES
-// this excludes: the whole User_Interface, this is updated independent from the 
-//   logic frame length (more often)
-#define FRAME_LENGTH 250   
-
-// TODO: make this configurable through conf file or cmdline
-#define MAX_OBJS 50000  // might not be enough
-
 /** class Player
  *
  * pure virtual class to define, what a player must be able to do
@@ -47,6 +38,7 @@ class Player {
 #include "descr_maintainer.h"
 #include "cmd_queue.h"
 #include "instances.h"
+#include "tribe.h"
 
 /** class Game
  *
@@ -69,7 +61,13 @@ class Game {
 					 int set_map(const char* mapname);
                 inline Map *get_map() { return map; }
 
+                inline ulong get_frame(void) { return frame_count; }
+
+                // TEMP
+                Tribe_Descr* get_player_tribe(uint n) { return tribe; }
+                // TEMP END
 		  private:
+                Tribe_Descr* tribe;
 					 Map *map;
 					 Player** pls;
 					 Interactive_Player* ipl;
