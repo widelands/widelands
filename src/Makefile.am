@@ -71,10 +71,12 @@ widelands_SOURCES=main.cc \
 						multiline_textarea.cc \
 						window.cc \
 						checkbox.cc \
+						radiobutton.cc \
 						listselect.cc \
 						scrollbar.cc \
 						mapselectmenue.h \
 						mapselectmenue.cc \
+						optionsmenu.cc \
 						s2map.h \
 						s2map.cc \
 						criterr.h \

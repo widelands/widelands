@@ -82,6 +82,8 @@ void setup_ui(void) {
 
 		  // list select class
 		  Listselect::setup_ui();
+
+		  Checkbox::setup_ui();
 }
 
 /** void setup_searchpaths(void)

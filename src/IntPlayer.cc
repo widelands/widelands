@@ -35,6 +35,9 @@
  * Depends: g_ip, g_ui, g_gr, g_cur
  */
 
+uint Interactive_Player::xresolution;
+uint Interactive_Player::yresolution;
+
 /** Interactive_Player::Interactive_Player(Game *g)
  *
  * Init
@@ -42,7 +45,7 @@
  * Args: g	the game to be played
  */
 Interactive_Player::Interactive_Player(Game *g)
-	: Panel(0, 0, 0, Game::get_xres(), Game::get_yres())
+	: Panel(0, 0, 0, get_xres(), get_yres())
 {
 	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g->get_map());
 
@@ -77,8 +80,8 @@ Interactive_Player::~Interactive_Player(void)
  */
 void Interactive_Player::start()
 {
-	g_gr.set_mode(Game::get_xres(), Game::get_yres(), g_gr.get_mode());
-	g_ip.set_max_cords(Game::get_xres()-g_cur.get_w(), Game::get_yres()-g_cur.get_h());
+	g_gr.set_mode(get_xres(), get_yres(), g_gr.get_mode());
+	g_ip.set_max_cords(get_xres()-g_cur.get_w(), get_yres()-g_cur.get_h());
 }
 
 /** Interactive_Player::exit_game_btn(void *a)

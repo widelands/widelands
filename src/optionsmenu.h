@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp
+ * Copyright (C) 2002 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,11 +17,9 @@
  *
  */
 
-#ifndef __S__OPTIONS_H
-#define __S__OPTIONS_H
+#ifndef OPTIONSMENU_H
+#define OPTIONSMENU_H
 
-#include "mytypes.h"
+void options_menu(void);
 
-void handle_options(uint, char**);
-
-#endif /* __S__OPTIONS_H */
+#endif /* OPTIONSMENU_H */

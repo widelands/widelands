@@ -1,16 +1,16 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -31,7 +31,7 @@
 #include "graphic.h"
 #include "input.h"
 #include "menuecommon.h"
-#include "game.h"
+#include "IntPlayer.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -56,7 +56,7 @@ struct Options {
 		  char effectsdir[MAX_OPT_LENGTH];
 		  char fontsdir[MAX_OPT_LENGTH];
 		  char savedir[MAX_OPT_LENGTH];
-		  
+
 		  // Gameplay
 		  bool swapmouse;
 		  int  mousespeed;
@@ -78,7 +78,7 @@ struct Options {
 		  // Cmdline stuff
 		  bool show_version;
 		  bool show_usage;
-		  
+
 		  // Debug
 		  char stderr_file[MAX_OPT_LENGTH];
 		  char stdout_file[MAX_OPT_LENGTH];
@@ -112,7 +112,7 @@ static int write_conf_file(Options* o) {
 		  buf=g_fileloc.get_new_filename("config");
 
 		  ofstream f(buf);
-		  
+
 		  f << "# Widelands configfile, written by Version " << VERSION << endl;
 		  f << "# Any comments to the game? mailto:SirVer@gmx.de" << endl;
 		  f << endl;
@@ -159,7 +159,7 @@ static int write_conf_file(Options* o) {
 		  f << "STDERR" << "=\"" << o->stderr_file << "\"" << endl;
 		  f << "STDOUT" << "=\"" << o->stdout_file << "\"" << endl;
 		  f.close();
-		  
+
 		  return RET_OK;
 }
 
@@ -233,14 +233,14 @@ static int parse_conf_file(Ascii_file &f, Options* o) {
 		  return RET_OK;
 }
 
-/** static int parse_command_line(uint argn, char** argc, Options* o) 
+/** static int parse_command_line(uint argn, char** argc, Options* o)
  *
  * Parses the standart cmd line of the program
  *
  * Args: argn	number of args
  * 		argc	args (args[0] == name of exe)
  * 		o		Option struct to write stuff inside
- * 
+ *
  * Returns: RET_OK on success
  */
 static int parse_command_line(uint argn, char** argc, Options* o) {
@@ -254,7 +254,7 @@ static int parse_command_line(uint argn, char** argc, Options* o) {
 		  p.register_string_opt("--searchdir0", o->searchdir0);
 		  p.register_string_opt("--searchdir1", o->searchdir1);
 		  p.register_string_opt("--searchdir2", o->searchdir2);
-		 
+
 		  p.register_string_opt("--txtsdir", o->txtsdir);
 		  p.register_string_opt("--picsdir", o->picsdir);
 		  p.register_string_opt("--bobsdir", o->bobsdir);
@@ -286,7 +286,7 @@ static int parse_command_line(uint argn, char** argc, Options* o) {
 
 		  p.register_bool_opt("--help", &o->show_usage);
 		  p.register_bool_opt("--version", &o->show_version);
-		  
+
 		  for(uint i=1; i<argn; i++) {
 					 if(p.parse_line(argc[i])) {
 								strcpy(output, "Parsing error on arg: ");
@@ -296,7 +296,7 @@ static int parse_command_line(uint argn, char** argc, Options* o) {
 					 }
 		  }
 
-		  
+
 		  return RET_OK;
 }
 
@@ -354,7 +354,7 @@ void handle_options(uint argn, char** argc) {
 		  // Cmdline stuff
 		  o.show_version=0;
 		  o.show_usage=0;
-		  
+
 		  // Debug
 		  strcpy(o.stderr_file, "stderr");
 		  strcpy(o.stdout_file, "stdout");
@@ -373,7 +373,7 @@ void handle_options(uint argn, char** argc) {
 					 // and on exit a new conf file will be written
 					 parse_conf_file(f, &o);
 		  }
-		  
+
 		  // Next, parse the comand line
 		  // Errors don't matter. The user will be informed and a usage function will
 		  // be called
@@ -383,7 +383,7 @@ void handle_options(uint argn, char** argc) {
 		  consume_options(&o);
 }
 
-/** static int consume_options(Options* o) 
+/** static int consume_options(Options* o)
  *
  * This functions finally send the options to the parts of the game they belong to
  *
@@ -396,8 +396,8 @@ static int consume_options(Options* o) {
 
 		  // Graphics
 		  // set in game resolution (res for menues is fixed)
-		  Game::set_resolution(o->xres, o->yres);
-		  
+		  Interactive_Player::set_resolution(o->xres, o->yres);
+
 		  if(o->fullscreen) {
 					 g_gr.set_mode(0, 0, Graphic::MODE_FS);
 		  } else {
@@ -409,10 +409,10 @@ static int consume_options(Options* o) {
 		  g_fileloc.add_searchdir(o->searchdir0, 0);
 		  g_fileloc.add_searchdir(o->searchdir1, 1);
 		  g_fileloc.add_searchdir(o->searchdir2, 2);
-		  g_fileloc.register_subdir(TYPE_TEXT, o->txtsdir); 
+		  g_fileloc.register_subdir(TYPE_TEXT, o->txtsdir);
 		  g_fileloc.register_subdir(TYPE_PIC, o->picsdir);
 		  g_fileloc.register_subdir(TYPE_BOB, o->bobsdir);
-		  g_fileloc.register_subdir(TYPE_TRIBE, o->tribesdir); 
+		  g_fileloc.register_subdir(TYPE_TRIBE, o->tribesdir);
 		  g_fileloc.register_subdir(TYPE_WORLD, o->worldsdir);
 		  g_fileloc.register_subdir(TYPE_CAMPAIGN, o->campaignsdir);
 		  g_fileloc.register_subdir(TYPE_MAP, o->mapsdir);
@@ -421,16 +421,16 @@ static int consume_options(Options* o) {
 		  g_fileloc.register_subdir(TYPE_FONT, o->fontsdir);
 		  g_fileloc.register_subdir(TYPE_SAVE, o->savedir);
 
-		  // Gameplay 
+		  // Gameplay
 		  g_ip.swap_buttons(o->swapmouse);
 		  g_ip.set_mouse_speed(o->mousespeed);
-		 
+
 		  // Player color TODO
 
 
 		  // Network TODO
 
-		  // Sound 
+		  // Sound
 		  if(o->usemusic || o->useeffects) {
 					 tell_user("Sound is not implemented in this release. Please turn this options off!");
 					 o->usemusic=o->useeffects=0;
@@ -446,24 +446,24 @@ static int consume_options(Options* o) {
 					 show_usage();
 					 exit(0);
 		  }
-		  
+
 		  // Debug
 		  if(o->stderr_file[0]=='\0') {
 					 strcpy(o->stderr_file, "stderr");
 		  }
 		  const char* buf=g_fileloc.get_new_filename(o->stderr_file);
 		  err.open(buf);
-		  
+
 		  if(o->stdout_file[0]=='\0') {
 					 strcpy(o->stdout_file, "stdout");
 		  }
 		  buf=g_fileloc.get_new_filename(o->stdout_file);
 		  out.open(buf);
-		  
+
 		  return RET_OK;
 }
 
-/** static void show_usage(void) 
+/** static void show_usage(void)
  *
  * This functions finally prints the usage and ends the programm
  *
@@ -471,7 +471,7 @@ static int consume_options(Options* o) {
  * Returns: Nothing
  */
 static void show_usage(void) {
-		  char help[] = 
+		  char help[] =
 					 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 					 "Options:\n"
 					 "Graphic:\n"
@@ -519,6 +519,6 @@ static void show_usage(void) {
 					 "Bug reports? Suggestions? mailto:SirVer@gmx.de\n"
 					 "Hope you enjoy this game!\n"
 					 "";
-		  
+
 		  tell_user(help);
 }

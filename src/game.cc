@@ -29,8 +29,6 @@
  * it depends on nearly everything else in widelands
  */
 
-uint Game::xresolution, Game::yresolution;
-
 /** Game::Game(void)
  *
  * init

@@ -329,7 +329,7 @@ Graphic::~Graphic(void) {
    SDL_Quit();
 }
 
-/** void Graphic::set_mode(const ushort x, const ushort y, const Mode m)
+/** void Graphic::set_mode(ushort x, ushort y, Mode m)
  *
  * This function sets a new graphics mode.
  *	if x==0 and y==0: ignore resolution, just set the mode (won't create a window)
@@ -339,7 +339,7 @@ Graphic::~Graphic(void) {
  * 		m	either windows or fullscreen
  * Returns: Nothing
  */
-void Graphic::set_mode(const ushort x, const ushort y, const Mode m) {
+void Graphic::set_mode(ushort x, ushort y, Mode m) {
    if(!x && !y) { mode=m; return; }
    if(screenbmp.w==x && screenbmp.h==y && mode==m) return;
    if(sc)

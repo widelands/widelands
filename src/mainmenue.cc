@@ -28,6 +28,7 @@
 #include "output.h"
 #include "singlepmenue.h"
 #include "menuecommon.h"
+#include "optionsmenu.h"
 #include "criterr.h"
 
 #ifndef VERSION
@@ -35,6 +36,67 @@
 #endif /* VERSION */
 
 #include <string.h>
+
+/*
+==============================================================================
+
+FileViewScreen
+
+==============================================================================
+*/
+
+class FileViewScreen : public BaseMenu {
+public:
+	FileViewScreen(const char *text);
+};
+
+FileViewScreen::FileViewScreen(const char *text)
+	: BaseMenu("splash.bmp")
+{
+	// Text view
+	new Multiline_Textarea(this, 40, 150, 560, 240, text);
+
+	// Close button
+	Button *b;
+
+	b = new Button(this, 233, 420, 174, 24, 0);
+	b->clickedid.set(this, &FileViewScreen::end_modal);
+	b->set_pic(g_fh.get_string("Close", 0));
+}
+
+/** fileview_screen(const char *fname)
+ *
+ * Display the contents of a text file in a menu screen
+ */
+static void fileview_screen(const char *fname)
+{
+	char *text;
+	const char *buf = g_fileloc.locate_file(fname);
+	FILE *file = 0;
+	if (buf)
+		file = fopen(buf, "r");
+	if (file) {
+		int length;
+
+		// load the entire file in one go
+		fseek(file, 0, SEEK_END);
+		length = ftell(file);
+		fseek(file, 0, SEEK_SET);
+
+		text = (char *)malloc(length + 1);
+		fread(text, length, 1, file);
+		text[length] = 0;
+
+		fclose(file);
+	} else
+		text = strdup("Unable to load file. Check your installation.");
+
+	FileViewScreen *fvs = new FileViewScreen(text);
+	fvs->run();
+	delete fvs;
+
+	free(text);
+}
 
 /*
 ==============================================================================
@@ -47,9 +109,9 @@ MainMenu
 enum {
 	mm_singleplayer,
 	//mm_multiplayer, // BIG TODO
-	//mm_options,
-	//mm_readme,
-	//mm_about,
+	mm_options,
+	mm_readme,
+	mm_license,
 	mm_exit
 };
 
@@ -74,17 +136,17 @@ MainMenu::MainMenu()
 	b->clicked.set(this, &MainMenu::not_supported);
 	b->set_pic(g_fh.get_string("Multi Player", 0));
 
-	b = new Button(this, 60, 230, 174, 24, 1);
-	b->clicked.set(this, &MainMenu::not_supported);
+	b = new Button(this, 60, 230, 174, 24, 1, mm_options);
+	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_pic(g_fh.get_string("Options", 0));
 
-	b = new Button(this, 60, 270, 174, 24, 1);
-	b->clicked.set(this, &MainMenu::not_supported);
+	b = new Button(this, 60, 270, 174, 24, 1, mm_readme);
+	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_pic(g_fh.get_string("View Readme", 0));
 
-	b = new Button(this, 60, 310, 174, 24, 1);
-	b->clicked.set(this, &MainMenu::not_supported);
-	b->set_pic(g_fh.get_string("About", 0));
+	b = new Button(this, 60, 310, 174, 24, 1, mm_license);
+	b->clickedid.set(this, &MainMenu::end_modal);
+	b->set_pic(g_fh.get_string("License", 0));
 
 
 	b = new Button(this, 60, 370, 174, 24, 0, mm_exit);
@@ -101,7 +163,7 @@ void MainMenu::not_supported()
 	critical_error("This is not yet supported. You can savly click on continue.");
 }
 
-/** void main_menue(void);
+/** void main_menue(void)
  *
  * This functions runs the main menu. There, you can select
  * between different playmodes, exit and so on.
@@ -119,6 +181,18 @@ void main_menue(void)
 		switch(code) {
 		case mm_singleplayer:
 			single_player_menue();
+			break;
+
+		case mm_options:
+			options_menu();
+			break;
+
+		case mm_readme:
+			fileview_screen("README");
+			break;
+
+		case mm_license:
+			fileview_screen("COPYING");
 			break;
 
 		default:

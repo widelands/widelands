@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp
+ * Copyright (C) 2002 Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,72 +19,144 @@
 
 #include "ui.h"
 
-#if 0
-/** class Checkbox
+/*
+==============================================================================
+
+Statebox
+
+==============================================================================
+*/
+
+AutoPic Statebox::_gr("checkbox.bmp", STATEBOX_WIDTH*2, STATEBOX_HEIGHT);
+ushort Statebox::dflt_highlightcolor;
+
+/** Statebox::setup_ui() [static]
  *
- * This defines a checkbox, which will be marked or unmarked, depending on their state
- *
- * Depends:	g_gr
- * 			class Graph::Pic
+ * Initialize default colors; called once by setup_ui
  */
-
-AutoPic Checkbox::gr("checkbox.bmp", CHECKBOX_WIDTH*2, CHECKBOX_HEIGHT);
-
-/** Checkbox::~Checkbox(const uint mx, const uint my, const bool b, Pic* mdp, 
- * 		const uint addx, const uint addy);
- *
- * This function finally creates a button
- *
- * Args:	mx	posx in window
- * 		my	posy in window
- * 		b	initial state
- * 		mdp	picture to draw in
- * 		addx	offset from the edge (for window borders)
- * 		addy	offset from the edge (for window borders)
- * Returns: Nothing
- */
-Checkbox::Checkbox(const uint mx, const uint my, const bool b, Pic* mdp, const uint addx, const uint addy) {
-		  assert(gr.get_w() && gr.get_h());
-		  
-		  x=mx;
-		  y=my;
-		  bstate=b;
-		  dp=mdp;
-		  xp=addx;
-		  yp=addy;
-}
-			
-
-/** Checkbox::~Checkbox(void)
- *
- * Cleanups
- *
- * Args: none
- * returns: nothing
- */
-Checkbox::~Checkbox(void) {
-
-		  return;
+void Statebox::setup_ui()
+{
+	dflt_highlightcolor = pack_rgb(100, 100, 80);
 }
 
-
-/** int Checkbox::draw(void) 
+/** Statebox::Statebox(Panel *parent, int x, int y)
  *
- * This draws the box in the current pic
- *
- * Args: none
- * Returns: 1 if it drawn something, 0 otherwise
+ * Initialize a Statebox.
+ * Stateboxs start out enabled and unchecked
  */
-int Checkbox::draw(void) {
-
-		  uint xoffs=0;
-
-		  if(bstate) 
-					 xoffs=CHECKBOX_WIDTH;
-
-		  
-		  Graph::copy_pic(dp, &gr, x+xp, y+yp, xoffs, 0, CHECKBOX_WIDTH, CHECKBOX_HEIGHT);
-
-		  return 1;
+Statebox::Statebox(Panel *parent, int x, int y)
+	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
+{
+	_highlighted = false;
+	_enabled = true;
+	_state = false;
 }
-#endif
+
+/** Statebox::~Statebox()
+ *
+ * Clean up resources
+ */
+Statebox::~Statebox()
+{
+}
+
+/** Statebox::set_enabled(bool enabled)
+ *
+ * Set the enabled state of the checkbox. A disabled checkbox cannot be clicked.
+ *
+ * Args: enabled	true if the checkbox should be disabled
+ */
+void Statebox::set_enabled(bool enabled)
+{
+	_enabled = enabled;
+	if (!_enabled)
+		_highlighted = false;
+	update(0, 0, get_w(), get_h());
+}
+
+/** Statebox::set_state(bool on)
+ *
+ * Changes the state of the checkbox.
+ *
+ * Args: on		true if the checkbox should be checked
+ */
+void Statebox::set_state(bool on)
+{
+	if (on == _state)
+		return;
+
+	_state = on;
+	changed.call();
+	changedto.call(on);
+	update(0, 0, get_w(), get_h());
+}
+
+/** Statebox::draw(Bitmap *dst, int ofsx, int ofsy)
+ *
+ * Redraw the entire checkbox
+ */
+void Statebox::draw(Bitmap *dst, int ofsx, int ofsy)
+{
+	int x;
+
+	if (_state)
+		x = STATEBOX_WIDTH;
+	else
+		x = 0;
+	copy_pic(dst, &_gr, ofsx, ofsy, x, 0, STATEBOX_WIDTH, STATEBOX_HEIGHT);
+
+	if (_highlighted)
+	{
+		dst->fill_rect(ofsx, ofsy, get_w(), 1, dflt_highlightcolor);
+		dst->fill_rect(ofsx, ofsy, 1, get_h(), dflt_highlightcolor);
+		dst->fill_rect(ofsx, ofsy+get_h()-1, get_w(), 1, dflt_highlightcolor);
+		dst->fill_rect(ofsx+get_w()-1, ofsy, 1, get_h(), dflt_highlightcolor);
+	}
+}
+
+/** Statebox::handle_mousein(bool inside)
+ *
+ * Highlight the checkbox when the mouse moves into it
+ */
+void Statebox::handle_mousein(bool inside)
+{
+	_highlighted = inside;
+	update(0, 0, get_w(), get_h());
+}
+
+/** Statebox::handle_mouseclick(uint btn, bool down, int x, int y)
+ *
+ * Left-click: Toggle checkbox state
+ */
+void Statebox::handle_mouseclick(uint btn, bool down, int x, int y)
+{
+	if (btn != 0)
+		return;
+
+	if (down) {
+		if (_enabled)
+			clicked();
+	}
+}
+
+/*
+==============================================================================
+
+Checkbox
+
+==============================================================================
+*/
+
+/*
+A checkbox only differs from a Statebox in that clicking on it toggles the
+state
+*/
+
+/** Checkbox::clicked()
+ *
+ * Toggle the checkbox state
+ */
+void Checkbox::clicked()
+{
+	set_state(!get_state());
+}

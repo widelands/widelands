@@ -26,50 +26,6 @@
 #include "growablearray.h"
 #include "auto_pic.h"
 
-#if 0
-// predeclaration
-class Window;
-
-/** class Checkbox
- *
- * This defines a checkbox, which will be marked or unmarked, depending on their state
- *
- * Depends:	g_gr
- * 			class Graph::Pic
- */
-#define CHECKBOX_WIDTH 20
-#define CHECKBOX_HEIGHT 20
-class Checkbox {
-		  Checkbox( const Checkbox&);
-		  Checkbox operator=(const Checkbox&);
-
-		  friend class Window;
-
-		  public:
-					 // Returns the current state of the checkbox
-					 bool get_state(void) const { return bstate; }
-
-		  private:
-					 Checkbox(const uint, const uint, const bool, Pic*, const uint, const uint);
-					 ~Checkbox(void);
-					 int draw(void);
-					 void set_state(bool b) { bstate=b; }
-					 // Information funcs
-					 static inline uint get_w(void) { return CHECKBOX_WIDTH; }
-					 static inline uint get_h(void) { return CHECKBOX_HEIGHT; }
-					 inline uint get_xpos(void) { return x+xp; }
-					 inline uint get_ypos(void) { return y+yp; }
-
-
-					 bool bstate;
-					 static AutoPic gr;
-					 uint x, y;
-					 uint xp, yp;
-					 Pic* dp;
-};
-
-#endif
-
 class Panel;
 
 /** class UISignal
@@ -242,6 +198,88 @@ private:
 	bool _highlighted; // mouse is over the button
 	bool _pressed;
 	bool _enabled;
+};
+
+/** class Statebox [virtual]
+ *
+ * Virtual base class providing a box that can be checked or unchecked.
+ * Serves as base for Checkbox and Radiobutton.
+ */
+#define STATEBOX_WIDTH 20
+#define STATEBOX_HEIGHT 20
+
+class Statebox : public Panel {
+	friend void setup_ui(void);
+	static ushort dflt_highlightcolor;
+	static void setup_ui();
+
+public:
+	Statebox(Panel *parent, int x, int y);
+	~Statebox();
+
+	UISignal changed;
+	UISignal1<bool> changedto;
+
+	void set_enabled(bool enabled);
+
+	inline bool get_state() const { return _state; }
+	void set_state(bool on);
+
+	// Drawing and event handlers
+	void draw(Bitmap *dst, int ofsx, int ofsy);
+
+	void handle_mousein(bool inside);
+	void handle_mouseclick(uint btn, bool down, int x, int y);
+
+private:
+	virtual void clicked() = 0;
+
+	static AutoPic _gr;
+
+	bool _highlighted;
+	bool _enabled; // true if the checkbox can be clicked
+	bool _state; // true if the box is checked
+};
+
+/** class Checkbox
+ *
+ * A checkbox is a simplistic panel which consists of just a small box which
+ * can be either checked (on) or unchecked (off)
+ */
+class Checkbox : public Statebox {
+public:
+	Checkbox(Panel *parent, int x, int y) : Statebox(parent, x, y) { }
+
+private:
+	void clicked();
+};
+
+/** class Radiogroup
+ *
+ * A group of radiobuttons. At most one of them is checked at any time.
+ * State is -1 if none is checked, otherwise it's the index of the checked button.
+ */
+class Radiobutton;
+
+class Radiogroup {
+	friend Radiobutton;
+
+public:
+	Radiogroup();
+	~Radiogroup();
+
+	UISignal changed;
+	UISignal1<int> changedto;
+
+	int add_button(Panel *parent, int x, int y);
+
+	inline int get_state() const { return _state; }
+	void set_state(int state);
+
+private:
+	Radiobutton *_buttons; // linked list of buttons (not sorted)
+	int _highestid;
+	int _state; // -1: none
 };
 
 /** class Textarea

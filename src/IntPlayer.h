@@ -43,7 +43,13 @@ class Interactive_Player : public Panel {
 
 					 void think();
 
+					 // Set the in-game resolution
+					 static void set_resolution(uint x, uint y) { xresolution=x; yresolution=y; }
+					 static inline uint get_xres() { return xresolution; }
+					 static inline uint get_yres() { return yresolution; }
+
 		  private:
+					 static uint xresolution, yresolution;
 					 Game *game;
 					 Map_View* main_mapview;
 };

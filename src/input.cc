@@ -276,9 +276,9 @@ void Input::handle_pending_input(void) {
 										  bshould_die=true;
 										  break;
 
-								default: 
+								default:
 										  break;
-					 }      
+					 }
 		  }
 }
 
