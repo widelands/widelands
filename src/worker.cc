@@ -1715,6 +1715,9 @@ get_building_work() function to intiate subtasks.
 The signal "update" is used to wake the worker up after a sleeping time
 (initiated by a false return value from get_building_work()).
 
+ivar1 - 0: no task has failed; 1: currently in buildingwork;
+        2: signal failure of buildingwork
+
 ==============================
 */
 
@@ -1737,6 +1740,8 @@ Begin work at a building.
 void Worker::start_task_buildingwork(Game* g)
 {
 	push_task(g, &taskBuildingwork);
+
+	get_state()->ivar1 = 0;
 }
 
 
@@ -1762,6 +1767,14 @@ void Worker::buildingwork_update(Game* g, State* state)
 
 	set_signal("");
 
+	if (state->ivar1 == 1)
+	{
+		if (signal == "fail")
+			state->ivar1 = 2;
+		else
+			state->ivar1 = 0;
+	}
+
 	// Return to building, if necessary
 	BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
@@ -1772,9 +1785,14 @@ void Worker::buildingwork_update(Game* g, State* state)
 		return;
 	}
 
-
 	// Get the new job
-	if (!((Building*)location)->get_building_work(g, this, !signal.size())) {
+	bool success = state->ivar1 != 2;
+
+	// Set this *before* calling to get_building_work, because the
+	// state pointer might become invalid
+	state->ivar1 = 1;
+
+	if (!((Building*)location)->get_building_work(g, this, success)) {
 		molog("[buildingwork]: Nothing to be done.\n");
 		set_animation(g, 0);
 		skip_act(g);
