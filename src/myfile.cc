@@ -328,7 +328,8 @@ int Ascii_file::write(char* buf, int size) {
  */
 int Ascii_file::read_line(char* buf, uint size)
 {
-	if(get_state() != OPEN) return ;
+	if (get_state() != OPEN)
+		return -1;
 
 	set_state(READS);
 		 
