@@ -408,8 +408,6 @@ private:
  * This class defines a list-select box.
  */
 class Listselect : public Panel {
-	static RGBColor dflt_bgcolor, dflt_framecolor, dflt_selcolor;
-
 public:
 	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left);
 	~Listselect();
@@ -423,10 +421,6 @@ public:
 	
 	void move_up(int i);
 	void move_down(int i);
-
-	void set_bgcolor(RGBColor clr);
-	void set_framecolor(RGBColor clr);
-	void set_selcolor(RGBColor clr);
 
 	void select(int i);
 	inline void *get_selection() {
@@ -442,7 +436,9 @@ public:
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
-	struct Entry {
+	static const int ms_darken_value=-20;
+
+   struct Entry {
 		void*		value;
 		char		name[1];
 	};
@@ -451,10 +447,6 @@ private:
 	std::vector<Entry*>	m_entries;
 	int						m_scrollpos;	// in pixels
 	int						m_selection;	// -1 when nothing is selected
-
-	RGBColor					m_bgcolor;
-	RGBColor					m_framecolor;
-	RGBColor					m_selcolor;
 };
 
 /** class Scrollbar

@@ -181,7 +181,7 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 	uint id;
 	AnimationData* ad;
 
-	m_animations.push_back();
+	m_animations.push_back(AnimationData());
 	id = m_animations.size();
 	
 	ad = &m_animations[id-1];

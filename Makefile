@@ -87,7 +87,9 @@ BUILD:=$(strip $(BUILD))
 ifeq ($(BUILD),release)
 OPTIMIZE:=yes
 # heavy optimization
-ADD_CFLAGS:=$(ADD_CFLAGS) -fomit-frame-pointer -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations 
+#ADD_CFLAGS:=$(ADD_CFLAGS) -fomit-frame-pointer -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations 
+# !!!! -fomit-frame-pointer breaks execeptions !!!! 
+ADD_CFLAGS:=$(ADD_CFLAGS) -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations 
 else
 ifeq ($(BUILD),profile)
 OPTIMIZE:=yes

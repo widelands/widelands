@@ -25,11 +25,6 @@
  *
  * This class defines a list-select box.
  */
-RGBColor Listselect::dflt_bgcolor(67, 32, 10);
-RGBColor Listselect::dflt_framecolor(0, 0, 0);
-RGBColor Listselect::dflt_selcolor(248, 201, 135);
-
-
 /*
 ===============
 Listselect::Listselect
@@ -49,10 +44,6 @@ Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align)
 {
 	set_think(false);
 
-	m_bgcolor = dflt_bgcolor;
-	m_framecolor = dflt_framecolor;
-	m_selcolor = dflt_selcolor;
-	
 	set_align(align);
 
 	m_scrollpos = 0;
@@ -179,46 +170,6 @@ void Listselect::move_down(int i)
 	update(0, 0, get_eff_w(), get_h());
 }
 
-/*
-===============
-Listselect::set_bgcolor
-
-Set a custom background color
-===============
-*/
-void Listselect::set_bgcolor(RGBColor clr)
-{
-	m_bgcolor = clr;
-	update(0, 0, get_eff_w(), get_h());
-}
-
-/*
-===============
-Listselect::set_framecolor
-
-Set a custom frame color
-===============
-*/
-void Listselect::set_framecolor(RGBColor clr)
-{
-	m_framecolor = clr;
-	update(0, 0, get_eff_w(), get_h());
-}
-
-/*
-===============
-Listselect::set_selcolor
-
-Set a custom selection color
-===============
-*/
-void Listselect::set_selcolor(RGBColor clr)
-{
-	m_selcolor = clr;
-	update(0, 0, get_eff_w(), get_h());
-}
-
-
 /** Listselect::select(int i)
  *
  * Change the currently selected entry
@@ -259,10 +210,6 @@ Redraw the listselect box
 */
 void Listselect::draw(RenderTarget* dst)
 {
-	// draw frame and fill with background color
-	dst->draw_rect(0, 0, get_eff_w(), get_h(), m_framecolor);
-	dst->fill_rect(1, 1, get_eff_w()-2, get_h()-2, m_bgcolor);
-
 	// draw text lines
 	int lineheight = get_lineheight();
 	int idx = m_scrollpos / lineheight;
@@ -275,8 +222,10 @@ void Listselect::draw(RenderTarget* dst)
 		
 		Entry* e = m_entries[idx];
 		
-		if (idx == m_selection)
-			dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
+		if (idx == m_selection) {
+			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
+			dst->brighten_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), ms_darken_value);
+      }
 
 		int x;
 		if (m_align & Align_Right)
