@@ -30,7 +30,8 @@ class FileRead;
 enum { // picture module flags
 	PicMod_UI = 1,
 	PicMod_Menu = 2,
-	PicMod_Game = 4
+	PicMod_Game = 4,
+	PicMod_Font = 8,
 };
 
 /*

@@ -630,7 +630,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 
 	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
 	
-	for (i=1;i<nearflags.size();i++) {
+	for (i=1;i< (int)nearflags.size();i++) {
 	    NearFlag& nf=nearflags[i];
 	    
 	    if (2*nf.distance+2>=nf.cost)

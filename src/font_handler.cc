@@ -17,262 +17,17 @@
  *
  */
 
-#include "font_handler.h"
+#include <algorithm>
+#include <iostream>
+#include <SDL_ttf.h>
 #include "error.h"
+#include "filesystem.h"
+#include "font_handler.h"
+#include "font_loader.h"
 #include "graphic.h"
 #include "rendertarget.h"
+#include "util.h"
 #include "wexception.h"
-#include <SDL_ttf.h>
-
-/*
- * the next two functions search for a font and through an exeption
- * or not if it is not found
- */
-Font* Font_Handler::find_correct_font(std::string name, int size) {
-   // Find the correct font
-   Font* f=0;
-   std::vector<Font*>::iterator it;
-   for(it = m_fonts.begin(); it != m_fonts.end(); it++) {
-      if((*it)->get_name() == name && (*it)->get_point_height()==size) {
-         assert(!f);
-         f=*it;
-      }
-   }
-
-
-   if(!f) throw wexception("Font unknown: %s, size: %i\n", name.c_str(), size);
-   return f;
-}
-
-Font* Font_Handler::find_correct_font(std::string name, int size, RGBColor fg, RGBColor bg) {
-   // Find the correct font
-   Font* f=0;
-   std::vector<Font*>::iterator it;
-   for(it = m_fonts.begin(); it != m_fonts.end(); it++) {
-      if((*it)->get_name() == name && (*it)->get_point_height()==size &&
-            (*it)->get_fg_clr().r()==fg.r() && (*it)->get_fg_clr().g()==fg.g() && (*it)->get_fg_clr().b()==fg.b() &&
-            (*it)->get_bg_clr().r()==bg.r() && (*it)->get_bg_clr().g()==bg.g() && (*it)->get_bg_clr().b()==bg.b()) {
-         assert(!f);
-         f=*it;
-      }
-   }
-
-   if(!f) throw wexception("Font unknown: %s, size: %i, fg:(%i,%i,%i), bg:(%i,%i,%i)\n", name.c_str(), size, fg.r(),fg.g(),fg.b(), bg.r(),bg.g(),bg.b());
-   return f;
-}
-
-
-/*
- * Draw a string directly into the destination bitmap with the desired alignment.
- * The function honours line-breaks.
- * If wrap is positive, the function will wrap a line after that many pixels.
- */
-void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty, const char* string,
-      Align align, int wrap, int mark_char, int mark_value)
-{
-   Font* f;
-   f=find_correct_font(font, size);
-
-   // Adjust for vertical alignment
-   if (align & (Align_VCenter|Align_Bottom))
-   {
-      int h;
-
-      get_size(font, size, string, 0, &h, wrap);
-
-      if (align & Align_VCenter)
-         dsty -= (h+1)/2; // +1 for slight bias to top
-      else
-         dsty -= h;
-   }
-
-   int i=0;
-   // Draw the string
-   while(*string)
-   {
-      const char* nextline;
-      int x = dstx;
-
-      if (wrap <= 0 && (align & Align_Horizontal) == Align_Left)
-      {
-         // straightforward path with no alignment and no wrapping
-         nextline = string + strcspn(string, "\n");
-      }
-      else
-      {
-         int width = calc_linewidth(font, size, string, wrap, &nextline);
-
-         if (align & Align_HCenter)
-            x -= width/2;
-         else if (align & Align_Right)
-            x -= width;
-      }
-
-      while(string < nextline)
-      {
-         uchar c = (uchar)*string;
-
-         if (c == ' ' || c == '\t') // whitespace
-         {
-            int ch=0;
-            int cw=0;
-            f->get_char_size(0,&cw,&ch);
-            if (c == '\t')
-               cw *= 8;
-            if(mark_char==i) {
-               dst->brighten_rect(x,dsty,cw,ch,mark_value);
-            }
-
-            x += cw;
-         }
-         else if (c && c != '\n')
-         {
-            if (c < 32 || c > 127)
-               c = 127;
-
-            c -= 32;
-            int w,h;
-            f->get_char_size(c,&w,&h);
-            if(mark_char==i) {
-               dst->brighten_rect(x,dsty,w,h,mark_value);
-            }
-            dst->blit(x, dsty, f->get_char_pic(c));
-            x += w;
-         } else if(c=='\n') {
-            if(mark_char==i) {
-               int ch=0;
-               int cw=0;
-               f->get_char_size(0,&cw,&ch);
-               if(mark_char==i) {
-                  dst->brighten_rect(x,dsty,cw,ch,mark_value);
-               }
-            }
-         }
-
-         i++;
-         string++;
-      }
-
-      dsty += f->get_pixel_height();
-   }
-}
-
-
-/*
- * Calculate the size of the given string.
- * pw and ph may be NULL.
- * If wrap is positive, the function will wrap a line after that many pixels
- */
-void Font_Handler::get_size(std::string font, int size, const char* string, int* pw, int* ph, int wrap)
-{
-   int maxw = 0; // width of widest line
-   int maxh = 0; // total height
-
-   Font* f=find_correct_font(font, size);
-
-   while(*string)
-   {
-      const char* nextline;
-      int width = calc_linewidth(font, size, string, wrap, &nextline);
-
-      if (width > maxw)
-         maxw = width;
-      maxh += f->get_pixel_height();
-
-      string = nextline;
-   }
-
-   if (pw)
-      *pw = maxw;
-   if (ph)
-      *ph = maxh;
-}
-
-
-
-/*
- * Calculates the width of the given line (up to \n or NUL).
- * If wrap is positive, the function will wrap the line after that many pixels.
- * nextline will point to the first character on the next line. That is, it
- * points to:
- *   - the character after the \n if the line is ended by a line-break
- *   - the NUL if the string ends after the line
- *   - the first visible character on the next line in case the line is wrapped
- *
- *   The function returns the width of the line, in pixels.
- */
-int Font_Handler::calc_linewidth(std::string name, int size, const char* line, int wrap, const char** nextline)
-{
-   const char* string = line; // current pointer into the string
-   int width = 0; // width of line
-
-   Font* f=find_correct_font(name, size);
-
-   // Loop forward
-   for(;;)
-   {
-      if (*string == ' ' || *string == '\t') // whitespace
-      {
-         int cw, ch;
-         f->get_char_size(0, &cw,&ch);
-         if (*string == '\t')
-            cw *= 8;
-
-         string++;
-
-         if (wrap > 0 && width+cw > wrap)
-            break;
-         else
-            width += cw;
-      }
-      else if (!*string || *string == '\n') // explicit end of line
-      {
-         if (*string)
-            string++;
-         break;
-      }
-      else // normal word
-      {
-         const char* p;
-         int wordwidth = 0;
-
-         for(p = string;; p++)
-         {
-            if (!*p || *p == ' ' || *p == '\t' || *p == '\n') // whitespace break
-               break;
-
-            uchar c = (uchar)*p;
-            if (c < 32 || c > 127)
-               c = 127;
-
-            c -= 32;
-            int cw, ch;
-            f->get_char_size(c, &cw,&ch);
-            wordwidth+=cw;
-
-            if (*p == '-') // other character break
-            {
-               p++;
-               break;
-            }
-         }
-
-         if (wrap > 0 && width && width+wordwidth > wrap)
-            break;
-         else
-         {
-            string = p;
-            width += wordwidth;
-         }
-      }
-   }
-
-   // That's it
-   if (nextline)
-      *nextline = string;
-
-   return width;
-}
 
 
 /*
@@ -280,75 +35,361 @@ int Font_Handler::calc_linewidth(std::string name, int size, const char* line, i
  */
 Font_Handler::Font_Handler(void) {
    if(TTF_Init()==-1) throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
+   m_font_loader = new Font_Loader();
 }
 
 /*
  * Plain Destructor
  */
 Font_Handler::~Font_Handler(void) {
+   delete m_font_loader;
    TTF_Quit();
-
-   std::vector<Font*>::iterator it;
-   for(it = m_fonts.begin(); it != m_fonts.end(); it++) {
-      delete *it;
-   }
-   m_fonts.resize(0);
 }
 
-
-/*
- * Wrapper around Font()
- * the constructor of Font does the main work
- */
-void Font_Handler::load_font(std::string name, int size, RGBColor fg, RGBColor bg) {
-   // log("Loading: %s, %i\n", name.c_str(), size);
-   try {
-      Font* f=find_correct_font(name,size,fg,bg);
-      if(f) return; // already loaded
-   } catch(wexception& exe) {
-      // not yet loaded
-      Font* f=new Font(name, size, fg, bg);
-      m_fonts.push_back(f);
-   }
-}
 
 /*
  * Returns the height of the font, in pixels.
 */
-int Font_Handler::get_fontheight(std::string name, int size)
-{
-   Font* f=find_correct_font(name,size);
-   return f->get_pixel_height();
+int Font_Handler::get_fontheight(std::string name, int size) {
+   TTF_Font* f = m_font_loader->get_font(name,size);
+   return TTF_FontHeight(f);;
 }
 
-
-
 /*
- * Unload all fonts with this name and size
- * if size == 0, delete all fonts with this name
+ * Draw this string, if it is not cached, create the cache for it.
+ * 
+ * The whole text block is rendered in one Surface, this surface is cached
+ * for reuse.
+ * This is a really fast approach for static texts, but for text areas which keep changing
+ * (like Multiline editboxes or chat windows, debug windows ... ) this is the death, for a whole new
+ * surface is rendered with everything that has been written so far.
+ *
+ * TODO: To solve this, these should use a linecache and state explicitly that they use one. This needs to be implemented 
+ * for Multiline_Textarea, when the scrollmode is changed (for this is, when the area changes a lot) 
+ * and for Multiline_Editbox.
  */
-void Font_Handler::unload_font(std::string name, int size) {
-  std::vector<Font*>::iterator it;
+// TODO: rename this to draw text 
+void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty,
+		std::string text, Align align, int wrap) {
+	TTF_Font* f = m_font_loader->get_font(font,size);
 
-	for(it = m_fonts.begin(); it != m_fonts.end(); it++) {
-      if((*it)->get_name() == name) {
-         if(!size || (*it)->get_point_height()==size) {
-            delete *it;
-            m_fonts.erase(it);
-         }
+   // look if text is cached
+    _Cache_Infos  ci = {
+         0, 
+         0,
+         text,
+         f,
+         fg,
+         bg, 
+         0,
+         0,
+      };
+	
+      uint i;
+      bool cached = false;
+      for( i = 0; i < m_cache.size(); i++) {
+         if( m_cache[i] == ci ) {  cached = true; break; }
       }
-   }
-}
+      _Cache_Infos* pci = &ci;
+      if( cached )  {
+         // Ok, it is cached, blit it and done
+         pci = &m_cache[i];
+         do_blit(dst,pci->surface_id,dstx,dsty,align,pci->w,pci->h);
+         
+         pci->referenced++;
+         return;
+      }
 
+      // Not cached, we need to create this string
+      if( wrap > 0 ) {
+         // Assume Multiline 
+         pci->surface_id = create_static_long_text_surface(dst, f, fg, bg, text, align, wrap);
+      } else {
+         // Singleline
+         pci->surface_id = create_single_line_text_surface(dst, f, fg, bg, text, align);
+      }
+
+      // Now cache it
+      g_gr->get_picture_size( pci->surface_id, &pci->w, &pci->h);
+      pci->f = f;
+      m_cache.push_back( ci );
+      std::sort<std::vector<_Cache_Infos>::iterator>(m_cache.begin(), m_cache.end());
+      while( m_cache.size() > CACHE_ARRAY_SIZE) {
+         int idx = m_cache.size()-1;
+         g_gr->free_surface(m_cache[idx].surface_id);
+         m_cache.resize( idx );
+      }
+ 
+      // Finally, blit it
+      do_blit(dst,pci->surface_id,dstx,dsty,align,pci->w,pci->h);
+}
+         
+/*
+ * This function renders a short (single line) text surface
+ */
+uint Font_Handler::create_single_line_text_surface( RenderTarget* dst, TTF_Font* f, RGBColor fg, RGBColor bg,
+      std::string text, Align align) {
+   // render this block in a SDL Surface
+   SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
+   SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
+
+   SDL_Surface *surface;
+
+   if( !text.size() ) 
+      text = " ";
+
+   if (!(surface = TTF_RenderText_Shaded(f, text.c_str(), sdl_fg, sdl_bg))) {
+      log("Font_Handler::create_single_line_text_surface, an error : %s\n", TTF_GetError());
+      log("Text was: %s\n", text.c_str());
+      return 0; // This will skip this line hopefully
+   }
+
+   return convert_sdl_surface( surface );
+}
 
 /*
- * Call the do_load() function for every Font.
-*/
-void Font_Handler::reload_all()
-{
-	std::vector<Font*>::iterator it;
+ * This function renders a longer (multiline) text passage, which should not change. 
+ * If it changes, this function is highly unperformant.
+ *
+ * This function also completly ignores vertical alignement
+ */ 
+uint Font_Handler::create_static_long_text_surface( RenderTarget* dst, TTF_Font* f, RGBColor fg, RGBColor bg, 
+            std::string text, Align align, int wrap) {
+   assert( wrap > 0); 
+   assert( text.size() > 0 );
+   
+   int global_surface_width  = wrap > 0 ? wrap : 0;
+   int global_surface_height = 0;
+   std::vector<SDL_Surface*> m_rendered_lines;
+	std::vector<std::string> lines;
+   
+   // TODO: remove format informations, before wrap
+   text = word_wrap_text(f,text,wrap);
+	split_string(text, &lines, "\n");
+ 
+   for(std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
+		std::string line = *it;
+		if (line.empty())
+			line = " ";
+    
+      // TODO: break the block up into 
+      // format specifications
 
-	for(it = m_fonts.begin(); it != m_fonts.end(); it++)
-		(*it)->do_load();
+      // render this block in a SDL Surface
+      SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
+      SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
+
+      SDL_Surface *surface;
+
+      if (!(surface = TTF_RenderText_Shaded(f, line.c_str(),sdl_fg,sdl_bg))) {
+         log("Font_Handler::create_static_long_text_surface, an error : %s\n", TTF_GetError());
+         log("Text was: %s\n", text.c_str());
+         continue; // Ignore this line
+      }
+
+      // TODO: join the blocks together in one line
+      
+      // line is finished, save it
+      m_rendered_lines.push_back(surface);
+      global_surface_height += TTF_FontLineSkip( f );
+      if( global_surface_width < surface->w) 
+         global_surface_width = surface->w;
+	}
+
+   // blit all this together in one Surface
+   SDL_Surface* global_surface = SDL_CreateRGBSurface( SDL_SWSURFACE, global_surface_width, global_surface_height,
+         16, 
+         m_rendered_lines[0]->format->Rmask,
+         m_rendered_lines[0]->format->Gmask,
+         m_rendered_lines[0]->format->Bmask,
+         m_rendered_lines[0]->format->Amask);
+
+   assert( global_surface );
+   
+   int x = 0, y = 0;
+   for( uint i = 0; i < m_rendered_lines.size(); i++) {
+      SDL_Surface* s = m_rendered_lines[i];
+      
+      // TODO: Alignement
+      SDL_Rect r;
+      r.x = x; r.y = y;
+      SDL_BlitSurface(s, 0, global_surface, &r);
+      y += s->h;
+      SDL_FreeSurface( s );
+   }
+ 
+   return convert_sdl_surface( global_surface );
 }
 
+/* 
+ * Converts a SDLSurface in a widelands one
+ */
+uint Font_Handler::convert_sdl_surface( SDL_Surface* surface ) {
+   int w = surface->w;
+   int h = surface->h;
+   ushort *data = (ushort*)malloc(sizeof(ushort)*w*h);
+	ushort* real_data=data;
+
+	for(int y=0; y<h; y++) {
+		for(int x=0; x<w; x++) {
+			uchar* real_pixel= ((uchar*)surface->pixels) + surface->pitch*y +  (x*surface->format->BytesPerPixel);
+
+			uchar r, g, b;
+			ulong pixel=0;
+			switch(surface->format->BytesPerPixel) {
+				case 1: pixel=*((uchar*)real_pixel);    break;
+				case 2: pixel=*((ushort*)real_pixel);    break;
+				case 4: pixel=*((ulong*)real_pixel);    break;
+			}
+
+			SDL_GetRGB(pixel, surface->format, &r, &g, &b);
+			*data=pack_rgb(r,g,b);
+			data++;
+		}
+	}
+	uchar r,g,b;
+	unpack_rgb(*real_data, &r, &g, &b);
+	RGBColor clrkey(r,g,b);
+	uint picid = g_gr->get_picture(PicMod_Font, w, h, real_data, clrkey);
+	free(real_data);
+	SDL_FreeSurface(surface);
+	
+   return picid;
+}
+
+/* 
+ * Flushes the cached picture ids
+ */
+void Font_Handler::flush_cache( void ) {
+   for( uint i = 0; i < m_cache.size(); i++) {
+      g_gr->free_surface( m_cache[i].surface_id );
+   }
+   m_cache.resize( 0 );
+}
+
+std::string Font_Handler::word_wrap_text(TTF_Font* f, const std::string &unwrapped_text, int max_width) {
+	//std::cerr << "Wrapping word " << unwrapped_text << "\n";
+	
+	std::string wrapped_text; // the final result
+
+	size_t word_start_pos = 0;
+	std::string cur_word; // including start-whitespace
+	std::string cur_line; // the whole line so far
+
+	for(size_t c = 0; c < unwrapped_text.length(); c++) {
+		// Find the next word
+		bool forced_line_break = false;
+		if (c == unwrapped_text.length() - 1) {
+			cur_word = unwrapped_text.substr(word_start_pos, c + 1 - word_start_pos);
+			word_start_pos = c + 1;
+		} 
+		else if (unwrapped_text[c] == '\n') {
+			cur_word = unwrapped_text.substr(word_start_pos, c + 1 - word_start_pos);
+			word_start_pos = c + 1;
+			forced_line_break = true;
+		} 
+		else if (unwrapped_text[c] == ' ') {
+			cur_word = unwrapped_text.substr(word_start_pos, c - word_start_pos);
+			word_start_pos = c;
+		} 
+		else {
+			continue;
+		}
+
+		// Test if the line should be wrapped or not
+		std::string tmp_str = cur_line + cur_word;
+		if (calc_linewidth(f,tmp_str) > max_width) {
+			if (calc_linewidth(f,cur_word) > (max_width /*/ 2*/)) {
+				// The last word is too big to fit in a nice way, split it on a char basis
+				//std::vector<std::string> split_word = split_utf8_string(cur_word);
+				for (uint i=0;i<cur_word.length();i++) {
+					tmp_str = cur_line + cur_word[i];
+					if (calc_linewidth(f, tmp_str) > max_width) {
+						wrapped_text += cur_line + '\n';
+						cur_line = "";
+					} 
+					else {
+						cur_line += cur_word[i];
+					}
+				}
+			} 
+			else {
+				// Split the line on a word basis
+				wrapped_text += cur_line + '\n';
+				cur_line = remove_first_space(cur_word);
+			}
+		} 
+		else {
+			cur_line += cur_word;
+		}
+
+		if (forced_line_break) {
+			wrapped_text += cur_line;
+			cur_line = "";
+			forced_line_break = false;
+		}
+	}
+    
+	// Don't forget to add the text left in cur_line
+	if (cur_line != "") {
+		wrapped_text += cur_line + '\n';
+	}
+	return wrapped_text;
+}
+	
+std::string Font_Handler::remove_first_space(const std::string &text) {
+	if (text.length() > 0 && text[0] == ' ')
+		return text.substr(1);
+	return text;
+}
+
+void Font_Handler::get_size(std::string font, int size, std::string text, int *w, int *h, int wrap) {
+	TTF_Font* f = m_font_loader->get_font(font,size);
+	
+	if (wrap > 0)
+		text = word_wrap_text(f,text,wrap);
+	std::vector<std::string> lines;
+	split_string(text, &lines, "\n");
+		
+	*w = 0;
+	*h = 0;
+	for(std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
+		std::string line = *it;
+		if (line.empty())
+			line = " ";
+
+		int line_w,line_h;
+		TTF_SizeText(f, line.c_str(), &line_w, &line_h);
+		
+		if (*w < line_w)
+			*w = line_w;
+		*h+=line_h;
+	}
+}
+
+int Font_Handler::calc_linewidth(TTF_Font* f, std::string &text) {
+	int w,h;
+	TTF_SizeText(f, text.c_str(), &w, &h);
+	return w;
+}
+
+void Font_Handler::do_blit(RenderTarget *dst, uint picid, int dstx, int dsty, Align align, int w, int h) {
+	//Vertical Align
+	int y = dsty;
+	if (align & (Align_VCenter|Align_Bottom)) {
+		if (align & Align_VCenter)
+			y -= (h+1)/2; // +1 for slight bias to top
+		else
+			y -= h;
+	}
+	
+	//Horizontal Align
+	int x = dstx;
+	if ((align & Align_Horizontal) != Align_Left) {
+		if (align & Align_HCenter)
+			x -= w/2;
+		else if (align & Align_Right)
+			x -= w;
+	}
+	dst->blit(x, y, picid);
+}

@@ -176,10 +176,11 @@ void UIMultiline_Editbox::draw(RenderTarget* dst)
    m_text.append(1,' ');
    if (m_text.size() )
    {
-      // Let the font handler worry about all the complicated stuff..
-      if(has_focus())
-         g_fh->draw_string(dst, get_font_name(), get_font_size(), get_font_clr(), RGBColor(0,0,0), 0, 0 - get_m_textpos(), m_text.c_str(), Align_Left, get_eff_w(),m_cur_pos,-ms_darken_value*4);
-      else
+      //TODO: Implement in new font handler
+		// Let the font handler worry about all the complicated stuff..
+      //if(has_focus())
+      //   g_fh->draw_string(dst, get_font_name(), get_font_size(), get_font_clr(), RGBColor(0,0,0), 0, 0 - get_m_textpos(), m_text.c_str(), Align_Left, get_eff_w(),m_cur_pos,-ms_darken_value*4);
+      //else
          g_fh->draw_string(dst, get_font_name(), get_font_size(), get_font_clr(), RGBColor(0,0,0), 0, 0 - get_m_textpos(), m_text.c_str(), Align_Left, get_eff_w());
    }
 

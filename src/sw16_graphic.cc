@@ -25,6 +25,7 @@ Management classes and functions of the 16-bit software renderer.
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
+#include "font_handler.h"
 #include "map.h"
 #include "player.h"
 #include "sw16_graphic.h"
@@ -1177,6 +1178,10 @@ void GraphicImpl::flush(int mod)
          delete m_roadtextures; 
          m_roadtextures = 0;
       }
+   } 
+   if(!mod || mod & PicMod_UI) {
+      // Flush the cached Fontdatas
+      g_fh->flush_cache();
    }
 }
 
@@ -1355,7 +1360,7 @@ Unlike normal pictures, surfaces are not freed by flush().
 */
 void GraphicImpl::free_surface(uint picid)
 {
-	assert(picid < m_pictures.size() && m_pictures[picid].mod == -1);
+	assert(picid < m_pictures.size() && ( m_pictures[picid].mod == -1 || m_pictures[picid].mod == PicMod_Font));
 
 	Picture* pic = &m_pictures[picid];
 

@@ -22,6 +22,7 @@
 #include "ui_multilinetextarea.h"
 #include "ui_scrollbar.h"
 #include "constants.h"
+#include "graphic.h"
 
 /**
 Initialize a textarea that supports multiline strings.
@@ -59,8 +60,7 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 /**
 Free allocated resources
 */
-UIMultiline_Textarea::~UIMultiline_Textarea()
-{
+UIMultiline_Textarea::~UIMultiline_Textarea() {
 }
 
 
@@ -89,8 +89,8 @@ void UIMultiline_Textarea::set_text(const char *text)
 		}
 
 		m_text = text;
-
-		g_fh->get_size(m_fontname, m_fontsize, text, 0, &m_textheight, get_eff_w());
+		int m_width;
+		g_fh->get_size(m_fontname, m_fontsize, text, &m_width, &m_textheight, get_eff_w());
 
 		if (setbottom || m_textpos > m_textheight - get_h())
 			m_textpos = m_textheight - get_h();
@@ -100,7 +100,6 @@ void UIMultiline_Textarea::set_text(const char *text)
 		m_scrollbar->set_steps(m_textheight - get_h());
 		m_scrollbar->set_pos(m_textpos);
 		}
-
 	update(0, 0, get_eff_w(), get_h());
 }
 
@@ -150,9 +149,8 @@ void UIMultiline_Textarea::draw(RenderTarget* dst)
          x += get_w()/2;
       else if (m_align & Align_Right)
          x += get_w();
-
+		
       // Let the font handler worry about all the complicated stuff..
       g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), x, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w());
    }
 }
-

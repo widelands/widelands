@@ -21,8 +21,10 @@
 #define __S__FONT_HANDLER_H
 
 #include <vector>
-#include <map>
-#include "font.h"
+#include <list>
+#include <queue>
+#include <SDL_ttf.h>
+#include "font_loader.h"
 
 class RenderTarget;
 
@@ -50,7 +52,6 @@ enum Align {
 	Align_BottomRight = Align_Right|Align_Bottom,
 };
 
-
 /** class Font_Handler
  *
  * This class generates font Pictures out of strings and returns them
@@ -59,23 +60,54 @@ class Font_Handler {
 public:
 	Font_Handler();
    ~Font_Handler();
-
-   void reload_all();
-	void load_font(std::string name, int size, RGBColor fg, RGBColor bg);
-   void unload_font(std::string name, int size = 0);
-
-	int calc_linewidth(std::string font, int size, const char* string, int wrap, const char** nextline);
-	void draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int x, int y, const char* string, Align align = Align_Left,
-						  int wrap = -1, int mark_char = -1, int mark_value=-1);
-	void get_size(std::string font, int size, const char* string, int* pw, int* ph, int wrap = -1);
+	void draw_string(RenderTarget* dst, const std::string font, int size, RGBColor fg, RGBColor bg, int x, int y, std::string text,
+			Align align = Align_CenterLeft, int wrap = -1) ;
+	void get_size(std::string font, int size, std::string text, int *w, int *h, int wrap = -1);
+	int calc_linewidth(TTF_Font* f, std::string &text);
 	int get_fontheight(std::string font, int size);
+	std::string remove_first_space(const std::string &text);
+	std::string word_wrap_text(TTF_Font* f, const std::string &unwrapped_text, int max_width);
+
+   // This deletes all cached pictures, it is called 
+   // from the graphics code before the graphics are flushed,
+   // to make sure that everything is forgotten
+   void flush_cache( void );  
 
 private:
-	std::vector<Font*>		m_fonts;		// map of all fonts
+   struct _Cache_Infos {
+      uint referenced;
+      uint surface_id;
+      std::string str;
+      TTF_Font* f;
+      RGBColor fg;
+      RGBColor bg;
+      int      w;
+      int      h;
 
-   Font* find_correct_font(std::string name, int size);
-   Font* find_correct_font(std::string name, int size, RGBColor fg, RGBColor bg);
+      inline bool operator== (const _Cache_Infos& who) const {
+         return ( str == who.str &&
+               f == who.f &&
+               fg == who.fg &&
+               bg == who.bg);
+      }
+      inline bool operator< (const _Cache_Infos& who) const {
+         return ( referenced > who.referenced) ;
+      }
+	};
 
+ 
+private:
+   static const uint CACHE_ARRAY_SIZE = 500;
+
+	Font_Loader* m_font_loader;
+   std::vector<_Cache_Infos> m_cache;
+	
+private:
+   uint render_string(RenderTarget* dst, TTF_Font *f, RGBColor fg, RGBColor bg, int dstx, int dsty, std::string &text, Align align, int w, int h);
+   uint convert_sdl_surface( SDL_Surface* );
+	void do_blit(RenderTarget *dst,uint picid, int dstx, int dsty, Align align, int w, int h);
+   uint create_static_long_text_surface( RenderTarget* dst, TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int wrap);
+   uint create_single_line_text_surface( RenderTarget* dst, TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align); 
 };
 
 extern Font_Handler* g_fh;	// the default font

@@ -141,6 +141,13 @@ public:
 	}
 	inline uint pack32() const { return *(const uint*)m_color & 0x00FFFFFF; }
 	inline void unpack32(uint clr) { *(uint*)m_color = clr; }
+
+   inline bool operator==(const RGBColor& colin) const {
+      return ( m_color[0] == colin.m_color[0] &&
+            m_color[1] == colin.m_color[1] &&
+            m_color[2] == colin.m_color[2] &&
+            m_color[3] == colin.m_color[3]);  
+   }
 };
 
 

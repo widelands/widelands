@@ -21,6 +21,7 @@
 #define __S__MULTILINE_TEXTAREA_H
 
 #include <string>
+#include <list>
 #include "font_handler.h"
 #include "ui_panel.h"
 
@@ -57,7 +58,7 @@ class UIMultiline_Textarea : public UIPanel {
 
       inline uint get_eff_w() { return get_w(); }
 
-      inline void set_font(std::string name, int size, RGBColor fg) { m_fontname=name; m_fontsize=size; m_fcolor=fg; g_fh->load_font(name, size, fg, RGBColor(0,0,0)); set_text(m_text.c_str()); }
+      inline void set_font(std::string name, int size, RGBColor fg) { m_fontname=name; m_fontsize=size; m_fcolor=fg; set_text(m_text.c_str()); }
 
       // Drawing and event handlers
       void draw(RenderTarget* dst);

@@ -67,9 +67,6 @@ static void g_init(int argc, char **argv)
 		Sys_Init();
 
 		g_fh = new Font_Handler();
-      // Load the standart fonts
-      g_fh->load_font(UI_FONT_SMALL, UI_FONT_SMALL_CLR);
-      g_fh->load_font(UI_FONT_BIG, UI_FONT_BIG_CLR);
 
 		// Initialize graphics
 		Section *s = g_options.pull_section("global");

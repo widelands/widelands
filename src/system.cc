@@ -903,10 +903,6 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 		}
 
 	Sys_SetMaxMouseCoords(w, h);
-
-	// Fonts need to reload images...
-	if (g_gr)
-		g_fh->reload_all();
 }
 
 

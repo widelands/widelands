@@ -250,7 +250,7 @@ void Interactive_Player::sample_statistics( void ) {
 ===============
 Interactive_Player::think
 
-Update the speed display.
+Update the speed display, check for chatmessages.
 ===============
 */
 void Interactive_Player::think()

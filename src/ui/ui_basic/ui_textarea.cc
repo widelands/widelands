@@ -19,6 +19,7 @@
 
 #include "ui_textarea.h"
 #include "constants.h"
+#include "graphic.h"
 
 /**
   Initialize a UITextarea. For non-multiline textareas, the dimensions are set
@@ -105,8 +106,7 @@ void UITextarea::draw(RenderTarget* dst)
          y += get_h()/2;
       else if (m_align & Align_Bottom)
          y += get_h();
-
-      g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), x, y, m_text.c_str(), m_align, m_multiline ? get_w() : -1);
+		g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), x, y, m_text.c_str(), m_align, m_multiline ? get_w() : -1);
    }
 }
 
@@ -169,4 +169,3 @@ void UITextarea::expand()
    set_pos(x, y);
    set_size(m_multiline ? get_w() : w, h);
 }
-

@@ -229,7 +229,7 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
       Coords fsel = get_fieldsel_pos();
 
       sprintf(buf, "%3i %3i", fsel.x, fsel.y);
-      g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 5, buf);
+      g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 5, buf, Align_Left);
    }
 
    if (get_display_flag(dfDebug))
@@ -238,7 +238,7 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
       char buf[100];
 		sprintf(buf, "%5.1f fps (avg: %5.1f fps)",
 				1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
-		g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  75, 5, buf);
+		g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  75, 5, buf, Align_Left);
 	}
 }
 
