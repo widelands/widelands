@@ -3432,6 +3432,8 @@ bool Carrier::notify_ware(Game* g, int flag)
 
 	if (state->task == &taskRoad)
 		send_signal(g, "ware");
+	else if (state->task == &taskWaitforcapacity)
+		send_signal(g, "wakeup");
 
 	return true;
 }

@@ -183,7 +183,7 @@ private: // task details
 
 	void geologist_update(Game* g, State* state);
 
-private:
+protected:
 	static Task taskTransfer;
 	static Task taskBuildingwork;
 	static Task taskReturn;
