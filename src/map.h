@@ -262,25 +262,25 @@ class CoordPath;
 
 class Path {
 	friend class Map;
-	
+
 public:
 	Path() { m_map = 0; }
 	Path(Map *map, Coords c) : m_map(map), m_start(c), m_end(c) { }
 	Path(CoordPath &o);
-	
+
 	void reverse();
-	
+
 	inline Map *get_map() const { return m_map; }
-	
+
 	inline bool is_valid() const { return m_map; }
 	inline const Coords &get_start() const { return m_start; }
 	inline const Coords &get_end() const { return m_end; }
-	
+
 	inline int get_nsteps() const { return m_path.size(); }
 	inline char get_step(int idx) const { return m_path[m_path.size()-idx-1]; }
-	
+
 	void append(int dir);
-	
+
 private:
 	Map *m_map;
 	Coords m_start;
@@ -293,25 +293,26 @@ class CoordPath {
 public:
 	CoordPath(Map *map, Coords c) : m_map(map) { m_coords.push_back(c); }
 	CoordPath(const Path &path);
-	
+
 	inline Map *get_map() const { return m_map; }
 	inline bool is_valid() const { return m_map; }
-	
+
 	inline const Coords &get_start() const { return m_coords.front(); }
 	inline const Coords &get_end() const { return m_coords.back(); }
 	inline const std::vector<Coords> &get_coords() const { return m_coords; }
-	
+
 	inline int get_nsteps() const { return m_path.size(); }
 	inline char get_step(int idx) const { return m_path[idx]; }
 	inline const std::vector<char> &get_steps() const { return m_path; }
-	
+
 	int get_index(Coords field) const;
-	
+
+	void reverse();
 	void truncate(int after);
 	void starttrim(int before);
 	void append(const Path &tail);
 	void append(const CoordPath &tail);
-	
+
 private:
 	Map *m_map;
 	std::vector<char> m_path;			// directions

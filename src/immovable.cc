@@ -374,7 +374,7 @@ The given request has completed successfully. You should now remove it from
 the economy and delete it.
 ===============
 */
-void PlayerImmovable::request_success(Request *req)
+void PlayerImmovable::request_success(Game* g, Request* req)
 {
 	throw wexception("request_success: unhandled");
 }

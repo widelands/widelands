@@ -130,7 +130,7 @@ public:
 	void add_worker(Worker *w);
 	void remove_worker(Worker *w);
 
-	virtual void request_success(Request *req);
+	virtual void request_success(Game* g, Request* req);
 
 protected:
 	void set_owner(Player *owner);

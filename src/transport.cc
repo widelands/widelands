@@ -103,7 +103,7 @@ Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic
 	flag->set_owner(owner);
 	flag->m_position = coords;
 	
-	if (imm && imm->get_type() == Map_Object::ROAD) 
+	if (imm && imm->get_type() == Map_Object::ROAD)
 	{
 		// we split a road
 		road = (Road*)imm;
@@ -114,7 +114,7 @@ Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic
 		// a new, standalone flag is created
 		(new Economy(owner))->add_flag(flag);
 	}
-	
+
 	if (road)
 		road->presplit(g, coords);
 	flag->init(g);
@@ -164,7 +164,7 @@ void Flag::set_economy(Economy *e)
 
 	if (old == e)
 		return;
-	
+
 	if (old) {
 		// TODO: remove flag's wares from economy
 	}
@@ -193,9 +193,9 @@ Call this only from the Building init!
 void Flag::attach_building(Editor_Game_Base *g, Building *building)
 {
 	assert(!m_building);
-	
+
 	m_building = building;
-	
+
 	Map *map = g->get_map();
 	Coords tln;
 	
@@ -239,7 +239,7 @@ Call this only from the Road init!
 void Flag::attach_road(int dir, Road *road)
 {
 	assert(!m_roads[dir-1]);
-	
+
 	m_roads[dir-1] = road;
 	m_roads[dir-1]->set_economy(get_economy());
 }
@@ -284,11 +284,11 @@ void Flag::get_neighbours(Neighbour_list *neighbours)
 			n.flag = road->get_flag_start();
 			n.cost = road->get_cost(false);
 		}
-		
+
 		assert(n.flag != this);
 		neighbours->push_back(n);
 	}
-	
+
 	// I guess this would be the place to add other ports if a port building
 	// is attached to this flag
 	// Or maybe other hosts of a carrier pigeon service, or a wormhole connection
@@ -308,11 +308,11 @@ Road *Flag::get_road(Flag *flag)
 		Road *road = m_roads[i];
 		if (!road)
 			continue;
-		
+
 		if (road->get_flag_start() == flag || road->get_flag_end() == flag)
 			return road;
 	}
-	
+
 	return 0;
 }
 
@@ -326,7 +326,7 @@ void Flag::init(Editor_Game_Base *g)
 	PlayerImmovable::init(g);
 
 	set_position(g, m_position);
-	
+
 	m_anim = get_owner()->get_tribe()->get_flag_anim();
 	m_animstart = g->get_gametime();
 }
@@ -493,16 +493,22 @@ int Road::get_cost(bool reverse)
 Road::set_path
 
 Set the new path, calculate costs.
+You have to set start and end flags before calling this function.
 ===============
 */
 void Road::set_path(Editor_Game_Base *g, const Path &path)
 {
+	assert(path.get_nsteps() >= 2);
 	assert(path.get_start() == m_start->get_position());
 	assert(path.get_end() == m_end->get_position());
-	
+
 	m_path = path;
 	g->get_map()->calc_cost(path, &m_cost_forward, &m_cost_backward);
+
+	// Figure out where carriers should idle
+	m_idle_index = path.get_nsteps() / 2;
 }
+
 
 /*
 ===============
@@ -515,28 +521,28 @@ void Road::mark_map(Editor_Game_Base *g)
 {
 	Map *map = g->get_map();
 	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
-	
+
 	for(int steps = 0; steps <= m_path.get_nsteps(); steps++) {
 		if (steps > 0 && steps < m_path.get_nsteps())
 			set_position(g, curf);
-		
+
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			int dir = get_reverse_dir(m_path.get_step(steps-1));
 			int rdir = 2*(dir - Map_Object::WALK_E);
-			
+
 			if (rdir >= 0 && rdir <= 4)
 				curf.field->set_road(rdir, m_type);
 		}
-		
+
 		// mark the road that leads away from this field
 		if (steps < m_path.get_nsteps()) {
 			int dir = m_path.get_step(steps);
 			int rdir = 2*(dir - Map_Object::WALK_E);
-			
+
 			if (rdir >= 0 && rdir <= 4)
 				curf.field->set_road(rdir, m_type);
-			
+
 			map->get_neighbour(curf, dir, &curf);
 		}
 	}
@@ -553,28 +559,28 @@ void Road::unmark_map(Editor_Game_Base *g)
 {
 	Map *map = g->get_map();
 	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
-	
+
 	for(int steps = 0; steps <= m_path.get_nsteps(); steps++) {
 		if (steps > 0 && steps < m_path.get_nsteps())
 			unset_position(g, curf);
-		
+
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			int dir = get_reverse_dir(m_path.get_step(steps-1));
 			int rdir = 2*(dir - Map_Object::WALK_E);
-			
+
 			if (rdir >= 0 && rdir <= 4)
 				curf.field->set_road(rdir, Road_None);
 		}
-		
+
 		// mark the road that leads away from this field
 		if (steps < m_path.get_nsteps()) {
 			int dir = m_path.get_step(steps);
 			int rdir = 2*(dir - Map_Object::WALK_E);
-			
+
 			if (rdir >= 0 && rdir <= 4)
 				curf.field->set_road(rdir, Road_None);
-		
+
 			map->get_neighbour(curf, dir, &curf);
 		}
 	}
@@ -591,28 +597,34 @@ void Road::init(Editor_Game_Base *gg)
 {
 	assert(m_path.get_nsteps() >= 2);
 
-   Game* g = static_cast<Game*>(gg); 
+   Game* g = static_cast<Game*>(gg);
 
 	PlayerImmovable::init(g);
 
 	// Link into the flags (this will also set our economy)
 	int dir;
-	
+
 	dir = m_path.get_step(0);
 	m_start->attach_road(dir, this);
-	
+
 	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
 	m_end->attach_road(dir, this);
-	
-	Economy::check_merge(m_start, m_end);	
-	
+
+	Economy::check_merge(m_start, m_end);
+
 	// Mark Fields
 	mark_map(g);
-	
+
 	// Request Carrier
-	if (!m_carrier.get(g) && !m_carrier_request) {
-		m_carrier_request = new Request(this, g->get_safe_ware_id("carrier"));
-		get_economy()->add_request(m_carrier_request);
+	Carrier* carrier = (Carrier*)m_carrier.get(g);
+
+	if (!carrier) {
+		if (!m_carrier_request)
+			request_carrier(g);
+	} else {
+		// This happens after a road split. Tell the carrier what's going on
+		carrier->set_location(this);
+		carrier->set_job_road(g, this);
 	}
 }
 
@@ -626,33 +638,52 @@ Cleanup the road
 */
 void Road::cleanup(Editor_Game_Base *gg)
 {
-   Game* g = static_cast<Game*>(gg); 
-	
+   Game* g = static_cast<Game*>(gg);
+
    // Release carrier
 	if (m_carrier_request) {
 		get_economy()->remove_request(m_carrier_request);
 		delete m_carrier_request;
 		m_carrier_request = 0;
 	}
-	
-	m_carrier = 0; // since the carrier is a worker, it has already been disconnected
+
+	m_carrier = 0; // carrier will be released via PlayerImmovable::cleanup
 
 	// Unmark Fields
 	unmark_map(g);
 
 	// Unlink from flags (also clears the economy)
 	int dir;
-	
+
 	dir = m_path.get_step(0);
 	m_start->detach_road(dir);
-	
+
 	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
 	m_end->detach_road(dir);
-	
+
 	Economy::check_split(m_start, m_end);
-	
+
 	PlayerImmovable::cleanup(g);
 }
+
+
+/*
+===============
+Road::request_carrier
+
+Request a new carrier.
+Only call this if the road can handle a new carrier, and if no request has been
+issued.
+===============
+*/
+void Road::request_carrier(Editor_Game_Base *g)
+{
+	assert(!m_carrier.get(g) && !m_carrier_request);
+
+	m_carrier_request = new Request(this, g->get_safe_ware_id("carrier"));
+	get_economy()->add_request(m_carrier_request);
+}
+
 
 /*
 ===============
@@ -680,35 +711,35 @@ be created to span [new flag...end]
 */
 void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 {
-   Game* g = static_cast<Game*>(gg); 
-	
+   Game* g = static_cast<Game*>(gg);
+
    Flag *oldend = m_end;
 	int dir;
-	
+
 	// detach from end
 	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
 	m_end->detach_road(dir);
-	
+
 	// build our new path and the new road's path
 	CoordPath path(m_path);
 	CoordPath secondpath(path);
 	int index = path.get_index(flag->get_position());
-	
+
 	assert(index > 0 && index < path.get_nsteps()-1);
-	
+
 	path.truncate(index);
 	secondpath.starttrim(index);
-	
+
 	// change road size and reattach
 	m_end = flag;
 	set_path(g, path);
 
 	dir = get_reverse_dir(m_path.get_step(m_path.get_nsteps()-1));
 	m_end->attach_road(dir, this);
-	
+
 	// recreate road markings
 	mark_map(g);
-	
+
 	// create the new road
 	Road *newroad = new Road(g->is_game());
 	newroad->set_owner(get_owner());
@@ -716,17 +747,40 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 	newroad->m_start = flag;
 	newroad->m_end = oldend;
 	newroad->set_path(g, secondpath);
-	
+
 	// Reassign carrier(s)
+	// The algorithm is pretty simplistic, and has a bias towards keeping
+	// the carrier around; there's obviously nothing wrong with that.
 	Carrier *carrier = (Carrier *)m_carrier.get(g);
+
 	if (carrier) {
-		// TODO: Figure out whether the carrier remains on this road or moves
-		// This largely depends on where the carrier is right now
+		int index = path.get_index(carrier->get_position());
+
+		if (index < 0)
+		{
+			// Reassign the carrier. Note that the final steps of reassigning
+			// are done in newroad->init()
+			m_carrier = 0;
+			newroad->m_carrier = carrier;
+		}
+		else
+		{
+			// Inform the carrier that something's going on, so that it can
+			// e.g. adjust walking paths
+			carrier->set_job_road(g, this);
+		}
 	}
 
 	// Initialize the new road
 	newroad->init(g);
+
+	// Request a new carrier for this road if necessary
+	// This must be done _after_ the new road initializes, otherwise request
+	// routing might not work correctly
+	if (!m_carrier.get(g) && !m_carrier_request)
+		request_carrier(g);
 }
+
 
 /*
 ===============
@@ -736,20 +790,21 @@ The given request has completed successfully. You should now remove it from
 the economy and delete it.
 ===============
 */
-void Road::request_success(Request *req)
+void Road::request_success(Game* g, Request* req)
 {
 	if (req == m_carrier_request) {
-		//Carrier *carrier = (Carrier*)req->get_worker();
-	
+		Carrier* carrier = (Carrier*)req->get_worker();
+
 		get_economy()->remove_request(m_carrier_request);
 		delete m_carrier_request;
 		m_carrier_request = 0;
-		
-		// TODO: give the carrier its job
+
+		m_carrier = carrier;
+		carrier->set_job_road(g, this);
 		return;
 	}
-	
-	PlayerImmovable::request_success(req);
+
+	PlayerImmovable::request_success(g, req);
 }
 
 /*
@@ -822,7 +877,7 @@ bool Route::verify(Game *g)
 		
 		flag = next;
 	}
-	
+
 	return true;
 }
 
@@ -908,6 +963,19 @@ Economy *Request::get_target_economy(Game *g)
 
 /*
 ===============
+Request::get_worker
+
+Get the worker this request is all about.
+===============
+*/
+Worker* Request::get_worker()
+{
+	return m_transfer.worker;
+}
+
+
+/*
+===============
 Request::start_transfer
 
 Begin transfer of the requested ware from the given warehouse.
@@ -916,7 +984,7 @@ Begin transfer of the requested ware from the given warehouse.
 void Request::start_transfer(Game *g, Warehouse *wh, Route *route)
 {
 	Ware_Descr *descr = g->get_ware_description(get_ware());
-	
+
 	if (descr->is_worker()) {
 		Worker *worker = wh->launch_worker(g, get_ware());
 		start_transfer(g, worker, route);
@@ -940,7 +1008,7 @@ void Request::start_transfer(Game *g, Worker *worker, Route *route)
 
 	m_state = TRANSFER;
 	m_transfer.worker = worker;
-	
+
 	worker->set_job_request(this, route);
 }
 
@@ -955,9 +1023,9 @@ Cause a route recalculation if necessary.
 void Request::check_transfer(Game *g)
 {
 	assert(m_state == TRANSFER);
-	
+
 	Ware_Descr *descr = g->get_ware_description(get_ware());
-	
+
 	if (descr->is_worker()) {
 		if (m_transfer.worker->get_route()) {
 			// cause a recalculation if the route is broken
@@ -982,9 +1050,9 @@ removed.
 void Request::cancel_transfer(Game *g)
 {
 	assert(m_state == TRANSFER);
-	
+
 	Ware_Descr *descr = g->get_ware_description(get_ware());
-	
+
 	if (descr->is_worker()) {
 		m_transfer.worker->change_job_request(true); // cancel
 		m_state = OPEN;
@@ -992,6 +1060,7 @@ void Request::cancel_transfer(Game *g)
 		throw wexception("TODO: cancel ware transfer");
 	}
 }
+
 
 /*
 ===============
@@ -1005,18 +1074,19 @@ for removing and deleting the request.
 void Request::transfer_finish(Game *g)
 {
 	assert(m_state == TRANSFER);
-	
+
 	PlayerImmovable *target = get_target(g);
-	
+
 	m_state = CLOSED;
-	target->request_success(this);
+	target->request_success(g, this);
 }
+
 
 /*
 ===============
 Request::transfer_fail
 
-Callback from ware/worker code that the scheduled transfer has failed.	
+Callback from ware/worker code that the scheduled transfer has failed.
 Re-open the request.
 ===============
 */
@@ -1058,7 +1128,7 @@ A request list should be empty when it's destroyed.
 RequestList::~RequestList()
 {
 	if (m_requests.size())
-		log("RequestList: %i requests of type %i left.\n", m_requests.size(), 
+		log("RequestList: %i requests of type %i left.\n", m_requests.size(),
 				m_requests[0]->get_ware());
 }
 
@@ -1068,7 +1138,7 @@ RequestList::add
 
 Add a request to the list.
 ===============
-*/	
+*/
 void RequestList::add(Request *req)
 {
 	m_requests.push_back(req);
@@ -1091,7 +1161,7 @@ void RequestList::remove(Request *req)
 			return;
 		}
 	}
-	
+
 	throw wexception("RequestList::remove: not in list");
 }
 
@@ -1138,13 +1208,13 @@ void Economy::check_merge(Flag *f1, Flag *f2)
 {
 	Economy *e1 = f1->get_economy();
 	Economy *e2 = f2->get_economy();
-	
+
 	if (e1 == e2)
 		return;
 
 	if (e2->get_nrflags() > e1->get_nrflags())
 		std::swap(e1, e2);
-	
+
 	e1->do_merge(e2);
 }
 
@@ -1160,9 +1230,9 @@ void Economy::check_split(Flag *f1, Flag *f2)
 {
 	assert(f1 != f2);
 	assert(f1->get_economy() == f2->get_economy());
-	
+
 	Economy *e = f1->get_economy();
-	
+
 	if (e->find_route(f1, f2, 0))
 		return;
 
@@ -1171,7 +1241,7 @@ void Economy::check_split(Flag *f1, Flag *f2)
 	// Unfortunately, there's no easy way to tell in advance which of the two
 	// resulting economies will be smaller
 	// Using f2 is just a guess, but if anything f2 is probably best:
-	// it will be the end point of a road. Since roads are typically built 
+	// it will be the end point of a road. Since roads are typically built
 	// from the center of a country outwards, and since splits
 	// are more likely to happen outwards, the economy at the end point is
 	// probably smaller in average. It's all just guesswork though ;)
@@ -1251,11 +1321,11 @@ public:
 				fix = r;
 			}
 		}
-		
+
 		m_data.pop_back();
 
 		debug(0, "pop");
-		
+
 		head->mpf_heapindex = -1;
 		return head;
 	}
@@ -1282,7 +1352,7 @@ public:
 		}
 		m_data[slot] = t;
 		t->mpf_heapindex = slot;
-		
+
 		debug(0, "push");
 	}
 
@@ -1307,7 +1377,7 @@ public:
 		}
 		m_data[slot] = t;
 		t->mpf_heapindex = slot;
-		
+
 		debug(0, "boost");
 	}
 
@@ -1360,46 +1430,46 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 	assert(end->get_economy() == this);
 
 	Map *map = get_owner()->get_game()->get_map();
-	
-	// advance the path-finding cycle	
+
+	// advance the path-finding cycle
 	mpf_cycle++;
 	if (!mpf_cycle) { // reset all cycle fields
 		for(uint i = 0; i < m_flags.size(); i++)
 			m_flags[i]->mpf_cycle = 0;
 		mpf_cycle++;
 	}
-	
+
 	// Add the starting flag into the open list
 	FlagQueue Open;
 	Flag *current;
-	
+
 	start->mpf_cycle = mpf_cycle;
 	start->mpf_backlink = 0;
 	start->mpf_realcost = 0;
 	start->mpf_estimate = map->calc_cost_estimate(start->get_position(), end->get_position());
-	
+
 	Open.push(start);
-	
+
 	while((current = Open.pop())) {
 		if (current == end)
 			break; // found our goal
-		
+
 		if (cost_cutoff >= 0 && current->mpf_realcost > cost_cutoff)
 			return false;
-		
+
 		// Loop through all neighbouring flags
 		Neighbour_list neighbours;
-		
+
 		current->get_neighbours(&neighbours);
-		
+
 		for(uint i = 0; i < neighbours.size(); i++) {
 			Flag *neighbour = neighbours[i].flag;
 			int cost;
 
-			// don't need to find the optimal path if we're just checking connectivity			
+			// don't need to find the optimal path if we're just checking connectivity
 			if (neighbour == end && !route)
 				return true;
-			
+
 			cost = current->mpf_realcost + neighbours[i].cost;
 
 			if (neighbour->mpf_cycle != mpf_cycle) {
@@ -1417,17 +1487,17 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 			}
 		}
 	}
-	
+
 	if (!current) // path not found
 		return false;
-	
+
 	// Unwind the path to form the route
 	if (route) {
 		Flag *flag;
-		
+
 		route->clear();
 		route->m_totalcost = end->mpf_realcost;
-		
+
 		flag = end;
 		for(;;) {
 			route->m_route.insert(route->m_route.begin(), flag);
@@ -1436,7 +1506,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 			flag = flag->mpf_backlink;
 		}
 	}
-	
+
 	return true;
 }
 
@@ -1445,7 +1515,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 Economy::find_nearest_warehouse
 
 Find the nearest warehouse, starting from the given start flag.
-Returns the best warehouse (or 0 if none can be found) and stores the route to 
+Returns the best warehouse (or 0 if none can be found) and stores the route to
 it in the given route.
 ===============
 */
@@ -1453,19 +1523,19 @@ Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
 {
 	int best_totalcost = -1;
 	Warehouse *best_warehouse = 0;
-	
+
 	for(uint i = 0; i < m_warehouses.size(); i++) {
 		Warehouse *wh = m_warehouses[i];
 		Route buf_route;
-		
+
 		if (!find_route(start, wh->get_base_flag(), &buf_route, best_totalcost))
 			continue;
-		
+
 		best_totalcost = buf_route.get_totalcost();
 		best_warehouse = wh;
 		*route = buf_route;
 	}
-	
+
 	return best_warehouse;
 }
 
@@ -1544,7 +1614,7 @@ a merger.
 void Economy::add_wares(int id, int count)
 {
 	m_wares.add(id, count);
-	
+
 	// TODO: add to global player inventory?
 }
 
@@ -1552,7 +1622,7 @@ void Economy::add_wares(int id, int count)
 ===============
 Economy::remove_wares
 
-Call this whenever a ware his destroyed or consumed, e.g. food has been 
+Call this whenever a ware his destroyed or consumed, e.g. food has been
 eaten or a warehouse has been destroyed.
 This is also called when a ware is removed from the economy through trade or
 a split of the Economy.
@@ -1578,7 +1648,7 @@ void Economy::add_warehouse(Warehouse *wh)
 {
 	m_warehouses.push_back(wh);
 	m_wares.add(wh->get_wares());
-	
+
 	match_requests(wh);
 }
 
@@ -1619,9 +1689,9 @@ void Economy::add_request(Request *req)
 
 	if (req->get_ware() >= (int)m_requests.size())
 		m_requests.resize(req->get_ware()+1);
-	
+
 	m_requests[req->get_ware()].add(req);
-	
+
 	// Try to fulfill the request
 	process_request(req); // if unsuccessful, the request is simply left open
 }
@@ -1631,7 +1701,7 @@ void Economy::add_request(Request *req)
 Economy::remove_request
 
 Remove the request from this economy.
-Only call remove_request() when a request is actually cancelled. That is, 
+Only call remove_request() when a request is actually cancelled. That is,
 _do not_ remove a request when the owning economy changes (split/merge). This
 is handled by the actual split/merge functions.
 ===============
@@ -1640,7 +1710,7 @@ void Economy::remove_request(Request *req)
 {
 	if (req->get_state() == Request::TRANSFER)
 		req->cancel_transfer(static_cast<Game*>(get_owner()->get_game()));
-	
+
 	m_requests[req->get_ware()].remove(req);
 }
 
@@ -1664,24 +1734,24 @@ void Economy::do_merge(Economy *e)
 	i = e->get_nrflags();
 	while(i--) {
 		assert(i+1 == e->get_nrflags());
-		
+
 		Flag *flag = e->m_flags[0];
-		
+
 		e->do_remove_flag(flag);
 		add_flag(flag);
 	}
 
 	// Merge requests after flags are merged for two reasons:
-	//  a) all flags and buildings must have the correct economy set, 
+	//  a) all flags and buildings must have the correct economy set,
 	//     or havoc ensues
 	//  b) all offered wares are now joined together, so we can really get
 	//     the closest provider instead of just the first one
 	for(i = 0; i < (int)e->m_requests.size(); i++) {
 		while(e->m_requests[i].get_nrrequests()) {
 			Request *req = e->m_requests[i].get_request(0);
-			
+
 			e->m_requests[i].remove(req);
-			
+
 			// if the request can't be fulfilled yet, pretend it's just been requested
 			// otherwise, don't mess with it, just add it
 			if (req->get_state() == Request::OPEN)
@@ -1693,7 +1763,7 @@ void Economy::do_merge(Economy *e)
 			}
 		}
 	}
-	
+
 	// implicity delete the economy
 	delete e;
 }
@@ -1710,9 +1780,9 @@ void Economy::do_split(Flag *f)
 	log("Economy: split %i\n", get_nrflags());
 
 	Economy *e = new Economy(m_owner);
-	
+
 	std::set<Flag*> open;
-	
+
 	open.insert(f);
 	while(open.size()) {
 		f = *open.begin();
@@ -1726,26 +1796,26 @@ void Economy::do_split(Flag *f)
 		// to the list (note: roads and buildings are reassigned via Flag::set_economy)
 		Neighbour_list neighbours;
 		f->get_neighbours(&neighbours);
-		
+
 		for(uint i = 0; i < neighbours.size(); i++) {
 			Flag *n = neighbours[i].flag;
-			
+
 			if (n->get_economy() == this)
 				open.insert(n);
 		}
 	}
-	
+
 	log("  split %i flags\n", e->get_nrflags());
-	
+
 	// Split the requests by looking at their owner
 	Game *game = static_cast<Game*>(get_owner()->get_game());
-	
+
 	for(int ware = 0; ware < (int)m_requests.size(); ware++) {
 		int idx = 0;
 		while(idx < m_requests[ware].get_nrrequests()) {
 			Request *req = m_requests[ware].get_request(idx);
 			Economy *tgteco = req->get_target_economy(game);
-			
+
 			if (tgteco == this)
 			{
 				// The target still remains with us.
@@ -1753,14 +1823,14 @@ void Economy::do_split(Flag *f)
 				// still finish
 				if (req->get_state() == Request::TRANSFER)
 					req->check_transfer(game);
-				
+
 				idx++;
 			}
 			else
 			{
 				// The target changes economy. Remove the request
 				m_requests[ware].remove(req);
-				
+
 				// If it's still open, pretend it has just been requested
 				if (req->get_state() == Request::OPEN)
 					tgteco->add_request(req);
@@ -1769,7 +1839,7 @@ void Economy::do_split(Flag *f)
 					if (ware >= (int)tgteco->m_requests.size())
 						tgteco->m_requests.resize(ware+1);
 					tgteco->m_requests[ware].add(req);
-					
+
 					if (req->get_state() == Request::TRANSFER)
 						req->check_transfer(game);
 				}
@@ -1790,41 +1860,44 @@ Returns true if the request could be processed.
 bool Economy::process_request(Request *req)
 {
 	assert(req->get_state() == Request::OPEN);
-	
+
 	Route buf_route0, buf_route1;
 	Warehouse *best_warehouse = 0;
 	Route *best_route = 0;
 	int best_cost = -1;
 	Flag *target_flag = req->get_target_flag(static_cast<Game*>(get_owner()->get_game()));
-	
+
 	// TODO: traverse idle wares
-	
-	// Look for matches in all warehouses
+
+	// Look for matches in all warehouses in this economy
 	for(uint i = 0; i < m_warehouses.size(); i++) {
 		Warehouse *wh = m_warehouses[i];
 		Route *route;
-		
+
 		if (!wh->get_wares().stock(req->get_ware()))
 			continue;
 
 		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
-		
+
 		int cost_cutoff = best_cost;
-		
-		if (!find_route(wh->get_base_flag(), target_flag, route, cost_cutoff))
+
+		if (!find_route(wh->get_base_flag(), target_flag, route, cost_cutoff)) {
+			if (!best_route)
+				throw wexception("Economy::process_request: COULDN'T FIND A ROUTE!");
 			continue;
-		
+		}
+
 		// cost_cutoff guarantuees us that the route is better than what we have
 		best_warehouse = wh;
 		best_route = route;
 		best_cost = route->get_totalcost();
 	}
-	
-	// Now that all options have been checked, start the transfer if possible
+
 	if (!best_route)
 		return false;
-	
+
+	// Now that all options have been checked, start the transfer
 	req->start_transfer(static_cast<Game*>(get_owner()->get_game()), best_warehouse, best_route);
 	return true;
 }
@@ -1845,33 +1918,33 @@ int Economy::match_requests(Warehouse *wh)
 	for(int ware = 0; ware < wl->get_nrwareids(); ware++) {
 		if (ware >= (int)m_requests.size())
 			continue;
-		
+
 		int stock = wl->stock(ware);
 		if (!stock)
 			continue;
-		
+
 		for(int idx = 0; idx < m_requests[ware].get_nrrequests(); idx++) {
 			Request *req = m_requests[ware].get_request(idx);
-			
+
 			if (req->get_state() != Request::OPEN)
 				continue;
-			
+
 			// Good, there's a request to fulfill
 			Flag *target_flag = req->get_target_flag(static_cast<Game*>(get_owner()->get_game()));
 			Route route;
 			bool success;
-			
+
 			success = find_route(wh->get_base_flag(), target_flag, &route);
 			if (!success)
 				throw wexception("match_requests(): find_route failed");
-			
+
 			req->start_transfer(static_cast<Game*>(get_owner()->get_game()), wh, &route);
-			
+
 			transfers++;
 			if (!--stock)
 				break; // stock depleted
 		}
 	}
-	
+
 	return transfers;
 }

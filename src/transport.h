@@ -44,7 +44,7 @@ to it. Instead of the WALK_NW road, it can also have a building attached to
 it.
 Flags also have a store of up to 8 wares.
 
-Important: Do not access m_roads directly. get_road() and others use 
+Important: Do not access m_roads directly. get_road() and others use
 Map_Object::WALK_xx in all "direction" parameters.
 */
 class Flag : public PlayerImmovable {
@@ -54,51 +54,51 @@ class Flag : public PlayerImmovable {
 public:
 	Flag(bool);
 	virtual ~Flag();
-	
+
 	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords, bool);
-	
+
 	virtual int get_type();
 	virtual int get_size();
 	virtual bool get_passable();
-	
+
 	virtual Flag *get_base_flag();
-	
+
 	inline const Coords &get_position() const { return m_position; }
-	
+
 	virtual void set_economy(Economy *e);
-	
+
 	inline Building *get_building() { return m_building; }
 	void attach_building(Editor_Game_Base *g, Building *building);
 	void detach_building(Editor_Game_Base *g);
-	
+
 	inline Road *get_road(int dir) { return m_roads[dir-1]; }
 	void attach_road(int dir, Road *road);
 	void detach_road(int dir);
 
 	void get_neighbours(Neighbour_list *neighbours);
 	Road *get_road(Flag *flag);
-	
+
 protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
-	
+
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
 	Coords		m_position;
 	uint			m_anim;
 	int			m_animstart;
-	
+
 	Building		*m_building;	// attached building (replaces road WALK_NW)
 	Road			*m_roads[6];	// Map_Object::WALK_xx-1 as index
-	
+
 	// The following are only used during pathfinding
 	uint			mpf_cycle;
 	int			mpf_heapindex;
 	int			mpf_realcost;	// real cost of getting to this flag
 	Flag*			mpf_backlink;	// flag where we came from
 	int			mpf_estimate;	// estimate of cost to destination
-	
+
 	inline int cost() const { return mpf_realcost+mpf_estimate; }
 };
 
@@ -113,6 +113,9 @@ exceptions: placement of carriers if the path's length is odd, splitting
 a road when a flag is inserted.
 
 Every road has one or more Carriers attached to it.
+
+All Workers on the Road are attached via add_worker()/remove_worker() in
+PlayerImmovable.
 */
 class Road : public PlayerImmovable {
 public:
@@ -129,13 +132,14 @@ public:
 	virtual bool get_passable();
 
 	virtual Flag *get_base_flag();
-	
+
 	int get_cost(bool reverse);
 	inline const Path &get_path() const { return m_path; }
-	
+	inline int get_idle_index() const { return m_idle_index; }
+
 	void presplit(Editor_Game_Base *g, Coords split);
 	void postsplit(Editor_Game_Base *g, Flag *flag);
-	
+
 protected:
 	void set_path(Editor_Game_Base *g, const Path &path);
 
@@ -144,9 +148,11 @@ protected:
 
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
-	
-	virtual void request_success(Request *req);
-	
+
+	void request_carrier(Editor_Game_Base *g);
+
+	virtual void request_success(Game* g, Request* req);
+
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
@@ -155,7 +161,8 @@ private:
 	Flag		*m_end;
 	int		m_cost_forward;	// cost for walking this road from start to end
 	int		m_cost_backward;	// dito, from end to start
-	Path		m_path;		// path goes from m_start to m_end
+	Path		m_path;			// path goes from m_start to m_end
+	int		m_idle_index;	// index into path where carriers should idle
 
 	Object_Ptr	m_carrier;	// our carrier
 	Request		*m_carrier_request;
@@ -171,16 +178,16 @@ class Route {
 
 public:
 	Route();
-	
+
 	void clear();
 	bool verify(Game *g);
-	
+
 	inline int get_totalcost() const { return m_totalcost; }
 	inline int get_nrsteps() const { return m_route.size()-1; }
 	Flag *get_flag(Game *g, int idx);
-	
+
 	void starttrim(int count);
-	
+
 private:
 	int				m_totalcost;
 	std::vector<Object_Ptr>		m_route;	// includes start and end flags
@@ -207,27 +214,28 @@ public:
 
 	Request(PlayerImmovable *target, int ware);
 	~Request();
-	
+
 	inline PlayerImmovable* get_target(Game*g) { return (PlayerImmovable*)m_target.get(g); }
 	inline int get_ware() const { return m_ware; }
 	inline int get_state() const { return m_state; }
-	
+
 	Flag *get_target_flag(Game *g);
 	Economy *get_target_economy(Game *g);
-	
+	Worker* get_worker();
+
 	void start_transfer(Game *g, Warehouse *wh, Route *route);
 	void start_transfer(Game *g, Worker *worker, Route *route);
-	
+
 	void check_transfer(Game *g);
 	void cancel_transfer(Game *g);
-	
+
 	void transfer_finish(Game *g);
 	void transfer_fail(Game *g);
-	
+
 private:
 	Object_Ptr	m_target;	// who requested it?
 	int			m_ware;		// the ware type
-	
+
 	int			m_state;
 	union {
 		Worker*	worker;		// worker that is supposed to fulfill the request
@@ -296,22 +304,22 @@ public:
 
 	void add_wares(int id, int count = 1);
 	void remove_wares(int id, int count = 1);
-	
+
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);
-	
+
 	void add_request(Request *req);
 	void remove_request(Request *req);
-	
+
 private:
 	void do_remove_flag(Flag *f);
-	
+
 	void do_merge(Economy *e);
 	void do_split(Flag *f);
 
 	bool process_request(Request *req);
 	int match_requests(Warehouse *wh);
-	
+
 private:
 	Player	*m_owner;
 	std::vector<Flag*>		m_flags;

@@ -1558,7 +1558,7 @@ void Path::reverse()
 {
 	std::swap(m_start, m_end);
 	std::reverse(m_path.begin(), m_path.end());
-	
+
 	for(uint i = 0; i < m_path.size(); i++)
 		m_path[i] = get_reverse_dir(m_path[i]);
 }
@@ -1576,6 +1576,7 @@ void Path::append(int dir)
 	m_map->get_neighbour(m_end, dir, &m_end);
 }
 
+
 /*
 ===============
 CoordPath::CoordPath
@@ -1592,7 +1593,7 @@ CoordPath::CoordPath(const Path &path)
 	
 	for(int i = 0; i < path.get_nsteps(); i++) {
 		int dir = path.get_step(i);
-		
+
 		m_path.push_back(dir);
 		m_map->get_neighbour(c, dir, &c);
 		m_coords.push_back(c);
@@ -1612,9 +1613,27 @@ int CoordPath::get_index(Coords field) const
 	for(uint i = 0; i < m_coords.size(); i++)
 		if (m_coords[i] == field)
 			return i;
-	
+
 	return -1;
 }
+
+
+/*
+===============
+CoordPath::reverse
+
+Reverse the direction of the path.
+===============
+*/
+void CoordPath::reverse()
+{
+	std::reverse(m_path.begin(), m_path.end());
+	std::reverse(m_coords.begin(), m_coords.end());
+
+	for(uint i = 0; i < m_path.size(); i++)
+		m_path[i] = get_reverse_dir(m_path[i]);
+}
+
 
 /*
 ===============
@@ -1622,7 +1641,7 @@ CoordPath::truncate
 
 Truncate the path after the given number of steps
 ===============
-*/	
+*/
 void CoordPath::truncate(int after)
 {
 	m_path.erase(m_path.begin()+after, m_path.end());

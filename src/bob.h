@@ -101,11 +101,12 @@ protected: // higher level handling (task-based)
 	inline int get_current_task() { return m_task; }
 	void start_task(Game*, uint task);
 	void end_task(Game*, bool success, uint nexttask);
-	void interrupt_task(Game*);
+	void interrupt_task(Game*, bool hard);
 
 	// handler functions
 	virtual int task_begin(Game*);
 	virtual int task_act(Game*, bool interrupt);
+	virtual bool task_interrupt(Game*);
 	virtual void task_end(Game*);
 
 	/** Map_Object::task_start_best(Game*, uint prev, bool success) [virtual]
@@ -115,7 +116,7 @@ protected: // higher level handling (task-based)
 	 * nexthint is the nexttask parameter passed to end_task().
 	 *
 	 * You must call start_task() (directly or indirectly) from this function.
-	 * Therefor, you MUST override this function in derived classes.
+	 * Therefore, you MUST override this function in derived classes.
 	 */
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint) = 0;
 

@@ -230,7 +230,8 @@ void Bob::cleanup(Editor_Game_Base *gg)
 ===============
 Bob::act
 
-Hand the acting over to the task
+Called by Cmd_Queue when a CMD_ACT event is triggered.
+Hand the acting over to the task.
 
 Change to the next task if necessary.
 ===============
@@ -360,16 +361,51 @@ void Bob::end_task(Game* g, bool success, uint nexttask)
 ===============
 Bob::interrupt_task
 
-Ask the current task to end (with failure) as soon as possible.
+Ask the current task to end (with failure) as soon as possible, i.e. within
+the next second or so.
+If hard is true, the task is stopped immediately.
+
+If hard is false, task_interrupt() is called. This function returns true if it
+is okay to interrupt the task immediately. Otherwise, the task will be
+interrupted on the next task_act().
 ===============
 */
-void Bob::interrupt_task(Game *g)
+void Bob::interrupt_task(Game *g, bool hard)
 {
-	// cause an interrupt on the next CMD_ACT
-	m_task_interrupt = true;
+	assert(!m_task_acting);
+	assert(!m_task_switching);
+	assert(m_task);
 
-	// TODO: call a task-specific interrupt function
+	if (!hard) {
+		bool stop;
+
+		m_task_acting = true;
+		stop = task_interrupt(g);
+		m_task_acting = false;
+
+		if (!stop) {
+			// cause an interrupt on the next CMD_ACT
+			m_task_interrupt = true;
+			return;
+		}
+	}
+
+
+	// Terminate the current task now.
+	task_end(g);
+
+	m_lasttask = m_task;
+	m_lasttask_success = false;
+	m_nexttask = 0;
+
+	m_task = 0;
+
+	++m_actid; // be very sure to eliminate spurious CMD_ACTs
+
+	// Start the next task
+	do_next_task(g);
 }
+
 
 /*
 ===============
@@ -412,10 +448,10 @@ bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *
 		delete task.movepath.path;
 		return false;
 	}
-	
+
 	task.movepath.step = 0;
 	task.movepath.anims = anims;
-	
+
 	start_task(g, TASK_MOVEPATH);
 	return true;
 }
@@ -430,7 +466,7 @@ Start moving along the given, precalculated path.
 void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims)
 {
 	assert(path.get_start() == get_position());
-	
+
 	task.movepath.path = new Path(path);
 	task.movepath.step = 0;
 	task.movepath.anims = anims;
@@ -449,10 +485,10 @@ void Bob::start_task_forcemove(Game *g, int dir, DirAnimations *anims)
 {
 	task.forcemove.dir = dir;
 	task.forcemove.anims = anims;
-	
+
 	start_task(g, TASK_FORCEMOVE);
 }
-	
+
 /*
 ===============
 Bob::task_begin [virtual]
@@ -468,8 +504,7 @@ You can schedule a call to task_act() by returning the time, in milliseconds,
 until task_act() should be could. NOTE: this time is relative to the current
 time!
 If you return a value <= 0, task_act() will _never_ be called. This means that
-the task can never end - it will continue till infinity (note that this may
-be changed at a later point, introducing something like interrupt_task).
+the task won't end itself.
 ===============
 */
 int Bob::task_begin(Game* g)
@@ -501,7 +536,7 @@ Bob::task_act [virtual]
 Calls to this function are scheduled by this function and task_begin().
 
 In this function you may call all the functions available in task_begin().
-If interrupt is true, you should call end_task() without success.
+If interrupt is true, you should call end_task() indicating failure.
 
 As with task_begin(), you can also schedule another call to task_act() by
 returning a value > 0
@@ -543,7 +578,7 @@ int Bob::task_act(Game* g, bool interrupt)
 		task.movepath.step++;
 		return tdelta;
 	}
-	
+
 	case TASK_FORCEMOVE:
 		end_walk(g);
 		end_task(g, true, 0);
@@ -552,6 +587,29 @@ int Bob::task_act(Game* g, bool interrupt)
 
 	throw wexception("task_act: Unhandled task %i", m_task);
 }
+
+
+/*
+===============
+Bob::task_interrupt [virtual]
+
+This is called when someone wants to interrupt a task nicely.
+Return true if you want to end the task right now.
+Return false if you want to continue until the next task_act().
+===============
+*/
+bool Bob::task_interrupt(Game*)
+{
+	switch(get_current_task()) {
+	case TASK_MOVEPATH:
+	case TASK_FORCEMOVE:
+		return false;
+
+	default:
+		return true;
+	}
+}
+
 
 /*
 ===============
@@ -575,7 +633,7 @@ void Bob::task_end(Game*)
 ===============
 Bob::draw
 
-Draw the map object. 
+Draw the map object.
 posx/posy is the on-bitmap position of the field we're currently on,
 WITHOUT height taken into account.
 
@@ -595,7 +653,7 @@ void Bob::draw(Editor_Game_Base *game, RenderTarget* dst, Point pos)
 	int sx, sy;
 	int ex, ey;
 	const RGBColor* playercolors = 0;
-	
+
 	if (get_owner())
 		playercolors = get_owner()->get_playercolor();
 
@@ -605,7 +663,7 @@ void Bob::draw(Editor_Game_Base *game, RenderTarget* dst, Point pos)
 
 	sx = ex;
 	sy = ey;
-	
+
 	switch(m_walking) {
 	case WALK_NW: map->get_brn(end, &start); sx += FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
 	case WALK_NE: map->get_bln(end, &start); sx -= FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
@@ -613,18 +671,18 @@ void Bob::draw(Editor_Game_Base *game, RenderTarget* dst, Point pos)
 	case WALK_E: map->get_ln(end, &start); sx -= FIELD_WIDTH; break;
 	case WALK_SW: map->get_trn(end, &start); sx += FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
 	case WALK_SE: map->get_tln(end, &start); sx -= FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
-	
+
 	case IDLE: start.field = 0; break;
 	}
 
 	if (start.field) {
 		sy += MULTIPLY_WITH_HEIGHT_FACTOR(end.field->get_height());
-		sy -= MULTIPLY_WITH_HEIGHT_FACTOR(start.field->get_height()); 
+		sy -= MULTIPLY_WITH_HEIGHT_FACTOR(start.field->get_height());
 
 		float f = (float)(game->get_gametime() - m_walkstart) / (m_walkend - m_walkstart);
 		if (f < 0) f = 0;
 		else if (f > 1) f = 1;
-		
+
 		ex = (int)(f*ex + (1-f)*sx);
 		ey = (int)(f*ey + (1-f)*sy);
 	}
@@ -678,7 +736,7 @@ Bob::start_walk
 Cause the object to walk, honoring passable/impassable parts of the map using movecaps.
 If force is true, the passability check is skipped.
 
-Returns the number of milliseconds after which the walk has ended. You must 
+Returns the number of milliseconds after which the walk has ended. You must
 call end_walk() after this time, so schedule a task_act().
 
 Returns a negative value when we can't walk into the requested direction.
@@ -687,7 +745,7 @@ Returns a negative value when we can't walk into the requested direction.
 int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 {
 	FCoords newf;
-	
+
 	g->get_map()->get_neighbour(m_position, dir, &newf);
 
 	// Move capability check by ANDing with the field caps
@@ -704,14 +762,14 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 
 	// Move is go
 	int tdelta = 2000; // :TODO: height-based speed changes
-	
+
 	m_walking = dir;
 	m_walkstart = g->get_gametime();
 	m_walkend = m_walkstart + tdelta;
-	
+
 	set_position(g, newf);
 	set_animation(g, a);
-	
+
 	return tdelta; // yep, we were successful
 }
 
@@ -731,7 +789,7 @@ void Bob::set_position(Game* g, Coords coords)
 	}
 
 	m_position = FCoords(coords, g->get_map()->get_field(coords));
-	
+
 	m_linknext = m_position.field->bobs;
 	m_linkpprev = &m_position.field->bobs;
 	if (m_linknext)
@@ -741,20 +799,20 @@ void Bob::set_position(Game* g, Coords coords)
 
 
 /*
-==============================================================================   
+==============================================================================
 
 class Critter_Bob
 
-==============================================================================   
+==============================================================================
 */
 
-// 
+//
 // Description
-// 
+//
 class Critter_Bob_Descr : public Bob_Descr {
    public:
       Critter_Bob_Descr(const char *name);
-      virtual ~Critter_Bob_Descr(void) { } 
+      virtual ~Critter_Bob_Descr(void) { }
 
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
       Bob *create_object(bool logic);

@@ -92,6 +92,7 @@ public:
 	virtual ~Worker();
 
 	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
+	inline int get_state() const { return m_state; }
 
 	virtual uint get_movecaps();
 
@@ -117,7 +118,10 @@ public:
 protected:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 
+	void set_state(int state);
+
 	void end_state(Game *g, bool success);
+	virtual void do_end_state(Game* g, int oldstate, bool success);
 	void run_state_request(Game *g, uint prev, bool success, uint nexthint);
 	void run_state_fugitive(Game *g, uint prev, bool success, uint nexthint);
 	void run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthint);
@@ -158,17 +162,22 @@ class Carrier : public Worker {
 public:
 	enum {
 		State_WorkIdle = State_Worker_Last + 1,	// idling on the road
-		State_WorkFetch,
+		//State_WorkTransport,								// transport something
 	};
 
 	Carrier(Carrier_Descr *descr, bool ingamelogic);
 	virtual ~Carrier();
 
-	//void set_job_work(Road* road);
+	void set_job_road(Game*, Road* road);
+	// TODO bool notify_ware(int flag);
+
+protected:
+	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
+	virtual void do_end_state(Game* g, int oldstate, bool success);
+
+	void run_state_workidle(Game* g, uint prev, bool success, uint nexthint);
 
 private:
-	Object_Ptr	m_road;		// the road we work on
-
 	int			m_fetch_flag;	// fetch from start_flag if 0, end_flag if 1; drop at the other flag
 };
 
