@@ -333,12 +333,8 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
    ushort i=0;
    ushort clr;
 
-	// TODO: looks like the gfx data doesn't actually use hotspots
-	//cerr << anim->get_hsx() << " " << anim->get_hsy() << endl;
-	//dst_x -= anim->get_hsx();
-	//dst_y -= anim->get_hsy();
-   dst_x -= (int) (anim->get_w()>>1);
-   dst_y -= (int) (anim->get_h()>>1);
+	dst_x -= anim->get_hsx();
+	dst_y -= anim->get_hsy();
 	   
    x=dst_x;
    for(y=dst_y; y<dst_y+anim->get_h(); ) {

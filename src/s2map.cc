@@ -172,9 +172,8 @@ int Map::load_s2mf_header(const char* filen)
  * ***** PRIVATE FUNC ******
  *
  * Args: 	filen		filename to read
- * Returns: RET_OK or RET_FAILED
  */
-int Map::load_s2mf(const char* filen, Game *game)
+void Map::load_s2mf(const char* filen, Game *game)
 {
    uchar *section = 0;
 	uchar *bobs = 0;
@@ -184,10 +183,10 @@ int Map::load_s2mf(const char* filen, Game *game)
    uint x=0;
    uint y=0;
 
+	assert(filen);
+	
 	try
 	{
-		if(!filen) return ERR_FAILED;
-
 		FileRead file;
 		file.Open(g_fs, filen);
 
@@ -253,10 +252,8 @@ int Map::load_s2mf(const char* filen, Game *game)
 		////           S E C T I O N    1 : H E I G H T S
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Heights --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section Heights not found");
 
 		Field *f = fields;
 		pc = section;
@@ -268,15 +265,14 @@ int Map::load_s2mf(const char* filen, Game *game)
 			}
 		}
 		free(section);
+		section = 0;
 
 
 		////				S E C T I O N		2: Landscape
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "LANDSCAPE --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section Landscape not found");
 
 		f = fields;
 		pc = section;
@@ -312,16 +308,14 @@ int Map::load_s2mf(const char* filen, Game *game)
 			}
 		}
 		free(section);
-
+		section = 0;
 
 
 		// S E C T I O N 3  -------- LANDSCAPE 2
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "LANDSCAPE 2 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section Landscape 2 not found");
 
 		f = fields;
 		pc = section;
@@ -357,24 +351,22 @@ int Map::load_s2mf(const char* filen, Game *game)
 			}
 		}
 		free(section);
+		section = 0;
 
 
 		// S E C T I O N 4  -------- UNKNOWN !!! Skip
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section UNKNOWN --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section UNKNOWN not found");
 		free(section);
+		section = 0;
 
 		// S E C T I O N 5  -------- Landscape (rocks, stuff..)
 		// New section??
 		bobs = load_s2mf_section(&file, hd.width, hd.height);
-		if (!bobs) {
-			cerr << "Section 5 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!bobs)
+			throw wexception("Section 5 (bobs) not found");
 
 		// S E C T I O N 6  -------- Ways
 		// This describes where you can put ways
@@ -389,10 +381,9 @@ int Map::load_s2mf(const char* filen, Game *game)
 		//      bob == 6 orange
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 6 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section 6 not found");
+		
 		uint i=0;
 		for(y=0; y<hd.height; y++) {
 			i=y*hd.width;
@@ -407,6 +398,7 @@ int Map::load_s2mf(const char* filen, Game *game)
 			}
 		}
 		free(section);
+		section = 0;
 
 		// S E C T I O N 7  -------- Animals
 		// 0x01 == Bunny
@@ -417,10 +409,9 @@ int Map::load_s2mf(const char* filen, Game *game)
 		// 0x06 == sheep
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 7 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section 7 (animals) not found");
+		
 		for(y=0; y<hd.height; y++) {
 			i=y*hd.width;
 			for(x=0; x<hd.width; x++, i++) {
@@ -442,22 +433,25 @@ int Map::load_s2mf(const char* filen, Game *game)
 				}
 
 				if (bobname) {
+					int idx = w->get_bob(bobname);
+					if (idx < 0)
+						throw wexception("Missing bob type %s", bobname);
 					for(uint z=0; z<CRITTER_PER_DEFINITION; z++)
-						game->create_bob(x, y, w->get_bob(bobname));
+						game->create_bob(x, y, idx);
 				}
 			}
 		}
 		free(section);
+		section = 0;
 
 		// S E C T I O N 8  --------UNKNOWN
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 8 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section 8 (unknown) not found");
 		free(section);
-
+		section = 0;
+		
 
 		// S E C T I O N 9  -------- What buildings can be build?
 		// 0x01 == flags (?? )
@@ -471,19 +465,16 @@ int Map::load_s2mf(const char* filen, Game *game)
 		// 0x78 == no buildings
 		// New section??
 		buildings = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 9 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!buildings)
+			throw wexception("Section 9 (buildings) not found");
 
 		// S E C T I O N 10  -------- UNKNOWN
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 10 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section 10 (unknown) not found");
 		free(section);
+		section = 0;
 
 		// S E C T I O N 11  -------- STARTING_POINT
 		// I don't know what this does. It really identifies some points
@@ -492,11 +483,10 @@ int Map::load_s2mf(const char* filen, Game *game)
 		//  We skip it.
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 11 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section 11 (unknown) not found");
 		free(section);
+		section = 0;
 
 		// S E C T I O N 12  -------- Mining
 		// 0x00 == Water
@@ -509,11 +499,10 @@ int Map::load_s2mf(const char* filen, Game *game)
 		// 0x59-5f == stones 1-7
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 12 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section 12 (resources) not found");
 		free(section);
+		section = 0;
 
 
 		// S E C T I O N 13  -------- Bergflanken.
@@ -522,11 +511,10 @@ int Map::load_s2mf(const char* filen, Game *game)
 		// Skip
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 13 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section 13 (unknown) not found");
 		free(section);
+		section = 0;
 
 		// S E C T I O N 14  -------- Fieldcount
 		// Describes to which island the field sticks
@@ -538,10 +526,8 @@ int Map::load_s2mf(const char* filen, Game *game)
 		//
 		// New section??
 		section = load_s2mf_section(&file, hd.width, hd.height);
-		if (!section) {
-			cerr << "Section 14 --> NOT FOUND in file" << endl;
-			return ERR_FAILED;
-		}
+		if (!section)
+			throw wexception("Section 14 (island id) not found");
 		free(section);
 		section = 0;
 
@@ -551,12 +537,6 @@ int Map::load_s2mf(const char* filen, Game *game)
 		for(y=0; y<hd.height; y++) {
 			for(x=0; x<hd.width; x++) {
 				const char *bobname = 0;
-
-			//   if(a_MapGetField(x,y)->can_build_way== 0x80) {
-			//    a_BuildingSet(x, y, TYPE_HQ, STATE_FINISH);
-			//      continue;
-			//   }
-
 
 				c=bobs[y*hd.width + x];
 				if(buildings[y*hd.width +x]==0x78) {
@@ -570,7 +550,10 @@ int Map::load_s2mf(const char* filen, Game *game)
 						default: break;
 					}
 					if (bobname) {
-						game->create_bob(x, y, w->get_bob(bobname));
+						int idx = w->get_bob(bobname);
+						if (idx < 0)
+							throw wexception("Missing bob type %s", bobname);
+						game->create_bob(x, y, idx);
 						continue;
 					}
 				}
@@ -660,7 +643,10 @@ int Map::load_s2mf(const char* filen, Game *game)
 				}
 
 				if (bobname) {
-					game->create_bob(x, y, w->get_bob(bobname));
+					int idx = w->get_bob(bobname);
+					if (idx < 0)
+						throw wexception("Missing bob type %s", bobname);
+					game->create_bob(x, y, idx);
 				}
 			}
 		}
@@ -678,7 +664,5 @@ int Map::load_s2mf(const char* filen, Game *game)
 
 	free(bobs);
 	free(buildings);
-   return RET_OK;
 }
-
 

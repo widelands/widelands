@@ -20,8 +20,6 @@
 #ifndef __S__DESCR_MAINTAINER_H
 #define __S__DESCR_MAINTAINER_H
 
-#include <string.h>
-
 /*
  * This template is used to have a type save mainting class for Bob_Descr, Worker_Descr 
  * and so on
@@ -36,7 +34,7 @@ template <class T> class Descr_Maintainer {
       T* get_nitem(void) { n++; if(n<nitems) return items[n]; return NULL; }
       void add(T* item);
       ushort get_nitems(void) { return nitems; }
-      ushort get_index(const char* name);
+      int get_index(const char* name); // can return -1!
       void reserve(uint n) {
          if(!items) {
             items = (T**) malloc(sizeof(T*)*n);
@@ -46,7 +44,7 @@ template <class T> class Descr_Maintainer {
          place_for=n;
       }
       
-      inline T* get(uint idx) { assert(idx<nitems); return items[idx]; }
+      inline T* get(int idx) { if (idx>=0 && idx<(int)nitems) return items[idx]; else return 0; }
 
    private:
       uint place_for;
@@ -56,16 +54,14 @@ template <class T> class Descr_Maintainer {
 };
 
 template <class T>
-ushort Descr_Maintainer<T>::get_index(const char* name) {
+int Descr_Maintainer<T>::get_index(const char* name) {
   
    ushort i;
    for(i=0; i<nitems; i++) {
       if(!strcasecmp(name, items[i]->get_name())) return i;
    }
 
-   
-   // assert(0); // we should never be here!
-   return 0;
+   return -1;
 }
 
 /*template <class T> 

@@ -40,6 +40,8 @@ Object_Manager::~Object_Manager(void)
  */
 Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner, int x, int y)
 {
+	assert(d);
+
 	Map_Object* obj = d->create_object();
 	
 	m_lastserial++;

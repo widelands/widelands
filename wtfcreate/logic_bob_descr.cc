@@ -28,7 +28,8 @@ Fabric<Logic_Bob_Descr> bobf;
 //
 // Logic Bob Descr, base class for ALLL those bobs
 // 
-Logic_Bob_Descr::Logic_Bob_Descr(const char* gname) {
+Logic_Bob_Descr::Logic_Bob_Descr(const char* gname)
+{
    zmem(name, sizeof(name));
 
    memcpy(name, gname, strlen(gname) < (sizeof(name)-1) ? strlen(gname) : sizeof(name)-1);
@@ -38,12 +39,13 @@ Logic_Bob_Descr::Logic_Bob_Descr(const char* gname) {
    hsx=0;
    hsy=0;
 }
-Logic_Bob_Descr::~Logic_Bob_Descr(void) {
+
+Logic_Bob_Descr::~Logic_Bob_Descr(void)
+{
 }
-int Logic_Bob_Descr::construct(Profile* p, Section* s) {
 
-   //   cerr << "Parsing Logic_Bob_Descr!" << endl;
-
+int Logic_Bob_Descr::construct(Profile* p, Section* s)
+{
    // Parse bob common information
    hsx=s->get_int("hot_spot_x", 0);
    if(!hsx) {

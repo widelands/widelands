@@ -24,6 +24,8 @@
 #include "bob.h"
 #include "worlddata.h"
 
+class Section;
+
 struct World_Descr_Header {
    char name[30];
    char author[30];
@@ -37,13 +39,8 @@ class Resource_Descr {
       Resource_Descr(void) { }
       ~Resource_Descr(void) { }
 
-      int read(FileRead* f) {
-         memcpy(name, f->Data(30), 30);
-         minh = f->Unsigned8();
-         maxh = f->Unsigned8();
-         importance = f->Unsigned8();
-         return RET_OK;
-      }
+      void parse(Section *s);
+		
    private:
       char name[30];
       uchar minh, maxh, importance;
@@ -60,14 +57,14 @@ class Terrain_Descr {
             uint i;
             for(i=0; i<ntex; i++) 
                delete tex[i];
-            delete[] tex;
+            free(tex);
          }
       }
 
       inline Pic* get_texture(void) { return tex[curtex]; }
       inline uchar get_is(void) { return is; }
 
-      void read(FileRead* f);
+      void read(const char *directory, Section* s);
 
       
    private:
@@ -104,7 +101,7 @@ class World
       inline const char* get_descr(void) { return hd.descr; }
       
       inline Terrain_Descr* get_terrain(uint i) { assert(i<ters.get_nitems()); return ters.get(i); }
-      inline ushort get_bob(const char* l) { return bobs.get_index(l); }
+      inline int get_bob(const char* l) { return bobs.get_index(l); }
       inline Logic_Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
 
       inline void animate(int time) {
@@ -120,10 +117,10 @@ class World
       World_Descr_Header hd;
 
       // Functions
-      void parse_header(FileRead* f);
-      void parse_resources(FileRead* f);
-      void parse_bobs(FileRead* f);
-      void parse_terrains(FileRead* f);
+      void parse_root_conf(const char *directory, const char *name);
+      void parse_resources(const char *directory);
+      void parse_terrains(const char *directory);
+      void parse_bobs(const char *directory);
 };
 
 #endif

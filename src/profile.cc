@@ -66,13 +66,13 @@ Section
 
 ==============================================================================
 */
-	
+
 const char *Section::get_name() const {
    return sname;
 }
 
-Section::Section(std::ostream &errstream, const char *name, bool supress_error)
-	: err(errstream), values(8, 8)
+Section::Section(const char *name, bool supress_error)
+	: values(8, 8)
 {
    supr_err=supress_error;
 	used = false;
@@ -96,7 +96,9 @@ void Section::check_used()
 	for(int i = 0; i < values.elements(); i++) {
 		Value *v = (Value *)values.element_at(i);
 		if (!v->used) {
-			if(!supr_err) err << "Section [" << sname << "], key '" << v->name << "' not used (did you spell the name correctly?)" << std::endl;
+			if(!supr_err)
+				throw wexception("Section [%s], key '%s' not used (did you spell the name correctly?)",
+				                 sname, v->name);
       }
 	}
 }
@@ -158,6 +160,62 @@ void Section::add_val(const char *key, const char *value)
 	values.add(v);
 }
 
+/** Section::get_safe_int(const char *name)
+ *
+ * Return the integer value of the given key or throw an exception if a
+ * problem arises.
+ */
+int Section::get_safe_int(const char *name)
+{
+	Value *v = get_val(name);
+	if (!v)
+		throw wexception("[%s]: missing integer key '%s'", get_name(), name);
+	return atoi(v->val);
+}
+
+/** Section::get_safe_boolean(const char *name)
+ *
+ * Return the boolean value of the given key or throw an exception if a
+ * problem arises.
+ */
+bool Section::get_safe_boolean(const char *name)
+{
+	Value *v = get_val(name);
+	if (!v)
+		throw wexception("[%s]: missing boolean key '%s'", get_name(), name);
+
+	int i;
+	for (i = 0; i < TRUE_WORDS; i++)
+		if (!strcasecmp(v->val, trueWords[i]))
+			return true;
+	for (i = 0; i < FALSE_WORDS; i++)
+		if (!strcasecmp(v->val, falseWords[i]))
+			return false;
+
+	throw wexception("[%s], key '%s' is not a boolean value", get_name(), name);
+}
+
+/** Section::get_safe_string(const char *name)
+ *
+ * Return the key value as a plain string or throw an exception if the key
+ * doesn't exist
+ */
+const char *Section::get_safe_string(const char *name)
+{
+	Value *v = get_val(name);
+	if (!v)
+		throw wexception("[%s]: missing key '%s'", get_name(), name);
+   
+	char* retval=v->val;
+   if(retval[0]=='\'' || retval[0]=='\"') {
+      retval++;
+   }
+   if(retval[strlen(retval)-1]=='\'' || retval[strlen(retval)-1]=='\"') {
+      retval[strlen(retval)-1]='\0'; // well, we change the buffer, but this doesn't matter
+   }  
+	return retval;
+}
+
 /** Section::get_int(const char *name, int def)
  *
  * Returns the integer value of the given key. Falls back to a default value
@@ -200,7 +258,8 @@ bool Section::get_boolean(const char *name, bool def)
 		if (!strcasecmp(v->val, falseWords[i]))
 			return false;
 
-	if(!supr_err) err << "[" << sname << "], key '" << name << "' is not a boolean value" << std::endl;
+	if(!supr_err)
+		throw wexception("[%s], key '%s' is not a boolean value", sname, name);
 	return def;
 }
 
@@ -276,7 +335,8 @@ const char *Section::get_next_boolean(const char *name, bool *value)
 				return v->name;
 			}
 
-		if(!supr_err) err << "[" << sname << "], key '" << v->name << "' is not a boolean value" << std::endl;
+		if(!supr_err)
+			throw wexception("[%s], key '%s' is not a boolean value", sname, v->name);
 		// we can't really return anything, so just get the next value
 		// I guess a goto would be more logical in this rare situation ;p
 	}
@@ -309,19 +369,19 @@ Profile
 ==============================================================================
 */
 
-/** Profile::Profile(std::ostream &errstream, const char* filename)
+/** Profile::Profile(const char* filename)
  *
  * Parses an ini-style file into sections and key-value pairs.
  *
  * Args: errstream	all syntax errors etc.. are written to this stream
  *       filename	name of the .ini file
  */
-Profile::Profile(std::ostream &errstream, const char* filename, bool section_less_file,  bool suppress_error_msg )
-	: err(errstream), sections(8, 8)
+Profile::Profile(const char* filename, bool section_less_file,  bool suppress_error_msg)
+	: sections(8, 8)
 {
    supr_err=suppress_error_msg;
    if(section_less_file) {
-      sections.add(new Section(errstream, "[__NO_SEC__]", supr_err));
+      sections.add(new Section("[__NO_SEC__]", supr_err));
    }
    parse(filename, section_less_file);
 }
@@ -331,7 +391,9 @@ Profile::~Profile()
 	for(int i = sections.elements()-1; i >= 0; i--) {
 		Section *s = (Section *)sections.element_at(i);
 		if (!s->used) {
-			if(!supr_err) err << "Section [" << s->get_name() << "] not used (did you spell the name correctly?)" << std::endl;
+			if(!supr_err)
+				throw wexception("Section [%s] not used (did you spell the name correctly?)",
+				                 s->get_name());
       } else {
 			s->check_used();
       }
@@ -430,7 +492,7 @@ void Profile::parse(const char *filename, bool section_less_file )
 {
 	FILE *file = fopen(filename, "r");
 	if (!file && !supr_err)
-		err << "Couldn't open " << filename << std::endl;
+		throw wexception("Couldn't open %s.", filename);
 
    char line[1024];
    char *p;
@@ -447,11 +509,13 @@ void Profile::parse(const char *filename, bool section_less_file )
 
       if (p[0] == '[') {
          if(section_less_file) {
-            if(!supr_err) err << filename<<", line "<<linenr<<": Section "<<p<<" in sectionless file!" << std::endl;
+            if(!supr_err)
+					throw wexception("%s, line %i: Section %s in sectionless file!",
+					                 filename, linenr, p);
          } else {
             p++;
             setEndAt(p, ']');
-            s = new Section(err, p, supr_err);
+            s = new Section(p, supr_err);
             sections.add(s);
          }
       } else {
@@ -467,7 +531,9 @@ void Profile::parse(const char *filename, bool section_less_file )
                if (s) {
                   s->add_val(p, tail);
                } else {
-                  if(!supr_err) err << filename<<", line "<<linenr<<": key "<<p<<" outside section" << std::endl;
+                  if(!supr_err)
+							throw wexception("%s, line %i: key %s outside section",
+							                 filename, linenr, p);
                }
             } else {
                ((Section*) sections.element_at(0))->add_val(p, tail);
@@ -475,7 +541,8 @@ void Profile::parse(const char *filename, bool section_less_file )
             }
 
          } else {
-            if(!supr_err) err << filename<<", line "<<linenr<<": syntax error" << std::endl;
+            if(!supr_err)
+					throw wexception("%s, line %i: syntax error", filename, linenr);
          }
       }
    }
@@ -489,7 +556,7 @@ int main(int argc, char **argv)
 		return 3;
 	}
 
-	Profile p(cerr, argv[1]);
+	Profile p(argv[1]);
 	Section *s;
 
 	while((s = p.get_next_section("test"))) {

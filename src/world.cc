@@ -22,6 +22,26 @@
 #include "bob.h"
 #include "worlddata.h"
 #include "md5.h"
+#include "profile.h"
+
+
+static void sec_missing(const char *section)
+{
+	throw wexception("Section '%s' missing", section);
+}
+
+static void key_missing(const char *section, const char *key)
+{
+	throw wexception("Section %s: key '%s' missing", section, key);
+}
+
+void Resource_Descr::parse(Section *s)
+{
+	snprintf(name, sizeof(name), "%s", s->get_name());
+   minh = s->get_int("min_height", 0);
+   maxh = s->get_int("max_height", 255);
+   importance = s->get_int("importance", 0);
+}
 
 // 
 // class World
@@ -39,31 +59,16 @@ World::~World(void) {
 //
 void World::load_world(const char* name)
 {
-	char filename[256];
+	char directory[256];
 
 	try
 	{	
-		snprintf(filename, sizeof(filename), "worlds/%s.wwf", name);
-
-		FileRead f;
-		f.Open(g_fs, filename);
-
-		ChkSum chksum;
-		chksum.pass_data(f.Data(0,0), f.GetSize()-16); // don't chksum the chksum ;)
-		chksum.finish_chksum();
-
-		// read header, skip need list (this is already done)
-		parse_header(&f);
-		parse_resources(&f);
-		parse_terrains(&f);
-		parse_bobs(&f);
-
-		// checksum check 
-		uchar *sum=(uchar*)chksum.get_chksum();
-		uchar *sum_read = (uchar*)f.Data(16);
-
-		if (memcmp(sum, sum_read, 16))
-			throw wexception("Checksum failed");
+		snprintf(directory, sizeof(directory), "worlds/%s", name);
+		
+		parse_root_conf(directory, name);
+		parse_resources(directory);
+		parse_terrains(directory);
+		parse_bobs(directory);		
 	}
 	catch(std::exception &e)
 	{
@@ -77,115 +82,114 @@ void World::load_world(const char* name)
 // 
 
 //
-//function for loading the header of a worlds file
-//skips the provides list also
-void World::parse_header(FileRead* f)
+// read the <world-directory>/conf
+//
+void World::parse_root_conf(const char *directory, const char *name)
 {
-   // read magic
-   if(strcasecmp(f->CString(), "WLwf"))
-		throw wexception("Wrong header magic");
+	char fname[256];
+	
+	snprintf(fname, sizeof(fname), "%s/conf", directory);
 
-   // read version
-   ushort given_vers;
-   given_vers = f->Unsigned16();
-   if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLWF_VERSION) ||
-      (VERSION_MAJOR(given_vers)==VERSION_MAJOR(WLWF_VERSION) &&
-       VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLWF_VERSION)))
-		throw wexception("Unsupported version");
+	try
+	{	
+		Profile prof(fname);
+		Section* s;
+
+		s = prof.get_section("world");
+		if(!s)
+			sec_missing("world");
+
+		const char* str;
+
+		str = s->get_string("name", name);
+		snprintf(hd.name, sizeof(hd.name), "%s", str);
+
+		str = s->get_string("author", 0);
+		if(!str)
+			key_missing("world", "author");
+		snprintf(hd.author, sizeof(hd.author), "%s", str);
+
+		str = s->get_string("descr", 0);
+		if (!str)
+			key_missing("world", "descr");
+		snprintf(hd.descr, sizeof(hd.descr), "%s", str);
+	}
+	catch(std::exception &e) {
+		throw wexception("%s: %s", fname, e.what());
+	}
+}
+
+void World::parse_resources(const char *directory)
+{
+	char fname[256];
+	
+	snprintf(fname, sizeof(fname), "%s/resconf", directory);
+
+	try
+	{
+		Profile prof(fname);
+		Section* s;
+
+		while((s = prof.get_next_section(0))) {
+			Resource_Descr* r = new Resource_Descr();
+			try {
+				r->parse(s);
+				res.add(r);
+			} catch(...) {
+				delete r;
+				throw;
+			}
+		}
+	}
+	catch(std::exception &e) {
+		throw wexception("%s: %s", fname, e.what());
+	}
+}
+
+void World::parse_terrains(const char *directory)
+{
+	char fname[256];
+	
+	snprintf(fname, sizeof(fname), "%s/terrainconf", directory);
    
-   // read name, skip author and description
-   memcpy(hd.name, f->Data(sizeof(hd.name)), sizeof(hd.name));
-   memcpy(hd.author, f->Data(sizeof(hd.author)), sizeof(hd.author)); // author
-   memcpy(hd.descr, f->Data(1024), 1024); // description
+   Profile prof(fname);
+   Section* s;
 
-   // skip provides list
-   // read magic
-   if(strcasecmp(f->CString(), "ProvidesList"))
-		throw wexception("Wrong ProvidesList magic");
+	while((s = prof.get_next_section(0)))
+	{
+		Terrain_Descr *ter = new Terrain_Descr();
+		try {
+			ter->read(directory, s);
+			ters.add(ter);
+		} catch(...) {
+			delete ter;
+			throw;
+		}
+	}
+}
+
+void World::parse_bobs(const char *directory)
+{
+	char subdir[256];
+	filenameset_t dirs;
 	
-   ushort nprovides;
-   nprovides = f->Unsigned16();
-
-   uint i;
-   ushort is_a;
-   for(i=0; i<nprovides; i++) {
-      is_a = f->Unsigned16();
-      f->Data(30);
-   }
-}
-
-void World::parse_resources(FileRead* f)
-{
-   if(strcasecmp(f->CString(), "Resources"))
-		throw wexception("Wrong resources magic");
-
-   ushort nres;
-   nres = f->Unsigned16();
-
-   uint i;
-   Resource_Descr* r;
-   for(i=0; i<nres; i++) {
-      r=new Resource_Descr();
-      res.add(r);
-      r->read(f);
-   }
-}
-
-void World::parse_terrains(FileRead* f)
-{
-   if(strcasecmp(f->CString(), "Terrains"))
-		throw wexception("Wrong terrains magic");
-
-   ushort nters;
-   nters = f->Unsigned16();
-
-   uint i;
-   Terrain_Descr* t;
-   for(i=0; i<nters; i++) {
-      t=new Terrain_Descr();
-      ters.add(t);
-      t->read(f);
-   }
-}
-
-void World::parse_bobs(FileRead* f)
-{
-   if(strcasecmp(f->CString(), "Bobs"))
-		throw wexception("Wrong bobs magic");
-
-   ushort nbobs;
-   nbobs = f->Unsigned16();
+	snprintf(subdir, sizeof(subdir), "%s/bobs", directory);
 	
-   Logic_Bob_Descr* b;
-   uchar id;
-   uint i;
-
-   bobs.reserve(nbobs);
-
-   for(i=0; i<nbobs; i++) {
-      id = f->Unsigned8();
-
-      switch(id) {
-         case Logic_Bob_Descr::BOB_DIMINISHING:
-            b=new Diminishing_Bob_Descr();
-            break;
-               
-         case Logic_Bob_Descr::BOB_BORING:
-            b=new Boring_Bob_Descr();
-            break;
-         
-         case Logic_Bob_Descr::BOB_CRITTER:
-            b=new Critter_Bob_Descr();
-            break;
-
-         case Logic_Bob_Descr::BOB_GROWING:
-         default:
-				throw wexception("Unsupported BOB_GROWING");
-      }
-      assert(b);
-      bobs.add(b);
-      b->read(f);
-   }
+	g_fs->FindFiles(subdir, "*", &dirs);
+	
+	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+		cerr << "a bob in " << *it << endl;
+		
+		Logic_Bob_Descr *descr;
+		try {
+			descr = Logic_Bob_Descr::create_from_dir(it->c_str());
+		} catch(std::exception &e) {
+			cerr << *it << ": " << e.what() << " (garbage directory?)" << endl;
+			descr = 0;
+		}
+		if (descr)
+			bobs.add(descr);
+	}
 }
 
 // 
@@ -195,34 +199,142 @@ void World::parse_bobs(FileRead* f)
 // 
 // read a terrain description in
 // 
-void Terrain_Descr::read(FileRead* f)
+void Terrain_Descr::read(const char *directory, Section *s)
 {
-   // for the moment, we skip a lot of stuff, since it is not yet needed
-   memcpy(name, f->Data(30), 30);
-   is = f->Unsigned8();
-   
-   // skip def resource
-//   f->read(&def_res, sizeof(uchar));
-//   f->read(&def_stock, sizeof(ushort));
-   // skip maxh, minh
-//   f->read(&minh, sizeof(uchar));
-//   f->read(&maxh, sizeof(uchar));
-   f->Data(5);
-   
-   // skip resources
-   uchar nres;
-   nres = f->Unsigned8();
-   f->Data(nres);
-   
-   ntex = f->Unsigned16();
-   
-   uint i;
-   tex=new Pic*[ntex];
-   for(i=0; i<ntex; i++) {
-      tex[i]=new Pic();
-      
-		ushort *ptr = (ushort*)f->Data(sizeof(ushort)*TEXTURE_W*TEXTURE_H);
-      tex[i]->create(TEXTURE_W, TEXTURE_H, ptr);
-   }
+	const char *str;
+
+	snprintf(name, sizeof(name), "%s", s->get_name());
+
+	// TODO: Implement the following fields
+	// def_res = water|fish   (example)
+	str = s->get_string("def_res", 0);
+	if (str) {
+		// def_stock = 10  (count)
+		s->get_int("def_stock", 0);
+	}
+	s->get_string("resources");
+	
+   // switch is
+   str = s->get_string("is", 0);
+	if (!str)
+		key_missing(name, "is");
+
+   if(!strcasecmp(str, "dry")) {
+      is = TERRAIN_DRY;
+   } else if(!strcasecmp(str, "green")) {
+      is = 0;
+   } else if(!strcasecmp(str, "water")) {
+      is = TERRAIN_WATER|TERRAIN_DRY|TERRAIN_UNPASSABLE;
+   } else if(!strcasecmp(str, "acid")) {
+      is = TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE;
+   } else if(!strcasecmp(str, "mountain")) {
+      is = TERRAIN_DRY|TERRAIN_MOUNTAIN;
+   } else if(!strcasecmp(str, "dead")) {
+      is = TERRAIN_DRY|TERRAIN_UNPASSABLE|TERRAIN_ACID;
+   } else if(!strcasecmp(str, "unpassable")) {
+      is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
+   } else
+		throw wexception("%s: invalid type '%s'", name, str);
+
+   // Load texture image(s)
+	char fnametmpl[256];
+	char fname[256];
+	
+	str = s->get_string("texture", 0);
+	if (str)
+		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, str);
+	else
+		snprintf(fnametmpl, sizeof(fnametmpl), "%s/pics/%s_??.bmp", directory, name);
+
+	for(;;) {
+		int nr = ntex;
+		char *p;
+		
+		// create the file name by reverse-scanning for '?' and replacing
+		strcpy(fname, fnametmpl);
+		p = fname + strlen(fname);
+		while(p > fname) {
+			if (*--p != '?')
+				continue;
+			
+			*p = '0' + (nr % 10);
+			nr = nr / 10;
+		}
+		
+		if (nr) // cycled up to maximum possible frame number
+			break;
+		
+		// is the frame actually there?
+		if (!g_fs->FileExists(fname))
+			break;
+	
+		Pic* pic = new Pic();
+		if (pic->load(fname)) {
+			delete pic;
+			break;
+		}
+
+		if(pic->get_w() != TEXTURE_W && pic->get_h() != TEXTURE_H) {
+			delete pic;
+			throw wexception("%s: texture must be %ix%i pixels big", fname, TEXTURE_W, TEXTURE_H);
+		}
+		
+		ntex++;
+		tex = (Pic**)realloc(tex, sizeof(Pic*)*ntex);
+		tex[ntex-1] = pic;
+	}
 }
 
+/* "attic" -- re-add this in when it's needed
+   // parse resources
+   str=s->get_string("resources", 0);
+   if(str && strcasecmp("", str)) {
+      nres=1;
+      uint i=0;
+      while(i < strlen(str)) { if(str[i]==',') { nres++; }  i++; }
+
+      res=new uchar[nres];
+      char temp[200];
+      uint n=0;
+      uint cur_res=0;
+      i=0;
+      Resource_Descr* rtemp;
+      while(i<strlen(str)) {
+         temp[n]=str[i];
+         i++;
+         n++;
+         if(str[i]==',') {
+            temp[n]='\0';
+            n--;
+            while(temp[n] == ',' || temp[n]==' ' || temp[n]=='\t') temp[n--]='\0';
+            uint z=0;
+            while(temp[z] == ' ' || temp[z] == '\t') z++;
+            n=0;
+            i++;
+            rtemp=resf.exists(temp+z);
+            if(!rtemp) {
+               strcpy(err_sec,s->get_name());
+               strcpy(err_key,"resource");
+               strcpy(err_msg, temp+z);
+               strcat(err_msg,": Resource does not exist!");
+               return ERROR;  
+            } 
+            res[cur_res++]=resf.get_index(rtemp->get_name());
+         }
+      }
+      temp[n]='\0';
+      n--;
+      while(temp[n] == ',' || temp[n]==' ' || temp[n]=='\t') temp[n--]='\0';
+      uint z=0;
+      while(temp[z] == ' ' || temp[z] == '\t') z++;
+      rtemp=resf.exists(temp+z);
+      if(!rtemp) {
+         strcpy(err_sec,s->get_name());
+         strcpy(err_key,"resource");
+         strcpy(err_msg, temp+z);
+         strcat(err_msg,": Resource does not exist!");
+         return ERROR;  
+      } 
+      res[cur_res++]=resf.get_index(rtemp->get_name());
+   }
+*/

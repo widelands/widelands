@@ -187,6 +187,7 @@ bool Game::run(void)
 		map = new Map();
       if (RET_OK != map->load_map(m_mapname, this)) {
 			critical_error("Couldn't load map.");
+			m_state = gs_none;
 			return false;
 		}
 
@@ -257,7 +258,8 @@ void Game::warp_building(int x, int y, char owner, int idx)
 	assert(get_player(owner));
    
 	descr = get_player_tribe(owner)->get_building_descr(idx);
-   assert(descr);
+	if (!descr)
+		throw wexception("warp_building: no description for %i", idx);
 
  	obj = m_objects->create_object(this, descr, owner, x, y);
 }
@@ -274,6 +276,9 @@ void Game::create_bob(int x, int y, int idx)
 	Map_Object* obj;
 
 	descr = map->get_world()->get_bob_descr(idx);
+	if (!descr)
+		throw wexception("create_bob: no description for %i", idx);
+	
 	obj = m_objects->create_object(this, descr, -1, x, y);
 }
 

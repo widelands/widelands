@@ -230,47 +230,46 @@ int Map::load_map_header(const char* file)
  */
 int Map::load_map(const char* file, Game* g)
 {
-   int ret;
+	try
+	{
+		if(!strcasecmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+		{
+			// It ends like a wide lands map file. try to load
+			// it as such
+			//ret = load_wlmf(file, g);
+			throw wexception("WLMF not supported");
+		}
+		else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+		{
+			// it is a S2 Map file. load it as such
+			load_s2mf(file, g);
+		}
+		else
+			throw wexception("Unknown map file format");
 
-   if(!strcasecmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
-   {
-      // It ends like a wide lands map file. try to load
-      // it as such
-      //ret = load_wlmf(file, g);
+		// Post process the map in the necessary two passes
+		Field *f;
+		uint y;
+		for(y=0; y<hd.height; y++) {
+			for(uint x=0; x<hd.width; x++) {
+				f = get_field(x, y);
+				recalc_brightness(x, y, f);
+				recalc_fieldcaps_pass1(x, y, f);
+			}
+		}
+
+		for(y=0; y<hd.height; y++) {
+			for(uint x=0; x<hd.width; x++) {
+				f = get_field(x, y);
+				recalc_fieldcaps_pass2(x, y, f);
+			}
+		}
+	}
+	catch(std::exception &e) {
+		cerr << "Error loading map " << file << ": " << e.what() << endl;
 		return ERR_FAILED;
-   }
-   else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
-   {
-		// it is a S2 Map file. load it as such
-      ret = load_s2mf(file, g);
-   }
-   else
-   {
-      assert(0);
-      return ERR_FAILED;
-   }
-
-   if (ret != RET_OK)
-      return ret;
-
-   // Post process the map in the necessary two passes
-	Field *f;
-	uint y;
-   for(y=0; y<hd.height; y++) {
-      for(uint x=0; x<hd.width; x++) {
-			f = get_field(x, y);
-         recalc_brightness(x, y, f);
-			recalc_fieldcaps_pass1(x, y, f);
-		}
 	}
-
-   for(y=0; y<hd.height; y++) {
-      for(uint x=0; x<hd.width; x++) {
-			f = get_field(x, y);
-			recalc_fieldcaps_pass2(x, y, f);
-		}
-	}
-
+	
    return RET_OK;
 }
 
