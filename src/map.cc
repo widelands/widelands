@@ -898,13 +898,13 @@ int Map::calc_distance(Coords a, Coords b)
 		{
 			int dx1 = lx - b.x;
 			int dx2 = b.x - (rx - m_width);
-			dist += std::min(dx1, dx2);
+			dist += min(dx1, dx2);
 		}
 		else if (b.x > rx)
 		{
 			int dx1 = b.x - rx;
 			int dx2 = (lx + m_width) - b.x;
-			dist += std::min(dx1, dx2);
+			dist += min(dx1, dx2);
 		}
 	}
 	else
@@ -914,7 +914,7 @@ int Map::calc_distance(Coords a, Coords b)
 		{
 			int dx1 = b.x - rx;
 			int dx2 = lx - b.x;
-			dist += std::min(dx1, dx2);
+			dist += min(dx1, dx2);
 		}
 	}
 	
