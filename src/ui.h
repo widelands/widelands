@@ -23,13 +23,68 @@
 #include "graphic.h"
 #include "singleton.h"
 
+/** class Button
+ *
+ * This defines a button.
+ *
+ * Depends: g_gr
+ * 			class Graph::Pic
+ * 			class Font_Handler
+ */
+#define BUTTON_EDGE_BRIGHT_FACTOR 60 
+class Button {
+		  Button(const Button&);
+		  Button& operator=(const Button&);
+
+		  public:
+					 Button(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const unsigned int, Pic*, const unsigned int,
+										  const unsigned int);
+					 ~Button();
+
+					 void set_text(const char*) ;
+					 void set_pic(Pic*);
+					 void draw();
+
+					 /** static void Button::set_bg(Pic* p, unsigned int n) 
+					  *
+					  * This function associates the picture with a background
+					  *
+					  * Args: p		picture to associate
+					  * 		 n 	number of bg to associate p with
+					  * Returns: Nothing
+					  */
+					 static void set_bg(Pic* p, unsigned int n) { 
+								assert(n<3); 
+								if(n==0) bg0=*p; 
+								if(n==1) bg1=*p;
+								if(n==2) bg2=*p;
+					 }
+
+					 /** static unsigned int Button::get_border(void) 
+					  *
+					  * Returns the width of the borders in pixel
+					  *
+					  * Args: none
+					  * Returns: width in pixel of button borders
+					  */
+					 static unsigned int get_border(void) { return 4; }
+					 
+		  private:
+					 bool bpressed;
+					 static Pic bg0, bg1, bg2;
+					 unsigned int x, y, w, h, xp, yp;
+					 Pic* mybg;
+					 Pic* dp;
+					 Pic* myp;
+};
 
 /** class Textarea 
  *
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
  *
- * Depends: class Graph::Pic
+ * Depends: g_gr
+ * 			class Graph::Pic
  * 			class Font_Handler
  */
 class Textarea {
@@ -69,12 +124,6 @@ class Textarea {
 					 Pic* dp;
 };
 
-// widht/height the graphs above must have
-#define MUST_HAVE_NPIX	100
-// width/height to use as the corner
-#define CORNER			20
-#define MIDDLE			(MUST_HAVE_NPIX-(CORNER*2))
-
 /** class Window
  *
  * This class offers a window. Should't be user directly
@@ -96,6 +145,13 @@ class Textarea {
  * 			Initalized g_gr object
  * 			User_Interface
  */
+
+// widht/height the graphs above must have
+#define MUST_HAVE_NPIX	100
+// width/height to use as the corner
+#define CORNER			20
+#define MIDDLE			(MUST_HAVE_NPIX-(CORNER*2))
+
 class Window {
 		  // Copy is non trivial and shouldn't be needed
 		  Window(const Window&);
@@ -146,6 +202,8 @@ class Window {
 					 // creation functions
 					 Textarea* create_textarea(const unsigned int, const unsigned int, const unsigned int, const Textarea::Align = Textarea::LEFTA);
 					 Textarea* create_textarea(const unsigned int, const unsigned int, const char* ,  Textarea::Align = Textarea::LEFTA);
+					 Button*   create_button(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const unsigned int);
+
 					 //					 void set_closefunc(...)
 
 
@@ -166,10 +224,11 @@ class Window {
 					 // for textareas
 					 unsigned int nta;
 					 Textarea** ta;
-					 
-					 // common
-					 unsigned int subids;
-					 
+					
+					 // for buttons
+					 unsigned int nbut;
+					 Button** but;
+
 					 //closefunc dfkj;
 					 static Pic l_border;
 					 static Pic r_border;

@@ -31,6 +31,7 @@
 
 namespace Graph {
 
+		 
 		  /** inline unsigned short Graph::pack_rgb(const unsigned char r, const unsigned char g, const unsigned char b);
 			* 
 			* This functions packs a RGB tribble into a short
@@ -60,6 +61,23 @@ namespace Graph {
 					 *b= (clr<<3);
 		  }
 
+		  /** inline unsigned short Graph::bright_up_clr(const unsigned short clr, const unsigned short factor)
+			*
+			* This function brights a clr up.
+			*
+			* Args:	clr to bright up
+			* 			factor	by how much
+			* Returns: Brighter color
+			*/
+		  inline unsigned short bright_up_clr(const unsigned short clr, const unsigned short factor) {
+					 static unsigned char r, g, b;
+					 unpack_rgb(clr, &r, &g, &b);
+					 r= ((char) r+factor) > 255 ? 255 : r+factor;
+					 g= ((char) g+factor) > 255 ? 255 : g+factor;
+					 b= ((char) b+factor) > 255 ? 255 : b+factor;
+					 return pack_rgb(r, g, b);
+		  }
+		 
 		  
 		  /** class Pic
 			* 

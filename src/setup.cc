@@ -93,6 +93,23 @@ void setup_ui(void) {
 		  bmp.load(buf);
 //		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_bg(&bmp);
+
+		  // Button class
+		  buf=g_fileloc.locate_file("but0.bmp", TYPE_PIC);
+		  assert(buf);
+		  bmp.load(buf);
+		  Button::set_bg(&bmp, 0);
+
+		  buf=g_fileloc.locate_file("but1.bmp", TYPE_PIC);
+		  assert(buf);
+		  bmp.load(buf);
+		  Button::set_bg(&bmp, 1);
+
+		  buf=g_fileloc.locate_file("but2.bmp", TYPE_PIC);
+		  assert(buf);
+		  bmp.load(buf);
+		  Button::set_bg(&bmp, 2);
+
 }
 
 /** void setup_searchpaths(void) 

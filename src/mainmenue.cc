@@ -84,7 +84,10 @@ void main_menue(void) {
 		  strcat(buf, VERSION);
 		  win->create_textarea(640, 480, buf, Textarea::RIGHTA);
 		  win->create_textarea(0, 480, "(C) 2002 by the Widelands Development Team"); 
-		  
+
+		  Button* b;
+		  b=win->create_button(0, 0, 75, 75, 1);
+
 		  // Register the resposible mouse funtions
 		  g_ip.register_mcf(click, Input::BUT1);
 		  g_ip.register_mcf(mcf1, Input::BUT2);
