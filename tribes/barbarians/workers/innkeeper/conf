@@ -6,7 +6,7 @@ menu_pic=menu.png
 
 [buildcost]
 carrier=1
-kitchenset=1
+kitchen_tools=1
 
 # The normal idle animation (non-directional)
 [idle]
