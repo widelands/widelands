@@ -100,6 +100,13 @@ in this function
 */
 void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 {
+   // TEMP DEBUG TODO fps counter
+   static long start_fps_counter=Sys_GetTime();
+   static long cur_fps_counter=start_fps_counter;
+   static long framecount=0;
+   static Pic* framecount_pic=g_fh.get_string("0 fps", 0);
+   
+   
 	// Prepare an improved bitmap which we can draw into without using ofsx/ofsy
 	int effvpx = vpx;
 	int effvpy = vpy;
@@ -126,6 +133,19 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 	sprintf(buf, "%i %i", fsel.x, fsel.y);
 	Pic *p = g_fh.get_string(buf, 0);
 	copy_pic(bmp, p, ofsx+5, ofsy+5, 0, 0, p->get_w(), p->get_h());
+
+   // debug show fps
+   ++framecount;
+   cur_fps_counter=Sys_GetTime();
+   if(cur_fps_counter-start_fps_counter > 1000) {
+      // one second has passed
+      delete framecount_pic;
+      sprintf(buf, "%li fps", framecount);
+      framecount_pic=g_fh.get_string(buf, 0);
+      framecount=0;
+      start_fps_counter=cur_fps_counter;
+   }
+   copy_pic(bmp, framecount_pic, ofsx+p->get_w()+25, ofsy+5, 0, 0, framecount_pic->get_w(), framecount_pic->get_h());
 	delete p;
 }
 

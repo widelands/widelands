@@ -64,10 +64,10 @@ class Immovable;
  *
  * a field like it is represented in the game
  */
-#define FIELD_WIDTH 58
-#define FIELD_HEIGHT 58
-//#define FIELD_WIDTH   58
-//#define FIELD_HEIGHT  58
+//#define FIELD_WIDTH 58
+//#define FIELD_HEIGHT 58
+#define FIELD_WIDTH   64
+#define FIELD_HEIGHT  64
 #define HEIGHT_FACTOR 5
 
 struct ImmovableFound {
