@@ -17,11 +17,6 @@
  *
  */
 
-#if 0
-
-********* CURRENTLY DISABLED
-
-
 /*
 Texture implementation and terrain rendering for the 32-bit software renderer.
 */
@@ -1004,6 +999,3 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 
 
 } // namespace Renderer_Software32
-
-#endif
-

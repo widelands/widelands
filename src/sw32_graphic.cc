@@ -20,12 +20,6 @@
 Management classes and functions of the 32-bit software renderer.
 */
 
-#if 0
-
-
-******THIS IS CURRENTLY DISABLED ******
-
-
 #include <SDL_image.h>
 #include <string>
 #include "bob.h"
@@ -38,6 +32,7 @@ Management classes and functions of the 32-bit software renderer.
 #include "sw32_graphic.h"
 #include "tribe.h"
 #include "wexception.h"
+#include "overlay_manager.h"
 
 #ifdef OPENGL_MODE
   #include <GL/gl.h>
@@ -513,80 +508,40 @@ Draw build help (buildings and roads) and the field sel
 ===============
 */
 static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
-                 FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr, bool draw_fsel)
+                 FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr)
 {
-	int mapwidth = mri->egbase->get_map()->get_width();
-	uchar overlay_basic = mri->overlay_basic[fc.y*mapwidth + fc.x];
-	int icon;
-	uint picid;
-	int w, h;
-
 	// Render frontier
-	if (overlay_basic > Overlay_Frontier_Base && overlay_basic <= Overlay_Frontier_Max)
-	{
-		Player *ownerplayer = mri->egbase->get_player(overlay_basic - Overlay_Frontier_Base);
-		uint anim = ownerplayer->get_tribe()->get_frontier_anim();
-		const RGBColor* playercolors = ownerplayer->get_playercolor();
-		uchar ovln;
+   uchar player;
+   if((player=mri->egbase->get_map()->get_overlay_manager()->is_frontier_field(fc))) {
+      Player *ownerplayer = mri->egbase->get_player(player); 
+      uint anim = ownerplayer->get_tribe()->get_frontier_anim();
+      const RGBColor* playercolors = ownerplayer->get_playercolor();
 
-		dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
+      dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
 
-		// check to the right
-		ovln = mri->overlay_basic[fcr.y*mapwidth + fcr.x];
-		if (ovln == overlay_basic)
-			dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
+      // check to the right
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc)) 
+         dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
+      // check to the bottom left 
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc)) 
+         dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
+      // check to the bottom right
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl)) 
+         dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
+   }
+   
+	// Draw normal buildhelp 
+   Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_FIELD];
+   int num_overlays=mri->egbase->get_map()->get_overlay_manager()->get_overlays(fc, overlay_info);
 
-		// check to the bottom left
-		ovln = mri->overlay_basic[fcbl.y*mapwidth + fcbl.x];
-		if (ovln == overlay_basic)
-			dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
+   int i;
+   for(i=0; i<num_overlays; i++) {
+      int x = pos.x - overlay_info[i].hotspot_x;
+      int y = pos.y - overlay_info[i].hotspot_y;
 
-		// check to the bottom right
-		ovln = mri->overlay_basic[fcbr.y*mapwidth + fcbr.x];
-		if (ovln == overlay_basic)
-			dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
-	}
-
-	// Draw normal buildhelp
-	if (mri->show_buildhelp && overlay_basic >= Overlay_Build_Min &&
-	    overlay_basic <= Overlay_Build_Max) {
-		int x, y;
-
-		icon = overlay_basic - Overlay_Build_Min;
-		picid = get_graphicimpl()->get_gameicons()->pics_build[icon];
-
-		g_gr->get_picture_size(picid, &w, &h);
-
-		x = pos.x - (w>>1);
-		if (overlay_basic == Overlay_Build_Flag)
-			y = pos.y - h;
-		else
-			y = pos.y - (h>>1);
-
-		dst->blit(x, y, picid);
-	}
-
-	// Draw road build help
-	uchar roads = mri->overlay_roads[fc.y*mapwidth + fc.x];
-
-	icon = (roads >> Road_Build_Shift) & 3;
-
-	if (icon) {
-		picid = get_graphicimpl()->get_gameicons()->pics_roadb[icon-1];
-		g_gr->get_picture_size(picid, &w, &h);
-
-		dst->blit(pos.x - (w/2), pos.y - (h/2), picid);
-	}
-
-	// Draw the fsel last
-   if (draw_fsel) {
-      picid = mri->fsel;
-      g_gr->get_picture_size(picid, &w, &h);
-
-      dst->blit(pos.x - (w>>1), pos.y - (h>>1), picid);
+      dst->blit(x,y,overlay_info[i].picid);
    }
 }
-
 
 /*
 ===============
@@ -630,12 +585,10 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	maxfy = (viewofs.y + dst.h) / (FIELD_HEIGHT>>1);
 	maxfx += 1; // because of big buildings
 	maxfy += 10; // necessary because of heights
-   minfx -= mri->fieldsel_radius; // to make fieldsel work properly. better than having if()s in every loop
-   minfy -= mri->fieldsel_radius;
 
 	//log("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
-	int dx = maxfx - minfx + mri->fieldsel_radius + 1;
-	int dy = maxfy - minfy + mri->fieldsel_radius + 1;
+	int dx = maxfx - minfx + 1;
+	int dy = maxfy - minfy + 1;
    int linear_fy = minfy;
 
 	while(dy--) {
@@ -683,7 +636,6 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 			int rposx, brposx, lposx, trposx;
 			bool render_r=true;
 			bool render_b=true;
-         bool draw_fsel=false;
 
 			map->get_rn(f, &r);
 			rposx = posx + FIELD_WIDTH;
@@ -710,14 +662,10 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 				}
 			}
 
-         // Would this be a field where a fsel should be?
-			if (map->calc_distance(f, mri->fieldsel) <= mri->fieldsel_radius)
-				draw_fsel = true;
-
 			// Render stuff that belongs to ground triangles
 			uchar roads = f.field->get_roads();
 
-			roads |= mri->overlay_roads[f.y*mapwidth + f.x];
+			roads |= mri->egbase->get_map()->get_overlay_manager()->get_road_overlay(f);
 
 			dst.draw_field(f.field, r.field, bl.field, br.field, l.field, tr.field,
 					posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
@@ -750,8 +698,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
             draw_overlays(this, mri, f, wh_pos,
                   r, Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(r.field->get_height())),
                   bl, Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(bl.field->get_height())),
-                  br, Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(br.field->get_height())),
-                  draw_fsel);
+                  br, Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(br.field->get_height())));
          }
 
 
@@ -1681,5 +1628,3 @@ Graphic* SW32_CreateGraphics(int w, int h, bool fullscreen)
 {
 	return new Renderer_Software32::GraphicImpl(w, h, fullscreen);
 }
-
-#endif

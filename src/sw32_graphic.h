@@ -17,11 +17,6 @@
  *
  */
 
-
-#if 0
-
-************ CURRENTLY DISABLED **************
-
 #ifndef included_sw32_graphic_h
 #define included_sw32_graphic_h
 
@@ -310,5 +305,3 @@ private:
 }
 
 #endif // included_sw32_graphic_h
-
-#endif
