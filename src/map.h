@@ -64,11 +64,19 @@ class Immovable;
  *
  * a field like it is represented in the game
  */
+
+// !!!!!!!!!!! remember to change the MULTIPLY_WITH_* macros below too !!!!!!!!!!!!!!!!
 //#define FIELD_WIDTH 58
 //#define FIELD_HEIGHT 58
 #define FIELD_WIDTH   64
 #define FIELD_HEIGHT  64
 #define HEIGHT_FACTOR 5
+// those are really just fast, if num is not a complex think, like
+// calling a function or so
+#define MULTIPLY_WITH_HEIGHT_FACTOR(num) ( ((num)<<2)+(num) )
+#define MULTIPLY_WITH_FIELD_WIDTH(num) ( ((num)<<6) )  
+#define MULTIPLY_WITH_HALF_FIELD_HEIGHT(num) ( ((num)<<5) )  // it's nearly never needed to use FIELD_HEIGHT in multiplys, only FIELD_HEIGHT/2
+
 
 struct ImmovableFound {
 	BaseImmovable	*object;
@@ -631,8 +639,8 @@ inline void Map::get_brn(const FCoords f, FCoords * const o)
  */
 inline void Map::get_basepix(const Coords fc, int *px, int *py)
 {
-	*py = fc.y * (FIELD_HEIGHT>>1);
-	*px = fc.x * FIELD_WIDTH;
+	*py = MULTIPLY_WITH_HALF_FIELD_HEIGHT(fc.y);
+	*px = MULTIPLY_WITH_FIELD_WIDTH(fc.x);
 	if (fc.y & 1)
 		*px += FIELD_WIDTH>>1;
 }
@@ -645,7 +653,7 @@ inline void Map::get_basepix(const int fx, const int fy, int *px, int *py)
 inline void Map::get_pix(const Coords fc, Field * const f, int *px, int *py)
 {
 	get_basepix(fc, px, py);
-	*py -= f->get_height() * HEIGHT_FACTOR;
+	*py -= MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height());
 }
 
 inline void Map::get_pix(const int fx, const int fy, Field * const f, int *px, int *py)

@@ -60,48 +60,12 @@ inline void unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b)
    *b= (clr<<3);
 }
 
-/** inline ushort bright_up_clr(const ushort clr, const ushort factor)
- *
- * This function brights a clr up.
- *
- * Args:	clr to bright up
- * 			factor	by how much
- * Returns: Brighter color
- */
-inline ushort bright_up_clr(const ushort clr, const ushort factor)
-{
-   uchar r, g, b;
-   r= ((clr<<3)>>11);
-   g= ((clr<<2)>>5);
-   b= (clr<<3);
-   r= ((long) r+factor) > 255 ? 255 : r+factor;
-   g= ((long) g+factor) > 255 ? 255 : g+factor;
-   b= ((long) b+factor) > 255 ? 255 : b+factor;
-   return pack_rgb(r, g, b);
-}
-
-#if 1
-// the voodoo version..., rev 2.
-// why use goto?
-inline uint bright_up_clr2(uint clr, int factor)
-{
-   int r = ((clr >> 11) << 3);
-   int g = ((clr >> 5)  << 2) & 0xFF;
-   int b = ((clr)       << 3) & 0xFF;
-
-   r += factor;
-   if (r & 0xFF00) r = (~r) >> 24;
-   g += factor;
-   if (g & 0xFF00) g = (~g) >> 24;
-   b += factor;
-   if (b & 0xFF00) b = (~b) >> 24;
-   return pack_rgb(r, g, b);
-}
-#elif 1
 // the voodoo version...
 // it's quite a bit faster than the original on my CPU
-inline uint bright_up_clr2(uint clr, int factor)
+inline ushort bright_up_clr(ushort clr, int factor)
 {
+   if(!factor) return clr;
+   
    int r = ((clr >> 11) << 3);
    int g = ((clr >> 5)  << 2) & 0xFF;
    int b = ((clr)       << 3) & 0xFF;
@@ -122,36 +86,6 @@ fix_b: b = (~b) >> 24;
 end:
        return pack_rgb(r, g, b);
 }
-#else
-inline uint bright_up_clr2(uint clr, int factor)
-{
-   if (factor == 0)
-      return clr;
-   int r = ((clr >> 11) << 3);
-   int g = ((clr >> 5)  << 2) & 0xFF;
-   int b = ((clr)       << 3) & 0xFF;
-
-   if (factor > 0)
-   {
-      r += factor;
-      if (r > 255) r = 255;
-      g += factor;
-      if (g > 255) g = 255;
-      b += factor;
-      if (b > 255) b = 255;
-   }
-   else
-   {
-      r += factor;
-      if (r < 0) r = 0;
-      g += factor;
-      if (g < 0) g = 0;
-      b += factor;
-      if (b < 0) b = 0;
-   }
-   return pack_rgb(r, g, b);
-}
-#endif
 
 /** class Point
 */
@@ -167,6 +101,16 @@ struct Point
    {
       x = px; y = py;
    }
+};
+
+/** class Point_with_bright
+ * this class is like a point, but with additional bright factor
+ * bright is an int to make it possible to directly save shifted values (8.8 fixed or so)
+ */
+struct Point_with_bright : public Point {
+   int b;
+   Point_with_bright() : Point(0,0) { b=0; }
+   Point_with_bright(int px, int py, int pb) : Point(px, py) { b=pb; }
 };
 
 // hm, floats...
@@ -320,7 +264,7 @@ extern Graphic *g_graphic;
 #define g_gr (*g_graphic)
 
 
-void render_triangle(Bitmap *dst, Point* points, int *brightness, Pic* texture, int vpx, int vpy);
+void render_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bright* second, Point_with_bright* third, Pic* texture, int vpx, int vpy);
 void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color);
 void render_road_vert(Bitmap *dst, Point start, Point end, ushort color);
 void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,

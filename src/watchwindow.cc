@@ -62,8 +62,8 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 	mapview->fieldclicked.set(parent, &Interactive_Player::field_action);
 
 	// only an approximation (odd rows shifted), but so what
-	int vx = fx * FIELD_WIDTH;
-	int vy = fy * (FIELD_HEIGHT>>1);
+	int vx = MULTIPLY_WITH_FIELD_WIDTH(fx); 
+	int vy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(fy);
 	mapview->set_viewpoint(vx - w/2, vy - h/2);
 
 	// don't cache: animations will always enforce redraw

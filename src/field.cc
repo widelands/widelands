@@ -54,16 +54,16 @@ static float calc_brightness(int l, int r, int tl, int tr, int bl, int br)
 #pragma warning(disable:4244)
 #endif
 		  normal = Vector(0, 0, FIELD_WIDTH);
-		  normal.x -= l * HEIGHT_FACTOR;
-		  normal.x += r * HEIGHT_FACTOR;
-		  normal.x -= (float)(tl * HEIGHT_FACTOR) * COS60;
-		  normal.y -= (float)(tl * HEIGHT_FACTOR) * SIN60;
-		  normal.x += (float)(tr * HEIGHT_FACTOR) * COS60;
-		  normal.y -= (float)(tr * HEIGHT_FACTOR) * SIN60;
-		  normal.x -= (float)(bl * HEIGHT_FACTOR) * COS60;
-		  normal.y += (float)(bl * HEIGHT_FACTOR) * SIN60;
-		  normal.x += (float)(br * HEIGHT_FACTOR) * COS60;
-		  normal.y += (float)(br * HEIGHT_FACTOR) * SIN60;
+		  normal.x -= MULTIPLY_WITH_HEIGHT_FACTOR(l); 
+		  normal.x += MULTIPLY_WITH_HEIGHT_FACTOR(r);
+		  normal.x -= (float)(MULTIPLY_WITH_HEIGHT_FACTOR(tl)) * COS60;
+		  normal.y -= (float)(MULTIPLY_WITH_HEIGHT_FACTOR(tl)) * SIN60;
+		  normal.x += (float)(MULTIPLY_WITH_HEIGHT_FACTOR(tr)) * COS60;
+		  normal.y -= (float)(MULTIPLY_WITH_HEIGHT_FACTOR(tr)) * SIN60;
+		  normal.x -= (float)(MULTIPLY_WITH_HEIGHT_FACTOR(bl)) * COS60;
+		  normal.y += (float)(MULTIPLY_WITH_HEIGHT_FACTOR(bl)) * SIN60;
+		  normal.x += (float)(MULTIPLY_WITH_HEIGHT_FACTOR(br)) * COS60;
+		  normal.y += (float)(MULTIPLY_WITH_HEIGHT_FACTOR(br)) * SIN60;
 		  normal.normalize();
 #ifdef _MSC_VER
 #pragma warning(default:4244)

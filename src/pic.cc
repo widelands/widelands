@@ -80,7 +80,7 @@ void Bitmap::brighten_rect(uint rx, uint ry, uint rw, uint rh, int factor)
    {
       uint p = y * pitch + rx;
       for (uint x=rx; x<rw; x++)
-         pixels[p++]= bright_up_clr2(pixels[p], factor);
+         pixels[p++]= bright_up_clr(pixels[p], factor);
    }
 }
 

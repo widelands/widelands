@@ -105,7 +105,8 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
    static long cur_fps_counter=start_fps_counter;
    static long framecount=0;
    static Pic* framecount_pic=g_fh.get_string("0 fps", 0);
-   
+   static float fps_average=0;
+   static int fps_av_count=0;
    
 	// Prepare an improved bitmap which we can draw into without using ofsx/ofsy
 	int effvpx = vpx;
@@ -125,11 +126,11 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
    	dst.fill_rect(0, 0, dst.get_w(), dst.get_h(), pack_rgb(0,0,0));
 	}
 
-	draw_ground(&dst, effvpx, effvpy, use_see_area);
+ 	draw_ground(&dst, effvpx, effvpy, use_see_area);
 
 	// debug: show fsel coordinates
 	Coords fsel = m_player->get_fieldsel();
-	char buf[16];
+	char buf[100];
 	sprintf(buf, "%i %i", fsel.x, fsel.y);
 	Pic *p = g_fh.get_string(buf, 0);
 	copy_pic(bmp, p, ofsx+5, ofsy+5, 0, 0, p->get_w(), p->get_h());
@@ -138,9 +139,13 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
    ++framecount;
    cur_fps_counter=Sys_GetTime();
    if(cur_fps_counter-start_fps_counter > 1000) {
+      float fps= (((float)framecount*1000)/(float)(cur_fps_counter-start_fps_counter));
+      fps_av_count++;
+      fps_average+=fps;
+         
       // one second has passed
       delete framecount_pic;
-      sprintf(buf, "%li fps", framecount);
+      sprintf(buf, "%4f fps (av: %4f fps)", fps, fps_average/(float)fps_av_count );
       framecount_pic=g_fh.get_string(buf, 0);
       framecount=0;
       start_fps_counter=cur_fps_counter;
@@ -275,57 +280,57 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
 				
 					if(f_tl->get_owned_by() != f->get_owned_by()) {
 						copy_animation_pic(dst, frontier, 0, 
-								tlposx, tposy - f_tl->get_height()*HEIGHT_FACTOR, playercolors);
+								tlposx, tposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_tl->get_height()), playercolors);
 						// left to top-left
 						if(f_l->get_owned_by() != f->get_owned_by()) {
 							copy_animation_pic(dst,  frontier, 0, 
-									(lposx+tlposx)>>1, ((posy - f_l->get_height()*HEIGHT_FACTOR)+(tposy - f_tl->get_height()*HEIGHT_FACTOR))>>1,
-									playercolors);
+									(lposx+tlposx)>>1, ((posy - MULTIPLY_WITH_HEIGHT_FACTOR(f_l->get_height()))+
+                                               (tposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_tl->get_height())))>>1, playercolors);
 						}
 						// top-left to top-right
 						if(f_tr->get_owned_by() != f->get_owned_by()) {
 							copy_animation_pic(dst, frontier, 0,
-									(tlposx+trposx)>>1, ((tposy - f_tl->get_height()*HEIGHT_FACTOR)+(tposy - f_tr->get_height()*HEIGHT_FACTOR))>>1,
-									playercolors);
+									(tlposx+trposx)>>1, ((tposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_tl->get_height()))+
+                                                (tposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_tr->get_height())))>>1, playercolors);
 						}
 					}
 					if(f_br->get_owned_by() != f->get_owned_by()) {
 						copy_animation_pic(dst,  frontier, 0, 
-								brposx, bposy - f_br->get_height()*HEIGHT_FACTOR, playercolors);
+								brposx, bposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_br->get_height()), playercolors);
 						// bottom-right to right
 						if(f_r->get_owned_by() != f->get_owned_by()) {
 							copy_animation_pic(dst, frontier, 0,
-									(brposx+rposx)>>1, ((bposy - f_br->get_height()*HEIGHT_FACTOR)+(posy - f_r->get_height()*HEIGHT_FACTOR))>>1,
-									playercolors);
+									(brposx+rposx)>>1, ((bposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_br->get_height()))+
+                                               (posy - MULTIPLY_WITH_HEIGHT_FACTOR(f_r->get_height())))>>1,	playercolors);
 						}
 						// bottom-left to bottom-left
 						if(f_bl->get_owned_by() != f->get_owned_by()) {
 							copy_animation_pic(dst, frontier, 0,
-									(brposx+blposx)>>1, ((bposy - f_br->get_height()*HEIGHT_FACTOR)+(bposy - f_bl->get_height()*HEIGHT_FACTOR))>>1,
-									playercolors);
+									(brposx+blposx)>>1, ((bposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_br->get_height()))+
+                                                (bposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_bl->get_height())))>>1,	playercolors);
 						}
 					}
 					// right to top-right
 					if(f_tr->get_owned_by() != f->get_owned_by() &&
 							f_r->get_owned_by() != f->get_owned_by()) {
 						copy_animation_pic(dst,  frontier, 0, 
-								rposx, posy - f_r->get_height()*HEIGHT_FACTOR, playercolors);
+								rposx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f_r->get_height()), playercolors);
 						copy_animation_pic(dst,  frontier, 0, 
-								trposx, tposy - f_tr->get_height()*HEIGHT_FACTOR, playercolors);
+								trposx, tposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_tr->get_height()), playercolors);
 						copy_animation_pic(dst, frontier, 0,
-								(trposx+rposx)>>1, ((tposy - f_tr->get_height()*HEIGHT_FACTOR)+(posy - f_r->get_height()*HEIGHT_FACTOR))>>1,
-								playercolors);
+								(trposx+rposx)>>1, ((tposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_tr->get_height()))+
+                                            (posy - MULTIPLY_WITH_HEIGHT_FACTOR(f_r->get_height())))>>1, playercolors);
 					}
 					// left to bottom-left
 					if(f_l->get_owned_by() != f->get_owned_by() &&
 							f_bl->get_owned_by() != f->get_owned_by()) {
 						copy_animation_pic(dst,  frontier, 0, 
-								lposx, posy - f_l->get_height()*HEIGHT_FACTOR, playercolors);
+								lposx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f_l->get_height()), playercolors);
 						copy_animation_pic(dst,  frontier, 0, 
-								blposx, bposy - f_bl->get_height()*HEIGHT_FACTOR, playercolors);
+								blposx, bposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_bl->get_height()), playercolors);
 						copy_animation_pic(dst, frontier, 0,
-								(blposx+lposx)>>1, ((bposy - f_bl->get_height()*HEIGHT_FACTOR)+(posy - f_l->get_height()*HEIGHT_FACTOR))>>1,
-								playercolors);
+								(blposx+lposx)>>1, ((bposy - MULTIPLY_WITH_HEIGHT_FACTOR(f_bl->get_height()))+
+                                            (posy - MULTIPLY_WITH_HEIGHT_FACTOR(f_l->get_height())))>>1, playercolors);
 					}
 				}
 
@@ -337,7 +342,7 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
 				// are there any overdraw issues with the current rendering order?
 
 				// Draw Map_Objects hooked to this field
-				int realy = posy - f->get_height()*HEIGHT_FACTOR;
+				int realy = posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height());
 				BaseImmovable *imm = f->get_immovable();
 				
 				if (imm)
@@ -385,46 +390,29 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
            const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, 
 			  uchar roads, bool render_r, bool render_b)
 {
-	// points are ordered: right, left, bottom-right, bottom-left
+   // points are ordered: right, left, bottom-right, bottom-left
 	// note that as long as render_triangle messes with the arrays, we need to
 	// copy them to a safe place first
-	Point p[4];
-	int b[4];
+	Point_with_bright r, l, br, bl;
 
-	p[0] = Point(rposx, posy - rf->get_height()*HEIGHT_FACTOR);
-	p[1] = Point(posx, posy - f->get_height()*HEIGHT_FACTOR);
-	p[2] = Point(rblposx, blposy - rfl->get_height()*HEIGHT_FACTOR);
-	p[3] = Point(blposx, blposy - fl->get_height()*HEIGHT_FACTOR);
-
-	if ((p[2].y < 0 && p[3].y < 0) ||
-	    (p[0].y >= (int)dst->get_h() && p[1].y >= (int)dst->get_h()))
-		return;
-
-	b[0] = rf->get_brightness();
-	b[1] = f->get_brightness();
-	b[2] = rfl->get_brightness();
-	b[3] = fl->get_brightness();
+	r= Point_with_bright(rposx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(rf->get_height()), rf->get_brightness());
+	l = Point_with_bright(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()), f->get_brightness());
+	br = Point_with_bright(rblposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(rfl->get_height()), rfl->get_brightness());
+	bl = Point_with_bright(blposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(fl->get_height()), fl->get_brightness());
 
 /*
-	b[0] += 20; // debug override for shading (make field borders visible)
-	b[3] -= 20;
+	r.b += 20; // debug override for shading (make field borders visible)
+	bl.b -= 20;
 */
 
 	// Render right triangle
-	Point ptmp[3];
-	int btmp[3];
-
    if(render_r) {
-		memcpy(ptmp, p, sizeof(Point)*3);
-		memcpy(btmp, b, sizeof(int)*3);
-      render_triangle(dst, ptmp, btmp, f->get_terr()->get_texture(), vpx, vpy);
+      render_triangle(dst, &r, &l, &br, f->get_terr()->get_texture(), vpx, vpy);
 	}
 
 	// Render bottom triangle
    if(render_b) {
-		memcpy(ptmp, p+1, sizeof(Point)*3);
-		memcpy(btmp, b+1, sizeof(int)*3);
-      render_triangle(dst, ptmp, btmp, f->get_terd()->get_texture(), vpx, vpy);
+      render_triangle(dst, &l, &br, &bl, f->get_terd()->get_texture(), vpx, vpy);
 	}
 	
 	// Render roads
@@ -439,7 +427,7 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 			color = pack_rgb(96, 96, 96);
 		else
 			color = pack_rgb(0, 0, 128);
-		render_road_horiz(dst, p[1], p[0], color);
+		render_road_horiz(dst, l, r, color);
 	}
 	
 	road = (roads >> Road_SouthEast) & Road_Mask;
@@ -450,7 +438,7 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 			color = pack_rgb(96, 96, 96);
 		else
 			color = pack_rgb(0, 0, 128);
-		render_road_vert(dst, p[1], p[2], color);
+		render_road_vert(dst, l, br, color);
 	}
 	
 	road = (roads >> Road_SouthWest) & Road_Mask;
@@ -461,7 +449,7 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 			color = pack_rgb(96, 96, 96);
 		else
 			color = pack_rgb(0, 0, 128);
-		render_road_vert(dst, p[1], p[3], color);
+		render_road_vert(dst, l, bl, color);
 	}
 }
 
@@ -475,7 +463,7 @@ Note: this is only called for visible fields.
 */
 void Map_View::draw_overlay(Bitmap *dst, FCoords coords, int posx, int posy)
 {
-	posy -= coords.field->get_height() * HEIGHT_FACTOR;
+	posy -= MULTIPLY_WITH_HEIGHT_FACTOR(coords.field->get_height()); 
 
 	// Render buildhelp. 
 	// Note: this could also go before rendering bobs, since this shouldn't interfere with non moving bobs
@@ -634,10 +622,10 @@ void Map_View::set_viewpoint(int x, int y)
 		return;
 
 	vpx=x; vpy=y;
-	while(vpx>(int)(FIELD_WIDTH*m_map->get_width()))			vpx-=(FIELD_WIDTH*m_map->get_width());
-	while(vpy>(int)((FIELD_HEIGHT*m_map->get_height())>>1))	vpy-=(FIELD_HEIGHT*m_map->get_height())>>1;
-	while(vpx< 0)  vpx+=(FIELD_WIDTH*m_map->get_width());
-	while(vpy< 0)  vpy+=(FIELD_HEIGHT*m_map->get_height())>>1;
+	while(vpx>(int)(MULTIPLY_WITH_FIELD_WIDTH(m_map->get_width())))			vpx-=(MULTIPLY_WITH_FIELD_WIDTH(m_map->get_width()));
+	while(vpy>(int)(MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_map->get_height())))	vpy-=MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_map->get_height());
+	while(vpx< 0)  vpx+=MULTIPLY_WITH_FIELD_WIDTH(m_map->get_width());
+	while(vpy< 0)  vpy+=MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_map->get_height());
 
 	warpview.call(vpx, vpy);
 }
@@ -721,8 +709,8 @@ void Map_View::track_fsel(int mx, int my)
 	// Now, fsel point to where we'd be if the field's height was 0.
 	// We now recursively move towards the correct field. Because height cannot
 	// be negative, we only need to consider the bottom-left or bottom-right neighbour
-	int mapheight = m_map->get_height()*(FIELD_HEIGHT>>1);
-	int mapwidth = m_map->get_width()*FIELD_WIDTH;
+	int mapheight = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_map->get_height());
+	int mapwidth = MULTIPLY_WITH_FIELD_WIDTH(m_map->get_width());
 	Field *f;
 	int fscrx, fscry;
 

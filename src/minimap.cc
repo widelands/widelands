@@ -129,7 +129,7 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 		{
          if (!use_see_area || player->is_field_seen(x, y)) {
 				clr = *f->get_terd()->get_texture()->get_pixels();
-				clr = bright_up_clr2(clr, f->get_brightness());
+				clr = bright_up_clr(clr, f->get_brightness());
          
             *pix++ = clr;
          } else {
@@ -156,7 +156,7 @@ bool MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
 	if (down) {
 		// make sure x/y is within range
 		if (x >= 0 && x < (int)m_map->get_width() && y > 0 && y < (int)m_map->get_height())
-			warpview.call(x * FIELD_WIDTH, y * (FIELD_HEIGHT>>1));
+			warpview.call(MULTIPLY_WITH_FIELD_WIDTH(x), MULTIPLY_WITH_HALF_FIELD_HEIGHT(y));
 	}
 
 	return true;

@@ -600,8 +600,8 @@ void Bob::draw(Game *game, Bitmap* dst, int posx, int posy)
 	}
 
 	if (start.field) {
-		sy += end.field->get_height()*HEIGHT_FACTOR;
-		sy -= start.field->get_height()*HEIGHT_FACTOR;
+		sy += MULTIPLY_WITH_HEIGHT_FACTOR(end.field->get_height());
+		sy -= MULTIPLY_WITH_HEIGHT_FACTOR(start.field->get_height()); 
 
 		float f = (float)(game->get_gametime() - m_walkstart) / (m_walkend - m_walkstart);
 		if (f < 0) f = 0;

@@ -61,120 +61,157 @@ struct _go
    int b; // 16.16 fixed point
 };
 
-int make_triangle_lines(Point* points, int* bright, _go* starts, _go* ends)
+// render_triangle for gouraud shading
+void render_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bright* second, Point_with_bright* third, Pic* texture, int vpx, int vpy)
 {
-	int ydiff1 = points[1].y - points[0].y;
-	int ydiff2 = points[2].y - points[0].y;
-	int ydiff3 = points[2].y - points[1].y;
-	int xdiff1 = points[1].x - points[0].x;
-	int xdiff2 = points[2].x - points[0].x;
-	int xdiff3 = points[2].x - points[1].x;
-	int bdiff1 = bright[1] - bright[0];
-	int bdiff2 = bright[2] - bright[0];
-	int bdiff3 = bright[2] - bright[1];
+   if (first->y > second->y)
+   {
+      swap<Point_with_bright*>(first, second);
+   }
+   if (second->y > third->y)
+   {
+      swap<Point_with_bright*>(second, third);
+   }
+   if (first->y > second->y)
+   {
+      swap<Point_with_bright*>(first, second);
+   }
+   
+   int ydiff2_0 = third->y - first->y;
+   
+   if (!ydiff2_0) 
+      return;
+   
+   int ydiff1_0 = second->y - first->y;
+   int ydiff2_1 = third->y - second->y;
+   int xdiff1_0 = second->x - first->x;
+   int xdiff2_0 = third->x - first->x;
+   int xdiff2_1 = third->x - second->x;
+   int bdiff1_0 = second->b - first->b;
+   int bdiff2_0 = third->b - first->b;
+   int bdiff2_1 = third->b - second->b;
 
-	if (!ydiff2)
-		// triangle has height 0
-		return 0;
 
-	// calculate x for line b at height of point B
-	int midx = points[0].x + (xdiff2 * ydiff1) / ydiff2;
-	// is B left from b?
-	if (points[1].x < midx)
-		// arrays have to be swapped
-		swap<_go*>(starts, ends);
-
-   int y;
    int xd1 = 0, xd2 = 0, xd3 = 0;
    int bd1 = 0, bd2 = 0, bd3 = 0;
+   int xd1_add= ydiff1_0 ? (xdiff1_0<<8)/ydiff1_0 : 0;
+   int bd1_add= ydiff1_0 ? (bdiff1_0<<8)/ydiff1_0 : 0;
+   int xd2_add= ydiff2_0 ? (xdiff2_0<<8)/ydiff2_0 : 0;
+   int bd2_add= ydiff2_0 ? (bdiff2_0<<8)/ydiff2_0 : 0;
+   
    // upper part of triangle
-   for (y=0; y<ydiff1; y++)
-   {
-      starts[y].x = points[0].x + xd2 / ydiff2;
-      starts[y].b = bright[0] + bd2 / ydiff2;
-      ends[y].x = points[0].x + xd1 / ydiff1;
-      ends[y].b = bright[0] + bd1 / ydiff1;
-      xd1 += xdiff1;
-      xd2 += xdiff2;
-      bd1 += bdiff1;
-      bd2 += bdiff2;
+   int xstart, bstart, bstop, xstop;
+   long xdiff, bdiff, bd; // known to be 4 bytes
+   int b, x;
+   ushort* pix;
+   int onscreen_y=(first->y)+1;
+   while(onscreen_y<=(first->y + ydiff1_0)) {
+      if(onscreen_y>=(int)dst->get_h()) {
+         // we're already outside the screen
+         return;
+      } 
+      if(onscreen_y<0) goto go_on1;
+
+      xstart=first->x + (xd2>>8);
+      xstop=first->x + (xd1>>8);
+
+      bstart=(first->b<<8) + (bd2);
+      bstop=(first->b<<8) + (bd1);
+      
+      if(xstart>xstop) {
+         swap<int>(xstart,xstop);
+         swap<int>(bstart,bstop);
+      }
+      // since our scanline algorythm is flawed, we add 1 to xstop, xdiff is therefore always >0. 
+      ++xstop;
+
+      // xdiff is always > 0
+      xdiff=xstop-xstart;
+
+      // bdiff is not always positiv
+      bdiff = bstop-bstart; 
+
+      b = bstart;
+      bd = bdiff / xdiff;
+
+      pix = dst->get_pixels() + (onscreen_y)*dst->get_pitch() + xstart;
+      x=xstart;
+      while(x!=xstop) {
+         //     cerr << x << ":" << xstart << ":" << xstop << ":" << xdiff << ":" << add << endl;
+         if(x<0) goto go_onx1;
+         if(x>=(int)dst->get_w()) goto go_onx1;
+         *pix = bright_up_clr(*texture->get_pixels(), (b>>8));
+go_onx1:
+         ++pix;
+         ++x; 
+         b+=bd;
+      } 
+      
+go_on1:
+      xd1 += xd1_add;
+      xd2 += xd2_add;
+      bd1 += bd1_add;
+      bd2 += bd2_add;
+      ++onscreen_y;
    }
+
    // lower part
-   for (y=ydiff1; y<ydiff2; y++)
-   {
-      starts[y].x = points[0].x + xd2 / ydiff2;
-      starts[y].b = bright[0] + bd2 / ydiff2;
-      ends[y].x = points[1].x + xd3 / ydiff3;
-      ends[y].b = bright[1] + bd3 / ydiff3;
-      xd2 += xdiff2;
-      xd3 += xdiff3;
-      bd2 += bdiff2;
-      bd3 += bdiff3;
-   }
-   return ydiff2;
-}
+   int xd3_add= ydiff2_1 ? (xdiff2_1<<8)/ydiff2_1 : 0;
+   int bd3_add= ydiff2_1 ? (bdiff2_1<<8)/ydiff2_1 : 0;
+   while(onscreen_y<=(first->y + ydiff2_0)) {
+      if(onscreen_y>=(int)dst->get_h()) {
+         // we're already outside the screen
+         return;
+      } 
+      if(onscreen_y<0) goto go_on2;
 
-// render_triangle for gouraud shading
-void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture, int vpx, int vpy)
-{
-   if (points[0].y > points[1].y)
-   {
-      swap<Point>(points[0], points[1]);
-      swap<int>(bright[0], bright[1]);
-   }
-   if (points[1].y > points[2].y)
-   {
-      swap<Point>(points[1], points[2]);
-      swap<int>(bright[1], bright[2]);
-   }
-   if (points[0].y > points[1].y)
-   {
-      swap<Point>(points[0], points[1]);
-      swap<int>(bright[0], bright[1]);
-   }
+      xstart=first->x + (xd2>>8);
+      xstop=second->x + (xd3>>8);
 
-   _go starts[200];		// FEAR!!
-   _go ends[200];			// don't use to high triangles
-   bright[0] <<= 16; // convert to 16.16 fixed point
-   bright[1] <<= 16;
-   bright[2] <<= 16;
+      bstart=(first->b<<8) + (bd2);
+      bstop=(second->b<<8) + (bd3);
 
-   int ymax = make_triangle_lines(points, bright, starts, ends);
-   int ystart = points[0].y < 0 ? -points[0].y : 0;
-   ymax = ymax + points[0].y <= (int)dst->get_h() ? ymax : dst->get_h()-points[0].y;
-   for (int y=ystart; y<ymax; y++)
-   {
-      if (starts[y].x >= (int)dst->get_w())
-         continue;
-      if (ends[y].x < 0)
-         continue;
-
-      int xdiff = ends[y].x - starts[y].x;
-      if (!xdiff)
-         xdiff = 1;
-      int bdiff = ends[y].b - starts[y].b;
-      int b = starts[y].b;
-      int bd = bdiff / xdiff;
-
-      int end = ends[y].x < (int)dst->get_w() ? ends[y].x : dst->get_w()-1;
-      int start = starts[y].x;
-      if (start < 0) {
-         b -= bd * start;
-         start = 0;
+      if(xstart>xstop) {
+         swap<int>(xstart,xstop);
+         swap<int>(bstart,bstop);
       }
+      
+      // since our scanline algorythm is flawed, we add 1 to xstop. 
+      ++xstop;
 
-      ushort *pix = dst->get_pixels() + (points[0].y + y)*dst->get_pitch() + start;
+      // xdiff is always > 0
+      xdiff=xstop-xstart;
 
-		int txend = end + vpx;
-      float per_pixel_slope=(bd>>16)/5; // 5 == HEIGHT_FACTOR
-      for(int tx = start + vpx; tx <= txend; tx++)
-      {
-         //*pix++ = pack_rgb((b >> 16) + 128, (b >> 16) + 128, (b >> 16) + 128); // shading test
-         ushort *texp = texture->get_pixels() + ((int)((points[0].y + y+vpy-(((starts[y].b>>16)/5)+(per_pixel_slope)*(tx-(start+vpx))))) % texture->get_h())*texture->get_w() + (tx & (TEXTURE_W-1));
-         *pix++ = bright_up_clr2(*texp, b >> 16);
-         b += bd;
-      }
+      // bdiff is not always positiv
+      bdiff = bstop-bstart; 
+      b = bstart;
+      bd = bdiff / xdiff ;
+
+      pix = dst->get_pixels() + (onscreen_y)*dst->get_pitch() + xstart;
+      x=xstart;
+      while(x!=xstop) {
+         //  cerr << x << ":" << xstart << ":" << xstop << ":" << xdiff << ":" << add << endl;
+         if(x<0) goto go_onx2;
+         if(x>=(int)dst->get_w()) goto go_onx2;
+         *pix = bright_up_clr(*texture->get_pixels(), b>>8);
+go_onx2:
+         ++pix;
+         ++x; 
+         b+=bd;
+      } 
+      
+go_on2:
+      xd2 += xd2_add;
+      xd3 += xd3_add;
+      bd2 += bd2_add;
+      bd3 += bd3_add;
+      ++onscreen_y;
    }
+
+   /* no need to convert back, since light is not used again
+   first->b >>= 8; // convert back 
+   second->b >>= 8;
+   third->b >>= 8;*/
 }
 
 /*

@@ -290,16 +290,16 @@ void Interactive_Player::minimap_btn()
  */
 void Interactive_Player::move_view_to(int fx, int fy)
 {
-	int x = fx * FIELD_WIDTH;
-	int y = fy * (FIELD_HEIGHT/2);
+	int x = MULTIPLY_WITH_FIELD_WIDTH(fx);
+	int y = MULTIPLY_WITH_HALF_FIELD_HEIGHT(fy);
 
 	if (m_minimap.window)
 		((MiniMap *)m_minimap.window)->set_view_pos(x, y);
 	
 	x -= main_mapview->get_w()>>1;
-	if (x < 0) x += m_game->get_map()->get_width() * FIELD_WIDTH;
+	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_game->get_map()->get_width());
 	y -= main_mapview->get_h()>>1;
-	if (y < 0) y += m_game->get_map()->get_height() * (FIELD_HEIGHT>>1);
+	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_game->get_map()->get_height());
 	main_mapview->set_viewpoint(x, y);
 }
 
@@ -408,8 +408,8 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 void Interactive_Player::mainview_move(int x, int y)
 {
 	if (m_minimap.window) {
-		int maxx = m_game->get_map()->get_width() * FIELD_WIDTH;
-		int maxy = m_game->get_map()->get_height() * (FIELD_HEIGHT>>1);
+		int maxx = MULTIPLY_WITH_FIELD_WIDTH(m_game->get_map()->get_width());
+		int maxy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_game->get_map()->get_height());
 
 		x += main_mapview->get_w()>>1;
 		if (x >= maxx) x -= maxx;
@@ -428,9 +428,9 @@ void Interactive_Player::mainview_move(int x, int y)
 void Interactive_Player::minimap_warp(int x, int y)
 {
 	x -= main_mapview->get_w()>>1;
-	if (x < 0) x += m_game->get_map()->get_width() * FIELD_WIDTH;
+	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_game->get_map()->get_width());
 	y -= main_mapview->get_h()>>1;
-	if (y < 0) y += m_game->get_map()->get_height() * (FIELD_HEIGHT>>1);
+	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_game->get_map()->get_height());
 	main_mapview->set_viewpoint(x, y);
 }
 
