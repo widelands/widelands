@@ -147,7 +147,7 @@ void g_main(int argc, char** argv)
 }
 
 // ** unix, win32 console *****************************************************
-#if !defined(WIN32) || (defined(WIN32) && defined(_CONSOLE))
+#if !defined(WIN32) || (defined(WIN32) && defined(_CONSOLE)) || (defined(WIN32) && defined(__GNUC__))
 
 int main(int argc, char** argv)
 {
