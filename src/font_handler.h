@@ -20,9 +20,7 @@
 #ifndef __S__FONT_HANDLER_H
 #define __S__FONT_HANDLER_H
 
-#include <vector>
 #include <list>
-#include <queue>
 #include <SDL_ttf.h>
 #include "font_loader.h"
 
@@ -75,7 +73,6 @@ public:
 
 private:
    struct _Cache_Infos {
-      uint referenced;
       uint surface_id;
       std::string str;
       TTF_Font* f;
@@ -90,9 +87,6 @@ private:
                fg == who.fg &&
                bg == who.bg);
       }
-      inline bool operator< (const _Cache_Infos& who) const {
-         return ( referenced > who.referenced) ;
-      }
 	};
 
  
@@ -100,7 +94,7 @@ private:
    static const uint CACHE_ARRAY_SIZE = 500;
 
 	Font_Loader* m_font_loader;
-   std::vector<_Cache_Infos> m_cache;
+	std::list<_Cache_Infos> m_cache;
 	
 private:
    uint render_string(RenderTarget* dst, TTF_Font *f, RGBColor fg, RGBColor bg, int dstx, int dsty, std::string &text, Align align, int w, int h);

@@ -75,7 +75,6 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
 
    // look if text is cached
     _Cache_Infos  ci = {
-         0, 
          0,
          text,
          f,
@@ -85,43 +84,41 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
          0,
       };
 	
-      uint i;
-      bool cached = false;
-      for( i = 0; i < m_cache.size(); i++) {
-         if( m_cache[i] == ci ) {  cached = true; break; }
-      }
-      _Cache_Infos* pci = &ci;
-      if( cached )  {
+	std::list<_Cache_Infos>::iterator i=find(m_cache.begin(), m_cache.end(), ci);
+      
+      if (i!=m_cache.end())  {
          // Ok, it is cached, blit it and done
-         pci = &m_cache[i];
-         do_blit(dst,pci->surface_id,dstx,dsty,align,pci->w,pci->h);
-         
-         pci->referenced++;
+         do_blit(dst,i->surface_id,dstx,dsty,align,i->w,i->h);
+	 
+	if (i!=m_cache.begin()) {
+		m_cache.push_front (*i);
+		m_cache.erase (i);
+	}
+	 
          return;
       }
 
       // Not cached, we need to create this string
       if( wrap > 0 ) {
          // Assume Multiline 
-         pci->surface_id = create_static_long_text_surface(dst, f, fg, bg, text, align, wrap);
+         ci.surface_id = create_static_long_text_surface(dst, f, fg, bg, text, align, wrap);
       } else {
          // Singleline
-         pci->surface_id = create_single_line_text_surface(dst, f, fg, bg, text, align);
+         ci.surface_id = create_single_line_text_surface(dst, f, fg, bg, text, align);
       }
 
       // Now cache it
-      g_gr->get_picture_size( pci->surface_id, &pci->w, &pci->h);
-      pci->f = f;
-      m_cache.push_back( ci );
-      std::sort<std::vector<_Cache_Infos>::iterator>(m_cache.begin(), m_cache.end());
+      g_gr->get_picture_size( ci.surface_id, &ci.w, &ci.h);
+      ci.f = f;
+      m_cache.push_front (ci);
+
       while( m_cache.size() > CACHE_ARRAY_SIZE) {
-         int idx = m_cache.size()-1;
-         g_gr->free_surface(m_cache[idx].surface_id);
-         m_cache.resize( idx );
+         g_gr->free_surface(m_cache.back().surface_id);
+         m_cache.pop_back();
       }
  
       // Finally, blit it
-      do_blit(dst,pci->surface_id,dstx,dsty,align,pci->w,pci->h);
+      do_blit(dst,ci.surface_id,dstx,dsty,align,ci.w,ci.h);
 }
          
 /*
@@ -261,10 +258,10 @@ uint Font_Handler::convert_sdl_surface( SDL_Surface* surface ) {
  * Flushes the cached picture ids
  */
 void Font_Handler::flush_cache( void ) {
-   for( uint i = 0; i < m_cache.size(); i++) {
-      g_gr->free_surface( m_cache[i].surface_id );
-   }
-   m_cache.resize( 0 );
+	while (!m_cache.empty()) {
+		g_gr->free_surface (m_cache.front().surface_id);
+		m_cache.pop_front();
+	}
 }
 
 std::string Font_Handler::word_wrap_text(TTF_Font* f, const std::string &unwrapped_text, int max_width) {
