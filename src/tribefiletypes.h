@@ -82,6 +82,7 @@ struct CreatureDesc
 
 struct Ware
 {
+	char name[16];
 	uint pic;
 	uint menupic;
 };
