@@ -32,7 +32,7 @@
 class CheckStepRoadAI : public CheckStep {
 public:
 	CheckStepRoadAI(Player* pl, uchar mc, bool oe)
-		: player(pl), movecaps(movecaps), openend(oe)
+		: player(pl), movecaps(mc), openend(oe)
 	{ }
 	
 	void set_openend (bool oe)
@@ -41,7 +41,7 @@ public:
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
-private:
+//private:
 	Player*		player;
 	uchar		movecaps;
 	bool		openend;
@@ -56,12 +56,24 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 	player = g->get_player(player_number);
 	tribe = player->get_tribe();
 	
-	log ("new Comp_Player for player %d\n", pid);
+	log ("ComputerPlayer(%d): initializing\n", player_number);
+	
+	wares=new WareObserver[tribe->get_nrwares()];
+	for (int i=0; i<tribe->get_nrwares(); i++) {
+	    wares[i].producers=0;
+	    wares[i].consumers=0;
+	    wares[i].preciousness=0;
+	}
+	
+	wares[tribe->get_safe_ware_index("trunk")].preciousness=4;
+	wares[tribe->get_safe_ware_index("raw_stone")].preciousness=3;
+	wares[tribe->get_safe_ware_index("grindstone")].preciousness=2;
+	wares[tribe->get_safe_ware_index("blackwood")].preciousness=1;
 
 	// collect information about which buildings our tribe can construct
 	for (int i=0; i<tribe->get_nrbuildings();i++) {
 		Building_Descr* bld=tribe->get_building_descr(i);
-		log ("\tcan build '%s', id is %d\n",bld->get_name(),i);
+		log ("ComputerPlayer(%d): I can build '%s', id is %d\n",player_number,bld->get_name(),i);
 		
 		buildings.push_back (BuildingObserver());
 		
@@ -72,6 +84,7 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 		bo.type=BuildingObserver::BORING;
 		bo.cnt_built=0;
 		bo.cnt_under_construction=0;
+		bo.production_hint=-1;
 		
 		bo.is_buildable=bld->get_buildable();
 		
@@ -84,6 +97,9 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 
 		if (!strcmp(bld->get_name(), "lumberjack"))
 		    bo.need_trees=true;
+		
+		if (!strcmp(bld->get_name(), "ranger"))
+		    bo.production_hint=tribe->get_safe_ware_index("trunk");
 		
 		if (typeid(*bld)==typeid(ConstructionSite_Descr)) {
 			bo.type=BuildingObserver::CONSTRUCTIONSITE;
@@ -98,11 +114,15 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 		if (typeid(*bld)==typeid(ProductionSite_Descr)) {
 		    ProductionSite_Descr* prod=static_cast<ProductionSite_Descr*>(bld);
 		    
-		    bo.type=BuildingObserver::PRODUCTIONSITE;
+		    bo.type=bld->get_ismine()
+				?BuildingObserver::MINE
+				:BuildingObserver::PRODUCTIONSITE;
 		    
-		    std::set<std::string>::iterator j;
-		    for (j=prod->get_outputs()->begin();j!=prod->get_outputs()->end();j++)
-			bo.outputs.push_back (tribe->get_ware_index(j->c_str()));
+		    for (std::vector<Input>::const_iterator j=prod->get_inputs()->begin();j!=prod->get_inputs()->end();j++)
+			bo.inputs.push_back (tribe->get_safe_ware_index(j->get_ware()->get_name()));
+
+		    for (std::set<std::string>::const_iterator j=prod->get_outputs()->begin();j!=prod->get_outputs()->end();j++)
+			bo.outputs.push_back (tribe->get_safe_ware_index(j->c_str()));
 
 		    continue;
 		}
@@ -110,6 +130,7 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 	
 	total_constructionsites=0;
 	next_construction_due=0;
+	next_productionsite_check_due=0;
 	inhibit_road_building=0;
 }
 
@@ -134,14 +155,14 @@ void Computer_Player::think ()
 	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end();) {
 		// check whether we lost ownership of the field
 		if (i->field->get_owned_by()!=player_number) {
-			log ("AI player %d lost field (%d,%d)\n", player_number, i->x, i->y);
+			log ("ComputerPlayer(%d): lost field (%d,%d)\n", player_number, i->x, i->y);
 			i=buildable_fields.erase(i);
 			continue;
 		}
 		
 		// check whether we can still build on the field
 		if ((player->get_buildcaps(*i) & BUILDCAPS_SIZEMASK)==0) {
-			log ("Field (%d,%d) can no longer be built upon\n", i->x, i->y);
+			log ("ComputerPlayer(%d): field (%d,%d) can no longer be built upon\n", player_number, i->x, i->y);
 			unusable_fields.push_back (*i);
 			i=buildable_fields.erase(i);
 			continue;
@@ -162,14 +183,14 @@ void Computer_Player::think ()
 	for (std::list<FCoords>::iterator i=unusable_fields.begin(); i!=unusable_fields.end();) {
 		// check whether we lost ownership of the field
 		if (i->field->get_owned_by()!=player_number) {
-			log ("AI player %d lost field (%d,%d)\n", player_number, i->x, i->y);
+			log ("ComputerPlayer(%d): lost field (%d,%d)\n", player_number, i->x, i->y);
 			i=unusable_fields.erase(i);
 			continue;
 		}
 
 		// check whether building capabilities have improved
 		if ((player->get_buildcaps(*i) & BUILDCAPS_SIZEMASK) != 0) {
-			log ("Field (%d,%d) can now be built upon\n", i->x, i->y);
+			log ("ComputerPlayer(%d): field (%d,%d) can now be built upon\n", player_number, i->x, i->y);
 			buildable_fields.push_back (*i);
 			i=unusable_fields.erase(i);
 
@@ -186,12 +207,22 @@ void Computer_Player::think ()
 	
 	// now build something if possible
 	if (next_construction_due<=game->get_gametime()) {
-	    next_construction_due=game->get_gametime() + 1500;
-	
+	    next_construction_due=game->get_gametime() + 2000;
+	    
 	    if (construct_building()) {
-		inhibit_road_building=game->get_gametime() + 2000;
+		inhibit_road_building=game->get_gametime() + 2500;
 		return;
 	    }
+	}
+	
+	// verify that our production sites are doing well
+	if (next_productionsite_check_due<=game->get_gametime() && !productionsites.empty()) {
+	    next_productionsite_check_due=game->get_gametime() + 2000;
+	    
+	    check_productionsite (productionsites.front());
+	    
+	    productionsites.push_back (productionsites.front());
+	    productionsites.pop_front ();
 	}
 	
 	// if nothing else is to do, update flags and economies
@@ -199,17 +230,17 @@ void Computer_Player::think ()
 		Flag* flag=new_flags.front();
 		new_flags.pop_front();
 		
-		get_economy_observer(flag->get_economy()).flags.push_back (flag);
+		get_economy_observer(flag->get_economy())->flags.push_back (flag);
 	}
 	
-	for (std::list<EconomyObserver>::iterator i=economies.begin(); i!=economies.end();) {
+	for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end();) {
 		// check if any flag has changed its economy
-		for (std::list<Flag*>::iterator j=i->flags.begin(); j!=i->flags.end();) {
-			if (i->economy!=(*j)->get_economy()) {
-				log ("Flag at (%d,%d) changed economy\n", (*j)->get_position().x, (*j)->get_position().y);
+		for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end();) {
+			if ((*i)->economy!=(*j)->get_economy()) {
+				log ("ComputerPlayer(%d): flag at (%d,%d) changed economy\n", player_number, (*j)->get_position().x, (*j)->get_position().y);
 				
-				get_economy_observer((*j)->get_economy()).flags.push_back (*j);
-				j=i->flags.erase(j);
+				get_economy_observer((*j)->get_economy())->flags.push_back (*j);
+				j=(*i)->flags.erase(j);
 				continue;
 			}
 			
@@ -217,30 +248,37 @@ void Computer_Player::think ()
 		}
 		
 		// if there are no more flags in this economy, we no longer need its observer
-		if (i->flags.empty()) {
+		if ((*i)->flags.empty()) {
+			delete *i;
 			i=economies.erase(i);
 			continue;
 		}
 		
+		i++;
+	}
+		
+	if (!economies.empty() && inhibit_road_building<=game->get_gametime()) {
+		EconomyObserver* eco=economies.front();
+		
 		bool finish=false;
 		
-		if (inhibit_road_building<=game->get_gametime()) {
-		    // try to connect to another economy
-		    if (economies.size()>1)
-			finish=connect_flag_to_another_economy(i->flags.front());
+		// try to connect to another economy
+    		if (economies.size()>1)
+		    finish=connect_flag_to_another_economy(eco->flags.front());
 		
-		    if (!finish)
-			finish=improve_roads(i->flags.front());
-		}
+		if (!finish)
+		    finish=improve_roads(eco->flags.front());
 
 		// cycle through flags one at a time
-		i->flags.push_back (i->flags.front());
-		i->flags.pop_front ();
+		eco->flags.push_back (eco->flags.front());
+		eco->flags.pop_front ();
+		
+		// and cycle through economies
+		economies.push_back (eco);
+		economies.pop_front();
 		
 		if (finish)
 		    return;
-		
-		i++;
 	}
 	
 	// force a split on roads that are extremely long
@@ -278,9 +316,8 @@ void Computer_Player::think ()
 bool Computer_Player::construct_building ()
 {
 	int spots_avail[4];
-	int i;
 	
-	for (i=0;i<4;i++)
+	for (int i=0;i<4;i++)
 		spots_avail[i]=0;
 	
 	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++)
@@ -319,15 +356,44 @@ bool Computer_Player::construct_building ()
 		    
 		    prio=0;
 		    
-		    if (j->type==BuildingObserver::MILITARYSITE)
+		    if (j->type==BuildingObserver::MILITARYSITE) {
 			    prio=(i->unowned_land_nearby - i->military_influence*2) * expand_factor / 4;
+
+			    if (i->avoid_military)
+				prio=prio/3 - 6;
+		    }
 
 		    if (j->type==BuildingObserver::PRODUCTIONSITE) {
 			    if (j->need_trees)
-				    prio+=i->trees_nearby - 8*i->tree_consumers_nearby;
+				    prio+=i->trees_nearby - 6*i->tree_consumers_nearby - 2;
 
 			    if (j->need_stones)
-				    prio+=i->stones_nearby - 8*i->stone_consumers_nearby;
+				    prio+=i->stones_nearby - 6*i->stone_consumers_nearby - 2;
+
+			    if (!j->need_trees && !j->need_stones) {
+				for (unsigned int k=0; k<j->inputs.size(); k++) {
+				    prio+=6*wares[j->inputs[k]].producers;
+				    prio-=4*wares[j->inputs[k]].consumers;
+				}
+
+				for (unsigned int k=0; k<j->outputs.size(); k++) {
+				    prio-=6*wares[j->outputs[k]].producers;
+				    prio+=4*wares[j->outputs[k]].consumers;
+				    prio+=2*wares[j->outputs[k]].preciousness;
+				    
+				    if (j->cnt_built+j->cnt_under_construction==0 &&
+					wares[j->outputs[k]].consumers>0)
+					prio+=8; // add a big bonus
+				}
+				
+				if (j->production_hint>=0) {
+				    prio-=6*(j->cnt_built+j->cnt_under_construction);
+				    prio+=4*wares[j->production_hint].consumers;
+				    prio+=2*wares[j->production_hint].preciousness;
+				}
+			    }
+
+			    prio-=2*j->cnt_under_construction*(j->cnt_under_construction+1);
 		    }
 
 		    if (i->preferred)
@@ -336,7 +402,7 @@ bool Computer_Player::construct_building ()
 			prio--;
 
 		    // don't waste good land for small huts
-		    prio-=(maxsize - j->desc->get_size()) * 6;
+		    prio-=(maxsize - j->desc->get_size()) * 3;
 		    
 		    // don't have too many construction sites
 		    prio-=total_constructionsites*total_constructionsites;
@@ -361,13 +427,38 @@ bool Computer_Player::construct_building ()
 	return false;
 }
 
+void Computer_Player::check_productionsite (ProductionSiteObserver& site)
+{
+	log ("ComputerPlayer(%d): checking %s\n", player_number, site.bo->desc->get_name());
+	
+	if (site.bo->need_trees &&
+	    map->find_immovables(site.site->get_position(), 8, 0,
+	    FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))==0) {
+
+	    log ("ComputerPlayer(%d): out of resources, destructing\n", player_number);
+	    game->send_player_bulldoze (site.site);
+	    return;
+	}
+
+	if (site.bo->need_stones &&
+	    map->find_immovables(site.site->get_position(), 8, 0,
+	    FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))==0) {
+
+	    log ("ComputerPlayer(%d): out of resources, destructing\n", player_number);
+	    game->send_player_bulldoze (site.site);
+	    return;
+	}
+}
+
 struct FindFieldUnowned:FindField {
 	virtual bool accept (const FCoords) const;
 };
 
 bool FindFieldUnowned::accept (const FCoords fc) const
 {
-	return fc.field->get_owned_by()==0;
+	// when looking for unowned terrain to acquire, we are actually
+	// only interested in fields we can walk on
+	return fc.field->get_owned_by()==0 && (fc.field->get_caps()&MOVECAPS_WALK);
 }
 
 void Computer_Player::update_buildable_field (BuildableField& field)
@@ -387,6 +478,7 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 	
 	field.reachable=false;	
 	field.preferred=false;
+	field.avoid_military=false;
 	
 	field.military_influence=0;
 	field.trees_nearby=0;
@@ -421,8 +513,10 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 				
 				int v=mil->get_conquers() - map->calc_distance(field, immovables[i].coords);
 				
-				if (v>0)
-				    field.military_influence+=(v*v+v)*6;
+				if (v>0) {
+				    field.military_influence+=v*(v+2)*6;
+				    field.avoid_military=true;
+				}
 			    }
 			    
 			    if (typeid(*con)==typeid(ProductionSite_Descr))
@@ -452,8 +546,6 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 		if (immovables[i].object->has_attribute(stone_attr))
 			field.stones_nearby++;
 	}
-	
-	log ("Military influence for updated field is %d\n", field.military_influence);
 }
 
 void Computer_Player::consider_productionsite_influence (BuildableField& field, const Coords& coord, const BuildingObserver& bo)
@@ -465,15 +557,15 @@ void Computer_Player::consider_productionsite_influence (BuildableField& field, 
 		field.stone_consumers_nearby++;
 }
 
-Computer_Player::EconomyObserver& Computer_Player::get_economy_observer (Economy* economy)
+Computer_Player::EconomyObserver* Computer_Player::get_economy_observer (Economy* economy)
 {
-	std::list<EconomyObserver>::iterator i;
+	std::list<EconomyObserver*>::iterator i;
 	
 	for (i=economies.begin(); i!=economies.end(); i++)
-		if (i->economy==economy)
+		if ((*i)->economy==economy)
 			return *i;
 	
-	economies.push_front (EconomyObserver(economy));
+	economies.push_front (new EconomyObserver(economy));
 	
 	return economies.front();
 }
@@ -486,8 +578,21 @@ void Computer_Player::gain_building (Building* b)
 		get_building_observer(static_cast<ConstructionSite*>(b)->get_building()->get_name()).cnt_under_construction++;
 	    	total_constructionsites++;
 	}
-	else
+	else {
 		bo.cnt_built++;
+		
+		if (bo.type==BuildingObserver::PRODUCTIONSITE) {		
+			productionsites.push_back (ProductionSiteObserver());
+			productionsites.back().site=static_cast<ProductionSite*>(b);
+			productionsites.back().bo=&bo;
+			
+			for (unsigned int i=0;i<bo.outputs.size();i++)
+		    		wares[bo.outputs[i]].producers++;
+
+			for (unsigned int i=0;i<bo.inputs.size();i++)
+				wares[bo.inputs[i]].consumers++;
+		}
+	}
 }
 
 void Computer_Player::lose_building (Building* b)
@@ -498,8 +603,23 @@ void Computer_Player::lose_building (Building* b)
 		get_building_observer(static_cast<ConstructionSite*>(b)->get_building()->get_name()).cnt_under_construction--;
 		total_constructionsites--;
 	}
-	else
+	else {
 		bo.cnt_built--;
+		
+		if (bo.type==BuildingObserver::PRODUCTIONSITE) {
+			for (std::list<ProductionSiteObserver>::iterator i=productionsites.begin(); i!=productionsites.end(); i++)
+				if (i->site==b) {
+					productionsites.erase (i);
+					break;
+				}
+				
+			for (unsigned int i=0;i<bo.outputs.size();i++)
+				wares[bo.outputs[i]].producers--;
+
+			for (unsigned int i=0;i<bo.inputs.size();i++)
+				wares[bo.inputs[i]].consumers--;
+		}
+	}
 }
 
 // Road building
@@ -511,7 +631,7 @@ struct FindFieldWithFlagOrRoad:FindField {
 bool FindFieldWithFlagOrRoad::accept (FCoords fc) const
 {
 	BaseImmovable* imm=fc.field->get_immovable();
-	
+
 	if (imm==0)
 		return false;
 	
@@ -593,7 +713,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 {
 	std::priority_queue<NearFlag> queue;
 	std::vector<NearFlag> nearflags;
-	int i;
+	unsigned int i;
 	
 	queue.push (NearFlag(flag, 0, 0));
 	
@@ -630,7 +750,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 
 	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
 	
-	for (i=1;i< (int)nearflags.size();i++) {
+	for (i=1;i<nearflags.size();i++) {
 	    NearFlag& nf=nearflags[i];
 	    
 	    if (2*nf.distance+2>=nf.cost)
@@ -639,8 +759,6 @@ bool Computer_Player::improve_roads (Flag* flag)
 	    Path* path=new Path();
 	    if (map->findpath(flag->get_position(), nf.flag->get_position(), 0, path, &check)>=0 &&
 		2*path->get_nsteps()+2<nf.cost) {
-
-		log ("Improved road graph: %ld -> %d\n", nf.cost, path->get_nsteps());
 
 		game->send_player_build_road (player_number, path);
 		return true;
@@ -674,6 +792,15 @@ void Computer_Player::lose_immovable (PlayerImmovable* pi)
 	switch (pi->get_type()) {
 	    case BaseImmovable::BUILDING:
 		lose_building (static_cast<Building*>(pi));
+		break;
+	    case BaseImmovable::FLAG:
+		for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end(); i++)
+		    for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end(); j++)
+			if (*j==pi) {
+			    (*i)->flags.erase (j);
+			    break;
+			}
+			
 		break;
 	    case BaseImmovable::ROAD:
 		roads.remove (static_cast<Road*>(pi));

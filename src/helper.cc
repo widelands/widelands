@@ -104,7 +104,7 @@ void log(const char *fmt, ...)
 {
 	char buf[2048];
 	va_list va;
-
+	
 	va_start(va, fmt);
 	vsnprintf(buf, sizeof(buf), fmt, va);
 	va_end(va);

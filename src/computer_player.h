@@ -28,6 +28,7 @@ class Player;
 class PlayerImmovable;
 class Tribe_Descr;
 class Road;
+class ProductionSite;
 
 class Computer_Player {
 	public:
@@ -60,6 +61,7 @@ class Computer_Player {
 			
 			bool			reachable;
 			bool			preferred;
+			bool			avoid_military;
 			
 			unsigned char		unowned_land_nearby;
 			
@@ -110,13 +112,26 @@ class Computer_Player {
 			bool			need_trees;
 			bool			need_stones;
 			
-			std::vector<int>	outputs;
+			std::vector<short>	inputs;
+			std::vector<short>	outputs;
+			short			production_hint;
 			
 			int			cnt_built;
 			int			cnt_under_construction;
 			
 			int get_total_count()
 			{ return cnt_built + cnt_under_construction; }
+		};
+		
+		struct ProductionSiteObserver {
+			ProductionSite*		site;
+			BuildingObserver*	bo;
+		};
+		
+		struct WareObserver {
+			uchar		producers;
+			uchar		consumers;
+			uchar		preciousness;
 		};
 		
 		Game*				game;
@@ -134,15 +149,20 @@ class Computer_Player {
 		std::list<MineableField>	mineable_fields;
 		std::list<Flag*>		new_flags;
 		std::list<Road*>		roads;
-		std::list<EconomyObserver>	economies;
+		std::list<EconomyObserver*>	economies;
+		std::list<ProductionSiteObserver>	productionsites;
 		
-		EconomyObserver& get_economy_observer (Economy*);
+		WareObserver*			wares;
+		
+		EconomyObserver* get_economy_observer (Economy*);
 		
 		long				next_construction_due;
+		long				next_productionsite_check_due;
 		long				inhibit_road_building;
 		
 		void update_buildable_field (BuildableField&);
 		void consider_productionsite_influence (BuildableField&, const Coords&, const BuildingObserver&);
+		void check_productionsite (ProductionSiteObserver&);
 		
 		BuildingObserver& get_building_observer(const char*);
 };
