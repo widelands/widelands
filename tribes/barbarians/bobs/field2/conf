@@ -1,10 +1,7 @@
 [global]
 type="diminishing"
-stock=1
-
-size=normal
-attrib=roman_field
-program=harvest
+size=none
+program=disappear
 
 clrkey_r=0
 clrkey_g=0
@@ -13,9 +10,9 @@ shadowclr_r=0
 shadowclr_g=0
 shadowclr_b=0
 
-# This program is executed when the farmer harvest the field
-[harvest]
-0=remove
+[disappear]
+0=animation idle 50000
+1=remove
 
 [idle]
 pics=field2_??.bmp

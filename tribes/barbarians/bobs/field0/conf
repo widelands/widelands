@@ -1,6 +1,6 @@
 [global]
 type=immovable
-size=normal
+size=big
 program=program
 picture=field0t_00.bmp
 clrkey_r=0

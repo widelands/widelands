@@ -1,9 +1,8 @@
-[global]
 type="diminishing"
 stock=1
-
-size=normal
-attrib=roman_field
+size=big
+attrib=barbarian_field
+program=program
 program=harvest
 
 clrkey_r=0
@@ -14,6 +13,10 @@ shadowclr_g=0
 shadowclr_b=0
 
 # This program is executed when the farmer harvest the field
+[program]
+0=animation idle 500000
+1=remove
+
 [harvest]
 0=transform tribe:field2
 
