@@ -83,7 +83,8 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.bmp", RGBColor(0,0,255)));
 
    // TEMP. set tool
-   current_tool=new Editor_Info_Tool();
+//   current_tool=new Editor_Info_Tool();
+   current_tool=new Editor_Increase_Height_Tool();
 }
 
 /****************************************

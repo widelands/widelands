@@ -20,6 +20,20 @@
 #ifndef __S__FIELD_H
 #define __S__FIELD_H
 
+// !!!!!!!!!!! remember to change the MULTIPLY_WITH_* macros below too !!!!!!!!!!!!!!!!
+//#define FIELD_WIDTH 58
+//#define FIELD_HEIGHT 58
+#define FIELD_WIDTH   64
+#define FIELD_HEIGHT  64
+#define HEIGHT_FACTOR 5
+// those are really just fast, if num is not a complex think, like
+// calling a function or so
+#define MULTIPLY_WITH_HEIGHT_FACTOR(num) ( ((num)<<2)+(num) )
+#define MULTIPLY_WITH_FIELD_WIDTH(num) ( ((num)<<6) )  
+#define MULTIPLY_WITH_HALF_FIELD_HEIGHT(num) ( ((num)<<5) )  // it's nearly never needed to use FIELD_HEIGHT in multiplys, only FIELD_HEIGHT/2
+#define MAX_FIELD_HEIGHT 32
+#define MAX_FIELD_HEIGHT_DIFF 5
+
 // TODO; Think, if we shouldn't call for each field a new() in map::set_size
 // and a delete - Holger
 // Okay, as it stands now, Field can be safely memset()ed to 0.
@@ -121,7 +135,7 @@ public:
 private:
    // note: you must reset this field's + neighbor's brightness when you change the height
    // Map's set_height does this
-   inline void set_height(uchar h) { height = h; }
+   inline void set_height(uchar h) { if(h>MAX_FIELD_HEIGHT) h=MAX_FIELD_HEIGHT; height = h; }
 };
 
 

@@ -65,19 +65,6 @@ class Immovable;
  * a field like it is represented in the game
  */
 
-// !!!!!!!!!!! remember to change the MULTIPLY_WITH_* macros below too !!!!!!!!!!!!!!!!
-//#define FIELD_WIDTH 58
-//#define FIELD_HEIGHT 58
-#define FIELD_WIDTH   64
-#define FIELD_HEIGHT  64
-#define HEIGHT_FACTOR 5
-// those are really just fast, if num is not a complex think, like
-// calling a function or so
-#define MULTIPLY_WITH_HEIGHT_FACTOR(num) ( ((num)<<2)+(num) )
-#define MULTIPLY_WITH_FIELD_WIDTH(num) ( ((num)<<6) )  
-#define MULTIPLY_WITH_HALF_FIELD_HEIGHT(num) ( ((num)<<5) )  // it's nearly never needed to use FIELD_HEIGHT in multiplys, only FIELD_HEIGHT/2
-
-
 struct ImmovableFound {
 	BaseImmovable	*object;
 	Coords			coords;
@@ -199,7 +186,11 @@ public:
 	             Player *player = 0, bool roadfind = false, const std::vector<Coords> *forbidden = 0);
 
 	bool can_reach_by_water(Coords field);
-					
+	
+   // change field heights
+   void change_field_height(const Coords&, int);
+   void change_field_height(int, int, int);
+
 private:
 	void set_size(uint w, uint h);
 	void set_world_name(const char *string);
@@ -228,6 +219,7 @@ private:
 	void recalc_brightness(int fx, int fy, Field *f);
 	void recalc_fieldcaps_pass1(int fx, int fy, Field *f);
 	void recalc_fieldcaps_pass2(int fx, int fy, Field *f);
+   void check_neighbour_heights(int fx, int fy, Field* f, int* area);
 };
 
 // FindImmovable functor

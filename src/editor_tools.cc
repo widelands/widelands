@@ -108,3 +108,35 @@ int Editor_Info_Tool::handle_click(const Coords* coordinates, Field* f, Map* map
    return 0;
 }
 
+/*
+=============================
+
+class Editor_Increase_Height_Tool
+
+=============================
+*/
+
+/*
+===========
+Editor_Increase_Height_Tool::handle_click()
+
+increase the height of the current field by one,
+this increases the height of the surrounding fields also
+if this is needed.
+===========
+*/
+int Editor_Increase_Height_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   map->change_field_height(*coordinates, m_increase_by);
+   return 0;
+}
+
+/*
+===========
+Editor_Increase_Height_Tool::tool_options_dialog()
+
+TODO
+===========
+*/
+int Editor_Increase_Height_Tool::tool_options_dialog(Editor_Interactive*) {
+   return 0;
+}

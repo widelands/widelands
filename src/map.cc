@@ -1497,7 +1497,106 @@ bool Map::can_reach_by_water(Coords field)
 	
 	return false;
 }
+   
+/*
+===========
+Map::change_field_height()
 
+relativly change field height, recalculate brightness and 
+if needed change surrounding fields so that walking is still
+possible
+===========
+*/
+void Map::change_field_height(const Coords& coordinates, int by) {
+   Field* m_field=get_field(coordinates);
+   int height=m_field->get_height();
+   
+   
+   height+=by;
+   m_field->set_height(height);
+   int radius=0;
+
+   check_neighbour_heights(coordinates.x, coordinates.y, m_field, &radius);
+   recalc_brightness(coordinates.x,coordinates.y,m_field);
+   recalc_fieldcaps_pass1(coordinates.x,coordinates.y,m_field);
+ 
+   // First recalculation step 
+   radius+=1; 
+   Map_Region mr(coordinates, radius, this);
+   Map_Region_Coords mrc(coordinates, radius, this); 
+   int x, y;
+   Field* field;
+   while((field=mr.next())) {
+      mrc.next(&x,&y);
+      recalc_brightness(x,y,field);
+      recalc_fieldcaps_pass1(x,y,field);
+   }
+
+   // seconc recalculation step
+   mr.init(coordinates, radius, this);
+   mrc.init(coordinates, radius, this); 
+   while((field=mr.next())) {
+      mrc.next(&x,&y);
+      recalc_brightness(x,y,field);
+      recalc_fieldcaps_pass2(x,y,field);
+   }
+   
+   recalc_fieldcaps_pass2(coordinates.x,coordinates.y,m_field);
+}
+ 
+
+void Map::change_field_height(int x, int y, int by) {
+   change_field_height(Coords(x,y), by);
+}
+  
+/*
+===========
+Map::check_neighbour_heights()
+
+This private functions checks all neighbours of a field 
+if they are in valid boundaries, if not, they are reheighted
+accordingly. returns 0 if no changes where needed, the radius
+for the recalculation otherwise
+=============
+*/
+void Map::check_neighbour_heights(int fx, int fy, Field* f, int* area) {
+   int m_height=f->get_height();
+   int diff;
+   
+   FCoords m(fx,fy,f);
+   FCoords n;
+ 
+   get_tln(m, &n); 
+   diff=m_height-n.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+
+   get_trn(m, &n); 
+   diff=m_height-n.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+
+   get_ln(m, &n); 
+   diff=m_height-n.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+
+   get_rn(m, &n); 
+   diff=m_height-n.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+
+   get_bln(m, &n); 
+   diff=m_height-n.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+
+   get_brn(m, &n); 
+   diff=m_height-n.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; n.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check_neighbour_heights(n.x,n.y,n.field, area); }
+
+}
 
 /*
 ==============================================================================
