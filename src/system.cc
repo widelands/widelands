@@ -365,6 +365,9 @@ static void Sys_DoWarpMouse(int x, int y)
 {
 	int curx, cury;
 
+	if (sys.fplayback) // don't warp anything during playback
+		return;
+
 	SDL_GetMouseState(&curx, &cury);
 
 	if (curx == x && cury == y)

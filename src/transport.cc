@@ -442,6 +442,7 @@ bool WareInstance::is_moving(Game* g)
 				reroutestart = m_move_route->get_flag(g, 0);
 
 			m_flag_dirty = true;
+			molog("WareInstance::is_moving: Reroute\n");
 
 			assert(get_economy() == reroutestart->get_economy());
 
@@ -1472,7 +1473,7 @@ void Road::init(Editor_Game_Base *gg)
 	} else {
 		// This happens after a road split. Tell the carrier what's going on
 		carrier->set_location(this);
-		carrier->set_job_road(g, this);
+		carrier->update_task_road(g);
 	}
 }
 
@@ -1553,7 +1554,7 @@ void Road::request_carrier_callback(Game* g, Request* rq, int ware, Worker* w, v
 	road->m_carrier_request = 0;
 
 	road->m_carrier = carrier;
-	carrier->set_job_road(g, road);
+	carrier->start_task_road(g, road);
 }
 
 
@@ -1663,7 +1664,7 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 		{
 			// Inform the carrier that something's going on, so that it can
 			// e.g. adjust walking paths
-			carrier->set_job_road(g, this);
+			carrier->update_task_road(g);
 		}
 	}
 
@@ -1879,6 +1880,8 @@ Worker* Request::get_worker()
 Request::start_transfer
 
 Begin transfer of the requested ware from the given warehouse.
+This function does not take ownership of route, i.e. the caller is responsible
+for its deletion.
 ===============
 */
 void Request::start_transfer(Game *g, Warehouse *wh, Route *route)
@@ -1895,7 +1898,7 @@ void Request::start_transfer(Game *g, Warehouse *wh, Route *route)
 		m_worker = wh->launch_worker(g, get_ware());
 
 		m_state = TRANSFER;
-		m_worker->set_job_request(this, route);
+		m_worker->start_task_request(g, this);
 	}
 	else
 	{
@@ -1936,33 +1939,8 @@ void Request::check_transfer(Game *g)
 
 	assert(m_worker);
 
-	Route* route;
-	PlayerImmovable* location;
-	PlayerImmovable* target = get_target(g);
-
 	// Get the route
-	route = m_worker->get_route();
-	location = m_worker->get_location(g);
-
-	// worker should phone home if that happens
-	if (!location)
-		throw wexception("Request::check_transfer(): current location disappeared!");
-
-
-	// Verify the route, and fix it if necessary
-	if (!route->verify(g))
-	{
-		if (!target || target->get_economy() != location->get_economy())
-		{
-			log("Request::check_transfer(): target unreachable\n");
-			cancel_transfer(g);
-			get_target_economy(g)->process_request(this);
-			return;
-		}
-
-		if (!target->get_economy()->find_route(location->get_base_flag(), target->get_base_flag(), route))
-			throw wexception("Request::check_transfer(): re-routing failed");
-	}
+	m_worker->update_task_request(g, false);
 }
 
 
@@ -1982,7 +1960,7 @@ void Request::cancel_transfer(Game *g)
 	{
 		assert(!m_item);
 
-		m_worker->change_job_request(true); // cancel
+		m_worker->update_task_request(g, true); // cancel
 		m_worker = 0;
 		m_state = OPEN;
 	}

@@ -728,7 +728,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	}
 
 	if (m_builder)
-		m_builder->stop_job_idleloop((Game*)g);
+		m_builder->send_signal((Game*)g, "stop"); // stop working
 
 
 	// Cleanup the wares queues
@@ -747,7 +747,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 
 		// Walk the builder home safely
 		m_builder->set_location(bld);
-		m_builder->set_job_gowarehouse();
+		m_builder->start_task_gowarehouse((Game*)g);
 	}
 }
 
@@ -808,7 +808,7 @@ void ConstructionSite::request_builder_callback(Game* g, Request* rq, int ware, 
 
 	cs->m_builder_request = 0;
 
-	w->set_job_idleloop(g, w->get_idle_anim()); // TODO: set useful animations in check_work()
+	w->start_task_idle(g, w->get_idle_anim(), -1); // TODO: useful idle animations
 
 	cs->check_work(g);
 }
@@ -1170,7 +1170,7 @@ bool Warehouse::fetch_from_flag(Game* g)
 		create_wares(carrierid, 1);
 
 	worker = launch_worker(g, carrierid);
-	worker->set_job_fetchfromflag(g);
+	worker->start_task_fetchfromflag(g);
 
 	return true;
 }
@@ -1266,7 +1266,7 @@ WareInstance* Warehouse::launch_item(Game* g, int ware)
 	get_economy()->remove_wares(ware, 1); // re-added by the item itself
 
 	// Setup the carrier
-	worker->set_job_dropoff(g, item);
+	worker->start_task_dropoff(g, item);
 
 	return item;
 }

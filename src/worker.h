@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -88,23 +88,10 @@ class Worker : public Bob {
 	MO_DESCR(Worker_Descr);
 
 public:
-	enum {
-		State_None = 0,
-		State_IdleLoop,		// infinite idle loop of one animation
-		State_Request,			// fulfilling a ware request
-		State_Fugitive,		// lost our location, trying to get back to warehouse
-		State_GoWarehouse,	// return to warehouse
-		State_DropOff,			// drop an item outside a building and go back inside
-		State_FetchFromFlag,	// fetch an item from the building's flag
-
-		State_Worker_Last		// must be last
-	};
-
 	Worker(Worker_Descr *descr);
 	virtual ~Worker();
 
 	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
-	inline int get_state() const { return m_state; }
 	inline uint get_idle_anim() const { return get_descr()->get_idle_anim(); }
 
 	virtual uint get_movecaps();
@@ -119,59 +106,70 @@ public:
 	void set_carried_item(Game* g, WareInstance* item);
 	WareInstance* fetch_carried_item(Game* g);
 
-	void set_job_request(Request *req, const Route *route);
-	void change_job_request(bool cancel);
-
-	void set_job_gowarehouse();
-
-	void set_job_idleloop(Game*, uint anim);
-	void stop_job_idleloop(Game*);
-
-	void set_job_dropoff(Game*, WareInstance* item);
-	void set_job_fetchfromflag(Game*);
-
 	void schedule_incorporate(Game *g);
 	void incorporate(Game *g);
-
-	inline Route *get_route() { return m_route; }
 
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
-	virtual bool wakeup_flag_capacity(Game* g, Flag* flag);
-	virtual bool wakeup_leave_building(Game* g, Building* building);
+	bool wakeup_flag_capacity(Game* g, Flag* flag);
+	bool wakeup_leave_building(Game* g, Building* building);
 
 protected:
-	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
-
-	void set_state(int state);
-
-	void end_state(Game *g, bool success);
-	virtual void do_end_state(Game* g, int oldstate, bool success);
-	void run_state_request(Game *g, uint prev, bool success, uint nexthint);
-	void run_state_fugitive(Game *g, uint prev, bool success, uint nexthint);
-	void run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthint);
-	void run_state_dropoff(Game* g, uint prev, bool success, uint nexthint);
-	void run_state_fetchfromflag(Game* g, uint prev, bool success, uint nexthint);
-
-	int run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgoal);
-
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
+	virtual void init_auto_task(Game* g);
+
+public: // worker-specific tasks
+	void start_task_request(Game* g, Request *req);
+	void update_task_request(Game* g, bool cancel);
+
+	void start_task_gowarehouse(Game* g);
+	void start_task_dropoff(Game* g, WareInstance* item);
+	void start_task_fetchfromflag(Game* g);
+
+	bool start_task_waitforcapacity(Game* g, Flag* flag);
+	bool start_task_waitleavebuilding(Game* g);
+	void start_task_route(Game* g, Route* route, PlayerImmovable* target);
+	void start_task_fugitive(Game* g);
+
+private: // task details
+	void request_update(Game* g, State* state);
+	void request_signal(Game* g, State* state);
+	void request_mask(Game* g, State* state);
+
+	void gowarehouse_update(Game* g, State* state);
+	void gowarehouse_signal(Game* g, State* state);
+
+	void dropoff_update(Game* g, State* state);
+
+	void fetchfromflag_update(Game* g, State* state);
+
+	void waitforcapacity_update(Game* g, State* state);
+	void waitforcapacity_signal(Game* g, State* state);
+
+	void waitleavebuilding_update(Game* g, State* state);
+	void waitleavebuilding_signal(Game* g, State* state);
+
+	void route_update(Game* g, State* state);
+	void route_mask(Game* g, State* state);
+
+	void fugitive_update(Game* g, State* state);
+	void fugitive_signal(Game* g, State* state);
+
+private:
+	static Task taskRequest;
+	static Task taskGowarehouse;
+	static Task taskDropoff;
+	static Task taskFetchfromflag;
+	static Task taskWaitforcapacity;
+	static Task taskWaitleavebuilding;
+	static Task taskRoute;
+	static Task taskFugitive;
 
 private:
 	Object_Ptr		m_location;			// meta location of the worker, a PlayerImmovable
 	Economy*			m_economy;			// Economy this worker is registered in
-	int				m_state;				// one of State_XXX
 	Object_Ptr		m_carried_item;	// Item we are carrying
-	Route				*m_route;			// used by Request, GoWarehouse
-
-	Request			*m_request;			// the request we're supposed to fulfill
-
-	int				m_fugitive_death;	// when are we going to die?
-
-	Object_Ptr		m_gowarehouse;		// the warehouse we're trying to reach
-
-	uint				m_job_anim;			// animation to be used in idleloop
 };
 
 
@@ -192,34 +190,33 @@ class Carrier : public Worker {
 	MO_DESCR(Carrier_Descr);
 
 public:
-	enum {
-		State_WorkIdle = State_Worker_Last + 1,	// idling on the road
-		State_WorkTransport,								// transport something
-	};
-
 	Carrier(Carrier_Descr *descr);
 	virtual ~Carrier();
 
-	void set_job_road(Game*, Road* road);
 	bool notify_ware(Game* g, int flag);
 
-	virtual bool wakeup_flag_capacity(Game* g, Flag* flag);
-
-protected:
-	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
-	virtual void do_end_state(Game* g, int oldstate, bool success);
-
-	bool find_pending_item(Game* g);
-
-	void run_state_workidle(Game* g, uint prev, bool success, uint nexthint);
-	void run_state_worktransport(Game* g, uint prev, bool success, uint nexthint);
-
-	bool walk_to_index(Game* g, int index);
-	bool walk_to_flag(Game* g, int flag, bool offset = false);
+public:
+	void start_task_road(Game* g, Road* road);
+	void update_task_road(Game* g);
+	void start_task_transport(Game* g, int fromflag);
+	bool start_task_walktoflag(Game* g, int flag, bool offset = false);
 
 private:
-	int			m_fetch_flag;	// fetch from start_flag if 0, end_flag if 1; drop at the other flag
-	bool			m_inbuilding;	// transporting worker walked into the target building
+	void find_pending_item(Game* g);
+
+private: // internal task stuff
+	void road_update(Game* g, State* state);
+	void road_signal(Game* g, State* state);
+
+	void transport_update(Game* g, State* state);
+	void transport_signal(Game* g, State* state);
+
+private:
+	static Task taskRoad;
+	static Task taskTransport;
+
+private:
+	int	m_acked_ware;	// -1: no ware acked; 0/1: acked ware for start/end flag of road
 };
 
 
@@ -381,7 +378,7 @@ class Grower : virtual public Worker_Descr,
    virtual public Has_Walk1_Worker_Descr,
    virtual public Has_Working_Worker_Descr,
    virtual public Has_Working1_Worker_Descr {
-   
+
    public:
       Grower(void) { }
       ~Grower(void) { }

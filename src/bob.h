@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,9 @@
 
 class Profile;
 class Bob;
+class Route;
+class Request;
+
 
 /*
 Bobs are moving map objects: Animals, humans, ships...
@@ -54,20 +57,28 @@ public:
 
 class Bob : public Map_Object {
 public:
-	enum {
-		TASK_NONE = 0,
+	struct State;
 
-		// Do nothing. Use start_task_idle() to invoke this task.
-		TASK_IDLE = 1,
+	typedef void (Bob::*Ptr)(Game*, State*);
 
-		// Move along a path. Use start_task_movepath() to invoke this task
-		TASK_MOVEPATH = 2,
+	struct Task {
+		const char* name;
 
-		// Move one field without passability checks. Use start_task_forcemove()
-		TASK_FORCEMOVE = 3,
+		Ptr update;
+		Ptr signal;
+		Ptr mask;
+	};
 
-		// descendants of Map_Objects must use task IDs greater than this
-		TASK_FIRST_USER = 10,
+	struct State {
+		Task*				task;
+		int				ivar1;
+		Object_Ptr		objvar1;
+		std::string		svar1;
+
+		DirAnimations*	diranims;
+		Path*				path;
+		Request*			request;
+		Route*			route;
 	};
 
 protected:
@@ -86,7 +97,10 @@ public:
 	virtual void act(Game*, uint data);
 
 	void schedule_destroy(Game* g);
-	
+	void schedule_act(Game* g, uint tdelta);
+	void skip_act(Game* g);
+	void force_skip_act(Game* g);
+
 	void calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos);
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
 
@@ -94,89 +108,69 @@ public:
 	inline Player *get_owner() { return m_owner; }
 
 	void set_position(Game* g, Coords f);
-	inline const FCoords &get_position() const { return m_position; }
+	inline const FCoords& get_position() const { return m_position; }
 	inline Bob* get_next_bob(void) { return m_linknext; }
 
-protected: // default tasks
+public: // default tasks
+	void send_signal(Game*, std::string sig);
+
 	void start_task_idle(Game*, uint anim, int timeout);
 	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims);
 	void start_task_movepath(Game*, const Path &path, DirAnimations *anims);
+	bool start_task_movepath(Game* g, const Path& path, int index, DirAnimations* anims);
 	void start_task_forcemove(Game*, int dir, DirAnimations *anims);
 
 protected: // higher level handling (task-based)
-	inline int get_current_task() { return m_task; }
-	void start_task(Game*, uint task);
-	void end_task(Game*, bool success, uint nexttask);
-	void interrupt_task(Game*, bool hard, uint nexthint = 0, bool success = false);
+	inline State* get_state() { return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0; }
+	inline std::string get_signal() { return m_signal; }
 
-	// handler functions
-	virtual int task_begin(Game*);
-	virtual int task_act(Game*, bool interrupt);
-	virtual bool task_interrupt(Game*);
-	virtual void task_end(Game*);
+	void push_task(Game*, Task* task);
+	void pop_task(Game*);
+	void set_signal(std::string sig);
 
-	/** Map_Object::task_start_best(Game*, uint prev, bool success) [virtual]
-	 *
-	 * prev is the task that was last run (can be 0 on initial startup).
-	 * success is the success parameter passed to end_task().
-	 * nexthint is the nexttask parameter passed to end_task().
-	 *
-	 * You must call start_task() (directly or indirectly) from this function.
-	 * Therefore, you MUST override this function in derived classes.
-	 */
-	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint) = 0;
+	virtual void init_auto_task(Game*);
 
-private:
-	void do_next_task(Game*);
-	void do_start_task(Game*);
-
-protected: // low level handling
+protected: // low level animation and walking handling
 	void set_animation(Game* g, uint anim);
 
 	int start_walk(Game* g, WalkingDir dir, uint anim, bool force = false);
 	void end_walk(Game* g);
 	bool is_walking();
 
-protected:
-	Player *m_owner; // can be 0
+private:
+	void do_act(Game* g, bool signalhandling);
 
-	FCoords m_position; // where are we right now?
-	Bob* m_linknext; // next object on this field
-	Bob** m_linkpprev;
+	void idle_update(Game* g, State* state);
+	void idle_signal(Game* g, State* state);
+	void movepath_update(Game* g, State* state);
+	void forcemove_update(Game* g, State* state);
 
-	uint m_actid; // CMD_ACT counter, used to eliminate spurious act()s
+private:
+	static Task taskIdle;
+	static Task taskMovepath;
+	static Task taskForcemove;
 
-	uint m_anim;
-	int m_animstart; // gametime when the animation was started
+private:
+	Player*		m_owner; // can be 0
 
-	WalkingDir m_walking;
-	int m_walkstart; // start and end time used for interpolation
-	int m_walkend;
+	FCoords		m_position; // where are we right now?
+	Bob*			m_linknext; // next object on this field
+	Bob**			m_linkpprev;
+
+	uint			m_actid; // CMD_ACT counter, used to eliminate spurious act()s
+
+	uint			m_anim;
+	int			m_animstart; // gametime when the animation was started
+
+	WalkingDir	m_walking;
+	int			m_walkstart; // start and end time used for interpolation
+	int			m_walkend;
 
 	// Task framework variables
-	uint m_task; // the task we are currently performing
-	bool m_task_acting;
-	bool m_task_switching;
-	bool m_task_interrupt;
-	bool m_lasttask_success;
-	uint m_lasttask;
-	uint m_nexttask;
-
-	// Variables used by the default tasks
-	union {
-		struct {
-			int timeout;
-		} idle;
-		struct {
-			int step;
-			DirAnimations *anims;
-			Path* path;
-		} movepath;
-		struct {
-			int dir;
-			DirAnimations *anims;
-		} forcemove;
-	} task;
+	std::vector<State>	m_stack;
+	bool						m_stack_dirty;
+	bool						m_sched_init_task;	// if init_auto_task was scheduled
+	std::string				m_signal;
 };
 
 #endif
