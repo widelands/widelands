@@ -55,7 +55,6 @@ class Main_Menu_Load_Map : public UIWindow {
       UIMultiline_Textarea* m_descr;
       Editor_Interactive *m_parent;
       UIListselect* m_ls;
-      UIEdit_Box* m_editbox;
        
       std::string m_basedir;
       std::string m_curdir;

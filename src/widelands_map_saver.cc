@@ -56,7 +56,6 @@ Widelands_Map_Saver::~Widelands_Map_Saver(void) {
  */
 void Widelands_Map_Saver::save(void) throw(wexception) {
    std::string filename=m_filename;
-   m_filename+=WLMF_SUFFIX;
 
    FileWrite fw;
    Widelands_Map_Data_Packet* dp;

@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <vector>
+#include "errno.h"
 #include "error.h"
 #include "filesystem.h"
 
@@ -576,6 +577,8 @@ public:
 
 	virtual bool FileExists(std::string path);
    virtual bool IsDirectory(std::string path);
+   virtual void EnsureDirectoryExists(std::string dirname);
+   virtual void MakeDirectory(std::string dirname);
 
 	virtual void *Load(std::string fname, int *length);
 	virtual void Write(std::string fname, void *data, int length);
@@ -728,6 +731,46 @@ bool RealFSImpl::IsDirectory(std::string path)
 	return S_ISDIR(st.st_mode);
 }
 
+/*
+ * Create this directory if it doesn't exist, throws an error
+ * if the dir can't be created or if a file with this name exists
+ */
+void RealFSImpl::EnsureDirectoryExists(std::string dirname) {
+   if(FileExists(dirname)) {
+      if(IsDirectory(dirname)) return; // ok, dir is already there
+   }
+   MakeDirectory(dirname);
+}
+
+/*
+ * Create this directory, throw an error if it already exists or
+ * if a file is in the way or if the creation fails. 
+ *
+ * Pleas note, this function does not honor parents, 
+ * MakeDirectory("onedir/otherdir/onemoredir") will fail
+ * if either ondir or otherdir is missing
+ */
+void RealFSImpl::MakeDirectory(std::string dirname) {
+   if(FileExists(dirname)) 
+      throw wexception("A File with the name %s already exists\n", dirname.c_str());
+
+   char canonical[256];
+	std::string fullname;
+
+	if (!FS_CanonicalizeName(canonical, sizeof(canonical), dirname.c_str()))
+		return;
+
+	fullname = m_directory + '/' + canonical;
+
+   int retval=0;
+#ifdef WIN32
+   retval=mkdir(fullname.c_str());
+#else
+   retval=mkdir(fullname.c_str(), 0x1FF);
+#endif
+   if(retval==-1) 
+      throw wexception("Couldn't create directory %s: %s\n", dirname.c_str(), strerror(errno));
+}
 
 /*
 ===============
@@ -856,6 +899,8 @@ public:
 
 	virtual bool FileExists(std::string path);
    virtual bool IsDirectory(std::string path);
+   virtual void EnsureDirectoryExists(std::string dirname);
+   virtual void MakeDirectory(std::string dirname);
 
 	virtual void *Load(std::string fname, int *length);
 	virtual void Write(std::string fname, void *data, int length);
@@ -1019,6 +1064,35 @@ void LayeredFSImpl::Write(std::string fname, void *data, int length)
 	throw wexception("LayeredFSImpl: No writable filesystem!");
 }
 
+/* 
+ * MakeDir in first writable directory
+ */
+void LayeredFSImpl::MakeDirectory(std::string dirname) {
+	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+		if (!(*it)->IsWritable())
+			continue;
+
+		(*it)->MakeDirectory(dirname);
+		return;
+	}
+
+	throw wexception("LayeredFSImpl: No writable filesystem!");
+}
+
+/*
+ * EnsureDirectoryExists in first writable directory
+ */
+void LayeredFSImpl::EnsureDirectoryExists(std::string dirname) {
+	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+		if (!(*it)->IsWritable())
+			continue;
+
+		(*it)->EnsureDirectoryExists(dirname);
+		return;
+	}
+
+	throw wexception("LayeredFSImpl: No writable filesystem!");
+}
 
 /** LayeredFileSystem::Create
  *

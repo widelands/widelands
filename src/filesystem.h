@@ -59,6 +59,8 @@ public:
 
 	virtual void *Load(std::string fname, int *length) = 0;
 	virtual void Write(std::string fname, void *data, int length) = 0;
+   virtual void EnsureDirectoryExists(std::string dirname) = 0;
+   virtual void MakeDirectory(std::string dirname) = 0;
 
 public:
 	static FileSystem *CreateFromDirectory(std::string directory);
