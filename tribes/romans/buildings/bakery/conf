@@ -10,15 +10,15 @@ program=work
 output=bread
 
 [inputs]
-wheat=6
+flour=6
 water=6
 
 
 [work]
 0=sleep 20000
 1=check water
-2=check wheat
-3=consume wheat
+2=check flour
+3=consume flour
 4=consume water
 5=animation working 20000
 6=produce bread

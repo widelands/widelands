@@ -1,5 +1,5 @@
 [global]
-descname=Forrester
+descname=Forester
 help=Plants trees.
 type=generic
 menu_pic=forrester_menu.png

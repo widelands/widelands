@@ -1,5 +1,5 @@
 [global]
-descname=Forrester's Cabin		# nicer name to display in GUI
+descname=Forester's Cabin		# nicer name to display in GUI
 type=production					# basic type (warehouse, production, military)
 size=small
 buildable=yes
