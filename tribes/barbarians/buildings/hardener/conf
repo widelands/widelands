@@ -13,10 +13,10 @@ output=blackwood
 trunk=16
 
 [work]
-0=sleep 30000
+0=sleep 43000
 1=check trunk 2     # two or more
 2=consume trunk 2
-3=animation working 23000
+3=animation working 24000
 4=produce blackwood 
 
 
