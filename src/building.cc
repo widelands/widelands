@@ -29,8 +29,9 @@
 #include "building_int.h"
 
 
-#define BUILDING_LEAVE_INTERVAL	1000
-#define CARRIER_SPAWN_INTERVAL	2500
+#define BUILDING_LEAVE_INTERVAL		1000
+#define CARRIER_SPAWN_INTERVAL		2500
+#define CONSTRUCTIONSITE_STEP_TIME	25000
 
 
 /*
@@ -547,6 +548,11 @@ ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr)
 
 	m_builder = 0;
 	m_builder_request = 0;
+
+	m_working = false;
+	m_work_steptime = 0;
+	m_work_completed = 0;
+	m_work_steps = 0;
 }
 
 
@@ -659,7 +665,10 @@ void ConstructionSite::init(Editor_Game_Base* g)
 
 			m_wares[i] = wq;
 
+			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->init((Game*)g, g->get_safe_ware_id((*bc)[i].name.c_str()), (*bc)[i].amount);
+
+			m_work_steps += (*bc)[i].amount;
 		}
 
 		request_builder((Game*)g);
@@ -697,7 +706,15 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 
 	Building::cleanup(g);
 
-	// TODO: if necessary, warp the building here and make sure the builder gets home safely
+	if (m_work_completed >= m_work_steps)
+	{
+		// Put the real building in place
+		Building* bld = m_building->create(g, get_owner(), m_position, false);
+
+		// Walk the builder home safely
+		m_builder->set_location(bld);
+		m_builder->set_job_gowarehouse();
+	}
 }
 
 
@@ -732,14 +749,133 @@ void ConstructionSite::request_builder_callback(Game* g, Request* rq, int ware, 
 	ConstructionSite* cs = (ConstructionSite*)data;
 
 	cs->m_builder = w;
-	w->set_job_idleloop(g, w->get_idle_anim());
-
-	// TODO: Make the builder walk around or whatever
 
 	cs->get_economy()->remove_request(rq);
 	delete rq;
 
 	cs->m_builder_request = 0;
+
+	w->set_job_idleloop(g, w->get_idle_anim()); // TODO: set useful animations in check_work()
+
+	cs->check_work(g);
+}
+
+
+/*
+===============
+ConstructionSite::act [virtual]
+
+Check whether a work step has been completed in this timer function.
+===============
+*/
+void ConstructionSite::act(Game *g, uint data)
+{
+	check_work(g);
+
+	Building::act(g, data);
+}
+
+
+/*
+===============
+ConstructionSite::check_work
+
+If we're currently working, check if the next step is finished.
+If we're not working, check if we can start to work now.
+===============
+*/
+void ConstructionSite::check_work(Game* g)
+{
+	// Check if we're done building
+	if (m_working)
+	{
+		if ((int)(g->get_gametime() - m_work_steptime) >= 0) {
+			molog("ConstructionSite::check_work: step %i completed\n", m_work_completed);
+
+			m_work_completed++;
+			if (m_work_completed >= m_work_steps)
+				schedule_destroy(g);
+
+			m_working = false;
+		}
+	}
+
+	// Check if we've got wares to consume
+	if (!m_working && m_work_completed < m_work_steps && m_builder)
+	{
+		for(uint i = 0; i < m_wares.size(); i++) {
+			WaresQueue* wq = m_wares[i];
+
+			if (!wq->get_filled())
+				continue;
+
+			molog("ConstructionSite::check_work: wq has %i/%i, begin work\n",
+						wq->get_filled(), wq->get_size());
+
+			wq->set_filled(wq->get_filled() - 1);
+			wq->set_size(wq->get_size() - 1);
+			wq->update(g);
+
+			m_working = true;
+			m_work_steptime = schedule_act(g, CONSTRUCTIONSITE_STEP_TIME);
+			break;
+		}
+	}
+}
+
+
+/*
+===============
+ConstructionSite::wares_queue_callback [static]
+
+Called by WaresQueue code when an item has arrived
+===============
+*/
+void ConstructionSite::wares_queue_callback(Game* g, WaresQueue* wq, int ware, void* data)
+{
+	ConstructionSite* cs = (ConstructionSite*)data;
+
+	if (!cs->m_working)
+		cs->check_work(g);
+}
+
+
+/*
+===============
+ConstructionSite::draw
+
+Draw the construction site.
+===============
+*/
+void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coords, Point pos)
+{
+	uint tanim = g->get_gametime() - m_animstart;
+
+	if (coords != m_position)
+		return; // draw big buildings only once
+
+	// Draw the construction site marker
+	dst->drawanim(pos.x, pos.y, m_anim, tanim, get_owner()->get_playercolor());
+
+	// Draw the partially finished building
+	int totaltime;
+	int completedtime;
+	int w, h;
+	int lines;
+	uint anim;
+
+	totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
+	completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+
+	if (m_working)
+		completedtime += CONSTRUCTIONSITE_STEP_TIME + g->get_gametime() - m_work_steptime;
+
+	anim = get_building()->get_idle_anim();
+	g_gr->get_animation_size(anim, tanim, &w, &h);
+
+	lines = completedtime * h / totaltime;
+
+	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor(), 0, h-lines, w, lines);
 }
 
 

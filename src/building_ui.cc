@@ -640,6 +640,7 @@ Make sure the window is redrawn when necessary.
 */
 void ConstructionSite_Window::think()
 {
+	Building_Window::think();
 }
 
 
@@ -746,17 +747,14 @@ ProductionSite UI IMPLEMENTATION
 ==============================================================================
 */
 
-class ProductionSite_Window : public Window {
+class ProductionSite_Window : public Building_Window {
 public:
 	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, Window** registry);
 	virtual ~ProductionSite_Window();
 
-	virtual void think();
+	inline ProductionSite* get_productionsite() { return (ProductionSite*)get_building(); }
 
-private:
-	Window**					m_registry;		// pointer to this window, cleared in destructor
-	Interactive_Player*	m_player;		// player the production site belongs to
-	ProductionSite*		m_productionsite;	// production site this window has been opened for
+	virtual void think();
 };
 
 
@@ -768,20 +766,16 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, Window** registry)
-	: Window(parent, 0, 0, 136, 260, ps->get_name())
+	: Building_Window(parent, ps, registry)
 {
-	m_registry = registry;
-	if (*m_registry)
-		delete *m_registry;
-	*m_registry = this;
+	Box* box = new Box(this, 0, 0, Box::Vertical);
 
-	m_player = parent;
-	m_productionsite = ps;
+	// Add caps buttons
+	box->add(create_capsbuttons(box), Box::AlignCenter);
 
-	move_to_mouse();
-
-	set_think(true);
+	fit_inner(box);
 }
+
 
 /*
 ===============
@@ -792,7 +786,6 @@ Deinitialize, remove from registry
 */
 ProductionSite_Window::~ProductionSite_Window()
 {
-	*m_registry = 0;
 }
 
 
@@ -805,6 +798,7 @@ Make sure the window is redrawn when necessary.
 */
 void ProductionSite_Window::think()
 {
+	Building_Window::think();
 }
 
 

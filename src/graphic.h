@@ -102,7 +102,7 @@ public:
 	inline RGBColor(uchar r, uchar g, uchar b) : m_r(r), m_g(g), m_b(b) { }
 	
 	inline void set(uchar r, uchar g, uchar b) { m_r = r; m_g = g; m_b = b; }
-	
+
 	inline uchar r() const { return m_r; }
 	inline uchar g() const { return m_g; }
 	inline uchar b() const { return m_b; }
@@ -290,7 +290,7 @@ public:
 
 	virtual int get_w() const = 0;
 	virtual int get_h() const = 0;
-	
+
 	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr) = 0;
    virtual void fill_rect(int x, int y, int w, int h, RGBColor clr) = 0;
    virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
@@ -303,8 +303,10 @@ public:
 
 	virtual void rendermap(const MapRenderInfo* mri, Point viewofs) = 0;
 	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint, uint) = 0;
-	
+
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs) = 0;
+	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,
+				const RGBColor* plrclrs, int srcx, int srcy, int w, int h) = 0;
 };
 
 
@@ -328,7 +330,7 @@ class Graphic
 This interface represents the framebuffer / screen.
 
 Picture IDs can be allocated using get_picture() and used in RenderTarget::blit().
-Pictures are only loaded from disk once and thrown out of memory when the 
+Pictures are only loaded from disk once and thrown out of memory when the
 graphics system is unloaded, or when flush() is called with the appropriate
 module flag.
 */
@@ -343,7 +345,7 @@ public:
 	virtual void update_rectangle(int x, int y, int w, int h) = 0;
 	virtual bool need_update() = 0;
 	virtual void refresh() = 0;
-	
+
 	virtual void flush(int mod) = 0;
 	virtual uint get_picture(int mod, const char* fname) = 0;
 	virtual uint get_picture(int mod, const char* fname, RGBColor clrkey) = 0;
@@ -352,14 +354,15 @@ public:
 	virtual uint create_surface(int w, int h, RGBColor clrkey) = 0;
 	virtual void free_surface(uint pic) = 0;
 	virtual RenderTarget* get_surface_renderer(uint pic) = 0;
-	
+
 	virtual uint get_maptexture(const char* fnametempl, uint frametime) = 0;
 	virtual void animate_maptextures(uint time) = 0;
-	
+
 	virtual void load_animations() = 0;
+	virtual void get_animation_size(uint anim, uint time, int* w, int* h) = 0;
 
 	virtual void screenshot(const char* fname) = 0;
-	
+
 	// HACK: needed to load the old font
 	virtual uint get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey) = 0;
 };

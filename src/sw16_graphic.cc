@@ -784,7 +784,7 @@ void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx
 
 	pt.x += m_offset.x;
 	pt.y += m_offset.y;
-	
+
 	rc.x = 0;
 	rc.y = 0;
 	rc.w = mri->egbase->get_map()->get_width();
@@ -803,7 +803,7 @@ void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx
 		rc.w = m_rect.w - pt.x;
 	if (rc.w <= 0)
 		return;
-	
+
 	if (pt.y < 0) {
 		rc.y -= pt.y;
 		rc.w += pt.y;
@@ -814,7 +814,7 @@ void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx
 	if (rc.h <= 0)
 		return;
 */
-	
+
 	m_bitmap->draw_minimap(Point(pt.x + m_rect.x, pt.y + m_rect.y), mri, rc, fx, fy);
 }
 
@@ -842,16 +842,16 @@ void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, c
 	frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes());
 	dstx += m_offset.x;
 	dsty += m_offset.y;
-	
+
 	dstx -= frame->hotspot.x;
 	dsty -= frame->hotspot.y;
-	
+
 	rc.x = 0;
 	rc.y = 0;
 	rc.w = frame->width;
 	rc.h = frame->height;
-	
-	
+
+
 	// Clipping
 	if (dstx < 0) {
 		rc.x -= dstx;
@@ -862,7 +862,91 @@ void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, c
 		rc.w = m_rect.w - dstx;
 	if (rc.w <= 0)
 		return;
-	
+
+	if (dsty < 0) {
+		rc.y -= dsty;
+		rc.h += dsty;
+		dsty = 0;
+	}
+	if (dsty + rc.h > m_rect.h)
+		rc.h = m_rect.h - dsty;
+	if (rc.h <= 0)
+		return;
+
+
+	// Draw it
+	m_bitmap->draw_animframe(Point(dstx + m_rect.x, dsty + m_rect.y), frame, rc, plrclrs);
+}
+
+
+/*
+===============
+RenderTargetImpl::drawanimrect
+
+Draws a part of a frame of an animation at the given location
+===============
+*/
+void RenderTargetImpl::drawanimrect(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs,
+												int srcx, int srcy, int w, int h)
+{
+	const AnimationData* data = g_anim.get_animation(animation);
+	const AnimationGfx* gfx = get_graphicimpl()->get_animation(animation);
+	const AnimFrame* frame;
+	Rect rc;
+
+	if (!data || !gfx) {
+		log("WARNING: Animation %i doesn't exist\n", animation);
+		return;
+	}
+
+	// Get the frame and its data
+	frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes());
+	dstx += m_offset.x;
+	dsty += m_offset.y;
+
+	dstx -= frame->hotspot.x;
+	dsty -= frame->hotspot.y;
+
+	dstx += srcx;
+	dsty += srcy;
+
+	rc.x = srcx;
+	rc.y = srcy;
+	rc.w = w; //frame->width;
+	rc.h = h; //frame->height;
+
+	// Clipping against source
+	if (rc.x < 0) {
+		dstx -= rc.x;
+		rc.w += rc.x;
+		rc.x = 0;
+	}
+	if (rc.x + rc.w > frame->width)
+		rc.w = frame->width - rc.x;
+	if (rc.w <= 0)
+		return;
+
+	if (rc.y < 0) {
+		dsty -= rc.y;
+		rc.h += rc.y;
+		rc.y = 0;
+	}
+	if (rc.y + rc.h > frame->height)
+		rc.h = frame->height - rc.y;
+	if (rc.h <= 0)
+		return;
+
+	// Clipping against destination
+	if (dstx < 0) {
+		rc.x -= dstx;
+		rc.w += dstx;
+		dstx = 0;
+	}
+	if (dstx + rc.w > m_rect.w)
+		rc.w = m_rect.w - dstx;
+	if (rc.w <= 0)
+		return;
+
 	if (dsty < 0) {
 		rc.y -= dsty;
 		rc.h += dsty;
@@ -1221,7 +1305,7 @@ uint GraphicImpl::create_surface(int w, int h)
 {
 	uint id = find_free_picture();
 	Picture* pic = &m_pictures[id];
-	
+
 	pic->mod = -1; // mark as surface
 	pic->bitmap.pixels = (ushort*)malloc(w*h*sizeof(ushort));
 	pic->bitmap.w = w;
@@ -1395,8 +1479,45 @@ AnimationGfx* GraphicImpl::get_animation(uint anim)
 {
 	if (!anim || anim > m_animations.size())
 		return 0;
-	
+
 	return m_animations[anim-1];
+}
+
+
+/*
+===============
+GraphicImpl::get_animation_size
+
+Return the size of the animation at the given time.
+===============
+*/
+void GraphicImpl::get_animation_size(uint anim, uint time, int* pw, int* ph)
+{
+	const AnimationData* data = g_anim.get_animation(anim);
+	const AnimationGfx* gfx = get_graphicimpl()->get_animation(anim);
+	const AnimFrame* frame;
+	int w, h;
+
+	if (!data || !gfx)
+	{
+		log("WARNING: Animation %i doesn't exist\n", anim);
+		w = h = 0;
+	}
+	else
+	{
+		// Get the frame and its data
+		frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes());
+
+		w = frame->width;
+		h = frame->height;
+	}
+
+	if (pw)
+		*pw = w;
+	if (ph)
+		*ph = h;
+
+	return;
 }
 
 

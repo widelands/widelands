@@ -27,6 +27,7 @@ class Profile;
 class Request;
 class Flag;
 class Economy;
+class WaresQueue;
 class Worker;
 
 /*

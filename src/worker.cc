@@ -841,6 +841,7 @@ void Worker::run_state_fugitive(Game *g, uint prev, bool success, uint nexthint)
 
 		if (g->get_gametime() - m_fugitive_death >= 0) {
 			molog("Worker: State_Fugitive: die\n");
+
 			schedule_destroy(g);
 			return;
 		}
@@ -929,7 +930,7 @@ void Worker::run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthi
 	Warehouse *wh = (Warehouse*)m_gowarehouse.get(g);
 
 	if (!m_route) {
-		assert(location->get_type() == Map_Object::FLAG);
+		assert(location->get_type() == FLAG || location->get_type() == BUILDING);
 
 		m_route = new Route;
 

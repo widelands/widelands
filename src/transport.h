@@ -376,6 +376,9 @@ This micro storage room can hold any number of items of a fixed ware.
 */
 class WaresQueue {
 public:
+	typedef void (callback_t)(Game* g, WaresQueue* wq, int ware, void* data);
+
+public:
 	WaresQueue(PlayerImmovable* bld);
 	~WaresQueue();
 
@@ -386,6 +389,8 @@ public:
 	void init(Game*, int ware, int size);
 	void cleanup(Game*);
 	void update(Game*);
+
+	void set_callback(callback_t* fn, void* data);
 
 	void remove_from_economy(Economy* e);
 	void add_to_economy(Economy* e);
@@ -402,6 +407,9 @@ private:
 	int					m_size;		// # of items that fit into the queue
 	int					m_filled;	// # of items that are currently in the queue
 	Request*				m_request;	// currently pending request
+
+	callback_t*			m_callback_fn;
+	void*					m_callback_data;
 };
 
 

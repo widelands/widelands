@@ -68,6 +68,7 @@ public:
 
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
+	virtual void act(Game *g, uint data);
 
 	virtual void set_economy(Economy* e);
 
@@ -77,8 +78,13 @@ public:
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
+	void check_work(Game* g);
+
 	void request_builder(Game* g);
 	static void request_builder_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
+	static void wares_queue_callback(Game* g, WaresQueue* wq, int ware, void* data);
+
+	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
 	Building_Descr*	m_building; // type of building that is being built
@@ -87,6 +93,11 @@ private:
 	Worker*				m_builder;
 
 	std::vector<WaresQueue*>	m_wares;
+
+	bool					m_working;		// true if the builder is currently working
+	uint					m_work_steptime;	// time when next step is completed
+	uint					m_work_completed;	// how many steps have we done so far?
+	uint					m_work_steps;		// how many steps (= items) until we're done?
 };
 
 

@@ -83,11 +83,11 @@ struct Bitmap {
 
 	void draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx, uint fy);
 	void draw_animframe(Point dst, const AnimFrame* frame, Rect rc, const RGBColor* plrclrs);
-	
+
 	// sw16_terrain.cc
 	void draw_field(Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-	                const int posx, const int rposx, const int posy, 
-	                const int blposx, const int rblposx, const int blposy, 
+	                const int posx, const int rposx, const int posy,
+	                const int blposx, const int rblposx, const int blposy,
 	                uchar roads, bool render_r, bool render_b);
 };
 
@@ -98,10 +98,10 @@ struct Bitmap {
 */
 class Colormap {
 //    friend class Texture;
-    
+
 private:
 	SDL_Color palette[256];
-	
+
 	unsigned short *colormap;	// maps 8 bit color and brightness value to the shaded 16 bit color
 		// NOTE: brightness is currently 8 bits. Restricting brightness
 		// to 64 or less shades would greatly reduce the size of this
@@ -110,9 +110,9 @@ private:
 public:
 	Colormap (const SDL_Color *);
 	~Colormap ();
-	
+
 	SDL_Color* get_palette() { return palette; }
-	
+
 	unsigned short *get_colormap () const { return colormap; }
 };
 
@@ -201,6 +201,8 @@ public:
 	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint fx, uint fy);
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs = 0);
+	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,
+									  const RGBColor* plrclrs, int srcx, int srcy, int w, int h);
 };
 
 
@@ -235,17 +237,18 @@ public:
 	virtual uint create_surface(int w, int h, RGBColor clrkey);
 	virtual void free_surface(uint pic);
 	virtual RenderTarget* get_surface_renderer(uint pic);
-	
+
 	Bitmap* get_picture_bitmap(uint id);
-	
+
 	// Map textures
 	virtual uint get_maptexture(const char* fnametempl, uint frametime);
 	virtual void animate_maptextures(uint time);
 	Texture* get_maptexture_data(uint id);
-	
+
 	// Animations
 	virtual void load_animations();
 	AnimationGfx* get_animation(uint anim);
+	virtual void get_animation_size(uint anim, uint time, int* w, int* h);
 
 	// Misc functions
 	virtual void screenshot(const char* fname);

@@ -85,6 +85,8 @@ public:
 	virtual void cleanup(Editor_Game_Base*);
 	virtual void act(Game*, uint data);
 
+	void schedule_destroy(Game* g);
+	
 	void calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos);
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
 

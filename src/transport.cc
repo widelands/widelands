@@ -1907,7 +1907,7 @@ void Request::check_transfer(Game *g)
 	if (m_item) {
 		assert(!m_worker);
 
-		m_item->is_moving(g);
+		m_item->update(g);
 		return;
 	}
 
@@ -2111,6 +2111,9 @@ WaresQueue::WaresQueue(PlayerImmovable* bld)
 	m_size = 0;
 	m_filled = 0;
 	m_request = 0;
+
+	m_callback_fn = 0;
+	m_callback_data = 0;
 }
 
 
@@ -2206,6 +2209,20 @@ void WaresQueue::update(Game* g)
 
 /*
 ===============
+WaresQueue::set_callback
+
+Set the callback function that is called when an item has arrived.
+===============
+*/
+void WaresQueue::set_callback(callback_t* fn, void* data)
+{
+	m_callback_fn = fn;
+	m_callback_data = data;
+}
+
+
+/*
+===============
 WaresQueue::request_callback [static]
 
 Called when an item arrives at the owning building.
@@ -2227,6 +2244,9 @@ void WaresQueue::request_callback(Game* g, Request* rq, int ware, Worker* w, voi
 	// Update
 	wq->set_filled(wq->m_filled + 1);
 	wq->update(g);
+
+	if (wq->m_callback_fn)
+		(*wq->m_callback_fn)(g, wq, ware, wq->m_callback_data);
 }
 
 

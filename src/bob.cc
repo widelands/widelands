@@ -261,6 +261,24 @@ void Bob::act(Game* g, uint data)
 		                         ++m_actid, 0);
 }
 
+
+/*
+===============
+Bob::schedule_destroy
+
+Kill self ASAP.
+Make sure a task if set if necessary.
+===============
+*/
+void Bob::schedule_destroy(Game* g)
+{
+	if (!m_task)
+		m_task = TASK_IDLE; // dummy
+
+	Map_Object::schedule_destroy(g);
+}
+
+
 /*
 ===============
 Bob::do_next_task [private]
