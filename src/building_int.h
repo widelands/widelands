@@ -71,6 +71,9 @@ public:
 
 	virtual void set_economy(Economy* e);
 
+	uint get_nrwaresqueues() { return m_wares.size(); }
+	WaresQueue* get_waresqueue(uint idx) { return m_wares[idx]; }
+
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 

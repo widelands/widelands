@@ -32,6 +32,7 @@ class.
 #include "player.h"
 #include "worker.h"
 #include "fieldaction.h"
+#include "transport.h"
 
 #include "building_int.h"
 #include "ui_box.h"
@@ -42,6 +43,7 @@ static const char* pic_ok = "pics/menu_okay.png";
 static const char* pic_cancel = "pics/menu_abort.png";
 
 static const char* pic_bulldoze = "pics/menu_bld_bulldoze.png";
+static const char* pic_queue_background = "pics/queue_background.png";
 
 
 /*
@@ -214,6 +216,190 @@ dialog.
 void show_bulldoze_confirm(Interactive_Player* player, Building* building, PlayerImmovable* todestroy)
 {
 	new BulldozeConfirm(player, building, todestroy);
+}
+
+
+/*
+==============================================================================
+
+class WaresQueueDisplay
+
+==============================================================================
+*/
+
+/*
+class WaresQueueDisplay
+-----------------------
+This passive class displays the status of a WaresQueue.
+It updates itself automatically through think().
+*/
+class WaresQueueDisplay : public Panel {
+public:
+	enum {
+		CellWidth = 24,
+		CellHeight = 24,
+		Border = 4,
+
+		Height = CellHeight + 2 * Border,
+
+		BG_LeftBorderX = 0,
+		BG_CellX = BG_LeftBorderX + Border,
+		BG_RightBorderX = BG_CellX + CellWidth,
+		BG_ContinueCellX = BG_RightBorderX + Border,
+		BG_ContinueBorderX = BG_ContinueCellX + CellWidth,
+	};
+
+public:
+	WaresQueueDisplay(Panel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g);
+	~WaresQueueDisplay();
+
+	virtual void think();
+	virtual void draw(RenderTarget* dst);
+
+private:
+	void recalc_size();
+
+private:
+	WaresQueue*		m_queue;
+	uint				m_max_width;
+	uint				m_pic_empty;
+	uint				m_pic_full;
+	uint				m_pic_background;
+
+	uint				m_cache_size;
+	uint				m_cache_filled;
+	uint				m_display_size;
+};
+
+
+/*
+===============
+WaresQueueDisplay::WaresQueueDisplay
+
+Initialize the panel.
+===============
+*/
+WaresQueueDisplay::WaresQueueDisplay(Panel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g)
+	: Panel(parent, x, y, 0, Height)
+{
+	Ware_Descr* descr;
+	Item_Ware_Descr* waredescr;
+
+	m_queue = queue;
+	m_max_width = maxw;
+
+	descr = g->get_ware_description(m_queue->get_ware());
+	if (descr->is_worker())
+		throw wexception("WaresQueueDisplay: not implemented for workers");
+
+	waredescr = (Item_Ware_Descr*)descr;
+	m_pic_empty = waredescr->get_pic_queue_empty();
+	m_pic_full = waredescr->get_pic_queue_full();
+
+	m_cache_size = m_queue->get_size();
+	m_cache_filled = m_queue->get_filled();
+	m_display_size = 0;
+
+	m_pic_background = g_gr->get_picture(PicMod_Game, pic_queue_background);
+
+	recalc_size();
+
+	set_think(true);
+}
+
+
+/*
+===============
+WaresQueueDisplay::~WaresQueueDisplay
+
+Cleanup
+===============
+*/
+WaresQueueDisplay::~WaresQueueDisplay()
+{
+}
+
+
+/*
+===============
+WaresQueueDisplay::recalc_size
+
+Recalculate the panel's size.
+===============
+*/
+void WaresQueueDisplay::recalc_size()
+{
+	m_display_size = (m_max_width - 2*Border) / CellWidth;
+
+	m_cache_size = m_queue->get_size();
+
+	if (m_cache_size < m_display_size)
+		m_display_size = m_cache_size;
+
+	set_size(m_display_size*CellWidth + 2*Border, Height);
+}
+
+
+/*
+===============
+WaresQueueDisplay::think
+
+Compare the current WaresQueue state with the cached state; update if necessary.
+===============
+*/
+void WaresQueueDisplay::think()
+{
+	if ((uint)m_queue->get_size() != m_cache_size)
+		recalc_size();
+
+	if ((uint)m_queue->get_filled() != m_cache_filled)
+		update(0, 0, get_w(), get_h());
+}
+
+
+/*
+===============
+WaresQueueDisplay::draw
+
+Render the current WaresQueue state.
+===============
+*/
+void WaresQueueDisplay::draw(RenderTarget* dst)
+{
+	int x;
+
+	if (!m_display_size)
+		return;
+
+	m_cache_filled = m_queue->get_filled();
+
+	// Draw it
+	dst->blitrect(0, 0, m_pic_background, BG_LeftBorderX, 0, Border, Height);
+
+	x = Border;
+
+	for(uint cells = 0; cells < m_display_size; cells++) {
+		uint pic;
+
+		if (cells+1 == m_display_size && m_cache_size > m_display_size)
+			dst->blitrect(x, 0, m_pic_background, BG_ContinueCellX, 0, CellWidth, Height);
+		else
+			dst->blitrect(x, 0, m_pic_background, BG_CellX, 0, CellWidth, Height);
+
+		if (cells < m_cache_filled)
+			pic = m_pic_full;
+		else
+			pic = m_pic_empty;
+
+		dst->blit(x, Border, pic);
+
+		x += CellWidth;
+	}
+
+	if (m_cache_size > m_display_size)
+		dst->blitrect(x, 0, m_pic_background, BG_ContinueBorderX, 0, Border, Height);
+	else
+		dst->blitrect(x, 0, m_pic_background, BG_RightBorderX, 0, Border, Height);
 }
 
 
@@ -414,6 +600,17 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 	: Building_Window(parent, cs, registry)
 {
 	Box* box = new Box(this, 0, 0, Box::Vertical);
+
+	// Add the wares queue
+	for(uint i = 0; i < cs->get_nrwaresqueues(); i++)
+	{
+		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
+					cs->get_waresqueue(i), parent->get_game());
+
+		box->add(wqd, Box::AlignLeft);
+	}
+
+	box->add_space(8);
 
 	// Add the caps buttons
 	box->add(create_capsbuttons(box), Box::AlignCenter);

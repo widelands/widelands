@@ -76,6 +76,8 @@ public:
 
 	inline uint get_menu_pic() { return m_menu_pic; }
 	inline uint get_idle_anim() { return m_idle_anim; }
+	inline uint get_pic_queue_full() { return m_pic_queue_full; }
+	inline uint get_pic_queue_empty() { return m_pic_queue_empty; }
 
 private:
 	void parse(const char *directory, Profile *prof);
@@ -84,8 +86,14 @@ private:
 	std::string		m_descname;
 	std::string		m_helptext;
 	std::string		m_menu_pic_fname;
+	std::string		m_pic_queue_full_fname;
+	std::string		m_pic_queue_empty_fname;
+	
 	uint				m_menu_pic;
 	uint				m_idle_anim;
+
+	uint				m_pic_queue_full;
+	uint				m_pic_queue_empty;
 
 public:
 	static Item_Ware_Descr* create_from_dir(const char* name, const char* directory);

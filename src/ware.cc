@@ -62,11 +62,12 @@ void Ware_Descr::load_graphics()
 }
 
 
+
 /*
 ==============================================================================
 
 Item_Ware_Descr IMPLEMENTATION
-	
+
 ==============================================================================
 */
 
@@ -80,6 +81,9 @@ Item_Ware_Descr::Item_Ware_Descr(const char *name)
 	: Ware_Descr(name)
 {
 	m_menu_pic = 0;
+	m_idle_anim = 0;
+	m_pic_queue_full = 0;
+	m_pic_queue_empty = 0;
 }
 
 Item_Ware_Descr::~Item_Ware_Descr()
@@ -103,10 +107,20 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 	m_descname = global->get_string("descname", get_name());
 	m_helptext = global->get_string("help", "Doh... someone forgot the help text!");
 
-	snprintf(buf, sizeof(buf),	"%s_menu.bmp", get_name());
+	snprintf(buf, sizeof(buf),	"%s_menu.png", get_name());
 	string = global->get_string("menu_pic", buf);
 	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
 	m_menu_pic_fname = buf;
+
+	snprintf(buf, sizeof(buf), "%s_queue_full.png", get_name());
+	string = global->get_string("queue_full_pic", buf);
+	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
+	m_pic_queue_full_fname = buf;
+
+	snprintf(buf, sizeof(buf), "%s_queue_empty.png", get_name());
+	string = global->get_string("queue_empty_pic", buf);
+	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
+	m_pic_queue_empty_fname = buf;
 
 	m_idle_anim = g_anim.get(directory, prof->get_safe_section("idle"));
 }
@@ -120,6 +134,8 @@ Item_Ware_Descr::load_graphics
 void Item_Ware_Descr::load_graphics()
 {
 	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname.c_str());
+	m_pic_queue_full = g_gr->get_picture(PicMod_Game, m_pic_queue_full_fname.c_str(), RGBColor(0, 0, 255));
+	m_pic_queue_empty = g_gr->get_picture(PicMod_Game, m_pic_queue_empty_fname.c_str(), RGBColor(0, 0, 255));
 }
 
 
