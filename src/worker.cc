@@ -39,7 +39,7 @@ struct WorkerAction {
 		actCreateItem,			// sparam1 = ware name
 		actSetDescription,	// sparamv = possible bobs
 		actFindObject,			// iparam1 = radius predicate, iparam2 = attribute predicate (if >= 0)
-		actFindSpace,			// iparam1 = radius
+		actFindSpace,			// iparam1 = radius, iparam2 = FindFieldSize::sizeXXX
 		actWalk,					// iparam1 = walkXXX
 		actAnimation,			// iparam1 = anim id; iparam2 = duration
 		actReturn,				// iparam1 = 0: don't drop item on flag, 1: do drop item on flag
@@ -171,16 +171,57 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 			}
 			else if (cmd[0] == "findspace")
 			{
-				char* endp;
-
-				if (cmd.size() != 2)
-					throw wexception("Usage: findspace <radius>");
+				uint i;
 
 				act.type = WorkerAction::actFindSpace;
-				act.iparam1 = strtol(cmd[1].c_str(), &endp, 0);
+				act.iparam1 = -1;
+				act.iparam2 = -1;
 
-				if ((endp && *endp) || act.iparam1 <= 0)
-					throw wexception("Bad findspace radius %i", act.iparam1);
+				// Parse predicates
+				for(i = 1; i < cmd.size(); i++) {
+					uint idx = cmd[i].find(':');
+					std::string key = cmd[i].substr(0, idx);
+					std::string value = cmd[i].substr(idx+1);
+
+					if (key == "radius") {
+						char* endp;
+
+						act.iparam1 = strtol(value.c_str(), &endp, 0);
+						if (endp && *endp)
+							throw wexception("Bad findspace radius '%s'", value.c_str());
+					} else if (key == "size") {
+						static const struct {
+							const char* name;
+							int val;
+						} sizenames[] = {
+							{ "any",		FindFieldSize::sizeAny },
+							{ "build",	FindFieldSize::sizeBuild },
+							{ "small",	FindFieldSize::sizeSmall },
+							{ "medium",	FindFieldSize::sizeMedium },
+							{ "big",		FindFieldSize::sizeBig },
+							{ "mine",	FindFieldSize::sizeMine },
+							{ "port",	FindFieldSize::sizePort },
+							{ 0, 0 }
+						};
+
+						int idx;
+
+						for(idx = 0; sizenames[idx].name; ++idx)
+							if (value == sizenames[idx].name)
+								break;
+
+						if (!sizenames[idx].name)
+							throw wexception("Bad findspace size '%s'", value.c_str());
+
+						act.iparam2 = sizenames[idx].val;
+					} else
+						throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
+				}
+
+				if (act.iparam1 <= 0)
+					throw wexception("findspace: must specify radius");
+				if (act.iparam2 < 0)
+					throw wexception("findspace: must specify size");
 			}
 			else if (cmd[0] == "walk")
 			{
@@ -1210,9 +1251,8 @@ void Worker::program_update(Game* g, State* state)
 
 				descr = w->get_immovable_descr(state->ivar2);
 
-				// TODO: Hmm... the field predicate should be BUILDCAPS_FLAG *or* BUILDCAPS_SMALL...
-
-				if (!map->find_fields(get_position(), act->iparam1, &list, FindFieldCaps(BUILDCAPS_SMALL))) {
+				if (!map->find_fields(get_position(), act->iparam1, &list,
+									FindFieldSize((FindFieldSize::Size)act->iparam2))) {
 					molog("  no space found\n");
 					set_signal("fail");
 					pop_task(g);
@@ -1348,7 +1388,9 @@ void Worker::program_update(Game* g, State* state)
 				molog("  Plant: %i at %i,%i\n", state->ivar2, pos.x, pos.y);
 
 				// Check if the map is still free here
-				if (g->get_map()->get_immovable(pos)) {
+				BaseImmovable* imm = g->get_map()->get_immovable(pos);
+
+				if (imm && imm->get_size() >= BaseImmovable::SMALL) {
 					molog("  field no longer free\n");
 					set_signal("fail");
 					pop_task(g);

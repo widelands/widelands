@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,6 +86,14 @@ struct FindField {
 };
 
 
+struct FindImmovableAlwaysTrue : public FindImmovable {
+	virtual bool accept(BaseImmovable* imm) const { return true; }
+};
+struct FindBobAlwaysTrue : public FindBob {
+	virtual bool accept(Bob *imm) const { return true; }
+};
+
+
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -137,11 +145,11 @@ public:
 	inline uint get_height(void) { return m_height; }
 	inline World* get_world(void) { return m_world; }
 
-	bool find_bobs(Coords coord, uint radius, std::vector<Bob*> *list);
-	bool find_bobs(Coords coord, uint radius, std::vector<Bob*> *list, const FindBob &functor);
+	bool find_bobs(Coords coord, uint radius, std::vector<Bob*> *list,
+								const FindBob &functor = FindBobAlwaysTrue());
 	BaseImmovable *get_immovable(Coords coord);
-	bool find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list);
-	bool find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list, const FindImmovable &functor);
+	bool find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
+								const FindImmovable &functor = FindImmovableAlwaysTrue());
 	bool find_fields(Coords coord, uint radius, std::vector<Coords>* list, const FindField& functor);
 
 	// Field logic
@@ -265,6 +273,24 @@ struct FindFieldCaps : public FindField {
 	virtual bool accept(Coords c, Field* f) const;
 
 	uchar m_mincaps;
+};
+
+struct FindFieldSize : public FindField {
+	enum Size {
+		sizeAny = 0,	// any field not occupied by a robust immovable
+		sizeBuild,		// any field we can build on (flag or building)
+		sizeSmall,		// at least small size
+		sizeMedium,
+		sizeBig,
+		sizeMine,		// can build a mine on this field
+		sizePort,		// can build a port on this field
+	};
+
+	FindFieldSize(Size size) : m_size(size) { }
+
+	virtual bool accept(Coords c, Field* f) const;
+
+	Size m_size;
 };
 
 /** class Path

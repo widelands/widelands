@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
- * 
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -361,37 +361,13 @@ void Map::load_graphics()
 ===============
 Map::find_bobs
 
-Find Map_Objects in the given area. The functor-version only finds objects for
-which functor.accept() returns true.
+Find Map_Objects in the given area. Only finds objects for which
+functor.accept() returns true (the default functor always returns true)
 If list is non-zero, pointers to the relevant objects will be stored in the list.
 
 Returns true if objects could be found
 ===============
 */
-bool Map::find_bobs(Coords coords, uint radius, std::vector<Bob*> *list)
-{
-	Map_Region mr(coords, radius, this);
-	Field *f;
-	bool found = false;
-	
-	while((f = mr.next())) {
-		Bob *bob;
-		
-		for(bob = f->get_first_bob(); bob; bob = bob->get_next_bob()) {
-			if (find(list->begin(), list->end(), bob) != list->end())
-				continue;
-			
-			if (!list)
-				return true;
-			
-			list->push_back(bob);
-			found = true;
-		}
-	}
-	
-	return found;
-}
-
 bool Map::find_bobs(Coords coord, uint radius, std::vector<Bob*> *list, const FindBob &functor)
 {
 	Map_Region mr(coord, radius, this);
@@ -435,45 +411,14 @@ BaseImmovable *Map::get_immovable(Coords coord)
 ===============
 Map::find_immovables
 
-Find all immovables in the given area. Returns true if an immovable has been found.
-If list is not 0, found immovables are stored in list.
-===============
-*/
-bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list)
-{
-	Map_Region mr(coord, radius, this);
-	Field *f;
-	bool found = false;
-
-	while((f = mr.next())) {
-		BaseImmovable *imm = f->get_immovable();
-
-		if (!imm)
-			continue;
-
-		if (!list)
-			return true; // no need to look any further
-
-		ImmovableFound imf;
-		imf.object = imm;
-		get_coords(f, &imf.coords);
-		list->push_back(imf);
-		found = true;
-	}
-	
-	return found;
-}
-
-/*
-===============
-Map::find_immovables
-
-Find all immovables in the given area for which functor returns true.
+Find all immovables in the given area for which functor returns true
+(the default functor always returns true).
 Returns true if an immovable has been found.
 If list is not 0, found immovables are stored in list.
 ===============
 */
-bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list, const FindImmovable &functor)
+bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
+																			const FindImmovable &functor)
 {
    Map_Region mr(coord, radius, this);
 	Field *f;
@@ -1826,6 +1771,27 @@ bool FindFieldCaps::accept(Coords c, Field* f) const
 		return false;
 
 	return true;
+}
+
+bool FindFieldSize::accept(Coords c, Field* f) const
+{
+	BaseImmovable* imm = f->get_immovable();
+	bool hasrobust = (imm && imm->get_size() > BaseImmovable::NONE);
+	uchar fieldcaps = f->get_caps();
+
+	if (hasrobust)
+		return false;
+
+	switch(m_size) {
+	default:
+	case sizeAny:		return true;
+	case sizeBuild:	return (fieldcaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE));
+	case sizeMine:		return (fieldcaps & BUILDCAPS_MINE);
+	case sizePort:		return (fieldcaps & BUILDCAPS_PORT);
+	case sizeSmall:	return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_SMALL;
+	case sizeMedium:	return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_MEDIUM;
+	case sizeBig:		return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
+	}
 }
 
 
