@@ -99,7 +99,8 @@ namespace Graph {
 
 				unsigned long clear = clrkey;
 				for (unsigned int i=(w*h-2); i; i-=2)
-					pixels[i]=clear;
+					*(unsigned long*)&pixels[i] = clear;
+//					pixels[i] = clear;
 		  }
 
 		  /** int Pic::load(const char* file)
