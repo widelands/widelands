@@ -33,8 +33,8 @@ static const int EVENT_VERSION = 1;
 Event_Unhide_Area::Event_Unhide_Area(void) {
    set_name("Unhide Area");
    set_is_one_time_event(true);
-   set_coords(Coords(-1,-1));
-   set_player(-1);
+   set_coords(Coords(0,0));
+   set_player(1);
    set_area(5);
 }
 
@@ -122,7 +122,7 @@ void Event_Unhide_Area::Write(FileWrite* fw, Editor_Game_Base *egbase) {
  */
 void Event_Unhide_Area::run(Game* game) {
    assert(m_pt.x!=-1 && m_pt.y!=-1);
-   assert(m_player>0 && m_player<game->get_map()->get_nrplayers());
+   assert(m_player>0 && m_player<=game->get_map()->get_nrplayers());
 
    Player* player=game->get_player(m_player);
    player->set_area_seen(Coords(m_pt.x,m_pt.y),get_area(), true);

@@ -63,11 +63,7 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    m_buttons[3].name="Button 3";
    m_buttons[0].trigger=m_buttons[1].trigger=m_buttons[2].trigger=m_buttons[3].trigger=-1;
   
-   for(int i=0; i<m_event->get_nr_buttons(); i++) {
-      m_buttons[i].name=m_event->get_button_name(i);
-      m_buttons[i].trigger=m_parent->get_map()->get_trigger_index(m_event->get_button_trigger(i));
-   }
-   
+  
    // Name editbox 
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
@@ -173,6 +169,13 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
          m_null_triggers.push_back(i);
    }
 
+   for(int i=0; i<m_event->get_nr_buttons(); i++) {
+      m_buttons[i].name=m_event->get_button_name(i);
+      for(int j=0; j<((int)m_null_triggers.size()); j++) 
+         if(m_parent->get_map()->get_trigger_index(m_event->get_button_trigger(i))==m_null_triggers[j]) 
+            m_buttons[i].trigger=j;
+   }
+  
    center_to_parent();
    update();
 }
@@ -230,7 +233,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
             for(int i=0; i<m_nr_buttons; i++) {
                m_event->set_button_name(i, m_buttons[i].name.c_str());
                if(m_buttons[i].trigger!=-1) {
-                  m_event->set_button_trigger(i, static_cast<Trigger_Null*>(m_parent->get_map()->get_trigger(m_buttons[i].trigger)), m_parent->get_map());
+                  m_event->set_button_trigger(i, static_cast<Trigger_Null*>(m_parent->get_map()->get_trigger(m_null_triggers[m_buttons[i].trigger])), m_parent->get_map());
                } else {
                   m_event->set_button_trigger(i, 0, m_parent->get_map());
                }
@@ -334,7 +337,7 @@ void Event_Message_Box_Option_Menu::update(void) {
       if(m_buttons[m_ls_selected].trigger==-1) 
          m_current_trigger_ta->set_text("none");
       else
-         m_current_trigger_ta->set_text(m_parent->get_map()->get_trigger(m_buttons[m_ls_selected].trigger)->get_name());
+         m_current_trigger_ta->set_text(m_parent->get_map()->get_trigger(m_null_triggers[m_buttons[m_ls_selected].trigger])->get_name());
    } else { 
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;

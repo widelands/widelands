@@ -168,10 +168,8 @@ void Message_Box_Event_Message_Box::clicked(int i) {
       // One of the buttons has been pressed
 //      NoLog("Button %i has been pressed, nr of buttons: %i!\n", i, m_event->get_nr_buttons());
       Trigger_Null* t=m_trigger[i];
-      ALIVE();
       if(t)
          t->set_trigger_manually(true);
-      ALIVE();
       clicked(-1);
       return;
    }

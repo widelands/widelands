@@ -20,7 +20,7 @@
 #ifndef __S__EDITOR_TOOL_H
 #define __S__EDITOR_TOOL_H
 
-#define MAX_TOOL_AREA 6
+#define MAX_TOOL_AREA 9
 
 #include <vector>
 #include "field.h"

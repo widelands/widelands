@@ -289,6 +289,15 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
          case KEY_7:
             set_fieldsel_radius(6);
             return true;
+         case KEY_8:
+            set_fieldsel_radius(7);
+            return true;
+         case KEY_9:
+            set_fieldsel_radius(8);
+            return true;
+         case KEY_0:
+            set_fieldsel_radius(9);
+            return true;
 
          case KEY_LSHIFT:
          case KEY_RSHIFT:

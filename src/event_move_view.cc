@@ -33,7 +33,7 @@ static const int EVENT_VERSION = 1;
 Event_Move_View::Event_Move_View(void) {
    set_name("Move View");
    set_is_one_time_event(true);
-   set_coords(Coords(-1,-1));
+   set_coords(Coords(0,0));
 }
 
 Event_Move_View::~Event_Move_View(void) {

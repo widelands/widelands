@@ -32,8 +32,8 @@ static const int EVENT_VERSION = 1;
 Event_Conquer_Area::Event_Conquer_Area(void) {
    set_name("Conquer Area");
    set_is_one_time_event(true);
-   set_coords(Coords(-1,-1));
-   set_player(-1);
+   set_coords(Coords(0,0));
+   set_player(0);
    set_area(5);
 }
 
@@ -121,7 +121,7 @@ void Event_Conquer_Area::Write(FileWrite* fw, Editor_Game_Base *egbase) {
  */
 void Event_Conquer_Area::run(Game* game) {
    assert(m_pt.x!=-1 && m_pt.y!=-1);
-   assert(m_player>0 && m_player<game->get_map()->get_nrplayers());
+   assert(m_player>0 && m_player<=game->get_map()->get_nrplayers());
 
    game->conquer_area_no_building(m_player, Coords(m_pt.x, m_pt.y), get_area());
    
