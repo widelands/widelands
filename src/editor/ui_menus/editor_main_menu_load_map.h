@@ -21,9 +21,13 @@
 #define __S__EDITOR_MAIN_MENU_LOAD_MAP_H
 
 #include "ui_window.h"
+#include "filesystem.h"
 
 class Editor_Interactive;
 class UIEdit_Box;
+class UIListselect;
+class UITextarea;
+class UIMultiline_Textarea;
 
 /*
 =================================================
@@ -41,8 +45,14 @@ class Main_Menu_Load_Map : public UIWindow {
 
    private:
       void clicked(int);
+      void selected(int);
+
+      UITextarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;
+      UIMultiline_Textarea* m_descr;
       Editor_Interactive *m_parent;
+      UIListselect* m_ls;
       UIEdit_Box* m_editbox;
+      filenameset_t m_mapfiles;
 };
 
 #endif

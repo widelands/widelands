@@ -76,19 +76,23 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &m_mapfiles);
 	g_fs->FindFiles("maps", "*"S2MF_SUFFIX, &m_mapfiles);
 
+   
+   Map* map=new Map();
 	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 		const char *name = pname->c_str();
-		const char *slash = strrchr(name, '/');
-		const char *backslash = strrchr(name, '\\');
-
-		if (backslash && (!slash || backslash > slash))
-			slash = backslash;
-
-		list->add_entry
-		(
-			slash ? slash + 1 : name, reinterpret_cast<void*>(const_cast<char*>(name))
-		);
-	}
+       
+      Map_Loader* m_ml = map->get_correct_loader(name);
+      try {
+         m_ml->preload_map(true);
+         list->add_entry(map->get_name(), reinterpret_cast<void*>(const_cast<char*>(name)));
+      } catch(wexception& ) {
+         // we simply skip illegal entries
+      }
+	   delete m_ml;
+			
+   }
+   list->sort();
+   delete map;
 
 	// Info fields
 	new UITextarea(this, 450, 160, "Name:", Align_Right);
