@@ -24,14 +24,6 @@
 
 Graphic *g_graphic = 0;
 
-/* apparently deprecated -- Nicolai
-// wireframe or filled triangles?
-#define SHADING_FLAT		1
-#define SHADING_GOURAUD	2
-#define SHADING				SHADING_GOURAUD
-#define FILL_TRIANGLES
-*/
-
 // stupid kludge: this function from system.cc must be imported to report
 // resolution changes
 // ideally, the Graphic setup code would go into system.cc, while the actual
@@ -172,13 +164,14 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture, int 
       }
 
       ushort *pix = dst->get_pixels() + (points[0].y + y)*dst->get_pitch() + start;
-      ushort *texp = texture->get_pixels() + ((points[0].y + y+vpy) % texture->get_h())*texture->get_w();
 
 		int txend = end + vpx;
+      float per_pixel_slope=(bd>>16)/5; // 5 == HEIGHT_FACTOR
       for(int tx = start + vpx; tx <= txend; tx++)
       {
          //*pix++ = pack_rgb((b >> 16) + 128, (b >> 16) + 128, (b >> 16) + 128); // shading test
-         *pix++ = bright_up_clr2(texp[tx & (TEXTURE_W-1)], b >> 16);
+         ushort *texp = texture->get_pixels() + ((int)((points[0].y + y+vpy-(((starts[y].b>>16)/5)+(per_pixel_slope)*(tx-(start+vpx))))) % texture->get_h())*texture->get_w() + (tx & (TEXTURE_W-1));
+         *pix++ = bright_up_clr2(*texp, b >> 16);
          b += bd;
       }
    }

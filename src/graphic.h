@@ -27,7 +27,7 @@
 #include <SDL.h> // need SDL_Rect
 
 #define TEXTURE_W          64
-#define TEXTURE_H          64
+#define TEXTURE_H          TEXTURE_W   // texture have a fixed size and are squares, TEXTURE_H is just defined for easier understandement of the code
 
 /** inline ushort pack_rgb(const uchar r, const uchar g, const uchar b);
  *
