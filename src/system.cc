@@ -38,7 +38,7 @@ Our own virtual mouse is moved independently.
 Obviously, we draw the mouse ourselves.
 This is no longer true. we now use SDL's Relative Coordinates, since they now work
 properly. the old code ist still around (as comment), since relative mouse movements won't
-work on MacOS.
+work on MacOS (e.g).
 
 Internally, mouse position is kept with sub-pixel accuracy to make mouse speed
 work.

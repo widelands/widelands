@@ -67,7 +67,7 @@ void ToolPanel::draw_border(RenderTarget* dst)
 	int bgw, bgh;
 	int px, py;
 
-	g_gr->get_picture_size(m_pic_background, &bgw, &bgh);
+   g_gr->get_picture_size(m_pic_background, &bgw, &bgh);
 	
 	// fill background
    int blitw, blith;

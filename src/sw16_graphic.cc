@@ -671,7 +671,11 @@ void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx
 	rc.y = 0;
 	rc.w = mri->map->get_width();
 	rc.h = mri->map->get_height();
-	
+
+/*
+ * I don't know for what this is. i guess it's no longer needed for In game minimaprendering.
+ * But it's a nuicance for the editor. that's why it's commented.
+ *
 	if (pt.x < 0) {
 		rc.x -= pt.x;
 		rc.w += pt.x;
@@ -691,6 +695,7 @@ void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx
 		rc.h = m_rect.h - pt.y;
 	if (rc.h <= 0)
 		return;
+*/
 	
 	m_bitmap->draw_minimap(Point(pt.x + m_rect.x, pt.y + m_rect.y), mri, rc, fx, fy);
 }

@@ -44,20 +44,21 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
 
    // The mapview. watch the map!!!
    m_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
+   m_mapview->warpview.set(this, &Editor_Interactive::mainview_move);
+   //     main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
+
      
    // The panel. Tools, infos and gimmicks
    m_panel = new ToolPanel(this, 0, get_h()-PANEL_HEIGHT, get_w(), PANEL_HEIGHT);
-
-   //      main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
-   //     main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
-
+		
 
    // user interface buttons
    int x = (get_w() - (4*34)) >> 1;
    int y = get_h() - 34;
    Button *b;
 
-	new MiniMapView(m_panel, m_panel->get_w()-PANEL_HEIGHT-1, 0, this, PANEL_HEIGHT, PANEL_HEIGHT);
+	m_minimap= new MiniMapView(m_panel, m_panel->get_w()-PANEL_HEIGHT, 0, this, PANEL_HEIGHT, PANEL_HEIGHT);
+   m_minimap->warpview.set(this, &Editor_Interactive::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with
   // new MiniMapView(this, 50, 50, this, 0, 0);
@@ -180,3 +181,36 @@ void Editor_Interactive::exit_game_btn()
 }
 
 
+/** Editor_Interactive::minimap_warp(int x, int y)
+ *
+ * Called whenever the player clicks on a location on the minimap.
+ * Warps the main mapview position to the clicked location.
+ */
+void Editor_Interactive::minimap_warp(int x, int y)
+{
+	x -= m_mapview->get_w()>>1;
+	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_editor->get_map()->get_width());
+	y -= m_mapview->get_h()>>1;
+	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_editor->get_map()->get_height());
+	m_mapview->set_viewpoint(x, y);
+}
+
+
+/** Editor_Interactive::mainview_move(int x, int y)
+ *
+ * Signal handler for the main view's warpview updates the mini map's
+ * viewpos marker position
+ */
+void Editor_Interactive::mainview_move(int x, int y)
+{
+   int maxx = MULTIPLY_WITH_FIELD_WIDTH(m_editor->get_map()->get_width());
+   int maxy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_editor->get_map()->get_height());
+
+   x += m_mapview->get_w()>>1;
+   if (x >= maxx) x -= maxx;
+   y += m_mapview->get_h()>>1;
+   if (y >= maxy) y -= maxy;
+
+   m_minimap->set_view_pos(x, y);
+
+}

@@ -37,9 +37,10 @@ public:
 
 	// Drawing and event handlers
 	void draw_border(RenderTarget* dst);
-
+   
+   
 private:
-	uint	m_pic_top;
+   uint	m_pic_top;
 	uint	m_pic_background;
 };
 
