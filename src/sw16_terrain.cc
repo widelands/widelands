@@ -738,44 +738,47 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	uchar road;
 
 	road = (roads >> Road_East) & Road_Mask;
-	if (render_r && road) {
-		if (road == Road_Normal)
-			color = RGBColor(192, 192, 192).pack16();
-		else if (road == Road_Busy)
-			color = RGBColor(96, 96, 96).pack16();
-		else
-			color = RGBColor(0, 0, 128).pack16();
-		render_road_horiz(this, l, r, color);
+	if (render_r) {
+		if (road) {
+			switch (road) {
+				case Road_Normal: color = RGBColor(192, 192, 192).pack16(); break;
+				case Road_Busy:   color = RGBColor( 96,  96,  96).pack16(); break;
+				default:          color = RGBColor(  0,   0, 128).pack16(); break;
+			}
+			render_road_horiz(this, l, r, color);
+		}
+		else if (rtex!=0 && ttex!=0 && rtex!=ttex)
+			dither_edge_horiz(this, l, r, rtex, ttex);
 	}
-	else if (render_r && rtex!=0 && ttex!=0 && rtex!=ttex)
-		dither_edge_horiz(this, l, r, rtex, ttex);
 
 	// FIXME: this will try to work on some undiscovered terrain
 	road = (roads >> Road_SouthEast) & Road_Mask;
-	if (road) {
-		if (road == Road_Normal)
-			color = RGBColor(192, 192, 192).pack16();
-		else if (road == Road_Busy)
-			color = RGBColor(96, 96, 96).pack16();
-		else
-			color = RGBColor(0, 0, 128).pack16();
-		render_road_vert(this, l, br, color);
+	if (render_r || render_b) {
+		if (road) {
+			switch (road) {
+				case Road_Normal: color = RGBColor(192, 192, 192).pack16(); break;
+				case Road_Busy:   color = RGBColor( 96,  96,  96).pack16(); break;
+				default:          color = RGBColor(  0,   0, 128).pack16(); break;
+			}
+			render_road_vert(this, l, br, color);
+		}
+		else if (rtex!=0 && btex!=0 && rtex!=btex)
+			dither_edge_vert(this, l, br, rtex, btex);
 	}
-	else if (rtex!=0 && btex!=0 && rtex!=btex)
-		dither_edge_vert(this, l, br, rtex, btex);
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
-	if (road) {
-		if (road == Road_Normal)
-			color = pack_rgb(192, 192, 192);
-		else if (road == Road_Busy)
-			color = pack_rgb(96, 96, 96);
-		else
-			color = pack_rgb(0, 0, 128);
-		render_road_vert(this, l, bl, color);
+	if (render_b) {
+		if (road) {
+			switch (road) {
+				case Road_Normal: color = RGBColor(192, 192, 192).pack16(); break;
+				case Road_Busy:   color = RGBColor( 96,  96,  96).pack16(); break;
+				default:          color = RGBColor(  0,   0, 128).pack16(); break;
+			}
+			render_road_vert(this, l, bl, color);
+		}
+		else if (ltex!=0 && btex!=0 && ltex!=btex)
+			dither_edge_vert(this, l, bl, btex, ltex);
 	}
-	else if (ltex!=0 && btex!=0 && ltex!=btex)
-		dither_edge_vert(this, l, bl, btex, ltex);
 	
 	// FIXME: similar textures may not need dithering
 }
