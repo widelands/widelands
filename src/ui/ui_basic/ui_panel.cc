@@ -74,7 +74,7 @@ UIPanel::UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, co
 	update(0, 0, _w, _h);
 }
 
-/** 
+/**
  * Unlink the panel from the parent's queue
  */
 UIPanel::~UIPanel()
@@ -189,21 +189,21 @@ void UIPanel::end_modal(int code)
 	_retcode = code;
 }
 
-/** 
+/**
  * Called once before the event loop in run is started
  */
 void UIPanel::start()
 {
 }
 
-/** 
+/**
  * Called once after the event loop in run() has ended
  */
 void UIPanel::end()
 {
 }
 
-/** 
+/**
  * Resizes the panel.
  */
 void UIPanel::set_size(const uint nw, const uint nh)
@@ -224,7 +224,7 @@ void UIPanel::set_size(const uint nw, const uint nh)
 	update(0, 0, upw, uph);
 }
 
-/** 
+/**
  * Move the panel. UIPanel's position is relative to the parent.
  */
 void UIPanel::set_pos(const int nx, const int ny)
@@ -256,7 +256,7 @@ void UIPanel::fit_inner(UIPanel* inner)
 }
 
 
-/** 
+/**
  * Change the border dimensions.
  * Note that since position and total size aren't changed, so that the size
  * and position of the inner area will change.
@@ -270,7 +270,7 @@ void UIPanel::set_border(uint l, uint r, uint t, uint b)
 	update(0, 0, get_w(), get_h());
 }
 
-/** 
+/**
  * Make this panel the top-most panel in the parent's Z-order.
  */
 void UIPanel::move_to_top()
@@ -298,7 +298,7 @@ void UIPanel::move_to_top()
 		_parent->_lchild = this;
 }
 
-/** 
+/**
  * Makes the panel visible or invisible
  */
 void UIPanel::set_visible(bool on)
@@ -386,7 +386,7 @@ void UIPanel::update_inner(int x, int y, int w, int h)
 	update(x-_lborder, y-_tborder, w, h);
 }
 
-/** 
+/**
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
@@ -413,7 +413,7 @@ void UIPanel::set_cache(bool enable)
 */
 }
 
-/** 
+/**
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.
  * The default implementation calls the children's think function.
@@ -468,7 +468,7 @@ void UIPanel::center_mouse()
 }
 
 
-/** 
+/**
  * Called whenever the mouse enters or leaves the panel. The inside state
  * is relative to the outer area of a panel. This means that the mouse
  * position received in handle_mousemove may be negative while the mouse is
@@ -478,7 +478,7 @@ void UIPanel::handle_mousein(bool inside)
 {
 }
 
-/** 
+/**
  * Called whenever the user clicks into the panel.
  * If the panel doesn't process the mouse-click, it is handed to the panel's
  * parent.
@@ -510,7 +510,7 @@ bool UIPanel::handle_key(bool down, int code, char c)
 	return false;
 }
 
-/** 
+/**
  *
  * Enable/Disable mouse handling by this panel
  * Default is enabled. Note that when mouse handling is disabled, child panels
@@ -526,7 +526,7 @@ void UIPanel::set_handle_mouse(bool yes)
 		_flags &= ~pf_handle_mouse;
 }
 
-/** 
+/**
  *
  * Enable/Disable mouse grabbing. If a panel grabs the mouse, all mouse
  * related events will be sent directly to that panel.
@@ -579,7 +579,7 @@ void UIPanel::focus()
 	_parent->focus();
 }
 
-/** 
+/**
  * Enables/Disables calling think() during the event loop.
  * The default is enabled.
  *
@@ -593,7 +593,7 @@ void UIPanel::set_think(bool yes)
 		_flags &= ~pf_think;
 }
 
-/** 
+/**
  * Cause this panel to be removed on the next frame.
  * Use this for a panel that needs to destroy itself after a button has
  * been pressed (e.g. non-modal dialogs).
@@ -673,7 +673,7 @@ void UIPanel::do_draw(RenderTarget* dst)
 		if (_needdraw) {
 			draw_border(_cache);
 
-			RenderTarget* inner = _cache->enter_window(_lborder, _tborder, 
+			RenderTarget* inner = _cache->enter_window(_lborder, _tborder,
 			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
 
 			if (inner) {
@@ -720,7 +720,7 @@ UIPanel *UIPanel::get_mousein(int x, int y)
 	return child;
 }
 
-/** 
+/**
  * Propagate mouseleave events (e.g. for buttons that are inside a different
  * window)
  */
@@ -733,7 +733,7 @@ void UIPanel::do_mousein(bool inside)
 	handle_mousein(inside);
 }
 
-/** 
+/**
  * Propagate mouse clicks to the appropriate panel.
  *
  * Returns: true, if the click was processed
@@ -761,7 +761,7 @@ bool UIPanel::do_mouseclick(uint btn, bool down, int x, int y)
 	}
 }
 
-/** 
+/**
  * Propagate mouse movement to the appropriate panel.
  */
 void UIPanel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
@@ -796,7 +796,7 @@ bool UIPanel::do_key(bool down, int code, char c)
 	return handle_key(down, code, c);
 }
 
-/** 
+/**
  *
  * Determine which panel is to receive a mouse event.
  *
@@ -854,7 +854,7 @@ void UIPanel::ui_mouseclick(bool down, int button, uint btns, int x, int y)
 
 /**
  * [static]
- * 
+ *
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
 */
@@ -880,7 +880,7 @@ void UIPanel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 
 /**
  * [static]
- * 
+ *
  * Input callback function. Pass the key event to the currently modal panel
  */
 void UIPanel::ui_key(bool down, int code, char c)

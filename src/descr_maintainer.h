@@ -1,16 +1,16 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team  
- * 
+ * Copyright (C) 2002 by the Widelands Development Team
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -24,13 +24,13 @@
 #include "ware.h"
 
 /*
- * This template is used to have a type save mainting class for Bob_Descr, Worker_Descr 
+ * This template is used to have a type save mainting class for Bob_Descr, Worker_Descr
  * and so on
  */
 template <class T> class Descr_Maintainer {
    public:
       Descr_Maintainer(void) { nitems=0; items=0; place_for=0; }
-      ~Descr_Maintainer(void) ; 
+      ~Descr_Maintainer(void) ;
 
       T* exists(const char* name);
       T* start_enum(void) { n=0; if(nitems) return items[0]; return NULL; }
@@ -67,7 +67,7 @@ int Descr_Maintainer<T>::get_index(const char* name) {
    return -1;
 }
 
-/*template <class T> 
+/*template <class T>
 T* Descr_Maintainer<T>::get(const char* name) {
    uint i;
 
@@ -80,10 +80,10 @@ T* Descr_Maintainer<T>::get(const char* name) {
       items=(T**) malloc(sizeof(T*)*nitems);
    } else {
       items=(T**) realloc(items, sizeof(T*)*nitems);
-   } 
+   }
    items[nitems-1]= new T(name);
 
-   return items[nitems-1]; 
+   return items[nitems-1];
 }*/
 
 template <class T>
@@ -99,7 +99,7 @@ int Descr_Maintainer<T>::add(T* item) {
 //
 //returns elemt if it exists, NULL if it doesnt
 //
-template <class T> 
+template <class T>
 T* Descr_Maintainer<T>::exists(const char* name) {
    uint i;
 

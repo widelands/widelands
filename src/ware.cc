@@ -271,7 +271,7 @@ WareList::~WareList
 
 Delete the list. Print a warning message if the storage is not empty.
 This is because most of the time, a WareList should be zeroed by cleanup
-operations before the destructor is called. If you are sure of what you're 
+operations before the destructor is called. If you are sure of what you're
 doing, call clear().
 ===============
 */

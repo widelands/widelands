@@ -24,7 +24,7 @@
 #include "font.h"
 #include "ui_panel.h"
 
-/** 
+/**
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
  */

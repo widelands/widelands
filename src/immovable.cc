@@ -842,7 +842,7 @@ void PlayerImmovable::set_economy(Economy *e)
 PlayerImmovable::add_worker
 
 Associate the given worker with this immovable.
-The worker will be transferred along to another economy, and it will be 
+The worker will be transferred along to another economy, and it will be
 released when the immovable is destroyed.
 This should only be called from Worker::set_location.
 ===============

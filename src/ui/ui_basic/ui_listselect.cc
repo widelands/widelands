@@ -117,7 +117,7 @@ void UIListselect::set_scrollpos(int i)
 }
 
 
-/** 
+/**
  *
  * Change the currently selected entry
  *
@@ -182,7 +182,7 @@ void UIListselect::draw(RenderTarget* dst)
 }
 
 
-/** 
+/**
  * Handle mouse clicks: select the appropriate entry
  */
 bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)

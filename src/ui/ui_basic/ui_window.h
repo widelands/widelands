@@ -24,7 +24,7 @@
 #include "types.h"
 #include "ui_panel.h"
 
-/** 
+/**
  *
  * UIWindows are cached by default.
  *

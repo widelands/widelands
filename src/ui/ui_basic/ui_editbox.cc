@@ -81,15 +81,15 @@ a key event must be handled
 bool UIEdit_Box::handle_key(bool down, int code, char c) {
    if(down) {
       switch(code) {
-         case KEY_ESCAPE: 
-            set_text(m_lasttext.c_str()); 
-            UIButton::handle_mouseclick(0, false, 0, 0); 
+         case KEY_ESCAPE:
+            set_text(m_lasttext.c_str());
+            UIButton::handle_mouseclick(0, false, 0, 0);
             set_can_focus(false);
             m_keyboard_grabbed=false;
             grab_mouse(false);
-            return true; 
+            return true;
 
-         case KEY_RETURN: 
+         case KEY_RETURN:
             m_lasttext=m_text;
             UIButton::handle_mouseclick(0, false, 0, 0);
             set_can_focus(false);
@@ -97,7 +97,7 @@ bool UIEdit_Box::handle_key(bool down, int code, char c) {
             grab_mouse(false);
             changed.call();
             changedid.call(m_id);
-            return true; 
+            return true;
 
          case KEY_DELETE:
          case KEY_BACKSPACE:
@@ -111,7 +111,7 @@ bool UIEdit_Box::handle_key(bool down, int code, char c) {
             if(c && m_text.size()<m_maxchars) m_text+=c;
             set_text(m_text.c_str());
             return true;
-      } 
+      }
    }
 
    return false;
@@ -128,7 +128,7 @@ void UIEdit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 }
 
 /**
-Handles mouseins or rather mouse outs. 
+Handles mouseins or rather mouse outs.
 Hides a mouseout event from the underlying button
 */
 void UIEdit_Box::handle_mousein(bool inside) {

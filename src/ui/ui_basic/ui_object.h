@@ -20,7 +20,7 @@
 #ifndef UI_OBJECT_H
 #define UI_OBJECT_H
 
-/** 
+/**
  * Serves as a base class for UI related objects. The only purpose is
  * to provide the base class for signal function pointers.
  */

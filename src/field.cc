@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2002 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -54,7 +54,7 @@ static float calc_brightness(int l, int r, int tl, int tr, int bl, int br)
 #pragma warning(disable:4244)
 #endif
 		  normal = Vector(0, 0, FIELD_WIDTH);
-		  normal.x -= MULTIPLY_WITH_HEIGHT_FACTOR(l); 
+		  normal.x -= MULTIPLY_WITH_HEIGHT_FACTOR(l);
 		  normal.x += MULTIPLY_WITH_HEIGHT_FACTOR(r);
 		  normal.x -= (float)(MULTIPLY_WITH_HEIGHT_FACTOR(tl)) * COS60;
 		  normal.y -= (float)(MULTIPLY_WITH_HEIGHT_FACTOR(tl)) * SIN60;

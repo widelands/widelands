@@ -427,7 +427,7 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
  * Render a triangle. It is being split into to triangles which have one
  * horizontal edge, so that the resulting triangles have only two edges
  * which are not horizontal, one on the left, the other on the right.
- * The actual rendering is performed by render_top_triangle and 
+ * The actual rendering is performed by render_top_triangle and
  * render_bottom_triangle, which require a horizontal edge at the bottom
  * or at the top, respectively.
  */
@@ -695,14 +695,14 @@ static void render_road_vert(Bitmap *dst, const Point& start, const Point& end, 
 ===============
 Bitmap::draw_field
 
-Draw ground textures and roads for the given parallelogram (two triangles) 
+Draw ground textures and roads for the given parallelogram (two triangles)
 into the bitmap.
 ===============
 */
 void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Field * const rfl,
 			Field * const lf, Field * const ft,
-	                const int posx, const int rposx, const int posy, 
-	                const int blposx, const int rblposx, const int blposy, 
+	                const int posx, const int rposx, const int posy,
+	                const int blposx, const int rblposx, const int blposy,
 	                uchar roads, bool render_r, bool render_b)
 {
 	Vertex r, l, br, bl;

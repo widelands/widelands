@@ -29,7 +29,7 @@
 /*
 ================================================================================
 
-      COMPILE TIME CONFIGURATION 
+      COMPILE TIME CONFIGURATION
 
 ================================================================================
 */
@@ -37,7 +37,7 @@
 // the actual game logic doesn't know about frames (it works with millisecond-precise
 // timing)
 // FRAME_LENGTH is just the default animation speed
-#define FRAME_LENGTH 250   
+#define FRAME_LENGTH 250
 
 // Maxi numbers of players in a game
 #define MAX_PLAYERS		8

@@ -25,7 +25,7 @@
 #include "ui_panel.h"
 #include "ui_signal.h"
 
-/** 
+/**
  * This defines a button.
  */
 class UIButton : public UIPanel {

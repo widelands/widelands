@@ -88,7 +88,7 @@ Radiogroup
 ==============================================================================
 */
 
-/** 
+/**
  * Initialize an empty radiogroup
  */
 UIRadiogroup::UIRadiogroup()

@@ -182,8 +182,8 @@ void Main_Menu_Map_Options::changed(int id) {
 
 class Main_Menu_New_Map
 
-This is the new map selection menu. It offers 
-the user to choose the new world and a few other 
+This is the new map selection menu. It offers
+the user to choose the new world and a few other
 things like size, world ....
 
 =================================================
@@ -226,7 +226,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    const int spacing=5;
    const int width=get_inner_w()-offsx*2;
    const int height=20;
-   int posx=offsx; 
+   int posx=offsx;
    int posy=offsy;
    m_w=0; m_h=0;
    sprintf(buf, "Width: %i", MAP_DIMENSIONS[m_w]);
@@ -508,9 +508,9 @@ void Editor_Tool_Menu::changed_to(void) {
    }
 
    switch(n) {
-      case 0: 
-         m_parent->select_tool(1, 0); 
-         new Editor_Tool_Change_Height_Options_Menu(m_parent, 
+      case 0:
+         m_parent->select_tool(1, 0);
+         new Editor_Tool_Change_Height_Options_Menu(m_parent,
                static_cast<Editor_Increase_Height_Tool*>(m_tools->tools[1]),
                &m_options);
          break;

@@ -28,7 +28,7 @@
 
 class UIScrollbar;
 
-/** 
+/**
  * This class defines a list-select box.
  */
 class UIListselect : public UIPanel {

@@ -430,7 +430,7 @@ void Editor_Game_Base::init_wares()
 		Tribe_Descr *tribe = plr->get_tribe();
 	   for(int i=0; i < tribe->get_nrwares(); i++) {
          Ware_Descr* ware = tribe->get_ware_descr(i);
-         if(!ware) 
+         if(!ware)
             continue;
 
          int idx = m_wares.get_index(ware->get_name());

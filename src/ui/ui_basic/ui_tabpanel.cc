@@ -96,7 +96,7 @@ void UITab_Panel::set_snapparent(bool snapparent)
 
 /**
 Add a new tab
-*/	
+*/
 uint UITab_Panel::add(uint picid, UIPanel* panel)
 {
 	assert(panel);
@@ -143,7 +143,7 @@ void UITab_Panel::draw(RenderTarget* dst)
 	int x;
 
 	// draw the background
-	dst->tile(0, 0, m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2, 
+	dst->tile(0, 0, m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2,
 	          m_pic_background, get_x(), get_y());
 	dst->tile(0, TP_BUTTON_HEIGHT - 2, get_w(), get_h() - TP_BUTTON_HEIGHT + 2,
 	          m_pic_background, get_x(), get_y() + TP_BUTTON_HEIGHT - 2);

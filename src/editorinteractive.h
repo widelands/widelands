@@ -55,7 +55,7 @@ class Editor_Interactive : public Interactive_Base {
       };
 
       void select_tool(int, int);
-      int get_selected_tool(void) { return tools.current_tool_index; } 
+      int get_selected_tool(void) { return tools.current_tool_index; }
 
       void exit_editor();
       void map_changed();
@@ -65,7 +65,7 @@ class Editor_Interactive : public Interactive_Base {
       void toggle_buildhelp();
       void tool_menu_btn();
       void toolsize_menu_btn();
-      void toggle_mainmenu(); 
+      void toggle_mainmenu();
 
       // Tool
       Editor_Tools tools;

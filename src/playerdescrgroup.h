@@ -50,7 +50,7 @@ public:
 
 	void set_enabled(bool enable);
 
-private:	
+private:
 	void enable_player(bool on);
 	void toggle_playertype();
 };

@@ -70,7 +70,7 @@ private:
 };
 
 
-/** 
+/**
  * A checkbox is a simplistic panel which consists of just a small box which
  * can be either checked (on) or unchecked (off)
  * A checkbox only differs from a UIStatebox in that clicking on it toggles the

@@ -91,7 +91,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Tool_Info(6, 7, new Editor_Set_Right_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 7, new Editor_Set_Down_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 6, new Editor_Set_Both_Terrain_Tool()));
-  */ 
+  */
    select_tool(1, 0);
 }
 
@@ -120,8 +120,8 @@ void Editor_Interactive::start()
    int mapw;
 	int maph;
 
-   m_maprenderinfo.egbase = m_editor; 
-	m_maprenderinfo.visibility = 0; 
+   m_maprenderinfo.egbase = m_editor;
+	m_maprenderinfo.visibility = 0;
 	m_maprenderinfo.show_buildhelp = true;
 
 	mapw = m_maprenderinfo.egbase->get_map()->get_width();
@@ -369,7 +369,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
 ===========
 Editor_Interactive::select_tool()
 
-select a new tool 
+select a new tool
 ===========
 */
 void Editor_Interactive::select_tool(int n, int which) {

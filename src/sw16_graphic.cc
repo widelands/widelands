@@ -97,7 +97,7 @@ RenderTargetImpl::~RenderTargetImpl()
 ===============
 RenderTargetImpl::reset
 
-Called every time before the render target is handed out by the Graphic 
+Called every time before the render target is handed out by the Graphic
 implementation to start in a neutral state.
 ===============
 */
@@ -168,7 +168,7 @@ Builds a subwindow. rc is relative to the current drawing window. The subwindow
 will be clipped appropriately.
 The previous window state is returned in previous and prevofs.
 
-Returns false if the subwindow is invisible. In that case, the window state is 
+Returns false if the subwindow is invisible. In that case, the window state is
 not changed at all. Otherwise, the function returns true.
 ===============
 */

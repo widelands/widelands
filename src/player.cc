@@ -33,11 +33,11 @@
 //
 Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor)
 {
-   m_type = type;
+	m_type = type;
 	m_plnum = plnum;
 	m_tribe = tribe;
 	m_egbase = g;
-   seen_fields = 0;
+	seen_fields = 0;
 
 	for(int i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
@@ -45,8 +45,7 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
 
 Player::~Player(void)
 {
-   if(seen_fields)
-      delete seen_fields;
+	delete seen_fields;
 }
 
 /*
@@ -148,7 +147,7 @@ void Player::set_area_seen(Coords center, uint area, bool on)
 	Coords c;
 
 	while(mr.next(&c))
-      set_field_seen(c, on);
+		set_field_seen(c, on);
 }
 
 

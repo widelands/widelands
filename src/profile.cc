@@ -33,7 +33,7 @@ const char* trueWords[TRUE_WORDS] =
 	"true",
 	"yes",
 	"on",
-   "1"
+	"1"
 };
 
 #define FALSE_WORDS 4
@@ -42,7 +42,7 @@ const char* falseWords[FALSE_WORDS] =
 	"false",
 	"no",
 	"off",
-   "0"
+	"0"
 };
 
 /*
@@ -154,7 +154,7 @@ Section
 */
 
 const char *Section::get_name() const {
-   return m_section_name;
+	return m_section_name;
 }
 
 Section::Section(Profile *prof, const char *name)
@@ -332,7 +332,7 @@ const char *Section::get_safe_string(const char *name)
 	Value *v = get_val(name);
 	if (!v)
 		throw wexception("[%s]: missing key '%s'", get_name(), name);
-   return v->get_string();
+	return v->get_string();
 }
 
 /** Section::get_int(const char *name, int def)
@@ -615,7 +615,7 @@ void Profile::check_used()
 	for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
 		if (!s->is_used())
 			error("Section [%s] not used (did you spell the name correctly?)", s->get_name());
-      else
+		else
 			s->check_used();
 	}
 }

@@ -5,12 +5,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -82,7 +82,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu()
 constructor
 ===========
 */
-Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent, 
+Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent,
       Editor_Increase_Height_Tool* iht, UIUniqueWindowRegistry* registry) :
    Editor_Tool_Options_Menu(parent, registry, "Height Tools Options") {
 
@@ -90,7 +90,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    m_dht=iht->get_dht();
    m_sht=iht->get_sht();
 
-   int offsx=5; 
+   int offsx=5;
    int offsy=30;
    int spacing=5;
    int height=20;
@@ -99,7 +99,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    int posy=offsy;
 
    set_inner_size(135, 135);
-   UITextarea* ta=new UITextarea(this, 0, 0, "Height Tool Options", Align_Left); 
+   UITextarea* ta=new UITextarea(this, 0, 0, "Height Tool Options", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
    ta=new UITextarea(this, 0, 0, "In/Decrease Value", Align_Left);
@@ -108,12 +108,12 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    UIButton* b=new UIButton(this, posx, posy, width, height, 1, 0);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
-   b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 1); 
+   b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 1);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    m_increase=new UITextarea(this, 0, 0, "5", Align_Left);
    m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
-   posy+=width+spacing+spacing; 
+   posy+=width+spacing+spacing;
 
    ta=new UITextarea(this, 0, 0, "Set Value", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
@@ -121,12 +121,12 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    b=new UIButton(this, posx, posy, width, height, 1, 2);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
-   b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 3); 
+   b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 3);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    m_set=new UITextarea(this, 0, 0, "5", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
-   posy+=width+spacing; 
+   posy+=width+spacing;
 
    update();
 }
@@ -285,7 +285,7 @@ void Editor_Tool_Noise_Height_Options_Menu::button_clicked(int n) {
       case 3: --up; break;
       case 4: ++set; break;
       case 5: --set; break;
-   } 
+   }
    if(low>MAX_FIELD_HEIGHT) low=MAX_FIELD_HEIGHT;
    if(low<0) low=0;
    if(up>MAX_FIELD_HEIGHT) up=MAX_FIELD_HEIGHT;

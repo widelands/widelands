@@ -599,7 +599,7 @@ void Interactive_Player::recalc_overlay(FCoords fc)
 				code = Overlay_Frontier_Base + owner;
 		}
 
-		// Determine the buildhelp icon for that field		
+		// Determine the buildhelp icon for that field
 		if (get_player()->get_player_number() == owner) {
 			int buildcaps = get_player()->get_buildcaps(fc);
 

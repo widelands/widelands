@@ -40,7 +40,7 @@
  */
 
 
-/** 
+/**
  * Initialize a framed window.
  *
  * Args: parent	parent panel
@@ -69,7 +69,7 @@ UIWindow::UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *ti
 	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/win_bg.png");
 }
 
-/** 
+/**
  *
  * Resource cleanup
  */
@@ -184,7 +184,7 @@ void UIWindow::draw_border(RenderTarget* dst)
 	}
 }
 
-/** 
+/**
  * Left-click: drag the window
  * Right-click: close the window
  */
@@ -206,7 +206,7 @@ bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
 	return true;
 }
 
-/** 
+/**
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */

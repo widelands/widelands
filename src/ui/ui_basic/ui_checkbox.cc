@@ -74,7 +74,7 @@ UIStatebox::~UIStatebox()
 }
 
 
-/** 
+/**
  * Set the enabled state of the checkbox. A disabled checkbox cannot be clicked.
  *
  * Args: enabled	true if the checkbox should be disabled
@@ -88,7 +88,7 @@ void UIStatebox::set_enabled(bool enabled)
 }
 
 
-/** 
+/**
  * Changes the state of the checkbox.
  *
  * Args: on		true if the checkbox should be checked
@@ -154,7 +154,7 @@ void UIStatebox::handle_mousein(bool inside)
 }
 
 
-/** 
+/**
  * Left-click: Toggle checkbox state
  */
 bool UIStatebox::handle_mouseclick(uint btn, bool down, int x, int y)

@@ -33,7 +33,7 @@ inits
 */
 
 Editor::Editor() {
-   m_eia=0; 
+   m_eia=0;
 
    m_realtime=Sys_GetTime();
 }
@@ -45,7 +45,7 @@ Editor::~Editor()
 
 cleanups
 */
-Editor::~Editor() { 
+Editor::~Editor() {
 }
 
 /*

@@ -2,26 +2,26 @@
  * according to the definition of MD5 in RFC 1321 from April 1992.
  *
  * Thanks to Ulrich Drepper for the md5sum example code
- * 
+ *
  * Copyright (C) 2002 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-// a MD5 checksum is 16 bytes long. We use buffers to store it 
+// a MD5 checksum is 16 bytes long. We use buffers to store it
 
 #include "md5.h"
 
@@ -46,7 +46,7 @@ ChkSum::ChkSum(void) {
 		  ctx.buflen = 0;
 }
 
-/** 
+/**
  * Default destructor
  *
  * Args: none
@@ -58,10 +58,10 @@ ChkSum::~ChkSum(void) {
 
 /**
  * void pass_data(void* data, int length);
- * 
+ *
  * This function cares for new data. It takes it,
  * buffers it, and when the buffer is full calculates
- * one MD5 block. 
+ * one MD5 block.
  *
  * Args: 	data 		data to compute chksum for
  * 			length	len of data
@@ -88,7 +88,7 @@ void ChkSum::pass_data(const void* data, uint length) {
 /*
                 memcpy(buf, (const char*) (data)+(BLOCKSIZE-nread), length-(BLOCKSIZE-nread));
 					 nread=length-(BLOCKSIZE-nread);
-*/		  }					 
+*/		  }
 
 }
 
@@ -121,9 +121,9 @@ bool operator==(ChkSum& sum1, ChkSum& sum2) {
 
 		  if(!buf1 || !buf2) return false;
 
-		  if(buf1[0] == buf2[0]) 
-					 if(buf1[1] == buf2[1]) 
-								if(buf1[2] == buf2[2]) 
+		  if(buf1[0] == buf2[0])
+					 if(buf1[1] == buf2[1])
+								if(buf1[2] == buf2[2])
 										  if(buf1[3] == buf2[3])
 													 return true;
 		  return false;
@@ -141,9 +141,9 @@ bool operator==(ChkSum& sum1, const void* buf) {
 
 		  if(!buf1 || !buf2) return false;
 
-		  if(buf1[0] == buf2[0]) 
-					 if(buf1[1] == buf2[1]) 
-								if(buf1[2] == buf2[2]) 
+		  if(buf1[0] == buf2[0])
+					 if(buf1[1] == buf2[1])
+								if(buf1[2] == buf2[2])
 										  if(buf1[3] == buf2[3])
 													 return true;
 		  return false;
@@ -151,14 +151,14 @@ bool operator==(ChkSum& sum1, const void* buf) {
 
 std::ostream& operator<<(std::ostream& o, ChkSum& sum) {
 		  uchar	*buf=(uchar*) sum.get_chksum();
-		  if(!buf) { 
+		  if(!buf) {
 					 o << "(inval)";
 		  } else {
 					 char buf1[33];
-					 sprintf(buf1, "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x", 
-									buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7],  
+					 sprintf(buf1, "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+									buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7],
 									buf[8], buf[9], buf[10], buf[11], buf[12], buf[13], buf[14], buf[15]);
-					 o << buf1; 
+					 o << buf1;
 		  }
 		  return o;
 }
@@ -167,7 +167,7 @@ std::ostream& operator<<(std::ostream& o, ChkSum& sum) {
  *
  * Down here: private functions originally from Ulrich Drepper
  *
- * From GNU textutils. md5.c 
+ * From GNU textutils. md5.c
  *******************************************************************/
 
 /* Process the remaining bytes in the internal buffer and the usual

@@ -53,4 +53,4 @@ private:
 	int				m_state; // -1: none
 };
 
-#endif 
+#endif

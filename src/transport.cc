@@ -1425,7 +1425,7 @@ Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const 
 	r->set_path(g, path);
 	r->init(g);
 
-   return r;
+	return r;
 }
 
 /*
@@ -1579,7 +1579,7 @@ void Road::init(Editor_Game_Base *gg)
 {
 	assert(m_path.get_nsteps() >= 2);
 
-   Game* g = static_cast<Game*>(gg);
+	Game* g = static_cast<Game*>(gg);
 
 	PlayerImmovable::init(g);
 
@@ -1625,9 +1625,9 @@ Cleanup the road
 */
 void Road::cleanup(Editor_Game_Base *gg)
 {
-   Game* g = static_cast<Game*>(gg);
+	Game* g = static_cast<Game*>(gg);
 
-   // Release carrier
+	// Release carrier
 	m_desire_carriers = 0;
 
 	if (m_carrier_request) {
@@ -1760,9 +1760,9 @@ be created to span [new flag...end]
 */
 void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 {
-   Game* g = static_cast<Game*>(gg);
+	Game* g = static_cast<Game*>(gg);
 
-   Flag *oldend = m_flags[FlagEnd];
+	Flag *oldend = m_flags[FlagEnd];
 	int dir;
 
 	// detach from end

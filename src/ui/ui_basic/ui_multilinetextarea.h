@@ -26,12 +26,12 @@
 
 class UIScrollbar;
 
-/** 
+/**
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed.
  * The textarea transparently handles explicit line-breaks and word wrapping.
  *
- * Do not use it blindly for big texts: the font handler needs to re-break the 
+ * Do not use it blindly for big texts: the font handler needs to re-break the
  * entire text whenever the textarea is drawn, this is a trade-off which greatly
  * simplifies this class.
  */

@@ -51,7 +51,7 @@ class WorkerProgram;
 struct WorkerAction;
 
 class Worker_Descr : public Bob_Descr {
-   friend class Tribe_Descr;
+	friend class Tribe_Descr;
 
 	typedef std::map<std::string, WorkerProgram*> ProgramMap;
 
@@ -129,7 +129,7 @@ protected:
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
 	virtual void init_auto_task(Game* g);
 
-   inline bool does_carry_ware(void) { return m_carried_item.is_set(); }
+	inline bool does_carry_ware(void) { return m_carried_item.is_set(); }
 
 public: // worker-specific tasks
 	void start_task_transfer(Game* g, Transfer* t);

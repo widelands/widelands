@@ -5,12 +5,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -57,8 +57,8 @@ int Editor_Info_Tool::handle_click_impl(const Coords* coordinates, Field* f, Map
    sprintf(buf1, " Height: %i\n", f->get_height()); buf+=buf1;
    buf+=" Caps: ";
    switch((f->get_caps() & BUILDCAPS_SIZEMASK)) {
-      case BUILDCAPS_SMALL: buf+="small"; break; 
-      case BUILDCAPS_MEDIUM: buf+="medium"; break; 
+      case BUILDCAPS_SMALL: buf+="small"; break;
+      case BUILDCAPS_MEDIUM: buf+="medium"; break;
       case BUILDCAPS_BIG: buf+="big"; break;
       default: break;
    }
@@ -107,7 +107,7 @@ int Editor_Info_Tool::handle_click_impl(const Coords* coordinates, Field* f, Map
    buf += "\n";
    buf += "\n";
 
-   multiline_textarea->set_text(buf.c_str()); 
+   multiline_textarea->set_text(buf.c_str());
 
    return 0;
 }
@@ -259,7 +259,7 @@ int Set_Terrain::set_terrain(const Coords* coordinates, Field* field, Map* map, 
    max=0;
    while(mrc.next(&c)) {
       i=j=0;
-      if(right) 
+      if(right)
          i=map->change_field_terrain(c,get_random_enabled(),false,true);
       if(down)
          j=map->change_field_terrain(c,get_random_enabled(),true,false);

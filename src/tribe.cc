@@ -30,7 +30,7 @@ using namespace std;
 
 //
 // Tribe_Descr class
-// 
+//
 Tribe_Descr::Tribe_Descr(const char* name)
 {
 	snprintf(m_name, sizeof(m_name), "%s", name);
@@ -111,7 +111,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 		Profile prof(fname);
 		Section *s;
 
-		// Section [tribe]		
+		// Section [tribe]
 		s = prof.get_safe_section("tribe");
 
 		s->get_string("author");
@@ -151,7 +151,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
       while((value=s->get_next_val(0))) {
          int idx = m_wares.get_index(value->get_name());
-         if(idx == -1) 
+         if(idx == -1)
             throw wexception("In section [startwares], ware %s is not know!", value->get_name());
 
          std::string name=value->get_name();
@@ -162,7 +162,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
       s = prof.get_section("startworkers");
       while((value=s->get_next_val(0))) {
          int idx = m_workers.get_index(value->get_name());
-         if(idx == -1) 
+         if(idx == -1)
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
 
          std::string name=value->get_name();
@@ -306,7 +306,7 @@ void Tribe_Descr::parse_wares(const char* directory)
 ===========
 void Tribe_Descr::load_warehouse_with_start_wares()
 
-This loads a warehouse with the given start wares as defined in 
+This loads a warehouse with the given start wares as defined in
 the conf files
 ===========
 */
@@ -318,6 +318,6 @@ void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* game, Wareho
    }
    for(cur=m_startworkers.begin(); cur!=m_startworkers.end(); cur++) {
       wh->create_wares(game->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
-   } 
+   }
 }
 

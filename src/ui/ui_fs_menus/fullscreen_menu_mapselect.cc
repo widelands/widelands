@@ -125,7 +125,7 @@ void Fullscreen_Menu_MapSelect::map_selected(int id)
 
 	if (get_mapname())
 	{
-		assert(m_map); 
+		assert(m_map);
 
       try {
          m_maploader = m_map->get_correct_loader(get_mapname());
