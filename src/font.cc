@@ -162,3 +162,224 @@ Pic* Font_Handler::get_string(const char* str, const ushort f) {
 		  delete[] buf;
 		  return retval;
 }
+
+
+/*
+===============
+Font_Handler::draw_string
+
+Draw a string directly into the destination bitmap with the desired alignment.
+The function honours line-breaks.
+If wrap is positive, the function will wrap a line after that many pixels.
+===============
+*/
+void Font_Handler::draw_string(Bitmap* dst, int dstx, int dsty, const char* string,
+                               Align align, int wrap, ushort font)
+{
+	// Adjust for vertical alignment
+	if (align & (Align_VCenter|Align_Bottom))
+		{
+		int h;
+		
+		get_size(string, 0, &h, wrap, font);
+		
+		if (align & Align_VCenter)
+			dsty -= h/2;
+		else
+			dsty -= h;
+		}
+	
+	// Draw the string
+	const char* line = string; // beginning of current line
+	int width = 0; // width of current line
+	bool finished = false;
+	
+	while(!finished)
+		{
+		bool flushline = false;
+		
+		if (*string == ' ' || *string == '\t') // whitespace
+			{
+			int cw = fonts[font].p[0].get_w();
+			if (*string == '\t')
+				cw *= 8;
+			
+			if (wrap > 0 && width+cw > wrap)
+				flushline = true;
+			else
+				width += cw;
+			
+			string++;
+			}
+		else if (!*string || *string == '\n') // explicit end of line
+			{
+			if (!*string)
+				finished = true;
+			flushline = true;
+			string++;
+			}
+		else // normal word
+			{
+			const char* p;
+			int wordwidth = 0;
+			
+			for(p = string;; p++)
+				{
+				if (!*p || *p == ' ' || *p == '\t' || *p == '\n') // whitespace break
+					break;
+				
+				uchar c = (uchar)*p;
+				if (c < 32 || c > 127)
+					c = 127;
+				
+				c -= 32;
+				wordwidth += fonts[font].p[c].get_w();
+				
+				if (*p == '-') // other character break
+					{
+					p++;
+					break;
+					}
+				}
+			
+			if (wrap > 0 && width && width+wordwidth > wrap)
+				flushline = true;
+			else
+				{
+				string = p;
+				width += wordwidth;
+				}
+			}
+		
+		// Draw the current line if appropriate
+		if (flushline)
+			{
+			int x = dstx;
+			
+			if (align & Align_HCenter)
+				x -= width/2;
+			else if (align & Align_Right)
+				x -= width;
+			
+			for(const char* p = line; p < string; p++)
+				{
+				uchar c = (uchar)*p;
+				
+				if (c == ' ' || c == '\t') // whitespace
+					{
+					int cw = fonts[font].p[0].get_w();
+					if (c == '\t')
+						cw *= 8;
+					
+					x += cw;
+					}
+				else if (c && c != '\n')
+					{
+					if (c < 32 || c > 127)
+						c = 127;
+					
+					c -= 32;
+					copy_pic(dst, &fonts[font].p[c], x, dsty, 0, 0, fonts[font].p[c].get_w(), fonts[font].h);
+					x += fonts[font].p[c].get_w();
+					}
+				}
+			
+			width = 0;
+			line = string;
+			dsty += fonts[font].h;
+			}
+		}
+}
+		
+
+/*
+===============
+Font_Handler::get_size
+
+Calculate the size of the given string.
+pw and ph may be NULL.
+If wrap is positive, the function will wrap a line after that many pixels
+===============
+*/
+void Font_Handler::get_size(const char* string, int* pw, int* ph, int wrap, ushort font)
+{
+	int maxw = 0; // width of widest line
+	int maxh = 0; // total height
+	const char* line = string; // beginning of current line
+	int width = 0; // width of current line
+	bool finished = false;
+	
+	while(!finished)
+		{
+		bool flushline = false;
+		
+		if (*string == ' ' || *string == '\t') // whitespace
+			{
+			int cw = fonts[font].p[0].get_w();
+			if (*string == '\t')
+				cw *= 8;
+			
+			if (wrap > 0 && width+cw > wrap)
+				flushline = true;
+			else
+				width += cw;
+			
+			string++;
+			}
+		else if (!*string || *string == '\n') // explicit end of line
+			{
+			if (!*string)
+				finished = true;
+			flushline = true;
+			string++;
+			}
+		else // normal word
+			{
+			const char* p;
+			int wordwidth = 0;
+			
+			for(p = string;; p++)
+				{
+				if (!*p || *p == ' ' || *p == '\t' || *p == '\n') // whitespace break
+					break;
+				
+				uchar c = (uchar)*p;
+				if (c < 32 || c > 127)
+					c = 127;
+				
+				c -= 32;
+				wordwidth += fonts[font].p[c].get_w();
+				
+				if (*p == '-') // printable character break
+					{
+					p++;
+					break;
+					}
+				}
+			
+			if (wrap > 0 && width && width+wordwidth > wrap)
+				flushline = true;
+			else
+				{
+				string = p;
+				width += wordwidth;
+				}
+			}
+		
+		// Update maxw/maxh
+		if (flushline)
+			{
+			if (width > maxw)
+				maxw = width;
+			maxh += fonts[font].h;
+			
+			width = 0;
+			line = string;
+			}
+		}
+	
+	if (pw)
+		*pw = maxw;
+	if (ph)
+		*ph = maxh;
+}

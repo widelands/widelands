@@ -124,8 +124,8 @@ MainMenu::MainMenu()
 	b->set_pic(g_fh.get_string("Exit Game", 0));
 
 	// Text
-	new Textarea(this, MENU_XRES, MENU_YRES, "Version " VERSION, Textarea::BOTTOMRIGHT);
-	new Textarea(this, 0, MENU_YRES, "(C) 2002 by the Widelands Development Team", Textarea::V_BOTTOM);
+	new Textarea(this, MENU_XRES, MENU_YRES, "Version " VERSION, Align_BottomRight);
+	new Textarea(this, 0, MENU_YRES, "(C) 2002 by the Widelands Development Team", Align_Bottom);
 }
 
 void MainMenu::not_supported()

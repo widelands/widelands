@@ -31,89 +31,113 @@
  * 			class Font_Handler
  */
 
-/** Textarea::Textarea(Panel *parent, int x, int y, const char *text, Align align = 0, uint font = 0)
- *
- * Initialize a Textarea. The dimension are set automatically, depending on the text.
- *
- * Args: parent	parent panel
- *       x		coordinates of the textarea
- *       y
- *       text	text on the Textarea (can be 0)
- *       align	alignment for the text
- *       font	font to be used
- */
-Textarea::Textarea(Panel *parent, int x, int y, const char *text, Align align, uint font)
+/*
+===============
+Textarea::Textarea
+
+Initialize a Textarea. The dimension are set automatically, depending on the text.
+
+Args: parent	parent panel
+      x			coordinates of the textarea
+      y
+      text		text on the Textarea (can be 0)
+      align		alignment for the text
+===============
+*/
+Textarea::Textarea(Panel *parent, int x, int y, const char *text, Align align)
 	: Panel(parent, x, y, 0, 0)
 {
 	set_handle_mouse(false);
 	set_think(false);
 
-	_font = font;
-	_align = align;
-	_textpic = 0;
-
+	m_align = align;
+	
 	if (text)
 		set_text(text);
 }
 
-/** Textarea::~Textarea()
- *
- * Free allocated resources
- */
+/*
+===============
+Textarea::~Textarea
+
+Free allocated resources
+===============
+*/
 Textarea::~Textarea()
 {
-	if (_textpic)
-		delete _textpic;
 }
 
-/** Textarea::set_text(const char *text)
- *
- * Set the text of the Textarea. Size is automatically adjusted
- *
- * Args: text	the text string
- */
+
+/*
+===============
+Textarea::set_text
+
+Set the text of the Textarea. Size is automatically adjusted
+===============
+*/
 void Textarea::set_text(const char *text)
 {
-	if (_textpic) {
-		delete _textpic;
-		_textpic = 0;
-	}
-
+	collapse(); // collapse() implicitly updates
+	
 	if (text) {
-		collapse(); // collapse() implicitly updates
-		_textpic = g_fh.get_string(text, _font);
+		m_text = text;
 		expand();
 	} else
-		update(0, 0, get_w(), get_h());
+		m_text = "";
 }
 
-/** Textarea::set_align(Align align)
- *
- * Change the alignment
- *
- * Args: align	new alignment
- */
+
+/*
+===============
+Textarea::set_align
+
+Change the alignment
+===============
+*/
 void Textarea::set_align(Align align)
 {
 	collapse();
-	_align = align;
+	m_align = align;
 	expand();
 }
 
-/** Textarea::draw(Bitmap *dst, int ofsx, int ofsy)
- *
- * Redraw the Textarea
- */
+
+/*
+===============
+Textarea::draw
+
+Redraw the Textarea
+===============
+*/
 void Textarea::draw(Bitmap *dst, int ofsx, int ofsy)
 {
-	if (_textpic)
-		copy_pic(dst, _textpic, ofsx, ofsy, 0, 0, _textpic->get_w(), _textpic->get_h());
+	if (m_text.length())
+		{
+		int x = ofsx;
+		int y = ofsy;
+		
+		if (m_align & Align_HCenter)
+			x += get_w()/2;
+		else if (m_align & Align_Right)
+			x += get_w();
+		
+		if (m_align & Align_VCenter)
+			y += get_h()/2;
+		else if (m_align & Align_Bottom)
+			y += get_h();
+		
+		g_fh.draw_string(dst, x, y, m_text.c_str(), m_align);
+		}
 }
 
-/** Textarea::collapse()
- *
- * Reduce the Textarea to size 0x0 without messing up the alignment
- */
+
+/*
+===============
+Textarea::collapse
+
+Reduce the Textarea to size 0x0 without messing up the alignment
+===============
+*/
 void Textarea::collapse()
 {
 	int x = get_x();
@@ -121,42 +145,47 @@ void Textarea::collapse()
 	int w = get_w();
 	int h = get_h();
 
-	if (_align & H_CENTER)
+	if (m_align & Align_HCenter)
 		x += w >> 1;
-	else if (_align & H_RIGHT)
+	else if (m_align & Align_Right)
 		x += w;
 
-	if (_align & V_CENTER)
+	if (m_align & Align_VCenter)
 		y += h >> 1;
-	else if (_align & V_BOTTOM)
+	else if (m_align & Align_Bottom)
 		y += h;
 
 	set_pos(x, y);
 	set_size(0, 0);
 }
 
-/** Textarea::expand()
- *
- * Expand the size of the Textarea until it fits the size of the text
- */
+
+/*
+===============
+Textarea::expand
+
+Expand the size of the Textarea until it fits the size of the text
+===============
+*/
 void Textarea::expand()
 {
-	if (!_textpic)
+	if (!m_text.length())
 		return;
 
 	int x = get_x();
 	int y = get_y();
-	int w = _textpic->get_w();
-	int h = _textpic->get_h();
-
-	if (_align & H_CENTER)
+	int w, h;
+	 
+	g_fh.get_size(m_text.c_str(), &w, &h);
+	
+	if (m_align & Align_HCenter)
 		x -= w >> 1;
-	else if (_align & H_RIGHT)
+	else if (m_align & Align_Right)
 		x -= w;
 
-	if (_align & V_CENTER)
+	if (m_align & Align_VCenter)
 		y -= h >> 1;
-	else if (_align & V_BOTTOM)
+	else if (m_align & Align_Bottom)
 		y -= h;
 
 	set_pos(x, y);

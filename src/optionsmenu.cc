@@ -68,7 +68,7 @@ OptionsMenu::OptionsMenu()
 	: BaseMenu("optionsmenu.bmp")
 {
 	// Menu title
-	new Textarea(this, MENU_XRES/2, 140, "Options", Textarea::H_CENTER);
+	new Textarea(this, MENU_XRES/2, 140, "Options", Align_HCenter);
 
 	// Buttons
 	Button* b;
@@ -84,10 +84,10 @@ OptionsMenu::OptionsMenu()
 	// Fullscreen mode
 	fullscreen = new Checkbox(this, 100, 180);
 	fullscreen->set_state(g_gr.get_mode() == Graphic::MODE_FS);
-	new Textarea(this, 125, 190, "Fullscreen", Textarea::V_CENTER);
+	new Textarea(this, 125, 190, "Fullscreen", Align_VCenter);
 
 	// In-game resolution
-	new Textarea(this, 100, 230, "In-game resolution", Textarea::V_CENTER);
+	new Textarea(this, 100, 230, "In-game resolution", Align_VCenter);
 
 	int y = 240;
 	int i;
@@ -95,7 +95,7 @@ OptionsMenu::OptionsMenu()
 		char buf[16];
 		resolution.add_button(this, 100, y);
 		sprintf(buf, "%ix%i", resolutions[i].width, resolutions[i].height);
-		new Textarea(this, 125, y+10, buf, Textarea::V_CENTER);
+		new Textarea(this, 125, y+10, buf, Align_VCenter);
 
 		if (Interactive_Player::get_xres() == resolutions[i].width)
 			resolution.set_state(i);

@@ -63,7 +63,7 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	game = g;
 
 	// Text
-	new Textarea(this, MENU_XRES/2, 140, "Choose your map!", Textarea::H_CENTER);
+	new Textarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
 
 	// Buttons
 	Button* b;
@@ -99,17 +99,17 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	}
 
 	// Info fields
-	new Textarea(this, 450, 210, "Name:", Textarea::H_RIGHT);
+	new Textarea(this, 450, 210, "Name:", Align_Right);
 	taname = new Textarea(this, 460, 210, 0);
-	new Textarea(this, 450, 230, "Author:", Textarea::H_RIGHT);
+	new Textarea(this, 450, 230, "Author:", Align_Right);
 	taauthor = new Textarea(this, 460, 230, 0);
-	new Textarea(this, 450, 250, "Size:", Textarea::H_RIGHT);
+	new Textarea(this, 450, 250, "Size:", Align_Right);
 	tasize = new Textarea(this, 460, 250, 0);
-	new Textarea(this, 450, 270, "World:", Textarea::H_RIGHT);
+	new Textarea(this, 450, 270, "World:", Align_Right);
 	taworld = new Textarea(this, 460, 270, 0);
-	new Textarea(this, 450, 290, "Players:", Textarea::H_RIGHT);
+	new Textarea(this, 450, 290, "Players:", Align_Right);
 	tanplayers = new Textarea(this, 460, 290, 0);
-	new Textarea(this, 450, 310, "Descr:", Textarea::H_RIGHT);
+	new Textarea(this, 450, 310, "Descr:", Align_Right);
 	tadescr = new Multiline_Textarea(this, 460, 310, 180, 80, 0);
 }
 
@@ -141,6 +141,7 @@ void MapSelectMenu::map_selected(int id)
 			tasize->set_text(0);
 			tanplayers->set_text(0);
 			tadescr->set_text(0);
+			taworld->set_text(0);
 			m_ok->set_enabled(false);
 		}
 	}

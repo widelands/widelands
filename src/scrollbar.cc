@@ -29,8 +29,8 @@ Scrollbar
 ==============================================================================
 */
 
-AutoPic Scrollbar::pic_up("scrollbar_up.bmp", 0,0,255, 24, 24);
-AutoPic Scrollbar::pic_down("scrollbar_down.bmp", 0, 0, 255, 24, 24);
+AutoPic Scrollbar::pic_up("scrollbar_up.bmp", 0, 0, 255);
+AutoPic Scrollbar::pic_down("scrollbar_down.bmp", 0, 0, 255);
 
 /** Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
  *

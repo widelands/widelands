@@ -227,7 +227,7 @@ LaunchGameMenu::LaunchGameMenu(Game *g)
 	m_game = g;
 
 	// Title
-	new Textarea(this, MENU_XRES/2, 140, "Launch game", Textarea::H_CENTER);
+	new Textarea(this, MENU_XRES/2, 140, "Launch game", Align_HCenter);
 
 	// Buttons
 	Button* b;
@@ -242,7 +242,7 @@ LaunchGameMenu::LaunchGameMenu(Game *g)
 	m_ok->set_enabled(false);
 
 	// Map selection fields
-	m_mapname = new Textarea(this, 497, 184, "(no map)", Textarea::H_CENTER);
+	m_mapname = new Textarea(this, 497, 184, "(no map)", Align_HCenter);
 	b = new Button(this, 410, 200, 174, 24, 1, 0);
 	b->clicked.set(this, &LaunchGameMenu::select_map);
 	b->set_pic(g_fh.get_string("Select map", 0));

@@ -53,8 +53,8 @@ Critical_Error::Critical_Error(const char *text)
 	: Panel(0, 0, 0, g_gr.get_xres(), g_gr.get_yres())
 {
 	// Text
-	new Textarea(this, g_gr.get_xres()/2, 150, "!! CRITICAL ERROR !!", Textarea::H_CENTER);
-	new Textarea(this, g_gr.get_xres()/2, 200, text, Textarea::H_CENTER);
+	new Textarea(this, g_gr.get_xres()/2, 150, "!! CRITICAL ERROR !!", Align_HCenter);
+	new Textarea(this, g_gr.get_xres()/2, 200, text, Align_HCenter);
 
 	// Buttons
 	Button *b;

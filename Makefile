@@ -25,7 +25,7 @@ ifeq ($(CROSS),NO)
 CC=gcc
 
 # c++ compiler
-CXX=g++-3.0
+CXX=g++
 
 # additional build flags. if you're not a developer, you don't want
 # to change this
@@ -36,9 +36,10 @@ ADD_CFLAGS:=
 ADD_LDFLAGS:=
 
 # Different build-types:
-#  debug    optimized, debugging symbols
-#  release  optimized
-#  profile  optimized, debugging symbols, profiling
+#  debug-slow debugging symbols
+#  debug      optimized, debugging symbols
+#  release    optimized
+#  profile    optimized, debugging symbols, profiling
 #
 ifndef BUILD
 BUILD=debug
@@ -93,9 +94,13 @@ OPTIMIZE:=yes
 DEBUG:=yes
 PROFILE:=yes
 else
+ifeq ($(BUILD),debug-slow)
+DEBUG:=yes
+else
 BUILD:=debug
 OPTIMIZE:=yes
 DEBUG:=yes
+endif
 endif
 endif
 
@@ -155,7 +160,6 @@ clean:
 DEP_SED:=sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@'
 
 $(OBJECT_DIR)/%.o: src/%.cc
-#	$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
 	$(CXX) $(CXXFLAGS) -Wp,-MMD,"$*.d" -c -o $@ $<
 	$(DEP_SED) $*.d > $(OBJECT_DIR)/$*.d
 	rm $*.d

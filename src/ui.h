@@ -371,28 +371,11 @@ private:
  */
 class Textarea : public Panel {
 public:
-	enum Align {
-		H_LEFT = 0,
-		H_RIGHT = 1,
-		H_CENTER = 2,
-
-		V_TOP = 0,
-		V_BOTTOM = 4,
-		V_CENTER = 8,
-
-		CENTERRIGHT = H_RIGHT|V_CENTER,
-		BOTTOMRIGHT = H_RIGHT|V_BOTTOM,
-		CENTER = H_CENTER|V_CENTER,
-		BOTTOMCENTER = H_CENTER|V_BOTTOM,
-	};
-
-	Textarea(Panel *parent, int x, int y, const char *text, Align align = H_LEFT, uint font = 0);
+	Textarea(Panel *parent, int x, int y, const char *text, Align align = Align_Left);
 	~Textarea();
 
 	void set_text(const char *text);
 	void set_align(Align align);
-
-	inline int get_fh() const { return g_fh.get_fh(_font); }
 
 	// Drawing and event handlers
 	void draw(Bitmap *dst, int ofsx, int ofsy);
@@ -401,9 +384,8 @@ private:
 	void collapse();
 	void expand();
 
-	uint _font;
-	Pic *_textpic; // picture with prerendered text
-	Align _align;
+	std::string		m_text;
+	Align				m_align;
 };
 
 /** class Multiline_textarea

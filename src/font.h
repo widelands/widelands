@@ -23,6 +23,30 @@
 #include "graphic.h"
 #include "singleton.h"
 
+
+enum Align {
+	Align_Left = 0,
+	Align_HCenter = 1,
+	Align_Right = 2,
+	
+	Align_Top = 0,
+	Align_VCenter = 4,
+	Align_Bottom = 8,
+
+	Align_TopLeft = 0,
+	Align_CenterLeft = Align_VCenter,
+	Align_BottomLeft = Align_Bottom,
+	
+	Align_TopCenter = Align_HCenter,
+	Align_Center = Align_HCenter|Align_VCenter,
+	Align_BottomCenter = Align_HCenter|Align_Bottom,
+
+	Align_TopRight = Align_Right,
+	Align_CenterRight = Align_Right|Align_VCenter,
+	Align_BottomRight = Align_Right|Align_Bottom,
+};
+
+
 #define MAX_FONTS	5
 
 
@@ -61,6 +85,9 @@ class Font_Handler : public Singleton<Font_Handler> {
 					 
 					 int load_font(const char*, const ushort);
 					 Pic* get_string(const char*, const ushort);
+					 
+					 void draw_string(Bitmap* dst, int x, int y, const char* string, Align align, int wrap = -1, ushort font = 0);
+					 void get_size(const char* string, int* pw, int* ph, int wrap = -1, ushort font = 0);
 					 
 					 /** inline ushort get_fh(ushort f) 
 					  *

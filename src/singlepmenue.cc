@@ -54,7 +54,7 @@ SinglePlayerMenu::SinglePlayerMenu()
 	: BaseMenu("singleplmenu.bmp")
 {
 	// Text
-	new Textarea(this, MENU_XRES/2, 140, "Single Player Menu", Textarea::H_CENTER);
+	new Textarea(this, MENU_XRES/2, 140, "Single Player Menu", Align_HCenter);
 
 	// Buttons
 	Button* b;

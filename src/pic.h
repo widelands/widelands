@@ -79,6 +79,7 @@ class Bitmap {
       friend class Graphic;
 };
 
+
 /** class Pic
  *
  * Pic represents a picture.
@@ -101,6 +102,8 @@ class Pic : public Bitmap
       void clear_all(void);
 };
 
+
+/**/
 
 
 #endif 
