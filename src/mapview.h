@@ -31,7 +31,6 @@
  * Depends: class Map
  * 			g_gr
  */
-#include <iostream>
 class Map_View {
 		  Map_View(const Map_View&);
 		  Map_View& operator=(const Map_View&);
@@ -52,7 +51,7 @@ class Map_View {
 					 struct __starts {
 								long edge;
 								long h;
-					 } g_starts[500], g_stops[500];
+					 } g_starts[700], g_stops[700];
 
 					 Map* map;
 					 int vpx, vpy;

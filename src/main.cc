@@ -30,7 +30,6 @@
 #include "font.h"
 #include "ui.h"
 #include <stdlib.h>
-#include <iostream>
 #include <string.h>
 
 /** g_main function 

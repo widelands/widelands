@@ -32,7 +32,6 @@
 #include "input.h"
 #include "menuecommon.h"
 #include "game.h"
-#include <iostream.h>
 #include <string.h>
 #include <stdlib.h>
 

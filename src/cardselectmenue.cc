@@ -95,26 +95,41 @@ void card_select_menue(void) {
 
 		  // Add info fields
 		  win->create_textarea(380, 210, "Name:",  Textarea::CENTER);
-		  win->create_textarea(460, 210, "Eden",  Textarea::CENTER);
+		  Textarea* taname= win->create_textarea(460, 210, 640,  Textarea::LEFTA);
 		  win->create_textarea(380, 230, "Author:",  Textarea::CENTER);
-		  win->create_textarea(460, 230, "Widelands Development Team",  Textarea::CENTER);
+		  Textarea* taauthor= win->create_textarea(460, 230, 640,  Textarea::LEFTA);
 		  win->create_textarea(380, 250, "Size:", Textarea::CENTER);
-		  win->create_textarea(460, 250, "255x255", Textarea::CENTER);
+		  Textarea* tasize=win->create_textarea(460, 250, 640, Textarea::LEFTA);
 		  win->create_textarea(380, 270, "World:", Textarea::CENTER);
-		  win->create_textarea(460, 270, "Greenland", Textarea::CENTER);
+		  Textarea* taworld=win->create_textarea(460, 270, 640, Textarea::LEFTA);
 		  win->create_textarea(380, 290, "Players:", Textarea::CENTER);
-		  win->create_textarea(460, 290, "7      ", Textarea::CENTER);
+		  Textarea* tanplayers=win->create_textarea(460, 290, 640, Textarea::LEFTA);
 		 
 		  // TODO: Add description as multiline text box) 
 		  win->create_textarea(380, 310, "Descr:", Textarea::CENTER);
-		  win->create_textarea(460, 310, "Settler 2 Card", Textarea::CENTER);
+		  Textarea* tadescr=win->create_textarea(460, 310, 640, Textarea::CENTER);
 
 		  // Register the resposible mouse funtions
 		  g_ip.register_mcf(menue_lclick, Input::BUT1);
 		  g_ip.register_mcf(menue_rclick, Input::BUT2);
 	     g_ip.register_mmf(menue_mmf);
 
+		  Map m;
+		  char buf[10]; // 1024x1024\0
 		  while(!g_ip.should_die() && !*bexit) {
+					 if(sel->new_selection()) {
+								if(m.load_map(sel->get_selection()) == RET_OK) {	
+										  taname->set_text(m.get_name());
+										  taauthor->set_text(m.get_author());
+										  sprintf(buf, "%-4ix%4i", m.get_w(), m.get_h());
+										  tasize->set_text(buf);
+										  taworld->set_text(m.get_world());
+										  sprintf(buf, "%i", m.get_nplayers());
+										  tanplayers->set_text(buf);
+										  tadescr->set_text(m.get_descr());
+										  g_gr.register_update_rect(460, 210, 180, 220);
+								}
+					 }
 					 if(*bselect) {
 								if(sel->get_selection()) break;
 								else *bselect=false;

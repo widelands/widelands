@@ -24,7 +24,6 @@
 #ifdef WIN32
 #include <string.h>
 #endif
-#include <iostream>
 
 namespace Graph {
 		  /** Pic::Pic(const Pic& p)

@@ -65,6 +65,7 @@ void Map_View::draw(void) {
 		  f=map->get_ffield();
 		  if( (f->get_rn()->get_xpix()-vpx >=0) && (f->get_bln()->get_xpix()-vpx < (int)g_gr.get_xres()) ) 
 					 draw_field(f); 
+
 		  for(int i=(map->get_w()*(map->get_h()-1)); --i; )  {
 					 f=map->get_nfield();
 					 // X-check
@@ -72,12 +73,6 @@ void Map_View::draw(void) {
 					 if(f->get_bln()->get_xpix()-vpx >= (int)g_gr.get_xres()) continue;
 					 draw_field(f); 
 		  } 
-
-
-// TEMP
-		 // for(int i=1; i<map->get_w()-2; i++)
-//					 draw_field(map->get_field(5, 5));
-// TEMP
 
 		  if(!xtrans && (uint)vpx> map->get_w()*FIELD_WIDTH-g_gr.get_xres()) {
 					 int ovpx=vpx;
@@ -108,7 +103,7 @@ void Map_View::draw_field(Field* f) {
 #define MAX3(a, b, c) (MAX2(MAX2(a,b),MAX2(b,c)))
 #define MIN2(a, b) (a<b?a:b<a?b:a)
 #define MIN3(a, b, c) (MIN2(MIN2(a,b),MIN2(b,c)))
-
+#include <iostream>
 void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 		  int ystart, ystop;
 		  long xstart, xstop;
@@ -123,10 +118,10 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 		  // ycheck
 		  if(ystop < 0) return; 
 		  if(ystart >= (int)g_gr.get_yres()) return;
-					 
+		
 		  get_starts(l,r, m, ystart, ystop);
 		  ystop= ystop>= (int)g_gr.get_yres() ? (int)(g_gr.get_yres())-1 : ystop;
-					 
+
 		  
 		  p->get_fpixel();			 
 		  for(y_d= ystart<0 ? 0 : ystart; y_d<ystop; y_d++) {
@@ -161,6 +156,8 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 					 }
 								
 					 g_gr.set_cpixel(xstart-1, y_d);
+					 p->set_cpixel((xstart+vpx) % (p->get_w()),(y_d+vpy) % (p->get_h()>>1));
+								//p->set_cpixel(xstart-vpx % (p->get_w()>>1), ystart-vpy % (p->get_h()>>1));
 					 for(x_d=xstart; x_d<xstop; x_d++) {
 								g_gr.set_npixel(Graph::bright_up_clr(p->get_npixel(), h>>(16-HEIGHT_CLR_FACTOR)));
 					 }

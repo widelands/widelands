@@ -70,15 +70,7 @@ void Game::run(const char* map, uint nipl) {
 		  // TEMP
 		  Window* win=g_ui.create_window(0, 0, xresolution, yresolution, Window::FLAT);
 		  
-		  // more temp
-		  World* w;
-		  const char* buf=g_fileloc.locate_file("greenland.wwf", TYPE_WORLD);
-		  if(!buf) assert(0);
-		 
-		  w= new World(buf);
 		  c=new Map();
-		  
-		  c->set_world(w);
 		  if(c->load_map(map)) {
 					 // TODO: make this better
 					 assert(0) ;

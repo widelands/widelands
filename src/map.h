@@ -36,6 +36,8 @@
 
 #include "world.h"
 
+#pragma pack(1)
+
 /** struct Map_Header
  *
  * This is the header of a widelands card format
@@ -88,6 +90,8 @@ struct FieldDescr {
 		  ushort bob_nr;
 } /* size: 16 bytes */ ;	
 
+#pragma pack() 
+
 class Building;
 class Creature;
 class Bob;
@@ -108,9 +112,32 @@ class Field {
 		  Field& operator=(const Field&);
 
 		  public:
-					 Field(ushort, ushort, uchar, Pic*, Pic*);
+					 Field();
 					 ~Field(void);
 
+					 // setting funcs
+					 inline void set_pos(ushort x, ushort y, uchar h) {
+								xpos=x;
+								ypos=y;
+								height=h;
+
+								ypix=(((y+1)<<FIELD_SW_H)>>1)-(h<<HEIGHT_FACTOR);
+
+								if((y&1)) { // %2 
+										  xpix=((((x<<1)+1)<<FIELD_SW_W)>>1);
+								} else {
+										  xpix=(x<<FIELD_SW_W);
+								}			 
+					 }
+					 inline void set_td(Pic* p) {
+								texd=p;
+					 }
+					 inline void set_tr(Pic* p) {
+								texr=p;
+					 }
+					 void set_neighb(Field *, Field *, Field *, Field *, Field *, Field *);
+
+					 // Getting funcs
 					 inline uchar get_height(void) const { return height; }
 					 inline int get_xpix(void) const { return xpix; }
 					 inline int get_ypix(void) const { return ypix; }
@@ -127,15 +154,13 @@ class Field {
 					 inline Pic* get_texr(void) { return texr; }
 					 inline Pic* get_texd(void) { return texd; }
 
-					 void set_neighb(Field*, Field*, Field*, Field*, Field*, Field*);
-
 					 // ----- for class creature
-					 Building* building;
-					 Bob* bob;
 					 void remove_creature(Creature*) {};
 					 // -----
 					 
 		  private: 
+					 Building* building;
+					 Bob* bob;
 					 Field *ln, *rn, *tln, *trn, *bln, *brn;
 					 
 					 ushort xpos, ypos;
@@ -149,6 +174,7 @@ class Field {
  * This really identifies a map like it is in the game
  *
  * Depends: class File
+ * 			class g_fileloc
  */
 class Map {
 		  Map(const Map&);
@@ -159,48 +185,49 @@ class Map {
 					 ~Map(void);
 
 					 int load_map(const char*);
-
-					 // informational functions
-					 inline ushort get_w(void) { return width; }
-					 inline ushort get_h(void) { return height; }
 					 
+					 // informational functions
+					 inline const char* get_author(void) { return hd.author; }
+					 inline const char* get_name(void) { return hd.name; }
+					 inline const char* get_descr(void) { return hd.descr; }
+					 inline const char* get_world(void) { return hd.uses_world; }
+					 inline const ushort get_version(void) { return hd.version; }
+					 inline ushort get_nplayers(void) { return hd.nplayers; }
+					 inline ushort get_w(void) { return hd.width; }
+					 inline ushort get_h(void) { return hd.height; }
+
 					 // THEY DON'T CHECK FOR OVERFLOWS!!
 					 inline Field* get_field(const uint x, const uint y) {
-								lfield=(y)*(width) + (x);
-								return fields[lfield];
+								lfield=(y)*(hd.width) + (x);
+								return &fields[lfield];
 					 }
 					 inline Field* get_nfield(void) {
-								return fields[++lfield];
+								return &fields[++lfield];
 					 }
 					 inline Field* get_pfield(void) {
-								return fields[--lfield];
+								return &fields[--lfield];
 					 }
 					 inline Field* get_ffield(void) {
 								lfield=0;
-								return fields[0];
+								return &fields[0];
 					 }
 
-					 // rewidthinding or forwidtharding widthithout change
+					 // rewinding or forwarding widthithout change
 					 inline void nfield(void) { ++lfield; }
 					 inline void pfield(void) { --lfield; }
 					 inline void ffield(void) { lfield=0; }
-					 inline void set_cfield(const uint x, const uint y) { lfield=y*width + x; }
+					 inline void set_cfield(const uint x, const uint y) { lfield=y*hd.width + x; }
 
-					
-					 // temp functions
-					 void set_world(World* mw) { w=mw; } 
-
-		  
 		  private:
-					 ushort width, height;
+					 MapDescrHeader hd;
 					 World* w;
-					 Field** fields;
+					 Field* fields;
 					 uint lfield;
-					 char *name;
 
 					 // funcs
 					 int load_s2mf(const char*);
 					 int load_wlmf(const char*);
+					 void set_size(uint, uint);
 };
 
 #endif // __S__MAP_H 

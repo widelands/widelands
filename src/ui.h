@@ -333,6 +333,7 @@ class Textarea {
 					 Align al;
 					 
 					 Pic* txt;
+					 Pic* bak;
 					 Pic* dp;
 };
 

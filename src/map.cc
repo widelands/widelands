@@ -23,15 +23,12 @@
 #include "myfile.h"
 #include <string.h>
 
-// TEMP
-#include <iostream.h>
-
-
 /** class Map
  *
  * This really identifies a map like it is in the game
  *
  * DEPENDS: class File
+ * 			class g_fileloc
  */
 
 /** Map::Map(void) 
@@ -40,7 +37,6 @@
  */
 Map::Map(void) {
 		  w=0;
-		  name=0;
 		  fields=0;
 }
 
@@ -49,20 +45,36 @@ Map::Map(void) {
  * cleanups
  */
 Map::~Map(void) {
-		  if(name) 
-					 delete[] name;
-
 		  if(fields) {
-					 for(uint y=0; y<height; y++) {
-								for(uint x=0; x<width; x++) {
-										  delete fields[y*width + x];
-								}
-					 }
+					 // WARNING: if Field has to free something, we have to do
+					 // it here manually!!!
 					 free(fields);
 		  }
 		  
 		  if(w) delete w;
 }
+
+/** void Map::set_size(uint w, uint h)
+ *
+ * This sets the size of the current map
+ *
+ * *** PRIAVTE FUNC ****
+ *
+ * Args:	w, h	size of map
+ * Returns: Nothing
+ */
+void Map::set_size(uint w, uint h) {
+		  hd.width=w;
+		  hd.height=h;
+
+		  if(fields) {
+					 fields = (Field*) realloc(fields, sizeof(Field)*hd.height*hd.width);
+		  }
+		  else fields = (Field*) malloc(sizeof(Field)*hd.height*hd.width);
+
+}
+
+
 
 /** int Map::load_wlmf(const char* file) 
  *
@@ -82,7 +94,6 @@ int Map::load_wlmf(const char* file) {
 		  }
 
 		  // read header:
-		  MapDescrHeader hd;
 		  f.read(&hd, sizeof(hd));
 
 		  // check version
@@ -95,11 +106,6 @@ int Map::load_wlmf(const char* file) {
 					 }
 		  }
 
-		  // copy name
-		  if(name) delete[] name;
-		  name= new char[strlen(hd.name)+1]; 
-		  strcpy(name, hd.name);
-
 		  // ignore the player descriptions, probably the user has chnanged them. 
 		  // as long as the game knows how many players are around, everything is ok
 		  PlayerDescr pl;
@@ -107,70 +113,60 @@ int Map::load_wlmf(const char* file) {
 					 f.read(&pl, sizeof(pl));
 		  }
 		  
-		  // set size
-		  height=hd.height;
-		  width=hd.width;
-		  if(fields) {
-					 for(uint y=0; y<height; y++) {
-								for(uint x=0; x<width; x++) {
-										  delete fields[y*width + x];
-								}
-					 }
-					 free(fields);
-		  }
-		  fields = (Field**) malloc(sizeof(Field*)*height*width);
+		  set_size(hd.width, hd.height);
 
+		  
 		  // now, read in the fields, one at a time and init the card
 		  FieldDescr fd;
 		  int y;
 		  Pic *td, *tr;
-		  for(y=0; y<height; y++) {
-					 for(int x=0; x<width; x++) {
+		  int l, r, t, b;
+		  for(y=0; y<hd.height; y++) {
+					 for(int x=0; x<hd.width; x++) {
 								f.read(&fd, sizeof(fd));
-	
+
 								// TEMP
 								tr=w->get_texture(fd.tex_r);
 								if(!tr) {
-										  cerr << "Texture number " << fd.tex_r << " not found in file. Defaults to 0" << endl;
+										  //cerr << "Texture number " << fd.tex_r << " not found in file. Defaults to 0" << endl;
 										  tr=w->get_texture(0);
 								}
 								td=w->get_texture(fd.tex_d);
 								if(!td) {
-										  cerr << "Texture number " << fd.tex_d << " not found in file. Defaults to 0" << endl;
+										  // cerr << "Texture number " << fd.tex_d << " not found in file. Defaults to 0" << endl;
 										  td=w->get_texture(0);
 								}
 								// TEMP end
 
-								fields[y*width + x ] = new Field(x, y, fd.height, tr, td);
-					 }
-		  }
-		  int l, r, t, b;
-		  for(y=0; y<height; y++) {
-					 for(int x=0; x<width; x++) {
+								Field* f=get_field(x,y);
+								f->set_pos(x,y, fd.height);
+								f->set_tr(tr);
+								f->set_td(td);
 
-		 						l=x-1; 
+								l=x-1;
 								r=x+1;
-								t=y-1; 
+								t=y-1;
 								b=y+1;
-								
-								if(!x) l=width-1;
-								if(x==width-1) r=0;
-								if(!y) t=height-1;
-								if(y==height-1) b=0;
+
+								if(!x) l=hd.width-1;
+								if(x==hd.width-1) r=0;
+								if(!y) t=hd.height-1;
+								if(y==hd.height-1) b=0;
 
 								if(y&1) { // %1
-										  fields[y*width + x]->set_neighb(fields[y*width + l], fields[y*width + r], 
-																fields[t*width + x],  fields[t*width + r],
-																 fields[b*width + x],  fields[b*width + r]);
+										  get_field(x, y)->set_neighb(get_field(l, y), get_field(r, y),
+																get_field(x, t),  get_field(r, t),
+																get_field(x, b),  get_field(r, b));
 								} else {
-										  fields[y*width + x]->set_neighb(fields[y*width + l], fields[y*width + r],
-																 fields[t*width + l],  fields[t*width + x], 
-																 fields[b*width + l],  fields[b*width + x]);
-										  
+										  get_field(x, y)->set_neighb(get_field(l, y), get_field(r, y),
+																get_field(l, t),  get_field(x, t),
+																get_field(l, b),  get_field(x, b));
+
 								}
 					 }
 		  }
- 
+
+
 		  return RET_OK;
 }
 
@@ -181,14 +177,7 @@ int Map::load_wlmf(const char* file) {
  * Args: file	filename to read
  * Returns: RET_OK or ERR_FAILED
  */
-#include <iostream>
 int Map::load_map(const char* file) {
-		  if(!w) {
-					 // no world loaded.
-					 // We fail
-					 return ERR_FAILED;
-		  }
-
 		  if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX)) {
 					 // It ends like a wide lands map file. try to load
 					 // it as such 
@@ -196,8 +185,8 @@ int Map::load_map(const char* file) {
 		  }
 
 		  if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX)) {
-					 cerr << "S2Map file, not supported!!" << endl;
-					 return ERR_FAILED;
+					 // it is a S2 Map file. load it as such
+					 return load_s2mf(file);
 		  }
 		  
 		  // Never here, or file is invalid (which can't happen)

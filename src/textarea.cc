@@ -72,6 +72,9 @@ Textarea::Textarea(const uint px, const uint py, const char* t, const Align a, c
 
 		  al=a;
 		 
+		  bak=new Pic();
+		  bak->set_size(w, h);
+		  Graph::copy_pic(bak, dp, 0,0, x+xp, y+yp, w, h);
 		  draw();
 }
 
@@ -91,7 +94,6 @@ Textarea::Textarea(const uint px, const uint py, const char* t, const Align a, c
 Textarea::Textarea(const uint px, const uint py, const uint myw, const Align a, Pic* mdp, const uint addx, 
 					 const uint addy) {
 		 
-		  
 		  txt=0; 
 		  w=myw; 
 		  h=get_fh();
@@ -102,6 +104,9 @@ Textarea::Textarea(const uint px, const uint py, const uint myw, const Align a, 
 		  yp=addy;
 		  x=px;
 		  y=py;
+		  bak=new Pic();
+		  bak->set_size(w, h);
+		  Graph::copy_pic(bak, dp, 0,0, x+xp, y+yp, w, h);
 }
 
 /** void Textarea::set_text(const char* str)
@@ -128,6 +133,8 @@ void Textarea::set_text(const char* str) {
 Textarea::~Textarea(void) {
 
 		  if(txt) delete txt;
+		  delete bak;
+
 		  txt=0;
 }
 
@@ -156,5 +163,6 @@ void Textarea::draw(void) const {
 					 assert(0);
 		  }
 
+		  Graph::copy_pic(dp, bak, posx, yp+y, 0, 0, w, h);
 		  Graph::copy_pic(dp, txt, posx, yp+y, 0, 0, myw, h);
 }

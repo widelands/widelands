@@ -148,6 +148,10 @@ Pic* Font_Handler::get_string(const char* str, const ushort f) {
 					 if(c=='\t' || c=='\r' || c=='\n' || c=='\b' || c=='\a') continue;
 					 buf[n]=c;
 					 ++n;
+					 if(c < 32  || c > 127) {
+								// c is NOT an international ASCII char, we skip it silently
+								c=127;
+					 }
 					 w+= fonts[f].p[c-32].get_w();
 		  }
 		  buf[n]='\0';
@@ -170,6 +174,7 @@ Pic* Font_Handler::get_string(const char* str, const ushort f) {
 					 Graph::copy_pic(retval, &fonts[f].p[c], x, 0, 0, 0, fonts[f].p[c].get_w(), fonts[f].h);
 					 x+=fonts[f].p[c].get_w();
 		  }
+
 		  delete buf;
 		  return retval;
 }

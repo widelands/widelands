@@ -25,34 +25,17 @@
  * a field like it is represented in the game
  */
 
-/** Field::Field(ushort x, ushort y, uchar h, Pic* mtexr, Pic* mtexd)
+/** Field::Field(void) 
  *
- * Init
+ * Init. Trivial init (does nothing), because this
+ * gets never called (no new, rather malloc)
  *
- * Args:	x	xpos of field
- * 		y	ypos of field
- * 		h	height of field
- *			mtexr	right texture
- *			mtexd bottom texture
+ * Args: None
+ * Returns: Nothing
  */
-Field::Field(ushort x, ushort y, uchar h, Pic* mtexr, Pic* mtexd) { 
-		  
-		  height=h;
-		  xpos=x;
-		  ypos=y;
+Field::Field(void) {
 
-		  ypix=(((y+1)<<FIELD_SW_H)>>1)-(h<<HEIGHT_FACTOR);
-
-		  if((y&1)) { // %2 
-					 xpix=((((x<<1)+1)<<FIELD_SW_W)>>1);
-		  } else {
-					 xpix=(x<<FIELD_SW_W);
-		  }
-
-		  texr=mtexr;
-		  texd=mtexd;
 }
-
 
 /** Field::~Field(void) 
  *
