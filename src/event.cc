@@ -135,6 +135,7 @@ bool Event::reacts_when_trigger_is_set(Trigger* t) {
       }
    }
    assert(0);
+   throw;
 } 
    
 bool Event::set_reacts_when_trigger_is_set(Trigger* t, bool up) {
@@ -146,5 +147,6 @@ bool Event::set_reacts_when_trigger_is_set(Trigger* t, bool up) {
       }
    }
    assert(0);
+   throw;
 } 
 
