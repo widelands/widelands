@@ -961,6 +961,8 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 	if (!m_sdlsurface)
 		throw wexception("Couldn't set video mode: %s", SDL_GetError());
 
+	SDL_WM_SetCaption("Widelands " VERSION, "Widelands");
+
 	m_screen.pixels = (ushort*)m_sdlsurface->pixels;
 	m_screen.w = m_sdlsurface->w;
 	m_screen.h = m_sdlsurface->h;
