@@ -247,7 +247,7 @@ void Sys_Init()
       sys.active = true;
 
 		SDL_ShowCursor(SDL_DISABLE);
-		Sys_SetInputGrab(s->get_bool("inputgrab", true));
+		Sys_SetInputGrab(s->get_bool("inputgrab", false));
 		SDL_EnableUNICODE(1); // useful for e.g. chat messages
 		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 

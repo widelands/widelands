@@ -257,215 +257,227 @@ TERRAIN RENDERING
 */
 
 
-#define fix(v) ((int) ((v)*0x10000))
+struct VEdge {
+	Vertex start;
+	Vertex end;
+	int deltax;		// in 16.16 fixed point
+	int deltab;
+	int deltatx;
+	int deltaty;
+};
 
-static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y2)
+struct VEdgeBuffer {
+	VEdge	edges[3];
+	int	numedges;
+};
+
+
+/*
+===============
+vedge_from_vertices
+===============
+*/
+static bool vedge_from_vertices(VEdge* edge, Vertex p1, Vertex p2)
 {
-	int x,y,y1,w,h,ix1,ix2,itx,ity,l;
-	float x1,x2,dx1,dx2;
-	float b1,b2,db1,db2;
-	float tx1,tx2,dtx1,dtx2, ty1,ty2,dty1,dty2;
-	int b,db,tx,dtx,ty,dty;
-	uchar *texpixels;
-	uint *texcolormap;
+	if (p1.y < p2.y)
+	{
+		edge->start = p1;
+		edge->end = p2;
+	}
+	else if (p2.y < p1.y)
+	{
+		edge->start = p2;
+		edge->end = p1;
+	}
+	else
+		return false;
 
-	w=dst->w;
-	h=dst->h;
+	edge->deltax = ((edge->end.x - edge->start.x) << 16) / (edge->end.y - edge->start.y);
+	edge->deltab = ((edge->end.b - edge->start.b) << 16) / (edge->end.y - edge->start.y);
+	edge->deltatx = ((edge->end.tx - edge->start.tx) << 16) / (edge->end.y - edge->start.y);
+	edge->deltaty = ((edge->end.ty - edge->start.ty) << 16) / (edge->end.y - edge->start.y);
+	return true;
+}
 
-	texpixels=tex->get_curpixels();
-	texcolormap=tex->get_colormap();
 
-	y1=p1->y;
+/*
+===============
+calculate_vedges
 
-	x1=x2=p1->x;
-	dx1=(float) (p2->x - x1) / (p2->y - y1);
-	dx2=(float) (p3->x - x1) / (p3->y - y1);
+Calculate and sort the edges for the triangle given by the three points.
+===============
+*/
+static void calculate_vedges(VEdgeBuffer* buf, const Vertex& p1, const Vertex& p2, const Vertex& p3)
+{
+	// Build the edges
+	buf->numedges = 0;
 
-	b1=b2=p1->b;
-	db1=(float) (p2->b - b1) / (p2->y - y1);
-	db2=(float) (p3->b - b1) / (p3->y - y1);
+	if (vedge_from_vertices(&buf->edges[buf->numedges], p1, p2))
+		buf->numedges++;
+	if (vedge_from_vertices(&buf->edges[buf->numedges], p1, p3))
+		buf->numedges++;
+	if (vedge_from_vertices(&buf->edges[buf->numedges], p2, p3))
+		buf->numedges++;
 
-	tx1=tx2=p1->tx;
-	dtx1=(float) (p2->tx - tx1) / (p2->y - y1);
-	dtx2=(float) (p3->tx - tx1) / (p3->y - y1);
+	// Sort the edges
+	for(int base = 0; base < buf->numedges-1; base++) {
+		int best = base;
+		int besty = buf->edges[base].start.y;
 
-	ty1=ty2=p1->ty;
-	dty1=(float) (p2->ty - ty1) / (p2->y - y1);
-	dty2=(float) (p3->ty - ty1) / (p3->y - y1);
-
-	for (y=y1;y<=y2;y++) {
-		if (y>=0 && y<h) {
-			ix1=(int) x1;
-			ix2=(int) x2;
-
-			l=ix2-ix1;
-			if (l<1) l=1;
-
-			b=fix(b1);
-			db=fix(b2-b1)/l;
-
-			tx=fix(tx1);
-			dtx=fix(tx2-tx1)/l;
-
-			ty=fix(ty1);
-			dty=fix(ty2-ty1)/l;
-
-			uint *scanline=dst->pixels + y*dst->pitch;
-
-			if (ix2>=w) ix2=w-1;
-			if (ix1<0) {
-				b-=ix1*db;
-				tx-=ix1*dtx;
-				ty-=ix1*dty;
-				ix1=0;
-			}
-
-			for (x=ix1;x<=ix2;x++) {
-				itx=(tx>>16) & (TEXTURE_W-1);
-				ity=(ty>>16) & (TEXTURE_H-1);
-
-				scanline[x]=texcolormap[texpixels[itx+(ity<<6)] | ((b>>8) & 0xFF00)];
-
-				b+=db;
-				tx+=dtx;
-				ty+=dty;
+		for(int other = base+1; other < buf->numedges; other++) {
+			if (buf->edges[other].start.y < besty) {
+				besty = buf->edges[other].start.y;
+				best = other;
 			}
 		}
 
-		x1+=dx1;
-		x2+=dx2;
-		b1+=db1;
-		b2+=db2;
-		tx1+=dtx1;
-		tx2+=dtx2;
-		ty1+=dty1;
-		ty2+=dty2;
+		if (best != base) {
+			VEdge temp;
+
+			memcpy(&temp, &buf->edges[base], sizeof(VEdge));
+			memcpy(&buf->edges[base], &buf->edges[best], sizeof(VEdge));
+			memcpy(&buf->edges[best], &temp, sizeof(VEdge));
+		}
 	}
+
+	assert(buf->numedges != 1);
 }
 
-static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y1)
+
+/*
+===============
+render_triangle
+
+Render a triangle using a texture, taking brightness into account
+===============
+*/
+static void render_triangle(Bitmap* dst, const Vertex& p1, const Vertex& p2,
+									const Vertex& p3, Texture* tex)
 {
-	int x,y,y2,w,h,ix1,ix2,itx,ity,l;
-	float x1,x2,dx1,dx2;
-	float b1,b2,db1,db2;
-	float tx1,tx2,dtx1,dtx2, ty1,ty2,dty1,dty2;
-	int b,db,tx,dtx,ty,dty;
-	uchar *texpixels;
-	uint *texcolormap;
+	uchar* texpixels = tex->get_curpixels();
+	uint* texcolormap = tex->get_colormap();
+	VEdgeBuffer edgebuf;
 
-	w=dst->w;
-	h=dst->h;
+	calculate_vedges(&edgebuf, p1, p2, p3);
 
-	texpixels=tex->get_curpixels();
-	texcolormap=tex->get_colormap();
+	if (!edgebuf.numedges)
+		return;
 
-	y2=p3->y;
+	if (edgebuf.edges[edgebuf.numedges-1].end.y < 0)
+		return;
 
-	x1=x2=p3->x;
-	dx1=-(float) (p1->x - x1) / (p1->y - y2);
-	dx2=-(float) (p2->x - x1) / (p2->y - y2);
+	// render loop
+	VEdge* leftedge;
+	VEdge* rightedge;
+	int nextedgeidx;
+	int y;
+	int leftx, rightx; // in 16.16 fixed point
+	int leftb, rightb;
+	int lefttx, righttx;
+	int leftty, rightty;
 
-	b1=b2=p3->b;
-	db1=-(float) (p1->b - b1) / (p1->y - y2);
-	db2=-(float) (p2->b - b1) / (p2->y - y2);
+	// Figure out the starting edges and starting position
+	leftedge = &edgebuf.edges[0];
+	rightedge = &edgebuf.edges[1];
+	if (leftedge->start.x > rightedge->start.x)
+		std::swap(leftedge, rightedge);
+	else if (leftedge->start.x == rightedge->start.x) {
+		if (leftedge->deltax > rightedge->deltax)
+			std::swap(leftedge, rightedge);
+	}
 
-	tx1=tx2=p3->tx;
-	dtx1=-(float) (p1->tx - tx1) / (p1->y - y2);
-	dtx2=-(float) (p2->tx - tx1) / (p2->y - y2);
+	y = leftedge->start.y;
+	leftx = leftedge->start.x << 16; // note: in some cases, leftx != rightx here
+	rightx = rightedge->start.x << 16;
+	leftb = leftedge->start.b << 16;
+	rightb = rightedge->start.b << 16;
+	lefttx = leftedge->start.tx << 16;
+	righttx = rightedge->start.tx << 16;
+	leftty = leftedge->start.ty << 16;
+	rightty = rightedge->start.ty << 16;
 
-	ty1=ty2=p3->ty;
-	dty1=-(float) (p1->ty - ty1) / (p1->y - y2);
-	dty2=-(float) (p2->ty - ty1) / (p2->y - y2);
+	nextedgeidx = 2;
 
-	for (y=y2;y>=y1;y--) {
-		if (y>=0 && y<h) {
-			ix1=(int) x1;
-			ix2=(int) x2;
+	// Loop line by line
+	for(;;) {
+		if (y >= dst->h)
+			break;
 
-			l=ix2-ix1;
-			if (l<1) l=1;
+		// Draw the scanline
+		if (y >= 0 && y < dst->h) {
+			uint* pix;
+			int lx = leftx >> 16;
+			int rx = rightx >> 16;
+			int w = rx - lx;
 
-			b=fix(b1);
-			db=fix(b2-b1)/l;
+			if (w > 0 && lx < dst->w && rx > 0)
+			{
+				int b = leftb;
+				int tx = lefttx;
+				int ty = leftty;
+				int deltab = (rightb - leftb) / w;
+				int deltatx = (righttx - lefttx) / w;
+				int deltaty = (rightty - leftty) / w;
 
-			tx=fix(tx1);
-			dtx=fix(tx2-tx1)/l;
+				if (lx < 0) {
+					b -= lx * deltab;
+					tx -= lx * deltatx;
+					ty -= lx * deltaty;
+					lx = 0;
+				}
+				if (rx > dst->w) rx = dst->w;
 
-			ty=fix(ty1);
-			dty=fix(ty2-ty1)/l;
+				pix = dst->pixels + y * dst->pitch + lx;
+				w = rx - lx;
 
-			uint *scanline=dst->pixels + y*dst->pitch;
+				for(lx = 0; lx < w; lx++) {
+					int itx = (tx>>16) & (TEXTURE_W-1);
+					int ity = (ty>>16) & (TEXTURE_H-1);
 
-			if (ix2>=w) ix2=w-1;
-			if (ix1<0) {
-				b-=ix1*db;
-				tx-=ix1*dtx;
-				ty-=ix1*dty;
-				ix1=0;
-			}
+					pix[lx] = texcolormap[texpixels[itx+(ity<<6)] | ((b>>8) & 0xFF00)];
 
-			for (x=ix1;x<=ix2;x++) {
-				itx=(tx>>16) & (TEXTURE_W-1);
-				ity=(ty>>16) & (TEXTURE_H-1);
-
-				scanline[x]=texcolormap[texpixels[itx+(ity<<6)] | ((b>>8) & 0xFF00)];
-
-				b+=db;
-				tx+=dtx;
-				ty+=dty;
+					b += deltab;
+					tx += deltatx;
+					ty += deltaty;
+				}
 			}
 		}
 
-		x1+=dx1;
-		x2+=dx2;
-		b1+=db1;
-		b2+=db2;
-		tx1+=dtx1;
-		tx2+=dtx2;
-		ty1+=dty1;
-		ty2+=dty2;
-	}
-}
+		// Advance
+		leftx += leftedge->deltax;
+		rightx += rightedge->deltax;
+		leftb += leftedge->deltab;
+		rightb += rightedge->deltab;
+		lefttx += leftedge->deltatx;
+		righttx += rightedge->deltatx;
+		leftty += leftedge->deltaty;
+		rightty += rightedge->deltaty;
+		y++;
 
-/** render_triangle
- *
- * Render a triangle. It is being split into to triangles which have one
- * horizontal edge, so that the resulting triangles have only two edges
- * which are not horizontal, one on the left, the other on the right.
- * The actual rendering is performed by render_top_triangle and
- * render_bottom_triangle, which require a horizontal edge at the bottom
- * or at the top, respectively.
- */
-static void render_triangle (Bitmap *dst,Vertex *p1,Vertex *p2,Vertex *p3, Texture *tex)
-{
-	Vertex *p[3]={ p1,p2,p3 };
-	int top,bot,mid,y,ym,i;
+		if (y == leftedge->end.y) {
+			if (nextedgeidx >= edgebuf.numedges)
+				break;
 
-	top=bot=0; // to avoid compiler warning
+			leftedge = &edgebuf.edges[nextedgeidx++];
+			leftx = leftedge->start.x << 16;
+			leftb = leftedge->start.b << 16;
+			lefttx = leftedge->start.tx << 16;
+			leftty = leftedge->start.ty << 16;
 
-	y=0x7fffffff;
-	for (i=0;i<3;i++)
-		if (p[i]->y<y) { top=i; y=p[i]->y; }
+			assert(y == leftedge->start.y);
+		}
+		if (y == rightedge->end.y) {
+			if (nextedgeidx >= edgebuf.numedges)
+				break;
 
-	y=-0x7fffffff;
-	for (i=0;i<3;i++)
-		if (p[i]->y>y) { bot=i; y=p[i]->y; }
+			rightedge = &edgebuf.edges[nextedgeidx++];
+			rightx = rightedge->start.x << 16;
+			rightb = rightedge->start.b << 16;
+			righttx = rightedge->start.tx << 16;
+			rightty = rightedge->start.ty << 16;
 
-	for (mid=0;mid==top || mid==bot;mid++);
-	ym=p[mid]->y;
-
-	if (p[top]->y < ym) {
-		if (p[mid]->x < p[bot]->x)
-			render_top_triangle (dst,tex,p[top],p[mid],p[bot],ym);
-		else
-			render_top_triangle (dst,tex,p[top],p[bot],p[mid],ym);
-	}
-
-	if (ym < p[bot]->y) {
-		if (p[mid]->x < p[top]->x)
-			render_bottom_triangle (dst,tex,p[mid],p[top],p[bot],ym);
-		else
-			render_bottom_triangle (dst,tex,p[top],p[mid],p[bot],ym);
+			assert(y == rightedge->start.y);
+		}
 	}
 }
 
@@ -576,6 +588,9 @@ static void fill_triangle(Bitmap* dst, Point p1, Point p2, Point p3, uint color)
 	if (!edgebuf.numedges)
 		return;
 
+	if (edgebuf.edges[edgebuf.numedges-1].end.y < 0)
+		return;
+
 	// render loop
 	Edge* leftedge;
 	Edge* rightedge;
@@ -601,6 +616,9 @@ static void fill_triangle(Bitmap* dst, Point p1, Point p2, Point p3, uint color)
 
 	// Loop line by line
 	for(;;) {
+		if (y >= dst->h)
+			break;
+
 		// Draw the scanline
 		if (y >= 0 && y < dst->h) {
 			uint* pix;
@@ -609,9 +627,9 @@ static void fill_triangle(Bitmap* dst, Point p1, Point p2, Point p3, uint color)
 			int w;
 
 			if (lx < 0) lx = 0;
-			if (lx >= dst->w) lx = dst->w - 1;
+			if (lx > dst->w) lx = dst->w;
 			if (rx < 0) rx = 0;
-			if (rx >= dst->w) rx = dst->w - 1;
+			if (rx > dst->w) rx = dst->w;
 
 			pix = dst->pixels + y * dst->pitch + lx;
 			w = rx - lx;
@@ -738,7 +756,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 		Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
 
 		if (tex)
-			render_triangle(this, &r, &l, &br, tex);
+			render_triangle(this, r, l, br, tex);
 	}
 	else
 		fill_triangle(this, r, l, br, 0);
@@ -748,7 +766,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 		Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
 
 		if (tex)
-			render_triangle(this, &l, &br, &bl, tex);
+			render_triangle(this, l, br, bl, tex);
 	}
 	else
 		fill_triangle(this, l, br, bl, 0);
