@@ -71,7 +71,10 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
 		if (backslash && (!slash || backslash > slash))
 			slash = backslash;
 
-		list->add_entry(slash?slash+1:name, (void*)name);
+		list->add_entry
+		(
+			slash ? slash + 1 : name, reinterpret_cast<void*>(const_cast<char*>(name))
+		);
 	}
 
 	// Info fields
