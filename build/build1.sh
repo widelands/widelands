@@ -18,11 +18,11 @@ echo Creating source and binary package file lists
 
 find widelands -maxdepth 1 ! -type d > source.list
 cat >> source.list <<EOF
-widelands/src/*
 widelands/build/*
 widelands/win32/*
-widelands/wffcreate/*
 EOF
+find widelands/src -maxdepth 1 ! -type d >> source.list
+find widelands/wffcreate -maxdepth 1 ! -type d >> source.list
 
 cat > binary.list <<EOF
 widelands/AUTHORS

@@ -42,12 +42,8 @@
  */
 void setup_fonthandler(void)
 {
-	if (g_fh.load_font( "fixed_font1", FIXED_FONT1 ) != RET_OK) {
-		char mbuf[200];
-		snprintf(mbuf, sizeof(mbuf), "Failed to load fixed_font1.");
-		tell_user(mbuf);
-		exit(0);
-	}
+	if (g_fh.load_font( "fixed_font1", FIXED_FONT1 ) != RET_OK)
+		critical_error("Failed to load fixed_font1.");
 }
 
 /** void setup_ui(void)

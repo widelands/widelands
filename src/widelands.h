@@ -63,6 +63,12 @@
 
 #include "config.h"
 
+#ifdef __GNUC__
+#define PRINTF_FORMAT(b,c) __attribute__ (( __format__ (__printf__,b,c) ))
+#else
+#define PRINTF_FORMAT(b,c)
+#endif
+
 /*
 ==============================================================================
 
@@ -147,19 +153,14 @@ Error handling functions
 #define ERR_INVAL_ARG -2
 #define ERR_FAILED -255
 
-extern ofstream out; // I don't like this. Yea right, so sue me ;p
-extern ofstream err;
 
-void critical_error(const char*, ...);
+// Critical errors, displayed to the user.
+// Does not return (unless the user is really daring)
+void critical_error(const char *, ...) PRINTF_FORMAT(1,2);
 
-/* for critical messages that are displayed as directly as possible */
-void inline tell_user(const char* str) {
-#ifdef WIN32
-	MessageBox(NULL, str, "Wide Lands", MB_ICONINFORMATION);
-#else
-	puts(str);
-#endif
-}
+// Informational messages that can aid in debugging
+void log(const char *, ...) PRINTF_FORMAT(1,2);
+
 
 /** class wexception
  *
@@ -170,11 +171,10 @@ class wexception : public std::exception {
 	char m_string[256];
 
 public:
-	explicit wexception(const char *fmt, ...) throw();
+	explicit wexception(const char *fmt, ...) throw() PRINTF_FORMAT(2,3);
 	virtual ~wexception() throw();
 	
 	virtual const char *what() const throw();
-	void change(const char *fmt, ...);
 };
 
 #ifdef DEBUG

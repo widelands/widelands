@@ -38,6 +38,7 @@ typedef int (*KBD_HANDLER)(const char*, void*);
  */
 #define INPUT_HANDLED 0
 #define INPUT_UNHANDLED -1
+
 class Input : public Singleton<Input> {
 		  Input(const Input&);
 		  Input& operator=(const Input&);
@@ -46,6 +47,8 @@ class Input : public Singleton<Input> {
 					 Input();
 					 ~Input();
 
+					 void init();
+					 
 					 enum	Button {
 								BUT1,
 								BUT2
@@ -118,7 +121,6 @@ class Input : public Singleton<Input> {
 					bool b1_pressed, b2_pressed;
 					bool bshould_die;
 					 int levx, levy;
-
 };
 
 #define g_ip	Input::get_singleton()

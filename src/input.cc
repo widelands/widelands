@@ -21,6 +21,7 @@
 
 #include <SDL.h>
 
+#include "options.h"
 #include "input.h"
 #include "graphic.h"
 
@@ -42,7 +43,8 @@
  * Args: none
  * returns: nothing
  */
-Input::Input(void) {
+Input::Input(void)
+{
 		  cf[0]=0;
 		  cf[1]=0;
 		  cfa[0]=0;
@@ -71,7 +73,8 @@ Input::Input(void) {
  * Agrs: None
  * returns: Nothing
  */
-Input::~Input(void) {
+Input::~Input(void)
+{
 /*		  if(cfa[0]) free(cfa[0]);
 		  if(cfa[1]) free(cfa[1]);
 		  if(mmfa) free(mmfa);
@@ -85,6 +88,20 @@ Input::~Input(void) {
 		  SDL_ShowCursor(1);
 }
 
+/** Input::init()
+ *
+ * Initialization after configuration has been read in.
+ */
+void Input::init()
+{
+	Section *s = g_options.get_safe_section("global");
+
+	swap_buttons(s->get_bool("swapmouse", false));
+	set_mouse_speed(s->get_float("mousespeed", 1.0));
+
+	grab_input(true);
+}
+
 /** void Input::set_max_cords(const uint x, const uint y);
  *
  * Sets the maximal screen coordinates to allow as xpos and ypos
@@ -93,7 +110,8 @@ Input::~Input(void) {
  * 			y  max ypos
  * Returns: Nothing
  */
-void Input::set_max_cords(uint x, const uint y) {
+void Input::set_max_cords(uint x, const uint y)
+{
 		  if(maxx==x && maxy==y) return;
 
 		  maxx=x; maxy=y;

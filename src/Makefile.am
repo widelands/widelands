@@ -11,8 +11,6 @@ widelands_LDADD = @SDL_LIBS@
 widelands_SOURCES=main.cc \
 						singleton.h \
 						files.cc \
-						parser.h \
-						parser.cc \
 						options.cc \
 						options.h \
 						graphic.cc \

@@ -245,7 +245,7 @@ bool FileRead::TryOpen(FileSystem *fs, const char *fname)
 		data = fs->Load(fname, &length);
 		filepos = 0;
 	} catch(std::exception &e) {
-		tell_user(e.what());
+		log("%s\n", e.what());
 		return false;
 	}
 
@@ -441,7 +441,7 @@ bool FileWrite::TryWrite(FileSystem *fs, const char *filename)
 	try {
 		fs->Write(filename, data, length);
 	} catch(std::exception &e) {
-		tell_user(e.what());
+		log("%s\n", e.what());
 		return false;
 	}
 

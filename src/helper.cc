@@ -34,6 +34,23 @@ void to_lower(char* str) {
    }
 }
 
+/** log(const char *, ...)
+ *
+ */
+void log(const char *fmt, ...)
+{
+	char buf[2048];
+	va_list va;
+	
+	va_start(va, fmt);
+	vsnprintf(buf, sizeof(buf), fmt, va);
+	va_end(va);
+	
+	// use iostreams instead of vprintf because other parts of Widelands use iostreams
+	cout << buf;
+	cout.flush();
+}
+
 /*
 ==============================================================================
 
@@ -58,18 +75,6 @@ wexception::~wexception() throw()
 const char *wexception::what() const throw()
 {
 	return m_string;
-}
-
-void wexception::change(const char *fmt, ...)
-{
-	char buf[256];
-	va_list va;
-	
-	va_start(va, fmt);
-	vsnprintf(buf, sizeof(buf), fmt, va);
-	va_end(va);
-	
-	strcpy(m_string, buf);
 }
 
 void myassert(int line, const char* file, const char* condt) throw(wexception)

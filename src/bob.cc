@@ -501,7 +501,7 @@ void Critter_Bob_Descr::read(const char *directory, Section *s)
    Logic_Bob_Descr::read(directory, s);
 
    stock = s->get_int("stock", 0);
-   swimming = s->get_boolean("swimming", false);
+   swimming = s->get_bool("swimming", false);
 
    // read all the other animatins
 	char picname[256];
@@ -673,7 +673,7 @@ Logic_Bob_Descr *Logic_Bob_Descr::create_from_dir(const char *directory)
 		
 	try
 	{
-		Profile prof(fname, true); // section-less file
+		Profile prof(fname, "global"); // section-less file
 		Section *s = prof.get_next_section(0);
 		assert(s);
 

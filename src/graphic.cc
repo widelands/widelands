@@ -18,6 +18,7 @@
  */
 
 #include "widelands.h"
+#include "options.h"
 #include "graphic.h"
 #include "bob.h"
 
@@ -192,7 +193,8 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture)
  * Args: none
  * Returns: nothing
  */
-Graphic::Graphic(void) {
+Graphic::Graphic(void)
+{
    sc=NULL;
    st=STATE_NOT_INIT;
    nupr=0;
@@ -208,17 +210,37 @@ Graphic::Graphic(void) {
  * Args: none
  * Returns: nothing
  */
-Graphic::~Graphic(void) {
+Graphic::~Graphic(void)
+{
    if(sc) {
       SDL_FreeSurface(sc);
       sc=NULL;
    }
    screenbmp.pixels = 0;
-   st=STATE_NOT_INIT;
+   st = STATE_NOT_INIT;
 
    SDL_Quit();
 }
 
+/** Graphic::init()
+ *
+ * Initialize: read in options and stuff
+ */
+void Graphic::init()
+{
+	Section *s = g_options.get_safe_section("global");
+
+	Mode mode;
+	
+	if (s->get_bool("fullscreen", true))
+		mode = Graphic::MODE_FS;
+	else
+		mode = Graphic::MODE_WIN;
+	
+	set_mode(640, 480, mode);
+}	
+
+	
 /** void Graphic::set_mode(ushort x, ushort y, Mode m)
  *
  * This function sets a new graphics mode.
@@ -229,31 +251,37 @@ Graphic::~Graphic(void) {
  * 		m	either windows or fullscreen
  * Returns: Nothing
  */
-void Graphic::set_mode(ushort x, ushort y, Mode m) {
-   if(!x && !y) { mode=m; return; }
-   if(screenbmp.w==x && screenbmp.h==y && mode==m) return;
+void Graphic::set_mode(ushort x, ushort y, Mode m)
+{
+   if (!x && !y) {
+		x = screenbmp.w;
+		y = screenbmp.h;
+	}
+   if (screenbmp.w==x && screenbmp.h==y && mode==m)
+		return;
    if(sc)
       SDL_FreeSurface(sc);
    sc=0;
 
-   if(m==MODE_FS) {
+	st = STATE_NOT_INIT;
+
+   if (m == MODE_FS) {
       sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE | SDL_FULLSCREEN);
    } else {
       sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
    }
    if (!sc) {
-      char buf[256];
-	  sprintf(buf, "Couldn't set video mode: %s", SDL_GetError());
-      tell_user(buf);
-	  exit(0);
-   }
+      critical_error("Couldn't set video mode: %s", SDL_GetError());
+		return;
+	}
+	
    mode=m;
-   screenbmp.w=x;
-   screenbmp.pitch=x;
-   screenbmp.h=y;
-   screenbmp.pixels=(ushort*) sc->pixels;
+   screenbmp.w = x;
+   screenbmp.pitch = x;
+   screenbmp.h = y;
+   screenbmp.pixels = (ushort*) sc->pixels;
 
-   st=STATE_OK;
+   st = STATE_OK;
 
    bneeds_fs_update=true;
 

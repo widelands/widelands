@@ -18,6 +18,7 @@
  */
 
 #include "widelands.h"
+#include "options.h"
 #include "ui.h"
 #include "menuecommon.h"
 #include "optionsmenu.h"
@@ -112,7 +113,13 @@ void options_menu()
 	int code = om->run();
 
 	if (code == om_ok) {
-		g_gr.set_mode(g_gr.get_xres(), g_gr.get_yres(), om->get_fullscreen() ? Graphic::MODE_FS : Graphic::MODE_WIN);
+		Section *s = g_options.get_safe_section("global");
+	
+		s->set_int("xres", om->get_xres());
+		s->set_int("yres", om->get_yres());
+		s->set_bool("fullscreen", om->get_fullscreen());
+		
+		g_gr.set_mode(0, 0, om->get_fullscreen() ? Graphic::MODE_FS : Graphic::MODE_WIN);
 		Interactive_Player::set_resolution(om->get_xres(), om->get_yres());
 	}
 

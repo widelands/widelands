@@ -25,16 +25,12 @@
 #include "mainmenue.h"
 #include "setup.h"
 #include "font.h"
+#include "IntPlayer.h"
 
 #include <SDL.h>
 
 
 LayeredFileSystem *g_fs;
-
-#ifdef DEBUG
-// This is set for the assert function, to skip over to graphical asserts
-int graph_is_init=0;
-#endif
 
 
 /** g_main function 
@@ -48,38 +44,44 @@ int graph_is_init=0;
 //#include "md5file.h"
 int g_main(int argc, char** argv)
 {
-	static Font_Handler f; // Global instance for the hole game
-	static User_Interface ui; // Global instance for the hole game
-	static Cursor cur; // This is the global cursor instance, init here for the whole game
+	// Create all the subsystems
+	static Graphic g;
+	static Input myip;
+	static Font_Handler f;
+	static Cursor cur;
+	static User_Interface ui;
 
 	try
 	{
+	   // Setup filesystem
 		g_fs = LayeredFileSystem::Create();
-	
-	   // Setup default searchpaths
 		setup_searchpaths(argc, argv);
-	
+
 		// Handle options
 		handle_options(argc, argv);
 
-		// Load common UI pictures
+		// Initialize all subsystems after config has been read
+		Section *s = g_options.get_safe_section("global");
+		Interactive_Player::set_resolution(s->get_int("xres", 640), s->get_int("yres", 480));
+		
 		AutoPic::load_all();
 
-		// Setup font handler and user interface for the use in widelands
 		setup_fonthandler();
 		setup_ui();
 
-		// Until now, no window is created, nothing is started, just initialized.
-		// By now, we musn't use the tell_user function any longer!!
-		// Rather, we can now use a user_interface window for critical errors, which
-		// terminates the application in a good matter
-#ifdef 	DEBUG
-		graph_is_init=1;
-#endif
+		g_ip.init();
+		g_gr.init();
+
+		// complain about unknown options in the configuration file and on the 
+		// command line
+		g_options.check_used();
 
 		// run main_menue
 		main_menue();
 
+		// save options
+		write_conf_file();
+		
 		delete g_fs;
 	}
 	catch(std::exception &e)

@@ -48,16 +48,95 @@ Section::Value
 
 Section::Value::Value(const char *nname, const char *nval)
 {
-	used = false;
-	name = strdup(nname);
-	val = strdup(nval);
+	m_used = false;
+	m_name = strdup(nname);
+	m_value = strdup(nval);
+}
+
+Section::Value::Value(const Section::Value &o)
+{
+	m_used = o.m_used;
+	m_name = strdup(o.m_name);
+	m_value = strdup(o.m_value);
 }
 
 Section::Value::~Value()
 {
-	free(name);
-	free(val);
+	free(m_name);
+	free(m_value);
 }
+
+Section::Value &Section::Value::operator=(const Section::Value &o)
+{
+	free(m_name);
+	free(m_value);
+	m_used = o.m_used;
+	m_name = strdup(o.m_name);
+	m_value = strdup(o.m_value);
+	
+	return *this;
+}
+
+bool Section::Value::is_used() const
+{
+	return m_used;
+}
+
+void Section::Value::mark_used()
+{
+	m_used = true;
+}
+
+int Section::Value::get_int() const
+{
+	char *endp;
+	int i;
+	
+	i = strtol(m_value, &endp, 0);
+	
+	if (*endp)
+		throw wexception("%s: '%s' is not an integer", get_name(), m_value);
+	
+	return i;
+}
+
+float Section::Value::get_float() const
+{
+	char *endp;
+	float f;
+	
+	f = strtod(m_value, &endp);
+	
+	if (*endp)
+		throw wexception("%s: '%s' is not a float", get_name(), m_value);
+	
+	return f;
+}
+
+bool Section::Value::get_bool() const
+{
+	int i;
+	for (i = 0; i < TRUE_WORDS; i++)
+		if (!strcasecmp(m_value, trueWords[i]))
+			return true;
+	for (i = 0; i < FALSE_WORDS; i++)
+		if (!strcasecmp(m_value, falseWords[i]))
+			return false;
+
+	throw wexception("%s: '%s' is not a boolean value", get_name(), m_value);
+}
+
+const char *Section::Value::get_string() const
+{
+	return m_value;
+}
+
+void Section::Value::set_string(const char *value)
+{
+	free(m_value);
+	m_value = strdup(value);
+}
+
 
 /*
 ==============================================================================
@@ -68,22 +147,55 @@ Section
 */
 
 const char *Section::get_name() const {
-   return sname;
+   return m_section_name;
 }
 
-Section::Section(const char *name, bool supress_error)
-	: values(8, 8)
+Section::Section(Profile *prof, const char *name)
 {
-   supr_err=supress_error;
-	used = false;
-   sname = strdup(name);
+	m_profile = prof;
+	m_used = false;
+	m_section_name = strdup(name);
+}
+
+Section::Section(const Section &o)
+{
+	m_section_name = 0;
+	*this = o;
 }
 
 Section::~Section()
 {
-	for(int i = values.elements()-1; i >= 0; i--)
-		delete (Value *)values.element_at(i);
-	free(sname);
+	if (m_section_name)
+		free(m_section_name);
+}
+
+Section &Section::operator=(const Section &o)
+{
+	if (m_section_name)
+		free(m_section_name);
+
+	m_profile = o.m_profile;
+	m_used = o.m_used;
+	m_section_name = strdup(o.m_section_name);
+	m_values = o.m_values;
+	
+	return *this;
+}	
+
+/** Section::is_used()
+ *
+ */
+bool Section::is_used() const
+{
+	return m_used;
+}
+
+/** Section::mark_used()
+ *
+ */
+void Section::mark_used()
+{
+	m_used = true;
 }
 
 /** Section::check_used()
@@ -92,19 +204,16 @@ Section::~Section()
  */
 void Section::check_used()
 {
-	for(int i = 0; i < values.elements(); i++) {
-		Value *v = (Value *)values.element_at(i);
-		if (!v->used) {
-			if(!supr_err)
-				throw wexception("Section [%s], key '%s' not used (did you spell the name correctly?)",
-				                 sname, v->name);
-      }
+	for(Value_list::iterator v = m_values.begin(); v != m_values.end(); v++) {
+		if (!v->is_used())
+			m_profile->error("Section [%s], key '%s' not used (did you spell the name correctly?)",
+				              get_name(), v->get_name());
 	}
 }
 
 /** Section::get_val(const char *name)
  *
- * Returns the value associated with the given keyname.
+ * Returns the Value associated with the given keyname.
  *
  * Args: name	name of the key
  *
@@ -112,10 +221,9 @@ void Section::check_used()
  */
 Section::Value *Section::get_val(const char *name)
 {
-	for(int i = 0; i < values.elements(); i++) {
-		Value *v = (Value *)values.element_at(i);
-		if (!strcasecmp(v->name, name)) {
-			v->used = true;
+	for(Value_list::iterator v = m_values.begin(); v != m_values.end(); v++) {
+		if (!strcasecmp(v->get_name(), name)) {
+			v->mark_used();
 			return v;
 		}
 	}
@@ -133,12 +241,11 @@ Section::Value *Section::get_val(const char *name)
  */
 Section::Value *Section::get_next_val(const char *name)
 {
-	for(int i = 0; i < values.elements(); i++) {
-		Value *v = (Value *)values.element_at(i);
-		if (v->used)
+	for(Value_list::iterator v = m_values.begin(); v != m_values.end(); v++) {
+		if (v->is_used())
 			continue;
-		if (!name || !strcasecmp(v->name, name)) {
-			v->used = true;
+		if (!name || !strcasecmp(v->get_name(), name)) {
+			v->mark_used();
 			return v;
 		}
 	}
@@ -146,17 +253,27 @@ Section::Value *Section::get_next_val(const char *name)
 	return 0;
 }
 
-/** Section::add_val(const char *key, const char *value)
+/** Section::create_val(const char *name, const char *value, bool duplicate = false)
  *
- * Adds the given key-value pair to the section.
+ * Set the given key. If duplicate is false, an old key with the given name is 
+ * replaced if possible.
  *
- * Args: key	name of the key
- *       value	string associated with the key
+ * Unlike the set_*() class functions, it doesn't mark the key as used.
  */
-void Section::add_val(const char *key, const char *value)
+Section::Value *Section::create_val(const char *name, const char *value, bool duplicate)
 {
-	Value *v = new Value(key, value);
-	values.add(v);
+	if (!duplicate) {
+		for(Value_list::iterator old = m_values.begin(); old != m_values.end(); old++) {
+			if (!strcasecmp(old->get_name(), name)) {
+				old->set_string(value);
+				return old;
+			}
+		}
+	}
+	
+	Value v(name, value);
+	m_values.push_back(v);
+	return &m_values.back();
 }
 
 /** Section::get_safe_int(const char *name)
@@ -169,29 +286,33 @@ int Section::get_safe_int(const char *name)
 	Value *v = get_val(name);
 	if (!v)
 		throw wexception("[%s]: missing integer key '%s'", get_name(), name);
-	return atoi(v->val);
+	return v->get_int();
 }
 
-/** Section::get_safe_boolean(const char *name)
+/** Section::get_safe_float(const char *name)
+ *
+ * Return the float value of the given key or throw an exception if a
+ * problem arises.
+ */
+float Section::get_safe_float(const char *name)
+{
+	Value *v = get_val(name);
+	if (!v)
+		throw wexception("[%s]: missing float key '%s'", get_name(), name);
+	return v->get_float();
+}
+
+/** Section::get_safe_bool(const char *name)
  *
  * Return the boolean value of the given key or throw an exception if a
  * problem arises.
  */
-bool Section::get_safe_boolean(const char *name)
+bool Section::get_safe_bool(const char *name)
 {
 	Value *v = get_val(name);
 	if (!v)
 		throw wexception("[%s]: missing boolean key '%s'", get_name(), name);
-
-	int i;
-	for (i = 0; i < TRUE_WORDS; i++)
-		if (!strcasecmp(v->val, trueWords[i]))
-			return true;
-	for (i = 0; i < FALSE_WORDS; i++)
-		if (!strcasecmp(v->val, falseWords[i]))
-			return false;
-
-	throw wexception("[%s], key '%s' is not a boolean value", get_name(), name);
+	return v->get_bool();
 }
 
 /** Section::get_safe_string(const char *name)
@@ -204,15 +325,7 @@ const char *Section::get_safe_string(const char *name)
 	Value *v = get_val(name);
 	if (!v)
 		throw wexception("[%s]: missing key '%s'", get_name(), name);
-   
-	char* retval=v->val;
-   if(retval[0]=='\'' || retval[0]=='\"') {
-      retval++;
-   }
-   if(retval[strlen(retval)-1]=='\'' || retval[strlen(retval)-1]=='\"') {
-      retval[strlen(retval)-1]='\0'; // well, we change the buffer, but this doesn't matter
-   }  
-	return retval;
+   return v->get_string();
 }
 
 /** Section::get_int(const char *name, int def)
@@ -230,10 +343,35 @@ int Section::get_int(const char *name, int def)
 	Value *v = get_val(name);
 	if (!v)
 		return def;
-	return atoi(v->val);
+	
+	try {
+		return v->get_int();
+	} catch(std::exception &e) {
+		m_profile->error("%s", e.what());
+		return def;
+	}
 }
 
-/** Section::get_boolean(const char *name, bool def)
+/** Section::get_float(const char *name, float def)
+ *
+ * Returns the float value of the given key. Falls back to a default value
+ * if the key is not found.
+ */
+float Section::get_float(const char *name, float def)
+{
+	Value *v = get_val(name);
+	if (!v)
+		return def;
+	
+	try {
+		return v->get_float();
+	} catch(std::exception &e) {
+		m_profile->error("%s", e.what());
+		return def;
+	}
+}
+
+/** Section::get_bool(const char *name, bool def)
  *
  * Returns the boolean value of the given key. Falls back to a default value
  * if the key is not found.
@@ -243,23 +381,18 @@ int Section::get_int(const char *name, int def)
  *
  * Returns: the boolean value of the key
  */
-bool Section::get_boolean(const char *name, bool def)
+bool Section::get_bool(const char *name, bool def)
 {
 	Value *v = get_val(name);
 	if (!v)
 		return def;
-
-	int i;
-	for (i = 0; i < TRUE_WORDS; i++)
-		if (!strcasecmp(v->val, trueWords[i]))
-			return true;
-	for (i = 0; i < FALSE_WORDS; i++)
-		if (!strcasecmp(v->val, falseWords[i]))
-			return false;
-
-	if(!supr_err)
-		throw wexception("[%s], key '%s' is not a boolean value", sname, name);
-	return def;
+	
+	try {
+		return v->get_bool();
+	} catch(std::exception &e) {
+		m_profile->error("%s", e.what());
+		return def;
+	}
 }
 
 /** Section::get_string(const char *name, const char *def)
@@ -278,7 +411,7 @@ const char *Section::get_string(const char *name, const char *def)
 	Value *v = get_val(name);
 	if (!v)
 		return def;
-	return v->val;
+	return v->get_string();
 }
 
 /** Section::get_next_int(const char *name, int *value)
@@ -295,11 +428,26 @@ const char *Section::get_next_int(const char *name, int *value)
 	Value *v = get_next_val(name);
 	if (!v)
 		return 0;
-	*value = atoi(v->val);
-	return v->name;
+	
+	*value = v->get_int();
+	return v->get_name();
 }
 
-/** Section::get_next_boolean(const char *name, int *value)
+/** Section::get_next_float(const char *name, float *value)
+ *
+ * Retrieve the next unused key with the given name as a float.
+ */
+const char *Section::get_next_float(const char *name, float *value)
+{
+	Value *v = get_next_val(name);
+	if (!v)
+		return 0;
+	
+	*value = v->get_float();
+	return v->get_name();
+}
+
+/** Section::get_next_bool(const char *name, int *value)
  *
  * Retrieve the next unused key with the given name as a boolean value.
  *
@@ -308,30 +456,14 @@ const char *Section::get_next_int(const char *name, int *value)
  *
  * Returns: the name of the key, or 0 if none has been found
  */
-const char *Section::get_next_boolean(const char *name, bool *value)
+const char *Section::get_next_bool(const char *name, bool *value)
 {
-	for(;;) {
-		Value *v = get_next_val(name);
-		if (!v)
-			return 0;
+	Value *v = get_next_val(name);
+	if (!v)
+		return 0;
 
-		int i;
-		for (i = 0; i < TRUE_WORDS; i++)
-			if (!strcasecmp(v->val, trueWords[i])) {
-				*value = true;
-				return v->name;
-			}
-		for (i = 0; i < FALSE_WORDS; i++)
-			if (!strcasecmp(v->val, falseWords[i])) {
-				*value = false;
-				return v->name;
-			}
-
-		if(!supr_err)
-			throw wexception("[%s], key '%s' is not a boolean value", sname, v->name);
-		// we can't really return anything, so just get the next value
-		// I guess a goto would be more logical in this rare situation ;p
-	}
+	*value = v->get_bool();
+	return v->get_name();
 }
 
 /** Section::get_next_string(const char *name, int *value)
@@ -348,8 +480,62 @@ const char *Section::get_next_string(const char *name, const char **value)
 	Value *v = get_next_val(name);
 	if (!v)
 		return 0;
-	*value = v->val;
-	return v->name;
+	
+	*value = v->get_string();
+	return v->get_name();
+}
+
+/** Section::set_int(const char *name, int value, bool duplicate = false)
+ *
+ * Modifies/Creates the given key.
+ * If duplicate is true, a duplicate key will be created if the key already
+ * exists.
+ */
+void Section::set_int(const char *name, int value, bool duplicate)
+{
+	char buf[32];
+	
+	snprintf(buf, sizeof(buf), "%i", value);
+	create_val(name, buf, duplicate)->mark_used();
+}
+
+/** Section::set_float(const char *name, float value, bool duplicate = false)
+ *
+ * Modifies/Creates the given key.
+ * If duplicate is true, a duplicate key will be created if the key already
+ * exists.
+ */
+void Section::set_float(const char *name, float value, bool duplicate)
+{
+	char buf[64];
+	
+	snprintf(buf, sizeof(buf), "%f", value);
+	create_val(name, buf, duplicate)->mark_used();
+}
+
+/** Section::set_bool(const char *name, bool value, bool duplicate = false)
+ *
+ * Modifies/Creates the given key.
+ * If duplicate is true, a duplicate key will be created if the key already
+ * exists.
+ */
+void Section::set_bool(const char *name, bool value, bool duplicate)
+{
+	const char *string;
+
+	string = value ? "true" : "false";
+	create_val(name, string, duplicate)->mark_used();
+}
+
+/** Section::set_string(const char *name, const char *string, bool duplicate = false)
+ *
+ * Modifies/Creates the given key.
+ * If duplicate is true, a duplicate key will be created if the key already
+ * exists.
+ */
+void Section::set_string(const char *name, const char *string, bool duplicate)
+{
+	create_val(name, string, duplicate)->mark_used();
 }
 
 
@@ -361,45 +547,69 @@ Profile
 ==============================================================================
 */
 
-/** Profile::Profile(const char* filename)
+/** Profile::Profile(int error_level = err_throw)
  *
- * Parses an ini-style file into sections and key-value pairs.
- *
- * Args: errstream	all syntax errors etc.. are written to this stream
- *       filename	name of the .ini file
+ * Create an empty profile
  */
-Profile::Profile(const char* filename, bool section_less_file,  bool suppress_error_msg)
-	: sections(8, 8)
+Profile::Profile(int error_level)
 {
-   supr_err=suppress_error_msg;
-   if(section_less_file) {
-      sections.add(new Section("[__NO_SEC__]", supr_err));
-   }
-   parse(filename, section_less_file);
+	m_error_level = error_level;
 }
 
+/** Profile::Profile(const char* filename, const char *global_section = 0, int error_level = err_throw)
+ *
+ * Parses an ini-style file into sections and key-value pairs.
+ * If global_section is not null, keys outside of sections are put into a section
+ * of that name.
+ */
+Profile::Profile(const char* filename, const char *global_section, int error_level)
+{
+	m_error_level = error_level;
+	read(filename, global_section);
+}
+
+/** Profile::~Profile()
+ *
+ * Free allocated resources
+ */
 Profile::~Profile()
 {
-	for(int i = sections.elements()-1; i >= 0; i--) {
-		Section *s = (Section *)sections.element_at(i);
-		delete s;
-	}
+}
+
+/** Profile::error(const char *fmt, ...)
+ *
+ * Output an error message.
+ * Depending on the error level, it is thrown as a wexception, logged or ignored.
+ */
+void Profile::error(const char *fmt, ...) const
+{
+	if (m_error_level == err_ignore)
+		return;
+	
+	char buf[256];
+	va_list va;
+	
+	va_start(va, fmt);
+	vsnprintf(buf, sizeof(buf), fmt, va);
+	va_end(va);
+	
+	if (m_error_level == err_log)
+		log("%s\n", buf);
+	else
+		throw wexception("%s", buf);
 }
 
 /** Profile::check_used()
  *
- * Throw an exception if a section or key hasn't been used.
+ * Signal an error if a section or key hasn't been used.
  */
 void Profile::check_used()
 {
-	for(int i = sections.elements()-1; i >= 0; i--) {
-		Section *s = (Section *)sections.element_at(i);
-		if (!s->used) {
-				throw wexception("Section [%s] not used (did you spell the name correctly?)",
-				                 s->get_name());
-      } else {
+	for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+		if (!s->is_used())
+			error("Section [%s] not used (did you spell the name correctly?)", s->get_name());
+      else
 			s->check_used();
-      }
 	}
 }
 
@@ -413,15 +623,27 @@ void Profile::check_used()
  */
 Section *Profile::get_section(const char *name)
 {
-	for(int i = 0; i < sections.elements(); i++) {
-		Section *s = (Section *)sections.element_at(i);
+	for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
 		if (!strcasecmp(s->get_name(), name)) {
-			s->used = true;
+			s->mark_used();
 			return s;
 		}
 	}
 
 	return 0;
+}
+
+/** Profile::get_safe_section(const char *name)
+ *
+ * Safely get a section of the given name.
+ * If the section doesn't exist, an exception is thrown.
+ */
+Section *Profile::get_safe_section(const char *name)
+{
+	Section *s = get_section(name);
+	if (!s)
+		throw wexception("Section [%s] not found", name);
+	return s;
 }
 
 /** Profile::get_next_section(const char *name)
@@ -434,17 +656,37 @@ Section *Profile::get_section(const char *name)
  */
 Section *Profile::get_next_section(const char *name)
 {
-	for(int i = 0; i < sections.elements(); i++) {
-		Section *s = (Section *)sections.element_at(i);
-		if (s->used)
+	for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+		if (s->is_used())
 			continue;
 		if (!name || !strcasecmp(s->get_name(), name)) {
-			s->used = true;
+			s->mark_used();
 			return s;
 		}
 	}
 
 	return 0;
+}
+
+/** Profile::create_section(const char *name, bool duplicate = false)
+ *
+ * Create a section of the given name.
+ * If duplicate is true, a duplicate section may be created. Otherwise, a 
+ * pointer to an existing section is returned.
+ *
+ * Unlike get_safe_section(), the returned section is not marked as used.
+ */
+Section *Profile::create_section(const char *name, bool duplicate = false)
+{
+	if (!duplicate) {
+		for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+			if (!strcasecmp(s->get_name(), name))
+				return s;
+		}
+	}
+	
+	m_sections.push_back(Section(this, name));
+	return &m_sections.back();
 }
 
 inline char *skipwhite(char *p)
@@ -483,14 +725,14 @@ inline char *setEndAt(char *str, char c)
 	return str;
 }
 
-/** Profile::parse(const char *filename)
+/** Profile::read(const char *filename, const char *global_section = 0)
  *
  * Parses an ini-style file into sections and key values. If a section or
  * key name occurs multiple times, an additional entry is created.
  *
  * Args: filename	name of the source file
  */
-void Profile::parse(const char *filename, bool section_less_file)
+void Profile::read(const char *filename, const char *global_section)
 {
 	try
 	{
@@ -512,16 +754,9 @@ void Profile::parse(const char *filename, bool section_less_file)
 				continue;
 
 			if (p[0] == '[') {
-				if(section_less_file) {
-					if(!supr_err)
-						throw wexception("line %i: Section %s in sectionless file!",
-											  linenr, p);
-				} else {
-					p++;
-					setEndAt(p, ']');
-					s = new Section(p, supr_err);
-					sections.add(s);
-				}
+				p++;
+				setEndAt(p, ']');
+				s = create_section(p, true); // may create duplicate
 			} else {
 				char *tail = strchr(p, '=');
 				if (tail) {
@@ -539,32 +774,57 @@ void Profile::parse(const char *filename, bool section_less_file)
 							*eot = 0;
 					}  
 
-					if(!section_less_file) {
-						if (s) {
-							s->add_val(p, tail);
-						} else {
-							if(!supr_err)
-								throw wexception("line %i: key %s outside section",
-													  linenr, p);
-						}
-					} else {
-						((Section*) sections.element_at(0))->add_val(p, tail);
-						// add to default section
+					// ready to insert
+					if (!s) {
+						if (global_section)
+							s = create_section(global_section, true);
+						else
+							error("line %i: key %s outside section", linenr, p);
 					}
-
+					if (s) // error() may or may not throw
+						s->create_val(p, tail, true); // may create duplicate
 				} else {
-					if(!supr_err)
-						throw wexception("line %i: syntax error", linenr);
+					error("line %i: syntax error", linenr);
 				}
 			}
 		}
 	}
 	catch(std::exception &e) {
 		throw wexception("%s: %s", filename, e.what());
-	}		
+	}
 }
 
-#ifdef TEST_PROFILE // needs profile.cc, myfile.cc growablearray.cc
+/** Profile::write(const char *filename, bool used_only = true)
+ *
+ * Writes all sections out to the given file.
+ * If used_only is true, only used sections and keys are written to the file.
+ */
+void Profile::write(const char *filename, bool used_only)
+{
+	FileWrite fw;
+	
+	fw.Printf("# Automatically created by Widelands " VERSION "\n\n");
+
+	for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
+		if (used_only && !s->is_used())
+			continue;
+		
+		fw.Printf("[%s]\n", s->get_name());
+		
+		for(Section::Value_list::iterator v = s->m_values.begin(); v != s->m_values.end(); v++) {
+			if (used_only && !v->is_used())
+				continue;
+			fw.Printf("%s=%s\n", v->get_name(), v->get_string());
+		}
+		
+		fw.Printf("\n");
+	}
+	
+	fw.Write(g_fs, filename);
+}
+
+
+#ifdef TEST_PROFILE // this is out of date
 int main(int argc, char **argv)
 {
 	if (argc != 2) {
@@ -589,7 +849,7 @@ int main(int argc, char **argv)
 		bool v;
 
 		cout << "[bool]" << std::endl;
-		while((key = s->get_next_boolean(0, &v)))
+		while((key = s->get_next_bool(0, &v)))
 			cout << key<<"="<<v << std::endl;
 	}
 

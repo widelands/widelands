@@ -18,13 +18,11 @@
  */
 
 #include "widelands.h"
-
-#include <stdarg.h>
-
 #include "graphic.h"
 #include "font.h"
 #include "ui.h"
 #include "cursor.h"
+
 
 /*
 ==============================================================================
@@ -81,7 +79,8 @@ void Critical_Error::draw(Bitmap *dst, int ofsx, int ofsy)
  */
 void critical_error(const char* str, ...)
 {
-	Critical_Error *ce;
+	static int in_criterr = 0;
+
 	char buf[1024];
 	va_list va;
 
@@ -89,7 +88,20 @@ void critical_error(const char* str, ...)
 	vsnprintf(buf, sizeof(buf), str, va);
 	va_end(va);
 
-	ce = new Critical_Error(buf);
-	ce->run();
-	delete ce;
+	log("Critical Error%s: %s\n", in_criterr ? " (recursive)" : "", buf);
+	
+	if (g_gr.get_state() != Graphic::STATE_OK || in_criterr)
+	{
+#ifdef WIN32
+		MessageBox(NULL, buf, "Wide Lands", MB_ICONINFORMATION);
+#endif
+		exit(0);
+	}
+	else
+	{
+		in_criterr++;
+		Critical_Error ce(buf);
+		ce.run();
+		in_criterr--;
+	}
 }

@@ -20,6 +20,11 @@
 #ifndef __S__OPTIONS_H
 #define __S__OPTIONS_H
 
+#include "profile.h"
+
+extern Profile g_options;
+
 void handle_options(int argc, char**argv);
+void write_conf_file();
 
 #endif /* __S__OPTIONS_H */

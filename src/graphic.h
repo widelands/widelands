@@ -239,6 +239,8 @@ class Graphic : public Singleton<Graphic>
    Graphic(void);
    ~Graphic(void);
 
+	void init();
+	
    void set_mode(ushort, ushort, Mode);
    void register_update_rect(const ushort, const ushort, const ushort, const ushort);
    void update(void);

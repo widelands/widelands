@@ -41,12 +41,8 @@ void AutoPic::load_all()
 		snprintf(buf, sizeof(buf), "pics/%s", first->filename);
       first->load(buf);
       if ((first->desw && first->desw != (int)first->get_w()) ||
-            (first->desh && first->desh != (int)first->get_h())) {
-         char buf[1024];
-         sprintf(buf, "%s: should be %ix%i pixels.", first->filename, first->desw, first->desh);
-         tell_user(buf);
-         exit(0);
-      }
+            (first->desh && first->desh != (int)first->get_h()))
+			critical_error("%s: should be %ix%i pixels.", first->filename, first->desw, first->desh);
       first = first->next;
    }
 }
