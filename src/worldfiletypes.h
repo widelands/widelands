@@ -70,10 +70,10 @@ struct TerrainType
 
 enum AnimKey
 {
-	NONE=0,
-	TIME,
-	STOCK
-	// ...
+	ANIM_NONE=0,
+	ANIM_TIME,
+	ANIM_STOCK,
+	ANIM_FORCE_DWORD = 0x7FFFFFF
 };
 
 struct BobDesc

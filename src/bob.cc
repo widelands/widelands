@@ -36,19 +36,19 @@ Bob::Bob(BobDesc* bob, World* w)
   */
 Pic* Bob::get_pic(int timekey)
 {
-	int key = NONE;
+	int key = 0;
 	switch (desc.animKey)
 	{
-	case STOCK:
+	case ANIM_STOCK:
 		key = desc.stock;
 		break;
-	case TIME:
+	case ANIM_TIME:
 		// this scale allows 1 per second as slowest animation; hm.
 		// are there slower anims?
 		key = (timekey * desc.animFactor) / 1000;
 		break;
 	
-	case NONE:
+	case ANIM_NONE:
 	// suppress warnings
 	default:
 		break;

@@ -37,7 +37,6 @@
 #define VERSION			"0.9pre"
 
 char dirname[1024];
-char outfile[1024];
 
 void printHelp()
 {
@@ -89,9 +88,14 @@ void wwfcreate(Binary_file* output)
 
 int main(int argc, char* argv[])
 {
-	printf("Wide Lands WorldMaker v%s\n", VERSION);
+	printf("wwfCreate v%s\n", VERSION);
 	if (argc == 1 || argc > 3)
+	{
 		printHelp();
+		return -1;
+	}
+
+	char outfile[1024];
 
 	// get input dir name
 	strcpy(dirname, argv[1]);

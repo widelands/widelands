@@ -84,6 +84,10 @@ struct FieldDescr {
 		  ushort bob_nr;
 } /* size: 16 bytes */ ;	
 
+class Building;
+class Creature;
+class Bob;
+
 /** class Field
  *
  * a field like it is represented in the game
@@ -120,6 +124,12 @@ class Field {
 					 inline Pic* get_texd(void) { return texd; }
 
 					 void set_neighb(Field*, Field*, Field*, Field*, Field*, Field*);
+
+					 // ----- for class creature
+					 Building* building;
+					 Bob* bob;
+					 void remove_creature(Creature*) {};
+					 // -----
 					 
 		  private: 
 					 Field *ln, *rn, *tln, *trn, *bln, *brn;

@@ -16,6 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
+
 #include "os.h"
 #include "world.h"
 //#include "worldfiletypes.h"
@@ -23,11 +24,19 @@
 #include "myfile.h"
 #include <cassert>
 
+/** World(const char* file)
+  * Creates a new world from the file.
+  */
 World::World(const char* file)
 {
 	name[0] = 0;
 	author[0] = 0;
 	bobCount = textureCount = animCount = resourceCount = terrainCount = 0;
+	bob = NULL;
+	texture = NULL;
+	anim = NULL;
+	resource = NULL;
+	terrain = NULL;
 	//
 	Binary_file wwf; 
 	wwf.open(file, File::READ);
@@ -37,7 +46,7 @@ World::World(const char* file)
 
 /* TODO
  * these are skipped for now; mapeditor will need them
- */
+ *
 	ResourceDesc res;
 	for (uint i=0; i<resourceCount; i++)
 		wwf.read(&res, sizeof(ResourceDesc));
@@ -45,13 +54,18 @@ World::World(const char* file)
 	TerrainType terrain;
 	for (uint j=0; j<terrainCount; j++)
 		wwf.read(&terrain, sizeof(TerrainType));
-/**/
+**/
 	
+	read_resources(&wwf);
+	read_terrains(&wwf);
 	read_bobs(&wwf);
 	read_textures(&wwf);
 	read_anims(&wwf);
 }
 
+/** void read_header(Binary_file*)
+  * Reads the world header.
+  */
 void World::read_header(Binary_file* file)
 {
 	WorldFileHeader head;
@@ -67,6 +81,9 @@ void World::read_header(Binary_file* file)
 	strcpy(author, head.author);
 }
 
+/** void read_bobs(Binary_file*)
+  * Reads the bob descriptions.
+  */
 void World::read_bobs(Binary_file* file)
 {
 	if (!bobCount)
@@ -76,6 +93,9 @@ void World::read_bobs(Binary_file* file)
 		file->read(&bob[i], sizeof(BobDesc));
 }
 
+/** void read_textures(Binary_file*)
+  * Reads the textures.
+  */
 void World::read_textures(Binary_file* file)
 {
 	if (!textureCount)
@@ -93,9 +113,11 @@ void World::read_textures(Binary_file* file)
 	}
 }
 
+/** void read_anims(Binary_file*)
+  * Reads the animations.
+  */
 void World::read_anims(Binary_file* file)
 {
-	anim=0;
 	if (!animCount)
 		return;
 	anim = new Anim[animCount];
@@ -107,34 +129,101 @@ void World::read_anims(Binary_file* file)
 	}
 }
 
-World::~World()
+/** void read_terrains(Binary_file*)
+  * Reads the terrain types.
+  */
+void World::read_terrains(Binary_file* file)
 {
-	delete[] texture;
-	for (uint i=0; i<animCount; i++)
-		delete anim[i].pic;
-	if(anim) delete anim;
+	if (!terrainCount)
+		return;
+	terrain = new TerrainType[terrainCount];
+	for (uint i=0; i<terrainCount; i++)
+		file->read(&terrain[i], sizeof(TerrainType));
 }
 
+/** void read_resources(Binary_file*)
+  * Reads the resource descriptions.
+  */
+void World::read_resources(Binary_file* file)
+{
+	if (!resourceCount)
+		return;
+	resource = new ResourceDesc[resourceCount];
+	for (uint i=0; i<resourceCount; i++)
+		file->read(&resource[i], sizeof(ResourceDesc));
+}
+
+/** ~World()
+  * Armageddon.
+  */
+World::~World()
+{
+	if (texture)
+		delete[] texture;	//?
+	if (bob)
+		delete[] bob;
+	if (resource)
+		delete[] resource;
+	if (terrain)
+		delete[] terrain;
+
+	for (uint i=0; i<animCount; i++)
+		delete anim[i].pic;
+	if (anim)
+		delete[] anim;
+}
+
+/** Bob* create_bob(uint n)
+  * Returns a new instance of bob n.
+  */
 Bob* World::create_bob(uint n)
 {
-	// create a new instance of bob n
 	if (n < bobCount)
 		return new Bob(&bob[n], this);
 	return NULL;
 }
 
+/** Pic* get_texture(uint n)
+  * Returns texture n.
+  */
 Pic* World::get_texture(uint n)
 {
-	// return a new pointer to the texture
 	if (n < textureCount)
 		return texture[n];
 	return NULL;
 }
 
+/** Anim* get_anim(uint n)
+  * Returns animation n.
+  */
 Anim* World::get_anim(uint n)
 {
-	// return a new pointer to the anim
 	if (n < animCount)
 		return &anim[n];
 	return NULL;
+}
+
+ResourceDesc* World::get_resource(uint n)
+{
+	return &resource[n];
+}
+
+TerrainType* World::get_terrain(uint n)
+{
+	return &terrain[n];
+}
+
+inline uint World::resources()
+{
+	return resourceCount;
+}
+
+inline uint World::terrains()
+{
+	return terrainCount;
+}
+
+inline uint World::bobs()
+{
+	return bobCount;
 }

@@ -148,9 +148,9 @@ void Picture_Reader::read_bmp(Binary_file* file, PictureInfo* pic, ushort** p)
 		for (int y=0; y<infoHeader.height; y++)
 		{
 			for (int x=0; x<infoHeader.width; x++)
-				pixels[j + x] = pack_rgb(	data[i + x*3 + 0],
+				pixels[j + x] = pack_rgb(	data[i + x*3 + 2],
 											data[i + x*3 + 1],
-											data[i + x*3 + 2]);
+											data[i + x*3 + 0]);
 			i += pitch;
 			j += infoHeader.width;
 		}

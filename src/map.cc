@@ -24,7 +24,7 @@
 #include <string.h>
 
 // TEMP
-#include <iostream>
+#include <iostream.h>
 
 
 /** class Map
