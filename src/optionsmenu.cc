@@ -114,7 +114,7 @@ void options_menu()
 	int code = om->run();
 
 	if (code == om_ok) {
-		Section *s = g_options.get_safe_section("global");
+		Section *s = g_options.pull_section("global");
 	
 		s->set_int("xres", om->get_xres());
 		s->set_int("yres", om->get_yres());

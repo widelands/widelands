@@ -646,6 +646,19 @@ Section *Profile::get_safe_section(const char *name)
 	return s;
 }
 
+/** Profile::pull_section(const char *name)
+ *
+ * Safely get a section of the given name.
+ * If the section doesn't exist, it is created.
+ * Similar to create_section(), but the section is marked as used.
+ */
+Section *Profile::pull_section(const char *name)
+{
+	Section *s = create_section(name);
+	s->mark_used();
+	return s;
+}
+
 /** Profile::get_next_section(const char *name)
  *
  * Retrieve the next unused section of the given name and mark it used.
@@ -673,8 +686,6 @@ Section *Profile::get_next_section(const char *name)
  * Create a section of the given name.
  * If duplicate is true, a duplicate section may be created. Otherwise, a 
  * pointer to an existing section is returned.
- *
- * Unlike get_safe_section(), the returned section is not marked as used.
  */
 Section *Profile::create_section(const char *name, bool duplicate = false)
 {
@@ -790,7 +801,7 @@ void Profile::read(const char *filename, const char *global_section)
 		}
 	}
 	catch(std::exception &e) {
-		throw wexception("%s: %s", filename, e.what());
+		error("%s: %s", filename, e.what());
 	}
 }
 

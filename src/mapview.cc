@@ -540,12 +540,12 @@ void Map_View::draw_overlay_road(Bitmap *dst, FCoords coords, int posx, int posy
 	
 	// Finally, the road can go here.
 	Field *ftail = m_map->get_field(tail);
-	int slope = coords.field->get_height() - ftail->get_height();
+	int slope = abs(coords.field->get_height() - ftail->get_height());
 	Pic *pic;
 	
-	if (slope < 3)
+	if (slope < 2)
 		pic = &pic_roadb_green;
-	else if (slope < 5)
+	else if (slope < 4)
 		pic = &pic_roadb_yellow;
 	else
 		pic = &pic_roadb_red;

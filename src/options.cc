@@ -103,7 +103,7 @@ static bool parse_command_line(int argc, char** argv)
 
 		*value++ = 0;
 
-		g_options.get_safe_section("global")->create_val(opt, value);
+		g_options.pull_section("global")->create_val(opt, value);
 	}
 
 	return true;

@@ -58,7 +58,7 @@ System::System()
 	m_mouse_x = m_mouse_y = 0;
 	m_mouse_maxx = m_mouse_maxy = 0;
 
-	Section *s = g_options.get_safe_section("global");
+	Section *s = g_options.pull_section("global");
 
 	set_mouse_swap(s->get_bool("swapmouse", false));
 	set_mouse_speed(s->get_float("mousespeed", 1.0));

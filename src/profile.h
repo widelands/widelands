@@ -153,6 +153,7 @@ public:
 
 	Section *get_section(const char *name);
 	Section *get_safe_section(const char *name);
+	Section *pull_section(const char *name);
 	Section *get_next_section(const char *name);
 	
 	Section *create_section(const char *name, bool duplicate = false);

@@ -247,7 +247,7 @@ void render_road_vert(Bitmap *dst, Point start, Point end, ushort color)
  */
 Graphic::Graphic(void)
 {
-	Section *s = g_options.get_safe_section("global");
+	Section *s = g_options.pull_section("global");
 	Mode mode;
    
 	sc=NULL;

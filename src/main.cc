@@ -69,7 +69,7 @@ static void g_init(int argc, char **argv)
 		
 		// KLUDGE!
 		// Profile needs support for a Syntax definition to solve this in a sensible way
-		Section *s = g_options.get_safe_section("global");
+		Section *s = g_options.pull_section("global");
 		s->get_string("xres");
 		s->get_string("yres");
 		// KLUDGE!

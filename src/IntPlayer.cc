@@ -108,12 +108,12 @@ Retrieve in-game resolution from g_options.
 */
 int Interactive_Player::get_xres()
 {
-	return g_options.get_safe_section("global")->get_int("xres", 640);
+	return g_options.pull_section("global")->get_int("xres", 640);
 }
 
 int Interactive_Player::get_yres()
 {
-	return g_options.get_safe_section("global")->get_int("yres", 480);
+	return g_options.pull_section("global")->get_int("yres", 480);
 }
 
 
@@ -398,9 +398,9 @@ Finally build the road
 void Interactive_Player::finish_build_road()
 {
 	assert(m_buildroad);
-	
-	// TODO: issue player command
-	
+
+	// TODO: send build command
+
 	delete m_buildroad;
 	m_buildroad = 0;
 }
