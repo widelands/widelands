@@ -37,13 +37,23 @@ class Building;
  */
 class Building_Descr : public Map_Object_Descr {
 public:
+	struct CostItem {
+		std::string		name;		// name of ware
+		int				amount;	// amount
+
+		inline CostItem(const char* iname, int iamount) : name(iname), amount(iamount) { }
+	};
+	typedef std::vector<CostItem> BuildCost;
+
+public:
 	Building_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Building_Descr(void);
-	
+
 	inline const char *get_name(void) { return m_name; }
 	inline const char *get_descname() { return m_descname; }
 	inline uint get_idle_anim(void) { return m_idle; }
 	inline bool get_buildable(void) { return m_buildable; }
+	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
 	inline uint get_buildicon() const { return m_buildicon; }
 	inline int get_size(void) { return m_size; }
 	inline bool get_ismine() { return m_mine; }
@@ -55,12 +65,13 @@ public:
 protected:
 	virtual Building *create_object(bool) = 0;
 	Building* create_constructionsite(bool logic);
-		
-private: 
+
+private:
 	Tribe_Descr		*m_tribe;			// the tribe this building belongs to
 	char				m_name[20];			// internal codename
 	char				m_descname[30];	// descriptive name for GUI
 	bool				m_buildable;		// the player can build this himself
+	BuildCost		m_buildcost;
 	uint				m_buildicon;		// if buildable: the picture used in the build dialog
 	char*				m_buildicon_fname; // filename for this icon
 	int				m_size;				// size of the building
@@ -83,12 +94,12 @@ public:
 	Building(Building_Descr *descr, bool logic);
 	virtual ~Building();
 
-	virtual int get_type();	
+	virtual int get_type();
 	virtual int get_size();
 	virtual bool get_passable();
 
 	virtual Flag *get_base_flag();
-	
+
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }
 	
@@ -102,14 +113,14 @@ protected:
 	virtual void cleanup(Editor_Game_Base *g);
 
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
-	
+
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry) = 0;
-	
+
 protected:
 	Window		*m_optionswindow;
 	Coords		m_position;
 	Flag			*m_flag;
-	
+
 	uint			m_anim;
 	int			m_animstart;
 };

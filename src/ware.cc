@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2002 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -18,6 +18,7 @@
  */
 
 #include "widelands.h"
+#include "profile.h"
 #include "tribe.h"
 #include "ware.h"
 #include "worker.h"
@@ -86,12 +87,37 @@ Item_Ware_Descr::~Item_Ware_Descr()
 
 /*
 ===============
+Item_Ware_Descr::parse
+
+Parse the item data from the given profile.
+===============
+*/
+void Item_Ware_Descr::parse(const char *directory, Profile *prof)
+{
+	char buf[256];
+	const char* string;
+	Section* global = prof->get_safe_section("global");
+
+	m_descname = global->get_string("descname", get_name());
+	m_helptext = global->get_string("help", "Doh... someone forgot the help text!");
+
+	snprintf(buf, sizeof(buf),	"%s_menu.bmp", get_name());
+	string = global->get_string("menu_pic", buf);
+	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
+	m_menu_pic_fname = buf;
+
+	m_idle_anim = g_anim.get(directory, prof->get_safe_section("idle"));
+}
+
+
+/*
+===============
 Item_Ware_Descr::load_graphics
 ===============
 */
 void Item_Ware_Descr::load_graphics()
 {
-	// TODO: actually load the menu pic
+	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname.c_str());
 }
 
 
@@ -99,7 +125,7 @@ void Item_Ware_Descr::load_graphics()
 ===============
 Item_Ware_Descr::is_worker
 ===============
-*/	
+*/
 bool Item_Ware_Descr::is_worker()
 {
 	return false;
@@ -107,10 +133,42 @@ bool Item_Ware_Descr::is_worker()
 
 
 /*
+===============
+Item_Ware_Descr::create_from_dir [static]
+
+Create a new Item_Ware_Descr from the given data.
+Throws an exception if something goes wrong.
+===============
+*/
+Item_Ware_Descr* Item_Ware_Descr::create_from_dir(const char* name, const char* directory)
+{
+	Item_Ware_Descr* descr = new Item_Ware_Descr(name);
+
+	try
+	{
+		char fname[256];
+
+		snprintf(fname, sizeof(fname), "%s/conf", directory);
+
+		Profile prof(fname);
+
+		descr->parse(directory, &prof);
+	}
+	catch(...)
+	{
+		delete descr;
+		throw;
+	}
+
+	return descr;
+}
+
+
+/*
 ==============================================================================
 
 Worker_Ware_Descr IMPLEMENTATION
-	
+
 ==============================================================================
 */
 
@@ -165,7 +223,7 @@ void Worker_Ware_Descr::add_worker(Tribe_Descr *tribe, Worker_Descr *worker)
 {
 	assert(!strcmp(worker->get_name(), get_name()));
 	assert(worker->get_tribe() == tribe);
-	
+
 	m_workers[tribe] = worker;
 }
 

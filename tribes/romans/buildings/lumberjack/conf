@@ -10,6 +10,9 @@ buildicon=lumberjack_build.bmp
 
 # TODO: describe what this guy does
 
+# List of wares required for building
+[buildcost]
+plank=2
 
 [idle]
 pics=lumberjack_i_??.bmp  # ???

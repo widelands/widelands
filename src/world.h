@@ -43,7 +43,7 @@ class Resource_Descr {
       ~Resource_Descr(void) { }
 
       void parse(Section *s);
-		
+
    private:
       char name[30];
       uchar minh, maxh, importance;
@@ -52,13 +52,13 @@ class Resource_Descr {
 class Terrain_Descr {
    friend class Descr_Maintainer<Terrain_Descr>;
    friend class World;
-   
+
    public:
       Terrain_Descr(const char* directory, Section* s);
       ~Terrain_Descr(void);
 
 		void load_graphics();
-		
+
       inline uint get_texture(void) { return m_texture; }
       inline uchar get_is(void) { return m_is; }
 
@@ -88,34 +88,36 @@ class World
 
       World(const char* name);
 		~World();
-      
+
 		void postload(Editor_Game_Base*);
 		void load_graphics();
-		
+
       inline const char* get_name(void) { return hd.name; }
       inline const char* get_author(void) { return hd.author; }
       inline const char* get_descr(void) { return hd.descr; }
-      
+
       inline Terrain_Descr* get_terrain(uint i) { assert(i<ters.get_nitems()); return ters.get(i); }
       inline int get_bob(const char* l) { return bobs.get_index(l); }
 		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
       inline int get_immovable_index(const char* l) { return immovables.get_index(l); }
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
-		
+
 		void parse_wares(Descr_Maintainer<Ware_Descr> *wares);
-		
+
    private:
-      World_Descr_Header hd;
+		std::string				m_basedir;	// base directory, where the main conf file resides
+      World_Descr_Header	hd;
+
       Descr_Maintainer<Bob_Descr> bobs;
 		Descr_Maintainer<Immovable_Descr> immovables;
       Descr_Maintainer<Resource_Descr> res;
       Descr_Maintainer<Terrain_Descr> ters;
 
       // Functions
-      void parse_root_conf(const char *directory, const char *name);
-      void parse_resources(const char *directory);
-      void parse_terrains(const char *directory);
-      void parse_bobs(const char *directory);
+      void parse_root_conf(const char *name);
+      void parse_resources();
+      void parse_terrains();
+      void parse_bobs();
 };
 
 #endif

@@ -38,11 +38,12 @@ Like above, but throw an exception if the key doesn't exist.
 get_next_*:
 Returns the name of the next key of the given name. You can pass name == 0 to
 retrieve any unused key. Value::used is used to determine which key is next.
-The value of the key is stored in the second parameter. F
+The value of the key is stored in the second parameter.
 */
 class Section {
 	friend class Profile;
 
+public:
 	struct Value {
 		bool	m_used;
 		char	*m_name;
@@ -51,24 +52,25 @@ class Section {
 		Value(const char *nname, const char *nval);
 		Value(const Value &o);
 		~Value();
-		
+
 		Value &operator=(const Value &o);
-		
+
 		inline const char *get_name() const { return m_name; }
-		
+
 		bool is_used() const;
 		void mark_used();
-		
+
 		int get_int() const;
 		float get_float() const;
 		bool get_bool() const;
 		const char *get_string() const;
-		
+
 		void set_string(const char *value);
 	};
-	
+
 	typedef std::vector<Value> Value_list;
-	
+
+private:
 	Profile	*m_profile;
 	bool		m_used;
 	char		*m_section_name;
@@ -78,17 +80,17 @@ public:
 	Section(Profile *prof, const char *name);
 	Section(const Section &o);
 	~Section();
-	
+
 	Section &operator=(const Section &o);
 
 	Value *get_val(const char *name);
 	Value *get_next_val(const char *name);
-	
-	const char *get_name() const; 
+
+	const char *get_name() const;
 
 	bool is_used() const;
 	void mark_used();
-	
+
 	void check_used();
 
 	int get_int(const char *name, int def = 0);
@@ -100,12 +102,12 @@ public:
 	float get_safe_float(const char *name);
 	bool get_safe_bool(const char *name);
 	const char *get_safe_string(const char *name);
-	
+
 	const char *get_next_int(const char *name, int *value);
 	const char *get_next_float(const char *name, float *value);
 	const char *get_next_bool(const char *name, bool *value);
 	const char *get_next_string(const char *name, const char **value);
-	
+
 	void set_int(const char *name, int value, bool duplicate = false);
 	void set_float(const char *name, float value, bool duplicate = false);
 	void set_bool(const char *name, bool value, bool duplicate = false);

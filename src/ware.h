@@ -35,7 +35,7 @@ a worker.
 
 Item wares are defined on a per-world basis, workers are defined on a per-tribe
 basis.
-Since the life-times of world and tribe descriptions are a bit dodgy, the 
+Since the life-times of world and tribe descriptions are a bit dodgy, the
 master list of wares is kept by the Game class. The list is created just before
 the game starts.
 
@@ -49,13 +49,13 @@ class Ware_Descr {
 public:
 	Ware_Descr(const char *name);
 	virtual ~Ware_Descr();
-	
+
 	virtual void load_graphics();
-	
+
 	virtual bool is_worker() = 0;
-	
+
 	inline const char *get_name() const { return m_name; }
-	
+
 private:
 	char		m_name[30];
 };
@@ -64,25 +64,35 @@ class Item_Ware_Descr : public Ware_Descr {
 public:
 	Item_Ware_Descr(const char *name);
 	virtual ~Item_Ware_Descr();
-	
+
 	virtual void load_graphics();
-	
+
 	virtual bool is_worker();
 
 	inline uint get_menu_pic() { return m_menu_pic; }
-	
-	// TODO: actually implement this (parsing from config etc...)
+
 private:
-	uint		m_menu_pic;
+	void parse(const char *directory, Profile *prof);
+
+private:
+	std::string		m_descname;
+	std::string		m_helptext;
+	std::string		m_menu_pic_fname;
+	uint				m_menu_pic;
+	uint				m_idle_anim;
+
+public:
+	static Item_Ware_Descr* create_from_dir(const char* name, const char* directory);
 };
+
 
 class Worker_Ware_Descr : public Ware_Descr {
 public:
 	Worker_Ware_Descr(const char *name);
 	virtual ~Worker_Ware_Descr();
-	
+
 	virtual bool is_worker();
-	
+
 	Worker_Descr *get_worker(Tribe_Descr *tribe);
 	void add_worker(Tribe_Descr *tribe, Worker_Descr *worker);
 
@@ -101,19 +111,19 @@ class WareList {
 public:
 	WareList();
 	~WareList();
-	
+
 	WareList &operator=(const WareList &wl);
-	
+
 	void clear();
-	
+
 	inline int get_nrwareids() const { return m_wares.size(); } // highest possible ware id
-	
+
 	void add(int id, int count = 1);
 	void add(const WareList &wl);
 	void remove(int id, int count = 1);
 	void remove(const WareList &wl);
 	int stock(int id) const;
-	
+
 private:
 	std::vector<int>	m_wares;
 

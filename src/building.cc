@@ -99,10 +99,11 @@ Parse the basic building settings from the given profile and directory
 void Building_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
 	Section *global = prof->get_safe_section("global");
+	Section* s;
 	const char *string;
 	char buf[256];
 	char fname[256];
-	
+
 	snprintf(m_descname, sizeof(m_descname), "%s", global->get_safe_string("descname"));
 
 	string = global->get_safe_string("size");
@@ -118,20 +119,32 @@ void Building_Descr::parse(const char *directory, Profile *prof, const EncodeDat
 	} else
 		throw wexception("Section [global], unknown size '%s'. Valid values are small, medium, big, mine",
 		                 string);
-	
+
+	// Parse build options
 	m_buildable = global->get_bool("buildable", true);
-	
+
 	if (m_buildable)
 		{
+		// Get build icon
 		snprintf(buf, sizeof(buf), "%s_build.bmp", m_name);
 		string = global->get_string("buildicon", buf);
-		
+
 		snprintf(fname, sizeof(fname), "%s/%s", directory, string);
-		
+
 		m_buildicon_fname = strdup(fname);
+
+		// Get costs
+		s = prof->get_safe_section("buildcost");
+
+		Section::Value* val;
+
+		while((val = s->get_next_val(0)))
+			m_buildcost.push_back(CostItem(val->get_name(), val->get_int()));
 		}
-	
-	Section *s = prof->get_section("idle");
+
+
+	// Parse basic animation data
+	s = prof->get_section("idle");
 	if (!s)
 		throw wexception("Missing idle animation");
 	m_idle = g_anim.get(directory, s, 0, encdata);

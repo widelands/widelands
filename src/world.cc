@@ -36,22 +36,22 @@ void Resource_Descr::parse(Section *s)
    importance = s->get_int("importance", 0);
 }
 
-// 
+//
 // class World
-// 
+//
 World::World(const char* name)
 {
 	char directory[256];
 
 	try
-	{	
+	{
 		snprintf(directory, sizeof(directory), "worlds/%s", name);
-		
-		parse_root_conf(directory, name);
-		parse_resources(directory);
-		parse_terrains(directory);
-		parse_bobs(directory);
-		// parse_wares(directory); // TODO
+		m_basedir = directory;
+
+		parse_root_conf(name);
+		parse_resources();
+		parse_terrains();
+		parse_bobs();
 	}
 	catch(std::exception &e)
 	{
@@ -93,26 +93,26 @@ void World::load_graphics()
 	// Load terrain graphics
 	for(i = 0; i < ters.get_nitems(); i++)
 		ters.get(i)->load_graphics();
-	
+
 	// TODO: load more graphics
 }
 
 
-// 
+//
 // down here: Private functions for loading
-// 
+//
 
 //
 // read the <world-directory>/conf
 //
-void World::parse_root_conf(const char *directory, const char *name)
+void World::parse_root_conf(const char *name)
 {
 	char fname[256];
-	
-	snprintf(fname, sizeof(fname), "%s/conf", directory);
+
+	snprintf(fname, sizeof(fname), "%s/conf", m_basedir.c_str());
 
 	try
-	{	
+	{
 		Profile prof(fname);
 		Section* s;
 
@@ -128,7 +128,7 @@ void World::parse_root_conf(const char *directory, const char *name)
 
 		str = s->get_safe_string("descr");
 		snprintf(hd.descr, sizeof(hd.descr), "%s", str);
-		
+
 		prof.check_used();
 	}
 	catch(std::exception &e) {
@@ -136,11 +136,11 @@ void World::parse_root_conf(const char *directory, const char *name)
 	}
 }
 
-void World::parse_resources(const char *directory)
+void World::parse_resources()
 {
 	char fname[256];
-	
-	snprintf(fname, sizeof(fname), "%s/resconf", directory);
+
+	snprintf(fname, sizeof(fname), "%s/resconf", m_basedir.c_str());
 
 	try
 	{
@@ -157,7 +157,7 @@ void World::parse_resources(const char *directory)
 				throw;
 			}
 		}
-		
+
 		prof.check_used();
 	}
 	catch(std::exception &e) {
@@ -165,20 +165,20 @@ void World::parse_resources(const char *directory)
 	}
 }
 
-void World::parse_terrains(const char *directory)
+void World::parse_terrains()
 {
 	char fname[256];
-	
-	snprintf(fname, sizeof(fname), "%s/terrainconf", directory);
+
+	snprintf(fname, sizeof(fname), "%s/terrainconf", m_basedir.c_str());
 
 	try
-	{   
+	{
 		Profile prof(fname);
 		Section* s;
 
 		while((s = prof.get_next_section(0)))
 		{
-			Terrain_Descr *ter = new Terrain_Descr(directory, s);
+			Terrain_Descr *ter = new Terrain_Descr(m_basedir.c_str(), s);
 			ters.add(ter);
 		}
 
@@ -189,23 +189,23 @@ void World::parse_terrains(const char *directory)
 	}
 }
 
-void World::parse_bobs(const char *directory)
+void World::parse_bobs()
 {
 	char subdir[256];
 	filenameset_t dirs;
-	
-	snprintf(subdir, sizeof(subdir), "%s/bobs", directory);
-	
+
+	snprintf(subdir, sizeof(subdir), "%s/bobs", m_basedir.c_str());
+
 	g_fs->FindFiles(subdir, "*", &dirs);
-	
+
 	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		char fname[256];
-	
+
 		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
-	
+
 		if (!g_fs->FileExists(fname))
 			continue;
-		
+
 		const char *name;
 		const char *slash = strrchr(it->c_str(), '/');
 		const char *backslash = strrchr(it->c_str(), '\\');
@@ -217,13 +217,13 @@ void World::parse_bobs(const char *directory)
 			name = slash+1;
 		else
 			name = it->c_str();
-		
+
 		try
 		{
 			Profile prof(fname, "global"); // section-less file
 			Section *s = prof.get_safe_section("global");
 			const char *type = s->get_safe_string("type");
-			
+
 			if (!strcasecmp(type, "critter")) {
 				Bob_Descr *descr;
 				descr = Bob_Descr::create_from_dir(name, it->c_str(), &prof);
@@ -233,7 +233,7 @@ void World::parse_bobs(const char *directory)
 				descr->parse(it->c_str(), &prof);
 				immovables.add(descr);
 			}
-			
+
 			prof.check_used();
 		} catch(std::exception &e) {
 			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
@@ -242,6 +242,7 @@ void World::parse_bobs(const char *directory)
 		}
 	}
 }
+
 
 /*
 ===============
@@ -253,6 +254,54 @@ and is called by the Game class
 */
 void World::parse_wares(Descr_Maintainer<Ware_Descr> *wares)
 {
+	char subdir[256];
+	filenameset_t dirs;
+
+	snprintf(subdir, sizeof(subdir), "%s/wares", m_basedir.c_str());
+
+	g_fs->FindFiles(subdir, "*", &dirs);
+
+	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+		char fname[256];
+
+		snprintf(fname, sizeof(fname), "%s/conf", it->c_str());
+
+		if (!g_fs->FileExists(fname))
+			continue;
+
+		const char *name;
+		const char *slash = strrchr(it->c_str(), '/');
+		const char *backslash = strrchr(it->c_str(), '\\');
+
+		if (backslash && (!slash || backslash > slash))
+			slash = backslash;
+
+		if (slash)
+			name = slash+1;
+		else
+			name = it->c_str();
+
+		if (wares->get_index(name) >= 0)
+			log("Ware %s is already known in world init\n", it->c_str());
+
+		Item_Ware_Descr* descr = 0;
+
+		try
+		{
+			descr = Item_Ware_Descr::create_from_dir(name, it->c_str());
+		}
+		catch(std::exception& e)
+		{
+			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
+		}
+		catch(...)
+		{
+			cerr << it->c_str() << ": Unknown exception" << endl;
+		}
+
+		if (descr)
+			wares->add(descr);
+	}
 }
 
 
