@@ -4,7 +4,7 @@ descname=Sawmill		# nicer name to display in GUI
 type=production		# basic type (warehouse, production, military)
 size=medium
 buildable=yes
-buildicon=sawmill_build.png
+buildicon=sawmill_build.bmp
 worker=carpenter
 program=work
 output=plank
@@ -25,22 +25,22 @@ stone=2
 
 [idle]
 pics=sawmill_i_??.png  # ???
-hot_spot_x=69
-hot_spot_y=44
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
+hot_spot_x=55
+hot_spot_y=40
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
 shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
 
 [working]
 pics=sawmill_w_??.png  # ???
-hot_spot_x=69
-hot_spot_y=44
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
+hot_spot_x=55
+hot_spot_y=40
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
 shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
