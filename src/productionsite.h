@@ -160,4 +160,33 @@ protected:  // TrainingSite must have access to this stuff
    char                     m_last_stat_percent;
 };
 
+/*
+=============================
+
+class Input
+
+This class descripes, how many items of a certain
+ware can be stored in a house.
+This class will be extended to support ordering of
+certain wares directly or releasing some wares
+out of a building
+
+=============================
+*/
+class Input {
+public:
+	Input(Item_Ware_Descr* ware, int max) : m_ware(ware), m_max(max) {}
+	~Input(void) {}
+
+	inline void set_max(int n) { m_max = n; }
+	inline int get_max(void) const { return m_max; }
+	inline Item_Ware_Descr* get_ware() const { return m_ware; }
+
+private:
+	Item_Ware_Descr* m_ware;
+	int m_max;
+};
+
+
+
 #endif
