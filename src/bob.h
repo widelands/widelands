@@ -116,7 +116,7 @@ public:
 	inline void set_owner(Player *player) { m_owner = player; }
 	inline Player *get_owner() { return m_owner; }
 
-	void set_position(Game* g, Coords f);
+	void set_position(Editor_Game_Base* g, Coords f);
 	inline const FCoords& get_position() const { return m_position; }
 	inline Bob* get_next_bob(void) { return m_linknext; }
 

@@ -77,11 +77,10 @@ Create a bob of this type
 */
 Bob *Bob_Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords)
 {
-   Game* g=static_cast<Game*>(gg);
    Bob *bob = create_object();
    bob->set_owner(owner);
-   bob->set_position(g, coords);
-   bob->init(g);
+   bob->set_position(gg, coords);
+   bob->init(gg);
 
    return bob;
 }
@@ -1062,7 +1061,7 @@ Bob::set_position
 Moves the Map_Object to the given position.
 ===============
 */
-void Bob::set_position(Game* g, Coords coords)
+void Bob::set_position(Editor_Game_Base* g, Coords coords)
 {
 	if (m_position.field) {
 		*m_linkpprev = m_linknext;

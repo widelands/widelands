@@ -1140,13 +1140,11 @@ Custom creation routing that accounts for the location.
 */
 Worker *Worker_Descr::create(Editor_Game_Base *gg, Player *owner, PlayerImmovable *location, Coords coords)
 {
-   Game* g=static_cast<Game*>(gg);
-
    Worker *worker = (Worker*)create_object();
 	worker->set_owner(owner);
 	worker->set_location(location);
-	worker->set_position(g, coords);
-	worker->init(g);
+	worker->set_position(gg, coords);
+	worker->init(gg);
 	return worker;
 }
 

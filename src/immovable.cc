@@ -503,10 +503,9 @@ Create an immovable of this type
 */
 Immovable *Immovable_Descr::create(Editor_Game_Base *gg, Coords coords)
 {
-   Game* g=static_cast<Game*>(gg);
    Immovable *im = new Immovable(this);
 	im->m_position = coords;
-	im->init(g);
+	im->init(gg);
 	return im;
 }
 
