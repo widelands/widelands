@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
+ * Copyright (C) 2002, 2003 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1649,7 +1649,7 @@ void ProductionSite::act(Game *g, uint data)
 			break;
 
 		case ProductionAction::actWorker:
-			molog("  Worker\n");
+			molog("  Worker(%s)\n", action->sparam1.c_str());
 
 			m_worker->update_task_buildingwork(g);
 			break;

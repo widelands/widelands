@@ -11,7 +11,11 @@ program=chop
 # given direction
 
 [chop]
-0=createitem log							# create & carry the given item
+0=findobject attrib:tree radius:7	# find an object matching the given criteria, put it into the object slot
+1=walk object								# walk to the object in the object slot
+2=animation idle 10000					# play an animation
+3=createitem log							# create & carry the given item
+4=return										# return home
 
 #[chop]
 #0=findobject attrib:tree radius:7	# find an object matching the given criteria, put it into the object slot

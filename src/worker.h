@@ -131,6 +131,7 @@ public: // worker-specific tasks
 	void start_task_buildingwork(Game* g);
 	void update_task_buildingwork(Game* g);
 
+	void start_task_return(Game* g, bool dropitem);
 	void start_task_program(Game* g, std::string name);
 
 	void start_task_gowarehouse(Game* g);
@@ -138,7 +139,7 @@ public: // worker-specific tasks
 	void start_task_fetchfromflag(Game* g);
 
 	bool start_task_waitforcapacity(Game* g, Flag* flag);
-	bool start_task_waitleavebuilding(Game* g);
+	void start_task_leavebuilding(Game* g);
 	void start_task_route(Game* g, Route* route, PlayerImmovable* target);
 	void start_task_fugitive(Game* g);
 
@@ -149,6 +150,9 @@ private: // task details
 
 	void buildingwork_update(Game* g, State* state);
 	void buildingwork_signal(Game* g, State* state);
+
+	void return_update(Game* g, State* state);
+	void return_signal(Game* g, State* state);
 
 	void program_update(Game* g, State* state);
 	void program_signal(Game* g, State* state);
@@ -163,8 +167,8 @@ private: // task details
 	void waitforcapacity_update(Game* g, State* state);
 	void waitforcapacity_signal(Game* g, State* state);
 
-	void waitleavebuilding_update(Game* g, State* state);
-	void waitleavebuilding_signal(Game* g, State* state);
+	void leavebuilding_update(Game* g, State* state);
+	void leavebuilding_signal(Game* g, State* state);
 
 	void route_update(Game* g, State* state);
 	void route_mask(Game* g, State* state);
@@ -175,12 +179,13 @@ private: // task details
 private:
 	static Task taskRequest;
 	static Task taskBuildingwork;
+	static Task taskReturn;
 	static Task taskProgram;
 	static Task taskGowarehouse;
 	static Task taskDropoff;
 	static Task taskFetchfromflag;
 	static Task taskWaitforcapacity;
-	static Task taskWaitleavebuilding;
+	static Task taskLeavebuilding;
 	static Task taskRoute;
 	static Task taskFugitive;
 

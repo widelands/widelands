@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -114,6 +114,8 @@ class Immovable : public BaseImmovable {
 public:
 	Immovable(Immovable_Descr *descr);
 	~Immovable();
+
+	Coords get_position() const { return m_position; }
 
 	int get_type();
 	int get_size();

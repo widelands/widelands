@@ -37,10 +37,19 @@ class WorkerProgram
 struct WorkerAction {
 	enum Type {
 		actCreateItem,		// sparam1 = ware name
+		actFindObject,		// iparam1 = radius predicate, iparam2 = attribute predicate (if >= 0)
+		actWalk,				// iparam1 = walkXXX
+		actAnimation,		// iparam1 = anim id; iparam2 = duration
+		actReturn,			// iparam1 = 0: don't drop item on flag, 1: do drop item on flag
+	};
+
+	enum {
+		walkObject
 	};
 
 	Type			type;
 	int			iparam1;
+	int			iparam2;
 	std::string	sparam1;
 };
 
@@ -55,7 +64,7 @@ public:
 		return &m_actions[idx];
 	}
 
-	void parse(std::string directory, Profile* prof, std::string name);
+	void parse(Worker_Descr* descr, std::string directory, Profile* prof, std::string name);
 
 private:
 	std::string						m_name;
@@ -83,38 +92,113 @@ WorkerProgram::parse
 Parse a program
 ===============
 */
-void WorkerProgram::parse(std::string directory, Profile* prof, std::string name)
+void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* prof, std::string name)
 {
 	Section* sprogram = prof->get_safe_section(name.c_str());
 
 	for(uint idx = 0; ; ++idx) {
-		char buf[32];
-		const char* string;
-		std::vector<std::string> cmd;
-
-		snprintf(buf, sizeof(buf), "%i", idx);
-		string = sprogram->get_string(buf, 0);
-		if (!string)
-			break;
-
-		split_string(string, &cmd, " \t\r\n");
-		if (!cmd.size())
-			continue;
-
-		WorkerAction act;
-
-		if (cmd[0] == "createitem")
+		try
 		{
-			if (cmd.size() != 2)
-				throw wexception("Line %i: Usage: createitem <ware type>", idx);
+			char buf[32];
+			const char* string;
+			std::vector<std::string> cmd;
 
-			act.type = WorkerAction::actCreateItem;
-			act.sparam1 = cmd[1];
+			snprintf(buf, sizeof(buf), "%i", idx);
+			string = sprogram->get_string(buf, 0);
+			if (!string)
+				break;
+
+			split_string(string, &cmd, " \t\r\n");
+			if (!cmd.size())
+				continue;
+
+			WorkerAction act;
+
+			if (cmd[0] == "createitem")
+			{
+				if (cmd.size() != 2)
+					throw wexception("Usage: createitem <ware type>");
+
+				act.type = WorkerAction::actCreateItem;
+				act.sparam1 = cmd[1];
+			}
+			else if (cmd[0] == "findobject")
+			{
+				uint i;
+
+				act.type = WorkerAction::actFindObject;
+				act.iparam1 = -1;
+				act.iparam2 = -1;
+
+				// Parse predicates
+				for(i = 1; i < cmd.size(); i++) {
+					uint idx = cmd[i].find(':');
+					std::string key = cmd[i].substr(0, idx);
+					std::string value = cmd[i].substr(idx+1);
+
+					if (key == "radius") {
+						char* endp;
+
+						act.iparam1 = strtol(value.c_str(), &endp, 0);
+						if (endp && *endp)
+							throw wexception("Bad findobject radius '%s'", value.c_str());
+					} else if (key == "attrib") {
+						act.iparam2 = Map_Object_Descr::get_attribute_id(value);
+					} else
+						throw wexception("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
+				}
+
+				if (act.iparam1 <= 0)
+					throw wexception("findobject: must specify radius");
+			}
+			else if (cmd[0] == "walk")
+			{
+				if (cmd.size() != 2)
+					throw wexception("Usage: walk <where>");
+
+				act.type = WorkerAction::actWalk;
+
+				if (cmd[1] == "object")
+					act.iparam1 = WorkerAction::walkObject;
+				else
+					throw wexception("Bad walk destination '%s'", cmd[1].c_str());
+			}
+			else if (cmd[0] == "animation")
+			{
+				char* endp;
+
+				if (cmd.size() != 3)
+					throw wexception("Usage: animation <name> <time>");
+
+				act.type = WorkerAction::actAnimation;
+
+				// TODO: dynamically allocate animations here
+				if (cmd[1] == "idle")
+					act.iparam1 = descr->get_idle_anim();
+				else
+					throw wexception("Unknown animation '%s'", cmd[1].c_str());
+
+				act.iparam2 = strtol(cmd[2].c_str(), &endp, 0);
+				if (endp && *endp)
+					throw wexception("Bad duration '%s'", cmd[2].c_str());
+
+				if (act.iparam2 <= 0)
+					throw wexception("animation duration must be positive");
+			}
+			else if (cmd[0] == "return")
+			{
+				act.type = WorkerAction::actReturn;
+				act.iparam1 = 1; // drop any item on our owner's flag
+			}
+			else
+				throw wexception("unknown command '%s'", cmd[0].c_str());
+
+			m_actions.push_back(act);
 		}
-		else
-			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
-
-		m_actions.push_back(act);
+		catch(std::exception& e)
+		{
+			throw wexception("Line %i: %s", idx, e.what());
+		}
 	}
 }
 
@@ -257,7 +341,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 		try
 		{
 			prog = new WorkerProgram(string);
-			prog->parse(directory, prof, string);
+			prog->parse(this, directory, prof, string);
 			m_programs[prog->get_name()] = prog;
 		}
 		catch(std::exception& e)
@@ -722,14 +806,26 @@ void Worker::buildingwork_update(Game* g, State* state)
 		return;
 	}
 
-	set_signal("");
-
-	// Get the new job
+	// Reset any other signals
 	PlayerImmovable* location = get_location(g);
 
 	assert(location);
 	assert(location->get_type() == BUILDING);
 
+	set_signal("");
+
+	// Return to building, if necessary
+	BaseImmovable* position = g->get_map()->get_immovable(get_position());
+
+	if (position != location) {
+		molog("[buildingwork]: Something went wrong, return home.\n");
+
+		start_task_return(g, false); // don't drop item
+		return;
+	}
+
+
+	// Get the new job
 	if (!((Building*)location)->get_building_work(g, this, !signal.size())) {
 		molog("[buildingwork]: Nothing to be done.\n");
 		set_animation(g, 0);
@@ -773,10 +869,142 @@ void Worker::update_task_buildingwork(Game* g)
 /*
 ==============================
 
+RETURN task
+
+Return to our owning building.
+If dropitem (ivar1) is true, we'll drop our carried item (if any) on the
+building's flag, if possible.
+Blocks all signals except for "location".
+
+==============================
+*/
+
+Bob::Task Worker::taskReturn = {
+	"return",
+
+	(Bob::Ptr)&Worker::return_update,
+	(Bob::Ptr)&Worker::return_signal,
+	0,
+};
+
+
+/*
+===============
+Worker::start_task_return
+
+Return to our owning building.
+===============
+*/
+void Worker::start_task_return(Game* g, bool dropitem)
+{
+	PlayerImmovable* location = get_location(g);
+
+	molog("start_task_return\n");
+
+	if (!location || location->get_type() != BUILDING)
+		throw wexception("MO(%u): start_task_return(): not owned by building", get_serial());
+
+	push_task(g, &taskReturn);
+
+	molog("pushed task\n");
+
+	get_state()->ivar1 = dropitem ? 1 : 0;
+
+	molog("done\n");
+}
+
+
+/*
+===============
+Worker::return_update
+===============
+*/
+void Worker::return_update(Game* g, State* state)
+{
+	PlayerImmovable* location = get_location(g);
+	BaseImmovable* pos = g->get_map()->get_immovable(get_position());
+
+	assert(location && location->get_type() == BUILDING); // expect signal "location"
+
+	if (pos)
+	{
+		if (pos == location) {
+			molog("[return]: Back home.\n");
+
+			set_animation(g, 0);
+			pop_task(g);
+			return;
+		}
+
+		if (pos->get_type() == FLAG) {
+			Flag* flag = (Flag*)pos;
+
+			// Is this "our" flag?
+			if (flag->get_building() == location) {
+				if (state->ivar1 && flag->has_capacity()) {
+					WareInstance* item = fetch_carried_item(g);
+
+					if (item) {
+						molog("[return]: Drop item on flag\n");
+
+						flag->add_item(g, item);
+
+						set_animation(g, get_descr()->get_idle_anim());
+						schedule_act(g, 20); // rest a while
+						return;
+					}
+				}
+
+				molog("[return]: Move back into building\n");
+
+				start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+				return;
+			}
+		}
+	}
+
+	// Determine the building's flag and move to it
+	Flag* flag = location->get_base_flag();
+
+	molog("[return]: Move to building's flag\n");
+
+	if (!start_task_movepath(g, flag->get_position(), 15, get_descr()->get_walk_anims())) {
+		molog("[return]: Failed to return\n");
+
+		set_location(0);
+		return;
+	}
+}
+
+
+/*
+===============
+Worker::return_signal
+===============
+*/
+void Worker::return_signal(Game* g, State* state)
+{
+	std::string signal = get_signal();
+
+	if (signal == "location") {
+		molog("[return]: Interrupted by signal '%s'\n", signal.c_str());
+		pop_task(g);
+		return;
+	}
+
+	molog("[return]: Blocking signal '%s'\n", signal.c_str());
+	set_signal("");
+}
+
+
+/*
+==============================
+
 PROGRAM task
 
 Follow the steps of a configuration-defined program.
 ivar1 is the next action to be performed.
+objvar1 is used to store objects found by findobject
 
 ==============================
 */
@@ -817,40 +1045,157 @@ Worker::program_update
 void Worker::program_update(Game* g, State* state)
 {
 	const WorkerAction* act;
+	PlayerImmovable* location = get_location(g);
+	Building* owner;
 
-	molog("[program]: %s#%i\n", state->program->get_name().c_str(), state->ivar1);
+	assert(location);
+	assert(location->get_type() == BUILDING);
 
-	if (state->ivar1 >= state->program->get_size()) {
-		molog("  End of program\n");
-		pop_task(g);
-		return;
-	}
+	owner = (Building*)location;
 
-	act = state->program->get_action(state->ivar1);
+	for(;;)
+	{
+		molog("[program]: %s#%i\n", state->program->get_name().c_str(), state->ivar1);
 
-	switch(act->type) {
-	case WorkerAction::actCreateItem:
-		{
-			WareInstance* item;
-			int wareid;
+		if (state->ivar1 >= state->program->get_size()) {
+			molog("  End of program\n");
+			pop_task(g);
+			return;
+		}
 
-			molog("  CreateItem(%s)\n", act->sparam1.c_str());
+		act = state->program->get_action(state->ivar1);
 
-			item = fetch_carried_item(g);
-			if (item) {
-				molog("  Still carrying an item! Delete it.\n");
-				item->schedule_destroy(g);
+		switch(act->type) {
+		case WorkerAction::actCreateItem:
+			{
+				WareInstance* item;
+				int wareid;
+
+				molog("  CreateItem(%s)\n", act->sparam1.c_str());
+
+				item = fetch_carried_item(g);
+				if (item) {
+					molog("  Still carrying an item! Delete it.\n");
+					item->schedule_destroy(g);
+				}
+
+				wareid = g->get_safe_ware_id(act->sparam1.c_str());
+				item = new WareInstance(wareid);
+				item->init(g);
+
+				set_carried_item(g, item);
+
+				state->ivar1++;
+				schedule_act(g, 10);
+				return;
 			}
 
-			wareid = g->get_safe_ware_id(act->sparam1.c_str());
-			item = new WareInstance(wareid);
-			item->init(g);
+		case WorkerAction::actFindObject:
+			{
+				std::vector<ImmovableFound> list;
+				Map* map = g->get_map();
 
-			set_carried_item(g, item);
+				molog("  FindObject(%i, %i)\n", act->iparam1, act->iparam2);
 
-			state->ivar1++;
-			schedule_act(g, 10);
-			break;
+				if (act->iparam2 < 0)
+					map->find_immovables(get_position(), act->iparam1, &list);
+				else
+					map->find_immovables(get_position(), act->iparam1, &list, FindImmovableAttribute(act->iparam2));
+
+				molog("  %i found\n", list.size());
+
+				if (!list.size()) {
+					set_signal("fail"); // no object found, cannot run program
+					pop_task(g);
+					return;
+				}
+
+				int sel = g->logic_rand() % list.size();
+
+				state->objvar1 = list[sel].object;
+
+				state->ivar1++;
+				schedule_act(g, 10);
+				return;
+			}
+
+		case WorkerAction::actWalk:
+			{
+				BaseImmovable* imm = g->get_map()->get_immovable(get_position());
+				Coords dest;
+
+				molog("  Walk(%i)\n", act->iparam1);
+
+				// First of all, make sure we're outside
+				if (imm == owner) {
+					start_task_leavebuilding(g);
+					return;
+				}
+
+				// Determine the coords we need to walk towards
+				switch(act->iparam1) {
+				case WorkerAction::walkObject:
+					{
+						Map_Object* obj = state->objvar1.get(g);
+
+						if (!obj) {
+							molog("  object(nil)\n");
+							set_signal("fail");
+							pop_task(g);
+							return;
+						}
+
+						molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
+
+						if (obj->get_type() == BOB)
+							dest = ((Bob*)obj)->get_position();
+						else if (obj->get_type() == IMMOVABLE)
+							dest = ((Immovable*)obj)->get_position();
+						else
+							throw wexception("MO(%u): [actWalk]: bad object type = %i", get_serial(), obj->get_type());
+						break;
+					}
+
+				default:
+					throw wexception("MO(%u): [actWalk]: bad act->iparam1 = %i", get_serial(), act->iparam1);
+				}
+
+				// If we've already reached our destination, that's cool
+				if (get_position() == dest) {
+					molog("  reached\n");
+					state->ivar1++;
+					break; // next instruction
+				}
+
+				// Walk towards it
+				if (!start_task_movepath(g, dest, 10, get_descr()->get_walk_anims())) {
+					molog("  couldn't find path\n");
+					set_signal("fail");
+					pop_task(g);
+					return;
+				}
+
+				return;
+			}
+
+		case WorkerAction::actAnimation:
+			{
+				molog("  Animation(%i, %i)\n", act->iparam1, act->iparam2);
+				set_animation(g, act->iparam1);
+
+				state->ivar1++;
+				schedule_act(g, act->iparam2);
+				return;
+			}
+
+		case WorkerAction::actReturn:
+			{
+				molog("  Return(%i)\n", act->iparam1);
+
+				state->ivar1++;
+				start_task_return(g, act->iparam1);
+				return;
+			}
 		}
 	}
 }
@@ -1015,11 +1360,8 @@ void Worker::dropoff_update(Game* g, State* state)
 				return;
 
 			// Exit throttle
-			if (start_task_waitleavebuilding(g))
-				return;
-
 			molog("[dropoff]: move from building to flag\n");
-			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
+			start_task_leavebuilding(g);
 			return;
 		}
 
@@ -1120,12 +1462,8 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	// If we haven't got the item yet, walk onto the flag
 	if (!item && !state->ivar1) {
 		if (location->get_type() == BUILDING) {
-			// Exit throttle
-			if (start_task_waitleavebuilding(g))
-				return;
-
 			molog("[fetchfromflag]: move from building to flag\n");
-			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
+			start_task_leavebuilding(g);
 			return;
 		}
 
@@ -1278,25 +1616,24 @@ WAITLEAVEBUILDING task
 ==============================
 */
 
-Bob::Task Worker::taskWaitleavebuilding = {
-	"waitleavebuilding",
+Bob::Task Worker::taskLeavebuilding = {
+	"leavebuilding",
 
-	(Bob::Ptr)&Worker::waitleavebuilding_update,
-	(Bob::Ptr)&Worker::waitleavebuilding_signal,
+	(Bob::Ptr)&Worker::leavebuilding_update,
+	(Bob::Ptr)&Worker::leavebuilding_signal,
 	0,
 };
 
 
 /*
 ===============
-Worker::start_task_waitleavebuilding
+Worker::start_task_leavebuilding
 
-Returns false if we can just leave our location building right now.
-Return true if we have to wait on the building's leave queue. In the latter
-case, this function takes care of all the task scheduling etc.
+Leave the current building.
+Waits on the buildings leave wait queue if necessary.
 ===============
 */
-bool Worker::start_task_waitleavebuilding(Game* g)
+void Worker::start_task_leavebuilding(Game* g)
 {
 	PlayerImmovable* location = get_location(g);
 
@@ -1304,41 +1641,60 @@ bool Worker::start_task_waitleavebuilding(Game* g)
 
 	Building* building = (Building*)location;
 
-	if (building->leave_check_and_wait(g, this))
-		return false;
-
 	// Set the wait task
-	push_task(g, &taskWaitleavebuilding);
+	push_task(g, &taskLeavebuilding);
 
 	get_state()->objvar1 = building;
-
-	return true;
 }
 
 
 /*
 ===============
-Worker::waitleavebuilding_update
+Worker::leavebuilding_update
 ===============
 */
-void Worker::waitleavebuilding_update(Game* g, State* state)
+void Worker::leavebuilding_update(Game* g, State* state)
 {
-	skip_act(g);
+	BaseImmovable* position = g->get_map()->get_immovable(get_position());
+
+	if (!position || position->get_type() != BUILDING) {
+		molog("[leavebuilding]: Left the building successful\n");
+		pop_task(g);
+		return;
+	}
+
+	Building* building = (Building*)position;
+
+	assert(building == state->objvar1.get(g));
+
+	if (!building->leave_check_and_wait(g, this)) {
+		molog("[leavebuilding]: Wait\n");
+		skip_act(g);
+		return;
+	}
+
+	molog("[leavebuilding]: Leave\n");
+	start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
 }
 
 
 /*
 ===============
-Worker::waitleavebuilding_signal
+Worker::leavebuilding_signal
 ===============
 */
-void Worker::waitleavebuilding_signal(Game* g, State* state)
+void Worker::leavebuilding_signal(Game* g, State* state)
 {
-	molog("[waitleavebuilding]: Woke up by signal '%s'\n", get_signal().c_str());
+	std::string signal = get_signal();
 
-	if (get_signal() == "wakeup")
+	if (signal == "wakeup") {
+		molog("[leavebuilding]: Wake up\n");
 		set_signal("");
+		schedule_act(g, 1);
+		return;
+	}
 
+	molog("[leavebuilding]: Interrupted by signal '%s'\n", signal.c_str());
 	pop_task(g);
 }
 
@@ -1357,8 +1713,8 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
 
 	molog("wakeup_leave_building called\n");
 
-	if (state && state->task == &taskWaitleavebuilding) {
-		molog("[waitleavebuilding]: wakeup\n");
+	if (state && state->task == &taskLeavebuilding) {
+		molog("[leavebuilding]: wakeup\n");
 
 		if (state->objvar1.get(g) != building)
 			throw wexception("MO(%u): [waitleavebuilding]: buildings don't match", get_serial());
@@ -1542,11 +1898,8 @@ void Worker::route_update(Game* g, State* state)
 		if (location->get_base_flag() != nextstep)
 			throw wexception("MO(%u): [route]: in building, nextstep is not building's flag", get_serial());
 
-		if (start_task_waitleavebuilding(g))
-			return;
-
 		molog("[route]: move from building to flag\n");
-		start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
+		start_task_leavebuilding(g);
 		set_location(nextstep);
 		return;
 	}
