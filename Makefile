@@ -154,7 +154,7 @@ clean:
 	@-rm -rf $(OBJECT_DIR)/widelands
 	@-rm -rf *~ */*~ */*/*~ */*/*/*~
 
-VERSION:=b7.cvs040916
+VERSION:=b8
 dist:
 	@rm -rf widelands-$(VERSION)
 	@mkdir widelands-$(VERSION)

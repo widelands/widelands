@@ -21,7 +21,7 @@
 #define CONSTANTS_H
 
 // define current version
-#define VERSION "build-7"
+#define VERSION "build-8"
 
 #define TEXTURE_W 64        // texture have a fixed size and are squares
 #define TEXTURE_H TEXTURE_W // TEXTURE_H is just defined for easier understandement of the code

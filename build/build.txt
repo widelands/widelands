@@ -5,6 +5,8 @@ I. Building
 -----------
 
 1) Increase the build number (widelands.h)
+   Increase Packaging number in Makefile
+   Bring ChangeLog up to date
 
 2) Commit all changes
 

@@ -1,3 +1,4 @@
+build-8:
 - some ui ergonomics (new mapselect dialog, 
   double click function in listselects)
 - resources and default resources support
