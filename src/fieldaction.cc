@@ -109,7 +109,7 @@ belongs to and trigger signal buildclicked.
 */
 void BuildGrid::clickslot(int idx)
 {
-	int id = (int)get_data(idx);
+	long id = (long)get_data(idx);
 
 	buildclicked.call(id);
 }

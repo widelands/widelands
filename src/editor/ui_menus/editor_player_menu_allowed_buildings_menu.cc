@@ -132,7 +132,7 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(int i) {
    
    
    // Remove from one list
-   int index=((int)source->get_selection());
+   long index=((long)source->get_selection());
    source->remove_entry(source->get_selection_index());
    source->sort();
    

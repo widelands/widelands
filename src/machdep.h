@@ -24,7 +24,7 @@
 
 // TODO: figure out a way to define these portably
 // Currently supported: i386, PowerPC, Sparc
-#if defined (__ppc__)
+#if defined (__ppc__) || defined(__powerpc64__)
 #undef P_LITTLE_ENDIAN
 #define P_BIG_ENDIAN
 #undef P_ALIGNMENT
@@ -32,7 +32,7 @@
 #undef P_LITTLE_ENDIAN
 #define P_BIG_ENDIAN
 #define P_ALIGNMENT
-#elif defined (__i386__)
+#elif defined (__i386__) || defined(__x86_64__)
 #undef P_BIG_ENDIAN
 #define P_LITTLE_ENDIAN
 #undef P_ALIGNMENT

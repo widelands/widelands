@@ -371,7 +371,7 @@ Open the bob debug window for the bob of the given index in the list
 */
 void FieldDebugWindow::open_bob(int idx)
 {
-	uint serial = (uint)m_ui_bobs->get_selection();
+	unsigned long serial = (unsigned long)m_ui_bobs->get_selection();
 
 	if (!serial)
 		return;
