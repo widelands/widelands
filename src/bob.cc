@@ -427,6 +427,7 @@ signal. Use with great care.
 */
 void Bob::force_skip_act(Game* g)
 {
+	m_stack_dirty = false;
 	m_actid++;
 }
 

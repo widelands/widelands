@@ -785,6 +785,155 @@ bool Worker::run_removeobject(Game* g, State* state, const WorkerAction* act)
 /*
 ==============================================================================
 
+IdleWorkerSupply IMPLEMENTATION
+
+==============================================================================
+*/
+
+class IdleWorkerSupply : public Supply {
+public:
+	IdleWorkerSupply(Worker* w);
+	~IdleWorkerSupply();
+
+	void set_economy(Economy* e);
+
+public:
+	virtual PlayerImmovable* get_position(Game* g);
+	virtual int get_amount(Game* g, int ware);
+	virtual bool is_active(Game* g);
+
+	virtual WareInstance* launch_item(Game* g, int ware);
+	virtual Worker* launch_worker(Game* g, int ware);
+
+private:
+	Worker*		m_worker;
+	Economy*		m_economy;
+};
+
+
+/*
+===============
+IdleWorkerSupply::IdleWorkerSupply
+
+Automatically register with the worker's economy.
+===============
+*/
+IdleWorkerSupply::IdleWorkerSupply(Worker* w)
+{
+	m_worker = w;
+	m_economy = 0;
+
+	set_economy(w->get_economy());
+}
+
+
+/*
+===============
+IdleWorkerSupply::~IdleWorkerSupply
+
+Automatically unregister from economy.
+===============
+*/
+IdleWorkerSupply::~IdleWorkerSupply()
+{
+	set_economy(0);
+}
+
+
+/*
+===============
+IdleWorkerSupply::set_economy
+
+Add/remove this supply from the Economy as appropriate.
+===============
+*/
+void IdleWorkerSupply::set_economy(Economy* e)
+{
+	if (m_economy == e)
+		return;
+
+	if (m_economy)
+		m_economy->remove_supply(m_worker->get_ware_id(), this);
+
+	m_economy = e;
+
+	if (m_economy)
+		m_economy->add_supply(m_worker->get_ware_id(), this);
+}
+
+
+/*
+===============
+IdleWorkerSupply::get_position
+
+Return the worker's position.
+===============
+*/
+PlayerImmovable* IdleWorkerSupply::get_position(Game* g)
+{
+	return m_worker->get_location(g);
+}
+
+
+/*
+===============
+IdleWorkerSupply::get_amount
+
+It's just the one worker.
+===============
+*/
+int IdleWorkerSupply::get_amount(Game* g, int ware)
+{
+	if (ware == m_worker->get_ware_id())
+		return 1;
+
+	return 0;
+}
+
+
+/*
+===============
+IdleWorkerSupply::is_active
+
+Idle workers are always active supplies, because they need to get into a
+Warehouse ASAP.
+===============
+*/
+bool IdleWorkerSupply::is_active(Game* g)
+{
+	return true;
+}
+
+
+/*
+===============
+IdleWorkerSupply::launch_item
+===============
+*/
+WareInstance* IdleWorkerSupply::launch_item(Game* g, int ware)
+{
+	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");
+}
+
+
+/*
+===============
+IdleWorkerSupply::launch_worker
+
+No need to explicitly launch the worker.
+===============
+*/
+Worker* IdleWorkerSupply::launch_worker(Game* g, int ware)
+{
+	assert(ware == m_worker->get_ware_id());
+
+	return m_worker;
+}
+
+
+/*
+==============================================================================
+
 Worker IMPLEMENTATION
 
 ==============================================================================
@@ -960,6 +1109,7 @@ Worker::Worker(Worker_Descr *descr)
 {
 	m_economy = 0;
 	m_location = 0;
+	m_supply = 0;
 }
 
 Worker::~Worker()
@@ -1054,6 +1204,8 @@ void Worker::set_economy(Economy *economy)
 
 	if (item)
 		item->set_economy(m_economy);
+	if (m_supply)
+		m_supply->set_economy(m_economy);
 
 	if (m_economy)
 		m_economy->add_wares(get_descr()->get_ware_id(), 1);
@@ -1086,6 +1238,11 @@ Remove the worker.
 void Worker::cleanup(Editor_Game_Base *g)
 {
 	WareInstance* item = get_carried_item(g);
+
+	if (m_supply) {
+		delete m_supply;
+		m_supply = 0;
+	}
 
 	if (item)
 		item->destroy(g);
@@ -1236,6 +1393,17 @@ void Worker::start_task_transfer(Game* g, Transfer* t)
 {
 	State* state;
 
+	// hackish override for gowarehouse
+	state = get_state(&taskGowarehouse);
+	if (state) {
+		assert(!state->transfer);
+
+		state->transfer = t;
+		send_signal(g, "transfer");
+		return;
+	}
+
+	// just start a normal transfer
 	push_task(g, &taskTransfer);
 
 	state = get_state();
@@ -1794,7 +1962,11 @@ and we really should give those poor workers some rest ;-)
 */
 void Worker::start_task_gowarehouse(Game* g)
 {
+	assert(!m_supply);
+
 	push_task(g, &taskGowarehouse);
+
+	m_supply = new IdleWorkerSupply(this);
 }
 
 
@@ -1815,21 +1987,26 @@ void Worker::gowarehouse_update(Game* g, State* state)
 		return;
 	}
 
-	// Find nearest warehouse and move to it
-	Warehouse* wh;
-	Route* route = new Route;
+	// If we got a transfer, use it
+	if (state->transfer) {
+		Transfer* t = state->transfer;
 
-	wh = get_economy()->find_nearest_warehouse(location->get_base_flag(), route);
-	if (!wh) {
-		molog("[gowarehouse]: no warehouse found\n");
+		molog("[gowarehouse]: Got a Transfer\n");
 
-		set_location(0);
+		state->transfer = 0;
+		delete m_supply;
+		m_supply = 0;
+
+		pop_task(g);
+		start_task_transfer(g, t);
 		return;
 	}
 
-	molog("[gowarehouse]: found warehouse (%u)\n", wh->get_serial());
-	start_task_route(g, route, wh);
+	molog("[gowarehouse]: Idle\n");
+
+	start_task_idle(g, get_idle_anim(), -1);
 }
+
 
 /*
 ===============
@@ -1848,7 +2025,21 @@ void Worker::gowarehouse_signal(Game* g, State* state)
 		return;
 	}
 
+	if (signal == "transfer") {
+		molog("[gowarehouse]: transfer signal\n");
+
+		delete m_supply;
+		m_supply = 0;
+
+		schedule_act(g, 1);
+		set_signal("");
+		return;
+	}
+
 	molog("[gowarehouse]: cancel for signal '%s'\n", signal.c_str());
+
+	delete m_supply;
+	m_supply = 0;
 	pop_task(g);
 }
 
@@ -2276,295 +2467,6 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
 	}
 
 	return false;
-}
-
-
-/*
-==============================
-
-ROUTE task
-
-Follow the given route. If we have an explicit target, move onto this target
-before finishing the task.
-If the route is broken or something else happens, we do not attempt to reroute.
-Let the caller do this.
-
-Note that we temporarily mask all signals except for "location" and "wakeup",
-so that walking isn't interrupted in the middle of a road.
-The masked out signal is stored in svar1.
-
-==============================
-*/
-
-Bob::Task Worker::taskRoute = {
-	"route",
-
-	(Bob::Ptr)&Worker::route_update,
-	0,
-	(Bob::Ptr)&Worker::route_mask,
-};
-
-
-/*
-===============
-Worker::start_task_route
-
-Begin walking the given route. If target is not null, we also walk in/onto the
-target when we arrive.
-Note that if one segment of the route is destroyed, the route is not recreated
-automatically.
-
-We claim ownership of the route, i.e. the caller must not free it.
-===============
-*/
-void Worker::start_task_route(Game* g, Route* route, PlayerImmovable* target)
-{
-	State* state;
-
-	push_task(g, &taskRoute);
-
-	state = get_state();
-	state->objvar1 = target;
-	state->route = route;
-}
-
-
-/*
-===============
-Worker::route_update
-===============
-*/
-void Worker::route_update(Game* g, State* state)
-{
-	PlayerImmovable* location = get_location(g);
-	PlayerImmovable* nextstep;
-
-	if (!location)
-		set_signal("location");
-
-	// abort on signals
-	if (get_signal().size()) {
-		molog("[route]: Interrupted by signal '%s'\n", get_signal().c_str());
-		pop_task(g);
-		return;
-	}
-
-	//molog("[route]: update\n");
-
-	// issue post-poned signals
-	if (state->svar1.size()) {
-		set_signal(state->svar1);
-		schedule_act(g, 5);
-		return;
-	}
-
-	// Find out where we should go next
-	if (state->route)
-	{
-		// Verify that the route is still good
-		if (!state->route->verify(g)) {
-			molog("[route]: route no longer valid\n");
-			set_signal("fail");
-			pop_task(g);
-			return;
-		}
-
-		nextstep = state->route->get_flag(g, 0);
-
-		// Special case for roads #1:
-		// If we're on a road, and both the first and the second flag on the
-		// route are endpoints of this road, move to the second flag instead
-		// of the first
-		if (state->route->get_nrsteps() && location->get_type() == ROAD) {
-			Flag* otherflag = state->route->get_flag(g, 1);
-			Road* road = (Road*)location;
-
-			if ((road->get_flag(Road::FlagStart) == nextstep && road->get_flag(Road::FlagEnd) == otherflag) ||
-			    (road->get_flag(Road::FlagEnd) == nextstep && road->get_flag(Road::FlagStart) == otherflag))
-			{
-				nextstep = otherflag;
-				state->route->starttrim(1);
-			}
-		}
-
-
-		// Special case for roads #2:
-		// Make sure we don't walk unnecessarily across a road if the road is
-		// our final target.
-		PlayerImmovable* finalgoal = (PlayerImmovable*)state->objvar1.get(g);
-
-		if (finalgoal->get_type() == Map_Object::ROAD) {
-			Road *finalroad = (Road*)finalgoal;
-
-			if (finalroad->get_flag(Road::FlagEnd) == location) {
-				molog("[route]: arrived at end flag of target road\n");
-
-				nextstep = finalgoal;
-				delete state->route;
-				state->route = 0;
-			}
-		}
-	}
-	else
-	{
-		// We no longer have a route; there must be a final goal we have to reach
-		nextstep = (PlayerImmovable*)state->objvar1.get(g);
-
-		if (!nextstep) {
-			molog("[route]: no route and no final goal\n");
-			set_signal("fail");
-			pop_task(g);
-			return;
-		}
-	}
-
-	// If location == nextstep, consume one part of the route and wait a little
-	if (nextstep == location) {
-		if (state->route)
-		{
-			if (state->route->get_nrsteps())
-				state->route->starttrim(1);
-			else {
-				delete state->route;
-				state->route = 0;
-			}
-		}
-		else
-		{
-			state->objvar1 = 0;
-		}
-
-		if (!state->route && !state->objvar1.get(g)) {
-			molog("[route]: target reached\n");
-			pop_task(g);
-			return;
-		}
-
-		set_animation(g, get_descr()->get_idle_anim());
-		schedule_act(g, 50);
-		return;
-	}
-
-	// Building to Flag
-	if (location->get_type() == BUILDING) {
-		if (location->get_base_flag() != nextstep)
-			throw wexception("MO(%u): [route]: in building, nextstep is not building's flag", get_serial());
-
-		molog("[route]: move from building to flag\n");
-		start_task_leavebuilding(g);
-		set_location(nextstep);
-		return;
-	}
-
-	if (location->get_type() == FLAG) {
-		// Flag to Building
-		if (nextstep->get_type() == BUILDING) {
-			if (nextstep->get_base_flag() != location)
-				throw wexception("MO(%u): [route]: next step is building, but we're nowhere near", get_serial());
-
-			molog("[route]: move from flag to building\n");
-			start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
-			set_location(nextstep);
-			return;
-		}
-
-		// Flag to Flag
-		if (nextstep->get_type() == FLAG) {
-			Road* road = ((Flag*)location)->get_road((Flag*)nextstep);
-
-			molog("[route]: move to next flag via road %u\n", road->get_serial());
-
-			Path path(road->get_path());
-
-			if (nextstep != road->get_flag(Road::FlagEnd))
-				path.reverse();
-
-			start_task_movepath(g, path, get_descr()->get_right_walk_anims(does_carry_ware()));
-			set_location(road);
-			return;
-		}
-
-		// Flag to Road
-		if (nextstep->get_type() == ROAD) {
-			Road* road = (Road*)nextstep;
-
-			if (road->get_flag(Road::FlagStart) != location && road->get_flag(Road::FlagEnd) != location)
-				throw wexception("MO(%u): [route]: nextstep is road, but we're nowhere near", get_serial());
-
-			molog("[route]: set location to road %u\n", road->get_serial());
-			set_location(road);
-			set_animation(g, get_descr()->get_idle_anim());
-			schedule_act(g, 10); // wait a little
-			return;
-		}
-
-		throw wexception("MO(%u): [route]: flag to bad nextstep %u", get_serial(), nextstep->get_serial());
-	}
-
-	if (location->get_type() == ROAD) {
-		// Road to Flag
-		if (nextstep->get_type() == FLAG) {
-			Road* road = (Road*)location;
-			const Path& path = road->get_path();
-			int index;
-
-			if (nextstep == road->get_flag(Road::FlagStart))
-				index = 0;
-			else if (nextstep == road->get_flag(Road::FlagEnd))
-				index = path.get_nsteps();
-			else
-				index = -1;
-
-			molog("[route]: on road %u, to flag %u, index is %i\n", road->get_serial(),
-							nextstep->get_serial(), index);
-
-			if (index >= 0)
-			{
-				if (start_task_movepath(g, path, index, get_descr()->get_right_walk_anims(does_carry_ware()))) {
-					molog("[route]: from road %u to flag %u\n", get_serial(), road->get_serial(),
-									nextstep->get_serial());
-					return;
-				}
-			}
-			else
-			{
-				if (nextstep != g->get_map()->get_immovable(get_position()))
-					throw wexception("MO(%u): [route]: road to flag, but flag is nowhere near", get_serial());
-			}
-
-			molog("[route]: arrive at flag %u\n", nextstep->get_serial());
-			set_location((Flag*)nextstep);
-			set_animation(g, get_descr()->get_idle_anim());
-			schedule_act(g, 10); // wait a little
-			return;
-		}
-
-		throw wexception("MO(%u): [route]: from road to bad nextstep %u (type %u)", get_serial(),
-					nextstep->get_serial(), nextstep->get_type());
-	}
-
-	throw wexception("MO(%u): location %u has bad type %u", get_serial(),
-					location->get_serial(), location->get_type());
-}
-
-
-/*
-===============
-Worker::route_mask
-===============
-*/
-void Worker::route_mask(Game* g, State* state)
-{
-	std::string signal = get_signal();
-
-	//molog("[route]: Filter signal '%s'\n", signal.c_str());
-
-	// 'road', 'location' and 'wakeup' are allowed to get through
-	if (signal == "road" || signal == "location" || signal == "wakeup")
-		return;
-
-	state->svar1 = signal; // delay the signal
-	set_signal("");
 }
 
 
@@ -3087,7 +2989,7 @@ void Carrier::transport_update(Game* g, State* state)
 	// A sanity check is necessary, in case the building has been destroyed
 	PlayerImmovable* next = item->get_next_move_step(g);
 
-	if (next != flag && next->get_base_flag() == flag) {
+	if (next && next != flag && next->get_base_flag() == flag) {
 		if (start_task_walktoflag(g, state->ivar1 ^ 1))
 			return;
 

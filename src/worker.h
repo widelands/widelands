@@ -32,6 +32,7 @@ class PlayerImmovable;
 class Pic;
 class WareInstance;
 class Tribe_Descr;
+class IdleWorkerSupply;
 
 /*
 Worker is the base class for all humans (and actually potential non-humans, too)
@@ -145,7 +146,6 @@ public: // worker-specific tasks
 
 	bool start_task_waitforcapacity(Game* g, Flag* flag);
 	void start_task_leavebuilding(Game* g);
-	void start_task_route(Game* g, Route* route, PlayerImmovable* target);
 	void start_task_fugitive(Game* g);
 
 private: // task details
@@ -175,9 +175,6 @@ private: // task details
 	void leavebuilding_update(Game* g, State* state);
 	void leavebuilding_signal(Game* g, State* state);
 
-	void route_update(Game* g, State* state);
-	void route_mask(Game* g, State* state);
-
 	void fugitive_update(Game* g, State* state);
 	void fugitive_signal(Game* g, State* state);
 
@@ -191,7 +188,6 @@ private:
 	static Task taskFetchfromflag;
 	static Task taskWaitforcapacity;
 	static Task taskLeavebuilding;
-	static Task taskRoute;
 	static Task taskFugitive;
 
 private: // Program commands
@@ -207,9 +203,10 @@ private: // Program commands
 	bool run_removeobject(Game* g, State* state, const WorkerAction* act);
 
 private:
-	Object_Ptr		m_location;			// meta location of the worker, a PlayerImmovable
-	Economy*			m_economy;			// Economy this worker is registered in
-	Object_Ptr		m_carried_item;	// Item we are carrying
+	Object_Ptr			m_location;			// meta location of the worker, a PlayerImmovable
+	Economy*				m_economy;			// Economy this worker is registered in
+	Object_Ptr			m_carried_item;	// Item we are carrying
+	IdleWorkerSupply*	m_supply;			// supply while gowarehouse and not transfer
 };
 
 
@@ -259,279 +256,6 @@ private:
 private:
 	int	m_acked_ware;	// -1: no ware acked; 0/1: acked ware for start/end flag of road
 };
-
-
-/*
-class Menu_Worker_Descr : virtual public Worker_Descr {
-   friend class Tribe_Descr;
-
-   public:
-      Menu_Worker_Descr() : Worker_Descr() { }
-      virtual ~Menu_Worker_Descr() { };
-
-      virtual int read(FileRead* f) {
-            ushort clrkey;
-            clrkey = f->Unsigned16();
-
-            menu_pic.set_clrkey(clrkey);
-            menu_pic.create(24, 24, (ushort*)f->Data(24*24*2));
-
-            return RET_OK;
-      }
-
-   private:
-      Pic menu_pic;
-};
-
-class Soldier_Descr : virtual public Menu_Worker_Descr {
-   friend class Tribe_Descr;
-
-   public:
-      Soldier_Descr(void) : Worker_Descr() { };
-      ~Soldier_Descr(void) { };
-
-   protected:
-      uint energy;
-
-      Animation attack_l;
-      Animation attack1_l;
-      Animation evade_l;
-      Animation evade1_l;
-      Animation attack_r;
-      Animation attack1_r;
-      Animation evade_r;
-      Animation evade1_r;
-
-      virtual int read(FileRead* f);
-};
-
-//
-// workers having a second walk bob for every direction
-//
-class Has_Walk1_Worker_Descr : virtual public Worker_Descr {
-   public:
-      Has_Walk1_Worker_Descr(void) { }
-      virtual ~Has_Walk1_Worker_Descr() { } 
-      virtual int read(FileRead* f);
-
-   private:
-      Animation walk_ne1;
-      Animation walk_e1;
-      Animation walk_se1;
-      Animation walk_sw1;
-      Animation walk_w1;
-      Animation walk_nw1;
-};
-
-
-// 
-// workers having a work bob
-// 
-class Has_Working_Worker_Descr : virtual public Worker_Descr {
-   public:
-      Has_Working_Worker_Descr(void) { }
-      virtual ~Has_Working_Worker_Descr(void) { }
-      virtual int read(FileRead* f);
-
-   private:
-      Animation working;
-};
-
-// 
-// workers having a second work bob
-// 
-class Has_Working1_Worker_Descr : virtual public Worker_Descr {
-   public:
-      Has_Working1_Worker_Descr(void) { }
-      virtual ~Has_Working1_Worker_Descr(void) { }
-      virtual int read(FileRead* f);
-
-   private:
-      Animation working1;
-};
-
-//
-// Sit_Dig_Base class. this is the fundament for the sitters,
-// diggers and the specials
-class SitDigger_Base : virtual public Worker_Descr {
-   public:
-      SitDigger_Base(void) { };
-      virtual ~SitDigger_Base(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-//
-// Sitting workers and digging workers (same) 
-//
-class SitDigger : virtual public SitDigger_Base,
-   virtual public Menu_Worker_Descr {
-   public:
-      SitDigger(void) { }
-      virtual ~SitDigger(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-//
-// Searcher
-//
-class Searcher : virtual public Worker_Descr,
-   virtual public Menu_Worker_Descr,
-   virtual public Has_Walk1_Worker_Descr,
-   virtual public Has_Working_Worker_Descr {
-      
-   public:
-      Searcher(void) { }
-      ~Searcher(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-//
-// Planter
-//
-class Planter : virtual public Worker_Descr,
-   virtual public Menu_Worker_Descr,
-   virtual public Has_Walk1_Worker_Descr,
-   virtual public Has_Working_Worker_Descr {
-   
-   public:
-      Planter(void) { }
-      ~Planter(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-//
-// grower
-//
-class Grower : virtual public Worker_Descr, 
-   virtual public Menu_Worker_Descr,
-   virtual public Has_Walk1_Worker_Descr,
-   virtual public Has_Working_Worker_Descr,
-   virtual public Has_Working1_Worker_Descr {
-
-   public:
-      Grower(void) { }
-      ~Grower(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-// 
-// scientist
-//
-class Scientist : virtual public Worker_Descr,
-   virtual public Menu_Worker_Descr {
-
-   public:
-      Scientist(void) { }
-      ~Scientist(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-// 
-// Special workers
-// 
-class Carrier : virtual public SitDigger_Base,
-   virtual public Has_Walk1_Worker_Descr,
-   virtual public Has_Working_Worker_Descr,
-   virtual public Has_Working1_Worker_Descr {
-   public:
-      Carrier(void) { }
-      virtual ~Carrier(void) { }
-
-      virtual int read(FileRead* f);
-   
-   private:
-};
-   
-class Def_Carrier : virtual public Carrier {
-
-   public: 
-      Def_Carrier(void) { }
-      virtual ~Def_Carrier(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-class Add_Carrier : virtual public Carrier,
-   virtual public Menu_Worker_Descr {
-   public:
-      Add_Carrier(void) { }
-      virtual ~Add_Carrier(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-class Builder : virtual public SitDigger_Base,
-   virtual public Menu_Worker_Descr,
-   virtual public Has_Working_Worker_Descr,
-   virtual public Has_Working1_Worker_Descr {   
-   public:
-      Builder(void) { }
-      virtual ~Builder(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-
-class Planer : virtual public SitDigger_Base,
-   virtual public Menu_Worker_Descr,
-   virtual public Has_Working_Worker_Descr {
-   
-   public:
-      Planer(void) { }
-      virtual ~Planer(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-  
-class Explorer : virtual public SitDigger_Base,
-      virtual public Menu_Worker_Descr {
-   public:
-      Explorer(void) { }
-      virtual ~Explorer(void) { }
-
-      virtual int read(FileRead* f); 
-
-   private:
-};
-
-class Geologist : virtual public SitDigger_Base,
-   virtual public Menu_Worker_Descr,
-   virtual public Has_Working_Worker_Descr,
-   virtual public Has_Working1_Worker_Descr {
-   public:
-      Geologist(void) { }
-      virtual ~Geologist(void) { }
-
-      virtual int read(FileRead* f);
-
-   private:
-};
-*/
 
 
 #endif // __S__WORKER_DESCR_H

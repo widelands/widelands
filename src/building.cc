@@ -1734,7 +1734,7 @@ void Warehouse::idle_request_cb(Game* g, Request* rq, int ware, Worker* w, void*
 	Warehouse* wh = (Warehouse*)data;
 
 	if (w)
-		wh->incorporate_worker(g, w);
+		w->schedule_incorporate(g);
 	else
 		wh->m_supply->add_wares(ware, 1);
 }
