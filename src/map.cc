@@ -23,6 +23,10 @@
 #include "myfile.h"
 #include <string.h>
 
+// TEMP
+#include <iostream>
+
+
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -35,6 +39,7 @@
  * inits
  */
 Map::Map(void) {
+		  w=0;
 		  name=0;
 		  fields=0;
 }
@@ -55,6 +60,8 @@ Map::~Map(void) {
 					 }
 					 free(fields);
 		  }
+		  
+		  if(w) delete w;
 }
 
 
@@ -66,6 +73,12 @@ Map::~Map(void) {
  * Returns: RET_OK or ERR_FAILED
  */
 int Map::load_map(const char* file) {
+		  if(!w) {
+					 // no world loaded.
+					 // We fail
+					 return ERR_FAILED;
+		  }
+		  
 		  Binary_file f;
 
 		  f.open(file, File::READ);
@@ -115,12 +128,25 @@ int Map::load_map(const char* file) {
 		  // now, read in the fields, one at a time and init the card
 		  FieldDescr fd;
 		  int y;
+		  Pic *td, *tr;
 		  for(y=0; y<height; y++) {
 					 for(int x=0; x<width; x++) {
 								f.read(&fd, sizeof(fd));
 	
-								fields[y*width + x ] = new Field(x, y, fd.height);
-							 			// TODO care for the real fields;
+								// TEMP
+								tr=w->get_texture(fd.tex_r);
+								if(!tr) {
+										  cerr << "Texture number " << fd.tex_r << " not found in file. Defaults to 0" << endl;
+										  tr=w->get_texture(0);
+								}
+								td=w->get_texture(fd.tex_d);
+								if(!td) {
+										  cerr << "Texture number " << fd.tex_d << " not found in file. Defaults to 0" << endl;
+										  td=w->get_texture(0);
+								}
+								// TEMP end
+
+								fields[y*width + x ] = new Field(x, y, fd.height, tr, td);
 					 }
 		  }
 		  int l, r, t, b;

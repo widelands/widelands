@@ -46,6 +46,13 @@ Pic* Bob::get_pic(int timekey)
 		// this scale allows 1 per second as slowest animation; hm.
 		// are there slower anims?
 		key = (timekey * desc.animFactor) / 1000;
+		break;
+	
+	case NONE:
+	// suppress warnings
+	default:
+		break;
+		
 	}
 	Anim* anim = world->get_anim(desc.anim);
 	key %= anim->pics;

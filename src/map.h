@@ -30,8 +30,7 @@
 #define WLMF_VERSIONMAJOR(a)  (a >> 8)
 #define WLMF_VERSIONMINOR(a)  (a & 0xFF)
 
-
-typedef uint World; // todo, world file is not yet defined
+#include "world.h"
 
 /** struct Map_Header
  *
@@ -100,7 +99,7 @@ class Field {
 		  Field& operator=(const Field&);
 
 		  public:
-					 Field(ushort, ushort, uchar);
+					 Field(ushort, ushort, uchar, Pic*, Pic*);
 					 ~Field(void);
 
 					 inline uchar get_height(void) const { return height; }
@@ -114,6 +113,10 @@ class Field {
 					 inline Field* get_trn(void) const { return trn; }
 					 inline Field* get_bln(void) const { return bln; }
 					 inline Field* get_brn(void) const { return brn; }
+		  
+					 // get textures
+					 inline Pic* get_texr(void) { return texr; }
+					 inline Pic* get_texd(void) { return texd; }
 
 					 void set_neighb(Field*, Field*, Field*, Field*, Field*, Field*);
 					 
@@ -123,6 +126,7 @@ class Field {
 					 ushort xpos, ypos;
 					 int	xpix, ypix;
 					 uchar height;
+					 Pic *texr, *texd;
 };
 
 /** class Map
@@ -167,11 +171,14 @@ class Map {
 					 inline void ffield(void) { lfield=0; }
 					 inline void set_cfield(const uint x, const uint y) { lfield=y*width + x; }
 
-					 
+					
+					 // temp functions
+					 void set_world(World* mw) { w=mw; } 
 
 		  
 		  private:
 					 ushort width, height;
+					 World* w;
 					 Field** fields;
 					 uint lfield;
 					 char *name;

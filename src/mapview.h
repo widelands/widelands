@@ -60,8 +60,6 @@ class Map_View {
 					 void draw_polygon(Field*, Field*, Field*, Pic*);
 					 void get_starts(const Field*, const Field*, const Field*, int, int);
 					 void scanconv(const Field*, const Field*, __starts*, int ystart);
-					 
-					 Pic tmpg, tmpr;
 };
 
 

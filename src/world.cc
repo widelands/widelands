@@ -30,8 +30,8 @@ World::World(const char* file)
 	bobCount = textureCount = animCount = resourceCount = terrainCount = 0;
 	//
 	Binary_file* wwf = new Binary_file();
-	wwf->open(file, File::For::READ);
-	if (wwf->get_state() == File::State::CLOSE)
+	wwf->open(file, File::READ);
+	if (wwf->get_state() == File::CLOSE)
 		return;
 	read_header(wwf);
 

@@ -25,19 +25,17 @@
  * a field like it is represented in the game
  */
 
-/** Field::Field(ushort x, ushort y, uchar h, Field* mln, Field* mrn, Field* mtln, Field* mtrn, 
- * 		Field* mbln, Field* mbrn)
+/** Field::Field(ushort x, ushort y, uchar h, Pic* mtexr, Pic* mtexd)
  *
  * Init
  *
  * Args:	x	xpos of field
  * 		y	ypos of field
  * 		h	height of field
- * 		mln, mrn	left	and right neigbor fields
- * 		mtln, mtrn	top left and top right neighbour fields
- * 		mbln, mbrn  bottom left and bottom right neighbour fields
+ *			mtexr	right texture
+ *			mtexd bottom texture
  */
-Field::Field(ushort x, ushort y, uchar h) { 
+Field::Field(ushort x, ushort y, uchar h, Pic* mtexr, Pic* mtexd) { 
 		  
 		  height=h;
 		  xpos=x;
@@ -51,6 +49,8 @@ Field::Field(ushort x, ushort y, uchar h) {
 					 xpix=(x<<FIELD_SW_W);
 		  }
 
+		  texr=mtexr;
+		  texd=mtexd;
 }
 
 

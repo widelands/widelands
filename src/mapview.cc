@@ -38,16 +38,6 @@
 Map_View::Map_View(Map* m) {
 		  vpx=vpy=0;
 		  map=m;
-		
-		  // TEMP
-		  tmpg.set_size(50, 50);
-		  tmpg.set_clrkey(Graph::pack_rgb(51, 114, 44));
-		  tmpg.clear_all();
-
-		  tmpr.set_size(50, 50);
-		  tmpr.set_clrkey(Graph::pack_rgb(255, 0, 0));
-		  tmpr.clear_all();
-		  // TEMP
 }
 
 /** Map_View::~Map_View(void) 
@@ -83,6 +73,12 @@ void Map_View::draw(void) {
 					 draw_field(f); 
 		  } 
 
+
+// TEMP
+		 // for(int i=1; i<map->get_w()-2; i++)
+//					 draw_field(map->get_field(5, 5));
+// TEMP
+
 		  if(!xtrans && (uint)vpx> map->get_w()*FIELD_WIDTH-g_gr.get_xres()) {
 					 int ovpx=vpx;
 					 vpx-=map->get_w()*FIELD_WIDTH;
@@ -100,11 +96,12 @@ void Map_View::draw(void) {
 					 ytrans=false;
 					 vpy=ovpy; 
 		  }
+
 }
 					 
 void Map_View::draw_field(Field* f) {
-		  draw_polygon(f->get_bln(), f, f->get_brn(), &tmpr);
-		  draw_polygon(f, f->get_brn(), f->get_rn(), &tmpg);
+		  draw_polygon(f->get_bln(), f, f->get_brn(), f->get_texd() );
+		  draw_polygon(f, f->get_brn(), f->get_rn(), f->get_texr());
 }
 
 #define MAX2(a, b) ( (a)>(b) ? (a):  (b)>(a) ? (b):(a) )
@@ -128,6 +125,8 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 		  get_starts(l,r, m, ystart, ystop);
 		  ystop= ystop>= (int)g_gr.get_yres() ? (int)(g_gr.get_yres())-1 : ystop;
 					 
+		  
+		  p->get_fpixel();			 
 		  for(y_d= ystart<0 ? 0 : ystart; y_d<ystop; y_d++) {
 					 xstart=(long)g_starts[y_d-ystart].border1;
 					 xstop=(long)g_stops[y_d-ystart].border1;
@@ -138,12 +137,17 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 								xstart=temp;
 					 } 
 
-					 xstart= xstart<0 ? 0 : xstart;
-					 xstop= xstop>= (int)g_gr.get_xres() ? (int)(g_gr.get_xres())-1 : xstop;
+					 if(xstart<0) {
+								xstart= 0 ;
+					 }
+
+					 if(xstop>= (int)g_gr.get_xres()) {
+								xstop= (int)(g_gr.get_xres())-1;
+					 }
 								
 					 g_gr.set_cpixel(xstart-1, y_d);
 					 for(x_d=xstart; x_d<xstop; x_d++) {
-								g_gr.set_npixel(p->get_fpixel());
+								g_gr.set_npixel(p->get_npixel());
 					 }
 
 		  }
@@ -194,31 +198,115 @@ void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int yst
 
 		  // check, if this saves cycles
 		  // no, it doesn't
-//		  if(r->get_ypix()-vpy <0 && l->get_ypix()-vpy <0) return;
-//		  if(r->get_ypix()-vpy >= (int)g_gr.get_yres() && l->get_ypix()-vpy >= (int)g_gr.get_yres()) return;
+		  //		  if(r->get_ypix()-vpy <0 && l->get_ypix()-vpy <0) return;
+		  //		  if(r->get_ypix()-vpy >= (int)g_gr.get_yres() && l->get_ypix()-vpy >= (int)g_gr.get_yres()) return;
 
-		  slope=((l->get_xpix()-vpx)-(r->get_xpix()-vpx))<<16;
+		  		  slope=((l->get_xpix()-vpx)-(r->get_xpix()-vpx))<<16;
 
-		  if((r->get_ypix()-vpy)-(l->get_ypix()-vpy)) {
-					 slope/=(l->get_ypix()-vpy)-(r->get_ypix()-vpy);
-		  } else { 
-					 slope=0;
-		  }
-		  
-		  x=(r->get_xpix()-vpx)<<16; 
-		  count=r->get_ypix()-vpy;
+					  if((r->get_ypix()-vpy)-(l->get_ypix()-vpy)) {
+					  slope/=(l->get_ypix()-vpy)-(r->get_ypix()-vpy);
+					  } else { 
+					  slope=0;
+					  }
 
-		  if(count-ystart<0) { x+=slope*(ystart-count); count=ystart; }
-		  ystop=l->get_ypix()-vpy < (int) g_gr.get_yres()  ? l->get_ypix()-vpy : g_gr.get_yres();
+					  x=(r->get_xpix()-vpx)<<16; 
+					  count=r->get_ypix()-vpy;
 
-		  while(count < ystop) {
-					 start[count-ystart].border1=x>>16;
-					 x+=slope;
-					 count++; 
-		  }
+					  if(count-ystart<0) { x+=slope*(ystart-count); count=ystart; }
+					  ystop=l->get_ypix()-vpy < (int) g_gr.get_yres()  ? l->get_ypix()-vpy : g_gr.get_yres();
 
-}
+					  while(count < ystop) {
+					  start[count-ystart].border1=x>>16;
+					  x+=slope;
+					  count++; 
+					  }
+					  
+/*
+		  const Field* left = MIN2(r->get_xpix(), l->get_xpix()) == l->get_xpix() ? l : r;
+		  const Field* right = MAX2(r->get_xpix(), l->get_xpix()) == l->get_xpix() ? l : r;
+
+		  assert(left->get_xpix() < right->get_xpix());
+
+		  float d[4] = {
+					 left->get_ln()->get_ypix()-vpy,
+					 left->get_ypix()-vpy,
+					 right->get_ypix()-vpy, 
+					 right->get_rn()->get_ypix()-vpy
+		  };
+		  cerr << d[0] << ":" << d[1] << ":" << d[2] << ":" << d[3] << endl;
+
+		  float x[4] = {
+					 left->get_xpix()-FIELD_WIDTH-vpx,
+					 left->get_xpix()-vpx,
+					 left->get_xpix()+FIELD_WIDTH-vpx,
+					 left->get_xpix()+FIELD_WIDTH+FIELD_WIDTH-vpx,
 					 
+		  };
+		  
+		  float a[4]; 
+		  float t2;
+		  float sub[4-1];
+		  float diag[4-1];
+		  float sup[4-1];
+		  uint i;
+		  float oldy, oldt;
+		  float y;
+		  float t; 
+		  
+		  for (i=1; i<=4-2; i++){
+					 diag[i] = (FIELD_WIDTH*2)/3;
+					 sup[i] = FIELD_WIDTH/6;
+					 sub[i] = FIELD_WIDTH/6;
+					 a[i] = (d[i+1]-d[i])/FIELD_WIDTH-(d[i]-d[i-1])/FIELD_WIDTH;
+		  }
+		  * solve linear system with tridiagonal n by n matrix a
+			* using Gaussian elimination *without* pivoting
+			* where   a(i,i-1) = sub[i]  for 2<=i<=n
+			* a(i,i)   = diag[i] for 1<=i<=n
+			* a(i,i+1) = sup[i]  for 1<=i<=n-1
+			* (the values sub[1], sup[n] are ignored)
+			* right hand side vector b[1:n] is overwritten with solution 
+			* NOTE: 1...n is used in all arrays, 0 is unused 
+			*
+
+		  //    factorization and forward substitution 
+		  for(i=2; i<=4-2; i++){
+					 sub[i] = sub[i]/diag[i-1];
+					 diag[i] = diag[i] - sub[i]*sup[i-1];
+					 a[i] = a[i] - sub[i]*a[i-1];
+		  }
+		  a[4-2] = a[4-2]/diag[4-2];
+		  for(i=(4-2)-1;i>=1;i--){
+					 a[i] = (a[i] - sup[i]*a[i+1])/diag[i];
+		  }
+
+		  //		  solveTridiag(sub,diag,sup,a,np-2);
+
+		  // note that a[0]=a[np-1]=0
+		  // draw
+		  oldt=x[0];
+		  oldy=d[0];
+		//  draw_line((int)oldt,(int)oldy,(int)oldt,(int)oldy, Graph::pack_rgb(0,255,0));
+		  for (uint i=1; i<=4-1; i++) {   // loop over intervals between nodes
+					 for (uint j=1; j<=FIELD_WIDTH; j++){
+								t2 = FIELD_WIDTH - j;
+								y = ((-a[i-1]/6*(t2+FIELD_WIDTH)*j+d[i-1])*t2 +
+													 (-a[i]/6*(j+FIELD_WIDTH)*t2+d[i])*j)/FIELD_WIDTH;
+								t=x[i-1]+j;
+		//						draw_line((int)oldt,(int)oldy,(int)t,(int)y, Graph::pack_rgb(0,255,0));
+								
+								if((t>(left->get_xpix()-vpx)) && y>0 && (t<(right->get_xpix()-vpx)) && y<g_gr.get_yres())
+										  g_gr.set_pixel(t-j, d[i-1], Graph::pack_rgb(0, 0, 255));
+								oldt=t;
+								oldy=y;
+					 }
+		  }
+
+
+
+*/
+}
+
 
 void Map_View::set_viewpoint(uint x,  uint y) { 
 		  vpx=x; vpy=y; 

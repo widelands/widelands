@@ -73,7 +73,7 @@ SDL_LIBS_FOR_PLUGINS = -L/usr/lib -lSDL -lpthread -L/usr/X11R6/lib -lXxf86dga_pi
 VERSION = 0.0.15
 src = @src@
 
-EXTRA_FLAGS = -I/usr/include/SDL -D_REENTRANT -Wall -O2 -I../src 
+EXTRA_FLAGS = -I/usr/include/SDL -D_REENTRANT -Wall -O2 -I../src
 #EXTRA_FLAGS=-I/usr/include/SDL -D_REENTRANT -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2
 # LDFLAGS=
 CFLAGS = $(EXTRA_FLAGS)
