@@ -18,15 +18,15 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "font.h"
 
 /**
 Initialize a textarea that supports multiline strings.
 */
-Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h,
+UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w, uint h,
                                        const char *text, Align align)
-	: Panel(parent, x, y, w - 24, h)
+	: UIPanel(parent, x, y, w - 24, h)
 {
 	set_handle_mouse(false);
 	set_think(false);
@@ -37,8 +37,8 @@ Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint
 	m_textheight = 0;
 	m_scrollmode = ScrollNormal;
 
-	m_scrollbar = new Scrollbar(parent, x+get_w(), y, 24, h, false);
-	m_scrollbar->moved.set(this, &Multiline_Textarea::set_scrollpos);
+	m_scrollbar = new UIScrollbar(parent, x+get_w(), y, 24, h, false);
+	m_scrollbar->moved.set(this, &UIMultiline_Textarea::set_scrollpos);
 
 	m_scrollbar->set_pagesize(h - 2*g_font->get_fontheight());
 	m_scrollbar->set_steps(1);
@@ -51,7 +51,7 @@ Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint
 /**
 Free allocated resources
 */
-Multiline_Textarea::~Multiline_Textarea()
+UIMultiline_Textarea::~UIMultiline_Textarea()
 {
 }
 
@@ -60,7 +60,7 @@ Multiline_Textarea::~Multiline_Textarea()
 Replace the current text with a new one.
 Fix up scrolling state if necessary.
 */
-void Multiline_Textarea::set_text(const char *text)
+void UIMultiline_Textarea::set_text(const char *text)
 {
 	if (!text)
 		{
@@ -100,7 +100,7 @@ void Multiline_Textarea::set_text(const char *text)
 /**
 Change alignment of the textarea
 */
-void Multiline_Textarea::set_align(Align align)
+void UIMultiline_Textarea::set_align(Align align)
 {
 	// don't allow vertical alignment as it doesn't make sense
 	m_align = (Align)(align & Align_Horizontal);
@@ -110,7 +110,7 @@ void Multiline_Textarea::set_align(Align align)
 /**
 Scroll to the given position.
 */
-void Multiline_Textarea::set_scrollpos(int pixels)
+void UIMultiline_Textarea::set_scrollpos(int pixels)
 {
 	m_textpos = pixels;
 
@@ -122,7 +122,7 @@ void Multiline_Textarea::set_scrollpos(int pixels)
 Change the scroll mode. This will not change the current scroll position;
 it only affects the behaviour of set_text().
 */
-void Multiline_Textarea::set_scrollmode(ScrollMode mode)
+void UIMultiline_Textarea::set_scrollmode(ScrollMode mode)
 {
 	m_scrollmode = mode;
 }
@@ -131,7 +131,7 @@ void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 /**
 Redraw the textarea
 */
-void Multiline_Textarea::draw(RenderTarget* dst)
+void UIMultiline_Textarea::draw(RenderTarget* dst)
 {
 	// Let the font handler worry about all the complicated stuff..
 	g_font->draw_string(dst, 0, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w());

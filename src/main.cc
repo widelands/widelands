@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "options.h"
 #include "setup.h"
 #include "font.h"

@@ -25,16 +25,16 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string title, std::strin
 	: Fullscreen_Menu_Base("fileviewmenu.jpg")
 {
 	// Text view
-	mlta=new Multiline_Textarea(this, 40, 150, 560, 240, text.c_str());
+	mlta=new UIMultiline_Textarea(this, 40, 150, 560, 240, text.c_str());
 
    // Title
-   Textarea* ta= new Textarea(this, 50, 50, title, Align_Left);
+   UITextarea* ta= new UITextarea(this, 50, 50, title, Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 113);
 
 	// Close button
-	Button *b;
+	UIButton *b;
 
-	b = new Button(this, 233, 420, 174, 24, 0);
+	b = new UIButton(this, 233, 420, 174, 24, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_TextView::end_modal);
 	b->set_title("Close");
 }
@@ -58,15 +58,15 @@ TextViewWindow
 ==============================================================================
 */
 
-class TextViewWindow : public UniqueWindow {
+class TextViewWindow : public UIUniqueWindow {
 public:
-	TextViewWindow(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text);
+	TextViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text);
 };
 
-TextViewWindow::TextViewWindow(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text)
-	: UniqueWindow(parent, reg, 0, 0, title)
+TextViewWindow::TextViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text)
+	: UIUniqueWindow(parent, reg, 0, 0, title)
 {
-	new Multiline_Textarea(this, 0, 0, 560, 240, text.c_str());
+	new UIMultiline_Textarea(this, 0, 0, 560, 240, text.c_str());
 
 	set_inner_size(560, 240);
 
@@ -82,7 +82,7 @@ textview_window
 Display the text in a scrollable window.
 ===============
 */
-void textview_window(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text)
+void textview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text)
 {
 	new TextViewWindow(parent, reg, title, text);
 }
@@ -95,7 +95,7 @@ fileview_screen
 Display the contents of a text file in a scrollable window.
 ===============
 */
-void fileview_window(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string fname)
+void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string fname)
 {
 	FileRead f;
 	f.Open(g_fs, fname);

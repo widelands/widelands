@@ -30,8 +30,8 @@ class PlayerDescriptionGroup;
 class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Game* m_game;
 
-	Button*						m_ok;
-	Textarea*					m_mapname;
+	UIButton*						m_ok;
+	UITextarea*					m_mapname;
 	PlayerDescriptionGroup* m_players[MAX_PLAYERS];
 	
 public:

@@ -21,7 +21,7 @@
 #define __S__INTBASE_H
 
 
-#include "ui.h"
+#include "ui_basic.h"
 #include "editor_game_base.h"
 
 class Map;
@@ -35,7 +35,7 @@ class Map_View;
  * to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-class Interactive_Base : public Panel {
+class Interactive_Base : public UIPanel {
 	public:
 		enum {
 			dfShowCensus = 1,				// show census report on buildings
@@ -89,7 +89,7 @@ class Interactive_Base : public Panel {
 		uint					m_frametime;			// in millseconds
 		uint					m_avg_usframetime;	// in microseconds!
 
-      UniqueWindowRegistry m_minimap;
+      UIUniqueWindowRegistry m_minimap;
 
    protected:
       void toggle_minimap(void);

@@ -20,7 +20,7 @@
 #ifndef __S__PLAYER_DESCR_GROUP
 #define __S__PLAYER_DESCR_GROUP
 
-class Panel;
+class UIPanel;
 class Game;
 
 /** class PlayerDescriptionGroup
@@ -28,18 +28,18 @@ class Game;
  * - checkbox to enable/disable player
  * - button to switch between: Human, Remote, AI
  */
-class PlayerDescriptionGroup : public Panel {
+class PlayerDescriptionGroup : public UIPanel {
 	Game* m_game;
 	int m_plnum;
 	
 	bool m_enabled; // is this player allowed at all (map-dependent)
 	
-	Checkbox* m_btnEnablePlayer;
+	UICheckbox* m_btnEnablePlayer;
 	int m_playertype;
-	Button* m_btnPlayerType;
+	UIButton* m_btnPlayerType;
 
 public:
-	PlayerDescriptionGroup(Panel* parent, int x, int y, Game* game, int plnum);
+	PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum);
 
 	UISignal changed;
 		

@@ -24,10 +24,10 @@
 /** 
  * This class defines a list-select box.
  */
-class Listselect : public Panel {
+class UIListselect : public UIPanel {
 public:
-	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left);
-	~Listselect();
+	UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left);
+	~UIListselect();
 
 	UISignal1<int> selected;
 
@@ -62,7 +62,7 @@ private:
 
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
-	Scrollbar*				m_scrollbar;
+	UIScrollbar*		   m_scrollbar;
 	int						m_scrollpos;	// in pixels
 	int						m_selection;	// -1 when nothing is selected
 };

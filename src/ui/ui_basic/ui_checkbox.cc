@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 /*
 ==============================================================================
@@ -29,17 +29,13 @@ Statebox
 */
 
 
-/*
-===============
-Statebox::Statebox
-
+/**
 Stateboxes start out enabled and unchecked.
 If picid is non-zero, the given picture is used instead of the normal checkbox
 graphics.
-===============
 */
-Statebox::Statebox(Panel *parent, int x, int y, uint picid)
-	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
+UIStatebox::UIStatebox(UIPanel *parent, int x, int y, uint picid)
+	: UIPanel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
 {
 	if (picid)
 	{
@@ -68,25 +64,20 @@ Statebox::Statebox(Panel *parent, int x, int y, uint picid)
 }
 
 
-/*
-===============
-Statebox::~Statebox
-
+/**
 Clean up resources
-===============
 */
-Statebox::~Statebox()
+UIStatebox::~UIStatebox()
 {
 }
 
 
-/** Statebox::set_enabled(bool enabled)
- *
+/** 
  * Set the enabled state of the checkbox. A disabled checkbox cannot be clicked.
  *
  * Args: enabled	true if the checkbox should be disabled
  */
-void Statebox::set_enabled(bool enabled)
+void UIStatebox::set_enabled(bool enabled)
 {
 	m_enabled = enabled;
 	if (!m_enabled)
@@ -95,13 +86,12 @@ void Statebox::set_enabled(bool enabled)
 }
 
 
-/** Statebox::set_state(bool on)
- *
+/** 
  * Changes the state of the checkbox.
  *
  * Args: on		true if the checkbox should be checked
  */
-void Statebox::set_state(bool on)
+void UIStatebox::set_state(bool on)
 {
 	if (on == m_state)
 		return;
@@ -114,14 +104,10 @@ void Statebox::set_state(bool on)
 }
 
 
-/*
-===============
-Statebox::draw
-
+/**
 Redraw the entire checkbox
-===============
 */
-void Statebox::draw(RenderTarget* dst)
+void UIStatebox::draw(RenderTarget* dst)
 {
 	if (m_custom_picture)
 	{
@@ -156,22 +142,20 @@ void Statebox::draw(RenderTarget* dst)
 }
 
 
-/** Statebox::handle_mousein(bool inside)
- *
+/**
  * Highlight the checkbox when the mouse moves into it
  */
-void Statebox::handle_mousein(bool inside)
+void UIStatebox::handle_mousein(bool inside)
 {
 	m_highlighted = inside;
 	update(0, 0, get_w(), get_h());
 }
 
 
-/** Statebox::handle_mouseclick(uint btn, bool down, int x, int y)
- *
+/** 
  * Left-click: Toggle checkbox state
  */
-bool Statebox::handle_mouseclick(uint btn, bool down, int x, int y)
+bool UIStatebox::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn != 0)
 		return false;
@@ -193,16 +177,10 @@ Checkbox
 ==============================================================================
 */
 
-/*
-A checkbox only differs from a Statebox in that clicking on it toggles the
-state
-*/
-
-/** Checkbox::clicked()
- *
+/**
  * Toggle the checkbox state
  */
-void Checkbox::clicked()
+void UICheckbox::clicked()
 {
 	set_state(!get_state());
 }

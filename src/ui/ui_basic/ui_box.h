@@ -16,7 +16,6 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-// you MUST include ui.h before including this
 
 #ifndef included_ui_box_h
 #define included_ui_box_h
@@ -24,10 +23,10 @@
 
 /**
 A layouting panel that holds a number of child panels.
-The Panels you add to the Box must be children of the Box.
-The Box automatically resizes itself and positions the added children.
+The UIPanels you add to the UIBox must be children of the UIBox.
+The UIBox automatically resizes itself and positions the added children.
 */
-class Box : public Panel {
+class UIBox : public UIPanel {
 public:
 	enum {
 		Horizontal = 0,
@@ -40,13 +39,13 @@ public:
 		AlignBottom = 2,
 	};
 public:
-	Box(Panel* parent, int x, int y, uint orientation);
+	UIBox(UIPanel* parent, int x, int y, uint orientation);
 
 	void resize();
 
 	int get_nritems() const { return m_items.size(); }
 
-	void add(Panel* panel, uint align);
+	void add(UIPanel* panel, uint align);
 	void add_space(uint space);
 
 private:
@@ -64,7 +63,7 @@ private:
 
 		union {
 			struct {
-				Panel*	panel;
+				UIPanel*	panel;
 				uint		align;
 			} panel;
 			uint		space;

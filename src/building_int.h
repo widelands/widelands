@@ -82,7 +82,7 @@ public:
 	WaresQueue* get_waresqueue(uint idx) { return m_wares[idx]; }
 
 protected:
-	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
+	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
 
 	void check_work(Game* g);
 
@@ -170,7 +170,7 @@ public:
    inline std::vector<WaresQueue*>* get_warequeues(void) { return &m_input_queues; }
 
 protected:
-	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
+	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
 
 private:
 	void request_worker(Game* g);
@@ -238,7 +238,7 @@ class MilitarySite : public ProductionSite {
       */
 
 protected:
-	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
+	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
 
 private:
 	void request_soldier(Game* g);

@@ -19,7 +19,7 @@
 
 #include "widelands.h"
 #include "graphic.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "fullscreen_menu_base.h"
 #include "fullscreen_menu_main.h"
 
@@ -33,41 +33,41 @@ Fullscreen_Menu_Main
 Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 	: Fullscreen_Menu_Base("mainmenu.jpg")
 {
-	// Buttons
-	Button *b;
+	// UIButtons
+	UIButton *b;
 
-	b = new Button(this, 60, 100, 174, 24, 3, mm_singleplayer);
+	b = new UIButton(this, 60, 100, 174, 24, 3, mm_singleplayer);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title("Single Player");
 
-	b = new Button(this, 60, 140, 174, 24, 3);
+	b = new UIButton(this, 60, 140, 174, 24, 3);
 	b->clicked.set(this, &Fullscreen_Menu_Main::not_supported);
 	b->set_title("Multi Player");
 
-	b = new Button(this, 60, 180, 174, 24, 3, mm_options);
+	b = new UIButton(this, 60, 180, 174, 24, 3, mm_options);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title("Options");
 
-	b = new Button(this, 60, 220, 174, 24, 3, mm_editor);
+	b = new UIButton(this, 60, 220, 174, 24, 3, mm_editor);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title("Editor");
 
-   b = new Button(this, 60, 260, 174, 24, 3, mm_readme);
+   b = new UIButton(this, 60, 260, 174, 24, 3, mm_readme);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title("View Readme");
 
-	b = new Button(this, 60, 300, 174, 24, 3, mm_license);
+	b = new UIButton(this, 60, 300, 174, 24, 3, mm_license);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title("License");
 
 
-	b = new Button(this, 60, 370, 174, 24, 0, mm_exit);
+	b = new UIButton(this, 60, 370, 174, 24, 0, mm_exit);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title("Exit Game");
 
 	// Text
-	new Textarea(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right);
-	new Textarea(this, 15, MENU_YRES-29, "(C) 2002-2004 by the Widelands Development Team", Align_TopLeft);
+	new UITextarea(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right);
+	new UITextarea(this, 15, MENU_YRES-29, "(C) 2002-2004 by the Widelands Development Team", Align_TopLeft);
 }
 
 void Fullscreen_Menu_Main::not_supported()

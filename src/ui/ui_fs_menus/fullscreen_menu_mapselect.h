@@ -32,14 +32,14 @@ class Editor_Game_Base;
 class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 	Editor_Game_Base		*egbase;
 
-	Listselect *list;
-	Textarea *taname;
-	Textarea *taauthor;
-	Textarea *tasize;
-	Textarea *taworld;
-	Textarea *tanplayers;
-	Multiline_Textarea *tadescr;
-	Button *m_ok;
+	UIListselect *list;
+	UITextarea *taname;
+	UITextarea *taauthor;
+	UITextarea *tasize;
+	UITextarea *taworld;
+	UITextarea *tanplayers;
+	UIMultiline_Textarea *tadescr;
+	UIButton *m_ok;
 
 	filenameset_t	m_mapfiles;
 	

@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 
 /*
@@ -33,7 +33,7 @@ UniqueWindow IMPLEMENTATION
 /**
 In order to avoid dangling pointers, we need to kill our contained window here.
 */
-UniqueWindowRegistry::~UniqueWindowRegistry()
+UIUniqueWindowRegistry::~UIUniqueWindowRegistry()
 {
 	if (window)
 		delete window;
@@ -43,8 +43,8 @@ UniqueWindowRegistry::~UniqueWindowRegistry()
 /**
 Register, position according to the registry information.
 */
-UniqueWindow::UniqueWindow(Panel* parent, UniqueWindowRegistry* reg, int w, int h, std::string title)
-	: Window(parent, 0, 0, w, h, title.c_str())
+UIUniqueWindow::UIUniqueWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, int w, int h, std::string title)
+	: UIWindow(parent, 0, 0, w, h, title.c_str())
 {
 	m_registry = reg;
 	m_usedefaultpos = true;
@@ -66,7 +66,7 @@ UniqueWindow::UniqueWindow(Panel* parent, UniqueWindowRegistry* reg, int w, int 
 /**
 Unregister, save latest position.
 */
-UniqueWindow::~UniqueWindow()
+UIUniqueWindow::~UIUniqueWindow()
 {
 	if (m_registry) {
 		assert(m_registry->window == this);

@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "fullscreen_menu_options.h"
 
 /*
@@ -40,31 +40,31 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(int cur_x, int cur_y, bool full
 {
 
 	// Menu title
-	new Textarea(this, MENU_XRES/2, 140, "Options", Align_HCenter);
+	new UITextarea(this, MENU_XRES/2, 140, "Options", Align_HCenter);
 
-	// Buttons
-	Button* b;
+	// UIButtons
+	UIButton* b;
 
-	b = new Button(this, 330, 420, 174, 24, 0, om_cancel);
+	b = new UIButton(this, 330, 420, 174, 24, 0, om_cancel);
 	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
 	b->set_title("Cancel");
 
-	b = new Button(this, 136, 420, 174, 24, 2, om_ok);
+	b = new UIButton(this, 136, 420, 174, 24, 2, om_ok);
 	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
 	b->set_title("Apply");
 
 	// Fullscreen mode
-	m_fullscreen = new Checkbox(this, 100, 180);
+	m_fullscreen = new UICheckbox(this, 100, 180);
 	m_fullscreen->set_state(fullscreen);
-	new Textarea(this, 125, 190, "Fullscreen", Align_VCenter);
+	new UITextarea(this, 125, 190, "Fullscreen", Align_VCenter);
 
 	// input grab
-	m_inputgrab = new Checkbox(this, 100, 205);
+	m_inputgrab = new UICheckbox(this, 100, 205);
 	m_inputgrab->set_state(inputgrab);
-	new Textarea(this, 125, 215, "Grab Input", Align_VCenter);
+	new UITextarea(this, 125, 215, "Grab Input", Align_VCenter);
 
 	// In-game resolution
-	new Textarea(this, 100, 255, "In-game resolution", Align_VCenter);
+	new UITextarea(this, 100, 255, "In-game resolution", Align_VCenter);
 
 	int y = 265;
 	int i;
@@ -72,7 +72,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(int cur_x, int cur_y, bool full
 		char buf[16];
 		m_resolution.add_button(this, 100, y);
 		sprintf(buf, "%ix%i", resolutions[i].width, resolutions[i].height);
-		new Textarea(this, 125, y+10, buf, Align_VCenter);
+		new UITextarea(this, 125, y+10, buf, Align_VCenter);
 
 		if (cur_x == resolutions[i].width)
 			m_resolution.set_state(i);
@@ -81,13 +81,13 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(int cur_x, int cur_y, bool full
 		m_resolution.set_state(0);
 
 	// Graphics system
-	new Textarea(this, 400, 255, "Graphics mode", Align_VCenter);
+	new UITextarea(this, 400, 255, "Graphics mode", Align_VCenter);
 
 	m_gfxsys.add_button(this, 400, 265);
-	new Textarea(this, 425, 275, "16 bit software", Align_VCenter);
+	new UITextarea(this, 425, 275, "16 bit software", Align_VCenter);
 
 	m_gfxsys.add_button(this, 400, 290);
-	new Textarea(this, 425, 300, "32 bit software", Align_VCenter);
+	new UITextarea(this, 425, 300, "32 bit software", Align_VCenter);
 
 	m_gfxsys.set_state(Sys_GetGraphicsSystem() - GFXSYS_SW16);
 }

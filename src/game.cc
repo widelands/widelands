@@ -19,7 +19,7 @@
 
 #include "widelands.h"
 #include "graphic.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "game.h"
 #include "map.h"
 #include "cmd_queue.h"
@@ -28,7 +28,7 @@
 #include "worker.h"
 #include "tribe.h"
 #include "player.h"
-#include "ui/ui_fs_menus/fullscreen_menu_launchgame.h"
+#include "fullscreen_menu_launchgame.h"
 #include "IntPlayer.h"
 #include "player.h"
 #include "building.h"

@@ -18,20 +18,15 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
-#include "ui_progressbar.h"
+#include "ui_basic.h"
 
 
 
-/*
-===============
-ProgressBar::ProgressBar
-
+/**
 Initialize the progress bar.
-===============
 */
-ProgressBar::ProgressBar(Panel* parent, int x, int y, int w, int h, uint orientation)
-	: Panel(parent, x, y, w, h)
+UIProgress_Bar::UIProgress_Bar(UIPanel* parent, int x, int y, int w, int h, uint orientation)
+	: UIPanel(parent, x, y, w, h)
 {
 	m_orientation = orientation;
 
@@ -40,14 +35,10 @@ ProgressBar::ProgressBar(Panel* parent, int x, int y, int w, int h, uint orienta
 }
 
 
-/*
-===============
-ProgressBar::set_state
-
+/**
 Set the current state of progress.
-===============
 */
-void ProgressBar::set_state(uint state)
+void UIProgress_Bar::set_state(uint state)
 {
 	m_state = state;
 
@@ -55,14 +46,10 @@ void ProgressBar::set_state(uint state)
 }
 
 
-/*
-===============
-ProgressBar::set_total
-
+/**
 Set the maximum state
-===============
 */
-void ProgressBar::set_total(uint total)
+void UIProgress_Bar::set_total(uint total)
 {
 	m_total = total;
 
@@ -70,14 +57,10 @@ void ProgressBar::set_total(uint total)
 }
 
 
-/*
-===============
-ProgressBar::draw
-
+/**
 Draw the progressbar.
-===============
 */
-void ProgressBar::draw(RenderTarget* dst)
+void UIProgress_Bar::draw(RenderTarget* dst)
 {
 	RGBColor color;
 	float percent = (float)m_state / m_total;

@@ -21,13 +21,13 @@
 #define __S__INTPLAYER_H
 
 #include "game.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "interactive_base.h"
 
 class Player;
 class MiniMap;
 class Map_View;
-class Window;
+class UIWindow;
 class CoordPath;
 
 /** class Interactive_Player
@@ -78,10 +78,10 @@ class Interactive_Player : public Interactive_Base {
 		Game*		m_game;
 		uchar		m_player_number;
 
-		Textarea*	m_label_speed;
+		UITextarea*	m_label_speed;
 
-		UniqueWindowRegistry	m_mainmenu;
-		UniqueWindowRegistry	m_fieldaction;
+		UIUniqueWindowRegistry	m_mainmenu;
+		UIUniqueWindowRegistry	m_fieldaction;
 
 		CoordPath		*m_buildroad; // path for the new road
 };

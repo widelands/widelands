@@ -22,13 +22,13 @@
 #define __S__PANEL_H
 
 /** 
- * Panel is a basic rectangular UI element.
+ * UIPanel is a basic rectangular UI element.
  * The outer rectangle is defined by (_x,_y,_w,_h) and encloses the entire panel,
  * including both border and inner area/rectangle.
  * The inner rectangle is the outer rectangle minus the border sizes.
  * Child panel coordinates are always relative to the inner rectangle.
  */
-class Panel : public UIObject {
+class UIPanel : public UIObject {
 public:
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
@@ -40,10 +40,10 @@ public:
 		pf_can_focus = 64, ///< can receive the keyboard focus
 	};
 
-	Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh);
-	virtual ~Panel();
+	UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, const uint nh);
+	virtual ~UIPanel();
 
-	inline Panel *get_parent() const { return _parent; }
+	inline UIPanel *get_parent() const { return _parent; }
 
 	void free_children();
 
@@ -64,7 +64,7 @@ public:
 	inline int get_h() const { return _h; }
 
 	void set_inner_size(uint nw, uint nh);
-	void fit_inner(Panel* inner);
+	void fit_inner(UIPanel* inner);
 	void set_border(uint l, uint r, uint t, uint b);
 
 	inline uint get_lborder() const { return _lborder; }
@@ -126,17 +126,17 @@ private:
 
 	void do_draw(RenderTarget* dst);
 
-	Panel *get_mousein(int x, int y);
+	UIPanel *get_mousein(int x, int y);
 	void do_mousein(bool inside);
 	bool do_mouseclick(uint btn, bool down, int x, int y);
 	void do_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 	bool do_key(bool down, int code, char c);
 
-	Panel *_parent;
-	Panel *_next, *_prev;
-	Panel *_fchild, *_lchild; // first, last child
-	Panel *_mousein; // child panel the mouse is in
-	Panel *_focus; // keyboard focus
+	UIPanel *_parent;
+	UIPanel *_next, *_prev;
+	UIPanel *_fchild, *_lchild; // first, last child
+	UIPanel *_mousein; // child panel the mouse is in
+	UIPanel *_focus; // keyboard focus
 
 	uint _flags;
 	uint _cache;
@@ -150,14 +150,14 @@ private:
 	int _retcode;
 
 private:
-	static Panel *ui_trackmouse(int *x, int *y);
+	static UIPanel *ui_trackmouse(int *x, int *y);
 	static void ui_mouseclick(bool down, int button, uint btns, int x, int y);
 	static void ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff);
 	static void ui_key(bool down, int code, char c);
 
-	static Panel *_modal;
-	static Panel *_g_mousegrab;
-	static Panel *_g_mousein;
+	static UIPanel *_modal;
+	static UIPanel *_g_mousegrab;
+	static UIPanel *_g_mousein;
 	static uint s_default_cursor;
 };
 

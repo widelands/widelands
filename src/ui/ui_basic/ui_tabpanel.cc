@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 
 #define TP_BUTTON_WIDTH			34
@@ -28,10 +28,10 @@
 
 
 /**
-Initialize an empty TabPanel
+Initialize an empty UITab_Panel
 */
-TabPanel::TabPanel(Panel* parent, int x, int y, uint background)
-	: Panel(parent, x, y, 0, 0)
+UITab_Panel::UITab_Panel(UIPanel* parent, int x, int y, uint background)
+	: UIPanel(parent, x, y, 0, 0)
 {
 	m_active = 0;
 	m_snapparent = false;
@@ -53,7 +53,7 @@ Resize according to number of tabs and the size of the currently visible
 contents.
 Resize the parent if snapparent is enabled.
 */
-void TabPanel::resize()
+void UITab_Panel::resize()
 {
 	int w;
 	int h;
@@ -65,7 +65,7 @@ void TabPanel::resize()
 	// size of contents
 	if (m_active < m_tabs.size())
 		{
-		Panel* panel = m_tabs[m_active].panel;
+		UIPanel* panel = m_tabs[m_active].panel;
 		
 		if (panel->get_w() > w)
 			w = panel->get_w();
@@ -82,10 +82,10 @@ void TabPanel::resize()
 
 /**
 If snapparent is enabled, the parent window will be adjusted to the size of the
-TabPanel whenever the TabPanel's size changes.
+Tab_Panel whenever the UITab_Panel's size changes.
 The default for snapparent behaviour is off.
 */
-void TabPanel::set_snapparent(bool snapparent)
+void UITab_Panel::set_snapparent(bool snapparent)
 {
 	m_snapparent = snapparent;
 }
@@ -94,7 +94,7 @@ void TabPanel::set_snapparent(bool snapparent)
 /**
 Add a new tab
 */	
-uint TabPanel::add(uint picid, Panel* panel)
+uint UITab_Panel::add(uint picid, UIPanel* panel)
 {
 	assert(panel);
 	assert(panel->get_parent() == this);
@@ -118,7 +118,7 @@ uint TabPanel::add(uint picid, Panel* panel)
 /**
 Make a different tab the currently active tab.
 */
-void TabPanel::activate(uint idx)
+void UITab_Panel::activate(uint idx)
 {
 	if (m_active < m_tabs.size())
 		m_tabs[m_active].panel->set_visible(false);
@@ -134,7 +134,7 @@ void TabPanel::activate(uint idx)
 /**
 Draw the buttons and the tab
 */
-void TabPanel::draw(RenderTarget* dst)
+void UITab_Panel::draw(RenderTarget* dst)
 {
 	uint idx;
 	int x;
@@ -188,7 +188,7 @@ void TabPanel::draw(RenderTarget* dst)
 /**
 Cancel all highlights when the mouse leaves the panel
 */
-void TabPanel::handle_mousein(bool inside)
+void UITab_Panel::handle_mousein(bool inside)
 {
 	if (!inside && m_highlight >= 0)
 		{
@@ -202,7 +202,7 @@ void TabPanel::handle_mousein(bool inside)
 /**
 Update highlighting
 */
-void TabPanel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
+void UITab_Panel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 	int hl;
 	
@@ -231,7 +231,7 @@ void TabPanel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 /**
 Change the active tab if a tab button has been clicked
 */
-bool TabPanel::handle_mouseclick(uint btn, bool down, int x, int y)
+bool UITab_Panel::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn == 0) // left mouse button
 		{

@@ -44,10 +44,10 @@ public:
 
 
 private:
-	Checkbox*	m_fullscreen;
-	Checkbox*	m_inputgrab;
-	Radiogroup	m_resolution;
-	Radiogroup	m_gfxsys;
+	UICheckbox*	m_fullscreen;
+	UICheckbox*	m_inputgrab;
+	UIRadiogroup	m_resolution;
+	UIRadiogroup	m_gfxsys;
 
 	struct res {
 		int width;

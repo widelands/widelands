@@ -19,7 +19,7 @@
 
 #include "widelands.h"
 #include "options.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "graphic.h"
 #include "game.h"
 #include "minimap.h"
@@ -39,9 +39,9 @@ GameMainMenu IMPLEMENTATION
 */
 
 // The GameMainMenu is a rather dumb window with lots of buttons
-class GameMainMenu : public UniqueWindow {
+class GameMainMenu : public UIUniqueWindow {
 public:
-	GameMainMenu(Interactive_Player *plr, UniqueWindowRegistry *registry);
+	GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry);
 	virtual ~GameMainMenu();
 
 private:
@@ -55,8 +55,8 @@ GameMainMenu::GameMainMenu
 Create all the buttons etc...
 ===============
 */
-GameMainMenu::GameMainMenu(Interactive_Player *plr, UniqueWindowRegistry *registry)
-	: UniqueWindow(plr, registry, 102, 136, "Menu")
+GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry)
+	: UIUniqueWindow(plr, registry, 102, 136, "Menu")
 {
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -107,28 +107,28 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
 	int y = get_h() - 34;
-	Button *b;
+	UIButton *b;
 
 	// temp (should be toggle messages)
-	b = new Button(this, x, y, 34, 34, 2);
+	b = new UIButton(this, x, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::exit_game_btn);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png", RGBColor(0,0,255)));
 	// temp
 
-	b = new Button(this, x+34, y, 34, 34, 2);
+	b = new UIButton(this, x+34, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::main_menu_btn);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png", RGBColor(0,0,255)));
 
-	b = new Button(this, x+68, y, 34, 34, 2);
+	b = new UIButton(this, x+68, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_minimap);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png", RGBColor(0,0,255)));
 
-	b = new Button(this, x+102, y, 34, 34, 2);
+	b = new UIButton(this, x+102, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", RGBColor(0,0,255)));
 
 	// Speed info
-	m_label_speed = new Textarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
+	m_label_speed = new UITextarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
 }
 
 /*

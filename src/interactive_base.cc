@@ -40,7 +40,7 @@ Initialize
 ===============
 */
 Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
-  Panel(0, 0, 0, get_xres(), get_yres())
+  UIPanel(0, 0, 0, get_xres(), get_yres())
 {
 	// Switch to the new graphics system now, if necessary
    Section *s = g_options.pull_section("global");
@@ -150,7 +150,7 @@ void Interactive_Base::think()
 	g_gr->update_fullscreen();
 
 	// some of the UI windows need to think()
-	Panel::think();
+	UIPanel::think();
 }
 
 

@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_tools.h"
@@ -42,8 +42,8 @@ constructor
 ===========
 */
 Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent,
-													UniqueWindowRegistry* registry, char* title) :
-   UniqueWindow(parent, registry, 100, 100, title)
+													UIUniqueWindowRegistry* registry, char* title) :
+   UIUniqueWindow(parent, registry, 100, 100, title)
 {
    m_parent=parent;
 
@@ -79,7 +79,7 @@ constructor
 ===========
 */
 Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent, 
-      Editor_Increase_Height_Tool* iht, UniqueWindowRegistry* registry) :
+      Editor_Increase_Height_Tool* iht, UIUniqueWindowRegistry* registry) :
    Editor_Tool_Options_Menu(parent, registry, "Height Tools Options") {
 
    m_iht=iht;
@@ -95,32 +95,32 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    int posy=offsy;
    
    set_inner_size(135, 135);
-   Textarea* ta=new Textarea(this, 0, 0, "Height Tool Options", Align_Left); 
+   UITextarea* ta=new UITextarea(this, 0, 0, "Height Tool Options", Align_Left); 
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
-   ta=new Textarea(this, 0, 0, "In/Decrease Value", Align_Left);
+   ta=new UITextarea(this, 0, 0, "In/Decrease Value", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=spacing+width;
-   Button* b=new Button(this, posx, posy, width, height, 1, 0);
+   UIButton* b=new UIButton(this, posx, posy, width, height, 1, 0);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
-   b=new Button(this, get_inner_w()-spacing-width, posy, width, height, 1, 1); 
+   b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 1); 
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
-   m_increase=new Textarea(this, 0, 0, "5", Align_Left);
+   m_increase=new UITextarea(this, 0, 0, "5", Align_Left);
    m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
    posy+=width+spacing+spacing; 
    
-   ta=new Textarea(this, 0, 0, "Set Value", Align_Left);
+   ta=new UITextarea(this, 0, 0, "Set Value", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=width+spacing;
-   b=new Button(this, posx, posy, width, height, 1, 2);
+   b=new UIButton(this, posx, posy, width, height, 1, 2);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
-   b=new Button(this, get_inner_w()-spacing-width, posy, width, height, 1, 3); 
+   b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 3); 
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
-   m_set=new Textarea(this, 0, 0, "5", Align_Left);
+   m_set=new UITextarea(this, 0, 0, "5", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
    posy+=width+spacing; 
    
@@ -193,47 +193,47 @@ Create all the buttons etc...
 ===============
 */
 Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive *parent,
-				Editor_Noise_Height_Tool* nht, UniqueWindowRegistry* registry)
+				Editor_Noise_Height_Tool* nht, UIUniqueWindowRegistry* registry)
    : Editor_Tool_Options_Menu(parent, registry, "Noise Height Options")
 {
    char buf[250];
    sprintf(buf, "Minimum: %i", 10);
-   m_textarea_lower=new Textarea(this, 10, 25, buf);
+   m_textarea_lower=new UITextarea(this, 10, 25, buf);
    sprintf(buf, "Maximum: %i", 10);
-   m_textarea_upper=new Textarea(this, 105, 25, buf);
+   m_textarea_upper=new UITextarea(this, 105, 25, buf);
 
-   Button* b = new Button(this, 30, 40, 20, 20, 0, 0);
+   UIButton* b = new UIButton(this, 30, 40, 20, 20, 0, 0);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b=new Button(this, 50, 40, 20, 20, 0, 1);
+   b=new UIButton(this, 50, 40, 20, 20, 0, 1);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b=new Button(this, 130, 40, 20, 20, 0, 2);
+   b=new UIButton(this, 130, 40, 20, 20, 0, 2);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b=new Button(this, 150, 40, 20, 20, 0, 3);
+   b=new UIButton(this, 150, 40, 20, 20, 0, 3);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
 
    set_inner_size(200, 115);
    
-   Textarea* ta=new Textarea(this, 3, 5, "Noise Height Tool Options", Align_Left);
+   UITextarea* ta=new UITextarea(this, 3, 5, "Noise Height Tool Options", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
    int posy=70;
    int width=20;
    int spacing=5;
    int height=20;
-   ta=new Textarea(this, 0, 0, "Set Value", Align_Left);
+   ta=new UITextarea(this, 0, 0, "Set Value", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=20;
    
-   m_set=new Textarea(this, 0, 0, "99", Align_Left);
+   m_set=new UITextarea(this, 0, 0, "99", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
-   b=new Button(this, m_set->get_x()-width-spacing, posy, width, height, 1, 4);
+   b=new UIButton(this, m_set->get_x()-width-spacing, posy, width, height, 1, 4);
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", RGBColor(0,0,255)));
-   b=new Button(this, m_set->get_x()+m_set->get_w()+spacing, posy, width, height, 1, 5);
+   b=new UIButton(this, m_set->get_x()+m_set->get_w()+spacing, posy, width, height, 1, 5);
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
           
@@ -311,7 +311,7 @@ Create all the buttons etc...
 ===============
 */
 Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent,
-						Editor_Set_Both_Terrain_Tool* sbt, UniqueWindowRegistry *registry)
+						Editor_Set_Both_Terrain_Tool* sbt, UIUniqueWindowRegistry *registry)
 	: Editor_Tool_Options_Menu(parent, registry, "Terrain Select")
 {
    m_sbt=sbt;
@@ -333,7 +333,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    while(i<=nr_textures) {
       if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
 
-      Checkbox* cb=new Checkbox(this, xpos , ypos, g_gr->get_picture(PicMod_Game, get_graphicimpl()->get_maptexture_data(i)->get_texture_picture()));
+      UICheckbox* cb=new UICheckbox(this, xpos , ypos, g_gr->get_picture(PicMod_Game, get_graphicimpl()->get_maptexture_data(i)->get_texture_picture()));
 
       cb->set_size(TEXTURE_W+1, TEXTURE_H+1);
       cb->set_id(i-1);
@@ -346,7 +346,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    }
    ypos+=TEXTURE_H+1+space+5;
 
-   Textarea* ta=new Textarea(this, 0, 5, "Choose Terrain Menu", Align_Left);
+   UITextarea* ta=new UITextarea(this, 0, 5, "Choose Terrain Menu", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
 
@@ -360,7 +360,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
       }
    }
    
-   m_textarea=new Textarea(this, 5, ypos, buf);
+   m_textarea=new UITextarea(this, 5, ypos, buf);
    m_textarea->set_pos((get_inner_w()-m_textarea->get_w())/2, ypos);
 }
 
@@ -405,7 +405,7 @@ constructor
 ===========
 */
 Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive* parent,
-		Editor_Place_Immovable_Tool* pit, UniqueWindowRegistry* registry) :
+		Editor_Place_Immovable_Tool* pit, UIUniqueWindowRegistry* registry) :
    Editor_Tool_Options_Menu(parent, registry, "Immovable Bobs Menu") {
    const int max_items_in_tab=6;
    
@@ -421,9 +421,9 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    if(immovables_in_row>max_items_in_tab) immovables_in_row=max_items_in_tab;
 
 
-   TabPanel* m_tabpanel=new TabPanel(this, 0, 0, 1);
+   UITab_Panel* m_tabpanel=new UITab_Panel(this, 0, 0, 1);
    m_tabpanel->set_snapparent(true);
-   Box* box=new Box(m_tabpanel, 0, 0, Box::Horizontal);
+   UIBox* box=new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
    m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
 
 
@@ -451,12 +451,12 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
          ypos=ystart;
          xpos=xstart;
          box->resize();
-         box=new Box(m_tabpanel, 0, 0, Box::Horizontal);
+         box=new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
          m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
       }
 
 		Immovable_Descr* descr = get_parent()->get_map()->get_world()->get_immovable_descr(i);
-      Checkbox* cb= new Checkbox(box, xpos, ypos,
+      UICheckbox* cb= new UICheckbox(box, xpos, ypos,
             g_gr->get_picture(PicMod_Game, descr->get_picture(), descr->get_default_encodedata().clrkey));
 
       cb->set_size(width, height);

@@ -29,7 +29,7 @@
  * entire text whenever the textarea is drawn, this is a trade-off which greatly
  * simplifies this class.
  */
-class Multiline_Textarea : public Panel {
+class UIMultiline_Textarea : public UIPanel {
    public:
       enum ScrollMode {
          ScrollNormal = 0,    ///< (default) only explicit or forced scrolling
@@ -37,9 +37,9 @@ class Multiline_Textarea : public Panel {
       };
 
    public:
-      Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h, const char *text,
+      UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w, uint h, const char *text,
             Align align = Align_Left);
-      ~Multiline_Textarea();
+      ~UIMultiline_Textarea();
 
       std::string get_text() const { return m_text; }
       ScrollMode get_scrollmode() const { return m_scrollmode; }
@@ -57,7 +57,7 @@ class Multiline_Textarea : public Panel {
    private:
 	Align				m_align;
 	std::string		m_text;
-	Scrollbar*		m_scrollbar;
+   UIScrollbar*		m_scrollbar;
 	ScrollMode     m_scrollmode;
    int				m_textheight;	///< total height of wrapped text, in pixels
 	int				m_textpos;		///< current scrolling position in pixels (0 is top)

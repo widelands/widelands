@@ -20,11 +20,11 @@
 #ifndef __S__FILE_VIEW_SCREEN_H
 #define __S__FILE_VIEW_SCREEN_H
 
-class Panel;
-struct UniqueWindowRegistry;
+class UIPanel;
+struct UIUniqueWindowRegistry;
 
-void fileview_window(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string fname);
-void textview_window(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text);
+void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string fname);
+void textview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text);
 
 #include "fullscreen_menu_base.h"
 
@@ -39,7 +39,7 @@ protected:
    void set_text(std::string text);
 
 private:
-   Multiline_Textarea* mlta;
+   UIMultiline_Textarea* mlta;
 };
 
 /**

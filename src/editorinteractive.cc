@@ -54,25 +54,25 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    // user interface buttons
    int x = (get_w() - (5*34)) >> 1;
    int y = get_h() - 34;
-   Button *b;
+   UIButton *b;
    
-   b = new Button(this, x, y, 34, 34, 2);
+   b = new UIButton(this, x, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_mainmenu);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png", RGBColor(0,0,255)));
 
-   b = new Button(this, x+34, y, 34, 34, 2);
+   b = new UIButton(this, x+34, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::tool_menu_btn);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.png", RGBColor(0,0,255)));
 
-   b = new Button(this, x+68, y, 34, 34, 2);
+   b = new UIButton(this, x+68, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toolsize_menu_btn);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_set_toolsize_menu.png", RGBColor(0,0,255)));
 
-   b = new Button(this, x+102, y, 34, 34, 2);
+   b = new UIButton(this, x+102, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_minimap);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png", RGBColor(0,0,255)));
    
-   b = new Button(this, x+136, y, 34, 34, 2);
+   b = new UIButton(this, x+136, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", RGBColor(0,0,255)));
 

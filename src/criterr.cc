@@ -22,7 +22,7 @@
 #include <stdarg.h>
 
 #include "graphic.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 
 /*
@@ -38,7 +38,7 @@ enum {
 	ce_exit
 };
 
-class Critical_Error : public Panel {
+class Critical_Error : public UIPanel {
 public:
 	Critical_Error(const char *text);
 
@@ -48,20 +48,20 @@ public:
 };
 
 Critical_Error::Critical_Error(const char *text)
-	: Panel(0, 0, 0, g_gr->get_xres(), g_gr->get_yres())
+	: UIPanel(0, 0, 0, g_gr->get_xres(), g_gr->get_yres())
 {
 	// Text
-	new Textarea(this, g_gr->get_xres()/2, 150, "!! CRITICAL ERROR !!", Align_HCenter);
-	new Textarea(this, g_gr->get_xres()/2, 200, text, Align_HCenter);
+	new UITextarea(this, g_gr->get_xres()/2, 150, "!! CRITICAL ERROR !!", Align_HCenter);
+	new UITextarea(this, g_gr->get_xres()/2, 200, text, Align_HCenter);
 
-	// Buttons
-	Button *b;
+	// UIButtons
+	UIButton *b;
 
-	b = new Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-200, 174, 24, 1);
+	b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-200, 174, 24, 1);
 	b->clicked.set(this, &Critical_Error::exit);
 	b->set_title("Exit");
 
-	b = new Button(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-250, 174, 24, 1);
+	b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-250, 174, 24, 1);
 	b->clickedid.set(this, &Critical_Error::end_modal);
 	b->set_title("!! Continue execution !!");
 }

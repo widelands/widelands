@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "fullscreen_menu_base.h"
 #include "fullscreen_menu_mapselect.h"
 #include "map.h"
@@ -41,22 +41,22 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
    m_map = new Map;
    
 	// Text
-	new Textarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
+	new UITextarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
 
-	// Buttons
-	Button* b;
+	// UIButtons
+	UIButton* b;
 
-	b = new Button(this, 410, 356, 174, 24, 0, 0);
+	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_MapSelect::end_modal);
 	b->set_title("Back");
 
-	m_ok = new Button(this, 410, 386, 174, 24, 2, 0);
+	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_MapSelect::ok);
 	m_ok->set_title("OK");
 	m_ok->set_enabled(false);
 
 	// Create the list area
-	list = new Listselect(this, 21, 172, 354, 280);
+	list = new UIListselect(this, 21, 172, 354, 280);
 	list->selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
 
 	// Fill it with the files: Widelands map files
@@ -75,18 +75,18 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
 	}
 
 	// Info fields
-	new Textarea(this, 450, 160, "Name:", Align_Right);
-	taname = new Textarea(this, 460, 160, "");
-	new Textarea(this, 450, 180, "Author:", Align_Right);
-	taauthor = new Textarea(this, 460, 180, "");
-	new Textarea(this, 450, 200, "Size:", Align_Right);
-	tasize = new Textarea(this, 460, 200, "");
-	new Textarea(this, 450, 220, "World:", Align_Right);
-	taworld = new Textarea(this, 460, 220, "");
-	new Textarea(this, 450, 240, "Players:", Align_Right);
-	tanplayers = new Textarea(this, 460, 240, "");
-	new Textarea(this, 450, 260, "Descr:", Align_Right);
-	tadescr = new Multiline_Textarea(this, 460, 260, 160, 80, "");
+	new UITextarea(this, 450, 160, "Name:", Align_Right);
+	taname = new UITextarea(this, 460, 160, "");
+	new UITextarea(this, 450, 180, "Author:", Align_Right);
+	taauthor = new UITextarea(this, 460, 180, "");
+	new UITextarea(this, 450, 200, "Size:", Align_Right);
+	tasize = new UITextarea(this, 460, 200, "");
+	new UITextarea(this, 450, 220, "World:", Align_Right);
+	taworld = new UITextarea(this, 460, 220, "");
+	new UITextarea(this, 450, 240, "Players:", Align_Right);
+	tanplayers = new UITextarea(this, 460, 240, "");
+	new UITextarea(this, 450, 260, "Descr:", Align_Right);
+	tadescr = new UIMultiline_Textarea(this, 460, 260, 160, 80, "");
 }
 
 Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()

@@ -20,14 +20,14 @@
 #ifndef __S__UNIQUE_WINDOW_H
 #define __S__UNIQUE_WINDOW_H
 
-class UniqueWindow;
+class UIUniqueWindow;
 
-struct UniqueWindowRegistry {
-   UniqueWindow*	window;
+struct UIUniqueWindowRegistry {
+   UIUniqueWindow*	window;
    int				x, y;
 
-   inline UniqueWindowRegistry() : window(0), x(-1), y(-1) { }
-   ~UniqueWindowRegistry();
+   inline UIUniqueWindowRegistry() : window(0), x(-1), y(-1) { }
+   ~UIUniqueWindowRegistry();
 };
 
 
@@ -35,15 +35,15 @@ struct UniqueWindowRegistry {
   can only be created once, when it is requested to
   open a second one, it will implicitly kill the old one
   */
-class UniqueWindow : public Window {
+class UIUniqueWindow : public UIWindow {
    public:
-      UniqueWindow(Panel* parent, UniqueWindowRegistry* reg, int w, int h, std::string title);
-      virtual ~UniqueWindow();
+      UIUniqueWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, int w, int h, std::string title);
+      virtual ~UIUniqueWindow();
 
       inline bool get_usedefaultpos() { return m_usedefaultpos; }
 
    private:
-      UniqueWindowRegistry*	m_registry;
+      UIUniqueWindowRegistry*	m_registry;
       bool							m_usedefaultpos;
 };
 

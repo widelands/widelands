@@ -34,8 +34,8 @@ Map_View::Map_View
 Initialize
 ===============
 */
-Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Base *player)
-	: Panel(parent, x, y, w, h)
+Map_View::Map_View(UIPanel *parent, int x, int y, uint w, uint h, Interactive_Base *player)
+	: UIPanel(parent, x, y, w, h)
 {
 	m_intbase = player;
 	m_viewpoint.x = m_viewpoint.y = 0;

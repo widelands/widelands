@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "playerdescrgroup.h"
 #include "fullscreen_menu_base.h"
 #include "game.h"
@@ -40,23 +40,23 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g)
 	m_game = g;
 
 	// Title
-	new Textarea(this, MENU_XRES/2, 140, "Launch game", Align_HCenter);
+	new UITextarea(this, MENU_XRES/2, 140, "Launch game", Align_HCenter);
 
-	// Buttons
-	Button* b;
+	// UIButtons
+	UIButton* b;
 
-	b = new Button(this, 410, 356, 174, 24, 0, 0);
+	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_LaunchGame::end_modal);
 	b->set_title("Back");
 
-	m_ok = new Button(this, 410, 386, 174, 24, 2, 1);
+	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 1);
 	m_ok->clickedid.set(this, &Fullscreen_Menu_LaunchGame::end_modal);
 	m_ok->set_title("Start game");
 	m_ok->set_enabled(false);
 
 	// Map selection fields
-	m_mapname = new Textarea(this, 497, 184, "(no map)", Align_HCenter);
-	b = new Button(this, 410, 200, 174, 24, 1, 0);
+	m_mapname = new UITextarea(this, 497, 184, "(no map)", Align_HCenter);
+	b = new UIButton(this, 410, 200, 174, 24, 1, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::select_map);
 	b->set_title("Select map");
 	

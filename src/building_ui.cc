@@ -36,7 +36,6 @@ class.
 #include "game_debug_ui.h"
 
 #include "building_int.h"
-#include "ui_progressbar.h"
 #include "waresdisplay.h"
 
 
@@ -98,7 +97,7 @@ class BulldozeConfirm
 ---------------------
 Confirm the bulldoze request for a building.
 */
-class BulldozeConfirm : public Window {
+class BulldozeConfirm : public UIWindow {
 public:
 	BulldozeConfirm(Interactive_Player* parent, Building* building, PlayerImmovable* todestroy = 0);
 	virtual ~BulldozeConfirm();
@@ -126,9 +125,9 @@ confirm building destruction when the building's base flag is removed.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm(Interactive_Player* parent, Building* building, PlayerImmovable* todestroy)
-	: Window(parent, 0, 0, 160, 90, "Destroy building?")
+	: UIWindow(parent, 0, 0, 160, 90, "Destroy building?")
 {
-	Button* btn;
+	UIButton* btn;
 	std::string text;
 
 	m_player = parent;
@@ -142,14 +141,14 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Player* parent, Building* building,
 	text = "Do you really want to destroy this ";
 	text += building->get_name();
 	text += "?";
-	new Textarea(this, 0, 0, 160, 44, text, Align_Center, true);
+	new UITextarea(this, 0, 0, 160, 44, text, Align_Center, true);
 
-	btn = new Button(this, 6, 50, 60, 34, 2);
+	btn = new UIButton(this, 6, 50, 60, 34, 2);
 	btn->clicked.set(this, &BulldozeConfirm::bulldoze);
 	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_ok, RGBColor(0,0,255)));
 
-	btn = new Button(this, 94, 50, 60, 34, 2);
-	btn->clicked.set(this, &Panel::die);
+	btn = new UIButton(this, 94, 50, 60, 34, 2);
+	btn->clicked.set(this, &UIPanel::die);
 	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_cancel, RGBColor(0,0,255)));
 
 	btn->center_mouse();
@@ -235,7 +234,7 @@ class WaresQueueDisplay
 This passive class displays the status of a WaresQueue.
 It updates itself automatically through think().
 */
-class WaresQueueDisplay : public Panel {
+class WaresQueueDisplay : public UIPanel {
 public:
 	enum {
 		CellWidth = 24,
@@ -252,7 +251,7 @@ public:
 	};
 
 public:
-	WaresQueueDisplay(Panel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g);
+	WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g);
 	~WaresQueueDisplay();
 
 	virtual void think();
@@ -281,8 +280,8 @@ WaresQueueDisplay::WaresQueueDisplay
 Initialize the panel.
 ===============
 */
-WaresQueueDisplay::WaresQueueDisplay(Panel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g)
-	: Panel(parent, x, y, 0, Height)
+WaresQueueDisplay::WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g)
+	: UIPanel(parent, x, y, 0, Height)
 {
 	Ware_Descr* descr;
 	Item_Ware_Descr* waredescr;
@@ -418,14 +417,14 @@ class Building_Window
 ---------------------
 Baseclass providing common tools for building windows.
 */
-class Building_Window : public Window {
+class Building_Window : public UIWindow {
 public:
 	enum {
 		Width = 136		// 4*34, 4 normally sized buttons
 	};
 
 public:
-	Building_Window(Interactive_Player* parent, Building* building, Window** registry);
+	Building_Window(Interactive_Player* parent, Building* building, UIWindow** registry);
 	virtual ~Building_Window();
 
 	Interactive_Player* get_player() { return m_player; }
@@ -434,7 +433,7 @@ public:
 	virtual void draw(RenderTarget* dst);
 	virtual void think();
 
-	Panel* create_capsbuttons(Panel* parent);
+	UIPanel* create_capsbuttons(UIPanel* parent);
 
 private:
 	void setup_capsbuttons();
@@ -443,11 +442,11 @@ private:
 	void act_debug();
 
 private:
-	Window**					m_registry;
+	UIWindow**				m_registry;
 	Interactive_Player*	m_player;
 	Building*				m_building;
 
-	Panel*	m_capsbuttons;		// Panel that contains capabilities buttons
+	UIPanel*	m_capsbuttons;		// UIPanel that contains capabilities buttons
 	uint		m_capscache;		// capabilities that were last used in setting up the caps panel
 };
 
@@ -459,8 +458,8 @@ Building_Window::Building_Window
 Create the window, add it to the registry.
 ===============
 */
-Building_Window::Building_Window(Interactive_Player* parent, Building* building, Window** registry)
-	: Window(parent, 0, 0, Width, 0, building->get_name())
+Building_Window::Building_Window(Interactive_Player* parent, Building* building, UIWindow** registry)
+	: UIWindow(parent, 0, 0, Width, 0, building->get_name())
 {
 	m_registry = registry;
 	if (*m_registry)
@@ -506,7 +505,7 @@ void Building_Window::draw(RenderTarget* dst)
 	dst->drawanim(get_inner_w() / 2, get_inner_h() / 2, anim, 0, 0);
 
 	// Draw all the panels etc. above the background
-	Window::draw(dst);
+	UIWindow::draw(dst);
 }
 
 
@@ -524,7 +523,7 @@ void Building_Window::think()
 			setup_capsbuttons();
 	}
 
-	Window::think();
+	UIWindow::think();
 }
 
 
@@ -536,12 +535,12 @@ Create the capsbuttons panel with the given parent window, set it up and return
 it.
 ===============
 */
-Panel* Building_Window::create_capsbuttons(Panel* parent)
+UIPanel* Building_Window::create_capsbuttons(UIPanel* parent)
 {
 	if (m_capsbuttons)
 		delete m_capsbuttons;
 
-	m_capsbuttons = new Panel(parent, 0, 0, Width, 34);
+	m_capsbuttons = new UIPanel(parent, 0, 0, Width, 34);
 	setup_capsbuttons();
 
 	return m_capsbuttons;
@@ -567,14 +566,14 @@ void Building_Window::setup_capsbuttons()
 	x = 0;
 
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
-		Button* btn = new Button(m_capsbuttons, x, 0, 34, 34, 2);
+		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
 		btn->clicked.set(this, &Building_Window::act_bulldoze);
 		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_bulldoze, RGBColor(0,0,255)));
 		x += 34;
 	}
 
 	if (m_player->get_display_flag(Interactive_Base::dfDebug)) {
-		Button* btn = new Button(m_capsbuttons, x, 0, 34, 34, 2);
+		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
 		btn->clicked.set(this, &Building_Window::act_debug);
 		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_debug, RGBColor(0,0,255)));
 		x += 34;
@@ -618,7 +617,7 @@ ConstructionSite UI IMPLEMENTATION
 
 class ConstructionSite_Window : public Building_Window {
 public:
-	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, Window** registry);
+	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, UIWindow** registry);
 	virtual ~ConstructionSite_Window();
 
 	ConstructionSite* get_constructionsize() { return (ConstructionSite*)get_building(); }
@@ -626,7 +625,7 @@ public:
 	virtual void think();
 
 private:
-	ProgressBar*	m_progress;
+	UIProgress_Bar*	m_progress;
 };
 
 
@@ -638,16 +637,16 @@ Create the window and its panels
 ===============
 */
 ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs,
-                                                 Window** registry)
+                                                 UIWindow** registry)
 	: Building_Window(parent, cs, registry)
 {
-	Box* box = new Box(this, 0, 0, Box::Vertical);
+	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
 
 	// Add the progress bar
-	m_progress = new ProgressBar(box, 0, 0, ProgressBar::DefaultWidth, ProgressBar::DefaultHeight,
-							ProgressBar::Horizontal);
+	m_progress = new UIProgress_Bar(box, 0, 0, UIProgress_Bar::DefaultWidth, UIProgress_Bar::DefaultHeight,
+							UIProgress_Bar::Horizontal);
 	m_progress->set_total(1 << 16);
-	box->add(m_progress, Box::AlignCenter);
+	box->add(m_progress, UIBox::AlignCenter);
 
 	box->add_space(8);
 
@@ -657,13 +656,13 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
 					cs->get_waresqueue(i), parent->get_game());
 
-		box->add(wqd, Box::AlignLeft);
+		box->add(wqd, UIBox::AlignLeft);
 	}
 
 	box->add_space(8);
 
 	// Add the caps button
-	box->add(create_capsbuttons(box), Box::AlignCenter);
+	box->add(create_capsbuttons(box), UIBox::AlignCenter);
 
 	fit_inner(box);
 }
@@ -703,7 +702,7 @@ ConstructionSite::create_options_window
 Create the status window describing the construction site.
 ===============
 */
-Window *ConstructionSite::create_options_window(Interactive_Player *plr, Window **registry)
+UIWindow *ConstructionSite::create_options_window(Interactive_Player *plr, UIWindow **registry)
 {
 	return new ConstructionSite_Window(plr, this, registry);
 }
@@ -719,7 +718,7 @@ Warehouse UI IMPLEMENTATION
 
 class Warehouse_Window : public Building_Window {
 public:
-	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, Window **registry);
+	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UIWindow **registry);
 	virtual ~Warehouse_Window();
 
 	Warehouse* get_warehouse() { return (Warehouse*)get_building(); }
@@ -737,17 +736,17 @@ Warehouse_Window::Warehouse_Window
 Open the window, create the window buttons and add to the registry.
 ===============
 */
-Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, Window **registry)
+Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UIWindow **registry)
 	: Building_Window(parent, wh, registry)
 {
-	Box* box = new Box(this, 0, 0, Box::Vertical);
+	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
 
 	// Add wares display
 	m_waresdisplay = new WaresDisplay(box, 0, 0, parent->get_game(), parent->get_player());
-	box->add(m_waresdisplay, Box::AlignCenter);
+	box->add(m_waresdisplay, UIBox::AlignCenter);
 
 	// Add caps buttons
-	box->add(create_capsbuttons(box), Box::AlignCenter);
+	box->add(create_capsbuttons(box), UIBox::AlignCenter);
 
 	fit_inner(box);
 }
@@ -785,7 +784,7 @@ Warehouse::create_options_window
 Create the warehouse information window
 ===============
 */
-Window *Warehouse::create_options_window(Interactive_Player *plr, Window **registry)
+UIWindow *Warehouse::create_options_window(Interactive_Player *plr, UIWindow **registry)
 {
 	return new Warehouse_Window(plr, this, registry);
 }
@@ -801,7 +800,7 @@ ProductionSite UI IMPLEMENTATION
 
 class ProductionSite_Window : public Building_Window {
 public:
-	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, Window** registry);
+	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UIWindow** registry);
 	virtual ~ProductionSite_Window();
 
 	inline ProductionSite* get_productionsite() { return (ProductionSite*)get_building(); }
@@ -817,10 +816,10 @@ ProductionSite_Window::ProductionSite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, Window** registry)
+ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UIWindow** registry)
 	: Building_Window(parent, ps, registry)
 {
-	Box* box = new Box(this, 0, 0, Box::Vertical);
+	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
 
 	// Add the wares queue
    std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
@@ -829,13 +828,13 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
 					(*warequeues)[i], parent->get_game());
 
-		box->add(wqd, Box::AlignLeft);
+		box->add(wqd, UIBox::AlignLeft);
 	}
 
 	box->add_space(8);
 
 	// Add caps buttons
-	box->add(create_capsbuttons(box), Box::AlignCenter);
+	box->add(create_capsbuttons(box), UIBox::AlignCenter);
 
 	fit_inner(box);
 }
@@ -873,7 +872,7 @@ ProductionSite::create_options_window
 Create the production site information window.
 ===============
 */
-Window* ProductionSite::create_options_window(Interactive_Player* plr, Window** registry)
+UIWindow* ProductionSite::create_options_window(Interactive_Player* plr, UIWindow** registry)
 {
 	return new ProductionSite_Window(plr, this, registry);
 }
@@ -889,7 +888,7 @@ MilitarySite UI IMPLEMENTATION
 
 class MilitarySite_Window : public ProductionSite_Window {
 public:
-	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, Window** registry);
+	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UIWindow** registry);
 	virtual ~MilitarySite_Window();
 
 	inline MilitarySite* get_militarysite() { return (MilitarySite*)get_building(); }
@@ -905,7 +904,7 @@ MilitarySite_Window::MilitarySite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, Window** registry)
+MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UIWindow** registry)
 	: ProductionSite_Window(parent, ps, registry)
 {
    // TODO
@@ -945,7 +944,7 @@ MilitarySite::create_options_window
 Create the production site information window.
 ===============
 */
-Window* MilitarySite::create_options_window(Interactive_Player* plr, Window** registry)
+UIWindow* MilitarySite::create_options_window(Interactive_Player* plr, UIWindow** registry)
 {
 	return new MilitarySite_Window(plr, this, registry);
 }

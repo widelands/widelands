@@ -22,7 +22,7 @@
 
 class Editor_Interactive;
 #include "map.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "world.h"
 #include <vector>
 

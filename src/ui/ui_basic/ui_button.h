@@ -26,10 +26,10 @@
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
 #define MOUSE_OVER_BRIGHT_FACTOR  15
 
-class Button : public Panel {
+class UIButton : public UIPanel {
 public:
-	Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id = 0, bool flat = false);
-	~Button();
+	UIButton(UIPanel *parent, int x, int y, uint w, uint h, uint background, int id = 0, bool flat = false);
+	~UIButton();
 
 	UISignal clicked;
 	UISignal1<int> clickedid;

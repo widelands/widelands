@@ -16,32 +16,29 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-// you MUST include ui.h before including this
 
 #ifndef included_ui_progressbar_h
 #define included_ui_progressbar_h
 
 
-/*
-class ProgressBar
------------------
+/**
 A very simple panel that displays progress or productivity in percent,
 graphically enhanced with a coloured bar.
 
 The actual state of progress
 */
-class ProgressBar : public Panel {
+class UIProgress_Bar : public UIPanel {
 public:
 	enum {
-		Horizontal = 0,		// from left to right
-		Vertical = 1,			// from bottom to top
+		Horizontal = 0,		///< from left to right
+		Vertical = 1,			///< from bottom to top
 
 		DefaultWidth = 100,
 		DefaultHeight = 24,
 	};
 
 public:
-	ProgressBar(Panel* parent, int x, int y, int w, int h, uint orientation);
+	UIProgress_Bar(UIPanel* parent, int x, int y, int w, int h, uint orientation);
 
 	uint get_state() { return m_state; }
 	void set_state(uint state);
@@ -53,8 +50,8 @@ protected:
 
 private:
 	uint	m_orientation;
-	uint	m_state;				// m_state is [0..m_total]
-	uint	m_total;				// maximum progress
+	uint	m_state;				///< m_state is [0..m_total]
+	uint	m_total;				///< maximum progress
 };
 
 

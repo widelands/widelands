@@ -24,12 +24,12 @@
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
  */
-class Textarea : public Panel {
+class UITextarea : public UIPanel {
 public:
-	Textarea(Panel *parent, int x, int y, std::string text, Align align = Align_Left);
-	Textarea(Panel *parent, int x, int y, int w, int h, std::string text,
+	UITextarea(UIPanel *parent, int x, int y, std::string text, Align align = Align_Left);
+	UITextarea(UIPanel *parent, int x, int y, int w, int h, std::string text,
 			   Align align = Align_Left, bool multiline = false);
-	~Textarea();
+	~UITextarea();
 
 	void set_text(std::string text);
 	void set_align(Align align);

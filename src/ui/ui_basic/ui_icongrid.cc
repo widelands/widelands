@@ -18,15 +18,15 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "ui_icongrid.h"
 
 
 /**
 Initialize the grid
 */
-IconGrid::IconGrid(Panel* parent, int x, int y, int cellw, int cellh, uint flags, int cols)
-	: Panel(parent, x, y, 0, 0)
+UIIcon_Grid::UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, uint flags, int cols)
+	: UIPanel(parent, x, y, 0, 0)
 {
 	m_flags = flags;
 	m_columns = cols;
@@ -46,7 +46,7 @@ IconGrid::IconGrid(Panel* parent, int x, int y, int cellw, int cellh, uint flags
 Add a new icon to the list and resize appropriately.
 Returns the index of the newly added icon.
 */
-int IconGrid::add(uint picid, void* data)
+int UIIcon_Grid::add(uint picid, void* data)
 {
 	Item it;
 
@@ -82,7 +82,7 @@ int IconGrid::add(uint picid, void* data)
 /**
 Returns the user-defined data of the icon with the given index.
 */
-void* IconGrid::get_data(int idx)
+void* UIIcon_Grid::get_data(int idx)
 {
 	assert((uint)idx < m_items.size());
 
@@ -93,7 +93,7 @@ void* IconGrid::get_data(int idx)
 /**
 Set the currently selected icon for persistant grids.
 */
-void IconGrid::set_selection(int idx)
+void UIIcon_Grid::set_selection(int idx)
 {
 	assert(is_persistant());
 	assert((uint)idx < m_items.size());
@@ -109,7 +109,7 @@ void IconGrid::set_selection(int idx)
 /**
 Change the color of the selection box (default is yellow).
 */
-void IconGrid::set_selectbox_color(RGBColor clr)
+void UIIcon_Grid::set_selectbox_color(RGBColor clr)
 {
 	m_selectbox_color = clr;
 }
@@ -118,7 +118,7 @@ void IconGrid::set_selectbox_color(RGBColor clr)
 /**
 Draw the building symbols
 */
-void IconGrid::draw(RenderTarget* dst)
+void UIIcon_Grid::draw(RenderTarget* dst)
 {
 	int x, y;
 
@@ -171,10 +171,10 @@ void IconGrid::draw(RenderTarget* dst)
 
 
 /**
-Return the item index for a given point inside the IconGrid.
+Return the item index for a given point inside the UIIcon_Grid.
 Returns -1 if no item is below the point.
 */
-int IconGrid::index_for_point(int x, int y)
+int UIIcon_Grid::index_for_point(int x, int y)
 {
 	int w = m_cell_width;
 	int h = m_cell_height;
@@ -199,7 +199,7 @@ int IconGrid::index_for_point(int x, int y)
 /**
 Calculate the upper left corner of the cell with the given index.
 */
-void IconGrid::get_cell_position(int idx, int* px, int* py)
+void UIIcon_Grid::get_cell_position(int idx, int* px, int* py)
 {
 	if (get_orientation() == Grid_Horizontal)
 	{
@@ -217,7 +217,7 @@ void IconGrid::get_cell_position(int idx, int* px, int* py)
 /**
 Issue an update() call for the cell with the given idx.
 */
-void IconGrid::update_for_index(int idx)
+void UIIcon_Grid::update_for_index(int idx)
 {
 	if (idx >= 0 && idx < (int)m_items.size()) {
 		int x, y;
@@ -231,7 +231,7 @@ void IconGrid::update_for_index(int idx)
 /**
 Turn highlight off when the mouse leaves the grid
 */
-void IconGrid::handle_mousein(bool inside)
+void UIIcon_Grid::handle_mousein(bool inside)
 {
 	if (!inside) {
 		if (m_highlight != -1)
@@ -245,7 +245,7 @@ void IconGrid::handle_mousein(bool inside)
 /**
 Update highlight under the mouse
 */
-void IconGrid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
+void UIIcon_Grid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 	int hl = index_for_point(x, y);
 
@@ -262,7 +262,7 @@ void IconGrid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 Left mouse down selects the building, left mouse up acknowledges and sends the
 signal.
 */
-bool IconGrid::handle_mouseclick(uint btn, bool down, int x, int y)
+bool UIIcon_Grid::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	int hl;
 

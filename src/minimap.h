@@ -20,7 +20,7 @@
 #ifndef MINIMAP_H
 #define MINIMAP_H
 
-#include "ui.h"
+#include "ui_basic.h"
 
 class Interactive_Base;
 class Player;
@@ -37,9 +37,9 @@ class MiniMapView;
  * once.
  * The minimap always centers around the current viewpoint.
  */
-class MiniMapView : public Panel {
+class MiniMapView : public UIPanel {
 public:
-	MiniMapView(Panel *parent, int x, int y, int w, int h, Interactive_Base *plr);
+	MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactive_Base *plr);
 
 	UISignal2<int,int> warpview;
 
@@ -65,9 +65,9 @@ private:
  * Provide a minimap view (eventually with all sorts of gadgets, e.g.
  * show/hide buildings)
  */
-class MiniMap : public UniqueWindow {
+class MiniMap : public UIUniqueWindow {
 public:
-	MiniMap(Interactive_Base *parent, UniqueWindowRegistry *reg);
+	MiniMap(Interactive_Base *parent, UIUniqueWindowRegistry *reg);
 	~MiniMap();
 
    inline MiniMapView* get_minimapview(void) { return m_view; }

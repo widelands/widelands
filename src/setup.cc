@@ -24,7 +24,7 @@
 #include "widelands.h"
 #include "graphic.h"
 #include "font.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "setup.h"
 
 #ifndef WIN32
@@ -58,7 +58,7 @@ void setup_searchpaths(int argc, char **argv)
 	free(exename);
 
 	// finally, the user's config directory
-	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
+	// TODO: implement this for UIWindows (yes, NT-based ones are actually multi-user)
 #ifndef	WIN32
 	std::string path;
 	char *buf=getenv("HOME");

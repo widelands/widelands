@@ -18,13 +18,13 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 /**
-Initialize a Button
+Initialize a UIButton
 */
-Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id, bool flat)
-	: Panel(parent, x, y, w, h)
+UIButton::UIButton(UIPanel *parent, int x, int y, uint w, uint h, uint background, int id, bool flat)
+	: UIPanel(parent, x, y, w, h)
 {
 	set_think(false);
 
@@ -50,7 +50,7 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 /**
 Free any resources associated with the button
 */
-Button::~Button()
+UIButton::~UIButton()
 {
 	remove_title();
 }
@@ -59,7 +59,7 @@ Button::~Button()
 /**
 Remove any title the button currently carries.
 */
-void Button::remove_title()
+void UIButton::remove_title()
 {
 	m_pic_custom = 0;
 	m_title = "";
@@ -69,7 +69,7 @@ void Button::remove_title()
 /**
 Sets a new picture for the button.
 */
-void Button::set_pic(uint picid)
+void UIButton::set_pic(uint picid)
 {
 	remove_title();
 
@@ -82,7 +82,7 @@ void Button::set_pic(uint picid)
 /**
 Set a text title for the button
 */
-void Button::set_title(const char* title)
+void UIButton::set_title(const char* title)
 {
 	remove_title();
 
@@ -97,7 +97,7 @@ void Button::set_title(const char* title)
 Enable/Disable the button (disabled buttons can't be clicked).
 Buttons are enabled by default
 */
-void Button::set_enabled(bool on)
+void UIButton::set_enabled(bool on)
 {
 	// disabled buttons should look different...
 	if (on)
@@ -114,7 +114,7 @@ void Button::set_enabled(bool on)
 /**
 Redraw the button
 */
-void Button::draw(RenderTarget* dst)
+void UIButton::draw(RenderTarget* dst)
 {
 	// Draw the background
 	if(!m_flat)
@@ -176,7 +176,7 @@ void Button::draw(RenderTarget* dst)
    }
 	else
 	{
-      // Button is flat, do not draw borders, instead, if it is pressed, draw
+      // UIButton is flat, do not draw borders, instead, if it is pressed, draw
       // a box around it
 		if (m_pressed && m_highlighted)
 			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_down);
@@ -187,7 +187,7 @@ void Button::draw(RenderTarget* dst)
 /**
 Update highlighted status
 */
-void Button::handle_mousein(bool inside)
+void UIButton::handle_mousein(bool inside)
 {
 	if (inside && m_enabled)
 		m_highlighted = true;
@@ -200,7 +200,7 @@ void Button::handle_mousein(bool inside)
 /**
 Update the pressed status of the button
 */
-bool Button::handle_mouseclick(uint btn, bool down, int x, int y)
+bool UIButton::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn != 0) // only react on left button
 		return false;

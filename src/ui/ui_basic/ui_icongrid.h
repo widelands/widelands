@@ -29,10 +29,10 @@ Arrangement can be horizontal (pictures fill the grid from left to right, top
 to bottom) or vertical (pictures fill the grid from top to bottom, then left to
 right).
 
-An IconGrid can be persistant, which means that one of the pictures can be
+An UIIcon_Grid can be persistant, which means that one of the pictures can be
 the currently selected picture. This picture is highlighted all the time.
 */
-class IconGrid : public Panel {
+class UIIcon_Grid : public UIPanel {
 public:
 	enum {
 		Grid_Horizontal = 0,
@@ -43,7 +43,7 @@ public:
 	};
 
 public:
-	IconGrid(Panel* parent, int x, int y, int cellw, int cellh, uint flags, int cols);
+	UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, uint flags, int cols);
 
 	UISignal1<int> clicked;
 

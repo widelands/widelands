@@ -18,17 +18,17 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 /**
-Initialize a Textarea. For non-multiline textareas, the dimensions are set
+Initialize a UITextarea. For non-multiline textareas, the dimensions are set
 automatically, depending on the text.
 For multiline textareas, only the height and vertical position is adjusted
-automatically. A multiline Textarea differs from a Multiline_Textarea in that
+automatically. A multiline UITextarea differs from a UIMultiline_Textarea in that
 Multiline_Textarea provides scrollbars.
 */
-Textarea::Textarea(Panel *parent, int x, int y, std::string text, Align align)
-	: Panel(parent, x, y, 0, 0)
+UITextarea::UITextarea(UIPanel *parent, int x, int y, std::string text, Align align)
+	: UIPanel(parent, x, y, 0, 0)
 {
 	set_handle_mouse(false);
 	set_think(false);
@@ -39,8 +39,8 @@ Textarea::Textarea(Panel *parent, int x, int y, std::string text, Align align)
 	set_text(text);
 }
 
-Textarea::Textarea(Panel *parent, int x, int y, int w, int h, std::string text, Align align, bool multiline)
-	: Panel(parent, x, y, w, h)
+UITextarea::UITextarea(UIPanel *parent, int x, int y, int w, int h, std::string text, Align align, bool multiline)
+	: UIPanel(parent, x, y, w, h)
 {
 	set_handle_mouse(false);
 	set_think(false);
@@ -55,15 +55,15 @@ Textarea::Textarea(Panel *parent, int x, int y, int w, int h, std::string text, 
 /**
 Free allocated resources
 */
-Textarea::~Textarea()
+UITextarea::~UITextarea()
 {
 }
 
 
 /**
-Set the text of the Textarea. Size is automatically adjusted
+Set the text of the UITextarea. Size is automatically adjusted
 */
-void Textarea::set_text(std::string text)
+void UITextarea::set_text(std::string text)
 {
 	collapse(); // collapse() implicitly updates
 
@@ -75,7 +75,7 @@ void Textarea::set_text(std::string text)
 /**
 Change the alignment
 */
-void Textarea::set_align(Align align)
+void UITextarea::set_align(Align align)
 {
 	collapse();
 	m_align = align;
@@ -84,9 +84,9 @@ void Textarea::set_align(Align align)
 
 
 /**
-Redraw the Textarea
+Redraw the UITextarea
 */
-void Textarea::draw(RenderTarget* dst)
+void UITextarea::draw(RenderTarget* dst)
 {
 	if (m_text.length())
 		{
@@ -109,9 +109,9 @@ void Textarea::draw(RenderTarget* dst)
 
 
 /**
-Reduce the Textarea to size 0x0 without messing up the alignment
+Reduce the UITextarea to size 0x0 without messing up the alignment
 */
-void Textarea::collapse()
+void UITextarea::collapse()
 {
 	int x = get_x();
 	int y = get_y();
@@ -137,9 +137,9 @@ void Textarea::collapse()
 
 
 /**
-Expand the size of the Textarea until it fits the size of the text
+Expand the size of the UITextarea until it fits the size of the text
 */
-void Textarea::expand()
+void UITextarea::expand()
 {
 	if (!m_text.length())
 		return;

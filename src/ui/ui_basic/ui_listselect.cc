@@ -18,20 +18,20 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 /**
 Initialize a list select panel
 
 Args: parent	parent panel
-      x		coordinates of the Listselect
+      x		coordinates of the UIListselect
       y
-      w		dimensions, in pixels, of the Listselect
+      w		dimensions, in pixels, of the UIListselect
       h
-      align	alignment of text inside the Listselect
+      align	alignment of text inside the UIListselect
 */
-Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align)
-	: Panel(parent, x, y, w-24, h)
+UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align)
+	: UIPanel(parent, x, y, w-24, h)
 {
 	set_think(false);
 
@@ -40,8 +40,8 @@ Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align)
 	m_scrollpos = 0;
 	m_selection = -1;
 
-	m_scrollbar = new Scrollbar(parent, x+get_w(), y, 24, h, false);
-	m_scrollbar->moved.set(this, &Listselect::set_scrollpos);
+	m_scrollbar = new UIScrollbar(parent, x+get_w(), y, 24, h, false);
+	m_scrollbar->moved.set(this, &UIListselect::set_scrollpos);
 
 	m_scrollbar->set_pagesize(h - 2*g_font->get_fontheight());
 	m_scrollbar->set_steps(1);
@@ -51,7 +51,7 @@ Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align)
 /**
 Free allocated resources
 */
-Listselect::~Listselect()
+UIListselect::~UIListselect()
 {
 	m_scrollbar = 0;
 	clear();
@@ -61,7 +61,7 @@ Listselect::~Listselect()
 /**
 Remove all entries from the listselect
 */
-void Listselect::clear()
+void UIListselect::clear()
 {
 	for(uint i = 0; i < m_entries.size(); i++)
 		free(m_entries[i]);
@@ -80,7 +80,7 @@ Add a new entry to the listselect.
 Args: name	name that will be displayed
       value	value returned by get_select()
 */
-void Listselect::add_entry(const char *name, void* value)
+void UIListselect::add_entry(const char *name, void* value)
 {
 	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(name));
 
@@ -98,7 +98,7 @@ void Listselect::add_entry(const char *name, void* value)
 /**
 Set the list alignment (only horizontal alignment works)
 */
-void Listselect::set_align(Align align)
+void UIListselect::set_align(Align align)
 {
 	m_align = (Align)(align & Align_Horizontal);
 }
@@ -107,7 +107,7 @@ void Listselect::set_align(Align align)
 /**
 Scroll to the given position, in pixels.
 */
-void Listselect::set_scrollpos(int i)
+void UIListselect::set_scrollpos(int i)
 {
 	m_scrollpos = i;
 
@@ -121,7 +121,7 @@ void Listselect::set_scrollpos(int i)
  *
  * Args: i	the entry to select
  */
-void Listselect::select(int i)
+void UIListselect::select(int i)
 {
 	if (m_selection == i)
 		return;
@@ -136,7 +136,7 @@ void Listselect::select(int i)
 /**
 Return the total height (text + spacing) occupied by a single line
 */
-int Listselect::get_lineheight()
+int UIListselect::get_lineheight()
 {
 	return g_font->get_fontheight() + 2;
 }
@@ -145,7 +145,7 @@ int Listselect::get_lineheight()
 /**
 Redraw the listselect box
 */
-void Listselect::draw(RenderTarget* dst)
+void UIListselect::draw(RenderTarget* dst)
 {
 	// draw text lines
 	int lineheight = get_lineheight();
@@ -183,7 +183,7 @@ void Listselect::draw(RenderTarget* dst)
 /** 
  * Handle mouse clicks: select the appropriate entry
  */
-bool Listselect::handle_mouseclick(uint btn, bool down, int x, int y)
+bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn != 0) // only left-click
 		return false;

@@ -22,7 +22,7 @@
 #include "player.h"
 #include "ware.h"
 
-#include "ui.h"
+#include "ui_basic.h"
 #include "waresdisplay.h"
 
 
@@ -43,8 +43,8 @@ WaresDisplay::WaresDisplay
 Initialize the wares display
 ===============
 */
-WaresDisplay::WaresDisplay(Panel* parent, int x, int y, Editor_Game_Base* game, Player* player)
-	: Panel(parent, x, y, Width, 0)
+WaresDisplay::WaresDisplay(UIPanel* parent, int x, int y, Editor_Game_Base* game, Player* player)
+	: UIPanel(parent, x, y, Width, 0)
 {
 	int rows, height;
 

@@ -18,13 +18,13 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/* class Window
+/* class UIWindow
  *
  * The graphics (see pictures) are used in the following manner: (Example)
  *
@@ -50,8 +50,8 @@
  *       h
  *       title	string to display in the window title
  */
-Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
-	: Panel(parent, x, y, w+WINDOW_BORDER*2, h+WINDOW_BORDER*2)
+UIWindow::UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *title)
+	: UIPanel(parent, x, y, w+WINDOW_BORDER*2, h+WINDOW_BORDER*2)
 {
 	_dragging = false;
 
@@ -73,7 +73,7 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
  *
  * Resource cleanup
  */
-Window::~Window()
+UIWindow::~UIWindow()
 {
 }
 
@@ -81,7 +81,7 @@ Window::~Window()
 /**
  * Replace the current title with a new one
 */
-void Window::set_title(const char *text)
+void UIWindow::set_title(const char *text)
 {
 	m_title = text;
 	update(0, 0, get_w(), WINDOW_BORDER);
@@ -91,14 +91,14 @@ void Window::set_title(const char *text)
 Move the window so that it is under the mouse cursor.
 Ensure that the window doesn't move out of the screen.
 */
-void Window::move_to_mouse()
+void UIWindow::move_to_mouse()
 {
 	int px, py;
 
 	px = get_mouse_x() - get_w()/2;
 	py = get_mouse_y() - get_h()/2;
 
-	Panel *parent = get_parent();
+	UIPanel *parent = get_parent();
 	if (parent) {
 		if (px < 0)
 			px = 0;
@@ -118,9 +118,9 @@ void Window::move_to_mouse()
 /**
 Move the window so that it is centered wrt the parent.
 */
-void Window::center_to_parent()
+void UIWindow::center_to_parent()
 {
-	Panel* parent = get_parent();
+	UIPanel* parent = get_parent();
 
 	assert(parent);
 
@@ -131,7 +131,7 @@ void Window::center_to_parent()
 /**
 Redraw the window frame and background
 */
-void Window::draw_border(RenderTarget* dst)
+void UIWindow::draw_border(RenderTarget* dst)
 {
 	int px, py;
 
@@ -188,7 +188,7 @@ void Window::draw_border(RenderTarget* dst)
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool Window::handle_mouseclick(uint btn, bool down, int mx, int my)
+bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
 {
 	if (btn == MOUSE_LEFT)
 	{
@@ -210,7 +210,7 @@ bool Window::handle_mouseclick(uint btn, bool down, int mx, int my)
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
-void Window::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
+void UIWindow::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
 {
 	if (_dragging)
 	{

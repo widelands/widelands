@@ -72,8 +72,8 @@ class Editor_Interactive : public Interactive_Base {
 
       // UI ownings
       Editor* m_editor;
-      UniqueWindowRegistry m_toolmenu;
-      UniqueWindowRegistry m_toolsizemenu;
-      UniqueWindowRegistry m_mainmenu;
+      UIUniqueWindowRegistry m_toolmenu;
+      UIUniqueWindowRegistry m_toolsizemenu;
+      UIUniqueWindowRegistry m_mainmenu;
 };
 #endif // __S__EDITOR_H

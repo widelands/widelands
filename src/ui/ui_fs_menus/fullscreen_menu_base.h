@@ -20,7 +20,7 @@
 #ifndef __S__MENUECOMMON_H
 #define __S__MENUECOMMON_H
 
-#include "ui.h"
+#include "ui_basic.h"
 
 #define MENU_XRES	640   ///< Fullscreen Menu Width
 #define MENU_YRES	480   ///< Fullscreen Menu Height
@@ -31,7 +31,7 @@
  * A fullscreen menu is a menu which takes the full screen; it has the size
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
-class Fullscreen_Menu_Base : public Panel {
+class Fullscreen_Menu_Base : public UIPanel {
 	uint	m_pic_background;
 	
 public:

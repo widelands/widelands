@@ -19,7 +19,7 @@
 
 #include "widelands.h"
 #include "graphic.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "fullscreen_menu_base.h"
 #include "fullscreen_menu_singleplayer.h"
 
@@ -28,24 +28,24 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	: Fullscreen_Menu_Base("singleplmenu.jpg")
 {
 	// Text
-	new Textarea(this, MENU_XRES/2, 140, "Single Player Menu", Align_HCenter);
+	new UITextarea(this, MENU_XRES/2, 140, "Single Player Menu", Align_HCenter);
 
-	// Buttons
-	Button* b;
+	// UIButtons
+	UIButton* b;
 
-	b = new Button(this, 60, 170, 174, 24, 1, sp_skirmish);
+	b = new UIButton(this, 60, 170, 174, 24, 1, sp_skirmish);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title("Single Map");
 
-	b = new Button(this, 60, 210, 174, 24, 1);
+	b = new UIButton(this, 60, 210, 174, 24, 1);
 	b->clicked.set(this, &Fullscreen_Menu_SinglePlayer::not_supported);
 	b->set_title("Campaign");
 
-	b = new Button(this, 60, 250, 174, 24, 1);
+	b = new UIButton(this, 60, 250, 174, 24, 1);
 	b->clicked.set(this, &Fullscreen_Menu_SinglePlayer::not_supported);
 	b->set_title("Load Game");
 
-	b = new Button(this, 60, 370, 174, 24, 0, sp_back);
+	b = new UIButton(this, 60, 370, 174, 24, 0, sp_back);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title("Back");
 }

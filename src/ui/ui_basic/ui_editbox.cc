@@ -17,12 +17,12 @@
  *
  */
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 /*
 =================================================
 
-class Edit_Box
+class UIEdit_Box
 
 =================================================
 */
@@ -30,8 +30,8 @@ class Edit_Box
 /**
 constructor
 */
-Edit_Box::Edit_Box(Panel* parent, int x, int y, uint w, uint h, uint background, int id) :
-   Button(parent, x, y, w, h, background, id) {
+UIEdit_Box::UIEdit_Box(UIPanel* parent, int x, int y, uint w, uint h, uint background, int id) :
+   UIButton(parent, x, y, w, h, background, id) {
    
    set_think(false);
 
@@ -49,7 +49,7 @@ Edit_Box::Edit_Box(Panel* parent, int x, int y, uint w, uint h, uint background,
 /**
 destructor
 */
-Edit_Box::~Edit_Box(void) {
+UIEdit_Box::~UIEdit_Box(void) {
    grab_mouse(false);
    set_can_focus(false);
 }
@@ -57,13 +57,13 @@ Edit_Box::~Edit_Box(void) {
 /**
 the mouse was clicked on this editbox
 */
-bool Edit_Box::handle_mouseclick(uint btn, bool down, int x, int y) {
+bool UIEdit_Box::handle_mouseclick(uint btn, bool down, int x, int y) {
    if(btn!=0) return false;
    
    if(down && !m_keyboard_grabbed) {
       set_can_focus(true);
       grab_mouse(true);
-      Button::handle_mouseclick(btn, down, x, y);
+      UIButton::handle_mouseclick(btn, down, x, y);
       focus();
       m_keyboard_grabbed=true;
       m_lasttext=m_text;
@@ -76,12 +76,12 @@ bool Edit_Box::handle_mouseclick(uint btn, bool down, int x, int y) {
 /**
 a key event must be handled
 */
-bool Edit_Box::handle_key(bool down, int code, char c) {
+bool UIEdit_Box::handle_key(bool down, int code, char c) {
    if(down) {
       switch(code) {
          case KEY_ESCAPE: 
             set_text(m_lasttext.c_str()); 
-            Button::handle_mouseclick(0, false, 0, 0); 
+            UIButton::handle_mouseclick(0, false, 0, 0); 
             set_can_focus(false);
             m_keyboard_grabbed=false;
             grab_mouse(false);
@@ -89,7 +89,7 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
 
          case KEY_RETURN: 
             m_lasttext=m_text;
-            Button::handle_mouseclick(0, false, 0, 0);
+            UIButton::handle_mouseclick(0, false, 0, 0);
             set_can_focus(false);
             m_keyboard_grabbed=false;
             grab_mouse(false);
@@ -120,16 +120,16 @@ handles the mousemove for this panel.
 does not much, suppresses messages when the focus
 is received
 */
-void Edit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns) {
+void UIEdit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns) {
    if(m_keyboard_grabbed) return;
-   else Button::handle_mousemove(x,y,xdiff,ydiff,btns);
+   else UIButton::handle_mousemove(x,y,xdiff,ydiff,btns);
 }
 
 /**
 Handles mouseins or rather mouse outs. 
 Hides a mouseout event from the underlying button
 */
-void Edit_Box::handle_mousein(bool inside) {
+void UIEdit_Box::handle_mousein(bool inside) {
    if(m_keyboard_grabbed) return;
-   Button::handle_mousein(inside);
+   UIButton::handle_mousein(inside);
 }

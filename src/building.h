@@ -86,7 +86,7 @@ public:
 	                                       const EncodeData *encdata);
 };
 
-class Window;
+class UIWindow;
 
 class Building : public PlayerImmovable {
 	friend class Building_Descr;
@@ -140,10 +140,10 @@ protected:
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 	void draw_help(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
-	virtual Window *create_options_window(Interactive_Player *plr, Window **registry) = 0;
+	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry) = 0;
 
 protected:
-	Window		*m_optionswindow;
+	UIWindow		*m_optionswindow;
 	Coords		m_position;
 	Flag			*m_flag;
 
@@ -211,7 +211,7 @@ public:
 	void incorporate_item(Game* g, WareInstance* item);
 
 protected:
-	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
+	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
 
 private:
 	WarehouseSupply*	m_supply;

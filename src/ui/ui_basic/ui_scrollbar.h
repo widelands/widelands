@@ -20,11 +20,11 @@
 #ifndef __S__SCROLLBAR_H
 #define __S__SCROLLBAR_H
 
-/** class Scrollbar
+/** class UIScrollbar
  *
  * This class provides a scrollbar
  */
-class Scrollbar : public Panel {
+class UIScrollbar : public UIPanel {
 public:
 	enum Area {
 		None,
@@ -40,7 +40,7 @@ public:
 	};
 
 public:
-	Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz);
+	UIScrollbar(UIPanel *parent, int x, int y, uint w, uint h, bool horiz);
 
 	UISignal1<int> moved;
 

@@ -32,7 +32,7 @@ class WaresDisplay
 ------------------
 Panel that displays the contents of a WareList.
 */
-class WaresDisplay : public Panel {
+class WaresDisplay : public UIPanel {
 public:
 	enum {
 		Width = 136,	// 5*24 (5 wares icons) + space in between
@@ -41,7 +41,7 @@ public:
 	};
 
 public:
-	WaresDisplay(Panel* parent, int x, int y, Editor_Game_Base* game, Player* player);
+	WaresDisplay(UIPanel* parent, int x, int y, Editor_Game_Base* game, Player* player);
 	virtual ~WaresDisplay();
 
 	void set_wares(const WareList& wares);

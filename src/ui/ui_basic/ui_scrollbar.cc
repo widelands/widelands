@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 
 #define SCROLLBAR_AUTOREPEAT_DELAY	200
@@ -36,8 +36,8 @@ Scrollbar
 /**
 Initialize the scrollbar using default values.
 */
-Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
-	: Panel(parent, x, y, w, h)
+UIScrollbar::UIScrollbar(UIPanel *parent, int x, int y, uint w, uint h, bool horiz)
+	: UIPanel(parent, x, y, w, h)
 {
 	m_horizontal = horiz;
 
@@ -70,7 +70,7 @@ Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
 /**
 Change the number of steps of the scrollbar.
 */
-void Scrollbar::set_steps(int steps)
+void UIScrollbar::set_steps(int steps)
 {
 	if (steps < 1)
 		steps = 1;
@@ -87,7 +87,7 @@ void Scrollbar::set_steps(int steps)
 /**
 Change the number of steps a pageup/down will scroll.
 */
-void Scrollbar::set_pagesize(int pagesize)
+void UIScrollbar::set_pagesize(int pagesize)
 {
 	if (pagesize < 1)
 		pagesize = 1;
@@ -99,7 +99,7 @@ void Scrollbar::set_pagesize(int pagesize)
 /**
 Change the current scrolling position.
 */
-void Scrollbar::set_pos(int pos)
+void UIScrollbar::set_pos(int pos)
 {
 	if (pos < 0)
 		pos = 0;
@@ -119,7 +119,7 @@ void Scrollbar::set_pos(int pos)
 /**
 Scrollbar::get_area_for_point
 */
-Scrollbar::Area Scrollbar::get_area_for_point(int x, int y)
+UIScrollbar::Area UIScrollbar::get_area_for_point(int x, int y)
 {
 	int extent;
 	int knob;
@@ -161,7 +161,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int x, int y)
 /**
 Return the center of the knob, in pixels, depending on the current position.
 */
-int Scrollbar::get_knob_pos()
+int UIScrollbar::get_knob_pos()
 {
 	int extent;
 
@@ -179,7 +179,7 @@ int Scrollbar::get_knob_pos()
 /**
 Change the position according to knob movement.
 */
-void Scrollbar::set_knob_pos(int pos)
+void UIScrollbar::set_knob_pos(int pos)
 {
 	int extent;
 
@@ -199,7 +199,7 @@ void Scrollbar::set_knob_pos(int pos)
 /**
 Perform the action for klicking on the given area.
 */
-void Scrollbar::action(Area area)
+void UIScrollbar::action(Area area)
 {
 	int diff;
 	int pos;
@@ -217,7 +217,7 @@ void Scrollbar::action(Area area)
 }
 
 
-void Scrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h)
+void UIScrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h)
 {
 	uint pic;
 
@@ -270,7 +270,7 @@ void Scrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, i
 }
 
 
-void Scrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h)
+void UIScrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h)
 {
 	dst->tile(x, y, w, h, m_pic_background, get_x()+x, get_y()+y);
 
@@ -282,7 +282,7 @@ void Scrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, int
 /**
 Draw the scrollbar.
 */
-void Scrollbar::draw(RenderTarget* dst)
+void UIScrollbar::draw(RenderTarget* dst)
 {
 	uint knobpos = get_knob_pos();
 
@@ -310,9 +310,9 @@ void Scrollbar::draw(RenderTarget* dst)
 /**
 Check for possible auto-repeat scrolling.
 */
-void Scrollbar::think()
+void UIScrollbar::think()
 {
-	Panel::think();
+	UIPanel::think();
 
 	if (m_pressed == None || m_pressed == Knob)
 		return;
@@ -329,7 +329,7 @@ void Scrollbar::think()
 }
 
 
-bool Scrollbar::handle_mouseclick(uint btn, bool down, int x, int y)
+bool UIScrollbar::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn != 0) // only react on left button
 		return false;
@@ -370,7 +370,7 @@ bool Scrollbar::handle_mouseclick(uint btn, bool down, int x, int y)
 /**
 Move the knob while pressed.
 */
-void Scrollbar::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
+void UIScrollbar::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
 {
 	if (m_pressed == Knob)
 	{

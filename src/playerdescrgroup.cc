@@ -19,7 +19,7 @@
 
 #include "widelands.h"
 #include "graphic.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "fullscreen_menu_base.h"
 #include "game.h"
 #include "fullscreen_menu_mapselect.h"
@@ -81,8 +81,8 @@ uchar g_playercolors[MAX_PLAYERS][12] = {
 };
 
 
-PlayerDescriptionGroup::PlayerDescriptionGroup(Panel* parent, int x, int y, Game* game, int plnum)
-	: Panel(parent, x, y, 300, 20)
+PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum)
+	: UIPanel(parent, x, y, 300, 20)
 {
 	m_game = game;
 	m_plnum = plnum;
@@ -91,11 +91,11 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(Panel* parent, int x, int y, Game
 	set_visible(false);
 
 	// create sub-panels
-	m_btnEnablePlayer = new Checkbox(this, 0, 0);
+	m_btnEnablePlayer = new UICheckbox(this, 0, 0);
 	m_btnEnablePlayer->set_state(true);
 	m_btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
 	
-	m_btnPlayerType = new Button(this, 28, 0, 174, 20, 1);
+	m_btnPlayerType = new UIButton(this, 28, 0, 174, 20, 1);
 	m_btnPlayerType->clicked.set(this, &PlayerDescriptionGroup::toggle_playertype);
 	if (plnum==1)
 		m_playertype = Player::playerLocal;

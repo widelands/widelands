@@ -19,7 +19,7 @@
 
 #include <vector>
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "game.h"
 #include "map.h"
 #include "mapview.h"
@@ -35,7 +35,7 @@ WatchWindow
 ==============================================================================
 */
 
-class WatchWindow : public Window {
+class WatchWindow : public UIWindow {
 public:
 	WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords);
 
@@ -65,9 +65,9 @@ Initialize a watch window.
 ===============
 */
 WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords)
-	: Window(parent, x, y, w, h, "Watch")
+	: UIWindow(parent, x, y, w, h, "Watch")
 {
-	Button* btn;
+	UIButton* btn;
 
 	m_game = parent->get_game();
 
@@ -77,12 +77,12 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 
 	warp_mainview.set(parent, &Interactive_Base::move_view_to_point);
 
-	// Buttons
-	btn = new Button(this, 0, h - 34, 34, 34, 0);
+	// UIButtons
+	btn = new UIButton(this, 0, h - 34, 34, 34, 0);
 	btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png", RGBColor(0,0,255)));
 	btn->clicked.set(this, &WatchWindow::toggle_tracking);
 
-	btn = new Button(this, 34, h - 34, 34, 34, 0);
+	btn = new UIButton(this, 34, h - 34, 34, 34, 0);
 	btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_goto.png", RGBColor(0,0,255)));
 	btn->clicked.set(this, &WatchWindow::act_mainview_goto);
 
@@ -193,7 +193,7 @@ Update the mapview if we're tracking something.
 */
 void WatchWindow::think()
 {
-	Window::think();
+	UIWindow::think();
 
 	Map_Object* obj = m_tracking.get(m_game);
 

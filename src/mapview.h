@@ -21,7 +21,7 @@
 #define __S__MAPVIEW_H
 
 #include "graphic.h"
-#include "ui.h"
+#include "ui_basic.h"
 
 class Interactive_Base;
 class Game;
@@ -35,9 +35,9 @@ class Map;
  * Depends: class Map
  * 			g_gr
  */
-class Map_View : public Panel {
+class Map_View : public UIPanel {
 public:
-	Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Base *);
+	Map_View(UIPanel *parent, int x, int y, uint w, uint h, Interactive_Base *);
 	~Map_View();
 
 	UISignal2<int,int> warpview; // x/y in screen coordinates

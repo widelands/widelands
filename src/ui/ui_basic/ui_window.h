@@ -22,7 +22,7 @@
 
 /** 
  *
- * Windows are cached by default.
+ * UIWindows are cached by default.
  *
  * The graphics (see m_pic_*) are used in the following manner: (Example)
  *
@@ -46,10 +46,10 @@
 #define WINDOW_BORDER	20
 #define WINDOW_CLRKEY RGBColor(0, 0, 255)
 
-class Window : public Panel {
+class UIWindow : public UIPanel {
 public:
-	Window(Panel *parent, int x, int y, uint w, uint h, const char *title);
-	~Window();
+	UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *title);
+	~UIWindow();
 
 	void set_title(const char *text);
 

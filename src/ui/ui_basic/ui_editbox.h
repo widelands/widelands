@@ -29,10 +29,10 @@ it's text (title). When return is pressed, the
 editbox is unfocused, the keyboard released and
 a callback function is called
 */
-class Edit_Box : private Button {
+class UIEdit_Box : private UIButton {
    public:
-     Edit_Box(Panel *parent, int x, int y, uint w, uint h, uint background, int id);
-     virtual ~Edit_Box();
+     UIEdit_Box(UIPanel *parent, int x, int y, uint w, uint h, uint background, int id);
+     virtual ~UIEdit_Box();
 
      UISignal changed;
      UISignal1<int> changedid;

@@ -23,23 +23,23 @@
 
 /**
 Provides a tab view; every tab is a panel that can contain any number of
-sub-panels (such as buttons, other TabPanels, etc..) and an associated
+sub-panels (such as buttons, other UITab_Panels, etc..) and an associated
 picture.
 The picture is displayed as a button the user can click to bring the panel
 to the top.
 
-The Panels you add() to the TabPanel must be children of the TabPanel.
+The UIPanels you add() to the UITab_Panel must be children of the UITab_Panel.
 */
-class TabPanel : public Panel {
+class UITab_Panel : public UIPanel {
 public:
-	TabPanel(Panel* parent, int x, int y, uint background);
+	UITab_Panel(UIPanel* parent, int x, int y, uint background);
 
 	void resize();
 	
 	void set_snapparent(bool snapparent);
 	bool get_snapparent() const { return m_snapparent; }
 	
-	uint add(uint picid, Panel* panel);
+	uint add(uint picid, UIPanel* panel);
 	
 	void activate(uint idx);
 	
@@ -53,7 +53,7 @@ private:
 	
 	struct Tab {
 		uint		picid;
-		Panel*	panel;
+		UIPanel*	panel;
 	};
 	
 	std::vector<Tab>	m_tabs;

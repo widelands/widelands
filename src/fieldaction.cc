@@ -18,7 +18,7 @@
  */
 
 #include "widelands.h"
-#include "ui.h"
+#include "ui_basic.h"
 #include "game.h"
 #include "map.h"
 #include "IntPlayer.h"
@@ -42,9 +42,9 @@ BuildGrid IMPLEMENTATION
 
 
 // The BuildGrid presents a selection of buildable buildings
-class BuildGrid : public IconGrid {
+class BuildGrid : public UIIcon_Grid {
 public:
-	BuildGrid(Panel* parent, Tribe_Descr* tribe, int x, int y, int cols);
+	BuildGrid(UIPanel* parent, Tribe_Descr* tribe, int x, int y, int cols);
 
 	UISignal1<int> buildclicked;
 
@@ -65,8 +65,8 @@ BuildGrid::BuildGrid
 Initialize the grid
 ===============
 */
-BuildGrid::BuildGrid(Panel* parent, Tribe_Descr* tribe, int x, int y, int cols)
-	: IconGrid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols)
+BuildGrid::BuildGrid(UIPanel* parent, Tribe_Descr* tribe, int x, int y, int cols)
+	: UIIcon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols)
 {
 	m_tribe = tribe;
 
@@ -86,7 +86,7 @@ void BuildGrid::add(int id)
 	Building_Descr* descr = m_tribe->get_building_descr(id);
 	uint picid = descr->get_buildicon();
 
-	IconGrid::add(picid, (void*)id);
+	UIIcon_Grid::add(picid, (void*)id);
 }
 
 
@@ -114,9 +114,9 @@ FieldActionWindow IMPLEMENTATION
 
 ==============================================================================
 */
-class FieldActionWindow : public UniqueWindow {
+class FieldActionWindow : public UIUniqueWindow {
 public:
-	FieldActionWindow(Interactive_Player *plr, UniqueWindowRegistry *registry);
+	FieldActionWindow(Interactive_Player *plr, UIUniqueWindowRegistry *registry);
 	~FieldActionWindow();
 
 	void init();
@@ -137,8 +137,8 @@ public:
 	void act_build(int idx);
 
 private:
-   void add_tab(const char* picname, Panel* panel);
-   void add_button(Box* box, const char* picname, void (FieldActionWindow::*fn)());
+   void add_tab(const char* picname, UIPanel* panel);
+   void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
 	void okdialog();
 
 	Interactive_Player	*m_player;
@@ -146,7 +146,7 @@ private:
 
 	FCoords		m_field;
 
-	TabPanel*	m_tabpanel;
+	UITab_Panel*	m_tabpanel;
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
 };
 
@@ -177,8 +177,8 @@ FieldActionWindow::FieldActionWindow
 Initialize a field action window, creating the appropriate buttons.
 ===============
 */
-FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindowRegistry *registry)
-	: UniqueWindow(plr, registry, 68, 34, "Action")
+FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UIUniqueWindowRegistry *registry)
+	: UIUniqueWindow(plr, registry, 68, 34, "Action")
 {
 	// Hooks into the game classes
 	m_player = plr;
@@ -190,7 +190,7 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindowRegist
 	m_player->set_fieldsel_freeze(true);
 
 	//
-	m_tabpanel = new TabPanel(this, 0, 0, 1);
+	m_tabpanel = new UITab_Panel(this, 0, 0, 1);
 	m_tabpanel->set_snapparent(true);
 
 	m_fastclick = true;
@@ -221,7 +221,7 @@ void FieldActionWindow::init()
 {
 	m_tabpanel->resize();
 
-	center_to_parent(); // override UniqueWindow position
+	center_to_parent(); // override UIUniqueWindow position
 
 	// Move the window away from the current mouse position, i.e.
 	// where the field is, to allow better view
@@ -251,10 +251,10 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto()
 {
-	Box* buildbox = 0;
-	Box* watchbox;
+	UIBox* buildbox = 0;
+	UIBox* watchbox;
 
-	watchbox = new Box(m_tabpanel, 0, 0, Box::Horizontal);
+	watchbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
 
 	// Add road-building actions
 	if (m_field.field->get_owned_by() == m_player->get_player_number())
@@ -262,7 +262,7 @@ void FieldActionWindow::add_buttons_auto()
 		BaseImmovable *imm = m_map->get_immovable(m_field);
 
 		// The box with road-building buttons
-		buildbox = new Box(m_tabpanel, 0, 0, Box::Horizontal);
+		buildbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
 
 		if (imm && imm->get_type() == Map_Object::FLAG)
 		{
@@ -386,7 +386,7 @@ Buttons used during road building: Set flag here and Abort
 */
 void FieldActionWindow::add_buttons_road(bool flag)
 {
-	Box* buildbox = new Box(m_tabpanel, 0, 0, Box::Horizontal);
+	UIBox* buildbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
 
 	if (flag)
 		add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag);
@@ -406,7 +406,7 @@ FieldActionWindow::add_tab
 Convenience function: Adds a new tab to the main tab panel
 ===============
 */
-void FieldActionWindow::add_tab(const char* picname, Panel* panel)
+void FieldActionWindow::add_tab(const char* picname, UIPanel* panel)
 {
 	m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname, RGBColor(0,0,255)), panel);
 }
@@ -417,13 +417,13 @@ void FieldActionWindow::add_tab(const char* picname, Panel* panel)
 FieldActionWindow::add_button
 ===============
 */
-void FieldActionWindow::add_button(Box* box, const char* picname, void (FieldActionWindow::*fn)())
+void FieldActionWindow::add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)())
 {
-	Button *b = new Button(box, 0, 0, 34, 34, 2);
+	UIButton *b = new UIButton(box, 0, 0, 34, 34, 2);
 	b->clicked.set(this, fn);
 	b->set_pic(g_gr->get_picture(PicMod_Game, picname, RGBColor(0,0,255)));
 
-	box->add(b, Box::AlignTop);
+	box->add(b, UIBox::AlignTop);
 }
 
 /*
@@ -615,7 +615,7 @@ Perform a field action (other than building options).
 Bring up a field action window or continue road building.
 ===============
 */
-void show_field_action(Interactive_Player *parent, UniqueWindowRegistry *registry)
+void show_field_action(Interactive_Player *parent, UIUniqueWindowRegistry *registry)
 {
 	FieldActionWindow *faw;
 

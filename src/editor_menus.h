@@ -20,7 +20,7 @@
 #ifndef __S__EDITOR_MENUS_H
 #define __S__EDITOR_MENUS_H
 
-#include "ui.h"
+#include "ui_basic.h"
 #include "editorinteractive.h"
 
 /*
@@ -32,15 +32,15 @@ this represents the main menu
 
 =============================
 */
-class Editor_Main_Menu : public UniqueWindow {
+class Editor_Main_Menu : public UIUniqueWindow {
    public:
-      Editor_Main_Menu(Editor_Interactive*, UniqueWindowRegistry*);
+      Editor_Main_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
       virtual ~Editor_Main_Menu();
 
    private:
       Editor_Interactive *m_parent;
 
-		UniqueWindowRegistry		m_window_readme;
+		UIUniqueWindowRegistry		m_window_readme;
 
       void exit_btn();
       void load_btn();
@@ -60,17 +60,17 @@ Here, you can select the tool you wish to use the next time
 
 =============================
 */
-class Editor_Tool_Menu : public UniqueWindow {
+class Editor_Tool_Menu : public UIUniqueWindow {
    public:
-      Editor_Tool_Menu(Editor_Interactive*, UniqueWindowRegistry*, Editor_Interactive::Editor_Tools*);
+      Editor_Tool_Menu(Editor_Interactive*, UIUniqueWindowRegistry*, Editor_Interactive::Editor_Tools*);
       virtual ~Editor_Tool_Menu();
 
    private:
-      UniqueWindowRegistry m_options;
+      UIUniqueWindowRegistry m_options;
 
       Editor_Interactive::Editor_Tools* m_tools;
       Editor_Interactive* m_parent;
-      Radiogroup* m_radioselect;
+      UIRadiogroup* m_radioselect;
 
       void changed_to(void);
 };
@@ -87,16 +87,16 @@ Here, you can select the tool you wish to use the next time
 =============================
 */
 
-class Editor_Toolsize_Menu : public UniqueWindow {
+class Editor_Toolsize_Menu : public UIUniqueWindow {
    public:
-      Editor_Toolsize_Menu(Editor_Interactive*, UniqueWindowRegistry*);
+      Editor_Toolsize_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
       virtual ~Editor_Toolsize_Menu();
 
    private:
       void button_clicked(int);
 
       Editor_Interactive* m_parent;
-      Textarea* m_textarea;
+      UITextarea* m_textarea;
 };
 
 

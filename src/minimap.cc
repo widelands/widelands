@@ -41,8 +41,8 @@ MiniMapView::MiniMapView
 Initialize the minimap object
 ===============
 */
-MiniMapView::MiniMapView(Panel *parent, int x, int y, int w, int h, Interactive_Base *plr)
-	: Panel(parent, x, y, 10, 10)
+MiniMapView::MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactive_Base *plr)
+	: UIPanel(parent, x, y, 10, 10)
 {
 	m_player = plr;
 	m_viewx = m_viewy = 0;
@@ -148,8 +148,8 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-MiniMap::MiniMap(Interactive_Base *plr, UniqueWindowRegistry *reg)
-	: UniqueWindow(plr, reg, 10, 10, "Map")
+MiniMap::MiniMap(Interactive_Base *plr, UIUniqueWindowRegistry *reg)
+	: UIUniqueWindow(plr, reg, 10, 10, "Map")
 {
 	m_view = new MiniMapView(this, 0, 0, 0, 0, plr);
    int button_width = (int) (m_view->get_w()/3);
@@ -162,27 +162,27 @@ MiniMap::MiniMap(Interactive_Base *plr, UniqueWindowRegistry *reg)
 
 	//set_cache(false); // testing
 
-	Button* b=new Button(this, 0, m_view->get_h(), button_width, button_height, 0);
+	UIButton* b=new UIButton(this, 0, m_view->get_h(), button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_color.bmp", RGBColor(0,0,255)));
 	//b->set_title("col");
 	b->clicked.set(this, &MiniMap::toggle_color);
 
-	b=new Button(this, button_width, m_view->get_h(), button_width, button_height, 0);
+	b=new UIButton(this, button_width, m_view->get_h(), button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_ownedBy.bmp", RGBColor(0,0,255)));
 	//b->set_title("own");
 	b->clicked.set(this, &MiniMap::toggle_ownedBy);
 
-	b=new Button(this, 2*button_width, m_view->get_h(), button_width, button_height, 0);
+	b=new UIButton(this, 2*button_width, m_view->get_h(), button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_flags.bmp", RGBColor(0,0,255)));
 	//b->set_title("Flags");
 	b->clicked.set(this, &MiniMap::toggle_flags);
 
-	b=new Button(this, 0, m_view->get_h()+button_height, button_width, button_height, 0);
+	b=new UIButton(this, 0, m_view->get_h()+button_height, button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_roads.bmp", RGBColor(0,0,255)));
 	//b->set_title("Roads");
 	b->clicked.set(this, &MiniMap::toggle_roads);
 
-	b=new Button(this, button_width, m_view->get_h()+button_height, button_width, button_height, 0);
+	b=new UIButton(this, button_width, m_view->get_h()+button_height, button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_building.bmp", RGBColor(0,0,255)));
 	//b->set_title("Buildings");
 	b->clicked.set(this, &MiniMap::toggle_buildings);
