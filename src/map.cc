@@ -1397,7 +1397,7 @@ int Map::is_neighbour(const Coords start, const Coords end)
 }
 
 
-#define BASE_COST_PER_FIELD		2000
+#define BASE_COST_PER_FIELD		1800
 #define SLOPE_COST_FACTOR			0.02
 #define SLOPE_COST_STEPS			8
 

@@ -456,7 +456,7 @@ void Bob::push_task(Game* g, Task* task)
 	state->ivar2 = 0;
 	state->diranims = 0;
 	state->path = 0;
-	state->request = 0;
+	state->transfer = 0;
 	state->route = 0;
 	state->program = 0;
 
@@ -485,8 +485,8 @@ void Bob::pop_task(Game* g)
 		delete state->path;
 	if (state->route)
 		delete state->route;
-	if (state->request)
-		state->request->transfer_fail(g);
+	if (state->transfer)
+		state->transfer->request->transfer_fail(g, state->transfer);
 
 	m_stack.pop_back();
 	m_stack_dirty = true;

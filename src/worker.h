@@ -130,8 +130,8 @@ protected:
    inline bool does_carry_ware(void) { return m_carried_item.is_set(); }
 
 public: // worker-specific tasks
-	void start_task_request(Game* g, Request *req);
-	void update_task_request(Game* g, bool cancel);
+	void start_task_transfer(Game* g, Transfer* t);
+	void update_task_transfer(Game* g, bool cancel);
 
 	void start_task_buildingwork(Game* g);
 	void update_task_buildingwork(Game* g);
@@ -149,9 +149,9 @@ public: // worker-specific tasks
 	void start_task_fugitive(Game* g);
 
 private: // task details
-	void request_update(Game* g, State* state);
-	void request_signal(Game* g, State* state);
-	void request_mask(Game* g, State* state);
+	void transfer_update(Game* g, State* state);
+	void transfer_signal(Game* g, State* state);
+	void transfer_mask(Game* g, State* state);
 
 	void buildingwork_update(Game* g, State* state);
 	void buildingwork_signal(Game* g, State* state);
@@ -182,7 +182,7 @@ private: // task details
 	void fugitive_signal(Game* g, State* state);
 
 private:
-	static Task taskRequest;
+	static Task taskTransfer;
 	static Task taskBuildingwork;
 	static Task taskReturn;
 	static Task taskProgram;

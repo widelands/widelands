@@ -29,6 +29,7 @@ class Profile;
 class Bob;
 class Route;
 class Request;
+struct Transfer;
 class WorkerProgram;
 
 
@@ -82,7 +83,7 @@ public:
 		Coords					coords;
 		DirAnimations*			diranims;
 		Path*						path;
-		Request*					request;
+		Transfer*				transfer;
 		Route*					route;
 		const WorkerProgram*	program;
 	};

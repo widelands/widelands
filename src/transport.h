@@ -20,6 +20,7 @@
 #ifndef included_transport_h
 #define included_transport_h
 
+#include "trackptr.h"
 #include "instances.h"
 #include "map.h"
 
@@ -27,6 +28,7 @@
 class Flag;
 class Road;
 class Request;
+struct Transfer;
 class Economy;
 class Item_Ware_Descr;
 class IdleWareSupply;
@@ -78,8 +80,8 @@ public:
 	PlayerImmovable* get_next_move_step(Game* g);
 	PlayerImmovable* get_final_move_step(Game* g);
 
-	void set_request(Game* g, Request* rq, const Route* route);
-	void cancel_request(Game* g);
+	void set_transfer(Game* g, Transfer* t, const Route* route);
+	void cancel_transfer(Game* g);
 
 private:
 	Object_Ptr			m_location;
@@ -87,7 +89,7 @@ private:
 	int					m_ware;
 	Item_Ware_Descr*	m_ware_descr;
 
-	Request*				m_request;
+	Transfer*			m_transfer;
 	IdleWareSupply*	m_supply;
 
 	bool			m_return_watchdog;	// scheduled return-to-warehouse watchdog
@@ -160,6 +162,8 @@ public:
 
 	void call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep);
 	void update_items(Game* g, Flag* other);
+
+	void remove_item(Editor_Game_Base* g, WareInstance* item);
 
 protected:
 	virtual void init(Editor_Game_Base*);
@@ -300,6 +304,19 @@ private:
 
 
 /*
+Whenever an item or worker is transferred to fulfill a Request,
+a Transfer structure is allocated to describe this transfer.
+
+Transfer structures are always created and destroyed by a Request instance.
+*/
+struct Transfer {
+	Request*			request;
+	WareInstance*	item;			// non-null if ware is an item
+	Worker*			worker;		// non-null if ware is a worker
+};
+
+
+/*
 A Supply is a virtual base class representing something that can offer
 wares of any type for any purpose.
 
@@ -309,7 +326,7 @@ Important note: The implementation of Supply is responsible for adding
 and removing itself from Economies. This rule holds true for Economy
 changes.
 */
-class Supply {
+class Supply : public Trackable {
 public:
 	virtual PlayerImmovable* get_position(Game* g) = 0;
 	virtual int get_amount(Game* g, int ware) = 0;
@@ -345,17 +362,11 @@ Requests are always created and destroyed by their owner, i.e. the target
 building. The owner is also responsible for calling set_economy() when
 its economy changes.
 */
-class Request {
+class Request : public Trackable {
 	friend class Economy;
 	friend class RequestList;
 
 public:
-	enum {
-		OPEN = 0,	// not fulfilled yet
-		TRANSFER,	// corresponding ware/worker is on its way
-		CLOSED,		// request successful, waiting for its deletion
-	};
-
 	typedef void (*callback_t)(Game*, Request*, int ware, Worker*, void* data);
 
 public:
@@ -364,51 +375,46 @@ public:
 
 	PlayerImmovable* get_target(Game* g) { return m_target; }
 	int get_ware() const { return m_ware; }
-	int get_state() const { return m_state; }
+	int get_count() const { return m_count; }
+	bool is_open() const { return m_count > (int)m_transfers.size(); }
 	Economy* get_economy() const { return m_economy; }
+	int get_required_time();
 
 	Flag *get_target_flag(Game *g);
 
 	void set_economy(Economy* e);
+	void set_count(int count);
+	void set_required_time(int time);
+	void set_required_interval(int interval);
 
-	void start_transfer(Game *g, Supply* supp, Route *route);
+	void start_transfer(Game *g, Supply* supp);
 
 public: // callbacks for WareInstance/Worker code
-	void transfer_finish(Game *g);
-	void transfer_fail(Game *g);
+	void transfer_finish(Game *g, Transfer* t);
+	void transfer_fail(Game *g, Transfer* t);
 
 private:
+	int get_base_required_time(Editor_Game_Base* g, int nr);
+
+	void cancel_transfer(uint idx);
+	void remove_transfer(uint idx);
+	uint find_transfer(Transfer* t);
+
+private:
+	typedef std::vector<Transfer*> TransferList;
+
 	PlayerImmovable*	m_target;	// who requested it?
 	Economy*				m_economy;
 	int					m_ware;		// the ware type
+	int					m_count;		// how many do we need in total
 
-	callback_t	m_callbackfn;	// called on request success
-	void*			m_callbackdata;
+	callback_t		m_callbackfn;		// called on request success
+	void*				m_callbackdata;
 
-	int			m_state;
+	int				m_required_time;	// when do we need the first ware (can be in the past)
+	int				m_required_interval;	// time between items
 
-	WareInstance*	m_item;			// non-null if ware is an item and transferring
-	Worker*			m_worker;		// non-null if ware is a worker and transferring
-};
-
-
-/*
-RequestList is used in the Economy to keep track of requests.
-Maybe we can one day introduce prioritizing of requests.
-*/
-class RequestList {
-public:
-	RequestList();
-	~RequestList();
-
-	void add(Request *req);
-	void remove(Request *req);
-
-	inline int get_nrrequests() const { return m_requests.size(); }
-	inline Request* get_request(int idx) const { return m_requests[idx]; }
-
-private:
-	std::vector<Request*>	m_requests;
+	TransferList	m_transfers;	// maximum size is m_count
 };
 
 
@@ -431,6 +437,7 @@ public:
 	int get_ware() const { return m_ware; }
 	int get_size() const { return m_size; }
 	int get_filled() const { return m_filled; }
+	int get_consume_interval() const { return m_consume_interval; }
 
 	void init(Game*, int ware, int size);
 	void cleanup(Game*);
@@ -443,6 +450,7 @@ public:
 
 	void set_size(int size);
 	void set_filled(int size);
+	void set_consume_interval(int time);
 
 private:
 	static void request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
@@ -452,6 +460,7 @@ private:
 	int					m_ware;		// ware ID
 	int					m_size;		// # of items that fit into the queue
 	int					m_filled;	// # of items that are currently in the queue
+	int					m_consume_interval; // time in ms between consumption at full speed
 	Request*				m_request;	// currently pending request
 
 	callback_t*			m_callback_fn;
@@ -489,9 +498,11 @@ public:
 	void remove_warehouse(Warehouse *wh);
 
 	void add_request(Request* req);
+	bool have_request(Request* req);
 	void remove_request(Request* req);
 
 	void add_supply(int ware, Supply* supp);
+	bool have_supply(int ware, Supply* supp);
 	void remove_supply(int ware, Supply* supp);
 
 private:
@@ -500,14 +511,16 @@ private:
 	void do_merge(Economy *e);
 	void do_split(Flag *f);
 
-	void start_request_timer();
+	void start_request_timer(int delta = 200);
 
-	bool process_request(Request *req);
+	Supply* find_best_supply(Game* g, Request* req, int ware, int* pcost);
 	void process_requests();
 
 	static void request_timer_cb(Game* g, int serial, int unused);
 
 private:
+	typedef std::set<Request*> RequestList;
+
 	Player*	m_owner;
 	uint		m_trackserial;
 	bool		m_rebuilding;	// true while rebuilding Economies (i.e. during split/merge)
@@ -516,10 +529,11 @@ private:
 	WareList						m_wares;		// virtual storage with all wares in this Economy
 	std::vector<Warehouse*>	m_warehouses;
 
-	std::vector<RequestList>	m_requests; // requests by ware id
+	RequestList						m_requests; // requests
 	std::vector<SupplyList>		m_supplies; // supplies by ware id
 
 	bool		m_request_timer;	// true if we started the request timer
+	int		m_request_timer_time;
 
 	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
 };

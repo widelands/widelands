@@ -1208,56 +1208,56 @@ void Worker::init_auto_task(Game* g)
 /*
 ==============================
 
-REQUEST task
+TRANSFER task
 
-Follow the given request.
+Follow the given transfer.
 Signal "update" to force a recalculation of the route.
-Signal "cancel" to cancel the request.
+Signal "cancel" to cancel the transfer.
 
 ==============================
 */
 
-Bob::Task Worker::taskRequest = {
-	"request",
+Bob::Task Worker::taskTransfer = {
+	"transfer",
 
-	(Bob::Ptr)&Worker::request_update,
-	(Bob::Ptr)&Worker::request_signal,
-	(Bob::Ptr)&Worker::request_mask,
+	(Bob::Ptr)&Worker::transfer_update,
+	(Bob::Ptr)&Worker::transfer_signal,
+	(Bob::Ptr)&Worker::transfer_mask,
 };
 
 
 /*
 ===============
-Worker::start_task_request
+Worker::start_task_transfer
 
-Tell the worker to fulfill the request
+Tell the worker to follow the Transfer
 ===============
 */
-void Worker::start_task_request(Game* g, Request *req)
+void Worker::start_task_transfer(Game* g, Transfer* t)
 {
 	State* state;
 
-	push_task(g, &taskRequest);
+	push_task(g, &taskTransfer);
 
 	state = get_state();
-	state->request = req;
+	state->transfer = t;
 }
 
 
 /*
 ===============
-Worker::request_update
+Worker::transfer_update
 ===============
 */
-void Worker::request_update(Game* g, State* state)
+void Worker::transfer_update(Game* g, State* state)
 {
 	PlayerImmovable* location = get_location(g);
 
 	assert(location); // 'location' signal expected otherwise
 
 	// The request is no longer valid, the task has failed
-	if (!state->request) {
-		molog("[request]: Fail (without request)\n");
+	if (!state->transfer) {
+		molog("[transfer]: Fail (without transfer)\n");
 
 		set_signal("fail");
 		pop_task(g);
@@ -1265,17 +1265,17 @@ void Worker::request_update(Game* g, State* state)
 	}
 
 	// Figure out where to go
-	PlayerImmovable* target = state->request->get_target(g);
+	PlayerImmovable* target = state->transfer->request->get_target(g);
 
 	if (get_location(g) == target) {
-		Request* rq = state->request;
+		Transfer* t = state->transfer;
 
-		molog("[request]: finish\n");
+		molog("[transfer]: finish\n");
 
-		state->request = 0; // don't fail, we were successful!
+		state->transfer = 0; // don't fail, we were successful!
 		pop_task(g);
 
-		rq->transfer_finish(g);
+		t->request->transfer_finish(g, t);
 		return;
 	}
 
@@ -1283,7 +1283,7 @@ void Worker::request_update(Game* g, State* state)
 	// our target. However, request_signal() defers handling of "update", so
 	// we do the appropriate check here
 	if (get_economy() != target->get_economy()) {
-		molog("[request]: Fail (split from target economy)\n");
+		molog("[transfer]: Fail (split from target economy)\n");
 
 		set_signal("fail");
 		pop_task(g);
@@ -1294,7 +1294,7 @@ void Worker::request_update(Game* g, State* state)
 	Route* route = new Route;
 
 	if (!get_economy()->find_route(get_location(g)->get_base_flag(), target->get_base_flag(), route)) {
-		molog("[request]: Can't find route\n");
+		molog("[transfer]: Can't find route\n");
 
 		set_signal("fail");
 		pop_task(g);
@@ -1307,10 +1307,10 @@ void Worker::request_update(Game* g, State* state)
 
 /*
 ===============
-Worker::request_signal
+Worker::transfer_signal
 ===============
 */
-void Worker::request_signal(Game* g, State* state)
+void Worker::transfer_signal(Game* g, State* state)
 {
 	std::string signal = get_signal();
 
@@ -1318,41 +1318,41 @@ void Worker::request_signal(Game* g, State* state)
 	// failed.
 	// We will recalculate the route on the next update().
 	if (signal == "update" || signal == "road" || signal == "fail") {
-		molog("[request]: Got signal '%s' -> recalculate\n", signal.c_str());
+		molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 		set_signal("");
 		return;
 	}
 
-	molog("[request]: Cancel due to signal '%s'\n", signal.c_str());
+	molog("[transfer]: Cancel due to signal '%s'\n", signal.c_str());
 	pop_task(g);
 }
 
 
 /*
 ===============
-Worker::request_mask
+Worker::transfer_mask
 ===============
 */
-void Worker::request_mask(Game* g, State* state)
+void Worker::transfer_mask(Game* g, State* state)
 {
 	std::string signal = get_signal();
 
 	if (signal == "cancel")
-		state->request = 0; // dont't call transfer_fail/finish when cancelled
+		state->transfer = 0; // dont't call transfer_fail/finish when cancelled
 }
 
 
 /*
 ===============
-Worker::update_task_request
+Worker::update_task_transfer
 
-Called by Economy code when:
-- the request has been cancelled & destroyed (cancel is true)
+Called by transport code when:
+- the transfer has been cancelled & destroyed (cancel is true)
 - the current route has been broken (cancel is false)
 ===============
 */
-void Worker::update_task_request(Game* g, bool cancel)
+void Worker::update_task_transfer(Game* g, bool cancel)
 {
 	send_signal(g, cancel ? "cancel" : "update");
 }

@@ -31,7 +31,7 @@
 
 #define BUILDING_LEAVE_INTERVAL		1000
 #define CARRIER_SPAWN_INTERVAL		2500
-#define CONSTRUCTIONSITE_STEP_TIME	25000
+#define CONSTRUCTIONSITE_STEP_TIME	30000
 
 
 /*
@@ -866,6 +866,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 			m_wares[i] = wq;
 
 			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
+			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
 			wq->init((Game*)g, g->get_safe_ware_id((*bc)[i].name.c_str()), (*bc)[i].amount);
 
 			m_work_steps += (*bc)[i].amount;
@@ -2218,7 +2219,7 @@ void ProductionSite::act(Game *g, uint data)
             m_program_timer = true;
             m_program_time = schedule_act(g, action->iparam2);
             break;
-            
+
          case ProductionAction::actWorker:
             molog("  Worker(%s)\n", action->sparam1.c_str());
 
@@ -2251,6 +2252,7 @@ void ProductionSite::act(Game *g, uint data)
 
          case ProductionAction::actCheck:
             molog("  Checking(%s)\n", action->sparam1.c_str());
+
             for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
                if(!strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(), action->sparam1.c_str())) {
                   WaresQueue* wq=m_input_queues[i];
@@ -2267,23 +2269,27 @@ void ProductionSite::act(Game *g, uint data)
                   break;
                }
             }
-               molog("  Check done!\n");
+
+				molog("  Check done!\n");
+
             program_step();
-            m_program_timer=true;
-            m_program_time=schedule_act(g, 10);
+            m_program_timer = true;
+            m_program_time = schedule_act(g, 10);
             break;
 
          case ProductionAction::actProduce:
             {
             molog("  Produce(%s)\n", action->sparam1.c_str());
-            int wareid= g->get_safe_ware_id(action->sparam1.c_str());
+
+            int wareid = g->get_safe_ware_id(action->sparam1.c_str());
+
             WareInstance* item = new WareInstance(wareid);
             item->init(g);
             m_worker->set_carried_item(g,item);
+
+				// get the worker to drop the item off
+				// get_building_work() will advance the program
             m_worker->update_task_buildingwork(g);
-            program_step();
-            m_program_timer=true;
-            m_program_time=schedule_act(g,10);
             }
             break;
       }
@@ -2311,6 +2317,8 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 			molog("PSITE: WARNING: carried item %s is not an output item\n",
 					item->get_ware_descr()->get_name());
 
+		molog("ProductionSite::get_building_work: start dropoff\n");
+		
 		w->start_task_dropoff(g, item);
 		return true;
 	}
@@ -2342,6 +2350,11 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 				m_program_timer = true;
 				m_program_time = schedule_act(g, 10);
 			}
+		} else if (action->type == ProductionAction::actProduce) {
+			// Worker returned home after dropping item
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, 10);
 		}
 	}
 

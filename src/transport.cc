@@ -201,7 +201,7 @@ WareInstance::WareInstance(int ware)
 	m_ware = ware;
 	m_ware_descr = 0;
 
-	m_request = 0;
+	m_transfer = 0;
 	m_supply = 0;
 	m_return_watchdog = false;
 	m_moving = false;
@@ -258,7 +258,16 @@ WareInstance::cleanup
 */
 void WareInstance::cleanup(Editor_Game_Base* g)
 {
-	molog("WareInstance::cleanup\n");
+	//molog("WareInstance::cleanup\n");
+
+	Map_Object* location = m_location.get(g);
+
+	// Unlink from our current location, if necessary
+	if (location && location->get_type() == FLAG) {
+		Flag* flag = (Flag*)location;
+
+		flag->remove_item(g, this);
+	}
 
 	if (m_supply) {
 		delete m_supply;
@@ -269,6 +278,8 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 		cancel_moving((Game*)g);
 		set_location((Game*)g, 0);
 	}
+
+	//molog("  done\n");
 
 	Map_Object::cleanup(g);
 }
@@ -351,7 +362,7 @@ Callback for the return-to-warehouse timer.
 */
 void WareInstance::act(Game* g, uint data)
 {
-	if (!m_request && !m_moving && m_return_watchdog)
+	if (!m_transfer && !m_moving && m_return_watchdog)
 	{
 		Map_Object* location = get_location(g);
 		Warehouse* wh;
@@ -419,14 +430,14 @@ void WareInstance::update(Game* g)
 	// Updates based on location type
 	switch(loc->get_type()) {
 	case BUILDING:
-		if (m_request)
+		if (m_transfer)
 		{
-			Request* rq = m_request;
+			Transfer* t = m_transfer;
 
-			if (loc == rq->get_target(g))
+			if (loc == t->request->get_target(g))
 			{
-				m_request = 0;
-				rq->transfer_finish(g);
+				m_transfer = 0;
+				t->request->transfer_finish(g, t);
 				return;
 			}
 
@@ -465,7 +476,7 @@ void WareInstance::update(Game* g)
 		}
 
 	case FLAG:
-		if (!m_request)
+		if (!m_transfer)
 		{
 			// arrange for a return to warehouse
 			if (!m_moving && !m_return_watchdog) {
@@ -493,12 +504,12 @@ void WareInstance::update(Game* g)
 
 /*
 ===============
-WareInstance::set_request
+WareInstance::set_transfer
 
-Set ware state so that it fulfills the given request.
+Set ware state so that it follows the given transfer.
 ===============
 */
-void WareInstance::set_request(Game* g, Request* rq, const Route* route)
+void WareInstance::set_transfer(Game* g, Transfer* t, const Route* route)
 {
 	// Reset current movement & request
 	if (m_supply) {
@@ -506,9 +517,9 @@ void WareInstance::set_request(Game* g, Request* rq, const Route* route)
 		m_supply = 0;
 	}
 
-	if (m_request) {
-		m_request->transfer_fail(g);
-		m_request = 0;
+	if (m_transfer) {
+		m_transfer->request->transfer_fail(g, m_transfer);
+		m_transfer = 0;
 	}
 
 	if (m_move_route) {
@@ -516,14 +527,14 @@ void WareInstance::set_request(Game* g, Request* rq, const Route* route)
 		m_move_route = 0;
 	}
 
-	// Set request state
-	m_request = rq;
+	// Set transfer state
+	m_transfer = t;
 
 	m_return_watchdog = false;
 	m_flag_dirty = true;
 
 	m_moving = true;
-	m_move_destination = m_request->get_target(g);
+	m_move_destination = m_transfer->request->get_target(g);
 	m_move_route = new Route(*route);
 
 	update(g);
@@ -532,14 +543,14 @@ void WareInstance::set_request(Game* g, Request* rq, const Route* route)
 
 /*
 ===============
-WareInstance::cancel_request
+WareInstance::cancel_transfer
 
-The request has been cancelled, just stop moving.
+The transfer has been cancelled, just stop moving.
 ===============
 */
-void WareInstance::cancel_request(Game* g)
+void WareInstance::cancel_transfer(Game* g)
 {
-	m_request = 0;
+	m_transfer = 0;
 	m_moving = false;
 
 	if (m_move_route) {
@@ -664,11 +675,11 @@ whatever reason.
 */
 void WareInstance::cancel_moving(Game* g)
 {
-	if (m_request) {
-		molog("WareInstance::cancel_moving() fails request.\n");
+	if (m_transfer) {
+		molog("WareInstance::cancel_moving() fails transfer.\n");
 
-		m_request->transfer_fail(g);
-		m_request = 0;
+		m_transfer->request->transfer_fail(g, m_transfer);
+		m_transfer = 0;
 	}
 
 	m_moving = false;
@@ -1189,6 +1200,34 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 
 /*
 ===============
+Flag::remove_item
+
+Force a removal of the given item from this flag.
+Called by WareInstance::cleanup()
+===============
+*/
+void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
+{
+	for(int i = 0; i < m_item_filled; i++) {
+		if (m_items[i].item != item)
+			continue;
+
+		m_item_filled--;
+		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
+
+		if (g->is_game())
+			wake_up_capacity_queue((Game*)g);
+
+		return;
+	}
+
+	throw wexception("MO(%u): Flag::remove_item: item %u not on flag",
+	                 get_serial(), item->get_serial());
+}
+
+
+/*
+===============
 Flag::call_carrier
 
 If nextstep is not null, a carrier will be called to move this item to
@@ -1333,11 +1372,16 @@ Detach building and free roads.
 */
 void Flag::cleanup(Editor_Game_Base *g)
 {
+	//molog("Flag::cleanup\n");
+
 	while(m_item_filled) {
 		WareInstance* item = m_items[--m_item_filled].item;
 
+		item->set_location((Game*)g, 0);
 		item->destroy((Game*)g);
 	}
+
+	//molog("  items destroyed\n");
 
 	if (m_building) {
 		m_building->remove(g); // immediate death
@@ -1354,6 +1398,8 @@ void Flag::cleanup(Editor_Game_Base *g)
 	get_economy()->remove_flag(this);
 
 	unset_position(g, m_position);
+
+	//molog("  done\n");
 
 	PlayerImmovable::cleanup(g);
 }
@@ -2053,13 +2099,12 @@ Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdat
 	m_target = target;
 	m_economy = m_target->get_economy();
 	m_ware = ware;
+	m_count = 1;
+	m_required_time = target->get_owner()->get_game()->get_gametime();
+	m_required_interval = 0;
 
 	m_callbackfn = cbfn;
 	m_callbackdata = cbdata;
-
-	m_state = OPEN;
-	m_worker = 0;
-	m_item = 0;
 
 	if (m_economy)
 		m_economy->add_request(this);
@@ -2068,30 +2113,16 @@ Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdat
 
 Request::~Request()
 {
-	Game* g = static_cast<Game*>(m_economy->get_owner()->get_game());
-
-	if (m_state == TRANSFER)
-	{
-		if (m_worker)
-		{
-			assert(!m_item);
-
-			m_worker->update_task_request(g, true); // cancel
-			m_worker = 0;
-		}
-		else
-		{
-			assert(m_item);
-
-			m_item->cancel_request(g);
-			m_item = 0;
-		}
-	}
-	else if (m_state == OPEN)
+	// Remove from the economy
+	if (is_open())
 	{
 		if (m_economy)
 			m_economy->remove_request(this);
 	}
+
+	// Cancel all ongoing transfers
+	while(m_transfers.size())
+		cancel_transfer(0);
 }
 
 
@@ -2110,6 +2141,46 @@ Flag *Request::get_target_flag(Game *g)
 
 /*
 ===============
+Request::get_base_required_time
+
+Return the point in time at which we want the item of the given number to
+be delivered. nr is in the range [0..m_count[
+===============
+*/
+int Request::get_base_required_time(Editor_Game_Base* g, int nr)
+{
+	int curtime = g->get_gametime();
+
+	if (!nr || !m_required_interval)
+		return m_required_time;
+
+	if ((curtime - m_required_time) > (m_required_interval * 2)) {
+		if (nr == 1)
+			return m_required_time + (curtime - m_required_time) / 2;
+
+		return curtime + (nr-2) * m_required_interval;
+	}
+
+	return m_required_time + nr * m_required_interval;
+}
+
+
+/*
+===============
+Request::get_required_time
+
+Return the time when the requested ware is needed.
+Can be in the past, indicating that we have been idling, waiting for the ware.
+===============
+*/
+int Request::get_required_time()
+{
+	return get_base_required_time(m_economy->get_owner()->get_game(), m_transfers.size());
+}
+
+
+/*
+===============
 Request::set_economy
 
 Change the Economy we belong to.
@@ -2120,13 +2191,69 @@ void Request::set_economy(Economy* e)
 	if (m_economy == e)
 		return;
 
-	if (m_economy && m_state == OPEN)
+	if (m_economy && is_open())
 		m_economy->remove_request(this);
 
 	m_economy = e;
 
-	if (m_economy && m_state == OPEN)
+	if (m_economy && is_open())
 		m_economy->add_request(this);
+}
+
+
+/*
+===============
+Request::set_count
+
+Change the number of wares we need.
+===============
+*/
+void Request::set_count(int count)
+{
+	bool wasopen = is_open();
+
+	m_count = count;
+
+	// Cancel unneeded transfers. This should be more clever about which
+	// transfers to cancel. Then again, this loop shouldn't execute during
+	// normal play anyway
+	while(m_count < (int)m_transfers.size())
+		cancel_transfer(m_transfers.size() - 1);
+
+	// Update the economy
+	if (m_economy) {
+		if (wasopen && !is_open())
+			m_economy->remove_request(this);
+		else if (!wasopen && is_open())
+			m_economy->add_request(this);
+	}
+}
+
+
+/*
+===============
+Request::set_required_time
+
+Change the time at which the first item to be delivered is needed.
+Default is the gametime of the Request creation.
+===============
+*/
+void Request::set_required_time(int time)
+{
+	m_required_time = time;
+}
+
+
+/*
+===============
+Request::set_required_interval
+
+Change the time between desired delivery of items.
+===============
+*/
+void Request::set_required_interval(int interval)
+{
+	m_required_interval = interval;
 }
 
 
@@ -2139,36 +2266,56 @@ This function does not take ownership of route, i.e. the caller is responsible
 for its deletion.
 ===============
 */
-void Request::start_transfer(Game* g, Supply* supp, Route* route)
+void Request::start_transfer(Game* g, Supply* supp)
 {
-	Ware_Descr *descr = g->get_ware_description(get_ware());
+	assert(is_open());
 
-	m_economy->remove_request(this);
+	Ware_Descr* descr = g->get_ware_description(get_ware());
+	Transfer* t = new Transfer;
 
-	if (descr->is_worker())
+	try
 	{
-		// Begin the transfer of a worker.
-		// launch_worker() creates the worker, set_job_request() makes sure the
-		// worker starts walking
-		log("Request: start worker transfer for %i\n", get_ware());
+		t->request = this;
+		t->worker = 0;
+		t->item = 0;
 
-		m_worker = supp->launch_worker(g, get_ware());
+		if (descr->is_worker())
+		{
+			// Begin the transfer of a worker.
+			// launch_worker() creates the worker, set_job_request() makes sure the
+			// worker starts walking
+			log("Request: start worker transfer for %i\n", get_ware());
 
-		m_state = TRANSFER;
-		m_worker->start_task_request(g, this);
+			t->worker = supp->launch_worker(g, get_ware());
+			t->worker->start_task_transfer(g, t);
+		}
+		else
+		{
+			// Begin the transfer of an item. The item itself is passive.
+			// launch_item() ensures the WareInstance is transported out of the warehouse
+			// Once it's on the flag, the flag code will decide what to do with it.
+			log("Request: start item transfer for %i\n", get_ware());
+
+			Route route;
+
+			t->item = supp->launch_item(g, get_ware());
+
+			if (!m_economy->find_route(supp->get_position(g)->get_base_flag(),
+											get_target_flag(g), &route))
+				throw wexception("Request::start_transfer: routing is inconsistent");
+
+			t->item->set_transfer(g, t, &route);
+		}
 	}
-	else
+	catch(...)
 	{
-		// Begin the transfer of an item. The item itself is passive.
-		// launch_item() ensures the WareInstance is transported out of the warehouse
-		// Once it's on the flag, the flag code will decide what to do with it.
-		log("Request: start item transfer for %i\n", get_ware());
-
-		m_item = supp->launch_item(g, get_ware());
-
-		m_state = TRANSFER;
-		m_item->set_request(g, this, route);
+		delete t;
+		throw;
 	}
+
+	m_transfers.push_back(t);
+	if (!is_open())
+		m_economy->remove_request(this);
 }
 
 
@@ -2181,20 +2328,23 @@ This will call a callback function in the target, which is then responsible
 for removing and deleting the request.
 ===============
 */
-void Request::transfer_finish(Game *g)
+void Request::transfer_finish(Game *g, Transfer* t)
 {
-	assert(m_state == TRANSFER);
+	Worker* w = t->worker;
 
-	m_state = CLOSED;
-
-	if (m_item) {
-		m_item->destroy(g);
-		m_item = 0;
+	if (t->item) {
+		t->item->destroy(g);
+		t->item = 0;
 	}
 
-	(*m_callbackfn)(g, this, m_ware, m_worker, m_callbackdata);
+	remove_transfer(find_transfer(t));
 
-	// this should no longer be valid here
+	set_required_time(get_base_required_time(g, 1));
+	m_count--;
+
+	(*m_callbackfn)(g, this, m_ware, w, m_callbackdata);
+
+	// this may no longer be valid here
 }
 
 
@@ -2208,78 +2358,89 @@ The calling code has already dealt with the worker/item.
 Re-open the request.
 ===============
 */
-void Request::transfer_fail(Game *g)
+void Request::transfer_fail(Game *g, Transfer* t)
 {
-	assert(m_state == TRANSFER);
+	bool wasopen = is_open();
 
-	m_worker = 0;
-	m_item = 0;
-	m_state = OPEN;
-	m_economy->add_request(this);
+	remove_transfer(find_transfer(t));
+
+	if (!wasopen)
+		m_economy->add_request(this);
 }
 
 
 /*
-==============================================================================
-
-RequestList IMPLEMENTATION
-
-==============================================================================
-*/
-
-/*
 ===============
-RequestList::RequestList
+Request::cancel_transfer
 
-Zero-initialize the list
+Cancel the transfer with the given index.
+Note that this does *not* update whether the Request is registered with the
+Economy or not.
 ===============
 */
-RequestList::RequestList()
+void Request::cancel_transfer(uint idx)
 {
-}
+	Game* g = static_cast<Game*>(m_economy->get_owner()->get_game());
+	Transfer* t = m_transfers[idx];
 
-/*
-===============
-RequestList::~RequestList
+	if (t->worker)
+	{
+		assert(!t->item);
 
-A request list should be empty when it's destroyed.
-===============
-*/
-RequestList::~RequestList()
-{
-}
+		t->worker->update_task_transfer(g, true); // cancel
+		t->worker = 0;
+	}
+	else
+	{
+		assert(t->item);
 
-/*
-===============
-RequestList::add
-
-Add a request to the list.
-===============
-*/
-void RequestList::add(Request *req)
-{
-	m_requests.push_back(req);
-}
-
-/*
-===============
-RequestList::remove
-
-Remove the given request from the list.
-===============
-*/
-void RequestList::remove(Request *req)
-{
-	for(uint idx = 0; idx < m_requests.size(); idx++) {
-		if (m_requests[idx] == req) {
-			if (idx != m_requests.size()-1)
-				m_requests[idx] = m_requests[m_requests.size()-1];
-			m_requests.pop_back();
-			return;
-		}
+		t->item->cancel_transfer(g);
+		t->item = 0;
 	}
 
-	throw wexception("RequestList::remove: not in list");
+	remove_transfer(idx);
+}
+
+
+/*
+===============
+Request::remove_transfer
+
+Remove and free the transfer with the given index.
+This does not update the Transfer's worker or item, and it does not update
+whether the Request is registered with the Economy.
+===============
+*/
+void Request::remove_transfer(uint idx)
+{
+	Transfer* t = m_transfers[idx];
+
+	if (idx+1 != m_transfers.size())
+		m_transfers[idx] = m_transfers[m_transfers.size()-1];
+	m_transfers.resize(m_transfers.size()-1);
+
+	delete t;
+}
+
+
+/*
+===============
+Request::find_transfer
+
+Lookup a Transfer in the transfers array.
+Throws an exception if the Transfer is not registered with us.
+===============
+*/
+uint Request::find_transfer(Transfer* t)
+{
+	assert(t->request == this);
+
+	TransferList::iterator it = std::find(m_transfers.begin(), m_transfers.end(), t);
+
+	if (it == m_transfers.end())
+		throw wexception("Request::find_transfer(): not found");
+
+	return it - m_transfers.begin();
 }
 
 
@@ -2373,6 +2534,7 @@ WaresQueue::WaresQueue(PlayerImmovable* bld)
 	m_size = 0;
 	m_filled = 0;
 	m_request = 0;
+	m_consume_interval = 0;
 
 	m_callback_fn = 0;
 	m_callback_data = 0;
@@ -2455,6 +2617,9 @@ void WaresQueue::update(Game* g)
 	{
 		if (!m_request)
 			m_request = new Request(m_owner, m_ware, &WaresQueue::request_callback, this);
+
+		m_request->set_count(m_size - m_filled);
+		m_request->set_required_interval(m_consume_interval);
 	}
 	else
 	{
@@ -2494,10 +2659,6 @@ void WaresQueue::request_callback(Game* g, Request* rq, int ware, Worker* w, voi
 	assert(!w); // WaresQueue can't hold workers
 	assert(wq->m_filled < wq->m_size);
 	assert(wq->m_ware == ware);
-
-	// Ack the request
-	delete rq;
-	wq->m_request = 0;
 
 	// Update
 	wq->set_filled(wq->m_filled + 1);
@@ -2563,6 +2724,20 @@ void WaresQueue::set_filled(int filled)
 }
 
 
+/*
+===============
+WaresQueue::set_consume_interval
+
+Set the time between consumption of items when the owning building
+is consuming at full speed.
+This interval is merely a hint for the Supply/Request balancing code.
+===============
+*/
+void WaresQueue::set_consume_interval(int time)
+{
+	m_consume_interval = time;
+}
+
 
 /*
 ==============================================================================
@@ -2593,6 +2768,8 @@ Economy::~Economy()
 
 	m_owner->get_game()->remove_trackpointer(m_trackserial);
 
+	if (m_requests.size())
+		log("Warning: Economy still has requests left on destruction\n");
 	if (m_flags.size())
 		log("Warning: Economy still has flags left on destruction\n");
 	if (m_warehouses.size())
@@ -3093,20 +3270,30 @@ Consider the request, try to fulfill it immediately or queue it for later.
 Important: This must only be called by the Request class.
 ===============
 */
-void Economy::add_request(Request *req)
+void Economy::add_request(Request* req)
 {
-	assert(req->get_state() == Request::OPEN);
+	assert(req->is_open());
 
 	log("%p: add_request(%p) for %u\n", this, req,
 			req->get_target((Game*)get_owner()->get_game())->get_serial());
 
-	if (req->get_ware() >= (int)m_requests.size())
-		m_requests.resize(req->get_ware()+1);
-
-	m_requests[req->get_ware()].add(req);
+	m_requests.insert(req);
 
 	// Try to fulfill the request
 	start_request_timer();
+}
+
+
+/*
+===============
+Economy::have_request
+
+Return true if the given Request is registered with the Economy.
+===============
+*/
+bool Economy::have_request(Request* req)
+{
+	return m_requests.find(req) != m_requests.end();
 }
 
 
@@ -3118,14 +3305,12 @@ Remove the request from this economy.
 Important: This must only be called by the Request class.
 ===============
 */
-void Economy::remove_request(Request *req)
+void Economy::remove_request(Request* req)
 {
-	assert(req->get_state() == Request::OPEN);
-
 	log("%p: remove_request(%p) for %u\n", this, req,
 			req->get_target((Game*)get_owner()->get_game())->get_serial());
 
-	m_requests[req->get_ware()].remove(req);
+	m_requests.erase(req);
 }
 
 
@@ -3146,6 +3331,26 @@ void Economy::add_supply(int ware, Supply* supp)
 	m_supplies[ware].add(supp);
 
 	start_request_timer();
+}
+
+
+/*
+===============
+Economy::have_supply
+
+Return true if the given supply is registered with the economy.
+===============
+*/
+bool Economy::have_supply(int ware, Supply* supp)
+{
+	if (ware >= (int)m_supplies.size())
+		return false;
+
+	for(int i = 0; i < m_supplies[ware].get_nrsupplies(); i++)
+		if (m_supplies[ware].get_supply(i) == supp)
+			return true;
+
+	return false;
 }
 
 
@@ -3256,42 +3461,42 @@ Economy::start_request_timer
 Make sure the request timer is running.
 ===============
 */
-void Economy::start_request_timer()
+void Economy::start_request_timer(int delta)
 {
 	if (!m_owner->get_game()->is_game())
 		return;
 
-	if (!m_request_timer) {
-		Game* game = (Game*)m_owner->get_game();
-		Cmd_Queue* cq = game->get_cmdqueue();
+	Game* game = (Game*)m_owner->get_game();
 
-		cq->queue(game->get_gametime() + 200, SENDER_MAPOBJECT, CMD_CALL,
+	if (m_request_timer && m_request_timer_time - (game->get_gametime() + delta) < 0)
+		return;
+
+	Cmd_Queue* cq = game->get_cmdqueue();
+
+	m_request_timer = true;
+	m_request_timer_time = game->get_gametime() + delta;
+	cq->queue(m_request_timer_time, SENDER_MAPOBJECT, CMD_CALL,
 					(int)(&Economy::request_timer_cb), m_trackserial, 0);
-		m_request_timer = true;
-	}
 }
 
 
 /*
 ===============
-Economy::process_request
+Economy::find_best_supply
 
-Look at available resources and try to fulfill the request.
-Assumes that req has been added to the request list.
-Returns true if the request could be processed.
+Find the supply that is best suited to fulfill the given request.
+Returns 0 if no supply is found.
 ===============
 */
-bool Economy::process_request(Request *req)
+Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost)
 {
-	assert(req->get_state() == Request::OPEN);
+	assert(req->is_open());
 
-	Game* g = static_cast<Game*>(get_owner()->get_game());
 	Route buf_route0, buf_route1;
 	Supply *best_supply = 0;
 	Route *best_route = 0;
 	int best_cost = -1;
 	Flag* target_flag = req->get_target_flag(g);
-	int ware = req->get_ware();
 
 	// Look for matches in all possible supplies in this economy
 	if (ware >= (int)m_supplies.size())
@@ -3308,7 +3513,7 @@ bool Economy::process_request(Request *req)
 
 		if (!find_route(supp->get_position(g)->get_base_flag(), target_flag, route, cost_cutoff)) {
 			if (!best_route)
-				throw wexception("Economy::process_request: COULDN'T FIND A ROUTE!");
+				throw wexception("Economy::find_best_supply: COULDN'T FIND A ROUTE!");
 			continue;
 		}
 
@@ -3319,13 +3524,28 @@ bool Economy::process_request(Request *req)
 	}
 
 	if (!best_route)
-		return false;
+		return 0;
 
-	// Now that all options have been checked, start the transfer
-	req->start_transfer(g, best_supply, best_route);
-	return true;
+	*pcost = best_cost;
+	return best_supply;
 }
 
+
+struct RequestSupplyPair {
+	int						ware;
+	TrackPtr<Request>		request;
+	TrackPtr<Supply>		supply;
+	int						priority;
+
+	struct Compare {
+		bool operator()(const RequestSupplyPair& p1, const RequestSupplyPair& p2) {
+			return p1.priority < p2.priority;
+		}
+	};
+};
+
+typedef std::priority_queue<RequestSupplyPair, std::vector<RequestSupplyPair>,
+				RequestSupplyPair::Compare> RSPairQueue;
 
 /*
 ===============
@@ -3336,18 +3556,87 @@ Find any open requests that can be fulfilled by supplies.
 */
 void Economy::process_requests()
 {
-	for(uint ware = 0; ware < m_requests.size(); ware++) {
-		if (m_requests[ware].get_nrrequests()) {
-			while(m_requests[ware].get_nrrequests()) {
-				Request *req = m_requests[ware].get_request(0);
+	Editor_Game_Base* egbase = m_owner->get_game();
+	Game* g;
+	RSPairQueue rspqueue;
+	int nexttimer = -1;
 
-				assert(req->get_state() == Request::OPEN);
+	if (!egbase->is_game())
+		return;
 
-				if (!process_request(req)) {
-					break;
-				}
-			}
+	g = (Game*)egbase;
+	log("PR t = %i\n", g->get_gametime());
+
+	for(RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
+		Request* req = *it;
+		Supply* supp;
+		int cost; // estimated time in milliseconds to fulfill Request
+		int idletime;
+
+		supp = find_best_supply(g, req, req->get_ware(), &cost);
+		if (!supp)
+			continue;
+
+		// Calculate the time the building will be forced to idle waiting
+		// for the request
+		// If the building wouldn't have to idle, we wait with the request
+		idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
+
+		if (idletime < -200) {
+			if (nexttimer < 0 || nexttimer > (-idletime))
+				nexttimer = -idletime;
+
+			break;
 		}
+
+		if (idletime <= 0)
+			idletime = 1;
+
+		// Otherwise, consider this request/supply pair for queueing
+		RequestSupplyPair rsp;
+
+		rsp.ware = req->get_ware();
+		rsp.request = req;
+		rsp.supply = supp;
+		rsp.priority = idletime; // TODO: priorities?
+
+		log("REQ: %u (%i) <- %u (ware %i), priority %i\n", req->get_target(g)->get_serial(),
+				req->get_required_time(), supp->get_position(g)->get_serial(),
+				rsp.ware, rsp.priority);
+
+		rspqueue.push(rsp);
+	}
+
+	// Now execute request/supply pairs
+	while(rspqueue.size()) {
+		RequestSupplyPair rsp = rspqueue.top();
+
+		rspqueue.pop();
+
+		if (!rsp.request || !rsp.supply ||
+		    !have_request(rsp.request) || !have_supply(rsp.ware, rsp.supply)) {
+			log("NO: ware %i, priority %i\n", rsp.ware, rsp.priority);
+
+			nexttimer = 200;
+			continue;
+		}
+
+		log("HANDLE: %u -> %u, ware %i, priority %i\n", rsp.request->get_target(g)->get_serial(),
+				rsp.supply->get_position(g)->get_serial(), rsp.ware, rsp.priority);
+
+		rsp.request->start_transfer(g, rsp.supply);
+
+		// for multiple wares
+		if (rsp.request && have_request(rsp.request)) {
+			log("  request is still around, reschedule timer\n");
+			nexttimer = 200;
+		}
+	}
+
+	// restart the timer, if necessary
+	if (nexttimer > 0) {
+		log("  nexttimer: %i\n", nexttimer);
+		start_request_timer(nexttimer);
 	}
 }
 
@@ -3365,6 +3654,9 @@ void Economy::request_timer_cb(Game* g, int serial, int unused)
 	Economy* e = (Economy*)g->get_trackpointer(serial);
 
 	if (!e)
+		return;
+
+	if (g->get_gametime() != e->m_request_timer_time)
 		return;
 
 	e->m_request_timer = false;
