@@ -128,4 +128,14 @@ bool Event::reacts_when_trigger_is_set(Trigger* t) {
    assert(0);
 } 
    
-
+bool Event::set_reacts_when_trigger_is_set(Trigger* t, bool up) {
+   assert(trigger_exists(t));
+   std::vector<Trigger_Info>::iterator i;
+   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) { 
+      if((*i).t==t) {
+         return i->up=up;
+      }
+   }
+   assert(0);
+} 
+ 

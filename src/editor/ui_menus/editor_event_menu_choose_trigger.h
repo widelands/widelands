@@ -26,6 +26,7 @@ class Editor_Interactive;
 class UIListselect;
 class UIButton;
 class Event;
+class Trigger;
 
 /*
 =============================
@@ -43,6 +44,11 @@ class Editor_Event_Menu_Choose_Trigger : public UIWindow {
       
 
    private:
+      struct Trigger_Data {
+         Trigger*      trig;
+         bool          run_enabled;
+      };
+
       Editor_Interactive *m_parent;
       UIListselect* m_available, *m_selected;
       UIButton *m_btn_ltor, *m_btn_rtol;

@@ -141,7 +141,7 @@ void Main_Menu_Load_Map::clicked(int id) {
       m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
    }
 
-   /* Resources, we do not calculate default resources, therefore we do
+   /* Resources. we do not calculate default resources, therefore we do
     * not expect to meet them here. */ 
    uint x,y;
    for(y=0; y<m_map->get_height(); y++) {
@@ -160,6 +160,10 @@ void Main_Menu_Load_Map::clicked(int id) {
       }
    }
   
+   // Touch all triggers once, so that they do not get deleted even
+   // when unreferenced
+   for(i=0; i<m_map->get_number_of_triggers(); i++)
+      m_map->reference_trigger(m_map->get_trigger(i));
 
    delete ml;
    }

@@ -100,6 +100,20 @@ Editor_Event_Menu_Choose_Trigger::Editor_Event_Menu_Choose_Trigger(Editor_Intera
    
    center_to_parent();
 
+   // Fill the list boxes, construct our data 
+   int i;
+   Map* map=m_parent->get_map();
+   for(i=0; i<map->get_number_of_triggers(); i++) {
+      Trigger_Data* data=new Trigger_Data();
+      data->trig=map->get_trigger(i);
+      data->run_enabled=true;
+      if(m_event->trigger_exists(data->trig)) { 
+         data->run_enabled=m_event->reacts_when_trigger_is_set(data->trig);
+         m_selected->add_entry(data->trig->get_name(), data);
+      } else {
+         m_available->add_entry(data->trig->get_name(), data);
+      }
+   }
   
    update();
 }
@@ -113,27 +127,23 @@ Unregister from the registry pointer
 */
 Editor_Event_Menu_Choose_Trigger::~Editor_Event_Menu_Choose_Trigger()
 {
+   int i=0; 
+   for(i=0; i<m_selected->get_nr_entries(); i++) {
+      m_selected->select(i);
+      delete static_cast<Trigger_Data*>(m_selected->get_selection());
+   }
+   for(i=0; i<m_available->get_nr_entries(); i++) {
+      m_available->select(i);
+      delete static_cast<Trigger_Data*>(m_available->get_selection());
+   }
 }
 
 /*
  * update all user interface stuff
  */
 void Editor_Event_Menu_Choose_Trigger::update(void) {
-   m_selected->clear();
-   m_available->clear();
 
-   // Fill the list boxes 
-   int i;
-   Map* map=m_parent->get_map();
-   for(i=0; i<map->get_number_of_triggers(); i++) {
-      Trigger* t=map->get_trigger(i);
-      if(m_event->trigger_exists(t)) 
-         m_selected->add_entry(t->get_name(), t);
-      else
-         m_available->add_entry(t->get_name(), t);
-
-   }
-   m_available->sort();
+    m_available->sort();
    m_selected->sort();
 
    if(m_available->get_selection()==0) 
@@ -168,6 +178,20 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
    case 1:
       {
          // OK Button
+         int i;
+         for(i=0; i<m_selected->get_nr_entries(); i++) {
+            m_selected->select(i);
+            Trigger_Data* t=static_cast<Trigger_Data*>(m_selected->get_selection());
+            if(!m_event->trigger_exists(t->trig)) 
+                  m_event->register_trigger(t->trig, m_parent->get_map(), t->run_enabled);
+            m_event->set_reacts_when_trigger_is_set(t->trig, t->run_enabled);
+         }
+         for(i=0; i<m_available->get_nr_entries(); i++) {
+            m_available->select(i);
+            Trigger_Data* t=static_cast<Trigger_Data*>(m_available->get_selection());
+            if(m_event->trigger_exists(t->trig))
+                  m_event->unregister_trigger(t->trig, m_parent->get_map());
+         }
          end_modal(1);
          return;
       }
@@ -176,8 +200,9 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
    case 2:
       {
          // Left to right button
-         Trigger* t=static_cast<Trigger*>(m_selected->get_selection());
-         m_event->unregister_trigger(t, m_parent->get_map());
+         Trigger_Data* t=static_cast<Trigger_Data*>(m_selected->get_selection());
+         m_selected->remove_entry(m_selected->get_selection_index());
+         m_available->add_entry(t->trig->get_name(), t);
          update();
       } 
       break;
@@ -185,9 +210,9 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
    case 3:
       {
          // Right to left button
-         Trigger* t=static_cast<Trigger*>(m_available->get_selection());
-         // TODO: make next item togglebar
-         m_event->register_trigger(t, m_parent->get_map(), true);
+         Trigger_Data* t=static_cast<Trigger_Data*>(m_available->get_selection());
+         m_available->remove_entry(m_available->get_selection_index());
+         m_selected->add_entry(t->trig->get_name(), t);
          update();
       }
       break;

@@ -58,6 +58,7 @@ class Event {
       inline void set_is_one_time_event(bool t) { m_is_one_time_event=t; } 
      
       bool reacts_when_trigger_is_set(Trigger* t);
+      bool set_reacts_when_trigger_is_set(Trigger*, bool);
 
       // Check if triggers are set
       bool check_triggers(void);
