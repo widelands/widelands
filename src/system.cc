@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -749,6 +749,8 @@ void Sys_SetMousePos(int x, int y)
 {
 	sys.mouse_x = x;
 	sys.mouse_y = y;
+	sys.mouse_internal_x = x;
+	sys.mouse_internal_y = y;
 
 	if (!sys.input_grab)
 		Sys_DoWarpMouse(x, y); // sync mouse positions
