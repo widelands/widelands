@@ -46,7 +46,7 @@ int Editor_Delete_Bob_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Inte
    while(mrc.next(&c)) {
       Field *f = parent->get_map()->get_field(c);
       Bob* bob=f->get_first_bob();
-      if (f) {
+      if (bob) {
          bob->remove(parent->get_editor());
       }
    }
