@@ -23,6 +23,7 @@
 #include "field.h"
 #include "error.h"
 
+
 /*
  * Constructor
  */
@@ -133,37 +134,6 @@ void Overlay_Manager::init(int w, int h) {
    m_h=h;
 
    m_overlay_fields = (uchar*)malloc(w*h);
-}
-
-/*
- * [ private function ]
- *
- * call cleanup and then, when graphic is reloaded
- * overlay_manager calls this for himself and everything should be fine
- */
-void Overlay_Manager::load_graphics(void) {
-   // Load all the needed graphics
-   m_buildhelp_infos[0].picid=g_gr->get_picture(PicMod_Game, "pics/set_flag.png", RGBColor(0,0,255));
-   g_gr->get_picture_size(m_buildhelp_infos[0].picid, &m_buildhelp_infos[0].hotspot_x, &m_buildhelp_infos[0].hotspot_y); 
-   m_buildhelp_infos[0].hotspot_x/=2; m_buildhelp_infos[0].hotspot_y-=1;
-   
-   m_buildhelp_infos[1].picid=g_gr->get_picture(PicMod_Game, "pics/small.png", RGBColor(0,0,255));
-   g_gr->get_picture_size(m_buildhelp_infos[1].picid, &m_buildhelp_infos[1].hotspot_x, &m_buildhelp_infos[1].hotspot_y); 
-   m_buildhelp_infos[1].hotspot_x/=2; m_buildhelp_infos[1].hotspot_y/=2;
-  
-   m_buildhelp_infos[2].picid=g_gr->get_picture(PicMod_Game, "pics/medium.png", RGBColor(0,0,255));
-   g_gr->get_picture_size(m_buildhelp_infos[2].picid, &m_buildhelp_infos[2].hotspot_x, &m_buildhelp_infos[2].hotspot_y); 
-   m_buildhelp_infos[2].hotspot_x/=2; m_buildhelp_infos[2].hotspot_y/=2;
-   
-   m_buildhelp_infos[3].picid=g_gr->get_picture(PicMod_Game, "pics/big.png", RGBColor(0,0,255));
-   g_gr->get_picture_size(m_buildhelp_infos[3].picid, &m_buildhelp_infos[3].hotspot_x, &m_buildhelp_infos[3].hotspot_y); 
-   m_buildhelp_infos[3].hotspot_x/=2; m_buildhelp_infos[3].hotspot_y/=2;
-   
-   m_buildhelp_infos[4].picid=g_gr->get_picture(PicMod_Game, "pics/mine.png", RGBColor(0,0,255));
-   g_gr->get_picture_size(m_buildhelp_infos[4].picid, &m_buildhelp_infos[4].hotspot_x, &m_buildhelp_infos[4].hotspot_y); 
-   m_buildhelp_infos[4].hotspot_x/=2; m_buildhelp_infos[4].hotspot_y/=2;
-   
-   m_are_graphics_loaded=true;
 }
 
 /*
@@ -308,38 +278,35 @@ void Overlay_Manager::remove_overlay(int jobid) {
    }
 }
 
-/*static const char* roadb_names[3] = {
-   "pics/roadb_green.png",
-   "pics/roadb_yellow.png",
-   "pics/roadb_red.png"
-};
-static const char* build_names[5] = {
-   "pics/set_flag.png",
-   "pics/small.png",
-   "pics/medium.png",
-   "pics/big.png",
-   "pics/mine.png"
-};
-
-
-
-===============
-GraphicImpl::allocate_gameicons
-
-Allocate the pictures used by rendermap()
-===============
-
-void GraphicImpl::allocate_gameicons()
-{
-	if (m_gameicons)
-		return;
-
-	m_gameicons = new GameIcons;
-
-	for(int i = 0; i < 3; i++)
-		m_gameicons->pics_roadb[i] = g_gr->get_picture(PicMod_Game, roadb_names[i], RGBColor(0,0,255));
-	for(int i = 0; i < 5; i++)
-		m_gameicons->pics_build[i] = g_gr->get_picture(PicMod_Game, build_names[i], RGBColor(0,0,255));
+/*
+ * [ private function ]
+ *
+ * call cleanup and then, when graphic is reloaded
+ * overlay_manager calls this for himself and everything should be fine
+ */
+void Overlay_Manager::load_graphics(void) {
+   // Load all the needed graphics
+   m_buildhelp_infos[0].picid=g_gr->get_picture(PicMod_Game, "pics/set_flag.png", RGBColor(0,0,255));
+   g_gr->get_picture_size(m_buildhelp_infos[0].picid, &m_buildhelp_infos[0].hotspot_x, &m_buildhelp_infos[0].hotspot_y); 
+   m_buildhelp_infos[0].hotspot_x/=2; m_buildhelp_infos[0].hotspot_y-=1;
+   
+   m_buildhelp_infos[1].picid=g_gr->get_picture(PicMod_Game, "pics/small.png", RGBColor(0,0,255));
+   g_gr->get_picture_size(m_buildhelp_infos[1].picid, &m_buildhelp_infos[1].hotspot_x, &m_buildhelp_infos[1].hotspot_y); 
+   m_buildhelp_infos[1].hotspot_x/=2; m_buildhelp_infos[1].hotspot_y/=2;
+  
+   m_buildhelp_infos[2].picid=g_gr->get_picture(PicMod_Game, "pics/medium.png", RGBColor(0,0,255));
+   g_gr->get_picture_size(m_buildhelp_infos[2].picid, &m_buildhelp_infos[2].hotspot_x, &m_buildhelp_infos[2].hotspot_y); 
+   m_buildhelp_infos[2].hotspot_x/=2; m_buildhelp_infos[2].hotspot_y/=2;
+   
+   m_buildhelp_infos[3].picid=g_gr->get_picture(PicMod_Game, "pics/big.png", RGBColor(0,0,255));
+   g_gr->get_picture_size(m_buildhelp_infos[3].picid, &m_buildhelp_infos[3].hotspot_x, &m_buildhelp_infos[3].hotspot_y); 
+   m_buildhelp_infos[3].hotspot_x/=2; m_buildhelp_infos[3].hotspot_y/=2;
+   
+   m_buildhelp_infos[4].picid=g_gr->get_picture(PicMod_Game, "pics/mine.png", RGBColor(0,0,255));
+   g_gr->get_picture_size(m_buildhelp_infos[4].picid, &m_buildhelp_infos[4].hotspot_x, &m_buildhelp_infos[4].hotspot_y); 
+   m_buildhelp_infos[4].hotspot_x/=2; m_buildhelp_infos[4].hotspot_y/=2;
+   
+   m_are_graphics_loaded=true;
 }
-*/
+
 
