@@ -27,6 +27,95 @@
 #include "minimap.h"
 #include "editor_tools.h"
 
+/*
+=============================
+
+class Editor_Tool_Menu
+
+This class is the tool selection window/menu. 
+Here, you can select the tool you wish to use the next time
+
+=============================
+*/
+
+class Editor_Tool_Menu : public Window {
+   public:
+      Editor_Tool_Menu(Editor_Interactive*, UniqueWindow*, Editor_Interactive::Editor_Tools*);
+      virtual ~Editor_Tool_Menu();
+
+   private:
+      Editor_Interactive::Editor_Tools* m_tools;
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+
+      void changed_to_function(int);
+};
+
+/*
+===============
+Editor_Tool_Menu::Editor_Tool_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *registry, Editor_Interactive::Editor_Tools* tools)
+	: Window(parent, (parent->get_w()-102)/2, (parent->get_h()-136)/2, 350, 200, "Tool Menu")
+{
+	m_registry = registry;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
+	}
+   m_tools=tools;
+
+   Radiogroup* r=new Radiogroup();
+   r->changedto.set(this, &Editor_Tool_Menu::changed_to_function);
+
+   int y = 20;
+   uint i;
+   for(i = 0; i < m_tools->tools.size(); i++, y+= 25) {
+      char buf[32];
+      r->add_button(this, 100, y);
+      sprintf(buf, "%s", m_tools->tools[i]->get_name());
+      new Textarea(this, 125, y+10, buf, Align_VCenter);
+
+   }
+   r->set_state(m_tools->current_tool);
+
+}
+
+/*
+===============
+Editor_Tool_Menu::~Editor_Tool_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Tool_Menu::~Editor_Tool_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Tool_Menu::changed_to_function()
+
+called when the listselect changes
+===========
+*/
+void Editor_Tool_Menu::changed_to_function(int n) {
+   m_tools->current_tool=n;
+   // TODO: call some kind of 'you've been selected' function
+}
+
 /**********************************************
  *
  * class EditorInteractive
@@ -64,27 +153,28 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    minimapview->warpview.set(this, &Editor_Interactive::minimap_warp);
    set_minimapview(minimapview);
 
-   // temp (should be toggle messages)
+   // temp (should be Main menu)
    b = new Button(this, x, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::exit_game_btn);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.bmp", RGBColor(0,0,255)));
    // temp
 
    b = new Button(this, x+34, y, 34, 34, 2);
-   //      b->clicked.set(this, &Interactive_Player::main_menu_btn);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.bmp", RGBColor(0,0,255)));
+   b->clicked.set(this, &Editor_Interactive::tool_menu_btn);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.bmp", RGBColor(0,0,255)));
 
    b = new Button(this, x+68, y, 34, 34, 2);
    //      b->clicked.set(this, &Interactive_Player::minimap_btn);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.bmp", RGBColor(0,0,255)));
 
    b = new Button(this, x+102, y, 34, 34, 2);
-   //      b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
+   b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.bmp", RGBColor(0,0,255)));
 
-   // TEMP. set tool
-//   current_tool=new Editor_Info_Tool();
-   current_tool=new Editor_Increase_Height_Tool();
+   // Init Tools
+   tools.current_tool=0;
+   tools.tools.push_back(new Editor_Info_Tool());
+   tools.tools.push_back(new Editor_Increase_Height_Tool());
 }
 
 /****************************************
@@ -93,7 +183,10 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
  * cleanup
  */
 Editor_Interactive::~Editor_Interactive() {
-   if(current_tool) delete current_tool;
+   while(tools.tools.size()) {
+      delete tools.tools.back();
+      tools.tools.pop_back();
+   }
 }
 
 /*
@@ -176,7 +269,7 @@ void Editor_Interactive::recalc_overlay(FCoords fc)
    m_maprenderinfo.overlay_basic[fc.y*map->get_width() + fc.x] = code;
 }
 
-
+  
 /** Editor_Interactive::exit_game_btn(void *a)
  *
  * Handle exit button
@@ -195,8 +288,33 @@ the function of the currently selected tool
 ===========
 */
 void Editor_Interactive::field_clicked() {
-   if(current_tool) {
-      Map* m=get_map();
-      current_tool->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
-   }
+   Map* m=get_map();
+   tools.tools[tools.current_tool]->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
+}
+
+/*
+===========
+Editor_Interactive::toggle_buildhelp()
+
+toggles the buildhelp on the map
+===========
+*/
+void Editor_Interactive::toggle_buildhelp(void)
+{
+	m_maprenderinfo.show_buildhelp = !m_maprenderinfo.show_buildhelp;
+}
+
+/*
+===============
+Editor_Interactive::tool_menu_btn
+
+Bring up or close the main menu
+===============
+*/
+void Editor_Interactive::tool_menu_btn()
+{
+	if (m_toolmenu.window)
+		delete m_toolmenu.window;
+	else
+		new Editor_Tool_Menu(this, &m_toolmenu, &tools);
 }

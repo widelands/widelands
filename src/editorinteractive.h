@@ -46,16 +46,24 @@ class Editor_Interactive : public Interactive_Base {
       // gets called when a field is clicked
       void field_clicked();
       
+      void toggle_buildhelp();
+      void tool_menu_btn();
+     
+      struct Editor_Tools {
+         int current_tool;
+         std::vector<Editor_Tool*> tools;
+      };
    private:
       static const int PANEL_HEIGHT=100;
 
       void exit_game_btn();
    
       // Tool
-      Editor_Tool* current_tool;
-      
+      Editor_Tools tools;
+
       // UI ownings
       ToolPanel* m_panel;
       Editor* m_editor;
+      UniqueWindow m_toolmenu;
 };
 #endif // __S__EDITOR_H

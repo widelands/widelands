@@ -519,4 +519,23 @@ private:
 	uint	m_pic_background;
 };
 
+/*
+=============================
+
+UniqueWindow
+
+can only be created once, when it is requested to 
+open a second one, it won't
+
+=============================
+*/
+
+struct UniqueWindow {
+	Window	*window;
+	int		x, y;
+	
+	inline UniqueWindow() : window(0), x(-1), y(-1) { }
+};
+
+
 #endif /* __S__UI_H */

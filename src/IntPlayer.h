@@ -30,13 +30,6 @@ class Map_View;
 class Window;
 class CoordPath;
 
-struct UniqueWindow {
-	Window	*window;
-	int		x, y;
-	
-	inline UniqueWindow() : window(0), x(-1), y(-1) { }
-};
-
 /** class Interactive_Player
  *
  * This is the interactive player. this one is

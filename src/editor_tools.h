@@ -40,6 +40,7 @@ class Editor_Tool {
 
       virtual int handle_click(const Coords*, Field* field, Map* m, Editor_Interactive* parent) = 0;
       virtual int tool_options_dialog(Editor_Interactive* parent) { return 0; } // not needed by every tool
+      virtual const char* get_name(void) = 0;
 };
 
 /*
@@ -55,6 +56,7 @@ class Editor_Info_Tool : public Editor_Tool {
       virtual ~Editor_Info_Tool() { }
 
       virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual const char* get_name(void) { return "Field Informations"; }
 };
 
 /*
@@ -71,6 +73,8 @@ class Editor_Increase_Height_Tool : public Editor_Tool {
   
       virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
       virtual int tool_options_dialog(Editor_Interactive* parent);
+      
+      virtual const char* get_name(void) { return "Increase Field Height"; }
       
    private:
       int m_increase_by;
