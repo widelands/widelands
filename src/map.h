@@ -379,6 +379,16 @@ struct FindFieldImmovableAttribute : public FindField {
 };
 
 
+// Accepts a field if it has the given resource
+struct FindFieldResource : public FindField {
+	FindFieldResource(uchar res) : m_resource(res) { }
+
+	virtual bool accept(FCoords coord) const;
+
+	uchar m_resource;
+};
+
+
 /*
 CheckStepDefault
 ----------------

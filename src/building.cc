@@ -1774,8 +1774,15 @@ struct ProductionAction {
       actConsume,    // sparam1 = consume this ware, has to be an input
       actAnimate,    // sparam1 = activate this animation until timeout
       actProduce,    // sparem1 = ware to produce. the worker carriers it out of the house
-      actCheck,      // sparam1 = ist DAs da?
+      actCheck,      // sparam1 = check if the given input ware is available
+		actMine,			// iparam1 = mineXXX type to mine for
    };
+
+	enum {
+		mineCoal,
+		mineGold,
+		mineIron
+	};
 
 	Type			type;
 	int			iparam1;
@@ -1917,8 +1924,21 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
          if (act.iparam2 <= 0)
             throw wexception("animation duration must be positive");
 
-      }
-		else
+      } else if (cmd[0] == "mine") {
+			if (cmd.size() != 2)
+				throw wexception("Usage: mine <resource>");
+
+			act.type = ProductionAction::actMine;
+
+			if (cmd[1] == "coal")
+				act.iparam1 = ProductionAction::mineCoal;
+			else if (cmd[1] == "gold")
+				act.iparam1 = ProductionAction::mineGold;
+			else if (cmd[1] == "iron")
+				act.iparam1 = ProductionAction::mineIron;
+			else
+				throw wexception("Resource must be gold, coal or iron (not '%s')", cmd[1].c_str());
+		} else
 			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
 
 		m_actions.push_back(act);
@@ -2455,6 +2475,109 @@ void ProductionSite::program_act(Game* g)
 			// get the worker to drop the item off
 			// get_building_work() will advance the program
 			m_worker->update_task_buildingwork(g);
+			return;
+			}
+
+		case ProductionAction::actMine:
+			{
+			Map* map = g->get_map();
+			MapRegion mr;
+			uchar res;
+
+			molog("  Mine %u\n", action->iparam1);
+
+			switch(action->iparam1) {
+			case ProductionAction::mineCoal: res = Resource_Coal; break;
+			case ProductionAction::mineGold: res = Resource_Gold; break;
+			case ProductionAction::mineIron: res = Resource_Iron; break;
+			default: throw wexception("ProductionAction::actMine: bad iparam = %u", action->iparam1);
+			}
+
+			// Select one of the fields randomly
+			uint totalres = 0;
+			uint totalchance = 0;
+			int pick;
+			Field* f;
+
+			mr.init(map, get_position(), 2);
+
+			while((f = mr.next())) {
+				uchar fres = f->get_resources();
+				uint amount;
+
+				if ((fres & Resource_TypeMask) != res)
+					amount = 0;
+				else
+				{
+					amount = fres & Resource_AmountMask;
+
+					// In the future, we might want to support amount = 0 for
+					// fields that can produce an infinite amount of resources.
+					if (!amount)
+						f->set_resources(0);
+				}
+
+				totalres += amount;
+				totalchance += 8*amount;
+
+				// Add penalty for fields that are running out
+				if (!amount)
+					totalchance += 1; // we already know it's completely empty, so penalty is less
+				else if (amount <= 2)
+					totalchance += 6;
+				else if (amount <= 4)
+					totalchance += 4;
+				else if (amount <= 6)
+					totalchance += 2;
+			}
+
+			if (!totalres) {
+				molog("  Run out of resources\n");
+				program_end(g, false);
+				return;
+			}
+
+			// Second pass through fields
+			pick = g->logic_rand() % totalchance;
+
+			mr.init(map, get_position(), 2);
+
+			while((f = mr.next())) {
+				uchar fres = f->get_resources();
+				uint amount;
+
+				if ((fres & Resource_TypeMask) != res)
+					amount = 0;
+				else
+					amount = fres & Resource_AmountMask;
+
+				pick -= 8*amount;
+				if (pick < 0) {
+					assert(amount > 0);
+
+					amount--;
+
+					if (!amount)
+						fres = 0;
+					else
+						fres = res | amount;
+
+					f->set_resources(fres);
+					break;
+				}
+			}
+
+			if (pick >= 0) {
+				molog("  Not successful this time\n");
+				program_end(g, false);
+				return;
+			}
+
+			molog("  Mined one item\n");
+
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, 10);
 			return;
 			}
 	}

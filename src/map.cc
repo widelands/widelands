@@ -2255,6 +2255,17 @@ bool FindFieldImmovableAttribute::accept(FCoords coord) const
 }
 
 
+bool FindFieldResource::accept(FCoords coord) const
+{
+	uchar res = coord.field->get_resources();
+
+	if ((res & Resource_TypeMask) != (m_resource & Resource_TypeMask))
+		return false;
+
+	return true;
+}
+
+
 /*
 ==============================================================================
 

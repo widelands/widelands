@@ -1,0 +1,16 @@
+[global]
+descname=Coal
+help=Coal is needed in the forge and other buildings
+menu_pic=coal_menu.png
+queue_full_pic=coal_queue_full.png
+queue_empty_pic=coal_queue_empty.png
+
+# The "animation" used when the item rests on a flag
+[idle]
+pics=coal_idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=4
+hot_spot_y=4
+
