@@ -4,6 +4,7 @@
 - improved watch window functionality
 - improved the transport system
 - added a 32 bit software renderer
+- improved renderer
 - added infrastructure for real-time in-game debugging and inspection
 - various code cleanups and bug fixes
 
