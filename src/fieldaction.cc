@@ -448,7 +448,7 @@ Open a watch window for the given field and delete self.
 */
 void FieldActionWindow::act_watch()
 {
-	show_watch_window(m_player, m_field.x, m_field.y);
+	show_watch_window(m_player, m_field);
 	okdialog();
 }
 

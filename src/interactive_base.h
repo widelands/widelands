@@ -63,6 +63,7 @@ class Interactive_Base : public Panel {
 		inline const MapRenderInfo* get_maprenderinfo() const { return &m_maprenderinfo; }
 
       void move_view_to(int fx, int fy);
+		void move_view_to_point(Point pos);
 		void warp_mouse_to_field(Coords c);
 
       virtual void recalc_overlay(FCoords fc) = 0;

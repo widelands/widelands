@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002, 2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,6 @@
 
 class Interactive_Player;
 
-void show_watch_window(Interactive_Player *parent, int fx, int fy);
+void show_watch_window(Interactive_Player *parent, Coords coords);
 
 #endif /* WATCHWINDOW_H */

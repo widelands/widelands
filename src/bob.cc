@@ -847,6 +847,10 @@ Bob::calc_drawpos
 
 Calculates the actual position to draw on from the base field position.
 This function takes walking etc. into account.
+
+pos is the location, in pixels, of the field m_position (height is already
+taken into account).
+drawpos will be filled with the location of the bob.
 ===============
 */
 void Bob::calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos)

@@ -38,9 +38,8 @@ Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Base
 	: Panel(parent, x, y, w, h)
 {
 	m_intbase = player;
-
-	vpx = vpy = 0;
-	dragging = false;
+	m_viewpoint.x = m_viewpoint.y = 0;
+	m_dragging = false;
 }
 
 
@@ -68,8 +67,8 @@ void Map_View::warp_mouse_to_field(Coords c)
 	int x, y;
 
 	m_intbase->get_map()->get_pix(c, &x, &y);
-	x -= vpx;
-	y -= vpy;
+	x -= m_viewpoint.x;
+	y -= m_viewpoint.y;
 
 	if (x >= 0 && x < get_w() && y >= 0 && y < get_h())
 		set_mouse_pos(x, y);
@@ -87,26 +86,26 @@ in this function
 */
 void Map_View::draw(RenderTarget* dst)
 {
-	dst->rendermap(m_intbase->get_maprenderinfo(), Point(vpx, vpy));
+	dst->rendermap(m_intbase->get_maprenderinfo(), m_viewpoint);
 }
 
 
-/** Map_View::set_viewpoint(int x, int y)
- *
- * Set the viewpoint to the given screen coordinates
- */
-void Map_View::set_viewpoint(int x, int y)
+/*
+===============
+Map_View::set_viewpoint
+
+Set the viewpoint to the given pixel coordinates
+===============
+*/
+void Map_View::set_viewpoint(Point vp)
 {
-   if (vpx == x && vpy == y)
+	if (vp == m_viewpoint)
 		return;
 
-	vpx=x; vpy=y;
-	while(vpx>(int)(MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width())))			vpx-=(MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width()));
-	while(vpy>(int)(MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height())))	vpy-=MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height());
-	while(vpx< 0)  vpx+=MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width());
-	while(vpy< 0)  vpy+=MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height());
+	m_intbase->get_map()->normalize_pix(&vp);
+	m_viewpoint = vp;
 
-	warpview.call(vpx, vpy);
+	warpview.call(m_viewpoint.x, m_viewpoint.y);
 }
 
 /** Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
@@ -128,31 +127,35 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 	else if (btn == MOUSE_RIGHT)
 	{
 		if (down) {
-			dragging = true;
+			m_dragging = true;
 			grab_mouse(true);
 			Sys_MouseLock(true);
-		} else if (dragging) {
+		} else if (m_dragging) {
 			Sys_MouseLock(false);
 			grab_mouse(false);
-			dragging = false;
+			m_dragging = false;
 		}
 	}
 
 	return true;
 }
 
-/** Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
- *
- * Scroll the view according to mouse movement.
- */
+
+/*
+===============
+Map_View::handle_mousemove
+
+Scroll the view according to mouse movement.
+===============
+*/
 void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
    if (!(btns & (1<<MOUSE_RIGHT)))
-		dragging = false;
-   
-	if (dragging)
+		m_dragging = false;
+
+	if (m_dragging)
 	{
-		set_rel_viewpoint(xdiff, ydiff);
+		set_rel_viewpoint(Point(xdiff, ydiff));
 	}
 
 	if (!m_intbase->get_fieldsel_freeze())
@@ -160,6 +163,7 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 
 	g_gr->update_fullscreen();
 }
+
 
 /*
 ===============
@@ -173,99 +177,7 @@ void Map_View::track_fsel(int mx, int my)
 {
 	FCoords fsel;
 
-	// First of all, get a preliminary field coordinate based on the basic
-	// grid (not taking heights into account)
-	my += vpy;
-	fsel.y = (my + (FIELD_HEIGHT>>2)) / (FIELD_HEIGHT>>1) - 1;
-
-	mx += vpx;
-	fsel.x = mx;
-	if (fsel.y & 1)
-		fsel.x -= FIELD_WIDTH>>1;
-	fsel.x = (fsel.x + (FIELD_WIDTH>>1)) / FIELD_WIDTH;
-
-	m_intbase->get_map()->normalize_coords((Coords*)&fsel);
-
-	// Now, fsel point to where we'd be if the field's height was 0.
-	// We now recursively move towards the correct field. Because height cannot
-	// be negative, we only need to consider the bottom-left or bottom-right neighbour
-	int mapheight = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height());
-	int mapwidth = MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width());
-	int fscrx, fscry;
-
-	fsel.field = m_intbase->get_map()->get_field(fsel);
-	m_intbase->get_map()->get_pix(fsel, &fscrx, &fscry);
-
-	for(;;) {
-		FCoords bln, brn;
-		int blscrx, blscry, brscrx, brscry;
-		bool movebln, movebrn;
-		int fd, blnd, brnd;
-		int d2;
-
-		m_intbase->get_map()->get_bln(fsel, &bln);
-		m_intbase->get_map()->get_brn(fsel, &brn);
-
-		m_intbase->get_map()->get_pix(bln, &blscrx, &blscry);
-		m_intbase->get_map()->get_pix(brn, &brscrx, &brscry);
-
-		// determine which field the mouse is closer to on the y-axis
-		// bit messy because it has to be aware of map wrap-arounds
-		fd = my - fscry;
-		d2 = my - mapheight - fscry;
-		if (abs(d2) < abs(fd))
-			fd = d2;
-
-		blnd = blscry - my;
-		d2 = blscry - (my - mapheight);
-		if (abs(d2) < abs(blnd))
-			blnd = d2;
-		movebln = blnd < fd;
-
-		brnd = brscry - my;
-		d2 = brscry - (my - mapheight);
-		if (abs(d2) < abs(brnd))
-			brnd = d2;
-		movebrn = brnd < fd;
-
-		if (!movebln && !movebrn)
-			break;
-
-		// determine which field is closer on the x-axis
-		blnd = mx - blscrx;
-		d2 = mx - mapwidth - blscrx;
-		if (abs(d2) < abs(blnd))
-			blnd = d2;
-
-		brnd = brscrx - mx;
-		d2 = brscrx - (mx - mapwidth);
-		if (abs(d2) < abs(brnd))
-			brnd = d2;
-
-		if (brnd < blnd) {
-			if (movebrn) {
-				fsel = brn;
-				fscrx = brscrx;
-				fscry = brscry;
-			} else if (movebln) {
-				fsel = bln;
-				fscrx = blscrx;
-				fscry = blscry;
-			} else
-				break;
-		} else {
-			if (movebln)  {
-				fsel = bln;
-				fscrx = blscrx;
-				fscry = blscry;
-			} else if (movebrn) {
-				fsel = brn;
-				fscrx = brscrx;
-				fscry = brscry;
-			} else
-				break;
-		}
-	}
+	fsel = m_intbase->get_map()->calc_coords(Point(m_viewpoint.x + mx, m_viewpoint.y + my));
 
 	// Apply the new fieldsel
 	m_intbase->set_fieldsel(fsel);

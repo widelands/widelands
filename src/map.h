@@ -222,6 +222,9 @@ public:
 	void get_neighbour(const FCoords f, int dir, FCoords * const o);
 
 	// Field/screen coordinates
+	FCoords calc_coords(Point pos);
+	void normalize_pix(Point* p);
+	int calc_pix_distance(Point a, Point b);
 	inline void get_basepix(const Coords fc, int *px, int *py);
 	inline void get_pix(const FCoords fc, int *px, int *py);
 	inline void get_pix(const Coords c, int *px, int *py);

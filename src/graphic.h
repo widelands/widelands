@@ -144,6 +144,11 @@ struct Point
    Point(int px, int py) : x(px), y(py) { }
 };
 
+inline bool operator==(Point a, Point b) { return (a.x == b.x) && (a.y == b.y); }
+inline bool operator!=(Point a, Point b) { return (a.x != b.x) || (a.y != b.y); }
+inline Point operator+(Point a, Point b) { return Point(a.x + b.x, a.y + b.y); }
+inline Point operator-(Point a, Point b) { return Point(a.x - b.x, a.y - b.y); }
+
 struct Rect : public Point {
 	int w;
 	int h;

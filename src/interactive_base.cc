@@ -202,25 +202,32 @@ void Interactive_Base::mainview_move(int x, int y)
    }
 }
 
-/** Interactive_Base::minimap_warp(int x, int y)
- *
- * Called whenever the player clicks on a location on the minimap.
- * Warps the main mapview position to the clicked location.
- */
+
+/*
+===============
+Interactive_Base::minimap_warp
+
+Called whenever the player clicks on a location on the minimap.
+Warps the main mapview position to the clicked location.
+===============
+*/
 void Interactive_Base::minimap_warp(int x, int y)
 {
 	x -= get_mapview()->get_w()>>1;
 	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
 	y -= get_mapview()->get_h()>>1;
 	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
-	get_mapview()->set_viewpoint(x, y);
+	get_mapview()->set_viewpoint(Point(x, y));
 }
 
 
-/** Interactive_Base::move_view_to(int fx, int fy)
- *
- * Move the mainview to the given position (in field coordinates)
- */
+/*
+===============
+Interactive_Base::move_view_to
+
+Move the mainview to the given position (in field coordinates)
+===============
+*/
 void Interactive_Base::move_view_to(int fx, int fy)
 {
 	int x = MULTIPLY_WITH_FIELD_WIDTH(fx);
@@ -233,7 +240,23 @@ void Interactive_Base::move_view_to(int fx, int fy)
 	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
 	y -= get_mapview()->get_h()>>1;
 	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
-	get_mapview()->set_viewpoint(x, y);
+	get_mapview()->set_viewpoint(Point(x, y));
+}
+
+
+/*
+===============
+Interactive_Base::move_view_to_point
+
+Center the mainview on the given position (in pixels)
+===============
+*/
+void Interactive_Base::move_view_to_point(Point pos)
+{
+	if (m_minimap.window)
+		m_mm->get_minimapview()->set_view_pos(pos.x, pos.y);
+
+	get_mapview()->set_viewpoint(pos - Point(get_mapview()->get_w()/2, get_mapview()->get_h()/2));
 }
 
 
@@ -262,11 +285,13 @@ void Interactive_Base::toggle_minimap() {
    }
 	else {
 		m_mm = new MiniMap(this, &m_minimap);
-      m_mm->get_minimapview()->warpview.set(this, 
+      m_mm->get_minimapview()->warpview.set(this,
             &Interactive_Base::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with
-		mainview_move(get_mapview()->get_vpx(), get_mapview()->get_vpy());
+		Point p = get_mapview()->get_viewpoint();
+
+		mainview_move(p.x, p.y);
 	}
 }
 
