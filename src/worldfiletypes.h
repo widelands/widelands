@@ -1,6 +1,7 @@
 /* WordFile format 0.1
 
 2002-02-10	sft+	created
+2002-02-13	sft+	made use mytypes.h
 
 WordFile
 {
@@ -12,8 +13,7 @@ WordFile
 }
 */
 
-typedef unsigned short word;
-typedef unsigned int dword;
+#include "mytypes.h"
 
 #define WLWF_MAGIC		"WLwf"
 #define WLWF_VERSION	0x0001
@@ -23,28 +23,28 @@ typedef unsigned int dword;
 struct WorldFileHeader
 {
 	char magic[6];			// "WLwf\0\0"
-	word version;			// file format version
+	ushort version;			// file format version
 	char author[20];
 	char name[20];
-	dword checksum;			// not yet used
-	dword nPictures;
-	dword nTerrains;
-	dword nBobs;
-	dword nResources;
+	uint checksum;			// not yet used
+	uint nPictures;
+	uint nTerrains;
+	uint nBobs;
+	uint nResources;
 };
 
 struct TerrainType
 {
 	char name[16];
-	dword attributes;
-	dword texture;			// index in WorldFileHeader::picture
+	uint attributes;
+	uint texture;			// index in WorldFileHeader::picture
 };
 
 /*struct Bob
 {
 	char name[16];
-	dword atributes;
-	dword texture;
+	uint atributes;
+	uint texture;
 	//?
 };*/
 typedef struct TerrainType Bob;		// for now, that'll do just fine
@@ -52,9 +52,9 @@ typedef struct TerrainType Bob;		// for now, that'll do just fine
 struct ResourceDesc
 {
 	char name[16];
-	dword atributes;
-	dword texture;
-	dword occurence;		// how much of this is will be in this world
+	uint atributes;
+	uint texture;
+	uint occurence;			// how much of this is will be in this world
 							// (we'll have to define some unit for this)
 	//?
 };
@@ -76,9 +76,9 @@ struct PictureInfo
 	char name[16];
 	PictureType type;		// terrain-texture/bob-picture/resource-picture
 	
-	dword width;
-	dword height;
-	dword depth;			// bits per pixel
-	dword flags;
+	uint width;
+	uint height;
+	uint depth;				// bits per pixel
+	uint flags;
 	// image data
 };

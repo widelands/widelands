@@ -66,4 +66,29 @@ void closedir(DIR* dir)
 	delete dir;
 }
 
+// is there anything like this in unix dirent?
+int readdircomplete(const char* name, char*** buf)
+{
+	// count files
+	DIR* dir = opendir(name);
+	int n=0;
+	while (readdir(dir))
+		n++;
+	closedir(dir);
+	if (n == 0)
+		return 0;
+
+	// fill buffer
+	*buf = new char*[n];
+	dir = opendir(name);
+	for (int i=0; i<n; i++)
+	{
+		dirent* file = readdir(dir);
+		if (!file)
+			break;		// some ++&"§ changed the dir!!
+		(*buf)[i] = file->d_name;
+	}
+	return n;
+}
+
 #endif //WIN32
