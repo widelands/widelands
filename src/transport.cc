@@ -3586,7 +3586,7 @@ void Economy::process_requests()
 			if (nexttimer < 0 || nexttimer > (-idletime))
 				nexttimer = -idletime;
 
-			break;
+			continue;
 		}
 
 		if (idletime <= 0)
