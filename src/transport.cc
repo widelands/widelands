@@ -3798,6 +3798,76 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 
 		s->queue.push(rsp);
 	}
+
+	// TODO: This function should be called from time to time
+	create_requested_workers (g);
+}
+
+/*
+===============
+Economy::create_requested_workers
+
+Walk all Requests and find requests of workers than aren't supplied. Then try to create
+the worker at warehouses.
+===============
+*/
+void Economy::create_requested_workers(Game* g)
+{
+	/*
+		Find the request of workers that can not be supplied
+	*/
+	if (get_nr_warehouses() > 0) {
+		Warehouse *wh = m_warehouses[0];
+
+		for(RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
+			Request* req = *it;
+
+			if (!req->is_idle()) {
+				Worker_Descr* w_desc = 0;
+				int ware = req->get_ware();
+				int temp = 0;
+				int num_wares = 0;
+
+				while (temp < wh->get_wares().get_nrwareids()) {
+					w_desc = get_owner()->get_tribe()->get_worker_descr(temp);
+					temp++;
+					if ((w_desc) && (w_desc->get_ware_id() == ware))
+						break;
+					w_desc = 0;
+				} // while
+					
+				// Ignore it if isn't a worker or is a worker that cann't be buildable
+				if ((!w_desc) || (!w_desc->get_buildable()))
+					continue;
+
+//log ("REQ.Worker buildable (%d, %s)\n", ware, w_desc->get_name());
+
+				for(int i = 0; i < m_supplies[ware].get_nrsupplies(); i++) {
+					Supply* supp = m_supplies[ware].get_supply(i);
+
+					if (!supp->is_active(g)) {
+						num_wares++;
+//log ("(%d, %s) act ?: %d  Num:%d There are supplies!\n", ware, w_desc->get_name(), supp->is_active(g), supp->get_amount(g, ware));
+						continue;
+					} // if (supp->is_active)
+				} // for(int i = 0; i < m_supplies)
+
+				// If there aren't enough supplies...
+				if (num_wares == 0) {
+// log ("(%d, %s) There are NOT supplies!\n", ware, w_desc->get_name());
+					uint n_wh = 0;
+					while (n_wh < get_nr_warehouses()) {
+						if (m_warehouses[n_wh]->can_create_worker(g, ware)) {
+log("Economy::process_request-- Created a '%s' needed\n", w_desc->get_name());
+							m_warehouses[n_wh]->create_worker(g, ware);
+							break;
+						} // if (m_warehouses[n_wh]
+						n_wh++;
+					} // while (n_wh < get_nr_warehouses())
+				} // if (num_wares == 0)			
+			} // if (req->is_open())
+		} // for (RequestList::iterator
+	} // if (get_nr_warehouses())
 }
 
 

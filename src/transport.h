@@ -583,6 +583,7 @@ private:
 
 	Supply* find_best_supply(Game* g, Request* req, int ware, int* pcost);
 	void process_requests(Game* g, RSPairStruct* s);
+	void create_requested_workers(Game* g);
 	void balance_requestsupply();
 
 	static void request_timer_cb(Game* g, int serial, int unused);

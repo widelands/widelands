@@ -4,6 +4,9 @@ help=The Carpenter works in the Sawmill and reduces one trunk to one wood.
 type=generic
 menu_pic=carpenter_menu.png
 
+[buildcost]
+carrier=1
+
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.
 # You can, however, create [walk_nw] etc.. sections for sub-animations in a

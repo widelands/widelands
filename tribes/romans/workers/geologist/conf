@@ -6,6 +6,9 @@ menu_pic=geologist_menu.png
 program=expedition
 program=search
 
+[buildcost]
+carrier=1
+
 # Expedition is the main program
 # The specialized geologist command walks the geologist around his starting
 # location, executing the search program from time to time.

@@ -44,6 +44,7 @@ Soldier_Descr::~Soldier_Descr
 Soldier_Descr::Soldier_Descr(Tribe_Descr *tribe, const char *name)
 	: Worker_Descr(tribe, name)
 {
+   m_buildable = false; 
 }
 
 Soldier_Descr::~Soldier_Descr(void)

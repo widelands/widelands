@@ -549,9 +549,7 @@ Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name, Tribe_
    if(!tribe)
       idx = m_map->get_world()->get_immovable_index(name.c_str());
    else { 
-      log("ALIVE: %s\n", name.c_str());
       idx = tribe->get_immovable_index(name.c_str());
-      log("ALIVE: %i\n", idx);
    }
 
 	if (idx < 0)

@@ -26,7 +26,7 @@
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
-
+#include "tribe.h"
 
 static const int CARRIER_SPAWN_INTERVAL = 2500;
 
@@ -696,3 +696,105 @@ Building* Warehouse_Descr::create_object()
 {
 	return new Warehouse(this);
 }
+
+
+/*
+===============
+Warehouse::can_create_worker
+===============
+*/
+bool Warehouse::can_create_worker(Game *g, int worker)
+{
+	int num;
+	Worker_Descr *w_desc = 0;
+	
+	num = 0;
+	
+	while (num < m_supply->get_wares().get_nrwareids ()) {
+		w_desc = get_owner()->get_tribe()->get_worker_descr(num);
+		if (w_desc->get_ware_id() == worker)
+			break;
+		num++;
+	}
+
+	if (num >= m_supply->get_wares().get_nrwareids ())
+		throw wexception ("Worker type %d doesn't exists!", worker);
+
+	if (w_desc)
+	{
+		uint i;
+		bool enought_wares;
+		const Worker_Descr::BuildCost* bc = w_desc->get_buildcost();
+		
+		// First watch if we can build it
+		if (!w_desc->get_buildable())
+			return false;
+		enought_wares = true;
+
+		// Now see if we have the resources
+		for(i = 0; i < bc->size(); i++) 
+		{
+			int id_w;
+			
+			id_w = g->get_safe_ware_id((*bc)[i].name.c_str());
+			
+			if (m_supply->stock(id_w) < (*bc)[i].amount)
+			{
+			molog (" %s: Need more %s for creation\n", w_desc->get_name(), (*bc)[i].name.c_str());
+				enought_wares = false;
+			}
+		}
+		return enought_wares;
+	}
+	else
+		throw wexception("Can not create worker of desired type : %d", worker);
+}
+
+/*
+=============
+Warehouse::create_worker
++=============
+*/
+void Warehouse::create_worker(Game *g, int worker)
+{
+	int num;
+	Worker_Descr *w_desc = 0;
+	num = 0;
+	
+	while (num < m_supply->get_wares().get_nrwareids ()) {
+		w_desc = get_owner()->get_tribe()->get_worker_descr(num);
+		if (w_desc->get_ware_id() == worker)
+			break;
+		num++;
+	}
+
+	if (num >= m_supply->get_wares().get_nrwareids ())
+		throw wexception ("Worker type %d doesn't exists!", worker);
+
+	if (!can_create_worker (g, worker))
+		throw wexception ("Warehouse::create_worker WE CANN'T CREATE A %d WORKER", worker);
+
+
+	if (w_desc)
+	{
+		uint i;
+		const Worker_Descr::BuildCost* bc = w_desc->get_buildcost();
+		
+		for(i = 0; i < bc->size(); i++) {
+			int id_w;
+			id_w = g->get_safe_ware_id((*bc)[i].name.c_str());
+			destroy_wares(id_w , (*bc)[i].amount);
+		}
+
+		create_wares(worker, 1);
+
+		molog (" We have created a(n) %s\n", w_desc->get_name ());
+
+	}
+	else
+		throw wexception("Can not create worker of desired type : %d", worker);
+
+	
+}
+
+

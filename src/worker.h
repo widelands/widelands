@@ -22,6 +22,8 @@
 
 #include "animation.h"
 #include "bob.h"
+#include <string>
+#include <vector>
 
 class Building;
 class Economy;
@@ -36,272 +38,288 @@ class Tribe_Descr;
 class IdleWorkerSupply;
 
 /*
-Worker is the base class for all humans (and actually potential non-humans, too)
-that belong to a tribe.
+   Worker is the base class for all humans (and actually potential non-humans, too)
+   that belong to a tribe.
 
-Every worker can carry one (item) ware.
+   Every worker can carry one (item) ware.
 
-Workers can be in one of the following meta states:
-- Request: the worker is walking to his job somewhere
-- Idle: the worker is at his job but idling
-- Work: the worker is running his working schedule
-*/
+   Workers can be in one of the following meta states:
+   - Request: the worker is walking to his job somewhere
+   - Idle: the worker is at his job but idling
+   - Work: the worker is running his working schedule
+   */
 class Worker;
 class WorkerProgram;
 struct WorkerAction;
 
 class Worker_Descr : public Bob_Descr {
-	friend class Tribe_Descr;
+   friend class Tribe_Descr;
+   friend class Warehouse;
 
-	typedef std::map<std::string, WorkerProgram*> ProgramMap;
+   typedef std::map<std::string, WorkerProgram*> ProgramMap;
 
-public:
-	enum Worker_Type {
+   struct CostItem {
+      std::string name;   // name of ware
+      int         amount; // amount
+
+      inline CostItem(const char* iname, int iamount)
+         : name(iname), amount(iamount) {}
+   };
+   typedef std::vector<CostItem> BuildCost;
+
+   public:
+   enum Worker_Type {
       NORMAL = 0,
       CARRIER, 
       SOLDIER,
    };
-   
+
    Worker_Descr(Tribe_Descr *tribe, const char *name);
-	virtual ~Worker_Descr(void);
+   virtual ~Worker_Descr(void);
 
-	virtual Bob *create_object();
+   virtual Bob *create_object();
 
-	virtual void load_graphics(void);
+   virtual void load_graphics(void);
+
+   inline bool get_buildable() { return m_buildable; }
+   inline const BuildCost* get_buildcost() { return &m_buildcost; }
 
    inline Tribe_Descr *get_tribe() { return m_tribe; }
-	inline std::string get_descname() const { return m_descname; }
-	inline std::string get_helptext() const { return m_helptext; }
-	inline uint get_menu_pic() { return m_menu_pic; }
-	inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
-	inline DirAnimations *get_right_walk_anims(bool carries_ware) { if(carries_ware) return &m_walkload_anims; return &m_walk_anims; }
-	inline int get_ware_id() const { return m_ware_id; }
-	const WorkerProgram* get_program(std::string name) const;
-   
+   inline std::string get_descname() const { return m_descname; }
+   inline std::string get_helptext() const { return m_helptext; }
+
+   inline uint get_menu_pic() { return m_menu_pic; }
+   inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
+   inline DirAnimations *get_right_walk_anims(bool carries_ware) { if(carries_ware) return &m_walkload_anims; return &m_walk_anims; }
+   inline int get_ware_id() const { return m_ware_id; }
+   const WorkerProgram* get_program(std::string name) const;
+
    virtual Worker_Type get_worker_type(void) { return NORMAL; }
 
    // For leveling
    inline int get_max_exp(void) { return m_max_experience; }
    inline int get_min_exp(void) { return m_min_experience; }
    const char* get_becomes(void) { return m_becomes.size() ? m_becomes.c_str() : 0; }
-	void set_ware_id(int idx);
+   void set_ware_id(int idx);
 
-	Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords);
+   Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords);
 
-protected:
-	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	static Worker_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata);
+   protected:
+   virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+   static Worker_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata);
 
-	Tribe_Descr*	m_tribe;
-	std::string		m_descname;			// Descriptive name
-	std::string		m_helptext;			// Short (tooltip-like) help text
-	char*				m_menu_pic_fname;
-	uint				m_menu_pic;
-	DirAnimations	m_walk_anims;
-	DirAnimations	m_walkload_anims;
-	int				m_ware_id;
+   Tribe_Descr*	m_tribe;
+   std::string		m_descname;			// Descriptive name
+   std::string		m_helptext;			// Short (tooltip-like) help text
+   char*				m_menu_pic_fname;
+   uint				m_menu_pic;
+   DirAnimations	m_walk_anims;
+   DirAnimations	m_walkload_anims;
+   int				m_ware_id;
+   bool        m_buildable;
+   BuildCost      m_buildcost;
    int            m_max_experience, m_min_experience;
    std::string    m_becomes;
-	ProgramMap		m_programs;
+   ProgramMap		m_programs;
 };
 
 class Worker : public Bob {
-	friend class WorkerProgram;
+   friend class WorkerProgram;
 
-	MO_DESCR(Worker_Descr);
+   MO_DESCR(Worker_Descr);
 
-public:
+   public:
 
    Worker(Worker_Descr *descr);
-	virtual ~Worker();
+   virtual ~Worker();
 
    virtual Worker_Descr::Worker_Type get_worker_type(void) { return get_descr()->get_worker_type(); }
    virtual int get_bob_type() { return Bob::WORKER; }
-	
 
-	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
-	inline uint get_idle_anim() const { return get_descr()->get_idle_anim(); }
+
+   inline int get_ware_id() const { return get_descr()->get_ware_id(); }
+   inline uint get_idle_anim() const { return get_descr()->get_idle_anim(); }
    inline uint get_menu_pic() const { return get_descr()->get_menu_pic(); }
    const char* get_becomes(void) { return get_descr()->get_becomes(); }
-   
-	virtual uint get_movecaps();
 
-	inline PlayerImmovable *get_location(Editor_Game_Base *g) { return (PlayerImmovable*)m_location.get(g); }
-	inline Economy *get_economy() { return m_economy; }
+   virtual uint get_movecaps();
 
-	void set_location(PlayerImmovable *location);
-	void set_economy(Economy *economy);
+   inline PlayerImmovable *get_location(Editor_Game_Base *g) { return (PlayerImmovable*)m_location.get(g); }
+   inline Economy *get_economy() { return m_economy; }
 
-	WareInstance* get_carried_item(Editor_Game_Base* g) { return (WareInstance*)m_carried_item.get(g); }
-	void set_carried_item(Game* g, WareInstance* item);
-	WareInstance* fetch_carried_item(Game* g);
+   void set_location(PlayerImmovable *location);
+   void set_economy(Economy *economy);
 
-	void schedule_incorporate(Game *g);
-	void incorporate(Game *g);
+   WareInstance* get_carried_item(Editor_Game_Base* g) { return (WareInstance*)m_carried_item.get(g); }
+   void set_carried_item(Game* g, WareInstance* item);
+   WareInstance* fetch_carried_item(Game* g);
 
-	virtual void init(Editor_Game_Base *g);
-	virtual void cleanup(Editor_Game_Base *g);
+   void schedule_incorporate(Game *g);
+   void incorporate(Game *g);
 
-	bool wakeup_flag_capacity(Game* g, Flag* flag);
-	bool wakeup_leave_building(Game* g, Building* building);
+   virtual void init(Editor_Game_Base *g);
+   virtual void cleanup(Editor_Game_Base *g);
+
+   bool wakeup_flag_capacity(Game* g, Flag* flag);
+   bool wakeup_leave_building(Game* g, Building* building);
 
    // For leveling
    void level(Game*);
    void create_needed_experience(Game*);
-   
-protected:
-	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
-	virtual void init_auto_task(Game* g);
 
-	inline bool does_carry_ware(void) { return m_carried_item.is_set(); }
+   protected:
+   virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
+   virtual void init_auto_task(Game* g);
 
-public: // worker-specific tasks
-	void start_task_transfer(Game* g, Transfer* t);
-	void cancel_task_transfer(Game* g);
+   inline bool does_carry_ware(void) { return m_carried_item.is_set(); }
 
-	void start_task_buildingwork(Game* g);
-	void update_task_buildingwork(Game* g);
+   public: // worker-specific tasks
+   void start_task_transfer(Game* g, Transfer* t);
+   void cancel_task_transfer(Game* g);
 
-	void start_task_return(Game* g, bool dropitem);
-	void start_task_program(Game* g, std::string name);
+   void start_task_buildingwork(Game* g);
+   void update_task_buildingwork(Game* g);
 
-	void start_task_gowarehouse(Game* g);
-	void start_task_dropoff(Game* g, WareInstance* item);
-	void start_task_fetchfromflag(Game* g);
+   void start_task_return(Game* g, bool dropitem);
+   void start_task_program(Game* g, std::string name);
 
-	bool start_task_waitforcapacity(Game* g, Flag* flag);
-	void start_task_leavebuilding(Game* g, bool changelocation);
-	void start_task_fugitive(Game* g);
+   void start_task_gowarehouse(Game* g);
+   void start_task_dropoff(Game* g, WareInstance* item);
+   void start_task_fetchfromflag(Game* g);
 
-	void start_task_geologist(Game* g, int attempts, int radius, std::string subcommand);
-   
+   bool start_task_waitforcapacity(Game* g, Flag* flag);
+   void start_task_leavebuilding(Game* g, bool changelocation);
+   void start_task_fugitive(Game* g);
+
+   void start_task_geologist(Game* g, int attempts, int radius, std::string subcommand);
+
    // For leveling
    void gain_experience(Game*);
    int get_needed_experience(void) { return m_needed_exp; }
    int get_current_experience(void) { return m_current_exp; }
 
-private: // task details
-	void transfer_update(Game* g, State* state);
-	void transfer_signal(Game* g, State* state);
-	void transfer_mask(Game* g, State* state);
+   private: // task details
+   void transfer_update(Game* g, State* state);
+   void transfer_signal(Game* g, State* state);
+   void transfer_mask(Game* g, State* state);
 
-	void buildingwork_update(Game* g, State* state);
-	void buildingwork_signal(Game* g, State* state);
+   void buildingwork_update(Game* g, State* state);
+   void buildingwork_signal(Game* g, State* state);
 
-	void return_update(Game* g, State* state);
-	void return_signal(Game* g, State* state);
+   void return_update(Game* g, State* state);
+   void return_signal(Game* g, State* state);
 
-	void program_update(Game* g, State* state);
-	void program_signal(Game* g, State* state);
+   void program_update(Game* g, State* state);
+   void program_signal(Game* g, State* state);
 
-	void gowarehouse_update(Game* g, State* state);
-	void gowarehouse_signal(Game* g, State* state);
+   void gowarehouse_update(Game* g, State* state);
+   void gowarehouse_signal(Game* g, State* state);
 
-	void dropoff_update(Game* g, State* state);
+   void dropoff_update(Game* g, State* state);
 
-	void fetchfromflag_update(Game* g, State* state);
+   void fetchfromflag_update(Game* g, State* state);
 
-	void waitforcapacity_update(Game* g, State* state);
-	void waitforcapacity_signal(Game* g, State* state);
+   void waitforcapacity_update(Game* g, State* state);
+   void waitforcapacity_signal(Game* g, State* state);
 
-	void leavebuilding_update(Game* g, State* state);
-	void leavebuilding_signal(Game* g, State* state);
+   void leavebuilding_update(Game* g, State* state);
+   void leavebuilding_signal(Game* g, State* state);
 
-	void fugitive_update(Game* g, State* state);
-	void fugitive_signal(Game* g, State* state);
+   void fugitive_update(Game* g, State* state);
+   void fugitive_signal(Game* g, State* state);
 
-	void geologist_update(Game* g, State* state);
+   void geologist_update(Game* g, State* state);
 
-protected:
-	static Task taskTransfer;
-	static Task taskBuildingwork;
-	static Task taskReturn;
-	static Task taskProgram;
-	static Task taskGowarehouse;
-	static Task taskDropoff;
-	static Task taskFetchfromflag;
-	static Task taskWaitforcapacity;
-	static Task taskLeavebuilding;
-	static Task taskFugitive;
-	static Task taskGeologist;
+   protected:
+   static Task taskTransfer;
+   static Task taskBuildingwork;
+   static Task taskReturn;
+   static Task taskProgram;
+   static Task taskGowarehouse;
+   static Task taskDropoff;
+   static Task taskFetchfromflag;
+   static Task taskWaitforcapacity;
+   static Task taskLeavebuilding;
+   static Task taskFugitive;
+   static Task taskGeologist;
 
-private: // Program commands
-	bool run_mine(Game* g, State* state, const WorkerAction* act);
-	bool run_createitem(Game* g, State* state, const WorkerAction* act);
-	bool run_setdescription(Game* g, State* state, const WorkerAction* act);
-	bool run_setbobdescription(Game* g, State* state, const WorkerAction* act);
-	bool run_findobject(Game* g, State* state, const WorkerAction* act);
-	bool run_findspace(Game* g, State* state, const WorkerAction* act);
-	bool run_findresource(Game* g, State* state, const WorkerAction* act);
-	bool run_walk(Game* g, State* state, const WorkerAction* act);
-	bool run_animation(Game* g, State* state, const WorkerAction* act);
-	bool run_return(Game* g, State* state, const WorkerAction* act);
-	bool run_object(Game* g, State* state, const WorkerAction* act);
-	bool run_plant(Game* g, State* state, const WorkerAction* act);
-	bool run_create_bob(Game* g, State* state, const WorkerAction* act);
-	bool run_removeobject(Game* g, State* state, const WorkerAction* act);
-	bool run_geologist(Game* g, State* state, const WorkerAction* act);
-	bool run_geologist_find(Game* g, State* state, const WorkerAction* act);
+   private: // Program commands
+   bool run_mine(Game* g, State* state, const WorkerAction* act);
+   bool run_createitem(Game* g, State* state, const WorkerAction* act);
+   bool run_setdescription(Game* g, State* state, const WorkerAction* act);
+   bool run_setbobdescription(Game* g, State* state, const WorkerAction* act);
+   bool run_findobject(Game* g, State* state, const WorkerAction* act);
+   bool run_findspace(Game* g, State* state, const WorkerAction* act);
+   bool run_findresource(Game* g, State* state, const WorkerAction* act);
+   bool run_walk(Game* g, State* state, const WorkerAction* act);
+   bool run_animation(Game* g, State* state, const WorkerAction* act);
+   bool run_return(Game* g, State* state, const WorkerAction* act);
+   bool run_object(Game* g, State* state, const WorkerAction* act);
+   bool run_plant(Game* g, State* state, const WorkerAction* act);
+   bool run_create_bob(Game* g, State* state, const WorkerAction* act);
+   bool run_removeobject(Game* g, State* state, const WorkerAction* act);
+   bool run_geologist(Game* g, State* state, const WorkerAction* act);
+   bool run_geologist_find(Game* g, State* state, const WorkerAction* act);
 
-private:
-	Object_Ptr			m_location;			// meta location of the worker, a PlayerImmovable
-	Economy*				m_economy;			// Economy this worker is registered in
-	Object_Ptr			m_carried_item;	// Item we are carrying
-	IdleWorkerSupply*	m_supply;			// supply while gowarehouse and not transfer
+   private:
+   Object_Ptr			m_location;			// meta location of the worker, a PlayerImmovable
+   Economy*				m_economy;			// Economy this worker is registered in
+   Object_Ptr			m_carried_item;	// Item we are carrying
+   IdleWorkerSupply*	m_supply;			// supply while gowarehouse and not transfer
    int               m_needed_exp;     // experience for next level
    int               m_current_exp;    // current experience
 };
 
 
 /*
-Carrier is a worker who is employed by a Road.
-*/
+   Carrier is a worker who is employed by a Road.
+   */
 class Carrier_Descr : public Worker_Descr {
-public:
-	Carrier_Descr(Tribe_Descr *tribe, const char *name);
-	virtual ~Carrier_Descr(void);
-   
-   virtual Worker_Type get_worker_type(void) { return CARRIER; }
+   public:
+      Carrier_Descr(Tribe_Descr *tribe, const char *name);
+      virtual ~Carrier_Descr(void);
 
-protected:
-	virtual Bob *create_object();
-	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+      virtual Worker_Type get_worker_type(void) { return CARRIER; }
+
+   protected:
+      virtual Bob *create_object();
+      virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 };
 
 class Carrier : public Worker {
-	MO_DESCR(Carrier_Descr);
+   MO_DESCR(Carrier_Descr);
 
-public:
-	Carrier(Carrier_Descr *descr);
-	virtual ~Carrier();
+   public:
+   Carrier(Carrier_Descr *descr);
+   virtual ~Carrier();
 
-	bool notify_ware(Game* g, int flag);
+   bool notify_ware(Game* g, int flag);
 
-public:
+   public:
    virtual Worker_Descr::Worker_Type get_worker_type(void) { return get_descr()->get_worker_type(); }
-	
+
    void start_task_road(Game* g, Road* road);
-	void update_task_road(Game* g);
-	void start_task_transport(Game* g, int fromflag);
-	bool start_task_walktoflag(Game* g, int flag, bool offset = false);
+   void update_task_road(Game* g);
+   void start_task_transport(Game* g, int fromflag);
+   bool start_task_walktoflag(Game* g, int flag, bool offset = false);
 
-private:
-	void find_pending_item(Game* g);
-	int find_closest_flag(Game* g);
+   private:
+   void find_pending_item(Game* g);
+   int find_closest_flag(Game* g);
 
-private: // internal task stuff
-	void road_update(Game* g, State* state);
-	void road_signal(Game* g, State* state);
+   private: // internal task stuff
+   void road_update(Game* g, State* state);
+   void road_signal(Game* g, State* state);
 
-	void transport_update(Game* g, State* state);
-	void transport_signal(Game* g, State* state);
+   void transport_update(Game* g, State* state);
+   void transport_signal(Game* g, State* state);
 
-private:
-	static Task taskRoad;
-	static Task taskTransport;
+   private:
+   static Task taskRoad;
+   static Task taskTransport;
 
-private:
-	int	m_acked_ware;	// -1: no ware acked; 0/1: acked ware for start/end flag of road
+   private:
+   int	m_acked_ware;	// -1: no ware acked; 0/1: acked ware for start/end flag of road
 };
 
 

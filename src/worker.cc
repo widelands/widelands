@@ -1350,6 +1350,7 @@ Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
 	m_menu_pic = 0;
 	m_menu_pic_fname = 0;
 	m_ware_id = -1;
+   m_buildable = true; 
 
 	add_attribute(Map_Object::WORKER);
 }
@@ -1453,6 +1454,22 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	string = sglobal->get_string("menu_pic", buf);
 	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 	m_menu_pic_fname = strdup(fname);
+
+	// Read the costs of building
+	m_buildable = sglobal->get_bool("buildable", m_buildable);
+	
+	if (m_buildable)
+	{
+		Section *s;
+
+		// Get the buildcost
+		s = prof->get_safe_section("buildcost");
+
+		Section::Value *val;
+		
+		while ((val = s->get_next_val(0)))
+			m_buildcost.push_back (CostItem(val->get_name(), val->get_int()));
+	}
 
 	// Read the walking animations
 	m_walk_anims.parse(directory, prof, "walk_??", prof->get_section("walk"), encdata);
@@ -3390,6 +3407,7 @@ Carrier_Descr::~Carrier_Descr
 Carrier_Descr::Carrier_Descr(Tribe_Descr *tribe, const char *name)
 	: Worker_Descr(tribe, name)
 {
+   m_buildable = false; 
 }
 
 Carrier_Descr::~Carrier_Descr(void)

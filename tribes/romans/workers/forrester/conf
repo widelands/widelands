@@ -5,6 +5,9 @@ type=generic
 menu_pic=forrester_menu.png
 program=plant
 
+[buildcost]
+carrier=1
+
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.
 # You can, however, create [walk_nw] etc.. sections for sub-animations in a

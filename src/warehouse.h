@@ -87,6 +87,8 @@ public:
 	void do_launch_item(Game* g, WareInstance* item);
 	void incorporate_item(Game* g, WareInstance* item);
 
+	bool can_create_worker(Game *, int worker);
+	void create_worker(Game *, int worker);
 protected:
 	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
 

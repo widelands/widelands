@@ -6,6 +6,9 @@ menu_pic=farmer_menu.bmp
 program=plant
 program=harvest
 
+[buildcost]
+carrier=1
+
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.
 # You can, however, create [walk_nw] etc.. sections for sub-animations in a
