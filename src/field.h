@@ -31,7 +31,7 @@
 #define MULTIPLY_WITH_HEIGHT_FACTOR(num) ( ((num)<<2)+(num) )
 #define MULTIPLY_WITH_FIELD_WIDTH(num) ( ((num)<<6) )  
 #define MULTIPLY_WITH_HALF_FIELD_HEIGHT(num) ( ((num)<<5) )  // it's nearly never needed to use FIELD_HEIGHT in multiplys, only FIELD_HEIGHT/2
-#define MAX_FIELD_HEIGHT 32
+#define MAX_FIELD_HEIGHT 60
 #define MAX_FIELD_HEIGHT_DIFF 5
 
 // TODO; Think, if we shouldn't call for each field a new() in map::set_size
