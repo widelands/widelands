@@ -25,6 +25,7 @@
 #include "player.h"
 #include "profile.h"
 #include "rendertarget.h"
+#include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
 #include "util.h"
@@ -1455,7 +1456,8 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 
 	// Read the walking animations
 	m_walk_anims.parse(directory, prof, "walk_??", prof->get_section("walk"), encdata);
-   m_walkload_anims.parse(directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
+   if(get_worker_type()!=SOLDIER) // Soldier have no walkload
+      m_walkload_anims.parse(directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
 
    // Read the becomes and experience
    m_becomes = sglobal->get_string("becomes","");
@@ -4049,8 +4051,10 @@ Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *dire
 			descr = new Worker_Descr(tribe, name);
 		else if (!strcasecmp(type, "carrier"))
 			descr = new Carrier_Descr(tribe, name);
+		else if (!strcasecmp(type, "soldier"))
+			descr = new Soldier_Descr(tribe, name);
 		else
-			throw wexception("Unknown worker type '%s' [supported: carrier]", type);
+			throw wexception("Unknown worker type '%s' [supported: carrier, soldier]", type);
 
 		descr->parse(directory, &prof, encdata);
 	}

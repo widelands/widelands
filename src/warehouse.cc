@@ -583,7 +583,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
    // We remove carrier, but we keep other workers around
-   if(w->get_worker_type()==Worker::CARRIER) {
+   if(w->get_worker_type()==Worker_Descr::CARRIER) {
       w->remove(g);
    } else {
       m_incroporated_workers.insert(std::pair<std::string,Worker*>(w->get_name(),w));

@@ -23,6 +23,7 @@
 #include "productionsite.h"
 #include "types.h"
 
+class Soldier;
 
 class MilitarySite_Descr : public ProductionSite_Descr {
 public:
@@ -83,10 +84,8 @@ private:
 
 private:
 	Request* m_soldier_request;
-	Worker*  m_soldier;
+   std::vector<Soldier*> m_soldiers;
 	bool		m_didconquer;
-	//Soldier*
-	//Soldier_Queue
 };
 
 #endif

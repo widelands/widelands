@@ -56,12 +56,18 @@ class Worker_Descr : public Bob_Descr {
 	typedef std::map<std::string, WorkerProgram*> ProgramMap;
 
 public:
-	Worker_Descr(Tribe_Descr *tribe, const char *name);
+	enum Worker_Type {
+      NORMAL = 0,
+      CARRIER, 
+      SOLDIER,
+   };
+   
+   Worker_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Worker_Descr(void);
 
 	virtual Bob *create_object();
 
-	void load_graphics();
+	virtual void load_graphics(void);
 
    inline Tribe_Descr *get_tribe() { return m_tribe; }
 	inline std::string get_descname() const { return m_descname; }
@@ -71,6 +77,8 @@ public:
 	inline DirAnimations *get_right_walk_anims(bool carries_ware) { if(carries_ware) return &m_walkload_anims; return &m_walk_anims; }
 	inline int get_ware_id() const { return m_ware_id; }
 	const WorkerProgram* get_program(std::string name) const;
+   
+   virtual Worker_Type get_worker_type(void) { return NORMAL; }
 
    // For leveling
    inline int get_max_exp(void) { return m_max_experience; }
@@ -103,15 +111,11 @@ class Worker : public Bob {
 	MO_DESCR(Worker_Descr);
 
 public:
-	enum Worker_Type {
-      NORMAL = 0,
-      CARRIER, 
-   };
-   
+
    Worker(Worker_Descr *descr);
 	virtual ~Worker();
 
-   virtual Worker_Type get_worker_type(void) { return NORMAL; }
+   virtual Worker_Descr::Worker_Type get_worker_type(void) { return get_descr()->get_worker_type(); }
    virtual int get_bob_type() { return Bob::WORKER; }
 	
 
@@ -256,6 +260,8 @@ class Carrier_Descr : public Worker_Descr {
 public:
 	Carrier_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Carrier_Descr(void);
+   
+   virtual Worker_Type get_worker_type(void) { return CARRIER; }
 
 protected:
 	virtual Bob *create_object();
@@ -272,7 +278,7 @@ public:
 	bool notify_ware(Game* g, int flag);
 
 public:
-   virtual Worker_Type get_worker_type(void) { return CARRIER; }
+   virtual Worker_Descr::Worker_Type get_worker_type(void) { return get_descr()->get_worker_type(); }
 	
    void start_task_road(Game* g, Road* road);
 	void update_task_road(Game* g);

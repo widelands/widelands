@@ -1,0 +1,61 @@
+[global]
+descname=Soldier
+help=Defend and Conquer!
+type=soldier
+
+menu_pic=soldier_menu.png 
+
+# SOLDIER SPECIFIC STUFF STARTS HERE
+# max levels
+max_hp_level=3       
+max_evade_level=2
+max_attack_level=5
+max_defense_level=1   # no increase possible
+
+# initial values and per level increasements
+hp=100-130                # this is set randomly
+hp_incr_per_level=30      
+attack=12-16              # this is a fixed value, the randomess comes with each hit
+attack_incr_per_level=3   
+defense=5                 # fixed, percentage to reduce damage
+defense_incr_per_level=5  
+evade=25                  # percentage to evade a attack
+evade_incr_per_level=10   
+
+# Pictures
+hp_level_1_pic=hp_level1.png
+hp_level_2_pic=hp_level2.png
+hp_level_3_pic=hp_level3.png
+evade_level_1_pic=evade_level1.png
+evade_level_2_pic=evade_level2.png
+attack_level_1_pic=attack_level1.png
+attack_level_2_pic=attack_level2.png
+attack_level_3_pic=attack_level3.png
+attack_level_4_pic=attack_level4.png
+attack_level_5_pic=attack_level5.png
+defense_level_1_pic=defense_level1.png
+
+# SOLDIER SPECIFIC STUFF ENDS HERE
+
+# Here come the animations
+# For the walk animation, [walk] is a default for all walk animations.
+# You can, however, create [walk_nw] etc.. sections for sub-animations in a
+# given direction
+
+# The normal idle animation (non-directional)
+[idle]
+pics=idle_??.png
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
+hot_spot_x=5
+hot_spot_y=13
+
+# Walking empty-handed
+[walk]
+hot_spot_x=5
+hot_spot_y=13
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
+fps=20

@@ -22,6 +22,7 @@
 #include "militarysite.h"
 #include "player.h"
 #include "profile.h"
+#include "soldier.h"
 #include "transport.h"
 #include "worker.h"
 
@@ -101,7 +102,6 @@ MilitarySite::MilitarySite(MilitarySite_Descr* descr)
 	: ProductionSite(descr)
 {
 	m_didconquer = false;
-	m_soldier = 0;
 	m_soldier_request = 0;
 }
 
@@ -142,7 +142,7 @@ void MilitarySite::init(Editor_Game_Base* g)
 
 	if (g->is_game()) {
 		// Request soldier
-		if(!m_soldier)
+		if(!m_soldiers.size())
 			request_soldier((Game*)g);
 	}
 }
@@ -194,12 +194,13 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
 		m_soldier_request = 0;
 	}
 
-	if (m_soldier) {
-		Worker* w = m_soldier;
+   uint i;
+   for(i=0; i<m_soldiers.size(); i++) {
+      Soldier* s = m_soldiers[i];
 
-		m_soldier = 0;
-		w->set_location(0);
-	}
+      m_soldiers[i] = 0;
+      s->set_location(0);
+   }
 
 	// unconquer land
 	if (m_didconquer)
@@ -237,10 +238,10 @@ Issue the soldier request
 */
 void MilitarySite::request_soldier(Game* g)
 {
-	assert(!m_soldier);
+	assert(!m_soldiers.size());
 	assert(!m_soldier_request);
 
-	int wareid = g->get_safe_ware_id("lumberjack");
+	int wareid = g->get_safe_ware_id("soldier");
 
 	m_soldier_request =
 		new Request(this, wareid, &MilitarySite::request_soldier_callback, this);
@@ -257,14 +258,19 @@ Called when our soldier arrives.
 void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware,
 	Worker* w, void* data)
 {
-	MilitarySite* psite = (MilitarySite*)data;
+	MilitarySite* msite = (MilitarySite*)data;
+   Soldier* s=static_cast<Soldier*>(w);
+   
+	assert(s);
+	assert(s->get_location(g) == msite);
 
-	assert(w);
-	assert(w->get_location(g) == psite);
+	g->conquer_area(msite->get_owner()->get_player_number(),
+		msite->get_position(), msite->get_descr());
+	msite->m_didconquer = true;
+   
+   msite->m_soldiers.push_back(s);
+   s->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
 
-	g->conquer_area(psite->get_owner()->get_player_number(),
-		psite->get_position(), psite->get_descr());
-	psite->m_didconquer = true;
 }
 
 
