@@ -73,6 +73,10 @@ class NetGame {
 	virtual void handle_network ()=0;
 
 	virtual void send_player_command (PlayerCommand*)=0;
+	virtual void send_chat_message (std::wstring)=0;
+	
+	bool have_chat_message();
+	std::wstring get_chat_message();
 	
 	virtual void syncreport (uint)=0;
 
@@ -88,6 +92,8 @@ class NetGame {
 	
 	PlayerDescriptionGroup*	playerdescr[MAX_PLAYERS];
 	Fullscreen_Menu_LaunchGame*	launch_menu;
+	
+	std::queue<std::wstring>	chat_msg_queue;
 };
 
 class NetHost:public NetGame {
@@ -103,10 +109,12 @@ class NetHost:public NetGame {
 	virtual void handle_network ();
 	
 	virtual void send_player_command (PlayerCommand*);
+	virtual void send_chat_message (std::wstring);
 	
 	virtual void syncreport (uint);
 
     private:
+	void send_chat_message_int (const wchar_t*);
 	void send_player_info ();
 	void update_network_delay ();
 
@@ -147,6 +155,7 @@ class NetClient:public NetGame {
 	virtual void handle_network ();
 	
 	virtual void send_player_command (PlayerCommand*);
+	virtual void send_chat_message (std::wstring);
     
 	virtual void syncreport (uint);
 
@@ -187,7 +196,10 @@ class Serializer {
 		buffer.push_back (v & 0xFF);
 	}
 	
+	void putwchar (wchar_t);
+	
 	void putstr (const char*);
+	void putwstr (const wchar_t*);
     
     private:
 	std::vector<unsigned char>	buffer;
@@ -238,7 +250,10 @@ class Deserializer {
 		return v;
 	}
 	
+	wchar_t getwchar ();
+	
 	void getstr (char*, int);
+	void getwstr (wchar_t*, int);
     
     private:
 	std::queue<unsigned char>	queue;

@@ -44,7 +44,8 @@ enum {
 	NETCMD_PONG,
 	NETCMD_ADVANCETIME,
 	NETCMD_PLAYERCOMMAND,
-	NETCMD_SYNCREPORT
+	NETCMD_SYNCREPORT,
+	NETCMD_CHATMESSAGE
 };
 
 
@@ -102,6 +103,22 @@ void NetGame::run ()
 	delete game;
 
 	game=0;
+}
+
+bool NetGame::have_chat_message ()
+{
+	return !chat_msg_queue.empty();
+}
+
+std::wstring NetGame::get_chat_message ()
+{
+	assert (!chat_msg_queue.empty());
+	
+	std::wstring msg=chat_msg_queue.front();
+	
+	chat_msg_queue.pop ();
+	
+	return msg;
 }
 
 // Return the maximum amount of time the game logic is allowed to advance.
@@ -294,6 +311,13 @@ void NetHost::handle_network ()
 				clients[i].syncreports.push (
 					clients[i].deserializer->getlong());
 				break;
+			    case NETCMD_CHATMESSAGE:
+				{
+					wchar_t buffer[256];
+					clients[i].deserializer->getwstr (buffer, 256);
+					send_chat_message_int (buffer);
+				}
+				break;
 			    default:
 				throw wexception("Invalid network data received");
 			}
@@ -356,6 +380,21 @@ void NetHost::handle_network ()
 	}
 }
 
+void NetHost::send_chat_message_int (const wchar_t* str)
+{
+	unsigned int i;
+	
+	serializer->begin_packet ();
+	serializer->putchar (NETCMD_CHATMESSAGE);
+	serializer->putwstr (str);
+	serializer->end_packet ();
+	
+	for (i=0;i<clients.size();i++)
+		serializer->send (clients[i].sock);
+	
+	chat_msg_queue.push (str);
+}
+
 void NetHost::update_network_delay ()
 {
 	ulong tmp[8];
@@ -394,6 +433,11 @@ void NetHost::update_network_delay ()
 void NetHost::send_player_command (PlayerCommand* cmd)
 {
 	cmds.push (cmd);
+}
+
+void NetHost::send_chat_message (std::wstring str)
+{
+	send_chat_message_int (str.c_str());
 }
 
 void NetHost::syncreport (uint sync)
@@ -520,6 +564,14 @@ void NetClient::handle_network ()
 				game->enqueue_command (cmd);
 			}
 			break;
+		    case NETCMD_CHATMESSAGE:
+			{
+				wchar_t buffer[256];
+				
+				deserializer->getwstr (buffer, 256);
+				chat_msg_queue.push (buffer);
+			}
+			break;
 		    default:
 			throw wexception("Invalid network data received");
 		}
@@ -531,6 +583,15 @@ void NetClient::send_player_command (PlayerCommand* cmd)
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_PLAYERCOMMAND);
 	cmd->serialize (serializer);
+	serializer->end_packet ();
+	serializer->send (sock);
+}
+
+void NetClient::send_chat_message (std::wstring msg)
+{
+	serializer->begin_packet ();
+	serializer->putchar (NETCMD_CHATMESSAGE);
+	serializer->putwstr (msg.c_str());
 	serializer->end_packet ();
 	serializer->send (sock);
 }
@@ -572,12 +633,58 @@ void Serializer::end_packet ()
 	buffer[1]=length & 0xFF;
 }
 
+void Serializer::putwchar (wchar_t wc)
+{
+	// use UTF-8 encoding so preserve space in the packet
+	
+	if (wc<0x80)
+		buffer.push_back (wc);
+	else if (wc<0x800) {
+		buffer.push_back (0xC0 | (wc>>6));
+		buffer.push_back (0x80 | (wc&0x3F));
+	}
+	else if (wc<0x10000) {
+		buffer.push_back (0xE0 | (wc>>12));
+		buffer.push_back (0x80 | ((wc>>6)&0x3F));
+		buffer.push_back (0x80 | (wc&0x3F));
+	}
+	else if (wc<0x200000) {
+		buffer.push_back (0xF0 | (wc>>18));
+		buffer.push_back (0x80 | ((wc>>12)&0x3F));
+		buffer.push_back (0x80 | ((wc>>6)&0x3F));
+		buffer.push_back (0x80 | (wc&0x3F));
+	}
+	else if (wc<0x4000000) {
+		buffer.push_back (0xF8 | (wc>>24));
+		buffer.push_back (0x80 | ((wc>>18)&0x3F));
+		buffer.push_back (0x80 | ((wc>>12)&0x3F));
+		buffer.push_back (0x80 | ((wc>>6)&0x3F));
+		buffer.push_back (0x80 | (wc&0x3F));
+	}
+	else {
+		buffer.push_back (0xFC | (wc>>30));
+		buffer.push_back (0x80 | ((wc>>24)&0x3F));
+		buffer.push_back (0x80 | ((wc>>18)&0x3F));
+		buffer.push_back (0x80 | ((wc>>12)&0x3F));
+		buffer.push_back (0x80 | ((wc>>6)&0x3F));
+		buffer.push_back (0x80 | (wc&0x3F));
+	}
+}
+
 void Serializer::putstr (const char* str)
 {
 	while (*str)
-		buffer.push_back (*str++);
+		putchar (*str++);
 	
-	buffer.push_back (0);
+	putchar (0);
+}
+
+void Serializer::putwstr (const wchar_t* str)
+{
+	while (*str)
+		putwchar (*str++);
+	
+	putwchar (0);
 }
 
 void Serializer::send (TCPsocket sock)
@@ -622,11 +729,52 @@ void Deserializer::read_packet (TCPsocket sock)
 	}
 }
 
+wchar_t Deserializer::getwchar ()
+{
+	wchar_t chr,tmp;
+	int n;
+
+	chr=queue.front();
+	queue.pop ();
+	
+	if (chr<128)
+	    return chr;
+	
+	if (chr<0xC0 || chr>=0xFE)
+	    throw wexception("Illegal UTF-8 character encountered");
+	
+	for (n=1;chr&(0x40>>n);n++);
+	
+	chr&=0x3F >> n;
+	chr<<=n*6;
+	
+	while (n-->0) {
+		tmp=queue.front();
+		queue.pop ();
+		
+		if ((tmp&0xC0)!=0x80)
+			throw wexception("Illegal UTF-8 character encountered");
+		
+		chr|=tmp << (n*6);
+	}
+	
+	return chr;
+}
+
 void Deserializer::getstr (char* buffer, int maxlength)
 {
 	int i;
 	
 	for (i=0;(buffer[i]=getchar())!=0;i++)
+		if (i==maxlength)
+			throw wexception("Deserializer: string too long");
+}
+
+void Deserializer::getwstr (wchar_t* buffer, int maxlength)
+{
+	int i;
+	
+	for (i=0;(buffer[i]=getwchar())!=0;i++)
 		if (i==maxlength)
 			throw wexception("Deserializer: string too long");
 }

@@ -29,6 +29,10 @@
 #include "setup.h"
 #include "error.h"
 
+#ifdef USE_DATAFILE
+#include "datafile.h"
+#endif
+
 #ifndef WIN32
   #include <sys/stat.h>
   #include <sys/types.h>
@@ -95,7 +99,12 @@ void setup_searchpaths(int argc, char **argv)
 	if (slash != std::string::npos) {
 		exename.erase(slash);
 		if (exename != ".") {
+#ifdef USE_DATAFILE
+			exename.append ("/widelands.dat");
+			g_fs->AddFileSystem(new Datafile(exename.c_str()));
+#else
 			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
+#endif
 		}
 	}
 
