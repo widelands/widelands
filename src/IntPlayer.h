@@ -23,6 +23,7 @@
 #include "ui.h"
 
 class Game;
+class Player;
 class MiniMap;
 class Map_View;
 
@@ -49,21 +50,27 @@ class Interactive_Player : public Panel {
 
 		void think();
 
-		inline Game *get_game() { return game; }
-		inline uchar get_player_number(void) { return player_number; } // for watchwindow
+		bool handle_key(bool down, int code, char c);
+		
+		inline Game *get_game() { return m_game; }
+		inline uchar get_player_number(void) { return m_player_number; }
+		inline bool get_ignore_shadow() { return m_ignore_shadow; }
+		Player *get_player();
 		
 		static int get_xres();
 		static int get_yres();
-					 
+
 	private:
 		void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);
 
-		Game *game;
-		Map_View* main_mapview;
-		MiniMap *minimap;
-		Window *fieldaction;
-		uchar player_number;
+		Game		*m_game;
+		uchar		m_player_number;
+		bool		m_ignore_shadow; // if true, draw unseen territory
+		
+		Map_View*	main_mapview;
+		MiniMap		*minimap;
+		Window		*fieldaction;
 };
 
 

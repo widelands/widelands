@@ -2,3 +2,4 @@
 build-2:
 - options handling redesigned
 - introduced System
+- added keyboard input

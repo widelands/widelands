@@ -282,3 +282,14 @@ void Game::create_bob(int x, int y, int idx)
 	obj = m_objects->create_object(this, descr, -1, x, y);
 }
 
+/*
+===============
+Game::get_allow_cheats
+
+Returns true if cheat codes have been activated (single-player only)
+===============
+*/
+bool Game::get_allow_cheats()
+{
+	return true;
+}

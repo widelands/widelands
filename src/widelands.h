@@ -227,7 +227,6 @@ public:
 // FRAME_LENGTH is just the default animation speed
 #define FRAME_LENGTH 250   
 
-#define USE_SEE_AREA 1
 
 
 /*

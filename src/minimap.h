@@ -21,6 +21,8 @@
 #define MINIMAP_H
 
 #include "ui.h"
+
+class Interactive_Player;
 class Player;
 class Map;
 
@@ -33,7 +35,7 @@ class MiniMapView;
 
 class MiniMap : public Window {
 public:
-	MiniMap(Panel *parent, int x, int y, Map *m, MiniMap **reg, Player* ply);
+	MiniMap(Panel *parent, int x, int y, MiniMap **reg, Interactive_Player* ply);
 	~MiniMap();
 
 	UISignal2<int,int> warpview; // screen coordinates of viewport

@@ -115,6 +115,7 @@ public:
 		pf_die = 8, // this panel needs to die
 		pf_child_die = 16, // a child needs to die
 		pf_visible = 32, // render the panel
+		pf_can_focus = 64, // can receive the keyboard focus
 	};
 
 	Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh);
@@ -167,11 +168,16 @@ public:
 	virtual void handle_mousein(bool inside);
 	virtual bool handle_mouseclick(uint btn, bool down, int x, int y);
 	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
+	virtual bool handle_key(bool down, int code, char c);
 
 	void set_handle_mouse(bool yes);
 	inline bool get_handle_mouse() const { return (_flags & pf_handle_mouse) ? true : false; }
 	void grab_mouse(bool grab);
 
+	void set_can_focus(bool yes);
+	inline bool get_can_focus() const { return (_flags & pf_can_focus) ? true : false; }
+	void focus();
+	
 	void set_think(bool yes);
 	inline bool get_think() const { return (_flags & pf_think) ? true : false; }
 
@@ -193,11 +199,13 @@ private:
 	void do_mousein(bool inside);
 	bool do_mouseclick(uint btn, bool down, int x, int y);
 	void do_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
+	bool do_key(bool down, int code, char c);
 
 	Panel *_parent;
 	Panel *_next, *_prev;
 	Panel *_fchild, *_lchild; // first, last child
 	Panel *_mousein; // child panel the mouse is in
+	Panel *_focus; // keyboard focus
 
 	uint _flags;
 	Pic *_cache;
@@ -214,6 +222,7 @@ private:
 	static Panel *ui_trackmouse(int *x, int *y);
 	static void ui_mouseclick(bool down, int button, uint btns, int x, int y);
 	static void ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff);
+	static void ui_key(bool down, int code, char c);
 
 	static Panel *_modal;
 	static Panel *_g_mousegrab;

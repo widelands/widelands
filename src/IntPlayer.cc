@@ -27,6 +27,7 @@
 #include "fieldaction.h"
 #include "mapview.h"
 #include "IntPlayer.h"
+#include "map.h"
 
 
 /** Interactive_Player::Interactive_Player(Game *g)
@@ -38,15 +39,17 @@
 Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	: Panel(0, 0, 0, get_xres(), get_yres())
 {
-	game = g;
-   player_number=plyn;
+	m_game = g;
+	m_player_number = plyn;
 
-	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g, player_number);
+	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
 	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
 	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
 	minimap = 0;
 	fieldaction = 0;
 
+	m_ignore_shadow = false;
+	
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
 	int y = get_h() - 34;
@@ -92,17 +95,35 @@ int Interactive_Player::get_xres()
 
 int Interactive_Player::get_yres()
 {
-	return g_options.get_safe_section("global")->get_int("xres", 640);
+	return g_options.get_safe_section("global")->get_int("yres", 480);
 }
 
-/** Interactive_Player::start()
- *
- * Set the resolution
- */
+
+/*
+===============
+Interactive_Player::start
+
+Set the resolution just before going modal
+===============
+*/
 void Interactive_Player::start()
 {
 	g_gr.set_mode(get_xres(), get_yres(), g_gr.get_mode());
 }
+
+
+/*
+===============
+Interactive_Player::get_player
+
+Return the logic player that is controlled by this Interactive_Player
+===============
+*/
+Player *Interactive_Player::get_player()
+{
+	return m_game->get_player(m_player_number);
+}
+
 
 /** Interactive_Player::exit_game_btn(void *a)
  *
@@ -125,7 +146,8 @@ void Interactive_Player::main_menu_btn()
 //
 // Toggles buildhelp rendering in the main MapView
 //
-void Interactive_Player::toggle_buildhelp(void) {
+void Interactive_Player::toggle_buildhelp(void)
+{
    main_mapview->toggle_buildhelp();
 }
 
@@ -140,7 +162,7 @@ void Interactive_Player::minimap_btn()
 		delete minimap;
 	else
 	{
-		new MiniMap(this, 200, 150, game->get_map(), &minimap, game->get_player(player_number));
+		new MiniMap(this, 200, 150, &minimap, this);
 		minimap->warpview.set(this, &Interactive_Player::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with
@@ -161,9 +183,9 @@ void Interactive_Player::move_view_to(int fx, int fy)
 		minimap->set_view_pos(x, y);
 	
 	x -= main_mapview->get_w()>>1;
-	if (x < 0) x += game->get_map()->get_w() * FIELD_WIDTH;
+	if (x < 0) x += m_game->get_map()->get_w() * FIELD_WIDTH;
 	y -= main_mapview->get_h()>>1;
-	if (y < 0) y += game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+	if (y < 0) y += m_game->get_map()->get_h() * (FIELD_HEIGHT>>1);
 	main_mapview->set_viewpoint(x, y);
 }
 
@@ -179,15 +201,6 @@ void Interactive_Player::field_action(int fx, int fy)
 	// note: buildings owned by the player must be treated differently
 	// (i.e bring up dialog specific to the building)
 
-   // TEMP
-   cerr << fx << ":" << fy << "=" << game->get_map()->get_field(fx,fy)->get_terr() << "|" << game->get_map()->get_field(fx,fy)->get_terd() << endl;
-   cerr << fx << ":" << fy << "=" << hex << (int) game->get_map()->get_field(fx,fy)->get_terr()->get_is() << "|" << 
-      (int) game->get_map()->get_field(fx,fy)->get_terd()->get_is() << endl << dec ;
-   cerr << "Bau symbol: " << (int) game->get_map()->get_build_symbol(fx,fy) << endl;
-   cerr << "Hoehe: " << (int) game->get_map()->get_field(fx,fy)->get_height() << endl;
-
-   // TEMP ENDS
-   
 	show_field_action(this, fx, fy, &fieldaction);
 }
 
@@ -199,10 +212,40 @@ void Interactive_Player::think()
 {
 	// Call game logic here
    // The game advances
-   game->think();
+	m_game->think();
    
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
 	g_gr.needs_fs_update();
+}
+
+/*
+===============
+Interactive_Player::handle_key
+
+Global in-game keypresses:
+Space: toggles buildhelp
+F5: reveal map
+===============
+*/
+bool Interactive_Player::handle_key(bool down, int code, char c)
+{
+	switch(code) {
+	case KEY_SPACE:
+		if (down)
+			toggle_buildhelp();
+		return true;
+	
+	case KEY_F5:
+		if (down) {
+			if (m_ignore_shadow)
+				m_ignore_shadow = false;
+			else if (get_game()->get_allow_cheats())
+				m_ignore_shadow = true;
+		}
+		return true;
+	}
+	
+	return false;
 }
 
 /** Interactive_Player::mainview_move(int x, int y)
@@ -213,8 +256,8 @@ void Interactive_Player::think()
 void Interactive_Player::mainview_move(int x, int y)
 {
 	if (minimap) {
-		int maxx = game->get_map()->get_w() * FIELD_WIDTH;
-		int maxy = game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+		int maxx = m_game->get_map()->get_w() * FIELD_WIDTH;
+		int maxy = m_game->get_map()->get_h() * (FIELD_HEIGHT>>1);
 
 		x += main_mapview->get_w()>>1;
 		if (x >= maxx) x -= maxx;
@@ -233,8 +276,8 @@ void Interactive_Player::mainview_move(int x, int y)
 void Interactive_Player::minimap_warp(int x, int y)
 {
 	x -= main_mapview->get_w()>>1;
-	if (x < 0) x += game->get_map()->get_w() * FIELD_WIDTH;
+	if (x < 0) x += m_game->get_map()->get_w() * FIELD_WIDTH;
 	y -= main_mapview->get_h()>>1;
-	if (y < 0) y += game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+	if (y < 0) y += m_game->get_map()->get_h() * (FIELD_HEIGHT>>1);
 	main_mapview->set_viewpoint(x, y);
 }

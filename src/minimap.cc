@@ -22,6 +22,7 @@
 #include "map.h"
 #include "auto_pic.h"
 #include "player.h"
+#include "IntPlayer.h"
 
 /*
 ==============================================================================
@@ -38,7 +39,7 @@ MiniMapView
  */
 class MiniMapView : public Panel {
 public:
-	MiniMapView(Panel *parent, int x, int y, Map *m, Player* pl);
+	MiniMapView(Panel *parent, int x, int y, Interactive_Player *plr);
 
 	UISignal2<int,int> warpview;
 
@@ -51,24 +52,30 @@ public:
 
 private:
 	static AutoPic map_spot;
-   Player* player;
-	Map *_map;
-	int _viewx, _viewy;
+	
+	Interactive_Player	*m_player;
+	Map						*m_map;
+	int						m_viewx, m_viewy;
 };
 
 AutoPic MiniMapView::map_spot("map_spot.bmp", 0, 0, 255);
 
-/** MiniMapView::MiniMapView(Panel *parent, int x, int y, Map *m)
- *
- * Initialize the minimap object
- */
-MiniMapView::MiniMapView(Panel *parent, int x, int y, Map *m, Player* ply)
-	: Panel(parent, x, y, m->get_w(), m->get_h())
-{
-	_map = m;
-   player=ply;
+/*
+===============
+MiniMapView::MiniMapView
 
-	_viewx = _viewy = 0;
+Initialize the minimap object
+===============
+*/
+MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Player *plr)
+	: Panel(parent, x, y, 10, 10)
+{
+	m_player = plr;
+	m_map = plr->get_game()->get_map();
+
+	m_viewx = m_viewy = 0;
+
+	set_size(m_map->get_w(), m_map->get_h());
 }
 
 /** MiniMapView::set_view_pos(int x, int y)
@@ -80,8 +87,8 @@ MiniMapView::MiniMapView(Panel *parent, int x, int y, Map *m, Player* ply)
  */
 void MiniMapView::set_view_pos(int x, int y)
 {
-	_viewx = x / FIELD_WIDTH;
-	_viewy = y / (FIELD_HEIGHT>>1);
+	m_viewx = x / FIELD_WIDTH;
+	m_viewy = y / (FIELD_HEIGHT>>1);
 	update(0, 0, get_w(), get_h());
 }
 
@@ -91,6 +98,8 @@ void MiniMapView::set_view_pos(int x, int y)
  */
 void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 {
+	bool use_see_area = !m_player->get_ignore_shadow();
+	Player *player = m_player->get_player();
 	int sx, sy;
 	int ex, ey;
 	int x, y;
@@ -103,11 +112,11 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 		sy = 0;
 
 	ex = dst->get_w() - ofsx;
-	if (ex > (int)_map->get_w())
-		ex = _map->get_w();
+	if (ex > (int)m_map->get_w())
+		ex = m_map->get_w();
 	ey = dst->get_h() - ofsy;
-	if (ey > (int)_map->get_h())
-		ey = _map->get_h();
+	if (ey > (int)m_map->get_h())
+		ey = m_map->get_h();
 			
 	ushort clr;
 	Field* f;
@@ -115,27 +124,23 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 	{
 		ushort *pix = dst->get_pixels() + (y+ofsy)*dst->get_pitch() + (sx+ofsx);
 
-		f = _map->get_field(sx, y);
+		f = m_map->get_field(sx, y);
 		for(x = sx; x < ex; x++, f++)
 		{
-#ifdef USE_SEE_AREA
-         if(player->is_field_seen(x, y)) {
-#endif
+         if (!use_see_area || player->is_field_seen(x, y)) {
 				clr = *f->get_terd()->get_texture()->get_pixels();
 				clr = bright_up_clr2(clr, f->get_brightness());
          
             *pix++ = clr;
-#ifdef USE_SEE_AREA
          } else {
             *pix++ =  pack_rgb(0, 0, 0); // make black
          }
-#endif
 		}
 	}
 
 	// draw the view pos marker
-	x = ofsx + _viewx - (map_spot.get_w()>>1);
-	y = ofsy + _viewy - (map_spot.get_h()>>1);
+	x = ofsx + m_viewx - (map_spot.get_w()>>1);
+	y = ofsy + m_viewy - (map_spot.get_h()>>1);
 	copy_pic(dst, &map_spot, x, y, 0, 0, map_spot.get_w(), map_spot.get_h());
 }
 
@@ -150,7 +155,7 @@ bool MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
 
 	if (down) {
 		// make sure x/y is within range
-		if (x >= 0 && x < (int)_map->get_w() && y > 0 && y < (int)_map->get_h())
+		if (x >= 0 && x < (int)m_map->get_w() && y > 0 && y < (int)m_map->get_h())
 			warpview.call(x * FIELD_WIDTH, y * (FIELD_HEIGHT>>1));
 	}
 
@@ -165,22 +170,21 @@ MiniMap
 ==============================================================================
 */
 
-/** MiniMap::MiniMap(Panel *parent, int x, int y, Map *m, MiniMap **reg)
- *
- * Initialize the minimap window. Dimensions will be set automatically
- * according to the map size.
- * A registry pointer is set to track the MiniMap object (only show one
- * minimap at a time).
- *
- * Args: parent	parent panel
- *       x		coordinates of the window
- *       y
- *       m		pointer to the map
- *       reg	registry pointer will be set by constructor and cleared by
- *       		destructor
- */
-MiniMap::MiniMap(Panel *parent, int x, int y, Map *m, MiniMap **reg, Player* ply)
-	: Window(parent, x, y, m->get_w(), m->get_h(), "Map")
+/*
+=============== 
+MiniMap::MiniMap
+
+Initialize the minimap window. Dimensions will be set automatically
+according to the map size.
+A registry pointer is set to track the MiniMap object (only show one
+minimap at a time).
+
+reg, the registry pointer will be set by constructor and cleared by
+destructor
+===============
+*/
+MiniMap::MiniMap(Panel *parent, int x, int y, MiniMap **reg, Interactive_Player *plr)
+	: Window(parent, x, y, 10, 10, "Map")
 {
 	_registry = reg;
 	if (_registry) {
@@ -189,8 +193,10 @@ MiniMap::MiniMap(Panel *parent, int x, int y, Map *m, MiniMap **reg, Player* ply
 		*_registry = this;
 	}
 
-	_view = new MiniMapView(this, 0, 0, m, ply);
+	_view = new MiniMapView(this, 0, 0, plr);
 	_view->warpview.set(&warpview, &UISignal2<int,int>::call);
+	
+	set_inner_size(_view->get_w(), _view->get_h());
 
 	//set_cache(false); // testing
 }

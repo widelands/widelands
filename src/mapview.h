@@ -20,10 +20,12 @@
 #ifndef __S__MAPVIEW_H
 #define __S__MAPVIEW_H
 
-
-#include "map.h"
 #include "graphic.h"
 #include "ui.h"
+
+class Interactive_Player;
+class Game;
+class Map;
 
 /* class Map_View
  *
@@ -35,7 +37,7 @@
  */
 class Map_View : public Panel {
 public:
-	Map_View(Panel *parent, int x, int y, uint w, uint h, Game *g, uchar ply);
+	Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Player *plr);
 	~Map_View();
 
 	UISignal2<int,int> warpview; // x/y in screen coordinates
@@ -50,7 +52,7 @@ public:
 
 	// Drawing
 	void draw(Bitmap *bmp, int ofsx, int ofsy);
-	void draw_ground(Bitmap *bmp, int effvpx, int effvpy);
+	void draw_ground(Bitmap *bmp, int effvpx, int effvpy, bool use_see_area);
 
 	// Event handling
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
@@ -67,17 +69,16 @@ private:
    static AutoPic mine_building;
    static AutoPic setable_flag;
 
-   uchar player_number;
+   Interactive_Player *m_player;
 	Game* m_game;
-	Map* map;
+	Map* m_map;
 	int vpx, vpy;
 	bool dragging;
 	int fselx, fsely; // field the mouse is over
    bool show_buildhelp;
-   
+	  
    void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
                  const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, bool, bool);
-
 };
 
 

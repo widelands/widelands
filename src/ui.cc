@@ -55,6 +55,7 @@ Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const ui
 		_prev = _next = 0;
 
 	_mousein = 0;
+	_focus = 0;
 
 	_x = nx;
 	_y = ny;
@@ -95,6 +96,8 @@ Panel::~Panel()
 	if (_parent) {
 		if (_parent->_mousein == this)
 			_parent->_mousein = 0;
+		if (_parent->_focus == this)
+			_parent->_focus = 0;
 
 		if (_prev)
 			_prev->_next = _next;
@@ -132,7 +135,7 @@ int Panel::run()
 		static System::InputCallback icb = {
 			Panel::ui_mouseclick,
 			Panel::ui_mousemove,
-			0 /* key */
+			Panel::ui_key
 		};
 	
 		g_sys.handle_input(&icb);
@@ -467,6 +470,22 @@ void Panel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 }
 
+/*
+===============
+Panel::handle_key
+
+Receive a keypress or keyrelease event.
+code is one of the KEY_xxx constants, c is the corresponding printable
+character or 0 for special, unprintable keys.
+
+Return true if you processed the key.
+===============
+*/
+bool Panel::handle_key(bool down, int code, char c)
+{
+	return false;
+}
+
 /** Panel::set_handle_mouse(bool yes)
  *
  * Enable/Disable mouse handling by this panel
@@ -500,6 +519,43 @@ void Panel::grab_mouse(bool grab)
 		assert(!_g_mousegrab || _g_mousegrab == this);
 		_g_mousegrab = 0;
 	}
+}
+
+/*
+===============
+Panel::set_can_focus
+===============
+*/
+void Panel::set_can_focus(bool yes)
+{
+	if (yes)
+		_flags |= pf_can_focus;
+	else {
+		_flags &= ~pf_can_focus;
+		
+		if (_parent && _parent->_focus == this)
+			_parent->_focus = 0;
+	}
+}
+
+/*
+===============
+Panel::focus
+
+Grab the keyboard focus
+===============
+*/
+void Panel::focus()
+{
+	assert(get_can_focus());
+
+	if (!_parent || this == _modal)
+		return;
+	if (_parent->_focus == this)
+		return;
+
+	_parent->_focus = this;
+	_parent->focus();
 }
 
 /** Panel::set_think(bool yes)
@@ -733,6 +789,24 @@ void Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 	}
 }
 
+/*
+===============
+Panel::do_key
+
+Pass the key event to the focussed child.
+If it doesn't process the key, we'll see if we can use the event.
+===============
+*/
+bool Panel::do_key(bool down, int code, char c)
+{
+	if (_focus) {
+		if (_focus->do_key(down, code, c))
+			return true;
+	}
+	
+	return handle_key(down, code, c);
+}
+
 /** Panel::ui_trackmouse(int *x, int *y) [static]
  *
  * Determine which panel is to receive a mouse event.
@@ -778,7 +852,7 @@ Panel *Panel::ui_trackmouse(int *x, int *y)
 
 /*
 ===============
-Panel::ui_mouseclick
+Panel::ui_mouseclick [static]
  
 Input callback function. Pass the mouseclick event to the currently modal
 panel.
@@ -797,7 +871,7 @@ void Panel::ui_mouseclick(bool down, int button, uint btns, int x, int y)
 
 /*
 ===============
-Panel::ui_mousemove
+Panel::ui_mousemove [static]
 
 Input callback function. Pass the mousemove event to the currently modal
 panel.
@@ -820,3 +894,14 @@ void Panel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 	p->do_mousemove(x, y, xdiff, ydiff, btns);
 }
 
+/*
+===============
+Panel::ui_key [static]
+
+Input callback function. Pass the key event to the currently modal panel
+===============
+*/
+void Panel::ui_key(bool down, int code, char c)
+{
+	_modal->do_key(down, code, c);
+}
