@@ -24,8 +24,7 @@
 #include "fieldaction.h"
 #include "font_handler.h"
 #include "game_loader.h"
-#include "game_main_menu_save_game.h"
-#include "game_main_menu_load_game.h"
+#include "game_main_menu.h"
 #include "general_statistics_menu.h"
 #include "interactive_player.h"
 #include "keycodes.h"
@@ -44,112 +43,6 @@
 #include "tribe.h"
 #include "ware_statistics_menu.h"
 
-
-/*
-==============================================================================
-
-GameMainMenu IMPLEMENTATION
-
-==============================================================================
-*/
-
-// The GameMainMenu is a rather dumb window with lots of buttons
-class GameMainMenu : public UIUniqueWindow {
-public:
-	GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry);
-	virtual ~GameMainMenu();
-
-private:
-   UIUniqueWindowRegistry m_saveload;
-   UIUniqueWindowRegistry m_wares_statistics;
-   UIUniqueWindowRegistry m_buildings_statistics;
-   UIUniqueWindowRegistry m_general_statistics;
-   UIUniqueWindowRegistry m_stock;
-	Interactive_Player	*m_player;
-   void clicked(int);
-};
-
-/*
-===============
-GameMainMenu::GameMainMenu
-
-Create all the buttons etc...
-===============
-*/
-GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(plr, registry, 102, 160, "Menu")
-{
-   m_player=plr;
-
-   UIButton* b=new UIButton(this, 5, 5, get_inner_w()-10, 20, 0, 1);
-   b->set_title("Save Game");
-   b->clickedid.set(this, &GameMainMenu::clicked);
-
-   b=new UIButton(this, 5, 30, get_inner_w()-10, 20, 0, 2);
-   b->set_title("Load Game");
-   b->clickedid.set(this, &GameMainMenu::clicked);
-
-   b=new UIButton(this, 5, 55, get_inner_w()-10, 20, 0, 3);
-   b->set_title("Wares Statistics");
-   b->clickedid.set(this, &GameMainMenu::clicked);
-
-   b=new UIButton(this, 5, 80, get_inner_w()-10, 20, 0, 4);
-   b->set_title("Buildings Statistics");
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   
-   b=new UIButton(this, 5, 105, get_inner_w()-10, 20, 0, 5);
-   b->set_title("Comparative Statistics");
-   b->clickedid.set(this, &GameMainMenu::clicked);
-   
-   b=new UIButton(this, 5, 130, get_inner_w()-10, 20, 0, 6);
-   b->set_title("Stock");
-   b->clickedid.set(this, &GameMainMenu::clicked);
-     
-	if (get_usedefaultpos())
-		center_to_parent();
-}
-
-void GameMainMenu::clicked(int n) {
-   switch(n) {
-      case 1:
-         // Save
-         new Game_Main_Menu_Save_Game(m_player, &m_saveload);
-         break;
-      case 2:
-         // Load
-         new Game_Main_Menu_Load_Game(m_player, &m_saveload);
-         break;
-
-      case 3:
-         // Wares statistics
-         new Ware_Statistics_Menu(m_player, &m_wares_statistics);
-         break;
-
-      case 4:
-         // Building statistics
-         new Building_Statistics_Menu(m_player, &m_buildings_statistics);
-         break;
-
-      case 5:
-         // General Statistics 
-         new General_Statistics_Menu(m_player, &m_general_statistics);
-         break;
-  
-      case 6:
-         // Stock 
-         new Stock_Menu(m_player, &m_stock);
-         break;
-   }
-}
-
-/*
-===============
-GameMainMenu::~GameMainMenu
-===============
-*/
-GameMainMenu::~GameMainMenu()
-{
-}
 
 
 /*
@@ -192,11 +85,11 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	int y = get_h() - 34;
 	UIButton *b;
 
-	// temp (should be toggle messages)
+	/* temp (should be toggle messages)
 	b = new UIButton(this, x, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::exit_game_btn);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png", true));
-	// temp
+	// temp */
 
 	b = new UIButton(this, x+34, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::main_menu_btn);
@@ -455,7 +348,7 @@ void Interactive_Player::main_menu_btn()
 	if (m_mainmenu.window)
 		delete m_mainmenu.window;
 	else
-		new GameMainMenu(this, &m_mainmenu);
+		new GameMainMenu(this, &m_mainmenu, &m_mainm_windows);
 }
 
 //

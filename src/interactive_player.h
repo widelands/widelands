@@ -56,6 +56,24 @@ class Interactive_Player : public Interactive_Base {
          std::vector< uint > miltary_strength;
       };
 
+      struct Game_Main_Menu_Windows {
+         UIUniqueWindowRegistry loadgame;
+         UIUniqueWindowRegistry savegame;
+         UIUniqueWindowRegistry readme;
+         UIUniqueWindowRegistry keys;
+         UIUniqueWindowRegistry authors;
+         UIUniqueWindowRegistry licence;
+         UIUniqueWindowRegistry options;
+
+         UIUniqueWindowRegistry building_stats;
+         UIUniqueWindowRegistry general_stats;
+         UIUniqueWindowRegistry ware_stats;
+         UIUniqueWindowRegistry stock;
+
+         UIUniqueWindowRegistry mission_objectives;
+         UIUniqueWindowRegistry chat;
+      };
+
    public:
 		Interactive_Player(Game *g, uchar pln);
 		~Interactive_Player(void);
@@ -104,6 +122,7 @@ class Interactive_Player : public Interactive_Base {
 
       UIUniqueWindowRegistry	m_mainmenu;
       UIUniqueWindowRegistry	m_fieldaction;
+      Game_Main_Menu_Windows  m_mainm_windows;
 
       std::vector<uint> m_current_statistics;
       std::vector< std::vector<uint> > m_ware_productions;
@@ -111,6 +130,7 @@ class Interactive_Player : public Interactive_Base {
 
       BuildingStats m_building_stats;
       std::vector< General_Stats > m_general_stats;
+
 
    private:
       void sample_statistics( void );
