@@ -138,7 +138,7 @@ int Map::load_wlmf(const char* file) {
 								// TEMP end
 
 								Field* f=get_field(x,y);
-								f->set_height(fd.height);
+								f->set_height((uchar)fd.height);
 								f->set_texr(tr);
 								f->set_texd(td);
 					 }

@@ -1,0 +1,6 @@
+*.da
+*.s
+.deps
+Makefile
+Makefile.in
+widelands

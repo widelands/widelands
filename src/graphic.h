@@ -22,7 +22,7 @@
 
 #define 	DEF_CLRKEY	pack_rgb(0,0,255)
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <stdlib.h>
 #include "errors.h"
 #include "singleton.h"

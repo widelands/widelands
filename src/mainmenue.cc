@@ -24,7 +24,6 @@
 #include "fileloc.h"
 #include "font.h"
 #include "setup.h"
-#include "counter.h"
 #include "output.h"
 #include "singlepmenue.h"
 #include "menuecommon.h"

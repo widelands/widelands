@@ -32,6 +32,9 @@
 	#ifdef _DEBUG			//chk ths plz. Acked by Holger
 		#define DEBUG
 	#endif //_DEBUG
+
+	#define snprintf _snprintf
+	#define vsnprintf _vsnprintf
 #else //WIN32
    #include <sys/types.h>
    #include <sys/stat.h>

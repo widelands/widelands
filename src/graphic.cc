@@ -18,6 +18,7 @@
  */
 
 #include "graphic.h"
+#include "output.h"
 #include <string.h>
 
 // wireframe or filled triangles?

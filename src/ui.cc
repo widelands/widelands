@@ -147,6 +147,9 @@ int Panel::run()
 			g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
 			g_gr.update();
 		}
+
+		if (_flags & pf_child_die)
+			check_child_death();
 	}
 	g_gr.needs_fs_update();
 	end();
@@ -499,6 +502,45 @@ void Panel::set_think(bool yes)
 		_flags |= pf_think;
 	else
 		_flags &= ~pf_think;
+}
+
+/** Panel::die()
+ *
+ * Cause this panel to be removed on the next frame.
+ * Use this for a panel that needs to destroy itself after a button has
+ * been pressed (e.g. non-modal dialogs).
+ * Do NOT use this to delete a hierarchy of panels that have been modal.
+ */
+void Panel::die()
+{
+	_flags |= pf_die;
+
+	for(Panel *p = _parent; p; p = p->_parent) {
+		p->_flags |= pf_child_die;
+		if (p == _modal)
+			break;
+	}
+}
+
+/** Panel::check_child_death() [private]
+ *
+ * Recursively walk the panel tree, killing panels that are marked for death
+ * using die().
+ */
+void Panel::check_child_death()
+{
+	Panel *next = _fchild;
+	while(next) {
+		Panel *p = next;
+		next = p->_next;
+
+		if (p->_flags & pf_die)
+			delete p;
+		else if (p->_flags & pf_child_die)
+			p->check_child_death();
+	}
+
+	_flags &= ~pf_child_die;
 }
 
 /** Panel::do_draw(Bitmap *dst, int ofsx, int ofsy) [private]

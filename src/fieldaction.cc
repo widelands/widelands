@@ -86,7 +86,7 @@ FieldActionWindow::~FieldActionWindow()
 void FieldActionWindow::act_watch()
 {
 	show_watch_window(_player, _fx, _fy);
-	delete this;
+	die();
 }
 
 /** show_field_action(Interactive_Player *parent, int fx, int fy, Window **registry)

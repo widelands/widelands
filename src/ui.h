@@ -112,6 +112,8 @@ public:
 		pf_handle_mouse = 1, // receive mouse events
 		pf_think = 2, // call think() function during run
 		pf_top_on_click = 4, // bring panel on top when clicked inside it
+		pf_die = 8, // this panel needs to die
+		pf_child_die = 16, // a child needs to die
 	};
 
 	Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh);
@@ -163,19 +165,24 @@ public:
 	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	void set_handle_mouse(bool yes);
-	inline bool get_handle_mouse() const { return (bool)(_flags & pf_handle_mouse); }
+	inline bool get_handle_mouse() const { return (_flags & pf_handle_mouse) ? true : false; }
 	void grab_mouse(bool grab);
 
 	void set_think(bool yes);
-	inline bool get_think() const { return (bool)(_flags & pf_think); }
+	inline bool get_think() const { return (_flags & pf_think) ? true : false; }
 
 	inline void set_top_on_click(bool on) {
 		if (on) _flags |= pf_top_on_click;
 		else _flags &= ~pf_top_on_click;
 	}
-	inline bool get_top_on_click() const { return (bool)(_flags & pf_top_on_click); }
+	inline bool get_top_on_click() const { return (_flags & pf_top_on_click) ? true : false; }
+
+protected:
+	void die();
 
 private:
+	void check_child_death();
+
 	void do_draw(Bitmap *dst, int ofsx, int ofsy);
 
 	Panel *get_mousein(int x, int y);

@@ -31,7 +31,7 @@
 #include "ui.h"
 #include <stdlib.h>
 #include <string.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #ifdef DEBUG
 // This is set for the assert function, to skip over to graphical asserts
@@ -72,7 +72,7 @@ int kbdh(const char* str, void* a) {
  *
  * return Exitcode of App
  */
-#include "md5file.h"
+//#include "md5file.h"
 inline int g_main(int argn, char** argc)
 {
 	static Font_Handler f; // Global instance for the hole game
@@ -184,7 +184,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR /*cmdLine*/, int)
 
 	delete[] args;
 	delete[] cmdLine;
-	
+
 	return ret;
 }
 

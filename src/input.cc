@@ -17,7 +17,7 @@
  *
  */
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <stdlib.h>
 #include "input.h"
 
@@ -229,48 +229,48 @@ void Input::handle_pending_input(void) {
 
 								case SDL_MOUSEBUTTONDOWN:
 								case SDL_MOUSEBUTTONUP:
-										  uint but;
-										  if(ev.button.button==3) but=1;
-										  else if(ev.button.button==1) but=0;
-										  else break;
+									uint but;
+									if(ev.button.button==3) but=1;
+									else if(ev.button.button==1) but=0;
+									else break;
 
-										  if(cf[but])
-													 cf[but](ev.button.state, mpx, mpy, cfa[but]);
-										  break;
+									if(cf[but])
+										cf[but](ev.button.state ? true : false, mpx, mpy, cfa[but]);
+									break;
 
 								case SDL_MOUSEMOTION:
-										  // This seems to produce inconsistent values for xdiff/ydiff
-										  if(ev.motion.x!=maxx>>1 || ev.motion.y!=maxy>>1) {
-													 mplx=mpx; mply=mpy;
-													 xdiff = (int) ((ev.motion.x-levx)*mouse_speed);
-													 ydiff = (int) ((ev.motion.y-levy)*mouse_speed);
-													 mpx+=xdiff;
-													 mpy+=ydiff;
+									// This seems to produce inconsistent values for xdiff/ydiff
+									if(ev.motion.x!=maxx>>1 || ev.motion.y!=maxy>>1) {
+										mplx=mpx; mply=mpy;
+										xdiff = (int) ((ev.motion.x-levx)*mouse_speed);
+										ydiff = (int) ((ev.motion.y-levy)*mouse_speed);
+										mpx+=xdiff;
+										mpy+=ydiff;
 
-													 if((int)mpx < 0) mpx=0;
-													 else if(mpx >=maxx) mpx=maxx-1;
-													 if((int)mpy < 0) mpy=0;
-													 else if(mpy >=maxy) mpy=maxy-1;
+										if((int)mpx < 0) mpx=0;
+										else if(mpx >=maxx) mpx=maxx-1;
+										if((int)mpy < 0) mpy=0;
+										else if(mpy >=maxy) mpy=maxy-1;
 
-													 if(mmf) {
-																if(!buts_swapped) {
-																		  mmf(mpx, mpy, xdiff, ydiff, SDL_BUTTON(1) & ev.motion.state,
-																								SDL_BUTTON(3) & ev.motion.state, mmfa);
-																} else {
-																		  mmf(mpx, mpy, xdiff, ydiff, SDL_BUTTON(3) & ev.motion.state,
-																								SDL_BUTTON(1) & ev.motion.state, mmfa);
-																}
-													 }
+										if(mmf) {
+											if(!buts_swapped) {
+												mmf(mpx, mpy, xdiff, ydiff, (SDL_BUTTON(1) & ev.motion.state) ? true : false,
+														(SDL_BUTTON(3) & ev.motion.state) ? true : false, mmfa);
+											} else {
+												mmf(mpx, mpy, xdiff, ydiff, (SDL_BUTTON(3) & ev.motion.state) ? true : false,
+														(SDL_BUTTON(1) & ev.motion.state) ? true : false, mmfa);
+											}
+										}
 
-													 levx=ev.motion.x;
-													 levy=ev.motion.y;
+										levx=ev.motion.x;
+										levy=ev.motion.y;
 
-													 SDL_WarpMouse(maxx>>1,maxy>>1);
-										  } else {
-													 levy=maxy>>1;
-													 levx=maxx>>1;
-										  }
-										  break;
+										SDL_WarpMouse(maxx>>1,maxy>>1);
+									} else {
+										levy=maxy>>1;
+										levx=maxx>>1;
+									}
+									break;
 
 								case SDL_QUIT:
 										  bshould_die=true;

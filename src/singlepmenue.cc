@@ -23,7 +23,6 @@
 #include "ui.h"
 #include "fileloc.h"
 #include "cursor.h"
-#include "counter.h"
 #include "font.h"
 #include "mainmenue.h"
 #include "menuecommon.h"
