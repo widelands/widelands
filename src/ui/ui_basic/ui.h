@@ -194,140 +194,15 @@ private:
 };
 
 
-/** class Textarea
- *
- * This defines a non responsive (to clicks) text area, where a text
- * can easily be printed
- */
-class Textarea : public Panel {
-public:
-	Textarea(Panel *parent, int x, int y, std::string text, Align align = Align_Left);
-	Textarea(Panel *parent, int x, int y, int w, int h, std::string text,
-			   Align align = Align_Left, bool multiline = false);
-	~Textarea();
-
-	void set_text(std::string text);
-	void set_align(Align align);
-
-	// Drawing and event handlers
-	void draw(RenderTarget* dst);
-
-private:
-	void collapse();
-	void expand();
-
-	std::string		m_text;
-	Align				m_align;
-	bool				m_multiline;
-};
-
-
-/** class Scrollbar
- *
- * This class provides a scrollbar
- */
-class Scrollbar : public Panel {
-public:
-	enum Area {
-		None,
-		Minus,
-		Plus,
-		Knob,
-		MinusPage,
-		PlusPage
-	};
-
-	enum {
-		Size = 24,	// default width for vertical scrollbars, height for horizontal scrollbars
-	};
-
-public:
-	Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz);
-
-	UISignal1<int> moved;
-
-	void set_steps(int steps);
-	void set_pagesize(int pagesize);
-	void set_pos(int pos);
-
-	uint get_steps() const { return m_steps; }
-	uint get_pagesize() const { return m_pagesize; }
-	uint get_pos() const { return m_pos; }
-
-private:
-	Area get_area_for_point(int x, int y);
-	int get_knob_pos();
-	void set_knob_pos(int p);
-
-	void action(Area area);
-
-	void draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h);
-	void draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h);
-	void draw(RenderTarget* dst);
-	void think();
-
-	bool handle_mouseclick(uint btn, bool down, int x, int y);
-	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
-
-private:
-	bool		m_horizontal;
-
-	uint		m_pos;		// from 0 to m_range - 1
-	uint		m_pagesize;
-	uint		m_steps;
-
-	Area		m_pressed;			// area that the user clicked on (None if mouse is up)
-	int		m_time_nextact;
-	int		m_knob_grabdelta;	// only while m_pressed == Knob
-
-	uint		m_pic_minus;	// left/up
-	uint		m_pic_plus;		// right/down
-	uint		m_pic_background;
-	uint		m_pic_buttons;
-};
-
-
-/** class Multiline_textarea
- *
- * This defines a non responsive (to clicks) text area, where a text
- * can easily be printed
- */
-class Multiline_Textarea : public Panel {
-   public:
-      enum ScrollMode {
-         ScrollNormal = 0,    // (default) only explicit or forced scrolling
-         ScrollLog = 1,       // follow the bottom of the text
-      };
-
-   public:
-      Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h, const char *text,
-            Align align = Align_Left);
-      ~Multiline_Textarea();
-
-      std::string get_text() const { return m_text; }
-      ScrollMode get_scrollmode() const { return m_scrollmode; }
-
-      void set_text(const char *text);
-      void set_align(Align align);
-      void set_scrollpos(int pixels);
-      void set_scrollmode(ScrollMode mode);
-
-      inline uint get_eff_w() { return get_w(); }
-
-      // Drawing and event handlers
-      void draw(RenderTarget* dst);
-
-   private:
-	Align				m_align;
-	std::string		m_text;
-	Scrollbar*		m_scrollbar;
-	ScrollMode     m_scrollmode;
-   int				m_textheight;	// total height of wrapped text, in pixels
-	int				m_textpos;		// current scrolling position in pixels (0 is top)
-};
-
+#include "ui_textarea.h"
+#include "ui_scrollbar.h"
+#include "ui_multilinetextarea.h"
 #include "ui_listselect.h"
 #include "ui_window.h"
 #include "ui_unique_window.h"
+#include "ui_icongrid.h"
+#include "ui_editbox.h"
+#include "ui_box.h"
+#include "ui_tabpanel.h"
 
 #endif /* __S__UI_H */

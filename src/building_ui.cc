@@ -36,7 +36,6 @@ class.
 #include "game_debug_ui.h"
 
 #include "building_int.h"
-#include "ui_box.h"
 #include "ui_progressbar.h"
 #include "waresdisplay.h"
 

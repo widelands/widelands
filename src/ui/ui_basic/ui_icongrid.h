@@ -22,9 +22,7 @@
 #define included_ui_icongrid_h
 
 
-/*
-class IconGrid
---------------
+/**
 Arranges clickable pictures of common size in a regular grid.
 
 Arrangement can be horizontal (pictures fill the grid from left to right, top
@@ -78,12 +76,12 @@ private:
 	};
 
 	uint	m_flags;
-	int	m_columns;		// max # of columns (or rows, depending on orientation) in the grid
-	int	m_highlight;	// currently highlight (mouseover) icon idx (-1 = no highlight)
-	int	m_clicked;		// icon that was clicked (only while LMB is down)
-	int	m_selected;		// currently selected (persistant) icon idx (-1 = no selection)
+	int	m_columns;		///< max # of columns (or rows, depending on orientation) in the grid
+	int	m_highlight;	///< currently highlight (mouseover) icon idx (-1 = no highlight)
+	int	m_clicked;		///< icon that was clicked (only while LMB is down)
+	int	m_selected;		///< currently selected (persistant) icon idx (-1 = no selection)
 
-	int	m_cell_width;	// size of one cell
+	int	m_cell_width;	///< size of one cell
 	int	m_cell_height;
 
 	std::vector<Item>	m_items;

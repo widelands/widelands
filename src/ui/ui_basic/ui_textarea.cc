@@ -20,24 +20,12 @@
 #include "widelands.h"
 #include "ui.h"
 
-////////////////////////////////////////////////////////////////////////////////////////7
-
-/** class Textarea
- *
- * This defines a non responsive (to clicks) text area, where a text
- * can easily be printed
- */
-
-/*
-===============
-Textarea::Textarea
-
+/**
 Initialize a Textarea. For non-multiline textareas, the dimensions are set
 automatically, depending on the text.
 For multiline textareas, only the height and vertical position is adjusted
 automatically. A multiline Textarea differs from a Multiline_Textarea in that
 Multiline_Textarea provides scrollbars.
-===============
 */
 Textarea::Textarea(Panel *parent, int x, int y, std::string text, Align align)
 	: Panel(parent, x, y, 0, 0)
@@ -64,24 +52,16 @@ Textarea::Textarea(Panel *parent, int x, int y, int w, int h, std::string text, 
 }
 
 
-/*
-===============
-Textarea::~Textarea
-
+/**
 Free allocated resources
-===============
 */
 Textarea::~Textarea()
 {
 }
 
 
-/*
-===============
-Textarea::set_text
-
+/**
 Set the text of the Textarea. Size is automatically adjusted
-===============
 */
 void Textarea::set_text(std::string text)
 {
@@ -92,12 +72,8 @@ void Textarea::set_text(std::string text)
 }
 
 
-/*
-===============
-Textarea::set_align
-
+/**
 Change the alignment
-===============
 */
 void Textarea::set_align(Align align)
 {
@@ -107,12 +83,8 @@ void Textarea::set_align(Align align)
 }
 
 
-/*
-===============
-Textarea::draw
-
+/**
 Redraw the Textarea
-===============
 */
 void Textarea::draw(RenderTarget* dst)
 {
@@ -136,12 +108,8 @@ void Textarea::draw(RenderTarget* dst)
 }
 
 
-/*
-===============
-Textarea::collapse
-
+/**
 Reduce the Textarea to size 0x0 without messing up the alignment
-===============
 */
 void Textarea::collapse()
 {
@@ -168,12 +136,8 @@ void Textarea::collapse()
 }
 
 
-/*
-===============
-Textarea::expand
-
+/**
 Expand the size of the Textarea until it fits the size of the text
-===============
 */
 void Textarea::expand()
 {

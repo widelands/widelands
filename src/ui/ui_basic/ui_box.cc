@@ -19,15 +19,9 @@
 
 #include "widelands.h"
 #include "ui.h"
-#include "ui_box.h"
 
-
-/*
-===============
-Box::Box
-
+/**
 Initialize an empty box
-===============
 */
 Box::Box(Panel* parent, int x, int y, uint orientation)
 	: Panel(parent, x, y, 0, 0)
@@ -36,12 +30,8 @@ Box::Box(Panel* parent, int x, int y, uint orientation)
 }
 
 
-/*
-===============
-Box::resize
-
+/**
 Adjust all the children and the box's size.
-===============
 */
 void Box::resize()
 {
@@ -84,12 +74,8 @@ void Box::resize()
 }
 
 
-/*
-===============
-Box::add
-
+/**
 Add a new panel to be controlled by this box
-===============
 */
 void Box::add(Panel* panel, uint align)
 {
@@ -105,12 +91,8 @@ void Box::add(Panel* panel, uint align)
 }
 
 
-/*
-===============
-Box::add_space
-
+/**
 Add spacing of empty pixels.
-===============
 */
 void Box::add_space(uint space)
 {
@@ -125,13 +107,9 @@ void Box::add_space(uint space)
 }
 
 
-/*
-===============
-Box::get_item_size
-
+/**
 Retrieve the given item's size. depth is the size of the item along the
 orientation axis, breadth is the size perpendicular to the orientation axis.
-===============
 */
 void Box::get_item_size(uint idx, int* pdepth, int* pbreadth)
 {
@@ -171,14 +149,10 @@ void Box::get_item_size(uint idx, int* pdepth, int* pbreadth)
 }
 
 
-/*
-===============
-Box::set_item_pos
-
+/**
 Position the given item according to its parameters.
 pos is the position relative to the parent in the direction of the orientation
 axis.
-===============
 */
 void Box::set_item_pos(uint idx, int pos)
 {

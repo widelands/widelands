@@ -16,15 +16,12 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-// you MUST include ui.h before including this
 
 #ifndef included_ui_tabpanel_h
 #define included_ui_tabpanel_h
 
 
-/*
-class TabPanel
---------------
+/**
 Provides a tab view; every tab is a panel that can contain any number of
 sub-panels (such as buttons, other TabPanels, etc..) and an associated
 picture.
@@ -60,12 +57,12 @@ private:
 	};
 	
 	std::vector<Tab>	m_tabs;
-	uint					m_active; // index of the currently active tab
-	bool					m_snapparent; // if true, resize parent to fit this panel
+	uint					m_active; ///< index of the currently active tab
+	bool					m_snapparent; ///< if true, resize parent to fit this panel
 	
-	int					m_highlight; // index of the highlighted button
+	int					m_highlight; ///< index of the highlighted button
 	
-	uint					m_pic_background; // picture used to draw background
+	uint					m_pic_background; ///< picture used to draw background
 };
 
 

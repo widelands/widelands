@@ -22,12 +22,8 @@
 #include "ui_icongrid.h"
 
 
-/*
-===============
-IconGrid::IconGrid
-
+/**
 Initialize the grid
-===============
 */
 IconGrid::IconGrid(Panel* parent, int x, int y, int cellw, int cellh, uint flags, int cols)
 	: Panel(parent, x, y, 0, 0)
@@ -46,13 +42,9 @@ IconGrid::IconGrid(Panel* parent, int x, int y, int cellw, int cellh, uint flags
 }
 
 
-/*
-===============
-IconGrid::add
-
+/**
 Add a new icon to the list and resize appropriately.
 Returns the index of the newly added icon.
-===============
 */
 int IconGrid::add(uint picid, void* data)
 {
@@ -87,12 +79,8 @@ int IconGrid::add(uint picid, void* data)
 }
 
 
-/*
-===============
-IconGrid::get_data
-
+/**
 Returns the user-defined data of the icon with the given index.
-===============
 */
 void* IconGrid::get_data(int idx)
 {
@@ -102,12 +90,8 @@ void* IconGrid::get_data(int idx)
 }
 
 
-/*
-===============
-IconGrid::set_selection
-
+/**
 Set the currently selected icon for persistant grids.
-===============
 */
 void IconGrid::set_selection(int idx)
 {
@@ -122,12 +106,8 @@ void IconGrid::set_selection(int idx)
 }
 
 
-/*
-===============
-IconGrid::set_selectbox_color
-
+/**
 Change the color of the selection box (default is yellow).
-===============
 */
 void IconGrid::set_selectbox_color(RGBColor clr)
 {
@@ -135,12 +115,8 @@ void IconGrid::set_selectbox_color(RGBColor clr)
 }
 
 
-/*
-===============
-IconGrid::draw
-
+/**
 Draw the building symbols
-===============
 */
 void IconGrid::draw(RenderTarget* dst)
 {
@@ -194,13 +170,9 @@ void IconGrid::draw(RenderTarget* dst)
 }
 
 
-/*
-===============
-IconGrid::index_for_point
-
+/**
 Return the item index for a given point inside the IconGrid.
 Returns -1 if no item is below the point.
-===============
 */
 int IconGrid::index_for_point(int x, int y)
 {
@@ -224,12 +196,8 @@ int IconGrid::index_for_point(int x, int y)
 }
 
 
-/*
-===============
-IconGrid::get_cell_position
-
+/**
 Calculate the upper left corner of the cell with the given index.
-===============
 */
 void IconGrid::get_cell_position(int idx, int* px, int* py)
 {
@@ -246,12 +214,8 @@ void IconGrid::get_cell_position(int idx, int* px, int* py)
 }
 
 
-/*
-===============
-IconGrid::update_for_index
-
+/**
 Issue an update() call for the cell with the given idx.
-===============
 */
 void IconGrid::update_for_index(int idx)
 {
@@ -264,12 +228,8 @@ void IconGrid::update_for_index(int idx)
 }
 
 
-/*
-===============
-IconGrid::handle_mousein
-
+/**
 Turn highlight off when the mouse leaves the grid
-===============
 */
 void IconGrid::handle_mousein(bool inside)
 {
@@ -282,12 +242,8 @@ void IconGrid::handle_mousein(bool inside)
 }
 
 
-/*
-===============
-IconGrid::handle_mousemove
-
+/**
 Update highlight under the mouse
-===============
 */
 void IconGrid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
@@ -302,13 +258,9 @@ void IconGrid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 }
 
 
-/*
-===============
-IconGrid::handle_mouseclick
-
+/**
 Left mouse down selects the building, left mouse up acknowledges and sends the
 signal.
-===============
 */
 bool IconGrid::handle_mouseclick(uint btn, bool down, int x, int y)
 {

@@ -22,9 +22,7 @@
 #define included_ui_box_h
 
 
-/*
-class Box
----------
+/**
 A layouting panel that holds a number of child panels.
 The Panels you add to the Box must be children of the Box.
 The Box automatically resizes itself and positions the added children.

@@ -21,37 +21,8 @@
 #include "ui.h"
 #include "font.h"
 
-////////////////////////////////////////////////////////////////////////////////////////7
-
-/** class Multiline_textarea
- *
- * This defines a non responsive (to clicks) text area, where a text
- * can easily be printed.
- * The textarea transparently handles explicit line-breaks and word wrapping.
- *
- * Do not use it blindly for big texts: the font handler needs to re-break the 
- * entire text whenever the textarea is drawn, this is a trade-off which greatly
- * simplifies this class.
- *
- * Depends: class Graph::Pic
- * 			class Font_Handler
- */
-
-/*
-===============
-Multiline_Textarea::Multiline_Textarea
-
+/**
 Initialize a textarea that supports multiline strings.
-
-Args: parent	parent panel
-      x		coordinates of the textarea
-      y
-      w		size of the textarea
-      h
-      text	text for the textarea (can be 0)
-      align	text alignment
-		scrollbar	wether we create a vertical scrollbar
-===============
 */
 Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h,
                                        const char *text, Align align)
@@ -77,25 +48,17 @@ Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint
 }
 
 
-/*
-===============
-Multiline_Textarea::~Multiline_Textarea
-
+/**
 Free allocated resources
-===============
 */
 Multiline_Textarea::~Multiline_Textarea()
 {
 }
 
 
-/*
-===============
-Multiline_Textarea::set_text
-
+/**
 Replace the current text with a new one.
 Fix up scrolling state if necessary.
-===============
 */
 void Multiline_Textarea::set_text(const char *text)
 {
@@ -134,12 +97,8 @@ void Multiline_Textarea::set_text(const char *text)
 }
 
 
-/*
-===============
-Multiline_Textarea::set_align
-
+/**
 Change alignment of the textarea
-===============
 */
 void Multiline_Textarea::set_align(Align align)
 {
@@ -148,12 +107,8 @@ void Multiline_Textarea::set_align(Align align)
 }
 
 
-/*
-===============
-Multiline_Textarea::set_scrollpos
-
+/**
 Scroll to the given position.
-===============
 */
 void Multiline_Textarea::set_scrollpos(int pixels)
 {
@@ -163,13 +118,9 @@ void Multiline_Textarea::set_scrollpos(int pixels)
 }
 
 
-/*
-===============
-Multiline_Textarea::set_scrollmode
-
+/**
 Change the scroll mode. This will not change the current scroll position;
 it only affects the behaviour of set_text().
-===============
 */
 void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 {
@@ -177,12 +128,8 @@ void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 }
 
 
-/*
-===============
-Multiline_Textarea::draw
-
+/**
 Redraw the textarea
-===============
 */
 void Multiline_Textarea::draw(RenderTarget* dst)
 {

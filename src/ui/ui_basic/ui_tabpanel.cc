@@ -19,7 +19,6 @@
 
 #include "widelands.h"
 #include "ui.h"
-#include "ui_tabpanel.h"
 
 
 #define TP_BUTTON_WIDTH			34
@@ -28,12 +27,8 @@
 #define TP_SEPARATOR_HEIGHT	4	// height of the bar separating buttons and tab contents
 
 
-/*
-===============
-TabPanel::TabPanel
-
+/**
 Initialize an empty TabPanel
-===============
 */
 TabPanel::TabPanel(Panel* parent, int x, int y, uint background)
 	: Panel(parent, x, y, 0, 0)
@@ -53,14 +48,10 @@ TabPanel::TabPanel(Panel* parent, int x, int y, uint background)
 }
 
 
-/*
-===============
-TabPanel::resize
-
+/**
 Resize according to number of tabs and the size of the currently visible
 contents.
 Resize the parent if snapparent is enabled.
-===============
 */
 void TabPanel::resize()
 {
@@ -89,14 +80,10 @@ void TabPanel::resize()
 }
 
 
-/*
-===============
-TabPanel::set_snapparent
-
+/**
 If snapparent is enabled, the parent window will be adjusted to the size of the
 TabPanel whenever the TabPanel's size changes.
 The default for snapparent behaviour is off.
-===============
 */
 void TabPanel::set_snapparent(bool snapparent)
 {
@@ -104,12 +91,8 @@ void TabPanel::set_snapparent(bool snapparent)
 }
 
 
-/*
-===============
-TabPanel::add
-
+/**
 Add a new tab
-===============
 */	
 uint TabPanel::add(uint picid, Panel* panel)
 {
@@ -132,12 +115,8 @@ uint TabPanel::add(uint picid, Panel* panel)
 }
 
 
-/*
-===============
-TabPanel::activate
-
+/**
 Make a different tab the currently active tab.
-===============
 */
 void TabPanel::activate(uint idx)
 {
@@ -152,12 +131,8 @@ void TabPanel::activate(uint idx)
 }
 
 
-/*
-===============
-TabPanel::draw
-
+/**
 Draw the buttons and the tab
-===============
 */
 void TabPanel::draw(RenderTarget* dst)
 {
@@ -210,12 +185,8 @@ void TabPanel::draw(RenderTarget* dst)
 }
 
 
-/*
-===============
-TabPanel::handle_mousein
-
+/**
 Cancel all highlights when the mouse leaves the panel
-===============
 */
 void TabPanel::handle_mousein(bool inside)
 {
@@ -228,12 +199,8 @@ void TabPanel::handle_mousein(bool inside)
 }
 
 
-/*
-===============
-TabPanel::handle_mousemove
-
+/**
 Update highlighting
-===============
 */
 void TabPanel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
@@ -261,12 +228,8 @@ void TabPanel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 }
 
 
-/*
-===============
-TabPanel::mouseclick
-
+/**
 Change the active tab if a tab button has been clicked
-===============
 */
 bool TabPanel::handle_mouseclick(uint btn, bool down, int x, int y)
 {

@@ -18,7 +18,6 @@
  */
 #include "widelands.h"
 #include "ui.h"
-#include "ui_editbox.h"
 
 /*
 =================================================
@@ -28,12 +27,8 @@ class Edit_Box
 =================================================
 */
 
-/*
-===========
-Edit_Box::Edit_Box()
-
+/**
 constructor
-===========
 */
 Edit_Box::Edit_Box(Panel* parent, int x, int y, uint w, uint h, uint background, int id) :
    Button(parent, x, y, w, h, background, id) {
@@ -51,24 +46,16 @@ Edit_Box::Edit_Box(Panel* parent, int x, int y, uint w, uint h, uint background,
    set_can_focus(true);
 }
 
-/*
-===========
-Edit_Box::~Edit_Box()
-
+/**
 destructor
-===========
 */
 Edit_Box::~Edit_Box(void) {
    grab_mouse(false);
    set_can_focus(false);
 }
 
-/*
-===========
-Edit_Box::handle_mouseclick()
-
+/**
 the mouse was clicked on this editbox
-===========
 */
 bool Edit_Box::handle_mouseclick(uint btn, bool down, int x, int y) {
    if(btn!=0) return false;
@@ -86,12 +73,8 @@ bool Edit_Box::handle_mouseclick(uint btn, bool down, int x, int y) {
    return false;
 }
 
-/*
-===========
-Edit_Box::handle_key() 
-
+/**
 a key event must be handled
-===========
 */
 bool Edit_Box::handle_key(bool down, int code, char c) {
    if(down) {
@@ -132,27 +115,19 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
    return false;
 }
 
-/*
-===========
-Edit_Box::handle_mousemove()
-
+/**
 handles the mousemove for this panel.
 does not much, suppresses messages when the focus
 is received
-===========
 */
 void Edit_Box::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns) {
    if(m_keyboard_grabbed) return;
    else Button::handle_mousemove(x,y,xdiff,ydiff,btns);
 }
 
-/*
-===========
-Edit_Box::handle_mousein()
-
+/**
 Handles mouseins or rather mouse outs. 
 Hides a mouseout event from the underlying button
-===========
 */
 void Edit_Box::handle_mousein(bool inside) {
    if(m_keyboard_grabbed) return;

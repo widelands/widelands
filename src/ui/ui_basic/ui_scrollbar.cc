@@ -33,12 +33,8 @@ Scrollbar
 */
 
 
-/*
-===============
-Scrollbar::Scrollbar
-
+/**
 Initialize the scrollbar using default values.
-===============
 */
 Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
 	: Panel(parent, x, y, w, h)
@@ -71,12 +67,8 @@ Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
 }
 
 
-/*
-===============
-Scrollbar::set_steps
-
+/**
 Change the number of steps of the scrollbar.
-===============
 */
 void Scrollbar::set_steps(int steps)
 {
@@ -92,12 +84,8 @@ void Scrollbar::set_steps(int steps)
 }
 
 
-/*
-===============
-Scrollbar::set_pagesize
-
+/**
 Change the number of steps a pageup/down will scroll.
-===============
 */
 void Scrollbar::set_pagesize(int pagesize)
 {
@@ -108,12 +96,8 @@ void Scrollbar::set_pagesize(int pagesize)
 }
 
 
-/*
-===============
-Scrollbar::set_pos
-
+/**
 Change the current scrolling position.
-===============
 */
 void Scrollbar::set_pos(int pos)
 {
@@ -132,12 +116,8 @@ void Scrollbar::set_pos(int pos)
 }
 
 
-/*
-===============
+/**
 Scrollbar::get_area_for_point
-
-Figure out which area the given point belongs to.
-===============
 */
 Scrollbar::Area Scrollbar::get_area_for_point(int x, int y)
 {
@@ -178,12 +158,8 @@ Scrollbar::Area Scrollbar::get_area_for_point(int x, int y)
 }
 
 
-/*
-===============
-Scrollbar::get_knob_pos
-
+/**
 Return the center of the knob, in pixels, depending on the current position.
-===============
 */
 int Scrollbar::get_knob_pos()
 {
@@ -200,12 +176,8 @@ int Scrollbar::get_knob_pos()
 }
 
 
-/*
-===============
-Scrollbar::set_knob_pos
-
+/**
 Change the position according to knob movement.
-===============
 */
 void Scrollbar::set_knob_pos(int pos)
 {
@@ -224,12 +196,8 @@ void Scrollbar::set_knob_pos(int pos)
 }
 
 
-/*
-===============
-Scrollbar::action
-
+/**
 Perform the action for klicking on the given area.
-===============
 */
 void Scrollbar::action(Area area)
 {
@@ -249,11 +217,6 @@ void Scrollbar::action(Area area)
 }
 
 
-/*
-===============
-Scrollbar::draw_button
-===============
-*/
 void Scrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h)
 {
 	uint pic;
@@ -307,11 +270,6 @@ void Scrollbar::draw_button(RenderTarget* dst, Area area, int x, int y, int w, i
 }
 
 
-/*
-===============
-Scrollbar::draw_area
-===============
-*/
 void Scrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h)
 {
 	dst->tile(x, y, w, h, m_pic_background, get_x()+x, get_y()+y);
@@ -321,12 +279,8 @@ void Scrollbar::draw_area(RenderTarget* dst, Area area, int x, int y, int w, int
 }
 
 
-/*
-===============
-Scrollbar::draw
-
+/**
 Draw the scrollbar.
-===============
 */
 void Scrollbar::draw(RenderTarget* dst)
 {
@@ -353,12 +307,8 @@ void Scrollbar::draw(RenderTarget* dst)
 }
 
 
-/*
-===============
-Scrollbar::think
-
+/**
 Check for possible auto-repeat scrolling.
-===============
 */
 void Scrollbar::think()
 {
@@ -379,11 +329,6 @@ void Scrollbar::think()
 }
 
 
-/*
-===============
-Scrollbar::handle_mouseclick
-===============
-*/
 bool Scrollbar::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn != 0) // only react on left button
@@ -422,12 +367,8 @@ bool Scrollbar::handle_mouseclick(uint btn, bool down, int x, int y)
 }
 
 
-/*
-===============
-Scrollbar::handle_mousemove
-
+/**
 Move the knob while pressed.
-===============
 */
 void Scrollbar::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
 {

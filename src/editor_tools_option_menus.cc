@@ -25,8 +25,6 @@
 #include "editor_tools_option_menus.h"
 #include "graphic.h"
 #include "sw16_graphic.h"
-#include "ui_tabpanel.h"
-#include "ui_box.h"
 
 /*
 =================================================

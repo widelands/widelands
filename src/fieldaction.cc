@@ -28,10 +28,6 @@
 #include "watchwindow.h"
 #include "game_debug_ui.h"
 
-#include "ui_tabpanel.h"
-#include "ui_box.h"
-#include "ui_icongrid.h"
-
 
 /*
 ==============================================================================

@@ -23,17 +23,11 @@
 
 #include <string>
 
-/*
-=================================================
-
-class Edit_Box
-
+/**
 a editbox can be clicked, then the user can change
 it's text (title). When return is pressed, the 
 editbox is unfocused, the keyboard released and
 a callback function is called
-
-=================================================
 */
 class Edit_Box : private Button {
    public:

@@ -27,9 +27,6 @@
 #include "worker.h"
 #include "transport.h"
 
-#include "ui_tabpanel.h"
-
-
 /*
 ==============================================================================
 
