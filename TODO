@@ -1,0 +1,39 @@
+WIP == Work in Process
+TIP == Thinking in Process
+
+**************************** WIDELANDS WORLD CREATOR ***************
+
+- Write the documentation for the world file format
+- Build/Rebuild the editor to match the specs 
+
+
+**************************** WIDELANDS TRIBE CREATOR **************
+
+- Write the documentation for the tribe formats (WIP: Holger 50%)
+- Build/Rebuild the editor to match the specs
+
+**************************** WIDELANDS MAP CREATOR ****************
+
+     --- DEPENDS ON TRIBEs AND WORLDs
+
+
+
+
+**************************** WIDELANDS WORK ***********************
+
+- Speed up map rendering
+- Improve graphics (Special concern for me) 
+- Define bob format
+
+
+
+
+
+***************************** GAMEPLAY WORK *****************************
+
+- Define a game (Widelands is more an engine, than a game) 
+  Questions to handle here are: 
+   * Do we really want a settlers II clone, or rather a settlers II like
+	  game, but much better 8)
+   * Story for a tutorial campaign
+
