@@ -151,7 +151,22 @@ clean:
 	@-rm -rf *.da src/*.da
 	@-rm -rf $(OBJECT_DIR)/*.o $(OBJECT_DIR)/*/*.o $(OBJECT_DIR)/*/*/*.o $(OBJECT_DIR)/*/*/*/*.o 
 	@-rm -rf $(OBJECT_DIR)/*.d $(OBJECT_DIR)/*/*.d $(OBJECT_DIR)/*/*/*.d $(OBJECT_DIR)/*/*/*/*.d 
+	@-rm -rf $(OBJECT_DIR)/widelands
 	@-rm -rf *~ */*~ */*/*~ */*/*/*~
+
+VERSION:=b7.cvs040916
+dist:
+	@rm -rf widelands-$(VERSION)
+	@mkdir widelands-$(VERSION)
+	@cp -r AUTHORS ChangeLog fonts maps pics README-compiling.txt COPYING Makefile README README.developers tribes worlds widelands-$(VERSION)
+	@for n in `find src -name '*.cc'` `find src -name '*.h'` ; do \
+	   mkdir -p widelands-$(VERSION)/`dirname $$n` ; \
+	   cp $$n widelands-$(VERSION)/`dirname $$n` ; \
+	 done
+	@find widelands-$(VERSION) -name CVS | xargs rm -rf
+	@find widelands-$(VERSION) -name .cvsignore | xargs rm -f
+	@tar cf - widelands-$(VERSION) | gzip -9c - > widelands-$(VERSION).tar.gz
+	@rm -rf widelands-$(VERSION)
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 

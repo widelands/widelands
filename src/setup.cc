@@ -67,6 +67,11 @@ static std::string getexename()
  */
 void setup_searchpaths(int argc, char **argv)
 {
+	// if everything else fails, search it where the FHS forces us to put it (obviously UNIX-only)
+#ifndef WIN32
+	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/widelands"));
+#endif
+
 	// absolute fallback directory is the CWD
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
 
