@@ -152,9 +152,9 @@ int Creature::produce(uint timekey)
 					field->bob->consume();
 				else
 					return -1;
-				break;
+				break;*/
 			case CONSUME_RESOURCE:
-				if (field->resource() == desc->consume)
+/*				if (field->resource() == desc->consume)
 					field->consume();
 				else
 					return -1;
