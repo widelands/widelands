@@ -2511,7 +2511,8 @@ void Worker::start_task_fugitive(Game* g)
 {
 	push_task(g, &taskFugitive);
 
-	get_state()->ivar1 = g->get_gametime() + 60000 + 100*(g->logic_rand() % 300);
+	// Fugitives survive for two to four minutes
+	get_state()->ivar1 = g->get_gametime() + 120000 + 200*(g->logic_rand() % 600);
 }
 
 
@@ -2525,7 +2526,7 @@ void Worker::fugitive_update(Game* g, State* state)
 	Map *map = g->get_map();
 	PlayerImmovable *location = get_location(g);
 
-	if (location) {
+	if (location && location->get_owner() == get_owner()) {
 		molog("[fugitive]: we're on location\n");
 
 		if (location->has_attribute(WAREHOUSE)) {
@@ -2544,7 +2545,7 @@ void Worker::fugitive_update(Game* g, State* state)
 		Flag *flag = (Flag*)imm;
 		Building *building = flag->get_building();
 
-		if (building && building->has_attribute(WAREHOUSE)) {
+		if (building && building->has_attribute(WAREHOUSE) && building->get_owner() == get_owner()) {
 			molog("[fugitive]: move into warehouse\n");
 			start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
 			set_location(building);
@@ -2571,6 +2572,11 @@ void Worker::fugitive_update(Game* g, State* state)
 
 		for(uint i = 0; i < warehouses.size(); i++) {
 			Warehouse *wh = (Warehouse*)warehouses[i].object;
+
+			// Only walk into one of our warehouses
+			if (wh->get_owner() != get_owner())
+				continue;
+
 			int dist = map->calc_distance(get_position(), warehouses[i].coords);
 
 			if (!best || dist < bestdist) {
@@ -2579,22 +2585,23 @@ void Worker::fugitive_update(Game* g, State* state)
 			}
 		}
 
-		bool use;
+		if (best)
+		{
+			bool use = false;
 
-		if (bestdist < 6)
-			use = true;
-		else
-			use = (g->logic_rand() % (bestdist-4)) == 0;
+			if ((g->logic_rand() % 30) <= (30 - bestdist))
+				use = true;
 
-		// okay, move towards the flag of this warehouse
-		if (use) {
-			Flag *flag = best->get_base_flag();
+			// okay, move towards the flag of this warehouse
+			if (use) {
+				Flag *flag = best->get_base_flag();
 
-			molog("[fugitive]: try to move to warehouse\n");
+				molog("[fugitive]: try to move to warehouse\n");
 
-			// the warehouse could be on a different island, so check for failure
-			if (start_task_movepath(g, flag->get_position(), 0, get_descr()->get_right_walk_anims(does_carry_ware())))
-				return;
+				// the warehouse could be on a different island, so check for failure
+				if (start_task_movepath(g, flag->get_position(), 0, get_descr()->get_right_walk_anims(does_carry_ware())))
+					return;
+			}
 		}
 	}
 
@@ -2603,8 +2610,8 @@ void Worker::fugitive_update(Game* g, State* state)
 
 	molog("[fugitive]: wander randomly\n");
 
-	dst.x = get_position().x + (g->logic_rand()%5) - 2;
-	dst.y = get_position().y + (g->logic_rand()%5) - 2;
+	dst.x = get_position().x + (g->logic_rand()%11) - 5;
+	dst.y = get_position().y + (g->logic_rand()%11) - 5;
 
 	if (start_task_movepath(g, dst, 4, get_descr()->get_right_walk_anims(does_carry_ware())))
 		return;

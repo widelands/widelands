@@ -1260,6 +1260,8 @@ appropriate ware to our warelist
 */
 void Warehouse::incorporate_worker(Game *g, Worker *w)
 {
+	assert(w->get_owner() == get_owner());
+
 	int ware = w->get_ware_id();
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
