@@ -39,7 +39,6 @@ Cmd_Queue::~Cmd_Queue(void) {
 
 // Queue a new command
 void Cmd_Queue::queue(uchar sender, ushort cmd, ulong arg1, ulong arg2, void* arg3) {
-   cerr << "queue: ncmds:" << ncmds << endl;
    if(ncmds == MAX_CMDS-1) run_queue();
    
    cmds[ncmds].sender=sender;
@@ -58,8 +57,6 @@ int Cmd_Queue::run_queue(void) {
    Instance* inst;
    ushort cmd;
    
-   cerr << "running queue! ncmds:" << ncmds << endl;
-
    while(i<ncmds) {
       c=&cmds[i];
       cmd=c->cmd;
@@ -115,9 +112,7 @@ int Cmd_Queue::run_queue(void) {
       i++;
    }
 
-   cerr << "queue ends1!: ncmds" << ncmds << endl;
    ncmds=0;
-   cerr << "queue ends2!: ncmds" << ncmds << endl;
 
    return RET_OK;
 }

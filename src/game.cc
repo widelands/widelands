@@ -29,8 +29,6 @@
 #include "game.h"
 
 
-Game* g_game;
-
 /** class Game
  *
  * This game handels one game. This class is not a all portabel,
@@ -86,8 +84,6 @@ void Game::run(void) {
    assert(!tribe->load(str));
    // TEMP
 
-   g_game=this;
-
    // run the cmd queue, so all the load cmds are worked through
    queue->run_queue();
    
@@ -111,6 +107,9 @@ void Game::think(void) {
    
    while(curticks-lticks > FRAME_LENGTH) {
 //      cerr << "Working frame number: " << frame_count << endl;
+      
+      // Animate animated textures
+      map->get_world()->animate();
 
       uint i;
       Instance* inst;

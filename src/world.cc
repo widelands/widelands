@@ -163,8 +163,11 @@ int World::parse_bobs(Binary_file* f) {
    uchar id;
    uint i;
 
+   bobs.reserve(nbobs);
+
    for(i=0; i<nbobs; i++) {
-      f->read(&id, sizeof(uchar)); 
+      f->read(&id, sizeof(uchar));
+
       switch(id) {
          case Logic_Bob_Descr::BOB_DIMINISHING:
             b=new Diminishing_Bob_Descr();
@@ -177,17 +180,18 @@ int World::parse_bobs(Binary_file* f) {
          case Logic_Bob_Descr::BOB_GROWING:
          case Logic_Bob_Descr::BOB_CRITTER:
          default:
-            // illegal bob for worlsd
+            // illegal bob for world
+            assert(0);
             return ERR_FAILED;
             break;
       }
+      assert(b);
       bobs.add(b);
       b->read(f);
    }
 
    return RET_OK;
 }
-
 
 // 
 // Down here: subclasses of world

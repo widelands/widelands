@@ -58,13 +58,14 @@ class Animation {
       inline ushort get_h(void) { return h; }
       inline ushort get_hsx(void) { return hsx; }
       inline ushort get_hsy(void) { return hsy; }
+
       void add_pic(ushort size, ushort* data) {
-         if(!npics) {
-            npics=1;
+         if(!pics) {
             pics=(Animation_Pic*) malloc(sizeof(Animation_Pic));
+            npics=1;
          } else {
-            npics++;
-            pics=(Animation_Pic*) realloc(pics, sizeof(Animation_Pic*)*npics);
+            ++npics;
+            pics=(Animation_Pic*) realloc(pics, sizeof(Animation_Pic)*npics);
          }
          pics[npics-1].data=(ushort*)malloc(size);
          pics[npics-1].parent=this;
@@ -77,10 +78,9 @@ class Animation {
 
       int read(Binary_file*);
 
-      // TEMP 
-      inline Animation_Pic* get_pic(ushort) { return &pics[0]; }
+      inline Animation_Pic* get_pic(ushort n) { assert(n<npics); return &pics[n]; }
+      inline ushort get_npics(void) { return npics; }
 
-      // TEMP ENDS
    private:
       uint flags;
       ushort w, h;
@@ -89,33 +89,7 @@ class Animation {
       Animation_Pic *pics;
 };
 
-//
-// This class describes a in-game Boring bob
-//
-class Boring_Bob : public Map_Object {
-   public:
-      Boring_Bob(ushort n) : Map_Object(n) { } 
-      virtual ~Boring_Bob(void) { }
-
-      int act(Game* g);
-
-   private:
-};
-
-//
-// This class describes a in-game Diminishing bob
-//
-class Diminishing_Bob : public Map_Object {
-   public:
-      Diminishing_Bob(ushort n) : Map_Object(n) { } 
-      virtual ~Diminishing_Bob(void) { }
-
-      int act(Game* g);
-
-   private:
-};
-
-class Logic_Bob_Descr {
+class Logic_Bob_Descr : public Map_Object_Descr {
    public:
       enum {
          BOB_GROWING=0,
@@ -184,6 +158,35 @@ class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
    private:
       ushort ttl; // time to life
 };
+
+//
+// This class describes a in-game Boring bob
+//
+class Boring_Bob : public Map_Object {
+   public:
+      Boring_Bob(Boring_Bob_Descr *d) { descr=d; cur_pic=d->get_anim()->get_pic(0); } 
+      virtual ~Boring_Bob(void) { }
+
+      int act(Game* g);
+
+   private:
+      Boring_Bob_Descr* descr;
+};
+
+//
+// This class describes a in-game Diminishing bob
+//
+class Diminishing_Bob : public Map_Object {
+   public:
+      Diminishing_Bob(Diminishing_Bob_Descr* d)  { descr=d;  cur_pic=d->get_anim()->get_pic(0); } 
+      virtual ~Diminishing_Bob(void) { }
+
+      int act(Game* g);
+
+   private:
+      Diminishing_Bob_Descr* descr;
+};
+
 
 #endif
 

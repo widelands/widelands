@@ -22,19 +22,6 @@
 
 #include "instances.h"
 
-//
-// This class describes a in-game building
-//
-class Building_HQ : public Map_Object {
-   public:
-      Building_HQ(ushort n) : Map_Object(n) { } 
-      virtual ~Building_HQ(void) { }
-
-      int act(Game* g);
-
-   private:
-};
-
 
 class NeedWares_List {
    public:
@@ -56,7 +43,7 @@ class NeedWares_List {
 /*
  * Common to all buildings!
  */
-class Building_Descr { 
+class Building_Descr : public Map_Object_Descr { 
    public:
       Building_Descr(void) { }
       virtual ~Building_Descr(void) { }
@@ -496,6 +483,20 @@ class Port_Descr : virtual public Boring_Building_Descr,
 
       private:
          // nothing
+};
+
+//
+// This class describes a in-game HQ 
+//
+class Building_HQ : public Map_Object {
+   public:
+      Building_HQ(HQ_Descr* d) { descr=d; } 
+      virtual ~Building_HQ(void) { }
+
+      int act(Game* g);
+
+   private:
+      HQ_Descr* descr;
 };
 
 

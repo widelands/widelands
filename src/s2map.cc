@@ -515,7 +515,6 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
 
          
          c=bobs[y*hd.width + x];
-         cerr << x << ":" << y  << ":" << c << endl;
          if(buildings[y*hd.width +x]==0x78) {
             switch(c) {
                case BOB_STONE1:

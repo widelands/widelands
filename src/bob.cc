@@ -26,8 +26,8 @@
 // this is a function which reads a animation from a file
 //
 int Animation::read(Binary_file* f) {
-   ushort npics;
-   f->read(&npics, sizeof(ushort));
+   ushort np;
+   f->read(&np, sizeof(ushort));
 
    uint i;
    char* buf;
@@ -35,8 +35,9 @@ int Animation::read(Binary_file* f) {
    buf=(char*) malloc(buf_size);
    
    ushort size;
-   for(i=0; i<npics; i++) {
+   for(i=0; i<np; i++) {
       f->read(&size, sizeof(ushort));
+      
       if(size > buf_size) {
          buf_size=size;
          buf=(char*) realloc(buf, buf_size);
@@ -54,18 +55,25 @@ int Animation::read(Binary_file* f) {
 // class Diminishing_Bob
 //
 int Diminishing_Bob::act(Game* g) {
-   cur_pic=g->get_map()->get_world()->get_bob_descr(idx)->get_anim()->get_pic(0);
+   
+   // Animate
+   pic_idx++;
+   if(pic_idx==descr->get_anim()->get_npics()) pic_idx=0;
+   cur_pic=descr->get_anim()->get_pic(pic_idx);
 
-   return RET_OK;
+   return 1; // next frame again
 }
 
 //
 // class Boring_Bob
 // 
 int Boring_Bob::act(Game* g) {
-   cur_pic=g->get_map()->get_world()->get_bob_descr(idx)->get_anim()->get_pic(0);
+   // Animate
+   pic_idx++;
+   if(pic_idx==descr->get_anim()->get_npics()) pic_idx=0;
+   cur_pic=descr->get_anim()->get_pic(pic_idx);
 
-   return RET_OK;
+   return 1; // next frame again
 }
 
 // DOWN HERE: DECRIPTION CLASSES
@@ -103,11 +111,12 @@ int Boring_Bob_Descr::read(Binary_file* f) {
 }
 int Boring_Bob_Descr::create_instance(Instance* inst) {
    
-   inst->obj=new Boring_Bob(g_game->get_map()->get_world()->get_bob(this->get_name()));
+   inst->obj=new Boring_Bob(this);
 
    cerr << "Boring_Bob_Descr::create_instance() TODO!" << endl;
 
-   return RET_OK;
+   if(this->anim.get_npics() > 1) return 1; // we have to animate
+   return -1; // this thing doesn't animate, so don't waste cycles on it
 }
 
 //
@@ -124,11 +133,12 @@ int Diminishing_Bob_Descr::read(Binary_file* f) {
    return RET_OK;
 }
 int Diminishing_Bob_Descr::create_instance(Instance* inst) {
-   inst->obj=new Diminishing_Bob(g_game->get_map()->get_world()->get_bob(this->get_name()));
+   inst->obj=new Diminishing_Bob(this);
    
    cerr << "Diminishing_Bob_Descr::create_instance() TODO!" << endl;
-
-   return RET_OK;
+   
+   if(this->anim.get_npics() > 1) return 1; // we have to animate
+   return -1; // this thing doesn't animate, so don't waste cycles on it
 }
 
 //

@@ -24,6 +24,16 @@ class Game;
 class Animation_Pic;
 
 //
+// Base class for descriptions of worker, files and so on. this must just
+// link them together
+// 
+class Map_Object_Descr {
+   public:
+      Map_Object_Descr(void) { }
+      virtual ~Map_Object_Descr(void) { }
+};
+
+//
 // Map_Object is a class representing a base class for all objects. like buildings, animals
 // ... so on. Every 'Instance' has one of those classes
 // 
@@ -31,7 +41,7 @@ class Map_Object {
    friend class Instance;
 
    public:
-      Map_Object(ushort n) { idx=n; };
+      Map_Object(void) { pic_idx=0; };
       virtual ~Map_Object(void) { }
 
       inline Animation_Pic* get_cur_pic(void) { return cur_pic; }
@@ -44,9 +54,9 @@ class Map_Object {
       inline void set_next_acting_frame(uint i) { next_acting_frame=i; }
  
    protected:
-      ushort idx;
       uint next_acting_frame;
       Animation_Pic* cur_pic;
+      uchar pic_idx;
       uchar owned_by; // player number
 };
 

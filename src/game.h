@@ -77,9 +77,4 @@ class Game {
                 ulong frame_count;
 };
 
-// TEMP TODO
-extern Game* g_game;
-
-
-
 #endif // __S__GAME_H

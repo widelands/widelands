@@ -28,7 +28,7 @@
  */
 template <class T> class Descr_Maintainer {
    public:
-      Descr_Maintainer(void) { nitems=0; items=0; }
+      Descr_Maintainer(void) { nitems=0; items=0; place_for=0; }
       ~Descr_Maintainer(void) ; 
 
       T* exists(const char* name);
@@ -37,10 +37,19 @@ template <class T> class Descr_Maintainer {
       void add(T* item);
       ushort get_nitems(void) { return nitems; }
       ushort get_index(const char* name);
-     
+      void reserve(uint n) {
+         if(!items) {
+            items = (T**) malloc(sizeof(T*)*n);
+         } else {
+            items = (T**) realloc(items, sizeof(T*)*n);
+         }
+         place_for=n;
+      }
+      
       inline T* get(uint idx) { assert(idx<nitems); return items[idx]; }
 
    private:
+      uint place_for;
       uint n;
       uint nitems;
       T** items;
@@ -81,11 +90,9 @@ T* Descr_Maintainer<T>::get(const char* name) {
 template <class T>
 void Descr_Maintainer<T>::add(T* item) {
    nitems++;
-   if(nitems==1) {
-      items=(T**) malloc(sizeof(T*)*nitems);
-   } else {
-      items=(T**) realloc(items, sizeof(T*)*nitems);
-   } 
+   if(nitems>=place_for) {
+      reserve(nitems);
+   }
    items[nitems-1]=item;
 }
 

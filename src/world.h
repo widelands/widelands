@@ -51,7 +51,8 @@ class Resource_Descr {
 
 class Terrain_Descr {
    friend class Descr_Maintainer<Terrain_Descr>;
-
+   friend class World;
+   
    public:
       Terrain_Descr(void) { ntex=0; tex=0; curtex=0; }
       ~Terrain_Descr(void) { 
@@ -67,6 +68,11 @@ class Terrain_Descr {
       int read(Binary_file* f);
 
    private:
+      inline void animate(void) {
+         curtex++;
+         if(curtex==ntex) curtex=0;
+      }
+
       char name[30];
       uchar is;
       Pic** tex;
@@ -99,6 +105,14 @@ class World
       inline ushort get_bob(const char* l) { return bobs.get_index(l); }
       inline Logic_Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
 
+      inline void animate(void) {
+         uint i;
+         for(i=0; i<ters.get_nitems(); i++)
+            ters.get(i)->animate();
+      }
+
+
+ 
    private:
       Descr_Maintainer<Logic_Bob_Descr> bobs;
       Descr_Maintainer<Resource_Descr> res;

@@ -52,10 +52,9 @@ int NeedWares_List::read(Binary_file* f) {
 int Building_HQ::act(Game* g) {
 
    // cerr << "Building HQ should act. Repeating in ten frames!" << endl;
-   
 
    next_acting_frame=g->get_frame()+10;
-   cur_pic=g->get_player_tribe(owned_by)->get_building_descr(idx)->get_idle_anim()->get_pic(0);
+   cur_pic=descr->get_idle_anim()->get_pic(0);
 
    return RET_OK;
 }
@@ -388,12 +387,13 @@ int HQ_Descr::read(Binary_file *f) {
    // own 
    f->read(&conquers, sizeof(ushort));
 
-   return RET_OK;
+   return -1; // never act again
 }
+
 int HQ_Descr::create_instance(Instance* inst) {
    cerr << "HQ_Descr::create_instance() not yet implemented: TODO!" << endl;
 
-   inst->obj=new Building_HQ(0);
+   inst->obj=new Building_HQ(this);
 
    return 10; // act in 10 frames again 
 }
