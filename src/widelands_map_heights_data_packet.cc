@@ -25,6 +25,9 @@
 #include "widelands_map_data_packet_ids.h"
 #include "error.h"
 
+
+#define CURRENT_PACKET_VERSION 1
+
 /*
  * Destructor
  */
@@ -35,16 +38,23 @@ Widelands_Map_Heights_Data_Packet::~Widelands_Map_Heights_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Heights_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase) throw(wexception) {
-   // Read all the heights 
-   Map* map=egbase->get_map();
-   
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         uchar h=fr->Unsigned8();
-//         log("[Map Loader] Setting height of field (%i,%i) to %i\n", x, y, h);
-         map->get_field(Coords(x,y))->set_height(h);
+   // read packet version
+   int packet_version=fr->Unsigned16();
+
+   if(packet_version==CURRENT_PACKET_VERSION) {
+      // Read all the heights 
+      Map* map=egbase->get_map();
+
+      for(ushort y=0; y<map->get_height(); y++) {
+         for(ushort x=0; x<map->get_width(); x++) {
+            uchar h=fr->Unsigned8();
+            //         log("[Map Loader] Setting height of field (%i,%i) to %i\n", x, y, h);
+            map->get_field(Coords(x,y))->set_height(h);
+         }
       }
+      return;
    }
+   assert(0); // never here
 }
 
 
@@ -55,6 +65,9 @@ void Widelands_Map_Heights_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* e
    // first of all the magic bytes
    fw->Unsigned16(PACKET_HEIGHTS);
 
+   // Now packet version
+   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   
    // Now, all heights as unsigned chars in order
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {

@@ -23,6 +23,8 @@
 #include "map.h"
 #include "world.h"
 
+#define CURRENT_PACKET_VERSION 1
+
 /*
  * Destructor
  */
@@ -43,26 +45,34 @@ void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileRead* fr, Map* map) throw
    version=fr->Unsigned16();
    if(version > WLMF_VERSION) throw wexception("Map newer than binary!");
 
-   map->m_width=fr->Unsigned16();
-   map->m_height=fr->Unsigned16();
-   map->set_nrplayers(fr->Unsigned8()); 
+   // check packet version
+   int packet_version=fr->Unsigned16();
    
-   // World name
-	memcpy(buf, fr->Data(WORLD_NAME_LEN), WORLD_NAME_LEN);
-   map->set_world_name(buf);
-   
-   // Name
-	memcpy(buf, fr->Data(MAP_NAME_LEN), MAP_NAME_LEN);
-   map->set_name(buf);
-   
-   // Author
-	memcpy(buf, fr->Data(MAP_AUTHOR_LEN), MAP_AUTHOR_LEN);
-   map->set_author(buf);
-   
-   // Descr
-	memcpy(buf, fr->Data(MAP_DESCR_LEN), MAP_DESCR_LEN);
-   map->set_description(buf);
+   if(packet_version == CURRENT_PACKET_VERSION) {
+      map->m_width=fr->Unsigned16();
+      map->m_height=fr->Unsigned16();
+      map->set_nrplayers(fr->Unsigned8()); 
+
+      // World name
+      memcpy(buf, fr->Data(WORLD_NAME_LEN), WORLD_NAME_LEN);
+      map->set_world_name(buf);
+
+      // Name
+      memcpy(buf, fr->Data(MAP_NAME_LEN), MAP_NAME_LEN);
+      map->set_name(buf);
+
+      // Author
+      memcpy(buf, fr->Data(MAP_AUTHOR_LEN), MAP_AUTHOR_LEN);
+      map->set_author(buf);
+
+      // Descr
+      memcpy(buf, fr->Data(MAP_DESCR_LEN), MAP_DESCR_LEN);
+      map->set_description(buf);
+      return;
+   }
+   assert(0); // should never be here
 }
+
 
 
 /*
@@ -82,6 +92,9 @@ void Widelands_Map_Elemental_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
 
    // Now, map version
    fw->Unsigned16(WLMF_VERSION);
+
+   // Packet version
+   fw->Unsigned16(CURRENT_PACKET_VERSION);
 
    // Map dimensions
    Map* map=egbase->get_map();
