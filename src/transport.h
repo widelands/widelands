@@ -162,6 +162,7 @@ public:
 protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
+	virtual void destroy(Editor_Game_Base*);
 
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 

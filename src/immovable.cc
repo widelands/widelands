@@ -120,30 +120,45 @@ Immovable_Descr::Immovable_Descr(const char *name)
 	snprintf(m_name, sizeof(m_name), "%s", name);
 	m_size = BaseImmovable::NONE;
    m_picture="";
+	m_default_encodedata.clear();
 }
+
 
 /*
 ===============
 Immovable_Descr::parse
 
-Parse an immovable from its conf file
+Parse an immovable from its conf file.
+
+Section [global]:
+picture (default = $NAME_00.bmp): name of picture used in editor
+size = none|small|medium|big (default = none): influences build options
+EncodeData (default for all animations)
+
+Section [program] (optional)
+step = animation [animation name] [duration]
+       transform [immovable name]
+
+Default:
+0=animation idle -1
 ===============
 */
 void Immovable_Descr::parse(const char *directory, Profile *prof)
 {
-	Section *s = prof->get_safe_section("global");
+	Section* global = prof->get_safe_section("global");
+	Section* program = prof->get_section("program");
+	const char* string;
+	char buf[256];
 	char picname[256];
 
-	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
-   m_anim = g_anim.get(directory, s, picname);
-	
-   snprintf(picname, sizeof(picname), "%s/%s_00.bmp", directory, m_name);
+	// Global options
+	snprintf(buf, sizeof(buf), "%s_00.bmp", m_name);
+	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));
    m_picture = picname;
 
+	m_default_encodedata.parse(global);
 
-	const char *string;
-
-	string = s->get_string("size", 0);
+	string = global->get_string("size", 0);
 	if (string) {
 		if (!strcasecmp(string, "volatile") || !strcasecmp(string, "none"))
 		{
@@ -164,12 +179,131 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 		else
 			throw wexception("Unknown size '%s'. Possible values: none, small, medium, big", string);
 	}
-	
-	// TODO
-	s->get_string("ends_in");
-	s->get_int("life_time");
-	s->get_int("stock");
+
+
+	// Parse the program
+	if (program)
+	{
+		uint line;
+
+		for(line = 0; ; line++) {
+			Action action;
+			std::vector<std::string> command;
+
+			snprintf(buf, sizeof(buf), "%i", line);
+			string = program->get_string(buf, 0);
+
+			if (!string)
+				break;
+
+			split_string(string, &command, " \t\r\n");
+			if (!command.size())
+				continue;
+
+			if (command[0] == "animation")
+			{
+				if (command.size() != 3) {
+					log("%s:program:%i: %s: Syntax: animation [name] [duration]\n", directory, line, string);
+					continue;
+				}
+
+				action.type = actAnimation;
+				action.iparam1 = parse_animation(directory, prof, command[1]);
+				action.iparam2 = atoi(command[2].c_str());
+
+				if (action.iparam2 == 0 || action.iparam2 < -1) {
+					log("%s:program:%i: %s: duration out of range (-1, 1..+inf)\n", directory, line,
+							command[2].c_str());
+					action.iparam2 = 1000;
+				}
+			}
+			else if (command[0] == "transform")
+			{
+				if (command.size() != 2) {
+					log("%s:program:%i: %s: Syntax: transform [bob name]\n", directory, line, string);
+					continue;
+				}
+
+				action.type = actTransform;
+				action.sparam = command[1];
+			}
+			else if (command[0] == "remove")
+			{
+				if (command.size() != 1) {
+					log("%s:program:%i: %s: Syntax: remove\n", directory, line, string);
+					continue;
+				}
+
+				action.type = actRemove;
+			}
+			else
+			{
+				log("%s:program:%i: Unknown instruction %s\n", directory, line, command[0].c_str());
+				continue;
+			}
+
+			m_program.push_back(action);
+		}
+	}
+
+	// Fallback (default) program
+	if (!m_program.size())
+	{
+		Action act;
+
+		if (program)
+			log("WARNING: %s: [program] is empty, using default\n", directory);
+
+		act.type = actAnimation;
+		act.iparam1 = parse_animation(directory, prof, "idle");
+		act.iparam2 = -1;
+
+		m_program.push_back(act);
+	}
 }
+
+
+/*
+===============
+Immovable_Descr::parse_animation
+
+Parse the animation of the given name.
+===============
+*/
+uint Immovable_Descr::parse_animation(const char* directory, Profile* s, std::string name)
+{
+	AnimationMap::iterator it = m_animations.find(name);
+
+	// Check if the animation has already been loaded
+	if (it != m_animations.end())
+		return it->second;
+
+	// Load the animation
+	Section* anim = s->get_section(name.c_str());
+	char picname[256];
+	uint animid;
+
+	snprintf(picname, sizeof(picname), "%s_%s_??.bmp", m_name, name.c_str());
+
+	// kind of obscure, this is still needed for backwards compatibility
+	if (name == "idle" && !anim) {
+		anim = s->get_section("global");
+
+		snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
+	}
+
+	if (!anim) {
+		log("%s: Animation %s not defined.\n", directory, name.c_str());
+		return 0;
+	}
+
+   animid = g_anim.get(directory, anim, picname, &m_default_encodedata);
+
+	m_animations[name] = animid;
+
+	return animid;
+}
+
 
 /*
 ===============
@@ -206,6 +340,8 @@ Immovable::Immovable(Immovable_Descr *descr)
 	: BaseImmovable(descr)
 {
 	m_anim = 0;
+	m_program_ptr = 0;
+	m_program_step = 0;
 }
 
 Immovable::~Immovable()
@@ -247,9 +383,12 @@ void Immovable::init(Editor_Game_Base *g)
 
 	set_position(g, m_position);
 
-	m_anim = get_descr()->get_anim();
-	m_animstart = g->get_gametime();
+	set_program_animation(g);
+
+	if (g->is_game())
+		run_program((Game*)g, false);
 }
+
 
 /*
 ===============
@@ -264,6 +403,103 @@ void Immovable::cleanup(Editor_Game_Base *g)
 
 	BaseImmovable::cleanup(g);
 }
+
+
+/*
+===============
+Immovable::set_program_animation
+
+Set animation data according to current program state.
+===============
+*/
+void Immovable::set_program_animation(Editor_Game_Base* g)
+{
+	const Immovable_Descr::Program& prog = get_descr()->get_program();
+	const Immovable_Descr::Action& action = prog[m_program_ptr];
+
+	if (action.type == Immovable_Descr::actAnimation) {
+		m_anim = action.iparam1;
+		m_animstart = g->get_gametime();
+	}
+}
+
+
+/*
+===============
+Immovable::act
+
+Run program timer.
+===============
+*/
+void Immovable::act(Game *g, uint data)
+{
+	BaseImmovable::act(g, data);
+
+	if (g->get_gametime() - m_program_step >= 0)
+		run_program(g, true); // This might delete itself!
+}
+
+
+/*
+===============
+Immovable::run_program
+
+Execute the next step(s) in the program until we need to schedule_act().
+If killable is true, the immovable could kill itself in this function.
+===============
+*/
+void Immovable::run_program(Game* g, bool killable)
+{
+	const Immovable_Descr::Program& prog = get_descr()->get_program();
+	uint origptr = m_program_ptr; // avoid infinite loops
+
+	do
+	{
+		const Immovable_Descr::Action& action = prog[m_program_ptr];
+
+		m_program_ptr = (m_program_ptr+1) % prog.size();
+
+		switch(action.type) {
+		case Immovable_Descr::actAnimation:
+			m_anim = action.iparam1;
+			m_animstart = g->get_gametime();
+
+			if (action.iparam2 > 0)
+				m_program_step = schedule_act(g, action.iparam2);
+			return;
+
+		case Immovable_Descr::actTransform:
+			{
+				Coords c = m_position;
+
+				if (!killable) { // we need to reschedule and remove self from act()
+					m_program_ptr = (m_program_ptr+prog.size()-1) % prog.size();
+					m_program_step = schedule_act(g, 1);
+					return;
+				}
+
+				remove(g);
+				// Only use variables on the stack below this point!
+				g->create_immovable(c, action.sparam);
+				return;
+			}
+
+		case Immovable_Descr::actRemove:
+			if (!killable) {
+				m_program_ptr = (m_program_ptr+prog.size()-1) % prog.size();
+				m_program_step = schedule_act(g, 1);
+				return;
+			}
+
+			remove(g);
+			return;
+		}
+	}
+	while(origptr != m_program_ptr);
+
+	molog("WARNING: %s has infinite loop in program\n", get_descr()->get_name());
+}
+
 
 /*
 ===============
@@ -331,7 +567,7 @@ void PlayerImmovable::set_economy(Economy *e)
 
 	for(uint i = 0; i < m_workers.size(); i++)
 		m_workers[i]->set_economy(e);
-	
+
 	m_economy = e;
 }
 

@@ -518,6 +518,8 @@ Give the worker something to do after the last task has finished.
 */
 void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 {
+	assert(!get_current_task());
+
 	switch(m_state) {
 	case State_None:
 		{
@@ -591,6 +593,8 @@ Return true if we actually woke up due to this.
 bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 {
 	if (m_state == State_DropOff && get_carried_item(g)) {
+		assert(get_current_task());
+
 		molog("State_DropOff: Wake up: flag capacity.\n");
 
 		interrupt_task(g, false);
@@ -936,8 +940,9 @@ void Worker::run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthi
 
 		wh = get_economy()->find_nearest_warehouse(location->get_base_flag(), m_route);
 		if (!wh) {
-			set_location(0); // no warehouse in this economy, become a fugitive
-			end_state(g, false);
+			molog("State_GoWarehouse: no warehouse found\n");
+
+			set_location(0); // implicitly makes us a fugitive
 			return;
 		}
 
@@ -1793,6 +1798,8 @@ Called by flag code when our target flag has capacity.
 bool Carrier::wakeup_flag_capacity(Game* g, Flag* flag)
 {
 	if (get_state() == State_WorkTransport && get_carried_item(g)) {
+		assert(get_current_task());
+
 		interrupt_task(g, false);
 		return true;
 	}

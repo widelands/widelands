@@ -1,3 +1,4 @@
+[global]
 type="critter"
 swimming=0  # defaults to 0, is only in the water?
 stock=1

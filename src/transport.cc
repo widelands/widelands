@@ -1153,6 +1153,29 @@ void Flag::cleanup(Editor_Game_Base *g)
 	PlayerImmovable::cleanup(g);
 }
 
+
+/*
+===============
+Flag::destroy
+
+Destroy the building as well.
+
+Note that this is needed in addition to the call to m_building->remove() in
+Flag::cleanup(). This function is needed to ensure a fire is created when a
+player removes a flag.
+===============
+*/
+void Flag::destroy(Editor_Game_Base* g)
+{
+	if (m_building) {
+		m_building->destroy(g);
+		assert(!m_building);
+	}
+
+	PlayerImmovable::destroy(g);
+}
+
+
 /*
 ===============
 Flag::draw

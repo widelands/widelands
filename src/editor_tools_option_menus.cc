@@ -405,21 +405,22 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    int immovables_in_row=(int)(sqrt(nr_immovables));
    if(immovables_in_row*immovables_in_row<nr_immovables) { immovables_in_row++; }
    if(immovables_in_row>max_items_in_tab) immovables_in_row=max_items_in_tab;
-   
-   
+
+
    TabPanel* m_tabpanel=new TabPanel(this, 0, 0, 1);
    m_tabpanel->set_snapparent(true);
    Box* box=new Box(m_tabpanel, 0, 0, Box::Horizontal);
    m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
-   
-   
+
+
    int width=0;
    int height=0;
    for(int j=0; j<nr_immovables; j++) {
       int w,h;
+		Immovable_Descr* descr = get_parent()->get_map()->get_world()->get_immovable_descr(j);
       g_gr->get_picture_size(
-            g_gr->get_picture(PicMod_Game, get_parent()->get_map()->get_world()->get_immovable_descr(j)->get_picture(),
-                              g_anim.get_animation(get_parent()->get_map()->get_world()->get_immovable_descr(j)->get_anim())->encdata.clrkey), &w, &h);
+            g_gr->get_picture(PicMod_Game, descr->get_picture(),
+                              descr->get_default_encodedata().clrkey), &w, &h);
       if(w>width) width=w;
       if(h>height) height=h;
    }
@@ -431,18 +432,18 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    int cur_x=0;
    int i=0;
    while(i<nr_immovables) {
-      if(cur_x==immovables_in_row) { 
-         cur_x=0; 
-         ypos=ystart; 
-         xpos=xstart; 
-         box->resize(); 
-         box=new Box(m_tabpanel, 0, 0, Box::Horizontal); 
+      if(cur_x==immovables_in_row) {
+         cur_x=0;
+         ypos=ystart;
+         xpos=xstart;
+         box->resize();
+         box=new Box(m_tabpanel, 0, 0, Box::Horizontal);
          m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
       }
 
-      Checkbox* cb= new Checkbox(box, xpos, ypos, 
-            g_gr->get_picture(PicMod_Game, get_parent()->get_map()->get_world()->get_immovable_descr(i)->get_picture(), 
-               g_anim.get_animation(get_parent()->get_map()->get_world()->get_immovable_descr(i)->get_anim())->encdata.clrkey));
+		Immovable_Descr* descr = get_parent()->get_map()->get_world()->get_immovable_descr(i);
+      Checkbox* cb= new Checkbox(box, xpos, ypos,
+            g_gr->get_picture(PicMod_Game, descr->get_picture(), descr->get_default_encodedata().clrkey));
 
       cb->set_size(width, height);
       cb->set_id(i);

@@ -70,6 +70,8 @@ public:
 	virtual void cleanup(Editor_Game_Base* g);
 	virtual void act(Game *g, uint data);
 
+	virtual bool burn_on_destroy();
+
 	virtual void set_economy(Economy* e);
 
 	uint get_nrwaresqueues() { return m_wares.size(); }

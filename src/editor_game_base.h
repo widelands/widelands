@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -67,12 +67,13 @@ class Editor_Game_Base {
       Building* warp_building(int x, int y, char owner, int idx);
 		Building* warp_constructionsite(int x, int y, char owner, int idx);
       Bob *create_bob(int x, int y, int idx);
-      Immovable *create_immovable(int x, int y, int idx);
+      Immovable* create_immovable(int x, int y, int idx);
+		Immovable* create_immovable(Coords c, std::string name);
 
       inline int get_gametime(void) { return m_gametime; }
 
    protected:
-      // next function is used to update the current gametime, 
+      // next function is used to update the current gametime,
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
       inline void set_iabase(Interactive_Base* b) { m_iabase=b; }

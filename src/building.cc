@@ -20,7 +20,6 @@
 #include "widelands.h"
 #include "profile.h"
 #include "tribedata.h"
-#include "helper.h"
 #include "tribe.h"
 #include "game.h"
 #include "player.h"
@@ -352,6 +351,41 @@ void Building::cleanup(Editor_Game_Base *g)
 	}
 
 	PlayerImmovable::cleanup(g);
+}
+
+
+/*
+===============
+Building::burn_on_destroy [virtual]
+
+Return true if a fire should be created when the building is destroyed.
+By default, burn always.
+===============
+*/
+bool Building::burn_on_destroy()
+{
+	return true;
+}
+
+
+/*
+===============
+Building::destroy
+
+Remove the building from the world now, and create a fire in its place if
+applicable.
+===============
+*/
+void Building::destroy(Editor_Game_Base* g)
+{
+	Coords pos = m_position;
+	bool fire = burn_on_destroy();
+
+	PlayerImmovable::destroy(g);
+
+	// We are deleted. Only use stack variables beyond this point
+	if (fire)
+		g->create_immovable(pos, "fire");
 }
 
 
@@ -715,6 +749,25 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		m_builder->set_location(bld);
 		m_builder->set_job_gowarehouse();
 	}
+}
+
+
+/*
+===============
+ConstructionSite::burn_on_destroy
+
+Construction sites only burn if some of the work has been completed.
+===============
+*/
+bool ConstructionSite::burn_on_destroy()
+{
+	if (m_work_completed >= m_work_steps)
+		return false; // completed, so don't burn
+
+	if (m_work_completed)
+		return true;
+
+	return false;
 }
 
 

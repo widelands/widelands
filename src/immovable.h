@@ -67,21 +67,43 @@ Immovable represents a standard immovable such as trees or stones.
 */
 class Immovable_Descr : public Map_Object_Descr {
 public:
+	enum Type {
+		actAnimation,		// iparam1 = anim, iparam2 = duration (-1 = forever)
+		actTransform,		// sparam = transform into
+		actRemove
+	};
+
+	struct Action {
+		Type			type;
+		int			iparam1;
+		int			iparam2;
+		std::string	sparam;
+	};
+
+	typedef std::vector<Action> Program;
+	typedef std::map<std::string, uint> AnimationMap;
+
+public:
 	Immovable_Descr(const char *name);
 
 	inline const char* get_name(void) { return m_name; }
-	inline uint get_anim(void) { return m_anim; }
 	inline int get_size(void) { return m_size; }
-   inline const char*  get_picture(void) { return m_picture.c_str(); }
+   inline const char* get_picture(void) { return m_picture.c_str(); }
+	inline const Program& get_program() const { return m_program; }
+	inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
 
 	void parse(const char *directory, Profile *s);
+	uint parse_animation(const char* directory, Profile* s, std::string name);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
 protected:
    std::string m_picture;
-   char		m_name[30];
-	uint		m_anim; // the default animation
-	int		m_size;
+   char			m_name[30];
+	int			m_size;
+	EncodeData	m_default_encodedata;
+
+	Program			m_program;
+	AnimationMap	m_animations;
 };
 
 class Immovable : public BaseImmovable {
@@ -99,14 +121,22 @@ public:
 
 	void init(Editor_Game_Base *g);
 	void cleanup(Editor_Game_Base *g);
+	void act(Game *g, uint data);
 
 	void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos);
+
+protected:
+	void set_program_animation(Editor_Game_Base* g);
+	void run_program(Game* g, bool killable);
 
 protected:
 	Coords		m_position;
 
 	uint			m_anim;
 	int			m_animstart;
+
+	uint			m_program_ptr;			// index of next instruction to execute
+	int			m_program_step;		// time of next step
 };
 
 

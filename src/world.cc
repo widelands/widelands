@@ -233,8 +233,6 @@ void World::parse_bobs()
 				descr->parse(it->c_str(), &prof);
 				immovables.add(descr);
 			}
-
-			prof.check_used();
 		} catch(std::exception &e) {
 			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
 		} catch(...) {
@@ -321,7 +319,7 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s)
 	m_texture = 0;
  	m_frametime = FRAME_LENGTH;
 	m_picnametempl = 0;
-	
+
 	// Read configuration
 	snprintf(m_name, sizeof(m_name), "%s", s->get_name());
 

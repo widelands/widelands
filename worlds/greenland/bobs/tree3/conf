@@ -1,9 +1,10 @@
-type="diminishing"
-ends_in=""
+[global]
+type=immovable
 stock=1
-
 size=normal
 
+[idle]
+pics=tree3_??.bmp
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255

@@ -203,7 +203,7 @@ class wexception : public std::exception {
 public:
 	explicit wexception(const char *fmt, ...) throw() PRINTF_FORMAT(2,3);
 	virtual ~wexception() throw();
-	
+
 	virtual const char *what() const throw();
 };
 
@@ -212,7 +212,7 @@ public:
       #ifdef assert
          #undef assert
       #endif
-	
+
 /* reintroduce when we figure out a way to actually manage the beast that is autotools
    (problem is: tools include this as well)
       extern int graph_is_init;
@@ -409,6 +409,17 @@ public:
 
 // Access all game data files etc.. through this FileSystem
 extern LayeredFileSystem *g_fs;
+
+
+/*
+==============================================================================
+
+UTILITIES
+
+==============================================================================
+*/
+
+void split_string(std::string in, std::vector<std::string>* plist, const char* separators);
 
 
 /*

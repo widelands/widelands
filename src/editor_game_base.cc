@@ -392,6 +392,18 @@ Immovable *Editor_Game_Base::create_immovable(int x, int y, int idx)
 	return descr->create(this, Coords(x, y));
 }
 
+Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name)
+{
+	int idx = m_map->get_world()->get_immovable_index(name.c_str());
+
+	if (idx < 0)
+		throw wexception("Editor_Game_Base::create_immovable(%i, %i): %s is not defined",
+								c.x, c.y, name.c_str());
+
+	return create_immovable(c.x, c.y, idx);
+}
+
+
 /*
 ===============
 Editor_Game_Base::get_safe_ware_id

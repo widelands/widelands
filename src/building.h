@@ -110,6 +110,9 @@ public:
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }
 
+	virtual bool burn_on_destroy();
+	virtual void destroy(Editor_Game_Base*);
+
 	void show_options(Interactive_Player *plr);
 	void hide_options();
 
