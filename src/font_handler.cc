@@ -21,6 +21,7 @@
 #include "error.h"
 #include "graphic.h"
 #include "rendertarget.h"
+#include "wexception.h"
 #include <SDL_ttf.h>
 
 /*
