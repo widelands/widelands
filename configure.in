@@ -41,4 +41,4 @@ dnl Checks for library functions.
 AC_SUBST(LIBSDL_LIB)
 AC_SUBST(src pkgdatadir)
 
-AC_OUTPUT([Makefile src/Makefile])
+AC_OUTPUT([Makefile src/Makefile wffcreate/Makefile])
