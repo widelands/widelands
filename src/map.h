@@ -137,7 +137,7 @@ class Map {
 	friend class Editor_Game_Base;
    friend class Map_Loader;
    friend class S2_Map_Loader;
-   friend class Editor;
+	friend class Editor;
 
 public:
 	struct Pathfield;
@@ -242,7 +242,7 @@ public:
 	bool can_reach_by_water(Coords field);
 
    // change field heights
-   int change_field_height(const Coords&, int);
+   int change_field_height(Coords, int);
    int change_field_height(int, int, int);
    int set_field_height(const Coords&, int);
    int set_field_height(int, int, int);
@@ -269,10 +269,10 @@ private:
 	Pathfield*	m_pathfields;
 
 	//int load_wlmf(const char*, Game*);
-	void recalc_brightness(int fx, int fy, Field *f);
-	void recalc_fieldcaps_pass1(int fx, int fy, Field *f);
-	void recalc_fieldcaps_pass2(int fx, int fy, Field *f);
-   void check_neighbour_heights(int fx, int fy, Field* f, int* area);
+	void recalc_brightness(FCoords coords);
+	void recalc_fieldcaps_pass1(FCoords coords);
+	void recalc_fieldcaps_pass2(FCoords coords);
+   void check_neighbour_heights(FCoords coords, int* area);
 	void increase_pathcycle();
 
 	template<typename functorT>
@@ -843,59 +843,45 @@ inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
 	get_pix(fx, fy, get_field(fx, fy), px, py);
 }
 
-// 
-// class Map_Region
-//
-// This class is init with a center field and
-// a sourrounding. it then returns the next field
-// in this region with each call to next()
-class Map_Region {
-   public:
-		Map_Region() { }
-      Map_Region(Coords coords, int area, Map* m) { init(coords, area, m); }
-      Map_Region(int x, int y, int area, Map* m) { init(Coords(x,y), area, m); }
-      ~Map_Region() { }
 
-      void init(int mx, int my, int area, Map* m) { init(Coords(mx,my), area, m); }
-		void init(Coords coords, int area, Map *m);
-      Field* next(void);
+/*
+class MapRegion
+---------------
+Producer/Coroutine class that returns every field within a given radius
+around the center point exactly once via next().
+Note that the order in which fields are returned is not guarantueed.
 
-   private:
-      int _area;
-      int backwards;
-      int sx, sy;
-      int cx, cy;
-      int tlx, tly, trx, tr_y, blx, bly, brx, bry;
-      Field* _lf, *_tl, *_tr, *_bl, *_br;
-      Map* _map;
+next() returns false when no more fields are to be traversed.
+*/
+class MapRegion {
+public:
+	MapRegion() { }
+	MapRegion(Map* map, Coords coords, uint radius) { init(map, coords, radius); }
+	~MapRegion() { }
+
+	void init(Map* map, Coords coords, uint radius);
+	bool next(FCoords* fc);
+	bool next(Coords* c);
+	Field* next();
+
+private:
+	enum Phase {
+		phaseNone,		// not initialized or completed
+		phaseUpper,		// upper half
+		phaseLower,		// lower half
+	};
+
+	Map*		m_map;
+	Phase		m_phase;
+	uint		m_radius;		// radius of area
+	uint		m_row;			// # of rows completed in this phase
+	uint		m_rowwidth;		// # of fields to return per row
+	uint		m_rowpos;		// # of fields we have returned in this row
+
+	FCoords	m_left;			// left-most field of current row
+	FCoords	m_next;			// next field to return
 };
 
-//
-// class Map_Region_Coords
-//
-// This class is init with a center field and
-// a sourrounding. it then returns the next field
-// in this region with each call to next() by map_Coords
-class Map_Region_Coords {
-   public:
-		Map_Region_Coords() { }
-      Map_Region_Coords(Coords coords, int area, Map* m) { init(coords, area, m); }
-      Map_Region_Coords(int x, int y, int area, Map* m) { init(Coords(x,y), area, m); }
-      ~Map_Region_Coords() { }
-
-      void init(int mx, int my, int area, Map* m) { init(Coords(mx,my), area, m); }
-		void init(Coords coords, int area, Map *m);
-		bool next(Coords* pc);
-
-   private:
-      int backwards;
-      int _area;
-      int sx, sy;
-      int cx, cy;
-      int tlx, tly, trx, tr_y, blx, bly, brx, bry;
-      Field *_tl, *_tr, *_bl, *_br, *_lf;
-      Map* _map;
-};
 
 /*
 =============================
@@ -906,7 +892,7 @@ This class loads a map from a file. It firsts only loads
 small junks of informations like size, nr of players for the
 map select dialog. For this loading function the same class Map* can be reused.
 Then, when the player has a map selected, the Map is completly filled with
-objects and information. When now the player selects another map, this class Map* 
+objects and information. When now the player selects another map, this class Map*
 must be deleted, a new one must be selected
 
 =============================
@@ -915,12 +901,12 @@ class Map_Loader {
    public:
       Map_Loader(const char*, Map*) { m_s=STATE_INIT; m_map=0; }
       virtual ~Map_Loader() { };
-      
+
       virtual int preload_map()=0;
       virtual int load_map_complete(Editor_Game_Base*)=0;
 
       inline Map* get_map() { return m_map; }
-      
+
    protected:
       bool exists_world(const char*);
 
@@ -932,7 +918,7 @@ class Map_Loader {
       void set_state(State s) { m_s=s; }
       State get_state(void) { return m_s; }
       Map* m_map;
-      
+
    private:
       State m_s;
 };

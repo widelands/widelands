@@ -170,9 +170,9 @@ void Editor_Interactive::recalc_overlay(FCoords fc)
 
    int buildcaps=fc.field->get_caps();
    if(owner) {
-      // Determine the buildhelp icon for that field		
+      // Determine the buildhelp icon for that field
       buildcaps = m_editor->get_player(owner)->get_buildcaps(fc);
-   }	
+   }
 
    if (buildcaps & BUILDCAPS_MINE)
       code = Overlay_Build_Mine;
@@ -188,7 +188,7 @@ void Editor_Interactive::recalc_overlay(FCoords fc)
    m_maprenderinfo.overlay_basic[fc.y*map->get_width() + fc.x] = code;
 }
 
-  
+
 /*
 ===========
 Editor_Interactive::exit_editor()
@@ -230,10 +230,11 @@ void Editor_Interactive::field_clicked() {
    int radius=tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, &m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
 
    // Some things have changed, map is informed, logic is informed. But overlays may still be wrong. Recalc them
-   Map_Region_Coords mrc(m_maprenderinfo.fieldsel, radius, m);
-   Coords c;
-   while(mrc.next(&c)) {
-      recalc_overlay(FCoords(c, m->get_field(c)));
+   MapRegion mr(m, m_maprenderinfo.fieldsel, radius);
+   FCoords c;
+
+   while(mr.next(&c)) {
+      recalc_overlay(c);
    }
 }
 

@@ -152,14 +152,13 @@ Player::set_area_seen
 Mark the given area as (un)seen
 ===============
 */
-void Player::set_area_seen(int x, int y, uint area, bool on)
+void Player::set_area_seen(Coords center, uint area, bool on)
 {
-	Map_Region_Coords r(Coords(x, y), area, m_egbase->get_map());
+	MapRegion mr(m_egbase->get_map(), center, area);
 	Coords c;
 
-	while(r.next(&c)) {
-      set_field_seen(c.x, c.y, on);
-   }
+	while(mr.next(&c))
+      set_field_seen(c, on);
 }
 
 

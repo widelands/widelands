@@ -70,40 +70,36 @@ Editor_Game_Base::recalc_for_field
 Call this function whenever the field at fx/fy has changed in one of the ways:
  - height has changed
  - robust Map_Object has been added or removed
- 
+
 This performs the steps outlined in the comment above Map::recalc_brightness()
 and recalcs the interactive player's overlay.
 ===============
 */
 void Editor_Game_Base::recalc_for_field(Coords coords, int radius)
 {
-   Map_Region_Coords mrc;
-	Coords c;
-   Field *f;
+   MapRegion mr;
+	FCoords c;
 
    // First pass
-   mrc.init(coords, 2+radius, m_map);
+   mr.init(m_map, coords, radius+2);
 
-   while(mrc.next(&c)) {
-      f = m_map->get_field(c);
-      m_map->recalc_brightness(c.x, c.y, f);
-      m_map->recalc_fieldcaps_pass1(c.x, c.y, f);
+   while(mr.next(&c)) {
+      m_map->recalc_brightness(c);
+      m_map->recalc_fieldcaps_pass1(c);
    }
 
 
    // Second pass
-   mrc.init(coords, 2+radius, m_map);
+   mr.init(m_map, coords, radius+2);
 
-   while(mrc.next(&c)) {
-      f = m_map->get_field(c);
-      m_map->recalc_fieldcaps_pass2(c.x, c.y, f);
+   while(mr.next(&c)) {
+      m_map->recalc_fieldcaps_pass2(c);
 
-      if (m_iabase) {
-         m_iabase->recalc_overlay(FCoords(c.x, c.y, f));
-      }
+      if (m_iabase)
+         m_iabase->recalc_overlay(c);
    }
-
 }
+
 
 /*
 ===============
@@ -115,10 +111,10 @@ Additionally, it updates the visible area for that player.
 */
 void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, int radius)
 {
-	Map_Region m(coords, radius, m_map);
+	MapRegion mr(m_map, coords, radius);
 	Field* f;
 
-	while((f = m.next()))
+	while((f = mr.next()))
 	{
 		if (f->get_owned_by() == playernr)
 			continue;
@@ -126,18 +122,18 @@ void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, int radius)
 			f->set_owned_by(playernr);
 			continue;
 		}
-		
+
       // TODO: add support here what to do if some fields are already
       // occupied by another player
 		// Probably the best thing to just don't grab it. Players should fight
 		// for their land.
       //cerr << "warning: already occupied field is claimed by another user!" << endl;
    }
-	
+
 	Player *player = get_player(playernr);
-	
-	player->set_area_seen(coords.x, coords.y, radius+4, true);
-	
+
+	player->set_area_seen(coords, radius+4, true);
+
 	recalc_for_field(coords, radius);
 }
 

@@ -71,7 +71,7 @@ class Player {
 		inline bool is_field_seen(int x, int y) { return is_field_seen(Coords(x, y)); }
 		inline std::vector<bool>* get_visibility() { return seen_fields; }
 
-		void set_area_seen(int x, int y, uint area, bool on);
+		void set_area_seen(Coords c, uint area, bool on);
 
 		// Player commands
 		void build_flag(Coords c);
@@ -82,8 +82,8 @@ class Player {
    private:
       // set functions
       inline void set_field_seen(int i, bool t) { (*seen_fields)[i]=t; }
-      inline void set_field_seen(int x, int y, bool t) {
-			(*seen_fields)[y*m_egbase->get_map()->get_width() + x]=t;
+      inline void set_field_seen(Coords c, bool t) {
+			(*seen_fields)[c.y*m_egbase->get_map()->get_width() + c.x]=t;
       }
 
       Editor_Game_Base*				m_egbase;

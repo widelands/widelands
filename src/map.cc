@@ -209,33 +209,36 @@ Map::~Map()
 ===========
 Map::recalc_whole_map()
 
-this recalculates all data that needs to be recalculated. 
+this recalculates all data that needs to be recalculated.
 This is only needed when all fields have change, this means
 a map has been loaded or newly created
 ===========
 */
-void Map::recalc_whole_map(void) {
-   // Post process the map in the necessary two passes to calculate 
+void Map::recalc_whole_map(void)
+{
+   // Post process the map in the necessary two passes to calculate
    // brightness and building caps
-   Field *f;
+   FCoords f;
    uint y;
+
    for(y=0; y<m_height; y++) {
       for(uint x=0; x<m_width; x++) {
-         f = get_field(x, y);
          int area;
-         check_neighbour_heights(x,y,f,&area);
-         recalc_brightness(x, y, f);
-         recalc_fieldcaps_pass1(x, y, f);
+
+			f = get_fcoords(Coords(x, y));
+         check_neighbour_heights(f,&area);
+         recalc_brightness(f);
+         recalc_fieldcaps_pass1(f);
       }
    }
 
    for(y=0; y<m_height; y++) {
       for(uint x=0; x<m_width; x++) {
-         f = get_field(x, y);
-         recalc_fieldcaps_pass2(x, y, f);
+			f = get_fcoords(Coords(x, y));
+         recalc_fieldcaps_pass2(f);
       }
    }
-} 
+}
 
 /*
 ===============
@@ -450,14 +453,11 @@ Functor is of the form: functor(Map*, FCoords)
 template<typename functorT>
 void Map::find_radius(Coords coord, uint radius, functorT& functor)
 {
-	Map_Region_Coords mrc(coord, radius, this);
-	Coords c;
+	MapRegion mr(this, coord, radius);
+	FCoords c;
 
-	while(mrc.next(&c)) {
-		FCoords fc(c, get_field(c));
-
-		functor(this, fc);
-	}
+	while(mr.next(&c))
+		functor(this, c);
 }
 
 
@@ -719,96 +719,99 @@ The Field::caps calculation is split into more passes because of inter-field
 dependencies.
 */
 
-/** Map::recalc_brightness(int fx, int fy, Field *f)
- *
- * Fetch the slopes to neighbours and call the actual logic in Field
- */
-void Map::recalc_brightness(int fx, int fy, Field *f)
+/*
+===============
+Map::recalc_brightness
+
+Fetch the slopes to neighbours and call the actual logic in Field
+===============
+*/
+void Map::recalc_brightness(FCoords f)
 {
-   Field *n;
-   int dx, dy;
+	FCoords d;
    int l, r, tl, tr, bl, br;
 
-   f = get_field(fx, fy);
-
    // left
-   get_ln(fx, fy, f, &dx, &dy, &n);
-   l = f->get_height() - n->get_height();
+   get_ln(f, &d);
+   l = f.field->get_height() - d.field->get_height();
 
    // right
-   get_rn(fx, fy, f, &dx, &dy, &n);
-   r = f->get_height() - n->get_height();
+   get_rn(f, &d);
+   r = f.field->get_height() - d.field->get_height();
 
    // top-left
-   get_tln(fx, fy, f, &dx, &dy, &n);
-   tl = f->get_height() - n->get_height();
+   get_tln(f, &d);
+   tl = f.field->get_height() - d.field->get_height();
 
    // top-right
-   get_rn(dx, dy, n, &dx, &dy, &n);
-   tr = f->get_height() - n->get_height();
+   get_rn(d, &d);
+   tr = f.field->get_height() - d.field->get_height();
 
    // bottom-left
-   get_bln(fx, fy, f, &dx, &dy, &n);
-   bl = f->get_height() - n->get_height();
+   get_bln(f, &d);
+   bl = f.field->get_height() - d.field->get_height();
 
    // bottom-right
-   get_rn(dx, dy, n, &dx, &dy, &n);
-   br = f->get_height() - n->get_height();
+   get_rn(d, &d);
+   br = f.field->get_height() - d.field->get_height();
 
-   f->set_brightness(l, r, tl, tr, bl, br);
+   f.field->set_brightness(l, r, tl, tr, bl, br);
 }
 
-/** Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
- *
- * Recalculate the fieldcaps for the given field.
- *  - Check terrain types for passability and flag buildability
- *
- * I hope this is understandable and maintainable. 
- *
- * Note: due to inter-field dependencies, fieldcaps calculations are split up
- * into two passes. You should always perform both passes. See the comment
- * above recalc_brightness.
- */
-void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
+
+/*
+===============
+Map::recalc_fieldcaps_pass1
+
+Recalculate the fieldcaps for the given field.
+ - Check terrain types for passability and flag buildability
+
+I hope this is understandable and maintainable.
+
+Note: due to inter-field dependencies, fieldcaps calculations are split up
+into two passes. You should always perform both passes. See the comment
+above recalc_brightness.
+===============
+*/
+void Map::recalc_fieldcaps_pass1(FCoords f)
 {
-   f->caps = 0;
+   f.field->caps = 0;
 
    // 1a) Get all the neighbours to make life easier
-   int tlnx, tlny, trnx, trny, lnx, lny, rnx, rny, blnx, blny, brnx, brny;
-   Field *tln, *trn, *ln, *rn, *bln, *brn;
+	FCoords tln, trn, ln, rn, bln, brn;
 
-   get_tln(fx, fy, f, &tlnx, &tlny, &tln);
-   get_trn(fx, fy, f, &trnx, &trny, &trn);
-   get_ln(fx, fy, f, &lnx, &lny, &ln);
-   get_rn(fx, fy, f, &rnx, &rny, &rn);
-   get_bln(fx, fy, f, &blnx, &blny, &bln);
-   get_brn(fx, fy, f, &brnx, &brny, &brn);
+   get_tln(f, &tln);
+   get_trn(f, &trn);
+   get_ln(f, &ln);
+   get_rn(f, &rn);
+   get_bln(f, &bln);
+   get_brn(f, &brn);
 
    // 1b) Collect some information about the neighbours
    int cnt_unpassable = 0;
    int cnt_water = 0;
    int cnt_acid = 0;
 
-   if (f->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (f->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (ln->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (tln->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (tln->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-   if (trn->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (f.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (f.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (ln.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (tln.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (tln.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (trn.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
 
-   if (f->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (f->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (ln->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (tln->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (tln->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-   if (trn->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (f.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (f.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (ln.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (tln.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (tln.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (trn.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
 
-   if (f->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (f->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (ln->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (tln->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (tln->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-   if (trn->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (f.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (f.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (ln.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (tln.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (tln.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (trn.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
 
 
    // 2) Passability
@@ -816,54 +819,58 @@ void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
    // 2a) If any of the neigbouring triangles is walkable this field is
    //     walkable.
    if (cnt_unpassable < 6)
-      f->caps |= MOVECAPS_WALK;
+      f.field->caps |= MOVECAPS_WALK;
 
    // 2b) If all neighbouring triangles are water, the field is swimable
    if (cnt_water == 6)
-      f->caps |= MOVECAPS_SWIM;
-   
+      f.field->caps |= MOVECAPS_SWIM;
+
 
    // 2c) [OVERRIDE] If any of the neighbouring triangles is really
    //     "bad" (such as lava), we can neither walk nor swim to this field.
    if (cnt_acid)
-      f->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+      f.field->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 
    // === everything below is used to check buildability ===
 
    // 3) General buildability check: if a "robust" Map_Object is on this field
    //    we cannot build anything on it.
    //    Exception: we can build flags on roads
-   BaseImmovable *imm = get_immovable(Coords(fx, fy));
+   BaseImmovable *imm = get_immovable(f);
 
    if (imm && imm->get_type() != Map_Object::ROAD && imm->get_size() >= BaseImmovable::SMALL)
    {
       // 3b) [OVERRIDE] check for "unpassable" Map_Objects
       if (!imm->get_passable())
-         f->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+         f.field->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
       return;
    }
 
    // 4) Flags
-   //    We can build flags on anything that's walkable and buildable, with some 
+   //    We can build flags on anything that's walkable and buildable, with some
    //    restrictions
-   if (f->caps & MOVECAPS_WALK)
+   if (f.field->caps & MOVECAPS_WALK)
    {
       // 4b) Flags must be at least 1 field apart
-      if (find_immovables(Coords(fx, fy), 1, 0, FindImmovableType(Map_Object::FLAG))) {
+      if (find_immovables(f, 1, 0, FindImmovableType(Map_Object::FLAG))) {
          return;
       }
-      f->caps |= BUILDCAPS_FLAG;
+      f.field->caps |= BUILDCAPS_FLAG;
    }
 }
 
-/** Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
- *
- * Second pass of fieldcaps. Determine which kind of building (if any) can be built
- * on this Field.
- *
- * Important: flag buildability has already been checked in the first pass.
- */
-void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
+
+/*
+===============
+Map::recalc_fieldcaps_pass2
+
+Second pass of fieldcaps. Determine which kind of building (if any) can be built
+on this Field.
+
+Important: flag buildability has already been checked in the first pass.
+===============
+*/
+void Map::recalc_fieldcaps_pass2(FCoords f)
 {
 	// 1) Collect neighbour information
 	//
@@ -871,16 +878,14 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	// This is unavoidable and shouldn't hurt too much anyway.
 
 	// 1a) Get all the neighbours to make life easier
-	int tlnx, tlny, trnx, trny, lnx, lny, rnx, rny, blnx, blny, brnx, brny;
-	Field *tln, *trn, *ln, *rn, *bln, *brn;
-   
-	
-	get_tln(fx, fy, f, &tlnx, &tlny, &tln);
-	get_trn(fx, fy, f, &trnx, &trny, &trn);
-	get_ln(fx, fy, f, &lnx, &lny, &ln);
-	get_rn(fx, fy, f, &rnx, &rny, &rn);
-	get_bln(fx, fy, f, &blnx, &blny, &bln);
-	get_brn(fx, fy, f, &brnx, &brny, &brn);
+	FCoords tln, trn, ln, rn, bln, brn;
+
+   get_tln(f, &tln);
+   get_trn(f, &trn);
+   get_ln(f, &ln);
+   get_rn(f, &rn);
+   get_bln(f, &bln);
+   get_brn(f, &brn);
 
 	// 1b) Collect some information about the neighbours
 	int cnt_unpassable = 0;
@@ -889,61 +894,61 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	int cnt_mountain = 0;
 	int cnt_dry = 0;
 
-	if (f->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (f->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (ln->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (tln->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (tln->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (trn->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	
-	if (f->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (f->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (ln->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (tln->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (tln->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (trn->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+	if (f.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+	if (f.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+	if (ln.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+	if (tln.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+	if (tln.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+	if (trn.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
 
-	if (f->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (f->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (ln->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (tln->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (tln->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (trn->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-	
-	if (f->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (f->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (ln->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (tln->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (tln->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	if (trn->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
-	
-	if (f->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (f->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (ln->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (tln->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (tln->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
-	if (trn->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
-	
+	if (f.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+	if (f.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+	if (ln.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+	if (tln.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+	if (tln.field->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+	if (trn.field->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+
+	if (f.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+	if (f.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+	if (ln.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+	if (tln.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+	if (tln.field->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+	if (trn.field->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+
+	if (f.field->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
+	if (f.field->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
+	if (ln.field->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
+	if (tln.field->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
+	if (tln.field->get_terr()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
+	if (trn.field->get_terd()->get_is() & TERRAIN_MOUNTAIN) cnt_mountain++;
+
+	if (f.field->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
+	if (f.field->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
+	if (ln.field->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
+	if (tln.field->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
+	if (tln.field->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
+	if (trn.field->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
+
 	// 2) We can only build something on fields that are
 	//     - walkable
 	//     - have no water triangles next to them
 	//     - are not blocked by "robust" Map_Objects
-	BaseImmovable *immovable = get_immovable(Coords(fx, fy));
+	BaseImmovable *immovable = get_immovable(f);
 
-	if (!(f->caps & MOVECAPS_WALK) ||
+	if (!(f.field->caps & MOVECAPS_WALK) ||
 	    cnt_water ||
 	    (immovable && immovable->get_size() >= BaseImmovable::SMALL))
 		return;
-		
+
 	// 3) We can only build something if there is a flag on the bottom-right neighbour
 	//    (or if we could build a flag on the bottom-right neighbour)
 	//
 	// NOTE: This dependency on the bottom-right neighbour is the reason why the caps
 	// calculation is split into two passes
-	if (!(brn->caps & BUILDCAPS_FLAG) &&
-	    !find_immovables(Coords(brnx, brny), 0, 0, FindImmovableType(Map_Object::FLAG)))
+	if (!(brn.field->caps & BUILDCAPS_FLAG) &&
+	    !find_immovables(brn, 0, 0, FindImmovableType(Map_Object::FLAG)))
 		return;
-	
+
 	// === passability and flags allow us to build something beyond this point ===
 
 	// 4) Reduce building size based on nearby objects (incl. buildings) and roads.
@@ -957,13 +962,13 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	// Big buildings:  same as big objects
 	uchar building = BUILDCAPS_BIG;
 	std::vector<ImmovableFound> objectlist;
-	
-	find_immovables(Coords(fx, fy), 2, &objectlist, FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
+
+	find_immovables(f, 2, &objectlist, FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
 	for(uint i = 0; i < objectlist.size(); i++) {
 		BaseImmovable *obj = objectlist[i].object;
 		Coords objpos = objectlist[i].coords;
-		int dist = calc_distance(Coords(fx, fy), objpos);
-		
+		int dist = calc_distance(f, objpos);
+
 		switch(obj->get_size()) {
 		case BaseImmovable::SMALL:
 			if (dist == 1) {
@@ -971,8 +976,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 					// a flag to the bottom-right does not reduce building size (obvious)
 					// additionally, roads going top-right and left from a big building's
 					// flag should be allowed
-					if ((objpos != Coords(brnx, brny) && objpos != Coords(rnx, rny) &&
-					     objpos != Coords(blnx, blny)) ||
+					if ((objpos != brn && objpos != rn && objpos != bln) ||
 					    (obj->get_type() != Map_Object::FLAG && obj->get_type() != Map_Object::ROAD))
 						building = BUILDCAPS_MEDIUM;
 				}
@@ -990,7 +994,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 				}
 			}
 			break;
-		
+
 		case BaseImmovable::BIG:
 			if (dist == 2)
 				building = BUILDCAPS_SMALL;
@@ -998,48 +1002,48 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 				return; // can't build buildings next to big objects
 		}
 	}
-	
+
 	// 5) Build mines on mountains
 	if (cnt_mountain == 6)
 	{
 		// 4b) Check the mountain slope
-		if ((int)brn->get_height() - f->get_height() < 4)
-			f->caps |= BUILDCAPS_MINE;
+		if ((int)brn.field->get_height() - f.field->get_height() < 4)
+			f.field->caps |= BUILDCAPS_MINE;
 		return;
 	}
 
 	// 6) Can't build anything if there are mountain or desert triangles next to the field
 	if (cnt_mountain || cnt_dry)
 		return;
-	
+
 	// 7) Reduce building size based on slope of direct neighbours:
 	//    - slope >= 4: can't build anything here -> return
 	//    - slope >= 3: maximum size is small
 	int slope;
 
-	slope = abs((int)tln->get_height() - f->get_height());
+	slope = abs((int)tln.field->get_height() - f.field->get_height());
 	if (slope >= 4) return;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
-	
-	slope = abs((int)trn->get_height() - f->get_height());
+
+	slope = abs((int)trn.field->get_height() - f.field->get_height());
 	if (slope >= 4) return;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
-	
-	slope = abs((int)rn->get_height() - f->get_height());
+
+	slope = abs((int)rn.field->get_height() - f.field->get_height());
 	if (slope >= 4) return;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
 
 	// Special case for bottom-right neighbour (where our flag is)
-	// Is this correct?	
+	// Is this correct?
    // Yep, it is - Holger
-	slope = abs((int)brn->get_height() - f->get_height());
+	slope = abs((int)brn.field->get_height() - f.field->get_height());
 	if (slope >= 2) return;
-	
-	slope = abs((int)bln->get_height() - f->get_height());
+
+	slope = abs((int)bln.field->get_height() - f.field->get_height());
 	if (slope >= 4) return;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
 
-	slope = abs((int)ln->get_height() - f->get_height());
+	slope = abs((int)ln.field->get_height() - f.field->get_height());
 	if (slope >= 4) return;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
 
@@ -1052,52 +1056,51 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
    //    fields? - Holger
 	//    Ah right. Well, for the final decision, we'd probably have to see how
 	//    ships work out. If they become an important part in day-to-day gameplay,
-	//    an automatic method will probably work better. 
+	//    an automatic method will probably work better.
 	//    However, it should probably be more clever than this, to avoid harbours at tiny
 	//    lakes... - Nicolai
 	//
 	// Processes the neighbours in clockwise order, starting from the right-most
-	int secx, secy;
-	Field *sec;
+	FCoords sec;
 
-	get_rn(rnx, rny, rn, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_rn(rn, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_brn(rnx, rny, rn, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_brn(rn, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_brn(brnx, brny, brn, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_brn(brn, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_bln(brnx, brny, brn, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_bln(brn, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_bln(blnx, blny, bln, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_bln(bln, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_ln(blnx, blny, bln, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_ln(bln, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_ln(lnx, lny, ln, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_ln(ln, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_tln(lnx, lny, ln, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_tln(ln, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_tln(tlnx, tlny, tln, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_tln(tln, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_trn(tlnx, tlny, tln, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_trn(tln, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_trn(trnx, trny, trn, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_trn(trn, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	get_rn(trnx, trny, trn, &secx, &secy, &sec);
-	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
+	get_rn(trn, &sec);
+	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	// 9) That's it, store the collected information
-	f->caps |= building;
+	f.field->caps |= building;
 }
 
 
@@ -1753,14 +1756,17 @@ int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright) {
    if(tright)
       f->set_terrainr(ter);
 
-   Map_Region_Coords mrc(c,1,this);
-   Coords coords;
-   while(mrc.next(&coords)) {
-      recalc_fieldcaps_pass1(coords.x, coords.y, get_field(coords));
+   MapRegion mr;
+   FCoords coords;
+
+	mr.init(this,c,2);
+   while(mr.next(&coords)) {
+      recalc_fieldcaps_pass1(coords);
    }
-   mrc.init(c,1,this);
-   while(mrc.next(&coords)) {
-      recalc_fieldcaps_pass2(coords.x, coords.y, get_field(coords));
+
+   mr.init(this,c,2);
+   while(mr.next(&coords)) {
+      recalc_fieldcaps_pass2(coords);
    }
 
    return 2;
@@ -1775,10 +1781,6 @@ sets the field height to an absolut value. This changes the surrounding
 fields are changed as well
 ===========
 */
-int Map::set_field_height(int x, int y, int to) {
-   return set_field_height(Coords(x,y),to);
-}
-
 int Map::set_field_height(const Coords& coordinates, int to) {
    Field* m_field=get_field(coordinates);
    int val=m_field->get_height();
@@ -1797,105 +1799,96 @@ possible
 returns the area of fields, that have been changed
 ===========
 */
-int Map::change_field_height(const Coords& coordinates, int by) {
-   Field* m_field=get_field(coordinates);
-   int height=m_field->get_height();
-
+int Map::change_field_height(Coords coords, int by)
+{
+	FCoords coordinates = get_fcoords(coords);
+   int height = coordinates.field->get_height();
 
    height+=by;
-   m_field->set_height(height);
+   coordinates.field->set_height(height);
    int radius=0;
 
-   check_neighbour_heights(coordinates.x, coordinates.y, m_field, &radius);
-   recalc_brightness(coordinates.x,coordinates.y,m_field);
-   recalc_fieldcaps_pass1(coordinates.x,coordinates.y,m_field);
+   check_neighbour_heights(coordinates, &radius);
+   radius += 2;
 
    // First recalculation step
-   radius+=1;
-   Map_Region_Coords mrc(coordinates, radius, this);
-	Coords c;
+   MapRegion mr;
+	FCoords c;
 
-	while(mrc.next(&c)) {
-		Field* f = get_field(c);
-
-      recalc_brightness(c.x,c.y,f);
-      recalc_fieldcaps_pass1(c.x,c.y,f);
+	mr.init(this, coordinates, radius);
+	while(mr.next(&c)) {
+      recalc_brightness(c);
+      recalc_fieldcaps_pass1(c);
    }
 
-   // seconc recalculation step
-   mrc.init(coordinates, radius, this);
-   while(mrc.next(&c)) {
-      recalc_fieldcaps_pass2(c.x,c.y,get_field(c));
+   // Second recalculation step
+   mr.init(this, coordinates, radius);
+   while(mr.next(&c)) {
+      recalc_fieldcaps_pass2(c);
    }
-
-   recalc_fieldcaps_pass2(coordinates.x,coordinates.y,m_field);
 
    return radius;
 }
 
 
-int Map::change_field_height(int x, int y, int by) {
-   return change_field_height(Coords(x,y), by);
-}
-
 /*
 ===========
 Map::check_neighbour_heights()
 
-This private functions checks all neighbours of a field 
+This private functions checks all neighbours of a field
 if they are in valid boundaries, if not, they are reheighted
-accordingly. returns 0 if no changes where needed, the radius
-for the recalculation otherwise
+accordingly.
+The radius of modified fields is stored in *area.
 =============
 */
-void Map::check_neighbour_heights(int fx, int fy, Field* f, int* area) {
-   int m_height=f->get_height();
+void Map::check_neighbour_heights(FCoords coords, int* area)
+{
+   int height = coords.field->get_height();
    int diff;
    bool check[6] = { false, false, false, false, false, false };
-   
-   
-   FCoords m(fx,fy,f);
+
+
    FCoords tln, trn, ln, rn, bln, brn;
 
-   get_tln(m, &tln); 
-   get_trn(m, &trn); 
-   get_ln(m, &ln);
-   get_rn(m, &rn); 
-   get_bln(m, &bln);
-   get_brn(m, &brn);
-   
-   diff=m_height-tln.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; tln.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check[0]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; tln.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check[0]=true; }
+   get_tln(coords, &tln);
+   get_trn(coords, &trn);
+   get_ln(coords, &ln);
+   get_rn(coords, &rn);
+   get_bln(coords, &bln);
+   get_brn(coords, &brn);
 
-   diff=m_height-trn.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; trn.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check[1]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; trn.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check[1]=true; }
+   diff=height-tln.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; tln.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[0]=true; }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; tln.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[0]=true; }
 
-   diff=m_height-ln.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; ln.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check[2]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; ln.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check[2]=true; }
+   diff=height-trn.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; trn.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[1]=true; }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; trn.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[1]=true; }
 
-   diff=m_height-rn.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; rn.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check[3]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; rn.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check[3]=true; }
+   diff=height-ln.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; ln.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[2]=true; }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; ln.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[2]=true; }
 
-   diff=m_height-bln.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; bln.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check[4]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; bln.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check[4]=true; }
+   diff=height-rn.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; rn.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[3]=true; }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; rn.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[3]=true; }
 
-   diff=m_height-brn.field->get_height();
-   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; brn.field->set_height(m_height-MAX_FIELD_HEIGHT_DIFF); check[5]=true; }
-   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; brn.field->set_height(m_height+MAX_FIELD_HEIGHT_DIFF); check[5]=true; }
+   diff=height-bln.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; bln.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[4]=true; }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; bln.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[4]=true; }
 
-   if(check[0]) check_neighbour_heights(tln.x, tln.y, tln.field, area);
-   if(check[1]) check_neighbour_heights(trn.x, trn.y, trn.field, area);
-   if(check[2]) check_neighbour_heights(ln.x, ln.y, ln.field, area);
-   if(check[3]) check_neighbour_heights(rn.x, rn.y, rn.field, area);
-   if(check[4]) check_neighbour_heights(bln.x, bln.y, bln.field, area);
-   if(check[5]) check_neighbour_heights(brn.x, brn.y, brn.field, area);
-   
+   diff=height-brn.field->get_height();
+   if(diff > MAX_FIELD_HEIGHT_DIFF) { *area++; brn.field->set_height(height-MAX_FIELD_HEIGHT_DIFF); check[5]=true; }
+   if(diff < -MAX_FIELD_HEIGHT_DIFF) { *area++; brn.field->set_height(height+MAX_FIELD_HEIGHT_DIFF); check[5]=true; }
+
+   if(check[0]) check_neighbour_heights(tln, area);
+   if(check[1]) check_neighbour_heights(trn, area);
+   if(check[2]) check_neighbour_heights(ln, area);
+   if(check[3]) check_neighbour_heights(rn, area);
+   if(check[4]) check_neighbour_heights(bln, area);
+   if(check[5]) check_neighbour_heights(brn, area);
 }
+
 
 /*
 ==============================================================================
@@ -2308,124 +2301,128 @@ void CoordPath::append(const CoordPath &tail)
 {
 	assert(m_map);
 	assert(tail.get_start() == get_end());
-	
+
 	m_path.insert(m_path.end(), tail.m_path.begin(), tail.m_path.end());
 	m_coords.insert(m_coords.end(), tail.m_coords.begin()+1, tail.m_coords.end());
 }
 
 
-// 
-// class Map_Region
-// 
-void Map_Region::init(Coords coords, int area, Map *m)
+/*
+==============================================================================
+
+MapRegion IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+MapRegion::init
+
+Initialize the region.
+===============
+*/
+void MapRegion::init(Map* map, Coords coords, uint radius)
 {
-	backwards=0;
-	_area=area;
-	_map=m;
-	_lf=m->get_field(coords);
-	_tl=_tr=_bl=_br=_lf;
-	tlx=trx=blx=brx=coords.x;
-	tly=tr_y=bly=bry=coords.y;
-	sx=coords.x; sy=coords.y;
-	int i;
-	for(i=0; i<area; i++) {
-		m->get_tln(tlx, tly, _tl, &tlx, &tly, &_tl);
-		m->get_trn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
-		m->get_bln(blx, bly, _bl, &blx, &bly, &_bl);
-		m->get_brn(brx, bry, _br, &brx, &bry, &_br);
-	}
-	_lf=_tl;
-	cx=tlx; cy=tly;
-}
-     
+	m_map = map;
+	m_phase = phaseUpper;
+	m_radius = radius;
 
-Field* Map_Region::next(void) {
-   Field* retval=_lf;
+	m_row = 0;
+	m_rowwidth = radius+1;
+	m_rowpos = 0;
 
-   if(_lf==_tr) {
-      if(tly==sy) backwards=true;
-      if(backwards) {
-          if(_lf==_br) {
-             _lf=0;
-             return retval;
-          }
-         _map->get_brn(tlx, tly, _tl, &tlx, &tly, &_tl);
-         _map->get_bln(trx, tr_y, _tr, &trx, &tr_y, &_tr);
-         _lf=_tl;
-         cx=tlx;
-         cy=tly;
-      } else {
-         _map->get_bln(tlx, tly, _tl, &tlx, &tly, &_tl);
-         _map->get_brn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
-         _lf=_tl;
-         cx=tlx;
-         cy=tly;
-         return retval;
-      }
-   } else {
-      _map->get_rn(cx, cy, _lf, &cx, &cy, &_lf);
-   }
+	m_left = map->get_fcoords(coords);
+	for(uint i = 0; i < radius; ++i)
+		map->get_tln(m_left, &m_left);
 
-   
-   return retval;
+	m_next = m_left;
 }
 
-// 
-// class Map_Region_Coords
-// 
-void Map_Region_Coords::init(Coords coords, int area, Map *m)
+
+/*
+===============
+MapRegion::next
+
+Traverse the region by row.
+I hope this results in slightly better cache behaviour than other algorithms
+(e.g. one could also walk concentric "circles"/hexagons).
+===============
+*/
+bool MapRegion::next(FCoords* fc)
 {
-	backwards=0;
-	_area=area;
-	_map=m;
-	_lf=m->get_field(coords);
-	_tl=_tr=_bl=_br=_lf;
-	tlx=trx=blx=brx=coords.x;
-	tly=tr_y=bly=bry=coords.y;
-	sx=coords.x; sy=coords.y;
-	int i;
-	for(i=0; i<area; i++) {
-		m->get_tln(tlx, tly, _tl, &tlx, &tly, &_tl);
-		m->get_trn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
-		m->get_bln(blx, bly, _bl, &blx, &bly, &_bl);
-		m->get_brn(brx, bry, _br, &brx, &bry, &_br);
+	if (m_phase == phaseNone)
+		return false;
+
+	*fc = m_next;
+
+	m_rowpos++;
+	if (m_rowpos < m_rowwidth)
+	{
+		m_map->get_rn(m_next, &m_next);
 	}
-	_lf=_tl;
-	cx=tlx; cy=tly;
+	else
+	{
+		m_row++;
+
+		// If we completed the widest, center line, switch into lower mode
+		// There are m_radius+1 lines in the upper "half", because the upper
+		// half includes the center line.
+		if (m_phase == phaseUpper && m_row > m_radius) {
+			m_row = 0;
+			m_phase = phaseLower;
+		}
+
+		if (m_phase == phaseUpper)
+		{
+			m_map->get_bln(m_left, &m_left);
+			m_rowwidth++;
+		}
+		else
+		{
+			// There are m_radius lines in the lower "half"
+			if (m_row >= m_radius) {
+				m_phase = phaseNone;
+				return true; // early out
+			}
+
+			m_map->get_brn(m_left, &m_left);
+			m_rowwidth--;
+		}
+
+		m_next = m_left;
+		m_rowpos = 0;
+	}
+
+	return true;
 }
 
-bool Map_Region_Coords::next(Coords* pc) {
-   bool retval = false;
 
-   if(_lf) retval = true;
-   pc->x=cx;
-   pc->y=cy;
+/*
+===============
+MapRegion::next
 
+Call the main algorithm and filter out the data we're interested in.
+===============
+*/
+bool MapRegion::next(Coords* c)
+{
+	FCoords fc;
 
-   if(_lf==_tr) {
-      if(tly==sy) backwards=true;
-      if(backwards) {
-          if(_lf==_br) {
-             _lf=0;
-             return retval;
-          }
-         _map->get_brn(tlx, tly, _tl, &tlx, &tly, &_tl);
-         _map->get_bln(trx, tr_y, _tr, &trx, &tr_y, &_tr);
-         _lf=_tl;
-         cx=tlx;
-         cy=tly;
-      } else {
-         _map->get_bln(tlx, tly, _tl, &tlx, &tly, &_tl);
-         _map->get_brn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
-         _lf=_tl;
-         cx=tlx;
-         cy=tly;
-         return retval;
-      }
-   } else {
-      _map->get_rn(cx, cy, _lf, &cx, &cy, &_lf);
-   }
+	if (!next(&fc))
+		return false;
 
-
-   return retval;
+	*c = fc;
+	return true;
 }
+
+Field* MapRegion::next()
+{
+	FCoords fc;
+
+	if (!next(&fc))
+		return 0;
+
+	return fc.field;
+}
+

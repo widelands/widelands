@@ -129,7 +129,7 @@ if this is needed.
 ===========
 */
 int Editor_Increase_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
 	Coords c;
 
    int max, i;
@@ -159,7 +159,7 @@ if this is needed.
 ===========
 */
 int Editor_Decrease_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
 
    int max,i;
@@ -188,10 +188,9 @@ this decreases the height of the surrounding fields also
 if this is needed.
 ===========
 */
-int Editor_Set_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   
-
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+int Editor_Set_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent)
+{
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
    int i, max;
    max=0;
@@ -221,7 +220,7 @@ if this is needed.
 ===========
 */
 int Editor_Noise_Height_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
 
    int i, max;
@@ -252,7 +251,7 @@ if this is needed.
 ===========
 */
 int Editor_Set_Down_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
 
    int i, max;
@@ -282,7 +281,7 @@ if this is needed.
 ===========
 */
 int Editor_Set_Right_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
 
    int i, max;
@@ -312,7 +311,7 @@ if this is needed.
 ===========
 */
 int Editor_Set_Both_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
 
    int i, max;
@@ -343,7 +342,7 @@ and places this on the current field
 int Editor_Place_Immovable_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
    if(!m_nr_enabled) return parent->get_fieldsel_radius();
 
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
 
    while(mrc.next(&c)) {
@@ -371,13 +370,13 @@ class Editor_Delete_Immovable_Tool
 
 /*
 ===========
-Editor_Delete_Immovable_Tool::handle_click_impl() 
+Editor_Delete_Immovable_Tool::handle_click_impl()
 
 deletes the immovable at the given location
 ===========
 */
 int Editor_Delete_Immovable_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
 
    while(mrc.next(&c)) {
