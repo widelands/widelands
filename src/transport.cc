@@ -1747,6 +1747,25 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 		Worker* w = *it;
 		int index = path.get_index(w->get_position());
 
+		// Careful! If the worker is currently inside the building at our
+		// starting flag, we *must not* reassign him.
+		// If he is in the building at our end flag or at the other road's
+		// end flag, he can be reassigned to the other road.
+		if (index < 0)
+		{
+			Map* map = g->get_map();
+			BaseImmovable* imm = map->get_immovable(w->get_position());
+
+			if (imm && imm->get_type() == BUILDING) {
+				Coords pos;
+
+				g->get_map()->get_brn(w->get_position(), &pos);
+
+				if (pos == path.get_start())
+					index = 0;
+			}
+		}
+
 		molog("Split: check %u -> index %i\n", w->get_serial(), index);
 
 		if (index < 0)
