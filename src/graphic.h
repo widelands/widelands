@@ -246,13 +246,13 @@ class Vector
 inline Vector operator + (const Vector& a, const Vector& b)
 {
    return Vector(a.x + b.x, a.y + b.y, a.z + b.z);
-};
+}
 
 // inner product
 inline float operator * (const Vector& a, const Vector& b)
 {
    return a.x * b.x + a.y * b.y + a.z * b.z;
-};
+}
 
 
 /*
