@@ -26,8 +26,8 @@
 #include "player.h"
 #include "rendertarget.h"
 #include "transport.h"
-#include "worker.h"
 #include "wexception.h"
+#include "worker.h"
 
 static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
 
