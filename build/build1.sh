@@ -7,13 +7,6 @@ echo Retrieving the latest and greatest from CVS
 cvs -z3 -d:pserver:anonymous@cvs.widelands.sourceforge.net:/cvsroot/widelands export -D now widelands
 
 echo
-echo autotools stuff...
-
-cd widelands
-./make_ready.sh
-cd ..
-
-echo
 echo Creating source and binary package file lists
 
 find widelands -maxdepth 1 ! -type d > source.list
@@ -39,12 +32,14 @@ widelands/worlds/*
 EOF
 
 echo
+echo Editing the makefile
+$EDITOR src/Makefile
+
+echo 
 echo Compiling the source now
 
 cd widelands
-./configure
 make
-cp src/widelands .
 cd ..
 
 cat <<EOF
