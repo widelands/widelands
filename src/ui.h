@@ -40,13 +40,23 @@ class Button {
 		  Button(const Button&);
 		  Button& operator=(const Button&);
 
-		  public:
-					 Button(const uint, const uint, const uint, const uint, const uint, Pic*, const uint,
-										  const uint);
-					 ~Button();
+		  
+		  friend class Window;
 
+		  public:
+					 /** void register_func(BUT_FUNC f, void* arg)
+					  * 
+					  * This funtion registers the click func for this button
+					  *
+					  * Args:	f func to use
+					  * 			a	user definde argument given to the function
+					  * returns: Nothing
+					  */
+					 void register_func(BUT_FUNC f, void* arg) {
+								func=f;
+								funca=arg;
+					 }
 					 void set_pic(Pic*);
-					 int draw();
 
 					 /** static void Button::set_bg(Pic* p, uint n) 
 					  *
@@ -79,6 +89,15 @@ class Button {
 								}
 					 }
 
+		  private:
+					 Button(const uint, const uint, const uint, const uint, const uint, Pic*, const uint,
+										  const uint);
+					 ~Button();
+
+					 int draw();
+
+					 
+
 					 /** static uint Button::get_border(void) 
 					  *
 					  * Returns the width of the borders in pixel
@@ -88,18 +107,7 @@ class Button {
 					  */
 					 static uint get_border(void) { return 4; }
 					
-					 /** void register_func(BUT_FUNC f, void* arg)
-					  *
-					  * This funtion registers the click func for this button
-					  *
-					  * Args:	f func to use
-					  * 			a	user definde argument given to the function
-					  * returns: Nothing
-					  */
-					 void register_func(BUT_FUNC f, void* arg) {
-								func=f;
-								funca=arg;
-					 }
+					 
 
 					 /** void run(void) 
 					  *
@@ -149,19 +157,23 @@ class Textarea {
 		  Textarea( const Textarea&);
 		  Textarea& operator=(const Textarea&);
 
+		  friend class Window;
+
 		  public:
 					 enum Align {
 								RIGHTA, 
 								LEFTA, 
 								CENTER
 					 };
-					
+					 void set_text(const char*);
+			
+		  private:
+				
 					 Textarea(const uint, const uint, const char* , const Align, const uint, const uint, Pic*, const uint,
 										  const uint);
 					 Textarea(const uint, const uint, const uint, const Align, Pic*, const uint, const uint);
 					 ~Textarea(void);
 					 
-					 void set_text(const char*);
 					 void draw(void) const ;
 					 
 					 /** static void set_font(uint n)
@@ -227,14 +239,20 @@ class Window {
 		  // Copy is non trivial and shouldn't be needed
 		  Window(const Window&);
 		  Window& operator=(const Window&);
-		  
+		 
+		 
 		  public:
 					 enum Flags {
 								DEFAULT, 
 								FLAT // No clicks, no moves, no borders.
 					 };
 
-					 // static Functions to set the standart graphics
+					 // creation functions
+					 Textarea* create_textarea(const uint, const uint, const uint, const Textarea::Align = Textarea::LEFTA);
+					 Textarea* create_textarea(const uint, const uint, const char* ,  Textarea::Align = Textarea::LEFTA);
+					 Button*   create_button(const uint, const uint, const uint, const uint, const uint);
+					 void set_new_bg(Pic* p);
+
 					 /** static void Window::set_l_border(Pic* p) 
 					  *
 					  * This represents also the other function following.
@@ -253,7 +271,10 @@ class Window {
 					 static void set_bot(Pic* p) { assert(p->get_w()==MUST_HAVE_NPIX && p->get_h()==CORNER 
 										  && "bot doesn't have the default width!"); Window::bot=*p; }
 					 static void set_bg(Pic* p) { Window::bg=*p; }
-					 // The next two functions are there to get the different between asked window size and given window size
+					
+
+		  private:
+					  // The next two functions are there to get the different between asked window size and given window size
 					 // Ex: you want a 100x100 window. Now, the User_Interface class makes sure that border widths and top,bottom heights
 					 // are added to the size and still the window musn't leave the screen on any edges.
 					 inline const static uint get_border(void) { return (CORNER<<1); }
@@ -268,14 +289,8 @@ class Window {
 					 int handle_click(const uint, const bool, const uint, const uint);
 					 int handle_mm(const uint, const uint, const bool, const bool);
 					 void draw(void);	
-					 void set_new_bg(Pic* p);
 					 
-					 // creation functions
-					 Textarea* create_textarea(const uint, const uint, const uint, const Textarea::Align = Textarea::LEFTA);
-					 Textarea* create_textarea(const uint, const uint, const char* ,  Textarea::Align = Textarea::LEFTA);
-					 Button*   create_button(const uint, const uint, const uint, const uint, const uint);
-
-					 //					 void set_closefunc(...)
+										 //					 void set_closefunc(...)
 
 
 		  friend class User_Interface;

@@ -65,7 +65,10 @@ widelands_SOURCES=main.cc \
 						world.h \
 						bob.cc \
 						bob.h \
-						worldfiletypes.h
+						worldfiletypes.h \
+						button.cc \
+						textarea.cc \
+						window.cc
 						
 
 

@@ -1,0 +1,414 @@
+/*
+ * Copyright (C) 2002 by Holger Rapp 
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#include "ui.h"
+#include "input.h"
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/** class Window
+ *
+ * This class offers a window. Should't be user directly
+ *
+ * The graphics (see static Pics) are used in the following manner: (Example)
+ *
+ *  <--20leftmostpixel_of_top--><60Pixels as often as possible to reach window with from top><20rightmost pixel of top>
+ *  ^
+ *  20 topmost pixels of l_border                                      <--- > same for r_border
+ *  as often as needed: 60 pixels of l_border								  <--- > same for r_border
+ *  20 bottom pixels of l_border													  <--- > same for r_borde
+ *  <--20leftmostpixel_of_bot--><60Pixels as often as possible to reach window with from bot><20rightmost pixel of bot>
+ * 
+ * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
+ * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
+ * 	 
+ * DEPENDS: Graph::Pic
+ * 			Graph::draw_pic
+ * 			Initalized g_gr object
+ */
+
+Pic Window::l_border;
+Pic Window::r_border;
+Pic Window::top;
+Pic Window::bot;
+Pic Window::bg;
+	
+/** Window::Window(const uint px, const uint py, const uint wi, const uint he, const uint gid, 
+ * 	const Flags f) 
+ *
+ * 	This is the constructor with which a window gets created
+ *
+ * 	Args:	x	x pos of window
+ * 			y 	y pos of window
+ * 			w	width of window
+ * 			h	height of window
+ * 			f	what window to create
+ */
+Window::Window(const uint px, const uint py, const uint wi, const uint he, const Flags f) {
+		  assert(bg.get_w() && r_border.get_w() && l_border.get_w() && top.get_w() && bot.get_w() && "Window class is not fully initalized!");
+
+		  x=px;
+		  y=py;
+		  w=wi;
+		  h=he;
+		  myf=f;
+					 
+		  nta=0;
+		  ta=(Textarea**) malloc(sizeof(Textarea*)*MAX_TA);
+		
+		  nbut=0;
+		  but=(Button**) malloc(sizeof(Button*)*MAX_BUT);
+
+		  winpic=new Pic();
+		  winpic->set_size(w, h);
+		  
+		  own_bg=0;					
+
+		  redraw_win();
+		  g_gr.register_update_rect(x, y, w, h);
+}
+
+/** Window::~Window()
+ *
+ * Default destructor
+ *
+ * Args: None
+ * Returns: Nothing
+ */
+Window::~Window(void) {
+		  uint i;
+		  
+		  g_gr.register_update_rect(x, y, w, h);
+		  
+		  for(i=0 ; i< nta; i++) 
+					 delete ta[i];
+		  free(ta);
+		 
+		  for(i=0; i< nbut; i++) 
+					 delete but[i];
+		  free(but);
+		  
+		  delete winpic;
+		  if(own_bg) delete own_bg;
+		  
+}
+
+/** void Window::set_pos(uint posx, uint posy)
+ *
+ * This gives the window a new position on the screen
+ *
+ * PRIVATE function so that only friends can move us (because we have 
+ * to care for the size of the screen) 
+ *
+ * Args:	posx 	new xpos
+ * 		posy	new ypos
+ * Returns: Nothing
+ */
+void Window::set_pos(uint posx, uint posy) {
+		  x=posx; y=posy;
+		  g_gr.register_update_rect(x, y, w, h);
+}
+					 
+/** Textarea Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
+ * 
+ * This function creates a textarea with a given text. The size will be set through the 
+ * text width
+ *
+ * Args:	px	xpos in window
+ * 		py	ypos in window
+ * 		t	text to use
+ * 		a	alignment to use 
+ * Returns: textarea just created
+ */
+Textarea* Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a) {
+	
+		  uint myw=w;
+		  uint myh=h;
+		  uint add=0;
+		  
+		  if(myf!=FLAT) {
+					 myw-=get_border();
+					 myh-=get_border();
+					 add=get_border()>>1;
+		  }
+		  
+		  ta[nta]=new Textarea(px, py, t, a, myw, myh, winpic, add, add);
+		  ta[nta]->draw();
+		  g_gr.register_update_rect(x+ta[nta]->get_xpos(), y+ta[nta]->get_ypos(), ta[nta]->get_w(), ta[nta]->get_h());
+		  nta++;
+
+		  assert(nta<MAX_TA);
+
+		  return ta[nta-1];
+}
+  
+/** Textarea Window::create_textarea(const uint px, const uint py, const unsigend int myw,  Textarea::Align a = Textarea::LEFTA)
+ * 
+ * This function creates a textarea with a given width. 
+ *
+ * Args:	px	xpos in window
+ * 		py	ypos in window
+ * 		myw	width of area
+ * 		a	alignment to use 
+ * Returns: textarea just created
+ */
+Textarea* Window::create_textarea(const uint px, const uint py, const uint myw ,  Textarea::Align a) {
+
+		  uint add=0;
+		  if(myf!=FLAT) add=get_border();
+		 
+		  int rw=myw;
+		  int mypy=py;
+		  if(px+add+rw > w) rw=w-add-px;
+		  if(py+add+Textarea::get_fh() > h) mypy=h-Textarea::get_fh();
+
+		  ta[nta]=new Textarea(px, mypy, rw, a, winpic, add>>1, add>>1);
+		  ta[nta]->draw();
+		  g_gr.register_update_rect(x+ta[nta]->get_xpos(), y+ta[nta]->get_ypos(), ta[nta]->get_w(), ta[nta]->get_h());
+		  nta++;
+
+		  assert(nta<MAX_TA);
+
+		  return ta[nta-1];
+}
+
+/** void Window::redraw_win(void) 
+ *
+ * PRIVATE FUNCTION to update the whole winpic
+ *
+ * Args: None
+ * Returns: Nothing
+ */
+void Window::redraw_win(void) {
+		  uint i, j;
+		  uint px=x; 
+		  uint py=y;
+		
+		  g_gr.register_update_rect(x, y, w, h);
+
+		  Pic* usebg= own_bg ? own_bg : &bg ;
+		
+		  if(myf != FLAT) {
+					 px+=get_border()>>1;
+					 py+=get_border()>>1;
+
+					 // Top n Bottom
+					 // top
+					 Graph::copy_pic(winpic, &top, 0, 0, 0, 0, CORNER, CORNER);
+					 // bot
+					 Graph::copy_pic(winpic, &bot, 0, h-CORNER, 0, 0, CORNER, CORNER);
+					 for(i=CORNER; i<w-CORNER-MIDDLE; i+=MIDDLE) {
+								// top
+								Graph::copy_pic(winpic, &top, i, 0, CORNER, 0, MIDDLE, CORNER);
+								// bot
+								Graph::copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, MIDDLE, CORNER);
+					 } 
+					 // top
+					 Graph::copy_pic(winpic, &top, i, 0, CORNER, 0, w-CORNER-i, CORNER);
+					 Graph::copy_pic(winpic, &top, w-CORNER, 0, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+					 // bot
+					 Graph::copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, w-CORNER-i, CORNER);
+					 Graph::copy_pic(winpic, &bot, w-CORNER, h-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+
+					 // borders
+					 // left
+					 Graph::copy_pic(winpic, &l_border, 0, CORNER, 0, 0, CORNER, CORNER);
+					 // right
+					 Graph::copy_pic(winpic, &r_border, w-CORNER, CORNER, 0, 0, CORNER, CORNER);
+					 for(i=CORNER+CORNER; i<h-CORNER-CORNER-MIDDLE; i+=MIDDLE) {
+								// left
+								Graph::copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, MIDDLE);
+								// right
+								Graph::copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, MIDDLE);
+					 } 
+					 // left
+					 Graph::copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, h-CORNER-i);
+					 Graph::copy_pic(winpic, &l_border, 0, h-CORNER-CORNER, 0, l_border.get_h()-CORNER, CORNER, CORNER);
+					 // right
+					 Graph::copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, h-CORNER-i);
+					 Graph::copy_pic(winpic, &r_border, w-CORNER, h-CORNER-CORNER, 0, r_border.get_h()-CORNER, CORNER, CORNER);
+
+					 // bg
+					 for(j=CORNER; (int)j<=(int)(h-CORNER-CORNER-usebg->get_h()); j+=usebg->get_h()) {
+								for(i=CORNER; (int)i<=(int)(w-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
+										  Graph::copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
+								} 
+								Graph::copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, usebg->get_h());
+					 }
+					 for(i=CORNER; (int)i<=(int)(w-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
+								Graph::copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), h-j-CORNER);
+					 } 
+					 Graph::copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, h-j-bot.get_h());
+		  } else {
+					 // has no borders. Simply paste once the pic
+					 uint mw = usebg->get_w() > w ? w : usebg->get_w();
+					 uint mh = usebg->get_h() > h ? h : usebg->get_h();
+		 
+					 Graph::copy_pic(winpic, usebg, 0, 0, 0, 0, mw, mh);
+		  }
+		  
+		  // Draw textareas
+		  for(i=0 ; i< nta; i++) 
+					 ta[i]->draw();
+
+
+		  // Draw Buttons
+		  for(i=0; i< nbut; i++) 
+					 but[i]->draw();
+}
+					 
+/** Button* Window::create_button(const uint px, const uint py, const uint rw, const uint rh, const uint bg)
+ *
+ * This functions creates a button on the given point
+ *
+ * Args: px, py	position
+ * 		rw, rh	width/height
+ * 		bg  background to use
+ * Returns: The created button
+ */
+Button* Window::create_button(const uint px, const uint py, const uint rw, const uint rh, const uint bg) {
+		  uint add=0;
+		  if(myf!=FLAT) add=get_border();
+		 
+		  int mypx=px;
+		  int mypy=py;
+		  uint myw=rw+Button::get_border();
+		  uint myh=rh+Button::get_border();
+
+
+		  if(px+add+rw > w) mypx=w-(add+rw);
+		  if(mypx<0) return NULL;
+		  if(py+add+rh > h) mypy=h-(add+rh);
+
+		  
+		  
+		  but[nbut]=new Button(mypx, mypy, myw, myh, bg, winpic, add>>1, add>>1);
+		  but[nbut]->draw();
+		  g_gr.register_update_rect(x+but[nbut]->get_xpos(), y+but[nbut]->get_ypos(), but[nbut]->get_w(), but[nbut]->get_h());
+		  nbut++;
+
+		  assert(nbut<MAX_BUT);
+
+		  return but[nbut-1];
+}
+
+
+/** void Window::draw(void)
+ *
+ * This function draws the current window on the g_gr object
+ *
+ * Args: None
+ * Returns: Nothing
+ */
+void Window::draw(void) {
+		  Graph::draw_pic(winpic, x, y, 0, 0, w, h);
+}
+					 
+/** void Window::set_new_bg(Pic* p);
+ *
+ * Setting a non default bg for a window. Window cares for clearup on close
+ *
+ * Args: p	new pic to set
+ * returns: Nothing
+ */
+void Window::set_new_bg(Pic* p) {
+		  assert(p);
+		  
+		  if(own_bg) delete own_bg;
+		  own_bg=p;
+
+		  redraw_win();
+		  
+		  g_gr.register_update_rect(x, y, w, h);
+}
+					 
+/** int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2)
+ *
+ * This func cares for mouse movements
+ *
+ * Args:	x	xpos in window
+ * 		y	ypos in window
+ * 		b1, b2	state of the mouse buttons
+ * Returns: INPUT_HANDLED or -1
+ */
+int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2) {
+		  uint i;
+		  
+		  // check for buttons
+		  for(i=0; i<nbut; i++) {
+					 if(but[i]->get_xpos()<x && but[i]->get_xpos()+but[i]->get_w()>x &&
+										  but[i]->get_ypos()<y && but[i]->get_ypos()+but[i]->get_h()>y) {
+								// is inside!
+								but[i]->set_bright(true);
+								but[i]->set_pressed(b1);
+					 } else {
+								but[i]->set_bright(false);
+								but[i]->set_pressed(false);
+					 }
+		  
+					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
+		  }
+					 
+
+		  // we do not care for ta, because they are non responsive to mouse movements or clicks
+		  
+		  return INPUT_HANDLED;
+}
+
+/** int Window::handle_click(const uint pbut, const bool b, const uint x, const uint y) 
+ *
+ * This cares for mouseclicks into the window
+ *
+ * Args:	pbut	1 / 2
+ * 		b		true if pressed, false if released
+ * 		x, y	position in window
+ *
+ * Returns: INPUT_HANDLED, or INPUT_UNHANDLED
+ */
+int Window::handle_click(const uint pbut, const bool b, const uint x, const uint y) {
+		  if(pbut==2) return INPUT_UNHANDLED; // we do not react on this
+		  uint i;
+
+		  
+		  // check buttons
+		  for(i=0; i<nbut; i++) {
+					 if(but[i]->get_xpos()<x && but[i]->get_xpos()+but[i]->get_w()>x &&
+										  but[i]->get_ypos()<y && but[i]->get_ypos()+but[i]->get_h()>y) {
+								// is inside!
+								if(but[i]->is_pressed() && !b) {
+										  // button was pressed, mouse is now released over the button
+										  // Run the button func!
+										  but[i]->run();
+								}
+								but[i]->set_pressed(b);
+					 } else {
+								but[i]->set_pressed(false);
+					 }
+					 
+					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
+		  }
+			 
+		  
+
+		  // we do not care for textareas, they are unresponsive to clicks
+		  
+		  return INPUT_UNHANDLED;
+}
+
