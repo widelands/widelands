@@ -50,7 +50,7 @@ Game::Game(void)
    cmdqueue = new Cmd_Queue(this);
    map=0;
 
-	m_realtime = 0;
+	m_realtime = g_sys.get_time();
 }
 
 /** Game::~Game(void)
@@ -167,9 +167,6 @@ bool Game::run(void)
 {
 	bool played = false;
 
-   counter.start();
-
-
 	m_state = gs_menu;
 
 	if (launch_game_menu(this))
@@ -230,7 +227,7 @@ void Game::think(void)
 {
 	int lasttime = m_realtime;
 	int frametime;
-	m_realtime = counter.get_ticks();
+	m_realtime = g_sys.get_time();
 	frametime = m_realtime - lasttime;
 
 	// Networking: check socket here

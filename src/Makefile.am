@@ -29,10 +29,6 @@ widelands_SOURCES=main.cc \
 						font.cc \
 						setup.cc \
 						setup.h \
-						counter.h \
-						counter.cc \
-						mydirent.cc \
-						mydirent.h \
 						singlepmenue.cc \
 						singlepmenue.h \
 						menuecommon.cc \

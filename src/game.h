@@ -20,7 +20,6 @@
 #ifndef __S__GAME_H
 #define __S__GAME_H
 
-#include "counter.h"
 #include "descr_maintainer.h"
 #include "instances.h"
 #include "tribe.h"
@@ -96,9 +95,8 @@ private:
    Cmd_Queue* cmdqueue;
 	Player* m_players[MAX_PLAYERS];
    Object_Manager* m_objects;
-   Counter counter; // used to obtain realtime
 
-	int m_realtime; // # of ms passed since game was created (including pauses etc..)
+	int m_realtime; // the real time (including) pauses in milliseconds
 
 public: // items to reconsider
 
