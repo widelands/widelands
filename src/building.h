@@ -220,7 +220,7 @@ private:
 	WarehouseSupply*			m_supply;
 	std::vector<Request*>	m_requests; // one idle request per ware type
 
-	uint			m_next_carrier_spawn;		// time of next carrier growth
+	int m_next_carrier_spawn;		// time of next carrier growth
 };
 
 
