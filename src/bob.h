@@ -33,7 +33,6 @@ class Route;
 class Request;
 class Transfer;
 class Tribe_Descr;
-class WorkerProgram;
 
 
 /*
@@ -72,6 +71,11 @@ class Bob : public Map_Object {
 	MO_DESCR(Bob_Descr);
 
 public:
+   enum Bob_Type {
+      CRITTER,
+      WORKER
+   };
+   
 	struct State;
 
 	typedef void (Bob::*Ptr)(Game*, State*);
@@ -88,6 +92,7 @@ public:
 		Task*				task;
 		int				ivar1;
 		int				ivar2;
+		int				ivar3;
 		Object_Ptr		objvar1;
 		std::string		svar1;
 
@@ -96,7 +101,7 @@ public:
 		Path*						path;
 		Transfer*				transfer;
 		Route*					route;
-		const WorkerProgram*	program;
+		const void*	         program; // Pointer to current programm class
 	};
 
 protected:
@@ -108,7 +113,8 @@ public:
 	int get_animstart() const { return m_animstart; }
 
 	virtual int get_type();
-	virtual uint get_movecaps() { return 0; }
+	virtual int get_bob_type() = 0;
+   virtual uint get_movecaps() { return 0; }
 	std::string get_name() const { return get_descr()->get_name(); }
 
 	virtual void init(Editor_Game_Base*);
@@ -137,9 +143,9 @@ public: // default tasks
 	void send_signal(Game*, std::string sig);
 
 	void start_task_idle(Game*, uint anim, int timeout);
-	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims, bool forceonlast = false);
-	void start_task_movepath(Game*, const Path &path, DirAnimations *anims, bool forceonlast = false);
-	bool start_task_movepath(Game* g, const Path& path, int index, DirAnimations* anims, bool forceonlast = false);
+	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims, bool forceonlast = false, int only_step = -1);
+	void start_task_movepath(Game*, const Path &path, DirAnimations *anims, bool forceonlast = false, int only_step = -1);
+	bool start_task_movepath(Game* g, const Path& path, int index, DirAnimations* anims, bool forceonlast = false, int only_step = -1);
 	void start_task_forcemove(Game*, int dir, DirAnimations *anims);
 
 protected: // higher level handling (task-based)
@@ -166,6 +172,7 @@ private:
 	void idle_update(Game* g, State* state);
 	void idle_signal(Game* g, State* state);
 	void movepath_update(Game* g, State* state);
+	void movepath_signal(Game* g, State* state);
 	void forcemove_update(Game* g, State* state);
 
 private:

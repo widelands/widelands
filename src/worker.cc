@@ -18,6 +18,7 @@
  */
 
 #include "cmd_queue.h"
+#include "critter_bob.h"
 #include "filesystem.h"
 #include "game.h"
 #include "graphic.h"
@@ -498,8 +499,12 @@ radius:<dist>
 attrib:<attribute>  (optional)
 	Find objects with the given attribute
 
+type:<what>         (optional, defaults to immovable)
+   Find only objects of this type
+   
 iparam1 = radius predicate
 iparam2 = attribute predicate (if >= 0)
+sparam1 = type
 
 ==============================
 */
@@ -510,7 +515,8 @@ void WorkerProgram::parse_findobject(WorkerAction* act, Parser* parser, const st
 	act->function = &Worker::run_findobject;
 	act->iparam1 = -1;
 	act->iparam2 = -1;
-
+   act->sparam1 = "immovable";
+      
 	// Parse predicates
 	for(i = 1; i < cmd.size(); i++) {
 		uint idx = cmd[i].find(':');
@@ -525,7 +531,9 @@ void WorkerProgram::parse_findobject(WorkerAction* act, Parser* parser, const st
 				throw wexception("Bad findobject radius '%s'", value.c_str());
 		} else if (key == "attrib") {
 			act->iparam2 = Map_Object_Descr::get_attribute_id(value);
-		} else
+		} else if (key == "type") {
+         act->sparam1 = value;
+      } else
 			throw wexception("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
 	}
 
@@ -535,45 +543,64 @@ void WorkerProgram::parse_findobject(WorkerAction* act, Parser* parser, const st
 
 bool Worker::run_findobject(Game* g, State* state, const WorkerAction* act)
 {
-	Coords pos = get_position();
-	std::vector<ImmovableFound> list;
-	Map* map = g->get_map();
-	PlayerImmovable* location = get_location(g);
-	Building* owner;
+   Coords pos = get_position();
+   Map* map = g->get_map();
 
-	assert(location);
-	assert(location->get_type() == BUILDING);
+   molog("  FindObject(%i, %i,%s)\n", act->iparam1, act->iparam2, act->sparam1.c_str());
 
-	owner = (Building*)location;
 
-	molog("  FindObject(%i, %i)\n", act->iparam1, act->iparam2);
+   PlayerImmovable* location = get_location(g);
+   Building* owner;
 
-	if (pos == owner->get_position())
-		pos = owner->get_base_flag()->get_position();
+   assert(location);
+   assert(location->get_type() == BUILDING);
 
-	CheckStepWalkOn cstep(get_movecaps(), false);
+   owner = (Building*)location;
 
-	if (act->iparam2 < 0)
-		map->find_reachable_immovables(pos, act->iparam1, &list, &cstep);
-	else
-		map->find_reachable_immovables(pos, act->iparam1, &list, &cstep,
-													FindImmovableAttribute(act->iparam2));
+   CheckStepWalkOn cstep(get_movecaps(), false);
 
-	molog("  %i found\n", list.size());
+   if (pos == owner->get_position())
+      pos = owner->get_base_flag()->get_position();
 
-	if (!list.size()) {
-		set_signal("fail"); // no object found, cannot run program
-		pop_task(g);
-		return true;
-	}
+   if(act->sparam1=="immovable") {
+      std::vector<ImmovableFound> list;
+      if (act->iparam2 < 0)
+         map->find_reachable_immovables(pos, act->iparam1, &list, &cstep);
+      else
+         map->find_reachable_immovables(pos, act->iparam1, &list, &cstep,
+               FindImmovableAttribute(act->iparam2));
 
-	int sel = g->logic_rand() % list.size();
+      if (!list.size()) {
+         set_signal("fail"); // no object found, cannot run program
+         pop_task(g);
+         return true;
+      }
 
-	state->objvar1 = list[sel].object;
+      int sel = g->logic_rand() % list.size();
+      state->objvar1 = list[sel].object;
+      molog("  %i found\n", list.size());
+   } else {
+      std::vector<Bob*> list;
+      log("BOB: searching bob with attribute (%i)\n", act->iparam2);
+      if (act->iparam2 < 0)
+         map->find_reachable_bobs(pos, act->iparam1, &list, &cstep);
+      else
+         map->find_reachable_bobs(pos, act->iparam1, &list, &cstep,
+               FindBobAttribute(act->iparam2));
 
-	state->ivar1++;
-	schedule_act(g, 10);
-	return true;
+      if (!list.size()) {
+         set_signal("fail"); // no object found, cannot run program
+         pop_task(g);
+         return true;
+      }
+      int sel = g->logic_rand() % list.size();
+      state->objvar1 = list[sel];
+      molog("  %i found\n", list.size());
+   }
+
+   state->ivar1++;
+   schedule_act(g, 10);
+   return true;
 }
 
 
@@ -737,7 +764,8 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
 	bool forceonlast = false;
 	PlayerImmovable* location = get_location(g);
 	Building* owner;
-
+   int max_steps=-1;
+   
 	assert(location);
 	assert(location->get_type() == BUILDING);
 
@@ -773,6 +801,7 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
 			else
 				throw wexception("MO(%u): [actWalk]: bad object type = %i", get_serial(), obj->get_type());
 
+         max_steps=1; // Only take one step, then rethink (object may have moved)
 			forceonlast = true;
 			break;
 		}
@@ -794,7 +823,7 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
 	}
 
 	// Walk towards it
-	if (!start_task_movepath(g, dest, 10, get_descr()->get_right_walk_anims(does_carry_ware()), forceonlast)) {
+	if (!start_task_movepath(g, dest, 10, get_descr()->get_right_walk_anims(does_carry_ware()), forceonlast, max_steps)) {
 		molog("  couldn't find path\n");
 		set_signal("fail");
 		pop_task(g);
@@ -920,6 +949,19 @@ bool Worker::run_object(Game* g, State* state, const WorkerAction* act)
 
 	if (obj->get_type() == IMMOVABLE)
 		((Immovable*)obj)->switch_program(g, act->sparam1);
+   else if(obj->get_type() == BOB) {
+      Bob* bob=((Bob*)(obj));
+      if(bob->get_bob_type() == Bob::CRITTER) {
+         Critter_Bob* crit= ((Critter_Bob*)bob);
+         crit->send_signal(g, "interrupt_now");
+         crit->start_task_program(g, act->sparam1);
+      } else if(bob->get_type() == Bob::WORKER) {
+         Worker* w= ((Worker*)bob);
+         w->send_signal(g, "interrupt_now");
+         w->start_task_program(g, act->sparam1);
+      } else 
+         throw wexception("MO(%i): [actObject]: bab bob type = %i", get_serial(), bob->get_bob_type());
+   }
    else 
 		throw wexception("MO(%u): [actObject]: bad object type = %i", get_serial(), obj->get_type());
 
@@ -2364,15 +2406,16 @@ void Worker::program_update(Game* g, State* state)
 
 	for(;;)
 	{
-		molog("[program]: %s#%i\n", state->program->get_name().c_str(), state->ivar1);
+      const WorkerProgram* program=static_cast<const WorkerProgram*>(state->program);
+		molog("[program]: %s#%i\n", program->get_name().c_str(), state->ivar1);
 
-		if (state->ivar1 >= state->program->get_size()) {
+		if (state->ivar1 >= program->get_size()) {
 			molog("  End of program\n");
 			pop_task(g);
 			return;
 		}
 
-		act = state->program->get_action(state->ivar1);
+		act = program->get_action(state->ivar1);
 
 		if ((this->*(act->function))(g, state, act))
 			return;

@@ -781,7 +781,6 @@ uint Map::find_reachable_immovables(Coords coord, uint radius, std::vector<Immov
 	return cb.m_found;
 }
 
-
 /*
 ===============
 FindFieldsCallback
@@ -2293,6 +2292,20 @@ bool FindImmovablePlayerImmovable::accept(BaseImmovable* imm) const
 {
 	return imm->get_type() >= Map_Object::BUILDING;
 }
+
+
+/*
+==============================================================================
+
+Bob search functors
+
+==============================================================================
+*/
+bool FindBobAttribute::accept(Bob *bob) const
+{
+	return bob->has_attribute(m_attrib);
+}
+
 
 
 /*

@@ -109,6 +109,13 @@ struct FindImmovableAlwaysTrue : public FindImmovable {
 struct FindBobAlwaysTrue : public FindBob {
 	virtual bool accept(Bob *imm) const { return true; }
 };
+struct FindBobAttribute : public FindBob {
+	FindBobAttribute(uint attrib) : m_attrib(attrib) { }
+
+	virtual bool accept(Bob *imm) const;
+
+	int m_attrib;
+};
 
 
 /** class Map

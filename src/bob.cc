@@ -19,6 +19,7 @@
 
 #include "animation.h"
 #include "bob.h"
+#include "critter_bob.h"
 #include "game.h"
 #include "map.h"
 #include "player.h"
@@ -81,7 +82,8 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
 
 	// Parse attributes
    const char* string;
-	while(global->get_next_string("attrib", &string)) {
+	global= prof->get_safe_section("global");
+   while(global->get_next_string("attrib", &string)) {
 		uint attrib = get_attribute_id(string);
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
@@ -702,6 +704,7 @@ MOVEPATH task
 Move along a predefined path.
 ivar1 is the step number.
 ivar2 is non-zero if we should force moving onto the final field.
+ivar3 is number of steps to take maximally or -1
 
 Sets the following signal(s):
 "fail" - cannot move along the given path
@@ -713,7 +716,7 @@ Bob::Task Bob::taskMovepath = {
 	"movepath",
 
 	&Bob::movepath_update,
-	0,		// lazy signal handling
+	&Bob::movepath_signal,		// lazy signal handling, only act on one signal
 	0,		// mask
 };
 
@@ -727,9 +730,11 @@ for Map::findpath().
 Returns false if no path could be found.
 
 The task finishes once the goal has been reached. It may fail.
+
+only step defines how many steps should be taken, before this returns as a success
 ===============
 */
-bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *anims, bool forceonlast)
+bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *anims, bool forceonlast, int only_step)
 {
 	Path* path = new Path;
 	State* state;
@@ -753,7 +758,8 @@ bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *
 	state->path = path;
 	state->ivar1 = 0;		// step #
 	state->ivar2 = forceonlast ? 1 : 0;
-	state->diranims = anims;
+   state->ivar3 = only_step;
+   state->diranims = anims;
 
 	return true;
 }
@@ -766,7 +772,7 @@ Bob::start_task_movepath
 Start moving along the given, precalculated path.
 ===============
 */
-void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims, bool forceonlast)
+void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims, bool forceonlast, int only_step)
 {
 	State* state;
 
@@ -778,6 +784,7 @@ void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims, b
 	state->path = new Path(path);
 	state->ivar1 = 0;
 	state->ivar2 = forceonlast ? 1 : 0;
+   state->ivar3 = only_step;
 	state->diranims = anims;
 }
 
@@ -793,7 +800,7 @@ Return true if a task has been started, or false if we already are on the given
 path index.
 ===============
 */
-bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnimations* anims, bool forceonlast)
+bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnimations* anims, bool forceonlast, int only_step)
 {
 	CoordPath path(origpath);
 	int curidx = path.get_index(get_position());
@@ -808,13 +815,13 @@ bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnima
 			path.truncate(index);
 			path.starttrim(curidx);
 
-			start_task_movepath(g, path, anims, forceonlast);
+			start_task_movepath(g, path, anims, forceonlast, only_step);
 		} else {
 			path.truncate(curidx);
 			path.starttrim(index);
 			path.reverse();
 
-			start_task_movepath(g, path, anims, forceonlast);
+			start_task_movepath(g, path, anims, forceonlast, only_step);
 		}
 
 		return true;
@@ -846,7 +853,13 @@ void Bob::movepath_update(Game* g, State* state)
 		assert(!state->path || m_position == state->path->get_end());
 		pop_task(g); // success
 		return;
-	}
+	} else if(state->ivar1==state->ivar3) {
+      // We have stepped all steps that we were asked for.
+      // This is some kind of success, though we do not are were we wanted
+      // to go
+      pop_task(g);
+      return;
+   }
 
 	char dir = state->path->get_step(state->ivar1);
 	bool forcemove = false;
@@ -867,6 +880,16 @@ void Bob::movepath_update(Game* g, State* state)
 	schedule_act(g, tdelta);
 }
 
+/*
+ * movepath signal
+ */
+void Bob::movepath_signal(Game* g, State* start) {
+   if(get_signal()=="interrupt_now") {
+      // User requests an immediate interrupt.
+      // Well, he better nows what he's doing
+      pop_task(g);
+   }
+}
 
 /*
 ==============================
@@ -1105,158 +1128,6 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	if (m_linknext)
 		m_linknext->m_linkpprev = &m_linknext;
 	m_position.field->bobs = this;
-}
-
-
-/*
-==============================================================================
-
-class Critter_Bob
-
-==============================================================================
-*/
-
-//
-// Description
-//
-class Critter_Bob_Descr : public Bob_Descr {
-   public:
-      Critter_Bob_Descr(const char *name, Tribe_Descr* tribe);
-      virtual ~Critter_Bob_Descr(void) { }
-
-      virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-      Bob *create_object();
-
-      inline bool is_swimming(void) { return m_swimming; }
-      inline DirAnimations* get_walk_anims(void) { return &m_walk_anims; }
-
-   private:
-		DirAnimations	m_walk_anims;
-      bool				m_swimming;
-};
-
-Critter_Bob_Descr::Critter_Bob_Descr(const char *name, Tribe_Descr* tribe)
-	: Bob_Descr(name, tribe)
-{
-	m_swimming = 0;
-}
-
-void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
-{
-	Bob_Descr::parse(directory, prof, encdata);
-
-	Section *s = prof->get_safe_section("global");
-
-	m_swimming = s->get_bool("swimming", false);
-
-   // Read all walking animations.
-	// Default settings are in [walk]
-	char sectname[256];
-
-	snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
-	m_walk_anims.parse(directory, prof, sectname, prof->get_section("walk"), encdata);
-}
-
-
-//
-// Implementation
-//
-#define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000 // wait up to 12 seconds between moves
-
-class Critter_Bob : public Bob {
-	MO_DESCR(Critter_Bob_Descr);
-
-public:
-	Critter_Bob(Critter_Bob_Descr *d);
-	virtual ~Critter_Bob(void);
-
-	uint get_movecaps();
-
-	virtual void init_auto_task(Game* g);
-
-private:
-	void roam_update(Game* g, State* state);
-
-	static Task taskRoam;
-};
-
-Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
-	: Bob(d)
-{
-}
-
-Critter_Bob::~Critter_Bob()
-{
-}
-
-uint Critter_Bob::get_movecaps() { return get_descr()->is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK; }
-
-
-/*
-==============================
-
-ROAM task
-
-Simply roam the map
-
-==============================
-*/
-
-Bob::Task Critter_Bob::taskRoam = {
-	"roam",
-
-	(Bob::Ptr)&Critter_Bob::roam_update,
-	0,
-	0,
-};
-
-void Critter_Bob::roam_update(Game* g, State* state)
-{
-
-	// ignore all signals
-	if (get_signal().size())
-		set_signal("");
-
-	// alternately move and idle
-	if (state->ivar1)
-	{
-		// Pick a target at random
-		Coords dst;
-
-		dst.x = get_position().x + (g->logic_rand()%5) - 2;
-		dst.y = get_position().y + (g->logic_rand()%5) - 2;
-
-		//molog("[roam]: Try to move\n");
-
-		if (start_task_movepath(g, dst, 3, get_descr()->get_walk_anims())) {
-			state->ivar1 = 0;
-			return;
-		}
-
-		//molog("        Failed\n");
-
-		start_task_idle(g, get_descr()->get_idle_anim(), 1 + g->logic_rand()%1000);
-	}
-	else
-	{
-		state->ivar1 = 1;
-
-		//molog("[roam]: Idle\n");
-
-		start_task_idle(g, get_descr()->get_idle_anim(), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
-	}
-}
-
-void Critter_Bob::init_auto_task(Game* g)
-{
-	push_task(g, &taskRoam);
-
-	get_state()->ivar1 = 0;
-}
-
-Bob *Critter_Bob_Descr::create_object()
-{
-	return new Critter_Bob(this);
 }
 
 

@@ -63,7 +63,7 @@ public:
 
 	void load_graphics();
 
-	inline Tribe_Descr *get_tribe() { return m_tribe; }
+   inline Tribe_Descr *get_tribe() { return m_tribe; }
 	inline std::string get_descname() const { return m_descname; }
 	inline std::string get_helptext() const { return m_helptext; }
 	inline uint get_menu_pic() { return m_menu_pic; }
@@ -112,6 +112,8 @@ public:
 	virtual ~Worker();
 
    virtual Worker_Type get_worker_type(void) { return NORMAL; }
+   virtual int get_bob_type() { return Bob::WORKER; }
+	
 
 	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
 	inline uint get_idle_anim() const { return get_descr()->get_idle_anim(); }

@@ -1,6 +1,10 @@
 type="critter"
 swimming=0  # defaults to 0, is only in the water?
 attrib=eatable
+program=remove
+
+[remove]
+0=remove
 
 [idle]
 clrkey_r=0
@@ -21,4 +25,3 @@ shadowclr_g=0
 shadowclr_b=0
 hot_spot_x=5
 hot_spot_y=9
-
