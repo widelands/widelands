@@ -101,7 +101,7 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    b->set_title("Comparative Statistics");
    b->clickedid.set(this, &GameMainMenu::clicked);
    
-   b=new UIButton(this, 5, 105, get_inner_w()-10, 20, 0, 6);
+   b=new UIButton(this, 5, 130, get_inner_w()-10, 20, 0, 6);
    b->set_title("Stock");
    b->clickedid.set(this, &GameMainMenu::clicked);
      
