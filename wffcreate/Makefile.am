@@ -4,7 +4,7 @@ EXTRA_FLAGS=@SDL_CFLAGS@ -Wall -O2 -I../src
 CFLAGS= $(EXTRA_FLAGS)
 CXXFLAGS= $(EXTRA_FLAGS)
 
-# EXTRA_DIST=worlds pics 
+EXTRA_DIST=README
 
 bin_PROGRAMS=wffcreate
 wffcreate_LDADD =@SDL_LIBS@
