@@ -127,7 +127,7 @@ void Game::add_player(int plnum, int type)
 	if (m_players[plnum])
 		remove_player(plnum);
 	
-	m_players[plnum] = new Player(this, type);
+	m_players[plnum] = new Player(this, type, plnum);
 }
 
 /** Game::can_start()
@@ -199,15 +199,15 @@ bool Game::run(void)
       // TEMP: player number
 	   ipl = new Interactive_Player(this, 0);
 	   
-		// Prepare the map (i.e. place HQs)
+		// Prepare the players (i.e. place HQs)
 		for(int i = 0; i < map->get_nplayers(); i++) {
 			Player* player = get_player(i);
 			if (!player)
 				continue;
-			
-			const Cords *c = map->get_starting_pos(i);
-			warp_building(c->x, c->y, i, 0);
-			
+
+			player->setup();
+		
+			const Cords* c = map->get_starting_pos(i);
 			if (player->get_type() == Player::playerLocal)
 				ipl->move_view_to(c->x, c->y);
 		}
@@ -264,21 +264,7 @@ void Game::warp_building(int x, int y, char owner, int idx)
    
 	descr = get_player_tribe(owner)->get_building_descr(idx);
 
-	obj = m_objects->create_object(this, descr, owner);
-	obj->set_position(this, x, y);
-
-   // TODO: conquers
-   Player* ply=get_player(owner);
-
-   if(!ply) return; // this player is not in the game
-   
-	Map_Region_Cords* r=new Map_Region_Cords(x, y, descr->get_see_area(), map);
-   if(!ply->seen_fields)  ply->seen_fields=new std::bit_vector(map->get_w()*map->get_h(), false);
-
-   while(r->next(&x, &y)) {
-      get_player(owner)->set_field_seen(x, y, true);
-   }
-   delete r;
+	obj = m_objects->create_object(this, descr, owner, x, y);
 }
 
 /** Game::create_bob(int x, int y, int idx)
@@ -293,7 +279,6 @@ void Game::create_bob(int x, int y, int idx)
 	Map_Object* obj;
 
 	descr = map->get_world()->get_bob_descr(idx);
-	obj = m_objects->create_object(this, descr);
-	obj->set_position(this, x, y);
+	obj = m_objects->create_object(this, descr, -1, x, y);
 }
 

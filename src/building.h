@@ -459,21 +459,5 @@ class Port_Descr : virtual public Boring_Building_Descr,
          // nothing
 };
 
-//
-// This class describes a in-game HQ 
-//
-class Building_HQ : public Map_Object {
-   public:
-      Building_HQ(HQ_Descr* d);
-      virtual ~Building_HQ(void) { }
-
-		void init(Game* g);
-
-		// the HQ doesn't act (if anything, it acts like any other building, i.e. door opens)
-		
-   private:
-      HQ_Descr* descr;
-};
-
 
 #endif // __S__BUILDING_H

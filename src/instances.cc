@@ -40,7 +40,7 @@ Object_Manager::~Object_Manager(void)
  *
  * Create an object of type d
  */
-Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner)
+Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner, int x, int y)
 {
 	Map_Object* obj = d->create_object();
 	
@@ -51,6 +51,7 @@ Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owne
 	m_objects[m_lastserial] = obj;
 
 	obj->set_owned_by(owner);
+	obj->set_position(g, x, y);
 	obj->init(g);
 	
 	return obj;

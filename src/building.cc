@@ -25,6 +25,7 @@
 #include "myfile.h"
 #include "tribe.h"
 #include "game.h"
+#include "player.h"
 
 // 
 // Need List
@@ -47,20 +48,6 @@ int NeedWares_List::read(Binary_file* f) {
    }
 
    return RET_OK;
-}
-
-//
-// Building code
-//
-Building_HQ::Building_HQ(HQ_Descr *d)
-	: Map_Object(BIG_BUILDING)
-{
-	descr=d;
-}
-
-void Building_HQ::init(Game* g)
-{
-	set_animation(g, descr->get_idle_anim());
 }
 
 // 
@@ -145,9 +132,60 @@ int Boring_Building_Descr::read(Binary_file *f) {
 }
 
 
+/*
+==============================================================================
+
+Base Building
+
+==============================================================================
+*/
+
+class Building : public Map_Object {
+public:
+	Building(Type t, Building_Descr *descr);
+	
+	virtual void init(Game* g);
+	
+protected:
+	// ugly, ugly
+	// we have a choice of either recreating the entire virtual function
+	// hierarchy from Building_Descr in Building, or of performing lots of
+	// casts in the derived classes.
+	// come to think of it, it would be more consistent to put m_descr into
+	// Map_Object and pull some template (or other) tricks to hide the nasty
+	// casts
+	Building_Descr *m_descr;
+};
+
+Building::Building(Type t, Building_Descr *descr)
+	: Map_Object(t)
+{
+	m_descr = descr;
+}
+
+/** Building::init(Game *g)
+ *
+ * Common building initialization code. You must call this from derived class' init.
+ */
+void Building::init(Game* g)
+{
+   Player* player = g->get_player(get_owner_by());
+
+	assert(player);
+   
+	player->set_area_seen(m_px, m_py, m_descr->get_see_area(), true);
+}
+
 // 
 // DOWN HERE: The real buildings, no abstractions
 // 
+/*
+==============================================================================
+
+Dig Building
+
+==============================================================================
+*/
 
 int Dig_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -170,6 +208,14 @@ Map_Object *Dig_Building_Descr::create_object()
    cerr << "Dig_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
    return 0;
 }
+
+/*
+==============================================================================
+
+Search Building
+
+==============================================================================
+*/
 
 int Search_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -196,6 +242,14 @@ Map_Object *Search_Building_Descr::create_object()
    return 0;
 }
 
+/*
+==============================================================================
+
+Plant Building
+
+==============================================================================
+*/
+
 int Plant_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
@@ -221,6 +275,14 @@ Map_Object *Plant_Building_Descr::create_object()
 }
 
 
+/*
+==============================================================================
+
+Grow Building
+
+==============================================================================
+*/
+
 int Grow_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
@@ -245,6 +307,14 @@ Map_Object *Grow_Building_Descr::create_object()
 	return 0;
 }
 
+
+/*
+==============================================================================
+
+Sitter Building
+
+==============================================================================
+*/
 
 int Sit_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -293,6 +363,14 @@ Map_Object *Sit_Building_Produ_Worker_Descr::create_object()
 }
 
 
+/*
+==============================================================================
+
+Science Building
+
+==============================================================================
+*/
+
 int Science_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
    Working_Building_Descr::read(f);
@@ -309,6 +387,14 @@ Map_Object *Science_Building_Descr::create_object()
 	return 0;
 }
 
+
+/*
+==============================================================================
+
+Military Building
+
+==============================================================================
+*/
 
 int Military_Building_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -331,6 +417,14 @@ Map_Object *Military_Building_Descr::create_object()
 	return 0;
 }
 
+
+/*
+==============================================================================
+
+Cannon
+
+==============================================================================
+*/
 
 int Cannon_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -384,6 +478,39 @@ Map_Object *Cannon_Descr::create_object()
 }
 
 
+/*
+==============================================================================
+
+Headquarters
+
+==============================================================================
+*/
+
+class Building_HQ : public Building {
+   public:
+      Building_HQ(HQ_Descr* d);
+		
+		void init(Game* g);
+
+		// the HQ doesn't act (if anything, it acts like any other building, i.e. door opens)
+		
+	private:
+      HQ_Descr* descr;
+};
+
+// HQ code
+Building_HQ::Building_HQ(HQ_Descr *d)
+	: Building(BIG_BUILDING, d)
+{
+}
+
+void Building_HQ::init(Game* g)
+{
+	Building::init(g);
+	set_animation(g, m_descr->get_idle_anim());
+}
+
+// HQ description
 int HQ_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
@@ -399,6 +526,13 @@ Map_Object *HQ_Descr::create_object()
 	return new Building_HQ(this);
 }
 
+/*
+==============================================================================
+
+Store
+
+==============================================================================
+*/
 
 int Store_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -416,6 +550,14 @@ Map_Object *Store_Descr::create_object()
 	return 0;
 }
 
+
+/*
+==============================================================================
+
+Dockyard
+
+==============================================================================
+*/
 
 int Dockyard_Descr::read(Binary_file *f) {
    Building_Descr::read(f);
@@ -437,6 +579,14 @@ Map_Object *Dockyard_Descr::create_object()
 	return 0;
 }
 
+
+/*
+==============================================================================
+
+Port
+
+==============================================================================
+*/
 
 int Port_Descr::read(Binary_file *f) {
 

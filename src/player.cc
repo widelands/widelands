@@ -30,8 +30,9 @@
 // class Player
 //
 //
-Player::Player(Game* g, int type) {
+Player::Player(Game* g, int type, int plnum) {
    m_type = type; 
+	m_plnum = plnum;
    game=g;
    seen_fields=0;
 }
@@ -41,3 +42,27 @@ Player::~Player(void) {
       delete seen_fields;
 }
 
+/** Player::setup()
+ *
+ * Prepare the player for in-game action
+ */
+void Player::setup()
+{
+	seen_fields = new std::bit_vector(game->get_map()->get_w()*game->get_map()->get_h(), false);
+
+	// place the HQ
+	const Cords *c = game->get_map()->get_starting_pos(m_plnum);
+	game->warp_building(c->x, c->y, m_plnum, 0);
+}
+
+/** Player::set_area_seen(int x, int y, uint area, bool on)
+ *
+ * Mark the given area as (un)seen
+ */
+void Player::set_area_seen(int x, int y, uint area, bool on)
+{
+	Map_Region_Cords r(x, y, area, game->get_map());
+   
+	while(r.next(&x, &y))
+      set_field_seen(x, y, on);
+}

@@ -149,7 +149,7 @@ class Object_Manager {
 				return 0;
 			return it->second;
 		}
-		Map_Object* create_object(Game* g, Map_Object_Descr* d, int owner = -1);
+		Map_Object* create_object(Game* g, Map_Object_Descr* d, int owner, int x, int y);
 		void free_object(Map_Object* obj);
 		
 	private:
