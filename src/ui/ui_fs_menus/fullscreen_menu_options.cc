@@ -84,10 +84,14 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 
 	title= new UITextarea(this, MENU_XRES/2, 240, "In-game Options", Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-	
+
+   // Toggle Options
 	m_single_watchwin = new UICheckbox(this,60,280);
 	m_single_watchwin->set_state(opt.single_watchwin);
 	new UITextarea(this,85,290,"Use single Watchwindow Mode", Align_VCenter);
+	m_show_workarea_preview= new UICheckbox(this,60,305);
+	m_show_workarea_preview->set_state(opt.show_warea);
+	new UITextarea(this,85,315,"Show buildings area preview", Align_VCenter);
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
@@ -99,6 +103,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	opt.fullscreen = m_fullscreen->get_state();
 	opt.inputgrab = m_inputgrab->get_state();
 	opt.single_watchwin = m_single_watchwin->get_state();
+	opt.show_warea = m_show_workarea_preview->get_state();
 	return opt;
 }
 
@@ -126,6 +131,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	opt.inputgrab = s->get_bool("inputgrab", false);
 	opt.fullscreen = s->get_bool("fullscreen", false);
 	opt.single_watchwin = s->get_bool("single_watchwin",false);
+	opt.show_warea= s->get_bool("workareapreview",false);
 	return opt;
 }
 
@@ -136,6 +142,7 @@ void Options_Ctrl::save_options(){
 	m_opt_section->set_bool("fullscreen", opt.fullscreen);
 	m_opt_section->set_bool("inputgrab", opt.inputgrab);
 	m_opt_section->set_bool("single_watchwin",opt.single_watchwin);
+	m_opt_section->set_bool("workareapreview",opt.show_warea);
 	((opt.depth == 32) ? m_opt_section->set_string("gfxsys","sw32") : m_opt_section->set_string("gfxsys","sw16"));
 	
 	Sys_SetInputGrab(opt.inputgrab);

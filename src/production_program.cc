@@ -21,7 +21,9 @@
 #include "productionsite.h"
 #include "production_program.h"
 #include "profile.h"
+#include "tribe.h"
 #include "util.h"
+#include "worker_program.h"
 
 /*
 ==============================================================================
@@ -147,6 +149,38 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			act.type = ProductionAction::actWorker;
 			act.sparam1 = cmd[1];
+
+			//  Quote form "void ProductionSite::program_act(Game*)":
+			//  "Always main worker is doing stuff"
+			const char * const main_worker_name
+				= (*building->get_workers())[0].name.c_str();
+			log
+				("Parsed production command 'worker (%s) %s'\n",
+				 main_worker_name, act.sparam1.c_str());
+			Tribe_Descr * tribe_descr = building->get_tribe();
+			const Workarea_Info & workarea_info
+				= tribe_descr->get_worker_descr
+				(tribe_descr->get_safe_worker_index(main_worker_name))
+				->get_program(act.sparam1.c_str())->get_workarea_info();
+
+			for
+				(Workarea_Info::const_iterator it = workarea_info.begin();
+				 it != workarea_info.end(); ++it) {
+				log("Radius: %i\n", it->first);
+				const std::set<std::string> & descriptions = it->second;
+				for
+					(std::set<std::string>::const_iterator de = descriptions.begin();
+					 de != descriptions.end(); ++de) {
+					log("        %s\n", (*de).c_str());
+					std::string description = building->get_descname();
+					description += ' ';
+					description += m_name;
+					description += " worker ";
+					description += main_worker_name;
+					description += *de;
+					building->m_workarea_info[it->first].insert(description);
+				}
+			}
 		} else if (cmd[0] == "animation") {
 			char* endp;
 
@@ -191,6 +225,12 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
          if(endp && *endp || act.iparam3>100)
             throw wexception("Bad chance after maximum amount is empty: '%s'", cmd[4].c_str());
 
+				 std::string description = building->get_descname();
+				 description += ' ';
+				 description += name;
+				 description += " mine ";
+				 description += act.sparam1;
+				 building->m_workarea_info[act.iparam1].insert(description);
 		} else if (cmd[0] == "call") {
 			if (cmd.size() != 2)
 				throw wexception("Usage: call <program>");

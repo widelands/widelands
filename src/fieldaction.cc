@@ -23,6 +23,7 @@
 #include "fieldaction.h"
 #include "game_debug_ui.h"
 #include "map.h"
+#include "overlay_manager.h"
 #include "player.h"
 #include "soldier.h"
 #include "transport.h"
@@ -56,11 +57,15 @@ public:
 	BuildGrid(UIPanel* parent, Tribe_Descr* tribe, int x, int y, int cols);
 
 	UISignal1<int> buildclicked;
+	UISignal1<int> buildmouseout;
+	UISignal1<int> buildmousein;
 
 	void add(int id);
 
 private:
 	void clickslot(int idx);
+	void mouseoutslot(int idx);
+	void mouseinslot(int idx);
 
 private:
 	Tribe_Descr*		m_tribe;
@@ -80,6 +85,8 @@ BuildGrid::BuildGrid(UIPanel* parent, Tribe_Descr* tribe, int x, int y, int cols
 	m_tribe = tribe;
 
 	clicked.set(this, &BuildGrid::clickslot);
+	mouseout.set(this, &BuildGrid::mouseoutslot);
+	mousein.set(this, &BuildGrid::mouseinslot);
 }
 
 
@@ -115,6 +122,38 @@ void BuildGrid::clickslot(int idx)
 }
 
 
+/*
+===============
+BuildGrid::mouseoutslot [private]
+
+The mouse pointer has left the icon with the given index. Figure out which
+building it belongs to and trigger signal buildmouseout.
+===============
+*/
+void BuildGrid::mouseoutslot(int idx)
+{
+	int id = (int)get_data(idx);
+
+	buildmouseout.call(id);
+}
+
+
+/*
+===============
+BuildGrid::mouseinslot [private]
+
+The mouse pointer has entered the icon with the given index. Figure out which
+building it belongs to and trigger signal buildmousein.
+===============
+*/
+void BuildGrid::mouseinslot(int idx)
+{
+	int id = (int)get_data(idx);
+
+	buildmousein.call(id);
+}
+
+
 
 /*
 ==============================================================================
@@ -123,6 +162,7 @@ FieldActionWindow IMPLEMENTATION
 
 ==============================================================================
 */
+static const size_t number_of_workarea_pics = 3;
 class FieldActionWindow : public UIUniqueWindow {
 public:
 	FieldActionWindow(Interactive_Base *iabase, Player* plr, UIUniqueWindowRegistry *registry);
@@ -145,6 +185,8 @@ public:
 	void act_abort_buildroad();
 	void act_removeroad();
 	void act_build(int idx);
+	void building_icon_mouse_out(int idx);
+	void building_icon_mouse_in(int idx);
 	void act_geologist();
    void act_attack();         /// Launch the attack
    void act_attack_more();    /// Increase the number of soldiers to be launched
@@ -160,11 +202,14 @@ private:
 	Interactive_Base    *m_iabase;
    Player              *m_plr;
 	Map				     *m_map;
+	Overlay_Manager & m_overlay_manager;
 
 	FCoords		m_field;
 
 	UITab_Panel*	m_tabpanel;
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
+	int m_workarea_preview_job_id;
+	unsigned int workarea_cumulative_picid[number_of_workarea_pics + 1];
    
    /// Variables to use with attack dialog
    UITextarea* m_text_attackers;
@@ -208,13 +253,15 @@ FieldActionWindow::FieldActionWindow
 Initialize a field action window, creating the appropriate buttons.
 ===============
 */
-FieldActionWindow::FieldActionWindow(Interactive_Base *iabase, Player* plr, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(iabase, registry, 68, 34, "Action")
+FieldActionWindow::FieldActionWindow
+(Interactive_Base *iabase, Player* plr, UIUniqueWindowRegistry *registry) :
+	UIUniqueWindow(iabase, registry, 68, 34, "Action"),
+	m_iabase(iabase),
+	m_plr(plr),
+	m_map(iabase->get_egbase()->get_map()),
+	m_overlay_manager(*m_map->get_overlay_manager()),
+	m_workarea_preview_job_id(-1)
 {
-	// Hooks into the game classes
-   m_iabase = iabase;
-	m_plr = plr;
-	m_map = iabase->get_egbase()->get_map();
 
 	Field *f = m_map->get_field(iabase->get_fieldsel_pos());
 	m_field = FCoords(iabase->get_fieldsel_pos(), f);
@@ -227,6 +274,12 @@ FieldActionWindow::FieldActionWindow(Interactive_Base *iabase, Player* plr, UIUn
    m_text_attackers = 0;
 
 	m_fastclick = true;
+	for (unsigned int i = 1; i <= number_of_workarea_pics; ++i) {
+		char filename[30];
+		snprintf(filename, 30, "pics/workarea%icumulative.png", i);
+		workarea_cumulative_picid[i]
+			= g_gr->get_picture(PicMod_Game, filename, true);
+	}
 }
 
 /*
@@ -238,6 +291,8 @@ Free allocated resources, remove from registry.
 */
 FieldActionWindow::~FieldActionWindow()
 {
+	if (m_workarea_preview_job_id != -1)
+		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	m_iabase->set_fieldsel_freeze(false);
    if (m_text_attackers)
    {
@@ -483,6 +538,8 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 			{
 			*ppgrid = new BuildGrid(m_tabpanel, tribe, 0, 0, 5);
 			(*ppgrid)->buildclicked.set(this, &FieldActionWindow::act_build);
+			(*ppgrid)->buildmouseout.set(this, &FieldActionWindow::building_icon_mouse_out);
+			(*ppgrid)->buildmousein.set(this, &FieldActionWindow::building_icon_mouse_in);
 			}
 
 		// Add it to the grid
@@ -754,6 +811,72 @@ void FieldActionWindow::act_build(int idx)
       static_cast<Editor_Interactive*>(m_iabase)->reference_player_tribe(m_plr->get_player_number(), m_plr->get_tribe());
    }
    okdialog();
+}
+
+
+/*
+===============
+FieldActionWindow::building_icon_mouse_out
+
+The mouse pointer has moved away from the icon for the building with the index idx.
+===============
+*/
+void FieldActionWindow::building_icon_mouse_out(int idx) {
+	if (m_workarea_preview_job_id != -1) {
+		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
+		m_workarea_preview_job_id = -1;
+	}
+}
+
+
+/*
+===============
+FieldActionWindow::building_icon_mouse_in
+
+The mouse pointer has moved to the icon for the building with the index idx.
+===============
+*/
+void FieldActionWindow::building_icon_mouse_in(int idx) {
+	if (m_iabase->m_show_workarea_preview) {
+		const Workarea_Info & workarea_info =
+			m_plr->get_tribe()->get_building_descr(idx)->m_recursive_workarea_info;
+		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
+		unsigned int hole_radius = 0;
+		Workarea_Info::const_iterator it = workarea_info.begin();
+		for
+			(unsigned int i =
+				 std::min(workarea_info.size(), number_of_workarea_pics);
+			 i > 0; --i, ++it) {
+			const unsigned int radius = it->first;
+			hole_radius = radius;
+			MapHollowRegion workarea 
+				= MapHollowRegion(*m_map, m_field, radius, 0);
+			Coords c;
+			const Coords invalid(-1, -1);
+			while (workarea.next(c)) {
+				m_overlay_manager.register_overlay
+					(c, workarea_cumulative_picid[i], 0, invalid,
+					 m_workarea_preview_job_id);
+			}
+			hole_radius = radius;
+		}
+
+		//  This is debug output.
+		//  Improvement suggestion: add to sign explanation window instead.
+		for
+			(Workarea_Info::const_iterator it = workarea_info.begin();
+			 it != workarea_info.end(); ++it) {
+			const int radius = it->first;
+			log("Radius: %i\n", radius);
+			const std::set<std::string> & descriptions = it->second;
+			for
+				(std::set<std::string>::const_iterator de = descriptions.begin();
+				 de != descriptions.end(); ++de) {
+				log("        %s\n", (*de).c_str());
+			}
+		}
+
+	}
 }
 
 

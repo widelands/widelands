@@ -518,6 +518,7 @@ void WorkerProgram::parse_findobject(Worker_Descr*, WorkerAction* act, Parser* p
 
 	if (act->iparam1 <= 0)
 		throw wexception("findobject: must specify radius");
+	m_workarea_info[act->iparam1].insert(" findobject");
 }
 
 bool Worker::run_findobject(Game* g, State* state, const WorkerAction* act)
@@ -665,6 +666,7 @@ void WorkerProgram::parse_findspace(Worker_Descr*, WorkerAction* act, Parser* pa
 		throw wexception("findspace: must specify radius");
 	if (act->iparam2 < 0)
 		throw wexception("findspace: must specify size");
+	m_workarea_info[act->iparam1].insert(" findspace");
 }
 
 bool Worker::run_findspace(Game* g, State* state, const WorkerAction* act)

@@ -2907,3 +2907,90 @@ Field* MapRegion::next()
 	return fc.field;
 }
 
+/*
+==============================================================================
+
+MapHollowRegion IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+MapHollowRegion::MapHollowRegion
+
+Initialize the hollow region.
+===============
+*/
+MapHollowRegion::MapHollowRegion
+(Map & map, const Coords center,
+ const unsigned int radius, const unsigned int hole_radius) :
+	m_map(map), m_phase(Top), m_radius(radius), m_hole_radius(hole_radius),
+	m_delta_radius(radius - hole_radius),
+	m_row(0), m_rowwidth(radius + 1), m_rowpos(0)
+{
+	assert(hole_radius < radius);
+	Coords first = center;
+	for(unsigned int i = 0; i < radius; ++i) map.get_tln(first, &first);
+	m_left = first;
+	m_next = first;
+}
+
+
+/*
+===============
+MapHollowRegion::next
+
+Traverse the region by row.
+I hope this results in slightly better cache behaviour than other algorithms
+(e.g. one could also walk concentric "circles"/hexagons).
+===============
+*/
+bool MapHollowRegion::next(Coords & c) {
+	if (m_phase == None) return false;
+	c = m_next;
+	++m_rowpos;
+	if (m_rowpos < m_rowwidth) {
+		m_map.get_rn(m_next, &m_next);
+		if ((m_phase & (Upper|Lower)) and m_rowpos == m_delta_radius) {
+			//  Jump over the hole.
+			const unsigned int holewidth = m_rowwidth - 2 * m_delta_radius;
+			for (unsigned int i = 0; i < holewidth; ++i)
+				m_map.get_rn(m_next, &m_next);
+			m_rowpos += holewidth;
+		}
+	}
+	else {
+		++m_row;
+		if (m_phase == Top and m_row == m_delta_radius) m_phase = Upper;
+
+		// If we completed the widest, center line, switch into lower mode
+		// There are m_radius+1 lines in the upper "half", because the upper
+		// half includes the center line.
+		else if (m_phase == Upper and m_row > m_radius) {
+			m_row = 1;
+			m_phase = Lower;
+		}
+
+		if (m_phase & (Top|Upper)) {
+			m_map.get_bln(m_left, &m_left);
+			++m_rowwidth;
+		}
+		else {
+
+			if (m_row > m_radius) {
+				m_phase = None;
+				return true; // early out
+			}
+			else if (m_phase == Lower and m_row > m_hole_radius) m_phase = Bottom; 
+
+			m_map.get_brn(m_left, &m_left);
+			--m_rowwidth;
+		}
+
+		m_next = m_left;
+		m_rowpos = 0;
+	}
+
+	return true;
+}

@@ -41,6 +41,7 @@ class Options_Ctrl {
 			bool inputgrab;
 			bool fullscreen;
 			bool single_watchwin;
+			bool show_warea;
 		};
 		
 		Options_Ctrl(Section *s);
@@ -69,6 +70,7 @@ private:
 	UICheckbox*	m_fullscreen;
 	UICheckbox*	m_inputgrab;
 	UICheckbox* m_single_watchwin;
+	UICheckbox* m_show_workarea_preview;
 	UIListselect* m_reslist;
 
 	struct res {

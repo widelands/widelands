@@ -25,6 +25,7 @@
 #include "immovable.h"
 #include "instances.h"
 #include "ware.h"
+#include "workarea_info.h"
 
 class Flag;
 class Interactive_Player;
@@ -79,6 +80,7 @@ public:
 	virtual int get_conquers(void) const { return 0; }
 	
    inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
+	Workarea_Info m_workarea_info, m_recursive_workarea_info;
 
 protected:
 	virtual Building* create_object() = 0;

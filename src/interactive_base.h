@@ -57,6 +57,7 @@ class Interactive_Base : public UIPanel {
 
 		static int get_xres();
 		static int get_yres();
+	bool m_show_workarea_preview;
       
       // get visibility, for drawing
       virtual std::vector<bool>* get_visibility(void) = 0;

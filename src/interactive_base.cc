@@ -82,6 +82,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
    m_jobid=0;
 	m_buildroad = false;
    m_road_build_player=0;
+	 m_show_workarea_preview = s->get_bool("workareapreview", false);
 }
 
 /*

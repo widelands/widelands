@@ -909,4 +909,40 @@ private:
 	FCoords	m_next;			// next field to return
 };
 
+/*
+struct MapHollowRegion
+---------------
+Producer/Coroutine struct that returns every field for which the distance to
+the center point is greater than hole_radius and at most radius exactly once
+via next(). Note that the order in which fields are returned is not
+guarantueed.
+*/
+struct MapHollowRegion {
+	MapHollowRegion
+	(Map & map, const Coords center,
+	 const unsigned int radius, const unsigned int hole_radius);
+
+	bool next(Coords & c);
+
+private:
+	enum Phase {
+		None   = 0, // not initialized or completed
+		Top    = 1, // above the hole
+		Upper  = 2, // upper half
+		Lower  = 4, // lower half
+		Bottom = 8, // below the hole
+	};
+
+	Map & m_map;
+	Phase m_phase;
+	const unsigned int m_radius;      // radius of the area
+	const unsigned int m_hole_radius; // radius of the hole
+	const unsigned int m_delta_radius;
+	unsigned int m_row; // # of rows completed in this phase
+	unsigned int m_rowwidth; // # of fields to return per row
+	unsigned int m_rowpos; // # of fields we have returned in this row
+	Coords m_left; // left-most field of current row
+	Coords m_next; // next field to return
+};
+
 #endif // __S__MAP_H

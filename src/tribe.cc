@@ -48,8 +48,8 @@ Tribe_Descr::Tribe_Descr(const char* name)
 
 		m_default_encdata.clear();
       parse_wares(directory);
-		parse_buildings(directory);
 		parse_workers(directory);
+		parse_buildings(directory);
       parse_bobs(directory);
       parse_root_conf(directory);
 	}
@@ -216,6 +216,66 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 		if (descr)
 			m_buildings.add(descr);
 	}
+
+	//  Calculate recursive workarea info. For each building, add info to
+	//  m_recursive_workarea_info from every building that can be reached through
+	//  at least 1 sequence of enhancement operations (including the empty
+	//  sequence).
+	for (int i = 0; i < m_buildings.get_nitems(); ++i) {
+		Workarea_Info & collected_info
+			= get_building_descr(i)->m_recursive_workarea_info;
+		std::set<int> to_consider, considered;
+		to_consider.insert(i);
+		while (not to_consider.empty()) {
+			const std::set<int>::iterator consider_now_iterator
+				= to_consider.begin();
+			const int consider_now = *consider_now_iterator;
+			const Building_Descr & considered_building_descr
+				= *get_building_descr(consider_now);
+			to_consider.erase(consider_now_iterator);
+			considered.insert(consider_now);
+			{  //  Enhancements from the considered building
+				assert(considered_building_descr.get_enhances_to());
+				const std::vector<char*> & enhancements =
+					*considered_building_descr.get_enhances_to();
+				for
+					(std::vector<char*>::const_iterator it = enhancements.begin();
+					 it != enhancements.end(); ++it) {
+					const int index = m_buildings.get_index(*it);
+					log
+						("Building %s (%i) enhances to %s (%i)\n",
+						 considered_building_descr.get_descname(), consider_now,
+						 *it, index);
+					if (index < 0) {
+						log
+							("        Warning: building %s (%i) does not exist\n",
+							 *it, index);
+					}
+					else if (considered.find(index) == considered.end()) {
+						//  The building index has not been considered. Add it to
+						//  to_consider.
+						to_consider.insert(index);
+					}
+				}
+			}
+			{
+				//  Merge collected info.
+				const Workarea_Info & ci = considered_building_descr.m_workarea_info;
+				for
+					(Workarea_Info::const_iterator it = ci.begin(); it != ci.end(); ++it)
+					{
+					const int radius = it->first;
+					const std::set<std::string> & descriptions = it->second;
+					for
+						(std::set<std::string>::const_iterator di = descriptions.begin();
+						 di != descriptions.end(); ++di) {
+						collected_info[radius].insert(*di);
+					}
+				}
+			}
+		}
+	}
+
 }
 
 

@@ -52,6 +52,8 @@ public:
 	UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, uint flags, int cols);
 
 	UISignal1<int> clicked;
+	UISignal1<int> mouseout;
+	UISignal1<int> mousein;
 
 	bool is_persistant() const { return m_flags & Grid_Persistant; }
 	uint get_orientation() const { return m_flags & Grid_Orientation_Mask; }

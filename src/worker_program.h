@@ -25,6 +25,7 @@
  */
 
 #include "bob.h"
+#include "workarea_info.h"
 
 class Game;
 
@@ -67,8 +68,10 @@ public:
 	}
 
 	void parse(Worker_Descr*, Parser* parser, std::string name);
+	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
 
 private:
+	Workarea_Info m_workarea_info;
 	struct ParseMap {
 		const char*		name;
 		parse_t			function;

@@ -72,6 +72,11 @@ void MilitarySite_Descr::parse(const char* directory, Profile* prof,
 	m_num_medics=sglobal->get_safe_int("max_medics");
 	m_heal_per_second=sglobal->get_safe_int("heal_per_second");
 	m_heal_incr_per_medic=sglobal->get_safe_int("heal_increase_per_medic");
+	if (m_conquer_radius > 0) {
+		std::string description (get_descname());
+		description += " conquer";
+		m_workarea_info[m_conquer_radius].insert(description);
+	}
 }
 
 /**

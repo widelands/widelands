@@ -252,8 +252,10 @@ Turn highlight off when the mouse leaves the grid
 void UIIcon_Grid::handle_mousein(bool inside)
 {
 	if (!inside) {
-		if (m_highlight != -1)
+		if (m_highlight != -1) {
 			update_for_index(m_highlight);
+			mouseout.call(m_highlight);
+		}
 
 		m_highlight = -1;
 	}
@@ -261,7 +263,7 @@ void UIIcon_Grid::handle_mousein(bool inside)
 
 
 /**
-Update highlight under the mouse
+Update highlight under the mouse and send signals.
 */
 void UIIcon_Grid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
@@ -269,7 +271,9 @@ void UIIcon_Grid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns
 
 	if (hl != m_highlight) {
 		update_for_index(m_highlight);
+		if (m_highlight != -1) mouseout.call(m_highlight);
 		update_for_index(hl);
+		if (hl != -1) mousein.call(hl);
 
 		m_highlight = hl;
 	}

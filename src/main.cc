@@ -78,10 +78,12 @@ static void g_init(int argc, char **argv)
 		// command line
 
 		// KLUDGE!
-		// Without this, xres and yres get dropped by check_used().
+		// Without this, xres, yres and workareapreview get dropped by
+		// check_used().
 		// Profile needs support for a Syntax definition to solve this in a sensible way
 		s->get_string("xres");
 		s->get_string("yres");
+		s->get_bool("workareapreview");
 		// KLUDGE!
 
 		g_options.check_used();
