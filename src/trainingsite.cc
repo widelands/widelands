@@ -324,9 +324,34 @@ void TrainingSite::request_soldier(Game* g)
 	int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
 
 	Request* req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::SOLDIER);
-	Requeriments* r = 0;
+	Requeriments* r = new Requeriments();
 
-	req->set_requeriments (r);
+   // setting requirements to match this site
+   int totalmax = 0;
+   int totalmin = 0;
+   if( get_descr()->get_train_attack()) {
+      totalmin += get_descr()->get_min_level(atrAttack);
+      totalmax += get_descr()->get_max_level(atrAttack);
+      r->set(atrAttack, get_descr()->get_min_level(atrAttack), get_descr()->get_max_level(atrAttack));
+   }
+   if( get_descr()->get_train_defense()) {
+      totalmin += get_descr()->get_min_level(atrDefense);
+      totalmax += get_descr()->get_max_level(atrDefense);
+      r->set(atrDefense, get_descr()->get_min_level(atrDefense), get_descr()->get_max_level(atrDefense));
+   }
+   if( get_descr()->get_train_evade()) {
+      totalmin += get_descr()->get_min_level(atrEvade);
+      totalmax += get_descr()->get_max_level(atrEvade);
+      r->set(atrEvade, get_descr()->get_min_level(atrEvade), get_descr()->get_max_level(atrEvade));
+   } 
+   if( get_descr()->get_train_hp()) {
+      totalmin += get_descr()->get_min_level(atrHP);
+      totalmax += get_descr()->get_max_level(atrHP);
+      r->set(atrHP, get_descr()->get_min_level(atrHP), get_descr()->get_max_level(atrHP));
+   }
+   r->set(atrTotal, totalmin, totalmax - 1); // To make sure that fully trained soldiers are not requested
+
+   req->set_requeriments (r);
 
 	m_soldier_requests.push_back(req);
 	m_total_soldiers ++;
@@ -434,7 +459,7 @@ void TrainingSite::drop_soldier (Game *g, uint nr) {
 		// Walk the soldier home safely
 		s->reset_tasks(g);
 		s->set_location(this);
-      s->mark(true);
+      s->mark(false);
 		s->start_task_leavebuilding(g,true);
 	}
 }
