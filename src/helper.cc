@@ -21,7 +21,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include "wexception.h"
+#include "error.h"
 
 using std::cout;
 
@@ -102,6 +104,7 @@ const char *wexception::what() const throw()
 
 void myassert(int line, const char* file, const char* condt) throw(wexception)
 {
-	throw wexception("%s:%i: assertion \"%s\" failed!\n", file, line, condt);
+	critical_error("%s:%i: assertion \"%s\" failed!\n", file, line, condt);
+	throw wexception("Assertion %s:%i (%s) has been ignored", file, line, condt);
 }
 
