@@ -63,6 +63,8 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 Free allocated resources
 */
 UIMultiline_Textarea::~UIMultiline_Textarea() {
+	if (m_cache_id)
+		g_fh->delete_widget_cache(m_cache_id);
 }
 
 

@@ -128,7 +128,6 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
 	}
 	//We need to (re)create the picid for the widget
 	else {
-		uint picid;
 		int w,h;
 		if (widget_cache == Widget_Cache_Update)
 			g_gr->free_surface(*widget_cache_id);
@@ -281,6 +280,10 @@ void Font_Handler::flush_cache( void ) {
 		g_gr->free_surface (m_cache.front().surface_id);
 		m_cache.pop_front();
 	}
+}
+//Deletes widget controlled surface
+void Font_Handler::delete_widget_cache(uint widget_cache_id) { 
+	g_gr->free_surface(widget_cache_id);
 }
 
 std::string Font_Handler::word_wrap_text(TTF_Font* f, const std::string &unwrapped_text, int max_width) {
