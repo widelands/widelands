@@ -108,6 +108,13 @@ void setup_ui(void) {
 		  bmp.load(buf);
 		  Button::set_bg(&bmp, 2);
 
+		  // Checkbox class
+		  buf=g_fileloc.locate_file("checkbox.bmp", TYPE_PIC);
+		  assert(buf);
+		  bmp.load(buf);
+		  Checkbox::set_graph(&bmp);
+
+
 }
 
 /** void setup_searchpaths(void) 

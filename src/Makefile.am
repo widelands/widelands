@@ -68,7 +68,8 @@ widelands_SOURCES=main.cc \
 						worldfiletypes.h \
 						button.cc \
 						textarea.cc \
-						window.cc
+						window.cc \
+						checkbox.cc
 						
 
 

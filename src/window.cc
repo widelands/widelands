@@ -76,6 +76,9 @@ Window::Window(const uint px, const uint py, const uint wi, const uint he, const
 		  nbut=0;
 		  but=(Button**) malloc(sizeof(Button*)*MAX_BUT);
 
+		  ncheckbox=0;
+		  checkbox=(Checkbox**) malloc(sizeof(Checkbox)*MAX_CHECKBOX);
+
 		  winpic=new Pic();
 		  winpic->set_size(w, h);
 		  
@@ -104,6 +107,10 @@ Window::~Window(void) {
 		  for(i=0; i< nbut; i++) 
 					 delete but[i];
 		  free(but);
+		 
+		  for(i=0; i< ncheckbox; i++) 
+					 delete checkbox[i];
+		  free(checkbox);
 		  
 		  delete winpic;
 		  if(own_bg) delete own_bg;
@@ -272,6 +279,11 @@ void Window::redraw_win(void) {
 		  // Draw Buttons
 		  for(i=0; i< nbut; i++) 
 					 but[i]->draw();
+
+		  // Draw checkboxes
+		  for(i=0; i< ncheckbox; i++) 
+					 checkbox[i]->draw();
+
 }
 					 
 /** Button* Window::create_button(const uint px, const uint py, const uint rw, const uint rh, const uint bg)
@@ -309,6 +321,41 @@ Button* Window::create_button(const uint px, const uint py, const uint rw, const
 		  return but[nbut-1];
 }
 
+
+/** Checkbox* Window::create_checkbox(const uint px, const uint py, const bool bstate) 
+ *
+ * This funcion creates a checkbox in the window
+ *
+ * Args: px, py	position
+ * 		bstate	initial state of checkbox
+ * Returns: The created checkbox
+ */
+Checkbox* Window::create_checkbox(const uint px, const uint py, const bool bstate) {
+		  uint add=0;
+		  if(myf!=FLAT) add=get_border();
+		 
+		  int mypx=px;
+		  int mypy=py;
+		  uint myw=Checkbox::get_w();
+		  uint myh=Checkbox::get_h();
+
+
+		  if(px+add+myw > w) mypx=w-(add+myw);
+		  if(mypx<0) return NULL;
+		  if(py+add+myh > h) mypy=h-(add+myh);
+
+		  
+		  
+		  checkbox[ncheckbox]=new Checkbox(mypx, mypy, bstate, winpic, add>>1, add>>1);
+		  checkbox[ncheckbox]->draw();
+		  g_gr.register_update_rect(x+checkbox[ncheckbox]->get_xpos(), 
+								y+checkbox[ncheckbox]->get_ypos(), checkbox[ncheckbox]->get_w(), checkbox[ncheckbox]->get_h());
+		  ncheckbox++;
+
+		  assert(ncheckbox<MAX_CHECKBOX);
+
+		  return checkbox[ncheckbox-1];
+}
 
 /** void Window::draw(void)
  *
@@ -365,8 +412,9 @@ int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2) 
 		  
 					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
 		  }
-					 
+		
 
+		  // We do not care for checkboxes, since they only react on clicks
 		  // we do not care for ta, because they are non responsive to mouse movements or clicks
 		  
 		  return INPUT_HANDLED;
@@ -405,8 +453,21 @@ int Window::handle_click(const uint pbut, const bool b, const uint x, const uint
 					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
 		  }
 			 
-		  
+		  // Check for checkboxes 
+		  if(b) {
+					 for(i=0; i<ncheckbox; i++) {
+								if(checkbox[i]->get_xpos()<x && checkbox[i]->get_xpos()+checkbox[i]->get_w()>x &&
+													 checkbox[i]->get_ypos()<y && checkbox[i]->get_ypos()+checkbox[i]->get_h()>y) {
+										  // is inside!
+										  checkbox[i]->set_state(!checkbox[i]->get_state());
+								}
 
+								if(checkbox[i]->draw()) g_gr.register_update_rect(this->x+checkbox[i]->get_xpos(), 
+													 this->y+checkbox[i]->get_ypos(), checkbox[i]->get_w(), checkbox[i]->get_h());
+					 }
+		  }
+		  
+		  
 		  // we do not care for textareas, they are unresponsive to clicks
 		  
 		  return INPUT_UNHANDLED;

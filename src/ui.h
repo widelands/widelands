@@ -144,6 +144,65 @@ class Button {
 					 Pic* myp;
 };
 
+/** class Checkbox
+ *
+ * This defines a checkbox, which will be marked or unmarked, depending on their state
+ * 
+ * Depends:	g_gr
+ * 			class Graph::Pic
+ */
+#define CHECKBOX_WIDTH 20
+#define CHECKBOX_HEIGHT 20 
+class Checkbox {
+		  Checkbox( const Checkbox&);
+		  Checkbox operator=(const Checkbox&);
+
+		  friend class Window;
+
+		  public:
+					 // Returns the current state of the checkbox
+					 bool get_state(void) const { return bstate; }
+
+					 /** static void set_graph(Pic*);
+					  * 
+					  * Function to set the graphic.
+					  * 
+					  * It has to be of the following format: 
+					  *  CHECKBOX_WIDTH (uncheked) CHECKBOX_WIDTH (cheked)
+					  *  HEC
+					  *  KBO
+					  *  X
+					  *  _
+					  *  HEIGHT
+					  * It also has a total for (CHECKBOX_WIDTH*2)*CHECKBOX_HEIGHT
+					  */
+					 static void set_graph(Pic* p) { 
+								assert(p->get_w() == (CHECKBOX_WIDTH*2));
+								assert(p->get_h() == CHECKBOX_HEIGHT);
+								gr=*p; 
+					 }
+
+
+		  private:
+					 Checkbox(const uint, const uint, const bool, Pic*, const uint, const uint);
+					 ~Checkbox(void);
+					 int draw(void);
+					 void set_state(bool b) { bstate=b; }
+					 // Information funcs
+					 static inline uint get_w(void) { return CHECKBOX_WIDTH; }
+					 static inline uint get_h(void) { return CHECKBOX_HEIGHT; }
+					 inline uint get_xpos(void) { return x+xp; }
+					 inline uint get_ypos(void) { return y+yp; }
+					 
+					 
+					 bool bstate;
+					 static Pic gr;
+					 uint x, y;
+					 uint xp, yp;
+					 Pic* dp;
+};
+
+					 
 /** class Textarea 
  *
  * This defines a non responsive (to clicks) text area, where a text
@@ -166,16 +225,7 @@ class Textarea {
 								CENTER
 					 };
 					 void set_text(const char*);
-			
-		  private:
-				
-					 Textarea(const uint, const uint, const char* , const Align, const uint, const uint, Pic*, const uint,
-										  const uint);
-					 Textarea(const uint, const uint, const uint, const Align, Pic*, const uint, const uint);
-					 ~Textarea(void);
-					 
-					 void draw(void) const ;
-					 
+		
 					 /** static void set_font(uint n)
 					  * This function sets the font to use for textareas
 					  * defaults to zero
@@ -184,7 +234,16 @@ class Textarea {
 					  * Returns:	nothing
 					  */
 					 static void set_font(uint n) { nfont=n; }
-		
+	
+		  private:
+				
+					 Textarea(const uint, const uint, const char* , const Align, const uint, const uint, Pic*, const uint,
+										  const uint);
+					 Textarea(const uint, const uint, const uint, const Align, Pic*, const uint, const uint);
+					 ~Textarea(void);
+					 
+					 void draw(void) const ;
+					 		
 					 // information funcs
 					 static inline ushort get_fh(void) { return g_fh.get_fh(nfont); }
 
@@ -234,6 +293,7 @@ class Textarea {
 
 #define MAX_BUT 100  // these values don't get checked. you better don't ignore them
 #define MAX_TA   40	 
+#define MAX_CHECKBOX   10
 
 class Window {
 		  // Copy is non trivial and shouldn't be needed
@@ -251,6 +311,7 @@ class Window {
 					 Textarea* create_textarea(const uint, const uint, const uint, const Textarea::Align = Textarea::LEFTA);
 					 Textarea* create_textarea(const uint, const uint, const char* ,  Textarea::Align = Textarea::LEFTA);
 					 Button*   create_button(const uint, const uint, const uint, const uint, const uint);
+					 Checkbox*   create_checkbox(const uint, const uint, const bool b);
 					 void set_new_bg(Pic* p);
 
 					 /** static void Window::set_l_border(Pic* p) 
@@ -315,6 +376,10 @@ class Window {
 					 uint nbut;
 					 Button** but;
 
+					 // for checkboxes
+					 uint ncheckbox;
+					 Checkbox** checkbox;
+					 
 					 //closefunc dfkj;
 					 static Pic l_border;
 					 static Pic r_border;
