@@ -1,11 +1,12 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp,
+ *                       Nicolai Haehnle
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -17,83 +18,53 @@
  *
  */
 
+#include "menuecommon.h"
 #include "ui.h"
 #include "input.h"
 #include "graphic.h"
 #include "cursor.h"
+#include "fileloc.h"
+#include "criterr.h"
 
-/** void menue_butclick_func(Window*, void* b) 
+/*
+==============================================================================
+
+BaseMenu
+
+==============================================================================
+*/
+
+/** BaseMenu::BaseMenu(const char *bgpic)
  *
- * This function is used to register button clicks in a menue.
- * it expects a pt to bool in b and sets it true.
+ * Initialize a pre-game menu
  *
- * Args:	b	pointer to bool
- * Returns: nothing
+ * Args: bgpic	name of the background picture
  */
-void menue_butclick_func(Window*, void* b) { *((bool*) b)=true; }
-
-
-/** int int menue_lclick(const bool b, const uint x, const uint y, void* )
- *
- * This function is the generic left click handler for a menue
- *
- * Args:	b	button pressed or not
- * 		x, y	position of click
- * Returns: INPUT_HANDLED
- */
-int menue_lclick(const bool b, const uint x, const uint y, void* ) {
-		  if(g_ui.handle_click(1, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
-		  return INPUT_HANDLED;
+BaseMenu::BaseMenu(const char *bgpic)
+	: Panel(0, 0, 0, MENU_XRES, MENU_YRES)
+{
+	const char *name = g_fileloc.locate_file(bgpic, TYPE_PIC);
+	if (!name)
+		critical_error("%s: File not found. Check your installation.", bgpic);
+	bg.load(name);
 }
 
-/** int int menue_rclick(const bool b, const uint x, const uint y, void* )
+/** BaseMenu::start()
  *
- * This function is the generic right click handler for a menue
- *
- * Args:	b	button pressed or not
- * 		x, y	position of click
- * Returns: INPUT_HANDLED
+ * Change the resolution to menu resolution before the event loop starts
  */
-int menue_rclick(const bool b, const uint x, const uint y, void*) {
-		  if(g_ui.handle_click(2, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
-		  return INPUT_HANDLED;
+void BaseMenu::start()
+{
+	g_gr.set_mode(MENU_XRES, MENU_YRES, g_gr.get_mode());
+	g_ip.set_max_cords(MENU_XRES-g_cur.get_w(), MENU_YRES-g_cur.get_h());
 }
 
-/** int menue_mmf(const uint x, const uint y, const int xdiff, const int ydiff, const bool b1, const bool b2, void*) 
- * 
- * This is the generic mouse movement function for a menue.
+/** BaseMenu::draw(Bitmap *dst, int ofsx, int ofsy)
  *
- * Args:	x, y	position of the cursor on the screen
- * 		xdiff, ydiff	differences since last call
- * 		b1, b2	state of the two mouse buttons
- * Returns:	INPUT_HANDLED
+ * Draw the splash screen
  */
-int menue_mmf(const uint x, const uint y, const int xdiff, const int ydiff, const bool b1, const bool b2, 
-					 void* ) {
-		  g_gr.register_update_rect(x, y, g_cur.get_w(), g_cur.get_h());
-		  g_gr.register_update_rect(g_ip.get_mplx(), g_ip.get_mply(), g_cur.get_w(), g_cur.get_h());
-
-		  g_ui.handle_mm(x, y, xdiff, ydiff, b1, b2, NULL); 
-
-		  return INPUT_HANDLED;
-}
-
-/** void menue_loop(void) 
- *
- * This is the generic menue loop. It redraws and updates the screen and 
- * cares for pending input
- *
- * Args: None
- * Returns: Nothing
- */
-void menue_loop(void) {
-		  g_ip.handle_pending_input(); 
-		  if(g_gr.does_need_update()) {
-					 g_ui.draw();
-					 g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
-					 g_gr.update();
-					 //g_gr.update_quarter();
-		  }
-
+void BaseMenu::draw(Bitmap *dst, int ofsx, int ofsy)
+{
+	Graph::copy_pic(dst, &bg, 0, 0, 0, 0, bg.get_w(), bg.get_h());
 }
 

@@ -25,13 +25,13 @@
 
 /** class Game
  *
- * This game handels one game. This class is not a all portabel, 
+ * This game handels one game. This class is not a all portabel,
  * it depends on nearly everything else in widelands
  */
 
 uint Game::xresolution, Game::yresolution;
 
-/** Game::Game(void) 
+/** Game::Game(void)
  *
  * init
  */
@@ -39,7 +39,7 @@ Game::Game(void) {
 }
 
 
-/** Game::~Game(void) 
+/** Game::~Game(void)
  *
  * cleanup
  */
@@ -47,41 +47,28 @@ Game::~Game(void) {
 
 }
 
-/** void Game::run(const char* map, uint nipl) 
+/** void Game::run(const char* mapname, uint nipl)
  *
- * This runs a game with the given map. 
+ * This runs a game with the given map.
  *
- * Args:	map	file name of map to load
+ * Args:	mapname	file name of map to load
  * 		nipl	the player number of the interactive player
  * Returns: nothing
  */
 #include "ui.h"
 #include "fileloc.h"
 #include "worldfiletypes.h"
-void Game::run(const char* map, uint nipl) {	
-		  Map* c;
-		  Interactive_Player* ip;
-		
-		  // set graphics and input
-		  g_gr.set_mode(xresolution, yresolution, g_gr.get_mode());
-		  g_ip.set_max_cords( xresolution-g_cur.get_w(), yresolution-g_cur.get_h());
+void Game::run(const char* mapname, uint nipl) {
 
-		  // TEMP
-//		  Window* win=g_ui.create_window(0, 0, xresolution, yresolution, Window::FLAT);
-		  
-		  c=new Map();
-		  if(c->load_map(map)) {
+		  map = new Map();
+		  if(map->load_map(mapname)) {
 					 // TODO: make this better
 					 assert(0) ;
 		  }
 
-		  ip=new Interactive_Player(c);
+		  ipl = new Interactive_Player(this);
+		  ipl->run();
+		  delete ipl;
 
-		  while(!ip->should_end_game()) {
-					 ip->interact();
-		  }
-//		  g_ui.delete_window(win);
-
-		  delete ip;
-		  delete c;
+		  delete map;
 }

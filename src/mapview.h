@@ -22,8 +22,9 @@
 
 #include "map.h"
 #include "graphic.h"
+#include "ui.h"
 
-/* class Map_View 
+/* class Map_View
  *
  * this implements a view of a map. it's used
  * to render a valid map on the screen
@@ -31,23 +32,29 @@
  * Depends: class Map
  * 			g_gr
  */
-class Map_View
-{
-	Map_View(const Map_View&);
-	Map_View& operator=(const Map_View&);
+class Map_View : public Panel {
 public:
-	Map_View(Map*);
-	~Map_View(void);
+	Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m);
+	~Map_View();
 
 	// Function to set the viewpoint
-	void set_viewpoint(uint,  uint); 										 
+	void set_viewpoint(uint,  uint);
 	void set_rel_viewpoint(int x, int y) { set_viewpoint(vpx+x,  vpy+y); }
-	void draw(void);
+
+	// Drawing
+	void draw(Bitmap *bmp, int ofsx, int ofsx);
+
+	// Event handling
+	void handle_mouseclick(uint btn, bool down, uint x, uint y);
+	void handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns);
+
 private:
 	Map* map;
 	int vpx, vpy;
-	void draw_field(Field*);
-	void draw_polygon(Field*, Field*, Field*, Pic*);
+	bool dragging;
+
+	void draw_field(Bitmap *, Field*);
+	void draw_polygon(Bitmap *, Field*, Field*, Field*, Pic*);
 };
 
 

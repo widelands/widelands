@@ -1,16 +1,16 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -22,169 +22,79 @@
 #include "graphic.h"
 #include "IntPlayer.h"
 #include "cursor.h"
+#include "game.h"
 
 
 /** class Interactive_Player
  *
- * This is the interactive player. this one is 
+ * This is the interactive player. this one is
  * responsible to show the correct map
- * to the player and draws the user interface, 
+ * to the player and draws the user interface,
  * cares for input and so on.
  *
  * Depends: g_ip, g_ui, g_gr, g_cur
  */
 
-/** Interactive_Player::Interactive_Player(Map* m)
+/** Interactive_Player::Interactive_Player(Game *g)
  *
  * Init
  *
- * Args: m	map to use for the mapview
+ * Args: g	the game to be played
  */
-Interactive_Player::Interactive_Player(Map* m) {
-		  grab_input();
-		  
-		  bshould_exit=false;
-		  bshould_endgame=false;
+Interactive_Player::Interactive_Player(Game *g)
+	: Panel(0, 0, 0, Game::get_xres(), Game::get_yres())
+{
+	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g->get_map());
 
-		  mv= new Map_View(m);
+	// user interface buttons
+	int x = (get_w() - (4*34)) >> 1;
+	int y = get_h() - 34;
+	Button *b;
 
-		  // Creating the user interface (lots, and lots to do)
-		  mwin=g_ui.create_window((g_gr.get_xres()>>1)-(MAIN_WINDOW_WIDTH>>1), g_gr.get_yres()-MAIN_WINDOW_HEIGHT, MAIN_WINDOW_WIDTH,
-								MAIN_WINDOW_HEIGHT, Window::FLAT);
-		  Button* b=mwin->create_button(0,0,30,30,2);
-		  b->set_pic(g_fh.get_string("EXIT", 0));
-		  b->register_func(exit_click, this);
-		  
-		  b=mwin->create_button(34,0,30,30,2);
-		  b->set_pic(g_fh.get_string("WIN", 0));
-		  b->register_func(window_click, this);
+	b = new Button(this, x, y, 34, 34, 2);
+	b->clicked.set(this, &Interactive_Player::exit_game_btn);
+	b->set_pic(g_fh.get_string("EXIT", 0));
 
-		  mwin->create_button(68,0,30,30,2);
-		  mwin->create_button(102,0,30,30,2);
+	b = new Button(this, x+34, y, 34, 34, 2);
+	b = new Button(this, x+68, y, 34, 34, 2);
+	b = new Button(this, x+102, y, 34, 34, 2);
 }
 
-/** Interactive_Player::~Interactive_Player(void) 
+/** Interactive_Player::~Interactive_Player(void)
  *
  * cleanups
  */
-Interactive_Player::~Interactive_Player(void)  {
-		  g_ui.delete_all_windows();
-		  delete mv;
+Interactive_Player::~Interactive_Player(void)
+{
 }
 
-/** void Interactive_Player::draw_interact(void) 
+/** Interactive_Player::start()
  *
- * Draws the screen for the interactive user
- * and cares for events
- *
- * Args: none
- * Returns: Nothing
+ * Set the resolution
  */
-void Interactive_Player::interact(void) {
-
-		  g_ip.handle_pending_input(); 
-		  if(g_gr.does_need_update()) {
-					 mv->draw();
-					 g_ui.draw();
-					 g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
-					 g_gr.update();
-					 //g_gr.update_quarter();
-		  }
-
+void Interactive_Player::start()
+{
+	g_gr.set_mode(Game::get_xres(), Game::get_yres(), g_gr.get_mode());
+	g_ip.set_max_cords(Game::get_xres()-g_cur.get_w(), Game::get_yres()-g_cur.get_h());
 }
-		  
-/** void Interactive_Player::grab_input(void) 
+
+/** Interactive_Player::exit_game_btn(void *a)
  *
- * Grabs the current input handler for the Interactive user
- *
- * Args: none
- * Returns: Nothing
+ * Handle exit button
  */
-void Interactive_Player::grab_input(void) {
-		  g_ip.register_mmf(IP_mmf, this);
-		  g_ip.register_mcf(IP_lclick, Input::BUT1, this);
-		  g_ip.register_mcf(IP_rclick, Input::BUT2, this);
+void Interactive_Player::exit_game_btn()
+{
+	end_modal(0);
 }
 
-/** int IP_lclick(const bool b, const uint x, const uint y, void* )
+/** Interactive_Player::think()
  *
- *  This functions is responsible for the user input in a running game
- *
- * Args: b  button pressed or not
- *       x, y  position of click
- *       a 	pointer to interactive player class
- * Returns: INPUT_HANDLED
+ * Called once per frame by the UI code
  */
-int IP_lclick(const bool b, const uint x, const uint y, void* a) {
-		  if(g_ui.handle_click(1, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED;
-		  
-		  // Interactive_Player* pl= (Interactive_Player*) a;
-		  
-		  return INPUT_HANDLED;
+void Interactive_Player::think()
+{
+	// Call game logic here
+
+	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
+	g_gr.needs_fs_update();
 }
-
-/** int int IP_rclick(const bool b, const uint x, const uint y, void* )
- *  
- *  This functions is responsible for the user input in a running game
- *  
- * Args: b  button pressed or not
- *       x, y  position of click
- *       a 	pointer to interactive player class
- * Returns: INPUT_HANDLED
- */
-int IP_rclick(const bool b, const uint x, const uint y, void*) {
-		  if(g_ui.handle_click(2, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED;
-		  return INPUT_HANDLED;
-}
-
-/** int IP_mmf(const uint x, const uint y, const int xdiff, const int ydiff, const bool b1, const bool b2, void*) 
- *  
- *  This functions is responsible for the user input in a running game
- *
- * Args: x, y  position of the cursor on the screen
- *       xdiff, ydiff   differences since last call
- *       b1, b2   state of the two mouse buttons
- *       a 	pointer to interactive player class
- * Returns: INPUT_HANDLED
- */
-int IP_mmf(const uint x, const uint y, const int xdiff, const int ydiff, const bool b1, const bool b2, void* a ) {
-		  static bool drag=false;
-		  int ret=INPUT_UNHANDLED;
-
-		  if(!b2) drag=false;
-
-
-		  if(drag==false) ret=g_ui.handle_mm(x, y, xdiff, ydiff, b1, b2, NULL) ;
-
-		  if(ret == INPUT_UNHANDLED && b2) {
-					 Interactive_Player* pl= (Interactive_Player*) a;
-					 
-					 pl->mv->set_rel_viewpoint(xdiff, ydiff);
-					 g_gr.needs_fs_update(); // map scroll, invalidates all
-					 g_ip.set_mouse_pos(g_ip.get_mplx(), g_ip.get_mply());
-					 drag=1;
-		  } else {
-					 g_gr.register_update_rect(x, y, g_cur.get_w(), g_cur.get_h());
-					 g_gr.register_update_rect(g_ip.get_mplx(), g_ip.get_mply(), g_cur.get_w(), g_cur.get_h());
-		  }
-
-		  return INPUT_HANDLED;
-}
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// BUTTON FUNCS down here. Will be a hole bunch of them, i guess
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Main Window: Second leftest button is clicked.
-void window_click(Window* par, void* a) {
-	//	  Interactive_Player* pl= (Interactive_Player*) a;
-		  
-		  g_ui.create_window(40, 40, 100, 100);
-};
-// Main Window: Leftest button is clicked.
-void exit_click(Window* par, void* a) {
-		  Interactive_Player* pl= (Interactive_Player*) a;
-		  
-		  pl->bshould_endgame=true;
-};

@@ -25,114 +25,9 @@
 #include "font.h"
 #include "growablearray.h"
 
+#if 0
 // predeclaration
 class Window;
-
-/** class Button
- *
- * This defines a button.
- *
- * Depends: g_gr
- * 			class Graph::Pic
- * 			class Font_Handler
- */
-#define BUTTON_EDGE_BRIGHT_FACTOR 60
-#define MOUSE_OVER_BRIGHT_FACTOR  15
-typedef void (*BUT_FUNC)(Window*, void*);
-
-class Button {
-		  Button(const Button&);
-		  Button& operator=(const Button&);
-
-
-		  friend class Window;
-
-		  public:
-					 /** void register_func(BUT_FUNC f, void* arg)
-					  *
-					  * This funtion registers the click func for this button
-					  *
-					  * Args:	f func to use
-					  * 			a	user definde argument given to the function
-					  * returns: Nothing
-					  */
-					 void register_func(BUT_FUNC f, void* arg) {
-								func=f;
-								funca=arg;
-					 }
-					 void set_pic(Pic*);
-
-					/** static void Button::setup_ui()
-					 *
-					 * Create the highlighted background pics. Called once by setup_ui().
-					 */
-					static void setup_ui() {
-						bg0e = bg0;
-						bg0e.brighten_rect(0, 0, bg0e.get_w(), bg0e.get_h(), MOUSE_OVER_BRIGHT_FACTOR);
-
-						bg1e = bg1;
-						bg1e.brighten_rect(0, 0, bg1e.get_w(), bg1e.get_h(), MOUSE_OVER_BRIGHT_FACTOR);
-
-						bg2e = bg2;
-						bg2e.brighten_rect(0, 0, bg2e.get_w(), bg2e.get_h(), MOUSE_OVER_BRIGHT_FACTOR);
-					}
-
-		  private:
-					 Button(const uint, const uint, const uint, const uint, const uint, Pic*, const uint,
-										  const uint);
-					 ~Button();
-
-					 int draw();
-
-
-
-					 /** static uint Button::get_border(void)
-					  *
-					  * Returns the width of the borders in pixel
-					  *
-					  * Args: none
-					  * Returns: width in pixel of button borders
-					  */
-					 static uint get_border(void) { return 4; }
-
-
-
-					 /** void run(Window* par)
-					  *
-					  * This runs the registered button func (if any)
-					  *
-					  * Args:	par	Parent window of this button
-					  * Returns: Nothing
-					  */
-					 void run(Window* par) {
-								if(func)
-										  func(par, funca);
-					 }
-
-					 // some functions to set informations and to get informations
-					 inline void set_bright(const bool b) { if(benlighted!=b) { benlighted=b; needs_draw=true; }  }
-					 inline void set_pressed(const bool b) { if(bpressed!=b) { bpressed=b; needs_draw=true ; } }
-					 inline uint get_xpos(void) { return x+xp; }
-					 inline uint get_ypos(void) { return y+yp; }
-					 inline uint get_w(void) const { return w; }
-					 inline uint get_h(void) const { return h; }
-					 inline bool is_pressed(void) { return bpressed; }
-
-		  private:
-					 static AutoPic bg0, bg1, bg2;
-					 static Pic bg0e, bg1e, bg2e;
-
-					 bool needs_draw;
-					 bool bpressed;
-					 bool	benlighted;
-					 uint x, y, w, h, xp, yp;
-					 BUT_FUNC func;
-					 void* funca;
-
-					 Pic* mybg, *myebg;
-					 Pic* dp;
-					 Pic* myp;
-};
 
 /** class Checkbox
  *
@@ -169,196 +64,6 @@ class Checkbox {
 					 static AutoPic gr;
 					 uint x, y;
 					 uint xp, yp;
-					 Pic* dp;
-};
-
-/** class Listselect
- *
- * This class defines a list-select box.
- *
- * Depends: class Graph::Pic
- * 			g_fh
- * 			class Button
- */
-#define MAX_LISTENTRYS	1024	// TODO: replace this with growablearray, as soon as it is faster
-class Listselect {
-		  Listselect(const Listselect&);
-		  Listselect& operator=(const Listselect&);
-
-		  friend class Window;
-		  friend void listselect_but_up(Window*,   void*);
-		  friend void listselect_but_down(Window*, void*);
-
-		  public:
-					 // Function to set the font
-					 static void set_font(uint n) { nfont=n; }
-					 static void set_clrs(ushort b, ushort f, ushort s) { bgclr=b; frameclr=f; selclr=s; }
-					 void add_entry(const char*, const char* =0) ;
-					 inline const char* get_selection(void) {
-								if(cursel==-1) return 0;
-								return ent[cursel].value;
-					 }
-					 inline bool new_selection(void) {
-								if(!bnew_selection) return false;
-								bnew_selection=false;
-								return true;
-					 }
-
-		  private:
-					 Listselect(const uint, const uint, const uint, const uint, Pic*, const uint, const uint);
-					 ~Listselect(void);
-					 int draw(void);
-					 void move_up(uint i) { firstvis-=i; if(firstvis<0) firstvis=0; draw(); }
-					 void move_down(uint i) { firstvis+=i; if(firstvis+h > nent) firstvis=nent-h; if(firstvis<0) firstvis=0; draw(); }
-					 void select(uint);
-
-					 // Information funcs
-					 inline uint get_w(void) const { return w; }
-					 inline uint get_h(void) const { return (g_fh.get_fh(nfont)+2)*h; }
-					 inline uint get_xpos(void) { return x+xp; }
-					 inline uint get_ypos(void) { return y+yp; }
-
-
-					 // Vars
-					 struct Entry {
-								Pic* p;
-								char value[255];
-					 };
-
-					 static uint nfont;
-					 static ushort bgclr, frameclr, selclr;
-
-					 Entry ent[MAX_LISTENTRYS];
-					 uint nent;
-
-					 bool bnew_selection;
-					 int firstvis;
-					 int cursel;
-					 uint w, h;
-					 uint x, y;
-					 uint xp, yp;
-					 Pic* dp;
-
-};
-
-/** class Multiline_textarea
- *
- * This defines a non responsive (to clicks) text area, where a text
- * can easily be printed
- *
- * Depends: g_gr
- * 			class Graph::Pic
- * 			class Font_Handler
- */
-class Multiline_Textarea {
-		  Multiline_Textarea( const Multiline_Textarea&);
-		  Multiline_Textarea& operator=(const Multiline_Textarea&);
-
-		  friend class Window;
-		  friend void multiline_textarea_but_up(Window*,   void*);
-		  friend void multiline_textarea_but_down(Window*, void*);
-
-		  public:
-					 enum Align {
-								RIGHTA,
-								LEFTA,
-								CENTER
-					 };
-					 void set_text(const char*);
-
-					 /** static void set_font(uint n)
-					  * This function sets the font to use for textareas
-					  * defaults to zero
-					  *
-					  * Args: n 	font to use
-					  * Returns:	nothing
-					  */
-					 static void set_font(uint n) { nfont=n; }
-
-		  private:
-					 Multiline_Textarea(const uint, const uint, const uint, const uint, const Align, Pic*, const uint, const uint);
-					 ~Multiline_Textarea(void);
-					 void move_up(uint i) { firstvis-=i; if(firstvis<0) firstvis=0; draw(); }
-					 void move_down(uint i) { firstvis+=i; if(firstvis+h > lines) firstvis=lines-h; if(firstvis<0) firstvis=0; draw(); }
-					 void draw(void) const ;
-
-					 // some information funcs
-					 inline uint get_xpos(void) { return x+xp; }
-					 inline uint get_ypos(void) { return y+yp; }
-					 inline uint get_w(void) const { return w; }
-					 inline uint get_h(void) const { return (g_fh.get_fh(nfont)+2)*h; }
-
-
-		  private:
-					 static uint nfont;
-					 uint x, y, w, h, xp, yp;
-					 Align al;
-					 Growable_Array *ar;
-					 uint lines;
-					 int firstvis;
-
-					 Pic* bak;
-					 Pic* dp;
-};
-
-/** class Textarea
- *
- * This defines a non responsive (to clicks) text area, where a text
- * can easily be printed
- *
- * Depends: g_gr
- * 			class Graph::Pic
- * 			class Font_Handler
- */
-class Textarea {
-		  Textarea( const Textarea&);
-		  Textarea& operator=(const Textarea&);
-
-		  friend class Window;
-
-		  public:
-					 enum Align {
-								RIGHTA,
-								LEFTA,
-								CENTER
-					 };
-					 void set_text(const char*);
-
-					 /** static void set_font(uint n)
-					  * This function sets the font to use for textareas
-					  * defaults to zero
-					  *
-					  * Args: n 	font to use
-					  * Returns:	nothing
-					  */
-					 static void set_font(uint n) { nfont=n; }
-
-		  private:
-
-					 Textarea(const uint, const uint, const char* , const Align, const uint, const uint, Pic*, const uint,
-										  const uint);
-					 Textarea(const uint, const uint, const uint, const Align, Pic*, const uint, const uint);
-					 ~Textarea(void);
-
-					 void draw(void) const ;
-
-					 // information funcs
-					 static inline ushort get_fh(void) { return g_fh.get_fh(nfont); }
-
-					 // some information funcs
-					 inline uint get_xpos(void) { return x+xp; }
-					 inline uint get_ypos(void) { return y+yp; }
-					 inline uint get_w(void) const { return w; }
-					 inline uint get_h(void) const { return h; }
-
-
-		  private:
-					 static uint nfont;
-					 uint x, y, w, h, xp, yp;
-					 Align al;
-
-					 Pic* txt;
-					 Pic* bak;
 					 Pic* dp;
 };
 
@@ -478,7 +183,335 @@ class Window {
 					 static AutoPic bot;
 					 static AutoPic bg;
 };
+#endif
 
+class Panel;
+
+/** class UISignal
+ *
+ * Provides a hook for callback function.
+ * This is exactly what register_func used to provide but for Panel
+ * member functions and with better type checking.
+ *
+ * Use as:
+ *		UISignal signal;
+ *		UISignal1<int> signal1;
+ *
+ *		foo->signal.set(this, &MyClass::Handler);
+ *		signal.call();
+ *		signal1.call(some_int);
+ */
+class UISignal {
+	typedef void (Panel::*fnT)();
+	Panel *_pnl;
+	fnT _fn;
+public:
+	UISignal() { _pnl = 0; _fn = 0; }
+	template<class T>
+	void set(Panel *p, void (T::*f)()) {
+		_pnl = p;
+		_fn = static_cast<fnT>(f);
+	}
+	void call() { if (_fn) (_pnl->*_fn)(); }
+};
+
+template<class T1>
+class UISignal1 {
+	typedef void (Panel::*fnT)(T1);
+	Panel *_pnl;
+	fnT _fn;
+public:
+	UISignal1() { _pnl = 0; _fn = 0; }
+	template<class T>
+	void set(Panel *p, void (T::*f)(T1)) {
+		_pnl = p;
+		_fn = static_cast<fnT>(f);
+	}
+	void call(T1 t1) { if (_fn) (_pnl->*_fn)(t1); }
+};
+
+/** class Panel
+ *
+ * Panel is a basic rectangular UI element.
+ */
+class Panel {
+public:
+	enum {
+		pf_handle_mouse = 1,
+		pf_think
+	};
+
+	Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh);
+	virtual ~Panel();
+
+	// Modal
+	int run();
+	void end_modal(int code);
+
+	virtual void start();
+	virtual void end();
+
+	// Geometry
+	void set_size(const uint nw, const uint nh);
+	void set_pos(const int nx, const int ny);
+
+	inline int get_x() const { return _x; }
+	inline int get_y() const { return _y; }
+	inline uint get_w() const { return _w; }
+	inline uint get_h() const { return _h; }
+
+	// Drawing, visibility
+	virtual void draw(Bitmap *dst, int ofsx, int ofsy);
+	void update(int x, int y, int w, int h);
+
+	// Events
+	virtual void think();
+
+	virtual void handle_mousein(bool inside);
+	virtual void handle_mouseclick(uint btn, bool down, uint x, uint y);
+	virtual void handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns);
+
+	void set_handle_mouse(bool yes);
+	inline bool get_handle_mouse() const { return _flags & pf_handle_mouse; }
+
+	void set_think(bool yes);
+	inline bool get_think() const { return _flags & pf_think; }
+
+private:
+	void do_draw(Bitmap *dst, int ofsx, int ofsy);
+
+	Panel *get_mousein(uint x, uint y);
+	void do_mousein(bool inside);
+	void do_mouseclick(uint btn, bool down, uint x, uint y);
+	void do_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns);
+
+	static int ui_mouseclick(const bool down, const uint x, const uint y, void *a);
+	static int ui_mousemove(const uint x, const uint y, const int xdiff, const int ydiff,
+	                        const bool lbtn, const bool rbtn, void *a);
+
+	static Panel *_modal;
+
+	Panel *_parent;
+	Panel *_next, *_prev;
+	Panel *_fchild, *_lchild; // first, last child
+	Panel *_mousein; // child panel the mouse is in
+
+	uint _flags;
+
+	int _x, _y;
+	uint _w, _h;
+
+	bool _running;
+	int _retcode;
+};
+
+/** class Button : public Panel
+ *
+ * This defines a button.
+ *
+ * Depends: g_gr
+ * 			class Graph::Pic
+ * 			class Font_Handler
+ */
+#define BUTTON_EDGE_BRIGHT_FACTOR 60
+#define MOUSE_OVER_BRIGHT_FACTOR  15
+
+class Button : public Panel {
+	friend void setup_ui(void);
+	static void setup_ui();
+
+public:
+	Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id = 0);
+	~Button();
+
+	UISignal clicked;
+	UISignal1<int> clickedid;
+
+	void set_pic(Pic *pic);
+	void set_enabled(bool on);
+
+	// Drawing and event handlers
+	void draw(Bitmap *dst, int ofsx, int ofsy);
+
+	void handle_mousein(bool inside);
+	void handle_mouseclick(uint btn, bool down, uint x, uint y);
+
+private:
+	static AutoPic bg0, bg1, bg2; // background pictures
+	static Pic bg0e, bg1e, bg2e;
+
+	Pic *_mybg, *_mybge; // one of the static bgX
+	Pic *_mypic; // the text etc.. on the button
+
+	int _id;
+	bool _highlighted;
+	bool _pressed;
+	bool _enabled;
+};
+
+/** class Textarea
+ *
+ * This defines a non responsive (to clicks) text area, where a text
+ * can easily be printed
+ *
+ * Depends: g_gr
+ * 			class Graph::Pic
+ * 			class Font_Handler
+ */
+class Textarea : public Panel {
+public:
+	enum Align {
+		H_LEFT = 0,
+		H_RIGHT = 1,
+		H_CENTER = 2,
+
+		V_TOP = 0,
+		V_BOTTOM = 4,
+		V_CENTER = 8,
+
+		CENTERRIGHT = H_RIGHT|V_CENTER,
+		BOTTOMRIGHT = H_RIGHT|V_BOTTOM,
+		CENTER = H_CENTER|V_CENTER,
+		BOTTOMCENTER = H_CENTER|V_BOTTOM,
+	};
+
+	Textarea(Panel *parent, int x, int y, const char *text, Align align = H_LEFT, uint font = 0);
+	~Textarea();
+
+	void set_text(const char *text);
+	void set_align(Align align);
+
+	inline int get_fh() const { return g_fh.get_fh(_font); }
+
+	// Drawing and event handlers
+	void draw(Bitmap *dst, int ofsx, int ofsy);
+
+private:
+	void collapse();
+	void expand();
+
+	uint _font;
+	Pic *_textpic; // picture with prerendered text
+	Align _align;
+};
+
+/** class Multiline_textarea
+ *
+ * This defines a non responsive (to clicks) text area, where a text
+ * can easily be printed
+ *
+ * Depends: g_gr
+ * 			class Graph::Pic
+ * 			class Font_Handler
+ */
+class Multiline_Textarea : public Panel {
+public:
+	enum Align {
+		H_LEFT = 0,
+		H_RIGHT = 1,
+		H_CENTER = 2
+	};
+
+	Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h, const char *text,
+	                   Align align = H_LEFT, uint font = 0);
+	~Multiline_Textarea();
+
+	void clear();
+	void set_text(const char *text);
+
+	void move_up(int i);
+	void move_down(int i);
+
+	inline uint get_eff_w() { return get_w(); }
+
+	// Drawing and event handlers
+	void draw(Bitmap *bmp, int ofsx, int ofsy);
+
+private:
+	uint _font;
+	Align _align;
+	Growable_Array _lines;
+	uint _firstvis;
+};
+
+/** class Listselect
+ *
+ * This class defines a list-select box.
+ *
+ * Depends: class Graph::Pic
+ * 			g_fh
+ * 			class Button
+ */
+typedef void (Panel::*LISTSELECT_FUNC)(int id, int arg);
+
+class Listselect : public Panel {
+	friend void setup_ui(void);
+	static ushort dflt_bgcolor, dflt_framecolor, dflt_selcolor;
+	static void setup_ui();
+
+public:
+	enum Align {
+		H_LEFT = 0,
+		H_RIGHT = 1,
+		H_CENTER = 2
+	};
+
+	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = H_LEFT, uint font = 0);
+	~Listselect();
+	static Listselect *create_scrolling(Panel *parent, int x, int y, uint w, uint h,
+	                                    Align align = H_LEFT, uint font = 0);
+
+	UISignal1<int> selected;
+
+	void clear();
+	void add_entry(const char *name, const char *value = 0);
+
+	void move_up(int i);
+	void move_down(int i);
+
+	void set_colors(ushort bg, ushort frame, ushort sel);
+
+	void select(int i);
+	inline const char *get_selection() {
+		if (_selection < 0) return 0;
+		return ((Entry *)_entries.element_at(_selection))->str;
+	}
+
+	inline uint get_eff_w() { return get_w(); }
+
+	// Drawing and event handling
+	void draw(Bitmap *dst, int ofsx, int ofsy);
+	void handle_mouseclick(uint btn, bool down, uint x, uint y);
+
+private:
+	struct Entry {
+		Pic *pic;
+		char str[1]; // variable size
+	};
+
+	ushort _bgcolor, _framecolor, _selcolor;
+	uint _font;
+	Align _align;
+	Growable_Array _entries;
+	uint _firstvis;
+	int _selection;
+};
+
+/** class Scrollbar
+ *
+ * This class provides a scrollbar (single-step only atm)
+ */
+class Scrollbar : public Panel {
+public:
+	Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz);
+
+	UISignal1<int> up; // left for horizontal scrollbars
+	UISignal1<int> down; // right for vertical scrollbars
+
+private:
+	void btn_up() { up.call(1); }
+	void btn_down() { down.call(1); }
+};
 
 /** class User_Interface
  *
@@ -493,33 +526,13 @@ class Window {
  * 			global Object: g_gr
  */
 class User_Interface : public Singleton<User_Interface> {
-		  User_Interface(const User_Interface&);
-		  User_Interface& operator=(const User_Interface&);
+	User_Interface(const User_Interface&);
+	User_Interface& operator=(const User_Interface&);
 
-		  public:
-		  User_Interface(void);
-		  ~User_Interface(void);
-
-		  Window* create_window(const uint, const uint, const uint, const uint, const Window::Flags=Window::DEFAULT);
-		  void delete_all_windows(void);
-		  void delete_window(Window*);
-		  void move_window(Window*, const uint, const uint);
-		  void draw(void);
-		  int handle_mm(const uint, const uint, const int, const int, const bool, const bool, void*);
-		  int handle_click(const uint, const bool, const uint, const uint, void* );
-
-		  private:
-		  struct win_p {
-					 win_p* next;
-					 win_p* prev;
-					 Window* w;
-		  };
-		  Window* dragwin;
-
-		  win_p* first;
-		  win_p* last;
+public:
+	User_Interface(void);
+	~User_Interface(void);
 };
-
 
 #define g_ui	User_Interface::get_singleton()
 

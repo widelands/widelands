@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
+ * Copyright (C) 2002 by Holger Rapp
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,13 +26,14 @@
 #define MENU_XRES	640
 #define MENU_YRES	480
 
-int menue_lclick(const bool, const uint, const uint, void* );
-int menue_rclick(const bool, const uint, const uint, void* );
-int menue_mmf(const uint, const uint, const int, const int, const bool, const bool, void*);
-void menue_loop(void);
-void menue_butclick_func(Window*, void*);
+class BaseMenu : public Panel {
+	Pic bg;
+public:
+	BaseMenu(const char *bgpic);
 
-
+	virtual void start();
+	virtual void draw(Bitmap *dst, int ofsx, int ofsy);
+};
 
 
 #endif // __S__MENUECOMMON_H

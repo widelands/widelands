@@ -27,34 +27,24 @@
 #define MAIN_WINDOW_WIDTH 136
 #define MAIN_WINDOW_HEIGHT 34
 
-class Interactive_Player {
+class Game;
+
+class Interactive_Player : public Panel {
 		 Interactive_Player(const Interactive_Player&);
 		 Interactive_Player operator=(const Interactive_Player&);
 
 		  public:
-					 Interactive_Player(Map*);
+					 Interactive_Player(Game *g);
 					 ~Interactive_Player(void);
-					 void interact(void);
-					 void grab_input(void);
 
-					 // some inlines
-					 inline bool should_end_game(void) { return bshould_endgame; }
-					 inline bool should_exit(void) { return bshould_exit; }
+					 void start();
+					 void exit_game_btn();
 
-		  
-		  friend int IP_mmf(const uint, const uint, const int, const int, const bool, const bool, void*);
-		  friend int IP_lclick(const bool, const uint, const uint, void* );
-		  friend int IP_rclick(const bool, const uint, const uint, void* );
-		 
-		  // Button funcs, all are our friends
-		  friend void exit_click(Window*, void*);
-		  friend void window_click(Window*, void*);
+					 void think();
 
 		  private:
-					 Map_View* mv;
-					 bool bshould_endgame;
-					 bool bshould_exit;
-					 Window* mwin;
+					 Game *game;
+					 Map_View* main_mapview;
 };
 
 

@@ -117,25 +117,25 @@ int Font_Handler::load_font(const char* str, ushort fn) {
 		  free(pix);
 		  return RET_OK;
 }
-		 
+
 /** Pic* Font_Handler::get_string(const uchar* str, const ushort f);
  *
  * This function constructs a Picture containing the given text and
  * returns it. It just makes ONE line. Not a whole paragraph
- * 
+ *
  * Args:	str	String to construct
  * 		f		Font to use
  * Returns:	Pointer to picture, caller must free it later on
  */
 Pic* Font_Handler::get_string(const char* str, const ushort f) {
 		  assert(f<MAX_FONTS);
-		  
+
 		  char* buf = new char[strlen(str)+1];
 		  uchar c;
 		  uint n=0;
 		  uint x=0;
 		  uint w=0;
-		  
+
 		  for(uint i=0; i<strlen(str); i++) {
 					 c=(uchar) str[i];
 					 if(c=='\t' || c=='\r' || c=='\n' || c=='\b' || c=='\a') continue;
@@ -148,7 +148,7 @@ Pic* Font_Handler::get_string(const char* str, const ushort f) {
 					 w+= fonts[f].p[c-32].get_w();
 		  }
 		  buf[n]='\0';
-		  
+
 		  // Now buf contains only valid chars
 		  Pic* retval=new Pic;
 		  retval->set_clrkey(fonts[f].p[0].get_clrkey());

@@ -35,7 +35,7 @@
 #include <sys/types.h>
 #endif
 
-/** void setup_fonthandler(void) 
+/** void setup_fonthandler(void)
  *
  * Sets up the global font handler for the needs in widelands
  *
@@ -81,11 +81,10 @@ void setup_ui(void) {
 		  Button::setup_ui();
 
 		  // list select class
-		  Listselect::set_font(0);
-		  Listselect::set_clrs(Graph::pack_rgb(67, 32, 10), Graph::pack_rgb(0, 0, 0), Graph::pack_rgb(248, 201, 135));
+		  Listselect::setup_ui();
 }
 
-/** void setup_searchpaths(void) 
+/** void setup_searchpaths(void)
  *
  * Sets the filelocators default searchpaths, this is OS specific
  *

@@ -1,6 +1,7 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp,
+ *                       Nicolai Haehnle
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -10,7 +11,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -29,160 +30,209 @@
  * 			g_fh
  * 			class Button
  */
-uint Listselect::nfont;
-ushort Listselect::frameclr, Listselect::bgclr, Listselect::selclr;
+ushort Listselect::dflt_bgcolor, Listselect::dflt_framecolor, Listselect::dflt_selcolor;
 
-/** Listselect::Listselect(uint mx, uint my, uint mw, uint mh, Pic* mdp, uint addx, uint addy) 
+/** Listselect::setup_ui() [static]
  *
- * This function makes a listselect 
- *
- * Args:	mx	posx in window
- * 		my	posy in window
- * 		mw	width	(pixels)
- * 		mh	height (pixels, but this will be cut to a complete row count) 
- * 		mdp	picture to draw in
- * 		addx	offset from the edge (for window borders)
- * 		addy	offset from the edge (for window borders)
- * Returns: Nothing
+ * Initialize global variables; called once from setup_ui
  */
-Listselect::Listselect(uint mx, uint my, uint mw, uint mh, Pic* mdp, uint addx, uint addy)  {
-		  x=mx; 
-		  y=my;
-		  w=mw;
-		  h=(mh/(g_fh.get_fh(nfont)+2)); 
-		  dp=mdp;
-		  xp=addx;
-		  yp=addy;
-
-		  nent=0;
-		  firstvis=0;
-		  cursel=-1;
-}
-
-/** Listselect::~Listselect(void) 
- *
- * Cleanups
- *
- * Args: None
- * Returns: Nothing
- */
-Listselect::~Listselect(void) {
-		  for(uint i=0; i<nent; i++) {
-					 delete ent[i].p;
-		  }
-		 
-		  return;
-}
-
-/** int Listselect::draw(void) 
- *
- * Draws the listselect box
- *
- * Args: none
- * returns: 0 when nothing was drawed, 1 elseways
- */
-int Listselect::draw(void)
+void Listselect::setup_ui()
 {
-	// draw the frame
-	dp->draw_rect(x+xp, y+yp, w, this->get_h(), frameclr);
+	dflt_bgcolor = Graph::pack_rgb(67, 32, 10);
+	dflt_framecolor = Graph::pack_rgb(0, 0, 0);
+	dflt_selcolor = Graph::pack_rgb(248, 201, 135);
+}
 
-	// fill with background color
-	dp->fill_rect(x+xp+1, y+yp+1, w-2, this->get_h()-2, bgclr);
+/** Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = 0, uint font = 0)
+ *
+ * Initialize a list select panel
+ *
+ * Args: parent	parent panel
+ *       x		coordinates of the Listselect
+ *       y
+ *       w		dimensions, in pixels, of the Listselect
+ *       h
+ *       align	alignment of text inside the Listselect
+ *       font	font to be used for listselect
+ */
+Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align, uint font)
+	: Panel(parent, x, y, w-24, h), _entries(5, 5)
+{
+	set_think(false);
+
+	_bgcolor = dflt_bgcolor;
+	_framecolor = dflt_framecolor;
+	_selcolor = dflt_selcolor;
+	_font = font;
+	_align = align;
+
+	_firstvis = 0;
+	_selection = -1;
+
+	Scrollbar *sb = new Scrollbar(parent, x+get_w(), y, 24, h, false);
+	sb->up.set(this, &Listselect::move_up);
+	sb->down.set(this, &Listselect::move_down);
+}
+
+/** Listselect::~Listselect()
+ *
+ * Free allocated resources
+ */
+Listselect::~Listselect()
+{
+	clear();
+}
+
+/** Listselect::clear()
+ *
+ * Remove all entries from the listselect
+ */
+void Listselect::clear()
+{
+	for(int i = 0; i < _entries.elements(); i++) {
+		Entry *e = (Entry *)_entries.element_at(i);
+		delete e->pic;
+		free(e);
+	}
+	_entries.flush(1);
+
+	_firstvis = 0;
+	_selection = -1;
+}
+
+/** Listselect::add_entry(const char *name, const char *value = 0)
+ *
+ * Add a new entry to the listselect.
+ *
+ * Args: name	name that will be displayed
+ *       value	string returned by get_select() (can be 0, in which case name is used)
+ */
+void Listselect::add_entry(const char *name, const char *value = 0)
+{
+	if (!value)
+		value = name;
+
+	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(value));
+	e->pic = g_fh.get_string(name, _font);
+	strcpy(e->str, value);
+	_entries.add(e);
+
+	update(0, 0, get_eff_w(), get_h());
+}
+
+/** Listselect::move_up(int i)
+ *
+ * Scroll the listselect up
+ *
+ * Args: i	number of lines to scroll
+ */
+void Listselect::move_up(int i)
+{
+	if (i < 0)
+		return;
+	if (i > (int)_firstvis)
+		i = _firstvis;
+	if (!i)
+		return;
+
+	_firstvis -= i;
+	update(0, 0, get_eff_w(), get_h());
+}
+
+/** Listselect::move_down(int i)
+ *
+ * Scroll the listselect down
+ *
+ * Args: i	number of lines to scroll
+ */
+void Listselect::move_down(int i)
+{
+	if (i < 0)
+		return;
+	if ((int)(_firstvis+i) >= _entries.elements())
+		i = _entries.elements()-_firstvis-1;
+	if (!i)
+		return;
+
+	_firstvis += i;
+	update(0, 0, get_eff_w(), get_h());
+}
+
+/** Listselect::set_colors(ushort bg, ushort frame, ushort sel)
+ *
+ * Overwrite the default colors used by the listselect
+ *
+ * Args: bg		background color
+ *       frame	frame color
+ *       sel	selection color
+ */
+void Listselect::set_colors(ushort bg, ushort frame, ushort sel)
+{
+	_bgcolor = bg;
+	_framecolor = frame;
+	_selcolor = sel;
+	update(0, 0, get_eff_w(), get_h());
+}
+
+/** Listselect::select(int i)
+ *
+ * Change the currently selected entry
+ *
+ * Args: i	the entry to select
+ */
+void Listselect::select(int i)
+{
+	if (_selection == i)
+		return;
+
+	_selection = i;
+
+	selected.call(_selection);
+	update(0, 0, get_eff_w(), get_h());
+}
+
+/** Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
+ *
+ * Redraw the listselect box
+ */
+void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
+{
+	// draw frame and fill with background color
+	dst->draw_rect(ofsx, ofsy, get_eff_w(), get_h(), _framecolor);
+	dst->fill_rect(ofsx+1, ofsy+1, get_eff_w()-2, get_h()-2, _bgcolor);
 
 	// draw text lines
-	for(uint i=0; (i<h) && (i+firstvis < nent); i++)
-	{
-		Pic* p = ent[i+firstvis].p;
-		if(i+firstvis == (uint)cursel)
-			// draw selection box
-			dp->fill_rect(x+xp+1, y+yp+i*(g_fh.get_fh(nfont)+2), w-2, p->get_h(), selclr);
-		Graph::copy_pic(dp, p, x+xp, y+yp+(i*(g_fh.get_fh(nfont)+2)), 0, 0, 
-			p->get_w() > w ? w : p->get_w(), p->get_h());
+	uint y = 1;
+	for(int i = _firstvis; i < _entries.elements(); i++) {
+		if (y >= get_h())
+			return;
+
+		Entry *e = (Entry *)_entries.element_at(i);
+
+		if (i == _selection)
+			dst->fill_rect(ofsx+1, ofsy+y, get_eff_w()-2, e->pic->get_h(), _selcolor);
+
+		int x = 1;
+		if (_align == H_RIGHT)
+			x = get_eff_w()-e->pic->get_w()-2;
+		else if (_align == H_CENTER)
+			x = (get_eff_w()-e->pic->get_w()-2) >> 1;
+		Graph::copy_pic(dst, e->pic, x+ofsx, y+ofsx, 0, 0, e->pic->get_w(), e->pic->get_h());
+		y += e->pic->get_h() + 2;
 	}
-	return 1;
 }
 
-
-/** void Listselect::add_entry(const char* name, const char* value =0) 
+/** Listselect::handle_mouseclick(uint btn, bool down, uint x, uint y)
  *
- * This adds a new entry to the list
- *
- * Args: 	name 	this is the line that will appear in the box
- * 			value	this is the value that will be returned by get_selection
- * 			 (if this is zero, name will used as value)
- * Returns: Nothing
+ * Handle mouse clicks: select the appropriate entry
  */
-void Listselect::add_entry(const char* name, const char* value) {
-		  if(!name) return;
+void Listselect::handle_mouseclick(uint btn, bool down, uint x, uint y)
+{
+	if (btn || !down) // only left-click
+		return;
 
-		  const char* realval=value;
-		  
-		  if(!value) realval=name;
-		 
-		  
-		  strncpy(ent[nent].value, realval, 255);
-		  ent[nent].p= g_fh.get_string(name, nfont);
-
-		  ++nent;
-
-		  draw();
-
-		  assert(nent < MAX_LISTENTRYS);
+	y = y / (g_fh.get_fh(_font)+2);
+	y += _firstvis;
+	if ((int)y < _entries.elements())
+		select(y);
 }
-
-/** void Listselect::select(uint y)
- *
- * a click in the box has happened.
- *
- * Args: y 	ypos of click in box
- * Returns: Nothing
- */
-void Listselect::select(uint y) {
-		  uint sel;
-
-		  sel=(y/(g_fh.get_fh(nfont)+2)+firstvis); 
-		  
-		  if(sel>=nent) sel=nent-1;
-
-		  cursel=sel;
-		  bnew_selection=true;
-}
-
-/** void listselect_but_up(void *a) 
- *
- * This is the click function for the up button
- *
- * Args: a == pt to Listselect
- * Returns: Nothing
- */
-void listselect_but_up(Window* par, void* a) {
-		  Listselect* sel=(Listselect*) a;
-
-		  sel->move_up(1);
-		  g_gr.register_update_rect(par->get_xpos()+sel->get_xpos(),
-								par->get_ypos()+sel->get_ypos(),
-								sel->get_w(),
-								sel->get_h());
-
-}
-
-/** void listselect_but_down(void *a) 
- *
- * This is the click function for the down button
- *
- * Args: par parent window
- * 		a == pt to Listselect
- * Returns: Nothing
- */
-void listselect_but_down(Window* par, void* a) {
-		  Listselect* sel=(Listselect*) a;
-
-		  sel->move_down(1);
-		  g_gr.register_update_rect(par->get_xpos()+sel->get_xpos(),
-								par->get_ypos()+sel->get_ypos(),
-								sel->get_w(),
-								sel->get_h());
-
-}
-					 
-		  

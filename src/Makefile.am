@@ -4,9 +4,9 @@ EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -pg -f
 CFLAGS= $(EXTRA_FLAGS)
 CXXFLAGS= $(EXTRA_FLAGS)
 
-# EXTRA_DIST=worlds pics 
+# EXTRA_DIST=worlds pics
 
-bin_PROGRAMS=widelands 
+bin_PROGRAMS=widelands
 widelands_LDADD = @SDL_LIBS@
 widelands_SOURCES=main.cc \
 						os.h \
@@ -72,6 +72,7 @@ widelands_SOURCES=main.cc \
 						window.cc \
 						checkbox.cc \
 						listselect.cc \
+						scrollbar.cc \
 						mapselectmenue.h \
 						mapselectmenue.cc \
 						s2map.h \
@@ -81,7 +82,7 @@ widelands_SOURCES=main.cc \
 						myassert.h \
 						md5.cc \
 						md5.h
-						
+
 
 
 #  uncomment the following if widelands requires the math library

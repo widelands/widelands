@@ -39,7 +39,7 @@ class Player {
 
 /** class Game
  *
- * This game handels one game. This class is not a all portabel, 
+ * This game handels one game. This class is not a all portabel,
  * it depends on nearly everything else in widelands
  */
 class Game {
@@ -49,16 +49,21 @@ class Game {
 		  public:
 					 Game(void);
 					 ~Game(void);
-					
+
 					 void run(const char*, const uint /* other flags ? */);
 
 					 // Set the in-game resolution
-					 static void set_resolution(uint x, uint y) { xresolution=x; yresolution=y; } 
-					 
+					 static void set_resolution(uint x, uint y) { xresolution=x; yresolution=y; }
+					 static inline uint get_xres() { return xresolution; }
+					 static inline uint get_yres() { return yresolution; }
+
+					 inline Map *get_map() { return map; }
+
 		  private:
+					 Map *map;
 					 static uint xresolution, yresolution;
 					 Player** pls;
-					 Interactive_Player* ipl; 
+					 Interactive_Player* ipl;
 };
 
 

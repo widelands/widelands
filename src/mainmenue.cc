@@ -1,16 +1,16 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -36,119 +36,94 @@
 
 #include <string.h>
 
+/*
+==============================================================================
+
+MainMenu
+
+==============================================================================
+*/
+
+enum {
+	mm_singleplayer,
+	//mm_multiplayer, // BIG TODO
+	//mm_options,
+	//mm_readme,
+	//mm_about,
+	mm_exit
+};
+
+class MainMenu : public BaseMenu {
+public:
+	MainMenu();
+
+	void not_supported();
+};
+
+MainMenu::MainMenu()
+	: BaseMenu("splash.bmp")
+{
+	// Buttons
+	Button *b;
+
+	b = new Button(this, 60, 150, 174, 24, 1, mm_singleplayer);
+	b->clickedid.set(this, &MainMenu::end_modal);
+	b->set_pic(g_fh.get_string("Single Player", 0));
+
+	b = new Button(this, 60, 190, 174, 24, 1);
+	b->clicked.set(this, &MainMenu::not_supported);
+	b->set_pic(g_fh.get_string("Multi Player", 0));
+
+	b = new Button(this, 60, 230, 174, 24, 1);
+	b->clicked.set(this, &MainMenu::not_supported);
+	b->set_pic(g_fh.get_string("Options", 0));
+
+	b = new Button(this, 60, 270, 174, 24, 1);
+	b->clicked.set(this, &MainMenu::not_supported);
+	b->set_pic(g_fh.get_string("View Readme", 0));
+
+	b = new Button(this, 60, 310, 174, 24, 1);
+	b->clicked.set(this, &MainMenu::not_supported);
+	b->set_pic(g_fh.get_string("About", 0));
+
+
+	b = new Button(this, 60, 370, 174, 24, 0, mm_exit);
+	b->clickedid.set(this, &MainMenu::end_modal);
+	b->set_pic(g_fh.get_string("Exit Game", 0));
+
+	// Text
+	new Textarea(this, MENU_XRES, MENU_YRES, "Version " VERSION, Textarea::BOTTOMRIGHT);
+	new Textarea(this, 0, MENU_YRES, "(C) 2002 by the Widelands Development Team", Textarea::V_BOTTOM);
+}
+
+void MainMenu::not_supported()
+{
+	critical_error("This is not yet supported. You can savly click on continue.");
+}
+
 /** void main_menue(void);
- * 
+ *
  * This functions runs the main menu. There, you can select
  * between different playmodes, exit and so on.
  *
- * Args: None
- * Returns: Nothing
+ * This is mainly a wrapper of MainMenu creation, running and
+ * deletion, so MainMenu doesn't have to be in a header file.
  */
-void main_menue(void) {
-		  bool* doexit = new bool(false);
-		  bool* dosingle_player = new bool(false);
-		  bool* domulti_player = new bool(false);
-		  bool* dooptions = new bool(false);
-		  bool* doreadme = new bool(false);
-		  bool* doabout = new bool(false);
-		  
-		  // Register the resposible mouse funtions
-		  g_ip.register_mcf(menue_lclick, Input::BUT1);
-		  g_ip.register_mcf(menue_rclick, Input::BUT2);
-	     g_ip.register_mmf(menue_mmf);
+void main_menue(void)
+{
+	for(;;) {
+		MainMenu *mm = new MainMenu;
+		int code = mm->run();
+		delete mm;
 
-		  // Set to MENU_XRESxMENU_YRES so that we know on what we are and the pictures
-		  // look good
-		  g_gr.set_mode(MENU_XRES, MENU_YRES, g_gr.get_mode());
-		  g_ip.set_max_cords(MENU_XRES-g_cur.get_w(), MENU_YRES-g_cur.get_h());
+		switch(code) {
+		case mm_singleplayer:
+			single_player_menue();
+			break;
 
-		  // make the background window, fill it with the splash screen
-		  Window* win=g_ui.create_window(0, 0, g_gr.get_xres(), g_gr.get_yres(), Window::FLAT);
-		  Pic* p = new Pic;
-		  const char* str=g_fileloc.locate_file("splash.bmp", TYPE_PIC);
-		  if(!str) {
-					 critical_error("splash.bmp:  File not found. Check your installation.");
-		  }
-		  p->load(str);
-		  
-		  win->set_new_bg(p);		 
-		  // Create the different areas
-		  char buf[100];
-		  strcpy(buf, "Version ");
-		  strcat(buf, VERSION);
-		  win->create_textarea(MENU_XRES, MENU_YRES, buf, Textarea::RIGHTA);
-		  win->create_textarea(0, 480, "(C) 2002 by the Widelands Development Team"); 
-
-		  // Create the buttons
-		  Button* b;
-		  b=win->create_button(60, 150, 170, 20, 1);
-		  b->register_func(menue_butclick_func, dosingle_player);
-		  b->set_pic(g_fh.get_string("Single Player", 0));
-		  
-		  b=win->create_button(60, 190, 170, 20, 1);
-		  b->register_func(menue_butclick_func, domulti_player);
-		  b->set_pic(g_fh.get_string("Multi Player", 0));
-		  
-		  b=win->create_button(60, 230, 170, 20, 1);
-		  b->register_func(menue_butclick_func, dooptions);
-		  b->set_pic(g_fh.get_string("Options", 0));
-		 
-		  b=win->create_button(60, 270, 170, 20, 1);
-		  b->register_func(menue_butclick_func, doreadme);
-		  b->set_pic(g_fh.get_string("View Readme", 0));
-		  
-		  b=win->create_button(60, 310, 170, 20, 1);
-		  b->register_func(menue_butclick_func, doabout);
-		  b->set_pic(g_fh.get_string("About", 0));
-		  
-
-		  
-		  b=win->create_button(60, 370, 170, 20, 0);
-		  b->register_func(menue_butclick_func, doexit);
-		  b->set_pic(g_fh.get_string("Exit Game", 0));
-		  
-	
-		  while(!g_ip.should_die() && !*doexit && !*dosingle_player &&  
-								!*domulti_player && !*dooptions &&  !*doreadme && !*doabout) {
-					 menue_loop();
-		  }
-		  
-
-		  
-		  if(*doexit) {
-					 g_ui.delete_all_windows();
-					 return;
-		  }
-		  else if(*dosingle_player) { 
-					 g_ui.delete_all_windows();
-					 single_player_menue();
-		  }
-		  else if(*domulti_player) {
-					 g_ui.delete_all_windows();
-					 // TODO
-					 critical_error("This is not yet supported. You can savly click on continue.");
-					 main_menue();
-		  }
-		  else if(*dooptions) {
-					 g_ui.delete_all_windows();
-					 // TODO
-					 critical_error("This is not yet supported. You can savly click on continue.");
-					 main_menue();
-		  }
-		  else if(*doreadme) {
-					 g_ui.delete_all_windows();
-					 // TODO
-					 critical_error("This is not yet supported. You can savly click on continue.");
-					 main_menue();
-		  }
-		  else if(*doabout) {
-					 g_ui.delete_all_windows();
-					 // TODO
-					 critical_error("This is not yet supported. You can savly click on continue.");
-					 main_menue();
-		  }
-
-		  // everything done.
-		  // we return, this will end the game
-		  return;
+		default:
+		case mm_exit:
+			return;
+		}
+	}
 }

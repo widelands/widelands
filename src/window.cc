@@ -20,6 +20,7 @@
 #include "ui.h"
 #include "input.h"
 
+#if 0
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -114,7 +115,7 @@ Window::~Window(void) {
 					 delete but[i];
 		  free(but);
 
-		  for(i=0; i< ncheckbox; i++) 
+		  for(i=0; i< ncheckbox; i++)
 					 delete checkbox[i];
 		  free(checkbox);
 		  
@@ -170,13 +171,13 @@ Listselect* Window::create_listselect(const uint px, const uint py, const uint w
 		  listselect[nlistselect]=new Listselect(px, py, myw-20-Button::get_border(), myh, winpic, add, add);
 		  listselect[nlistselect]->draw();
 
-		  g_gr.register_update_rect(x+listselect[nlistselect]->get_xpos(), y+listselect[nlistselect]->get_ypos(), 
+		  g_gr.register_update_rect(x+listselect[nlistselect]->get_xpos(), y+listselect[nlistselect]->get_ypos(),
 								listselect[nlistselect]->get_w(), listselect[nlistselect]->get_h());
 
 		  assert(nlistselect<MAX_TA);
 
 		  // set the move button
-		  Button* b=create_button(listselect[nlistselect]->get_xpos()+myw-20-Button::get_border(), 
+		  Button* b=create_button(listselect[nlistselect]->get_xpos()+myw-20-Button::get_border(),
 								listselect[nlistselect]->get_ypos(),
 								20, 20, 1);
 		  b->register_func(listselect_but_up, listselect[nlistselect]);
@@ -239,7 +240,7 @@ Multiline_Textarea*  Window::create_multiline_textarea(const uint px, const uint
 										  20, 20, 1);
 					 b->register_func(multiline_textarea_but_up, multiline_textarea[nmultiline_textarea]);
 					 b->set_pic(g_fh.get_string("U", 0));
-					 b=create_button(multiline_textarea[nmultiline_textarea]->get_xpos()+myw-20-Button::get_border(), 
+					 b=create_button(multiline_textarea[nmultiline_textarea]->get_xpos()+myw-20-Button::get_border(),
 										  multiline_textarea[nmultiline_textarea]->get_ypos()+20+Button::get_border(),
 										  20, 20, 1);
 					 b->set_pic(g_fh.get_string("D", 0));
@@ -254,28 +255,28 @@ Multiline_Textarea*  Window::create_multiline_textarea(const uint px, const uint
 }
 
 /** Textarea* Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
- * 
- * This function creates a textarea with a given text. The size will be set through the 
+ *
+ * This function creates a textarea with a given text. The size will be set through the
  * text width
  *
  * Args:	px	xpos in window
  * 		py	ypos in window
  * 		t	text to use
- * 		a	alignment to use 
+ * 		a	alignment to use
  * Returns: textarea just created
  */
 Textarea* Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a) {
-	
+
 		  uint myw=w;
 		  uint myh=h;
 		  uint add=0;
-		  
+
 		  if(myf!=FLAT) {
 					 myw-=get_border();
 					 myh-=get_border();
 					 add=get_border()>>1;
 		  }
-		  
+
 		  ta[nta]=new Textarea(px, py, t, a, myw, myh, winpic, add, add);
 		  ta[nta]->draw();
 		  g_gr.register_update_rect(x+ta[nta]->get_xpos(), y+ta[nta]->get_ypos(), ta[nta]->get_w(), ta[nta]->get_h());
@@ -285,22 +286,22 @@ Textarea* Window::create_textarea(const uint px, const uint py, const char* t , 
 
 		  return ta[nta-1];
 }
-  
+
 /** Textarea Window::create_textarea(const uint px, const uint py, const unsigend int myw,  Textarea::Align a = Textarea::LEFTA)
- * 
- * This function creates a textarea with a given width. 
+ *
+ * This function creates a textarea with a given width.
  *
  * Args:	px	xpos in window
  * 		py	ypos in window
  * 		myw	width of area
- * 		a	alignment to use 
+ * 		a	alignment to use
  * Returns: textarea just created
  */
 Textarea* Window::create_textarea(const uint px, const uint py, const uint myw ,  Textarea::Align a) {
 
 		  uint add=0;
 		  if(myf!=FLAT) add=get_border();
-		 
+
 		  int rw=myw;
 		  int mypy=py;
 		  if(px+add+rw > w) rw=w-add-px;
@@ -316,7 +317,7 @@ Textarea* Window::create_textarea(const uint px, const uint py, const uint myw ,
 		  return ta[nta-1];
 }
 
-/** void Window::redraw_win(void) 
+/** void Window::redraw_win(void)
  *
  * PRIVATE FUNCTION to update the whole winpic
  *
@@ -325,13 +326,13 @@ Textarea* Window::create_textarea(const uint px, const uint py, const uint myw ,
  */
 void Window::redraw_win(void) {
 		  uint i, j;
-		  uint px=x; 
+		  uint px=x;
 		  uint py=y;
-		
+
 		  g_gr.register_update_rect(x, y, w, h);
 
 		  Pic* usebg= own_bg ? own_bg : &bg ;
-		
+
 		  if(myf != FLAT) {
 					 px+=get_border()>>1;
 					 py+=get_border()>>1;
@@ -346,7 +347,7 @@ void Window::redraw_win(void) {
 								Graph::copy_pic(winpic, &top, i, 0, CORNER, 0, MIDDLE, CORNER);
 								// bot
 								Graph::copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, MIDDLE, CORNER);
-					 } 
+					 }
 					 // top
 					 Graph::copy_pic(winpic, &top, i, 0, CORNER, 0, w-CORNER-i, CORNER);
 					 Graph::copy_pic(winpic, &top, w-CORNER, 0, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
@@ -364,7 +365,7 @@ void Window::redraw_win(void) {
 								Graph::copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, MIDDLE);
 								// right
 								Graph::copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, MIDDLE);
-					 } 
+					 }
 					 // left
 					 Graph::copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, h-CORNER-i);
 					 Graph::copy_pic(winpic, &l_border, 0, h-CORNER-CORNER, 0, l_border.get_h()-CORNER, CORNER, CORNER);
@@ -376,43 +377,43 @@ void Window::redraw_win(void) {
 					 for(j=CORNER; (int)j<=(int)(h-CORNER-CORNER-usebg->get_h()); j+=usebg->get_h()) {
 								for(i=CORNER; (int)i<=(int)(w-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
 										  Graph::copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
-								} 
+								}
 								Graph::copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, usebg->get_h());
 					 }
 					 for(i=CORNER; (int)i<=(int)(w-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
 								Graph::copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), h-j-CORNER);
-					 } 
+					 }
 					 Graph::copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, h-j-bot.get_h());
 		  } else {
 					 // has no borders. Simply paste once the pic
 					 uint mw = usebg->get_w() > w ? w : usebg->get_w();
 					 uint mh = usebg->get_h() > h ? h : usebg->get_h();
-		 
+
 					 Graph::copy_pic(winpic, usebg, 0, 0, 0, 0, mw, mh);
 		  }
-		  
+
 		  // Draw listselects
-		  for(i=0; i< nlistselect; i++) 
+		  for(i=0; i< nlistselect; i++)
 					 listselect[i]->draw();
-		  
-		  // Draw multiline textareas 
-		  for(i=0; i<nmultiline_textarea; i++) 
-					 multiline_textarea[i]->draw(); 
-  
+
+		  // Draw multiline textareas
+		  for(i=0; i<nmultiline_textarea; i++)
+					 multiline_textarea[i]->draw();
+
 		  // Draw textareas
-		  for(i=0 ; i< nta; i++) 
+		  for(i=0 ; i< nta; i++)
 					 ta[i]->draw();
 
 		  // Draw Buttons
-		  for(i=0; i< nbut; i++) 
+		  for(i=0; i< nbut; i++)
 					 but[i]->draw();
 
 		  // Draw checkboxes
-		  for(i=0; i< ncheckbox; i++) 
+		  for(i=0; i< ncheckbox; i++)
 					 checkbox[i]->draw();
 
 }
-					 
+
 /** Button* Window::create_button(const uint px, const uint py, const uint rw, const uint rh, const uint bg)
  *
  * This functions creates a button on the given point
@@ -425,7 +426,7 @@ void Window::redraw_win(void) {
 Button* Window::create_button(const uint px, const uint py, const uint rw, const uint rh, const uint bg) {
 		  uint add=0;
 		  if(myf!=FLAT) add=get_border();
-		 
+
 		  int mypx=px;
 		  int mypy=py;
 		  uint myw=rw+Button::get_border();
@@ -436,8 +437,8 @@ Button* Window::create_button(const uint px, const uint py, const uint rw, const
 		  if(mypx<0) return NULL;
 		  if(py+add+rh > h) mypy=h-(add+rh);
 
-		  
-		  
+
+
 		  but[nbut]=new Button(mypx, mypy, myw, myh, bg, winpic, add>>1, add>>1);
 		  but[nbut]->draw();
 		  g_gr.register_update_rect(x+but[nbut]->get_xpos(), y+but[nbut]->get_ypos(), but[nbut]->get_w(), but[nbut]->get_h());
@@ -449,7 +450,7 @@ Button* Window::create_button(const uint px, const uint py, const uint rw, const
 }
 
 
-/** Checkbox* Window::create_checkbox(const uint px, const uint py, const bool bstate) 
+/** Checkbox* Window::create_checkbox(const uint px, const uint py, const bool bstate)
  *
  * This funcion creates a checkbox in the window
  *
@@ -460,7 +461,7 @@ Button* Window::create_button(const uint px, const uint py, const uint rw, const
 Checkbox* Window::create_checkbox(const uint px, const uint py, const bool bstate) {
 		  uint add=0;
 		  if(myf!=FLAT) add=get_border();
-		 
+
 		  int mypx=px;
 		  int mypy=py;
 		  uint myw=Checkbox::get_w();
@@ -471,11 +472,11 @@ Checkbox* Window::create_checkbox(const uint px, const uint py, const bool bstat
 		  if(mypx<0) return NULL;
 		  if(py+add+myh > h) mypy=h-(add+myh);
 
-		  
-		  
+
+
 		  checkbox[ncheckbox]=new Checkbox(mypx, mypy, bstate, winpic, add>>1, add>>1);
 		  checkbox[ncheckbox]->draw();
-		  g_gr.register_update_rect(x+checkbox[ncheckbox]->get_xpos(), 
+		  g_gr.register_update_rect(x+checkbox[ncheckbox]->get_xpos(),
 								y+checkbox[ncheckbox]->get_ypos(), checkbox[ncheckbox]->get_w(), checkbox[ncheckbox]->get_h());
 		  ncheckbox++;
 
@@ -492,9 +493,9 @@ Checkbox* Window::create_checkbox(const uint px, const uint py, const bool bstat
  * Returns: Nothing
  */
 void Window::draw(void) {
-		  Graph::copy_pic(g_gr.get_screenbmp(), winpic, x, y, 0, 0, w, h);
+		  Graph::draw_pic(winpic, x, y, 0, 0, w, h);
 }
-					 
+
 /** void Window::set_new_bg(Pic* p);
  *
  * Setting a non default bg for a window. Window cares for clearup on close
@@ -504,15 +505,15 @@ void Window::draw(void) {
  */
 void Window::set_new_bg(Pic* p) {
 		  assert(p);
-		  
+
 		  if(own_bg) delete own_bg;
 		  own_bg=p;
 
 		  redraw_win();
-		  
+
 		  g_gr.register_update_rect(x, y, w, h);
 }
-					 
+
 /** int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2)
  *
  * This func cares for mouse movements
@@ -524,7 +525,7 @@ void Window::set_new_bg(Pic* p) {
  */
 int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2) {
 		  uint i;
-		  
+
 		  // check for buttons
 		  for(i=0; i<nbut; i++) {
 					 if(but[i]->get_xpos()<x && but[i]->get_xpos()+but[i]->get_w()>x &&
@@ -536,17 +537,17 @@ int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2) 
 								but[i]->set_bright(false);
 								but[i]->set_pressed(false);
 					 }
-		  
+
 					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
 		  }
-	
+
 		  // We do not care for checkboxes, since they only react on clicks
 		  // we do not care for ta, because they are non responsive to mouse movements or clicks
-		  
+
 		  return INPUT_HANDLED;
 }
 
-/** int Window::handle_click(const uint pbut, const bool b, const uint x, const uint y) 
+/** int Window::handle_click(const uint pbut, const bool b, const uint x, const uint y)
  *
  * This cares for mouseclicks into the window
  *
@@ -574,11 +575,11 @@ int Window::handle_click(const uint pbut, const bool b, const uint x, const uint
 					 } else {
 								but[i]->set_pressed(false);
 					 }
-					 
+
 					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
 		  }
-			 
-		  // Check for checkboxes 
+
+		  // Check for checkboxes
 		  if(b) {
 					 for(i=0; i<ncheckbox; i++) {
 								if(checkbox[i]->get_xpos()<x && checkbox[i]->get_xpos()+checkbox[i]->get_w()>x &&
@@ -587,7 +588,7 @@ int Window::handle_click(const uint pbut, const bool b, const uint x, const uint
 										  checkbox[i]->set_state(!checkbox[i]->get_state());
 								}
 
-								if(checkbox[i]->draw()) g_gr.register_update_rect(this->x+checkbox[i]->get_xpos(), 
+								if(checkbox[i]->draw()) g_gr.register_update_rect(this->x+checkbox[i]->get_xpos(),
 													 this->y+checkbox[i]->get_ypos(), checkbox[i]->get_w(), checkbox[i]->get_h());
 					 }
 		  }
@@ -610,3 +611,4 @@ int Window::handle_click(const uint pbut, const bool b, const uint x, const uint
 		  return INPUT_UNHANDLED;
 }
 
+#endif

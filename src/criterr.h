@@ -22,7 +22,7 @@
 
 
 
-void critical_error(const char*);
+void critical_error(const char*, ...);
 
 
 

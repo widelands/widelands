@@ -1,16 +1,17 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp,
+ *                       Nicolai Haehnle
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -22,7 +23,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////7
 
-/** class Multiline_textarea 
+/** class Multiline_textarea
  *
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
@@ -31,197 +32,183 @@
  * 			class Font_Handler
  */
 
-uint Multiline_Textarea::nfont=0;
-
-/* Multiline_Textarea::Multiline_Textarea(const uint px, const uint py, const uint myw, const Align a, Pic* mdp)
+/** Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h,
+ *                     const char *text, Align align = 0, uint font = 0)
  *
- * This creates a Textarea.
+ * Initialize a textarea that supports multiline strings.
  *
- * Args: px	xpos in win
- * 		py 	ypos in win
- * 		myw,myh	sizes of area
- * 		a	alignment to use
- * 		mdp picture to draw into
- * 		addx	offset from the edge (for frame)
- * 		addy	offset from the edge (for frame)
- * Returns: Nothing
+ * Args: parent	parent panel
+ *       x		coordinates of the textarea
+ *       y
+ *       w		size of the textarea
+ *       h
+ *       text	text for the textarea (can be 0)
+ *       align	text alignment
+ *       font	font number
  */
-Multiline_Textarea::Multiline_Textarea(const uint px, const uint py, const uint myw, const uint myh, const Align a, Pic* mdp, const uint addx, 
-					 const uint addy) {
-		  w=myw; 
-		  h=(myh/(g_fh.get_fh(nfont)+2));
-		  dp=mdp;
-		  al=a;
+Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h,
+                                       const char *text, Align align, uint font)
+	: Panel(parent, x, y, w-24, h), _lines(1, 3)
+{
+	set_handle_mouse(false);
+	set_think(false);
 
-		  xp=addx;
-		  yp=addy;
-		  x=px;
-		  y=py;
-		  bak=new Pic();
-		  bak->set_size(w, get_h());
-		  Graph::copy_pic(bak, dp, 0,0, x+xp, y+yp, w, get_h());
-		 
-		  lines=0;
-		  ar= new Growable_Array(1, 5);
-		  firstvis=0;
+	_font = font;
+	_align = align;
+	_firstvis = 0;
+
+	if (text)
+		set_text(text);
+
+	Scrollbar *sb = new Scrollbar(parent, x+get_w(), y, 24, h, false);
+	sb->up.set(this, &Multiline_Textarea::move_up);
+	sb->down.set(this, &Multiline_Textarea::move_down);
 }
 
-/** void Multiline_Textarea::set_text(const char* str)
+/** Multiline_Textarea::~Multiline_Textarea()
  *
- * This sets the string of the Textarea
- *
- * Args: mystr	string to set
- * Returns: Nothing
+ * Free allocated resources
  */
-void Multiline_Textarea::set_text(const char* mystr) {
-		  if(lines) {
-					 for(uint i=0; i<lines; i++) 
-								delete (Pic*) ar->element_at(i);
-					 ar->flush(1);
-					 lines=0;
-		  }
-		 
-		  int i=0;
-		  int n=0;
-		  int len=strlen(mystr);
-		  char *str = new char[len+1];
-		  strcpy(str, mystr);
-		  str[len]='\n';
-		  char *buf = new char[len+1];
-		  do {
-					 buf[n]=str[i];
-					 if(buf[n]=='\n' || str[i+1]=='\0') {
-								buf[n]='\0';
-								Pic* add=g_fh.get_string(buf, nfont);
-								if(add->get_w() > w) {
+Multiline_Textarea::~Multiline_Textarea()
+{
+	clear();
+}
+
+/** Multiline_Textarea::clear()
+ *
+ * Clear the text
+ */
+void Multiline_Textarea::clear()
+{
+	for(int i = 0; i < _lines.elements(); i++)
+		delete (Pic *)_lines.element_at(i);
+	_lines.flush(1);
+	_firstvis = 0;
+}
+
+/** Multiline_Textarea::set_text(const char *text)
+ *
+ * Replace the current text with a new one.
+ * New text is broken into multiple lines if necessary, '\n' is recognized.
+ *
+ * Args: text	the new text
+ */
+void Multiline_Textarea::set_text(const char *text)
+{
+	clear();
+
+	int i=0;
+	int n=0;
+	int len=strlen(text);
+	char *str = new char[len+1];
+	strcpy(str, text);
+	str[len]='\n';
+	char *buf = new char[len+1];
+	do {
+		buf[n]=str[i];
+		if(buf[n]=='\n' || str[i+1]=='\0') {
+			buf[n]='\0';
+			Pic* add=g_fh.get_string(buf, _font);
+			if(add->get_w() > get_eff_w()) {
 up:
-										  // Big trouble, line doesn't fitt in one, we must do a break
-										  while(buf[n]!=' ' && buf[n]!='.' && buf[n]!=',' && n) { --n; }
-										  if(!n) { 
-													 // well, this huge line is just one word, so we just have
-													 // to take it over, the last few chars are then cut in draw()
-													 ar->add(add);
-													 ++lines;
-										  } else {
-													 i-=strlen(buf);
-													 if(buf[n]==' ') buf[n]='\0';
-													 else buf[n+1]='\0';
-													 i+=strlen(buf);
-													 delete add;
-													 add=(g_fh.get_string(buf, nfont));
-													 if(add->get_w() > w) {
-																--n;
-																goto up;
-													 }
-													
-													 ar->add(g_fh.get_string(buf, nfont));
-													 ++lines;
-										  }
-								} else {
-										  // Everything is fine
-										  ar->add(add);
-										  ++lines;
-								}
-								n=-1;
-					 }
-					 ++n;
-					 ++i;
-		  } while(i<=len);
+				// Big trouble, line doesn't fitt in one, we must do a break
+				while(buf[n]!=' ' && buf[n]!='.' && buf[n]!=',' && n) { --n; }
+				if(!n) {
+					// well, this huge line is just one word, so we just have
+					// to take it over, the last few chars are then cut in draw()
+					_lines.add(add);
+				} else {
+					i-=strlen(buf);
+					if(buf[n]==' ') buf[n]='\0';
+					else buf[n+1]='\0';
+					i+=strlen(buf);
+					delete add;
+					add=(g_fh.get_string(buf, _font));
+					if(add->get_w() > get_eff_w()) {
+						--n;
+						goto up;
+					}
 
-		  delete[] str;
-		  delete[] buf;
-		  draw();
+					_lines.add(g_fh.get_string(buf, _font));
+				}
+			} else {
+				// Everything is fine
+				_lines.add(add);
+			}
+			n=-1;
+		}
+		++n;
+		++i;
+	} while(i<=len);
+
+	delete[] str;
+	delete[] buf;
+
+	update(0, 0, get_eff_w(), get_h());
 }
 
-/** Multiline_Textarea::~Multiline_Textarea(void)
+/** Multiline_Textarea::move_up(int i)
  *
- * Destructor
+ * Scroll the area up i lines
  *
- * Args: None
- * Returns: Nothing
+ * Args: i	number of lines to scroll
  */
-Multiline_Textarea::~Multiline_Textarea(void) {
-					 Pic* txt;
-		  for(uint i=0; i<lines; i++) {
-					 txt=(Pic*) ar->element_at(i);
-					 delete txt;
-		  }
-		  delete ar;
-		  
-		  delete bak;
+void Multiline_Textarea::move_up(int i)
+{
+	if (i < 0)
+		return;
+	if (i > (int)_firstvis)
+		i = _firstvis;
+	if (!i)
+		return;
+
+	_firstvis -= i;
+	update(0, 0, get_eff_w(), get_h());
 }
 
-/** void Multiline_Textarea::draw(const uint xp, const uint yp) const 
+/** Multiline_Textarea::move_down(int i)
  *
- * Draws a Textarea into the windows picture
+ * Scroll down i lines
  *
- *	Args: None
- * Returns: Nothing
+ * Args: i	number of lines to scroll
  */
-void Multiline_Textarea::draw(void) const {
-		  if(!lines) return;
-		  uint posx, myw;
-		  Pic* txt;
-		 
-		  Graph::copy_pic(dp, bak, xp+x, yp+y, 0, 0, w, get_h());
+void Multiline_Textarea::move_down(int i)
+{
+	if (i < 0)
+		return;
+	if ((int)(_firstvis+i) >= _lines.elements())
+		i = _lines.elements()-_firstvis-1;
+	if (!i)
+		return;
 
-		  for(uint i=0; (i<h) && (i+firstvis<lines); i++) {
-					 txt= (Pic*) ar->element_at(i+firstvis);
-
-					 myw= w < txt->get_w() ? w : txt->get_w();
-
-					 if(al==RIGHTA) {
-								posx=xp+x+w-myw;
-					 } else if(al==LEFTA) {
-								posx=xp+x;
-					 } else if(al==CENTER) {
-								posx=xp+x+((w>>1) - (myw>>1));
-					 } else {
-								// Never here!!
-								assert(0);
-								return;
-					 }
-
-					 Graph::copy_pic(dp, txt, posx, yp+y+i*(g_fh.get_fh(nfont)+2), 0, 0, myw, txt->get_h());
-		  }
-
+	_firstvis += i;
+	update(0, 0, get_eff_w(), get_h());
 }
 
-/** void multiline_textarea_but_up(void *a) 
+/** Multiline_Textarea::draw(Bitmap *bmp, int ofsx, int ofsy)
  *
- * This is the click function for the up button
- *
- * Args: a == pt to Listselect
- * Returns: Nothing
+ * Redraw the textarea
  */
-void multiline_textarea_but_up(Window* par, void* a) {
-		  Multiline_Textarea* multexta=(Multiline_Textarea*) a;
+void Multiline_Textarea::draw(Bitmap *bmp, int ofsx, int ofsy)
+{
+	if (!_lines.elements())
+		return;
 
-		  multexta->move_up(1);
-		  g_gr.register_update_rect(par->get_xpos()+multexta->get_xpos(),
-								par->get_ypos()+multexta->get_ypos(),
-								multexta->get_w(),
-								multexta->get_h());
+	uint y = 0;
+	for(int i = _firstvis; i < _lines.elements(); i++) {
+		if (y >= get_h())
+			return;
 
+		Pic *txt = (Pic *)_lines.element_at(i);
+
+		int x = 0;
+		if (_align == H_RIGHT)
+			x = get_eff_w() - txt->get_w();
+		else if (_align == H_CENTER)
+			x = (get_eff_w() - txt->get_w()) >> 1;
+
+		Graph::copy_pic(bmp, txt, x+ofsx, y+ofsy, 0, 0, txt->get_w(), txt->get_h());
+		y += txt->get_h() + 2;
+	}
 }
 
-/** void multiline_textarea_but_down(void *a) 
- *
- * This is the click function for the down button
- *
- * Args: par parent window
- * 		a == pt to Multiline_Textarea
- * Returns: Nothing
- */
-void multiline_textarea_but_down(Window* par, void* a) {
-		  Multiline_Textarea* multexta=(Multiline_Textarea*) a;
-
-		  multexta->move_down(1);
-		  g_gr.register_update_rect(par->get_xpos()+multexta->get_xpos(),
-								par->get_ypos()+multexta->get_ypos(),
-								multexta->get_w(),
-								multexta->get_h());
-
-}
-					 
-	

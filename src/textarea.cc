@@ -1,16 +1,17 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp,
+ *                       Nicolai Haehnle
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -21,7 +22,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////7
 
-/** class Textarea 
+/** class Textarea
  *
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
@@ -30,140 +31,134 @@
  * 			class Font_Handler
  */
 
-uint Textarea::nfont=0;
-
-/* Textarea::Textarea(const uint px, const uint py, const char* t, const Align a, const uint winw, const uint winh, Pic* mdp)
+/** Textarea::Textarea(Panel *parent, int x, int y, const char *text, Align align = 0, uint font = 0)
  *
- * This creates a textarea out of a fixed string.
+ * Initialize a Textarea. The dimension are set automatically, depending on the text.
  *
- * Args: px	xpos in win
- * 		py 	ypos in win
- * 		t	text to set
- * 		a	alignment to use
- * 		winw	width of window
- * 		winh	height of window
- * 		mdp	Picture to draw in
- * 		addx	offset from the edge (for frame)
- * 		addy	offset from the edge (for frame)
- * Returns: Nothing
+ * Args: parent	parent panel
+ *       x		coordinates of the textarea
+ *       y
+ *       text	text on the Textarea (can be 0)
+ *       align	alignment for the text
+ *       font	font to be used
  */
-Textarea::Textarea(const uint px, const uint py, const char* t, const Align a, const uint winw, const uint winh, Pic* mdp, const uint addx, const uint addy) {
-		 
-		  txt=g_fh.get_string(t, nfont);
+Textarea::Textarea(Panel *parent, int x, int y, const char *text, Align align, uint font)
+	: Panel(parent, x, y, 0, 0)
+{
+	set_handle_mouse(false);
+	set_think(false);
 
-		  int myx=px;
-		  int myy=py;
-		  uint myw=txt->get_w();
-		  uint myh=txt->get_h();
-		  
-		  if(myx+txt->get_w() > winw) myx=winw-txt->get_w();
-		  if(myx<0) { myx=px; myw=winw-px; }
-		  if(myy+txt->get_h() > winh) myy=winh-txt->get_h();
-		  if(myy<0) { myy=py; myh=winh-py; }
-		  
-		  x=myx; 
-		  y=myy; 
-		  w=myw; 
-		  h=myh;
-		  dp=mdp;
-		  
-		  xp=addx; 
-		  yp=addy;
+	_font = font;
+	_align = align;
+	_textpic = 0;
 
-		  al=a;
-		 
-		  bak=new Pic();
-		  bak->set_size(w, h);
-		  Graph::copy_pic(bak, dp, 0,0, x+xp, y+yp, w, h);
-		  draw();
+	if (text)
+		set_text(text);
 }
 
-/* Textarea::Textarea(const uint px, const uint py, const uint myw, const Align a, Pic* mdp)
+/** Textarea::~Textarea()
  *
- * This creates a textarea.
- *
- * Args: px	xpos in win
- * 		py 	ypos in win
- * 		w	width of area
- * 		a	alignment to use
- * 		mdp picture to draw into
- * 		addx	offset from the edge (for frame)
- * 		addy	offset from the edge (for frame)
- * Returns: Nothing
+ * Free allocated resources
  */
-Textarea::Textarea(const uint px, const uint py, const uint myw, const Align a, Pic* mdp, const uint addx, 
-					 const uint addy) {
-		 
-		  txt=0; 
-		  w=myw; 
-		  h=get_fh();
-		  dp=mdp;
-		  al=a;
-
-		  xp=addx;
-		  yp=addy;
-		  x=px;
-		  y=py;
-		  bak=new Pic();
-		  bak->set_size(w, h);
-		  Graph::copy_pic(bak, dp, 0,0, x+xp, y+yp, w, h);
+Textarea::~Textarea()
+{
+	if (_textpic)
+		delete _textpic;
 }
 
-/** void Textarea::set_text(const char* str)
+/** Textarea::set_text(const char *text)
  *
- * This sets the string of the textarea
+ * Set the text of the Textarea. Size is automatically adjusted
  *
- * Args: str	string to set
- * Returns: Nothing
+ * Args: text	the text string
  */
-void Textarea::set_text(const char* str) {
-		  if(txt) delete txt;
-        txt=g_fh.get_string(str, nfont);
-		  
-		  draw();
+void Textarea::set_text(const char *text)
+{
+	if (_textpic) {
+		delete _textpic;
+		_textpic = 0;
+	}
+
+	if (text) {
+		collapse();
+		_textpic = g_fh.get_string(text, _font);
+		expand();
+	}
 }
 
-/** Textarea::~Textarea(void)
+/** Textarea::set_align(Align align)
  *
- * Destructor
+ * Change the alignment
  *
- * Args: None
- * Returns: Nothing
+ * Args: align	new alignment
  */
-Textarea::~Textarea(void) {
-
-		  if(txt) delete txt;
-		  delete bak;
-
-		  txt=0;
+void Textarea::set_align(Align align)
+{
+	collapse();
+	_align = align;
+	expand();
 }
 
-/** void Textarea::draw(const uint xp, const uint yp) const 
+/** Textarea::draw(Bitmap *dst, int ofsx, int ofsy)
  *
- * Draws a textarea into the windows picture
- *
- *	Args: None
- * Returns: Nothing
+ * Redraw the Textarea
  */
-void Textarea::draw(void) const {
-		  if(!txt) return;
-		  uint posx, myw;
-		  
-		  myw= w < txt->get_w() ? w : txt->get_w();
-		 
-
-		  if(al==RIGHTA) {
-					 posx=xp+x+w-myw;
-		  } else if(al==LEFTA) {
-					 posx=xp+x;
-		  } else if(al==CENTER) {
-					 posx=xp+x+((w>>1) - (myw>>1));
-		  } else {
-					 // Never here!!
-					 assert(0);
-					 return;
-		  }
-
-		  Graph::copy_pic(dp, bak, posx, yp+y, 0, 0, w, h);
-		  Graph::copy_pic(dp, txt, posx, yp+y, 0, 0, myw, h);
+void Textarea::draw(Bitmap *dst, int ofsx, int ofsy)
+{
+	if (_textpic)
+		Graph::copy_pic(dst, _textpic, ofsx, ofsy, 0, 0, _textpic->get_w(), _textpic->get_h());
 }
+
+/** Textarea::collapse()
+ *
+ * Reduce the Textarea to size 0x0 without messing up the alignment
+ */
+void Textarea::collapse()
+{
+	int x = get_x();
+	int y = get_y();
+	int w = get_w();
+	int h = get_h();
+
+	if (_align & H_CENTER)
+		x += w >> 1;
+	else if (_align & H_RIGHT)
+		x += w;
+
+	if (_align & V_CENTER)
+		y += h >> 1;
+	else if (_align & V_BOTTOM)
+		y += h;
+
+	set_pos(x, y);
+	set_size(0, 0);
+}
+
+/** Textarea::expand()
+ *
+ * Expand the size of the Textarea until it fits the size of the text
+ */
+void Textarea::expand()
+{
+	if (!_textpic)
+		return;
+
+	int x = get_x();
+	int y = get_y();
+	int w = _textpic->get_w();
+	int h = _textpic->get_h();
+
+	if (_align & H_CENTER)
+		x -= w >> 1;
+	else if (_align & H_RIGHT)
+		x -= w;
+
+	if (_align & V_CENTER)
+		y -= h >> 1;
+	else if (_align & V_BOTTOM)
+		y -= h;
+
+	set_pos(x, y);
+	set_size(w, h);
+}
+

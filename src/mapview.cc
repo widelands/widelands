@@ -1,29 +1,28 @@
 /*
  * Copyright (C) 2002 by Holger Rapp
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
+#include "os.h"
 #include "mapview.h"
 #include "graphic.h"
+#include "input.h"
 
-#include "os.h"
-#include <iostream.h>
-
-/* class Map_View 
+/* class Map_View
  *
  * this implements a view of a map. it's used
  * to render a valid map on the screen
@@ -32,18 +31,21 @@
  * 			g_gr
  */
 
-/** Map_View::Map_View(Map* m) 
+/** Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m)
  *
  * Init
  *
  * Args: m 	map to use
  */
-Map_View::Map_View(Map* m) {
-		  vpx=vpy=0;
-		  map=m;
+Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m)
+	: Panel(parent, x, y, w, h)
+{
+	vpx = vpy = 0;
+	map = m;
+	dragging = false;
 }
 
-/** Map_View::~Map_View(void) 
+/** Map_View::~Map_View(void)
  *
  * Cleanups
  */
@@ -60,18 +62,43 @@ Map_View::~Map_View(void) {
  * Args: None
  * Returns: Nothing
  */
-void Map_View::draw(void)
+void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 {
 /*	g_gr.set_pixel(0, 0, 0);
 	for (int z=0; z<640*480; z++)
 		g_gr.set_npixel(0);*/
+
+	// Prepare an improved bitmap which we can draw into without using ofsx/ofsy
+	int orig_vpx = vpx;
+	int orig_vpy = vpy;
+	Bitmap dst;
+
+	dst.pitch = bmp->pitch;
+	dst.pixels = bmp->pixels;
+	dst.w = bmp->w;
+	dst.h = bmp->h;
+
+	if (ofsx > 0) {
+		dst.pixels += ofsx;
+		dst.w -= ofsx;
+	} else if (ofsx < 0) {
+		orig_vpx -= ofsx;
+	}
+	if (ofsy > 0) {
+		dst.pixels += ofsy * dst.pitch;
+		dst.h -= ofsy;
+	} else if (ofsy < 0) {
+		orig_vpy -= ofsy;
+	}
+
+	// Now draw the view
 	Field *f;
 	static bool xtrans;
 	static bool ytrans;
 
 	f=map->get_ffield();
 	if( (f->get_rn()->get_xpix()-vpx >=0) && (f->get_bln()->get_xpix()-vpx < (int)g_gr.get_xres()) )
-		draw_field(f);
+		draw_field(&dst, f);
 
 	for(int i=(map->get_w()*(map->get_h()-1)); --i; )
 	{
@@ -83,7 +110,7 @@ void Map_View::draw(void)
 		if(f->get_ypix()-vpy >= (int)g_gr.get_yres()) continue;
 		if(f->get_bln()->get_ypix()-vpy < 0 &&
 		   f->get_brn()->get_ypix()-vpy < 0) continue;
-		draw_field(f);
+		draw_field(&dst, f);
 	}
 
 	if(!xtrans && (uint)vpx> map->get_w()*FIELD_WIDTH-g_gr.get_xres())
@@ -91,7 +118,7 @@ void Map_View::draw(void)
 		int ovpx=vpx;
 		vpx-=map->get_w()*FIELD_WIDTH;
 		xtrans=true;
-		draw();
+		draw(&dst, 0, 0);
 		xtrans=false;
 		vpx=ovpx;
 	}
@@ -101,21 +128,24 @@ void Map_View::draw(void)
 		int ovpy=vpy;
 		vpy-=(((map->get_h()+1)*FIELD_HEIGHT)>>1);
 		ytrans=true;
-		draw();
+		draw(&dst, 0, 0);
 		ytrans=false;
 		vpy=ovpy;
 	}
+
+	vpx = orig_vpx;
+	vpy = orig_vpy;
 }
 
-void Map_View::draw_field(Field* f)
+void Map_View::draw_field(Bitmap *dst, Field* f)
 {
 	// for plain terrain, this param order will avoid swapping in
 	// Graphic::render_triangle
-	draw_polygon(f, f->get_bln(), f->get_brn(), f->get_texd());
-	draw_polygon(f, f->get_rn(), f->get_brn(), f->get_texr());
+	draw_polygon(dst, f, f->get_bln(), f->get_brn(), f->get_texd());
+	draw_polygon(dst, f, f->get_rn(), f->get_brn(), f->get_texr());
 }
 
-inline void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* pic)
+inline void Map_View::draw_polygon(Bitmap *dst, Field* l, Field* r, Field* m, Pic* pic)
 {
 	Graph::Point p[3];
 	p[0] = Graph::Point(l->get_xpix()-vpx, l->get_ypix()-vpy);
@@ -125,7 +155,7 @@ inline void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* pic)
 	n[0] = l->get_normal();
 	n[1] = r->get_normal();
 	n[2] = m->get_normal();
-	Graph::render_triangle(g_gr.get_screenbmp(), p, n, pic);
+	Graph::render_triangle(dst, p, n, pic);
 }
 
 void Map_View::set_viewpoint(uint x,  uint y)
@@ -136,3 +166,38 @@ void Map_View::set_viewpoint(uint x,  uint y)
 	while(vpx< 0)  vpx+=(FIELD_WIDTH*map->get_w());
 	while(vpy< 0)  vpy+=(FIELD_HEIGHT*map->get_h())>>1;
 }
+
+/** Map_View::handle_mouseclick(uint btn, bool down, uint x, uint y)
+ *
+ * Mouseclicks on the map:
+ * Right-click: enable/disable dragging
+ * Left-click: field action window
+ */
+void Map_View::handle_mouseclick(uint btn, bool down, uint x, uint y)
+{
+	// right-click
+	if (btn == 1)
+	{
+		if (down)
+			dragging = true;
+		else
+			dragging = false;
+	}
+}
+
+/** Map_View::handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
+ *
+ * Scroll the view according to mouse movement.
+ */
+void Map_View::handle_mousemove(uint x, uint y, int xdiff, int ydiff, uint btns)
+{
+	if (!(btns & 2))
+		dragging = false;
+	if (!dragging)
+		return;
+
+	set_rel_viewpoint(xdiff, ydiff);
+	g_gr.needs_fs_update();
+	g_ip.set_mouse_pos(x-xdiff, y-ydiff);
+}
+

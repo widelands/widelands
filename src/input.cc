@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
+ * Copyright (C) 2002 by Holger Rapp
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -189,7 +189,7 @@ void Input::grab_input(const bool b) {
  */
 void Input::set_mouse_speed(const uint s)  { if(!s) return; mouse_speed=((float) s/100); }
 
-/** void Input::set_mouse_pos(uint x, uint y) 
+/** void Input::set_mouse_pos(uint x, uint y)
  *
  * Sets the mouse pos
  *
@@ -198,11 +198,11 @@ void Input::set_mouse_speed(const uint s)  { if(!s) return; mouse_speed=((float)
  * Returns: Nothing
  */
 void Input::set_mouse_pos(uint x, uint y) { mpx=mplx=x; mpy=mply=y; }
-					
+
 /** void Input::handle_pending_input(void)
  *
  * This function is the heart of the whole class
- * it should be called frequently (read: as often as possible) 
+ * it should be called frequently (read: as often as possible)
  * and cares about the registered input events and the update
  * of the status information
  *
@@ -212,11 +212,13 @@ void Input::set_mouse_pos(uint x, uint y) { mpx=mplx=x; mpy=mply=y; }
 void Input::handle_pending_input(void) {
 		  static SDL_Event ev;
 		  static int xdiff, ydiff;
-		  SDL_PumpEvents();    
+		  SDL_PumpEvents();
 
-		  while(SDL_PollEvent(&ev)) { 
+		  while(SDL_PollEvent(&ev)) {
 					 switch(ev.type) {
 								case SDL_KEYDOWN:
+										  if (ev.key.keysym.sym == SDLK_F10) // TEMP
+										  		bshould_die = true;
 										  if(kbdh) kbdh(SDL_GetKeyName(ev.key.keysym.sym), kbdha);
 										  break;
 
@@ -224,7 +226,7 @@ void Input::handle_pending_input(void) {
 										  //                              DBG("Key released!\n");
 										  break;
 
-		
+
 								case SDL_MOUSEBUTTONDOWN:
 								case SDL_MOUSEBUTTONUP:
 										  uint but;
@@ -237,14 +239,15 @@ void Input::handle_pending_input(void) {
 										  break;
 
 								case SDL_MOUSEMOTION:
+										  // This seems to produce inconsistent values for xdiff/ydiff
 										  if(ev.motion.x!=maxx>>1 || ev.motion.y!=maxy>>1) {
 													 mplx=mpx; mply=mpy;
 													 xdiff = (int) ((ev.motion.x-levx)*mouse_speed);
 													 ydiff = (int) ((ev.motion.y-levy)*mouse_speed);
 													 mpx+=xdiff;
 													 mpy+=ydiff;
-													 
-													 if((int)mpx < 0) mpx=0; 
+
+													 if((int)mpx < 0) mpx=0;
 													 else if(mpx >=maxx) mpx=maxx-1;
 													 if((int)mpy < 0) mpy=0;
 													 else if(mpy >=maxy) mpy=maxy-1;
@@ -261,7 +264,7 @@ void Input::handle_pending_input(void) {
 
 													 levx=ev.motion.x;
 													 levy=ev.motion.y;
-		
+
 													 SDL_WarpMouse(maxx>>1,maxy>>1);
 										  } else {
 													 levy=maxy>>1;

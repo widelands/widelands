@@ -19,6 +19,7 @@
 
 #include "ui.h"
 
+#if 0
 /** class Checkbox
  *
  * This defines a checkbox, which will be marked or unmarked, depending on their state
@@ -86,3 +87,4 @@ int Checkbox::draw(void) {
 
 		  return 1;
 }
+#endif
