@@ -234,6 +234,8 @@ public:
 
 	virtual Flag* get_base_flag();
 
+	virtual void set_economy(Economy *e);
+
 	int get_cost(FlagId fromflag);
 	inline const Path &get_path() const { return m_path; }
 	inline int get_idle_index() const { return m_idle_index; }
@@ -339,10 +341,9 @@ private:
 /*
 A Request is issued whenever some object (road or building) needs a ware.
 
-Important: While you must reassign the wares that e.g. a building owns when
-the building moves to another economy (in a split/merge), DO NOT reassign
-requests. Requests are treated in a special way by the Economy split/merge
-code since it can be done more efficiently there.
+Requests are always created and destroyed by their owner, i.e. the target
+building. The owner is also responsible for calling set_economy() when
+its economy changes.
 */
 class Request {
 	friend class Economy;
@@ -361,24 +362,25 @@ public:
 	Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdata);
 	~Request();
 
-	inline PlayerImmovable* get_target(Game* g) { return (PlayerImmovable*)m_target.get(g); }
-	inline int get_ware() const { return m_ware; }
-	inline int get_state() const { return m_state; }
+	PlayerImmovable* get_target(Game* g) { return m_target; }
+	int get_ware() const { return m_ware; }
+	int get_state() const { return m_state; }
+	Economy* get_economy() const { return m_economy; }
 
 	Flag *get_target_flag(Game *g);
-	Economy *get_target_economy(Game *g);
+
+	void set_economy(Economy* e);
 
 	void start_transfer(Game *g, Supply* supp, Route *route);
 
-	void check_transfer(Game *g);
-	void cancel_transfer(Game *g);
-
+public: // callbacks for WareInstance/Worker code
 	void transfer_finish(Game *g);
 	void transfer_fail(Game *g);
 
 private:
-	Object_Ptr	m_target;	// who requested it?
-	int			m_ware;		// the ware type
+	PlayerImmovable*	m_target;	// who requested it?
+	Economy*				m_economy;
+	int					m_ware;		// the ware type
 
 	callback_t	m_callbackfn;	// called on request success
 	void*			m_callbackdata;

@@ -829,6 +829,8 @@ void ConstructionSite::set_economy(Economy* e)
 	}
 
 	Building::set_economy(e);
+	if (m_builder_request)
+		m_builder_request->set_economy(e);
 
 	if (e) {
 		for(i = 0; i < m_wares.size(); i++)
@@ -886,7 +888,6 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 {
 	// Release worker
 	if (m_builder_request) {
-		get_economy()->remove_request(m_builder_request);
 		delete m_builder_request;
 		m_builder_request = 0;
 	}
@@ -948,7 +949,6 @@ void ConstructionSite::request_builder(Game* g)
 
 	m_builder_request = new Request(this, g->get_safe_ware_id("builder"),
 	                                &ConstructionSite::request_builder_callback, this);
-	get_economy()->add_request(m_builder_request);
 }
 
 
@@ -967,9 +967,7 @@ void ConstructionSite::request_builder_callback(Game* g, Request* rq, int ware, 
 
 	cs->m_builder = w;
 
-	cs->get_economy()->remove_request(rq);
 	delete rq;
-
 	cs->m_builder_request = 0;
 
 	w->start_task_idle(g, w->get_idle_anim(), -1); // TODO: useful idle animations
@@ -2037,7 +2035,7 @@ void ProductionSite::init(Editor_Game_Base *g)
 	Building::init(g);
 
    if (g->is_game()) {
-   // Request worker
+		// Request worker
       if(!m_worker)
          request_worker((Game*)g);
 
@@ -2073,6 +2071,8 @@ void ProductionSite::set_economy(Economy* e)
 	}
 
 	Building::set_economy(e);
+	if (m_worker_request)
+		m_worker_request->set_economy(e);
 
 	if (e) {
 		for(i = 0; i < m_input_queues.size(); i++)
@@ -2091,7 +2091,6 @@ void ProductionSite::cleanup(Editor_Game_Base *g)
 {
 	// Release worker
 	if (m_worker_request) {
-		get_economy()->remove_request(m_worker_request);
 		delete m_worker_request;
 		m_worker_request = 0;
 	}
@@ -2151,7 +2150,6 @@ void ProductionSite::request_worker(Game* g)
 	int wareid = g->get_safe_ware_id(get_descr()->get_worker_name().c_str());
 
 	m_worker_request = new Request(this, wareid, &ProductionSite::request_worker_callback, this);
-	get_economy()->add_request(m_worker_request);
 }
 
 
@@ -2172,9 +2170,7 @@ void ProductionSite::request_worker_callback(Game* g, Request* rq, int ware, Wor
 
 	psite->m_worker = w;
 
-	psite->get_economy()->remove_request(rq);
 	delete rq;
-
 	psite->m_worker_request = 0;
 
 	w->start_task_buildingwork(g);
@@ -2195,14 +2191,14 @@ void ProductionSite::act(Game *g, uint data)
 
 		m_program_timer = false;
 		m_program_needs_restart=false;
-         
+
       molog("PSITE: program %s#%i\n", m_program->get_name().c_str(), m_program_ip);
 
       if(m_anim!=get_descr()->get_idle_anim()) {
          // Restart idle animation, which is the default
          start_animation(g, get_descr()->get_idle_anim());
       }
-      
+
 
       switch(action->type) {
          case ProductionAction::actSleep:
@@ -2538,7 +2534,8 @@ void MilitarySite::set_economy(Economy* e)
    */
    // TODO: SoldiersQueue migration
    ProductionSite::set_economy(e);
-   
+	if (m_soldier_request)
+		m_soldier_request->set_economy(e);
 }
 
 /*
@@ -2552,7 +2549,6 @@ void MilitarySite::cleanup(Editor_Game_Base *g)
 {
 	// Release worker
 	if (m_soldier_request) {
-		get_economy()->remove_request(m_soldier_request);
 		delete m_soldier_request;
 		m_soldier_request = 0;
 	}
@@ -2605,7 +2601,6 @@ void MilitarySite::request_soldier(Game* g)
 	int wareid = g->get_safe_ware_id("lumberjack");
 
 	m_soldier_request = new Request(this, wareid, &MilitarySite::request_soldier_callback, this);
-	get_economy()->add_request(m_soldier_request);
 }
 
 

@@ -216,7 +216,7 @@ WareInstance::~WareInstance
 */
 WareInstance::~WareInstance()
 {
-	if (!m_supply) {
+	if (m_supply) {
 		molog("Ware %i still has supply %p\n", m_ware, m_supply);
 		delete m_supply;
 	}
@@ -1697,7 +1697,6 @@ void Road::cleanup(Editor_Game_Base *gg)
 	m_desire_carriers = 0;
 
 	if (m_carrier_request) {
-		get_economy()->remove_request(m_carrier_request);
 		delete m_carrier_request;
 		m_carrier_request = 0;
 	}
@@ -1722,6 +1721,22 @@ void Road::cleanup(Editor_Game_Base *gg)
 
 /*
 ===============
+Road::set_economy
+
+Workers' economies are fixed by PlayerImmovable, but we need to handle
+any requests ourselves.
+===============
+*/
+void Road::set_economy(Economy *e)
+{
+	PlayerImmovable::set_economy(e);
+	if (m_carrier_request)
+		m_carrier_request->set_economy(e);
+}
+
+
+/*
+===============
 Road::request_carrier
 
 Request a new carrier.
@@ -1735,7 +1750,6 @@ void Road::request_carrier(Game* g)
 
 	m_carrier_request = new Request(this, g->get_safe_ware_id("carrier"),
 	                                &Road::request_carrier_callback, this);
-	get_economy()->add_request(m_carrier_request);
 }
 
 
@@ -1753,7 +1767,6 @@ void Road::request_carrier_callback(Game* g, Request* rq, int ware, Worker* w, v
 	Road* road = (Road*)data;
 	Carrier* carrier = (Carrier*)w;
 
-	road->get_economy()->remove_request(rq);
 	delete rq;
 	road->m_carrier_request = 0;
 
@@ -1973,7 +1986,7 @@ Walk all flags and check whether they're still there and interconnected.
 bool Route::verify(Game *g)
 {
 	Flag *flag = (Flag*)m_route[0].get(g);
-	
+
 	if (!flag)
 		return false;
 	
@@ -2038,6 +2051,7 @@ Request::~Request
 Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdata)
 {
 	m_target = target;
+	m_economy = m_target->get_economy();
 	m_ware = ware;
 
 	m_callbackfn = cbfn;
@@ -2046,11 +2060,38 @@ Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdat
 	m_state = OPEN;
 	m_worker = 0;
 	m_item = 0;
+
+	if (m_economy)
+		m_economy->add_request(this);
 }
+
 
 Request::~Request()
 {
-	// Request must have been removed from the economy before it's deleted
+	Game* g = static_cast<Game*>(m_economy->get_owner()->get_game());
+
+	if (m_state == TRANSFER)
+	{
+		if (m_worker)
+		{
+			assert(!m_item);
+
+			m_worker->update_task_request(g, true); // cancel
+			m_worker = 0;
+		}
+		else
+		{
+			assert(m_item);
+
+			m_item->cancel_request(g);
+			m_item = 0;
+		}
+	}
+	else if (m_state == OPEN)
+	{
+		if (m_economy)
+			m_economy->remove_request(this);
+	}
 }
 
 
@@ -2066,17 +2107,28 @@ Flag *Request::get_target_flag(Game *g)
 	return get_target(g)->get_base_flag();
 }
 
+
 /*
 ===============
-Request::get_target_economy
+Request::set_economy
 
-Figure out which economy the target is in.
+Change the Economy we belong to.
 ===============
 */
-Economy *Request::get_target_economy(Game *g)
+void Request::set_economy(Economy* e)
 {
-	return get_target(g)->get_economy();
+	if (m_economy == e)
+		return;
+
+	if (m_economy && m_state == OPEN)
+		m_economy->remove_request(this);
+
+	m_economy = e;
+
+	if (m_economy && m_state == OPEN)
+		m_economy->add_request(this);
 }
+
 
 /*
 ===============
@@ -2090,6 +2142,8 @@ for its deletion.
 void Request::start_transfer(Game* g, Supply* supp, Route* route)
 {
 	Ware_Descr *descr = g->get_ware_description(get_ware());
+
+	m_economy->remove_request(this);
 
 	if (descr->is_worker())
 	{
@@ -2114,66 +2168,6 @@ void Request::start_transfer(Game* g, Supply* supp, Route* route)
 
 		m_state = TRANSFER;
 		m_item->set_request(g, this, route);
-	}
-}
-
-
-/*
-===============
-Request::check_transfer
-
-Check whether our transfer can still finish (verify route).
-Cause a route recalculation if necessary.
-
-Called by Economy splitting code.
-===============
-*/
-void Request::check_transfer(Game *g)
-{
-	assert(m_state == TRANSFER);
-
-	// Item code does the check itself
-	if (m_item) {
-		assert(!m_worker);
-
-		m_item->update(g);
-		return;
-	}
-
-	assert(m_worker);
-
-	// Get the route
-	m_worker->update_task_request(g, false);
-}
-
-
-/*
-===============
-Request::cancel_transfer
-
-Cancel the transfer. Called from Economy code when the request is about to be
-removed.
-===============
-*/
-void Request::cancel_transfer(Game *g)
-{
-	assert(m_state == TRANSFER);
-
-	if (m_worker)
-	{
-		assert(!m_item);
-
-		m_worker->update_task_request(g, true); // cancel
-		m_worker = 0;
-		m_state = OPEN;
-	}
-	else
-	{
-		assert(m_item);
-
-		m_item->cancel_request(g);
-		m_item = 0;
-		m_state = OPEN;
 	}
 }
 
@@ -2221,7 +2215,7 @@ void Request::transfer_fail(Game *g)
 	m_worker = 0;
 	m_item = 0;
 	m_state = OPEN;
-	get_target_economy(g)->process_request(this);
+	m_economy->add_request(this);
 }
 
 
@@ -2459,15 +2453,12 @@ void WaresQueue::update(Game* g)
 
 	if (m_filled < m_size)
 	{
-		if (!m_request) {
+		if (!m_request)
 			m_request = new Request(m_owner, m_ware, &WaresQueue::request_callback, this);
-			m_owner->get_economy()->add_request(m_request);
-		}
 	}
 	else
 	{
 		if (m_request) {
-			m_owner->get_economy()->remove_request(m_request);
 			delete m_request;
 			m_request = 0;
 		}
@@ -2505,7 +2496,6 @@ void WaresQueue::request_callback(Game* g, Request* rq, int ware, Worker* w, voi
 	assert(wq->m_ware == ware);
 
 	// Ack the request
-	wq->m_owner->get_economy()->remove_request(rq);
 	delete rq;
 	wq->m_request = 0;
 
@@ -2528,6 +2518,8 @@ Remove the wares in this queue from the given economy (used in accounting).
 void WaresQueue::remove_from_economy(Economy* e)
 {
 	e->remove_wares(m_ware, m_filled);
+	if (m_request)
+		m_request->set_economy(0);
 }
 
 
@@ -2541,6 +2533,8 @@ Add the wares in this queue to the given economy (used in accounting)
 void WaresQueue::add_to_economy(Economy* e)
 {
 	e->add_wares(m_ware, m_filled);
+	if (m_request)
+		m_request->set_economy(e);
 }
 
 
@@ -3092,11 +3086,15 @@ void Economy::remove_warehouse(Warehouse *wh)
 Economy::add_request
 
 Consider the request, try to fulfill it immediately or queue it for later.
+Important: This must only be called by the Request class.
 ===============
 */
 void Economy::add_request(Request *req)
 {
 	assert(req->get_state() == Request::OPEN);
+
+	log("%p: add_request(%p) for %u\n", this, req,
+			req->get_target((Game*)get_owner()->get_game())->get_serial());
 
 	if (req->get_ware() >= (int)m_requests.size())
 		m_requests.resize(req->get_ware()+1);
@@ -3114,15 +3112,15 @@ void Economy::add_request(Request *req)
 Economy::remove_request
 
 Remove the request from this economy.
-Only call remove_request() when a request is actually cancelled. That is,
-_do not_ remove a request when the owning economy changes (split/merge). This
-is handled by the actual split/merge functions.
+Important: This must only be called by the Request class.
 ===============
 */
 void Economy::remove_request(Request *req)
 {
-	if (req->get_state() == Request::TRANSFER)
-		req->cancel_transfer(static_cast<Game*>(get_owner()->get_game()));
+	assert(req->get_state() == Request::OPEN);
+
+	log("%p: remove_request(%p) for %u\n", this, req,
+			req->get_target((Game*)get_owner()->get_game())->get_serial());
 
 	m_requests[req->get_ware()].remove(req);
 }
@@ -3194,30 +3192,7 @@ void Economy::do_merge(Economy *e)
 		add_flag(flag);
 	}
 
-	// Merge requests after flags are merged for two reasons:
-	//  a) all flags and buildings must have the correct economy set,
-	//     or havoc ensues
-	//  b) all offered wares are now joined together, so we can really get
-	//     the closest provider instead of just the first one
-	for(i = 0; i < (int)e->m_requests.size(); i++) {
-		while(e->m_requests[i].get_nrrequests()) {
-			Request *req = e->m_requests[i].get_request(0);
-
-			e->m_requests[i].remove(req);
-
-			// if the request can't be fulfilled yet, pretend it's just been requested
-			// otherwise, don't mess with it, just add it
-			if (req->get_state() == Request::OPEN)
-				add_request(req);
-			else {
-				if (i >= (int)m_requests.size())
-					m_requests.resize(i+1);
-				m_requests[i].add(req);
-			}
-		}
-	}
-
-	// Fix up after rebuilding
+	// Fix up Supply/Request after rebuilding
 	m_rebuilding = false;
 
 	process_requests();
@@ -3225,6 +3200,7 @@ void Economy::do_merge(Economy *e)
 	// implicitly delete the economy
 	delete e;
 }
+
 
 /*
 ===============
@@ -3268,47 +3244,7 @@ void Economy::do_split(Flag *f)
 
 	log("  split %i flags\n", e->get_nrflags());
 
-	// Split the requests by looking at their owner
-	Game *game = static_cast<Game*>(get_owner()->get_game());
-
-	for(int ware = 0; ware < (int)m_requests.size(); ware++) {
-		int idx = 0;
-		while(idx < m_requests[ware].get_nrrequests()) {
-			Request *req = m_requests[ware].get_request(idx);
-			Economy *tgteco = req->get_target_economy(game);
-
-			if (tgteco == this)
-			{
-				// The target still remains with us.
-				// If a transfer has been initiated, check whether the transfer can
-				// still finish
-				if (req->get_state() == Request::TRANSFER)
-					req->check_transfer(game);
-
-				idx++;
-			}
-			else
-			{
-				// The target changes economy. Remove the request
-				m_requests[ware].remove(req);
-
-				// If it's still open, pretend it has just been requested
-				if (req->get_state() == Request::OPEN)
-					tgteco->add_request(req);
-				else {
-					// Manually add to other economy
-					if (ware >= (int)tgteco->m_requests.size())
-						tgteco->m_requests.resize(ware+1);
-					tgteco->m_requests[ware].add(req);
-
-					if (req->get_state() == Request::TRANSFER)
-						req->check_transfer(game);
-				}
-			}
-		}
-	}
-
-	// Fix requests
+	// Fix Supply/Request after rebuilding
 	m_rebuilding = false;
 	e->m_rebuilding = false;
 
@@ -3383,13 +3319,13 @@ void Economy::process_requests()
 {
 	for(uint ware = 0; ware < m_requests.size(); ware++) {
 		if (m_requests[ware].get_nrrequests()) {
-			for(int idx = 0; idx < m_requests[ware].get_nrrequests(); idx++) {
-				Request *req = m_requests[ware].get_request(idx);
+			while(m_requests[ware].get_nrrequests()) {
+				Request *req = m_requests[ware].get_request(0);
 
-				if (req->get_state() != Request::OPEN)
-					continue;
+				assert(req->get_state() == Request::OPEN);
 
-				process_request(req);
+				if (!process_request(req))
+					break;
 			}
 		}
 	}
