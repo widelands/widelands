@@ -595,3 +595,4 @@ void AnimationGfx::encode(AnimFrame* frame, SDL_Surface* bmp, const EncodeData* 
 }
 
 }; // namespace Renderer_Software16
+

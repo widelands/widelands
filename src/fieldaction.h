@@ -32,3 +32,4 @@ void show_field_action(Interactive_Player *parent, UniqueWindowRegistry* registr
 void show_bulldoze_confirm(Interactive_Player* player, Building* building, PlayerImmovable* todestroy);
 
 #endif /* FIELDACTION_H */
+

@@ -943,3 +943,4 @@ LayeredFileSystem *LayeredFileSystem::Create()
 {
 	return new LayeredFSImpl;
 }
+
