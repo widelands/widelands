@@ -53,9 +53,10 @@ class Player {
       ~Player(void);
 
       inline int get_type() { return m_type; }
-
+		Tribe_Descr *get_tribe();
+		
 		void setup();
-		      
+		
 		// get functions
       inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
       inline bool is_field_seen(int x, int y) { return (*seen_fields)[y*game->get_map()->get_w() + x]; }

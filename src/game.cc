@@ -95,6 +95,18 @@ void Game::set_mapname(const char* mapname)
 	// Networking updates here?
 }
 
+/*
+===============
+Game::get_allow_cheats
+
+Returns true if cheat codes have been activated (single-player only)
+===============
+*/
+bool Game::get_allow_cheats()
+{
+	return true;
+}
+
 /** Game::remove_player(int plnum)
  *
  + Remove the player with the given number
@@ -177,19 +189,19 @@ bool Game::run(void)
 
 		// TEMP
 		tribe= new Tribe_Descr(); 
-	   tribe->load("testtribe");
+	   tribe->load("romans");
 		// TEMP
 
       // Load the map
 		map = new Map();
-      if (RET_OK != map->load_map(m_mapname, this)) {
+		if (RET_OK != map->load_map(m_mapname, this)) {
 			critical_error("Couldn't load map.");
 			m_state = gs_none;
 			return false;
 		}
 
       // TEMP: player number
-	   ipl = new Interactive_Player(this, 1);
+		ipl = new Interactive_Player(this, 1);
 	  
 		// Prepare the players (i.e. place HQs)
 		for(int i = 1; i <= map->get_nplayers(); i++) {
@@ -198,7 +210,7 @@ bool Game::run(void)
 				continue;
 
 			player->setup();
-		
+
 			const Coords* c = map->get_starting_pos(i);
 			if (player->get_type() == Player::playerLocal)
 				ipl->move_view_to(c->x, c->y);
@@ -280,12 +292,34 @@ void Game::create_bob(int x, int y, int idx)
 
 /*
 ===============
-Game::get_allow_cheats
+Game::conquer_area
 
-Returns true if cheat codes have been activated (single-player only)
+Conquers the given area for that player.
+Additionally, it updates the visible area for that player.
 ===============
 */
-bool Game::get_allow_cheats()
+void Game::conquer_area(uchar playernr, Coords coords, int radius)
 {
-	return true;
+	Map_Region m(coords.x, coords.y, radius, map);
+	Field* f;
+
+	while((f = m.next()))
+	{
+		if (f->get_owned_by() == playernr)
+			continue;
+		if (!f->get_owned_by()) {
+			f->set_owned_by(playernr);
+			continue;
+		}
+		
+      // TODO: add support here what to do if some fields are already
+      // occupied by another player
+		// Probably the best thing to just don't grab it. Players should fight
+		// for their land.
+      //cerr << "warning: already occupied field is claimed by another user!" << endl;
+   }
+	
+	Player *player = get_player(playernr);
+	
+	player->set_area_seen(coords.x, coords.y, radius+4, true);
 }

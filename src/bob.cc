@@ -25,6 +25,112 @@
 #include "map.h"
 #include "profile.h"
 
+
+/*
+==============================================================================
+
+EncodeData IMPLEMENTAION
+
+==============================================================================
+*/
+
+/*
+===============
+EncodeData::clear
+
+Reset the EncodeData to defaults (no special colors)
+===============
+*/			
+void EncodeData::clear()
+{
+	hasclrkey = false;
+	hasshadow = false;
+	hasplrclrs = false;
+}
+
+
+/*
+===============
+EncodeData::parse
+
+Parse color codes from section, the following keys are currently known:
+
+clrkey_[r,g,b]		Color key
+shadowclr_[r,g,b]	color for shadow pixels
+===============
+*/
+void EncodeData::parse(Section *s)
+{
+	int r, g, b;
+
+	// Read color key
+	r = s->get_int("clrkey_r", -1);
+	g = s->get_int("clrkey_g", -1);
+	b = s->get_int("clrkey_b", -1);
+	if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
+		hasclrkey = true;
+		clrkey_r = r;
+		clrkey_g = g;
+		clrkey_b = b;
+	}
+	
+	// Read shadow color
+	r = s->get_int("shadowclr_r", -1);
+	g = s->get_int("shadowclr_g", -1);
+	b = s->get_int("shadowclr_b", -1);
+	if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
+		hasshadow = true;
+		shadow_r = r;
+		shadow_g = g;
+		shadow_b = b;
+	}
+
+	// TODO: read player color codes	
+}
+
+
+/*
+===============
+EncodeData::add
+
+Add another encode data. Already existing color codes are overwritten
+===============
+*/
+void EncodeData::add(const EncodeData *other)
+{
+	if (other->hasclrkey) {
+		hasclrkey = true;
+		clrkey_r = other->clrkey_r;
+		clrkey_g = other->clrkey_g;
+		clrkey_b = other->clrkey_b;
+	}
+	
+	if (other->hasshadow) {
+		hasshadow = true;
+		shadow_r = other->shadow_r;
+		shadow_g = other->shadow_g;
+		shadow_b = other->shadow_b;
+	}
+	
+	if (other->hasplrclrs) {
+		hasplrclrs = true;
+		for(int i = 0; i < 4; i++) {
+			plrclr_r[i] = other->plrclr_r[i];
+			plrclr_g[i] = other->plrclr_g[i];
+			plrclr_b[i] = other->plrclr_b[i];
+		}
+	}
+}
+
+
+/*
+==============================================================================
+
+Animation IMPLEMENTAION
+
+==============================================================================
+*/
+			
 Animation::Animation(void)
 {
 	npics = 0;
@@ -67,12 +173,28 @@ void Animation::add_pic(ushort size, ushort* data)
  *
  * Adds one frame to the animation
  */
-void Animation::add_pic(Pic* pic, bool hasclrkey, ushort clrkey, ushort hasshadow, int shadowclr,
-                                  int hasplrclrs, ushort *plrclrs)
+void Animation::add_pic(Pic* pic, const EncodeData *encdata)
 {
 	if(pic->get_w() != w && pic->get_h() != h)
 		throw wexception("frame must be %ix%i pixels big", w, h);
 
+	// Pack the EncodeData colorkey&co. to 16 bit
+	ushort clrkey = 0;
+	ushort shadowclr = 0;
+	int hasplrclrs = 0;
+	ushort plrclrs[4];
+	
+	if (encdata->hasclrkey)
+		clrkey = pack_rgb(encdata->clrkey_r, encdata->clrkey_g, encdata->clrkey_b);
+	if (encdata->hasshadow)
+		shadowclr = pack_rgb(encdata->shadow_r, encdata->shadow_g, encdata->shadow_b);
+	if (encdata->hasplrclrs) {
+		hasplrclrs = 4;
+		for(int i = 0; i < 4; i++)
+			plrclrs[i] = pack_rgb(encdata->plrclr_r[i], encdata->plrclr_g[i], encdata->plrclr_b[i]);
+	}
+	
+	// Ready to encode	
    ushort* data = 0;
 	uint in, out;
 	int runstart = -1; // code field for normal run
@@ -90,7 +212,7 @@ void Animation::add_pic(Pic* pic, bool hasclrkey, ushort clrkey, ushort hasshado
 			uint count;
 	
 			// Deal with transparency
-			if (hasclrkey && pixels[in] == clrkey) {
+			if (encdata->hasclrkey && pixels[in] == clrkey) {
 				if (runstart >= 0) { // finish normal run
 					data[runstart] = out-runstart-1;
 					runstart = -1;
@@ -108,7 +230,7 @@ void Animation::add_pic(Pic* pic, bool hasclrkey, ushort clrkey, ushort hasshado
 			}
 			
 			// Deal with shadow
-			if (hasshadow && pixels[in] == shadowclr) {
+			if (encdata->hasshadow && pixels[in] == shadowclr) {
 				if (runstart >= 0) { // finish normal run
 					data[runstart] = out-runstart-1;
 					runstart = -1;
@@ -197,38 +319,43 @@ int Animation::read(FileRead* f)
    return RET_OK;
 }
 
-/** Animation::parse(const char *directory, Section *s, const char *picnametempl)
- *
- * Read an animation which sits in the given directory.
- * The animation is described by the given section.
- * picnametempl, when not null, overrides the default logic for determining
- *  picture file names when the file names aren't given explicitly.
- */
-void Animation::parse(const char *directory, Section *s, const char *picnametempl)
+/*
+===============
+Animation::parse
+
+Read an animation which sits in the given directory.
+The animation is described by the given section.
+
+This function looks for pictures in this order:
+	picnametempl, if not null
+	key 'pics', if present
+	<sectionname>_??.bmp
+===============
+*/
+void Animation::parse(const char *directory, Section *s, const char *picnametempl, const EncodeData *encdefaults)
 {
 	char templbuf[256]; // used when picnametempl == 0
 	char pictempl[256];
 
 	if (!picnametempl) {
-		// allow named sections to automatically give sequence names
-		snprintf(templbuf, sizeof(templbuf), "%s_??.bmp", s->get_name());
-		picnametempl = templbuf;
+		picnametempl = s->get_string("pics");
+		if (!picnametempl) {
+			snprintf(templbuf, sizeof(templbuf), "%s_??.bmp", s->get_name());
+			picnametempl = templbuf;
+		}
 	}
 	
 	snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
 
 	// Get colorkey, shadow color and hotspot
-	int r, g, b;
-   ushort clrkey, shadowclr;
-   r = s->get_int("clrkey_r", 255); 
-   g = s->get_int("clrkey_g", 255);
-   b = s->get_int("clrkey_b", 255);
-   clrkey = pack_rgb(r, g, b);
-   r = s->get_int("shadowclr_r", 0);
-   g = s->get_int("shadowclr_g", 0);
-   b = s->get_int("shadowclr_b", 0);
-   shadowclr = pack_rgb(r, g, b);
-
+	EncodeData encdata;
+	
+	encdata.clear();
+	
+	if (encdefaults)
+		encdata.add(encdefaults);
+	
+	encdata.parse(s);
 
 	// TODO: Frames of varying size / hotspot?
 
@@ -276,7 +403,7 @@ void Animation::parse(const char *directory, Section *s, const char *picnametemp
 		}
 		
 		try {
-			add_pic(pic, true, clrkey, true, shadowclr, 0, 0);
+			add_pic(pic, &encdata);
 		} catch(...) {
 			delete pic;
 			throw;
@@ -706,8 +833,7 @@ Logic_Bob_Descr *Logic_Bob_Descr::create_from_dir(const char *directory)
 	try
 	{
 		Profile prof(fname, "global"); // section-less file
-		Section *s = prof.get_next_section(0);
-		assert(s);
+		Section *s = prof.get_safe_section("global");
 
 		const char *type = s->get_safe_string("type");
 

@@ -128,7 +128,11 @@ void g_main(int argc, char** argv)
 	{
 		g_init(argc, argv);
 
-		main_menue();
+		try {
+			main_menue();
+		} catch(std::exception &e) {
+			critical_error("Unhandled exception: %s", e.what());
+		}
 
 		g_shutdown();
 	}

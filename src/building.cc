@@ -18,12 +18,338 @@
  */
 
 #include "widelands.h"
+#include "profile.h"
 #include "tribedata.h"
 #include "helper.h"
 #include "tribe.h"
 #include "game.h"
 #include "player.h"
 
+
+/*
+==============================================================================
+
+Basic building
+
+==============================================================================
+*/
+
+/*
+===============
+Building_Descr::Building_Descr
+
+Initialize with sane defaults
+===============
+*/
+Building_Descr::Building_Descr(Tribe_Descr *tribe, const char *name)
+{
+	m_tribe = tribe;
+	snprintf(m_name, sizeof(m_name), "%s", name);
+	strcpy(m_descname, m_name);
+	m_buildable = true;
+}
+
+
+/*
+===============
+Building_Descr::~Building_Descr
+
+Cleanup
+===============
+*/
+Building_Descr::~Building_Descr(void)
+{
+}
+		
+
+/*
+===============
+Building_Descr::parse
+
+Parse the basic building settings from the given profile and directory
+===============
+*/
+void Building_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
+{
+	Section *global = prof->get_safe_section("global");
+	const char *string;
+	
+	add_attribute(Map_Object::ROBUST);
+	add_attribute(Map_Object::BUILDING);
+	add_attribute(Map_Object::UNPASSABLE);
+
+	snprintf(m_descname, sizeof(m_descname), "%s", global->get_safe_string("descname"));
+
+	string = global->get_safe_string("size");
+	if (!strcasecmp(string, "small")) {
+		add_attribute(Map_Object::SMALL);
+	} else if (!strcasecmp(string, "big")) {
+		add_attribute(Map_Object::BIG);
+	} else if (!strcasecmp(string, "mine")) {
+		add_attribute(Map_Object::SMALL);
+	} else if (!strcasecmp(string, "medium")) {
+		//
+	} else
+		throw wexception("Section [global], unknown size '%s'. Valid values are small, medium, big, mine",
+		                 string);
+	
+	m_buildable = global->get_bool("buildable", true);
+	
+	Section *s = prof->get_section("idle");
+	if (!s)
+		throw wexception("Missing idle animation");
+	m_idle.parse(directory, s, 0, encdata);
+}
+
+
+/*
+==============================
+
+Implementation
+
+==============================
+*/
+class Building : public Map_Object {
+	MO_DESCR(Building_Descr)
+
+public:
+	Building(Building_Descr *descr);
+	
+	virtual void init(Game* g);
+};
+
+Building::Building(Building_Descr *descr)
+	: Map_Object(descr)
+{
+}
+
+/*
+===============
+Building::init
+
+Common building initialization code. You must call this from derived class' init.
+===============
+*/
+void Building::init(Game* g)
+{
+	Map_Object::init(g);
+}
+
+
+/*
+==============================================================================
+
+Warehouse building
+
+==============================================================================
+*/
+
+class Warehouse_Descr : public Building_Descr {
+public:
+	enum {
+		Subtype_Normal,
+		Subtype_HQ,
+		Subtype_Port
+	};
+	
+	Warehouse_Descr(Tribe_Descr *tribe, const char *name);
+
+	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+	virtual Map_Object *create_object();
+	
+	inline int get_subtype() const { return m_subtype; }
+	inline int get_conquers() const { return m_conquers; }
+	
+private:
+	int	m_subtype;
+	int	m_conquers;		// HQs conquer
+};
+
+/*
+===============
+Warehouse_Descr::Warehouse_Descr
+
+Initialize with sane defaults
+===============
+*/
+Warehouse_Descr::Warehouse_Descr(Tribe_Descr *tribe, const char *name)
+	: Building_Descr(tribe, name)
+{
+	m_subtype = Subtype_Normal;
+	m_conquers = 0;
+}
+
+/*
+===============
+Warehouse_Descr::parse
+
+Parse the additional warehouse settings from the given profile and directory
+===============
+*/
+void Warehouse_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
+{
+	Building_Descr::parse(directory, prof, encdata);
+
+	Section *global = prof->get_safe_section("global");
+	const char *string;
+	
+	string = global->get_safe_string("subtype");
+	if (!strcasecmp(string, "HQ")) {
+		m_subtype = Subtype_HQ;
+	} else if (!strcasecmp(string, "port")) {
+		m_subtype = Subtype_Port;
+	} else if (!strcasecmp(string, "none")) {
+		//
+	} else
+		throw wexception("Unsupported warehouse subtype '%s'. Possible values: none, HQ, port", string);
+	
+	if (m_subtype == Subtype_HQ)
+		m_conquers = global->get_int("conquers");
+}
+
+
+/*
+==============================
+
+Normal Implementation
+
+==============================
+*/
+class Warehouse : public Building {
+	MO_DESCR(Warehouse_Descr);
+
+public:
+	Warehouse(Warehouse_Descr *descr);
+
+	virtual void init(Game *g);
+	virtual void task_start_best(Game *g, uint prev, bool success, uint nexthint);
+};
+
+/*
+===============
+Warehouse::Warehouse
+
+Initialize a warehouse (zero contents, etc...)
+===============
+*/
+Warehouse::Warehouse(Warehouse_Descr *descr)
+	: Building(descr)
+{
+}
+
+/*
+===============
+Warehouse::init
+
+Conquer the land around the HQ on init.
+===============
+*/	
+void Warehouse::init(Game* g)
+{
+	if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
+		g->conquer_area(get_owned_by(), m_pos, get_descr()->get_conquers());
+	
+	Building::init(g);
+}
+
+/*
+===============
+Warehouse::task_start_best
+
+Always idle.
+===============
+*/
+void Warehouse::task_start_best(Game *g, uint prev, bool success, uint nexthint)
+{
+	start_task_idle(g, get_descr()->get_idle_anim(), -1);
+}
+
+
+/*
+===============
+Warehouse_Descr::create_object
+===============
+*/
+Map_Object *Warehouse_Descr::create_object()
+{
+	return new Warehouse(this);
+}
+
+/*
+==============================================================================
+
+Building_Descr Factory
+
+==============================================================================
+*/
+
+/*
+===============
+Building_Descr::create_from_dir
+
+Open the appropriate configuration file and check if a building description
+is there.
+
+May return 0.
+===============
+*/
+Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *directory,
+		                                          const EncodeData *encdata)
+{
+	const char *name;
+	
+	// name = last element of path
+	const char *slash = strrchr(directory, '/');
+	const char *backslash = strrchr(directory, '\\');
+	
+	if (backslash && (!slash || backslash > slash))
+		slash = backslash;
+	
+	if (slash)
+		name = slash+1;
+	else
+		name = directory;
+
+	// Open the config file
+	Building_Descr *descr = 0;
+	char fname[256];
+	
+	snprintf(fname, sizeof(fname), "%s/conf", directory);
+	
+	if (!g_fs->FileExists(fname))
+		return 0;
+		
+	try
+	{
+		Profile prof(fname, "global"); // section-less file
+		Section *s = prof.get_safe_section("global");
+		const char *type = s->get_safe_string("type");
+		
+		if (!strcasecmp(type, "warehouse"))
+			descr = new Warehouse_Descr(tribe, name);
+		else
+			throw wexception("Unknown building type '%s'", type);
+		
+		descr->parse(directory, &prof, encdata);
+		prof.check_used();
+	}
+	catch(std::exception &e) {
+		if (descr)
+			delete descr;
+		throw wexception("Error reading building %s: %s", name, e.what());
+	}
+	catch(...) {
+		if (descr)
+			delete descr;
+		throw;
+	}
+	
+	return descr;
+}
+
+
+
+#if 0
 // 
 // Need List
 // 
@@ -50,31 +376,6 @@ int NeedWares_List::read(FileRead* f)
 
 // 
 // Down here: Descriptions
-
-int Building_Descr::read(FileRead *f)
-{
-	add_attribute(Map_Object::ROBUST);
-	add_attribute(Map_Object::UNPASSABLE);
-
-   memcpy(name, f->Data(sizeof(name)), sizeof(name));
-
-   uchar temp;
-   temp = f->Unsigned8();
-   is_enabled = temp ? true : false;
-   see_area = f->Unsigned16();
-   uint w, h, hsx, hsy;
-	w = f->Unsigned16();
-	h = f->Unsigned16();
-	hsx = f->Unsigned16();
-	hsy = f->Unsigned16();
-
-   idle.set_dimensions(w, h);
-   idle.set_hotspot(hsx, hsy);
-
-   idle.read(f);
-
-   return RET_OK;
-}
 
 int Has_Needs_Building_Descr::read(FileRead *f)
 {
@@ -139,68 +440,6 @@ int Boring_Building_Descr::read(FileRead *f)
    return RET_OK;
 }
 
-/*
-==============================================================================
-
-Building helper functions
-
-==============================================================================
-*/
-void conquer_area(uchar player, Map* map, int x, int y, ushort area)
-{
-   Map_Region m(x, y, area, map);
-   Field* f;
-   while((f=m.next())) {
-      if(f->get_owned_by() == player) continue;
-      if(!f->get_owned_by()) {
-         f->set_owned_by(player);
-         continue;
-      }
-		
-      // TODO: add support here what to do if some fields are already
-      // occupied by another player
-		// Probably the best thing to just don't grab it. Players should fight
-		// for their land.
-      //cerr << "warning: already occupied field is claimed by another user!" << endl;
-   }
-}
-
-/*
-==============================================================================
-
-Base Building
-
-==============================================================================
-*/
-
-class Building : public Map_Object {
-	MO_DESCR(Building_Descr)
-
-public:
-	Building(Building_Descr *descr);
-	
-	virtual void init(Game* g);
-};
-
-Building::Building(Building_Descr *descr)
-	: Map_Object(descr)
-{
-}
-
-/** Building::init(Game *g)
- *
- * Common building initialization code. You must call this from derived class' init.
- */
-void Building::init(Game* g)
-{
-   Player* player = g->get_player(get_owned_by());
-
-	assert(player);
-   
-	player->set_area_seen(m_pos.x, m_pos.y, get_descr()->get_see_area(), true);
-
-	Map_Object::init(g);
-}
 
 // 
 // DOWN HERE: The real buildings, no abstractions
@@ -504,60 +743,6 @@ Map_Object *Cannon_Descr::create_object()
 	return 0;
 }
 
-
-/*
-==============================================================================
-
-Headquarters
-
-==============================================================================
-*/
-
-class Building_HQ : public Building {
-		MO_VIRTUAL_DESCR(HQ_Descr)
-
-   public:
-      Building_HQ(HQ_Descr* d);
-		
-		virtual void init(Game* g);
-		virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
-};
-
-// HQ code
-Building_HQ::Building_HQ(HQ_Descr *d)
-	: Building(d)
-{
-	m_descr = d;
-}
-
-void Building_HQ::init(Game* g)
-{
-   // conquer area
-	conquer_area(get_owned_by(), g->get_map(), m_pos.x, m_pos.y, get_descr()->get_conquers());
-	
-	Building::init(g);
-}
-
-void Building_HQ::task_start_best(Game* g, uint prev, bool success, uint nexthint)
-{
-	start_task_idle(g, get_descr()->get_idle_anim(), -1);
-}
-
-// HQ description
-int HQ_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-
-   // own 
-   conquers = f->Unsigned16();
-
-   return 0;
-}
-Map_Object *HQ_Descr::create_object()
-{
-	return new Building_HQ(this);
-}
-
 /*
 ==============================================================================
 
@@ -636,3 +821,5 @@ Map_Object *Port_Descr::create_object()
 	return 0;
 }
 
+
+#endif

@@ -41,17 +41,35 @@ Player::~Player(void) {
       delete seen_fields;
 }
 
-/** Player::setup()
- *
- * Prepare the player for in-game action
- */
+/*
+===============
+Player::get_tribe
+
+Return the tribe this player uses
+===============
+*/
+Tribe_Descr *Player::get_tribe()
+{
+	return game->get_player_tribe(m_plnum);
+}
+
+/*
+===============
+Player::setup
+
+Prepare the player for in-game action
+===============
+*/
 void Player::setup()
 {
 	seen_fields = new std::vector<bool>(game->get_map()->get_w()*game->get_map()->get_h(), false);
 
 	// place the HQ
 	const Coords *c = game->get_map()->get_starting_pos(m_plnum);
-	game->warp_building(c->x, c->y, m_plnum, 0);
+	int idx = get_tribe()->get_building_index("headquarters");
+	if (idx < 0)
+		throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
+	game->warp_building(c->x, c->y, m_plnum, idx);
 }
 
 /** Player::set_area_seen(int x, int y, uint area, bool on)

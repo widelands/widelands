@@ -23,6 +23,42 @@
 #include "instances.h"
 
 
+class Tribe_Descr;
+class Profile;
+struct EncodeData;
+
+/*
+ * Common to all buildings!
+ */
+class Building_Descr : public Map_Object_Descr { 
+   public:
+      Building_Descr(Tribe_Descr *tribe, const char *name);
+      virtual ~Building_Descr(void);
+		
+		virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+
+		inline const char *get_name(void) { return m_name; }
+		inline const char *get_descname() { return m_descname; }
+		inline Animation* get_idle_anim(void) { return &m_idle; }
+      inline bool get_buildable(void) { return m_buildable; }
+
+   private: 
+		Tribe_Descr		*m_tribe;			// the tribe this building belongs to
+		char				m_name[15];			// internal codename
+		char				m_descname[30];	// descriptive name for GUI
+		bool				m_buildable;		// the player can build this himself
+		Animation		m_idle;
+
+	public:
+		static Building_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory,
+		                                       const EncodeData *encdata);
+};
+
+
+#if 0
+/*
+ * Buildings, that have some need wares (means also stock ist valid)
+ */
 class NeedWares_List {
    public:
       NeedWares_List(void) { list=0; }
@@ -40,36 +76,6 @@ class NeedWares_List {
       List* list;
 };
 
-/*
- * Common to all buildings!
- */
-class Building_Descr : public Map_Object_Descr { 
-   public:
-      Building_Descr(void) { }
-      virtual ~Building_Descr(void) { }
-
-      virtual int read(FileRead* f);
-     
-      inline char* get_name(void) { return name; }
-      inline Animation* get_idle_anim(void) { return &idle; }
-      inline bool get_is_enabled(void) { return is_enabled; }
-      inline ushort get_see_area(void) { return see_area; }
-
-   protected:
-      //      int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew=0, ushort* eh=0);
-
-   private: 
-      char name[30];
-      ushort see_area;
-      bool is_enabled;
-
-   protected: // for size
-      Animation idle;
-};
-
-/*
- * Buildings, that have some need wares (means also stock ist valid)
- */
 class Has_Needs_Building_Descr : virtual public Building_Descr {
    public:
       Has_Needs_Building_Descr(void) { }
@@ -458,6 +464,6 @@ class Port_Descr : virtual public Boring_Building_Descr,
       private:
          // nothing
 };
-
+#endif
 
 #endif // __S__BUILDING_H

@@ -5,5 +5,6 @@ build-2:
 - added keyboard input
 - build symbols react to objects now (can't build next to stones etc...)
 - only use 8 different types of trees (like Settlers 2)
-- unique windows now reappear where they were last moved
+- unique windows now remember their position
 - improved fieldaction mouse placement for fast click-through
+- new structure for tribe data

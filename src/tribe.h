@@ -44,30 +44,33 @@ class Tribe_Descr {
 
       void load(const char* name);
 
-      inline Ware_Descr* get_ware_descr(uint idx) { return wares.get(idx); }
+		inline const char *get_name() const { return m_name; }
+		
+		inline Ware_Descr* get_ware_descr(uint idx) { return wares.get(idx); }
       inline Soldier_Descr* get_soldier_descr(uint idx) { return soldiers.get(idx); }
       inline Worker_Descr* get_worker_descr(uint idx) { return workers.get(idx); }
-      inline Building_Descr* get_building_descr(uint idx) { return buildings.get(idx); }
-      inline Animation* get_frontier_anim(void) { return &frontier; }
+		inline int get_building_index(const char *name) { return buildings.get_index(name); }
+		inline Building_Descr *get_building_descr(uint idx) { return buildings.get(idx); }
+      inline Animation* get_frontier_anim(void) { return &m_anim_frontier; }
 
    private:
-      Animation frontier;
-      char name[30];
-      Descr_Maintainer<Ware_Descr> wares;
+      char m_name[30];
+      
+      Animation m_anim_frontier;
+		
+		Descr_Maintainer<Ware_Descr> wares;
       Descr_Maintainer<Soldier_Descr> soldiers;
       Descr_Maintainer<Worker_Descr> workers;
       Descr_Maintainer<Building_Descr> buildings;
 
-      // Functions
-      void parse_header(FileRead* f);
-      void parse_regent(FileRead* f);
-      void parse_bobs(FileRead* f);
-      void parse_wares(FileRead* f);
-      void parse_soldiers(FileRead* f);
-      void parse_workers(FileRead* f);
-      void parse_buildings(FileRead* f);
+      // Parsing the tribe
+		EncodeData	m_default_encdata;
+		
+		void parse_root_conf(const char *directory);
+		void parse_buildings(const char *directory);
+		void parse_workers(const char *directory);
+		void parse_soldiers(const char *directory);
+		void parse_wares(const char *directory);
 };
-
-int read_anim(Animation* a, FileRead* f);
 
 #endif //__TRIBE_H

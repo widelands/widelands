@@ -35,6 +35,21 @@ struct Animation_Pic {
    Animation* parent;
 };
 
+struct EncodeData {
+	bool hasclrkey;
+	uchar clrkey_r, clrkey_g, clrkey_b;
+	bool hasshadow;
+	uchar shadow_r, shadow_g, shadow_b;
+	bool hasplrclrs;
+	uchar plrclr_r[4];
+	uchar plrclr_g[4];
+	uchar plrclr_b[4];
+
+	void clear();
+	void parse(Section *s);
+	void add(const EncodeData *o);
+};
+
 class Animation {
    public:
       enum {
@@ -52,15 +67,14 @@ class Animation {
       inline ushort get_hsy(void) { return hsy; }
 
       void add_pic(ushort size, ushort* data);
-		void add_pic(Pic* pic, bool hasclrkey, ushort clrkey, ushort hasshadow, int shadowclr,
-		                       int hasplrclrs, ushort *plrclrs);
+		void add_pic(Pic* pic, const EncodeData *enc);
 
       void set_flags(uint mflags) { flags=mflags; }
       void set_dimensions(ushort mw, ushort mh) { w=mw; h=mh; }
       void set_hotspot(ushort x, ushort y) { hsx=x; hsy=y; }
 
       int read(FileRead*);
-		void parse(const char *directory, Section *s, const char *picnametempl);
+		void parse(const char *directory, Section *s, const char *picnametempl = 0, const EncodeData *encdefaults = 0);
 		
       inline Animation_Pic* get_pic(ushort n) { assert(n<npics); return &pics[n]; }
       inline ushort get_npics(void) { return npics; }

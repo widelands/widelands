@@ -113,6 +113,8 @@ void World::parse_root_conf(const char *directory, const char *name)
 		if (!str)
 			key_missing("world", "descr");
 		snprintf(hd.descr, sizeof(hd.descr), "%s", str);
+		
+		prof.check_used();
 	}
 	catch(std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());
@@ -140,6 +142,8 @@ void World::parse_resources(const char *directory)
 				throw;
 			}
 		}
+		
+		prof.check_used();
 	}
 	catch(std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());
@@ -151,20 +155,28 @@ void World::parse_terrains(const char *directory)
 	char fname[256];
 	
 	snprintf(fname, sizeof(fname), "%s/terrainconf", directory);
-   
-   Profile prof(fname);
-   Section* s;
 
-	while((s = prof.get_next_section(0)))
-	{
-		Terrain_Descr *ter = new Terrain_Descr();
-		try {
-			ter->read(directory, s);
-			ters.add(ter);
-		} catch(...) {
-			delete ter;
-			throw;
+	try
+	{   
+		Profile prof(fname);
+		Section* s;
+
+		while((s = prof.get_next_section(0)))
+		{
+			Terrain_Descr *ter = new Terrain_Descr();
+			try {
+				ter->read(directory, s);
+				ters.add(ter);
+			} catch(...) {
+				delete ter;
+				throw;
+			}
 		}
+
+		prof.check_used();
+	}
+	catch(std::exception &e) {
+		throw wexception("%s: %s", fname, e.what());
 	}
 }
 
