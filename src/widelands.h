@@ -121,24 +121,32 @@ inline bool operator!=(const FCoords& c1, const FCoords& c2) { return !(c1 == c2
 
 
 // TODO: figure out a way to define these portably
-#define P_LITTLE_ENDIAN
+// At the moment it just distinguishs between i386- and PowerPC-architecture
+#if defined (__ppc__)
+#undef P_LITTLE_ENDIAN
+#define P_BIG_ENDIAN
+#elif defined (__i386__)
 #undef P_BIG_ENDIAN
+#define P_LITTLE_ENDIAN
+#else
+#error architecture not supported
+#endif
 
 #ifdef P_LITTLE_ENDIAN
 #define Little16(x)		(x)
 #define Little32(x)		(x)
-#define LittleFloat(x)	(x)
-#define Big16(x)			Swap16((x))
-#define Big32(x)			Swap32((x))
+#define LittleFloat(x)		(x)
+#define Big16(x)		Swap16((x))
+#define Big32(x)		Swap32((x))
 #define BigFloat(x)		SwapFloat((x))
 #endif
 
 #ifdef P_BIG_ENDIAN
 #define Little16(x)		Swap16((x))
 #define Little32(x)		Swap32((x))
-#define LittleFloat(x)	SwapFloat((x))
-#define Big16(x)			(x)
-#define Big32(x)			(x)
+#define LittleFloat(x)		SwapFloat((x))
+#define Big16(x)		(x)
+#define Big32(x)		(x)
 #define BigFloat(x)		(x)
 #endif
 

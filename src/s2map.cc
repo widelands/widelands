@@ -115,10 +115,16 @@ void S2_Map_Loader::load_s2mf_header()
 	S2MapDescrHeader header;
 	memcpy(&header, file.Data(sizeof(header)), sizeof(header));
 
+        //  Header must be swaped for big-endian Systems, works at the moment only for PowerPC architecture
+#if defined(__ppc__)
+        header.w=Swap16(header.w);
+        header.h=Swap16(header.h);
+#endif
+
 	// don't really set size, but make the structures
-   // valid
-   m_map->m_width=header.w;
-   m_map->m_height=header.h;
+        // valid
+        m_map->m_width=header.w;
+        m_map->m_height=header.h;
 
 	m_map->set_author(header.author);
 	m_map->set_name(header.name);
@@ -156,6 +162,12 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 
 		S2MapDescrHeader header;
 		memcpy(&header, file.Data(sizeof(header)), sizeof(header));
+                
+                //  Header must be swaped for big-endian Systems, works at the moment only for PowerPC architecture
+#if defined(__ppc__)
+                header.w=Swap16(header.w);
+                header.h=Swap16(header.h);
+#endif
 
 		// The header must already have been processed
 		assert(m_map->m_world);

@@ -160,6 +160,15 @@ void Font::do_load()
 		int w = f.Unsigned16();
 
 		ushort *data = (ushort*)f.Data(sizeof(ushort)*w*m_height);
+
+                //  Pixeldata (ushort) must be swaped for big-endian Systems, works at the moment only for PowerPC architecture
+#if defined(__ppc__)
+                for (int a = 0; a < w; a++) {
+                    for (int b = 0; b < m_height; b++){
+                        data[a*m_height + b] = (ushort) Swap16(data[a*m_height + b]);
+                    }
+                }
+#endif
 		
 		m_pictures[i].width = w;
 		m_pictures[i].pic = g_gr->get_picture(PicMod_UI, w, m_height, data, clrkey);
