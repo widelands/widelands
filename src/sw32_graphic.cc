@@ -910,6 +910,7 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 {
 	m_nr_update_rects = 0;
 	m_update_fullscreen = false;
+   m_roadtextures = 0;
 
 	// Set video mode using SDL
 	int flags;
@@ -1185,10 +1186,11 @@ void GraphicImpl::flush(int mod)
       for(i = 0; i < m_animations.size(); i++)
          delete m_animations[i];
       m_animations.resize(0);
-   }
-   if( m_roadtextures ) {
-      delete m_roadtextures; 
-      m_roadtextures = 0;
+      
+      if( m_roadtextures ) {
+         delete m_roadtextures; 
+         m_roadtextures = 0;
+      }
    }
 }
 
