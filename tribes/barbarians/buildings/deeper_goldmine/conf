@@ -18,7 +18,7 @@ meal=6
 0=sleep 40000   # a bit faster
 1=consume meal  
 2=animation working 16000
-3=mine iron 2 100 10 
+3=mine gold 2 100 10 
 4=produce goldstone
 
 [buildcost]
