@@ -162,7 +162,9 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 		if (down) {
 			dragging = true;
 			grab_mouse(true);
+			Sys_MouseLock(true);
 		} else if (dragging) {
+			Sys_MouseLock(false);
 			grab_mouse(false);
 			dragging = false;
 		}
@@ -183,7 +185,6 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 	if (dragging)
 	{
 		set_rel_viewpoint(xdiff, ydiff);
-		set_mouse_pos(x-xdiff, y-ydiff);
 	}
 
 	if (!m_player->get_fieldsel_freeze())

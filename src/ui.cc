@@ -125,6 +125,7 @@ int Panel::run()
 	Panel *prevmodal = _modal;
 	_modal = this;
 	_g_mousegrab = 0; // good ol' paranoia
+	Sys_MouseLock(false); // more paranoia :-)
 
 	Panel *forefather = this;
 	while(forefather->_parent)

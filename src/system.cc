@@ -55,6 +55,7 @@ static struct {
 	float		mouse_x;
 	float		mouse_y;
 	int		mouse_maxx, mouse_maxy;
+	bool		mouse_locked;
 	
 	// Graphics
 	int		gfx_system;
@@ -212,6 +213,7 @@ void Sys_Init()
 
 		// Input
 		sys.mouse_swapped = false;
+		sys.mouse_locked = false;
 		sys.mouse_speed = 1.0;
 		sys.mouse_buttons = 0;
 		sys.mouse_x = sys.mouse_y = 0;
@@ -606,20 +608,28 @@ void Sys_HandleInput(InputCallback *cb)
             sys.mouse_x += mxd * sys.mouse_speed;
             sys.mouse_y += myd * sys.mouse_speed;
 
-            if (sys.mouse_x < 0)
-               sys.mouse_x = 0;
-            else if (sys.mouse_x >= sys.mouse_maxx-1)
-               sys.mouse_x = sys.mouse_maxx-1;
-            if (sys.mouse_y < 0)
-               sys.mouse_y = 0;
-            else if (sys.mouse_y >= sys.mouse_maxy-1)
-               sys.mouse_y = sys.mouse_maxy-1;
-
             int xdiff = (int)sys.mouse_x - (int)xlast;
             int ydiff = (int)sys.mouse_y - (int)ylast;
 
+            if (sys.mouse_locked) {
+               // mouse is locked; so don't move the cursor
+					sys.mouse_x = xlast;
+					sys.mouse_y = ylast;
+				}
+				else
+				{
+					if (sys.mouse_x < 0)
+						sys.mouse_x = 0;
+					else if (sys.mouse_x >= sys.mouse_maxx-1)
+						sys.mouse_x = sys.mouse_maxx-1;
+					if (sys.mouse_y < 0)
+						sys.mouse_y = 0;
+					else if (sys.mouse_y >= sys.mouse_maxy-1)
+						sys.mouse_y = sys.mouse_maxy-1;
+				}
+
             if (!xdiff && !ydiff)
-               break;
+					break;
 
             if (cb && cb->mouse_move)
                cb->mouse_move(sys.mouse_buttons, (int)sys.mouse_x, (int)sys.mouse_y, xdiff, ydiff);
@@ -706,6 +716,20 @@ void Sys_SetMaxMouseCoords(int x, int y)
 	sys.mouse_maxx = x;
 	sys.mouse_maxy = y;
 }
+
+
+/*
+===============
+Sys_MouseLock
+
+Lock the mouse cursor into place (e.g., for scrolling the map)
+===============
+*/
+void Sys_MouseLock(bool locked)
+{
+	sys.mouse_locked = locked;
+}
+
 
 /*
 ===============

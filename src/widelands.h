@@ -480,5 +480,7 @@ void Sys_SetMousePos(int x, int y);
 void Sys_SetMouseSwap(bool swap);
 void Sys_SetMouseSpeed(float speed);
 
+void Sys_MouseLock(bool locked);
+
 // graphics
 void Sys_InitGraphics(int system, int w, int h, bool fullscreen);
