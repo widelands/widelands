@@ -17,9 +17,8 @@
  *
  */
 
+#include "widelands.h"
 #include "graphic.h"
-#include "output.h"
-#include <string.h>
 
 // wireframe or filled triangles?
 #define SHADING_FLAT		1

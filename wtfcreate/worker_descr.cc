@@ -19,6 +19,7 @@
 
 #define KEEP_STANDART_ASSERT 1 // no graphical assert in this file
 
+#include "../src/widelands.h"
 #include <string.h>
 #include <assert.h>
 #include "worker_descr.h"

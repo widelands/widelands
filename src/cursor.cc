@@ -17,6 +17,7 @@
  *
  */
 
+#include "widelands.h"
 #include "cursor.h"
 
 

@@ -20,9 +20,6 @@
 #ifndef __S__PIC_H
 #define __S__PIC_H
 
-#include "mytypes.h"
-#include <stdlib.h>
-
 /** class Bitmap
  *
  * Rectangle of 16bit pixels, can be colorkeyed.

@@ -17,10 +17,9 @@
  *
  */
 
-#include "os.h"
+#include "widelands.h"
+#include "ui.h"
 #include "options.h"
-#include "errors.h"
-#include "output.h"
 #include "fileloc.h"
 #include "input.h"
 #include "cursor.h"
@@ -28,18 +27,16 @@
 #include "mainmenue.h"
 #include "setup.h"
 #include "font.h"
-#include "ui.h"
-#include <stdlib.h>
-#include <string.h>
+#include "myfile.h"
+
 #include <SDL.h>
 
 #ifdef DEBUG
 // This is set for the assert function, to skip over to graphical asserts
-int graph_is_init=0; 
+int graph_is_init=0;
 #endif
 
 // TEMP this functions should be removed as soon as possible
-#include "myfile.h"
 int kbdh(const char* str, void* a) {
 		  if(strcmpi(str, "print screen") == 0) {
 					 // we do a screeni
@@ -57,7 +54,7 @@ int kbdh(const char* str, void* a) {
 								g_gr.screenshot(p);
 								break;
 					 }
-					 
+
 		  }
 		  return INPUT_HANDLED;
 }

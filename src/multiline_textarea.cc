@@ -18,8 +18,7 @@
  *
  */
 
-#include <string.h>
-
+#include "widelands.h"
 #include "ui.h"
 #include "font.h"
 

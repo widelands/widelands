@@ -20,7 +20,6 @@
 #ifndef __S__INTPLAYER_H
 #define __S__INTPLAYER_H
 
-#include "mytypes.h"
 #include "mapview.h"
 #include "ui.h"
 

@@ -19,7 +19,6 @@
 #ifndef __WORLD_H
 #define __WORLD_H
 
-#include "mytypes.h"
 #include "graphic.h"
 
 class Binary_file;

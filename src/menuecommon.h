@@ -20,7 +20,6 @@
 #ifndef __S__MENUECOMMON_H
 #define __S__MENUECOMMON_H
 
-#include "mytypes.h"
 #include "ui.h"
 
 #define MENU_XRES	640

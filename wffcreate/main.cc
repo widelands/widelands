@@ -30,9 +30,8 @@ int main(int argn, char** argc)
 	return g_main(argn, argc);
 }
 
+#include "../src/widelands.h"
 #include <iostream.h>
-#include <stdio.h>
-#include <string.h>
 #include "../src/font.h"
 #include "../src/myfile.h"
 #include "../src/graphic.h"

@@ -20,9 +20,6 @@
 #ifndef __S__MYFILE_H
 #define __S__MYFILE_H
 
-#include <stdio.h>
-#include "mytypes.h"
-
 /** class File
  *
  * this works for binary files

@@ -17,11 +17,12 @@
  *
  */
 
-#include "creature.h"
-#include "growablearray.h"
+#include "widelands.h"
 #include "map.h"
 #include "building.h"
+#include "creature.h"
 #include "bob.h"
+#include "growablearray.h"
 
 Creature::Task::Task(TaskAction a, void* p)
 {

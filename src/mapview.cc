@@ -17,10 +17,10 @@
  *
  */
 
-#include "os.h"
-#include "mapview.h"
+#include "widelands.h"
 #include "graphic.h"
 #include "input.h"
+#include "mapview.h"
 
 /* class Map_View
  *

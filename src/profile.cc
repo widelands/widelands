@@ -17,13 +17,7 @@
  *
  */
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-#include <iostream>
-
-#include "os.h"
+#include "widelands.h"
 #include "profile.h"
 #include "myfile.h"
 

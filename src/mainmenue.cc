@@ -17,24 +17,18 @@
  *
  */
 
-#include "input.h"
-#include "cursor.h"
+#include "widelands.h"
 #include "graphic.h"
 #include "ui.h"
+#include "input.h"
+#include "cursor.h"
 #include "fileloc.h"
 #include "font.h"
 #include "setup.h"
-#include "output.h"
 #include "singlepmenue.h"
 #include "menuecommon.h"
 #include "optionsmenu.h"
-#include "criterr.h"
 
-#ifndef VERSION
-#include "config.h"
-#endif /* VERSION */
-
-#include <string.h>
 
 /*
 ==============================================================================

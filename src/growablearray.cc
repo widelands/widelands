@@ -17,9 +17,8 @@
  *
  */
 
+#include "widelands.h"
 #include "growablearray.h"
-#include <string.h>
-#include <malloc.h>
 
 Growable_Array::Growable_Array(int size, int inc)
 {

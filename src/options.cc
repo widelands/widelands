@@ -19,21 +19,17 @@
 
 // 2002-02-10	sft+	added config-existing check in handle_options
 
-#include "mytypes.h"
+#include "widelands.h"
 #include "options.h"
 #include "parser.h"
 #include "myfile.h"
-#include "errors.h"
 #include "fileloc.h"
 #include "config.h"
-#include "output.h"
-#include "os.h"
 #include "graphic.h"
 #include "input.h"
 #include "menuecommon.h"
 #include "IntPlayer.h"
-#include <string.h>
-#include <stdlib.h>
+
 
 struct Options {
 		  // Graphics

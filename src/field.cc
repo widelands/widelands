@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001 by Holger Rapp 
+ * Copyright (C) 2001 by Holger Rapp
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-
+#include "widelands.h"
 #include "map.h"
 
 /** class Field

@@ -17,10 +17,10 @@
  *
  */
 
-#include "bob_descr.h"
-#include "string.h"
-#include "wtfcreate.h"
+#include "../src/widelands.h"
 #include "../src/graphic.h"
+#include "bob_descr.h"
+#include "wtfcreate.h"
 
 
 /** class Bob_Data_Pic_Descr 

@@ -21,7 +21,6 @@
 #define __S__INPUT_H
 
 #include "singleton.h"
-#include "mytypes.h"
 
 
 typedef int (*MOUSE_CLICK_FUNCTION)(const bool, const uint, const uint, void*);

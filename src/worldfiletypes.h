@@ -32,8 +32,6 @@ WordFile
 }
 */
 
-#include "mytypes.h"
-
 #define WLWF_MAGIC		"WLwf"
 #define WLWF_VERSION	0x0001
 #define WLWF_VERSIONMAJOR(a)	(a >> 8)

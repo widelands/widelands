@@ -18,13 +18,13 @@
  *
  */
 
-#include "menuecommon.h"
+#include "widelands.h"
 #include "ui.h"
 #include "input.h"
 #include "graphic.h"
 #include "cursor.h"
 #include "fileloc.h"
-#include "criterr.h"
+#include "menuecommon.h"
 
 /*
 ==============================================================================

@@ -17,9 +17,12 @@
  *
  */
 
-#include "font.h"
-#include "myfile.h"
+#include "widelands.h"
+
 #include <string.h>
+
+#include "myfile.h"
+#include "font.h"
 
 /** class Font_Handler
  *

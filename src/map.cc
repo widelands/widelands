@@ -17,11 +17,9 @@
  *
  */
 
-#include <stdlib.h>
+#include "widelands.h"
 #include "map.h"
-#include "errors.h"
 #include "myfile.h"
-#include <string.h>
 
 /** class Map
  *

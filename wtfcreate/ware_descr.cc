@@ -17,11 +17,11 @@
  *
  */
 
-#include <string.h>
-#include "ware_descr.h"
+#include "../src/widelands.h"
 #include "../src/helper.h"
 #include "../src/graphic.h"
 #include "wtfcreate.h"
+#include "ware_descr.h"
 
 Fabric<Ware_Descr> waref;
 

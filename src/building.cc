@@ -17,9 +17,10 @@
  *
  */
 
+#include "widelands.h"
+#include "map.h"
 #include "building.h"
 #include "creature.h"
-#include "map.h"
 
 Building::Building()
 {

@@ -17,6 +17,7 @@
  *
  */
 
+#include "../src/widelands.h"
 #include "../src/mydirent.h"
 #include "soldier_descr.h"
 #include "worker_descr.h"
@@ -36,21 +37,21 @@ void sec_missing(const char* file, const char* sec) {
       << "\t" << sec << ": mandatory section is missing!" << endl;
 }
 
-void err(const char* file, const char* msg) {
+void error(const char* file, const char* msg) {
    cerr << "In file <" << file << ">:" << endl
       << "\t" << msg << endl;
 }
 
 void inform_over_construct_error(const char* file, File_Descr* b, int error) {
    if(error==File_Descr::KEY_MISSING) {
-      key_missing(file, b->get_last_err_section(), 
+      key_missing(file, b->get_last_err_section(),
             b->get_last_err_key());
    } else if(error==File_Descr::SECTION_MISSING) {
       sec_missing(file,  b->get_last_err_section());
    } else {
       cerr << "In file <" << file << ">:" << endl;
-      cerr << "\t" << 
-         b->get_last_err_section() << "(" << b->get_last_err_key() << ") :" 
+      cerr << "\t" <<
+         b->get_last_err_section() << "(" << b->get_last_err_key() << ") :"
          << b->get_last_err_msg() << endl;
    }
 }
@@ -78,7 +79,7 @@ int parse_buildings(Buildings_Descr* pbuildings) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No HQ description found!");
+      error(file, "No HQ description found!");
       delete[] file;
       return ERROR;
    }
@@ -96,7 +97,7 @@ int parse_buildings(Buildings_Descr* pbuildings) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No Store description found!");
+      error(file, "No Store description found!");
       delete[] file;
       return ERROR;
    }
@@ -115,7 +116,7 @@ int parse_buildings(Buildings_Descr* pbuildings) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No dockyard description found!");
+      error(file, "No dockyard description found!");
       delete[] file;
       return ERROR;
    }
@@ -134,7 +135,7 @@ int parse_buildings(Buildings_Descr* pbuildings) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No Port description found!");
+      error(file, "No Port description found!");
       delete[] file;
       return ERROR;
    }
@@ -294,7 +295,7 @@ int create_def_worker(void) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No default-carrier description found!");
+      error(file, "No default-carrier description found!");
       delete[] file;
       return ERROR;
    }
@@ -305,7 +306,7 @@ int create_def_worker(void) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No Builder description found!");
+      error(file, "No Builder description found!");
       delete[] file;
       return ERROR;
    }
@@ -316,7 +317,7 @@ int create_def_worker(void) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No Planer description found!");
+      error(file, "No Planer description found!");
       delete[] file;
       return ERROR;
    }
@@ -327,7 +328,7 @@ int create_def_worker(void) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No Explorer description found!");
+      error(file, "No Explorer description found!");
       delete[] file;
       return ERROR;
    }
@@ -338,7 +339,7 @@ int create_def_worker(void) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No Geologist description found!");
+      error(file, "No Geologist description found!");
       delete[] file;
       return ERROR;
    }
@@ -349,7 +350,7 @@ int create_def_worker(void) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No second carrier description found!");
+      error(file, "No second carrier description found!");
       delete[] file;
       return ERROR;
    }
@@ -360,7 +361,7 @@ int create_def_worker(void) {
    s=p->get_next_section(0);
    if(!s) {
       delete p;
-      err(file, "No third carrier description found!");
+      error(file, "No third carrier description found!");
       delete[] file;
       return ERROR;
    }

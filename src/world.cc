@@ -17,13 +17,11 @@
  *
  */
 
-#include "os.h"
+#include "widelands.h"
 #include "world.h"
 //#include "worldfiletypes.h"
 #include "bob.h"
 #include "myfile.h"
-#include "myassert.h"
-#include <string.h>
 
 /** World(const char* file)
   * Creates a new world from the file.

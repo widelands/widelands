@@ -16,8 +16,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-#include "mapselectmenue.h"
-#include "singlepmenue.h"
+
+#include "widelands.h"
 #include "graphic.h"
 #include "input.h"
 #include "ui.h"
@@ -27,7 +27,8 @@
 #include "mainmenue.h"
 #include "menuecommon.h"
 #include "game.h"
-#include "criterr.h"
+#include "singlepmenue.h"
+#include "mapselectmenue.h"
 
 /*
 ==============================================================================

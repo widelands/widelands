@@ -1,30 +1,32 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#include "os.h"
-#include "fileloc.h"
+#include "widelands.h"
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>
 #ifdef WIN32
 #include <direct.h>
 #endif
+
+#include "fileloc.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -36,7 +38,7 @@
  * Is also able to list files in a convenient way
  */
 
-/** File_Locator::File_Locator(void) 
+/** File_Locator::File_Locator(void)
  *
  * Some inits. Nothing special
  *
@@ -45,7 +47,7 @@
  */
 File_Locator::File_Locator(void) {
 		  la=LA_SUCCESS;
-		  
+
 		  for(uint i=0; i<MAX_DIRS; i++) dirs[i][0]='\0';
 		  for(uint j=0; j<MAX_SUBDIRS; j++) subdirs[j][0]='\0';
 		  retval[0]='\0';
@@ -57,7 +59,7 @@ File_Locator::File_Locator(void) {
 		  ndirstrlen=0;
 }
 
-/** File_Locator::~File_Locator(void) 
+/** File_Locator::~File_Locator(void)
  *
  * Cleanups.
  *
@@ -81,21 +83,21 @@ void File_Locator::add_searchdir(const char* dir, const uint prio) {
 					 la=LA_TOOMUCH;
 					 return;
 		  }
-		  
+
 		  struct stat st;
 		  if(stat(dir, &st) == -1) {
 					 la=LA_NOTEXISTING;
 					 return;
 		  }
-		  
+
 		  if(!(S_IFDIR & st.st_mode)) {
 					 la=LA_NOTALLOWED;
 					 return;
 		  }
 		  strcpy(dirs[prio], dir);
-		  if(dirs[prio][strlen(dirs[prio])-1]!=CSEP) {
-					 int len=strlen(dirs[prio]);
-					 dirs[prio][len]=CSEP;
+		  int len=strlen(dirs[prio]);
+		  if(dirs[prio][len-1]!='/' && dirs[prio][len-1] != '\\') {
+					 dirs[prio][len]='/';
 					 dirs[prio][len+1]='\0';
 		  }
 		  la=LA_SUCCESS;
@@ -112,14 +114,14 @@ File_Locator::Last_action File_Locator::get_state(void) const {
 		  return la;
 }
 
-/** void File_Locator::register_subdir(const int id, const char* subd) 
+/** void File_Locator::register_subdir(const int id, const char* subd)
  *
- * This function registers a subdir with a certain type of 
+ * This function registers a subdir with a certain type of
  * file type (for ex: #define TYPE_TEXT 0  ; register_subdir(TYPE_TEXT, "txts"))
  *
- * Args:	id 	id to identify with 
+ * Args:	id 	id to identify with
  * 	   subd	subdir to identify with
- *	
+ *
  *	Returns: nothing
  */
 void File_Locator::register_subdir(const uint id, const char* subd) {
@@ -127,11 +129,11 @@ void File_Locator::register_subdir(const uint id, const char* subd) {
 					 la=LA_TOOMUCH;
 					 return;
 		  }
-		  
+
 		  strcpy(subdirs[id], subd);
-		  if(subdirs[id][strlen(subdirs[id])-1]!=CSEP) {
-					 int len=strlen(subdirs[id]);
-					 subdirs[id][len]=CSEP;
+		  int len=strlen(subdirs[id]);
+		  if(subdirs[id][len-1] != '/' && subdirs[id][len-1] != '\\') {
+					 subdirs[id][len]='/';
 					 subdirs[id][len+1]='\0';
 		  }
 		  la=LA_SUCCESS;

@@ -22,14 +22,10 @@
 
 #define 	DEF_CLRKEY	pack_rgb(0,0,255)
 
-#include <SDL.h>
-#include <stdlib.h>
-#include "errors.h"
 #include "singleton.h"
-#include "mytypes.h"
-#include <math.h>
-
 #include "pic.h"
+
+#include <SDL.h> // need SDL_Rect
 
 /** inline ushort pack_rgb(const uchar r, const uchar g, const uchar b);
  *

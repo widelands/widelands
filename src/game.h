@@ -20,8 +20,6 @@
 #ifndef __S__GAME_H
 #define __S__GAME_H
 
-#include "mytypes.h"
-
 /** class Player
  *
  * pure virtual class to define, what a player must be able to do

@@ -17,16 +17,14 @@
  *
  */
 
+#include "widelands.h"
+
 #include <stdarg.h>
 
-#include "os.h"
-#include "criterr.h"
 #include "graphic.h"
-#include "input.h"
+#include "font.h"
 #include "ui.h"
 #include "cursor.h"
-#include "font.h"
-#include "menuecommon.h"
 
 /*
 ==============================================================================

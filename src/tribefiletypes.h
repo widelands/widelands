@@ -20,8 +20,6 @@
 #ifndef __TRIBEFILETYPES_H
 #define __TRIBEFILETYPES_H
 
-#include "mytypes.h"
-
 struct TribeFileHeader
 {
 	char magic[6];			// "WLtf\0\0"

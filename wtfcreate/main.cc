@@ -17,6 +17,7 @@
  *
  */
 
+#include "../src/widelands.h"
 #include <iostream>
 
 #include "../src/md5file.h"

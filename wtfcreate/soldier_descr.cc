@@ -17,6 +17,7 @@
  *
  */
 
+#include "../src/widelands.h"
 #include "soldier_descr.h"
 #include "../src/graphic.h"
 

@@ -17,11 +17,9 @@
  *
  */
 
-#include <string.h>
-
-#include "os.h"
-#include "mapselectmenue.h"
+#include "widelands.h"
 #include "ui.h"
+#include "mapselectmenue.h"
 #include "font.h"
 #include "fileloc.h"
 #include "input.h"
@@ -29,7 +27,6 @@
 #include "map.h"
 #include "singlepmenue.h"
 #include "game.h"
-#include "criterr.h"
 #include "mainmenue.h"
 
 /*
@@ -94,7 +91,7 @@ MapSelectMenu::MapSelectMenu()
 		if(!name) continue;
 
 		i = strlen(name);
-		while(name[i] !=  CSEP) --i;
+		while(name[i] != '/' && name[i] != '\\') --i;
 		++i;
 		list->add_entry(name+i, name);
 	}
@@ -107,7 +104,7 @@ MapSelectMenu::MapSelectMenu()
 		if(!name) continue;
 
 		i=strlen(name);
-		while(name[i]!= CSEP) --i;
+		while(name[i] != '/' && name[i] != '\\') --i;
 		++i;
 		list->add_entry(name+i, name);
 	}

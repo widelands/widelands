@@ -17,9 +17,10 @@
  *
  */
 
-#include "logic_bob_descr.h"
+#include "../src/widelands.h"
 #include "../src/graphic.h"
 #include "wtfcreate.h"
+#include "logic_bob_descr.h"
 #include "need_list.h"
 
 Fabric<Logic_Bob_Descr> bobf;

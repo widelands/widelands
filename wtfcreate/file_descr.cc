@@ -17,11 +17,11 @@
  *
  */
 
-#include <string.h>
-#include "file_descr.h"
+#include "../src/widelands.h"
 #include "../src/graphic.h"
 #include "../src/helper.h"
 #include "wtfcreate.h"
+#include "file_descr.h"
 
 //
 // class File_Descr

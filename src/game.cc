@@ -17,11 +17,10 @@
  *
  */
 
+#include "widelands.h"
+#include "cursor.h"
 #include "game.h"
 #include "map.h"
-#include "input.h"
-#include "cursor.h"
-#include "criterr.h"
 
 /** class Game
  *

@@ -17,9 +17,9 @@
  *
  */
 
-#include "bob.h"
+#include "widelands.h"
 #include "world.h"
-#include "os.h"
+#include "bob.h"
 
 /** Bob(BobDesc*, World*)
   * This constructor creates a bob. Only worlds will create bobs.

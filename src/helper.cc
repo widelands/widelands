@@ -17,6 +17,7 @@
  *
  */
 
+#include "widelands.h"
 #include "helper.h"
 
 void zmem(void* mem, const ulong size) {

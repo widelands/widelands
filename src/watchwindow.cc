@@ -17,7 +17,7 @@
  *
  */
 
-#include "os.h"
+#include "widelands.h"
 #include "ui.h"
 #include "game.h"
 #include "map.h"

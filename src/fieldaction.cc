@@ -17,11 +17,11 @@
  *
  */
 
-#include "os.h"
+#include "widelands.h"
 #include "ui.h"
-#include "fieldaction.h"
 #include "map.h"
 #include "IntPlayer.h"
+#include "fieldaction.h"
 #include "watchwindow.h"
 
 class FieldActionWindow : public Window {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
+ * Copyright (C) 2002 by Holger Rapp
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,16 +24,14 @@
  * Excellent code!!
  */
 
-#include "myassert.h"
-
 template <typename T> class Singleton {
 		  static T* ms;
 
 		  public:
-		  Singleton(void) { 
-					 assert (!ms) ; 
-					 int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1; 
-					 ms=(T*)((int)this+offset); 
+		  Singleton(void) {
+					 assert (!ms) ;
+					 int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1;
+					 ms=(T*)((int)this+offset);
 		  }
 		  ~Singleton(void) { assert(ms); ms=0; }
 		  static inline T& get_singleton(void) { assert (ms); return *ms; }

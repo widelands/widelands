@@ -21,7 +21,6 @@
 #define __S__FILE_LOCATOR
 
 #include "mydirent.h"
-#include "mytypes.h"
 #include "singleton.h"
 
 #ifdef MAX_PATH

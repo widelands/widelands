@@ -17,12 +17,10 @@
  *
  */
 
+#include "../src/widelands.h"
 #include "picturereader.h"
 #include "../src/myfile.h"
 #include "../src/worldfiletypes.h"
-#include "../src/mytypes.h"
-#include "../src/os.h"
-#include <string.h>
 
 #define BITMAP_MAGIC	0x4D42		// 'MB' -> "BM" in file
 struct BitmapFileHeader
@@ -63,9 +61,9 @@ Picture_Reader::Picture_Reader(const char* picdir)
 {
 	strcpy(this->dir, picdir);
 	int len = strlen(this->dir);
-	if (this->dir[len-1] != CSEP)
+	if (this->dir[len-1] != '/' && this->dir[len-1] != '\\')
 	{
-		this->dir[len] = CSEP;
+		this->dir[len] = '/';
 		this->dir[len+1] = 0;
 	}
 }

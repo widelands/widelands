@@ -20,15 +20,13 @@
 // 2002-02-10	sft+	made setup_searchpaths work for win32
 // 2002-02-11	sft+	made setup_searchpaths work PROPERLY for win32
 
-#include "fileloc.h"
-#include "setup.h"
+#include "widelands.h"
 #include "graphic.h"
 #include "font.h"
 #include "ui.h"
+#include "fileloc.h"
+#include "setup.h"
 #include "cursor.h"
-#include "output.h"
-
-#include <string.h>
 
 #ifndef WIN32
 #include <sys/stat.h>

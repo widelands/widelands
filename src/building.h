@@ -17,7 +17,6 @@
  *
  */
 
-#include "mytypes.h"
 #include "tribefiletypes.h"
 
 class Creature;

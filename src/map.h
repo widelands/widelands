@@ -20,9 +20,6 @@
 #ifndef __S__MAP_H
 #define __S__MAP_H
 
-#include "mytypes.h"
-
-
 #define WLMF_VERSION 	0x0001
 
 #define WLMF_SUFFIX		".wmf"

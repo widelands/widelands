@@ -17,16 +17,13 @@
  *
  */
 
-#include <string.h>
-#include "mytypes.h"
-#include "errors.h"
+#include "widelands.h"
 #include "s2map.h"
 #include "myfile.h"
 #include "map.h"
 #include "fileloc.h"
 
 // TEMP
-#include <iostream.h>
 #define hex ios::hex
 #define dec ios::dec
 

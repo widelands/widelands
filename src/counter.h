@@ -20,8 +20,7 @@
 #ifndef __S__COUNTER_H
 #define __S__COUNTER_H
 
-#include <SDL/SDL.h>
-#include "mytypes.h"
+#include <SDL.h>
 
 /** class Counter
  *

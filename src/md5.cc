@@ -23,7 +23,7 @@
 
 // a MD5 checksum is 16 bytes long. We use buffers to store it 
 
-#include <stdio.h>
+#include "widelands.h"
 #include "md5.h"
 		   
 const unsigned int ChkSum::BLOCKSIZE; //=4096; 

@@ -18,6 +18,7 @@
  *
  */
 
+#include "widelands.h"
 #include "ui.h"
 #include "font.h"
 #include "input.h"

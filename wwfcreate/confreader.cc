@@ -17,12 +17,11 @@
  *
  */
 
+#include "../src/widelands.h"
 #include "confreader.h"
 #include "../src/growablearray.h"
 #include "../src/profile.h"
 #include "../src/worldfiletypes.h"
-#include <string.h>
-#include <stdio.h>
 
 inline char* ltrim(char* str)
 {

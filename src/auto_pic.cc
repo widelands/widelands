@@ -17,10 +17,9 @@
  *
  */
 
-#include "auto_pic.h"
+#include "widelands.h"
 #include "fileloc.h"
-#include "output.h"
-#include <stdio.h>
+#include "auto_pic.h"
 
    /*
 ==========================================================================

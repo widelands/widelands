@@ -20,8 +20,6 @@
 #ifndef __PICTUREREADER_H
 #define __PICTUREREADER_H
 
-#include "../src/mytypes.h"
-
 struct PictureInfo;
 class Binary_file;
 

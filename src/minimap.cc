@@ -17,7 +17,7 @@
  *
  */
 
-#include "os.h"
+#include "widelands.h"
 #include "minimap.h"
 #include "map.h"
 #include "auto_pic.h"

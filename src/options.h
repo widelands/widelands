@@ -20,8 +20,6 @@
 #ifndef __S__OPTIONS_H
 #define __S__OPTIONS_H
 
-#include "mytypes.h"
-
 void handle_options(uint, char**);
 
 #endif /* __S__OPTIONS_H */

@@ -17,11 +17,9 @@
  *
  */
 
-#include <stdlib.h>
+#include "../src/widelands.h"
 #include <iostream>
-#include <string.h>
 #include "need_list.h"
-#include "../src/os.h"
 
 Tribe_File_Need_List needl;
 

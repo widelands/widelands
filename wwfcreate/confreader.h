@@ -20,7 +20,6 @@
 #ifndef __CONFREADER_H
 #define __CONFREADER_H
 
-#include "../src/mytypes.h"
 #include "../src/worldfiletypes.h"
 
 class Growable_Array;

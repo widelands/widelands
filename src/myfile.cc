@@ -17,10 +17,8 @@
  *
  */
 
+#include "widelands.h"
 #include "myfile.h"
-#include "errors.h"
-#include "myassert.h"
-#include <string.h>
 
 /** class File
  *

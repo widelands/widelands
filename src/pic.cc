@@ -19,13 +19,9 @@
 
 // 2002-02-10	sft+	minor speedup in Pic::clear_all
 
+#include "widelands.h"
 #include "graphic.h"
 #include "fileloc.h"
-#include "output.h"
-
-#ifdef WIN32
-#include <string.h>
-#endif
 
 #define PIXEL(x, y)		pixels[(y)*pitch+(x)]
 
