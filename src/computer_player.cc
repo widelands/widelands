@@ -640,7 +640,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 	    if (map->findpath(flag->get_position(), nf.flag->get_position(), 0, path, &check)>=0 &&
 		2*path->get_nsteps()+2<nf.cost) {
 
-		log ("Improved road graph: %d -> %d\n", nf.cost, path->get_nsteps());
+		log ("Improved road graph: %ld -> %d\n", nf.cost, path->get_nsteps());
 
 		game->send_player_build_road (player_number, path);
 		return true;

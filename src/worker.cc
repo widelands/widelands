@@ -270,7 +270,7 @@ bool Worker::run_mine(Game* g, State* state, const WorkerAction* act)
 
 
    res=map->get_world()->get_resource(act->sparam1.c_str());
-   if(static_cast<char>(res)==-1)
+   if(static_cast<signed char>(res)==-1)
       throw wexception(" Worker::run_mine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
             " with world!!\n",  act->sparam1.c_str());
 

@@ -3526,7 +3526,7 @@ public:
 	{
 		unsigned slot = t->mpf_heapindex;
 
-#ifdef DEBUG
+#if defined(DEBUG) && defined(__i386__)
       /* This is here temporarilly till the bugs are fixed
        * which trigger the asserts below 
        */

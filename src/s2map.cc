@@ -554,7 +554,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
             uchar nres=0;
             if(res!="") {
                nres=m_map->get_world()->get_resource(res.c_str());
-               if(static_cast<char>(nres)==-1)
+               if(static_cast<signed char>(nres)==-1)
                   throw wexception("World doesn't define Resource %s\n, you can't play settler maps here!\n", res.c_str());
             }
             int real_amount=((int)(2.86*(float)amount));

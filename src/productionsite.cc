@@ -690,7 +690,7 @@ void ProductionSite::program_act(Game* g)
          molog("  Mine '%s'", action->sparam1.c_str());
 
          res=map->get_world()->get_resource(action->sparam1.c_str());
-         if(static_cast<char>(res)==-1)
+         if(static_cast<signed char>(res)==-1)
             throw wexception("ProductionAction::actMine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
                   " with world!!\n",  action->sparam1.c_str());
 
