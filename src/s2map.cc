@@ -436,6 +436,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				case 0x40: res = "coal"; amount=c&7; break;
 				case 0x48: res = "iron"; amount=c&7; break;
 				case 0x50: res = "gold"; amount=c&7; break;
+				case 0x59: res = "granit"; amount=c&7; break;
 				default: res = ""; amount=0;
 				}
   

@@ -880,7 +880,12 @@ bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
       uint amount = position.field->get_resources_amount();
 		
       std::string immname;
-		immname = g->get_map()->get_world()->get_resource(res)->get_indicator(amount);
+      Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
+      if(rdescr->is_detectable()) { 
+         immname = g->get_map()->get_world()->get_resource(res)->get_indicator(amount);
+      } else {
+         immname = g->get_map()->get_world()->get_resource(0)->get_indicator(amount);
+      }
 
 		molog("  Resource: %02X -> plant indicator '%s'\n", res, immname.c_str());
 

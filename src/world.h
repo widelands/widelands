@@ -47,12 +47,17 @@ public:
    const char* get_name() const { return m_name.c_str(); }
 	std::string get_indicator(uint amount) const;
 
+   inline bool is_detectable(void) { return m_is_detectable; }
+   inline bool get_max_amount(void) { return m_max_amount; }
+
 private:
 	struct Indicator {
 		std::string		bobname;
 		int				upperlimit;
 	};
 
+   bool                    m_is_detectable;
+   int                     m_max_amount;
 	std::string					m_name;
 	std::vector<Indicator>	m_indicators;
 };
@@ -62,7 +67,7 @@ class Terrain_Descr {
    friend class World;
 
    public:
-      Terrain_Descr(const char* directory, Section* s);
+      Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>*);
       ~Terrain_Descr(void);
 
 		void load_graphics();
@@ -77,6 +82,9 @@ class Terrain_Descr {
 		uint		m_frametime;
       uchar		m_is;
 
+      uchar*   m_valid_resources;
+      uchar    m_nr_valid_resources;
+      char     m_default_resources;
 		uint		m_texture; // renderer's texture
 };
 

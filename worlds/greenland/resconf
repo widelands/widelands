@@ -7,13 +7,35 @@ indicator=resi_none
 name=Coal
 indicator=resi_coal1 4
 indicator=resi_coal2
+max_amount=12
 
 [gold]
 name=Gold
 indicator=resi_gold1 4
 indicator=resi_gold2
+max_amount=12
 
 [iron]
 name=Iron
 indicator=resi_iron1 4
 indicator=resi_iron2
+max_amount=12
+
+[granit]
+name=Granit
+indicator=resi_granit1 5
+indicator=resi_granit2
+max_amount=12
+
+[water]
+name=Water
+indicator=resi_water
+max_amount=50
+
+[fish]
+# fish should not be detected by geologist
+# therefor it has no indicator
+name=Fish
+detectable=false
+max_amount=20
+

@@ -31,6 +31,7 @@
 #include "editor_game_base.h"
 #include "editor_set_starting_pos_tool.h"
 #include "overlay_manager.h"
+#include "world.h"
 
 /*
 ===============
@@ -138,6 +139,20 @@ void Main_Menu_Load_Map::clicked(int id) {
       g_gr->get_picture_size(picid, &w, &h);
       m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
    }
+
+   /* Resources 
+   uint x,y;
+   for(y=0; y<m_map->get_height(); y++) {
+      for(x=0; x<m_map->get_width(); x++) {
+         Field *f=m_map->get_field(Coords(x,y));  
+         int res=f->get_resources();
+         int amount=f->get_resources_amount();
+         if(amount) {
+            std::string str= m_map->get_world()->get_resource(res)->get_indicator(amount);
+         }
+      }
+   }
+  */
 
    delete ml;
    }

@@ -240,7 +240,8 @@ Map::recalc_whole_map()
 
 this recalculates all data that needs to be recalculated.
 This is only needed when all fields have change, this means
-a map has been loaded or newly created
+a map has been loaded or newly created or in the editor that
+the overlays have completly changed
 ===========
 */
 void Map::recalc_whole_map(void)

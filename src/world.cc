@@ -18,6 +18,7 @@
  */
 
 #include <iostream>
+#include <sstream>
 #include "constants.h"
 #include "filesystem.h"
 #include "graphic.h"
@@ -48,44 +49,49 @@ Parse a resource description section.
 */
 void Resource_Descr::parse(Section *s)
 {
-	const char* string;
+   const char* string;
 
-	m_name = s->get_string("name", s->get_name());
+   m_name = s->get_string("name", s->get_name());
+   if(strcmp(s->get_name(),"none")) { 
+      m_max_amount = s->get_safe_int("max_amount");
+      m_is_detectable=s->get_bool("detectable", true);
+   }
+   while(s->get_next_string("indicator", &string))
+   {
+      std::vector<std::string> args;
+      Indicator i;
 
-	while(s->get_next_string("indicator", &string))
-	{
-		std::vector<std::string> args;
-		Indicator i;
+      split_string(string, &args, " \t");
 
-		split_string(string, &args, " \t");
+      if (args.size() != 1 && args.size() != 2)
+      {
+         log("Resource '%s' has bad indicator=%s\n", m_name.c_str(), string);
+         continue;
+      }
 
-		if (args.size() != 1 && args.size() != 2)
-		{
-			log("Resource '%s' has bad indicator=%s\n", m_name.c_str(), string);
-			continue;
-		}
+      i.bobname = args[0];
+      i.upperlimit = -1;
 
-		i.bobname = args[0];
-		i.upperlimit = -1;
+      if (args.size() >= 2)
+      {
+         char* endp;
 
-		if (args.size() >= 2)
-		{
-			char* endp;
+         i.upperlimit = strtol(args[1].c_str(), &endp, 0);
 
-			i.upperlimit = strtol(args[1].c_str(), &endp, 0);
+         if (endp && *endp)
+         {
+            log("Resource '%s' has bad indicator=%s\n", m_name.c_str(), string);
+            continue;
+         }
+      }
 
-			if (endp && *endp)
-			{
-				log("Resource '%s' has bad indicator=%s\n", m_name.c_str(), string);
-				continue;
-			}
-		}
+      m_indicators.push_back(i);
+   }
 
-		m_indicators.push_back(i);
-	}
-
-	if (!m_indicators.size())
-		throw wexception("Resource '%s' has no indicators", m_name.c_str());
+   if(m_is_detectable && !m_indicators.size()) 
+      throw wexception("Resource '%s' has no indicators", m_name.c_str());
+   if(!m_is_detectable && m_indicators.size())
+      throw wexception("Resource '%s' is not detectable, but has indicators defined!", m_name.c_str());
 }
 
 
@@ -290,7 +296,7 @@ void World::parse_terrains()
 
 		while((s = prof.get_next_section(0)))
 		{
-			Terrain_Descr *ter = new Terrain_Descr(m_basedir.c_str(), s);
+			Terrain_Descr *ter = new Terrain_Descr(m_basedir.c_str(), s, &m_resources);
 			ters.add(ter);
 		}
 
@@ -390,7 +396,7 @@ Terrain_Descr
 ==============================================================================
 */
 
-Terrain_Descr::Terrain_Descr(const char* directory, Section* s)
+Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>* resources) 
 {
 	const char *str;
 
@@ -398,18 +404,55 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s)
 	m_texture = 0;
  	m_frametime = FRAME_LENGTH;
 	m_picnametempl = 0;
+   m_valid_resources = 0;
+   m_nr_valid_resources = 0;
+   m_default_resources=-1;
 
 	// Read configuration
 	snprintf(m_name, sizeof(m_name), "%s", s->get_name());
 
-	// TODO: Implement the following fields
-	// def_res = water|fish   (example)
-	str = s->get_string("def_res", 0);
+	// Parse the default resource
+   str = s->get_string("def_resources", 0);
 	if (str) {
-		// def_stock = 10  (count)
-		s->get_int("def_stock", 0);
-	}
-	s->get_string("resources");
+      std::istringstream str1(str);
+      std::string resource;
+      int amount;
+	   str1 >> resource >> amount;
+      int res=resources->get_index(resource.c_str());;
+      if(res==-1)
+         throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), resource.c_str());
+      m_default_resources=res; 
+   }
+   
+   // Parse valid resources
+   std::string str1=s->get_string("resources", "");
+   if(str1!="") {
+      int nres=1;
+      uint i=0;
+      while(i < str1.size()) { if(str1[i]==',') { nres++; }  i++; }
+
+      m_nr_valid_resources=nres;
+      if(nres==1) 
+         m_valid_resources=new uchar;
+      else
+         m_valid_resources=new uchar[nres];
+      std::string curres;
+      i=0;
+      int cur_res=0;
+      while(i<=str1.size()) {
+         if(str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') { ++i; continue; }
+         if(str1[i]==',' || i==str1.size()) {
+            int res=resources->get_index(curres.c_str());;    
+            if(res==-1) 
+               throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());
+            m_valid_resources[cur_res++]=res;
+            curres="";
+         } else {
+            curres.append(1, str1[i]);
+         }
+         i++;
+      }
+   }
 
 	int fps = s->get_int("fps");
 	if (fps > 0)
@@ -451,6 +494,14 @@ Terrain_Descr::~Terrain_Descr()
 {
 	if (m_picnametempl)
 		free(m_picnametempl);
+   if(m_nr_valid_resources==1) {
+      delete m_valid_resources;
+   } 
+   if(m_nr_valid_resources>1) {
+      delete[] m_valid_resources;
+   }
+   m_nr_valid_resources=0;
+   m_valid_resources=0;
 }
 
 
@@ -469,55 +520,4 @@ void Terrain_Descr::load_graphics()
 
 /* "attic" -- re-add this in when it's needed
 
-	// parse resources
-   str=s->get_string("resources", 0);
-   if(str && strcasecmp("", str)) {
-      nres=1;
-      uint i=0;
-      while(i < strlen(str)) { if(str[i]==',') { nres++; }  i++; }
-
-      res=new uchar[nres];
-      char temp[200];
-      uint n=0;
-      uint cur_res=0;
-      i=0;
-      Resource_Descr* rtemp;
-      while(i<strlen(str)) {
-         temp[n]=str[i];
-         i++;
-         n++;
-         if(str[i]==',') {
-            temp[n]='\0';
-            n--;
-            while(temp[n] == ',' || temp[n]==' ' || temp[n]=='\t') temp[n--]='\0';
-            uint z=0;
-            while(temp[z] == ' ' || temp[z] == '\t') z++;
-            n=0;
-            i++;
-            rtemp=resf.exists(temp+z);
-            if(!rtemp) {
-               strcpy(err_sec,s->get_name());
-               strcpy(err_key,"resource");
-               strcpy(err_msg, temp+z);
-               strcat(err_msg,": Resource does not exist!");
-               return ERROR;
-            }
-            res[cur_res++]=resf.get_index(rtemp->get_name());
-         }
-      }
-      temp[n]='\0';
-      n--;
-      while(temp[n] == ',' || temp[n]==' ' || temp[n]=='\t') temp[n--]='\0';
-      uint z=0;
-      while(temp[z] == ' ' || temp[z] == '\t') z++;
-      rtemp=resf.exists(temp+z);
-      if(!rtemp) {
-         strcpy(err_sec,s->get_name());
-         strcpy(err_key,"resource");
-         strcpy(err_msg, temp+z);
-         strcat(err_msg,": Resource does not exist!");
-         return ERROR;
-      }
-      res[cur_res++]=resf.get_index(rtemp->get_name());
-   }
 */
