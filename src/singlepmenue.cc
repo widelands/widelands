@@ -17,6 +17,7 @@
  *
  */
 
+#include <vector>
 #include "widelands.h"
 #include "graphic.h"
 #include "input.h"

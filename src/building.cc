@@ -17,6 +17,7 @@
  *
  */
 
+#include <vector>
 #include "widelands.h"
 #include "tribedata.h"
 #include "myfile.h"

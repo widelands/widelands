@@ -45,13 +45,15 @@ AutoPic Map_View::setable_flag("set_flag.bmp", 0, 0, 255);
  *
  * Args: m 	map to use
  */
-Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Game *g)
+Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Game *g, uchar ply)
 	: Panel(parent, x, y, w, h)
 {
 	vpx = vpy = 0;
 	m_game = g;
 	map = m_game->get_map();
 	dragging = false;
+
+   player_number=ply;
 
 	fselx = fsely = 0;
 }

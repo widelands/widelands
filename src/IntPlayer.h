@@ -36,7 +36,7 @@ class Interactive_Player : public Panel {
 		 Interactive_Player operator=(const Interactive_Player&);
 
 		  public:
-					 Interactive_Player(Game *g);
+					 Interactive_Player(Game *g, uchar pln);
 					 ~Interactive_Player(void);
 
 					 void start();
@@ -54,7 +54,8 @@ class Interactive_Player : public Panel {
 					 static void set_resolution(uint x, uint y) { xresolution=x; yresolution=y; }
 					 static inline uint get_xres() { return xresolution; }
 					 static inline uint get_yres() { return yresolution; }
-
+         
+                inline uchar get_player_number(void) { return player_number; } // for watchwindow
 		  private:
 					 void mainview_move(int x, int y);
 					 void minimap_warp(int x, int y);
@@ -64,6 +65,7 @@ class Interactive_Player : public Panel {
 					 Map_View* main_mapview;
 					 MiniMap *minimap;
 					 Window *fieldaction;
+                uchar player_number;
 };
 
 

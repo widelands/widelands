@@ -17,6 +17,7 @@
  *
  */
 
+#include <vector>
 #include "widelands.h"
 #include "world.h"
 #include "bob.h"

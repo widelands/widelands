@@ -17,6 +17,7 @@
  *
  */
 
+#include <vector>
 #include "widelands.h"
 #include "pic.h"
 #include "bob.h"
@@ -25,4 +26,16 @@
 #include "tribe.h"
 #include "player.h"
 
-// GREAT TODO
+//
+//
+// class Player
+//
+//
+Player::Player(Game* g, int type) {
+    m_type = type; 
+    game=g;
+}
+
+Player::~Player(void) {
+}
+

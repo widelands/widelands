@@ -17,6 +17,7 @@
  *
  */
 
+#include <vector>
 #include "widelands.h"
 #include "ui.h"
 #include "input.h"
@@ -47,12 +48,13 @@ uint Interactive_Player::yresolution;
  *
  * Args: g	the game to be played
  */
-Interactive_Player::Interactive_Player(Game *g)
+Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	: Panel(0, 0, 0, get_xres(), get_yres())
 {
 	game = g;
+   player_number=plyn;
 
-	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g);
+	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g, player_number);
 	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
 	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
 	minimap = 0;
@@ -125,7 +127,7 @@ void Interactive_Player::minimap_btn()
 		delete minimap;
 	else
 	{
-		new MiniMap(this, 200, 150, game->get_map(), &minimap);
+		new MiniMap(this, 200, 150, game->get_map(), &minimap, game->get_player(player_number));
 		minimap->warpview.set(this, &Interactive_Player::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with

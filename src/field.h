@@ -36,7 +36,6 @@ class Field {
    char brightness;
    Terrain_Descr *terr, *terd;
 	Map_Object* objects; // linked list, see Map_Object::m_linknext
-   uchar seen_by;
    uchar owned_by;
 
    public:
@@ -63,15 +62,6 @@ class Field {
    void set_brightness(int l, int r, int tl, int tr, int bl, int br);
    inline char get_brightness() const { return brightness; }
 
-   inline void set_seen_by(uint pln, bool seen) { 
-      assert(pln<9); 
-      if(seen) {
-         seen_by &= (pln-1);   
-      } else {
-         seen_by &= ~(pln-1);   
-      }
-   }
-   inline bool get_seen_by(uint pln) { assert(pln<9); return (seen_by & (pln-1)); }
    inline void set_owned_by(uint pln) { owned_by=pln; }
    inline uchar get_owned_by(void) { return owned_by; }
 

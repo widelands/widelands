@@ -20,27 +20,54 @@
 #ifndef __S__PLAYER_H
 #define __S__PLAYER_H
 
-//
-// This defines a player class. 
-// A player is 
-//  a) the one who has the track of all it's buildings, units and wares
-//  b) the logic (e.g network code or AI code) 
-//  c) the one who triggers commands to the game
-//
+#include "game.h"
+#include "map.h"
+
+
+/** class Player
+ *
+ * Pleease... no more pure virtual nonsense.
+ * What we really need is a Player class that stores e.g. score
+ * and diplomacy of a player.
+ *
+ * These Player classes should be controlled via the cmd queue.
+ * Commands are inserted by:
+ *  - local player
+ *  - network packets
+ *  - AI code which is invoked from Game, _not_ from Player
+ * So basically the Game knows whether a player is controlled
+ * locally, remotely or by AI.
+ *                      -- Nicolai
+ */
 class Player {
+   friend class Game;
+   
    public:
+      Player(Game* g, int type);
+      ~Player(void);
+
+      // get functions
+      inline bool is_field_seen(int i) { return seen_fields[i]; }
+      inline bool is_field_seen(int x, int y) { return seen_fields[y*game->get_map()->get_w() + x]; }
+   
 		enum {
 			playerLocal = 0,
 			//playerRemote,
 			playerAI
 		};
 		
-		Player(int type) { m_type = type; }
-		~Player() { }
-	
-		inline int get_type() { return m_type; }
+      inline int get_type() { return m_type; }
 		
    private:
+      // set functions
+      inline void set_field_seen(int i, bool t) { seen_fields.reserve(i); seen_fields[i]=t; }
+      inline void set_field_seen(int x, int y, bool t) { 
+         seen_fields.reserve(game->get_map()->get_w()*game->get_map()->get_h());
+         seen_fields[y*game->get_map()->get_w() + x]=t; 
+      }
+      
+      std::bit_vector seen_fields; 
+      Game* game; 
 		int m_type;
       
 		// regent data: name, pics so on

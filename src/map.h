@@ -389,4 +389,87 @@ inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
 	get_pix(fx, fy, get_field(fx, fy), px, py);
 }
 
+// 
+// class Map_Region 
+//
+// This class is init with a center field and
+// a sourrounding. it then returns the next field
+// in this region with each call to next()
+class Map_Region {
+   public:
+      Map_Region(const int x, const int y, int area, Map* m) {
+         _area=area;
+         _map=m;
+         _lf=m->get_safe_field(x, y);
+         _tl=_tr=_bl=_br=_lf;
+         tlx=trx=blx=brx=x;
+         tly=tr_y=bly=bry=y;
+         sx=x; sy=y;
+         int i;
+         for(i=0; i<area; i++) {
+            m->get_tln(tlx, tly, _tl, &tlx, &tly, &_tl);
+            m->get_trn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
+            m->get_bln(blx, bly, _bl, &blx, &bly, &_bl);
+            m->get_brn(brx, bry, _br, &brx, &bry, &_br);
+         }
+         _lf=_tl;
+         cx=tlx; cy=tly;
+      }
+      
+      ~Map_Region() {
+      }
+      
+      Field* next(void);
+
+   private:
+      int _area;
+      int sx, sy;
+      int cx, cy;
+      int tlx, tly, trx, tr_y, blx, bly, brx, bry;
+      Field* _lf, *_tl, *_tr, *_bl, *_br;
+      Map* _map;
+};
+
+// 
+// class Map_Region_Cords
+//
+// This class is init with a center field and
+// a sourrounding. it then returns the next field
+// in this region with each call to next() by map_cords
+class Map_Region_Cords {
+   public:
+      Map_Region_Cords(const int x, const int y, int area, Map* m) {
+         _area=area;
+         _map=m;
+         _lf=m->get_safe_field(x, y);
+         _tl=_tr=_bl=_br=_lf;
+         tlx=trx=blx=brx=x;
+         tly=tr_y=bly=bry=y;
+         sx=x; sy=y;
+         int i;
+         for(i=0; i<area; i++) {
+            m->get_tln(tlx, tly, _tl, &tlx, &tly, &_tl);
+            m->get_trn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
+            m->get_bln(blx, bly, _bl, &blx, &bly, &_bl);
+            m->get_brn(brx, bry, _br, &brx, &bry, &_br);
+         }
+         _lf=_tl;
+         cx=tlx; cy=tly;
+      }
+      
+      ~Map_Region_Cords() {
+      }
+      
+      int next(int*, int*);
+
+   private:
+      int _area;
+      int sx, sy;
+      int cx, cy;
+      int tlx, tly, trx, tr_y, blx, bly, brx, bry;
+      Field *_tl, *_tr, *_bl, *_br, *_lf;
+      Map* _map;
+};
+
+
 #endif // __S__MAP_H

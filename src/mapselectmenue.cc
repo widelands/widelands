@@ -17,6 +17,7 @@
  *
  */
 
+#include <vector>
 #include "widelands.h"
 #include "ui.h"
 #include "mapselectmenue.h"

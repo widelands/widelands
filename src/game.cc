@@ -17,6 +17,7 @@
  *
  */
 
+#include <vector>
 #include "widelands.h"
 #include "cursor.h"
 #include "map.h"
@@ -27,6 +28,7 @@
 #include "worker.h"
 #include "tribe.h"
 #include "game.h"
+#include "player.h"
 #include "ui.h"
 #include "fileloc.h"
 #include "myfile.h"
@@ -125,7 +127,7 @@ void Game::add_player(int plnum, int type)
 	if (m_players[plnum])
 		remove_player(plnum);
 	
-	m_players[plnum] = new Player(type);
+	m_players[plnum] = new Player(this, type);
 }
 
 /** Game::can_start()
@@ -186,15 +188,16 @@ bool Game::run(void)
 		   assert(0);
 	   }
 		// TEMP
-
-		// Load the map
+     
+      // Load the map
 		map = new Map();
       if (RET_OK != map->load_map(m_mapname, this)) {
 			critical_error("Couldn't load map.");
 			return false;
 		}
 
-	   ipl = new Interactive_Player(this);
+      // TEMP: player number
+	   ipl = new Interactive_Player(this, 0);
 	   ipl->run();
 	   delete ipl;
 	   delete tribe;
@@ -244,9 +247,18 @@ void Game::warp_building(int x, int y, uchar owner, int idx)
 	Map_Object* obj;
 	
 	descr = get_player_tribe(owner)->get_building_descr(idx);
+
 	obj = m_objects->create_object(this, descr);
 	obj->set_owned_by(owner);
 	obj->set_position(this, x, y);
+
+   // TODO: see area
+   // TODO: conquers
+   Map_Region_Cords* r=new Map_Region_Cords(x, y, 13, map);
+   while(r->next(&x, &y)) {
+      get_player(owner)->set_field_seen(x, y, true);
+   }
+   delete r;
 }
 
 /** Game::create_bob(int x, int y, int idx)

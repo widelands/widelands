@@ -35,7 +35,7 @@
   pointer on it's description
 - Make -DNDEBUG work again
 - Make a good/unpredictable/fast random generator with a good seed
-
+- Add a occupie variable for diminishing bobs, boring bobs and growing bobs
 
 
 ***************************** GAMEPLAY WORK *****************************

@@ -42,6 +42,7 @@ enum {
 	gs_running		// in-game
 };
 
+class Player;
 class Interactive_Player;
 class Player;
 
@@ -79,6 +80,8 @@ public:
 
    inline Map *get_map() { return map; }
 
+   inline Player* get_player(ushort n) { return m_players[n]; }
+
 public:
 	void warp_building(int x, int y, uchar owner, int idx);
 	void create_bob(int x, int y, int idx);
@@ -89,7 +92,7 @@ private:
 
 	Interactive_Player *ipl;
 	Tribe_Descr* tribe;
-	Map* map;
+	Map *map;
    Cmd_Queue* cmdqueue;
 	Player* m_players[MAX_PLAYERS];
    Object_Manager* m_objects;

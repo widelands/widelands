@@ -29,6 +29,11 @@
 
 // class World;
 //class Pic;
+enum {
+   NOTHING = 0,
+   SMALL = 1,
+   BIG = 2
+};   // for the occupies vars in Bobs
 
 class Animation;
 
@@ -131,6 +136,7 @@ class Growing_Bob_Descr : virtual public Logic_Bob_Descr {
    private:
       Logic_Bob_Descr* ends_in;
       ushort growing_speed;
+      uchar occupies;
 };
 
 // 
@@ -147,6 +153,7 @@ class Diminishing_Bob_Descr : virtual public Logic_Bob_Descr {
    private:
       Logic_Bob_Descr* ends_in;
       ushort stock;
+      uchar occupies;
 };
 
 // 
@@ -162,6 +169,7 @@ class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
 
    private:
       ushort ttl; // time to life
+      uchar occupies;
 };
 
 // 

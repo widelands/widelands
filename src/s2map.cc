@@ -17,6 +17,7 @@
  *
  */
 
+#include <vector>
 #include "widelands.h"
 #include "game.h"
 #include "s2map.h"
@@ -398,8 +399,8 @@ int Map::load_s2mf(const char* filen, Game *game) {
       for(x=0; x<hd.width; x++, i++) {
          // ignore everything but HQs
          if(section[i]==0x80) {
-            // cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl;
-				game->warp_building(x, y, bobs[i], 0);
+             cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl;
+            game->warp_building(x, y, bobs[i], 0);
 			}
       }
    }
@@ -558,11 +559,11 @@ int Map::load_s2mf(const char* filen, Game *game) {
          if(buildings[y*hd.width +x]==0x78) {
             switch(c) {
                case BOB_STONE1: bobname = "stones1"; break;
-               case BOB_STONE2: bobname = "stones1"; break;
-               case BOB_STONE3: bobname = "stones1"; break;
-               case BOB_STONE4: bobname = "stones1"; break;
-               case BOB_STONE5: bobname = "stones1"; break;
-               case BOB_STONE6: bobname = "stones1"; break;
+               case BOB_STONE2: bobname = "stones2"; break;
+               case BOB_STONE3: bobname = "stones3"; break;
+               case BOB_STONE4: bobname = "stones4"; break;
+               case BOB_STONE5: bobname = "stones5"; break;
+               case BOB_STONE6: bobname = "stones6"; break;
 					default: break;
 				}
 				if (bobname) {

@@ -21,6 +21,7 @@
 #include "minimap.h"
 #include "map.h"
 #include "auto_pic.h"
+#include "player.h"
 
 /*
 ==============================================================================
@@ -37,7 +38,7 @@ MiniMapView
  */
 class MiniMapView : public Panel {
 public:
-	MiniMapView(Panel *parent, int x, int y, Map *m);
+	MiniMapView(Panel *parent, int x, int y, Map *m, Player* pl);
 
 	UISignal2<int,int> warpview;
 
@@ -50,7 +51,7 @@ public:
 
 private:
 	static AutoPic map_spot;
-
+   Player* player;
 	Map *_map;
 	int _viewx, _viewy;
 };
@@ -61,10 +62,11 @@ AutoPic MiniMapView::map_spot("map_spot.bmp", 0, 0, 255);
  *
  * Initialize the minimap object
  */
-MiniMapView::MiniMapView(Panel *parent, int x, int y, Map *m)
+MiniMapView::MiniMapView(Panel *parent, int x, int y, Map *m, Player* ply)
 	: Panel(parent, x, y, m->get_w(), m->get_h())
 {
 	_map = m;
+   player=ply;
 
 	_viewx = _viewy = 0;
 }
@@ -119,7 +121,11 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 			clr = *f->get_terd()->get_texture()->get_pixels();
 			clr = bright_up_clr2(clr, f->get_brightness());
          
-         *pix++ = clr;
+         if(player->is_field_seen(x, y)) {
+            *pix++ = clr;
+         } else {
+            *pix++ =  pack_rgb(0, 0, 0); // make black
+         }
 		}
 	}
 
@@ -169,7 +175,7 @@ MiniMap
  *       reg	registry pointer will be set by constructor and cleared by
  *       		destructor
  */
-MiniMap::MiniMap(Panel *parent, int x, int y, Map *m, MiniMap **reg)
+MiniMap::MiniMap(Panel *parent, int x, int y, Map *m, MiniMap **reg, Player* ply)
 	: Window(parent, x, y, m->get_w(), m->get_h(), "Map")
 {
 	_registry = reg;
@@ -179,7 +185,7 @@ MiniMap::MiniMap(Panel *parent, int x, int y, Map *m, MiniMap **reg)
 		*_registry = this;
 	}
 
-	_view = new MiniMapView(this, 0, 0, m);
+	_view = new MiniMapView(this, 0, 0, m, ply);
 	_view->warpview.set(&warpview, &UISignal2<int,int>::call);
 
 	//set_cache(false); // testing

@@ -456,4 +456,72 @@ Field::Build_Symbol Map::get_build_symbol(const int x, const int y) {
    return Field::BIG;
 }
 
+// 
+// class Map_Region
+// 
+Field* Map_Region::next(void) {
+   Field* retval=_lf;
 
+   if(_lf==_tr) {
+      if(tly >= sy) {
+          if(_lf==_br) {
+             _lf=0;
+             return retval;
+          }
+         _map->get_brn(tlx, tly, _tl, &tlx, &tly, &_tl);
+         _map->get_bln(trx, tr_y, _tr, &trx, &tr_y, &_tr);
+         _lf=_tl;
+         cx=tlx;
+         cy=tly;
+      } else {
+         _map->get_bln(tlx, tly, _tl, &tlx, &tly, &_tl);
+         _map->get_brn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
+         _lf=_tl;
+         cx=tlx;
+         cy=tly;
+         return retval;
+      }
+   } else {
+      _map->get_rn(cx, cy, _lf, &cx, &cy, &_lf);
+   }
+
+   
+   return retval;
+}
+
+// 
+// class Map_Region_Cords
+// 
+int Map_Region_Cords::next(int* retx, int* rety) {
+   int retval=0;
+   
+   if(_lf) retval=1;
+   *retx=cx;
+   *rety=cy;
+
+   if(_lf==_tr) {
+      if(tly >= sy) {
+          if(_lf==_br) {
+             _lf=0;
+             return retval;
+          }
+         _map->get_brn(tlx, tly, _tl, &tlx, &tly, &_tl);
+         _map->get_bln(trx, tr_y, _tr, &trx, &tr_y, &_tr);
+         _lf=_tl;
+         cx=tlx;
+         cy=tly;
+      } else {
+         _map->get_bln(tlx, tly, _tl, &tlx, &tly, &_tl);
+         _map->get_brn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
+         _lf=_tl;
+         cx=tlx;
+         cy=tly;
+         return retval;
+      }
+   } else {
+      _map->get_rn(cx, cy, _lf, &cx, &cy, &_lf);
+   }
+
+   
+   return retval;
+}

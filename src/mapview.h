@@ -34,7 +34,7 @@
  */
 class Map_View : public Panel {
 public:
-	Map_View(Panel *parent, int x, int y, uint w, uint h, Game *g);
+	Map_View(Panel *parent, int x, int y, uint w, uint h, Game *g, uchar ply);
 	~Map_View();
 
 	UISignal2<int,int> warpview; // x/y in screen coordinates
@@ -65,14 +65,16 @@ private:
    static AutoPic mine_building;
    static AutoPic setable_flag;
 
+   uchar player_number;
 	Game* m_game;
 	Map* map;
 	int vpx, vpy;
 	bool dragging;
 	int fselx, fsely; // field the mouse is over
 
-	void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-			const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy);
+   void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+                 const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy);
+
 };
 
 
