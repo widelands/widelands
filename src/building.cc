@@ -679,6 +679,8 @@ ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr)
 	m_builder = 0;
 	m_builder_request = 0;
 
+	m_fetchfromflag = 0;
+
 	m_working = false;
 	m_work_steptime = 0;
 	m_work_completed = 0;
@@ -893,10 +895,6 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		m_builder_request = 0;
 	}
 
-	if (m_builder)
-		m_builder->send_signal((Game*)g, "stop"); // stop working
-
-
 	// Cleanup the wares queues
 	for(uint i = 0; i < m_wares.size(); i++) {
 		m_wares[i]->cleanup((Game*)g);
@@ -978,6 +976,24 @@ void ConstructionSite::request_builder_callback(Game* g, Request* rq, int ware, 
 
 /*
 ===============
+ConstructionSite::fetch_from_flag
+
+Remember the item on the flag. The worker will be sent from get_building_work().
+===============
+*/
+bool ConstructionSite::fetch_from_flag(Game* g)
+{
+	m_fetchfromflag++;
+
+	if (m_builder)
+		m_builder->update_task_buildingwork(g);
+
+	return true;
+}
+
+
+/*
+===============
 ConstructionSite::get_building_work
 
 Called by our builder to get instructions.
@@ -1001,6 +1017,13 @@ bool ConstructionSite::get_building_work(Game* g, Worker* w, bool success)
 
 			m_working = false;
 		}
+	}
+
+	// Fetch items from flag
+	if (m_fetchfromflag) {
+		m_fetchfromflag--;
+		w->start_task_fetchfromflag(g);
+		return true;
 	}
 
 	// Check if we've got wares to consume
@@ -1116,6 +1139,7 @@ public:
 public: // Supply implementation
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual int get_amount(Game* g, int ware);
+	virtual bool is_active(Game* g);
 
 	virtual WareInstance* launch_item(Game* g, int ware);
 	virtual Worker* launch_worker(Game* g, int ware);
@@ -1259,6 +1283,19 @@ Return our stock of the given ware.
 int WarehouseSupply::get_amount(Game* g, int ware)
 {
 	return m_wares.stock(ware);
+}
+
+
+/*
+===============
+WarehouseSupply::is_active
+
+Warehouse supplies are never active.
+===============
+*/
+bool WarehouseSupply::is_active(Game* g)
+{
+	return false;
 }
 
 
@@ -1981,6 +2018,8 @@ ProductionSite::ProductionSite(ProductionSite_Descr* descr)
 	m_worker = 0;
 	m_worker_request = 0;
 
+	m_fetchfromflag = 0;
+
 	m_program = 0;
 	m_program_ip = 0;
 	m_program_phase = 0;
@@ -2292,6 +2331,24 @@ void ProductionSite::act(Game *g, uint data)
 
 /*
 ===============
+ProductionSite::fetch_from_flag
+
+Remember that we need to fetch an item from the flag.
+===============
+*/
+bool ProductionSite::fetch_from_flag(Game* g)
+{
+	m_fetchfromflag++;
+
+	if (m_worker)
+		m_worker->update_task_buildingwork(g);
+
+	return true;
+}
+
+
+/*
+===============
 ProductionSite::get_building_work
 
 There's currently nothing to do for the worker.
@@ -2300,6 +2357,8 @@ Note: we assume that the worker is inside the building when this is called.
 */
 bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 {
+	assert(w == m_worker);
+
 	// Default actions first
 	WareInstance* item = w->fetch_carried_item(g);
 
@@ -2311,6 +2370,12 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 		molog("ProductionSite::get_building_work: start dropoff\n");
 
 		w->start_task_dropoff(g, item);
+		return true;
+	}
+
+	if (m_fetchfromflag) {
+		m_fetchfromflag--;
+		w->start_task_fetchfromflag(g);
 		return true;
 	}
 

@@ -131,7 +131,7 @@ protected:
 
 public: // worker-specific tasks
 	void start_task_transfer(Game* g, Transfer* t);
-	void update_task_transfer(Game* g, bool cancel);
+	void cancel_task_transfer(Game* g);
 
 	void start_task_buildingwork(Game* g);
 	void update_task_buildingwork(Game* g);

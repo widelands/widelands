@@ -28,7 +28,7 @@
 class Flag;
 class Road;
 class Request;
-struct Transfer;
+class Transfer;
 class Economy;
 class Item_Ware_Descr;
 class IdleWareSupply;
@@ -77,10 +77,10 @@ public:
 
 	bool is_moving(Game* g);
 	void cancel_moving(Game* g);
-	PlayerImmovable* get_next_move_step(Game* g);
-	PlayerImmovable* get_final_move_step(Game* g);
 
-	void set_transfer(Game* g, Transfer* t, const Route* route);
+	PlayerImmovable* get_next_move_step(Game* g);
+
+	void set_transfer(Game* g, Transfer* t);
 	void cancel_transfer(Game* g);
 
 private:
@@ -89,8 +89,9 @@ private:
 	int					m_ware;
 	Item_Ware_Descr*	m_ware_descr;
 
-	Transfer*			m_transfer;
 	IdleWareSupply*	m_supply;
+	Transfer*			m_transfer;
+	Object_Ptr			m_transfer_nextstep; // cached PlayerImmovable, can be 0
 
 	bool			m_return_watchdog;	// scheduled return-to-warehouse watchdog
 	bool			m_flag_dirty;			// true if we need to tell the flag to take care of us
@@ -296,6 +297,7 @@ public:
 	Flag *get_flag(Game *g, int idx);
 
 	void starttrim(int count);
+	void truncate(int count);
 
 private:
 	int				m_totalcost;
@@ -305,14 +307,45 @@ private:
 
 /*
 Whenever an item or worker is transferred to fulfill a Request,
-a Transfer structure is allocated to describe this transfer.
+a Transfer is allocated to describe this transfer.
 
-Transfer structures are always created and destroyed by a Request instance.
+Transfers are always created and destroyed by a Request instance.
+
+Call get_next_step() to find out where you should go next. If
+get_next_step() returns 0, the transfer is complete or cannot be
+completed. Call finish() if success is true, fail() otherwise.
+Call fail() if something really bad has happened (e.g. the worker
+or ware was destroyed).
 */
-struct Transfer {
-	Request*			request;
-	WareInstance*	item;			// non-null if ware is an item
-	Worker*			worker;		// non-null if ware is a worker
+class Transfer {
+	friend class Request;
+
+public:
+	Transfer(Game* g, Request* req, WareInstance* it);
+	Transfer(Game* g, Request* req, Worker* w);
+	~Transfer();
+
+	Request* get_request() const { return m_request; }
+	bool is_idle() const { return m_idle; }
+
+	void set_idle(bool idle);
+
+public: // called by the controlled ware or worker
+	PlayerImmovable* get_next_step(PlayerImmovable* location, bool* psuccess);
+	void finish();
+	void fail();
+
+private:
+	void tlog(const char* fmt, ...) PRINTF_FORMAT(2,3);
+
+private:
+	Game*				m_game;
+	Request*			m_request;
+	WareInstance*	m_item;			// non-null if ware is an item
+	Worker*			m_worker;		// non-null if ware is a worker
+	Route				m_route;
+
+	bool				m_idle;		// an idle transfer can be fail()ed if the item feels like it
 };
 
 
@@ -321,6 +354,10 @@ A Supply is a virtual base class representing something that can offer
 wares of any type for any purpose.
 
 Subsequent calls to get_position() can return different results.
+If a Supply is "active", it should be transferred to a possible Request
+quickly. Basically, supplies in warehouses (or unused supplies that are
+being carried into a warehouse) are inactive, and supplies that are just
+sitting on a flag are active.
 
 Important note: The implementation of Supply is responsible for adding
 and removing itself from Economies. This rule holds true for Economy
@@ -330,6 +367,7 @@ class Supply : public Trackable {
 public:
 	virtual PlayerImmovable* get_position(Game* g) = 0;
 	virtual int get_amount(Game* g, int ware) = 0;
+	virtual bool is_active(Game* g) = 0;
 
 	virtual WareInstance* launch_item(Game* g, int ware) = 0;
 	virtual Worker* launch_worker(Game* g, int ware) = 0;
@@ -390,8 +428,8 @@ public:
 	void start_transfer(Game *g, Supply* supp);
 
 public: // callbacks for WareInstance/Worker code
-	void transfer_finish(Game *g, Transfer* t);
-	void transfer_fail(Game *g, Transfer* t);
+	void transfer_finish(Game* g, Transfer* t);
+	void transfer_fail(Game* g, Transfer* t);
 
 private:
 	int get_base_required_time(Editor_Game_Base* g, int nr);

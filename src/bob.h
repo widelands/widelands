@@ -29,7 +29,7 @@ class Profile;
 class Bob;
 class Route;
 class Request;
-struct Transfer;
+class Transfer;
 class WorkerProgram;
 
 

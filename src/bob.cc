@@ -486,7 +486,7 @@ void Bob::pop_task(Game* g)
 	if (state->route)
 		delete state->route;
 	if (state->transfer)
-		state->transfer->request->transfer_fail(g, state->transfer);
+		state->transfer->fail();
 
 	m_stack.pop_back();
 	m_stack_dirty = true;

@@ -25,6 +25,8 @@ What _does_ belong in here:
 Flags, Roads, the logic behind ware pulls and pushes.
 */
 
+#include <stdarg.h>
+
 #include "widelands.h"
 #include "game.h"
 #include "player.h"
@@ -53,6 +55,7 @@ public:
 public: // implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual int get_amount(Game* g, int ware);
+	virtual bool is_active();
 
 	virtual WareInstance* launch_item(Game* g, int ware);
 	virtual Worker* launch_worker(Game* g, int ware);
@@ -145,6 +148,17 @@ IdleWareSupply::get_amount
 int IdleWareSupply::get_amount(Game* g, int ware)
 {
 	return (ware == m_ware->get_ware()) ? 1 : 0;
+}
+
+
+/*
+===============
+IdleWareSupply::is_active
+===============
+*/
+bool IdleWareSupply::is_active(Game* g)
+{
+	return !m_ware->is_moving(g);
 }
 
 
@@ -424,70 +438,98 @@ void WareInstance::update(Game* g)
 		return;
 	}
 
-	// Make sure current movement data is correct
-	is_moving(g);
+	// Deal with transfers
+	if (m_transfer)
+	{
+		bool success;
+		PlayerImmovable* location;
+		PlayerImmovable* nextstep;
 
-	// Updates based on location type
-	switch(loc->get_type()) {
-	case BUILDING:
-		if (m_transfer)
-		{
+		if (loc->get_type() >= BUILDING)
+			location = (PlayerImmovable*)loc;
+		else
+			return; // wait
+
+		nextstep = m_transfer->get_next_step(location, &success);
+		m_transfer_nextstep = nextstep;
+
+		if (!nextstep) {
 			Transfer* t = m_transfer;
 
-			if (loc == t->request->get_target(g))
-			{
-				m_transfer = 0;
-				t->request->transfer_finish(g, t);
+			m_transfer = 0;
+
+			if (success) {
+				t->finish();
+				return;
+			} else {
+				t->fail();
+
+				cancel_moving(g);
+				update(g);
 				return;
 			}
+		}
+
+		switch(location->get_type()) {
+		case BUILDING:
+			if (nextstep != location->get_base_flag())
+				throw wexception("MO(%u): ware: move from building to non-baseflag", get_serial());
 
 			// There are some situations where we might end up in a warehouse as
 			// part of a requested route, and we need to move out of it again, e.g.:
 			//  - we were requested just when we were being carried into the warehouse
 			//  - we were carried into a harbour/warehouse to be shipped across the sea,
 			//    but a better, land-based route has been found
-			if (loc->has_attribute(WAREHOUSE))
+			if (location->has_attribute(WAREHOUSE))
 			{
-				Warehouse* wh = (Warehouse*)loc;
-				PlayerImmovable* nextstep = get_next_move_step(g);
+				Warehouse* wh = (Warehouse*)location;
 
-				molog("WareInstance::update() on warehouse %u. nextstep is %u\n",
-						wh->get_serial(), nextstep->get_serial());
-
-				if (nextstep == wh->get_base_flag()) {
-					wh->do_launch_item(g, this);
-					return;
-				}
+				wh->do_launch_item(g, this);
+				return;
 			}
 
-			throw wexception("MO(%u): WareInstance::update: End in building, but not request target",
-							get_serial());
-		}
-		else
-		{
-			if (loc->has_attribute(WAREHOUSE)) {
-				Warehouse* wh = (Warehouse*)loc;
+			throw wexception("MO(%u): ware: can't move from building %u to %u (not a warehouse)",
+							get_serial(), location->get_serial(), nextstep->get_serial());
 
-				wh->incorporate_item(g, this);
-				return; // *this should now be freed
-			}
-
-			throw wexception("WareInstance::set_location: BUILDING, but neither request nor warehouse");
+		case FLAG:
+			if (nextstep->get_type() == BUILDING && nextstep->get_base_flag() != location)
+				((Flag*)location)->call_carrier(g, this, nextstep->get_base_flag());
+			else
+				((Flag*)location)->call_carrier(g, this, nextstep);
+			break;
 		}
+
+		return;
+	}
+
+	// NOTE NOTE NOTE
+	// The following is going to be obsoleted.
+
+	// Make sure current movement data is correct
+	is_moving(g);
+
+	// Updates based on location type
+	switch(loc->get_type()) {
+	case BUILDING:
+		if (loc->has_attribute(WAREHOUSE)) {
+			Warehouse* wh = (Warehouse*)loc;
+
+			wh->incorporate_item(g, this);
+			return; // *this should now be freed
+		}
+
+		throw wexception("WareInstance::set_location: BUILDING, but neither request nor warehouse");
 
 	case FLAG:
-		if (!m_transfer)
-		{
-			// arrange for a return to warehouse
-			if (!m_moving && !m_return_watchdog) {
-				g->get_cmdqueue()->queue(g->get_gametime() + 5000, SENDER_MAPOBJECT,
-						CMD_ACT, m_serial, 0, 0);
-				m_return_watchdog = true;
-			}
-
-			if (!m_supply)
-				m_supply = new IdleWareSupply(this);
+		// arrange for a return to warehouse
+		if (!m_moving && !m_return_watchdog) {
+			g->get_cmdqueue()->queue(g->get_gametime() + 5000, SENDER_MAPOBJECT,
+					CMD_ACT, m_serial, 0, 0);
+			m_return_watchdog = true;
 		}
+
+		if (!m_supply)
+			m_supply = new IdleWareSupply(this);
 
 		if (m_flag_dirty) {
 			if (m_moving)
@@ -509,7 +551,7 @@ WareInstance::set_transfer
 Set ware state so that it follows the given transfer.
 ===============
 */
-void WareInstance::set_transfer(Game* g, Transfer* t, const Route* route)
+void WareInstance::set_transfer(Game* g, Transfer* t)
 {
 	// Reset current movement & request
 	if (m_supply) {
@@ -518,7 +560,7 @@ void WareInstance::set_transfer(Game* g, Transfer* t, const Route* route)
 	}
 
 	if (m_transfer) {
-		m_transfer->request->transfer_fail(g, m_transfer);
+		m_transfer->fail();
 		m_transfer = 0;
 	}
 
@@ -534,8 +576,7 @@ void WareInstance::set_transfer(Game* g, Transfer* t, const Route* route)
 	m_flag_dirty = true;
 
 	m_moving = true;
-	m_move_destination = m_transfer->request->get_target(g);
-	m_move_route = new Route(*route);
+	m_move_destination = 0; // use data from transfer
 
 	update(g);
 }
@@ -590,6 +631,9 @@ bool WareInstance::is_moving(Game* g)
 		cancel_moving(g);
 		return false;
 	}
+
+	if (m_transfer)
+		return true; // transfers are handled differently
 
 	// free an empty route
 	if (m_move_route && !m_move_route->get_nrsteps()) {
@@ -678,7 +722,7 @@ void WareInstance::cancel_moving(Game* g)
 	if (m_transfer) {
 		molog("WareInstance::cancel_moving() fails transfer.\n");
 
-		m_transfer->request->transfer_fail(g, m_transfer);
+		m_transfer->fail();
 		m_transfer = 0;
 	}
 
@@ -705,6 +749,12 @@ PlayerImmovable* WareInstance::get_next_move_step(Game* g)
 {
 	assert(m_moving);
 
+	if (m_transfer)
+		return (PlayerImmovable*)m_transfer_nextstep.get(g);
+
+	// NOTE NOTE NOTE
+	// Below is going to be removed
+
 	if (m_move_route) {
 		assert(m_move_route->get_nrsteps());
 
@@ -715,21 +765,6 @@ PlayerImmovable* WareInstance::get_next_move_step(Game* g)
 
 		return flag;
 	}
-
-	return (PlayerImmovable*)m_move_destination.get(g);
-}
-
-
-/*
-===============
-WareInstance::get_final_move_step
-
-Returns the final target.
-===============
-*/
-PlayerImmovable* WareInstance::get_final_move_step(Game* g)
-{
-	assert(m_moving);
 
 	return (PlayerImmovable*)m_move_destination.get(g);
 }
@@ -2035,13 +2070,13 @@ bool Route::verify(Game *g)
 
 	if (!flag)
 		return false;
-	
+
 	for(uint idx = 1; idx < m_route.size(); idx++) {
 		Flag *next = (Flag*)m_route[idx].get(g);
-		
+
 		if (!next)
 			return false;
-		
+
 		if (!flag->get_road(next))
 			return false;
 
@@ -2079,6 +2114,250 @@ void Route::starttrim(int count)
 
 	m_route.erase(m_route.begin(), m_route.begin()+count);
 }
+
+
+/*
+===============
+Route::truncate
+
+Keep the first count steps, truncate the rest.
+===============
+*/
+void Route::truncate(int count)
+{
+	assert(count < (int)m_route.size());
+
+	m_route.erase(m_route.begin()+count+1, m_route.end());
+}
+
+
+/*
+==============================================================================
+
+Transfer IMPLEMENTATION
+
+==============================================================================
+*/
+
+
+/*
+===============
+Transfer::Transfer
+
+Start the transfer
+===============
+*/
+Transfer::Transfer(Game* g, Request* req, WareInstance* it)
+{
+	m_game = g;
+	m_request = req;
+	m_item = it;
+	m_worker = 0;
+
+	m_idle = false;
+
+	m_item->set_transfer(g, this);
+}
+
+Transfer::Transfer(Game* g, Request* req, Worker* w)
+{
+	m_game = g;
+	m_request = req;
+	m_worker = w;
+	m_item = 0;
+
+	m_idle = false;
+
+	m_worker->start_task_transfer(g, this);
+}
+
+
+/*
+===============
+Transfer::~Transfer
+
+Cleanup.
+===============
+*/
+Transfer::~Transfer()
+{
+	if (m_worker)
+	{
+		assert(!m_item);
+
+		m_worker->cancel_task_transfer(m_game);
+	}
+	else if (m_item)
+	{
+		m_item->cancel_transfer(m_game);
+	}
+}
+
+
+/*
+===============
+Transfer::set_idle
+
+An idle transfer can be fail()ed by the controlled item whenever a better
+Request is available.
+===============
+*/
+void Transfer::set_idle(bool idle)
+{
+	m_idle = idle;
+}
+
+
+/*
+===============
+Transfer::get_next_step
+
+Determine where we should be going from our current location.
+===============
+*/
+PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psuccess)
+{
+	PlayerImmovable* destination = m_request->get_target(m_game);
+	Flag* locflag;
+	Flag* destflag;
+
+	// Catch the simplest cases
+	if (location->get_economy() != destination->get_economy()) {
+		tlog("Economy mismatch -> fail\n");
+
+		*psuccess = false;
+		return 0;
+	}
+
+	*psuccess = true;
+
+	if (location == destination) {
+		tlog("location == destination\n");
+		return 0;
+	}
+
+	locflag = location->get_base_flag();
+	destflag = destination->get_base_flag();
+
+	if (locflag == destflag) {
+		tlog("location flag == destination flag\n");
+
+		if (locflag == location)
+			return destination;
+
+		return locflag;
+	}
+
+	// Brute force: recalculate the best route every time
+	if (!locflag->get_economy()->find_route(locflag, destflag, &m_route))
+		throw wexception("Transfer::get_next_step: inconsistent economy");
+
+	if (m_route.get_nrsteps() >= 1 && location->get_type() == Map_Object::ROAD) {
+		Road* road = (Road*)location;
+		Flag* oflag = m_route.get_flag(m_game, 1);
+
+		if (road->get_flag(Road::FlagEnd) == oflag) {
+			tlog("trim start flag (road)\n");
+			m_route.starttrim(1);
+		}
+	}
+
+	if (m_route.get_nrsteps() >= 1 && destination->get_type() == Map_Object::ROAD) {
+		Road* road = (Road*)destination;
+		Flag* oflag = m_route.get_flag(m_game, m_route.get_nrsteps()-1);
+
+		if (road->get_flag(Road::FlagEnd) == oflag) {
+			tlog("trim end flag (road)\n");
+			m_route.truncate(m_route.get_nrsteps()-1);
+		}
+	}
+
+	// Now decide where we want to go
+	if (location->get_type() == Map_Object::FLAG) {
+		assert(m_route.get_flag(m_game, 0) == location);
+
+		// special rule to get items into buildings
+		if (m_item) {
+			if (m_route.get_nrsteps() == 1 && destination->get_type() == Map_Object::BUILDING) {
+				assert(m_route.get_flag(m_game, 1) == destination->get_base_flag());
+
+				return destination;
+			}
+		}
+
+		if (m_route.get_nrsteps() >= 1) {
+			tlog("go to next flag\n");
+			return m_route.get_flag(m_game, 1);
+		}
+
+		tlog("move from flag to destination\n");
+		return destination;
+	}
+
+	tlog("move to first flag\n");
+	return m_route.get_flag(m_game, 0);
+}
+
+
+/*
+===============
+Transfer::finish
+
+Transfer finished successfully.
+This Transfer object will be deleted indirectly by finish().
+The caller might be destroyed, too.
+===============
+*/
+void Transfer::finish()
+{
+	m_request->transfer_finish(m_game, this);
+}
+
+
+/*
+===============
+Transfer::fail
+
+Transfer failed for reasons beyond our control.
+This Transfer object will be deleted indirectly by fail().
+===============
+*/
+void Transfer::fail()
+{
+	m_request->transfer_fail(m_game, this);
+}
+
+
+/*
+===============
+Transfer::tlog
+===============
+*/
+void Transfer::tlog(const char* fmt, ...)
+{
+	char buf[1024];
+	va_list va;
+	char id;
+	uint serial;
+
+	va_start(va, fmt);
+	vsnprintf(buf, sizeof(buf), fmt, va);
+	va_end(va);
+
+	if (m_worker) {
+		id = 'W';
+		serial = m_worker->get_serial();
+	} else if (m_item) {
+		id = 'I';
+		serial = m_item->get_serial();
+	} else {
+		id = '?';
+		serial = 0;
+	}
+
+	log("T%c(%u): %s", id, serial, buf);
+}
+
 
 /*
 ==============================================================================
@@ -2271,14 +2550,10 @@ void Request::start_transfer(Game* g, Supply* supp)
 	assert(is_open());
 
 	Ware_Descr* descr = g->get_ware_description(get_ware());
-	Transfer* t = new Transfer;
+	Transfer* t = 0;
 
 	try
 	{
-		t->request = this;
-		t->worker = 0;
-		t->item = 0;
-
 		if (descr->is_worker())
 		{
 			// Begin the transfer of a worker.
@@ -2286,8 +2561,9 @@ void Request::start_transfer(Game* g, Supply* supp)
 			// worker starts walking
 			log("Request: start worker transfer for %i\n", get_ware());
 
-			t->worker = supp->launch_worker(g, get_ware());
-			t->worker->start_task_transfer(g, t);
+			Worker* w = supp->launch_worker(g, get_ware());
+
+			t = new Transfer(g, this, w);
 		}
 		else
 		{
@@ -2296,20 +2572,16 @@ void Request::start_transfer(Game* g, Supply* supp)
 			// Once it's on the flag, the flag code will decide what to do with it.
 			log("Request: start item transfer for %i\n", get_ware());
 
-			Route route;
+			WareInstance* item = supp->launch_item(g, get_ware());
 
-			t->item = supp->launch_item(g, get_ware());
-
-			if (!m_economy->find_route(supp->get_position(g)->get_base_flag(),
-											get_target_flag(g), &route))
-				throw wexception("Request::start_transfer: routing is inconsistent");
-
-			t->item->set_transfer(g, t, &route);
+			t = new Transfer(g, this, item);
 		}
 	}
 	catch(...)
 	{
-		delete t;
+		if (t)
+			delete t;
+
 		throw;
 	}
 
@@ -2330,12 +2602,13 @@ for removing and deleting the request.
 */
 void Request::transfer_finish(Game *g, Transfer* t)
 {
-	Worker* w = t->worker;
+	Worker* w = t->m_worker;
 
-	if (t->item) {
-		t->item->destroy(g);
-		t->item = 0;
-	}
+	if (t->m_item)
+		t->m_item->destroy(g);
+
+	t->m_worker = 0;
+	t->m_item = 0;
 
 	remove_transfer(find_transfer(t));
 
@@ -2362,6 +2635,9 @@ void Request::transfer_fail(Game *g, Transfer* t)
 {
 	bool wasopen = is_open();
 
+	t->m_worker = 0;
+	t->m_item = 0;
+
 	remove_transfer(find_transfer(t));
 
 	if (!wasopen)
@@ -2380,24 +2656,6 @@ Economy or not.
 */
 void Request::cancel_transfer(uint idx)
 {
-	Game* g = static_cast<Game*>(m_economy->get_owner()->get_game());
-	Transfer* t = m_transfers[idx];
-
-	if (t->worker)
-	{
-		assert(!t->item);
-
-		t->worker->update_task_transfer(g, true); // cancel
-		t->worker = 0;
-	}
-	else
-	{
-		assert(t->item);
-
-		t->item->cancel_transfer(g);
-		t->item = 0;
-	}
-
 	remove_transfer(idx);
 }
 
@@ -2433,8 +2691,6 @@ Throws an exception if the Transfer is not registered with us.
 */
 uint Request::find_transfer(Transfer* t)
 {
-	assert(t->request == this);
-
 	TransferList::iterator it = std::find(m_transfers.begin(), m_transfers.end(), t);
 
 	if (it == m_transfers.end())

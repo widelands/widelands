@@ -1211,7 +1211,6 @@ void Worker::init_auto_task(Game* g)
 TRANSFER task
 
 Follow the given transfer.
-Signal "update" to force a recalculation of the route.
 Signal "cancel" to cancel the transfer.
 
 ==============================
@@ -1265,43 +1264,130 @@ void Worker::transfer_update(Game* g, State* state)
 	}
 
 	// Figure out where to go
-	PlayerImmovable* target = state->transfer->request->get_target(g);
+	bool success;
+	PlayerImmovable* nextstep = state->transfer->get_next_step(location, &success);
 
-	if (get_location(g) == target) {
+	if (!nextstep) {
 		Transfer* t = state->transfer;
 
-		molog("[transfer]: finish\n");
+		state->transfer = 0;
 
-		state->transfer = 0; // don't fail, we were successful!
-		pop_task(g);
+		if (success) {
+			molog("[transfer]: Success\n");
+			pop_task(g);
 
-		t->request->transfer_finish(g, t);
+			t->finish();
+			return;
+		} else {
+			molog("[transfer]: Failed\n");
+			set_signal("fail");
+			pop_task(g);
+
+			t->fail();
+			return;
+		}
+	}
+
+	// Initiate the next step
+	if (location->get_type() == BUILDING) {
+		if (location->get_base_flag() != nextstep)
+			throw wexception("MO(%u): [transfer]: in building, nextstep is not building's flag", get_serial());
+
+		molog("[transfer]: move from building to flag\n");
+		start_task_leavebuilding(g);
+		set_location(nextstep);
 		return;
 	}
 
-	// We may get the signal "update" when we were split from the economy of
-	// our target. However, request_signal() defers handling of "update", so
-	// we do the appropriate check here
-	if (get_economy() != target->get_economy()) {
-		molog("[transfer]: Fail (split from target economy)\n");
+	if (location->get_type() == FLAG) {
+		// Flag to Building
+		if (nextstep->get_type() == BUILDING) {
+			if (nextstep->get_base_flag() != location)
+				throw wexception("MO(%u): [transfer]: next step is building, but we're nowhere near", get_serial());
 
-		set_signal("fail");
-		pop_task(g);
-		return;
+			molog("[transfer]: move from flag to building\n");
+			start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+			set_location(nextstep);
+			return;
+		}
+
+		// Flag to Flag
+		if (nextstep->get_type() == FLAG) {
+			Road* road = ((Flag*)location)->get_road((Flag*)nextstep);
+
+			molog("[transfer]: move to next flag via road %u\n", road->get_serial());
+
+			Path path(road->get_path());
+
+			if (nextstep != road->get_flag(Road::FlagEnd))
+				path.reverse();
+
+			start_task_movepath(g, path, get_descr()->get_right_walk_anims(does_carry_ware()));
+			set_location(road);
+			return;
+		}
+
+		// Flag to Road
+		if (nextstep->get_type() == ROAD) {
+			Road* road = (Road*)nextstep;
+
+			if (road->get_flag(Road::FlagStart) != location && road->get_flag(Road::FlagEnd) != location)
+				throw wexception("MO(%u): [transfer]: nextstep is road, but we're nowhere near", get_serial());
+
+			molog("[transfer]: set location to road %u\n", road->get_serial());
+			set_location(road);
+			set_animation(g, get_descr()->get_idle_anim());
+			schedule_act(g, 10); // wait a little
+			return;
+		}
+
+		throw wexception("MO(%u): [transfer]: flag to bad nextstep %u", get_serial(), nextstep->get_serial());
 	}
 
-	// Calculate a route
-	Route* route = new Route;
+	if (location->get_type() == ROAD) {
+		// Road to Flag
+		if (nextstep->get_type() == FLAG) {
+			Road* road = (Road*)location;
+			const Path& path = road->get_path();
+			int index;
 
-	if (!get_economy()->find_route(get_location(g)->get_base_flag(), target->get_base_flag(), route)) {
-		molog("[transfer]: Can't find route\n");
+			if (nextstep == road->get_flag(Road::FlagStart))
+				index = 0;
+			else if (nextstep == road->get_flag(Road::FlagEnd))
+				index = path.get_nsteps();
+			else
+				index = -1;
 
-		set_signal("fail");
-		pop_task(g);
-		return;
+			molog("[transfer]: on road %u, to flag %u, index is %i\n", road->get_serial(),
+							nextstep->get_serial(), index);
+
+			if (index >= 0)
+			{
+				if (start_task_movepath(g, path, index, get_descr()->get_right_walk_anims(does_carry_ware()))) {
+					molog("[transfer]: from road %u to flag %u\n", get_serial(), road->get_serial(),
+									nextstep->get_serial());
+					return;
+				}
+			}
+			else
+			{
+				if (nextstep != g->get_map()->get_immovable(get_position()))
+					throw wexception("MO(%u): [transfer]: road to flag, but flag is nowhere near", get_serial());
+			}
+
+			molog("[transfer]: arrive at flag %u\n", nextstep->get_serial());
+			set_location((Flag*)nextstep);
+			set_animation(g, get_descr()->get_idle_anim());
+			schedule_act(g, 10); // wait a little
+			return;
+		}
+
+		throw wexception("MO(%u): [transfer]: from road to bad nextstep %u (type %u)", get_serial(),
+					nextstep->get_serial(), nextstep->get_type());
 	}
 
-	start_task_route(g, route, target);
+	throw wexception("MO(%u): location %u has bad type %u", get_serial(),
+					location->get_serial(), location->get_type());
 }
 
 
@@ -1317,7 +1403,7 @@ void Worker::transfer_signal(Game* g, State* state)
 	// The caller requested a route update, or the previously calulcated route
 	// failed.
 	// We will recalculate the route on the next update().
-	if (signal == "update" || signal == "road" || signal == "fail") {
+	if (signal == "road" || signal == "fail") {
 		molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 		set_signal("");
@@ -1345,16 +1431,14 @@ void Worker::transfer_mask(Game* g, State* state)
 
 /*
 ===============
-Worker::update_task_transfer
+Worker::cancel_task_transfer
 
-Called by transport code when:
-- the transfer has been cancelled & destroyed (cancel is true)
-- the current route has been broken (cancel is false)
+Called by transport code when the transfer has been cancelled & destroyed.
 ===============
 */
-void Worker::update_task_transfer(Game* g, bool cancel)
+void Worker::cancel_task_transfer(Game* g)
 {
-	send_signal(g, cancel ? "cancel" : "update");
+	send_signal(g, "cancel");
 }
 
 
@@ -1977,7 +2061,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 		return;
 	}
 
-	throw wexception("Worker: FetchFromFlag: TODO: return into non-warehouse");
+	pop_task(g); // assume our parent task knows what to do
 }
 
 
@@ -2475,7 +2559,7 @@ void Worker::route_mask(Game* g, State* state)
 
 	//molog("[route]: Filter signal '%s'\n", signal.c_str());
 
-	// 'location' and wakeup are allowed to get through
+	// 'road', 'location' and 'wakeup' are allowed to get through
 	if (signal == "road" || signal == "location" || signal == "wakeup")
 		return;
 
@@ -3001,20 +3085,16 @@ void Carrier::transport_update(Game* g, State* state)
 	assert(item->get_location(g) == this);
 
 	// A sanity check is necessary, in case the building has been destroyed
-	if (item->is_moving(g))
-	{
-		PlayerImmovable* final = item->get_final_move_step(g);
+	PlayerImmovable* next = item->get_next_move_step(g);
 
-		if (final != flag && final->get_base_flag() == flag)
-		{
-			if (start_task_walktoflag(g, state->ivar1 ^ 1))
-				return;
-
-			molog("[transport]: Move into building.\n");
-			start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
-			state->ivar1 = -1;
+	if (next != flag && next->get_base_flag() == flag) {
+		if (start_task_walktoflag(g, state->ivar1 ^ 1))
 			return;
-		}
+
+		molog("[transport]: Move into building.\n");
+		start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
+		state->ivar1 = -1;
+		return;
 	}
 
 	// Move into waiting position if the flag is overloaded

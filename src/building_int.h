@@ -80,6 +80,7 @@ public:
 	uint get_nrwaresqueues() { return m_wares.size(); }
 	WaresQueue* get_waresqueue(uint idx) { return m_wares[idx]; }
 
+	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
 protected:
@@ -99,7 +100,9 @@ private:
 
 	std::vector<WaresQueue*>	m_wares;
 
-	bool					m_working;		// true if the builder is currently working
+	int					m_fetchfromflag;	// # of items to fetch from flag
+
+	bool					m_working;			// true if the builder is currently working
 	uint					m_work_steptime;	// time when next step is completed
 	uint					m_work_completed;	// how many steps have we done so far?
 	uint					m_work_steps;		// how many steps (= items) until we're done?
@@ -161,10 +164,10 @@ public:
 
 	virtual void remove_worker(Worker *w);
 
+	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
    virtual void set_economy(Economy* e);
-
 
    inline std::vector<WaresQueue*>* get_warequeues(void) { return &m_input_queues; }
 
@@ -182,6 +185,8 @@ private:
 	Request*		m_worker_request;
 	Worker*		m_worker;
 
+	int			m_fetchfromflag;	// # of items to fetch from flag
+
 	const ProductionProgram*	m_program;			// currently running program
 	int								m_program_ip;		// instruction pointer
 	int								m_program_phase;	// micro-step index (instruction dependent)
@@ -193,9 +198,9 @@ private:
 
 class MilitarySite_Descr : public ProductionSite_Descr {
    public:
-      MilitarySite_Descr(Tribe_Descr *tribe, const char *name); 
+      MilitarySite_Descr(Tribe_Descr *tribe, const char *name);
       virtual ~MilitarySite_Descr();
-  
+
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
       virtual Building *create_object();
 
