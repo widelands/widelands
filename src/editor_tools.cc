@@ -151,7 +151,8 @@ Editor_Increase_Height_Tool_Options_Menu::Editor_Increase_Height_Tool_Options_Me
 			set_pos(m_registry->x, m_registry->y);
 	}
    m_changed_by=changed_by;
-   
+   m_parent=parent;
+
    new Textarea(this, 5, 5, "Increase Height Tool Options", Align_Left);
    char buf[250];
    sprintf(buf, "Increase by: %i", *m_changed_by);
@@ -203,6 +204,11 @@ void Editor_Increase_Height_Tool_Options_Menu::button_clicked(int n) {
    char buf[250];
    sprintf(buf, "Increase by: %i", *m_changed_by);
    m_textarea->set_text(buf);
+   
+   // TEMP, TODO
+   std::cerr << "Actual: " << m_parent->get_fieldsel_radius() << ", New: " << val << std::endl;
+   m_parent->set_fieldsel_radius(val);
+   // TEMP ENDS
 }
 
 /*
@@ -245,6 +251,103 @@ int Editor_Increase_Height_Tool::tool_options_dialog(Editor_Interactive* parent)
 /*
 =============================
 
+class Editor_Decrease_Height_Tool_Options_Menu
+
+this is the option menu for this tool
+
+=============================
+*/
+class Editor_Decrease_Height_Tool_Options_Menu : public Window {
+   public:
+      Editor_Decrease_Height_Tool_Options_Menu(Editor_Interactive*, UniqueWindow*, int*);
+      virtual ~Editor_Decrease_Height_Tool_Options_Menu();
+
+   private:
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+      int* m_changed_by;
+      Textarea* m_textarea; 
+      
+      void button_clicked(int);
+};
+
+/*
+===============
+Editor_Decrease_Height_Tool_Options_Menu::Editor_Decrease_Height_Tool_Options_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Decrease_Height_Tool_Options_Menu::Editor_Decrease_Height_Tool_Options_Menu(Editor_Interactive *parent, UniqueWindow *registry, int* changed_by)
+	: Window(parent, (parent->get_w()-300)/2, (parent->get_h()-100)/2, 210, 70, "Option Menu")
+{
+   m_registry = registry;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
+	}
+   m_changed_by=changed_by;
+   m_parent=parent;
+   
+   new Textarea(this, 5, 5, "Decrease Height Tool Options", Align_Left);
+   char buf[250];
+   sprintf(buf, "Decrease by: %i", *m_changed_by);
+   m_textarea=new Textarea(this, 50, 25, buf);
+
+   Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Decrease_Height_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 105, 40, 20, 20, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Decrease_Height_Tool_Options_Menu::button_clicked);
+}
+
+/*
+===============
+Editor_Decrease_Height_Tool_Options_Menu::~Editor_Decrease_Height_Tool_Options_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Decrease_Height_Tool_Options_Menu::~Editor_Decrease_Height_Tool_Options_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Decrease_Height_Tool_Options_Menu::button_clicked()
+
+called, when one of the up/down buttons is pressed
+id: 0 is up, 1 is down
+===========
+*/
+void Editor_Decrease_Height_Tool_Options_Menu::button_clicked(int n) {
+   int val=*m_changed_by;
+   if(n==0) {
+      ++val;
+      if(val>MAX_FIELD_HEIGHT) val=MAX_FIELD_HEIGHT;
+   } else if(n==1) {
+      --val;
+      if(val<0) val=0;
+   }
+   *m_changed_by=val;
+   
+   char buf[250];
+   sprintf(buf, "Decrease by: %i", *m_changed_by);
+   m_textarea->set_text(buf);
+}
+/*
+=============================
+
 class Editor_Decrease_Height_Tool
 
 =============================
@@ -268,9 +371,310 @@ int Editor_Decrease_Height_Tool::handle_click(const Coords* coordinates, Field* 
 ===========
 Editor_Decrease_Height_Tool::tool_options_dialog()
 
-TODO
+Calls the Tool Option dialog
 ===========
 */
-int Editor_Decrease_Height_Tool::tool_options_dialog(Editor_Interactive*) {
+int Editor_Decrease_Height_Tool::tool_options_dialog(Editor_Interactive* parent) {
+   if (m_w.window)
+      delete m_w.window;
+   else
+      new Editor_Decrease_Height_Tool_Options_Menu(parent, &m_w, &m_decrease_by);
    return 0;
 }
+
+/*
+=============================
+
+class Editor_Set_Height_Tool_Options_Menu
+
+this is the option menu for this tool
+
+=============================
+*/
+class Editor_Set_Height_Tool_Options_Menu : public Window {
+   public:
+      Editor_Set_Height_Tool_Options_Menu(Editor_Interactive*, UniqueWindow*, int*);
+      virtual ~Editor_Set_Height_Tool_Options_Menu();
+
+   private:
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+      int* m_change_to;
+      Textarea* m_textarea; 
+      
+      void button_clicked(int);
+};
+
+/*
+===============
+Editor_Set_Height_Tool_Options_Menu::Editor_Set_Height_Tool_Options_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Set_Height_Tool_Options_Menu::Editor_Set_Height_Tool_Options_Menu(Editor_Interactive *parent, UniqueWindow *registry, int* change_to)
+	: Window(parent, (parent->get_w()-400)/2, (parent->get_h()-100)/2, 190, 70, "Option Menu")
+{
+   m_registry = registry;
+   if (m_registry) {
+      if (m_registry->window)
+         delete m_registry->window;
+
+      m_registry->window = this;
+      if (m_registry->x >= 0)
+         set_pos(m_registry->x, m_registry->y);
+   }
+   m_change_to=change_to;
+   m_parent=parent;
+
+   new Textarea(this, 10, 5, "Set Height Tool Options", Align_Left);
+   char buf[250];
+   sprintf(buf, "Set to: %i", *m_change_to);
+   m_textarea=new Textarea(this, 59, 25, buf);
+
+   Button* b = new Button(this, 75, 40, 20, 20, 0, 0);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Set_Height_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 95, 40, 20, 20, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Set_Height_Tool_Options_Menu::button_clicked);
+}
+
+/*
+===============
+Editor_Set_Height_Tool_Options_Menu::~Editor_Set_Height_Tool_Options_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Set_Height_Tool_Options_Menu::~Editor_Set_Height_Tool_Options_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Set_Height_Tool_Options_Menu::button_clicked()
+
+called, when one of the up/down buttons is pressed
+id: 0 is up, 1 is down
+===========
+*/
+void Editor_Set_Height_Tool_Options_Menu::button_clicked(int n) {
+   int val=*m_change_to;
+   if(n==0) {
+      ++val;
+      if(val>MAX_FIELD_HEIGHT) val=MAX_FIELD_HEIGHT;
+   } else if(n==1) {
+      --val;
+      if(val<0) val=0;
+   }
+   *m_change_to=val;
+
+   char buf[250];
+   sprintf(buf, "Set to: %i", *m_change_to);
+   m_textarea->set_text(buf);
+}
+
+/*
+=============================
+
+class Editor_Set_Height_Tool
+
+=============================
+*/
+
+/*
+===========
+Editor_Set_Height_Tool::handle_click()
+
+sets the height of the current to a fixed value,
+this decreases the height of the surrounding fields also
+if this is needed.
+===========
+*/
+int Editor_Set_Height_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   map->set_field_height(*coordinates, m_set_to);
+   return 0;
+}
+
+/*
+===========
+Editor_Set_Height_Tool::tool_options_dialog()
+
+Calls the Tool Option dialog
+===========
+*/
+int Editor_Set_Height_Tool::tool_options_dialog(Editor_Interactive* parent) {
+   if (m_w.window)
+		delete m_w.window;
+	else
+		new Editor_Set_Height_Tool_Options_Menu(parent, &m_w, &m_set_to);
+   return 0;
+}
+
+/*
+=============================
+
+class Editor_Noise_Height_Tool_Options_Menu
+
+this is the option menu for this tool
+
+=============================
+*/
+class Editor_Noise_Height_Tool_Options_Menu : public Window {
+   public:
+      Editor_Noise_Height_Tool_Options_Menu(Editor_Interactive*, UniqueWindow*, int*, int*);
+      virtual ~Editor_Noise_Height_Tool_Options_Menu();
+
+   private:
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+      int* m_lower_value, *m_upper_value;
+      Textarea* m_textarea_lower; 
+      Textarea* m_textarea_upper; 
+      
+      void button_clicked(int);
+};
+
+/*
+===============
+Editor_Noise_Height_Tool_Options_Menu::Editor_Noise_Height_Tool_Options_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Noise_Height_Tool_Options_Menu::Editor_Noise_Height_Tool_Options_Menu(Editor_Interactive *parent, UniqueWindow *registry, int* lower_value,
+      int* higher_value)
+	: Window(parent, (parent->get_w()-500)/2, (parent->get_h()-100)/2, 200, 70, "Option Menu")
+{
+   m_registry = registry;
+   if (m_registry) {
+      if (m_registry->window)
+         delete m_registry->window;
+
+      m_registry->window = this;
+      if (m_registry->x >= 0)
+         set_pos(m_registry->x, m_registry->y);
+   }
+   m_lower_value=lower_value;
+   m_upper_value=higher_value;
+   m_parent=parent;
+
+   new Textarea(this, 3, 5, "Noise Height Tool Options", Align_Left);
+   char buf[250];
+   sprintf(buf, "Minimum: %i", *m_lower_value);
+   m_textarea_lower=new Textarea(this, 10, 25, buf);
+   sprintf(buf, "Maximum: %i", *m_upper_value);
+   m_textarea_upper=new Textarea(this, 105, 25, buf);
+
+   Button* b = new Button(this, 30, 40, 20, 20, 0, 0);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Noise_Height_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 50, 40, 20, 20, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Noise_Height_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 130, 40, 20, 20, 0, 2);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Noise_Height_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 150, 40, 20, 20, 0, 3);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Noise_Height_Tool_Options_Menu::button_clicked);
+}
+
+/*
+===============
+Editor_Noise_Height_Tool_Options_Menu::~Editor_Noise_Height_Tool_Options_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Noise_Height_Tool_Options_Menu::~Editor_Noise_Height_Tool_Options_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Noise_Height_Tool_Options_Menu::button_clicked()
+
+called, when one of the up/down buttons is pressed
+id: 0 is up, 1 is down
+===========
+*/
+void Editor_Noise_Height_Tool_Options_Menu::button_clicked(int n) {
+   int upper=*m_upper_value;
+   int lower=*m_lower_value;
+   
+   if(n==0) {
+      ++lower;
+      if(lower>MAX_FIELD_HEIGHT) lower=MAX_FIELD_HEIGHT;
+   } else if(n==1) {
+      --lower;
+      if(lower<0) lower=0;
+   } else if(n==2) {
+      ++upper;
+      if(upper>MAX_FIELD_HEIGHT) upper=MAX_FIELD_HEIGHT;
+   } else if(n==3) {
+      --upper;
+      if(upper<0) upper=0;
+   }
+   *m_upper_value=upper;
+   *m_lower_value=lower;
+
+   char buf[250];
+   sprintf(buf, "Minimum: %i", lower);
+   m_textarea_lower->set_text(buf);
+   sprintf(buf, "Maximum: %i", upper);
+   m_textarea_upper->set_text(buf);
+}
+
+/*
+=============================
+
+class Editor_Noise_Height_Tool
+
+=============================
+*/
+
+/*
+===========
+Editor_Noise_Height_Tool::handle_click()
+
+sets the height of the current to a random value,
+this decreases the height of the surrounding fields also
+if this is needed.
+===========
+*/
+int Editor_Noise_Height_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   int j=m_lower_value+(int) ((double)(m_upper_value-m_lower_value)*rand()/(RAND_MAX+1.0));
+
+   std::cerr << j << std::endl;
+   map->set_field_height(*coordinates, j);
+   return 0;
+}
+
+/*
+===========
+Editor_Noise_Height_Tool::tool_options_dialog()
+
+Calls the Tool Option dialog
+===========
+*/
+int Editor_Noise_Height_Tool::tool_options_dialog(Editor_Interactive* parent) {
+   if (m_w.window)
+		delete m_w.window;
+	else
+		new Editor_Noise_Height_Tool_Options_Menu(parent, &m_w, &m_lower_value, &m_upper_value);
+   return 0;
+}
+
+

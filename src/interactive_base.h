@@ -60,12 +60,15 @@ class Interactive_Base : public Panel {
       virtual void recalc_overlay(FCoords fc) = 0;
       virtual void start() = 0;
 
+      void set_fieldsel_radius(int n) { m_maprenderinfo.fieldsel_radius=n; }
+      inline int get_fieldsel_radius(void) { return m_maprenderinfo.fieldsel_radius; }
+
    private:
       Map_View* m_mapview;
       MiniMapView* m_minimapview;
       Editor_Game_Base* m_egbase;
       bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
-      
+         
    protected:
       void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);

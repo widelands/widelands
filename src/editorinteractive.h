@@ -46,6 +46,7 @@ class Editor_Interactive : public Interactive_Base {
       void field_clicked();
       
       void toggle_buildhelp();
+      void toggle_minimap();
       void tool_menu_btn();
      
       struct Editor_Tools {
@@ -63,5 +64,6 @@ class Editor_Interactive : public Interactive_Base {
       // UI ownings
       Editor* m_editor;
       UniqueWindow m_toolmenu;
+      UniqueWindow m_minimap;
 };
 #endif // __S__EDITOR_H

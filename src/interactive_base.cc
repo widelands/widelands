@@ -43,7 +43,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
   Panel(0, 0, 0, get_xres(), get_yres())
 {
 	// Switch to the new graphics system now, if necessary
-	Section *s = g_options.pull_section("global");
+   Section *s = g_options.pull_section("global");
 	
 	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
 
@@ -54,6 +54,9 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 
    m_minimapview=0;
    m_mapview=0;
+	
+   
+   set_fieldsel_radius(0);
 }
 
 /*

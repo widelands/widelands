@@ -463,7 +463,6 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 		}
 }
 
-
 /*
 ===============
 draw_overlays
@@ -472,7 +471,7 @@ Draw build help (buildings and roads) and the field sel
 ===============
 */
 static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
-                 FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr)
+                 FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr, bool draw_fsel)
 {
 	int mapwidth = mri->map->get_width();
 	uchar overlay_basic = mri->overlay_basic[fc.y*mapwidth + fc.x];
@@ -538,12 +537,55 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 	}
 			
 	// Draw the fsel last
-	if (mri->fieldsel == fc) {
-		picid = get_graphicimpl()->get_gameicons()->pic_fieldsel;
-		g_gr->get_picture_size(picid, &w, &h);
+   if (draw_fsel) {
+      picid = get_graphicimpl()->get_gameicons()->pic_fieldsel;
+      g_gr->get_picture_size(picid, &w, &h);
 
-		dst->blit(pos.x - (w/2), pos.y - (h/2), picid);
-	}
+      dst->blit(pos.x - (w>>1), pos.y - (h>>1), picid);
+
+/*
+      int i=mri->fieldsel_radius;
+      while(i--) {
+         int blitx=pos.x, blity=pos.y;
+         int z=i;
+         while(z--) { blitx-=FIELD_WIDTH>>1; blity-=FIELD_HEIGHT>>1; }
+         z=i;
+         while(z--) { 
+            blitx+=FIELD_WIDTH;  
+            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
+         } 
+         z=i;
+         while(z--) {
+            blitx+=FIELD_WIDTH>>1;
+            blity+=FIELD_HEIGHT>>1;
+            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
+         }
+         z=i;
+         while(z--) {
+            blitx-=FIELD_WIDTH>>1;
+            blity+=FIELD_HEIGHT>>1;
+            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
+         }
+         z=i;
+         while(z--) {
+            blitx-=FIELD_WIDTH;
+            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
+         }
+         z=i;
+         while(z--) {
+            blitx-=FIELD_WIDTH>>1;
+            blity-=FIELD_HEIGHT>>1;
+            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
+         }
+         z=i;
+         while(z--) {
+            blitx+=FIELD_WIDTH>>1;
+            blity-=FIELD_HEIGHT>>1;
+            dst->blit(blitx - (w>>1), blity - (h>>1), picid);
+         }
+      }
+      */
+   }
 }
 
 
@@ -573,7 +615,11 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	
 	// Completely clear the window
 	dst.clear();
-
+   
+   Map_Region_Coords fsel_coords_int(mri->fieldsel, mri->fieldsel_radius, mri->map);
+   int next_fieldsel_cord_x, next_fieldsel_cord_y;
+   fsel_coords_int.next(&next_fieldsel_cord_x, &next_fieldsel_cord_y);
+   
 	// Actually draw the map. Loop through fields row by row
 	// For each field, draw ground textures, then roads, then immovables 
 	// (and borders), then bobs, then overlay stuff (build icons etc...)
@@ -588,11 +634,13 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	maxfx = (viewofs.x + (FIELD_WIDTH>>1) + dst.w) / FIELD_WIDTH;
 	maxfy = (viewofs.y + dst.h) / (FIELD_HEIGHT>>1);
 	maxfy += 10; // necessary because of heights
-
+   minfx -= mri->fieldsel_radius; // to make fieldsel work properly. better than having if()s in every loop
+   minfy -= mri->fieldsel_radius; 
+   
 	//log("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
-	int dx = maxfx - minfx + 1;
-	int dy = maxfy - minfy + 1;
-	int linear_fy = minfy;
+	int dx = maxfx - minfx + mri->fieldsel_radius + 1;
+	int dy = maxfy - minfy + mri->fieldsel_radius + 1; 
+   int linear_fy = minfy;
 
 	while(dy--) {
 		int linear_fx = minfx;
@@ -634,7 +682,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 		f = map->get_field(fx, fy);
 		f_bl = map->get_field(bl_x, bl_y);
 		f_tl = map->get_field(tl_x, tl_y);
-
+            
 		int count = dx;
 		while(count--) {
 			Field *f_br, *f_r, *f_l, *f_tr;
@@ -642,7 +690,8 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 			int r_x, r_y, br_x, br_y, l_x, l_y, tr_x, tr_y; 
 			bool render_r=true;
 			bool render_b=true;
-
+         bool draw_fsel=false;
+         
 			map->get_rn(fx, fy, f, &r_x, &r_y, &f_r);
 			rposx = posx + FIELD_WIDTH;
 
@@ -668,6 +717,12 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 				}
 			}
 
+         // Would this be a field where a fsel should be?
+         if(fx==next_fieldsel_cord_x && fy==next_fieldsel_cord_y) {
+            draw_fsel=true;
+            fsel_coords_int.next(&next_fieldsel_cord_x, &next_fieldsel_cord_y);
+         }
+         
 			// Render stuff that belongs to ground triangles
 			if (render_b || render_r) {
 				uchar roads = f->get_roads();
@@ -676,39 +731,41 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 
 				dst.draw_field(f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
 			}
-			
-			// Render stuff that belongs to the field node
+		
+         // Render stuff that belongs to the field node
 			if (!mri->visibility || (*mri->visibility)[fy*mapwidth + fx])
-			{
-				Point wh_pos(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()));
-				
-				// Render bobs
-				// TODO - rendering order?
-				// This must be defined somewho. some bobs have a higher priority than others
-				//  ^-- maybe this priority is a moving vs. non-moving bobs thing?
-				// draw_ground implies that this doesn't render map objects.
-				// are there any overdraw issues with the current rendering order?
+         {
+            Point wh_pos(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()));
 
-				// Draw Map_Objects hooked to this field
-				BaseImmovable *imm = f->get_immovable();
+            // Render bobs
+            // TODO - rendering order?
+            // This must be defined somewho. some bobs have a higher priority than others
+            //  ^-- maybe this priority is a moving vs. non-moving bobs thing?
+            // draw_ground implies that this doesn't render map objects.
+            // are there any overdraw issues with the current rendering order?
 
-				if (imm)
-					// imm->draw(mri->game, this, FCoords(fx, fy, f), wh_pos);
-					imm->draw(mri->egbase, this, FCoords(fx, fy, f), wh_pos);
+            // Draw Map_Objects hooked to this field
+            BaseImmovable *imm = f->get_immovable();
 
-				Bob *bob = f->get_first_bob();
-				while(bob) {
-					bob->draw(mri->egbase, this, wh_pos);
-					bob = bob->get_next_bob();
-				}
+            if (imm)
+               // imm->draw(mri->game, this, FCoords(fx, fy, f), wh_pos);
+               imm->draw(mri->egbase, this, FCoords(fx, fy, f), wh_pos);
 
-				// Draw buildhelp, road buildhelp and fieldsel
-				draw_overlays(this, mri, FCoords(fx, fy, f), wh_pos,
-				     FCoords(r_x, r_y, f_r), Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(f_r->get_height())),
-					  FCoords(bl_x, bl_y, f_bl), Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(f_bl->get_height())),
-					  FCoords(br_x, br_y, f_br), Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(f_br->get_height())));
-			}
+            Bob *bob = f->get_first_bob();
+            while(bob) {
+               bob->draw(mri->egbase, this, wh_pos);
+               bob = bob->get_next_bob();
+            }
 
+            // Draw buildhelp, road buildhelp and fieldsel
+            draw_overlays(this, mri, FCoords(fx, fy, f), wh_pos,
+                  FCoords(r_x, r_y, f_r), Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(f_r->get_height())),
+                  FCoords(bl_x, bl_y, f_bl), Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(f_bl->get_height())),
+                  FCoords(br_x, br_y, f_br), Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(f_br->get_height())),
+                  draw_fsel);
+         }
+
+	
 			// Advance to next field in row
 			f_bl = f_br;
 			blposx = brposx;
@@ -729,7 +786,6 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 		linear_fy++;
 	}
 }
-
 
 /*
 ===============

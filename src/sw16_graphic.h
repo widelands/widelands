@@ -167,7 +167,7 @@ class RenderTargetImpl : public RenderTarget {
 	Bitmap*	m_bitmap;		// the target surface
 	Rect		m_rect;			// the current clip rectangle
 	Point		m_offset;		// drawing offset
-	
+
 public:
 	RenderTargetImpl(Bitmap* bmp);
 	virtual ~RenderTargetImpl();

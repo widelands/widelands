@@ -151,6 +151,7 @@ construct editor sourroundings
 Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    m_editor = e;
 
+
    // The mapview. watch the map!!!
    Map_View* mm;
    mm = new Map_View(this, 0, 0, get_w(), get_h(), this);
@@ -163,12 +164,6 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    int y = get_h() - 34;
    Button *b;
 
-/*   MiniMapView* minimapview;
-	minimapview= new MiniMapView(m_panel, m_panel->get_w()-PANEL_HEIGHT, 0, this, PANEL_HEIGHT, PANEL_HEIGHT);
-   minimapview->warpview.set(this, &Editor_Interactive::minimap_warp);
-   set_minimapview(minimapview);
-*/
-
    // temp (should be Main menu)
    b = new Button(this, x, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::exit_game_btn);
@@ -180,7 +175,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.bmp", RGBColor(0,0,255)));
 
    b = new Button(this, x+68, y, 34, 34, 2);
-   //      b->clicked.set(this, &Interactive_Player::minimap_btn);
+   b->clicked.set(this, &Editor_Interactive::toggle_minimap);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.bmp", RGBColor(0,0,255)));
 
    b = new Button(this, x+102, y, 34, 34, 2);
@@ -192,6 +187,8 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Info_Tool());
    tools.tools.push_back(new Editor_Increase_Height_Tool());
    tools.tools.push_back(new Editor_Decrease_Height_Tool());
+   tools.tools.push_back(new Editor_Set_Height_Tool());
+   tools.tools.push_back(new Editor_Noise_Height_Tool());
 }
 
 /****************************************
@@ -246,6 +243,10 @@ Recalculate build help and borders for the given field
 */
 void Editor_Interactive::recalc_overlay(FCoords fc)
 {
+   // TEMP, TODO
+   set_fieldsel_radius(2);
+   // TEMP ENDS
+   
    Map* map = m_maprenderinfo.map;
 
    // Only do recalcs after maprenderinfo has been setup
@@ -334,4 +335,26 @@ void Editor_Interactive::tool_menu_btn()
 		delete m_toolmenu.window;
 	else
 		new Editor_Tool_Menu(this, &m_toolmenu, &tools);
+}
+
+/*
+===========
+Editor_Interactive::toggle_minimap()
+
+Open the minimap or close it if it's open
+===========
+*/
+void Editor_Interactive::toggle_minimap() {
+	if (m_minimap.window) {
+		delete m_minimap.window;
+      set_minimapview(0);
+   }
+	else {
+		MiniMap *mm = new MiniMap(this, &m_minimap);
+		set_minimapview(mm->get_minimapview());
+      get_minimapview()->warpview.set(this, &Editor_Interactive::minimap_warp);
+
+		// make sure the viewpos marker is at the right pos to start with
+		mainview_move(get_mapview()->get_vpx(), get_mapview()->get_vpy());
+	}
 }

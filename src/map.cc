@@ -1497,7 +1497,26 @@ bool Map::can_reach_by_water(Coords field)
 	
 	return false;
 }
-   
+
+/*
+===========
+Map::set_field_height()
+
+sets the field height to an absolut value. This changes the surrounding
+fields are changed as well
+===========
+*/
+void Map::set_field_height(int x, int y, int to) {
+   set_field_height(Coords(x,y),to);
+}
+
+void Map::set_field_height(const Coords& coordinates, int to) {
+   Field* m_field=get_field(coordinates);
+   int val=m_field->get_height();
+   int diff=to-val;
+   change_field_height(coordinates, diff);
+}
+
 /*
 ===========
 Map::change_field_height()

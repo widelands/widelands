@@ -190,6 +190,8 @@ public:
    // change field heights
    void change_field_height(const Coords&, int);
    void change_field_height(int, int, int);
+   void set_field_height(const Coords&, int);
+   void set_field_height(int, int, int);
 
 private:
 	void set_size(uint w, uint h);
