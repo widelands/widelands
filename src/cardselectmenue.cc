@@ -118,6 +118,8 @@ void card_select_menue(void) {
 		  char buf[10]; // 1024x1024\0
 		  while(!g_ip.should_die() && !*bexit) {
 					 if(sel->new_selection()) {
+								if(sel->get_selection())
+								{
 								if(m.load_map(sel->get_selection()) == RET_OK) {	
 										  taname->set_text(m.get_name());
 										  taauthor->set_text(m.get_author());
@@ -128,6 +130,7 @@ void card_select_menue(void) {
 										  tanplayers->set_text(buf);
 										  tadescr->set_text(m.get_descr());
 										  g_gr.register_update_rect(460, 210, 180, 220);
+								}
 								}
 					 }
 					 if(*bselect) {

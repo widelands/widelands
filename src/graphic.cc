@@ -86,12 +86,15 @@ namespace Graph {
 								SDL_FreeSurface(sc);
 					 sc=0;
 
+#if defined(WIN32) && defined(_DEBUG)
+					 sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
+#else
 					 if(m==MODE_FS) {
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE | SDL_FULLSCREEN);
 					 } else {
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
 					 }
-
+#endif
 					 mode=m;
 					 xres=x; 
 					 yres=y;

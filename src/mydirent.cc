@@ -22,8 +22,11 @@
 
 Dir::Dir(const char* n)
 {
-	name = new char[strlen(n) + 1 + 4];
+	int nlen = strlen(n);
+	name = new char[nlen + 1 + 4];
 	strcpy(name, n);
+	if (name[nlen-1] == '\\')
+		name[nlen-1] = 0;
 	strcat(name, "\\*.*");
 	find = NULL;
 }

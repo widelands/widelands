@@ -305,6 +305,9 @@ void File_Locator::open_next_dir(void)  {
 		  }
 
 
+		  if (ncurdir == MAX_DIRS)
+			  return;
+
 		  // Try to open the dir
 		  curdir=opendir(retval);
 	
@@ -374,12 +377,19 @@ const char* File_Locator::get_next_file(void) {
 		  strcat(retval, file->d_name);
 		  
 		  // Make sure the prefix is valid
-		  if(suf[0]!='\0' && strlen(retval)>strlen(suf)) {
+		  /*if(suf[0]!='\0' && strlen(retval)>strlen(suf)) {
 					 uint n=0;
 					 for(n=strlen(suf)-1; n>0; --n) {
 								if(suf[strlen(suf)-n]!=retval[strlen(retval)-n]) break;
 					 }
 					 if(n) return get_next_file();
+		  }*/
+		  if (suf[0])
+		  {
+			  int rlen = strlen(retval);
+			  int slen = strlen(suf);
+			  if (rlen < slen || strcmpi(retval + rlen - slen, suf))
+				  return get_next_file();
 		  }
 		  
 		  la=LA_SUCCESS;
