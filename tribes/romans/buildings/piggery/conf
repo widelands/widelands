@@ -28,33 +28,36 @@ stone=2
 
 [idle]
 pics=piggery_i_??.png  # ???
-hot_spot_x=69
-hot_spot_y=44
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
+#pics=piggery.png  # ???
+hot_spot_x=70
+hot_spot_y=62
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
 shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
 
 [working]
 pics=piggery_w_??.png  # ???
-hot_spot_x=69
-hot_spot_y=44
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
+#pics=piggery.png  # ???
+hot_spot_x=70
+hot_spot_y=62
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
 shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=piggery_i_??.png  # ???
-hot_spot_x=69
-hot_spot_y=44
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
+#pics=piggery_i_??.png  # ???
+pics=piggery.png
+hot_spot_x=70
+hot_spot_y=62
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
 shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
