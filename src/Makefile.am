@@ -108,7 +108,8 @@ widelands_SOURCES=main.cc \
                   ware.h \
                   ware.cc \
                   worker.h \
-                  worker.cc
+                  worker.cc \
+                  worlddata.h
 
 # TO INCLUDE IN CVS: current
 

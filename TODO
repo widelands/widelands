@@ -29,8 +29,10 @@
    - Refine bob format
    - Redo wtfcreate bob writing routine, redo widelands bob blitting
      routine
+- Fix g_game object
 - Change the way, descriptions (buildings, workers..) are saved in 
-  widelands, for working build command
+  widelands, for working build command. make sure, every instance has a 
+  pointer on it's description
 
 
 
