@@ -44,8 +44,8 @@ public:
 
 	void parse(Section* s, std::string);
 
+   const char* get_descrname() const { return m_descrname.c_str(); }
    const char* get_name() const { return m_name.c_str(); }
-	std::string get_indicator(uint amount) const;
 
    inline bool is_detectable(void) { return m_is_detectable; }
    inline int get_max_amount(void) { return m_max_amount; }
@@ -65,7 +65,7 @@ private:
    bool                    m_is_detectable;
    int                     m_max_amount;
 	std::string					m_name;
-	std::vector<Indicator>	m_indicators;
+	std::string					m_descrname;
 	std::vector<Editor_Pic>	m_editor_pics;
 };
 

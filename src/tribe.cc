@@ -22,6 +22,7 @@
 #include "error.h"
 #include "filesystem.h"
 #include "profile.h"
+#include "world.h"
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
@@ -396,6 +397,53 @@ void Tribe_Descr::get_all_tribes(std::vector<std::string>* retval) {
       if(Tribe_Descr::exists_tribe(tribe.c_str()))
          retval->push_back(tribe);
    }
+}
+
+/*
+==============
+Resource_Descr::get_indicator
+
+Find the best matching indicator for the given amount.
+==============
+*/
+int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
+{
+   if(!res || !amount) {
+      int idx=get_immovable_index("resi_none");
+      if(idx==-1) 
+         throw wexception("Tribe %s doesn't declar a resource indicator resi_none!\n", get_name());
+      return idx;
+   }
+   
+   char buffer[256];
+
+   int i=1;
+   int num_indicators=0;
+   while(true) {
+      sprintf(buffer, "resi_%s%i", res->get_name(), i);
+      if(get_immovable_index(buffer)==-1) 
+         break;
+      ++i;
+      ++num_indicators;
+   }
+  
+   if(!num_indicators) {
+      // Upsy, no indicators for this resource
+      throw wexception("Tribe %s doesn't declar a resource indicator for resource %s!\n", get_name(), res->get_name());
+   }
+   
+   uint bestmatch = (uint) (((float)(amount/res->get_max_amount())*num_indicators));
+   if(((int)amount)<res->get_max_amount()) 
+      bestmatch+=1; // Resi start with 1, not 0
+
+   sprintf(buffer, "resi_%s%i", res->get_name(), bestmatch);
+
+	// NoLog("Resource(%s): Indicator '%s' for amount = %u\n",
+	//	res->get_name(), buffer, amount);
+
+
+   
+	return get_immovable_index(buffer);
 }
 
 

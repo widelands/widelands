@@ -893,24 +893,25 @@ bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
 
 	if (imm && imm->get_size() > BaseImmovable::NONE)
 	{
-		molog("  Field is no longer empty\n");
+//		NoLog("  Field is no longer empty\n");
 	}
 	else
 	{
 		uint res = position.field->get_resources();
       uint amount = position.field->get_resources_amount();
 
-      std::string immname;
+      int idx;
       Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
+
       if(rdescr->is_detectable() && amount) {
-         immname = g->get_map()->get_world()->get_resource(res)->get_indicator(amount);
+         idx = get_descr()->get_tribe()->get_resource_indicator(rdescr, amount);
       } else {
-         immname = g->get_map()->get_world()->get_resource(0)->get_indicator(amount);
+         idx = get_descr()->get_tribe()->get_resource_indicator(0, 0); // not detectable
       }
 
-		molog("  Resource: %02X -> plant indicator '%s'\n", res, immname.c_str());
+//		NoLog("  Resource: %02X -> plant indicator '%s'\n", res, get_descr()->get_tribe()->get_immovable_descr(idx)->get_name());
 
-		g->create_immovable(position, immname, get_descr()->get_tribe());
+		g->create_immovable(position, idx, get_descr()->get_tribe());
 	}
 
 	state->ivar1++;

@@ -31,6 +31,7 @@
 class Building_Descr;
 class Editor_Game_Base;
 class Item_Ware_Descr;
+class Resource_Descr;
 class Worker_Descr;
 class Warehouse;
 
@@ -76,6 +77,8 @@ class Tribe_Descr {
 
       inline uint get_frontier_anim(void) { return m_anim_frontier; }
 		inline uint get_flag_anim(void) { return m_anim_flag; }
+
+      int get_resource_indicator(Resource_Descr* res, uint amount);
 
 		void postload(Editor_Game_Base*);
 		void load_graphics();

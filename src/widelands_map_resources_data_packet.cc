@@ -45,18 +45,19 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_res=fr->Unsigned16();
-      if(nr_res>world->get_nr_resources()) throw wexception("Number of resources in map (%i) is bigger than in world (%i)",
+      if(nr_res>world->get_nr_resources()) log("WARNING: Number of resources in map (%i) is bigger than in world (%i)",
             nr_res, world->get_nr_resources());
 
       // construct ids and map
-      std::map<uchar,Resource_Descr*> smap;
+      std::map<uchar,int> smap;
       char* buffer;
       for(int i=0; i<nr_res; i++) {
          int id=fr->Unsigned16();
          buffer=fr->CString();
+         log("Getting resources: %s\n", buffer);
          int res=world->get_resource(buffer);
          if(res==-1) throw wexception("Resource '%s' exists in map, not in world!", buffer);
-         smap[id]=world->get_resource(res);
+         smap[id]=res;
       }
 
       // Now get all the the resources
@@ -66,7 +67,9 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
             int id=fr->Unsigned8();
             int amount=fr->Unsigned8();
             // NoLog("[Map Loader] Setting resource of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
-            egbase->get_map()->get_field(Coords(x,y))->set_resources(id,amount);
+            if(smap[id]==-1) 
+               throw("Unkown resource in map file. It is not in world!\n");
+            egbase->get_map()->get_field(Coords(x,y))->set_resources(smap[id],amount);
          }
       }
       return;

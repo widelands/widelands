@@ -52,23 +52,26 @@ void Resource_Descr::parse(Section *s, std::string basedir)
    const char* string;
 
 
-   m_name = s->get_string("name", s->get_name());
-     m_is_detectable=s->get_bool("detectable", true);
+   m_name=s->get_name();
+   m_descrname = s->get_string("name", s->get_name());
+   m_is_detectable=s->get_bool("detectable", true);
 
-   while(s->get_next_string("indicator", &string))
+   m_max_amount = s->get_safe_int("max_amount");
+   while(s->get_next_string("editor_pic", &string))
    {
       std::vector<std::string> args;
-      Indicator i;
+      Editor_Pic i;
 
       split_string(string, &args, " \t");
 
       if (args.size() != 1 && args.size() != 2)
       {
-         log("Resource '%s' has bad indicator=%s\n", m_name.c_str(), string);
+         log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
          continue;
       }
 
-      i.bobname = args[0];
+      i.picname = basedir + "/pics/";
+      i.picname += args[0];
       i.upperlimit = -1;
 
       if (args.size() >= 2)
@@ -79,113 +82,17 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 
          if (endp && *endp)
          {
-            log("Resource '%s' has bad indicator=%s\n", m_name.c_str(), string);
-            continue;
-         }
-      }
-
-      m_indicators.push_back(i);
-   }
-   if(strcmp(s->get_name(),"none")) {
-      m_max_amount = s->get_safe_int("max_amount");
-      while(s->get_next_string("editor_pic", &string))
-      {
-         std::vector<std::string> args;
-         Editor_Pic i;
-
-         split_string(string, &args, " \t");
-
-         if (args.size() != 1 && args.size() != 2)
-         {
             log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
             continue;
          }
-
-         i.picname = basedir + "/pics/";
-         i.picname += args[0];
-         i.upperlimit = -1;
-
-         if (args.size() >= 2)
-         {
-            char* endp;
-
-            i.upperlimit = strtol(args[1].c_str(), &endp, 0);
-
-            if (endp && *endp)
-            {
-               log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
-               continue;
-            }
-         }
-
-         m_editor_pics.push_back(i);
       }
-      if(!m_editor_pics.size())
-         throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
+
+      m_editor_pics.push_back(i);
    }
-
-   if(m_is_detectable && !m_indicators.size())
-      throw wexception("Resource '%s' has no indicators", m_name.c_str());
-   if(!m_is_detectable && m_indicators.size())
-      throw wexception("Resource '%s' is not detectable, but has indicators defined!", m_name.c_str());
+   if(!m_editor_pics.size())
+      throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
 }
 
-
-/*
-==============
-Resource_Descr::get_indicator
-
-Find the best matching indicator for the given amount.
-==============
-*/
-std::string Resource_Descr::get_indicator(uint amount) const
-{
-	uint bestmatch = 0;
-
-	assert(m_indicators.size());
-
-	for(uint i = 1; i < m_indicators.size(); ++i)
-	{
-		int diff1 = m_indicators[bestmatch].upperlimit - (int)amount;
-		int diff2 = m_indicators[i].upperlimit - (int)amount;
-
-		// This indicator is a catch-all for high amounts
-		if (m_indicators[i].upperlimit < 0)
-		{
-			if (diff1 < 0) {
-				bestmatch = i;
-				continue;
-			}
-
-			continue;
-		}
-
-		// This indicator is lower than the actual amount
-		if (diff2 < 0)
-		{
-			if (m_indicators[bestmatch].upperlimit < 0)
-				continue;
-
-			if (diff1 < diff2) {
-				bestmatch = i; // still better than previous best match
-				continue;
-			}
-
-			continue;
-		}
-
-		// This indicator is higher than the actual amount
-		if (m_indicators[bestmatch].upperlimit < 0 || diff1 > diff2 || diff1 < 0) {
-			bestmatch = i;
-			continue;
-		}
-	}
-
-	log("Resource(%s): Indicator '%s' for amount = %u\n",
-		m_name.c_str(), m_indicators[bestmatch].bobname.c_str(), amount);
-
-	return m_indicators[bestmatch].bobname;
-}
 
 /*
  * Get the correct editor pic for this amount of this resource
@@ -355,11 +262,7 @@ void World::parse_resources()
 		Profile prof(fname);
       Section* section;
 
-      Resource_Descr* descr=new Resource_Descr();
-      section=prof.get_safe_section("none");
-      descr->parse(section,m_basedir);
-      m_resources.add(descr);
-
+      Resource_Descr* descr;
       while((section=prof.get_next_section(0))) {
          descr=new Resource_Descr();
          descr->parse(section,m_basedir);

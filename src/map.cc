@@ -214,7 +214,7 @@ void Map::recalc_default_resources(void) {
          FCoords f,f1;
          f=get_fcoords(Coords(x,y));
          // only on unset fields
-         if(f.field->get_resources()!=0 && f.field->get_resources_amount()) continue;
+         if(f.field->get_resources()!=0 || f.field->get_resources_amount()) continue;
          std::map<int,int> m;
          int amount=0;
          Terrain_Descr* terr, *terd;
