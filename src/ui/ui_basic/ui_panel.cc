@@ -119,8 +119,8 @@ void UIPanel::free_children()
 
 
 /**
- * Enters the event loop; all events will be handled by this panel.
- * Returns the return code passed to end_modal
+Enters the event loop; all events will be handled by this panel.
+Returns the return code passed to end_modal
 */
 int UIPanel::run()
 {

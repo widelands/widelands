@@ -31,10 +31,10 @@
 // hard-coded playercolors
 uchar g_playercolors[MAX_PLAYERS][12] = {
 	{ // blue
-		  0,   0, 165,
-		  0,  55, 190,
-		  0, 120, 215,
-		  0, 210, 245
+		  2,   2,  74,
+		  2,   2, 112,
+		  2,   2, 149,
+		  2,   2, 198
 	},
 	{ // red
 		119,  19,   0,
