@@ -459,7 +459,7 @@ public:
 	};
 	
 	void handle_input(InputCallback *cb);
-			
+	
 	uint get_mouse_buttons();
 	int get_mouse_x();
 	int get_mouse_y();

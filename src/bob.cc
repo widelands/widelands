@@ -1196,8 +1196,8 @@ void Critter_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthin
 		// Pick a target at random
 		Coords dst;
 		
-		dst.x = m_position.x + (rand()%5) - 2;
-		dst.y = m_position.y + (rand()%5) - 2;
+		dst.x = m_position.x + (g->logic_rand()%5) - 2;
+		dst.y = m_position.y + (g->logic_rand()%5) - 2;
 		
 		if (start_task_movepath(g, dst, 3, anims))
 			return;

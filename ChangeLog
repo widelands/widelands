@@ -12,3 +12,5 @@ build-2:
 - added "fps" key to animations
 - renderer uses player colors
 - added flags
+- added road building
+- split of moving and non-moving objects in hierarchy

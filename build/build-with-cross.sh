@@ -22,7 +22,8 @@ mv widelands/widelands.temp widelands/widelands
 mv widelands/Makefile.bak widelands/Makefile
 
 cp /usr/local/cross-tools/i386-mingw32msvc/lib/SDL.dll widelands/
-/usr/local/cross-tools/bin/i386-mingw32msvc-strip widelands/SDL.dll
+/usr/local/cross-tools/bin/i386-mingw32msvc-strip --strip-unneeded widelands/SDL.dll
+/usr/local/cross-tools/bin/i386-mingw32msvc-strip --strip-unneeded widelands/widelands.exe
 
 cat << EOF
 
