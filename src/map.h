@@ -317,6 +317,24 @@ struct FindFieldCaps : public FindField {
 	uchar m_mincaps;
 };
 
+// Accepts fields if they are accepted by all subfunctors.
+struct FindFieldAnd : public FindField {
+	FindFieldAnd() { }
+	virtual ~FindFieldAnd() { }
+
+	void add(const FindField* findfield, bool negate = false);
+
+	virtual bool accept(FCoords coord) const;
+
+	struct Subfunctor {
+		bool					negate;
+		const FindField*	findfield;
+	};
+
+	std::vector<Subfunctor> m_subfunctors;
+};
+
+// Accepts fields based on what can be built there
 struct FindFieldSize : public FindField {
 	enum Size {
 		sizeAny = 0,	// any field not occupied by a robust immovable
@@ -335,6 +353,7 @@ struct FindFieldSize : public FindField {
 	Size m_size;
 };
 
+// Accepts fields based on the size of immovables on the field
 struct FindFieldImmovableSize : public FindField {
 	enum {
 		sizeNone		= (1 << 0),
@@ -348,6 +367,15 @@ struct FindFieldImmovableSize : public FindField {
 	virtual bool accept(FCoords coord) const;
 
 	uint m_sizes;
+};
+
+// Accepts a field if it has an immovable with a given attribute
+struct FindFieldImmovableAttribute : public FindField {
+	FindFieldImmovableAttribute(uint attrib) : m_attribute(attrib) { }
+
+	virtual bool accept(FCoords coord) const;
+
+	uint m_attribute;
 };
 
 

@@ -867,10 +867,32 @@ void WorkerProgram::parse_geologist_find(WorkerAction* act, Parser* parser, cons
 bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
 {
 	FCoords position = g->get_map()->get_fcoords(get_position());
-	uint res = position.field->get_resources();
+	BaseImmovable* imm = position.field->get_immovable();
 
-	molog("  Resources: %02X\n", res);
-	molog("  ==== TODO PLANT ====\n");
+	if (imm && imm->get_size() > BaseImmovable::NONE)
+	{
+		molog("  Field is no longer empty\n");
+	}
+	else
+	{
+		uint res = position.field->get_resources();
+		World::Resource wres;
+		std::string immname;
+
+		switch(res & Resource_TypeMask) {
+		default:
+		case 0: wres = World::Resource_None; break;
+		case Resource_Coal: wres = World::Resource_Coal; break;
+		case Resource_Iron: wres = World::Resource_Iron; break;
+		case Resource_Gold: wres = World::Resource_Gold; break;
+		}
+
+		immname = g->get_map()->get_world()->get_resource(wres)->get_indicator(res & Resource_AmountMask);
+
+		molog("  Resource: %02X -> plant indicator '%s'\n", res, immname.c_str());
+
+		g->create_immovable(position, immname);
+	}
 
 	state->ivar1++;
 	return false;
@@ -2820,7 +2842,8 @@ void Worker::geologist_update(Game* g, State* state)
 		// Check to see if we're on suitable terrain
 		BaseImmovable* imm = map->get_immovable(get_position());
 
-		if (!imm || imm->get_size() == BaseImmovable::NONE)
+		if (!imm ||
+		    (imm->get_size() == BaseImmovable::NONE && !imm->has_attribute(RESI)))
 		{
 			molog("[geologist]: Starting program '%s'\n", state->svar1.c_str());
 
@@ -2832,9 +2855,14 @@ void Worker::geologist_update(Game* g, State* state)
 		// Find a suitable field and walk towards it
 		std::vector<Coords> list;
 		CheckStepDefault cstep(get_movecaps());
+		FindFieldImmovableSize ffis(FindFieldImmovableSize::sizeNone);
+		FindFieldImmovableAttribute ffia(RESI);
+		FindFieldAnd ffa;
 
-		if (map->find_reachable_fields(get_position(), state->ivar2, &list, &cstep,
-							FindFieldImmovableSize(FindFieldImmovableSize::sizeNone)))
+		ffa.add(&ffis, false);
+		ffa.add(&ffia, true);
+
+		if (map->find_reachable_fields(center, state->ivar2, &list, &cstep, ffa))
 		{
 			Coords target = list[g->logic_rand() % list.size()];
 

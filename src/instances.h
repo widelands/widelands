@@ -121,6 +121,7 @@ public:
 	enum Attribute {
 		WAREHOUSE = 1,		// assume BUILDING
 		WORKER,				// assume BOB
+		RESI,					// resource indicator, assume IMMOVABLE
 
 		HIGHEST_FIXED_ATTRIBUTE
 	};

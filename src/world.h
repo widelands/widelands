@@ -33,17 +33,23 @@ struct World_Descr_Header {
 };
 
 class Resource_Descr {
-   friend class Descr_Maintainer<Resource_Descr>;
+public:
+	Resource_Descr() { }
+	~Resource_Descr() { }
 
-   public:
-      Resource_Descr(void) { }
-      ~Resource_Descr(void) { }
+	void parse(Section* s);
 
-      void parse(Section *s);
+	std::string get_name() const { return m_name; }
+	std::string get_indicator(uint amount) const;
 
-   private:
-      char name[30];
-      uchar minh, maxh, importance;
+private:
+	struct Indicator {
+		std::string		bobname;
+		int				upperlimit;
+	};
+
+	std::string					m_name;
+	std::vector<Indicator>	m_indicators;
 };
 
 class Terrain_Descr {
@@ -84,6 +90,15 @@ class World
          ERR_WRONGVERSION
       };
 
+		enum Resource {
+			Resource_None = 0,
+			Resource_Coal = 1,
+			Resource_Iron = 2,
+			Resource_Gold = 3,
+
+			Num_Resources = 4
+		};
+
       World(const char* name);
 		~World();
 
@@ -103,14 +118,18 @@ class World
       inline int get_nr_immovables(void) { return immovables.get_nitems(); }
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
 
+		const Resource_Descr* get_resource(Resource res) const
+		{ assert(res < Num_Resources); return &m_resources[res]; }
+
    private:
 		std::string				m_basedir;	// base directory, where the main conf file resides
       World_Descr_Header	hd;
 
       Descr_Maintainer<Bob_Descr> bobs;
 		Descr_Maintainer<Immovable_Descr> immovables;
-      Descr_Maintainer<Resource_Descr> res;
       Descr_Maintainer<Terrain_Descr> ters;
+
+		Resource_Descr	m_resources[Num_Resources];
 
       // Functions
       void parse_root_conf(const char *name);

@@ -1,16 +1,18 @@
 
-# Resource markers, as set up by geologists
 [none]
-marker=resmarker_none
+indicator=resi_none
 
 [coal]
-marker=resmarker_coal1 4
-marker=resmarker_coal2
+name=Coal
+indicator=resi_coal1 4
+indicator=resi_coal2
 
 [gold]
-marker=resmarker_gold1 4
-marker=resmarker_gold2
+name=Gold
+indicator=resi_gold1 4
+indicator=resi_gold2
 
 [iron]
-marker=resmarker_iron1 4
-marker=resmarker_iron2
+name=Iron
+indicator=resi_iron1 4
+indicator=resi_iron2

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,21 +25,135 @@
 #include "wexception.h"
 #include "world.h"
 #include "worlddata.h"
+#include "util.h"
+#include "error.h"
 
 using std::cerr;
 using std::endl;
 
+/*
+=============================================================================
+
+Resource_Descr
+
+=============================================================================
+*/
+
+/*
+==============
+Resource_Descr::parse
+
+Parse a resource description section.
+==============
+*/
 void Resource_Descr::parse(Section *s)
 {
-	snprintf(name, sizeof(name), "%s", s->get_name());
-   minh = s->get_int("min_height", 0);
-   maxh = s->get_int("max_height", 255);
-   importance = s->get_int("importance", 0);
+	const char* string;
+
+	m_name = s->get_string("name", s->get_name());
+
+	while(s->get_next_string("indicator", &string))
+	{
+		std::vector<std::string> args;
+		Indicator i;
+
+		split_string(string, &args, " \t");
+
+		if (args.size() != 1 && args.size() != 2)
+		{
+			log("Resource '%s' has bad indicator=%s\n", m_name.c_str(), string);
+			continue;
+		}
+
+		i.bobname = args[0];
+		i.upperlimit = -1;
+
+		if (args.size() >= 2)
+		{
+			char* endp;
+
+			i.upperlimit = strtol(args[1].c_str(), &endp, 0);
+
+			if (endp && *endp)
+			{
+				log("Resource '%s' has bad indicator=%s\n", m_name.c_str(), string);
+				continue;
+			}
+		}
+
+		m_indicators.push_back(i);
+	}
+
+	if (!m_indicators.size())
+		throw wexception("Resource '%s' has no indicators", m_name.c_str());
 }
 
-//
-// class World
-//
+
+/*
+==============
+Resource_Descr::get_indicator
+
+Find the best matching indicator for the given amount.
+==============
+*/
+std::string Resource_Descr::get_indicator(uint amount) const
+{
+	uint bestmatch = 0;
+
+	assert(m_indicators.size());
+
+	for(uint i = 1; i < m_indicators.size(); ++i)
+	{
+		int diff1 = m_indicators[bestmatch].upperlimit - (int)amount;
+		int diff2 = m_indicators[i].upperlimit - (int)amount;
+
+		// This indicator is a catch-all for high amounts
+		if (m_indicators[i].upperlimit < 0)
+		{
+			if (diff1 < 0) {
+				bestmatch = i;
+				continue;
+			}
+
+			continue;
+		}
+
+		// This indicator is lower than the actual amount
+		if (diff2 < 0)
+		{
+			if (m_indicators[bestmatch].upperlimit < 0)
+				continue;
+
+			if (diff1 < diff2) {
+				bestmatch = i; // still better than previous best match
+				continue;
+			}
+
+			continue;
+		}
+
+		// This indicator is higher than the actual amount
+		if (m_indicators[bestmatch].upperlimit < 0 || diff1 > diff2) {
+			bestmatch = i;
+			continue;
+		}
+	}
+
+	log("Resource(%s): Indicator '%s' for amount = %u\n",
+		m_name.c_str(), m_indicators[bestmatch].bobname.c_str(), amount);
+
+	return m_indicators[bestmatch].bobname;
+}
+
+
+/*
+=============================================================================
+
+World
+
+=============================================================================
+*/
+
 World::World(const char* name)
 {
 	char directory[256];
@@ -146,18 +260,11 @@ void World::parse_resources()
 	try
 	{
 		Profile prof(fname);
-		Section* s;
 
-		while((s = prof.get_next_section(0))) {
-			Resource_Descr* r = new Resource_Descr();
-			try {
-				r->parse(s);
-				res.add(r);
-			} catch(...) {
-				delete r;
-				throw;
-			}
-		}
+		m_resources[Resource_None].parse(prof.pull_section("none"));
+		m_resources[Resource_Coal].parse(prof.pull_section("coal"));
+		m_resources[Resource_Iron].parse(prof.pull_section("iron"));
+		m_resources[Resource_Gold].parse(prof.pull_section("gold"));
 	}
 	catch(std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());

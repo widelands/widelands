@@ -2167,6 +2167,31 @@ Field search functors
 ==============================================================================
 */
 
+
+void FindFieldAnd::add(const FindField* findfield, bool negate)
+{
+	Subfunctor sf;
+
+	sf.negate = negate;
+	sf.findfield = findfield;
+
+	m_subfunctors.push_back(sf);
+}
+
+bool FindFieldAnd::accept(FCoords coord) const
+{
+	for(std::vector<Subfunctor>::const_iterator it = m_subfunctors.begin();
+	    it != m_subfunctors.end();
+		 ++it)
+	{
+		if (it->findfield->accept(coord) == it->negate)
+			return false;
+	}
+
+	return true;
+}
+
+
 bool FindFieldCaps::accept(FCoords coord) const
 {
 	uchar fieldcaps = coord.field->get_caps();
@@ -2216,6 +2241,17 @@ bool FindFieldImmovableSize::accept(FCoords coord) const
 	case BaseImmovable::BIG: return m_sizes & sizeBig;
 	default: throw wexception("FindFieldImmovableSize: bad size = %i", size);
 	}
+}
+
+
+bool FindFieldImmovableAttribute::accept(FCoords coord) const
+{
+	BaseImmovable* imm = coord.field->get_immovable();
+
+	if (!imm)
+		return false;
+
+	return imm->has_attribute(m_attribute);
 }
 
 

@@ -157,6 +157,8 @@ uint Map_Object_Descr::get_attribute_id(std::string name)
 		return Map_Object::WAREHOUSE;
 	else if (name == "worker")
 		return Map_Object::WORKER;
+	else if (name == "resi")
+		return Map_Object::RESI;
 
 	s_dyn_attribhigh++;
 	s_dyn_attribs[name] = s_dyn_attribhigh;
