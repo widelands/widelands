@@ -160,8 +160,8 @@ void Main_Menu_Load_Map::clicked(int id) {
 
          m_parent->get_editor()->cleanup_for_load(true, false);
 
-         Widelands_Map_Loader* ml=new Widelands_Map_Loader(filename.c_str(), m_map);
-
+         Map_Loader* ml = m_map->get_correct_loader(filename.c_str());
+         
          try {
             //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
             ml->preload_map(true);

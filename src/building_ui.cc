@@ -107,7 +107,7 @@ Confirm the bulldoze request for a building.
 */
 class BulldozeConfirm : public UIWindow {
 public:
-	BulldozeConfirm(Interactive_Player* parent, Building* building, PlayerImmovable* todestroy = 0);
+	BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy = 0);
 	virtual ~BulldozeConfirm();
 
 	virtual void think();
@@ -116,7 +116,7 @@ private:
 	void bulldoze();
 
 private:
-	Interactive_Player*	m_player;
+	Interactive_Base*	   m_iabase;
 	Object_Ptr				m_building;
 	Object_Ptr				m_todestroy;
 };
@@ -132,13 +132,13 @@ Otherwise, todestroy is destroyed when the user confirms it. This is useful to
 confirm building destruction when the building's base flag is removed.
 ===============
 */
-BulldozeConfirm::BulldozeConfirm(Interactive_Player* parent, Building* building, PlayerImmovable* todestroy)
+BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy)
 	: UIWindow(parent, 0, 0, 160, 90, "Destroy building?")
 {
 	UIButton* btn;
 	std::string text;
 
-	m_player = parent;
+	m_iabase = parent;
 	m_building = building;
 
 	if (!todestroy)
@@ -182,9 +182,9 @@ Make sure the building still exists and can in fact be bulldozed.
 */
 void BulldozeConfirm::think()
 {
-	Game* g = m_player->get_game();
-	Building* building = (Building*)m_building.get(g);
-	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(g);
+	Editor_Game_Base* egbase = m_iabase->get_egbase();
+	Building* building = (Building*)m_building.get(egbase);
+	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
 
 	if (!todestroy || !building ||
 	    !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
@@ -201,12 +201,22 @@ Issue the CMD_BULLDOZE command for this building.
 */
 void BulldozeConfirm::bulldoze()
 {
-	Game* g = m_player->get_game();
-	Building* building = (Building*)m_building.get(g);
-	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(g);
+	Editor_Game_Base* egbase = m_iabase->get_egbase();
+	Building* building = (Building*)m_building.get(egbase);
+	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(egbase);
 
-	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze))
-		g->send_player_command(m_player->get_player_number(), CMD_BULLDOZE, todestroy->get_serial());
+	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
+      if(egbase->is_game()) {
+         // Game
+         Game* g=static_cast<Game*>(egbase);
+         Interactive_Player* player=static_cast<Interactive_Player*>(m_iabase);
+         g->send_player_command(player->get_player_number(), CMD_BULLDOZE, todestroy->get_serial());
+      } else {
+         // Editor
+         Player* plr=todestroy->get_owner();
+         plr->bulldoze(todestroy);
+      }
+   }
 
 	die();
 }
@@ -222,7 +232,7 @@ todestroy is the immovable that will be bulldozed if the user confirms the
 dialog.
 ===============
 */
-void show_bulldoze_confirm(Interactive_Player* player, Building* building, PlayerImmovable* todestroy)
+void show_bulldoze_confirm(Interactive_Base* player, Building* building, PlayerImmovable* todestroy)
 {
 	new BulldozeConfirm(player, building, todestroy);
 }

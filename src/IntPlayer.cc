@@ -109,8 +109,6 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	mview->fieldclicked.set(this, &Interactive_Player::field_action);
    set_mapview(mview);
 
-	m_buildroad = false;
-
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
 	int y = get_h() - 34;
@@ -137,8 +135,6 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	// Speed info
 	m_label_speed = new UITextarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
 
-   m_road_buildhelp_overlay_jobid=0;
-   m_jobid=0;
 }
 
 /*
@@ -150,8 +146,6 @@ cleanups
 */
 Interactive_Player::~Interactive_Player(void)
 {
-	if (m_buildroad)
-		abort_build_road();
 }
 
 
@@ -263,7 +257,7 @@ void Interactive_Player::field_action()
 	}
 
 	// everything else can bring up the temporary dialog
-	show_field_action(this, &m_fieldaction);
+	show_field_action(this, get_player(), &m_fieldaction);
 }
 
 /*
@@ -348,248 +342,3 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 }
 
 
-/*
-===============
-Interactive_Player::start_build_road
-
-Begin building a road
-===============
-*/
-void Interactive_Player::start_build_road(Coords start)
-{
-	// create an empty path
-	m_buildroad = new CoordPath(m_game->get_map(), start);
-
-	roadb_add_overlay();
-}
-
-
-/*
-===============
-Interactive_Player::abort_build_road
-
-Stop building the road
-===============
-*/
-void Interactive_Player::abort_build_road()
-{
-	assert(m_buildroad);
-
-	roadb_remove_overlay();
-
-	delete m_buildroad;
-	m_buildroad = 0;
-}
-
-
-/*
-===============
-Interactive_Player::finish_build_road
-
-Finally build the road
-===============
-*/
-void Interactive_Player::finish_build_road()
-{
-	assert(m_buildroad);
-
-	roadb_remove_overlay();
-
-	if (m_buildroad->get_nsteps()) {
-		// awkward... path changes ownership
-		Path *path = new Path(*m_buildroad);
-		m_game->send_player_command(get_player_number(), CMD_BUILD_ROAD, (int)path, 0, 0);
-	}
-
-	delete m_buildroad;
-	m_buildroad = 0;
-}
-
-
-/*
-===============
-Interactive_Player::append_build_road
-
-If field is on the path, remove tail of path.
-Otherwise append if possible or return false.
-===============
-*/
-bool Interactive_Player::append_build_road(Coords field)
-{
-	assert(m_buildroad);
-
-	int idx = m_buildroad->get_index(field);
-
-	if (idx >= 0) {
-		roadb_remove_overlay();
-		m_buildroad->truncate(idx);
-		roadb_add_overlay();
-
-		return true;
-	}
-
-	// Find a path to the clicked-on field
-	Map *map = m_game->get_map();
-	Path path;
-	CheckStepRoad cstep(get_player(), MOVECAPS_WALK, &m_buildroad->get_coords());
-
-	if (map->findpath(m_buildroad->get_end(), field, 0, &path, &cstep, Map::fpBidiCost) < 0)
-		return false; // couldn't find a path
-
-	roadb_remove_overlay();
-	m_buildroad->append(path);
-	roadb_add_overlay();
-
-	return true;
-}
-
-/*
-===============
-Interactive_Player::get_build_road_start
-
-Return the current road-building startpoint
-===============
-*/
-const Coords &Interactive_Player::get_build_road_start()
-{
-	assert(m_buildroad);
-
-	return m_buildroad->get_start();
-}
-
-/*
-===============
-Interactive_Player::get_build_road_end
-
-Return the current road-building endpoint
-===============
-*/
-const Coords &Interactive_Player::get_build_road_end()
-{
-	assert(m_buildroad);
-
-	return m_buildroad->get_end();
-}
-
-/*
-===============
-Interactive_Player::get_build_road_end_dir
-
-Return the direction of the last step
-===============
-*/
-int Interactive_Player::get_build_road_end_dir()
-{
-	assert(m_buildroad);
-
-	if (!m_buildroad->get_nsteps())
-		return 0;
-
-	return m_buildroad->get_step(m_buildroad->get_nsteps()-1);
-}
-
-/*
-===============
-Interactive_Player::roadb_add_overlay
-
-Add road building data to the road overlay
-===============
-*/
-void Interactive_Player::roadb_add_overlay()
-{
-	assert(m_buildroad);
-
-	//log("Add overlay\n");
-
-	Map* map = m_game->get_map();
-
-	// preview of the road
-   assert(!m_jobid);
-   m_jobid=get_map()->get_overlay_manager()->get_a_job_id();
-	for(int idx = 0; idx < m_buildroad->get_nsteps(); idx++)	{
-		uchar dir = m_buildroad->get_step(idx);
-		Coords c = m_buildroad->get_coords()[idx];
-
-		if (dir < Map_Object::WALK_E || dir > Map_Object::WALK_SW) {
-			map->get_neighbour(c, dir, &c);
-			dir = get_reverse_dir(dir);
-		}
-
-		int shift = 2*(dir - Map_Object::WALK_E);
-
-      uchar set_to= get_map()->get_overlay_manager()->get_road_overlay(c);
-      set_to|=  Road_Normal << shift;
-      get_map()->get_overlay_manager()->register_road_overlay(c, set_to, m_jobid);
-	}
-
-	// build hints
-	FCoords endpos = map->get_fcoords(m_buildroad->get_end());
-
-   assert(!m_road_buildhelp_overlay_jobid);
-   m_road_buildhelp_overlay_jobid= get_map()->get_overlay_manager()->get_a_job_id();
-	for(int dir = 1; dir <= 6; dir++) {
-		FCoords neighb;
-		int caps;
-
-		map->get_neighbour(endpos, dir, &neighb);
-		caps = get_player()->get_buildcaps(neighb);
-
-		if (!(caps & MOVECAPS_WALK))
-			continue; // need to be able to walk there
-
-		BaseImmovable *imm = map->get_immovable(neighb); // can't build on robusts
-		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-			if (!(imm->get_type() == Map_Object::FLAG ||
-					(imm->get_type() == Map_Object::ROAD && caps & BUILDCAPS_FLAG)))
-				continue;
-		}
-
-		if (m_buildroad->get_index(neighb) >= 0)
-			continue; // the road can't cross itself
-
-		int slope = abs(endpos.field->get_height() - neighb.field->get_height());
-		int icon;
-
-		if (slope < 2)
-			icon = 1;
-		else if (slope < 4)
-			icon = 2;
-		else
-			icon = 3;
-
-      std::string name="";
-      switch(icon) {
-         case 1: name="pics/roadb_green.png"; break;
-         case 2: name="pics/roadb_yellow.png"; break;
-         case 3: name="pics/roadb_red.png"; break;
-      };
-
-      assert(name!="");
-
-      get_map()->get_overlay_manager()->register_overlay(neighb,  g_gr->get_picture(PicMod_Game, name.c_str(), true),7, Coords(-1,-1), m_road_buildhelp_overlay_jobid);
-	}
-}
-
-/*
-===============
-Interactive_Player::roadb_remove_overlay
-
-Remove road building data from road overlay
-===============
-*/
-void Interactive_Player::roadb_remove_overlay()
-{
-	assert(m_buildroad);
-
-	//log("Remove overlay\n");
-
-   // preview of the road
-   if(m_jobid)
-       get_map()->get_overlay_manager()->remove_road_overlay(m_jobid);
-   m_jobid=0;
-
-	// build hints
-   if(m_road_buildhelp_overlay_jobid)
-      get_map()->get_overlay_manager()->remove_overlay(m_road_buildhelp_overlay_jobid);
-   m_road_buildhelp_overlay_jobid=0;
-}

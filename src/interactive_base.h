@@ -23,12 +23,12 @@
 #include "editor_game_base.h"
 #include "geometry.h"
 #include "graphic.h"
+#include "map.h"
 #include "maprenderinfo.h"
 #include "ui_panel.h"
 #include "ui_unique_window.h"
 
 class Editor_Game_Base;
-class Map;
 class Map_View;
 class MiniMap;
 class MiniMapView;
@@ -76,12 +76,28 @@ class Interactive_Base : public UIPanel {
       virtual void start() = 0;
 
 
+      // Display flags
 		uint get_display_flags();
 		void set_display_flags(uint flags);
 		bool get_display_flag(uint flag);
 		void set_display_flag(uint flag, bool on);
 
+      // Road building
+		inline bool is_building_road() const { return m_buildroad; }
+		inline CoordPath *get_build_road() { return m_buildroad; }
+		void start_build_road(Coords start, int player);
+		void abort_build_road();
+		void finish_build_road();
+		bool append_build_road(Coords field);
+		const Coords &get_build_road_start();
+		const Coords &get_build_road_end();
+		int get_build_road_end_dir();
+
+
    private:
+      void roadb_add_overlay();
+      void roadb_remove_overlay();
+      
       Map_View* m_mapview;
       MiniMap* m_mm;
       Editor_Game_Base* m_egbase;
@@ -98,6 +114,11 @@ class Interactive_Base : public UIPanel {
 		uint					m_lastframe;			// system time (milliseconds)
 		uint					m_frametime;			// in millseconds
 		uint					m_avg_usframetime;	// in microseconds!
+
+      int      m_jobid;
+      int      m_road_buildhelp_overlay_jobid;
+      CoordPath		*m_buildroad; // path for the new road
+      int      m_road_build_player; 
 
       UIUniqueWindowRegistry m_minimap;
 
@@ -118,6 +139,7 @@ class Interactive_Base : public UIPanel {
       // map rendering stuff. this is still protected since this is
       // used quite often
 		MapRenderInfo	   m_maprenderinfo;
+
 };
 
 

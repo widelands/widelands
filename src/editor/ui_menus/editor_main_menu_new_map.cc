@@ -117,7 +117,7 @@ void Main_Menu_New_Map::button_clicked(int n) {
               {
                  Map* m_map=m_parent->get_egbase()->get_map();
                  // Clean all the stuff up, so we can load
-                 m_parent->get_editor()->cleanup_for_load(true, true);
+                 m_parent->get_editor()->cleanup_for_load(true, false);
 
                  m_map->create_empty_map(MAP_DIMENSIONS[m_w],MAP_DIMENSIONS[m_h],(*m_worlds)[m_currentworld]);
 

@@ -46,6 +46,7 @@ static const char* EDITOR_README =
 "------------------\n"
 "\n"
 "SPACE    Toggles build help\n"
+"C        Toggles census on/off\n"
 "E        Toggles event menu\n"
 "H        Toggles main menu\n"
 "M        Toggles minimap\n"

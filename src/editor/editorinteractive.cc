@@ -27,6 +27,7 @@
 #include "editor_main_menu.h"
 #include "editor_main_menu_load_map.h"
 #include "editor_main_menu_save_map.h"
+#include "editor_make_infrastructure_tool.h"
 #include "editor_noise_height_tool.h"
 #include "editor_place_immovable_tool.h"
 #include "editor_place_bob_tool.h"
@@ -65,6 +66,9 @@ construct editor sourroundings
 Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    m_editor = e;
 
+   // Disable debug. it is no use for editor
+   set_display_flag(Interactive_Base::dfDebug, false);
+   
    // The mapview. watch the map!!!
    Map_View* mm;
    mm = new Map_View(this, 0, 0, get_w(), get_h(), this);
@@ -117,6 +121,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Set_Starting_Pos_Tool());
    tools.tools.push_back(new Editor_Place_Bob_Tool(new Editor_Delete_Bob_Tool()));
    tools.tools.push_back(new Editor_Increase_Resources_Tool(new Editor_Decrease_Resources_Tool(), new Editor_Set_Resources_Tool()));
+   tools.tools.push_back(new Editor_Make_Infrastructure_Tool());
    
    // Load all tribes into memory
    std::vector<std::string> tribes;
@@ -359,6 +364,11 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
 
          case KEY_SPACE:
             toggle_buildhelp();
+            return true;
+
+         case KEY_c:
+            set_display_flag(Interactive_Base::dfShowCensus,
+                  !get_display_flag(Interactive_Base::dfShowCensus));
             return true;
 
          case KEY_e:

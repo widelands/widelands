@@ -22,14 +22,14 @@
 
 class Building;
 class PlayerImmovable;
-class Interactive_Player;
+class Interactive_Base;
 struct UIUniqueWindowRegistry;
 
 // fieldaction.cc
-void show_field_action(Interactive_Player *parent, UIUniqueWindowRegistry* registry);
+void show_field_action(Interactive_Base *parent, Player* player, UIUniqueWindowRegistry* registry);
 
 // building_ui.cc
-void show_bulldoze_confirm(Interactive_Player* player, Building* building, PlayerImmovable* todestroy);
+void show_bulldoze_confirm(Interactive_Base* player, Building* building, PlayerImmovable* todestroy);
 
 #endif /* FIELDACTION_H */
 

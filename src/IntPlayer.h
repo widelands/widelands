@@ -58,32 +58,14 @@ class Interactive_Player : public Interactive_Base {
 		inline uchar get_player_number(void) { return m_player_number; }
 		inline Player *get_player() { assert(m_game); return m_game->get_player(m_player_number) ; }
 
-		// Road building
-		inline bool is_building_road() const { return m_buildroad; }
-		inline CoordPath *get_build_road() { return m_buildroad; }
-		void start_build_road(Coords start);
-		void abort_build_road();
-		void finish_build_road();
-		bool append_build_road(Coords field);
-		const Coords &get_build_road_start();
-		const Coords &get_build_road_end();
-		int get_build_road_end_dir();
+   private:
+      Game*		m_game;
+      uchar		m_player_number;
 
-	private:
-      void roadb_add_overlay();
-		void roadb_remove_overlay();
+      UITextarea*	m_label_speed;
 
-      int      m_jobid;
-		int      m_road_buildhelp_overlay_jobid;
-		Game*		m_game;
-		uchar		m_player_number;
-
-		UITextarea*	m_label_speed;
-
-		UIUniqueWindowRegistry	m_mainmenu;
-		UIUniqueWindowRegistry	m_fieldaction;
-
-		CoordPath		*m_buildroad; // path for the new road
+      UIUniqueWindowRegistry	m_mainmenu;
+      UIUniqueWindowRegistry	m_fieldaction;
 };
 
 

@@ -19,6 +19,7 @@
 
 #include "editor.h"
 #include "editorinteractive.h"
+#include "editor_make_infrastructure_tool.h"
 #include "editor_player_menu.h"
 #include "editor_player_menu_allowed_buildings_menu.h"
 #include "editor_set_starting_pos_tool.h"
@@ -177,8 +178,11 @@ void Editor_Player_Menu::update(void) {
       }
       if(m_parent->get_map()->get_scenario_player_tribe(i+1)!="<undefined>")
          m_plr_set_tribes_buts[i]->set_title(m_parent->get_map()->get_scenario_player_tribe(i+1).c_str());
-      else 
+      else { 
          m_plr_set_tribes_buts[i]->set_title(m_tribes[0].c_str());
+         m_parent->get_map()->set_scenario_player_tribe(i+1,m_tribes[0]);
+      }
+
       // Set Starting pos button 
       if(!m_plr_set_pos_buts[i]) {
           m_plr_set_pos_buts[i]=new UIButton(this, posx, posy, size, size, 0, i+1);
@@ -361,7 +365,10 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
       // Remove old overlay if any
       m_parent->get_editor()->get_map()->get_overlay_manager()->remove_overlay(start_pos,picid);
    }
-   log("Player %i: %p\n", n, editor->get_player(n));
+   m_parent->select_tool(m_mis_index,0);
+   static_cast<Editor_Make_Infrastructure_Tool*>(m_tools->tools[m_mis_index])->set_player(n);
+   m_parent->get_editor()->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Make_Infrastructure_Tool_Callback, static_cast<void*>(m_parent->get_editor()),n);
+   m_parent->get_editor()->get_map()->recalc_whole_map();
 }
 
 /*

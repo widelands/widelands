@@ -19,6 +19,7 @@
 
 #include "IntPlayer.h"
 #include "cmd_queue.h"
+#include "editorinteractive.h"
 #include "fieldaction.h"
 #include "game_debug_ui.h"
 #include "map.h"
@@ -122,7 +123,7 @@ FieldActionWindow IMPLEMENTATION
 */
 class FieldActionWindow : public UIUniqueWindow {
 public:
-	FieldActionWindow(Interactive_Player *plr, UIUniqueWindowRegistry *registry);
+	FieldActionWindow(Interactive_Base *iabase, Player* plr, UIUniqueWindowRegistry *registry);
 	~FieldActionWindow();
 
 	void init();
@@ -148,8 +149,9 @@ private:
    void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
 	void okdialog();
 
-	Interactive_Player	*m_player;
-	Map						*m_map;
+	Interactive_Base    *m_iabase;
+   Player              *m_plr;
+	Map				     *m_map;
 
 	FCoords		m_field;
 
@@ -185,17 +187,18 @@ FieldActionWindow::FieldActionWindow
 Initialize a field action window, creating the appropriate buttons.
 ===============
 */
-FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(plr, registry, 68, 34, "Action")
+FieldActionWindow::FieldActionWindow(Interactive_Base *iabase, Player* plr, UIUniqueWindowRegistry *registry)
+	: UIUniqueWindow(iabase, registry, 68, 34, "Action")
 {
 	// Hooks into the game classes
-	m_player = plr;
-	m_map = m_player->get_game()->get_map();
+   m_iabase = iabase;
+	m_plr = plr;
+	m_map = iabase->get_egbase()->get_map();
 
-	Field *f = m_map->get_field(m_player->get_fieldsel_pos());
-	m_field = FCoords(m_player->get_fieldsel_pos(), f);
+	Field *f = m_map->get_field(iabase->get_fieldsel_pos());
+	m_field = FCoords(iabase->get_fieldsel_pos(), f);
 
-	m_player->set_fieldsel_freeze(true);
+	iabase->set_fieldsel_freeze(true);
 
 	//
 	m_tabpanel = new UITab_Panel(this, 0, 0, 1);
@@ -213,7 +216,7 @@ Free allocated resources, remove from registry.
 */
 FieldActionWindow::~FieldActionWindow()
 {
-	m_player->set_fieldsel_freeze(false);
+	m_iabase->set_fieldsel_freeze(false);
 }
 
 
@@ -265,8 +268,8 @@ void FieldActionWindow::add_buttons_auto()
 	watchbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
 
 	// Add road-building actions
-	if (m_field.field->get_owned_by() == m_player->get_player_number())
-	{
+	if (m_field.field->get_owned_by() == m_plr->get_player_number()) {
+	
 		BaseImmovable *imm = m_map->get_immovable(m_field);
 
 		// The box with road-building buttons
@@ -284,11 +287,12 @@ void FieldActionWindow::add_buttons_auto()
 			if (!building || building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag);
 
-			add_button(buildbox, pic_geologist, &FieldActionWindow::act_geologist);
+         if(m_iabase->get_egbase()->is_game()) // No geologist in editor
+            add_button(buildbox, pic_geologist, &FieldActionWindow::act_geologist);
 		}
 		else
 		{
-			int buildcaps = m_player->get_player()->get_buildcaps(m_field);
+			int buildcaps = m_plr->get_buildcaps(m_field);
 
 			// Add house building
 			if ((buildcaps & BUILDCAPS_SIZEMASK) || (buildcaps & BUILDCAPS_MINE))
@@ -303,12 +307,15 @@ void FieldActionWindow::add_buttons_auto()
 		}
 	}
 
-	// Watch actions
-	add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch);
+	// Watch actions, only when game (no use in editor)
+   // same for statistics. census is ok
+   if(m_iabase->get_egbase()->is_game()) {
+      add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch);
+      add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics);
+   }
 	add_button(watchbox, pic_showcensus, &FieldActionWindow::act_show_census);
-	add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics);
 
-	if (m_player->get_display_flag(Interactive_Base::dfDebug))
+	if (m_iabase->get_display_flag(Interactive_Base::dfDebug))
 		add_button(watchbox, pic_debug, &FieldActionWindow::act_debug);
 
 	// Add tabs
@@ -335,7 +342,7 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 	BuildGrid* bbg_house[3] = { 0, 0, 0 };
 	BuildGrid* bbg_mine = 0;
 
-	Tribe_Descr* tribe = m_player->get_player()->get_tribe();
+	Tribe_Descr* tribe = m_plr->get_tribe();
 
 	m_fastclick = false;
 
@@ -345,9 +352,14 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 		BuildGrid** ppgrid;
 
 		// Some buildings cannot be built (i.e. construction site, HQ)
-      // and not allowed buildings
-		if (!descr->get_buildable() || !m_player->get_player()->is_building_allowed(id))
-			continue;
+      // and not allowed buildings. The rules are different in editor
+      // and game: enhanced buildings _are_ buildable in the editor
+      if(m_iabase->get_egbase()->is_game()) {
+         if (!descr->get_buildable() || !m_plr->is_building_allowed(id))
+            continue;
+      } else {
+         if(!descr->get_buildable() && !descr->get_enhanced_building()) continue;
+      }
 
 		// Figure out if we can build it here, and in which tab it belongs
 		if (descr->get_ismine())
@@ -447,7 +459,7 @@ It resets the mouse to its original position and closes the window
 */
 void FieldActionWindow::okdialog()
 {
-   m_player->warp_mouse_to_field(m_field);
+   m_iabase->warp_mouse_to_field(m_field);
 	die();
 }
 
@@ -460,7 +472,9 @@ Open a watch window for the given field and delete self.
 */
 void FieldActionWindow::act_watch()
 {
-	show_watch_window(m_player, m_field);
+	assert(m_iabase->get_egbase()->is_game());
+   
+   show_watch_window(static_cast<Interactive_Player*>(m_iabase), m_field);
 	okdialog();
 }
 
@@ -475,15 +489,15 @@ Toggle display of census and statistics for buildings, respectively.
 */
 void FieldActionWindow::act_show_census()
 {
-	m_player->set_display_flag(Interactive_Base::dfShowCensus,
-		!m_player->get_display_flag(Interactive_Base::dfShowCensus));
+	m_iabase->set_display_flag(Interactive_Base::dfShowCensus,
+		!m_iabase->get_display_flag(Interactive_Base::dfShowCensus));
 	okdialog();
 }
 
 void FieldActionWindow::act_show_statistics()
 {
-	m_player->set_display_flag(Interactive_Base::dfShowStatistics,
-		!m_player->get_display_flag(Interactive_Base::dfShowStatistics));
+	m_iabase->set_display_flag(Interactive_Base::dfShowStatistics,
+		!m_iabase->get_display_flag(Interactive_Base::dfShowStatistics));
 	okdialog();
 }
 
@@ -497,7 +511,7 @@ Show a debug widow for this field.
 */
 void FieldActionWindow::act_debug()
 {
-	show_field_debug(m_player, m_field);
+	show_field_debug(m_iabase, m_field);
 }
 
 
@@ -510,13 +524,18 @@ Build a flag at this field
 */
 void FieldActionWindow::act_buildflag()
 {
-	Game *g = m_player->get_game();
+	Editor_Game_Base* egbase=m_iabase->get_egbase();
 
-	g->send_player_command(m_player->get_player_number(), CMD_BUILD_FLAG, m_field.x, m_field.y);
-
-	if (m_player->is_building_road())
-		m_player->finish_build_road();
-
+   if(egbase->is_game()) { 
+      // Game: send command
+      Game *g = static_cast<Game*>(egbase); 
+      g->send_player_command(m_plr->get_player_number(), CMD_BUILD_FLAG, m_field.x, m_field.y);
+   } else {
+      // Editor: Just plain build this flag
+      m_plr->build_flag(m_field);
+   }
+   if (m_iabase->is_building_road())
+      m_iabase->finish_build_road();
 	okdialog();
 }
 
@@ -529,30 +548,36 @@ Remove the flag at this field
 */
 void FieldActionWindow::act_ripflag()
 {
-	Game *g = m_player->get_game();
-	BaseImmovable* imm = g->get_map()->get_immovable(m_field);
-	Flag* flag;
-	Building* building;
+   BaseImmovable* imm = m_iabase->get_egbase()->get_map()->get_immovable(m_field);
+   Flag* flag;
+   Building* building;
 
-	okdialog();
+   okdialog();
 
-	if (!imm || imm->get_type() != Map_Object::FLAG)
-		return;
+   if (!imm || imm->get_type() != Map_Object::FLAG)
+      return;
 
-	flag = (Flag*)imm;
-	building = flag->get_building();
+   flag = (Flag*)imm;
+   building = flag->get_building();
 
-	if (building)
-	{
-		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
-			return;
+   if (building)
+   {
+      if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+         return;
 
-		show_bulldoze_confirm(m_player, building, flag);
-	}
-	else
-	{
-		g->send_player_command(m_player->get_player_number(), CMD_BULLDOZE, flag->get_serial());
-	}
+      show_bulldoze_confirm(m_iabase, building, flag);
+   }
+   else
+   {
+      if(m_iabase->get_egbase()->is_game()) {
+         // Game
+         Game *g = static_cast<Game*>(m_iabase->get_egbase()); 
+         g->send_player_command(m_plr->get_player_number(), CMD_BULLDOZE, flag->get_serial());
+      } else {
+         // Editor
+         imm->remove(m_iabase->get_egbase());
+      }
+   }
 }
 
 
@@ -565,8 +590,8 @@ Start road building.
 */
 void FieldActionWindow::act_buildroad()
 {
-	m_player->start_build_road(m_field);
-	okdialog();
+   m_iabase->start_build_road(m_field, m_plr->get_player_number());
+   okdialog();
 }
 
 /*
@@ -578,11 +603,11 @@ Abort building a road.
 */
 void FieldActionWindow::act_abort_buildroad()
 {
-	if (!m_player->is_building_road())
-		return;
+   if (!m_iabase->is_building_road())
+      return;
 
-	m_player->abort_build_road();
-	okdialog();
+   m_iabase->abort_build_road();
+   okdialog();
 }
 
 /*
@@ -594,13 +619,20 @@ Remove the road at the given field
 */
 void FieldActionWindow::act_removeroad()
 {
-	Game *g = m_player->get_game();
-	BaseImmovable *imm = g->get_map()->get_immovable(m_field);
+   BaseImmovable *imm = m_iabase->get_egbase()->get_map()->get_immovable(m_field);
 
-	if (imm && imm->get_type() == Map_Object::ROAD)
-		g->send_player_command(m_player->get_player_number(), CMD_BULLDOZE, imm->get_serial());
-
-	okdialog();
+   if (imm && imm->get_type() == Map_Object::ROAD)
+      if(m_iabase->get_egbase()->is_game()) {
+         // Game
+         Game *g = static_cast<Game*>(m_iabase->get_egbase()); 
+         Interactive_Player* player=static_cast<Interactive_Player*>(m_iabase);
+         g->send_player_command(player->get_player_number(), CMD_BULLDOZE, imm->get_serial());
+      } else {
+         Road* road=static_cast<Road*>(imm);
+         Player* plr=road->get_owner();
+         plr->bulldoze(road);
+      }
+   okdialog();
 }
 
 
@@ -613,11 +645,17 @@ Start construction of the building with the give description index
 */
 void FieldActionWindow::act_build(int idx)
 {
-	Game *g = m_player->get_game();
-
-	g->send_player_command(m_player->get_player_number(), CMD_BUILD, m_field.x, m_field.y, idx);
-
-	okdialog();
+   if(m_iabase->get_egbase()->is_game()) {
+      // Game
+      Interactive_Player* m_player=static_cast<Interactive_Player*>(m_iabase);
+      Game *g = m_player->get_game();
+      g->send_player_command(m_player->get_player_number(), CMD_BUILD, m_field.x, m_field.y, idx);
+   } else {
+      // Editor
+      m_iabase->get_egbase()->warp_building(m_field, m_plr->get_player_number(), idx);
+      static_cast<Editor_Interactive*>(m_iabase)->reference_player_tribe(m_plr->get_player_number(), m_plr->get_tribe());
+   }
+   okdialog();
 }
 
 
@@ -630,16 +668,18 @@ Call a geologist on this flag.
 */
 void FieldActionWindow::act_geologist()
 {
-	Game* g = m_player->get_game();
-	BaseImmovable *imm = g->get_map()->get_immovable(m_field);
+   assert(m_iabase->get_egbase()->is_game());
 
-	if (imm && imm->get_type() == Map_Object::FLAG)
-		g->send_player_command(m_player->get_player_number(), CMD_FLAGACTION,
-			imm->get_serial(), FLAGACTION_GEOLOGIST);
+   Interactive_Player* m_player=static_cast<Interactive_Player*>(m_iabase);
+   Game* g = m_player->get_game();
+   BaseImmovable *imm = g->get_map()->get_immovable(m_field);
 
-	okdialog();
+   if (imm && imm->get_type() == Map_Object::FLAG)
+      g->send_player_command(m_player->get_player_number(), CMD_FLAGACTION,
+            imm->get_serial(), FLAGACTION_GEOLOGIST);
+
+   okdialog();
 }
-
 
 /*
 ===============
@@ -649,7 +689,7 @@ Perform a field action (other than building options).
 Bring up a field action window or continue road building.
 ===============
 */
-void show_field_action(Interactive_Player *parent, UIUniqueWindowRegistry *registry)
+void show_field_action(Interactive_Base *iabase, Player* player, UIUniqueWindowRegistry *registry)
 {
 	FieldActionWindow *faw;
 
@@ -661,24 +701,24 @@ void show_field_action(Interactive_Player *parent, UIUniqueWindowRegistry *regis
 		registry->window = 0;
 	}
 
-	if (!parent->is_building_road()) {
-		faw = new FieldActionWindow(parent, registry);
+	if (!iabase->is_building_road()) {
+		faw = new FieldActionWindow(iabase, player, registry);
 		faw->add_buttons_auto();
 		faw->init();
 		return;
 	}
 
 	// we're building a road right now
-	Map *map = parent->get_game()->get_map();
-	Coords target = parent->get_fieldsel_pos();
+	Map *map = iabase->get_egbase()->get_map();
+	Coords target = iabase->get_fieldsel_pos();
 
 	// if user clicked on the same field again, build a flag
-	if (target == parent->get_build_road_end()) {
-		faw = new FieldActionWindow(parent, registry);
+	if (target == iabase->get_build_road_end()) {
+		faw = new FieldActionWindow(iabase, player, registry);
 
 		bool flag = false;
-		if (target != parent->get_build_road_start() &&
-		    parent->get_player()->get_buildcaps(target) & BUILDCAPS_FLAG)
+		if (target != iabase->get_build_road_start() &&
+		    player->get_buildcaps(target) & BUILDCAPS_FLAG)
 			flag = true;
 		faw->add_buttons_road(flag);
 		faw->init();
@@ -686,8 +726,8 @@ void show_field_action(Interactive_Player *parent, UIUniqueWindowRegistry *regis
 	}
 
 	// append or take away from the road
-	if (!parent->append_build_road(target)) {
-		faw = new FieldActionWindow(parent, registry);
+	if (!iabase->append_build_road(target)) {
+		faw = new FieldActionWindow(iabase, player, registry);
 		faw->add_buttons_road(false);
 		faw->init();
 		return;
@@ -699,13 +739,14 @@ void show_field_action(Interactive_Player *parent, UIUniqueWindowRegistry *regis
 	if (imm) {
 		switch(imm->get_type()) {
 		case Map_Object::ROAD:
-			if (!(parent->get_player()->get_buildcaps(target) & BUILDCAPS_FLAG))
+			if (!(player->get_buildcaps(target) & BUILDCAPS_FLAG))
 				break;
-			parent->get_game()->send_player_command(parent->get_player_number(), CMD_BUILD_FLAG, target.x, target.y);
+			if(iabase->get_egbase()->is_game())
+            static_cast<Interactive_Player*>(iabase)->get_game()->send_player_command(player->get_player_number(), CMD_BUILD_FLAG, target.x, target.y);
 			// fall through, there is a flag now
 
 		case Map_Object::FLAG:
-			parent->finish_build_road();
+			iabase->finish_build_road();
 			break;
 		}
 	}
