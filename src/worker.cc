@@ -56,6 +56,7 @@ public:
 		Worker_Descr*		descr;
 		std::string			directory;
 		Profile*				prof;
+      const EncodeData* encdata;
 	};
 
 	typedef void (WorkerProgram::*parse_t)(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
@@ -579,7 +580,7 @@ bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
 	}
 
 	// Walk towards it
-	if (!start_task_movepath(g, dest, 10, get_descr()->get_walk_anims(), forceonlast)) {
+	if (!start_task_movepath(g, dest, 10, get_descr()->get_right_walk_anims(does_carry_ware()), forceonlast)) {
 		molog("  couldn't find path\n");
 		set_signal("fail");
 		pop_task(g);
@@ -610,12 +611,14 @@ void WorkerProgram::parse_animation(WorkerAction* act, Parser* parser, const std
 		throw wexception("Usage: animation <name> <time>");
 
 	act->function = &Worker::run_animation;
-
-	// TODO: dynamically allocate animations here
+   
 	if (cmd[1] == "idle")
 		act->iparam1 = parser->descr->get_idle_anim();
-	else
-		throw wexception("Unknown animation '%s'", cmd[1].c_str());
+	else {
+      // dynamically allocate animations here
+      Section* s = parser->prof->get_safe_section(cmd[1].c_str());
+      act->iparam1 = g_anim.get(parser->directory.c_str(), s, 0, parser->encdata);
+   }
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
 	if (endp && *endp)
@@ -921,6 +924,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 			parser.descr = this;
 			parser.directory = directory;
 			parser.prof = prof;
+         parser.encdata = encdata;
 
 			prog = new WorkerProgram(string);
 			prog->parse(&parser, string);
@@ -1542,7 +1546,7 @@ void Worker::return_update(Game* g, State* state)
 
 				molog("[return]: Move back into building\n");
 
-				start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+				start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
 				return;
 			}
 		}
@@ -1553,7 +1557,7 @@ void Worker::return_update(Game* g, State* state)
 
 	molog("[return]: Move to building's flag\n");
 
-	if (!start_task_movepath(g, flag->get_position(), 15, get_descr()->get_walk_anims())) {
+	if (!start_task_movepath(g, flag->get_position(), 15, get_descr()->get_right_walk_anims(does_carry_ware()))) {
 		molog("[return]: Failed to return\n");
 
 		set_location(0);
@@ -1832,7 +1836,7 @@ void Worker::dropoff_update(Game* g, State* state)
 			}
 
 			molog("[dropoff]: flag is overloaded\n");
-			start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+			start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
 			return;
 		}
 
@@ -1841,7 +1845,7 @@ void Worker::dropoff_update(Game* g, State* state)
 
 	// We don't have the item any more, return home
 	if (location->get_type() == Map_Object::FLAG) {
-		start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+		start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
 		return;
 	}
 
@@ -1938,7 +1942,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 	if (location->get_type() == FLAG) {
 		molog("[fetchfromflag]: return to building\n");
 
-		start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+		start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
 		return;
 	}
 
@@ -2124,7 +2128,7 @@ void Worker::leavebuilding_update(Game* g, State* state)
 	}
 
 	molog("[leavebuilding]: Leave\n");
-	start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
+	start_task_forcemove(g, WALK_SE, get_descr()->get_right_walk_anims(does_carry_ware()));
 }
 
 
@@ -2361,7 +2365,7 @@ void Worker::route_update(Game* g, State* state)
 				throw wexception("MO(%u): [route]: next step is building, but we're nowhere near", get_serial());
 
 			molog("[route]: move from flag to building\n");
-			start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+			start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
 			set_location(nextstep);
 			return;
 		}
@@ -2377,7 +2381,7 @@ void Worker::route_update(Game* g, State* state)
 			if (nextstep != road->get_flag(Road::FlagEnd))
 				path.reverse();
 
-			start_task_movepath(g, path, get_descr()->get_walk_anims());
+			start_task_movepath(g, path, get_descr()->get_right_walk_anims(does_carry_ware()));
 			set_location(road);
 			return;
 		}
@@ -2418,7 +2422,7 @@ void Worker::route_update(Game* g, State* state)
 
 			if (index >= 0)
 			{
-				if (start_task_movepath(g, path, index, get_descr()->get_walk_anims())) {
+				if (start_task_movepath(g, path, index, get_descr()->get_right_walk_anims(does_carry_ware()))) {
 					molog("[route]: from road %u to flag %u\n", get_serial(), road->get_serial(),
 									nextstep->get_serial());
 					return;
@@ -2530,7 +2534,7 @@ void Worker::fugitive_update(Game* g, State* state)
 
 		if (building && building->has_attribute(WAREHOUSE)) {
 			molog("[fugitive]: move into warehouse\n");
-			start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+			start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
 			set_location(building);
 			return;
 		}
@@ -2577,7 +2581,7 @@ void Worker::fugitive_update(Game* g, State* state)
 			molog("[fugitive]: try to move to warehouse\n");
 
 			// the warehouse could be on a different island, so check for failure
-			if (start_task_movepath(g, flag->get_position(), 0, get_descr()->get_walk_anims()))
+			if (start_task_movepath(g, flag->get_position(), 0, get_descr()->get_right_walk_anims(does_carry_ware())))
 				return;
 		}
 	}
@@ -2590,7 +2594,7 @@ void Worker::fugitive_update(Game* g, State* state)
 	dst.x = get_position().x + (g->logic_rand()%5) - 2;
 	dst.y = get_position().y + (g->logic_rand()%5) - 2;
 
-	if (start_task_movepath(g, dst, 4, get_descr()->get_walk_anims()))
+	if (start_task_movepath(g, dst, 4, get_descr()->get_right_walk_anims(does_carry_ware())))
 		return;
 
 	start_task_idle(g, get_descr()->get_idle_anim(), 50);
@@ -2807,7 +2811,7 @@ void Carrier::road_update(Game* g, State* state)
 	}
 
 	// Move into idle position if necessary
-	if (start_task_movepath(g, road->get_path(), road->get_idle_index(), get_descr()->get_walk_anims()))
+	if (start_task_movepath(g, road->get_path(), road->get_idle_index(), get_descr()->get_right_walk_anims(does_carry_ware())))
 		return;
 
 	// Be bored. There's nothing good on TV, either.
@@ -2926,7 +2930,7 @@ void Carrier::transport_update(Game* g, State* state)
 
 			// Now walk back onto the flag
 			molog("[transport]: Move out of building.\n");
-			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
+			start_task_forcemove(g, WALK_SE, get_descr()->get_right_walk_anims(does_carry_ware()));
 			return;
 		}
 
@@ -2986,7 +2990,7 @@ void Carrier::transport_update(Game* g, State* state)
 				return;
 
 			molog("[transport]: Move into building.\n");
-			start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+			start_task_forcemove(g, WALK_NW, get_descr()->get_right_walk_anims(does_carry_ware()));
 			state->ivar1 = -1;
 			return;
 		}
@@ -3177,7 +3181,7 @@ bool Carrier::start_task_walktoflag(Game* g, int flag, bool offset)
 			idx--;
 	}
 
-	return start_task_movepath(g, path, idx, get_descr()->get_walk_anims());
+	return start_task_movepath(g, path, idx, get_descr()->get_right_walk_anims(does_carry_ware()));
 }
 
 

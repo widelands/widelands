@@ -207,6 +207,8 @@ public:
 	inline void set(Map_Object* obj) { if (obj) m_serial = obj->m_serial; else m_serial = 0; }
 	inline Object_Ptr& operator = (Map_Object* obj) { set(obj); return *this; }
 
+   inline bool is_set(void) { return m_serial; }
+
 	// dammit... without a Editor_Game_Base object, we can't implement a Map_Object* operator
 	// (would be _really_ nice)
 	Map_Object* get(Editor_Game_Base* g);

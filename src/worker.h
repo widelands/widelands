@@ -66,7 +66,7 @@ public:
 	inline std::string get_helptext() const { return m_helptext; }
 	inline uint get_menu_pic() { return m_menu_pic; }
 	inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
-	inline DirAnimations *get_walkload_anims() { return &m_walkload_anims; }
+	inline DirAnimations *get_right_walk_anims(bool carries_ware) { if(carries_ware) return &m_walkload_anims; return &m_walk_anims; }
 	inline int get_ware_id() const { return m_ware_id; }
 	const WorkerProgram* get_program(std::string name) const;
 
@@ -126,6 +126,8 @@ public:
 protected:
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
 	virtual void init_auto_task(Game* g);
+
+   inline bool does_carry_ware(void) { return m_carried_item.is_set(); }
 
 public: // worker-specific tasks
 	void start_task_request(Game* g, Request *req);

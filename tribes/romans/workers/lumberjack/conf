@@ -14,7 +14,7 @@ program=burn
 [chop]
 0=findobject attrib:tree radius:8	# find an object matching the given criteria, put it into the object slot
 1=walk object								# walk to the object in the object slot
-2=animation idle 10000					# play an animation (TODO: hacking animtion)
+2=animation hacking 10000				# play an animation 
 3=object fall								# cause the object to change its program (to 'fall')
 4=animation idle 2000					# wait for the tree to disappear
 5=createitem log							# create & carry the given item
@@ -24,20 +24,39 @@ program=burn
 0=setdescription fire
 1=findobject attrib:tree radius:12
 2=walk object
-3=animation idle 5000  # TODO: burn animation
+3=animation burning 5000  
 4=removeobject
 5=plant
 6=findobject attrib:tree radius:12
 7=walk object
-8=animation idle 5000  # TODO: burn animation
+8=animation burning 5000  
 9=removeobject
 10=plant
 11=findobject attrib:tree radius:12
 12=walk object
-13=animation idle 5000  # TODO: burn animation
+13=animation burning 5000 
 14=removeobject
 15=plant
 16=return 
+
+
+[hacking]
+pics=hacking_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13
+
+
+[burning]
+pics=burning_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13
+
 
 # The normal idle animation (non-directional)
 [idle]

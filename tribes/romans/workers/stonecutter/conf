@@ -13,7 +13,7 @@ program=cut
 [cut]
 0=findobject attrib:stone radius:8	# find an object matching the given criteria
 1=walk object							# walk to the object in the object slot
-2=animation idle 10000				# play an animation (TODO: hacking animtion)
+2=animation hacking 10000			# play an animation 
 3=object shrink						# cause the object to change its program (to 'shrink')
 4=createitem stone					# create & carry the given item
 5=return									# return home
@@ -21,6 +21,14 @@ program=cut
 # The normal idle animation (non-directional)
 [idle]
 pics=idle_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13
+
+[hacking]
+pics=hacking_??.png
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
