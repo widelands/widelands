@@ -120,6 +120,8 @@ Update all
 ===============
 */
 void Editor_Player_Menu::update(void) {
+   if(is_minimized()) return;
+
    int nr_players=m_parent->get_map()->get_nrplayers();
    std::string text="";
    if(nr_players/10) text+=static_cast<char>(nr_players/10 + 0x30);
@@ -168,8 +170,8 @@ void Editor_Player_Menu::update(void) {
           m_plr_names[i]=new UIEdit_Box(this, posx, posy, 140, size, 0, i);
           m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
           posx+=140+spacing;
+          m_plr_names[i]->set_text(m_parent->get_map()->get_scenario_player_name(i+1).c_str());
       }
-      m_plr_names[i]->set_text(m_parent->get_map()->get_scenario_player_name(i+1).c_str());
 
       if(!m_plr_set_tribes_buts[i]) {
          m_plr_set_tribes_buts[i]=new UIButton(this, posx, posy, 140, size, 0, i);
@@ -298,15 +300,20 @@ void Editor_Player_Menu::set_starting_pos_clicked(int n) {
       m_parent->move_view_to(c.x,c.y);
 
    // If the player is already created in the editor, this means
-   // that there is already a hq placed somewhere. This needs to be
+   // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
-   if(m_parent->get_editor()->get_player(n)) return;
-
+   if(m_parent->get_editor()->get_player(n)) {
+      if(m_parent->get_map()->get_starting_pos(n) != Coords(-1,-1)) {
+         BaseImmovable* imm = m_parent->get_map()->get_field(m_parent->get_map()->get_starting_pos(n))->get_immovable();
+         if(imm && imm->get_type() == Map_Object::BUILDING) return;
+      }
+   }
+   
    // Select tool set mplayer
    m_parent->select_tool(m_spt_index,0);
    static_cast<Editor_Set_Starting_Pos_Tool*>(m_tools->tools[m_spt_index])->set_current_player(n);
 
-      // Reselect tool, so everything is in a defined state
+   // Reselect tool, so everything is in a defined state
    m_parent->select_tool(m_parent->get_selected_tool(),0);
 
    // Register callback function to make sure that only valid fields are selected.
@@ -326,8 +333,8 @@ void Editor_Player_Menu::name_changed(int m) {
       m_plr_names[m]->set_text(text.c_str());
    }
    m_parent->get_map()->set_scenario_player_name(m+1, text);
+   m_plr_names[m]->set_text(m_parent->get_map()->get_scenario_player_name(m+1).c_str());
    m_parent->set_need_save(true);
-   update();
 }
 
 /*
@@ -346,12 +353,25 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
       // This player is unknown, register it, place a hq and reference the tribe
       // so that this tribe can not be changed
       editor->add_player(n, Player::playerLocal, m_plr_set_tribes_buts[n-1]->get_title(), m_plr_names[n-1]->get_text());
-      
+
       p=editor->get_player(n);
-	   p->init(m_parent->get_egbase(),true);
+      p->init(m_parent->get_egbase(),false);
+   }
+
+   // If the player is already created in the editor, this means
+   // that there might be already a hq placed somewhere. This needs to be
+   // deleted before a starting position change can occure
+   BaseImmovable* imm = m_parent->get_map()->get_field(m_parent->get_map()->get_starting_pos(p->get_player_number()))->get_immovable();
+   if(!imm) {
+      // place HQ
+      const Coords &c = m_parent->get_map()->get_starting_pos(p->get_player_number());
+      int idx = p->get_tribe()->get_building_index("headquarters");
+      if (idx < 0)
+         throw wexception("Tribe %s lacks headquarters", p->get_tribe()->get_name());
+      m_parent->get_egbase()->warp_building(c, p->get_player_number(), idx);
 
       m_parent->reference_player_tribe(n, p->get_tribe());
-   
+
       // Remove the player overlay from this starting pos.
       // A HQ is overlay enough
       std::string picsname="pics/editor_player_";
@@ -362,6 +382,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
       // Remove old overlay if any
       m_parent->get_editor()->get_map()->get_overlay_manager()->remove_overlay(start_pos,picid);
    }
+
    m_parent->select_tool(m_mis_index,0);
    static_cast<Editor_Make_Infrastructure_Tool*>(m_tools->tools[m_mis_index])->set_player(n);
    m_parent->get_editor()->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Make_Infrastructure_Tool_Callback, static_cast<void*>(m_parent->get_editor()),n);

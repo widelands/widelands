@@ -459,7 +459,7 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
    if(!res || !amount) {
       int idx=get_immovable_index("resi_none");
       if(idx==-1) 
-         throw wexception("Tribe %s doesn't declar a resource indicator resi_none!\n", get_name());
+         throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", get_name());
       return idx;
    }
    
@@ -480,7 +480,7 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
       throw wexception("Tribe %s doesn't declar a resource indicator for resource %s!\n", get_name(), res->get_name());
    }
    
-   uint bestmatch = (uint) (((float)(amount/res->get_max_amount())*num_indicators));
+   uint bestmatch = (uint) (( static_cast<float>(amount)/res->get_max_amount() ) * num_indicators);
    if(((int)amount)<res->get_max_amount()) 
       bestmatch+=1; // Resi start with 1, not 0
 

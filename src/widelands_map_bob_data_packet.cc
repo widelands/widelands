@@ -69,6 +69,9 @@ void Widelands_Map_Bob_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase,
                assert(!mol->is_object_known(reg));
 
                Bob* bob=0;
+               if(subtype != Bob::CRITTER && subtype != Bob::WORKER) 
+                  throw wexception("Unknown bob type %i in Widelands_Map_Bob_Data_Packet!\n", subtype);
+
                if(owner=="world") {
                   if(subtype!=Bob::CRITTER)
                      throw wexception("world bob is not a critter!\n");
@@ -78,19 +81,24 @@ void Widelands_Map_Bob_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase,
                   bob=egbase->create_bob(Coords(x,y),idx);
                } else {
                   if(skip) continue; // We do no load player bobs when no scenario 
-                  if(subtype!=Bob::WORKER)
-                     throw wexception("tribe bob is not a worker!\n");
                   egbase->manually_load_tribe(owner.c_str()); // Make sure that the correct tribe is known and loaded 
                   Tribe_Descr* tribe=egbase->get_tribe(owner.c_str());
                   if(!tribe) 
                      throw wexception("Map asks for Tribe %s, but world doesn't deliver!\n", owner.c_str());
-                  int idx=tribe->get_worker_index(name.c_str());
-                  if(idx==-1) 
-                     throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
-                  Worker_Descr* descr=tribe->get_worker_descr(idx);
-                  bob=descr->create_object();
-                  bob->set_position(egbase, Coords(x,y));
-                  bob->init(egbase);
+                  if(subtype==Bob::WORKER) {
+                     int idx=tribe->get_worker_index(name.c_str());
+                     if(idx==-1) 
+                        throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
+                     Worker_Descr* descr=tribe->get_worker_descr(idx);
+                     bob=descr->create_object();
+                     bob->set_position(egbase, Coords(x,y));
+                     bob->init(egbase);
+                  } else if(subtype==Bob::CRITTER) {
+                     int idx=tribe->get_bob(name.c_str());
+                     if(idx==-1) 
+                        throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
+                     bob=egbase->create_bob(Coords(x,y),idx,tribe); 
+                  }
                }
             
                assert(bob);

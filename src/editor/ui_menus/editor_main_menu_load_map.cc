@@ -306,9 +306,12 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          int w, h;
          int picid=g_gr->get_picture(PicMod_Game, text.c_str(), true);
          g_gr->get_picture_size(picid, &w, &h);
-         // only register, when the player is not created (HQ placed)
-         if(!m_parent->get_editor()->get_player(i))
-            m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
+         // only register, when theres no building there
+         BaseImmovable* imm = m_parent->get_map()->get_field(fc)->get_immovable();
+         if(imm && imm->get_type() == Map_Object::BUILDING) continue;
+         
+         // no building, place overlay
+         m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
       }
 
       /* Resources. we do not calculate default resources, therefore we do

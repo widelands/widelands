@@ -60,12 +60,10 @@ int Editor_Set_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_I
       if(Editor_Change_Resource_Tool_Callback(c,map,m_cur_res)) {
          // Ok, we're doing something. First remove the current overlays
          std::string str;
-         if(res) {
-            str=map->get_world()->get_resource(res)->get_editor_pic(f->get_resources_amount());
-            int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), true);
-            map->get_overlay_manager()->remove_overlay(c,picid);
+         str=map->get_world()->get_resource(res)->get_editor_pic(f->get_resources_amount());
+         int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), true);
+         map->get_overlay_manager()->remove_overlay(c,picid);
 
-         }
          if(!amount) {
             f->set_resources(0,0);
             f->set_starting_res_amount(0);

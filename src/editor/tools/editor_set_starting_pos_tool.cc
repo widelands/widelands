@@ -80,11 +80,15 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
          m_current_player=1;
       }
 
+      // If the player is already created in the editor, this means
+      // that there might be already a hq placed somewhere. This needs to be
+      // deleted before a starting position change can occure
       if(ei->get_editor()->get_player(m_current_player)) {
-         // The player exists, do not change it's starting pos
-         // since there's already an HQ placed for him
-         return 1;
-      }
+         if(ei->get_map()->get_starting_pos(m_current_player) != Coords(-1,-1)) {
+            BaseImmovable* imm = ei->get_map()->get_field(ei->get_map()->get_starting_pos(m_current_player))->get_immovable();
+            if(imm && imm->get_type() == Map_Object::BUILDING) return 1;
+         }
+      } 
 
       std::string picsname="pics/editor_player_";
       picsname+=static_cast<char>((m_current_player/10) + 0x30);

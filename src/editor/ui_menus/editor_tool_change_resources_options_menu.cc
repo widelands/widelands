@@ -67,7 +67,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
 
    int w=0, h=0;
    int width=0, height=0;
-   for(i=1; i<nr_resources; i++) {
+   for(i=0; i<nr_resources; i++) {
       Resource_Descr* res=parent->get_map()->get_world()->get_resource(i);
       std::string editor_pic=res->get_editor_pic(100000);
       int picid=g_gr->get_picture(PicMod_Game, editor_pic.c_str(), true);
@@ -120,7 +120,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    // Now the available resources
    posx=xstart;
    int cur_x=0;
-   i=1;
+   i=0;
    m_radiogroup=new UIRadiogroup();
    m_radiogroup->changed.set(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
    m_radiogroup->clicked.set(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
@@ -141,7 +141,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    }
    posy+=height+1+space+5;
 
-   m_radiogroup->set_state(m_irt->get_cur_res()-1);
+   m_radiogroup->set_state(m_irt->get_cur_res());
 
    update();
 }
@@ -186,11 +186,11 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked(int n) {
 void Editor_Tool_Change_Resources_Options_Menu::selected(void) {
    int n=m_radiogroup->get_state();
 
-   m_srt->set_cur_res(n+1);
-   m_irt->set_cur_res(n+1);
-   m_drt->set_cur_res(n+1);
+   m_srt->set_cur_res(n);
+   m_irt->set_cur_res(n);
+   m_drt->set_cur_res(n);
 
-   m_parent->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Change_Resource_Tool_Callback, static_cast<void*>(m_parent->get_map()), n+1);
+   m_parent->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Change_Resource_Tool_Callback, static_cast<void*>(m_parent->get_map()), n);
    m_parent->get_map()->recalc_whole_map();
    select_correct_tool();
 
