@@ -281,6 +281,9 @@ void Bob::do_next_task(Game* g)
 		task_start_best(g, m_lasttask, m_lasttask_success, m_nexttask);
 		m_task_switching = false;
 
+		if (!m_task)
+			throw wexception("MO(%u): Failed to set task in task_start_best()", m_serial);
+
 		do_start_task(g);
 
 		task_retries++;

@@ -522,30 +522,31 @@ void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 
 			start_task_idle(g, get_descr()->get_idle_anim(), 1);
 		}
-		return;
+		break;
 
 	case State_IdleLoop:
 		start_task_idle(g, m_job_anim, -1);
-		return;
+		break;
 
 	case State_Request:
 		run_state_request(g, prev, success, nexthint);
-		return;
+		break;
 
 	case State_Fugitive:
 		run_state_fugitive(g, prev, success, nexthint);
-		return;
+		break;
 
 	case State_GoWarehouse:
 		run_state_gowarehouse(g, prev, success, nexthint);
-		return;
+		break;
 
 	case State_DropOff:
 		run_state_dropoff(g, prev, success, nexthint);
-		return;
-	}
+		break;
 
-	throw wexception("Worker::task_start_best: unhandled");
+	default:
+		throw wexception("Worker::task_start_best: unhandled");
+	}
 }
 
 
