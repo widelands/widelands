@@ -118,8 +118,8 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 		{
 			clr = *f->get_terd()->get_texture()->get_pixels();
 			clr = bright_up_clr2(clr, f->get_brightness());
-
-			*pix++ = clr;
+         
+         *pix++ = clr;
 		}
 	}
 

@@ -27,42 +27,65 @@
 //
 Cmd_Queue::Cmd_Queue(Game* gg) {
    g=gg;
-   ncmds=0;
-}
-
-Cmd_Queue::~Cmd_Queue(void) {
+   cur_frame=0;
+   cur_cmd=0;
+   
    uint i;
-   for(i=0; i<ncmds; i++) {
-      assert(!cmds[i].arg3);
+   for(i=0; i<FRAMES_IN_ADVANCE; i++) {
+         frames[i].first.sender=0;
+         frames[i].first.cmd=0;
+         frames[i].first.arg1=0;
+         frames[i].first.arg2=0;
+         frames[i].first.arg3=0;
+         frames[i].first.next=0;
+         frames[i].last=&frames[i].first;
+   }
+   
+   for(i=0; i<MAX_CMDS; i++) {
+      cmds[i].sender=0;
+      cmds[i].cmd=0;
+      cmds[i].arg1=0;
+      cmds[i].arg2=0;
+      cmds[i].arg3=0;
+      cmds[i].next=0;
    }
 }
 
+Cmd_Queue::~Cmd_Queue(void) {
+   // nothig to clean
+}
+
 // Queue a new command
-void Cmd_Queue::queue(uchar sender, ushort cmd, ulong arg1, ulong arg2, void* arg3) {
-   if(ncmds == MAX_CMDS-1) run_queue();
-   
-   cmds[ncmds].sender=sender;
-   cmds[ncmds].cmd=cmd;
-   cmds[ncmds].arg1=arg1;
-   cmds[ncmds].arg2=arg2;
-   cmds[ncmds].arg3=arg3;
-   ++ncmds;
+void Cmd_Queue::queue(uint frame, uchar sender, ushort cmd, ulong arg1, ulong arg2, void* arg3) {
+   assert(frame < FRAMES_IN_ADVANCE);
+   frame+=cur_frame;
+   if(frame>=FRAMES_IN_ADVANCE) frame-=FRAMES_IN_ADVANCE;
+
+   Cmd* pcmd=&cmds[cur_cmd];
+   while(pcmd->cmd) { pcmd=&cmds[cur_cmd++]; if(cur_cmd==MAX_CMDS-1) cur_cmd=0; }
+
+   pcmd->sender=sender;
+   pcmd->cmd=cmd;
+   pcmd->arg1=arg1;
+   pcmd->arg2=arg2;
+   pcmd->arg3=arg3;
+   pcmd->next=0;
+
+   frames[frame].last->next=pcmd;
+   frames[frame].last=pcmd;
 }
 
 // main function, run the queued commands
 int Cmd_Queue::run_queue(void) {
-   
-   uint i=0, temp=0;
-   Cmd* c;
+   int temp=0;
+   Cmd* c, *tempc;
    Instance* inst;
-   ushort cmd;
-   
-   while(i<ncmds) {
-      c=&cmds[i];
-      cmd=c->cmd;
-      c->cmd=SKIP;
-      
-      switch(cmd) {
+  
+   c=frames[cur_frame].first.next;
+
+
+   while(c) {
+      switch(c->cmd) {
          case CMD_LOAD_MAP:
             // arg3 is file name of map
             g->map = new Map();
@@ -79,11 +102,11 @@ int Cmd_Queue::run_queue(void) {
             // arg3==pointer to point struct where to build the building
             temp=g->hinst->get_free_inst_id();
             inst=g->hinst->get_inst(temp);
-            cerr << "Hooking instance: " << ((Point*) c->arg3)->x << ":" << ((Point*) c->arg3)->y << endl;
             g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
             temp=g->get_player_tribe(c->arg1)->get_building_descr(c->arg2)->create_instance(inst);
             inst->set_owned_by((uchar)c->arg1);
-            inst->set_next_acting_frame(g->get_frame()+temp);
+            if(temp>=0) queue(temp, SENDER_QUEUE, CMD_ACT, 0, 0, inst);
+            //inst->set_next_acting_frame(g->get_frame()+temp);
             break;
 
          case CMD_CREATE_BOB:
@@ -96,23 +119,42 @@ int Cmd_Queue::run_queue(void) {
             g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
             temp=g->get_map()->get_world()->get_bob_descr((ushort)c->arg1)->create_instance(inst);
             inst->set_owned_by(SENDER_LOADER);
-            inst->set_next_acting_frame(g->get_frame()+temp);
+            if(temp>=0) queue(temp, SENDER_QUEUE, CMD_ACT, 0, 0, inst);
+            //inst->set_next_acting_frame(g->get_frame()+temp);
             break;
-            
+
+         case CMD_ACT:
+            // an instance has requested to act again after a time
+            // arg3==(Instance*) pointer_to_instance to act
+            assert(c->arg3);
+            inst=(Instance*) c->arg3;
+            temp=inst->act(g);
+            if(temp>=0) queue(temp, SENDER_QUEUE, CMD_ACT, 0, 0, inst);
+            c->arg3=0; // prevent from freeing
+            break;
+
          default:
-            cerr << "Unknown Queue_Cmd: " << c->cmd << endl;
             break;
       }
-            
+      
+     
+      tempc=c->next;
+      // cleanup this cmd
       if(c->arg3) {
          free(c->arg3); 
          c->arg3=0;
       }
+      c->cmd=0; // make public again
+      c->next=0; // make public again
       
-      i++;
+      c=tempc;
    }
 
-   ncmds=0;
+   frames[cur_frame].first.next=0;
+   frames[cur_frame].last=&frames[cur_frame].first;
+
+   ++cur_frame;
+   if(cur_frame==FRAMES_IN_ADVANCE) cur_frame=0;
 
    return RET_OK;
 }

@@ -22,6 +22,7 @@
 
 // Define here all the possible users
 #define SENDER_LOADER 0
+#define SENDER_QUEUE  0 
 #define SENDER_PLAYER1 1 // those are just place holder, a player can send commands with
 #define SENDER_PLAYER2 2 // it's player number 
 #define SENDER_PLAYER3 3 
@@ -35,10 +36,11 @@
 
 // ---------------------- BEGINN OF CMDS ----------------------------------
 enum {
-   SKIP = 0,
+   UNUSED = 0,
    CMD_LOAD_MAP = 1,
    CMD_WARP_BUILDING,
-   CMD_CREATE_BOB
+   CMD_CREATE_BOB,
+   CMD_ACT
 };
 // ---------------------- END    OF CMDS ----------------------------------
 
@@ -50,6 +52,7 @@ enum {
 // building or so.
 // 
 struct Cmd {
+   Cmd* next;
    uchar sender;
    ushort cmd;
    ulong arg1;
@@ -57,9 +60,11 @@ struct Cmd {
    void* arg3; // don't use, if you can avoid it!
 };
 
-#define MAX_CMDS  100    // if more than this commands are queued in one frame, 
+#define MAX_CMDS  65536    // if more than this commands are queued in one frame, 
                          // the game might freeze, since the cmd queue runs those cmds
                          // first
+#define FRAMES_IN_ADVANCE 100 // how many frames in advanced can commands be queued, others will cause the game
+                           // to assert. 
 
 // 
 // This is finally the command queue. It is fully widelands specific,
@@ -72,13 +77,18 @@ class Cmd_Queue {
       Cmd_Queue(Game *);
       ~Cmd_Queue(void);
      
-      void queue(uchar, ushort, ulong=0, ulong=0, void* =0);
+      void queue(uint, uchar, ushort, ulong=0, ulong=0, void* =0);
       int run_queue(void);
       
    private:
+      ulong cur_frame;
+      uint cur_cmd;
       Cmd cmds[MAX_CMDS];
+      struct {
+         Cmd first;
+         Cmd* last;
+      } frames[FRAMES_IN_ADVANCE];
       Game* g;
-      uint ncmds;
 };
 
 

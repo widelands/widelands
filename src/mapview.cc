@@ -270,7 +270,26 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 	{
 		if (down) {
 			track_fsel(x, y);
-			fieldclicked.call(fselx, fsely);
+		   // TEMP
+         cerr << "Left mouseclick. field height: " << (int) map->get_safe_field(x,y)->get_height() << endl; 
+         cerr << "right_neighbour: " << (int) map->get_safe_field(x-1, y)->get_height() << endl;
+         cerr << "left neighbour: " << (int) map->get_safe_field(x+1, y)->get_height() << endl;
+         if(y&1) {
+            // odd 
+            cerr << "top-left neighbour: " << (int) map->get_safe_field(x, y-1)->get_height() << endl;
+            cerr << "top-right neighbour: " << (int) map->get_safe_field(x+1, y-1)->get_height() << endl;
+            cerr << "bottom-left neighbour: " << (int) map->get_safe_field(x, y+1)->get_height() << endl;
+            cerr << "bottom-right neighbour: " << (int) map->get_safe_field(x+1, y+1)->get_height() << endl;
+         } else {
+            // even
+            cerr << "top-left neighbour: " << (int) map->get_safe_field(x-1, y-1)->get_height() << endl;
+            cerr << "top-right neighbour: " << (int) map->get_safe_field(x, y-1)->get_height() << endl;
+            cerr << "bottom-left neighbour: " << (int) map->get_safe_field(x-1, y+1)->get_height() << endl;
+            cerr << "bottom-right neighbour: " << (int) map->get_safe_field(x, y+1)->get_height() << endl;
+         }
+         cerr << endl;
+         // TEMP ENDS
+         fieldclicked.call(fselx, fsely);
 		}
 	}
 	else if (btn == 1)

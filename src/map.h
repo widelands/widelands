@@ -122,20 +122,37 @@ private:
 	char brightness;
 	Terrain_Descr *terr, *terd;
    Instance* inst; // TODO: at the moment every field can only have one object associated with it
+   uchar seen_by;
+   uchar owned_by;
    
 public:
+   Field(void) { seen_by=0; owned_by=0; }
+   ~Field(void) { }
+
 	inline uchar get_height() const { return height; }
 
 	inline Terrain_Descr *get_terr() const { return terr; }
 	inline Terrain_Descr *get_terd() const { return terd; }
-	inline void set_terrainr(Terrain_Descr *p) { terr = p; }
-	inline void set_terraind(Terrain_Descr *p) { terd = p; }
+	inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
+	inline void set_terraind(Terrain_Descr *p) { assert(p); terd = p; }
 
    inline void hook_instance(Instance* obj) { inst=obj; }
    inline Instance* get_inst(void) { return inst; }
 
 	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
 	inline char get_brightness() const { return brightness; }
+   
+   inline void set_seen_by(uint pln, bool seen) { 
+      assert(pln<9); 
+      if(seen) {
+         seen_by &= (pln-1);   
+      } else {
+         seen_by &= ~(pln-1);   
+      }
+   }
+   inline bool get_seen_by(uint pln) { assert(pln<9); return (seen_by & (pln-1)); }
+   inline void set_owned_by(uint pln) { owned_by=pln; }
+   inline uchar get_owned_by(void) { return owned_by; }
 
 private:
 	// note: you must reset this field's + neighbor's brightness when you change the height

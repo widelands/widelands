@@ -193,16 +193,18 @@ int Map::load_map(const char* file, Cmd_Queue* q)
 {
    int ret;
 
-   if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+   if(!strcasecmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
    {
       // It ends like a wide lands map file. try to load
       // it as such
       ret = load_wlmf(file, q);
    }
-   else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+   else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {
+      cerr << "Herer we go!" << endl;
       // it is a S2 Map file. load it as such
       ret = load_s2mf(file, q);
+      cerr << "double done!" << endl;
    }
    else
    {

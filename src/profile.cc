@@ -114,7 +114,7 @@ Section::Value *Section::get_val(const char *name)
 {
 	for(int i = 0; i < values.elements(); i++) {
 		Value *v = (Value *)values.element_at(i);
-		if (!strcmpi(v->name, name)) {
+		if (!strcasecmp(v->name, name)) {
 			v->used = true;
 			return v;
 		}
@@ -137,7 +137,7 @@ Section::Value *Section::get_next_val(const char *name)
 		Value *v = (Value *)values.element_at(i);
 		if (v->used)
 			continue;
-		if (!name || !strcmpi(v->name, name)) {
+		if (!name || !strcasecmp(v->name, name)) {
 			v->used = true;
 			return v;
 		}
@@ -195,10 +195,10 @@ bool Section::get_boolean(const char *name, bool def)
 
 	int i;
 	for (i = 0; i < TRUE_WORDS; i++)
-		if (!strcmpi(v->val, trueWords[i]))
+		if (!strcasecmp(v->val, trueWords[i]))
 			return true;
 	for (i = 0; i < FALSE_WORDS; i++)
-		if (!strcmpi(v->val, falseWords[i]))
+		if (!strcasecmp(v->val, falseWords[i]))
 			return false;
 
 	if(!supr_err) err << "[" << sname << "], key '" << name << "' is not a boolean value" << std::endl;
@@ -267,12 +267,12 @@ const char *Section::get_next_boolean(const char *name, bool *value)
 
 		int i;
 		for (i = 0; i < TRUE_WORDS; i++)
-			if (!strcmpi(v->val, trueWords[i])) {
+			if (!strcasecmp(v->val, trueWords[i])) {
 				*value = true;
 				return v->name;
 			}
 		for (i = 0; i < FALSE_WORDS; i++)
-			if (!strcmpi(v->val, falseWords[i])) {
+			if (!strcasecmp(v->val, falseWords[i])) {
 				*value = false;
 				return v->name;
 			}
@@ -352,7 +352,7 @@ Section *Profile::get_section(const char *name)
 {
 	for(int i = 0; i < sections.elements(); i++) {
 		Section *s = (Section *)sections.element_at(i);
-		if (!strcmpi(s->get_name(), name)) {
+		if (!strcasecmp(s->get_name(), name)) {
 			s->used = true;
 			return s;
 		}
@@ -375,7 +375,7 @@ Section *Profile::get_next_section(const char *name)
 		Section *s = (Section *)sections.element_at(i);
 		if (s->used)
 			continue;
-		if (!name || !strcmpi(s->get_name(), name)) {
+		if (!name || !strcasecmp(s->get_name(), name)) {
 			s->used = true;
 			return s;
 		}

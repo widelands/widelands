@@ -64,7 +64,7 @@ Game::~Game(void) {
 int Game::set_map(const char* mapname) {
    if(map) return ERR_FAILED;
 
-   queue->queue(SENDER_LOADER, CMD_LOAD_MAP, 0, 0, strdup(mapname));
+   queue->queue(0, SENDER_LOADER, CMD_LOAD_MAP, 0, 0, strdup(mapname));
 
    return RET_OK;
 }
@@ -81,7 +81,9 @@ void Game::run(void) {
    tribe= new Tribe_Descr(); 
    const char* str=g_fileloc.locate_file("testtribe.wtf", TYPE_TRIBE);
    assert(str);
-   assert(!tribe->load(str));
+   if(!tribe->load(str)) {
+      assert(0);
+   }
    // TEMP
 
    // run the cmd queue, so all the load cmds are worked through
@@ -111,7 +113,7 @@ void Game::think(void) {
       // Animate animated textures
       map->get_world()->animate();
 
-      uint i;
+/*      uint i;
       Instance* inst;
       for(i=0; i<MAX_OBJS; i++) {
          inst=hinst->get_inst(i);
@@ -122,7 +124,7 @@ void Game::think(void) {
             }
          }
       }
-
+*/
       queue->run_queue();
       frame_count++;
       lticks=curticks;

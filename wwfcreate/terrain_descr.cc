@@ -81,15 +81,15 @@ int Terrain_Descr::construct(Profile* p, Section *s) {
       return KEY_MISSING;
    }
 
-   if(!strcmpi(str, "dry")) {
+   if(!strcasecmp(str, "dry")) {
       is=TERRAIN_DRY;
-   } else if(!strcmpi(str, "green")) {
+   } else if(!strcasecmp(str, "green")) {
       is=TERRAIN_GREEN;
-   } else if(!strcmpi(str, "water")) {
+   } else if(!strcasecmp(str, "water")) {
       is=TERRAIN_WATER;
-   } else if(!strcmpi(str, "acid")) {
+   } else if(!strcasecmp(str, "acid")) {
       is=TERRAIN_ACID;
-   } else if(!strcmpi(str, "mountain")) {
+   } else if(!strcasecmp(str, "mountain")) {
       is=TERRAIN_MOUNTAIN;
    } else {
       strcpy(err_sec,s->get_name());
@@ -101,7 +101,7 @@ int Terrain_Descr::construct(Profile* p, Section *s) {
 
    // parse resources
    str=s->get_string("resources", 0);
-   if(str && strcmpi("", str)) {
+   if(str && strcasecmp("", str)) {
       nres=1;
       uint i=0;
       while(i < strlen(str)) { if(str[i]==',') { nres++; }  i++; }

@@ -76,11 +76,11 @@ int parse_bobs(void) {
          return ERROR;
       }
 
-      if(!strcmpi(type, "diminishing")) {
+      if(!strcasecmp(type, "diminishing")) {
          bob=new Diminishing_Bob_Descr(file->d_name);
-      } else if(!strcmpi(type, "growing")) {
+      } else if(!strcasecmp(type, "growing")) {
          bob=new Growing_Bob_Descr(file->d_name);
-      } else if(!strcmpi(type, "boring")) {
+      } else if(!strcasecmp(type, "boring")) {
          bob=new Boring_Bob_Descr(file->d_name);
       } else {
          delete p;

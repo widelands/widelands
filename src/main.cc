@@ -38,7 +38,7 @@ int graph_is_init=0;
 
 // TEMP this functions should be removed as soon as possible
 int kbdh(const char* str, void* a) {
-		  if(strcmpi(str, "print screen") == 0) {
+		  if(strcasecmp(str, "print screen") == 0) {
 					 // we do a screeni
 					 char buf[250];
 					 const char* p;

@@ -51,8 +51,6 @@ int NeedWares_List::read(Binary_file* f) {
 // down here: Buildings as Map_Objects
 int Building_HQ::act(Game* g) {
 
-   // cerr << "Building HQ should act. Repeating in ten frames!" << endl;
-
    next_acting_frame=g->get_frame()+10;
    cur_pic=descr->get_idle_anim()->get_pic(0);
 
@@ -395,7 +393,7 @@ int HQ_Descr::create_instance(Instance* inst) {
 
    inst->obj=new Building_HQ(this);
 
-   return 10; // act in 10 frames again 
+   return -1; // never act again 
 }
 
 

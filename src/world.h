@@ -101,7 +101,7 @@ class World
       inline const char* get_author(void) { return hd.author; }
       inline const char* get_descr(void) { return hd.descr; }
       
-      inline Terrain_Descr* get_terrain(uint i) { return ters.get(i); }
+      inline Terrain_Descr* get_terrain(uint i) { assert(i<ters.get_nitems()); return ters.get(i); }
       inline ushort get_bob(const char* l) { return bobs.get_index(l); }
       inline Logic_Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
 

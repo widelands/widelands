@@ -397,7 +397,7 @@ const char* File_Locator::get_next_file(void) {
 		  {
 			  int rlen = strlen(retval);
 			  int slen = strlen(suf);
-			  if (rlen < slen || strcmpi(retval + rlen - slen, suf))
+			  if (rlen < slen || strcasecmp(retval + rlen - slen, suf))
 				  return get_next_file();
 		  }
 		  
