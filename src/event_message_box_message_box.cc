@@ -22,8 +22,11 @@
 #include "graphic.h"
 #include "editorinteractive.h"
 #include "ui_multilinetextarea.h"
+#include "ui_textarea.h"
 #include "ui_button.h"
 #include "system.h"
+#include "constants.h"
+#include "trigger_null.h"
 
 /*
  * The message box himself
@@ -32,25 +35,124 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
   UIWindow(egbase->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
   
      m_event=event;
-      UIMultiline_Textarea* m_text; 
-
-      int spacing=5;
-      log("Picture id is: %i\n", m_event->get_pic_id());
-      if(static_cast<int>(m_event->get_pic_id())!=-1) {
+     
+     UIMultiline_Textarea* m_text=0;
+     UITextarea* m_caption=0;
+       
+     int spacing=5;
+     int offsy=5;
+     int offsx=spacing;
+     int posx=offsx;
+     int posy=offsy;
+     
+     if(static_cast<int>(m_event->get_pic_id())==-1) {
+        // No picture, so we can optimaly assign all things its place
+        set_inner_size(400,300);
+        m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
+        posy+=50;
+        m_text=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
+     } else {
+        // Picture there
         int picw, pich;
         g_gr->get_picture_size(m_event->get_pic_id(), &picw, &pich);
-        
-        //UIButton* b=new UIButton(this, get_inner_w()-picw-spacing, picw, 30, pich, 0, 0, 1); 
-        UIButton* b=new UIButton(this, 0, 0, get_inner_w(), get_inner_h(), 0, 0, 0); 
-//        b->set_enabled(false);
-        b->set_pic(m_event->get_pic_id());
+        UIButton* b;
+        switch(event->get_pic_position()) {
+           case Event_Message_Box::Right:
+              {
+                 set_inner_size(picw*2+2*spacing+50, pich+110);
+                 m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
+                 posy+=50;
+                 b=new UIButton(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, pich, 0, 0, 1); 
+                 b->set_enabled(false);
+                 b->set_pic(event->get_pic_id());
+                 m_text=new UIMultiline_Textarea(this, spacing, posy, get_inner_w()/2-2*spacing, pich, "", Align_Left);
+              }
+              break;
 
-        m_text=new UIMultiline_Textarea(this, spacing, 30, get_inner_w()-picw-3*spacing, get_inner_h()-2*spacing, "", Align_Left);
-     } else {
-        m_text=new UIMultiline_Textarea(this, 0,0,get_w(),get_h(), "", Align_Left);
+            case Event_Message_Box::Left:
+              {
+                 set_inner_size(picw*2+2*spacing+50, pich+110);
+                 m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
+                 posy+=50;
+                 b=new UIButton(this, spacing, posy, get_inner_w()/2-2*spacing, pich, 0, 0, 1); 
+                 b->set_enabled(false);
+                 b->set_pic(event->get_pic_id());
+                 m_text=new UIMultiline_Textarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, pich, "", Align_Left);
+              }
+              break;
+
+            case Event_Message_Box::Center_under:
+              {
+                 set_inner_size(picw+2*15, pich+300);
+                 m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
+                 posy+=50;
+                 b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1); 
+                 b->set_enabled(false);
+                 b->set_pic(event->get_pic_id());
+                 posy+=pich+spacing;
+                 m_text=new UIMultiline_Textarea(this, spacing, posy, get_inner_w()-2*spacing, get_inner_h()-2*spacing-posy, "", Align_Left);
+              }
+              break;
+
+            case Event_Message_Box::Center_over:
+              {
+                 ALIVE();
+                 set_inner_size(picw+2*15, pich+300);
+                 ALIVE();
+                 b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1); 
+                 ALIVE();
+                 b->set_enabled(false);
+                 ALIVE();
+                 b->set_pic(event->get_pic_id());
+                 ALIVE();
+                 posy+=pich+spacing;
+                 ALIVE();
+                 m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
+                 ALIVE();
+                 posy+=50;
+                 ALIVE();
+                 m_text=new UIMultiline_Textarea(this, spacing, posy, get_inner_w()-2*spacing, get_inner_h()-2*spacing-posy, "", Align_Left);
+                 ALIVE();
+              }
+              break;
+        }
      }
-     m_text->set_text(m_event->get_text());
+     ALIVE();
+     if(m_caption)
+        m_caption->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+     ALIVE();
+     if(m_text)
+        m_text->set_text(m_event->get_text());
+     ALIVE();
+
+
+     ALIVE();
+     // Buttons
+     int but_width=80;
+     int space=get_inner_w()-2*spacing;
+     space-=but_width*m_event->get_nr_buttons();
+     space/=m_event->get_nr_buttons()+1;
+     UIButton* b;
+     posx=spacing;
+     posy=get_inner_h()-30;
+     ALIVE();
+     for(int i=0; i<m_event->get_nr_buttons(); i++) {
+     ALIVE();
+        posx+=space;
+     ALIVE();
+        b=new UIButton(this, posx, posy, but_width, 20, 0, i);
+     ALIVE();
+        posx+=but_width;
+     ALIVE();
+        b->clickedid.set(this, &Message_Box_Event_Message_Box::clicked);
+     ALIVE();
+        b->set_title(m_event->get_button_name(i));
+     ALIVE();
+     } 
+     
+     ALIVE();
      center_to_parent();
+     ALIVE();
 }
 
 
@@ -81,6 +183,17 @@ void Message_Box_Event_Message_Box::clicked(int i) {
          die();
          return;
       }
+   } else {
+      // One of the buttons has been pressed
+      if(m_event->get_nr_buttons()<=1) {
+         clicked(-1);
+         return;
+      } else {
+         Trigger_Null* t=m_event->get_button_trigger(i);
+         if(t)
+            t->set_trigger_manually(true);
+      }
+      clicked(-1);
+      return;
    }
-
 }

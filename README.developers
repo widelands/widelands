@@ -46,17 +46,18 @@ Here i'll talk very shortly about triggers and events and how they are implement
 Triggers are exactly what they sound like: Simple triggers (switches) which can 
 either be on or off. Triggers are checked periodically in the cmdqueue if they
 are set or not. The cmdqueue makes sure that each trigger is checked at least
-once every 10 seconds. So this is the problem with the triggers. For example,
-you have set a Time Trigger, which should go to on after 20 seconds. Now, it
-really gets set after 20-30 seconds; same: it could take up to 10 seconds before
+once every second. So this is the problem with the triggers. For example,
+you have set a Time Trigger, which should go to on after 2 seconds. Now, it
+really gets set after 20-21 seconds; same: it could take up to 1 seconds before
 an event occurs that should be tackled by one trigger; even worse: it could take
-up to 10*number_of_triggers_the_event_needs_to_be_set. 
+up to number_of_triggers_the_event_needs_to_be_set seconds. So the way triggers are
+checked may change in the future when this proofs as to slow.
 
 If you want to implement a new trigger, here is what to do. First, make sure
 that: 
-  1) if your trigger sets/unsets itself in the check function, make sure that it stays
-     set/unset, even if it's condition changes again until it is reset by some
-     event. Than it behave on a check like expected
+  1) if your trigger sets/unsets itself in the check function, make sure that it 
+     stays set/unset, even if it's condition changes again until it is reset by 
+     some event. Than it behave on a check like expected
   2) if your trigger triggers only once through the whole game, make sure that
      your reset function assert(0)s and that it's check function never ever
      changes the state again after this first time.
@@ -64,7 +65,7 @@ that:
 Ok, now the steps to implement a new Trigger:
   1) Add its id in src/trigger_ids.h (TRIGGER_<YOUR_TRIGGER_NAME>)
   2) Add its description, name and id into TRIGGER_DESCRIPTIONS[] in
-      src/trigger_factor.h, update also the functions ther
+      src/trigger_factor.cc, update also the functions ther
   3) Derive a class Trigger_<Your_Trigger_Name> from Trigger (own header and
      source file, trigger_<your_name_here>.[h|cc]
   4) Create the Menu class as a modal window (no move, no other actions allowed
@@ -84,5 +85,19 @@ are in the state the event needs, the event runs itself. If the event can't reru
 again (a one timer), it deletes itself and frees all triggers that he needed, 
 if the triggers aren't referenced anymore, they also get deleted.
 
-What to do to implement a Trigger:
- TODO
+What to do to implement an Event:
+   1) Add its id in src/event_ids.h 
+   2) Add its description in src/event_factory.cc and update the functions 
+      there.
+   3) Derive a class Event_<Your Event Name> from class Event (own header
+      and source file)
+      make sure that you proper handle your resources,
+        memory stuff should be freed in destructor
+        trigger should be released in cleanup and reinitialized/freed
+        in reinitialize_own(). if all triggers are already released in 
+        reinitialize own, cleanup must detect this and not release them 
+        again
+   4) Create the Option-Menu class as a modal window in
+         src/editor/ui_menus/event_<event name here>.[h|cc]
+And that's all. Orientat yourself on the already implemented classes.
+

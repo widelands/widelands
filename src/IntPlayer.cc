@@ -99,8 +99,6 @@ Initialize
 */
 Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g)
 {
-
-
    // Setup all screen elements
 	m_game = g;
 	m_player_number = plyn;

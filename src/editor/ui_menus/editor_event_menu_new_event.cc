@@ -54,6 +54,7 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* par
       Event_Descr* d=Event_Factory::get_correct_event_descr(i);
       m_event_list->add_entry(d->name, d);
    }
+   m_event_list->sort();
 
    // Descr List
    new UITextarea(this, (get_inner_w()/2)+spacing, offsy, "Description: ", Align_Left);
@@ -123,7 +124,7 @@ void Editor_Event_Menu_New_Event::clicked(int i) {
  * the listbox got selected
  */
 void Editor_Event_Menu_New_Event::selected(int i) {
-   Event_Descr* d=Event_Factory::get_correct_event_descr(i);
+   Event_Descr* d=static_cast<Event_Descr*>(m_event_list->get_selection());
    m_description->set_text(d->descr);
    m_ok_button->set_enabled(true);
 }

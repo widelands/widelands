@@ -27,21 +27,23 @@ class Game;
 class PlayerDescriptionGroup;
 class UIButton;
 class UITextarea;
+class Map_Loader;
 
 /**
  * Fullscreen menu to select map and to set map options.
  */
 class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Game* m_game;
-
+   Map_Loader** m_ml;
+   
 	UIButton*						m_ok;
 	UITextarea*					m_mapname;
 	PlayerDescriptionGroup* m_players[MAX_PLAYERS];
    bool                    m_is_scenario;
-   void back();
+   void clicked(int);
 
 public:
-	Fullscreen_Menu_LaunchGame(Game *g);
+	Fullscreen_Menu_LaunchGame(Game *g, Map_Loader**);
 
 	void think();
 

@@ -103,7 +103,7 @@ void Main_Menu_Load_Map::clicked(int id) {
 
    try {
       //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
-      ml->preload_map();
+      ml->preload_map(true);
 
       ml->load_map_complete(m_parent->get_editor(), true);
    }  catch(std::exception& exe) {

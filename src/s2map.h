@@ -137,7 +137,7 @@ class S2_Map_Loader : public Map_Loader {
       S2_Map_Loader(const char*, Map*);
       virtual ~S2_Map_Loader();
 
-      virtual int preload_map();
+      virtual int preload_map(bool);
       virtual int load_map_complete(Editor_Game_Base*, bool scenario);
 
    private:

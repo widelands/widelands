@@ -40,27 +40,41 @@ Widelands_Map_Player_Names_And_Tribes_Data_Packet::~Widelands_Map_Player_Names_A
  * this is a scenario packet, it might be that we have to skip it
  */
 void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase) throw(wexception) {
+   Pre_Read(fr, egbase->get_map());
+}
 
+/*
+ * Pre Read function
+ */
+void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileRead* fr, Map* map) {
    // First packet version
    int packet_version=fr->Unsigned16();
 
-   Map* map=egbase->get_map();
    if(packet_version==CURRENT_PACKET_VERSION) {
-      std::string name, tribe;
+     ALIVE();
+     std::string name, tribe;
+     ALIVE();
       int i;
+     ALIVE();
+     log("Nr Players: %i\n", map->get_nrplayers());
       for(i=1; i<=map->get_nrplayers(); i++) {
+     ALIVE();
          name=fr->CString();
+     ALIVE();
          tribe=fr->CString();
+     ALIVE();
          if(!get_scenario_skip()) {
+            log("setting name/tribe of %i to %s/%s\n", i,name.c_str(), tribe.c_str());
             map->set_scenario_player_name(i,name);
+     ALIVE();
             map->set_scenario_player_tribe(i,tribe);
+     ALIVE();
          }
       }
       return;
    }
-   assert(0); // never here
+   throw wexception("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i\n", packet_version); 
 }
-
 
 /*
  * Write Function

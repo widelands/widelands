@@ -20,19 +20,23 @@
 
 #include "editorinteractive.h"
 #include "trigger_time.h"
+#include "trigger_null.h"
 #include "trigger_ids.h"
 #include "trigger_factory.h"
 #include "error.h"
 #include "wexception.h"
 #include "trigger_time_option_menu.h"
+#include "trigger_null_option_menu.h"
 
 static const int nr_of_triggers=2;
 
 Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
    { TRIGGER_TIME, "Time Trigger", "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when"
                       "the wait time is over for repeating events" },
-   { TRIGGER_OWN_AREA, "Own Area Trigger", "This Trigger gets set when the configured field is owned by the configured player. If it isn't a one timer"
-                            "it unsets itself again when the area is no longer owned by the player and resets itselt when it is again" },
+   { TRIGGER_NULL, "Null Trigger", "This Trigger never changes its state by itself. It is useful "
+                        "to pass it to some event which changes triggers" },
+/*   { TRIGGER_OWN_AREA, "Own Area Trigger", "This Trigger gets set when the configured field is owned by the configured player. If it isn't a one timer"
+                            "it unsets itself again when the area is no longer owned by the player and resets itselt when it is again" },*/
 };
 
 
@@ -42,6 +46,7 @@ Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
 Trigger* Trigger_Factory::get_correct_trigger(uint id) {
    switch(id) {
       case TRIGGER_TIME: return new Trigger_Time(); break;
+      case TRIGGER_NULL: return new Trigger_Null(); break;
       default: break;
    }
    throw wexception("Trigger_Factory::get_correct_trigger: Unknown trigger id found: %i\n", id);
@@ -63,6 +68,7 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(uint id, Editor_Intera
    int retval=-100;
    switch(id) {
       case TRIGGER_TIME: { Trigger_Time_Option_Menu* t=new Trigger_Time_Option_Menu(m_parent, static_cast<Trigger_Time*>(trig)); retval=t->run(); delete t; } break; 
+      case TRIGGER_NULL: { Trigger_Null_Option_Menu* t=new Trigger_Null_Option_Menu(m_parent, static_cast<Trigger_Null*>(trig)); retval=t->run(); delete t; } break; 
       default: break;
    }
    if(retval==-100) 

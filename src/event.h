@@ -43,12 +43,14 @@ class Event {
       // virtual functions, implemented by the real events 
       virtual void run(Game*)=0;
       virtual uint get_id(void)=0; // this function is needed to recreate the correct option window
-      virtual void cleanup(Map* )=0;     // some events have things registered, which they must free
+      virtual void cleanup(Editor_Game_Base*); // release triggers, no memory release
+      virtual void reinitialize(Game*);             // can be overwritten to reintialize stuff in the child class
 
       // Functions needed by all
       void set_name(const char* name) { m_name=name; }
       void set_name(std::string name) { m_name=name; }
       inline const char* get_name() { return m_name.c_str(); }
+      
        
       void register_trigger(Trigger*, Map*, bool up );
       void unregister_trigger(Trigger*, Map*);
@@ -69,13 +71,11 @@ class Event {
       virtual void Read(FileRead*, Editor_Game_Base*, bool)=0;
       
 
-
    protected:
       // only for child classes
       void write_triggers(FileWrite*, Editor_Game_Base*);
       void read_triggers(FileRead*, Editor_Game_Base*, bool);
-      void reinitialize(Game*);
-      
+
    private:
       struct Trigger_Info {
          Trigger* t;

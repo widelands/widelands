@@ -21,6 +21,7 @@
 #define __S__EVENT_MESSAGE_BOX_OPTION_MENU_H
 
 #include <string>
+#include <vector>
 #include "ui_window.h"
 
 class Editor_Interactive;
@@ -78,6 +79,8 @@ class Event_Message_Box_Option_Menu : public UIWindow {
       uint         m_picid;
       int         m_position;
       bool        m_clrkey;
+
+      std::vector<int> m_null_triggers;
 };
 
 #endif

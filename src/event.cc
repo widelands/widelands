@@ -101,17 +101,34 @@ bool Event::check_triggers(void) {
  * Release all triggers and unregister this event if it is a one timer.
  */
 void Event::reinitialize(Game* game) {
-   Map* map=game->get_map();
+     ALIVE();
    if(is_one_time_event()) {
-      while(get_nr_triggers())
-         unregister_trigger(m_triggers[0].t, map);
-      map->unregister_event(this);
+     ALIVE();
+     Event::cleanup(game);
+     ALIVE();
    } else {
       // toggle all those triggers back
       int i=0; 
       for(i=0; i<get_nr_triggers(); i++) 
          m_triggers[i].t->reset_trigger(game);
    }
+     ALIVE();
+}
+
+
+/*
+ * Cleanup
+ */
+void Event::cleanup(Editor_Game_Base* g) {
+     ALIVE();
+   Map* map=g->get_map();
+     ALIVE();
+   while(get_nr_triggers())
+      unregister_trigger(m_triggers[0].t, map);
+     ALIVE();
+   log("Unregistering event: %s. %p\n", get_name(), this);
+   g->get_map()->unregister_event(this);  
+   ALIVE();
 }
 
 /*
@@ -138,4 +155,4 @@ bool Event::set_reacts_when_trigger_is_set(Trigger* t, bool up) {
    }
    assert(0);
 } 
- 
+

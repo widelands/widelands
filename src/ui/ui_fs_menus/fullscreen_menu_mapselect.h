@@ -29,7 +29,7 @@ class Map_Loader;
 class UIButton;
 class UIMultiline_Textarea;
 class UITextarea;
-
+class Map_Loader;
 class Editor_Game_Base;
 
 /**
@@ -49,12 +49,12 @@ class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 
 	filenameset_t	m_mapfiles;
 
-	Map_Loader*			m_maploader;
+	Map_Loader**		m_ml;
 	Map*              m_map;
    bool              m_is_scenario;
 
 public:
-	Fullscreen_Menu_MapSelect(Editor_Game_Base *g);
+	Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader**);
 	~Fullscreen_Menu_MapSelect();
 
 	const char *get_mapname() { return (const char*)list->get_selection(); }

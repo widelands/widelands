@@ -36,13 +36,15 @@ Fullscreen_Menu_MapSelect
 */
 
 
-Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
+Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Loader** ml)
 	: Fullscreen_Menu_Base("choosemapmenu.jpg")
 {
 	egbase = g;
-	m_maploader = 0;
    m_map = new Map;
    m_is_scenario = false;
+   m_ml=ml;
+   if(*m_ml) delete *m_ml;
+   *m_ml=0;
 
 	// Text
    UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, "Choose your map!", Align_HCenter);
@@ -105,10 +107,6 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
 
 Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
 {
-	if (m_maploader) {
-		delete m_maploader;
-		m_maploader = 0;
-	}
    if(m_map) {
       // upsy, obviously ok was not pressed
       delete m_map;
@@ -127,14 +125,11 @@ void Fullscreen_Menu_MapSelect::ok()
 {
 	if (m_map)
 	{
-		assert(m_maploader);
+		assert(*m_ml);
 
-		egbase->set_map(m_maploader->get_map());
-		m_maploader->load_map_complete(egbase, m_is_scenario);
+		egbase->set_map((*m_ml)->get_map());
+		(*m_ml)->preload_map(m_is_scenario);
 		m_map = 0;
-
-		delete m_maploader;
-		m_maploader = 0;
 	}
 
    if(m_is_scenario) 
@@ -145,9 +140,9 @@ void Fullscreen_Menu_MapSelect::ok()
 
 void Fullscreen_Menu_MapSelect::map_selected(int id)
 {
-	if (m_maploader) {
-		delete m_maploader;
-		m_maploader = 0;
+	if (*m_ml) {
+		delete *m_ml;
+      *m_ml = 0;
 	}
 
 	if (get_mapname())
@@ -155,8 +150,8 @@ void Fullscreen_Menu_MapSelect::map_selected(int id)
 		assert(m_map);
 
       try {
-         m_maploader = m_map->get_correct_loader(get_mapname());
-	      m_maploader->preload_map();
+         *m_ml = m_map->get_correct_loader(get_mapname());
+	      (*m_ml)->preload_map(m_is_scenario);
 
 			char buf[256];
 			taname->set_text(m_map->get_name());

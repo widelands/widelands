@@ -166,8 +166,11 @@ void Editor_Event_Menu::clicked(int id) {
       } else if(id==1) {
          // Delete event
          Event* event=static_cast<Event*>(m_event_list->get_selection());
-         event->cleanup(m_parent->get_map());
-         m_parent->get_map()->unregister_event(event);
+         // event unregisters itself from the map
+         event->cleanup(m_parent->get_egbase());
+         // Some paranoia
+         m_parent->get_map()->delete_unreferenced_triggers();
+         m_parent->get_map()->delete_events_without_trigger();
          update();
       } else if(id==2) {
          Event* event=static_cast<Event*>(m_event_list->get_selection());

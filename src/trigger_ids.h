@@ -29,7 +29,7 @@
  */
 enum {
    TRIGGER_TIME = 0,
-   TRIGGER_OWN_AREA,
+   TRIGGER_NULL,
 };
 
 #endif

@@ -32,6 +32,8 @@ class Widelands_Map_Player_Names_And_Tribes_Data_Packet : public Widelands_Map_D
 
       virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
       virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
+
+      void Pre_Read(FileRead*, Map*);
 };
 
 

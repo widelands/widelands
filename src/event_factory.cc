@@ -31,7 +31,8 @@
 static const int nr_of_events=1;
 
 Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
-   { EVENT_MESSAGE_BOX, "Message Box", "This Event shows a messagebox." },
+   { EVENT_MESSAGE_BOX, "Message Box", "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned"
+                                       " to each button to use this as a Choose Dialog for the user" },
 };
 
 /*

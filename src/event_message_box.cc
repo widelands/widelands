@@ -25,6 +25,7 @@
 #include "event_message_box_message_box.h"
 #include "map.h"
 #include "graphic.h"
+#include "trigger_null.h"
 
 static const int EVENT_VERSION = 1;
 
@@ -50,13 +51,33 @@ Event_Message_Box::~Event_Message_Box(void) {
 }
 
 /*
- * cleanup. release the triggers we've set
+ * cleanup()
  */
-void Event_Message_Box::cleanup(Map* map) {
-// The triggers, that we set are not yet dereferenced
-   int i=0; 
-   for(i=0; i<get_nr_buttons(); i++)
-      set_button_trigger(i,0,map);
+void Event_Message_Box::cleanup(Editor_Game_Base* g) {  
+   ALIVE();
+   uint i=0; 
+     ALIVE();
+   for(i=0; i<m_buttons.size(); i++) 
+      if(m_buttons[i].trigger) 
+         set_button_trigger(i, 0, g->get_map());
+     ALIVE();
+   m_buttons.resize(0);
+     ALIVE();
+
+     Event::cleanup(g);
+}
+
+/*
+ * reinitialize
+ */
+void Event_Message_Box::reinitialize(Game* g) {
+   ALIVE();
+   if(is_one_time_event()) {
+      cleanup(g); // Also calls event cleanup
+   } else {
+      Event::reinitialize(g);
+   }
+   ALIVE();
 }
 
 /*
@@ -71,7 +92,7 @@ void Event_Message_Box::set_nr_buttons(int i) {
 int Event_Message_Box::get_nr_buttons(void) {
    return m_buttons.size();
 }
-void Event_Message_Box::set_button_trigger(int i, Trigger* t, Map* map) {
+void Event_Message_Box::set_button_trigger(int i, Trigger_Null* t, Map* map) {
    assert(i<get_nr_buttons());
    if(m_buttons[i].trigger==t) return;
 
@@ -82,7 +103,7 @@ void Event_Message_Box::set_button_trigger(int i, Trigger* t, Map* map) {
       map->reference_trigger(t);
    m_buttons[i].trigger=t;
 }
-Trigger* Event_Message_Box::get_button_trigger(int i) {
+Trigger_Null* Event_Message_Box::get_button_trigger(int i) {
    assert(i<get_nr_buttons());
    return m_buttons[i].trigger;
 }
@@ -119,9 +140,12 @@ void Event_Message_Box::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) 
       for(i=0; i<get_nr_buttons(); i++) {
          set_button_name(i,fr->CString());
          int id=fr->Signed16();
-         if(id!=-1 && !skip) 
-            set_button_trigger(i, egbase->get_map()->get_trigger(id), egbase->get_map());
-         else
+         if(id!=-1 && !skip) {
+            Trigger* trig=egbase->get_map()->get_trigger(id);
+            if(trig->get_id()!=TRIGGER_NULL)
+               throw wexception("Trigger of message box %s is not a Null Trigger!\n", get_name());
+            set_button_trigger(i, static_cast<Trigger_Null*>(trig), egbase->get_map());
+         } else
             set_button_trigger(i,0,egbase->get_map()); 
       }
     
@@ -191,11 +215,19 @@ void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
  * check if trigger conditions are done
  */
 void Event_Message_Box::run(Game* game) {
-   new Message_Box_Event_Message_Box(game, this);
+
+   ALIVE();
+   Message_Box_Event_Message_Box* mb=new Message_Box_Event_Message_Box(game, this);
+   if(get_is_modal()) {
+      mb->run();
+      delete mb;
+   }
 
    // If this is a one timer, release our triggers 
    // and forget about us
+   ALIVE();
    reinitialize(game);
+   ALIVE();
 }
 
 

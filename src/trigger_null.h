@@ -17,23 +17,37 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_LOADER_H
-#define __S__WIDELANDS_MAP_LOADER_H
+#ifndef __S__TRIGGER_NULL_H
+#define __S__TRIGGER_NULL_H
 
-#include <string>
-#include "map_loader.h"
-#include "map.h"
+#include "trigger_ids.h"
+#include "trigger.h"
 
-class Widelands_Map_Loader : public Map_Loader {
+/*
+ * For documentation see the description in editor or trigger_factory.cc
+ * or see trigger.h
+ */
+class Trigger_Null : public Trigger {
    public:
-      Widelands_Map_Loader(const char* file, Map* map);
-      virtual ~Widelands_Map_Loader(void);
-   
-      virtual int preload_map(bool);
-      virtual int load_map_complete(Editor_Game_Base*, bool);
+      Trigger_Null();
+      ~Trigger_Null();
+      
+      // one liner functions
+      uint get_id(void) { return TRIGGER_NULL; } 
+
+      void check_set_conditions(Game*);
+      void reset_trigger(Game*);
+      
+      // File Functions
+      void Write(FileWrite*);
+      void Read(FileRead*);
+
+      void set_trigger_manually(bool t) { m_should_toggle=true; m_value=t; }
 
    private:
-      std::string m_filename;
+      bool m_should_toggle;
+      bool m_value;
 };
 
 #endif
+

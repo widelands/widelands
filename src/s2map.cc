@@ -82,14 +82,40 @@ get_author() and so on are called
 load the header
 ===========
 */
-int S2_Map_Loader::preload_map() {
+int S2_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
+
+   m_map->cleanup();
 
    load_s2mf_header();
 
    if(!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
+
+   if(scenario) {
+      // Load this as scenario. 
+      // there is no such a think as S2 scenarios, therefore
+      // set the tribes and some default names
+      
+      // Just for fun: some roman names
+      const char* names[] = {
+         "Marius",
+         "Avitus",
+         "Silvanus",
+         "Caius", 
+         "Augustus",
+         "Maximus",
+         "Titus",
+         "Rufus",
+      };
+        
+      for(int i=1; i<=m_map->get_nrplayers(); i++) { 
+         m_map->set_scenario_player_tribe(i, "romans");
+         m_map->set_scenario_player_name(i, names[i-1]);
+      }
+   }
+
 
    set_state(STATE_PRELOADED);
 
@@ -115,30 +141,6 @@ int S2_Map_Loader::load_map_complete(Editor_Game_Base* game, bool scenario) {
    m_map->m_world->postload(game);
    m_map->set_size(m_map->m_width, m_map->m_height);
    load_s2mf(game);
-
-   if(scenario) {
-      // Load this as scenario. 
-      // there is no such a think as S2 scenarios, therefore
-      // set the tribes and some default names
-      
-      // Just for fun: some roman names
-      const char* names[] = {
-         "Marius",
-         "Avitus",
-         "Silvanus",
-         "Caius", 
-         "Augustus",
-         "Maximus",
-         "Titus",
-         "Rufus",
-      };
-        
-      Map* map=game->get_map();
-      for(int i=1; i<=map->get_nrplayers(); i++) { 
-         map->set_scenario_player_tribe(i, "romans");
-         map->set_scenario_player_name(i, names[i-1]);
-      }
-   }
 
    m_map->recalc_whole_map();
 

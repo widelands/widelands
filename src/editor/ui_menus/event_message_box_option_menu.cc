@@ -32,6 +32,7 @@
 #include "error.h"
 #include "map.h"
 #include "graphic.h"
+#include "trigger_null.h"
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive* parent, Event_Message_Box* event) :
    UIWindow(parent, 0, 0, 430, 400, "Event Option Menu") {
@@ -165,6 +166,13 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    b->set_title("Cancel");
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
 
+   int i=0;
+   for(i=0; i<m_parent->get_map()->get_number_of_triggers(); i++) {
+      Trigger* trig=m_parent->get_map()->get_trigger(i);
+      if(trig->get_id()==TRIGGER_NULL) 
+         m_null_triggers.push_back(i);
+   }
+
    center_to_parent();
    update();
 }
@@ -222,7 +230,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
             for(int i=0; i<m_nr_buttons; i++) {
                m_event->set_button_name(i, m_buttons[i].name.c_str());
                if(m_buttons[i].trigger!=-1) {
-                  m_event->set_button_trigger(i, m_parent->get_map()->get_trigger(m_buttons[i].trigger), m_parent->get_map());
+                  m_event->set_button_trigger(i, static_cast<Trigger_Null*>(m_parent->get_map()->get_trigger(m_buttons[i].trigger)), m_parent->get_map());
                } else {
                   m_event->set_button_trigger(i, 0, m_parent->get_map());
                }
@@ -271,7 +279,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
          {
             // Trigger sel, down
             m_buttons[m_ls_selected].trigger--;
-            if(m_buttons[m_ls_selected].trigger<0) m_buttons[m_ls_selected].trigger=m_parent->get_map()->get_number_of_triggers()-1;
+            if(m_buttons[m_ls_selected].trigger<0) m_buttons[m_ls_selected].trigger=m_null_triggers.size()-1;
             update();
          }
          break;
@@ -281,7 +289,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
          {
             // Trigger sel, up
             m_buttons[m_ls_selected].trigger++;
-            if(m_buttons[m_ls_selected].trigger>=m_parent->get_map()->get_number_of_triggers()) 
+            if(m_buttons[m_ls_selected].trigger>=static_cast<int>(m_null_triggers.size()))
                m_buttons[m_ls_selected].trigger=0;
             update();
          }
@@ -305,7 +313,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
 void Event_Message_Box_Option_Menu::update(void) {
    if(m_ls_selected>=m_nr_buttons) m_buttons_ls->select(0);
   
-if(!m_parent->get_map()->get_number_of_triggers()) {
+   if(!m_null_triggers.size()) {
       // No triggers, no other buttons
       m_nr_buttons=1;
    } 

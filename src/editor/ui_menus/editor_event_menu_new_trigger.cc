@@ -54,6 +54,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
       Trigger_Descr* d=Trigger_Factory::get_correct_trigger_descr(i);
       m_trigger_list->add_entry(d->name, d);
    }
+   m_trigger_list->sort();
 
    // Descr List
    new UITextarea(this, (get_inner_w()/2)+spacing, offsy, "Description: ", Align_Left);
@@ -126,7 +127,7 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
  * the listbox got selected
  */
 void Editor_Event_Menu_New_Trigger::selected(int i) {
-   Trigger_Descr* d=Trigger_Factory::get_correct_trigger_descr(i);
+   Trigger_Descr* d=static_cast<Trigger_Descr*>(m_trigger_list->get_selection());
    m_description->set_text(d->descr);
    m_ok_button->set_enabled(true);
 }

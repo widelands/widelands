@@ -60,10 +60,17 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
 
    // MANDATORY PACKETS
    // Start with writing the map out, first Elemental data
+// PRELOAD DATA BEGIN
    dp= new Widelands_Map_Elemental_Data_Packet();
    dp->Write(&fw, m_egbase);
    delete dp;
 
+   // now player names and tribes 
+   dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
+   dp->Write(&fw, m_egbase);
+   delete dp;
+// PRELOAD DATA END
+   
    // now heights
    dp=new Widelands_Map_Heights_Data_Packet();
    dp->Write(&fw, m_egbase);
@@ -91,11 +98,6 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    
    // now resources
    dp=new Widelands_Map_Resources_Data_Packet();
-   dp->Write(&fw, m_egbase);
-   delete dp;
-
-   // now player names and tribes 
-   dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
    dp->Write(&fw, m_egbase);
    delete dp;
 

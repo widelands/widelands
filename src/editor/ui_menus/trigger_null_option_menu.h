@@ -17,23 +17,35 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_LOADER_H
-#define __S__WIDELANDS_MAP_LOADER_H
+#ifndef __S__TRIGGER_NULL_OPTION_MENU_H
+#define __S__TRIGGER_NULL_OPTION_MENU_H
 
 #include <string>
-#include "map_loader.h"
-#include "map.h"
+#include "ui_window.h"
 
-class Widelands_Map_Loader : public Map_Loader {
+class Editor_Interactive;
+class Trigger_Null;
+class UIEdit_Box;
+
+/*
+ * This is a modal box - The user must end this first 
+ * before it can return
+ */
+class Trigger_Null_Option_Menu : public UIWindow {
    public:
-      Widelands_Map_Loader(const char* file, Map* map);
-      virtual ~Widelands_Map_Loader(void);
-   
-      virtual int preload_map(bool);
-      virtual int load_map_complete(Editor_Game_Base*, bool);
+      Trigger_Null_Option_Menu(Editor_Interactive*, Trigger_Null*);
+      ~Trigger_Null_Option_Menu();
+
+      bool handle_mouseclick(uint btn, bool down, int mx, int my);
 
    private:
-      std::string m_filename;
+      void clicked(int);
+
+      Trigger_Null* m_trigger;
+      Editor_Interactive* m_parent;
+      UIEdit_Box* m_name;
 };
 
 #endif
+
+

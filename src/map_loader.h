@@ -42,7 +42,7 @@ class Map_Loader {
       Map_Loader(const char*, Map*) { m_s=STATE_INIT; m_map=0; }
       virtual ~Map_Loader() { };
 
-      virtual int preload_map()=0;
+      virtual int preload_map(bool as_scenario)=0;
       virtual int load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
 
       inline Map* get_map() { return m_map; }

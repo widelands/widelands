@@ -60,10 +60,9 @@ class Trigger {
       virtual void Write(FileWrite*)=0;
       virtual void Read(FileRead*)=0;
       
-     
 
    protected:
-      // only for child classes
+      // This is only for child classes to toggle the trigger
       inline void set_trigger(bool t) { m_is_set=t; }
       
    private:

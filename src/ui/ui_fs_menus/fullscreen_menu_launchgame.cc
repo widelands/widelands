@@ -33,11 +33,12 @@ Fullscreen_Menu_LaunchGame
 ==============================================================================
 */
 
-Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g)
+Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, Map_Loader** ml)
 	: Fullscreen_Menu_Base("launchgamemenu.jpg")
 {
 	m_game = g;
    m_is_scenario = false;
+   m_ml=ml;
 
 	// Title
    UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Launch Game", Align_HCenter);
@@ -47,11 +48,11 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g)
 	UIButton* b;
 
 	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
-	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::back);
+	b->clickedid.set(this, &Fullscreen_Menu_LaunchGame::clicked);
 	b->set_title("Back");
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 1);
-	m_ok->clickedid.set(this, &Fullscreen_Menu_LaunchGame::end_modal);
+	m_ok->clickedid.set(this, &Fullscreen_Menu_LaunchGame::clicked);
 	m_ok->set_title("Start game");
 	m_ok->set_enabled(false);
 
@@ -83,39 +84,62 @@ void Fullscreen_Menu_LaunchGame::think()
 }
 
 /*
- * back has been pressed, clean the game up
- * so that nobody complains
- */
-void Fullscreen_Menu_LaunchGame::back() {
-   m_game->get_objects()->cleanup(m_game);
-   end_modal(0);
+ * a button has been pressed
+ * */
+void Fullscreen_Menu_LaunchGame::clicked(int id) {
+   if(id==0) {
+      // Back
+      m_game->get_objects()->cleanup(m_game);
+      end_modal(0);
+   } else {
+      // Ok
+      if(m_is_scenario) 
+         end_modal(2);
+      else 
+         end_modal(1);
+   }
 }
 
 
 void Fullscreen_Menu_LaunchGame::refresh()
 {
-	Map* map = m_game->get_map();
+   ALIVE();
+   Map* map = m_game->get_map();
+   ALIVE();
 	int maxplayers = 0;
+   ALIVE();
 
 	// update the mapname
 	if (map)
 	{
+   ALIVE();
 		m_mapname->set_text(map->get_name());
+   ALIVE();
 		maxplayers = map->get_nrplayers();
+   ALIVE();
 	}
 	else
 		m_mapname->set_text("(no map)");
 
+   ALIVE();
 	// update the player description groups
 	int i;
+   ALIVE();
 	for(i = 0; i < MAX_PLAYERS; i++) {
+   ALIVE();
       m_players[i]->allow_changes(true);
+   ALIVE();
 		m_players[i]->set_enabled(i < maxplayers);
+   ALIVE();
       if(m_is_scenario && (i<maxplayers) && map) {
          // set player to the by the map given
+   ALIVE();
          m_players[i]->allow_changes(false);
+   ALIVE();
          m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
+   ALIVE();
          m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
+   ALIVE();
       } else if(i<maxplayers && map ) {
          std::string name="Player ";
          if((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
@@ -123,18 +147,16 @@ void Fullscreen_Menu_LaunchGame::refresh()
          m_players[i]->set_player_name(name);
          m_players[i]->allow_changes(true);
       }
+   ALIVE();
    }
+   ALIVE();
 
 	m_ok->set_enabled(m_game->can_start());
 }
 
 void Fullscreen_Menu_LaunchGame::select_map()
 {
-   // Clean all the stuff up, so we can load
-   // TODO: This needs to be done properly
-   m_game->get_objects()->cleanup(m_game);
-   
-   Fullscreen_Menu_MapSelect* msm=new Fullscreen_Menu_MapSelect(m_game);
+   Fullscreen_Menu_MapSelect* msm=new Fullscreen_Menu_MapSelect(m_game, m_ml);
    if(msm->run()==2)
       m_is_scenario=true;
    else 

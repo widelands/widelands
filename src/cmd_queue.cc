@@ -167,18 +167,21 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
          int i=0;
          for(i=0; i<m_game->get_map()->get_number_of_events(); i++) {
             Event* ev=m_game->get_map()->get_event(i);
+            log("Checking event: %s\n", ev->get_name());
             bool is_one_timer=false;
             if(ev->check_triggers()) {
                // This event is ready to run
                is_one_timer=ev->is_one_time_event();
+               log("Run event!\n");
                ev->run(m_game);
+               log("Run done!\n");
                if(is_one_timer) // The event was a one timer and got therefore deleted. we have to make sure that i stays valid
-                  i--;
+                  --i;
             }
          }
       }
       // recheck next trigger in the time that all triggers get checked at least once ever 10 seconds
-      int time= m_game->get_map()->get_number_of_triggers() ? 10000/m_game->get_map()->get_number_of_triggers() : 30000;
+      int time= m_game->get_map()->get_number_of_triggers() ? 1000/m_game->get_map()->get_number_of_triggers() : 30000;
       queue(m_game->get_gametime() + time, SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, trigger_id, 0, 0);
       break;
    }

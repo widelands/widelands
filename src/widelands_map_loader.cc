@@ -19,6 +19,8 @@
 
 #include "widelands_map_loader.h"
 #include "widelands_map_elemental_data_packet.h"
+#include "widelands_map_player_names_and_tribes_data_packet.h"
+#include "widelands_map_data_packet_ids.h"
 #include "widelands_map_data_packet_factory.h"
 #include "filesystem.h"
 #include "map.h"
@@ -45,8 +47,10 @@ Widelands_Map_Loader::~Widelands_Map_Loader(void) {
  * the map class returns valid data for all 
  * the get_info() functions (_width, _nrplayers..)
  */
-int Widelands_Map_Loader::preload_map() {
+int Widelands_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
+   
+   m_map->cleanup();
 
    // Load elemental data block
    Widelands_Map_Elemental_Data_Packet mp;
@@ -54,11 +58,28 @@ int Widelands_Map_Loader::preload_map() {
 
    fr.Open(g_fs, m_filename.c_str());
    mp.Pre_Read(&fr, m_map);
+   log("Number of players: %i, scenario: %i\n", m_map->get_nrplayers(), scenario);
    
    if(!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
-   
+  
+   log("Number of players1: %i\n", m_map->get_nrplayers());
+
+   if(fr.Unsigned16()!=PACKET_PLAYER_NAM_TRIB) 
+      throw wexception("Wrong packet order in map!\n");
+
+   Widelands_Map_Player_Names_And_Tribes_Data_Packet* dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
+   log("Number of players2: %i\n", m_map->get_nrplayers());
+   if(!scenario) 
+      dp->set_scenario_skip(true);
+   else 
+      dp->set_scenario_skip(false);
+   log("Number of players3: %i\n", m_map->get_nrplayers());
+   dp->Pre_Read(&fr, m_map);
+   delete dp;
+
+   fr.Close();
    set_state(STATE_PRELOADED);
 
    return 0;

@@ -24,6 +24,7 @@
 #include "graphic.h"
 #include "player.h"
 #include "system.h"
+#include "map_loader.h"
 
 /** Game::Game(void)
  *
@@ -118,9 +119,12 @@ bool Game::run(void)
 
 	m_state = gs_menu;
 
-   Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this);
+   Map_Loader* ml=0;
+   Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, &ml);
+   ALIVE();
 	int code = lgm->run();
-	delete lgm;
+   ALIVE();
+   delete lgm;
 
 	if (code && get_map())
 	{
@@ -131,6 +135,11 @@ bool Game::run(void)
 		ipl = new Interactive_Player(this, 1);
       // inform base, that we have something interactive
       set_iabase(ipl);
+
+      // Now first, completly load the map
+      log("Loading map complete: %i\n", code);
+      ml->load_map_complete(this, code==2); // if code==2 is a scenario
+      delete ml;
 
 		postload();
 

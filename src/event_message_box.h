@@ -23,6 +23,9 @@
 #include <string>
 #include "event.h"
 
+class Trigger_Null;
+class Editor_Game_Base;
+
 /*
  * This event shows a message box
  */
@@ -35,7 +38,8 @@ class Event_Message_Box : public Event {
       uint get_id(void) { return EVENT_MESSAGE_BOX; } 
 
       void run(Game*);
-      void cleanup(Map*);
+      virtual void reinitialize(Game*);
+      virtual void cleanup(Editor_Game_Base* g);
 
       // File Functions
       void Write(FileWrite*, Editor_Game_Base*);
@@ -53,23 +57,27 @@ class Event_Message_Box : public Event {
       inline int  get_pic_position(void) { return m_pic_position; }
       inline void set_is_modal(bool t) {  m_is_modal=t; }
       inline bool get_is_modal(void) { return m_is_modal; }
-      void set_button_trigger(int i, Trigger* t, Map*);
-      Trigger* get_button_trigger(int i);
+      void set_button_trigger(int i, Trigger_Null* t, Map*);
+      Trigger_Null* get_button_trigger(int i);
       void set_button_name(int i, std::string);
       const char* get_button_name(int i);
       void set_nr_buttons(int i); 
       int get_nr_buttons(void); 
-      
-   private:
+     
       enum {
          Right = 0,
          Left,
          Center_under, 
          Center_over,
-      };
+      }; 
+   
+   protected:
+      
+   private:
+      
       struct Button_Descr {
          std::string name;
-         Trigger *trigger;
+         Trigger_Null *trigger;
       };
 
       std::string m_text;
