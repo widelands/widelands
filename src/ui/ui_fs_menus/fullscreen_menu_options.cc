@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "fullscreen_menu_options.h"
 #include "ui_button.h"
 #include "ui_textarea.h"

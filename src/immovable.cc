@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "editor_game_base.h"
 #include "error.h"
 #include "field.h"

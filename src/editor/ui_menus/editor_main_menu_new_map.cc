@@ -18,6 +18,7 @@
  */
 
 #include <string>
+#include <stdio.h>
 #include <vector>
 #include "editor_main_menu_new_map.h"
 #include "ui_window.h"

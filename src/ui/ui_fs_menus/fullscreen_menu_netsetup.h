@@ -21,6 +21,7 @@
 #define __S__NETSETUP_H
 
 #include <list>
+#include <string>
 
 #include "fullscreen_menu_base.h"
 

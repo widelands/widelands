@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "map.h"
 #include "ui_textarea.h"
 #include "ui_multilinetextarea.h"

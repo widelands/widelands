@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "error.h"
 #include "fullscreen_menu_loadgame.h"
 #include "game.h"

@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "editor_tool_noise_height_options_menu.h"
 #include "editorinteractive.h"
 #include "ui_button.h"

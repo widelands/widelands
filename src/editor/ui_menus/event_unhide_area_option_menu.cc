@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "event_unhide_area_option_menu.h"
 #include "event_unhide_area.h"
 #include "ui_window.h"

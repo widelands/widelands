@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include <string>
 #include "ui_textarea.h"
 #include "ui_editbox.h"

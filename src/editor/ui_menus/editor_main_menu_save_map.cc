@@ -18,6 +18,7 @@
  */
 
 #include <string>
+#include <stdio.h>
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_main_menu_save_map.h"

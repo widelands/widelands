@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "editor_toolsize_menu.h"
 #include "editorinteractive.h"
 #include "ui_textarea.h"

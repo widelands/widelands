@@ -18,6 +18,7 @@
  */
 
 #include <cstdarg>
+#include <stdio.h>
 #include <string>
 #include "cmd_queue.h"
 #include "error.h"

@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "animation.h"
 #include "bob.h"
 #include "error.h"

@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "productionsite.h"
 #include "production_program.h"
 #include "profile.h"

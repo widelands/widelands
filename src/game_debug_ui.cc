@@ -18,6 +18,7 @@
  */
 // UI classes for real-time game debugging
 
+#include <stdio.h>
 #include "bob.h"
 #include "field.h"
 #include "graphic.h"

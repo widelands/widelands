@@ -18,6 +18,7 @@
  */
 
 #include <algorithm>
+#include <stdio.h>
 #include "overlay_manager.h"
 #include "filesystem.h"
 #include "map.h"

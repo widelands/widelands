@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "bob.h"
 #include "critter_bob.h"
 #include "critter_bob_program.h"

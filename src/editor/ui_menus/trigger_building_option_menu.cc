@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "trigger_building_option_menu.h"
 #include "trigger_building.h"
 #include "ui_window.h"

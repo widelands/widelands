@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "editor_game_base.h"
 #include "font_handler.h"
 #include "graphic.h"

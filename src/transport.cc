@@ -26,6 +26,7 @@ Flags, Roads, the logic behind ware pulls and pushes.
 */
 
 #include <cstdarg>
+#include <stdio.h>
 #include "cmd_queue.h"
 #include "editor_game_base.h"
 #include "error.h"

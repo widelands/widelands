@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "event_move_view_option_menu.h"
 #include "event_move_view.h"
 #include "ui_window.h"

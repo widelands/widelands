@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "animation.h"
 #include "constructionsite.h"
 #include "editor_game_base.h"

@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "event_conquer_area_option_menu.h"
 #include "event_conquer_area.h"
 #include "ui_window.h"

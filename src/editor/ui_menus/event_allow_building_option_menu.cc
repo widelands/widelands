@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "editor.h"
 #include "editorinteractive.h"
 #include "error.h"

@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "editor_info_tool.h"
 #include "ui_multilinetextarea.h"
 #include "ui_window.h"

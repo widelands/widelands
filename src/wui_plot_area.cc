@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "constants.h"
 #include "font.h"
 #include "font_handler.h"

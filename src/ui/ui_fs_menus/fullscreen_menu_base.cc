@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include "fullscreen_menu_base.h"
 #include "graphic.h"
 #include "options.h"
