@@ -45,7 +45,7 @@ class Button {
 					 ~Button();
 
 					 void set_pic(Pic*);
-					 void draw();
+					 int draw();
 
 					 /** static void Button::set_bg(Pic* p, unsigned int n) 
 					  *
@@ -113,8 +113,8 @@ class Button {
 					 }
 
 					 // some functions to set informations and to get informations
-					 inline void set_bright(const bool b) { if(benlighted!=b) { benlighted=b; draw(); }  }
-					 inline void set_pressed(const bool b) { if(bpressed!=b) { bpressed=b; draw() ; } }
+					 inline void set_bright(const bool b) { if(benlighted!=b) { benlighted=b; needs_draw=true; }  }
+					 inline void set_pressed(const bool b) { if(bpressed!=b) { bpressed=b; needs_draw=true ; } }
 					 inline unsigned int get_xpos(void) { return x+xp; }
 					 inline unsigned int get_ypos(void) { return y+yp; }
 					 inline unsigned int get_w(void) { return w; }
@@ -122,6 +122,7 @@ class Button {
 					 inline bool is_pressed(void) { return bpressed; } 
 					 
 		  private:
+					 bool needs_draw;
 					 bool bpressed;
 					 bool	benlighted;
 					 static Pic bg0, bg1, bg2, bg0e, bg1e, bg2e;
@@ -170,7 +171,13 @@ class Textarea {
 					  * Returns:	nothing
 					  */
 					 static void set_font(unsigned int n) { nfont=n; }
-
+			
+					 // some information funcs
+					 inline unsigned int get_xpos(void) { return x+xp; }
+					 inline unsigned int get_ypos(void) { return y+yp; }
+					 inline unsigned int get_w(void) { return w; }
+					 inline unsigned int get_h(void) { return h; }
+	
 					 
 		  private: 
 					 static unsigned int nfont;

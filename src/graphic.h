@@ -212,6 +212,8 @@ namespace Graph {
 			* 
 			* It's a singleton
 			*/
+		  #define MAX_RECTS 20
+		  
 		  class Graphic : public Singleton<Graphic> {
 					 // forbidden functions
 					 Graphic(const Graphic&);
@@ -233,9 +235,8 @@ namespace Graph {
 					 ~Graphic(void);
 
 					 void set_mode(const unsigned short, const unsigned short, const Mode);
-					 void update_screen(void);
-					 void update_rect(const unsigned short, const unsigned short, const unsigned short, const unsigned short);
-					 void update_quarter(void);
+					 void register_update_rect(const unsigned short, const unsigned short, const unsigned short, const unsigned short);
+					 void update(void);
 
 					 /** Graphic::State Graphic::get_state(void) 
 					  *
@@ -271,14 +272,14 @@ namespace Graph {
 					  */
 					 inline unsigned int get_yres(void) const { return yres; }
 
-					 /** inline void Graphics::needs_update(void) 
+					 /** inline void Graphics::needs_fs_update(void) 
 					  *
-					  * This functions tells the graphic that it should redraw itself
+					  * This functions tells the graphic that it should redraw the whole screen
 					  *
 					  * Args: None
 					  * returns: Nothing
 					  */
-					 inline void needs_update(void) { bneeds_update=true; }
+					 inline void needs_fs_update(void) { bneeds_fs_update=bneeds_update=true; }
 
 					 /** inline bool does_need_update(void) 
 					  *
@@ -358,7 +359,9 @@ namespace Graph {
 					 Mode mode;
 					 SDL_Surface* sc;
 					 State st;
-
+					 SDL_Rect upd_rects[MAX_RECTS];
+					 unsigned int nupr;
+					 bool bneeds_fs_update;
 					 bool bneeds_update;
 		  };
 

@@ -24,6 +24,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// #include <iostream>
 namespace Graph {
 
 		  /** class Graphic
@@ -47,7 +48,9 @@ namespace Graph {
 					 pixels=NULL;
 					 xres=yres=0;
 					 st=STATE_NOT_INIT;
-
+					 nupr=0;
+					 bneeds_fs_update=false;
+					 
 					 SDL_Init(SDL_INIT_VIDEO);
 		  }
 
@@ -67,7 +70,7 @@ namespace Graph {
 					 pixels=NULL;
 					 xres=yres=0;
 					 st=STATE_NOT_INIT;
-
+					 
 					 SDL_Quit();
 		  }
 
@@ -102,65 +105,53 @@ namespace Graph {
 					 return;
 		  }
 
-		  /** void Graphic::update_screen(void);
-			* 
-			* This updates the whole screen
+		  /** void Graphic::register_update_rect(const unsigned short x, const unsigned short y, const unsigned short w, const unsigned short h);
 			*
-			* Args: None
-			* Returns: Nothing
-			*/
-		  void Graphic::update_screen(void) {
-					 if(!sc) {
-								st=STATE_ERROR;
-								return;
-					 }
-
-					 SDL_UpdateRect(sc, 0, 0, xres, yres);
-
-					 bneeds_update=false;
-		  }
-		  
-		  /** void Graphic::update_rect(const unsigned short x, const unsigned short y, const unsigned short w, const unsigned short h);
-			*
-			* This updates a rect of the screen
+			* This registers a rect of the screen for update 
 			*
 			* Args: 	x	upper left corner of rect
 			* 			y  upper left corner of rect
 			* 			w	width
 			* 			h	height
 			*/
-		  void Graphic::update_rect(const unsigned short x, const unsigned short y, const unsigned short w, const unsigned short h) {
-					 if(!sc) {
-								st=STATE_ERROR;
-								return;
+		  void Graphic::register_update_rect(const unsigned short x, const unsigned short y, const unsigned short w, const unsigned short h) {
+					 if(nupr>=MAX_RECTS) { 
+								bneeds_fs_update=true; 
+								return; 
 					 }
+					 
+					upd_rects[nupr].x=x;
+					upd_rects[nupr].y=y;
+					upd_rects[nupr].w=w;
+					upd_rects[nupr].h=h;
+				
+					++nupr;
 
-					 SDL_UpdateRect(sc, x, y, w, h);
-					 bneeds_update=false;
+					bneeds_update=true;
 		  }
 
-		  /** void Graphic::update_quarter(void) 
+		  /** void Graphic::update(void) 
 			*
-			* This function updates a bit of the screen, but this bit moves around each time
-			* this function gets called. 
-			* So it's made sure, that the whole screen gets updated, when this function gets called
-			* every frame
+			*	This function updates the registered rects on the screen
 			*
 			* Args: none
 			* Returns: Nothing
 			*/
-		  void Graphic::update_quarter(void) {
-					static unsigned int x; 
-					static unsigned int y;
-					static unsigned int xadd=xres/4;
-					static unsigned int yadd=yres/4;
-
-					if(x==xres) { x=0; y+=yadd; }
-					if(y==yres) y=0;
-
-					SDL_UpdateRect(sc, x, y, xadd, yadd);
-					x+=xadd;
-					bneeds_update=false;
+		  void Graphic::update(void) {
+					 if(bneeds_fs_update) {
+								SDL_UpdateRect(sc, 0, 0, xres, yres);
+					 } else {
+	/*							cerr << "##########################" << endl;
+								cerr << nupr << endl;
+								for(unsigned int i=0; i<nupr; i++) 
+										  cerr << upd_rects[i].x << ":" << upd_rects[i].y << ":" << 
+													 upd_rects[i].w << ":" << upd_rects[i].h << endl;
+								cerr << "##########################" << endl;
+	*/							SDL_UpdateRects(sc, nupr, upd_rects);
+					 }
+					 nupr=0;
+					 bneeds_fs_update=false;
+					 bneeds_update=false;
 		  }
 		  
 		  /** void draw_pic(Pic* p, const unsigned short d_x_pos, const unsigned short d_y_pos,  const unsigned short p_x_pos, 

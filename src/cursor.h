@@ -45,6 +45,10 @@ class Cursor : public Singleton<Cursor> {
 					 void show_cursor(const bool);
 					 void set_pic(Pic* );
 					 void draw(const unsigned int, const unsigned int);
+					 
+					 // some information functions
+					 inline unsigned int get_w(void) { return pic->get_w(); }
+					 inline unsigned int get_h(void) { return pic->get_h(); }
 
 		  private:
 					 bool show_c;

@@ -83,6 +83,7 @@ Window::Window(const unsigned int px, const unsigned int py, const unsigned int 
 		  own_bg=0;					
 
 		  redraw_win();
+		  g_gr.register_update_rect(x, y, w, h);
 }
 
 /** Window::~Window()
@@ -95,6 +96,8 @@ Window::Window(const unsigned int px, const unsigned int py, const unsigned int 
 Window::~Window(void) {
 		  unsigned int i;
 		  
+		  g_gr.register_update_rect(x, y, w, h);
+		  
 		  for(i=0 ; i< nta; i++) 
 					 delete ta[i];
 		  free(ta);
@@ -106,7 +109,6 @@ Window::~Window(void) {
 		  delete winpic;
 		  if(own_bg) delete own_bg;
 		  
-		  g_gr.needs_update();
 }
 
 /** void Window::set_pos(unsigned int posx, unsigned int posy)
@@ -122,7 +124,7 @@ Window::~Window(void) {
  */
 void Window::set_pos(unsigned int posx, unsigned int posy) {
 		  x=posx; y=posy;
-		  draw();
+		  g_gr.register_update_rect(x, y, w, h);
 }
 					 
 /** Textarea Window::create_textarea(const unsigned int px, const unsigned int py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
@@ -150,6 +152,7 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
 		  
 		  ta[nta]=new Textarea(px, py, t, a, myw, myh, winpic, add, add);
 		  ta[nta]->draw();
+		  g_gr.register_update_rect(x+px, y+py, ta[nta]->get_w(), ta[nta]->get_h());
 		  nta++;
 
 		  assert(nta<MAX_TA);
@@ -178,6 +181,8 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
 		  if(py+add+FONT_H > h) mypy=h-FONT_H;
 
 		  ta[nta]=new Textarea(px, mypy, rw, a, winpic, add>>1, add>>1);
+		  ta[nta]->draw();
+		  g_gr.register_update_rect(x+px, y+py, ta[nta]->get_w(), ta[nta]->get_h());
 		  nta++;
 
 		  assert(nta<MAX_TA);
@@ -187,7 +192,7 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
 
 /** void Window::redraw_win(void) 
  *
- * PRIVATE FUNCTION to update the whole windpic
+ * PRIVATE FUNCTION to update the whole winpic
  *
  * Args: None
  * Returns: Nothing
@@ -197,8 +202,8 @@ void Window::redraw_win(void) {
 		  unsigned int px=x; 
 		  unsigned int py=y;
 		
-		  g_gr.needs_update();
-		 
+		  g_gr.register_update_rect(x, y, w, h);
+
 		  Pic* usebg= own_bg ? own_bg : &bg ;
 		
 		  if(myf != FLAT) {
@@ -268,8 +273,6 @@ void Window::redraw_win(void) {
 		  // Draw Buttons
 		  for(i=0; i< nbut; i++) 
 					 but[i]->draw();
-
-
 }
 					 
 /** Button* Window::create_button(const unsigned int px, const unsigned int py, const unsigned int rw, const unsigned int rh, const unsigned int bg)
@@ -298,6 +301,8 @@ Button* Window::create_button(const unsigned int px, const unsigned int py, cons
 		  
 		  
 		  but[nbut]=new Button(mypx, mypy, myw, myh, bg, winpic, add>>1, add>>1);
+		  but[nbut]->draw();
+		  g_gr.register_update_rect(x+px, y+py, but[nbut]->get_w(), but[nbut]->get_h());
 		  nbut++;
 
 		  assert(nbut<MAX_BUT);
@@ -315,7 +320,6 @@ Button* Window::create_button(const unsigned int px, const unsigned int py, cons
  */
 void Window::draw(void) {
 		  Graph::draw_pic(winpic, x, y, 0, 0, w, h);
-		  g_gr.needs_update();
 }
 					 
 /** void Window::set_new_bg(Pic* p);
@@ -332,6 +336,8 @@ void Window::set_new_bg(Pic* p) {
 		  own_bg=p;
 
 		  redraw_win();
+		  
+		  g_gr.register_update_rect(x, y, w, h);
 }
 					 
 /** int Window::handle_mm(const unsigned int x, const unsigned int y, const bool b1, const bool b2)
@@ -357,12 +363,14 @@ int Window::handle_mm(const unsigned int x, const unsigned int y, const bool b1,
 								but[i]->set_bright(false);
 								but[i]->set_pressed(false);
 					 }
+		  
+					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
 		  }
 					 
 
 		  // we do not care for ta, because they are non responsive to mouse movements or clicks
 		  
-		  return INPUT_UNHANDLED;
+		  return INPUT_HANDLED;
 }
 
 /** int Window::handle_click(const unsigned int pbut, const bool b, const unsigned int x, const unsigned int y) 
@@ -394,6 +402,8 @@ int Window::handle_click(const unsigned int pbut, const bool b, const unsigned i
 					 } else {
 								but[i]->set_pressed(false);
 					 }
+					 
+					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
 		  }
 			 
 		  
@@ -774,8 +784,7 @@ void Textarea::draw(void) const {
 		  }
 
 		  Graph::copy_pic(dp, txt, posx, yp+y, 0, 0, myw, h);
-		  
-		  g_gr.needs_update();
+
 }
 
 
@@ -835,11 +844,10 @@ Button::Button(const unsigned int mx, const unsigned int my, const unsigned int 
 
 		  bpressed=false;
 		  benlighted=false;
+		  needs_draw=true;
 
 		  func=0;
 		  funca=0;
-
-		  draw();
 }
 			
 /** Button::~Button(void) 
@@ -852,7 +860,6 @@ Button::Button(const unsigned int mx, const unsigned int my, const unsigned int 
 Button::~Button(void) {
 		  if(myp) delete myp;
 		  if(funca) free(funca);
-		  g_gr.needs_update();
 }
 					 
 
@@ -868,19 +875,22 @@ void Button::set_pic(Pic* p) {
 
 		  if(myp) delete myp;
 		  myp=p;
-
-		  draw();
-		  g_gr.needs_update();
+		  
+		  needs_draw=true;
 }
 
-/** void Button::draw(void) 
+/** int Button::draw(void) 
  *
  * This draws the button in the current pic
  *
  * Args: none
- * Returns: nothing
+ * Returns: 1 if it drawn something, 0 otherwise
  */
-void Button::draw(void) {
+int Button::draw(void) {
+		  if(!needs_draw) return 0;
+
+		  needs_draw=false;
+		  
 		  unsigned int j;
 		  unsigned short clr;
 		 
@@ -999,6 +1009,6 @@ void Button::draw(void) {
  
 		  }
 		 
-		  g_gr.needs_update();
+		  return 1;
 }
 		  

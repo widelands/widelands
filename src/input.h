@@ -87,6 +87,11 @@ class Input : public Singleton<Input> {
 					  */
 					 inline unsigned int get_mpy(void) { return mpy; }
 
+
+					 // functions to get the last mouse position
+					 inline unsigned int get_mplx(void) { return mplx; }
+					 inline unsigned int get_mply(void) { return mply; }
+
 					 /** inline bool Input::is_but_pressed(const Button b) 
 					  *
 					  * Checks if a button is pressed

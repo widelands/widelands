@@ -33,6 +33,7 @@
 
 #include <string.h>
 
+#include <SDL/SDL_thread.h>
 
 int click(const bool b, const unsigned int x, const unsigned int y, void* ) {
 		  if(g_ui.handle_click(1, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
@@ -46,8 +47,10 @@ int mcf1(const bool b, const unsigned int x, const unsigned int y, void*) {
 
 int mmf(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, 
 					 void* ) {
-		  if(g_ui.handle_mm(x, y, xdiff, ydiff, b1, b2, NULL) == INPUT_HANDLED) return INPUT_HANDLED;
-		  g_gr.needs_update();
+		  g_gr.register_update_rect(x, y, g_cur.get_w(), g_cur.get_h());
+		  g_gr.register_update_rect(g_ip.get_mplx(), g_ip.get_mply(), g_cur.get_w(), g_cur.get_h());
+
+		  g_ui.handle_mm(x, y, xdiff, ydiff, b1, b2, NULL); 
 
 		  return INPUT_HANDLED;
 }
@@ -78,7 +81,7 @@ void main_menue(void) {
 		  //unsigned int lx=g_gr.get_xres();
 		  //unsigned int ly=g_gr.get_yres();
 		  g_gr.set_mode(640, 480, g_gr.get_mode());
-		  g_ip.set_max_cords(640, 480);
+		  g_ip.set_max_cords(640-g_cur.get_w(), 480-g_cur.get_h());
 
 		  // make the background window, fill it with the splash screen
 		  Window* win=g_ui.create_window(0, 0, g_gr.get_xres(), g_gr.get_yres(), Window::FLAT);
@@ -128,7 +131,7 @@ void main_menue(void) {
 		  g_ip.register_mcf(click, Input::BUT1);
 		  g_ip.register_mcf(mcf1, Input::BUT2);
 	     g_ip.register_mmf(mmf);
-		 
+		
 		  Counter c;
 		  c.start();
 		  while(!g_ip.should_die()) {
@@ -136,7 +139,8 @@ void main_menue(void) {
 					 if(g_gr.does_need_update()) {
 								g_ui.draw();
 								g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
-								g_gr.update_screen(); // g_gr.update_quarter();
+								g_gr.update();
+								//g_gr.update_quarter();
 					 }
 		  }
 		  return; 

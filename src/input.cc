@@ -270,7 +270,5 @@ void Input::handle_pending_input(void) {
 										  break;
 					 }      
 		  }
-		  
-		  SDL_Delay(8);
 }
 
