@@ -495,6 +495,30 @@ void Bob::pop_task(Game* g)
 
 /*
 ===============
+Bob::get_state
+
+Get the bottom-most (usually the only) state of this task from the stack.
+Return 0 if this task is not running at all.
+===============
+*/
+Bob::State* Bob::get_state(Task* task)
+{
+	std::vector<State>::iterator it = m_stack.end();
+
+	while(it != m_stack.begin())
+	{
+		--it;
+
+		if (it->task == task)
+			return &*it;
+	}
+
+	return 0;
+}
+
+
+/*
+===============
 Bob::send_signal
 
 Sets the signal string and calls the current task's signal function, if any.

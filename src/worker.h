@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -243,6 +243,7 @@ public:
 
 private:
 	void find_pending_item(Game* g);
+	int find_closest_flag(Game* g);
 
 private: // internal task stuff
 	void road_update(Game* g, State* state);

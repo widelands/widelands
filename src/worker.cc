@@ -3018,23 +3018,73 @@ void Carrier::transport_update(Game* g, State* state)
 	// Move into waiting position if the flag is overloaded
 	if (!flag->has_capacity())
 	{
-		if (start_task_walktoflag(g, state->ivar1 ^ 1, true))
-			return;
+		Flag *otherflag = road->get_flag((Road::FlagId)state->ivar1);
 
-		// Wait one field away
-		start_task_waitforcapacity(g, flag);
-		return;
+		if (m_acked_ware == (state->ivar1 ^ 1))
+		{
+			// All is well, we already acked an item that we can pick up
+			// from this flag
+		}
+		else if (flag->has_pending_item(g, otherflag))
+		{
+			if (!flag->ack_pending_item(g, otherflag))
+				throw wexception("MO(%u): transport: overload exchange: flag %u is fucked up",
+							get_serial(), flag->get_serial());
+
+			m_acked_ware = state->ivar1 ^ 1;
+		}
+		else
+		{
+			if (start_task_walktoflag(g, state->ivar1 ^ 1, true))
+				return;
+
+			// Wait one field away
+			start_task_waitforcapacity(g, flag);
+			return;
+		}
 	}
 
 	// If there is capacity, walk to the flag
 	if (start_task_walktoflag(g, state->ivar1 ^ 1))
 		return;
 
+	// Drop the item, possible exchanging it with another one
+	WareInstance* otheritem = 0;
+
+	if (m_acked_ware == (state->ivar1 ^ 1)) {
+		otheritem = flag->fetch_pending_item(g, road->get_flag((Road::FlagId)state->ivar1));
+
+		if (!otheritem && !flag->has_capacity()) {
+			molog("[transport]: strange: acked ware from busy flag no longer present.\n");
+
+			m_acked_ware = -1;
+			set_animation(g, get_descr()->get_idle_anim());
+			schedule_act(g, 20);
+			return;
+		}
+
+		state->ivar1 = m_acked_ware;
+		m_acked_ware = -1;
+	}
+
 	item = fetch_carried_item(g);
 	flag->add_item(g, item);
 
-	molog("[transport]: back to idle.\n");
-	pop_task(g);
+	if (otheritem)
+	{
+		molog("[transport]: return trip.\n");
+
+		set_carried_item(g, otheritem);
+
+		set_animation(g, get_descr()->get_idle_anim());
+		schedule_act(g, 20);
+		return;
+	}
+	else
+	{
+		molog("[transport]: back to idle.\n");
+		pop_task(g);
+	}
 }
 
 
@@ -3077,6 +3127,30 @@ bool Carrier::notify_ware(Game* g, int flag)
 		return false;
 	}
 
+	// If we are currently in a transport.
+	// Explanation:
+	//  a) a different carrier / road may be better suited for this ware
+	//     (the transport code does not have priorities for the actual
+	//     carrier that is notified)
+	//  b) the transport task has logic that allows it to
+	//     drop an item on an overloaded flag iff it can pick up an item
+	//     at the same time.
+	//     We should ack said item to avoid more confusion before we move
+	//     onto the flag, but we can't do that if we have already acked
+	//     something.
+	//  c) we might ack for a flag that we are actually moving away from;
+	//     this will get us into trouble if items have arrived on the other
+	//     flag while we couldn't ack them.
+	//
+	// (Maybe the need for this lengthy explanation is proof that the
+	// ack system needs to be reworked.)
+	State* transport = get_state(&taskTransport);
+
+	if (transport) {
+		if ((transport->ivar1 == -1 && find_closest_flag(g) != flag) || flag == transport->ivar1)
+			return false;
+	}
+
 	// Ack it if we haven't
 	molog("notify_ware(%i)\n", flag);
 	m_acked_ware = flag;
@@ -3099,50 +3173,19 @@ accordingly.
 void Carrier::find_pending_item(Game* g)
 {
 	Road* road = (Road*)get_location(g);
-	CoordPath startpath;
-	CoordPath endpath;
-	int curidx = -1;
 	uint haveitembits = 0;
 
 	assert(m_acked_ware < 0);
 
 	if (road->get_flag(Road::FlagStart)->has_pending_item(g, road->get_flag(Road::FlagEnd)))
-	{
 		haveitembits |= 1;
 
-		startpath = road->get_path();
-
-		curidx = startpath.get_index(get_position());
-
-		startpath.truncate(curidx);
-		startpath.reverse();
-	}
-
 	if (road->get_flag(Road::FlagEnd)->has_pending_item(g, road->get_flag(Road::FlagStart)))
-	{
 		haveitembits |= 2;
-
-		endpath = road->get_path();
-
-		if (curidx < 0)
-			curidx = endpath.get_index(get_position());
-
-		endpath.starttrim(curidx);
-	}
 
 	// If both roads have an item, we pick the one closer to us
 	if (haveitembits == 3)
-	{
-		int startcost, endcost;
-
-		g->get_map()->calc_cost(startpath, &startcost, 0);
-		g->get_map()->calc_cost(endpath, &endcost, 0);
-
-		if (startcost < endcost)
-			haveitembits = 1;
-		else
-			haveitembits = 2;
-	}
+		haveitembits = (1 << find_closest_flag(g));
 
 	// Ack our decision
 	if (haveitembits == 1)
@@ -3172,6 +3215,57 @@ void Carrier::find_pending_item(Game* g)
 
 		return;
 	}
+}
+
+
+/*
+===============
+Carrier::find_closest_flag
+
+Find the flag we are closest to (in walking time).
+===============
+*/
+int Carrier::find_closest_flag(Game* g)
+{
+	Road* road = (Road*)get_location(g);
+	CoordPath startpath;
+	CoordPath endpath;
+	int startcost, endcost;
+	int curidx = -1;
+
+	startpath = road->get_path();
+	curidx = startpath.get_index(get_position());
+
+	// Apparently, we're in a building
+	if (curidx < 0) {
+		Coords pos = get_position();
+
+		g->get_map()->get_brn(pos, &pos);
+
+		if (pos == startpath.get_start())
+			curidx = 0;
+		else if (pos == startpath.get_end())
+			curidx = startpath.get_nsteps();
+		else
+			throw wexception("MO(%u): Carrier::find_closest_flag: not on road, not on building",
+						get_serial());
+	}
+
+	// Calculate the paths and their associated costs
+	endpath = startpath;
+
+	startpath.truncate(curidx);
+	startpath.reverse();
+
+	endpath.starttrim(curidx);
+
+	g->get_map()->calc_cost(startpath, &startcost, 0);
+	g->get_map()->calc_cost(endpath, &endcost, 0);
+
+	if (startcost <= endcost)
+		return 0;
+	else
+		return 1;
 }
 
 
