@@ -37,8 +37,8 @@
 #define MAX_FIELD_HEIGHT 60
 #define MAX_FIELD_HEIGHT_DIFF 5
 
-// TODO; Think, if we shouldn't call for each field a new() in map::set_size
-// and a delete - Holger
+// Think, if we shouldn't call for each field a new() in map::set_size
+// and a delete 
 // Okay, as it stands now, Field can be safely memset()ed to 0.
 //
 // No. In fact, you should view Field more as a plain old structure rather than

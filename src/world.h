@@ -22,6 +22,7 @@
 #include "bob.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
+#include "worlddata.h"
 
 class Section;
 class Editor_Game_Base;

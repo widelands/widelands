@@ -2892,19 +2892,43 @@ void Worker::geologist_update(Game* g, State* state)
 		ffa.add(&ffia, true);
 
 		if (map->find_reachable_fields(center, state->ivar2, &list, &cstep, ffa))
-		{
-			Coords target = list[g->logic_rand() % list.size()];
+      {
+         Coords target;
 
-			molog("[geologist]: Walk towards free field\n");
-			if (!start_task_movepath(g, target, 0, get_descr()->get_right_walk_anims(does_carry_ware())))
-			{
-				molog("[geologist]: BUG: couldn't find path\n");
-				set_signal("fail");
-				pop_task(g);
-				return;
-			}
-			return;
-		}
+         // is center a mountain piece?
+         bool is_center_mountain= (map->get_field(center)->get_terd()->get_is() & TERRAIN_MOUNTAIN) |
+            (map->get_field(center)->get_terr()->get_is() & TERRAIN_MOUNTAIN);  
+         // Only run towards fields that are on a mountain (or not)
+         // depending on position of center
+         bool is_target_mountain;
+         uint n=list.size();
+         uint i=g->logic_rand() % list.size();
+         do {
+            molog("[geologist] Searching for a suitable field!\n");
+            target = list[g->logic_rand() % list.size()];
+            is_target_mountain = (map->get_field(target)->get_terd()->get_is() & TERRAIN_MOUNTAIN) |
+               (map->get_field(target)->get_terr()->get_is() & TERRAIN_MOUNTAIN);
+            if(i==0) i=list.size();
+            --i;
+            --n;
+         } while( (is_center_mountain != is_target_mountain) && n );
+
+         if(!n) {
+            // no suitable field found, this is no fail, there's just nothing else to do
+            // so let's go home 
+            // FALLTHROUGH TO RETURN HOME
+         } else {
+            molog("[geologist]: Walk towards free field\n");
+            if (!start_task_movepath(g, target, 0, get_descr()->get_right_walk_anims(does_carry_ware())))
+            {
+               molog("[geologist]: BUG: couldn't find path\n");
+               set_signal("fail");
+               pop_task(g);
+               return;
+            }
+            return;
+         }
+      }
 
 		molog("[geologist]: Found no applicable field, going home\n");
 		state->ivar1 = 0;
