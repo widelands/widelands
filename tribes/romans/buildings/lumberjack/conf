@@ -15,10 +15,13 @@ plank=2
 
 [idle]
 pics=lumberjack_i_??.bmp  # ???
-hot_spot_x=38
-hot_spot_y=38
+hot_spot_x=40
+hot_spot_y=40
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
 
 

@@ -7,9 +7,9 @@ size=big
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
-shadowclr_r=0
+shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
-hot_spot_x=30
-hot_spot_y=50
+hot_spot_x=25
+hot_spot_y=30
 
