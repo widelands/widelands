@@ -96,8 +96,6 @@ MapSelectMenu::MapSelectMenu(Game *g)
 		if (backslash && (!slash || backslash > slash))
 			slash = backslash;
 
-      cerr << "\"" << name << "\"" << endl;
-
 		list->add_entry(slash?slash+1:name, name);
 	}
 

@@ -234,7 +234,7 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
          // below this field.
          // This could be avoided by either pre-rendering all ground-fields before drawing a bob (time-costy!)
          // or by different (more complicated, also with build-help) checking here below.  - Holger
-         if(f->get_owned_by()) {
+         if(f->get_owned_by() && m_game->get_player(player_number)->is_field_seen(fx, fy)) {
             if(f_tl->get_owned_by() != f->get_owned_by()) {
                copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
                      tlposx, tposy - f_tl->get_height()*HEIGHT_FACTOR);
