@@ -634,10 +634,12 @@ void ProductionSite::set_economy(Economy* e)
 	Building::set_economy(e);
 	if (m_worker_requests.size()) {
       uint i=0;
-      for(i=0; i<m_worker_requests.size(); i++) 
-         m_worker_requests[i]->set_economy(e);
+      for(i=0; i<m_worker_requests.size(); i++)
+         if(m_worker_requests[i])
+            m_worker_requests[i]->set_economy(e);
    }
-	if (e) {
+	
+   if (e) {
 		for(i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->add_to_economy(e);
 	}
@@ -653,16 +655,16 @@ Cleanup after a production site is removed
 void ProductionSite::cleanup(Editor_Game_Base* g)
 {
 	// Release worker
-	if (m_worker_requests.size()) {
+   if (m_worker_requests.size()) {
       uint i=0;
       for(i=0; i<m_worker_requests.size(); i++) {
-		delete m_worker_requests[i];
-		m_worker_requests[i]=0;
+         delete m_worker_requests[i];
+         m_worker_requests[i]=0;
       }
-   m_workers.resize(0);
+      m_workers.resize(0);
    }
-   
-	if (m_workers.size()) {
+
+   if (m_workers.size()) {
       uint i=0;
       for(i=0; i<m_workers.size(); i++) {
          Worker* w = m_workers[i];
@@ -670,17 +672,18 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
          m_workers[i] = 0;
          w->set_location(0);
       }
+      m_workers.resize(0);
    }
 
-	// Cleanup the wares queues
-	for(uint i = 0; i < m_input_queues.size(); i++) {
-		m_input_queues[i]->cleanup((Game*)g);
-		delete m_input_queues[i];
-	}
-	m_input_queues.clear();
+   // Cleanup the wares queues
+   for(uint i = 0; i < m_input_queues.size(); i++) {
+      m_input_queues[i]->cleanup((Game*)g);
+      delete m_input_queues[i];
+   }
+   m_input_queues.clear();
 
 
-	Building::cleanup(g);
+   Building::cleanup(g);
 }
 
 
