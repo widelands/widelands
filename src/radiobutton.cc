@@ -82,8 +82,7 @@ Radiobutton::~Radiobutton()
  */
 void Radiobutton::clicked()
 {
-	if (!get_state())
-		m_group->set_state(m_id);
+   m_group->set_state(m_id);
 }
 
 
@@ -141,8 +140,10 @@ int Radiogroup::add_button(Panel *parent, int x, int y, uint picid)
  */
 void Radiogroup::set_state(int state)
 {
-	if (state == m_state)
+	if (state == m_state) {
+      clicked.call();
 		return;
+   }
 
 	for(Radiobutton *btn = m_buttons; btn; btn = btn->m_nextbtn)
 		btn->set_state(btn->m_id == state);

@@ -66,8 +66,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
 
    b = new Button(this, x+68, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toolsize_menu_btn);
-//   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png", RGBColor(0,0,255)));
-   b->set_title("TS");
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_set_toolsize_menu.png", RGBColor(0,0,255)));
 
    b = new Button(this, x+102, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_minimap);
@@ -78,18 +77,21 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", RGBColor(0,0,255)));
 
    // Init Tools
-   tools.current_tool=0;
-   tools.last_tool=-1;
-   tools.using_linked_tool=false;
-   tools.tools.push_back(new Tool_Info(0, 0, new Editor_Info_Tool()));
-   tools.tools.push_back(new Tool_Info(2, 3, new Editor_Increase_Height_Tool()));
-   tools.tools.push_back(new Tool_Info(1, 3, new Editor_Decrease_Height_Tool()));
+   tools.current_tool_index=1;
+   tools.use_tool=0;
+   tools.tools.push_back(new Editor_Info_Tool());
+   Editor_Set_Height_Tool* sht=new Editor_Set_Height_Tool();
+   tools.tools.push_back(new Editor_Increase_Height_Tool(new Editor_Decrease_Height_Tool(), sht));
+   tools.tools.push_back(new Editor_Noise_Height_Tool(sht));
+   tools.tools.push_back(new Editor_Set_Both_Terrain_Tool(new Editor_Set_Down_Terrain_Tool(), new Editor_Set_Right_Terrain_Tool()));
+
+/*   tools.tools.push_back(new Tool_Info(1, 3, new Editor_Decrease_Height_Tool()));
    tools.tools.push_back(new Tool_Info(1, 2, new Editor_Set_Height_Tool()));
    tools.tools.push_back(new Tool_Info(4, 4, new Editor_Noise_Height_Tool()));
    tools.tools.push_back(new Tool_Info(6, 7, new Editor_Set_Right_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 7, new Editor_Set_Down_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 6, new Editor_Set_Both_Terrain_Tool()));
-   select_tool(1, true);
+  */ select_tool(1, 0);
 }
 
 /****************************************
@@ -99,7 +101,6 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
  */
 Editor_Interactive::~Editor_Interactive() {
    while(tools.tools.size()) {
-      delete tools.tools.back()->tool;
       delete tools.tools.back();
       tools.tools.pop_back();
    }
@@ -224,7 +225,7 @@ the function of the currently selected tool
 */
 void Editor_Interactive::field_clicked() {
    Map* m=get_map();
-   int radius=tools.tools[tools.current_tool]->tool->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
+   int radius=tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, &m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
 
    // Some things have changed, map is informed, logic is informed. But overlays may still be wrong. Recalc them
    Map_Region_Coords mrc(m_maprenderinfo.fieldsel, radius, m);
@@ -260,7 +261,8 @@ void Editor_Interactive::tool_menu_btn()
 	if (m_toolmenu.window)
 		delete m_toolmenu.window;
 	else
-		new Editor_Preliminary_Tool_Menu(this, &m_toolmenu, &tools);
+		//new Editor_Preliminary_Tool_Menu(this, &m_toolmenu, &tools);
+		new Editor_Tool_Menu(this, &m_toolmenu, &tools);
 }
 
 /*
@@ -329,19 +331,21 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
 
          case KEY_LSHIFT:
          case KEY_RSHIFT:
-            if(!tools.using_linked_tool) {
-               tools.using_linked_tool=true;
-               select_tool(tools.tools[tools.current_tool]->f_linked_tool, false);
+            if(!tools.use_tool) {
+               select_tool(tools.current_tool_index, 1);
             }
             return true;
 
          case KEY_LALT:
          case KEY_RALT:
          case KEY_MODE:
-            if(!tools.using_linked_tool) {
-               tools.using_linked_tool=true;
-               select_tool(tools.tools[tools.current_tool]->s_linked_tool, false);
+            if(!tools.use_tool) {
+               select_tool(tools.current_tool_index, 2);
             }
+            return true;
+
+         case KEY_i:
+            select_tool(0, 0);
             return true;
       }
    } else {
@@ -352,9 +356,8 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
          case KEY_LALT:
          case KEY_RALT:
          case KEY_MODE:
-            if(tools.using_linked_tool) {
-               select_tool(tools.last_tool, true);
-               tools.using_linked_tool=false;
+            if(tools.use_tool) {
+               select_tool(tools.current_tool_index, 0);
             }
             return true;
       }
@@ -369,16 +372,11 @@ Editor_Interactive::select_tool()
 select a new tool 
 ===========
 */
-void Editor_Interactive::select_tool(int n, bool new_default_tool) {
-   tools.last_tool=tools.current_tool;
-   tools.current_tool=n;
-
-   set_fsel_picture(tools.tools[n]->tool->get_fsel());
-
-   if(new_default_tool) {
-      tools.last_tool=-1;
-      tools.using_linked_tool=false;
-   }
+void Editor_Interactive::select_tool(int n, int which) {
+   tools.current_tool_index=n;
+   tools.use_tool=which;
+   
+   set_fsel_picture(tools.tools[n]->get_fsel(which));
 }
 
 

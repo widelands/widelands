@@ -52,29 +52,27 @@ class Editor_Main_Menu : public Window {
 /*
 =============================
 
-class Editor_Preliminary_Tool_Menu
+class Editor_Tool_Menu
 
 This class is the tool selection window/menu. 
 Here, you can select the tool you wish to use the next time
 
-It's preliminary, no graphics, no stuff. only for debugging
-
 =============================
 */
-
-class Editor_Preliminary_Tool_Menu : public Window {
+class Editor_Tool_Menu : public Window {
    public:
-      Editor_Preliminary_Tool_Menu(Editor_Interactive*, UniqueWindow*, Editor_Interactive::Editor_Tools*);
-      virtual ~Editor_Preliminary_Tool_Menu();
+      Editor_Tool_Menu(Editor_Interactive*, UniqueWindow*, Editor_Interactive::Editor_Tools*);
+      virtual ~Editor_Tool_Menu();
 
    private:
+      UniqueWindow m_options;
+
       Editor_Interactive::Editor_Tools* m_tools;
       UniqueWindow* m_registry;
       Editor_Interactive* m_parent;
       Radiogroup* m_radioselect;
 
-      void changed_to_function(int);
-      void options_button_clicked(int);
+      void changed_to(void);
 };
 
 

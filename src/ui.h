@@ -350,6 +350,7 @@ public:
 
 	UISignal changed;
 	UISignal1<int> changedto;
+   UISignal clicked; // clicked without things changed
 
 	int add_button(Panel* parent, int x, int y, uint picid = 0);
 

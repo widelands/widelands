@@ -21,6 +21,7 @@
 #include "editor_menus.h"
 #include "ui.h"
 #include "editor.h"
+#include "editor_tools_option_menus.h"
 #include "editor_tools.h"
 #include "ui_editbox.h"
 #include "fileviewscreen.h"
@@ -341,27 +342,28 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UniqueWindow *reg
    const int height=20;
    int posx=offsx; 
    int posy=offsy;
+
    Button* b=new Button(this, posx, posy, width, height, 1);
    b->set_title("New Map");
    b->clicked.set(this, &Editor_Main_Menu::new_map_btn);
    posy+=height+spacing;
-   
+
    b=new Button(this, posx, posy, width, height, 1);
    b->set_title("Load Map");
    b->clicked.set(this, &Editor_Main_Menu::load_btn);
    posy+=height+spacing;
-   
+
    b=new Button(this, posx, posy, width, height, 1);
    b->set_title("Save Map");
    b->clicked.set(this, &Editor_Main_Menu::save_btn);
    posy+=height+spacing;
-  
+
    posy+=spacing;
    b=new Button(this, posx, posy, width, height, 1);
    b->set_title("Map Options");
    b->clicked.set(this, &Editor_Main_Menu::map_options_btn);
    posy+=height+spacing;
-   
+
    posy+=spacing;
    b=new Button(this, posx, posy, width, height, 1);
    b->set_title("View Readme");
@@ -373,6 +375,7 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UniqueWindow *reg
    b->set_title("Exit Editor");
    b->clicked.set(this, &Editor_Main_Menu::exit_btn);
    posy+=height+spacing;
+
 }
 
 /*
@@ -436,19 +439,19 @@ Editor_Main_Menu::~Editor_Main_Menu()
 /*
 =================================================
 
-class Editor_Preliminary_Tool_Menu 
+class Editor_Tool_Menu 
 
 =================================================
 */
 
 /*
 ===============
-Editor_Preliminary_Tool_Menu::Editor_Preliminary_Tool_Menu
+Editor_Tool_Menu::Editor_Tool_Menu
 
 Create all the buttons etc...
 ===============
 */
-Editor_Preliminary_Tool_Menu::Editor_Preliminary_Tool_Menu(Editor_Interactive *parent, UniqueWindow *registry, Editor_Interactive::Editor_Tools* tools)
+Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *registry, Editor_Interactive::Editor_Tools* tools)
 	: Window(parent, (parent->get_w()-350)/2, (parent->get_h()-400)/2, 350, 400, "Tool Menu")
 {
 	m_registry = registry;
@@ -463,63 +466,90 @@ Editor_Preliminary_Tool_Menu::Editor_Preliminary_Tool_Menu(Editor_Interactive *p
    m_tools=tools;
    m_parent=parent;
 
+
+   // Buttons
+   const int offsx=5;
+   const int offsy=30;
+   const int spacing=5;
+   const int width=34;
+   const int height=34;
+   int posx=offsx; 
+   int posy=offsy;
+
    m_radioselect=new Radiogroup();
-   m_radioselect->changedto.set(this, &Editor_Preliminary_Tool_Menu::changed_to_function);
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_change_height.png", RGBColor(0, 0, 255)));
+   posx+=width+spacing; 
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_noise_height.png", RGBColor(0,0,255)));
+   posx=offsx;
+   posy+=spacing+height;
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_set_terrain.png", RGBColor(0,0,255)));
+   posx+=width+spacing;
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_place_bob.png", RGBColor(0,0,255)));
 
-   int y = 5;
-   uint i;
-   for(i = 0; i < m_tools->tools.size(); i++, y+= 25) {
-      char buf[32];
-      m_radioselect->add_button(this, 5, y);
-      sprintf(buf, "%s", m_tools->tools[i]->tool->get_name());
-      new Textarea(this, 55, y+10, buf, Align_VCenter);
-      if(m_tools->tools[i]->tool->has_options()) {
-         Button* b = new Button(this, 30, y+3, 14, 14, 0, i);
-         b->set_title("O");
-         b->clickedid.set(this, &Editor_Preliminary_Tool_Menu::options_button_clicked);
-      }
-   }
-   m_radioselect->set_state(m_tools->current_tool);
+   set_inner_size(offsx+(width+spacing)*2, offsy+(height+spacing)*2);
 
+   Textarea* ta=new Textarea(this, 0, 0, "Tool Menu");
+   ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
+
+   m_radioselect->set_state(parent->get_selected_tool()-1); 
+   
+   m_radioselect->changed.set(this, &Editor_Tool_Menu::changed_to);
+   m_radioselect->clicked.set(this, &Editor_Tool_Menu::changed_to);
 }
 
 /*
 ===============
-Editor_Preliminary_Tool_Menu::~Editor_Preliminary_Tool_Menu
+Editor_Tool_Menu::~Editor_Tool_Menu
 
 Unregister from the registry pointer
 ===============
 */
-Editor_Preliminary_Tool_Menu::~Editor_Preliminary_Tool_Menu()
+Editor_Tool_Menu::~Editor_Tool_Menu()
 {
 	if (m_registry) {
 		m_registry->x = get_x();
 		m_registry->y = get_y();
 		m_registry->window = 0;
 	}
+   delete m_radioselect;
 }
 
 /*
 ===========
-Editor_Preliminary_Tool_Menu::changed_to_function()
+Editor_Tool_Menu::changed_to()
 
-called when the listselect changes
+called when the radiogroup changes or is reclicked
 ===========
 */
-void Editor_Preliminary_Tool_Menu::changed_to_function(int n) {
-   m_parent->select_tool(n, true);
-}
+void Editor_Tool_Menu::changed_to(void) {
+   int n=m_radioselect->get_state();
 
-/*
-===========
-Editor_Preliminary_Tool_Menu::options_button_clicked()
+   if (m_options.window) {
+      delete m_options.window;
+   }
+  
+   switch(n) {
+      case 0: 
+         m_parent->select_tool(1, 0); 
+         new Editor_Tool_Change_Height_Options_Menu(m_parent, 
+               static_cast<Editor_Increase_Height_Tool*>(m_tools->tools[1]),
+               &m_options);
+         break;
+   
+      case 1:
+         m_parent->select_tool(2,0);
+         new Editor_Tool_Noise_Height_Options_Menu(m_parent,
+               static_cast<Editor_Noise_Height_Tool*>(m_tools->tools[2]),
+               &m_options);
+         break;
 
-called when one of the options buttons has been clicked
-===========
-*/
-void Editor_Preliminary_Tool_Menu::options_button_clicked(int n) {
-   m_tools->tools[n]->tool->tool_options_dialog(m_parent);
-   m_radioselect->set_state(n);
+      case 2:
+         m_parent->select_tool(3,0);
+         new Editor_Tool_Set_Terrain_Tool_Options_Menu(m_parent,
+               static_cast<Editor_Set_Both_Terrain_Tool*>(m_tools->tools[3]),
+               &m_options);
+      default: break;
+   }
 }
 
 /*

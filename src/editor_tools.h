@@ -38,14 +38,31 @@ place building, modify building are 3 tools)
 */
 class Editor_Tool {
    public:
-      Editor_Tool() { }
-      virtual ~Editor_Tool() { } 
+      Editor_Tool(Editor_Tool* second, Editor_Tool* third) { m_second=second; m_third=third; if(!m_second) m_second=this; if(!m_third) m_third=this; }
+      virtual ~Editor_Tool() { 
+         if(m_second==m_third) m_third=0;
+         if(m_second && m_second!=this) { delete m_second; m_second=0; }
+         if(m_third && m_third!=this) { delete m_third; m_third=0; }
+      }
 
-      virtual int handle_click(const Coords*, Field* field, Map* m, Editor_Interactive* parent) = 0;
-      virtual int tool_options_dialog(Editor_Interactive* parent) { return 0; } // not needed by every tool
-      virtual bool has_options(void) { return false; }
-      virtual const char* get_name(void) = 0;
-      virtual const char* get_fsel(void) = 0;
+      int handle_click(int n, const Coords* c, Field* f, Map* m, Editor_Interactive* parent) {
+         if(n==0) return this->handle_click_impl(c,f,m,parent);
+         if(n==1) return m_second->handle_click_impl(c,f,m,parent);
+         if(n==2) return m_third->handle_click_impl(c,f,m,parent);
+         return 0;
+      }
+      const char* get_fsel(int n) { 
+         if(n==0) return this->get_fsel_impl(); 
+         if(n==1) return m_second->get_fsel_impl(); 
+         if(n==2) return m_third->get_fsel_impl(); 
+         return 0; 
+      }
+      
+      virtual int handle_click_impl(const Coords*, Field* field, Map* m, Editor_Interactive* parent) = 0;
+      virtual const char* get_fsel_impl(void) = 0;
+
+   protected:
+      Editor_Tool* m_second, *m_third;
 };
 
 /*
@@ -57,37 +74,13 @@ this is a simple tool to show information about the clicked field
 */
 class Editor_Info_Tool : public Editor_Tool {
    public:
-      Editor_Info_Tool() { }
+      Editor_Info_Tool() : Editor_Tool(this,this) { }
       virtual ~Editor_Info_Tool() { }
 
-      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
-      virtual const char* get_name(void) { return "Field Informations"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_info.png"; }
+      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_info.png"; }
 };
 
-/*
-=============================
-class Editor_Increase_Height_Tool
-
-this increases the height of a field by a value
-=============================
-*/
-class Editor_Increase_Height_Tool : public Editor_Tool {
-   public:
-      Editor_Increase_Height_Tool() { m_increase_by=1; }
-      virtual ~Editor_Increase_Height_Tool() { }
-  
-      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
-      virtual int tool_options_dialog(Editor_Interactive* parent);
-      virtual bool has_options(void) { return true; }
-      
-      virtual const char* get_name(void) { return "Increase Field Height"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_increase_height.png"; }
-      
-   private:
-      UniqueWindow m_w;
-      int m_increase_by;
-};
 
 /*
 =============================
@@ -98,19 +91,18 @@ this decreases the height of a field by a value
 */
 class Editor_Decrease_Height_Tool : public Editor_Tool {
    public:
-      Editor_Decrease_Height_Tool() { m_decrease_by=1; }
+      Editor_Decrease_Height_Tool() : Editor_Tool(this,this) { m_changed_by=1; }
       virtual ~Editor_Decrease_Height_Tool() { }
   
-      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
-      virtual int tool_options_dialog(Editor_Interactive* parent);
-      virtual bool has_options(void) { return true; }
+      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
       
-      virtual const char* get_name(void) { return "Decrease Field Height"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_decrease_height.png"; }
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_decrease_height.png"; }
+      
+      inline int get_changed_by(void) { return m_changed_by; }
+      inline void set_changed_by(int n) { m_changed_by=n; }
       
    private:
-      UniqueWindow m_w;
-      int m_decrease_by;
+      int m_changed_by;
 };
 
 /*
@@ -122,20 +114,49 @@ this decreases the height of a field by a value
 */
 class Editor_Set_Height_Tool : public Editor_Tool {
    public:
-      Editor_Set_Height_Tool() { m_set_to=10; }
+      Editor_Set_Height_Tool() : Editor_Tool(this,this) { m_set_to=10; }
       virtual ~Editor_Set_Height_Tool() { }
   
-      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
-      virtual int tool_options_dialog(Editor_Interactive* parent);
-      virtual bool has_options(void) { return true; }
+      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
       
-      virtual const char* get_name(void) { return "Set Field Height"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_set_height.png"; }
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_set_height.png"; }
+      
+      inline int get_set_to(void) { return m_set_to; }
+      inline void set_set_to(int n) { m_set_to=n; }
       
    private:
-      UniqueWindow m_w;
       int m_set_to;
 };
+
+/*
+=============================
+class Editor_Increase_Height_Tool
+
+this increases the height of a field by a value
+=============================
+*/
+class Editor_Increase_Height_Tool : public Editor_Tool {
+   public:
+      Editor_Increase_Height_Tool(Editor_Decrease_Height_Tool* dht, Editor_Set_Height_Tool* sht)
+        : Editor_Tool(dht, sht) { m_changed_by=1; m_dht=dht; m_sht=sht; }
+      virtual ~Editor_Increase_Height_Tool() {  }
+  
+      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
+      
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_increase_height.png"; }
+     
+      inline int get_changed_by(void) { return m_changed_by; }
+      inline void set_changed_by(int n) { m_changed_by=n; }
+      
+      Editor_Decrease_Height_Tool* get_dht(void) { return m_dht; }
+      Editor_Set_Height_Tool* get_sht(void) { return m_sht; }
+      
+   private:
+      Editor_Decrease_Height_Tool* m_dht; 
+      Editor_Set_Height_Tool* m_sht;
+      int m_changed_by;
+};
+
 
 /*
 =============================
@@ -146,18 +167,21 @@ this decreases the height of a field by a value
 */
 class Editor_Noise_Height_Tool : public Editor_Tool {
    public:
-      Editor_Noise_Height_Tool() { m_upper_value=MAX_FIELD_HEIGHT/2; m_lower_value=10; }
-      virtual ~Editor_Noise_Height_Tool() { }
+      Editor_Noise_Height_Tool(Editor_Set_Height_Tool* sht) :
+        Editor_Tool(sht,sht) { m_upper_value=MAX_FIELD_HEIGHT/2; m_lower_value=10; m_sht=sht; }
+      virtual ~Editor_Noise_Height_Tool() { m_third=m_second=0; } // don't delete this, somone else will care  
   
-      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
-      virtual int tool_options_dialog(Editor_Interactive* parent);
-      virtual bool has_options(void) { return true; }
+      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
       
-      virtual const char* get_name(void) { return "Noise Field Height"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_noise_height.png"; }
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_noise_height.png"; }
+     
+      inline Editor_Set_Height_Tool* get_sht(void) { return m_sht; }
       
+      inline void get_values(int* a, int* b) { *a=m_lower_value; *b=m_upper_value; }
+      inline void set_values(int a, int b) { m_lower_value=a; m_upper_value=b; }
+
    private:
-      UniqueWindow m_w;
+      Editor_Set_Height_Tool* m_sht;
       int m_upper_value;
       int m_lower_value;
 };
@@ -171,20 +195,19 @@ this decreases the height of a field by a value
 */
 class Editor_Set_Down_Terrain_Tool : public Editor_Tool {
    public:
-      Editor_Set_Down_Terrain_Tool() { m_terrain=5; }
+      Editor_Set_Down_Terrain_Tool() : Editor_Tool(this,this) { m_terrain=5; }
       virtual ~Editor_Set_Down_Terrain_Tool() { }
   
-      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
-      virtual int tool_options_dialog(Editor_Interactive* parent);
-      virtual bool has_options(void) { return true; }
-      
-      virtual const char* get_name(void) { return "Set Down Terrain"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_down.png"; }
-      
+      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_terrain_down.png"; }
+     
+      void set_terrain(int m) { m_terrain=m; }
+      inline int get_terrain(void) { return m_terrain; }
+
    private:
-      UniqueWindow m_w;
       int m_terrain;
 };
+
 
 /*
 =============================
@@ -195,18 +218,16 @@ this decreases the height of a field by a value
 */
 class Editor_Set_Right_Terrain_Tool : public Editor_Tool {
    public:
-      Editor_Set_Right_Terrain_Tool() { m_terrain=5; }
+      Editor_Set_Right_Terrain_Tool() : Editor_Tool(this,this) { m_terrain=5; }
       virtual ~Editor_Set_Right_Terrain_Tool() { }
   
-      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
-      virtual int tool_options_dialog(Editor_Interactive* parent);
-      virtual bool has_options(void) { return true; }
+      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
       
-      virtual const char* get_name(void) { return "Set Right Terrain"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_right.png"; }
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_terrain_right.png"; }
+      void set_terrain(int m) { m_terrain=m; }
+      inline int get_terrain(void) { return m_terrain; }
       
    private:
-      UniqueWindow m_w;
       int m_terrain;
 };
 
@@ -219,19 +240,21 @@ this decreases the height of a field by a value
 */
 class Editor_Set_Both_Terrain_Tool : public Editor_Tool {
    public:
-      Editor_Set_Both_Terrain_Tool() { m_terrain=5; }
+      Editor_Set_Both_Terrain_Tool(Editor_Set_Down_Terrain_Tool* sdt, Editor_Set_Right_Terrain_Tool* srt) : 
+        Editor_Tool(sdt, srt) { m_sdt=sdt; m_srt=srt; m_terrain=5; }
       virtual ~Editor_Set_Both_Terrain_Tool() { }
   
-      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
-      virtual int tool_options_dialog(Editor_Interactive* parent);
-      virtual bool has_options(void) { return true; }
+      virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
       
-      virtual const char* get_name(void) { return "Set Both Terrains"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_both.png"; }
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_terrain_both.png"; }
       
+      void set_terrain(int m) { m_terrain=m; m_sdt->set_terrain(m); m_srt->set_terrain(m); }
+      inline int get_terrain(void) { return m_terrain; }
+
    private:
-      UniqueWindow m_w;
       int m_terrain;
+      Editor_Set_Down_Terrain_Tool* m_sdt;
+      Editor_Set_Right_Terrain_Tool* m_srt;
 };
 
 #endif // __S__EDITOR_TOOLS_H

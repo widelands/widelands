@@ -48,23 +48,14 @@ class Editor_Interactive : public Interactive_Base {
       // gets called when a keyboard event occurs
       bool handle_key(bool down, int code, char c);
       
-      struct Tool_Info {
-         int f_linked_tool;
-         int s_linked_tool;
-         Editor_Tool* tool;
-
-         Tool_Info(int f, int s, Editor_Tool* t) : f_linked_tool(f), s_linked_tool(s), tool(t) { }
-      };
-      
       struct Editor_Tools {
-         int current_tool;
-         int last_tool;
-         bool using_linked_tool;
-         std::vector<Tool_Info*> tools;
+         int current_tool_index;
+         int use_tool;
+         std::vector<Editor_Tool*> tools;
       };
 
-      void select_tool(int, bool);
-      int get_selected_tool(void) { return tools.current_tool; } 
+      void select_tool(int, int);
+      int get_selected_tool(void) { return tools.current_tool_index; } 
       
       void exit_editor();
       void map_changed();
