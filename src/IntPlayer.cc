@@ -135,6 +135,25 @@ void Interactive_Player::minimap_btn()
 	}
 }
 
+/** Interactive_Player::move_view_to(int fx, int fy)
+ *
+ * Move the mainview to the given position (in field coordinates)
+ */
+void Interactive_Player::move_view_to(int fx, int fy)
+{
+	int x = fx * FIELD_WIDTH;
+	int y = fy * (FIELD_HEIGHT/2);
+
+	if (minimap)
+		minimap->set_view_pos(x, y);
+	
+	x -= main_mapview->get_w()>>1;
+	if (x < 0) x += game->get_map()->get_w() * FIELD_WIDTH;
+	y -= main_mapview->get_h()>>1;
+	if (y < 0) y += game->get_map()->get_h() * (FIELD_HEIGHT>>1);
+	main_mapview->set_viewpoint(x, y);
+}
+
 /** Interactive_Player::field_action(int fx, int fy)
  *
  * Player has clicked on the given field; bring up the context menu.

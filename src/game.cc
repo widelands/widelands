@@ -188,7 +188,7 @@ bool Game::run(void)
 		   assert(0);
 	   }
 		// TEMP
-     
+
       // Load the map
 		map = new Map();
       if (RET_OK != map->load_map(m_mapname, this)) {
@@ -198,7 +198,21 @@ bool Game::run(void)
 
       // TEMP: player number
 	   ipl = new Interactive_Player(this, 0);
-	   ipl->run();
+	   
+		// Prepare the map (i.e. place HQs)
+		for(int i = 0; i < map->get_nplayers(); i++) {
+			Player* player = get_player(i);
+			if (!player)
+				continue;
+			
+			const Cords *c = map->get_starting_pos(i);
+			warp_building(c->x, c->y, i, 0);
+			
+			if (player->get_type() == Player::playerLocal)
+				ipl->move_view_to(c->x, c->y);
+		}
+		
+		ipl->run();
 	   delete ipl;
 	   delete tribe;
 		played = true;
@@ -234,29 +248,31 @@ void Game::think(void)
 	}
 }
 
-/** Game::warp_building(int x, int y, uchar owner, int idx)
+/** Game::warp_building(int x, int y, char owner, int idx)
  *
  * Instantly create a building at the given x/y location. There is no build time.
  *
  * owner is the player number of the building's owner.
  * idx is the building type index.
  */
-void Game::warp_building(int x, int y, uchar owner, int idx)
+void Game::warp_building(int x, int y, char owner, int idx)
 {
 	Building_Descr *descr;
 	Map_Object* obj;
+	
+	assert(get_player(owner));
+   
+	descr = get_player_tribe(owner)->get_building_descr(idx);
+
+	obj = m_objects->create_object(this, descr, owner);
+	obj->set_position(this, x, y);
+
+   // TODO: conquers
    Player* ply=get_player(owner);
 
    if(!ply) return; // this player is not in the game
    
-	descr = get_player_tribe(owner)->get_building_descr(idx);
-
-	obj = m_objects->create_object(this, descr);
-	obj->set_owned_by(owner);
-	obj->set_position(this, x, y);
-
-   // TODO: conquers
-   Map_Region_Cords* r=new Map_Region_Cords(x, y, descr->get_see_area(), map);
+	Map_Region_Cords* r=new Map_Region_Cords(x, y, descr->get_see_area(), map);
    if(!ply->seen_fields)  ply->seen_fields=new std::bit_vector(map->get_w()*map->get_h(), false);
 
    while(r->next(&x, &y)) {

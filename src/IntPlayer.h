@@ -45,6 +45,7 @@ class Interactive_Player : public Panel {
 					 void minimap_btn();
 
 					 void field_action(int fx, int fy);
+					 void move_view_to(int fx, int fy);
 
 					 void think();
 
@@ -56,6 +57,7 @@ class Interactive_Player : public Panel {
 					 static inline uint get_yres() { return yresolution; }
          
                 inline uchar get_player_number(void) { return player_number; } // for watchwindow
+					 
 		  private:
 					 void mainview_move(int x, int y);
 					 void minimap_warp(int x, int y);

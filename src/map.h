@@ -153,6 +153,8 @@ class Map {
                inline World* get_world(void) { return w; }
                Field::Build_Symbol get_build_symbol(const int x, const int y);
 
+					inline const Cords* get_starting_pos(int plnum) { return &starting_pos[plnum]; }
+					
                // Field logic
                inline Field *get_field(const int x, const int y);
                inline void normalize_coords(int *x, int *y);

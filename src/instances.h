@@ -100,7 +100,8 @@ class Map_Object {
 		// Let the Map_Object draw itself
 		virtual void draw(Game* game, Bitmap* dst, int posx, int posy);
 
-      inline void set_owned_by(uchar plnum) { owned_by=plnum; }
+      inline void set_owned_by(char plnum) { m_owned_by = plnum; }
+		inline char get_owner_by() { return m_owned_by; }
  //     uint handle_click(void); // is this good here?
  
 		void set_position(Game* g, uint x, uint y, Field* f = 0);
@@ -114,7 +115,7 @@ class Map_Object {
 		
       Type type;
 		uint m_serial;
-      uchar owned_by; // player number
+      char m_owned_by; // player number, or -1 if neutral (like animals, trees)
       
 		Field* m_field; // where are we right now?
       uint m_px, m_py;
@@ -148,7 +149,7 @@ class Object_Manager {
 				return 0;
 			return it->second;
 		}
-		Map_Object* create_object(Game* g, Map_Object_Descr* d);
+		Map_Object* create_object(Game* g, Map_Object_Descr* d, int owner = -1);
 		void free_object(Map_Object* obj);
 		
 	private:

@@ -203,6 +203,8 @@ int Map::load_s2mf(const char* filen, Game *game) {
    hd.version=WLMF_VERSION;
    strcpy(hd.descr, "Bluebyte Settlers II Map. No comment defined!");
 
+	starting_pos = (Cords*)malloc(sizeof(Cords) * hd.nplayers);
+	memset(starting_pos, 0, sizeof(Cords) * hd.nplayers);
 
    const char* buf;
    switch(header.uses_world) {
@@ -399,8 +401,10 @@ int Map::load_s2mf(const char* filen, Game *game) {
       for(x=0; x<hd.width; x++, i++) {
          // ignore everything but HQs
          if(section[i]==0x80) {
-             cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl;
-            game->warp_building(x, y, bobs[i], 0);
+				if (bobs[i] < hd.nplayers) {
+					starting_pos[bobs[i]].x = x;
+					starting_pos[bobs[i]].y = y;
+				}
 			}
       }
    }

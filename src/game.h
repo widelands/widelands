@@ -82,7 +82,7 @@ public:
    inline Player* get_player(ushort n) { return m_players[n]; }
 
 public:
-	void warp_building(int x, int y, uchar owner, int idx);
+	void warp_building(int x, int y, char owner, int idx);
 	void create_bob(int x, int y, int idx);
 
 private:

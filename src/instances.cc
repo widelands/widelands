@@ -36,11 +36,11 @@ Object_Manager::~Object_Manager(void)
 	}
 }
 
-/** Object_Manager::create_object(Game *g, Map_Object_Descr *d)
+/** Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner)
  *
  * Create an object of type d
  */
-Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d)
+Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner)
 {
 	Map_Object* obj = d->create_object();
 	
@@ -50,6 +50,7 @@ Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d)
 	
 	m_objects[m_lastserial] = obj;
 
+	obj->set_owned_by(owner);
 	obj->init(g);
 	
 	return obj;
@@ -83,7 +84,7 @@ Map_Object::Map_Object(Type t)
 	type = t;
 	m_serial = 0;
 
-	owned_by = 0;
+	m_owned_by = -1;
 	m_field = 0; // not linked anywhere
 	m_px = m_py = 0;
 	m_linknext = 0;
