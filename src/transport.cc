@@ -3657,14 +3657,21 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		} else {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
-			// If the building wouldn't have to idle, we wait with the request
 			idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
 
-			if (idletime < -200) {
-				if (s->nexttimer < 0 || s->nexttimer > (-idletime))
-					s->nexttimer = -idletime;
+			if (!supp->is_active()) {
+				// If the building wouldn't have to idle, we wait with the request
+				if (idletime < -200) {
+					if (s->nexttimer < 0 || s->nexttimer > (-idletime))
+						s->nexttimer = -idletime;
 
-				continue;
+					continue;
+				}
+			} else {
+				// If the Supply is active (i.e. idle ware), we always fulfill
+				// a Request
+				if (idletime < 1)
+					idletime = 1;
 			}
 
 			// TODO: priorities?

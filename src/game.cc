@@ -131,10 +131,8 @@ bool Game::run(void)
 	int code = lgm->run();
 	delete lgm;
 
-	if (code)
+	if (code && get_map())
 	{
-		assert(get_map());
-
 		m_state = gs_running;
 
 		g_gr->flush(PicMod_Menu);
@@ -158,7 +156,7 @@ bool Game::run(void)
 				ipl->move_view_to(c.x, c.y);
 		}
 
-      
+
 		load_graphics();
 
 		ipl->run();
