@@ -101,7 +101,7 @@ class Map_Object {
 		virtual void draw(Game* game, Bitmap* dst, int posx, int posy);
 
       inline void set_owned_by(char plnum) { m_owned_by = plnum; }
-		inline char get_owner_by() { return m_owned_by; }
+		inline char get_owned_by() { return m_owned_by; }
  //     uint handle_click(void); // is this good here?
  
 		void set_position(Game* g, uint x, uint y, Field* f = 0);

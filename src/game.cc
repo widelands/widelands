@@ -198,7 +198,8 @@ bool Game::run(void)
 
       // TEMP: player number
 	   ipl = new Interactive_Player(this, 0);
-	   
+	  
+
 		// Prepare the players (i.e. place HQs)
 		for(int i = 0; i < map->get_nplayers(); i++) {
 			Player* player = get_player(i);
@@ -211,7 +212,6 @@ bool Game::run(void)
 			if (player->get_type() == Player::playerLocal)
 				ipl->move_view_to(c->x, c->y);
 		}
-		
 		ipl->run();
 	   delete ipl;
 	   delete tribe;
@@ -263,8 +263,9 @@ void Game::warp_building(int x, int y, char owner, int idx)
 	assert(get_player(owner));
    
 	descr = get_player_tribe(owner)->get_building_descr(idx);
+   assert(descr);
 
-	obj = m_objects->create_object(this, descr, owner, x, y);
+ 	obj = m_objects->create_object(this, descr, owner, x, y);
 }
 
 /** Game::create_bob(int x, int y, int idx)

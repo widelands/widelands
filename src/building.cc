@@ -131,6 +131,27 @@ int Boring_Building_Descr::read(Binary_file *f) {
    return RET_OK;
 }
 
+/*
+==============================================================================
+
+Building helper functions
+
+==============================================================================
+*/
+void conquer_area(uchar player, Map* map, int x, int y, ushort area) {
+   Map_Region m(x, y, area, map);
+   Field* f;
+   while((f=m.next())) {
+      if(f->get_owned_by() == player) continue;
+      if(f->get_owned_by() == FIELD_OWNED_BY_NOONE) {
+         f->set_owned_by(player);
+         continue;
+      }
+      // TODO: add support here what to do if some fields are already
+      // occupied by another player
+      cerr << "warning: already occupied field is claimed by another user!" << endl;
+   }
+}
 
 /*
 ==============================================================================
@@ -145,9 +166,10 @@ public:
 	Building(Type t, Building_Descr *descr);
 	
 	virtual void init(Game* g);
-	
+   
+   
 protected:
-	// ugly, ugly
+   // ugly, ugly
 	// we have a choice of either recreating the entire virtual function
 	// hierarchy from Building_Descr in Building, or of performing lots of
 	// casts in the derived classes.
@@ -169,7 +191,7 @@ Building::Building(Type t, Building_Descr *descr)
  */
 void Building::init(Game* g)
 {
-   Player* player = g->get_player(get_owner_by());
+   Player* player = g->get_player(get_owned_by());
 
 	assert(player);
    
@@ -502,12 +524,16 @@ class Building_HQ : public Building {
 Building_HQ::Building_HQ(HQ_Descr *d)
 	: Building(BIG_BUILDING, d)
 {
+   descr=d;
 }
 
 void Building_HQ::init(Game* g)
 {
 	Building::init(g);
 	set_animation(g, m_descr->get_idle_anim());
+
+   // conquer area
+   conquer_area(get_owned_by(), g->get_map(), m_px, m_py, descr->get_conquers());
 }
 
 // HQ description
@@ -518,7 +544,7 @@ int HQ_Descr::read(Binary_file *f) {
    // own 
    f->read(&conquers, sizeof(ushort));
 
-   return -1; // never act again
+   return 0;
 }
 Map_Object *HQ_Descr::create_object()
 {

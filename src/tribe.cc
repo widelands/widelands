@@ -341,6 +341,13 @@ int Tribe_Descr::parse_header(Binary_file* f) {
    f->read(buf, sizeof(name)); // author
    f->read(buf, 1024); // description
 
+   // read frontier bob
+   // TODO: does this belong into the header (before the need list??!!)
+   // will be fixed, when ships and other mandatory tribe bobs are introduced
+   frontier.read(f);
+   frontier.set_dimensions(FRONTIER_W, FRONTIER_H);
+   frontier.set_hotspot(FRONTIER_HSX, FRONTIER_HSY);
+
    // skip need list
    // read magic
    f->read(buf, 9);

@@ -62,7 +62,8 @@ void Player::setup()
 void Player::set_area_seen(int x, int y, uint area, bool on)
 {
 	Map_Region_Cords r(x, y, area, game->get_map());
-   
-	while(r.next(&x, &y))
+  
+	while(r.next(&x, &y)) {
       set_field_seen(x, y, on);
+   }
 }

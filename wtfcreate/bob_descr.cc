@@ -113,13 +113,19 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
          uint idx;
          for(idx=0; idx<4; idx++) {
             if(pixels[i]==play_clr[idx]) {
+               if(has_clrkey() && play_clr[idx]==get_clrkey()) {
+                  cerr << "Your chosen colorkey is identical to one of the player colors. expect trouble!" << endl;
+               } 
+               if(has_shadow && play_clr[idx]==shadowclr) {
+                  cerr << "Your chosen shadowclr is identical to one of the player colors. expect trouble!" << endl;
+               }
+               
                data[n]|=CMD_PLCLR;
-               data[n]|=idx;
+               data[n+1]=idx;
                count=0;
-               n++;
                while(i<npix && pixels[i]==play_clr[idx]) { count++; i++; }
-               data[n]=count;
-               n++;
+               data[n]|=count;
+               n+=2;
                i--;
                // write last count
                if(lidx!=-1) {
@@ -171,7 +177,8 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
       }
       cerr << endl << dec;
    }
-  
+ 
+   cerr << "end of bob" << endl;
       
    // write the size of the data
    ushort size=n*sizeof(ushort);
@@ -257,7 +264,6 @@ uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const ch
       for(one='0'; one<='9'; one++) {
          buf[nidx+1]=one;
 
-          // cerr << buf << endl;
 
          // Handle this picture!
          pics[i]= new Bob_Data_Pic_Descr();
@@ -287,13 +293,13 @@ uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const ch
       }
       if((one-1)!='9') break;
    }
-
+  
    if(!npics) {
       delete[] buf;
       free(pics);
       return ERR_NOPICS;
    }
-   
+
   pics=(Bob_Data_Pic_Descr**) realloc(pics, sizeof(Bob_Data_Pic_Descr*)*npics);
 
    delete[] buf;

@@ -49,8 +49,10 @@ class Tribe_Descr {
       inline Soldier_Descr* get_soldier_descr(uint idx) { return soldiers.get(idx); }
       inline Worker_Descr* get_worker_descr(uint idx) { return workers.get(idx); }
       inline Building_Descr* get_building_descr(uint idx) { return buildings.get(idx); }
+      inline Animation* get_frontier_anim(void) { return &frontier; }
 
    private:
+      Animation frontier;
       char name[30];
       Descr_Maintainer<Ware_Descr> wares;
       Descr_Maintainer<Soldier_Descr> soldiers;

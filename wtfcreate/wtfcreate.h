@@ -44,6 +44,7 @@
 #define REGENT_PS_W    45
 #define REGENT_PS_H    70
 
+
 extern char g_dirname[];
 
 

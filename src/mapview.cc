@@ -126,14 +126,15 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 
 /** Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
  *
- * Draw the ground only (i.e. the shaded triangles)
+ * Draw the Map. ground, bobs, you_name_it
  *
  * Args: dst	bitmap to draw in
  *       effvpx	viewpoint coordinates
  */
 void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 {
-	int minfx, minfy;
+	// TODO: change this function name. it's not really about drawing the ground only
+   int minfx, minfy;
 	int maxfx, maxfy;
 
 	minfx = (effvpx + (FIELD_WIDTH>>1)) / FIELD_WIDTH - 1; // hack to prevent negative numbers
@@ -143,7 +144,6 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 	maxfy += 10; // necessary because of heights
 
 //	printf("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
-
 	int dx = maxfx - minfx + 1;
 	int dy = maxfy - minfy + 1;
 	int linear_fy = minfy;
@@ -151,64 +151,96 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 	while(dy--) {
 		int linear_fx = minfx;
 		int fx, fy;
-		int lx, ly;
-		Field *f, *fl;
+      int bl_x, bl_y;
+      int tl_x, tl_y;
+		Field *f, *f_bl, *f_tl;
 		int posx, posy;
 		int blposx, blposy;
-
-		// Use linear (non-wrapped) coordinates to calculate on-screen pos
+	   int tlposx, tlposy;
+      
+      // Use linear (non-wrapped) coordinates to calculate on-screen pos
 		map->get_basepix(linear_fx, linear_fy, &posx, &posy);
 		posx -= effvpx;
 		posy -= effvpy;
 
 		// Get linear bottom-left coordinate
-		ly = linear_fy+1;
-		lx = linear_fx - (ly&1);
+		bl_y = linear_fy+1;
+		bl_x = linear_fx - (bl_y&1);
 
-		map->get_basepix(lx, ly, &blposx, &blposy);
+		map->get_basepix(bl_x, bl_y, &blposx, &blposy);
 		blposx -= effvpx;
 		blposy -= effvpy;
 
+      // Get lineear top-left coordinates TODO
+      tl_y = linear_fx-1;
+      tl_x = linear_fx - (tl_y&1);
+
+      map->get_basepix(tl_x, tl_y, &tlposx, &tlposy);
+      tlposx -= effvpx;
+      tlposy -= effvpy;
+      
 		// Calculate safe (bounded) field coordinates and get field pointers
 		fx = linear_fx;
 		fy = linear_fy;
 		map->normalize_coords(&fx, &fy);
-		map->normalize_coords(&lx, &ly);
-
+		map->normalize_coords(&bl_x, &bl_y);
+      map->normalize_coords(&tl_x, &tl_y);
 		f = map->get_field(fx, fy);
-		fl = map->get_field(lx, ly);
+		f_bl = map->get_field(bl_x, bl_y);
+      f_tl = map->get_field(tl_x, tl_y);
 
 		int count = dx;
 		while(count--) {
-			Field *rf, *rfl;
-			int rposx, rblposx;
-         int rx, ry, rlx, rly;
+			Field *f_br, *f_r, *f_l, *f_tr;
+			int rposx, brposx, lposx, trposx;
+         int r_x, r_y, br_x, br_y, l_x, l_y, tr_x, tr_y; 
          bool render_r=true;
          bool render_b=true;
          
-			map->get_rn(fx, fy, f, &rx, &ry, &rf);
+			map->get_rn(fx, fy, f, &r_x, &r_y, &f_r);
 			rposx = posx + FIELD_WIDTH;
+         
+         map->get_ln(fx, fy, f, &l_x, &l_y, &f_l);
+         lposx = posx - FIELD_WIDTH;
 
-			map->get_rn(lx, ly, fl, &rlx, &rly, &rfl);
-			rblposx = blposx + FIELD_WIDTH;
-
+			map->get_rn(bl_x, bl_y, f_bl, &br_x, &br_y, &f_br);
+			brposx = blposx + FIELD_WIDTH;
+      
+         map->get_rn(tl_x, tl_y, f_tl, &tr_x, &tr_y, &f_tr);
+         trposx = tlposx + FIELD_WIDTH;
+         
+         
 #ifdef USE_SEE_AREA
          if(!m_game->get_player(player_number)->is_field_seen(fx, fy) ||
-               !m_game->get_player(player_number)->is_field_seen(rlx, rly)) {
+               !m_game->get_player(player_number)->is_field_seen(br_x, br_y)) {
             render_r=false;
             render_b=false;
          } else {
-            if(!m_game->get_player(player_number)->is_field_seen(lx, ly))
+            if(!m_game->get_player(player_number)->is_field_seen(bl_x, bl_y))
                render_b=false;
-            if(!m_game->get_player(player_number)->is_field_seen(rx, ry))
+            if(!m_game->get_player(player_number)->is_field_seen(r_x, r_y))
                render_r=false;
          }
 #endif
+			draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, blposy, render_r, render_b);
+         
+         // Render frontier TODO
+         if(f->get_owned_by() != FIELD_OWNED_BY_NOONE) {
+//            if(f_tl->get_owned_by() != f->get_owned_by() &&
+  //                f_tr->get_owned_by() == f->get_owned_by()) {
+          //     cerr << posx << ":" << trposx << ":" << ((posx+trposx)>>1) << endl;
+               copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
+                     (posx+trposx)>>1, ((posy - f->get_height()*HEIGHT_FACTOR)+(tlposy - f_tr->get_height()*HEIGHT_FACTOR))>>1); // + (tlposy - f_tr->get_height()*HEIGHT_FACTOR))>>1);
+               //      (posx+tr_posx)>>1, ((posy - f->get_height()*HEIGHT_FACTOR)+(tr_posy - tr_neighbour->get_height()*HEIGHT_FACTOR))>>1);
+            // }
+         }
+          
+         // Render ways TODO
 
-			draw_field(dst, f, rf, fl, rfl, posx, rposx, posy, blposx, rblposx, blposy, render_r, render_b);
-
-        
-			//TODO - rendering order?
+         
+			// Render bobs
+         // TODO - rendering order?
+         // This must be defined somewho. some bobs have a higher priority than others
 			// draw_ground implies that this doesn't render map objects.
 			// are there any overdraw issues with the current rendering order?
 			
@@ -264,14 +296,20 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
          }
          // TEMP ENDS
 #endif
-			f = rf;
-			fl = rfl;
+			f_bl = f_br;
+			blposx = brposx;
+         bl_x = br_x;
+         bl_y = br_y;
+			
+         f = f_r;
 			posx = rposx;
-			blposx = rblposx;
-         lx = rlx;
-         ly = rly;
-         fx = rx;
-         fy = ry;
+         fx = r_x;
+         fy = r_y;
+
+         f_tl = f_tr;
+         tlposx = trposx;
+         tl_x = tr_x;
+         tl_y = tr_y;
       }
 
 		linear_fy++;

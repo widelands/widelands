@@ -22,7 +22,7 @@
 
 #ifdef ERROR
 #undef ERROR
-#endif ERROR
+#endif // ERROR
 
 #include "../src/pic.h"
 #include "../src/myfile.h"
@@ -38,7 +38,7 @@
 
 class Bob_Data_Pic_Descr;
 
-// ERROR is already #define'd in msvc. for now i will solve this like:
+// TODO: ERROR is already #define'd in msvc. for now i will solve this like:
 #ifdef ERROR
 #undef ERROR
 #endif

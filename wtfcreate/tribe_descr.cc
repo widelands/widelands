@@ -60,15 +60,69 @@ int Tribe_Header::construct(Profile* p, Section* s) {
    }
    memcpy(descr, str, strlen(str) < sizeof(descr) ? strlen(str) : sizeof(descr)-1);
 
-  
-   return OK;
+   
+   // parse clrkey
+   uchar r=255;
+   uchar g=255;
+   uchar b=255;
+   Section* def= p->get_section("defaults");
+   if(def) {
+      r=def->get_int("clrkey_r", r);
+      g=def->get_int("clrkey_g", g);
+      b=def->get_int("clrkey_b", b);
+   }
+   // Now, parse description itself
+   r=s->get_int("clrkey_r", r);
+   g=s->get_int("clrkey_g", g);
+   b=s->get_int("clrkey_b", b);
+   ushort clrkey=pack_rgb(r, g, b);
+
+
+   // parse pic
+   str=s->get_string("frontier_pic", "frontier_??.bmp");
+
+   ushort w, h;
+   w=h=0;
+   uint retval=frontier.construct(str, g_dirname, PICS_DIR, clrkey, 0, &w, &h, 1); 
+        
+   if(retval) {
+      switch (retval) {
+         case Bob_Descr::ERROR:
+         case Bob_Descr::ERR_INVAL_FILE_NAMES:
+         case Bob_Descr::ERR_INVAL_DIMENSIONS:
+         case Bob_Descr::ERR_NOPICS:
+            strcpy(err_sec,s->get_name());
+            strcpy(err_key, "frontier_pic");
+            strcpy(err_msg, g_dirname);
+            strcat(err_msg, PICS_DIR);
+            strcat(err_msg, str);
+            strcat(err_msg,": Some bob error. check if all got the same dimensions and if the picture names are valid!");
+            return ERROR;  
+            break;
+      }
+   }
+
+   // check size
+   if(w != FRONTIER_W || 
+         h != FRONTIER_H) {
+      strcpy(err_sec, s->get_name());
+      strcpy(err_key, "frontier_pic");
+      strcpy(err_msg, "The picture \"");
+      strcat(err_msg, str);
+      strcat(err_msg, "\" has an invalid size for a frontier pic!!");
+      return ERROR;
+   }
+ 
+
+   return OK;  
 }
 int Tribe_Header::write(Binary_file* f) {
    
    f->write(name, sizeof(name));
    f->write(author, sizeof(author));
    f->write(descr, sizeof(descr));
-   
+   frontier.write(f);
+
    return OK;
 }
 

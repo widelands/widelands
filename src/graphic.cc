@@ -338,15 +338,14 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
    x=dst_x;
    for(y=dst_y; y<dst_y+anim->get_h(); ) {
 //      for(x=0; x<bob->get_w(); x++) {
-         cmd=((pic->data[i]>> 14) & 0x3);
+         cmd=((pic->data[i]>> 14));
          count=pic->data[i] & 0x3fff;
 
 //         cerr << "ALIVE:" << hex << pic->data[i] << ":"  << cmd << ":" << count << endl;
 
          i++;
          if(cmd==0) {
-//            cerr << "Should draw " << count << " pixels"; 
-            //   cerr << count << ":" <<  x << ":" << y << endl;
+            // Normal color pixels
             for(uint z=0; z<count; z++) {
                clr=pic->data[i+z];
    //            cerr << count << ":" << hex << clr << endl;
@@ -366,7 +365,7 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
             i+=count;
             continue;
          } else if(cmd==1) {
-//            cerr << "Should skip " << count << " pixels!" << endl;
+            // Skip pixels
             while(count) {
                ++x;
                   
@@ -375,25 +374,48 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
             }
             continue;
          } else if(cmd==2) {
-//            cerr << "Should draw " << count << " pixels in player color!" << endl;
-            // Player Color. Skip for the moment: TODO!
-           /* while(count) {
+            // Should draw player color pixels. TODO
+            clr=pic->data[i];
+            switch(clr) {
+               case 0: clr=pack_rgb(0, 0, 165); break;
+               case 1: clr=pack_rgb(0,55,190); break;
+               case 2: clr=pack_rgb(0, 120, 215); break;
+               case 3: clr=pack_rgb(0, 210, 245); break;
+               default:
+                       // this should never happen!!
+                       cerr << hex << clr << dec << endl;
+                       assert(0);
+                       break;
+            }
+            
+            while(count) {
+             if(x>=0 && y>=0) {
+                  if( (((uint)x)<dst->get_w()) && (((uint)y)<dst->get_h()) ) {
+                     dst->pixels[y*dst->pitch + x]=clr; 
+                  }
+               }
                ++x;
-               if(x==bob->get_w()) { ++y; x=0; }
+               if(x==dst_x+anim->get_w()) { 
+                  ++y; 
+                  x=dst_x; 
+                  if(y==dst_y+anim->get_h()) break;
+               }     
+               if(x==dst_x+anim->get_w()) { ++y; x=dst_x; if(y==dst_y+anim->get_h()) break;}
                --count;
             }
-           */ i++;
+            ++i;
             continue;
          } else if(cmd==3) {
             // Shadow. Skip for the moment TODO!
-//            cerr << "Should draw " << count << " pixels as shadow!" << endl;
-           /* while(count) {
+            // Skip pixels
+            while(count) {
                ++x;
-               if(x==bob->get_w()) { ++y; x=0; }
+                  
+               if(x==dst_x+anim->get_w()) { ++y; x=dst_x; if(y==dst_y+anim->get_h()) break;}
                --count;
             }
-           */ continue;
-  //        }
+             
+            continue;
       
       }
    }

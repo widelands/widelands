@@ -463,7 +463,8 @@ Field* Map_Region::next(void) {
    Field* retval=_lf;
 
    if(_lf==_tr) {
-      if(tly >= sy) {
+      if(tly==sy) backwards=true;
+      if(backwards) {
           if(_lf==_br) {
              _lf=0;
              return retval;
@@ -494,13 +495,15 @@ Field* Map_Region::next(void) {
 // 
 int Map_Region_Cords::next(int* retx, int* rety) {
    int retval=0;
-   
+ 
    if(_lf) retval=1;
    *retx=cx;
    *rety=cy;
+      
 
    if(_lf==_tr) {
-      if(tly >= sy) {
+      if(tly==sy) backwards=true;
+      if(backwards) {
           if(_lf==_br) {
              _lf=0;
              return retval;

@@ -435,7 +435,7 @@ int parse_root_conf(Tribe_Header* ph, Regent_Descr* pregent) {
       delete[] file;
       return ERROR;
    }
-
+   
    s=p->get_section("regent");
    if(!s) {
       delete p;

@@ -24,6 +24,8 @@
 // and a delete, for proper garbage collection, since here is a memory hole, at
 // the moment (it would also spare the if(!obj) call in hook_instance
 
+#define FIELD_OWNED_BY_NOONE 255   // if a field is owned by noone, this value must be in owned_by
+
 class Terrain_Descr;
 class Map_Object;
 

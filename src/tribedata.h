@@ -61,6 +61,9 @@
 #define SPEC_PORT			   11
 #define SPEC_DOCKYARD      12
 
- 
+#define FRONTIER_W     10
+#define FRONTIER_H     20 
+#define FRONTIER_HSX   4
+#define FRONTIER_HSY   19
  
 #endif /* __S__TRIBEDATA_H */

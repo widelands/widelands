@@ -400,6 +400,7 @@ inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
 class Map_Region {
    public:
       Map_Region(const int x, const int y, int area, Map* m) {
+         backwards=0;
          _area=area;
          _map=m;
          _lf=m->get_safe_field(x, y);
@@ -425,6 +426,7 @@ class Map_Region {
 
    private:
       int _area;
+      int backwards;
       int sx, sy;
       int cx, cy;
       int tlx, tly, trx, tr_y, blx, bly, brx, bry;
@@ -441,6 +443,7 @@ class Map_Region {
 class Map_Region_Cords {
    public:
       Map_Region_Cords(const int x, const int y, int area, Map* m) {
+         backwards=0;
          _area=area;
          _map=m;
          _lf=m->get_safe_field(x, y);
@@ -465,6 +468,7 @@ class Map_Region_Cords {
       int next(int*, int*);
 
    private:
+      int backwards;
       int _area;
       int sx, sy;
       int cx, cy;

@@ -25,6 +25,7 @@
 #include "../src/helper.h"
 #include "file_descr.h"
 #include "pic_descr.h"
+#include "bob_descr.h"
 
 /*
  * This is the tribe header
@@ -42,6 +43,7 @@ class Tribe_Header : virtual public File_Descr {
       char name[30];
       char author[30];
       char descr[1024];
+      Bob_Descr frontier;
 };
 
 /* 
