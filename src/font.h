@@ -77,7 +77,7 @@ class Font_Handler : public Singleton<Font_Handler> {
 					// inline ushort get_fw(ushort f) { assert(f<MAX_FONTS); assert(w[f]); return w[f]; }
 					 
 		  private:
-					 struct {
+					 struct __font {
 								ushort h;
 								Pic p[96];
 					 } fonts[MAX_FONTS];
