@@ -1,3 +1,8 @@
+If you got the source from CVS do a 
+  ./make_ready.sh 
+before compiling (needs GNU autoconf and automake). Then continue
+with normal procedure
+
 Notice: ./configure, make, make install should do well, if you've
 		  got libsdl installed.
 
