@@ -505,14 +505,17 @@ Instantly create a bob at the given x/y location.
 idx is the bob type.
 ===============
 */
-Bob *Editor_Game_Base::create_bob(Coords c, int idx)
+Bob *Editor_Game_Base::create_bob(Coords c, int idx, Tribe_Descr* tribe)
 {
 	Bob_Descr *descr;
 
-	descr = m_map->get_world()->get_bob_descr(idx);
+   if(!tribe)
+      descr = m_map->get_world()->get_bob_descr(idx);
+   else
+      descr=tribe->get_bob_descr(idx);
 	assert(descr);
 
-	return descr->create(this, 0, c);
+	return descr->create(this, 0, c); // The bob knows for itself it is a world or a tribe bob
 }
 
 

@@ -88,6 +88,7 @@ private:
 private:
 	void parse_createitem(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_setdescription(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_setbobdescription(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_findobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_findspace(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_walk(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
@@ -95,6 +96,7 @@ private:
 	void parse_return(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_object(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_plant(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_create_bob(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_removeobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_geologist(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_geologist_find(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
@@ -110,6 +112,7 @@ private:
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{ "createitem",		&WorkerProgram::parse_createitem },
 	{ "setdescription",	&WorkerProgram::parse_setdescription },
+	{ "setbobdescription", &WorkerProgram::parse_setbobdescription },
 	{ "findobject",		&WorkerProgram::parse_findobject },
 	{ "findspace",			&WorkerProgram::parse_findspace },
 	{ "walk",				&WorkerProgram::parse_walk },
@@ -117,6 +120,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{ "return",				&WorkerProgram::parse_return },
 	{ "object",				&WorkerProgram::parse_object },
 	{ "plant",				&WorkerProgram::parse_plant },
+   { "create_bob",		&WorkerProgram::parse_create_bob },
 	{ "removeobject",		&WorkerProgram::parse_removeobject },
 	{ "geologist",			&WorkerProgram::parse_geologist },
 	{ "geologist-find",	&WorkerProgram::parse_geologist_find },
@@ -305,6 +309,63 @@ bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* act)
 	return true;
 }
 
+/*
+==============================
+
+setbobdescription <bob name> <bob name> ...
+
+Randomly select a bob name that can be used in subsequent commands
+(e.g. create_bob).
+
+sparamv = possible bobs
+
+==============================
+*/
+void WorkerProgram::parse_setbobdescription(WorkerAction* act, Parser* parser,
+															const std::vector<std::string>& cmd)
+{
+	if (cmd.size() < 2)
+		throw wexception("Usage: setbobdescription <bob name> <bob name> ...");
+
+	act->function = &Worker::run_setbobdescription;
+
+	for(uint i = 1; i < cmd.size(); i++)
+		act->sparamv.push_back(cmd[i]);
+}
+
+bool Worker::run_setbobdescription(Game* g, State* state, const WorkerAction* act)
+{
+	int idx = g->logic_rand() % act->sparamv.size();
+
+	molog("  SetBobDescription: %s\n", act->sparamv[idx].c_str());
+
+   std::vector<std::string> list;
+   split_string(act->sparamv[idx], &list, ":");
+   std::string bob;
+   if(list.size()==1) {
+      state->svar1 = "world";
+      bob=list[0];
+   } else {
+      state->svar1 = "tribe";
+      bob=list[1];
+   }
+      
+   if(state->svar1 == "world") { 
+	state->ivar2 = g->get_map()->get_world()->get_bob(bob.c_str());
+   } else {
+	state->ivar2 = get_descr()->get_tribe()->get_bob(bob.c_str());
+   }
+	if (state->ivar2 < 0) {
+		molog("  WARNING: Unknown bob %s\n", act->sparamv[idx].c_str());
+		set_signal("fail");
+		pop_task(g);
+		return true;
+	}
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
 
 /*
 ==============================
@@ -735,7 +796,11 @@ bool Worker::run_object(Game* g, State* state, const WorkerAction* act)
 
 	if (obj->get_type() == IMMOVABLE)
 		((Immovable*)obj)->switch_program(g, act->sparam1);
-	else
+	else if(obj->get_type() == BOB) {
+      if(act->sparam1
+      ((Bob*)obj)
+
+   } else 
 		throw wexception("MO(%u): [actObject]: bad object type = %i", get_serial(), obj->get_type());
 
 	state->ivar1++;
@@ -784,6 +849,38 @@ bool Worker::run_plant(Game* g, State* state, const WorkerAction* act)
 	schedule_act(g, 10);
 	return true;
 }
+
+/*
+==============================
+
+create_bob
+
+Plants a bob (critter usually, maybe also worker later on). The immovable type must have been
+selected by a previous command (i.e. setbobdescription).
+
+==============================
+*/
+void WorkerProgram::parse_create_bob(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	act->function = &Worker::run_create_bob;
+}
+
+bool Worker::run_create_bob(Game* g, State* state, const WorkerAction* act)
+{
+	Coords pos = get_position();
+
+	molog("  Create Bob: %i at %i,%i\n", state->ivar2, pos.x, pos.y);
+
+   if(state->svar1 == "world") 
+      g->create_bob(pos, state->ivar2, 0);
+   else 
+      g->create_bob(pos, state->ivar2, get_descr()->get_tribe());
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
+
 
 
 /*

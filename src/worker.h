@@ -199,6 +199,7 @@ protected:
 private: // Program commands
 	bool run_createitem(Game* g, State* state, const WorkerAction* act);
 	bool run_setdescription(Game* g, State* state, const WorkerAction* act);
+	bool run_setbobdescription(Game* g, State* state, const WorkerAction* act);
 	bool run_findobject(Game* g, State* state, const WorkerAction* act);
 	bool run_findspace(Game* g, State* state, const WorkerAction* act);
 	bool run_walk(Game* g, State* state, const WorkerAction* act);
@@ -206,6 +207,7 @@ private: // Program commands
 	bool run_return(Game* g, State* state, const WorkerAction* act);
 	bool run_object(Game* g, State* state, const WorkerAction* act);
 	bool run_plant(Game* g, State* state, const WorkerAction* act);
+	bool run_create_bob(Game* g, State* state, const WorkerAction* act);
 	bool run_removeobject(Game* g, State* state, const WorkerAction* act);
 	bool run_geologist(Game* g, State* state, const WorkerAction* act);
 	bool run_geologist_find(Game* g, State* state, const WorkerAction* act);

@@ -78,6 +78,18 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
 
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
 	m_idle_anim = g_anim.get(directory, prof->get_safe_section("idle"), picname, encdata);
+
+	// Parse attributes
+	while(global->get_next_string("attrib", &string)) {
+		uint attrib = get_attribute_id(string);
+
+		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
+		{
+         throw wexception("Bad attribute '%s'", string);
+		}
+
+		add_attribute(attrib);
+	}
 }
 
 
@@ -1134,7 +1146,6 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 
 	Section *s = prof->get_safe_section("global");
 
-	s->get_int("stock", 0);
 	m_swimming = s->get_bool("swimming", false);
 
    // Read all walking animations.

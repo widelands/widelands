@@ -1,6 +1,6 @@
 type="critter"
 swimming=0  # defaults to 0, is only in the water?
-stock=1
+attrib=eatable
 
 [idle]
 clrkey_r=0
