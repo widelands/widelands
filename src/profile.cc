@@ -219,7 +219,14 @@ const char *Section::get_string(const char *name, const char *def = 0)
 	Value *v = get_val(name);
 	if (!v)
 		return def;
-	return v->val;
+   char* retval=v->val;
+   if(retval[0]=='\'' || retval[0]=='\"') {
+      retval++;
+   }
+   if(retval[strlen(retval)-1]=='\'' || retval[strlen(retval)-1]=='\"') {
+      retval[strlen(retval)-1]='\0'; // well, we change the buffer, but this doesn't matter
+   }  
+	return retval;
 }
 
 /** Section::get_next_int(const char *name, int *value)
@@ -308,10 +315,13 @@ Profile
  * Args: errstream	all syntax errors etc.. are written to this stream
  *       filename	name of the .ini file
  */
-Profile::Profile(std::ostream &errstream, const char* filename)
+Profile::Profile(std::ostream &errstream, const char* filename, bool section_less_file )
 	: err(errstream), sections(8, 8)
 {
-	parse(filename);
+   if(section_less_file) {
+      sections.add(new Section(errstream, "[__NO_SEC__]"));
+   }
+   parse(filename, section_less_file);
 }
 
 Profile::~Profile()
@@ -413,46 +423,56 @@ inline char *setEndAt(char *str, char c)
  *
  * Args: filename	name of the source file
  */
-void Profile::parse(const char *filename)
+void Profile::parse(const char *filename, bool section_less_file )
 {
-	Ascii_file file;
-	file.open(filename, File::READ);
+   Ascii_file file;
+   file.open(filename, File::READ);
 
-	char line[1024];
-	char *p;
-	uint linenr = 0;
-	Section *s = 0;
+   char line[1024];
+   char *p;
+   uint linenr = 0;
+   Section *s = 0;
 
-	while(file.read_line(line, sizeof(line)) >= 0)
-	{
-		linenr++;
-		p = line;
-		p = skipwhite(p);
-		if (!p[0] || p[0] == '#' || (p[0] == '/' && p[1] == '/'))
-			continue;
+   while(file.read_line(line, sizeof(line)) >= 0)
+   {
+      linenr++;
+      p = line;
+      p = skipwhite(p);
+      if (!p[0] || p[0] == '#' || (p[0] == '/' && p[1] == '/'))
+         continue;
 
-		if (p[0] == '[') {
-			p++;
-			setEndAt(p, ']');
-			s = new Section(err, p);
-			sections.add(s);
-		} else {
-			char *tail = strchr(p, '=');
-			if (tail) {
-				*tail++ = 0;
-				tail = skipwhite(tail);
-				killcomments(tail);
-				rtrim(tail);
-				rtrim(p);
+      if (p[0] == '[') {
+         if(section_less_file) {
+            err << filename<<", line "<<linenr<<": Section "<<p<<" in sectionless file!" << std::endl;
+         } else {
+            p++;
+            setEndAt(p, ']');
+            s = new Section(err, p);
+            sections.add(s);
+         }
+      } else {
+         char *tail = strchr(p, '=');
+         if (tail) {
+            *tail++ = 0;
+            tail = skipwhite(tail);
+            killcomments(tail);
+            rtrim(tail);
+            rtrim(p);
 
-				if (s)
-					s->add_val(p, tail);
-				else
-					err << filename<<", line "<<linenr<<": key "<<p<<" outside section" << std::endl;
-			} else
-				err << filename<<", line "<<linenr<<": syntax error" << std::endl;
-		}
-	}
+            if(!section_less_file) {
+               if (s)
+                  s->add_val(p, tail);
+               else
+                  err << filename<<", line "<<linenr<<": key "<<p<<" outside section" << std::endl;
+            } else {
+               ((Section*) sections.element_at(0))->add_val(p, tail);
+               // add to default section
+            }
+
+         } else
+            err << filename<<", line "<<linenr<<": syntax error" << std::endl;
+      }
+   }
 }
 
 #ifdef TEST_PROFILE // needs profile.cc, myfile.cc growablearray.cc

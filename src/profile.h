@@ -97,9 +97,9 @@ class Profile {
 	std::ostream &err;
 	Growable_Array sections;
 
-	void parse(const char *filename);
+	void parse(const char *filename, bool section_less_file);
 public:
-	Profile(std::ostream &errstream, const char* filename);
+	Profile(std::ostream &errstream, const char* filename, bool section_less_file = false);
 	~Profile();
 
 	Section *get_section(const char *name);
