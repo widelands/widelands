@@ -268,7 +268,7 @@ int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
       else
          influence = MAX_RADIUS - influence;
    
-      influence *= influence * influence * influence;
+      influence = influence * influence * influence * influence;
    }
    else if (method == 1)
    {

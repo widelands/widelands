@@ -557,7 +557,7 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
                log("Tribe defines no soldier\n");
                return;
             }
-            int radius = 15;
+            int radius = 25;
             std::vector<ImmovableFound> list;
             std::vector<MilitarySite*> ms_list;
             CheckStepWalkOn cstep(MOVECAPS_WALK, false);

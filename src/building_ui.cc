@@ -42,6 +42,7 @@ class.
 #include "ui_listselect.h"
 #include "ui_progressbar.h"
 #include "ui_table.h"
+#include "ui_tabpanel.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
 #include "warehouse.h"
@@ -61,6 +62,8 @@ static const char* pic_queue_background = "pics/queue_background.png";
 
 static const char* pic_list_worker = "pics/menu_list_workers.png";
 
+static const char* pic_tab_military = "pics/menu_tab_military.png";
+static const char* pic_tab_training = "pics/menu_tab_training.png";
 static const char* pic_up_train = "pics/menu_up_train.png";
 static const char* pic_down_train = "pics/menu_down_train.png";
 static const char* pic_train_options = "pics/menu_train_options.png";
@@ -1153,6 +1156,8 @@ private:
 public:
    void list_worker_clicked(void);
 	UIButton* get_list_button() { return m_list_worker; }
+protected:
+   UIBox* create_production_box(UIPanel* ptr, ProductionSite* ps);
 };
 
 
@@ -1169,32 +1174,42 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
    m_parent=parent;
    m_reg=registry;
 
-	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
-
-	// Add the wares queue
-   std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
-	for(uint i = 0; i < warequeues->size(); i++)
-	{
-		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
-					(*warequeues)[i], parent->get_game());
-
-		box->add(wqd, UIBox::AlignLeft);
-	}
-
-	box->add_space(8);
-
-	// Add caps buttons
-	box->add(create_capsbuttons(box), UIBox::AlignCenter);
-
-	// Add list worker button
-	m_list_worker=new UIButton(box, 0,0,32,32,2,100);
-	m_list_worker->set_pic(g_gr->get_picture(PicMod_Game, pic_list_worker, true)); 
-	m_list_worker->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
-	box->add(m_list_worker, UIBox::AlignLeft);
-
-	fit_inner(box);
+   UIBox* prod_box = 0;
+   if (ps->get_building_type() == Building::PRODUCTIONSITE)
+   {
+       prod_box = create_production_box (this, ps);
+      fit_inner(prod_box);
+   }
 }
 
+UIBox* 
+ProductionSite_Window::create_production_box (UIPanel* parent, ProductionSite* ps)
+{
+   UIBox* box = new UIBox (parent, 0, 0, UIBox::Vertical);
+   
+   // Add the wares queue
+   std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
+   for(uint i = 0; i < warequeues->size(); i++)
+   {
+      WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
+            (*warequeues)[i], m_parent->get_game());
+
+      box->add(wqd, UIBox::AlignLeft);
+   }
+
+   box->add_space(8);
+
+      // Add caps buttons
+   box->add(create_capsbuttons(box), UIBox::AlignCenter);
+
+      // Add list worker button
+   m_list_worker=new UIButton(box, 0,0,32,32,2,100);
+   m_list_worker->set_pic(g_gr->get_picture(PicMod_Game, pic_list_worker, true)); 
+   m_list_worker->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
+   box->add(m_list_worker, UIBox::AlignLeft);
+
+   return box;
+}
 
 /*
 ===============
@@ -1659,15 +1674,22 @@ public:
 	void drop_button_clicked ();
 	void soldier_capacity_up () { act_change_soldier_capacity (1); }
 	void soldier_capacity_down() { act_change_soldier_capacity(-1); }
+   UIBox* create_military_box (UIPanel*);
 private:
 	void update();
+   
+   void add_tab(const char* picname, UIPanel* panel);
+//   void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
 
-	Coords		m_ms_location;
-	Interactive_Player* m_parent;
-	UIWindow**	m_reg;
-	UITable*	m_table;
-	UIButton*	m_drop_button;
-	UITextarea*	m_capacity;
+   Coords              m_ms_location;
+   Interactive_Player* m_parent;
+   UIWindow**          m_reg;
+   UITable*            m_table;
+   UIButton*           m_drop_button;
+   UITextarea*         m_capacity;
+   
+   UITab_Panel*         m_tabpanel;
+ 
 };
 
 
@@ -1678,77 +1700,29 @@ TrainingSite_Window::TrainingSite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UIWindow** registry)
-	: ProductionSite_Window(parent, ps, registry)
+TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSite* ms, UIWindow** registry)
+	: ProductionSite_Window(parent, ms, registry)
 {
-	m_parent=parent;
-	m_reg=registry;
-	m_ms_location=ps->get_position();
-	UIBox* BigBox = new UIBox (this, 8, 8, UIBox::Horizontal);
-	UIBox* C1Box = new UIBox (BigBox, 0, 0, UIBox::Vertical);
-	UIBox* C2Box = new UIBox (BigBox, 0, 0, UIBox::Vertical);
-	get_list_button()->set_visible (false);
+   m_parent = parent;
+   m_reg = registry;
+   m_ms_location = ms->get_position ();
 
-	C1Box->add((UIPanel*)this, Align_Left);
+   m_tabpanel = new UITab_Panel(this, 0, 0, 1);
+   m_tabpanel->set_snapparent(true);
 
-	// Soldiers view
-	m_table=new UITable(C2Box, 0, 0, 360, 200, Align_Left, UITable::UP);
-	m_table->add_colum("Name", UITable::STRING, 100);
-	m_table->add_colum("HP", UITable::STRING, 40);
-	m_table->add_colum("AT", UITable::STRING, 40);
-	m_table->add_colum("DE", UITable::STRING, 40);
-	m_table->add_colum("EV", UITable::STRING, 40);
-	m_table->add_colum("Level", UITable::STRING, 100); // enough space for scrollbar
-	C2Box->add (m_table, Align_Left);
-
-	// Add drop soldier button
-	UIButton* b = new UIButton (C2Box, 0, 0, 360, 32, 2, 100);
-	b->set_pic(g_gr->get_picture(PicMod_Game, pic_drop_soldier, true));
-	b->clicked.set(this, &TrainingSite_Window::drop_button_clicked);
-	C2Box->add(b, Align_Left);
-
-	UIBox* box = new UIBox(C1Box, 0, 0, UIBox::Horizontal);
-
-	UIPanel* pan = new UIPanel(box, 0, 34, Width, 34);
-
-	// Add the caps button
-	box->add (create_capsbuttons(box), Align_Left);
-
-	// Add List Worker button
-	b=new UIButton(pan, 0, 0, 32,32, 2,100);
-	b->set_pic(g_gr->get_picture(PicMod_Game, pic_list_worker, true));
-	b->clicked.set(this, &TrainingSite_Window::list_worker_clicked);
-
-	// Add TrainingSite Options  button
-	b=new UIButton(pan, 32, 0, 32,32, 2,100);
-	b->set_pic(g_gr->get_picture(PicMod_Game, pic_train_options, true));
-	b->clicked.set(this, &TrainingSite_Window::options_button_clicked);
-
-	box->add(pan, UIBox::AlignCenter);
-	C1Box->add(box, Align_Left);
-	pan = 0;
-	box = 0;
-
-	box = new UIBox(C1Box, 0, 0, UIBox::Horizontal);
-	pan = new UIPanel(box, 0, 0, 150, 34);
-		new UITextarea (pan, 0, 11, "Capacity", Align_Left);
- 	// Capacity buttons
-	b = new UIButton (pan, 70, 4, 24, 24, 0, 2);
-	b->set_pic(g_gr->get_picture(PicMod_Game, pic_down_train, true));
-	b->clicked.set(this, &TrainingSite_Window::soldier_capacity_down);
-	b = 0;
-	b = new UIButton (pan, 118, 4, 24, 24, 1, 3);
-	b->set_pic(g_gr->get_picture(PicMod_Game, pic_up_train, true));
-	b->clicked.set(this, &TrainingSite_Window::soldier_capacity_up);
-	b = 0;
-	m_capacity =new UITextarea (pan, 100, 11, "xx", Align_Center);
-
-	box->add(pan, UIBox::AlignCenter);
-	C1Box->add (box, Align_Left);
-
-	BigBox->add(C1Box, Align_Left);
-	BigBox->add(C2Box, Align_Left);
-	fit_inner(BigBox);
+      // Training Box (wares and buttons related to they)
+   UIBox* prod_box = create_production_box (m_tabpanel, ms);
+   prod_box->resize();
+   add_tab(pic_tab_training, prod_box);
+   
+      // Military Box (Soldiers and buttons related to they)
+      // Training Box (wares and buttons related to they)
+   UIBox* train_box = create_military_box (m_tabpanel);
+   train_box->resize();
+   add_tab(pic_tab_military, train_box);
+   
+   m_tabpanel->resize();
+   fit_inner (m_tabpanel);
 }
 
 
@@ -1761,6 +1735,66 @@ Deinitialize, remove from registry
 */
 TrainingSite_Window::~TrainingSite_Window()
 {
+}
+
+UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
+{
+   UIBox* sold_box = new UIBox (panel, 0, 0, UIBox::Vertical);
+
+      // Soldiers view
+   m_table=new UITable(sold_box, 0, 0, 360, 200, Align_Left, UITable::UP);
+   m_table->add_colum("Name", UITable::STRING, 100);
+   m_table->add_colum("HP", UITable::STRING, 40);
+   m_table->add_colum("AT", UITable::STRING, 40);
+   m_table->add_colum("DE", UITable::STRING, 40);
+   m_table->add_colum("EV", UITable::STRING, 40);
+   m_table->add_colum("Level", UITable::STRING, 100); // enough space for scrollbar
+   sold_box->add (m_table, Align_Left);
+
+      // Add drop soldier button
+   UIButton* b = new UIButton (sold_box, 0, 0, 360, 32, 2, 100);
+   b->set_pic (g_gr->get_picture (PicMod_Game, pic_drop_soldier, true));
+   b->clicked.set (this, &TrainingSite_Window::drop_button_clicked);
+   sold_box->add (b, Align_Left);
+
+      // Add TrainingSite Options and Capacity  buttons
+   UIBox* box = new UIBox (sold_box, 0, 0, UIBox::Horizontal);
+   b = new UIButton(box, 32, 0, 32,32, 2,100);
+   b->set_pic(g_gr->get_picture(PicMod_Game, pic_train_options, true));
+   b->clicked.set(this, &TrainingSite_Window::options_button_clicked);
+   box->add (b, Align_Top);
+   
+   box->add (new UITextarea (box, 0, 11, "Capacity", Align_Left), Align_Left);
+      // Capacity buttons
+   b = new UIButton (box, 70, 4, 24, 24, 0, 2);
+   b->set_pic (g_gr->get_picture (PicMod_Game, pic_down_train, true));
+   b->clicked.set (this, &TrainingSite_Window::soldier_capacity_down);
+   box->add (b, Align_Top);
+   b = 0;
+   
+   m_capacity = new UITextarea (box, 0, 11, "xx", Align_Center);
+   box->add (m_capacity, Align_Top);
+   
+   b = new UIButton (box, 118, 4, 24, 24, 1, 3);
+   b->set_pic (g_gr->get_picture(PicMod_Game, pic_up_train, true));
+   b->clicked.set (this, &TrainingSite_Window::soldier_capacity_up);
+   box->add (b, Align_Top);
+   b = 0;
+   sold_box->add (box, Align_Left);
+
+   return sold_box;
+}
+
+/*
+===============
+TrainingSite_Window::add_tab
+
+Convenience function: Adds a new tab to the main tab panel
+===============
+*/
+void TrainingSite_Window::add_tab(const char* picname, UIPanel* panel)
+{
+	m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname, true), panel);
 }
 
 

@@ -791,17 +791,19 @@ void FieldActionWindow::act_attack ()
    Game* g = m_player->get_game();
    BaseImmovable *imm = g->get_map()->get_immovable(m_field);
 
-   log( "imm: %p, imm->get_type(): %i, m_attackers: %i\n", 
-         imm, imm->get_type(), m_attackers);
+   if (imm && imm->get_type() == Map_Object::BUILDING)
+   {
+      imm = ((Building *)imm)->get_base_flag();
+      log ("FieldActionWindow::act_attack () %d\n", m_attackers);
 
-   // Before doing this is needed to show a window to configure the attack.
-   if (imm && imm->get_type() >= Map_Object::BUILDING && m_attackers > 0)
-      g->send_player_enemyflagaction (
-         static_cast<PlayerImmovable*>(imm)->get_base_flag(), 
-         ENEMYFLAGACTION_ATTACK, 
-         m_player->get_player_number(),
-         m_attackers,  // Number of soldiers
-         m_attackers_type); // Type of soldiers
+      if (imm && imm->get_type() == Map_Object::FLAG && m_attackers > 0)
+         g->send_player_enemyflagaction (
+               static_cast<Flag*>(imm), 
+               ENEMYFLAGACTION_ATTACK, 
+               m_player->get_player_number(),
+               m_attackers,  // Number of soldiers
+               m_attackers_type); // Type of soldiers
+   }
 
    okdialog();
 }
