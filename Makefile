@@ -150,13 +150,13 @@ all: makedirs tags $(OBJECT_DIR)/widelands
 clean:
 	@-rm -rf widelands
 	@-rm -rf *.da src/*.da
-	@-rm -rf src/*.o src/*/*.o
-	@-rm -rf src/*.d src/*/*.d
-	@-rm -rf *~ */*~ */*/*/*~
+	@-rm -rf $(OBJECT_DIR)/*.o $(OBJECT_DIR)/*/*.o $(OBJECT_DIR)/*/*/*.o $(OBJECT_DIR)/*/*/*/*.o 
+	@-rm -rf $(OBJECT_DIR)/*.d $(OBJECT_DIR)/*/*.d $(OBJECT_DIR)/*/*/*.d $(OBJECT_DIR)/*/*/*/*.d 
+	@-rm -rf *~ */*~ */*/*~ */*/*/*~
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=src src/ui/ui_fs_menus src/ui/ui_basic src/editor src/editor/ui_menus
+SUBDIRS=src src/ui/ui_fs_menus src/ui/ui_basic src/editor src/editor/ui_menus src/editor/tools
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
