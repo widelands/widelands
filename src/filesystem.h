@@ -41,6 +41,7 @@ char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
 char *FS_StripExtension(char *fname);
 char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
 bool FS_CanonicalizeName(char *buf, int bufsize, const char *path);
+const char *FS_Filename(const char* buf);
 
 /*
 FileSystem is a base class representing certain filesystem operations.
@@ -53,6 +54,7 @@ public:
 
 	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results) = 0;
 
+   virtual bool IsDirectory(std::string path) = 0;
 	virtual bool FileExists(std::string path) = 0;
 
 	virtual void *Load(std::string fname, int *length) = 0;
@@ -82,6 +84,9 @@ $CWD  <-- the current-working directory; this is useful for debugging, when the 
 class LayeredFileSystem : public FileSystem {
 public:
 	virtual void AddFileSystem(FileSystem *fs) = 0;
+   
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results) = 0;  // From FileSystem
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth) = 0;
 
 public:
 	static LayeredFileSystem *Create();

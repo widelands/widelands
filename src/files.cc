@@ -142,6 +142,10 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 	const char *tok;
 	int toklen;
 	char *p;
+   bool skip_token;
+   
+   // clear the dst buffer
+   memset(buf, 0, bufsize);
 
 	p = buf;
 	while(*path) {
@@ -154,11 +158,14 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 		toklen = strcspn(path, "/\\");
 		path += toklen;
 
+
+      skip_token=false;
+      
 		// check for '.', '..', ...
-		if (toklen == 1 && strncmp(tok, ".", 1))
+		if (toklen == 1 && !strncmp(tok, ".", 1))
 			continue;
-		if (toklen == 2 && strncmp(tok, "..", 2)) {
-			p--;
+		if (toklen == 2 && !strncmp(tok, "..", 2)) {
+         p--;
 			while(p > buf) {
 				if (*(p-1) == '/')
 					break;
@@ -166,20 +173,40 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 			}
 			if (p < buf)
 				return false; // too many '..'s
-		}
+         skip_token=true;
+      }
 
 		// use the token
 		if (p + toklen >= buf + bufsize)
 			return false; // path is too long
 
-		memcpy(p, tok, toklen);
-		p += toklen;
+      if(!skip_token) {
+         memcpy(p, tok, toklen);
+         p += toklen;
+      }
 		if (*path)
 			*p++ = '/';
 	}
-	*p = 0;
+   *p = 0;
+	if(*(p-1)=='/' || *(p-1)=='\\')
+      *(p-1)=0;
 
 	return true;
+
+   
+}
+
+/*
+ * Returns the filename of this path, everything after the last
+ * / or \  (or the whole string)
+ */
+const char *FS_Filename(const char* buf) {
+   int i=strlen(buf)-1;
+   while(i>=0) {
+      if(buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
+      --i;
+   }
+   return buf;
 }
 
 
@@ -548,6 +575,7 @@ public:
 	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results);
 
 	virtual bool FileExists(std::string path);
+   virtual bool IsDirectory(std::string path);
 
 	virtual void *Load(std::string fname, int *length);
 	virtual void Write(std::string fname, void *data, int length);
@@ -662,7 +690,7 @@ bool RealFSImpl::FileExists(std::string path)
 	std::string fullname;
 	struct stat st;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
+   if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
 		return false;
 
 	fullname = m_directory + '/' + canonical;
@@ -672,6 +700,34 @@ bool RealFSImpl::FileExists(std::string path)
 
 	return true;
 }
+
+/*
+===============
+RealFSImpl::IsDirectory
+
+Returns true if the given file is a directory, and false if it doesn't.
+Also returns false if the pathname is invalid
+===============
+*/
+bool RealFSImpl::IsDirectory(std::string path)
+{
+   if(!FileExists(path)) return false;
+
+   char canonical[256];
+	std::string fullname;
+	struct stat st;
+
+	if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
+		return false;
+
+	fullname = m_directory + '/' + canonical;
+
+	if (stat(fullname.c_str(), &st) == -1)
+		return false;
+
+	return S_ISDIR(st.st_mode);
+}
+
 
 /*
 ===============
@@ -795,9 +851,11 @@ public:
 
 	virtual void AddFileSystem(FileSystem *fs);
 
-	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results);
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth); // Overwritten from LayeredFileSystem
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results); // overwritten from FileSystem
 
 	virtual bool FileExists(std::string path);
+   virtual bool IsDirectory(std::string path);
 
 	virtual void *Load(std::string fname, int *length);
 	virtual void Write(std::string fname, void *data, int length);
@@ -852,14 +910,20 @@ void LayeredFSImpl::AddFileSystem(FileSystem *fs)
 LayeredFSImpl::FindFiles
 
 Find files in all sub-filesystems in the given path, with the given pattern.
-Store all found files in results.
+Store all found files in results. 
+
+If depth is not 0 only search this many subfilesystems.
 
 Returns the number of files found.
 ===============
 */
-int LayeredFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results)
+int LayeredFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth)
 {
-	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+   int i=0;
+   if(!depth)
+      depth=10000; // Wow, if you have so many filesystem you're my hero
+   
+	for(FileSystem_rit it = m_filesystems.rbegin(); (it != m_filesystems.rend()) && (i<depth); it++, i++) {
 		filenameset_t files;
 		(*it)->FindFiles(path, pattern, &files);
 
@@ -872,6 +936,10 @@ int LayeredFSImpl::FindFiles(std::string path, std::string pattern, filenameset_
 	return results->size();
 }
 
+int LayeredFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results) {
+   return FindFiles(path,pattern,results,0);
+}
+
 /*
 ===============
 LayeredFSImpl::FileExists
@@ -881,7 +949,7 @@ Returns true if the file can be found in at least one of the sub-filesystems
 */
 bool LayeredFSImpl::FileExists(std::string path)
 {
-	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+   for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		if ((*it)->FileExists(path))
 			return true;
 	}
@@ -889,6 +957,22 @@ bool LayeredFSImpl::FileExists(std::string path)
 	return false;
 }
 
+/*
+===============
+LayeredFSImpl::IsDirectory
+
+Returns true if the file can be found in at least one of the sub-filesystems
+===============
+*/
+bool LayeredFSImpl::IsDirectory(std::string path)
+{
+	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+		if ((*it)->IsDirectory(path))
+			return true;
+	}
+
+	return false;
+}
 /*
 ===============
 LayeredFSImpl::Load

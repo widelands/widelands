@@ -1729,6 +1729,7 @@ the given mapfile
 */
 Map_Loader* Map::get_correct_loader(const char* filename) {
    Map_Loader* retval=0;
+   if(strlen(filename)<strlen(WLMF_SUFFIX) || strlen(filename)<strlen(S2MF_SUFFIX)) return 0;
 
    if(!strcasecmp(filename+(strlen(filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
    {
@@ -1739,8 +1740,6 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
       // it is a S2 Map file. load it as such
       retval=new S2_Map_Loader(filename, this);
    }
-   else
-      throw wexception("Map filename %s has unknown extension", filename);
 
    return retval;
 }

@@ -63,27 +63,6 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    m_ls->selected.set(this, &Main_Menu_Load_Map::selected);
    m_ls->double_clicked.set(this, &Main_Menu_Load_Map::double_clicked);
 
-	// Fill it with the files: Widelands map files
-	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &m_mapfiles);
-	g_fs->FindFiles("maps", "*"S2MF_SUFFIX, &m_mapfiles);
-
-   Map* map=new Map();
-	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
-		const char *name = pname->c_str();
-
-      Map_Loader* m_ml = map->get_correct_loader(name);
-      try {
-         m_ml->preload_map(true);
-         m_ls->add_entry(map->get_name(), reinterpret_cast<void*>(const_cast<char*>(name)));
-      } catch(wexception& ) {
-         // we simply skip illegal entries
-      }
-	   delete m_ml;
-
-   }
-   m_ls->sort();
-   delete map;
-
    // the descriptive areas
    // Name
    posx=get_inner_w()/2+spacing;
@@ -127,11 +106,14 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
    but->set_title("Cancel");
 
+
+   m_basedir="maps";
+   m_curdir="maps";
+
+   fill_list();
+
    center_to_parent();
    move_to_top();
-
-   if(m_ls->get_nr_entries())
-      m_ls->select(0);
 }
 
 /*
@@ -152,88 +134,24 @@ called when the ok button has been clicked
 */
 void Main_Menu_Load_Map::clicked(int id) {
    if(id==1) {
+      // Ok
       std::string filename=static_cast<const char*>(m_ls->get_selection());
 
-      Map* m_map=m_parent->get_editor()->get_map();
-
-      if(filename!="") {
-
-         m_parent->get_editor()->cleanup_for_load(true, false);
-
-         Map_Loader* ml = m_map->get_correct_loader(filename.c_str());
-         
-         try {
-            //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
-            ml->preload_map(true);
-
-            ml->load_map_complete(m_parent->get_editor(), true);
-         }  catch(std::exception& exe) {
-            // This really shoudn't fail since maps are already preloaded (in map preview)
-            // and therefore valid, but if it does, a valid map must be displayed, therefore
-            // we create an empty one from scratch
-            m_parent->get_editor()->cleanup_for_load(true, false);
-            m_map->create_empty_map();
-
-            std::string s="Map Loading Error!\n\nReason given:\n";
-            s+=exe.what();
-            UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, "Load Map Error!!", s, UIModal_Message_Box::OK);
-            mbox->run();
-            delete mbox;
-         }
-
-         m_parent->get_editor()->postload();
-         m_parent->get_editor()->load_graphics();
-
-         // Now update all the visualisations
-         // Player positions
-         std::string text;
-         int i=0;
-         for(i=1; i<=m_parent->get_map()->get_nrplayers(); i++) {
-            text="pics/editor_player_";
-            text+=static_cast<char>(((i)/10) + 0x30);
-            text+=static_cast<char>(((i)%10) + 0x30);
-            text+="_starting_pos.png";
-            Coords fc=m_parent->get_map()->get_starting_pos(i);
-
-            if(fc.x==-1 && fc.y==-1) continue;
-            int w, h;
-            int picid=g_gr->get_picture(PicMod_Game, text.c_str(), true);
-            g_gr->get_picture_size(picid, &w, &h);
-            // only register, when the player is not created (HQ placed)
-            if(!m_parent->get_editor()->get_player(i))
-               m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
-         }
-
-         /* Resources. we do not calculate default resources, therefore we do
-          * not expect to meet them here. */
-         uint x,y;
-         for(y=0; y<m_map->get_height(); y++) {
-            for(x=0; x<m_map->get_width(); x++) {
-               Field *f=m_map->get_field(Coords(x,y));
-               int res=f->get_resources();
-               int amount=f->get_resources_amount();
-               std::string immname="";
-               if(amount)
-                  immname = m_parent->get_editor()->get_map()->get_world()->get_resource(res)->get_editor_pic(amount);
-               if(immname!="") {
-                  int picid=g_gr->get_picture(PicMod_Game, immname.c_str(), true);
-                  m_parent->get_map()->get_overlay_manager()->register_overlay(Coords(x,y),picid,4);
-               }
-            }
-         }
-
-         // Touch all triggers once, so that they do not get deleted even
-         // when unreferenced
-         for(i=0; i<m_map->get_number_of_triggers(); i++)
-            m_map->reference_trigger(m_map->get_trigger(i));
-
-         // Tell the interactive that the map is saved and all
-         m_parent->set_need_save(false);
-
-         delete ml;
+      if(g_fs->IsDirectory(filename.c_str())) {
+         char buffer[256];
+         FS_CanonicalizeName(buffer, sizeof(buffer), filename.c_str());
+         m_curdir=buffer;
+         m_ls->clear();
+         m_mapfiles.clear();
+         fill_list();
+      } else {
+         load_map(filename);
+         die();
       }
+   } else {
+      // Cancel
+      die();
    }
-   die();
 }
 
 /*
@@ -242,24 +160,33 @@ void Main_Menu_Load_Map::clicked(int id) {
 void Main_Menu_Load_Map::selected(int i) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
-   Map* map=new Map();
-   Map_Loader* m_ml = map->get_correct_loader(name);
-   m_ml->preload_map(true); // This has worked before, no problem
-   delete m_ml;
+   if(!g_fs->IsDirectory(name)) {
+      Map* map=new Map();
+      Map_Loader* m_ml = map->get_correct_loader(name);
+      m_ml->preload_map(true); // This has worked before, no problem
+      delete m_ml;
 
-   m_name->set_text(map->get_name());
-   m_author->set_text(map->get_author());
-   m_descr->set_text(map->get_description());
-   m_world->set_text(map->get_world_name());
+      m_name->set_text(map->get_name());
+      m_author->set_text(map->get_author());
+      m_descr->set_text(map->get_description());
+      m_world->set_text(map->get_world_name());
 
-   char buf[200];
-   sprintf(buf, "%i", map->get_nrplayers());
-   m_nrplayers->set_text(buf);
+      char buf[200];
+      sprintf(buf, "%i", map->get_nrplayers());
+      m_nrplayers->set_text(buf);
 
-   sprintf(buf, "%ix%i", map->get_width(), map->get_height());
-   m_size->set_text(buf);
+      sprintf(buf, "%ix%i", map->get_width(), map->get_height());
+      m_size->set_text(buf);
 
-   delete map;
+      delete map;
+   } else {
+      m_name->set_text("");
+      m_author->set_text("");
+      m_descr->set_text("");
+      m_world->set_text("");
+      m_nrplayers->set_text("");
+      m_size->set_text("");
+   }
 }
 
 /*
@@ -267,4 +194,144 @@ void Main_Menu_Load_Map::selected(int i) {
  */
 void Main_Menu_Load_Map::double_clicked(int) {
    clicked(1);
+}
+
+/*
+ * fill the file list
+ */
+void Main_Menu_Load_Map::fill_list(void) {
+   // Fill it with all files we find. 
+   g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
+  
+   // First, we add all directorys
+   // We manually add the parent directory
+   if(m_curdir!=m_basedir) {
+      char buffer[256];
+      char buffer1[256];
+      strcpy(buffer, m_curdir.c_str());
+      strcat(buffer, "/..");
+      strcpy(buffer1,buffer);
+      FS_CanonicalizeName(buffer1, sizeof(buffer1), buffer);
+      m_parentdir=buffer1;
+      m_ls->add_entry("<parent>", reinterpret_cast<void*>(const_cast<char*>(m_parentdir.c_str())), false, g_gr->get_picture(PicMod_Game, "pics/ls_dir.png", true));
+   }
+
+   for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
+      const char *name = pname->c_str();
+      if(!strcmp(FS_Filename(name),".")) continue;
+      if(!strcmp(FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
+      if(!g_fs->IsDirectory(name)) continue;
+
+      m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture(PicMod_Game, "pics/ls_dir.png", true));
+   }
+  
+   Map* map=new Map();
+
+   for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
+      const char *name = pname->c_str();
+      
+      Map_Loader* m_ml = map->get_correct_loader(name);
+      if(!m_ml) continue; 
+
+      try {
+         m_ml->preload_map(true);
+         std::string pic="";
+         switch(m_ml->get_type()) {
+            case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
+            case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
+         }
+         m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture(PicMod_Game, pic.c_str(), true));
+      } catch(wexception& ) {
+         // we simply skip illegal entries
+      }
+      delete m_ml;
+
+   }
+   delete map;
+   
+//   if(m_ls->get_nr_entries())
+  //    m_ls->select(0);
+}
+
+/*
+ * Load map complete
+ */
+void Main_Menu_Load_Map::load_map(std::string filename) {
+   Map* m_map=m_parent->get_editor()->get_map();
+
+   if(filename!="") {
+      m_parent->get_editor()->cleanup_for_load(true, false);
+
+      Map_Loader* ml = m_map->get_correct_loader(filename.c_str());
+
+      try {
+         //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
+         ml->preload_map(true);
+
+         ml->load_map_complete(m_parent->get_editor(), true);
+      }  catch(std::exception& exe) {
+         // This really shoudn't fail since maps are already preloaded (in map preview)
+         // and therefore valid, but if it does, a valid map must be displayed, therefore
+         // we create an empty one from scratch
+         m_parent->get_editor()->cleanup_for_load(true, false);
+         m_map->create_empty_map();
+
+         std::string s="Map Loading Error!\n\nReason given:\n";
+         s+=exe.what();
+         UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, "Load Map Error!!", s, UIModal_Message_Box::OK);
+         mbox->run();
+         delete mbox;
+      }
+
+      m_parent->get_editor()->postload();
+      m_parent->get_editor()->load_graphics();
+
+      // Now update all the visualisations
+      // Player positions
+      std::string text;
+      int i=0;
+      for(i=1; i<=m_parent->get_map()->get_nrplayers(); i++) {
+         text="pics/editor_player_";
+         text+=static_cast<char>(((i)/10) + 0x30);
+         text+=static_cast<char>(((i)%10) + 0x30);
+         text+="_starting_pos.png";
+         Coords fc=m_parent->get_map()->get_starting_pos(i);
+
+         if(fc.x==-1 && fc.y==-1) continue;
+         int w, h;
+         int picid=g_gr->get_picture(PicMod_Game, text.c_str(), true);
+         g_gr->get_picture_size(picid, &w, &h);
+         // only register, when the player is not created (HQ placed)
+         if(!m_parent->get_editor()->get_player(i))
+            m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
+      }
+
+      /* Resources. we do not calculate default resources, therefore we do
+       * not expect to meet them here. */
+      uint x,y;
+      for(y=0; y<m_map->get_height(); y++) {
+         for(x=0; x<m_map->get_width(); x++) {
+            Field *f=m_map->get_field(Coords(x,y));
+            int res=f->get_resources();
+            int amount=f->get_resources_amount();
+            std::string immname="";
+            if(amount)
+               immname = m_parent->get_editor()->get_map()->get_world()->get_resource(res)->get_editor_pic(amount);
+            if(immname!="") {
+               int picid=g_gr->get_picture(PicMod_Game, immname.c_str(), true);
+               m_parent->get_map()->get_overlay_manager()->register_overlay(Coords(x,y),picid,4);
+            }
+         }
+      }
+
+      // Touch all triggers once, so that they do not get deleted even
+      // when unreferenced
+      for(i=0; i<m_map->get_number_of_triggers(); i++)
+         m_map->reference_trigger(m_map->get_trigger(i));
+
+      // Tell the interactive that the map is saved and all
+      m_parent->set_need_save(false);
+
+      delete ml;
+   }
 }

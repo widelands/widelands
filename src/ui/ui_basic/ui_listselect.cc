@@ -113,7 +113,7 @@ void UIListselect::add_entry(const char *name, void* value, bool select, int pic
 
    m_entries.push_back(e);
 
-	m_scrollbar->set_steps(m_entries.size() * m_lineheight - get_h());
+	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
    if(select)

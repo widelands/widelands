@@ -39,9 +39,15 @@ must be deleted, a new one must be selected
 */
 class Map_Loader {
    public:
+      enum Type {
+         WLML, // Widelands Map Loader
+         S2ML  // S2 Map Loader
+      }; 
+      
       Map_Loader(const char*, Map*) { m_s=STATE_INIT; m_map=0; }
       virtual ~Map_Loader() { };
 
+      virtual int get_type(void) = 0;
       virtual int preload_map(bool as_scenario)=0;
       virtual int load_map_complete(Editor_Game_Base*, bool as_scenario)=0;
 

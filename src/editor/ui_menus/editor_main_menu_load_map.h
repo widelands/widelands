@@ -48,11 +48,18 @@ class Main_Menu_Load_Map : public UIWindow {
       void selected(int);
       void double_clicked(int);
 
+      void fill_list(void);
+      void load_map(std::string);
+
       UITextarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;
       UIMultiline_Textarea* m_descr;
       Editor_Interactive *m_parent;
       UIListselect* m_ls;
       UIEdit_Box* m_editbox;
+       
+      std::string m_basedir;
+      std::string m_curdir;
+      std::string m_parentdir;
       filenameset_t m_mapfiles;
 };
 

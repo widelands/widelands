@@ -29,6 +29,8 @@ class Widelands_Map_Loader : public Map_Loader {
       Widelands_Map_Loader(const char* file, Map* map);
       virtual ~Widelands_Map_Loader(void);
 
+      virtual int get_type(void) { return Map_Loader::WLML; }
+
       virtual int preload_map(bool);
       virtual int load_map_complete(Editor_Game_Base*, bool);
 
