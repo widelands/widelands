@@ -17,6 +17,7 @@
  *
  */
 
+#include <SDL.h>
 #include "editor.h"
 #include "error.h"
 #include "filesystem.h"
