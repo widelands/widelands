@@ -17,7 +17,7 @@
  *
  */
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <SDL/SDL_net.h>
 #include "error.h"
 #include "filesystem.h"
