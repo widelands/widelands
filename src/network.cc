@@ -558,7 +558,9 @@ NetClient::~NetClient ()
 	delete deserializer;
 	
 	SDLNet_FreeSocketSet (sockset);
-	SDLNet_TCP_Close (sock);
+	
+	if (sock!=0)
+	    SDLNet_TCP_Close (sock);
 }
 
 void NetClient::begin_game ()
@@ -570,13 +572,14 @@ void NetClient::handle_network ()
 	NetGGZ::ref()->data();
 
 	// check if data is available on the socket
-	while (SDLNet_CheckSockets(sockset, 0) > 0) {
+	while (sock!=0 && SDLNet_CheckSockets(sockset, 0) > 0) {
 		if (!deserializer->read_packet(sock))
 		    continue;
 		
 		// lost network connection
 		SDLNet_TCP_DelSocket (sockset, sock);
 		SDLNet_TCP_Close (sock);
+		sock=0;
 		
 		disconnect ();
 	}
@@ -586,6 +589,7 @@ void NetClient::handle_network ()
 		    case NETCMD_DISCONNECT:
 			SDLNet_TCP_DelSocket (sockset, sock);
 			SDLNet_TCP_Close (sock);
+			sock=0;
 			
 			disconnect ();
 			break;
@@ -632,7 +636,10 @@ void NetClient::handle_network ()
 			serializer->begin_packet ();
 			serializer->putchar (NETCMD_PONG);
 			serializer->end_packet ();
-			serializer->send (sock);
+			
+			if (sock!=0)
+			    serializer->send (sock);
+			
 			printf ("Pong!\n");
 			break;
 		    case NETCMD_ADVANCETIME:
@@ -671,7 +678,9 @@ void NetClient::send_player_command (PlayerCommand* cmd)
 	serializer->putchar (NETCMD_PLAYERCOMMAND);
 	cmd->serialize (serializer);
 	serializer->end_packet ();
-	serializer->send (sock);
+	
+	if (sock!=0)
+		serializer->send (sock);
 }
 
 void NetClient::send_chat_message (Chat_Message msg)
@@ -685,7 +694,9 @@ void NetClient::send_chat_message (Chat_Message msg)
 
 	serializer->putwstr (msg.msg.c_str());
 	serializer->end_packet ();
-	serializer->send (sock);
+	
+	if (sock!=0)
+		serializer->send (sock);
 }
 
 void NetClient::syncreport (uint sync)
@@ -694,7 +705,9 @@ void NetClient::syncreport (uint sync)
 	serializer->putchar (NETCMD_SYNCREPORT);
 	serializer->putlong (sync);
 	serializer->end_packet ();
-	serializer->send (sock);
+	
+	if (sock!=0)
+		serializer->send (sock);
 }
 
 void NetClient::disconnect ()
