@@ -223,8 +223,16 @@ void g_main(int argc, char** argv)
 			else if (code==Fullscreen_Menu_NetSetup::JOINGAME) {
 			    IPaddress peer;
 
-			    if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
-				    throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
+//			    if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
+//				    throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
+			    ulong addr;
+			    ushort port;
+			    
+			    if (!ns->get_host_address(addr,port))
+				    throw wexception("Address of game server is no good");
+
+			    peer.host=addr;
+			    peer.port=port;
 
 			    netgame=new NetClient(&peer);
 			} else if(code==Fullscreen_Menu_NetSetup::INTERNETGAME) {

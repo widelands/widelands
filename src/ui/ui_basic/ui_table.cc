@@ -73,7 +73,7 @@ UITable::~UITable()
 /*
  * Add a new colum to this table 
  */
-void UITable::add_colum(const char* name, Type type, int w) {
+void UITable::add_column(const char* name, Type type, int w) {
    uint i=0;
    int complete_width=0;
    for(i=0; i<m_columns.size(); i++) {
@@ -94,6 +94,17 @@ void UITable::add_colum(const char* name, Type type, int w) {
       m_scrollbar->set_steps(1);
    }
 
+}
+
+UITable_Entry* UITable::find_entry (const void* userdata)
+{
+    unsigned int i;
+    
+    for (i=0; i<m_entries.size(); i++)
+	if (m_entries[i]->get_user_data()==userdata)
+	    return m_entries[i];
+
+    return 0;
 }
 
 /*

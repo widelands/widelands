@@ -76,7 +76,8 @@ public: // FUNCTIONS
 	UISignal1<int> selected;
    UISignal1<int> double_clicked;
 
-   void add_colum(const char*, Type, int);
+#define add_colum add_column
+   void add_column(const char*, Type, int);
 
    // Information functions
    inline int get_nr_columns(void) { return m_columns.size(); }
@@ -92,9 +93,10 @@ public: // FUNCTIONS
 
 	void set_align(Align align);
 
-	inline int get_nr_entries(void) { return m_entries.size(); }
-   inline int get_selection_index(void) { return m_selection; }
-   inline UITable_Entry* get_entry(int n) { assert(((int)m_entries.size())>n); return m_entries[n]; }
+	int get_nr_entries(void) { return m_entries.size(); }
+	int get_selection_index(void) { return m_selection; }
+	UITable_Entry* get_entry(int n) { assert(((int)m_entries.size())>n); return m_entries[n]; }
+	UITable_Entry* find_entry(const void*);	// find by userdata
 
    void select(int i);
 	inline void *get_selection() {

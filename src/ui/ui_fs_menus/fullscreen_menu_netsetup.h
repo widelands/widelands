@@ -21,8 +21,14 @@
 #define __S__NETSETUP_H
 
 #include "fullscreen_menu_base.h"
-#include "ui_editbox.h"
 
+class UIEdit_Box;
+class UITable;
+class UITable_Entry;
+
+class LAN_Game_Finder;
+class LAN_Open_Game;
+struct LAN_Game_Info;
 
 class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	public:
@@ -36,11 +42,25 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		Fullscreen_Menu_NetSetup ();
 		~Fullscreen_Menu_NetSetup ();
 
-		const char* get_host_address ()
-		{ return hostname->get_text(); }
+		virtual void think();
+	
+		bool get_host_address (ulong&, ushort&);
+		// return true if the selected or entered hostname is valid
 	
 	private:
-		UIEdit_Box*	hostname;
+		UIEdit_Box*		hostname;
+		UITable*		opengames;
+		LAN_Game_Finder*	discovery;
+		
+		void game_selected (int);
+		
+		static void discovery_callback (int, const LAN_Open_Game*, void*);
+
+		void game_opened (const LAN_Open_Game*);
+		void game_closed (const LAN_Open_Game*);
+		void game_updated (const LAN_Open_Game*);
+		
+		void update_game_info (UITable_Entry*, const LAN_Game_Info&);
 };
 
 #endif

@@ -18,12 +18,14 @@
  */
 
 #include <algorithm>
+#include "network_system.h"
 #include "game.h"
 #include "player.h"
 #include "playercommand.h"
 #include "playerdescrgroup.h"
 #include "tribe.h"
 #include "network.h"
+#include "network_lan_promotion.h"
 #include "wexception.h"
 #include "fullscreen_menu_launchgame.h"
 
@@ -154,6 +156,8 @@ NetHost::NetHost ()
 	
 	for (i=0;i<8;i++)
 	    net_delay_history[i]=INITIAL_NETWORK_DELAY;
+
+	promoter=new LAN_Game_Promoter();
 }
 
 NetHost::~NetHost ()
@@ -173,6 +177,8 @@ NetHost::~NetHost ()
 void NetHost::update_map ()
 {
 	Map* map=game->get_map();
+	
+	promoter->set_map (map?map->get_name():"none");
 	
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_SELECTMAP);
@@ -218,6 +224,9 @@ void NetHost::send_player_info ()
 // After that, notify the other players that we are starting.
 void NetHost::begin_game ()
 {
+	delete promoter;
+	promoter=0;
+	
 	SDLNet_TCP_Close (svsock);
 	svsock=0;
 	
@@ -237,6 +246,9 @@ void NetHost::handle_network ()
 {
 	TCPsocket sock;
 	unsigned int i;
+	
+	if (promoter!=0)
+	    promoter->run ();
 	
 	// if we are in the game initiation phase, check for new connections
 	while (svsock!=0 && (sock=SDLNet_TCP_Accept(svsock))!=0) {

@@ -26,9 +26,7 @@
 #include "wexception.h"
 #include "types.h"
 
-
 #define WIDELANDS_PORT		7396
-
 
 class Game;
 class PlayerCommand;
@@ -38,6 +36,7 @@ class Deserializer;
 
 class Fullscreen_Menu_LaunchGame;
 
+class LAN_Game_Promoter;
 
 class NetGame {
     public:
@@ -132,6 +131,8 @@ class NetHost:public NetGame {
 		std::queue<uint>	syncreports;
 		ulong			lag;
 	};
+	
+	LAN_Game_Promoter*		promoter;
 	
 	TCPsocket			svsock;
 	SDLNet_SocketSet		sockset;
