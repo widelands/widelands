@@ -172,7 +172,8 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
          }
       }
       // recheck next trigger in the time that all triggers get checked at least once ever 10 seconds
-      queue(m_game->get_gametime() + 10000/m_game->get_map()->get_number_of_triggers(), SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, trigger_id, 0, 0);
+      int time= m_game->get_map()->get_number_of_triggers() ? 10000/m_game->get_map()->get_number_of_triggers() : 30000;
+      queue(m_game->get_gametime() + time, SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, trigger_id, 0, 0);
       break;
    }
 
