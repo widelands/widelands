@@ -47,7 +47,7 @@ FileViewScreen::FileViewScreen(const char *text)
 	// Close button
 	Button *b;
 
-	b = new Button(this, 233, 420, 174, 24, 0);
+	b = new Button(this, 233, 420, 174, 24, 3);
 	b->clickedid.set(this, &FileViewScreen::end_modal);
 	b->set_title("Close");
 }
@@ -95,23 +95,23 @@ MainMenu::MainMenu()
 	// Buttons
 	Button *b;
 
-	b = new Button(this, 60, 150, 174, 24, 1, mm_singleplayer);
+	b = new Button(this, 60, 150, 174, 24, 3, mm_singleplayer);
 	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_title("Single Player");
 
-	b = new Button(this, 60, 190, 174, 24, 1);
+	b = new Button(this, 60, 190, 174, 24, 3);
 	b->clicked.set(this, &MainMenu::not_supported);
 	b->set_title("Multi Player");
 
-	b = new Button(this, 60, 230, 174, 24, 1, mm_options);
+	b = new Button(this, 60, 230, 174, 24, 3, mm_options);
 	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_title("Options");
 
-	b = new Button(this, 60, 270, 174, 24, 1, mm_readme);
+	b = new Button(this, 60, 270, 174, 24, 3, mm_readme);
 	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_title("View Readme");
 
-	b = new Button(this, 60, 310, 174, 24, 1, mm_license);
+	b = new Button(this, 60, 310, 174, 24, 3, mm_license);
 	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_title("License");
 

@@ -63,10 +63,10 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
 	set_cache(true);
 	set_top_on_click(true);
 
-	m_pic_lborder = g_gr->get_picture(PicMod_UI, "pics/win_l_border.bmp");
-	m_pic_rborder = g_gr->get_picture(PicMod_UI, "pics/win_r_border.bmp");
-	m_pic_top = g_gr->get_picture(PicMod_UI, "pics/win_top.bmp");
-	m_pic_bottom = g_gr->get_picture(PicMod_UI, "pics/win_bot.bmp");
+	m_pic_lborder = g_gr->get_picture(PicMod_UI, "pics/win_l_border.bmp", WINDOW_CLRKEY);
+	m_pic_rborder = g_gr->get_picture(PicMod_UI, "pics/win_r_border.bmp", WINDOW_CLRKEY);
+	m_pic_top = g_gr->get_picture(PicMod_UI, "pics/win_top.bmp", WINDOW_CLRKEY);
+	m_pic_bottom = g_gr->get_picture(PicMod_UI, "pics/win_bot.bmp", WINDOW_CLRKEY);
 	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/win_bg.bmp");
 }
 
@@ -135,10 +135,14 @@ void Window::draw_border(RenderTarget* dst)
 	g_gr->get_picture_size(m_pic_background, &bgw, &bgh);
 	
 	// fill background
-	for(py = CORNER; py < get_h()-CORNER; py += bgh) {
-		for(px = CORNER; px < get_w()-CORNER; px += bgw)
-			dst->blit(px, py, m_pic_background);
-	}
+   int blitw, blith;
+   for(py = CORNER; py < get_h()-CORNER; py += bgh) {
+      for(px = CORNER; px < get_w()-CORNER; px += bgw) {
+         blitw=(get_w()-px-CORNER) > bgw ? bgw : (get_w()-px-CORNER);
+         blith=(get_h()-py-CORNER) > bgh ? bgh : (get_h()-py-CORNER);
+         dst->blitrect(px, py, m_pic_background, 0, 0, blitw, blith);
+      }
+   }
 
 	// top left corner
 	dst->blitrect(0, 0, m_pic_top, 0, 0, CORNER, CORNER);

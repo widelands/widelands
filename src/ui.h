@@ -489,6 +489,7 @@ private:
 #define MIDDLE			(MUST_HAVE_NPIX-(CORNER*2))
 
 #define WINDOW_BORDER	20
+#define WINDOW_CLRKEY RGBColor(0, 0, 255)
 
 class Window : public Panel {
 public:
@@ -506,6 +507,7 @@ public:
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
 
 private:
+
 	bool _dragging;
 
 	std::string		m_title;

@@ -43,6 +43,7 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 	case 0: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.bmp"); break;
 	case 1: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.bmp"); break;
 	case 2: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.bmp"); break;
+	case 3: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.bmp"); break;
 	}
 
 	_id = id;
