@@ -410,6 +410,7 @@ private:
 	MinMax m_attack;
 	MinMax m_defense;
 	MinMax m_evade;
+	MinMax m_total;
 };
 
 /*

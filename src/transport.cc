@@ -2324,11 +2324,13 @@ Requeriments::Requeriments ()
 	m_attack.min = -1;
 	m_defense.min = -1;
 	m_evade.min = -1;
-
+   m_total.min = -1;
+   
 	m_hp.max = 100;
 	m_attack.max = 100;
 	m_defense.max = 100;
 	m_evade.max = 100;
+   m_total.max = 400;
 }
 
 void Requeriments::set (tAttribute at, int min, int max)
@@ -2347,6 +2349,9 @@ void Requeriments::set (tAttribute at, int min, int max)
 		case atrEvade:		m_evade.min = min;
 								m_evade.max = max;
 								break;
+		case atrTotal:		m_total.min = min;
+								m_total.max = max;
+								break;
 		default:
 			throw wexception ("Requeriments::set Unknown attribute %d.", at);
 	}
@@ -2356,10 +2361,13 @@ bool Requeriments::check (int hp, int attack, int defense, int evade)
 {
 	bool result = false;
 
+   int total = hp + attack + defense + evade;
+
 	if(((m_hp.min <= hp)           && (hp <= m_hp.max)) &&
 	   ((m_attack.min <= attack)   && (attack <= m_attack.max)) &&
 		((m_defense.min <= defense) && (defense <= m_defense.max)) &&
-		((m_evade.min <= evade)     && (evade <= m_evade.max)))
+		((m_evade.min <= evade)     && (evade <= m_evade.max)) &&
+      ((m_total.min <= total)     && (total <= m_total.max)))
 			result = true;
 
 	return result;
