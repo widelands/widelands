@@ -183,23 +183,23 @@ class RenderTargetImpl : public RenderTarget {
 public:
 	RenderTargetImpl(Bitmap* bmp);
 	virtual ~RenderTargetImpl();
-	
+
 	void reset();
-	
+
 	virtual void get_window(Rect* rc, Point* ofs) const;
 	virtual void set_window(const Rect& rc, const Point& ofs);
 	virtual bool enter_window(const Rect& rc, Rect* previous, Point* prevofs);
 
 	virtual int get_w() const;
 	virtual int get_h() const;
-	
+
 	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr);
 	virtual void fill_rect(int x, int y, int w, int h, RGBColor clr);
 	virtual void brighten_rect(int x, int y, int w, int h, int factor);
 	virtual void clear();
 
 	void doblit(Point dst, Bitmap* src, Rect srcrc);
-	
+
 	virtual void blit(int dstx, int dsty, uint picture);
 	virtual void blitrect(int dstx, int dsty, uint picture,
 	                      int srcx, int srcy, int w, int h);
@@ -236,7 +236,7 @@ public:
 	virtual void refresh();
 
 	virtual void flush(int mod);
-	
+
 	// Pictures
 	virtual uint get_picture(int mod, const char* fname);
 	virtual uint get_picture(int mod, const char* fname, RGBColor clrkey);
@@ -266,33 +266,33 @@ public:
 
 	virtual uint get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey);
 	virtual const char* get_maptexture_picture(uint id);
-      
+
 private:
 	uint find_free_picture();
 
 	struct Picture {
 		int		mod; // 0 if unused, -1 for surfaces, PicMod_* bitmask for pictures
 		Bitmap	bitmap;
-		
+
 		union {
 			char*					fname;
 			RenderTargetImpl*	rendertarget;
 		} u;
-		
+
 		Picture() { mod = 0; u.fname = 0; bitmap.pixels = 0; }
 	};
 	typedef std::map<std::string, uint> picmap_t;
-	
+
 	SDL_Surface*			m_sdlsurface;
 	Bitmap					m_screen;
 	RenderTargetImpl*		m_rendertarget;
    SDL_Rect					m_update_rects[MAX_RECTS];
 	int						m_nr_update_rects;
 	bool						m_update_fullscreen;
-	
+
 	std::vector<Picture>	m_pictures;
 	picmap_t					m_picturemap; // hash of filename/picture ID pairs
-	
+
 	std::vector<Texture*>		m_maptextures;
 	std::vector<AnimationGfx*>	m_animations;
 

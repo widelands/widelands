@@ -34,7 +34,7 @@ constructor
 */
 UIEdit_Box::UIEdit_Box(UIPanel* parent, int x, int y, uint w, uint h, uint background, int id) :
    UIButton(parent, x, y, w, h, background, id) {
-   
+
    set_think(false);
 
    m_keyboard_grabbed=false;
@@ -61,7 +61,7 @@ the mouse was clicked on this editbox
 */
 bool UIEdit_Box::handle_mouseclick(uint btn, bool down, int x, int y) {
    if(btn!=0) return false;
-   
+
    if(down && !m_keyboard_grabbed) {
       set_can_focus(true);
       grab_mouse(true);

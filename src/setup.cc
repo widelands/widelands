@@ -39,12 +39,12 @@ void setup_searchpaths(int argc, char **argv)
 {
 	// absolute fallback directory is the CWD
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
-	
+
 	// the directory the executable is in is the default game data directory
 	char *exename = strdup(argv[0]);
 	char *slash = strrchr(exename, '/');
 	char *backslash = strrchr(exename, '\\');
-	
+
 	if (backslash && (!slash || backslash > slash))
 		slash = backslash;
 	if (slash) {
@@ -52,7 +52,7 @@ void setup_searchpaths(int argc, char **argv)
 		if (strcmp(exename, "."))
 			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
 	}
-	
+
 	free(exename);
 
 	// finally, the user's config directory
@@ -60,7 +60,7 @@ void setup_searchpaths(int argc, char **argv)
 #ifndef	WIN32
 	std::string path;
 	char *buf=getenv("HOME");
-	
+
 	if (buf) { // who knows, maybe the user's homeless
 		path = std::string(buf) + "/.widelands";
 		mkdir(path.c_str(), 0x1FF);

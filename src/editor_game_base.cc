@@ -16,7 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-   
+
 #include <set>
 #include "building.h"
 #include "editor_game_base.h"
@@ -63,7 +63,7 @@ Editor_Game_Base::~Editor_Game_Base() {
    for(i = 1; i <= MAX_PLAYERS; i++)
       if (m_players[i-1])
          remove_player(i);
-	
+
    if (m_map)
 		delete m_map;
 
@@ -306,7 +306,7 @@ the game starts. Similar for remote players.
 void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const uchar *playercolor)
 {
 	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
-	
+
 	if (m_players[plnum-1])
 		remove_player(plnum);
 
@@ -316,10 +316,10 @@ void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const 
 	for(i = 0; i < m_tribes.size(); i++)
 		if (!strcmp(m_tribes[i]->get_name(), tribe))
 			break;
-	
+
 	if (i == m_tribes.size())
 		m_tribes.push_back(new Tribe_Descr(tribe));
-	
+
 	m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], playercolor);
 }
 
@@ -360,7 +360,7 @@ void Editor_Game_Base::postload()
 	while(id < m_tribes.size()) {
 		for(pid = 1; pid <= MAX_PLAYERS; pid++) {
 			Player* plr = get_player(pid);
-			
+
 			if (plr && plr->get_tribe() == m_tribes[id])
 				break;
 		}
@@ -401,12 +401,12 @@ void Editor_Game_Base::load_graphics()
 
 	for(i = 0; i < (int)m_tribes.size(); i++)
 		m_tribes[i]->load_graphics();
-	
+
 	// TODO: load player graphics? (maybe)
-	
+
 	for(i = 0; i < m_wares.get_nitems(); i++)
 		m_wares.get(i)->load_graphics();
-	
+
 	g_gr->load_animations();
 }
 
@@ -424,7 +424,7 @@ void Editor_Game_Base::init_wares()
 		Player *plr = get_player(pid);
 		if (!plr)
 			continue;
-	
+
       // TODO: BUG different wares with same name (different tribes)
       // do not get inserted ok
 		Tribe_Descr *tribe = plr->get_tribe();
@@ -438,18 +438,18 @@ void Editor_Game_Base::init_wares()
          if(idx < 0)
             idx = m_wares.add(m_ware);
       }
-      
+
 		for(int i = 0; i < tribe->get_nrworkers(); i++) {
 			Worker_Descr *worker = tribe->get_worker_descr(i);
 			if (!worker)
 				continue;
-			
+
 			int idx = m_wares.get_index(worker->get_name());
 			if (idx < 0)
 				idx = m_wares.add(new Worker_Ware_Descr(worker->get_name()));
-			
+
 			worker->set_ware_id(idx);
-				
+
 			Worker_Ware_Descr *descr = (Worker_Ware_Descr*)m_wares.get(idx);
 			descr->add_worker(tribe, worker);
 		}

@@ -45,7 +45,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 {
 	// Switch to the new graphics system now, if necessary
    Section *s = g_options.pull_section("global");
-	
+
 	Sys_InitGraphics(Sys_GetGraphicsSystemFromString(s->get_string("gfxsys", "sw32")),
 			get_xres(), get_yres(), s->get_bool("fullscreen", false));
 

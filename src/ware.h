@@ -92,7 +92,7 @@ private:
 	std::string		m_menu_pic_fname;
 	std::string		m_pic_queue_full_fname;
 	std::string		m_pic_queue_empty_fname;
-	
+
 	uint				m_menu_pic;
 	uint				m_idle_anim;
 

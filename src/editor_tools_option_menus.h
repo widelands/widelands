@@ -95,5 +95,5 @@ class Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu
       UITextarea* m_name;
       void clicked(int, bool);
 };
-   
+
 #endif // __S__EDITOR_TOOLS_OPTION_MENUS_H

@@ -30,7 +30,7 @@ enum Align {
 	Align_HCenter = 1,
 	Align_Right = 2,
 	Align_Horizontal = 3,
-	
+
 	Align_Top = 0,
 	Align_VCenter = 4,
 	Align_Bottom = 8,
@@ -39,7 +39,7 @@ enum Align {
 	Align_TopLeft = 0,
 	Align_CenterLeft = Align_VCenter,
 	Align_BottomLeft = Align_Bottom,
-	
+
 	Align_TopCenter = Align_HCenter,
 	Align_Center = Align_HCenter|Align_VCenter,
 	Align_BottomCenter = Align_HCenter|Align_Bottom,
@@ -58,7 +58,7 @@ class Font {
 public:
 	static void reload_all();
 	static Font* load(const char* name);
-	
+
 	void addref();
 	void release();
 
@@ -67,23 +67,23 @@ public:
 						  int wrap = -1);
 	void get_size(const char* string, int* pw, int* ph, int wrap = -1);
 	int get_fontheight();
-	
+
 private:
 	Font(const char* name);
 	~Font();
-	
+
 	void do_load();
-	
+
 	struct Char {
 		int	width;
 		uint	pic;
 	};
-	
+
 	int	m_refs;
 	char*	m_name;
 	int	m_height;			// height of the font
 	Char	m_pictures[96];
-	
+
 	static std::map<const char*, Font*>		s_fonts;		// map of all fonts
 };
 

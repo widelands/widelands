@@ -39,7 +39,7 @@ void options_shutdown()
 	g_options.write("config", true);
 }
 
-		 
+
 /** show_usage()
  *
  * This functions finally prints the usage and ends the programm
@@ -100,14 +100,14 @@ static bool parse_command_line(int argc, char** argv)
 			show_version();
 			return false;
 		}
-		
+
 		value = strchr(opt, '=');
 		if (!value) {
 			show_usage();
 			return false;
 		}
 		*value++ = 0;
-		
+
 		if (!strcmp(opt, "record")) {
 			Sys_SetRecordFile(value);
 			continue;
@@ -116,7 +116,7 @@ static bool parse_command_line(int argc, char** argv)
 			Sys_SetPlaybackFile(value);
 			continue;
 		}
-		
+
 		g_options.pull_section("global")->create_val(opt, value);
 	}
 
@@ -130,7 +130,7 @@ static bool parse_command_line(int argc, char** argv)
 void options_init(int argc, char **argv)
 {
 	g_options.read("config", "global");
-	
+
 	if (!parse_command_line(argc, argv))
 		exit(0);
 }

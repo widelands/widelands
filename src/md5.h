@@ -50,7 +50,7 @@
 class ChkSum {
 		  ChkSum(const ChkSum&);
 		  ChkSum operator=(const ChkSum&);
-		  
+
 		  public:
 					 ChkSum(void);
 					 ~ChkSum(void);
@@ -84,10 +84,10 @@ class ChkSum {
 					 uint nread;
 					 char sum[16];
 					 bool can_handle_data;
-					
-					 
+
+
 };
-					 
+
 // operator overloading
 bool operator==(ChkSum&, ChkSum&);
 bool operator==(ChkSum&, const void*);

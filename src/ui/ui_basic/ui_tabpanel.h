@@ -38,14 +38,14 @@ public:
 	UITab_Panel(UIPanel* parent, int x, int y, uint background);
 
 	void resize();
-	
+
 	void set_snapparent(bool snapparent);
 	bool get_snapparent() const { return m_snapparent; }
-	
+
 	uint add(uint picid, UIPanel* panel);
-	
+
 	void activate(uint idx);
-	
+
 private:
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
@@ -53,18 +53,18 @@ private:
 	void handle_mousein(bool inside);
 	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
-	
+
 	struct Tab {
 		uint		picid;
 		UIPanel*	panel;
 	};
-	
+
 	std::vector<Tab>	m_tabs;
 	uint					m_active; ///< index of the currently active tab
 	bool					m_snapparent; ///< if true, resize parent to fit this panel
-	
+
 	int					m_highlight; ///< index of the highlighted button
-	
+
 	uint					m_pic_background; ///< picture used to draw background
 };
 

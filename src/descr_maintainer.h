@@ -46,7 +46,7 @@ template <class T> class Descr_Maintainer {
          }
          place_for=n;
       }
-      
+
       inline T* get(int idx) { if (idx>=0 && idx<(int)nitems) return items[idx]; else return 0; }
 
    private:
@@ -58,7 +58,7 @@ template <class T> class Descr_Maintainer {
 
 template <class T>
 int Descr_Maintainer<T>::get_index(const char* name) {
-  
+
    ushort i;
    for(i=0; i<nitems; i++) {
       if(!strcasecmp(name, items[i]->get_name())) return i;
@@ -82,10 +82,10 @@ T* Descr_Maintainer<T>::get(const char* name) {
       items=(T**) realloc(items, sizeof(T*)*nitems);
    } 
    items[nitems-1]= new T(name);
-   
+
    return items[nitems-1]; 
 }*/
-      
+
 template <class T>
 int Descr_Maintainer<T>::add(T* item) {
    nitems++;

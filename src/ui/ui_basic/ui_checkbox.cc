@@ -116,9 +116,9 @@ void UIStatebox::draw(RenderTarget* dst)
 		// center picture
       int xpos, ypos;
       int w,h;
-     
+
       g_gr->get_picture_size(m_pic_graphics, &w, &h);
-      
+
       xpos=(get_inner_w()-w)/2;
       ypos=(get_inner_h()-h)/2;
       dst->blit(xpos, ypos, m_pic_graphics);

@@ -34,7 +34,7 @@ inits
 
 Editor::Editor() {
    m_eia=0; 
-   
+
    m_realtime=Sys_GetTime();
 }
 
@@ -57,7 +57,7 @@ and go for it
 =========
 */
 void Editor::run() {
-  
+
    // set empty map, defaults
    Map* map=new Map;
    map->set_world_name("greenland");
@@ -80,11 +80,11 @@ void Editor::run() {
    set_map(map);
 
    g_gr->flush(PicMod_Menu);
-		
+
    m_eia = new Editor_Interactive(this);
    // inform base, that we have something interactive
    set_iabase(m_eia);
-      
+
    postload();
    load_graphics();
 

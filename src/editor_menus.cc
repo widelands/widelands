@@ -199,7 +199,7 @@ class Main_Menu_New_Map : public UIWindow {
       UIButton* m_world;
       int m_w, m_h;
       std::string m_worldstr;
-      
+
       void button_clicked(int);
 };
 
@@ -238,7 +238,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=20+spacing+spacing;
-   
+
    sprintf(buf, "Height: %i", MAP_DIMENSIONS[m_h]);
    m_height=new UITextarea(this, posx+spacing+20, posy+7, buf, Align_Left);
    b = new UIButton(this, posx, posy, 20, 20, 1, 2);
@@ -506,7 +506,7 @@ void Editor_Tool_Menu::changed_to(void) {
    if (m_options.window) {
       delete m_options.window;
    }
-  
+
    switch(n) {
       case 0: 
          m_parent->select_tool(1, 0); 
@@ -514,7 +514,7 @@ void Editor_Tool_Menu::changed_to(void) {
                static_cast<Editor_Increase_Height_Tool*>(m_tools->tools[1]),
                &m_options);
          break;
-   
+
       case 1:
          m_parent->select_tool(2,0);
          new Editor_Tool_Noise_Height_Options_Menu(m_parent,

@@ -40,7 +40,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
 	egbase = g;
 	m_maploader = 0;
    m_map = new Map;
-   
+
 	// Text
 	new UITextarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
 
@@ -63,12 +63,12 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
 	// Fill it with the files: Widelands map files
 	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &m_mapfiles);
 	g_fs->FindFiles("maps", "*"S2MF_SUFFIX, &m_mapfiles);
-	
+
 	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 		const char *name = pname->c_str();
 		const char *slash = strrchr(name, '/');
 		const char *backslash = strrchr(name, '\\');
-		
+
 		if (backslash && (!slash || backslash > slash))
 			slash = backslash;
 
@@ -112,7 +112,7 @@ void Fullscreen_Menu_MapSelect::ok()
    egbase->set_map(m_maploader->get_map());
 	m_maploader->load_map_complete(egbase);
    m_map=0;
-   
+
 	end_modal(1);
 }
 
@@ -122,11 +122,11 @@ void Fullscreen_Menu_MapSelect::map_selected(int id)
 		delete m_maploader;
 		m_maploader = 0;
 	}
-	
+
 	if (get_mapname())
 	{
 		assert(m_map); 
-      
+
       try {
          m_maploader = m_map->get_correct_loader(get_mapname());
 	      m_maploader->preload_map();

@@ -79,7 +79,7 @@ void log(const char *, ...) PRINTF_FORMAT(1,2);
       }
 */
 		void myassert(int line, const char* file, const char* condt) throw(wexception);
-   
+
       #define assert(condition) \
 			do { if (!(condition)) myassert(__LINE__, __FILE__, #condition); } while(0)
 

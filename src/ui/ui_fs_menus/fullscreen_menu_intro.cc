@@ -36,6 +36,6 @@ bool Fullscreen_Menu_Intro::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (down)
 		end_modal(0);
-	
+
 	return true;
 }

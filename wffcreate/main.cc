@@ -52,17 +52,17 @@ inline int g_main(int argc, char** argv)
 	FileWrite f;
 	char filename[300];
 	char hdrname[20];
-		  
+
 	snprintf(hdrname, sizeof(hdrname), "%s", argv[1]);
 	snprintf(filename, sizeof(filename), "%s%s", hdrname, WLFF_SUFFIX);
-	
+
 	ushort tmp;
 	f.Data(WLFF_MAGIC, 6);
 	f.Unsigned16(WLFF_VERSION);
 	f.Data(hdrname, 20);
 	tmp=pack_rgb(atoi(argv[2]), atoi(argv[3]), atoi(argv[4]));
 	f.Unsigned16(tmp);
-		 
+
 	SDL_Surface* sur;
 	uint h=0;
 	for(uchar c=32; c<=127; c++) {
@@ -73,7 +73,7 @@ inline int g_main(int argc, char** argv)
 			cerr << buf << ": file not found or other error!" << endl;
 			return -1;
 		}
-					 
+
 		if(!h) {
 			h=sur->h;
 			f.Unsigned16(h);
@@ -91,9 +91,9 @@ inline int g_main(int argc, char** argv)
 			}
 		}
 	}
-	
+
 	f.Write(tool_fs, filename);
-	
+
 	delete tool_fs;
 	return 0;
 }

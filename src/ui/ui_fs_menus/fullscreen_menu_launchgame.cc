@@ -58,16 +58,16 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g)
 	b = new UIButton(this, 410, 200, 174, 24, 1, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::select_map);
 	b->set_title("Select map");
-	
+
 	// Player settings
 	int i;
 	int y;
-	
+
 	y = 184;
 	for(i = 1; i <= MAX_PLAYERS; i++)	{ // players start with 1, not 0
 		PlayerDescriptionGroup *pdg = new PlayerDescriptionGroup(this, 30, y, m_game, i);
 		pdg->changed.set(this, &Fullscreen_Menu_LaunchGame::refresh);
-		
+
 		m_players[i-1] = pdg;
 		y += 30;
 	}
@@ -82,7 +82,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 {
 	Map* map = m_game->get_map();
 	int maxplayers = 0;
-	
+
 	// update the mapname
 	if (map)
 	{
@@ -91,13 +91,13 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	}
 	else
 		m_mapname->set_text("(no map)");
-	
+
 	// update the player description groups
 	int i;
 	for(i = 0; i < MAX_PLAYERS; i++) {
 		m_players[i]->set_enabled(i < maxplayers);
    }
-	
+
 	m_ok->set_enabled(m_game->can_start());
 }
 

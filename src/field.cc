@@ -71,7 +71,7 @@ static float calc_brightness(int l, int r, int tl, int tr, int bl, int br)
 
 	float b = normal * sun;
 	b *= -LIGHT_FACTOR;
-	
+
 	return b;
 }
 
@@ -88,12 +88,12 @@ void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 	static float flatbrightness = 0; // HACK to normalize flat terrain to zero brightness
 	if (!flatbrightness)
 		flatbrightness = calc_brightness(0, 0, 0, 0, 0, 0);
-	
+
 	float b = calc_brightness(l, r, tl, tr, bl, br) - flatbrightness;
-	
+
 	if (b > 0)
 		b *= 1.5;
-	
+
 	if (b < -128) b = -128;
 	else if (b > 127) b = 127;
 	brightness = (char)b;

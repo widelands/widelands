@@ -72,7 +72,7 @@ public:
 public: // for use by the graphics subsystem
 	uint get_nranimations() const;
 	const AnimationData* get_animation(uint id) const;
-	
+
 private:
 	std::vector<AnimationData>	m_animations;
 };
@@ -88,12 +88,12 @@ class DirAnimations {
 public:
 	DirAnimations();
 	~DirAnimations();
-	
+
 	void parse(const char *directory, Profile *prof, const char *sectnametempl, Section *defaults = 0, 
 	           const EncodeData *encdefaults = 0);
-	
+
 	inline uint get_animation(int dir) { return m_animations[dir-1]; }
-	
+
 private:
 	uint	m_animations[6];
 };

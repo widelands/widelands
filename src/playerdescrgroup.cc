@@ -83,7 +83,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 {
 	m_game = game;
 	m_plnum = plnum;
-	
+
 	m_enabled = false;
 	set_visible(false);
 
@@ -91,7 +91,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	m_btnEnablePlayer = new UICheckbox(this, 0, 0);
 	m_btnEnablePlayer->set_state(true);
 	m_btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
-	
+
 	m_btnPlayerType = new UIButton(this, 28, 0, 174, 20, 1);
 	m_btnPlayerType->clicked.set(this, &PlayerDescriptionGroup::toggle_playertype);
 	if (plnum==1)
@@ -109,9 +109,9 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 {
 	if (enable == m_enabled)
 		return;
-	
+
 	m_enabled = enable;
-	
+
 	if (!m_enabled)
 	{
 		if (m_btnEnablePlayer->get_state())
@@ -122,7 +122,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 	{
 		if (m_btnEnablePlayer->get_state())
 			m_game->add_player(m_plnum, m_playertype, "romans", g_playercolors[m_plnum-1]);
-			
+
 		const char* string = 0;
 		switch(m_playertype) {
 		case Player::playerLocal: string = "Human"; break;
@@ -130,10 +130,10 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 		}
 		m_btnPlayerType->set_title(string);
 		m_btnPlayerType->set_visible(m_btnEnablePlayer->get_state());
-		
+
 		set_visible(true);
 	}
-	
+
 	changed.call();
 }
 

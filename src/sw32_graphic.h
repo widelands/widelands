@@ -266,7 +266,7 @@ public:
 
 	virtual uint get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey);
 	virtual const char* get_maptexture_picture (uint id);
-   
+
 private:
 	uint find_free_picture();
 

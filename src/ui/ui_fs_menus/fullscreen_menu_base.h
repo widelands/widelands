@@ -34,7 +34,7 @@
  */
 class Fullscreen_Menu_Base : public UIPanel {
 	uint	m_pic_background;
-	
+
 public:
 	Fullscreen_Menu_Base(const char *bgpic);
 

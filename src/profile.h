@@ -151,7 +151,7 @@ public:
 
 	void error(const char *fmt, ...) const;
 	void check_used();
-	
+
 	void read(const char *filename, const char *global_section = 0);
 	void write(const char *filename, bool used_only = true);
 
@@ -159,7 +159,7 @@ public:
 	Section *get_safe_section(const char *name);
 	Section *pull_section(const char *name);
 	Section *get_next_section(const char *name);
-	
+
 	Section *create_section(const char *name, bool duplicate = false);
 };
 

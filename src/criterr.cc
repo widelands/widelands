@@ -91,7 +91,7 @@ void critical_error(const char* str, ...)
 	va_end(va);
 
 	log("Critical Error%s: %s\n", in_criterr ? " (recursive)" : "", buf);
-	
+
 	if (in_criterr || !g_gr)
 	{
 #ifdef WIN32

@@ -61,7 +61,7 @@ class Editor_Tool {
          if(n==2) return m_third->get_fsel_impl(); 
          return 0; 
       }
-      
+
       virtual int handle_click_impl(const Coords*, Field* field, Map* m, Editor_Interactive* parent) = 0;
       virtual const char* get_fsel_impl(void) = 0;
 
@@ -97,14 +97,14 @@ class Editor_Decrease_Height_Tool : public Editor_Tool {
    public:
       Editor_Decrease_Height_Tool() : Editor_Tool(this,this) { m_changed_by=1; }
       virtual ~Editor_Decrease_Height_Tool() { }
-  
+
       virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
-      
+
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_decrease_height.png"; }
-      
+
       inline int get_changed_by(void) { return m_changed_by; }
       inline void set_changed_by(int n) { m_changed_by=n; }
-      
+
    private:
       int m_changed_by;
 };
@@ -120,14 +120,14 @@ class Editor_Set_Height_Tool : public Editor_Tool {
    public:
       Editor_Set_Height_Tool() : Editor_Tool(this,this) { m_set_to=10; }
       virtual ~Editor_Set_Height_Tool() { }
-  
+
       virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
-      
+
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_set_height.png"; }
-      
+
       inline int get_set_to(void) { return m_set_to; }
       inline void set_set_to(int n) { m_set_to=n; }
-      
+
    private:
       int m_set_to;
 };
@@ -144,17 +144,17 @@ class Editor_Increase_Height_Tool : public Editor_Tool {
       Editor_Increase_Height_Tool(Editor_Decrease_Height_Tool* dht, Editor_Set_Height_Tool* sht)
         : Editor_Tool(dht, sht) { m_changed_by=1; m_dht=dht; m_sht=sht; }
       virtual ~Editor_Increase_Height_Tool() {  }
-  
+
       virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
-      
+
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_increase_height.png"; }
-     
+
       inline int get_changed_by(void) { return m_changed_by; }
       inline void set_changed_by(int n) { m_changed_by=n; }
-      
+
       Editor_Decrease_Height_Tool* get_dht(void) { return m_dht; }
       Editor_Set_Height_Tool* get_sht(void) { return m_sht; }
-      
+
    private:
       Editor_Decrease_Height_Tool* m_dht; 
       Editor_Set_Height_Tool* m_sht;
@@ -174,13 +174,13 @@ class Editor_Noise_Height_Tool : public Editor_Tool {
       Editor_Noise_Height_Tool(Editor_Set_Height_Tool* sht) :
         Editor_Tool(sht,sht) { m_upper_value=MAX_FIELD_HEIGHT/2; m_lower_value=10; m_sht=sht; }
       virtual ~Editor_Noise_Height_Tool() { m_third=m_second=0; } // don't delete this, somone else will care  
-  
+
       virtual int handle_click_impl(const Coords*, Field*, Map*, Editor_Interactive*);
-      
+
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_noise_height.png"; }
-     
+
       inline Editor_Set_Height_Tool* get_sht(void) { return m_sht; }
-      
+
       inline void get_values(int* a, int* b) { *a=m_lower_value; *b=m_upper_value; }
       inline void set_values(int a, int b) { m_lower_value=a; m_upper_value=b; }
 
@@ -248,7 +248,7 @@ class Set_Terrain : public MultiSelect {
    protected:
       int set_terrain(const Coords*, Field*, Map*, Editor_Interactive*, bool right, bool down);
 };
-      
+
 /*
 =============================
 class Editor_Set_Right_Terrain_Tool
@@ -260,11 +260,11 @@ class Editor_Set_Right_Terrain_Tool : public Editor_Tool, public Set_Terrain {
    public:
       Editor_Set_Right_Terrain_Tool() : Editor_Tool(this,this) { }
       virtual ~Editor_Set_Right_Terrain_Tool() { }
-  
+
       virtual int handle_click_impl(const Coords* c, Field* f, Map* m, Editor_Interactive* e) {
          return set_terrain(c,f,m,e,true,false);
       }
-      
+
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_terrain_right.png"; }
 };
 
@@ -279,11 +279,11 @@ class Editor_Set_Down_Terrain_Tool : public Editor_Tool, public Set_Terrain {
    public:
       Editor_Set_Down_Terrain_Tool() : Editor_Tool(this,this) { }
       virtual ~Editor_Set_Down_Terrain_Tool() { }
-  
+
       virtual int handle_click_impl(const Coords* c, Field* f, Map* m, Editor_Interactive* e) {
          return set_terrain(c,f,m,e,false,true);
       }
-      
+
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_terrain_down.png"; }
 };
 
@@ -300,18 +300,18 @@ class Editor_Set_Both_Terrain_Tool : public Editor_Tool, public Set_Terrain {
       Editor_Set_Both_Terrain_Tool(Editor_Set_Down_Terrain_Tool* sdt, Editor_Set_Right_Terrain_Tool* srt) : 
         Editor_Tool(sdt, srt) { m_sdt=sdt; m_srt=srt; }
       virtual ~Editor_Set_Both_Terrain_Tool() { }
-  
+
       virtual int handle_click_impl(const Coords* c, Field* f, Map* m, Editor_Interactive* e) {
          return set_terrain(c,f,m,e,true,true);
       }
-     
+
       virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_terrain_both.png"; }
       void enable(int n, bool t) {
          m_sdt->enable(n,t);
          m_srt->enable(n,t);
          MultiSelect::enable(n,t);
       }
-      
+
    private:
       Editor_Set_Down_Terrain_Tool* m_sdt;
       Editor_Set_Right_Terrain_Tool* m_srt;

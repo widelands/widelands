@@ -54,7 +54,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    int x = (get_w() - (5*34)) >> 1;
    int y = get_h() - 34;
    UIButton *b;
-   
+
    b = new UIButton(this, x, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_mainmenu);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png", RGBColor(0,0,255)));
@@ -70,7 +70,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b = new UIButton(this, x+102, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_minimap);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png", RGBColor(0,0,255)));
-   
+
    b = new UIButton(this, x+136, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", RGBColor(0,0,255)));
@@ -84,7 +84,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Noise_Height_Tool(sht));
    tools.tools.push_back(new Editor_Set_Both_Terrain_Tool(new Editor_Set_Down_Terrain_Tool(), new Editor_Set_Right_Terrain_Tool()));
    tools.tools.push_back(new Editor_Place_Immovable_Tool(new Editor_Delete_Immovable_Tool()));
-   
+
 /*   tools.tools.push_back(new Tool_Info(1, 3, new Editor_Decrease_Height_Tool()));
    tools.tools.push_back(new Tool_Info(1, 2, new Editor_Set_Height_Tool()));
    tools.tools.push_back(new Tool_Info(4, 4, new Editor_Noise_Height_Tool()));
@@ -123,17 +123,17 @@ void Editor_Interactive::start()
    m_maprenderinfo.egbase = m_editor; 
 	m_maprenderinfo.visibility = 0; 
 	m_maprenderinfo.show_buildhelp = true;
-	
+
 	mapw = m_maprenderinfo.egbase->get_map()->get_width();
 	maph = m_maprenderinfo.egbase->get_map()->get_height();
 	m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
 	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
 	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
-	
+
 	for(int y = 0; y < maph; y++)
 		for(int x = 0; x < mapw; x++) {
 			FCoords coords = m_maprenderinfo.egbase->get_map()->get_fcoords(Coords(x,y));
-			
+
 			recalc_overlay(coords);
 		}
 }
@@ -375,7 +375,7 @@ select a new tool
 void Editor_Interactive::select_tool(int n, int which) {
    tools.current_tool_index=n;
    tools.use_tool=which;
-   
+
    set_fsel_picture(tools.tools[n]->get_fsel(which));
 }
 

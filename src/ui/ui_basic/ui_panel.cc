@@ -150,7 +150,7 @@ int UIPanel::run()
 			UIPanel::ui_mousemove,
 			UIPanel::ui_key
 		};
-	
+
 		Sys_HandleInput(&icb);
 		if (Sys_ShouldDie())
 			end_modal(-1);
@@ -160,11 +160,11 @@ int UIPanel::run()
 
 		if (g_gr->need_update()) {
 			RenderTarget* rt = g_gr->get_render_target();
-			
+
 			forefather->do_draw(rt);
-			
+
 			rt->blit(Sys_GetMouseX(), Sys_GetMouseY(), s_default_cursor);
-			
+
 			g_gr->refresh();
 		}
 
@@ -307,7 +307,7 @@ void UIPanel::set_visible(bool on)
    _flags &= ~pf_visible;
 	if (on)
 		_flags |= pf_visible;
-		
+
 	update(0, 0, _w, _h);
 }
 
@@ -553,7 +553,7 @@ void UIPanel::set_can_focus(bool yes)
 		_flags |= pf_can_focus;
    }	else {
 		_flags &= ~pf_can_focus;
-		
+
 		if (_parent && _parent->_focus == this)
 			_parent->_focus = 0;
 	}
@@ -642,7 +642,7 @@ void UIPanel::do_draw(RenderTarget* dst)
 {
 	if (!get_visible())
 		return;
-	
+
 	if (!_cache)
 	{
 		Rect outerrc;
@@ -675,13 +675,13 @@ void UIPanel::do_draw(RenderTarget* dst)
 
 			RenderTarget* inner = _cache->enter_window(_lborder, _tborder, 
 			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
-			
+
 			if (inner) {
 				draw(inner);
 
 				for(UIPanel *child = _lchild; child; child = child->_prev)
 					child->do_draw(inner);
-				
+
 				inner->leave_window();
 			}
 
@@ -792,7 +792,7 @@ bool UIPanel::do_key(bool down, int code, char c)
 		if (_focus->do_key(down, code, c))
 			return true;
 	}
-	
+
 	return handle_key(down, code, c);
 }
 
@@ -865,9 +865,9 @@ void UIPanel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 
 	UIPanel *p;
 	int w, h;
-	
+
 	g_gr->get_picture_size(s_default_cursor, &w, &h);
-	
+
 	g_gr->update_rectangle(x-xdiff, y-ydiff, w, h);
 	g_gr->update_rectangle(x, y, w, h);
 

@@ -125,7 +125,7 @@ class Field;
 
 struct FCoords : public Coords {
 	Field		*field;
-	
+
 	inline FCoords() { }
 	inline FCoords(Coords nc, Field *nf) : Coords(nc), field(nf) { }
 	inline FCoords(int nx, int ny, Field *nf) : Coords(nx, ny), field(nf) { }

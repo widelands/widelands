@@ -48,10 +48,10 @@ class Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 	UIButton *m_ok;
 
 	filenameset_t	m_mapfiles;
-	
+
 	Map_Loader*			m_maploader;
 	Map*              m_map;
-   
+
 public:
 	Fullscreen_Menu_MapSelect(Editor_Game_Base *g);
 	~Fullscreen_Menu_MapSelect();

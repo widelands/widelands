@@ -1274,6 +1274,6 @@ Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, P
 			delete bob;
 		throw;
 	}
-	
+
 	return bob;
 }

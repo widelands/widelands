@@ -34,13 +34,13 @@ using namespace std;
 Tribe_Descr::Tribe_Descr(const char* name)
 {
 	snprintf(m_name, sizeof(m_name), "%s", name);
-	
+
 	try
 	{
 		char directory[256];
 
 		snprintf(directory, sizeof(directory), "tribes/%s", name);
-		
+
 		m_default_encdata.clear();
       parse_wares(directory);
 		parse_buildings(directory);
@@ -80,7 +80,7 @@ Load tribe graphics
 void Tribe_Descr::load_graphics()
 {
 	int i;
-	
+
 	for(i = 0; i < m_workers.get_nitems(); i++)
 		m_workers.get(i)->load_graphics();
 
@@ -103,9 +103,9 @@ Read and process the main conf file
 void Tribe_Descr::parse_root_conf(const char *directory)
 {
 	char fname[256];
-	
+
 	snprintf(fname, sizeof(fname), "%s/conf", directory);
-	
+
 	try
 	{
 		Profile prof(fname);
@@ -113,42 +113,42 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 
 		// Section [tribe]		
 		s = prof.get_safe_section("tribe");
-		
+
 		s->get_string("author");
 		s->get_string("name"); // descriptive name
 		s->get_string("descr"); // long description
-		
+
 		// Section [defaults]
 		s = prof.get_section("defaults");
-		
+
 		if (s)
 			m_default_encdata.parse(s);
-		
+
 		// Section [regent]
 		s = prof.get_safe_section("regent");
-		
+
 		s->get_string("name");
 		s->get_string("pic_small");
 		s->get_string("pic_big");
-		
+
 		// Section [frontier]
 		s = prof.get_section("frontier");
 		if (!s)
 			throw wexception("Missing section [frontier]");
-		
+
 		m_anim_frontier = g_anim.get(directory, s, 0, &m_default_encdata);
-		
+
 		// Section [flag]
 		s = prof.get_section("flag");
 		if (!s)
 			throw wexception("Missing section [flag]");
-		
+
 		m_anim_flag = g_anim.get(directory, s, 0, &m_default_encdata);
 
       // default wares
       s = prof.get_section("startwares");
 	   Section::Value* value;
-      
+
       while((value=s->get_next_val(0))) {
          int idx = m_wares.get_index(value->get_name());
          if(idx == -1) 
@@ -173,7 +173,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
       throw wexception("%s: %s", fname, e.what());
    }
 }
-	
+
 
 /*
 ===============
@@ -186,11 +186,11 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 {
 	char subdir[256];
 	filenameset_t dirs;
-	
+
 	snprintf(subdir, sizeof(subdir), "%s/buildings", rootdir);
-	
+
 	g_fs->FindFiles(subdir, "*", &dirs);
-	
+
 	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		Building_Descr *descr = 0;
 
@@ -219,11 +219,11 @@ void Tribe_Descr::parse_workers(const char *directory)
 {
 	char subdir[256];
 	filenameset_t dirs;
-	
+
 	snprintf(subdir, sizeof(subdir), "%s/workers", directory);
-	
+
 	g_fs->FindFiles(subdir, "*", &dirs);
-	
+
 	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		Worker_Descr *descr = 0;
 
@@ -312,7 +312,7 @@ the conf files
 */
 void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* game, Warehouse* wh) {
    std::map<std::string, int>::iterator cur;
-   
+
    for(cur=m_startwares.begin(); cur!=m_startwares.end(); cur++) {
       wh->create_wares(game->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
    }
@@ -320,4 +320,4 @@ void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* game, Wareho
       wh->create_wares(game->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
    } 
 }
-      
+

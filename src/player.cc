@@ -36,7 +36,7 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
 	m_tribe = tribe;
 	m_egbase = g;
    seen_fields = 0;
-	
+
 	for(int i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
 }

@@ -615,7 +615,7 @@ void WorkerProgram::parse_animation(WorkerAction* act, Parser* parser, const std
 		throw wexception("Usage: animation <name> <time>");
 
 	act->function = &Worker::run_animation;
-   
+
 	if (cmd[1] == "idle")
 		act->iparam1 = parser->descr->get_idle_anim();
 	else {

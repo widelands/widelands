@@ -68,7 +68,7 @@ void EncodeData::parse(Section *s)
 		hasclrkey = true;
 		clrkey.set(r, g, b);
 	}
-	
+
 	// Read shadow color
 	r = s->get_int("shadowclr_r", -1);
 	g = s->get_int("shadowclr_g", -1);
@@ -81,20 +81,20 @@ void EncodeData::parse(Section *s)
 	// Read player color codes	
 	for(i = 0; i < 4; i++) {
 		char keyname[32];
-		
+
 		snprintf(keyname, sizeof(keyname), "plrclr%i_r", i);
 		r = s->get_int(keyname, -1);
 		snprintf(keyname, sizeof(keyname), "plrclr%i_g", i);
 		g = s->get_int(keyname, -1);
 		snprintf(keyname, sizeof(keyname), "plrclr%i_b", i);
 		b = s->get_int(keyname, -1);
-		
+
 		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 			break;
-		
+
 		plrclr[i].set(r, g, b);
 	}
-	
+
 	if (i == 4)
 		hasplrclrs = true;
 }
@@ -118,7 +118,7 @@ void EncodeData::add(const EncodeData *other)
 		hasshadow = true;
 		shadow = other->shadow;
 	}
-	
+
 	if (other->hasplrclrs) {
 		hasplrclrs = true;
 		for(int i = 0; i < 4; i++)
@@ -202,7 +202,7 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 			picnametempl = templbuf;
 		}
 	}
-	
+
 	snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
 
 	ad->picnametempl = pictempl;
@@ -211,21 +211,21 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
       // delete extension
       ad->picnametempl[strlen(pictempl)-4]='\0';
    }
-   
+
 	// Get descriptive data
 	if (encdefaults)
 		ad->encdata.add(encdefaults);
-	
+
 	ad->encdata.parse(s);
 
 	int fps = s->get_int("fps");
 	if (fps > 0)
 		ad->frametime = 1000 / fps;
-	
+
 	// TODO: Frames of varying size / hotspot?
 	ad->hotspot.x = s->get_int("hot_spot_x", 0);
 	ad->hotspot.y = s->get_int("hot_spot_y", 0);
-	
+
 	return id;
 }
 
@@ -302,7 +302,7 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 	char sectnamebase[256];
 	char *repl;
 	const char* string;
-  
+
 	if (strchr(sectnametempl, '%'))
 		throw wexception("sectnametempl %s contains %%", sectnametempl);
 
@@ -332,7 +332,7 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 
 
 		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
-      
+
 		s = prof->get_section(sectname);
 		if (!s) {
 			if (!defaults)

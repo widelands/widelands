@@ -272,7 +272,7 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s)
 		s->get_int("def_stock", 0);
 	}
 	s->get_string("resources");
-	
+
 	int fps = s->get_int("fps");
 	if (fps > 0)
 		m_frametime = 1000 / fps;
@@ -299,13 +299,13 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s)
 
 	// Determine template of the texture animation pictures
 	char fnametmpl[256];
-	
+
 	str = s->get_string("texture", 0);
 	if (str)
 		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, str);
 	else
 		snprintf(fnametmpl, sizeof(fnametmpl), "%s/pics/%s_??.bmp", directory, m_name);
-	
+
 	m_picnametempl = strdup(fnametmpl);
 }
 
@@ -330,7 +330,7 @@ void Terrain_Descr::load_graphics()
 }
 
 /* "attic" -- re-add this in when it's needed
-  
+
 	// parse resources
    str=s->get_string("resources", 0);
    if(str && strcasecmp("", str)) {

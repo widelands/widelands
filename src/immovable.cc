@@ -870,7 +870,7 @@ void PlayerImmovable::remove_worker(Worker *w)
 			return;
 		}
 	}
-	
+
 	throw wexception("PlayerImmovable::remove_worker: not in list");
 }
 
@@ -888,7 +888,7 @@ void PlayerImmovable::set_owner(Player *owner)
 	// works (necessary for military building)
 	assert(!m_owner);
 	assert(owner);
-	
+
 	m_owner = owner;
 }
 

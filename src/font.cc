@@ -64,7 +64,7 @@ Font::Font(const char* name)
 	m_refs = 0;
 	m_name = strdup(name);
 	s_fonts[m_name] = this;
-	
+
 	if (g_gr) // otherwise, reload_all() does it
 		do_load();
 }
@@ -81,7 +81,7 @@ Font::~Font()
 {
 	if (m_refs)
 		log("Font::~Font: Oops, m_refs == %i, name = %s\n", m_refs, m_name);
-	
+
 	if (m_name)
 		{
 		s_fonts.erase(m_name);
@@ -102,7 +102,7 @@ Font* Font::load(const char* name)
 {
 	std::map<const char*, Font*>::iterator it;
 	Font* font;
-	
+
 	it = s_fonts.find(name);
 	if (it != s_fonts.end())
 		font = it->second;
@@ -115,7 +115,7 @@ Font* Font::load(const char* name)
 			{
 			throw wexception("Couldn't load font %s: %s\n", name, e.what());
 			}
-	
+
 	font->addref();
 	return font;
 }
@@ -133,12 +133,12 @@ void Font::do_load()
 	// Read the font
 	char buf[200];
 	FileRead f;
-	
+
 	snprintf(buf, sizeof(buf), "fonts/%s.wff", m_name);
 	f.Open(g_fs, buf);
-	
+
 	f.Data(6); // skip magic
-	
+
 	ushort version = f.Unsigned16();
 
 	if(WLFF_VERSIONMAJOR(version) > WLFF_VERSIONMAJOR(WLFF_VERSION))
@@ -148,19 +148,19 @@ void Font::do_load()
 			throw wexception("%s: bad minor font version", buf);
 
 	f.Data(20); // skip name
-	
+
 	RGBColor clrkey;
 	clrkey.unpack16(f.Unsigned16());
 	m_height = f.Unsigned16();
-	
-	
+
+
 	// Read in the characters
 	for(int i = 0; i < 96; i++)
 		{
 		uchar c = f.Unsigned8();
 		if (c != (i+32))
 			throw wexception("%s: bad character order", buf);
-		
+
 		int w = f.Unsigned16();
 
 		ushort *data = (ushort*)f.Data(sizeof(ushort)*w*m_height);
@@ -173,7 +173,7 @@ void Font::do_load()
                     }
                 }
 #endif
-		
+
 		m_pictures[i].width = w;
 		m_pictures[i].pic = g_gr->get_picture(PicMod_UI, w, m_height, data, clrkey);
 		}
@@ -190,7 +190,7 @@ Increase the reference counter of the font.
 void Font::addref()
 {
 	m_refs++;
-	
+
 	assert(m_refs > 0);
 }
 
@@ -206,7 +206,7 @@ Free the font when the refcount when it reaches zero.
 void Font::release()
 {
 	assert(m_refs > 0);
-	
+
 	m_refs--;
 	if (!m_refs)
 		delete this;
@@ -232,7 +232,7 @@ int Font::calc_linewidth(const char* line, int wrap, const char** nextline)
 {
 	const char* string = line; // current pointer into the string
 	int width = 0; // width of line
-	
+
 	// Loop forward
 	for(;;)
 		{
@@ -241,9 +241,9 @@ int Font::calc_linewidth(const char* line, int wrap, const char** nextline)
 			int cw = m_pictures[0].width;
 			if (*string == '\t')
 				cw *= 8;
-			
+
 			string++;
-			
+
 			if (wrap > 0 && width+cw > wrap)
 				break;
 			else
@@ -259,26 +259,26 @@ int Font::calc_linewidth(const char* line, int wrap, const char** nextline)
 			{
 			const char* p;
 			int wordwidth = 0;
-			
+
 			for(p = string;; p++)
 				{
 				if (!*p || *p == ' ' || *p == '\t' || *p == '\n') // whitespace break
 					break;
-				
+
 				uchar c = (uchar)*p;
 				if (c < 32 || c > 127)
 					c = 127;
-				
+
 				c -= 32;
 				wordwidth += m_pictures[c].width;
-				
+
 				if (*p == '-') // other character break
 					{
 					p++;
 					break;
 					}
 				}
-			
+
 			if (wrap > 0 && width && width+wordwidth > wrap)
 				break;
 			else
@@ -288,11 +288,11 @@ int Font::calc_linewidth(const char* line, int wrap, const char** nextline)
 				}
 			}
 		}
-	
+
 	// That's it
 	if (nextline)
 		*nextline = string;
-	
+
 	return width;
 }
 
@@ -313,21 +313,21 @@ void Font::draw_string(RenderTarget* dst, int dstx, int dsty, const char* string
 	if (align & (Align_VCenter|Align_Bottom))
 		{
 		int h;
-		
+
 		get_size(string, 0, &h, wrap);
-		
+
 		if (align & Align_VCenter)
 			dsty -= (h+1)/2; // +1 for slight bias to top
 		else
 			dsty -= h;
 		}
-	
+
 	// Draw the string
 	while(*string)
 		{
 		const char* nextline;
 		int x = dstx;
-		
+
 		if (wrap <= 0 && (align & Align_Horizontal) == Align_Left)
 			{
 			// straightforward path with no alignment and no wrapping
@@ -336,17 +336,17 @@ void Font::draw_string(RenderTarget* dst, int dstx, int dsty, const char* string
 		else
 			{
 			int width = calc_linewidth(string, wrap, &nextline);
-			
+
 			if (align & Align_HCenter)
 				x -= width/2;
 			else if (align & Align_Right)
 				x -= width;
 			}
-		
+
 		while(string < nextline)
 			{
 			uchar c = (uchar)*string;
-			
+
 			if (c == ' ' || c == '\t') // whitespace
 				{
 				int cw = m_pictures[0].width;
@@ -364,14 +364,14 @@ void Font::draw_string(RenderTarget* dst, int dstx, int dsty, const char* string
 				dst->blit(x, dsty, m_pictures[c].pic);
 				x += m_pictures[c].width;
 				}
-			
+
 			string++;
 			}
-		
+
 		dsty += m_height;
 		}
 }
-		
+
 
 /*
 ===============
@@ -386,19 +386,19 @@ void Font::get_size(const char* string, int* pw, int* ph, int wrap)
 {
 	int maxw = 0; // width of widest line
 	int maxh = 0; // total height
-	
+
 	while(*string)
 		{
 		const char* nextline;
 		int width = calc_linewidth(string, wrap, &nextline);
-		
+
 		if (width > maxw)
 			maxw = width;
 		maxh += m_height;
 
 		string = nextline;
 		}
-	
+
 	if (pw)
 		*pw = maxw;
 	if (ph)
@@ -429,7 +429,7 @@ Call the do_load() function for every Font.
 void Font::reload_all()
 {
 	std::map<const char*, Font*>::iterator it;
-	
+
 	for(it = s_fonts.begin(); it != s_fonts.end(); it++)
 		it->second->do_load();
 }

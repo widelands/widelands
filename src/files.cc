@@ -337,11 +337,11 @@ bool FileRead::ReadLine(char *buf, int buflen)
 
 	if (filepos >= length)
 		return false;
-	
+
 	while(filepos < length && buflen > 0) {
 		char c = ((char *)data)[filepos];
 		filepos++;
-		
+
 		if (c == '\r') // not perfectly correct, but it should work
 			continue;
 		if (c == '\n') {
@@ -349,16 +349,16 @@ bool FileRead::ReadLine(char *buf, int buflen)
 			buflen--;
 			break;
 		}
-		
+
 		*dst++ = c;
 		buflen--;
 	}
-	
+
 	if (!buflen && *(dst-1)) {
 		*(dst-1) = 0;
 		throw wexception("ReadLine: buffer overflow");
 	}
-	
+
 	return true;
 }
 

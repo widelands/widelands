@@ -24,7 +24,7 @@
 // a MD5 checksum is 16 bytes long. We use buffers to store it 
 
 #include "md5.h"
-		   
+
 const unsigned char ChkSum::fillbuf[64] = { 0x80, 0 /* , 0, 0, ...  */ };
 
 /**
@@ -36,7 +36,7 @@ const unsigned char ChkSum::fillbuf[64] = { 0x80, 0 /* , 0, 0, ...  */ };
 ChkSum::ChkSum(void) {
 		  can_handle_data=1;
 		  nread=0;
-		  
+
 		  ctx.A = 0x67452301;
 		  ctx.B = 0xefcdab89;
 		  ctx.C = 0x98badcfe;
@@ -75,8 +75,8 @@ void ChkSum::pass_data(const void* data, uint length) {
 					 nread+=length;
 					 return;
 		  } else {
-           
-           
+
+
 					 // Buffers is full
 					 memcpy(buf+nread, data, BLOCKSIZE-nread);
 					 // Handle buffer
@@ -89,7 +89,7 @@ void ChkSum::pass_data(const void* data, uint length) {
                 memcpy(buf, (const char*) (data)+(BLOCKSIZE-nread), length-(BLOCKSIZE-nread));
 					 nread=length-(BLOCKSIZE-nread);
 */		  }					 
-		  
+
 }
 
 
@@ -109,7 +109,7 @@ void ChkSum::finish_chksum(void) {
 
 		  md5_finish_ctx(&ctx, sum);
 }
-					 
+
 /** Overloaded == operator
  *
  * Args: sum1,sum2 	sums to check to
@@ -138,7 +138,7 @@ bool operator==(ChkSum& sum1, ChkSum& sum2) {
 bool operator==(ChkSum& sum1, const void* buf) {
 		  ulong* buf1=sum1.get_chksum();
 		  ulong* buf2=(ulong*) buf;
-		  
+
 		  if(!buf1 || !buf2) return false;
 
 		  if(buf1[0] == buf2[0]) 
@@ -197,7 +197,7 @@ void * ChkSum::md5_finish_ctx (md5_ctx* ctx, void* resbuf)
   /* Process last bytes.  */
   md5_process_block (ctx->buffer, bytes + pad + 8, ctx);
 
-  
+
   ((ulong *) resbuf)[0] = (ctx->A);
   ((ulong *) resbuf)[1] = (ctx->B);
   ((ulong *) resbuf)[2] = (ctx->C);

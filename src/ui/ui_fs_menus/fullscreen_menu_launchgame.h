@@ -37,7 +37,7 @@ class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	UIButton*						m_ok;
 	UITextarea*					m_mapname;
 	PlayerDescriptionGroup* m_players[MAX_PLAYERS];
-	
+
 public:
 	Fullscreen_Menu_LaunchGame(Game *g);
 

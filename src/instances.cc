@@ -33,7 +33,7 @@ Object_Manager::~Object_Manager(void)
 	// better not throw an exception in a destructor...
 	if (!m_objects.empty())
 		log("Object_Manager: ouch! remaining objects\n");
-	
+
 	log("lastserial: %i\n", m_lastserial);
 }
 
@@ -119,10 +119,10 @@ bool Map_Object_Descr::has_attribute(uint attr)
 		if (m_attributes[i] == attr)
 			return true;
 	}
-	
+
 	return false;
 }
-		
+
 
 /*
 ===============

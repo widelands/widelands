@@ -59,7 +59,7 @@ class Terrain_Descr {
       inline uint get_texture(void) { return m_texture; }
       inline uchar get_is(void) { return m_is; }
       inline const char* get_name() { return m_name; }
-   
+
    private:
       char		m_name[30];
 		char*		m_picnametempl;

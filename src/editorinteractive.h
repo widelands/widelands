@@ -44,10 +44,10 @@ class Editor_Interactive : public Interactive_Base {
 
       // gets called when a field is clicked
       void field_clicked();
-	
+
       // gets called when a keyboard event occurs
       bool handle_key(bool down, int code, char c);
-      
+
       struct Editor_Tools {
          int current_tool_index;
          int use_tool;
@@ -56,17 +56,17 @@ class Editor_Interactive : public Interactive_Base {
 
       void select_tool(int, int);
       int get_selected_tool(void) { return tools.current_tool_index; } 
-      
+
       void exit_editor();
       void map_changed();
-   
+
    private:
       static const int PANEL_HEIGHT=100;
       void toggle_buildhelp();
       void tool_menu_btn();
       void toolsize_menu_btn();
       void toggle_mainmenu(); 
-   
+
       // Tool
       Editor_Tools tools;
 

@@ -772,7 +772,7 @@ class S2_Map_Loader : public Map_Loader {
 
       virtual int preload_map();
       virtual int load_map_complete(Editor_Game_Base*);
-   
+
    private:
       char  m_filename[256];
 

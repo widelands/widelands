@@ -85,11 +85,11 @@ enum Roads {
 	Road_Busy = 2,
 	Road_Water = 3,
 	Road_Mask = 3,
-	
+
 	Road_East = 0,	// shift values
 	Road_SouthEast = 2,
 	Road_SouthWest = 4,
-	
+
 	// bits 6-7: road building symbols in overlay while roads are built
 	Road_Build_Shift = 6,
 };
@@ -116,7 +116,7 @@ private:
 public:
    inline uchar get_height() const { return height; }
 	inline uchar get_caps() const { return caps; }
-	
+
    inline Terrain_Descr *get_terr() const { return terr; }
    inline Terrain_Descr *get_terd() const { return terd; }
    inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
@@ -137,7 +137,7 @@ public:
 		roads &= ~(Road_Mask << dir); 
 		roads |= type << dir;
 	}
-   
+
    // note: you must reset this field's + neighbor's brightness when you change the height
    // Map's change_height does this
    // This function is not private, because the loader and an empty map creator will use them directly

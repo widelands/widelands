@@ -92,7 +92,7 @@ S2_Map_Loader::S2_Map_Loader(const char* filename, Map* map) :
    Map_Loader(filename, map) {
 	snprintf(m_filename, sizeof(m_filename), "%s", filename);
    m_map=map;
-   
+
 }
 
 /*
@@ -120,13 +120,13 @@ int S2_Map_Loader::preload_map() {
    assert(get_state()!=STATE_LOADED);
 
    load_s2mf_header();
-	
+
    if(!exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
-   
+
    set_state(STATE_PRELOADED);
-   
+
    return 0;
 }
 
@@ -151,9 +151,9 @@ int S2_Map_Loader::load_map_complete(Editor_Game_Base* game) {
 
 
    m_map->recalc_whole_map();
-   
+
    set_state(STATE_LOADED);
-   
+
    return 0;
 }
 
@@ -202,7 +202,7 @@ Map::~Map()
    if (m_world)
 		delete m_world;
 	m_world = 0;
-	
+
 	m_nrplayers = 0;
 }
 
@@ -285,7 +285,7 @@ void Map::set_nrplayers(uint nrplayers)
 	m_starting_pos = (Coords*)realloc(m_starting_pos, sizeof(Coords)*nrplayers);
 	while(m_nrplayers < nrplayers)
 		m_starting_pos[m_nrplayers++] = Coords(0, 0);
-	
+
 	m_nrplayers = nrplayers; // in case the number players got less
 }
 
@@ -299,7 +299,7 @@ Set the starting coordinates of a player
 void Map::set_starting_pos(uint plnum, Coords c)
 {
 	assert(plnum >= 1 && plnum <= m_nrplayers);
-	
+
 	m_starting_pos[plnum-1] = c;
 }
 
@@ -1354,7 +1354,7 @@ int Map::is_neighbour(const Coords start, const Coords end)
 		dx -= m_width;
 	else if (dx < -(int)(m_width>>1))
 		dx += m_width;
-	
+
 	// end and start are on the same row
 	if (!dy) {
 		switch(dx) {
@@ -1369,7 +1369,7 @@ int Map::is_neighbour(const Coords start, const Coords end)
 		dy -= m_height;
 	else if (dy < -(int)(m_height>>1))
 		dy += m_height;
-	
+
 	// end is one row below start
 	if (dy == 1) {
 		if (start.y & 1)
@@ -1381,7 +1381,7 @@ int Map::is_neighbour(const Coords start, const Coords end)
 		default: return 0;
 		}
 	}
-	
+
 	// end is one row above start
 	if (dy == -1) {
 		if (start.y & 1)
@@ -1655,11 +1655,11 @@ public:
 				fix = r;
 			}
 		}
-		
+
 		m_data.pop_back();
 
 		debug(0, "pop");
-		
+
 		head->heap_index = -1;
 		return head;
 	}
@@ -1711,7 +1711,7 @@ public:
 		}
 		m_data[slot] = t;
 		t->heap_index = slot;
-		
+
 		debug(0, "boost");
 	}
 
@@ -2517,17 +2517,17 @@ void CoordPath::append(const Path &tail)
 {
 	assert(m_map);
 	assert(tail.get_start() == get_end());
-	
+
 	Coords c = get_end();
-	
+
 	for(int i = 0; i < tail.get_nsteps(); i++) {
 		char dir = tail.get_step(i);
-		
+
 		m_map->get_neighbour(c, dir, &c);
 		m_path.push_back(dir);
 		m_coords.push_back(c);
 	}
-	
+
 	// debug
 	//log("CoordPath; start %i %i\n", m_coords[0].x, m_coords[0].y);
 	//for(uint i = 0; i < m_path.size(); i++)

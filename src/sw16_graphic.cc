@@ -19,7 +19,7 @@
 /*
 Management classes and functions of the 16-bit software renderer.
 */
- 
+
 #include <SDL_image.h>
 #include "bob.h"
 #include "editor_game_base.h"
@@ -106,7 +106,7 @@ void RenderTargetImpl::reset()
 	m_rect.x = m_rect.y = 0;
 	m_rect.w = m_bitmap->w;
 	m_rect.h = m_bitmap->h;
-	
+
 	m_offset.x = m_offset.y = 0;
 }
 
@@ -136,7 +136,7 @@ void RenderTargetImpl::set_window(const Rect& rc, const Point& ofs)
 {
 	m_rect = rc;
 	m_offset = ofs;
-	
+
 	// safeguards clipping against the bitmap itself
 	if (m_rect.x < 0) {
 		m_offset.x += m_rect.x;
@@ -147,7 +147,7 @@ void RenderTargetImpl::set_window(const Rect& rc, const Point& ofs)
 		m_rect.w = m_bitmap->w - m_rect.x;
 	if (m_rect.w < 0)
 		m_rect.w = 0;
-	
+
 	if (m_rect.y < 0) {
 		m_offset.y += m_rect.y;
 		m_rect.h += m_rect.y;
@@ -181,7 +181,7 @@ bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevo
 	newrect.y = rc.y + m_offset.y;
 	newrect.w = rc.w;
 	newrect.h = rc.h;
-	
+
 	// Clipping
 	if (newrect.x < 0) {
 		newofs.x = newrect.x;
@@ -192,7 +192,7 @@ bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevo
 		newrect.w = m_rect.w - newrect.x;
 	if (newrect.w <= 0)
 		return false;
-	
+
 	if (newrect.y < 0) {
 		newofs.y = newrect.y;
 		newrect.h += newrect.y;
@@ -202,19 +202,19 @@ bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevo
 		newrect.h = m_rect.h - newrect.y;
 	if (newrect.h <= 0)
 		return false;
-	
+
 	newrect.x += m_rect.x;
 	newrect.y += m_rect.y;
-	
+
 	// Apply the changes
 	if (previous)
 		*previous = m_rect;
 	if (prevofs)
 		*prevofs = m_offset;
-	
+
 	m_rect = newrect;
 	m_offset = newofs;
-	
+
 	return true;
 }
 
@@ -252,7 +252,7 @@ void RenderTargetImpl::draw_rect(int x, int y, int w, int h, RGBColor clr)
 {
 	x += m_offset.x;
 	y += m_offset.y;
-	
+
 	if (x < 0) {
 		w += x;
 		x = 0;
@@ -261,7 +261,7 @@ void RenderTargetImpl::draw_rect(int x, int y, int w, int h, RGBColor clr)
 		w = m_rect.w - x;
 	if (w <= 0)
 		return;
-	
+
 	if (y < 0) {
 		h += y;
 		y = 0;
@@ -270,7 +270,7 @@ void RenderTargetImpl::draw_rect(int x, int y, int w, int h, RGBColor clr)
 		h = m_rect.h - y;
 	if (h <= 0)
 		return;
-	
+
 	m_bitmap->draw_rect(Rect(x + m_rect.x, y + m_rect.y, w, h), clr);
 }
 
@@ -278,7 +278,7 @@ void RenderTargetImpl::fill_rect(int x, int y, int w, int h, RGBColor clr)
 {
 	x += m_offset.x;
 	y += m_offset.y;
-	
+
 	if (x < 0) {
 		w += x;
 		x = 0;
@@ -287,7 +287,7 @@ void RenderTargetImpl::fill_rect(int x, int y, int w, int h, RGBColor clr)
 		w = m_rect.w - x;
 	if (w <= 0)
 		return;
-	
+
 	if (y < 0) {
 		h += y;
 		y = 0;
@@ -304,7 +304,7 @@ void RenderTargetImpl::brighten_rect(int x, int y, int w, int h, int factor)
 {
 	x += m_offset.x;
 	y += m_offset.y;
-	
+
 	if (x < 0) {
 		w += x;
 		x = 0;
@@ -313,7 +313,7 @@ void RenderTargetImpl::brighten_rect(int x, int y, int w, int h, int factor)
 		w = m_rect.w - x;
 	if (w <= 0)
 		return;
-	
+
 	if (y < 0) {
 		h += y;
 		y = 0;
@@ -322,7 +322,7 @@ void RenderTargetImpl::brighten_rect(int x, int y, int w, int h, int factor)
 		h = m_rect.h - y;
 	if (h <= 0)
 		return;
-	
+
 	m_bitmap->brighten_rect(Rect(x + m_rect.x, y + m_rect.y, w, h), factor);
 }
 
@@ -346,7 +346,7 @@ void RenderTargetImpl::doblit(Point dst, Bitmap* src, Rect srcrc)
 {
 	dst.x += m_offset.x;
 	dst.y += m_offset.y;
-	
+
 	// Clipping
 	if (dst.x < 0) {
 		srcrc.x -= dst.x;
@@ -362,7 +362,7 @@ void RenderTargetImpl::doblit(Point dst, Bitmap* src, Rect srcrc)
 		srcrc.w = m_rect.w - dst.x;
 	if (srcrc.w <= 0)
 		return;
-	
+
 	if (dst.y < 0) {
 		srcrc.y -= dst.y;
 		srcrc.h += dst.y;
@@ -377,7 +377,7 @@ void RenderTargetImpl::doblit(Point dst, Bitmap* src, Rect srcrc)
 		srcrc.h = m_rect.h - dst.y;
 	if (srcrc.h <= 0)
 		return;
-	
+
 	// Draw it
 	m_bitmap->blit(Point(dst.x + m_rect.x, dst.y + m_rect.y), src, srcrc);
 }
@@ -395,7 +395,7 @@ void RenderTargetImpl::blit(int dstx, int dsty, uint picture)
 {
 	GraphicImpl* gfx = get_graphicimpl();
 	Bitmap* src = gfx->get_picture_bitmap(picture);
-	
+
 	if (src)
 		doblit(Point(dstx, dsty), src, Rect(0, 0, src->w, src->h));
 }
@@ -405,7 +405,7 @@ void RenderTargetImpl::blitrect(int dstx, int dsty, uint picture,
 {
 	GraphicImpl* gfx = get_graphicimpl();
 	Bitmap* src = gfx->get_picture_bitmap(picture);
-	
+
 	if (src)
 		doblit(Point(dstx, dsty), src, Rect(srcx, srcy, w, h));
 }
@@ -452,38 +452,38 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 	ofsx = ofsx % src->w;
 	if (ofsx < 0)
 		ofsx += src->w;
-	
+
 	ofsy = ofsy % src->h;
 	if (ofsy < 0)
 		ofsy += src->h;
-	
+
 	// Blit the picture into the rectangle
 	int ty = 0;
-	
+
 	while(ty < h)
 		{
 		int tx = 0;
 		int tofsx = ofsx;
 		Rect srcrc;
-		
+
 		srcrc.y = ofsy;
 		srcrc.h = src->h - ofsy;
 		if (ty + srcrc.h > h)
 			srcrc.h = h - ty;
-		
+
 		while(tx < w)
 			{
 			srcrc.x = tofsx;
 			srcrc.w = src->w - tofsx;
 			if (tx + srcrc.w > w)
 				srcrc.w = w - tx;
-			
+
 			m_bitmap->blit(Point(m_rect.x + x + tx, m_rect.y + y + ty), src, srcrc);
-			
+
 			tx += srcrc.w;
 			tofsx = 0;
 			}
-		
+
 		ty += srcrc.h;
 		ofsy = 0;
 		}
@@ -514,17 +514,17 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 		uchar ovln;
 
 		dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
-		
+
 		// check to the right
 		ovln = mri->overlay_basic[fcr.y*mapwidth + fcr.x];
 		if (ovln == overlay_basic)
 			dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
-	
+
 		// check to the bottom left
 		ovln = mri->overlay_basic[fcbl.y*mapwidth + fcbl.x];
 		if (ovln == overlay_basic)
 			dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
-	
+
 		// check to the bottom right
 		ovln = mri->overlay_basic[fcbr.y*mapwidth + fcbr.x];
 		if (ovln == overlay_basic)
@@ -535,33 +535,33 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 	if (mri->show_buildhelp && overlay_basic >= Overlay_Build_Min &&
 	    overlay_basic <= Overlay_Build_Max) {
 		int x, y;
-		
+
 		icon = overlay_basic - Overlay_Build_Min;
 		picid = get_graphicimpl()->get_gameicons()->pics_build[icon];
-		
+
 		g_gr->get_picture_size(picid, &w, &h);
-			
+
 		x = pos.x - (w>>1);
 		if (overlay_basic == Overlay_Build_Flag)
 			y = pos.y - h;
 		else
 			y = pos.y - (h>>1);
-				
+
 		dst->blit(x, y, picid);
 	}
 
 	// Draw road build help
 	uchar roads = mri->overlay_roads[fc.y*mapwidth + fc.x];
-	
+
 	icon = (roads >> Road_Build_Shift) & 3;
-	
+
 	if (icon) {
 		picid = get_graphicimpl()->get_gameicons()->pics_roadb[icon-1];
 		g_gr->get_picture_size(picid, &w, &h);
-		
+
 		dst->blit(pos.x - (w/2), pos.y - (h/2), picid);
 	}
-			
+
 	// Draw the fsel last
    if (draw_fsel) {
       picid = mri->fsel;
@@ -943,24 +943,24 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 {
 	m_nr_update_rects = 0;
 	m_update_fullscreen = false;
-	
+
 	m_gameicons = 0;
-	
+
 	// Set video mode using SDL
 	int flags = SDL_SWSURFACE;
-	
+
 	if (fullscreen)
 		flags |= SDL_FULLSCREEN;
-	
+
 	m_sdlsurface = SDL_SetVideoMode(w, h, 16, flags);
 	if (!m_sdlsurface)
 		throw wexception("Couldn't set video mode: %s", SDL_GetError());
-	
+
 	m_screen.pixels = (ushort*)m_sdlsurface->pixels;
 	m_screen.w = m_sdlsurface->w;
 	m_screen.h = m_sdlsurface->h;
 	m_screen.pitch = m_sdlsurface->pitch / sizeof(ushort);
-	
+
 	m_rendertarget = new RenderTargetImpl(&m_screen);
 }
 
@@ -1007,7 +1007,7 @@ Return a pointer to the RenderTarget representing the screen
 RenderTarget* GraphicImpl::get_render_target()
 {
 	m_rendertarget->reset();
-	
+
 	return m_rendertarget;
 }
 
@@ -1072,7 +1072,7 @@ void GraphicImpl::refresh()
 //		{
 //		SDL_UpdateRects(m_sdlsurface, m_nr_update_rects, m_update_rects);
 //		}
-	
+
 	m_update_fullscreen = false;
 	m_nr_update_rects = 0;
 }
@@ -1093,22 +1093,22 @@ void GraphicImpl::flush(int mod)
 	// Flush pictures
 	for(i = 0; i < m_pictures.size(); i++) {
 		Picture* pic = &m_pictures[i];
-		
+
 		if (!pic->mod)
 			continue;
-		
+
 		if (pic->mod < 0) {
 			if (!mod)
 				log("LEAK: SW16: flush(0): non-picture %i left.\n", i+1);
 			continue;
 		}
-		
+
 		pic->mod &= ~mod; // unmask the mods that should be flushed
-		
+
 		// Once the picture is no longer in any mods, free it
 		if (!pic->mod) {
 			m_picturemap.erase(pic->u.fname);
-			
+
 			if (pic->u.fname)
 				free(pic->u.fname);
 			free(pic->bitmap.pixels);
@@ -1120,11 +1120,11 @@ void GraphicImpl::flush(int mod)
 		for(i = 0; i < m_maptextures.size(); i++)
 			delete m_maptextures[i];
 		m_maptextures.resize(0);
-		
+
 		for(i = 0; i < m_animations.size(); i++)
 			delete m_animations[i];
 		m_animations.resize(0);
-		
+
 		if (m_gameicons) {
 			delete m_gameicons;
 			m_gameicons = 0;
@@ -1274,7 +1274,7 @@ uint GraphicImpl::create_surface(int w, int h)
 	pic->bitmap.pitch = w;
 	pic->bitmap.hasclrkey = false;
 	pic->u.rendertarget = new RenderTargetImpl(&pic->bitmap);
-	
+
 	return id;
 }
 
@@ -1282,10 +1282,10 @@ uint GraphicImpl::create_surface(int w, int h, RGBColor clrkey)
 {
 	uint id = create_surface(w, h);
 	Picture* pic = &m_pictures[id];
-	
+
 	pic->bitmap.hasclrkey = true;
 	pic->bitmap.clrkey = clrkey.pack16();
-	
+
 	return id;
 }
 
@@ -1301,9 +1301,9 @@ Unlike normal pictures, surfaces are not freed by flush().
 void GraphicImpl::free_surface(uint picid)
 {
 	assert(picid < m_pictures.size() && m_pictures[picid].mod == -1);
-	
+
 	Picture* pic = &m_pictures[picid];
-	
+
 	delete pic->u.rendertarget;
 	free(pic->bitmap.pixels);
 	pic->mod = 0;
@@ -1320,11 +1320,11 @@ Returns the RenderTarget for the given surface
 RenderTarget* GraphicImpl::get_surface_renderer(uint pic)
 {
 	assert(pic < m_pictures.size() && m_pictures[pic].mod == -1);
-	
+
 	RenderTargetImpl* rt = m_pictures[pic].u.rendertarget;
-	
+
 	rt->reset();
-	
+
 	return rt;
 }
 
@@ -1341,10 +1341,10 @@ Bitmap* GraphicImpl::get_picture_bitmap(uint id)
 {
 	if (id >= m_pictures.size())
 		return 0;
-	
+
 	if (!m_pictures[id].mod)
 		return 0;
-	
+
 	return &m_pictures[id].bitmap;
 }
 
@@ -1370,9 +1370,9 @@ uint GraphicImpl::get_maptexture(const char* fnametempl, uint frametime)
 {
 	try {
 		Texture* tex = new Texture(fnametempl, frametime);
-		
+
 		m_maptextures.push_back(tex);
-		
+
 		return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 	} catch(std::exception& e) {
 		log("Failed to load maptexture %s: %s\n", fnametempl, e.what());
@@ -1405,7 +1405,7 @@ Return the actual texture data associated with the given ID.
 Texture* GraphicImpl::get_maptexture_data(uint id)
 {
 	id--; // ID 1 is at m_maptextures[0]
-	
+
 	if (id < m_maptextures.size())
 		return m_maptextures[id];
 	else
@@ -1438,7 +1438,7 @@ Load all animations that are registered with the AnimationManager
 void GraphicImpl::load_animations()
 {
 	assert(!m_animations.size());
-	
+
 	for(uint id = 1; id <= g_anim.get_nranimations(); id++)
 		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));
 }
@@ -1555,13 +1555,13 @@ Find a free picture slot and return it.
 uint GraphicImpl::find_free_picture()
 {
 	uint id;
-	
+
 	for(id = 1; id < m_pictures.size(); id++)
 		if (!m_pictures[id].mod)
 			return id;
-	
+
 	m_pictures.resize(id+1);
-	
+
 	return id;
 }
 

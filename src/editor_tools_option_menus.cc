@@ -97,7 +97,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    int width=20;
    int posx=offsx;
    int posy=offsy;
-   
+
    set_inner_size(135, 135);
    UITextarea* ta=new UITextarea(this, 0, 0, "Height Tool Options", Align_Left); 
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
@@ -114,7 +114,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    m_increase=new UITextarea(this, 0, 0, "5", Align_Left);
    m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
    posy+=width+spacing+spacing; 
-   
+
    ta=new UITextarea(this, 0, 0, "Set Value", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=width+spacing;
@@ -127,7 +127,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    m_set=new UITextarea(this, 0, 0, "5", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
    posy+=width+spacing; 
-   
+
    update();
 }
 
@@ -220,7 +220,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Edi
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
 
    set_inner_size(200, 115);
-   
+
    UITextarea* ta=new UITextarea(this, 3, 5, "Noise Height Tool Options", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
@@ -231,7 +231,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Edi
    ta=new UITextarea(this, 0, 0, "Set Value", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=20;
-   
+
    m_set=new UITextarea(this, 0, 0, "99", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
    b=new UIButton(this, m_set->get_x()-width-spacing, posy, width, height, 1, 4);
@@ -240,9 +240,9 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Edi
    b=new UIButton(this, m_set->get_x()+m_set->get_w()+spacing, posy, width, height, 1, 5);
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", RGBColor(0,0,255)));
-          
+
    m_nht=nht;
-   
+
    update();
 }
 
@@ -363,7 +363,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
          --j;
       }
    }
-   
+
    m_textarea=new UITextarea(this, 5, ypos, buf);
    m_textarea->set_pos((get_inner_w()-m_textarea->get_w())/2, ypos);
 }
@@ -388,7 +388,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
          --j;
       }
    }
-   
+
    m_textarea->set_text(buf.c_str());
    m_textarea->set_pos((get_inner_w()-m_textarea->get_w())/2, m_textarea->get_y());
 }
@@ -412,9 +412,9 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
 		Editor_Place_Immovable_Tool* pit, UIUniqueWindowRegistry* registry) :
    Editor_Tool_Options_Menu(parent, registry, "Immovable Bobs Menu") {
    const int max_items_in_tab=6;
-   
+
    m_pit=pit;
-   
+
    const int space=5;
    const int xstart=5;
    const int ystart=15;

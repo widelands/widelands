@@ -51,7 +51,7 @@ int Editor_Info_Tool::handle_click_impl(const Coords* coordinates, Field* f, Map
 
    string buf;
    char buf1[1024];
-   
+
    buf += "1) Field Infos\n";
    sprintf(buf1, " Coordinates: (%i/%i)\n", coordinates->x, coordinates->y); buf+=buf1;
    sprintf(buf1, " Height: %i\n", f->get_height()); buf+=buf1;
@@ -72,7 +72,7 @@ int Editor_Info_Tool::handle_click_impl(const Coords* coordinates, Field* f, Map
    sprintf(buf1, " Has base immovable: %s (TODO! more info)\n", f->get_immovable() ? "Yes" : "No"); buf+=buf1;
    sprintf(buf1, " Has bobs: %s (TODO: more informations)\n", f->get_first_bob() ? "Yes" : "No"); buf+=buf1;
    sprintf(buf1, " Roads: TODO!\n"); buf+=buf1;
-   
+
    buf += "\n";
    Terrain_Descr* ter=f->get_terr();
    buf += "2) Right Terrain Info\n";
@@ -100,13 +100,13 @@ int Editor_Info_Tool::handle_click_impl(const Coords* coordinates, Field* f, Map
    sprintf(buf1, " Author: %s\n", map->get_world()->get_author()); buf+=buf1;
    sprintf(buf1, " Descr: %s\n", map->get_world()->get_descr()); buf+=buf1;
    sprintf(buf1, " TODO -- More information (Number of bobs/number of wares...)\n"); buf+=buf1;
-   
+
    buf += "\n";
    buf += "\n";
    buf += "\n";
    buf += "\n";
    buf += "\n";
-         
+
    multiline_textarea->set_text(buf.c_str()); 
 
    return 0;
@@ -254,7 +254,7 @@ int Set_Terrain::set_terrain(const Coords* coordinates, Field* field, Map* map, 
    if(!get_nr_enabled()) return parent->get_fieldsel_radius();
    MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
-   
+
    int i, j, max;
    max=0;
    while(mrc.next(&c)) {

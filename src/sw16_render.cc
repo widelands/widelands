@@ -148,12 +148,12 @@ void Bitmap::blit(Point dst, Bitmap* src, Rect srcrc)
 {
 	ushort* dstpixels = pixels + dst.y*pitch + dst.x;
 	ushort* srcpixels = src->pixels + srcrc.y*src->pitch + srcrc.x;
-	
+
 	if (src->hasclrkey)
 	{
 		uint dstskip = pitch - srcrc.w;
 		uint srcskip = src->pitch - srcrc.w;
-		
+
 		for (int i = srcrc.h; i; i--, dstpixels += dstskip, srcpixels += srcskip) {
 			for (int j = srcrc.w; j; j--, dstpixels++, srcpixels++) {
 				ushort clr = *srcpixels;
@@ -302,16 +302,16 @@ void Bitmap::draw_animframe(Point dstpt, const AnimFrame* frame, Rect rc, const 
 		plrclrs_packed[i] = plrclrs[i].pack16();
 
 	const ushort* in = frame->data;
-	
+
 	rc.w += rc.x;
 	rc.h += rc.y;
-	
+
 	//log("%ix%i; %i,%i,%i,%i\n", frame->width, frame->height, rc.x, rc.y, rc.w, rc.h);
-	
+
 	for(int y = 0; y < rc.h; y++) {
 		ushort* out = &pixels[(dstpt.y+y-rc.y)*pitch + dstpt.x-rc.x];
 		int x = 0;
-	
+
 		while(x < frame->width) {
 			ushort cmd;
 			int count;
@@ -320,7 +320,7 @@ void Bitmap::draw_animframe(Point dstpt, const AnimFrame* frame, Rect rc, const 
 			cmd = *in++;
 			count = cmd & 0x3fff;
 			cmd = cmd >> 14;
-			
+
 			//log(" %i - %i\n", cmd, count);
 
 			switch(cmd) {
@@ -412,7 +412,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
       ".gif",
       ".jpg"
    };
-   
+
    for(;;) {
       char fname[256];
       int nr = m_nrframes;
@@ -433,7 +433,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
                continue;
 
             cycling=true;
-            
+
             *p = '0' + (nr % 10);
             nr = nr / 10;
          }
@@ -505,7 +505,7 @@ AnimationGfx::~AnimationGfx()
 	if (m_frames) {
 		for(int i = 0; i < m_nrframes; i++)
 			free(m_frames[i].data);
-		
+
 		free(m_frames);
 	}
 }

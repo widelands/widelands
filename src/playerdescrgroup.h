@@ -36,9 +36,9 @@ class UIPanel;
 class PlayerDescriptionGroup : public UIPanel {
 	Game* m_game;
 	int m_plnum;
-	
+
 	bool m_enabled; // is this player allowed at all (map-dependent)
-	
+
 	UICheckbox* m_btnEnablePlayer;
 	int m_playertype;
 	UIButton* m_btnPlayerType;
@@ -47,7 +47,7 @@ public:
 	PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum);
 
 	UISignal changed;
-		
+
 	void set_enabled(bool enable);
 
 private:	

@@ -82,7 +82,7 @@ uchar *S2_Map_Loader::load_s2mf_section(FileRead *file, int width, int height)
    }
 
    uchar *section = (uchar *)malloc(dw * dh);
-	
+
 	try {
 	   int y;
    	for(y = 0; y < height; y++) {
@@ -153,7 +153,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
    uchar *section = 0;
 	uchar *bobs = 0;
 	uchar *buildings = 0;
-	
+
 	uchar *pc;
    uint x=0;
    uint y=0;
@@ -165,7 +165,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 
 		S2MapDescrHeader header;
 		memcpy(&header, file.Data(sizeof(header)), sizeof(header));
-                
+
                 //  Header must be swaped for big-endian Systems, works at the moment only for PowerPC architecture
 #if defined(__ppc__)
                 header.w=Swap16(header.w);
@@ -308,7 +308,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
 		if (!section)
 			throw wexception("Section 6 not found");
-		
+
 		uint i=0;
 		for(y=0; y<m_map->get_height(); y++) {
 			i=y*m_map->get_width();
@@ -334,7 +334,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
 		if (!section)
 			throw wexception("Section 7 (animals) not found");
-		
+
 		for(y=0; y<m_map->get_height(); y++) {
 			i=y*m_map->get_width();
 			for(x=0; x<m_map->get_width(); x++, i++) {
@@ -374,7 +374,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			throw wexception("Section 8 (unknown) not found");
 		free(section);
 		section = 0;
-		
+
 
 		// S E C T I O N 9  -------- What buildings can be build?
 		// 0x01 == flags (?? )
@@ -505,37 +505,37 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					case BOB_TREE2:
 					case BOB_TREE3:
 					case BOB_TREE4: bobname = "tree1"; break;
-					
+
 					case BOB_TREE5:
 					case BOB_TREE6:
 					case BOB_TREE7:
 					case BOB_TREE8: bobname = "tree2"; break;
-					
+
 					case BOB_TREE9:
 					case BOB_TREE10:
 					case BOB_TREE11:
 					case BOB_TREE12: bobname = "tree3"; break;
-					
+
 					case BOB_TREE13:
 					case BOB_TREE14:
 					case BOB_TREE15:
 					case BOB_TREE16: bobname = "tree4"; break;
-					
+
 					case BOB_TREE17:
 					case BOB_TREE18:
 					case BOB_TREE19:
 					case BOB_TREE20: bobname = "tree6"; break;
-					
+
 					case BOB_TREE21:
 					case BOB_TREE22:
 					case BOB_TREE23:
 					case BOB_TREE24: bobname = "tree6"; break;
-					
+
 					case BOB_TREE25:
 					case BOB_TREE26:
 					case BOB_TREE27:
 					case BOB_TREE28: bobname = "tree7"; break;
-					
+
 					case BOB_TREE29:
 					case BOB_TREE30:
 					case BOB_TREE31:

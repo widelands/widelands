@@ -58,7 +58,7 @@ static void g_init(int argc, char **argv)
 		Sys_Init();
 
 		g_font = Font::load("fixed_font1");
-		
+
 		// Initialize graphics
 		Section *s = g_options.pull_section("global");
 
@@ -100,12 +100,12 @@ static void g_shutdown()
 		g_font->release();
 		g_font = 0;
 	}
-	
+
 	Sys_Shutdown();
-	
+
 	// Save options
 	options_shutdown();
-	
+
 	// Destroy filesystem
 	if (g_fs) {
 		delete g_fs;
@@ -132,7 +132,7 @@ void g_main(int argc, char** argv)
          Fullscreen_Menu_Intro r;
          r.run();
          bool done=false;
-         
+
          while(!done) {
             Fullscreen_Menu_Main *mm = new Fullscreen_Menu_Main;
             int code = mm->run();

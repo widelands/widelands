@@ -247,10 +247,10 @@ void Interactive_Player::field_action()
 
 	// Special case for buildings
 	BaseImmovable *imm = m_game->get_map()->get_immovable(m_maprenderinfo.fieldsel);
-	
+
 	if (imm && imm->get_type() == Map_Object::BUILDING) {
 		Building *building = (Building *)imm;
-		
+
 		if (building->get_owner()->get_player_number() == get_player_number()) {
 			building->show_options(this);
 			return;
@@ -349,13 +349,13 @@ Stop building the road
 void Interactive_Player::abort_build_road()
 {
 	assert(m_buildroad);
-	
+
 	roadb_remove_overlay();
-	
+
 	delete m_buildroad;
 	m_buildroad = 0;
 }
-	
+
 
 /*
 ===============
@@ -375,7 +375,7 @@ void Interactive_Player::finish_build_road()
 		Path *path = new Path(*m_buildroad);
 		m_game->send_player_command(get_player_number(), CMD_BUILD_ROAD, (int)path, 0, 0);
 	}
-	
+
 	delete m_buildroad;
 	m_buildroad = 0;
 }
@@ -428,7 +428,7 @@ Return the current road-building startpoint
 const Coords &Interactive_Player::get_build_road_start()
 {
 	assert(m_buildroad);
-	
+
 	return m_buildroad->get_start();
 }
 
@@ -442,7 +442,7 @@ Return the current road-building endpoint
 const Coords &Interactive_Player::get_build_road_end()
 {
 	assert(m_buildroad);
-	
+
 	return m_buildroad->get_end();
 }
 
@@ -456,10 +456,10 @@ Return the direction of the last step
 int Interactive_Player::get_build_road_end_dir()
 {
 	assert(m_buildroad);
-	
+
 	if (!m_buildroad->get_nsteps())
 		return 0;
-	
+
 	return m_buildroad->get_step(m_buildroad->get_nsteps()-1);
 }
 
@@ -473,40 +473,40 @@ Add road building data to the road overlay
 void Interactive_Player::roadb_add_overlay()
 {
 	assert(m_buildroad);
-	
+
 	//log("Add overlay\n");
-	
+
 	Map* map = m_game->get_map();
 	int mapwidth = map->get_width();
-	
+
 	// preview of the road
 	for(int idx = 0; idx < m_buildroad->get_nsteps(); idx++)	{
 		uchar dir = m_buildroad->get_step(idx);
 		Coords c = m_buildroad->get_coords()[idx];
-		
+
 		if (dir < Map_Object::WALK_E || dir > Map_Object::WALK_SW) {
 			map->get_neighbour(c, dir, &c);
 			dir = get_reverse_dir(dir);
 		}
-		
+
 		int shift = 2*(dir - Map_Object::WALK_E);
-		
+
 		m_maprenderinfo.overlay_roads[c.y*mapwidth + c.x] |= Road_Normal << shift;
 	}
-	
+
 	// build hints
 	FCoords endpos = map->get_fcoords(m_buildroad->get_end());
-	
+
 	for(int dir = 1; dir <= 6; dir++) {
 		FCoords neighb;
 		int caps;
-		
+
 		map->get_neighbour(endpos, dir, &neighb);
 		caps = get_player()->get_buildcaps(neighb);
-		
+
 		if (!(caps & MOVECAPS_WALK))
 			continue; // need to be able to walk there
-		
+
 		BaseImmovable *imm = map->get_immovable(neighb); // can't build on robusts
 		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
 			if (!(imm->get_type() == Map_Object::FLAG ||
@@ -519,14 +519,14 @@ void Interactive_Player::roadb_add_overlay()
 
 		int slope = abs(endpos.field->get_height() - neighb.field->get_height());
 		int icon;
-		
+
 		if (slope < 2)
 			icon = 1;
 		else if (slope < 4)
 			icon = 2;
 		else
 			icon = 3;
-	
+
 		m_maprenderinfo.overlay_roads[neighb.y*mapwidth + neighb.x] |= icon << Road_Build_Shift;
 	}
 }
@@ -541,27 +541,27 @@ Remove road building data from road overlay
 void Interactive_Player::roadb_remove_overlay()
 {
 	assert(m_buildroad);
-	
+
 	//log("Remove overlay\n");
-	
+
 	Map* map = m_game->get_map();
 	int mapwidth = map->get_width();
-	
+
 	// preview of the road
 	for(int idx = 0; idx <= m_buildroad->get_nsteps(); idx++)	{
 		Coords c = m_buildroad->get_coords()[idx];
 
 		m_maprenderinfo.overlay_roads[c.y*mapwidth + c.x] = 0;
 	}
-	
+
 	// build hints
 	Coords endpos = m_buildroad->get_end();
-	
+
 	for(int dir = 1; dir <= 6; dir++) {
 		Coords neighb;
-		
+
 		map->get_neighbour(endpos, dir, &neighb);
-		
+
 		m_maprenderinfo.overlay_roads[neighb.y*mapwidth + neighb.x] = 0;
 	}
 }
@@ -583,26 +583,26 @@ void Interactive_Player::recalc_overlay(FCoords fc)
 
 	Map* map = m_maprenderinfo.egbase->get_map();
    assert(map); // must be setup
-      
+
 	uchar code = 0;
 	int owner = fc.field->get_owned_by();
-	
+
 	if (owner) {
 		// A border is on every field that is owned by a player and has
 		// neighbouring fields that are not owned by that player
 		for(int dir = 1; dir <= 6; dir++) {
 			FCoords neighb;
-			
+
 			map->get_neighbour(fc, dir, &neighb);
-			
+
 			if (neighb.field->get_owned_by() != owner)
 				code = Overlay_Frontier_Base + owner;
 		}
-		
+
 		// Determine the buildhelp icon for that field		
 		if (get_player()->get_player_number() == owner) {
 			int buildcaps = get_player()->get_buildcaps(fc);
-	
+
 			if (buildcaps & BUILDCAPS_MINE)
 				code = Overlay_Build_Mine;
 			else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
@@ -615,6 +615,6 @@ void Interactive_Player::recalc_overlay(FCoords fc)
 				code = Overlay_Build_Flag;
 		}
 	}
-	
+
 	m_maprenderinfo.overlay_basic[fc.y*map->get_width() + fc.x] = code;
 }

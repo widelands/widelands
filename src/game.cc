@@ -35,7 +35,7 @@ Game::Game(void)
 	m_speed = 1;
 
    cmdqueue = new Cmd_Queue(this);
-   
+
 	m_realtime = Sys_GetTime();
 }
 
@@ -72,13 +72,13 @@ bool Game::can_start()
 
 	if (!get_map())
 		return false;
-	
+
 	// we need exactly one local player
 	local_num = -1;
 	for(i = 1; i <= MAX_PLAYERS; i++) {
 		if (!get_player(i))
 			continue;
-		
+
 		if (get_player(i)->get_type() == Player::playerLocal) {
 			if (local_num < 0)
 				local_num = i;
@@ -88,7 +88,7 @@ bool Game::can_start()
 	}
 	if (local_num < 0)
 		return false;
-	
+
 	return true;
 }
 

@@ -372,7 +372,7 @@ Return the number of wares of a given type stored in this storage.
 int WareList::stock(int id) const
 {
 	assert(id >= 0);
-	
+
 	if (id >= (int)m_wares.size())
 		return 0;
 	return m_wares[id];
@@ -390,7 +390,7 @@ of all wares types.
 bool operator==(const WareList &wl1, const WareList &wl2)
 {
 	uint i = 0;
-	
+
 	while(i < wl1.m_wares.size()) {
 		int count = wl1.m_wares[i];
 		if (i < wl2.m_wares.size()) {
@@ -402,13 +402,13 @@ bool operator==(const WareList &wl1, const WareList &wl2)
 		}
 		i++;
 	}
-	
+
 	while(i < wl2.m_wares.size()) {
 		if (wl2.m_wares[i]) // wl1 has 0 stock per definition
 			return false;
 		i++;
 	}
-	
+
 	return true;
 }
 

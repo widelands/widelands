@@ -44,12 +44,12 @@ class Tribe_Descr {
          OK = 0,
          ERR_WRONGVERSION
       };
-      
+
       Tribe_Descr(const char* name);
       ~Tribe_Descr(void);
 
 		inline const char *get_name() const { return m_name; }
-		
+
 		inline int get_nrworkers() { return m_workers.get_nitems(); }
       inline Worker_Descr* get_worker_descr(uint idx) { return m_workers.get(idx); }
 		inline int get_nrwares() { return m_wares.get_nitems(); }
@@ -58,31 +58,31 @@ class Tribe_Descr {
       inline int get_nrbuildings() { return m_buildings.get_nitems(); }
 		inline int get_building_index(const char *name) { return m_buildings.get_index(name); }
 		inline Building_Descr *get_building_descr(uint idx) { return m_buildings.get(idx); }
-		
+
       inline uint get_frontier_anim(void) { return m_anim_frontier; }
 		inline uint get_flag_anim(void) { return m_anim_flag; }
 
 		void postload(Editor_Game_Base*);
 		void load_graphics();
-		
+
       void load_warehouse_with_start_wares(Editor_Game_Base*, Warehouse*);
-      
+
    private:
       char m_name[30];
-      
+
       uint m_anim_frontier;
 		uint m_anim_flag;
-		
+
       Descr_Maintainer<Worker_Descr> m_workers;
       Descr_Maintainer<Building_Descr> m_buildings;
       Descr_Maintainer<Item_Ware_Descr> m_wares;
-     
+
       std::map<std::string, int> m_startwares;
       std::map<std::string, int> m_startworkers;
-      
+
       // Parsing the tribe
 		EncodeData	m_default_encdata;
-      	
+
 		void parse_root_conf(const char *directory);
 		void parse_buildings(const char *directory);
 		void parse_workers(const char *directory);
