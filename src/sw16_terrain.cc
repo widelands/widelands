@@ -123,28 +123,28 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 	m_pixels = 0;
 	m_frametime = frametime;
    m_texture_picture=0;
-   
+
 	// Load the pictures one by one
 	char fname[256];
-	
+
 	for(;;) {
 		int nr = m_nrframes;
 		char *p;
-		
+
 		// create the file name by reverse-scanning for '?' and replacing
 		snprintf(fname, sizeof(fname), "%s", fnametmpl);
 		p = fname + strlen(fname);
 		while(p > fname) {
 			if (*--p != '?')
 				continue;
-			
+
 			*p = '0' + (nr % 10);
 			nr = nr / 10;
 		}
-		
+
 		if (nr) // cycled up to maximum possible frame number
 			break;
-		
+
 		// is the frame actually there?
 		if (!g_fs->FileExists(fname))
 			break;
@@ -154,23 +154,23 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 		if(!m_texture_picture) {
          m_texture_picture=get_graphicimpl()->get_picture(PicMod_Game, fname);
       };
-      
+
 		if (!surf)
 			break;
-		
-		if (surf->w != TEXTURE_W && surf->h != TEXTURE_H) {
+
+		if (surf->w != TEXTURE_W || surf->h != TEXTURE_H) {
 			SDL_FreeSurface(surf);
 			log("WARNING: %s: texture must be %ix%i pixels big\n", fname, TEXTURE_W, TEXTURE_H);
 			break;
 		}
-		
+
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
 			if (surf->format->BitsPerPixel == 8)
 				m_colormap = new Colormap(surf->format->palette->colors);
 			else {
 				SDL_Color pal[256];
-			
+
 				log("WARNING: %s: using 332 default palette\n", fname);
 
 				for (int r=0;r<8;r++)
@@ -180,33 +180,37 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 							pal[(r<<5) | (g<<2) | b].g=g<<5;
 							pal[(r<<5) | (g<<2) | b].b=b<<6;
 						}
-	
+
 				m_colormap = new Colormap(pal);
 			}
 		}
-		
+
 		// Convert to our palette
 		SDL_Palette palette;
 		SDL_PixelFormat fmt;
-		
+
 		palette.ncolors = 256;
 		palette.colors = m_colormap->get_palette();
-		
+
 		memset(&fmt, 0, sizeof(fmt));
 		fmt.BitsPerPixel = 8;
 		fmt.BytesPerPixel = 1;
 		fmt.palette = &palette;
-		
+
 		SDL_Surface* cv = SDL_ConvertSurface(surf, &fmt, 0);
-		
+
 		// Add the frame
 		m_pixels = (uchar*)realloc(m_pixels, TEXTURE_W*TEXTURE_H*(m_nrframes+1));
 		m_curframe = &m_pixels[TEXTURE_W*TEXTURE_H*m_nrframes];
 		m_nrframes++;
-		
+
+		SDL_LockSurface(cv);
+
 		for(int y = 0; y < TEXTURE_H; y++)
 			memcpy(m_curframe + y*TEXTURE_W, (Uint8*)cv->pixels + y*cv->pitch, TEXTURE_W);
-		
+
+		SDL_UnlockSurface(cv);
+
 		SDL_FreeSurface(cv);
 		SDL_FreeSurface(surf);
 	}

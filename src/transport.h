@@ -22,13 +22,13 @@
 
 #include "instances.h"
 #include "map.h"
-#include "ware.h"
 
 
 class Flag;
 class Road;
 class Request;
 class Economy;
+class Item_Ware_Descr;
 
 struct Neighbour {
 	Flag	*flag;
@@ -36,6 +36,70 @@ struct Neighbour {
 	int	cost;
 };
 typedef std::vector<Neighbour> Neighbour_list;
+
+
+/*
+WareInstance
+------------
+WareInstance represents one item while it is being carried around.
+
+The WareInstance never draws itself; the carrying worker or the current flag
+location are responsible for that.
+
+The location of a ware can be one of the following:
+- a flag
+- a worker that is currently carrying the ware
+- a building; this should only be temporary until the ware is incorporated into
+  the building somehow
+*/
+class WareInstance : public Map_Object {
+public:
+	WareInstance(int ware);
+	~WareInstance();
+
+	virtual int get_type();
+
+	Map_Object* get_location(Editor_Game_Base* g) { return m_location.get(g); }
+	Economy* get_economy() { return m_economy; }
+	int get_ware() const { return m_ware; }
+	Item_Ware_Descr* get_ware_descr() const { return m_ware_descr; }
+
+	void init(Editor_Game_Base* g);
+	void cleanup(Editor_Game_Base* g);
+	void act(Game*, uint data);
+	void update(Game*);
+
+	void set_location(Game* g, Map_Object* loc);
+	void set_economy(Economy* e);
+
+	bool is_moving(Game* g);
+	void cancel_moving(Game* g);
+	PlayerImmovable* get_next_move_step(Game* g);
+	PlayerImmovable* get_final_move_step(Game* g);
+
+	void set_request(Game* g, Request* rq, const Route* route);
+	void cancel_request(Game* g);
+
+private:
+	Object_Ptr			m_location;
+	Economy*				m_economy;
+	int					m_ware;
+	Item_Ware_Descr*	m_ware_descr;
+
+	Request*		m_request;
+
+	bool			m_return_watchdog;	// scheduled return-to-warehouse watchdog
+	bool			m_flag_dirty;			// true if we need to tell the flag to take care of us
+
+	bool			m_moving;
+	Object_Ptr	m_move_destination;
+	Route*		m_move_route;
+
+private:
+	static Map_Object_Descr	s_description;
+};
+
+
 
 /*
 Flag represents a flag, obviously.
@@ -93,6 +157,7 @@ public:
 	WareInstance* fetch_pending_item(Game* g, Flag* destflag);
 
 	void update_items(Game* g, Flag* other);
+	void update_item(Game* g, WareInstance* item);
 
 protected:
 	virtual void init(Editor_Game_Base*);

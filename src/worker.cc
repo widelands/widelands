@@ -47,6 +47,8 @@ Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
 	m_menu_pic = 0;
 	m_menu_pic_fname = 0;
 	m_ware_id = -1;
+
+	add_attribute(Map_Object::WORKER);
 }
 
 Worker_Descr::~Worker_Descr(void)
@@ -156,7 +158,6 @@ Worker::Worker(Worker_Descr *descr, bool logic)
 	m_economy = 0;
 	m_location = 0;
 	m_state = State_None;
-	m_carried_item = 0;
 	m_route = 0;
 }
 
@@ -238,21 +239,18 @@ void Worker::set_economy(Economy *economy)
 	if (economy == m_economy)
 		return;
 
-	if (m_economy) {
+	if (m_economy)
 		m_economy->remove_wares(get_descr()->get_ware_id(), 1);
-
-		if (m_carried_item)
-			m_carried_item->remove_from_economy(m_economy);
-	}
 
 	m_economy = economy;
 
-	if (m_economy) {
-		m_economy->add_wares(get_descr()->get_ware_id(), 1);
+	WareInstance* item = get_carried_item(get_owner()->get_game());
 
-		if (m_carried_item)
-			m_carried_item->add_to_economy(m_economy);
-	}
+	if (item)
+		item->set_economy(m_economy);
+
+	if (m_economy)
+		m_economy->add_wares(get_descr()->get_ware_id(), 1);
 }
 
 
@@ -266,14 +264,16 @@ If we carry an item right now, it will be destroyed (see fetch_carried_item()).
 */
 void Worker::set_carried_item(Game* g, WareInstance* item)
 {
-	if (m_carried_item) {
-		m_carried_item->cleanup(g);
-		delete m_carried_item;
-		m_carried_item = 0;
+	WareInstance* olditem = get_carried_item(g);
+
+	if (olditem) {
+		olditem->cleanup(g);
+		delete olditem;
 	}
 
 	m_carried_item = item;
-	m_carried_item->set_location(get_location(g));
+	item->set_location(g, this);
+	item->update(g);
 }
 
 
@@ -284,12 +284,12 @@ Worker::fetch_carried_item
 Stop carrying the current item, and return a pointer to it.
 ===============
 */
-WareInstance* Worker::fetch_carried_item()
+WareInstance* Worker::fetch_carried_item(Game* g)
 {
-	WareInstance* item = m_carried_item;
+	WareInstance* item = get_carried_item(g);
 
-	if (m_carried_item) {
-		m_carried_item->set_location(0);
+	if (item) {
+		item->set_location(g, 0);
 		m_carried_item = 0;
 	}
 
@@ -470,11 +470,10 @@ Remove the worker.
 */
 void Worker::cleanup(Editor_Game_Base *g)
 {
-	if (m_carried_item) {
-		m_carried_item->cleanup((Game*)g);
-		delete m_carried_item;
-		m_carried_item = 0;
-	}
+	WareInstance* item = get_carried_item(g);
+
+	if (item)
+		item->destroy(g);
 
 	if (get_location(g))
 		set_location(0);
@@ -503,8 +502,8 @@ void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 			if (prev != TASK_NONE && nexthint != TASK_IDLE) {
 				PlayerImmovable *location = get_location(g);
 
-				if (get_carried_item())
-					get_carried_item()->cancel(g);
+				if (get_carried_item(g))
+					get_carried_item(g)->cancel_moving(g);
 
 				if (location && location->get_type() == Map_Object::FLAG) {
 					molog("Worker::task_start_best [State_None]: return to warehouse\n");
@@ -560,7 +559,7 @@ Return true if we actually woke up due to this.
 */
 bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 {
-	if (m_state == State_DropOff && get_carried_item()) {
+	if (m_state == State_DropOff && get_carried_item(g)) {
 		molog("State_DropOff: Wake up: flag capacity.\n");
 
 		interrupt_task(g, false);
@@ -912,7 +911,7 @@ into the building.
 void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
 {
 	PlayerImmovable* owner = get_location(g);
-	WareInstance* item = get_carried_item();
+	WareInstance* item = get_carried_item(g);
 
 	if (!owner) {
 		molog("Worker: DropOff: owner disappeared\n");
@@ -954,7 +953,7 @@ void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
 			if (flag->has_capacity()) {
 				molog("Worker: DropOff: dropping the item\n");
 
-				item = fetch_carried_item();
+				item = fetch_carried_item(g);
 				flag->add_item(g, item);
 
 				start_task_idle(g, get_descr()->get_idle_anim(), 50);
@@ -1122,7 +1121,7 @@ Worker::draw
 Draw the worker, taking the carried item into account.
 ===============
 */
-void Worker::draw(Editor_Game_Base* game, RenderTarget* dst, Point pos)
+void Worker::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos)
 {
 	uint anim = get_current_anim();
 
@@ -1132,16 +1131,18 @@ void Worker::draw(Editor_Game_Base* game, RenderTarget* dst, Point pos)
 	const RGBColor* playercolors = 0;
 	Point drawpos;
 
-	calc_drawpos(game, pos, &drawpos);
+	calc_drawpos(g, pos, &drawpos);
 
 	if (get_owner())
 		playercolors = get_owner()->get_playercolor();
 
-	dst->drawanim(drawpos.x, drawpos.y, anim, game->get_gametime() - get_animstart(), playercolors);
+	dst->drawanim(drawpos.x, drawpos.y, anim, g->get_gametime() - get_animstart(), playercolors);
 
 	// Draw the currently carried item
-	if (m_carried_item) {
-		uint itemanim = m_carried_item->get_ware_descr()->get_idle_anim();
+	WareInstance* item = get_carried_item(g);
+
+	if (item) {
+		uint itemanim = item->get_ware_descr()->get_idle_anim();
 
 		dst->drawanim(drawpos.x, drawpos.y - 15, itemanim, 0, playercolors);
 	}
@@ -1505,12 +1506,12 @@ void Carrier::run_state_worktransport(Game* g, uint prev, bool success, uint nex
 
 		// Drop the item, indicating success
 		if (pos->get_type() == Map_Object::BUILDING) {
-			item = fetch_carried_item();
+			item = fetch_carried_item(g);
 
 			if (item) {
 				molog("Carrier: WorkTransport: Arrived in building.\n");
-				item->set_location((Building*)pos);
-				item->arrived(g); // The item disappears from under us
+				item->set_location(g, (Building*)pos);
+				item->update(g);
 
 				start_task_idle(g, get_descr()->get_idle_anim(), 20);
 				return;
@@ -1541,7 +1542,7 @@ void Carrier::run_state_worktransport(Game* g, uint prev, bool success, uint nex
 	}
 
 	// If we don't carry something, walk to the flag
-	if (!get_carried_item()) {
+	if (!get_carried_item(g)) {
 		Flag* flag;
 		Flag* otherflag;
 
@@ -1570,8 +1571,10 @@ void Carrier::run_state_worktransport(Game* g, uint prev, bool success, uint nex
 	// into said building
 	Flag* flag;
 
-	item = get_carried_item();
+	item = get_carried_item(g);
 	flag = road->get_flag((Road::FlagId)(m_fetch_flag ^ 1));
+
+	assert(item->get_location(g) == this);
 
 	// A sanity check is necessary, in case the building has been destroyed
 	if (item->is_moving(g))
@@ -1606,7 +1609,7 @@ void Carrier::run_state_worktransport(Game* g, uint prev, bool success, uint nex
 	if (walk_to_flag(g, m_fetch_flag ^ 1))
 		return;
 
-	item = fetch_carried_item();
+	item = fetch_carried_item(g);
 	flag->add_item(g, item);
 
 	// Check for pending items
@@ -1631,7 +1634,7 @@ Called by flag code when our target flag has capacity.
 */
 bool Carrier::wakeup_flag_capacity(Game* g, Flag* flag)
 {
-	if (get_state() == State_WorkTransport && get_carried_item()) {
+	if (get_state() == State_WorkTransport && get_carried_item(g)) {
 		interrupt_task(g, false);
 		return true;
 	}

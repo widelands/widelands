@@ -93,8 +93,12 @@ public:
 	enum {
 		BOB,			// class Bob
 
+		WARE,			// class WareInstance
+
 		// everything below is at least a BaseImmovable
 		IMMOVABLE,
+
+		// everything below is at least a PlayerImmovable
 		BUILDING,
 		FLAG,
 		ROAD
@@ -103,6 +107,7 @@ public:
 	// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
 	enum Attribute {
 		WAREHOUSE = 1,		// assume BUILDING
+		WORKER,				// assume BOB
 	};
 
 	// the enums tell us where we are going
@@ -123,7 +128,7 @@ protected:
 public:
 	virtual int get_type() = 0;
 
-	inline int get_serial(void) const { return m_serial; }
+	inline uint get_serial(void) const { return m_serial; }
 	inline bool has_attribute(uint attr) { return m_descr->has_attribute(attr); }
 
 	void remove(Editor_Game_Base*);

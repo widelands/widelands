@@ -32,6 +32,451 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "building.h"
 
 
+
+/*
+==============================================================================
+
+WareInstance IMPLEMENTATION
+
+==============================================================================
+*/
+
+
+Map_Object_Descr WareInstance::s_description; // dummy description
+
+/*
+===============
+WareInstance::WareInstance
+===============
+*/
+WareInstance::WareInstance(int ware)
+	: Map_Object(&s_description, true)
+{
+	m_economy = 0;
+
+	m_ware = ware;
+	m_ware_descr = 0;
+
+	m_request = 0;
+	m_return_watchdog = false;
+	m_moving = false;
+	m_move_route = 0;
+}
+
+
+/*
+===============
+WareInstance::~WareInstance
+===============
+*/
+WareInstance::~WareInstance()
+{
+}
+
+
+/*
+===============
+WareInstance::get_type
+===============
+*/
+int WareInstance::get_type()
+{
+	return WARE;
+}
+
+
+/*
+===============
+WareInstance::init
+===============
+*/
+void WareInstance::init(Editor_Game_Base* g)
+{
+	Ware_Descr* descr = g->get_ware_description(m_ware);
+
+	assert(!descr->is_worker());
+
+	Map_Object::init(g);
+
+	m_ware_descr = (Item_Ware_Descr*)descr;
+}
+
+
+/*
+===============
+WareInstance::cleanup
+===============
+*/
+void WareInstance::cleanup(Editor_Game_Base* g)
+{
+	molog("WareInstance::cleanup\n");
+
+	if (g->is_game()) {
+		cancel_moving((Game*)g);
+		set_location((Game*)g, 0);
+	}
+
+	Map_Object::cleanup(g);
+}
+
+
+/*
+===============
+WareInstance::set_economy
+
+Ware accounting
+===============
+*/
+void WareInstance::set_economy(Economy* e)
+{
+	if (m_economy == e)
+		return;
+
+	if (m_economy)
+		m_economy->remove_wares(m_ware, 1);
+
+	m_economy = e;
+
+	if (m_economy)
+		m_economy->add_wares(m_ware, 1);
+}
+
+
+/*
+===============
+WareInstance::set_location
+
+Change the current location.
+Once you've assigned a ware to its new location, you usually have to call
+update() as well.
+===============
+*/
+void WareInstance::set_location(Game* g, Map_Object* location)
+{
+	Map_Object* oldlocation = m_location.get(g);
+
+	if (oldlocation == location)
+		return;
+
+	m_location = location;
+
+	if (location)
+	{
+		Economy* eco = 0;
+
+		if (location->get_type() >= BUILDING)
+			eco = ((PlayerImmovable*)location)->get_economy();
+		else if (location->has_attribute(WORKER))
+			eco = ((Worker*)location)->get_economy();
+
+		if (oldlocation && get_economy()) {
+			if (get_economy() != eco)
+				throw wexception("WareInstance::set_location() implies change of economy");
+		} else {
+			set_economy(eco);
+		}
+
+		m_flag_dirty = true;
+	}
+	else
+	{
+		set_economy(0);
+	}
+}
+
+
+/*
+===============
+WareInstance::act
+
+Callback for the return-to-warehouse timer.
+===============
+*/
+void WareInstance::act(Game* g, uint data)
+{
+	if (!m_request && !m_moving && m_return_watchdog)
+	{
+		molog("WareInstance::act: TODO: return to warehouse\n");
+
+		m_return_watchdog = false;
+	}
+}
+
+
+/*
+===============
+WareInstance::update
+
+Performs the state updates necessary for the current location:
+- if it's a building, acknowledge the Request or incorporate into warehouse
+- if it's a flag and we have no request, start the return to warehouse timer
+
+Note: update() may result in the deletion of this object.
+===============
+*/
+void WareInstance::update(Game* g)
+{
+	Map_Object* loc = m_location.get(g);
+
+	// Reset our state if we're not on location or outside an economy
+	if (!loc || !get_economy()) {
+		cancel_moving(g);
+		return;
+	}
+
+	// Make sure current movement data is correct
+	is_moving(g);
+
+	// Updates based on location type
+	switch(loc->get_type()) {
+	case BUILDING:
+		if (m_request)
+		{
+			Request* rq = m_request;
+
+			if (loc != rq->get_target(g))
+				throw wexception("WareInstance::update: End in building, but not request target");
+
+			m_request = 0;
+			rq->transfer_finish(g);
+			return; // *this should now be freed
+		}
+		else
+		{
+			if (loc->has_attribute(WAREHOUSE)) {
+				Warehouse* wh = (Warehouse*)loc;
+
+				wh->incorporate_item(g, this);
+				return; // *this should now be freed
+			}
+
+			throw wexception("WareInstance::set_location: BUILDING, but neither request nor warehouse");
+		}
+
+	case FLAG:
+		if (!m_request)
+		{
+			// arrange for a return to warehouse
+			if (!m_moving && !m_return_watchdog) {
+				g->get_cmdqueue()->queue(g->get_gametime() + 5000, SENDER_MAPOBJECT,
+						CMD_ACT, m_serial, 0, 0);
+				m_return_watchdog = true;
+			}
+		}
+
+		if (m_flag_dirty) {
+			((Flag*)loc)->update_item(g, this);
+			m_flag_dirty = false;
+		}
+		break;
+	}
+}
+
+
+/*
+===============
+WareInstance::set_request
+
+Set ware state so that it fulfills the given request.
+===============
+*/
+void WareInstance::set_request(Game* g, Request* rq, const Route* route)
+{
+	// Reset current movement & request
+	if (m_request) {
+		m_request->transfer_fail(g);
+		m_request = 0;
+	}
+
+	if (m_move_route) {
+		delete m_move_route;
+		m_move_route = 0;
+	}
+
+	// Set request state
+	m_request = rq;
+
+	m_return_watchdog = false;
+	m_flag_dirty = true;
+
+	m_moving = true;
+	m_move_destination = m_request->get_target(g);
+	m_move_route = new Route(*route);
+
+	update(g);
+}
+
+
+/*
+===============
+WareInstance::cancel_request
+
+The request has been cancelled, just stop moving.
+===============
+*/
+void WareInstance::cancel_request(Game* g)
+{
+	m_request = 0;
+	m_moving = false;
+
+	if (m_move_route) {
+		delete m_move_route;
+		m_move_route = 0;
+	}
+
+	m_return_watchdog = false;
+
+	update(g);
+}
+
+
+
+/*
+===============
+WareInstance::is_moving
+
+Update the move state, figure out whether we should be moving, etc.
+===============
+*/
+bool WareInstance::is_moving(Game* g)
+{
+	Map_Object* loc;
+	PlayerImmovable* target;
+
+	if (!m_moving)
+		return false;
+
+	loc = get_location(g);
+	target = (PlayerImmovable*)m_move_destination.get(g);
+
+	assert(loc);
+
+	if (!target) {
+		cancel_moving(g);
+		return false;
+	}
+
+	if (m_move_route)
+	{
+		PlayerImmovable* reroutestart = 0;
+		bool recalc = false;
+
+		// If we're on a flag, it should be either the first or second on the route
+		// If we're on the second flag, we finished the first part of the route,
+		// so trim it
+		if (loc->get_type() == Map_Object::FLAG) {
+			if (loc == m_move_route->get_flag(g, 1))
+			{
+				m_move_route->starttrim(1);
+				if (!m_move_route->get_nrsteps()) {
+					delete m_move_route;
+					m_move_route = 0;
+				}
+			}
+			else if (loc != m_move_route->get_flag(g, 0))
+			{
+				// This might happen when a road is split while the item is carried
+				// on it.
+				// Try to deal gracefully
+				molog("WareInstance::is_moving: Not on first or second flag of route.\n");
+				recalc = true;
+			}
+
+			reroutestart = (Flag*)loc;
+		}
+
+		// Now validate the route
+		if (m_move_route && (recalc || !m_move_route->verify(g))) {
+			if (target->get_economy() != get_economy()) {
+				molog("WareInstance::is_moving: Target unreachable (%p vs %p)\n",
+						target->get_economy(), get_economy());
+
+				cancel_moving(g);
+				return false;
+			}
+
+			if (!reroutestart)
+				reroutestart = m_move_route->get_flag(g, 0);
+
+			if (!get_economy()->find_route(reroutestart->get_base_flag(), target->get_base_flag(), m_move_route))
+				throw wexception("WareInstance::is_moving: Failed to find route within economy");
+		}
+	}
+
+	return true;
+}
+
+
+/*
+===============
+WareInstance::cancel_moving
+
+Call this function if movement + potential request need to be cancelled for
+whatever reason.
+===============
+*/
+void WareInstance::cancel_moving(Game* g)
+{
+	if (m_request) {
+		molog("WareInstance::cancel_moving() fails request.\n");
+
+		m_request->transfer_fail(g);
+		m_request = 0;
+	}
+
+	m_moving = false;
+	m_return_watchdog = false;
+
+	if (m_move_route) {
+		delete m_move_route;
+		m_move_route = 0;
+	}
+}
+
+
+/*
+===============
+WareInstance::get_next_move_step
+
+Return the next flag we should be moving to, or the final target if the route
+has been completed successfully.
+===============
+*/
+PlayerImmovable* WareInstance::get_next_move_step(Game* g)
+{
+	assert(m_moving);
+
+	if (m_move_route) {
+		assert(m_move_route->get_nrsteps());
+
+		Flag* flag = m_move_route->get_flag(g, 0);
+
+		if (get_location(g) == flag)
+			return m_move_route->get_flag(g, 1);
+
+		return flag;
+	}
+
+	return (PlayerImmovable*)m_move_destination.get(g);
+}
+
+
+/*
+===============
+WareInstance::get_final_move_step
+
+Returns the final target.
+===============
+*/
+PlayerImmovable* WareInstance::get_final_move_step(Game* g)
+{
+	assert(m_moving);
+
+	return (PlayerImmovable*)m_move_destination.get(g);
+}
+
+
+
 /*
 ==============================================================================
 
@@ -173,23 +618,17 @@ void Flag::set_economy(Economy *e)
 	if (old == e)
 		return;
 
-	if (old) {
-		for(int i = 0; i < m_item_filled; i++)
-			m_items[i].item->remove_from_economy(old);
-	}
-
 	PlayerImmovable::set_economy(e);
+
+	for(int i = 0; i < m_item_filled; i++)
+		m_items[i].item->set_economy(e);
 
 	if (m_building)
 		m_building->set_economy(e);
+
 	for(int i = 0; i < 6; i++) {
 		if (m_roads[i])
 			m_roads[i]->set_economy(e);
-	}
-
-	if (e) {
-		for(int i = 0; i < m_item_filled; i++)
-			m_items[i].item->add_to_economy(e);
 	}
 }
 
@@ -369,9 +808,8 @@ void Flag::add_item(Game* g, WareInstance* item)
 	pi->pending = false;
 	pi->flag = 0;
 
-	item->set_location(this);
-
-	update_item(g, pi);
+	item->set_location(g, this);
+	item->update(g); // will call update_item() if necessary
 }
 
 
@@ -452,7 +890,7 @@ WareInstance* Flag::fetch_pending_item(Game* g, Flag* destflag)
 		m_item_filled--;
 		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
 
-		item->set_location(0);
+		item->set_location(g, 0);
 
 		// wake up capacity wait queue
 		while(m_capacity_wait.size()) {
@@ -488,6 +926,10 @@ _always_ be renotified, even if there was no change.
 void Flag::update_item(Game* g, PendingItem* pi, Flag* renotify_flag)
 {
 	WareInstance* item = pi->item;
+
+	assert(item->get_location(g) == this);
+
+	molog("Flag::update_item(%u)\n", item->get_serial());
 
 	if (item->is_moving(g))
 	{
@@ -543,16 +985,18 @@ void Flag::update_item(Game* g, PendingItem* pi, Flag* renotify_flag)
 			if (next != get_building())
 				throw wexception("Flag::update_item: move to disjoint building");
 
-			throw("TODO: Fetch item from flag into building");
+			molog("Flag::update_item: Tell building to fetch this item\n");
+
+			//get_building()->fetch_from_flag(g);
+			throw wexception("TODO: Building::fetch_from_flag");
+			return;
 		}
 
 		throw("Flag::update_item: can only move to flag or building");
 	}
 
-	// The item is idling for now; set an idle timeout
+	// The item is idling for now.
 	pi->flag = 0;
-
-	// TODO: Set an idle timeout for return to warehouse
 }
 
 
@@ -574,6 +1018,21 @@ void Flag::update_items(Game* g, Flag* other)
 {
 	for(int i = 0; i < m_item_filled; i++)
 		update_item(g, &m_items[i], other);
+}
+
+
+/*
+===============
+Flag::update_item
+
+Called by item code when its moving state has changed.
+===============
+*/
+void Flag::update_item(Game* g, WareInstance* item)
+{
+	for(int i = 0; i < m_item_filled; i++)
+		if (m_items[i].item == item)
+			update_item(g, &m_items[i]);
 }
 
 
@@ -604,8 +1063,7 @@ void Flag::cleanup(Editor_Game_Base *g)
 	while(m_item_filled) {
 		WareInstance* item = m_items[--m_item_filled].item;
 
-		item->cleanup((Game*)g);
-		delete item;
+		item->destroy((Game*)g);
 	}
 
 	if (m_building) {
@@ -1328,7 +1786,7 @@ void Request::start_transfer(Game *g, Warehouse *wh, Route *route)
 		m_item = wh->launch_item(g, get_ware());
 
 		m_state = TRANSFER;
-		m_item->set_state_request(g, this, route);
+		m_item->set_request(g, this, route);
 	}
 }
 
@@ -1347,33 +1805,27 @@ void Request::check_transfer(Game *g)
 {
 	assert(m_state == TRANSFER);
 
+	// Item code does the check itself
+	if (m_item) {
+		assert(!m_worker);
+
+		m_item->is_moving(g);
+		return;
+	}
+
+	assert(m_worker);
+
 	Route* route;
 	PlayerImmovable* location;
 	PlayerImmovable* target = get_target(g);
 
 	// Get the route
-	if (m_worker) {
-		assert(!m_item);
+	route = m_worker->get_route();
+	location = m_worker->get_location(g);
 
-		route = m_worker->get_route();
-		location = m_worker->get_location(g);
-
-		// worker should phone home if that happens
-		if (!location)
-			throw wexception("Request::check_transfer(): current location disappeared!");
-	} else {
-		assert(!m_worker);
-
-		route = m_item->get_route();
-		location = m_item->get_location(g);
-
-		// since wares often have a zero location temporarily, this can happen
-		if (!location) {
-			cancel_transfer(g);
-			get_target_economy(g)->process_request(this);
-			return;
-		}
-	}
+	// worker should phone home if that happens
+	if (!location)
+		throw wexception("Request::check_transfer(): current location disappeared!");
 
 
 	// Verify the route, and fix it if necessary
@@ -1417,8 +1869,7 @@ void Request::cancel_transfer(Game *g)
 	{
 		assert(m_item);
 
-		m_item->end_state_request(g);
-		m_item->set_state_idle(g);
+		m_item->cancel_request(g);
 		m_item = 0;
 		m_state = OPEN;
 	}
@@ -1441,8 +1892,7 @@ void Request::transfer_finish(Game *g)
 	m_state = CLOSED;
 
 	if (m_item) {
-		m_item->cleanup(g);
-		delete m_item;
+		m_item->destroy(g);
 		m_item = 0;
 	}
 

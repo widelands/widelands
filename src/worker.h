@@ -113,9 +113,9 @@ public:
 	void set_location(PlayerImmovable *location);
 	void set_economy(Economy *economy);
 
-	WareInstance* get_carried_item() const { return m_carried_item; }
+	WareInstance* get_carried_item(Editor_Game_Base* g) { return (WareInstance*)m_carried_item.get(g); }
 	void set_carried_item(Game* g, WareInstance* item);
-	WareInstance* fetch_carried_item();
+	WareInstance* fetch_carried_item(Game* g);
 
 	void set_job_request(Request *req, const Route *route);
 	void change_job_request(bool cancel);
@@ -157,7 +157,7 @@ private:
 	Object_Ptr		m_location;			// meta location of the worker, a PlayerImmovable
 	Economy*			m_economy;			// Economy this worker is registered in
 	int				m_state;				// one of State_XXX
-	WareInstance*	m_carried_item;	// Item we are carrying
+	Object_Ptr		m_carried_item;	// Item we are carrying
 	Route				*m_route;			// used by Request, GoWarehouse
 
 	Request			*m_request;			// the request we're supposed to fulfill

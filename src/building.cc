@@ -305,24 +305,24 @@ void Building::cleanup(Editor_Game_Base *g)
 {
 	// Remove from flag
 	m_flag->detach_building(g);
-	
+
 	// Unset the building
    unset_position(g, m_position);
-	
+
 	if (get_size() == BIG) {
 		Map *map = g->get_map();
 		Coords neighb;
-		
+
 		map->get_ln(m_position, &neighb);
 		unset_position(g, neighb);
 
 		map->get_tln(m_position, &neighb);
 		unset_position(g, neighb);
-		
+
 		map->get_trn(m_position, &neighb);
 		unset_position(g, neighb);
 	}
-	
+
 	PlayerImmovable::cleanup(g);
 }
 
@@ -339,7 +339,7 @@ void Building::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, P
 		return; // draw big buildings only once
 
 	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, get_owner()->get_playercolor());
-	
+
 	// door animation?
 }
 
@@ -543,6 +543,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		m_wares[i]->cleanup((Game*)g);
 		delete m_wares[i];
 	}
+	m_wares.clear();
 
 	Building::cleanup(g);
 
@@ -848,7 +849,7 @@ appropriate ware to our warelist
 void Warehouse::incorporate_worker(Game *g, Worker *w)
 {
 	int ware = w->get_ware_id();
-	WareInstance* item = w->fetch_carried_item(); // rescue an item
+	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
 	w->remove(g);
 
@@ -877,13 +878,6 @@ WareInstance* Warehouse::launch_item(Game* g, int ware)
 	Worker_Descr* workerdescr;
 	Worker* worker;
 
-	item = new WareInstance(ware);
-	item->set_location(this);
-	item->init(g);
-
-	m_wares.remove(ware, 1);
-	get_economy()->remove_wares(ware, 1); // re-added by the item itself
-
 	// Create a carrier
 	carrierid = g->get_ware_id("carrier");
 	waredescr = g->get_ware_description(carrierid);
@@ -896,6 +890,13 @@ WareInstance* Warehouse::launch_item(Game* g, int ware)
 		m_wares.remove(carrierid, 1);
 		get_economy()->remove_wares(carrierid, 1);
 	}
+
+	// Create the item
+	item = new WareInstance(ware);
+	item->init(g);
+
+	m_wares.remove(ware, 1);
+	get_economy()->remove_wares(ware, 1); // re-added by the item itself
 
 	// Setup the carrier
 	worker->set_job_dropoff(g, item);
@@ -915,9 +916,7 @@ void Warehouse::incorporate_item(Game* g, WareInstance* item)
 {
 	int ware = item->get_ware();
 
-	item->cleanup(g);
-	delete item;
-	item = 0;
+	item->destroy(g);
 
 	m_wares.add(ware, 1);
 	get_economy()->add_wares(ware, 1);
