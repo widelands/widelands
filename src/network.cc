@@ -28,6 +28,18 @@ enum {
 	NETCMD_PLAYERCOMMAND
 };
 
+/* A note on simulation timing:
+In a network game, in addition to the regular game time the concept of network
+time (NetGame::net_game_time) is introduced. Network time is always ahead of game
+time and defines how far the game time may advance using regular simulation.
+Whenever a player command is issued, it is scheduled at the current network time so
+it is guaranteed that all players will handle it at the appropriate time because
+they must not have advanced the game time past that point. When the host decides that
+up to some point later than current network time it will not schedule any more player
+commands, than the network time will be advanced. Note that only the host has the
+authority to do this. */
+
+
 /*** class NetGame ***/
 
 NetGame::NetGame ()
@@ -48,6 +60,9 @@ void NetGame::run ()
 	game=0;
 }
 
+// Return the maximum amount of time the game logic is allowed to advance.
+// After that, new player commands may be scheduled and must be taken
+// into account.
 int NetGame::get_max_frametime ()
 {
 	int game_time=game->get_gametime();
@@ -63,6 +78,7 @@ NetHost::NetHost ()
 {
 	IPaddress myaddr;
 	
+	// create a listening socket
 	SDLNet_ResolveHost (&myaddr, NULL, WIDELANDS_PORT);
 	svsock=SDLNet_TCP_Open(&myaddr);
 	
@@ -97,11 +113,13 @@ void NetHost::handle_network ()
 {
 	unsigned int i;
 	
+	// check if we hear anything from our peers
 	while (SDLNet_CheckSockets(sockset, 0) > 0)
 		for (i=0;i<clients.size();i++)
 			if (SDLNet_SocketReady(clients[i].sock))
 				clients[i].deserializer->read_packet (clients[i].sock);
 
+	// if so, deserialize player commands
 	for (i=0;i<clients.size();i++)
 		while (clients[i].deserializer->avail())
 			cmds.push (PlayerCommand::deserialize(clients[i].deserializer));
@@ -114,6 +132,7 @@ void NetHost::handle_network ()
 	if (net_game_time - game->get_gametime() < 250) {
 		serializer->begin_packet ();
 
+		// send any outstanding player commands
 		while (!cmds.empty()) {
 			log ("%d player commands queued\n", cmds.size());
 
@@ -127,6 +146,7 @@ void NetHost::handle_network ()
 			game->enqueue_command (cmd);
 		}
 
+		// update network time
 		net_game_time=game->get_gametime()+500;
 	
 		serializer->putchar (NETCMD_ADVANCETIME);
@@ -134,6 +154,7 @@ void NetHost::handle_network ()
 	
 		serializer->end_packet ();
 	
+		// send the packet to all peers
 		for (i=0;i<clients.size();i++)
 			serializer->send (clients[i].sock);
 	}
@@ -173,6 +194,7 @@ void NetClient::begin_game ()
 
 void NetClient::handle_network ()
 {
+	// check if data is available on the socket
 	while (SDLNet_CheckSockets(sockset, 0) > 0)
 		deserializer->read_packet (sock);
 	
@@ -195,6 +217,8 @@ void NetClient::handle_network ()
 
 void NetClient::send_player_command (PlayerCommand* cmd)
 {
+	// send the packet to the server instead of queuing it locally
+	// note that currently clients can only send player commands, this may change in the future
 	serializer->begin_packet ();
 	cmd->serialize (serializer);
 	serializer->end_packet ();
@@ -214,7 +238,7 @@ Serializer::~Serializer ()
 void Serializer::begin_packet ()
 {
 	buffer.clear ();
-	buffer.push_back (0);
+	buffer.push_back (0);	// this will finally be the length of the packet
 	buffer.push_back (0);
 }
 
@@ -224,6 +248,7 @@ void Serializer::end_packet ()
 	
 	assert (length<0x10000);
 	
+	// update packet length
 	buffer[0]=length >> 8;
 	buffer[1]=length & 0xFF;
 }
@@ -248,14 +273,16 @@ void Deserializer::read_packet (TCPsocket sock)
 	unsigned char buffer[256];
 	int length,amount,i;
 	
+	// read packet length (including length field)
 	if (SDLNet_TCP_Recv(sock, buffer, 2) < 2)
 		throw wexception("Error reading from socket");
 
 	length=(buffer[0]<<8) | buffer[1];
-	length-=2;
+	length-=2;	// subtract 2 bytes for the length field
 
 	assert (length>=0);
 	
+	// read packet data in chunks of 256 bytes
 	while (length>0) {
 		amount=length <? 256;
 		
