@@ -20,22 +20,28 @@
 #ifndef __S__EDITOR_TOOL_PLACE_BOB_OPTIONS_MENU
 #define __S__EDITOR_TOOL_PLACE_BOB_OPTIONS_MENU
 
+#include <vector>
 #include "editor_tool_options_menu.h"
 
 class Editor_Interactive;
 class Editor_Place_Bob_Tool;
 class UITextarea;
-
+class UICheckbox;
+ 
 class Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
    public:
       Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive*, Editor_Place_Bob_Tool*,
 		                                         UIUniqueWindowRegistry*);
-      virtual ~Editor_Tool_Place_Bob_Options_Menu() { };
+      virtual ~Editor_Tool_Place_Bob_Options_Menu();
+      virtual bool handle_key(bool, int, char);
 
    private:
+      std::vector<UICheckbox*> m_checkboxes;
       Editor_Place_Bob_Tool* m_pit;
       UITextarea* m_name;
       void clicked(int, bool);
+      void do_nothing(int, bool);
+      bool m_multiselect;
 };
 
 #endif

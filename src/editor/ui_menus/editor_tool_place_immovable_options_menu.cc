@@ -27,6 +27,7 @@
 #include "map.h"
 #include "world.h"
 #include "editor_place_immovable_tool.h"
+#include "keycodes.h"
 
 /*
 =================================================
@@ -49,6 +50,7 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    const int max_items_in_tab=6;
 
    m_pit=pit;
+   m_multiselect=false;
 
    const int space=5;
    const int xstart=5;
@@ -102,6 +104,7 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
       cb->set_id(i);
       cb->set_state(m_pit->is_enabled(i));
       cb->changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
+      m_checkboxes.push_back(cb);
       box->add(cb, Align_Left);
       box->add_space(space);
       xpos+=width+1+space;
@@ -113,6 +116,17 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    m_tabpanel->activate(0);
    box->resize();
    m_tabpanel->resize();
+
+   // keyboard stuff
+   set_can_focus(true);
+   focus();
+}
+
+/*
+ * Cleanup 
+ */
+Editor_Tool_Place_Immovable_Options_Menu::~Editor_Tool_Place_Immovable_Options_Menu(void) {
+   set_can_focus(false);
 }
 
 /*
@@ -123,5 +137,35 @@ this is called when one of the state boxes is toggled
 ===========
 */
 void Editor_Tool_Place_Immovable_Options_Menu::clicked(int n, bool t) {
+   if(t==false && (!m_multiselect || m_pit->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
+
+   if(!m_multiselect) {
+      int i=0; 
+      while(m_pit->get_nr_enabled()) {
+         m_pit->enable(i++,false);
+      }
+      // Disable all checkboxes
+      for(i=0; i<((int)m_checkboxes.size()); i++) {
+         if(i==n) continue;
+         m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::do_nothing);
+         m_checkboxes[i]->set_state(false);
+         m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
+      }
+   }
+
    m_pit->enable(n,t);
 }
+
+
+/*
+ * handle key. When STRG is pressed, set multiselect to on
+ */
+bool Editor_Tool_Place_Immovable_Options_Menu::handle_key(bool down, int code, char c) {
+   if(code==KEY_LCTRL || code==KEY_RCTRL) m_multiselect=down;
+   return false;
+}
+
+/* do nothing */
+void Editor_Tool_Place_Immovable_Options_Menu::do_nothing(int n, bool t) {
+}
+
