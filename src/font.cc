@@ -58,16 +58,16 @@ Font_Handler::Font_Handler(void) {
 Font_Handler::~Font_Handler(void) {
 }
 
-/** void Font_Handler::load_font(const char* str, ushort fn )
+/** int Font_Handler::load_font(const char* str, ushort fn )
  *
  * This registers a certain font with the given
  * objects
  *
  * Args:	str file name of fontfile to load font from
  * 		fn 	number of font to register
- *	Returns: Nothing
+ *	Returns: ERR_FAILED, FERR_INVAL_VERSION, FERR_INVAL_FILE, RET_OK
  */
-void Font_Handler::load_font(const char* str, ushort fn) {
+int Font_Handler::load_font(const char* str, ushort fn) {
 		  assert(fn<MAX_FONTS);
 		  assert(str);
 
@@ -75,9 +75,7 @@ void Font_Handler::load_font(const char* str, ushort fn) {
 
 		  f.open(str, File::READ);
 		  if(f.get_state() != File::OPEN) {
-					 assert(0);
-					 // TODO: inform the user		 
-					 return;
+					 return FERR_INVAL_FILE;
 		  }
 
 		  // read the header
@@ -85,15 +83,11 @@ void Font_Handler::load_font(const char* str, ushort fn) {
 		  f.read((char*) &fh, sizeof(FHeader));
 
 		  if(WLFF_VERSIONMAJOR(fh.version) > WLFF_VERSIONMAJOR(WLFF_VERSION)) {
-					 assert(0);
-					 // TODO: inform the user      
-					 return;
+					 return FERR_INVAL_VERSION;
 		  }
 		  if(WLFF_VERSIONMAJOR(fh.version) == WLFF_VERSIONMAJOR(WLFF_VERSION)) {
 					 if(WLFF_VERSIONMINOR(fh.version) > WLFF_VERSIONMINOR(WLFF_VERSION)) {
-								assert(0);
-								// TODO: inform the user      
-								return;
+								return FERR_INVAL_VERSION;
 					 }
 		  }
 
@@ -107,9 +101,7 @@ void Font_Handler::load_font(const char* str, ushort fn) {
 		  for(unsigned int i=0; i<96; i++) {
 					 f.read((char*) &c, 1);
 					 if((uchar) c!=(i+32)) {
-								assert(0);
-								// TODO: inform the user      
-								return;
+								return FERR_INVAL_FILE;
 					 }	
 					 
 					 f.read((char*) &w, sizeof(ushort));
@@ -123,6 +115,7 @@ void Font_Handler::load_font(const char* str, ushort fn) {
 		  };
 
 		  free(pix);
+		  return RET_OK;
 }
 		 
 /** Pic* Font_Handler::get_string(const uchar* str, const ushort f);

@@ -30,17 +30,5 @@
  * Returns: nothing
  */
 void run_intro(void) {
-		  static Cursor cur; // This is the global cursor instance, init here for the whole game
-
-		  Pic *cursor=new Pic;
-		  const char* bmp=g_fileloc.locate_file("cursor.bmp", TYPE_PIC);
-		  
-		  assert(bmp);
-		  
-		  cursor->load(bmp);
-		  cursor->set_clrkey(0,0,255);
-		 
-		  g_cur.set_pic(cursor);
-
 		  return;
 }

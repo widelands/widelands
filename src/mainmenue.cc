@@ -124,19 +124,19 @@ void main_menue(void) {
 		  }
 		  else if(*domulti_player) {
 					 g_ui.delete_window(win);
-					 // Todo
+					 // TODO
 		  }
 		  else if(*dooptions) {
 					 g_ui.delete_window(win);
-					 // Todo
+					 // TODO
 		  }
 		  else if(*doreadme) {
 					 g_ui.delete_window(win);
-					 // Todo
+					 // TODO
 		  }
 		  else if(*doabout) {
 					 g_ui.delete_window(win);
-					 // Todo
+					 // TODO
 		  }
 
 		  // everything done.

@@ -74,13 +74,15 @@ namespace Graph {
 		  /** void Graphic::set_mode(const ushort x, const ushort y, const Mode m)
 			*
 			* This function sets a new graphics mode.
-			*
+			*	if x==0 and y==0: ignore resolution, just set the mode (won't create a window)
+			*	
 			* Args:	x	x resolution
 			* 		y	y resolution
 			* 		m	either windows or fullscreen
 			* Returns: Nothing
 			*/
 		  void Graphic::set_mode(const ushort x, const ushort y, const Mode m) {
+					 if(!x && !y) { mode=m; return; }
 					 if(xres==x && yres==y && mode==m) return;
 					 if(sc)
 								SDL_FreeSurface(sc);

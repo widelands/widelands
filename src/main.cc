@@ -43,6 +43,7 @@
 int g_main(int argn, char** argc) {
 		  static Font_Handler f; // Global instance for the hole game
 		  static User_Interface ui; // Global instance for the hole game
+		  static Cursor cur; // This is the global cursor instance, init here for the whole game
 		  
 		  // Setup default searchpaths
 		  setup_searchpaths();
@@ -50,11 +51,15 @@ int g_main(int argn, char** argc) {
 		  // Handle options
 		  handle_options(argn, argc);
 
-
 		  // Setup font handler and user interface for the use in widelands
 		  setup_fonthandler();
 		  setup_ui();
-
+		  
+		  // Until now, no window is created, nothing is started, just initialized.
+		  // By now, we musn't use the tell_user function any longer!! 
+		  // Rather, we can now use a user_interface window for critical errors, which
+		  // terminates the application in a good matter
+		  
 		  // run intro
 		  run_intro();
 		 

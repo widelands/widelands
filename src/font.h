@@ -33,6 +33,8 @@
 #define WLFF_VERSIONMAJOR(a)  (a >> 8)
 #define WLFF_VERSIONMINOR(a)  (a & 0xFF)
 
+#define FERR_INVAL_FILE -127
+#define FERR_INVAL_VERSION -128
 
 /** class Font_Handler
  *
@@ -57,7 +59,7 @@ class Font_Handler : public Singleton<Font_Handler> {
 					 ~Font_Handler();
 
 					 
-					 void load_font(const char*, const ushort);
+					 int load_font(const char*, const ushort);
 					 Pic* get_string(const char*, const ushort);
 					 
 					 /** inline ushort get_fh(ushort f) 

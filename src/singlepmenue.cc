@@ -95,11 +95,11 @@ void single_player_menue(void) {
 		  }
 		  else if(*brunc) {
 					 g_ui.delete_window(win);
-					 // todo
+					 // TODO
 		  }
 		  else if(*bloadg) {
 					 g_ui.delete_window(win);
-					 // todo
+					 // TODO
 		  }
 		  
 		  

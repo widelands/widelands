@@ -25,6 +25,8 @@
 #include "graphic.h"
 #include "font.h"
 #include "ui.h"
+#include "cursor.h"
+#include "output.h"
 
 #include <string.h>
 
@@ -38,16 +40,16 @@
 void setup_fonthandler(void) {
 		  // Setting Font_Handler up
 		  const char* buf=g_fileloc.locate_file("fixed_font1.wff", TYPE_FONT);
-		  assert(buf);
-		  g_fh.load_font( buf, FIXED_FONT1 );
-		  
-/*		  buf=g_fileloc.locate_file("fixed_font2.bmp", TYPE_PIC);
-		  assert(buf);
-		  bmp = new Pic;
-		  bmp->load(buf);
-		  bmp->set_clrkey(DEF_CLRKEY);
-		  g_fh.set_font(1, bmp, FONT_W, FONT_H);
-*/
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
+		  if(g_fh.load_font( buf, FIXED_FONT1 ) != RET_OK) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: Invalid File, load error, or wrong version. Check for new versions.", buf);
+					 tell_user(mbuf);
+		  }
 }
 
 /** void setup_ui(void) 
@@ -58,59 +60,108 @@ void setup_fonthandler(void) {
  * Returns: Nothing
  */
 void setup_ui(void) {
-		  
+		  // Init cursor
+		  Pic *cursor=new Pic;
+		  const char* buf=g_fileloc.locate_file("cursor.bmp", TYPE_PIC);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
+
+		  cursor->load(buf);
+		  cursor->set_clrkey(0,0,255);
+		  g_cur.set_pic(cursor);
+
+
 		  // Init the window
 		  // Window's without clrkey, so it's drawn WAY faster
 		  Pic bmp;
-		  const char *buf=g_fileloc.locate_file("win_l_border.bmp", TYPE_PIC);
-		  assert(buf);
+		  buf=g_fileloc.locate_file("win_l_border.bmp", TYPE_PIC);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
-//		  bmp.set_clrkey(DEF_CLRKEY);
+		  //		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_l_border(&bmp);
-		  
+
 		  buf=g_fileloc.locate_file("win_r_border.bmp", TYPE_PIC);
-		  assert(buf);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
-//		  bmp.set_clrkey(DEF_CLRKEY);
+		  //		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_r_border(&bmp);
-		  
+
 		  buf=g_fileloc.locate_file("win_top.bmp", TYPE_PIC);
-		  assert(buf);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
-//		  bmp.set_clrkey(DEF_CLRKEY);
+		  //		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_top(&bmp);
-		  
+
 		  buf=g_fileloc.locate_file("win_bot.bmp", TYPE_PIC);
-		  assert(buf);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
-//		  bmp.set_clrkey(DEF_CLRKEY);
+		  //		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_bot(&bmp);
-		  
+
 		  buf=g_fileloc.locate_file("win_bg.bmp", TYPE_PIC);
-		  assert(buf);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
-//		  bmp.set_clrkey(DEF_CLRKEY);
+		  //		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_bg(&bmp);
 
 		  // Button class
 		  buf=g_fileloc.locate_file("but0.bmp", TYPE_PIC);
-		  assert(buf);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
 		  Button::set_bg(&bmp, 0);
 
 		  buf=g_fileloc.locate_file("but1.bmp", TYPE_PIC);
-		  assert(buf);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
 		  Button::set_bg(&bmp, 1);
 
 		  buf=g_fileloc.locate_file("but2.bmp", TYPE_PIC);
-		  assert(buf);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
 		  Button::set_bg(&bmp, 2);
 
 		  // Checkbox class
 		  buf=g_fileloc.locate_file("checkbox.bmp", TYPE_PIC);
-		  assert(buf);
+		  if(!buf) {
+					 char mbuf[200];
+					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
+					 tell_user(mbuf);
+		  }
 		  bmp.load(buf);
 		  Checkbox::set_graph(&bmp);
 
