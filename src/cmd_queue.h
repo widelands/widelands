@@ -82,7 +82,7 @@ class Cmd_Queue {
 
    private:
 		void exec_cmd(const Cmd *c);
-		void clear_cmd(Cmd *c);
+		void clear_cmd(const Cmd* c);
 
       Game *m_game;
 		queue_t m_cmds;

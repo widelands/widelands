@@ -37,7 +37,7 @@ Cmd_Queue::~Cmd_Queue(void)
 {
 	while(!m_cmds.empty()) {
 		const Cmd &c = m_cmds.top();
-		clear_cmd((Cmd *)&c);
+		clear_cmd(&c);
 		m_cmds.pop();
 	}
 }
@@ -88,7 +88,7 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 
 		*game_time_var = c.time;
 		exec_cmd(&c);
-		clear_cmd((Cmd *)&c);
+		clear_cmd(&c);
 	}
 
 	*game_time_var = final;
@@ -183,7 +183,7 @@ Cmd_Queue::clear_cmd
 Free dynamically allocated arguments, if any
 ===============
 */
-void Cmd_Queue::clear_cmd(Cmd *c)
+void Cmd_Queue::clear_cmd(const Cmd* c)
 {
 	switch(c->cmd) {
 	case CMD_BUILD_ROAD:
