@@ -37,9 +37,9 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title("Single Map");
 
-	b = new UIButton(this, 60, 210, 174, 24, 1);
-	b->clicked.set(this, &Fullscreen_Menu_SinglePlayer::not_supported);
-	b->set_title("Campaign");
+	b = new UIButton(this, 60, 210, 174, 24, 1, sp_tutorial);
+	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
+	b->set_title("Tutorial Campaign");
 
 	b = new UIButton(this, 60, 250, 174, 24, 1, sp_loadgame);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
@@ -48,9 +48,4 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	b = new UIButton(this, 60, 370, 174, 24, 0, sp_back);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title("Back");
-}
-
-void Fullscreen_Menu_SinglePlayer::not_supported()
-{
-	critical_error("This is not yet supported. You can safely click on continue.");
 }

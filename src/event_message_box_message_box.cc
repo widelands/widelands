@@ -143,8 +143,9 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
  * otherwise through die()
  */
 bool Message_Box_Event_Message_Box::handle_mouseclick(uint btn, bool down, int mx, int my) {
-   if(btn == MOUSE_RIGHT && down) {
-      clicked(-1);
+   if(btn == MOUSE_RIGHT) {
+      // We are not closable by right clicking
+      // so that we are not closed by accidental scrolling
       return true;
    } else
       return false; // we're not dragable

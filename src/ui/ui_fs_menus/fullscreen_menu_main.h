@@ -38,9 +38,6 @@ public:
       mm_license,
       mm_exit
    };
-
-
-	void not_supported();
 };
 
 #endif /* __S__MAINMENUE_H */

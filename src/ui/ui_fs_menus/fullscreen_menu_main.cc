@@ -69,8 +69,3 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 	new UITextarea(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right);
 	new UITextarea(this, 15, MENU_YRES-29, "(C) 2002-2004 by the Widelands Development Team", Align_TopLeft);
 }
-
-void Fullscreen_Menu_Main::not_supported()
-{
-	critical_error("This is not yet supported. You can safely click on continue.");
-}

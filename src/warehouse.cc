@@ -215,18 +215,6 @@ void WarehouseSupply::remove_workers(int id, int count)
 }
    
 /*
- * This is overwritten from Player Immovable
- * a warehouse has no workers. And we get problems
- * when incorporated workers 
- * list themselves as workers
-*/ 
-void Warehouse::add_worker( Worker* w ) {
-}
-void Warehouse::remove_worker( Worker* w ) {
-}
-
-
-/*
 ===============
 WarehouseSupply::get_position
 
@@ -703,7 +691,7 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
       // one found, make him available
       worker = static_cast<Worker*>(i->get(g));
       worker->reset_tasks(g); // Forget everything you did
-      worker->set_economy( get_economy() ); // Back in a economy 
+      worker->set_location( this ); // Back in a economy 
       m_incorporated_workers.erase(i);
    }
       
@@ -760,7 +748,7 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
 		soldier = static_cast<Soldier*>(i->get(g));
 		soldier->reset_tasks(g); // Forget everything you did
 		soldier->mark(false);
-      soldier->set_economy( get_economy() ); // Back in a economy 
+      soldier->set_location( this );
 		m_incorporated_workers.erase(i);
 	}
       
@@ -846,8 +834,8 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
       w=0;
    } else {
       sort_worker_in(g, w->get_name(), w);
+      w->set_location(0); // No more in a economy
       w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
-      w->set_economy(0); // No more in a economy
    }
 
    m_supply->add_workers(index, 1);

@@ -30,11 +30,9 @@ class Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
    public:
       Fullscreen_Menu_SinglePlayer();
 
-      void not_supported();
-
       enum {
          sp_skirmish,
-         //sp_campaign, // BIG TODO
+         sp_tutorial, 
          sp_loadgame,
          sp_back
       };

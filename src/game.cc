@@ -33,6 +33,7 @@
 #include "playercommand.h"
 #include "trigger.h"
 #include "network.h"
+#include "widelands_map_loader.h"
 
 
 /** Game::Game(void)
@@ -105,6 +106,33 @@ bool Game::can_start()
 		return false;
 
 	return true;
+}
+
+bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
+   m_netgame = 0;
+   
+   assert(!get_map());
+
+   Map *map = new Map();
+   set_map(map);
+   
+   m_maploader = new Widelands_Map_Loader(mapname, map);
+   m_maploader->preload_map(scenario);
+   
+   m_state = gs_running;
+
+   // We have to create the players here
+   for( uint i = 1; i <= map->get_nrplayers(); i++) 
+      add_player(i, i==1 ? Player::playerLocal : Player::playerAI, 
+            map->get_scenario_player_tribe(i).c_str(), map->get_scenario_player_name(i).c_str());
+
+   init_player_controllers ();
+
+	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
+	delete m_maploader;
+	m_maploader=0;
+
+	return run();
 }
 
 

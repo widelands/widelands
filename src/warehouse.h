@@ -86,10 +86,6 @@ public:
    void insert_workers(int id, int count);
    void remove_workers(int id, int count);
    
-   // Overwritten from Player Immovable
-   void add_worker( Worker* w ); 
-   void remove_worker( Worker* w);
-   
 	virtual bool fetch_from_flag(Game* g);
 
 	void mark_as_used (Game* g, int ware, Requeriments* r);

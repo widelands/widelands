@@ -25,9 +25,10 @@
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
 #include "fullscreen_menu_main.h"
+#include "fullscreen_menu_netsetup.h"
 #include "fullscreen_menu_options.h"
 #include "fullscreen_menu_singleplayer.h"
-#include "fullscreen_menu_netsetup.h"
+#include "fullscreen_menu_tutorial_select_map.h"
 #include "fullscreen_menu_inet_server_options.h"
 #include "fullscreen_menu_inet_lobby.h"
 #include "game.h"
@@ -181,10 +182,28 @@ void g_main(int argc, char** argv)
                                  }
                                  continue;
                               }
-
+                           
+                           case Fullscreen_Menu_SinglePlayer::sp_tutorial:
+                              {
+                                 Fullscreen_Menu_TutorialSelectMap* sm = new Fullscreen_Menu_TutorialSelectMap;
+                                 int code = sm->run();
+                                 if(code) {
+                                    std::string mapname = sm->get_mapname( code );
+                                    delete sm;
+                                    
+                                    Game* g = new Game;
+                                    bool run = g->run_splayer_map_direct( mapname.c_str(), true);
+                                    delete g;
+                                    if(run) 
+                                       done = true;
+                                    continue;
+                                 }
+                                 // Fallthrough if back was pressed
+                              }
+                           
                            default:
                            case Fullscreen_Menu_SinglePlayer::sp_back:
-										done = true;
+                              done = true;
                               break;
                         }
                      }
