@@ -113,3 +113,19 @@ void Event::reinitialize(Game* game) {
          m_triggers[i].t->reset_trigger(game);
    }
 }
+
+/*
+ * Returns true when the event should react when this trigger is set
+ */
+bool Event::reacts_when_trigger_is_set(Trigger* t) {
+   assert(trigger_exists(t));
+   std::vector<Trigger_Info>::iterator i;
+   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) { 
+      if((*i).t==t) {
+         return i->up==true;
+      }
+   }
+   assert(0);
+} 
+   
+

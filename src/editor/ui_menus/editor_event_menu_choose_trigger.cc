@@ -133,6 +133,9 @@ void Editor_Event_Menu_Choose_Trigger::update(void) {
          m_available->add_entry(t->get_name(), t);
 
    }
+   m_available->sort();
+   m_selected->sort();
+
    if(m_available->get_selection()==0) 
       m_btn_rtol->set_enabled(false);
    if(m_selected->get_selection()==0) 

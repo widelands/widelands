@@ -130,7 +130,10 @@ void Editor_Event_Menu::update(void) {
       event=m_parent->get_map()->get_event(i);
       m_event_list->add_entry(event->get_name(), event);
    }
-    
+   
+   m_trigger_list->sort();
+   m_event_list->sort();
+
    if(!m_trigger_list->get_selection()) {
       m_btn_del_trigger->set_enabled(false);
       m_btn_edit_trigger->set_enabled(false);

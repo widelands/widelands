@@ -82,8 +82,9 @@ Add a new entry to the listselect.
 
 Args: name	name that will be displayed
       value	value returned by get_select()
+      select if true, directly select the new entry
 */
-void UIListselect::add_entry(const char *name, void* value)
+void UIListselect::add_entry(const char *name, void* value, bool select)
 {
 	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(name));
 
@@ -95,8 +96,30 @@ void UIListselect::add_entry(const char *name, void* value)
 	m_scrollbar->set_steps(m_entries.size() * g_fh->get_fontheight(UI_FONT_SMALL) - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
+   if(select) 
+      m_selection=m_entries.size()-1;
 }
 
+/*
+ * Sort the listbox alphabetically. make sure that the current selection stays
+ * valid (though it might scroll out of visibility)
+ */
+void UIListselect::sort(void) {
+   Entry *ei, *ej;
+   for(uint i=0; i<m_entries.size(); i++) 
+      for(uint j=i; j<m_entries.size(); j++) {
+         ei=m_entries[i];
+         ej=m_entries[j];
+         if(strcmp(ei->name, ej->name) > 0)  {
+            if(m_selection==((int)i)) 
+               m_selection=j;
+            else if(m_selection==((int)j)) 
+               m_selection=i;
+            m_entries[i]=ej;
+            m_entries[j]=ei;  
+         }
+      }
+}
 
 /**
 Set the list alignment (only horizontal alignment works)
@@ -201,3 +224,16 @@ bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)
 
 	return true;
 }
+
+/*
+ * Remove entry
+ */
+void UIListselect::remove_entry(int i) {
+   if(i<0 || ((uint)i)>=m_entries.size()) return;
+
+   free(m_entries[i]); 
+   m_entries.erase(m_entries.begin() + i); 
+   if(m_selection==i) 
+      m_selection=-1;
+}
+

@@ -48,13 +48,17 @@ class Event {
       void set_name(const char* name) { m_name=name; }
       void set_name(std::string name) { m_name=name; }
       inline const char* get_name() { return m_name.c_str(); }
+      
       void register_trigger(Trigger*, Map*, bool up );
       void unregister_trigger(Trigger*, Map*);
       inline int get_nr_triggers(void) { return m_triggers.size(); }         
       bool trigger_exists(Trigger* trig);
+      
       inline bool is_one_time_event(void) { return m_is_one_time_event; }
       inline void set_is_one_time_event(bool t) { m_is_one_time_event=t; } 
      
+      bool reacts_when_trigger_is_set(Trigger* t);
+
       // Check if triggers are set
       bool check_triggers(void);
       

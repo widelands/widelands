@@ -152,6 +152,10 @@ bool Game::run(void)
       get_map()->delete_unreferenced_triggers();
       get_map()->delete_events_without_trigger();
 
+      // Now let all triggers check once, if they are in the right state
+      for(int i=0; i<get_map()->get_number_of_triggers(); i++) 
+         get_map()->get_trigger(i)->check_set_conditions(this);
+
 		load_graphics();
 
       // Everything prepared, send the first trigger event

@@ -39,11 +39,16 @@ public:
 	UISignal1<int> selected;
 
 	void clear();
-	void add_entry(const char *name, void *value);
+   void sort();
+	void add_entry(const char *name, void *value, bool select = false);
+   void remove_entry(int i);
 
 	void set_align(Align align);
 
-	void select(int i);
+	inline int get_nr_entries(void) { return m_entries.size(); }
+   inline int get_selection_index(void) { return m_selection; }
+
+   void select(int i);
 	inline void *get_selection() {
 		if (m_selection < 0) return 0;
 		return m_entries[m_selection]->value;
