@@ -47,7 +47,7 @@ Player::~Player(void) {
  */
 void Player::setup()
 {
-	seen_fields = new std::bit_vector(game->get_map()->get_w()*game->get_map()->get_h(), false);
+	seen_fields = new std::vector<bool>(game->get_map()->get_w()*game->get_map()->get_h(), false);
 
 	// place the HQ
 	const Coords *c = game->get_map()->get_starting_pos(m_plnum);

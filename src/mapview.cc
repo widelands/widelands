@@ -57,6 +57,7 @@ Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Game *g, uchar p
    player_number=ply;
 
 	fselx = fsely = 0;
+   show_buildhelp = false;
 }
 
 /** Map_View::~Map_View(void)
@@ -133,43 +134,43 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
  */
 void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 {
-	// TODO: change this function name. it's not really about drawing the ground only
+   // TODO: change this function name. it's not really about drawing the ground only
    int minfx, minfy;
-	int maxfx, maxfy;
+   int maxfx, maxfy;
 
-	minfx = (effvpx + (FIELD_WIDTH>>1)) / FIELD_WIDTH - 1; // hack to prevent negative numbers
-	minfy = effvpy / (FIELD_HEIGHT>>1);
-	maxfx = (effvpx + (FIELD_WIDTH>>1) + dst->get_w()) / FIELD_WIDTH;
-	maxfy = (effvpy + dst->get_h()) / (FIELD_HEIGHT>>1);
-	maxfy += 10; // necessary because of heights
+   minfx = (effvpx + (FIELD_WIDTH>>1)) / FIELD_WIDTH - 1; // hack to prevent negative numbers
+   minfy = effvpy / (FIELD_HEIGHT>>1);
+   maxfx = (effvpx + (FIELD_WIDTH>>1) + dst->get_w()) / FIELD_WIDTH;
+   maxfy = (effvpy + dst->get_h()) / (FIELD_HEIGHT>>1);
+   maxfy += 10; // necessary because of heights
 
-//	printf("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
-	int dx = maxfx - minfx + 1;
-	int dy = maxfy - minfy + 1;
-	int linear_fy = minfy;
+   //	printf("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
+   int dx = maxfx - minfx + 1;
+   int dy = maxfy - minfy + 1;
+   int linear_fy = minfy;
 
-	while(dy--) {
-		int linear_fx = minfx;
-		int fx, fy;
+   while(dy--) {
+      int linear_fx = minfx;
+      int fx, fy;
       int bl_x, bl_y;
       int tl_x, tl_y;
-		Field *f, *f_bl, *f_tl;
-		int posx, posy;
-		int blposx, bposy;
-	   int tlposx, tposy;
-      
+      Field *f, *f_bl, *f_tl;
+      int posx, posy;
+      int blposx, bposy;
+      int tlposx, tposy;
+
       // Use linear (non-wrapped) coordinates to calculate on-screen pos
-		map->get_basepix(linear_fx, linear_fy, &posx, &posy);
-		posx -= effvpx;
-		posy -= effvpy;
+      map->get_basepix(linear_fx, linear_fy, &posx, &posy);
+      posx -= effvpx;
+      posy -= effvpy;
 
-		// Get linear bottom-left coordinate
-		bl_y = linear_fy+1;
-		bl_x = linear_fx - (bl_y&1);
+      // Get linear bottom-left coordinate
+      bl_y = linear_fy+1;
+      bl_x = linear_fx - (bl_y&1);
 
-		map->get_basepix(bl_x, bl_y, &blposx, &bposy);
-		blposx -= effvpx;
-		bposy -= effvpy;
+      map->get_basepix(bl_x, bl_y, &blposx, &bposy);
+      blposx -= effvpx;
+      bposy -= effvpy;
 
       // Get linear top-left coordinates 
       tl_y = linear_fy-1;
@@ -178,38 +179,38 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
       map->get_basepix(tl_x, tl_y, &tlposx, &tposy);
       tlposx -= effvpx;
       tposy -= effvpy;
-      
-		// Calculate safe (bounded) field coordinates and get field pointers
-		fx = linear_fx;
-		fy = linear_fy;
-		map->normalize_coords(&fx, &fy);
-		map->normalize_coords(&bl_x, &bl_y);
+
+      // Calculate safe (bounded) field coordinates and get field pointers
+      fx = linear_fx;
+      fy = linear_fy;
+      map->normalize_coords(&fx, &fy);
+      map->normalize_coords(&bl_x, &bl_y);
       map->normalize_coords(&tl_x, &tl_y);
-		f = map->get_field(fx, fy);
-		f_bl = map->get_field(bl_x, bl_y);
+      f = map->get_field(fx, fy);
+      f_bl = map->get_field(bl_x, bl_y);
       f_tl = map->get_field(tl_x, tl_y);
 
-		int count = dx;
-		while(count--) {
-			Field *f_br, *f_r, *f_l, *f_tr;
-			int rposx, brposx, lposx, trposx;
+      int count = dx;
+      while(count--) {
+         Field *f_br, *f_r, *f_l, *f_tr;
+         int rposx, brposx, lposx, trposx;
          int r_x, r_y, br_x, br_y, l_x, l_y, tr_x, tr_y; 
          bool render_r=true;
          bool render_b=true;
-         
-			map->get_rn(fx, fy, f, &r_x, &r_y, &f_r);
-			rposx = posx + FIELD_WIDTH;
-         
+
+         map->get_rn(fx, fy, f, &r_x, &r_y, &f_r);
+         rposx = posx + FIELD_WIDTH;
+
          map->get_ln(fx, fy, f, &l_x, &l_y, &f_l);
          lposx = posx - FIELD_WIDTH;
 
-			map->get_rn(bl_x, bl_y, f_bl, &br_x, &br_y, &f_br);
-			brposx = blposx + FIELD_WIDTH;
-      
+         map->get_rn(bl_x, bl_y, f_bl, &br_x, &br_y, &f_br);
+         brposx = blposx + FIELD_WIDTH;
+
          map->get_rn(tl_x, tl_y, f_tl, &tr_x, &tr_y, &f_tr);
          trposx = tlposx + FIELD_WIDTH;
-         
-         
+
+
 #ifdef USE_SEE_AREA
          if(!m_game->get_player(player_number)->is_field_seen(fx, fy) ||
                !m_game->get_player(player_number)->is_field_seen(br_x, br_y)) {
@@ -222,18 +223,18 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
                render_r=false;
          }
 #endif
-			draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, render_r, render_b);
-         
+         draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, render_r, render_b);
+
          // Render ways TODO
-		
-			
+
+
          // Render frontier
          // Note: Frontiers hot spot must be the lowest y-pixel in the picture
          // otherwise, the bob will get 'clipped' (read: overdrawn) by the fields that are drawn
          // below this field.
          // This could be avoided by either pre-rendering all ground-fields before drawing a bob (time-costy!)
          // or by different (more complicated, also with build-help) checking here below.  - Holger
-         if(f->get_owned_by() != FIELD_OWNED_BY_NOONE) {
+         if(f->get_owned_by()) {
             if(f_tl->get_owned_by() != f->get_owned_by()) {
                copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
                      tlposx, tposy - f_tl->get_height()*HEIGHT_FACTOR);
@@ -283,72 +284,75 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
                      (blposx+lposx)>>1, ((bposy - f_bl->get_height()*HEIGHT_FACTOR)+(posy - f_l->get_height()*HEIGHT_FACTOR))>>1);
             }
          }
-                  
-			// Render bobs
+
+         // Render bobs
          // TODO - rendering order?
          // This must be defined somewho. some bobs have a higher priority than others
-			// draw_ground implies that this doesn't render map objects.
-			// are there any overdraw issues with the current rendering order?
-			
-		   // draw Map_Objects hooked to this field
+         // draw_ground implies that this doesn't render map objects.
+         // are there any overdraw issues with the current rendering order?
+
+         // draw Map_Objects hooked to this field
 #ifdef USE_SEE_AREA
          if(m_game->get_player(player_number)->is_field_seen(fx, fy)) {
 #endif
-				Map_Object* obj = f->get_first_object();
-	      	while(obj) {
-					obj->draw(m_game, dst, posx, posy);
-   	   	   obj = obj->get_next_object();
-  			   }
+            Map_Object* obj = f->get_first_object();
+            while(obj) {
+               obj->draw(m_game, dst, posx, posy);
+               obj = obj->get_next_object();
+            }
 #ifdef USE_SEE_AREA
          }
 #endif
 
-#if 0
-        // TODO: TEMP DEBUG: render buildhelp over everything
-         switch(map->get_build_symbol(fx, fy)) {
-            case Field::NOTHING:
-               break;
-               
-            case Field::FLAG:
-               copy_pic(dst, &setable_flag, posx-(setable_flag.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(setable_flag.get_h()), 
-                     0, 0, setable_flag.get_w(), setable_flag.get_h());
-               break;
-               
-            case Field::SMALL:
-               copy_pic(dst, &small_building, posx-(small_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(small_building.get_h()>>1), 
-                     0, 0, small_building.get_w(), small_building.get_h());
-               break;
-               
-            case Field::MEDIUM:
-               copy_pic(dst, &medium_building, posx-(medium_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(medium_building.get_h()>>1), 
-                     0, 0, medium_building.get_w(), medium_building.get_h());
-               break;
-               
-            case Field::BIG:
-               copy_pic(dst, &big_building, posx-(big_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(big_building.get_h()>>1), 
-                     0, 0, big_building.get_w(), big_building.get_h());
-               break;
+         // render buildhelp. 
+         // Note: this could also go before rendering bobs, since this shouldn't interfere with non moving bobs
+         // but so, animals are below the build help, which might reduce weirdness
+         if(m_game->get_player(player_number)->is_field_seen(fx, fy) &&
+               f->get_owned_by() == player_number &&
+               show_buildhelp) {
+            switch(map->get_build_symbol(fx, fy)) {
+               case Field::NOTHING:
+                  break;
 
-            case Field::MINE:
-               copy_pic(dst, &mine_building, posx-(mine_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(mine_building.get_h()>>1), 
-                     0, 0, mine_building.get_w(), mine_building.get_h());
-                break;
+               case Field::FLAG:
+                  copy_pic(dst, &setable_flag, posx-(setable_flag.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(setable_flag.get_h()), 
+                        0, 0, setable_flag.get_w(), setable_flag.get_h());
+                  break;
 
-               
-            case Field::PORT:
-            default:
-               assert(0);
-               break;
+               case Field::SMALL:
+                  copy_pic(dst, &small_building, posx-(small_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(small_building.get_h()>>1), 
+                        0, 0, small_building.get_w(), small_building.get_h());
+                  break;
+
+               case Field::MEDIUM:
+                  copy_pic(dst, &medium_building, posx-(medium_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(medium_building.get_h()>>1), 
+                        0, 0, medium_building.get_w(), medium_building.get_h());
+                  break;
+
+               case Field::BIG:
+                  copy_pic(dst, &big_building, posx-(big_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(big_building.get_h()>>1), 
+                        0, 0, big_building.get_w(), big_building.get_h());
+                  break;
+
+               case Field::MINE:
+                  copy_pic(dst, &mine_building, posx-(mine_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(mine_building.get_h()>>1), 
+                        0, 0, mine_building.get_w(), mine_building.get_h());
+                  break;
+
+
+               case Field::PORT:
+               default:
+                  assert(0);
+                  break;
+            }
          }
-         // TEMP ENDS
-#endif
-			f_bl = f_br;
-			blposx = brposx;
+         f_bl = f_br;
+         blposx = brposx;
          bl_x = br_x;
          bl_y = br_y;
-			
+
          f = f_r;
-			posx = rposx;
+         posx = rposx;
          fx = r_x;
          fy = r_y;
 
@@ -358,8 +362,8 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
          tl_y = tr_y;
       }
 
-		linear_fy++;
-	}
+      linear_fy++;
+   }
 }
 
 /* void Map_View::draw_field(Bitmap *dst, Field *f, Field *rf, Field *fl, Field *rfl,

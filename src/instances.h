@@ -40,7 +40,7 @@ class Map_Object_Descr {
 		
 		virtual Map_Object *create_object() = 0;
 
-		// TODO: maybe this could be implemented as an array of available attributes (bit_vector even?)		
+		// TODO: maybe this could be implemented as an array of available attributes (vector<bool> even?)		
 		virtual bool has_attribute(uint attr) { return false; }
 };
 

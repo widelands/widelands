@@ -27,7 +27,10 @@
 //class Pic;
 
 // Eh? Is this used for anything? If it is what I think it is, attributes
-// are better to solve this because it's transparent wrt buildings etc...
+// are better to solve this because it's transparent wrt buildings etc... -Nicolai
+// This is thought for big or small SOLIDS, as said: Stones in S2 are making all their 
+// surrounding fields to flags, trees only to small buildings.
+// This must be configurable for logic_bobs (can't be hardcoded, i'm afraid)
 enum {
    NOTHING = 0,
    SMALL = 1,

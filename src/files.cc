@@ -620,7 +620,7 @@ int RealFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *
 
 	if (path) {
 		buf = m_directory + '/' + path + '/' + pattern;
-		ofs = m_directory.length()+strlen(path)+2;
+		ofs = m_directory.length()+1;
 	} else {
 		buf = m_directory + '/' + pattern;
 		ofs = m_directory.length()+1;
@@ -632,7 +632,7 @@ int RealFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *
 	count = gl.gl_pathc;
 
 	for(i = 0; i < count; i++) {
-		results->insert(gl.gl_pathv[i]);
+		results->insert(&gl.gl_pathv[i][ofs]);
 	}
 
 	globfree(&gl);

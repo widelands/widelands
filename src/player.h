@@ -72,7 +72,7 @@ class Player {
 		int m_type;
 		int m_plnum;
       Game* game; 
-      std::bit_vector* seen_fields; 
+      std::vector<bool>* seen_fields; 
       
 		// regent data: name, pics so on
       Tribe_Descr* tribe; // buildings, wares, workers, sciences

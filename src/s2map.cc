@@ -264,7 +264,7 @@ int Map::load_s2mf(const char* filen, Game *game)
 			for(x=0; x<hd.width; x++, f++, pc++) {
 				f->set_height(*pc);
 				f->objects = 0;
-				f->owned_by=FIELD_OWNED_BY_NOONE;
+				f->owned_by=0; 
 			}
 		}
 		free(section);

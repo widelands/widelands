@@ -79,7 +79,7 @@ public:
 
    inline Map *get_map() { return map; }
 
-   inline Player* get_player(ushort n) { return m_players[n]; }
+   inline Player* get_player(ushort n) { assert(n>=1 && n<=MAX_PLAYERS); return m_players[n-1]; }
 
 public:
 	void warp_building(int x, int y, char owner, int idx);

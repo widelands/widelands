@@ -66,8 +66,8 @@ Game::~Game(void)
 	if (map)
 		delete map;
 	
-	for(i = 0; i < MAX_PLAYERS; i++)
-		if (m_players[i])
+	for(i = 1; i <= MAX_PLAYERS; i++)
+		if (m_players[i-1])
 			remove_player(i);
 	
 	if (m_mapname)
@@ -101,12 +101,12 @@ void Game::set_mapname(const char* mapname)
  */
 void Game::remove_player(int plnum)
 {
-	assert(plnum >= 0 && plnum < MAX_PLAYERS);
+	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 	assert(m_state != gs_running);
 	
-	if (m_players[plnum]) {
-		delete m_players[plnum];
-		m_players[plnum] = 0;
+	if (m_players[plnum-1]) {
+		delete m_players[plnum-1];
+		m_players[plnum-1] = 0;
 	}		
 }
 
@@ -118,13 +118,13 @@ void Game::remove_player(int plnum)
  */
 void Game::add_player(int plnum, int type)
 {
-	assert(plnum >= 0 && plnum < MAX_PLAYERS);
+	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 	assert(m_state != gs_running);
 	
-	if (m_players[plnum])
+	if (m_players[plnum-1])
 		remove_player(plnum);
 	
-	m_players[plnum] = new Player(this, type, plnum);
+	m_players[plnum-1] = new Player(this, type, plnum);
 }
 
 /** Game::can_start()
@@ -169,6 +169,7 @@ bool Game::run(void)
 
    counter.start();
 
+
 	m_state = gs_menu;
 
 	if (launch_game_menu(this))
@@ -190,11 +191,11 @@ bool Game::run(void)
 		}
 
       // TEMP: player number
-	   ipl = new Interactive_Player(this, 0);
+	   ipl = new Interactive_Player(this, 1);
 	  
 
 		// Prepare the players (i.e. place HQs)
-		for(int i = 0; i < map->get_nplayers(); i++) {
+		for(int i = 1; i <= map->get_nplayers(); i++) {
 			Player* player = get_player(i);
 			if (!player)
 				continue;

@@ -159,7 +159,7 @@ void conquer_area(uchar player, Map* map, int x, int y, ushort area) {
    Field* f;
    while((f=m.next())) {
       if(f->get_owned_by() == player) continue;
-      if(f->get_owned_by() == FIELD_OWNED_BY_NOONE) {
+      if(!f->get_owned_by()) {
          f->set_owned_by(player);
          continue;
       }

@@ -57,7 +57,8 @@ public:
 	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	void track_fsel(int mx, int my);
-
+   inline void toggle_buildhelp(void) { show_buildhelp=!show_buildhelp; }
+   
 private:
    static AutoPic fsel;
    static AutoPic small_building;
@@ -72,7 +73,8 @@ private:
 	int vpx, vpy;
 	bool dragging;
 	int fselx, fsely; // field the mouse is over
-
+   bool show_buildhelp;
+   
    void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
                  const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, bool, bool);
 

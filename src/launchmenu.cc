@@ -81,7 +81,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(Panel* parent, int x, int y, Game
 	
 	m_btnPlayerType = new Button(this, 28, 0, 174, 20, 1);
 	m_btnPlayerType->clicked.set(this, &PlayerDescriptionGroup::toggle_playertype);
-	if (!plnum)
+	if (plnum==1)
 		m_playertype = Player::playerLocal;
 	else
 		m_playertype = Player::playerAI;
@@ -201,11 +201,11 @@ LaunchGameMenu::LaunchGameMenu(Game *g)
 	int y;
 	
 	y = 184;
-	for(i = 0; i < MAX_PLAYERS; i++)	{
+	for(i = 1; i <= MAX_PLAYERS; i++)	{ // players start with 1, not 0
 		PlayerDescriptionGroup *pdg = new PlayerDescriptionGroup(this, 30, y, m_game, i);
 		pdg->changed.set(this, &LaunchGameMenu::refresh);
 		
-		m_players[i] = pdg;
+		m_players[i-1] = pdg;
 		y += 30;
 	}
 }

@@ -78,6 +78,8 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	b->set_pic(g_fh.get_string("MAP", 0));
 
 	b = new Button(this, x+102, y, 34, 34, 2);
+	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
+	b->set_pic(g_fh.get_string("BHELP", 0));
 }
 
 /** Interactive_Player::~Interactive_Player(void)
@@ -114,6 +116,13 @@ void Interactive_Player::exit_game_btn()
 void Interactive_Player::main_menu_btn()
 {
 	new Window(this, 100, 100, 150, 250, "Menu");
+}
+
+//
+// Toggles buildhelp rendering in the main MapView
+//
+void Interactive_Player::toggle_buildhelp(void) {
+   main_mapview->toggle_buildhelp();
 }
 
 /** Interactive_Player::minimap_btn()

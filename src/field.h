@@ -21,15 +21,12 @@
 #define __S__FIELD_H
 
 // TODO; Think, if we shouldn't call for each field a new() in map::set_size
-// and a delete
+// and a delete - Holger
 // No. In fact, you should view Field more as a plain old structure rather than
 // a class. If you think of Fields as a class you get into a whole lot of 
-// problems (like the 6 neighbour field pointers we used to have).
-
-// TODO: It would be nice if 0 would be a valid neutral setting for each member
-// of Field. This way, we could just memset everything to 0
-
-#define FIELD_OWNED_BY_NOONE 255   // if a field is owned by noone, this value must be in owned_by
+// problems (like the 6 neighbour field pointers we used to have). - Nicolai
+// Probably it would be better to make Field a struct, rather than a class (things wouldn't
+// change much, it's just a question of style and code understanding)
 
 enum FieldCaps {
 	// can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary masking)

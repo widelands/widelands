@@ -43,6 +43,7 @@ class Interactive_Player : public Panel {
 					 void exit_game_btn();
 					 void main_menu_btn();
 					 void minimap_btn();
+					 void toggle_buildhelp();
 
 					 void field_action(int fx, int fy);
 					 void move_view_to(int fx, int fy);

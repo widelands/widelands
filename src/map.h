@@ -150,7 +150,7 @@ class Map {
 					void recalc_for_field(int fx, int fy);
                Field::Build_Symbol get_build_symbol(int x, int y);
 
-					inline const Coords* get_starting_pos(int plnum) { return &starting_pos[plnum]; }
+					inline const Coords* get_starting_pos(int plnum) { return &starting_pos[plnum-1]; } // players are numbered 1-100, not 0-99
 					
                // Field logic
                inline Field *get_field(const Coords c);
