@@ -1,7 +1,7 @@
 type="boring"
 life_time=0
 
-clrkey_r=255
+clrkey_r=0
 clrkey_g=0
 clrkey_b=255
 shadowclr_r=0
