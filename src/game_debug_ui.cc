@@ -145,7 +145,8 @@ public:
 	virtual void think();
 
 private:
-	Object_Ptr	m_object;
+	Object_Ptr		m_object;
+	uint				m_serial;
 	UITab_Panel*	m_tabs;
 };
 
@@ -165,7 +166,8 @@ MapObjectDebugWindow::MapObjectDebugWindow(Interactive_Base* parent, Map_Object*
 
 	m_object = obj;
 
-	snprintf(buf, sizeof(buf), "%u", obj->get_serial());
+	m_serial = obj->get_serial();
+	snprintf(buf, sizeof(buf), "%u", m_serial);
 	set_title(buf);
 
 	m_tabs = new UITab_Panel(this, 0, 0, 1);
@@ -189,7 +191,10 @@ void MapObjectDebugWindow::think()
 	Map_Object* obj = m_object.get(get_iabase()->get_egbase());
 
 	if (!obj) {
-		die();
+		char buf[128];
+
+		snprintf(buf, sizeof(buf), "DEAD: %u", m_serial);
+		set_title(buf);
 		return;
 	}
 
