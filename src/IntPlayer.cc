@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by The Widelands Development Team
+ * Copyright (C) 2002-2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -256,7 +256,7 @@ void Interactive_Player::field_action()
 			return;
 		}
 	}
-	
+
 	// everything else can bring up the temporary dialog
 	show_field_action(this, &m_fieldaction);
 }
@@ -281,6 +281,16 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 	case KEY_m:
 		if (down)
 			toggle_minimap();
+		return true;
+
+	case KEY_c:
+		if (down)
+			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+		return true;
+
+	case KEY_s:
+		if (down)
+			set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 		return true;
 
 	case KEY_PAGEUP:

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002-2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,12 @@ class Map_View;
  */
 class Interactive_Base : public Panel {
 	public:
+		enum {
+			dfShowCensus = 1,				// show census report on buildings
+			dfShowStatistics = 2,		// show statistics report on buildings
+		};
+
+	public:
 		Interactive_Base(Editor_Game_Base* g);
 		virtual ~Interactive_Base(void);
 
@@ -64,11 +70,17 @@ class Interactive_Base : public Panel {
       void set_fieldsel_radius(int n) { m_maprenderinfo.fieldsel_radius=n; }
       inline int get_fieldsel_radius(void) { return m_maprenderinfo.fieldsel_radius; }
 
+		uint get_display_flags();
+		void set_display_flags(uint flags);
+		bool get_display_flag(uint flag);
+		void set_display_flag(uint flag, bool on);
+
    private:
       Map_View* m_mapview;
       MiniMap* m_mm;
       Editor_Game_Base* m_egbase;
       bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
+		uint					m_display_flags;
 
       UniqueWindowRegistry m_minimap;
 
@@ -84,8 +96,8 @@ class Interactive_Base : public Panel {
       void set_fsel_picture(const char* file) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); }
       void unset_fsel_picture(void) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, "pics/fsel.png", RGBColor(0,0,255)); }
 
-         
-      // cart rendering stuff. this is still protected since this is 
+
+      // cart rendering stuff. this is still protected since this is
       // used quite often
 		MapRenderInfo	   m_maprenderinfo;
 };

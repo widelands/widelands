@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by The Widelands Development Team
+ * Copyright (C) 2002-2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,29 +32,28 @@ class Editor_Game_Base {
    friend class Interactive_Base;
 
    public:
-      Editor_Game_Base(); 
+      Editor_Game_Base();
       virtual ~Editor_Game_Base();
-	
+
       void set_map(Map* map);
       inline Map *get_map() { return m_map; }
       inline Object_Manager* get_objects() { return m_objects; }
-	
 
       void unconquer_area(uchar playernr, Coords coords);
       void conquer_area(uchar playernr, Coords coords, Building_Descr*);
       void conquer_area_no_building(uchar playernr, Coords coords, int radius);
       void recalc_for_field(Coords coords, int radius = 0);
-	
+
       // logic handler func
-      virtual void think() = 0;	
-	
+      virtual void think() = 0;
+
       // Player commands
       void remove_player(int plnum);
       void add_player(int plnum, int type, const char* tribe, const uchar *playercolor);
       inline Player* get_player(int n) { assert(n>=1 && n<=MAX_PLAYERS); return m_players[n-1]; }
-  
-      virtual bool is_game() = 0; 
- 
+
+      virtual bool is_game() = 0;
+
       // Ware stuff
       inline int get_ware_id(const char *name) { return m_wares.get_index(name); }
       inline int get_nrwares() const { return m_wares.get_nitems(); }
@@ -73,6 +72,7 @@ class Editor_Game_Base {
 		Immovable* create_immovable(Coords c, std::string name);
 
       inline int get_gametime(void) { return m_gametime; }
+		Interactive_Base* get_iabase() { return m_iabase; }
 
    protected:
       // next function is used to update the current gametime,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002-2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 
    m_fieldsel_freeze = false;
    m_egbase=g;
+	m_display_flags = 0;
 
    m_mapview=0;
    m_mm=0;	
@@ -135,7 +136,7 @@ void Interactive_Base::think()
  
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
 	g_gr->update_fullscreen();
-	
+
 	// some of the UI windows need to think()
 	Panel::think();
 }
@@ -228,4 +229,52 @@ void Interactive_Base::toggle_minimap() {
 		// make sure the viewpos marker is at the right pos to start with
 		mainview_move(get_mapview()->get_vpx(), get_mapview()->get_vpy());
 	}
+}
+
+
+/*
+===============
+Interactive_Base::get_display_flags
+
+Return display flags (dfXXX) that modify the view of the map.
+===============
+*/
+uint Interactive_Base::get_display_flags()
+{
+	return m_display_flags;
+}
+
+
+/*
+===============
+Interactive_Base::set_display_flags
+
+Change the display flags that modify the view of the map.
+===============
+*/
+void Interactive_Base::set_display_flags(uint flags)
+{
+	m_display_flags = flags;
+}
+
+
+/*
+===============
+Interactive_Base::get_display_flag
+Interactive_Base::set_display_flag
+
+Get and set one individual flag of the display flags.
+===============
+*/
+bool Interactive_Base::get_display_flag(uint flag)
+{
+	return m_display_flags & flag;
+}
+
+void Interactive_Base::set_display_flag(uint flag, bool on)
+{
+	m_display_flags &= ~flag;
+
+	if (on)
+		m_display_flags |= flag;
 }

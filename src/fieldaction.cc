@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -129,6 +129,8 @@ public:
 
 	// Action handlers
 	void act_watch();
+	void act_show_census();
+	void act_show_statistics();
 	void act_buildflag();
 	void act_ripflag();
 	void act_buildroad();
@@ -164,6 +166,8 @@ static const char* pic_remroad = "pics/menu_rem_way.png";
 static const char* pic_buildflag = "pics/menu_build_flag.png";
 static const char* pic_ripflag = "pics/menu_rip_flag.png";
 static const char* pic_watchfield = "pics/menu_watch_field.png";
+static const char* pic_showcensus = "pics/menu_show_census.png";
+static const char* pic_showstatistics = "pics/menu_show_statistics.png";
 static const char* pic_abort = "pics/menu_abort.png";
 
 
@@ -292,6 +296,8 @@ void FieldActionWindow::add_buttons_auto()
 
 	// Watch actions
 	add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch);
+	add_button(watchbox, pic_showcensus, &FieldActionWindow::act_show_census);
+	add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics);
 
 
 	// Add tabs
@@ -446,6 +452,30 @@ void FieldActionWindow::act_watch()
 	okdialog();
 }
 
+
+/*
+===============
+FieldActionWindow::act_show_census
+FieldActionWindow::act_show_statistics
+
+Toggle display of census and statistics for buildings, respectively.
+===============
+*/
+void FieldActionWindow::act_show_census()
+{
+	m_player->set_display_flag(Interactive_Base::dfShowCensus,
+		!m_player->get_display_flag(Interactive_Base::dfShowCensus));
+	okdialog();
+}
+
+void FieldActionWindow::act_show_statistics()
+{
+	m_player->set_display_flag(Interactive_Base::dfShowStatistics,
+		!m_player->get_display_flag(Interactive_Base::dfShowStatistics));
+	okdialog();
+}
+
+
 /*
 ===============
 FieldActionWindow::act_buildflag
@@ -458,10 +488,10 @@ void FieldActionWindow::act_buildflag()
 	Game *g = m_player->get_game();
 
 	g->send_player_command(m_player->get_player_number(), CMD_BUILD_FLAG, m_field.x, m_field.y);
-	
+
 	if (m_player->is_building_road())
 		m_player->finish_build_road();
-	
+
 	okdialog();
 }
 

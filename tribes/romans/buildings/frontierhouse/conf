@@ -1,5 +1,5 @@
 [global]
-descname=Sawmill		# nicer name to display in GUI
+descname=Frontierhouse		# nicer name to display in GUI
 
 type=military		# basic type (warehouse, production, military)
 size=small

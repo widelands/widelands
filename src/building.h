@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2002-2004 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -106,6 +106,7 @@ public:
 	virtual int get_type();
 	virtual int get_size();
 	virtual bool get_passable();
+	virtual uint get_ui_anim();
 
 	virtual Flag *get_base_flag();
 	virtual uint get_playercaps();
@@ -113,6 +114,9 @@ public:
 
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }
+
+	virtual std::string get_census_string();
+	virtual std::string get_statistics_string();
 
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base*);
@@ -126,9 +130,6 @@ public:
 	bool leave_check_and_wait(Game* g, Worker* w);
    inline int get_conquers(void) const { return get_descr()->get_conquers(); }
 
-public:
-	virtual uint get_ui_anim();
-
 protected:
 	void start_animation(Editor_Game_Base *g, uint anim);
 
@@ -137,6 +138,7 @@ protected:
 	virtual void act(Game *g, uint data);
 
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
+	void draw_help(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry) = 0;
 

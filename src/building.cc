@@ -25,6 +25,7 @@
 #include "player.h"
 #include "transport.h"
 
+#include "interactive_base.h"
 #include "building_int.h"
 
 
@@ -405,6 +406,40 @@ uint Building::get_ui_anim()
 
 /*
 ===============
+Building::get_census_string [virtual]
+
+Return the overlay string that is displayed on the map view when
+enabled by the player.
+
+Default is the descriptive name of the building, but e.g. construction
+sites may want to override this.
+===============
+*/
+std::string Building::get_census_string()
+{
+	return get_descname();
+}
+
+
+/*
+===============
+Building::get_statistics_string [virtual]
+
+Return the overlay string that is displayed on the map view when enabled
+by the player.
+
+By default, there is no such string. Production buildings will want to
+override this with a percentage indicating how well the building works, etc.
+===============
+*/
+std::string Building::get_statistics_string()
+{
+	return "";
+}
+
+
+/*
+===============
 Building::get_building_work [virtual]
 
 This function is called by workers in the buildingwork task.
@@ -539,6 +574,36 @@ void Building::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, P
 	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, get_owner()->get_playercolor());
 
 	// door animation?
+
+	// Overlay strings (draw when enabled)
+	draw_help(game, dst, coords, pos);
+}
+
+
+/*
+===============
+Building::draw_help
+
+Draw overlay help strings when enabled.
+===============
+*/
+void Building::draw_help(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
+{
+	uint dpyflags = game->get_iabase()->get_display_flags();
+
+	if (dpyflags & Interactive_Base::dfShowCensus)
+	{
+		std::string txt = get_census_string();
+
+		g_font->draw_string(dst, pos.x, pos.y - 45, txt.c_str(), Align_Center);
+	}
+
+	if (dpyflags & Interactive_Base::dfShowStatistics)
+	{
+		std::string txt = get_statistics_string();
+
+		g_font->draw_string(dst, pos.x, pos.y - 35, txt.c_str(), Align_Center);
+	}
 }
 
 
@@ -673,6 +738,60 @@ should be more useful to the player.
 uint ConstructionSite::get_ui_anim()
 {
 	return get_building()->get_idle_anim();
+}
+
+
+/*
+===============
+ConstructionSite::get_census_string
+
+Print the name of the building we build.
+===============
+*/
+std::string ConstructionSite::get_census_string()
+{
+	return get_building()->get_descname();
+}
+
+
+/*
+===============
+ConstructionSite::get_statistics_string
+
+Print completion percentage.
+===============
+*/
+std::string ConstructionSite::get_statistics_string()
+{
+	char buf[40];
+
+	snprintf(buf, sizeof(buf), "%u%% built", (get_built_per64k() * 100) >> 16);
+
+	return std::string(buf);
+}
+
+
+/*
+===============
+ConstructionSite::get_built_per64k
+
+Return the completion "percentage", where 2^16 = completely built,
+0 = nothing built.
+===============
+*/
+uint ConstructionSite::get_built_per64k()
+{
+	uint time = get_owner()->get_game()->get_gametime();
+	uint thisstep = m_working ? (CONSTRUCTIONSITE_STEP_TIME - m_work_steptime + time) : 0;
+	uint total;
+
+	thisstep = (thisstep << 16) / CONSTRUCTIONSITE_STEP_TIME;
+	total = (thisstep + (m_work_completed << 16)) / m_work_steps;
+
+	assert(thisstep >= 0 && thisstep <= (1 << 16));
+	assert(total >= 0 && total <= (1 << 16));
+
+	return total;
 }
 
 
@@ -974,6 +1093,9 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 	lines = completedtime * h / totaltime;
 
 	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor(), 0, h-lines, w, lines);
+
+	// Draw help strings
+	draw_help(g, dst, coords, pos);
 }
 
 
@@ -1674,6 +1796,22 @@ ProductionSite::~ProductionSite()
 
 /*
 ===============
+ProductionSite::get_statistics_string
+
+Display whether we're occupied.
+===============
+*/
+std::string ProductionSite::get_statistics_string()
+{
+	if (!m_worker)
+		return "(not occupied)";
+
+	return "%%%%"; // TODO: implement percentage counter
+}
+
+
+/*
+===============
 ProductionSite::init
 
 Initialize the production site.
@@ -2123,6 +2261,19 @@ MilitarySite::~MilitarySite
 */
 MilitarySite::~MilitarySite()
 {
+}
+
+
+/*
+===============
+MilitarySite::get_statistics_string
+
+Display number of soldiers.
+===============
+*/
+std::string MilitarySite::get_statistics_string()
+{
+	return "(soldiers)";
 }
 
 

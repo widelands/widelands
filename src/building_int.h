@@ -63,6 +63,9 @@ public:
 	virtual int get_size();
 	virtual uint get_playercaps();
 	virtual uint get_ui_anim();
+	virtual std::string get_census_string();
+	virtual std::string get_statistics_string();
+	uint get_built_per64k();
 
 	void set_building(Building_Descr* descr);
 	inline Building_Descr* get_building() const { return m_building; }
@@ -128,7 +131,7 @@ public:
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual Building *create_object();
-	
+
 	std::string get_worker_name() const { return m_worker_name; }
 	bool is_output(std::string name) const { return m_output.find(name) != m_output.end(); }
 	const std::set<std::string>* get_outputs() const { return &m_output; }
@@ -136,7 +139,7 @@ public:
    const ProductionProgram* get_program(std::string name) const;
 
    virtual bool is_only_production_site(void) { return true; }
-   
+
 private:
 	std::string					m_worker_name;	// name of worker type
    std::vector<Input>      m_inputs;
@@ -151,6 +154,8 @@ public:
 	ProductionSite(ProductionSite_Descr* descr);
 	virtual ~ProductionSite();
 
+	virtual std::string get_statistics_string();
+
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 	virtual void act(Game *g, uint data);
@@ -158,7 +163,7 @@ public:
 	virtual void remove_worker(Worker *w);
 
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
-   
+
    virtual void set_economy(Economy* e);
 
 
@@ -215,9 +220,10 @@ class MilitarySite : public ProductionSite {
 	MO_DESCR(MilitarySite_Descr);
    
    public:
-      MilitarySite(MilitarySite_Descr* descr); 
+      MilitarySite(MilitarySite_Descr* descr);
       virtual ~MilitarySite();
 
+		virtual std::string get_statistics_string();
 
       virtual void init(Editor_Game_Base *g);
       virtual void cleanup(Editor_Game_Base *g);
@@ -242,7 +248,7 @@ private:
 	Request*		m_soldier_request;
 	Worker*		m_soldier;
 //     Soldier*
-//  Soldier_Queue    
+//  Soldier_Queue
 };
 
 /*
