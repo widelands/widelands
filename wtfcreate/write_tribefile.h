@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp
+ * Copyright (C) 2002 by the Widelands Development Team  
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,15 @@
  *
  */
 
-#ifndef __S__TRIBEDATA_H
-#define __S__TRIBEDATA_H
 
-#ifndef PACK_VERSION
-#define PACK_VERSION(major, minor) (  (ushort) (((uchar) (major))<<8) | (((uchar) (minor))) ) 
+#ifndef __S__WRITE_TRIBEFILE_H
+#define __S__WRITE_TRIBEFILE_H
+
+#include "../src/md5file.h"
+#include "building_descr.h"
+#include "tribe_descr.h"
+
+int write_tribefile(MD5_Binary_file* f, Buildings_Descr* buildings, Tribe_Header* header, Regent_Descr* regent);
+
 #endif
 
-#ifndef VERSION_MAJOR
-#define VERSION_MAJOR(vers) ((ushort) (((ushort) (vers)>>8) & 0xff))
-#endif
-
-#ifndef VERSION_MINOR
-#define VERSION_MINOR(vers) ((ushort) (((ushort) (vers)) & 0xff))
-#endif
-
-#define WLTF_VERSION			PACK_VERSION(1,0)
-
-#endif /* __S__TRIBEDATA_H */

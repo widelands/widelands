@@ -21,18 +21,18 @@
 #define __S__PIC_DESCR_H
 
 #include "../src/pic.h"
+#include "../src/myfile.h"
 
-/** class Bitmap_Descr
- *
- * This class extends class Pic and delivers a bitmap description
- * data 
- */
-class Bitmap_Descr : public Pic {
+//
+// This is simply a picture, but it knows how to write itself
+// in a file
+// 
+class Pic_Descr : public Pic {
    public:
-      Bitmap_Descr(void) : Pic() { }
-      ~Bitmap_Descr(void) { }
+      Pic_Descr(void) : Pic() { }
+      ~Pic_Descr(void) { }
 
-      uint construct_description(void* data, ushort size);
+      int write(Binary_file* f);
 };
 
 #endif /* __S__PIC_DESCR_H */

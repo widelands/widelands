@@ -21,6 +21,7 @@
 #define __S__BOB_DESCR_H
 
 #include "../src/pic.h"
+#include "../src/myfile.h"
 
 #define DARKEST_PL_CLR  pack_rgb(0  , 0  , 165)
 #define DARK_PL_CLR     pack_rgb(0  , 55 , 190)
@@ -36,11 +37,28 @@ struct BobPicDescr {
    char* data;
 };
 
-struct BobDescr {
-   ushort npics;
-   BobPicDescr* pics;
+class Bob_Descr {
+   public:
+      enum {
+         OK =0, 
+         ERROR, 
+         ERR_INVAL_FILE_NAMES,
+         ERR_INVAL_DIMENSIONS,
+         ERR_NOPICS,
+         ERR_INVAL_HOT_SPOT
+      };
+      uint construct(const char* pfile_names, const char* dirname, const char* subdir, ushort clrkey, ushort shadowclr, ushort* w, ushort *h);
+
+      void write(Binary_file* f);
+
+      ushort get_npics(void) { return npics; } 
+
+   private:
+      ushort npics;
+      BobPicDescr* pics;
 };
 
+/*
 struct DBobsDescr {
    char name[30];
    char ends_in[30];
@@ -62,27 +80,6 @@ struct GBobsDescr {
    ushort growing_speed;
    BobDescr* bob_growing;
 };
-
-/** class Bob_Data_Pic_Descr 
- *
- * This class extends class Pic and can add itself to a bob information
- */
-class Bob_Data_Pic_Descr : public Pic {
-   public:
-      Bob_Data_Pic_Descr(void) : Pic() { has_plclr=0; has_shadow=0; shadowclr=0; }
-      ~Bob_Data_Pic_Descr(void) { }
-
-      void set_shadowclr(ushort clr); 
-      void set_plclr(ushort darkest, ushort dark, ushort middle, ushort light);
-
-      uint construct_description(BobDescr*);
-
-   private:
-      ushort shadowclr;
-      ushort play_clr[4];
-      bool has_shadow;
-      bool has_plclr;
-};
-
+*/
  
 #endif /* __S__BOB_DESCR_H */

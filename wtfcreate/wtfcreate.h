@@ -17,21 +17,34 @@
  *
  */
 
-#ifndef __S__TRIBEDATA_H
-#define __S__TRIBEDATA_H
+#ifndef __S__WTFCREATE_H
+#define __S__WTFCREATE_H
 
-#ifndef PACK_VERSION
-#define PACK_VERSION(major, minor) (  (ushort) (((uchar) (major))<<8) | (((uchar) (minor))) ) 
+#define CONF_NAME		"conf"
+#define WTF_EXT			".wtf"
+
+#ifdef WIN32
+ #define SEPERATOR		'\\'
+ #define SSEPERATOR	"\\"
+#else
+ #define SEPERATOR		'/'
+ #define SSEPERATOR	"/"
 #endif
 
-#ifndef VERSION_MAJOR
-#define VERSION_MAJOR(vers) ((ushort) (((ushort) (vers)>>8) & 0xff))
-#endif
+#define PICS_DIR     "pics"  SSEPERATOR
+#define BOBS_DIR     "bobs"  SSEPERATOR
+#define WARES_DIR    "wares" SSEPERATOR
+#define SOLDIERS_DIR "soldiers" SSEPERATOR
+#define WORKERS_DIR  "workers" SSEPERATOR
+#define BUILDINGS_DIR "buildings" SSEPERATOR
 
-#ifndef VERSION_MINOR
-#define VERSION_MINOR(vers) ((ushort) (((ushort) (vers)) & 0xff))
-#endif
+#define MENU_PIC_BL    24
+#define REGENT_PB_W    70
+#define REGENT_PB_H    100
+#define REGENT_PS_W    45
+#define REGENT_PS_H    70
 
-#define WLTF_VERSION			PACK_VERSION(1,0)
+extern char g_dirname[];
 
-#endif /* __S__TRIBEDATA_H */
+
+#endif /* __S__WTFCREATE_H */

@@ -1,15 +1,41 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall
+#EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall
 #EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2
 # LDFLAGS=
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"/usr/local/share/widelands\" -Wall -O3 -pg -fprofile-arcs -g
 CFLAGS= $(EXTRA_FLAGS)
 CXXFLAGS= $(EXTRA_FLAGS)
 
 EXTRA_DIST=README
 
-bin_PROGRAMS=wtfcreate 
-wtfcreate_LDADD =@SDL_LIBS@ ../src/growablearray.o ../src/myfile.o ../src/pic.o ../src/mydirent.o ../src/profile.o 
-wtfcreate_SOURCES=bob_descr.cc  bob_descr.h  main.cc  pic_descr.cc  pic_descr.h  tribedata.h 
-
+bin_PROGRAMS=wtfcreate
+wtfcreate_LDADD =@SDL_LIBS@  ../src/md5file.o ../src/myfile.o ../src/md5.o ../src/helper.o ../src/profile.o ../src/growablearray.o ../src/pic.o -lefence  
+wtfcreate_SOURCES=main.cc \
+                  building_descr.h \
+                  building_descr.cc \
+                  file_descr.h \
+                  file_descr.cc \
+                  bob_descr.h \
+                  bob_descr.cc \
+                  ware_descr.h \
+                  ware_descr.cc \
+                  fabric.h \
+                  worker_descr.cc \
+                  worker_descr.h \
+                  tribedata.h \
+                  soldier_descr.cc \
+                  soldier_descr.h \
+                  tribe_descr.h \
+                  tribe_descr.cc \
+                  logic_bob_descr.h \
+                  logic_bob_descr.cc \
+                  parse.cc \
+                  parse.h \
+                  need_list.h \
+                  need_list.cc \
+                  write_tribefile.h \
+                  write_tribefile.cc \
+                  pic_descr.cc \
+                  pic_descr.h
 
 #  uncomment the following if widelands requires the math library
 #widelands_LDADD=-lm

@@ -20,18 +20,15 @@
 #include "pic_descr.h"
 #include <string.h>
 
-/*
- * construct a bitmap description (as used for pictures in Datafiles)
- *
- * Args: gdata     construct description in this pice of data
- *       size     size of data, if=0, then data is newly malloc()ed
- * Returns: used size of data or 0 if function fails
- */
-uint Bitmap_Descr::construct_description(void* gdata, ushort size) {
-   if(size<(get_h()*get_w()*2)) return 0;
+#include <iostream>
 
-   memcpy(gdata, pixels, get_h()*get_w()*2);
+// 
+// class Pic_Descr
+// 
+int Pic_Descr::write(Binary_file* f) {
+   
+   f->write(get_pixels(), get_w()*get_h()*sizeof(short));
 
-   return get_h()*get_w()*2;
+   return 0;
 }
 

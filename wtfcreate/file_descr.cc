@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp
+ * Copyright (C) 2002 by the Widelands Development Team  
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,23 @@
  *
  */
 
-#ifndef __S__TRIBEDATA_H
-#define __S__TRIBEDATA_H
+#include <string.h>
+#include "file_descr.h"
+#include "../src/graphic.h"
+#include "../src/helper.h"
+#include "wtfcreate.h"
 
-#ifndef PACK_VERSION
-#define PACK_VERSION(major, minor) (  (ushort) (((uchar) (major))<<8) | (((uchar) (minor))) ) 
-#endif
+//
+// class File_Descr
+// 
+File_Descr::File_Descr(void) {
+   zmem(err_sec, sizeof(err_sec));
+   zmem(err_key, sizeof(err_key));
+   zmem(err_msg, sizeof(err_msg));
+}
+File_Descr::~File_Descr(void) {
+}
 
-#ifndef VERSION_MAJOR
-#define VERSION_MAJOR(vers) ((ushort) (((ushort) (vers)>>8) & 0xff))
-#endif
 
-#ifndef VERSION_MINOR
-#define VERSION_MINOR(vers) ((ushort) (((ushort) (vers)) & 0xff))
-#endif
 
-#define WLTF_VERSION			PACK_VERSION(1,0)
 
-#endif /* __S__TRIBEDATA_H */
