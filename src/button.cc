@@ -64,7 +64,9 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 	: Panel(parent, x, y, w, h)
 {
 	set_think(false);
-
+   
+   _must_delete_mypic=false;
+   
 	switch(background) {
 	default:
 	case 0:
@@ -95,7 +97,7 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
  */
 Button::~Button()
 {
-	if (_mypic)
+	if (_mypic && _must_delete_mypic)
 		delete _mypic;
 }
 
@@ -107,12 +109,35 @@ Button::~Button()
  */
 void Button::set_pic(Pic *pic)
 {
-	if (_mypic)
+	if (_mypic) {
+      assert(_must_delete_mypic);
 		delete _mypic;
+   }
 	_mypic = pic;
 
 	update(0, 0, get_w(), get_h());
+   _must_delete_mypic=true;
 }
+
+/** Button::set_pic(AutoPic *pic)
+ *
+ * Sets a new picture for the button.
+ * But: AutoPics must not be deleted
+ *
+ * Args: pic	the picture
+ */
+void Button::set_pic(AutoPic *pic)
+{
+	if (_mypic) {
+      assert(_must_delete_mypic);
+		delete _mypic;
+   }
+	_mypic = pic;
+
+	update(0, 0, get_w(), get_h());
+   _must_delete_mypic=false;
+}
+
 
 /** Button::set_enabled(bool on)
  *

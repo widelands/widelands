@@ -51,7 +51,7 @@ public:
 };
 
 SinglePlayerMenu::SinglePlayerMenu()
-	: BaseMenu("splash.bmp")
+	: BaseMenu("singleplmenu.bmp")
 {
 	// Text
 	new Textarea(this, MENU_XRES/2, 140, "Single Player Menu", Textarea::H_CENTER);

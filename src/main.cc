@@ -24,6 +24,7 @@
 #include "mainmenue.h"
 #include "setup.h"
 #include "font.h"
+#include "intro.h"
 
 #include <SDL.h>
 
@@ -129,7 +130,11 @@ void g_main(int argc, char** argv)
 		g_init(argc, argv);
 
 		try {
-			main_menue();
+			Intro* intr=new Intro;
+         intr->run();
+         delete intr;
+
+         main_menue();
 		} catch(std::exception &e) {
 			critical_error("Unhandled exception: %s", e.what());
 		}

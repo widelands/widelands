@@ -29,9 +29,12 @@ Scrollbar
 ==============================================================================
 */
 
+AutoPic Scrollbar::pic_up("scrollbar_up.bmp", 0,0,255, 24, 24);
+AutoPic Scrollbar::pic_down("scrollbar_down.bmp", 0, 0, 255, 24, 24);
+
 /** Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
  *
- * Build a scrollbar. Big TODO, this is a lame hack really.
+ * Build a scrollbar. TODO, this is a lame hack really.
  */
 Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
 	: Panel(parent, x, y, w, h)
@@ -67,12 +70,12 @@ Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
 		// up button
 		b = new Button(this, 0, 0, w, btnh, 1);
 		b->clicked.set(this, &Scrollbar::btn_up);
-		b->set_pic(g_fh.get_string("U", 0));
+		b->set_pic(&pic_up);
 
 		// down button
 		b = new Button(this, 0, h-btnh, w, btnh, 1);
 		b->clicked.set(this, &Scrollbar::btn_down);
-		b->set_pic(g_fh.get_string("D", 0));
+		b->set_pic(&pic_down);
 	}
 }
 

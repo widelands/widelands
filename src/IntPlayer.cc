@@ -39,6 +39,14 @@ Interactive_Player IMPLEMENTATION
 ==============================================================================
 */
 
+AutoPic Interactive_Player::pic_buildhelp("menu_toggle_buildhelp.bmp", 0, 0, 255, 34, 34);
+AutoPic Interactive_Player::pic_minimap("menu_toggle_minimap.bmp", 0, 0, 255, 34, 34);
+AutoPic Interactive_Player::pic_menu("menu_toggle_menu.bmp", 0, 0, 255, 34, 34);
+// temp
+AutoPic Interactive_Player::pic_exit("menu_exit_game.bmp", 0, 0, 255, 34, 34);
+// temp ends
+
+
 /*
 ===============
 Interactive_Player::Interactive_Player
@@ -70,19 +78,19 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 
 	b = new Button(this, x, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::exit_game_btn);
-	b->set_pic(g_fh.get_string("EXIT", 0));
+	b->set_pic(&pic_exit);
 
 	b = new Button(this, x+34, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::main_menu_btn);
-	b->set_pic(g_fh.get_string("MENU", 0));
+	b->set_pic(&pic_menu);
 
 	b = new Button(this, x+68, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::minimap_btn);
-	b->set_pic(g_fh.get_string("MAP", 0));
+	b->set_pic(&pic_minimap);
 
 	b = new Button(this, x+102, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
-	b->set_pic(g_fh.get_string("BHELP", 0));
+	b->set_pic(&pic_buildhelp);
 }
 
 /*

@@ -88,7 +88,14 @@ class Interactive_Player : public Panel {
 		int get_build_road_end_dir();
 		
 	private:
-		void mainview_move(int x, int y);
+		static AutoPic pic_buildhelp;
+      static AutoPic pic_minimap;
+      static AutoPic pic_menu;
+      // temp
+      static AutoPic pic_exit;
+      // temp ends
+
+      void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);
 
 		Game		*m_game;

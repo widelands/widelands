@@ -46,7 +46,14 @@ public:
 	void act_removeroad();
 
 private:
-	void add_button(const char *name, void (FieldActionWindow::*fn)());
+	static AutoPic pic_buildroad;
+   static AutoPic pic_remroad;
+   static AutoPic pic_buildflag;
+   static AutoPic pic_ripflag;
+   static AutoPic pic_watchfield;
+   static AutoPic pic_abort;
+   
+   void add_button(AutoPic* pic, void (FieldActionWindow::*fn)());
 	void okdialog();
 	
 	Interactive_Player	*m_player;
@@ -57,6 +64,13 @@ private:
 	
 	FCoords	m_field;
 };
+
+AutoPic FieldActionWindow::pic_buildroad("menu_build_way.bmp", 0, 0, 255, 34, 34);
+AutoPic FieldActionWindow::pic_remroad("menu_rem_way.bmp", 0, 0, 255, 34, 34);
+AutoPic FieldActionWindow::pic_buildflag("menu_build_flag.bmp", 0, 0, 255, 34, 34);
+AutoPic FieldActionWindow::pic_ripflag("menu_rip_flag.bmp", 0, 0, 255, 34, 34);
+AutoPic FieldActionWindow::pic_watchfield("menu_watch_field.bmp", 0, 0, 255, 34, 34);
+AutoPic FieldActionWindow::pic_abort("menu_abort.bmp", 0, 0, 255, 34, 34);
 
 /*
 ===============
@@ -147,12 +161,12 @@ void FieldActionWindow::add_buttons_auto()
 			// Add flag actions
 			Flag *flag = (Flag*)imm;
 
-			add_button("ROAD", &FieldActionWindow::act_buildroad);
+			add_button(&pic_buildroad, &FieldActionWindow::act_buildroad);
 
 			Building *building = flag->get_building();
 
 			if (!building || strcasecmp(building->get_name(), "headquarters"))
-				add_button("RIP", &FieldActionWindow::act_ripflag);
+				add_button(&pic_ripflag, &FieldActionWindow::act_ripflag);
 		}
 		else
 		{
@@ -160,15 +174,15 @@ void FieldActionWindow::add_buttons_auto()
 			int buildcaps = m_player->get_player()->get_buildcaps(m_field);
 
 			if (buildcaps & BUILDCAPS_FLAG)
-				add_button("FLAG", &FieldActionWindow::act_buildflag);
+				add_button(&pic_buildflag, &FieldActionWindow::act_buildflag);
 			
 			if (imm && imm->get_type() == Map_Object::ROAD)
-				add_button("REM", &FieldActionWindow::act_removeroad);
+				add_button(&pic_remroad, &FieldActionWindow::act_removeroad);
 		}
 	}
 	
 	// Common to all fields
-	add_button("WATCH", &FieldActionWindow::act_watch);
+	add_button(&pic_watchfield, &FieldActionWindow::act_watch);
 }
 
 /*
@@ -181,9 +195,9 @@ Buttons used during road building: Set flag here and Abort
 void FieldActionWindow::add_buttons_road(bool flag)
 {
 	if (flag)
-		add_button("FLAG", &FieldActionWindow::act_buildflag);
+		add_button(&pic_buildflag, &FieldActionWindow::act_buildflag);
 	
-	add_button("ABORT", &FieldActionWindow::act_abort_buildroad);
+	add_button(&pic_abort, &FieldActionWindow::act_abort_buildroad);
 }
 
 
@@ -192,11 +206,11 @@ void FieldActionWindow::add_buttons_road(bool flag)
 FieldActionWindow::add_button
 ===============
 */
-void FieldActionWindow::add_button(const char *name, void (FieldActionWindow::*fn)())
+void FieldActionWindow::add_button(AutoPic *pic, void (FieldActionWindow::*fn)())
 {
 	Button *b = new Button(this, m_nbuttons*34, 0, 34, 34, 2);
 	b->clicked.set(this, fn);
-	b->set_pic(g_fh.get_string(name, 0));
+	b->set_pic(pic);
 	
 	m_nbuttons++;
 }

@@ -58,7 +58,7 @@ public:
 };
 
 MapSelectMenu::MapSelectMenu(Game *g)
-	: BaseMenu("splash.bmp")
+	: BaseMenu("choosemapmenu.bmp")
 {
 	game = g;
 

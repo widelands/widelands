@@ -42,7 +42,7 @@ public:
 };
 
 FileViewScreen::FileViewScreen(const char *text)
-	: BaseMenu("splash.bmp")
+	: BaseMenu("fileviewmenu.bmp")
 {
 	// Text view
 	new Multiline_Textarea(this, 40, 150, 560, 240, text);
@@ -93,7 +93,7 @@ public:
 };
 
 MainMenu::MainMenu()
-	: BaseMenu("splash.bmp")
+	: BaseMenu("mainmenu.bmp")
 {
 	// Buttons
 	Button *b;

@@ -255,6 +255,7 @@ public:
 	UISignal1<int> clickedid;
 
 	void set_pic(Pic *pic);
+	void set_pic(AutoPic *pic);
 	void set_enabled(bool on);
 
 	// Drawing and event handlers
@@ -271,6 +272,7 @@ private:
 	Pic *_mypic; // the text etc.. on the button
 
 	int _id;
+   bool _must_delete_mypic;
 	bool _highlighted; // mouse is over the button
 	bool _pressed;
 	bool _enabled;
@@ -516,6 +518,8 @@ public:
 	UISignal1<int> down; // right for vertical scrollbars
 
 private:
+   static AutoPic pic_up;
+   static AutoPic pic_down;
 	void btn_up() { up.call(1); }
 	void btn_down() { down.call(1); }
 };

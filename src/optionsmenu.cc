@@ -65,7 +65,7 @@ OptionsMenu::res OptionsMenu::resolutions[NUM_RESOLUTIONS] = {
 };
 
 OptionsMenu::OptionsMenu()
-	: BaseMenu("splash.bmp")
+	: BaseMenu("optionsmenu.bmp")
 {
 	// Menu title
 	new Textarea(this, MENU_XRES/2, 140, "Options", Textarea::H_CENTER);

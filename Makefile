@@ -27,11 +27,20 @@ CXX=c++
 
 # additional build flags. if you're not a developer, you don't want
 # to change this
-ADD_CFLAGS:=-g -O3 -DDEBUG
+ADD_CFLAGS:=
 
 # additional link flags. if you're not a developer, you don't want 
 # to change this
 ADD_LDFLAGS:=
+
+# This are additional build flags, you don't want to change them, unless
+# you know what you're doing
+DEBUG=YES
+PROFILE=YES
+OPTIMIZE=YES
+# RELEASE_BUILD disables debug and profile
+RELEASE_BUILD=NO
+
 endif
 
 ########################### LINUX SECTION ##########################
@@ -60,6 +69,26 @@ ADD_CFLAGS=-O3
 
 endif
 
+ifeq ($(RELEASE_BUILD),YES)
+DEBUG:=NO
+PROFILE:=NO
+OPTIMIZE:=YES
+endif
+
+ifeq ($(OPTIMIZE),YES)
+ADD_CFLAGS:=-O3
+endif
+
+ifeq ($(DEBUG),YES) 
+ADD_CFLAGS:=$(ADD_CFLAGS) -DDEBUG
+else
+ADD_CFLAGS:=$(ADD_CFLAGS) -DNDEBUG
+endif
+
+ifeq ($(PROFILE),YES)
+ADD_CFLAGS:=$(ADD_CFLAGS) -pg -fprofile-arcs
+endif
+	
 all: dotest widelands 
 	@echo -ne "\nCongrats. Build seems to be complete. If there was no "
 	@echo -ne "error (ignore file not found errors), you can run the game "
@@ -74,9 +103,9 @@ endif
 
 clean:
 	@rm -rf widelands 
-	@rm -rf src/*.da src/*.o
+	@rm -rf src/*.da src/*.o *.da
 	@rm -rf *~ */*~ */*/*/*~
-
+	
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
 # note: all src/*.cc files are considered source code
@@ -84,8 +113,8 @@ WIDELANDS_SRC:=$(wildcard src/*.cc)
 WIDELANDS_OBJ:=$(WIDELANDS_SRC:.cc=.o)
 
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
-CXXFLAGS=$(CFLAGS)
-LDFLAGS=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS)
+CXXFLAGS:=$(CFLAGS)
+LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS)
 
 include $(WIDELANDS_OBJ:.o=.d)
 
@@ -95,5 +124,8 @@ include $(WIDELANDS_OBJ:.o=.d)
 %.h: 
 	
 
-widelands: $(WIDELANDS_OBJ)
-	$(CXX) $^ -o $@ $(LDFLAGS) $(CLAGS)  
+widelands: tags $(WIDELANDS_OBJ)
+	$(CXX) $(WIDELANDS_OBJ) -o $@ $(LDFLAGS) $(CLAGS)  
+
+tags: $(wildcard src/*.cc src/*.h)
+	@ if [ -x /usr/bin/ctags ]; then ctags -R ; else true; fi
