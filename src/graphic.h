@@ -65,6 +65,7 @@ inline void unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b)
 
 // the voodoo version...
 // it's quite a bit faster than the original on my CPU
+// note that this is not used by the new renderer anymore
 inline ushort bright_up_clr(ushort clr, int factor)
 {
    if(!factor) return clr;
@@ -129,14 +130,17 @@ struct Point
 {
    int x;
    int y;
-   Point()
-   {
-      x = y = 0;
-   }
-   Point(int px, int py)
-   {
-      x = px; y = py;
-   }
+	
+   Point() { }
+   Point(int px, int py) : x(px), y(py) { }
+};
+
+struct Rect : public Point {
+	int w;
+	int h;
+	
+	Rect() { }
+	Rect(int px, int py, int pw, int ph) : Point(px, py), w(pw), h(ph) { }
 };
 
 /** class Point_with_bright
@@ -147,6 +151,19 @@ struct Point_with_bright : public Point {
    int b;
    Point_with_bright() : Point(0,0) { b=0; }
    Point_with_bright(int px, int py, int pb) : Point(px, py) { b=pb; }
+};
+
+/** struct Vertex
+ *
+ * This replaces Point_with_bright for use with the new texture mapping renderer.
+ *
+ * This struct is like a point, but with an additional bright factor and texture coordinates.
+ */
+struct Vertex:public Point {
+	int b,tx,ty;
+	Vertex (): Point (0,0) { b=tx=ty=0; }
+	Vertex (int vx,int vy,int vb,int vtx,int vty): Point (vx,vy)
+	{ b=vb; tx=vtx; ty=vty; }
 };
 
 // hm, floats...
@@ -193,29 +210,79 @@ inline float operator * (const Vector& a, const Vector& b)
 /*
 ==============================================================================
 
-Graphics object interfaces
+MapRenderInfo
 
 ==============================================================================
 */
 
-class BlitSource;
-class BlitSourceRect;
+/*
+struct MapRenderInfo
+
+This structure contains all the information that is needed by the renderer.
+
+It includes the map itself as well as overlay data (build symbols, road 
+building symbols, ...)
+*/
+class Game;
+class Map;
+
+enum {
+	Overlay_Frontier_Base = 0,	// add the player number to mark a border field
+	Overlay_Frontier_Max = 15,
+	
+	Overlay_Build_Flag = 16,
+	Overlay_Build_Small,
+	Overlay_Build_Medium,
+	Overlay_Build_Big,
+	Overlay_Build_Mine,
+	
+	Overlay_Build_Min = Overlay_Build_Flag,
+	Overlay_Build_Max = Overlay_Build_Mine,
+};
+
+struct MapRenderInfo {
+	Game*		game;
+	Map*		map;
+	Coords	fieldsel; // field selection marker, moved by cursor
+	uchar*	overlay_basic; // borders and build help
+	uchar*	overlay_roads; // needs to be ORed with logical road info
+	bool		show_buildhelp;
+
+	std::vector<bool>*		visibility; // array of fields, true if the field can be seen
+	                     // can be 0, in which case the whole map is visible
+};
+
+
+/*
+==============================================================================
+
+Graphics object interfaces
+
+==============================================================================
+*/
 
 /*
 class RenderTarget
 
 This abstract class represents anything that can be rendered to.
 
-enter_window() is used to obtain a RenderTarget that can be used to draw into
-the given rectangle whle clipping and so on. It returns the new target only if
-the window is actually visible.
-After you're finished rendering into that window, call leave_window() on the
-RenderTarget that was returned from enter_window().
+It supports windows, which are composed of a clip rectangle and a drawing
+offset:
+The drawing offset will be added to all coordinates that are passed to drawing
+routines. Therefore, the offset is usually negative. Then the coordinates are 
+interpreted as relative to the clip rectangle and the primitives are clipped
+accordingly.
+enter_window() can be used to enter a sub-window of the current window. When 
+you're finished drawing in the window, restore the old window by calling
+set_window() with the values stored in previous and prevofs.
+Note: If the sub-window would be empty/invisible, enter_window() returns false
+and doesn't change the window state at all.
 */
 class RenderTarget {
 public:
-	virtual RenderTarget* enter_window(int x, int y, int w, int h) = 0;
-	virtual void leave_window() = 0;
+	virtual void get_window(Rect* rc, Point* ofs) const = 0;
+	virtual void set_window(const Rect& rc, const Point& ofs) = 0;
+	virtual bool enter_window(const Rect& rc, Rect* previous, Point* prevofs) = 0;
 
 	virtual int get_w() const = 0;
 	virtual int get_h() const = 0;
@@ -225,45 +292,15 @@ public:
    virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
 	virtual void clear() = 0;
 
-	virtual void blit(int dstx, int dsty, BlitSource* src) = 0;
-	virtual void blitrect(int dstx, int dsty, BlitSourceRect* src, 
+	virtual void blit(int dstx, int dsty, uint picture) = 0;
+	virtual void blitrect(int dstx, int dsty, uint picture,
 	                      int srcx, int srcy, int w, int h) = 0;
-};
 
-/*
-class BlitSource
-
-This abstract class represents any kind of picture that can be copied into a
-RenderTarget.
-
-TODO: Add a blit-offset feature here (makes sense for animations)?
-*/
-class Bitmap;
-
-class BlitSource {
-	friend class Bitmap;
-
-public:
-	virtual int get_w() const = 0;
-	virtual int get_h() const = 0;
+	virtual void rendermap(const MapRenderInfo* mri, Point viewofs) = 0;
+	virtual void renderminimap(Point pt, const MapRenderInfo* mri) = 0;
 	
-private:
-	virtual void blit_to_bitmap16(Bitmap* dst, int dstx, int dsty) = 0;
+	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs) = 0;
 };
-
-/*
-class BlitSourceRect
-
-This is a more general source for blits into RenderTarget which allows a
-source rectangle to be specified.
-*/
-class BlitSourceRect : public BlitSource {
-	friend class Bitmap;
-
-private:
-	virtual void blit_to_bitmap16rect(Bitmap* dst, int dstx, int dsty, int srcx, int srcy, int w, int h) = 0;
-};
-
 
 
 /*
@@ -273,11 +310,22 @@ class Graphic
 
 ==============================================================================
 */
+
+enum { // picture module flags
+	PicMod_UI = 1,
+	PicMod_Menu = 2,
+	PicMod_Game = 4,
+};
 
 /*
 class Graphic
 
 This interface represents the framebuffer / screen.
+
+Picture IDs can be allocated using get_picture() and used in RenderTarget::blit().
+Pictures are only loaded from disk once and thrown out of memory when the 
+graphics system is unloaded, or when flush() is called with the appropriate
+module flag.
 */
 class Graphic {
 public:
@@ -291,23 +339,27 @@ public:
 	virtual bool need_update() = 0;
 	virtual void refresh() = 0;
 	
+	virtual void flush(int mod) = 0;
+	virtual uint get_picture(int mod, const char* fname) = 0;
+	virtual uint get_picture(int mod, const char* fname, RGBColor clrkey) = 0;
+	virtual void get_picture_size(uint pic, int* pw, int* ph) = 0;
+	virtual uint create_surface(int w, int h) = 0;
+	virtual uint create_surface(int w, int h, RGBColor clrkey) = 0;
+	virtual void free_surface(uint pic) = 0;
+	virtual RenderTarget* get_surface_renderer(uint pic) = 0;
+	
+	virtual uint get_maptexture(const char* fnametempl, uint frametime) = 0;
+	virtual void animate_maptextures(uint time) = 0;
+	
+	virtual void load_animations() = 0;
+
 	virtual void screenshot(const char* fname) = 0;
+	
+	// HACK: needed to load the old font
+	virtual uint get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey) = 0;
 };
 
 extern Graphic* g_gr;
 
-
-// TODO: get rid of the following
-class Bitmap;
-class Pic;
-
-void render_right_triangle(Bitmap*, Point_with_bright*, Point_with_bright*, Point_with_bright*, Pic*, int, int);
-void render_bottom_triangle(Bitmap*, Point_with_bright*, Point_with_bright*, Point_with_bright*, Pic*, int, int);
-void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color);
-void render_road_vert(Bitmap *dst, Point start, Point end, ushort color);
-
-class Animation;
-
-void copy_animation_pic(RenderTarget* dst, Animation* anim, uint time, int dst_x, int dst_y, const uchar *plrclrs);
 
 #endif /* __S__GRAPHIC_H */

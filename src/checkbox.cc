@@ -28,7 +28,6 @@ Statebox
 ==============================================================================
 */
 
-AutoPic Statebox::_gr("checkbox.bmp", STATEBOX_WIDTH*2, STATEBOX_HEIGHT);
 RGBColor Statebox::dflt_highlightcolor(100, 100, 80);
 
 
@@ -40,6 +39,8 @@ RGBColor Statebox::dflt_highlightcolor(100, 100, 80);
 Statebox::Statebox(Panel *parent, int x, int y)
 	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
 {
+	m_pic_graphics = g_gr->get_picture(PicMod_UI, "pics/checkbox.bmp");
+
 	_highlighted = false;
 	_enabled = true;
 	_state = false;
@@ -99,7 +100,7 @@ void Statebox::draw(RenderTarget* dst)
 		x = STATEBOX_WIDTH;
 	else
 		x = 0;
-	dst->blitrect(0, 0, &_gr, x, 0, STATEBOX_WIDTH, STATEBOX_HEIGHT);
+	dst->blitrect(0, 0, m_pic_graphics, x, 0, STATEBOX_WIDTH, STATEBOX_HEIGHT);
 
 	if (_highlighted)
 	{

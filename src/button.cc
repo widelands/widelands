@@ -25,29 +25,6 @@
  * This defines a button.
  */
 
-AutoPic Button::bg0("but0.bmp");
-AutoPic Button::bg1("but1.bmp");
-AutoPic Button::bg2("but2.bmp");
-Pic Button::bg0e;
-Pic Button::bg1e;
-Pic Button::bg2e;
-
-/** Button::setup_ui() [static]
- *
- * Create the highlighted background pics. Called once by setup_ui().
- */
-void Button::setup_ui()
-{
-	bg0e = bg0;
-	bg0e.brighten_rect(0, 0, bg0e.get_w(), bg0e.get_h(), MOUSE_OVER_BRIGHT_FACTOR);
-
-	bg1e = bg1;
-	bg1e.brighten_rect(0, 0, bg1e.get_w(), bg1e.get_h(), MOUSE_OVER_BRIGHT_FACTOR);
-
-	bg2e = bg2;
-	bg2e.brighten_rect(0, 0, bg2e.get_w(), bg2e.get_h(), MOUSE_OVER_BRIGHT_FACTOR);
-}
-
 /** Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background)
  *
  * Initialize a Button
@@ -61,30 +38,18 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 {
 	set_think(false);
    
-   _must_delete_mypic=false;
-   
 	switch(background) {
 	default:
-	case 0:
-		_mybg = &bg0;
-		_mybge = &bg0e;
-		break;
-
-	case 1:
-		_mybg = &bg1;
-		_mybge = &bg1e;
-		break;
-
-	case 2:
-		_mybg = &bg2;
-		_mybge = &bg2e;
-		break;
+	case 0: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.bmp"); break;
+	case 1: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.bmp"); break;
+	case 2: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.bmp"); break;
 	}
 
 	_id = id;
-	_mypic = 0;
 	_highlighted = _pressed = false;
 	_enabled = true;
+	
+	m_pic_custom = 0;
 }
 
 /*
@@ -109,13 +74,7 @@ Remove any title the button currently carries.
 */
 void Button::remove_title()
 {
-	if (_mypic)
-		{
-		if (_must_delete_mypic)
-			delete _mypic;
-		_mypic = 0;
-		}
-	
+	m_pic_custom = 0;
 	m_title = "";
 }
 
@@ -125,39 +84,13 @@ void Button::remove_title()
 Button::set_pic
 
 Sets a new picture for the button.
-
-
-TODO: The two different set_pic()s are really dangerous.
-Once font reorganization has been done, we can probably just remove this
-set_pic() and only allow AutoPics (eventually only Images that have been
-loaded from disk). Or at least give the two functions different names,
-and use two seperate member variables.
 ===============
 */
-void Button::set_pic(Pic *pic)
+void Button::set_pic(uint picid)
 {
 	remove_title();
 	
-	_mypic = pic;
-   _must_delete_mypic=true;
-
-	update(0, 0, get_w(), get_h());
-}
-
-/*
-===============
-Button::set_pic
-
-Sets a new picture for the button.
-But: AutoPics must not be deleted
-===============
-*/
-void Button::set_pic(AutoPic *pic)
-{
-	remove_title();
-	
-	_mypic = pic;
-   _must_delete_mypic=false;
+	m_pic_custom = picid;
 
 	update(0, 0, get_w(), get_h());
 }
@@ -211,30 +144,34 @@ Redraw the button
 */
 void Button::draw(RenderTarget* dst)
 {
-	Pic *bg;
+	// Draw the background
+	int bgw, bgh;
+	int srcy;
+	int h;
+	
+	g_gr->get_picture_size(m_pic_background, &bgw, &bgh);
+	
+	srcy = get_y() % bgh;
+	h = bgh - srcy;
 
-	if (!_enabled || !_highlighted)
-		bg = _mybg;
-	else
-		bg = _mybge;
-
-	int srcy = get_y() % bg->get_h();
-	int h = bg->get_h() - srcy;
-
-	for(int y = 0; y < get_h(); y += h, srcy = 0, h = bg->get_h()) {
-		int srcx = get_x() % bg->get_w();
-		int w = bg->get_w() - srcx;
-		for(int x = 0; x < get_w(); x += w, srcx = 0, w = bg->get_w())
-			dst->blitrect(x, y, bg, srcx, srcy, w, h);
+	for(int y = 0; y < get_h(); y += h, srcy = 0, h = bgh) {
+		int srcx = get_x() % bgw;
+		int w = bgw - srcx;
+		for(int x = 0; x < get_w(); x += w, srcx = 0, w = bgw)
+			dst->blitrect(x, y, m_pic_background, srcx, srcy, w, h);
 	}
 
-	// if we got a picture, draw it centered
-	if (_mypic)
-		{
-		int x = (get_w() - _mypic->get_w()) >> 1;
-		int y = (get_h() - _mypic->get_h()) >> 1;
+	if (_enabled && _highlighted)
+		dst->brighten_rect(0, 0, get_w(), get_h(), MOUSE_OVER_BRIGHT_FACTOR);
 
-		dst->blit(x, y, _mypic);
+	// if we got a picture, draw it centered
+	if (m_pic_custom)
+		{
+		int cpw, cph;
+		
+		g_gr->get_picture_size(m_pic_custom, &cpw, &cph);
+		
+		dst->blit((get_w() - cpw) >> 1, (get_h() - cph) >> 1, m_pic_custom);
 		}
 	else if (m_title.length()) // otherwise draw the title string centered
 		{

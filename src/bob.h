@@ -26,7 +26,6 @@
 
 
 class Profile;
-
 class Bob;
 
 /*
@@ -38,7 +37,7 @@ public:
 	virtual ~Bob_Descr(void);
 
 	inline const char* get_name(void) { return m_name; }
-	inline Animation* get_idle_anim(void) { return &m_idle_anim; }
+	inline uint get_idle_anim(void) { return m_idle_anim; }
 
 	Bob *create(Game *g, Player *owner, Coords coords);
 	
@@ -46,8 +45,8 @@ protected:
 	virtual Bob *create_object() = 0;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	
-	char m_name[30];
-	Animation m_idle_anim; // the default animation
+	char	m_name[30];
+	uint	m_idle_anim; // the default animation
 
 public:
 	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof);
@@ -83,7 +82,7 @@ public:
 	virtual void cleanup(Game*);
 	virtual void act(Game*);
 		
-	virtual void draw(Game* game, RenderTarget* dst, int posx, int posy);
+	virtual void draw(Game* game, RenderTarget* dst, Point pos);
 
 	inline void set_owner(Player *player) { m_owner = player; }
 	inline Player *get_owner() { return m_owner; }
@@ -93,7 +92,7 @@ public:
 	inline Bob* get_next_bob(void) { return m_linknext; }
 
 protected: // default tasks
-	void start_task_idle(Game*, Animation* anim, int timeout);
+	void start_task_idle(Game*, uint anim, int timeout);
 	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims);
 	void start_task_movepath(Game*, const Path &path, DirAnimations *anims);
 	void start_task_forcemove(Game*, int dir, DirAnimations *anims);
@@ -125,9 +124,9 @@ private:
 	void do_start_task(Game*);
 
 protected: // low level handling
-	void set_animation(Game* g, Animation* anim);
+	void set_animation(Game* g, uint anim);
 
-	int start_walk(Game* g, WalkingDir dir, Animation *anim, bool force = false);
+	int start_walk(Game* g, WalkingDir dir, uint anim, bool force = false);
 	void end_walk(Game* g);
 	bool is_walking();
 
@@ -138,7 +137,7 @@ protected:
 	Bob* m_linknext; // next object on this field
 	Bob** m_linkpprev;
 
-	Animation* m_anim;
+	uint m_anim;
 	int m_animstart; // gametime when the animation was started
 
 	WalkingDir m_walking;

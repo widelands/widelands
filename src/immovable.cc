@@ -75,7 +75,7 @@ void BaseImmovable::set_position(Game *g, Coords c)
 	f->immovable = this;
 
 	if (get_size() >= SMALL)
-		g->get_map()->recalc_for_field(c);
+		g->recalc_for_field(c);
 }
 
 /*
@@ -95,7 +95,7 @@ void BaseImmovable::unset_position(Game *g, Coords c)
 	f->immovable = 0;
 	
 	if (get_size() >= SMALL)
-		g->get_map()->recalc_for_field(c);
+		g->recalc_for_field(c);
 }
 
 
@@ -133,7 +133,7 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 	char picname[256];
 	
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
-   m_anim.parse(directory, s, picname);
+   m_anim = g_anim.get(directory, s, picname);
 
 	const char *string;
 	 
@@ -266,12 +266,12 @@ Draw the immovable at the given position.
 coords is the field that draw() was called for.
 ===============
 */
-void Immovable::draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy)
+void Immovable::draw(Game* game, RenderTarget* dst, FCoords coords, Point pos)
 {
 	if (!m_anim)
 		return;
 
-	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, posx, posy, 0);
+	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, 0);
 }
 
 

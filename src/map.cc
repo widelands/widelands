@@ -57,20 +57,19 @@ struct Map::Pathfield {
 /** class Map
  *
  * This really identifies a map like it is in the game
- *
- * DEPENDS: class File
- * 			class g_fileloc
  */
 
 /*
 ===============
 Map::Map
 
-inits
+Preload the map. This only loads the map header.
 ===============
 */
-Map::Map(void)
+Map::Map(const char* filename)
 {
+	snprintf(m_filename, sizeof(m_filename), "%s", filename);
+
 	m_nrplayers = 0;
 	m_width = m_height = 0;
 	m_world = 0;
@@ -80,7 +79,7 @@ Map::Map(void)
 	m_pathcycle = 0;
 	m_pathfields = 0;
 	
-	m_only_information = true;
+	load_map_header();
 }
 
 /*
@@ -90,19 +89,7 @@ Map::~Map
 cleanups
 ===============
 */
-Map::~Map(void)
-{
-	clear();
-}
-
-/*
-===============
-Map::clear
-
-Completely reset the map
-===============
-*/
-void Map::clear()
+Map::~Map()
 {
 	if (m_fields)
       free(m_fields);
@@ -122,69 +109,33 @@ void Map::clear()
 
 /*
 ===============
-Map::set_only_info
+Map::set_size [private]
 
-Turn only-info mode on or off
-===============
-*/
-void Map::set_only_info(bool yes)
-{
-	if (m_only_information == yes)
-		return;
-	
-	if (yes)
-	{
-		if (m_fields)
-			free(m_fields);
-		m_fields = 0;
-		if (m_pathfields)
-			free(m_pathfields);
-		m_pathfields = 0;
-	}
-	else
-	{
-		if (m_width && m_height) {		
-			m_fields = (Field*) malloc(sizeof(Field)*m_width*m_height);
-			memset(m_fields, 0, sizeof(Field)*m_width*m_height);
-
-			m_pathcycle = 0;
-			m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*m_width*m_height);
-			memset(m_pathfields, 0, sizeof(Pathfield)*m_width*m_height);
-		}
-	}
-	
-	m_only_information = yes;
-}
-
-/*
-===============
-Map::set_size
-
-Resize the map. All information will be lost!
+Set the size of the map. This should only happen once during initial load.
 =============== 
 */
 void Map::set_size(uint w, uint h)
 {
-	clear();
+	assert(!m_fields);
+	assert(!m_pathfields);
 	
 	m_width = w;
 	m_height = h;
 
-	if (!m_only_information) {
-		m_fields = (Field*) malloc(sizeof(Field)*w*h);
-		memset(m_fields, 0, sizeof(Field)*w*h);
+	m_fields = (Field*) malloc(sizeof(Field)*w*h);
+	memset(m_fields, 0, sizeof(Field)*w*h);
 
-		m_pathcycle = 0;
-		m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*w*h);
-		memset(m_pathfields, 0, sizeof(Pathfield)*w*h);
-	}
+	m_pathcycle = 0;
+	m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*w*h);
+	memset(m_pathfields, 0, sizeof(Pathfield)*w*h);
 }
 
 /*
 ===============
 Map::set_nrplayers
 
-Change the number of players the map supports
+Change the number of players the map supports.
+Could happen multiple times in the map editor.
 ===============
 */
 void Map::set_nrplayers(uint nrplayers)
@@ -246,162 +197,75 @@ void Map::set_description(const char *string)
 ===============
 Map::set_world_name
 
-Set the world name and load the corresponding world
+Set the world name and load the corresponding world. This should only happen
+once during initial load.
 ===============
 */
 void Map::set_world_name(const char *string)
 {
-	snprintf(m_worldname, sizeof(m_worldname), "%s", string);
+	assert(!m_world);
 	
-	if (m_world)
-		delete m_world;
-	
-	m_world = new World;
-	m_world->load_world(m_worldname);
+	m_world = new World(string);
 }
 
 
-/** int Map::load_wlmf(const char* file)
- *
- * this loads a given file as a widelands map file
- *
- * ***** PRIVATE FUNC ******
- *
- * Args: 	file		filename to read
- * Returns: RET_OK or RET_FAILED
- */
+/*
+===============
+Map::load_map_header [private]
 
-// TODO: This function is not working!!
-//  Well, I wouldn't bother about that as we don't even have a map editor... -- Nicolai
-#if 0
-int Map::load_wlmf(const char* file, Game *game)
+Loads the map header, called from the constructor.
+Throws an exception if the loader failed (map is invalid).
+===============
+*/
+void Map::load_map_header()
 {
-	FileRead f
-
-   f.Load(g_fs, file);
-
-   // read header:
-	memcpy(&hd, f.Data(sizeof(hd)), sizeof(hd));
-
-   // check version
-   if(WLMF_VERSIONMAJOR(hd.version) > WLMF_VERSIONMAJOR(WLMF_VERSION)) {
-      return ERR_FAILED;
-   }
-   if(WLMF_VERSIONMAJOR(hd.version) == WLMF_VERSIONMAJOR(WLMF_VERSION)) {
-      if(WLMF_VERSIONMINOR(hd.version) > WLMF_VERSIONMINOR(WLMF_VERSION)) {
-         return ERR_FAILED;
-      }
-   }
-
-   // ignore the player descriptions, probably the user has chnanged them.
-   // as long as the game knows how many players are around, everything is ok
-   PlayerDescr pl;
-   for(uint i=0; i<hd.nplayers; i++) {
-      f.Data(sizeof(PlayerDescr));
-   }
-
-   set_size(m_width, m_height);
-
-
-   // now, read in the fields, one at a time and init the map
-   FieldDescr *fd;
-   uint y;
-   Terrain_Descr *td, *tr;
-   for(y=0; y<m_height; y++) {
-      for(uint x=0; x<m_width; x++) {
-			fd = (FieldDescr *)f.Data(sizeof(FieldDescr));
-
-         // TEMP
-         tr=w->get_terrain(fd->tex_r);
-         if(!tr) {
-            //cerr << "Texture number " << fd.tex_r << " not found in file. Defaults to 0" << endl;
-            tr=w->get_terrain(0);
-            assert(0); // we should never be here!  
-         }
-         td=w->get_terrain(fd->tex_d);
-         if(!td) {
-            // cerr << "Texture number " << fd.tex_d << " not found in file. Defaults to 0" << endl;
-            td=w->get_terrain(0);
-            assert(0); // we should never be here!  
-         }
-         // TEMP end
-
-         Field* f=get_field(x,y);
-         f->set_height((uchar)fd->height);
-         f->set_terrainr(tr);
-         f->set_terraind(td);
-			f->objects = 0;
-      }
-   }
-
-   return RET_OK;
-}
-#endif
-
-/** 
- * This functions load a map header, for previewing maps.
- *
- * Returns RET_OK if the map is invalid
- */
-int Map::load_map_header(const char* file)
-{
-   int ret=RET_OK;
-
-   if(!strcasecmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+   if(!strcasecmp(m_filename+(strlen(m_filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
    {
-      // It ends like a wide lands map file. try to load
-      // it as such
-      // TODO: do this
-      // ret = load_wlmf(file, q);
-		return ERR_FAILED;
+		throw wexception("TODO: WLMF not implemented");
    }
-   else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+   else if (!strcasecmp(m_filename+(strlen(m_filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {
       // it is a S2 Map file. load it as such
 		try {
-			load_s2mf_header(file);
-			ret = RET_OK;
+			load_s2mf_header();
 		} catch(std::exception &e) {
-			cerr << "Problem loading map " << file << ": " << e.what() << endl;
-			ret = ERR_FAILED;
+			throw wexception("Couldn't load map %s: %s", m_filename, e.what());
 		}
-   }
-   else
-   {
-      assert(0);
-      return ERR_FAILED;
-   }
-
-   return ret;
+	}
+	else
+		throw wexception("Map filename %s has unknown extension", m_filename);
 }
 
-/** int Map::load_map(const char* file)
- *
- * This loads a complete map from a file
- *
- * Args: file	filename to read
- * Returns: RET_OK or ERR_FAILED
- */
-int Map::load_map(const char* file, Game* g)
+
+/*
+===============
+Map::postload
+
+Actually load the entire map, initialize map elements etc...
+===============
+*/
+void Map::postload(Game* g)
 {
 	try
 	{
-		if(!strcasecmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+		// Postload the world which provides all the immovables found on a map
+		m_world->postload(g);
+	
+		// Now load the bulk of the map
+		if(!strcasecmp(m_filename+(strlen(m_filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
 		{
-			// It ends like a wide lands map file. try to load
-			// it as such
-			//ret = load_wlmf(file, g);
-			throw wexception("WLMF not supported");
+			throw wexception("TODO: WLMF not supported");
 		}
-		else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+		else if(!strcasecmp(m_filename+(strlen(m_filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
 		{
-			// it is a S2 Map file. load it as such
-			load_s2mf(file, g);
+			// it is a S2 Map file. load it
+			load_s2mf(g);
 		}
 		else
 			throw wexception("Unknown map file format");
 
-		// Post process the map in the necessary two passes
+		// Post process the map in the necessary two passes to calculate 
+		// brightness and building caps
 		Field *f;
 		uint y;
 		for(y=0; y<m_height; y++) {
@@ -420,12 +284,23 @@ int Map::load_map(const char* file, Game* g)
 		}
 	}
 	catch(std::exception &e) {
-		cerr << "Error loading map " << file << ": " << e.what() << endl;
-		return ERR_FAILED;
+		throw wexception("Postloading map failed: %s", e.what());
 	}
-	
-   return RET_OK;
 }
+
+
+/*
+===============
+Map::load_graphics
+
+Load data for the graphics subsystem.
+===============
+*/
+void Map::load_graphics()
+{
+	m_world->load_graphics();
+}
+
 
 /*
 ===============
@@ -978,41 +853,6 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 }
 
 
-/*
-===============
-Map::recalc_for_field
-
-Call this function whenever the field at fx/fy has changed in one of the ways:
- - height has changed
- - robust Map_Object has been added or removed
- 
-This performs the steps outlined in the comment above recalc_brightness()
-===============
-*/
-void Map::recalc_for_field(Coords coords)
-{
-	Map_Region_Coords mrc;
-	int x, y;
-	Field *f;
-	
-	// First pass
-	mrc.init(coords, 2, this);
-
-	while(mrc.next(&x, &y)) {
-		f = get_field(x, y);
-		recalc_brightness(x, y, f);
-		recalc_fieldcaps_pass1(x, y, f);
-	}
-	
-	// Second pass
-	mrc.init(coords, 2, this);
-	
-	while(mrc.next(&x, &y)) {
-		f = get_field(x, y);
-		recalc_fieldcaps_pass2(x, y, f);
-	}
-}
-	
 /** Map::calc_distance(Coords a, Coords b)
  *
  * Calculate the (Manhattan) distance from a to b

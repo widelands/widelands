@@ -52,7 +52,7 @@ Bob_Descr::~Bob_Descr(void)
 
 /*
 ===============
-Bob_Descr::read
+Bob_Descr::parse
 
 Parse additional information from the config file
 ===============
@@ -62,8 +62,9 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
 	char picname[256];
 	
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
-	m_idle_anim.parse(directory, prof->get_safe_section("idle"), picname, encdata);
+	m_idle_anim = g_anim.get(directory, prof->get_safe_section("idle"), picname, encdata);
 }
+
 
 /*
 ===============
@@ -364,7 +365,7 @@ time.
 This task always succeeds unless interrupted.
 ===============
 */
-void Bob::start_task_idle(Game* g, Animation* anim, int timeout)
+void Bob::start_task_idle(Game* g, uint anim, int timeout)
 {
 	// timeout == 0 will wait indefinitely - probably NOT what you want (use -1 for infinite)
 	assert(timeout < 0 || timeout > 0);
@@ -566,7 +567,7 @@ Note that the current field is actually the field we're walking to, not
 the one we start from.
 ===============
 */
-void Bob::draw(Game *game, RenderTarget* dst, int posx, int posy)
+void Bob::draw(Game *game, RenderTarget* dst, Point pos)
 {
 	if (!m_anim)
 		return;
@@ -576,14 +577,14 @@ void Bob::draw(Game *game, RenderTarget* dst, int posx, int posy)
 	FCoords start;
 	int sx, sy;
 	int ex, ey;
-	const uchar *playercolors = 0;
+	const RGBColor* playercolors = 0;
 	
 	if (get_owner())
-		playercolors = get_owner()->get_playercolor_rgb();
+		playercolors = get_owner()->get_playercolor();
 
 	end = m_position;
-	ex = posx;
-	ey = posy;
+	ex = pos.x;
+	ey = pos.y;
 
 	sx = ex;
 	sy = ey;
@@ -611,7 +612,7 @@ void Bob::draw(Game *game, RenderTarget* dst, int posx, int posy)
 		ey = (int)(f*ey + (1-f)*sy);
 	}
 
-	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, ex, ey, playercolors);
+	dst->drawanim(ex, ey, m_anim, game->get_gametime() - m_animstart, playercolors);
 }
 
 
@@ -622,7 +623,7 @@ Bob::set_animation
 Set a looping animation, starting now.
 ===============
 */
-void Bob::set_animation(Game* g, Animation* anim)
+void Bob::set_animation(Game* g, uint anim)
 {
 	m_anim = anim;
 	m_animstart = g->get_gametime();
@@ -666,7 +667,7 @@ call end_walk() after this time, so schedule a task_act().
 Returns a negative value when we can't walk into the requested direction.
 ===============
 */
-int Bob::start_walk(Game *g, WalkingDir dir, Animation *a, bool force)
+int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 {
 	FCoords newf;
 	

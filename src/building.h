@@ -42,7 +42,7 @@ public:
 		
 	inline const char *get_name(void) { return m_name; }
 	inline const char *get_descname() { return m_descname; }
-	inline Animation* get_idle_anim(void) { return &m_idle; }
+	inline uint get_idle_anim(void) { return m_idle; }
 	inline bool get_buildable(void) { return m_buildable; }
 	inline int get_size(void) { return m_size; }
 
@@ -59,7 +59,7 @@ private:
 	bool				m_buildable;		// the player can build this himself
 	int				m_size;				// size of the building
 	bool				m_mine;
-	Animation		m_idle;
+	uint				m_idle;		// idle animation
 
 public:
 	static Building_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory,
@@ -90,22 +90,22 @@ public:
 	void hide_options();
 
 protected:
-	void start_animation(Game *g, Animation *anim);
+	void start_animation(Game *g, uint anim);
 
 	virtual void init(Game *g);
 	virtual void cleanup(Game *g);
 
-	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy);
+	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, Point pos);
 	
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry) = 0;
 	
 protected:
-	Window			*m_optionswindow;
-	Coords			m_position;
-	Flag				*m_flag;
+	Window		*m_optionswindow;
+	Coords		m_position;
+	Flag			*m_flag;
 	
-	Animation		*m_anim;
-	int				m_animstart;
+	uint			m_anim;
+	int			m_animstart;
 };
 
 /*

@@ -21,7 +21,6 @@
 #include "profile.h"
 #include "graphic.h"
 #include "descr_maintainer.h"
-#include "pic.h"
 #include "bob.h"
 #include "tribedata.h"
 #include "ware.h"
@@ -31,12 +30,7 @@
 //
 // Tribe_Descr class
 // 
-Tribe_Descr::Tribe_Descr(void) {
-}
-Tribe_Descr::~Tribe_Descr(void) {
-}
-
-void Tribe_Descr::load(const char* name)
+Tribe_Descr::Tribe_Descr(const char* name)
 {
 	snprintf(m_name, sizeof(m_name), "%s", name);
 	
@@ -56,6 +50,41 @@ void Tribe_Descr::load(const char* name)
 		throw wexception("Error loading tribe %s: %s", name, e.what());
 	}
 }
+
+Tribe_Descr::~Tribe_Descr(void)
+{
+}
+
+
+/*
+===============
+Tribe_Descr::postload
+
+Load all logic data
+===============
+*/
+void Tribe_Descr::postload(Game* g)
+{
+	// TODO: move more loads to postload
+}
+
+/*
+===============
+Tribe_Descr::load_graphics
+
+Load tribe graphics
+===============
+*/
+void Tribe_Descr::load_graphics()
+{
+	int i;
+	
+	for(i = 0; i < m_workers.get_nitems(); i++)
+		m_workers.get(i)->load_graphics();
+
+	// TODO: load building graphics
+}
+
 
 //
 // down here: private read functions for loading
@@ -104,14 +133,14 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 		if (!s)
 			throw wexception("Missing section [frontier]");
 		
-		m_anim_frontier.parse(directory, s, 0, &m_default_encdata);
+		m_anim_frontier = g_anim.get(directory, s, 0, &m_default_encdata);
 		
 		// Section [flag]
 		s = prof.get_section("flag");
 		if (!s)
 			throw wexception("Missing section [flag]");
 		
-		m_anim_flag.parse(directory, s, 0, &m_default_encdata);
+		m_anim_flag = g_anim.get(directory, s, 0, &m_default_encdata);
 		
 		prof.check_used();
 	}

@@ -52,6 +52,7 @@ class Interactive_Player : public Panel {
 		static int get_yres();
 
 		void start();
+		
 		void exit_game_btn();
 		void main_menu_btn();
 		void minimap_btn();
@@ -68,13 +69,16 @@ class Interactive_Player : public Panel {
 		
 		inline Game *get_game() { return m_game; }
 		inline uchar get_player_number(void) { return m_player_number; }
-		inline bool get_ignore_shadow() { return m_ignore_shadow; }
 		Player *get_player();
 		
-		inline const Coords &get_fieldsel() const { return m_fieldsel; }
+		inline const Coords &get_fieldsel() const { return m_maprenderinfo.fieldsel; }
 		inline bool get_fieldsel_freeze() const { return m_fieldsel_freeze; }
 		void set_fieldsel(Coords c);
 		void set_fieldsel_freeze(bool yes);
+		
+		inline const MapRenderInfo* get_maprenderinfo() const { return &m_maprenderinfo; }
+		
+		void recalc_overlay(FCoords fc);
 		
 		// Road building
 		inline bool is_building_road() const { return m_buildroad; }
@@ -88,19 +92,14 @@ class Interactive_Player : public Panel {
 		int get_build_road_end_dir();
 		
 	private:
-		static AutoPic pic_buildhelp;
-      static AutoPic pic_minimap;
-      static AutoPic pic_menu;
-      // temp
-      static AutoPic pic_exit;
-      // temp ends
-
+		void roadb_add_overlay();
+		void roadb_remove_overlay();
+	
       void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);
 
 		Game		*m_game;
 		uchar		m_player_number;
-		bool		m_ignore_shadow; // if true, draw unseen territory
 		
 		Map_View*	main_mapview;
 		
@@ -108,10 +107,11 @@ class Interactive_Player : public Panel {
 		UniqueWindow	m_minimap;
 		UniqueWindow	m_fieldaction;
 		
-		Coords	m_fieldsel; // the selected field below the mouse
 		bool		m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
 		
-		CoordPath	*m_buildroad; // path for the new road
+		MapRenderInfo	m_maprenderinfo;
+		
+		CoordPath		*m_buildroad; // path for the new road
 };
 
 

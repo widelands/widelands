@@ -116,7 +116,7 @@ void Building_Descr::parse(const char *directory, Profile *prof, const EncodeDat
 	Section *s = prof->get_section("idle");
 	if (!s)
 		throw wexception("Missing idle animation");
-	m_idle.parse(directory, s, 0, encdata);
+	m_idle = g_anim.get(directory, s, 0, encdata);
 }
 
 
@@ -176,7 +176,7 @@ Building::start_animation
 Start the given animation
 ===============
 */
-void Building::start_animation(Game *g, Animation *anim)
+void Building::start_animation(Game *g, uint anim)
 {
 	m_anim = anim;
 	m_animstart = g->get_gametime();
@@ -268,13 +268,12 @@ Building::draw
 Draw the building.
 ===============
 */
-void Building::draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy)
+void Building::draw(Game* game, RenderTarget* dst, FCoords coords, Point pos)
 {
 	if (coords != m_position)
 		return; // draw big buildings only once
 
-	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, posx, posy, 
-			get_owner()->get_playercolor_rgb());
+	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, get_owner()->get_playercolor());
 	
 	// door animation?
 }

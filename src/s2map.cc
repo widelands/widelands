@@ -33,21 +33,20 @@ using std::endl;
 // this is a detail of S2 maps
 #define CRITTER_PER_DEFINITION   1
 
-/** uchar *Map::load_s2mf_section(Binary_file *file, int width, int height)
- *
- * Some of the original S2 maps have rather odd sizes. In that case, however,
- * width (and height?) are rounded up to some alignment. The in-file size of
- * a section is stored in the section header (I think ;)).
- * This is the work-around.
- *
- * Args: file	the file to read from
- *       width	desired width to pack to
- *       height	desired height to pack to
- *
- * Returns: Pointer to the (packed) contents of the section. 0 if the read
- *          failed.
- *          If successful, you must free the returned pointer.
- */
+/*
+===============
+Map::load_s2mf_section
+
+Some of the original S2 maps have rather odd sizes. In that case, however,
+width (and height?) are rounded up to some alignment. The in-file size of
+a section is stored in the section header (I think ;)).
+This is the work-around.
+
+Returns a pointer to the (packed) contents of the section. 0 if the read
+failed.
+If successful, you must free the returned pointer.
+===============
+*/
 uchar *Map::load_s2mf_section(FileRead *file, int width, int height)
 {
    ushort dw, dh;
@@ -102,24 +101,19 @@ uchar *Map::load_s2mf_section(FileRead *file, int width, int height)
 
 /*
 ===============
-Map::load_s2mf_header
+Map::load_s2mf_header [private]
 
 Load informational data of an S2 map
 ===============
 */
-void Map::load_s2mf_header(const char* filen)
+void Map::load_s2mf_header()
 {
 	FileRead file;
 
-   assert(filen);
+   file.Open(g_fs, m_filename);
 
-   file.Open(g_fs, filen);
-
-	clear();
-	set_only_info(true);
-	
-   S2MapDescrHeader header;
-   memcpy(&header, file.Data(sizeof(header)), sizeof(header));
+	S2MapDescrHeader header;
+	memcpy(&header, file.Data(sizeof(header)), sizeof(header));
 
 	set_size(header.w, header.h);
 	
@@ -142,7 +136,7 @@ Map::load_s2mf [private]
 This loads a given file as a settlers 2 map file
 ===============
 */
-void Map::load_s2mf(const char* filen, Game *game)
+void Map::load_s2mf(Game *game)
 {
    uchar *section = 0;
 	uchar *bobs = 0;
@@ -152,31 +146,18 @@ void Map::load_s2mf(const char* filen, Game *game)
    uint x=0;
    uint y=0;
 
-	assert(filen);
-	
 	try
 	{
 		FileRead file;
-		file.Open(g_fs, filen);
+		file.Open(g_fs, m_filename);
 
-		clear();
-		set_only_info(false);
-		
 		S2MapDescrHeader header;
 		memcpy(&header, file.Data(sizeof(header)), sizeof(header));
 
-		set_size(header.w, header.h);
-		
-		set_author(header.author);
-		set_name(header.name);
-		set_nrplayers(header.nplayers);
-		set_description("Bluebyte Settlers II Map. No comment defined!");
-
-		switch(header.uses_world) {
-		case 0: set_world_name("greenland"); break;
-		case 1: set_world_name("blackland"); break;
-		case 2: set_world_name("winterland"); break;
-		}
+		// The header must already have been processed
+		assert(m_world);
+		assert(m_fields);
+		assert((int)m_width == header.w && (int)m_height == header.h);
 
 		////           S E C T I O N    1 : H E I G H T S
 		// New section??

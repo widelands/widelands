@@ -20,7 +20,6 @@
 #include "widelands.h"
 #include "ui.h"
 #include "options.h"
-#include "cursor.h"
 #include "mainmenue.h"
 #include "setup.h"
 #include "font.h"
@@ -55,14 +54,9 @@ static void g_init(int argc, char **argv)
 		// Create all subsystems after config has been read
 		Sys_Init();
 
-		static Cursor cur;
-
-		AutoPic::load_all();
-		
 		g_font = Font::load("fixed_font1");
-		setup_ui();
 		
-		// Initialize graphics last
+		// Initialize graphics
 		Section *s = g_options.pull_section("global");
 		
 		Sys_InitGraphics(GFXSYS_SW16, 640, 480, s->get_bool("fullscreen", false));

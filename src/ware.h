@@ -50,6 +50,8 @@ public:
 	Ware_Descr(const char *name);
 	virtual ~Ware_Descr();
 	
+	virtual void load_graphics();
+	
 	virtual bool is_worker() = 0;
 	
 	inline const char *get_name() const { return m_name; }
@@ -63,13 +65,15 @@ public:
 	Item_Ware_Descr(const char *name);
 	virtual ~Item_Ware_Descr();
 	
+	virtual void load_graphics();
+	
 	virtual bool is_worker();
 
-	inline Pic *get_menu_pic() { return m_menu_pic; }
+	inline uint get_menu_pic() { return m_menu_pic; }
 	
 	// TODO: actually implement this (parsing from config etc...)
 private:
-	Pic*		m_menu_pic;
+	uint		m_menu_pic;
 };
 
 class Worker_Ware_Descr : public Ware_Descr {

@@ -22,8 +22,7 @@
 
 #include "graphic.h"
 #include "font.h"
-#include "growablearray.h"
-#include "auto_pic.h"
+
 
 /** class UIObject
  *
@@ -211,7 +210,7 @@ private:
 	Panel *_focus; // keyboard focus
 
 	uint _flags;
-	Pic *_cache;
+	uint _cache;
 	bool _needdraw;
 
 	int _x, _y;
@@ -230,23 +229,17 @@ private:
 	static Panel *_modal;
 	static Panel *_g_mousegrab;
 	static Panel *_g_mousein;
+	static uint s_default_cursor;
 };
 
 /** class Button : public Panel
  *
  * This defines a button.
- *
- * Depends: g_gr
- * 			class Graph::Pic
- * 			class Font_Handler
  */
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
 #define MOUSE_OVER_BRIGHT_FACTOR  15
 
 class Button : public Panel {
-	friend void setup_ui(void);
-	static void setup_ui();
-
 public:
 	Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id = 0);
 	~Button();
@@ -255,8 +248,7 @@ public:
 	UISignal1<int> clickedid;
 
 	void remove_title();
-	void set_pic(Pic *pic);
-	void set_pic(AutoPic *pic);
+	void set_pic(uint picid);
 	void set_title(const char* title);
 	void set_enabled(bool on);
 
@@ -267,19 +259,15 @@ public:
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
-	static AutoPic bg0, bg1, bg2; // background pictures
-	static Pic bg0e, bg1e, bg2e;
-
-	Pic *_mybg, *_mybge; // one of the static bgX
-	Pic *_mypic; // the text etc.. on the button
-
 	int _id;
-   bool _must_delete_mypic;
 	bool _highlighted; // mouse is over the button
 	bool _pressed;
 	bool _enabled;
 	
 	std::string		m_title;		// title string used when _mypic == 0
+
+	uint	m_pic_background; // background texture (picture ID)
+	uint	m_pic_custom; // custom icon on the button
 };
 
 /** class Statebox [virtual]
@@ -314,8 +302,8 @@ public:
 private:
 	virtual void clicked() = 0;
 
-	static AutoPic _gr;
-
+	uint	m_pic_graphics;
+	
 	bool _highlighted;
 	bool _enabled; // true if the checkbox can be clicked
 	bool _state; // true if the box is checked
@@ -366,10 +354,6 @@ private:
  *
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
- *
- * Depends: g_gr
- * 			class Graph::Pic
- * 			class Font_Handler
  */
 class Textarea : public Panel {
 public:
@@ -394,10 +378,6 @@ private:
  *
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
- *
- * Depends: g_gr
- * 			class Graph::Pic
- * 			class Font_Handler
  */
 class Multiline_Textarea : public Panel {
 public:
@@ -426,10 +406,6 @@ private:
 /** class Listselect
  *
  * This class defines a list-select box.
- *
- * Depends: class Graph::Pic
- * 			g_fh
- * 			class Button
  */
 class Listselect : public Panel {
 	static RGBColor dflt_bgcolor, dflt_framecolor, dflt_selcolor;
@@ -493,8 +469,6 @@ public:
 	UISignal1<int> down; // right for vertical scrollbars
 
 private:
-   static AutoPic pic_up;
-   static AutoPic pic_down;
 	void btn_up() { up.call(1); }
 	void btn_down() { down.call(1); }
 };
@@ -503,7 +477,7 @@ private:
  *
  * Windows are cached by default.
  *
- * The graphics (see static Pics) are used in the following manner: (Example)
+ * The graphics (see m_pic_*) are used in the following manner: (Example)
  *
  *  <--20leftmostpixel_of_top--><60Pixels as often as possible to reach window with from top><20rightmost pixel of top>
  *  ^
@@ -514,11 +488,6 @@ private:
  *
  * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
  * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
- *
- * DEPENDS: Graph::Pic
- * 			Graph::draw_pic
- * 			Initalized g_gr object
- * 			User_Interface
  */
 
 // widht/height the graphs above must have
@@ -535,7 +504,6 @@ public:
 	~Window();
 
 	void set_title(const char *text);
-	void set_new_bg(Pic* p);
 
 	void move_to_mouse();
 
@@ -546,16 +514,15 @@ public:
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
 
 private:
-	Pic *_custom_bg; // custom background, set through set_new_bg()
 	bool _dragging;
 
 	std::string		m_title;
 	
-	static AutoPic l_border;
-	static AutoPic r_border;
-	static AutoPic top;
-	static AutoPic bot;
-	static AutoPic bg;
+	uint	m_pic_lborder;
+	uint	m_pic_rborder;
+	uint	m_pic_top;
+	uint	m_pic_bottom;
+	uint	m_pic_background;
 };
 
 #endif /* __S__UI_H */

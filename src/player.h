@@ -51,14 +51,14 @@ class Player {
 			playerAI
 		};
 		
-      Player(Game* g, int type, int plnum, const uchar *playercolor);
+      Player(Game* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor);
       ~Player(void);
 
 		inline Game *get_game() const { return m_game; }
       inline int get_type() const { return m_type; }
 		inline int get_player_number() const { return m_plnum; }
-		inline const uchar *get_playercolor_rgb() const { return m_playercolor; }
-		Tribe_Descr *get_tribe();
+		inline const RGBColor* get_playercolor() const { return m_playercolor; }
+		inline Tribe_Descr *get_tribe() const { return m_tribe; }
 		
 		void setup();
 		
@@ -68,6 +68,7 @@ class Player {
 		inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
 		inline bool is_field_seen(Coords c) { return (*seen_fields)[c.y*m_game->get_map()->get_width() + c.x]; }
 		inline bool is_field_seen(int x, int y) { return is_field_seen(Coords(x, y)); }
+		inline std::vector<bool>* get_visibility() { return seen_fields; }
 		
 		void set_area_seen(int x, int y, uint area, bool on);
 		
@@ -84,14 +85,15 @@ class Player {
 			(*seen_fields)[y*m_game->get_map()->get_width() + x]=t; 
       }
       
-		int m_type;
-		int m_plnum;
-		uchar m_playercolor[12];
-      Game* m_game; 
+      Game*				m_game; 
+		int				m_type;
+		int				m_plnum;
+      Tribe_Descr*	m_tribe; // buildings, wares, workers, sciences
+		RGBColor			m_playercolor[4];
+		
       std::vector<bool>* seen_fields; 
       
 		// regent data: name, pics so on
-      Tribe_Descr* tribe; // buildings, wares, workers, sciences
 };
 
 #endif 

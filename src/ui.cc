@@ -20,7 +20,6 @@
 #include "widelands.h"
 #include "ui.h"
 #include "font.h"
-#include "cursor.h"
 
 /*
 ==============================================================================
@@ -33,6 +32,8 @@ Panel
 Panel *Panel::_modal = 0;
 Panel *Panel::_g_mousegrab = 0;
 Panel *Panel::_g_mousein = 0;
+uint Panel::s_default_cursor = 0;
+
 
 /** Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh)
  *
@@ -80,7 +81,7 @@ Panel::~Panel()
 	update(0, 0, get_w(), get_h());
 
 	if (_cache)
-		delete _cache;
+		g_gr->free_surface(_cache);
 
 	// Release pointers to this object
 	if (_g_mousegrab == this)
@@ -129,6 +130,8 @@ int Panel::run()
 	while(forefather->_parent)
 		forefather = forefather->_parent;
 
+	s_default_cursor = g_gr->get_picture(PicMod_UI, "pics/cursor.bmp", RGBColor(0,0,255));
+	
 	// Loop
 	_running = true;
 	start();
@@ -149,8 +152,12 @@ int Panel::run()
 			think();
 
 		if (g_gr->need_update()) {
-			forefather->do_draw(g_gr->get_render_target());
-			g_cur.draw(Sys_GetMouseX(), Sys_GetMouseY());
+			RenderTarget* rt = g_gr->get_render_target();
+			
+			forefather->do_draw(rt);
+			
+			rt->blit(Sys_GetMouseX(), Sys_GetMouseY(), s_default_cursor);
+			
 			g_gr->refresh();
 		}
 
@@ -211,8 +218,10 @@ void Panel::set_size(const uint nw, const uint nh)
 	if (nw > upw) upw = nw;
 	if (nh > uph) uph = nh;
 
-	if (_cache)
-		_cache->set_size(_w, _h);
+	if (_cache) {
+		g_gr->free_surface(_cache);
+		_cache = g_gr->create_surface(_w, _h);
+	}
 
 	update(0, 0, upw, uph);
 }
@@ -395,6 +404,7 @@ void Panel::update_inner(int x, int y, int w, int h)
  */
 void Panel::set_cache(bool enable)
 {
+/* Deactivated for now
 	if (enable)
 	{
 		if (_cache)
@@ -410,6 +420,7 @@ void Panel::set_cache(bool enable)
 			_cache = 0;
 		}
 	}
+*/
 }
 
 /** Panel::think()
@@ -673,27 +684,26 @@ void Panel::do_draw(RenderTarget* dst)
 	
 	if (!_cache)
 	{
-		RenderTarget* outer = dst->enter_window(_x, _y, _w, _h);
+		Rect outerrc;
+		Point outerofs;
 		
-		if (outer) {
-			draw_border(outer);
+		if (dst->enter_window(Rect(_x, _y, _w, _h), &outerrc, &outerofs)) {
+			draw_border(dst);
 			
-			RenderTarget* inner = outer->enter_window(_lborder, _tborder, 
-			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
+			Rect innerwindow(_lborder, _tborder, _w-(_lborder+_rborder), _h-(_tborder+_bborder));
 			
-			if (inner) {
-				draw(inner);
+			if (dst->enter_window(innerwindow, 0, 0)) {
+				draw(dst);
 
 				// draw back to front
 				for(Panel *child = _lchild; child; child = child->_prev)
-					child->do_draw(inner);
-				
-				inner->leave_window();
+					child->do_draw(dst);
 			}
 			
-			outer->leave_window();
+			dst->set_window(outerrc, outerofs);
 		}
 	}
+	/*
 	else
 	{
 		// redraw only if explicitly requested
@@ -718,6 +728,7 @@ void Panel::do_draw(RenderTarget* dst)
 		// now just blit from the cache
 		dst->blit(_x, _y, _cache);
 	}
+	*/
 }
 
 
@@ -923,9 +934,12 @@ void Panel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 		return;
 
 	Panel *p;
-
-	g_gr->update_rectangle(x-xdiff, y-ydiff, g_cur.get_w(), g_cur.get_h());
-	g_gr->update_rectangle(x, y, g_cur.get_w(), g_cur.get_h());
+	int w, h;
+	
+	g_gr->get_picture_size(s_default_cursor, &w, &h);
+	
+	g_gr->update_rectangle(x-xdiff, y-ydiff, w, h);
+	g_gr->update_rectangle(x, y, w, h);
 
 	p = ui_trackmouse(&x, &y);
 	if (!p)

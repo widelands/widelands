@@ -57,11 +57,16 @@ public:
 	void think(void);
 	
 	// startup phase
+	inline Map *get_map() { return m_map; }
+	void set_map(Map* map);
+	
 	void remove_player(int plnum);
-	void add_player(int plnum, int type, const uchar *playercolor);
+	void add_player(int plnum, int type, const char* tribe, const uchar *playercolor);
 
 	bool can_start();
-		
+	void postload();
+	void load_graphics();
+	
 	// in-game logic
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
    inline int get_gametime(void) { return cmdqueue->get_time(); }
@@ -74,11 +79,6 @@ public:
 	// and other fancy stuff.
 	inline int logic_rand() { return rand(); }
 	
-	inline const char *get_mapname() { return m_mapname; }
-	void set_mapname(const char* mapname);
-
-   inline Map *get_map() { return map; }
-
 	inline Player* get_player(int n) { assert(n>=1 && n<=MAX_PLAYERS); return m_players[n-1]; }
 	bool get_allow_cheats();
 	
@@ -95,29 +95,23 @@ public:
 	Immovable *create_immovable(int x, int y, int idx);
 
 	void conquer_area(uchar playernr, Coords coords, int radius);
+	void recalc_for_field(Coords coords, int radius = 0);
 	
 private:
 	void init_wares();
 
 	int		m_state;
-	char*		m_mapname;
 
-	Interactive_Player*	ipl;
-	Tribe_Descr*			tribe;
-	Map*						map;
- 	Cmd_Queue*				cmdqueue;
-	Player*					m_players[MAX_PLAYERS];
-   Object_Manager*		m_objects;
+	Interactive_Player*			ipl;
+	std::vector<Tribe_Descr*>	m_tribes;
+	Map*								m_map;
+ 	Cmd_Queue*						cmdqueue;
+	Player*							m_players[MAX_PLAYERS];
+   Object_Manager*				m_objects;
 
 	Descr_Maintainer<Ware_Descr>	m_wares;
 	
 	int m_realtime; // the real time (including) pauses in milliseconds
-
-public: // items to reconsider
-
-   // TEMP
-   Tribe_Descr* get_player_tribe(uint n) { return tribe; }
-   // TEMP END
 };
 
 #endif // __S__GAME_H

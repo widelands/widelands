@@ -102,21 +102,19 @@ struct FindBob {
  * bottom-right   0/+1  +1/+1
  *
  * Warning: width and height must be even
- *
- * Depends: class File
- * 			class g_fileloc
  */
 class Map {
+	friend class Game;
+
 public:
 	struct Pathfield;
                
-	Map(void);
-	~Map(void);
+	Map(const char* filename);
+	~Map();
 
-	void clear();
-	void set_only_info(bool yes);
+	void postload(Game* g);
+	void load_graphics();
 	
-	void set_size(uint w, uint h);
 	void set_nrplayers(uint nrplayers);
 
 	void set_starting_pos(uint plnum, Coords c);
@@ -125,16 +123,14 @@ public:
 	void set_author(const char *string);
 	void set_name(const char *string);
 	void set_description(const char *string);
-	void set_world_name(const char *string);
 	
-	int load_map(const char*, Game*);
-	int load_map_header(const char*); 
+	void load_map_header();
 
 	// informational functions
 	inline const char* get_author(void) { return m_author; }
 	inline const char* get_name(void) { return m_name; }
 	inline const char* get_description(void) { return m_description; }
-	inline const char* get_world_name(void) { return m_worldname; }
+	inline const char* get_world_name(void) { return m_world->get_name(); }
 	inline ushort get_nrplayers(void) { return m_nrplayers; }
 	inline uint get_width(void) { return m_width; }
 	inline uint get_height(void) { return m_height; }
@@ -146,13 +142,12 @@ public:
 	bool find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list);
 	bool find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list, const FindImmovable &functor);
 
-	void recalc_for_field(Coords coords);
-
 	// Field logic
-	inline Field *get_field(const Coords c);
-	inline Field *get_field(const int x, const int y);
+	inline Field* get_field(const Coords c);
+	inline Field* get_field(const int x, const int y);
+	inline FCoords get_fcoords(const Coords c);
 	inline void normalize_coords(int *x, int *y);
-	inline Field *get_safe_field(int x, int y);
+	inline Field* get_safe_field(int x, int y);
 	inline void get_coords(Field * const f, Coords *c);
 					
 	int calc_distance(Coords a, Coords b);
@@ -205,16 +200,18 @@ public:
 	bool can_reach_by_water(Coords field);
 					
 private:
+	void set_size(uint w, uint h);
+	void set_world_name(const char *string);
+	
+	char		m_filename[128];
 	uint		m_nrplayers;		// # of players this map supports (!= Game's number of players)
 	uint		m_width;
 	uint		m_height;
 	char		m_author[61];
 	char		m_name[61];
 	char		m_description[1024];
-	char		m_worldname[32];
 	World*	m_world;				// world type
 	Coords*	m_starting_pos;	// players' starting positions
-	bool		m_only_information;	// only the fields above are valid
 	
 	Field*	m_fields;
 
@@ -222,8 +219,8 @@ private:
 	Pathfield*	m_pathfields;
 
 	// funcs
-	void load_s2mf(const char*, Game*);
-	void load_s2mf_header(const char*);
+	void load_s2mf(Game*);
+	void load_s2mf_header();
 	uchar *load_s2mf_section(FileRead *file, int width, int height);
 
 	//int load_wlmf(const char*, Game*);
@@ -328,14 +325,19 @@ Field arithmetics
 ==============================================================================
 */
 
-inline Field *Map::get_field(const Coords c)
+inline Field* Map::get_field(const Coords c)
 {
 	return &m_fields[c.y*m_width + c.x];
 }
 
-inline Field *Map::get_field(const int x, const int y)
+inline Field* Map::get_field(const int x, const int y)
 {
 	return &m_fields[y*m_width + x];
+}
+
+inline FCoords Map::get_fcoords(const Coords c)
+{
+	return FCoords(c, get_field(c));
 }
 
 inline void Map::normalize_coords(int *x, int *y)

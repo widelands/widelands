@@ -20,8 +20,6 @@
 #include "widelands.h"
 #include "graphic.h"
 #include "ui.h"
-#include "cursor.h"
-#include "font.h"
 #include "mainmenue.h"
 #include "menuecommon.h"
 #include "game.h"
@@ -159,7 +157,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 	else
 	{
 		if (m_btnEnablePlayer->get_state())
-			m_game->add_player(m_plnum, m_playertype, g_playercolors[m_plnum-1]);
+			m_game->add_player(m_plnum, m_playertype, "romans", g_playercolors[m_plnum-1]);
 			
 		const char* string = 0;
 		switch(m_playertype) {
@@ -182,7 +180,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 void PlayerDescriptionGroup::enable_player(bool on)
 {
 	if (on) {
-		m_game->add_player(m_plnum, m_playertype, g_playercolors[m_plnum-1]);
+		m_game->add_player(m_plnum, m_playertype, "romans", g_playercolors[m_plnum-1]);
 	} else {
 		m_game->remove_player(m_plnum);
 	}
@@ -268,25 +266,17 @@ void LaunchGameMenu::think()
 
 void LaunchGameMenu::refresh()
 {
-	const char *mapname = m_game->get_mapname();
+	Map* map = m_game->get_map();
 	int maxplayers = 0;
 	
 	// update the mapname
-	if (mapname) {
-		Map m;
-		if (m.load_map_header(mapname) != RET_OK)
-		{
-			m_game->set_mapname(0);
-			m_mapname->set_text("(invalid map)");
-		}
-		else
-		{
-			m_mapname->set_text(m.get_name());
-			maxplayers = m.get_nrplayers();
-		}
-	} else {
-		m_mapname->set_text("(no map)");
+	if (map)
+	{
+		m_mapname->set_text(map->get_name());
+		maxplayers = map->get_nrplayers();
 	}
+	else
+		m_mapname->set_text("(no map)");
 	
 	// update the player description groups
 	int i;

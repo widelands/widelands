@@ -21,7 +21,6 @@
 #include "options.h"
 #include "ui.h"
 #include "graphic.h"
-#include "cursor.h"
 #include "menuecommon.h"
 
 /*
@@ -41,21 +40,17 @@ BaseMenu
 BaseMenu::BaseMenu(const char *bgpic)
 	: Panel(0, 0, 0, MENU_XRES, MENU_YRES)
 {
-	char buf[256];
-	snprintf(buf, sizeof(buf), "pics/%s", bgpic);
-	bg.load(buf);
-}
-
-/** BaseMenu::start()
- *
- * Change the resolution to menu resolution before the event loop starts
- */
-void BaseMenu::start()
-{
+	// Switch graphics mode if necessary
 	Section *s = g_options.pull_section("global");
 
 	Sys_InitGraphics(GFXSYS_SW16, MENU_XRES, MENU_YRES, s->get_bool("fullscreen", false));
+	
+	// Load background graphics
+	char buf[256];
+	snprintf(buf, sizeof(buf), "pics/%s", bgpic);
+	m_pic_background = g_gr->get_picture(PicMod_Menu, buf);
 }
+
 
 /*
 ===============
@@ -66,5 +61,5 @@ Draw the splash screen
 */
 void BaseMenu::draw(RenderTarget* dst)
 {
-	dst->blit(0, 0, &bg);
+	dst->blit(0, 0, m_pic_background);
 }

@@ -82,11 +82,11 @@ protected:
 	virtual void init(Game*);
 	virtual void cleanup(Game*);
 	
-	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy);
+	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
 	Coords		m_position;
-	Animation	*m_anim;
+	uint			m_anim;
 	int			m_animstart;
 	
 	Building		*m_building;	// attached building (replaces road WALK_NW)
@@ -147,7 +147,7 @@ protected:
 	
 	virtual void request_success(Request *req);
 	
-	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy);
+	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
 	int		m_type;		// use Field::Road_XXX

@@ -26,31 +26,12 @@
 #include "font.h"
 #include "ui.h"
 #include "setup.h"
-#include "cursor.h"
 
 #ifndef WIN32
 #include <sys/stat.h>
 #include <sys/types.h>
 #endif
 
-/** void setup_ui(void)
- *
- * Sets up the user interface for the needs in widelands
- *
- * Args: none
- * Returns: Nothing
- */
-void setup_ui(void)
-{
-	// Init cursor
-	Pic *cursor=new Pic;
-	cursor->load("pics/cursor.bmp");
-	cursor->set_clrkey(0,0,255);
-	g_cur.set_pic(cursor);
-
-	// Button class
-	Button::setup_ui();
-}
 
 /** void setup_searchpaths(int argc, char **argv)
  *

@@ -147,7 +147,7 @@ void Warehouse_Window::draw(RenderTarget* dst)
 	
 	for(int id = 0; id < game->get_nrwares(); id++)	{
 		Ware_Descr *wd = game->get_ware_description(id);
-		Pic *pic;
+		uint pic;
 		
 		// Figure out the picture
 		if (wd->is_worker()) {
@@ -156,7 +156,6 @@ void Warehouse_Window::draw(RenderTarget* dst)
 		} else
 			pic = ((Item_Ware_Descr*)wd)->get_menu_pic();
 		
-		assert(pic);
 		dst->blit(x, y, pic);
 		dst->fill_rect(x, y+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, RGBColor(0, 0, 0));
 		

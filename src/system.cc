@@ -700,9 +700,13 @@ Sys_InitGraphics
 Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE) with
 the given resolution.
 Throws an exception on failure.
+
+Note: Because of the way pictures are handled now, this function must not be
+      called while UI elements are active.
 ===============
 */
 Graphic* SW16_CreateGraphics(int w, int h, bool fullscreen);
+void Font_ReloadAll();
 
 void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 {
@@ -728,4 +732,8 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 		}
 
 	Sys_SetMaxMouseCoords(w, h);
+
+	// Fonts need to reload images...
+	if (g_gr)
+		Font_ReloadAll();
 }

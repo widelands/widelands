@@ -20,8 +20,7 @@
 #ifndef __S__FONT_H
 #define __S__FONT_H
 
-#include "graphic.h"
-#include "pic.h"
+class RenderTarget;
 
 
 enum Align {
@@ -55,11 +54,11 @@ enum Align {
  */
 class Font {
 public:
+	static void reload_all();
 	static Font* load(const char* name);
+	
 	void addref();
 	void release();
-
-	Pic* get_string(const char* string);
 
 	int calc_linewidth(const char* string, int wrap, const char** nextline);
 	void draw_string(RenderTarget* dst, int x, int y, const char* string, Align align = Align_Left,
@@ -71,12 +70,19 @@ private:
 	Font(const char* name);
 	~Font();
 	
+	void do_load();
+	
+	struct Char {
+		int	width;
+		uint	pic;
+	};
+	
 	int	m_refs;
 	char*	m_name;
 	int	m_height;			// height of the font
-	Pic	m_pictures[96];
+	Char	m_pictures[96];
 	
-	static std::map<const char*, Font*>		m_fonts;		// map of all fonts
+	static std::map<const char*, Font*>		s_fonts;		// map of all fonts
 };
 
 extern Font* g_font;	// the default font

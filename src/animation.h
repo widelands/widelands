@@ -22,74 +22,78 @@
 
 class Profile;
 class Section;
-class Animation;
-
-struct Animation_Pic {
-   ushort *data;
-   Animation* parent;
-};
 
 struct EncodeData {
-	bool hasclrkey;
-	uchar clrkey_r, clrkey_g, clrkey_b;
-	bool hasshadow;
-	uchar shadow_r, shadow_g, shadow_b;
-	bool hasplrclrs;
-	uchar plrclr_r[4];
-	uchar plrclr_g[4];
-	uchar plrclr_b[4];
+	bool		hasclrkey;
+	RGBColor	clrkey;
+	bool		hasshadow;
+	RGBColor	shadow;
+	bool		hasplrclrs;
+	RGBColor	plrclr[4];
 
 	void clear();
 	void parse(Section *s);
 	void add(const EncodeData *o);
 };
 
-class Animation {
-public:
-	Animation(void);
-	~Animation(void);
-   
-	inline ushort get_w(void) { return w; }
-	inline ushort get_h(void) { return h; }
-	inline ushort get_hsx(void) { return hsx; }
-	inline ushort get_hsy(void) { return hsy; }
-
-	void add_pic(ushort size, ushort* data);
-	void add_pic(Pic* pic, const EncodeData *enc);
-
-	void set_flags(uint mflags) { flags=mflags; }
-	void set_dimensions(ushort mw, ushort mh) { w=mw; h=mh; }
-	void set_hotspot(ushort x, ushort y) { hsx=x; hsy=y; }
-
-	void parse(const char *directory, Section *s, const char *picnametempl = 0, const EncodeData *encdefaults = 0);
-		
-	inline Animation_Pic* get_pic(ushort n) { assert(n<npics); return &pics[n]; }
-	inline ushort get_npics(void) { return npics; }
-
-	inline uint get_duration() { return m_frametime * npics; }
-	inline Animation_Pic* get_time_pic(uint time) { return &pics[(time / m_frametime) % npics]; }
-		
-private:
-	uint flags;
-	uint m_frametime;
-	ushort w, h;
-	ushort hsx, hsy;
-	ushort npics;
-	Animation_Pic *pics;
+struct AnimationData {
+	uint				frametime;
+	Point				hotspot;
+	EncodeData		encdata;
+	std::string		picnametempl;
 };
 
+/*
+class AnimationManager
+
+The animation manager manages a list of all active animations.
+They are flushed after a game is finished and loaded at gfxload time by the
+Game code.
+get() only works properly before gfxload. This means that all animations must
+be loaded before the game starts.
+
+Note that animation IDs are counted from 1, while the m_animations array is
+counted from 0.
+*/
+class AnimationManager {
+public:
+	AnimationManager();
+	~AnimationManager();
+
+	void flush();
+	uint get(const char *directory, Section *s, const char *picnametempl = 0,
+	         const EncodeData *encdefaults = 0);
+
+public: // for use by the graphics subsystem
+	uint get_nranimations() const;
+	const AnimationData* get_animation(uint id) const;
+	
+private:
+	std::vector<AnimationData>	m_animations;
+};
+
+
+/*
+class DirAnimations
+
+Use this class to automatically manage a set of 6 animations, one for each
+possible direction
+*/
 class DirAnimations {
 public:
 	DirAnimations();
 	~DirAnimations();
 	
-	inline Animation *get_animation(int dir) { return &m_animations[dir-1]; }
-	
 	void parse(const char *directory, Profile *prof, const char *sectnametempl, Section *defaults = 0, 
 	           const EncodeData *encdefaults = 0);
 	
+	inline uint get_animation(int dir) { return m_animations[dir-1]; }
+	
 private:
-	Animation	m_animations[6];
+	uint	m_animations[6];
 };
+
+extern AnimationManager g_anim;
+
 
 #endif // included_animation_h

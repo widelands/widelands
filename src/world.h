@@ -28,7 +28,6 @@
 
 class Section;
 class Game;
-class Pic;
 
 struct World_Descr_Header {
    char name[30];
@@ -55,26 +54,21 @@ class Terrain_Descr {
    friend class World;
    
    public:
-      Terrain_Descr(void) { ntex=0; tex=0; curtex=0; m_frametime = FRAME_LENGTH; }
+      Terrain_Descr(const char* directory, Section* s);
       ~Terrain_Descr(void);
 
-      inline Pic* get_texture(void) { return tex[curtex]; }
-      inline uchar get_is(void) { return is; }
+		void load_graphics();
+		
+      inline uint get_texture(void) { return m_texture; }
+      inline uchar get_is(void) { return m_is; }
 
-      void read(const char *directory, Section* s);
-
-      
    private:
-      inline void animate(uint time) {
-			curtex = (time / m_frametime) % ntex;
-      }
+      char		m_name[30];
+		char*		m_picnametempl;
+		uint		m_frametime;
+      uchar		m_is;
 
-      char name[30];
-		uint m_frametime;
-      uchar is;
-      Pic** tex;
-      ushort ntex;
-      ushort curtex;
+		uint		m_texture; // renderer's texture
 };
 
 /** class World
@@ -92,10 +86,12 @@ class World
          ERR_WRONGVERSION
       };
 
-      World(void);
+      World(const char* name);
 		~World();
-      void load_world(const char*);
       
+		void postload(Game*);
+		void load_graphics();
+		
       inline const char* get_name(void) { return hd.name; }
       inline const char* get_author(void) { return hd.author; }
       inline const char* get_descr(void) { return hd.descr; }
@@ -106,20 +102,14 @@ class World
       inline int get_immovable_index(const char* l) { return immovables.get_index(l); }
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
 		
-      inline void animate(int time) {
-         uint i;
-         for(i=0; i<ters.get_nitems(); i++)
-				ters.get(i)->animate(time);
-      }
- 
 		void parse_wares(Descr_Maintainer<Ware_Descr> *wares);
 		
    private:
+      World_Descr_Header hd;
       Descr_Maintainer<Bob_Descr> bobs;
 		Descr_Maintainer<Immovable_Descr> immovables;
       Descr_Maintainer<Resource_Descr> res;
       Descr_Maintainer<Terrain_Descr> ters;
-      World_Descr_Header hd;
 
       // Functions
       void parse_root_conf(const char *directory, const char *name);

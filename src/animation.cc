@@ -20,7 +20,6 @@
 #include "widelands.h"
 #include "profile.h"
 #include "graphic.h"
-#include "pic.h"
 #include "animation.h"
 
 
@@ -68,9 +67,7 @@ void EncodeData::parse(Section *s)
 	b = s->get_int("clrkey_b", -1);
 	if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
 		hasclrkey = true;
-		clrkey_r = r;
-		clrkey_g = g;
-		clrkey_b = b;
+		clrkey.set(r, g, b);
 	}
 	
 	// Read shadow color
@@ -79,9 +76,7 @@ void EncodeData::parse(Section *s)
 	b = s->get_int("shadowclr_b", -1);
 	if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
 		hasshadow = true;
-		shadow_r = r;
-		shadow_g = g;
-		shadow_b = b;
+		shadow.set(r, g, b);
 	}
 
 	// Read player color codes	
@@ -98,9 +93,7 @@ void EncodeData::parse(Section *s)
 		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 			break;
 		
-		plrclr_r[i] = r;
-		plrclr_g[i] = g;
-		plrclr_b[i] = b;
+		plrclr[i].set(r, g, b);
 	}
 	
 	if (i == 4)
@@ -119,25 +112,18 @@ void EncodeData::add(const EncodeData *other)
 {
 	if (other->hasclrkey) {
 		hasclrkey = true;
-		clrkey_r = other->clrkey_r;
-		clrkey_g = other->clrkey_g;
-		clrkey_b = other->clrkey_b;
+		clrkey = other->clrkey;
 	}
 	
 	if (other->hasshadow) {
 		hasshadow = true;
-		shadow_r = other->shadow_r;
-		shadow_g = other->shadow_g;
-		shadow_b = other->shadow_b;
+		shadow = other->shadow;
 	}
 	
 	if (other->hasplrclrs) {
 		hasplrclrs = true;
-		for(int i = 0; i < 4; i++) {
-			plrclr_r[i] = other->plrclr_r[i];
-			plrclr_g[i] = other->plrclr_g[i];
-			plrclr_b[i] = other->plrclr_b[i];
-		}
+		for(int i = 0; i < 4; i++)
+			plrclr[i] = other->plrclr[i];
 	}
 }
 
@@ -145,185 +131,43 @@ void EncodeData::add(const EncodeData *other)
 /*
 ==============================================================================
 
-Animation IMPLEMENTAION
+AnimationManager IMPLEMENTATION
 
 ==============================================================================
 */
-			
-Animation::Animation(void)
+
+AnimationManager g_anim;
+
+
+AnimationManager::AnimationManager()
 {
-	npics = 0;
-	pics = 0;
-	m_frametime = FRAME_LENGTH;
-	w = h = 0;
-	hsx = hsy = 0;
 }
 
-Animation::~Animation(void)
-{ 
-	if(npics) {
-		uint i; 
-		for(i=0; i<npics; i++) {
-			free(pics[i].data);
-		}
-		free(pics);
-	}
-}
-
-/** Animation::add_pic(ushort size, ushort* data)
- *
- * Adds one frame of raw encoded data to the animation
- */
-void Animation::add_pic(ushort size, ushort* data)
+AnimationManager::~AnimationManager()
 {
-	if(!pics) {
-		pics=(Animation_Pic*) malloc(sizeof(Animation_Pic));
-		npics=1;
-	} else {
-		++npics;
-		pics=(Animation_Pic*) realloc(pics, sizeof(Animation_Pic)*npics);
-	}
-	pics[npics-1].data=(ushort*)malloc(size);
-	pics[npics-1].parent=this;
-	memcpy(pics[npics-1].data, data, size);
 }
-
-/** Animation::add_pic(Pic* pic, bool hasclrkey, ushort clrkey, bool hasshadow, ushort shadowclr)
- *
- * Adds one frame to the animation
- */
-void Animation::add_pic(Pic* pic, const EncodeData *encdata)
-{
-	if(pic->get_w() != w && pic->get_h() != h)
-		throw wexception("frame must be %ix%i pixels big", w, h);
-
-	// Pack the EncodeData colorkey&co. to 16 bit
-	ushort clrkey = 0;
-	ushort shadowclr = 0;
-	int hasplrclrs = 0;
-	ushort plrclrs[4];
-	
-	if (encdata->hasclrkey)
-		clrkey = pack_rgb(encdata->clrkey_r, encdata->clrkey_g, encdata->clrkey_b);
-	if (encdata->hasshadow)
-		shadowclr = pack_rgb(encdata->shadow_r, encdata->shadow_g, encdata->shadow_b);
-	if (encdata->hasplrclrs) {
-		hasplrclrs = 4;
-		for(int i = 0; i < 4; i++)
-			plrclrs[i] = pack_rgb(encdata->plrclr_r[i], encdata->plrclr_g[i], encdata->plrclr_b[i]);
-	}
-	
-	// Ready to encode	
-   ushort* data = 0;
-	uint in, out;
-	int runstart = -1; // code field for normal run
-	uint npix = pic->get_w()*pic->get_h();
-	ushort *pixels = pic->get_pixels();
-	
-	try
-	{
-		data = (ushort*) malloc(pic->get_w()*pic->get_h()*sizeof(ushort)*2); 
-		
-		in = 0;
-		out = 0;
-		while(in < npix)
-		{
-			uint count;
-	
-			// Deal with transparency
-			if (encdata->hasclrkey && pixels[in] == clrkey) {
-				if (runstart >= 0) { // finish normal run
-					data[runstart] = out-runstart-1;
-					runstart = -1;
-				}
-					
-				count = 1;
-				in++;
-				while(in < npix && pixels[in] == clrkey) {
-					count++;
-					in++;
-				}
-				
-				data[out++] = (1<<14) | count;
-				continue;
-			}
-			
-			// Deal with shadow
-			if (encdata->hasshadow && pixels[in] == shadowclr) {
-				if (runstart >= 0) { // finish normal run
-					data[runstart] = out-runstart-1;
-					runstart = -1;
-				}
-					
-				count = 1;
-				in++;
-				while(in < npix && pixels[in] == shadowclr) {
-					count++;
-					in++;
-				}
-				
-				data[out++] = (3<<14) | count;
-				continue;
-   		}
-			
-			// Check if it's a player color
-			if (hasplrclrs) {
-				int idx;
-				
-	         for(idx = 0; idx < hasplrclrs; idx++) {
-            	if(pixels[in] == plrclrs[idx])
-						break;
-				}
-				
-				if (idx < hasplrclrs) {
-					if (runstart >= 0) { // finish normal run
-						data[runstart] = out-runstart-1;
-						runstart = -1;
-					}
-					
-					count = 1;
-					in++;
-					while(in < npix && pixels[in] == shadowclr) {
-						count++;
-						in++;
-					}
-					
-					data[out++] = (2<<14) | count;
-					data[out++] = idx;
-					continue;
-            }
-         }
-			
-			// Normal run of pixels
-			if (runstart < 0)
-				runstart = out++;
-			
-			data[out++] = pixels[in++];
-      }
-   
-		if (runstart >= 0) { // finish normal run
-			data[runstart] = out-runstart-1;
-			runstart = -1;
-		}
-		
-		// Store the frame
-		add_pic(out*sizeof(short), data);
-	} catch(...) {
-		if (data)
-			free(data);
-		throw;
-	}
-	
-	free(data);
-}
-
 
 /*
 ===============
-Animation::parse
+AnimationManager::flush
 
-Read an animation which sits in the given directory.
-The animation is described by the given section.
+Remove all animations
+===============
+*/
+void AnimationManager::flush()
+{
+	m_animations.resize(0);
+}
+
+/*
+===============
+AnimationManager::get
+
+Read in basic information about the information.
+The graphics are loaded later by the graphics subsystem.
+
+The animation resides in the given directory and is described by the given
+section.
 
 This function looks for pictures in this order:
 	key 'pics', if present
@@ -331,8 +175,23 @@ This function looks for pictures in this order:
 	<sectionname>_??.bmp
 ===============
 */
-void Animation::parse(const char *directory, Section *s, const char *picnametempl, const EncodeData *encdefaults)
+uint AnimationManager::get(const char *directory, Section *s, const char *picnametempl,
+	                        const EncodeData *encdefaults)
 {
+	uint id;
+	AnimationData* ad;
+
+	m_animations.push_back();
+	id = m_animations.size();
+	
+	ad = &m_animations[id-1];
+	ad->frametime = FRAME_LENGTH;
+	ad->hotspot.x = 0;
+	ad->hotspot.y = 0;
+	ad->encdata.clear();
+	ad->picnametempl = "";
+
+	// Determine picture name template
 	char templbuf[256]; // used when picnametempl == 0
 	char pictempl[256];
 
@@ -347,77 +206,53 @@ void Animation::parse(const char *directory, Section *s, const char *picnametemp
 	
 	snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
 
-	// Get colorkey, shadow color and hotspot
-	EncodeData encdata;
+	ad->picnametempl = pictempl;
 	
-	encdata.clear();
-	
+	// Get descriptive data
 	if (encdefaults)
-		encdata.add(encdefaults);
+		ad->encdata.add(encdefaults);
 	
-	encdata.parse(s);
+	ad->encdata.parse(s);
 
-	// Get animation speed
 	int fps = s->get_int("fps");
 	if (fps > 0)
-		m_frametime = 1000 / fps;
+		ad->frametime = 1000 / fps;
 	
 	// TODO: Frames of varying size / hotspot?
-	hsx = s->get_int("hot_spot_x", 0);
-	hsy = s->get_int("hot_spot_y", 0);
+	ad->hotspot.x = s->get_int("hot_spot_x", 0);
+	ad->hotspot.y = s->get_int("hot_spot_y", 0);
 	
-	// Read frames in one by one
-	for(;;) {
-		char fname[256];
-		int nr = npics;
-		char *p;
-		
-		// create the file name by reverse-scanning for '?' and replacing
-		strcpy(fname, pictempl);
-		p = fname + strlen(fname);
-		while(p > fname) {
-			if (*--p != '?')
-				continue;
-			
-			*p = '0' + (nr % 10);
-			nr = nr / 10;
-		}
-		
-		if (nr) // cycled up to maximum possible frame number
-			break;
-		
-		// is the frame actually there?
-		if (!g_fs->FileExists(fname))
-			break;
-	
-		Pic* pic = new Pic();
-		if (pic->load(fname)) {
-			delete pic;
-			break;
-		}
+	return id;
+}
 
-		if (!npics) {
-			w = pic->get_w();
-			h = pic->get_h();
-		}
-		
-		if(pic->get_w() != w && pic->get_h() != h) {
-			delete pic;
-			throw wexception("%s: frame must be %ix%i pixels big", fname, w, h);
-		}
-		
-		try {
-			add_pic(pic, &encdata);
-		} catch(...) {
-			delete pic;
-			throw;
-		}
-		
-		delete pic;
-	}
+
+/*
+===============
+AnimationManager::get
+
+Return the number of animations.
+===============
+*/
+uint AnimationManager::get_nranimations() const
+{
+	return m_animations.size();
+}
+
+
+/*
+===============
+AnimationManager::get_animation
+
+Return AnimationData for this animation.
+Returns 0 if the animation doesn't exist.
+===============
+*/
+const AnimationData* AnimationManager::get_animation(uint id) const
+{
+	if (!id || id > m_animations.size())
+		return 0;
 	
-	if (!npics)
-		throw wexception("Animation %s has no frames", pictempl);
+	return &m_animations[id-1];
 }
 
 
@@ -486,8 +321,7 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 		}
 		
 		strcat(sectname, "_??.bmp");
-		m_animations[dir-1].parse(directory, s, sectname, encdefaults);
+		m_animations[dir-1] = g_anim.get(directory, s, sectname, encdefaults);
 	}
 }
-
 

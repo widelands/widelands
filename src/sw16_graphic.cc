@@ -17,91 +17,765 @@
  *
  */
 /*
-Implementation of Graphic in 16-bit software mode.
+Management classes and functions of the 16-bit software renderer.
 */
  
 #include "widelands.h"
 #include "options.h"
 #include "graphic.h"
-#include "pic.h"
+#include "animation.h"
+#include "game.h"
+#include "map.h"
+#include "player.h"
 
-#include <SDL.h>
+#include "sw16_graphic.h"
 
 
-/*
-===============================================================================
-
-SW16ScreenSurface -- simple wrapper around Bitmap to represent the screen
-
-===============================================================================
-*/
-
-class SW16ScreenSurface : public Bitmap {
-public:
-	SW16ScreenSurface(SDL_Surface* surface);
-};
-
-/*
-===============
-SW16ScreenSurface::SW16Surface
-
-Set members according to surface info.
-===============
-*/
-SW16ScreenSurface::SW16ScreenSurface(SDL_Surface* surface)
+namespace Renderer_Software16
 {
-	m_pixels = (ushort*)surface->pixels;
-	m_w = surface->w;
-	m_h = surface->h;
-	m_pitch = surface->pitch / sizeof(ushort);
+
+/*
+==============================================================================
+
+RenderTargetImpl -- wrapper around a Bitmap that can be rendered into
+		
+==============================================================================
+*/
+
+/*
+===============
+RenderTargetImpl::RenderTargetImpl
+
+Build a render target for the given bitmap.
+Note that the bitmap will not be owned by the renderer, i.e. it won't be
+deleted by the destructor.
+===============
+*/
+RenderTargetImpl::RenderTargetImpl(Bitmap* bmp)
+{
+	m_bitmap = bmp;
+	
+	reset();
+}
+
+
+/*
+===============
+RenderTargetImpl::~RenderTargetImpl
+===============
+*/
+RenderTargetImpl::~RenderTargetImpl()
+{
+}
+
+/*
+===============
+RenderTargetImpl::reset
+
+Called every time before the render target is handed out by the Graphic 
+implementation to start in a neutral state.
+===============
+*/
+void RenderTargetImpl::reset()
+{
+	m_rect.x = m_rect.y = 0;
+	m_rect.w = m_bitmap->w;
+	m_rect.h = m_bitmap->h;
+	
+	m_offset.x = m_offset.y = 0;
+}
+
+
+/*
+===============
+RenderTargetImpl::get_window [const]
+
+Retrieve the current window setting.
+===============
+*/
+void RenderTargetImpl::get_window(Rect* rc, Point* ofs) const
+{
+	*rc = m_rect;
+	*ofs = m_offset;
+}
+
+
+/*
+===============
+RenderTargetImpl::set_window
+
+Sets an arbitrary drawing window.
+===============
+*/
+void RenderTargetImpl::set_window(const Rect& rc, const Point& ofs)
+{
+	m_rect = rc;
+	m_offset = ofs;
+	
+	// safeguards clipping against the bitmap itself
+	if (m_rect.x < 0) {
+		m_offset.x += m_rect.x;
+		m_rect.w += m_rect.x;
+		m_rect.x = 0;
+	}
+	if (m_rect.x + m_rect.w > m_bitmap->w)
+		m_rect.w = m_bitmap->w - m_rect.x;
+	if (m_rect.w < 0)
+		m_rect.w = 0;
+	
+	if (m_rect.y < 0) {
+		m_offset.y += m_rect.y;
+		m_rect.h += m_rect.y;
+		m_rect.y = 0;
+	}
+	if (m_rect.y + m_rect.h > m_bitmap->h)
+		m_rect.h = m_bitmap->h - m_rect.y;
+	if (m_rect.h < 0)
+		m_rect.h = 0;
+}
+
+
+/*
+===============
+RenderTargetImpl::enter_window
+
+Builds a subwindow. rc is relative to the current drawing window. The subwindow
+will be clipped appropriately.
+The previous window state is returned in previous and prevofs.
+
+Returns false if the subwindow is invisible. In that case, the window state is 
+not changed at all. Otherwise, the function returns true.
+===============
+*/
+bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevofs)
+{
+	Point newofs(0,0);
+	Rect newrect;
+	
+	newrect.x = rc.x + m_offset.x;
+	newrect.y = rc.y + m_offset.y;
+	newrect.w = rc.w;
+	newrect.h = rc.h;
+	
+	// Clipping
+	if (newrect.x < 0) {
+		newofs.x = newrect.x;
+		newrect.w += newrect.x;
+		newrect.x = 0;
+	}
+	if (newrect.x + newrect.w > m_rect.w)
+		newrect.w = m_rect.w - newrect.x;
+	if (newrect.w <= 0)
+		return false;
+	
+	if (newrect.y < 0) {
+		newofs.y = newrect.y;
+		newrect.h += newrect.y;
+		newrect.y = 0;
+	}
+	if (newrect.y + newrect.h > m_rect.h)
+		newrect.h = m_rect.h - newrect.y;
+	if (newrect.h <= 0)
+		return false;
+	
+	newrect.x += m_rect.x;
+	newrect.y += m_rect.y;
+	
+	// Apply the changes
+	if (previous)
+		*previous = m_rect;
+	if (prevofs)
+		*prevofs = m_offset;
+	
+	m_rect = newrect;
+	m_offset = newofs;
+	
+	return true;
+}
+
+
+/*
+===============
+RenderTargetImpl::get_w [const]
+RenderTargetImpl::get_h [const]
+
+Returns the true size of the render target (ignoring the window settings).
+===============
+*/
+int RenderTargetImpl::get_w() const
+{
+	return m_bitmap->w;
+}
+
+int RenderTargetImpl::get_h() const
+{
+	return m_bitmap->h;
+}
+
+
+/*
+===============
+RenderTargetImpl::draw_rect
+RenderTargetImpl::fill_rect
+RenderTargetImpl::brighten_rect
+RenderTargetImpl::clear
+
+Clip against window and pass those primitives along to the bitmap.
+===============
+*/
+void RenderTargetImpl::draw_rect(int x, int y, int w, int h, RGBColor clr)
+{
+	x += m_offset.x;
+	y += m_offset.y;
+	
+	if (x < 0) {
+		w += x;
+		x = 0;
+	}
+	if (x + w > m_rect.w)
+		w = m_rect.w - x;
+	if (w <= 0)
+		return;
+	
+	if (y < 0) {
+		h += y;
+		y = 0;
+	}
+	if (y + h > m_rect.h)
+		h = m_rect.h - y;
+	if (h <= 0)
+		return;
+	
+	m_bitmap->draw_rect(Rect(x + m_rect.x, y + m_rect.y, w, h), clr);
+}
+
+void RenderTargetImpl::fill_rect(int x, int y, int w, int h, RGBColor clr)
+{
+	x += m_offset.x;
+	y += m_offset.y;
+	
+	if (x < 0) {
+		w += x;
+		x = 0;
+	}
+	if (x + w > m_rect.w)
+		w = m_rect.w - x;
+	if (w <= 0)
+		return;
+	
+	if (y < 0) {
+		h += y;
+		y = 0;
+	}
+	if (y + h > m_rect.h)
+		h = m_rect.h - y;
+	if (h <= 0)
+		return;
+	
+	m_bitmap->fill_rect(Rect(x + m_rect.x, y + m_rect.y, w, h), clr);
+}
+
+void RenderTargetImpl::brighten_rect(int x, int y, int w, int h, int factor)
+{
+	x += m_offset.x;
+	y += m_offset.y;
+	
+	if (x < 0) {
+		w += x;
+		x = 0;
+	}
+	if (x + w > m_rect.w)
+		w = m_rect.w - x;
+	if (w <= 0)
+		return;
+	
+	if (y < 0) {
+		h += y;
+		y = 0;
+	}
+	if (y + h > m_rect.h)
+		h = m_rect.h - y;
+	if (h <= 0)
+		return;
+	
+	m_bitmap->brighten_rect(Rect(x + m_rect.x, y + m_rect.y, w, h), factor);
+}
+
+void RenderTargetImpl::clear(void)
+{
+	if (!m_rect.x && !m_rect.y && m_rect.w == m_bitmap->w && m_rect.h == m_bitmap->h)
+		m_bitmap->clear();
+	else
+		m_bitmap->fill_rect(Rect(m_rect.x, m_rect.y, m_rect.w, m_rect.h), RGBColor(0,0,0));
+}
+
+
+/*
+===============
+RenderTargetImpl::doblit
+
+Clip against window and source bitmap, then call the Bitmap blit routine.
+===============
+*/
+void RenderTargetImpl::doblit(Point dst, Bitmap* src, Rect srcrc)
+{
+	dst.x += m_offset.x;
+	dst.y += m_offset.y;
+	
+	// Clipping
+	if (dst.x < 0) {
+		srcrc.x -= dst.x;
+		srcrc.w += dst.x;
+		dst.x = 0;
+	}
+	if (srcrc.x < 0) {
+		dst.x -= srcrc.x;
+		srcrc.w += srcrc.x;
+		srcrc.x = 0;
+	}
+	if (dst.x + srcrc.w > m_rect.w)
+		srcrc.w = m_rect.w - dst.x;
+	if (srcrc.w <= 0)
+		return;
+	
+	if (dst.y < 0) {
+		srcrc.y -= dst.y;
+		srcrc.h += dst.y;
+		dst.y = 0;
+	}
+	if (srcrc.y < 0) {
+		dst.y -= srcrc.y;
+		srcrc.h += srcrc.y;
+		srcrc.y = 0;
+	}
+	if (dst.y + srcrc.h > m_rect.h)
+		srcrc.h = m_rect.h - dst.y;
+	if (srcrc.h <= 0)
+		return;
+	
+	// Draw it
+	m_bitmap->blit(Point(dst.x + m_rect.x, dst.y + m_rect.y), src, srcrc);
+}
+
+
+/*
+===============
+RenderTargetImpl::blit
+RenderTargetImpl::blitrect
+
+Blits a blitsource into this bitmap
+===============
+*/
+void RenderTargetImpl::blit(int dstx, int dsty, uint picture)
+{
+	GraphicImpl* gfx = get_graphicimpl();
+	Bitmap* src = gfx->get_picture_bitmap(picture);
+	
+	if (src)
+		doblit(Point(dstx, dsty), src, Rect(0, 0, src->w, src->h));
+}
+
+void RenderTargetImpl::blitrect(int dstx, int dsty, uint picture,
+	                             int srcx, int srcy, int w, int h)
+{
+	GraphicImpl* gfx = get_graphicimpl();
+	Bitmap* src = gfx->get_picture_bitmap(picture);
+	
+	if (src)
+		doblit(Point(dstx, dsty), src, Rect(srcx, srcy, w, h));
+}
+
+
+/*
+===============
+draw_overlays
+
+Draw build help (buildings and roads) and the field sel
+===============
+*/
+static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
+                 FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr)
+{
+	int mapwidth = mri->map->get_width();
+	uchar overlay_basic = mri->overlay_basic[fc.y*mapwidth + fc.x];
+	int icon;
+	uint picid;
+	int w, h;
+
+	// Render frontier
+	if (overlay_basic > Overlay_Frontier_Base && overlay_basic <= Overlay_Frontier_Max)
+	{
+		Player *ownerplayer = mri->game->get_player(overlay_basic - Overlay_Frontier_Base);
+		uint anim = ownerplayer->get_tribe()->get_frontier_anim();
+		const RGBColor* playercolors = ownerplayer->get_playercolor();
+		uchar ovln;
+
+		dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
+		
+		// check to the right
+		ovln = mri->overlay_basic[fcr.y*mapwidth + fcr.x];
+		if (ovln == overlay_basic)
+			dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
+	
+		// check to the bottom left
+		ovln = mri->overlay_basic[fcbl.y*mapwidth + fcbl.x];
+		if (ovln == overlay_basic)
+			dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
+	
+		// check to the bottom right
+		ovln = mri->overlay_basic[fcbr.y*mapwidth + fcbr.x];
+		if (ovln == overlay_basic)
+			dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
+	}
+
+	// Draw normal buildhelp
+	if (mri->show_buildhelp && overlay_basic >= Overlay_Build_Min &&
+	    overlay_basic <= Overlay_Build_Max) {
+		int x, y;
+		
+		icon = overlay_basic - Overlay_Build_Min;
+		picid = get_graphicimpl()->get_gameicons()->pics_build[icon];
+		
+		g_gr->get_picture_size(picid, &w, &h);
+			
+		x = pos.x - (w>>1);
+		if (overlay_basic == Overlay_Build_Flag)
+			y = pos.y - h;
+		else
+			y = pos.y - (h>>1);
+				
+		dst->blit(x, y, picid);
+	}
+
+	// Draw road build help
+	uchar roads = mri->overlay_roads[fc.y*mapwidth + fc.x];
+	
+	icon = (roads >> Road_Build_Shift) & 3;
+	
+	if (icon) {
+		picid = get_graphicimpl()->get_gameicons()->pics_roadb[icon-1];
+		g_gr->get_picture_size(picid, &w, &h);
+		
+		dst->blit(pos.x - (w/2), pos.y - (h/2), picid);
+	}
+			
+	// Draw the fsel last
+	if (mri->fieldsel == fc) {
+		picid = get_graphicimpl()->get_gameicons()->pic_fieldsel;
+		g_gr->get_picture_size(picid, &w, &h);
+
+		dst->blit(pos.x - (w/2), pos.y - (h/2), picid);
+	}
+}
+
+
+/*
+===============
+RenderTargetImpl::rendermap
+
+Render the map into the current drawing window.
+viewofs is the offset of the upper left corner of the window into the map, 
+in pixels.
+===============
+*/
+void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
+{
+	Bitmap dst;
+	
+	viewofs.x -= m_offset.x;
+	viewofs.y -= m_offset.y;
+	
+	dst.pixels = &m_bitmap->pixels[m_rect.y * m_bitmap->pitch + m_rect.x];
+	dst.pitch = m_bitmap->pitch;
+	dst.w = m_rect.w;
+	dst.h = m_rect.h;
+	dst.hasclrkey = false; // should be irrelevant
+	
+	get_graphicimpl()->allocate_gameicons();
+	
+	// Completely clear the window
+	dst.clear();
+
+	// Actually draw the map. Loop through fields row by row
+	// For each field, draw ground textures, then roads, then immovables 
+	// (and borders), then bobs, then overlay stuff (build icons etc...)
+	//Player *player = m_player->get_player();
+	Map* map = mri->map;
+	int mapwidth = map->get_width();
+	int minfx, minfy;
+	int maxfx, maxfy;
+
+	minfx = (viewofs.x + (FIELD_WIDTH>>1)) / FIELD_WIDTH - 1; // hack to prevent negative numbers
+	minfy = viewofs.y / (FIELD_HEIGHT>>1);
+	maxfx = (viewofs.x + (FIELD_WIDTH>>1) + dst.w) / FIELD_WIDTH;
+	maxfy = (viewofs.y + dst.h) / (FIELD_HEIGHT>>1);
+	maxfy += 10; // necessary because of heights
+
+	//log("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
+	int dx = maxfx - minfx + 1;
+	int dy = maxfy - minfy + 1;
+	int linear_fy = minfy;
+
+	while(dy--) {
+		int linear_fx = minfx;
+		int fx, fy;
+		int bl_x, bl_y;
+		int tl_x, tl_y;
+		Field *f, *f_bl, *f_tl;
+		int posx, posy;
+		int blposx, bposy;
+		int tlposx, tposy;
+
+		// Use linear (non-wrapped) coordinates to calculate on-screen pos
+		map->get_basepix(linear_fx, linear_fy, &posx, &posy);
+		posx -= viewofs.x;
+		posy -= viewofs.y;
+
+		// Get linear bottom-left coordinate
+		bl_y = linear_fy+1;
+		bl_x = linear_fx - (bl_y&1);
+
+		map->get_basepix(bl_x, bl_y, &blposx, &bposy);
+		blposx -= viewofs.x;
+		bposy -= viewofs.y;
+
+		// Get linear top-left coordinates 
+		tl_y = linear_fy-1;
+		tl_x = linear_fx - (tl_y&1);
+
+		map->get_basepix(tl_x, tl_y, &tlposx, &tposy);
+		tlposx -= viewofs.x;
+		tposy -= viewofs.y;
+
+		// Calculate safe (bounded) field coordinates and get field pointers
+		fx = linear_fx;
+		fy = linear_fy;
+		map->normalize_coords(&fx, &fy);
+		map->normalize_coords(&bl_x, &bl_y);
+		map->normalize_coords(&tl_x, &tl_y);
+		f = map->get_field(fx, fy);
+		f_bl = map->get_field(bl_x, bl_y);
+		f_tl = map->get_field(tl_x, tl_y);
+
+		int count = dx;
+		while(count--) {
+			Field *f_br, *f_r, *f_l, *f_tr;
+			int rposx, brposx, lposx, trposx;
+			int r_x, r_y, br_x, br_y, l_x, l_y, tr_x, tr_y; 
+			bool render_r=true;
+			bool render_b=true;
+
+			map->get_rn(fx, fy, f, &r_x, &r_y, &f_r);
+			rposx = posx + FIELD_WIDTH;
+
+			map->get_ln(fx, fy, f, &l_x, &l_y, &f_l);
+			lposx = posx - FIELD_WIDTH;
+
+			map->get_rn(bl_x, bl_y, f_bl, &br_x, &br_y, &f_br);
+			brposx = blposx + FIELD_WIDTH;
+
+			map->get_rn(tl_x, tl_y, f_tl, &tr_x, &tr_y, &f_tr);
+			trposx = tlposx + FIELD_WIDTH;
+
+			if (mri->visibility) {
+				if (!(*mri->visibility)[fy*mapwidth + fx] ||
+					 !(*mri->visibility)[br_y*mapwidth + br_x]) {
+					render_r=false;
+					render_b=false;
+				} else {
+					if(!(*mri->visibility)[bl_y*mapwidth + bl_x])
+						render_b=false;
+					if(!(*mri->visibility)[r_y*mapwidth + r_x])
+						render_r=false;
+				}
+			}
+
+			// Render stuff that belongs to ground triangles
+			if (render_b || render_r) {
+				uchar roads = f->get_roads();
+
+				roads |= mri->overlay_roads[fy*mapwidth + fx];
+
+				dst.draw_field(f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
+			}
+			
+			// Render stuff that belongs to the field node
+			if (!mri->visibility || (*mri->visibility)[fy*mapwidth + fx])
+			{
+				Point wh_pos(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()));
+				
+				// Render bobs
+				// TODO - rendering order?
+				// This must be defined somewho. some bobs have a higher priority than others
+				//  ^-- maybe this priority is a moving vs. non-moving bobs thing?
+				// draw_ground implies that this doesn't render map objects.
+				// are there any overdraw issues with the current rendering order?
+
+				// Draw Map_Objects hooked to this field
+				BaseImmovable *imm = f->get_immovable();
+
+				if (imm)
+					imm->draw(mri->game, this, FCoords(fx, fy, f), wh_pos);
+
+				Bob *bob = f->get_first_bob();
+				while(bob) {
+					bob->draw(mri->game, this, wh_pos);
+					bob = bob->get_next_bob();
+				}
+
+				// Draw buildhelp, road buildhelp and fieldsel
+				draw_overlays(this, mri, FCoords(fx, fy, f), wh_pos,
+				     FCoords(r_x, r_y, f_r), Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(f_r->get_height())),
+					  FCoords(bl_x, bl_y, f_bl), Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(f_bl->get_height())),
+					  FCoords(br_x, br_y, f_br), Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(f_br->get_height())));
+			}
+
+			// Advance to next field in row
+			f_bl = f_br;
+			blposx = brposx;
+			bl_x = br_x;
+			bl_y = br_y;
+
+			f = f_r;
+			posx = rposx;
+			fx = r_x;
+			fy = r_y;
+
+			f_tl = f_tr;
+			tlposx = trposx;
+			tl_x = tr_x;
+			tl_y = tr_y;
+		}
+
+		linear_fy++;
+	}
+}
+
+
+/*
+===============
+RenderTargetImpl::renderminimap
+
+Renders a minimap into the topleft of the clipping window
+===============
+*/
+void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri)
+{
+	Rect rc;
+
+	pt.x += m_offset.x;
+	pt.y += m_offset.y;
+	
+	rc.x = 0;
+	rc.y = 0;
+	rc.w = mri->map->get_width();
+	rc.h = mri->map->get_height();
+	
+	if (pt.x < 0) {
+		rc.x -= pt.x;
+		rc.w += pt.x;
+		pt.x = 0;
+	}
+	if (pt.x + rc.w > m_rect.w)
+		rc.w = m_rect.w - pt.x;
+	if (rc.w <= 0)
+		return;
+	
+	if (pt.y < 0) {
+		rc.y -= pt.y;
+		rc.w += pt.y;
+		pt.y = 0;
+	}
+	if (pt.y + rc.h > m_rect.h)
+		rc.h = m_rect.h - pt.y;
+	if (rc.h <= 0)
+		return;
+	
+	m_bitmap->draw_minimap(Point(pt.x + m_rect.x, pt.y + m_rect.y), mri, rc);
+}
+
+
+/*
+===============
+RenderTargetImpl::drawanim
+
+Draws a frame of an animation at the given location
+===============
+*/
+void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs)
+{
+	const AnimationData* data = g_anim.get_animation(animation);
+	const AnimationGfx* gfx = get_graphicimpl()->get_animation(animation);
+	const AnimFrame* frame;
+	Rect rc;
+	
+	if (!data || !gfx) {
+		log("WARNING: Animation %i doesn't exist\n", animation);
+		return;
+	}
+	
+	// Get the frame and its data
+	frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes());
+	dstx += m_offset.x;
+	dsty += m_offset.y;
+	
+	dstx -= frame->hotspot.x;
+	dsty -= frame->hotspot.y;
+	
+	rc.x = 0;
+	rc.y = 0;
+	rc.w = frame->width;
+	rc.h = frame->height;
+	
+	
+	// Clipping
+	if (dstx < 0) {
+		rc.x -= dstx;
+		rc.w += dstx;
+		dstx = 0;
+	}
+	if (dstx + rc.w > m_rect.w)
+		rc.w = m_rect.w - dstx;
+	if (rc.w <= 0)
+		return;
+	
+	if (dsty < 0) {
+		rc.y -= dsty;
+		rc.h += dsty;
+		dsty = 0;
+	}
+	if (dsty + rc.h > m_rect.h)
+		rc.h = m_rect.h - dsty;
+	if (rc.h <= 0)
+		return;
+
+
+	// Draw it
+	m_bitmap->draw_animframe(Point(dstx + m_rect.x, dsty + m_rect.y), frame, rc, plrclrs);
 }
 
 
 /*
 ===============================================================================
 
-SW16Graphic -- 16 bit software implementation of main graphics interface
+GraphicImpl -- 16 bit software implementation of main graphics interface
 
 ===============================================================================
 */
 
-#define MAX_RECTS 20
-
-class SW16Graphic : public Graphic {
-public:
-	SW16Graphic(int w, int h, bool fullscreen);
-	virtual ~SW16Graphic();
-
-	virtual int get_xres();
-	virtual int get_yres();
-	virtual RenderTarget* get_render_target();
-	virtual void update_fullscreen();
-	virtual void update_rectangle(int x, int y, int w, int h);
-	virtual bool need_update();
-	virtual void refresh();
-
-	virtual void screenshot(const char* fname);
-
-private:
-	SDL_Surface*			m_sdlsurface;
-	SW16ScreenSurface*	m_surface;
-   SDL_Rect					m_update_rects[MAX_RECTS];
-	int						m_nr_update_rects;
-	bool						m_update_fullscreen;
-};
-
-
 /*
 ===============
-SW16Graphic::SW16Graphic
+GraphicImpl::GraphicImpl
 
 Initialize the SDL video mode.
 ===============
 */
-SW16Graphic::SW16Graphic(int w, int h, bool fullscreen)
+GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 {
 	m_nr_update_rects = 0;
 	m_update_fullscreen = false;
+	
+	m_gameicons = 0;
 	
 	// Set video mode using SDL
 	int flags = SDL_SWSURFACE;
@@ -113,72 +787,81 @@ SW16Graphic::SW16Graphic(int w, int h, bool fullscreen)
 	if (!m_sdlsurface)
 		throw wexception("Couldn't set video mode: %s", SDL_GetError());
 	
-	m_surface = new SW16ScreenSurface(m_sdlsurface);
+	m_screen.pixels = (ushort*)m_sdlsurface->pixels;
+	m_screen.w = m_sdlsurface->w;
+	m_screen.h = m_sdlsurface->h;
+	m_screen.pitch = m_sdlsurface->pitch / sizeof(ushort);
+	
+	m_rendertarget = new RenderTargetImpl(&m_screen);
 }
 
 /*
 ===============
-SW16Graphic::~SW16Graphic
+GraphicImpl::~GraphicImpl
 
 Free the surface
 ===============
 */
-SW16Graphic::~SW16Graphic()
+GraphicImpl::~GraphicImpl()
 {
-	delete m_surface;
+	flush(0);
+
+	delete m_rendertarget;
 	SDL_FreeSurface(m_sdlsurface);
 }
 
 /*
 ===============
-SW16Graphic::get_xres
-SW16Graphic::get_yres
+GraphicImpl::get_xres
+GraphicImpl::get_yres
 
 Return the screen resolution
 ===============
 */
-int SW16Graphic::get_xres()
+int GraphicImpl::get_xres()
 {
 	return m_sdlsurface->w;
 }
 
-int SW16Graphic::get_yres()
+int GraphicImpl::get_yres()
 {
 	return m_sdlsurface->h;
 }
 
 /*
 ===============
-SW16Graphic::get_render_target
+GraphicImpl::get_render_target
 
 Return a pointer to the RenderTarget representing the screen
 ===============
 */
-RenderTarget* SW16Graphic::get_render_target()
+RenderTarget* GraphicImpl::get_render_target()
 {
-	return m_surface;
+	m_rendertarget->reset();
+	
+	return m_rendertarget;
 }
 
 /*
 ===============
-SW16Graphic::update_fullscreen
+GraphicImpl::update_fullscreen
 
 Mark the entire screen for refreshing
 ===============
 */
-void SW16Graphic::update_fullscreen()
+void GraphicImpl::update_fullscreen()
 {
 	m_update_fullscreen = true;
 }
 
 /*
 ===============
-SW16Graphic::update_rectangle
+GraphicImpl::update_rectangle
 
 Mark a rectangle for refreshing
 ===============
 */
-void SW16Graphic::update_rectangle(int x, int y, int w, int h)
+void GraphicImpl::update_rectangle(int x, int y, int w, int h)
 {
 	if (m_nr_update_rects >= MAX_RECTS)
 		{
@@ -195,24 +878,24 @@ void SW16Graphic::update_rectangle(int x, int y, int w, int h)
 
 /*
 ===============
-SW16Graphic::need_update
+GraphicImpl::need_update
 
 Returns true if parts of the screen have been marked for refreshing.
 ===============
 */
-bool SW16Graphic::need_update()
+bool GraphicImpl::need_update()
 {
 	return m_nr_update_rects || m_update_fullscreen;
 }
 
 /*
 ===============
-SW16Graphic::refresh
+GraphicImpl::refresh
 
 Bring the screen uptodate.
 ===============
 */
-void SW16Graphic::refresh()
+void GraphicImpl::refresh()
 {
 //	if (m_update_fullscreen)
 		SDL_UpdateRect(m_sdlsurface, 0, 0, 0, 0);
@@ -225,18 +908,440 @@ void SW16Graphic::refresh()
 	m_nr_update_rects = 0;
 }
 
+
 /*
 ===============
-SW16Graphic::screenshot
+GraphicImpl::flush
+
+Remove all resources (currently pictures) from the given modules.
+If mod is 0, all pictures are flushed.
+===============
+*/
+void GraphicImpl::flush(int mod)
+{
+	uint i;
+
+	// Flush pictures
+	for(i = 0; i < m_pictures.size(); i++) {
+		Picture* pic = &m_pictures[i];
+		
+		if (!pic->mod)
+			continue;
+		
+		if (pic->mod < 0) {
+			if (!mod)
+				log("LEAK: SW16: flush(0): non-picture %i left.\n", i+1);
+			continue;
+		}
+		
+		pic->mod &= ~mod; // unmask the mods that should be flushed
+		
+		// Once the picture is no longer in any mods, free it
+		if (!pic->mod) {
+			m_picturemap.erase(pic->u.fname);
+			
+			if (pic->u.fname)
+				free(pic->u.fname);
+			free(pic->bitmap.pixels);
+		}
+	}
+	
+	// Flush game items
+	if (!mod || mod & PicMod_Game) {
+		for(i = 0; i < m_maptextures.size(); i++)
+			delete m_maptextures[i];
+		m_maptextures.resize(0);
+		
+		for(i = 0; i < m_animations.size(); i++)
+			delete m_animations[i];
+		m_animations.resize(0);
+		
+		if (m_gameicons) {
+			delete m_gameicons;
+			m_gameicons = 0;
+		}
+	}
+}
+
+
+/*
+===============
+GraphicImpl::get_picture
+
+Retrieves the picture ID of the picture with the given filename.
+If the picture has already been loaded, the old ID is reused.
+The picture is placed into the module(s) given by mod.
+
+Returns 0 (a null-picture) if the picture cannot be loaded.
+===============
+*/
+uint GraphicImpl::get_picture(int mod, const char* fname)
+{
+	uint id;
+	
+	// Check if the picture's already loaded
+	picmap_t::iterator it = m_picturemap.find(fname);
+	
+	if (it != m_picturemap.end())
+	{
+		id = it->second;
+	}
+	else
+	{
+		SDL_Surface* bmp = SDL_LoadBMP(fname); // TODO: incorrect, it bypasses the file code
+
+		if (!bmp) {
+			log("WARNING: Couldn't open %s: %s\n", fname, SDL_GetError());
+			return 0;
+		}
+
+		SDL_Surface* cv = SDL_ConvertSurface(bmp, m_sdlsurface->format, 0);
+		
+		// Fill in a free slot in the pictures array
+		Picture* pic;
+		
+		id = find_free_picture();
+		pic = &m_pictures[id];
+		
+		pic->mod = 0; // will be filled in by caller
+		pic->u.fname = strdup(fname);
+		pic->bitmap.pixels = (ushort*)malloc(cv->w*cv->h*2);
+		pic->bitmap.w = cv->w;
+		pic->bitmap.h = cv->h;
+		pic->bitmap.pitch = cv->w;
+		pic->bitmap.hasclrkey = false;
+
+		for(int y = 0; y < cv->h; y++)
+			memcpy(pic->bitmap.pixels + y*cv->w, (Uint8*)cv->pixels + y*cv->pitch, cv->w*2);
+
+		SDL_FreeSurface(cv);
+		SDL_FreeSurface(bmp);
+		
+		m_picturemap[pic->u.fname] = id;
+	}
+	
+	m_pictures[id].mod |= mod;
+	return id;
+}
+
+uint GraphicImpl::get_picture(int mod, const char* fname, RGBColor clrkey)
+{
+	uint id = get_picture(mod, fname);
+	
+	if (id) {
+		m_pictures[id].bitmap.hasclrkey = true;
+		m_pictures[id].bitmap.clrkey = clrkey.pack16();
+	}
+	
+	return id;
+}
+
+// TODO: get rid of this function (needs change of font format)
+uint GraphicImpl::get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey)
+{
+	uint id = find_free_picture();
+	Picture* pic = &m_pictures[id];
+	
+	pic->mod = mod;
+	pic->u.fname = 0;
+	pic->bitmap.pixels = (ushort*)malloc(w*h*2);
+	pic->bitmap.w = w;
+	pic->bitmap.h = h;
+	pic->bitmap.pitch = w;
+	pic->bitmap.hasclrkey = true;
+	pic->bitmap.clrkey = clrkey.pack16();
+	
+	memcpy(pic->bitmap.pixels, data, w*h*2);
+	
+	return id;
+}
+
+
+/*
+===============
+GraphicImpl::get_picture_size
+
+Stores the picture size in pw and ph.
+Throws an exception if the picture doesn't exist.
+===============
+*/
+void GraphicImpl::get_picture_size(uint pic, int* pw, int* ph)
+{
+	if (pic >= m_pictures.size() || !m_pictures[pic].mod)
+		throw wexception("get_picture_size(%i): picture doesn't exist", pic);
+	
+	Bitmap* bmp = &m_pictures[pic].bitmap;
+	
+	*pw = bmp->w;
+	*ph = bmp->h;
+}
+
+
+/*
+===============
+GraphicImpl::create_surface
+
+Create an offscreen surface that can be used both as target and as source for
+rendering operations. The surface is put into a normal slot in the picture 
+array so the surface can be used in normal blit() operations.
+A RenderTarget for the surface can be obtained using get_surface_renderer().
+Note that surfaces do not belong to a module and must be freed explicitly.
+===============
+*/
+uint GraphicImpl::create_surface(int w, int h)
+{
+	uint id = find_free_picture();
+	Picture* pic = &m_pictures[id];
+	
+	pic->mod = -1; // mark as surface
+	pic->bitmap.pixels = (ushort*)malloc(w*h*sizeof(ushort));
+	pic->bitmap.w = w;
+	pic->bitmap.h = h;
+	pic->bitmap.pitch = w;
+	pic->bitmap.hasclrkey = false;
+	pic->u.rendertarget = new RenderTargetImpl(&pic->bitmap);
+	
+	return id;
+}
+
+uint GraphicImpl::create_surface(int w, int h, RGBColor clrkey)
+{
+	uint id = create_surface(w, h);
+	Picture* pic = &m_pictures[id];
+	
+	pic->bitmap.hasclrkey = true;
+	pic->bitmap.clrkey = clrkey.pack16();
+	
+	return id;
+}
+
+
+/*
+===============
+GraphicImpl::free_surface
+
+Free the given surface.
+Unlike normal pictures, surfaces are not freed by flush().
+===============
+*/
+void GraphicImpl::free_surface(uint picid)
+{
+	assert(picid < m_pictures.size() && m_pictures[picid].mod == -1);
+	
+	Picture* pic = &m_pictures[picid];
+	
+	delete pic->u.rendertarget;
+	free(pic->bitmap.pixels);
+	pic->mod = 0;
+}
+
+
+/*
+===============
+GraphicImpl::get_surface_renderer
+
+Returns the RenderTarget for the given surface
+===============
+*/
+RenderTarget* GraphicImpl::get_surface_renderer(uint pic)
+{
+	assert(pic < m_pictures.size() && m_pictures[pic].mod == -1);
+	
+	RenderTargetImpl* rt = m_pictures[pic].u.rendertarget;
+	
+	rt->reset();
+	
+	return rt;
+}
+
+
+/*
+===============
+GraphicImpl::get_picture_bitmap
+
+Returns the bitmap that belongs to the given picture ID.
+May return 0 if the given picture does not exist.
+===============
+*/
+Bitmap* GraphicImpl::get_picture_bitmap(uint id)
+{
+	if (id >= m_pictures.size())
+		return 0;
+	
+	if (!m_pictures[id].mod)
+		return 0;
+	
+	return &m_pictures[id].bitmap;
+}
+
+
+/*
+===============
+GraphicImpl::get_maptexture
+
+Creates a terrain texture.
+fnametempl is a filename with possible wildcard characters '?'. The function
+fills the wildcards with decimal numbers to get the different frames of a
+texture animation. For example, if fnametempl is "foo_??.bmp", it tries
+"foo_00.bmp", "foo_01.bmp" etc...
+frametime is in milliseconds.
+
+Returns 0 if the texture couldn't be loaded.
+
+Note: Terrain textures are not reused, even if fnametempl matches.
+      These textures are freed when PicMod_Game is flushed.
+===============
+*/
+uint GraphicImpl::get_maptexture(const char* fnametempl, uint frametime)
+{
+	try {
+		Texture* tex = new Texture(fnametempl, frametime);
+		
+		m_maptextures.push_back(tex);
+		
+		return m_maptextures.size(); // ID 1 is at m_maptextures[0]
+	} catch(std::exception& e) {
+		log("Failed to load maptexture %s: %s\n", fnametempl, e.what());
+		return 0;
+	}
+}
+
+
+/*
+===============
+GraphicImpl::animate_maptextures
+
+Advance frames for animated textures
+===============
+*/
+void GraphicImpl::animate_maptextures(uint time)
+{
+	for(uint i = 0; i < m_maptextures.size(); i++)
+		m_maptextures[i]->animate(time);
+}
+
+
+/*
+===============
+GraphicImpl::get_maptexture_data
+
+Return the actual texture data associated with the given ID.
+===============
+*/
+Texture* GraphicImpl::get_maptexture_data(uint id)
+{
+	id--; // ID 1 is at m_maptextures[0]
+	
+	if (id < m_maptextures.size())
+		return m_maptextures[id];
+	else
+		return 0;
+}
+
+
+/*
+===============
+GraphicImpl::load_animations
+
+Load all animations that are registered with the AnimationManager
+===============
+*/
+void GraphicImpl::load_animations()
+{
+	assert(!m_animations.size());
+	
+	for(uint id = 1; id <= g_anim.get_nranimations(); id++)
+		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));
+}
+
+
+/*
+===============
+GraphicImpl::get_animation
+
+Retrieve the animation graphics
+===============
+*/
+AnimationGfx* GraphicImpl::get_animation(uint anim)
+{
+	if (!anim || anim > m_animations.size())
+		return 0;
+	
+	return m_animations[anim-1];
+}
+
+
+/*
+===============
+GraphicImpl::screenshot
 
 Save a screenshot in the given file.
 ===============
 */
-void SW16Graphic::screenshot(const char* fname)
+void GraphicImpl::screenshot(const char* fname)
 {
 	// TODO: this is incorrect; it bypasses the files code
    SDL_SaveBMP(m_sdlsurface, fname);
 }
+
+
+/*
+===============
+GraphicImpl::allocate_gameicons
+
+Allocate the pictures used by rendermap()
+===============
+*/
+void GraphicImpl::allocate_gameicons()
+{
+	static const char* roadb_names[3] = {
+		"pics/roadb_green.bmp",
+		"pics/roadb_yellow.bmp",
+		"pics/roadb_red.bmp"
+	};
+	static const char* build_names[5] = {
+		"pics/set_flag.bmp",
+		"pics/small.bmp",
+		"pics/medium.bmp",
+		"pics/big.bmp",
+		"pics/mine.bmp"
+	};
+
+	if (m_gameicons)
+		return;
+	
+	m_gameicons = new GameIcons;
+	
+	for(int i = 0; i < 3; i++)
+		m_gameicons->pics_roadb[i] = g_gr->get_picture(PicMod_Game, roadb_names[i], RGBColor(0,0,255));
+	for(int i = 0; i < 5; i++)
+		m_gameicons->pics_build[i] = g_gr->get_picture(PicMod_Game, build_names[i], RGBColor(0,0,255));
+	m_gameicons->pic_fieldsel = g_gr->get_picture(PicMod_Game, "pics/fsel.bmp", RGBColor(0,0,255));
+}
+
+
+/*
+===============
+GraphicImpl::find_free_picture
+
+Find a free picture slot and return it.
+===============
+*/
+uint GraphicImpl::find_free_picture()
+{
+	uint id;
+	
+	for(id = 1; id < m_pictures.size(); id++)
+		if (!m_pictures[id].mod)
+			return id;
+	
+	m_pictures.resize(id+1);
+	
+	return id;
+}
+
+
+}; // namespace Renderer_Software16
 
 
 /*
@@ -248,5 +1353,5 @@ Factory function called by System code
 */
 Graphic* SW16_CreateGraphics(int w, int h, bool fullscreen)
 {
-	return new SW16Graphic(w, h, fullscreen);
+	return new Renderer_Software16::GraphicImpl(w, h, fullscreen);
 }

@@ -54,40 +54,19 @@ public:
 
 	// Drawing
 	void draw(RenderTarget* dst);
-	void draw_ground(RenderTarget* dst, int effvpx, int effvpy, bool use_see_area);
 	
 	// Event handling
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	void track_fsel(int mx, int my);
-   inline void toggle_buildhelp(void) { show_buildhelp=!show_buildhelp; }
    
 private:
-   static AutoPic pic_fsel;
-   static AutoPic small_building;
-   static AutoPic medium_building;
-   static AutoPic big_building;
-   static AutoPic mine_building;
-   static AutoPic setable_flag;
-	static AutoPic pic_roadb_green;
-	static AutoPic pic_roadb_yellow;
-	static AutoPic pic_roadb_red;
-
    Interactive_Player *m_player;
 	Game* m_game;
 	Map* m_map;
 	int vpx, vpy;
 	bool dragging;
-   bool show_buildhelp;
-	  
-   void draw_field(RenderTarget* dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-                 const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, 
-					  uchar roads, bool render_r, bool render_b);
-	void draw_overlay(RenderTarget* dst, FCoords coords, int posx, int posy);
-	void draw_overlay_road(RenderTarget* dst, FCoords coords, int posx, int posy);
-	
-	uchar get_overlay_roads(FCoords coords);
 };
 
 

@@ -53,7 +53,7 @@ public:
 	virtual int get_size() = 0;
 	virtual bool get_passable() = 0;
 	
-	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy) = 0;
+	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, Point pos) = 0;
 	
 protected:
 	void set_position(Game *g, Coords c);
@@ -70,16 +70,16 @@ public:
 	Immovable_Descr(const char *name);
 
 	inline const char* get_name(void) { return m_name; }
-	inline Animation* get_anim(void) { return &m_anim; }
+	inline uint get_anim(void) { return m_anim; }
 	inline int get_size(void) { return m_size; }
 		
 	void parse(const char *directory, Profile *s);
 	Immovable *create(Game *g, Coords coords);
 	
 protected:
-	char			m_name[30];
-	Animation	m_anim; // the default animation
-	int			m_size;
+	char		m_name[30];
+	uint		m_anim; // the default animation
+	int		m_size;
 };
 
 class Immovable : public BaseImmovable {
@@ -98,13 +98,13 @@ public:
 	void init(Game *g);
 	void cleanup(Game *g);
 
-	void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy);
+	void draw(Game* game, RenderTarget* dst, FCoords coords, Point pos);
 
 protected:
-	Coords				m_position;
+	Coords		m_position;
 	
-	Animation			*m_anim;
-	int					m_animstart;
+	uint			m_anim;
+	int			m_animstart;
 };
 
 

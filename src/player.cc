@@ -29,30 +29,22 @@
 // class Player
 //
 //
-Player::Player(Game* g, int type, int plnum, const uchar *playercolor)
+Player::Player(Game* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor)
 {
    m_type = type; 
 	m_plnum = plnum;
-	memcpy(m_playercolor, playercolor, sizeof(m_playercolor));
-   m_game = g;
+	m_tribe = tribe;
+	m_game = g;
    seen_fields = 0;
+	
+	for(int i = 0; i < 4; i++)
+		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
 }
 
-Player::~Player(void) {
+Player::~Player(void)
+{
    if(seen_fields) 
       delete seen_fields;
-}
-
-/*
-===============
-Player::get_tribe
-
-Return the tribe this player uses
-===============
-*/
-Tribe_Descr *Player::get_tribe()
-{
-	return m_game->get_player_tribe(m_plnum);
 }
 
 /*
@@ -88,11 +80,23 @@ Return filtered buildcaps that take the player's territory into account.
 */
 int Player::get_buildcaps(Coords coords)
 {
-	Field *f = m_game->get_map()->get_field(coords);
-	int buildcaps = f->get_caps();
+	FCoords fc = m_game->get_map()->get_fcoords(coords);
+	int buildcaps = fc.field->get_caps();
 	
-	if (f->get_owned_by() != get_player_number())
-		buildcaps = 0;
+	if (fc.field->get_owned_by() != get_player_number())
+		return 0;
+	
+	// If any neighbour belongs to somebody else, we can't build here
+	FCoords neighb[6];
+	
+	for(int dir = 1; dir <= 6; dir++) {
+		m_game->get_map()->get_neighbour(fc, dir, &neighb[dir-1]);
+		
+		if (neighb[dir-1].field->get_owned_by() != get_player_number())
+			return 0;
+	}
+	
+	// TODO: check if a building's flag can't be build due to ownership
 	
 	return buildcaps;
 }

@@ -26,7 +26,7 @@
 
 /** class Window
  *
- * The graphics (see static Pics) are used in the following manner: (Example)
+ * The graphics (see pictures) are used in the following manner: (Example)
  *
  *  <--20leftmostpixel_of_top--><60Pixels as often as possible to reach window with from top><20rightmost pixel of top>
  *  ^
@@ -38,12 +38,6 @@
  * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
  * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
  */
-
-AutoPic Window::l_border("win_l_border.bmp", CORNER, MUST_HAVE_NPIX);
-AutoPic Window::r_border("win_r_border.bmp", CORNER, MUST_HAVE_NPIX);
-AutoPic Window::top("win_top.bmp", MUST_HAVE_NPIX, CORNER);
-AutoPic Window::bot("win_bot.bmp", MUST_HAVE_NPIX, CORNER);
-AutoPic Window::bg("win_bg.bmp");
 
 
 /** Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
@@ -60,7 +54,6 @@ AutoPic Window::bg("win_bg.bmp");
 Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
 	: Panel(parent, x, y, w+WINDOW_BORDER*2, h+WINDOW_BORDER*2)
 {
-	_custom_bg = 0;
 	_dragging = false;
 
 	if (title)
@@ -69,6 +62,12 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
 	set_border(WINDOW_BORDER, WINDOW_BORDER, WINDOW_BORDER, WINDOW_BORDER);
 	set_cache(true);
 	set_top_on_click(true);
+
+	m_pic_lborder = g_gr->get_picture(PicMod_UI, "pics/win_l_border.bmp");
+	m_pic_rborder = g_gr->get_picture(PicMod_UI, "pics/win_r_border.bmp");
+	m_pic_top = g_gr->get_picture(PicMod_UI, "pics/win_top.bmp");
+	m_pic_bottom = g_gr->get_picture(PicMod_UI, "pics/win_bot.bmp");
+	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/win_bg.bmp");
 }
 
 /** Window::~Window()
@@ -77,8 +76,6 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
  */
 Window::~Window()
 {
-	if (_custom_bg)
-		delete _custom_bg;
 }
 
 
@@ -93,22 +90,6 @@ void Window::set_title(const char *text)
 {
 	m_title = text;
 	update(0, 0, get_w(), WINDOW_BORDER);
-}
-
-/** Window::set_new_bg(Pic* p)
- *
- * Set a custom background picture.
- * Window will ensure that the picture is freed.
- *
- * Args: p	custom background picture
- */
-void Window::set_new_bg(Pic* p)
-{
-	if (_custom_bg)
-		delete _custom_bg;
-	_custom_bg = p;
-
-	update(0, 0, get_w(), get_h());
 }
 
 /** Window::move_to_mouse()
@@ -148,52 +129,54 @@ Redraw the window frame and background
 */
 void Window::draw_border(RenderTarget* dst)
 {
-	Pic *usebg = _custom_bg ? _custom_bg : &bg;
+	int bgw, bgh;
 	int px, py;
 
+	g_gr->get_picture_size(m_pic_background, &bgw, &bgh);
+	
 	// fill background
-	for(py = CORNER; py < get_h()-CORNER; py += usebg->get_h()) {
-		for(px = CORNER; px < get_w()-CORNER; px += usebg->get_w())
-			dst->blit(px, py, usebg);
+	for(py = CORNER; py < get_h()-CORNER; py += bgh) {
+		for(px = CORNER; px < get_w()-CORNER; px += bgw)
+			dst->blit(px, py, m_pic_background);
 	}
 
 	// top left corner
-	dst->blitrect(0, 0, &top, 0, 0, CORNER, CORNER);
+	dst->blitrect(0, 0, m_pic_top, 0, 0, CORNER, CORNER);
 	// bottom left corner
-	dst->blitrect(0, get_h()-CORNER, &bot, 0, 0, CORNER, CORNER);
+	dst->blitrect(0, get_h()-CORNER, m_pic_bottom, 0, 0, CORNER, CORNER);
 
 	// top & bottom bar
 	for(px = CORNER; px < get_w()-CORNER-MIDDLE; px += MIDDLE) {
-		dst->blitrect(px, 0, &top, CORNER, 0, MIDDLE, CORNER);
-		dst->blitrect(px, get_h()-CORNER, &bot, CORNER, 0, MIDDLE, CORNER);
+		dst->blitrect(px, 0, m_pic_top, CORNER, 0, MIDDLE, CORNER);
+		dst->blitrect(px, get_h()-CORNER, m_pic_bottom, CORNER, 0, MIDDLE, CORNER);
 	}
 	// odd pixels of top & bottom bar
-	dst->blitrect(px, 0, &top, CORNER, 0, get_w()-px-CORNER, CORNER);
-	dst->blitrect(px, get_h()-CORNER, &bot, CORNER, 0, get_w()-px-CORNER, CORNER);
+	dst->blitrect(px, 0, m_pic_top, CORNER, 0, get_w()-px-CORNER, CORNER);
+	dst->blitrect(px, get_h()-CORNER, m_pic_bottom, CORNER, 0, get_w()-px-CORNER, CORNER);
 
 	// top right corner
-	dst->blitrect(get_w()-CORNER, 0, &top, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+	dst->blitrect(get_w()-CORNER, 0, m_pic_top, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 	// bottom right corner
-	dst->blitrect(get_w()-CORNER, get_h()-CORNER, &bot, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+	dst->blitrect(get_w()-CORNER, get_h()-CORNER, m_pic_bottom, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 
 	// left top thingy
-	dst->blitrect(0, CORNER, &l_border, 0, 0, CORNER, CORNER);
+	dst->blitrect(0, CORNER, m_pic_lborder, 0, 0, CORNER, CORNER);
 	// right top thingy
-	dst->blitrect(get_w()-CORNER, CORNER, &r_border, 0, 0, CORNER, CORNER);
+	dst->blitrect(get_w()-CORNER, CORNER, m_pic_rborder, 0, 0, CORNER, CORNER);
 
 	// left & right bars
 	for(py = 2*CORNER; py < get_h()-2*CORNER-MIDDLE; py += MIDDLE) {
-		dst->blitrect(0, py, &l_border, 0, CORNER, CORNER, MIDDLE);
-		dst->blitrect(get_w()-CORNER, py, &r_border, 0, CORNER, CORNER, MIDDLE);
+		dst->blitrect(0, py, m_pic_lborder, 0, CORNER, CORNER, MIDDLE);
+		dst->blitrect(get_w()-CORNER, py, m_pic_rborder, 0, CORNER, CORNER, MIDDLE);
 	}
 	// odd pixels of left & right bars
-	dst->blitrect(0, py, &l_border, 0, CORNER, CORNER, get_h()-py-2*CORNER);
-	dst->blitrect(get_w()-CORNER, py, &r_border, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+	dst->blitrect(0, py, m_pic_lborder, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+	dst->blitrect(get_w()-CORNER, py, m_pic_rborder, 0, CORNER, CORNER, get_h()-py-2*CORNER);
 
 	// left bottom thingy
-	dst->blitrect(0, get_h()-2*CORNER, &l_border, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
+	dst->blitrect(0, get_h()-2*CORNER, m_pic_lborder, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
 	// right bottom thingy
-	dst->blitrect(get_w()-CORNER, get_h()-2*CORNER, &r_border, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
+	dst->blitrect(get_w()-CORNER, get_h()-2*CORNER, m_pic_rborder, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
 
 	// draw the title if we have one
 	if (m_title.length()) {

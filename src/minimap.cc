@@ -20,7 +20,6 @@
 #include "widelands.h"
 #include "minimap.h"
 #include "map.h"
-#include "auto_pic.h"
 #include "player.h"
 #include "IntPlayer.h"
 
@@ -51,14 +50,13 @@ public:
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
-	static AutoPic map_spot;
-	
 	Interactive_Player	*m_player;
 	Map						*m_map;
 	int						m_viewx, m_viewy;
+	
+	uint			m_pic_map_spot;
 };
 
-AutoPic MiniMapView::map_spot("map_spot.bmp", 0, 0, 255);
 
 /*
 ===============
@@ -76,6 +74,8 @@ MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Player *plr)
 	m_viewx = m_viewy = 0;
 
 	set_size(m_map->get_width(), m_map->get_height());
+	
+	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.bmp", RGBColor(0,0,255));
 }
 
 /** MiniMapView::set_view_pos(int x, int y)
@@ -101,48 +101,18 @@ Redraw the view of the map
 */
 void MiniMapView::draw(RenderTarget* dst)
 {
-	Bitmap* bmp = static_cast<Bitmap*>(dst); // HACKHACKHACK
-
-	bool use_see_area = !m_player->get_ignore_shadow();
-	Player *player = m_player->get_player();
-	int sx, sy;
-	int ex, ey;
 	int x, y;
+	int w, h;
 
-	sx = 0;
-	sy = 0;
-
-	ex = dst->get_w();
-	if (ex > (int)m_map->get_width())
-		ex = m_map->get_width();
-	ey = dst->get_h();
-	if (ey > (int)m_map->get_height())
-		ey = m_map->get_height();
-			
-	ushort clr;
-	Field* f;
-	for(y = sy; y < ey; y++)
-	{
-		ushort *pix = bmp->get_pixels() + y*bmp->get_pitch() + sx;
-
-		f = m_map->get_field(sx, y);
-		for(x = sx; x < ex; x++, f++)
-		{
-         if (!use_see_area || player->is_field_seen(x, y)) {
-				clr = *f->get_terd()->get_texture()->get_pixels();
-				clr = bright_up_clr(clr, f->get_brightness());
-         
-            *pix++ = clr;
-         } else {
-            *pix++ =  pack_rgb(0, 0, 0); // make black
-         }
-		}
-	}
-
+	dst->renderminimap(Point(0,0), m_player->get_maprenderinfo());
+	
 	// draw the view pos marker
-	x = m_viewx - (map_spot.get_w()>>1);
-	y = m_viewy - (map_spot.get_h()>>1);
-	dst->blit(x, y, &map_spot);
+	g_gr->get_picture_size(m_pic_map_spot, &w, &h);
+	
+	x = m_viewx - (w>>1);
+	y = m_viewy - (h>>1);
+	dst->blit(x, y, m_pic_map_spot);
+
 }
 
 /** MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)

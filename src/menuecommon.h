@@ -26,11 +26,11 @@
 #define MENU_YRES	480
 
 class BaseMenu : public Panel {
-	Pic bg;
+	uint	m_pic_background;
+	
 public:
 	BaseMenu(const char *bgpic);
 
-	virtual void start();
 	virtual void draw(RenderTarget* dst);
 };
 

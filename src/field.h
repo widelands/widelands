@@ -69,6 +69,9 @@ enum Roads {
 	Road_East = 0,	// shift values
 	Road_SouthEast = 2,
 	Road_SouthWest = 4,
+	
+	// bits 6-7: road building symbols in overlay while roads are built
+	Road_Build_Shift = 6,
 };
 
 class Terrain_Descr;

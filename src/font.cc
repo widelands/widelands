@@ -18,7 +18,9 @@
  */
 
 #include "widelands.h"
+#include "graphic.h"
 #include "font.h"
+
 
 // Font file definitions - deprecated
 // TODO: Replace font files with more standard formats (ttf, bmp?)
@@ -44,58 +46,23 @@ Font IMPLEMENTATION
 ===============================================================================
 */
 
-std::map<const char*, Font*> Font::m_fonts;
+std::map<const char*, Font*> Font::s_fonts;
 
 /*
 ===============
 Font::Font [private]
 
-Load and initialize a font
+Initialize a font and load it.
 ===============
 */
 Font::Font(const char* name)
 {
 	m_refs = 0;
-	
-	// Read the font
-	char buf[200];
-	FileRead f;
-	
-	snprintf(buf, sizeof(buf), "fonts/%s.wff", name);
-	f.Open(g_fs, buf);
-	
-	f.Data(6); // skip magic
-	
-	ushort version = f.Unsigned16();
-
-	if(WLFF_VERSIONMAJOR(version) > WLFF_VERSIONMAJOR(WLFF_VERSION))
-		throw wexception("%s: bad font version", buf);
-	if(WLFF_VERSIONMAJOR(version) == WLFF_VERSIONMAJOR(WLFF_VERSION))
-		if(WLFF_VERSIONMINOR(version) > WLFF_VERSIONMINOR(WLFF_VERSION))
-			throw wexception("%s: bad minor font version", buf);
-
-	f.Data(20); // skip name
-	
-	ushort clrkey = f.Unsigned16();
-	m_height = f.Unsigned16();
-
-	// Read in the characters
-	for(int i = 0; i < 96; i++)
-		{
-		uchar c = f.Unsigned8();
-		if (c != (i+32))
-			throw wexception("%s: bad character order", buf);
-		
-		int w = f.Unsigned16();
-
-		ushort *data = (ushort*)f.Data(sizeof(ushort)*w*m_height);
-		m_pictures[i].create(w, m_height, data);
-		m_pictures[i].set_clrkey(clrkey);
-		}
-
-	// Add to list
 	m_name = strdup(name);
-	m_fonts[m_name] = this;
+	s_fonts[m_name] = this;
+	
+	if (g_gr) // otherwise, reload_all() does it
+		do_load();
 }
 
 
@@ -113,12 +80,7 @@ Font::~Font()
 	
 	if (m_name)
 		{
-		std::map<const char*, Font*>::iterator it;
-		 
-		it = m_fonts.find(m_name);
-		if (it != m_fonts.end())
-			m_fonts.erase(it);
-
+		s_fonts.erase(m_name);
 		free(m_name);
 		}
 }
@@ -137,8 +99,8 @@ Font* Font::load(const char* name)
 	std::map<const char*, Font*>::iterator it;
 	Font* font;
 	
-	it = m_fonts.find(name);
-	if (it != m_fonts.end())
+	it = s_fonts.find(name);
+	if (it != s_fonts.end())
 		font = it->second;
 	else
 		try
@@ -152,6 +114,56 @@ Font* Font::load(const char* name)
 	
 	font->addref();
 	return font;
+}
+
+
+/*
+===============
+Font::do_load [private]
+
+Actually load the font from disk.
+===============
+*/
+void Font::do_load()
+{
+	// Read the font
+	char buf[200];
+	FileRead f;
+	
+	snprintf(buf, sizeof(buf), "fonts/%s.wff", m_name);
+	f.Open(g_fs, buf);
+	
+	f.Data(6); // skip magic
+	
+	ushort version = f.Unsigned16();
+
+	if(WLFF_VERSIONMAJOR(version) > WLFF_VERSIONMAJOR(WLFF_VERSION))
+		throw wexception("%s: bad font version", buf);
+	if(WLFF_VERSIONMAJOR(version) == WLFF_VERSIONMAJOR(WLFF_VERSION))
+		if(WLFF_VERSIONMINOR(version) > WLFF_VERSIONMINOR(WLFF_VERSION))
+			throw wexception("%s: bad minor font version", buf);
+
+	f.Data(20); // skip name
+	
+	RGBColor clrkey;
+	clrkey.unpack16(f.Unsigned16());
+	m_height = f.Unsigned16();
+	
+	
+	// Read in the characters
+	for(int i = 0; i < 96; i++)
+		{
+		uchar c = f.Unsigned8();
+		if (c != (i+32))
+			throw wexception("%s: bad character order", buf);
+		
+		int w = f.Unsigned16();
+
+		ushort *data = (ushort*)f.Data(sizeof(ushort)*w*m_height);
+		
+		m_pictures[i].width = w;
+		m_pictures[i].pic = g_gr->get_picture(PicMod_UI, w, m_height, data, clrkey);
+		}
 }
 
 
@@ -190,34 +202,6 @@ void Font::release()
 
 /*
 ===============
-Font::get_string
-
-This function constructs a Picture containing the given text and
-returns it
-
-TODO: Does it make sense to keep this function? It's not used, but I'll leave
-it around for now.
-===============
-*/
-Pic* Font::get_string(const char* str)
-{
-	int w, h;
-	Pic* pic;
-	
-	get_size(str, &w, &h, -1);
-	
-	pic = new Pic;
-	pic->set_clrkey(m_pictures[0].get_clrkey());
-	pic->set_size(w, h);
-	
-	draw_string(pic, 0, 0, str, Align_Left, -1);
-	
-	return pic;
-}
-
-
-/*
-===============
 Font::calc_linewidth
 
 Calculates the width of the given line (up to \n or NUL).
@@ -241,7 +225,7 @@ int Font::calc_linewidth(const char* line, int wrap, const char** nextline)
 		{
 		if (*string == ' ' || *string == '\t') // whitespace
 			{
-			int cw = m_pictures[0].get_w();
+			int cw = m_pictures[0].width;
 			if (*string == '\t')
 				cw *= 8;
 			
@@ -273,7 +257,7 @@ int Font::calc_linewidth(const char* line, int wrap, const char** nextline)
 					c = 127;
 				
 				c -= 32;
-				wordwidth += m_pictures[c].get_w();
+				wordwidth += m_pictures[c].width;
 				
 				if (*p == '-') // other character break
 					{
@@ -352,7 +336,7 @@ void Font::draw_string(RenderTarget* dst, int dstx, int dsty, const char* string
 			
 			if (c == ' ' || c == '\t') // whitespace
 				{
-				int cw = m_pictures[0].get_w();
+				int cw = m_pictures[0].width;
 				if (c == '\t')
 					cw *= 8;
 
@@ -364,8 +348,8 @@ void Font::draw_string(RenderTarget* dst, int dstx, int dsty, const char* string
 					c = 127;
 
 				c -= 32;
-				dst->blit(x, dsty, &m_pictures[c]);
-				x += m_pictures[c].get_w();
+				dst->blit(x, dsty, m_pictures[c].pic);
+				x += m_pictures[c].width;
 				}
 			
 			string++;
@@ -419,4 +403,26 @@ Returns the height of the font, in pixels.
 int Font::get_fontheight()
 {
 	return m_height;
+}
+
+
+/*
+===============
+Font::reload_all [static]
+
+Call the do_load() function for every Font.
+===============
+*/
+void Font::reload_all()
+{
+	std::map<const char*, Font*>::iterator it;
+	
+	for(it = s_fonts.begin(); it != s_fonts.end(); it++)
+		it->second->do_load();
+}
+
+
+void Font_ReloadAll()
+{
+	Font::reload_all();
 }

@@ -24,7 +24,6 @@
 #include "player.h"
 #include "tribe.h"
 #include "transport.h"
-#include "pic.h"
 
 
 /*
@@ -46,14 +45,29 @@ Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
 {
 	m_tribe = tribe;
 	m_menu_pic = 0;
+	m_menu_pic_fname = 0;
 	m_ware_id = -1;
 }
 
 Worker_Descr::~Worker_Descr(void)
 {
-	if (m_menu_pic)
-		delete m_menu_pic;
+	if (m_menu_pic_fname)
+		free(m_menu_pic_fname);
 }
+
+
+/*
+===============
+Worker_Descr::load_graphics
+
+Load graphics (other than animations).
+===============
+*/
+void Worker_Descr::load_graphics()
+{
+	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname);
+}
+
 
 /*
 ===============
@@ -106,11 +120,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	string = s->get_string("menu_pic", buf);
 	
 	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
-	m_menu_pic = new Pic;
-	m_menu_pic->load(fname);
-	
-	if (m_menu_pic->get_w() != WARE_MENU_PIC_W || m_menu_pic->get_h() != WARE_MENU_PIC_H)
-		throw wexception("%s: menu pic must be %ix%i pixels.", fname, WARE_MENU_PIC_W, WARE_MENU_PIC_H);
+	m_menu_pic_fname = strdup(fname);
 	
 	// Read the walking animations
 	s = prof->get_section("walk");

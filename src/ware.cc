@@ -21,7 +21,6 @@
 #include "tribe.h"
 #include "ware.h"
 #include "worker.h"
-#include "pic.h"
 
 
 /*
@@ -49,6 +48,18 @@ Ware_Descr::~Ware_Descr()
 
 
 /*
+===============
+Ware_Descr::load_graphics [virtual]
+
+Load descriptive icons etc... here
+===============
+*/
+void Ware_Descr::load_graphics()
+{
+}
+
+
+/*
 ==============================================================================
 
 Item_Ware_Descr IMPLEMENTATION
@@ -70,9 +81,19 @@ Item_Ware_Descr::Item_Ware_Descr(const char *name)
 
 Item_Ware_Descr::~Item_Ware_Descr()
 {
-	if (m_menu_pic)
-		delete m_menu_pic;
 }
+
+
+/*
+===============
+Item_Ware_Descr::load_graphics
+===============
+*/
+void Item_Ware_Descr::load_graphics()
+{
+	// TODO: actually load the menu pic
+}
+
 
 /*
 ===============

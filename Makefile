@@ -153,9 +153,9 @@ clean:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
--include $(WIDELANDS_DEP)
+%.h:
 
-%.h: 
+-include $(WIDELANDS_DEP)
 
 DEP_SED:=sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@'
 

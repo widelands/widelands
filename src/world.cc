@@ -19,11 +19,11 @@
 
 #include "widelands.h"
 #include "profile.h"
+#include "graphic.h"
 #include "world.h"
 #include "bob.h"
-#include "graphic.h"
 #include "worlddata.h"
-#include "pic.h"
+
 
 using std::cerr;
 using std::endl;
@@ -39,18 +39,7 @@ void Resource_Descr::parse(Section *s)
 // 
 // class World
 // 
-World::World(void)
-{
-}
-
-World::~World(void) {
-
-}
-
-// 
-// This loads a sane world file
-//
-void World::load_world(const char* name)
+World::World(const char* name)
 {
 	char directory[256];
 
@@ -69,7 +58,45 @@ void World::load_world(const char* name)
 		// tag with world name
 		throw wexception("Error loading world %s: %s", name, e.what());
 	}
-} 
+}
+
+World::~World(void)
+{
+
+}
+
+
+/*
+===============
+World::postload
+
+Load all logic game data now
+===============
+*/
+void World::postload(Game* g)
+{
+	// TODO: move more loads to postload
+}
+
+
+/*
+===============
+World::load_graphics
+
+Load graphics data here
+===============
+*/
+void World::load_graphics()
+{
+	int i;
+
+	// Load terrain graphics
+	for(i = 0; i < ters.get_nitems(); i++)
+		ters.get(i)->load_graphics();
+	
+	// TODO: load more graphics
+}
+
 
 // 
 // down here: Private functions for loading
@@ -151,14 +178,8 @@ void World::parse_terrains(const char *directory)
 
 		while((s = prof.get_next_section(0)))
 		{
-			Terrain_Descr *ter = new Terrain_Descr();
-			try {
-				ter->read(directory, s);
-				ters.add(ter);
-			} catch(...) {
-				delete ter;
-				throw;
-			}
+			Terrain_Descr *ter = new Terrain_Descr(directory, s);
+			ters.add(ter);
 		}
 
 		prof.check_used();
@@ -235,29 +256,25 @@ void World::parse_wares(Descr_Maintainer<Ware_Descr> *wares)
 }
 
 
-// 
-// Down here: subclasses of world
-// 
+/*
+==============================================================================
 
-// 
-// read a terrain description in
-// 
-Terrain_Descr::~Terrain_Descr()
-{ 
-	if(ntex)
-		{
-		uint i;
-		for(i=0; i<ntex; i++) 
-			delete tex[i];
-		free(tex);
-		}
-}
+Terrain_Descr
 
-void Terrain_Descr::read(const char *directory, Section *s)
+==============================================================================
+*/
+
+Terrain_Descr::Terrain_Descr(const char* directory, Section* s)
 {
 	const char *str;
 
-	snprintf(name, sizeof(name), "%s", s->get_name());
+	// Set some defaults
+	m_texture = 0;
+ 	m_frametime = FRAME_LENGTH;
+	m_picnametempl = 0;
+	
+	// Read configuration
+	snprintf(m_name, sizeof(m_name), "%s", s->get_name());
 
 	// TODO: Implement the following fields
 	// def_res = water|fish   (example)
@@ -271,78 +288,62 @@ void Terrain_Descr::read(const char *directory, Section *s)
 	int fps = s->get_int("fps");
 	if (fps > 0)
 		m_frametime = 1000 / fps;
-	
-   // switch is
-   str = s->get_safe_string("is");
 
-   if(!strcasecmp(str, "dry")) {
-      is = TERRAIN_DRY;
-   } else if(!strcasecmp(str, "green")) {
-      is = 0;
-   } else if(!strcasecmp(str, "water")) {
-      is = TERRAIN_WATER|TERRAIN_DRY|TERRAIN_UNPASSABLE;
-   } else if(!strcasecmp(str, "acid")) {
-      is = TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE;
-   } else if(!strcasecmp(str, "mountain")) {
-      is = TERRAIN_DRY|TERRAIN_MOUNTAIN;
-   } else if(!strcasecmp(str, "dead")) {
-      is = TERRAIN_DRY|TERRAIN_UNPASSABLE|TERRAIN_ACID;
-   } else if(!strcasecmp(str, "unpassable")) {
-      is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
-   } else
-		throw wexception("%s: invalid type '%s'", name, str);
+	// switch is
+	str = s->get_safe_string("is");
 
-   // Load texture image(s)
+	if(!strcasecmp(str, "dry")) {
+		m_is = TERRAIN_DRY;
+	} else if(!strcasecmp(str, "green")) {
+		m_is = 0;
+	} else if(!strcasecmp(str, "water")) {
+		m_is = TERRAIN_WATER|TERRAIN_DRY|TERRAIN_UNPASSABLE;
+	} else if(!strcasecmp(str, "acid")) {
+		m_is = TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE;
+	} else if(!strcasecmp(str, "mountain")) {
+		m_is = TERRAIN_DRY|TERRAIN_MOUNTAIN;
+	} else if(!strcasecmp(str, "dead")) {
+		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE|TERRAIN_ACID;
+	} else if(!strcasecmp(str, "unpassable")) {
+		m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
+	} else
+		throw wexception("%s: invalid type '%s'", m_name, str);
+
+	// Determine template of the texture animation pictures
 	char fnametmpl[256];
-	char fname[256];
 	
 	str = s->get_string("texture", 0);
 	if (str)
 		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, str);
 	else
-		snprintf(fnametmpl, sizeof(fnametmpl), "%s/pics/%s_??.bmp", directory, name);
-
-	for(;;) {
-		int nr = ntex;
-		char *p;
-		
-		// create the file name by reverse-scanning for '?' and replacing
-		strcpy(fname, fnametmpl);
-		p = fname + strlen(fname);
-		while(p > fname) {
-			if (*--p != '?')
-				continue;
-			
-			*p = '0' + (nr % 10);
-			nr = nr / 10;
-		}
-		
-		if (nr) // cycled up to maximum possible frame number
-			break;
-		
-		// is the frame actually there?
-		if (!g_fs->FileExists(fname))
-			break;
+		snprintf(fnametmpl, sizeof(fnametmpl), "%s/pics/%s_??.bmp", directory, m_name);
 	
-		Pic* pic = new Pic();
-		if (pic->load(fname)) {
-			delete pic;
-			break;
-		}
+	m_picnametempl = strdup(fnametmpl);
+}
 
-		if(pic->get_w() != TEXTURE_W && pic->get_h() != TEXTURE_H) {
-			delete pic;
-			throw wexception("%s: texture must be %ix%i pixels big", fname, TEXTURE_W, TEXTURE_H);
-		}
-		
-		ntex++;
-		tex = (Pic**)realloc(tex, sizeof(Pic*)*ntex);
-		tex[ntex-1] = pic;
-	}
+Terrain_Descr::~Terrain_Descr()
+{
+	if (m_picnametempl)
+		free(m_picnametempl);
+}
+
+
+/*
+===============
+Terrain_Descr::load_graphics
+
+Trigger load of the actual animation frames.
+===============
+*/
+void Terrain_Descr::load_graphics()
+{
+	if (m_picnametempl)
+		m_texture = g_gr->get_maptexture(m_picnametempl, m_frametime);
 }
 
 /* "attic" -- re-add this in when it's needed
-   // parse resources
+  
+	// parse resources
    str=s->get_string("resources", 0);
    if(str && strcasecmp("", str)) {
       nres=1;

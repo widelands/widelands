@@ -24,10 +24,6 @@
 /** class Listselect
  *
  * This class defines a list-select box.
- *
- * Depends: class Pic
- * 			g_fh
- * 			class Button
  */
 RGBColor Listselect::dflt_bgcolor(67, 32, 10);
 RGBColor Listselect::dflt_framecolor(0, 0, 0);

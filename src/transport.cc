@@ -366,10 +366,10 @@ Flag::draw
 Draw the flag.
 ===============
 */
-void Flag::draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy)
+void Flag::draw(Game* game, RenderTarget* dst, FCoords coords, Point pos)
 {
-	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, posx, posy, 
-			get_owner()->get_playercolor_rgb());
+	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, 
+	              get_owner()->get_playercolor());
 	
 	// TODO: draw wares
 }
@@ -753,7 +753,7 @@ Road::draw
 The road is drawn by the terrain renderer via marked fields.
 ===============
 */
-void Road::draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy)
+void Road::draw(Game* game, RenderTarget* dst, FCoords coords, Point pos)
 {
 }
 

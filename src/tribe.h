@@ -40,10 +40,8 @@ class Tribe_Descr {
          ERR_WRONGVERSION
       };
       
-      Tribe_Descr(void);
+      Tribe_Descr(const char* name);
       ~Tribe_Descr(void);
-
-      void load(const char* name);
 
 		inline const char *get_name() const { return m_name; }
 		
@@ -52,14 +50,17 @@ class Tribe_Descr {
 		inline int get_building_index(const char *name) { return buildings.get_index(name); }
 		inline Building_Descr *get_building_descr(uint idx) { return buildings.get(idx); }
 		
-      inline Animation* get_frontier_anim(void) { return &m_anim_frontier; }
-		inline Animation* get_flag_anim(void) { return &m_anim_flag; }
+      inline uint get_frontier_anim(void) { return m_anim_frontier; }
+		inline uint get_flag_anim(void) { return m_anim_flag; }
 
+		void postload(Game*);
+		void load_graphics();
+		
    private:
       char m_name[30];
       
-      Animation m_anim_frontier;
-		Animation m_anim_flag;
+      uint m_anim_frontier;
+		uint m_anim_flag;
 		
       Descr_Maintainer<Worker_Descr> m_workers;
       Descr_Maintainer<Building_Descr> buildings;

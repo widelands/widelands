@@ -50,10 +50,13 @@ class MapSelectMenu : public BaseMenu {
 
 	filenameset_t	m_mapfiles;
 	
+	Map*			m_map;
+	
 public:
 	MapSelectMenu(Game *g);
+	~MapSelectMenu();
 
-	const char *get_map() { return (const char*)list->get_selection(); }
+	const char *get_mapname() { return (const char*)list->get_selection(); }
 
 	void ok();
 	void map_selected(int id);
@@ -63,6 +66,7 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	: BaseMenu("choosemapmenu.bmp")
 {
 	game = g;
+	m_map = 0;
 
 	// Text
 	new Textarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
@@ -113,29 +117,48 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	tadescr = new Multiline_Textarea(this, 460, 310, 180, 80, 0);
 }
 
+MapSelectMenu::~MapSelectMenu()
+{
+	if (m_map) {
+		delete m_map;
+		m_map = 0;
+	}
+}
+
+
 void MapSelectMenu::ok()
 {
-	game->set_mapname(get_map());
+	game->set_map(m_map);
+	m_map = 0;
+	
 	end_modal(1);
 }
 
 void MapSelectMenu::map_selected(int id)
 {
-	if (get_map())
+	if (m_map) {
+		delete m_map;
+		m_map = 0;
+	}
+	
+	if (get_mapname())
 	{
-		Map m;
-		if (m.load_map_header(get_map()) == RET_OK) {
+		try {
+			m_map = new Map(get_mapname());
+		
 			char buf[256];
-			taname->set_text(m.get_name());
-			taauthor->set_text(m.get_author());
-			sprintf(buf, "%-4ix%4i", m.get_width(), m.get_height());
+			taname->set_text(m_map->get_name());
+			taauthor->set_text(m_map->get_author());
+			sprintf(buf, "%-4ix%4i", m_map->get_width(), m_map->get_height());
 			tasize->set_text(buf);
-			sprintf(buf, "%i", m.get_nrplayers());
+			sprintf(buf, "%i", m_map->get_nrplayers());
 			tanplayers->set_text(buf);
-			tadescr->set_text(m.get_description());
-			taworld->set_text(m.get_world_name());
+			tadescr->set_text(m_map->get_description());
+			taworld->set_text(m_map->get_world_name());
          m_ok->set_enabled(true);
-		} else {
+		} catch(std::exception& e) {
+			log("Failed to load map %s: %s\n", get_mapname(), e.what());
+			
 			taname->set_text("(bad map file)");
 			taauthor->set_text(0);
 			tasize->set_text(0);

@@ -18,17 +18,16 @@
  */
 
 #include "widelands.h"
-#include "cursor.h"
+#include "graphic.h"
+#include "ui.h"
+#include "game.h"
 #include "map.h"
 #include "cmd_queue.h"
 #include "bob.h"
 #include "ware.h"
 #include "worker.h"
 #include "tribe.h"
-#include "game.h"
 #include "player.h"
-#include "ui.h"
-#include "graphic.h"
 #include "mapselectmenue.h"
 #include "IntPlayer.h"
 #include "player.h"
@@ -42,14 +41,13 @@
 Game::Game(void)
 {
 	m_state = gs_none;
-	m_mapname = 0;
+
+	m_map = 0;
+   m_objects = new Object_Manager;
+   cmdqueue = new Cmd_Queue(this);
 
 	memset(m_players, 0, sizeof(m_players));
 	
-   m_objects = new Object_Manager;
-   cmdqueue = new Cmd_Queue(this);
-   map=0;
-
 	m_realtime = Sys_GetTime();
 }
 
@@ -63,37 +61,18 @@ Game::~Game(void)
 	
 	delete m_objects;
 	delete cmdqueue;
-	if (map)
-		delete map;
+	if (m_map)
+		delete m_map;
 	
 	for(i = 1; i <= MAX_PLAYERS; i++)
 		if (m_players[i-1])
 			remove_player(i);
 	
-	if (m_mapname)
-		free(m_mapname);
+	for(i = 0; i < (int)m_tribes.size(); i++)
+		delete m_tribes[i];
+	m_tribes.resize(0);
 }
 
-/** void Game::set_mapname(const char *mapname)
- *
- * Set the mapname, but don't load the map yet (this is done when the
- * game starts)
- *
- * Args: mapname	name of the map
- */
-void Game::set_mapname(const char* mapname)
-{
-	assert(!map);
-
-	if (m_mapname)
-		free(m_mapname);
-	if (mapname)
-		m_mapname = strdup(mapname);
-	else
-		m_mapname = 0;
-
-	// Networking updates here?
-}
 
 /*
 ===============
@@ -122,10 +101,33 @@ int Game::get_safe_ware_id(const char *name)
 	return id;
 }
 
-/** Game::remove_player(int plnum)
- *
- + Remove the player with the given number
- */
+
+/*
+===============
+Game::set_map
+
+Replaces the current map with the given one. Ownership of the map is transferred
+to the Game object.
+===============
+*/
+void Game::set_map(Map* map)
+{
+	assert(m_state <= gs_menu);
+
+	if (m_map)
+		delete m_map;
+	
+	m_map = map;
+}
+
+
+/*
+===============
+Game::remove_player
+
+Remove the player with the given number
+===============
+*/
 void Game::remove_player(int plnum)
 {
 	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
@@ -137,6 +139,7 @@ void Game::remove_player(int plnum)
 	}		
 }
 
+
 /*
 ===============
 Game::add_player
@@ -146,16 +149,27 @@ Note that AI player structures and the Interactive_Player are created when
 the game starts. Similar for remote players.
 ===============
 */
-void Game::add_player(int plnum, int type, const uchar *playercolor)
+void Game::add_player(int plnum, int type, const char* tribe, const uchar *playercolor)
 {
 	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 	assert(m_state != gs_running);
 	
 	if (m_players[plnum-1])
 		remove_player(plnum);
+
+	// Get the player's tribe
+	uint i;
 	
-	m_players[plnum-1] = new Player(this, type, plnum, playercolor);
+	for(i = 0; i < m_tribes.size(); i++)
+		if (!strcmp(m_tribes[i]->get_name(), tribe))
+			break;
+	
+	if (i == m_tribes.size())
+		m_tribes.push_back(new Tribe_Descr(tribe));
+	
+	m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], playercolor);
 }
+
 
 /** Game::can_start()
  *
@@ -166,7 +180,7 @@ bool Game::can_start()
 	int local_num;
 	int i;
 
-	if (!m_mapname)
+	if (!m_map)
 		return false;
 	
 	// we need exactly one local player
@@ -188,11 +202,98 @@ bool Game::can_start()
 	return true;
 }
 
-/** void Game::run(void)
- *
- * This runs a game, including game creation phase.
- * Returns true if a game actually took place.
- */
+
+/*
+===============
+Game::postload
+
+Load and prepare detailled game data.
+This happens once just after the host has started the game and before the 
+graphics are loaded.
+===============
+*/
+void Game::postload()
+{
+	uint id;
+	int pid;
+
+	// Postload the map
+	m_map->postload(this);
+	
+	// Postload tribes
+	id = 0;
+	while(id < m_tribes.size()) {
+		for(pid = 1; pid <= MAX_PLAYERS; pid++) {
+			Player* plr = get_player(pid);
+			
+			if (plr && plr->get_tribe() == m_tribes[id])
+				break;
+		}
+		
+		if (pid <= MAX_PLAYERS) {
+			// the tribe is used, postload it
+			m_tribes[id]->postload(this);
+			id++;
+		} else {
+			delete m_tribes[id]; // the tribe is no longer used, remove it
+			m_tribes.erase(m_tribes.begin() + id);
+		}
+	}
+	
+	// TODO: postload players? (maybe)
+
+	// Postload wares
+	init_wares();
+}
+
+
+/*
+===============
+Game::load_graphics
+
+Load all graphics.
+This function needs to be called once at startup when the graphics system
+is ready.
+If the graphics system is to be replaced at runtime, the function must be
+called after that has happened.
+===============
+*/
+void Game::load_graphics()
+{
+	int i;
+
+	m_map->load_graphics(); // especially loads world data
+	
+	// TODO: load tribe graphics (buildings, units)
+	// TODO: load player graphics? (maybe)
+	
+	for(i = 0; i < m_wares.get_nitems(); i++)
+		m_wares.get(i)->load_graphics();
+	
+	g_gr->load_animations();
+}
+
+
+/*
+===============
+void Game::run(void)
+
+This runs a game, including game creation phase.
+Returns true if a game actually took place.
+
+The setup and loading of a game happens (or rather: will happen) in three 
+stages.
+1. First of all, the host (or single player) configures the game. During this
+   time, only short descriptions of the game data (such as map headers )are 
+	loaded to minimize loading times.
+2. Once the game is about to start and the configuration screen is finished,
+   all logic data (map, tribe information, building information) is loaded
+	during postload.
+2b. If a game is created, initial player positions are set. This step is 
+    skipped when a game is loaded.
+3. After this has happened, the game graphics are loaded.
+===============
+*/
 bool Game::run(void)
 {
 	bool played = false;
@@ -201,45 +302,39 @@ bool Game::run(void)
 
 	if (launch_game_menu(this))
 	{
-		assert(m_mapname);
+		assert(m_map);
 
 		m_state = gs_running;
 
-		// TEMP
-		tribe= new Tribe_Descr(); 
-	   tribe->load("romans");
-		// TEMP
-
-      // Load the map
-		map = new Map();
-		if (RET_OK != map->load_map(m_mapname, this)) {
-			critical_error("Couldn't load map.");
-			m_state = gs_none;
-			return false;
-		}
+		g_gr->flush(PicMod_Menu);
 		
-		init_wares();
-		
-      // TEMP: player number
 		ipl = new Interactive_Player(this, 1);
-	  
+
+		postload();
+		
 		// Prepare the players (i.e. place HQs)
-		for(int i = 1; i <= map->get_nrplayers(); i++) {
+		for(int i = 1; i <= m_map->get_nrplayers(); i++) {
 			Player* player = get_player(i);
 			if (!player)
 				continue;
 
 			player->setup();
 
-			const Coords &c = map->get_starting_pos(i);
+			const Coords &c = m_map->get_starting_pos(i);
 			if (player->get_type() == Player::playerLocal)
 				ipl->move_view_to(c.x, c.y);
 		}
+		
+		load_graphics();
+		
 		ipl->run();
 		
 		m_objects->cleanup(this);
 	   delete ipl;
-	   delete tribe;
+		
+		g_gr->flush(PicMod_Game);
+		g_anim.flush();
+
 		played = true;
 	}
 
@@ -253,13 +348,13 @@ bool Game::run(void)
 ===============
 Game::init_wares
 
-Called just before the game loop starts.
+Called during postload.
 Collects all wares from world and tribes and puts them into a global list
 ===============
 */
 void Game::init_wares()
 {
-	World *world = map->get_world();
+	World *world = m_map->get_world();
 	
 	world->parse_wares(&m_wares);
 	
@@ -309,7 +404,7 @@ void Game::think(void)
 	{
 		cmdqueue->run_queue(frametime);
 		
-		map->get_world()->animate(get_gametime()); // update texture animation states
+		g_gr->animate_maptextures(get_gametime());
 	}
 }
 
@@ -359,7 +454,7 @@ Bob *Game::create_bob(int x, int y, int idx)
 {
 	Bob_Descr *descr;
 
-	descr = map->get_world()->get_bob_descr(idx);
+	descr = m_map->get_world()->get_bob_descr(idx);
 	assert(descr);
 	
 	return descr->create(this, 0, Coords(x, y));
@@ -377,7 +472,7 @@ Immovable *Game::create_immovable(int x, int y, int idx)
 {
 	Immovable_Descr *descr;
 
-	descr = map->get_world()->get_immovable_descr(idx);
+	descr = m_map->get_world()->get_immovable_descr(idx);
 	assert(descr);
 	
 	return descr->create(this, Coords(x, y));
@@ -393,7 +488,7 @@ Additionally, it updates the visible area for that player.
 */
 void Game::conquer_area(uchar playernr, Coords coords, int radius)
 {
-	Map_Region m(coords, radius, map);
+	Map_Region m(coords, radius, m_map);
 	Field* f;
 
 	while((f = m.next()))
@@ -415,4 +510,47 @@ void Game::conquer_area(uchar playernr, Coords coords, int radius)
 	Player *player = get_player(playernr);
 	
 	player->set_area_seen(coords.x, coords.y, radius+4, true);
+	
+	recalc_for_field(coords, radius);
 }
+
+
+/*
+===============
+Game::recalc_for_field
+
+Call this function whenever the field at fx/fy has changed in one of the ways:
+ - height has changed
+ - robust Map_Object has been added or removed
+ 
+This performs the steps outlined in the comment above Map::recalc_brightness()
+and recalcs the interactive player's overlay.
+===============
+*/
+void Game::recalc_for_field(Coords coords, int radius)
+{
+	Map_Region_Coords mrc;
+	int x, y;
+	Field *f;
+	
+	// First pass
+	mrc.init(coords, 2+radius, m_map);
+
+	while(mrc.next(&x, &y)) {
+		f = m_map->get_field(x, y);
+		m_map->recalc_brightness(x, y, f);
+		m_map->recalc_fieldcaps_pass1(x, y, f);
+	}
+	
+	// Second pass
+	mrc.init(coords, 2+radius, m_map);
+	
+	while(mrc.next(&x, &y)) {
+		f = m_map->get_field(x, y);
+		m_map->recalc_fieldcaps_pass2(x, y, f);
+		
+		if (ipl)
+			ipl->recalc_overlay(FCoords(x, y, f));
+	}
+}
+

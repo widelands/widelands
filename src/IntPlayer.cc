@@ -21,7 +21,6 @@
 #include "options.h"
 #include "ui.h"
 #include "graphic.h"
-#include "cursor.h"
 #include "game.h"
 #include "minimap.h"
 #include "fieldaction.h"
@@ -96,14 +95,6 @@ Interactive_Player IMPLEMENTATION
 ==============================================================================
 */
 
-AutoPic Interactive_Player::pic_buildhelp("menu_toggle_buildhelp.bmp", 0, 0, 255, 34, 34);
-AutoPic Interactive_Player::pic_minimap("menu_toggle_minimap.bmp", 0, 0, 255, 34, 34);
-AutoPic Interactive_Player::pic_menu("menu_toggle_menu.bmp", 0, 0, 255, 34, 34);
-// temp
-AutoPic Interactive_Player::pic_exit("menu_exit_game.bmp", 0, 0, 255, 34, 34);
-// temp ends
-
-
 /*
 ===============
 Interactive_Player::Interactive_Player
@@ -114,16 +105,21 @@ Initialize
 Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	: Panel(0, 0, 0, get_xres(), get_yres())
 {
+	// Switch to the new graphics system now, if necessary
+	Section *s = g_options.pull_section("global");
+	
+	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
+	
+	memset(&m_maprenderinfo, 0, sizeof(m_maprenderinfo));
+	
+	// Setup all screen elements
 	m_game = g;
 	m_player_number = plyn;
-
+	
 	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
 	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
 	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
 
-	m_ignore_shadow = false;
-	
-	m_fieldsel.x = m_fieldsel.y = 0;
 	m_fieldsel_freeze = false;
 	
 	m_buildroad = false;
@@ -133,21 +129,23 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	int y = get_h() - 34;
 	Button *b;
 
+	// temp (should be toggle messages)
 	b = new Button(this, x, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::exit_game_btn);
-	b->set_pic(&pic_exit);
+	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.bmp", RGBColor(0,0,255)));
+	// temp
 
 	b = new Button(this, x+34, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::main_menu_btn);
-	b->set_pic(&pic_menu);
+	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.bmp", RGBColor(0,0,255)));
 
 	b = new Button(this, x+68, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::minimap_btn);
-	b->set_pic(&pic_minimap);
+	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.bmp", RGBColor(0,0,255)));
 
 	b = new Button(this, x+102, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
-	b->set_pic(&pic_buildhelp);
+	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.bmp", RGBColor(0,0,255)));
 }
 
 /*
@@ -159,9 +157,47 @@ cleanups
 */
 Interactive_Player::~Interactive_Player(void)
 {
+	if (m_maprenderinfo.overlay_basic)
+		free(m_maprenderinfo.overlay_basic);
+	if (m_maprenderinfo.overlay_roads)
+		free(m_maprenderinfo.overlay_roads);
+	
 	if (m_buildroad)
 		abort_build_road();
 }
+
+
+/*
+===============
+Interactive_Player::start
+
+Called just before the game starts, after postload, init and gfxload
+===============
+*/
+void Interactive_Player::start()
+{
+	int mapw;
+	int maph;
+
+	m_maprenderinfo.game = m_game;
+	m_maprenderinfo.map = m_game->get_map();
+	m_maprenderinfo.visibility = get_player()->get_visibility();
+	m_maprenderinfo.show_buildhelp = false;
+	
+	mapw = m_maprenderinfo.map->get_width();
+	maph = m_maprenderinfo.map->get_height();
+	m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
+	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
+	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
+	
+	for(int y = 0; y < maph; y++)
+		for(int x = 0; x < mapw; x++) {
+			FCoords coords(x, y, m_maprenderinfo.map->get_field(x,y));
+			
+			recalc_overlay(coords);
+		}
+}
+
 
 /*
 ===============
@@ -179,21 +215,6 @@ int Interactive_Player::get_xres()
 int Interactive_Player::get_yres()
 {
 	return g_options.pull_section("global")->get_int("yres", 480);
-}
-
-
-/*
-===============
-Interactive_Player::start
-
-Set the resolution just before going modal
-===============
-*/
-void Interactive_Player::start()
-{
-	Section *s = g_options.pull_section("global");
-	
-	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
 }
 
 
@@ -219,7 +240,7 @@ Change the field selection. Does not honour the freeze!
 */
 void Interactive_Player::set_fieldsel(Coords c)
 {
-	m_fieldsel = c;
+	m_maprenderinfo.fieldsel = c;
 }
 
 
@@ -265,7 +286,7 @@ void Interactive_Player::main_menu_btn()
 //
 void Interactive_Player::toggle_buildhelp(void)
 {
-   main_mapview->toggle_buildhelp();
+	m_maprenderinfo.show_buildhelp = !m_maprenderinfo.show_buildhelp;
 }
 
 /** Interactive_Player::minimap_btn()
@@ -328,11 +349,11 @@ Player has clicked on the given field; bring up the context menu.
 */
 void Interactive_Player::field_action()
 {
-	if (!get_ignore_shadow() && !get_player()->is_field_seen(m_fieldsel))
-		return;			
+	if (m_maprenderinfo.visibility && !get_player()->is_field_seen(m_maprenderinfo.fieldsel))
+		return;
 
 	// Special case for buildings
-	BaseImmovable *imm = m_game->get_map()->get_immovable(m_fieldsel);
+	BaseImmovable *imm = m_game->get_map()->get_immovable(m_maprenderinfo.fieldsel);
 	
 	if (imm && imm->get_type() == Map_Object::BUILDING) {
 		Building *building = (Building *)imm;
@@ -391,10 +412,10 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 		
 	case KEY_F5:
 		if (down) {
-			if (m_ignore_shadow)
-				m_ignore_shadow = false;
+			if (!m_maprenderinfo.visibility)
+				m_maprenderinfo.visibility = get_player()->get_visibility();
 			else if (get_game()->get_allow_cheats())
-				m_ignore_shadow = true;
+				m_maprenderinfo.visibility = 0;
 		}
 		return true;
 	}
@@ -448,6 +469,8 @@ void Interactive_Player::start_build_road(Coords start)
 {
 	// create an empty path
 	m_buildroad = new CoordPath(m_game->get_map(), start);
+	
+	roadb_add_overlay();
 }
 
 
@@ -461,6 +484,8 @@ Stop building the road
 void Interactive_Player::abort_build_road()
 {
 	assert(m_buildroad);
+	
+	roadb_remove_overlay();
 	
 	delete m_buildroad;
 	m_buildroad = 0;
@@ -478,6 +503,8 @@ void Interactive_Player::finish_build_road()
 {
 	assert(m_buildroad);
 
+	roadb_remove_overlay();
+	
 	if (m_buildroad->get_nsteps()) {
 		// awkward... path changes ownership
 		Path *path = new Path(*m_buildroad);
@@ -504,7 +531,10 @@ bool Interactive_Player::append_build_road(Coords field)
 	int idx = m_buildroad->get_index(field);
 	
 	if (idx >= 0) {
+		roadb_remove_overlay();
 		m_buildroad->truncate(idx);
+		roadb_add_overlay();
+		
 		return true;
 	}
 	
@@ -512,11 +542,13 @@ bool Interactive_Player::append_build_road(Coords field)
 	Map *map = m_game->get_map();
 	Path path;
 	
-	if (map->findpath(m_buildroad->get_end(), field, MOVECAPS_WALK, 0, &path, 
+	if (!map->findpath(m_buildroad->get_end(), field, MOVECAPS_WALK, 0, &path, 
 	                  get_player(), true, &m_buildroad->get_coords()) < 0)
 		return false; // couldn't find a path
 	
+	roadb_remove_overlay();
 	m_buildroad->append(path);
+	roadb_add_overlay();
 	
 	return true;
 }
@@ -564,4 +596,158 @@ int Interactive_Player::get_build_road_end_dir()
 		return 0;
 	
 	return m_buildroad->get_step(m_buildroad->get_nsteps()-1);
+}
+
+/*
+===============
+Interactive_Player::roadb_add_overlay
+
+Add road building data to the road overlay
+===============
+*/
+void Interactive_Player::roadb_add_overlay()
+{
+	assert(m_buildroad);
+	
+	//log("Add overlay\n");
+	
+	Map* map = m_game->get_map();
+	int mapwidth = map->get_width();
+	
+	// preview of the road
+	for(int idx = 0; idx < m_buildroad->get_nsteps(); idx++)	{
+		uchar dir = m_buildroad->get_step(idx);
+		Coords c = m_buildroad->get_coords()[idx];
+		
+		if (dir < Map_Object::WALK_E || dir > Map_Object::WALK_SW) {
+			map->get_neighbour(c, dir, &c);
+			dir = get_reverse_dir(dir);
+		}
+		
+		int shift = 2*(dir - Map_Object::WALK_E);
+		
+		m_maprenderinfo.overlay_roads[c.y*mapwidth + c.x] |= Road_Normal << shift;
+	}
+	
+	// build hints
+	FCoords endpos = map->get_fcoords(m_buildroad->get_end());
+	
+	for(int dir = 1; dir <= 6; dir++) {
+		FCoords neighb;
+		int caps;
+		
+		map->get_neighbour(endpos, dir, &neighb);
+		caps = get_player()->get_buildcaps(neighb);
+		
+		if (!(caps & MOVECAPS_WALK))
+			continue; // need to be able to walk there
+		
+		BaseImmovable *imm = map->get_immovable(neighb); // can't build on robusts
+		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
+			if (!(imm->get_type() == Map_Object::FLAG ||
+					(imm->get_type() == Map_Object::ROAD && caps & BUILDCAPS_FLAG)))
+				continue;
+		}
+
+		if (m_buildroad->get_index(neighb) >= 0)
+			continue; // the road can't cross itself
+		
+		int slope = abs(endpos.field->get_height() - neighb.field->get_height());
+		int icon;
+		
+		if (slope < 2)
+			icon = 1;
+		else if (slope < 4)
+			icon = 2;
+		else
+			icon = 3;
+	
+		m_maprenderinfo.overlay_roads[neighb.y*mapwidth + neighb.x] |= icon << Road_Build_Shift;
+	}
+}
+
+/*
+===============
+Interactive_Player::roadb_remove_overlay
+
+Remove road building data from road overlay
+===============
+*/
+void Interactive_Player::roadb_remove_overlay()
+{
+	assert(m_buildroad);
+	
+	//log("Remove overlay\n");
+	
+	Map* map = m_game->get_map();
+	int mapwidth = map->get_width();
+	
+	// preview of the road
+	for(int idx = 0; idx <= m_buildroad->get_nsteps(); idx++)	{
+		Coords c = m_buildroad->get_coords()[idx];
+		
+		m_maprenderinfo.overlay_roads[c.y*mapwidth + c.x] = 0;
+	}
+	
+	// build hints
+	Coords endpos = m_buildroad->get_end();
+	
+	for(int dir = 1; dir <= 6; dir++) {
+		Coords neighb;
+		
+		map->get_neighbour(endpos, dir, &neighb);
+		
+		m_maprenderinfo.overlay_roads[neighb.y*mapwidth + neighb.x] = 0;
+	}
+}
+
+
+/*
+===============
+Interactive_Player::recalc_overlay
+
+Recalculate build help and borders for the given field
+===============
+*/
+void Interactive_Player::recalc_overlay(FCoords fc)
+{
+	Map* map = m_maprenderinfo.map;
+
+	// Only do recalcs after maprenderinfo has been setup
+	if (!map)
+		return;
+	
+	uchar code = 0;
+	int owner = fc.field->get_owned_by();
+	
+	if (owner) {
+		// A border is on every field that is owned by a player and has
+		// neighbouring fields that are not owned by that player
+		for(int dir = 1; dir <= 6; dir++) {
+			FCoords neighb;
+			
+			map->get_neighbour(fc, dir, &neighb);
+			
+			if (neighb.field->get_owned_by() != owner)
+				code = Overlay_Frontier_Base + owner;
+		}
+		
+		// Determine the buildhelp icon for that field		
+		if (get_player()->get_player_number() == owner) {
+			int buildcaps = get_player()->get_buildcaps(fc);
+	
+			if (buildcaps & BUILDCAPS_MINE)
+				code = Overlay_Build_Mine;
+			else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
+				code = Overlay_Build_Big;
+			else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
+				code = Overlay_Build_Medium;
+			else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
+				code = Overlay_Build_Small;
+			else if (buildcaps & BUILDCAPS_FLAG)
+				code = Overlay_Build_Flag;
+		}
+	}
+	
+	m_maprenderinfo.overlay_basic[fc.y*map->get_width() + fc.x] = code;
 }
