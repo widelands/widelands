@@ -74,7 +74,10 @@ void Player::setup()
 	int idx = get_tribe()->get_building_index("headquarters");
 	if (idx < 0)
 		throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
-	m_game->warp_building(c.x, c.y, m_plnum, idx);
+	Warehouse *wh = (Warehouse *)m_game->warp_building(c.x, c.y, m_plnum, idx);
+
+	//	Add starting wares
+	wh->create_wares(m_game->get_safe_ware_id("carrier"), 20);
 }
 
 /*
@@ -140,7 +143,7 @@ void Player::rip_flag(Coords c)
 	
 	if (imm && imm->get_type() == Map_Object::FLAG) {
 		if (((Flag *)imm)->get_owner() == this)
-			imm->die(m_game);
+			imm->destroy(m_game);
 	}
 }
 
@@ -210,5 +213,5 @@ void Player::remove_road(Road *road)
 	if (road->get_flag_start()->get_owner() != this)
 		return;
 	
-	road->die(m_game);
+	road->destroy(m_game);
 }

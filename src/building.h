@@ -21,6 +21,7 @@
 #define __S__BUILDING_H
 
 #include "immovable.h"
+#include "ware.h"
 
 class Flag;
 class Interactive_Player;
@@ -84,6 +85,9 @@ public:
 	
 	virtual void show_options(Interactive_Player *plr) = 0;
 
+	virtual void add_to_economy(Economy *e);
+	virtual void remove_from_economy(Economy *e);
+	
 protected:
 	void start_animation(Game *g, Animation *anim);
 
@@ -99,6 +103,53 @@ protected:
 	
 	Animation		*m_anim;
 	int				m_animstart;
+};
+
+/*
+Warehouse
+*/
+class Warehouse_Descr : public Building_Descr {
+public:
+	enum {
+		Subtype_Normal,
+		Subtype_HQ,
+		Subtype_Port
+	};
+	
+	Warehouse_Descr(Tribe_Descr *tribe, const char *name);
+
+	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+	virtual Building *create_object();
+	
+	inline int get_subtype() const { return m_subtype; }
+	inline int get_conquers() const { return m_conquers; }
+	
+private:
+	int	m_subtype;
+	int	m_conquers;		// HQs conquer
+};
+
+
+class Warehouse : public Building {
+	MO_DESCR(Warehouse_Descr);
+
+public:
+	Warehouse(Warehouse_Descr *descr);
+	virtual ~Warehouse();
+
+	virtual void init(Game *g);
+	virtual void cleanup(Game *g);
+
+	virtual void show_options(Interactive_Player *plr);
+
+	virtual void add_to_economy(Economy *e);
+	virtual void remove_from_economy(Economy *e);
+
+	inline const WareList &get_wares() const { return m_wares; }
+	void create_wares(int id, int count);
+	
+private:
+	WareList		m_wares;
 };
 
 

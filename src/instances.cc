@@ -47,7 +47,7 @@ void Object_Manager::cleanup(Game *g)
 {
 	while(!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
-		it->second->die(g);
+		it->second->remove(g);
 	}
 }
 
@@ -168,17 +168,33 @@ Map_Object::~Map_Object()
 
 /*
 ===============
-Map_Object::die
+Map_Object::remove
 
-Call this function if you want to remove the object immediately.
+Call this function if you want to remove the object immediately, without
+any effects.
 ===============
 */
-void Map_Object::die(Game *g)
+void Map_Object::remove(Game *g)
 {
 	cleanup(g);
 	delete this;
 }
 
+/*
+===============
+Map_Object::destroy [virtual]
+
+Destroy the object immediately. Unlike remove(), special actions may be 
+performed:
+- create a decaying skeleton (humans)
+- create a burning fire (buildings)
+...
+===============
+*/
+void Map_Object::destroy(Game *g)
+{
+	remove(g);
+}
 
 /*
 ===============

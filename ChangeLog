@@ -4,6 +4,7 @@ build-3:
 - added Economy code
 - added record/playback code
 - added wares code
+- added worker code
 
 build-2:
 - options handling redesigned

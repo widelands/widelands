@@ -161,6 +161,29 @@ bool Building::get_passable()
 	return false;
 }
 
+/*
+===============
+Building::add_to_economy
+
+Called when a building joins an economy.
+Add all requests, provides etc.. to the economy.
+===============
+*/
+void Building::add_to_economy(Economy *e)
+{
+}
+
+/*
+===============
+Building::remove_from_economy
+
+Called when a building leaves an economy.
+Remove all requests etc.. from the economy.
+===============
+*/
+void Building::remove_from_economy(Economy *e)
+{
+}
 
 /*
 ===============
@@ -278,27 +301,6 @@ Warehouse building
 ==============================================================================
 */
 
-class Warehouse_Descr : public Building_Descr {
-public:
-	enum {
-		Subtype_Normal,
-		Subtype_HQ,
-		Subtype_Port
-	};
-	
-	Warehouse_Descr(Tribe_Descr *tribe, const char *name);
-
-	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	virtual Building *create_object();
-	
-	inline int get_subtype() const { return m_subtype; }
-	inline int get_conquers() const { return m_conquers; }
-	
-private:
-	int	m_subtype;
-	int	m_conquers;		// HQs conquer
-};
-
 /*
 ===============
 Warehouse_Descr::Warehouse_Descr
@@ -345,20 +347,10 @@ void Warehouse_Descr::parse(const char *directory, Profile *prof, const EncodeDa
 /*
 ==============================
 
-Normal Implementation
+IMPLEMENTATION
 
 ==============================
 */
-class Warehouse : public Building {
-	MO_DESCR(Warehouse_Descr);
-
-public:
-	Warehouse(Warehouse_Descr *descr);
-
-	virtual void init(Game *g);
-
-	virtual void show_options(Interactive_Player *plr);
-};
 
 /*
 ===============
@@ -370,6 +362,22 @@ Initialize a warehouse (zero contents, etc...)
 Warehouse::Warehouse(Warehouse_Descr *descr)
 	: Building(descr)
 {
+}
+
+	
+/*
+===============
+Warehouse::Warehouse
+
+Cleanup
+===============
+*/
+Warehouse::~Warehouse()
+{
+	// During building cleanup, we're removed from the Economy.
+	// Therefore, the wares can simply be cleared out. The global inventory 
+	// will be okay.
+	m_wares.clear();
 }
 
 /*
@@ -389,6 +397,20 @@ void Warehouse::init(Game* g)
 
 /*
 ===============
+Warehouse::cleanup
+
+Destroy the warehouse.
+===============
+*/
+void Warehouse::cleanup(Game *g)
+{
+	// TODO: un-conquer the area?
+
+	Building::cleanup(g);
+}
+
+/*
+===============
 Warehouse::show_options
 
 Show the warehouse information window
@@ -401,6 +423,47 @@ void Warehouse::show_options(Interactive_Player *plr)
 
 /*
 ===============
+Warehouse::add_to_economy
+
+Register our storage with the economy.
+===============
+*/
+void Warehouse::add_to_economy(Economy *e)
+{
+	e->add_warehouse(this);
+}
+
+/*
+===============
+Warehouse::remove_from_economy
+
+Unregister our storage with the economy
+===============
+*/
+void Warehouse::remove_from_economy(Economy *e)
+{
+	e->remove_warehouse(this);
+}
+
+/*
+===============
+Warehouse::create_wares
+
+Magically create wares in this warehouse. Updates the economy accordingly.
+===============
+*/
+void Warehouse::create_wares(int id, int count)
+{
+	m_wares.add(id, count);
+	
+	assert(m_flag);
+	Economy *e = m_flag->get_economy();
+	
+	e->add_wares(id, count);
+}
+
+/*
+===============
 Warehouse_Descr::create_object
 ===============
 */
@@ -408,6 +471,7 @@ Building *Warehouse_Descr::create_object()
 {
 	return new Warehouse(this);
 }
+
 
 /*
 ==============================================================================

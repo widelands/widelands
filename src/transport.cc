@@ -156,7 +156,19 @@ Call this only from Economy code!
 */
 void Flag::set_economy(Economy *e)
 {
+	// Remove from current economy
+	if (m_economy) {
+		if (m_building)
+			m_building->remove_from_economy(m_economy);
+	}
+
 	m_economy = e;
+	
+	// Add to new economy
+	if (m_economy) {
+		if (m_building)
+			m_building->add_to_economy(m_economy);
+	}
 }
 
 /*
@@ -177,6 +189,8 @@ void Flag::attach_building(Game *g, Building *building)
 	
 	map->get_tln(m_position, &tln);
 	map->get_field(tln)->set_road(Road_SouthEast, Road_Normal);
+	
+	m_building->add_to_economy(m_economy);
 }
 
 
@@ -191,6 +205,8 @@ void Flag::detach_building(Game *g)
 {
 	assert(m_building);
 
+	m_building->remove_from_economy(m_economy);
+	
 	Map *map = g->get_map();
 	Coords tln;
 	
@@ -290,14 +306,14 @@ Detach building and free roads.
 void Flag::cleanup(Game *g)
 {
 	if (m_building) {
-		m_building->die(g); // immediate death
-		m_building = 0;
+		m_building->remove(g); // immediate death
+		assert(!m_building);
 	}
 	
 	for(int i = 0; i < 6; i++) {
 		if (m_roads[i]) {
-			m_roads[i]->die(g); // immediate death
-			m_roads[i] = 0;
+			m_roads[i]->remove(g); // immediate death
+			assert(!m_roads[i]);
 		}
 	}
 
@@ -672,6 +688,8 @@ Economy::~Economy()
 {
 	if (m_flags.size())
 		log("Warning: Economy still has flags left on destruction\n");
+	if (m_warehouses.size())
+		log("Warning: Economy still has warehouses left on destruction\n");
 }
 
 /*
@@ -1018,18 +1036,93 @@ void Economy::remove_flag(Flag *flag)
 	flag->set_economy(0);
 
 	// fast remove
-	for(uint i = 0; i < m_flags.size(); i++) {
+	uint i;
+	for(i = 0; i < m_flags.size(); i++) {
 		if (m_flags[i] == flag) {
 			if (i < m_flags.size()-1)
 				m_flags[i] = m_flags[m_flags.size()-1];
 			break;
 		}
 	}
+	assert(i != m_flags.size());
 	m_flags.pop_back();
 
 	// automatically delete the economy when it becomes empty.
 	if (!m_flags.size())
 		delete this;
+}
+
+/*
+===============
+Economy::add_wares
+
+Call this whenever some entity created a ware, e.g. when a lumberjack
+has felled a tree.
+This is also called when a ware is added to the economy through trade or
+a merger.
+===============
+*/
+void Economy::add_wares(int id, int count)
+{
+	m_wares.add(id, count);
+	
+	// TODO: add to global player inventory?
+}
+
+/*
+===============
+Economy::remove_wares
+
+Call this whenever a ware his destroyed or consumed, e.g. food has been 
+eaten or a warehouse has been destroyed.
+This is also called when a ware is removed from the economy through trade or
+a split of the Economy.
+===============
+*/
+void Economy::remove_wares(int id, int count)
+{
+	m_wares.remove(id, count);
+
+	// TODO: remove from global player inventory?
+}
+
+/*
+===============
+Economy::add_warehouse
+
+Add the warehouse to our list of warehouses.
+This also adds the wares in the warehouse to the economy. However, if wares are
+added to the warehouse in the future, add_wares() must be called.
+===============
+*/
+void Economy::add_warehouse(Warehouse *wh)
+{
+	m_warehouses.push_back(wh);
+	m_wares.add(wh->get_wares());
+}
+
+/*
+===============
+Economy::remove_warehouse
+
+Remove the warehouse and its wares from the economy.
+===============
+*/
+void Economy::remove_warehouse(Warehouse *wh)
+{
+	m_wares.remove(wh->get_wares());
+
+	// fast remove
+	uint i;
+	for(i = 0; i < m_warehouses.size(); i++) {
+		if (m_warehouses[i] == wh) {
+			if (i < m_warehouses.size()-1)
+				m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
+			break;
+		}
+	}
+	assert(i != m_warehouses.size());
+	m_warehouses.pop_back();
 }
 
 /*

@@ -34,7 +34,7 @@ template <class T> class Descr_Maintainer {
       T* get_nitem(void) { n++; if(n<nitems) return items[n]; return NULL; }
       int add(T* item);
       ushort get_nitems(void) { return nitems; }
-      int get_index(const char* name); // can return -1!
+      int get_index(const char* name); // can return -1
       void reserve(uint n) {
          if(!items) {
             items = (T**) malloc(sizeof(T*)*n);

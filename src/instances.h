@@ -124,7 +124,8 @@ public:
 	inline int get_serial(void) const { return m_serial; }
 	inline bool has_attribute(uint attr) { return m_descr->has_attribute(attr); }
 	
-	void die(Game*);
+	void remove(Game*);
+	virtual void destroy(Game*);
 
 	virtual void act(Game*);
 

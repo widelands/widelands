@@ -40,7 +40,7 @@ master list of wares is kept by the Game class. The list is created just before
 the game starts.
 
 Note that multiple tribes can define a worker with the same name. The different
-"version" of a worker must perform the same job, but they can look different.
+"version" of a worker must perform the same job, but they can look differently.
 */
 class Ware_Descr {
 public:
@@ -81,6 +81,28 @@ private:
 	typedef std::map<Tribe_Descr*,Worker_Descr*> Worker_map;
 
 	Worker_map	m_workers;
+};
+
+
+/*
+WareList is a simple wrapper around an array of ware types.
+It is useful for warehouses and for economy-wide inventory.
+*/
+class WareList {
+public:
+	WareList();
+	~WareList();
+	
+	void clear();
+	
+	void add(int id, int count = 1);
+	void add(const WareList &wl);
+	void remove(int id, int count = 1);
+	void remove(const WareList &wl);
+	int stock(int id);
+	
+private:
+	std::vector<int>	m_wares;
 };
 
 #endif

@@ -145,3 +145,124 @@ void Worker_Ware_Descr::add_worker(Tribe_Descr *tribe, Worker_Descr *worker)
 	m_workers[tribe] = worker;
 }
 
+
+/*
+==============================================================================
+
+WareList IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+WareList::WareList
+
+Zero-initialize the storage.
+===============
+*/
+WareList::WareList()
+{
+}
+
+/*
+===============
+WareList::~WareList
+
+Delete the list. Print a warning message if the storage is not empty.
+This is because most of the time, a WareList should be zeroed by cleanup
+operations before the destructor is called. If you are sure of what you're 
+doing, call clear().
+===============
+*/
+WareList::~WareList()
+{
+	for(uint id = 0; id < m_wares.size(); id++) {
+		if (m_wares[id])
+			log("WareList: %i items of %i left.\n", m_wares[id], id);
+	}
+}
+
+/*
+===============
+WareList::clear
+
+Clear the storage.
+===============
+*/
+void WareList::clear()
+{
+	m_wares.clear();
+}
+	
+/*
+===============
+WareList::add
+
+Add the given number of items (default = 1) to the storage.
+===============
+*/
+void WareList::add(int id, int count)
+{
+	if (!count)
+		return;
+
+	assert(id >= 0);
+	
+	if (id >= (int)m_wares.size())
+		m_wares.resize(id+1, 0);
+	m_wares[id] += count;
+	assert(m_wares[id] >= count);
+}
+
+void WareList::add(const WareList &wl)
+{
+	if (wl.m_wares.size() > m_wares.size())
+		m_wares.reserve(wl.m_wares.size());
+		
+	for(uint id = 0; id < wl.m_wares.size(); id++)
+		if (wl.m_wares[id])
+			add(id, wl.m_wares[id]);
+}
+
+/*
+===============
+WareList::remove
+
+Remove the given number of items (default = 1) from the storage.
+===============
+*/
+void WareList::remove(int id, int count)
+{
+	if (!count)
+		return;
+
+	assert(id >= 0 && id < (int)m_wares.size());
+	assert(m_wares[id] >= count);
+	m_wares[id] -= count;
+}
+
+void WareList::remove(const WareList &wl)
+{
+	for(uint id = 0; id < wl.m_wares.size(); id++)
+		if (wl.m_wares[id])
+			remove(id, wl.m_wares[id]);
+}
+
+/*
+===============
+WareList::stock
+
+Return the number of wares of a given type stored in this storage.
+===============
+*/
+int WareList::stock(int id)
+{
+	assert(id >= 0);
+	
+	if (id < (int)m_wares.size())
+		return 0;
+	return m_wares[id];
+}
+
+	

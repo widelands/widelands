@@ -107,6 +107,21 @@ bool Game::get_allow_cheats()
 	return true;
 }
 
+/*
+===============
+Game::get_safe_ware_id
+
+Return the corresponding ware id. Throws an exception if ware can't be found.
+===============
+*/
+int Game::get_safe_ware_id(const char *name)
+{
+	int id = m_wares.get_index(name);
+	if (id < 0)
+		throw wexception("Ware '%s' not found", name);
+	return id;
+}
+
 /** Game::remove_player(int plnum)
  *
  + Remove the player with the given number
@@ -319,7 +334,7 @@ void Game::send_player_command(int pid, int cmd, int arg1, int arg2, int arg3)
  * owner is the player number of the building's owner.
  * idx is the building type index.
  */
-void Game::warp_building(int x, int y, char owner, int idx)
+Building *Game::warp_building(int x, int y, char owner, int idx)
 {
 	Building_Descr *descr;
 	Player *player = get_player(owner);
@@ -329,7 +344,7 @@ void Game::warp_building(int x, int y, char owner, int idx)
 	descr = player->get_tribe()->get_building_descr(idx);
 	assert(descr);
 
-	descr->create(this, get_player(owner), Coords(x, y));
+	return descr->create(this, get_player(owner), Coords(x, y));
 }
 
 /** Game::create_bob(int x, int y, int idx)
@@ -338,14 +353,14 @@ void Game::warp_building(int x, int y, char owner, int idx)
  *
  * idx is the bob type.
  */
-void Game::create_bob(int x, int y, int idx)
+Bob *Game::create_bob(int x, int y, int idx)
 {
 	Bob_Descr *descr;
 
 	descr = map->get_world()->get_bob_descr(idx);
 	assert(descr);
 	
-	descr->create(this, 0, Coords(x, y));
+	return descr->create(this, 0, Coords(x, y));
 }
 
 /*
@@ -356,14 +371,14 @@ Create an immovable at the given location.
 Does not perform any placability checks.
 ===============
 */
-void Game::create_immovable(int x, int y, int idx)
+Immovable *Game::create_immovable(int x, int y, int idx)
 {
 	Immovable_Descr *descr;
 
 	descr = map->get_world()->get_immovable_descr(idx);
 	assert(descr);
 	
-	descr->create(this, Coords(x, y));
+	return descr->create(this, Coords(x, y));
 }
 
 /*

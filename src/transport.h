@@ -22,6 +22,8 @@
 
 #include "instances.h"
 #include "map.h"
+#include "ware.h"
+
 
 class Flag;
 class Road;
@@ -181,15 +183,23 @@ public:
 	void add_flag(Flag *flag);
 	void remove_flag(Flag *flag);
 
+	void add_wares(int id, int count = 1);
+	void remove_wares(int id, int count = 1);
+	
+	void add_warehouse(Warehouse *wh);
+	void remove_warehouse(Warehouse *wh);
+	
 private:
 	void do_merge(Economy *e);
 	void do_split(Flag *f);
 
 private:
 	Player	*m_owner;
+	std::vector<Flag*>		m_flags;
+	WareList						m_wares;	// virtual storage with all wares in this Economy
+	std::vector<Warehouse*>	m_warehouses;
+		
 	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
-	
-	std::vector<Flag*>	m_flags;
 };
 
 #endif // included_transport_h

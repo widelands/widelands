@@ -35,9 +35,15 @@ ADD_LDFLAGS:=
 
 # This are additional build flags, you don't want to change them, unless
 # you know what you're doing
+ifndef DEBUG
 DEBUG=YES
+endif
+ifndef PROFILE
 PROFILE=NO
+endif
+ifndef OPTIMIZE
 OPTIMIZE=YES
+endif
 # RELEASE_BUILD disables debug and profile
 RELEASE_BUILD=NO
 
@@ -125,7 +131,7 @@ include $(WIDELANDS_OBJ:.o=.d)
 	
 
 widelands: tags $(WIDELANDS_OBJ)
-	$(CXX) $(WIDELANDS_OBJ) -o $@ $(LDFLAGS) $(CLAGS)  
+	$(CXX) $(WIDELANDS_OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
 
 tags: $(wildcard src/*.cc src/*.h)
 	@ if [ -x /usr/bin/ctags ]; then ctags -R ; else true; fi

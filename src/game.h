@@ -82,12 +82,16 @@ public:
 	inline Player* get_player(int n) { assert(n>=1 && n<=MAX_PLAYERS); return m_players[n-1]; }
 	bool get_allow_cheats();
 	
+	inline int get_ware_id(const char *name) { return m_wares.get_index(name); }
+	int get_safe_ware_id(const char *name);
+	inline Ware_Descr *get_ware_description(int id) { return m_wares.get(id); }
+	
 public:
 	void send_player_command(int pid, int cmd, int arg1=0, int arg2=0, int arg3=0);
 
-	void warp_building(int x, int y, char owner, int idx);
-	void create_bob(int x, int y, int idx);
-	void create_immovable(int x, int y, int idx);
+	Building *warp_building(int x, int y, char owner, int idx);
+	Bob *create_bob(int x, int y, int idx);
+	Immovable *create_immovable(int x, int y, int idx);
 
 	void conquer_area(uchar playernr, Coords coords, int radius);
 	
