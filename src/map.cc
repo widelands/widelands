@@ -2362,6 +2362,19 @@ bool FindFieldSize::accept(FCoords coord) const
 	}
 }
 
+bool FindFieldSizeResource::accept(FCoords coord) const {
+   bool base_ret=FindFieldSize::accept(coord);
+
+   if(!base_ret) 
+      return false;
+
+   if(coord.field->get_resources()==m_res && 
+         coord.field->get_resources_amount())
+      return true;
+   
+   return false;
+}
+
 bool FindFieldImmovableSize::accept(FCoords coord) const
 {
 	BaseImmovable* imm = coord.field->get_immovable();

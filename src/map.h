@@ -66,6 +66,7 @@ struct ImmovableFound {
 FindImmovable
 FindBob
 FindField
+FindResource
 CheckStep
 
 Predicates used in path finding and find functions.
@@ -449,6 +450,16 @@ struct FindFieldSize : public FindField {
 	virtual bool accept(FCoords coord) const;
 
 	Size m_size;
+};
+
+// Accepts a field for a certain size if it has
+// a valid resource and amount on it
+struct FindFieldSizeResource : public FindFieldSize {
+   FindFieldSizeResource(Size size, int res) : FindFieldSize(size) { m_res=res; }
+
+   virtual bool accept(FCoords coord) const;
+
+   int m_res;
 };
 
 // Accepts fields based on the size of immovables on the field

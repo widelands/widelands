@@ -86,6 +86,7 @@ private:
 	};
 
 private:
+	void parse_mine(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_createitem(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_setdescription(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_setbobdescription(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
@@ -110,6 +111,7 @@ private:
 };
 
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
+	{ "mine",		      &WorkerProgram::parse_mine },
 	{ "createitem",		&WorkerProgram::parse_createitem },
 	{ "setdescription",	&WorkerProgram::parse_setdescription },
 	{ "setbobdescription", &WorkerProgram::parse_setbobdescription },
@@ -250,6 +252,120 @@ bool Worker::run_createitem(Game* g, State* state, const WorkerAction* act)
 	return true;
 }
 
+/*
+==============================
+
+mine <resource> <area>
+
+Mine on the current coordinates (from walk or so) for resources
+decrease, go home
+
+iparam1 = area
+sparam1 = resource 
+
+==============================
+*/
+void WorkerProgram::parse_mine(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+   if (cmd.size() != 3)
+      throw wexception("Usage: mine <ware type> <area>");
+
+   act->function = &Worker::run_mine;
+   act->sparam1 = cmd[1];
+   char* endp;
+   act->iparam1 = strtol(cmd[2].c_str(),&endp, 0);
+
+   if(endp && *endp)
+      throw wexception("Bad area '%s'", cmd[2].c_str());
+
+}
+
+bool Worker::run_mine(Game* g, State* state, const WorkerAction* act)
+{
+   molog("  Mine(%s,%i)\n", act->sparam1.c_str(), act->iparam1);
+
+   Map* map = g->get_map();
+   MapRegion mr;
+   uchar res;
+
+
+   res=map->get_world()->get_resource(act->sparam1.c_str());
+   if(static_cast<char>(res)==-1)
+      throw wexception(" Worker::run_mine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
+            " with world!!\n",  act->sparam1.c_str());
+
+   // Select one of the fields randomly
+   uint totalres = 0;
+   uint totalchance = 0;
+   int pick;
+   Field* f;
+
+   mr.init(map, get_position(), act->iparam1);
+
+   while((f = mr.next())) {
+      uchar fres = f->get_resources();
+      uint amount = f->get_resources_amount();
+
+      // In the future, we might want to support amount = 0 for
+      // fields that can produce an infinite amount of resources.
+      // Rather -1 or something similar. not 0
+      if (fres != res)
+         amount = 0;
+
+      totalres += amount;
+      totalchance += 8 * amount;
+
+      // Add penalty for fields that are running out
+      if (amount == 0)
+         // we already know it's completely empty, so punish is less
+         totalchance += 1;
+      else if (amount <= 2)
+         totalchance += 6;
+      else if (amount <= 4)
+         totalchance += 4;
+      else if (amount <= 6)
+         totalchance += 2;
+   }
+
+   if (totalres == 0) {
+      molog("  Run out of resources\n");
+      return false;
+   }
+
+   // Second pass through fields
+   pick = g->logic_rand() % totalchance;
+
+   mr.init(map, get_position(), act->iparam1);
+
+   while((f = mr.next())) {
+      uchar fres = f->get_resources();
+      uint amount = f->get_resources_amount();;
+
+      if (fres != res)
+         amount = 0;
+
+      pick -= 8*amount;
+      if (pick < 0) {
+         assert(amount > 0);
+
+         amount--;
+
+         f->set_resources(res,amount);
+         break;
+      }
+   }
+
+   if (pick >= 0) {
+      molog("  Not successful this time\n");
+      return false;
+   }
+
+   molog("  Mined one item\n");
+
+   state->ivar1++;
+   schedule_act(g, 10);
+   return true;
+}
 
 /*
 ==============================
@@ -477,8 +593,13 @@ radius:<dist>
 size:[any|build|small|medium|big|mine|port]
 	Search for fields with the given amount of space.
 
+resource:<resname>
+   Resource to search for. This is mainly intended for fisher and 
+   therelike (non detectable Resources and default resources)
+
 iparam1 = radius
 iparam2 = FindFieldSize::sizeXXX
+sparam1 = Resource
 
 ==============================
 */
@@ -489,7 +610,8 @@ void WorkerProgram::parse_findspace(WorkerAction* act, Parser* parser, const std
 	act->function = &Worker::run_findspace;
 	act->iparam1 = -1;
 	act->iparam2 = -1;
-
+   act->sparam1 = "";
+   
 	// Parse predicates
 	for(i = 1; i < cmd.size(); i++) {
 		uint idx = cmd[i].find(':');
@@ -527,7 +649,9 @@ void WorkerProgram::parse_findspace(WorkerAction* act, Parser* parser, const std
 				throw wexception("Bad findspace size '%s'", value.c_str());
 
 			act->iparam2 = sizenames[idx].val;
-		} else
+		} else if(key == "resource") {
+         act->sparam1 = value; 
+      } else
 			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
 	}
 
@@ -542,23 +666,21 @@ bool Worker::run_findspace(Game* g, State* state, const WorkerAction* act)
 	std::vector<Coords> list;
 	Map* map = g->get_map();
 	World* w = map->get_world();
-	Immovable_Descr* descr;
+	
+   CheckStepDefault cstep(get_movecaps());
 
-	molog("  FindSpace(%i): for %i\n", act->iparam1, state->ivar2);
+   int res=w->get_resource(act->sparam1.c_str());
 
-	if (state->ivar2 < 0 || state->ivar2 >= w->get_nr_immovables()) {
-		molog("  WARNING: [actFindSpace]: bad immovable index %i\n", state->ivar2);
-		set_signal("fail");
-		pop_task(g);
-		return true;
-	}
+   int retval=0;
+   if(res!=-1) {
+      retval=map->find_reachable_fields(get_position(), act->iparam1, &list, &cstep,
+               FindFieldSizeResource((FindFieldSize::Size)act->iparam2,res)); 
+   } else {
+      retval=map->find_reachable_fields(get_position(), act->iparam1, &list, &cstep,
+               FindFieldSize((FindFieldSize::Size)act->iparam2)); 
+   }
 
-	descr = w->get_immovable_descr(state->ivar2);
-
-	CheckStepDefault cstep(get_movecaps());
-
-	if (!map->find_reachable_fields(get_position(), act->iparam1, &list, &cstep,
-						FindFieldSize((FindFieldSize::Size)act->iparam2))) {
+   if(!retval) {
 		molog("  no space found\n");
 		set_signal("fail");
 		pop_task(g);

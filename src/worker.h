@@ -197,11 +197,13 @@ protected:
 	static Task taskGeologist;
 
 private: // Program commands
+	bool run_mine(Game* g, State* state, const WorkerAction* act);
 	bool run_createitem(Game* g, State* state, const WorkerAction* act);
 	bool run_setdescription(Game* g, State* state, const WorkerAction* act);
 	bool run_setbobdescription(Game* g, State* state, const WorkerAction* act);
 	bool run_findobject(Game* g, State* state, const WorkerAction* act);
 	bool run_findspace(Game* g, State* state, const WorkerAction* act);
+	bool run_findresource(Game* g, State* state, const WorkerAction* act);
 	bool run_walk(Game* g, State* state, const WorkerAction* act);
 	bool run_animation(Game* g, State* state, const WorkerAction* act);
 	bool run_return(Game* g, State* state, const WorkerAction* act);
