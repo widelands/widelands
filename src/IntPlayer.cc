@@ -369,7 +369,7 @@ void Interactive_Player::finish_build_road()
 	assert(m_buildroad);
 
 	roadb_remove_overlay();
-	
+
 	if (m_buildroad->get_nsteps()) {
 		// awkward... path changes ownership
 		Path *path = new Path(*m_buildroad);
@@ -385,7 +385,7 @@ void Interactive_Player::finish_build_road()
 ===============
 Interactive_Player::append_build_road
 
-If field is on the path, remove tail of path. 
+If field is on the path, remove tail of path.
 Otherwise append if possible or return false.
 ===============
 */
@@ -399,22 +399,22 @@ bool Interactive_Player::append_build_road(Coords field)
 		roadb_remove_overlay();
 		m_buildroad->truncate(idx);
 		roadb_add_overlay();
-		
+
 		return true;
 	}
-	
+
 	// Find a path to the clicked-on field
 	Map *map = m_game->get_map();
 	Path path;
 	CheckStepRoad cstep(get_player(), MOVECAPS_WALK, &m_buildroad->get_coords());
 
-	if (map->findpath(m_buildroad->get_end(), field, 0, &path, &cstep) < 0)
+	if (map->findpath(m_buildroad->get_end(), field, 0, &path, &cstep, Map::fpBidiCost) < 0)
 		return false; // couldn't find a path
-	
+
 	roadb_remove_overlay();
 	m_buildroad->append(path);
 	roadb_add_overlay();
-	
+
 	return true;
 }
 
@@ -516,7 +516,7 @@ void Interactive_Player::roadb_add_overlay()
 
 		if (m_buildroad->get_index(neighb) >= 0)
 			continue; // the road can't cross itself
-		
+
 		int slope = abs(endpos.field->get_height() - neighb.field->get_height());
 		int icon;
 		
@@ -550,7 +550,7 @@ void Interactive_Player::roadb_remove_overlay()
 	// preview of the road
 	for(int idx = 0; idx <= m_buildroad->get_nsteps(); idx++)	{
 		Coords c = m_buildroad->get_coords()[idx];
-		
+
 		m_maprenderinfo.overlay_roads[c.y*mapwidth + c.x] = 0;
 	}
 	

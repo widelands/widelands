@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by The Widelands Development Team
+ * Copyright (C) 2002-2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -987,7 +987,7 @@ int Bob::start_walk(Game *g, WalkingDir dir, uint a, bool force)
 	}
 
 	// Move is go
-	int tdelta = 2000; // :TODO: height-based speed changes
+	int tdelta = g->get_map()->calc_cost(m_position, dir);
 
 	m_walking = dir;
 	m_walkstart = g->get_gametime();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -140,6 +140,12 @@ class Map {
 	friend class Editor;
 
 public:
+	enum { // flags for findpath()
+		fpBidiCost = 1,		// use bidirection cost instead of normal cost calculations
+									// should be used for road building
+	};
+
+public:
 	struct Pathfield;
 
    Map();
@@ -194,7 +200,9 @@ public:
 	int is_neighbour(const Coords start, const Coords end);
 
 	int calc_cost_estimate(Coords a, Coords b);
+	int calc_cost(int slope);
 	int calc_cost(Coords coords, int dir);
+	int calc_bidi_cost(Coords coords, int dir);
 	void calc_cost(const Path &path, int *forward, int *backward);
 
 	inline void get_ln(const Coords f, Coords * const o);
@@ -219,7 +227,8 @@ public:
 	inline void get_pix(const Coords c, int *px, int *py);
 
 	// Pathfinding
-	int findpath(Coords start, Coords end, int persist, Path *path, const CheckStep* checkstep);
+	int findpath(Coords start, Coords end, int persist, Path *path, const CheckStep* checkstep,
+						uint flags = 0);
 
 	bool can_reach_by_water(Coords field);
 

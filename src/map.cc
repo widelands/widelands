@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -117,7 +117,7 @@ load the header
 */
 int S2_Map_Loader::preload_map() {
    assert(get_state()!=STATE_LOADED);
-   
+
    load_s2mf_header();
 	
    if(!exists_world(m_map->get_world_name())) {
@@ -1225,7 +1225,7 @@ int Map::is_neighbour(const Coords start, const Coords end)
 	if (dy == -1) {
 		if (start.y & 1)
 			dx--;
-		
+
 		switch(dx) {
 		case -1: return Map_Object::WALK_NW;
 		case 0: return Map_Object::WALK_NE;
@@ -1236,6 +1236,11 @@ int Map::is_neighbour(const Coords start, const Coords end)
 	return 0;
 }
 
+
+#define BASE_COST_PER_FIELD		2000
+#define SLOPE_COST_FACTOR			0.02
+#define SLOPE_COST_STEPS			8
+
 /*
 ===============
 Map::calc_cost_estimate
@@ -1244,27 +1249,94 @@ Calculates the cost estimate between the two points.
 This function is used mainly for the path-finding estimate.
 ===============
 */
-#define COST_PER_FIELD		2000 // TODO
- 
 int Map::calc_cost_estimate(Coords a, Coords b)
 {
-	return calc_distance(a, b) * COST_PER_FIELD;
+	return calc_distance(a, b) * BASE_COST_PER_FIELD;
 }
+
 
 /*
 ===============
 Map::calc_cost
 
-Calculate the hard cost of walking from coords in the given direction.
+Calculate the hard cost of walking the given slope (positive means up,
+negative means down).
 The cost is in milliseconds it takes to walk.
 
-TODO: slope must impact cost
+The time is calculated as BASE_COST_PER_FIELD * f, where
+
+f = base + d(Slope)
+d = SLOPE_COST_FACTOR * (Slope + SLOPE_COST_STEPS)*(Slope + SLOPE_COST_STEPS - 1) / 2
+base = 1.0 - d(0)
+
+Slope is limited to the range [ -SLOPE_COST_STEPS; +oo [
+===============
+*/
+#define CALC_COST_D(slope)		(SLOPE_COST_FACTOR * ((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1) * 0.5)
+#define CALC_COST_BASE			(1.0 - CALC_COST_D(0))
+
+static inline float calc_cost_d(int slope)
+{
+	if (slope < -SLOPE_COST_STEPS)
+		slope = -SLOPE_COST_STEPS;
+
+	return CALC_COST_D(slope);
+}
+
+int Map::calc_cost(int slope)
+{
+	return (int)(BASE_COST_PER_FIELD * (CALC_COST_BASE + calc_cost_d(slope)));
+}
+
+
+/*
+===============
+Map::calc_cost
+
+Return the time it takes to walk the given step from coords in the given
+direction, in milliseconds.
 ===============
 */
 int Map::calc_cost(Coords coords, int dir)
 {
-	return COST_PER_FIELD;
+	FCoords f;
+	int startheight;
+	int delta;
+
+	// Calculate the height delta
+	f = get_fcoords(coords);
+	startheight = f.field->get_height();
+
+	get_neighbour(f, dir, &f);
+	delta = f.field->get_height() - startheight;
+
+	return calc_cost(delta);
 }
+
+
+/*
+===============
+Map::calc_bidi_cost
+
+Calculate the average cost of walking the given step in both directions.
+===============
+*/
+int Map::calc_bidi_cost(Coords coords, int dir)
+{
+	FCoords f;
+	int startheight;
+	int delta;
+
+	// Calculate the height delta
+	f = get_fcoords(coords);
+	startheight = f.field->get_height();
+
+	get_neighbour(f, dir, &f);
+	delta = f.field->get_height() - startheight;
+
+	return (calc_cost(delta) + calc_cost(-delta)) / 2;
+}
+
 
 /*
 ===============
@@ -1278,15 +1350,15 @@ with the cost of walking in said direction.
 void Map::calc_cost(const Path &path, int *forward, int *backward)
 {
 	Coords coords = path.get_start();
-		
+
 	if (forward)
 		*forward = 0;
 	if (backward)
 		*backward = 0;
-	
+
 	for(int i = 0; i < path.get_nsteps(); i++) {
 		int dir = path.get_step(i);
-		
+
 		if (forward)
 			*forward += calc_cost(coords, dir);
 		get_neighbour(coords, dir, &coords);
@@ -1336,7 +1408,7 @@ the given mapfile
 */
 Map_Loader* Map::get_correct_loader(const char* filename) {
    Map_Loader* retval=0;
-   
+
    if(!strcasecmp(filename+(strlen(filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
    {
       throw wexception("TODO: WLMF not implemented");
@@ -1550,7 +1622,8 @@ The function returns the cost of the path (in milliseconds of normal walking
 speed) or -1 if no path has been found.
 ===============
 */
-int Map::findpath(Coords instart, Coords inend, int persist, Path *path, const CheckStep* checkstep)
+int Map::findpath(Coords instart, Coords inend, int persist, Path *path,
+                  const CheckStep* checkstep, uint flags)
 {
 	FCoords start;
 	FCoords end;
@@ -1584,7 +1657,7 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path, const C
 	if (!persist)
 		upper_cost_limit = 0;
 	else
-		upper_cost_limit = persist * calc_cost_estimate(start, end); // assume 2 secs per field
+		upper_cost_limit = persist * calc_cost_estimate(start, end); // assume flat terrain
 
 	// Actual pathfinding
 	StarQueue Open;
@@ -1647,13 +1720,17 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path, const C
 				continue;
 
 			// Calculate cost
-			cost = curpf->real_cost + calc_cost(Coords(cur.x, cur.y), *direction);
+			if (flags & fpBidiCost)
+				cost = curpf->real_cost + calc_bidi_cost(Coords(cur.x, cur.y), *direction);
+			else
+				cost = curpf->real_cost + calc_cost(Coords(cur.x, cur.y), *direction);
 
 			if (neighbpf->cycle != m_pathcycle) {
 				// add to open list
 				neighbpf->cycle = m_pathcycle;
 				neighbpf->real_cost = cost;
-				neighbpf->estim_cost = calc_cost_estimate(neighb, end);
+				// use a slightly lower estimate for better accuracy
+				neighbpf->estim_cost = calc_cost_estimate(neighb, end) >> 1;
 				neighbpf->backlink = *direction;
 				Open.push(neighbpf);
 			} else if (neighbpf->cost() > cost+neighbpf->estim_cost) {
