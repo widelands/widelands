@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,15 @@ protected:
 
 private:
 	std::vector<uint>	m_attributes;
+
+public:
+	static uint get_attribute_id(std::string name);
+
+private:
+	typedef std::map<std::string, uint> AttribMap;
+
+	static uint			s_dyn_attribhigh;		// highest attribute ID used
+	static AttribMap	s_dyn_attribs;
 };
 
 
@@ -108,6 +117,8 @@ public:
 	enum Attribute {
 		WAREHOUSE = 1,		// assume BUILDING
 		WORKER,				// assume BOB
+
+		HIGHEST_FIXED_ATTRIBUTE
 	};
 
 	// the enums tell us where we are going

@@ -2,6 +2,7 @@
 type=immovable
 stock=1
 size=normal
+attrib=tree
 
 [idle]
 pics=tree3_??.bmp

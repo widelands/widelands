@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -178,6 +178,12 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 		}
 		else
 			throw wexception("Unknown size '%s'. Possible values: none, small, medium, big", string);
+	}
+
+
+	// Parse attributes
+	while(global->get_next_string("attrib", &string)) {
+		add_attribute(get_attribute_id(string));
 	}
 
 

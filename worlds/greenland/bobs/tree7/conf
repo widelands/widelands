@@ -1,8 +1,10 @@
+[global]
 type="diminishing"
 ends_in=""
 stock=1
 
 size=normal
+attrib=tree
 
 clrkey_r=0
 clrkey_g=0

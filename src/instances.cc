@@ -100,9 +100,13 @@ Map_Object* Object_Ptr::get(Editor_Game_Base* game)
 ==============================================================================
 
 Map_Object_Descr IMPLEMENTATION
-		
+
 ==============================================================================
 */
+
+uint Map_Object_Descr::s_dyn_attribhigh = Map_Object::HIGHEST_FIXED_ATTRIBUTE;
+Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
+
 
 /*
 ===============
@@ -133,6 +137,35 @@ void Map_Object_Descr::add_attribute(uint attr)
 {
 	if (!has_attribute(attr))
 		m_attributes.push_back(attr);
+}
+
+
+/*
+===============
+Map_Object_Descr::get_attribute_id [static]
+
+Lookup an attribute by name. If the attribute name hasn't been encountered
+before, we add it to the map.
+===============
+*/
+uint Map_Object_Descr::get_attribute_id(std::string name)
+{
+	AttribMap::iterator it = s_dyn_attribs.find(name);
+
+	if (it != s_dyn_attribs.end())
+		return it->second;
+
+	if (name == "warehouse")
+		return Map_Object::WAREHOUSE;
+	else if (name == "worker")
+		return Map_Object::WORKER;
+
+	s_dyn_attribhigh++;
+	s_dyn_attribs[name] = s_dyn_attribhigh;
+
+	assert(s_dyn_attribhigh != 0); // wrap around seems *highly* unlikely ;)
+
+	return s_dyn_attribhigh;
 }
 
 
