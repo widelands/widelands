@@ -284,7 +284,8 @@ void TrainingSite::cleanup(Editor_Game_Base* g)
 		for(i=0; i<m_soldiers.size(); i++) {
 			Soldier* s = m_soldiers[i];
 		 	m_soldiers[i] = 0;
-		 	s->set_location(0);
+         if(g->get_objects()->object_still_available(s))
+            s->set_location(0);
 		}
 		m_soldiers.resize(0);
 	}
