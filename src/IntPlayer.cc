@@ -145,6 +145,15 @@ void Interactive_Player::field_action(int fx, int fy)
 	// note: buildings owned by the player must be treated differently
 	// (i.e bring up dialog specific to the building)
 
+   // TEMP
+   cerr << fx << ":" << fy << "=" << game->get_map()->get_field(fx,fy)->get_terr() << "|" << game->get_map()->get_field(fx,fy)->get_terd() << endl;
+   cerr << fx << ":" << fy << "=" << hex << (int) game->get_map()->get_field(fx,fy)->get_terr()->get_is() << "|" << 
+      (int) game->get_map()->get_field(fx,fy)->get_terd()->get_is() << endl << dec ;
+   cerr << "Bau symbol: " << (int) game->get_map()->get_build_symbol(fx,fy) << endl;
+   cerr << "Hoehe: " << (int) game->get_map()->get_field(fx,fy)->get_height() << endl;
+
+   // TEMP ENDS
+   
 	show_field_action(this, fx, fy, &fieldaction);
 }
 

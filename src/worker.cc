@@ -49,13 +49,13 @@ int Worker_Descr::read(Binary_file* f) {
    walk_w.set_dimensions(w, h);
    walk_sw.set_dimensions(w, h);
    walk_se.set_dimensions(w, h);
-   walk_w.set_dimensions(w, h);
+   walk_e.set_dimensions(w, h);
    walk_ne.set_hotspot(sx, sy);
    walk_nw.set_hotspot(sx, sy);
    walk_w.set_hotspot(sx, sy);
    walk_sw.set_hotspot(sx, sy);
    walk_se.set_hotspot(sx, sy);
-   walk_w.set_hotspot(sx, sy);
+   walk_e.set_hotspot(sx, sy);
    
    walk_ne.read(f);
    walk_e.read(f);

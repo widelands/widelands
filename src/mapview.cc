@@ -32,6 +32,11 @@
  */
 
 AutoPic Map_View::fsel("fsel.bmp", 0, 0, 255);
+AutoPic Map_View::small_building("small.bmp", 0, 0, 255);
+AutoPic Map_View::medium_building("medium.bmp", 0, 0, 255);
+AutoPic Map_View::big_building("big.bmp", 0, 0, 255);
+AutoPic Map_View::mine_building("mine.bmp", 0, 0, 255);
+AutoPic Map_View::setable_flag("set_flag.bmp", 0, 0, 255);
 
 /** Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m)
  *
@@ -168,7 +173,9 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 		while(count--) {
 			Field *rf, *rfl;
 			int rposx, rblposx;
-
+//         int map_posx=fx;
+  //       int map_posy=fy;
+         
 			map->get_rn(fx, fy, f, &fx, &fy, &rf);
 			rposx = posx + FIELD_WIDTH;
 
@@ -177,6 +184,46 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 
 			draw_field(dst, f, rf, fl, rfl, posx, rposx, posy, blposx, rblposx, blposy);
 
+         /*
+        // TODO: TEMP DEBUG: render buildhelp over everything
+         switch(map->get_build_symbol(map_posx, map_posy)) {
+            case Field::NOTHING:
+               break;
+               
+            case Field::FLAG:
+               copy_pic(dst, &setable_flag, posx-(setable_flag.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(setable_flag.get_h()), 
+                     0, 0, setable_flag.get_w(), setable_flag.get_h());
+               break;
+               
+            case Field::SMALL:
+               copy_pic(dst, &small_building, posx-(small_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(small_building.get_h()>>1), 
+                     0, 0, small_building.get_w(), small_building.get_h());
+               break;
+               
+            case Field::MEDIUM:
+               copy_pic(dst, &medium_building, posx-(medium_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(medium_building.get_h()>>1), 
+                     0, 0, medium_building.get_w(), medium_building.get_h());
+               break;
+               
+            case Field::BIG:
+               copy_pic(dst, &big_building, posx-(big_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(big_building.get_h()>>1), 
+                     0, 0, big_building.get_w(), big_building.get_h());
+               break;
+
+            case Field::MINE:
+               copy_pic(dst, &mine_building, posx-(mine_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(mine_building.get_h()>>1), 
+                     0, 0, mine_building.get_w(), mine_building.get_h());
+                break;
+
+               
+            case Field::PORT:
+            default:
+               assert(0);
+               break;
+         }
+         // TEMP ENDS
+*/
+ 
 			f = rf;
 			fl = rfl;
 			posx = rposx;
@@ -232,10 +279,13 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 	render_triangle(dst, p+1, b+1, f->get_terd()->get_texture());
 
    // check if a instance is hooked to this field, if so, draw it
-   if(f->get_inst()) {
-  //    cerr << p[1].x << ":" << p[1].y << endl;
-      copy_animation_pic(dst, f->get_inst(), p[1].x, p[1].y, 0, 0, 0, 0); 
-      // cerr << temp << ": Should draw a instance! TODO" << endl;
+   if(f->get_first_inst()) {
+      //    cerr << p[1].x << ":" << p[1].y << endl;
+      Instance_Link* inst=f->get_first_inst();
+      while(inst) {
+         copy_animation_pic(dst, inst->inst, p[1].x, p[1].y, 0, 0, 0, 0); 
+         inst=inst->next;
+      }
    }
 
 }
@@ -269,26 +319,8 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 	if (btn == 0)
 	{
 		if (down) {
-			track_fsel(x, y);
-		   // TEMP
-         cerr << "Left mouseclick. field height: " << (int) map->get_safe_field(x,y)->get_height() << endl; 
-         cerr << "right_neighbour: " << (int) map->get_safe_field(x-1, y)->get_height() << endl;
-         cerr << "left neighbour: " << (int) map->get_safe_field(x+1, y)->get_height() << endl;
-         if(y&1) {
-            // odd 
-            cerr << "top-left neighbour: " << (int) map->get_safe_field(x, y-1)->get_height() << endl;
-            cerr << "top-right neighbour: " << (int) map->get_safe_field(x+1, y-1)->get_height() << endl;
-            cerr << "bottom-left neighbour: " << (int) map->get_safe_field(x, y+1)->get_height() << endl;
-            cerr << "bottom-right neighbour: " << (int) map->get_safe_field(x+1, y+1)->get_height() << endl;
-         } else {
-            // even
-            cerr << "top-left neighbour: " << (int) map->get_safe_field(x-1, y-1)->get_height() << endl;
-            cerr << "top-right neighbour: " << (int) map->get_safe_field(x, y-1)->get_height() << endl;
-            cerr << "bottom-left neighbour: " << (int) map->get_safe_field(x-1, y+1)->get_height() << endl;
-            cerr << "bottom-right neighbour: " << (int) map->get_safe_field(x, y+1)->get_height() << endl;
-         }
-         cerr << endl;
-         // TEMP ENDS
+         track_fsel(x, y);
+
          fieldclicked.call(fselx, fsely);
 		}
 	}

@@ -148,6 +148,7 @@ int Logic_Bob_Descr::create_bob(Profile* p, Section* s, const char* def_suffix, 
 
    return OK;  
 }
+
 //
 // Growings
 // 
@@ -297,4 +298,73 @@ int Boring_Bob_Descr::write(Binary_file* f) {
    return OK;
 }
 
+//
+// Critters
+// 
+Critter_Bob_Descr::Critter_Bob_Descr(const char* gname) : Logic_Bob_Descr(gname) {
+   stock=0;
+   swimming=0;
+   needl.add_provide(get_name(), Need_List_Descr::IS_CRITTER_BOB);
+}
+Critter_Bob_Descr::~Critter_Bob_Descr(void) {
+}
+int Critter_Bob_Descr::construct(Profile* p, Section* s) {
+   int retval;
 
+   //   cerr << "Parsing Critter_Bob_Descr!" << endl;
+
+   retval=Logic_Bob_Descr::construct(p,s);
+   if(retval) return retval;
+
+   stock=s->get_int("stock", 0);
+   swimming=s->get_boolean("swimming", false);
+
+   // parse bobs
+   retval=create_bob(p, s, "_walk_ne_??.bmp", "walk_ne_anim", &bob_walk_ne);
+   if(retval) {
+      return retval;
+   }
+   retval=create_bob(p, s, "_walk_nw_??.bmp", "walk_nw_anim", &bob_walk_nw);
+   if(retval) {
+      return retval;
+   }retval=create_bob(p, s, "_walk_e_??.bmp", "walk_e_anim", &bob_walk_e);
+   if(retval) {
+      return retval;
+   }retval=create_bob(p, s, "_walk_w_??.bmp", "walk_w_anim", &bob_walk_w);
+   if(retval) {
+      return retval;
+   }retval=create_bob(p, s, "_walk_sw_??.bmp", "walk_sw_anim", &bob_walk_sw);
+   if(retval) {
+      return retval;
+   }retval=create_bob(p, s, "_walk_se_??.bmp", "walk_se_anim", &bob_walk_se);
+   if(retval) {
+      return retval;
+   }
+   
+   return OK;
+}
+int Critter_Bob_Descr::write(Binary_file* f) {
+//   cerr << "Critter_Bob_Descr::write()!" << endl;
+
+   // write type
+   uchar type=BOB_CRITTER;
+   f->write(&type, sizeof(uchar));
+   
+   // write bob common informations
+   Logic_Bob_Descr::write(f);
+  
+   // write ours 
+   f->write(&stock, sizeof(ushort));
+   type=swimming;
+   f->write(&type, sizeof(uchar));
+
+   // write more bobs
+   bob_walk_ne.write(f);
+   bob_walk_e.write(f);
+   bob_walk_se.write(f);
+   bob_walk_sw.write(f);
+   bob_walk_w.write(f);
+   bob_walk_nw.write(f);
+   
+   return OK;
+}

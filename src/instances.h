@@ -20,6 +20,8 @@
 #ifndef __S__INSTANCE_H
 #define __S__INSTANCE_H
 
+#include "field.h"
+
 class Game;
 struct Animation_Pic;
 
@@ -41,7 +43,7 @@ class Map_Object {
    friend class Instance;
 
    public:
-      Map_Object(void) { pic_idx=0; };
+      Map_Object(void) { pic_idx=0; rel_pos_x=0; rel_pos_y=0; };
       virtual ~Map_Object(void) { }
 
       inline Animation_Pic* get_cur_pic(void) { return cur_pic; }
@@ -50,14 +52,14 @@ class Map_Object {
       virtual int act(Game*)=0;
       inline void set_owned_by(uchar plnum) { owned_by=plnum; }
  //     uint handle_click(void); // is this good here?
-      inline uint get_next_acting_frame(void) { return next_acting_frame; }
-      inline void set_next_acting_frame(uint i) { next_acting_frame=i; }
  
    protected:
-      uint next_acting_frame;
       Animation_Pic* cur_pic;
       uchar pic_idx;
       uchar owned_by; // player number
+      Field* field;
+      ushort px, py;
+      float rel_pos_x, rel_pos_y;
 };
 
 //
@@ -79,13 +81,20 @@ class Instance {
       virtual ~Instance(void) { }
       
       
-      inline uint get_next_acting_frame(void) { assert(obj); return obj->get_next_acting_frame(); }
-      inline void set_next_acting_frame(uint i) { assert(obj); obj->set_next_acting_frame(i); }
       inline Animation_Pic* get_cur_pic(void) { assert(obj);  return obj->get_cur_pic(); }
       inline int act(Game* g) { assert(obj); return obj->act(g); }
       inline void set_owned_by(uchar plnum) { assert(obj); obj->set_owned_by(plnum); }
+      inline float get_rel_pos_x(void) { assert(obj); return obj->rel_pos_x; }
+      inline float get_rel_pos_y(void) { assert(obj); return obj->rel_pos_y; }
       
-     // Is this a good idea, making this thinggy public?
+      inline void hook_field(ushort x, ushort y, Field* f) {
+         obj->px=x;
+         obj->py=y;
+         obj->field=f;
+         f->hook_instance(this);
+      }
+
+      // Is this a good idea, making this thinggy public?
       Map_Object* obj;
 
    private:
@@ -110,13 +119,13 @@ class Instance_Handler {
          return ((uint) -1);
       }
 
-      inline void free_obj(uint n) {
+      inline void free_inst(uint n) {
          if(inst[n].obj) delete inst[n].obj; 
          inst[n].obj=0;
          inst[n].state=Instance::UNUSED;
       }
-      
-   private:
+     
+      private:
       uint nobj;
       Instance* inst;
 };

@@ -1,4 +1,4 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -DNDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 # -pg -fprofile-arcs -g
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 # -pg -fprofile-arcs -g # -O3
 #EXTRA_FLAGS=@SDL_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2 -O3
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
@@ -109,9 +109,10 @@ widelands_SOURCES=main.cc \
                   ware.cc \
                   worker.h \
                   worker.cc \
-                  worlddata.h
+                  worlddata.h \
+                  field.h
 
-# TO INCLUDE IN CVS: current
+# TO INCLUDE IN CVS: 
 
 
 #  uncomment the following if widelands requires the math library

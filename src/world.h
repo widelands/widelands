@@ -23,6 +23,7 @@
 #include "myfile.h"
 #include "descr_maintainer.h"
 #include "bob.h"
+#include "worlddata.h"
 
 struct World_Descr_Header {
    char name[30];
@@ -65,8 +66,11 @@ class Terrain_Descr {
       }
 
       inline Pic* get_texture(void) { return tex[curtex]; }
+      inline uchar get_is(void) { return is; }
+
       int read(Binary_file* f);
 
+      
    private:
       inline void animate(void) {
          curtex++;

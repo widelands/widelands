@@ -51,7 +51,6 @@ int NeedWares_List::read(Binary_file* f) {
 // down here: Buildings as Map_Objects
 int Building_HQ::act(Game* g) {
 
-   next_acting_frame=g->get_frame()+10;
    cur_pic=descr->get_idle_anim()->get_pic(0);
 
    return RET_OK;
@@ -392,7 +391,7 @@ int HQ_Descr::create_instance(Instance* inst) {
    cerr << "HQ_Descr::create_instance() not yet implemented: TODO!" << endl;
 
    inst->obj=new Building_HQ(this);
-
+   
    return -1; // never act again 
 }
 

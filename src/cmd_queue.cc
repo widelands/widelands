@@ -102,8 +102,11 @@ int Cmd_Queue::run_queue(void) {
             // arg3==pointer to point struct where to build the building
             temp=g->hinst->get_free_inst_id();
             inst=g->hinst->get_inst(temp);
-            g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
+            cerr << "Building at: " << ((Point*) c->arg3)->x << ":" <<  ((Point*) c->arg3)->y << endl;
             temp=g->get_player_tribe(c->arg1)->get_building_descr(c->arg2)->create_instance(inst);
+            inst->hook_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y,
+                  g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y));
+//                  g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
             inst->set_owned_by((uchar)c->arg1);
             if(temp>=0) queue(temp, SENDER_QUEUE, CMD_ACT, 0, 0, inst);
             //inst->set_next_acting_frame(g->get_frame()+temp);
@@ -116,8 +119,10 @@ int Cmd_Queue::run_queue(void) {
             // arg3=pointer to point struct where to build the bobs
             temp=g->hinst->get_free_inst_id();
             inst=g->hinst->get_inst(temp);
-            g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
             temp=g->get_map()->get_world()->get_bob_descr((ushort)c->arg1)->create_instance(inst);
+            inst->hook_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y,
+                  g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y));
+        //    g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
             inst->set_owned_by(SENDER_LOADER);
             if(temp>=0) queue(temp, SENDER_QUEUE, CMD_ACT, 0, 0, inst);
             //inst->set_next_acting_frame(g->get_frame()+temp);

@@ -58,7 +58,13 @@ public:
 	void track_fsel(int mx, int my);
 
 private:
-	static AutoPic fsel;
+   static AutoPic fsel;
+   static AutoPic small_building;
+   static AutoPic medium_building;
+   static AutoPic big_building;
+   static AutoPic mine_building;
+   static AutoPic setable_flag;
+
 
 	Map* map;
 	int vpx, vpy;

@@ -107,6 +107,25 @@ class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
       ushort ttl; // time to life
 };
 
+// 
+// Critters
+// 
+class Critter_Bob_Descr : virtual public Logic_Bob_Descr {
+   public:
+      Critter_Bob_Descr(const char* name);
+      virtual ~Critter_Bob_Descr(void);
+
+      virtual int construct(Profile* p, Section *s);
+      virtual int write(Binary_file* f);
+
+   private:
+      short stock;
+      bool swimming;
+      Bob_Descr bob_walk_sw, bob_walk_se, bob_walk_w,
+       bob_walk_e, bob_walk_ne, bob_walk_nw;
+};
+
+
 // global ware fabric objekt!
 extern Fabric<Logic_Bob_Descr> bobf;
 

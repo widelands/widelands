@@ -82,20 +82,32 @@ int Terrain_Descr::construct(Profile* p, Section *s) {
    }
 
    if(!strcasecmp(str, "dry")) {
-      is=TERRAIN_DRY;
+      is|=TERRAIN_DRY;
    } else if(!strcasecmp(str, "green")) {
-      is=TERRAIN_GREEN;
+      is=0;
    } else if(!strcasecmp(str, "water")) {
-      is=TERRAIN_WATER;
+      is|=TERRAIN_WATER;
+      is|=TERRAIN_DRY;
+      is|=TERRAIN_UNPASSABLE;
    } else if(!strcasecmp(str, "acid")) {
-      is=TERRAIN_ACID;
+      is|=TERRAIN_ACID;
+      is|=TERRAIN_DRY;
+      is|=TERRAIN_UNPASSABLE;
    } else if(!strcasecmp(str, "mountain")) {
-      is=TERRAIN_MOUNTAIN;
+      is|=TERRAIN_DRY;
+      is|=TERRAIN_MOUNTAIN;
+   } else if(!strcasecmp(str, "dead")) {
+      is|=TERRAIN_DRY;
+      is|=TERRAIN_UNPASSABLE;
+      is|=TERRAIN_ACID;
+   } else if(!strcasecmp(str, "unpassable")) {
+      is|=TERRAIN_DRY;
+      is|=TERRAIN_UNPASSABLE;
    } else {
       strcpy(err_sec,s->get_name());
       strcpy(err_key,"is");
       strcpy(err_msg, str);
-      strcat(err_msg,": Not a valid type (dry, green, water, acid, mountain)");
+      strcat(err_msg,": Not a valid type (unpassable, dry, green, water, acid, mountain, dead)");
       return ERROR;
    }                              
 

@@ -38,11 +38,13 @@
 #define TEXTURE_H          64
 
 
-#define TERRAIN_DRY        0
-#define TERRAIN_GREEN      1 
+#define TERRAIN_DRY        1
+// #define TERRAIN_GREEN      1 
 #define TERRAIN_WATER      2
-#define TERRAIN_ACID       3
-#define TERRAIN_MOUNTAIN   4
+#define TERRAIN_ACID       4
+#define TERRAIN_MOUNTAIN   8
+// fine TERRAIN_DEAD       5
+#define TERRAIN_UNPASSABLE 16
 
 
 #endif /* __S__TRIBEDATA_H */

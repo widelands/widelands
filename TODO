@@ -34,7 +34,7 @@
   widelands, for working build command. make sure, every instance has a 
   pointer on it's description
 - Make -DNDEBUG work again
-
+- Make a good/unpredictable/fast random generator with a good seed
 
 
 

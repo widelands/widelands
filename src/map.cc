@@ -20,6 +20,7 @@
 #include "widelands.h"
 #include "map.h"
 #include "myfile.h"
+#include "worlddata.h"
 
 /** class Map
  *
@@ -161,14 +162,14 @@ int Map::load_wlmf(const char* file, Cmd_Queue* q) {
 int Map::load_map_header(const char* file) {
    int ret=RET_OK;
 
-   if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+   if(!strcasecmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
    {
       // It ends like a wide lands map file. try to load
       // it as such
       // TODO: do this
       // ret = load_wlmf(file, q);
    }
-   else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+   else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {
       // it is a S2 Map file. load it as such
       ret = load_s2mf_header(file);
@@ -201,10 +202,8 @@ int Map::load_map(const char* file, Cmd_Queue* q)
    }
    else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {
-      cerr << "Herer we go!" << endl;
       // it is a S2 Map file. load it as such
       ret = load_s2mf(file, q);
-      cerr << "double done!" << endl;
    }
    else
    {
@@ -261,3 +260,171 @@ void Map::recalc_brightness(int fx, int fy)
 
    f->set_brightness(l, r, tl, tr, bl, br);
 }
+
+/** 
+ * this function returns the build symbol on this field.
+ * This needs a quite complex calculation of the sourrounding fields heights
+ * and terrains, bobs ....
+ *
+ * Probably, this information should be stored in the field data...
+ */
+Field::Build_Symbol Map::get_build_symbol(const int x, const int y) {
+   Field *f, *f1;
+
+   f=get_field(x,y);
+   int h, h1, x1, y1;
+
+  // if: unpassable
+   if((f->get_terr()->get_is() & TERRAIN_UNPASSABLE) &&
+         (f->get_terd()->get_is() & TERRAIN_UNPASSABLE)) {
+      get_tln(x, y, f, &x1, &y1, &f1);
+      if((f1->get_terr()->get_is() & TERRAIN_UNPASSABLE) &&
+            (f1->get_terd()->get_is() & TERRAIN_UNPASSABLE)) {
+         get_ln(x, y, f, &x1, &y1, &f1);
+         if(f1->get_terr()->get_is() & TERRAIN_UNPASSABLE) {
+            get_trn(x, y, f, &x1, &y1, &f1);
+            if(f1->get_terd()->get_is() & TERRAIN_UNPASSABLE) 
+               return Field::NOTHING;
+         }
+      }
+   }
+   
+    // if dead terrain: check
+   if(f->get_terr()->get_is() & TERRAIN_ACID) return Field::NOTHING;
+   if(f->get_terd()->get_is() & TERRAIN_ACID) return Field::NOTHING;
+   get_ln(x, y, f, &x1, &y1, &f1);
+   if(f1->get_terr()->get_is() & TERRAIN_ACID) return Field::NOTHING;
+   get_tln(x, y, f, &x1, &y1, &f1); 
+   if(f1->get_terr()->get_is() & TERRAIN_ACID) return Field::NOTHING;
+   if(f1->get_terd()->get_is() & TERRAIN_ACID) return Field::NOTHING;
+   get_trn(x, y, f, &x1, &y1, &f1);
+   if(f1->get_terd()->get_is() & TERRAIN_ACID) return Field::NOTHING;
+   // also might be: flag
+   get_rn(x, y, f, &x1, &y1, &f1);
+   if(f1->get_terd()->get_is() & TERRAIN_ACID) return Field::FLAG;
+   get_brn(x, y, f, &x1, &y1, &f1);
+   if(f1->get_terd()->get_is() & TERRAIN_ACID) return Field::FLAG;
+   if(f1->get_terr()->get_is() & TERRAIN_ACID) return Field::FLAG;
+   get_bln(x, y, f, &x1, &y1, &f1);
+   if(f1->get_terr()->get_is() & TERRAIN_ACID) return Field::FLAG;
+
+   
+// #warning: Mountain is still buggy!! TODO
+   h=f->get_height();
+   if((f->get_terr()->get_is() & TERRAIN_MOUNTAIN) &&
+         (f->get_terd()->get_is() & TERRAIN_MOUNTAIN)) {
+      // mountain
+      get_brn(x, y, f, &x1, &y1, &f1);
+      h1=f1->get_height();
+      if(abs(h1-h) >= 6) 
+         return Field::FLAG;
+      return Field::MINE;
+   } 
+
+
+   // if dry or mountain terrain: flag
+   if(f->get_terr()->get_is() & TERRAIN_DRY) return Field::FLAG;
+   if(f->get_terd()->get_is() & TERRAIN_DRY) return Field::FLAG;
+   get_ln(x, y, f, &x1, &y1, &f1);
+   if(f1->get_terr()->get_is() & TERRAIN_DRY) return Field::FLAG;
+   get_tln(x, y, f, &x1, &y1, &f1); 
+   if(f1->get_terr()->get_is() & TERRAIN_DRY) return Field::FLAG;
+   if(f1->get_terd()->get_is() & TERRAIN_DRY) return Field::FLAG;
+   get_trn(x, y, f, &x1, &y1, &f1);
+   if(f1->get_terd()->get_is() & TERRAIN_DRY) return Field::FLAG;
+
+   // green
+   get_brn(x, y, f, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if((h1-h)>=2) {
+      //      cerr << "is ne flagge!, da bottom-right neighbour >=2!" << endl;
+      return Field::FLAG;
+   } else {
+      // check sourroundings: if height diff>=4 (can't be higher) --> flag
+      get_rn(x, y, f, &x1, &y1, &f1);
+      h1=f1->get_height();
+      if(abs(h1-h) >=4) {
+         //         cerr << "is ne flagge, da right neighbour unterschied >=4" << endl;
+         return Field::FLAG;
+      }
+      get_ln(x, y, f, &x1, &y1, &f1);
+      h1=f1->get_height();
+      if(abs(h1-h) >=4) {
+         //         cerr << "is ne flagge, da left neighbour unterschied >=4" << endl;
+         return Field::FLAG;
+      }   
+      get_tln(x, y, f, &x1, &y1, &f1);
+      h1=f1->get_height();
+      if(abs(h1-h)>=4) {
+         //         cerr << "is ne flagge, da top-left neighbour unterschied >=4" << endl;
+         return Field::FLAG;
+      }   
+      get_trn(x, y, f, &x1, &y1, &f1);
+      h1=f1->get_height();
+      if(abs(h1-h)>=4) {
+         //         cerr << "is ne flagge, da top-right neighbour unterschied >=4" << endl;
+         return Field::FLAG;
+      }   
+      get_bln(x, y, f, &x1, &y1, &f1);
+      h1=f1->get_height();
+      if(abs(h1-h)>=4) {
+         //         cerr << "is ne flagge, da bottom-left neighbour unterschied >=4" << endl;
+         return Field::FLAG;
+      }   
+      get_brn(x, y, f, &x1, &y1, &f1);
+      h1=f1->get_height();
+      if(abs(h1-h)>=4) {
+         //         cerr << "is ne flagge, da bottom-right neighbour unterschied >=4" << endl;
+         return Field::FLAG;
+      }   
+   } 
+
+   // else: check surroundings, second instance
+   get_rn(x, y, f, &x1, &y1, &f1);
+   get_rn(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h) >=3) {
+      //      cerr << "ist ein kleines gebauede, da right neighbour unterschied >=3" << endl;
+      return Field::SMALL;
+   }
+   get_ln(x, y, f, &x1, &y1, &f1);
+   get_ln(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h) >=3) {
+      //      cerr << "ist ein kleines gebauede, da left neighbour unterschied >=3" << endl;
+      return Field::SMALL;
+   }   
+   get_tln(x, y, f, &x1, &y1, &f1);
+   get_tln(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      //      cerr << "ist ein kleines gebauede, da top-left neighbour unterschied >=3" << endl;
+      return Field::SMALL;
+   }   
+   get_trn(x, y, f, &x1, &y1, &f1);
+   get_trn(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      //      cerr << "ist ein kleines gebauede, da top-right neighbour unterschied >=3" << endl;
+      return Field::SMALL;
+   }   
+   get_bln(x, y, f, &x1, &y1, &f1);
+   get_bln(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      //      cerr << "ist ein kleines gebauede, da bottom-left neighbour unterschied >=3" << endl;
+      return Field::SMALL;
+   }   
+   get_brn(x, y, f, &x1, &y1, &f1);
+   get_brn(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      //      cerr << "ist ein kleines gebauede, da bottom-right neighbour unterschied >=3" << endl;
+      return Field::SMALL;
+   }   
+
+   //   cerr << "Is ein big building!" << endl;
+   return Field::BIG;
+}
+
+

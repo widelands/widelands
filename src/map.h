@@ -33,6 +33,7 @@
 
 #include "cmd_queue.h"
 #include "world.h"
+#include "field.h"
 
 /** struct Map_Header
  *
@@ -113,53 +114,6 @@ struct Cords {
 //#define FIELD_HEIGHT  58
 #define HEIGHT_FACTOR 5
 
-class Instance;
-
-class Field {
-	friend class Map;
-private:
-	uchar height;
-	char brightness;
-	Terrain_Descr *terr, *terd;
-   Instance* inst; // TODO: at the moment every field can only have one object associated with it
-   uchar seen_by;
-   uchar owned_by;
-   
-public:
-   Field(void) { seen_by=0; owned_by=0; }
-   ~Field(void) { }
-
-	inline uchar get_height() const { return height; }
-
-	inline Terrain_Descr *get_terr() const { return terr; }
-	inline Terrain_Descr *get_terd() const { return terd; }
-	inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
-	inline void set_terraind(Terrain_Descr *p) { assert(p); terd = p; }
-
-   inline void hook_instance(Instance* obj) { inst=obj; }
-   inline Instance* get_inst(void) { return inst; }
-
-	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
-	inline char get_brightness() const { return brightness; }
-   
-   inline void set_seen_by(uint pln, bool seen) { 
-      assert(pln<9); 
-      if(seen) {
-         seen_by &= (pln-1);   
-      } else {
-         seen_by &= ~(pln-1);   
-      }
-   }
-   inline bool get_seen_by(uint pln) { assert(pln<9); return (seen_by & (pln-1)); }
-   inline void set_owned_by(uint pln) { owned_by=pln; }
-   inline uchar get_owned_by(void) { return owned_by; }
-
-private:
-	// note: you must reset this field's + neighbor's brightness when you change the height
-	// Map's set_height does this
-	inline void set_height(uchar h) { height = h; }
-};
-
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -182,29 +136,30 @@ class Map {
 		  Map& operator=(const Map&);
 
 		  public:
-					 Map(void);
-					 ~Map(void);
+               Map(void);
+               ~Map(void);
 
-					 int load_map(const char*, Cmd_Queue*);
-                int load_map_header(const char*); 
+               int load_map(const char*, Cmd_Queue*);
+               int load_map_header(const char*); 
 
-					 // informational functions
-					 inline const char* get_author(void) { return hd.author; }
-					 inline const char* get_name(void) { return hd.name; }
-					 inline const char* get_descr(void) { return hd.descr; }
-					 inline const char* get_world_name(void) { return hd.uses_world; }
-					 inline const ushort get_version(void) { return hd.version; }
-					 inline ushort get_nplayers(void) { return hd.nplayers; }
-					 inline uint get_w(void) { return hd.width; }
-					 inline uint get_h(void) { return hd.height; }
-                inline World* get_world(void) { return w; }
+               // informational functions
+               inline const char* get_author(void) { return hd.author; }
+               inline const char* get_name(void) { return hd.name; }
+               inline const char* get_descr(void) { return hd.descr; }
+               inline const char* get_world_name(void) { return hd.uses_world; }
+               inline const ushort get_version(void) { return hd.version; }
+               inline ushort get_nplayers(void) { return hd.nplayers; }
+               inline uint get_w(void) { return hd.width; }
+               inline uint get_h(void) { return hd.height; }
+               inline World* get_world(void) { return w; }
+               Field::Build_Symbol get_build_symbol(const int x, const int y);
 
-					// Field logic
-					inline Field *get_field(const int x, const int y);
-					inline void normalize_coords(int *x, int *y);
-					inline Field *get_safe_field(int x, int y);
+               // Field logic
+               inline Field *get_field(const int x, const int y);
+               inline void normalize_coords(int *x, int *y);
+               inline Field *get_safe_field(int x, int y);
 
-					inline void get_ln(const int fx, const int fy, int *ox, int *oy);
+               inline void get_ln(const int fx, const int fy, int *ox, int *oy);
 					inline void get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 					inline void get_rn(const int fx, const int fy, int *ox, int *oy);
 					inline void get_rn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);

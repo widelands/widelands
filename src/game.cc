@@ -81,7 +81,7 @@ void Game::run(void) {
    tribe= new Tribe_Descr(); 
    const char* str=g_fileloc.locate_file("testtribe.wtf", TYPE_TRIBE);
    assert(str);
-   if(!tribe->load(str)) {
+   if(tribe->load(str)) {
       assert(0);
    }
    // TEMP

@@ -247,7 +247,8 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
 
    // set size
    set_size(hd.width, hd.height);
-
+   
+   Point* p;
    ////           S E C T I O N    1 : H E I G H T S
    // New section??
    section = load_s2mf_section(&file, hd.width, hd.height);
@@ -398,7 +399,7 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
          // ignore everything but HQs
          if(section[i]==0x80) {
             // cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl;
-            Point* p = (Point*) malloc(sizeof(Point)); 
+            p = (Point*) malloc(sizeof(Point)); 
             p->x=x;
             p->y=y;
             q->queue(0, SENDER_LOADER, CMD_WARP_BUILDING, bobs[i], 0, p);
@@ -411,7 +412,7 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
    // 0x01 == Bunny
    // 0x02 == fox
    // 0x03 == reindeer
-   // 0x04 == rein
+   // 0x04 == deer
    // 0x05 == duck
    // 0x06 == sheep
    // New section??
@@ -419,6 +420,56 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
    if (!section) {
       cerr << "Section 7 --> NOT FOUND in file" << endl;
       return ERR_FAILED;
+   }
+   for(y=0; y<hd.height; y++) {
+      i=y*hd.width;
+      for(x=0; x<hd.width; x++, i++) {
+         uint z=0;
+         // ignore everything but HQs
+         switch(section[i]) {
+            case 0x01:
+               for(z=0; z<CRITTER_PER_DEFINITION; z++) { 
+                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("bunny"), 0, p);
+               }
+               break;
+
+            case 0x02:
+               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
+                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("fox"), 0, p);
+               }
+               break;
+
+            case 0x03:
+               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
+                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("reindeer"), 0, p);
+               }
+               break;
+
+            case 0x04:
+               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
+                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("deer"), 0, p);
+               }
+               break;
+
+            case 0x05:
+               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
+                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("duck"), 0, p);
+               }
+               break;
+
+            case 0x06:
+               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
+                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("Sheep"), 0, p);
+               }
+               break;
+
+            default:
+               cerr << "Unsupported animal: " << (int) section[i] << endl;
+               assert(0);
+            case 0x00:
+               break;
+         }
+      }
    }
    free(section);
 
@@ -520,7 +571,6 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
 
 
    uchar c;
-   Point* p;
    for(y=0; y<hd.height; y++) {
       for(x=0; x<hd.width; x++) {
  

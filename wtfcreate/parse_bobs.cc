@@ -82,6 +82,8 @@ int parse_bobs(void) {
          bob=new Growing_Bob_Descr(file->d_name);
       } else if(!strcasecmp(type, "boring")) {
          bob=new Boring_Bob_Descr(file->d_name);
+      } else if(!strcasecmp(type, "critter")) {
+         bob=new Critter_Bob_Descr(file->d_name);
       } else {
          delete p;
          sec_missing(filename, "type");

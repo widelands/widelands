@@ -25,6 +25,10 @@
 #include "myfile.h"
 #include "instances.h"
 
+#define CRITTER_WALKING_SPEED 20      // frames needed to cross one field
+#define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 50 // wait maximal n frames before doing something 
+#define CRITTER_PER_DEFINITION   1
+
 // class World;
 //class Pic;
 
@@ -159,6 +163,36 @@ class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
       ushort ttl; // time to life
 };
 
+// 
+// Critters
+// 
+class Critter_Bob_Descr : virtual public Logic_Bob_Descr {
+   public:
+      Critter_Bob_Descr(void) { stock=swimming=0; }
+      virtual ~Critter_Bob_Descr(void) { } 
+
+      virtual int read(Binary_file* f);
+      int create_instance(Instance*);
+
+      inline bool is_swimming(void) { return swimming; }
+      inline Animation* get_walk_ne_anim(void) { return &walk_ne; }
+      inline Animation* get_walk_nw_anim(void) { return &walk_nw; }
+      inline Animation* get_walk_se_anim(void) { return &walk_se; }
+      inline Animation* get_walk_sw_anim(void) { return &walk_sw; }
+      inline Animation* get_walk_w_anim(void) { return &walk_w; }
+      inline Animation* get_walk_e_anim(void) { return &walk_e; }
+
+   private:
+      ushort stock;
+      bool swimming;
+      Animation walk_ne;
+      Animation walk_nw;
+      Animation walk_e;
+      Animation walk_w;
+      Animation walk_se;
+      Animation walk_sw;
+};
+
 //
 // This class describes a in-game Boring bob
 //
@@ -172,6 +206,32 @@ class Boring_Bob : public Map_Object {
    private:
       Boring_Bob_Descr* descr;
 };
+
+//
+// This class describes a in-game Critter bob
+//
+class Critter_Bob : public Map_Object {
+   public:
+      Critter_Bob(Critter_Bob_Descr *d) { descr=d; cur_pic=d->get_anim()->get_pic(0); state=IDLE; } 
+      virtual ~Critter_Bob(void) { }
+
+      int act(Game* g);
+
+   private:
+      enum {
+         IDLE, 
+         WALK_NE,
+         WALK_E,
+         WALK_SE,
+         WALK_SW,
+         WALK_W,
+         WALK_NW
+      } state;
+      Critter_Bob_Descr* descr;
+      float vx, vy;
+      uint steps;
+};
+
 
 //
 // This class describes a in-game Diminishing bob

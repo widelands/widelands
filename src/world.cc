@@ -176,9 +176,12 @@ int World::parse_bobs(Binary_file* f) {
          case Logic_Bob_Descr::BOB_BORING:
             b=new Boring_Bob_Descr();
             break;
+         
+         case Logic_Bob_Descr::BOB_CRITTER:
+            b=new Critter_Bob_Descr();
+            break;
 
          case Logic_Bob_Descr::BOB_GROWING:
-         case Logic_Bob_Descr::BOB_CRITTER:
          default:
             // illegal bob for world
             assert(0);

@@ -445,8 +445,8 @@ void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint 
    ushort clr;
 
    // TODO: proper hotspot implementation
-   dst_x-=bob->get_w()>>1;
-   dst_y-=bob->get_h()>>1;
+   dst_x-=(int) ((bob->get_w()>>1)-inst->get_rel_pos_x());
+   dst_y-=(int) ((bob->get_h()>>1)-inst->get_rel_pos_y());
    
    x=dst_x;
    for(y=dst_y; y<dst_y+bob->get_h(); ) {
