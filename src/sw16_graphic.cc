@@ -601,10 +601,6 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	// Completely clear the window
 	dst.clear();
 
-   Map_Region_Coords fsel_coords_int(mri->fieldsel, mri->fieldsel_radius, mri->egbase->get_map());
-	Coords next_fieldsel_cord;
-   fsel_coords_int.next(&next_fieldsel_cord);
-
 	// Actually draw the map. Loop through fields row by row
 	// For each field, draw ground textures, then roads, then immovables
 	// (and borders), then bobs, then overlay stuff (build icons etc...)
@@ -703,10 +699,8 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 			}
 
          // Would this be a field where a fsel should be?
-         if(fx==next_fieldsel_cord.x && fy==next_fieldsel_cord.y) {
-            draw_fsel=true;
-            fsel_coords_int.next(&next_fieldsel_cord);
-         }
+			if (map->calc_distance(Coords(fx, fy), mri->fieldsel) <= mri->fieldsel_radius)
+				draw_fsel = true;
 
 			// Render stuff that belongs to ground triangles
 			if (render_b || render_r) {
@@ -716,7 +710,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 
 				dst.draw_field(f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
 			}
-		
+
          // Render stuff that belongs to the field node
 			if (!mri->visibility || (*mri->visibility)[fy*mapwidth + fx])
          {
@@ -733,7 +727,6 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
             BaseImmovable *imm = f->get_immovable();
 
             if (imm)
-               // imm->draw(mri->game, this, FCoords(fx, fy, f), wh_pos);
                imm->draw(mri->egbase, this, FCoords(fx, fy, f), wh_pos);
 
             Bob *bob = f->get_first_bob();

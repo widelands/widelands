@@ -1014,7 +1014,7 @@ void Bob::set_position(Game* g, Coords coords)
 			m_linknext->m_linkpprev = m_linkpprev;
 	}
 
-	m_position = FCoords(coords, g->get_map()->get_field(coords));
+	m_position = g->get_map()->get_fcoords(coords);
 
 	m_linknext = m_position.field->bobs;
 	m_linkpprev = &m_position.field->bobs;
