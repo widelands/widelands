@@ -12,10 +12,9 @@ clrkey_b=255
 shadowclr_r=0
 shadowclr_g=0
 shadowclr_b=0
-hot_spot_x=15
-hot_spot_y=51
+hot_spot_x=24
+hot_spot_y=60
 
 # This program is executed when the lumberjack kills the tree
 [fall]
 0=remove
-
