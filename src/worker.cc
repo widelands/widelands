@@ -833,7 +833,9 @@ void WorkerProgram::parse_geologist(WorkerAction* act, Parser* parser, const std
 
 bool Worker::run_geologist(Game* g, State* state, const WorkerAction* act)
 {
+	#ifdef DEBUG
 	PlayerImmovable* location = get_location(g);
+	#endif
 
 	assert(location);
 	assert(location->get_type() == FLAG);
@@ -2238,7 +2240,9 @@ void Worker::dropoff_update(Game* g, State* state)
 
 	WareInstance* item = get_carried_item(g);
 	BaseImmovable* location = g->get_map()->get_immovable(get_position());
+	#ifdef DEBUG
 	PlayerImmovable* ploc = get_location(g);
+	#endif
 
 	assert(ploc && ploc->get_type() == BUILDING);
 	assert(location && (ploc == location || ploc->get_base_flag() == location));
