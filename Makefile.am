@@ -1,4 +1,4 @@
-SUBDIRS= src wffcreate
+SUBDIRS= src  #wffcreate
 
 EXTRA_DIST=pics
 
