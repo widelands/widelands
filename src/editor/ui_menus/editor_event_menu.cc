@@ -25,6 +25,9 @@
 #include "ui_listselect.h"
 #include "error.h"
 #include "editor_event_menu_new_trigger.h"
+#include "trigger.h"
+#include "map.h"
+#include "trigger_factory.h"
 
 /*
 ===============
@@ -51,22 +54,45 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    // Event List
    new UITextarea(this, spacing, offsy, "Registered Events: ", Align_Left);
    m_event_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
 
    // Trigger List
    new UITextarea(this, (get_inner_w()/2)+spacing, offsy, "Registered Triggers", Align_Left);
    m_trigger_list=new UIListselect(this, (get_inner_w()/2)+spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   m_trigger_list->selected.set(this, &Editor_Event_Menu::trigger_list_selected);
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
-   UIButton* b=new UIButton(this, posx, posy, 80, 20, 0, 0);
+   UIButton* b=new UIButton(this, posx, posy, 80, 20, 4, 0);
    b->set_title("New Event");
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
+   posx-=45+spacing;
+   m_btn_del_event=new UIButton(this, posx, posy, 45, 20, 0, 1);
+   m_btn_del_event->set_title("Del");
+   m_btn_del_event->clickedid.set(this, &Editor_Event_Menu::clicked);
+   m_btn_del_event->set_enabled(false);
+   posx-=45+spacing;
+   m_btn_edit_event=new UIButton(this, posx, posy, 45, 20, 0, 2);
+   m_btn_edit_event->set_title("Edit");
+   m_btn_edit_event->clickedid.set(this, &Editor_Event_Menu::clicked);
+   m_btn_edit_event->set_enabled(false);
+   
+   
    posx=(get_inner_w()/2)+spacing;
-   b=new UIButton(this, posx, posy, 80, 20, 0, 1);
+   b=new UIButton(this, posx, posy, 80, 20, 4, 3);
    b->set_title("New Trigger");
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
-
-
+   posx+=80+spacing;
+   m_btn_edit_trigger=new UIButton(this, posx, posy, 45, 20, 0, 4);
+   m_btn_edit_trigger->set_title("Edit");
+   m_btn_edit_trigger->clickedid.set(this, &Editor_Event_Menu::clicked);
+   m_btn_edit_trigger->set_enabled(false);
+   posx+=45+spacing;
+   m_btn_del_trigger=new UIButton(this, posx, posy, 45, 20, 0, 5);
+   m_btn_del_trigger->set_title("Del");
+   m_btn_del_trigger->clickedid.set(this, &Editor_Event_Menu::clicked);
+   m_btn_del_trigger->set_enabled(false);
+   
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -88,20 +114,58 @@ Editor_Event_Menu::~Editor_Event_Menu()
  * update all lists and stuff
  */
 void Editor_Event_Menu::update(void) {
+   Trigger* trig=0;
+   m_trigger_list->clear();
+   int i=0;
+   for(i=0; i<m_parent->get_map()->get_number_of_triggers(); i++) {
+      trig=m_parent->get_map()->get_trigger(i);
+      m_trigger_list->add_entry(trig->get_name(), trig);
+   }
 }
 
 /*
  * a button has been clicked
  */
 void Editor_Event_Menu::clicked(int id) {
-   if(!id) {
-      // New Event
+   if(id<3) {
+      if(id==0) {
+         // New Event
+      } else if(id==1) {
+         // Delete event
+      } else if(id==2) {
+         // edit event
+      }
    } else {
+      if(id==3) {
       // New Trigger
       Editor_Event_Menu_New_Trigger* ntm=new Editor_Event_Menu_New_Trigger(m_parent);
       int retval=ntm->run();
       if(retval) 
          update();
       delete ntm;
+      } else if(id==4) {
+         // Edit trigger
+         Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
+         trig=Trigger_Factory::make_trigger_with_option_dialog(trig->get_id(), m_parent, trig);
+         update();
+      } else if(id==5) {
+         // Delete trigger
+         Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
+         m_parent->get_map()->unregister_trigger(trig);
+         update();
+      }
    }
 }
+
+/*
+ * listbox was selected
+ */
+void Editor_Event_Menu::trigger_list_selected(int i) {
+   m_btn_del_trigger->set_enabled(true);
+   m_btn_edit_trigger->set_enabled(true);
+}
+void Editor_Event_Menu::event_list_selected(int i) {
+   m_btn_del_event->set_enabled(true);
+   m_btn_edit_event->set_enabled(true);
+}
+

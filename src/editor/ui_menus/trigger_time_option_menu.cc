@@ -52,8 +52,8 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
    m_values[2]=(wait_time/60)/10; // minutes
    m_values[3]=(wait_time/60)%10;
    wait_time-=(wait_time/60)*60;
-   m_values[4]=(wait_time/3600)/10; // seconds
-   m_values[5]=(wait_time/3600)%10;
+   m_values[4]=(wait_time)/10; // seconds
+   m_values[5]=(wait_time)%10;
 
    new UITextarea(this, spacing, offsy, "Only triggers once: ", Align_Left);
    UICheckbox* cb=new UICheckbox(this, spacing+130, offsy-3);
@@ -187,7 +187,6 @@ void Trigger_Time_Option_Menu::clicked(int i) {
       int seconds=m_values[4]*10+m_values[5];
       int total=hours*3600+minutes*60+seconds;   
       // ok button
-      log("Setting trigger to: %i seconds and one time trigger: %i\n", total, m_is_one_time_trigger);
       m_trigger->set_is_one_time_trigger(m_is_one_time_trigger);
       m_trigger->set_wait_time(total);
       if(m_name->get_text())

@@ -24,6 +24,7 @@
 #include <vector>
 #include "field.h"
 #include "geometry.h"
+#include "trigger.h"
 
 class BaseImmovable;
 class FileRead;
@@ -251,6 +252,32 @@ public:
 	// change terrain of a field, recalculate buildcaps
    int change_field_terrain(Coords coords, int terrain, bool tdown, bool tright);
 
+   // Trigger functions, all inlines
+   inline void register_new_trigger(Trigger* t) { 
+      m_triggers.push_back(t);  // it is the users job to make sure this trigger is not yet registered
+   }
+   inline int get_number_of_triggers(void) { return m_triggers.size(); }
+   inline void unregister_trigger(Trigger* t) {
+      std::vector<Trigger*>::iterator i;
+      for(i=m_triggers.begin(); i!=m_triggers.end(); i++) 
+         if(*i==t) {
+            delete t;
+            m_triggers.erase(i);
+            return;
+         }
+      assert(0); // never here, this trigger is not known
+   }
+   inline bool trigger_exists(Trigger* trig) {
+      std::vector<Trigger*>::iterator i;
+      for(i=m_triggers.begin(); i!=m_triggers.end(); i++) 
+         if(*i==trig) {
+            return true;
+         }
+      return false;
+   }
+   inline Trigger* get_trigger(int i) { assert(i<get_number_of_triggers()); return m_triggers[i]; }
+   inline std::vector<Trigger*>* get_all_triggers(void) { return &m_triggers; } // the user musn't change this directly, it is his job to look after this 
+   
 private:
 	void set_size(uint w, uint h);
 	void load_world();
@@ -273,6 +300,7 @@ private:
 
    std::vector<std::string> m_scenario_tribes; // only alloced when really needed
    std::vector<std::string> m_scenario_names;  
+   std::vector<Trigger*>    m_triggers;        // Triggers are available on all maps. All game types can be done through triggers.
 
 	void recalc_brightness(FCoords coords);
 	void recalc_fieldcaps_pass1(FCoords coords);

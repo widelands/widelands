@@ -21,6 +21,7 @@
 #include "wexception.h"
 #include "filesystem.h"
 #include "map.h"
+#include "editor_game_base.h"
 #include "widelands_map_elemental_data_packet.h"
 #include "widelands_map_heights_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
@@ -29,6 +30,7 @@
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_player_names_and_tribes_data_packet.h"
+#include "widelands_map_trigger_data_packet.h"
 
 /*
  * Constructor
@@ -97,6 +99,12 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    delete dp;
 
    // NON MANDATORY PACKETS
+   if(m_egbase->get_map()->get_number_of_triggers()) {
+      dp=new Widelands_Map_Trigger_Data_Packet();
+      dp->Write(&fw, m_egbase);
+      delete dp;
+   }
+   
    fw.Write(g_fs,m_filename); 
 }
 

@@ -175,8 +175,6 @@ bool Game::run(void)
 // Depending on the current state we advance game logic and stuff,
 // running the cmd queue etc.
 //
-// think(), mmh, i don't know if i like the name
-//
 void Game::think(void)
 {
 	int lasttime = m_realtime;

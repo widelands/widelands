@@ -27,7 +27,9 @@
 #include "system.h"
 #include "trigger.h"
 #include "trigger_factory.h"
+#include "map.h"
 #include "error.h"
+
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
    UIWindow(parent, 0, 0, 400, 240, "New Trigger") {
@@ -110,7 +112,11 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
       end_modal(0); 
       return; 
    }
-   log("TODO: register new trigger with map: %s!\n", trig->get_name());
+   if(m_parent->get_map()->trigger_exists(trig)) 
+      m_parent->get_map()->unregister_trigger(trig);
+   m_parent->get_map()->register_new_trigger(trig);
+   end_modal(1);
+   return;
 }
 
 /*

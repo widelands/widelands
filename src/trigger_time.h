@@ -43,11 +43,11 @@ class Trigger_Time : public Trigger {
       void Read(FileRead*);
   
       inline void set_wait_time(int i) { m_wait_time=i; }
-      inline void set_m_last_start_time(int i) { m_last_start_time; }
+      inline void set_last_start_time(int i) { m_last_start_time; }
       inline int get_wait_time(void) { return m_wait_time; }
       
    private:
-      uint m_wait_time; // in seconds
+      ulong m_wait_time; // in seconds
       uint m_last_start_time;
 };
 

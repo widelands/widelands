@@ -17,24 +17,22 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__WIDELANDS_MAP_TRIGGER_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_TRIGGER_DATA_PACKET_H
+
+#include "widelands_map_data_packet.h"
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
- *
- * Scenario packets have the highest bit set
+ * This packet contains all the triggers the map defines 
  */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
-#define PACKET_BOB              5
-#define PACKET_RESOURCES        6
-#define PACKET_PLAYER_NAM_TRIB  7        // Scenario packet 
-#define PACKET_TRIGGER          8        // Scenraio packet, non obligatory
+class Widelands_Map_Trigger_Data_Packet : public Widelands_Map_Data_Packet {
+   public:
+      virtual ~Widelands_Map_Trigger_Data_Packet();
+
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
+};
+
 
 #endif
 

@@ -319,6 +319,9 @@ void Map::cleanup(void) {
 
    if(m_overlay_manager) 
       m_overlay_manager->cleanup();
+
+   while(get_number_of_triggers()) 
+      unregister_trigger(get_trigger(0));
 }
 
 /*

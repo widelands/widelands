@@ -55,7 +55,8 @@ Trigger* Trigger_Factory::get_correct_trigger(uint id) {
  * and let it be initalised through it.
  * if it fails, return zero/unmodified given trigger, elso return the created/modified trigger
  */
-Trigger* Trigger_Factory::make_trigger_with_option_dialog(uint id, Editor_Interactive* m_parent, Trigger* trig) {
+Trigger* Trigger_Factory::make_trigger_with_option_dialog(uint id, Editor_Interactive* m_parent, Trigger* gtrig) {
+   Trigger* trig=gtrig;
    if(!trig) 
       trig=get_correct_trigger(id);
 
@@ -68,8 +69,11 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(uint id, Editor_Intera
       throw wexception("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger id found: %i\n", id);
    if(retval) 
       return trig;
-   delete trig;
-   return 0;
+   if(!gtrig) {
+      delete trig;
+      return 0;
+   } else return gtrig;
+   // never here
 }
 
 /*

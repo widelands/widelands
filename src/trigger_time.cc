@@ -21,6 +21,8 @@
 #include "error.h"
 #include "filesystem.h"
 
+static const int TRIGGER_VERSION = 1;
+
 /* 
  * Init and cleanup
  */
@@ -28,8 +30,8 @@ Trigger_Time::Trigger_Time(void) {
    m_last_start_time=0;
    m_wait_time=60; // defaults to one minute
    set_name("Time Trigger");
-   set_trigger("false");
-   set_is_one_time_trigger("false");
+   set_trigger(false);
+   set_is_one_time_trigger(true);
 }
 
 Trigger_Time::~Trigger_Time(void) {
@@ -39,11 +41,34 @@ Trigger_Time::~Trigger_Time(void) {
  * File Read, File Write
  */
 void Trigger_Time::Read(FileRead* fr) {
-   log("TODO: Trigger_Time File Read!\n");
+   int version=fr->Unsigned16();
+   if(version <= TRIGGER_VERSION) {
+      set_name(fr->CString());
+      set_is_one_time_trigger(fr->Unsigned8());
+      m_wait_time=fr->Unsigned32();
+      return;
+   }
+   throw wexception("Time Trigger with unknown/unhandled version %i in map!\n", version);
 }
 
 void Trigger_Time::Write(FileWrite* fw) {
-   log("TODO: Trigger_Time File Write!\n");
+   // First of all the id
+   fw->Unsigned16(get_id());
+
+   // Now the version
+   fw->Unsigned16(TRIGGER_VERSION);
+
+   // Name
+   fw->Data(get_name(), strlen(get_name()));
+   fw->Unsigned8('\0');
+   
+   // triggers only once?
+   fw->Unsigned8(is_one_time_trigger());
+
+   // Wait time
+   fw->Unsigned32(m_wait_time);
+  
+   // done
 }
       
 /*
