@@ -164,9 +164,7 @@ void Widelands_Map_Immovable_Data_Packet::Read_version1(FileRead *fr, Editor_Gam
          if(id==0xffff) continue; // nothing here
          //      log("[Map Loader] Setting immovable of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
          if(smap[id]==-1) throw wexception("Unknown world immovable in map!\n");
-         Immovable* imm=egbase->create_immovable(Coords(x, y), smap[id], 0); 
-
-         assert(imm);
+         egbase->create_immovable(Coords(x, y), smap[id], 0); 
       }
    }
    return;

@@ -336,7 +336,8 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite(Building* build
 
       // Wares
       uint nr_queues = fr->Unsigned16();
-      assert( nr_queues == ps->m_input_queues.size() );
+      if( nr_queues != ps->m_input_queues.size() ) 
+         throw ("Productionsite has wrong number of input queues!\n");
       for(uint i=0; i<ps->m_input_queues.size(); i++)
          ps->m_input_queues[i]->Read(fr,egbase,ol);
 

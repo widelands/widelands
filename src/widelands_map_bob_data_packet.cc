@@ -70,14 +70,16 @@ void Widelands_Map_Bob_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase,
 
                Bob* bob=0;
                if(owner=="world") {
-                  assert(subtype==Bob::CRITTER);
+                  if(subtype!=Bob::CRITTER)
+                     throw wexception("world bob is not a critter!\n");
                   int idx=egbase->get_map()->get_world()->get_bob(name.c_str());
                   if(idx==-1) 
                      throw wexception("Map defines Bob %s, but world doesn't deliver!\n", name.c_str());
                   bob=egbase->create_bob(Coords(x,y),idx);
                } else {
                   if(skip) continue; // We do no load player bobs when no scenario 
-                  assert(subtype==Bob::WORKER);
+                  if(subtype!=Bob::WORKER)
+                     throw wexception("tribe bob is not a worker!\n");
                   egbase->manually_load_tribe(owner.c_str()); // Make sure that the correct tribe is known and loaded 
                   Tribe_Descr* tribe=egbase->get_tribe(owner.c_str());
                   if(!tribe) 

@@ -1,55 +1,43 @@
 Widelands Development Team
 --------------------------
 
-The following is an alphabetically sorted list of contributors to Widelands.
-
-Albert Jasiowka <hackbird@t-online.de>
-	Project Member, Graphics
-
-Delia <delia@subsigillo.de>
-	Graphics
-
-Florian Bluemel <sintflut@gmx.net>
-	Project Member, Programmer
-
-Florian Falkner <falkner@contwise.com>
-	Programmer
-
-Florian Neuerburg
-	Graphics
-
-Holger Rapp <SirVer@gmx.de>
-	Project Admin, Programmer, Graphics
-
-Jerome Rosinski 
-   Graphics
-
-Martin Quinson <martin.quinson@tuxfamily.org>
-	Programmer
-
-Marz <margodofwar_au@yahoo.com.au>
-	Project Member, Graphics
-
-Mats Olsson <mats.olsson@proventek.com>
-	Graphics
-
-Nicolai Haehnle <prefect@rtts.org>
-	Project Admin, Programmer
-
-Philipp Engelhard <drmorden@users.sourceforge.net>
-	Project Member, Programmer, Graphics
-
-Raul Ferriz 
-   Programmer
+Project Head:
+  Holger Rapp <SirVer@gmx.de>
+  
+Project Admins: 
+  Holger Rapp <SirVer@gmx.de>
+  Nicolai Haehnle <prefect@rtts.org>
+  
+Project Members, Programming:
+   Florian Bluemel <sintflut@gmx.net>
+   Holger Rapp <SirVer@gmx.de>
+   Nicolai Haehnle <prefect@rtts.org>
+   Philipp Engelhard <drmorden@users.sourceforge.net>
+   Stefan Boettner <stefanb@upb.de>
+   Tron <dertron@users.sourceforge.net>
    
-Stefan Boettner <stefanb@upb.de>
-	Project Memeber, Programmer
+Project Members, Graphics:
+   Albert Jasiowka <hackbird@t-online.de>
+   Holger Rapp <SirVer@gmx.de>
+   Marz <margodofwar_au@yahoo.com.au>
+   Philipp Engelhard <drmorden@users.sourceforge.net>
+   Yannick Warnier <ywarnier@beeznest.org>
 
-Tron <dertron@users.sourceforge.net>
-	Project Member, Programmer
+Packagers:
+   Debian - Martin Quinson <martin.quinson@tuxfamily.org> 
+   Mac OS X - Philipp Engelhard <drmorden@users.sourceforge.net>
 
-Yannick Warnier <ywarnier@beeznest.org>
-	Project Member, Graphics
+Contributors, Graphics:
+   Delia <delia@subsigillo.de>
+   Florian Neuerburg
+   Jerome Rosinski 
+   Mats Olsson <mats.olsson@proventek.com>
 
-Willem Jan Palenstijn
-	Programmer
+Contributors, Programming:
+   Florian Falkner <falkner@contwise.com>
+   Martin Quinson <martin.quinson@tuxfamily.org>
+   Raul Ferriz 
+   Willem Jan Palenstijn
+
+Contributors, Maps:
+   Florian Falkner <falkner@contwise.com>

@@ -435,4 +435,5 @@ int Player::get_economy_number(Economy* eco) {
       ++i;
    }
    assert(0); // never here
+   return 0;
 }
