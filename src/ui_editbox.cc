@@ -117,7 +117,7 @@ bool Edit_Box::handle_key(bool down, int code, char c) {
          case KEY_DELETE:
          case KEY_BACKSPACE:
             if(m_text.size()) {
-               m_text.erase(--m_text.end());
+               m_text.erase(m_text.end() - 1);
                set_text(m_text.c_str());
             }
             return true;
