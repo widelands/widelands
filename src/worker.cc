@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1279,6 +1279,18 @@ void Worker::request_update(Game* g, State* state)
 		return;
 	}
 
+	// We may get the signal "update" when we were split from the economy of
+	// our target. However, request_signal() defers handling of "update", so
+	// we do the appropriate check here
+	if (get_economy() != target->get_economy()) {
+		molog("[request]: Fail (split from target economy)\n");
+
+		set_signal("fail");
+		pop_task(g);
+		return;
+	}
+
+	// Calculate a route
 	Route* route = new Route;
 
 	if (!get_economy()->find_route(get_location(g)->get_base_flag(), target->get_base_flag(), route)) {
