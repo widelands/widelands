@@ -690,15 +690,17 @@ Logic_Bob_Descr *Logic_Bob_Descr::create_from_dir(const char *directory)
 		} else
 			throw wexception("Unsupported bob type '%s'", type);
 
-		try {
-			bob->read(directory, s);
-		} catch(...) {
-			delete bob;
-			throw;
-		}
+		bob->read(directory, s);
+		prof.check_used();
 	}
-	catch(wexception &e) {
-		e.change("Error reading bob %s: %s", directory, e.what());
+	catch(std::exception &e) {
+		if (bob)
+			delete bob;
+		throw wexception("Error reading bob %s: %s", directory, e.what());
+	}
+	catch(...) {
+		if (bob)
+			delete bob;
 		throw;
 	}
 	

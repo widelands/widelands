@@ -180,12 +180,13 @@ void World::parse_bobs(const char *directory)
 	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
 		//cerr << "a bob in " << *it << endl;
 		
-		Logic_Bob_Descr *descr;
+		Logic_Bob_Descr *descr = 0;
 		try {
 			descr = Logic_Bob_Descr::create_from_dir(it->c_str());
 		} catch(std::exception &e) {
 			cerr << it->c_str() << ": " << e.what() << " (garbage directory?)" << endl;
-			descr = 0;
+		} catch(...) {
+			cerr << it->c_str() << ": unknown exception (garbage directory?)" << endl;
 		}
 		if (descr)
 			bobs.add(descr);

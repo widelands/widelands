@@ -637,8 +637,7 @@ void Map::load_s2mf(const char* filen, Game *game)
 					case BOB_BUSH5: bobname = "bush5"; break;
 
 					default:
-						// N("Unknown bob in file! %x (%i,%i)\n", c, x, y);
-						assert(!"Unknow bob in file");
+						cerr << "Unknown bob " << (uint)c << endl;
 						break;
 				}
 

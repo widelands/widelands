@@ -33,6 +33,13 @@ struct S2MapDescrHeader {
 
 // MILLIONS of Definitions
 // Bobs
+
+// TODO: the following bob types appear in S2 maps but are unknown
+//  Somebody who can run Settlers II please check them out
+//  11 (0x0B)
+//  40 (0x28)
+//  41 (0x29)
+
 #define BOB_NONE            0x0
 
 #define BOB_STONE1          0x1

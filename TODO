@@ -2,23 +2,6 @@
 *  == finished
 /  == half done
 
-**************************** WIDELANDS WORLD CREATOR ***************
-
-- Write the documentation for the world file format
-- Build/Rebuild the editor to match the specs 
-
-
-**************************** WIDELANDS TRIBE CREATOR **************
-
-- Write the documentation for the tribe formats (WIP: Holger 50%)
-- Build/Rebuild the editor to match the specs
-
-**************************** WIDELANDS MAP CREATOR ****************
-
-     --- DEPENDS ON TRIBEs AND WORLDs
-
-
-
 
 **************************** WIDELANDS WORK ***********************
 
@@ -27,8 +10,6 @@
 - Improve graphics (Special concern for me) 
 * Define bob format
    - Refine bob format
-   - Redo wtfcreate bob writing routine, redo widelands bob blitting
-     routine
 * Fix g_game object
 * Change the way, descriptions (buildings, workers..) are saved in 
   widelands, for working build command. make sure, every instance has a 

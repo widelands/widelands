@@ -89,7 +89,6 @@ Section::~Section()
 /** Section::check_used()
  *
  * Print a warning for every unused value.
- * This should only be called from the Profile destructor
  */
 void Section::check_used()
 {
@@ -383,14 +382,24 @@ Profile::~Profile()
 {
 	for(int i = sections.elements()-1; i >= 0; i--) {
 		Section *s = (Section *)sections.element_at(i);
+		delete s;
+	}
+}
+
+/** Profile::check_used()
+ *
+ * Throw an exception if a section or key hasn't been used.
+ */
+void Profile::check_used()
+{
+	for(int i = sections.elements()-1; i >= 0; i--) {
+		Section *s = (Section *)sections.element_at(i);
 		if (!s->used) {
-			if(!supr_err)
 				throw wexception("Section [%s] not used (did you spell the name correctly?)",
 				                 s->get_name());
       } else {
 			s->check_used();
       }
-		delete s;
 	}
 }
 
@@ -481,72 +490,78 @@ inline char *setEndAt(char *str, char c)
  *
  * Args: filename	name of the source file
  */
-void Profile::parse(const char *filename, bool section_less_file )
+void Profile::parse(const char *filename, bool section_less_file)
 {
-	FILE *file = fopen(filename, "r");
-	if (!file && !supr_err)
-		throw wexception("Couldn't open %s.", filename);
+	try
+	{
+		FileRead fr;
+	
+		fr.Open(g_fs, filename);
 
-   char line[1024];
-   char *p;
-   uint linenr = 0;
-   Section *s = 0;
+		char line[1024];
+		char *p;
+		uint linenr = 0;
+		Section *s = 0;
 
-   while(fgets(line, sizeof(line), file))
-   {
-      linenr++;
-      p = line;
-      p = skipwhite(p);
-      if (!p[0] || p[0] == '#' || (p[0] == '/' && p[1] == '/'))
-         continue;
+		while(fr.ReadLine(line, sizeof(line)))
+		{
+			linenr++;
+			p = line;
+			p = skipwhite(p);
+			if (!p[0] || p[0] == '#' || (p[0] == '/' && p[1] == '/'))
+				continue;
 
-      if (p[0] == '[') {
-         if(section_less_file) {
-            if(!supr_err)
-					throw wexception("%s, line %i: Section %s in sectionless file!",
-					                 filename, linenr, p);
-         } else {
-            p++;
-            setEndAt(p, ']');
-            s = new Section(p, supr_err);
-            sections.add(s);
-         }
-      } else {
-         char *tail = strchr(p, '=');
-         if (tail) {
-            *tail++ = 0;
-            tail = skipwhite(tail);
-            killcomments(tail);
-            rtrim(tail);
-            rtrim(p);
+			if (p[0] == '[') {
+				if(section_less_file) {
+					if(!supr_err)
+						throw wexception("line %i: Section %s in sectionless file!",
+											  linenr, p);
+				} else {
+					p++;
+					setEndAt(p, ']');
+					s = new Section(p, supr_err);
+					sections.add(s);
+				}
+			} else {
+				char *tail = strchr(p, '=');
+				if (tail) {
+					*tail++ = 0;
+					tail = skipwhite(tail);
+					killcomments(tail);
+					rtrim(tail);
+					rtrim(p);
 
-				// remove surrounding '' or ""
-				if (tail[0] == '\'' || tail[0] == '\"') {
-					tail++;
-					char *eot = tail+strlen(tail)-1;
-				   if (*eot == '\'' || *eot == '\"')
-						*eot = 0;
-   			}  
+					// remove surrounding '' or ""
+					if (tail[0] == '\'' || tail[0] == '\"') {
+						tail++;
+						char *eot = tail+strlen(tail)-1;
+						if (*eot == '\'' || *eot == '\"')
+							*eot = 0;
+					}  
 
-            if(!section_less_file) {
-               if (s) {
-                  s->add_val(p, tail);
-               } else {
-                  if(!supr_err)
-							throw wexception("%s, line %i: key %s outside section",
-							                 filename, linenr, p);
-               }
-            } else {
-               ((Section*) sections.element_at(0))->add_val(p, tail);
-               // add to default section
-            }
+					if(!section_less_file) {
+						if (s) {
+							s->add_val(p, tail);
+						} else {
+							if(!supr_err)
+								throw wexception("line %i: key %s outside section",
+													  linenr, p);
+						}
+					} else {
+						((Section*) sections.element_at(0))->add_val(p, tail);
+						// add to default section
+					}
 
-         } else {
-            if(!supr_err)
-					throw wexception("%s, line %i: syntax error", filename, linenr);
-         }
-      }
-   }
+				} else {
+					if(!supr_err)
+						throw wexception("line %i: syntax error", linenr);
+				}
+			}
+		}
+	}
+	catch(std::exception &e) {
+		throw wexception("%s: %s", filename, e.what());
+	}		
 }
 
 #ifdef TEST_PROFILE // needs profile.cc, myfile.cc growablearray.cc

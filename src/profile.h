@@ -22,8 +22,6 @@
 
 #include "growablearray.h"
 
-#include <iostream>
-
 class Profile;
 
 /*
@@ -106,6 +104,8 @@ public:
 	Profile(const char* filename, bool section_less_file = false, bool suppress_error_msg = false);
 	~Profile();
 
+	void check_used();
+	
 	Section *get_section(const char *name);
 	Section *get_next_section(const char *name);
 };
