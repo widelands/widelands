@@ -73,11 +73,11 @@ SDL_LIBS_FOR_PLUGINS = @SDL_LIBS_FOR_PLUGINS@
 VERSION = @VERSION@
 src = @src@
 
-SUBDIRS = src wffcreate
+SUBDIRS = src wffcreate wwfcreate
 
 EXTRA_DIST = pics fonts
 
-EXTRADATADIRS = pics/ fonts/
+EXTRADATADIRS = pics/ fonts/ worlds
 EXTRADATA = pics/*.bmp fonts/*.wff
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

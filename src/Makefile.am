@@ -7,7 +7,7 @@ CXXFLAGS= $(EXTRA_FLAGS)
 # EXTRA_DIST=worlds pics 
 
 bin_PROGRAMS=widelands
-widelands_LDADD = @SDL_LIBS@ -lefence 
+widelands_LDADD = @SDL_LIBS@ # -lefence 
 widelands_SOURCES=main.cc \
 						unix_m.cc \
 						os.h \
@@ -50,7 +50,18 @@ widelands_SOURCES=main.cc \
 						menuecommon.h \
 						growablearray.cc \
 						growablearray.h \
-						mytypes.h
+						mytypes.h \
+						map.h \
+						map.cc \
+						game.cc \
+						game.h \
+						IntPlayer.cc \
+						IntPlayer.h \
+						mapview.h \
+						mapview.cc \
+						field.cc \
+						profile.cc
+						
 
 
 #  uncomment the following if widelands requires the math library

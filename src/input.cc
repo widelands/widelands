@@ -69,11 +69,13 @@ Input::Input(void) {
  * returns: Nothing
  */
 Input::~Input(void) {
-		  if(cfa[0]) free(cfa[0]);
+/*		  if(cfa[0]) free(cfa[0]);
 		  if(cfa[1]) free(cfa[1]);
 		  if(mmfa) free(mmfa);
 		  if(kbdha) free(kbdha);
-
+		  
+		  We do not free this stuff. this makes problems
+*/
 		  if(input_grabbed) {
 					 SDL_WM_GrabInput(SDL_GRAB_OFF);
 		  }

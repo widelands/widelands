@@ -27,6 +27,7 @@
 #include "font.h"
 #include "mainmenue.h"
 #include "menuecommon.h"
+#include "game.h"
 
 /** void single_player_menue(void) 
  *
@@ -90,7 +91,10 @@ void single_player_menue(void) {
 		  }
 		  else if(*brunsc) {
 					 g_ui.delete_window(win);
-					 // todo;
+#warning "You'll run into problems here!"
+					 Game g;
+					 g.run("/home/sirver/.widelands/Eden.wmf", 0);
+					 
 		  }
 		  else if(*brunc) {
 					 g_ui.delete_window(win);

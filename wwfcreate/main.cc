@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 	}
 	
 	Binary_file* output = new Binary_file();
-	output->open(outfile, File::For::WRITE);
+	output->open(outfile, File::WRITE);
 	wwfcreate(output);
 	delete output;
 

@@ -1,8 +1,8 @@
-SUBDIRS= src wffcreate
+SUBDIRS= src wffcreate wwfcreate
 
 EXTRA_DIST=pics fonts
 
-EXTRADATADIRS=pics/ fonts/
+EXTRADATADIRS=pics/ fonts/ worlds
 EXTRADATA=pics/*.bmp fonts/*.wff
 
 datainstalldirs:

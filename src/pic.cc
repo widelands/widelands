@@ -24,6 +24,7 @@
 #ifdef WIN32
 #include <string.h>
 #endif
+#include <iostream>
 
 namespace Graph {
 		  /** Pic::Pic(const Pic& p)
@@ -96,11 +97,12 @@ namespace Graph {
 		  void Pic::clear_all(void)
 		  {
 				if(!bhas_clrkey) return;
-
-				ulong clear = clrkey;
-				for (uint i=(w*h-2); i; i-=2)
-					*(ulong*)&pixels[i] = clear;
-//					pixels[i] = clear;
+			
+				for(int i=w*h-1; i>=0; i--) 
+						  pixels[i]=sh_clrkey;
+				
+//				for(int i=w*h-2; i>=0; i-=2) 
+//						  pixels[i]=clrkey;
 		  }
 
 		  /** int Pic::load(const char* file)
