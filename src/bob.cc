@@ -26,420 +26,6 @@
 #include "map.h"
 #include "profile.h"
 
-/*
-==============================================================================
-
-EncodeData IMPLEMENTAION
-
-==============================================================================
-*/
-
-/*
-===============
-EncodeData::clear
-
-Reset the EncodeData to defaults (no special colors)
-===============
-*/			
-void EncodeData::clear()
-{
-	hasclrkey = false;
-	hasshadow = false;
-	hasplrclrs = false;
-}
-
-
-/*
-===============
-EncodeData::parse
-
-Parse color codes from section, the following keys are currently known:
-
-clrkey_[r,g,b]		Color key
-shadowclr_[r,g,b]	color for shadow pixels
-===============
-*/
-void EncodeData::parse(Section *s)
-{
-	int i;
-	int r, g, b;
-
-	// Read color key
-	r = s->get_int("clrkey_r", -1);
-	g = s->get_int("clrkey_g", -1);
-	b = s->get_int("clrkey_b", -1);
-	if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
-		hasclrkey = true;
-		clrkey_r = r;
-		clrkey_g = g;
-		clrkey_b = b;
-	}
-	
-	// Read shadow color
-	r = s->get_int("shadowclr_r", -1);
-	g = s->get_int("shadowclr_g", -1);
-	b = s->get_int("shadowclr_b", -1);
-	if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
-		hasshadow = true;
-		shadow_r = r;
-		shadow_g = g;
-		shadow_b = b;
-	}
-
-	// Read player color codes	
-	for(i = 0; i < 4; i++) {
-		char keyname[32];
-		
-		snprintf(keyname, sizeof(keyname), "plrclr%i_r", i);
-		r = s->get_int(keyname, -1);
-		snprintf(keyname, sizeof(keyname), "plrclr%i_g", i);
-		g = s->get_int(keyname, -1);
-		snprintf(keyname, sizeof(keyname), "plrclr%i_b", i);
-		b = s->get_int(keyname, -1);
-		
-		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-			break;
-		
-		plrclr_r[i] = r;
-		plrclr_g[i] = g;
-		plrclr_b[i] = b;
-	}
-	
-	if (i == 4)
-		hasplrclrs = true;
-}
-
-
-/*
-===============
-EncodeData::add
-
-Add another encode data. Already existing color codes are overwritten
-===============
-*/
-void EncodeData::add(const EncodeData *other)
-{
-	if (other->hasclrkey) {
-		hasclrkey = true;
-		clrkey_r = other->clrkey_r;
-		clrkey_g = other->clrkey_g;
-		clrkey_b = other->clrkey_b;
-	}
-	
-	if (other->hasshadow) {
-		hasshadow = true;
-		shadow_r = other->shadow_r;
-		shadow_g = other->shadow_g;
-		shadow_b = other->shadow_b;
-	}
-	
-	if (other->hasplrclrs) {
-		hasplrclrs = true;
-		for(int i = 0; i < 4; i++) {
-			plrclr_r[i] = other->plrclr_r[i];
-			plrclr_g[i] = other->plrclr_g[i];
-			plrclr_b[i] = other->plrclr_b[i];
-		}
-	}
-}
-
-
-/*
-==============================================================================
-
-Animation IMPLEMENTAION
-
-==============================================================================
-*/
-			
-Animation::Animation(void)
-{
-	npics = 0;
-	pics = 0;
-	m_frametime = FRAME_LENGTH;
-	w = h = 0;
-	hsx = hsy = 0;
-}
-
-Animation::~Animation(void)
-{ 
-	if(npics) {
-		uint i; 
-		for(i=0; i<npics; i++) {
-			free(pics[i].data);
-		}
-		free(pics);
-	}
-}
-
-/** Animation::add_pic(ushort size, ushort* data)
- *
- * Adds one frame of raw encoded data to the animation
- */
-void Animation::add_pic(ushort size, ushort* data)
-{
-	if(!pics) {
-		pics=(Animation_Pic*) malloc(sizeof(Animation_Pic));
-		npics=1;
-	} else {
-		++npics;
-		pics=(Animation_Pic*) realloc(pics, sizeof(Animation_Pic)*npics);
-	}
-	pics[npics-1].data=(ushort*)malloc(size);
-	pics[npics-1].parent=this;
-	memcpy(pics[npics-1].data, data, size);
-}
-
-/** Animation::add_pic(Pic* pic, bool hasclrkey, ushort clrkey, bool hasshadow, ushort shadowclr)
- *
- * Adds one frame to the animation
- */
-void Animation::add_pic(Pic* pic, const EncodeData *encdata)
-{
-	if(pic->get_w() != w && pic->get_h() != h)
-		throw wexception("frame must be %ix%i pixels big", w, h);
-
-	// Pack the EncodeData colorkey&co. to 16 bit
-	ushort clrkey = 0;
-	ushort shadowclr = 0;
-	int hasplrclrs = 0;
-	ushort plrclrs[4];
-	
-	if (encdata->hasclrkey)
-		clrkey = pack_rgb(encdata->clrkey_r, encdata->clrkey_g, encdata->clrkey_b);
-	if (encdata->hasshadow)
-		shadowclr = pack_rgb(encdata->shadow_r, encdata->shadow_g, encdata->shadow_b);
-	if (encdata->hasplrclrs) {
-		hasplrclrs = 4;
-		for(int i = 0; i < 4; i++)
-			plrclrs[i] = pack_rgb(encdata->plrclr_r[i], encdata->plrclr_g[i], encdata->plrclr_b[i]);
-	}
-	
-	// Ready to encode	
-   ushort* data = 0;
-	uint in, out;
-	int runstart = -1; // code field for normal run
-	uint npix = pic->get_w()*pic->get_h();
-	ushort *pixels = pic->get_pixels();
-	
-	try
-	{
-		data = (ushort*) malloc(pic->get_w()*pic->get_h()*sizeof(ushort)*2); 
-		
-		in = 0;
-		out = 0;
-		while(in < npix)
-		{
-			uint count;
-	
-			// Deal with transparency
-			if (encdata->hasclrkey && pixels[in] == clrkey) {
-				if (runstart >= 0) { // finish normal run
-					data[runstart] = out-runstart-1;
-					runstart = -1;
-				}
-					
-				count = 1;
-				in++;
-				while(in < npix && pixels[in] == clrkey) {
-					count++;
-					in++;
-				}
-				
-				data[out++] = (1<<14) | count;
-				continue;
-			}
-			
-			// Deal with shadow
-			if (encdata->hasshadow && pixels[in] == shadowclr) {
-				if (runstart >= 0) { // finish normal run
-					data[runstart] = out-runstart-1;
-					runstart = -1;
-				}
-					
-				count = 1;
-				in++;
-				while(in < npix && pixels[in] == shadowclr) {
-					count++;
-					in++;
-				}
-				
-				data[out++] = (3<<14) | count;
-				continue;
-   		}
-			
-			// Check if it's a player color
-			if (hasplrclrs) {
-				int idx;
-				
-	         for(idx = 0; idx < hasplrclrs; idx++) {
-            	if(pixels[in] == plrclrs[idx])
-						break;
-				}
-				
-				if (idx < hasplrclrs) {
-					if (runstart >= 0) { // finish normal run
-						data[runstart] = out-runstart-1;
-						runstart = -1;
-					}
-					
-					count = 1;
-					in++;
-					while(in < npix && pixels[in] == shadowclr) {
-						count++;
-						in++;
-					}
-					
-					data[out++] = (2<<14) | count;
-					data[out++] = idx;
-					continue;
-            }
-         }
-			
-			// Normal run of pixels
-			if (runstart < 0)
-				runstart = out++;
-			
-			data[out++] = pixels[in++];
-      }
-   
-		if (runstart >= 0) { // finish normal run
-			data[runstart] = out-runstart-1;
-			runstart = -1;
-		}
-		
-		// Store the frame
-		add_pic(out*sizeof(short), data);
-	} catch(...) {
-		if (data)
-			free(data);
-		throw;
-	}
-	
-	free(data);
-}
-
-//
-// this is a function which reads a animation from a file
-//
-int Animation::read(FileRead* f)
-{
-   ushort np;
-   np = f->Unsigned16();
-
-   uint i;
-   
-   ushort size;
-   for(i=0; i<np; i++) {
-      size = f->Unsigned16();
-      
-      ushort *ptr = (ushort*)f->Data(size);
-      add_pic(size, ptr);
-   }
-  
-   return RET_OK;
-}
-
-/*
-===============
-Animation::parse
-
-Read an animation which sits in the given directory.
-The animation is described by the given section.
-
-This function looks for pictures in this order:
-	picnametempl, if not null
-	key 'pics', if present
-	<sectionname>_??.bmp
-===============
-*/
-void Animation::parse(const char *directory, Section *s, const char *picnametempl, const EncodeData *encdefaults)
-{
-	char templbuf[256]; // used when picnametempl == 0
-	char pictempl[256];
-
-	if (!picnametempl) {
-		picnametempl = s->get_string("pics");
-		if (!picnametempl) {
-			snprintf(templbuf, sizeof(templbuf), "%s_??.bmp", s->get_name());
-			picnametempl = templbuf;
-		}
-	}
-	
-	snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
-
-	// Get colorkey, shadow color and hotspot
-	EncodeData encdata;
-	
-	encdata.clear();
-	
-	if (encdefaults)
-		encdata.add(encdefaults);
-	
-	encdata.parse(s);
-
-	// Get animation speed
-	int fps = s->get_int("fps");
-	if (fps > 0)
-		m_frametime = 1000 / fps;
-	
-	// TODO: Frames of varying size / hotspot?
-	hsx = s->get_int("hot_spot_x", 0);
-	hsy = s->get_int("hot_spot_y", 0);
-	
-	// Read frames in one by one
-	for(;;) {
-		char fname[256];
-		int nr = npics;
-		char *p;
-		
-		// create the file name by reverse-scanning for '?' and replacing
-		strcpy(fname, pictempl);
-		p = fname + strlen(fname);
-		while(p > fname) {
-			if (*--p != '?')
-				continue;
-			
-			*p = '0' + (nr % 10);
-			nr = nr / 10;
-		}
-		
-		if (nr) // cycled up to maximum possible frame number
-			break;
-		
-		// is the frame actually there?
-		if (!g_fs->FileExists(fname))
-			break;
-	
-		Pic* pic = new Pic();
-		if (pic->load(fname)) {
-			delete pic;
-			break;
-		}
-
-		if (!npics) {
-			w = pic->get_w();
-			h = pic->get_h();
-		}
-		
-		if(pic->get_w() != w && pic->get_h() != h) {
-			delete pic;
-			throw wexception("%s: frame must be %ix%i pixels big", fname, w, h);
-		}
-		
-		try {
-			add_pic(pic, &encdata);
-		} catch(...) {
-			delete pic;
-			throw;
-		}
-		
-		delete pic;
-	}
-	
-	if (!npics)
-		throw wexception("Animation %s has no frames", pictempl);
-}
 
 /*
 ==============================================================================
@@ -471,8 +57,10 @@ Bob_Descr::read
 Parse additional information from the config file
 ===============
 */
-void Bob_Descr::read(const char *directory, Section *s)
+void Bob_Descr::read(const char *directory, Profile *prof)
 {
+	Section *s = prof->get_safe_section("global");
+
 	char picname[256];
 	
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
@@ -777,15 +365,13 @@ Bob::start_task_movepath
 
 Start moving to the given destination. persist is the same parameter as
 for Map::findpath().
-anims is an array of 6 animations, one for each direction.
-The order is the canonical NE, E, SE, SW, W, NW (order of the enum)
 
 Returns false if no path could be found.
 
 The task finishes once the goal has been reached. It may fail.
 ===============
 */
-bool Bob::start_task_movepath(Game* g, Coords dest, int persist, Animation **anims)
+bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *anims)
 {
 	task.movepath.path = new Path;
 
@@ -795,7 +381,7 @@ bool Bob::start_task_movepath(Game* g, Coords dest, int persist, Animation **ani
 	}
 	
 	task.movepath.step = 0;
-	memcpy(task.movepath.anims, anims, sizeof(Animation*)*6);
+	task.movepath.anims = anims;
 	
 	start_task(g, TASK_MOVEPATH);
 	return true;
@@ -866,9 +452,8 @@ int Bob::task_act(Game* g)
 		}
 
 		char dir = task.movepath.path->get_step(task.movepath.step);
-		Animation *a = task.movepath.anims[dir-1];
 	
-		int tdelta = start_walk(g, (WalkingDir)dir, a);
+		int tdelta = start_walk(g, (WalkingDir)dir, task.movepath.anims->get_animation(dir));
 		if (tdelta < 0) {
 			end_task(g, false, 0); // failure to reach goal
 			return 0;
@@ -923,7 +508,6 @@ void Bob::draw(Game *game, Bitmap* dst, int posx, int posy)
 	Map *map = game->get_map();
 	FCoords end;
 	FCoords start;
-	int dummyx, dummyy;
 	int sx, sy;
 	int ex, ey;
 	const uchar *playercolors = 0;
@@ -1019,15 +603,7 @@ int Bob::start_walk(Game *g, WalkingDir dir, Animation *a)
 {
 	FCoords newf;
 	
-	switch(dir) {
-	case IDLE: assert(0); break;
-	case WALK_NW: g->get_map()->get_tln(m_position, &newf); break;
-	case WALK_NE: g->get_map()->get_trn(m_position, &newf); break;
-	case WALK_W: g->get_map()->get_ln(m_position, &newf); break;
-	case WALK_E: g->get_map()->get_rn(m_position, &newf); break;
-	case WALK_SW: g->get_map()->get_bln(m_position, &newf); break;
-	case WALK_SE: g->get_map()->get_brn(m_position, &newf); break;
-	}
+	g->get_map()->get_neighbour(m_position, dir, &newf);
 
 	// Move capability check by ANDing with the field caps
 	//
@@ -1093,61 +669,37 @@ class Critter_Bob_Descr : public Bob_Descr {
       Critter_Bob_Descr(const char *name);
       virtual ~Critter_Bob_Descr(void) { } 
 
-      virtual void read(const char *directory, Section *s);
+      virtual void read(const char *directory, Profile *prof);
       Bob *create_object();
 
-      inline bool is_swimming(void) { return swimming; }
-      inline Animation* get_walk_ne_anim(void) { return &walk_ne; }
-      inline Animation* get_walk_nw_anim(void) { return &walk_nw; }
-      inline Animation* get_walk_se_anim(void) { return &walk_se; }
-      inline Animation* get_walk_sw_anim(void) { return &walk_sw; }
-      inline Animation* get_walk_w_anim(void) { return &walk_w; }
-      inline Animation* get_walk_e_anim(void) { return &walk_e; }
+      inline bool is_swimming(void) { return m_swimming; }
+      inline DirAnimations* get_walk_anims(void) { return &m_walk_anims; }
 
    private:
-      ushort stock;
-      bool swimming;
-      Animation walk_ne;
-      Animation walk_nw;
-      Animation walk_e;
-      Animation walk_w;
-      Animation walk_se;
-      Animation walk_sw;
+		DirAnimations	m_walk_anims;
+      bool				m_swimming;
 };
 
 Critter_Bob_Descr::Critter_Bob_Descr(const char *name)
 	: Bob_Descr(name)
 {
-	stock = swimming = 0;
+	m_swimming = 0;
 }
 
-void Critter_Bob_Descr::read(const char *directory, Section *s)
+void Critter_Bob_Descr::read(const char *directory, Profile *prof)
 {
-	Bob_Descr::read(directory, s);
+	Bob_Descr::read(directory, prof);
 
-	stock = s->get_int("stock", 0);
-   swimming = s->get_bool("swimming", false);
+	Section *s = prof->get_safe_section("global");
+	
+	s->get_int("stock", 0);
+	m_swimming = s->get_bool("swimming", false);
 
    // read all the other animatins
-	char picname[256];
+	char sectname[256];
 	
-	snprintf(picname, sizeof(picname), "%s_walk_ne_??.bmp", m_name);
-	walk_ne.parse(directory, s, picname);
-	
-	snprintf(picname, sizeof(picname), "%s_walk_e_??.bmp", m_name);
-	walk_e.parse(directory, s, picname);
-	
-	snprintf(picname, sizeof(picname), "%s_walk_se_??.bmp", m_name);
-	walk_se.parse(directory, s, picname);
-	
-	snprintf(picname, sizeof(picname), "%s_walk_sw_??.bmp", m_name);
-	walk_sw.parse(directory, s, picname);
-	
-	snprintf(picname, sizeof(picname), "%s_walk_w_??.bmp", m_name);
-	walk_w.parse(directory, s, picname);
-
-	snprintf(picname, sizeof(picname), "%s_walk_nw_??.bmp", m_name);
-	walk_nw.parse(directory, s, picname);
+	snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
+	m_walk_anims.parse(directory, prof, sectname, s);
 }
 
 
@@ -1183,23 +735,13 @@ void Critter_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthin
 {
 	if (prev == TASK_IDLE)
 	{
-		// Build the animation list - this needs a better solution (AnimationManager, anyone?)
-		Animation *anims[6];
-		
-		anims[0] = get_descr()->get_walk_ne_anim();
-		anims[1] = get_descr()->get_walk_e_anim();
-		anims[2] = get_descr()->get_walk_se_anim();
-		anims[3] = get_descr()->get_walk_sw_anim();
-		anims[4] = get_descr()->get_walk_w_anim();
-		anims[5] = get_descr()->get_walk_nw_anim();
-		
 		// Pick a target at random
 		Coords dst;
 		
 		dst.x = m_position.x + (g->logic_rand()%5) - 2;
 		dst.y = m_position.y + (g->logic_rand()%5) - 2;
 		
-		if (start_task_movepath(g, dst, 3, anims))
+		if (start_task_movepath(g, dst, 3, get_descr()->get_walk_anims()))
 			return;
 	
 		start_task_idle(g, get_descr()->get_anim(), 1 + g->logic_rand()%1000);
@@ -1246,7 +788,7 @@ Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, P
 		} else
 			throw wexception("Unsupported bob type '%s'", type);
 
-		bob->read(directory, s);
+		bob->read(directory, prof);
 	}
 	catch(std::exception &e) {
 		if (bob)

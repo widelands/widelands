@@ -194,13 +194,13 @@ void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color)
 	int centery = start.y << 16;
 
 	for(int x = start.x; x < end.x; x++, centery += ydiff) {
-		if (x < 0 || x >= dst->get_w())
+		if (x < 0 || x >= (int)dst->get_w())
 			continue;
 		
 		int y = (centery >> 16) - 2;
 		
 		for(int i = 0; i < 5; i++, y++) {
-			if (y < 0 || y >= dst->get_h())
+			if (y < 0 || y >= (int)dst->get_h())
 				continue;
 			
 	      ushort *pix = dst->get_pixels() + y*dst->get_pitch() + x;
@@ -215,13 +215,13 @@ void render_road_vert(Bitmap *dst, Point start, Point end, ushort color)
 	int centerx = start.x << 16;
 
 	for(int y = start.y; y < end.y; y++, centerx += xdiff) {
-		if (y < 0 || y >= dst->get_h())
+		if (y < 0 || y >= (int)dst->get_h())
 			continue;
 		
 		int x = (centerx >> 16) - 2;
 		
 		for(int i = 0; i < 5; i++, x++) {
-			if (x < 0 || x >= dst->get_w())
+			if (x < 0 || x >= (int)dst->get_w())
 				continue;
 			
 			ushort *pix = dst->get_pixels() + y*dst->get_pitch() + x;

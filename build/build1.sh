@@ -46,6 +46,8 @@ cd widelands
 make clean all
 cd ..
 
+strip --strip-unneeded widelands/widelands
+
 cat <<EOF
 
 If everything went okay, you've now got the following steps left to do:

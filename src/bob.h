@@ -21,75 +21,11 @@
 #define __BOB_H
 
 #include "graphic.h"
-#include "pic.h"
+#include "animation.h"
 #include "instances.h"
 
 
 class Profile;
-class Section;
-class Animation;
-
-// TODO: move animations into extra animation.* files
-struct Animation_Pic {
-   ushort *data;
-   Animation* parent;
-};
-
-struct EncodeData {
-	bool hasclrkey;
-	uchar clrkey_r, clrkey_g, clrkey_b;
-	bool hasshadow;
-	uchar shadow_r, shadow_g, shadow_b;
-	bool hasplrclrs;
-	uchar plrclr_r[4];
-	uchar plrclr_g[4];
-	uchar plrclr_b[4];
-
-	void clear();
-	void parse(Section *s);
-	void add(const EncodeData *o);
-};
-
-class Animation {
-   public:
-      enum {
-         HAS_TRANSPARENCY = 1,
-         HAS_SHADOW = 2,
-         HAS_PL_CLR = 3
-      };
-
-      Animation(void);
-      ~Animation(void);
-   
-      inline ushort get_w(void) { return w; }
-      inline ushort get_h(void) { return h; }
-      inline ushort get_hsx(void) { return hsx; }
-      inline ushort get_hsy(void) { return hsy; }
-
-      void add_pic(ushort size, ushort* data);
-		void add_pic(Pic* pic, const EncodeData *enc);
-
-      void set_flags(uint mflags) { flags=mflags; }
-      void set_dimensions(ushort mw, ushort mh) { w=mw; h=mh; }
-      void set_hotspot(ushort x, ushort y) { hsx=x; hsy=y; }
-
-      int read(FileRead*);
-		void parse(const char *directory, Section *s, const char *picnametempl = 0, const EncodeData *encdefaults = 0);
-		
-      inline Animation_Pic* get_pic(ushort n) { assert(n<npics); return &pics[n]; }
-      inline ushort get_npics(void) { return npics; }
-
-		inline uint get_duration() { return m_frametime * npics; }
-		inline Animation_Pic* get_time_pic(uint time) { return &pics[(time / m_frametime) % npics]; }
-		
-   private:
-      uint flags;
-		uint m_frametime;
-      ushort w, h;
-      ushort hsx, hsy;
-      ushort npics;
-      Animation_Pic *pics;
-};
 
 class Bob;
 
@@ -108,7 +44,7 @@ public:
 	
 protected:
 	virtual Bob *create_object() = 0;
-	virtual void read(const char *directory, Section *s);
+	virtual void read(const char *directory, Profile *prof);
 	
 	char m_name[30];
 	Animation anim; // the default animation
@@ -155,7 +91,7 @@ public:
 
 protected: // default tasks
 	void start_task_idle(Game*, Animation* anim, int timeout);
-	bool start_task_movepath(Game*, Coords dest, int persist, Animation **anims);
+	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims);
 	
 protected: // higher level handling (task-based)
 	inline int get_current_task() { return m_task; }
@@ -185,7 +121,7 @@ private:
 protected: // low level handling
 	void set_animation(Game* g, Animation* anim);
 
-	int start_walk(Game* g, WalkingDir dir, Animation* a);
+	int start_walk(Game* g, WalkingDir dir, Animation *anim);
 	void end_walk(Game* g);
 	bool is_walking();
 
@@ -218,7 +154,7 @@ protected:
 		} idle;
 		struct {
 			int step;
-			Animation* anims[6];
+			DirAnimations *anims;
 			Path* path;
 		} movepath;
 	} task;

@@ -83,7 +83,7 @@ clean:
 WIDELANDS_SRC:=$(wildcard src/*.cc)
 WIDELANDS_OBJ:=$(WIDELANDS_SRC:.cc=.o)
 
-CFLAGS:=$(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
+CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS=$(CFLAGS)
 LDFLAGS=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS)
 

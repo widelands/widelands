@@ -178,7 +178,7 @@ void Player::build_road(const Path *path)
 	// Verify ownership of the path
 	Coords coords = path->get_start();
 	
-	for(uint i = 0; i < path->get_nsteps()-1; i++) {
+	for(int i = 0; i < path->get_nsteps()-1; i++) {
 		int dir = path->get_step(i);
 		map->get_neighbour(coords, dir, &coords);
 		

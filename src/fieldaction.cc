@@ -329,7 +329,6 @@ void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
 	// we're building a road right now	
 	Map *map = parent->get_game()->get_map();
 	Coords target = parent->get_fieldsel();
-	Field *field = map->get_field(target);
 	
 	// if user clicked on the same field again, build a flag	
 	if (target == parent->get_build_road_end()) {

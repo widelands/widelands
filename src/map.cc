@@ -1656,7 +1656,7 @@ CoordPath::CoordPath(const Path &path)
 	
 	Coords c = path.get_start();
 	
-	for(uint i = 0; i < path.get_nsteps(); i++) {
+	for(int i = 0; i < path.get_nsteps(); i++) {
 		int dir = path.get_step(i);
 		
 		m_path.push_back(dir);
@@ -1722,9 +1722,8 @@ void CoordPath::append(const Path &tail)
 	
 	Coords c = get_end();
 	
-	for(uint i = 0; i < tail.get_nsteps(); i++) {
+	for(int i = 0; i < tail.get_nsteps(); i++) {
 		char dir = tail.get_step(i);
-		Coords nc;
 		
 		m_map->get_neighbour(c, dir, &c);
 		m_path.push_back(dir);

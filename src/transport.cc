@@ -358,7 +358,7 @@ void Road::mark_map(Game *g)
 	Map *map = g->get_map();
 	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
 	
-	for(uint steps = 0; steps <= m_path.get_nsteps(); steps++) {
+	for(int steps = 0; steps <= m_path.get_nsteps(); steps++) {
 		if (steps > 0 && steps < m_path.get_nsteps())
 			set_position(g, curf);
 		
@@ -396,7 +396,7 @@ void Road::unmark_map(Game *g)
 	Map *map = g->get_map();
 	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
 	
-	for(uint steps = 0; steps <= m_path.get_nsteps(); steps++) {
+	for(int steps = 0; steps <= m_path.get_nsteps(); steps++) {
 		if (steps > 0 && steps < m_path.get_nsteps())
 			unset_position(g, curf);
 		

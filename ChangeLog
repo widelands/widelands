@@ -1,4 +1,7 @@
 
+build-3:
+- added DirAnimations for convenience
+
 build-2:
 - options handling redesigned
 - introduced System
