@@ -96,6 +96,8 @@ void Input::set_max_cords(uint x, const uint y) {
 		  maxx=x; maxy=y;
 		  levx=maxx>>1;
 		  levy=maxy>>1;
+		  //mplx=mply=levx;
+		  //mpy=mply=levy;
 		  SDL_WarpMouse(levx, levy);
 }
 

@@ -261,6 +261,8 @@ namespace Graph
 			float bdiff = ends[y].b - starts[y].b;
 			float bd = 0;
 			uint tb = (y % texture->h) * texture->w;
+			if(!xdiff)
+					  xdiff=1;
 			for (int x=start; x<=end; x++)
 			{
 				uint tp = tb + (x - starts[y].x) % texture->w;
@@ -348,7 +350,7 @@ namespace Graph
 
 					 st=STATE_OK;
 					 
-					 bneeds_update=true;
+					 bneeds_fs_update=true;
 
 					 return;
 		  }
