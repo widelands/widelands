@@ -39,9 +39,11 @@
 #include "ui_unique_window.h"
 #include "overlay_manager.h"
 #include "soldier.h"
+#include "stock_menu.h"
 #include "transport.h"
 #include "tribe.h"
 #include "ware_statistics_menu.h"
+
 
 /*
 ==============================================================================
@@ -62,6 +64,7 @@ private:
    UIUniqueWindowRegistry m_wares_statistics;
    UIUniqueWindowRegistry m_buildings_statistics;
    UIUniqueWindowRegistry m_general_statistics;
+   UIUniqueWindowRegistry m_stock;
 	Interactive_Player	*m_player;
    void clicked(int);
 };
@@ -74,7 +77,7 @@ Create all the buttons etc...
 ===============
 */
 GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(plr, registry, 102, 136, "Menu")
+	: UIUniqueWindow(plr, registry, 102, 160, "Menu")
 {
    m_player=plr;
 
@@ -96,6 +99,10 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    
    b=new UIButton(this, 5, 105, get_inner_w()-10, 20, 0, 5);
    b->set_title("Comparative Statistics");
+   b->clickedid.set(this, &GameMainMenu::clicked);
+   
+   b=new UIButton(this, 5, 105, get_inner_w()-10, 20, 0, 6);
+   b->set_title("Stock");
    b->clickedid.set(this, &GameMainMenu::clicked);
      
 	if (get_usedefaultpos())
@@ -126,6 +133,11 @@ void GameMainMenu::clicked(int n) {
       case 5:
          // General Statistics 
          new General_Statistics_Menu(m_player, &m_general_statistics);
+         break;
+  
+      case 6:
+         // Stock 
+         new Stock_Menu(m_player, &m_stock);
          break;
    }
 }

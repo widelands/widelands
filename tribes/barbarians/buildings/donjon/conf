@@ -5,15 +5,15 @@ type=military		# basic type (warehouse, production, military)
 size=medium
 buildable=yes
 buildicon=build.png
-max_soldiers=6
+max_soldiers=5
 heal_per_second=5
-conquers=9
+conquers=5
 max_medics=2
 heal_increase_per_medic=3
 
 [buildcost]
 blackwood=7
-trunk=3
+trunk=1
 raw_stone=4
 
 [idle]

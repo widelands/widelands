@@ -3328,8 +3328,10 @@ Economy::Economy(Player *player)
 	mpf_cycle = 0;
    
    m_worker_supplies.resize( player->get_tribe()->get_nrworkers() );
+   m_workers.set_nrwares( player->get_tribe()->get_nrworkers() );
    m_ware_supplies.resize( player->get_tribe()->get_nrwares() );
-
+   m_wares.set_nrwares( player->get_tribe()->get_nrwares() );
+   
    player->add_economy(this);
 }
 

@@ -40,15 +40,20 @@ public:
 		WaresPerRow = 5,
 	};
 
+   enum wdType {
+      WORKER,
+      WARE
+   };
+   
 public:
 	WaresDisplay(UIPanel* parent, int x, int y, Editor_Game_Base* game, Player* player);
 	virtual ~WaresDisplay();
 
-	void set_wares(const WareList& wares);
-	void set_workers(const WareList& workers);
-
    void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
+   void add_warelist(const WareList*, wdType);
+   void remove_all_warelists(void);
+   
 protected:
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_ware(RenderTarget* dst, int x, int y, uint id, uint stock, bool);
@@ -57,8 +62,8 @@ private:
 	UITextarea*       m_curware;
    Editor_Game_Base*	m_game;
 	Player*				m_player;
-	WareList				m_wares;
-	WareList				m_workers;
+   wdType            m_type;
+   std::vector< const WareList* > m_warelists;
 };
 
 

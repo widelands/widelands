@@ -177,6 +177,7 @@ void WarehouseSupply::remove_wares(int id, int count)
 WarehouseSupply::add_workers
 
 Add workers and update the economy.
+
 ===============
 */
 void WarehouseSupply::add_workers(int id, int count)
@@ -187,7 +188,7 @@ void WarehouseSupply::add_workers(int id, int count)
 	if (!m_workers.stock(id))
 		m_economy->add_worker_supply(id, this);
 
-	m_economy->add_workers(id, count);
+   m_economy->add_workers(id, count);
 	m_workers.add(id, count);
 }
 
@@ -197,6 +198,8 @@ void WarehouseSupply::add_workers(int id, int count)
 WarehouseSupply::remove_workers
 
 Remove workers and update the economy.
+
+Comments see add_workers
 ===============
 */
 void WarehouseSupply::remove_workers(int id, int count)
@@ -205,10 +208,21 @@ void WarehouseSupply::remove_workers(int id, int count)
 		return;
 
 	m_workers.remove(id, count);
-	m_economy->remove_workers(id, count);
+   m_economy->remove_workers(id, count);
 
 	if (!m_workers.stock(id))
 		m_economy->remove_worker_supply(id, this);
+}
+   
+/*
+ * This is overwritten from Player Immovable
+ * a warehouse has no workers. And we get problems
+ * when incorporated workers 
+ * list themselves as workers
+*/ 
+void Warehouse::add_worker( Worker* w ) {
+}
+void Warehouse::remove_worker( Worker* w ) {
 }
 
 
@@ -689,10 +703,12 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
       // one found, make him available
       worker = static_cast<Worker*>(i->get(g));
       worker->reset_tasks(g); // Forget everything you did
+      worker->set_economy( get_economy() ); // Back in a economy 
       m_incorporated_workers.erase(i);
    }
+      
+   m_supply->remove_workers(ware, 1);
    
-	m_supply->remove_workers(ware, 1);
 
 	return worker;
 }
@@ -744,10 +760,12 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
 		soldier = static_cast<Soldier*>(i->get(g));
 		soldier->reset_tasks(g); // Forget everything you did
 		soldier->mark(false);
+      soldier->set_economy( get_economy() ); // Back in a economy 
 		m_incorporated_workers.erase(i);
 	}
+      
+   m_supply->remove_workers(ware, 1);
 
-	m_supply->remove_workers(ware, 1);
 	return soldier;
 }
 
@@ -829,9 +847,10 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
    } else {
       sort_worker_in(g, w->get_name(), w);
       w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
+      w->set_economy(0); // No more in a economy
    }
 
-	m_supply->add_workers(index, 1);
+   m_supply->add_workers(index, 1);
 
 	if (item) 
 		incorporate_item(g, item);

@@ -45,16 +45,11 @@ Initialize the wares display
 WaresDisplay::WaresDisplay(UIPanel* parent, int x, int y, Editor_Game_Base* game, Player* player)
 	: UIPanel(parent, x, y, Width, 0)
 {
-	int rows, height;
 
 	m_game = game;
 	m_player = player;
 
-	rows = (player->get_tribe()->get_nrwares() + player->get_tribe()->get_nrworkers() + WaresPerRow - 1) / WaresPerRow;
-	height = rows * (WARE_MENU_PIC_H + 8 + 3) + 1;
-
-	set_size(Width, height+30);
-
+   set_size(Width, 100);
    m_curware = new UITextarea(this, 0, get_inner_h()-25, get_inner_w(), 20, "Testtext", Align_Center);
 }
 
@@ -68,8 +63,7 @@ Cleanup
 */
 WaresDisplay::~WaresDisplay()
 {
-	m_wares.clear(); // okay with accounting + avoid error messages
-	m_workers.clear(); // okay with accounting + avoid error messages
+   remove_all_warelists();
 }
 
 /*
@@ -81,17 +75,21 @@ void WaresDisplay::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btn
    index += x / (WARE_MENU_PIC_W +4)+1;
    std::string str;
 
-   if(index > (m_wares.get_nrwareids()+m_workers.get_nrwareids())) {
+   assert( m_warelists.size() );
+
+   if(index > (m_warelists[0]->get_nrwareids())) {
       m_curware->set_text("");
-   } else if(index>m_wares.get_nrwareids()) {
-      str=m_player->get_tribe()->get_worker_descr(index-(m_wares.get_nrwareids()+1))->get_descname();
-      str+=" (worker)";
-      m_curware->set_text(str.c_str());
-   } else {
-		index--;
-      str=m_player->get_tribe()->get_ware_descr(index)->get_descname();
-      str+=" (ware)";
-      m_curware->set_text(str.c_str());
+   } 
+   else {
+      if(m_type == WORKER) {
+         index--;
+         str=m_player->get_tribe()->get_worker_descr(index)->get_descname();
+         m_curware->set_text(str.c_str());
+      } else {
+         index--;
+         str=m_player->get_tribe()->get_ware_descr(index)->get_descname();
+         m_curware->set_text(str.c_str());
+      }
    }
 }
 
@@ -99,26 +97,34 @@ void WaresDisplay::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btn
 ===============
 WaresDisplay::set_wares
 
-Set the new wares state. Update the window if anything has changed.
+add a ware list to be displayed in this WaresDisplay
 ===============
 */
-void WaresDisplay::set_wares(const WareList& wares)
+void WaresDisplay::add_warelist(const WareList* wares, wdType type)
 {
-	if (m_wares == wares)
-		return;
+   // If you register something twice, it is counted twice. Not my problem
+	m_warelists.push_back(wares);
+	
+   int rows, height;
 
-	m_wares = wares;
+   rows = (wares->get_nrwareids() + WaresPerRow - 1) / WaresPerRow;
+	height = rows * (WARE_MENU_PIC_H + 8 + 3) + 1;
+
+	set_size(get_inner_w(), height+30);
+   m_curware->set_pos(0, get_inner_h()-25);
+   m_curware->set_size(get_inner_w(), 20);
+   
+   m_type = type;
+
 
 	update(0, 0, get_w(), get_h());
 }
-void WaresDisplay::set_workers(const WareList& workers) {
-	if (m_workers == workers)
-		return;
 
-	m_workers = workers;
-
-	update(0, 0, get_w(), get_h());
-
+/*
+ * Delete all ware lists
+ */
+void WaresDisplay::remove_all_warelists( void ) {
+   m_warelists.clear();
 }
 
 /*
@@ -130,39 +136,36 @@ Draw the wares.
 */
 void WaresDisplay::draw(RenderTarget* dst)
 {
-	int x, y;
+   int x, y;
 
-	x = 2;
-	y = 2;
+   x = 2;
+   y = 2;
 
+   int number = m_player->get_tribe()->get_nrwares();
+   bool is_worker = false;
 
+   if( m_type == WORKER ) { 
+      number = m_player->get_tribe()->get_nrworkers();
+      is_worker = true;
+   }
    int totid=0;
-	for(int id = 0; id < m_player->get_tribe()->get_nrwares(); id++, totid++)	{
-		draw_ware(dst, x, y, id, m_wares.stock(id), false);
+   for(int id = 0; id < number; id++, totid++)	{
+      uint totalstock = 0;
+      for( uint i = 0; i < m_warelists.size(); i++)
+         totalstock += m_warelists[i]->stock(id);
 
-		if (((totid+1) % WaresPerRow) != 0)
-		{
-			x += WARE_MENU_PIC_W + 3;
-		}
-		else
-		{
-			x = 2;
-			y += WARE_MENU_PIC_H+8 + 3;
-		}
-	}
-	for(int id = 0; id < m_player->get_tribe()->get_nrworkers(); id++, totid++)	{
-		draw_ware(dst, x, y, id, m_workers.stock(id), true);
+      draw_ware(dst, x, y, id, totalstock, is_worker);
 
-		if (((totid+1) % WaresPerRow) != 0)
-		{
-			x += WARE_MENU_PIC_W + 3;
-		}
-		else
-		{
-			x = 2;
-			y += WARE_MENU_PIC_H+8 + 3;
-		}
-	}
+      if (((totid+1) % WaresPerRow) != 0)
+      {
+         x += WARE_MENU_PIC_W + 3;
+      }
+      else
+      {
+         x = 2;
+         y += WARE_MENU_PIC_H+8 + 3;
+      }
+   }
 }
 
 

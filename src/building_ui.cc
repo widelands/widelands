@@ -640,6 +640,12 @@ void Building_Window::setup_capsbuttons()
 		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_debug,true));
 		x += 34;
 	}
+
+   if( x == 0 ) {
+      // no capsbutton is in this window
+      // resize us, so that we do not take space
+      m_capsbuttons->set_inner_size(0,0);
+   }
 }
 
 
@@ -843,7 +849,13 @@ public:
 	virtual void think();
 
 private:
+   void clicked(int);
+   void switch_page( void );
+   
+private:
 	WaresDisplay*			m_waresdisplay;
+   Interactive_Player*  m_parent;
+   int                  m_curpage;
 };
 
 /*
@@ -856,16 +868,44 @@ Open the window, create the window buttons and add to the registry.
 Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UIWindow **registry)
 	: Building_Window(parent, wh, registry)
 {
-	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
+   m_parent = parent;
 
 	// Add wares display
-	m_waresdisplay = new WaresDisplay(box, 0, 0, parent->get_game(), parent->get_player());
-	box->add(m_waresdisplay, UIBox::AlignCenter);
+	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->get_game(), parent->get_player());
+	m_waresdisplay->add_warelist(&get_warehouse()->get_wares(), WaresDisplay::WARE);
+   
+   set_inner_size(m_waresdisplay->get_w(), 0);
+   
+   int spacing = 5;
+   int nr_buttons = 4; // one more, turn page button is bigger
+   int button_w = (get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
+   int posx = spacing;
+   int posy = m_waresdisplay->get_h() + spacing;
+   m_curpage = 0;
+
+
+   UIButton* b = new UIButton(this, posx, posy, button_w, 25, 0, 100);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png", true));
+   b->clickedid.set(this, &Warehouse_Window::clicked);
+   posx += button_w + spacing;
+   b = new UIButton(this, posx, posy, button_w*2+spacing, 25, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png", true));
+   b->clickedid.set(this, &Warehouse_Window::clicked);
+   posx += button_w*2 + 2*spacing;
+   b = new UIButton(this, posx, posy, button_w, 25, 0, 101);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_goto.png", true));
+   b->clickedid.set(this, &Warehouse_Window::clicked);
+   posx += button_w + spacing;
+   posy += 25 + spacing;
 
 	// Add caps buttons
-	box->add(create_capsbuttons(box), UIBox::AlignCenter);
-
-	fit_inner(box);
+   posx = 0;
+   UIPanel* caps = create_capsbuttons(this);
+   caps->set_pos(spacing, posy);
+   if( caps->get_h() ) 
+      posy += caps->get_h() + spacing;
+   
+   set_inner_size(get_inner_w(), posy);
 }
 
 
@@ -880,7 +920,53 @@ Warehouse_Window::~Warehouse_Window()
 {
 }
 
+/*
+ * A button has been clicked
+ */
+void Warehouse_Window::clicked( int id ) {
+   switch(id) {
+      case 100:
+      {
+         // Help
+         log("TODO: Implement help!\n");
+         break;
+      }
 
+      case 101:
+      {
+         // Goto button
+         m_parent->move_view_to(get_warehouse()->get_position().x, get_warehouse()->get_position().y);
+         break;
+      }
+
+      case 1:
+      {
+         // Switch page
+         switch_page();
+      }
+      
+   }
+   
+}
+
+/*
+ * Switch to the next page, that is, show 
+ * wares -> workers -> soldier
+ */
+void Warehouse_Window::switch_page(void) {
+   if(m_curpage == 0) {
+      // Showing wares, should show workers
+      m_waresdisplay->remove_all_warelists();
+      m_waresdisplay->add_warelist(&get_warehouse()->get_workers(), WaresDisplay::WORKER);
+      m_curpage = 1;
+   } else if( m_curpage == 1) {
+      // Showing workers, should show soldiers
+      //TODO currently switches back to wares
+      m_waresdisplay->remove_all_warelists();
+      m_waresdisplay->add_warelist(&get_warehouse()->get_wares(), WaresDisplay::WARE);
+      m_curpage = 0;
+   }
+}
 /*
 ===============
 Warehouse_Window::think
@@ -890,8 +976,6 @@ Push the current wares status to the WaresDisplay.
 */
 void Warehouse_Window::think()
 {
-	m_waresdisplay->set_wares(get_warehouse()->get_wares());
-	m_waresdisplay->set_workers(get_warehouse()->get_workers());
 }
 
 

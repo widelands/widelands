@@ -5,6 +5,7 @@ type=generic
 menu_pic=builder_menu.png
 
 [buildcost]
+hammer=1
 carrier=1
 
 # Here come the animations

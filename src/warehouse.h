@@ -55,7 +55,7 @@ public:
 
 	inline int get_subtype() const { return m_subtype; }
 	virtual int get_conquers(void) const { return m_conquers; }
-
+   
 private:
 	int	m_subtype;
 	int	m_conquers;		// HQs conquer
@@ -85,6 +85,10 @@ public:
 	void remove_wares(int id, int count);
    void insert_workers(int id, int count);
    void remove_workers(int id, int count);
+   
+   // Overwritten from Player Immovable
+   void add_worker( Worker* w ); 
+   void remove_worker( Worker* w);
    
 	virtual bool fetch_from_flag(Game* g);
 
