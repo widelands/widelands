@@ -54,6 +54,8 @@ public:
 	bool run_single_player ();
 	bool run_multi_player (NetGame*);
 
+	void load_map (const char*);
+
 	void think(void);
 
 
@@ -94,6 +96,7 @@ private:
 	void init_player_controllers ();
 	bool run ();
 
+	Map_Loader*	m_maploader;
 	
 	NetGame*	m_netgame;
 	

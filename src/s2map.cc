@@ -54,11 +54,10 @@ S2_Map_Loader::S2_Map_Loader()
 inits the map loader
 ===========
 */
-S2_Map_Loader::S2_Map_Loader(const char* filename, Map* map) :
-   Map_Loader(filename, map) {
+S2_Map_Loader::S2_Map_Loader(const char* filename, Map* map) : Map_Loader(filename, map)
+{
 	snprintf(m_filename, sizeof(m_filename), "%s", filename);
-   m_map=map;
-
+	m_map=map;
 }
 
 /*

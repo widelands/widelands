@@ -104,8 +104,8 @@ bool Game::run_single_player ()
 	m_state = gs_menu;
 	m_netgame=0;
 
-	Map_Loader* ml=0;
-	Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, &ml);
+	m_maploader=0;
+	Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, 0, &m_maploader);
 	int code = lgm->run();
 	delete lgm;
 	
@@ -119,30 +119,29 @@ bool Game::run_single_player ()
 	init_player_controllers ();
 
 	// Now first, completly load the map
-	ml->load_map_complete(this, code==2); // if code==2 is a scenario
-	delete ml;
+	m_maploader->load_map_complete(this, code==2); // if code==2 is a scenario
+	delete m_maploader;
+	m_maploader=0;
 
 	return run();
 }
 
 
-extern uchar g_playercolors[MAX_PLAYERS][12];
+//extern uchar g_playercolors[MAX_PLAYERS][12];
 bool Game::run_multi_player (NetGame* ng)
 {
+	m_state = gs_menu;
 	m_netgame=ng;
 
-	// temporarily hardcode map
-	Map* map=new Map();
-	Map_Loader* ml = map->get_correct_loader("maps/eden.swd");
-	assert (ml!=0);
-        ml->preload_map(0);
-	set_map (ml->get_map());
+	m_maploader=0;
+	Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, m_netgame, &m_maploader);
+	m_netgame->set_launch_menu (lgm);
+	int code = lgm->run();
+	m_netgame->set_launch_menu (0);
+	delete lgm;
 	
-	int pn=ng->get_playernum();
-	
-	add_player (1, (pn==1)?Player::playerLocal:Player::playerRemote, "romans", g_playercolors[0]);
-	add_player (2, (pn==2)?Player::playerLocal:Player::playerRemote, "romans", g_playercolors[1]);
-	add_player (3, Player::playerAI, "romans", g_playercolors[2]);
+	if (code==0 || get_map()==0)
+	    return false;
 
 	m_netgame->begin_game();
 	    
@@ -153,10 +152,21 @@ bool Game::run_multi_player (NetGame* ng)
 	init_player_controllers ();
 
 	// Now first, completly load the map
-	ml->load_map_complete(this, false); // if code==2 is a scenario
-	delete ml;
+	m_maploader->load_map_complete(this, false); // if code==2 is a scenario
+	delete m_maploader;
+	m_maploader=0;
 
 	return run();
+}
+
+
+void Game::load_map (const char* filename)
+{
+	Map* map=new Map();
+	m_maploader = map->get_correct_loader(filename);
+	assert (m_maploader!=0);
+	m_maploader->preload_map(0);
+	set_map (m_maploader->get_map());
 }
 
 

@@ -68,7 +68,7 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game
          
          if(!egbase->is_game() && !plr && !get_scenario_skip()) {
             // Editor: we better add this player, and place the HQ 
-            egbase->add_player(i, Player::playerLocal, egbase->get_map()->get_scenario_player_tribe(i).c_str(), g_playercolors[i-1]);
+            egbase->add_player(i, Player::playerLocal, egbase->get_map()->get_scenario_player_tribe(i).c_str());
             plr=egbase->get_player(i);
             
             int idx = plr->get_tribe()->get_building_index("headquarters");

@@ -30,8 +30,11 @@
 
 class Game;
 class PlayerCommand;
+class PlayerDescriptionGroup;
 class Serializer;
 class Deserializer;
+
+class Fullscreen_Menu_LaunchGame;
 
 
 class NetGame {
@@ -41,10 +44,28 @@ class NetGame {
 	
 	int get_playernum () { return playernum; }
 	
+	bool get_players_changed ()
+	{
+		bool ch=players_changed;
+		players_changed=false;
+		return ch;
+	}
+	
+	void set_player_description_group (int plnum, PlayerDescriptionGroup* pdg)
+	{
+		playerdescr[plnum-1]=pdg;
+	}
+	
+	void set_launch_menu (Fullscreen_Menu_LaunchGame* lgm)
+	{
+		launch_menu=lgm;
+	}
+	
 	void run ();
 	
 	int get_max_frametime();
 	
+	virtual bool is_host ()=0;
 	virtual void begin_game ()=0;
 
 	virtual void handle_network ()=0;
@@ -56,13 +77,21 @@ class NetGame {
 	
 	int		playernum;
 	int		net_game_time;
+	
+	bool		players_changed;
+	
+	PlayerDescriptionGroup*	playerdescr[MAX_PLAYERS];
+	Fullscreen_Menu_LaunchGame*	launch_menu;
 };
 
 class NetHost:public NetGame {
     public:
 	NetHost ();
 	virtual ~NetHost ();
+	
+	void update_map ();
 
+	virtual bool is_host () { return true; }
 	virtual void begin_game ();
 	
 	virtual void handle_network ();
@@ -70,9 +99,12 @@ class NetHost:public NetGame {
 	virtual void send_player_command (PlayerCommand*);
 	
     private:
+	void send_player_info ();
+
 	struct Client {
 		TCPsocket		sock;
 		Deserializer*		deserializer;
+		int			playernum;
 	};
 	
 	TCPsocket			svsock;
@@ -89,6 +121,7 @@ class NetClient:public NetGame {
 	NetClient (IPaddress*);
 	virtual ~NetClient ();
 
+	virtual bool is_host () { return false; }
 	virtual void begin_game ();
 	
 	virtual void handle_network ();
@@ -131,6 +164,8 @@ class Serializer {
 		buffer.push_back ((v>>8) & 0xFF);
 		buffer.push_back (v & 0xFF);
 	}
+	
+	void putstr (const char*);
     
     private:
 	std::vector<unsigned char>	buffer;
@@ -180,6 +215,8 @@ class Deserializer {
 		
 		return v;
 	}
+	
+	void getstr (char*, int);
     
     private:
 	std::queue<unsigned char>	queue;

@@ -18,12 +18,20 @@
  */
 
 #include "game.h"
+#include "player.h"
 #include "playercommand.h"
+#include "playerdescrgroup.h"
+#include "tribe.h"
 #include "network.h"
 #include "wexception.h"
+#include "fullscreen_menu_launchgame.h"
 
 enum {
 	NETCMD_UNUSED=0,
+	NETCMD_HELLO,
+	NETCMD_SELECTMAP,
+	NETCMD_PLAYERINFO,
+	NETCMD_START,
 	NETCMD_ADVANCETIME,
 	NETCMD_PLAYERCOMMAND
 };
@@ -44,7 +52,11 @@ authority to do this. */
 
 NetGame::NetGame ()
 {
+	game=0;
 	net_game_time=0;
+	playernum=0;
+	
+	players_changed=false;
 }
 
 NetGame::~NetGame ()
@@ -86,32 +98,126 @@ NetHost::NetHost ()
 	serializer=new Serializer();
 	
 	playernum=1;
-	
-	// FIXME: temporarily wait for my buddy here
-	Client peer;
-	
-	while ((peer.sock=SDLNet_TCP_Accept(svsock))==0);
-	
-	SDLNet_TCP_AddSocket (sockset, peer.sock);
-	peer.deserializer=new Deserializer();
-	clients.push_back (peer);
 }
 
 NetHost::~NetHost ()
 {
+	SDLNet_FreeSocketSet (sockset);
+	
+	// close all open sockets
+	if (svsock!=0)
+		SDLNet_TCP_Close (svsock);
+	
+	for (unsigned int i=0;i<clients.size();i++)
+		SDLNet_TCP_Close (clients[i].sock);
 }
 
-// When the game starts, shut down the server socket.
-// No new connections are accepted then.
+// Whenever at the host a new map is selected, NetHost::update_map will
+// notify the other players so that they load the map as well
+void NetHost::update_map ()
+{
+	Map* map=game->get_map();
+	
+	serializer->begin_packet ();
+	serializer->putchar (NETCMD_SELECTMAP);
+	serializer->putstr (map?map->get_filename():"");
+	serializer->end_packet ();
+	
+	for (unsigned int i=0;i<clients.size();i++)
+		serializer->send (clients[i].sock);
+	
+	playerdescr[0]->set_player_type (Player::playerLocal);
+	
+	send_player_info ();
+}
+
+void NetHost::send_player_info ()
+{
+	unsigned char playerenabled, playerhuman;
+	Player* pl;
+	int i;
+	
+	playerenabled=0;
+	playerhuman=0;
+	
+	for (i=0;i<MAX_PLAYERS;i++)
+		if ((pl=game->get_player(i+1))!=0) {
+			playerenabled|=1<<i;
+			
+			if (pl->get_type()!=Player::playerAI)
+				playerhuman|=1<<i;
+		}
+	
+	serializer->begin_packet ();
+	serializer->putchar (NETCMD_PLAYERINFO);
+	serializer->putchar (playerenabled);
+	serializer->putchar (playerhuman);
+	serializer->end_packet ();
+	
+	for (unsigned int i=0;i<clients.size();i++)
+		serializer->send (clients[i].sock);
+}
+
+// When the game starts, first shut down the server socket. No new connections are accepted then.
+// After that, notify the other players that we are starting.
 void NetHost::begin_game ()
 {
 	SDLNet_TCP_Close (svsock);
 	svsock=0;
+	
+	serializer->begin_packet ();
+	serializer->putchar (NETCMD_START);
+	serializer->end_packet ();
+	
+	for (unsigned int i=0;i<clients.size();i++)
+		serializer->send (clients[i].sock);
 }
 
 void NetHost::handle_network ()
 {
+	TCPsocket sock;
 	unsigned int i;
+	
+	// if we are in the game initiation phase, check for new connections
+	while (svsock!=0 && (sock=SDLNet_TCP_Accept(svsock))!=0) {
+		Player* pl=0;
+		
+		for (i=1;i<=MAX_PLAYERS;i++)
+			if ((pl=game->get_player(i))!=0 && pl->get_type()==Player::playerAI) break;
+		
+		if (pl==0) {
+			// sorry, but there no room on this map for any more players
+			SDLNet_TCP_Close (sock);
+			continue;
+		}
+		
+		const char* tribe=pl->get_tribe()->get_name();
+		
+		game->remove_player (i);
+		game->add_player (i, Player::playerRemote, tribe);
+		
+		Client peer;
+		peer.sock=sock;
+		peer.deserializer=new Deserializer();
+		peer.playernum=i;
+		clients.push_back (peer);
+		
+		players_changed=true;
+		
+		playerdescr[i-1]->set_player_type (Player::playerRemote);
+		
+		serializer->begin_packet ();
+		serializer->putchar (NETCMD_HELLO);
+		serializer->putchar (i);
+
+		Map* map=game->get_map();
+		serializer->putchar (NETCMD_SELECTMAP);
+		serializer->putstr (map?map->get_filename():"");
+		serializer->end_packet ();
+		serializer->send (peer.sock);
+		
+		send_player_info ();
+	}
 	
 	// check if we hear anything from our peers
 	while (SDLNet_CheckSockets(sockset, 0) > 0)
@@ -176,8 +282,6 @@ NetClient::NetClient (IPaddress* svaddr)
 	sockset=SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (sockset, sock);
 	
-	playernum=2;
-	
 	serializer=new Serializer();
 	deserializer=new Deserializer();
 }
@@ -186,6 +290,9 @@ NetClient::~NetClient ()
 {
 	delete serializer;
 	delete deserializer;
+	
+	SDLNet_FreeSocketSet (sockset);
+	SDLNet_TCP_Close (sock);
 }
 
 void NetClient::begin_game ()
@@ -200,6 +307,44 @@ void NetClient::handle_network ()
 	
 	while (deserializer->avail())
 	        switch (deserializer->getchar()) {
+		    case NETCMD_HELLO:
+			playernum=deserializer->getchar();
+			break;
+		    case NETCMD_SELECTMAP:
+			{
+				assert (launch_map!=0);
+
+				char buffer[256];
+				deserializer->getstr (buffer,sizeof(buffer));
+				log ("Map '%s' selected\n", buffer);
+				
+				game->load_map (buffer);
+				playerdescr[playernum-1]->set_player_type (Player::playerLocal);
+				launch_menu->refresh ();
+			}
+			break;
+		    case NETCMD_PLAYERINFO:
+			{
+				unsigned char enabled,human;
+				int i;
+				
+				enabled=deserializer->getchar();
+				human=deserializer->getchar();
+				
+				for (i=0;i<MAX_PLAYERS;i++)
+					if (i!=playernum-1)
+						if (enabled & (1<<i)) {
+					    		playerdescr[i]->set_player_type ((human&(1<<i))?Player::playerRemote:Player::playerAI);
+					    		playerdescr[i]->set_enabled (true);
+						}
+						else
+							playerdescr[i]->set_enabled (false);
+			}
+			break;
+		    case NETCMD_START:
+			assert (launch_menu!=0);
+			launch_menu->start_clicked();
+			break;
 		    case NETCMD_ADVANCETIME:
 			net_game_time=deserializer->getlong();
 			break;
@@ -253,6 +398,14 @@ void Serializer::end_packet ()
 	buffer[1]=length & 0xFF;
 }
 
+void Serializer::putstr (const char* str)
+{
+	while (*str)
+		buffer.push_back (*str++);
+	
+	buffer.push_back (0);
+}
+
 void Serializer::send (TCPsocket sock)
 {
 	SDLNet_TCP_Send (sock, &(buffer[0]), buffer.size());
@@ -294,4 +447,14 @@ void Deserializer::read_packet (TCPsocket sock)
 		length-=amount;
 	}
 }
+
+void Deserializer::getstr (char* buffer, int maxlength)
+{
+	int i;
+	
+	for (i=0;(buffer[i]=getchar())!=0;i++)
+		if (i==maxlength)
+			throw wexception("Deserializer: string too long");
+}
+
 

@@ -115,7 +115,4 @@ class Tribe_Descr {
 
 };
 
-// And the tribe colors
-extern uchar g_playercolors[MAX_PLAYERS][12];
-
 #endif //__TRIBE_H

@@ -20,7 +20,8 @@
 #ifndef __S__MAP_LOADER_H
 #define __S__MAP_LOADER_H
 
-class Map;
+#include "map.h"
+
 class Editor_Game_Base;
 
 /*
@@ -44,7 +45,7 @@ class Map_Loader {
          S2ML  // S2 Map Loader
       }; 
       
-      Map_Loader(const char*, Map*) { m_s=STATE_INIT; m_map=0; }
+      Map_Loader(const char* filename, Map* map) { m_s=STATE_INIT; m_map=map; m_map->set_filename(filename); }
       virtual ~Map_Loader() { };
 
       virtual int get_type(void) = 0;

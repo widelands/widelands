@@ -225,7 +225,7 @@ bool UIButton::handle_mouseclick(uint btn, bool down, int x, int y)
       }
    }
 	update(0, 0, get_w(), get_h());
-
+	
 	return true;
 }
 

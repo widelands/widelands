@@ -60,7 +60,7 @@ class Editor_Game_Base {
 
       // Player commands
       void remove_player(int plnum);
-      void add_player(int plnum, int type, const char* tribe, const uchar *playercolor);
+      void add_player(int plnum, int type, const char* tribe);
       inline Player* get_player(int n) { assert(n>=1 && n<=MAX_PLAYERS); return m_players[n-1]; }
 
       virtual bool is_game() = 0;

@@ -173,12 +173,14 @@ public:
 	void set_starting_pos(uint plnum, Coords c);
 	inline const Coords &get_starting_pos(uint plnum) { return m_starting_pos[plnum-1]; }
 
+	void set_filename(const char *string);
 	void set_author(const char *string);
 	void set_world_name(const char *string);
 	void set_name(const char *string);
 	void set_description(const char *string);
 
 	// informational functions
+	inline const char* get_filename(void) { return m_filename; }
 	inline const char* get_author(void) { return m_author; }
 	inline const char* get_name(void) { return m_name; }
 	inline const char* get_description(void) { return m_description; }
@@ -356,6 +358,7 @@ private:
 	uint		m_nrplayers;		// # of players this map supports (!= Game's number of players)
 	uint		m_width;
 	uint		m_height;
+	char		m_filename[256];
 	char		m_author[61];
 	char		m_name[61];
 	char		m_description[1024];

@@ -41,15 +41,16 @@ class PlayerDescriptionGroup : public UIPanel {
 	int m_plnum;
 
 	bool m_enabled; // is this player allowed at all (map-dependent)
-
-   UITextarea* m_plr_name;
-   UICheckbox* m_btnEnablePlayer;
 	int m_playertype;
+	uint      m_current_tribe;
+	bool      m_allow_changes;
+
+	std::vector<std::string> m_tribes;
+	
+	UITextarea* m_plr_name;
+	UICheckbox* m_btnEnablePlayer;
 	UIButton* m_btnPlayerType;
 	UIButton* m_btnPlayerTribe;
-   bool      m_allow_changes;
-   std::vector<std::string> m_tribes;
-   uint      m_current_tribe;
 
 public:
 	PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum);
@@ -57,10 +58,11 @@ public:
 	UISignal changed;
 
 	void set_enabled(bool enable);
-   void allow_changes(bool t);
-   void set_player_tribe(std::string str);
-   void set_player_name(std::string name);
-
+	void allow_changes(bool t);
+	void set_player_tribe(std::string str);
+	void set_player_name(std::string name);
+	void set_player_type(int);
+	
 private:
 	void enable_player(bool on);
 	void toggle_playertype();

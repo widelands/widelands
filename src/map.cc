@@ -70,20 +70,21 @@ Map::Map
 Inits a clean, empty map
 ===============
 */
-Map::Map(void) {
+Map::Map(void)
+{
  	m_nrplayers = 0;
 	m_width = m_height = 0;
-   m_world=0;
+	m_world=0;
 	m_pathcycle = 0;
 	m_fields = 0;
 	m_pathfields = 0;
 	m_starting_pos = 0;
 	m_world = 0;
 
-   m_overlay_manager=0;
+	m_overlay_manager=0;
 
-   // Paranoia
-   cleanup();
+	// Paranoia
+	cleanup();
 }
 
 /*
@@ -477,6 +478,11 @@ Map::set_world_name
 Set informational strings
 ===============
 */
+void Map::set_filename(const char *string)
+{
+	snprintf(m_filename, sizeof(m_filename), "%s", string);
+}
+
 void Map::set_author(const char *string)
 {
 	snprintf(m_author, sizeof(m_author), "%s", string);

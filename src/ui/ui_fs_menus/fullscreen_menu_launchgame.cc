@@ -20,6 +20,8 @@
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_mapselect.h"
 #include "game.h"
+#include "player.h"
+#include "network.h"
 #include "map.h"
 #include "playerdescrgroup.h"
 #include "ui_button.h"
@@ -33,34 +35,37 @@ Fullscreen_Menu_LaunchGame
 ==============================================================================
 */
 
-Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, Map_Loader** ml)
+Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map_Loader** ml)
 	: Fullscreen_Menu_Base("launchgamemenu.jpg")
 {
 	m_game = g;
-   m_is_scenario = false;
-   m_ml=ml;
+	m_netgame = ng;
+	m_is_scenario = false;
+	m_ml=ml;
 
 	// Title
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Launch Game", Align_HCenter);
-   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Launch Game", Align_HCenter);
+	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
 	UIButton* b;
 
 	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
-	b->clickedid.set(this, &Fullscreen_Menu_LaunchGame::clicked);
+	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::back_clicked);
 	b->set_title("Back");
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 1);
-	m_ok->clickedid.set(this, &Fullscreen_Menu_LaunchGame::clicked);
+	m_ok->clicked.set(this, &Fullscreen_Menu_LaunchGame::start_clicked);
 	m_ok->set_title("Start game");
 	m_ok->set_enabled(false);
+	m_ok->set_visible(m_netgame==0 || m_netgame->is_host());
 
 	// Map selection fields
 	m_mapname = new UITextarea(this, 497, 184, "(no map)", Align_HCenter);
 	b = new UIButton(this, 410, 200, 174, 24, 1, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::select_map);
 	b->set_title("Select map");
+	b->set_enabled (m_netgame==0 || m_netgame->is_host());
 
 	// Player settings
 	int i;
@@ -73,9 +78,17 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, Map_Loader** ml)
 
 		m_players[i-1] = pdg;
 		y += 30;
+		
+		if (m_netgame!=0)
+		    m_netgame->set_player_description_group (i, pdg);
 	}
-   // Directly go selecting a map
-   select_map();
+	
+	if (m_netgame==0)
+		m_players[0]->set_player_type (Player::playerLocal);
+
+	// Directly go selecting a map
+	if (m_netgame==0 || m_netgame->is_host())
+		select_map();
 }
 
 void Fullscreen_Menu_LaunchGame::think()
@@ -84,26 +97,27 @@ void Fullscreen_Menu_LaunchGame::think()
 }
 
 /*
- * a button has been pressed
+ * back-button has been pressed
  * */
-void Fullscreen_Menu_LaunchGame::clicked(int id) {
-   if(id==0) {
-      // Back
-      m_game->get_objects()->cleanup(m_game);
-      end_modal(0);
-   } else {
-      // Ok
-      if(m_is_scenario)
-         end_modal(2);
-      else
-         end_modal(1);
-   }
+void Fullscreen_Menu_LaunchGame::back_clicked()
+{
+	m_game->get_objects()->cleanup(m_game);
+	end_modal(0);
+}
+
+
+/*
+ * start-button has been pressed
+ * */
+void Fullscreen_Menu_LaunchGame::start_clicked()
+{
+	end_modal(m_is_scenario?2:1);
 }
 
 
 void Fullscreen_Menu_LaunchGame::refresh()
 {
-   Map* map = m_game->get_map();
+	Map* map = m_game->get_map();
 	int maxplayers = 0;
 
 	// update the mapname
@@ -116,36 +130,42 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		m_mapname->set_text("(no map)");
 
 	// update the player description groups
-	int i;
-	for(i = 0; i < MAX_PLAYERS; i++) {
-      m_players[i]->allow_changes(true);
+	for(int i = 0; i < MAX_PLAYERS; i++) {
+		m_players[i]->allow_changes(true);
 		m_players[i]->set_enabled(i < maxplayers);
-      if(m_is_scenario && (i<maxplayers) && map) {
-         // set player to the by the map given
-         m_players[i]->allow_changes(false);
-         m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
-         m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
-      } else if(i<maxplayers && map ) {
-         std::string name="Player ";
-         if((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
-         name.append(1, static_cast<char>(((i+1)%10) + 0x30));
-         m_players[i]->set_player_name(name);
-         m_players[i]->allow_changes(true);
-      }
-   }
+		if(m_is_scenario && (i<maxplayers) && map) {
+			// set player to the by the map given
+			m_players[i]->allow_changes(false);
+			m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
+			m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
+		} else if(i<maxplayers && map ) {
+			std::string name="Player ";
+			if((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
+			name.append(1, static_cast<char>(((i+1)%10) + 0x30));
+			m_players[i]->set_player_name(name);
+			m_players[i]->allow_changes(true);
+		}
+		
+		if (m_netgame!=0 && m_netgame->get_playernum()!=i+1)
+			m_players[i]->allow_changes(false);
+	}
 
 	m_ok->set_enabled(m_game->can_start());
 }
 
 void Fullscreen_Menu_LaunchGame::select_map()
 {
-   Fullscreen_Menu_MapSelect* msm=new Fullscreen_Menu_MapSelect(m_game, m_ml);
-   if(msm->run()==2)
-      m_is_scenario=true;
-   else
-      m_is_scenario=false;
+	Fullscreen_Menu_MapSelect* msm=new Fullscreen_Menu_MapSelect(m_game, m_ml);
+	if(msm->run()==2)
+		m_is_scenario=true;
+	else
+		m_is_scenario=false;
 
-   delete msm;
-   refresh();
+	delete msm;
+	
+	if (m_netgame)
+		static_cast<NetHost*>(m_netgame)->update_map();
+	
+	refresh();
 }
 

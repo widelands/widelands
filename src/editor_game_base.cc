@@ -31,6 +31,58 @@
 #include "world.h"
 #include "error.h"
 
+// hard-coded playercolors
+const uchar g_playercolors[MAX_PLAYERS][12] = {
+	{ // blue
+		  2,   2,  74,
+		  2,   2, 112,
+		  2,   2, 149,
+		  2,   2, 198
+	},
+	{ // red
+		119,  19,   0,
+		166,  27,   0,
+		209,  34,   0,
+		255,  41,   0
+	},
+	{ // yellow
+		112, 103,   0,
+		164, 150,   0,
+		209, 191,   0,
+		255, 232,   0
+	},
+	{ // green
+		 26,  99,   1,
+		 37, 143,   2,
+		 48, 183,   3,
+		 59, 223,   3
+	},
+	{ // black/dark gray
+		  0,   0,   0,
+		 19,  19,  19,
+		 35,  35,  35,
+		 57,  57,  57
+	},
+	{ // orange
+		119,  80,   0,
+		162, 109,   0,
+		209, 141,   0,
+		255, 172,   0,
+	},
+	{ // purple
+		 91,   0,  93,
+		139,   0, 141,
+		176,   0, 179,
+		215,   0, 218,
+	},
+	{ // white
+		119, 119, 119,
+		166, 166, 166,
+		210, 210, 210,
+		255, 255, 255
+	}
+};
+
 /*
 ============
 Editor_Game_Base::Editor_Game_Base()
@@ -267,9 +319,9 @@ Note that AI player structures and the Interactive_Player are created when
 the game starts. Similar for remote players.
 ===============
 */
-void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const uchar *playercolor)
+void Editor_Game_Base::add_player(int plnum, int type, const char* tribe)
 {
-assert(plnum >= 1 && plnum <= MAX_PLAYERS);
+	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 
 	if (m_players[plnum-1])
 		remove_player(plnum);
@@ -284,7 +336,7 @@ assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 	if (i == m_tribes.size())
 		m_tribes.push_back(new Tribe_Descr(tribe));
 
-	m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], playercolor);
+	m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], g_playercolors[plnum-1]);
 }
 
 /*

@@ -345,7 +345,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
    if(!p) {
       // This player is unknown, register it, place a hq and reference the tribe
       // so that this tribe can not be changed
-      editor->add_player(n, Player::playerLocal, m_plr_set_tribes_buts[n-1]->get_title(), g_playercolors[n-1]);
+      editor->add_player(n, Player::playerLocal, m_plr_set_tribes_buts[n-1]->get_title());
 
       p=editor->get_player(n);
 	

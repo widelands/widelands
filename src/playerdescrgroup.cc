@@ -27,58 +27,6 @@
 #include "tribe.h"
 #include "wexception.h"
 
-// hard-coded playercolors
-uchar g_playercolors[MAX_PLAYERS][12] = {
-	{ // blue
-		  2,   2,  74,
-		  2,   2, 112,
-		  2,   2, 149,
-		  2,   2, 198
-	},
-	{ // red
-		119,  19,   0,
-		166,  27,   0,
-		209,  34,   0,
-		255,  41,   0
-	},
-	{ // yellow
-		112, 103,   0,
-		164, 150,   0,
-		209, 191,   0,
-		255, 232,   0
-	},
-	{ // green
-		 26,  99,   1,
-		 37, 143,   2,
-		 48, 183,   3,
-		 59, 223,   3
-	},
-	{ // black/dark gray
-		  0,   0,   0,
-		 19,  19,  19,
-		 35,  35,  35,
-		 57,  57,  57
-	},
-	{ // orange
-		119,  80,   0,
-		162, 109,   0,
-		209, 141,   0,
-		255, 172,   0,
-	},
-	{ // purple
-		 91,   0,  93,
-		139,   0, 141,
-		176,   0, 179,
-		215,   0, 218,
-	},
-	{ // white
-		119, 119, 119,
-		166, 166, 166,
-		210, 210, 210,
-		255, 255, 255
-	}
-};
-
 void PlayerDescriptionGroup::allow_changes(bool t) {
    m_allow_changes=t;
    m_btnEnablePlayer->set_visible(t);
@@ -91,8 +39,8 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 {
 	m_game = game;
 	m_plnum = plnum;
-   m_allow_changes=true;
-   m_current_tribe=0;
+	m_allow_changes=true;
+	m_current_tribe=0;
 
 	m_enabled = false;
 	set_visible(false);
@@ -100,23 +48,20 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	// create sub-panels
 	m_plr_name=new UITextarea(this, 0, 0, 100, 20, "Player 1", Align_Left);
 
-   m_btnEnablePlayer = new UICheckbox(this, 88, 0);
+	m_btnEnablePlayer = new UICheckbox(this, 88, 0);
 	m_btnEnablePlayer->set_state(true);
 	m_btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
 
 	m_btnPlayerType = new UIButton(this, 116, 0, 120, 20, 1);
 	m_btnPlayerType->clicked.set(this, &PlayerDescriptionGroup::toggle_playertype);
-	if (plnum==1)
-		m_playertype = Player::playerLocal;
-	else
-		m_playertype = Player::playerAI;
 
+	m_btnPlayerTribe = new UIButton(this, 244, 0, 120, 20, 1);
+	m_btnPlayerTribe->clicked.set(this, &PlayerDescriptionGroup::toggle_playertribe);
 
-   m_btnPlayerTribe = new UIButton(this, 244, 0, 120, 20, 1);
-   m_btnPlayerTribe->clicked.set(this, &PlayerDescriptionGroup::toggle_playertribe);
-
-   Tribe_Descr::get_all_tribes(&m_tribes);
-   m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
+	Tribe_Descr::get_all_tribes(&m_tribes);
+	m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
+	
+	set_player_type (Player::playerAI);
 }
 
 /** PlayerDescriptionGroup::set_enabled(bool enable)
@@ -127,7 +72,8 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 void PlayerDescriptionGroup::set_enabled(bool enable)
 {
 	if(!m_allow_changes) return;
-   if (enable == m_enabled)
+	
+	if (enable == m_enabled)
 		return;
 
 	m_enabled = enable;
@@ -141,7 +87,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 	else
 	{
 		if (m_btnEnablePlayer->get_state())
-			m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), g_playercolors[m_plnum-1]);
+			m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
 
 		const char* string = 0;
 		switch(m_playertype) {
@@ -168,7 +114,7 @@ void PlayerDescriptionGroup::enable_player(bool on)
 	if(!m_allow_changes) return;
 
    if (on) {
-		m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), g_playercolors[m_plnum-1]);
+		m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
 	} else {
 		m_game->remove_player(m_plnum);
 	}
@@ -186,13 +132,18 @@ void PlayerDescriptionGroup::toggle_playertype()
 /*
  * toggles the tribe the player will play
  */
-void PlayerDescriptionGroup::toggle_playertribe(void) {
-   ++m_current_tribe;
-   if(m_current_tribe==m_tribes.size()) m_current_tribe=0;
-   m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
-   // set the player
-   m_game->remove_player(m_plnum);
-   m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), g_playercolors[m_plnum-1]);
+void PlayerDescriptionGroup::toggle_playertribe(void)
+{
+	if (!m_allow_changes)
+		return;
+
+	++m_current_tribe;
+	if(m_current_tribe==m_tribes.size()) m_current_tribe=0;
+	m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
+
+	// set the player
+	m_game->remove_player(m_plnum);
+	m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
 }
 
 /*
@@ -206,7 +157,7 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
          m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
          // set the player
          m_game->remove_player(m_plnum);
-         m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), g_playercolors[m_plnum-1]);
+         m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
          return;
       }
    }
@@ -220,3 +171,10 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
 void PlayerDescriptionGroup::set_player_name(std::string str) {
    m_plr_name->set_text(str.c_str());
 }
+
+void PlayerDescriptionGroup::set_player_type(int type)
+{
+	m_playertype=type;
+	m_btnPlayerType->set_title((type!=Player::playerAI)?"Human":"Computer");
+}
+
