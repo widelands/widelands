@@ -170,7 +170,6 @@ void Editor_Event_Menu::clicked(int id) {
          event->cleanup(m_parent->get_egbase());
          // Some paranoia
          m_parent->get_map()->delete_unreferenced_triggers();
-         m_parent->get_map()->delete_events_without_trigger();
          update();
       } else if(id==2) {
          Event* event=static_cast<Event*>(m_event_list->get_selection());

@@ -17,21 +17,41 @@
  *
  */
 
-#ifndef __S__EVENT_IDS_H
-#define __S__EVENT_IDS_H
+#ifndef __S__EVENT_MOVE_VIEW_H
+#define __S__EVENT_MOVE_VIEW_H
+
+#include "event.h"
+#include "geometry.h"
+
+class Editor_Game_Base;
 
 /*
- * If you change anything here, 
- * make sure that you also change event_factory.cc
- *
- * Make sure that the orders of this enum and in the 
- * description structure in event_factory.cc stay the same
+ * This event shows a message box
  */
-enum {
-   EVENT_MESSAGE_BOX = 0,
-   EVENT_MOVE_VIEW,
-   EVENT_UNHIDE_AREA,
-   EVENT_CONQUER_AREA,
+class Event_Move_View : public Event {
+   public:
+     Event_Move_View();
+      ~Event_Move_View();
+      
+      // one liner functions
+      uint get_id(void) { return EVENT_MOVE_VIEW; } 
+
+      void run(Game*);
+      virtual void reinitialize(Game*);
+      virtual void cleanup(Editor_Game_Base* g);
+
+      // File Functions
+      void Write(FileWrite*, Editor_Game_Base*);
+      void Read(FileRead*, Editor_Game_Base*, bool);
+  
+      inline void set_coords(Coords pt) { m_pt=pt; }
+      inline Coords get_coords(void) { return m_pt; }
+      
+   private:
+      Coords m_pt;
 };
 
+
+
 #endif
+

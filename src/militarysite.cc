@@ -59,8 +59,10 @@ void MilitarySite_Descr::parse(const char* directory, Profile* prof,
 {
 	Section* sglobal = prof->get_section("global");
 
-	Building_Descr::parse(directory, prof, encdata);
 	ProductionSite_Descr::parse(directory,prof,encdata);
+   // Defaults to false
+   m_stopable=false;
+   Building_Descr::parse(directory, prof, encdata);
 
 	m_conquer_radius=sglobal->get_safe_int("conquers");
 	m_num_soldiers=sglobal->get_safe_int("max_soldiers");

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__MESSAGEBOX_H
-#define __S__MESSAGEBOX_H
+#ifndef __S__EVENT_MESSAGEBOX_H
+#define __S__EVENT_MESSAGEBOX_H
 
 #include <string>
 #include "event.h"

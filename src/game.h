@@ -72,9 +72,6 @@ public:
   // is this base a game
    inline bool is_game() { return true; }
 
-   // TEMP
-   inline Interactive_Player* get_ipl(void) { return ipl; }
-
 private:
 	int		m_state;
 	int		m_speed;		// frametime multiplier
