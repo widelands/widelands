@@ -625,10 +625,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 
 	while(dy--) {
 		int linear_fx = minfx;
-		int fx, fy;
-		int bl_x, bl_y;
-		int tl_x, tl_y;
-		Field *f, *f_bl, *f_tl;
+		FCoords f, bl, tl;
 		int posx, posy;
 		int blposx, bposy;
 		int tlposx, tposy;
@@ -639,82 +636,83 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 		posy -= viewofs.y;
 
 		// Get linear bottom-left coordinate
-		bl_y = linear_fy+1;
-		bl_x = linear_fx - (bl_y&1);
+		bl.y = linear_fy+1;
+		bl.x = linear_fx - (bl.y&1);
 
-		map->get_basepix(bl_x, bl_y, &blposx, &bposy);
+		map->get_basepix(bl, &blposx, &bposy);
 		blposx -= viewofs.x;
 		bposy -= viewofs.y;
 
 		// Get linear top-left coordinates
-		tl_y = linear_fy-1;
-		tl_x = linear_fx - (tl_y&1);
+		tl.y = linear_fy-1;
+		tl.x = linear_fx - (tl.y&1);
 
-		map->get_basepix(tl_x, tl_y, &tlposx, &tposy);
+		map->get_basepix(tl, &tlposx, &tposy);
 		tlposx -= viewofs.x;
 		tposy -= viewofs.y;
 
 		// Calculate safe (bounded) field coordinates and get field pointers
-		fx = linear_fx;
-		fy = linear_fy;
-		map->normalize_coords(&fx, &fy);
-		map->normalize_coords(&bl_x, &bl_y);
-		map->normalize_coords(&tl_x, &tl_y);
-		f = map->get_field(fx, fy);
-		f_bl = map->get_field(bl_x, bl_y);
-		f_tl = map->get_field(tl_x, tl_y);
+		f.x = linear_fx;
+		f.y = linear_fy;
+		map->normalize_coords(&f);
+		map->normalize_coords(&bl);
+		map->normalize_coords(&tl);
+
+		f.field = map->get_field(f);
+		bl.field = map->get_field(bl);
+		tl.field = map->get_field(tl);
 
 		int count = dx;
 		while(count--) {
-			Field *f_br, *f_r, *f_l, *f_tr;
+			FCoords br, r, l, tr;
 			int rposx, brposx, lposx, trposx;
-			int r_x, r_y, br_x, br_y, l_x, l_y, tr_x, tr_y;
 			bool render_r=true;
 			bool render_b=true;
          bool draw_fsel=false;
 
-			map->get_rn(fx, fy, f, &r_x, &r_y, &f_r);
+			map->get_rn(f, &r);
 			rposx = posx + FIELD_WIDTH;
 
-			map->get_ln(fx, fy, f, &l_x, &l_y, &f_l);
+			map->get_ln(f, &l);
 			lposx = posx - FIELD_WIDTH;
 
-			map->get_rn(bl_x, bl_y, f_bl, &br_x, &br_y, &f_br);
+			map->get_rn(bl, &br);
 			brposx = blposx + FIELD_WIDTH;
 
-			map->get_rn(tl_x, tl_y, f_tl, &tr_x, &tr_y, &f_tr);
+			map->get_rn(tl, &tr);
 			trposx = tlposx + FIELD_WIDTH;
 
 			if (mri->visibility) {
-				if (!(*mri->visibility)[fy*mapwidth + fx] ||
-					 !(*mri->visibility)[br_y*mapwidth + br_x]) {
+				if (!(*mri->visibility)[f.y*mapwidth + f.x] ||
+					 !(*mri->visibility)[br.y*mapwidth + br.x]) {
 					render_r=false;
 					render_b=false;
 				} else {
-					if(!(*mri->visibility)[bl_y*mapwidth + bl_x])
+					if(!(*mri->visibility)[bl.y*mapwidth + bl.x])
 						render_b=false;
-					if(!(*mri->visibility)[r_y*mapwidth + r_x])
+					if(!(*mri->visibility)[r.y*mapwidth + r.x])
 						render_r=false;
 				}
 			}
 
          // Would this be a field where a fsel should be?
-			if (map->calc_distance(Coords(fx, fy), mri->fieldsel) <= mri->fieldsel_radius)
+			if (map->calc_distance(f, mri->fieldsel) <= mri->fieldsel_radius)
 				draw_fsel = true;
 
 			// Render stuff that belongs to ground triangles
 			if (render_b || render_r) {
-				uchar roads = f->get_roads();
+				uchar roads = f.field->get_roads();
 
-				roads |= mri->overlay_roads[fy*mapwidth + fx];
+				roads |= mri->overlay_roads[f.y*mapwidth + f.x];
 
-				dst.draw_field(f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
+				dst.draw_field(f.field, r.field, bl.field, br.field,
+						posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
 			}
 
          // Render stuff that belongs to the field node
-			if (!mri->visibility || (*mri->visibility)[fy*mapwidth + fx])
+			if (!mri->visibility || (*mri->visibility)[f.y*mapwidth + f.x])
          {
-            Point wh_pos(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()));
+            Point wh_pos(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f.field->get_height()));
 
             // Render bobs
             // TODO - rendering order?
@@ -724,46 +722,41 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
             // are there any overdraw issues with the current rendering order?
 
             // Draw Map_Objects hooked to this field
-            BaseImmovable *imm = f->get_immovable();
+            BaseImmovable *imm = f.field->get_immovable();
 
             if (imm)
-               imm->draw(mri->egbase, this, FCoords(fx, fy, f), wh_pos);
+               imm->draw(mri->egbase, this, f, wh_pos);
 
-            Bob *bob = f->get_first_bob();
+            Bob *bob = f.field->get_first_bob();
             while(bob) {
                bob->draw(mri->egbase, this, wh_pos);
                bob = bob->get_next_bob();
             }
 
             // Draw buildhelp, road buildhelp and fieldsel
-            draw_overlays(this, mri, FCoords(fx, fy, f), wh_pos,
-                  FCoords(r_x, r_y, f_r), Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(f_r->get_height())),
-                  FCoords(bl_x, bl_y, f_bl), Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(f_bl->get_height())),
-                  FCoords(br_x, br_y, f_br), Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(f_br->get_height())),
+            draw_overlays(this, mri, f, wh_pos,
+                  r, Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(r.field->get_height())),
+                  bl, Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(bl.field->get_height())),
+                  br, Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(br.field->get_height())),
                   draw_fsel);
          }
 
-	
+
 			// Advance to next field in row
-			f_bl = f_br;
+			bl = br;
 			blposx = brposx;
-			bl_x = br_x;
-			bl_y = br_y;
 
-			f = f_r;
+			f = r;
 			posx = rposx;
-			fx = r_x;
-			fy = r_y;
 
-			f_tl = f_tr;
+			tl = tr;
 			tlposx = trposx;
-			tl_x = tr_x;
-			tl_y = tr_y;
 		}
 
 		linear_fy++;
 	}
 }
+
 
 /*
  ===============

@@ -743,7 +743,7 @@ bool Worker::run_plant(Game* g, State* state, const WorkerAction* act)
 		return true;
 	}
 
-	g->create_immovable(pos.x, pos.y, state->ivar2);
+	g->create_immovable(pos, state->ivar2);
 
 	state->ivar1++;
 	schedule_act(g, 10);

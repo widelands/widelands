@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,12 +67,14 @@ void Editor::run() {
 
    for(int y=0; y<64; y++) {
       for(int x=0; x<64; x++) {
-         map->get_field(x,y)->set_height(10);
-         map->get_field(x,y)->set_terraind(map->get_world()->get_terrain(5));
-         map->get_field(x,y)->set_terrainr(map->get_world()->get_terrain(5));
+			FCoords coords = map->get_fcoords(Coords(x, y));
+
+         coords.field->set_height(10);
+         coords.field->set_terraind(map->get_world()->get_terrain(5));
+         coords.field->set_terrainr(map->get_world()->get_terrain(5));
       }
    }
-   
+
    set_map(map);
 
    g_gr->flush(PicMod_Menu);

@@ -1700,33 +1700,32 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path, const C
  */
 bool Map::can_reach_by_water(Coords field)
 {
-	Field *f = get_field(field);
+	FCoords fc = get_fcoords(field);
 
-	if (f->get_caps() & MOVECAPS_SWIM)
+	if (fc.field->get_caps() & MOVECAPS_SWIM)
 		return true;
-	if (!(f->get_caps() & MOVECAPS_WALK))
+	if (!(fc.field->get_caps() & MOVECAPS_WALK))
 		return false;
 
-	Coords n;
-	Field *nf;
+	FCoords neighb;
 
-	get_tln(field.x, field.y, f, &n.x, &n.y, &nf);
-	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+	get_tln(fc, &neighb);
+	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
 
-	get_trn(field.x, field.y, f, &n.x, &n.y, &nf);
-	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+	get_trn(fc, &neighb);
+	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
 
-	get_rn(field.x, field.y, f, &n.x, &n.y, &nf);
-	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+	get_rn(fc, &neighb);
+	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
 
-	get_brn(field.x, field.y, f, &n.x, &n.y, &nf);
-	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+	get_brn(fc, &neighb);
+	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
 
-	get_bln(field.x, field.y, f, &n.x, &n.y, &nf);
-	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+	get_bln(fc, &neighb);
+	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
 
-	get_ln(field.x, field.y, f, &n.x, &n.y, &nf);
-	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+	get_ln(fc, &neighb);
+	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
 
 	return false;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -244,7 +244,7 @@ Texture::~Texture ()
 * Return the colour to be used in the minimap.
 * Flags are bits: 1. mapcolor, 2. owner, 3. flags, 4. roads, 5. buildings
 */
-unsigned short Texture::get_minimap_color(char shade, const MapRenderInfo* mri, ushort p_x, ushort p_y, uchar owner, char flags)
+unsigned short Texture::get_minimap_color(char shade, const MapRenderInfo* mri, Coords coords, uchar owner, char flags)
 {
     uchar clr = m_pixels[0]; // just use the top-left pixel
     uint table = (uchar)shade;
@@ -272,19 +272,19 @@ unsigned short Texture::get_minimap_color(char shade, const MapRenderInfo* mri, 
 
     if (flags & 0x04) {
         // show flags
-        if (mri->egbase->get_map()->find_immovables(Coords(p_x, p_y), 0, 0, FindImmovableType(Map_Object::FLAG)))
+        if (mri->egbase->get_map()->find_immovables(coords, 0, 0, FindImmovableType(Map_Object::FLAG)))
             pixelcolor = 0xFFFF;
     }
 
     if (flags & 0x08) {
         // show roads
-        if (mri->egbase->get_map()->find_immovables(Coords(p_x, p_y), 0, 0, FindImmovableType(Map_Object::ROAD)))
+        if (mri->egbase->get_map()->find_immovables(coords, 0, 0, FindImmovableType(Map_Object::ROAD)))
             pixelcolor = add_color(pixelcolor, 0xFFFF);
     }
 
     if (flags & 0x10) {
         // show buildings
-        if (mri->egbase->get_map()->find_immovables(Coords(p_x, p_y), 0, 0, FindImmovableType(Map_Object::BUILDING)))
+        if (mri->egbase->get_map()->find_immovables(coords, 0, 0, FindImmovableType(Map_Object::BUILDING)))
             pixelcolor = 0xFFFF;
     }
 

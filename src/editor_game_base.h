@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002, 2003 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ class Editor_Game_Base {
 
    public:
       Editor_Game_Base(); 
-      virtual ~Editor_Game_Base(); 
+      virtual ~Editor_Game_Base();
 	
       void set_map(Map* map);
       inline Map *get_map() { return m_map; }
@@ -58,16 +58,16 @@ class Editor_Game_Base {
       inline int get_nrwares() const { return m_wares.get_nitems(); }
       int get_safe_ware_id(const char *name);
       inline Ware_Descr *get_ware_description(int id) { return m_wares.get(id); }
-	
+
       // loading stuff
       void postload();
       void load_graphics();
 
       // warping stuff. instantly creating map_objects
-      Building* warp_building(int x, int y, char owner, int idx);
-		Building* warp_constructionsite(int x, int y, char owner, int idx);
-      Bob *create_bob(int x, int y, int idx);
-      Immovable* create_immovable(int x, int y, int idx);
+      Building* warp_building(Coords, char owner, int idx);
+		Building* warp_constructionsite(Coords c, char owner, int idx);
+      Bob *create_bob(Coords c, int idx);
+      Immovable* create_immovable(Coords c, int idx);
 		Immovable* create_immovable(Coords c, std::string name);
 
       inline int get_gametime(void) { return m_gametime; }

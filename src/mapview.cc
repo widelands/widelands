@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002, 2003 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -201,8 +201,8 @@ Does not honour fieldsel freeze.
 */
 void Map_View::track_fsel(int mx, int my)
 {
-	Coords fsel;
-	
+	FCoords fsel;
+
 	// First of all, get a preliminary field coordinate based on the basic
 	// grid (not taking heights into account)
 	my += vpy;
@@ -214,32 +214,30 @@ void Map_View::track_fsel(int mx, int my)
 		fsel.x -= FIELD_WIDTH>>1;
 	fsel.x = (fsel.x + (FIELD_WIDTH>>1)) / FIELD_WIDTH;
 
-	m_intbase->get_map()->normalize_coords(&fsel.x, &fsel.y);
+	m_intbase->get_map()->normalize_coords((Coords*)&fsel);
 
 	// Now, fsel point to where we'd be if the field's height was 0.
 	// We now recursively move towards the correct field. Because height cannot
 	// be negative, we only need to consider the bottom-left or bottom-right neighbour
 	int mapheight = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_intbase->get_map()->get_height());
 	int mapwidth = MULTIPLY_WITH_FIELD_WIDTH(m_intbase->get_map()->get_width());
-	Field *f;
 	int fscrx, fscry;
 
-	f = m_intbase->get_map()->get_field(fsel);
-	m_intbase->get_map()->get_pix(fsel.x, fsel.y, f, &fscrx, &fscry);
+	fsel.field = m_intbase->get_map()->get_field(fsel);
+	m_intbase->get_map()->get_pix(fsel, fsel.field, &fscrx, &fscry);
 
 	for(;;) {
-		Field *bln, *brn;
-		int blx, bly, brx, bry;
+		FCoords bln, brn;
 		int blscrx, blscry, brscrx, brscry;
 		bool movebln, movebrn;
 		int fd, blnd, brnd;
 		int d2;
 
-		m_intbase->get_map()->get_bln(fsel.x, fsel.y, f, &blx, &bly, &bln);
-		m_intbase->get_map()->get_brn(fsel.x, fsel.y, f, &brx, &bry, &brn);
+		m_intbase->get_map()->get_bln(fsel, &bln);
+		m_intbase->get_map()->get_brn(fsel, &brn);
 
-		m_intbase->get_map()->get_pix(blx, bly, bln, &blscrx, &blscry);
-		m_intbase->get_map()->get_pix(brx, bry, brn, &brscrx, &brscry);
+		m_intbase->get_map()->get_pix(bln, bln.field, &blscrx, &blscry);
+		m_intbase->get_map()->get_pix(brn, brn.field, &brscrx, &brscry);
 
 		// determine which field the mouse is closer to on the y-axis
 		// bit messy because it has to be aware of map wrap-arounds
@@ -276,30 +274,22 @@ void Map_View::track_fsel(int mx, int my)
 
 		if (brnd < blnd) {
 			if (movebrn) {
-				f = brn;
-				fsel.x = brx;
-				fsel.y = bry;
+				fsel = brn;
 				fscrx = brscrx;
 				fscry = brscry;
 			} else if (movebln) {
-				f = bln;
-				fsel.x = blx;
-				fsel.y = bly;
+				fsel = bln;
 				fscrx = blscrx;
 				fscry = blscry;
 			} else
 				break;
 		} else {
 			if (movebln)  {
-				f = bln;
-				fsel.x = blx;
-				fsel.y = bly;
+				fsel = bln;
 				fscrx = blscrx;
 				fscry = blscry;
 			} else if (movebrn) {
-				f = brn;
-				fsel.x = brx;
-				fsel.y = bry;
+				fsel = brn;
 				fscrx = brscrx;
 				fscry = brscry;
 			} else

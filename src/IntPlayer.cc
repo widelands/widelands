@@ -193,8 +193,8 @@ void Interactive_Player::start()
 
 	for(int y = 0; y < maph; y++)
 		for(int x = 0; x < mapw; x++) {
-			FCoords coords(x, y, m_maprenderinfo.egbase->get_map()->get_field(x,y));
-			
+			FCoords coords = m_maprenderinfo.egbase->get_map()->get_fcoords(Coords(x,y));
+
 			recalc_overlay(coords);
 		}
 }

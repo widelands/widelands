@@ -68,7 +68,7 @@ void Player::init_for_game(Game* game)
 	int idx = get_tribe()->get_building_index("headquarters");
 	if (idx < 0)
 		throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
-	Warehouse *wh = (Warehouse *)game->warp_building(c.x, c.y, m_plnum, idx);
+	Warehouse *wh = (Warehouse *)game->warp_building(c, m_plnum, idx);
 
 	get_tribe()->load_warehouse_with_start_wares(game, wh);
 
@@ -269,7 +269,7 @@ void Player::build(Coords c, int idx)
 			return;
 		}
 
-	get_game()->warp_constructionsite(c.x, c.y, m_plnum, idx);
+	get_game()->warp_constructionsite(c, m_plnum, idx);
 }
 
 

@@ -320,14 +320,17 @@ void Editor_Game_Base::init_wares()
 }
 
 
-/** Editor_Game_Base::warp_building(int x, int y, char owner, int idx)
- *
- * Instantly create a building at the given x/y location. There is no build time.
- *
- * owner is the player number of the building's owner.
- * idx is the building type index.
- */
-Building *Editor_Game_Base::warp_building(int x, int y, char owner, int idx)
+/*
+===============
+Editor_Game_Base::warp_building
+
+Instantly create a building at the given x/y location. There is no build time.
+
+owner is the player number of the building's owner.
+idx is the building type index.
+===============
+*/
+Building *Editor_Game_Base::warp_building(Coords c, char owner, int idx)
 {
 	Building_Descr *descr;
 	Player *player = get_player(owner);
@@ -337,7 +340,7 @@ Building *Editor_Game_Base::warp_building(int x, int y, char owner, int idx)
 	descr = player->get_tribe()->get_building_descr(idx);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), Coords(x, y), false);
+	return descr->create(this, get_player(owner), c, false);
 }
 
 
@@ -348,7 +351,7 @@ Editor_Game_Base::warp_constructionsite
 Create a building site at the given x/y location for the given building type.
 ===============
 */
-Building* Editor_Game_Base::warp_constructionsite(int x, int y, char owner, int idx)
+Building* Editor_Game_Base::warp_constructionsite(Coords c, char owner, int idx)
 {
 	Building_Descr* descr;
 	Player *player = get_player(owner);
@@ -358,25 +361,29 @@ Building* Editor_Game_Base::warp_constructionsite(int x, int y, char owner, int 
 	descr = player->get_tribe()->get_building_descr(idx);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), Coords(x, y), true);
+	return descr->create(this, get_player(owner), c, true);
 }
 
 
-/** Editor_Game_Base::create_bob(int x, int y, int idx)
- *
- * Instantly create a bob at the given x/y location.
- *
- * idx is the bob type.
- */
-Bob *Editor_Game_Base::create_bob(int x, int y, int idx)
+/*
+===============
+Editor_Game_Base::create_bob
+
+Instantly create a bob at the given x/y location.
+
+idx is the bob type.
+===============
+*/
+Bob *Editor_Game_Base::create_bob(Coords c, int idx)
 {
 	Bob_Descr *descr;
 
 	descr = m_map->get_world()->get_bob_descr(idx);
 	assert(descr);
-	
-	return descr->create(this, 0, Coords(x, y));
+
+	return descr->create(this, 0, c);
 }
+
 
 /*
 ===============
@@ -386,14 +393,14 @@ Create an immovable at the given location.
 Does not perform any placability checks.
 ===============
 */
-Immovable *Editor_Game_Base::create_immovable(int x, int y, int idx)
+Immovable *Editor_Game_Base::create_immovable(Coords c, int idx)
 {
 	Immovable_Descr *descr;
 
 	descr = m_map->get_world()->get_immovable_descr(idx);
 	assert(descr);
-	
-	return descr->create(this, Coords(x, y));
+
+	return descr->create(this, c);
 }
 
 Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name)
@@ -404,7 +411,7 @@ Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name)
 		throw wexception("Editor_Game_Base::create_immovable(%i, %i): %s is not defined",
 								c.x, c.y, name.c_str());
 
-	return create_immovable(c.x, c.y, idx);
+	return create_immovable(c, idx);
 }
 
 

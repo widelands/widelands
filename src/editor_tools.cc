@@ -296,7 +296,8 @@ int Editor_Place_Immovable_Tool::handle_click_impl(const Coords* coordinates, Fi
          if(f->get_immovable()->get_size() != BaseImmovable::NONE)
             continue;
       }
-      parent->get_editor()->create_immovable(c.x, c.y, get_random_enabled());
+
+		parent->get_editor()->create_immovable(c, get_random_enabled());
    }
    return parent->get_fieldsel_radius()+2;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -193,13 +193,13 @@ void Bitmap::draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx,
     vp_y = (vp_y + 1 + (int) mri->egbase->get_map()->get_height()/2)%rc.h;
 
     if(fx==(uint)rc.w && fy==(uint)rc.h) {
-        // forced size == natural size. 
+        // forced size == natural size.
         // use fast rendering
         int mapwidth = mri->egbase->get_map()->get_width();
 
         for(int y = 0; y < rc.h; y++) {
             ushort* pix = pixels + (dst.y+y)*pitch + dst.x;
-            Field* f = mri->egbase->get_map()->get_field(rc.x, (rc.y+y+vp_y)%rc.h);
+            Field* f = mri->egbase->get_map()->get_field(Coords(rc.x, (rc.y+y+vp_y)%rc.h));
 
             f = &f[vp_x];  // move by vp_x to begin
             for(int x = 0; x < rc.w; x++, f++, pix++)
@@ -211,12 +211,12 @@ void Bitmap::draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx,
                     *pix = 0;
                 else {
                     Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
-                    *pix = tex->get_minimap_color(f->get_brightness(), mri, (x+vp_x)%rc.w, (y+vp_y)%rc.h, f->get_owned_by(), flags);
+                    *pix = tex->get_minimap_color(f->get_brightness(), mri, Coords((x+vp_x)%rc.w, (y+vp_y)%rc.h), f->get_owned_by(), flags);
                 }
             }
         }
 
-    } else { 
+    } else {
         // forced size is somehow different. slow rendering needed
         // we center the minimap in the area we got.
         int mapwidth = mri->egbase->get_map()->get_width();
@@ -229,12 +229,12 @@ void Bitmap::draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx,
 
             for(uint x = 0; x < fx; x++, pix++, xfield+=xslope)
             {
-                Field* f = mri->egbase->get_map()->get_field((int)(xfield+vp_x)%fx, (int)(yfield+vp_y)%fy);
+                Field* f = mri->egbase->get_map()->get_field(Coords((int)(xfield+vp_x)%fx, (int)(yfield+vp_y)%fy));
                 if (mri->visibility && !(*mri->visibility)[(int)(yfield+vp_y)%fy*mapwidth + (int)(xfield+vp_x)%fx])
                     *pix = 0;
                 else {
                     Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
-                    *pix = tex->get_minimap_color(f->get_brightness(), mri, (x+vp_x)%rc.w, (y+vp_y)%rc.h, f->get_owned_by(), flags);
+                    *pix = tex->get_minimap_color(f->get_brightness(), mri, Coords((x+vp_x)%rc.w, (y+vp_y)%rc.h), f->get_owned_by(), flags);
                 }
             }
             xfield=0;

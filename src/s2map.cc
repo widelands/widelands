@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -357,7 +357,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
 					for(uint z=0; z<CRITTER_PER_DEFINITION; z++)
-						game->create_bob(x, y, idx);
+						game->create_bob(Coords(x, y), idx);
 				}
 			}
 		}
@@ -473,7 +473,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 						int idx = m_map->m_world->get_immovable_index(bobname);
 						if (idx < 0)
 							throw wexception("Missing immovable type %s", bobname);
-						game->create_immovable(x, y, idx);
+						game->create_immovable(Coords(x, y), idx);
 						continue;
 					}
 				}
@@ -572,7 +572,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 					int idx = m_map->m_world->get_immovable_index(bobname);
 					if (idx < 0)
 						throw wexception("Missing immovable type %s", bobname);
-					game->create_immovable(x, y, idx);
+					game->create_immovable(Coords(x, y), idx);
 				}
 			}
 		}

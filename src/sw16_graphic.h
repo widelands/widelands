@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Wide Lands Development Team
+ * Copyright (C) 2002, 2003 by the Wide Lands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -133,21 +133,21 @@ private:
 	unsigned char*		m_pixels;
 	uint					m_frametime;
 	unsigned char*		m_curframe;
-   std::string    m_texture_picture;
+   std::string			m_texture_picture;
 
 public:
 	Texture (const char* fnametempl, uint frametime);
 	~Texture ();
 
-        inline const char* get_texture_picture(void) { return m_texture_picture.c_str(); }
-   
+   inline const char* get_texture_picture(void) { return m_texture_picture.c_str(); }
+
 	unsigned char *get_pixels () const { return m_pixels; }
 	unsigned char* get_curpixels() const { return m_curframe; }
 	unsigned short *get_colormap () const { return m_colormap->get_colormap(); }
-	
-	unsigned short get_minimap_color(char shade, const MapRenderInfo* mri, ushort p_x, ushort p_y, uchar owner, char flags);
-        unsigned short add_color(ushort old_pixel, ushort aColor);
-	
+
+	unsigned short get_minimap_color(char shade, const MapRenderInfo* mri, Coords coords, uchar owner, char flags);
+   unsigned short add_color(ushort old_pixel, ushort aColor);
+
 	void animate(uint time);
 };
 
@@ -155,7 +155,7 @@ public:
 /*
 struct GameIcons
 
-Contains the indices of a number of default icons that are accessed by 
+Contains the indices of a number of default icons that are accessed by
 rendermap()
 */
 struct GameIcons {
