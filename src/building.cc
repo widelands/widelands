@@ -1339,6 +1339,7 @@ struct ProductionAction {
 
 	Type			type;
 	int			iparam1;
+	int			iparam2;
 	std::string	sparam1;
 };
 
@@ -1358,7 +1359,7 @@ public:
 		return &m_actions[idx];
 	}
 
-	void parse(std::string directory, Profile* prof, std::string name, ProductionSite_Descr* building);
+	void parse(std::string directory, Profile* prof, std::string name, ProductionSite_Descr* building, const EncodeData* encdata);
 
 private:
 	std::string							m_name;
@@ -1384,7 +1385,7 @@ ProductionProgram::parse
 Parse a program. The building is parsed completly. hopefully
 ===============
 */
-void ProductionProgram::parse(std::string directory, Profile* prof, std::string name, ProductionSite_Descr* building)
+void ProductionProgram::parse(std::string directory, Profile* prof, std::string name, ProductionSite_Descr* building, const EncodeData* encdata)
 {
 	Section* sprogram = prof->get_safe_section(name.c_str());
 
@@ -1443,7 +1444,29 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
 
 			act.type = ProductionAction::actWorker;
 			act.sparam1 = cmd[1];
-		}
+      } else if (cmd[0] == "animation") {
+         char* endp;
+
+         if (cmd.size() != 3)
+            throw wexception("Usage: animation <name> <time>");
+
+         act.type = ProductionAction::actAnimate;
+
+         // dynamically allocate animations here
+         Section* s = prof->get_safe_section(cmd[1].c_str());
+         act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
+         
+         if (cmd[1] == "idle")
+            throw wexception("Idle animation is default, no calling senseful!");
+
+         act.iparam2 = strtol(cmd[2].c_str(), &endp, 0);
+         if (endp && *endp)
+            throw wexception("Bad duration '%s'", cmd[2].c_str());
+
+         if (act.iparam2 <= 0)
+            throw wexception("animation duration must be positive");
+			
+      }
 		else
 			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
 
@@ -1520,7 +1543,7 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
 		try
 		{
 			program = new ProductionProgram(string);
-			program->parse(directory, prof, string, this); 
+			program->parse(directory, prof, string, this, encdata); 
 			m_programs[program->get_name()] = program;
 		}
 		catch(std::exception& e)
@@ -1758,8 +1781,14 @@ void ProductionSite::act(Game *g, uint data)
 
 		m_program_timer = false;
 		m_program_needs_restart=false;
+         
+      molog("PSITE: program %s#%i\n", m_program->get_name().c_str(), m_program_ip);
 
-		molog("PSITE: program %s#%i\n", m_program->get_name().c_str(), m_program_ip);
+      if(m_anim!=get_descr()->get_idle_anim()) {
+         // Restart idle animation, which is the default
+         start_animation(g, get_descr()->get_idle_anim());
+      }
+      
 
       switch(action->type) {
          case ProductionAction::actSleep:
@@ -1770,14 +1799,20 @@ void ProductionSite::act(Game *g, uint data)
             m_program_time = schedule_act(g, action->iparam1);
             break;
 
+         case ProductionAction::actAnimate:
+            molog("  Animate(%i,%i)\n", action->iparam1, action->iparam2);
+
+            start_animation(g, action->iparam1);
+
+            program_step();
+            m_program_timer = true;
+            m_program_time = schedule_act(g, action->iparam2);
+            break;
+            
          case ProductionAction::actWorker:
-            {
             molog("  Worker(%s)\n", action->sparam1.c_str());
 
-            Worker::State* state=m_worker->get_state();
-            log("---> actWorker: %s, %s\n", m_worker->get_signal().c_str(), state->task->name); 
             m_worker->update_task_buildingwork(g);
-            }
             break;
 
          case ProductionAction::actConsume:
@@ -1803,9 +1838,6 @@ void ProductionSite::act(Game *g, uint data)
             int wareid= g->get_safe_ware_id(action->sparam1.c_str());
             WareInstance* item = new WareInstance(wareid);
             item->init(g);
-            Worker::State* state=m_worker->get_state();
-            
-            log("---> actProduce: %s, %s\n", m_worker->get_signal().c_str(), state->task->name); 
             m_worker->set_carried_item(g,item);
             m_worker->update_task_buildingwork(g);
             program_step();
