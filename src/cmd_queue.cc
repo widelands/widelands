@@ -23,7 +23,7 @@
 #include "player.h"
 #include "worker.h"
 
-// 
+//
 // class Cmd_Queue
 //
 Cmd_Queue::Cmd_Queue(Game *g)
@@ -165,6 +165,18 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
 		if (obj && obj->get_type() >= Map_Object::BUILDING)
 			plr->bulldoze((PlayerImmovable*)obj);
+		break;
+	}
+
+	case CMD_FLAGACTION:
+	{
+		assert(c->arg1);
+		Player* plr = m_game->get_player(c->sender);
+		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
+		if (obj && obj->get_type() == Map_Object::FLAG) {
+			if (((PlayerImmovable*)obj)->get_owner() == plr)
+				plr->flagaction((Flag*)obj, c->arg2);
+		}
 		break;
 	}
 

@@ -94,6 +94,8 @@ private:
 	void parse_object(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_plant(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_removeobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_geologist(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_geologist_find(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 
 private:
 	std::string						m_name;
@@ -114,6 +116,8 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{ "object",				&WorkerProgram::parse_object },
 	{ "plant",				&WorkerProgram::parse_plant },
 	{ "removeobject",		&WorkerProgram::parse_removeobject },
+	{ "geologist",			&WorkerProgram::parse_geologist },
+	{ "geologist-find",	&WorkerProgram::parse_geologist_find },
 
 	{ 0, 0 }
 };
@@ -786,6 +790,88 @@ bool Worker::run_removeobject(Game* g, State* state, const WorkerAction* act)
 	schedule_act(g, 10);
 	return true;
 }
+
+
+/*
+==============================
+
+geologist <repeat #> <radius> <subcommand>
+
+Walk around the starting point randomly within a certain radius,
+and execute the subcommand for some of the fields.
+
+iparam1 = maximum repeat #
+iparam2 = radius
+sparam1 = subcommand
+
+==============================
+*/
+void WorkerProgram::parse_geologist(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	char* endp;
+
+	if (cmd.size() != 4)
+		throw wexception("Usage: geologist <repeat #> <radius> <subcommand>");
+
+	act->function = &Worker::run_geologist;
+
+	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
+	if (endp && *endp)
+		throw wexception("Bad repeat count '%s'", cmd[1].c_str());
+
+	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
+	if (endp && *endp)
+		throw wexception("Bad radius '%s'", cmd[2].c_str());
+
+	act->sparam1 = cmd[3];
+}
+
+bool Worker::run_geologist(Game* g, State* state, const WorkerAction* act)
+{
+	PlayerImmovable* location = get_location(g);
+
+	assert(location);
+	assert(location->get_type() == FLAG);
+
+	molog("  Start Geologist (%i attempts, %i radius -> %s)\n",
+		act->iparam1, act->iparam2, act->sparam1.c_str());
+
+	state->ivar1++;
+	start_task_geologist(g, act->iparam1, act->iparam2, act->sparam1);
+	return true;
+}
+
+
+/*
+==============================
+
+geologist-find
+
+Check resources at the current position, and plant a marker object
+when possible.
+
+==============================
+*/
+void WorkerProgram::parse_geologist_find(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 1)
+		throw wexception("Usage: geologist-find");
+
+	act->function = &Worker::run_geologist_find;
+}
+
+bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
+{
+	FCoords position = g->get_map()->get_fcoords(get_position());
+	uint res = position.field->get_resources();
+
+	molog("  Resources: %02X\n", res);
+	molog("  ==== TODO PLANT ====\n");
+
+	state->ivar1++;
+	return false;
+}
+
 
 
 /*
@@ -2619,6 +2705,138 @@ void Worker::fugitive_signal(Game* g, State* state)
 {
 	molog("[fugitive]: interrupted by signal '%s'\n", get_signal().c_str());
 	pop_task(g);
+}
+
+
+/*
+==============================
+
+GEOLOGIST task
+
+Walk in a circle around our owner, calling a subprogram on currently
+empty fields.
+
+ivar1 - number of attempts
+ivar2 - radius to search
+svar1 - name of subcommand
+
+Failure of path movement is caught, all other signals terminate this task.
+
+==============================
+*/
+
+Bob::Task Worker::taskGeologist = {
+	"geologist",
+
+	(Bob::Ptr)&Worker::geologist_update,
+	0,
+	0,
+};
+
+
+/*
+===============
+Worker::start_task_geologist
+===============
+*/
+void Worker::start_task_geologist(Game* g, int attempts, int radius, std::string subcommand)
+{
+	push_task(g, &taskGeologist);
+
+	State* s = get_state();
+
+	s->ivar1 = attempts;
+	s->ivar2 = radius;
+	s->svar1 = subcommand;
+}
+
+
+/*
+===============
+Worker::geologist_update
+===============
+*/
+void Worker::geologist_update(Game* g, State* state)
+{
+	std::string signal = get_signal();
+
+	if (signal == "fail")
+	{
+		molog("[geologist]: Caught signal '%s'\n", signal.c_str());
+		set_signal("");
+	}
+	else if (signal.size())
+	{
+		molog("[geologist]: Interrupted by signal '%s'\n", signal.c_str());
+		pop_task(g);
+		return;
+	}
+
+	//
+	Map* map = g->get_map();
+	PlayerImmovable* location = get_location(g);
+	Flag* owner;
+	Coords center;
+
+	assert(location);
+	assert(location->get_type() == FLAG);
+
+	owner = (Flag*)location;
+	center = owner->get_position();
+
+	// Check if it's time to go home
+	if (state->ivar1 > 0)
+	{
+		// Check to see if we're on suitable terrain
+		BaseImmovable* imm = map->get_immovable(get_position());
+
+		if (!imm || imm->get_size() == BaseImmovable::NONE)
+		{
+			molog("[geologist]: Starting program '%s'\n", state->svar1.c_str());
+
+			state->ivar1--;
+			start_task_program(g, state->svar1);
+			return;
+		}
+
+		// Find a suitable field and walk towards it
+		std::vector<Coords> list;
+		CheckStepDefault cstep(get_movecaps());
+
+		if (map->find_reachable_fields(get_position(), state->ivar2, &list, &cstep,
+							FindFieldImmovableSize(FindFieldImmovableSize::sizeNone)))
+		{
+			Coords target = list[g->logic_rand() % list.size()];
+
+			molog("[geologist]: Walk towards free field\n");
+			if (!start_task_movepath(g, target, 0, get_descr()->get_right_walk_anims(does_carry_ware())))
+			{
+				molog("[geologist]: BUG: couldn't find path\n");
+				set_signal("fail");
+				pop_task(g);
+				return;
+			}
+			return;
+		}
+
+		molog("[geologist]: Found no applicable field, going home\n");
+		state->ivar1 = 0;
+	}
+
+	if (get_position() == center) {
+		molog("[geologist]: We're home\n");
+		pop_task(g);
+		return;
+	}
+
+	molog("[geologist]: Return home\n");
+	if (!start_task_movepath(g, center, 0, get_descr()->get_right_walk_anims(does_carry_ware())))
+	{
+		molog("[geologist]: Couldn't find path home\n");
+		set_signal("fail");
+		pop_task(g);
+		return;
+	}
 }
 
 

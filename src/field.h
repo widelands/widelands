@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 // those are really just fast, if num is not a complex think, like
 // calling a function or so
 #define MULTIPLY_WITH_HEIGHT_FACTOR(num) ( ((num)<<2)+(num) )
-#define MULTIPLY_WITH_FIELD_WIDTH(num) ( ((num)<<6) )  
+#define MULTIPLY_WITH_FIELD_WIDTH(num) ( ((num)<<6) )
 #define MULTIPLY_WITH_HALF_FIELD_HEIGHT(num) ( ((num)<<5) )  // it's nearly never needed to use FIELD_HEIGHT in multiplys, only FIELD_HEIGHT/2
 #define MAX_FIELD_HEIGHT 60
 #define MAX_FIELD_HEIGHT_DIFF 5
@@ -42,7 +42,7 @@
 // Okay, as it stands now, Field can be safely memset()ed to 0.
 //
 // No. In fact, you should view Field more as a plain old structure rather than
-// a class. If you think of Fields as a class you get into a whole lot of 
+// a class. If you think of Fields as a class you get into a whole lot of
 // problems (like the 6 neighbour field pointers we used to have). - Nicolai
 // Probably it would be better to make Field a struct, rather than a class (things wouldn't
 // change much, it's just a question of style and code understanding)
@@ -94,6 +94,15 @@ enum Roads {
 	Road_Build_Shift = 6,
 };
 
+enum {
+	Resource_Coal		= (1 << 4),
+	Resource_Iron		= (2 << 4),
+	Resource_Gold		= (3 << 4),
+	Resource_TypeMask		= 0xF0,
+
+	Resource_AmountMask	= 0x0F,
+};
+
 class Terrain_Descr;
 class Bob;
 class BaseImmovable;
@@ -109,6 +118,7 @@ private:
 	uchar caps; // what can we build here, who can walk here [8 bits used]
 	uchar owned_by; // 0 = neutral; otherwise: player number
 	uchar roads; // are any roads on this field? [6 bits used]
+	uchar resources;
 	Terrain_Descr *terr, *terd;
 	Bob* bobs; // linked list, see Bob::m_linknext
 	BaseImmovable* immovable;
@@ -134,9 +144,12 @@ public:
 	inline int get_roads() const { return roads; }
 	inline int get_road(int dir) const { return (roads >> dir) & Road_Mask; }
 	inline void set_road(int dir, int type) {
-		roads &= ~(Road_Mask << dir); 
+		roads &= ~(Road_Mask << dir);
 		roads |= type << dir;
 	}
+
+	inline uchar get_resources() const { return resources; }
+	inline void set_resources(uchar res) { resources = res; }
 
    // note: you must reset this field's + neighbor's brightness when you change the height
    // Map's change_height does this

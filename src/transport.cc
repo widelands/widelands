@@ -623,6 +623,9 @@ Flag::~Flag()
 	if (m_building)
 		log("Flag: ouch! building left\n");
 
+	if (m_flag_jobs.size())
+		log("Flag: ouch! flagjobs left\n");
+
 	for(int i = 0; i < 6; i++)
 		if (m_roads[i])
 			log("Flag: ouch! road left\n");
@@ -715,6 +718,9 @@ void Flag::set_economy(Economy *e)
 
 	if (m_building)
 		m_building->set_economy(e);
+
+	for(std::list<FlagJob>::const_iterator it = m_flag_jobs.begin(); it != m_flag_jobs.end(); ++it)
+		it->request->set_economy(e);
 
 	for(int i = 0; i < 6; i++) {
 		if (m_roads[i])
@@ -1201,6 +1207,11 @@ void Flag::cleanup(Editor_Game_Base *g)
 {
 	//molog("Flag::cleanup\n");
 
+	while(m_flag_jobs.size()) {
+		delete m_flag_jobs.begin()->request;
+		m_flag_jobs.erase(m_flag_jobs.begin());
+	}
+
 	while(m_item_filled) {
 		WareInstance* item = m_items[--m_item_filled].item;
 
@@ -1251,6 +1262,56 @@ void Flag::destroy(Editor_Game_Base* g)
 	}
 
 	PlayerImmovable::destroy(g);
+}
+
+
+/*
+==============
+Flag::add_flag_job
+
+Add a new flag job to request the worker with the given ID, and to execute
+the given program once it's completed.
+==============
+*/
+void Flag::add_flag_job(Game* g, int workerware, std::string programname)
+{
+	FlagJob j;
+
+	j.request = new Request(this, workerware,
+	                        &Flag::flag_job_request_callback, this);
+	j.program = programname;
+
+	m_flag_jobs.push_back(j);
+}
+
+
+/*
+==============
+Flag::flag_job_request_callback [static]
+
+This function is called when one of the flag job workers arrives on
+the flag. Give him his job.
+==============
+*/
+void Flag::flag_job_request_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+{
+	Flag* flag = (Flag*)data;
+
+	assert(w);
+
+	for(std::list<FlagJob>::iterator it = flag->m_flag_jobs.begin(); it != flag->m_flag_jobs.end(); ++it) {
+		if (it->request != rq)
+			continue;
+
+		delete rq;
+
+		w->start_task_program(g, it->program);
+
+		flag->m_flag_jobs.erase(it);
+		return;
+	}
+
+	flag->molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
 
 

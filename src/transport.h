@@ -27,6 +27,8 @@
 #endif
 
 #include <set>
+#include <list>
+
 #include "immovable.h"
 #include "map.h"
 #include "trackptr.h"
@@ -115,6 +117,11 @@ to it. Instead of the WALK_NW road, it can also have a building attached to
 it.
 Flags also have a store of up to 8 wares.
 
+You can also assign an arbitrary number of "jobs" for a flag.
+A job consists of a request for a worker, and the name of a program that the
+worker is to execute. Once execution of the program has finished, the worker
+will return to a warehouse.
+
 Important: Do not access m_roads directly. get_road() and others use
 Map_Object::WALK_xx in all "direction" parameters.
 */
@@ -127,6 +134,11 @@ private:
 		WareInstance*		item;			// the item itself
 		bool					pending;		// if the item is pending
 		PlayerImmovable*	nextstep;	// next step that this item is sent to
+	};
+
+	struct FlagJob {
+		Request*		request;
+		std::string	program;
 	};
 
 public:
@@ -168,6 +180,8 @@ public:
 
 	void remove_item(Editor_Game_Base* g, WareInstance* item);
 
+	void add_flag_job(Game* g, int workerware, std::string programname);
+
 protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
@@ -176,6 +190,8 @@ protected:
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 	void wake_up_capacity_queue(Game* g);
+
+	static void flag_job_request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
 private:
 	Coords			m_position;
@@ -194,6 +210,8 @@ private:
 														// the destination is the given flag
 
 	std::vector<Object_Ptr>	m_capacity_wait;	// workers waiting for capacity
+
+	std::list<FlagJob>	m_flag_jobs;
 
 	// The following are only used during pathfinding
 	uint				mpf_cycle;
@@ -399,8 +417,8 @@ private:
 A Request is issued whenever some object (road or building) needs a ware.
 
 Requests are always created and destroyed by their owner, i.e. the target
-building. The owner is also responsible for calling set_economy() when
-its economy changes.
+player immovable. The owner is also responsible for calling set_economy()
+when its economy changes.
 
 Idle Requests need not be fulfilled; however, when there's a matching Supply
 left, a transfer may be initiated.

@@ -424,6 +424,25 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		section = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
 		if (!section)
 			throw wexception("Section 12 (resources) not found");
+
+		f = m_map->m_fields;
+		pc = section;
+		for(y=0; y<m_map->get_height(); y++) {
+			for(x=0; x<m_map->get_width(); x++, f++, pc++) {
+				char c = *pc;
+				uchar res;
+
+				switch(c & 0xF8) {
+				case 0x40: res = Resource_Coal | (c & 7); break;
+				case 0x48: res = Resource_Iron | (c & 7); break;
+				case 0x50: res = Resource_Gold | (c & 7); break;
+				default: res = 0;
+				}
+
+				f->set_resources(res);
+			}
+		}
+
 		free(section);
 		section = 0;
 
@@ -589,7 +608,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		if (buildings)
 			free(buildings);
 		throw;
-	}   
+	}
 
 	free(bobs);
 	free(buildings);

@@ -140,6 +140,7 @@ public:
 	void act_abort_buildroad();
 	void act_removeroad();
 	void act_build(int idx);
+	void act_geologist();
 
 private:
    void add_tab(const char* picname, UIPanel* panel);
@@ -155,24 +156,25 @@ private:
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
 };
 
-static const char* pic_tab_buildroad = "pics/menu_tab_buildroad.png";
-static const char* pic_tab_watch = "pics/menu_tab_watch.png";
-static const char* pic_tab_buildhouse[3] = {
+static const char* const pic_tab_buildroad = "pics/menu_tab_buildroad.png";
+static const char* const pic_tab_watch = "pics/menu_tab_watch.png";
+static const char* const pic_tab_buildhouse[3] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
 	"pics/menu_tab_buildbig.png"
 };
-static const char* pic_tab_buildmine = "pics/menu_tab_buildmine.png";
+static const char* const pic_tab_buildmine = "pics/menu_tab_buildmine.png";
 
-static const char* pic_buildroad = "pics/menu_build_way.png";
-static const char* pic_remroad = "pics/menu_rem_way.png";
-static const char* pic_buildflag = "pics/menu_build_flag.png";
-static const char* pic_ripflag = "pics/menu_rip_flag.png";
-static const char* pic_watchfield = "pics/menu_watch_field.png";
-static const char* pic_showcensus = "pics/menu_show_census.png";
-static const char* pic_showstatistics = "pics/menu_show_statistics.png";
-static const char* pic_debug = "pics/menu_debug.png";
-static const char* pic_abort = "pics/menu_abort.png";
+static const char* const pic_buildroad = "pics/menu_build_way.png";
+static const char* const pic_remroad = "pics/menu_rem_way.png";
+static const char* const pic_buildflag = "pics/menu_build_flag.png";
+static const char* const pic_ripflag = "pics/menu_rip_flag.png";
+static const char* const pic_watchfield = "pics/menu_watch_field.png";
+static const char* const pic_showcensus = "pics/menu_show_census.png";
+static const char* const pic_showstatistics = "pics/menu_show_statistics.png";
+static const char* const pic_debug = "pics/menu_debug.png";
+static const char* const pic_abort = "pics/menu_abort.png";
+static const char* const pic_geologist = "pics/menu_geologist.png";
 
 
 /*
@@ -280,6 +282,8 @@ void FieldActionWindow::add_buttons_auto()
 
 			if (!building || building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag);
+
+			add_button(buildbox, pic_geologist, &FieldActionWindow::act_geologist);
 		}
 		else
 		{
@@ -610,6 +614,26 @@ void FieldActionWindow::act_build(int idx)
 	Game *g = m_player->get_game();
 
 	g->send_player_command(m_player->get_player_number(), CMD_BUILD, m_field.x, m_field.y, idx);
+
+	okdialog();
+}
+
+
+/*
+===============
+FieldActionWindow::act_geologist
+
+Call a geologist on this flag.
+===============
+*/
+void FieldActionWindow::act_geologist()
+{
+	Game* g = m_player->get_game();
+	BaseImmovable *imm = g->get_map()->get_immovable(m_field);
+
+	if (imm && imm->get_type() == Map_Object::FLAG)
+		g->send_player_command(m_player->get_player_number(), CMD_FLAGACTION,
+			imm->get_serial(), FLAGACTION_GEOLOGIST);
 
 	okdialog();
 }

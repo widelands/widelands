@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2002, 2003 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -28,6 +28,7 @@ class Game;
 class Path;
 class PlayerImmovable;
 class Road;
+class Flag;
 class Tribe_Descr;
 
 /** class Player
@@ -78,10 +79,12 @@ class Player {
 		void set_area_seen(Coords c, uint area, bool on);
 
 		// Player commands
+		// Only to be called indirectly via CmdQueue
 		void build_flag(Coords c);
 		void build_road(const Path *path);
 		void build(Coords c, int idx);
 		void bulldoze(PlayerImmovable* imm);
+		void flagaction(Flag* flag, int action);
 
    private:
       // set functions

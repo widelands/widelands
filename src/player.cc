@@ -1,16 +1,16 @@
 /*
  * Copyright (C) 2002, 2003 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -23,6 +23,8 @@
 #include "transport.h"
 #include "tribe.h"
 #include "wexception.h"
+#include "cmd_queue.h"
+
 
 //
 //
@@ -31,7 +33,7 @@
 //
 Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor)
 {
-   m_type = type; 
+   m_type = type;
 	m_plnum = plnum;
 	m_tribe = tribe;
 	m_egbase = g;
@@ -302,5 +304,45 @@ void Player::bulldoze(PlayerImmovable* imm)
 
 	// Now destroy it
 	imm->destroy(get_game());
+}
+
+
+/*
+===============
+Player::flagaction
+
+Perform an action on the given flag.
+===============
+*/
+void Player::flagaction(Flag* flag, int action)
+{
+	Editor_Game_Base* eg = get_game();
+
+	if (!eg->is_game())
+		return;
+
+	Game* g = (Game*)eg;
+
+	// Additional security check
+	if (flag->get_owner() != this)
+		return;
+
+	switch(action) {
+	case FLAGACTION_GEOLOGIST:
+		{
+		int id = g->get_ware_id("geologist");
+
+		if (id < 0) {
+			log("Tribe defines no geologist\n");
+			return;
+		}
+
+		flag->add_flag_job(g, id, "expedition");
+		return;
+		}
+
+	default:
+		log("Player sent bad flagaction = %i\n", action);
+	}
 }
 

@@ -149,6 +149,8 @@ public: // worker-specific tasks
 	void start_task_leavebuilding(Game* g);
 	void start_task_fugitive(Game* g);
 
+	void start_task_geologist(Game* g, int attempts, int radius, std::string subcommand);
+
 private: // task details
 	void transfer_update(Game* g, State* state);
 	void transfer_signal(Game* g, State* state);
@@ -179,6 +181,8 @@ private: // task details
 	void fugitive_update(Game* g, State* state);
 	void fugitive_signal(Game* g, State* state);
 
+	void geologist_update(Game* g, State* state);
+
 private:
 	static Task taskTransfer;
 	static Task taskBuildingwork;
@@ -190,6 +194,7 @@ private:
 	static Task taskWaitforcapacity;
 	static Task taskLeavebuilding;
 	static Task taskFugitive;
+	static Task taskGeologist;
 
 private: // Program commands
 	bool run_createitem(Game* g, State* state, const WorkerAction* act);
@@ -202,6 +207,8 @@ private: // Program commands
 	bool run_object(Game* g, State* state, const WorkerAction* act);
 	bool run_plant(Game* g, State* state, const WorkerAction* act);
 	bool run_removeobject(Game* g, State* state, const WorkerAction* act);
+	bool run_geologist(Game* g, State* state, const WorkerAction* act);
+	bool run_geologist_find(Game* g, State* state, const WorkerAction* act);
 
 private:
 	Object_Ptr			m_location;			// meta location of the worker, a PlayerImmovable

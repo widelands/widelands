@@ -5,7 +5,7 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -107,10 +107,10 @@ S2_Map_Loader::~S2_Map_Loader() {
 
 /*
 ===========
-S2_Map_Loader::preload_map() 
+S2_Map_Loader::preload_map()
 
 preloads the map. The map will then return valid
-infos when get_width() or get_nrplayers(), 
+infos when get_width() or get_nrplayers(),
 get_author() and so on are called
 
 load the header
@@ -134,7 +134,7 @@ int S2_Map_Loader::preload_map() {
 ===========
 S2_Map_Loader::load_map_complete()
 
-Completly loads the map, loads the 
+Completly loads the map, loads the
 corresponding world, loads the graphics
 and places all the objects. From now on
 the Map* can't be set to another one.
@@ -246,7 +246,7 @@ void Map::recalc_whole_map(void)
 Map::set_size [private]
 
 Set the size of the map. This should only happen once during initial load.
-=============== 
+===============
 */
 void Map::set_size(uint w, uint h)
 {
@@ -2201,6 +2201,22 @@ bool FindFieldSize::accept(FCoords coord) const
 	}
 }
 
+bool FindFieldImmovableSize::accept(FCoords coord) const
+{
+	BaseImmovable* imm = coord.field->get_immovable();
+	int size = BaseImmovable::NONE;
+
+	if (imm)
+		size = imm->get_size();
+
+	switch(size) {
+	case BaseImmovable::NONE: return m_sizes & sizeNone;
+	case BaseImmovable::SMALL: return m_sizes & sizeSmall;
+	case BaseImmovable::MEDIUM: return m_sizes & sizeMedium;
+	case BaseImmovable::BIG: return m_sizes & sizeBig;
+	default: throw wexception("FindFieldImmovableSize: bad size = %i", size);
+	}
+}
 
 
 /*

@@ -1,13 +1,16 @@
 
-[wasser]
+# Resource markers, as set up by geologists
+[none]
+marker=resmarker_none
+
+[coal]
+marker=resmarker_coal1 4
+marker=resmarker_coal2
 
 [gold]
+marker=resmarker_gold1 4
+marker=resmarker_gold2
 
-[granit]
-
-[kohle]
-
-[eisen]
-
-[fisch]
-
+[iron]
+marker=resmarker_iron1 4
+marker=resmarker_iron2

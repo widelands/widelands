@@ -335,6 +335,21 @@ struct FindFieldSize : public FindField {
 	Size m_size;
 };
 
+struct FindFieldImmovableSize : public FindField {
+	enum {
+		sizeNone		= (1 << 0),
+		sizeSmall	= (1 << 1),
+		sizeMedium	= (1 << 2),
+		sizeBig		= (1 << 3)
+	};
+
+	FindFieldImmovableSize(uint sizes) : m_sizes(sizes) { }
+
+	virtual bool accept(FCoords coord) const;
+
+	uint m_sizes;
+};
+
 
 /*
 CheckStepDefault

@@ -46,6 +46,13 @@ enum {
 	CMD_BUILD_ROAD,	// arg1 = Path*
 	CMD_BUILD,			// arg1 = x, arg2 = y, arg3 = build_descr idx
 	CMD_BULLDOZE,		// arg1 = serialnum (PlayerImmovable)
+
+	CMD_FLAGACTION,	// arg1 = serialnum of flag, arg2 = action number
+};
+
+// arg2 of CMD_FLAGACTION is one of these:
+enum {
+	FLAGACTION_GEOLOGIST = 0,	// call a geologist
 };
 // ---------------------- END    OF CMDS ----------------------------------
 
