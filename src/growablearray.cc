@@ -75,7 +75,7 @@ void Growable_Array::grow(int inc)
 	memcpy(newData, this->elementData, this->capacity * sizeof(void*));
 	free(this->elementData);
 	this->elementData = newData;*/
-	realloc(this->elementData, newCapacity * sizeof(void*));
+	this->elementData=(void**) realloc(this->elementData, newCapacity * sizeof(void*));
 #ifdef G_ARRAY_SAFE
 	memset(this->elementData + this->capacity, 0, (newCapacity - this->capacity) * sizeof(void*));
 #endif	

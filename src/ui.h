@@ -23,6 +23,7 @@
 #include "graphic.h"
 #include "singleton.h"
 #include "font.h"
+#include "growablearray.h"
 
 // predeclaration
 class Window;
@@ -130,8 +131,8 @@ class Button {
 					 inline void set_pressed(const bool b) { if(bpressed!=b) { bpressed=b; needs_draw=true ; } }
 					 inline uint get_xpos(void) { return x+xp; }
 					 inline uint get_ypos(void) { return y+yp; }
-					 inline uint get_w(void) { return w; }
-					 inline uint get_h(void) { return h; }
+					 inline uint get_w(void) const { return w; }
+					 inline uint get_h(void) const { return h; }
 					 inline bool is_pressed(void) { return bpressed; } 
 					 
 		  private:
@@ -247,8 +248,8 @@ class Listselect {
 					 void select(uint);
 					 
 					 // Information funcs
-					 inline uint get_w(void) { return w; }
-					 inline uint get_h(void) { return (g_fh.get_fh(nfont)+2)*h; }
+					 inline uint get_w(void) const { return w; }
+					 inline uint get_h(void) const { return (g_fh.get_fh(nfont)+2)*h; }
 					 inline uint get_xpos(void) { return x+xp; }
 					 inline uint get_ypos(void) { return y+yp; }
 
@@ -275,7 +276,61 @@ class Listselect {
 					 
 };
 
+/** class Multiline_textarea 
+ *
+ * This defines a non responsive (to clicks) text area, where a text
+ * can easily be printed
+ *
+ * Depends: g_gr
+ * 			class Graph::Pic
+ * 			class Font_Handler
+ */
+class Multiline_Textarea {
+		  Multiline_Textarea( const Multiline_Textarea&);
+		  Multiline_Textarea& operator=(const Multiline_Textarea&);
+
+		  friend class Window;
+
+		  public:
+					 enum Align {
+								RIGHTA, 
+								LEFTA, 
+								CENTER
+					 };
+					 void set_text(const char*);
+		
+					 /** static void set_font(uint n)
+					  * This function sets the font to use for textareas
+					  * defaults to zero
+					  *
+					  * Args: n 	font to use
+					  * Returns:	nothing
+					  */
+					 static void set_font(uint n) { nfont=n; }
+	
+		  private:
+					 Multiline_Textarea(const uint, const uint, const uint, const uint, const Align, Pic*, const uint, const uint);
+					 ~Multiline_Textarea(void);
 					 
+					 void draw(void) const ;
+					 		
+					 // some information funcs
+					 inline uint get_xpos(void) { return x+xp; }
+					 inline uint get_ypos(void) { return y+yp; }
+					 inline uint get_w(void) const { return w; }
+					 inline uint get_h(void) const { return h*g_fh.get_fh(nfont); }
+	
+					 
+		  private: 
+					 static uint nfont;
+					 uint x, y, w, h, xp, yp;
+					 Align al;
+					 Growable_Array *ar;
+					 uint lines;
+
+					 Pic* bak;
+					 Pic* dp;
+};					 
 					 
 /** class Textarea 
  *
@@ -324,8 +379,8 @@ class Textarea {
 					 // some information funcs
 					 inline uint get_xpos(void) { return x+xp; }
 					 inline uint get_ypos(void) { return y+yp; }
-					 inline uint get_w(void) { return w; }
-					 inline uint get_h(void) { return h; }
+					 inline uint get_w(void) const { return w; }
+					 inline uint get_h(void) const { return h; }
 	
 					 
 		  private: 
@@ -370,12 +425,12 @@ class Textarea {
 #define MAX_TA   40	 
 #define MAX_CHECKBOX   10
 #define MAX_LISTSELECT   2
+#define MAX_MULTILINE_TEXTAREA  1
 
 class Window {
 		  // Copy is non trivial and shouldn't be needed
 		  Window(const Window&);
 		  Window& operator=(const Window&);
-		 
 		 
 		  public:
 					 enum Flags {
@@ -389,6 +444,7 @@ class Window {
 					 Button*   create_button(const uint, const uint, const uint, const uint, const uint);
 					 Checkbox*   create_checkbox(const uint, const uint, const bool b);
 					 Listselect*   create_listselect(const uint, const uint, const uint, const uint);
+					 Multiline_Textarea*   create_multiline_textarea(const uint, const uint, const uint, const uint, const Multiline_Textarea::Align);
 					 void set_new_bg(Pic* p);
 
 					 /** static void Window::set_l_border(Pic* p) 
@@ -414,8 +470,8 @@ class Window {
 					 // inline functions to get some informations
 					 inline uint get_xpos(void) { return x; }
 					 inline uint get_ypos(void) { return y; }
-					 inline uint get_w(void) { return w; }
-					 inline uint get_h(void) { return h; }
+					 inline uint get_w(void) const { return w; }
+					 inline uint get_h(void) const { return h; }
 					 inline Flags get_flags(void) { return myf; }					 
 
 		  private:
@@ -461,6 +517,10 @@ class Window {
 					 // for listselects
 					 uint nlistselect;
 					 Listselect** listselect;
+
+					 // for multiline_textareas
+					 uint nmultiline_textarea;
+					 Multiline_Textarea** multiline_textarea;
 
 					 //closefunc dfkj;
 					 static Pic l_border;

@@ -1,4 +1,4 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -g # -pg -fprofile-arcs
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -pg -fprofile-arcs -g
 #EXTRA_FLAGS=@SDL_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2 -O3
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
@@ -69,6 +69,7 @@ widelands_SOURCES=main.cc \
 						tribefiletypes.h \
 						button.cc \
 						textarea.cc \
+						multiline_textarea.cc \
 						window.cc \
 						checkbox.cc \
 						listselect.cc \

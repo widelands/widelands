@@ -24,6 +24,7 @@
 
 class Growable_Array
 {
+	Growable_Array(void); // Forbidden
 	void** elementData;
 	int elementCount;
 	int capacity;

@@ -47,8 +47,8 @@ class Cursor : public Singleton<Cursor> {
 					 void draw(const uint, const uint);
 					 
 					 // some information functions
-					 inline uint get_w(void) { return pic->get_w(); }
-					 inline uint get_h(void) { return pic->get_h(); }
+					 inline uint get_w(void) const { return pic->get_w(); }
+					 inline uint get_h(void) const { return pic->get_h(); }
 
 		  private:
 					 bool show_c;

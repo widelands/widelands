@@ -81,6 +81,9 @@ Window::Window(const uint px, const uint py, const uint wi, const uint he, const
 
 		  nlistselect=0;
 		  listselect=(Listselect**) malloc(sizeof(Listselect)*MAX_LISTSELECT);
+					 
+		  nmultiline_textarea=0;
+		  multiline_textarea=(Multiline_Textarea**) malloc(sizeof(Multiline_Textarea)*MAX_MULTILINE_TEXTAREA);
 
 		  winpic=new Pic();
 		  winpic->set_size(w, h);
@@ -119,6 +122,10 @@ Window::~Window(void) {
 					 delete listselect[i];
 		  free(listselect);
 		  
+		  for(i=0; i<nmultiline_textarea; i++) 
+					 delete  multiline_textarea[i]; 
+		  free(multiline_textarea);
+
 		  delete winpic;
 		  if(own_bg) delete own_bg;
 		  
@@ -186,6 +193,60 @@ Listselect* Window::create_listselect(const uint px, const uint py, const uint w
 		  return listselect[nlistselect-1];
 }
 
+/** Multiline_Textarea* Window::create_multiline_textarea(const uint px, const uint py, const uint w, const uint h, const Multiline_Textarea::Align a);
+ *
+ * This creates a listselect at the given point
+ *
+ * Args: px, py	pos in window
+ * 		w,h		dimensions
+ * 		a 			alignent of each line in this box
+ * Returns: Pointer to listselect-box just created
+ */
+Multiline_Textarea*  Window::create_multiline_textarea(const uint px, const uint py, const uint w, const uint h, const Multiline_Textarea::Align a) {
+		  uint myw=w;
+		  uint myh=h;
+		  uint add=0;
+
+		  if(myf!=FLAT) {
+					 myw-=get_border();
+					 myh-=get_border();
+					 add=get_border()>>1;
+		  }
+
+		  multiline_textarea[nmultiline_textarea]=new Multiline_Textarea(px, py, myw, myh, a, winpic, add, add);
+		  multiline_textarea[nmultiline_textarea]->draw();
+
+		  g_gr.register_update_rect(x+multiline_textarea[nmultiline_textarea]->get_xpos(), y+multiline_textarea[nmultiline_textarea]->get_ypos(), 
+								multiline_textarea[nmultiline_textarea]->get_w(), multiline_textarea[nmultiline_textarea]->get_h());
+		  assert(nmultiline_textarea<MAX_TA);
+
+/*		  multiline_textarea[nmultiline_textarea]=new Listselect(px, py, myw-20-Button::get_border(), myh, winpic, add, add);
+		  multiline_textarea[nmultiline_textarea]->draw();
+
+		  g_gr.register_update_rect(x+multiline_textarea[nmultiline_textarea]->get_xpos(), y+multiline_textarea[nmultiline_textarea]->get_ypos(), 
+								multiline_textarea[nmultiline_textarea]->get_w(), multiline_textarea[nmultiline_textarea]->get_h());
+
+		  assert(nmultiline_textarea<MAX_TA);
+
+		  // set the move button
+		  Button* b=create_button(multiline_textarea[nmultiline_textarea]->get_xpos()+myw-20-Button::get_border(), 
+								multiline_textarea[nmultiline_textarea]->get_ypos(),
+								20, 20, 1);
+		  b->register_func(multiline_textarea_but_up, multiline_textarea[nmultiline_textarea]);
+		  b->set_pic(g_fh.get_string("U", 0));
+		  b=create_button(multiline_textarea[nmultiline_textarea]->get_xpos()+myw-20-Button::get_border(), 
+								multiline_textarea[nmultiline_textarea]->get_ypos()+20+Button::get_border(),
+								20, 20, 1);
+		  b->set_pic(g_fh.get_string("D", 0));
+		  b->register_func(multiline_textarea_but_down, multiline_textarea[nmultiline_textarea]);
+*/								
+		  nmultiline_textarea++;
+		  
+		  g_gr.register_update_rect(x+px, y+py, myw, myh);
+		  
+		  return multiline_textarea[nmultiline_textarea-1];
+
+}
 
 /** Textarea* Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
  * 
@@ -328,6 +389,10 @@ void Window::redraw_win(void) {
 		  // Draw listselects
 		  for(i=0; i< nlistselect; i++) 
 					 listselect[i]->draw();
+		  
+		  // Draw multiline textareas 
+		  for(i=0; i<nmultiline_textarea; i++) 
+					 multiline_textarea[i]->draw(); 
   
 		  // Draw textareas
 		  for(i=0 ; i< nta; i++) 

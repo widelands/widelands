@@ -122,9 +122,9 @@ int Button::draw(void)
 	needs_draw=false;
 		  	 
 	if(!benlighted || bpressed) {
-		Graph::copy_pic(dp, mybg, x+xp, y+yp, 0, 0, w, h);
+		Graph::copy_pic(dp, mybg, x+xp, y+yp, (x+xp)%w, (y+yp)%h, w, h);
 	} else {
-		Graph::copy_pic(dp, myebg, x+xp, y+yp, 0, 0, w, h);
+		Graph::copy_pic(dp, myebg, x+xp, y+yp, (x+xp)%w, (y+yp)%h, w, h);
 	}
 		 
 
