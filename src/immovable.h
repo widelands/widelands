@@ -127,8 +127,8 @@ public:
 
 	virtual void set_economy(Economy *e);
 
-	void add_worker(Worker *w);
-	void remove_worker(Worker *w);
+	virtual void add_worker(Worker *w);
+	virtual void remove_worker(Worker *w);
 
 protected:
 	void set_owner(Player *owner);

@@ -107,15 +107,15 @@ void Game::run(void)
 This runs a game, including game creation phase.
 Returns true if a game actually took place.
 
-The setup and loading of a game happens (or rather: will happen) in three 
+The setup and loading of a game happens (or rather: will happen) in three
 stages.
 1. First of all, the host (or single player) configures the game. During this
-   time, only short descriptions of the game data (such as map headers )are 
+   time, only short descriptions of the game data (such as map headers )are
 	loaded to minimize loading times.
 2. Once the game is about to start and the configuration screen is finished,
    all logic data (map, tribe information, building information) is loaded
 	during postload.
-2b. If a game is created, initial player positions are set. This step is 
+2b. If a game is created, initial player positions are set. This step is
     skipped when a game is loaded.
 3. After this has happened, the game graphics are loaded.
 ===============
@@ -133,13 +133,13 @@ bool Game::run(void)
 		m_state = gs_running;
 
 		g_gr->flush(PicMod_Menu);
-		
+
 		ipl = new Interactive_Player(this, 1);
       // inform base, that we have something interactive
       set_iabase(ipl);
-      
+
 		postload();
-		
+
 		// Prepare the players (i.e. place HQs)
 		for(int i = 1; i <= get_map()->get_nrplayers(); i++) {
 			Player* player = get_player(i);
@@ -152,15 +152,14 @@ bool Game::run(void)
 			if (player->get_type() == Player::playerLocal)
 				ipl->move_view_to(c.x, c.y);
 		}
-		
-		load_graphics();
-		
-		ipl->run();
 
+		load_graphics();
+
+		ipl->run();
 
 		get_objects()->cleanup(this);
 	   delete ipl;
-		
+
 		g_gr->flush(PicMod_Game);
 		g_anim.flush();
 
@@ -168,7 +167,7 @@ bool Game::run(void)
 	}
 
 	m_state = gs_none;
-	
+
 	return played;
 }
 

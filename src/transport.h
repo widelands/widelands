@@ -239,6 +239,7 @@ public:
 	void postsplit(Editor_Game_Base *g, Flag *flag);
 
 	bool notify_ware(Game* g, FlagId flagid);
+	virtual void remove_worker(Worker *w);
 
 protected:
 	void set_path(Editor_Game_Base *g, const Path &path);
@@ -262,7 +263,8 @@ private:
 	Path		m_path;			// path goes from start to end
 	int		m_idle_index;	// index into path where carriers should idle
 
-	Object_Ptr	m_carrier;	// our carrier
+	uint			m_desire_carriers;	// total # of carriers we want (currently limited to 0 or 1)
+	Object_Ptr	m_carrier;				// our carrier
 	Request*		m_carrier_request;
 };
 

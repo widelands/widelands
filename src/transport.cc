@@ -1230,6 +1230,7 @@ Road::Road()
 	m_type = 0;
 	m_flags[0] = m_flags[1] = 0;
 	m_flagidx[0] = m_flagidx[1] = -1;
+	m_desire_carriers = 0;
 	m_carrier_request = 0;
 }
 
@@ -1440,6 +1441,8 @@ void Road::init(Editor_Game_Base *gg)
 	// Request Carrier
 	Carrier* carrier = (Carrier*)m_carrier.get(g);
 
+	m_desire_carriers = 1;
+
 	if (!carrier) {
 		if (g->is_game() && !m_carrier_request)
 			request_carrier(g);
@@ -1463,6 +1466,8 @@ void Road::cleanup(Editor_Game_Base *gg)
    Game* g = static_cast<Game*>(gg);
 
    // Release carrier
+	m_desire_carriers = 0;
+
 	if (m_carrier_request) {
 		get_economy()->remove_request(m_carrier_request);
 		delete m_carrier_request;
@@ -1526,6 +1531,30 @@ void Road::request_carrier_callback(Game* g, Request* rq, int ware, Worker* w, v
 
 	road->m_carrier = carrier;
 	carrier->set_job_road(g, road);
+}
+
+
+/*
+===============
+Road::remove_worker
+
+If we lost our carrier, re-request it.
+===============
+*/
+void Road::remove_worker(Worker *w)
+{
+	Editor_Game_Base* g = get_owner()->get_game();
+	Carrier* carrier = (Carrier*)m_carrier.get(g);
+
+	if (carrier == w)
+		m_carrier = carrier = 0;
+
+	if (!carrier && !m_carrier_request && m_desire_carriers && g->is_game()) {
+		molog("Road::remove_worker: Request a new carrier\n");
+		request_carrier((Game*)g);
+	}
+
+	PlayerImmovable::remove_worker(w);
 }
 
 

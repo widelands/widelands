@@ -164,6 +164,7 @@ Worker::~Worker()
 {
 }
 
+
 /*
 ===============
 Worker::get_movecaps
@@ -173,6 +174,7 @@ uint Worker::get_movecaps()
 {
 	return MOVECAPS_WALK;
 }
+
 
 /*
 ===============
@@ -223,6 +225,7 @@ void Worker::set_location(PlayerImmovable *location)
 		set_economy(0);
 	}
 }
+
 
 /*
 ===============
@@ -499,6 +502,8 @@ void Worker::cleanup(Editor_Game_Base *g)
 
 	if (get_location(g))
 		set_location(0);
+
+	assert(!get_economy());
 
 	Bob::cleanup(g);
 }
