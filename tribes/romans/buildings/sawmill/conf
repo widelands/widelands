@@ -12,9 +12,11 @@ output=plank
 [inputs]
 log=6
 
+
 [work]
 0=sleep 20000
 1=consume log
+2=produce plank
 
 [buildcost]
 plank=2

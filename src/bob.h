@@ -124,6 +124,8 @@ public: // default tasks
 	bool start_task_movepath(Game* g, const Path& path, int index, DirAnimations* anims, bool forceonlast = false);
 	void start_task_forcemove(Game*, int dir, DirAnimations *anims);
 
+friend class ProductionSite;
+friend class ProductionSite_Descr;
 protected: // higher level handling (task-based)
 	inline State* get_state() { return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0; }
 	inline std::string get_signal() { return m_signal; }

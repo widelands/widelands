@@ -1332,8 +1332,10 @@ struct ProductionAction {
 	enum Type {
 		actSleep,		// iparam1 = sleep time in milliseconds
 		actWorker,		// sparam1 = worker program to run
-      actConsume    // sparam1 = consume this ware, has to be an input
-	};
+      actConsume,    // sparam1 = consume this ware, has to be an input
+      actAnimate,    // sparam1 = activate this animation until timeout
+      actProduce,    // sparem1 = ware to produce. the worker carriers it out of the house
+   };
 
 	Type			type;
 	int			iparam1;
@@ -1356,7 +1358,7 @@ public:
 		return &m_actions[idx];
 	}
 
-	void parse(std::string directory, Profile* prof, std::string name);
+	void parse(std::string directory, Profile* prof, std::string name, ProductionSite_Descr* building);
 
 private:
 	std::string							m_name;
@@ -1379,10 +1381,10 @@ ProductionProgram::ProductionProgram(std::string name)
 ===============
 ProductionProgram::parse
 
-Parse a program.
+Parse a program. The building is parsed completly. hopefully
 ===============
 */
-void ProductionProgram::parse(std::string directory, Profile* prof, std::string name)
+void ProductionProgram::parse(std::string directory, Profile* prof, std::string name, ProductionSite_Descr* building)
 {
 	Section* sprogram = prof->get_safe_section(name.c_str());
 
@@ -1426,9 +1428,16 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
          
          act.type = ProductionAction::actConsume;
          act.sparam1 = cmd[1]; 
-      }
-		else if (cmd[0] == "worker")
-		{
+      } else if (cmd[0] == "produce") {
+         if(cmd.size() != 2) 
+            throw wexception("Line %i: Usage: produce <ware>", idx);
+
+         if(!building->is_output(cmd[1])) 
+            throw wexception("Line %i: Ware %s is not in [outputs]\n", idx, cmd[1].c_str());
+        
+         act.type = ProductionAction::actProduce;
+         act.sparam1 = cmd[1];
+      } else if (cmd[0] == "worker") {
 			if (cmd.size() != 2)
 				throw wexception("Line %i: Usage: worker <program name>", idx);
 
@@ -1511,7 +1520,7 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
 		try
 		{
 			program = new ProductionProgram(string);
-			program->parse(directory, prof, string);
+			program->parse(directory, prof, string, this); 
 			m_programs[program->get_name()] = program;
 		}
 		catch(std::exception& e)
@@ -1762,9 +1771,13 @@ void ProductionSite::act(Game *g, uint data)
             break;
 
          case ProductionAction::actWorker:
+            {
             molog("  Worker(%s)\n", action->sparam1.c_str());
 
+            Worker::State* state=m_worker->get_state();
+            log("---> actWorker: %s, %s\n", m_worker->get_signal().c_str(), state->task->name); 
             m_worker->update_task_buildingwork(g);
+            }
             break;
 
          case ProductionAction::actConsume:
@@ -1782,6 +1795,23 @@ void ProductionSite::act(Game *g, uint data)
             program_step();
             m_program_timer=true;
             m_program_time=schedule_act(g, 10);
+            break;
+
+         case ProductionAction::actProduce:
+            {
+            molog("  Produce(%s)\n", action->sparam1.c_str());
+            int wareid= g->get_safe_ware_id(action->sparam1.c_str());
+            WareInstance* item = new WareInstance(wareid);
+            item->init(g);
+            Worker::State* state=m_worker->get_state();
+            
+            log("---> actProduce: %s, %s\n", m_worker->get_signal().c_str(), state->task->name); 
+            m_worker->set_carried_item(g,item);
+            m_worker->update_task_buildingwork(g);
+            program_step();
+            m_program_timer=true;
+            m_program_time=schedule_act(g,10);
+            }
             break;
       }
    }
