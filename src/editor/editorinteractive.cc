@@ -19,13 +19,15 @@
 
 #include "editor.h"
 #include "editorinteractive.h"
-#include "editor_menus.h"
 #include "editor_tools.h"
 #include "keycodes.h"
 #include "map.h"
 #include "mapview.h"
 #include "player.h"
 #include "ui_button.h"
+#include "editor_main_menu.h"
+#include "editor_tool_menu.h"
+#include "editor_toolsize_menu.h"
 
 /**********************************************
  *

@@ -118,7 +118,7 @@ ADD_CFLAGS += -O3
 endif
 
 ifdef DEBUG
-ADD_CFLAGS += -g -DDEBUG
+ADD_CFLAGS += -g -DDEBUG  -fmessage-length=0
 else
 ADD_CFLAGS += -DNDEBUG
 endif
@@ -156,7 +156,7 @@ clean:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=src src/ui/ui_fs_menus src/ui/ui_basic
+SUBDIRS=src src/ui/ui_fs_menus src/ui/ui_basic src/editor src/editor/ui_menus
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-4 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,41 +17,13 @@
  *
  */
 
-#ifndef __S__EDITOR_MENUS_H
-#define __S__EDITOR_MENUS_H
+#ifndef __S__EDITOR_TOOL_MENU_H
+#define __S__EDITOR_TOOL_MENU_H
 
-#include "editorinteractive.h"
 #include "ui_unique_window.h"
+#include "editorinteractive.h"
 
 class UIRadiogroup;
-class UITextarea;
-
-/*
-=============================
-
-class Editor_Main_Menu
-
-this represents the main menu
-
-=============================
-*/
-class Editor_Main_Menu : public UIUniqueWindow {
-   public:
-      Editor_Main_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
-      virtual ~Editor_Main_Menu();
-
-   private:
-      Editor_Interactive *m_parent;
-
-		UIUniqueWindowRegistry		m_window_readme;
-
-      void exit_btn();
-      void load_btn();
-      void save_btn();
-      void new_map_btn();
-      void map_options_btn();
-      void readme_btn();
-};
 
 /*
 =============================
@@ -78,29 +50,4 @@ class Editor_Tool_Menu : public UIUniqueWindow {
       void changed_to(void);
 };
 
-
-/*
-=============================
-
-class Editor_Toolsize_Menu
-
-This class is the tool selection window/menu.
-Here, you can select the tool you wish to use the next time
-
-=============================
-*/
-
-class Editor_Toolsize_Menu : public UIUniqueWindow {
-   public:
-      Editor_Toolsize_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
-      virtual ~Editor_Toolsize_Menu();
-
-   private:
-      void button_clicked(int);
-
-      Editor_Interactive* m_parent;
-      UITextarea* m_textarea;
-};
-
-
-#endif // __S__EDITOR_MENUS_H
+#endif
