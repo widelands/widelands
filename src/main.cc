@@ -189,7 +189,8 @@ void g_main(int argc, char** argv)
 
 								switch(om->get_gfxsys()) {
 								case GFXSYS_SW16: s->set_string("gfxsys", "sw16"); break;
-								case GFXSYS_SW32: s->set_string("gfxsys", "sw32"); break;
+//								case GFXSYS_SW32: s->set_string("gfxsys", "sw32"); break;
+                        default: wexception("Unknown graphic system is set!!");
 								}
 
                         Sys_SetInputGrab(om->get_inputgrab());

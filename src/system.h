@@ -40,7 +40,7 @@ enum { // use 1<<MOUSE_xxx for bitmasks
 enum { // which graphics subsystem to use
 	GFXSYS_NONE = 0,
 	GFXSYS_SW16,			// software, 16-bit depth
-	GFXSYS_SW32,			// software, 32-bit depth
+	GFXSYS_SW32,			// software, 32-bit depth IS CURRENTLY DISABLED
 };
 
 

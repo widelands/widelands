@@ -20,6 +20,12 @@
 Management classes and functions of the 32-bit software renderer.
 */
 
+#if 0
+
+
+******THIS IS CURRENTLY DISABLED ******
+
+
 #include <SDL_image.h>
 #include <string>
 #include "bob.h"
@@ -1675,3 +1681,5 @@ Graphic* SW32_CreateGraphics(int w, int h, bool fullscreen)
 {
 	return new Renderer_Software32::GraphicImpl(w, h, fullscreen);
 }
+
+#endif

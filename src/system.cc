@@ -853,7 +853,7 @@ Note: Because of the way pictures are handled now, this function must not be
 ===============
 */
 Graphic* SW16_CreateGraphics(int w, int h, bool fullscreen);
-Graphic* SW32_CreateGraphics(int w, int h, bool fullscreen);
+// Graphic* SW32_CreateGraphics(int w, int h, bool fullscreen);  <-- This is currently disabled
 void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 {
 	if (system == sys.gfx_system && w == sys.gfx_w && h == sys.gfx_h && fullscreen == sys.gfx_fullscreen)
@@ -876,9 +876,9 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 			g_gr = SW16_CreateGraphics(w, h, fullscreen);
 			break;
 
-		case GFXSYS_SW32:
-			g_gr = SW32_CreateGraphics(w, h, fullscreen);
-			break;
+//		case GFXSYS_SW32:
+//			g_gr = SW32_CreateGraphics(w, h, fullscreen);
+//			break;
 		}
 
 	Sys_SetMaxMouseCoords(w, h);

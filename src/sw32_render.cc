@@ -16,6 +16,11 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
+
+#if 0
+
+***** CURRENTLY DISABLED ********
+
 /*
 Rendering functions of the 32-bit software renderer.
 */
@@ -617,4 +622,7 @@ void AnimationGfx::encode(AnimFrame* frame, SDL_Surface* bmp, const EncodeData* 
 }
 
 } // namespace Renderer_Software32
+
+#endif
+
 
