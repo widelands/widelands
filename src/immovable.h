@@ -72,13 +72,13 @@ public:
 	inline const char* get_name(void) { return m_name; }
 	inline uint get_anim(void) { return m_anim; }
 	inline int get_size(void) { return m_size; }
-   inline uint get_picture(void) { return m_picture; }
+   inline const char*  get_picture(void) { return m_picture.c_str(); }
 
 	void parse(const char *directory, Profile *s);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
 protected:
-	uint     m_picture;
+   std::string m_picture;
    char		m_name[30];
 	uint		m_anim; // the default animation
 	int		m_size;

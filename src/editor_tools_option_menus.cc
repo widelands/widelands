@@ -344,7 +344,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    while(i<=nr_textures) {
       if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
 
-      m_radiogroup->add_button(this, xpos , ypos, get_graphicimpl()->get_maptexture_data(i)->get_texture_picture());
+      m_radiogroup->add_button(this, xpos , ypos, g_gr->get_picture(PicMod_Game, get_graphicimpl()->get_maptexture_data(i)->get_texture_picture()));
 
       xpos+=TEXTURE_W+1+space;
       ++cur_x;
@@ -425,7 +425,9 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
    int height=0;
    for(int j=0; j<nr_immovables; j++) {
       int w,h;
-      g_gr->get_picture_size(get_parent()->get_map()->get_world()->get_immovable_descr(j)->get_picture(), &w, &h);
+      g_gr->get_picture_size(
+            g_gr->get_picture(PicMod_Game, get_parent()->get_map()->get_world()->get_immovable_descr(j)->get_picture(),
+                              g_anim.get_animation(get_parent()->get_map()->get_world()->get_immovable_descr(j)->get_anim())->encdata.clrkey), &w, &h);
       if(w>width) width=w;
       if(h>height) height=h;
    }
@@ -446,7 +448,10 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
          m_tabpanel->add(g_gr->get_picture(PicMod_Game, "pics/menu_tab_buildbig.png" , RGBColor(0,0,255)), box);
       }
 
-      Checkbox* cb= new Checkbox(box, xpos, ypos, get_parent()->get_map()->get_world()->get_immovable_descr(i)->get_picture()); 
+      Checkbox* cb= new Checkbox(box, xpos, ypos, 
+            g_gr->get_picture(PicMod_Game, get_parent()->get_map()->get_world()->get_immovable_descr(i)->get_picture(), 
+               g_anim.get_animation(get_parent()->get_map()->get_world()->get_immovable_descr(i)->get_anim())->encdata.clrkey));
+
       cb->set_size(width, height);
       cb->set_id(i);
       cb->set_state(m_pit->is_enabled(i));

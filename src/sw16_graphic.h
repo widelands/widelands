@@ -133,13 +133,13 @@ private:
 	unsigned char*		m_pixels;
 	uint					m_frametime;
 	unsigned char*		m_curframe;
-   uint              m_texture_picture;
+   std::string    m_texture_picture;
 
 public:
 	Texture (const char* fnametempl, uint frametime);
 	~Texture ();
 
-   inline uint get_texture_picture(void) { return m_texture_picture; }
+   inline const char* get_texture_picture(void) { return m_texture_picture.c_str(); }
    
 	unsigned char *get_pixels () const { return m_pixels; }
 	unsigned char* get_curpixels() const { return m_curframe; }
