@@ -78,8 +78,8 @@ class Interactive_Base : public Panel {
       inline MiniMapView* get_minimapview() { return m_minimapview; }
       inline Map_View* get_mapview() { return m_mapview; }
     
-      void set_fsel(const char* file) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); }
-      void unset_fsel(void) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, "pics/fsel.bmp", RGBColor(0,0,255)); }
+      void set_fsel_picture(const char* file) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); }
+      void unset_fsel_picture(void) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, "pics/fsel.bmp", RGBColor(0,0,255)); }
 
          
       // cart rendering stuff. this is still protected since this is 

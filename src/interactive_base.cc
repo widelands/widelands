@@ -57,7 +57,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 	
    
    set_fieldsel_radius(0);
-   unset_fsel(); // set default fsel
+   unset_fsel_picture(); // set default fsel
 }
 
 /*
@@ -149,17 +149,17 @@ void Interactive_Base::think()
  */
 void Interactive_Base::mainview_move(int x, int y)
 {
-	if (get_minimapview()) {
-		int maxx = MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
-		int maxy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
+   if (get_minimapview()) {
+      int maxx = MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
+      int maxy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
 
-		x += get_mapview()->get_w()>>1;
-		if (x >= maxx) x -= maxx;
-		y += get_mapview()->get_h()>>1;
-		if (y >= maxy) y -= maxy;
+      x += get_mapview()->get_w()>>1;
+      if (x >= maxx) x -= maxx;
+      y += get_mapview()->get_h()>>1;
+      if (y >= maxy) y -= maxy;
 
-		get_minimapview()->set_view_pos(x, y);
-	}
+      get_minimapview()->set_view_pos(x, y);
+   }
 }
 
 /** Interactive_Base::minimap_warp(int x, int y)

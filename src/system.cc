@@ -227,9 +227,13 @@ void Sys_Init()
 		Sys_SetMouseSwap(s->get_bool("swapmouse", false));
 		Sys_SetMouseSpeed(s->get_float("mousespeed", 1.0));
 
-		if (SDL_Init(SDL_INIT_VIDEO) < 0)
+#ifdef NO_PARACHUTE
+      if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE) < 0)
 			throw wexception("Failed to initialize SDL: %s", SDL_GetError());
-
+#else
+      if (SDL_Init(SDL_INIT_VIDEO) < 0)
+			throw wexception("Failed to initialize SDL: %s", SDL_GetError());
+#endif
 		sys.active = true;
 		
 		SDL_ShowCursor(SDL_DISABLE);

@@ -309,7 +309,7 @@ Editor_Interactive::~Editor_Interactive() {
       delete tools.tools.back();
       tools.tools.pop_back();
    }
-   unset_fsel(); // reset default fsel
+   unset_fsel_picture(); // reset default fsel
 }
 
 /*
@@ -477,7 +477,6 @@ Open the minimap or close it if it's open
 void Editor_Interactive::toggle_minimap() {
 	if (m_minimap.window) {
 		delete m_minimap.window;
-      set_minimapview(0);
    }
 	else {
 		MiniMap *mm = new MiniMap(this, &m_minimap);
@@ -581,7 +580,7 @@ void Editor_Interactive::select_tool(int n, bool new_default_tool) {
    tools.last_tool=tools.current_tool;
    tools.current_tool=n;
 
-   set_fsel(tools.tools[n]->tool->get_fsel());
+   set_fsel_picture(tools.tools[n]->tool->get_fsel());
 
    if(new_default_tool) {
       tools.last_tool=-1;

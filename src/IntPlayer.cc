@@ -229,7 +229,6 @@ void Interactive_Player::minimap_btn()
 {
 	if (m_minimap.window) {
 		delete m_minimap.window;
-      set_minimapview(0);
    }
 	else {
 		MiniMap *mm = new MiniMap(this, &m_minimap);

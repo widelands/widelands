@@ -180,4 +180,5 @@ MiniMap::~MiniMap()
 		m_registry->y = get_y();
 		m_registry->window = 0;
 	}
+   delete m_view;
 }

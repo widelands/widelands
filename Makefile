@@ -36,6 +36,7 @@ ADD_CFLAGS:=
 ADD_LDFLAGS:=
 
 # Different build-types:
+#  debug-no-parachute optimized, debugging symbols, disable SDLs parachute 
 #  debug-slow debugging symbols
 #  debug      optimized, debugging symbols
 #  release    optimized
@@ -99,9 +100,16 @@ else
 ifeq ($(BUILD),debug-slow)
 DEBUG:=yes
 else
+ifeq ($(BUILD),debug)
 BUILD:=debug
 OPTIMIZE:=yes
 DEBUG:=yes
+else
+BUILD:=debug-no-parachute
+OPTIMIZE:=YES
+DEBUG:=YES
+ADD_CFLAGS:=-DNO_PARACHUTE
+endif
 endif
 endif
 endif

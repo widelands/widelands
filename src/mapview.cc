@@ -128,7 +128,7 @@ void Map_View::draw(RenderTarget* dst)
  */
 void Map_View::set_viewpoint(int x, int y)
 {
-	if (vpx == x && vpy == y)
+   if (vpx == x && vpy == y)
 		return;
 
 	vpx=x; vpy=y;
@@ -178,9 +178,9 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
  */
 void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
-	if (!(btns & (1<<MOUSE_RIGHT)))
+   if (!(btns & (1<<MOUSE_RIGHT)))
 		dragging = false;
-
+   
 	if (dragging)
 	{
 		set_rel_viewpoint(xdiff, ydiff);
