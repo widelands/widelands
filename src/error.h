@@ -53,6 +53,8 @@ void log(const char *, ...) PRINTF_FORMAT(1,2);
 
 #ifdef DEBUG
    #ifndef KEEP_STANDART_ASSERT
+		#include "wexception.h"
+
       #ifdef assert
          #undef assert
       #endif
