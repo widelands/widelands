@@ -86,6 +86,7 @@ struct Bitmap {
 
 	// sw32_terrain.cc
 	void draw_field(Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+			Field * const lf, Field * const ft,
 	                const int posx, const int rposx, const int posy,
 	                const int blposx, const int rblposx, const int blposy,
 	                uchar roads, bool render_r, bool render_b);

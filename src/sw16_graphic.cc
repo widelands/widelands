@@ -705,7 +705,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 
 				roads |= mri->overlay_roads[f.y*mapwidth + f.x];
 
-				dst.draw_field(f.field, r.field, bl.field, br.field,
+				dst.draw_field(f.field, r.field, bl.field, br.field, l.field, tr.field,
 						posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
 			}
 

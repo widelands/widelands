@@ -46,36 +46,19 @@ Colormap
 /** Colormap::Colormap
  *
  * Create a new Colormap, taking the palette as a parameter.
- * It automatically creates the rgbmap and the colormap for
- * 16-to-8-bit conversion and shading.
+ * It automatically creates the colormap for shading.
  */
 Colormap::Colormap (const SDL_Color *pal)
 {
-   int i,j,r,g,b;
+	int i,j,r,g,b;
 
 	memcpy(palette, pal, sizeof(palette));
 	
-   colormap=new unsigned short[65536];
+	colormap=new unsigned short[65536];
    
 //    log ("Creating color map\n");
 	for (i=0;i<256;i++)
 		for (j=0;j<256;j++) {
-			// Old shading method
-/*			char shade=j;
-
-			r=(palette[i].r+shade)>>3;
-			g=(palette[i].g+shade)>>2;
-			b=(palette[i].b+shade)>>3;
-
-			if (r<0) r=0;
-			if (r>31) r=31;
-
-			if (g<0) g=0;
-			if (g>63) g=63;
-
-			if (b<0) b=0;
-			if (b>31) b=31;*/
-
 			int shade=(j<128)?j:(j-256);
 			shade=256+2*shade;
 
@@ -151,7 +134,7 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 		// Load it
 		SDL_Surface* surf;
 
-      m_texture_picture =fname;
+		m_texture_picture =fname;
 
 		try
 		{
@@ -281,12 +264,12 @@ TERRAIN RENDERING
     with u=(u1 u2)^T and v=(v1 v2)^T */
 static inline void get_horiz_linearcomb (int u1, int u2, int v1, int v2, float& lambda, float& mu)
 {
-    float det;
+	float det;
     
-    det=u1*v2 - u2*v1;		// determinant of (u v)
+	det=u1*v2 - u2*v1;	// determinant of (u v)
     
-    lambda=v2/det;		// by Cramer's rule
-    mu=-u2/det;
+	lambda=v2/det;		// by Cramer's rule
+	mu=-u2/det;
 }
 
 static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y2)
@@ -484,6 +467,175 @@ static void render_triangle (Bitmap *dst,Vertex *p1,Vertex *p2,Vertex *p3, Textu
 }
 
 
+/*  dither_edge_horiz and dither_edge_vert:
+
+    Blur the polygon edge between vertices start and end.
+    It is dithered by randomly placing points taken from the
+    texture of the adjacent polygon.
+    The blend area is a few pixels wide, and the chance for replacing
+    a pixel depends on the distance from the center line.
+    Texture coordinates and brightness are interpolated across the center
+    line (outer loop). To the sides these are approximated (inner loop):
+    Brightness is kept constant, and the texture is mapped orthogonally
+    to the center line. It is important that only those pixels are drawn
+    whose texture actually changes in order to minimize artifacts.
+    
+    Note that all this is preliminary and subject to change.
+    For example, a special edge texture could be used instead of
+    stochastically dithering. Road rendering could be handled as a
+    special case then.
+*/
+
+#define DITHER_WIDTH		4
+// DITHER_WIDTH must be a power of two
+
+#define DITHER_RAND_MASK	(DITHER_WIDTH*2-1)
+#define DITHER_RAND_SHIFT	(16/DITHER_WIDTH)
+
+static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& end, Texture* ttex, Texture* btex)
+{
+	unsigned char *tpixels, *bpixels;
+	unsigned short *tcolormap, *bcolormap;
+	
+	tpixels=ttex->get_curpixels();
+	tcolormap=ttex->get_colormap();
+	bpixels=btex->get_curpixels();
+	bcolormap=btex->get_colormap();
+	
+	int tx,ty,b,dtx,dty,db,tx0,ty0;
+	
+	tx=itofix(start.tx);
+	ty=itofix(start.ty);
+	b=itofix(start.b);
+	dtx=(itofix(end.tx)-tx) / (end.x-start.x+1);
+	dty=(itofix(end.ty)-ty) / (end.x-start.x+1);
+	db=(itofix(end.b)-b) / (end.x-start.x+1);
+
+	unsigned long rnd=0x726C9F4B;
+
+	int dstw = dst->w;
+	int dsth = dst->h;
+
+	int ydiff = itofix(end.y - start.y) / (end.x - start.x);
+	int centery = itofix(start.y);
+
+	for(int x = start.x; x < end.x; x++, centery += ydiff) {
+		if (x>=0 && x<dstw) {
+			int y = fixtoi(centery) - DITHER_WIDTH;
+		
+			tx0=tx - DITHER_WIDTH*dty;
+			ty0=ty + DITHER_WIDTH*dtx;
+		
+			unsigned long rnd0=rnd;
+
+			// dither above the edge
+			for (unsigned int i = 0; i < DITHER_WIDTH; i++, y++) {
+				if ((rnd0&DITHER_RAND_MASK)<=i && y>=0 && y<dsth) {
+					ushort *pix = dst->pixels + y*dst->pitch + x;
+					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
+					*pix=tcolormap[tpixels[texel] | ((b>>8)&0xFF00)];
+				}
+			
+				tx0+=dty;
+				ty0-=dtx;
+				rnd0>>=DITHER_RAND_SHIFT;
+			}
+		
+			// dither below the edge
+			for (unsigned int i = 0; i < DITHER_WIDTH; i++, y++) {
+				if ((rnd0&DITHER_RAND_MASK)>=i+DITHER_WIDTH && y>=0 && y<dsth) {
+				    ushort *pix = dst->pixels + y*dst->pitch + x;
+				    int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
+				    *pix=bcolormap[bpixels[texel] | ((b>>8)&0xFF00)];
+				}
+			
+				tx0+=dty;
+				ty0-=dtx;
+				rnd0>>=DITHER_RAND_SHIFT;
+			}
+		}
+		
+		tx+=dtx;
+		ty+=dty;
+		b+=db;
+		
+		rnd=(rnd<<2) + rnd + 0x1C4035;		// linear congruent generator
+	}
+}
+
+
+static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& end, Texture* ltex, Texture* rtex)
+{
+	unsigned char *lpixels, *rpixels;
+	unsigned short *lcolormap, *rcolormap;
+	
+	lpixels=ltex->get_curpixels();
+	lcolormap=ltex->get_colormap();
+	rpixels=rtex->get_curpixels();
+	rcolormap=rtex->get_colormap();
+	
+	int tx,ty,b,dtx,dty,db,tx0,ty0;
+	
+	tx=itofix(start.tx);
+	ty=itofix(start.ty);
+	b=itofix(start.b);
+	dtx=(itofix(end.tx)-tx) / (end.y-start.y+1);
+	dty=(itofix(end.ty)-ty) / (end.y-start.y+1);
+	db=(itofix(end.b)-b) / (end.y-start.y+1);
+
+	unsigned long rnd=0x726C9F4B;
+
+	int dstw = dst->w;
+	int dsth = dst->h;
+
+	int xdiff = itofix(end.x - start.x) / (end.y - start.y);
+	int centerx = itofix(start.x);
+	
+	for(int y = start.y; y < end.y; y++, centerx += xdiff) {
+		if (y>=0 && y<dsth) {
+			int x = fixtoi(centerx) - DITHER_WIDTH;
+		
+			tx0=tx - DITHER_WIDTH*dty;
+			ty0=ty + DITHER_WIDTH*dtx;
+		
+			unsigned long rnd0=rnd;
+
+			// dither on left side
+			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
+				if ((rnd0&DITHER_RAND_MASK)<=i && x>=0 && x<dstw) {
+					ushort *pix = dst->pixels + y*dst->pitch + x;
+					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
+					*pix=lcolormap[lpixels[texel] | ((b>>8)&0xFF00)];
+				}
+			
+				tx0+=dty;
+				ty0-=dtx;
+				rnd0>>=DITHER_RAND_SHIFT;
+			}
+		
+			// dither on right side
+			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
+				if ((rnd0 & DITHER_RAND_MASK)>=i+DITHER_WIDTH && x>=0 && x<dstw) {
+					ushort *pix = dst->pixels + y*dst->pitch + x;
+					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
+					*pix=rcolormap[rpixels[texel] | ((b>>8)&0xFF00)];
+				}
+			
+				tx0+=dty;
+				ty0-=dtx;
+				rnd0>>=DITHER_RAND_SHIFT;
+			}
+		}
+		
+		tx+=dtx;
+		ty+=dty;
+		b+=db;
+		
+		rnd=(rnd<<2) + rnd + 0x1C4035;		// linear congruent generator
+	}
+}
+
+
 /*
 ===============
 render_road_horiz
@@ -492,7 +644,7 @@ render_road_vert
 Render a road. This is really dumb right now, not using a texture
 ===============
 */
-static void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color)
+static void render_road_horiz(Bitmap *dst, const Point& start, const Point& end, ushort color)
 {
 	int dstw = dst->w;
 	int dsth = dst->h;
@@ -516,7 +668,7 @@ static void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color)
 	}
 }
 
-static void render_road_vert(Bitmap *dst, Point start, Point end, ushort color)
+static void render_road_vert(Bitmap *dst, const Point& start, const Point& end, ushort color)
 {
 	int dstw = dst->w;
 	int dsth = dst->h;
@@ -550,6 +702,7 @@ into the bitmap.
 ===============
 */
 void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+			Field * const lf, Field * const ft,
 	                const int posx, const int rposx, const int posy, 
 	                const int blposx, const int rblposx, const int blposy, 
 	                uchar roads, bool render_r, bool render_b)
@@ -569,22 +722,18 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 //	render_r=false; // debug overwrite: just render b triangle
 //	render_b=false; // debug overwrite: just render r triangle
 
-	// Render right triangle
-	if(render_r) {
-		Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
-		
-		if (tex)
-			render_triangle(this, &r, &l, &br, tex);
-	}
+	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
+	if(render_r && rtex)
+		render_triangle(this, &r, &l, &br, rtex);
 
-	if(render_b) {
-		Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
-		
-		if (tex)
-			render_triangle(this, &l, &br, &bl, tex);
-	}
+	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
+	if(render_b && btex)
+		render_triangle(this, &l, &br, &bl, btex);
 
-	// Render roads
+	Texture* ltex = get_graphicimpl()->get_maptexture_data(lf->get_terr()->get_texture());
+	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd()->get_texture());
+
+	// Render roads and dither polygon edges
 	ushort color;
 	uchar road;
 
@@ -598,7 +747,10 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 			color = RGBColor(0, 0, 128).pack16();
 		render_road_horiz(this, l, r, color);
 	}
+	else if (render_r && rtex!=0 && ttex!=0 && rtex!=ttex)
+		dither_edge_horiz(this, l, r, rtex, ttex);
 
+	// FIXME: this will try to work on some undiscovered terrain
 	road = (roads >> Road_SouthEast) & Road_Mask;
 	if (road) {
 		if (road == Road_Normal)
@@ -609,6 +761,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 			color = RGBColor(0, 0, 128).pack16();
 		render_road_vert(this, l, br, color);
 	}
+	else if (rtex!=0 && btex!=0 && rtex!=btex)
+		dither_edge_vert(this, l, br, rtex, btex);
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
 	if (road) {
@@ -620,6 +774,10 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 			color = pack_rgb(0, 0, 128);
 		render_road_vert(this, l, bl, color);
 	}
+	else if (ltex!=0 && btex!=0 && ltex!=btex)
+		dither_edge_vert(this, l, bl, btex, ltex);
+	
+	// FIXME: similar textures may not need dithering
 }
 
 
