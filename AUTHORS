@@ -1,12 +1,27 @@
 Widelands Development Team
 --------------------------
-Maintainer, Programmer: Holger Rapp <SirVer@gmx.de>
-Win32 Programmer: Florian Bluemel <sintflut@gmx.net>
-Programmer: Nicolai Haehnle <prefect@rtts.org>
+Maintainer, Programmer: 
+   Holger Rapp <SirVer@gmx.de>
+   Nicolai Haehnle <prefect@rtts.org>
 
+Programmer:
+   Stefan Boettner <stefanb@upb.de>
+   
+Artist Maintainer:
+   Hackbird <hackbird@t-online.de>
+
+Artists:
+   Delia <delia@subsigillo.de>
+   Marz <margodofwar_au@yahoo.com.au>
+   
+Win32 Programmer (no longer active): Florian Bluemel <sintflut@gmx.net>
 Artist (no longer active): Mats Olsson <mats.olsson@proventek.com>
-Artist: Albert Jasiowka 
 
 Contributors - Graphics
 -----------------------
-Florian Neuerburg <spike_fn@web.de>
+Florian Neuerburg
+
+Contributors - Patches
+----------------------
+Willem Jan Palenstijn
+
