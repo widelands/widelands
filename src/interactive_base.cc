@@ -131,7 +131,6 @@ void Interactive_Base::set_fieldsel_pos(Coords c)
    while(mr.next(&fc)) { 
       get_map()->get_overlay_manager()->register_overlay(fc, m_fsd.fieldsel_pic, 7, Coords(-1,-1), m_fsd.fieldsel_jobid);
    }
-   
 }
          
 /*

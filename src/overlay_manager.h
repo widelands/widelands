@@ -27,6 +27,23 @@
 
 class Map;
 
+// TODO: move this to cc file
+// This is private to this file
+enum {
+	Overlay_Frontier_Base = 0,	// add the player number to mark a border field
+	Overlay_Frontier_Max = 15,
+
+	Overlay_Build_Flag = 16,
+	Overlay_Build_Small,
+	Overlay_Build_Medium,
+	Overlay_Build_Big,
+	Overlay_Build_Mine,
+
+	Overlay_Build_Min = Overlay_Build_Flag,
+	Overlay_Build_Max = Overlay_Build_Mine,
+};
+
+
 /*
  * The Overlay Manager is responsible for the map overlays. He 
  * manages overlays in the following way:
@@ -82,16 +99,45 @@ class Overlay_Manager {
       void remove_overlay(Coords c, int picid=-1); // if picid == -1 remove all overlays
       void remove_overlay(int jobid);              // remove by jobid
 
-      int get_overlays(FCoords c, Overlay_Info* overlays);
-
+      int get_overlays(FCoords& c, Overlay_Info* overlays);
+      
       void show_buildhelp(bool t) { m_showbuildhelp= t; }
       void toggle_buildhelp(void) { m_showbuildhelp=!m_showbuildhelp; } 
      
       void recalc_field_overlays(FCoords& f, FCoords* neighbours);
-      uchar get_overlay_fields(int i) { return m_overlay_fields[i]; } // TODO: remove me
 
-      // void recalc_in_between_overlays(); 
       //      void register_road_overlay(); 
+
+      // functions for border. This could be generalized with "in between overlays"
+      // but there do not exist any more (yet?). For now, handling borders for themself
+      // is ok. this functions are inlined for speed and must be called in a row.
+      // calling them in a different order results in undefined behaviour
+      inline int is_frontier_field(Coords& fc) {
+         // index pointer and m_overlay_basic are invalid
+         m_index_pointer=fc.y*m_w + fc.x;
+         m_overlay_basic = m_overlay_fields[m_index_pointer];
+         if (m_overlay_basic > Overlay_Frontier_Base && m_overlay_basic <= Overlay_Frontier_Max) 
+            return (m_overlay_basic - Overlay_Frontier_Base);
+         return 0;
+      }
+      inline uchar draw_border_to_right(Coords& fc) {
+         // index pointer points to field, m_overlay_basic should be valid
+         int index=m_index_pointer;
+         if(fc.x==m_w-1) { index-=fc.x; } else { ++index; } // right neighbour
+         if(m_overlay_fields[index] == m_overlay_basic) return true; 
+         return false;
+      }
+      inline uchar draw_border_to_bottom_left(Coords& fc) {
+         // index pointer points to field, m_overlay_basic should be valid         
+         m_index_pointer+=m_w; // increase by one row
+         if(fc.y == m_h-1) m_index_pointer=fc.x;
+         if(!(fc.y & 1)) {
+            m_index_pointer-=1;
+            if(fc.x==0) m_index_pointer+=m_w;
+         }
+         if(m_overlay_fields[m_index_pointer] == m_overlay_basic) return true;
+         return false;
+      }
 
    private:
       // this is always sorted by (x<<8)+y. a unique coordinate which is sortable 
@@ -112,30 +158,16 @@ class Overlay_Manager {
       int m_w, m_h;
       Overlay_Callback_Function m_callback;           // this callback is used to define we're overlays are set and were not
                                                       // since we only care for map stuff, not for player stuff or editor issues
-      int m_cur_jobid;                                // current job id
-      
       void *m_callback_data;
-
+      int m_cur_jobid;                                // current job id
+      int m_index_pointer;                            // used for frontier drawing
+      uchar m_overlay_basic;                          // used for frontier drawing too
+      
       // functions
       void load_graphics();
+      inline int get_build_overlay(FCoords& c, Overlay_Info* overlays, int i);
 };
 
-
-// TODO: move this to cc file
-// This is private to this file
-enum {
-	Overlay_Frontier_Base = 0,	// add the player number to mark a border field
-	Overlay_Frontier_Max = 15,
-
-	Overlay_Build_Flag = 16,
-	Overlay_Build_Small,
-	Overlay_Build_Medium,
-	Overlay_Build_Big,
-	Overlay_Build_Mine,
-
-	Overlay_Build_Min = Overlay_Build_Flag,
-	Overlay_Build_Max = Overlay_Build_Mine,
-};
 
 
 

@@ -17,6 +17,7 @@
  *
  */
 
+#include <algorithm>
 #include "overlay_manager.h"
 #include "graphic.h"
 #include "field.h"
@@ -48,7 +49,7 @@ Overlay_Manager::~Overlay_Manager(void) {
  * return the currently registered overlays
  * or the standart help.
  */
-int Overlay_Manager::get_overlays(FCoords c, Overlay_Info* overlays) {
+int Overlay_Manager::get_overlays(FCoords& c, Overlay_Info* overlays) {
    if(!m_are_graphics_loaded) load_graphics();
 
    int num_ret=0;
@@ -58,29 +59,50 @@ int Overlay_Manager::get_overlays(FCoords c, Overlay_Info* overlays) {
    int nov=0;
    if((nov=m_overlays.count(fieldindex))) {
       // there are overlays registered 
-      // TODO: care for levels
       std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex);
-      do {
+      while(i->first==fieldindex && i->second.level<=5) {   
          overlays[num_ret].picid=i->second.picid;
          overlays[num_ret].hotspot_x=i->second.hotspot_x;
          overlays[num_ret].hotspot_y=i->second.hotspot_y;
          ++num_ret;
          ++i;
-
-      } while(i->first==fieldindex);
+      } 
+   
+      // now overlays
+      num_ret+=get_build_overlay(c,overlays,num_ret);
+     
+      while(i->first==fieldindex) {
+         overlays[num_ret].picid=i->second.picid;
+         overlays[num_ret].hotspot_x=i->second.hotspot_x;
+         overlays[num_ret].hotspot_y=i->second.hotspot_y;
+         ++num_ret;
+         ++i;
+      }
+      return num_ret;
    }
 
+   // no overlays, this will be most common
+   num_ret+=get_build_overlay(c,overlays,num_ret);
+   return num_ret;
+}
+
+/*
+ * get the build overlays
+ *
+ * returns one if a overlay was set
+ */
+inline int Overlay_Manager::get_build_overlay(FCoords& c, Overlay_Info* overlays, int i) {
    uchar overlay_field = m_overlay_fields[c.y*m_w+c.x];  
    if(m_showbuildhelp && overlay_field >= Overlay_Build_Min &&
          overlay_field <= Overlay_Build_Max) {
       int build_overlay = overlay_field - Overlay_Build_Min;
 
-      overlays[num_ret]=m_buildhelp_infos[build_overlay];
-      ++num_ret;
+      overlays[i]=m_buildhelp_infos[build_overlay];
+      return 1;
    }
-
-   return num_ret;
+   return 0;
 }
+      
 
 /*
  * remove all registered overlays. The Overlay_Manager 
@@ -196,6 +218,7 @@ void Overlay_Manager::recalc_field_overlays(FCoords& fc, FCoords* neighbours) {
 void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords hot_spot, int jobid) {
    assert(static_cast<uint>(c.x)<=0xffff);
    assert(static_cast<uint>(c.y)<=0xffff);
+   assert(level!=5); // level == 5 is undefined behavior
 
    int fieldindex=(c.y<<8)+c.x;
    if(m_overlays.count(fieldindex)) {
@@ -223,6 +246,29 @@ void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords ho
    };
 
    m_overlays.insert(std::pair<int,Registered_Overlays>(fieldindex, info));
+
+   // Now manually sort, so that they are ordered 
+   //  * first by fieldindex (done by std::multimap)
+   //  * second by levels (done manually here)
+   std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex); // theres at least one registered
+   std::map<int, Registered_Overlays>::iterator j; 
+   do {
+      j=i;
+      ++j;
+      
+      if(j->first==i->first) {
+         // there are more elements registered
+         if(j->second.level > i->second.level) {
+            std::swap<Overlay_Manager::Registered_Overlays>(i->second,j->second);
+            i=m_overlays.lower_bound(fieldindex);
+         } else {
+            ++i;
+         }
+      } else {
+         // i is the last element, break this loop
+         break;
+      }
+   } while(i->first==fieldindex);
 }
 
 /*

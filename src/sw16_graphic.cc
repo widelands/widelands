@@ -504,54 +504,27 @@ Draw build help (buildings and roads)
 static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
                  FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr)
 {
-	int mapwidth = mri->egbase->get_map()->get_width();
-	int icon;
-
 	// Render frontier
-	uchar overlay_basic = mri->egbase->get_map()->get_overlay_manager()->get_overlay_fields(fc.y*mapwidth + fc.x);
-	if (overlay_basic > Overlay_Frontier_Base && overlay_basic <= Overlay_Frontier_Max)
-	{
-		Player *ownerplayer = mri->egbase->get_player(overlay_basic - Overlay_Frontier_Base);
-		uint anim = ownerplayer->get_tribe()->get_frontier_anim();
-		const RGBColor* playercolors = ownerplayer->get_playercolor();
-		uchar ovln;
+   uchar player;
+   if((player=mri->egbase->get_map()->get_overlay_manager()->is_frontier_field(fc))) {
+      Player *ownerplayer = mri->egbase->get_player(player); 
+      uint anim = ownerplayer->get_tribe()->get_frontier_anim();
+      const RGBColor* playercolors = ownerplayer->get_playercolor();
 
-		dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
+      dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
 
-		// check to the right
-		ovln =  mri->egbase->get_map()->get_overlay_manager()->get_overlay_fields(fcr.y*mapwidth + fcr.x);
-		if (ovln == overlay_basic)
-			dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
-
-		// check to the bottom left
-		ovln =  mri->egbase->get_map()->get_overlay_manager()->get_overlay_fields(fcbl.y*mapwidth + fcbl.x);
-		if (ovln == overlay_basic)
-			dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
-
-		// check to the bottom right
-		ovln =  mri->egbase->get_map()->get_overlay_manager()->get_overlay_fields(fcbr.y*mapwidth + fcbr.x);
-		if (ovln == overlay_basic)
-			dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
-	}
-
-	/* Draw normal buildhelp 
-	if (mri->show_buildhelp && overlay_basic >= Overlay_Build_Min &&
-	    overlay_basic <= Overlay_Build_Max) {
-		int x, y;
-
-		icon = overlay_basic - Overlay_Build_Min;
-		picid = get_graphicimpl()->get_gameicons()->pics_build[icon];
-
-		g_gr->get_picture_size(picid, &w, &h);
-
-		x = pos.x - (w>>1);
-		if (overlay_basic == Overlay_Build_Flag)
-			y = pos.y - h;
-		else
-			y = pos.y - (h>>1);
-
-		dst->blit(x, y, picid);
-	}*/
+      // check to the right
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc)) 
+         dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
+      // check to the bottom left 
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc)) 
+         dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
+      // check to the bottom right
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl)) 
+         dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
+   }
+   
+	// Draw normal buildhelp 
    Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_FIELD];
    int num_overlays=mri->egbase->get_map()->get_overlay_manager()->get_overlays(fc, overlay_info);
 
