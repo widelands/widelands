@@ -32,6 +32,9 @@ Management classes and functions of the 32-bit software renderer.
 
 #include "SDL_image.h"
 
+#ifdef OPENGL_MODE
+#include <GL/gl.h>
+#endif
 
 namespace Renderer_Software32
 {
@@ -947,7 +950,21 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 	m_gameicons = 0;
 
 	// Set video mode using SDL
-	int flags = SDL_SWSURFACE;
+	int flags;
+
+#ifdef OPENGL_MODE
+	flags = SDL_OPENGL;
+
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 0);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 0);
+	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 0);
+#else
+	flags = SDL_SWSURFACE | SDL_DOUBLEBUF;
+#endif
 
 	if (fullscreen)
 		flags |= SDL_FULLSCREEN;
@@ -956,10 +973,27 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 	if (!m_sdlsurface)
 		throw wexception("Couldn't set video mode: %s", SDL_GetError());
 
+	//log("Original flags: %08x, final flags: %08x\n", flags, m_sdlsurface->flags);
+
+#ifdef OPENGL_MODE
+	m_screen.pixels = (uint*)malloc(1024*1024*sizeof(uint));
+	memset(m_screen.pixels, 128, 1024*512*sizeof(uint));
+
+	glBindTexture(GL_TEXTURE_2D, 1);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_BGRA, GL_UNSIGNED_BYTE, m_screen.pixels);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	free(m_screen.pixels);
+
+	m_screen.pixels = (uint*)malloc(w*h*sizeof(uint));
+	m_screen.pitch = w;
+#else
 	m_screen.pixels = (uint*)m_sdlsurface->pixels;
-	m_screen.w = m_sdlsurface->w;
-	m_screen.h = m_sdlsurface->h;
 	m_screen.pitch = m_sdlsurface->pitch / sizeof(uint);
+#endif
+	m_screen.w = w;
+	m_screen.h = h;
 
 	m_rendertarget = new RenderTargetImpl(&m_screen);
 }
@@ -973,6 +1007,10 @@ Free the surface
 */
 GraphicImpl::~GraphicImpl()
 {
+#ifdef OPENGL_MODE
+	free(m_screen.pixels);
+#endif
+
 	flush(0);
 
 	delete m_rendertarget;
@@ -1071,16 +1109,47 @@ void GraphicImpl::refresh()
 	static int counter = 0;
 
 	counter++;
-	if (counter & 15)
+	if (counter & 31)
 		return;
 #endif
 
+#ifdef OPENGL_MODE
+	glViewport(0, 0, m_screen.w, m_screen.h);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, m_screen.w, m_screen.h, 0, -1, 1);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, 1);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_screen.w, m_screen.h,
+			GL_BGRA, GL_UNSIGNED_BYTE, m_screen.pixels);
+
+
+	glBegin(GL_QUADS);
+		glTexCoord2f(0, 0);
+		glVertex2i(0, 0);
+		glTexCoord2f((float)m_screen.w / 1024.0, 0);
+		glVertex2i(m_screen.w, 0);
+		glTexCoord2f((float)m_screen.w / 1024.0, (float)m_screen.h / 1024.0);
+		glVertex2i(m_screen.w, m_screen.h);
+		glTexCoord2f(0, (float)m_screen.h / 1024.0);
+		glVertex2i(0, m_screen.h);
+	glEnd();
+
+	SDL_GL_SwapBuffers();
+#else
 //	if (m_update_fullscreen)
-		SDL_UpdateRect(m_sdlsurface, 0, 0, 0, 0);
+		//SDL_UpdateRect(m_sdlsurface, 0, 0, 0, 0);
+		SDL_Flip(m_sdlsurface);
 //	else
 //		{
 //		SDL_UpdateRects(m_sdlsurface, m_nr_update_rects, m_update_rects);
 //		}
+#endif
 
 	m_update_fullscreen = false;
 	m_nr_update_rects = 0;

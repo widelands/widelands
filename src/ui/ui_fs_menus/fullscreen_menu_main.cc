@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 
 	// Text
 	new Textarea(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right);
-	new Textarea(this, 15, MENU_YRES-29, "(C) 2002-2003 by the Widelands Development Team", Align_TopLeft);
+	new Textarea(this, 15, MENU_YRES-29, "(C) 2002-2004 by the Widelands Development Team", Align_TopLeft);
 }
 
 void Fullscreen_Menu_Main::not_supported()
