@@ -38,6 +38,8 @@ class Conf_Reader
 	void					read_buildings();
 	void					read_creatures();
 	void					read_wares();
+	int						get_ware(const char*);
+	int						get_creature(const char*);
 public:
 							Conf_Reader(const char* filename);
 							~Conf_Reader();

@@ -66,6 +66,22 @@ void Conf_Reader::read_header()
 	conf->get_string("tribe", "name", header.name, "(no name)");
 }
 
+int Conf_Reader::get_ware(const char* name)
+{
+	for (uint i=0; i<header.wares; i++)
+		if (strcmpi(ware[i].name, name) == 0)
+			return i;
+	return 0xFFFFFFFF;
+}
+
+int Conf_Reader::get_creature(const char* name)
+{
+	for (uint j=0; j<header.creatures; j++)
+		if (strcmpi(creature[j].name, name) == 0)
+			return j;
+	return 0xFFFFFFFF;
+}
+
 void Conf_Reader::read_buildings()
 {
 	if (!header.buildings)
@@ -77,15 +93,11 @@ void Conf_Reader::read_buildings()
 		char sectionName[MAX_NAME_LEN];
 		sprintf(sectionName, "building_%i", i);
 		conf->get_string(sectionName, "name", building[i].name, "(no name)");
+		
 		char profession[128];
 		conf->get_string(sectionName, "profession", profession, "");
-		//building[i].profession = 0xFFFFFFFF;
-		for (uint j=0; j<header.creatures; j++)
-			if (strcmpi(creature[j].name, profession))
-			{
-				building[i].profession = j;
-				break;
-			}
+		building[i].profession = this->get_creature(profession);
+
 		char type[128];
 		conf->get_string(sectionName, "type", type, "");
 		if (strcmpi(type, "search") == 0)
@@ -106,11 +118,24 @@ void Conf_Reader::read_creatures()
 		char sectionName[MAX_NAME_LEN];
 		sprintf(sectionName, "creature_%i", i);
 		conf->get_string(sectionName, "name", creature[i].name, "(no name)");
-		//TODO
-		//produce
+
+		char produce[128];
+		conf->get_string(sectionName, "produce", produce, "");
+		creature[i].produce = this->get_ware(produce);
+
 		creature[i].prodTime = conf->get_int(sectionName, "prodtime");
-		//consume
-		//consumetype
+
+		char ctype[128];
+		conf->get_string(sectionName, "consume", ctype, "");
+		char* consume = strchr(ctype, ':');
+		consume[0] = 0;
+		consume++;
+		if (strcmpi(ctype, "bob") == 0)
+			creature[i].consumeType = CONSUME_BOB;
+		else if (strcmpi(ctype, "res") == 0)
+			creature[i].consumeType = CONSUME_RESOURCE;
+		strcpy(creature[i].consume, consume);
+		//TODO
 		//animation
 	}
 }

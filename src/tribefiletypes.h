@@ -73,7 +73,7 @@ struct BuildingDesc
 struct CreatureDesc
 {
 	char			name[16];
-	uint			consume;
+	char			consume[16];		// name of res to consume
 	ConsumeType		consumeType;
 	uint			produce;
 	uint			prodTime;

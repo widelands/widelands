@@ -1,1 +1,27 @@
-add infos here
+tribe file tags definition
+
+[tribe]
+author
+name
+wares			number of terrain definions in this file
+buildings		number of resource definions in this file
+creatures		number of bob definions in this file
+
+[ware_x]
+name
+pic			picture for this ware (laying near flag)
+menupic		picture for this ware in menus
+
+[building_x]
+name
+profession		name of creature working in this building
+type			way of working; can be "search" or "sit"
+
+[creature_x]
+name
+produce		name of ware to produce
+prodtime		time to produce ware
+consume		resource to consume and where to consume it from
+			can be "bob:<resource>" for resources from bobs
+			or "res:<resource" for resources from map fields
+anim			anim for this bob TODO
