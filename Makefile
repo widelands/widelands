@@ -8,14 +8,14 @@
 
 ########################### GLOBAL SECTION ##########################
 
+#  set this to YES if you're done here
+IS_MAKEFILE_EDITED:=YES
+
 # C compiler
 CC=gcc
 
 # c++ compiler
 CXX=c++
-
-#  set this to YES if you're done here
-IS_MAKEFILE_EDITED:=YES
 
 # on some systems (BSD) this is named sdl12-config or so
 SDL_CONFIG:=sdl-config
@@ -40,7 +40,7 @@ ADD_LDFLAGS:=
 all: dotest widelands 
 	@echo -ne "\nCongrats. Build seems to be complete. If there was no "
 	@echo -ne "error (ignore file not found errors), you can run the game "
-	@echo -ne "now. just type: 'src/widelands' and enjoy!\n\n"
+	@echo -ne "now. just type: './widelands' and enjoy!\n\n"
 	@echo -e "\tTHE WIDELANDS DEVELOPMENT TEAM"
 
 dotest:
