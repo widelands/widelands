@@ -1,4 +1,4 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -Wall -O2 -I../src 
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall
 #EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
@@ -7,10 +7,9 @@ CXXFLAGS= $(EXTRA_FLAGS)
 EXTRA_DIST=README
 
 bin_PROGRAMS=wtfcreate 
-wtfcreate_LDADD =@SDL_LIBS@ ../src/profile.o ../src/growablearray.o ../src/myfile.o ../wwfcreate/picturereader.o
-wtfcreate_SOURCES=confreader.cc \
-						confreader.h \
-						main.cc
+wtfcreate_LDADD =@SDL_LIBS@ ../src/growablearray.o ../src/myfile.o ../src/pic.o ../src/mydirent.o ../src/profile.o 
+wtfcreate_SOURCES=bob_descr.cc  bob_descr.h  main.cc  pic_descr.cc  pic_descr.h  tribedata.h 
+
 
 #  uncomment the following if widelands requires the math library
 #widelands_LDADD=-lm
