@@ -870,8 +870,8 @@ class Editor_Set_Right_Terrain_Tool_Options_Menu : public Window {
       UniqueWindow* m_registry;
       Editor_Interactive* m_parent;
       int* m_terrain;
-      Textarea* m_textarea; 
-      
+      Textarea* m_textarea;
+
       void button_clicked(int);
 };
 
@@ -889,7 +889,7 @@ Editor_Set_Right_Terrain_Tool_Options_Menu::Editor_Set_Right_Terrain_Tool_Option
 	if (m_registry) {
 		if (m_registry->window)
 			delete m_registry->window;
-		
+
 		m_registry->window = this;
 		if (m_registry->x >= 0)
 			set_pos(m_registry->x, m_registry->y);
@@ -1013,9 +1013,9 @@ class Editor_Set_Both_Terrain_Tool_Options_Menu : public Window {
       UniqueWindow* m_registry;
       Editor_Interactive* m_parent;
       int* m_terrain;
-      Textarea* m_textarea; 
-      Radiogroup_with_Buttons* m_radiogroup;
-      
+      Textarea* m_textarea;
+      Radiogroup* m_radiogroup;
+
       void selected(int);
 };
 
@@ -1034,14 +1034,14 @@ Editor_Set_Both_Terrain_Tool_Options_Menu::Editor_Set_Both_Terrain_Tool_Options_
 	if (m_registry) {
 		if (m_registry->window)
 			delete m_registry->window;
-		
+
 		m_registry->window = this;
 		if (m_registry->x >= 0)
 			set_pos(m_registry->x, m_registry->y);
 	}
    m_terrain=terrain;
    m_parent=parent;
-    
+
    const int space=5;
    const int xstart=5;
    const int ystart=15;
@@ -1050,24 +1050,24 @@ Editor_Set_Both_Terrain_Tool_Options_Menu::Editor_Set_Both_Terrain_Tool_Options_
    int textures_in_row=(int)(sqrt(nr_textures));
    if(textures_in_row*textures_in_row<nr_textures) { textures_in_row++; }
    int i=1;
-  
-   m_radiogroup=new Radiogroup_with_Buttons(TEXTURE_W+1, TEXTURE_H+1, true);
+
+   m_radiogroup = new Radiogroup();
    set_inner_size((textures_in_row)*(TEXTURE_W+1+space)+xstart, (textures_in_row)*(TEXTURE_H+1+space)+ystart+yend);
- 
+
    int ypos=ystart;
    int xpos=xstart;
    int cur_x=0;
    while(i<=nr_textures) {
-      if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; } 
-   
-      m_radiogroup->add_button(this, xpos , ypos, 0,  get_graphicimpl()->get_maptexture_data(i)->get_texture_picture());
+      if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
 
-      xpos+=TEXTURE_W+1+space; 
+      m_radiogroup->add_button(this, xpos , ypos, get_graphicimpl()->get_maptexture_data(i)->get_texture_picture());
+
+      xpos+=TEXTURE_W+1+space;
       ++cur_x;
       ++i;
    }
-   ypos+=TEXTURE_H+1+space+5; 
-  
+   ypos+=TEXTURE_H+1+space+5;
+
    Textarea* ta=new Textarea(this, 0, 5, "Choose Terrain Menu", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 

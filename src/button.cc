@@ -25,19 +25,18 @@
  * This defines a button.
  */
 
-/** Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background)
- *
- * Initialize a Button
- *
- * Args: parent			parent panel
- *       x, y, w, h		button dimensions
- *       background		number of the button style (0..2)
- */
-Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id, bool forcepressed, bool flat)
+/*
+===============
+Button::Button
+
+Initialize a Button
+===============
+*/
+Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id, bool flat)
 	: Panel(parent, x, y, w, h)
 {
 	set_think(false);
-   
+
 	switch(background) {
 	default:
 	case 0: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.bmp"); break;
@@ -46,14 +45,16 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 	case 3: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.bmp"); break;
 	}
 
-	_id = id;
-	_highlighted = _pressed = false;
-	_enabled = true;
-	
+	m_id = id;
+	m_highlighted = m_pressed = false;
+	m_enabled = true;
+
 	m_pic_custom = 0;
-   m_no_automatic_pressed=forcepressed;
-   m_flat=flat;
+   m_flat = flat;
+
+	m_clr_down.set(229, 161, 2);
 }
+
 
 /*
 ===============
@@ -92,7 +93,7 @@ Sets a new picture for the button.
 void Button::set_pic(uint picid)
 {
 	remove_title();
-	
+
 	m_pic_custom = picid;
 
 	update(0, 0, get_w(), get_h());
@@ -101,7 +102,7 @@ void Button::set_pic(uint picid)
 
 /*
 ===============
-void set_title(const char* title);
+Button::set_title
 
 Set a text title for the button
 ===============
@@ -109,30 +110,31 @@ Set a text title for the button
 void Button::set_title(const char* title)
 {
 	remove_title();
-	
+
 	if (title)
 		m_title = title;
-	
+
 	update(0, 0, get_w(), get_h());
 }
 
 
-/** Button::set_enabled(bool on)
- *
- * Enable/Disable the button (disabled buttons can't be clicked).
- * Buttons are enabled by default
- *
- * Args: on	true if button should be enabled
- */
+/*
+===============
+Button::set_enabled
+
+Enable/Disable the button (disabled buttons can't be clicked).
+Buttons are enabled by default
+===============
+*/
 void Button::set_enabled(bool on)
 {
 	// disabled buttons should look different...
 	if (on)
-		_enabled = true;
+		m_enabled = true;
 	else {
-		_enabled = false;
-		_pressed = false;
-		_highlighted = false;
+		m_enabled = false;
+		m_pressed = false;
+		m_highlighted = false;
 	}
 	update(0, 0, get_w(), get_h());
 }
@@ -148,24 +150,24 @@ Redraw the button
 void Button::draw(RenderTarget* dst)
 {
 	// Draw the background
-	if(!m_flat) 
+	if(!m_flat)
       dst->tile(0, 0, get_w(), get_h(), m_pic_background, get_x(), get_y());
 
-	if (_enabled && _highlighted)
+	if (m_enabled && m_highlighted)
 		dst->brighten_rect(0, 0, get_w(), get_h(), MOUSE_OVER_BRIGHT_FACTOR);
 
 	// if we got a picture, draw it centered
 	if (m_pic_custom)
 		{
 		int cpw, cph;
-		
+
 		g_gr->get_picture_size(m_pic_custom, &cpw, &cph);
-		
+
 		dst->blit((get_w() - cpw) >> 1, (get_h() - cph) >> 1, m_pic_custom);
 		}
 	else if (m_title.length()) // otherwise draw the title string centered
 		{
-		g_font->draw_string(dst, get_w()>>1, get_h()>>1, 
+		g_font->draw_string(dst, get_w()>>1, get_h()>>1,
 		                    m_title.c_str(), Align_Center);
 		}
 
@@ -175,10 +177,10 @@ void Button::draw(RenderTarget* dst)
 	// or the button stays pressed when it is pressed once
    RGBColor black(0,0,0);
 
-   if(!m_flat) {
+   if(!m_flat)
+	{
       // button is a normal one, not flat
-      if ((!m_no_automatic_pressed && (!_pressed || !_highlighted)) 
-            || (m_no_automatic_pressed && !_pressed))
+      if (!m_pressed || !m_highlighted)
       {
          // top edge
          dst->brighten_rect(0, 0, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
@@ -204,61 +206,57 @@ void Button::draw(RenderTarget* dst)
          dst->fill_rect(0, 0, 1, get_h()-1, black);
          dst->fill_rect(1, 0, 1, get_h()-2, black);
       }
-   } else {
-      // Button is flat, do not draw borders, instead, if it is pressed, draw 
+   }
+	else
+	{
+      // Button is flat, do not draw borders, instead, if it is pressed, draw
       // a box around it
-      if ((!m_no_automatic_pressed && (!_pressed || !_highlighted)) 
-            || (m_no_automatic_pressed && !_pressed)) {
-         // not selected, do nothing
-      } else {
-         // bottom edge
-         dst->fill_rect(0, get_h()-1, get_w(), 1, FLAT_BUTTON_FRAME_CLR);
-         // right edge
-         dst->fill_rect(get_w()-1, 0, 1, get_h(), FLAT_BUTTON_FRAME_CLR);
-         // top edge
-         dst->fill_rect(0, 0, get_w(), 1, FLAT_BUTTON_FRAME_CLR);
-         // left edge
-         dst->fill_rect(0, 0, 1, get_h(), FLAT_BUTTON_FRAME_CLR);
-      }
+		if (m_pressed && m_highlighted)
+			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_down);
    }
 }
 
-/** Button::handle_mousein(bool inside)
- *
- * Update highlighted & pressed status
- */
+
+/*
+===============
+Button::handle_mousein
+
+Update highlighted status
+===============
+*/
 void Button::handle_mousein(bool inside)
 {
-	if (inside && _enabled)
-		_highlighted = true;
+	if (inside && m_enabled)
+		m_highlighted = true;
 	else
-		_highlighted = false;
+		m_highlighted = false;
 	update(0, 0, get_w(), get_h());
 }
 
-/** Button::handle_mouseclick(uint btn, bool down, int x, int y)
- *
- * Update the pressed status of the button
- */
+
+/*
+===============
+Button::handle_mouseclick
+
+Update the pressed status of the button
+===============
+*/
 bool Button::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn != 0) // only react on left button
 		return false;
 
-	if (down && _enabled) {
-		if(m_no_automatic_pressed) {
-         clicked.call();
-         clickedid.call(_id);
-      } else grab_mouse(true);
-		_pressed = true;
+	if (down && m_enabled) {
+		grab_mouse(true);
+		m_pressed = true;
    } else {
-      if(!m_no_automatic_pressed && _pressed) {
+      if (m_pressed) {
          grab_mouse(false);
-         if (_highlighted && _enabled) {
+         if (m_highlighted && m_enabled) {
             clicked.call();
-            clickedid.call(_id);
+            clickedid.call(m_id);
          }
-         _pressed = false;
+         m_pressed = false;
       }
    }
 	update(0, 0, get_w(), get_h());

@@ -28,31 +28,55 @@ Statebox
 ==============================================================================
 */
 
-RGBColor Statebox::dflt_highlightcolor(100, 100, 80);
 
+/*
+===============
+Statebox::Statebox
 
-/** Statebox::Statebox(Panel *parent, int x, int y)
- *
- * Initialize a Statebox.
- * Stateboxs start out enabled and unchecked
- */
-Statebox::Statebox(Panel *parent, int x, int y)
+Stateboxes start out enabled and unchecked.
+If picid is non-zero, the given picture is used instead of the normal checkbox
+graphics.
+===============
+*/
+Statebox::Statebox(Panel *parent, int x, int y, uint picid)
 	: Panel(parent, x, y, STATEBOX_WIDTH, STATEBOX_HEIGHT)
 {
-	m_pic_graphics = g_gr->get_picture(PicMod_UI, "pics/checkbox.bmp");
+	if (picid)
+	{
+		int w, h;
 
-	_highlighted = false;
-	_enabled = true;
-	_state = false;
+		g_gr->get_picture_size(picid, &w, &h);
+		set_size(w, h);
+
+		m_custom_picture = true;
+		m_pic_graphics = picid;
+	}
+	else
+	{
+		m_custom_picture = false;
+		m_pic_graphics = g_gr->get_picture(PicMod_UI, "pics/checkbox.bmp");
+	}
+
+	m_highlighted = false;
+	m_enabled = true;
+	m_state = false;
+
+	m_clr_highlight.set(100, 100, 80);
+	m_clr_state.set(229, 161, 2);
 }
 
-/** Statebox::~Statebox()
- *
- * Clean up resources
- */
+
+/*
+===============
+Statebox::~Statebox
+
+Clean up resources
+===============
+*/
 Statebox::~Statebox()
 {
 }
+
 
 /** Statebox::set_enabled(bool enabled)
  *
@@ -62,11 +86,12 @@ Statebox::~Statebox()
  */
 void Statebox::set_enabled(bool enabled)
 {
-	_enabled = enabled;
-	if (!_enabled)
-		_highlighted = false;
+	m_enabled = enabled;
+	if (!m_enabled)
+		m_highlighted = false;
 	update(0, 0, get_w(), get_h());
 }
+
 
 /** Statebox::set_state(bool on)
  *
@@ -76,14 +101,15 @@ void Statebox::set_enabled(bool enabled)
  */
 void Statebox::set_state(bool on)
 {
-	if (on == _state)
+	if (on == m_state)
 		return;
 
-	_state = on;
+	m_state = on;
 	changed.call();
 	changedto.call(on);
 	update(0, 0, get_w(), get_h());
 }
+
 
 /*
 ===============
@@ -94,22 +120,30 @@ Redraw the entire checkbox
 */
 void Statebox::draw(RenderTarget* dst)
 {
-	int x;
-
-	if (_state)
-		x = STATEBOX_WIDTH;
-	else
-		x = 0;
-	dst->blitrect(0, 0, m_pic_graphics, x, 0, STATEBOX_WIDTH, STATEBOX_HEIGHT);
-
-	if (_highlighted)
+	if (m_custom_picture)
 	{
-		dst->fill_rect(0, 0, get_w(), 1, dflt_highlightcolor);
-		dst->fill_rect(0, 0, 1, get_h(), dflt_highlightcolor);
-		dst->fill_rect(0, get_h()-1, get_w(), 1, dflt_highlightcolor);
-		dst->fill_rect(get_w()-1, 0, 1, get_h(), dflt_highlightcolor);
+		dst->blit(0, 0, m_pic_graphics);
+
+		if (m_state)
+			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_state);
+		else if (m_highlighted)
+			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_highlight);
+	}
+	else
+	{
+		int x;
+
+		if (m_state)
+			x = STATEBOX_WIDTH;
+		else
+			x = 0;
+		dst->blitrect(0, 0, m_pic_graphics, x, 0, STATEBOX_WIDTH, STATEBOX_HEIGHT);
+
+		if (m_highlighted)
+			dst->draw_rect(0, 0, get_w(), get_h(), m_clr_highlight);
 	}
 }
+
 
 /** Statebox::handle_mousein(bool inside)
  *
@@ -117,9 +151,10 @@ void Statebox::draw(RenderTarget* dst)
  */
 void Statebox::handle_mousein(bool inside)
 {
-	_highlighted = inside;
+	m_highlighted = inside;
 	update(0, 0, get_w(), get_h());
 }
+
 
 /** Statebox::handle_mouseclick(uint btn, bool down, int x, int y)
  *
@@ -131,12 +166,13 @@ bool Statebox::handle_mouseclick(uint btn, bool down, int x, int y)
 		return false;
 
 	if (down) {
-		if (_enabled)
+		if (m_enabled)
 			clicked();
 	}
 
 	return true;
 }
+
 
 /*
 ==============================================================================
