@@ -29,9 +29,15 @@
 #include "widelands_map_saver.h"
 #include "widelands_map_loader.h"
 
+#include "game_cmd_queue_data_packet.h"
+#include "game_data_packet_ids.h"
+#include "game_game_class_data_packet.h"
+#include "game_map_data_packet.h"
+#include "game_preload_data_packet.h"
+#include "game_interactive_player_data_packet.h"
+#include "game_player_economies_data_packet.h"
+#include "game_player_info_data_packet.h"
 
-// Forward declaration. Defined in IntPlayer.cc
-int Int_Player_overlay_callback_function(FCoords& fc, void* data, int);
 
 /*
  * Game Saver, creation and destruction
@@ -49,143 +55,57 @@ Game_Saver::~Game_Saver(void) {
  */
 void Game_Saver::save(void) throw(wexception) {
    FileWrite fw;
-   Widelands_Map_Map_Object_Saver* m_mos;
+   Game_Data_Packet* gp;
+   Game_Map_Data_Packet* gmdp;
    
-   // First of all, save some kind of header.
-   fw.Unsigned32(m_game->get_gametime()); // Time in milliseconds of elapsed game time (without pauses)
-   fw.CString(m_game->get_map()->get_name()); // Name of map
+   log("Game: Writing Preload Data ... ");
+   gp = new Game_Preload_Data_Packet();
+   gp->Write(&fw, m_game, 0); 
+   delete gp;
+   log(" done\n");
 
-   // Now write the game
-   save_game_class(&fw);
+   log("Game: Writing Game Class Data ... ");
+   gp = new Game_Game_Class_Data_Packet();
+   gp->Write(&fw, m_game, 0); 
+   delete gp;
+   log(" done\n");
 
-   // Now Write the map as it would be a normal map saving
-   Widelands_Map_Saver wms(&fw, m_game);
-   wms.save();
-   m_mos=wms.get_map_object_saver();
-
-   log(" Writing Player Economies!");
-   bool done=false;
-   for(uint i=1; i<=m_game->get_map()->get_nrplayers(); i++) {
-      Player* plr=m_game->get_player(i);
-      if(!plr) continue; 
-      fw.Unsigned16(plr->m_economies.size());
-      for(uint j=0; j<plr->m_economies.size(); j++) {
-         done=false;
-         // Walk the map so that we find a representant
-         Map* map=m_game->get_map();
-         for(ushort y=0; y<map->get_height(); y++) {
-            for(ushort x=0; x<map->get_width(); x++) {
-               BaseImmovable* imm=map->get_field(Coords(x,y))->get_immovable();
-               if(!imm) continue;
-
-               if(imm->get_type()==Map_Object::FLAG) {
-                  Flag* flag=static_cast<Flag*>(imm);
-                  if(flag->get_economy() == plr->m_economies[j]) {
-                     fw.Unsigned16(x);
-                     fw.Unsigned16(y);
-                     done=true;
-                  }
-               }
-               if(done) break;
-            }
-            if(done) break;
-         }
-         if(done) continue;
-      }
-   }
+   log("Game: Writing Player Info ... ");
+   gp = new Game_Player_Info_Data_Packet();
+   gp->Write(&fw, m_game, 0); 
+   delete gp;
+   log(" done\n");
    
-   // Now write the command queue
-   log(" Writing cmd_queue!\n");
-   save_cmd_queue_class(&fw, m_mos);
+   log("Game: Writing Map Data!\n");
+   gmdp = new Game_Map_Data_Packet();
+   gmdp->Write(&fw, m_game, 0);
+   Widelands_Map_Map_Object_Saver *mos = gmdp->get_map_object_saver();
+   log("Game: Writing Map Data done!\n");
+
+   log("Game: Writing Player Economies Info ... ");
+   gp = new Game_Player_Economies_Data_Packet();
+   gp->Write(&fw, m_game, mos); 
+   delete gp;
+   log(" done\n");
    
+   log("Game: Writing Command Queue Data ... ");
+   gp = new Game_Cmd_Queue_Data_Packet();
+   gp->Write(&fw, m_game, mos); 
+   delete gp;
+   log(" done\n");
+ 
+   log("Game: Writing Interactive Player Data ... ");
+   gp = new Game_Interactive_Player_Data_Packet();
+   gp->Write(&fw, m_game, mos); 
+   delete gp;
+   log(" done\n");
+
+   delete gmdp; // Deletes our map object saver
+
    fw.Write(g_fs, m_filename.c_str());
 }
 
 /*
- * Saves all data concerning the game class
- */
-void Game_Saver::save_game_class(FileWrite* fw) throw(wexception) {
-      // GAME CLASS
-   // Can't save netgames
-   assert(!m_game->m_netgame);
-
-   // State is running, we do not need to save this
-	// Save speed
-   fw->Signed16(m_game->m_speed);
-
-   // From the interactive player, we only
-   // need the player number
-   fw->Unsigned8(m_game->ipl->get_player_number());
-	
-   // WE DO NOT SAVE COMPUTER PLAYERS AT THE MOMENT // TODO
- 	
-   // CMD Queue is saved later
-   // We do not care for real time. 
-
-       // EDITOR GAME CLASS
-   // Write gametime
-   fw->Unsigned32(m_game->m_gametime);
-   
-   // We do not care for players, since they were set
-   // on game initialization to match Map::scenario_player_[names|tribes]
-   // or vice versa, so this is handled by map loader
-   
-   // Objects are loaded and saved by map
-   
-   // Tribes and wares are handled by map
-   // Interactive_Base doesn't need saving
-
-   // Map is handled by map saving
-
-   // Track pointers are not saved in save games
-
-   // Conquer info
-   fw->Unsigned16(m_game->m_conquer_info.size());
-   for(uint i=0; i<m_game->m_conquer_info.size(); i++) {
-      fw->Unsigned8(m_game->m_conquer_info[i].player);
-      fw->Unsigned16(m_game->m_conquer_info[i].middle_point.x);
-      fw->Unsigned16(m_game->m_conquer_info[i].middle_point.y);
-      fw->Unsigned16(m_game->m_conquer_info[i].area);
-   }
-}
-
-/*
- * Saves all data concerning the cmd_queue class
- */
-void Game_Saver::save_cmd_queue_class(FileWrite* fw, Widelands_Map_Map_Object_Saver* mos) throw(wexception) {
-   Cmd_Queue* cmdq=m_game->get_cmdqueue();
-
-   // nothing to be done for m_game
-   
-   // Next serial
-   fw->Unsigned32(cmdq->nextserial);
-
-   // Number of cmds
-   fw->Unsigned16(cmdq->m_cmds.size());
-
-   // Write all commands
-   std::priority_queue<Cmd_Queue::cmditem> p;
-   
-   // Make a copy, so we can pop stuff
-   p=cmdq->m_cmds;
-   
-   assert(p.top().serial==cmdq->m_cmds.top().serial);
-   assert(p.top().cmd==cmdq->m_cmds.top().cmd);
-
-   while(p.size()) {
-      // Serial number
-      fw->Unsigned32(p.top().serial);
-     
-      // Now the id
-      fw->Unsigned16(p.top().cmd->get_id());
-
-      // Now the command itself
-      p.top().cmd->Write(fw, m_game, mos);
-      // DONE: next command
-      p.pop();
-   }
-}
-
 void Game_Saver::load(void) throw (wexception) {
    FileRead fr;
    Widelands_Map_Map_Object_Loader* m_mol;
@@ -263,88 +183,5 @@ void Game_Saver::load(void) throw (wexception) {
    load_cmd_queue_class(&fr, m_mol);
    ALIVE();
 
-   
-   m_game->get_map()->get_overlay_manager()->show_buildhelp(false);
-   m_game->get_map()->get_overlay_manager()->register_overlay_callback_function(&Int_Player_overlay_callback_function, static_cast<void*>(m_game->ipl));
-
-   m_game->get_map()->recalc_whole_map();
-
 }
-
-void Game_Saver::load_cmd_queue_class(FileRead* fr, Widelands_Map_Map_Object_Loader* mol) throw (wexception) {
-   Cmd_Queue* cmdq=m_game->get_cmdqueue();
-
-   // nothing to be done for m_game
-   
-   // Next serial
-   cmdq->nextserial=fr->Unsigned32();
-
-   // Erase all currently pending commands in the queue
-   while(!cmdq->m_cmds.empty())
-      cmdq->m_cmds.pop();
-   
-   // Number of cmds
-   uint ncmds=fr->Unsigned16();
-
-   uint i=0;
-   while(i<ncmds) {
-      Cmd_Queue::cmditem item;
-      item.serial=fr->Unsigned32();
-
-      uint packet_id=fr->Unsigned16();
-      log("Creating queue command for id: %i (serial: %li) ... ", packet_id, item.serial);
-      BaseCommand* cmd=Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-      cmd->Read(fr, m_game, mol);
-      log("done\n");
-
-      item.cmd=cmd;
-
-      cmdq->m_cmds.push(item);
-      ++i;
-   }
-}
-
-void Game_Saver::load_game_class(FileRead* fr) throw (wexception) {
-      // GAME CLASS
-   // Can't save netgames
-   m_game->m_netgame=0;
-
-   m_game->m_state=gs_running;
-   m_game->m_speed=fr->Signed16();
-
-   // From the interactive player, we only
-   // need the player number
-   m_game->ipl->set_player_number(fr->Unsigned8());
-	
-   // WE DO NOT SAVE COMPUTER PLAYERS AT THE MOMENT // TODO
- 	
-   // CMD Queue is saved later
-   // We do not care for real time. 
-
-       // EDITOR GAME CLASS
-   // Write gametime
-   m_game->m_gametime=fr->Unsigned32();
-   
-   // We do not care for players, since they were set
-   // on game initialization to match Map::scenario_player_[names|tribes]
-   // or vice versa, so this is handled by map loader
-   
-   // Objects are loaded and saved by map
-   
-   // Tribes and wares are handled by map
-   // Interactive_Base doesn't need saving
-
-   // Map is handled by map saving
-
-   // Track pointers are not saved in save games
-
-   // Conquer info
-   m_game->m_conquer_info.resize(fr->Unsigned16());
-   for(uint i=0; i<m_game->m_conquer_info.size(); i++) {
-      m_game->m_conquer_info[i].player = fr->Unsigned8();
-      m_game->m_conquer_info[i].middle_point.x = fr->Unsigned16();
-      m_game->m_conquer_info[i].middle_point.y = fr->Unsigned16();
-      m_game->m_conquer_info[i].area = fr->Unsigned16();
-   }
-}
-
+*/

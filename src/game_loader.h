@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-4 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,33 @@
  *
  */
 
-#ifndef __S__SINGLEPMENUE_H
-#define __S__SINGLEPMENUE_H
+#ifndef __S__GAME_LOADER_H
+#define __S__GAME_LOADER_H
 
-#include "fullscreen_menu_base.h"
+#include <string>
+#include "wexception.h"
 
-/**
- * Fullscreen Menu for SinglePlayer.
- * Here you select what game you want to play.
+class Game;
+class FileRead;
+class Widelands_Map_Map_Object_Loader;
+
+class Game_Preload_Data_Packet;
+
+/*
+ * This class reads a complete state
+ * of a game out to a file. 
  */
-class Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
+class Game_Loader {
    public:
-      Fullscreen_Menu_SinglePlayer();
+      Game_Loader(const char* filename, Game* game);
+      ~Game_Loader(void);
 
-      void not_supported();
-
-      enum {
-         sp_skirmish,
-         //sp_campaign, // BIG TODO
-         sp_loadgame,
-         sp_back
-      };
-
+      int preload_game(Game_Preload_Data_Packet*);
+      int load_game(void);
+      
+   private:
+      std::string m_filename;
+      Game* m_game;
 };
 
-#endif // __S__SINGLEPMENUE_H
+#endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-4 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,24 @@
  *
  */
 
-#ifndef __S__SINGLEPMENUE_H
-#define __S__SINGLEPMENUE_H
+#ifndef __S__WIDELANDS_MAP_DATA_PACKET_FACTOR_H
+#define __S__WIDELANDS_MAP_DATA_PACKET_FACTOR_H
 
-#include "fullscreen_menu_base.h"
 
-/**
- * Fullscreen Menu for SinglePlayer.
- * Here you select what game you want to play.
+#include "wexception.h"
+#include "types.h"
+
+class Game_Data_Packet;
+
+/*
+ * This factory creates the valid map_data packet
+ * classes. This is usefull to add new Packets without
+ * the need to touch any other code than class
  */
-class Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
+class Game_Data_Packet_Factory {
    public:
-      Fullscreen_Menu_SinglePlayer();
-
-      void not_supported();
-
-      enum {
-         sp_skirmish,
-         //sp_campaign, // BIG TODO
-         sp_loadgame,
-         sp_back
-      };
-
+      Game_Data_Packet* create_correct_packet(ushort id) throw(wexception);
 };
 
-#endif // __S__SINGLEPMENUE_H
+
+#endif

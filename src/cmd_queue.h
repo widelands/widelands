@@ -80,7 +80,7 @@ class BaseCommand {
 };
 
 class Cmd_Queue {
-   friend class Game_Saver;
+   friend class Game_Cmd_Queue_Data_Packet;
 
 	struct cmditem {
 		BaseCommand*	cmd;

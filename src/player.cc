@@ -49,6 +49,10 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
    m_allowed_buildings.resize(m_tribe->get_nrbuildings());
    for(i=0; i<m_tribe->get_nrbuildings(); i++) 
       m_allowed_buildings[i]=true;
+
+   // Resize the visibility array, so that it is large enough
+   // init() will shrink it again
+   seen_fields.resize(1024*1024);
 }
 
 Player::~Player(void)
@@ -69,7 +73,6 @@ void Player::init(Editor_Game_Base* game, bool hq)
 {
 	Map *map = game->get_map();
 
-   seen_fields.resize(0);
 	seen_fields.resize(map->get_width()*map->get_height(), false); 
 
 	// place the HQ

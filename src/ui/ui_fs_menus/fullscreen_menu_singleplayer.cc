@@ -41,8 +41,8 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	b->clicked.set(this, &Fullscreen_Menu_SinglePlayer::not_supported);
 	b->set_title("Campaign");
 
-	b = new UIButton(this, 60, 250, 174, 24, 1);
-	b->clicked.set(this, &Fullscreen_Menu_SinglePlayer::not_supported);
+	b = new UIButton(this, 60, 250, 174, 24, 1, sp_loadgame);
+	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title("Load Game");
 
 	b = new UIButton(this, 60, 370, 174, 24, 0, sp_back);

@@ -17,12 +17,14 @@
  *
  */
 
-#include "IntPlayer.h"
 #include "building.h"
 #include "cmd_queue.h"
 #include "fieldaction.h"
 #include "font_handler.h"
-#include "game_saver.h"
+#include "game_loader.h"
+#include "game_main_menu_save_game.h"
+#include "game_main_menu_load_game.h"
+#include "IntPlayer.h"
 #include "keycodes.h"
 #include "immovable.h"
 #include "mapview.h"
@@ -33,87 +35,6 @@
 #include "ui_unique_window.h"
 #include "overlay_manager.h"
 
-class Game_Main_Menu_Save_Game : public UIUniqueWindow {
-   public:
-      Game_Main_Menu_Save_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
-      virtual ~Game_Main_Menu_Save_Game(void);
-
-   private:
-      void clicked(int);
-      Interactive_Player* m_parent;
-      UIEdit_Box* m_editbox;
-};
-
-Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) :
-UIUniqueWindow(plr,registry,105,140,"Save_Game") {
-
-   m_parent=plr;
-
-   m_editbox=new UIEdit_Box(this, 5, 5, get_inner_w()-10, 20, 0, 0);
-
-   UIButton* b=new UIButton(this, (get_inner_w()-60)/2, get_inner_h()-30, 60, 20, 0, 1);
-   b->set_title("OK");
-   b->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
-
-   if(get_usedefaultpos())
-      center_to_parent();
-}
-
-Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game(void) {
-}
-
-void Game_Main_Menu_Save_Game::clicked(int) {
-   std::string t=m_editbox->get_text();
-
-   if(t.size()) {
-      Game_Saver gs(m_editbox->get_text(), m_parent->get_game());
-      gs.save();
-      die();
-   }
-}
-
-class Game_Main_Menu_Load_Game : public UIUniqueWindow {
-   public:
-      Game_Main_Menu_Load_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
-      virtual ~Game_Main_Menu_Load_Game(void);
-
-   private:
-      void clicked(int);
-      Interactive_Player* m_parent;
-      UIEdit_Box* m_editbox;
-};
-
-Game_Main_Menu_Load_Game::Game_Main_Menu_Load_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) :
-UIUniqueWindow(plr,registry,105,140,"Load_Game") {
-
-   m_parent=plr;
-
-   m_editbox=new UIEdit_Box(this, 5, 5, get_inner_w()-10, 20, 0, 0);
-
-   UIButton* b=new UIButton(this, (get_inner_w()-60)/2, get_inner_h()-30, 60, 20, 0, 1);
-   b->set_title("OK");
-   b->clickedid.set(this, &Game_Main_Menu_Load_Game::clicked);
-
-   if(get_usedefaultpos())
-      center_to_parent();
-}
-
-Game_Main_Menu_Load_Game::~Game_Main_Menu_Load_Game(void) {
-}
-
-void Game_Main_Menu_Load_Game::clicked(int) {
-   std::string t=m_editbox->get_text();
-
-   if(t.size()) {
-      m_parent->get_game()->cleanup_for_load(true,true); // TODO: this should really clean up all
-      // Load Game
-      Game_Saver gs(m_editbox->get_text(), m_parent->get_game());
-      gs.load();
-      m_parent->get_game()->postload();
-      m_parent->get_game()->load_graphics();
-      die();
-   }
-}
 /*
 ==============================================================================
 

@@ -17,36 +17,31 @@
  *
  */
 
-#ifndef __S__GAME_SAVER_H
-#define __S__GAME_SAVER_H
+#ifndef __S__GAME_DATA_PACKET_H
+#define __S__GAME_DATA_PACKET_H
 
-#include <string>
+#include "game_data_packet_ids.h"
+#include "map.h"
 #include "wexception.h"
+#include "widelands_map_map_object_saver.h"
+#include "widelands_map_map_object_loader.h"
 
+class FileRead;
 class FileWrite;
-class Game;
-class Widelands_Map_Map_Object_Saver;
-class Widelands_Map_Map_Object_Loader;
+class Editor_Game_Base;
 
 /*
- * This class writes a complete state
- * of a game out to a file. The world in ONE file
- *
- * This might eventually evolve into the same kind of saving/loading
- * structure as was used for the map stuff - but currently, there's
- * so little to save, that everything is done by this class
- */
+========================================
 
-class Game_Saver {
+This class represents a data packet in a widelands
+saved game file. it is an abstract base class
+
+========================================
+*/
+class Game_Data_Packet {
    public:
-      Game_Saver(std::string filename, Game* game);
-      ~Game_Saver(void);
-
-      void save(void) throw(wexception);
-   
-   private:
-      std::string m_filename;
-      Game* m_game;
+      virtual void Read(FileRead*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception) = 0;
+      virtual void Write(FileWrite*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception) = 0;
 };
 
 #endif

@@ -17,28 +17,45 @@
  *
  */
 
-#ifndef __S__SINGLEPMENUE_H
-#define __S__SINGLEPMENUE_H
+#ifndef __S__LOAD_GAMEMENUE_H
+#define __S__LOAD_GAMEMENUE_H
 
+#include "filesystem.h"
 #include "fullscreen_menu_base.h"
+#include "ui_listselect.h"
+
+class Game;
+class Map;
+class UIButton;
+class UIMultiline_Textarea;
+class UITextarea;
+class Map_Loader;
+class Editor_Game_Base;
 
 /**
- * Fullscreen Menu for SinglePlayer.
- * Here you select what game you want to play.
+ * Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu
  */
-class Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
-   public:
-      Fullscreen_Menu_SinglePlayer();
+class Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
+	Game* game;
 
-      void not_supported();
+	UIListselect *list;
+	UITextarea *tamapname;
+	UITextarea *tagametime;
+	UIButton *m_ok;
 
-      enum {
-         sp_skirmish,
-         //sp_campaign, // BIG TODO
-         sp_loadgame,
-         sp_back
-      };
+	filenameset_t	m_gamefiles;
 
+public:
+	Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer);
+	~Fullscreen_Menu_LoadGame();
+
+	const char *get_gamename() { return (const char*)list->get_selection(); }
+
+	void ok();
+	void map_selected(int id);
+   void double_clicked(int);
+   void fill_list(void);
 };
 
-#endif // __S__SINGLEPMENUE_H
+
+#endif

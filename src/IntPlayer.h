@@ -38,7 +38,9 @@ class UIWindow;
  * cares for input and so on.
  */
 class Interactive_Player : public Interactive_Base {
-	public:
+   friend class Game_Interactive_Player_Data_Packet;
+	
+   public:
 		Interactive_Player(Game *g, uchar pln);
 		~Interactive_Player(void);
 

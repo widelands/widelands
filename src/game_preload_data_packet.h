@@ -17,36 +17,33 @@
  *
  */
 
-#ifndef __S__GAME_SAVER_H
-#define __S__GAME_SAVER_H
+#ifndef __S__GAME_PRELOAD_DATA_PACKET_H
+#define __S__GAME_PRELOAD_DATA_PACKET_H
 
 #include <string>
-#include "wexception.h"
+#include "game_data_packet.h"
 
+class FileRead;
 class FileWrite;
-class Game;
-class Widelands_Map_Map_Object_Saver;
-class Widelands_Map_Map_Object_Loader;
+class Editor_Game_Base;
 
 /*
- * This class writes a complete state
- * of a game out to a file. The world in ONE file
- *
- * This might eventually evolve into the same kind of saving/loading
- * structure as was used for the map stuff - but currently, there's
- * so little to save, that everything is done by this class
+ * This contains all the preload data needed to identify
+ * a game for a user (for example in a listbox)
  */
-
-class Game_Saver {
+class Game_Preload_Data_Packet : public Game_Data_Packet {
    public:
-      Game_Saver(std::string filename, Game* game);
-      ~Game_Saver(void);
+      virtual ~Game_Preload_Data_Packet();
 
-      void save(void) throw(wexception);
-   
+      virtual void Read(FileRead*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
+      virtual void Write(FileWrite*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
+
+      const char* get_mapname(void) { return m_mapname.c_str(); }
+      uint get_gametime(void) { return m_gametime; }
+      
    private:
-      std::string m_filename;
-      Game* m_game;
+      std::string m_mapname;
+      uint m_gametime;
 };
 
 #endif

@@ -22,6 +22,9 @@
 
 #include "editor_game_base.h"
 
+#define WLGF_SUFFIX		".wgf"
+#define WLGF_MAGIC      "WLgf"
+
 /** class Game
  *
  * This class manages the entire lifetime of a game session, from creating the
@@ -45,7 +48,8 @@ class NetGame;
 
 class Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
-   friend class Game_Saver;
+   friend class Game_Game_Class_Data_Packet;
+   friend class Game_Player_Info_Data_Packet;
 
 public:
 	Game(void);
@@ -54,6 +58,7 @@ public:
 	// life cycle
 	bool run_single_player ();
 	bool run_multi_player (NetGame*);
+   bool run_load_game(bool);
 
 	void load_map (const char*);
 
@@ -97,9 +102,11 @@ public:
 	// is this base a game
 	inline bool is_game() { return true; }
 
+   Interactive_Player* get_ipl(void) { return ipl; }
+
 private:
 	void init_player_controllers ();
-	bool run ();
+	bool run (bool = false);
 
 	Map_Loader*	m_maploader;
 	

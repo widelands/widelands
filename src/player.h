@@ -47,7 +47,8 @@ class Tribe_Descr;
  */
 class Player {
 	friend class Editor_Game_Base;
-	friend class Game_Saver;
+	friend class Game_Player_Info_Data_Packet;
+	friend class Game_Player_Economies_Data_Packet;
 
 	public:
 		enum {

@@ -169,6 +169,7 @@ void Main_Menu_Save_Map::clicked(int id) {
       // Make directory
       Main_Menu_Save_Map_Make_Directory* md=new Main_Menu_Save_Map_Make_Directory(this, "unnamed");
       if(md->run()) {
+         g_fs->EnsureDirectoryExists(m_basedir);
          // Create directory
          std::string dirname=md->get_dirname();
          std::string fullname=m_curdir;

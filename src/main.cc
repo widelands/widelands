@@ -166,6 +166,17 @@ void g_main(int argc, char** argv)
                                  continue;
                               }
 
+                           case Fullscreen_Menu_SinglePlayer::sp_loadgame:
+                              {
+                                 Game* g = new Game;
+                                 bool ran = g->run_load_game(true);
+                                 delete g;
+                                 if (ran) {
+                                    done=true;
+                                 }
+                                 continue;
+                              }
+
                            default:
                            case Fullscreen_Menu_SinglePlayer::sp_back:
 										done = true;

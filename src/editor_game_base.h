@@ -41,7 +41,7 @@ class Tribe_Descr;
 
 class Editor_Game_Base {
    friend class Interactive_Base;
-   friend class Game_Saver;
+   friend class Game_Game_Class_Data_Packet;
    
    public:
       Editor_Game_Base();

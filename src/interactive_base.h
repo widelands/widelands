@@ -39,7 +39,9 @@ class MiniMapView;
  * Editor_Interactive share.
  */
 class Interactive_Base : public UIPanel {
-	public:
+   friend class Game_Interactive_Player_Data_Packet;
+
+   public:
 		enum {
 			dfShowCensus = 1,				// show census report on buildings
 			dfShowStatistics = 2,		// show statistics report on buildings
@@ -74,7 +76,6 @@ class Interactive_Base : public UIPanel {
 		void warp_mouse_to_field(Coords c);
 
       virtual void start() = 0;
-
 
       // Display flags
 		uint get_display_flags();

@@ -21,6 +21,7 @@
 #include "CompPlayer.h"
 #include "cmd_queue.h"
 #include "fullscreen_menu_launchgame.h"
+#include "fullscreen_menu_loadgame.h"
 #include "game.h"
 #include "graphic.h"
 #include "player.h"
@@ -127,6 +128,25 @@ bool Game::run_single_player ()
 	return run();
 }
 
+/*
+ * Load a game
+ * argument defines if this is a single player game (true) 
+ * or networked (false)
+ */
+bool Game::run_load_game(bool is_splayer) {
+   assert(is_splayer); // TODO: net game saving not supported
+   
+   Fullscreen_Menu_LoadGame* ssg = new Fullscreen_Menu_LoadGame(this, true);
+   int code = ssg->run();
+   delete ssg;
+
+   if(code==0) 
+      return false;
+
+   m_state = gs_running;
+
+   return run(true);
+}
 
 //extern uchar g_playercolors[MAX_PLAYERS][12];
 bool Game::run_multi_player (NetGame* ng)
@@ -212,53 +232,56 @@ stages.
 3. After this has happened, the game graphics are loaded.
 ===============
 */
-bool Game::run()
+bool Game::run(bool is_savegame)
 {
    postload();
 
-   // Prepare the players (i.e. place HQs)
-   for (int i = 1; i <= get_map()->get_nrplayers(); i++) {
-      Player* player = get_player(i);
-      if (!player)
-         continue;
+   if(!is_savegame) {
+      // Prepare the players (i.e. place HQs)
+      for (int i = 1; i <= get_map()->get_nrplayers(); i++) {
+         Player* player = get_player(i);
+         if (!player)
+            continue;
 
-      // TODO: place hq here if needed
-      player->init(this, true);
+         player->init(this, true);
 
-      const Coords &c = get_map()->get_starting_pos(i);
-      if (player->get_type() == Player::playerLocal)
-         ipl->move_view_to(c.x, c.y);
-   }
-
-   // Prepare the map, set default textures
-   get_map()->recalc_default_resources();
-   get_map()->delete_unreferenced_triggers();
-   get_map()->delete_events_without_trigger();
-
-   // Now let all triggers check once, if they are in the right state
-   for (int i=0; i<get_map()->get_number_of_triggers(); i++)
-      get_map()->get_trigger(i)->check_set_conditions(this);
-
-   // Finally, set the scenario names and tribes to represent
-   // the correct names of the players
-   int curplr;
-   for(curplr=1; curplr <= get_map()->get_nrplayers(); curplr++) {
-      Player* plr=get_player(curplr);
-
-      if(plr) { 
-         get_map()->set_scenario_player_tribe(curplr, plr->get_tribe()->get_name());
-         get_map()->set_scenario_player_name(curplr, plr->get_name()); 
-      } else {
-         get_map()->set_scenario_player_tribe(curplr, "");
-         get_map()->set_scenario_player_name(curplr, "");
+         const Coords &c = get_map()->get_starting_pos(i);
+         if (player->get_type() == Player::playerLocal)
+            ipl->move_view_to(c.x, c.y);
       }
-   }
+
+      // Prepare the map, set default textures
+      get_map()->recalc_default_resources();
+      get_map()->delete_unreferenced_triggers();
+      get_map()->delete_events_without_trigger();
+
+      // Now let all triggers check once, if they are in the right state
+      for (int i=0; i<get_map()->get_number_of_triggers(); i++)
+         get_map()->get_trigger(i)->check_set_conditions(this);
+
+      // Finally, set the scenario names and tribes to represent
+      // the correct names of the players
+      int curplr;
+      for(curplr=1; curplr <= get_map()->get_nrplayers(); curplr++) {
+         Player* plr=get_player(curplr);
+
+         if(plr) { 
+            get_map()->set_scenario_player_tribe(curplr, plr->get_tribe()->get_name());
+            get_map()->set_scenario_player_name(curplr, plr->get_name()); 
+         } else {
+            get_map()->set_scenario_player_tribe(curplr, "");
+            get_map()->set_scenario_player_name(curplr, "");
+         }
+      }
+
+
+
+      // Everything prepared, send the first trigger event
+      // We lie about the sender here. Hey, what is one lie in a lifetime?
+      enqueue_command (new Cmd_CheckTrigger(get_gametime(), -1));
+   } 
    
    load_graphics();
-
-	// Everything prepared, send the first trigger event
-	// We lie about the sender here. Hey, what is one lie in a lifetime?
-	enqueue_command (new Cmd_CheckTrigger(get_gametime(), -1));
 
 	ipl->run();
 

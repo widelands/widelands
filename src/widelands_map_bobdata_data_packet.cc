@@ -519,19 +519,16 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* e
 }
 
 void Widelands_Map_Bobdata_Data_Packet::write_critter_bob(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os, Critter_Bob* critter) {
-   log("Writing Critter Bob!\n");
    fw->Unsigned16(CRITTER_BOB_PACKET_VERSION);
 }
 
 void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os, Worker* worker) {
-   log("Writing Worker Bob!\n");
    fw->Unsigned16(WORKER_BOB_PACKET_VERSION);
 
    switch(worker->get_worker_type()) {
       case Worker_Descr::NORMAL: break; 
       case Worker_Descr::SOLDIER:
       {
-         log("Writing Soldier Bob!\n");
          fw->Unsigned16(SOLDIER_WORKER_BOB_PACKET_VERSION);
          Soldier* soldier=static_cast<Soldier*>(worker);
 
@@ -550,7 +547,6 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
 
       case Worker_Descr::CARRIER:
       {
-         log("Writing Carrier Bob!\n");
          fw->Unsigned16(CARRIER_WORKER_BOB_PACKET_VERSION);
          Carrier* c=static_cast<Carrier*>(worker);
 

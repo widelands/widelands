@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-4 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,6 @@
  *
  */
 
-#ifndef __S__SINGLEPMENUE_H
-#define __S__SINGLEPMENUE_H
+#include "game_data_packet.h"
 
-#include "fullscreen_menu_base.h"
-
-/**
- * Fullscreen Menu for SinglePlayer.
- * Here you select what game you want to play.
- */
-class Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
-   public:
-      Fullscreen_Menu_SinglePlayer();
-
-      void not_supported();
-
-      enum {
-         sp_skirmish,
-         //sp_campaign, // BIG TODO
-         sp_loadgame,
-         sp_back
-      };
-
-};
-
-#endif // __S__SINGLEPMENUE_H
+// NOTHING HERE, all in header
