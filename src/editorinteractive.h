@@ -65,14 +65,16 @@ class Editor_Interactive : public Interactive_Base {
 
       void select_tool(int, bool);
       int get_selected_tool(void) { return tools.current_tool; } 
+      
+      void exit_editor();
+      void map_changed();
+   
    private:
       static const int PANEL_HEIGHT=100;
-
-      void exit_game_btn();
       void toggle_buildhelp();
       void tool_menu_btn();
       void toolsize_menu_btn();
-   
+      void toggle_mainmenu(); 
    
       // Tool
       Editor_Tools tools;
@@ -81,5 +83,6 @@ class Editor_Interactive : public Interactive_Base {
       Editor* m_editor;
       UniqueWindow m_toolmenu;
       UniqueWindow m_toolsizemenu;
+      UniqueWindow m_mainmenu;
 };
 #endif // __S__EDITOR_H

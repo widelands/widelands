@@ -188,6 +188,7 @@ ERROR HANDLING FUNCTIONS
 void critical_error(const char *, ...) PRINTF_FORMAT(1,2);
 
 // Informational messages that can aid in debugging
+#define ALIVE(...) log("Alive in %s line %i\n", __FILE__, __LINE__)
 void log(const char *, ...) PRINTF_FORMAT(1,2);
 
 

@@ -29,6 +29,144 @@
 /*
 =============================
 
+class Editor_Main_Menu
+
+this represents the main menu
+
+=============================
+*/
+class Editor_Main_Menu : public Window {
+   public:
+      Editor_Main_Menu(Editor_Interactive*, UniqueWindow*);
+      virtual ~Editor_Main_Menu();
+
+   private:
+      UniqueWindow* m_registry;
+      Editor_Interactive *m_parent;
+
+      void exit_btn();
+      void load_btn();
+      void save_btn();
+      void new_map_btn();
+      void map_options_btn();     
+};
+
+/*
+===============
+Editor_Main_Menu::Editor_Main_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UniqueWindow *registry)
+	: Window(parent, (parent->get_w()-130)/2, (parent->get_h()-170)/2, 130, 170, "Main Menu")
+{
+	m_registry = registry;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
+	}
+   m_parent=parent;
+
+   // Caption
+   Textarea* tt=new Textarea(this, 0, 0, "Editor Main Menu", Align_Left);
+   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
+
+   // Buttons
+   const int offsx=5;
+   const int offsy=30;
+   const int spacing=5;
+   const int width=get_inner_w()-offsx*2;
+   const int height=20;
+   int posx=offsx; 
+   int posy=offsy;
+   Button* b=new Button(this, posx, posy, width, height, 1);
+   b->set_title("New Map");
+   b->clicked.set(this, &Editor_Main_Menu::new_map_btn);
+   posy+=height+spacing;
+   
+   b=new Button(this, posx, posy, width, height, 1);
+   b->set_title("Load Map");
+   b->clicked.set(this, &Editor_Main_Menu::load_btn);
+   posy+=height+spacing;
+   
+   b=new Button(this, posx, posy, width, height, 1);
+   b->set_title("Save Map");
+   b->clicked.set(this, &Editor_Main_Menu::save_btn);
+   posy+=height+spacing;
+  
+   posy+=spacing;
+   b=new Button(this, posx, posy, width, height, 1);
+   b->set_title("Map Options");
+   b->clicked.set(this, &Editor_Main_Menu::map_options_btn);
+   posy+=height+spacing;
+   
+   posy+=spacing;
+   b=new Button(this, posx, posy, width, height, 0);
+   b->set_title("Exit Editor");
+   b->clicked.set(this, &Editor_Main_Menu::exit_btn);
+   posy+=height+spacing;
+}
+
+/*
+===========
+Editor_Main_Menu Button functions
+
+called, when buttons get clicked
+===========
+*/
+void Editor_Main_Menu::new_map_btn() {
+   // TODO
+}
+void Editor_Main_Menu::load_btn() {
+   
+   m_parent->get_editor()->get_objects()->cleanup(m_parent->get_editor());
+   g_anim.flush();
+
+   //map_select_menue(m_parent->get_editor());
+   std::cerr << "ALIVE!" << std::endl;
+   //m_parent->map_changed();
+   
+   g_gr->flush(PicMod_Menu);
+		
+   m_parent->get_editor()->postload();
+   m_parent->get_editor()->load_graphics();
+}
+
+void Editor_Main_Menu::save_btn() {
+   // TODO
+}
+void Editor_Main_Menu::map_options_btn() {
+   // TODO
+}
+void Editor_Main_Menu::exit_btn() {
+   m_parent->exit_editor();
+}
+
+/*
+===============
+Editor_Main_Menu::~Editor_Main_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Main_Menu::~Editor_Main_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+
+/*
+=============================
+
 class Editor_Tool_Menu
 
 This class is the tool selection window/menu. 
@@ -259,12 +397,10 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    int x = (get_w() - (5*34)) >> 1;
    int y = get_h() - 34;
    Button *b;
-
-   // temp (should be Main menu)
+   
    b = new Button(this, x, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::exit_game_btn);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.bmp", RGBColor(0,0,255)));
-   // temp
+   b->clicked.set(this, &Editor_Interactive::toggle_mainmenu);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.bmp", RGBColor(0,0,255)));
 
    b = new Button(this, x+34, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::tool_menu_btn);
@@ -393,13 +529,32 @@ void Editor_Interactive::recalc_overlay(FCoords fc)
 }
 
   
-/** Editor_Interactive::exit_game_btn(void *a)
- *
- * Handle exit button
- */
-void Editor_Interactive::exit_game_btn()
+/*
+===========
+Editor_Interactive::exit_editor()
+
+exit the editor
+===========
+*/
+void Editor_Interactive::exit_editor()
 {
 	end_modal(0);
+}
+
+/*
+===========
+Editor_Interactive::toggle_mainmenu()
+
+toggles the mainmenu
+===========
+*/
+void Editor_Interactive::toggle_mainmenu(void) {
+   if (m_mainmenu.window) {
+      delete m_mainmenu.window;
+   }
+   else {
+      new Editor_Main_Menu(this, &m_mainmenu);
+   }
 }
 
 /*
