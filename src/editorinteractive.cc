@@ -82,9 +82,9 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *reg
    for(i = 0; i < m_tools->tools.size(); i++, y+= 25) {
       char buf[32];
       m_radioselect->add_button(this, 5, y);
-      sprintf(buf, "%s", m_tools->tools[i]->get_name());
+      sprintf(buf, "%s", m_tools->tools[i]->tool->get_name());
       new Textarea(this, 55, y+10, buf, Align_VCenter);
-      if(m_tools->tools[i]->has_options()) {
+      if(m_tools->tools[i]->tool->has_options()) {
          Button* b = new Button(this, 30, y+3, 14, 14, 0, i);
          b->set_title("O");
          b->clickedid.set(this, &Editor_Tool_Menu::options_button_clicked);
@@ -118,8 +118,7 @@ called when the listselect changes
 ===========
 */
 void Editor_Tool_Menu::changed_to_function(int n) {
-   m_tools->current_tool=n;
-   // TODO: call some kind of 'you've been selected' function
+   m_parent->select_tool(n);
 }
 
 /*
@@ -130,7 +129,7 @@ called when one of the options buttons has been clicked
 ===========
 */
 void Editor_Tool_Menu::options_button_clicked(int n) {
-   m_tools->tools[n]->tool_options_dialog(m_parent);
+   m_tools->tools[n]->tool->tool_options_dialog(m_parent);
    m_radioselect->set_state(n);
 }
 
@@ -287,14 +286,16 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
 
    // Init Tools
    tools.current_tool=0;
-   tools.tools.push_back(new Editor_Info_Tool());
-   tools.tools.push_back(new Editor_Increase_Height_Tool());
-   tools.tools.push_back(new Editor_Decrease_Height_Tool());
-   tools.tools.push_back(new Editor_Set_Height_Tool());
-   tools.tools.push_back(new Editor_Noise_Height_Tool());
-   tools.tools.push_back(new Editor_Set_Right_Terrain_Tool());
-   tools.tools.push_back(new Editor_Set_Down_Terrain_Tool());
-   tools.tools.push_back(new Editor_Set_Both_Terrain_Tool());
+   tools.last_tool=-1;
+   tools.using_linked_tool=false;
+   tools.tools.push_back(new Tool_Info(0, 0, new Editor_Info_Tool()));
+   tools.tools.push_back(new Tool_Info(2, 3, new Editor_Increase_Height_Tool()));
+   tools.tools.push_back(new Tool_Info(1, 3, new Editor_Decrease_Height_Tool()));
+   tools.tools.push_back(new Tool_Info(1, 2, new Editor_Set_Height_Tool()));
+   tools.tools.push_back(new Tool_Info(4, 4, new Editor_Noise_Height_Tool()));
+   tools.tools.push_back(new Tool_Info(6, 7, new Editor_Set_Right_Terrain_Tool()));
+   tools.tools.push_back(new Tool_Info(5, 7, new Editor_Set_Down_Terrain_Tool()));
+   tools.tools.push_back(new Tool_Info(5, 6, new Editor_Set_Both_Terrain_Tool()));
 }
 
 /****************************************
@@ -304,6 +305,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
  */
 Editor_Interactive::~Editor_Interactive() {
    while(tools.tools.size()) {
+      delete tools.tools.back()->tool;
       delete tools.tools.back();
       tools.tools.pop_back();
    }
@@ -409,7 +411,7 @@ the function of the currently selected tool
 */
 void Editor_Interactive::field_clicked() {
    Map* m=get_map();
-   int radius=tools.tools[tools.current_tool]->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
+   int radius=tools.tools[tools.current_tool]->tool->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
 
    // Some things have changed, map is informed, logic is informed. But overlays may still be wrong. Recalc them
    Map_Region_Coords mrc(m_maprenderinfo.fieldsel, radius, m);
@@ -485,3 +487,101 @@ void Editor_Interactive::toggle_minimap() {
 		mainview_move(get_mapview()->get_vpx(), get_mapview()->get_vpy());
 	}
 }
+
+/*
+===========
+Editor_Interactive::handle_key()
+
+Handles a keyboard event
+===========
+*/
+bool Editor_Interactive::handle_key(bool down, int code, char c) {
+   if(down) {
+      // only on down events
+      switch(code) {
+         case KEY_SPACE:
+            toggle_buildhelp();
+            return true;
+
+         case KEY_m:
+            toggle_minimap();
+            return true;
+
+         case KEY_t:
+            tool_menu_btn();
+            return true;
+
+            // Fieldsel radius
+         case KEY_1:
+            set_fieldsel_radius(0);
+            return true;
+         case KEY_2:
+            set_fieldsel_radius(1);
+            return true;
+         case KEY_3:
+            set_fieldsel_radius(2);
+            return true;
+         case KEY_4:
+            set_fieldsel_radius(3);
+            return true;
+         case KEY_5:
+            set_fieldsel_radius(4);
+            return true;
+         case KEY_6:
+            set_fieldsel_radius(5);
+            return true;
+         case KEY_7:
+            set_fieldsel_radius(6);
+            return true;
+
+         case KEY_LSHIFT:
+         case KEY_RSHIFT:
+            if(!tools.using_linked_tool) {
+               tools.using_linked_tool=true;
+               select_tool(tools.tools[tools.current_tool]->f_linked_tool);
+            }
+            return true;
+
+         case KEY_LALT:
+         case KEY_RALT:
+         case KEY_MODE:
+            if(!tools.using_linked_tool) {
+               tools.using_linked_tool=true;
+               select_tool(tools.tools[tools.current_tool]->s_linked_tool);
+            }
+            return true;
+      }
+   } else {
+      // key up events
+      switch(code) {
+         case KEY_LSHIFT:
+         case KEY_RSHIFT:
+         case KEY_LALT:
+         case KEY_RALT:
+         case KEY_MODE:
+            if(tools.using_linked_tool) {
+               select_tool(tools.last_tool);
+               tools.using_linked_tool=false;
+            }
+            return true;
+      }
+   }
+   return false;
+}
+
+/*
+===========
+Editor_Interactive::select_tool()
+
+select a new tool 
+===========
+*/
+void Editor_Interactive::select_tool(int n) {
+   tools.last_tool=tools.current_tool;
+   tools.current_tool=n;
+
+   
+// TODO: call some kind of 'you've been selected' function
+}
+
+

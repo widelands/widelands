@@ -38,8 +38,8 @@ place building, modify building are 3 tools)
 */
 class Editor_Tool {
    public:
-      Editor_Tool() { } ;
-      virtual ~Editor_Tool() { } ;
+      Editor_Tool() { }
+      virtual ~Editor_Tool() { } 
 
       virtual int handle_click(const Coords*, Field* field, Map* m, Editor_Interactive* parent) = 0;
       virtual int tool_options_dialog(Editor_Interactive* parent) { return 0; } // not needed by every tool

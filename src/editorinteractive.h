@@ -44,11 +44,27 @@ class Editor_Interactive : public Interactive_Base {
 
       // gets called when a field is clicked
       void field_clicked();
+	
+      // gets called when a keyboard event occurs
+      bool handle_key(bool down, int code, char c);
+      
+      struct Tool_Info {
+         int f_linked_tool;
+         int s_linked_tool;
+         Editor_Tool* tool;
+
+         Tool_Info(int f, int s, Editor_Tool* t) : f_linked_tool(f), s_linked_tool(s), tool(t) { }
+      };
       
       struct Editor_Tools {
          int current_tool;
-         std::vector<Editor_Tool*> tools;
+         int last_tool;
+         bool using_linked_tool;
+         std::vector<Tool_Info*> tools;
       };
+
+      void select_tool(int);
+      int get_selected_tool(void) { return tools.current_tool; } 
    private:
       static const int PANEL_HEIGHT=100;
 
@@ -57,7 +73,7 @@ class Editor_Interactive : public Interactive_Base {
       void toggle_minimap();
       void tool_menu_btn();
       void toolsize_menu_btn();
-
+   
    
       // Tool
       Editor_Tools tools;
