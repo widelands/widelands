@@ -192,7 +192,7 @@ void Input::set_mouse_speed(const unsigned int s)  { if(!s) return; mouse_speed=
  * Returns: Nothing
  */
 void Input::set_mouse_pos(unsigned int x, unsigned int y) { mpx=mplx=x; mpy=mply=y; }
-					 
+					
 /** void Input::handle_pending_input(void)
  *
  * This function is the heart of the whole class
@@ -205,8 +205,9 @@ void Input::set_mouse_pos(unsigned int x, unsigned int y) { mpx=mplx=x; mpy=mply
  */
 void Input::handle_pending_input(void) {
 		  static SDL_Event ev;
+		  static int xdiff, ydiff;
 		  SDL_PumpEvents();    
-		  
+
 		  while(SDL_PollEvent(&ev)) { 
 					 switch(ev.type) {
 								case SDL_KEYDOWN:
@@ -230,10 +231,10 @@ void Input::handle_pending_input(void) {
 										  break;
 
 								case SDL_MOUSEMOTION:
-										  if(ev.motion.x!=maxx>>1 && ev.motion.y!=maxy>>1) {
+										  if(ev.motion.x!=maxx>>1 || ev.motion.y!=maxy>>1) {
 													 mplx=mpx; mply=mpy;
-													 int xdiff = (int) ((ev.motion.x-levx)*mouse_speed);
-													 int ydiff = (int) ((ev.motion.y-levy)*mouse_speed);
+													 xdiff = (int) ((ev.motion.x-levx)*mouse_speed);
+													 ydiff = (int) ((ev.motion.y-levy)*mouse_speed);
 													 mpx+=xdiff;
 													 mpy+=ydiff;
 													 

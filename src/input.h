@@ -116,6 +116,7 @@ class Input : public Singleton<Input> {
 					bool b1_pressed, b2_pressed;
 					bool bshould_die;
 					 int levx, levy;
+
 };
 
 #define g_ip	Input::get_singleton()
