@@ -187,8 +187,7 @@ void Cmd_Queue::clear_cmd(const Cmd* c)
 {
 	switch(c->cmd) {
 	case CMD_BUILD_ROAD:
-		if (c->arg1)
-			delete (Path*)c->arg1;
+		delete (Path*)c->arg1;
 		break;
 	}
 }
