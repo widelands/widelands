@@ -478,7 +478,7 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer
 	if (str)
 		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, str);
 	else
-		snprintf(fnametmpl, sizeof(fnametmpl), "%s/pics/%s_??.bmp", directory, m_name);
+		snprintf(fnametmpl, sizeof(fnametmpl), "%s/pics/%s_??.png", directory, m_name);
 
 	m_picnametempl = strdup(fnametmpl);
 }

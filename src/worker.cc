@@ -1486,7 +1486,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	m_descname = sglobal->get_string("descname", get_name());
 	m_helptext = sglobal->get_string("help", "Doh... someone forgot the help text!");
 
-	snprintf(buf, sizeof(buf),	"%s_menu.bmp", get_name());
+	snprintf(buf, sizeof(buf),	"%s_menu.png", get_name());
 	string = sglobal->get_string("menu_pic", buf);
 	snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 	m_menu_pic_fname = strdup(fname);

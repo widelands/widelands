@@ -15,8 +15,11 @@ conquers=9
 
 [idle]
 pics=hq_i_??.png 
-hot_spot_x=81
-hot_spot_y=115
+hot_spot_x=94 
+hot_spot_y=117
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0

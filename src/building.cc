@@ -154,7 +154,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	if (m_buildable || m_enhanced_building)
 		{
       // Get build icon
-		snprintf(buf, sizeof(buf), "%s_build.bmp", m_name);
+		snprintf(buf, sizeof(buf), "%s_build.png", m_name);
 		string = global->get_string("buildicon", buf);
 
 		snprintf(fname, sizeof(fname), "%s/%s", directory, string);

@@ -301,7 +301,7 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 	char picname[256];
 
 	// Global options
-	snprintf(buf, sizeof(buf), "%s_00.bmp", m_name);
+	snprintf(buf, sizeof(buf), "%s_00.png", m_name);
 	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));
    m_picture = picname;
 
@@ -417,13 +417,13 @@ uint Immovable_Descr::parse_animation(std::string directory, Profile* s, std::st
 	char picname[256];
 	uint animid=0;
 
-	snprintf(picname, sizeof(picname), "%s_%s_??.bmp", m_name, name.c_str());
+	snprintf(picname, sizeof(picname), "%s_%s_??.png", m_name, name.c_str());
 
 	// kind of obscure, this is still needed for backwards compatibility
 	if (name == "idle" && !anim) {
 		anim = s->get_section("global");
 
-		snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
+		snprintf(picname, sizeof(picname), "%s_??.png", m_name);
 	}
 
 	if (!anim) {

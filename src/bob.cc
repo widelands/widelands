@@ -71,13 +71,13 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
    Section* global = prof->get_safe_section("idle");
 
    // Global options
-	snprintf(buf, sizeof(buf), "%s_00.bmp", m_name);
+	snprintf(buf, sizeof(buf), "%s_00.png", m_name);
 	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));
    m_picture = picname;
 
 	m_default_encodedata.parse(global);
 
-	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
+	snprintf(picname, sizeof(picname), "%s_??.png", m_name);
 	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle"), picname, encdata));
 
 	// Parse attributes

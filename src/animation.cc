@@ -200,7 +200,7 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 		picnametempl = s->get_string("pics");
 	else {
 		if (!picnametempl) {
-			snprintf(templbuf, sizeof(templbuf), "%s_??.bmp", s->get_name());
+			snprintf(templbuf, sizeof(templbuf), "%s_??.png", s->get_name());
 			picnametempl = templbuf;
 		}
 	}
@@ -324,7 +324,7 @@ void DirAnimations::parse(Bob_Descr* b, const char *directory, Profile *prof, co
 			throw wexception("DirAnimations dirpics name templates %s does not contain !!", dirpictempl);
 		strncpy(repl, "%s", 2);
 	} else {
-		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.bmp", sectnamebase);
+		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.png", sectnamebase);
 	}
 
 	for(int dir = 1; dir <= 6; dir++) {
