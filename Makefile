@@ -131,7 +131,7 @@ endif
 # Object files and directories, final compilation flags
 
 OBJECT_DIR:=src/$(TARGET)-$(BUILD)
-CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
+CFLAGS:=-Wall -Werror $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
 LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image -lSDL_ttf
 
