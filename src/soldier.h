@@ -35,6 +35,11 @@ public:
 
    virtual void load_graphics(void); 
 
+   uint get_max_hp_level(void) { return m_max_hp_level; }
+   uint get_max_attack_level(void) { return m_max_attack_level; }
+   uint get_max_defense_level(void) { return m_max_defense_level; }
+   uint get_max_evade_level(void) { return m_max_evade_level; }
+
    uint get_min_hp() { return m_min_hp; }
    uint get_max_hp() { return m_max_hp; }
    uint get_min_attack() { return m_min_attack; }
@@ -95,6 +100,16 @@ public:
 	virtual ~Soldier();
    
    virtual void init(Editor_Game_Base*); 
+
+   void set_level(uint, uint, uint, uint);
+   void set_hp_level(uint); 
+   void set_attack_level(uint);
+   void set_defense_level(uint);
+   void set_evade_level(uint); 
+   uint get_hp_level(void) { return m_hp_level; }
+   uint get_attack_level(void) { return m_attack_level; }
+   uint get_defense_level(void) { return m_defense_level; }
+   uint get_evade_level(void) { return m_evade_level; }
    
 public:
    virtual Worker_Descr::Worker_Type get_worker_type(void) { return get_descr()->get_worker_type(); }
@@ -118,17 +133,17 @@ public:
 
 private:
    // Private data
-   int m_hp_current;
-   int m_hp_max;
-   int m_min_attack;
-   int m_max_attack;
-   int m_defense;
-   int m_evade;
+   uint m_hp_current;
+   uint m_hp_max;
+   uint m_min_attack;
+   uint m_max_attack;
+   uint m_defense;
+   uint m_evade;
 
-   int m_hp_level;
-   int m_attack_level;
-   int m_defense_level;
-   int m_evade_level;
+   uint m_hp_level;
+   uint m_attack_level;
+   uint m_defense_level;
+   uint m_evade_level;
 };
 
 

@@ -21,9 +21,12 @@
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
+#include "game.h"
 #include "profile.h"
 #include "world.h"
+#include "soldier.h"
 #include "tribe.h"
+#include "util.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
@@ -142,7 +145,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 		m_anim_flag = g_anim.get(directory, s, 0, &m_default_encdata);
 
       // default wares
-      s = prof.get_section("startwares");
+      s = prof.get_safe_section("startwares");
 	   Section::Value* value;
 
       while((value=s->get_next_val(0))) {
@@ -155,14 +158,23 @@ void Tribe_Descr::parse_root_conf(const char *directory)
       }
 
       // default workers
-      s = prof.get_section("startworkers");
+      s = prof.get_safe_section("startworkers");
       while((value=s->get_next_val(0))) {
+         if(!strcmp(value->get_name(),"soldier")) continue; // Ignore soldiers here
          int idx = m_workers.get_index(value->get_name());
          if(idx == -1)
             throw wexception("In section [startworkers], worker %s is not know!", value->get_name());
 
          std::string name=value->get_name();
          m_startworkers[name]=value->get_int();
+      }
+   
+      // default soldiers
+      s = prof.get_safe_section("startsoldiers");
+      while((value=s->get_next_val(0))) {
+         // NOTE: no check here, since we do not know about max levels and so on
+         std::string soldier=value->get_name();
+         m_startsoldiers[soldier]=value->get_int();
       }
    }
    catch(std::exception &e) {
@@ -359,14 +371,47 @@ This loads a warehouse with the given start wares as defined in
 the conf files
 ===========
 */
-void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* game, Warehouse* wh) {
+void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Warehouse* wh) {
    std::map<std::string, int>::iterator cur;
 
    for(cur=m_startwares.begin(); cur!=m_startwares.end(); cur++) {
-      wh->create_wares(game->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
+      wh->create_wares(egbase->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
    }
    for(cur=m_startworkers.begin(); cur!=m_startworkers.end(); cur++) {
-      wh->create_wares(game->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
+      wh->create_wares(egbase->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
+   }
+   for(cur=m_startsoldiers.begin(); cur!=m_startsoldiers.end(); cur++) {
+      std::vector<std::string> list;
+      split_string(cur->first, &list, "/");
+
+      if(list.size()!=4) 
+         throw wexception("Error in tribe (%s), startsoldier %s is not valid!", get_name(), cur->first.c_str());
+
+      char* endp;
+      int hplvl=strtol(list[0].c_str(),&endp, 0);
+      if(endp && *endp)
+         throw wexception("Bad hp level '%s'", list[0].c_str());
+      int attacklvl=strtol(list[1].c_str(),&endp, 0);
+      if(endp && *endp)
+         throw wexception("Bad attack level '%s'", list[1].c_str());
+      int defenselvl=strtol(list[2].c_str(),&endp, 0);
+      if(endp && *endp)
+         throw wexception("Bad defense level '%s'", list[2].c_str());
+      int evadelvl=strtol(list[3].c_str(),&endp, 0);
+      if(endp && *endp)
+         throw wexception("Bad evade level '%s'", list[3].c_str());
+  
+      int i=0;
+      for(i=0;i<cur->second; i++) {
+         if(egbase->is_game()) { 
+            Game* game=static_cast<Game*>(egbase);
+            Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
+            Soldier* soldier=static_cast<Soldier*>(soldierd->create(game, wh->get_owner(), wh, wh->get_position()));
+            soldier->set_level(hplvl,attacklvl,defenselvl,evadelvl);
+            wh->incorporate_worker(game, soldier);
+         } 
+      }
+      //TODO: What to do in editor
    }
 }
 

@@ -3,6 +3,9 @@ descname=Carrier
 help=Carries items along your roads.
 type=carrier
 menu_pic=carrier_menu.png
+buildable=yes
+
+[buildcost]
 
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.

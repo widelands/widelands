@@ -101,6 +101,7 @@ class Tribe_Descr {
 
       std::map<std::string, int> m_startwares;
       std::map<std::string, int> m_startworkers;
+      std::map<std::string, int> m_startsoldiers;
 
       // Parsing the tribe
 		EncodeData	m_default_encdata;

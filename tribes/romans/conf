@@ -70,4 +70,8 @@ geologist=50
 butcher=5
 swineherd=5
 miner=10
-soldier=10
+
+[startsoldiers]
+1/1/1/1=32
+3/5/1/2=5
+

@@ -44,7 +44,6 @@ Soldier_Descr::~Soldier_Descr
 Soldier_Descr::Soldier_Descr(Tribe_Descr *tribe, const char *name)
 	: Worker_Descr(tribe, name)
 {
-   m_buildable = false; 
 }
 
 Soldier_Descr::~Soldier_Descr(void)
@@ -227,6 +226,52 @@ void Soldier::init(Editor_Game_Base* gg) {
    
    Worker::init(gg);
 }
+
+/*
+ * Set this soldiers level. Automatically sets the new values
+ */
+void Soldier::set_level(uint hp, uint attack, uint defense, uint evade) {
+   set_hp_level(hp);
+   set_attack_level(attack);
+   set_defense_level(defense);
+   set_evade_level(evade);
+}
+void Soldier::set_hp_level(uint hp) {
+   assert(hp>=m_hp_level && hp<=get_descr()->get_max_hp_level());
+   
+   while(m_hp_level<hp) {
+      ++m_hp_level;
+      m_hp_max+=get_descr()->get_hp_incr_per_level();
+      m_hp_current+=get_descr()->get_hp_incr_per_level();
+   }
+}
+void Soldier::set_attack_level(uint attack) {
+   assert(attack>=m_attack_level && attack<=get_descr()->get_max_attack_level());
+   
+   while(m_attack_level<attack) {
+      ++m_attack_level;
+      m_min_attack+=get_descr()->get_attack_incr_per_level();
+      m_max_attack+=get_descr()->get_attack_incr_per_level();
+   }
+}
+void Soldier::set_defense_level(uint defense) {
+   assert(defense>=m_defense_level && defense<=get_descr()->get_max_defense_level());
+   
+   while(m_defense_level<defense) {
+      ++m_defense_level;
+      m_defense+=get_descr()->get_defense_incr_per_level();
+   }
+}
+void Soldier::set_evade_level(uint evade) {
+   assert(evade>=m_evade_level && evade<=get_descr()->get_max_evade_level());
+   
+   while(m_evade_level<evade) {
+      ++m_evade_level;
+      m_evade+=get_descr()->get_evade_incr_per_level();
+   }
+}
+
+
 
 /*
  * Draw this soldier. This basically draws him as a worker, but add hitpoints

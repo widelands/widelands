@@ -1350,8 +1350,6 @@ Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
 	m_menu_pic = 0;
 	m_menu_pic_fname = 0;
 	m_ware_id = -1;
-   m_buildable = true; 
-
 	add_attribute(Map_Object::WORKER);
 }
 
@@ -1456,8 +1454,11 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	m_menu_pic_fname = strdup(fname);
 
 	// Read the costs of building
-	m_buildable = sglobal->get_bool("buildable", m_buildable);
-	
+   if(get_worker_type() == CARRIER || get_worker_type() == SOLDIER) 
+      m_buildable = sglobal->get_bool("buildable", false);
+   else 
+      m_buildable = sglobal->get_bool("buildable", true);
+
 	if (m_buildable)
 	{
 		Section *s;
@@ -3407,7 +3408,6 @@ Carrier_Descr::~Carrier_Descr
 Carrier_Descr::Carrier_Descr(Tribe_Descr *tribe, const char *name)
 	: Worker_Descr(tribe, name)
 {
-   m_buildable = false; 
 }
 
 Carrier_Descr::~Carrier_Descr(void)
