@@ -80,7 +80,9 @@ called when the ok button has been clicked
 void Main_Menu_Save_Map::clicked(int id) {
    std::string filename=m_editbox->get_text();
    if(filename!="") {
-      Widelands_Map_Saver* wms=new Widelands_Map_Saver(filename, m_parent->get_editor());
+      std::string realname = "maps/";
+      realname+=filename;
+      Widelands_Map_Saver* wms=new Widelands_Map_Saver(realname, m_parent->get_editor());
       try {
          wms->save();
       } catch(std::exception& exe) {

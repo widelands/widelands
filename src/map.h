@@ -20,6 +20,7 @@
 #ifndef __S__MAP_H
 #define __S__MAP_H
 
+#include <string>
 #include <vector>
 #include "field.h"
 #include "geometry.h"
@@ -142,8 +143,14 @@ public:
 
    // For loading
    Map_Loader* get_correct_loader(const char*);
-	void load_graphics();
+   void cleanup(void);
+
+   // for editor
+   void create_empty_map(int w=64, int h=64, std::string worldname = std::string("greenland"));
+
+   void load_graphics();
    void recalc_whole_map();
+
 
 	void set_nrplayers(uint nrplayers);
 

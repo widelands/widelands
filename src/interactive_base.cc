@@ -83,6 +83,30 @@ Interactive_Base::~Interactive_Base(void)
 
 
 /*
+==============
+Interactive_Base::map_changed()
+
+called when the map has changed
+overlays have to be recalculated
+==============
+*/
+void Interactive_Base::map_changed(void) {
+	int mapw;
+	int maph;
+
+	mapw = m_maprenderinfo.egbase->get_map()->get_width();
+	maph = m_maprenderinfo.egbase->get_map()->get_height();
+
+	for(int y = 0; y < maph; y++)
+		for(int x = 0; x < mapw; x++) {
+			FCoords coords = m_maprenderinfo.egbase->get_map()->get_fcoords(Coords(x,y));
+
+			recalc_overlay(coords);
+		}
+}
+
+
+/*
 ===============
 Interactive_Base::set_fieldsel
 

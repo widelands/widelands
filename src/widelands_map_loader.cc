@@ -23,6 +23,7 @@
 #include "filesystem.h"
 #include "map.h"
 #include "world.h"
+#include "error.h"
 
 /*
  * Constructor
@@ -45,20 +46,29 @@ Widelands_Map_Loader::~Widelands_Map_Loader(void) {
  * the get_info() functions (_width, _nrplayers..)
  */
 int Widelands_Map_Loader::preload_map() {
+   ALIVE();
    assert(get_state()!=STATE_LOADED);
 
+   ALIVE();
    // Load elemental data block
    Widelands_Map_Elemental_Data_Packet mp;
+   ALIVE();
    FileRead fr;
+   ALIVE();
 
+   ALIVE();
    fr.Open(g_fs, m_filename.c_str());
+   ALIVE();
    mp.Pre_Read(&fr, m_map);
+   ALIVE();
    
    if(!exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
+   ALIVE();
    
    set_state(STATE_PRELOADED);
+   ALIVE();
 
    return 0;
 }
@@ -93,10 +103,6 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase) {
      delete pak;
    } 
 
-   //// HACK for debug
-  // m_map->set_nrplayers(1);
-//	m_map->set_starting_pos(1, Coords(24, 24));
-   
    m_map->recalc_whole_map();
 
    set_state(STATE_LOADED);

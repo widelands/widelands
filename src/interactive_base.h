@@ -56,7 +56,11 @@ class Interactive_Base : public UIPanel {
 
 		static int get_xres();
 		static int get_yres();
-
+      
+      // called to recalc all stuff 
+      // after a map change
+      void map_changed(void);
+   
       // logic handler func
       void think();
 

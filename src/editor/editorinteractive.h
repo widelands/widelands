@@ -58,7 +58,6 @@ class Editor_Interactive : public Interactive_Base {
       int get_selected_tool(void) { return tools.current_tool_index; }
 
       void exit_editor();
-      void map_changed();
 
    private:
       static const int PANEL_HEIGHT=100;

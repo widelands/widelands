@@ -191,12 +191,7 @@ void Interactive_Player::start()
 	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
 	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
 
-	for(int y = 0; y < maph; y++)
-		for(int x = 0; x < mapw; x++) {
-			FCoords coords = m_maprenderinfo.egbase->get_map()->get_fcoords(Coords(x,y));
-
-			recalc_overlay(coords);
-		}
+   map_changed();
 }
 
 

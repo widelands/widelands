@@ -18,6 +18,7 @@
  */
 
 #include "editor.h"
+#include "interactive_base.h"
 #include "editorinteractive.h"
 #include "keycodes.h"
 #include "map.h"
@@ -139,12 +140,7 @@ void Editor_Interactive::start()
 	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
 	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
 
-	for(int y = 0; y < maph; y++)
-		for(int x = 0; x < mapw; x++) {
-			FCoords coords = m_maprenderinfo.egbase->get_map()->get_fcoords(Coords(x,y));
-
-			recalc_overlay(coords);
-		}
+   Interactive_Base::map_changed();
 }
 
 /*

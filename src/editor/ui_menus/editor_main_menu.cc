@@ -25,6 +25,7 @@
 #include "editor_main_menu_new_map.h"
 #include "editor_main_menu_map_options.h"
 #include "editor_main_menu_save_map.h"
+#include "editor_main_menu_load_map.h"
 #include "error.h"
 #include "fullscreen_menu_fileview.h"
 
@@ -131,19 +132,8 @@ void Editor_Main_Menu::new_map_btn() {
    delete this;
 }
 void Editor_Main_Menu::load_btn() {
-   log("TODO: Editor_Main_Menu::load_btn()\n");
-   /*
-   m_parent->get_editor()->get_objects()->cleanup(m_parent->get_editor());
-   g_anim.flush();
-
-   //map_select_menue(m_parent->get_editor());
-   //m_parent->map_changed();
-
-   g_gr->flush(PicMod_Menu);
-
-   m_parent->get_editor()->postload();
-   m_parent->get_editor()->load_graphics();
-*/
+   new Main_Menu_Load_Map(m_parent);
+   delete this;
 }
 
 void Editor_Main_Menu::save_btn() {

@@ -22,6 +22,7 @@
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "system.h"
+#include "graphic.h"
 
 UIModal_Message_Box::UIModal_Message_Box(UIPanel* parent, std::string caption, std::string text, MB_Type type) :
    UIWindow(parent, 0, 0, 20, 20, caption.c_str()) {
@@ -46,7 +47,6 @@ UIModal_Message_Box::UIModal_Message_Box(UIPanel* parent, std::string caption, s
 }
 
 UIModal_Message_Box::~UIModal_Message_Box(void) {
-
 }
 
 /*

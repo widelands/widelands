@@ -165,18 +165,10 @@ int S2_Map_Loader::load_map_complete(Editor_Game_Base* game) {
 Map::Map
 
 Inits a clean, empty map
-Preload the map. This only loads the map header.
 ===============
 */
 Map::Map(void) {
-	m_nrplayers = 0;
-	m_width = m_height = 0;
-	m_world = 0;
-	m_fields = 0;
-	m_starting_pos = 0;
-
-	m_pathcycle = 0;
-	m_pathfields = 0;
+   cleanup();
 }
 
 /*
@@ -188,20 +180,7 @@ cleanups
 */
 Map::~Map()
 {
-	if (m_fields)
-      free(m_fields);
-	m_fields = 0;
-	if (m_pathfields)
-		free(m_pathfields);
-	m_pathfields = 0;
-   if (m_starting_pos)
-      free(m_starting_pos);
-	m_starting_pos = 0;
-   if (m_world)
-		delete m_world;
-	m_world = 0;
-
-	m_nrplayers = 0;
+   cleanup();
 }
 
 /*
@@ -241,6 +220,66 @@ void Map::recalc_whole_map(void)
 
 /*
 ===============
+Map::cleanup
+
+remove your world, remove your data
+go back to your initial state
+===============
+*/
+void Map::cleanup(void) {
+ 	m_nrplayers = 0;
+	m_width = m_height = 0;
+	m_fields = 0;
+	m_starting_pos = 0;
+   m_world=0;
+	m_pathcycle = 0;
+	m_pathfields = 0;
+
+   if (m_fields)
+      free(m_fields);
+	m_fields = 0;
+	if (m_pathfields)
+		free(m_pathfields);
+	m_pathfields = 0;
+   if (m_starting_pos)
+      free(m_starting_pos);
+	m_starting_pos = 0;
+   if (m_world)
+		delete m_world;
+	m_world = 0;
+
+}
+
+/*
+===========
+Map::create_emtpy_map
+
+creates an empty map without name with
+the given data
+===========
+*/
+void Map::create_empty_map(int w, int h, std::string worldname) {
+   set_world_name(worldname.c_str());
+   load_world();
+   set_size(w,h);
+   set_name("No Name");
+   set_author("Unknown");
+   set_description("no description defined");
+
+   for(int y=0; y<64; y++) {
+      for(int x=0; x<64; x++) {
+			FCoords coords = get_fcoords(Coords(x, y));
+
+         coords.field->set_height(10);
+         coords.field->set_terraind(get_world()->get_terrain(static_cast<uint>(0)));
+         coords.field->set_terrainr(get_world()->get_terrain(static_cast<uint>(0)));
+      }
+   }
+   recalc_whole_map();
+}
+
+/*
+===============
 Map::set_size [private]
 
 Set the size of the map. This should only happen once during initial load.
@@ -248,7 +287,7 @@ Set the size of the map. This should only happen once during initial load.
 */
 void Map::set_size(uint w, uint h)
 {
-	assert(!m_fields);
+   assert(!m_fields);
 	assert(!m_pathfields);
 
 	m_width = w;
@@ -341,7 +380,7 @@ once during initial load.
 */
 void Map::load_world(void)
 {
-	assert(!m_world);
+   assert(!m_world);
 
 	m_world = new World(m_worldname);
 }
