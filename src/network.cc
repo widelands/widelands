@@ -17,6 +17,7 @@
  *
  */
 
+#include <algorithm>
 #include "game.h"
 #include "player.h"
 #include "playercommand.h"
@@ -27,7 +28,10 @@
 #include "fullscreen_menu_launchgame.h"
 
 
-#define CHECK_SYNC_INTERVAL	1000
+#define CHECK_SYNC_INTERVAL	2000
+#define	DELAY_PROBE_INTERVAL	10000
+#define MINIMUM_NETWORK_DELAY	10	/* to avoid unneccessary network congestion */
+#define INITIAL_NETWORK_DELAY	500
 
 
 enum {
@@ -36,6 +40,8 @@ enum {
 	NETCMD_SELECTMAP,
 	NETCMD_PLAYERINFO,
 	NETCMD_START,
+	NETCMD_PING,
+	NETCMD_PONG,
 	NETCMD_ADVANCETIME,
 	NETCMD_PLAYERCOMMAND,
 	NETCMD_SYNCREPORT
@@ -48,7 +54,6 @@ class Cmd_NetCheckSync:public BaseCommand {
 	
     public:
 	Cmd_NetCheckSync (int dt, NetGame* ng) : BaseCommand (dt) { netgame=ng; }
-//	Cmd_NetCheckSync () : BaseCommand(0) { } // For savegame loading
        
 	virtual void execute (Game* g);
 	
@@ -102,9 +107,9 @@ void NetGame::run ()
 // Return the maximum amount of time the game logic is allowed to advance.
 // After that, new player commands may be scheduled and must be taken
 // into account.
-int NetGame::get_max_frametime ()
+uint NetGame::get_max_frametime ()
 {
-	int game_time=game->get_gametime();
+	uint game_time=game->get_gametime();
 	
 	assert (game_time<=net_game_time);
 
@@ -116,6 +121,7 @@ int NetGame::get_max_frametime ()
 NetHost::NetHost ()
 {
 	IPaddress myaddr;
+	int i;
 	
 	// create a listening socket
 	SDLNet_ResolveHost (&myaddr, NULL, WIDELANDS_PORT);
@@ -125,6 +131,12 @@ NetHost::NetHost ()
 	serializer=new Serializer();
 	
 	playernum=1;
+	
+	net_delay=INITIAL_NETWORK_DELAY;
+	next_ping_due=0;
+	
+	for (i=0;i<8;i++)
+	    net_delay_history[i]=INITIAL_NETWORK_DELAY;
 }
 
 NetHost::~NetHost ()
@@ -262,6 +274,19 @@ void NetHost::handle_network ()
 	for (i=0;i<clients.size();i++)
 		while (clients[i].deserializer->avail())
 			switch (clients[i].deserializer->getchar()) {
+			    case NETCMD_PONG:
+				if (clients[i].lag>0) {
+				    printf ("Duplicate pong received\n");
+				    continue;
+				}
+				
+				clients[i].lag=(SDL_GetTicks() - last_ping_sent) >? 1;
+				pongs_received++;
+				
+				if (pongs_received==clients.size())
+					update_network_delay ();
+				
+				break;
 			    case NETCMD_PLAYERCOMMAND:
 				cmds.push (PlayerCommand::deserialize(clients[i].deserializer));
 				break;
@@ -278,7 +303,7 @@ void NetHost::handle_network ()
 	// according to the network speed and lag.
 	// The values used here should be alright for a
 	// slow dialup connection.
-	if (net_game_time - game->get_gametime() < 250) {
+	if (net_game_time - game->get_gametime() < net_delay/2) {
 		serializer->begin_packet ();
 
 		// send any outstanding player commands
@@ -298,7 +323,7 @@ void NetHost::handle_network ()
 		}
 
 		// update network time
-		net_game_time=game->get_gametime()+500;
+		net_game_time=(game->get_gametime()+net_delay) >? net_game_time;
 	
 		serializer->putchar (NETCMD_ADVANCETIME);
 		serializer->putlong (net_game_time);
@@ -309,6 +334,61 @@ void NetHost::handle_network ()
 		for (i=0;i<clients.size();i++)
 			serializer->send (clients[i].sock);
 	}
+    
+	// see if it is time to check network lag again
+	if (SDL_GetTicks()>=next_ping_due) {
+		printf ("Ping!\n");
+		
+		last_ping_sent=SDL_GetTicks();
+		next_ping_due=last_ping_sent + DELAY_PROBE_INTERVAL;
+		pongs_received=0;
+	    
+		serializer->begin_packet ();
+		serializer->putchar (NETCMD_PING);
+		serializer->end_packet ();
+	    
+    		// send the packet to all peers
+		for (i=0;i<clients.size();i++) {
+			serializer->send (clients[i].sock);
+			
+			clients[i].lag=0;
+		}
+	}
+}
+
+void NetHost::update_network_delay ()
+{
+	ulong tmp[8];
+	unsigned int i;
+	
+	for (i=7;i>0;i--)
+	    net_delay_history[i]=net_delay_history[i-1];
+	
+	net_delay_history[0]=MINIMUM_NETWORK_DELAY;
+	
+	for (i=0;i<clients.size();i++)
+		if (clients[i].lag>net_delay_history[0])
+		    net_delay_history[0]=clients[i].lag;
+	
+	// add a safety margin (25%)
+	net_delay_history[0]+=net_delay_history[0]/4;
+	
+	for (i=0;i<8;i++)
+	    tmp[i]=net_delay_history[i];
+	
+	std::sort (tmp, tmp+8);
+	
+	// forget the two slowest and the two fastest probes
+	// average the remaining four
+	
+	net_delay=0;
+	
+	for (i=2;i<6;i++)
+	    net_delay+=tmp[i];
+	
+	net_delay/=4;
+	
+	printf ("network delay is now %dms\n", (int) net_delay);
 }
 
 void NetHost::send_player_command (PlayerCommand* cmd)
@@ -422,6 +502,13 @@ void NetClient::handle_network ()
 			
 			assert (launch_menu!=0);
 			launch_menu->start_clicked();
+			break;
+		    case NETCMD_PING:	// got a ping, reply with a pong
+			serializer->begin_packet ();
+			serializer->putchar (NETCMD_PONG);
+			serializer->end_packet ();
+			serializer->send (sock);
+			printf ("Pong!\n");
 			break;
 		    case NETCMD_ADVANCETIME:
 			net_game_time=deserializer->getlong();
@@ -551,8 +638,6 @@ void Cmd_NetCheckSync::execute (Game* g)
 {
 	// because the random number generator is made dependant
 	// on the command queue, it is a good indicator for synchronization
-	
-	printf ("sync report...\n");
 	
 	netgame->syncreport (g->logic_rand());
 	

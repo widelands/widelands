@@ -65,7 +65,7 @@ class NetGame {
 	
 	void run ();
 	
-	int get_max_frametime();
+	uint get_max_frametime();
 	
 	virtual bool is_host ()=0;
 	virtual void begin_game ()=0;
@@ -80,7 +80,7 @@ class NetGame {
 	Game*		game;
 	
 	int		playernum;
-	int		net_game_time;
+	uint		net_game_time;
 	
 	uint		common_rand_seed;
 	
@@ -108,12 +108,14 @@ class NetHost:public NetGame {
 
     private:
 	void send_player_info ();
+	void update_network_delay ();
 
 	struct Client {
 		TCPsocket		sock;
 		Deserializer*		deserializer;
 		int			playernum;
 		std::queue<uint>	syncreports;
+		ulong			lag;
 	};
 	
 	TCPsocket			svsock;
@@ -125,6 +127,13 @@ class NetHost:public NetGame {
 	Serializer*			serializer;
 	
 	std::queue<uint>		mysyncreports;
+	
+	ulong				net_delay;
+	ulong				net_delay_history[8];
+	
+	ulong				next_ping_due;
+	ulong				last_ping_sent;
+	uint				pongs_received;
 };
 
 class NetClient:public NetGame {
