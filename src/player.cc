@@ -135,7 +135,7 @@ void Player::build_flag(Coords c)
 	int buildcaps = get_buildcaps(c);
 	
 	if (buildcaps & BUILDCAPS_FLAG)
-		Flag::create(m_egbase, this, c, m_egbase->is_game());
+		Flag::create(m_egbase, this, c);
 }
 
 /*
@@ -149,7 +149,7 @@ by the player.
 void Player::rip_flag(Coords c)
 {
 	BaseImmovable *imm = m_egbase->get_map()->get_immovable(c);
-	
+
 	if (imm && imm->get_type() == Map_Object::FLAG) {
 		if (((Flag *)imm)->get_owner() == this)
 			imm->destroy(m_egbase);
@@ -172,28 +172,28 @@ void Player::build_road(const Path *path)
 	Map *map = m_egbase->get_map();
 	BaseImmovable *imm;
 	Flag *start, *end;
-	
+
 	imm = map->get_immovable(path->get_start());
 	if (!imm || imm->get_type() != Map_Object::FLAG) {
 		log("%i: building road, missed start flag\n", get_player_number());
 		return;
 	}
 	start = (Flag *)imm;
-	
+
 	imm = map->get_immovable(path->get_end());
 	if (!imm || imm->get_type() != Map_Object::FLAG) {
 		log("%i: building road, missed end flag\n", get_player_number());
 		return;
 	}
 	end = (Flag *)imm;
-	
+
 	// Verify ownership of the path
 	Coords coords = path->get_start();
-	
+
 	for(int i = 0; i < path->get_nsteps()-1; i++) {
 		int dir = path->get_step(i);
 		map->get_neighbour(coords, dir, &coords);
-		
+
 		imm = map->get_immovable(coords);
 		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
 			log("%i: building road, small immovable in the way\n", get_player_number());
@@ -205,9 +205,9 @@ void Player::build_road(const Path *path)
 			return;
 		}
 	}
-	
+
 	// fine, we can build the road
-	Road::create(m_egbase, Road_Normal, start, end, *path, m_egbase->is_game());
+	Road::create(m_egbase, Road_Normal, start, end, *path);
 }
 
 /*

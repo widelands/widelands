@@ -52,16 +52,16 @@ Insert a new command into the queue; it will be executed at the given time
 void Cmd_Queue::queue(int time, char sender, int cmd, int arg1, int arg2, int arg3)
 {
 	Cmd c; // our command
-	
+
 	c.time = time;
 	c.sender = sender;
 	c.cmd = cmd;
 	c.arg1 = arg1;
-	c.arg2 = arg2;	
+	c.arg2 = arg2;
 	c.arg3 = arg3;
-	
+
 	m_cmds.push(c);
-	
+
 	//cerr << "queue(" << time << ", " << arg1 << ")" << endl;
 }
 
@@ -69,7 +69,7 @@ void Cmd_Queue::queue(int time, char sender, int cmd, int arg1, int arg2, int ar
  *
  * Run all commands scheduled for the next interval milliseconds, and update the
  * internal time as well.
- * the game_time_var represents the current game time, which we update and with 
+ * the game_time_var represents the current game time, which we update and with
  * which we must mess around (to run all queued cmd.s) and which we update (add
  * the interval)
  */
@@ -80,21 +80,19 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 
 
 	while(!m_cmds.empty()) {
-		const Cmd &c = m_cmds.top();
+		Cmd c = m_cmds.top();
 		if (final - c.time < 0)
 			break;
-		
-		//cerr << "run(" << c.time << ", " << c.arg1 << ")" << endl;
-			
+
+		m_cmds.pop();
+
 		*game_time_var = c.time;
 		exec_cmd(&c);
 		clear_cmd((Cmd *)&c);
-		
-		m_cmds.pop();
 	}
-	
+
 	*game_time_var = final;
-   
+
 	return cnt;
 }
 
@@ -116,7 +114,7 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		// the object must queue the next CMD_ACT itself if necessary
 		break;
 	}
-	
+
 	case CMD_DESTROY:
 	{
 		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
@@ -124,7 +122,7 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 			obj->destroy(m_game);
 		break;
 	}
-	
+
 	case CMD_INCORPORATE:
 	{
 		Worker *worker = (Worker*)m_game->get_objects()->get_object(c->arg1);
@@ -132,28 +130,28 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 			worker->incorporate(m_game);
 		break;
 	}
-	
+
 	case CMD_BUILD_FLAG:
 	{
 		Player *plr = m_game->get_player(c->sender);
 		plr->build_flag(Coords(c->arg1, c->arg2));
 		break;
 	}
-	
+
 	case CMD_RIP_FLAG:
 	{
 		Player *plr = m_game->get_player(c->sender);
 		plr->rip_flag(Coords(c->arg1, c->arg2));
 		break;
 	}
-	
+
 	case CMD_BUILD_ROAD:
 	{
 		Player *plr = m_game->get_player(c->sender);
 		plr->build_road((Path*)c->arg1);
 		break;
 	}
-	
+
 	case CMD_REMOVE_ROAD:
 	{
 		assert(c->arg1);
@@ -163,14 +161,14 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 			plr->remove_road((Road*)obj);
 		break;
 	}
-	
+
 	case CMD_BUILD:
 	{
 		Player* plr = m_game->get_player(c->sender);
 		plr->build(Coords(c->arg1, c->arg2), c->arg3);
 		break;
 	}
-	
+
 	default:
 		assert(0);
 		break;

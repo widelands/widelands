@@ -50,7 +50,7 @@ WareInstance::WareInstance
 ===============
 */
 WareInstance::WareInstance(int ware)
-	: Map_Object(&s_description, true)
+	: Map_Object(&s_description)
 {
 	m_economy = 0;
 
@@ -441,6 +441,8 @@ bool WareInstance::is_moving(Game* g)
 			if (!reroutestart)
 				reroutestart = m_move_route->get_flag(g, 0);
 
+			m_flag_dirty = true;
+
 			assert(get_economy() == reroutestart->get_economy());
 
 			if (!get_economy()->find_route(reroutestart->get_base_flag(), target->get_base_flag(), m_move_route))
@@ -550,8 +552,8 @@ Flag::Flag
 Create the flag. Initially, it doesn't have any attachments.
 ===============
 */
-Flag::Flag(bool logic)
-	: PlayerImmovable(&g_flag_descr, logic)
+Flag::Flag()
+	: PlayerImmovable(&g_flag_descr)
 {
 	m_anim = 0;
 	m_building = 0;
@@ -595,12 +597,12 @@ Flag::create [static]
 Create a flag at the given location
 ===============
 */
-Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic)
+Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
 {
 	Road *road = 0;
 	BaseImmovable *imm = g->get_map()->get_immovable(coords);
 
-	Flag *flag = new Flag(g->is_game());
+	Flag *flag = new Flag();
 	flag->set_owner(owner);
 	flag->m_position = coords;
 
@@ -623,6 +625,7 @@ Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic
 		road->postsplit(g, flag);
 	return flag;
 }
+
 
 /*
 ===============
@@ -651,6 +654,7 @@ Flag *Flag::get_base_flag()
 {
 	return this;
 }
+
 
 /*
 ===============
@@ -934,7 +938,7 @@ void Flag::wake_up_capacity_queue(Game* g)
 		if (!w)
 			continue;
 
-		log("Flag: wake up one from wait queue.\n");
+		molog("Flag: wake up one from wait queue.\n");
 
 		if (w->wakeup_flag_capacity(g, this))
 			break;
@@ -1165,7 +1169,7 @@ void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point
 		{  7,  1 },
 		{ -6, -3 },
 		{ -1, -2 },
-		{ -3, -2 },
+		{  3, -2 },
 		{  8, -3 }
 	};
 
@@ -1211,6 +1215,7 @@ Road_Descr::Road_Descr()
 
 Road_Descr g_road_descr;
 
+
 /*
 ===============
 Road::Road
@@ -1219,8 +1224,8 @@ Road::~Road
 Construction and destruction. Most of the actual work is done in init/cleanup.
 ===============
 */
-Road::Road(bool logic)
-	: PlayerImmovable(&g_road_descr, logic)
+Road::Road()
+	: PlayerImmovable(&g_road_descr)
 {
 	m_type = 0;
 	m_flags[0] = m_flags[1] = 0;
@@ -1244,12 +1249,12 @@ Road::create [static]
 Create a road between the given flags, using the given path.
 ===============
 */
-Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path, bool logic)
+Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path)
 {
 	assert(start->get_position() == path.get_start());
 	assert(end->get_position() == path.get_end());
 
-	Road *r = new Road(logic);
+	Road *r = new Road();
 	r->set_owner(start->get_owner());
 	r->m_type = type;
 	r->m_flags[FlagStart] = start;	// m_flagidx is set when attach_road() is called, i.e. in init()
@@ -1436,7 +1441,7 @@ void Road::init(Editor_Game_Base *gg)
 	Carrier* carrier = (Carrier*)m_carrier.get(g);
 
 	if (!carrier) {
-		if (get_logic() && !m_carrier_request)
+		if (g->is_game() && !m_carrier_request)
 			request_carrier(g);
 	} else {
 		// This happens after a road split. Tell the carrier what's going on
@@ -1580,7 +1585,7 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 	mark_map(g);
 
 	// create the new road
-	Road *newroad = new Road(g->is_game());
+	Road *newroad = new Road();
 	newroad->set_owner(get_owner());
 	newroad->m_type = m_type;
 	newroad->m_flags[FlagStart] = flag; // flagidx will be set on init()

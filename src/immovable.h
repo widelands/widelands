@@ -47,13 +47,13 @@ public:
 		BIG
 	};
 
-	BaseImmovable(Map_Object_Descr *descr, bool);
+	BaseImmovable(Map_Object_Descr *descr);
 	virtual ~BaseImmovable();
-	
-	virtual int get_size() = 0; 
-	virtual bool get_passable() = 0; 
+
+	virtual int get_size() = 0;
+	virtual bool get_passable() = 0;
 	virtual void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos) = 0;
-	
+
 protected:
 	void set_position(Editor_Game_Base *g, Coords c);
 	void unset_position(Editor_Game_Base *g, Coords c);
@@ -71,9 +71,9 @@ public:
 	inline const char* get_name(void) { return m_name; }
 	inline uint get_anim(void) { return m_anim; }
 	inline int get_size(void) { return m_size; }
-		
+
 	void parse(const char *directory, Profile *s);
-	Immovable *create(Editor_Game_Base *g, Coords coords, bool);
+	Immovable *create(Editor_Game_Base *g, Coords coords);
 
 protected:
 	char		m_name[30];
@@ -87,7 +87,7 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(Immovable_Descr);
 
 public:
-	Immovable(Immovable_Descr *descr, bool);
+	Immovable(Immovable_Descr *descr);
 	~Immovable();
 
 	int get_type();
@@ -117,7 +117,7 @@ adjusted automatically.
 */
 class PlayerImmovable : public BaseImmovable {
 public:
-	PlayerImmovable(Map_Object_Descr *descr, bool);
+	PlayerImmovable(Map_Object_Descr *descr);
 	virtual ~PlayerImmovable();
 
 	inline Player *get_owner() const { return m_owner; }

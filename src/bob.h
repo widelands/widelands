@@ -39,10 +39,10 @@ public:
 	inline const char* get_name(void) { return m_name; }
 	inline uint get_idle_anim(void) { return m_idle_anim; }
 
-	Bob *create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic);
+	Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
 
 protected:
-	virtual Bob *create_object(bool) = 0;
+	virtual Bob *create_object() = 0;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 
 	char	m_name[30];
@@ -71,7 +71,7 @@ public:
 	};
 
 protected:
-	Bob(Bob_Descr *descr, bool);
+	Bob(Bob_Descr *descr);
 	virtual ~Bob(void);
 
 public:
@@ -105,7 +105,7 @@ protected: // higher level handling (task-based)
 	inline int get_current_task() { return m_task; }
 	void start_task(Game*, uint task);
 	void end_task(Game*, bool success, uint nexttask);
-	void interrupt_task(Game*, bool hard, uint nexthint = 0);
+	void interrupt_task(Game*, bool hard, uint nexthint = 0, bool success = false);
 
 	// handler functions
 	virtual int task_begin(Game*);

@@ -122,7 +122,7 @@ public:
 	};
 
 protected:
-	Map_Object(Map_Object_Descr *descr, bool logic);
+	Map_Object(Map_Object_Descr *descr);
 	virtual ~Map_Object(void);
 
 public:
@@ -134,9 +134,10 @@ public:
 	void remove(Editor_Game_Base*);
 	virtual void destroy(Editor_Game_Base*);
 
-   // The next two functions are really only needed in games.
+   // The next functions are really only needed in games.
    // Not in Editor
 	void schedule_destroy(Game *g);
+	uint schedule_act(Game* g, uint tdelta, uint data = 0);
 	virtual void act(Game*, uint data);
 
 protected:
@@ -144,19 +145,11 @@ protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
 
-   // init for game alone
-
-   // is this a game (with logic) or a editor run (without logic)
-   inline bool get_logic(void) { return m_logic; }
-
 	void molog(const char* fmt, ...);
 
 protected:
 	Map_Object_Descr *m_descr;
 	uint m_serial;
-
-private:
-   bool m_logic;
 };
 
 inline int get_reverse_dir(int dir) { return 1 + ((dir-1)+3)%6; }

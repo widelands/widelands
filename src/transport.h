@@ -123,10 +123,10 @@ private:
 	};
 
 public:
-	Flag(bool);
+	Flag();
 	virtual ~Flag();
 
-	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords, bool);
+	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords);
 
 	virtual int get_type();
 	virtual int get_size();
@@ -218,10 +218,10 @@ public:
 	};
 
 public:
-	Road(bool);
+	Road();
 	virtual ~Road();
 
-	static Road* create(Editor_Game_Base *g, int type, Flag* start, Flag* end, const Path &path, bool);
+	static Road* create(Editor_Game_Base *g, int type, Flag* start, Flag* end, const Path &path);
 
 	inline Flag* get_flag(FlagId flag) const { return m_flags[flag]; }
 

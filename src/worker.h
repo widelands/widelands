@@ -22,6 +22,7 @@
 
 #include "bob.h"
 
+class Building;
 class Economy;
 class Flag;
 class Request;
@@ -52,7 +53,7 @@ public:
 	Worker_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Worker_Descr(void);
 
-	virtual Bob *create_object(bool);
+	virtual Bob *create_object();
 
 	void load_graphics();
 
@@ -66,7 +67,7 @@ public:
 
 	void set_ware_id(int idx);
 
-	Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords, bool logic);
+	Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords);
 
 protected:
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
@@ -99,7 +100,7 @@ public:
 		State_Worker_Last		// must be last
 	};
 
-	Worker(Worker_Descr *descr, bool ingamelogic);
+	Worker(Worker_Descr *descr);
 	virtual ~Worker();
 
 	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
@@ -138,6 +139,7 @@ public:
 	virtual void cleanup(Editor_Game_Base *g);
 
 	virtual bool wakeup_flag_capacity(Game* g, Flag* flag);
+	virtual bool wakeup_leave_building(Game* g, Building* building);
 
 protected:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
@@ -182,7 +184,7 @@ public:
 	virtual ~Carrier_Descr(void);
 
 protected:
-	virtual Bob *create_object(bool);
+	virtual Bob *create_object();
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 };
 
@@ -195,7 +197,7 @@ public:
 		State_WorkTransport,								// transport something
 	};
 
-	Carrier(Carrier_Descr *descr, bool ingamelogic);
+	Carrier(Carrier_Descr *descr);
 	virtual ~Carrier();
 
 	void set_job_road(Game*, Road* road);

@@ -58,13 +58,13 @@ public:
 	inline int get_size(void) { return m_size; }
 	inline bool get_ismine() { return m_mine; }
 
-	Building *create(Editor_Game_Base *g, Player *owner, Coords pos, bool logic, bool construct);
+	Building *create(Editor_Game_Base *g, Player *owner, Coords pos, bool construct);
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual void load_graphics();
 
 protected:
-	virtual Building *create_object(bool) = 0;
-	Building* create_constructionsite(bool logic);
+	virtual Building *create_object() = 0;
+	Building* create_constructionsite();
 
 private:
 	Tribe_Descr		*m_tribe;			// the tribe this building belongs to
@@ -91,7 +91,7 @@ class Building : public PlayerImmovable {
 	MO_DESCR(Building_Descr)
 
 public:
-	Building(Building_Descr *descr, bool logic);
+	Building(Building_Descr *descr);
 	virtual ~Building();
 
 	virtual int get_type();
@@ -108,11 +108,14 @@ public:
 
 	virtual bool fetch_from_flag(Game* g);
 
+	bool leave_check_and_wait(Game* g, Worker* w);
+
 protected:
 	void start_animation(Editor_Game_Base *g, uint anim);
 
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
+	virtual void act(Game *g, uint data);
 
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
@@ -125,7 +128,12 @@ protected:
 
 	uint			m_anim;
 	int			m_animstart;
+
+	std::vector<Object_Ptr> m_leave_queue;		// FIFO queue of workers leaving the building
+	uint							m_leave_time;		// when to wake the next one from leave queue
+	Object_Ptr					m_leave_allow;		// worker that is allowed to leave now
 };
+
 
 /*
 Warehouse
@@ -137,15 +145,15 @@ public:
 		Subtype_HQ,
 		Subtype_Port
 	};
-	
+
 	Warehouse_Descr(Tribe_Descr *tribe, const char *name);
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	virtual Building *create_object(bool);
-	
+	virtual Building *create_object();
+
 	inline int get_subtype() const { return m_subtype; }
 	inline int get_conquers() const { return m_conquers; }
-	
+
 private:
 	int	m_subtype;
 	int	m_conquers;		// HQs conquer
@@ -156,7 +164,7 @@ class Warehouse : public Building {
 	MO_DESCR(Warehouse_Descr);
 
 public:
-	Warehouse(Warehouse_Descr *descr, bool);
+	Warehouse(Warehouse_Descr *descr);
 	virtual ~Warehouse();
 
 	virtual void init(Editor_Game_Base *g);
@@ -180,9 +188,11 @@ public:
 
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
-	
+
 private:
 	WareList		m_wares;
+
+	uint			m_next_carrier_spawn;		// time of next carrier growth
 };
 
 

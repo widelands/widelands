@@ -327,13 +327,13 @@ Building *Editor_Game_Base::warp_building(int x, int y, char owner, int idx)
 {
 	Building_Descr *descr;
 	Player *player = get_player(owner);
-	
+
 	assert(player);
-   
+
 	descr = player->get_tribe()->get_building_descr(idx);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), Coords(x, y), is_game(), false);
+	return descr->create(this, get_player(owner), Coords(x, y), false);
 }
 
 
@@ -348,13 +348,13 @@ Building* Editor_Game_Base::warp_constructionsite(int x, int y, char owner, int 
 {
 	Building_Descr* descr;
 	Player *player = get_player(owner);
-	
+
 	assert(player);
-   
+
 	descr = player->get_tribe()->get_building_descr(idx);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), Coords(x, y), is_game(), true);
+	return descr->create(this, get_player(owner), Coords(x, y), true);
 }
 
 
@@ -371,7 +371,7 @@ Bob *Editor_Game_Base::create_bob(int x, int y, int idx)
 	descr = m_map->get_world()->get_bob_descr(idx);
 	assert(descr);
 	
-	return descr->create(this, 0, Coords(x, y), is_game());
+	return descr->create(this, 0, Coords(x, y));
 }
 
 /*
@@ -389,7 +389,7 @@ Immovable *Editor_Game_Base::create_immovable(int x, int y, int idx)
 	descr = m_map->get_world()->get_immovable_descr(idx);
 	assert(descr);
 	
-	return descr->create(this, Coords(x, y), is_game());
+	return descr->create(this, Coords(x, y));
 }
 
 /*

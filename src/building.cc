@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2002 by Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -27,6 +27,10 @@
 #include "transport.h"
 
 #include "building_int.h"
+
+
+#define BUILDING_LEAVE_INTERVAL	1000
+#define CARRIER_SPAWN_INTERVAL	2500
 
 
 /*
@@ -77,15 +81,15 @@ Building_Descr::create
 Create a building of this type. Does not perform any sanity checks.
 ===============
 */
-Building *Building_Descr::create(Editor_Game_Base *g, Player *owner, Coords pos, bool logic, bool construct)
+Building *Building_Descr::create(Editor_Game_Base *g, Player *owner, Coords pos, bool construct)
 {
 	assert(owner);
-	
-	Building *b = construct ? create_constructionsite(logic) : create_object(logic);
+
+	Building *b = construct ? create_constructionsite() : create_object();
 	b->set_owner(owner);
 	b->m_position = pos;
 	b->init(g);
-	
+
 	return b;
 }
 
@@ -171,14 +175,14 @@ Building_Descr::create_constructionsite
 Create a construction site for this type of building
 ===============
 */
-Building* Building_Descr::create_constructionsite(bool logic)
+Building* Building_Descr::create_constructionsite()
 {
 	Building_Descr* descr = m_tribe->get_building_descr(m_tribe->get_building_index("constructionsite"));
 	if (!descr)
 		throw wexception("Tribe %s has no constructionsite", m_tribe->get_name());
 
-	ConstructionSite* csite = (ConstructionSite*)descr->create_object(true);
-	
+	ConstructionSite* csite = (ConstructionSite*)descr->create_object();
+
 	csite->set_building(this);
 
 	return csite;
@@ -193,8 +197,8 @@ Implementation
 ==============================
 */
 
-Building::Building(Building_Descr *descr, bool logic)
-	: PlayerImmovable(descr, logic)
+Building::Building(Building_Descr *descr)
+	: PlayerImmovable(descr)
 {
 	m_flag = 0;
 	m_optionswindow = 0;
@@ -263,7 +267,7 @@ void Building::init(Editor_Game_Base* g)
 	Coords neighb;
 
 	set_position(g, m_position);
-	
+
 	if (get_size() == BIG) {
 		map->get_ln(m_position, &neighb);
 		set_position(g, neighb);
@@ -285,13 +289,15 @@ void Building::init(Editor_Game_Base* g)
 	if (imm && imm->get_type() == FLAG)
 		flag = (Flag *)imm;
 	else
-		flag = Flag::create(g, get_owner(), neighb, g->is_game());
+		flag = Flag::create(g, get_owner(), neighb);
 
 	m_flag = flag;
 	m_flag->attach_building(g, this);
 
 	// Start the animation
 	start_animation(g, get_descr()->get_idle_anim());
+
+	m_leave_time = g->get_gametime();
 }
 
 /*
@@ -324,6 +330,92 @@ void Building::cleanup(Editor_Game_Base *g)
 	}
 
 	PlayerImmovable::cleanup(g);
+}
+
+
+/*
+===============
+Building::leave_check_and_wait
+
+Return true if the given worker can leave the building immediately.
+Otherwise, return false. The worker's wakeup_leave_building() will be called as
+soon as the worker can leave the building.
+===============
+*/
+bool Building::leave_check_and_wait(Game* g, Worker* w)
+{
+	Map_Object* allow = m_leave_allow.get(g);
+
+	molog("Building::leave_check_and_wait\n");
+
+	if (w == allow) {
+		m_leave_allow = 0;
+		return true;
+	}
+
+	// Check time and queue
+	uint time = g->get_gametime();
+
+	if (!m_leave_queue.size())
+	{
+		if ((int)(time - m_leave_time) >= 0) {
+			molog("Building::leave_check_and_wait: Leave now\n");
+			m_leave_time = time + BUILDING_LEAVE_INTERVAL;
+			return true;
+		}
+
+		schedule_act(g, m_leave_time - time);
+	}
+
+	molog("Building::leave_check_and_wait: Put on queue\n");
+
+	m_leave_queue.push_back(w);
+	return false;
+}
+
+
+/*
+===============
+Building::act
+
+Advance the leave queue.
+===============
+*/
+void Building::act(Game *g, uint data)
+{
+	uint time = g->get_gametime();
+
+	if ((int)(time - m_leave_time) >= 0)
+	{
+		bool wakeup = false;
+
+		// Wake up one worker
+		while(m_leave_queue.size())
+		{
+			Worker* w = (Worker*)m_leave_queue[0].get(g);
+
+			m_leave_queue.erase(m_leave_queue.begin());
+
+			if (!w)
+				continue;
+
+			m_leave_allow = w;
+
+			if (w->wakeup_leave_building(g, this)) {
+				m_leave_time = time + BUILDING_LEAVE_INTERVAL;
+				wakeup = true;
+				break;
+			}
+		}
+
+		if (m_leave_queue.size())
+			schedule_act(g, m_leave_time - time);
+
+		if (!wakeup)
+			m_leave_time = time; // make sure leave_time doesn't get too far behind
+	}
+
+	PlayerImmovable::act(g, data);
 }
 
 
@@ -405,9 +497,9 @@ ConstructionSite_Descr::create_object
 Allocate a ConstructionSite
 ===============
 */
-Building* ConstructionSite_Descr::create_object(bool logic)
+Building* ConstructionSite_Descr::create_object()
 {
-	return new ConstructionSite(this, logic);
+	return new ConstructionSite(this);
 }
 
 
@@ -427,8 +519,8 @@ ConstructionSite::ConstructionSite
 Initialize with default values
 ===============
 */
-ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr, bool logic)
-	: Building(descr, logic)
+ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr)
+	: Building(descr)
 {
 	m_building = 0;
 
@@ -649,7 +741,7 @@ void Warehouse_Descr::parse(const char *directory, Profile *prof, const EncodeDa
 
 	Section *global = prof->get_safe_section("global");
 	const char *string;
-	
+
 	string = global->get_safe_string("subtype");
 	if (!strcasecmp(string, "HQ")) {
 		m_subtype = Subtype_HQ;
@@ -673,8 +765,6 @@ IMPLEMENTATION
 ==============================
 */
 
-#define CARRIER_SPAWN_INTERVAL	2500
-
 /*
 ===============
 Warehouse::Warehouse
@@ -682,9 +772,10 @@ Warehouse::Warehouse
 Initialize a warehouse (zero contents, etc...)
 ===============
 */
-Warehouse::Warehouse(Warehouse_Descr *descr, bool logic)
-	: Building(descr, logic)
+Warehouse::Warehouse(Warehouse_Descr *descr)
+	: Building(descr)
 {
+	m_next_carrier_spawn = 0;
 }
 
 
@@ -718,13 +809,13 @@ void Warehouse::init(Editor_Game_Base* gg)
    if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
       gg->conquer_area(get_owner()->get_player_number(), m_position, get_descr()->get_conquers());
 
-	if(get_logic()) {
+	if (gg->is_game()) {
       Game* g=static_cast<Game*>(gg);
 
-      g->get_cmdqueue()->queue(g->get_gametime()+CARRIER_SPAWN_INTERVAL,
-            SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+		m_next_carrier_spawn = schedule_act(g, CARRIER_SPAWN_INTERVAL);
    }
 }
+
 
 /*
 ===============
@@ -754,22 +845,26 @@ Or maybe I should just stop writing comments that late at night ;-)
 */
 void Warehouse::act(Game *g, uint data)
 {
-	int id = g->get_safe_ware_id("carrier");
-	int stock = m_wares.stock(id);
-	int tdelta = CARRIER_SPAWN_INTERVAL;
+	if (g->get_gametime() - m_next_carrier_spawn >= 0)
+	{
+		int id = g->get_safe_ware_id("carrier");
+		int stock = m_wares.stock(id);
+		int tdelta = CARRIER_SPAWN_INTERVAL;
 
-	if (stock < 100) {
-		tdelta -= 4*(100 - stock);
-		create_wares(id, 1);
-	} else if (stock > 100) {
-		tdelta -= 4*(stock - 100);
-		if (tdelta < 10)
-			tdelta = 10;
-		destroy_wares(id, 1);
+		if (stock < 100) {
+			tdelta -= 4*(100 - stock);
+			create_wares(id, 1);
+		} else if (stock > 100) {
+			tdelta -= 4*(stock - 100);
+			if (tdelta < 10)
+				tdelta = 10;
+			destroy_wares(id, 1);
+		}
+
+		m_next_carrier_spawn = schedule_act(g, tdelta);
 	}
 
-	g->get_cmdqueue()->queue(g->get_gametime() + tdelta, SENDER_MAPOBJECT,
-			CMD_ACT, m_serial, 0, 0);
+	Building::act(g, data);
 }
 
 
@@ -873,7 +968,7 @@ Worker *Warehouse::launch_worker(Game *g, int ware)
 
 	workerdescr = ((Worker_Ware_Descr*)waredescr)->get_worker(get_owner()->get_tribe());
 
-	worker = workerdescr->create(g, get_owner(), this, m_position, g->is_game());
+	worker = workerdescr->create(g, get_owner(), this, m_position);
 
 	m_wares.remove(ware, 1);
 	get_economy()->remove_wares(ware, 1); // re-added by the worker himself
@@ -927,7 +1022,7 @@ WareInstance* Warehouse::launch_item(Game* g, int ware)
 	waredescr = g->get_ware_description(carrierid);
 	workerdescr = ((Worker_Ware_Descr*)waredescr)->get_worker(get_owner()->get_tribe());
 
-	worker = workerdescr->create(g, get_owner(), this, m_position, g->is_game());
+	worker = workerdescr->create(g, get_owner(), this, m_position);
 
 	// Yup, this is cheating.
 	if (m_wares.stock(carrierid)) {
@@ -974,9 +1069,9 @@ void Warehouse::incorporate_item(Game* g, WareInstance* item)
 Warehouse_Descr::create_object
 ===============
 */
-Building *Warehouse_Descr::create_object(bool logic)
+Building *Warehouse_Descr::create_object()
 {
-	return new Warehouse(this, logic);
+	return new Warehouse(this);
 }
 
 
@@ -1022,8 +1117,8 @@ IMPLEMENTATION
 ProductionSite::ProductionSite
 ===============
 */
-ProductionSite::ProductionSite(ProductionSite_Descr* descr, bool logic)
-	: Building(descr, logic)
+ProductionSite::ProductionSite(ProductionSite_Descr* descr)
+	: Building(descr)
 {
 }
 
@@ -1048,7 +1143,7 @@ Initialize the production site.
 void ProductionSite::init(Editor_Game_Base *g)
 {
 	Building::init(g);
-	
+
 	// TODO: request worker
 }
 
@@ -1075,9 +1170,9 @@ ProductionSite_Descr::create_object
 Create a new building of this type
 ===============
 */
-Building* ProductionSite_Descr::create_object(bool logic)
+Building* ProductionSite_Descr::create_object()
 {
-	return new ProductionSite(this, logic);
+	return new ProductionSite(this);
 }
 
 
@@ -1367,7 +1462,7 @@ int Grow_Building_Descr::read(FileRead *f) {
    Has_Needs_Building_Descr::read(f);
    Has_Products_Building_Descr::read(f);
 
-   // own stuff 
+   // own stuff
    working_time = f->Unsigned16();
    idle_time = f->Unsigned16();
    working_area = f->Unsigned16();

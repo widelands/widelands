@@ -41,8 +41,8 @@ BaseImmovable::~BaseImmovable
 Base immovable creation and destruction
 ===============
 */
-BaseImmovable::BaseImmovable(Map_Object_Descr *descr, bool logic)
-	: Map_Object(descr, logic)
+BaseImmovable::BaseImmovable(Map_Object_Descr *descr)
+	: Map_Object(descr)
 {
 }
 
@@ -65,9 +65,9 @@ void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 
 	if (f->immovable) {
 		BaseImmovable *other = f->immovable;
-		
+
 		assert(other->get_size() == NONE);
-		
+
 		other->cleanup(g);
 		delete other;
 	}
@@ -131,12 +131,12 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 {
 	Section *s = prof->get_safe_section("global");
 	char picname[256];
-	
+
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
    m_anim = g_anim.get(directory, s, picname);
 
 	const char *string;
-	 
+
 	string = s->get_string("size", 0);
 	if (string) {
 		if (!strcasecmp(string, "volatile") || !strcasecmp(string, "none"))
@@ -172,10 +172,10 @@ Immovable_Descr::create
 Create an immovable of this type
 ===============
 */
-Immovable *Immovable_Descr::create(Editor_Game_Base *gg, Coords coords, bool logic)
+Immovable *Immovable_Descr::create(Editor_Game_Base *gg, Coords coords)
 {
    Game* g=static_cast<Game*>(gg);
-   Immovable *im = new Immovable(this, g->is_game());
+   Immovable *im = new Immovable(this);
 	im->m_position = coords;
 	im->init(g);
 	return im;
@@ -196,8 +196,8 @@ Immovable::Immovable
 Immovable::~Immovable
 ===============
 */
-Immovable::Immovable(Immovable_Descr *descr, bool logic)
-	: BaseImmovable(descr, logic)
+Immovable::Immovable(Immovable_Descr *descr)
+	: BaseImmovable(descr)
 {
 	m_anim = 0;
 }
@@ -208,7 +208,7 @@ Immovable::~Immovable()
 
 /*
 ===============
-Immovable::get_type	
+Immovable::get_type
 Immovable::get_size
 Immovable::get_passable
 ===============
@@ -238,9 +238,9 @@ Actually initialize the immovable.
 void Immovable::init(Editor_Game_Base *g)
 {
 	BaseImmovable::init(g);
-	
+
 	set_position(g, m_position);
-	
+
 	m_anim = get_descr()->get_anim();
 	m_animstart = g->get_gametime();
 }
@@ -291,8 +291,8 @@ PlayerImmovable::PlayerImmovable
 Zero-initialize
 ===============
 */
-PlayerImmovable::PlayerImmovable(Map_Object_Descr *descr, bool logic)
-	: BaseImmovable(descr, logic)
+PlayerImmovable::PlayerImmovable(Map_Object_Descr *descr)
+	: BaseImmovable(descr)
 {
 	m_owner = 0;
 	m_economy = 0;

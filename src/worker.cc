@@ -90,12 +90,11 @@ Worker_Descr::create
 Custom creation routing that accounts for the location.
 ===============
 */
-Worker *Worker_Descr::create(Editor_Game_Base *gg, Player *owner, PlayerImmovable *location, Coords coords, bool logic)
+Worker *Worker_Descr::create(Editor_Game_Base *gg, Player *owner, PlayerImmovable *location, Coords coords)
 {
-   assert(logic); // a worker without logic doesn't make sense
    Game* g=static_cast<Game*>(gg);
 
-   Worker *worker = (Worker*)create_object(g->is_game());
+   Worker *worker = (Worker*)create_object();
 	worker->set_owner(owner);
 	worker->set_location(location);
 	worker->set_position(g, coords);
@@ -152,8 +151,8 @@ Worker::Worker
 Worker::~Worker
 ===============
 */
-Worker::Worker(Worker_Descr *descr, bool logic)
-	: Bob(descr, logic)
+Worker::Worker(Worker_Descr *descr)
+	: Bob(descr)
 {
 	m_economy = 0;
 	m_location = 0;
@@ -599,6 +598,30 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 
 /*
 ===============
+Worker::wakeup_leave_building [virtual]
+
+Called when the given building allows us to leave it.
+Return true if we actually woke up due to this.
+===============
+*/
+bool Worker::wakeup_leave_building(Game* g, Building* building)
+{
+	if (get_current_task() == TASK_IDLE)
+	{
+		BaseImmovable* location = g->get_map()->get_immovable(get_position());
+
+		if (building == location) {
+			interrupt_task(g, false, 0, true);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+/*
+===============
 Worker::set_state
 
 Change the current state. However, the current task is not interrupted.
@@ -971,10 +994,14 @@ void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
 				return;
 			}
 
+			// Exit throttle
+			if (!((Building*)location)->leave_check_and_wait(g, this)) {
+				molog("Worker: DropOff: wait on building's leave queue\n");
+				start_task_idle(g, get_descr()->get_idle_anim(), -1);
+				return;
+			}
+
 			molog("Worker: DropOff: move from building to flag\n");
-
-			// TODO: add building exit throttle
-
 			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
 			return;
 		}
@@ -1046,10 +1073,14 @@ void Worker::run_state_fetchfromflag(Game *g, uint prev, bool success, uint next
 	// If we haven't got the item yet, walk onto the flag
 	if (!item) {
 		if (location->get_type() == BUILDING) {
+			// Exit throttle
+			if (!((Building*)location)->leave_check_and_wait(g, this)) {
+				molog("Worker: FetchFromFlag: wait on building's leave queue\n");
+				start_task_idle(g, get_descr()->get_idle_anim(), -1);
+				return;
+			}
+
 			molog("Worker: FetchFromFlag: move from building to flag\n");
-
-			// TODO: add building exit throttle
-
 			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
 			return;
 		}
@@ -1148,10 +1179,14 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 			assert(location->get_type() == Map_Object::BUILDING);
 			assert(location->get_base_flag() == current);
 
+			// Exit throttle
+			if (!((Building*)location)->leave_check_and_wait(g, this)) {
+				molog("run_route: wait on building's leave queue\n");
+				start_task_idle(g, get_descr()->get_idle_anim(), -1);
+				return 0;
+			}
+
 			molog("run_route: move from building to flag\n");
-
-			// TODO: add building exit throttle
-
 			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
 			return 0;
 		}
@@ -1273,9 +1308,9 @@ Worker_Descr::create_object
 Create a generic worker of this type.
 ===============
 */
-Bob* Worker_Descr::create_object(bool logic)
+Bob* Worker_Descr::create_object()
 {
-	return new Worker(this, logic);
+	return new Worker(this);
 }
 
 
@@ -1329,8 +1364,8 @@ Carrier::Carrier
 Carrier::~Carrier
 ===============
 */
-Carrier::Carrier(Carrier_Descr *descr, bool logic)
-	: Worker(descr, logic)
+Carrier::Carrier(Carrier_Descr *descr)
+	: Worker(descr)
 {
 	m_inbuilding = false;
 }
@@ -1837,9 +1872,9 @@ Carrier_Descr::create_object
 Create a carrier of this type.
 ===============
 */
-Bob *Carrier_Descr::create_object(bool logic)
+Bob *Carrier_Descr::create_object()
 {
-	return new Carrier(this, logic);
+	return new Carrier(this);
 }
 
 

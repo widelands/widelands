@@ -50,14 +50,14 @@ public:
 	ConstructionSite_Descr(Tribe_Descr* tribe, const char* name);
 
 	virtual void parse(const char* directoy, Profile* prof, const EncodeData* encdata);
-	virtual Building* create_object(bool logic);
+	virtual Building* create_object();
 };
 
 class ConstructionSite : public Building {
 	MO_DESCR(ConstructionSite_Descr);
 
 public:
-	ConstructionSite(ConstructionSite_Descr* descr, bool logic);
+	ConstructionSite(ConstructionSite_Descr* descr);
 	virtual ~ConstructionSite();
 
 	virtual int get_size();
@@ -103,14 +103,14 @@ public:
 	ProductionSite_Descr(Tribe_Descr *tribe, const char *name);
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	virtual Building *create_object(bool);
+	virtual Building *create_object();
 };
 
 class ProductionSite : public Building {
 	MO_DESCR(ProductionSite_Descr);
 
 public:
-	ProductionSite(ProductionSite_Descr* descr, bool logic);
+	ProductionSite(ProductionSite_Descr* descr);
 	virtual ~ProductionSite();
 
 	virtual void init(Editor_Game_Base *g);

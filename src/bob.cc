@@ -73,10 +73,10 @@ Bob_Descr::create
 Create a bob of this type
 ===============
 */
-Bob *Bob_Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords, bool logic)
+Bob *Bob_Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords)
 {
    Game* g=static_cast<Game*>(gg);
-   Bob *bob = create_object(logic);
+   Bob *bob = create_object();
    bob->set_owner(owner);
    bob->set_position(g, coords);
    bob->init(g);
@@ -100,8 +100,8 @@ Bob::Bob
 Zero-initialize a map object
 ===============
 */
-Bob::Bob(Bob_Descr* descr, bool wl)
-	: Map_Object(descr, wl)
+Bob::Bob(Bob_Descr* descr)
+	: Map_Object(descr)
 {
 	m_owner = 0;
 	m_position.x = m_position.y = 0; // not linked anywhere
@@ -190,7 +190,7 @@ void Bob::init(Editor_Game_Base* gg)
 {
    Map_Object::init(gg);
 
-   if(get_logic()) {
+   if (gg->is_game()) {
       Game* g=static_cast<Game*>(gg);
       // Initialize task system
       m_lasttask = 0;
@@ -210,7 +210,7 @@ Perform independant cleanup as necessary.
 */
 void Bob::cleanup(Editor_Game_Base *gg)
 {
-   if(get_logic()) {
+   if (gg->is_game()) {
       Game* g=static_cast<Game*>(gg);
       if (get_current_task())
          task_end(g); // subtle...
@@ -364,8 +364,9 @@ void Bob::end_task(Game* g, bool success, uint nexttask)
 ===============
 Bob::interrupt_task
 
-Ask the current task to end (with failure) as soon as possible, i.e. within
-the next second or so.
+Ask the current task to end as soon as possible, i.e. within the next second or
+so. By default, the task is ended with failure, but you can set success to true
+to override that.
 If hard is true, the task is stopped immediately.
 
 If hard is false, task_interrupt() is called. This function returns true if it
@@ -373,7 +374,7 @@ is okay to interrupt the task immediately. Otherwise, the task will be
 interrupted on the next task_act().
 ===============
 */
-void Bob::interrupt_task(Game *g, bool hard, uint nexthint)
+void Bob::interrupt_task(Game *g, bool hard, uint nexthint, bool success)
 {
 	assert(!m_task_acting);
 	assert(!m_task_switching);
@@ -398,7 +399,7 @@ void Bob::interrupt_task(Game *g, bool hard, uint nexthint)
 	task_end(g);
 
 	m_lasttask = m_task;
-	m_lasttask_success = false;
+	m_lasttask_success = success;
 	m_nexttask = nexthint;
 
 	m_task = 0;
@@ -833,7 +834,7 @@ class Critter_Bob_Descr : public Bob_Descr {
       virtual ~Critter_Bob_Descr(void) { }
 
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-      Bob *create_object(bool logic);
+      Bob *create_object();
 
       inline bool is_swimming(void) { return m_swimming; }
       inline DirAnimations* get_walk_anims(void) { return &m_walk_anims; }
@@ -854,14 +855,14 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 	Bob_Descr::parse(directory, prof, encdata);
 
 	Section *s = prof->get_safe_section("global");
-	
+
 	s->get_int("stock", 0);
 	m_swimming = s->get_bool("swimming", false);
-	
+
    // Read all walking animations.
 	// Default settings are in [walk]
 	char sectname[256];
-	
+
 	snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
 	m_walk_anims.parse(directory, prof, sectname, prof->get_section("walk"), encdata);
 }
@@ -876,7 +877,7 @@ class Critter_Bob : public Bob {
 	MO_DESCR(Critter_Bob_Descr);
 
 public:
-	Critter_Bob(Critter_Bob_Descr *d, bool);
+	Critter_Bob(Critter_Bob_Descr *d);
 	virtual ~Critter_Bob(void);
 
 	uint get_movecaps();
@@ -884,8 +885,8 @@ public:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 };
 
-Critter_Bob::Critter_Bob(Critter_Bob_Descr *d, bool logic)
-	: Bob(d, logic)
+Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
+	: Bob(d)
 {
 }
 
@@ -901,24 +902,24 @@ void Critter_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthin
 	{
 		// Pick a target at random
 		Coords dst;
-		
+
 		dst.x = m_position.x + (g->logic_rand()%5) - 2;
 		dst.y = m_position.y + (g->logic_rand()%5) - 2;
-		
+
 		if (start_task_movepath(g, dst, 3, get_descr()->get_walk_anims()))
 			return;
-	
+
 		start_task_idle(g, get_descr()->get_idle_anim(), 1 + g->logic_rand()%1000);
 		return;
 	}
-	
+
 	// idle for a longer period
 	start_task_idle(g, get_descr()->get_idle_anim(), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
 }
 
-Bob *Critter_Bob_Descr::create_object(bool logic)
+Bob *Critter_Bob_Descr::create_object()
 {
-	return new Critter_Bob(this, logic);
+	return new Critter_Bob(this);
 }
 
 
@@ -933,7 +934,7 @@ Bob_Descr factory
 /*
 ===============
 Bob_Descr::create_from_dir(const char *directory) [static]
- 
+
 Master factory to read a bob from the given directory and create the
 appropriate description class.
 ===============

@@ -151,9 +151,8 @@ Map_Object::Map_Object
 Zero-initialize a map object
 ===============
 */
-Map_Object::Map_Object(Map_Object_Descr* descr, bool logic)
+Map_Object::Map_Object(Map_Object_Descr* descr)
 {
-   m_logic = logic;
 	m_descr = descr;
 	m_serial = 0;
 }
@@ -238,6 +237,25 @@ void Map_Object::cleanup(Editor_Game_Base *g)
 {
 	g->get_objects()->remove(this);
 }
+
+
+/*
+===============
+Map_Object::schedule_act
+
+Queue a CMD_ACT tdelta milliseconds from now, using the given data.
+Returns the absolute gametime at which the CMD_ACT will occur.
+===============
+*/
+uint Map_Object::schedule_act(Game* g, uint tdelta, uint data)
+{
+	uint time = g->get_gametime() + tdelta;
+
+	g->get_cmdqueue()->queue(time, SENDER_MAPOBJECT, CMD_ACT, m_serial, data, 0);
+
+	return time;
+}
+
 
 /*
 ===============
