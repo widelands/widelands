@@ -309,18 +309,26 @@ Field::Build_Symbol Map::get_build_symbol(const int x, const int y) {
    if(f1->get_terr()->get_is() & TERRAIN_ACID) return Field::FLAG;
 
    
-// #warning: Mountain is still buggy!! TODO
    h=f->get_height();
    if((f->get_terr()->get_is() & TERRAIN_MOUNTAIN) &&
          (f->get_terd()->get_is() & TERRAIN_MOUNTAIN)) {
       // mountain
-      get_brn(x, y, f, &x1, &y1, &f1);
-      h1=f1->get_height();
-      if(abs(h1-h) >= 6) 
-         return Field::FLAG;
-      return Field::MINE;
-   } 
-
+      get_tln(x, y, f, &x1, &y1, &f1);
+      if((f1->get_terr()->get_is() & TERRAIN_MOUNTAIN) &&
+            (f1->get_terd()->get_is() & TERRAIN_MOUNTAIN)) {
+         get_ln(x, y, f, &x1, &y1, &f1);
+         if(f1->get_terr()->get_is() & TERRAIN_MOUNTAIN) {
+            get_trn(x, y, f, &x1, &y1, &f1);
+            if(f1->get_terd()->get_is() & TERRAIN_MOUNTAIN) {
+               get_brn(x, y, f, &x1, &y1, &f1);
+               h1=f1->get_height();
+               if(h1-h >= 4) 
+                  return Field::FLAG;
+               return Field::MINE;
+            }
+         }
+      }
+   }
 
    // if dry or mountain terrain: flag
    if(f->get_terr()->get_is() & TERRAIN_DRY) return Field::FLAG;

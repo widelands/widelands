@@ -61,7 +61,8 @@ class Field {
    inline Terrain_Descr *get_terd() const { return terd; }
    inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
    inline void set_terraind(Terrain_Descr *p) { assert(p); terd = p; }
-
+   bool has_hooked(uchar);
+     
    inline void hook_instance(Instance* obj) { 
       if(!obj) {
          // This function gets called once to bring the field in 

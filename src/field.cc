@@ -110,3 +110,12 @@ void Field::hook_inst_link(Instance_Link* link) {
    }
 }
 
+bool Field::has_hooked(uchar t) {
+   Instance_Link* i=inst_first;
+   while(i) { 
+      if(i->inst->get_type() == t) return true;
+      i=i->next;
+   }
+   return false;
+}
+

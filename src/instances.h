@@ -43,11 +43,19 @@ class Map_Object {
    friend class Instance;
 
    public:
+      enum Type {
+         DIMINISHING_BOB,
+         CRITTER_BOB,
+         GROWING_BOB,
+         BORING_BOB,
+         BIG_BUILDING
+      };
+      
+      
       Map_Object(void) { pic_idx=0; rel_pos_x=0; rel_pos_y=0; };
       virtual ~Map_Object(void) { }
 
       inline Animation_Pic* get_cur_pic(void) { return cur_pic; }
-
    private:
       virtual int act(Game*)=0;
       inline void set_owned_by(uchar plnum) { owned_by=plnum; }
@@ -60,6 +68,7 @@ class Map_Object {
       Field* field;
       ushort px, py;
       float rel_pos_x, rel_pos_y;
+      Type type;
 };
 
 //
@@ -80,6 +89,7 @@ class Instance {
       Instance(void) { obj=0; state=UNUSED; }
       virtual ~Instance(void) { }
       
+      inline Map_Object::Type get_type(void) { assert(obj); return obj->type; }
       
       inline Animation_Pic* get_cur_pic(void) { assert(obj);  return obj->get_cur_pic(); }
       inline int act(Game* g) { assert(obj); return obj->act(g); }

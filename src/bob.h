@@ -198,7 +198,7 @@ class Critter_Bob_Descr : virtual public Logic_Bob_Descr {
 //
 class Boring_Bob : public Map_Object {
    public:
-      Boring_Bob(Boring_Bob_Descr *d) { descr=d; cur_pic=d->get_anim()->get_pic(0); } 
+      Boring_Bob(Boring_Bob_Descr *d) { descr=d; cur_pic=d->get_anim()->get_pic(0); type=Map_Object::BORING_BOB; } 
       virtual ~Boring_Bob(void) { }
 
       int act(Game* g);
@@ -212,7 +212,7 @@ class Boring_Bob : public Map_Object {
 //
 class Critter_Bob : public Map_Object {
    public:
-      Critter_Bob(Critter_Bob_Descr *d) { descr=d; cur_pic=d->get_anim()->get_pic(0); state=IDLE; } 
+      Critter_Bob(Critter_Bob_Descr *d) { descr=d; cur_pic=d->get_anim()->get_pic(0); state=IDLE; type=Map_Object::CRITTER_BOB;  } 
       virtual ~Critter_Bob(void) { }
 
       int act(Game* g);
@@ -238,7 +238,7 @@ class Critter_Bob : public Map_Object {
 //
 class Diminishing_Bob : public Map_Object {
    public:
-      Diminishing_Bob(Diminishing_Bob_Descr* d)  { descr=d;  cur_pic=d->get_anim()->get_pic(0); } 
+      Diminishing_Bob(Diminishing_Bob_Descr* d)  { descr=d;  cur_pic=d->get_anim()->get_pic(0); type=Map_Object::DIMINISHING_BOB; } 
       virtual ~Diminishing_Bob(void) { }
 
       int act(Game* g);

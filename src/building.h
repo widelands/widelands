@@ -490,7 +490,7 @@ class Port_Descr : virtual public Boring_Building_Descr,
 //
 class Building_HQ : public Map_Object {
    public:
-      Building_HQ(HQ_Descr* d) { descr=d; cur_pic=d->get_idle_anim()->get_pic(0); } 
+      Building_HQ(HQ_Descr* d) { descr=d; cur_pic=d->get_idle_anim()->get_pic(0); type=Map_Object::BIG_BUILDING;} 
       virtual ~Building_HQ(void) { }
 
       int act(Game* g);

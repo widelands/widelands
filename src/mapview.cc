@@ -173,8 +173,8 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 		while(count--) {
 			Field *rf, *rfl;
 			int rposx, rblposx;
-//         int map_posx=fx;
-  //       int map_posy=fy;
+         int map_posx=fx;
+         int map_posy=fy;
          
 			map->get_rn(fx, fy, f, &fx, &fy, &rf);
 			rposx = posx + FIELD_WIDTH;
@@ -184,7 +184,7 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 
 			draw_field(dst, f, rf, fl, rfl, posx, rposx, posy, blposx, rblposx, blposy);
 
-         /*
+#if 0   
         // TODO: TEMP DEBUG: render buildhelp over everything
          switch(map->get_build_symbol(map_posx, map_posy)) {
             case Field::NOTHING:
@@ -222,7 +222,7 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
                break;
          }
          // TEMP ENDS
-*/
+#endif
  
 			f = rf;
 			fl = rfl;
