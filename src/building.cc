@@ -53,6 +53,17 @@ int NeedWares_List::read(Binary_file* f) {
 // 
 // Down here: Descriptions
 
+bool Building_Descr::has_attribute(uint attrib)
+{
+	switch(attrib) {
+	case Map_Object::ROBUST:
+	case Map_Object::UNPASSABLE:
+		return true;
+	}
+	
+	return false; // no need to call parent has_attribute()
+}
+
 int Building_Descr::read(Binary_file *f) {
    f->read(name, sizeof(name));
 
@@ -162,27 +173,17 @@ Base Building
 */
 
 class Building : public Map_Object {
+	MO_DESCR(Building_Descr)
+
 public:
-	Building(Type t, Building_Descr *descr);
+	Building(Building_Descr *descr);
 	
 	virtual void init(Game* g);
-   
-   
-protected:
-   // ugly, ugly
-	// we have a choice of either recreating the entire virtual function
-	// hierarchy from Building_Descr in Building, or of performing lots of
-	// casts in the derived classes.
-	// come to think of it, it would be more consistent to put m_descr into
-	// Map_Object and pull some template (or other) tricks to hide the nasty
-	// casts
-	Building_Descr *m_descr;
 };
 
-Building::Building(Type t, Building_Descr *descr)
-	: Map_Object(t)
+Building::Building(Building_Descr *descr)
+	: Map_Object(descr)
 {
-	m_descr = descr;
 }
 
 /** Building::init(Game *g)
@@ -195,7 +196,7 @@ void Building::init(Game* g)
 
 	assert(player);
    
-	player->set_area_seen(m_px, m_py, m_descr->get_see_area(), true);
+	player->set_area_seen(m_px, m_py, get_descr()->get_see_area(), true);
 }
 
 // 
@@ -509,31 +510,28 @@ Headquarters
 */
 
 class Building_HQ : public Building {
+		MO_VIRTUAL_DESCR(HQ_Descr)
+
    public:
       Building_HQ(HQ_Descr* d);
 		
 		void init(Game* g);
-
-		// the HQ doesn't act (if anything, it acts like any other building, i.e. door opens)
-		
-	private:
-      HQ_Descr* descr;
 };
 
 // HQ code
 Building_HQ::Building_HQ(HQ_Descr *d)
-	: Building(BIG_BUILDING, d)
+	: Building(d)
 {
-   descr=d;
+	m_descr = d;
 }
 
 void Building_HQ::init(Game* g)
 {
 	Building::init(g);
-	set_animation(g, m_descr->get_idle_anim());
+	set_animation(g, get_descr()->get_idle_anim());
 
    // conquer area
-   conquer_area(get_owned_by(), g->get_map(), m_px, m_py, descr->get_conquers());
+	conquer_area(get_owned_by(), g->get_map(), m_px, m_py, get_descr()->get_conquers());
 }
 
 // HQ description
@@ -548,7 +546,6 @@ int HQ_Descr::read(Binary_file *f) {
 }
 Map_Object *HQ_Descr::create_object()
 {
-   cerr << "HQ_Descr::create_instance() not yet implemented: TODO!" << endl;
 	return new Building_HQ(this);
 }
 

@@ -32,7 +32,7 @@ Object_Manager::~Object_Manager(void)
 {
 	while(!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
-		free_object(it->second);
+		free_object(0, it->second);
 	}
 }
 
@@ -54,6 +54,9 @@ Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owne
 	obj->set_position(g, x, y);
 	obj->init(g);
 	
+	if (obj->has_attribute(Map_Object::ROBUST))
+		g->get_map()->recalc_for_field(x, y);
+	
 	return obj;
 }
 
@@ -61,8 +64,15 @@ Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owne
  *
  * Free the given object.
  */
-void Object_Manager::free_object(Map_Object* obj)
+void Object_Manager::free_object(Game* g, Map_Object* obj)
 {
+	int x, y;
+
+	if (g)
+		if (obj->get_position(&x, &y))
+			if (obj->has_attribute(Map_Object::ROBUST))
+				g->get_map()->recalc_for_field(x, y);
+
 	m_objects.erase(obj->m_serial);
 	delete obj;
 }
@@ -76,13 +86,13 @@ Map_Object* Object_Ptr::get(Game* game)
 	return obj;
 }
 
-/** Map_Object::Map_Object(Type t)
+/** Map_Object::Map_Object(Map_Object_Descr* descr)
  *
  * Zero-initialize a map object
  */
-Map_Object::Map_Object(Type t)
+Map_Object::Map_Object(Map_Object_Descr* descr)
 {
-	type = t;
+	m_descr = descr;
 	m_serial = 0;
 
 	m_owned_by = -1;
@@ -192,7 +202,7 @@ void Map_Object::end_walk()
 
 /** Map_Object::start_walk()
  *
- * Cause the object to walk, honoring passable/impassable parts of the map (checks can_*()).
+ * Cause the object to walk, honoring passable/impassable parts of the map using movecaps.
  *
  * Important: this function schedules a CMD_ACT event which you must deal with correctly,
  *   which is a bit nasty. Ideally, all this acting business should be handled using an
@@ -213,17 +223,14 @@ bool Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
 	case WALK_SE: g->get_map()->get_brn(m_px, m_py, m_field, &newx, &newy, &newf); break;
 	}
 
-	// Move capability check
-	// :TODO: shouldn't passability be on a per-field basis? this check only honours a
-	// single triangle attached to the field.
-	// For example, every field could have a bitmap that reflects that movecaps bit;
-	// we'd only need a single bitmask for the check
-	uchar is = newf->get_terr()->get_is();
+	// Move capability check by ANDing with the field caps
+	//
+	// The somewhat crazy check involving MOVECAPS_SWIM should allow swimming objects to
+	// temporarily land.
 	uint movecaps = get_movecaps();
-	
-	if (is & TERRAIN_WATER && !(movecaps & MOVECAPS_SWIM))
-		return false;
-	if (is & TERRAIN_UNPASSABLE)
+
+	if (!(m_field->get_caps() & movecaps & MOVECAPS_SWIM && newf->get_caps() & MOVECAPS_WALK) &&
+	    !(newf->get_caps() & movecaps))
 		return false;
 
 	// Move is go

@@ -38,12 +38,11 @@ class Map_Object_Descr {
       virtual ~Map_Object_Descr(void) { }
 		
 		virtual Map_Object *create_object() = 0;
+
+		// TODO: maybe this could be implemented as an array of available attributes (bit_vector even?)		
+		virtual bool has_attribute(uint attr) { return false; }
 };
 
-enum MoveCaps {
-	MOVECAPS_WALK = 1,
-	MOVECAPS_SWIM = 2
-};
 
 //
 // Map_Object is a class representing a base class for all objects. like buildings, animals
@@ -56,20 +55,42 @@ enum MoveCaps {
 // DO NOT allocate/free Map_Objects directly; use the Object_Manager for this.
 // Note that convenient creation functions are defined in class Game.
 // 
+
+// If you find a better way to do this that doesn't cost a virtual function or additional
+// member variable, go ahead
+// Note that if you abused virtual inheritance in the *_Descr, you need to use MO_VIRTUAL_DESCR
+// and set that variable in the constructor!
+#define MO_DESCR(type) \
+protected: inline type* get_descr() { return static_cast<type*>(m_descr); }
+
+#define MO_VIRTUAL_DESCR(type) \
+protected: type* m_descr; inline type* get_descr() { return m_descr; }
+
 class Map_Object {
    friend class Object_Manager;
 	friend class Object_Ptr;
-   
+
+		MO_DESCR(Map_Object_Descr)
+	   
 	public:
-		//TODO: do we really need enum Type? implementation details should be hidden,
-		// that's what generic interfaces are for
-      enum Type {
-         DIMINISHING_BOB,
-         CRITTER_BOB,
-         GROWING_BOB,
-         BORING_BOB,
-         BIG_BUILDING
-      };
+		// Some default, globally valid, attributes.
+		// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
+      enum Attribute {
+			// This Map_Object can move (animals, humans, ships)
+			MOVABLE = 0,
+			
+			// (only valid when !MOVABLE): this Map_Object cannot be killed by
+			// placing something else on it.
+			// This applies to e.g. buildings, trees, but it doesn't apply to purely
+			// aesthetic objects such as pebbles.
+			ROBUST = 1,
+			
+			// (only valid when ROBUST): cannot walk onto this Map_Object
+			UNPASSABLE = 2,
+			
+			// (assert ROBUST && !UNPASSABLE): this is a flag (can be used as road endpoint)
+			FLAG = 3,
+		};
       
 		// the enums tell us where we are going
       enum WalkingDir {
@@ -83,11 +104,12 @@ class Map_Object {
       };
 		
 	protected:
-      Map_Object(Type t);
+      Map_Object(Map_Object_Descr *descr);
       virtual ~Map_Object(void);
 
 	public:
 		virtual uint get_movecaps() { return 0; }
+		inline bool has_attribute(uint attr) { return m_descr->has_attribute(attr); }
 		
 		// init() is called from Instance::create, just after the constructor
 		// use it to trigger initial CMD_ACTs
@@ -105,6 +127,13 @@ class Map_Object {
  //     uint handle_click(void); // is this good here?
  
 		void set_position(Game* g, uint x, uint y, Field* f = 0);
+		inline bool get_position(int *px, int *py, Field **pf = 0) {
+			if (!m_field) return false;
+			if (pf) *pf = m_field;
+			*px = m_px;
+			*py = m_py;
+			return true;
+		}
 		inline Map_Object* get_next_object(void) { return m_linknext; }
 
    protected:
@@ -112,8 +141,9 @@ class Map_Object {
 	
 		void end_walk();
 		bool start_walk(Game* g, WalkingDir dir, Animation* a);
-		
-      Type type;
+
+	protected:		
+		Map_Object_Descr *m_descr;
 		uint m_serial;
       char m_owned_by; // player number, or -1 if neutral (like animals, trees)
       
@@ -150,7 +180,7 @@ class Object_Manager {
 			return it->second;
 		}
 		Map_Object* create_object(Game* g, Map_Object_Descr* d, int owner, int x, int y);
-		void free_object(Map_Object* obj);
+		void free_object(Game* g, Map_Object* obj);
 		
 	private:
 		uint m_lastserial;

@@ -224,7 +224,11 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 #endif
 			draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, blposy, render_r, render_b);
          
+         // Render ways TODO
+		
+			
          // Render frontier TODO
+			// Frontier is a kind of bob, therefore the change of order
          if(f->get_owned_by() != FIELD_OWNED_BY_NOONE) {
 //            if(f_tl->get_owned_by() != f->get_owned_by() &&
   //                f_tr->get_owned_by() == f->get_owned_by()) {
@@ -234,10 +238,7 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
                //      (posx+tr_posx)>>1, ((posy - f->get_height()*HEIGHT_FACTOR)+(tr_posy - tr_neighbour->get_height()*HEIGHT_FACTOR))>>1);
             // }
          }
-          
-         // Render ways TODO
-
-         
+                  
 			// Render bobs
          // TODO - rendering order?
          // This must be defined somewho. some bobs have a higher priority than others

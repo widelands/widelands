@@ -52,51 +52,111 @@ int Animation::read(Binary_file* f) {
    
    return RET_OK;
 }
-   
-// 
-// class Diminishing_Bob
-//
+
+
+/*
+==============================================================================   
+
+class Diminishing_Bob
+
+==============================================================================   
+*/
+
+class Diminishing_Bob : public Map_Object {
+		MO_DESCR(Diminishing_Bob_Descr);
+
+   public:
+		Diminishing_Bob(Diminishing_Bob_Descr* d);
+      virtual ~Diminishing_Bob(void);
+
+		void init(Game *g);
+};
+
 Diminishing_Bob::Diminishing_Bob(Diminishing_Bob_Descr* d)
-	: Map_Object(DIMINISHING_BOB)
+	: Map_Object(d)
 {
-	descr=d;
 } 
+
+Diminishing_Bob::~Diminishing_Bob()
+{
+}
 
 void Diminishing_Bob::init(Game *g)
 {
-	set_animation(g, descr->get_anim());
+	set_animation(g, get_descr()->get_anim());
 }
 
-//
-// class Boring_Bob
-// 
+
+/*
+==============================================================================   
+
+class Boring_Bob
+
+==============================================================================   
+*/
+
+class Boring_Bob : public Map_Object {
+		MO_DESCR(Boring_Bob_Descr);
+
+   public:
+      Boring_Bob(Boring_Bob_Descr *d);
+      virtual ~Boring_Bob(void);
+
+		void init(Game *g);
+};
+
 Boring_Bob::Boring_Bob(Boring_Bob_Descr *d)
-	: Map_Object(BORING_BOB)
+	: Map_Object(d)
 {
-	descr = d;
+}
+
+Boring_Bob::~Boring_Bob()
+{
 }
 
 void Boring_Bob::init(Game *g)
 {
-	set_animation(g, descr->get_anim());
+	set_animation(g, get_descr()->get_anim());
 }
 
-//
-// class Critter_Bob
-// 
+
+/*
+==============================================================================   
+
+class Critter_Bob
+
+==============================================================================   
+*/
+
 #define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000 // wait up to 12 seconds between moves
 
+class Critter_Bob : public Map_Object {
+		MO_DESCR(Critter_Bob_Descr);
+
+   public:
+      Critter_Bob(Critter_Bob_Descr *d);
+      virtual ~Critter_Bob(void);
+
+		uint get_movecaps();
+		
+		void init(Game *g);
+		void act(Game* g);
+};
+
 Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
-	: Map_Object(CRITTER_BOB)
+	: Map_Object(d)
 {
-	descr = d;
 }
 
-uint Critter_Bob::get_movecaps() { return descr->is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK; }
+Critter_Bob::~Critter_Bob()
+{
+}
+
+uint Critter_Bob::get_movecaps() { return get_descr()->is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK; }
 
 void Critter_Bob::init(Game *g)
 {
-	set_animation(g, descr->get_anim());
+	set_animation(g, get_descr()->get_anim());
 	
 	// gotcha... need to schedule an initial act() ;)
 	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
@@ -113,7 +173,7 @@ void Critter_Bob::act(Game* g)
 		if (g->logic_rand() % 100 < 30) {
 			int t = g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
 
-			set_animation(g, descr->get_anim());			
+			set_animation(g, get_descr()->get_anim());			
 			g->get_cmdqueue()->queue(g->get_gametime()+t, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
 			return;
 		}
@@ -123,12 +183,12 @@ void Critter_Bob::act(Game* g)
 	WalkingDir dir = IDLE;
 	
 	switch(g->logic_rand() % 6) {
-	case 0: dir = WALK_NW; a = descr->get_walk_nw_anim(); break;
-	case 1: dir = WALK_NE; a = descr->get_walk_ne_anim(); break;
-	case 2: dir = WALK_W; a = descr->get_walk_w_anim(); break;
-	case 3: dir = WALK_E; a = descr->get_walk_e_anim(); break;
-	case 4: dir = WALK_SW; a = descr->get_walk_sw_anim(); break;
-	case 5: dir = WALK_SE; a = descr->get_walk_se_anim(); break;
+	case 0: dir = WALK_NW; a = get_descr()->get_walk_nw_anim(); break;
+	case 1: dir = WALK_NE; a = get_descr()->get_walk_ne_anim(); break;
+	case 2: dir = WALK_W; a = get_descr()->get_walk_w_anim(); break;
+	case 3: dir = WALK_E; a = get_descr()->get_walk_e_anim(); break;
+	case 4: dir = WALK_SW; a = get_descr()->get_walk_sw_anim(); break;
+	case 5: dir = WALK_SE; a = get_descr()->get_walk_se_anim(); break;
 	}
 	
 //	cerr << "Critter attempts to walk" << endl;

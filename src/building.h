@@ -55,6 +55,8 @@ class Building_Descr : public Map_Object_Descr {
       inline bool get_is_enabled(void) { return is_enabled; }
       inline ushort get_see_area(void) { return see_area; }
 
+		virtual bool has_attribute(uint attrib);
+		
    protected:
       //      int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew=0, ushort* eh=0);
 

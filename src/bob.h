@@ -29,6 +29,9 @@
 
 // class World;
 //class Pic;
+
+// Eh? WTH is this used for? If it is what I think it is, attributes
+// are better to solve this because it's transparent wrt buildings etc...
 enum {
    NOTHING = 0,
    SMALL = 1,
@@ -125,7 +128,7 @@ class Logic_Bob_Descr : public Map_Object_Descr {
 //
 // Growings
 // 
-class Growing_Bob_Descr : virtual public Logic_Bob_Descr {
+class Growing_Bob_Descr : public Logic_Bob_Descr {
    public:
       Growing_Bob_Descr(void) { ends_in=0; growing_speed=0; }
       virtual ~Growing_Bob_Descr(void) {  }
@@ -142,7 +145,7 @@ class Growing_Bob_Descr : virtual public Logic_Bob_Descr {
 // 
 // Diminishing
 // 
-class Diminishing_Bob_Descr : virtual public Logic_Bob_Descr {
+class Diminishing_Bob_Descr : public Logic_Bob_Descr {
    public:
       Diminishing_Bob_Descr(void) { ends_in=0; stock=0; }
       virtual ~Diminishing_Bob_Descr(void) { }
@@ -159,7 +162,7 @@ class Diminishing_Bob_Descr : virtual public Logic_Bob_Descr {
 // 
 // Borings
 // 
-class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
+class Boring_Bob_Descr : public Logic_Bob_Descr {
    public:
       Boring_Bob_Descr(void) { ttl=0; }
       virtual ~Boring_Bob_Descr(void) { } 
@@ -175,7 +178,7 @@ class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
 // 
 // Critters
 // 
-class Critter_Bob_Descr : virtual public Logic_Bob_Descr {
+class Critter_Bob_Descr : public Logic_Bob_Descr {
    public:
       Critter_Bob_Descr(void) { stock=swimming=0; }
       virtual ~Critter_Bob_Descr(void) { } 
@@ -200,52 +203,6 @@ class Critter_Bob_Descr : virtual public Logic_Bob_Descr {
       Animation walk_w;
       Animation walk_se;
       Animation walk_sw;
-};
-
-//
-// This class describes a in-game Boring bob
-//
-class Boring_Bob : public Map_Object {
-   public:
-      Boring_Bob(Boring_Bob_Descr *d);
-      virtual ~Boring_Bob(void) { }
-
-		void init(Game *g);
-   
-	private:
-      Boring_Bob_Descr* descr;
-};
-
-//
-// This class describes a in-game Critter bob
-//
-class Critter_Bob : public Map_Object {
-   public:
-      Critter_Bob(Critter_Bob_Descr *d);
-      virtual ~Critter_Bob(void) { }
-
-		uint get_movecaps();
-		
-		void init(Game *g);
-		void act(Game* g);
-
-   private:
-      Critter_Bob_Descr* descr;
-};
-
-
-//
-// This class describes a in-game Diminishing bob
-//
-class Diminishing_Bob : public Map_Object {
-   public:
-		Diminishing_Bob(Diminishing_Bob_Descr* d);
-      virtual ~Diminishing_Bob(void) { }
-
-		void init(Game *g);
-   
-	private:
-      Diminishing_Bob_Descr* descr;
 };
 
 

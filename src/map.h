@@ -34,6 +34,7 @@
 #include "world.h"
 #include "field.h"
 
+
 /** struct Map_Header
  *
  * This is the header of a widelands map format
@@ -151,7 +152,11 @@ class Map {
                inline uint get_w(void) { return hd.width; }
                inline uint get_h(void) { return hd.height; }
                inline World* get_world(void) { return w; }
-               Field::Build_Symbol get_build_symbol(const int x, const int y);
+					
+					bool find_objects(int x, int y, uint radius, uint attribute, vector<Map_Object*> *list);
+					
+					void recalc_for_field(int fx, int fy);
+               Field::Build_Symbol get_build_symbol(int x, int y);
 
 					inline const Cords* get_starting_pos(int plnum) { return &starting_pos[plnum]; }
 					
@@ -192,7 +197,9 @@ class Map {
                int load_wlmf(const char*, Game*);
                void set_size(uint, uint);
 
-               void recalc_brightness(int fx, int fy);
+               void recalc_brightness(int fx, int fy, Field *f);
+					void recalc_fieldcaps_pass1(int fx, int fy, Field *f);
+					void recalc_fieldcaps_pass2(int fx, int fy, Field *f);				
 };
 
 /*
@@ -399,29 +406,11 @@ inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
 // in this region with each call to next()
 class Map_Region {
    public:
-      Map_Region(const int x, const int y, int area, Map* m) {
-         backwards=0;
-         _area=area;
-         _map=m;
-         _lf=m->get_safe_field(x, y);
-         _tl=_tr=_bl=_br=_lf;
-         tlx=trx=blx=brx=x;
-         tly=tr_y=bly=bry=y;
-         sx=x; sy=y;
-         int i;
-         for(i=0; i<area; i++) {
-            m->get_tln(tlx, tly, _tl, &tlx, &tly, &_tl);
-            m->get_trn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
-            m->get_bln(blx, bly, _bl, &blx, &bly, &_bl);
-            m->get_brn(brx, bry, _br, &brx, &bry, &_br);
-         }
-         _lf=_tl;
-         cx=tlx; cy=tly;
-      }
-      
-      ~Map_Region() {
-      }
-      
+		Map_Region() { }
+      Map_Region(int x, int y, int area, Map* m) { init(x, y, area, m); }
+      ~Map_Region() { }
+		 
+		void init(int x, int y, int area, Map *m);      
       Field* next(void);
 
    private:
@@ -442,30 +431,12 @@ class Map_Region {
 // in this region with each call to next() by map_cords
 class Map_Region_Cords {
    public:
-      Map_Region_Cords(const int x, const int y, int area, Map* m) {
-         backwards=0;
-         _area=area;
-         _map=m;
-         _lf=m->get_safe_field(x, y);
-         _tl=_tr=_bl=_br=_lf;
-         tlx=trx=blx=brx=x;
-         tly=tr_y=bly=bry=y;
-         sx=x; sy=y;
-         int i;
-         for(i=0; i<area; i++) {
-            m->get_tln(tlx, tly, _tl, &tlx, &tly, &_tl);
-            m->get_trn(trx, tr_y, _tr, &trx, &tr_y, &_tr);
-            m->get_bln(blx, bly, _bl, &blx, &bly, &_bl);
-            m->get_brn(brx, bry, _br, &brx, &bry, &_br);
-         }
-         _lf=_tl;
-         cx=tlx; cy=tly;
-      }
-      
-      ~Map_Region_Cords() {
-      }
-      
-      int next(int*, int*);
+		Map_Region_Cords() { }
+      Map_Region_Cords(int x, int y, int area, Map* m) { init(x, y, area, m); }
+      ~Map_Region_Cords() { }
+		
+		void init(int x, int y, int area, Map *m);
+		int next(int*, int*);
 
    private:
       int backwards;

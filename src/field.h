@@ -20,11 +20,45 @@
 #ifndef __S__FIELD_H
 #define __S__FIELD_H
 
-// TODO; think, if we shouldn't call for each field a new() in map::set_size
-// and a delete, for proper garbage collection, since here is a memory hole, at
-// the moment (it would also spare the if(!obj) call in hook_instance
+// TODO; Think, if we shouldn't call for each field a new() in map::set_size
+// and a delete
+// No. In fact, you should view Field more as a plain old structure rather than
+// a class. If you think of Fields as a class you get into a whole lot of 
+// problems (like the 6 neighbour field pointers we used to have).
+
+// TODO: It would be nice if 0 would be a valid neutral setting for each member
+// of Field. This way, we could just memset everything to 0
 
 #define FIELD_OWNED_BY_NOONE 255   // if a field is owned by noone, this value must be in owned_by
+
+enum FieldCaps {
+	// can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary masking)
+	BUILDCAPS_SMALL = 1,
+	BUILDCAPS_MEDIUM = 2,
+	BUILDCAPS_BIG = 3,
+	BUILDCAPS_SIZEMASK = 3,
+
+	// can we build a flag on this field?
+	BUILDCAPS_FLAG = 4,
+
+	// can we build a mine on this field (completely independent from build size!)
+	BUILDCAPS_MINE = 8,
+	
+	// (only if BUILDCAPS_BIG): can we build a harbour on this field?
+	// this should be automatically set for BUILDCAPS_BIG fields that have a swimmable second-order neighbour
+	BUILDCAPS_PORT = 16,
+
+	// Can Map_Objects walk or swim here? Also used for Map_Object::get_movecaps()
+	// If MOVECAPS_WALK, any walking being can walk to this field
+	MOVECAPS_WALK = 64,
+	
+	// If MOVECAPS_SWIM, any swimming being (including ships) can go there
+	// Additionally, swimming beings can temporarily visit fields that are walkable
+	// but not swimmable if those fields are at the start or end of their path.
+	// Without this clause, harbours would be kind of impossible ;)
+	// This clause stops ducks from "swimwalking" along the coast
+	MOVECAPS_SWIM = 128,	
+};
 
 class Terrain_Descr;
 class Map_Object;
@@ -35,10 +69,11 @@ class Field {
 	
    private:
    uchar height;
-   char brightness;
-   Terrain_Descr *terr, *terd;
+	char brightness;
+	uchar caps; // what can we build here, who can walk here
+	uchar owned_by;
+	Terrain_Descr *terr, *terd;
 	Map_Object* objects; // linked list, see Map_Object::m_linknext
-   uchar owned_by;
 
    public:
    enum Build_Symbol {
@@ -52,7 +87,8 @@ class Field {
    };
 
    inline uchar get_height() const { return height; }
-
+	inline uchar get_caps() const { return caps; }
+	
    inline Terrain_Descr *get_terr() const { return terr; }
    inline Terrain_Descr *get_terd() const { return terd; }
    inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
