@@ -226,14 +226,14 @@ namespace Graph {
 					  */
 					 State get_state(void) const { return st; }
 
-					 /** inline bool Graphic::is_fs(void)
+					 /** inline Mode Graphic::get_mode(void)
 					  *
-					  * graphic mode is fullscreen?
+					  * return the current mode (fs or window) 
 					  *
 					  * Args: none
-					  * Returns: true if fs, false if window
+					  * Returns: the current mode
 					  */
-					 inline bool is_fs(void) { return bis_fs; st=OK; }
+					 inline Mode get_mode(void) {  st=OK; return mode; }
 
 					 /** inline unsigned int Graphic::get_xres(void) const
 					  * 
@@ -318,7 +318,7 @@ namespace Graph {
 					 unsigned short* pixels;
 					 unsigned short xres, yres;
 					 unsigned int lpix;
-					 bool	bis_fs;
+					 Mode mode;
 					 SDL_Surface* sc;
 					 State st;
 		  };

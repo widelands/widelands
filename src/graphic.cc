@@ -44,7 +44,6 @@ namespace Graph {
 					 pixels=NULL;
 					 xres=yres=0;
 					 st=NOT_INIT;
-					 bis_fs=0;
 
 					 SDL_Init(SDL_INIT_VIDEO);
 		  }
@@ -84,12 +83,11 @@ namespace Graph {
 
 					 if(m==MODE_FS) {
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE | SDL_FULLSCREEN);
-								bis_fs=1;
 					 } else {
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
-								bis_fs=0;
 					 }
 
+					 mode=m;
 					 xres=x; 
 					 yres=y;
 					 pixels=(unsigned short*) sc->pixels;
@@ -239,13 +237,15 @@ namespace Graph {
 					 if(d_x_pos+w>dst->get_w()) w=dst->get_w()-d_x_pos;
 					 if(d_y_pos+h>dst->get_h()) h=dst->get_h()-d_y_pos;
 
-					 if(src->has_clrkey() && (dst->get_clrkey()!=src->get_clrkey())) {
+					if(src->has_clrkey() && (dst->get_clrkey()!=src->get_clrkey())) {
 								for(unsigned long  y=0; y<h; y++) {
 										  clr=src->get_pixel(p_x_pos, p_y_pos+y);
-										  dst->set_pixel(d_x_pos, d_y_pos+y, clr);
+										  if(clr != src->get_clrkey()) dst->set_pixel(d_x_pos, d_y_pos+y, clr);
+										  else dst->set_cpixel(d_x_pos, d_y_pos+y);
 										  for(unsigned long x=1; x<w; x++) {
 													 clr=src->get_npixel();
-													 dst->set_npixel(clr);
+													 if(clr != src->get_clrkey()) dst->set_npixel(clr);
+													 else dst->npixel();
 										  }
 								}
 					 } else {

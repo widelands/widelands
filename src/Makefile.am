@@ -40,7 +40,9 @@ widelands_SOURCES=main.cc \
 						setup.cc \
 						setup.h \
 						counter.h \
-						counter.cc
+						counter.cc \
+						mydirent.cc \
+						mydirent.h
 
 
 #  uncomment the following if widelands requires the math library

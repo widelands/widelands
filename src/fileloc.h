@@ -20,7 +20,7 @@
 #ifndef __S__FILE_LOCATOR
 #define __S__FILE_LOCATOR
 
-#include <dirent.h>
+#include "dirent.h"
 
 #include "singleton.h"
 

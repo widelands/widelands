@@ -42,12 +42,14 @@ class Textarea {
 								LEFTA, 
 								CENTER
 					 };
-					 
-					 Textarea(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Align = LEFTA);
+					
+					 Textarea(const unsigned int, const unsigned int, const char* , const Align, const unsigned int, const unsigned int, Pic*, const unsigned int,
+										  const unsigned int);
+					 Textarea(const unsigned int, const unsigned int, const unsigned int, const Align, Pic*, const unsigned int, const unsigned int);
 					 ~Textarea(void);
 					 
 					 void set_text(const char*);
-					 void draw(const unsigned int, const unsigned int) const ;
+					 void draw(void) const ;
 					 
 					 /** static void set_font(unsigned int n)
 					  * This function sets the font to use for textareas
@@ -60,10 +62,11 @@ class Textarea {
 					 
 		  private: 
 					 static unsigned int nfont;
-					 unsigned int x, y, w, h;
-					 Align myal;
+					 unsigned int x, y, w, h, xp, yp;
+					 Align al;
 					 
 					 Pic* txt;
+					 Pic* dp;
 };
 
 /** class Window
@@ -138,22 +141,25 @@ class Window {
 					 void handle_click(const unsigned int, const unsigned int); // TODO
 					 void handle_mmove(const unsigned int, const unsigned int); // TODO
 					 void draw(void);	
-					 void set_pos(const unsigned int, const unsigned int);  // TODO
 					 void set_new_bg(Pic* p);
 					 
 					 // creation functions
-					 unsigned int create_textarea(const unsigned int, const unsigned int,const unsigned int,const unsigned int, const Textarea::Align = Textarea::RIGHTA);
+					 Textarea* create_textarea(const unsigned int, const unsigned int, const unsigned int, const Textarea::Align = Textarea::LEFTA);
+					 Textarea* create_textarea(const unsigned int, const unsigned int, const char* ,  Textarea::Align = Textarea::LEFTA);
 					 //					 void set_closefunc(...)
 
 
 		  friend class User_Interface;
 
 		  private:
-					 // Only friends can create and destroy us
+					 // Only friends can create and destroy and move us!
+					 void set_pos(const unsigned int, const unsigned int); 
 					 Window(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Flags); 
 					 ~Window();
-
+					 void redraw_win(void);
+					 
 					 unsigned int x, y, w, h;
+					 Pic* winpic;
 					 Pic* own_bg;
 					 Flags myf;
 				
@@ -194,7 +200,8 @@ class User_Interface : public Singleton<User_Interface> {
 		  ~User_Interface(void);
 		  
 		  Window* create_window(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Window::Flags=Window::DEFAULT); 
-		  void delete_window(Window* win); 
+		  void delete_window(Window*); 
+		  void move_window(Window*, const unsigned int, const unsigned int);
 		  void draw(void);
 					 
 		  private:

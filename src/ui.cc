@@ -18,7 +18,7 @@
  */
 
 #include "ui.h"
-
+#include "font.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -75,9 +75,12 @@ Window::Window(const unsigned int px, const unsigned int py, const unsigned int 
 					 
 		  subids=0;
 
-		  own_bg=0;
-					
- 
+		  winpic=new Pic();
+		  winpic->set_size(w, h);
+		  
+		  own_bg=0;					
+
+		  redraw_win();
 }
 
 /** Window::~Window()
@@ -88,88 +91,181 @@ Window::Window(const unsigned int px, const unsigned int py, const unsigned int 
  * Returns: Nothing
  */
 Window::~Window(void) {
-		  //unsigned int i;
+		  unsigned int i;
 		  
-/*		  for(i=0 ; i< nta; i++) 
+		  for(i=0 ; i< nta; i++) 
 					 delete ta[i];
 		  free(ta);
-*/		  
+		  
+		  delete winpic;
 		  if(own_bg) delete own_bg;
 }
 
-/** void Window::draw(void)
+/** void Window::set_pos(unsigned int posx, unsigned int posy)
  *
- * This function draws the current window on the g_gr object
+ * This gives the window a new position on the screen
+ *
+ * PRIVATE function so that only friends can move us (because we have 
+ * to care for the size of the screen) 
+ *
+ * Args:	posx 	new xpos
+ * 		posy	new ypos
+ * Returns: Nothing
+ */
+void Window::set_pos(unsigned int posx, unsigned int posy) {
+		  x=posx; y=posy;
+}
+					 
+/** Textarea Window::create_textarea(const unsigned int px, const unsigned int py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
  * 
- * NOTE: This function is quite slow, it could be a better idea to give every window a Pic* of him
- * self which he simply plots on the screen and which gets updated, whenever the window changes.
- * Somone really should give it a try!
+ * This function creates a textarea with a given text. The size will be set through the 
+ * text width
+ *
+ * Args:	px	xpos in window
+ * 		py	ypos in window
+ * 		t	text to use
+ * 		a	alignment to use 
+ * Returns: textarea just created
+ */
+Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, const char* t ,  Textarea::Align a = Textarea::LEFTA) {
+	
+		  unsigned int myw=w;
+		  unsigned int myh=h;
+		  unsigned int add=0;
+		  
+		  if(myf!=FLAT) {
+					 myw-=get_border();
+					 myh-=get_border();
+					 add=get_border()>>1;
+		  }
+		  
+		  ta[nta]=new Textarea(px, py, t, a, myw, myh, winpic, add, add);
+		  ta[nta]->draw();
+		  nta++;
+
+		  ta=(Textarea**) realloc(ta, sizeof(Textarea*)*nta);
+		 
+		  
+		  return ta[nta-1];
+}
+  
+/** Textarea Window::create_textarea(const unsigned int px, const unsigned int py, const unsigend int myw,  Textarea::Align a = Textarea::LEFTA)
+ * 
+ * This function creates a textarea with a given width. 
+ *
+ * Args:	px	xpos in window
+ * 		py	ypos in window
+ * 		myw	width of area
+ * 		a	alignment to use 
+ * Returns: textarea just created
+ */
+Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, const unsigned int myw ,  Textarea::Align a = Textarea::LEFTA) {
+
+		  unsigned int add=0;
+		  if(myf!=FLAT) add=get_border();
+		 
+		  int rw=myw;
+		  
+		  if(px+add+rw > w) rw=w-add-px;
+		  
+		  ta[nta]=new Textarea(px, py, rw, a, winpic, add>>1, add>>1);
+		  nta++;
+
+		  ta=(Textarea**) realloc(ta, sizeof(Textarea*)*nta);
+		  
+		  return ta[nta-1];
+}
+
+/** void Window::redraw_win(void) 
+ *
+ * PRIVATE FUNCTION to update the whole windpic
  *
  * Args: None
  * Returns: Nothing
  */
-void Window::draw(void) {
+void Window::redraw_win(void) {
 		  unsigned int i, j;
-		 
+		  unsigned int px=x; 
+		  unsigned int py=y;
+		
 		  Pic* usebg= own_bg ? own_bg : &bg ;
 		
 		  if(myf != FLAT) {
+					 px+=get_border()>>1;
+					 py+=get_border()>>1;
+
 					 // Top n Bottom
 					 // top
-					 draw_pic(&top, x, y, 0, 0, CORNER, CORNER);
+					 copy_pic(winpic, &top, 0, 0, 0, 0, CORNER, CORNER);
 					 // bot
-					 draw_pic(&bot, x, y+h-CORNER, 0, 0, CORNER, CORNER);
-					 for(i=x+CORNER; i<(w+x)-CORNER-MIDDLE; i+=MIDDLE) {
+					 copy_pic(winpic, &bot, 0, h-CORNER, 0, 0, CORNER, CORNER);
+					 for(i=CORNER; i<w-CORNER-MIDDLE; i+=MIDDLE) {
 								// top
-								draw_pic(&top, i, y, CORNER, 0, MIDDLE, CORNER);
+								copy_pic(winpic, &top, i, 0, CORNER, 0, MIDDLE, CORNER);
 								// bot
-								draw_pic(&bot, i, y+h-CORNER, CORNER, 0, MIDDLE, CORNER);
+								copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, MIDDLE, CORNER);
 					 } 
 					 // top
-					 draw_pic(&top, i, y, CORNER, 0, w+x-CORNER-i, CORNER);
-					 draw_pic(&top, (x+w)-CORNER, y, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+					 copy_pic(winpic, &top, i, 0, CORNER, 0, w-CORNER-i, CORNER);
+					 copy_pic(winpic, &top, w-CORNER, 0, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 					 // bot
-					 draw_pic(&bot, i, y+h-CORNER, CORNER, 0, w+x-CORNER-i, CORNER);
-					 draw_pic(&bot, (x+w)-CORNER, y+h-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
-
+					 copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, w-CORNER-i, CORNER);
+					 copy_pic(winpic, &bot, w-CORNER, h-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 
 					 // borders
 					 // left
-					 draw_pic(&l_border, x, y+CORNER, 0, 0, CORNER, CORNER);
+					 copy_pic(winpic, &l_border, 0, CORNER, 0, 0, CORNER, CORNER);
 					 // right
-					 draw_pic(&r_border, x+w-CORNER, y+CORNER, 0, 0, CORNER, CORNER);
-					 for(i=y+CORNER+CORNER; i<(h+y)-CORNER-CORNER-MIDDLE; i+=MIDDLE) {
+					 copy_pic(winpic, &r_border, w-CORNER, CORNER, 0, 0, CORNER, CORNER);
+					 for(i=CORNER+CORNER; i<h-CORNER-CORNER-MIDDLE; i+=MIDDLE) {
 								// left
-								draw_pic(&l_border, x, i, 0, CORNER, CORNER, MIDDLE);
+								copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, MIDDLE);
 								// right
-								draw_pic(&r_border, x+w-CORNER, i, 0, CORNER, CORNER, MIDDLE);
+								copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, MIDDLE);
 					 } 
 					 // left
-					 draw_pic(&l_border, x, i, 0, CORNER, CORNER, h+y-CORNER-i);
-					 draw_pic(&l_border, x, y+h-CORNER-CORNER, 0, l_border.get_h()-CORNER, CORNER, CORNER);
+					 copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, h-CORNER-i);
+					 copy_pic(winpic, &l_border, 0, h-CORNER-CORNER, 0, l_border.get_h()-CORNER, CORNER, CORNER);
 					 // right
-					 draw_pic(&r_border, x+w-CORNER, i, 0, CORNER, CORNER, h+y-CORNER-i);
-					 draw_pic(&r_border, x+w-CORNER, y+h-CORNER-CORNER, 0, r_border.get_h()-CORNER, CORNER, CORNER);
-
+					 copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, h-CORNER-i);
+					 copy_pic(winpic, &r_border, w-CORNER, h-CORNER-CORNER, 0, r_border.get_h()-CORNER, CORNER, CORNER);
 
 					 // bg
-					 for(j=y+CORNER; (int)j<=(int)((h+y)-CORNER-CORNER-usebg->get_h()); j+=usebg->get_h()) {
-								for(i=x+CORNER; (int)i<=(int)((x+w)-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
-										  draw_pic(usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
+					 for(j=CORNER; (int)j<=(int)(h-CORNER-CORNER-usebg->get_h()); j+=usebg->get_h()) {
+								for(i=CORNER; (int)i<=(int)(w-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
+										  copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
 								} 
-								draw_pic(usebg, i, j, 0, 0, w+x-i-CORNER, usebg->get_h());
+								copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, usebg->get_h());
 					 }
-					 for(i=x+CORNER; (int)i<=(int)((w+x)-CORNER-usebg->get_w()); i+=usebg->get_w()) {
-								draw_pic(usebg, i, j, 0, 0, usebg->get_w(), y+h-j-CORNER);
+					 for(i=CORNER; (int)i<=(int)(w-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
+								copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), h-j-CORNER);
 					 } 
-					 draw_pic(usebg, i, j, 0, 0, w+x-i-CORNER, y+h-j-bot.get_h());
+					 copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, h-j-bot.get_h());
 		  } else {
 					 // has no borders. Simply paste once the pic
 					 unsigned int mw = usebg->get_w() > w ? w : usebg->get_w();
 					 unsigned int mh = usebg->get_h() > h ? h : usebg->get_h();
 		 
-					 draw_pic(usebg, x, y, 0, 0, mw, mh);
+					 copy_pic(winpic, usebg, 0, 0, 0, 0, mw, mh);
 		  }
+		  
+		  // Draw textareas
+		  for(i=0 ; i< nta; i++) 
+					 ta[i]->draw();
+
+
+
+}
+
+/** void Window::draw(void)
+ *
+ * This function draws the current window on the g_gr object
+ *
+ * Args: None
+ * Returns: Nothing
+ */
+void Window::draw(void) {
+		  draw_pic(winpic, x, y, 0, 0, w, h);
 }
 					 
 /** void Window::set_new_bg(Pic* p);
@@ -181,29 +277,12 @@ void Window::draw(void) {
  */
 void Window::set_new_bg(Pic* p) {
 		  assert(p);
-
-
+		  
 		  if(own_bg) delete own_bg;
 		  own_bg=p;
+
+		  redraw_win();
 }
-
-/** 
- * unsigned int Window::create_textarea(const unsigned int x, const unsigned int y, const unsigned int w, const unsigned int h, const Textarea::Align t 
- *  	= Textarea::RIGHTA) 
- *
- *  This function creates a new textarea
- *  Args: x,y	position of the textarea relative to left/top edge of window
- *  		 h,w	height and width
- *  		 f		Alignment of the text in the area
- *  Returns: ID of this thingy
- */
-unsigned int Window::create_textarea(const unsigned int x, const unsigned int y, const unsigned int w, const unsigned int h, const Textarea::Align t 
-					   = Textarea::RIGHTA) {
-
-		  return 0;
-
-}
-					  
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -267,6 +346,30 @@ void User_Interface::draw(void) {
 					 p->w->draw();
 		  }
 }
+		  
+/** void User_Interface::move_window(Window* win, const unigned int x, const unsigned int y) 
+ *
+ * This moves a window to the new given coordinates. This is done in User Interface since we have
+ * to make sure, that the window won't move outside the screen
+ *
+ * Args:	win Window to move
+ * 		x	new xpos
+ * 		y	new ypos
+ * Returns: Nothing
+ */
+void User_Interface::move_window(Window* win, const unsigned int x, const unsigned int y) {
+		  int myx=x;
+		  int myy=y;
+		  unsigned int mw=win->get_w();
+		  unsigned int mh=win->get_h();
+
+		  if(myx+mw >= g_gr.get_xres()) myx=g_gr.get_xres()-mw;
+		  if(myx<0) return;
+		  if(myy+mh >= g_gr.get_yres()) myy=g_gr.get_yres()-mh;
+		  if(myy<0) return;
+
+		  win->set_pos(myx, myy);
+}
 
 /** Window* User_Interface::create_window(const unsigned int x, const unsigned int y, const unsigned int w, 
  *   	const unsigned int h, const Window::Flags f=Window::DEFAULT) 
@@ -284,16 +387,25 @@ Window*  User_Interface::create_window(const unsigned int x, const unsigned int 
 					 const unsigned int h, const Window::Flags f=Window::DEFAULT) {
 		  Window* win;
 		  
-		  if(f==Window::FLAT) {
-					 win=new Window(x, y, w, h, f);
-		  } else {
+		  unsigned int mw=w;
+		  unsigned int mh=h;
+		  
+		  if(f!=Window::FLAT) {
 					 unsigned int get_b=Window::get_border();
-					 unsigned int mw=w+get_b;
-					 unsigned int mh=h+get_b;
-					 if(x+mw > g_gr.get_xres()) mw=g_gr.get_xres();
-					 if(y+mh > g_gr.get_yres()) mh=g_gr.get_yres(); 
-					 win= new Window(x, y, mw, mh, f);
+					 mw+=get_b;
+					 mh+=get_b;
 		  }
+		  
+		  
+		  int myx=x;
+		  int myy=y;
+		  if(myx+mw >= g_gr.get_xres()) myx=g_gr.get_xres()-mw;
+		  if(myx<0) return 0;
+		  if(myy+mh >= g_gr.get_yres()) myy=g_gr.get_yres()-mh;
+		  if(myy<0) return 0;
+		  
+		  win=new Window(myx, myy, mw, mh, f);
+		  
 
 		  last->w=win;
 		  last->next=new win_p;
@@ -345,19 +457,128 @@ void User_Interface::delete_window(Window* win) {
  * Depends: class Graph::Pic
  * 			class Font_Handler
  */
-					 
-/*
-Textarea(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Align = LEFT);
-					 ~Textarea(void);
-					 
-					 void set_text(const char*);
-					 void draw(const unsigned int, const unsigned int) const ;
-					 
-		  private: 
-					 static unsigned int nfont;
-					 unsigned int x, y, w, h;
-					 Align myal;
-					 
-					 Pic* txt;
-};
-*/
+
+unsigned int Textarea::nfont=0;
+
+/* Textarea::Textarea(const unsigned int px, const unsigned int py, const char* t, const Align a, const unsigned int winw, const unsigned int winh, Pic* mdp)
+ *
+ * This creates a textarea out of a fixed string.
+ *
+ * Args: px	xpos in win
+ * 		py 	ypos in win
+ * 		t	text to set
+ * 		a	alignment to use
+ * 		winw	width of window
+ * 		winh	height of window
+ * 		mdp	Picture to draw in
+ * 		addx	offset from the edge (for frame)
+ * 		addy	offset from the edge (for frame)
+ * Returns: Nothing
+ */
+Textarea::Textarea(const unsigned int px, const unsigned int py, const char* t, const Align a, const unsigned int winw, const unsigned int winh, Pic* mdp, const unsigned int addx, const unsigned int addy) {
+		 
+		  txt=g_fh.get_string(t, nfont);
+
+		  int myx=px;
+		  int myy=py;
+		  unsigned int myw=txt->get_w();
+		  unsigned int myh=txt->get_h();
+		  
+		  if(myx+txt->get_w() > winw) myx=winw-txt->get_w();
+		  if(myx<0) { myx=px; myw=winw-px; }
+		  if(myy+txt->get_h() > winh) myy=winh-txt->get_h();
+		  if(myy<0) { myy=py; myh=winh-py; }
+		  
+		  x=myx; 
+		  y=myy; 
+		  w=myw; 
+		  h=myh;
+		  dp=mdp;
+		  
+		  xp=addx; 
+		  yp=addy;
+
+		  al=a;
+}
+
+/* Textarea::Textarea(const unsigned int px, const unsigned int py, const unsigned int myw, const Align a, Pic* mdp)
+ *
+ * This creates a textarea.
+ *
+ * Args: px	xpos in win
+ * 		py 	ypos in win
+ * 		w	width of area
+ * 		a	alignment to use
+ * 		mdp picture to draw into
+ * 		addx	offset from the edge (for frame)
+ * 		addy	offset from the edge (for frame)
+ * Returns: Nothing
+ */
+Textarea::Textarea(const unsigned int px, const unsigned int py, const unsigned int myw, const Align a, Pic* mdp, const unsigned int addx, 
+					 const unsigned int addy) {
+		 
+		  txt=0; 
+		  x=px; 
+		  y=py; 
+		  w=myw; 
+		  h=FONT_H;
+		  dp=mdp;
+		  al=a;
+
+		  xp=addx;
+		  yp=addy;
+}
+
+/** void Textarea::set_text(const char* str)
+ *
+ * This sets the string of the textarea
+ *
+ * Args: str	string to set
+ * Returns: Nothing
+ */
+void Textarea::set_text(const char* str) {
+		  if(txt) delete txt;
+        txt=g_fh.get_string(str, nfont);
+		  
+		  draw();
+}
+
+/** Textarea::~Textarea(void)
+ *
+ * Destructor
+ *
+ * Args: None
+ * Returns: Nothing
+ */
+Textarea::~Textarea(void) {
+
+		  if(txt) delete txt;
+		  txt=0;
+}
+
+/** void Textarea::draw(const unsigned int xp, const unsigned int yp) const 
+ *
+ * Draws a textarea into the windows picture
+ *
+ *	Args: None
+ * Returns: Nothing
+ */
+void Textarea::draw(void) const {
+		  if(!txt) return;
+		  unsigned int posx, myw;
+		  
+		  myw= w < txt->get_w() ? w : txt->get_w();
+		 
+
+		  if(al==RIGHTA) {
+					 posx=xp+x+w-myw;
+		  } else if(al==LEFTA) {
+					 posx=xp+x;
+		  } else if(al==CENTER) {
+					 posx=xp+x+((w>>1) - (myw>>1));
+		  } else {
+					 // Never here!!
+					 assert(0);
+		  }
+		  Graph::copy_pic(dp, txt, posx, yp+y, 0, 0, myw, h);
+}

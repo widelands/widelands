@@ -46,7 +46,7 @@ void setup_fonthandler(void) {
 		  bmp = new Pic;
 		  bmp->load(buf);
 		  bmp->set_clrkey(DEF_CLRKEY);
-		  g_fh.set_font(0, bmp, FONT_W, FONT_H);
+		  g_fh.set_font(1, bmp, FONT_W, FONT_H);
 }
 
 /** void setup_ui(void) 
@@ -59,35 +59,36 @@ void setup_fonthandler(void) {
 void setup_ui(void) {
 		  
 		  // Init the window
+		  // Window's without clrkey, so it's drawn WAY faster
 		  Pic bmp;
 		  const char *buf=g_fileloc.locate_file("win_l_border.bmp", TYPE_PIC);
 		  assert(buf);
 		  bmp.load(buf);
-		  bmp.set_clrkey(DEF_CLRKEY);
+//		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_l_border(&bmp);
 		  
 		  buf=g_fileloc.locate_file("win_r_border.bmp", TYPE_PIC);
 		  assert(buf);
 		  bmp.load(buf);
-		  bmp.set_clrkey(DEF_CLRKEY);
+//		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_r_border(&bmp);
 		  
 		  buf=g_fileloc.locate_file("win_top.bmp", TYPE_PIC);
 		  assert(buf);
 		  bmp.load(buf);
-		  bmp.set_clrkey(DEF_CLRKEY);
+//		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_top(&bmp);
 		  
 		  buf=g_fileloc.locate_file("win_bot.bmp", TYPE_PIC);
 		  assert(buf);
 		  bmp.load(buf);
-		  bmp.set_clrkey(DEF_CLRKEY);
+//		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_bot(&bmp);
 		  
 		  buf=g_fileloc.locate_file("win_bg.bmp", TYPE_PIC);
 		  assert(buf);
 		  bmp.load(buf);
-		  bmp.set_clrkey(DEF_CLRKEY);
+//		  bmp.set_clrkey(DEF_CLRKEY);
 		  Window::set_bg(&bmp);
 }
 

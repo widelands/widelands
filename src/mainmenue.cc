@@ -27,7 +27,14 @@
 #include "counter.h"
 #include "output.h"
 
-bool should_update;
+#ifndef VERSION
+#include "config.h"
+#endif /* VERSION */
+
+#include <string.h>
+
+
+bool should_update=true;
 
 void click(const bool b, const unsigned int x, const unsigned int y, void* ) {
 		 exit(0);
@@ -57,18 +64,34 @@ void main_menue(void) {
 		  setup_fonthandler();
 		  setup_ui();
 
-		  // make a window
-		  Window* win=g_ui.create_window(0,0,320, 320);
-/*		  Pic* p = new Pic;
-		  p->load("/home/sirver/.widelands/pics/s2.bmp");
-		  win->set_new_bg(p);
-		 
+		  // Set to 640x480 so that we know on what we are and the pictures
+		  // look good
+		  //unsigned int lx=g_gr.get_xres();
+		  //unsigned int ly=g_gr.get_yres();
+		  g_gr.set_mode(640, 480, g_gr.get_mode());
+		  g_ip.set_max_cords(640, 480);
+
+		  // make the background window, fill it with the splash screen
+/*		  Window* win=g_ui.create_window(0, 0, g_gr.get_xres(), g_gr.get_yres(), Window::FLAT);
+		  Pic* p = new Pic;
+		  const char* str=g_fileloc.locate_file("splash.bmp", TYPE_PIC);
+		  assert(str);
+		  p->load(str);
 		  assert(p);
 		  
+		  win->set_new_bg(p);		 
+		  // Create the different areas
+		  char buf[100];
+		  strcpy(buf, "Version: ");
+		  strcat(buf, VERSION);
+		  win->create_textarea(640, 480, buf, Textarea::RIGHTA);
 */
+		  Window* win=g_ui.create_window(100, 100, 200, 200);
+		  win->create_textarea(0, 0, 800, Textarea::LEFTA)->set_text("Hallo Du da!");
+		  // Register the resposible mouse funtions
 		  g_ip.register_mcf(click, Input::BUT1);
 		  g_ip.register_mcf(mcf1, Input::BUT2);
-	  g_ip.register_mmf(mmf);
+	     g_ip.register_mmf(mmf);
 		 
 		  Counter c;
 		  c.start();
