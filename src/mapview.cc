@@ -34,10 +34,10 @@ Map_View::Map_View
 Initialize
 ===============
 */
-Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Player *player)
+Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Base *player)
 	: Panel(parent, x, y, w, h)
 {
-	m_player = player;
+	m_intbase = player;
 	m_map = player->get_map();
 	
 	vpx = vpy = 0;
@@ -97,10 +97,10 @@ void Map_View::draw(RenderTarget* dst)
    static int fps_av_count=0;
 	// TEMP
    
-	dst->rendermap(m_player->get_maprenderinfo(), Point(vpx, vpy));
+	dst->rendermap(m_intbase->get_maprenderinfo(), Point(vpx, vpy));
 
 	// debug: show fsel coordinates
-	Coords fsel = m_player->get_fieldsel();
+	Coords fsel = m_intbase->get_fieldsel();
 	char buf[100];
 	sprintf(buf, "%3i %3i", fsel.x, fsel.y);
 	g_font->draw_string(dst, 5, 5, buf);
@@ -186,7 +186,7 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 		set_rel_viewpoint(xdiff, ydiff);
 	}
 
-	if (!m_player->get_fieldsel_freeze())
+	if (!m_intbase->get_fieldsel_freeze())
 		track_fsel(x, y);
 
 	g_gr->update_fullscreen();
@@ -309,5 +309,5 @@ void Map_View::track_fsel(int mx, int my)
 	}
 	
 	// Apply the new fieldsel
-	m_player->set_fieldsel(fsel);
+	m_intbase->set_fieldsel(fsel);
 }

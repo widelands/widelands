@@ -615,6 +615,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 				BaseImmovable *imm = f->get_immovable();
 
 				if (imm)
+					// imm->draw(mri->game, this, FCoords(fx, fy, f), wh_pos);
 					imm->draw(mri->game, this, FCoords(fx, fy, f), wh_pos);
 
 				Bob *bob = f->get_first_bob();

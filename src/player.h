@@ -28,7 +28,6 @@ class Road;
 
 /** class Player
  *
- * Pleease... no more pure virtual nonsense.
  * What we really need is a Player class that stores e.g. score
  * and diplomacy of a player.
  *

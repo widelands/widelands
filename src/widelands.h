@@ -255,6 +255,9 @@ public:
 // FRAME_LENGTH is just the default animation speed
 #define FRAME_LENGTH 250   
 
+// Maxi numbers of players in a game
+#define MAX_PLAYERS		8
+
 
 
 /*

@@ -23,7 +23,7 @@
 #include "graphic.h"
 #include "ui.h"
 
-class Interactive_Player;
+class Interactive_Base;
 class Game;
 class Map;
 
@@ -37,7 +37,7 @@ class Map;
  */
 class Map_View : public Panel {
 public:
-	Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Player *plr);
+	Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Base *);
 	~Map_View();
 
 	UISignal2<int,int> warpview; // x/y in screen coordinates
@@ -62,7 +62,7 @@ public:
 	void track_fsel(int mx, int my);
    
 private:
-   Interactive_Player *m_player;
+   Interactive_Base *m_intbase;
 	Map* m_map;
 	int vpx, vpy;
 	bool dragging;

@@ -170,7 +170,7 @@ void Interactive_Player::start()
 	int mapw;
 	int maph;
 
-	m_maprenderinfo.game = m_game;
+   m_maprenderinfo.game = m_game; 
 	m_maprenderinfo.map = m_game->get_map();
 	m_maprenderinfo.visibility = get_player()->get_visibility();
 	m_maprenderinfo.show_buildhelp = false;

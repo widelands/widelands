@@ -241,8 +241,8 @@ enum {
 };
 
 struct MapRenderInfo {
-	Game*		game;
-	Map*		map;
+	Game*    game;
+   Map*		map;
 	Coords	fieldsel; // field selection marker, moved by cursor
 	uchar*	overlay_basic; // borders and build help
 	uchar*	overlay_roads; // needs to be ORed with logical road info

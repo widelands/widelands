@@ -33,18 +33,21 @@
  *
  * construct editor sourroundings
  ***********************************************/
-Editor_Interactive::Editor_Interactive(Editor* editor) :
+Editor_Interactive::Editor_Interactive() :
    Panel(0, 0, 0, get_xres(), get_yres()) {
 // Switch to the new graphics system now, if necessary
 	Section *s = g_options.pull_section("global");
 	
 	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
-	
+
 //	memset(&m_maprenderinfo, 0, sizeof(m_maprenderinfo));
 	
 	// Setup all screen elements
-	m_editor = editor;
-	
+   m_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
+
+   // TEMP
+//   m_map = new Map();
+//   map->load(
 /*	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
 	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
 	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);

@@ -22,27 +22,26 @@
 
 #include "ui.h"
 #include "mapview.h"
-
-class Editor;
+#include "interactive_base.h"
 
 /*
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game
  */
-class Editor_Interactive : public Panel {
+class Editor_Interactive : public Panel, public Interactive_Base {
    public:
       // Editor(Map*);
-      Editor_Interactive(Editor*);
+      Editor_Interactive();
       ~Editor_Interactive();
 
+      inline Map* get_map() { return m_map; }
 //      void think();
 
       static int get_xres();
       static int get_yres();
 
    private:
-      Map_View* map;
+      Map_View* m_mapview;
       Map* m_map;
-      Editor* m_editor;
 };
 #endif // __S__EDITOR_H

@@ -23,8 +23,7 @@
 #include "singlepmenue.h"
 #include "menuecommon.h"
 #include "optionsmenu.h"
-#include "editor.h"
-
+#include "editorinteractive.h"
 
 /*
 ==============================================================================
@@ -170,7 +169,7 @@ void main_menue(void)
 
       case mm_editor: 
          {
-         Editor* e=new Editor();
+         Editor_Interactive* e=new Editor_Interactive();
          e->run();
          delete e;
          break;

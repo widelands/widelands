@@ -33,6 +33,10 @@ class Interactive_Base {
 		Interactive_Base(void);
 		virtual ~Interactive_Base(void);
 
+      // they are not fast, but this is not so important, since they're not
+      // called often
+      virtual Map* get_map() =0 ;
+      
 		inline const Coords &get_fieldsel() const { return m_maprenderinfo.fieldsel; }
 		inline bool get_fieldsel_freeze() const { return m_fieldsel_freeze; }
 		void set_fieldsel(Coords c);

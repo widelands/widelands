@@ -26,15 +26,12 @@
 #include "cmd_queue.h"
 #include "ware.h"
 
-
 /** class Game
  *
  * This class manages the entire lifetime of a game session, from creating the
  * game and setting options, selecting maps to the actual playing phase and the
  * final statistics screen(s).
  */
-#define MAX_PLAYERS		8
-
 enum {
 	gs_none = 0,	// not connected, nothing
 	gs_menu,			// in the setup menu(s)
