@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003 by Widelands Development Team
+ * Copyright (C) 2002-2004 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -429,6 +429,7 @@ public:
 	Interactive_Player* get_player() { return m_player; }
 	Building* get_building() { return m_building; }
 
+	virtual void draw(RenderTarget* dst);
 	virtual void think();
 
 	Panel* create_capsbuttons(Panel* parent);
@@ -485,6 +486,24 @@ Add to registry
 Building_Window::~Building_Window()
 {
 	*m_registry = 0;
+}
+
+
+/*
+===============
+Building_Window::draw
+
+Draw a picture of the building in the background.
+===============
+*/
+void Building_Window::draw(RenderTarget* dst)
+{
+	uint anim = get_building()->get_ui_anim();
+
+	dst->drawanim(get_inner_w() / 2, get_inner_h() / 2, anim, 0, 0);
+
+	// Draw all the panels etc. above the background
+	Window::draw(dst);
 }
 
 

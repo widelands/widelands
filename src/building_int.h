@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,6 +62,7 @@ public:
 
 	virtual int get_size();
 	virtual uint get_playercaps();
+	virtual uint get_ui_anim();
 
 	void set_building(Building_Descr* descr);
 	inline Building_Descr* get_building() const { return m_building; }
@@ -77,7 +78,6 @@ public:
 	uint get_nrwaresqueues() { return m_wares.size(); }
 	WaresQueue* get_waresqueue(uint idx) { return m_wares[idx]; }
 
-   
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
@@ -241,7 +241,7 @@ private:
    private:
 	Request*		m_soldier_request;
 	Worker*		m_soldier;
-//     Soldier*  
+//     Soldier*
 //  Soldier_Queue    
 };
 

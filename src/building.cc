@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by Widelands Development Team
+ * Copyright (C) 2002-2004 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -391,6 +391,20 @@ void Building::destroy(Editor_Game_Base* g)
 
 /*
 ===============
+Building::get_ui_anim [virtual]
+
+Return the animation ID that is used for the building in UI items
+(the building UI, messages, etc..)
+===============
+*/
+uint Building::get_ui_anim()
+{
+	return get_descr()->get_idle_anim();
+}
+
+
+/*
+===============
 Building::get_building_work [virtual]
 
 This function is called by workers in the buildingwork task.
@@ -645,6 +659,20 @@ uint ConstructionSite::get_playercaps()
 	caps |= 1 << PCap_Bulldoze;
 
 	return caps;
+}
+
+
+/*
+===============
+ConstructionSite::get_ui_anim
+
+Return the animation for the building that is in construction, as this
+should be more useful to the player.
+===============
+*/
+uint ConstructionSite::get_ui_anim()
+{
+	return get_building()->get_idle_anim();
 }
 
 

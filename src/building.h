@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,6 +125,9 @@ public:
 
 	bool leave_check_and_wait(Game* g, Worker* w);
    inline int get_conquers(void) const { return get_descr()->get_conquers(); }
+
+public:
+	virtual uint get_ui_anim();
 
 protected:
 	void start_animation(Editor_Game_Base *g, uint anim);
