@@ -108,21 +108,28 @@ ImmovableProgram IMPLEMENTATION
 ==============================================================================
 */
 
-struct ImmovableAction {
-	enum Type {
-		actAnimation,		// iparam1 = anim, iparam2 = duration (-1 = forever)
-		actTransform,		// sparam = transform into
-		actRemove
-	};
+// Additional parameters for op parsing routines
+struct ProgramParser {
+	Immovable_Descr*		descr;
+	std::string				directory;
+	Profile* 				prof;
+};
 
-	Type			type;
+// One action of a program
+struct ImmovableAction {
+	typedef bool (Immovable::*execute_t)(Game* g, bool killable, const ImmovableAction& action);
+
+	execute_t	function;
 	int			iparam1;
 	int			iparam2;
 	std::string	sparam;
 };
 
-
+// The ImmovableProgram
 class ImmovableProgram {
+	typedef void (ImmovableProgram::*parse_t)(ImmovableAction* act, const ProgramParser* parser,
+																				const std::vector<std::string>& cmd);
+
 public:
 	ImmovableProgram(std::string name);
 
@@ -134,9 +141,33 @@ public:
 	void parse(Immovable_Descr* descr, std::string directory, Profile* prof);
 
 private:
+	void parse_animation(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
+	void parse_transform(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
+	void parse_remove(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
+
+private:
+	struct ParseMap {
+		const char*	name;
+		parse_t		function;
+	};
+
+private:
 	std::string							m_name;
 	std::vector<ImmovableAction>	m_actions;
+
+private:
+	static const ParseMap			s_parsemap[];
 };
+
+// Command name -> parser function mapping
+const ImmovableProgram::ParseMap ImmovableProgram::s_parsemap[] = {
+	{ "animation",		&ImmovableProgram::parse_animation },
+	{ "transform",		&ImmovableProgram::parse_transform },
+	{ "remove",			&ImmovableProgram::parse_remove },
+
+	{ 0, 0 }
+};
+
 
 ImmovableProgram::ImmovableProgram(std::string name)
 {
@@ -166,8 +197,13 @@ Actually parse a program
 */
 void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Profile* prof)
 {
+	ProgramParser p;
 	Section* s = prof->get_safe_section(m_name.c_str());
 	uint line;
+
+	p.descr = descr;
+	p.directory = directory;
+	p.prof = prof;
 
 	for(line = 0; ; line++)
 	{
@@ -177,6 +213,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 			ImmovableAction action;
 			char buf[256];
 			const char* string;
+			uint mapidx;
 
 			snprintf(buf, sizeof(buf), "%i", line);
 			string = s->get_string(buf, 0);
@@ -188,35 +225,14 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 			if (!command.size())
 				continue;
 
-			if (command[0] == "animation")
-			{
-				if (command.size() != 3)
-					throw wexception("Syntax: animation [name] [duration]");
+			for(mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
+				if (command[0] == s_parsemap[mapidx].name)
+					break;
 
-				action.type = ImmovableAction::actAnimation;
-				action.iparam1 = descr->parse_animation(directory, prof, command[1]);
-				action.iparam2 = atoi(command[2].c_str());
-
-				if (action.iparam2 == 0 || action.iparam2 < -1)
-					throw wexception("duration out of range (-1, 1..+inf) '%s'", command[2].c_str());
-			}
-			else if (command[0] == "transform")
-			{
-				if (command.size() != 2)
-					throw wexception("Syntax: transform [bob name]");
-
-				action.type = ImmovableAction::actTransform;
-				action.sparam = command[1];
-			}
-			else if (command[0] == "remove")
-			{
-				if (command.size() != 1)
-					throw wexception("Syntax: remove");
-
-				action.type = ImmovableAction::actRemove;
-			}
-			else
+			if (!s_parsemap[mapidx].name)
 				throw wexception("Unknown instruction '%s'", command[0].c_str());
+
+			(this->*s_parsemap[mapidx].function)(&action, &p, command);
 
 			m_actions.push_back(action);
 		}
@@ -233,7 +249,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 
 		log("WARNING: %s: [%s] is empty, using default\n", directory.c_str(), m_name.c_str());
 
-		act.type = ImmovableAction::actAnimation;
+		act.function = &Immovable::run_animation;
 		act.iparam1 = descr->parse_animation(directory, prof, "idle");
 		act.iparam2 = -1;
 
@@ -380,7 +396,7 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 			ImmovableProgram* prog = new ImmovableProgram("program");
 			ImmovableAction act;
 
-			act.type = ImmovableAction::actAnimation;
+			act.function = &Immovable::run_animation;
 			act.iparam1 = parse_animation(directory, prof, "idle");
 			act.iparam2 = -1;
 			prog->add_action(act);
@@ -580,7 +596,7 @@ void Immovable::set_program_animation(Editor_Game_Base* g)
 
 	const ImmovableAction& action = prog->get_action(m_program_ptr);
 
-	if (action.type == ImmovableAction::actAnimation) {
+	if (action.function == &Immovable::run_animation) {
 		m_anim = action.iparam1;
 		m_animstart = g->get_gametime();
 	}
@@ -635,50 +651,14 @@ void Immovable::run_program(Game* g, bool killable)
 	{
 		const ImmovableAction& action = m_program->get_action(m_program_ptr);
 
-		m_program_ptr = (m_program_ptr+1) % m_program->get_size();
-
-		switch(action.type) {
-		case ImmovableAction::actAnimation:
-			m_anim = action.iparam1;
-			m_animstart = g->get_gametime();
-
-			if (action.iparam2 > 0)
-				m_program_step = schedule_act(g, action.iparam2);
+		if ((this->*action.function)(g, killable, action))
 			return;
-
-		case ImmovableAction::actTransform:
-			{
-				Coords c = m_position;
-
-				if (!killable) { // we need to reschedule and remove self from act()
-					m_program_ptr = (m_program_ptr+m_program->get_size()-1) % m_program->get_size();
-					m_program_step = schedule_act(g, 1);
-					return;
-				}
-
-				remove(g);
-				// Only use variables on the stack below this point!
-				g->create_immovable(c, action.sparam);
-				return;
-			}
-
-		case ImmovableAction::actRemove:
-			if (!killable) {
-				m_program_ptr = (m_program_ptr+m_program->get_size()-1) % m_program->get_size();
-				m_program_step = schedule_act(g, 1);
-				return;
-			}
-
-			remove(g);
-			return;
-		}
 	}
 	while(origptr != m_program_ptr);
 
 	molog("WARNING: %s has infinite loop in program %s\n", get_descr()->get_name(),
 					m_program->get_name().c_str());
 }
-
 
 /*
 ===============
@@ -694,6 +674,110 @@ void Immovable::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, 
 		return;
 
 	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, 0);
+}
+
+
+/*
+==============================
+
+Immovable commands
+
+==============================
+*/
+
+/*
+===============
+
+animation <name> <duration>
+
+===============
+*/
+void ImmovableProgram::parse_animation(ImmovableAction* act, const ProgramParser* parser,
+																	const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 3)
+		throw wexception("Syntax: animation [name] [duration]");
+
+	act->function = &Immovable::run_animation;
+	act->iparam1 = parser->descr->parse_animation(parser->directory, parser->prof, cmd[1]);
+	act->iparam2 = atoi(cmd[2].c_str());
+
+	if (act->iparam2 == 0 || act->iparam2 < -1)
+		throw wexception("duration out of range (-1, 1..+inf) '%s'", cmd[2].c_str());
+}
+
+bool Immovable::run_animation(Game* g, bool killable, const ImmovableAction& action)
+{
+	m_anim = action.iparam1;
+	m_animstart = g->get_gametime();
+
+	if (action.iparam2 > 0)
+		m_program_step = schedule_act(g, action.iparam2);
+
+	m_program_ptr = (m_program_ptr+1) % m_program->get_size();
+
+	return true;
+}
+
+
+/*
+===============
+
+transform <name of immovable>
+
+===============
+*/
+void ImmovableProgram::parse_transform(ImmovableAction* act, const ProgramParser* parser,
+															const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 2)
+		throw wexception("Syntax: transform [bob name]");
+
+	act->function = &Immovable::run_transform;
+	act->sparam = cmd[1];
+}
+
+bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& action)
+{
+	Coords c = m_position;
+
+	if (!killable) { // we need to reschedule and remove self from act()
+		m_program_step = schedule_act(g, 1);
+		return true;
+	}
+
+	remove(g);
+	// Only use variables on the stack below this point!
+	g->create_immovable(c, action.sparam);
+	return true;
+}
+
+
+/*
+===============
+
+remove
+
+===============
+*/
+void ImmovableProgram::parse_remove(ImmovableAction* act, const ProgramParser* parser,
+																	const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 1)
+		throw wexception("Syntax: remove");
+
+	act->function = &Immovable::run_remove;
+}
+
+bool Immovable::run_remove(Game* g, bool killable, const ImmovableAction& action)
+{
+	if (!killable) {
+		m_program_step = schedule_act(g, 1);
+		return true;
+	}
+
+	remove(g);
+	return true;
 }
 
 

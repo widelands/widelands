@@ -35,25 +35,14 @@ class WorkerProgram
 */
 
 struct WorkerAction {
-	enum Type {
-		actCreateItem,			// sparam1 = ware name
-		actSetDescription,	// sparamv = possible bobs
-		actFindObject,			// iparam1 = radius predicate, iparam2 = attribute predicate (if >= 0)
-		actFindSpace,			// iparam1 = radius, iparam2 = FindFieldSize::sizeXXX
-		actWalk,					// iparam1 = walkXXX
-		actAnimation,			// iparam1 = anim id; iparam2 = duration
-		actReturn,				// iparam1 = 0: don't drop item on flag, 1: do drop item on flag
-		actObject,				// sparam1 = object command
-		actPlant,				// plant the selected description
-	   actRemoveObject      // delete objvar1, no logic, simply remove it from the map
-   };
+	typedef bool (Worker::*execute_t)(Game* g, Bob::State* state, const WorkerAction* act);
 
 	enum {
 		walkObject,			// walk to objvar1
 		walkCoords,			// walk to coords
 	};
 
-	Type				type;
+	execute_t		function;
 	int				iparam1;
 	int				iparam2;
 	std::string		sparam1;
@@ -62,6 +51,15 @@ struct WorkerAction {
 };
 
 class WorkerProgram {
+public:
+	struct Parser {
+		Worker_Descr*		descr;
+		std::string			directory;
+		Profile*				prof;
+	};
+
+	typedef void (WorkerProgram::*parse_t)(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+
 public:
 	WorkerProgram(std::string name);
 
@@ -72,11 +70,47 @@ public:
 		return &m_actions[idx];
 	}
 
-	void parse(Worker_Descr* descr, std::string directory, Profile* prof, std::string name);
+	void parse(Parser* parser, std::string name);
+
+private:
+	struct ParseMap {
+		const char*		name;
+		parse_t			function;
+	};
+
+private:
+	void parse_createitem(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_setdescription(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_findobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_findspace(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_walk(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_animation(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_return(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_object(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_plant(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_removeobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 
 private:
 	std::string						m_name;
 	std::vector<WorkerAction>	m_actions;
+
+private:
+	static const ParseMap		s_parsemap[];
+};
+
+const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
+	{ "createitem",		&WorkerProgram::parse_createitem },
+	{ "setdescription",	&WorkerProgram::parse_setdescription },
+	{ "findobject",		&WorkerProgram::parse_findobject },
+	{ "findspace",			&WorkerProgram::parse_findspace },
+	{ "walk",				&WorkerProgram::parse_walk },
+	{ "animation",			&WorkerProgram::parse_animation },
+	{ "return",				&WorkerProgram::parse_return },
+	{ "object",				&WorkerProgram::parse_object },
+	{ "plant",				&WorkerProgram::parse_plant },
+	{ "removeobject",		&WorkerProgram::parse_removeobject },
+
+	{ 0, 0 }
 };
 
 
@@ -100,9 +134,9 @@ WorkerProgram::parse
 Parse a program
 ===============
 */
-void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* prof, std::string name)
+void WorkerProgram::parse(Parser* parser, std::string name)
 {
-	Section* sprogram = prof->get_safe_section(name.c_str());
+	Section* sprogram = parser->prof->get_safe_section(name.c_str());
 
 	for(uint idx = 0; ; ++idx) {
 		try
@@ -120,168 +154,18 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 			if (!cmd.size())
 				continue;
 
+			// Find the appropriate parser
 			WorkerAction act;
+			uint mapidx;
 
-			if (cmd[0] == "createitem")
-			{
-				if (cmd.size() != 2)
-					throw wexception("Usage: createitem <ware type>");
+			for(mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
+				if (cmd[0] == s_parsemap[mapidx].name)
+					break;
 
-				act.type = WorkerAction::actCreateItem;
-				act.sparam1 = cmd[1];
-			}
-			else if (cmd[0] == "setdescription")
-			{
-				if (cmd.size() < 2)
-					throw wexception("Usage: setdescription <bob name> <bob name> ...");
-
-				act.type = WorkerAction::actSetDescription;
-
-				for(uint i = 1; i < cmd.size(); i++)
-					act.sparamv.push_back(cmd[i]);
-			}
-			else if (cmd[0] == "findobject")
-			{
-				uint i;
-
-				act.type = WorkerAction::actFindObject;
-				act.iparam1 = -1;
-				act.iparam2 = -1;
-
-				// Parse predicates
-				for(i = 1; i < cmd.size(); i++) {
-					uint idx = cmd[i].find(':');
-					std::string key = cmd[i].substr(0, idx);
-					std::string value = cmd[i].substr(idx+1);
-
-					if (key == "radius") {
-						char* endp;
-
-						act.iparam1 = strtol(value.c_str(), &endp, 0);
-						if (endp && *endp)
-							throw wexception("Bad findobject radius '%s'", value.c_str());
-					} else if (key == "attrib") {
-						act.iparam2 = Map_Object_Descr::get_attribute_id(value);
-					} else
-						throw wexception("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
-				}
-
-				if (act.iparam1 <= 0)
-					throw wexception("findobject: must specify radius");
-			}
-			else if (cmd[0] == "findspace")
-			{
-				uint i;
-
-				act.type = WorkerAction::actFindSpace;
-				act.iparam1 = -1;
-				act.iparam2 = -1;
-
-				// Parse predicates
-				for(i = 1; i < cmd.size(); i++) {
-					uint idx = cmd[i].find(':');
-					std::string key = cmd[i].substr(0, idx);
-					std::string value = cmd[i].substr(idx+1);
-
-					if (key == "radius") {
-						char* endp;
-
-						act.iparam1 = strtol(value.c_str(), &endp, 0);
-						if (endp && *endp)
-							throw wexception("Bad findspace radius '%s'", value.c_str());
-					} else if (key == "size") {
-						static const struct {
-							const char* name;
-							int val;
-						} sizenames[] = {
-							{ "any",		FindFieldSize::sizeAny },
-							{ "build",	FindFieldSize::sizeBuild },
-							{ "small",	FindFieldSize::sizeSmall },
-							{ "medium",	FindFieldSize::sizeMedium },
-							{ "big",		FindFieldSize::sizeBig },
-							{ "mine",	FindFieldSize::sizeMine },
-							{ "port",	FindFieldSize::sizePort },
-							{ 0, 0 }
-						};
-
-						int idx;
-
-						for(idx = 0; sizenames[idx].name; ++idx)
-							if (value == sizenames[idx].name)
-								break;
-
-						if (!sizenames[idx].name)
-							throw wexception("Bad findspace size '%s'", value.c_str());
-
-						act.iparam2 = sizenames[idx].val;
-					} else
-						throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
-				}
-
-				if (act.iparam1 <= 0)
-					throw wexception("findspace: must specify radius");
-				if (act.iparam2 < 0)
-					throw wexception("findspace: must specify size");
-			}
-			else if (cmd[0] == "walk")
-			{
-				if (cmd.size() != 2)
-					throw wexception("Usage: walk <where>");
-
-				act.type = WorkerAction::actWalk;
-
-				if (cmd[1] == "object")
-					act.iparam1 = WorkerAction::walkObject;
-				else if (cmd[1] == "coords")
-					act.iparam1 = WorkerAction::walkCoords;
-				else
-					throw wexception("Bad walk destination '%s'", cmd[1].c_str());
-			}
-			else if (cmd[0] == "animation")
-			{
-				char* endp;
-
-				if (cmd.size() != 3)
-					throw wexception("Usage: animation <name> <time>");
-
-				act.type = WorkerAction::actAnimation;
-
-				// TODO: dynamically allocate animations here
-				if (cmd[1] == "idle")
-					act.iparam1 = descr->get_idle_anim();
-				else
-					throw wexception("Unknown animation '%s'", cmd[1].c_str());
-
-				act.iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-				if (endp && *endp)
-					throw wexception("Bad duration '%s'", cmd[2].c_str());
-
-				if (act.iparam2 <= 0)
-					throw wexception("animation duration must be positive");
-			}
-			else if (cmd[0] == "return")
-			{
-				act.type = WorkerAction::actReturn;
-				act.iparam1 = 1; // drop any item on our owner's flag
-			}
-			else if (cmd[0] == "object")
-			{
-				if (cmd.size() != 2)
-					throw wexception("Usage: object <program name>");
-
-				act.type = WorkerAction::actObject;
-				act.sparam1 = cmd[1];
-			}
-			else if (cmd[0] == "plant")
-			{
-				act.type = WorkerAction::actPlant;
-			}
-         else if(cmd[0] == "removeobject") 
-         {
-            act.type = WorkerAction::actRemoveObject;
-         }
-			else
+			if (!s_parsemap[mapidx].name)
 				throw wexception("unknown command '%s'", cmd[0].c_str());
+
+			(this->*s_parsemap[mapidx].function)(&act, parser, cmd);
 
 			m_actions.push_back(act);
 		}
@@ -290,6 +174,608 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 			throw wexception("Line %i: %s", idx, e.what());
 		}
 	}
+}
+
+
+
+/*
+==============================================================================
+
+WorkerProgram Commands
+
+==============================================================================
+*/
+
+
+/*
+==============================
+
+createitem <waretype>
+
+The worker will create and carry an item of the given type.
+
+sparam1 = ware name
+
+==============================
+*/
+void WorkerProgram::parse_createitem(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 2)
+		throw wexception("Usage: createitem <ware type>");
+
+	act->function = &Worker::run_createitem;
+	act->sparam1 = cmd[1];
+}
+
+bool Worker::run_createitem(Game* g, State* state, const WorkerAction* act)
+{
+	WareInstance* item;
+	int wareid;
+
+	molog("  CreateItem(%s)\n", act->sparam1.c_str());
+
+	item = fetch_carried_item(g);
+	if (item) {
+		molog("  Still carrying an item! Delete it.\n");
+		item->schedule_destroy(g);
+	}
+
+	wareid = g->get_safe_ware_id(act->sparam1.c_str());
+	item = new WareInstance(wareid);
+	item->init(g);
+
+	set_carried_item(g, item);
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
+
+
+/*
+==============================
+
+setdescription <immovable name> <immovable name> ...
+
+Randomly select an immovable name that can be used in subsequent commands
+(e.g. plant).
+
+sparamv = possible bobs
+
+==============================
+*/
+void WorkerProgram::parse_setdescription(WorkerAction* act, Parser* parser,
+															const std::vector<std::string>& cmd)
+{
+	if (cmd.size() < 2)
+		throw wexception("Usage: setdescription <bob name> <bob name> ...");
+
+	act->function = &Worker::run_setdescription;
+
+	for(uint i = 1; i < cmd.size(); i++)
+		act->sparamv.push_back(cmd[i]);
+}
+
+bool Worker::run_setdescription(Game* g, State* state, const WorkerAction* act)
+{
+	int idx = g->logic_rand() % act->sparamv.size();
+
+	molog("  SetDescription: %s\n", act->sparamv[idx].c_str());
+
+	state->ivar2 = g->get_map()->get_world()->get_immovable_index(act->sparamv[idx].c_str());
+	if (state->ivar2 < 0) {
+		molog("  WARNING: Unknown immovable %s\n", act->sparamv[idx].c_str());
+		set_signal("fail");
+		pop_task(g);
+		return true;
+	}
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
+
+
+/*
+==============================
+
+findobject key:value key:value ...
+
+Find and select an object based on a number of predicates.
+The object can be used in other commands like walk or object.
+
+Predicates:
+radius:<dist>
+	Find objects within the given radius
+
+attrib:<attribute>  (optional)
+	Find objects with the given attribute
+
+iparam1 = radius predicate
+iparam2 = attribute predicate (if >= 0)
+
+==============================
+*/
+void WorkerProgram::parse_findobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	uint i;
+
+	act->function = &Worker::run_findobject;
+	act->iparam1 = -1;
+	act->iparam2 = -1;
+
+	// Parse predicates
+	for(i = 1; i < cmd.size(); i++) {
+		uint idx = cmd[i].find(':');
+		std::string key = cmd[i].substr(0, idx);
+		std::string value = cmd[i].substr(idx+1);
+
+		if (key == "radius") {
+			char* endp;
+
+			act->iparam1 = strtol(value.c_str(), &endp, 0);
+			if (endp && *endp)
+				throw wexception("Bad findobject radius '%s'", value.c_str());
+		} else if (key == "attrib") {
+			act->iparam2 = Map_Object_Descr::get_attribute_id(value);
+		} else
+			throw wexception("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
+	}
+
+	if (act->iparam1 <= 0)
+		throw wexception("findobject: must specify radius");
+}
+
+bool Worker::run_findobject(Game* g, State* state, const WorkerAction* act)
+{
+	Coords pos = get_position();
+	std::vector<ImmovableFound> list;
+	Map* map = g->get_map();
+	PlayerImmovable* location = get_location(g);
+	Building* owner;
+
+	assert(location);
+	assert(location->get_type() == BUILDING);
+
+	owner = (Building*)location;
+
+	molog("  FindObject(%i, %i)\n", act->iparam1, act->iparam2);
+
+	if (pos == owner->get_position())
+		pos = owner->get_base_flag()->get_position();
+
+	CheckStepWalkOn cstep(get_movecaps(), false);
+
+	if (act->iparam2 < 0)
+		map->find_reachable_immovables(pos, act->iparam1, &list, &cstep);
+	else
+		map->find_reachable_immovables(pos, act->iparam1, &list, &cstep,
+													FindImmovableAttribute(act->iparam2));
+
+	molog("  %i found\n", list.size());
+
+	if (!list.size()) {
+		set_signal("fail"); // no object found, cannot run program
+		pop_task(g);
+		return true;
+	}
+
+	int sel = g->logic_rand() % list.size();
+
+	state->objvar1 = list[sel].object;
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
+
+
+
+/*
+==============================
+
+findspace key:value key:value ...
+
+Find a field based on a number of predicates.
+The field can later be used in other commands, e.g. walk.
+
+Predicates:
+radius:<dist>
+	Search for fields within the given radius around the worker.
+
+size:[any|build|small|medium|big|mine|port]
+	Search for fields with the given amount of space.
+
+iparam1 = radius
+iparam2 = FindFieldSize::sizeXXX
+
+==============================
+*/
+void WorkerProgram::parse_findspace(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	uint i;
+
+	act->function = &Worker::run_findspace;
+	act->iparam1 = -1;
+	act->iparam2 = -1;
+
+	// Parse predicates
+	for(i = 1; i < cmd.size(); i++) {
+		uint idx = cmd[i].find(':');
+		std::string key = cmd[i].substr(0, idx);
+		std::string value = cmd[i].substr(idx+1);
+
+		if (key == "radius") {
+			char* endp;
+
+			act->iparam1 = strtol(value.c_str(), &endp, 0);
+			if (endp && *endp)
+				throw wexception("Bad findspace radius '%s'", value.c_str());
+		} else if (key == "size") {
+			static const struct {
+				const char* name;
+				int val;
+			} sizenames[] = {
+				{ "any",		FindFieldSize::sizeAny },
+				{ "build",	FindFieldSize::sizeBuild },
+				{ "small",	FindFieldSize::sizeSmall },
+				{ "medium",	FindFieldSize::sizeMedium },
+				{ "big",		FindFieldSize::sizeBig },
+				{ "mine",	FindFieldSize::sizeMine },
+				{ "port",	FindFieldSize::sizePort },
+				{ 0, 0 }
+			};
+
+			int idx;
+
+			for(idx = 0; sizenames[idx].name; ++idx)
+				if (value == sizenames[idx].name)
+					break;
+
+			if (!sizenames[idx].name)
+				throw wexception("Bad findspace size '%s'", value.c_str());
+
+			act->iparam2 = sizenames[idx].val;
+		} else
+			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
+	}
+
+	if (act->iparam1 <= 0)
+		throw wexception("findspace: must specify radius");
+	if (act->iparam2 < 0)
+		throw wexception("findspace: must specify size");
+}
+
+bool Worker::run_findspace(Game* g, State* state, const WorkerAction* act)
+{
+	std::vector<Coords> list;
+	Map* map = g->get_map();
+	World* w = map->get_world();
+	Immovable_Descr* descr;
+
+	molog("  FindSpace(%i): for %i\n", act->iparam1, state->ivar2);
+
+	if (state->ivar2 < 0 || state->ivar2 >= w->get_nr_immovables()) {
+		molog("  WARNING: [actFindSpace]: bad immovable index %i\n", state->ivar2);
+		set_signal("fail");
+		pop_task(g);
+		return true;
+	}
+
+	descr = w->get_immovable_descr(state->ivar2);
+
+	CheckStepDefault cstep(get_movecaps());
+
+	if (!map->find_reachable_fields(get_position(), act->iparam1, &list, &cstep,
+						FindFieldSize((FindFieldSize::Size)act->iparam2))) {
+		molog("  no space found\n");
+		set_signal("fail");
+		pop_task(g);
+		return true;
+	}
+
+	// Pick a location at random
+	int sel = g->logic_rand() % list.size();
+
+	state->coords = list[sel];
+
+	molog("  selected %i,%i\n", state->coords.x, state->coords.y);
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
+
+
+/*
+==============================
+
+walk <where>
+
+Walk to a previously selected destination. where can be one of:
+	object	Walk to a previously found and selected object
+	coords	Walk to a previously found and selected field/coordinate
+
+iparam1 = walkXXX
+
+==============================
+*/
+void WorkerProgram::parse_walk(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 2)
+		throw wexception("Usage: walk <where>");
+
+	act->function = &Worker::run_walk;
+
+	if (cmd[1] == "object")
+		act->iparam1 = WorkerAction::walkObject;
+	else if (cmd[1] == "coords")
+		act->iparam1 = WorkerAction::walkCoords;
+	else
+		throw wexception("Bad walk destination '%s'", cmd[1].c_str());
+}
+
+bool Worker::run_walk(Game* g, State* state, const WorkerAction* act)
+{
+	BaseImmovable* imm = g->get_map()->get_immovable(get_position());
+	Coords dest;
+	bool forceonlast = false;
+	PlayerImmovable* location = get_location(g);
+	Building* owner;
+
+	assert(location);
+	assert(location->get_type() == BUILDING);
+
+	owner = (Building*)location;
+
+	molog("  Walk(%i)\n", act->iparam1);
+
+	// First of all, make sure we're outside
+	if (imm == owner) {
+		start_task_leavebuilding(g);
+		return true;
+	}
+
+	// Determine the coords we need to walk towards
+	switch(act->iparam1) {
+	case WorkerAction::walkObject:
+		{
+			Map_Object* obj = state->objvar1.get(g);
+
+			if (!obj) {
+				molog("  object(nil)\n");
+				set_signal("fail");
+				pop_task(g);
+				return true;
+			}
+
+			molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
+
+			if (obj->get_type() == BOB)
+				dest = ((Bob*)obj)->get_position();
+			else if (obj->get_type() == IMMOVABLE)
+				dest = ((Immovable*)obj)->get_position();
+			else
+				throw wexception("MO(%u): [actWalk]: bad object type = %i", get_serial(), obj->get_type());
+
+			forceonlast = true;
+			break;
+		}
+
+	case WorkerAction::walkCoords:
+		molog("  coords(%i,%i)\n", state->coords.x, state->coords.y);
+		dest = state->coords;
+		break;
+
+	default:
+		throw wexception("MO(%u): [actWalk]: bad act->iparam1 = %i", get_serial(), act->iparam1);
+	}
+
+	// If we've already reached our destination, that's cool
+	if (get_position() == dest) {
+		molog("  reached\n");
+		state->ivar1++;
+		return false; // next instruction
+	}
+
+	// Walk towards it
+	if (!start_task_movepath(g, dest, 10, get_descr()->get_walk_anims(), forceonlast)) {
+		molog("  couldn't find path\n");
+		set_signal("fail");
+		pop_task(g);
+		return true;
+	}
+
+	return true;
+}
+
+
+/*
+==============================
+
+animation <name> <duration>
+
+Play the given animation for the given amount of time.
+
+iparam1 = anim id
+iparam2 = duration
+
+==============================
+*/
+void WorkerProgram::parse_animation(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	char* endp;
+
+	if (cmd.size() != 3)
+		throw wexception("Usage: animation <name> <time>");
+
+	act->function = &Worker::run_animation;
+
+	// TODO: dynamically allocate animations here
+	if (cmd[1] == "idle")
+		act->iparam1 = parser->descr->get_idle_anim();
+	else
+		throw wexception("Unknown animation '%s'", cmd[1].c_str());
+
+	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
+	if (endp && *endp)
+		throw wexception("Bad duration '%s'", cmd[2].c_str());
+
+	if (act->iparam2 <= 0)
+		throw wexception("animation duration must be positive");
+}
+
+bool Worker::run_animation(Game* g, State* state, const WorkerAction* act)
+{
+	molog("  Animation(%i, %i)\n", act->iparam1, act->iparam2);
+	set_animation(g, act->iparam1);
+
+	state->ivar1++;
+	schedule_act(g, act->iparam2);
+	return true;
+}
+
+
+
+/*
+==============================
+
+return
+
+Return home, drop any item we're carrying onto our building's flag.
+
+iparam1 = 0: don't drop item on flag, 1: do drop item on flag
+
+==============================
+*/
+void WorkerProgram::parse_return(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	act->function = &Worker::run_return;
+	act->iparam1 = 1; // drop any item on our owner's flag
+}
+
+bool Worker::run_return(Game* g, State* state, const WorkerAction* act)
+{
+	molog("  Return(%i)\n", act->iparam1);
+
+	state->ivar1++;
+	start_task_return(g, act->iparam1);
+	return true;
+}
+
+
+/*
+==============================
+
+object <command>
+
+Cause the currently selected object to execute the given program.
+
+sparam1 = object command name
+
+==============================
+*/
+void WorkerProgram::parse_object(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 2)
+		throw wexception("Usage: object <program name>");
+
+	act->function = &Worker::run_object;
+	act->sparam1 = cmd[1];
+}
+
+bool Worker::run_object(Game* g, State* state, const WorkerAction* act)
+{
+	Map_Object* obj;
+
+	molog("  Object(%s)\n", act->sparam1.c_str());
+
+	obj = state->objvar1.get(g);
+
+	if (!obj) {
+		molog("  object(nil)\n");
+		set_signal("fail");
+		pop_task(g);
+		return true;
+	}
+
+	molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
+
+	if (obj->get_type() == IMMOVABLE)
+		((Immovable*)obj)->switch_program(g, act->sparam1);
+	else
+		throw wexception("MO(%u): [actObject]: bad object type = %i", get_serial(), obj->get_type());
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
+
+
+/*
+==============================
+
+plant
+
+Plant an immovable on the current position. The immovable type must have been
+selected by a previous command (i.e. setdescription)
+
+==============================
+*/
+void WorkerProgram::parse_plant(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	act->function = &Worker::run_plant;
+}
+
+bool Worker::run_plant(Game* g, State* state, const WorkerAction* act)
+{
+	Coords pos = get_position();
+
+	molog("  Plant: %i at %i,%i\n", state->ivar2, pos.x, pos.y);
+
+	// Check if the map is still free here
+	BaseImmovable* imm = g->get_map()->get_immovable(pos);
+
+	if (imm && imm->get_size() >= BaseImmovable::SMALL) {
+		molog("  field no longer free\n");
+		set_signal("fail");
+		pop_task(g);
+		return true;
+	}
+
+	g->create_immovable(pos.x, pos.y, state->ivar2);
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
+
+
+/*
+==============================
+
+removeobject
+
+Simply remove the currently selected object - make no fuss about it.
+
+==============================
+*/
+void WorkerProgram::parse_removeobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	act->function = &Worker::run_removeobject;
+}
+
+bool Worker::run_removeobject(Game* g, State* state, const WorkerAction* act)
+{
+	Map_Object* obj;
+
+	obj = state->objvar1.get(g);
+	obj->remove(g);
+	state->objvar1.set(0);
+
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
 }
 
 
@@ -423,15 +909,21 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	// Read the walking animations
 	m_walk_anims.parse(directory, prof, "walk_??", prof->get_section("walk"), encdata);
    m_walkload_anims.parse(directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
-	
+
    // Read programs
 	while(sglobal->get_next_string("program", &string)) {
 		WorkerProgram* prog = 0;
 
 		try
 		{
+			WorkerProgram::Parser parser;
+
+			parser.descr = this;
+			parser.directory = directory;
+			parser.prof = prof;
+
 			prog = new WorkerProgram(string);
-			prog->parse(this, directory, prof, string);
+			prog->parse(&parser, string);
 			m_programs[prog->get_name()] = prog;
 		}
 		catch(std::exception& e)
@@ -1140,13 +1632,6 @@ Worker::program_update
 void Worker::program_update(Game* g, State* state)
 {
 	const WorkerAction* act;
-	PlayerImmovable* location = get_location(g);
-	Building* owner;
-
-	assert(location);
-	assert(location->get_type() == BUILDING);
-
-	owner = (Building*)location;
 
 	for(;;)
 	{
@@ -1160,275 +1645,8 @@ void Worker::program_update(Game* g, State* state)
 
 		act = state->program->get_action(state->ivar1);
 
-		switch(act->type) {
-		case WorkerAction::actCreateItem:
-			{
-				WareInstance* item;
-				int wareid;
-
-				molog("  CreateItem(%s)\n", act->sparam1.c_str());
-
-				item = fetch_carried_item(g);
-				if (item) {
-					molog("  Still carrying an item! Delete it.\n");
-					item->schedule_destroy(g);
-				}
-
-				wareid = g->get_safe_ware_id(act->sparam1.c_str());
-				item = new WareInstance(wareid);
-				item->init(g);
-
-				set_carried_item(g, item);
-
-				state->ivar1++;
-				schedule_act(g, 10);
-				return;
-			}
-
-		case WorkerAction::actSetDescription:
-			{
-				int idx = g->logic_rand() % act->sparamv.size();
-
-				molog("  SetDescription: %s\n", act->sparamv[idx].c_str());
-
-				state->ivar2 = g->get_map()->get_world()->get_immovable_index(act->sparamv[idx].c_str());
-				if (state->ivar2 < 0) {
-					molog("  WARNING: Unknown immovable %s\n", act->sparamv[idx].c_str());
-					set_signal("fail");
-					pop_task(g);
-					return;
-				}
-
-				state->ivar1++;
-				schedule_act(g, 10);
-				return;
-			}
-
-		case WorkerAction::actFindObject:
-			{
-				Coords pos = get_position();
-				std::vector<ImmovableFound> list;
-				Map* map = g->get_map();
-
-				molog("  FindObject(%i, %i)\n", act->iparam1, act->iparam2);
-
-				if (pos == owner->get_position())
-					pos = owner->get_base_flag()->get_position();
-
-				CheckStepWalkOn cstep(get_movecaps(), false);
-
-				if (act->iparam2 < 0)
-					map->find_reachable_immovables(pos, act->iparam1, &list, &cstep);
-				else
-					map->find_reachable_immovables(pos, act->iparam1, &list, &cstep,
-																FindImmovableAttribute(act->iparam2));
-
-				molog("  %i found\n", list.size());
-
-				if (!list.size()) {
-					set_signal("fail"); // no object found, cannot run program
-					pop_task(g);
-					return;
-				}
-
-				int sel = g->logic_rand() % list.size();
-
-				state->objvar1 = list[sel].object;
-
-				state->ivar1++;
-				schedule_act(g, 10);
-				return;
-			}
-
-		case WorkerAction::actFindSpace:
-			{
-				std::vector<Coords> list;
-				Map* map = g->get_map();
-				World* w = map->get_world();
-				Immovable_Descr* descr;
-
-				molog("  FindSpace(%i): for %i\n", act->iparam1, state->ivar2);
-
-				if (state->ivar2 < 0 || state->ivar2 >= w->get_nr_immovables()) {
-					molog("  WARNING: [actFindSpace]: bad immovable index %i\n", state->ivar2);
-					set_signal("fail");
-					pop_task(g);
-					return;
-				}
-
-				descr = w->get_immovable_descr(state->ivar2);
-
-				CheckStepDefault cstep(get_movecaps());
-
-				if (!map->find_reachable_fields(get_position(), act->iparam1, &list, &cstep,
-									FindFieldSize((FindFieldSize::Size)act->iparam2))) {
-					molog("  no space found\n");
-					set_signal("fail");
-					pop_task(g);
-					return;
-				}
-
-				// Pick a location at random
-				int sel = g->logic_rand() % list.size();
-
-				state->coords = list[sel];
-
-				molog("  selected %i,%i\n", state->coords.x, state->coords.y);
-
-				state->ivar1++;
-				schedule_act(g, 10);
-				return;
-			}
-
-		case WorkerAction::actWalk:
-			{
-				BaseImmovable* imm = g->get_map()->get_immovable(get_position());
-				Coords dest;
-				bool forceonlast = false;
-
-				molog("  Walk(%i)\n", act->iparam1);
-
-				// First of all, make sure we're outside
-				if (imm == owner) {
-					start_task_leavebuilding(g);
-					return;
-				}
-
-				// Determine the coords we need to walk towards
-				switch(act->iparam1) {
-				case WorkerAction::walkObject:
-					{
-						Map_Object* obj = state->objvar1.get(g);
-
-						if (!obj) {
-							molog("  object(nil)\n");
-							set_signal("fail");
-							pop_task(g);
-							return;
-						}
-
-						molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
-
-						if (obj->get_type() == BOB)
-							dest = ((Bob*)obj)->get_position();
-						else if (obj->get_type() == IMMOVABLE)
-							dest = ((Immovable*)obj)->get_position();
-						else
-							throw wexception("MO(%u): [actWalk]: bad object type = %i", get_serial(), obj->get_type());
-
-						forceonlast = true;
-						break;
-					}
-
-				case WorkerAction::walkCoords:
-					molog("  coords(%i,%i)\n", state->coords.x, state->coords.y);
-					dest = state->coords;
-					break;
-
-				default:
-					throw wexception("MO(%u): [actWalk]: bad act->iparam1 = %i", get_serial(), act->iparam1);
-				}
-
-				// If we've already reached our destination, that's cool
-				if (get_position() == dest) {
-					molog("  reached\n");
-					state->ivar1++;
-					break; // next instruction
-				}
-
-				// Walk towards it
-				if (!start_task_movepath(g, dest, 10, get_descr()->get_walk_anims(), forceonlast)) {
-					molog("  couldn't find path\n");
-					set_signal("fail");
-					pop_task(g);
-					return;
-				}
-
-				return;
-			}
-
-		case WorkerAction::actAnimation:
-			{
-				molog("  Animation(%i, %i)\n", act->iparam1, act->iparam2);
-				set_animation(g, act->iparam1);
-
-				state->ivar1++;
-				schedule_act(g, act->iparam2);
-				return;
-			}
-
-		case WorkerAction::actReturn:
-			{
-				molog("  Return(%i)\n", act->iparam1);
-
-				state->ivar1++;
-				start_task_return(g, act->iparam1);
-				return;
-			}
-
-		case WorkerAction::actObject:
-			{
-				Map_Object* obj;
-
-				molog("  Object(%s)\n", act->sparam1.c_str());
-
-				obj = state->objvar1.get(g);
-
-				if (!obj) {
-					molog("  object(nil)\n");
-					set_signal("fail");
-					pop_task(g);
-					return;
-				}
-
-				molog("  object(%u): type = %i\n", obj->get_serial(), obj->get_type());
-
-				if (obj->get_type() == IMMOVABLE)
-					((Immovable*)obj)->switch_program(g, act->sparam1);
-				else
-					throw wexception("MO(%u): [actObject]: bad object type = %i", get_serial(), obj->get_type());
-
-				state->ivar1++;
-				schedule_act(g, 10);
-				return;
-			}
-
-		case WorkerAction::actPlant:
-			{
-				Coords pos = get_position();
-
-				molog("  Plant: %i at %i,%i\n", state->ivar2, pos.x, pos.y);
-
-				// Check if the map is still free here
-				BaseImmovable* imm = g->get_map()->get_immovable(pos);
-
-				if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-					molog("  field no longer free\n");
-					set_signal("fail");
-					pop_task(g);
-					return;
-				}
-
-				g->create_immovable(pos.x, pos.y, state->ivar2);
-
-				state->ivar1++;
-				schedule_act(g, 10);
-				return;
-			}
-
-      case WorkerAction::actRemoveObject:
-         {
-            Map_Object* obj;
-
-            obj = state->objvar1.get(g);
-            obj->remove(g);
-            state->objvar1.set(0);
-				
-            state->ivar1++;
-				schedule_act(g, 10);
-            return;
-         }
-		}
+		if ((this->*(act->function))(g, state, act))
+			return;
 	}
 }
 
@@ -3047,199 +3265,3 @@ Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *dire
 	return descr;
 }
 
-
-#if 0
-//
-// class Soldier_Descr
-//
-int Soldier_Descr::read(FileRead* f)
-{
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   
-   energy = f->Unsigned16();
-/*
-   attack_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   attack_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   attack_l.read(f);
-   attack1_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   attack1_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   attack1_l.read(f);
-   evade_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   evade_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   evade_l.read(f);
-   evade1_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   evade1_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   evade1_l.read(f);
-
-   attack_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   attack_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   attack_r.read(f);
-   attack1_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   attack1_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   attack1_r.read(f);
-   evade_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   evade_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   evade_r.read(f);
-   evade1_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   evade1_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   evade1_r.read(f);
-*/     
-   return RET_OK;
-}
-
-// Worker class read functions
-int Has_Working_Worker_Descr::read(FileRead* f) {
-/*
-   working.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   working.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   working.read(f);
-*/
-   return RET_OK;
-}
-
-int Has_Working1_Worker_Descr::read(FileRead* f) {
-/*
-   working1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   working1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   working1.read(f);
-*/
-   return RET_OK;
-}
-int Has_Walk1_Worker_Descr::read(FileRead* f) {
-/*
-   walk_ne1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_nw1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_w1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_sw1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_se1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_w1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_ne1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_nw1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_w1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_sw1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_se1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_w1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-
-   walk_ne1.read(f);
-   walk_e1.read(f);
-   walk_se1.read(f);
-   walk_sw1.read(f);
-   walk_w1.read(f);
-   walk_nw1.read(f);
-*/
-   return RET_OK;
-}
-int Scientist::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   
-   return RET_OK;
-}
-
-int Searcher::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-
-   // nothing additional
-   return RET_OK;
-}
-
-int Grower::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-
-   return RET_OK;
-}
-
-int Planter::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-   
-   return RET_OK;
-}
-int SitDigger_Base::read(FileRead* f) {
-   // Nothing to do
-   return RET_OK;
-}
-int SitDigger::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   
-   // Nothing of our own stuff to read
-   return RET_OK;
-}
-
-int Carrier::read(FileRead* f) {
-
-   // nothing to do
-   return RET_OK;
-}
-
-int Def_Carrier::read(FileRead* f) {
-   Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Carrier::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-
-   return RET_OK;
-}
-
-int Add_Carrier::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Carrier::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-
-   return RET_OK;
-}
-int Builder::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-
-   return RET_OK;
-}
-
-int Planer::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Has_Working_Worker_Descr::read(f);
-      
-   return RET_OK;
-}
-
-int Explorer::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-
-   return RET_OK;
-}
-
-int Geologist::read(FileRead* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-   
-   return RET_OK;
-}
-#endif

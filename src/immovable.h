@@ -100,6 +100,7 @@ protected:
 
 class Immovable : public BaseImmovable {
 	friend class Immovable_Descr;
+	friend class ImmovableProgram;
 
 	MO_DESCR(Immovable_Descr);
 
@@ -124,6 +125,11 @@ public:
 protected:
 	void set_program_animation(Editor_Game_Base* g);
 	void run_program(Game* g, bool killable);
+
+private:
+	bool run_animation(Game* g, bool killable, const ImmovableAction& action);
+	bool run_transform(Game* g, bool killable, const ImmovableAction& action);
+	bool run_remove(Game* g, bool killable, const ImmovableAction& action);
 
 protected:
 	Coords		m_position;

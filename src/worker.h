@@ -46,6 +46,7 @@ Workers can be in one of the following meta states:
 */
 class Worker;
 class WorkerProgram;
+struct WorkerAction;
 
 class Worker_Descr : public Bob_Descr {
    friend class Tribe_Descr;
@@ -90,6 +91,8 @@ protected:
 };
 
 class Worker : public Bob {
+	friend class WorkerProgram;
+
 	MO_DESCR(Worker_Descr);
 
 public:
@@ -188,6 +191,18 @@ private:
 	static Task taskLeavebuilding;
 	static Task taskRoute;
 	static Task taskFugitive;
+
+private: // Program commands
+	bool run_createitem(Game* g, State* state, const WorkerAction* act);
+	bool run_setdescription(Game* g, State* state, const WorkerAction* act);
+	bool run_findobject(Game* g, State* state, const WorkerAction* act);
+	bool run_findspace(Game* g, State* state, const WorkerAction* act);
+	bool run_walk(Game* g, State* state, const WorkerAction* act);
+	bool run_animation(Game* g, State* state, const WorkerAction* act);
+	bool run_return(Game* g, State* state, const WorkerAction* act);
+	bool run_object(Game* g, State* state, const WorkerAction* act);
+	bool run_plant(Game* g, State* state, const WorkerAction* act);
+	bool run_removeobject(Game* g, State* state, const WorkerAction* act);
 
 private:
 	Object_Ptr		m_location;			// meta location of the worker, a PlayerImmovable
@@ -289,7 +304,7 @@ class Soldier_Descr : virtual public Menu_Worker_Descr {
 
 //
 // workers having a second walk bob for every direction
-// 
+//
 class Has_Walk1_Worker_Descr : virtual public Worker_Descr {
    public:
       Has_Walk1_Worker_Descr(void) { }
@@ -347,7 +362,7 @@ class SitDigger_Base : virtual public Worker_Descr {
 
 //
 // Sitting workers and digging workers (same) 
-// 
+//
 class SitDigger : virtual public SitDigger_Base,
    virtual public Menu_Worker_Descr {
    public:
@@ -376,7 +391,7 @@ class Searcher : virtual public Worker_Descr,
    private:
 };
 
-// 
+//
 // Planter
 //
 class Planter : virtual public Worker_Descr,
