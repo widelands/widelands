@@ -1,3 +1,5 @@
+- fixed "Worker Type 11 not found" bug
+- new Tree Graphics from Wolfgang Weidner
 - Added patch from Florian Falkner
   * new Option Dialog 
   * UIListselect can have now a selection-indicator
