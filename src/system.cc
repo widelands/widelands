@@ -376,6 +376,8 @@ restart:
 				ev->type = SDL_MOUSEMOTION;
 				ev->motion.x = read_record_int();
 				ev->motion.y = read_record_int();
+				ev->motion.xrel = read_record_int();
+				ev->motion.yrel = read_record_int();
 				break;
 			
 			case RFC_QUIT:
@@ -423,6 +425,8 @@ restart:
 				write_record_char(RFC_MOUSEMOTION);
 				write_record_int(ev->motion.x);
 				write_record_int(ev->motion.y);
+				write_record_int(ev->motion.xrel);
+				write_record_int(ev->motion.yrel);
 				break;
 			
 			case SDL_QUIT:
@@ -574,42 +578,52 @@ void Sys_HandleInput(InputCallback *cb)
 			break;
 
 		case SDL_MOUSEMOTION:
-		{
-			int centerx = sys.mouse_maxx / 2;
-			int centery = sys.mouse_maxy / 2;
-			
-			if (ev.motion.x == centerx && ev.motion.y == centery)
-				break;
-				
-			int mxd = ev.motion.x - centerx;
-			int myd = ev.motion.y - centery;
-			
-			SDL_WarpMouse(centerx, centery); // doesn't hurt playback
-			
-			float xlast = sys.mouse_x;
-			float ylast = sys.mouse_y;
-			
-			sys.mouse_x += mxd * sys.mouse_speed;
-			sys.mouse_y += myd * sys.mouse_speed;
-			
-			if (sys.mouse_x < 0)
-				sys.mouse_x = 0;
-			else if (sys.mouse_x >= sys.mouse_maxx-1)
-				sys.mouse_x = sys.mouse_maxx-1;
-			if (sys.mouse_y < 0)
-				sys.mouse_y = 0;
-			else if (sys.mouse_y >= sys.mouse_maxy-1)
-				sys.mouse_y = sys.mouse_maxy-1;
-			
-			int xdiff = (int)sys.mouse_x - (int)xlast;
-			int ydiff = (int)sys.mouse_y - (int)ylast;
-			
-			if (!xdiff && !ydiff)
-				break;
-			
-			if (cb && cb->mouse_move)
-				cb->mouse_move(sys.mouse_buttons, (int)sys.mouse_x, (int)sys.mouse_y, xdiff, ydiff);
-		} break;
+         {
+            /* 
+             * This code might still be needed, if someone ports widelands to Mac
+             * or so.
+             *
+             * Leave it there for the moment!
+             *
+             * Holger
+             *
+             int centerx = sys.mouse_maxx / 2;
+             int centery = sys.mouse_maxy / 2;
+
+             if (ev.motion.x == centerx && ev.motion.y == centery)
+             break;
+
+             int mxd = ev.motion.x - centerx;
+             int myd = ev.motion.y - centery;
+
+             SDL_WarpMouse(centerx, centery); // doesn't hurt playback
+             */
+            int mxd = ev.motion.xrel;
+            int myd = ev.motion.yrel;
+            float xlast = sys.mouse_x;
+            float ylast = sys.mouse_y;
+
+            sys.mouse_x += mxd * sys.mouse_speed;
+            sys.mouse_y += myd * sys.mouse_speed;
+
+            if (sys.mouse_x < 0)
+               sys.mouse_x = 0;
+            else if (sys.mouse_x >= sys.mouse_maxx-1)
+               sys.mouse_x = sys.mouse_maxx-1;
+            if (sys.mouse_y < 0)
+               sys.mouse_y = 0;
+            else if (sys.mouse_y >= sys.mouse_maxy-1)
+               sys.mouse_y = sys.mouse_maxy-1;
+
+            int xdiff = (int)sys.mouse_x - (int)xlast;
+            int ydiff = (int)sys.mouse_y - (int)ylast;
+
+            if (!xdiff && !ydiff)
+               break;
+
+            if (cb && cb->mouse_move)
+               cb->mouse_move(sys.mouse_buttons, (int)sys.mouse_x, (int)sys.mouse_y, xdiff, ydiff);
+         } break;
 
 		case SDL_QUIT:
 			sys.should_die = true;
