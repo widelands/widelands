@@ -107,7 +107,7 @@ class Overlay_Manager {
       // but there do not exist any more (yet?). For now, handling borders for themself
       // is ok. this functions are inlined for speed and must be called in a row.
       // calling them in a different order results in undefined behaviour
-      inline int Overlay_Manager::is_frontier_field(Coords& fc) {
+      inline int is_frontier_field(Coords& fc) {
          // index pointer and m_overlay_basic are invalid
          m_index_pointer=fc.y*m_w + fc.x;
          m_overlay_basic = m_overlay_fields[m_index_pointer];
@@ -115,14 +115,14 @@ class Overlay_Manager {
             return (m_overlay_basic - Overlay_Frontier_Base);
          return 0;
       }
-      inline uchar Overlay_Manager::draw_border_to_right(Coords& fc) {
+      inline uchar draw_border_to_right(Coords& fc) {
          // index pointer points to field, m_overlay_basic should be valid
          int index=m_index_pointer;
          if(fc.x==m_w-1) { index-=fc.x; } else { ++index; } // right neighbour
          if(m_overlay_fields[index] == m_overlay_basic) return true;
          return false;
       }
-      inline uchar Overlay_Manager::draw_border_to_bottom_left(Coords& fc) {
+      inline uchar draw_border_to_bottom_left(Coords& fc) {
          // index pointer points to field, m_overlay_basic should be valid
          m_index_pointer+=m_w; // increase by one row
          if(fc.y == m_h-1) m_index_pointer=fc.x;
