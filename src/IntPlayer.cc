@@ -127,6 +127,8 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", RGBColor(0,0,255)));
 
+	// Speed info
+	m_label_speed = new Textarea(this, get_w(), 0, 0, 0, "", Align_TopRight);
 }
 
 /*
@@ -138,8 +140,32 @@ cleanups
 */
 Interactive_Player::~Interactive_Player(void)
 {
-		if (m_buildroad)
+	if (m_buildroad)
 		abort_build_road();
+}
+
+
+/*
+===============
+Interactive_Player::think
+
+Update the speed display.
+===============
+*/
+void Interactive_Player::think()
+{
+	Interactive_Base::think();
+
+	// Draw speed display
+	int speed = m_game->get_speed();
+	char buf[32] = "";
+
+	if (!speed)
+		strcpy(buf, "PAUSE");
+	else if (speed > 1)
+		snprintf(buf, sizeof(buf), "%ix", speed);
+
+	m_label_speed->set_text(buf);
 }
 
 
@@ -155,16 +181,16 @@ void Interactive_Player::start()
 	int mapw;
 	int maph;
 
-   m_maprenderinfo.egbase = m_game; 
+   m_maprenderinfo.egbase = m_game;
 	m_maprenderinfo.visibility = get_player()->get_visibility();
 	m_maprenderinfo.show_buildhelp = false;
-	
+
 	mapw = m_maprenderinfo.egbase->get_map()->get_width();
 	maph = m_maprenderinfo.egbase->get_map()->get_height();
 	m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
 	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
 	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
-	
+
 	for(int y = 0; y < maph; y++)
 		for(int x = 0; x < mapw; x++) {
 			FCoords coords(x, y, m_maprenderinfo.egbase->get_map()->get_field(x,y));
@@ -251,12 +277,28 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 		if (down)
 			toggle_buildhelp();
 		return true;
-	
+
 	case KEY_m:
 		if (down)
 			toggle_minimap();
 		return true;
-		
+
+	case KEY_PAGEUP:
+		if (down) {
+			int speed = m_game->get_speed();
+
+			m_game->set_speed(speed + 1);
+		}
+		return true;
+
+	case KEY_PAGEDOWN:
+		if (down) {
+			int speed = m_game->get_speed();
+
+			m_game->set_speed(std::max(0, speed-1));
+		}
+		return true;
+
 	case KEY_F5:
 		if (down) {
 			if (!m_maprenderinfo.visibility)
@@ -266,7 +308,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 		}
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -282,7 +324,7 @@ void Interactive_Player::start_build_road(Coords start)
 {
 	// create an empty path
 	m_buildroad = new CoordPath(m_game->get_map(), start);
-	
+
 	roadb_add_overlay();
 }
 
@@ -342,7 +384,7 @@ bool Interactive_Player::append_build_road(Coords field)
 	assert(m_buildroad);
 
 	int idx = m_buildroad->get_index(field);
-	
+
 	if (idx >= 0) {
 		roadb_remove_overlay();
 		m_buildroad->truncate(idx);

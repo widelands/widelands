@@ -42,6 +42,8 @@ class Interactive_Player : public Interactive_Base {
 		Interactive_Player(Game *g, uchar pln);
 		~Interactive_Player(void);
 
+		virtual void think();
+
 		void start();
 
 		void exit_game_btn();
@@ -73,8 +75,10 @@ class Interactive_Player : public Interactive_Base {
 		void roadb_add_overlay();
 		void roadb_remove_overlay();
 
-		Game		*m_game;
+		Game*		m_game;
 		uchar		m_player_number;
+
+		Textarea*	m_label_speed;
 
 		UniqueWindowRegistry	m_mainmenu;
 		UniqueWindowRegistry	m_fieldaction;

@@ -1397,8 +1397,6 @@ void ProductionSite::init(Editor_Game_Base *g)
 	if (g->is_game() && !m_worker) {
 		int wareid = g->get_safe_ware_id(get_descr()->get_worker().c_str());
 
-		molog("Request worker %s (%i)\n", get_descr()->get_worker().c_str(), wareid);
-
 		m_worker_request = new Request(this, wareid, &ProductionSite::request_worker_callback, this);
 		get_economy()->add_request(m_worker_request);
 	}
@@ -1444,8 +1442,6 @@ void ProductionSite::request_worker_callback(Game* g, Request* rq, int ware, Wor
 	assert(w);
 	assert(w->get_location(g) == psite);
 	assert(rq == psite->m_worker_request);
-
-	psite->molog("PSITE: got worker (%u)\n", w->get_serial());
 
 	psite->m_worker = w;
 

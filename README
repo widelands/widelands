@@ -60,6 +60,9 @@ Keyboard shortcuts (in-game)
 SPACE    Toggles build-help
 M        Toggle minimap
 
+PAGEUP	Change the speed of the game
+PAGEDOWN
+
 F5       Reveals the entire map
 F10      Quit the game immediately
 F11      Take a screenshot

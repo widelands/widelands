@@ -3,12 +3,15 @@ descname=Lumberjack
 help=Fells trees.
 type=generic
 menu_pic=lumberjack_menu.png
-#program=chop
+program=chop
 
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.
 # You can, however, create [walk_nw] etc.. sections for sub-animations in a
 # given direction
+
+[chop]
+0=createitem log							# create & carry the given item
 
 #[chop]
 #0=findobject attrib:tree radius:7	# find an object matching the given criteria, put it into the object slot
@@ -17,8 +20,7 @@ menu_pic=lumberjack_menu.png
 #3=object transform						# cause the object transform
 #4=animation idle 2000					# wait for the tree to disappear completely
 #5=createitem log							# create & carry the given item
-#6=dropoff									# drop the carried item on the home flag
-#7=return									# return home
+#6=return									# return home
 
 # The normal idle animation (non-directional)
 [idle]

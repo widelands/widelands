@@ -41,6 +41,7 @@
 Game::Game(void)
 {
 	m_state = gs_none;
+	m_speed = 1;
 
    cmdqueue = new Cmd_Queue(this);
    
@@ -188,14 +189,31 @@ void Game::think(void)
 	m_realtime = Sys_GetTime();
 	frametime = m_realtime - lasttime;
 
+	frametime *= get_speed();
+
 	// Networking: check socket here
 
 	if (m_state == gs_running)
 	{
       cmdqueue->run_queue(frametime, get_game_time_pointer());
-		
+
 		g_gr->animate_maptextures(get_gametime());
    }
+}
+
+
+/*
+===============
+Game::set_speed
+
+Change the game speed.
+===============
+*/
+void Game::set_speed(int speed)
+{
+	assert(speed >= 0);
+
+	m_speed = speed;
 }
 
 

@@ -44,7 +44,7 @@ class Player;
 class Interactive_Player;
 
 class Game : public Editor_Game_Base {
-	friend class Cmd_Queue; // this class handles the commands 
+	friend class Cmd_Queue; // this class handles the commands
 
 public:
 	Game(void);
@@ -53,10 +53,10 @@ public:
 	// life cycle
    bool run(void);
 	void think(void);
-	
+
 
 	bool can_start();
-	
+
 	// in-game logic
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
 
@@ -65,20 +65,24 @@ public:
 	// This will allow us to plug another PRNG in here for game playbacks
 	// and other fancy stuff.
 	inline int logic_rand() { return rand(); }
-	
+
+	int get_speed() const { return m_speed; }
+	void set_speed(int speed);
+
 	bool get_allow_cheats();
-	
+
 
 	void send_player_command(int pid, int cmd, int arg1=0, int arg2=0, int arg3=0);
 
   // is this base a game
    inline bool is_game() { return true; }
-   
+
    // TEMP
-   inline Interactive_Player* get_ipl(void) { return ipl; } 
-	
+   inline Interactive_Player* get_ipl(void) { return ipl; }
+
 private:
 	int		m_state;
+	int		m_speed;		// frametime multiplier
 
 	Interactive_Player*			ipl;
  	Cmd_Queue*						cmdqueue;
