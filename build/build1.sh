@@ -43,7 +43,7 @@ echo
 echo Compiling the source now
 
 cd widelands
-make clean all
+BUILD=release make clean all
 cd ..
 
 strip --strip-unneeded widelands/widelands

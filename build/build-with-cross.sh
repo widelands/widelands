@@ -8,18 +8,14 @@ echo "under /usr/local/cross-tools"
 echo "For infos about cross compiling check README-compiling.txt in the .. dir"
 
 cp widelands/widelands widelands/widelands.temp
-cp widelands/Makefile widelands/Makefile.bak
-
-cat widelands/Makefile.bak | sed 's/^CROSS=NO/CROSS=YES/' > widelands/Makefile
 
 cd widelands 
 make clean 
-make
+CROSS=YES BUILD=release make
 cd ..
 
 mv widelands/widelands widelands/widelands.exe
 mv widelands/widelands.temp widelands/widelands
-mv widelands/Makefile.bak widelands/Makefile
 
 cp /usr/local/cross-tools/i386-mingw32msvc/lib/SDL.dll widelands/
 /usr/local/cross-tools/bin/i386-mingw32msvc-strip --strip-unneeded widelands/SDL.dll

@@ -11,5 +11,5 @@
 #define PACKAGE "widelands"
 
 /* Version number of package */
-#define VERSION "build-2"
+#define VERSION "build-3"
 
