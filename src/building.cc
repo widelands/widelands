@@ -48,12 +48,18 @@ int NeedWares_List::read(Binary_file* f) {
    return RET_OK;
 }
 
-// down here: Buildings as Map_Objects
-int Building_HQ::act(Game* g) {
+//
+// Building code
+//
+Building_HQ::Building_HQ(HQ_Descr *d)
+	: Map_Object(BIG_BUILDING)
+{
+	descr=d;
+}
 
-   cur_pic=descr->get_idle_anim()->get_pic(0);
-
-   return RET_OK;
+void Building_HQ::init(Game* g, Instance* i)
+{
+	set_animation(g, descr->get_idle_anim());
 }
 
 // 
@@ -158,10 +164,10 @@ int Dig_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Dig_Building_Descr::create_instance(Instance* inst) {
+Map_Object *Dig_Building_Descr::create_object()
+{
    cerr << "Dig_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+   return 0;
 }
 
 int Search_Building_Descr::read(Binary_file *f) {
@@ -183,10 +189,10 @@ int Search_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Search_Building_Descr::create_instance(Instance* inst) {
+Map_Object *Search_Building_Descr::create_object()
+{
    cerr << "Search_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+   return 0;
 }
 
 int Plant_Building_Descr::read(Binary_file *f) {
@@ -207,10 +213,10 @@ int Plant_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Plant_Building_Descr::create_instance(Instance* inst) {
+Map_Object *Plant_Building_Descr::create_object()
+{
    cerr << "Plant_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
 
 
@@ -232,10 +238,10 @@ int Grow_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Grow_Building_Descr::create_instance(Instance* inst) {
+Map_Object *Grow_Building_Descr::create_object()
+{
    cerr << "Grow_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
 
 
@@ -257,10 +263,10 @@ int Sit_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Sit_Building_Descr::create_instance(Instance* inst) {
+Map_Object *Sit_Building_Descr::create_object()
+{
    cerr << "Sit_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+   return 0;
 }
 
 
@@ -279,10 +285,10 @@ int Sit_Building_Produ_Worker_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Sit_Building_Produ_Worker_Descr::create_instance(Instance* inst) {
+Map_Object *Sit_Building_Produ_Worker_Descr::create_object()
+{
    cerr << "Sit_Building_Produ_Worker_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
 
 
@@ -296,10 +302,10 @@ int Science_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Science_Building_Descr::create_instance(Instance* inst) {
+Map_Object *Science_Building_Descr::create_object()
+{
    cerr << "Science_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
 
 
@@ -318,10 +324,10 @@ int Military_Building_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Military_Building_Descr::create_instance(Instance* inst) {
+Map_Object *Military_Building_Descr::create_object()
+{
    cerr << "Military_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
 
 
@@ -370,10 +376,10 @@ int Cannon_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Cannon_Descr::create_instance(Instance* inst) {
+Map_Object *Cannon_Descr::create_object()
+{
    cerr << "Cannon_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
 
 
@@ -386,13 +392,10 @@ int HQ_Descr::read(Binary_file *f) {
 
    return -1; // never act again
 }
-
-int HQ_Descr::create_instance(Instance* inst) {
+Map_Object *HQ_Descr::create_object()
+{
    cerr << "HQ_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   inst->obj=new Building_HQ(this);
-   
-   return -1; // never act again 
+	return new Building_HQ(this);
 }
 
 
@@ -406,10 +409,10 @@ int Store_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Store_Descr::create_instance(Instance* inst) {
+Map_Object *Store_Descr::create_object()
+{
    cerr << "Store_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
 
 
@@ -427,10 +430,10 @@ int Dockyard_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Dockyard_Descr::create_instance(Instance* inst) {
+Map_Object *Dockyard_Descr::create_object()
+{
    cerr << "Dockyard_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
 
 
@@ -444,11 +447,9 @@ int Port_Descr::read(Binary_file *f) {
 
    return RET_OK;
 }
-int Port_Descr::create_instance(Instance* inst) {
+Map_Object *Port_Descr::create_object()
+{
    cerr << "Port_Descr::create_instance() not yet implemented: TODO!" << endl;
-
-   return RET_OK;
+	return 0;
 }
-
-
 

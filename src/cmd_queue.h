@@ -21,8 +21,7 @@
 #define __S__CMD_QUEUE_H
 
 // Define here all the possible users
-#define SENDER_LOADER 0
-#define SENDER_QUEUE  0 
+#define SENDER_MAPOBJECT 0
 #define SENDER_PLAYER1 1 // those are just place holder, a player can send commands with
 #define SENDER_PLAYER2 2 // it's player number 
 #define SENDER_PLAYER3 3 
@@ -31,65 +30,39 @@
 #define SENDER_PLAYER6 6 
 #define SENDER_PLAYER7 7
 #define SENDER_PLAYER8 8
-#define SENDER_ENGINE  50 
-#define SENDER_EVENT   51 // a map event has been triggered
 
 // ---------------------- BEGINN OF CMDS ----------------------------------
 enum {
    UNUSED = 0,
-   CMD_LOAD_MAP = 1,
-   CMD_WARP_BUILDING,
-   CMD_CREATE_BOB,
-   CMD_ACT
+   CMD_ACT		// arg1 = instance
 };
 // ---------------------- END    OF CMDS ----------------------------------
-
-//
-// This struct defines the commands, which are possible
-//
-// TODO: think about differencing 'rights', e.g. the 'loader' 
-// is allowed to do everything, while a 'player' may not warp a 
-// building or so.
-// 
-struct Cmd {
-   Cmd* next;
-   uchar sender;
-   ushort cmd;
-   ulong arg1;
-   ulong arg2;
-   void* arg3; // don't use, if you can avoid it!
-};
-
-#define MAX_CMDS  65536    // if more than this commands are queued in one frame, 
-                         // the game might freeze, since the cmd queue runs those cmds
-                         // first
-#define FRAMES_IN_ADVANCE 100 // how many frames in advanced can commands be queued, others will cause the game
-                           // to assert. 
 
 // 
 // This is finally the command queue. It is fully widelands specific,
 // it needs to know nearly all modules.
-// 
+//
 class Game;
 
 class Cmd_Queue {
-   public:
-      Cmd_Queue(Game *);
-      ~Cmd_Queue(void);
-     
-      void queue(uint, uchar, ushort, ulong=0, ulong=0, void* =0);
-      int run_queue(void);
-      
-   private:
-      ulong cur_frame;
-      uint cur_cmd;
-      Cmd cmds[MAX_CMDS];
-      struct {
-         Cmd first;
-         Cmd* last;
-      } frames[FRAMES_IN_ADVANCE];
-      Game* g;
-};
+	struct Cmd;
 
+   public:
+      Cmd_Queue(Game *g);
+      ~Cmd_Queue(void);
+
+		void queue(int time, char sender, int cmd, int arg1=0, int arg2=0, void *arg3=0);
+      int run_queue(int interval);
+   
+		inline int get_time() { return m_time; }
+		   
+   private:
+		void exec_cmd(Cmd *c);
+		void free_cmd(Cmd *c);
+	
+		Cmd *m_cmds;
+      Game *m_game;
+		int m_time;
+};
 
 #endif // __S__CMD_QUEUE_H 

@@ -434,22 +434,20 @@ void Graphic::update(void) {
 #include "instances.h"
 #include "bob.h"
 
-void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint src_x, uint src_y, int w, int h) {
-
+void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y, uint src_x, uint src_y, int w, int h) {
    int x, y;
-   Animation_Pic* pic=inst->get_cur_pic();
-   Animation* bob=pic->parent;
+   Animation_Pic* pic = anim->get_time_pic(time);
    ushort cmd;
    ushort count;
    ushort i=0;
    ushort clr;
 
    // TODO: proper hotspot implementation
-   dst_x-=(int) ((bob->get_w()>>1)-inst->get_rel_pos_x());
-   dst_y-=(int) ((bob->get_h()>>1)-inst->get_rel_pos_y());
+   dst_x -=(int) (anim->get_w()>>1);
+   dst_y -=(int) (anim->get_h()>>1);
    
    x=dst_x;
-   for(y=dst_y; y<dst_y+bob->get_h(); ) {
+   for(y=dst_y; y<dst_y+anim->get_h(); ) {
 //      for(x=0; x<bob->get_w(); x++) {
          cmd=((pic->data[i]>> 14) & 0x3);
          count=pic->data[i] & 0x3fff;
@@ -470,10 +468,10 @@ void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint 
                   }
                }
                ++x;
-               if(x==dst_x+bob->get_w()) { 
+               if(x==dst_x+anim->get_w()) { 
                   ++y; 
                   x=dst_x; 
-                  if(y==dst_y+bob->get_h()) break;
+                  if(y==dst_y+anim->get_h()) break;
                }
             }
             i+=count;
@@ -483,7 +481,7 @@ void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, int dst_y, uint 
             while(count) {
                ++x;
                   
-               if(x==dst_x+bob->get_w()) { ++y; x=dst_x; if(y==dst_y+bob->get_h()) break;}
+               if(x==dst_x+anim->get_w()) { ++y; x=dst_x; if(y==dst_y+anim->get_h()) break;}
                --count;
             }
             continue;

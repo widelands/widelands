@@ -88,9 +88,6 @@ void SinglePlayerMenu::not_supported()
  *
  * This takes care for the single player menue, chosing campaign or
  * single player maps and so on, so on.
- *
- * Args:	None
- * Returns:	nothing
  */
 void single_player_menue(void)
 {
@@ -102,10 +99,13 @@ void single_player_menue(void)
 
 		switch(code) {
 		case sp_skirmish:
-			if (map_select_menue())
-				return;
+		{
+			Game *g = new Game;
+			g->run();
+			delete g;
 			break;
-
+		}
+		
 		default:
 		case sp_back:
 			return;

@@ -25,8 +25,6 @@
 #include "myfile.h"
 #include "instances.h"
 
-#define CRITTER_WALKING_SPEED 20      // frames needed to cross one field
-#define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 50 // wait maximal n frames before doing something 
 #define CRITTER_PER_DEFINITION   1
 
 // class World;
@@ -47,7 +45,7 @@ class Animation {
          HAS_PL_CLR = 3
       };
 
-      Animation(void) { npics=0; pics=0;}
+      Animation(void) { npics=0; pics=0; frametime = FRAME_LENGTH; }
       ~Animation(void) { 
          if(npics) {
             uint i; 
@@ -85,8 +83,12 @@ class Animation {
       inline Animation_Pic* get_pic(ushort n) { assert(n<npics); return &pics[n]; }
       inline ushort get_npics(void) { return npics; }
 
+		inline uint get_duration() { return frametime * npics; }
+		inline Animation_Pic* get_time_pic(uint time) { return &pics[(time / frametime) % npics]; }
+		
    private:
       uint flags;
+		uint frametime;
       ushort w, h;
       ushort hsx, hsy;
       ushort npics;
@@ -106,7 +108,6 @@ class Logic_Bob_Descr : public Map_Object_Descr {
       virtual ~Logic_Bob_Descr(void) { }
 
       virtual int read(Binary_file*);
-      virtual int create_instance(Instance*)=0;
       const char* get_name(void) { return name; }
 
       inline Animation* get_anim(void) { return &anim; }
@@ -125,7 +126,7 @@ class Growing_Bob_Descr : virtual public Logic_Bob_Descr {
       virtual ~Growing_Bob_Descr(void) {  }
 
       virtual int read(Binary_file* f);
-      int create_instance(Instance*);
+      Map_Object *create_object();
 
    private:
       Logic_Bob_Descr* ends_in;
@@ -141,7 +142,7 @@ class Diminishing_Bob_Descr : virtual public Logic_Bob_Descr {
       virtual ~Diminishing_Bob_Descr(void) { }
 
       virtual int read(Binary_file* f);
-      int create_instance(Instance*);
+      Map_Object *create_object();
 
    private:
       Logic_Bob_Descr* ends_in;
@@ -157,7 +158,7 @@ class Boring_Bob_Descr : virtual public Logic_Bob_Descr {
       virtual ~Boring_Bob_Descr(void) { } 
 
       virtual int read(Binary_file* f);
-      int create_instance(Instance*);
+      Map_Object *create_object();
 
    private:
       ushort ttl; // time to life
@@ -172,7 +173,7 @@ class Critter_Bob_Descr : virtual public Logic_Bob_Descr {
       virtual ~Critter_Bob_Descr(void) { } 
 
       virtual int read(Binary_file* f);
-      int create_instance(Instance*);
+      Map_Object *create_object();
 
       inline bool is_swimming(void) { return swimming; }
       inline Animation* get_walk_ne_anim(void) { return &walk_ne; }
@@ -198,12 +199,12 @@ class Critter_Bob_Descr : virtual public Logic_Bob_Descr {
 //
 class Boring_Bob : public Map_Object {
    public:
-      Boring_Bob(Boring_Bob_Descr *d) { descr=d; cur_pic=d->get_anim()->get_pic(0); type=Map_Object::BORING_BOB; } 
+      Boring_Bob(Boring_Bob_Descr *d);
       virtual ~Boring_Bob(void) { }
 
-      int act(Game* g);
-
-   private:
+		void init(Game *g, Instance *i);
+   
+	private:
       Boring_Bob_Descr* descr;
 };
 
@@ -212,24 +213,16 @@ class Boring_Bob : public Map_Object {
 //
 class Critter_Bob : public Map_Object {
    public:
-      Critter_Bob(Critter_Bob_Descr *d) { descr=d; cur_pic=d->get_anim()->get_pic(0); state=IDLE; type=Map_Object::CRITTER_BOB;  } 
+      Critter_Bob(Critter_Bob_Descr *d);
       virtual ~Critter_Bob(void) { }
 
-      int act(Game* g);
+		uint get_movecaps();
+		
+		void init(Game *g, Instance *i);
+		void act(Game* g, Instance *i);
 
    private:
-      enum {
-         IDLE, 
-         WALK_NE,
-         WALK_E,
-         WALK_SE,
-         WALK_SW,
-         WALK_W,
-         WALK_NW
-      } state;
       Critter_Bob_Descr* descr;
-      float vx, vy;
-      uint steps;
 };
 
 
@@ -238,12 +231,12 @@ class Critter_Bob : public Map_Object {
 //
 class Diminishing_Bob : public Map_Object {
    public:
-      Diminishing_Bob(Diminishing_Bob_Descr* d)  { descr=d;  cur_pic=d->get_anim()->get_pic(0); type=Map_Object::DIMINISHING_BOB; } 
+		Diminishing_Bob(Diminishing_Bob_Descr* d);
       virtual ~Diminishing_Bob(void) { }
 
-      int act(Game* g);
-
-   private:
+		void init(Game *g, Instance *i);
+   
+	private:
       Diminishing_Bob_Descr* descr;
 };
 

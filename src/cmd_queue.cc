@@ -22,145 +22,134 @@
 #include "map.h"
 #include "cmd_queue.h"
 
+/*
+TODO:
+- try to avoid malloc()ing and free()ing all the time
+- use a better algorithm (heap?)
+*/
+
+//
+// This struct defines the commands, which are possible
+//
+// [I must've accidently deleted a comment about different access rights
+//  here; either way, filtering commands at the network level should
+//  really be enough]
+//
+struct Cmd_Queue::Cmd {
+   Cmd* next; // next command in queue
+	int time; // scheduled time of execution
+	char sender;
+	int cmd;
+	int arg1;
+	int arg2;
+	void *arg3; // pointer to malloc()ed memory
+};
+
+
 // 
 // class Cmd_Queue
 //
-Cmd_Queue::Cmd_Queue(Game* gg) {
-   g=gg;
-   cur_frame=0;
-   cur_cmd=0;
-   
-   uint i;
-   for(i=0; i<FRAMES_IN_ADVANCE; i++) {
-         frames[i].first.sender=0;
-         frames[i].first.cmd=0;
-         frames[i].first.arg1=0;
-         frames[i].first.arg2=0;
-         frames[i].first.arg3=0;
-         frames[i].first.next=0;
-         frames[i].last=&frames[i].first;
-   }
-   
-   for(i=0; i<MAX_CMDS; i++) {
-      cmds[i].sender=0;
-      cmds[i].cmd=0;
-      cmds[i].arg1=0;
-      cmds[i].arg2=0;
-      cmds[i].arg3=0;
-      cmds[i].next=0;
-   }
+Cmd_Queue::Cmd_Queue(Game *g)
+{
+	m_game = g;
+	m_cmds = 0;
+	m_time = 0;
 }
 
-Cmd_Queue::~Cmd_Queue(void) {
-   // nothig to clean
+Cmd_Queue::~Cmd_Queue(void)
+{
+	while(m_cmds) {
+		Cmd *c = m_cmds;
+		m_cmds = c->next;
+		
+		free_cmd(c);
+	}
 }
 
-// Queue a new command
-void Cmd_Queue::queue(uint frame, uchar sender, ushort cmd, ulong arg1, ulong arg2, void* arg3) {
-   assert(frame < FRAMES_IN_ADVANCE);
-   frame+=cur_frame;
-   if(frame>=FRAMES_IN_ADVANCE) frame-=FRAMES_IN_ADVANCE;
-
-   Cmd* pcmd=&cmds[cur_cmd];
-   while(pcmd->cmd) { pcmd=&cmds[cur_cmd++]; if(cur_cmd==MAX_CMDS-1) cur_cmd=0; }
-
-   pcmd->sender=sender;
-   pcmd->cmd=cmd;
-   pcmd->arg1=arg1;
-   pcmd->arg2=arg2;
-   pcmd->arg3=arg3;
-   pcmd->next=0;
-
-   frames[frame].last->next=pcmd;
-   frames[frame].last=pcmd;
+/** Cmd_Queue::queue(int time, char sender, int cmd, int arg1=0, int arg2=0, void *arg3=0)
+ *
+ * Insert a new command into the queue; it will be executed at the given time
+ */
+void Cmd_Queue::queue(int time, char sender, int cmd, int arg1=0, int arg2=0, void *arg3=0)
+{
+	Cmd *c; // our command
+	Cmd **pp; // where we put it
+	
+	// Initialize the command 
+	c = (Cmd *)malloc(sizeof(Cmd));
+	c->time = time;
+	c->sender = sender;
+	c->cmd = cmd;
+	c->arg1 = arg1;
+	c->arg2 = arg2;	
+	c->arg3 = arg3;
+	
+	// Insert it into the queue
+	pp = &m_cmds;
+	while(*pp && (*pp)->time <= time)
+		pp = &(*pp)->next;
+	
+	c->next = *pp;
+	*pp = c;
 }
 
-// main function, run the queued commands
-int Cmd_Queue::run_queue(void) {
-   int temp=0;
-   Cmd* c, *tempc;
-   Instance* inst;
-  
-   c=frames[cur_frame].first.next;
+/** Cmd_Queue::run_queue(int interval)
+ *
+ * Run all commands scheduled for the next interval milliseconds, and update the
+ * internal time as well.
+ */
+int Cmd_Queue::run_queue(int interval)
+{
+	int final = m_time + interval;
+	int cnt = 0;
 
+	while(m_cmds && final - m_cmds->time >= 0) {
+		Cmd *c = m_cmds;
+		m_cmds = c->next;
+		
+		m_time = c->time;
+		exec_cmd(c);
+		free_cmd(c);
+		cnt++;
+	}
+	
+	m_time = final;
+	
+	return cnt;
+}
 
-   while(c) {
-      switch(c->cmd) {
-         case CMD_LOAD_MAP:
-            // arg3 is file name of map
-            g->map = new Map();
-            if(g->map->load_map((char*)c->arg3, this)) {
-               // TODO: make this better
-               assert(0) ;
-            }
-            break;
+/** Cmd_Queue::exec_cmd(Cmd *c) [private]
+ *
+ * Execute the given command now
+ */
+void Cmd_Queue::exec_cmd(Cmd *c)
+{
+	switch(c->cmd) {
+	case CMD_ACT:
+	{
+		// an instance has requested to act again after a time
+		// arg1==(Instance*) pointer_to_instance to act
+		assert(c->arg1);
+		Instance *inst = (Instance*)c->arg1;
+		inst->act(m_game);
+		// the instance must queue the next CMD_ACT itself if necessary
+		break;
+	}
+	
+	default:
+		assert(0);
+		break;
+	}
+}
 
-         case CMD_WARP_BUILDING:
-            // create a building in a instance (without build time)
-            // arg1==player number to own the building
-            // arg2==index of building
-            // arg3==pointer to point struct where to build the building
-            temp=g->hinst->get_free_inst_id();
-            inst=g->hinst->get_inst(temp);
-            cerr << "Building at: " << ((Point*) c->arg3)->x << ":" <<  ((Point*) c->arg3)->y << endl;
-            temp=g->get_player_tribe(c->arg1)->get_building_descr(c->arg2)->create_instance(inst);
-            inst->hook_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y,
-                  g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y));
-//                  g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
-            inst->set_owned_by((uchar)c->arg1);
-            if(temp>=0) queue(temp, SENDER_QUEUE, CMD_ACT, 0, 0, inst);
-            //inst->set_next_acting_frame(g->get_frame()+temp);
-            break;
-
-         case CMD_CREATE_BOB:
-            // create a bob in a instance 
-            // arg1==bob_index
-            // arg2 unused!
-            // arg3=pointer to point struct where to build the bobs
-            temp=g->hinst->get_free_inst_id();
-            inst=g->hinst->get_inst(temp);
-            temp=g->get_map()->get_world()->get_bob_descr((ushort)c->arg1)->create_instance(inst);
-            inst->hook_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y,
-                  g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y));
-        //    g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
-            inst->set_owned_by(SENDER_LOADER);
-            if(temp>=0) queue(temp, SENDER_QUEUE, CMD_ACT, 0, 0, inst);
-            //inst->set_next_acting_frame(g->get_frame()+temp);
-            break;
-
-         case CMD_ACT:
-            // an instance has requested to act again after a time
-            // arg3==(Instance*) pointer_to_instance to act
-            assert(c->arg3);
-            inst=(Instance*) c->arg3;
-            temp=inst->act(g);
-            if(temp>=0) queue(temp, SENDER_QUEUE, CMD_ACT, 0, 0, inst);
-            c->arg3=0; // prevent from freeing
-            break;
-
-         default:
-            break;
-      }
-      
-     
-      tempc=c->next;
-      // cleanup this cmd
-      if(c->arg3) {
-         free(c->arg3); 
-         c->arg3=0;
-      }
-      c->cmd=0; // make public again
-      c->next=0; // make public again
-      
-      c=tempc;
-   }
-
-   frames[cur_frame].first.next=0;
-   frames[cur_frame].last=&frames[cur_frame].first;
-
-   ++cur_frame;
-   if(cur_frame==FRAMES_IN_ADVANCE) cur_frame=0;
-
-   return RET_OK;
+/** Cmd_Queue::free_cmd(Cmd *c) [private]
+ *
+ * Unuse a command structure
+ */
+void Cmd_Queue::free_cmd(Cmd *c)
+{
+	if (c->arg3)
+		free(c->arg3);
+	free(c);
 }
 

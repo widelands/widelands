@@ -21,6 +21,7 @@
 #include "world.h"
 #include "bob.h"
 #include "game.h"
+#include "cmd_queue.h"
 
 //
 // this is a function which reads a animation from a file
@@ -54,277 +55,85 @@ int Animation::read(Binary_file* f) {
 // 
 // class Diminishing_Bob
 //
-int Diminishing_Bob::act(Game* g) {
-   
-   // Animate
-   pic_idx++;
-   if(pic_idx==descr->get_anim()->get_npics()) pic_idx=0;
-   cur_pic=descr->get_anim()->get_pic(pic_idx);
+Diminishing_Bob::Diminishing_Bob(Diminishing_Bob_Descr* d)
+	: Map_Object(DIMINISHING_BOB)
+{
+	descr=d;
+} 
 
-   return 1; // next frame again
+void Diminishing_Bob::init(Game *g, Instance *i)
+{
+	set_animation(g, descr->get_anim());
 }
 
 //
 // class Boring_Bob
 // 
-int Boring_Bob::act(Game* g) {
-   // Animate
-   pic_idx++;
-   if(pic_idx==descr->get_anim()->get_npics()) pic_idx=0;
-   cur_pic=descr->get_anim()->get_pic(pic_idx);
+Boring_Bob::Boring_Bob(Boring_Bob_Descr *d)
+	: Map_Object(BORING_BOB)
+{
+	descr = d;
+}
 
-   return 1; // next frame again
+void Boring_Bob::init(Game *g, Instance *i)
+{
+	set_animation(g, descr->get_anim());
 }
 
 //
-// class Boring_Bob
+// class Critter_Bob
 // 
-int Critter_Bob::act(Game* g) {
-   Field* f1;
-   int x1, y1, x, y;
-   
-   switch(state) {
-      case IDLE:
-         switch((1+(rand() % 10))) {
-            default:   
-               // keep idle for some frames
-               // Animate
-               pic_idx++;
-               if(pic_idx==descr->get_anim()->get_npics()) pic_idx=0;
-               cur_pic=descr->get_anim()->get_pic(pic_idx);
-               return (1+(rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK));
-               
+#define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000 // wait up to 12 seconds between moves
 
-           case 4:
-               // walk e
-               if(!descr->is_swimming() && (field->get_terr()->get_is() & TERRAIN_UNPASSABLE)) return 1; // can't walk there, try again
-               if(descr->is_swimming() && !(field->get_terr()->get_is() & TERRAIN_WATER)) return 1; // can't walk there, try again
-               g->get_map()->get_rn(px, py, field, &x, &y, &f1);
-               x1=px; 
-               y1=py;
-               px=x;
-               py=y;
-               f1->hook_inst_link(field->unhook_inst_link(this));
-               field=f1;
-               g->get_map()->get_pix(px, py, &x, &y);
-               g->get_map()->get_pix(x1, y1, &x1, &y1);
-               vx=(((float) (x-x1))/CRITTER_WALKING_SPEED); // should be ready in so many frames
-               vy=(((float) (y-y1))/CRITTER_WALKING_SPEED);
-               rel_pos_x=(x1-x);
-               rel_pos_y=(y1-y);
-               steps=CRITTER_WALKING_SPEED;
-               pic_idx=0;
-               cur_pic=descr->get_walk_e_anim()->get_pic(0);
-               state=WALK_E;
-               return 1;
-          case 5:
-               // walk se
-               if(!descr->is_swimming() && (field->get_terr()->get_is() & TERRAIN_UNPASSABLE)) return 1; // can't walk there, try again
-               if(descr->is_swimming() && !(field->get_terr()->get_is() & TERRAIN_WATER)) return 1; // can't walk there, try again
-               g->get_map()->get_brn(px, py, field, &x, &y, &f1);
-               x1=px; 
-               y1=py;
-               px=x;
-               py=y;
-               f1->hook_inst_link(field->unhook_inst_link(this));
-               field=f1;
-               g->get_map()->get_pix(px, py, &x, &y);
-               g->get_map()->get_pix(x1, y1, &x1, &y1);
-               vx=(((float) (x-x1))/CRITTER_WALKING_SPEED); // should be ready in so many frames
-               vy=(((float) (y-y1))/CRITTER_WALKING_SPEED);
-               rel_pos_x=(x1-x);
-               rel_pos_y=(y1-y);
-               steps=CRITTER_WALKING_SPEED;
-               pic_idx=0;
-               cur_pic=descr->get_walk_se_anim()->get_pic(0);
-               state=WALK_SE;
-               return 1;
-          case 6:
-               // walk sw
-               if(!descr->is_swimming() && (field->get_terd()->get_is() & TERRAIN_UNPASSABLE)) return 1; // can't walk there, try again
-               if(descr->is_swimming() && !(field->get_terd()->get_is() & TERRAIN_WATER)) return 1; // can't walk there, try again
-               g->get_map()->get_bln(px, py, field, &x, &y, &f1);
-               x1=px; 
-               y1=py;
-               px=x;
-               py=y;
-               f1->hook_inst_link(field->unhook_inst_link(this));
-               field=f1;
-               g->get_map()->get_pix(px, py, &x, &y);
-               g->get_map()->get_pix(x1, y1, &x1, &y1);
-               vx=(((float) (x-x1))/CRITTER_WALKING_SPEED); // should be ready in so many frames
-               vy=(((float) (y-y1))/CRITTER_WALKING_SPEED);
-               rel_pos_x=(x1-x);
-               rel_pos_y=(y1-y);
-               steps=CRITTER_WALKING_SPEED;
-               pic_idx=0;
-               cur_pic=descr->get_walk_sw_anim()->get_pic(0);
-               state=WALK_SW;
-               return 1;
-          case 7:
-               // walk ne
-               g->get_map()->get_trn(px, py, field, &x1, &y1, &f1);
-               if(!descr->is_swimming() && (f1->get_terd()->get_is() & TERRAIN_UNPASSABLE)) return 1; // can't walk there, try again
-               if(descr->is_swimming() && !(f1->get_terd()->get_is() & TERRAIN_WATER)) return 1; // can't walk there, try again
-               g->get_map()->get_pix(px, py, &x, &y);
-               g->get_map()->get_pix(x1, y1, &x1, &y1);
-               vx=(((float) (x1-x))/CRITTER_WALKING_SPEED); // should be ready in so many frames
-               vy=(((float) (y1-y))/CRITTER_WALKING_SPEED);
-               steps=CRITTER_WALKING_SPEED;
-               pic_idx=0;
-               cur_pic=descr->get_walk_ne_anim()->get_pic(0);
-               state=WALK_NE;
-              return 1;
-            case 8:
-               // walk nw
-               g->get_map()->get_tln(px, py, field, &x1, &y1, &f1);
-               if(!descr->is_swimming() && (f1->get_terr()->get_is() & TERRAIN_UNPASSABLE)) return 1; // can't walk there, try again
-               if(descr->is_swimming() && !(f1->get_terr()->get_is() & TERRAIN_WATER)) return 1; // can't walk there, try again
-               g->get_map()->get_pix(px, py, &x, &y);
-               g->get_map()->get_pix(x1, y1, &x1, &y1);
-               vx=(((float) (x1-x))/CRITTER_WALKING_SPEED); // should be ready in so many frames
-               vy=(((float) (y1-y))/CRITTER_WALKING_SPEED);
-               steps=CRITTER_WALKING_SPEED;
-               pic_idx=0;
-               cur_pic=descr->get_walk_nw_anim()->get_pic(0);
-               state=WALK_NW;
-               return 1;
-            case 9:
-               // walk w
-               g->get_map()->get_ln(px, py, field, &x1, &y1, &f1);
-               if(!descr->is_swimming() && (f1->get_terr()->get_is() & TERRAIN_UNPASSABLE)) return 1; // can't walk there, try again
-               if(descr->is_swimming() && !(f1->get_terr()->get_is() & TERRAIN_WATER)) return 1; // can't walk there, try again
-               g->get_map()->get_pix(px, py, &x, &y);
-               g->get_map()->get_pix(x1, y1, &x1, &y1);
-               vx=(((float) (x1-x))/CRITTER_WALKING_SPEED); // should be ready in so many frames
-               vy=(((float) (y1-y))/CRITTER_WALKING_SPEED);
-               steps=CRITTER_WALKING_SPEED;
-               pic_idx=0;
-               cur_pic=descr->get_walk_w_anim()->get_pic(0);
-               state=WALK_W;
-               return 1;
-        }
-         break;
+Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
+	: Map_Object(CRITTER_BOB)
+{
+	descr = d;
+}
 
-      case WALK_NE:
-         pic_idx++;
-         if(pic_idx==descr->get_walk_ne_anim()->get_npics()) pic_idx=0;
-         cur_pic=descr->get_walk_ne_anim()->get_pic(pic_idx);
-         if(steps) {
-            steps--;
-            rel_pos_x+=vx;
-            rel_pos_y+=vy;
-         } else {
-            g->get_map()->get_trn(px, py, field, &x1, &y1, &f1);
-            px=x1;
-            py=y1;
-            f1->hook_inst_link(field->unhook_inst_link(this));
-            field=f1;
-            rel_pos_x=0;
-            rel_pos_y=0;
-            state=IDLE;
-            pic_idx=0;
-            cur_pic=descr->get_anim()->get_pic(0);
-            return (1+(rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK));
-         }
-         break;
-      case WALK_NW:
-         pic_idx++;
-         if(pic_idx==descr->get_walk_nw_anim()->get_npics()) pic_idx=0;
-         cur_pic=descr->get_walk_nw_anim()->get_pic(pic_idx);
-         if(steps) {
-            steps--;
-            rel_pos_x+=vx;
-            rel_pos_y+=vy;
-         } else {
-            g->get_map()->get_tln(px, py, field, &x1, &y1, &f1);
-            px=x1;
-            py=y1;
-            f1->hook_inst_link(field->unhook_inst_link(this));
-            field=f1;
-            rel_pos_x=0;
-            rel_pos_y=0;
-            state=IDLE;
-            pic_idx=0;
-            cur_pic=descr->get_anim()->get_pic(0);
-            return (1+(rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK));
-         }
-         break;
-      case WALK_W:
-         pic_idx++;
-         if(pic_idx==descr->get_walk_w_anim()->get_npics()) pic_idx=0;
-         cur_pic=descr->get_walk_w_anim()->get_pic(pic_idx);
-         if(steps) {
-            steps--;
-            rel_pos_x+=vx;
-            rel_pos_y+=vy;
-         } else {
-            g->get_map()->get_ln(px, py, field, &x1, &y1, &f1);
-            px=x1;
-            py=y1;
-            f1->hook_inst_link(field->unhook_inst_link(this));
-            field=f1;
-            rel_pos_x=0;
-            rel_pos_y=0;
-            state=IDLE;
-            pic_idx=0;
-            cur_pic=descr->get_anim()->get_pic(0);
-            return (1+(rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK));
-         }
-         break;
-      case WALK_E:
-         pic_idx++;
-         if(pic_idx==descr->get_walk_e_anim()->get_npics()) pic_idx=0;
-         cur_pic=descr->get_walk_e_anim()->get_pic(pic_idx);
-         if(steps) {
-            steps--;
-            rel_pos_x+=vx;
-            rel_pos_y+=vy;
-         } else {
-            rel_pos_x=0;
-            rel_pos_y=0;
-            state=IDLE;
-            pic_idx=0;
-            cur_pic=descr->get_anim()->get_pic(0);
-            return (1+(rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK));
-         }
-         break;
-      case WALK_SE:
-         pic_idx++;
-         if(pic_idx==descr->get_walk_se_anim()->get_npics()) pic_idx=0;
-         cur_pic=descr->get_walk_se_anim()->get_pic(pic_idx);
-         if(steps) {
-            steps--;
-            rel_pos_x+=vx;
-            rel_pos_y+=vy;
-         } else {
-            rel_pos_x=0;
-            rel_pos_y=0;
-            state=IDLE;
-            pic_idx=0;
-            cur_pic=descr->get_anim()->get_pic(0);
-            return (1+(rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK));
-         }
-         break;
-      case WALK_SW:
-         pic_idx++;
-         if(pic_idx==descr->get_walk_sw_anim()->get_npics()) pic_idx=0;
-         cur_pic=descr->get_walk_sw_anim()->get_pic(pic_idx);
-         if(steps) {
-            steps--;
-            rel_pos_x+=vx;
-            rel_pos_y+=vy;
-         } else {
-            rel_pos_x=0;
-            rel_pos_y=0;
-            state=IDLE;
-            pic_idx=0;
-            cur_pic=descr->get_anim()->get_pic(0);
-            return (1+(rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK));
-         }
-         break;
-   } 
-   return 1; // next frame again
+uint Critter_Bob::get_movecaps() { return descr->is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK; }
+
+void Critter_Bob::init(Game *g, Instance *i)
+{
+	set_animation(g, descr->get_anim());
+	
+	// gotcha... need to schedule an initial act() ;)
+	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_ACT, (int)i, 0, 0);
+}
+
+void Critter_Bob::act(Game* g, Instance *i)
+{
+	if (m_walking != IDLE) {
+		end_walk();
+
+//		cerr << "Critter stops walking" << endl;
+				
+		// 30% chance of stopping
+		if (g->logic_rand() % 100 < 30) {
+			int t = g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
+
+			set_animation(g, descr->get_anim());			
+			g->get_cmdqueue()->queue(g->get_gametime()+t, SENDER_MAPOBJECT, CMD_ACT, (int)i, 0, 0);
+			return;
+		}
+	}
+	
+	Animation *a = 0;
+	WalkingDir dir = IDLE;
+	
+	switch(g->logic_rand() % 6) {
+	case 0: dir = WALK_NW; a = descr->get_walk_nw_anim(); break;
+	case 1: dir = WALK_NE; a = descr->get_walk_ne_anim(); break;
+	case 2: dir = WALK_W; a = descr->get_walk_w_anim(); break;
+	case 3: dir = WALK_E; a = descr->get_walk_e_anim(); break;
+	case 4: dir = WALK_SW; a = descr->get_walk_sw_anim(); break;
+	case 5: dir = WALK_SE; a = descr->get_walk_se_anim(); break;
+	}
+	
+//	cerr << "Critter attempts to walk" << endl;
+	
+	if (!start_walk(g, i, dir, a))
+		g->get_cmdqueue()->queue(g->get_gametime()+g->logic_rand()%1000, SENDER_MAPOBJECT, CMD_ACT, (int)i, 0, 0);
 }
 
 // DOWN HERE: DECRIPTION CLASSES
@@ -360,14 +169,10 @@ int Boring_Bob_Descr::read(Binary_file* f) {
       
    return RET_OK;
 }
-int Boring_Bob_Descr::create_instance(Instance* inst) {
-   
-   inst->obj=new Boring_Bob(this);
 
-//   cerr << "Boring_Bob_Descr::create_instance() TODO!" << endl;
-
-   if(this->anim.get_npics() > 1) return 1; // we have to animate
-   return -1; // this thing doesn't animate, so don't waste cycles on it
+Map_Object *Boring_Bob_Descr::create_object()
+{
+	return new Boring_Bob(this);
 }
 
 //
@@ -405,11 +210,9 @@ int Critter_Bob_Descr::read(Binary_file* f) {
    return RET_OK;
 }
 
-int Critter_Bob_Descr::create_instance(Instance* inst) {
-   
-   inst->obj=new Critter_Bob(this);
-
-   return 1; // we have (at) least to move 
+Map_Object *Critter_Bob_Descr::create_object()
+{
+	return new Critter_Bob(this);
 }
 
 //
@@ -425,13 +228,10 @@ int Diminishing_Bob_Descr::read(Binary_file* f) {
    
    return RET_OK;
 }
-int Diminishing_Bob_Descr::create_instance(Instance* inst) {
-   inst->obj=new Diminishing_Bob(this);
-   
-//   cerr << "Diminishing_Bob_Descr::create_instance() TODO!" << endl;
-   
-   if(this->anim.get_npics() > 1) return 1; // we have to animate
-   return -1; // this thing doesn't animate, so don't waste cycles on it
+
+Map_Object *Diminishing_Bob_Descr::create_object()
+{
+	return new Diminishing_Bob(this);
 }
 
 //
@@ -441,17 +241,12 @@ int Growing_Bob_Descr::read(Binary_file* f) {
    cerr << "Growing_Bob_Descr::read() TODO!" << endl;
    return RET_OK;
 }
-int Growing_Bob_Descr::create_instance(Instance* inst) {
-   cerr << "Growing_Bob_Descr::create_instance() TODO!" << endl;
 
-   return RET_OK;
+Map_Object *Growing_Bob_Descr::create_object()
+{
+   cerr << "Growing_Bob_Descr::create_instance() TODO!" << endl;
+	
+	return 0; // uh oh
 }
-//
-// class Boring_Bob_Descr
-//
-/*int Critter_Bob_Descr::read(Binary_file* f) {
-   cerr << "Critter_Bob_Descr::read() TODO!" << endl;
-   return RET_OK;
-}*/
 
 

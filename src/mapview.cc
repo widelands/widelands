@@ -21,6 +21,7 @@
 #include "graphic.h"
 #include "input.h"
 #include "mapview.h"
+#include "game.h"
 
 /* class Map_View
  *
@@ -44,11 +45,12 @@ AutoPic Map_View::setable_flag("set_flag.bmp", 0, 0, 255);
  *
  * Args: m 	map to use
  */
-Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m)
+Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Game *g)
 	: Panel(parent, x, y, w, h)
 {
 	vpx = vpy = 0;
-	map = m;
+	m_game = g;
+	map = m_game->get_map();
 	dragging = false;
 
 	fselx = fsely = 0;
@@ -184,6 +186,22 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 
 			draw_field(dst, f, rf, fl, rfl, posx, rposx, posy, blposx, rblposx, blposy);
 
+			//TODO - rendering order?
+			// draw_ground implies that this doesn't render map objects.
+			// are there any overdraw issues with the current rendering order?
+			
+		   // check if a instance is hooked to this field, if so, draw it
+	   	if(f->get_first_inst()) {
+	      	//    cerr << p[1].x << ":" << p[1].y << endl;
+	   	   Instance_Link* inst=f->get_first_inst();
+		      while(inst) {
+					// Let instances draw themselves; more logical as a OO design
+   	   	   //copy_animation_pic(dst, inst->inst, p[1].x, p[1].y, 0, 0, 0, 0);
+					inst->inst->draw(m_game, dst, posx, posy);
+	      	   inst=inst->next;
+   		   }
+	   	}
+
         // TODO: TEMP DEBUG: render buildhelp over everything
          switch(map->get_build_symbol(map_posx, map_posy)) {
             case Field::NOTHING:
@@ -275,17 +293,6 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 
 	// Render bottom triangle
 	render_triangle(dst, p+1, b+1, f->get_terd()->get_texture());
-
-   // check if a instance is hooked to this field, if so, draw it
-   if(f->get_first_inst()) {
-      //    cerr << p[1].x << ":" << p[1].y << endl;
-      Instance_Link* inst=f->get_first_inst();
-      while(inst) {
-         copy_animation_pic(dst, inst->inst, p[1].x, p[1].y, 0, 0, 0, 0); 
-         inst=inst->next;
-      }
-   }
-
 }
 
 /** Map_View::set_viewpoint(int x, int y)

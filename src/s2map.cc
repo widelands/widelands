@@ -18,6 +18,7 @@
  */
 
 #include "widelands.h"
+#include "game.h"
 #include "s2map.h"
 #include "myfile.h"
 #include "map.h"
@@ -173,7 +174,7 @@ int Map::load_s2mf_header(const char* filen) {
  * Args: 	filen		filename to read
  * Returns: RET_OK or RET_FAILED
  */
-int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
+int Map::load_s2mf(const char* filen, Game *game) {
    Binary_file file;
    uchar *section, *pc;
    uint x=0;
@@ -248,7 +249,6 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
    // set size
    set_size(hd.width, hd.height);
    
-   Point* p;
    ////           S E C T I O N    1 : H E I G H T S
    // New section??
    section = load_s2mf_section(&file, hd.width, hd.height);
@@ -399,11 +399,8 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
          // ignore everything but HQs
          if(section[i]==0x80) {
             // cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl;
-            p = (Point*) malloc(sizeof(Point)); 
-            p->x=x;
-            p->y=y;
-            q->queue(0, SENDER_LOADER, CMD_WARP_BUILDING, bobs[i], 0, p);
-         }
+				game->warp_building(x, y, bobs[i], 0);
+			}
       }
    }
    free(section);
@@ -424,51 +421,27 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
    for(y=0; y<hd.height; y++) {
       i=y*hd.width;
       for(x=0; x<hd.width; x++, i++) {
-         uint z=0;
+			const char *bobname = 0;
+			
          // ignore everything but HQs
          switch(section[i]) {
-            case 0x01:
-               for(z=0; z<CRITTER_PER_DEFINITION; z++) { 
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("bunny"), 0, p);
-               }
-               break;
-
-            case 0x02:
-               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("fox"), 0, p);
-               }
-               break;
-
-            case 0x03:
-               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("reindeer"), 0, p);
-               }
-               break;
-
-            case 0x04:
-               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("deer"), 0, p);
-               }
-               break;
-
-            case 0x05:
-               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("duck"), 0, p);
-               }
-               break;
-
-            case 0x06:
-               for(z=0; z<CRITTER_PER_DEFINITION; z++) {
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("Sheep"), 0, p);
-               }
-               break;
-
-            default:
-               cerr << "Unsupported animal: " << (int) section[i] << endl;
-               assert(0);
-            case 0x00:
-               break;
+				case 0:
+					break;
+            case 0x01: bobname = "bunny"; break;
+				case 0x02: bobname = "fox"; break;
+				case 0x03: bobname = "reindeer"; break;
+				case 0x04: bobname = "deer"; break;
+				case 0x05: bobname = "duck"; break;
+				case 0x06: bobname = "Sheep"; break;
+				default:
+					cerr << "Unsupported animal: " << (int)section[i] << endl;
+					break;
          }
+			
+			if (bobname) {
+				for(uint z=0; z<CRITTER_PER_DEFINITION; z++)
+					game->create_bob(x, y, w->get_bob(bobname));
+			}
       }
    }
    free(section);
@@ -573,7 +546,8 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
    uchar c;
    for(y=0; y<hd.height; y++) {
       for(x=0; x<hd.width; x++) {
- 
+			const char *bobname = 0;
+		 
       //   if(a_MapGetField(x,y)->can_build_way== 0x80) {
       //    a_BuildingSet(x, y, TYPE_HQ, STATE_FINISH);
       //      continue;
@@ -583,30 +557,18 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
          c=bobs[y*hd.width + x];
          if(buildings[y*hd.width +x]==0x78) {
             switch(c) {
-               case BOB_STONE1:
-                  p=new Point(x,y);
-                  q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("stones1"), 0, p);
-                  continue;
-               case BOB_STONE2:
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("stones2"), 0, p);
-                  continue;
-               case BOB_STONE3:
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("stones3"), 0, p);
-                  continue;
-               case BOB_STONE4:
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("stones4"), 0, p);
-                  continue;
-               case BOB_STONE5:
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("stones5"), 0, p);
-                  continue;
-               case BOB_STONE6:
-                  p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("stones6"), 0, p);
-                  continue;
-
-               default:
-                  // Silently ignoring. S2 maps format is strange... or not understood
-                  break;
-            }
+               case BOB_STONE1: bobname = "stones1"; break;
+               case BOB_STONE2: bobname = "stones1"; break;
+               case BOB_STONE3: bobname = "stones1"; break;
+               case BOB_STONE4: bobname = "stones1"; break;
+               case BOB_STONE5: bobname = "stones1"; break;
+               case BOB_STONE6: bobname = "stones1"; break;
+					default: break;
+				}
+				if (bobname) {
+					game->create_bob(x, y, w->get_bob(bobname));
+					continue;
+				}
          }
 
          switch (c) {
@@ -614,213 +576,88 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
                // DO nothing
                break;
 
-            case BOB_PEBBLE1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("pebble1"), 0, p);
-               break;
-            case BOB_PEBBLE2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("pebble2"), 0, p);
-               break;
-            case BOB_PEBBLE3:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("pebble3"), 0, p);
-               break;
-            case BOB_PEBBLE4:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("pebble4"), 0, p);
-               break;
-            case BOB_PEBBLE5:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("pebble5"), 0, p);
-               break;
-            case BOB_PEBBLE6:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("pebble6"), 0, p);
-               break;
-
-            case BOB_MUSHROOM1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("mushroom1"), 0, p);
-               break;
-            case BOB_MUSHROOM2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("mushroom2"), 0, p);
-               break;
-
-            case BOB_DEADTREE1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("deadtree1"), 0, p);
-               break;
-            case BOB_DEADTREE2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("deadtree2"), 0, p);
-               break;
-            case BOB_DEADTREE3:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("deadtree3"), 0, p);
-               break;
-            case BOB_DEADTREE4:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("deadtree4"), 0, p);
-               break;
-
-            case BOB_TREE1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree1"), 0, p);
-               break;
-            case BOB_TREE2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree2"), 0, p);
-               break;
-            case BOB_TREE3:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree3"), 0, p);
-               break;
-            case BOB_TREE4:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree4"), 0, p);
-               break;
-            case BOB_TREE5:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree5"), 0, p);
-               break;
-            case BOB_TREE6:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree6"), 0, p);
-               break;
-            case BOB_TREE7:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree7"), 0, p);
-               break;
-            case BOB_TREE8:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree8"), 0, p);
-               break;
-            case BOB_TREE9:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree9"), 0, p);
-               break;
-            case BOB_TREE10:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree10"), 0, p);
-               break;
-            case BOB_TREE11:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree11"), 0, p);
-               break;
-            case BOB_TREE12:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree12"), 0, p);
-               break;
-            case BOB_TREE13:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree13"), 0, p);
-               break;
-            case BOB_TREE14:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree14"), 0, p);
-               break;
-            case BOB_TREE15:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree15"), 0, p);
-               break;
-            case BOB_TREE16:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree16"), 0, p);
-               break;
-            case BOB_TREE17:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree17"), 0, p);
-               break;
-            case BOB_TREE18:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree18"), 0, p);
-               break;
-            case BOB_TREE19:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree19"), 0, p);
-               break;
-            case BOB_TREE20:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree20"), 0, p);
-               break;
-            case BOB_TREE21:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree21"), 0, p);
-               break;
-            case BOB_TREE22:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree22"), 0, p);
-               break;
-            case BOB_TREE23:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree23"), 0, p);
-               break;
-            case BOB_TREE24:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree24"), 0, p);
-               break;
-            case BOB_TREE25:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree25"), 0, p);
-               break;
-            case BOB_TREE26:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree26"), 0, p);
-               break;
-            case BOB_TREE27:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree27"), 0, p);
-               break;
-            case BOB_TREE28:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree28"), 0, p);
-               break;
-            case BOB_TREE29:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree29"), 0, p);
-               break;
-            case BOB_TREE30:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree30"), 0, p);
-               break;
-            case BOB_TREE31:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree31"), 0, p);
-               break;
-            case BOB_TREE32:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("tree32"), 0, p);
-               break;
-
-            case BOB_GRASS1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("grass1"), 0, p);
-               break;
-            case BOB_GRASS2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("grass2"), 0, p);
-               break;
-            case BOB_GRASS3:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("grass3"), 0, p);
-               break;
-
-            case BOB_STANDING_STONES1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("sstones1"), 0, p);
-               break;
-            case BOB_STANDING_STONES2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("sstones2"), 0, p);
-               break;
-            case BOB_STANDING_STONES3:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("sstones3"), 0, p);
-               break;
-            case BOB_STANDING_STONES4:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("sstones4"), 0, p);
-               break;
-            case BOB_STANDING_STONES5:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("sstones5"), 0, p);
-               break;
-            case BOB_STANDING_STONES6:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("sstones6"), 0, p);
-               break;
-            case BOB_STANDING_STONES7:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("sstones7"), 0, p);
-               break;
-
-            case BOB_SKELETON1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("skeleton1"), 0, p);
-               break;
-            case BOB_SKELETON2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("skeleton2"), 0, p);
-               break;
-            case BOB_SKELETON3:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("skeleton3"), 0, p);
-               break;
-
-            case BOB_CACTUS1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("cactus1"), 0, p);
-               break;
-            case BOB_CACTUS2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("cactus2"), 0, p);
-               break;
-
-            case BOB_BUSH1:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("bush1"), 0, p);
-               break;
-            case BOB_BUSH2:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("bush2"), 0, p);
-               break;
-            case BOB_BUSH3:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("bush3"), 0, p);
-               break;
-            case BOB_BUSH4:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("bush4"), 0, p);
-               break;
-            case BOB_BUSH5:
-               p=new Point(x,y); q->queue(0, SENDER_LOADER, CMD_CREATE_BOB, w->get_bob("bush5"), 0, p);
-               break;
-
-            default:
+            case BOB_PEBBLE1: bobname = "pebble1"; break;
+            case BOB_PEBBLE2: bobname = "pebble2"; break;
+            case BOB_PEBBLE3: bobname = "pebble3"; break;
+            case BOB_PEBBLE4: bobname = "pebble4"; break;
+            case BOB_PEBBLE5: bobname = "pebble5"; break;
+            case BOB_PEBBLE6: bobname = "pebble6"; break;
+            
+            case BOB_MUSHROOM1: bobname = "mushroom1"; break;
+            case BOB_MUSHROOM2: bobname = "mushroom2"; break;
+            
+				case BOB_DEADTREE1: bobname = "deadtree1"; break;
+				case BOB_DEADTREE2: bobname = "deadtree2"; break;
+				case BOB_DEADTREE3: bobname = "deadtree3"; break;
+				case BOB_DEADTREE4: bobname = "deadtree4"; break;
+            
+				case BOB_TREE1: bobname = "tree1"; break;
+				case BOB_TREE2: bobname = "tree2"; break;
+				case BOB_TREE3: bobname = "tree3"; break;
+				case BOB_TREE4: bobname = "tree4"; break;
+				case BOB_TREE5: bobname = "tree5"; break;
+				case BOB_TREE6: bobname = "tree6"; break;
+				case BOB_TREE7: bobname = "tree7"; break;
+				case BOB_TREE8: bobname = "tree8"; break;
+				case BOB_TREE9: bobname = "tree9"; break;
+				case BOB_TREE10: bobname = "tree10"; break;
+				case BOB_TREE11: bobname = "tree11"; break;
+				case BOB_TREE12: bobname = "tree12"; break;
+				case BOB_TREE13: bobname = "tree13"; break;
+				case BOB_TREE14: bobname = "tree14"; break;
+				case BOB_TREE15: bobname = "tree15"; break;
+				case BOB_TREE16: bobname = "tree16"; break;
+				case BOB_TREE17: bobname = "tree17"; break;
+				case BOB_TREE18: bobname = "tree18"; break;
+				case BOB_TREE19: bobname = "tree19"; break;
+				case BOB_TREE20: bobname = "tree20"; break;
+				case BOB_TREE21: bobname = "tree21"; break;
+				case BOB_TREE22: bobname = "tree22"; break;
+				case BOB_TREE23: bobname = "tree23"; break;
+				case BOB_TREE24: bobname = "tree24"; break;
+				case BOB_TREE25: bobname = "tree25"; break;
+				case BOB_TREE26: bobname = "tree26"; break;
+				case BOB_TREE27: bobname = "tree27"; break;
+				case BOB_TREE28: bobname = "tree28"; break;
+				case BOB_TREE29: bobname = "tree29"; break;
+				case BOB_TREE30: bobname = "tree30"; break;
+				case BOB_TREE31: bobname = "tree31"; break;
+				case BOB_TREE32: bobname = "tree32"; break;
+            
+            case BOB_GRASS1: bobname = "grass1"; break;
+            case BOB_GRASS2: bobname = "grass2"; break;
+            case BOB_GRASS3: bobname = "grass3"; break;
+            
+				case BOB_STANDING_STONES1: bobname = "sstones1"; break;
+				case BOB_STANDING_STONES2: bobname = "sstones2"; break;
+				case BOB_STANDING_STONES3: bobname = "sstones3"; break;
+				case BOB_STANDING_STONES4: bobname = "sstones4"; break;
+				case BOB_STANDING_STONES5: bobname = "sstones5"; break;
+				case BOB_STANDING_STONES6: bobname = "sstones6"; break;
+				case BOB_STANDING_STONES7: bobname = "sstones7"; break;
+				
+            case BOB_SKELETON1: bobname = "skeleton1"; break;
+            case BOB_SKELETON2: bobname = "skeleton2"; break;
+            case BOB_SKELETON3: bobname = "skeleton3"; break;
+            
+				case BOB_CACTUS1: bobname = "cactus1"; break;
+				case BOB_CACTUS2: bobname = "cactus2"; break;
+				
+            case BOB_BUSH1: bobname = "bush1"; break;
+            case BOB_BUSH2: bobname = "bush2"; break;
+            case BOB_BUSH3: bobname = "bush3"; break;
+            case BOB_BUSH4: bobname = "bush4"; break;
+            case BOB_BUSH5: bobname = "bush5"; break;
+            
+				default:
                // N("Unknown bob in file! %x (%i,%i)\n", c, x, y);
                assert(!"Unknow bob in file");
                break;
-
-         } 
+         }
+			
+			if (bobname) {
+				game->create_bob(x, y, w->get_bob(bobname));
+			}
       }
    }
    

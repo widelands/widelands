@@ -57,7 +57,7 @@ private:
 WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, int fx, int fy)
 	: Window(parent, x, y, w, h, "Watch")
 {
-	mapview = new Map_View(this, 0, 0, w, h, parent->get_game()->get_map());
+	mapview = new Map_View(this, 0, 0, w, h, parent->get_game());
 	mapview->fieldclicked.set(parent, &Interactive_Player::field_action);
 
 	// only an approximation (odd rows shifted), but so what

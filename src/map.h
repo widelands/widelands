@@ -31,7 +31,6 @@
 #define WLMF_VERSIONMAJOR(a)  (a >> 8)
 #define WLMF_VERSIONMINOR(a)  (a & 0xFF)
 
-#include "cmd_queue.h"
 #include "world.h"
 #include "field.h"
 
@@ -139,7 +138,7 @@ class Map {
                Map(void);
                ~Map(void);
 
-               int load_map(const char*, Cmd_Queue*);
+               int load_map(const char*, Game*);
                int load_map_header(const char*); 
 
                // informational functions
@@ -184,11 +183,11 @@ class Map {
                Field* fields;
 
                // funcs
-               int load_s2mf(const char*, Cmd_Queue*);
+               int load_s2mf(const char*, Game*);
                int load_s2mf_header(const char*);
                uchar *load_s2mf_section(Binary_file *file, int width, int height);
 
-               int load_wlmf(const char*, Cmd_Queue*);
+               int load_wlmf(const char*, Game*);
                void set_size(uint, uint);
 
                void recalc_brightness(int fx, int fy);

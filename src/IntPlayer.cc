@@ -52,7 +52,7 @@ Interactive_Player::Interactive_Player(Game *g)
 {
 	game = g;
 
-	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g->get_map());
+	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g);
 	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
 	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
 	minimap = 0;

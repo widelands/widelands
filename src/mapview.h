@@ -34,7 +34,7 @@
  */
 class Map_View : public Panel {
 public:
-	Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m);
+	Map_View(Panel *parent, int x, int y, uint w, uint h, Game *g);
 	~Map_View();
 
 	UISignal2<int,int> warpview; // x/y in screen coordinates
@@ -65,7 +65,7 @@ private:
    static AutoPic mine_building;
    static AutoPic setable_flag;
 
-
+	Game* m_game;
 	Map* map;
 	int vpx, vpy;
 	bool dragging;

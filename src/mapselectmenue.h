@@ -20,8 +20,9 @@
 #ifndef __S__MAPSELECTMENUE_H
 #define __S__MAPSELECTMENUE_H
 
+class Game;
 
-bool map_select_menue(void);
-
+bool launch_game_menu(Game *g);
+void map_select_menue(Game *g);
 
 #endif

@@ -20,7 +20,7 @@
 #ifndef __S__PIC_H
 #define __S__PIC_H
 
-class Instance;
+class Animation;
 
 /** class Bitmap
  *
@@ -63,8 +63,8 @@ class Bitmap {
 
       friend void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
             uint src_x, uint src_y, int w, int h);
-      friend void copy_animation_pic(Bitmap* dst, Instance* inst, int dst_x, 
-            int dst_y, uint src_x, uint src_y, int w, int h);
+      friend void copy_animation_pic(Bitmap* dst, Animation* anim, uint time,
+		      int dst_x, int dst_y, uint src_x, uint src_y, int w, int h);
       friend class Graphic;
 };
 

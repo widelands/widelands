@@ -27,25 +27,30 @@
 #include "worker.h"
 #include "tribe.h"
 #include "game.h"
+#include "ui.h"
+#include "fileloc.h"
+#include "myfile.h"
+#include "graphic.h"
+#include "mapselectmenue.h"
+#include "IntPlayer.h"
 
 
-/** class Game
- *
- * This game handels one game. This class is not a all portabel,
- * it depends on nearly everything else in widelands
- */
 
 /** Game::Game(void)
  *
  * init
  */
-Game::Game(void) {
-   hinst= new Instance_Handler(MAX_OBJS);
-   queue = new Cmd_Queue(this);
-   map=0;
-   frame_count=0;
-}
+Game::Game(void)
+{
+	m_state = gs_none;
+	m_mapname = 0;
 
+   hinst = new Instance_Handler(MAX_OBJS);
+   cmdqueue = new Cmd_Queue(this);
+   map=0;
+
+	m_realtime = 0;
+}
 
 /** Game::~Game(void)
  *
@@ -53,80 +58,143 @@ Game::Game(void) {
  */
 Game::~Game(void) {
    delete hinst; 
-   delete queue;
-   delete map;
+	delete cmdqueue;
+	if (map)
+		delete map;
+	if (m_mapname)
+		free(m_mapname);
 }
 
-//
-//this function loads the map for the game. this must be done, before
-//Game::run() is called
-//
-int Game::set_map(const char* mapname) {
-   if(map) return ERR_FAILED;
+/** void Game::set_mapname(const char *mapname)
+ *
+ * Set the mapname, but don't load the map yet (this is done when the
+ * game starts)
+ *
+ * Args: mapname	name of the map
+ */
+void Game::set_mapname(const char* mapname)
+{
+	assert(!map);
 
-   queue->queue(0, SENDER_LOADER, CMD_LOAD_MAP, 0, 0, strdup(mapname));
+	if (m_mapname)
+		free(m_mapname);
+	if (mapname)
+		m_mapname = strdup(mapname);
+	else
+		m_mapname = 0;
 
-   return RET_OK;
+	// Networking updates here?
 }
+
 /** void Game::run(void)
  *
  * This runs a game 
  */
-#include "ui.h"
-#include "fileloc.h"
-#include "myfile.h"
-#include "graphic.h"
-void Game::run(void) {
-   // TEMP
-   tribe= new Tribe_Descr(); 
-   const char* str=g_fileloc.locate_file("testtribe.wtf", TYPE_TRIBE);
-   assert(str);
-   if(tribe->load(str)) {
-      assert(0);
-   }
-   // TEMP
-
-   // run the cmd queue, so all the load cmds are worked through
-   queue->run_queue();
-   
-   ipl = new Interactive_Player(this);
+void Game::run(void)
+{
    counter.start();
-   ipl->run();
-   delete ipl;
-   delete tribe;
+
+	m_state = gs_menu;
+
+	if (launch_game_menu(this))
+	{
+		assert(m_mapname);
+
+		m_state = gs_running;
+
+		// TEMP
+		tribe= new Tribe_Descr(); 
+	   const char* str=g_fileloc.locate_file("testtribe.wtf", TYPE_TRIBE);
+		assert(str);
+	   if(!tribe->load(str)) {
+		   assert(0);
+	   }
+		// TEMP
+
+		// Load the map
+		map = new Map();
+      if (RET_OK != map->load_map(m_mapname, this)) {
+			critical_error("Couldn't load map.");
+			return;
+		}
+
+	   ipl = new Interactive_Player(this);
+	   ipl->run();
+	   delete ipl;
+		delete map;
+		map = 0;
+	   delete tribe;
+	}
+
+	m_state = gs_none;
 }
 
 //
-// This is called by IntPlayer, in each of his loop. This
-// function checks, if a frame (time) has passed, if it has, it 
-// runs the command queue. 
+// think() is called by the UI objects initiated during Game::run()
+// during their modal loop.
+// Depending on the current state we advance game logic and stuff,
+// running the cmd queue etc.
 // 
 // think(), mmh, i don't know if i like the name
 // 
-void Game::think(void) {
-   static ulong lticks;
-   ulong curticks=counter.get_ticks();
-   
-   while(curticks-lticks > FRAME_LENGTH) {
-//      cerr << "Working frame number: " << frame_count << endl;
-      
-      // Animate animated textures
-      map->get_world()->animate();
+void Game::think(void)
+{
+	int lasttime = m_realtime;
+	int frametime;
+	m_realtime = counter.get_ticks();
+	frametime = m_realtime - lasttime;
 
-/*      uint i;
-      Instance* inst;
-      for(i=0; i<MAX_OBJS; i++) {
-         inst=hinst->get_inst(i);
-         if(inst->get_state() == Instance::USED) {
-            if(frame_count >= inst->get_next_acting_frame()) {
-               inst->act(this);
-               //        cerr << i << " is acting!" << endl;
-            }
-         }
-      }
-*/
-      queue->run_queue();
-      frame_count++;
-      lticks=curticks;
-   }
+	// Networking: check socket here
+
+	if (m_state == gs_running)
+	{
+		cmdqueue->run_queue(frametime);
+		
+		map->get_world()->animate(get_gametime()); // update texture animation states
+	}
 }
+
+/** Game::warp_building(int x, int y, uchar owner, int idx)
+ *
+ * Instantly create a building at the given x/y location. There is no build time.
+ *
+ * owner is the player number of the building's owner.
+ * idx is the building type index.
+ */
+void Game::warp_building(int x, int y, uchar owner, int idx)
+{
+	Instance *inst;
+	Building_Descr *descr;
+	int i;
+
+	i = hinst->get_free_inst_id();
+	inst = hinst->get_inst(i);
+
+	descr = get_player_tribe(owner)->get_building_descr(idx);
+
+	inst->create(this, descr);
+	inst->hook_field(x, y, map->get_field(x, y));
+	inst->set_owned_by(owner);
+}
+
+/** Game::create_bob(int x, int y, int idx)
+ *
+ * Instantly create a bob at the given x/y location.
+ *
+ * idx is the bob type.
+ */
+void Game::create_bob(int x, int y, int idx)
+{
+	Instance *inst;
+	Logic_Bob_Descr *descr;
+	int i;
+            
+	i = hinst->get_free_inst_id();
+	inst = hinst->get_inst(i);
+	
+	descr = map->get_world()->get_bob_descr(idx);
+	
+	inst->create(this, descr);
+	inst->hook_field(x, y, map->get_field(x, y));
+}
+

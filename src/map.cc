@@ -91,7 +91,7 @@ void Map::set_size(uint w, uint h) {
  */
 
 // TODO: This function is not working!!
-int Map::load_wlmf(const char* file, Cmd_Queue* q) {
+int Map::load_wlmf(const char* file, Game *game) {
    Binary_file f;
 
    f.open(file, File::READ);
@@ -190,7 +190,7 @@ int Map::load_map_header(const char* file) {
  * Args: file	filename to read
  * Returns: RET_OK or ERR_FAILED
  */
-int Map::load_map(const char* file, Cmd_Queue* q)
+int Map::load_map(const char* file, Game* g)
 {
    int ret;
 
@@ -198,12 +198,12 @@ int Map::load_map(const char* file, Cmd_Queue* q)
    {
       // It ends like a wide lands map file. try to load
       // it as such
-      ret = load_wlmf(file, q);
+      ret = load_wlmf(file, g);
    }
    else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {
       // it is a S2 Map file. load it as such
-      ret = load_s2mf(file, q);
+      ret = load_s2mf(file, g);
    }
    else
    {

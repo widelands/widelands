@@ -72,9 +72,8 @@ class Terrain_Descr {
 
       
    private:
-      inline void animate(void) {
-         curtex++;
-         if(curtex==ntex) curtex=0;
+      inline void animate(int time) {
+			curtex = (time / FRAME_LENGTH) % ntex;
       }
 
       char name[30];
@@ -109,10 +108,10 @@ class World
       inline ushort get_bob(const char* l) { return bobs.get_index(l); }
       inline Logic_Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
 
-      inline void animate(void) {
+      inline void animate(int time) {
          uint i;
          for(i=0; i<ters.get_nitems(); i++)
-            ters.get(i)->animate();
+				ters.get(i)->animate(time);
       }
 
 

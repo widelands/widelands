@@ -20,6 +20,10 @@
 #ifndef __S__BOB_DESCR_H
 #define __S__BOB_DESCR_H
 
+#ifdef ERROR
+#undef ERROR
+#endif ERROR
+
 #include "../src/pic.h"
 #include "../src/myfile.h"
 

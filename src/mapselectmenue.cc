@@ -37,12 +37,10 @@ MapSelectMenu
 ==============================================================================
 */
 
-enum {
-	ms_go,
-	ms_back
-};
 
 class MapSelectMenu : public BaseMenu {
+	Game		*game;
+
 	Listselect *list;
 	Textarea *taname;
 	Textarea *taauthor;
@@ -50,33 +48,36 @@ class MapSelectMenu : public BaseMenu {
 	Textarea *taworld;
 	Textarea *tanplayers;
 	Multiline_Textarea *tadescr;
-	Button *ok;
+	Button *m_ok;
 
 public:
-	MapSelectMenu();
+	MapSelectMenu(Game *g);
 
 	inline const char *get_map() { return list->get_selection(); }
 
+	void ok();
 	void map_selected(int id);
 };
 
-MapSelectMenu::MapSelectMenu()
+MapSelectMenu::MapSelectMenu(Game *g)
 	: BaseMenu("splash.bmp")
 {
+	game = g;
+
 	// Text
 	new Textarea(this, MENU_XRES/2, 140, "Choose your map!", Textarea::H_CENTER);
 
 	// Buttons
 	Button* b;
 
-	b = new Button(this, 410, 406, 174, 24, 0, ms_back);
+	b = new Button(this, 410, 406, 174, 24, 0, 0);
 	b->clickedid.set(this, &MapSelectMenu::end_modal);
 	b->set_pic(g_fh.get_string("Back", 0));
 
-	ok = new Button(this, 410, 436, 174, 24, 2, ms_go);
-	ok->clickedid.set(this, &MapSelectMenu::end_modal);
-	ok->set_pic(g_fh.get_string("OK", 0));
-	ok->set_enabled(false);
+	m_ok = new Button(this, 410, 436, 174, 24, 2, 0);
+	m_ok->clicked.set(this, &MapSelectMenu::ok);
+	m_ok->set_pic(g_fh.get_string("OK", 0));
+	m_ok->set_enabled(false);
 
 	// Create the list area
 	list = new Listselect(this, 20, 170, 360, 290);
@@ -125,6 +126,12 @@ MapSelectMenu::MapSelectMenu()
 	tadescr = new Multiline_Textarea(this, 460, 310, 180, 80, 0);
 }
 
+void MapSelectMenu::ok()
+{
+	game->set_mapname(get_map());
+	end_modal(1);
+}
+
 void MapSelectMenu::map_selected(int id)
 {
 	if (get_map())
@@ -140,45 +147,26 @@ void MapSelectMenu::map_selected(int id)
 			tanplayers->set_text(buf);
 			tadescr->set_text(m.get_descr());
 			taworld->set_text(m.get_world_name());
-         ok->set_enabled(true);
+         m_ok->set_enabled(true);
 		} else {
 			taname->set_text("(bad map file)");
 			taauthor->set_text(0);
 			tasize->set_text(0);
 			tanplayers->set_text(0);
 			tadescr->set_text(0);
-			ok->set_enabled(false);
+			m_ok->set_enabled(false);
 		}
 	}
 }
 
-/** void map_select_menue(void)
+/** void map_select_menue(Game *g)
  *
- *	Here, you chose a map out of a given listbox
+ * Here, you chose a map out of a given listbox
  *
- * Args:	None
- * Returns:	true if a game was played
+ * Args:	g	the game
  */
-bool map_select_menue(void)
+void map_select_menue(Game *g)
 {
-	MapSelectMenu *ms = new MapSelectMenu;
-	int code = ms->run();
-	char *map = 0;
-	if (code == ms_go) {
-		const char *sel = ms->get_map();
-		if (sel)
-			map = strdup(sel);
-	}
-	delete ms;
-
-	if (map) {
-		Game *g = new Game;
-		g->set_map(map);
-		free(map);
-      g->run();
-		delete g;
-		return true;
-	}
-
-	return false;
+	MapSelectMenu ms(g);
+	ms.run();
 }

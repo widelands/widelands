@@ -49,7 +49,6 @@ class Building_Descr : public Map_Object_Descr {
       virtual ~Building_Descr(void) { }
 
       virtual int read(Binary_file* f);
-      virtual int create_instance(Instance*)=0;
      
       // TODO: think about this. is this a good way to do it?
       inline char* get_name(void) { return name; }
@@ -225,7 +224,7 @@ class Dig_Building_Descr : virtual public Working_Building_Descr,
          ~Dig_Building_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          uint worker;
@@ -247,7 +246,7 @@ class Search_Building_Descr : virtual public Boring_Building_Descr,
          ~Search_Building_Descr(void) { if(bobs) free(bobs);  }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          ushort working_time;
@@ -270,7 +269,7 @@ class Plant_Building_Descr : virtual public Boring_Building_Descr,
          ~Plant_Building_Descr(void) { if(bobs) free(bobs); }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          ushort working_time;
@@ -294,7 +293,7 @@ class Grow_Building_Descr : virtual public Boring_Building_Descr,
          ~Grow_Building_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          uint worker;
@@ -318,7 +317,7 @@ class Sit_Building_Descr : virtual public Working_Building_Descr,
          ~Sit_Building_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          bool order_worker;
@@ -336,7 +335,7 @@ class Sit_Building_Produ_Worker_Descr : virtual public Working_Building_Descr,
          ~Sit_Building_Produ_Worker_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          uint worker;
@@ -356,7 +355,7 @@ class Science_Building_Descr : virtual public Working_Building_Descr,
          ~Science_Building_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          uint worker; 
@@ -375,7 +374,7 @@ class Military_Building_Descr : virtual public Boring_Building_Descr,
          Military_Building_Descr::~Military_Building_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          ushort beds;
@@ -396,7 +395,7 @@ class Cannon_Descr : virtual public Boring_Building_Descr,
          Cannon_Descr::~Cannon_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          uint worker;
@@ -424,7 +423,7 @@ class HQ_Descr : virtual public Boring_Building_Descr {
       HQ_Descr::~HQ_Descr(void) { }
 
       int read(Binary_file* f);
-      int create_instance(Instance*);
+      Map_Object *create_object();
       
       ushort get_conquers(void) { return conquers; }
 
@@ -443,7 +442,7 @@ class Store_Descr : virtual public Boring_Building_Descr,
          Store_Descr::~Store_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          // nothing
@@ -461,7 +460,7 @@ class Dockyard_Descr :  virtual public Boring_Building_Descr,
          Dockyard_Descr::~Dockyard_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          ushort working_time;
@@ -479,7 +478,7 @@ class Port_Descr : virtual public Boring_Building_Descr,
          Port_Descr::~Port_Descr(void) { }
 
          int read(Binary_file* f);
-         int create_instance(Instance*);
+         Map_Object *create_object();
 
       private:
          // nothing
@@ -490,11 +489,13 @@ class Port_Descr : virtual public Boring_Building_Descr,
 //
 class Building_HQ : public Map_Object {
    public:
-      Building_HQ(HQ_Descr* d) { descr=d; cur_pic=d->get_idle_anim()->get_pic(0); type=Map_Object::BIG_BUILDING;} 
+      Building_HQ(HQ_Descr* d);
       virtual ~Building_HQ(void) { }
 
-      int act(Game* g);
+		void init(Game* g, Instance* i);
 
+		// the HQ doesn't act (if anything, it acts like any other building, i.e. door opens)
+		
    private:
       HQ_Descr* descr;
 };
