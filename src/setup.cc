@@ -44,11 +44,13 @@ void setup_fonthandler(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  if(g_fh.load_font( buf, FIXED_FONT1 ) != RET_OK) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: Invalid File, load error, or wrong version. Check for new versions.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 }
 
@@ -67,6 +69,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 
 		  cursor->load(buf);
@@ -82,6 +85,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  //		  bmp.set_clrkey(DEF_CLRKEY);
@@ -92,6 +96,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  //		  bmp.set_clrkey(DEF_CLRKEY);
@@ -102,6 +107,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  //		  bmp.set_clrkey(DEF_CLRKEY);
@@ -112,6 +118,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  //		  bmp.set_clrkey(DEF_CLRKEY);
@@ -122,6 +129,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  //		  bmp.set_clrkey(DEF_CLRKEY);
@@ -133,6 +141,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  Button::set_bg(&bmp, 0);
@@ -142,6 +151,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  Button::set_bg(&bmp, 1);
@@ -151,6 +161,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  Button::set_bg(&bmp, 2);
@@ -161,6 +172,7 @@ void setup_ui(void) {
 					 char mbuf[200];
 					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
 					 tell_user(mbuf);
+					 exit(0);
 		  }
 		  bmp.load(buf);
 		  Checkbox::set_graph(&bmp);
