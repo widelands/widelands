@@ -79,7 +79,7 @@ class Button {
 								
 							
 								
-								uint mx, my;
+/*								uint mx, my;
 								ushort clr;
 								for(my=0; my<(p->get_h()); my++) {
 										  mx=0;
@@ -89,7 +89,8 @@ class Button {
 													 clr=p->get_npixel();
 													 ep->set_npixel(Graph::bright_up_clr(clr, MOUSE_OVER_BRIGHT_FACTOR));
 										  }
-								}
+								}*/
+								ep->brighten_rect(0, 0, p->get_w(), p->get_h(), MOUSE_OVER_BRIGHT_FACTOR);
 					 }
 
 		  private:

@@ -115,128 +115,60 @@ void Button::set_pic(Pic* p) {
  * Args: none
  * Returns: 1 if it drawn something, 0 otherwise
  */
-int Button::draw(void) {
-		  if(!needs_draw) return 0;
+int Button::draw(void)
+{
+	if(!needs_draw) return 0;
 
-		  needs_draw=false;
-		  
-		  uint j;
-		  ushort clr;
-		 
-		  if(!benlighted || bpressed) {
-					 Graph::copy_pic(dp, mybg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
-		  } else {
-					 Graph::copy_pic(dp, myebg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
-		  }
+	needs_draw=false;
+		  	 
+	if(!benlighted || bpressed) {
+		Graph::copy_pic(dp, mybg, x+xp, y+yp, 0, 0, w, h);
+	} else {
+		Graph::copy_pic(dp, myebg, x+xp, y+yp, 0, 0, w, h);
+	}
 		 
 
-		  // if we got a picture, draw it
-		  if(myp) {
-					 // we simply center it, without checkin
-					 uint mw = myp->get_w() > w ? w : myp->get_w();
-					 uint mh = myp->get_h() > h ? h : myp->get_h();
+	// if we got a picture, draw it
+	if(myp) {
+		// we simply center it, without checkin
+		uint mw = myp->get_w() > w ? w : myp->get_w();
+		uint mh = myp->get_h() > h ? h : myp->get_h();
 
-					 Graph::copy_pic(dp, myp, (x+xp+(w>>1))-(mw>>1), (y+yp+(h>>1))-(mh>>1), 0, 0, mw, mh);
-		  }
-		  
-		  // draw the borders
-		  if(!bpressed) {
-					 // left edge. we need to bright up the colors of the texture
-					 // top row
-					 j=0;
-					 clr=mybg->get_pixel(j, 0);
-					 dp->set_pixel(xp+x+j, y+yp, Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-					 while(j<(w-1)) { 
-								clr=mybg->get_npixel();
-								dp->set_npixel(Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-								j++;
-					 }
-					 // Second row
-					 j=0;
-					 clr=mybg->get_pixel(j, 1);
-					 dp->set_pixel(xp+x+j, y+yp+1, Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-					 while(j<(w-1)) { 
-								clr=mybg->get_npixel();
-								dp->set_npixel(Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-								j++;
-					 } 
+		Graph::copy_pic(dp, myp, (x+xp+(w>>1))-(mw>>1), (y+yp+(h>>1))-(mh>>1), 0, 0, mw, mh);
+	}
 
-					 // left edge
-					 j=2;
-					 while(j<(h-1)) {
-								clr=mybg->get_pixel(0, j);
-								dp->set_pixel(xp+x, yp+y+j, Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-								clr=mybg->get_npixel();
-								dp->set_npixel(Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-								j++;
-					 }
-
-
-					 // right edge
-					 dp->set_pixel(x+xp+w-1, y+yp, 0, 0, 0);
-					 j=y+yp+1;
-					 while(j < y+yp+h-1) { dp->set_pixel(x+xp+w-2, j, 0, 0, 0); dp->set_npixel(0, 0, 0); ++j; }
-
-					 // bottom edge
-					 j=x+xp;
-					 dp->set_pixel(j, y+yp+h-1, 0, 0, 0);
-					 while(j < x+xp+w-1) { dp->set_npixel(0,0,0); ++j; }
-					 j=x+xp+1;
-					 dp->set_pixel(j, y+yp+h-2, 0, 0, 0);
-					 while(j < x+xp+w-1) { dp->set_npixel(0,0,0); ++j; }
-
-		  } else {
-					 // top edge
-					 j=xp+x+w-1;
-					 dp->set_pixel(j, yp+y, 0, 0, 0);
-					 while(j>xp+x) { --j;  dp->set_ppixel(0,0,0); }
-					 j=xp+x+w-2;
-					 dp->set_pixel(j, yp+y+1, 0, 0, 0);
-					 while(j>xp+x) { --j;  dp->set_ppixel(0,0,0); }
-					
-					 // left edge
-					 for(j=yp+y+2; j<yp+y+h-1; j++) {
-								dp->set_pixel(xp+x, j, 0, 0, 0);
-								dp->set_npixel(0, 0, 0);
-					 }
-					 dp->set_pixel(xp+x, yp+y+h-1, 0, 0, 0); 
-		  
-					 // Bottom edge
-					 // Top row
-					 j=2;
-					 clr=mybg->get_pixel(j, 0);
-					 dp->set_pixel(xp+x+j, y+yp+h-2, Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-					 while(j<(w-1)) { 
-								clr=mybg->get_npixel();
-								dp->set_npixel(Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-								j++;
-					 } 
-					 // bottom row
-					 j=1;
-					 clr=mybg->get_pixel(j, 1);
-					 dp->set_pixel(xp+x+j, y+yp+h-1, Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-					 while(j<(w-1)) { 
-								clr=mybg->get_npixel();
-								dp->set_npixel(Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-								j++;
-					 } 
-
-					 // Right edge
-					 // left edge
-					 clr=mybg->get_pixel(0, 0);
-					 dp->set_pixel(xp+x+w-1, yp+y+1,  Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-					 j=2;
-					 while(j<h) {
-								clr=mybg->get_pixel(0, j);
-								dp->set_pixel(xp+x+w-1, yp+y+j, Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-								clr=mybg->get_npixel();
-								dp->set_ppixel(Graph::bright_up_clr(clr, BUTTON_EDGE_BRIGHT_FACTOR));
-								j++;
-					 }
-
- 
-		  }
+	// draw border
+	uint myx = x + xp;
+	uint myy = y + yp;
+#define BLACK 0x000000	//TEMP
+	if (!bpressed)
+	{
+		// top edge
+		dp->brighten_rect(myx + 0, myy + 0, w, 2, BUTTON_EDGE_BRIGHT_FACTOR);
+		// left edge
+		dp->brighten_rect(myx + 0, myy + 2, 2, h-2, BUTTON_EDGE_BRIGHT_FACTOR);
+		// bottom edge
+		dp->fill_rect(myx + 2, myy + h-2, w-2, 1, BLACK);
+		dp->fill_rect(myx + 1, myy + h-1, w-1, 1, BLACK);
+		// right edge
+		dp->fill_rect(myx + w-2, myy + 2, 1, h-2, BLACK);
+		dp->fill_rect(myx + w-1, myy + 1, 1, h-1, BLACK);
+	}
+	else
+	{
+		// bottom edge
+		dp->brighten_rect(myx + 0, myy + h-2, w, 2, BUTTON_EDGE_BRIGHT_FACTOR);
+		// right edge
+		dp->brighten_rect(myx + w-2, myy + 0, 2, h-2, BUTTON_EDGE_BRIGHT_FACTOR);
+		// top edge
+		dp->fill_rect(myx + 0, myy + 0, w-1, 1, BLACK);
+		dp->fill_rect(myx + 0, myy + 1, w-2, 1, BLACK);
+		// left edge
+		dp->fill_rect(myx + 0, myy + 0, 1, h-1, BLACK);
+		dp->fill_rect(myx + 1, myy + 0, 1, h-2, BLACK);
+	}
+#undef BLACK
 		 
-		  return 1;
+	return 1;
 }
 		  

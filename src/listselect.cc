@@ -81,40 +81,25 @@ Listselect::~Listselect(void) {
  * Args: none
  * returns: 0 when nothing was drawed, 1 elseways
  */
-int Listselect::draw(void) {
-		  // Draw the frame
-		  for(uint mx=x+xp; mx<x+xp+w; mx++) {
-					 dp->set_pixel(mx, y+yp, frameclr);
-					 dp->set_pixel(mx, y+yp+this->get_h()-1, frameclr);
-		  }
-		  uint my;
-		  for(my=y+yp; my<y+yp+this->get_h(); my++) {
-					 dp->set_pixel(x+xp, my, frameclr);
-					 dp->set_pixel(x+xp+w-1, my, frameclr);
-		  }
+int Listselect::draw(void)
+{
+	// draw the frame
+	dp->draw_rect(x+xp, y+yp, w, this->get_h(), frameclr);
 
-		  // Draw a box into the picture
-		  for(my=y+yp+1; my<(y+yp+this->get_h()-1); my++) {
-					 dp->set_pixel(x+xp+1, my, bgclr);
-					 for(uint mx=x+xp+2; mx<(x+xp+w-1); mx++) {
-								dp->set_npixel(bgclr);	
-					 }
-		  }
+	// fill with background color
+	dp->fill_rect(x+xp+1, y+yp+1, w-2, this->get_h()-2, bgclr);
 
-		  for(uint i=0; (i<h) && (i+firstvis < nent); i++) {
-					 if(i+firstvis == (uint)cursel) {
-								// Draw a box
-								for(uint my=y+yp+(i*(g_fh.get_fh(nfont)+2)); my<y+yp+(i*(g_fh.get_fh(nfont)+2))+ent[i+firstvis].p->get_h(); my++) {
-										  dp->set_pixel(x+xp, my, selclr);
-										  for(uint mx=x+xp+1; mx<x+xp+w; mx++) {
-													 dp->set_npixel(selclr);
-										  }
-								}
-					 }
-					 Graph::copy_pic(dp, ent[i+firstvis].p, x+xp, y+yp+(i*(g_fh.get_fh(nfont)+2)), 0, 0, 
-										  ent[i+firstvis].p->get_w() > w ? w : ent[i+firstvis].p->get_w(), ent[i+firstvis].p->get_h());
-		  }
-		  return 1;
+	// draw text lines
+	for(uint i=0; (i<h) && (i+firstvis < nent); i++)
+	{
+		Pic* p = ent[i+firstvis].p;
+		if(i+firstvis == (uint)cursel)
+			// draw selection box
+			dp->fill_rect(x+xp+1, y+yp+i*(g_fh.get_fh(nfont)+2), w-2, p->get_h(), selclr);
+		Graph::copy_pic(dp, p, x+xp, y+yp+(i*(g_fh.get_fh(nfont)+2)), 0, 0, 
+			p->get_w() > w ? w : p->get_w(), p->get_h());
+	}
+	return 1;
 }
 
 

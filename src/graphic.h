@@ -72,6 +72,9 @@ namespace Graph {
 			*/
 		  inline ushort bright_up_clr(const ushort clr, const ushort factor) {
 					 uchar r, g, b;
+					 // DAS HIER STIMMT SO NICHT, ODER?
+					 // SO KOMMT GRUEN INS ROT UND BLAU INS GRUEN
+					 // siehe auch bright_up_clr2 in pic.cc
 					 r= ((clr<<3)>>11);
 					 g= ((clr<<2)>>5);
 					 b= (clr<<3);
@@ -99,6 +102,10 @@ namespace Graph {
 					 void clear_all(void);
 					 Pic& operator=(const Pic&);
 					 Pic(const Pic&);
+
+					 void draw_rect(uint x, uint y, uint w, uint h, uint color);
+					 void fill_rect(uint x, uint y, uint w, uint h, uint color);
+					 void brighten_rect(uint x, uint y, uint w, uint h, int factor);
 
 					 /** inline uint Pic::get_w(void) const 
 					  * 
@@ -137,6 +144,7 @@ namespace Graph {
 					  */
 					 inline bool has_clrkey(void) { return bhas_clrkey; }
 					 
+/***///				 private:
 					 // optimized pixel get functions
 					 // They are rather simple,
 					 // THEY DON'T CHECK FOR OVERFLOWS!!
@@ -194,6 +202,7 @@ namespace Graph {
 								pixels[0] = pack_rgb(r, g, b);
 					 }
 					 
+/***///				 public:
 					 // this function really needs faaast blitting
 					 friend	void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort, 
 										  const ushort, const ushort);

@@ -40,9 +40,10 @@ void critical_error(const char* str) {
 		  Pic* p = new Pic;
 		  p->set_size(g_gr.get_xres(), g_gr.get_yres());
 		  
-		  p->set_pixel(g_gr.get_xres()-1, g_gr.get_yres()-1, 0, 0, 0);
+/*		  p->set_pixel(g_gr.get_xres()-1, g_gr.get_yres()-1, 0, 0, 0);
 		  for(uint i=g_gr.get_xres()*g_gr.get_yres()-2; i--; ) 
-					 p->set_ppixel(0,0,0);
+					 p->set_ppixel(0,0,0);*/
+		  p->clear_all();
 		  win->set_new_bg(p);		 
 
 		  // Create the different areas

@@ -25,7 +25,71 @@
 #include <string.h>
 #endif
 
-namespace Graph {
+// TEMP
+inline uint bright_up_clr2(const uint clr, const int factor)
+{
+	if (factor == 0)
+		return clr;
+	int r = ((clr << 3) >> 11) & 0xFF;
+	int g = ((clr << 2) >>  5) & 0xFF;
+	int b =  (clr << 3)        & 0xFF;
+	if (factor > 0)
+	{
+		r = (r+factor) > 255 ? 255 : r+factor;
+		g = (g+factor) > 255 ? 255 : g+factor;
+		b = (b+factor) > 255 ? 255 : b+factor;
+	}
+	else
+	{
+		r = (r+factor) < 0 ? 0 : r+factor;
+		g = (g+factor) < 0 ? 0 : g+factor;
+		b = (b+factor) < 0 ? 0 : b+factor;
+	}
+	return Graph::pack_rgb(r, g, b);
+}
+
+namespace Graph
+{
+	void Pic::draw_rect(uint rx, uint ry, uint rw, uint rh, uint color)
+	{
+		rw += rx;
+		rh += ry;
+		for (uint x=rx+1; x<rw-1; x++)
+		{
+			pixels[w*ry + x] = color;
+			pixels[w*(rh-1) + x] = color;
+		}
+		for (uint y=ry; y<rh; y++)
+		{
+			pixels[y*w + rx] = color;
+			pixels[y*w + rw-1] = color;
+		}
+	}
+
+	void Pic::fill_rect(uint rx, uint ry, uint rw, uint rh, uint color)
+	{
+		rw += rx;
+		rh += ry;
+		for (uint y=ry; y<rh; y++)
+		{
+			set_pixel(rx, y, color);
+			for (uint x=rx+1; x<rw; x++)
+				set_npixel((ushort)color);
+		}
+	}
+
+	void Pic::brighten_rect(uint rx, uint ry, uint rw, uint rh, int factor)
+	{
+		rw += rx;
+		rh += ry;
+		for (uint y=ry; y<rh; y++)
+		{
+			uint p = y * w + rx;
+			for (uint x=rx; x<rw; x++)
+				pixels[p++] = bright_up_clr(pixels[p], factor);
+		}
+	}
+
 		  /** Pic::Pic(const Pic& p)
 			*
 			* Copy constructor. Slow and simple
