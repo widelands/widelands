@@ -717,6 +717,10 @@ void NetClient::disconnect ()
     for (i=1;i<=MAX_PLAYERS;i++)
 	if (game->get_player(i)!=0 && game->get_player(i)->get_type()==Player::playerRemote)
 	    disconnect_player (i);
+    
+    // Since we are now independent of the host, we are not bound to network
+    // time anymore (nor are we receiving NETCMD_ADVANCETIME packets).
+    net_game_time=INT_MAX;
 }
 
 /*** class Serializer ***/
