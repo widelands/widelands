@@ -1,3 +1,4 @@
+# anim="bushdefaultoverritetest_??.bmp"
 type="boring"
 life_time=0
 
@@ -7,6 +8,7 @@ clrkey_b=255
 shadowclr_r=0
 shadowclr_g=0
 shadowclr_b=0
-hot_spot_x=19
-hot_spot_y=28
+hot_spot_x=11
+hot_spot_y=14
+
 

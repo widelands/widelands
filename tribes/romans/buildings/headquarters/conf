@@ -11,8 +11,8 @@ conquers=9		# is this correct?
 
 [idle]
 pics=hauptquartier_i_??.bmp  # ???
-hot_spot_x=37
-hot_spot_y=52
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
+hot_spot_x=81
+hot_spot_y=115
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
