@@ -50,14 +50,19 @@ class ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram*> ProgramMap;
 
 public:
-	ProductionSite_Descr(Tribe_Descr* tribe, const char* name);
+   struct Worker_Info {
+      std::string name;
+      int how_many;
+   };
+	
+   ProductionSite_Descr(Tribe_Descr* tribe, const char* name);
 	virtual ~ProductionSite_Descr();
 
 	virtual void parse(const char* directory, Profile* prof,
 		const EncodeData* encdata);
 	virtual Building* create_object();
 
-	std::string get_worker_name() const { return m_worker_name; }
+   std::vector<Worker_Info>* get_workers() { return &m_workers; }
 	bool is_output(std::string name) const {
 		return m_output.find(name) != m_output.end();
 	}
@@ -67,8 +72,9 @@ public:
 
 	virtual bool is_only_production_site(void) { return true; }
 
+
 private:
-	std::string           m_worker_name; // name of worker type
+	std::vector<Worker_Info>   m_workers; // name of worker type
 	std::vector<Input>    m_inputs;
 	std::set<std::string> m_output;      // output wares type names
 	ProgramMap            m_programs;
@@ -110,7 +116,7 @@ private:
 		uint                     flags;		// pfXXX flags
 	};
 
-	void request_worker(Game* g);
+	void request_worker(Game* g, const char* worker );
 	static void request_worker_callback(Game* g, Request* rq, int ware,
 		Worker* w, void* data);
 
@@ -122,10 +128,11 @@ private:
 	void add_statistics_value(bool val);
 
 	void calc_statistics();
+   bool can_start_working(void);
 
 private:
-	Request* m_worker_request;
-	Worker*  m_worker;
+   std::vector<Request*> m_worker_requests;
+   std::vector<Worker*>  m_workers;
 
 	int m_fetchfromflag; // # of items to fetch from flag
 

@@ -383,11 +383,35 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 
 	// Are we only a production site?
 	// If not, we might not have a worker
+   std::string workerstr="";
 	if (is_only_production_site())
-		m_worker_name = sglobal->get_safe_string("worker");
+		workerstr = sglobal->get_safe_string("worker");
 	else
-		m_worker_name = sglobal->get_string("worker", "");
+		workerstr = sglobal->get_string("worker", "");
 
+   std::vector<std::string> workers;
+   split_string(workerstr, &workers, ",");
+   uint i;
+   std::vector<std::string> amounts;
+   for(i=0; i<workers.size(); i++) {
+      amounts.resize(0);
+      remove_spaces(&workers[i]);
+      split_string(workers[i],&amounts,"*");
+      uint j;
+      for(j=0; j<amounts.size(); j++) 
+         remove_spaces(&amounts[j]);
+
+      int amount=1;
+      if(amounts.size()==2) {
+         char *endp;
+			amount = strtol(amounts[1].c_str(), &endp, 0);
+			if (endp && *endp)
+				throw wexception("Bad amount in worker line: %s", amounts[1].c_str());
+      }
+      Worker_Info m= { amounts[0], amount };
+      m_workers.push_back(m);
+   }
+   
 	// Get programs
 	while(sglobal->get_next_string("program", &string)) {
 		ProductionProgram* program = 0;
@@ -454,9 +478,6 @@ ProductionSite::ProductionSite
 ProductionSite::ProductionSite(ProductionSite_Descr* descr)
 	: Building(descr), m_statistics(STATISTICS_VECTOR_LENGTH, false)
 {
-	m_worker = 0;
-	m_worker_request = 0;
-
 	m_fetchfromflag = 0;
 
 	m_program_timer = false;
@@ -483,9 +504,15 @@ Display whether we're occupied.
 */
 std::string ProductionSite::get_statistics_string()
 {
-	if (!m_worker)
+   if (!m_workers.size())
 		return "(not occupied)";
-	if (m_stop)
+   else if(m_worker_requests.size()) {
+      char buf[1000];
+      sprintf(buf, "Waiting for %i workers!", m_worker_requests.size());
+      return buf;
+   }
+	
+   if (m_stop)
 		return "(stopped)";
 	if (m_statistics_changed)
 		calc_statistics();
@@ -561,8 +588,14 @@ void ProductionSite::init(Editor_Game_Base* g)
 
 	if (g->is_game()) {
 		// Request worker
-		if (!m_worker)
-			request_worker((Game*)g);
+		if (!m_workers.size()) {
+         std::vector<ProductionSite_Descr::Worker_Info>* info=get_descr()->get_workers();
+         uint i;
+         int j;
+         for(i=0; i<info->size(); i++) 
+            for(j=0; j< ((*info)[i]).how_many; j++) 
+               request_worker((Game*)g, ((*info)[i]).name.c_str());
+      }
 
 		// Init input ware queues
 		const std::vector<Input>* inputs =
@@ -599,9 +632,11 @@ void ProductionSite::set_economy(Economy* e)
 	}
 
 	Building::set_economy(e);
-	if (m_worker_request)
-		m_worker_request->set_economy(e);
-
+	if (m_worker_requests.size()) {
+      uint i=0;
+      for(i=0; i<m_worker_requests.size(); i++) 
+         m_worker_requests[i]->set_economy(e);
+   }
 	if (e) {
 		for(i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->add_to_economy(e);
@@ -618,18 +653,24 @@ Cleanup after a production site is removed
 void ProductionSite::cleanup(Editor_Game_Base* g)
 {
 	// Release worker
-	if (m_worker_request) {
-		delete m_worker_request;
-		m_worker_request = 0;
-	}
+	if (m_worker_requests.size()) {
+      uint i=0;
+      for(i=0; i<m_worker_requests.size(); i++) {
+		delete m_worker_requests[i];
+		m_worker_requests[i]=0;
+      }
+   m_workers.resize(0);
+   }
+   
+	if (m_workers.size()) {
+      uint i=0;
+      for(i=0; i<m_workers.size(); i++) {
+         Worker* w = m_workers[i];
 
-	if (m_worker) {
-		Worker* w = m_worker;
-
-		m_worker = 0;
-		w->set_location(0);
-	}
-
+         m_workers[i] = 0;
+         w->set_location(0);
+      }
+   }
 
 	// Cleanup the wares queues
 	for(uint i = 0; i < m_input_queues.size(); i++) {
@@ -652,10 +693,15 @@ Intercept remove_worker() calls to unassign our worker, if necessary.
 */
 void ProductionSite::remove_worker(Worker* w)
 {
-	if (m_worker == w) {
-		m_worker = 0;
-		request_worker((Game*)get_owner()->get_game());
-	}
+   uint i=0;
+   for(i=0; i<m_workers.size(); i++) {
+      if (m_workers[i] == w) {
+         m_workers[i] = 0;
+         request_worker((Game*)get_owner()->get_game(), w->get_name().c_str());
+         m_workers.erase(m_workers.begin() + i);
+         break;
+      }
+   }
 
 	Building::remove_worker(w);
 }
@@ -665,20 +711,16 @@ void ProductionSite::remove_worker(Worker* w)
 ===============
 ProductionSite::request_worker
 
-Issue the worker request
+Issue the worker requests  
 ===============
 */
-void ProductionSite::request_worker(Game* g)
+void ProductionSite::request_worker(Game* g, const char* worker)
 {
-	assert(!m_worker);
-	assert(!m_worker_request);
-	// no worker for this house. it's not a productionsite only
-	if (!get_descr()->get_worker_name().size()) return;
+   assert(worker);
 
-	int wareid = g->get_safe_ware_id(get_descr()->get_worker_name().c_str());
+   int wareid = g->get_safe_ware_id(worker);
 
-	m_worker_request =
-		new Request(this, wareid, &ProductionSite::request_worker_callback, this);
+   m_worker_requests.push_back(new Request(this, wareid, &ProductionSite::request_worker_callback, this));
 }
 
 
@@ -696,14 +738,29 @@ void ProductionSite::request_worker_callback(Game* g, Request* rq, int ware,
 
 	assert(w);
 	assert(w->get_location(g) == psite);
-	assert(rq == psite->m_worker_request);
 
-	psite->m_worker = w;
+   uint i=0;
+   for(i=0; i<psite->m_worker_requests.size(); i++) 
+      if(rq==psite->m_worker_requests[i]) break; 
+  
+   psite->m_worker_requests.erase(psite->m_worker_requests.begin() + i);
+
+	psite->m_workers.push_back(w);
 
 	delete rq;
-	psite->m_worker_request = 0;
+     
+   bool set_worker_idle=true;
+   if(psite->can_start_working() && w==psite->m_workers[0])
+      set_worker_idle=false;
 
-	w->start_task_buildingwork(g);
+   if(set_worker_idle)
+      w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
+
+   if(psite->can_start_working()) {
+      if(w!=psite->m_workers[0])
+         psite->m_workers[0]->send_signal(g, "wakeup");
+      psite->m_workers[0]->start_task_buildingwork(g);
+   }
 }
 
 
@@ -791,7 +848,7 @@ void ProductionSite::program_act(Game* g)
 		case ProductionAction::actWorker:
 			molog("  Worker(%s)\n", action->sparam1.c_str());
 
-			m_worker->update_task_buildingwork(g);
+			m_workers[0]->update_task_buildingwork(g);  // Always main worker is doing stuff
 			return;
 
 		case ProductionAction::actConsume:
@@ -857,11 +914,11 @@ void ProductionSite::program_act(Game* g)
 
 			WareInstance* item = new WareInstance(wareid);
 			item->init(g);
-			m_worker->set_carried_item(g,item);
+			m_workers[0]->set_carried_item(g,item);
 
 			// get the worker to drop the item off
 			// get_building_work() will advance the program
-			m_worker->update_task_buildingwork(g);
+			m_workers[0]->update_task_buildingwork(g);
 			return;
 		}
 
@@ -985,12 +1042,23 @@ bool ProductionSite::fetch_from_flag(Game* g)
 {
 	m_fetchfromflag++;
 
-	if (m_worker)
-		m_worker->update_task_buildingwork(g);
+	if (m_workers.size())
+		m_workers[0]->update_task_buildingwork(g);
 
 	return true;
 }
 
+/*
+ * returns true if this production site could
+ * theoretically start working (if all workers 
+ * are present)
+ */
+bool ProductionSite::can_start_working(void) {
+   if(m_worker_requests.size()) 
+      return false;
+   
+   return true;
+}
 
 /*
 ===============
@@ -1002,7 +1070,7 @@ Note: we assume that the worker is inside the building when this is called.
 */
 bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 {
-	assert(w == m_worker);
+	assert(w == m_workers[0]);
 
 	State* state = get_current_program();
 

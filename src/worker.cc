@@ -669,7 +669,9 @@ bool Worker::run_findspace(Game* g, State* state, const WorkerAction* act)
 	
    CheckStepDefault cstep(get_movecaps());
 
-   int res=w->get_resource(act->sparam1.c_str());
+   int res=-1;
+   if(act->sparam1.size()) 
+     res=w->get_resource(act->sparam1.c_str());
 
    int retval=0;
    if(res!=-1) {
