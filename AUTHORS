@@ -8,7 +8,7 @@ Project Admins:
   Holger Rapp <SirVer@gmx.de>
   Nicolai Haehnle <prefect@rtts.org>
   
-Project Members, Programming:
+Project Core Members, Programming:
    Florian Bluemel <sintflut@gmx.net>
    Holger Rapp <SirVer@gmx.de>
    Nicolai Haehnle <prefect@rtts.org>
@@ -16,7 +16,7 @@ Project Members, Programming:
    Stefan Boettner <stefanb@upb.de>
    Tron <dertron@users.sourceforge.net>
    
-Project Members, Graphics:
+Project Core Members, Graphics:
    Albert Jasiowka <hackbird@t-online.de>
    Holger Rapp <SirVer@gmx.de>
    Marz <margodofwar_au@yahoo.com.au>
@@ -27,7 +27,7 @@ Packagers:
    Debian - Martin Quinson <martin.quinson@tuxfamily.org> 
    Mac OS X - Philipp Engelhard <drmorden@users.sourceforge.net>
 
-Contributors, Graphics:
+Graphics:
    Delia <delia@subsigillo.de>
    Florian Neuerburg
    Jerome Rosinski 
@@ -35,11 +35,15 @@ Contributors, Graphics:
    Odin Omdal <odin.omdal+widelands@gmail.com> 
    Wolfgang Weidner 
 
-Contributors, Programming:
+Programming:
    Florian Falkner <falkner@contwise.com>
    Martin Quinson <martin.quinson@tuxfamily.org>
    Raul Ferriz 
    Willem Jan Palenstijn
 
-Contributors, Maps:
+Maps:
    Florian Falkner <falkner@contwise.com>
+
+Missions:
+   Michal Szopa
+
