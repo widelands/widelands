@@ -68,7 +68,7 @@
 #endif //WIN32
 
 // define current version
-#define VERSION "build-4"
+#define VERSION "build-5"
 
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b,c) __attribute__ (( __format__ (__printf__,b,c) ))
@@ -93,7 +93,7 @@ typedef unsigned long ulong;
 struct Coords {
    int x;
    int y;
-	
+
 	inline Coords() { }
 	inline Coords(int nx, int ny) : x(nx), y(ny) { }
 };
