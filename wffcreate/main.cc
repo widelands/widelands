@@ -18,15 +18,34 @@
  */
 
 
+#ifdef WIN32
+// ok. just a little hack to avoid using msvcrt.dll
+// the point is: if main is declared after including sdl, sdl will use its
+// own main function. if it does not, we will not have to link msvcrt.lib
+// (that is, compile singlethreaded and not multithreaded dll)
+// sadly, graphic.h has to include sdl.h, so at the moment this is the only
+// way to avoid using that ugly dll
+inline int g_main(int argn, char** argc);
+int main(int argn, char** argc)
+{
+	return g_main(argn, argc);
+}
+#else
+#define g_main main
+#endif
+
+#ifdef WIN32
+#include <iostream.h>
+#else
 #include <iostream>
+#endif
 #include <stdio.h>
 #include <string.h>
-#include "font.h"
-#include "myfile.h"
-#include "graphic.h"
+#include "../src/font.h"
+#include "../src/myfile.h"
+#include "../src/graphic.h"
 
-int main(int argn, char** argc) {
-
+inline int g_main(int argn, char** argc) {
 		  if(argn != 5) {
 					 cout << "wffcreate <fontname> <clrkey r> <clrkey g> <clrkey b>" << endl;
 					 cout << "This will create the file <fontname>. you can savly rename it." << WLFF_SUFFIX << endl;
