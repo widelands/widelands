@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2004-2005 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,8 @@
 enum {
 	NETCMD_UNUSED=0,
 	NETCMD_HELLO,
+	NETCMD_DISCONNECT,
+	NETCMD_DISCONNECT_PLAYER,
 	NETCMD_SELECTMAP,
 	NETCMD_PLAYERINFO,
 	NETCMD_START,
@@ -133,6 +135,13 @@ uint NetGame::get_max_frametime ()
 	assert (game_time<=net_game_time);
 
 	return net_game_time - game_time;
+}
+
+void NetGame::disconnect_player (int plnum)
+{
+	printf ("Player %d has been disconnected\n", plnum);
+	
+	// TODO: Let the computer take over this player
 }
 
 /*** class NetHost ***/
@@ -296,8 +305,28 @@ void NetHost::handle_network ()
 	// check if we hear anything from our peers
 	while (SDLNet_CheckSockets(sockset, 0) > 0)
 		for (i=0;i<clients.size();i++)
-			if (SDLNet_SocketReady(clients[i].sock))
-				clients[i].deserializer->read_packet (clients[i].sock);
+			if (SDLNet_SocketReady(clients[i].sock)) {
+				if (!clients[i].deserializer->read_packet(clients[i].sock))
+				    continue;
+				
+				// the network connection to this player has been closed
+				SDLNet_TCP_DelSocket (sockset, clients[i].sock);
+				SDLNet_TCP_Close (clients[i].sock);
+				
+				disconnect_player (clients[i].playernum);
+
+				serializer->begin_packet ();
+				serializer->putchar (NETCMD_DISCONNECT_PLAYER);
+				serializer->putchar (clients[i].playernum);
+				serializer->end_packet ();
+				
+				clients.erase (clients.begin()+i);
+				
+				for (i=0;i<clients.size();i++)
+				    serializer->send (clients[i].sock);
+				
+				break;
+			}
 
 	// if so, deserialize player commands
 	for (i=0;i<clients.size();i++)
@@ -326,14 +355,15 @@ void NetHost::handle_network ()
 			    case NETCMD_CHATMESSAGE:
 				{
 					wchar_t buffer[256];
-					uchar plrnum =  clients[i].deserializer->getchar();
-               clients[i].deserializer->getwstr (buffer, 256);
+					Chat_Message msg;
+//					uchar plrnum =  clients[i].deserializer->getchar();
+
+					clients[i].deserializer->getwstr (buffer, 256);
                
-               Chat_Message m;
-               m.msg = buffer;
-               m.plrnum = plrnum;
+					msg.msg=buffer;
+					msg.plrnum=clients[i].playernum;
                
-					send_chat_message_int (m);
+					send_chat_message_int (msg);
 				}
 				break;
 			    default:
@@ -404,7 +434,7 @@ void NetHost::send_chat_message_int (const Chat_Message msg)
 	
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_CHATMESSAGE);
-	serializer->putchar(msg.plrnum);
+	serializer->putchar (msg.plrnum);
 	serializer->putwstr (msg.msg.c_str());
 	serializer->end_packet ();
 	
@@ -456,7 +486,20 @@ void NetHost::send_player_command (PlayerCommand* cmd)
 
 void NetHost::send_chat_message (Chat_Message msg)
 {
+	// FIXME: send_chat_message should take a string rather than a Chat_Message
+	msg.plrnum=playernum;
+	
 	send_chat_message_int (msg);
+}
+
+void NetHost::send_game_message (const wchar_t* msg)
+{
+	Chat_Message cm;
+	
+	cm.plrnum=0;	// not a player but 'the game'
+	cm.msg=msg;
+	
+	send_chat_message_int (cm);
 }
 
 void NetHost::syncreport (uint sync)
@@ -527,11 +570,28 @@ void NetClient::handle_network ()
 	NetGGZ::ref()->data();
 
 	// check if data is available on the socket
-	while (SDLNet_CheckSockets(sockset, 0) > 0)
-		deserializer->read_packet (sock);
+	while (SDLNet_CheckSockets(sockset, 0) > 0) {
+		if (!deserializer->read_packet(sock))
+		    continue;
+		
+		// lost network connection
+		SDLNet_TCP_DelSocket (sockset, sock);
+		SDLNet_TCP_Close (sock);
+		
+		disconnect ();
+	}
 	
 	while (deserializer->avail())
 	        switch (deserializer->getchar()) {
+		    case NETCMD_DISCONNECT:
+			SDLNet_TCP_DelSocket (sockset, sock);
+			SDLNet_TCP_Close (sock);
+			
+			disconnect ();
+			break;
+		    case NETCMD_DISCONNECT_PLAYER:
+			disconnect_player (deserializer->getchar());
+			break;
 		    case NETCMD_SELECTMAP:
 			{
 				char buffer[256];
@@ -588,13 +648,15 @@ void NetClient::handle_network ()
 		    case NETCMD_CHATMESSAGE:
 			{
 				wchar_t buffer[256];
-			   char player = deserializer->getchar();
-            
-				deserializer->getwstr (buffer, 256);
-				Chat_Message t;
-            t.plrnum = player;
-            t.msg = buffer;
-            chat_msg_queue.push (t);
+				uchar player;
+				Chat_Message msg;
+				
+				player=deserializer->getchar();
+            			deserializer->getwstr (buffer, 256);
+
+        			msg.plrnum=player;
+        			msg.msg=buffer;
+        			chat_msg_queue.push (msg);
 			}
 			break;
 		    default:
@@ -616,7 +678,11 @@ void NetClient::send_chat_message (Chat_Message msg)
 {
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_CHATMESSAGE);
-	serializer->putchar(msg.plrnum);
+
+// don't send player number because we cannot send a chat message
+// from someone else (other than us)	
+//	serializer->putchar(msg.plrnum);
+
 	serializer->putwstr (msg.msg.c_str());
 	serializer->end_packet ();
 	serializer->send (sock);
@@ -629,6 +695,15 @@ void NetClient::syncreport (uint sync)
 	serializer->putlong (sync);
 	serializer->end_packet ();
 	serializer->send (sock);
+}
+
+void NetClient::disconnect ()
+{
+    int i;
+    
+    for (i=1;i<=MAX_PLAYERS;i++)
+	if (game->get_player(i)!=0 && game->get_player(i)->get_type()==Player::playerRemote)
+	    disconnect_player (i);
 }
 
 /*** class Serializer ***/
@@ -728,14 +803,14 @@ Deserializer::~Deserializer ()
 {
 }
 
-void Deserializer::read_packet (TCPsocket sock)
+int Deserializer::read_packet (TCPsocket sock)
 {
 	unsigned char buffer[256];
 	int length,amount,i;
 	
 	// read packet length (including length field)
 	if (SDLNet_TCP_Recv(sock, buffer, 2) < 2)
-		throw wexception("Error reading from socket");
+		return -1;
 
 	length=(buffer[0]<<8) | buffer[1];
 	length-=2;	// subtract 2 bytes for the length field
@@ -753,6 +828,8 @@ void Deserializer::read_packet (TCPsocket sock)
 		
 		length-=amount;
 	}
+	
+	return 0;
 }
 
 wchar_t Deserializer::getwchar ()
@@ -821,7 +898,7 @@ void Cmd_NetCheckSync::execute (Game* g)
 void Cmd_NetCheckSync::Write(FileWrite* file, Editor_Game_Base* egb, Widelands_Map_Map_Object_Saver* sv)
 {
 	// this command should not be written to a file
-	throw wexception("Cdm_NetCheckSync is not supposed to be written to a file");
+	throw wexception("Cmd_NetCheckSync is not supposed to be written to a file");
 }
 
 void Cmd_NetCheckSync::Read(FileRead* file, Editor_Game_Base* egb, Widelands_Map_Map_Object_Loader* ld)

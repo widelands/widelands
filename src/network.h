@@ -50,16 +50,14 @@ class LAN_Game_Promoter;
 
 class NetGame {
     public:
+	struct Chat_Message {
+		uint plrnum;
+		std::wstring msg;
+	};
+	
 	NetGame ();
 	virtual ~NetGame ();
 
-    public:
-   struct Chat_Message {
-      uint plrnum;
-      std::wstring msg;
-   };
-   
-	
 	int get_playernum () { return playernum; }
 	
 	bool get_players_changed ()
@@ -92,11 +90,13 @@ class NetGame {
 	virtual void send_chat_message (Chat_Message)=0;
 	
 	bool have_chat_message();
-   Chat_Message get_chat_message();
+	Chat_Message get_chat_message();
 	
 	virtual void syncreport (uint)=0;
 
-       protected:
+    protected:
+	void disconnect_player (int);
+	
 	Game*		game;
 	
 	int		playernum;
@@ -130,6 +130,7 @@ class NetHost:public NetGame {
 	virtual void syncreport (uint);
 
     private:
+	void send_game_message (const wchar_t*);
 	void send_chat_message_int ( const Chat_Message );
 	void send_player_info ();
 	void update_network_delay ();
@@ -178,6 +179,8 @@ class NetClient:public NetGame {
 	virtual void syncreport (uint);
 
     private:
+	void disconnect ();
+	
 	TCPsocket			sock;
 	SDLNet_SocketSet		sockset;
 
@@ -228,7 +231,7 @@ class Deserializer {
 	Deserializer ();
 	~Deserializer ();
 	
-	void read_packet (TCPsocket);
+	int read_packet (TCPsocket);
 	
 	bool avail ()
 	{ return !queue.empty(); }
