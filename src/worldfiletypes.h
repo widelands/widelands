@@ -24,10 +24,11 @@
 WordFile
 {
 	WordFileHeader	h;
-	ResourceDesc	r[h.nResources];
-	TerrainType		t[h.nTerrains];
-	BobDesc			b[h.nBobs];
-	PictureInfo		p[h.nPictures];
+	ResourceDesc	r[h.resources];
+	TerrainType		t[h.terrains];
+	BobDesc			b[h.bobs];
+	PictureInfo		p[h.pictures];
+	Anim			a[h.anims];
 }
 */
 
@@ -49,6 +50,7 @@ struct WorldFileHeader
 	uint terrains;
 	uint bobs;
 	uint pictures;
+	uint anims;
 };
 
 struct TerrainType

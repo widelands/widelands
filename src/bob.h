@@ -20,9 +20,10 @@
 #define __BOB_H
 
 #include "worldfiletypes.h"
+#include "graphic.h"
 
 class World;
-class Pic;
+//class Pic;
 
 /** class Bob
   *

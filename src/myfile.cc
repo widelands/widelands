@@ -149,7 +149,7 @@ void Binary_file::close(void) {
 		  }
 }
 
-/** Binary_file::read(char* buf, int size) 
+/** Binary_file::read(void* buf, int size) 
  *
  * Reads some bytes from the file into the buf
  *
@@ -158,13 +158,13 @@ void Binary_file::close(void) {
  *
  * Returns: bytes read or -1
  */
-int Binary_file::read(char* buf, int size) {
+int Binary_file::read(void* buf, int size) {
 		  if(get_state() != OPEN) return -1;
 
 		  set_state(READS);
 		  
 		  int nread;
-		  nread=fread(buf, 1, size, f);
+		  nread=fread((char*)buf, 1, size, f);
 
 		  set_state(OPEN);
 
@@ -173,7 +173,7 @@ int Binary_file::read(char* buf, int size) {
 		  return nread;
 }
 
-/** Binary_file::write(char* buf, int size) 
+/** Binary_file::write(void* buf, int size) 
  *
  * Writes some bytes into the file from buf
  *
@@ -182,14 +182,14 @@ int Binary_file::read(char* buf, int size) {
  *
  * Returns: bytes written or -1
  */
-int Binary_file::write(char* buf, int size) {
+int Binary_file::write(void* buf, int size) {
 		  if(get_state() != OPEN) return -1;
 
 		  set_state(WRITES);
 
 		  int nwritten;
 
-		  nwritten=fwrite(buf, 1, size, f);
+		  nwritten=fwrite((char*)buf, 1, size, f);
 
 		  set_state(OPEN);
 
@@ -270,7 +270,7 @@ void Ascii_file::close(void) {
 		  }
 }
 
-/** Ascii_file::read(char* buf, int size) 
+/** Ascii_file::read(void* buf, int size) 
  *
  * Reads some bytes from the file into the buf
  *
@@ -279,13 +279,13 @@ void Ascii_file::close(void) {
  *
  * Returns: bytes read or -1
  */
-int Ascii_file::read(char* buf, int size) {
+int Ascii_file::read(void* buf, int size) {
 		  if(get_state() != OPEN) return -1;
 
 		  set_state(READS);
 		  
 		  int nread;
-		  nread=fread(buf, 1, size, f);
+		  nread=fread((char*)buf, 1, size, f);
 
 		  set_state(OPEN);
 
@@ -294,7 +294,7 @@ int Ascii_file::read(char* buf, int size) {
 		  return nread;
 }
 
-/** Ascii_file::write(char* buf, int size) 
+/** Ascii_file::write(void* buf, int size) 
  *
  * Writes some bytes into the file from buf
  *
@@ -303,14 +303,14 @@ int Ascii_file::read(char* buf, int size) {
  *
  * Returns: bytes written or -1
  */
-int Ascii_file::write(char* buf, int size) {
+int Ascii_file::write(void* buf, int size) {
 		  if(get_state() != OPEN) return -1;
 
 		  set_state(WRITES);
 
 		  int nwritten;
 
-		  nwritten=fwrite(buf, 1, size, f);
+		  nwritten=fwrite((char*)buf, 1, size, f);
 
 		  set_state(OPEN);
 

@@ -20,9 +20,11 @@
 #define __WORLD_H
 
 #include "mytypes.h"
+#include "graphic.h"
 
+class Binary_file;
 class Bob;
-class Pic;
+//class Pic;
 struct Anim;
 struct BobDesc;
 
@@ -40,6 +42,12 @@ class World
 	uint		animCount;
 	uint		bobCount;
 	uint		textureCount;
+	uint		resourceCount;
+	uint		terrainCount;
+	void		read_header(Binary_file*);
+	void		read_bobs(Binary_file*);
+	void		read_textures(Binary_file*);
+	void		read_anims(Binary_file*);
 public:
 				World(const char* file);
 				~World();
