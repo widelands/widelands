@@ -1226,13 +1226,16 @@ uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 		id = find_free_picture();
 		pic = &m_pictures[id];
 
-		pic->mod = 0; // will be filled in by caller
+
+      pic->mod = 0; // will be filled in by caller
 		pic->u.fname = strdup(fname);
 		pic->bitmap.pixels = (uint*)malloc(cv->w*cv->h*4);
 		pic->bitmap.w = cv->w;
 		pic->bitmap.h = cv->h;
 		pic->bitmap.pitch = cv->w;
 		pic->bitmap.hasclrkey = false;
+      
+      SDL_LockSurface(cv);
 
 		for(int y = 0; y < cv->h; y++) {
 			uint* src = (uint*)((Uint8*)cv->pixels + y*cv->pitch);
@@ -1241,6 +1244,8 @@ uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 			for(int x = 0; x < cv->w; x++)
 				dst[x] = src[x] & 0x00FFFFFF;
 		}
+
+      SDL_UnlockSurface(cv);
 
 		SDL_FreeSurface(cv);
 		SDL_FreeSurface(bmp);

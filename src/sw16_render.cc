@@ -543,12 +543,13 @@ void AnimationGfx::encode(AnimFrame* frame, SDL_Surface* bmp, const EncodeData* 
 
 	try
 	{
-		surf = SDL_DisplayFormat(bmp);
+      surf = SDL_DisplayFormat(bmp);
 		data = (ushort*)malloc(surf->w*surf->h*sizeof(ushort)*2);
 
 		assert(surf->w == frame->width && surf->h == frame->height);
 
 		out = 0;
+		SDL_LockSurface(surf);
 
 		for(int y = 0; y < frame->height; y++)
 		{
@@ -608,6 +609,8 @@ void AnimationGfx::encode(AnimFrame* frame, SDL_Surface* bmp, const EncodeData* 
 
 		free(data),
 		data = 0;
+		
+      SDL_UnlockSurface(surf);
 
 		SDL_FreeSurface(surf);
 		surf = 0;

@@ -545,6 +545,8 @@ void AnimationGfx::encode(AnimFrame* frame, SDL_Surface* bmp, const EncodeData* 
 
 		out = 0;
 
+      SDL_LockSurface(surf);
+
 		for(int y = 0; y < frame->height; y++)
 		{
 			uint* pixels = (uint*)((Uint8*)surf->pixels + y*surf->pitch);
@@ -606,6 +608,7 @@ void AnimationGfx::encode(AnimFrame* frame, SDL_Surface* bmp, const EncodeData* 
 		free(data),
 		data = 0;
 
+      SDL_UnlockSurface(surf);
 		SDL_FreeSurface(surf);
 		surf = 0;
 	} catch(...) {
