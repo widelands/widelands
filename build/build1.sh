@@ -4,8 +4,11 @@ echo Build creation, step 1
 echo
 echo Retrieving the latest and greatest from CVS
 
-#cvs -z3 -d:pserver:anonymous@cvs.widelands.sourceforge.net:/cvsroot/widelands export -D now widelands
-cvs -z3 -d:pserver:anonymous@cvs.widelands.sourceforge.net:/cvsroot/widelands co -dPR widelands
+if [ -d widelands ]; then
+   cvs update -dPR
+else
+   cvs -z3 -d:pserver:anonymous@cvs.widelands.sourceforge.net:/cvsroot/widelands export -D now widelands
+fi
 
 echo
 echo Creating source and binary package file lists
@@ -40,7 +43,7 @@ echo
 echo Compiling the source now
 
 cd widelands
-make
+make clean all
 cd ..
 
 cat <<EOF
