@@ -51,19 +51,11 @@ int NeedWares_List::read(FileRead* f)
 // 
 // Down here: Descriptions
 
-bool Building_Descr::has_attribute(uint attrib)
-{
-	switch(attrib) {
-	case Map_Object::ROBUST:
-	case Map_Object::UNPASSABLE:
-		return true;
-	}
-	
-	return false; // no need to call parent has_attribute()
-}
-
 int Building_Descr::read(FileRead *f)
 {
+	add_attribute(Map_Object::ROBUST);
+	add_attribute(Map_Object::UNPASSABLE);
+
    memcpy(name, f->Data(sizeof(name)), sizeof(name));
 
    uchar temp;
@@ -154,7 +146,8 @@ Building helper functions
 
 ==============================================================================
 */
-void conquer_area(uchar player, Map* map, int x, int y, ushort area) {
+void conquer_area(uchar player, Map* map, int x, int y, ushort area)
+{
    Map_Region m(x, y, area, map);
    Field* f;
    while((f=m.next())) {
@@ -163,9 +156,12 @@ void conquer_area(uchar player, Map* map, int x, int y, ushort area) {
          f->set_owned_by(player);
          continue;
       }
+		
       // TODO: add support here what to do if some fields are already
       // occupied by another player
-      cerr << "warning: already occupied field is claimed by another user!" << endl;
+		// Probably the best thing to just don't grab it. Players should fight
+		// for their land.
+      //cerr << "warning: already occupied field is claimed by another user!" << endl;
    }
 }
 

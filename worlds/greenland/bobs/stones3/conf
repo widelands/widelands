@@ -2,6 +2,8 @@ type="diminishing"
 ends_in="stones2"
 stock=2
 
+size=big
+
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255

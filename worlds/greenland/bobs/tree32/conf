@@ -2,6 +2,8 @@ type="diminishing"
 ends_in=""
 stock=1
 
+size=normal
+
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255

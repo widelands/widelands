@@ -191,7 +191,6 @@ bool Game::run(void)
       // TEMP: player number
 	   ipl = new Interactive_Player(this, 1);
 	  
-
 		// Prepare the players (i.e. place HQs)
 		for(int i = 1; i <= map->get_nplayers(); i++) {
 			Player* player = get_player(i);

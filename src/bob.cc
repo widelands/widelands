@@ -303,6 +303,35 @@ void Logic_Bob_Descr::read(const char *directory, Section *s)
 	
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
    anim.parse(directory, s, picname);
+
+	const char *string;
+	 
+	string = s->get_string("size", 0);
+	if (string) {
+		if (has_attribute(Map_Object::MOVABLE))
+			throw wexception("Movable bob cannot have a size");
+	
+		if (!strcasecmp(string, "volatile") || !strcasecmp(string, "none"))
+		{
+			// not robust
+		}
+		else if (!strcasecmp(string, "small"))
+		{
+			add_attribute(Map_Object::ROBUST);
+			add_attribute(Map_Object::SMALL);
+		}
+		else if (!strcasecmp(string, "normal") || !strcasecmp(string, "medium"))
+		{
+			add_attribute(Map_Object::ROBUST);
+		}
+		else if (!strcasecmp(string, "big"))
+		{
+			add_attribute(Map_Object::ROBUST);
+			add_attribute(Map_Object::BIG);
+		}
+		else
+			throw wexception("Unknown size '%s'. Possible values: none, small, normal, big", string);
+	}
 }
 
 /*
@@ -324,10 +353,10 @@ class Diminishing_Bob_Descr : public Logic_Bob_Descr {
       virtual void read(const char *directory, Section *s);
       Map_Object *create_object();
 
-   private:
-      Logic_Bob_Descr* ends_in;
-      ushort stock;
-      uchar occupies;
+	private:
+		Logic_Bob_Descr* ends_in;
+		ushort stock;
+		uchar occupies;
 };
 
 Diminishing_Bob_Descr::Diminishing_Bob_Descr(const char *name)
@@ -341,10 +370,11 @@ void Diminishing_Bob_Descr::read(const char *directory, Section *s)
 {
    Logic_Bob_Descr::read(directory, s);
    
-   stock = s->get_int("stock", 0);
-		
+	stock = s->get_int("stock", 0);
+	
 	// TODO
 	s->get_string("ends_in", 0);
+	
 }
 
 
@@ -498,9 +528,11 @@ Critter_Bob_Descr::Critter_Bob_Descr(const char *name)
 
 void Critter_Bob_Descr::read(const char *directory, Section *s)
 {
-   Logic_Bob_Descr::read(directory, s);
+	add_attribute(Map_Object::MOVABLE);
+   
+	Logic_Bob_Descr::read(directory, s);
 
-   stock = s->get_int("stock", 0);
+	stock = s->get_int("stock", 0);
    swimming = s->get_bool("swimming", false);
 
    // read all the other animatins

@@ -40,22 +40,57 @@ class Map_Object_Descr {
 		
 		virtual Map_Object *create_object() = 0;
 
-		// TODO: maybe this could be implemented as an array of available attributes (vector<bool> even?)		
-		virtual bool has_attribute(uint attr) { return false; }
+		bool has_attribute(uint attr);
+		
+	protected:
+		void add_attribute(uint attr);
+	
+	private:
+		vector<uint>	m_attributes;
 };
 
 
-//
-// Map_Object is a class representing a base class for all objects. like buildings, animals
-// ... so on.
-// Every Map_Object has a unique serial number. This serial number is used as key in the
-// Object_Manager map, and in the safe Object_Ptr.
-// Since Map_Objects can be destroyed at pretty much any time, you shouldn't point to a
-// Map_Object directly; use an Object_Ptr instead.
-//
-// DO NOT allocate/free Map_Objects directly; use the Object_Manager for this.
-// Note that convenient creation functions are defined in class Game.
-// 
+/*
+Notes on Map_Object
+-------------------
+
+Map_Object is a class representing a base class for all objects. like buildings, animals
+... so on.
+Every Map_Object has a unique serial number. This serial number is used as key in the
+Object_Manager map, and in the safe Object_Ptr.
+Since Map_Objects can be destroyed at pretty much any time, you shouldn't point to a
+Map_Object directly; use an Object_Ptr instead.
+
+DO NOT allocate/free Map_Objects directly; use the Object_Manager for this.
+Note that convenient creation functions are defined in class Game.
+
+
+Attributes
+----------
+Attributes are used to flag certain types of object. They should be used to
+find all objects of a certain class (e.g. all trees around a lumberjack
+or all flags in the nearby area).
+
+Some attributes are relevant for building capabilities.
+ROBUST indicates that this stationary map object cannot be simply removed.
+  Decorative items (bushes, pebbles) can be removed simply by building something 
+  on them. They are not robust.
+
+SMALL and BIG define the size of a stationary object. Their exact meaning 
+  depends on the context.
+  
+  For normal objects:
+   Small: up to medium-sized houses can be built next to this object
+   Normal: small houses and flags can be built next to this obejct
+   Big: only flags can be built next to this object
+
+  For buildings, it is simply the building size. Note however, that:
+   Small: up to normal objects can be placed next to it (e.g. trees)
+	Normal: up to small objects can be placed next to it (e.g. flags)
+	Big: no robust objects can be placed next to it (however, non-robust objects
+	     such as pebbles as a result of catapults are possible)
+
+*/
 
 // If you find a better way to do this that doesn't cost a virtual function or additional
 // member variable, go ahead
@@ -77,22 +112,18 @@ class Map_Object {
 		// Some default, globally valid, attributes.
 		// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
       enum Attribute {
-			// This Map_Object can move (animals, humans, ships)
-			MOVABLE = 0,
+			MOVABLE = 0,		// This Map_Object can move (animals, humans, ships)
 			
-			// (only valid when !MOVABLE): this Map_Object cannot be killed by
-			// placing something else on it.
-			// This applies to e.g. buildings, trees, but it doesn't apply to purely
-			// aesthetic objects such as pebbles.
-			ROBUST = 1,
+			ROBUST,				// not overwritable (assert !MOVABLE)
+			BUILDING,			// is a building (assert ROBUST)
 			
-			// (only valid when ROBUST): cannot walk onto this Map_Object
-			UNPASSABLE = 2,
+			SMALL,				// object / building sizes (assert ROBUST)
+			BIG,
 			
-			// (assert ROBUST && !UNPASSABLE): this is a flag (can be used as road endpoint)
-			FLAG = 3,
+			UNPASSABLE,			// cannot walk into this (assert ROBUST)
+			FLAG,					// flag; can be used as road endpoint (assert ROBUST && !UNPASSABLE)
 		};
-
+		
 		// the enums tell us where we are going
       enum WalkingDir {
          IDLE = 0,
@@ -148,6 +179,7 @@ class Map_Object {
 			*py = m_pos.y;
 			return true;
 		}
+		inline const Coords &get_position() const { return m_pos; }
 		inline Map_Object* get_next_object(void) { return m_linknext; }
 
 	protected: // default tasks
@@ -189,7 +221,7 @@ class Map_Object {
 	protected:
 		Map_Object_Descr *m_descr;
 		uint m_serial;
-      char m_owned_by; // player number, or -1 if neutral (like animals, trees)
+      int m_owned_by; // 0 = neutral, otherwise player number
       
 		Field* m_field; // where are we right now?
       Coords m_pos;

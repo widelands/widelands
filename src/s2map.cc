@@ -258,11 +258,8 @@ void Map::load_s2mf(const char* filen, Game *game)
 		Field *f = fields;
 		pc = section;
 		for(y=0; y<hd.height; y++) {
-			for(x=0; x<hd.width; x++, f++, pc++) {
+			for(x=0; x<hd.width; x++, f++, pc++)
 				f->set_height(*pc);
-				f->objects = 0;
-				f->owned_by=0; 
-			}
 		}
 		free(section);
 		section = 0;

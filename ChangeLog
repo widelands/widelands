@@ -3,3 +3,4 @@ build-2:
 - options handling redesigned
 - introduced System
 - added keyboard input
+- build symbols react to objects now (can't build next to stones etc...)

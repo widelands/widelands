@@ -22,6 +22,8 @@
 
 // TODO; Think, if we shouldn't call for each field a new() in map::set_size
 // and a delete - Holger
+// Okay, as it stands now, Field can be safely memset()ed to 0.
+//
 // No. In fact, you should view Field more as a plain old structure rather than
 // a class. If you think of Fields as a class you get into a whole lot of 
 // problems (like the 6 neighbour field pointers we used to have). - Nicolai
@@ -64,15 +66,15 @@ class Field {
    friend class Map;
 	friend class Map_Object;
 	
-   private:
+private:
    uchar height;
 	char brightness;
 	uchar caps; // what can we build here, who can walk here
-	uchar owned_by;
+	uchar owned_by; // 0 = neutral; otherwise: player number
 	Terrain_Descr *terr, *terd;
 	Map_Object* objects; // linked list, see Map_Object::m_linknext
 
-   public:
+public:
    enum Build_Symbol {
       NOTHING,
       FLAG,
@@ -90,17 +92,16 @@ class Field {
    inline Terrain_Descr *get_terd() const { return terd; }
    inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
    inline void set_terraind(Terrain_Descr *p) { assert(p); terd = p; }
-//   bool has_hooked(uchar);
    
    inline Map_Object* get_first_object(void) { return objects; }
 
    void set_brightness(int l, int r, int tl, int tr, int bl, int br);
    inline char get_brightness() const { return brightness; }
 
-   inline void set_owned_by(uint pln) { owned_by=pln; }
+   inline void set_owned_by(uint pln) { owned_by = pln; }
    inline uchar get_owned_by(void) { return owned_by; }
 
-   private:
+private:
    // note: you must reset this field's + neighbor's brightness when you change the height
    // Map's set_height does this
    inline void set_height(uchar h) { height = h; }

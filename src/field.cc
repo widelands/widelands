@@ -76,18 +76,3 @@ void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 	brightness = (char)b;
 }
 
-/* can we get rid of this?
-if we were to store passability and possible building objects inside the Field,
-this function should be pretty unnecessary. Passability recalculations can be done
-in Map_Object::set_position()
-
-bool Field::has_hooked(uchar t)
-{
-	Map_Object* obj = objects;
-	while(obj) {
-		if (obj->get_type() == t) return true;
-		obj = obj->get_next_object();
-	}
-	return false;
-}
-*/

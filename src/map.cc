@@ -93,14 +93,15 @@ Map::~Map(void)
  * Args:	w, h	size of map
  * Returns: Nothing
  */
-void Map::set_size(uint w, uint h) {
+void Map::set_size(uint w, uint h)
+{
    hd.width=w;
    hd.height=h;
 
-   if(fields) {
-      fields = (Field*) realloc(fields, sizeof(Field)*hd.height*hd.width);
-   }
-   else fields = (Field*) malloc(sizeof(Field)*hd.height*hd.width);
+   if(fields)
+		free(fields);
+	fields = (Field*) malloc(sizeof(Field)*hd.height*hd.width);
+	memset(fields, 0, sizeof(Field)*hd.height*hd.width);
 
 	if (m_pathfields)
 		free(m_pathfields);
@@ -553,7 +554,52 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	
 	// === passability and flags allow us to build something beyond this point ===
 
-	// 4) Build mines on mountains
+	// 4) Reduce building size based on nearby objects (incl. buildings) and roads.
+	//
+	// Small object: allow medium-sized first-order neighbour, big second-order neighbour
+	// Medium object: allow small-sized first-order neighbour, big second-order neighbour
+	// Big object: allow no first-order neighbours, small second-order neighbours
+	//
+	// Small buildings: same as small objects
+	// Medium buildings: allow only medium second-order neighbours
+	// Big buildings:  same as big objects
+	uchar building = BUILDCAPS_BIG;
+	vector<Map_Object*> objectlist;
+	
+	find_objects(fx, fy, 2, Map_Object::ROBUST, &objectlist);
+	for(uint i = 0; i < objectlist.size(); i++) {
+		Map_Object *obj = objectlist[i];
+		int dist = calc_distance(Coords(fx, fy), obj->get_position());
+		
+		if (obj->has_attribute(Map_Object::SMALL))
+		{
+			if (dist == 1) {
+		 		if (building > BUILDCAPS_MEDIUM)
+					building = BUILDCAPS_MEDIUM;
+			}
+		}
+		else if (!obj->has_attribute(Map_Object::BIG))
+		{
+			if (obj->has_attribute(Map_Object::BUILDING)) {
+				if (building > BUILDCAPS_MEDIUM)
+					building = BUILDCAPS_MEDIUM;
+			} else {
+				if (dist == 1) {
+					if (building > BUILDCAPS_SMALL)
+						building = BUILDCAPS_SMALL;
+				}
+			}
+		}
+		else
+		{
+			if (dist == 2)
+				building = BUILDCAPS_SMALL;
+			else
+				return; // can't build buildings next to big objects
+		}
+	}
+	
+	// 5) Build mines on mountains
 	if (cnt_mountain == 6)
 	{
 		// 4b) Check the mountain slope
@@ -562,15 +608,9 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 		return;
 	}
 	
-	// 5) Can't build anything if there are mountain or desert triangles next to the field
+	// 6) Can't build anything if there are mountain or desert triangles next to the field
 	if (cnt_mountain || cnt_dry)
 		return;
-		
-	// 6) TODO: Reduce building size if buildings/roads/robusts(?) are near
-   // TODO: even worse: in S2 stones (granit) laying around reduce all their neighbours to flags
-   // while trees only reduces their neighbours to small buildings (except it's top-left neighbour, obviously -Holger
-	uchar building = BUILDCAPS_BIG;
-	bool harbour = false;
 	
 	// 7) Reduce building size based on slope of direct neighbours:
 	//    - slope >= 4: can't build anything here -> return
@@ -610,63 +650,54 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	//    of the second order neighbours is swimmable.
    //    TODO: didn't we agree that it would be easier to make harbours only on specially set
    //    fields? - Holger
+	//    Ah right. Well, for the final decision, we'd probably have to see how
+	//    ships work out. If they become an important part in day-to-day gameplay,
+	//    an automatic method will probably work better. 
+	//    However, it should probably be more clever than this, to avoid harbours at tiny
+	//    lakes... - Nicolai
 	//
 	// Processes the neighbours in clockwise order, starting from the right-most
 	int secx, secy;
 	Field *sec;
 
 	get_rn(rnx, rny, rn, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 	
 	get_brn(rnx, rny, rn, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_brn(brnx, brny, brn, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_bln(brnx, brny, brn, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_bln(blnx, blny, bln, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_ln(blnx, blny, bln, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_ln(lnx, lny, ln, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_tln(lnx, lny, ln, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_tln(tlnx, tlny, tln, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_trn(tlnx, tlny, tln, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_trn(trnx, trny, trn, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	get_rn(trnx, trny, trn, &secx, &secy, &sec);
-	if (sec->caps & MOVECAPS_SWIM) harbour = true;
 	if (abs((int)sec->get_height() - f->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
 	// 9) That's it, store the collected information
 	f->caps |= building;
-	//if (building == BUILDCAPS_BIG && harbour)
-	//	f->caps |= BUILDCAPS_PORT;
 }
 
 

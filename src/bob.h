@@ -16,6 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
+
 #ifndef __BOB_H
 #define __BOB_H
 
@@ -27,18 +28,6 @@
 //class Pic;
 
 class Section;
-
-// Eh? Is this used for anything? If it is what I think it is, attributes
-// are better to solve this because it's transparent wrt buildings etc... -Nicolai
-// This is thought for big or small SOLIDS, as said: Stones in S2 are making all their 
-// surrounding fields to flags, trees only to small buildings.
-// This must be configurable for logic_bobs (can't be hardcoded, i'm afraid)
-enum {
-   NOTHING = 0,
-   SMALL = 1,
-   BIG = 2
-};   // for the occupies vars in Bobs
-
 class Animation;
 
 struct Animation_Pic {

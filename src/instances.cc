@@ -91,6 +91,55 @@ Map_Object* Object_Ptr::get(Game* game)
 	return obj;
 }
 
+
+/*
+==============================================================================
+
+Map_Object_Descr IMPLEMENTATION
+		
+==============================================================================
+*/
+
+/*
+===============
+Map_Object_Descr::has_attribute
+
+Search for the attribute in the attribute list
+===============
+*/
+bool Map_Object_Descr::has_attribute(uint attr)
+{
+	for(uint i = 0; i < m_attributes.size(); i++) {
+		if (m_attributes[i] == attr)
+			return true;
+	}
+	
+	return false;
+}
+		
+
+/*
+===============
+Map_Object_Descr::add_attribute
+
+Add an attribute to the attribute list if it's not already there
+===============
+*/
+void Map_Object_Descr::add_attribute(uint attr)
+{
+	if (!has_attribute(attr))
+		m_attributes.push_back(attr);
+}
+
+
+/*
+==============================================================================
+
+Map_Object IMPLEMENTATION		
+
+==============================================================================
+*/
+
 /** Map_Object::Map_Object(Map_Object_Descr* descr)
  *
  * Zero-initialize a map object
@@ -100,7 +149,7 @@ Map_Object::Map_Object(Map_Object_Descr* descr)
 	m_descr = descr;
 	m_serial = 0;
 
-	m_owned_by = -1;
+	m_owned_by = 0;
 	m_field = 0; // not linked anywhere
 	m_pos.x = m_pos.y = 0;
 	m_linknext = 0;
