@@ -40,19 +40,59 @@ terrains.
 */
 int Set_Terrain::set_terrain(FCoords& fc, Map* map, Editor_Interactive* parent, bool right, bool down) {
    if(!get_nr_enabled()) return parent->get_fieldsel_radius();
-   MapRegion mrc(map, fc, parent->get_fieldsel_radius());
+
+   MapRegion mrc;
    Coords c;
 
    int i, j, max;
    max=0;
-   while(mrc.next(&c)) {
-      i=j=0;
-      if(right)
-         i=map->change_field_terrain(c,get_random_enabled(),false,true);
-      if(down)
-         j=map->change_field_terrain(c,get_random_enabled(),true,false);
-      if(i>max) max=i;
-      if(j>max) max=j;
+   if(right && down && parent->get_fieldsel_radius()) {
+      // Beatify the clicked are so that it has a nice round border
+      Coords curc;
+      int radius=parent->get_fieldsel_radius()-1;
+
+      // ok, click here
+      mrc.init(map,fc,radius);
+      while(mrc.next(&curc)) {
+         i=map->change_field_terrain(curc,get_random_enabled(),true,true);
+         if(i>max) max=i;
+      }
+
+      // click tln
+      FCoords nb;
+      map->get_tln(fc,&nb);
+      mrc.init(map,nb,radius);
+      while(mrc.next(&curc)) {
+         i=map->change_field_terrain(curc,get_random_enabled(),true,true);
+         if(i>max) max=i;
+      }
+
+      // click trn
+      map->get_trn(fc,&nb);
+      mrc.init(map,nb,radius);
+      while(mrc.next(&curc)) {
+         i=map->change_field_terrain(curc,get_random_enabled(),true,false);
+      }
+
+
+      // click ln
+      map->get_ln(fc,&nb);
+      mrc.init(map,nb,radius);
+      while(mrc.next(&curc)) { 
+         i=map->change_field_terrain(curc,get_random_enabled(),false, true);
+         if(i>max) max=i;
+      }
+   } else {
+      mrc.init(map, fc, parent->get_fieldsel_radius());
+      while(mrc.next(&c)) {
+         i=j=0;
+         if(right)
+            i=map->change_field_terrain(c,get_random_enabled(),false,true);
+         if(down)
+            j=map->change_field_terrain(c,get_random_enabled(),true,false);
+         if(i>max) max=i;
+         if(j>max) max=j;
+      }
    }
    return parent->get_fieldsel_radius()+max;
 }
