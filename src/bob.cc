@@ -220,6 +220,9 @@ void Bob::init(Editor_Game_Base* gg)
 
 		schedule_act(g, 1);
 		m_sched_init_task = true;
+   } else {
+      // In editor: play idle task forever
+      set_animation(gg, get_descr()->get_idle_anim());
    }
 }
 
@@ -979,7 +982,7 @@ Bob::set_animation
 Set a looping animation, starting now.
 ===============
 */
-void Bob::set_animation(Game* g, uint anim)
+void Bob::set_animation(Editor_Game_Base* g, uint anim)
 {
 	m_anim = anim;
 	m_animstart = g->get_gametime();

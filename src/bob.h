@@ -142,7 +142,7 @@ protected: // higher level handling (task-based)
 	virtual void init_auto_task(Game*);
 
 protected: // low level animation and walking handling
-	void set_animation(Game* g, uint anim);
+	void set_animation(Editor_Game_Base* g, uint anim);
 
 	int start_walk(Game* g, WalkingDir dir, uint anim, bool force = false);
 	void end_walk(Game* g);
