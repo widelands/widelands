@@ -203,7 +203,7 @@ void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Prof
 {
 	ProgramParser p;
 	Section* s = prof->get_safe_section(m_name.c_str());
-	uint line;
+	uint line=0;
 
 	p.descr = descr;
 	p.directory = directory;

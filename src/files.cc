@@ -784,8 +784,8 @@ void *RealFSImpl::Load(std::string fname, int *length)
 {
 	char canonical[256];
 	std::string fullname;
-	FILE *file;
-	void *data;
+	FILE *file=0;
+	void *data=0;
 	int size;
 
 	if (!FS_CanonicalizeName(canonical, sizeof(canonical), fname.c_str()))
