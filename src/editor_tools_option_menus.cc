@@ -24,7 +24,6 @@
 #include "editor_tools.h"
 #include "editor_tools_option_menus.h"
 #include "graphic.h"
-#include "sw16_graphic.h"
 
 /*
 =================================================
@@ -333,7 +332,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    while(i<=nr_textures) {
       if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
 
-      UICheckbox* cb=new UICheckbox(this, xpos , ypos, g_gr->get_picture(PicMod_Game, get_graphicimpl()->get_maptexture_data(i)->get_texture_picture()));
+      UICheckbox* cb=new UICheckbox(this, xpos , ypos, g_gr->get_picture(PicMod_Game, g_gr->get_maptexture_picture(i)));
 
       cb->set_size(TEXTURE_W+1, TEXTURE_H+1);
       cb->set_id(i-1);

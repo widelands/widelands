@@ -141,7 +141,7 @@ public:
 		m_color[Green] = ((clr<<2)>>5);
 		m_color[Blue] = (clr<<3);
 	}
-	inline uint pack32() const { return *(uint*)m_color & 0x00FFFFFF; }
+	inline uint pack32() const { return *(const uint*)m_color & 0x00FFFFFF; }
 	inline void unpack32(uint clr) { *(uint*)m_color = clr; }
 };
 
@@ -419,7 +419,7 @@ public:
 	virtual void get_animation_size(uint anim, uint time, int* w, int* h) = 0;
 
 	virtual void screenshot(const char* fname) = 0;
-
+	virtual const char* get_maptexture_picture (uint id) = 0;
 	// HACK: needed to load the old font
 	virtual uint get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey) = 0;
 };

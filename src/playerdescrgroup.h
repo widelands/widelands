@@ -20,7 +20,6 @@
 #ifndef __S__PLAYER_DESCR_GROUP
 #define __S__PLAYER_DESCR_GROUP
 
-class UIPanel;
 class Game;
 
 /** class PlayerDescriptionGroup

@@ -1499,6 +1499,21 @@ Texture* GraphicImpl::get_maptexture_data(uint id)
 		return 0;
 }
 
+/*
+==============
+GraphicImp::get_texture_picture
+
+Return Filename of texture of given ID.
+==============
+*/
+const char* GraphicImpl::get_maptexture_picture(uint id) {
+	Texture* tex = get_maptexture_data(id);
+	if (tex)
+		return tex->get_texture_picture();
+	else
+		return 0;
+}
+
 
 /*
 ===============
