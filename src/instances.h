@@ -128,6 +128,7 @@ public:
 
 		// everything below is at least a BaseImmovable
 		IMMOVABLE,
+      BATTLE,
 
 		// everything below is at least a PlayerImmovable
 		BUILDING,

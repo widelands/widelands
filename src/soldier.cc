@@ -31,6 +31,7 @@
 #include "transport.h"
 #include "tribe.h"
 #include "util.h"
+#include "warehouse.h"
 #include "wexception.h"
 
 
@@ -664,7 +665,7 @@ void Soldier::start_task_gowarehouse(Game* g)
  */
 
 Bob::Task Soldier::taskLaunchAttack = {
-   "LaunchAttack",
+   "launchattack",
 
    (Bob::Ptr)&Soldier::launchattack_update,
    (Bob::Ptr)&Soldier::launchattack_signal,
@@ -766,20 +767,20 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
          // Time to return home (in future, time to enter enemu house)
       if (get_position() == c_target)
       {
-         MilitarySite* ms = (MilitarySite*)f_target->get_building();
+         Building* bs = f_target->get_building();
             // If there are enemy soldiers, time to kill they !!!
-         if (start_task_waitforassault(g, f_target->get_building()))
+         if (start_task_waitforassault(g, bs))
             return;
          
             // Now, this soldier will enter to the house!
-         if (ms->get_owner() == get_owner())
+         if (bs->get_owner() == get_owner())
          {
             state->ivar1 = 0;
             schedule_act (g, 10);
             return;
          }
          molog ("Hey\n");
-         ms->conquered_by (get_owner());
+         bs->conquered_by (get_owner());
          molog ("Hey\n");
          state->ivar1 = 0;       // This makes return to home flag
          schedule_act(g, 50);    // Waits a little before trying to enter to the house
@@ -838,7 +839,7 @@ void Soldier::launchattack_signal (Game* g, State* state)
  */
 
 Bob::Task Soldier::taskWaitForAssault = {
-   "WaitForAssault",
+   "waitforassault",
 
    (Bob::Ptr)&Soldier::waitforassault_update,
    (Bob::Ptr)&Soldier::waitforassault_signal,
@@ -903,9 +904,18 @@ void Soldier::waitforassault_update (Game* g, State* state)
                ms->defend(g, this);
                break;
             }
+         case Building::WAREHOUSE:
+            {
+               Warehouse* wh = (Warehouse*) b;
+                  // This should launch a soldier to defend the house !
+               skip_act(g);
+               wh->defend(g, this);
+               break;
+            }
          default:
             molog("[waitforassault] Nothing to do with this building!!\n");
             pop_task (g);
+            send_signal(g, "fail");
             break;;
       }
       return;
@@ -947,7 +957,7 @@ void Soldier::waitforassault_signal (Game* g, State* state)
  */
 
 Bob::Task Soldier::taskDefendBuilding = {
-   "DefendBuilding",
+   "defendbuilding",
 
    (Bob::Ptr)&Soldier::defendbuilding_update,
    (Bob::Ptr)&Soldier::defendbuilding_signal,
@@ -1015,8 +1025,8 @@ void Soldier::defendbuilding_update (Game* g, State* state)
       s = (Soldier*) imm;
    
          // Starts real combat!!
-      Battle* battle = new Battle ();
-      battle->init (g, this, s);
+      Battle* battle = g->create_battle();
+      battle->soldiers (this, s);
       skip_act(g);
       return;
    }

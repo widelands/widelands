@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2002-4 by the Widelands Development Team
  *
@@ -143,7 +144,10 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
             else if(taskname=="fugitive") task=&Worker::taskFugitive; 
             else if(taskname=="geologist") task=&Worker::taskGeologist; 
             else if(taskname=="road") task=&Carrier::taskRoad; 
-            else if(taskname=="transport") task=&Carrier::taskTransport; 
+            else if(taskname=="transport") task=&Carrier::taskTransport;
+            else if(taskname=="launchattack") task=&Soldier::taskLaunchAttack; 
+            else if(taskname=="defendbuilding") task=&Soldier::taskDefendBuilding; 
+            else if(taskname=="waitforassault") task=&Soldier::taskWaitForAssault; 
             else if(taskname=="") continue; // Skip task
             else 
                throw wexception("Unknown task %s in file!\n", taskname.c_str());

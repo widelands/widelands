@@ -1,35 +1,26 @@
-
-
-
-
-
-
-
-
-
-
-
-// TODO: Add the comment header here :)
+/*
+ * Copyright (C) 2002-2004 by The Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
 // TODO: Create the load/save code, networkcode isn't needed (I think)
-
-
 
 #include "battle.h"
 #include "error.h"
 #include "game.h"
-
-/*class Battle : public BaseImmovable
-{
-   public:
-         Battle();
-         ~Battle();
-      void init (Game*, Soldier*, Soldier*);
-      virtual void act (Game*, uint);
-      
-   private:
-      Soldier* first;
-      Soldier* second;
-};*/
 
 class Battle_Descr : public Map_Object_Descr
 {
@@ -64,8 +55,31 @@ void Battle::init (Editor_Game_Base* eg, Soldier* s1, Soldier* s2)
    Map_Object::init(eg);
    m_first = s1;
    m_second = s2;
-   schedule_act ((Game*)eg, 1000); // Every round is 1000 ms
+   if (eg->is_game())
+      m_next_assault = schedule_act ((Game*)eg, 1000); // Every round is 1000 ms
 }
+
+void Battle::init (Editor_Game_Base* eg)
+{
+   assert (eg);
+   
+   Map_Object::init(eg);
+   
+   if (eg->is_game())
+      m_next_assault = schedule_act ((Game*)eg, 1000); // Every round is 1000 ms
+}
+
+void Battle::soldiers (Soldier* s1, Soldier* s2)
+{
+   assert (s1);
+   assert (s2);
+   log ("Battle::init\n");
+   
+   m_first = s1;
+   m_second = s2;
+  
+}
+
 
 void Battle::cleanup (Editor_Game_Base* eg)
 {
@@ -91,6 +105,7 @@ void Battle::act (Game* g, uint data)
       attacker = m_first;
       defender = m_second;
    }
+
    else
    {
       attacker = m_second;
@@ -139,7 +154,7 @@ log (" damage=%d\n", attack-defend);
 log (" evade(%d)=%d\n", defender->get_serial(), defender->get_evade());
       //defender->start_animation(g, "evade", 1000);
    }
-   schedule_act(g, 1000);
+   m_next_assault = schedule_act(g, 1000);
 }
 
 

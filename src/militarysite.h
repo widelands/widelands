@@ -98,10 +98,12 @@ public:
       
    /// Testing stuff
    int launch_attack(PlayerImmovable*, int);
-
+   int can_launch_soldiers () { return m_soldiers.size() > 1; }
+   
    virtual bool has_soldiers() { return m_soldiers.size() > 0; }
    virtual void defend (Game*, Soldier*);
    virtual void conquered_by (Player*);
+
 protected:
 	virtual UIWindow* create_options_window(Interactive_Player* plr,
 		UIWindow** registry);

@@ -527,8 +527,8 @@ void Game::send_player_change_soldier_capacity (Building* b, int val)
 }
 
 /////////////////////// TESTING STUFF
-void Game::send_player_enemyflagaction (Flag* flag, int action, int who_attacks)
+void Game::send_player_enemyflagaction (Flag* flag, int action, int who_attacks, int num_soldiers, int type)
 {
-	send_player_command (new Cmd_EnemyFlagAction(get_gametime(), flag->get_owner()->get_player_number(), flag, action, who_attacks));
+	send_player_command (new Cmd_EnemyFlagAction(get_gametime(), who_attacks, flag, action, who_attacks, num_soldiers, type));
 }
 

@@ -29,6 +29,7 @@
 #include "geometry.h"
 #include "types.h"
 
+class Battle;
 class Bob;
 class Building;
 class Building_Descr;
@@ -77,7 +78,9 @@ class Editor_Game_Base {
       Bob *create_bob(Coords c, int idx, Tribe_Descr* = 0);
       Immovable* create_immovable(Coords c, int idx, Tribe_Descr*);
 		Immovable* create_immovable(Coords c, std::string name, Tribe_Descr*);
-
+      Battle*    create_battle ();
+      
+      std::vector<int> get_battle_serials() { return m_battle_serials; }
       inline int get_gametime(void) { return m_gametime; }
 		Interactive_Base* get_iabase() { return m_iabase; }
 
@@ -103,7 +106,7 @@ class Editor_Game_Base {
    virtual void make_influence_map ();
 
       /// Returns the influence value of one position (a) with the radius (radius) about (b)
-   virtual int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius);
+   virtual int calc_influence (Coords a, Coords b, int radius);
    
    protected:
       // next function is used to update the current gametime,
@@ -132,10 +135,13 @@ class Editor_Game_Base {
 
 		uint								m_lasttrackserial;
 		std::map<uint, void*>		m_trackpointers;
-#define MAX_X     256
-#define MAX_Y     256      
+      // I know that this fucks, ideas ?
+#define MAX_X     512
+#define MAX_Y     512      
+public:
       int  m_conquer_map[MAX_PLAYERS+1][MAX_X][MAX_Y]; // m_conquer_map[playernr][x][y] = [quantity of influence]
                                                          // The playernr 0 is the REAL OWNER
+      std::vector<int>           m_battle_serials;    // The serials of the battles only used to load/save
 };
 
 extern const uchar g_playercolors[MAX_PLAYERS][12];

@@ -31,5 +31,8 @@ void show_field_action(Interactive_Base *parent, Player* player, UIUniqueWindowR
 // building_ui.cc
 void show_bulldoze_confirm(Interactive_Base* player, Building* building, PlayerImmovable* todestroy);
 
+// battle.cc
+//void show_attack_dialog((Interactive_Base* player, Building* building);
+
 #endif /* FIELDACTION_H */
 

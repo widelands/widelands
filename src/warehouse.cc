@@ -452,6 +452,7 @@ void Warehouse::init(Editor_Game_Base* gg)
       Game* g=static_cast<Game*>(gg);
 
       m_next_carrier_spawn = schedule_act(g, CARRIER_SPAWN_INTERVAL);
+      m_next_military_act = schedule_act(g, 1000);
    }
 }
 
@@ -523,8 +524,38 @@ void Warehouse::act(Game* g, uint data)
 
 		m_next_carrier_spawn = schedule_act(g, tdelta);
 	}
+      
+      // Military stuff: Kill the soldiers that are dead
+   if (g->get_gametime() - m_next_military_act >= 0)
+   {
+      int ware = get_owner()->get_tribe()->get_safe_worker_index("soldier");
+      
+      Worker_Descr* workerdescr;
+      Soldier* soldier;
 
-	Building::act(g, data);
+      workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
+         // Look if we got one in stock of those
+      std::string name=workerdescr->get_name();
+      std::vector<Object_Ptr>::iterator i;
+      for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+      {
+         if(static_cast<Worker*>(i->get(g))->get_name()==name)
+         {
+            soldier = static_cast<Soldier*>(i->get(g));
+            
+               // Soldier dead ...
+            if (!soldier || (soldier->get_current_hitpoints() == 0))
+            {
+               m_incorporated_workers.erase(i);
+               m_supply->remove_workers(ware, 1);
+               continue;
+            }
+               // If warehouse can heal, this is the place to put it
+         }
+      }
+      m_next_military_act = schedule_act (g, 1000);
+   }
+   Building::act(g, data);
 }
 
 
@@ -768,7 +799,6 @@ Mark a soldier as used by a request.
 */
 void Warehouse::mark_as_used(Game* g, int ware, Requeriments* r)
 {
-	log (">>Warehouse::mark_as_used :");
 	assert(m_supply->stock_workers(ware));
 
 	Worker_Descr* workerdescr;
@@ -800,16 +830,13 @@ void Warehouse::mark_as_used(Game* g, int ware, Requeriments* r)
 	soldier = 0;
 	if(i==m_incorporated_workers.end())
 	{
-		log ("NOT FOUND\n"); // This should be an exception
 	} 
 	else
 	{
       // one found
-		log ("Marked!\n");
 		soldier = static_cast<Soldier*>(i->get(g));
 		soldier->mark(true);
 	}
-	log ("<<Warehouse::mark_as_used\n");
 }
 
 
@@ -829,10 +856,17 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
    // We remove carrier, but we keep other workers around
-   if(w->get_worker_type()==Worker_Descr::CARRIER) {
+   if(w->get_worker_type()==Worker_Descr::CARRIER) 
+   {
       w->remove(g);
       w=0;
-   } else {
+   }
+   else
+   {
+         // This is to prevent having soldiers that only are used one time and become allways 'marked'
+      if (w->get_worker_type() == Worker_Descr::SOLDIER)
+         ((Soldier*)w)->mark(false);
+
       sort_worker_in(g, w->get_name(), w);
       w->set_location(0); // No more in a economy
       w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
@@ -1117,6 +1151,85 @@ void Warehouse::create_worker(Game *g, int worker)
 		throw wexception("Can not create worker of desired type : %d", worker);
 
 	
+}
+
+/// Down here, only military methods !! ;)
+
+bool Warehouse::has_soldiers()
+{
+   Worker_Descr* workerdescr;
+   Soldier* soldier;
+
+   workerdescr = get_owner()->get_tribe()->get_worker_descr (
+                     get_owner()->get_tribe()->get_safe_worker_index ("soldier"));
+   
+   // Look if we got one in stock of soldiers
+   std::string name=workerdescr->get_name();
+   std::vector<Object_Ptr>::iterator i;
+   for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+   {
+      if(static_cast<Worker*>(i->get(get_owner()->get_game()))->get_name()==name)
+      {
+         soldier = static_cast<Soldier*>(i->get(get_owner()->get_game()));
+         break;
+      }
+   }
+   return (i!=m_incorporated_workers.end());
+}
+
+void Warehouse::defend (Game* g, Soldier* s)
+{
+   assert(s);
+   molog ("[Warehouse] We are under attack of %d!\n", s->get_serial());
+
+   Worker_Descr* workerdescr;
+   Soldier* soldier;
+
+   workerdescr = get_owner()->get_tribe()->get_worker_descr (
+                     get_owner()->get_tribe()->get_safe_worker_index ("soldier"));
+   
+   // Look if we got one in stock of soldiers
+   std::string name=workerdescr->get_name();
+   std::vector<Object_Ptr>::iterator i;
+   for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+   {
+      if(static_cast<Worker*>(i->get(g))->get_name()==name)
+      {
+         soldier = static_cast<Soldier*>(i->get(g));
+         break;
+      }
+   }
+
+   if (i != m_incorporated_workers.end())
+   {
+      // TODO: Here may be extra checks
+      for(i = m_incorporated_workers.begin(); i != m_incorporated_workers.end(); i++)
+      {
+         if(static_cast<Worker*>(i->get(g))->get_name() == name)
+         {
+            soldier = static_cast<Soldier*>(i->get(g));
+            if (soldier->is_marked ())
+               continue;
+
+            soldier->mark(true);
+            soldier->reset_tasks (g);
+            soldier->set_location (this);
+            soldier->start_task_defendbuilding (g, this, s);
+            break;
+         }
+      }
+      if (i == m_incorporated_workers.end())
+         s->send_signal(g, "fail");
+   }
+}
+
+// A warhouse couldn't be conquered, this building is destroyed ...
+void Warehouse::conquered_by (Player* pl)
+{
+   molog ("Warehouse::conquered_by- ");
+   assert (pl);
+   molog ("destroying\n");
+   cleanup(pl->get_game());
 }
 
 

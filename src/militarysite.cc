@@ -341,7 +341,6 @@ void MilitarySite::act(Game* g, uint data)
 	// Maybe a new queueing system like MilitaryAct could be introduced.
    ProductionSite::act(g,data);
 
-   // Perform a heal action
    if (g->is_game ()) {
       uint total_heal = 0;
       uint numMedics = 0;	 // FIX THIS when medics were added
@@ -362,9 +361,14 @@ void MilitarySite::act(Game* g, uint data)
             i--;
             continue;
          }
+            
+            // Fighting soldiers couldn't be healed !
          if (s->is_marked())
             continue;
-         
+
+            // Heal action
+            
+            // I don't like this 'healing' method, but I don't have any idea to do differently ...
          if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
             s->heal (total_heal);
             total_heal -=	(total_heal/3);
@@ -372,7 +376,8 @@ void MilitarySite::act(Game* g, uint data)
       }
    }
    call_soldiers(g);
-   // Schedule the next wakeup at 1 second
+   
+      // Schedule the next wakeup at 1 second
    schedule_act (g, 1000);
 }
 
@@ -397,23 +402,34 @@ MilitarySite::drop_soldier
 Get out specied soldier from house.
 ===============
  */
-void MilitarySite::drop_soldier (uint serial) {
-	Game* g = (Game *)get_owner()->get_game();
+void MilitarySite::drop_soldier (uint serial) 
+{
+   Game* g = (Game *)get_owner()->get_game();
+
 molog ("**Dropping soldier (%d)\n", serial);
-	if (g->is_game() && m_soldiers.size()) {
-		int i = 0;
-		Soldier* s = m_soldiers[i];
-		while ((s->get_serial() != serial) && (i < (int)m_soldiers.size())) {
-			i++;
-			s = m_soldiers[i];
-		}
-		if ((i < (int)m_soldiers.size()) && (s->get_serial() == serial)) {
+
+   if (g->is_game() && m_soldiers.size()) 
+   {
+      int i = 0;
+      Soldier* s = m_soldiers[i];
+      
+      while ((s) && (s->get_serial() != serial) && (i < (int)m_soldiers.size())) 
+      {
+         molog ("Serial: %d -- \n!", s->get_serial());
+         i++;
+         s = m_soldiers[i];
+      }
+      if (s)
+         molog ("Serial: %d -- \n!", s->get_serial());
+
+      if ((s) && (s->get_serial() == serial)) 
+      {
 molog ("**--Sodier localized!\n");
-			drop_soldier(g, i);
-		}
-		else
-			molog ("--Soldier NOT localized!");
-	}
+         drop_soldier(g, i);
+      }
+      else
+         molog ("--Soldier NOT localized!\n");
+   }
 }
 
 /*
@@ -425,30 +441,35 @@ Use throught drop_soldier(int)
 ===============
  */
 
-void MilitarySite::drop_soldier (Game *g, int nr) {
-	if (g->is_game()) {
-		Soldier *s;
-		// Is out of bounds ?
-		if (nr >= (int) m_soldiers.size())
-			return;
+void MilitarySite::drop_soldier (Game *g, int nr) 
+{
+   if (g->is_game()) 
+   {
+      Soldier *s;
 
-		s = m_soldiers[nr];
-		s->set_location(0);
+      // Check if its out of bounds
+      if ((nr < 0) || (nr > (int) m_soldiers.size()))
+         return;
 
+      s = m_soldiers[nr];
+      
+      assert (s);
+      s->set_location(0);
 
-		for (uint i = nr; i < m_soldiers.size(); i++)
-			m_soldiers[i] = m_soldiers[i+1];
+      for (uint i = nr; i < m_soldiers.size(); i++)
+         m_soldiers[i] = m_soldiers[i+1];
 
-		m_soldiers.pop_back();
+      m_soldiers.pop_back();
 
-		// Call more soldiers if are enought space
-		call_soldiers (g);
+         // Call more soldiers if are enought space
+      call_soldiers (g);
 
-		// Walk the soldier home safely
-		s->reset_tasks(g);
-		s->set_location(this);
-		s->start_task_leavebuilding(g,true);
-	}
+         // Walk the soldier home safely
+      s->mark (false);
+      s->reset_tasks (g);
+      s->set_location (this);
+      s->start_task_leavebuilding (g, true);
+   }
 }
 
 /*
@@ -458,65 +479,92 @@ MilitarySite::change_soldier_capacity
 Changes the soldiers capacity.
 ===========
 */
-void MilitarySite::change_soldier_capacity(int how) {
-	if (how) {
-    	if (how > 0) {
-        	m_capacity += how;
+void MilitarySite::change_soldier_capacity(int how) 
+{
+   if (how) 
+   {
+      if (how > 0) 
+      {
+         m_capacity += how;
 
-            if (m_capacity > (uint) get_descr()->get_max_number_of_soldiers())
-				m_capacity = (uint) get_descr()->get_max_number_of_soldiers();
-			call_soldiers((Game*)get_owner()->get_game());
-		} else {
-			how = -how;
-        	if (how >= (int) m_capacity)
-            	m_capacity = 1;
-			else
-            	m_capacity -= how;
-			if (m_capacity < m_soldiers.size() + m_soldier_requests.size()) {
-				if (m_soldier_requests.size()) {
-					m_soldier_requests[0]->cancel_transfer(0);
-					m_soldier_requests.erase(m_soldier_requests.begin());
-				} else
-					if (m_soldiers.size()) {
-						Soldier *s = m_soldiers[0];
-						drop_soldier (s->get_serial());
+         if (m_capacity > (uint) get_descr()->get_max_number_of_soldiers())
+            m_capacity = (uint) get_descr()->get_max_number_of_soldiers();
+         call_soldiers((Game*)get_owner()->get_game());
+      }
+      else 
+      {
+         how = -how;
+         
+         if (how >= (int) m_capacity)
+            m_capacity = 1;
+         else
+            m_capacity -= how;
+         
+         if (m_capacity < m_soldiers.size() + m_soldier_requests.size())
+         {
+            if (m_soldier_requests.size()) 
+            {
+               m_soldier_requests[m_soldier_requests.size()-1]->cancel_transfer(0);
+               m_soldier_requests.pop_back();
+            }
+            else if (m_soldiers.size()) 
+            {
+               Soldier *s = m_soldiers[m_soldiers.size()-1];
+               drop_soldier (s->get_serial());
 				}
 			}
 		}
 	}
 }
 
-
-int MilitarySite::launch_attack(PlayerImmovable* p_imm, int percent)
+/// Type : STRONGEST - WEAKEST
+int MilitarySite::launch_attack(PlayerImmovable* p_imm, int type)
 {
    uint launched = 0;
-   uint i = 0;
-//   uint number = (m_soldiers.size() * percent) / 100;
-
+   int i = 0;
+   Soldier* s = 0;
+   
    assert (p_imm->get_type() == FLAG);
    Flag* flag = (Flag*) p_imm;
    Game* g = (Game*) get_owner()->get_game();
    
    if (!m_soldiers.size())
       return 0;
-//    while (i < m_soldiers.size() && launched < number)
-//    {
-      Soldier* s = m_soldiers[i];
-         
-      i++;
-      
+
+   switch (type)
+   {
+      case STRONGEST:
+         for (uint j = 0; j < m_soldiers.size(); j++)
+            if (! m_soldiers[j]->is_marked())
+               if (m_soldiers[i]->get_level (atrTotal) < m_soldiers[j]->get_level (atrTotal))
+                  i = j;
+         break;
+      case WEAKEST:
+         for (uint j = 0; j < m_soldiers.size(); j++)
+            if (! m_soldiers[j]->is_marked())
+               if (m_soldiers[i]->get_level (atrTotal) > m_soldiers[j]->get_level (atrTotal))
+                  i = j;
+         break;
+      default:
+         throw wexception ("Unkown type of attack (%d)", type);
+   }
+   
+   s = m_soldiers[i];
+   
+   if (s)
+   {
       if (s->is_marked())
-        return 0;
+         return 0;
+      
 molog("Launching soldier %d\n", s->get_serial());
       s->mark(true);
       s->reset_tasks(g);
       s->set_location(this);
       s->start_task_launchattack(g, flag);
-      m_soldiers[i-1] = 0;
-      m_soldiers.erase(m_soldiers.begin());
+      m_soldiers[i] = m_soldiers[m_soldiers.size() - 1];
+      m_soldiers.pop_back();
       launched++;
-//    }
-   
+   }
    return launched;
 }
 
@@ -539,6 +587,7 @@ void MilitarySite::defend (Game* g, Soldier* s)
       if (so->is_marked())
          continue;
 
+      so->mark(true);
       so->reset_tasks(g);
       so->set_location(this);
       so->start_task_defendbuilding (g, this, s);

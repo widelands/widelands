@@ -24,6 +24,7 @@
 #include "tribe.h"
 #include "wexception.h"
 #include "widelands_map_allowed_buildings_data_packet.h"
+#include "widelands_map_battle_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
 #include "widelands_map_building_data_packet.h"
@@ -288,6 +289,15 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    log("done!\n ");
 
 
+   // This should be at least after loading Soldiers (Bobs)
+   // NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
+   log("Writing Battle Data ... ");
+   dp=new Widelands_Map_Battle_Data_Packet();
+   dp->Write(fw, m_egbase, m_mos);
+   delete dp;
+   log("done!\n ");
+
+   
    // Write end of map data
    fw->Unsigned16(PACKET_END_OF_MAP_DATA);
 

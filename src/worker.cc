@@ -1320,8 +1320,7 @@ Soldier* IdleWorkerSupply::launch_soldier(Game* g, int ware, Requeriments* req)
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
-
-	if (req->check(
+	if (!req || req->check(
 					s->get_level(atrHP),
 					s->get_level(atrAttack),
 					s->get_level(atrDefense),
@@ -1347,8 +1346,7 @@ int IdleWorkerSupply::get_passing_requeriments(Game* g, int ware, Requeriments* 
 
 	Soldier* s = static_cast<Soldier*>(m_worker);
 
-
-	if (req->check(
+   if (!req || req->check(
 					s->get_level(atrHP),
 					s->get_level(atrAttack),
 					s->get_level(atrDefense),
@@ -1374,7 +1372,7 @@ void IdleWorkerSupply::mark_as_used (Game* g, int ware, Requeriments* r)
 	{
 		Soldier* s = static_cast<Soldier*>(m_worker);
 
-		if (r->check(
+		if (!r || r->check(
 					s->get_level(atrHP),
 					s->get_level(atrAttack),
 					s->get_level(atrDefense),

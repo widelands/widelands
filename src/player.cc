@@ -501,7 +501,7 @@ Player::enemyflagaction
 Perform an action on the given enemy flag.
 ===============
 */
-void Player::enemyflagaction(Flag* flag, int action, int attacker)
+void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int type)
 {
    Editor_Game_Base* eg = get_game();
 
@@ -511,6 +511,9 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker)
    if (!eg->is_game())
       return;
 
+   assert (num >= 0);
+
+      
    Game* g = (Game*)eg;
    Map* map = g->get_map();
 
@@ -525,26 +528,25 @@ log("--Player::EnemyFlagAction() Checkpoint!\n");
       case ENEMYFLAGACTION_ATTACK:
          {
             int id = get_tribe()->get_worker_index("soldier");
+            uint i;
 
-            if (id < 0) {
+            if (id < 0) 
+            {
                log("Tribe defines no soldier\n");
                return;
             }
-// TODO : Make this more flexible
             int radius = 15;
             std::vector<ImmovableFound> list;
+            std::vector<MilitarySite*> ms_list;
             CheckStepWalkOn cstep(MOVECAPS_WALK, false);
             
             map->find_reachable_immovables(flag->get_position(), radius, &list, &cstep);
 
             if (!list.size()) 
-            {
-log("Player::EnemyFlagAction() No militarysites found!\n");
                return;
-            }
-log("Player::EnemyFlagAction() %d immovables found\n", list.size());
             
-            for (uint i = 0; i < list.size(); i++)
+            /* Find all friendly MS */
+            for (i = 0; i < list.size(); i++)
             {
                BaseImmovable* imm = list[i].object;
 
@@ -554,18 +556,21 @@ log("Player::EnemyFlagAction() %d immovables found\n", list.size());
                   {
 log("Player::EnemyFlagAction() MilitarySite %p found!\n", &list[i]);
                      MilitarySite* ms = static_cast<MilitarySite*>(imm);
-                     // Percent is the percentage of available soldiers that will be launched to the
-                     // attack
-                     int percent = 50;
-
-                     if (ms->launch_attack (flag, percent) > 0)
-                     {
-                        //ms->call_soldiers(g);
-                        break;
-                     }
-                  }
+                     ms_list.push_back (ms);
+                 }
             }
             
+            int launched = 0;
+            for (i = 0; i < ms_list.size(); i++)
+            {
+               if (launched >= num)
+                  break;
+                  
+               if (ms_list[i]->can_launch_soldiers())
+               {
+                  launched += ms_list[i]->launch_attack(flag, type);
+               }
+            }
             break;
          }
       

@@ -100,6 +100,11 @@ public:
 	int get_soldiers_passing (Game*, int, Requeriments*);
 	bool can_create_worker(Game *, int worker);
 	void create_worker(Game *, int worker);
+   
+   /// Military stuff 
+   virtual bool has_soldiers();
+   virtual void defend (Game*, Soldier*);
+   virtual void conquered_by (Player*);
 protected:
 	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
 
@@ -112,6 +117,7 @@ private:
 	std::vector<Request*>	m_requests; // one idle request per ware type
    std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
 	int m_next_carrier_spawn;		// time of next carrier growth
+   int m_next_military_act;      // time of next military action
 };
 
 /*

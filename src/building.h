@@ -181,7 +181,7 @@ public:
 
    /// Testing stuff
    virtual bool has_soldiers() { return false; };
-
+   virtual void conquered_by (Player*);
 protected:
 	void start_animation(Editor_Game_Base* g, uint anim);
 

@@ -753,7 +753,13 @@ void Building::set_stop(bool stop) {
 	m_stop = stop;
 }
 
-/*
+void Building::conquered_by (Player* pl)
+{
+   molog ("Building::conquered_by - Building hasn't conquered code yet !\n");
+
+}
+
+/**
  * Log basic infos
  */
 void Building::log_general_info(Editor_Game_Base* egbase) {

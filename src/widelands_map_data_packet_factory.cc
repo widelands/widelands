@@ -18,6 +18,7 @@
  */
 
 #include "widelands_map_allowed_buildings_data_packet.h"
+#include "widelands_map_battle_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
 #include "widelands_map_building_data_packet.h"
@@ -67,6 +68,7 @@ Widelands_Map_Data_Packet* Widelands_Map_Data_Packet_Factory::create_correct_pac
       case PACKET_IMMOVABLEDATA: return new Widelands_Map_Immovabledata_Data_Packet(); break;
       case PACKET_OWNED_FIELDS: return new Widelands_Map_Owned_Fields_Data_Packet(); break;
       case PACKET_SEEN_FIELDS: return new Widelands_Map_Seen_Fields_Data_Packet(); break;
+      case PACKET_BATTLE: return new Widelands_Map_Battle_Data_Packet(); break;
       default: throw wexception("Unknown Packet_Data_ID in map file: %i\n", id); break;
     }
     // never here

@@ -24,12 +24,14 @@
 #include "game_debug_ui.h"
 #include "map.h"
 #include "player.h"
+#include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
 #include "ui_box.h"
 #include "ui_button.h"
 #include "ui_icongrid.h"
 #include "ui_tabpanel.h"
+#include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "watchwindow.h"
 #include "error.h"
@@ -130,8 +132,9 @@ public:
 	void add_buttons_auto();
 	void add_buttons_build(int buildcaps);
 	void add_buttons_road(bool flag);
+   void add_buttons_attack();
 
-	// Action handlers
+   // Action handlers
 	void act_watch();
 	void act_show_census();
 	void act_show_statistics();
@@ -143,7 +146,11 @@ public:
 	void act_removeroad();
 	void act_build(int idx);
 	void act_geologist();
-   void act_attack();
+   void act_attack();         /// Launch the attack
+   void act_attack_more();    /// Increase the number of soldiers to be launched
+   void act_attack_less();    /// Decrease the number of soldiers to be launched
+   void act_attack_strong();  /// Prepare to launch strongest soldiers
+   void act_attack_weak();    /// Prepare to launch weakest soldiers
 
 private:
    void add_tab(const char* picname, UIPanel* panel);
@@ -158,6 +165,11 @@ private:
 
 	UITab_Panel*	m_tabpanel;
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
+   
+   /// Variables to use with attack dialog
+   UITextarea* m_text_attackers;
+   uint     m_attackers;      // 0 - Number of available soldiers.
+   int      m_attackers_type; // STRONGEST - WEAKEST ...
 };
 
 static const char* const pic_tab_buildroad = "pics/menu_tab_buildroad.png";
@@ -179,8 +191,14 @@ static const char* const pic_showstatistics = "pics/menu_show_statistics.png";
 static const char* const pic_debug = "pics/menu_debug.png";
 static const char* const pic_abort = "pics/menu_abort.png";
 static const char* const pic_geologist = "pics/menu_geologist.png";
+
 /// TESTING STUFF
-static const char* const pic_attack = "pics/menu_attack.png";
+static const char* const pic_tab_attack    = "pics/menu_tab_attack.png";
+static const char* const pic_attack_more   = "pics/attack_add_soldier.png";
+static const char* const pic_attack_less   = "pics/attack_sub_soldier.png";
+static const char* const pic_attack_strong = "pics/attack_strongest.png";
+static const char* const pic_attack_weak   = "pics/attack_weakest.png";
+static const char* const pic_attack        = "pics/menu_attack.png";
 
 
 /*
@@ -206,6 +224,7 @@ FieldActionWindow::FieldActionWindow(Interactive_Base *iabase, Player* plr, UIUn
 	//
 	m_tabpanel = new UITab_Panel(this, 0, 0, 1);
 	m_tabpanel->set_snapparent(true);
+   m_text_attackers = 0;
 
 	m_fastclick = true;
 }
@@ -220,6 +239,11 @@ Free allocated resources, remove from registry.
 FieldActionWindow::~FieldActionWindow()
 {
 	m_iabase->set_fieldsel_freeze(false);
+   if (m_text_attackers)
+   {
+      delete m_text_attackers;
+      m_text_attackers = 0;
+   }
 }
 
 
@@ -312,7 +336,8 @@ void FieldActionWindow::add_buttons_auto()
       // There goes actions that can be done to non-owner fields ;)
    else
    {
-      BaseImmovable *imm = m_map->get_immovable(m_field);
+      add_buttons_attack ();
+/*      BaseImmovable *imm = m_map->get_immovable(m_field);
       // The box with road-building buttons
       buildbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
 
@@ -328,7 +353,7 @@ void FieldActionWindow::add_buttons_auto()
                 (building->get_building_type() == Building::WAREHOUSE))
             )
             add_button(buildbox, pic_attack, &FieldActionWindow::act_attack);
-      }
+      }*/
    }
 
 	// Watch actions, only when game (no use in editor)
@@ -353,6 +378,56 @@ void FieldActionWindow::add_buttons_auto()
 	add_tab(pic_tab_watch, watchbox);
 }
 
+void FieldActionWindow::add_buttons_attack ()
+{
+   UIBox* attackbox = 0;
+
+      // Add attack button
+   if (m_field.field->get_owned_by() != m_plr->get_player_number()) 
+   {
+      
+      BaseImmovable *imm = m_map->get_immovable(m_field);
+      
+         // The box with attack buttons
+      attackbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+
+      if (imm && imm->get_type() == Map_Object::BUILDING)
+      {
+            //Add flag actions
+         Flag *flag = (Flag*)((Building*)imm)->get_base_flag();
+
+         Building *building = flag->get_building();
+         if (building && 
+               m_iabase->get_egbase()->is_game() &&
+               ((building->get_building_type() == Building::MILITARYSITE) ||
+                (building->get_building_type() == Building::WAREHOUSE))
+            )
+         {
+            m_attackers = 0;
+            m_attackers_type = STRONGEST;
+            add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less);
+            
+            m_text_attackers = new UITextarea(attackbox, 90, 0, "000/000", Align_Center);
+            attackbox->add(m_text_attackers, UIBox::AlignTop);
+            
+            add_button(attackbox, pic_attack_more, &FieldActionWindow::act_attack_more);
+            
+            add_button(attackbox, pic_attack_strong, &FieldActionWindow::act_attack_strong);
+            add_button(attackbox, pic_attack_weak,   &FieldActionWindow::act_attack_weak);
+            
+            add_button(attackbox, pic_attack, &FieldActionWindow::act_attack);
+            act_attack_more();
+         }
+      }
+   }
+
+      // Add tab
+   if (attackbox && attackbox->get_nritems())
+   {
+      attackbox->resize();
+      add_tab(pic_tab_attack, attackbox);
+   }
+}
 
 /*
 ===============
@@ -709,20 +784,64 @@ void FieldActionWindow::act_geologist()
  * extra parameter to the send_player_enemyflagaction, the player number
  *
  */
-void FieldActionWindow::act_attack()
+void FieldActionWindow::act_attack ()
 {
    assert(m_iabase->get_egbase()->is_game());
    Interactive_Player* m_player=static_cast<Interactive_Player*>(m_iabase);
    Game* g = m_player->get_game();
    BaseImmovable *imm = g->get_map()->get_immovable(m_field);
 
-   if (imm && imm->get_type() == Map_Object::FLAG)
-	g->send_player_enemyflagaction (
-      static_cast<Flag*>(imm), 
-      ENEMYFLAGACTION_ATTACK, 
-      m_player->get_player_number());
+   // Before doing this is needed to show a window to configure the attack.
+   if (imm && imm->get_type() == Map_Object::FLAG && m_attackers > 0)
+      g->send_player_enemyflagaction (
+         static_cast<Flag*>(imm), 
+         ENEMYFLAGACTION_ATTACK, 
+         m_player->get_player_number(),
+         m_attackers,  // Number of soldiers
+         m_attackers_type); // Type of soldiers
 
    okdialog();
+}
+   
+void FieldActionWindow::act_attack_more()
+{
+   // TODO: Recalculate the number of available soldiers
+   char buf[20];
+   uint available = 99;
+   
+   if (m_attackers < available)
+      m_attackers ++;
+   else
+      m_attackers = available;
+
+   sprintf(buf, "%d/%d", m_attackers, available);
+   m_text_attackers->set_text (buf);
+}
+
+void FieldActionWindow::act_attack_less()
+{
+   // TODO: Recalculate the number of available soldiers
+   char buf[20];
+   uint available = 99;
+   
+   if (m_attackers > 0)
+      m_attackers --;
+   else
+      m_attackers = 0;
+            
+   sprintf(buf, "%d/%d", m_attackers, available);
+   m_text_attackers->set_text (buf);
+}
+
+void FieldActionWindow::act_attack_strong()
+{
+   m_attackers_type = STRONGEST;
+}
+
+
+void FieldActionWindow::act_attack_weak()
+{
+   m_attackers_type = WEAKEST;
 }
 
 /*

@@ -282,11 +282,13 @@ class Cmd_EnemyFlagAction:public PlayerCommand {
 	int serial;
 	int action;
    int attacker;
+   int number;
+   int type;
 
     public:
 	Cmd_EnemyFlagAction(void) : PlayerCommand() { } // For savegame loading
-	Cmd_EnemyFlagAction (int t, int p, Flag* f, int a, int at):PlayerCommand(t,p)
-	{ serial=f->get_serial(); action=a; attacker=at; }
+	Cmd_EnemyFlagAction (int t, int p, Flag* f, int a, int at, int num, int ty):PlayerCommand(t,p)
+	{ serial=f->get_serial(); action=a; attacker=at; number=num; type=ty; }
    
    // Write these commands to a file (for savegames)
    virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);

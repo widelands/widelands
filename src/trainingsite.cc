@@ -137,7 +137,7 @@ Returns the minium level that this building can upgrade of specified attribute
 int TrainingSite_Descr::get_min_level (tAttribute at) {
 	switch (at) {
 		case atrHP:			return m_min_hp;
-		case atrAttack:		return m_min_attack;
+		case atrAttack:	return m_min_attack;
 		case atrDefense:	return m_min_defense;
 		case atrEvade:		return m_min_evade;
 		default:
@@ -155,7 +155,7 @@ Returns the maxium level that this building can upgrade of specified attribute
 int TrainingSite_Descr::get_max_level (tAttribute at) {
 	switch (at) {
 		case atrHP:			return m_max_hp;
-		case atrAttack:		return m_max_attack;
+		case atrAttack:	return m_max_attack;
 		case atrDefense:	return m_max_defense;
 		case atrEvade:		return m_max_evade;
 		default:
@@ -208,7 +208,7 @@ TrainingSite::~TrainingSite()
 ===============
 TrainingSite::get_statistics_string
 
-Display number of soldiers.
+Display progran running.
 ===============
 */
 std::string TrainingSite::get_statistics_string()
@@ -569,6 +569,7 @@ void TrainingSite::find_next_program (Game *g) {
 
 		split_string (m_list_upgrades[i], &str, "_");
 
+      molog (m_list_upgrades[i].c_str());
 		assert (str.size() == 2); // upgrade what
 
 		if (str[1] == "hp") attrib = atrHP;

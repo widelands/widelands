@@ -22,6 +22,10 @@
 
 #include "worker.h"
 
+// Constants used to launch attacks
+#define WEAKEST   0
+#define STRONGEST 1
+
 class Editor_Game_Base;
 
 #define HP_FRAMECOLOR RGBColor(255,255,255)
@@ -31,7 +35,7 @@ public:
 	Soldier_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Soldier_Descr(void);
    
-   virtual Worker_Type get_worker_type(void) const { return SOLDIER; }
+   virtual Worker_Type get_worker_type(void) const { return Worker_Descr::SOLDIER; }
 
    virtual void load_graphics(void); 
 
@@ -177,19 +181,14 @@ private:
 
    void defendbuilding_update (Game*, State*);
    void defendbuilding_signal (Game*, State*);
-/*   void  combat_update (Game*, State*);
-   void  combat_signal (Game*, State*);
-   
-   
+/*
    void  conquerbuilding_update (Game*, State*);
    void  conquerbuilding_signal (Game*, State*);*/
    
 protected:
-//    static Task taskCombat;
    static Task taskLaunchAttack;    // Handle all the attack
    static Task taskWaitForAssault;  // Wait while the building isn't empty
 //    static Task taskConquerBuilding;
-//    static Task taskWaitForInvadeBuilding;
 
       // Defending stuff tasks
    static Task taskDefendBuilding;  // Defend the building under attack!!

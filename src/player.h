@@ -114,7 +114,7 @@ class Player {
       void change_soldier_capacity (PlayerImmovable* , int val);
       void change_training_options(PlayerImmovable* imm, int atr, int val);
          // Launch an attack
-      void enemyflagaction(Flag* flag, int action, int param);
+      void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
 	private:
 		bool m_see_all;
       

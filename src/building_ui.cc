@@ -468,7 +468,7 @@ protected:
 	void act_debug();
 	void act_start_stop();
    void act_enhance(int);
-	 void act_drop_soldier(uint);
+   void act_drop_soldier(uint);
 	void act_change_soldier_capacity(int);
 
 private:

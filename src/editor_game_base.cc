@@ -18,6 +18,7 @@
  */
 
 #include <set>
+#include "battle.h"
 #include "building.h"
 #include "editor_game_base.h"
 #include "game.h"
@@ -125,7 +126,9 @@ Editor_Game_Base::~Editor_Game_Base() {
    for(i = 0; i < (int)m_tribes.size(); i++)
 		delete m_tribes[i];
 	m_tribes.resize(0);
-   
+
+   m_battle_serials.resize(0);
+      
    memset (m_conquer_map, 0, sizeof (m_conquer_map));
 }
 
@@ -241,13 +244,13 @@ void Editor_Game_Base::conquer_area_no_building(uchar playernr, Coords coords, i
  *    If changing type of influence will be allowed at game, will be needed to add new
  * parameter at this function.
  */
-#define MAX_RADIUS 64
+#define MAX_RADIUS 32
 int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
 {
    int w = m_map->get_width(),
        h = m_map->get_height(),
        influence = 0,
-       method = 1;
+       method = 0;
    uint minx = std::min (std::min(abs(a.x - b.x), abs(a.x - b.x + w)), abs(a.x - b.x - w));
    uint miny = std::min (std::min(abs(a.y - b.y), abs(a.y - b.y + h)), abs(a.y - b.y - h));
     
@@ -256,23 +259,23 @@ int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
    
    if (method == 0)
    {
-         // This method makes a "parabola" like x^2, but the maxium radius is MAX_RADIUS,
-         // Warning : it seems that doesn't work fine
+         // This method makes a "parabola" like x^4, but the maxium radius is MAX_RADIUS,
+         // Now it works good, I've an stupid mistake ;)
       if (influence > radius)
          influence = 0;
       else if (influence == 0)
          influence = MAX_RADIUS;
       else
-         influence = MAX_RADIUS - radius;
+         influence = MAX_RADIUS - influence;
    
-      influence *= influence;
+      influence *= influence * influence * influence;
    }
    else if (method == 1)
    {
       //    The function used here to calculate the influence is (d*(d-1))/2 + 1 and this
       // functions returns something like: 1, 2, 4, 7, 11, 15, 21, 27 ... 
       // Works well, but lacks with the bug of cleaning immovables ...
-      influence = radius - influence;
+      influence = radius - influence + 1;
 
       if (influence < 1)
          influence = 0;
@@ -665,6 +668,14 @@ Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name, Tribe_
 								c.x, c.y, name.c_str());
 
 	return create_immovable(c, idx, tribe);
+}
+      
+Battle* Editor_Game_Base::create_battle ()
+{
+   Battle* b = new Battle ();
+   b->init (this);
+   m_battle_serials.push_back (b->get_serial());
+   return b;
 }
 
 /*

@@ -703,8 +703,10 @@ void Cmd_ChangeSoldierCapacity::Write(FileWrite *fw, Editor_Game_Base* egbase, W
 Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (Deserializer* des):PlayerCommand (0, des->getchar())
 {
 	action=des->getchar();
-	attacker=des->getchar();
 	serial=des->getlong();
+	attacker=des->getchar();
+	number=des->getchar();
+	type=des->getchar();
 }
 
 void Cmd_EnemyFlagAction::execute (Game* g)
@@ -723,7 +725,7 @@ void Cmd_EnemyFlagAction::execute (Game* g)
 	if (obj &&
        obj->get_type() == Map_Object::FLAG && 
        imm->get_owner() != real_player)
-		real_player->enemyflagaction (static_cast<Flag*>(obj), action, attacker);
+		real_player->enemyflagaction (static_cast<Flag*>(obj), action, attacker, number, type);
    else
       log ("Cmd_EnemyFlagAction Player invalid.\n");
 }
@@ -733,10 +735,12 @@ void Cmd_EnemyFlagAction::serialize (Serializer* ser)
 	ser->putchar (PLCMD_ENEMYFLAGACTION);
 	ser->putchar (get_sender());
 	ser->putchar (action);
-	ser->putchar (attacker);
 	ser->putlong (serial);
+	ser->putchar (attacker);
+	ser->putchar (number);
+	ser->putchar (type);
 }
-#define PLAYER_CMD_ENEMYFLAGACTION_VERSION 1
+#define PLAYER_CMD_ENEMYFLAGACTION_VERSION 2
 void Cmd_EnemyFlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
  int version=fr->Unsigned16();
    if(version==PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
@@ -746,13 +750,15 @@ void Cmd_EnemyFlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands
       // action
       action=fr->Unsigned8();
       
-      // param
-      attacker=fr->Unsigned8();
-
       // Serial
       int fileserial=fr->Unsigned32();
       assert(mol->is_object_known(fileserial));
       serial=mol->get_object_by_file_index(fileserial)->get_serial();
+      
+      // param
+      attacker=fr->Unsigned8();
+      number=fr->Unsigned8();
+      type=fr->Unsigned8();
    } else
       throw wexception("Unknown version in Cmd_FlagAction::Read: %i", version);
 }
@@ -763,12 +769,15 @@ void Cmd_EnemyFlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
    PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
    // Now action
    fw->Unsigned8(action);
-   // Now param
-   fw->Unsigned8(attacker);
 
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(serial);
    assert(mos->is_object_known(obj));
    fw->Unsigned32(mos->get_object_file_index(obj)); 
+   
+   // Now param
+   fw->Unsigned8(attacker);
+   fw->Unsigned8(number);
+   fw->Unsigned8(type);
 }
 
