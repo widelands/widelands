@@ -23,13 +23,19 @@
 #include "types.h"
 
 // TODO: figure out a way to define these portably
-// At the moment it just distinguishs between i386- and PowerPC-architecture
+// Currently supported: i386, PowerPC, Sparc
 #if defined (__ppc__)
 #undef P_LITTLE_ENDIAN
 #define P_BIG_ENDIAN
+#undef P_ALIGNMENT
+#elif defined (__sparc__)
+#undef P_LITTLE_ENDIAN
+#define P_BIG_ENDIAN
+#define P_ALIGNMENT
 #elif defined (__i386__)
 #undef P_BIG_ENDIAN
 #define P_LITTLE_ENDIAN
+#undef P_ALIGNMENT
 #else
 #error architecture not supported
 #endif
@@ -77,5 +83,48 @@ inline float SwapFloat(float x)
 	((uchar *)&s)[3] = ((uchar *)&x)[0];
 	return s;
 }
+
+inline char Deref8(const void* ptr)
+{
+	return *reinterpret_cast<const char*>(ptr);
+}
+
+#ifdef P_ALIGNMENT
+inline short Deref16(const void* ptr)
+{
+	short r;
+	memcpy(&r, ptr, sizeof(r));
+	return r;
+}
+
+inline int Deref32(const void* ptr)
+{
+	int r;
+	memcpy(&r, ptr, sizeof(r));
+	return r;
+}
+
+inline float DerefFloat(const void* ptr)
+{
+	float r;
+	memcpy(&r, ptr, sizeof(r));
+	return r;
+}
+#else
+inline short Deref16(const void* ptr)
+{
+	return *reinterpret_cast<const short*>(ptr);
+}
+
+inline int Deref32(const void* ptr)
+{
+	return *reinterpret_cast<const int*>(ptr);
+}
+
+inline float DerefFloat(const void* ptr)
+{
+	return *reinterpret_cast<const float*>(ptr);
+}
+#endif
 
 #endif

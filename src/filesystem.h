@@ -110,13 +110,13 @@ public:
 	inline int GetSize() const { return length; }
 	void SetFilePos(int pos);
 
-	inline char Signed8(int pos = -1) { return *(char *)Data(1, pos); }
-	inline uchar Unsigned8(int pos = -1) { return *(uchar *)Data(1, pos); }
-	inline short Signed16(int pos = -1) { return Little16(*(short *)Data(2, pos)); }
-	inline ushort Unsigned16(int pos = -1) { return (ushort)Little16(*(short *)Data(2, pos)); }
-	inline int Signed32(int pos = -1) { return Little32(*(int *)Data(4, pos)); }
-	inline uint Unsigned32(int pos = -1) { return (uint)Little32(*(int *)Data(4, pos)); }
-	inline float Float(int pos = -1) { return LittleFloat(*(float *)Data(4, pos)); }
+	inline char Signed8(int pos = -1) { return Deref8(Data(1, pos)); }
+	inline uchar Unsigned8(int pos = -1) { return (uchar)Deref8(Data(1, pos)); }
+	inline short Signed16(int pos = -1) { return Little16(Deref16(Data(2, pos))); }
+	inline ushort Unsigned16(int pos = -1) { return (ushort)Little16(Deref16(Data(2, pos))); }
+	inline int Signed32(int pos = -1) { return Little32(Deref32(Data(4, pos))); }
+	inline uint Unsigned32(int pos = -1) { return (uint)Little32(Deref32(Data(4, pos))); }
+	inline float Float(int pos = -1) { return LittleFloat(DerefFloat(Data(4, pos))); }
 	char *CString(int pos = -1);
 	bool ReadLine(char *buf, int buflen);
 
