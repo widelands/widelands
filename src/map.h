@@ -36,12 +36,6 @@
 
 #include "world.h"
 
-#ifdef _MSC_VER
-#pragma pack(push, 1)
-#else
-#pragma pack(1)
-#endif
-
 /** struct Map_Header
  *
  * This is the header of a widelands map format
@@ -94,12 +88,6 @@ struct FieldDescr {
 		  ushort bob_nr;
 } /* size: 16 bytes */ ;
 
-#ifdef _MSC_VER
-#pragma pack(pop)
-#else
-#pragma pack()
-#endif
-
 class Building;
 class Creature;
 class Bob;
@@ -108,11 +96,11 @@ class Bob;
  *
  * a field like it is represented in the game
  */
-#define FIELD_WIDTH 56
-#define FIELD_HEIGHT 64
+#define FIELD_WIDTH 58
+#define FIELD_HEIGHT 58
 //#define FIELD_WIDTH   58
 //#define FIELD_HEIGHT  58
-#define HEIGHT_FACTOR 6
+#define HEIGHT_FACTOR 5
 
 class Field {
 	friend class Map;

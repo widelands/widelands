@@ -20,8 +20,6 @@
 #ifndef __S__S2MAP_H
 #define __S__S2MAP_H
 
-#pragma pack(1)
-
 struct S2MapDescrHeader {
 		  char   magic[10]; // "WORLD_V1.0"
 		  char 	name[20]; 
@@ -32,8 +30,6 @@ struct S2MapDescrHeader {
 		  char 	author[26];
 		  char 	bulk[2290]; // unknown 
 } /* size 2352 */; 
-
-#pragma pack()
 
 // MILLIONS of Definitions
 // Bobs

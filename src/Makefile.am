@@ -1,5 +1,5 @@
 EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -pg -fprofile-arcs -g
-# EXTRA_FLAGS=@SDL_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2 -O3
+#EXTRA_FLAGS=@SDL_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2 -O3
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
 CXXFLAGS= $(EXTRA_FLAGS)
@@ -92,7 +92,11 @@ widelands_SOURCES=main.cc \
 						md5.h \
                   pic.h \
                   auto_pic.h \
-                  auto_pic.cc
+                  auto_pic.cc \
+                  md5file.h \
+                  md5file.cc \
+                  helper.cc \
+                  helper.h
 
 
 

@@ -39,12 +39,6 @@ WordFile
 #define WLWF_VERSIONMAJOR(a)	(a >> 8)
 #define WLWF_VERSIONMINOR(a)	(a & 0xFF)
 
-#ifdef _MSC_VER
-#pragma pack(push, 1)
-#else
-#pragma pack(1)
-#endif
-
 struct WorldFileHeader
 {
 	char magic[6];			// "WLwf\0\0"
@@ -129,11 +123,5 @@ struct Anim
 	uint pics;
 	uint* pic;
 };
-
-#ifdef _MSC_VER
-#pragma pack(pop)
-#else
-#pragma pack()
-#endif
 
 #endif //__WORLDFILETYPES_H

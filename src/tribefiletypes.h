@@ -22,13 +22,6 @@
 
 #include "mytypes.h"
 
-#if defined(WIN32) && defined(_MSC_VER)
-#pragma pack(push, 1)
-#else
-#pragma pack(1)
-#endif
-
-
 struct TribeFileHeader
 {
 	char magic[6];			// "WLtf\0\0"
@@ -83,12 +76,5 @@ struct Ware
 	uint pic;
 	uint menupic;
 };
-
-
-#if defined(WIN32) && defined(_MSC_VER)
-#pragma pack(pop, 1)
-#else 
-#pragma pack()
-#endif
 
 #endif //__TRIBEFILETYPES_H

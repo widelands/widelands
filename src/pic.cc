@@ -224,7 +224,7 @@ void Pic::set_size(const uint nw, const uint nh) {
    w=nw;
    pitch=nw;
    h=nh;
-
+   
    clear_all();
 }
 

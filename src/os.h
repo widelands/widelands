@@ -33,8 +33,11 @@
 		#define DEBUG
 	#endif //_DEBUG
 #else //WIN32
-	#include <unistd.h>
-	#define strcmpi strcasecmp
+   #include <sys/types.h>
+   #include <sys/stat.h>
+   #include <fcntl.h>
+   #include <unistd.h>
+   #define strcmpi strcasecmp
 	#define strncmpi strncasecmp
 	#define SEP			"/"
 	#define CSEP		'/'

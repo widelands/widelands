@@ -84,11 +84,6 @@ class Font_Handler : public Singleton<Font_Handler> {
 								Pic p[96];
 					 } fonts[MAX_FONTS];
 
-#ifdef _MSC_VER
-#pragma pack(push, 1)
-#else           
-#pragma pack(1)
-#endif
 					 struct FHeader {
 								char magic[6];
 								ushort version;
@@ -96,11 +91,6 @@ class Font_Handler : public Singleton<Font_Handler> {
 								ushort clrkey;
 								ushort height;
 					 };
-#ifdef _MSC_VER
-#pragma pack(pop)
-#else           
-#pragma pack()
-#endif
 					 
 };
 

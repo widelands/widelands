@@ -77,13 +77,20 @@ void ChkSum::pass_data(const void* data, uint length) {
 					 nread+=length;
 					 return;
 		  } else {
+           
+           
 					 // Buffers is full
 					 memcpy(buf+nread, data, BLOCKSIZE-nread);
 					 // Handle buffer
 					 md5_process_block(buf, BLOCKSIZE, &ctx);
-					 memcpy(buf, (const char*) (data)+(BLOCKSIZE-nread), length-(BLOCKSIZE-nread));
+					 data=(((char*) data)+BLOCKSIZE-nread);
+                length-=BLOCKSIZE-nread;
+                nread=0;
+                pass_data(data, length);
+/*
+                memcpy(buf, (const char*) (data)+(BLOCKSIZE-nread), length-(BLOCKSIZE-nread));
 					 nread=length-(BLOCKSIZE-nread);
-		  }					 
+*/		  }					 
 		  
 }
 

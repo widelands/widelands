@@ -72,13 +72,14 @@ int kbdh(const char* str, void* a) {
  *
  * return Exitcode of App
  */
+#include "md5file.h"
 inline int g_main(int argn, char** argc)
 {
 	static Font_Handler f; // Global instance for the hole game
 	static User_Interface ui; // Global instance for the hole game
 	static Cursor cur; // This is the global cursor instance, init here for the whole game
-	
-	// Setup default searchpaths
+
+   	// Setup default searchpaths
 	setup_searchpaths();
 	
 	// Handle options

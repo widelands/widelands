@@ -24,12 +24,6 @@
 #include "../src/os.h"
 #include <string.h>
 
-#ifdef _MSC_VER
-#pragma pack(push, 1)
-#else
-#pragma pack(1)
-#endif
-
 #define BITMAP_MAGIC	0x4D42		// 'MB' -> "BM" in file
 struct BitmapFileHeader
 {
@@ -54,11 +48,6 @@ struct BitmapInfoHeader
    uint		clrUsed;
    uint		clrImportant;
 };
-#ifdef _MSC_VER
-#pragma pack(pop)
-#else
-#pragma pack()
-#endif
 
 inline ushort pack_rgb(uchar r, uchar g, uchar b)
 {

@@ -27,20 +27,22 @@
 #include "profile.h"
 #include "myfile.h"
 
-#define TRUE_WORDS 3
+#define TRUE_WORDS 4
 const char* trueWords[TRUE_WORDS] =
 {
 	"true",
 	"yes",
-	"on"
+	"on", 
+   "1"
 };
 
-#define FALSE_WORDS 3
+#define FALSE_WORDS 4
 const char* falseWords[FALSE_WORDS] =
 {
 	"false",
 	"no",
-	"off"
+	"off",
+   "0"
 };
 
 /*
@@ -81,7 +83,7 @@ Section::Section(std::ostream &errstream, const char *name, bool supress_error)
 {
    supr_err=supress_error;
 	used = false;
-	sname = strdup(name);
+   sname = strdup(name);
 }
 
 Section::~Section()
