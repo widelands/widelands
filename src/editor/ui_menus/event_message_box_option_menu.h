@@ -17,43 +17,41 @@
  *
  */
 
-#ifndef __S__EDITOR_MAIN_MENU_MAP_OPTIONS_H
-#define __S__EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#ifndef __S__EVENT_MESSAGE_BOX_OPTION_MENU_H
+#define __S__EVENT_MESSAGE_BOX_OPTION_MENU_H
 
-#include "map.h"
+#include <string>
 #include "ui_window.h"
-#include "ui_textarea.h"
-#include "ui_multilineeditbox.h"
-#include "ui_editbox.h"
-
 
 class Editor_Interactive;
+class UIButton;
+class Event_Message_Box;
+class UITextarea;
+class UIMultiline_Editbox;
+class UIEdit_Box;
 
 /*
-=================================================
-
-class Main_Menu_Map_Options
-
-this is the Main Options Menu. Here, informations
-about the current map are displayed and you can change
-author, name and description
-
-=================================================
-*/
-class Main_Menu_Map_Options : public UIWindow {
+ * This is a modal box - The user must end this first 
+ * before it can return
+ */
+class Event_Message_Box_Option_Menu : public UIWindow {
    public:
-      Main_Menu_Map_Options(Editor_Interactive*);
-      virtual ~Main_Menu_Map_Options();
+      Event_Message_Box_Option_Menu(Editor_Interactive*, Event_Message_Box*);
+      ~Event_Message_Box_Option_Menu();
+
+      bool handle_mouseclick(uint btn, bool down, int mx, int my);
 
    private:
-      void changed(int);
-      void editbox_changed(void);
-      Editor_Interactive  *m_parent;
-      UIMultiline_Editbox* m_descr;
-      UITextarea* m_world, *m_nrplayers, *m_size;
-      UIEdit_Box* m_name, *m_author;
-      void update();
+      void clicked(int);
+      void cb_changed(bool); 
+
+      bool m_is_one_time_event;
+      Event_Message_Box* m_event;
+      Editor_Interactive* m_parent;
+      UIEdit_Box* m_name;
+      UIMultiline_Editbox* m_textarea;
 };
 
 #endif
+
 

@@ -17,25 +17,33 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__EVENT_FACTORY_H
+#define __S__EVENT_FACTORY_H
+
+#include "event_ids.h"
+#include "types.h"
+
+class Event;
+class Editor_Interactive;
+
+struct Event_Descr {
+   uint id;
+   const char* name;
+   const char* descr;
+};
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
- *
- * Scenario packets have the highest bit set
+ * This class returns the correct descriptions,
+ * ids and creates the correct option dialog and (of course) event
+ * for each event-id
  */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
-#define PACKET_BOB              5
-#define PACKET_RESOURCES        6
-#define PACKET_PLAYER_NAM_TRIB  7        // Scenario packet 
-#define PACKET_TRIGGER          8        // Scenraio packet, non obligatory
-#define PACKET_EVENT            9        // Scenraio packet, non obligatory
+class Event_Factory {
+   public:
+      static Event* get_correct_event(uint id);
+      static Event* make_event_with_option_dialog(uint id, Editor_Interactive*, Event*);
+      
+      static Event_Descr* get_correct_event_descr(uint id);
+      static const uint get_nr_of_available_events(void);
+};
 
 #endif
-

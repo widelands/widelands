@@ -17,25 +17,18 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__EVENT_IDS_H
+#define __S__EVENT_IDS_H
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
+ * If you change anything here, 
+ * make sure that you also change event_factory.cc
  *
- * Scenario packets have the highest bit set
+ * Make sure that the orders of this enum and in the 
+ * description structure in event_factory.cc stay the same
  */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
-#define PACKET_BOB              5
-#define PACKET_RESOURCES        6
-#define PACKET_PLAYER_NAM_TRIB  7        // Scenario packet 
-#define PACKET_TRIGGER          8        // Scenraio packet, non obligatory
-#define PACKET_EVENT            9        // Scenraio packet, non obligatory
+enum {
+   EVENT_MESSAGE_BOX = 0,
+};
 
 #endif
-

@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_event_menu_new_trigger.h"
+#include "editor_event_menu_new_event.h"
 #include "ui_window.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
@@ -25,18 +25,18 @@
 #include "ui_listselect.h"
 #include "editorinteractive.h"
 #include "system.h"
-#include "trigger.h"
-#include "trigger_factory.h"
+#include "event.h"
+#include "event_factory.h"
 #include "map.h"
 #include "error.h"
 
 
-Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
-   UIWindow(parent, 0, 0, 400, 240, "New Trigger") {
+Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* parent) :
+   UIWindow(parent, 0, 0, 400, 240, "New Event") {
   m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "New Trigger Menu", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, "New Event Menu", Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -45,14 +45,14 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
    int posx=offsx;
    int posy=offsy;
    
-   // Trigger List
-   new UITextarea(this, spacing, offsy, "Available Triggers: ", Align_Left);
-   m_trigger_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
-   m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
+   // Event List
+   new UITextarea(this, spacing, offsy, "Available Events: ", Align_Left);
+   m_event_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
    uint i=0; 
-   for(i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
-      Trigger_Descr* d=Trigger_Factory::get_correct_trigger_descr(i);
-      m_trigger_list->add_entry(d->name, d);
+   for(i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
+      Event_Descr* d=Event_Factory::get_correct_event_descr(i);
+      m_event_list->add_entry(d->name, d);
    }
 
    // Descr List
@@ -63,12 +63,12 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
    posx=(get_inner_w()/2)-80-spacing;
    m_ok_button=new UIButton(this, posx, posy, 80, 20, 0, 1);
    m_ok_button->set_title("Ok");
-   m_ok_button->clickedid.set(this, &Editor_Event_Menu_New_Trigger::clicked);
+   m_ok_button->clickedid.set(this, &Editor_Event_Menu_New_Event::clicked);
    m_ok_button->set_enabled(0);
    posx=(get_inner_w()/2)+spacing;
    UIButton* b=new UIButton(this, posx, posy, 80, 20, 1, 0);
    b->set_title("Cancel");
-   b->clickedid.set(this, &Editor_Event_Menu_New_Trigger::clicked);
+   b->clickedid.set(this, &Editor_Event_Menu_New_Event::clicked);
 
    center_to_parent();
 }
@@ -76,7 +76,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
 /*
  * cleanup
  */
-Editor_Event_Menu_New_Trigger::~Editor_Event_Menu_New_Trigger(void) {
+Editor_Event_Menu_New_Event::~Editor_Event_Menu_New_Event(void) {
 }
 
 /*
@@ -86,7 +86,7 @@ Editor_Event_Menu_New_Trigger::~Editor_Event_Menu_New_Trigger(void) {
  * on close (the caller must do this) instead 
  * we simulate a cancel click
  */
-bool Editor_Event_Menu_New_Trigger::handle_mouseclick(uint btn, bool down, int mx, int my) {
+bool Editor_Event_Menu_New_Event::handle_mouseclick(uint btn, bool down, int mx, int my) {
    if(btn == MOUSE_RIGHT && down) {
       clicked(0);
       return true;
@@ -97,27 +97,24 @@ bool Editor_Event_Menu_New_Trigger::handle_mouseclick(uint btn, bool down, int m
 /*
  * a button has been clicked
  */
-void Editor_Event_Menu_New_Trigger::clicked(int i) {
+void Editor_Event_Menu_New_Event::clicked(int i) {
    if(!i) {
       // Cancel has been clicked
       end_modal(0);
       return;
    }
-   
-   Trigger_Descr* d=static_cast<Trigger_Descr*>(m_trigger_list->get_selection());
-   // Create new trigger
-   Trigger* trig=
-      Trigger_Factory::make_trigger_with_option_dialog(d->id, m_parent, 0);
-   if(!trig) {
+
+   Event_Descr* d=static_cast<Event_Descr*>(m_event_list->get_selection());
+   // Create new event
+   Event* event=
+      Event_Factory::make_event_with_option_dialog(d->id, m_parent, 0);
+   if(!event) {
       end_modal(0); 
       return; 
    }
-   if(m_parent->get_map()->trigger_exists(trig)) {
-      trig->decr_reference();
-      m_parent->get_map()->unregister_trigger(trig);
+   if(!m_parent->get_map()->event_exists(event)) {
+      m_parent->get_map()->register_new_event(event);
    }
-   trig->incr_reference(); // Kludge that it doens't get deleted
-   m_parent->get_map()->register_new_trigger(trig);
    end_modal(1);
    return;
 }
@@ -125,8 +122,8 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
 /*
  * the listbox got selected
  */
-void Editor_Event_Menu_New_Trigger::selected(int i) {
-   Trigger_Descr* d=Trigger_Factory::get_correct_trigger_descr(i);
+void Editor_Event_Menu_New_Event::selected(int i) {
+   Event_Descr* d=Event_Factory::get_correct_event_descr(i);
    m_description->set_text(d->descr);
    m_ok_button->set_enabled(true);
 }

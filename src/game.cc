@@ -149,6 +149,8 @@ bool Game::run(void)
 
       // Prepare the map, set default textures
       get_map()->recalc_default_resources();
+      get_map()->delete_unreferenced_triggers();
+      get_map()->delete_events_without_trigger();
 
 		load_graphics();
 

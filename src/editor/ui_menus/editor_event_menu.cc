@@ -25,6 +25,8 @@
 #include "ui_listselect.h"
 #include "error.h"
 #include "editor_event_menu_new_trigger.h"
+#include "editor_event_menu_new_event.h"
+#include "editor_event_menu_choose_trigger.h"
 #include "trigger.h"
 #include "map.h"
 #include "trigger_factory.h"
@@ -121,6 +123,22 @@ void Editor_Event_Menu::update(void) {
       trig=m_parent->get_map()->get_trigger(i);
       m_trigger_list->add_entry(trig->get_name(), trig);
    }
+  
+   Event* event=0;
+   m_event_list->clear();
+   for(i=0; i<m_parent->get_map()->get_number_of_events(); i++) {
+      event=m_parent->get_map()->get_event(i);
+      m_event_list->add_entry(event->get_name(), event);
+   }
+    
+   if(!m_trigger_list->get_selection()) {
+      m_btn_del_trigger->set_enabled(false);
+      m_btn_edit_trigger->set_enabled(false);
+   }
+   if(!m_event_list->get_selection()) {
+      m_btn_del_event->set_enabled(false);
+      m_btn_edit_event->set_enabled(false);
+   }
 }
 
 /*
@@ -130,19 +148,37 @@ void Editor_Event_Menu::clicked(int id) {
    if(id<3) {
       if(id==0) {
          // New Event
+         Map* map=m_parent->get_map();
+         // Create the event if needed
+         Editor_Event_Menu_New_Event* ntm=new Editor_Event_Menu_New_Event(m_parent);
+         int retval=ntm->run();
+         delete ntm;
+         if(retval) {
+            Editor_Event_Menu_Choose_Trigger* ntm=new Editor_Event_Menu_Choose_Trigger(m_parent, map->get_event(map->get_number_of_events()-1));
+            ntm->run();
+            delete ntm;
+            update();
+         }
       } else if(id==1) {
          // Delete event
+         Event* event=static_cast<Event*>(m_event_list->get_selection());
+         m_parent->get_map()->unregister_event(event);
+         update();
       } else if(id==2) {
-         // edit event
+         Event* event=static_cast<Event*>(m_event_list->get_selection());
+         Editor_Event_Menu_Choose_Trigger* ntm=new Editor_Event_Menu_Choose_Trigger(m_parent, event);
+         ntm->run();
+         delete ntm;
+         update();
       }
    } else {
       if(id==3) {
-      // New Trigger
-      Editor_Event_Menu_New_Trigger* ntm=new Editor_Event_Menu_New_Trigger(m_parent);
-      int retval=ntm->run();
-      if(retval) 
-         update();
-      delete ntm;
+         // New Trigger
+         Editor_Event_Menu_New_Trigger* ntm=new Editor_Event_Menu_New_Trigger(m_parent);
+         int retval=ntm->run();
+         if(retval) 
+            update();
+         delete ntm;
       } else if(id==4) {
          // Edit trigger
          Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
@@ -151,6 +187,10 @@ void Editor_Event_Menu::clicked(int id) {
       } else if(id==5) {
          // Delete trigger
          Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
+         trig->decr_reference();
+         int i;
+         for(i=0; i<m_parent->get_map()->get_number_of_events(); i++) 
+            m_parent->get_map()->get_event(i)->unregister_trigger(trig, m_parent->get_map());
          m_parent->get_map()->unregister_trigger(trig);
          update();
       }

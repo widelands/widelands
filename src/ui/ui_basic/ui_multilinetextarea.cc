@@ -27,7 +27,7 @@
 Initialize a textarea that supports multiline strings.
 */
 UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w, uint h,
-                                       const char *text, Align align)
+                                       const char *text, Align align, bool always_show_scrollbar)
 	: UIPanel(parent, x, y, w - 24, h)
 {
 	set_handle_mouse(false);
@@ -45,9 +45,11 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 
 	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_BIG));
 	m_scrollbar->set_steps(1);
-   
+   m_scrollbar->set_force_draw(always_show_scrollbar);
+
    set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
 
+   
 	if (text)
 		set_text(text);
    

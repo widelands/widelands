@@ -54,7 +54,7 @@ void Widelands_Map_Trigger_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
          assert(trig);
          trig->Read(fr);
          if(get_scenario_skip()) 
-            delete trig; // what a waste, but o, we are not requested
+            delete trig; 
          else 
             map->register_new_trigger(trig);
       }

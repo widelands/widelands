@@ -17,25 +17,37 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__MESSAGEBOX_H
+#define __S__MESSAGEBOX_H
+
+#include <string>
+#include "event.h"
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
- *
- * Scenario packets have the highest bit set
+ * This event shows a message box
  */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
-#define PACKET_BOB              5
-#define PACKET_RESOURCES        6
-#define PACKET_PLAYER_NAM_TRIB  7        // Scenario packet 
-#define PACKET_TRIGGER          8        // Scenraio packet, non obligatory
-#define PACKET_EVENT            9        // Scenraio packet, non obligatory
+class Event_Message_Box : public Event {
+   public:
+     Event_Message_Box();
+      ~Event_Message_Box();
+      
+      // one liner functions
+      uint get_id(void) { return EVENT_MESSAGE_BOX; } 
+
+      void run(Game*);
+      
+      // File Functions
+      void Write(FileWrite*, Editor_Game_Base*);
+      void Read(FileRead*, Editor_Game_Base*, bool);
+  
+      inline void set_string(const char* str) { m_string=str; }
+      inline const char* get_string(void) { return m_string.c_str(); }
+      
+   private:
+      std::string m_string;
+};
+
+
 
 #endif
 

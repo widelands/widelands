@@ -44,7 +44,7 @@ class UIMultiline_Textarea : public UIPanel {
 
    public:
       UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w, uint h, const char *text,
-            Align align = Align_Left);
+            Align align = Align_Left, bool always_show_scrollbar = false);
       ~UIMultiline_Textarea();
 
       std::string get_text() const { return m_text; }
@@ -62,6 +62,10 @@ class UIMultiline_Textarea : public UIPanel {
       // Drawing and event handlers
       void draw(RenderTarget* dst);
 
+      inline const char* get_font_name() { return m_fontname.c_str(); }
+      inline const int get_font_size() { return m_fontsize; }
+      inline RGBColor& get_font_clr() { return m_fcolor; }
+      
    private:
 	Align				m_align;
 	std::string		m_text;
@@ -72,6 +76,10 @@ class UIMultiline_Textarea : public UIPanel {
    std::string    m_fontname;
    int            m_fontsize;
    RGBColor       m_fcolor;
+
+   protected:
+      inline int get_m_textpos(void) { return m_textpos; }
+
 };
 
 #endif // __S__MULTILINE_TEXTAREA_H

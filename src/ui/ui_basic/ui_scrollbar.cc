@@ -65,6 +65,7 @@ UIScrollbar::UIScrollbar(UIPanel *parent, int x, int y, uint w, uint h, bool hor
 	m_pic_buttons = g_gr->get_picture(PicMod_UI, "pics/but3.png");
 
 	m_time_nextact = 0;
+   m_force_draw = false;
 
 	set_think(true);
 }
@@ -289,7 +290,7 @@ void UIScrollbar::draw(RenderTarget* dst)
 {
 	uint knobpos = get_knob_pos();
 
-   if(m_steps==1) return; // don't draw a not doing scrollbar
+   if(m_steps==1 && !m_force_draw) return; // don't draw a not doing scrollbar
    
 	if (m_horizontal)
 	{

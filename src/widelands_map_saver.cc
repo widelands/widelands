@@ -31,6 +31,7 @@
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_player_names_and_tribes_data_packet.h"
 #include "widelands_map_trigger_data_packet.h"
+#include "widelands_map_event_data_packet.h"
 
 /*
  * Constructor
@@ -104,7 +105,11 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
       dp->Write(&fw, m_egbase);
       delete dp;
    }
-   
+  if(m_egbase->get_map()->get_number_of_events()) {
+      dp=new Widelands_Map_Event_Data_Packet();
+      dp->Write(&fw, m_egbase);
+      delete dp;
+   } 
    fw.Write(g_fs,m_filename); 
 }
 

@@ -21,6 +21,7 @@
 #define __S__TRIGGER_H
 
 #include <string>
+#include "error.h"
 
 class Game;
 class FileRead;
@@ -33,7 +34,7 @@ class FileWrite;
  */
 class Trigger {
    public:
-      Trigger(void) { };
+      Trigger(void) { m_reference=0; };
       virtual ~Trigger(void) { }
 
       // virtual functions, implemented by the real triggers
@@ -51,6 +52,9 @@ class Trigger {
       inline bool is_set(void) { return m_is_set; }
       inline bool is_one_time_trigger(void)  { return m_is_one_time_trigger; }
       inline void set_is_one_time_trigger(bool t) { m_is_one_time_trigger=t; }
+      inline void incr_reference(void) { ++m_reference; }
+      inline void decr_reference(void) { --m_reference; assert(m_reference>=0); }
+      inline bool is_unreferenced(void) { return !m_reference; }
 
       // File functions, to save or load this trigger
       virtual void Write(FileWrite*)=0;
@@ -66,6 +70,7 @@ class Trigger {
       std::string m_name;
       bool        m_is_set;
       bool        m_is_one_time_trigger;    // Can this trigger occur only once?
+      int         m_reference;
 };
 
 #endif

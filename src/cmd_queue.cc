@@ -164,11 +164,17 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
       trig->check_set_conditions(m_game);
       if(trig->is_set()!=trig_state) { 
          log("Trigger has changed state: %s gone to %i\n", trig->get_name(), trig->is_set());
-         if(trig->is_one_time_trigger()) 
-            m_game->get_map()->unregister_trigger(trig);
-         else {
-            // TEMP: reset the trigger. this will be done by events
-            trig->reset_trigger(m_game);
+         int i=0;
+         for(i=0; i<m_game->get_map()->get_number_of_events(); i++) {
+            Event* ev=m_game->get_map()->get_event(i);
+            bool is_one_timer=false;
+            if(ev->check_triggers()) {
+               // This event is ready to run
+               is_one_timer=ev->is_one_time_event();
+               ev->run(m_game);
+               if(is_one_timer) // The event was a one timer and got therefore deleted. we have to make sure that i stays valid
+                  i--;
+            }
          }
       }
       // recheck next trigger in the time that all triggers get checked at least once ever 10 seconds

@@ -40,7 +40,6 @@ class Editor_Event_Menu : public UIUniqueWindow {
 
    private:
       Editor_Interactive *m_parent;
-		UIUniqueWindowRegistry		m_window_readme;
 
       UIListselect* m_event_list, *m_trigger_list;
       UIButton *m_btn_del_event, *m_btn_edit_event, *m_btn_del_trigger, *m_btn_edit_trigger;

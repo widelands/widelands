@@ -23,6 +23,7 @@
 
 #include "ui_object.h"
 #include "types.h"
+#include "error.h"
 
 class RenderTarget;
 
@@ -115,7 +116,8 @@ public:
 
 	void set_can_focus(bool yes);
 	inline bool get_can_focus() const { return (_flags & pf_can_focus) ? true : false; }
-	void focus();
+	inline bool has_focus() const { assert(get_can_focus()); return (_parent->_focus == this); }
+   void focus();
 
 	void set_think(bool yes);
 	inline bool get_think() const { return (_flags & pf_think) ? true : false; }

@@ -68,7 +68,7 @@ Font* Font_Handler::find_correct_font(std::string name, int size, RGBColor fg, R
  * If wrap is positive, the function will wrap a line after that many pixels.
  */ 
 void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty, const char* string,
-      Align align, int wrap)
+      Align align, int wrap, int mark_char, int mark_value)
 {
    Font* f; 
    f=find_correct_font(font, size);
@@ -86,6 +86,7 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
          dsty -= h;
    }
 
+   int i=0;
    // Draw the string
    while(*string)
    {
@@ -118,6 +119,9 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
             f->get_char_size(0,&cw,&ch);
             if (c == '\t')
                cw *= 8;
+            if(mark_char==i) {
+               dst->brighten_rect(x,dsty,cw,ch,mark_value);
+            }
 
             x += cw;
          }
@@ -127,12 +131,25 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
                c = 127;
 
             c -= 32;
-            dst->blit(x, dsty, f->get_char_pic(c));
             int w,h;
             f->get_char_size(c,&w,&h);
+            if(mark_char==i) {
+               dst->brighten_rect(x,dsty,w,h,mark_value);
+            }
+            dst->blit(x, dsty, f->get_char_pic(c));
             x += w;
+         } else if(c=='\n') {
+            if(mark_char==i) {
+               int ch=0;
+               int cw=0;
+               f->get_char_size(0,&cw,&ch);
+               if(mark_char==i) {
+                  dst->brighten_rect(x,dsty,cw,ch,mark_value);
+               }
+            }
          }
 
+         i++;
          string++;
       }
 

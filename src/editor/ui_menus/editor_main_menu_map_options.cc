@@ -20,6 +20,7 @@
 #include "map.h"
 #include "ui_textarea.h"
 #include "ui_multilinetextarea.h"
+#include "ui_multilineeditbox.h"
 #include "ui_editbox.h"
 #include "editor_main_menu_map_options.h"
 #include "editorinteractive.h"
@@ -32,7 +33,7 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
-	: UIWindow(parent, (parent->get_w()-200)/2, (parent->get_h()-190)/2, 200, 190, "Map Options")
+	: UIWindow(parent, (parent->get_w()-200)/2, (parent->get_h()-300)/2, 200, 300, "Map Options")
 {
    m_parent=parent;
 
@@ -64,7 +65,9 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
    m_author=new UIEdit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 1);
    m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
-   m_descr=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, "Nothing defined!", Align_Left);
+   m_descr=new UIMultiline_Editbox(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, "Nothing defined!");
+   m_descr->set_maximum_chars(MAP_DESCR_LEN);
+   m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
    update();
 }
 
@@ -87,7 +90,7 @@ void Main_Menu_Map_Options::update(void) {
    sprintf(buf, "%i", map->get_nrplayers());
    m_nrplayers->set_text(buf);
    m_world->set_text(map->get_world_name());
-   m_descr->set_text("TODO: multiline editbox!!!");
+   m_descr->set_text(map->get_description());
 }
 
 
@@ -121,4 +124,10 @@ void Main_Menu_Map_Options::changed(int id) {
    update();
 }
 
+/*
+ * called when the editbox has changed
+ */
+void Main_Menu_Map_Options::editbox_changed(void) {
+   m_parent->get_map()->set_description(m_descr->get_text().c_str());
+}
 

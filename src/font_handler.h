@@ -66,7 +66,7 @@ public:
 
 	int calc_linewidth(std::string font, int size, const char* string, int wrap, const char** nextline);
 	void draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int x, int y, const char* string, Align align = Align_Left,
-						  int wrap = -1);
+						  int wrap = -1, int mark_char = -1, int mark_value=-1);
 	void get_size(std::string font, int size, const char* string, int* pw, int* ph, int wrap = -1);
 	int get_fontheight(std::string font, int size);
 

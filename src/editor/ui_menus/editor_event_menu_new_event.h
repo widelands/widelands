@@ -17,25 +17,38 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__EDITOR_EVENT_MENU_NEW_EVENT_H
+#define __S__EDITOR_EVENT_MENU_NEW_EVENT_H
+
+#include <string>
+#include "ui_window.h"
+
+class Editor_Interactive;
+class UIListselect;
+class UIMultiline_Textarea;
+class UIButton;
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
- *
- * Scenario packets have the highest bit set
+ * This is a modal box - The user must end this first 
+ * before it can return
  */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
-#define PACKET_BOB              5
-#define PACKET_RESOURCES        6
-#define PACKET_PLAYER_NAM_TRIB  7        // Scenario packet 
-#define PACKET_TRIGGER          8        // Scenraio packet, non obligatory
-#define PACKET_EVENT            9        // Scenraio packet, non obligatory
+class Editor_Event_Menu_New_Event : public UIWindow {
+   public:
+      Editor_Event_Menu_New_Event(Editor_Interactive*);
+      ~Editor_Event_Menu_New_Event();
+
+      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+
+   private:
+      void clicked(int);
+      void selected(int);
+      
+      UIListselect* m_event_list;
+      UIMultiline_Textarea* m_description;
+      Editor_Interactive* m_parent;
+      UIButton* m_ok_button;
+};
 
 #endif
+
 

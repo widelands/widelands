@@ -17,43 +17,41 @@
  *
  */
 
-#ifndef __S__EDITOR_MAIN_MENU_MAP_OPTIONS_H
-#define __S__EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#ifndef __S__EDITOR_EVENT_MENU_CHOOSE_TRIGGER_H
+#define __S__EDITOR_EVENT_MENU_CHOOSE_TRIGGER_H
 
-#include "map.h"
 #include "ui_window.h"
-#include "ui_textarea.h"
-#include "ui_multilineeditbox.h"
-#include "ui_editbox.h"
-
 
 class Editor_Interactive;
+class UIListselect;
+class UIButton;
+class Event;
 
 /*
-=================================================
+=============================
 
-class Main_Menu_Map_Options
+class Editor_Event_Menu_Choose_Trigger
 
-this is the Main Options Menu. Here, informations
-about the current map are displayed and you can change
-author, name and description
-
-=================================================
+=============================
 */
-class Main_Menu_Map_Options : public UIWindow {
+class Editor_Event_Menu_Choose_Trigger : public UIWindow {
    public:
-      Main_Menu_Map_Options(Editor_Interactive*);
-      virtual ~Main_Menu_Map_Options();
+      Editor_Event_Menu_Choose_Trigger(Editor_Interactive*, Event*);
+      virtual ~Editor_Event_Menu_Choose_Trigger();
+
+      bool handle_mouseclick(uint btn, bool down, int mx, int my);
+      
 
    private:
-      void changed(int);
-      void editbox_changed(void);
-      Editor_Interactive  *m_parent;
-      UIMultiline_Editbox* m_descr;
-      UITextarea* m_world, *m_nrplayers, *m_size;
-      UIEdit_Box* m_name, *m_author;
-      void update();
+      Editor_Interactive *m_parent;
+      UIListselect* m_available, *m_selected;
+      UIButton *m_btn_ltor, *m_btn_rtol;
+      Event* m_event;
+      void update(void);
+      void available_list_selected(int);
+      void selected_list_selected(int);
+      void clicked(int);
 };
 
-#endif
 
+#endif

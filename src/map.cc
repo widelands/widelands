@@ -320,8 +320,22 @@ void Map::cleanup(void) {
    if(m_overlay_manager) 
       m_overlay_manager->cleanup();
 
-   while(get_number_of_triggers()) 
-      unregister_trigger(get_trigger(0));
+
+   while(get_number_of_triggers()) {
+      Trigger* t=get_trigger(0);
+      int i=0; 
+      for(i=0; i<get_number_of_events(); i++) {
+         Event* ev=get_event(i);
+         if(ev->trigger_exists(t)) {
+            ev->unregister_trigger(t, this);
+         }
+      }
+      while(!t->is_unreferenced())
+         t->decr_reference();
+      delete_unreferenced_triggers();
+   }
+   delete_events_without_trigger();
+   assert(!get_number_of_triggers() && !get_number_of_events());
 }
 
 /*
