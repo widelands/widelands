@@ -214,7 +214,11 @@ protected:
 	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
 
 private:
-	WarehouseSupply*	m_supply;
+	static void idle_request_cb(Game* g, Request* rq, int ware, Worker* w, void* data);
+
+private:
+	WarehouseSupply*			m_supply;
+	std::vector<Request*>	m_requests; // one idle request per ware type
 
 	uint			m_next_carrier_spawn;		// time of next carrier growth
 };

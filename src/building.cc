@@ -1432,6 +1432,14 @@ void Warehouse::init(Editor_Game_Base* gg)
    if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
       gg->conquer_area(get_owner()->get_player_number(), m_position, get_descr());
 
+	for(int i = 0; i < gg->get_nrwares(); i++) {
+		Request* req = new Request(this, i, &Warehouse::idle_request_cb, this);
+
+		req->set_idle(true);
+
+		m_requests.push_back(req);
+	}
+
 	if (gg->is_game()) {
       Game* g=static_cast<Game*>(gg);
 
@@ -1449,6 +1457,14 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base *g)
 {
+	while(m_requests.size()) {
+		Request* req = m_requests[m_requests.size()-1];
+
+		m_requests.pop_back();
+
+		delete req;
+	}
+
    // TODO: un-conquer the area?
 	Building::cleanup(g);
 }
@@ -1510,6 +1526,9 @@ void Warehouse::set_economy(Economy *e)
 
 	m_supply->set_economy(e);
 	Building::set_economy(e);
+
+	for(uint i = 0; i < m_requests.size(); i++)
+		m_requests[i]->set_economy(e);
 
 	if (e)
 		e->add_warehouse(this);
@@ -1700,6 +1719,24 @@ void Warehouse::incorporate_item(Game* g, WareInstance* item)
 	item->destroy(g);
 
 	m_supply->add_wares(ware, 1);
+}
+
+
+/*
+===============
+Warehouse::idle_request_cb [static]
+
+Called when a transfer for one of the idle Requests completes.
+===============
+*/
+void Warehouse::idle_request_cb(Game* g, Request* rq, int ware, Worker* w, void* data)
+{
+	Warehouse* wh = (Warehouse*)data;
+
+	if (w)
+		wh->incorporate_worker(g, w);
+	else
+		wh->m_supply->add_wares(ware, 1);
 }
 
 

@@ -55,7 +55,7 @@ public:
 public: // implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
 	virtual int get_amount(Game* g, int ware);
-	virtual bool is_active();
+	virtual bool is_active(Game* g);
 
 	virtual WareInstance* launch_item(Game* g, int ware);
 	virtual Worker* launch_worker(Game* g, int ware);
@@ -217,9 +217,6 @@ WareInstance::WareInstance(int ware)
 
 	m_transfer = 0;
 	m_supply = 0;
-	m_return_watchdog = false;
-	m_moving = false;
-	m_move_route = 0;
 }
 
 
@@ -356,9 +353,6 @@ void WareInstance::set_location(Game* g, Map_Object* location)
 		} else {
 			set_economy(eco);
 		}
-
-		m_flag_dirty = true;
-		m_return_watchdog = false;
 	}
 	else
 	{
@@ -376,43 +370,6 @@ Callback for the return-to-warehouse timer.
 */
 void WareInstance::act(Game* g, uint data)
 {
-	if (!m_transfer && !m_moving && m_return_watchdog)
-	{
-		Map_Object* location = get_location(g);
-		Warehouse* wh;
-
-		assert(!m_move_route);
-		assert(location);
-
-		if (location->get_type() != FLAG)
-			throw wexception("MO(%u): return watchdog called, but location isn't a flag", get_serial());
-
-		m_move_route = new Route;
-		wh = get_economy()->find_nearest_warehouse((Flag*)location, m_move_route);
-
-		if (!wh)
-		{
-			molog("WareInstance: Return watchdog finds no warehouse, reschedule\n");
-
-			delete m_move_route;
-			m_move_route = 0;
-
-			g->get_cmdqueue()->queue(g->get_gametime() + 15000, SENDER_MAPOBJECT,
-					CMD_ACT, m_serial, 0, 0);
-		}
-		else
-		{
-			molog("WareInstance: Begin return to warehouse\n");
-
-			m_moving = true;
-			m_move_destination = wh;
-
-			m_flag_dirty = true;
-			m_return_watchdog = false;
-
-			update(g);
-		}
-	}
 }
 
 
@@ -436,6 +393,17 @@ void WareInstance::update(Game* g)
 	if (!loc || !get_economy()) {
 		cancel_moving(g);
 		return;
+	}
+
+	// Update whether we have a Supply or not
+	if (!m_transfer || m_transfer->is_idle()) {
+		if (!m_supply)
+			m_supply = new IdleWareSupply(this);
+	} else {
+		if (m_supply) {
+			delete m_supply;
+			m_supply = 0;
+		}
 	}
 
 	// Deal with transfers
@@ -501,46 +469,6 @@ void WareInstance::update(Game* g)
 
 		return;
 	}
-
-	// NOTE NOTE NOTE
-	// The following is going to be obsoleted.
-
-	// Make sure current movement data is correct
-	is_moving(g);
-
-	// Updates based on location type
-	switch(loc->get_type()) {
-	case BUILDING:
-		if (loc->has_attribute(WAREHOUSE)) {
-			Warehouse* wh = (Warehouse*)loc;
-
-			wh->incorporate_item(g, this);
-			return; // *this should now be freed
-		}
-
-		throw wexception("WareInstance::set_location: BUILDING, but neither request nor warehouse");
-
-	case FLAG:
-		// arrange for a return to warehouse
-		if (!m_moving && !m_return_watchdog) {
-			g->get_cmdqueue()->queue(g->get_gametime() + 5000, SENDER_MAPOBJECT,
-					CMD_ACT, m_serial, 0, 0);
-			m_return_watchdog = true;
-		}
-
-		if (!m_supply)
-			m_supply = new IdleWareSupply(this);
-
-		if (m_flag_dirty) {
-			if (m_moving)
-				((Flag*)loc)->call_carrier(g, this, get_next_move_step(g));
-			else
-				((Flag*)loc)->call_carrier(g, this, 0);
-
-			m_flag_dirty = false;
-		}
-		break;
-	}
 }
 
 
@@ -553,30 +481,14 @@ Set ware state so that it follows the given transfer.
 */
 void WareInstance::set_transfer(Game* g, Transfer* t)
 {
-	// Reset current movement & request
-	if (m_supply) {
-		delete m_supply;
-		m_supply = 0;
-	}
-
+	// Reset current transfer
 	if (m_transfer) {
 		m_transfer->fail();
 		m_transfer = 0;
 	}
 
-	if (m_move_route) {
-		delete m_move_route;
-		m_move_route = 0;
-	}
-
 	// Set transfer state
 	m_transfer = t;
-
-	m_return_watchdog = false;
-	m_flag_dirty = true;
-
-	m_moving = true;
-	m_move_destination = 0; // use data from transfer
 
 	update(g);
 }
@@ -592,15 +504,6 @@ The transfer has been cancelled, just stop moving.
 void WareInstance::cancel_transfer(Game* g)
 {
 	m_transfer = 0;
-	m_moving = false;
-
-	if (m_move_route) {
-		delete m_move_route;
-		m_move_route = 0;
-	}
-
-	m_flag_dirty = true;
-	m_return_watchdog = false;
 
 	update(g);
 }
@@ -611,101 +514,12 @@ void WareInstance::cancel_transfer(Game* g)
 ===============
 WareInstance::is_moving
 
-Update the move state, figure out whether we should be moving, etc.
+We are moving when there's a transfer, it's that simple.
 ===============
 */
 bool WareInstance::is_moving(Game* g)
 {
-	Map_Object* loc;
-	PlayerImmovable* target;
-
-	if (!m_moving)
-		return false;
-
-	loc = get_location(g);
-	target = (PlayerImmovable*)m_move_destination.get(g);
-
-	assert(loc);
-
-	if (!target) {
-		cancel_moving(g);
-		return false;
-	}
-
-	if (m_transfer)
-		return true; // transfers are handled differently
-
-	// free an empty route
-	if (m_move_route && !m_move_route->get_nrsteps()) {
-		delete m_move_route;
-		m_move_route = 0;
-	}
-
-	if (m_move_route)
-	{
-		PlayerImmovable* reroutestart = 0;
-		bool recalc = false;
-
-		// If we're in a building, the building's flag must be the first on the
-		// route.
-		// IMPORTANT: This rule must be modified when harbours etc. are implemented
-		if (m_move_route && loc->get_type() == Map_Object::BUILDING) {
-			Flag* baseflag = ((Building*)loc)->get_base_flag();
-
-			if (m_move_route->get_flag(g, 0) != baseflag) {
-				recalc = true;
-				reroutestart = baseflag;
-			}
-		}
-
-		// If we're on a flag, it should be either the first or second on the route
-		// If we're on the second flag, we finished the first part of the route,
-		// so trim it
-		if (m_move_route && loc->get_type() == Map_Object::FLAG) {
-			if (loc == m_move_route->get_flag(g, 1))
-			{
-				m_move_route->starttrim(1);
-				if (!m_move_route->get_nrsteps()) {
-					delete m_move_route;
-					m_move_route = 0;
-				}
-			}
-			else if (loc != m_move_route->get_flag(g, 0))
-			{
-				// This might happen when a road is split while the item is carried
-				// on it.
-				// Try to deal gracefully
-				molog("WareInstance::is_moving: Not on first or second flag of route.\n");
-				recalc = true;
-			}
-
-			reroutestart = (Flag*)loc;
-		}
-
-		// Now validate the route
-		if (m_move_route && (recalc || !m_move_route->verify(g))) {
-			if (target->get_economy() != get_economy()) {
-				molog("WareInstance::is_moving: Target unreachable (%p vs %p)\n",
-						target->get_economy(), get_economy());
-
-				cancel_moving(g);
-				return false;
-			}
-
-			if (!reroutestart)
-				reroutestart = m_move_route->get_flag(g, 0);
-
-			m_flag_dirty = true;
-			molog("WareInstance::is_moving: Reroute\n");
-
-			assert(get_economy() == reroutestart->get_economy());
-
-			if (!get_economy()->find_route(reroutestart->get_base_flag(), target->get_base_flag(), m_move_route))
-				throw wexception("WareInstance::is_moving: Failed to find route within economy");
-		}
-	}
-
-	return true;
+	return m_transfer;
 }
 
 
@@ -725,15 +539,6 @@ void WareInstance::cancel_moving(Game* g)
 		m_transfer->fail();
 		m_transfer = 0;
 	}
-
-	m_moving = false;
-	m_flag_dirty = true;
-	m_return_watchdog = false;
-
-	if (m_move_route) {
-		delete m_move_route;
-		m_move_route = 0;
-	}
 }
 
 
@@ -747,26 +552,10 @@ has been completed successfully.
 */
 PlayerImmovable* WareInstance::get_next_move_step(Game* g)
 {
-	assert(m_moving);
-
 	if (m_transfer)
 		return (PlayerImmovable*)m_transfer_nextstep.get(g);
-
-	// NOTE NOTE NOTE
-	// Below is going to be removed
-
-	if (m_move_route) {
-		assert(m_move_route->get_nrsteps());
-
-		Flag* flag = m_move_route->get_flag(g, 0);
-
-		if (get_location(g) == flag)
-			return m_move_route->get_flag(g, 1);
-
-		return flag;
-	}
-
-	return (PlayerImmovable*)m_move_destination.get(g);
+	else
+		return 0;
 }
 
 
@@ -2378,6 +2167,7 @@ Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdat
 	m_target = target;
 	m_economy = m_target->get_economy();
 	m_ware = ware;
+	m_idle = false;
 	m_count = 1;
 	m_required_time = target->get_owner()->get_game()->get_gametime();
 	m_required_interval = 0;
@@ -2477,6 +2267,32 @@ void Request::set_economy(Economy* e)
 
 	if (m_economy && is_open())
 		m_economy->add_request(this);
+}
+
+
+/*
+===============
+Request::set_idle
+
+Make a Request idle or not idle.
+===============
+*/
+void Request::set_idle(bool idle)
+{
+	bool wasopen = is_open();
+
+	if (m_idle == idle)
+		return;
+
+	m_idle = idle;
+
+	// Idle requests are always added to the economy
+	if (m_economy) {
+		if (wasopen && !is_open())
+			m_economy->remove_request(this);
+		else if (!wasopen && is_open())
+			m_economy->add_request(this);
+	}
 }
 
 
@@ -2585,6 +2401,8 @@ void Request::start_transfer(Game* g, Supply* supp)
 		throw;
 	}
 
+	t->set_idle(m_idle);
+
 	m_transfers.push_back(t);
 	if (!is_open())
 		m_economy->remove_request(this);
@@ -2612,8 +2430,10 @@ void Request::transfer_finish(Game *g, Transfer* t)
 
 	remove_transfer(find_transfer(t));
 
-	set_required_time(get_base_required_time(g, 1));
-	m_count--;
+	if (!m_idle) {
+		set_required_time(get_base_required_time(g, 1));
+		m_count--;
+	}
 
 	(*m_callbackfn)(g, this, m_ware, w, m_callbackdata);
 
@@ -3724,7 +3544,7 @@ void Economy::start_request_timer(int delta)
 
 	Game* game = (Game*)m_owner->get_game();
 
-	if (m_request_timer && m_request_timer_time - (game->get_gametime() + delta) < 0)
+	if (m_request_timer && m_request_timer_time - (game->get_gametime() + delta) <= 0)
 		return;
 
 	Cmd_Queue* cq = game->get_cmdqueue();
@@ -3760,7 +3580,11 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost)
 
 	for(int i = 0; i < m_supplies[ware].get_nrsupplies(); i++) {
 		Supply* supp = m_supplies[ware].get_supply(i);
-		Route *route;
+		Route* route;
+
+		// idle requests only get active supplies
+		if (req->is_idle() && !supp->is_active(g))
+			continue;
 
 		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
@@ -3803,26 +3627,21 @@ struct RequestSupplyPair {
 typedef std::priority_queue<RequestSupplyPair, std::vector<RequestSupplyPair>,
 				RequestSupplyPair::Compare> RSPairQueue;
 
+struct RSPairStruct {
+	RSPairQueue		queue;
+	int				nexttimer;
+};
+
+
 /*
 ===============
 Economy::process_requests
 
-Find any open requests that can be fulfilled by supplies.
+Walk all Requests and find potential transfer candidates.
 ===============
 */
-void Economy::process_requests()
+void Economy::process_requests(Game* g, RSPairStruct* s)
 {
-	Editor_Game_Base* egbase = m_owner->get_game();
-	Game* g;
-	RSPairQueue rspqueue;
-	int nexttimer = -1;
-
-	if (!egbase->is_game())
-		return;
-
-	g = (Game*)egbase;
-	log("PR t = %i\n", g->get_gametime());
-
 	for(RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
 		Request* req = *it;
 		Supply* supp;
@@ -3833,20 +3652,26 @@ void Economy::process_requests()
 		if (!supp)
 			continue;
 
-		// Calculate the time the building will be forced to idle waiting
-		// for the request
-		// If the building wouldn't have to idle, we wait with the request
-		idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
+		if (req->is_idle()) {
+			idletime = 0;
+		} else {
+			// Calculate the time the building will be forced to idle waiting
+			// for the request
+			// If the building wouldn't have to idle, we wait with the request
+			idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
 
-		if (idletime < -200) {
-			if (nexttimer < 0 || nexttimer > (-idletime))
-				nexttimer = -idletime;
+			if (idletime < -200) {
+				if (s->nexttimer < 0 || s->nexttimer > (-idletime))
+					s->nexttimer = -idletime;
 
-			continue;
+				continue;
+			}
+
+			// TODO: priorities?
+
+			if (idletime <= 0)
+				idletime = 1;
 		}
-
-		if (idletime <= 0)
-			idletime = 1;
 
 		// Otherwise, consider this request/supply pair for queueing
 		RequestSupplyPair rsp;
@@ -3854,26 +3679,53 @@ void Economy::process_requests()
 		rsp.ware = req->get_ware();
 		rsp.request = req;
 		rsp.supply = supp;
-		rsp.priority = idletime; // TODO: priorities?
+		rsp.priority = idletime;
 
 		log("REQ: %u (%i) <- %u (ware %i), priority %i\n", req->get_target(g)->get_serial(),
 				req->get_required_time(), supp->get_position(g)->get_serial(),
 				rsp.ware, rsp.priority);
 
-		rspqueue.push(rsp);
+		s->queue.push(rsp);
 	}
+}
+
+
+/*
+===============
+Economy::balance_requestsupply
+
+Balance Requests and Supplies by collecting and weighing pairs, and
+starting transfers for them.
+===============
+*/
+void Economy::balance_requestsupply()
+{
+	Editor_Game_Base* egbase = m_owner->get_game();
+	Game* g;
+	RSPairStruct rsps;
+
+	rsps.nexttimer = -1;
+
+	if (!egbase->is_game())
+		return;
+
+	g = (Game*)egbase;
+	log("PR t = %i\n", g->get_gametime());
+
+	// Try to fulfill non-idle Requests
+	process_requests(g, &rsps);
 
 	// Now execute request/supply pairs
-	while(rspqueue.size()) {
-		RequestSupplyPair rsp = rspqueue.top();
+	while(rsps.queue.size()) {
+		RequestSupplyPair rsp = rsps.queue.top();
 
-		rspqueue.pop();
+		rsps.queue.pop();
 
 		if (!rsp.request || !rsp.supply ||
 		    !have_request(rsp.request) || !have_supply(rsp.ware, rsp.supply)) {
 			log("NO: ware %i, priority %i\n", rsp.ware, rsp.priority);
 
-			nexttimer = 200;
+			rsps.nexttimer = 200;
 			continue;
 		}
 
@@ -3885,14 +3737,14 @@ void Economy::process_requests()
 		// for multiple wares
 		if (rsp.request && have_request(rsp.request)) {
 			log("  request is still around, reschedule timer\n");
-			nexttimer = 200;
+			rsps.nexttimer = 200;
 		}
 	}
 
 	// restart the timer, if necessary
-	if (nexttimer > 0) {
-		log("  nexttimer: %i\n", nexttimer);
-		start_request_timer(nexttimer);
+	if (rsps.nexttimer > 0) {
+		log("  nexttimer: %i\n", rsps.nexttimer);
+		start_request_timer(rsps.nexttimer);
 	}
 }
 
@@ -3912,9 +3764,9 @@ void Economy::request_timer_cb(Game* g, int serial, int unused)
 	if (!e)
 		return;
 
-	if (g->get_gametime() != e->m_request_timer_time)
+	if (!e->m_request_timer || g->get_gametime() != e->m_request_timer_time)
 		return;
 
 	e->m_request_timer = false;
-	e->process_requests();
+	e->balance_requestsupply();
 }

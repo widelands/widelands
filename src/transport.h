@@ -93,13 +93,6 @@ private:
 	Transfer*			m_transfer;
 	Object_Ptr			m_transfer_nextstep; // cached PlayerImmovable, can be 0
 
-	bool			m_return_watchdog;	// scheduled return-to-warehouse watchdog
-	bool			m_flag_dirty;			// true if we need to tell the flag to take care of us
-
-	bool			m_moving;
-	Object_Ptr	m_move_destination;
-	Route*		m_move_route;
-
 private:
 	static Map_Object_Descr	s_description;
 };
@@ -399,6 +392,10 @@ A Request is issued whenever some object (road or building) needs a ware.
 Requests are always created and destroyed by their owner, i.e. the target
 building. The owner is also responsible for calling set_economy() when
 its economy changes.
+
+Idle Requests need not be fulfilled; however, when there's a matching Supply
+left, a transfer may be initiated.
+The required time has no meaning for idle requests.
 */
 class Request : public Trackable {
 	friend class Economy;
@@ -413,14 +410,16 @@ public:
 
 	PlayerImmovable* get_target(Game* g) { return m_target; }
 	int get_ware() const { return m_ware; }
+	bool is_idle() const { return m_idle; }
 	int get_count() const { return m_count; }
-	bool is_open() const { return m_count > (int)m_transfers.size(); }
+	bool is_open() const { return m_idle || m_count > (int)m_transfers.size(); }
 	Economy* get_economy() const { return m_economy; }
 	int get_required_time();
 
 	Flag *get_target_flag(Game *g);
 
 	void set_economy(Economy* e);
+	void set_idle(bool idle);
 	void set_count(int count);
 	void set_required_time(int time);
 	void set_required_interval(int interval);
@@ -444,6 +443,7 @@ private:
 	PlayerImmovable*	m_target;	// who requested it?
 	Economy*				m_economy;
 	int					m_ware;		// the ware type
+	bool					m_idle;
 	int					m_count;		// how many do we need in total
 
 	callback_t		m_callbackfn;		// called on request success
@@ -509,6 +509,8 @@ private:
 /*
 Economy represents a network of Flag through which wares can be transported.
 */
+struct RSPairStruct;
+
 class Economy {
 	friend class Request;
 
@@ -552,7 +554,8 @@ private:
 	void start_request_timer(int delta = 200);
 
 	Supply* find_best_supply(Game* g, Request* req, int ware, int* pcost);
-	void process_requests();
+	void process_requests(Game* g, RSPairStruct* s);
+	void balance_requestsupply();
 
 	static void request_timer_cb(Game* g, int serial, int unused);
 
