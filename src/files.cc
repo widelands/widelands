@@ -586,19 +586,19 @@ bool RealFSImpl::IsWritable()
 // note: the Win32 version may be broken, feel free to fix it
 int RealFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *results)
 {
-	char buf[256];
+	std::string buf;
 	struct _finddata_t c_file;
 	long hFile;
 	int count;
 
 	if (path)
-		snprintf(buf, sizeof(buf), "%s\\%s\\%s", m_szDirectory. path, pattern);
+		buf = m_directory + '\\' + path + '\\' + pattern;
 	else
-		snprintf(buf, sizeof(buf), "%s\\%s", m_szDirectory, pattern);
+		buf = m_directory + '\\' + pattern;
 
 	count = 0;
 
-	hFile = _findfirst(buf, &c_file);
+	hFile = _findfirst(buf.c_str(), &c_file);
 	if (hFile == -1)
 		return 0;
 
@@ -840,7 +840,11 @@ int LayeredFSImpl::FindFiles(const char *path, const char *pattern, filenameset_
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		filenameset_t files;
 		(*it)->FindFiles(path, pattern, &files);
-		results->insert(files.begin(), files.end());
+
+		// need to workaround MSVC++6 issues
+		//results->insert(files.begin(), files.end());
+		for(filenameset_t::iterator fnit = files.begin(); fnit != files.end(); fnit++)
+			results->insert(*fnit);
 	}
 	
 	return results->size();
