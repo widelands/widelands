@@ -63,7 +63,7 @@ class Interactive_Base : public UIPanel {
 		inline const Coords &get_fieldsel_pos() const { return m_fsd.fieldsel_pos; }
 		inline bool get_fieldsel_freeze() const { return m_fsd.fieldsel_freeze; }
       inline int get_fieldsel_radius(void) { return m_fsd.fieldsel_radius; }
-		void set_fieldsel_pos(Coords c);
+		virtual void set_fieldsel_pos(Coords c);
 		void set_fieldsel_freeze(bool yes);
       void set_fieldsel_radius(int n);
 

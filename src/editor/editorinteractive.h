@@ -43,6 +43,7 @@ class Editor_Interactive : public Interactive_Base {
 
       // gets called when a field is clicked
       void field_clicked();
+		virtual void set_fieldsel_pos(Coords c); // overwritten
 
       // gets called when a keyboard event occurs
       bool handle_key(bool down, int code, char c);

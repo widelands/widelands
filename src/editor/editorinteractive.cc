@@ -42,6 +42,7 @@
 #include "editor_set_starting_pos_tool.h"
 #include "editor_place_bob_tool.h"
 #include "editor_increase_resources_tool.h"
+#include "system.h"
 
 /**********************************************
  *
@@ -207,6 +208,18 @@ void Editor_Interactive::field_clicked() {
    FCoords cords(get_fieldsel_pos(), m->get_field(get_fieldsel_pos()));
    tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, cords, m, this);
    set_need_save(true);
+}
+		
+/*
+ * Set the current fieldsel position and, if 
+ * a tool is selected and the first mouse button is pressed
+ * click this field
+ */
+void Editor_Interactive::set_fieldsel_pos(Coords c) {
+   uint btns = Sys_GetMouseButtons();
+   if(btns & ( 1 << MOUSE_LEFT ) && get_fieldsel_pos()!=c)
+      field_clicked();
+   Interactive_Base::set_fieldsel_pos(c);
 }
 
 /*
