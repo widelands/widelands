@@ -44,14 +44,14 @@ MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Base *plr, uin
 {
 	m_player = plr;
 	m_viewx = m_viewy = 0;
-	
+
 	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.png", RGBColor(0,0,255));
    m_fx=fx;
    m_fy=fy;
 
    if(m_fx==0) m_fx=m_player->get_map()->get_width();
    if(m_fy==0) m_fy=m_player->get_map()->get_height();
-	
+
    set_size(m_fx, m_fy);
 
 }
@@ -67,10 +67,10 @@ void MiniMapView::set_view_pos(int x, int y)
 {
    m_viewx = x / FIELD_WIDTH;
    m_viewy = y / (FIELD_HEIGHT>>1);
-  
+
    if(get_w()!=(int)m_player->get_map()->get_width() && get_h()!=(int)m_player->get_map()->get_height()) {
-      
-      if(get_w() && get_h() && m_player->get_map()->get_width() && m_player->get_map()->get_height()) { 
+
+      if(get_w() && get_h() && m_player->get_map()->get_width() && m_player->get_map()->get_height()) {
          m_viewx=(int)(((float)m_viewx/(float)m_player->get_map()->get_width())*get_w());
          m_viewy=(int)(((float)m_viewy/(float)m_player->get_map()->get_height())*get_h());
       }
@@ -138,7 +138,7 @@ MiniMap
 */
 
 /*
-=============== 
+===============
 MiniMap::MiniMap
 
 Initialize the minimap window. Dimensions will be set automatically
@@ -150,25 +150,18 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-MiniMap::MiniMap(Interactive_Base *plr, UniqueWindow *reg)
-	: Window(plr, 200, 150, 10, 10, "Map")
+MiniMap::MiniMap(Interactive_Base *plr, UniqueWindowRegistry *reg)
+	: UniqueWindow(plr, reg, 10, 10, "Map")
 {
-	m_registry = reg;
-	if (m_registry) {
-		if (m_registry->window)
-			delete m_registry->window;
-		
-		m_registry->window = this;
-		if (m_registry->x >= 0)
-			set_pos(m_registry->x, m_registry->y);
-	}
-
 	m_view = new MiniMapView(this, 0, 0, plr);
 //	m_view->warpview.set(&warpview, &UISignal2<int,int>::call);
-	
+
 	set_inner_size(m_view->get_w(), m_view->get_h());
 
 	//set_cache(false); // testing
+
+	if (get_usedefaultpos())
+		center_to_parent();
 }
 
 /** MiniMap::~MiniMap()
@@ -177,10 +170,5 @@ MiniMap::MiniMap(Interactive_Base *plr, UniqueWindow *reg)
  */
 MiniMap::~MiniMap()
 {
-	if (m_registry) {
-		m_registry->x = get_x();
-		m_registry->y = get_y();
-		m_registry->window = 0;
-	}
    delete m_view;
 }

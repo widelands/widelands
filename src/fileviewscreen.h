@@ -20,14 +20,12 @@
 #ifndef __S__FILE_VIEW_SCREEN_H
 #define __S__FILE_VIEW_SCREEN_H
 
-#include "menuecommon.h"
+class Panel;
+struct UniqueWindowRegistry;
 
-class FileViewScreen : public BaseMenu {
-public:
-	FileViewScreen(const char* title, const char *text);
-};
-
-void fileview_screen(const char* title, const char *fname);
-void textview_screen(const char* title, const char* text);
+void fileview_screen(std::string title, std::string fname);
+void textview_screen(std::string title, std::string text);
+void fileview_window(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string fname);
+void textview_window(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text);
 
 #endif // __S__FILE_VIEW_SCREEN_H

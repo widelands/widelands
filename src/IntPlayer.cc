@@ -39,14 +39,13 @@ GameMainMenu IMPLEMENTATION
 */
 
 // The GameMainMenu is a rather dumb window with lots of buttons
-class GameMainMenu : public Window {
+class GameMainMenu : public UniqueWindow {
 public:
-	GameMainMenu(Interactive_Player *plr, UniqueWindow *registry);
+	GameMainMenu(Interactive_Player *plr, UniqueWindowRegistry *registry);
 	virtual ~GameMainMenu();
 
 private:
 	Interactive_Player	*m_player;
-	UniqueWindow			*m_registry;
 };
 
 /*
@@ -56,34 +55,21 @@ GameMainMenu::GameMainMenu
 Create all the buttons etc...
 ===============
 */
-GameMainMenu::GameMainMenu(Interactive_Player *plr, UniqueWindow *registry)
-	: Window(plr, (plr->get_w()-102)/2, (plr->get_h()-136)/2, 102, 136, "Menu")
+GameMainMenu::GameMainMenu(Interactive_Player *plr, UniqueWindowRegistry *registry)
+	: UniqueWindow(plr, registry, 102, 136, "Menu")
 {
-	m_registry = registry;
-	if (m_registry) {
-		if (m_registry->window)
-			delete m_registry->window;
-		
-		m_registry->window = this;
-		if (m_registry->x >= 0)
-			set_pos(m_registry->x, m_registry->y);
-	}
+	if (get_usedefaultpos())
+		center_to_parent();
 }
+
 
 /*
 ===============
 GameMainMenu::~GameMainMenu
-
-Unregister from the registry pointer
 ===============
 */
 GameMainMenu::~GameMainMenu()
 {
-	if (m_registry) {
-		m_registry->x = get_x();
-		m_registry->y = get_y();
-		m_registry->window = 0;
-	}
 }
 
 
@@ -98,18 +84,18 @@ Interactive_Player IMPLEMENTATION
 /*
 ===============
 Interactive_Player::Interactive_Player
- 
+
 Initialize
 ===============
 */
 Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g)
 {
 
-   
+
    // Setup all screen elements
 	m_game = g;
 	m_player_number = plyn;
-	
+
 	Map_View* mview;
    mview = new Map_View(this, 0, 0, get_w(), get_h(), this);
 	mview->warpview.set(this, &Interactive_Player::mainview_move);
@@ -117,7 +103,7 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
    set_mapview(mview);
 
 	m_buildroad = false;
-	
+
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
 	int y = get_h() - 34;

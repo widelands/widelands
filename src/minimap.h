@@ -25,7 +25,6 @@
 class Interactive_Base;
 class Player;
 class Map;
-struct UniqueWindow;
 class MiniMapView;
 
 /** class MiniMapView
@@ -61,15 +60,14 @@ private:
  * show/hide buildings)
  */
 
-class MiniMap : public Window {
+class MiniMap : public UniqueWindow {
 public:
-	MiniMap(Interactive_Base *parent, UniqueWindow *reg);
+	MiniMap(Interactive_Base *parent, UniqueWindowRegistry *reg);
 	~MiniMap();
 
    inline MiniMapView* get_minimapview(void) { return m_view; }
 
 private:
-	UniqueWindow	*m_registry;
 	MiniMapView		*m_view;
 };
 

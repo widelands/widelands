@@ -27,7 +27,7 @@
 #include "fileviewscreen.h"
 #include <string>
 
-static const char* EDITOR_README = 
+static const char* EDITOR_README =
 "   README for the Widelands Map Editor\n"
 "\n"
 "\n"
@@ -58,7 +58,7 @@ static const char* EDITOR_README =
 
 class Main_Menu_Map_Options
 
-this is the Main Options Menu. Here, informations 
+this is the Main Options Menu. Here, informations
 about the current map are displayed and you can change
 author, name and description
 
@@ -100,7 +100,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
    const int offsy=30;
    const int spacing=3;
    const int height=20;
-   int posx=offsx; 
+   int posx=offsx;
    int posy=offsy;
    Textarea* ta= new Textarea(this, posx, posy+5, "Map Name:", Align_Left);
    m_name=new Edit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
@@ -109,17 +109,17 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
    ta=new Textarea(this, posx, posy+5, "Size:");
    m_size=new Textarea(this, posx+ta->get_w()+spacing, posy+5, "512x512", Align_Left);
    posy+=height+spacing;
-   ta=new Textarea(this, posx, posy+5, "Nr Players:");   
+   ta=new Textarea(this, posx, posy+5, "Nr Players:");
    m_nrplayers=new Textarea(this, posx+ta->get_w()+spacing, posy+5, "4", Align_Left);
    posy+=height+spacing;
-   ta=new Textarea(this, posx, posy+5, "World:");   
+   ta=new Textarea(this, posx, posy+5, "World:");
    m_world=new Textarea(this, posx+ta->get_w()+spacing, posy+5, "\"Greenland\"", Align_Left);
    posy+=height+spacing;
    ta=new Textarea(this, posx, posy+5, "Author:", Align_Left);
    m_author=new Edit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 1);
    m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
-   m_descr=new Multiline_Textarea(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, "Nothing defined!", Align_Left); 
+   m_descr=new Multiline_Textarea(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, "Nothing defined!", Align_Left);
    update();
 }
 
@@ -127,7 +127,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
 ===============
 Main_Menu_Map_Options::update()
 
-Updates all Textareas in the Window to represent currently 
+Updates all Textareas in the Window to represent currently
 set values
 ==============
 */
@@ -253,7 +253,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    m_world->set_title(m_worldstr.c_str());
    m_world->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=height+spacing+spacing+spacing;
-   
+
    b=new Button(this, posx, posy, width, height, 0, 5);
    b->set_title("Create Map");
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
@@ -277,7 +277,7 @@ void Main_Menu_New_Map::button_clicked(int n) {
       case 4: log("TODO: switch worlds!\n"); break;
       case 5: log("TODO: create new map!\n"); break;
    }
-  
+
    char buf[200];
    if(m_w<0) m_w=0;
    if(m_w>=NUMBER_OF_MAP_DIMENSIONS) m_w=NUMBER_OF_MAP_DIMENSIONS-1;
@@ -300,7 +300,7 @@ Main_Menu_New_Map::~Main_Menu_New_Map()
 {
 }
 
- 
+
 /*
 =================================================
 
@@ -316,18 +316,9 @@ Editor_Main_Menu::Editor_Main_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UniqueWindow *registry)
-	: Window(parent, (parent->get_w()-130)/2, (parent->get_h()-200)/2, 130, 200, "Main Menu")
+Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UniqueWindowRegistry *registry)
+	: UniqueWindow(parent, registry, 130, 200, "Main Menu")
 {
-	m_registry = registry;
-	if (m_registry) {
-		if (m_registry->window)
-			delete m_registry->window;
-		
-		m_registry->window = this;
-		if (m_registry->x >= 0)
-			set_pos(m_registry->x, m_registry->y);
-	}
    m_parent=parent;
 
    // Caption
@@ -340,7 +331,7 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UniqueWindow *reg
    const int spacing=5;
    const int width=get_inner_w()-offsx*2;
    const int height=20;
-   int posx=offsx; 
+   int posx=offsx;
    int posy=offsy;
 
    Button* b=new Button(this, posx, posy, width, height, 1);
@@ -376,6 +367,9 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UniqueWindow *reg
    b->clicked.set(this, &Editor_Main_Menu::exit_btn);
    posy+=height+spacing;
 
+	// Put in the default position, if necessary
+	if (get_usedefaultpos())
+		center_to_parent();
 }
 
 /*
@@ -398,9 +392,9 @@ void Editor_Main_Menu::load_btn() {
    //map_select_menue(m_parent->get_editor());
    std::cerr << "ALIVE!" << std::endl;
    //m_parent->map_changed();
-   
+
    g_gr->flush(PicMod_Menu);
-		
+
    m_parent->get_editor()->postload();
    m_parent->get_editor()->load_graphics();
 */
@@ -417,7 +411,7 @@ void Editor_Main_Menu::exit_btn() {
    m_parent->exit_editor();
 }
 void Editor_Main_Menu::readme_btn() {
-   textview_screen("Editor README", EDITOR_README);
+   textview_window(m_parent, &m_window_readme, "Editor README", EDITOR_README);
 }
 
 /*
@@ -429,17 +423,12 @@ Unregister from the registry pointer
 */
 Editor_Main_Menu::~Editor_Main_Menu()
 {
-	if (m_registry) {
-		m_registry->x = get_x();
-		m_registry->y = get_y();
-		m_registry->window = 0;
-	}
 }
 
 /*
 =================================================
 
-class Editor_Tool_Menu 
+class Editor_Tool_Menu
 
 =================================================
 */
@@ -451,18 +440,10 @@ Editor_Tool_Menu::Editor_Tool_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *registry, Editor_Interactive::Editor_Tools* tools)
-	: Window(parent, (parent->get_w()-350)/2, (parent->get_h()-400)/2, 350, 400, "Tool Menu")
+Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindowRegistry *registry,
+                                   Editor_Interactive::Editor_Tools* tools)
+	: UniqueWindow(parent, registry, 350, 400, "Tool Menu")
 {
-	m_registry = registry;
-	if (m_registry) {
-		if (m_registry->window)
-			delete m_registry->window;
-		
-		m_registry->window = this;
-		if (m_registry->x >= 0)
-			set_pos(m_registry->x, m_registry->y);
-	}
    m_tools=tools;
    m_parent=parent;
 
@@ -473,12 +454,12 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *reg
    const int spacing=5;
    const int width=34;
    const int height=34;
-   int posx=offsx; 
+   int posx=offsx;
    int posy=offsy;
 
    m_radioselect=new Radiogroup();
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_change_height.png", RGBColor(0, 0, 255)));
-   posx+=width+spacing; 
+   posx+=width+spacing;
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_noise_height.png", RGBColor(0,0,255)));
    posx=offsx;
    posy+=spacing+height;
@@ -491,10 +472,13 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *reg
    Textarea* ta=new Textarea(this, 0, 0, "Tool Menu");
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
-   m_radioselect->set_state(parent->get_selected_tool()-1); 
-   
+   m_radioselect->set_state(parent->get_selected_tool()-1);
+
    m_radioselect->changed.set(this, &Editor_Tool_Menu::changed_to);
    m_radioselect->clicked.set(this, &Editor_Tool_Menu::changed_to);
+
+	if (get_usedefaultpos())
+		center_to_parent();
 }
 
 /*
@@ -506,11 +490,6 @@ Unregister from the registry pointer
 */
 Editor_Tool_Menu::~Editor_Tool_Menu()
 {
-	if (m_registry) {
-		m_registry->x = get_x();
-		m_registry->y = get_y();
-		m_registry->window = 0;
-	}
    delete m_radioselect;
 }
 
@@ -574,18 +553,9 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UniqueWindow *registry)
-	: Window(parent, (parent->get_w()-102)/2, (parent->get_h()-136)/2, 160, 65, "Toolsize Menu")
+Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UniqueWindowRegistry *registry)
+	: UniqueWindow(parent, registry, 160, 65, "Toolsize Menu")
 {
-   m_registry = registry;
-   if (m_registry) {
-      if (m_registry->window)
-         delete m_registry->window;
-
-      m_registry->window = this;
-      if (m_registry->x >= 0)
-         set_pos(m_registry->x, m_registry->y);
-   }
    m_parent=parent;
 
    new Textarea(this, 15, 5, "Set Tool Size Menu", Align_Left);
@@ -600,6 +570,9 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UniqueWin
    b=new Button(this, bx+20, 40, 20, 20, 0, 1);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
+
+	if (get_usedefaultpos())
+		center_to_parent();
 }
 
 /*
@@ -611,11 +584,6 @@ Unregister from the registry pointer
 */
 Editor_Toolsize_Menu::~Editor_Toolsize_Menu()
 {
-	if (m_registry) {
-		m_registry->x = get_x();
-		m_registry->y = get_y();
-		m_registry->window = 0;
-	}
 }
 
 /*

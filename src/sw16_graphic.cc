@@ -427,10 +427,11 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 	GraphicImpl* gfx = get_graphicimpl();
 	Bitmap* src = gfx->get_picture_bitmap(picture);
 
-	// Clipping	
+
+	// Clipping
 	x += m_offset.x;
 	y += m_offset.y;
-	
+
 	if (x < 0) {
 		w += x;
 		x = 0;
@@ -439,7 +440,7 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 		w = m_rect.w - x;
 	if (w <= 0)
 		return;
-	
+
 	if (y < 0) {
 		h += y;
 		y = 0;

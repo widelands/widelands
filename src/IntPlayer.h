@@ -5,12 +5,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -43,21 +43,21 @@ class Interactive_Player : public Interactive_Base {
 		~Interactive_Player(void);
 
 		void start();
-		
+
 		void exit_game_btn();
 		void main_menu_btn();
 		void toggle_buildhelp();
 
 		void field_action();
-		
+
       void recalc_overlay(FCoords fc) ;
 
 		bool handle_key(bool down, int code, char c);
-	
+
 		inline Game *get_game() { return m_game; }
 		inline uchar get_player_number(void) { return m_player_number; }
 		inline Player *get_player() { assert(m_game); return m_game->get_player(m_player_number) ; }
-		
+
 		// Road building
 		inline bool is_building_road() const { return m_buildroad; }
 		inline CoordPath *get_build_road() { return m_buildroad; }
@@ -68,17 +68,17 @@ class Interactive_Player : public Interactive_Base {
 		const Coords &get_build_road_start();
 		const Coords &get_build_road_end();
 		int get_build_road_end_dir();
-		
+
 	private:
 		void roadb_add_overlay();
 		void roadb_remove_overlay();
-	
+
 		Game		*m_game;
 		uchar		m_player_number;
-		
-		UniqueWindow	m_mainmenu;
-		UniqueWindow	m_fieldaction;
-		
+
+		UniqueWindowRegistry	m_mainmenu;
+		UniqueWindowRegistry	m_fieldaction;
+
 		CoordPath		*m_buildroad; // path for the new road
 };
 

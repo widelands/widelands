@@ -18,6 +18,7 @@
  */
 
 #include "widelands.h"
+#include "menuecommon.h"
 #include "fileviewscreen.h"
 
 /*
@@ -28,11 +29,16 @@ FileViewScreen
 ==============================================================================
 */
 
-FileViewScreen::FileViewScreen(const char* title, const char *text)
+class FileViewScreen : public BaseMenu {
+public:
+	FileViewScreen(std::string title, std::string text);
+};
+
+FileViewScreen::FileViewScreen(std::string title, std::string text)
 	: BaseMenu("fileviewmenu.jpg")
 {
 	// Text view
-	new Multiline_Textarea(this, 40, 150, 560, 240, text);
+	new Multiline_Textarea(this, 40, 150, 560, 240, text.c_str());
 
    // Title
    Textarea* ta= new Textarea(this, 50, 50, title, Align_Left);
@@ -46,26 +52,85 @@ FileViewScreen::FileViewScreen(const char* title, const char *text)
 	b->set_title("Close");
 }
 
-/** textview_screen(const char *fname)
- *
- * Display the contents of a text in a menu screen
- */
-void textview_screen(const char* title, const char *text)
+
+/*
+===============
+textview_screen
+
+Display the contents of a text in a menu screen
+===============
+*/
+void textview_screen(std::string title, std::string text)
 {
-	FileViewScreen *fvs = new FileViewScreen(title, text); 
+	FileViewScreen *fvs = new FileViewScreen(title, text);
 	fvs->run();
 	delete fvs;
 }
 
-/** fileview_screen(const char *fname)
- *
- * Display the contents of a text file in a menu screen
- */
-void fileview_screen(const char* title, const char *fname)
+
+/*
+===============
+fileview_screen
+
+Display the contents of a text file in a menu screen
+===============
+*/
+void fileview_screen(std::string title, std::string fname)
 {
 	FileRead f;
 	f.Open(g_fs, fname);
-	FileViewScreen *fvs = new FileViewScreen(title, (char*)f.Data(0,0));
-	fvs->run();
-	delete fvs;
+	textview_screen(title, (const char*)f.Data(0,0));
+}
+
+
+/*
+==============================================================================
+
+TextViewWindow
+
+==============================================================================
+*/
+
+class TextViewWindow : public UniqueWindow {
+public:
+	TextViewWindow(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text);
+};
+
+TextViewWindow::TextViewWindow(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text)
+	: UniqueWindow(parent, reg, 0, 0, title)
+{
+	Multiline_Textarea* mt = new Multiline_Textarea(this, 0, 0, 560, 240, text.c_str());
+
+	fit_inner(mt);
+
+	if (get_usedefaultpos())
+		center_to_parent();
+}
+
+
+/*
+===============
+textview_window
+
+Display the text in a scrollable window.
+===============
+*/
+void textview_window(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text)
+{
+	new TextViewWindow(parent, reg, title, text);
+}
+
+
+/*
+===============
+fileview_screen
+
+Display the contents of a text file in a scrollable window.
+===============
+*/
+void fileview_window(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string fname)
+{
+	FileRead f;
+	f.Open(g_fs, fname);
+	textview_window(parent, reg, title, (const char*)f.Data(0,0));
 }

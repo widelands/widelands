@@ -5,12 +5,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -31,7 +31,7 @@ class Map_View;
 
 /** class Interactive_Base
  *
- * This is the interactive base class. It is used 
+ * This is the interactive base class. It is used
  * to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
@@ -41,10 +41,10 @@ class Interactive_Base : public Panel {
 		virtual ~Interactive_Base(void);
 
       inline Map* get_map() { return m_egbase->get_map(); }
-      
+
 		static int get_xres();
 		static int get_yres();
-	   
+
       // logic handler func
       void think();
 
@@ -52,9 +52,9 @@ class Interactive_Base : public Panel {
 		inline bool get_fieldsel_freeze() const { return m_fieldsel_freeze; }
 		void set_fieldsel(Coords c);
 		void set_fieldsel_freeze(bool yes);
-		
+
 		inline const MapRenderInfo* get_maprenderinfo() const { return &m_maprenderinfo; }
-		
+
       void move_view_to(int fx, int fy);
 		void warp_mouse_to_field(Coords c);
 
@@ -69,8 +69,8 @@ class Interactive_Base : public Panel {
       MiniMap* m_mm;
       Editor_Game_Base* m_egbase;
       bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
-        
-      UniqueWindow m_minimap;
+
+      UniqueWindowRegistry m_minimap;
 
    protected:
       void toggle_minimap(void);
@@ -80,7 +80,7 @@ class Interactive_Base : public Panel {
 
 	   inline void set_mapview(Map_View* w) { m_mapview=w; }
       inline Map_View* get_mapview() { return m_mapview; }
-    
+
       void set_fsel_picture(const char* file) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); }
       void unset_fsel_picture(void) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, "pics/fsel.png", RGBColor(0,0,255)); }
 

@@ -31,7 +31,7 @@
 /*
 =================================================
 
-class Editor_Tool_Options_Menu 
+class Editor_Tool_Options_Menu
 
 =================================================
 */
@@ -43,18 +43,14 @@ Editor_Tool_Options_Menu::Editor_Tool_Options_Menu()
 constructor
 ===========
 */
-Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent, UniqueWindow* registry, char* title) :
-   Window(parent, 150, 150, 100, 100, title) {
-   m_registry = registry;
-   if (m_registry) {
-      if (m_registry->window)
-         delete m_registry->window;
-
-      m_registry->window = this;
-      if (m_registry->x >= 0)
-         set_pos(m_registry->x, m_registry->y);
-   }
+Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent,
+													UniqueWindowRegistry* registry, char* title) :
+   UniqueWindow(parent, registry, 100, 100, title)
+{
    m_parent=parent;
+
+	if (get_usedefaultpos())
+		move_to_mouse();
 }
 
 /*
@@ -64,12 +60,8 @@ Editor_Tool_Options_Menu::~Editor_Tool_Options_Menu()
 destructor
 ===========
 */
-Editor_Tool_Options_Menu::~Editor_Tool_Options_Menu() {
-   if (m_registry) {
-      m_registry->x = get_x();
-      m_registry->y = get_y();
-      m_registry->window = 0;
-   }
+Editor_Tool_Options_Menu::~Editor_Tool_Options_Menu()
+{
 }
 
 
@@ -89,9 +81,9 @@ constructor
 ===========
 */
 Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent, 
-      Editor_Increase_Height_Tool* iht, UniqueWindow* registry) :
+      Editor_Increase_Height_Tool* iht, UniqueWindowRegistry* registry) :
    Editor_Tool_Options_Menu(parent, registry, "Height Tools Options") {
-  
+
    m_iht=iht;
    m_dht=iht->get_dht();
    m_sht=iht->get_sht();
@@ -202,8 +194,8 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive *parent, Editor_Noise_Height_Tool* nht, UniqueWindow* 
-      registry) 
+Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive *parent,
+				Editor_Noise_Height_Tool* nht, UniqueWindowRegistry* registry)
    : Editor_Tool_Options_Menu(parent, registry, "Noise Height Options")
 {
    char buf[250];
@@ -320,9 +312,9 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
 Create all the buttons etc...
 ===============
 */
-Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent, Editor_Set_Both_Terrain_Tool* sbt,
-      UniqueWindow *registry)
-	: Editor_Tool_Options_Menu(parent, registry, "Terrain Select") 
+Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent,
+						Editor_Set_Both_Terrain_Tool* sbt, UniqueWindowRegistry *registry)
+	: Editor_Tool_Options_Menu(parent, registry, "Terrain Select")
 {
    m_sbt=sbt;
 
@@ -398,8 +390,8 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
 constructor
 ===========
 */
-Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive* parent, Editor_Place_Immovable_Tool* pit,
-      UniqueWindow* registry) :
+Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive* parent,
+		Editor_Place_Immovable_Tool* pit, UniqueWindowRegistry* registry) :
    Editor_Tool_Options_Menu(parent, registry, "Immovable Bobs Menu") {
    const int max_items_in_tab=6;
    

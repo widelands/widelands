@@ -92,11 +92,14 @@ void Window::set_title(const char *text)
 	update(0, 0, get_w(), WINDOW_BORDER);
 }
 
-/** Window::move_to_mouse()
- *
- * Move the window so that it is under the mouse cursor.
- * Ensure that the window doesn't move out of the screen.
- */
+/*
+===============
+Window::move_to_mouse
+
+Move the window so that it is under the mouse cursor.
+Ensure that the window doesn't move out of the screen.
+===============
+*/
 void Window::move_to_mouse()
 {
 	int px, py;
@@ -119,6 +122,24 @@ void Window::move_to_mouse()
 
 	set_pos(px, py);
 }
+
+
+/*
+===============
+Window::center_to_parent
+
+Move the window so that it is centered wrt the parent.
+===============
+*/
+void Window::center_to_parent()
+{
+	Panel* parent = get_parent();
+
+	assert(parent);
+
+	set_pos((parent->get_inner_w() - get_w()) / 2, (parent->get_inner_h() - get_h()) / 2);
+}
+
 
 /*
 ===============
@@ -231,3 +252,72 @@ void Window::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
 	}
 }
 
+
+
+/*
+==============================================================================
+
+UniqueWindow IMPLEMENTATION
+
+==============================================================================
+*/
+
+
+/*
+===============
+UniqueWindowRegistry::~UniqueWindowRegistry
+
+In order to avoid dangling pointers, we need to kill our contained window here.
+===============
+*/
+UniqueWindowRegistry::~UniqueWindowRegistry()
+{
+	if (window)
+		delete window;
+}
+
+
+/*
+===============
+UniqueWindow::UniqueWindow
+
+Register, position according to the registry information.
+===============
+*/
+UniqueWindow::UniqueWindow(Panel* parent, UniqueWindowRegistry* reg, int w, int h, std::string title)
+	: Window(parent, 0, 0, w, h, title.c_str())
+{
+	m_registry = reg;
+	m_usedefaultpos = true;
+
+	if (m_registry)
+	{
+		if (m_registry->window)
+			delete m_registry->window;
+
+		m_registry->window = this;
+		if (m_registry->x >= 0) {
+			set_pos(m_registry->x, m_registry->y);
+			m_usedefaultpos = false;
+		}
+	}
+}
+
+
+/*
+===============
+UniqueWindow::~UniqueWindow
+
+Unregister, save latest position.
+===============
+*/
+UniqueWindow::~UniqueWindow()
+{
+	if (m_registry) {
+		assert(m_registry->window == this);
+
+		m_registry->window = 0;
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+	}
+}

@@ -25,22 +25,21 @@
 
 class Editor_Interactive;
 
-class Editor_Tool_Options_Menu : public Window {
+class Editor_Tool_Options_Menu : public UniqueWindow {
       public:
-         Editor_Tool_Options_Menu(Editor_Interactive*, UniqueWindow*, char* title);
+         Editor_Tool_Options_Menu(Editor_Interactive*, UniqueWindowRegistry*, char* title);
          ~Editor_Tool_Options_Menu();
-         
+
          inline Editor_Interactive* get_parent() { return m_parent; }
 
       private:
-         UniqueWindow* m_registry;
          Editor_Interactive* m_parent;
 };
 
 class Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu {
    public:
-      Editor_Tool_Change_Height_Options_Menu(Editor_Interactive*, Editor_Increase_Height_Tool*, 
-            UniqueWindow*);
+      Editor_Tool_Change_Height_Options_Menu(Editor_Interactive*, Editor_Increase_Height_Tool*,
+            UniqueWindowRegistry*);
       ~Editor_Tool_Change_Height_Options_Menu() { }
 
    private:
@@ -54,12 +53,12 @@ class Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu {
 
 class Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
    public:
-      Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive*, Editor_Noise_Height_Tool*, UniqueWindow*);
+      Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive*, Editor_Noise_Height_Tool*, UniqueWindowRegistry*);
       virtual ~Editor_Tool_Noise_Height_Options_Menu() { }
 
    private:
-      Textarea* m_textarea_lower; 
-      Textarea* m_textarea_upper; 
+      Textarea* m_textarea_lower;
+      Textarea* m_textarea_upper;
       Textarea* m_set;
       Editor_Noise_Height_Tool* m_nht;
 
@@ -69,7 +68,8 @@ class Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
 
 class Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Menu {
    public:
-      Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive*, Editor_Set_Both_Terrain_Tool*, UniqueWindow* );
+      Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive*, Editor_Set_Both_Terrain_Tool*,
+		                                          UniqueWindowRegistry* );
       virtual ~Editor_Tool_Set_Terrain_Tool_Options_Menu() { };
 
    private:
@@ -81,7 +81,8 @@ class Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Men
 
 class Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu {
    public:
-      Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive*, Editor_Place_Immovable_Tool*, UniqueWindow*);
+      Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive*, Editor_Place_Immovable_Tool*,
+		                                         UniqueWindowRegistry*);
       virtual ~Editor_Tool_Place_Immovable_Options_Menu() { };
 
    private:

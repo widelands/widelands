@@ -521,6 +521,7 @@ public:
 	void set_title(const char *text);
 
 	void move_to_mouse();
+	void center_to_parent();
 
 	// Drawing and event handlers
 	void draw_border(RenderTarget* dst);
@@ -533,7 +534,7 @@ private:
 	bool _dragging;
 
 	std::string		m_title;
-	
+
 	uint	m_pic_lborder;
 	uint	m_pic_rborder;
 	uint	m_pic_top;
@@ -541,23 +542,39 @@ private:
 	uint	m_pic_background;
 };
 
+
 /*
 =============================
 
 UniqueWindow
 
-can only be created once, when it is requested to 
-open a second one, it won't
+can only be created once, when it is requested to
+open a second one, it will implicitly kill the old one
 
 =============================
 */
 
-struct UniqueWindow {
-	Window	*window;
-	int		x, y;
-	
-	inline UniqueWindow() : window(0), x(-1), y(-1) { }
+class UniqueWindow;
+
+struct UniqueWindowRegistry {
+	UniqueWindow*	window;
+	int				x, y;
+
+	inline UniqueWindowRegistry() : window(0), x(-1), y(-1) { }
+	~UniqueWindowRegistry();
 };
 
+class UniqueWindow : public Window {
+public:
+public:
+	UniqueWindow(Panel* parent, UniqueWindowRegistry* reg, int w, int h, std::string title);
+	virtual ~UniqueWindow();
+
+	inline bool get_usedefaultpos() { return m_usedefaultpos; }
+
+private:
+	UniqueWindowRegistry*	m_registry;
+	bool							m_usedefaultpos;
+};
 
 #endif /* __S__UI_H */

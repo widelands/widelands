@@ -117,9 +117,9 @@ FieldActionWindow IMPLEMENTATION
 
 ==============================================================================
 */
-class FieldActionWindow : public Window {
+class FieldActionWindow : public UniqueWindow {
 public:
-	FieldActionWindow(Interactive_Player *plr, UniqueWindow *registry);
+	FieldActionWindow(Interactive_Player *plr, UniqueWindowRegistry *registry);
 	~FieldActionWindow();
 
 	void init();
@@ -143,7 +143,6 @@ private:
 
 	Interactive_Player	*m_player;
 	Map						*m_map;
-	UniqueWindow			*m_registry;
 
 	FCoords		m_field;
 
@@ -175,16 +174,12 @@ FieldActionWindow::FieldActionWindow
 Initialize a field action window, creating the appropriate buttons.
 ===============
 */
-FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *registry)
-	: Window(plr, plr->get_w()/2, plr->get_h()/2, 68, 34, "Action")
+FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindowRegistry *registry)
+	: UniqueWindow(plr, registry, 68, 34, "Action")
 {
 	// Hooks into the game classes
 	m_player = plr;
 	m_map = m_player->get_game()->get_map();
-	m_registry = registry;
-	if (registry->window)
-		delete registry->window;
-	registry->window = this;
 
 	Field *f = m_map->get_field(m_player->get_fieldsel());
 	m_field = FCoords(m_player->get_fieldsel(), f);
@@ -208,7 +203,6 @@ Free allocated resources, remove from registry.
 FieldActionWindow::~FieldActionWindow()
 {
 	m_player->set_fieldsel_freeze(false);
-	m_registry->window = 0;
 }
 
 
@@ -223,6 +217,8 @@ This mainly deals with mouse placement
 void FieldActionWindow::init()
 {
 	m_tabpanel->resize();
+
+	center_to_parent(); // override UniqueWindow position
 
 	// Move the window away from the current mouse position, i.e.
 	// where the field is, to allow better view
@@ -575,7 +571,7 @@ Perform a field action (other than building options).
 Bring up a field action window or continue road building.
 ===============
 */
-void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
+void show_field_action(Interactive_Player *parent, UniqueWindowRegistry *registry)
 {
 	FieldActionWindow *faw;
 
@@ -589,13 +585,13 @@ void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
 	// we're building a road right now
 	Map *map = parent->get_game()->get_map();
 	Coords target = parent->get_fieldsel();
-	
-	// if user clicked on the same field again, build a flag	
+
+	// if user clicked on the same field again, build a flag
 	if (target == parent->get_build_road_end()) {
 		faw = new FieldActionWindow(parent, registry);
-		
+
 		bool flag = false;
-		if (target != parent->get_build_road_start() && 
+		if (target != parent->get_build_road_start() &&
 		    parent->get_player()->get_buildcaps(target) & BUILDCAPS_FLAG)
 			flag = true;
 		faw->add_buttons_road(flag);
@@ -610,10 +606,10 @@ void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
 		faw->init();
 		return;
 	}
-	
+
 	// did he click on a flag or a road where a flag can be built?
 	BaseImmovable *imm = map->get_immovable(target);
-	
+
 	if (imm) {
 		switch(imm->get_type()) {
 		case Map_Object::ROAD:
@@ -621,7 +617,7 @@ void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
 				break;
 			parent->get_game()->send_player_command(parent->get_player_number(), CMD_BUILD_FLAG, target.x, target.y);
 			// fall through, there is a flag now
-				
+
 		case Map_Object::FLAG:
 			parent->finish_build_road();
 			break;
