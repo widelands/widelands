@@ -142,79 +142,59 @@ namespace Graph
 	}
 #endif
 
-	/** class Pic
-	  *
-	  * This class represents a picture
-	  */
-	class Pic
-	{
-		friend class Graphic;
-	public:
-		Pic(void) { pixels=NULL; w=h=clrkey=sh_clrkey=bhas_clrkey=0; }
-		~Pic(void) { if(pixels) free(pixels); }
+	/** struct Bitmap
+	 *
+	 * Rectangle of 16bit pixels, can be colorkeyed.
+	 *
+	 * This class provides a common interface for both loaded and run-time
+	 * generated pictures (i.e. class Pic) and the framebuffer.
+	 */
+	struct Bitmap {
+		ushort *pixels;
+		uint w, h;
+		uint pitch; // every row in the bitmap is pitch pixels long
+		ushort sh_clrkey;
+		bool bhas_clrkey;
 
-		void set_size(const ushort, const ushort);
-		void set_clrkey(const ushort);
-		void set_clrkey(const uchar, const uchar, const uchar);
-		int  load(const char*);
-		int  create(const ushort, const ushort, ushort* data);
-		void clear_all(void);
-		Pic& operator=(const Pic&);
-		Pic(const Pic&);
+		Bitmap() { pixels = 0; w = pitch = h = sh_clrkey = bhas_clrkey = 0; }
 
-		void draw_rect(uint x, uint y, uint w, uint h, uint color);
-		void fill_rect(uint x, uint y, uint w, uint h, uint color);
-		void brighten_rect(uint x, uint y, uint w, uint h, int factor);
-
-		/** inline uint Pic::get_w(void) const
-		  *
-		  * This function returns the width
-		  * Args: none
-		  * returns: width
-		  */
-		inline uint get_w(void) const { return w; }
-
-		/** inline uint Pic::get_h(void) const
-		  *
-		  * This function returns the height
-		  * Args: none
-		  * returns: height
-		  */
-		inline uint get_h(void) const { return h; }
-
-		/** inline ushort get_clrkey(void) const
-		  *
-		  * this returns the current colorkey
-		  *
-		  * Args: none
-		  * returns: clrkey
-		  */
+		inline uint get_w() const { return w; }
+		inline uint get_h() const { return h; }
+		inline bool has_clrkey(void) const { return bhas_clrkey; }
 		inline ushort get_clrkey(void) const
 		{
-			if(bhas_clrkey) return sh_clrkey;
-				return 0;
+			if (bhas_clrkey) return sh_clrkey;
+			return 0;
 		}
 
-		/** inline bool has_clrkey(void) const
-		  *
-		  * this indicates if the pixel has a valid clrkey
-		  *
-		  * Args: none
-		  * Returns: if the pixel has a clrkey or not
-		  */
-		inline bool has_clrkey(void) { return bhas_clrkey; }
+		void draw_rect(uint x, uint y, uint w, uint h, ushort color);
+		void fill_rect(uint x, uint y, uint w, uint h, ushort color);
+		void brighten_rect(uint x, uint y, uint w, uint h, int factor);
 
-		// this function really needs faaast blitting
-		friend void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort,
-		  const ushort, const ushort);
-		friend void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort,
-			const ushort, const ushort);
+		void set_clrkey(const ushort);
+		void set_clrkey(const uchar, const uchar, const uchar);
+	};
+
+	/** class Pic
+	 *
+	 * Pic represents a picture.
+	 * It extends Bitmap by providing Load, Resize, etc... operations
+	 */
+	class Pic : public Bitmap
+	{
+	public:
+		Pic(void) : Bitmap() { }
+		~Pic(void) { if (pixels) free(pixels); }
+
+		Pic(const Pic& p) { *this = p; }
+		Pic& operator=(const Pic&);
+
+		void set_size(const uint w, const uint h);
+		int  load(const char*);
+		int  create(const ushort, const ushort, ushort* data);
+
 	private:
-		bool bhas_clrkey;
-		ulong clrkey;
-		ushort sh_clrkey;
-		ushort* pixels;
-		ushort w, h;
+		void clear_all(void);
 	};
 
 	/** class AutoPic
@@ -292,7 +272,7 @@ namespace Graph
 		return a.x * b.x + a.y * b.y + a.z * b.z;
 	};
 
-	/** class Graphic 
+	/** class Graphic
 	  *
 	  * This class is responsible for all graphics stuff. It's
 	  * modified/optimized to work only for 16bit colordepth and nothing else
@@ -328,7 +308,6 @@ namespace Graph
 		void register_update_rect(const ushort, const ushort, const ushort, const ushort);
 		void update(void);
       void screenshot(const char*);
-		void render_triangle(Point* points, Vector* normals, Pic* texture);
 
 		/** Graphic::State Graphic::get_state(void)
 		  *
@@ -354,7 +333,7 @@ namespace Graph
 		  * Args: none
 		  * returns: XRes
 		  */
-		inline uint get_xres(void) const { return xres; }
+		inline uint get_xres(void) const { return screenbmp.w; }
 
 		/** inline uint Graphic::get_yres(void) const
 		  *
@@ -362,7 +341,7 @@ namespace Graph
 		  * Args: none
 		  * returns: YRes
 		  */
-		inline uint get_yres(void) const { return yres; }
+		inline uint get_yres(void) const { return screenbmp.h; }
 
 		/** inline void Graphics::needs_fs_update(void)
 		  *
@@ -382,15 +361,16 @@ namespace Graph
 		  */
 		inline bool does_need_update(void) { return bneeds_update; }
 
-		// this function really needs faaast blitting
-		friend	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort,
-			  const ushort, const ushort);
-
+		/** inline Bitmap *get_screenbmp()
+		 *
+		 * Return a Bitmap that contains the screen surface.
+		 *
+		 * Returns: a Bitmap representing the screen
+		 */
+		inline Bitmap *get_screenbmp() { return &screenbmp; }
 
 	private:
-		ushort* pixels;
-		ushort xres, yres;
-		uint lpix;
+		Bitmap screenbmp;
 		Mode mode;
 		SDL_Surface* sc;
 		State st;
@@ -400,13 +380,13 @@ namespace Graph
 		bool bneeds_update;
 	};
 
-	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort,
-		const ushort, const ushort);
-	void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort,
-		const ushort, const ushort);
+	void render_triangle(Bitmap *dst, Point* points, Vector* normals, Pic* texture);
+	void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
+	              uint src_x, uint src_y, int w, int h);
 }
 
 using	Graph::Graphic;
+using	Graph::Bitmap;
 using	Graph::Pic;
 using	Graph::AutoPic;
 using	Graph::Vector;

@@ -492,7 +492,7 @@ Checkbox* Window::create_checkbox(const uint px, const uint py, const bool bstat
  * Returns: Nothing
  */
 void Window::draw(void) {
-		  Graph::draw_pic(winpic, x, y, 0, 0, w, h);
+		  Graph::copy_pic(g_gr.get_screenbmp(), winpic, x, y, 0, 0, w, h);
 }
 					 
 /** void Window::set_new_bg(Pic* p);

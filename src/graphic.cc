@@ -42,6 +42,7 @@ namespace Graph
 		b = temp;
 	}
 
+
 #define V3	(float)0.57735
 
 #if SHADING == SHADING_FLAT || !defined(FILL_TRIANGLES)
@@ -74,7 +75,7 @@ namespace Graph
 		if (points[1].x < midx)
 			// arrays have to be swapped
 			swap<int*>(starts, ends);
-		
+
 		int y;
 		// upper part of triangle
 		for (y=0; y<ydiff1; y++)
@@ -96,7 +97,7 @@ namespace Graph
 	}
 
 	// render_triangle for flat shading
-	void Graphic::render_triangle(Point* points, Vector* normals, Pic* texture)
+	void render_triangle(Bitmap *dst, Point* points, Vector* normals, Pic* texture)
 	{
 		static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
 
@@ -217,7 +218,7 @@ namespace Graph
 	}
 
 	// render_triangle for gouraud shading
-	void Graphic::render_triangle(Point* points, Vector* normals, Pic* texture)
+	void render_triangle(Bitmap *dst, Point* points, Vector* normals, Pic* texture)
 	{
 		static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
 
@@ -246,10 +247,10 @@ namespace Graph
 
 		int ymax = make_triangle_lines(points, bright, starts, ends);
 		int ystart = points[0].y < 0 ? -points[0].y : 0;
-		ymax = ymax + points[0].y <= yres ? ymax : yres-points[0].y;
+		ymax = ymax + points[0].y <= (int)dst->h ? ymax : dst->h-points[0].y;
 		for (int y=ystart; y<ymax; y++)
 		{
-			if (starts[y].x >= xres)
+			if (starts[y].x >= (int)dst->w)
 				continue;
 			if (ends[y].x < 0)
 				continue;
@@ -261,14 +262,14 @@ namespace Graph
 			int b = -(int)(65536 * starts[y].b * LIGHT_FACTOR);
 			int bd = -(int)(65536 * LIGHT_FACTOR * bdiff / xdiff);
 
-			int end = ends[y].x < xres ? ends[y].x : xres-1;
+			int end = ends[y].x < (int)dst->w ? ends[y].x : dst->w-1;
 			int start = starts[y].x;
 			if (start < 0) {
 				b -= bd * start;
 				start = 0;
 			}
 
-			ushort *pix = pixels + (points[0].y + y)*xres + start;
+			ushort *pix = dst->pixels + (points[0].y + y)*dst->pitch + start;
 			ushort *texp = texture->pixels + (y % texture->h)*texture->w;
 			uint tp = start - starts[y].x;
 
@@ -287,6 +288,7 @@ namespace Graph
 		}
 	}
 #endif
+
 		  /** class Graphic
 			*
 			* This functions is responsible for displaying graphics and keeping them up to date
@@ -303,10 +305,7 @@ namespace Graph
 			* Returns: nothing
 			*/
 		  Graphic::Graphic(void) {
-					 lpix=0;
 					 sc=NULL;
-					 pixels=NULL;
-					 xres=yres=0;
 					 st=STATE_NOT_INIT;
 					 nupr=0;
 					 bneeds_fs_update=false;
@@ -314,7 +313,7 @@ namespace Graph
 					 SDL_Init(SDL_INIT_VIDEO);
 		  }
 
-		  /** Graphic::~Graphic(void) 
+		  /** Graphic::~Graphic(void)
 			*
 			* simple cleanups.
 			*
@@ -322,15 +321,13 @@ namespace Graph
 			* Returns: nothing
 			*/
 		  Graphic::~Graphic(void) {
-					 lpix=0;
 					 if(sc) {
 								SDL_FreeSurface(sc);
 								sc=NULL;
 					 }
-					 pixels=NULL;
-					 xres=yres=0;
+					 screenbmp.pixels = 0;
 					 st=STATE_NOT_INIT;
-					 
+
 					 SDL_Quit();
 		  }
 
@@ -338,7 +335,7 @@ namespace Graph
 			*
 			* This function sets a new graphics mode.
 			*	if x==0 and y==0: ignore resolution, just set the mode (won't create a window)
-			*	
+			*
 			* Args:	x	x resolution
 			* 		y	y resolution
 			* 		m	either windows or fullscreen
@@ -346,7 +343,7 @@ namespace Graph
 			*/
 		  void Graphic::set_mode(const ushort x, const ushort y, const Mode m) {
 					 if(!x && !y) { mode=m; return; }
-					 if(xres==x && yres==y && mode==m) return;
+					 if(screenbmp.w==x && screenbmp.h==y && mode==m) return;
 					 if(sc)
 								SDL_FreeSurface(sc);
 					 sc=0;
@@ -357,12 +354,13 @@ namespace Graph
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
 					 }
 					 mode=m;
-					 xres=x;
-					 yres=y;
-					 pixels=(ushort*) sc->pixels;
+					 screenbmp.w=x;
+					 screenbmp.pitch=x;
+					 screenbmp.h=y;
+					 screenbmp.pixels=(ushort*) sc->pixels;
 
 					 st=STATE_OK;
-					 
+
 					 bneeds_fs_update=true;
 
 					 return;
@@ -370,7 +368,7 @@ namespace Graph
 
 		  /** void Graphic::register_update_rect(const ushort x, const ushort y, const ushort w, const ushort h);
 			*
-			* This registers a rect of the screen for update 
+			* This registers a rect of the screen for update
 			*
 			* Args: 	x	upper left corner of rect
 			* 			y  upper left corner of rect
@@ -378,22 +376,22 @@ namespace Graph
 			* 			h	height
 			*/
 		  void Graphic::register_update_rect(const ushort x, const ushort y, const ushort w, const ushort h) {
-					 if(nupr>=MAX_RECTS) { 
-								bneeds_fs_update=true; 
-								return; 
+					 if(nupr>=MAX_RECTS) {
+								bneeds_fs_update=true;
+								return;
 					 }
-					 
+
 					upd_rects[nupr].x=x;
 					upd_rects[nupr].y=y;
 					upd_rects[nupr].w=w;
 					upd_rects[nupr].h=h;
-				
+
 					++nupr;
 
 					bneeds_update=true;
 		  }
 
-		  /** void Graphic::screenshot(const char* f) 
+		  /** void Graphic::screenshot(const char* f)
 			*
 			* This makes a screenshot of a the current screen
 			*
@@ -403,8 +401,8 @@ namespace Graph
 		  void Graphic::screenshot(const char* f) {
 					 SDL_SaveBMP(sc, f);
 		  }
-		  
-		  /** void Graphic::update(void) 
+
+		  /** void Graphic::update(void)
 			*
 			*	This function updates the registered rects on the screen
 			*
@@ -413,12 +411,12 @@ namespace Graph
 			*/
 		  void Graphic::update(void) {
 					 if(bneeds_fs_update) {
-								SDL_UpdateRect(sc, 0, 0, xres, yres);
+								SDL_UpdateRect(sc, 0, 0, screenbmp.w, screenbmp.h);
 					 } else {
 /*								cerr << "##########################" << endl;
 								cerr << nupr << endl;
-								for(uint i=0; i<nupr; i++) 
-										  cerr << upd_rects[i].x << ":" << upd_rects[i].y << ":" << 
+								for(uint i=0; i<nupr; i++)
+										  cerr << upd_rects[i].x << ":" << upd_rects[i].y << ":" <<
 													 upd_rects[i].w << ":" << upd_rects[i].h << endl;
 								cerr << "##########################" << endl;
 */								SDL_UpdateRects(sc, nupr, upd_rects);
@@ -427,125 +425,89 @@ namespace Graph
 					 bneeds_fs_update=false;
 					 bneeds_update=false;
 		  }
-		  
-	/** void draw_pic(Pic* p, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
-	  * 		const ushort p_y_pos, const ushort i_w, const ushort i_h)
-	  *
-	  * 	This functions plots a picture onto the current screen
-	  *	
-	  *		friend to class pic and class Graphic
-	  *
-	  * 	Args:	p 	picture to plot
-	  * 			d_x_pos	xpos on screen
-	  * 			d_y_pos	ypos on screen
-	  * 			p_x_pos	start xpos in picture
-	  * 			p_y_pos	start ypos in picture
-	  * 			i_w		width
-	  * 			i_h		height
-	  * 	returns: Nothing
-	  */
-	void draw_pic(Pic* p, ushort d_x_pos, ushort d_y_pos, ushort p_x_pos, ushort p_y_pos,
-							ushort w, ushort h)
-	{
-		if (d_x_pos+w > g_gr.xres)
-			w = g_gr.xres - d_x_pos;
-		if (d_y_pos+h > g_gr.yres)
-			h = g_gr.yres - d_y_pos;
 
-		if (p->has_clrkey())
+
+	/** void copy_pic(Bitmap +dst, Bitmap *src, const int dst_x, const int dst_y,
+	 *                const uint src_x, const uint src_y, const uint w, const uint h)
+	 *
+	 * Copy an area of the source bitmap to the destination bitmap, using
+	 * source colorkey if necessary.
+	 *
+	 * Assumes a valid source rectangle!
+	 * Destination clipping is performed
+	 *
+	 * Args: dst	destination bitmap
+	 *       src	source bitmap
+	 *       dst_x	destination coordinates
+	 *       dst_y
+	 *       src_x	source coordinates
+	 *       src_y
+	 *       w		width
+	 *       h		height
+	 */
+	void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
+	              uint src_x, uint src_y, int w, int h)
+	{
+		if (dst_x < 0) {
+			w += dst_x;
+			dst_x = 0;
+		}
+		if (dst_x+w > (int)dst->w)
+			w = dst->w - dst_x;
+		if (w <= 0)
+			return;
+
+		if (dst_y < 0) {
+			h += dst_y;
+			dst_y = 0;
+		}
+		if (dst_y+h > (int)dst->h)
+			h = dst->h - dst_y;
+		if (h <= 0)
+			return;
+
+		if (src->has_clrkey())
 		{
 			// Slow blit, checking for clrkeys. This could probably speed up by copying
 			// 2 pixels (==4bytes==register width)
 			// in one rush. But this is a nontrivial task
-			for (uint y=0; y<h; y++)
+			// This could also use MMX assembly on targets that support it...
+			for (int y=0; y<h; y++)
 			{
-				int sp = (p_y_pos++)*p->w + p_x_pos;
-				int dp = (d_y_pos++)*g_gr.xres + d_x_pos;
-				for (uint x=0; x<w; x++)
-				{
-					ushort clr = p->pixels[sp++];
-					if (clr != p->get_clrkey())
-						g_gr.pixels[dp] = clr;
-					dp++;
-				}				
-			}
-		}
-		else
-		{
-			if(w == g_gr.get_xres() && h == g_gr.get_yres())
-			{
-				// one memcpy and we're settled
-				memcpy(g_gr.pixels, p->pixels, (p->w * p->h) << 1);
-			}
-			else
-			{
-				uint poffs = p->w * p_y_pos + p_x_pos;
-				uint doffs = g_gr.xres * d_y_pos + d_x_pos;
-				int bw = w << 1; // w*sizeof(short)
-				// fast blitting, using memcpy
-				for (uint y=0; y<h; y++)
-				{
-					memcpy (g_gr.pixels+doffs, p->pixels+poffs, bw);
-					doffs += g_gr.xres;
-					poffs += p->w;
-				}
-			}
-		}
-	}
-											        
-		  /** void copy_pic(Pic* dst, Pic* src, const ushort d_x_pos, const ushort d_y_pos,  const ushort p_x_pos, 
-			* 		const ushort p_y_pos, const ushort i_w, const ushort i_h)
-			*
-			* 	This functions plots a picture into an other
-			*
-			*	friend to class pic
-			*
-			* 	Args:	src 	picture to plot
-			* 			dst	picture to plot inside
-			* 			d_x_pos	xpos on screen
-			* 			d_y_pos	ypos on screen
-			* 			p_x_pos	start xpos in picture
-			* 			p_y_pos	start ypos in picture
-			* 			i_w		width
-			* 			i_h		height
-			* 	returns: Nothing
-			*/
-	void copy_pic(Pic* dst, Pic* src, ushort d_x_pos, ushort d_y_pos,  ushort p_x_pos, 
-		ushort p_y_pos, ushort w, ushort h)
-	{
-		if(d_x_pos + w > dst->w)
-			w = dst->w - d_x_pos;
-		if(d_y_pos + h > dst->h)
-			h = dst->h - d_y_pos;
-
-		if (src->has_clrkey() && (dst->get_clrkey() != src->get_clrkey()))
-		{
-			for (uint y=0; y<h; y++)
-			{
-				int sp = (p_y_pos++)*src->w + p_x_pos;
-				int dp = (d_y_pos++)*dst->w + d_x_pos;
-				for (uint x=0; x<w; x++)
+				int sp = (src_y++)*src->pitch + src_x;
+				int dp = (dst_y++)*dst->pitch + dst_x;
+				for (int x=0; x<w; x++)
 				{
 					ushort clr = src->pixels[sp++];
 					if (clr != src->get_clrkey())
 						dst->pixels[dp] = clr;
 					dp++;
-				}				
+				}
 			}
 		}
 		else
 		{
-			uint soffs = src->w * p_y_pos + p_x_pos;
-			uint doffs = dst->w * d_y_pos + d_x_pos;
-
-			// fast blitting, using memcpy
-			for (uint y=0; y<h; y++)
+			if (w == (int)dst->pitch && w == (int)src->pitch)
 			{
-				memcpy(dst->pixels+doffs, src->pixels+soffs, w<<1); // w*sizeof(short) 
-				doffs+=dst->w;
-				soffs+=src->w;
+				// copy entire rows, so it can be all done in a single memcpy
+				uint soffs = src_y * src->w;
+				uint doffs = dst_y * dst->w;
+				memcpy(dst->pixels+doffs, src->pixels+soffs, (w*h) << 1);
 			}
-		}		  
+			else
+			{
+				// fast blitting, using one memcpy per row
+				uint soffs = src_y * src->pitch + src_x;
+				uint doffs = dst_y * dst->pitch + dst_x;
+				int bw = w << 1; // w*sizeof(short)
+				for (int y=0; y<h; y++)
+				{
+					memcpy (dst->pixels+doffs, src->pixels+soffs, bw);
+					soffs += src->pitch;
+					doffs += dst->pitch;
+				}
+			}
+		}
 	}
 
 }

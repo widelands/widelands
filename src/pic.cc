@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -27,11 +27,23 @@
 #include <string.h>
 #endif
 
-#define PIXEL(x, y)		pixels[(y)*w+(x)]
+#define PIXEL(x, y)		pixels[(y)*pitch+(x)]
 
 namespace Graph
 {
-	void Pic::draw_rect(uint rx, uint ry, uint rw, uint rh, uint color)
+	/*
+	==========================================================================
+
+	Bitmap
+
+	==========================================================================
+	*/
+
+	/** Bitmap::draw_rect(uint rx, uint ry, uint rw, uint rh, ushort color)
+	 *
+	 * Draws the outline of a rectangle
+	 */
+	void Bitmap::draw_rect(uint rx, uint ry, uint rw, uint rh, ushort color)
 	{
 		rw += rx;
 		rh += ry;
@@ -47,41 +59,72 @@ namespace Graph
 		}
 	}
 
-	void Pic::fill_rect(uint rx, uint ry, uint rw, uint rh, uint color)
+	/** Bitmap::fill_rect(uint rx, uint ry, uint rw, uint rh, ushort color)
+	 *
+	 * Draws a filled rectangle
+	 */
+	void Bitmap::fill_rect(uint rx, uint ry, uint rw, uint rh, ushort color)
 	{
 		rw += rx;
 		rh += ry;
 		for (uint y=ry; y<rh; y++)
 		{
-			uint p = y * w + rx;
+			uint p = y * pitch + rx;
 			for (uint x=rx; x<rw; x++)
 				pixels[p++]= color;
 		}
 	}
 
-	void Pic::brighten_rect(uint rx, uint ry, uint rw, uint rh, int factor)
+	/** Bitmap::brighten_rect(uint rx, uint ry, uint rw, uint rh, int factor)
+	 *
+	 * Change the brightness of the given rectangle
+	 */
+	void Bitmap::brighten_rect(uint rx, uint ry, uint rw, uint rh, int factor)
 	{
 		rw += rx;
 		rh += ry;
 		for (uint y=ry; y<rh; y++)
 		{
-			uint p = y * w + rx;
+			uint p = y * pitch + rx;
 			for (uint x=rx; x<rw; x++)
 				pixels[p++]= bright_up_clr(pixels[p], factor);
 		}
 	}
 
-		  /** Pic::Pic(const Pic& p)
-			*
-			* Copy constructor. Slow and simple
-			*
-			* Args: p	pic to copy
-			* Returns: Nothing
-			*/
-		  Pic::Pic(const Pic& p) {
-					 *this=p;
-		  }
+	/** Bitmap::set_clrkey(ushort dclrkey)
+	 *
+	 * sets the clrkey of this bitmap
+	 *
+	 * Args: dclrkey	The clrkey to use
+	 */
+	void Bitmap::set_clrkey(ushort dclrkey)
+	{
+		sh_clrkey = dclrkey;
+		bhas_clrkey=true;
+	}
 
+	/** Bitmap::set_clrkey(uchar r, uchar g, uchar b)
+	 *
+	 * sets the clrkey of this pic
+	 *
+	 * Args: r	red value of clrkey
+	 * 	     g	green value of clrkey
+	 * 	     b	blue value of clrkey
+	 */
+	void Bitmap::set_clrkey(uchar r, uchar g, uchar b)
+	{
+		ushort dclrkey = pack_rgb(r,g,b);
+		sh_clrkey=dclrkey;
+		bhas_clrkey=true;
+	}
+
+	/*
+	==========================================================================
+
+	Pic
+
+	==========================================================================
+	*/
 
 		  /** Pic& Pic::operator=(const Pic& p)
 			*
@@ -91,7 +134,6 @@ namespace Graph
 			* returns: *this
 			*/
 		  Pic& Pic::operator=(const Pic& p) {
-					 clrkey=p.clrkey;
 					 sh_clrkey=p.sh_clrkey;
 					 bhas_clrkey=p.bhas_clrkey;
 
@@ -102,7 +144,7 @@ namespace Graph
 					 return *this;
 		  }
 
-		  /** void Pic::set_size(const ushort nw, const ushort nh)
+		  /** void Pic::set_size(const uint nw, const uint nh)
 			*
 			* This functions sets the new size of a pic
 			*
@@ -110,7 +152,7 @@ namespace Graph
 			* 		 nh	= new height
 			* Returns: nothinh
 			*/
-		  void Pic::set_size(const ushort nw, const ushort nh) {
+		  void Pic::set_size(const uint nw, const uint nh) {
 					 if(pixels) free(pixels);
 					 w=nw;
 					 h=nh;
@@ -125,28 +167,23 @@ namespace Graph
 					 pixels=(ushort*) malloc(sizeof(short)*w*h);
 
 					 w=nw;
+					 pitch=nw;
 					 h=nh;
 
 					 clear_all();
 		  }
 
-		  /** void Pic::clear_all(void)
-			*
-			* This function clear all the pixels and sets them to the clrkey, if defined
-			*
-			* Args: none
-			* Returns: nothing
-			*/
-		  void Pic::clear_all(void)
-		  {
-				if(!bhas_clrkey) return;
+	/** Pic::clear_all(void) [private]
+	 *
+	 * Clears all pixels with the color of the color key.
+	 */
+	void Pic::clear_all(void)
+	{
+		if(!bhas_clrkey) return;
 
-				for(int i=w*h-1; i>=0; i--)
-						  pixels[i]=sh_clrkey;
-
-//				for(int i=w*h-2; i>=0; i-=2)
-//						  pixels[i]=clrkey;
-		  }
+		for(int i = w*h-1; i >= 0; i--)
+			pixels[i] = sh_clrkey;
+	}
 
 		  /** int Pic::load(const char* file)
 			*
@@ -166,10 +203,10 @@ namespace Graph
 		set_size(bmp->w, bmp->h);
 
 		int i=0;
-		for (int y=0; y<h; y++)
+		for (uint y=0; y<h; y++)
 		{
 			uchar* bits = (uchar*)bmp->pixels + y * bmp->pitch;
-			for (int x=0; x<w; x++)
+			for (uint x=0; x<w; x++)
 			{
 				uchar r = *(bits + (bmp->format->Rshift >> 3));
 				uchar g = *(bits + (bmp->format->Gshift >> 3));
@@ -201,34 +238,6 @@ namespace Graph
 			return RET_OK;
 		}
 
-		  /** void Pic::set_clrkey(ushort dclrkey)
-			*
-			* sets the clrkey of this pic
-			*
-			* Args: dclrkey	The clrkey to use
-			* Returns: nothing
-			*/
-		  void Pic::set_clrkey(ushort dclrkey) {
-					 sh_clrkey=dclrkey;
-					 clrkey= (dclrkey<<16 | dclrkey);
-					 bhas_clrkey=true;
-		  }
-
-		  /** void Pic::set_clrkey(uchar r, uchar g, uchar b)
-			*
-			* sets the clrkey of this pic
-			*
-			* Args: r	red value of clrkey
-			* 		  g	green value of clrkey
-			* 		  b	blue value of clrkey
-			* Returns: nothing
-			*/
-		  void Pic::set_clrkey(uchar r, uchar g, uchar b) {
-					 ushort dclrkey=pack_rgb(r,g,b);
-					 sh_clrkey=dclrkey;
-					 clrkey= (dclrkey<<16 & clrkey);
-					 bhas_clrkey=true;
-		  }
 
 	/*
 	==========================================================================

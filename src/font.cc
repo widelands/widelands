@@ -151,8 +151,8 @@ Pic* Font_Handler::get_string(const char* str, const ushort f) {
 		  
 		  // Now buf contains only valid chars
 		  Pic* retval=new Pic;
-		  retval->set_size(w, fonts[f].h);
 		  retval->set_clrkey(fonts[f].p[0].get_clrkey());
+		  retval->set_size(w, fonts[f].h);
 
 		  for(uint j=0; j<strlen(buf); j++) {
 					 c=buf[j];

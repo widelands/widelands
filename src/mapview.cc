@@ -125,7 +125,7 @@ inline void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* pic)
 	n[0] = l->get_normal();
 	n[1] = r->get_normal();
 	n[2] = m->get_normal();
-	g_gr.render_triangle(p, n, pic);
+	Graph::render_triangle(g_gr.get_screenbmp(), p, n, pic);
 }
 
 void Map_View::set_viewpoint(uint x,  uint y)
