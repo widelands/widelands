@@ -1463,9 +1463,9 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
 {
 	Section* sglobal = prof->get_section("global");
 	const char* string;
-   
+
 	Building_Descr::parse(directory, prof, encdata);
-   
+
    // Get inputs and outputs
    while(sglobal->get_next_string("output", &string))
       m_output.insert(string);
@@ -1478,7 +1478,7 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
       while((val=s->get_next_val(0))) {
 
          int idx=get_tribe()->get_ware_index(val->get_name());
-         if(idx==-1) 
+         if(idx==-1)
             throw wexception("Error in [inputs], ware %s is unknown!", val->get_name());
 
 
@@ -1580,11 +1580,11 @@ void ProductionSite::init(Editor_Game_Base *g)
 
    if (g->is_game()) {
    // Request worker
-      if(!m_worker) 
+      if(!m_worker)
          request_worker((Game*)g);
 
       // Init input ware queues
-      std::vector<Input>* inputs=((ProductionSite_Descr*)get_descr())->get_inputs();
+      const std::vector<Input>* inputs=((ProductionSite_Descr*)get_descr())->get_inputs();
 
       for(uint i = 0; i < inputs->size(); i++) {
          ALIVE();
@@ -1620,7 +1620,7 @@ void ProductionSite::cleanup(Editor_Game_Base *g)
 		w->set_location(0);
 	}
 
-   
+
    // Cleanup the wares queues
 	for(uint i = 0; i < m_input_queues.size(); i++) {
 		m_input_queues[i]->cleanup((Game*)g);

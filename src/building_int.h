@@ -131,7 +131,7 @@ public:
 	std::string get_worker() const { return m_worker; }
 	bool is_output(std::string name) const { return m_output.find(name) != m_output.end(); }
 	const std::set<std::string>* get_outputs() const { return &m_output; }
-	std::vector<Input>* get_inputs() { return &m_inputs; }
+	const std::vector<Input>* get_inputs() const { return &m_inputs; }
    const ProductionProgram* get_program(std::string name) const;
 
 private:
@@ -155,9 +155,9 @@ public:
 	virtual void remove_worker(Worker *w);
 
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
-   
+
    inline std::vector<WaresQueue*>* get_warequeues(void) { return &m_input_queues; }
-   
+
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
@@ -183,11 +183,11 @@ private:
 /*
 =============================
 
-class Input 
+class Input
 
 This class descripes, how many items of a certain
-ware can be stored in a house. 
-This class will be extended to support ordering of 
+ware can be stored in a house.
+This class will be extended to support ordering of
 certain wares directly or releasing some wares
 out of a building
 
@@ -199,7 +199,7 @@ class Input {
       ~Input(void) { }
 
       inline void set_max(int n) { m_max=n; }
-      inline int get_max(void) { return m_max; }
+      inline int get_max(void) const { return m_max; }
       inline Ware_Descr* get_ware() const { return m_ware; }
 
    private:
