@@ -28,6 +28,7 @@ class Game;
 class Path;
 class PlayerImmovable;
 class Road;
+class Soldier;
 class Flag;
 class Tribe_Descr;
 
@@ -107,6 +108,10 @@ class Player {
       int get_economy_number(Economy*); // for savegames
       Economy* get_economy_by_number(int i) { return m_economies[i]; } // for loading
 
+		// Military stuff
+      void drop_soldier(PlayerImmovable* imm, Soldier* worker);
+		void change_soldier_capacity (PlayerImmovable* , int val);
+      void change_training_options(PlayerImmovable* imm, int atr, int val);
 	private:
 		bool m_see_all;
       

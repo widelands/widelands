@@ -23,6 +23,7 @@
 #include "network.h"
 #include "player.h"
 #include "playercommand.h"
+#include "soldier.h"
 #include "wexception.h"
 #include "widelands_map_map_object_saver.h"
 #include "widelands_map_map_object_loader.h"
@@ -35,7 +36,10 @@ enum {
 	PLCMD_BUILDROAD,
 	PLCMD_FLAGACTION,
 	PLCMD_STARTSTOPBUILDING,
-	PLCMD_ENHANCEBUILDING	
+	PLCMD_ENHANCEBUILDING,
+	PLCMD_CHANGETRAININGOPTIONS,
+	PLCMD_DROPSOLDIER,
+	PLCMD_CHANGESOLDIERCAPACITY,
 };
 
 /*** class PlayerCommand ***/
@@ -52,22 +56,28 @@ PlayerCommand::~PlayerCommand ()
 PlayerCommand* PlayerCommand::deserialize (Deserializer* des)
 {
 	switch (des->getchar()) {
-	    case PLCMD_BULLDOZE:
-		return new Cmd_Bulldoze(des);
-	    case PLCMD_BUILD:
-		return new Cmd_Build(des);
-	    case PLCMD_BUILDFLAG:
-		return new Cmd_BuildFlag(des);
-	    case PLCMD_BUILDROAD:
-		return new Cmd_BuildRoad(des);
-	    case PLCMD_FLAGACTION:
-		return new Cmd_FlagAction(des);
-	    case PLCMD_STARTSTOPBUILDING:
-		return new Cmd_StartStopBuilding(des);
-	    case PLCMD_ENHANCEBUILDING:
-		return new Cmd_EnhanceBuilding(des);
-	    default:
-		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
+		case PLCMD_BULLDOZE:
+			return new Cmd_Bulldoze(des);
+		case PLCMD_BUILD:
+			return new Cmd_Build(des);
+		case PLCMD_BUILDFLAG:
+			return new Cmd_BuildFlag(des);
+		case PLCMD_BUILDROAD:
+			return new Cmd_BuildRoad(des);
+		case PLCMD_FLAGACTION:
+			return new Cmd_FlagAction(des);
+		case PLCMD_STARTSTOPBUILDING:
+			return new Cmd_StartStopBuilding(des);
+		case PLCMD_ENHANCEBUILDING:
+			return new Cmd_EnhanceBuilding(des);
+		case PLCMD_CHANGETRAININGOPTIONS:
+			return new Cmd_ChangeTrainingOptions(des);
+		case PLCMD_DROPSOLDIER:
+			return new Cmd_DropSoldier(des);
+		case PLCMD_CHANGESOLDIERCAPACITY:
+			return new Cmd_ChangeSoldierCapacity(des);
+		default:
+			throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
 	}
 }
 
@@ -481,7 +491,204 @@ void Cmd_EnhanceBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
    fw->Unsigned32(mos->get_object_file_index(obj)); 
 
    // Now id
-   fw->Unsigned16(id);
+	fw->Unsigned16(id);
 }
 
+/*** class Cmd_ChangeTrainingOptions ***/
+
+Cmd_ChangeTrainingOptions::Cmd_ChangeTrainingOptions (Deserializer* des):PlayerCommand (0, des->getchar())
+{
+	serial=des->getlong();      // Serial of the building
+	attribute=des->getshort();  // Attribute to modify
+	value=des->getshort();      // New vale
+}
+
+void Cmd_ChangeTrainingOptions::execute (Game* g)
+{
+	Player* player = g->get_player(get_sender());
+	Map_Object* obj = g->get_objects()->get_object(serial);
+
+	/* ¿ Maybe we must check that the building is a training house ? */
+	if ((obj) && (obj->get_type() >= Map_Object::BUILDING)) {
+		player->change_training_options(static_cast<PlayerImmovable*>(obj), attribute, value);
+	}
+
+}
+
+void Cmd_ChangeTrainingOptions::serialize (Serializer* ser)
+{
+	ser->putchar (PLCMD_CHANGETRAININGOPTIONS);
+	ser->putchar (get_sender());
+	ser->putlong (serial);
+	ser->putshort (attribute);
+	ser->putshort (value);
+}
+
+#define PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION 1
+void Cmd_ChangeTrainingOptions::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+	int version=fr->Unsigned16();
+	if(version==PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
+      // Read Player Command
+		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+
+      // Serial
+		int fileserial=fr->Unsigned32();
+		assert(mol->is_object_known(fileserial));
+		serial=mol->get_object_by_file_index(fileserial)->get_serial();
+
+      // Attibute
+		attribute=fr->Unsigned16();
+      
+		// Attibute
+		value=fr->Unsigned16();
+	} else
+		throw wexception("Unknown version in Cmd_ChangeTrainingOptions::Read: %i", version);
+}
+
+void Cmd_ChangeTrainingOptions::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+{
+	// First, write version
+	fw->Unsigned16(PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION);
+	// Write base classes
+	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+
+	// Now serial
+	Map_Object* obj=egbase->get_objects()->get_object(serial);
+	assert(mos->is_object_known(obj));
+	fw->Unsigned32(mos->get_object_file_index(obj)); 
+
+	// Now attribute
+	fw->Unsigned16(attribute);
+
+	// Now value
+	fw->Unsigned16(value);
+}
+
+/*** class Cmd_DropSoldier ***/
+
+Cmd_DropSoldier::Cmd_DropSoldier(Deserializer* des):PlayerCommand (0, des->getchar())
+{
+	serial=des->getlong();      // Serial of the building
+	soldier=des->getlong();     // Serial of soldier
+}
+
+void Cmd_DropSoldier::execute (Game* g)
+{
+	Player* player = g->get_player(get_sender());
+	Map_Object* obj = g->get_objects()->get_object(serial);
+	Map_Object* sold = g->get_objects()->get_object(soldier);
+
+	/* ¿ Maybe we must check that the building is a training house ? */
+	if ((obj) && (sold) && (obj->get_type() >= Map_Object::BUILDING) && (((Worker*)sold)->get_worker_type() == Worker_Descr::SOLDIER)) {
+		player->drop_soldier(static_cast<PlayerImmovable*>(obj), static_cast<Soldier*>(sold));
+			 }
+
+}
+
+void Cmd_DropSoldier::serialize (Serializer* ser)
+{
+	ser->putchar (PLCMD_DROPSOLDIER);
+	ser->putchar (get_sender());
+	ser->putlong (serial);
+	ser->putlong (soldier);
+}
+
+#define PLAYER_CMD_DROPSOLDIER_VERSION 1
+void Cmd_DropSoldier::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+	int version=fr->Unsigned16();
+	if(version==PLAYER_CMD_DROPSOLDIER_VERSION) {
+      // Read Player Command
+		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+
+      // Serial
+		int fileserial=fr->Unsigned32();
+		assert(mol->is_object_known(fileserial));
+		serial=mol->get_object_by_file_index(fileserial)->get_serial();
+
+      // Soldier serial
+		int soldierserial=fr->Unsigned32();
+		assert(mol->is_object_known(soldierserial));
+		soldier=mol->get_object_by_file_index(soldierserial)->get_serial();
+	} else
+		throw wexception("Unknown version in Cmd_DropSoldier::Read: %i", version);
+}
+
+void Cmd_DropSoldier::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+{
+	// First, write version
+	fw->Unsigned16(PLAYER_CMD_DROPSOLDIER_VERSION);
+	// Write base classes
+	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+
+	// Now serial
+	Map_Object* obj=egbase->get_objects()->get_object(serial);
+	assert(mos->is_object_known(obj));
+	fw->Unsigned32(mos->get_object_file_index(obj)); 
+
+	// Now soldier serial
+	obj=egbase->get_objects()->get_object(serial);
+	assert(mos->is_object_known(obj));
+	fw->Unsigned16(mos->get_object_file_index(obj));
+
+}
+
+/*** Cmd_ChangeSoldierCapacity ***/
+
+Cmd_ChangeSoldierCapacity::Cmd_ChangeSoldierCapacity(Deserializer* des):PlayerCommand (0, des->getchar())
+{
+	serial=des->getlong();
+	val=des->getshort();
+}
+
+void Cmd_ChangeSoldierCapacity::execute (Game* g)
+{
+	Player* player = g->get_player(get_sender());
+	Map_Object* obj = g->get_objects()->get_object(serial);
+
+	if (obj && obj->get_type() >= Map_Object::BUILDING)
+		player->change_soldier_capacity(static_cast<PlayerImmovable*>(obj), val);
+}
+
+void Cmd_ChangeSoldierCapacity::serialize (Serializer* ser)
+{
+	ser->putchar (PLCMD_CHANGESOLDIERCAPACITY);
+	ser->putchar (get_sender());
+	ser->putlong (serial);
+	ser->putshort (val);
+}
+
+#define PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION 1
+void Cmd_ChangeSoldierCapacity::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+	int version=fr->Unsigned16();
+	if(version==PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
+      // Read Player Command
+		PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+
+      // Serial
+		int fileserial=fr->Unsigned32();
+		assert(mol->is_object_known(fileserial));
+		serial=mol->get_object_by_file_index(fileserial)->get_serial();
+
+      // Now new capacity
+		val=fr->Unsigned16();
+	} else
+		throw wexception("Unknown version in Cmd_ChangeSoldierCapacity::Read: %i", version);
+}
+
+void Cmd_ChangeSoldierCapacity::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos)
+{
+	// First, write version
+	fw->Unsigned16(PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION);
+	// Write base classes
+	PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+
+	// Now serial
+	Map_Object* obj=egbase->get_objects()->get_object(serial);
+	assert(mos->is_object_known(obj));
+	fw->Unsigned32(mos->get_object_file_index(obj)); 
+
+	// Now capacity
+	fw->Unsigned16(val);
+
+}
 

@@ -38,11 +38,13 @@ class Widelands_Map_Buildingdata_Data_Packet : public Widelands_Map_Data_Packet 
       virtual void read_constructionsite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
       virtual void read_warehouse(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
       virtual void read_militarysite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-      virtual void read_productionsite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+		virtual void read_trainingsite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+		virtual void read_productionsite(Building*, FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
       virtual void write_constructionsite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
       virtual void write_warehouse(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
       virtual void write_militarysite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-      virtual void write_productionsite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+		virtual void write_trainingsite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+		virtual void write_productionsite(Building*, FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
 };
 
 

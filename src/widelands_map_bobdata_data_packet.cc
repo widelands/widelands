@@ -40,7 +40,7 @@
 #define WORKER_BOB_PACKET_VERSION 1
 
 // Worker subtype versions
-#define SOLDIER_WORKER_BOB_PACKET_VERSION 1
+#define SOLDIER_WORKER_BOB_PACKET_VERSION 2
 #define CARRIER_WORKER_BOB_PACKET_VERSION 1
 
 /*
@@ -288,6 +288,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
                soldier->m_attack_level=fr->Unsigned32();
                soldier->m_defense_level=fr->Unsigned32();
                soldier->m_evade_level=fr->Unsigned32();
+               soldier->m_marked=fr->Unsigned8();
             } else
                throw wexception("Unknown version %i in Soldier Bob (SubSubPacket)!", soldierversion);
          }
@@ -542,6 +543,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
          fw->Unsigned32(soldier->m_attack_level);
          fw->Unsigned32(soldier->m_defense_level);
          fw->Unsigned32(soldier->m_evade_level);
+         fw->Unsigned8 (soldier->m_marked);
       }
       break;
 

@@ -25,6 +25,7 @@
 #include "productionsite.h"
 #include "production_program.h"
 #include "profile.h"
+#include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
 #include "util.h"
@@ -228,6 +229,7 @@ ProductionSite::ProductionSite(ProductionSite_Descr* descr)
 	m_program_timer = false;
 	m_program_time = 0;
 	m_statistics_changed = true;
+	m_post_timer = 50;
 }
 
 
@@ -823,6 +825,146 @@ void ProductionSite::program_act(Game* g)
 			m_program_timer = true;
 			m_program_time = schedule_act(g, 10);
 			return;
+		case ProductionAction::actCheckSoldier:
+			{
+				bool found = false;
+				std::vector<Soldier*> *soldiers;
+
+				molog ("  Checking soldier (%s) level %d)\n",
+					action->sparam1.c_str(), action->iparam1);
+
+
+				if (get_soldiers() == 0)
+					throw wexception ("ProductionAction::program_act found actCheckSoldier and there isn't a trainery!!");
+
+				soldiers = get_soldiers();
+
+      	   for(uint i=0; i < (*soldiers).size(); i++) {
+				   if (action->sparam1 == "hp") {
+	         	   if((*soldiers)[i]->get_hp_level() == (uint) action->iparam1) {
+							// okay, do nothing
+                 		molog("    okay\n");
+	                  found=true;
+   		            break;
+      	 	      }
+         	  	}
+				   if (action->sparam1 == "attack") {
+	         	   if((*soldiers)[i]->get_attack_level() == (uint) action->iparam1) {
+							// okay, do nothing
+							molog("    okay\n");
+	                  found=true;
+							break;
+      	 	      }
+         	  	}
+				   if (action->sparam1 == "defense") {
+	         	   if((*soldiers)[i]->get_defense_level() == (uint) action->iparam1) {
+							// okay, do nothing
+                 		molog("    okay\n");
+	                  found=true;
+   		            break;
+      	 	      }
+         	  	}
+				   if (action->sparam1 == "evade") {
+	         	   if((*soldiers)[i]->get_evade_level() == (uint) action->iparam1) {
+							// okay, do nothing
+                 		molog("    okay\n");
+	                  found=true;
+   		            break;
+      	 	      }
+         	  	}
+				}
+
+	         if(!found) {
+	            molog("   Checking failed, program restart\n");
+   	         program_end(g, false);
+      	      return;
+         	}
+	         molog("  Check done!\n");
+
+				program_step();
+				m_program_timer = true;
+				m_program_time = schedule_act(g, 10);
+				return;
+			}
+		case ProductionAction::actTrain:
+			{
+				bool found = false;
+				uint i;
+				std::vector<Soldier*> *soldiers;
+
+				molog ("  Training soldier's %s (%d to %d)",
+					action->sparam1.c_str(),action->iparam1, action->iparam2);
+
+
+
+				if (get_soldiers() == 0)
+					throw wexception ("ProductionAction::program_act found actTrain and there isn't a trainery!!");
+
+				soldiers = get_soldiers();
+
+      	   for(i=0; i < (*soldiers).size(); i++) {
+				   if (action->sparam1 == "hp") {
+	         	   if((*soldiers)[i]->get_hp_level() == (uint) action->iparam1) {
+							// okay, do nothing
+                 		molog("    okay\n");
+	                  found=true;
+   		            break;
+      	 	      }
+         	  	}
+				   if (action->sparam1 == "attack") {
+	         	   if((*soldiers)[i]->get_attack_level() == (uint) action->iparam1) {
+							// okay, do nothing
+							molog("    okay\n");
+	                  found=true;
+							break;
+      	 	      }
+         	  	}
+				   if (action->sparam1 == "defense") {
+	         	   if((*soldiers)[i]->get_defense_level() == (uint) action->iparam1) {
+							// okay, do nothing
+                 		molog("    okay\n");
+	                  found=true;
+   		            break;
+      	 	      }
+         	  	}
+				   if (action->sparam1 == "evade") {
+	         	   if((*soldiers)[i]->get_evade_level() == (uint) action->iparam1) {
+							// okay, do nothing
+                 		molog("    okay\n");
+	                  found=true;
+   		            break;
+      	 	      }
+         	  	}
+				}
+
+	         if(!found) {
+	            molog("   ¡¡Training failed!!, program restart\n");
+   	         program_end(g, false);
+      	      return;
+         	}
+				try {
+					if (action->sparam1 == "hp")
+						(*soldiers)[i]->set_hp_level (action->iparam2);
+
+					if (action->sparam1 == "attack")
+						(*soldiers)[i]->set_attack_level (action->iparam2);
+
+					if (action->sparam1 == "defense")
+						(*soldiers)[i]->set_defense_level (action->iparam2);
+
+					if (action->sparam1 == "evade")
+						(*soldiers)[i]->set_evade_level (action->iparam2);
+
+				} catch (...) {
+					throw wexception ("Fail training soldier!!\n");
+				}
+	         molog("  Training done!\n");
+
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, 10);
+			return;
+		}
 	}
 }
 
@@ -1020,5 +1162,5 @@ void ProductionSite::program_end(Game* g, bool success)
    }
 	
    m_program_timer = true;
-	m_program_time = schedule_act(g, 10);
+	m_program_time = schedule_act(g, m_post_timer);
 }

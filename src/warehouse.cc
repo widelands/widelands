@@ -22,6 +22,7 @@
 #include "game.h"
 #include "player.h"
 #include "profile.h"
+#include "soldier.h"
 #include "transport.h"
 #include "warehouse.h"
 #include "wexception.h"
@@ -54,7 +55,8 @@ Destroy the supply.
 */
 WarehouseSupply::~WarehouseSupply()
 {
-	if (m_economy) {
+	if (m_economy)
+	{
 		log(
 			"WarehouseSupply::~WarehouseSupply: "
 			"Warehouse %u still belongs to an economy",
@@ -261,6 +263,46 @@ Worker* WarehouseSupply::launch_worker(Game* g, int ware)
 
 	return m_warehouse->launch_worker(g, ware);
 }
+
+
+/*
+===============
+WarehouseSupply::launch_soldier
+
+Launch a ware as soldier.
+===============
+*/
+Soldier* WarehouseSupply::launch_soldier(Game* g, int ware, Requeriments* req)
+{
+	assert(m_workers.stock(ware));
+
+	return m_warehouse->launch_soldier(g, ware, req);
+}
+
+/*
+===============
+WarehouseSupply::get_passing_requeriments
+
+Launch a ware as soldier.
+===============
+*/
+int WarehouseSupply::get_passing_requeriments(Game* g, int ware, Requeriments* req)
+{
+	assert(m_workers.stock(ware));
+
+	return m_warehouse->get_soldiers_passing (g, ware, req);
+}
+
+/*
+===============
+WarehouseSupply::mark_as_used
+===============
+*/
+void WarehouseSupply::mark_as_used (Game* g, int ware, Requeriments* r)
+{
+	m_warehouse->mark_as_used (g, ware, r);
+}
+
 
 
 /*
@@ -639,6 +681,115 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
 
 /*
 ===============
+Warehouse::launch_soldier
+
+Start a soldier or certain level. The soldier will be assigned a job by the caller.
+===============
+*/
+Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
+{
+	assert(m_supply->stock_workers(ware));
+
+	Worker_Descr* workerdescr;
+	Soldier* soldier;
+
+	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
+   // Look if we got one in stock of those
+	std::string name=workerdescr->get_name();
+	std::vector<Object_Ptr>::iterator i;
+	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+	{
+		if(static_cast<Worker*>(i->get(g))->get_name()==name)
+		{
+			soldier = static_cast<Soldier*>(i->get(g));
+			if ((!r) || (r->check (	soldier->get_level(atrHP),
+					soldier->get_level(atrAttack),
+					soldier->get_level(atrDefense),
+					soldier->get_level(atrEvade))
+							))
+				break;
+			else
+				continue;
+		}
+	}
+
+	soldier = 0;
+	if(i==m_incorporated_workers.end()) 
+	{
+      // None found, create a new one (if available)
+		soldier = (Soldier*)workerdescr->create(g, get_owner(), this, m_position);
+	} 
+	else 
+	{
+      // one found, make him available
+		soldier = static_cast<Soldier*>(i->get(g));
+		soldier->reset_tasks(g); // Forget everything you did
+		soldier->mark(false);
+		m_incorporated_workers.erase(i);
+	}
+
+	m_supply->remove_workers(ware, 1);
+	return soldier;
+}
+
+
+
+/*
+===============
+Warehouse::mark_as_used
+
+Mark a soldier as used by a request.
+===============
+*/
+void Warehouse::mark_as_used(Game* g, int ware, Requeriments* r)
+{
+	log (">>Warehouse::mark_as_used :");
+	assert(m_supply->stock_workers(ware));
+
+	Worker_Descr* workerdescr;
+	Soldier* soldier;
+
+	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
+   // Look if we got one in stock of those
+	std::string name=workerdescr->get_name();
+	std::vector<Object_Ptr>::iterator i;
+	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+	{
+		if(static_cast<Worker*>(i->get(g))->get_name()==name)
+		{
+			soldier = static_cast<Soldier*>(i->get(g));
+			if (!soldier->is_marked())
+			{
+				if ((!r) || (r->check (	soldier->get_level(atrHP),
+										soldier->get_level(atrAttack),
+										soldier->get_level(atrDefense),
+										soldier->get_level(atrEvade)))
+					)
+					break;
+				else
+					continue;
+			}
+		}
+	}
+
+	soldier = 0;
+	if(i==m_incorporated_workers.end())
+	{
+		log ("NOT FOUND\n"); // This should be an exception
+	} 
+	else
+	{
+      // one found
+		log ("Marked!\n");
+		soldier = static_cast<Soldier*>(i->get(g));
+		soldier->mark(true);
+	}
+	log ("<<Warehouse::mark_as_used\n");
+}
+
+
+/*
+===============
 Warehouse::incorporate_worker
 
 This is the opposite of launch_worker: destroy the worker and add the
@@ -786,6 +937,61 @@ Building* Warehouse_Descr::create_object()
 	return new Warehouse(this);
 }
 
+/*
+===============
+Warehouse::get_soldiers_passing
+===============
+*/
+int Warehouse::get_soldiers_passing (Game* g, int w, Requeriments* r)
+{
+	int number = 0;
+
+log ("Warehouse::get_soldiers_passing :");
+
+	assert(m_supply->stock_workers(w));
+
+	Worker_Descr* workerdescr;
+	Soldier* soldier;
+
+	workerdescr = get_owner()->get_tribe()->get_worker_descr(w);
+   // Look if we got one in stock of those
+   std::string name=workerdescr->get_name();
+   std::vector<Object_Ptr>::iterator i;
+
+	for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
+	{
+      if(static_cast<Worker*>(i->get(g))->get_name()==name)
+		{
+			soldier = static_cast<Soldier*>(i->get(g));
+
+			// Its a marked soldier, we cann't supply it !
+			if (!soldier->is_marked())
+			{
+				if (r)
+				{
+					if (r->check (	soldier->get_level(atrHP),
+										soldier->get_level(atrAttack),
+										soldier->get_level(atrDefense),
+										soldier->get_level(atrEvade)))
+					{
+						log ("+");
+						number++;
+					}
+				}
+				else
+				{
+					log ("+");
+					number++;
+				}
+			}
+			else
+				log ("M");
+		}
+	}
+	log ("\n");
+	return number;
+}
+
 
 /*
 ===============
@@ -796,7 +1002,7 @@ bool Warehouse::can_create_worker(Game *g, int worker)
 {
 	Worker_Descr *w_desc = 0;
 	
-	if (worker >= m_supply->get_workers().get_nrwareids ())
+	if (worker >= m_supply->get_workers().get_nrwareids())
 		throw wexception ("Worker type %d doesn't exists!", worker);
 
    w_desc=get_owner()->get_tribe()->get_worker_descr(worker);
@@ -869,7 +1075,12 @@ void Warehouse::create_worker(Game *g, int worker)
          }
 		}
 
-		insert_workers(worker, 1);
+		// This is needed to have a 0 level soldiers
+		Worker* w;
+
+		w = w_desc->create(g, get_owner(), this, m_position);
+
+		incorporate_worker(g, w);
 
 		molog (" We have created a(n) %s\n", w_desc->get_name ());
 

@@ -39,6 +39,10 @@ struct ProductionAction {
 		actMine,    // sparam1 = resource, iparam1=how far to mine, iparam2=up to max mine, iparam3=chance below 
 		actCall,		// sparam1 = name of sub-program
 		actSet,		// iparam1 = flags to set, iparam2 = flags to unset
+
+		// This is ONLY for Training Porpouses!
+      actCheckSoldier, // sparam = attribute asking to, iparam1 = level requested
+      actTrain,   // sparam = attribute asking to, iparam1 = level requested, iparam2 = level to upgrade
 	};
 
 	enum {

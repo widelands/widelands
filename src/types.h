@@ -25,4 +25,20 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
+
+enum tAttribute {
+    atrHP = 0,   
+    atrAttack,   
+    atrDefense,  
+    atrEvade   
+};
+
+
+class MinMax
+{
+public:
+	int min;
+	int max;
+};
+
 #endif

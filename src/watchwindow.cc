@@ -160,9 +160,9 @@ void WatchWindow::next_view(bool first) {
 		return;
 	if (!first)
 		save_coords();
-	if (first || (m_cur_index == m_views.size()-1 && m_cur_index != 0))
+	if (first || (static_cast<uint>(m_cur_index) == m_views.size()-1 && m_cur_index != 0))
 		m_cur_index = 0;
-	else if (m_cur_index < m_views.size()-1)
+	else if (static_cast<uint>(m_cur_index) < m_views.size()-1)
 		m_cur_index++;
 	show_view(first);
 }
@@ -202,7 +202,7 @@ void WatchWindow::close_cur_view() {
 
 //Enables/Disables buttons for views
 void WatchWindow::toggle_buttons() {
-	for (int i=0;i<NUM_VIEWS;i++) {
+	for (uint i=0;i<NUM_VIEWS;i++) {
 		if (i<m_views.size()) {
 			char buf[32];
 			snprintf(buf, sizeof(buf), "%i", i+1);

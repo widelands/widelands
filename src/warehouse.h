@@ -27,8 +27,9 @@
 class Economy;
 class Editor_Game_Base;
 class Interactive_Player;
-class Tribe_Descr;
 class Profile;
+class Soldier;
+class Tribe_Descr;
 class WareInstance;
 class WareList;
 struct EncodeData;
@@ -87,6 +88,8 @@ public:
    
 	virtual bool fetch_from_flag(Game* g);
 
+	void mark_as_used (Game* g, int ware, Requeriments* r);
+	Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
 	Worker* launch_worker(Game* g, int ware);
 	void incorporate_worker(Game *g, Worker *w);
 
@@ -94,6 +97,7 @@ public:
 	void do_launch_item(Game* g, WareInstance* item);
 	void incorporate_item(Game* g, WareInstance* item);
 
+	int get_soldiers_passing (Game*, int, Requeriments*);
 	bool can_create_worker(Game *, int worker);
 	void create_worker(Game *, int worker);
 protected:
@@ -138,10 +142,13 @@ public: // Supply implementation
 	virtual WareInstance* launch_item(Game* g, int ware);
 	virtual Worker* launch_worker(Game* g, int ware);
 
+	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
+	virtual int get_passing_requeriments(Game* g, int ware, Requeriments* r);
+	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 private:
 	Economy*		m_economy;
 	WareList		m_wares;
-	WareList		m_workers;
+	WareList		m_workers;	// We use this to keep the soldiers
 	Warehouse*	m_warehouse;
 };
 

@@ -69,7 +69,13 @@ public:
 
 	virtual void set_economy(Economy* e);
 
-   std::vector<Soldier*>* get_soldiers(void) { return &m_soldiers; }
+    virtual std::vector<Soldier*>* get_soldiers(void) { return &m_soldiers; }
+
+	int	get_capacity() { return m_capacity; }
+	// Overload of building functions
+    virtual void drop_soldier (uint serial);
+	virtual	void soldier_capacity_up ()		{ change_soldier_capacity(1); }
+	virtual	void soldier_capacity_down ()	{ change_soldier_capacity(-1); }
 
 protected:
 	virtual UIWindow* create_options_window(Interactive_Player* plr,
@@ -80,10 +86,15 @@ private:
 	static void request_soldier_callback(Game* g, Request* rq, int ware,
 		Worker* w, void* data);
 
+	void drop_soldier (Game *g, int i);
+	void call_soldiers(Game *g);
+	void change_soldier_capacity (int);
 private:
-	Request* m_soldier_request;
-   std::vector<Soldier*> m_soldiers;
+//	Request* m_soldier_request;
+	std::vector<Request*> m_soldier_requests;
+	std::vector<Soldier*> m_soldiers;
 	bool		m_didconquer;
+	uint		m_capacity;
 };
 
 #endif

@@ -29,6 +29,7 @@
 
 class Input;
 class ProductionProgram;
+class Soldier;
 class Request;
 class WaresQueue;
 
@@ -110,11 +111,14 @@ public:
       return &m_workers;
    }
 
+   virtual std::vector<Soldier*>* get_soldiers(void) {
+      throw wexception ("ProductionSite::get_soldiers makes no sense");
+   }
 protected:
 	virtual UIWindow* create_options_window(Interactive_Player* plr,
 		UIWindow** registry);
 
-private:
+protected:
 	struct State {
 		const ProductionProgram* program;	// currently running program
 		int                      ip;			// instruction pointer
@@ -134,9 +138,10 @@ private:
 	void add_statistics_value(bool val);
 
 	void calc_statistics();
-   bool can_start_working(void);
+	bool can_start_working(void);
+	void set_post_timer (int t) { m_post_timer = t; }	
 
-private:
+protected:  // TrainingSite must have access to this stuff
    std::vector<Request*> m_worker_requests;
    std::vector<Worker*>  m_workers;
 
@@ -145,6 +150,7 @@ private:
 	std::vector<State>       m_program;			// program stack
 	bool                     m_program_timer; // execute next instruction based on pointer
 	int                      m_program_time;	// timer time
+	int                      m_post_timer;    // Time to schedule after ends
 
 	std::vector<WaresQueue*> m_input_queues; //  input queues for all inputs
 	std::vector<bool>        m_statistics;

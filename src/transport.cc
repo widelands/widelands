@@ -32,6 +32,7 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "game.h"
 #include "player.h"
 #include "rendertarget.h"
+#include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -66,6 +67,9 @@ public: // implementation of Supply
 	virtual WareInstance* launch_item(Game* g, int ware);
 	virtual Worker* launch_worker(Game* g, int ware);
 
+	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
+	virtual int get_passing_requeriments (Game* g, int ware, Requeriments* r);
+	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 private:
 	WareInstance*		m_ware;
 	Economy*				m_economy;
@@ -195,6 +199,37 @@ Worker* IdleWareSupply::launch_worker(Game* g, int ware)
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
 
+
+/*
+===============
+IdleWareSupply::launch_soldier
+===============
+*/
+Soldier* IdleWareSupply::launch_soldier(Game* g, int ware, Requeriments* req)
+{
+	throw wexception("IdleWareSupply::launch_soldier makes no sense");
+}
+
+
+/*
+===============
+IdleWareSupply::get_passing_requeriments
+===============
+*/
+int IdleWareSupply::get_passing_requeriments(Game* g, int ware, Requeriments* req)
+{
+	throw wexception("IdleWareSupply::get_passing_requeriments makes no sense");
+}
+
+/*
+===============
+IdleWareSupply::get_passing_requeriments
+===============
+*/
+void IdleWareSupply::mark_as_used (Game* g, int ware, Requeriments* r)
+{
+	// By now, wares have not need to have this method
+}
 
 
 /*
@@ -2044,6 +2079,7 @@ Transfer::Transfer(Game* g, Request* req, WareInstance* it)
 	m_request = req;
 	m_item = it;
 	m_worker = 0;
+	m_soldier = 0;
 
 	m_idle = false;
 
@@ -2056,12 +2092,26 @@ Transfer::Transfer(Game* g, Request* req, Worker* w)
 	m_request = req;
 	m_worker = w;
 	m_item = 0;
+	m_soldier = 0;
 
 	m_idle = false;
 
 	m_worker->start_task_transfer(g, this);
 }
 
+
+Transfer::Transfer(Game* g, Request* req, Soldier* s)
+{
+	m_game = g;
+	m_request = req;
+	m_soldier = s;
+	m_worker = 0;
+	m_item = 0;
+
+	m_idle = false;
+
+	m_soldier->start_task_transfer(g, this);
+}
 
 /*
 ===============
@@ -2075,14 +2125,21 @@ Transfer::~Transfer()
 	if (m_worker)
 	{
 		assert(!m_item);
+		assert(!m_soldier);
 
       if(m_game->get_objects()->object_still_available(m_worker))
          m_worker->cancel_task_transfer(m_game);
 	}
 	else if (m_item)
 	{
-      if(m_game->get_objects()->object_still_available(m_item))
-         m_item->cancel_transfer(m_game);
+		assert(!m_soldier);
+		if(m_game->get_objects()->object_still_available(m_item))
+		   	m_item->cancel_transfer(m_game);
+	}
+	else if (m_soldier)
+	{
+		if(m_game->get_objects()->object_still_available(m_soldier))
+			m_soldier->cancel_task_transfer(m_game);
 	}
 }
 
@@ -2244,12 +2301,130 @@ void Transfer::tlog(const char* fmt, ...)
 	} else if (m_item) {
 		id = 'I';
 		serial = m_item->get_serial();
+	} else if (m_soldier) {
+		id = 'S';
+		serial = m_soldier->get_serial();
 	} else {
 		id = '?';
 		serial = 0;
 	}
 
 	log("T%c(%u): %s", id, serial, buf);
+}
+
+/*
+===============================================================================
+	Requeriments IMPLEMENTATION
+===============================================================================
+*/
+
+Requeriments::Requeriments ()
+{
+	m_hp.min = -1;
+	m_attack.min = -1;
+	m_defense.min = -1;
+	m_evade.min = -1;
+
+	m_hp.max = 100;
+	m_attack.max = 100;
+	m_defense.max = 100;
+	m_evade.max = 100;
+}
+
+void Requeriments::set (tAttribute at, int min, int max)
+{
+	switch (at)
+	{
+		case atrHP:			m_hp.min = min;
+								m_hp.max = max;
+								break;
+		case atrAttack:	m_attack.min = min;
+								m_attack.max = max;
+								break;
+		case atrDefense:	m_defense.min = min;
+								m_defense.max = max;
+								break;
+		case atrEvade:		m_evade.min = min;
+								m_evade.max = max;
+								break;
+		default:
+			throw wexception ("Requeriments::set Unknown attribute %d.", at);
+	}
+}
+
+bool Requeriments::check (int hp, int attack, int defense, int evade)
+{
+	bool result = false;
+
+	if(((m_hp.min <= hp)           && (hp <= m_hp.max)) &&
+	   ((m_attack.min <= attack)   && (attack <= m_attack.max)) &&
+		((m_defense.min <= defense) && (defense <= m_defense.max)) &&
+		((m_evade.min <= evade)     && (evade <= m_evade.max)))
+			result = true;
+
+	return result;
+}
+
+// Modified to allow Requeriments and Soldiers
+#define REQUERIMENTS_VERSION 1
+/*
+ * Read this requeriment from a file
+ *
+ * it is most probably created by some init function,
+ * It's called problably by some request loader, militarysite or trainingsite loader.
+ *
+ */
+void Requeriments::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol)
+{
+   uint version=fr->Unsigned16();
+
+   if(version==REQUERIMENTS_VERSION) {
+
+		// HitPoints Levels
+		m_hp.min = fr->Unsigned8();
+		m_hp.max = fr->Unsigned8();
+
+		// Attack Levels
+		m_attack.min = fr->Unsigned8();
+		m_attack.max = fr->Unsigned8();
+
+		// Defense levels
+		m_defense.min = fr->Unsigned8();
+		m_defense.max = fr->Unsigned8();
+
+		// Evade
+		m_evade.min = fr->Unsigned8();
+		m_evade.max = fr->Unsigned8();
+
+		// DONE
+      return;
+   }
+   throw wexception("Unknown requeriment version %i in file!\n", version);
+}
+
+/*
+ * Write this requeriment to a file
+ */
+void Requeriments::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+	fw->Unsigned16(REQUERIMENTS_VERSION);
+
+	// Hit Points
+	fw->Unsigned8(m_hp.min);
+	fw->Unsigned8(m_hp.max);
+
+	// Attack
+	fw->Unsigned8(m_attack.min);
+	fw->Unsigned8(m_attack.max);
+
+	// Defense
+	fw->Unsigned8(m_defense.min);
+	fw->Unsigned8(m_defense.max);
+
+	// Evade
+	fw->Unsigned8(m_defense.min);
+	fw->Unsigned8(m_defense.max);
+   // DONE
 }
 
 
@@ -2274,6 +2449,7 @@ Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbda
 	m_economy = m_target->get_economy();
 	m_index = index;
 	m_idle = false;
+
 	m_count = 1;
 	m_required_time = target->get_owner()->get_game()->get_gametime();
 	m_required_interval = 0;
@@ -2283,6 +2459,8 @@ Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbda
 
    if (m_economy)
       m_economy->add_request(this);
+
+	m_requeriments = 0;
 }
 
 
@@ -2298,9 +2476,15 @@ Request::~Request()
 	// Cancel all ongoing transfers
 	while(m_transfers.size()) 
 		cancel_transfer(0);
+
+	// Remove requeriments
+	if (m_requeriments)
+		delete m_requeriments;
+	m_requeriments = 0;
 }
 
-#define REQUEST_VERSION 1
+// Modified to allow Requeriments and SoldierRequests
+#define REQUEST_VERSION 2
 /*
  * Read this request from a file
  *
@@ -2325,22 +2509,32 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
       uint nr_transfers=fr->Unsigned16();
       uint i=0;
       for(i=0; i<nr_transfers; i++) {
-         bool is_ware=fr->Unsigned8();
+         uint what_is=fr->Unsigned8();
          uint reg=fr->Unsigned32();
          Transfer* trans=0;
          if(egbase->is_game()) {
             Game* g=static_cast<Game*>(egbase);
             assert(mol->is_object_known(reg));
-            if(is_ware) {
+            if(what_is==WARE) {
                WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
                trans=new Transfer(g, this, ware);
-            } else {
+            } else if (what_is==WORKER){
                Worker* worker=static_cast<Worker*>(mol->get_object_by_file_index(reg));
                trans=new Transfer(g, this, worker);
+            } else if (what_is==SOLDIER){
+               Soldier* soldier=static_cast<Soldier*>(mol->get_object_by_file_index(reg));
+               trans=new Transfer(g, this, soldier);
             }
             trans->set_idle(fr->Unsigned8());
             m_transfers.push_back(trans);
-         }   
+
+				// Requeriments
+				bool has_requeriments = fr->Unsigned8();
+				if (has_requeriments) {
+					m_requeriments = new Requeriments();
+					m_requeriments->Read (fr, egbase, mol);
+				}
+         }
       }
 
       if(!is_open() && m_economy) 
@@ -2383,20 +2577,31 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
    uint i=0;
    for(i=0; i<m_transfers.size(); i++) {
       Transfer* trans=m_transfers[i];
-      // Do no write game, request
-      bool is_ware=trans->m_item ? 1 : 0;
       // Is this a ware (or a worker)
-      fw->Unsigned8(is_ware);
+     	fw->Unsigned8(m_type);
       // Write ware/worker
-      if(is_ware) {
+      if(trans->m_item) {
          assert(mos->is_object_known(trans->m_item));
          fw->Unsigned32(mos->get_object_file_index(trans->m_item));
-      } else {
+      } else if (trans->m_worker){
          assert(mos->is_object_known(trans->m_worker));
          fw->Unsigned32(mos->get_object_file_index(trans->m_worker));
+      } else if (trans->m_soldier){
+         assert(mos->is_object_known(trans->m_soldier));
+         fw->Unsigned32(mos->get_object_file_index(trans->m_soldier));
       }
       // Write idle
       fw->Unsigned8(trans->is_idle());
+
+		// Requeriments
+//		fw->Unsigned8(m_requeriments ? true: false);
+
+		if (m_requeriments) {
+			fw->Unsigned8(true);
+			m_requeriments->Write (fw, egbase, mos);
+		}
+		else
+			fw->Unsigned8(false);
    }
    // DONE
 }
@@ -2570,11 +2775,21 @@ for its deletion.
 void Request::start_transfer(Game* g, Supply* supp)
 {
 	assert(is_open());
-
+	log(">>Request::StartTransfer\n");
 	Transfer* t = 0;
 	try
 	{
-		if (get_type()==WORKER) 
+		if (get_type()==SOLDIER)
+		{
+			// Begin the transfer of a soldier.
+			// launch_soldier() creates the worker, set_job_request() makes sure the
+			// worker starts walking
+			log("Request: start soldier transfer for %i\n", get_index());
+
+			Soldier* s = supp->launch_soldier(g, get_index(), get_requeriments());
+			t = new Transfer(g, this, s);
+		}
+		else if (get_type()==WORKER)
 		{
 			// Begin the transfer of a worker.
 			// launch_worker() creates the worker, set_job_request() makes sure the
@@ -2610,6 +2825,7 @@ void Request::start_transfer(Game* g, Supply* supp)
 	m_transfers.push_back(t);
 	if (!is_open())
 		m_economy->remove_request(this);
+	log("<<Request::StartTransfer\n");
 }
 
 
@@ -2624,11 +2840,19 @@ for removing and deleting the request.
 */
 void Request::transfer_finish(Game *g, Transfer* t)
 {
-	Worker* w = t->m_worker;
+log (">>Request::transfer_finish()\n");
+	Worker* w = 0;
+	Soldier* s = 0;
+
+	if (t->m_worker)
+		w = t->m_worker;
+	else
+		s = t->m_soldier;
 
 	if (t->m_item)
 		t->m_item->destroy(g);
 
+	t->m_soldier = 0;
 	t->m_worker = 0;
 	t->m_item = 0;
 
@@ -2639,9 +2863,17 @@ void Request::transfer_finish(Game *g, Transfer* t)
 		m_count--;
 	}
 
-	(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
+	if (w)
+		(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
+	else
+		(*m_callbackfn)(g, this, m_index, s, m_callbackdata);
+
+	if (m_requeriments)
+		delete m_requeriments;
+	m_requeriments = 0;
 
 	// this may no longer be valid here
+log ("<<Transfer::has_finished()\n");
 }
 
 
@@ -2659,6 +2891,7 @@ void Request::transfer_fail(Game *g, Transfer* t)
 {
 	bool wasopen = is_open();
 
+	t->m_soldier = 0;
 	t->m_worker = 0;
 	t->m_item = 0;
 
@@ -2666,6 +2899,10 @@ void Request::transfer_fail(Game *g, Transfer* t)
    
    if (!wasopen)
 		m_economy->add_request(this);
+
+	if (m_requeriments)
+		delete m_requeriments;
+	m_requeriments = 0;
 }
 
 
@@ -3635,7 +3872,11 @@ void Economy::add_request(Request* req)
       log("%p: add_request(%p) for worker %s, target is %u\n", this, req,
             get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
             req->get_target((Game*)get_owner()->get_game())->get_serial());
-   } else {
+   } else if(req->get_type()==Request::SOLDIER) {
+      log("%p: add_request(%p) for soldier %s, target is %u\n", this, req,
+            get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
+            req->get_target((Game*)get_owner()->get_game())->get_serial());
+   } else if (req->get_type()==Request::WARE){
       log("%p: add_request(%p) for ware %s, target is %u\n", this, req,
             get_owner()->get_tribe()->get_ware_descr(req->get_index())->get_descname(),
             req->get_target((Game*)get_owner()->get_game())->get_serial());
@@ -3739,6 +3980,61 @@ void Economy::remove_worker_supply(int ware, Supply* supp)
 
 	m_worker_supplies[ware].remove_supply(supp);
 }
+
+
+/*
+===============
+Economy::add_soldier_supply
+
+Add a soldier_supply to our list of supplies.
+===============
+*/
+void Economy::add_soldier_supply(int ware, Supply* supp)
+{
+	//log("add_soldier_supply(%i, %p)\n", ware, supp);
+
+	if (ware >= (int)m_worker_supplies.size())
+		m_worker_supplies.resize(ware+1);
+
+	m_worker_supplies[ware].add_supply(supp);
+
+	start_request_timer();
+}
+
+/*
+===============
+Economy::have_soldier_supply
+
+Return true if the given soldier_supply is registered with the economy.
+===============
+*/
+bool Economy::have_soldier_supply(int ware, Supply* supp, Requeriments* r)
+{
+	if (ware >= (int)m_worker_supplies.size())
+		return false;
+
+	for(int i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
+		if (m_worker_supplies[ware].get_supply(i) == supp)
+			return true;
+
+	return false;
+}
+
+
+/*
+===============
+Economy::remove_soldier_supply
+
+Remove a soldier_supply from our list of supplies.
+===============
+*/
+void Economy::remove_soldier_supply(int ware, Supply* supp)
+{
+	//log("remove_soldier_supply(%i, %p)\n", ware, supp);
+
+	m_worker_supplies[ware].remove_supply(supp);
+}
+
 
 
 /*
@@ -3941,6 +4237,18 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 		if (req->is_idle() && !supp->is_active(g))
 			continue;
 
+		// Check requeriments
+		if (req->get_type() == Request::SOLDIER)
+			if (req->has_requeriments())
+				if (supp->get_passing_requeriments (g, ware,  req->get_requeriments()) < 1)
+				{
+					log ("No pasado %d\n", supp->get_passing_requeriments (g, ware,  req->get_requeriments()));
+					continue;
+				}
+				else
+					log ("PASADO\n");
+
+
 		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
 
@@ -3952,6 +4260,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 			continue;
 		}
 
+//		supp->mark_as_used(g, req->get_index(), req->get_requeriments());
 		// cost_cutoff guarantuees us that the route is better than what we have
 		best_supply = supp;
 		best_route = route;
@@ -3967,7 +4276,9 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, s
 
 
 struct RequestSupplyPair {
+   bool                 is_item;
    bool                 is_worker;
+   bool                 is_soldier;
 	int						ware;
 	TrackPtr<Request>		request;
 	TrackPtr<Supply>		supply;
@@ -4004,10 +4315,10 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		int cost; // estimated time in milliseconds to fulfill Request
 		int idletime;
 
-      if(req->get_type()==Request::WORKER) 
-         supp = find_best_supply(g, req, req->get_index(), &cost, &m_worker_supplies);
-      else 
+      if(req->get_type()==Request::WARE)
          supp = find_best_supply(g, req, req->get_index(), &cost, &m_ware_supplies);
+      else
+         supp = find_best_supply(g, req, req->get_index(), &cost, &m_worker_supplies);
 
 		if (!supp)
 			continue;
@@ -4040,10 +4351,35 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 				idletime = 1;
 		}
 
+		// If its a soldier, then mark to prevent re-request this soldier.
+		// If we don't do this, then the same soldier can be re-requested, this cause a
+		// degrade of soldier levels
+		if (req->get_type() == Request::SOLDIER)
+		{
+			// This is to prevent a soldier to try to supply more than one Request.
+			// With this also ensures that you have enought soldiers 
+			if (supp->get_passing_requeriments(g, req->get_index(), req->get_requeriments()) > 0)
+			{
+				supp->mark_as_used (g, req->get_index(), req->get_requeriments());
+			}
+			else 
+				continue;
+		}
+
 		// Otherwise, consider this request/supply pair for queueing
 		RequestSupplyPair rsp;
-      
-      rsp.is_worker = req->get_type()==Request::WORKER;
+
+		rsp.is_item = false;
+		rsp.is_worker = false;
+		rsp.is_soldier = false;
+
+		switch (req->get_type())
+		{
+			case Request::WARE:		rsp.is_item = true; break;
+			case Request::WORKER:	rsp.is_worker = true; break;
+			case Request::SOLDIER:	rsp.is_soldier = true; break;
+		}
+
 		rsp.ware = req->get_index();
 		rsp.request = req;
 		rsp.supply = supp;
@@ -4077,7 +4413,7 @@ void Economy::create_requested_workers(Game* g)
 		for(RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
 			Request* req = *it;
 
-			if (!req->is_idle() && req->get_type()==Request::WORKER) {
+			if (!req->is_idle() && ((req->get_type()==Request::WORKER) || (req->get_type()==Request::SOLDIER))) {
 				int index = req->get_index();
 				int num_wares = 0;
             Worker_Descr* w_desc=get_owner()->get_tribe()->get_worker_descr(index);
@@ -4086,27 +4422,33 @@ void Economy::create_requested_workers(Game* g)
 				if (!w_desc->get_buildable())
 					continue;
 
-//log ("REQ.Worker buildable (%d, %s)\n", ware, w_desc->get_name());
-
 				for(int i = 0; i < m_worker_supplies[index].get_nrsupplies(); i++) {
 					Supply* supp = m_worker_supplies[index].get_supply(i);
 
-					if (!supp->is_active(g)) {
-						num_wares++;
-//log ("(%d, %s) act ?: %d  Num:%d There are supplies!\n", ware, w_desc->get_name(), supp->is_active(g), supp->get_amount(g, ware));
-						continue;
+					if (!supp->is_active(g))
+					{
+						if (req->has_requeriments())
+						{
+							if (supp->get_passing_requeriments (g, index, req->get_requeriments()))
+								num_wares++;
+						}
+						else
+						{
+							num_wares++;
+							continue;
+						}
 					} // if (supp->is_active)
 				} // for(int i = 0; i < m_worker_supplies)
 
 				// If there aren't enough supplies...
 				if (num_wares == 0) {
-// log ("(%d, %s) There are NOT supplies!\n", ware, w_desc->get_name());
+
 					uint n_wh = 0;
 					while (n_wh < get_nr_warehouses()) {
 						if (m_warehouses[n_wh]->can_create_worker(g, index)) {
 log("Economy::process_request-- Created a '%s' needed\n", w_desc->get_name());
 							m_warehouses[n_wh]->create_worker(g, index);
-							break;
+//							break;
 						} // if (m_warehouses[n_wh]
 						n_wh++;
 					} // while (n_wh < get_nr_warehouses())
@@ -4149,9 +4491,10 @@ void Economy::balance_requestsupply()
 		rsps.queue.pop();
 
 		if (!rsp.request || !rsp.supply ||
-		    !have_request(rsp.request) || 
-          ((rsp.is_worker) && !have_worker_supply(rsp.ware, rsp.supply) | 
-           (!rsp.is_worker) && !have_ware_supply(rsp.ware, rsp.supply))) {
+			!have_request(rsp.request) ||
+			(((rsp.is_soldier)  && !have_worker_supply(rsp.ware, rsp.supply)) ||
+			((rsp.is_worker)  && !have_worker_supply(rsp.ware, rsp.supply)) ||
+			((rsp.is_item) && !have_ware_supply(rsp.ware, rsp.supply)))) {
 			log("NO: ware %i, priority %i\n", rsp.ware, rsp.priority);
 
 			rsps.nexttimer = 200;

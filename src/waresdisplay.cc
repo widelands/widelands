@@ -78,7 +78,7 @@ WaresDisplay::~WaresDisplay()
 void WaresDisplay::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns) {
    int row= y / (WARE_MENU_PIC_H + 8 + 3);
    int index=row*WaresPerRow;
-   index += x / (WARE_MENU_PIC_W +4);
+   index += x / (WARE_MENU_PIC_W +4)+1;
    std::string str;
 
    if(index > (m_wares.get_nrwareids()+m_workers.get_nrwareids())) {
@@ -88,6 +88,7 @@ void WaresDisplay::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btn
       str+=" (worker)";
       m_curware->set_text(str.c_str());
    } else {
+		index--;
       str=m_player->get_tribe()->get_ware_descr(index)->get_descname();
       str+=" (ware)";
       m_curware->set_text(str.c_str());

@@ -21,6 +21,7 @@
 #include "game.h"
 #include "player.h"
 #include "transport.h"
+#include "trainingsite.h"
 #include "tribe.h"
 #include "wexception.h"
 #include "cmd_queue.h"
@@ -440,3 +441,54 @@ int Player::get_economy_number(Economy* eco) {
    assert(0); // never here
    return 0;
 }
+
+/************  Military stuff  **********/
+
+/*
+==========
+Player::change_training_options
+
+Change the training priotity values
+==========
+*/
+void Player::change_training_options(PlayerImmovable* imm, int atr, int val) {
+    if (imm->get_owner() != this)
+        return;
+    if (imm->get_type() == Map_Object::BUILDING) {
+        TrainingSite* ts=static_cast<TrainingSite*>(imm);
+        if (val>0)
+            ts->add_pri((enum tAttribute) atr);
+        else
+            ts->sub_pri((enum tAttribute) atr);
+    }
+}
+
+/*
+===========
+Player::drop_soldier
+
+Forces the drop of given soldier at given house
+===========
+*/
+void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
+    if (imm->get_owner() != this)
+        return;
+    if ((soldier->get_worker_type() == Worker_Descr::SOLDIER) &&
+        (imm->get_type() >= Map_Object::BUILDING)) {
+            Building* ms= static_cast<Building*>(imm);
+            ms->drop_soldier (soldier->get_serial());
+    }
+}
+
+void Player::change_soldier_capacity (PlayerImmovable* imm, int val) {
+	if (imm->get_owner() != this)
+		return;
+	if (imm->get_type() == Map_Object::BUILDING) {
+		//Building* ts=static_cast<TrainingSite*>(imm);
+		if (val>0)
+			((Building*) imm)->soldier_capacity_up();
+		else
+			((Building*)imm)->soldier_capacity_down();
+	}
+}
+

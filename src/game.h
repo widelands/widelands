@@ -98,6 +98,9 @@ public:
 	void send_player_flagaction (Flag*, int);
 	void send_player_start_stop_building (Building*);
 	void send_player_enhance_building (Building*, int);
+   void send_player_change_training_options(Building*, int, int);
+   void send_player_drop_soldier(Building*, int);
+	void send_player_change_soldier_capacity(Building*, int);
 
 	// is this base a game
 	inline bool is_game() { return true; }

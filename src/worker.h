@@ -123,6 +123,7 @@ class Worker_Descr : public Bob_Descr {
 };
 
 class Worker : public Bob {
+   friend class Soldier;		// Allow access to m_supply
    friend class WorkerProgram;
    friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
 
@@ -189,7 +190,7 @@ class Worker : public Bob {
    void start_task_return(Game* g, bool dropitem);
    void start_task_program(Game* g, std::string name);
 
-   void start_task_gowarehouse(Game* g);
+   virtual void start_task_gowarehouse(Game* g);
    void start_task_dropoff(Game* g, WareInstance* item);
    void start_task_fetchfromflag(Game* g);
 
@@ -268,6 +269,7 @@ class Worker : public Bob {
    Economy*				m_economy;			// Economy this worker is registered in
    Object_Ptr			m_carried_item;	// Item we are carrying
    IdleWorkerSupply*	m_supply;			// supply while gowarehouse and not transfer
+//   Supply*				m_supply;			// supply while gowarehouse and not transfer
    int               m_needed_exp;     // experience for next level
    int               m_current_exp;    // current experience
 };

@@ -103,7 +103,7 @@ MilitarySite::MilitarySite(MilitarySite_Descr* descr)
 	: ProductionSite(descr)
 {
 	m_didconquer = false;
-	m_soldier_request = 0;
+	m_capacity = descr->get_max_number_of_soldiers();
 }
 
 
@@ -139,12 +139,15 @@ Initialize the military site.
 */
 void MilitarySite::init(Editor_Game_Base* g)
 {
+log (">>MilitarySite::init()\n");
 	ProductionSite::init(g);
 
 	if (g->is_game()) {
-		// Request soldier
-      request_soldier((Game*)g);
+		// Request soldiers
+//		request_soldier((Game*)g);
+		call_soldiers((Game *) g);
 	}
+log ("<<MilitarySite::init()\n");
 }
 
 /*
@@ -173,10 +176,26 @@ void MilitarySite::set_economy(Economy* e)
 			m_input_queues[i]->add_to_economy(e);
 	}
 	*/
+/*	Economy* old = get_economy();
+
+	if (old) {
+		for (uint i = 0; i < m_soldier_requests.size(); i++) {
+			if (m_soldier_requests[i])
+				m_soldier_requests[i]->remove_from_economy(old);
+		}
+	}
+*/
+log (">>MilitarySite::set_economy()\n");
 	// TODO: SoldiersQueue migration
 	ProductionSite::set_economy(e);
-	if (m_soldier_request)
-		m_soldier_request->set_economy(e);
+
+	if (e) {
+		for (uint i = 0; i < m_soldier_requests.size(); i++) {
+			if (m_soldier_requests[i])
+				m_soldier_requests[i]->set_economy(e);
+		}
+	}
+log ("<<MilitarySite::set_economy()\n");
 }
 
 /*
@@ -189,10 +208,14 @@ Cleanup after a military site is removed
 void MilitarySite::cleanup(Editor_Game_Base* g)
 {
 	// Release worker
-	if (m_soldier_request) {
-		delete m_soldier_request;
-		m_soldier_request = 0;
+	if (m_soldier_requests.size())
+	{
+		for (uint i = 0; i < m_soldier_requests.size()-1; i++)
+		{
+			delete m_soldier_requests[i];
+			m_soldier_requests[i] = 0;
 	}
+		m_soldier_requests.resize(0);
 
    uint i;
    for(i=0; i<m_soldiers.size(); i++) {
@@ -202,7 +225,7 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
       if(g->get_objects()->object_still_available(s))
          s->set_location(0);
    }
-
+	}
 	// unconquer land
 	if (m_didconquer)
 		g->unconquer_area(get_owner()->get_player_number(), get_position());
@@ -239,10 +262,18 @@ Issue the soldier request
 */
 void MilitarySite::request_soldier(Game* g)
 {
-	int workerid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
+log (">>MilitarySite::request_soldier()\n");
+	int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
 
-	m_soldier_request =
-		new Request(this, workerid, &MilitarySite::request_soldier_callback, this, Request::WORKER);
+	Requeriments* r = new Requeriments();
+	r->set (atrAttack, 0, 2);
+
+	Request* req = new Request(this,	soldierid, &MilitarySite::request_soldier_callback, this, Request::SOLDIER);
+	req->set_requeriments (r);
+
+	m_soldier_requests.push_back (req);
+
+log ("<<MilitarySite::request_soldier()\n");
 }
 
 
@@ -256,6 +287,7 @@ Called when our soldier arrives.
 void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware,
 	Worker* w, void* data)
 {
+log (">>MilitarySite::request_soldier_callback()\n");
 	MilitarySite* msite = (MilitarySite*)data;
    Soldier* s=static_cast<Soldier*>(w);
    
@@ -266,9 +298,16 @@ void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware,
 		msite->get_position(), msite->get_descr());
 	msite->m_didconquer = true;
    
+	uint i=0;
+ 	for(i=0; i<msite->m_soldier_requests.size(); i++)
+		if(rq==msite->m_soldier_requests[i]) break;
+
+	msite->m_soldier_requests.erase(msite->m_soldier_requests.begin() + i);
+
    msite->m_soldiers.push_back(s);
    s->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
-
+	s->mark (false);
+log ("<<MilitarySite::request_soldier_callback()\n");
 }
 
 
@@ -286,5 +325,143 @@ void MilitarySite::act(Game* g, uint data)
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
 	// Maybe a new queueing system like MilitaryAct could be introduced.
+log (">>MilitarySite::act()\n");
 	ProductionSite::act(g,data);
+
+	// Perform a heal action
+	if (g->is_game ()) {
+		uint total_heal = 0;
+		uint numMedics = 0;	 // FIX THIS when medics were added
+		uint i = 0;
+		Soldier* s;
+
+		total_heal = get_descr()->get_heal_per_second();
+		total_heal += get_descr()->get_heal_increase_per_medic() * numMedics;
+
+		for (i=0; i < m_soldiers.size(); i++) {
+			s = m_soldiers[i];
+			if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
+				s->heal (total_heal);
+				total_heal -=	(total_heal/3);
+			}
+		}
+	}
+	// Schedule the next wakeup at 1 second
+	schedule_act (g, 1000);
+log ("<<MilitarySite::act()\n");
 }
+
+/*
+===============
+MilitarySite::call_soldiers
+
+Send the request for more soldiers if there are not full
+===============
+ */
+void MilitarySite::call_soldiers(Game *g) {
+log (">>MilitarySite::call_soldiers()\n");
+	if (g->is_game()) {
+		while(m_capacity > m_soldiers.size() + m_soldier_requests.size()) {
+			request_soldier(g);
+		}
+}
+log ("<<MilitarySite::call_soldiers()\n");
+}
+
+/*
+===============
+MilitarySite::drop_soldier
+
+Get out specied soldier from house.
+===============
+ */
+void MilitarySite::drop_soldier (uint serial) {
+	Game* g = (Game *)get_owner()->get_game();
+molog ("**Dropping soldier (%d)\n", serial);
+	if (g->is_game() && m_soldiers.size()) {
+		int i = 0;
+		Soldier* s = m_soldiers[i];
+		while ((s->get_serial() != serial) && (i < (int)m_soldiers.size())) {
+			i++;
+			s = m_soldiers[i];
+		}
+		if ((i < (int)m_soldiers.size()) && (s->get_serial() == serial)) {
+molog ("**--Sodier localized!\n");
+			drop_soldier(g, i);
+		}
+		else
+			molog ("--Soldier NOT localized!");
+	}
+}
+
+/*
+===============
+MilitarySite::drop_soldier (Game *, int)
+
+Drops a soldier at specific position at its table. SHOULD NOT be called directly.
+Use throught drop_soldier(int)
+===============
+ */
+
+void MilitarySite::drop_soldier (Game *g, int nr) {
+	if (g->is_game()) {
+		Soldier *s;
+		// Is out of bounds ?
+		if (nr >= (int) m_soldiers.size())
+			return;
+
+		s = m_soldiers[nr];
+		s->set_location(0);
+
+
+		for (uint i = nr; i < m_soldiers.size(); i++)
+			m_soldiers[i] = m_soldiers[i+1];
+
+		m_soldiers.pop_back();
+
+		// Call more soldiers if are enought space
+		call_soldiers (g);
+
+		// Walk the soldier home safely
+		s->reset_tasks(g);
+		s->set_location(this);
+		s->start_task_leavebuilding(g,true);
+	}
+}
+
+/*
+===========
+MilitarySite::change_soldier_capacity
+
+Changes the soldiers capacity.
+===========
+*/
+void MilitarySite::change_soldier_capacity(int how) {
+	if (how) {
+    	if (how > 0) {
+        	m_capacity += how;
+
+            if (m_capacity > (uint) get_descr()->get_max_number_of_soldiers())
+				m_capacity = (uint) get_descr()->get_max_number_of_soldiers();
+			call_soldiers((Game*)get_owner()->get_game());
+		} else {
+			how = -how;
+        	if (how >= (int) m_capacity)
+            	m_capacity = 1;
+			else
+            	m_capacity -= how;
+			if (m_capacity < m_soldiers.size() + m_soldier_requests.size()) {
+				if (m_soldier_requests.size()) {
+					m_soldier_requests[0]->cancel_transfer(0);
+					m_soldier_requests.erase(m_soldier_requests.begin());
+				} else
+					if (m_soldiers.size()) {
+						Soldier *s = m_soldiers[0];
+						drop_soldier (s->get_serial());
+				}
+			}
+		}
+	}
+}
+
+

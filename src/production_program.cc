@@ -226,6 +226,62 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 
 			if (act.iparam1 & act.iparam2)
 				throw wexception("Ambiguous set command");
+		} else if (cmd[0] == "check_soldier") {
+			if (cmd.size() != 3)
+				throw wexception("Usage: check_soldier <attribute> <level>");
+
+			act.type = ProductionAction::actCheckSoldier;
+
+			act.iparam1 = act.iparam2 = 0;
+
+			if ((cmd[1] == "hp") || (cmd[1] == "attack") || 
+				 (cmd[1] == "defense") || (cmd[1] == "evade")) 
+				act.sparam1 = cmd[1];
+			else
+				throw wexception ("check_soldier needs 'hp', 'attack', 'defense' or 'evade' parameter");
+
+		  int how_many=1;
+		  char* endp;
+		  how_many = strtol(cmd[2].c_str(), &endp, 0);
+		  if (endp && *endp)
+				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+
+			act.iparam1 = how_many;
+
+			if (act.iparam1 < 0)
+				throw wexception("Level must be greater than 0");
+		} else if (cmd[0] == "train") {
+			if (cmd.size() != 4)
+				throw wexception("Usage: train <attribute> <current_level> <new_level>");
+
+			act.type = ProductionAction::actTrain;
+
+			act.iparam1 = act.iparam2 = 0;
+
+			if ((cmd[1] == "hp") || (cmd[1] == "attack") || 
+				 (cmd[1] == "defense") || (cmd[1] == "evade")) 
+			{
+				act.sparam1 = cmd[1];
+			} 
+			else 
+				throw wexception ("train needs 'hp', 'attack', 'defense' or 'evade' parameter");
+
+			int how_many=1;
+			char* endp;
+			how_many = strtol(cmd[2].c_str(), &endp, 0);
+			if (endp && *endp)
+			  throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+
+			act.iparam1 = how_many;
+
+			how_many = strtol(cmd[3].c_str(), &endp, 0);
+			if (endp && *endp)
+					throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
+
+			act.iparam2 = how_many;
+
+			if (act.iparam1 >= act.iparam2)
+				throw wexception("current_level must be lesser than new_level");
 		} else
 			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
 

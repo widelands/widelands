@@ -25,6 +25,7 @@
 #include "game.h"
 #include "graphic.h"
 #include "player.h"
+#include "soldier.h"
 #include "system.h"
 #include "tribe.h"
 #include "map_loader.h"
@@ -451,5 +452,22 @@ void Game::send_player_enhance_building (Building* b, int id)
 	assert(id!=-1);
 
 	send_player_command (new Cmd_EnhanceBuilding(get_gametime(), b->get_owner()->get_player_number(), b, id));
+}
+
+void Game::send_player_change_training_options(Building* b, int atr, int val)
+{
+
+	send_player_command (new Cmd_ChangeTrainingOptions(get_gametime(), b->get_owner()->get_player_number(), b, atr, val));
+}
+
+void Game::send_player_drop_soldier (Building* b, int ser)
+{
+	assert(ser != -1);
+	send_player_command (new Cmd_DropSoldier(get_gametime(), b->get_owner()->get_player_number(), b, ser));
+}
+
+void Game::send_player_change_soldier_capacity (Building* b, int val)
+{
+	send_player_command (new Cmd_ChangeSoldierCapacity(get_gametime(), b->get_owner()->get_player_number(), b, val));
 }
 

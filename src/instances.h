@@ -140,6 +140,7 @@ public:
 		WAREHOUSE = 1,		// assume BUILDING
 		CONSTRUCTIONSITE, // assume BUILDING
       WORKER,				// assume BOB
+		SOLDIER,				// assume WORKER
 		RESI,					// resource indicator, assume IMMOVABLE
 
 		HIGHEST_FIXED_ATTRIBUTE

@@ -106,7 +106,8 @@ public:
    void set_hp_level(uint); 
    void set_attack_level(uint);
    void set_defense_level(uint);
-   void set_evade_level(uint); 
+   void set_evade_level(uint);
+   uint get_level (tAttribute at);
    uint get_hp_level(void) { return m_hp_level; }
    uint get_attack_level(void) { return m_attack_level; }
    uint get_defense_level(void) { return m_defense_level; }
@@ -138,6 +139,15 @@ public:
    uint get_defense_level_pic(void) { return get_descr()->get_defense_level_pic(m_defense_level); }
    uint get_evade_level_pic(void) { return get_descr()->get_evade_level_pic(m_evade_level); }
 
+	// Heal quantity of hit points instantly
+	void heal (uint);
+
+	//  This are used to control Requests (only called by Warehouse)
+	bool is_marked ()	 { return (m_marked == true); }
+	void mark (bool b) { m_marked = b; }
+public: // Worker-specific redefinitions
+   virtual void start_task_gowarehouse(Game* g);
+
 private:
    // Private data
    uint m_hp_current;
@@ -151,6 +161,8 @@ private:
    uint m_attack_level;
    uint m_defense_level;
    uint m_evade_level;
+
+	bool	m_marked;
 };
 
 

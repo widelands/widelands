@@ -124,7 +124,8 @@ public:
       PRODUCTIONSITE=0,
       CONSTRUCTIONSITE,
       MILITARYSITE,
-      WAREHOUSE
+      WAREHOUSE,
+		TRAININGSITE
    };
    
 	Building(Building_Descr* descr);
@@ -167,6 +168,16 @@ public:
    inline const std::vector<char*>* get_enhances_to() const { return get_descr()->get_enhances_to(); }
    
    void log_general_info(Editor_Game_Base* egbase);
+
+    // Use on military and training sites
+   virtual void drop_soldier(uint) { };
+	virtual	void soldier_capacity_up ()		{ }
+	virtual	void soldier_capacity_down ()	{ }
+
+    // Use on training sites only
+   virtual void change_train_priority(uint, int) { };
+	virtual void switch_train_mode () { };
+
       
 
 protected:

@@ -32,6 +32,7 @@
 #include "productionsite.h"
 #include "profile.h"
 #include "rendertarget.h"
+#include "trainingsite.h"
 #include "transport.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -299,6 +300,8 @@ Building_Descr* Building_Descr::create_from_dir(Tribe_Descr* tribe,
 			descr = new ConstructionSite_Descr(tribe, name);
 		else if (!strcasecmp(type, "military"))
 			descr = new MilitarySite_Descr(tribe, name);
+		else if (!strcasecmp(type, "training"))
+			descr = new TrainingSite_Descr(tribe, name);
 		else
 			throw wexception("Unknown building type '%s'", type);
 

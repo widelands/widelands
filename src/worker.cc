@@ -926,7 +926,7 @@ bool Worker::run_object(Game* g, State* state, const WorkerAction* act)
          Critter_Bob* crit= ((Critter_Bob*)bob);
          crit->send_signal(g, "interrupt_now");
          crit->start_task_program(g, act->sparam1);
-      } else if(bob->get_type() == Bob::WORKER) {
+      } else if((bob->get_type() == Bob::WORKER) || (bob->get_type() == Bob::SOLDIER)) {
          Worker* w= ((Worker*)bob);
          w->send_signal(g, "interrupt_now");
          w->start_task_program(g, act->sparam1);
@@ -1173,6 +1173,9 @@ public:
 	virtual WareInstance* launch_item(Game* g, int ware);
 	virtual Worker* launch_worker(Game* g, int ware);
 
+	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req);
+	virtual int get_passing_requeriments (Game* g, int ware, Requeriments* r);
+	virtual void mark_as_used (Game* g, int ware, Requeriments* r);
 private:
 	Worker*		m_worker;
 	Economy*		m_economy;
@@ -1298,6 +1301,85 @@ Worker* IdleWorkerSupply::launch_worker(Game* g, int ware)
 	return m_worker;
 }
 
+
+/*
+===============
+IdleWorkerSupply::launch_soldier
+===============
+*/
+Soldier* IdleWorkerSupply::launch_soldier(Game* g, int ware, Requeriments* req)
+{
+	assert (m_worker->get_worker_type()==Worker_Descr::SOLDIER);
+
+	Soldier* s = static_cast<Soldier*>(m_worker);
+
+
+	if (req->check(
+					s->get_level(atrHP),
+					s->get_level(atrAttack),
+					s->get_level(atrDefense),
+					s->get_level(atrEvade)
+					)
+	   )
+	{
+		return s;
+	}
+	else
+		throw wexception ("IdleWorkerSupply::launch_soldier try to launch a soldiers that doesn't accomplish the requeriments.");
+}
+
+
+/*
+===============
+IdleWorkerSupply::get_passing_requeriments
+===============
+*/
+int IdleWorkerSupply::get_passing_requeriments(Game* g, int ware, Requeriments* req)
+{
+	assert (m_worker->get_worker_type()==Worker_Descr::SOLDIER);
+
+	Soldier* s = static_cast<Soldier*>(m_worker);
+
+
+	if (req->check(
+					s->get_level(atrHP),
+					s->get_level(atrAttack),
+					s->get_level(atrDefense),
+					s->get_level(atrEvade)
+					)
+	   )
+		return 1;
+	else
+		return 0;
+}
+
+
+/*
+===============
+IdleWorkerSupply::mark_as_used
+===============
+*/
+void IdleWorkerSupply::mark_as_used (Game* g, int ware, Requeriments* r)
+{
+	assert(ware == m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()));
+
+	if (m_worker->get_worker_type()==Worker_Descr::SOLDIER)
+	{
+		Soldier* s = static_cast<Soldier*>(m_worker);
+
+		if (r->check(
+					s->get_level(atrHP),
+					s->get_level(atrAttack),
+					s->get_level(atrDefense),
+					s->get_level(atrEvade)
+					))
+			((Soldier*)m_worker)->mark(true);
+	}
+	else
+	{
+		// Non-soldiers doesn't have any need to be marked (by now)
+	}
+}
 
 /*
 ==============================================================================

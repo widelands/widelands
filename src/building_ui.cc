@@ -35,6 +35,7 @@ class.
 #include "militarysite.h"
 #include "productionsite.h"
 #include "rendertarget.h"
+#include "trainingsite.h"
 #include "transport.h"
 #include "ui_box.h"
 #include "ui_button.h"
@@ -59,6 +60,11 @@ static const char* pic_bulldoze = "pics/menu_bld_bulldoze.png";
 static const char* pic_queue_background = "pics/queue_background.png";
 
 static const char* pic_list_worker = "pics/menu_list_workers.png";
+
+static const char* pic_up_train = "pics/menu_up_train.png";
+static const char* pic_down_train = "pics/menu_down_train.png";
+static const char* pic_train_options = "pics/menu_train_options.png";
+static const char* pic_drop_soldier = "pics/menu_drop_soldier.png";
 
 /*
 ==============================================================================
@@ -436,6 +442,8 @@ class Building_Window
 Baseclass providing common tools for building windows.
 */
 class Building_Window : public UIWindow {
+	friend class TrainingSite_Window;
+	friend class MilitarySite_Window;
 public:
 	enum {
 		Width = 136		// 4*34, 4 normally sized buttons
@@ -453,13 +461,15 @@ public:
 
 	UIPanel* create_capsbuttons(UIPanel* parent);
 
-private:
+protected:
 	void setup_capsbuttons();
 
 	void act_bulldoze();
 	void act_debug();
 	void act_start_stop();
    void act_enhance(int);
+	 void act_drop_soldier(uint);
+	void act_change_soldier_capacity(int);
 
 private:
 	UIWindow**				m_registry;
@@ -667,6 +677,38 @@ void Building_Window::act_enhance(int id)
 		g->send_player_enhance_building (m_building, id);
 
 	die();
+}
+
+/*
+===============
+Building_Window::act_drop_soldier
+
+Callback for bulldozing request
+===============
+*/
+void Building_Window::act_drop_soldier(uint serial) {
+	 Game* g = m_player->get_game();
+log ("m_building = %d\n", m_building ? 1 : 0);
+log ("sold serial = %d\n", serial);
+
+	 if (m_building && (serial > 0))
+		  g->send_player_drop_soldier (m_building, serial);
+}
+
+/*
+===============
+Building_Window::act_change_soldier_capacity
+
+Do a modification at soldier capacity on military and training sites.
+TODO: Check that building is a military or a training site.
+===============
+*/
+void Building_Window::act_change_soldier_capacity(int value)
+{
+	Game* g = m_player->get_game();
+	if (m_building)
+		g->send_player_change_soldier_capacity (m_building, value);
+
 }
 
 /*
@@ -1023,8 +1065,10 @@ public:
 private:
    Interactive_Player* m_parent;
    UIWindow** m_reg;
-   
+	UIButton* m_list_worker;
+public:
    void list_worker_clicked(void);
+	UIButton* get_list_button() { return m_list_worker; }
 };
 
 
@@ -1058,11 +1102,11 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 	// Add caps buttons
 	box->add(create_capsbuttons(box), UIBox::AlignCenter);
 
-   // Add list worker button
-   UIButton* b=new UIButton(box, 0,0,32,32,2,100);
-   b->set_pic(g_gr->get_picture(PicMod_Game, pic_list_worker, true)); 
-   b->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
-   box->add(b, UIBox::AlignLeft);
+	// Add list worker button
+	m_list_worker=new UIButton(box, 0,0,32,32,2,100);
+	m_list_worker->set_pic(g_gr->get_picture(PicMod_Game, pic_list_worker, true)); 
+	m_list_worker->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
+	box->add(m_list_worker, UIBox::AlignLeft);
 
 	fit_inner(box);
 }
@@ -1133,11 +1177,15 @@ public:
 	virtual void think();
 private:
    void update();
+	void drop_button_clicked ();
+	void soldier_capacity_up () { act_change_soldier_capacity (1); }
+	void soldier_capacity_down() { act_change_soldier_capacity(-1); }
    
    Coords          m_ms_location;
    Interactive_Player* m_parent;
    UIWindow** m_reg;
    UITable* m_table;
+	UITextarea		*m_capacity;
 };
 
 
@@ -1158,20 +1206,43 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
 
    // Soldiers view
-   m_table=new UITable(box, 0, 0, 450, 200, Align_Left, UITable::UP);
-   m_table->add_colum("Name", UITable::STRING, 100);
-   m_table->add_colum("HP Level", UITable::STRING, 75);
-   m_table->add_colum("AT Level", UITable::STRING, 75);
-   m_table->add_colum("DE Level", UITable::STRING, 75);
-   m_table->add_colum("EV Level", UITable::STRING, 75);
-   m_table->add_colum("Level", UITable::STRING, 100); // enough space for scrollbar
+	m_table=new UITable(box, 0, 0, 360, 200, Align_Left, UITable::UP);
+	m_table->add_colum("Name", UITable::STRING, 100);
+	m_table->add_colum("HP", UITable::STRING, 40);
+	m_table->add_colum("AT", UITable::STRING, 40);
+	m_table->add_colum("DE", UITable::STRING, 40);
+	m_table->add_colum("EV", UITable::STRING, 40);
+	m_table->add_colum("Level", UITable::STRING, 100); // enough space for scrollbar
 
    box->add(m_table, UIBox::AlignCenter);
    
+	// Add drop soldier button
+	UIButton* b = new UIButton (box, 0, 0, 360, 32, 2, 100);
+	b->set_pic(g_gr->get_picture(PicMod_Game, pic_drop_soldier, true));
+	b->clicked.set(this, &MilitarySite_Window::drop_button_clicked);
+	box->add_space(8);
+	box->add (b, UIBox::AlignLeft);
 	box->add_space(8);
 
+	UIPanel* pan = new UIPanel(box, 0, 34, Width+100, 34);
+
 	// Add the caps button
-	box->add(create_capsbuttons(box), UIBox::AlignCenter);
+	create_capsbuttons(pan);
+
+		new UITextarea (pan, 70, 11, "Capacity", Align_Left);
+	// Capacity buttons
+	b = new UIButton (pan, 140, 4, 24, 24, 0, 2);
+	b->set_pic(g_gr->get_picture(PicMod_Game, pic_down_train, true));
+	b->clicked.set(this, &MilitarySite_Window::soldier_capacity_down);
+	b = 0;
+	b = new UIButton (pan, 188, 4, 24, 24, 1, 3);
+	b->set_pic(g_gr->get_picture(PicMod_Game, pic_up_train, true));
+	b->clicked.set(this, &MilitarySite_Window::soldier_capacity_up);
+	b = 0;
+	m_capacity =new UITextarea (pan, 170, 11, "XX", Align_Center);
+
+	box->add(pan, UIBox::AlignLeft);
+
 
    fit_inner(box);
 }
@@ -1224,6 +1295,10 @@ void MilitarySite_Window::update(void) {
    uint i;
    int sel;
    char buf[200];
+	if (soldiers->size() < (uint) m_table->get_nr_entries())
+		for (i = 0; (int) i < m_table->get_nr_entries(); i++)
+			m_table->remove_entry(0);
+
    for(i=0; i<soldiers->size(); i++) {
       Soldier* s=((*soldiers)[i]);
       UITable_Entry* e=0;
@@ -1251,6 +1326,30 @@ void MilitarySite_Window::update(void) {
       e->set_string(5, buf); 
    }
    m_table->sort();
+
+	std::string str;
+	sprintf (buf, "%2d", ((MilitarySite *)get_building())->get_capacity());
+	str = (const char *) buf;
+	m_capacity->set_text (str);
+}
+
+void MilitarySite_Window::drop_button_clicked() {
+	assert(*m_reg== this);
+	 std::vector<Soldier*>* soldiers=get_militarysite()->get_soldiers();
+	 Soldier* s = 0;
+
+	int sel = m_table->get_selection_index();
+	int i;
+
+	if ((sel < 0) || (sel >= (int)soldiers->size()))
+		return;
+	 for (i = 0; i < (int) soldiers->size(); i++) {
+		  s=((*soldiers)[i]);
+		  if (m_table->get_entry(sel)->get_user_data() == s)
+				break;
+	 }
+	 assert(i < (int) soldiers->size());
+	 act_drop_soldier (s->get_serial());
 }
 
 /*
@@ -1263,4 +1362,454 @@ Create the production site information window.
 UIWindow* MilitarySite::create_options_window(Interactive_Player* plr, UIWindow** registry)
 {
 	return new MilitarySite_Window(plr, this, registry);
+}
+
+/*
+====================
+	TrainingSite_Options_Window Implementation
+====================
+*/
+class TrainingSite_Options_Window : public UIWindow {
+public:
+	TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps);
+	virtual ~TrainingSite_Options_Window();
+
+	inline TrainingSite* get_trainingsite() { return m_trainingsite; }
+
+	void think();
+private:
+	void heros_clicked ()			{ get_trainingsite()->switch_heros(); }
+	void up_hp_clicked ()			{ act_change_priority(atrHP, 1); }
+	void up_attack_clicked()		{ act_change_priority(atrAttack, 1); }
+	void up_defense_clicked()		{ act_change_priority(atrDefense, 1); }
+	void up_evade_clicked()			{ act_change_priority(atrEvade, 1); }
+	void down_hp_clicked ()			{ act_change_priority(atrHP, -1); }
+	void down_attack_clicked()		{ act_change_priority(atrAttack, -1); }
+	void down_defense_clicked()		{ act_change_priority(atrDefense, -1); }
+	void down_evade_clicked()		{ act_change_priority(atrEvade, -1); }
+
+	void act_change_priority (int atr, int how);
+
+	void update();
+
+	Coords			m_ms_location;
+	Interactive_Player* m_parent;
+	UIWindow** 		m_reg;
+	UITextarea		*m_style_train,
+					*m_hp_pri,
+					*m_attack_pri,
+					*m_defense_pri,
+					*m_evade_pri;
+	TrainingSite	*m_trainingsite;
+};
+
+TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps)
+		: UIWindow(parent, 0, 0, 320, 125, "Training Options") {
+
+	int _bs = 22;
+	int _cn = 20;
+	int _cb = 100;
+
+	m_parent=parent;
+	m_trainingsite = ps;
+	m_ms_location=ps->get_position();
+	m_hp_pri = 0;
+	m_attack_pri = 0;
+	m_defense_pri = 0;
+	m_evade_pri = 0;
+
+	set_inner_size(250, _bs*9);
+
+	// TODO: Put the capacity buttons here.
+
+	UIButton *btn;
+
+	// Add switch training mode button
+	btn = new UIButton (this, _cb, _bs, 105, _bs, 5, 1);
+	btn->clicked.set(this, &TrainingSite_Options_Window::heros_clicked);
+	btn = 0;
+
+	new UITextarea(this, _cn - 15, _bs + 2, "Training mode : ", Align_Left);
+	m_style_train = new UITextarea (this, _cb + 4, _bs+2, "Balanced", Align_Left);
+
+
+	m_hp_pri			= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*2, "XX", Align_Center);
+	m_attack_pri	= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*3, "XX", Align_Center);
+	m_defense_pri	= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*4, "XX", Align_Center);
+	m_evade_pri		= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*5, "XX", Align_Center);
+
+	m_hp_pri->set_visible(false);
+	m_attack_pri->set_visible(false);
+	m_defense_pri->set_visible(false);
+	m_evade_pri->set_visible(false);
+
+	// Add priority buttons for every attribute
+	if (ps->get__descr()->get_train_hp()) {
+		// HP buttons
+		btn = new UIButton (this,  _cb, 2*(_bs+2), _bs, _bs, 0, 2);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_down_train, true));
+		btn->clicked.set(this, &TrainingSite_Options_Window::down_hp_clicked);
+		btn = 0;
+		btn = new UIButton (this, _cb+2*_bs, 2*(_bs+2), _bs, _bs, 1, 3);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_up_train, true));
+		btn->clicked.set(this, &TrainingSite_Options_Window::up_hp_clicked);
+		btn = 0;
+		new UITextarea (this, _cn, (3+_bs)*2, "Hit Points", Align_Left);
+		m_hp_pri->set_visible(true);
+	}
+	if (ps->get__descr()->get_train_attack()) {
+		// Attack buttons
+		btn = new UIButton (this, _cb, 3*(_bs+2), _bs, _bs, 0, 2);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_down_train, true));
+		btn->clicked.set(this, &TrainingSite_Options_Window::down_attack_clicked);
+		btn = 0;
+		btn = new UIButton (this, _cb+2*_bs, 3*(_bs+2), _bs, _bs, 1, 3);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_up_train, true));
+		btn->clicked.set(this, &TrainingSite_Options_Window::up_attack_clicked);
+		btn = 0;
+		new UITextarea (this, _cn, (3+_bs)*3, "Attack", Align_Left);
+		m_attack_pri->set_visible(true);
+	}
+	if (ps->get__descr()->get_train_defense()) {
+		// Defense buttons
+		btn = new UIButton (this, _cb, 4*(_bs+2), _bs, _bs, 0, 2);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_down_train, true));
+		btn->clicked.set(this,&TrainingSite_Options_Window::down_defense_clicked);
+		btn = 0;
+		btn = new UIButton (this, _cb+2*_bs, 4*(_bs+2), _bs, _bs, 1, 3);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_up_train, true));
+		btn->clicked.set(this,&TrainingSite_Options_Window::up_defense_clicked);
+		btn = 0;
+		new UITextarea (this, _cn, (3+_bs)*4, "Defense", Align_Left);
+		m_defense_pri->set_visible(true);
+	}
+	if (ps->get__descr()->get_train_evade()) {
+		// Evade buttons
+		btn = new UIButton (this, _cb, 5*(_bs+2), _bs, _bs, 0, 2);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_down_train, true));
+		btn->clicked.set(this, &TrainingSite_Options_Window::down_evade_clicked);
+		btn = 0;
+		btn = new UIButton (this, _cb+2*_bs, 5*(_bs+2), _bs, _bs, 1, 3);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_up_train, true));
+		btn->clicked.set(this, &TrainingSite_Options_Window::up_evade_clicked);
+		btn = 0;
+		new UITextarea (this, _cn, (3+_bs)*5, "Evade", Align_Left);
+		m_evade_pri->set_visible(true);
+	}
+
+	center_to_parent();
+	move_to_top();
+}
+
+TrainingSite_Options_Window::~TrainingSite_Options_Window()
+{
+}
+
+void TrainingSite_Options_Window::act_change_priority (int atr, int val) {
+
+	 if ((atr == atrHP) || (atr == atrAttack) || (atr == atrDefense) || (atr == atrEvade))
+		  if (m_trainingsite)
+				m_parent->get_game()->send_player_change_training_options((Building*)m_trainingsite, atr, val);
+}
+
+void TrainingSite_Options_Window::think()
+{
+//	Building_Window::think();
+
+	BaseImmovable* imm=m_parent->get_map()->get_field(m_ms_location)->get_immovable();
+	if(imm->get_type()!=Map_Object::BUILDING
+			|| static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
+		// The Site has been removed. Die quickly.
+		die();
+		return;
+	}
+	update();
+}
+
+void TrainingSite_Options_Window::update() {
+	char buf[200];
+	std::string str;
+
+	TrainingSite *ts = get_trainingsite();
+
+	if (ts->get_build_heros())
+		m_style_train->set_text("Make heroes");
+	else
+		m_style_train->set_text("Balanced army");
+
+	sprintf (buf, "%2d", ts->get_pri(atrHP));
+	str = (const char *) buf;
+	m_hp_pri->set_text (str);
+
+	sprintf (buf, "%2d", ts->get_pri(atrAttack));
+	str = (const char *) buf;
+	m_attack_pri->set_text (str);
+
+	sprintf (buf, "%2d", ts->get_pri(atrDefense));
+	str = (const char *) buf;
+	m_defense_pri->set_text (str);
+
+	sprintf (buf, "%2d", ts->get_pri(atrEvade));
+	str = (const char *) buf;
+	m_evade_pri->set_text (str);
+
+}
+
+/*
+==============================================================================
+
+TrainingSite UI IMPLEMENTATION
+
+==============================================================================
+*/
+
+class TrainingSite_Window : public ProductionSite_Window {
+public:
+	TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UIWindow** registry);
+	virtual ~TrainingSite_Window();
+
+	inline TrainingSite* get_trainingsite() { return (TrainingSite*)get_building(); }
+
+	virtual void think();
+	void options_button_clicked ();
+	void drop_button_clicked ();
+	void soldier_capacity_up () { act_change_soldier_capacity (1); }
+	void soldier_capacity_down() { act_change_soldier_capacity(-1); }
+private:
+	void update();
+
+	Coords		m_ms_location;
+	Interactive_Player* m_parent;
+	UIWindow**	m_reg;
+	UITable*	m_table;
+	UIButton*	m_drop_button;
+	UITextarea*	m_capacity;
+};
+
+
+/*
+===============
+TrainingSite_Window::TrainingSite_Window
+
+Create the window and its panels, add it to the registry.
+===============
+*/
+TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UIWindow** registry)
+	: ProductionSite_Window(parent, ps, registry)
+{
+	m_parent=parent;
+	m_reg=registry;
+	m_ms_location=ps->get_position();
+	UIBox* BigBox = new UIBox (this, 8, 8, UIBox::Horizontal);
+	UIBox* C1Box = new UIBox (BigBox, 0, 0, UIBox::Vertical);
+	UIBox* C2Box = new UIBox (BigBox, 0, 0, UIBox::Vertical);
+	get_list_button()->set_visible (false);
+
+	C1Box->add((UIPanel*)this, Align_Left);
+
+	// Soldiers view
+	m_table=new UITable(C2Box, 0, 0, 360, 200, Align_Left, UITable::UP);
+	m_table->add_colum("Name", UITable::STRING, 100);
+	m_table->add_colum("HP", UITable::STRING, 40);
+	m_table->add_colum("AT", UITable::STRING, 40);
+	m_table->add_colum("DE", UITable::STRING, 40);
+	m_table->add_colum("EV", UITable::STRING, 40);
+	m_table->add_colum("Level", UITable::STRING, 100); // enough space for scrollbar
+	C2Box->add (m_table, Align_Left);
+
+	// Add drop soldier button
+	UIButton* b = new UIButton (C2Box, 0, 0, 360, 32, 2, 100);
+	b->set_pic(g_gr->get_picture(PicMod_Game, pic_drop_soldier, true));
+	b->clicked.set(this, &TrainingSite_Window::drop_button_clicked);
+	C2Box->add(b, Align_Left);
+
+	UIBox* box = new UIBox(C1Box, 0, 0, UIBox::Horizontal);
+
+	UIPanel* pan = new UIPanel(box, 0, 34, Width, 34);
+
+	// Add the caps button
+	box->add (create_capsbuttons(box), Align_Left);
+
+	// Add List Worker button
+	b=new UIButton(pan, 0, 0, 32,32, 2,100);
+	b->set_pic(g_gr->get_picture(PicMod_Game, pic_list_worker, true));
+	b->clicked.set(this, &TrainingSite_Window::list_worker_clicked);
+
+	// Add TrainingSite Options  button
+	b=new UIButton(pan, 32, 0, 32,32, 2,100);
+	b->set_pic(g_gr->get_picture(PicMod_Game, pic_train_options, true));
+	b->clicked.set(this, &TrainingSite_Window::options_button_clicked);
+
+	box->add(pan, UIBox::AlignCenter);
+	C1Box->add(box, Align_Left);
+	pan = 0;
+	box = 0;
+
+	box = new UIBox(C1Box, 0, 0, UIBox::Horizontal);
+	pan = new UIPanel(box, 0, 0, 150, 34);
+		new UITextarea (pan, 0, 11, "Capacity", Align_Left);
+ 	// Capacity buttons
+	b = new UIButton (pan, 70, 4, 24, 24, 0, 2);
+	b->set_pic(g_gr->get_picture(PicMod_Game, pic_down_train, true));
+	b->clicked.set(this, &TrainingSite_Window::soldier_capacity_down);
+	b = 0;
+	b = new UIButton (pan, 118, 4, 24, 24, 1, 3);
+	b->set_pic(g_gr->get_picture(PicMod_Game, pic_up_train, true));
+	b->clicked.set(this, &TrainingSite_Window::soldier_capacity_up);
+	b = 0;
+	m_capacity =new UITextarea (pan, 100, 11, "xx", Align_Center);
+
+	box->add(pan, UIBox::AlignCenter);
+	C1Box->add (box, Align_Left);
+
+	BigBox->add(C1Box, Align_Left);
+	BigBox->add(C2Box, Align_Left);
+	fit_inner(BigBox);
+}
+
+
+/*
+===============
+TrainingSite_Window::~TrainingSite_Window
+
+Deinitialize, remove from registry
+===============
+*/
+TrainingSite_Window::~TrainingSite_Window()
+{
+}
+
+
+/*
+===============
+TrainingSite_Window::think
+
+Make sure the window is redrawn when necessary.
+===============
+*/
+void TrainingSite_Window::think()
+{
+	Building_Window::think();
+
+	BaseImmovable* imm=m_parent->get_map()->get_field(m_ms_location)->get_immovable();
+	if(imm->get_type()!=Map_Object::BUILDING
+		|| static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
+		// The Site has been removed. Die quickly.
+		die();
+		return;
+	}
+	update();
+}
+
+/*
+==============
+TrainingSite_Window::update()
+
+Update the listselect, maybe there are new soldiers
+=============
+*/
+void TrainingSite_Window::update(void) {
+	std::vector<Soldier*>* soldiers=get_trainingsite()->get_soldiers();
+
+	uint i;
+	int sel;
+	char buf[200];
+	if (soldiers->size() != (uint) m_table->get_nr_entries())
+		for (i = 0; (int) i < m_table->get_nr_entries(); i++)
+			m_table->remove_entry(0);
+
+	for(i=0; i<soldiers->size(); i++) {
+		Soldier* s=((*soldiers)[i]);
+		UITable_Entry* e=0;
+		for(sel=0; sel<m_table->get_nr_entries(); sel++) {
+			if(m_table->get_entry(sel)->get_user_data()==s) {
+				// Soldier already in list
+				e=m_table->get_entry(sel);
+				break;
+			}
+		}
+		if(!e) // add new
+			e= new UITable_Entry(m_table, s);
+		int hl	= s->get_hp_level(),
+			mhl	= s->get_max_hp_level(),
+			al	= s->get_attack_level(),
+			mal	= s->get_max_attack_level(),
+			dl	= s->get_defense_level(),
+			mdl	= s->get_max_defense_level(),
+			el	= s->get_evade_level(),
+			mel	= s->get_max_evade_level();
+
+		e->set_string(0, s->get_name().c_str());
+		sprintf(buf, "%i / %i", hl, mhl);
+		e->set_string(1, buf);
+		sprintf(buf, "%i / %i", al, mal);
+		e->set_string(2, buf);
+		sprintf(buf, "%i / %i", dl, mdl);
+		e->set_string(3, buf);
+		sprintf(buf, "%i / %i", el, mel);
+		e->set_string(4, buf);
+		sprintf(buf, "%i / %i", hl + al + dl + el, mhl + mel + mal + mdl);
+		e->set_string(5, buf);
+	}
+	m_table->sort();
+
+	std::string str;
+	sprintf (buf, "%2d", ((TrainingSite *)get_building())->get_capacity());
+	str = (const char *) buf;
+	m_capacity->set_text (str);
+}
+
+/*
+==============
+TrainingSite_Window::options_button_clicked()
+
+Handle the click at options buttons. Launch a train specific options window.
+=============
+*/
+void TrainingSite_Window::options_button_clicked () {
+	assert(*m_reg==this);
+
+	*m_reg=new TrainingSite_Options_Window(m_parent, get_trainingsite());
+	die();
+
+}
+
+/*
+==============
+TrainingSite_Window::drop_button_clicked()
+
+Handle the click at drop soldier. Enqueue a command at command queue to get out selected
+soldier from this training site.
+=============
+*/
+void TrainingSite_Window::drop_button_clicked() {
+	 assert(*m_reg== this);
+	 std::vector<Soldier*>* soldiers=get_trainingsite()->get_soldiers();
+
+	 int sel = m_table->get_selection_index();
+	 int i;
+
+	 if ((sel < 0) || (sel >= (int)soldiers->size()))
+		  return;
+
+	 for (i = 0; i < (int) soldiers->size(); i++) {
+		  Soldier* s=((*soldiers)[i]);
+		  if (m_table->get_entry(sel)->get_user_data() == s)
+			  break;
+	 }
+
+	 assert(i < (int) soldiers->size());
+	 act_drop_soldier ((*soldiers)[i]->get_serial());
+}
+
+/*
+===============
+TrainingSite::create_options_window
+
+Create the training site information window.
+===============
+*/
+UIWindow* TrainingSite::create_options_window(Interactive_Player* plr, UIWindow** registry)
+{
+	return new TrainingSite_Window(plr, this, registry);
 }

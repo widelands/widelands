@@ -43,6 +43,7 @@ class IdleWareSupply;
 class Item_Ware_Descr;
 class Request;
 class Road;
+class Soldier;
 class Transfer;
 class Warehouse;
 class Widelands_Map_Map_Object_Loader;
@@ -359,6 +360,7 @@ class Transfer {
 public:
 	Transfer(Game* g, Request* req, WareInstance* it);
 	Transfer(Game* g, Request* req, Worker* w);
+	Transfer(Game* g, Request* req, Soldier* s);
 	~Transfer();
 
 	Request* get_request() const { return m_request; }
@@ -379,11 +381,35 @@ private:
 	Request*			m_request;
 	WareInstance*	m_item;			// non-null if ware is an item
 	Worker*			m_worker;		// non-null if ware is a worker
+	Soldier*			m_soldier;		// non-null if ware is a soldier
 	Route				m_route;
 
 	bool				m_idle;		// an idle transfer can be fail()ed if the item feels like it
 };
 
+
+/*
+*/
+
+class Requeriments
+{
+public:
+		Requeriments ();	// Init to allow all
+
+	void set (tAttribute at, int min, int max);
+
+	bool check (int hp, int attack, int defense, int evade);
+
+	// For Save/Load Games
+	void Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol);
+	void Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos);
+
+private:
+	MinMax m_hp;
+	MinMax m_attack;
+	MinMax m_defense;
+	MinMax m_evade;
+};
 
 /*
 A Supply is a virtual base class representing something that can offer
@@ -407,6 +433,12 @@ public:
 
 	virtual WareInstance* launch_item(Game* g, int ware) = 0;
 	virtual Worker* launch_worker(Game* g, int ware) = 0;
+
+	// This is only for Soldier Requests correct use !
+	virtual Soldier* launch_soldier(Game* g, int ware, Requeriments* req) = 0;
+	virtual int get_passing_requeriments(Game* g, int ware, Requeriments* r) = 0;
+	virtual void mark_as_used (Game* g, int ware, Requeriments* r) = 0;
+
 };
 
 
@@ -448,8 +480,9 @@ public:
 	typedef void (*callback_t)(Game*, Request*, int ware, Worker*, void* data);
 
    enum Type {
-      WORKER,
-      WARE,
+      WARE = 0,
+      WORKER = 1,
+	   SOLDIER = 2
    };
 
 public:
@@ -487,11 +520,17 @@ public: // callbacks for WareInstance/Worker code
 
 private:
 	int get_base_required_time(Editor_Game_Base* g, int nr);
-
+public:
 	void cancel_transfer(uint idx);
+private:
 	void remove_transfer(uint idx);
 	uint find_transfer(Transfer* t);
 
+	bool has_requeriments () { return (m_requeriments != 0); }
+public:
+	void set_requeriments (Requeriments* r) { m_requeriments = r; }
+private:
+	Requeriments* get_requeriments () { return m_requeriments;  }
 
 private:
 	typedef std::vector<Transfer*> TransferList;
@@ -510,6 +549,8 @@ private:
 	int				m_required_interval;	// time between items
 
 	TransferList	m_transfers;	// maximum size is m_count
+
+	Requeriments*	m_requeriments;	// Soldier requeriments
 };
 
 
@@ -611,11 +652,17 @@ public:
 	void add_ware_supply(int ware, Supply* supp);
 	bool have_ware_supply(int ware, Supply* supp);
 	void remove_ware_supply(int ware, Supply* supp);
+	
 	void add_worker_supply(int worker, Supply* supp);
 	bool have_worker_supply(int worker, Supply* supp);
 	void remove_worker_supply(int worker, Supply* supp);
 
-   inline bool should_run_balance_check(int gametime) { 
+// Soldier stuff
+	void add_soldier_supply(int soldier, Supply* supp);
+	bool have_soldier_supply(int soldier, Supply* supp, Requeriments* r = 0);
+	void remove_soldier_supply(int soldier, Supply* supp);
+
+   inline bool should_run_balance_check(int gametime) {
       if (m_request_timer && (gametime == m_request_timer_time)) return true;
       return false;
    }
