@@ -13,26 +13,32 @@ fi
 echo
 echo Creating source and binary package file lists
 
-find widelands -maxdepth 1 ! -type d > source.list
-cat >> source.list <<EOF
-widelands/build/*
-widelands/win32/*
-EOF
-find widelands/src -maxdepth 1 ! -type d >> source.list
-find widelands/wffcreate -maxdepth 1 ! -type d >> source.list
-
-cat > binary.list <<EOF
+cat > common.list <<EOF
+widelands/ChangeLog
 widelands/AUTHORS
 widelands/COPYING
 widelands/README
+EOF
+
+cat > source.list <<EOF
+widelands/Makefile
+widelands/README-compiling.txt
+widelands/README.developers
+EOF
+find widelands/build ! -type d >> source.list
+find widelands/src ! -type d  >> source.list
+find widelands/wffcreate ! -type d  >> source.list
+
+find widelands/fonts ! -type d  > artwork.list
+find widelands/maps ! -type d  >> artwork.list
+find widelands/pics ! -type d  >> artwork.list
+find widelands/tribes ! -type d  >> artwork.list
+find widelands/worlds ! -type d  >> artwork.list
+
+cat > binary.list <<EOF
 widelands/widelands
 widelands/widelands.exe
 widelands/*.dll
-widelands/fonts/*
-widelands/maps/*
-widelands/pics/*
-widelands/tribes/*
-widelands/worlds/*
 EOF
 
 echo
