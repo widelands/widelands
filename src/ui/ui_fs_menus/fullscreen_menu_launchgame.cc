@@ -73,7 +73,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 
 	y = 184;
 	for(i = 1; i <= MAX_PLAYERS; i++)	{ // players start with 1, not 0
-		PlayerDescriptionGroup *pdg = new PlayerDescriptionGroup(this, 30, y, m_game, i);
+		PlayerDescriptionGroup *pdg = new PlayerDescriptionGroup(this, 30, y, m_game, i, m_netgame && m_netgame->get_playernum()==i);
 		pdg->changed.set(this, &Fullscreen_Menu_LaunchGame::refresh);
 
 		m_players[i-1] = pdg;
@@ -131,11 +131,11 @@ void Fullscreen_Menu_LaunchGame::refresh()
 
 	// update the player description groups
 	for(int i = 0; i < MAX_PLAYERS; i++) {
-		m_players[i]->allow_changes(true);
+		m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
 		m_players[i]->set_enabled(i < maxplayers);
 		if(m_is_scenario && (i<maxplayers) && map) {
 			// set player to the by the map given
-			m_players[i]->allow_changes(false);
+			m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_NOTHING);
 			m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
 			m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
 		} else if(i<maxplayers && map ) {
@@ -143,11 +143,20 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			if((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
 			name.append(1, static_cast<char>(((i+1)%10) + 0x30));
 			m_players[i]->set_player_name(name);
-			m_players[i]->allow_changes(true);
+			m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
 		}
 		
-		if (m_netgame!=0 && m_netgame->get_playernum()!=i+1)
-			m_players[i]->allow_changes(false);
+		if (m_netgame!=0) {
+			int allow=PlayerDescriptionGroup::CHANGE_NOTHING;
+			
+			if (m_netgame->is_host() && i>0)
+				allow|=PlayerDescriptionGroup::CHANGE_ENABLED;
+			
+			if (m_netgame->get_playernum()==i+1)
+				allow|=PlayerDescriptionGroup::CHANGE_TRIBE;
+			
+			m_players[i]->allow_changes ((PlayerDescriptionGroup::changemode_t) allow);
+		}
 	}
 
 	m_ok->set_enabled(m_game->can_start());

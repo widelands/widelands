@@ -27,19 +27,19 @@
 #include "tribe.h"
 #include "wexception.h"
 
-void PlayerDescriptionGroup::allow_changes(bool t) {
+void PlayerDescriptionGroup::allow_changes(changemode_t t) {
    m_allow_changes=t;
-   m_btnEnablePlayer->set_visible(t);
-   m_btnPlayerType->set_enabled(t);
-   m_btnPlayerTribe->set_enabled(t);
+   m_btnEnablePlayer->set_visible(t & CHANGE_ENABLED);
+   m_btnPlayerType->set_enabled(false);
+   m_btnPlayerTribe->set_enabled(t & CHANGE_TRIBE);
 }
 
-PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum)
+PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum, bool highlight)
 	: UIPanel(parent, x, y, 450, 20)
 {
 	m_game = game;
 	m_plnum = plnum;
-	m_allow_changes=true;
+	m_allow_changes=CHANGE_EVERYTHING;
 	m_current_tribe=0;
 
 	m_enabled = false;
@@ -52,10 +52,10 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	m_btnEnablePlayer->set_state(true);
 	m_btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
 
-	m_btnPlayerType = new UIButton(this, 116, 0, 120, 20, 1);
+	m_btnPlayerType = new UIButton(this, 116, 0, 120, 20, highlight?3:1);
 	m_btnPlayerType->clicked.set(this, &PlayerDescriptionGroup::toggle_playertype);
 
-	m_btnPlayerTribe = new UIButton(this, 244, 0, 120, 20, 1);
+	m_btnPlayerTribe = new UIButton(this, 244, 0, 120, 20, highlight?3:1);
 	m_btnPlayerTribe->clicked.set(this, &PlayerDescriptionGroup::toggle_playertribe);
 
 	Tribe_Descr::get_all_tribes(&m_tribes);
@@ -111,16 +111,15 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
  */
 void PlayerDescriptionGroup::enable_player(bool on)
 {
-	if(!m_allow_changes) return;
+//	if (!(m_allow_changes&CHANGE_ENABLED)) return;
 
-   if (on) {
+	if (on)
 		m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
-	} else {
+	else
 		m_game->remove_player(m_plnum);
-	}
 
 	m_btnPlayerType->set_visible(on);
-   m_btnPlayerTribe->set_visible(on);
+	m_btnPlayerTribe->set_visible(on);
 	changed.call();
 }
 
@@ -134,7 +133,7 @@ void PlayerDescriptionGroup::toggle_playertype()
  */
 void PlayerDescriptionGroup::toggle_playertribe(void)
 {
-	if (!m_allow_changes)
+	if (!(m_allow_changes==CHANGE_TRIBE))
 		return;
 
 	++m_current_tribe;
@@ -174,7 +173,16 @@ void PlayerDescriptionGroup::set_player_name(std::string str) {
 
 void PlayerDescriptionGroup::set_player_type(int type)
 {
+	if (m_playertype==type)
+		return;
+
 	m_playertype=type;
-	m_btnPlayerType->set_title((type!=Player::playerAI)?"Human":"Computer");
+	
+	if (m_enabled) {
+		m_btnPlayerType->set_title((type!=Player::playerAI)?"Human":"Computer");
+		
+		m_game->remove_player (m_plnum);
+		m_game->add_player (m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
+	}
 }
 

@@ -174,7 +174,7 @@ void Game::init_player_controllers ()
 {
 	ipl=0;
 	for (int i=1; i<=get_map()->get_nrplayers(); i++)
-		if (get_player(i)->get_type()==Player::playerLocal) {
+		if (get_player(i)!=0 && get_player(i)->get_type()==Player::playerLocal) {
 		    ipl = new Interactive_Player(this, i);
 		    break;
 		}
@@ -186,7 +186,7 @@ void Game::init_player_controllers ()
 
 	// set up computer controlled players
 	for (int i=1; i<=get_map()->get_nrplayers(); i++)
-		if (get_player(i)->get_type()==Player::playerAI)
+		if (get_player(i)!=0 && get_player(i)->get_type()==Player::playerAI)
 			cpl.push_back (new Computer_Player(this,i));
 
 }

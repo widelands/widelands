@@ -288,6 +288,12 @@ NetClient::NetClient (IPaddress* svaddr)
 	
 	serializer=new Serializer();
 	deserializer=new Deserializer();
+	
+	deserializer->read_packet (sock);
+	if (deserializer->getchar()!=NETCMD_HELLO)
+		throw wexception("Invalid network data received");
+	
+	playernum=deserializer->getchar();
 }
 
 NetClient::~NetClient ()
@@ -311,9 +317,6 @@ void NetClient::handle_network ()
 	
 	while (deserializer->avail())
 	        switch (deserializer->getchar()) {
-		    case NETCMD_HELLO:
-			playernum=deserializer->getchar();
-			break;
 		    case NETCMD_SELECTMAP:
 			{
 				char buffer[256];
@@ -337,10 +340,10 @@ void NetClient::handle_network ()
 					if (i!=playernum-1)
 						if (enabled & (1<<i)) {
 					    		playerdescr[i]->set_player_type ((human&(1<<i))?Player::playerRemote:Player::playerAI);
-					    		playerdescr[i]->set_enabled (true);
+					    		playerdescr[i]->enable_player (true);
 						}
 						else
-							playerdescr[i]->set_enabled (false);
+							playerdescr[i]->enable_player (false);
 			}
 			break;
 		    case NETCMD_START:

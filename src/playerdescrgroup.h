@@ -37,13 +37,36 @@ class UIPanel;
  * - button to switch between: Human, Remote, AI
  */
 class PlayerDescriptionGroup : public UIPanel {
-	Game* m_game;
-	int m_plnum;
+public:
+	enum changemode_t {
+		CHANGE_NOTHING=0,
+		CHANGE_ENABLED=1,
+		CHANGE_TRIBE=2,
+		CHANGE_EVERYTHING=3
+	};
 
-	bool m_enabled; // is this player allowed at all (map-dependent)
-	int m_playertype;
-	uint      m_current_tribe;
-	bool      m_allow_changes;
+	PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum, bool highlight=false);
+
+	UISignal changed;
+
+	void set_enabled(bool enable);
+	void allow_changes(changemode_t);
+	void enable_player(bool on);
+	void set_player_tribe(std::string str);
+	void set_player_name(std::string name);
+	void set_player_type(int);
+	
+private:
+	void toggle_playertype();
+	void toggle_playertribe();
+	
+	Game*		m_game;
+	int		m_plnum;
+
+	bool		m_enabled; // is this player allowed at all (map-dependent)
+	int		m_playertype;
+	uint		m_current_tribe;
+	changemode_t	m_allow_changes;
 
 	std::vector<std::string> m_tribes;
 	
@@ -51,22 +74,6 @@ class PlayerDescriptionGroup : public UIPanel {
 	UICheckbox* m_btnEnablePlayer;
 	UIButton* m_btnPlayerType;
 	UIButton* m_btnPlayerTribe;
-
-public:
-	PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum);
-
-	UISignal changed;
-
-	void set_enabled(bool enable);
-	void allow_changes(bool t);
-	void set_player_tribe(std::string str);
-	void set_player_name(std::string name);
-	void set_player_type(int);
-	
-private:
-	void enable_player(bool on);
-	void toggle_playertype();
-	void toggle_playertribe();
 };
 
 
