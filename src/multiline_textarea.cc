@@ -64,12 +64,15 @@ Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint
 
 	m_textpos = 0;
 	m_textheight = 0;
+
+	m_scrollbar = new Scrollbar(parent, x+get_w(), y, 24, h, false);
+	m_scrollbar->moved.set(this, &Multiline_Textarea::set_scrollpos);
+
+	m_scrollbar->set_pagesize(h - 2*g_font->get_fontheight());
+	m_scrollbar->set_steps(1);
+
 	if (text)
 		set_text(text);
-
-	Scrollbar *sb = new Scrollbar(parent, x+get_w(), y, 24, h, false);
-	sb->up.set(this, &Multiline_Textarea::move_up);
-	sb->down.set(this, &Multiline_Textarea::move_down);
 }
 
 
@@ -99,20 +102,23 @@ void Multiline_Textarea::set_text(const char *text)
 		{
 		// Clear the field
 		m_text = "";
-		
+
 		m_textheight = 0;
 		m_textpos = 0;
+		m_scrollbar->set_steps(1);
 		}
 	else
 		{
 		m_text = text;
-	
+
 		g_font->get_size(text, 0, &m_textheight, get_eff_w());
-	
+
 		if (m_textpos > m_textheight - get_h())
 			m_textpos = m_textheight - get_h();
 		if (m_textpos < 0)
 			m_textpos = 0;
+
+		m_scrollbar->set_steps(m_textheight - get_h());
 		}
 
 	update(0, 0, get_eff_w(), get_h());
@@ -135,43 +141,15 @@ void Multiline_Textarea::set_align(Align align)
 
 /*
 ===============
-Multiline_Textarea::move_up
+Multiline_Textarea::set_scrollpos
 
-Scroll the area up i lines
+Scroll to the given position.
 ===============
 */
-void Multiline_Textarea::move_up(int i)
+void Multiline_Textarea::set_scrollpos(int pixels)
 {
-	int delta = i * g_font->get_fontheight();
-	
-	if (delta > m_textpos)
-		delta = m_textpos;
-	if (delta <= 0)
-		return;
+	m_textpos = pixels;
 
-	m_textpos -= delta;
-
-	update(0, 0, get_eff_w(), get_h());
-}
-
-
-/*
-===============
-Multiline_Textarea::move_down
-
-Scroll down i lines
-===============
-*/
-void Multiline_Textarea::move_down(int i)
-{
-	int delta = i * g_font->get_fontheight();
-	
-	if (m_textpos + delta > m_textheight - get_h())
-		delta = m_textheight - get_h() - m_textpos;
-	if (delta <= 0)
-		return;
-
-	m_textpos += delta;
 	update(0, 0, get_eff_w(), get_h());
 }
 

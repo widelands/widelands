@@ -301,7 +301,7 @@ public:
 	void set_state(bool on);
 
    inline void set_id(int n) { m_id=n; }
-   
+
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
 
@@ -310,9 +310,9 @@ public:
 
 private:
 	virtual void clicked() = 0;
-   
+
    int   m_id;
-   
+
 	bool	m_custom_picture;		// the statebox displays a custom picture
 	uint	m_pic_graphics;
 
@@ -396,6 +396,72 @@ private:
 	bool				m_multiline;
 };
 
+
+/** class Scrollbar
+ *
+ * This class provides a scrollbar
+ */
+class Scrollbar : public Panel {
+public:
+	enum Area {
+		None,
+		Minus,
+		Plus,
+		Knob,
+		MinusPage,
+		PlusPage
+	};
+
+	enum {
+		Size = 24,	// default width for vertical scrollbars, height for horizontal scrollbars
+	};
+
+public:
+	Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz);
+
+	UISignal1<int> moved;
+
+	void set_steps(int steps);
+	void set_pagesize(int pagesize);
+	void set_pos(int pos);
+
+	uint get_steps() const { return m_steps; }
+	uint get_pagesize() const { return m_pagesize; }
+	uint get_pos() const { return m_pos; }
+
+private:
+	Area get_area_for_point(int x, int y);
+	int get_knob_pos();
+	void set_knob_pos(int p);
+
+	void action(Area area);
+
+	void draw_button(RenderTarget* dst, Area area, int x, int y, int w, int h);
+	void draw_area(RenderTarget* dst, Area area, int x, int y, int w, int h);
+	void draw(RenderTarget* dst);
+	void think();
+
+	bool handle_mouseclick(uint btn, bool down, int x, int y);
+	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
+
+private:
+	bool		m_horizontal;
+
+	uint		m_pos;		// from 0 to m_range - 1
+	uint		m_pagesize;
+	uint		m_steps;
+
+	Area		m_pressed;			// area that the user clicked on (None if mouse is up)
+	int		m_time_nextact;
+	int		m_knob_grabdelta;	// only while m_pressed == Knob
+
+	uint		m_pic_minus;	// left/up
+	uint		m_pic_plus;		// right/down
+	uint		m_pic_background;
+	uint		m_pic_buttons;
+};
+
+
 /** class Multiline_textarea
  *
  * This defines a non responsive (to clicks) text area, where a text
@@ -409,9 +475,7 @@ public:
 
 	void set_text(const char *text);
 	void set_align(Align align);
-
-	void move_up(int i);
-	void move_down(int i);
+	void set_scrollpos(int pixels);
 
 	inline uint get_eff_w() { return get_w(); }
 
@@ -421,6 +485,7 @@ public:
 private:
 	Align				m_align;
 	std::string		m_text;
+	Scrollbar*		m_scrollbar;
 	int				m_textheight;	// total height of wrapped text, in pixels
 	int				m_textpos;		// current scrolling position in pixels (0 is top)
 };
@@ -440,9 +505,6 @@ public:
 	void add_entry(const char *name, void *value);
 
 	void set_align(Align align);
-	
-	void move_up(int i);
-	void move_down(int i);
 
 	void select(int i);
 	inline void *get_selection() {
@@ -458,6 +520,9 @@ public:
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
+	void set_scrollpos(int pos);
+
+private:
 	static const int ms_darken_value=-20;
 
    struct Entry {
@@ -467,25 +532,12 @@ private:
 
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
+	Scrollbar*				m_scrollbar;
 	int						m_scrollpos;	// in pixels
 	int						m_selection;	// -1 when nothing is selected
 };
 
-/** class Scrollbar
- *
- * This class provides a scrollbar (single-step only atm)
- */
-class Scrollbar : public Panel {
-public:
-	Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz);
 
-	UISignal1<int> up; // left for horizontal scrollbars
-	UISignal1<int> down; // right for vertical scrollbars
-
-private:
-	void btn_up() { up.call(1); }
-	void btn_down() { down.call(1); }
-};
 
 /** class Window
  *

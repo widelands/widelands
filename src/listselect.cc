@@ -21,10 +21,7 @@
 #include "ui.h"
 #include "font.h"
 
-/** class Listselect
- *
- * This class defines a list-select box.
- */
+
 /*
 ===============
 Listselect::Listselect
@@ -49,9 +46,11 @@ Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align)
 	m_scrollpos = 0;
 	m_selection = -1;
 
-	Scrollbar *sb = new Scrollbar(parent, x+get_w(), y, 24, h, false);
-	sb->up.set(this, &Listselect::move_up);
-	sb->down.set(this, &Listselect::move_down);
+	m_scrollbar = new Scrollbar(parent, x+get_w(), y, 24, h, false);
+	m_scrollbar->moved.set(this, &Listselect::set_scrollpos);
+
+	m_scrollbar->set_pagesize(h - 2*g_font->get_fontheight());
+	m_scrollbar->set_steps(1);
 }
 
 
@@ -64,6 +63,7 @@ Free allocated resources
 */
 Listselect::~Listselect()
 {
+	m_scrollbar = 0;
 	clear();
 }
 
@@ -81,6 +81,8 @@ void Listselect::clear()
 		free(m_entries[i]);
 	m_entries.clear();
 
+	if (m_scrollbar)
+		m_scrollbar->set_steps(1);
 	m_scrollpos = 0;
 	m_selection = -1;
 }
@@ -99,11 +101,13 @@ Args: name	name that will be displayed
 void Listselect::add_entry(const char *name, void* value)
 {
 	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(name));
-	
+
 	e->value = value;
 	strcpy(e->name, name);
-	
+
 	m_entries.push_back(e);
+
+	m_scrollbar->set_steps(m_entries.size() * g_font->get_fontheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
 }
@@ -124,51 +128,18 @@ void Listselect::set_align(Align align)
 
 /*
 ===============
-Listselect::move_up
+Listselect::set_scrollpos
 
-Scroll the listselect up
-
-Args: i	number of lines to scroll
+Scroll to the given position, in pixels.
 ===============
 */
-void Listselect::move_up(int i)
+void Listselect::set_scrollpos(int i)
 {
-	int delta = i * g_font->get_fontheight();
+	m_scrollpos = i;
 
-	if (delta > m_scrollpos)
-		delta = m_scrollpos;
-	if (delta <= 0)
-		return;
-
-	m_scrollpos -= delta;
 	update(0, 0, get_eff_w(), get_h());
 }
 
-
-/*
-===============
-Listselect::move_down
-
-Scroll the listselect down
-  
-Args: i	number of lines to scroll
-===============
-*/
-void Listselect::move_down(int i)
-{
-	int delta = i * get_lineheight();
-	int max = (m_entries.size()+1) * get_lineheight() - get_h();
-	if (max < 0)
-		max = 0;
-	
-	if (m_scrollpos + delta > max)
-		delta = max - m_scrollpos;
-	if (delta <= 0)
-		return;
-	
-	m_scrollpos += delta;
-	update(0, 0, get_eff_w(), get_h());
-}
 
 /** Listselect::select(int i)
  *
@@ -214,14 +185,14 @@ void Listselect::draw(RenderTarget* dst)
 	int lineheight = get_lineheight();
 	int idx = m_scrollpos / lineheight;
 	int y = 1 + idx*lineheight - m_scrollpos;
-	
+
 	while(idx < (int)m_entries.size())
 		{
 		if (y >= get_h())
 			return;
-		
+
 		Entry* e = m_entries[idx];
-		
+
 		if (idx == m_selection) {
 			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
 			dst->brighten_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), ms_darken_value);
@@ -234,9 +205,9 @@ void Listselect::draw(RenderTarget* dst)
 			x = get_eff_w()>>1;
 		else
 			x = 1;
-		
+
 		g_font->draw_string(dst, x, y, e->name, m_align, -1);
-		
+
 		y += lineheight;
 		idx++;
 	}

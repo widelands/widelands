@@ -99,9 +99,9 @@ public:
 TextViewWindow::TextViewWindow(Panel* parent, UniqueWindowRegistry* reg, std::string title, std::string text)
 	: UniqueWindow(parent, reg, 0, 0, title)
 {
-	Multiline_Textarea* mt = new Multiline_Textarea(this, 0, 0, 560, 240, text.c_str());
+	new Multiline_Textarea(this, 0, 0, 560, 240, text.c_str());
 
-	fit_inner(mt);
+	set_inner_size(560, 240);
 
 	if (get_usedefaultpos())
 		center_to_parent();
