@@ -130,8 +130,8 @@ void Window::move_to_mouse()
 {
 	int px, py;
 
-	px = g_sys.get_mouse_x() - get_w()/2;
-	py = g_sys.get_mouse_y() - get_h()/2;
+	px = get_mouse_x() - get_w()/2;
+	py = get_mouse_y() - get_h()/2;
 
 	Panel *parent = get_parent();
 	if (parent) {

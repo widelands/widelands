@@ -53,7 +53,7 @@ static void g_init(int argc, char **argv)
 		options_init(argc, argv);
 
 		// Create all subsystems after config has been read
-		g_system = new System;
+		Sys_Init();
 
 		static Font_Handler f;
 		static Cursor cur;
@@ -99,10 +99,7 @@ static void g_shutdown()
 		g_graphic = 0;
 	}
 	
-	if (g_system) {
-		delete g_system;
-		g_system = 0;
-	}
+	Sys_Shutdown();
 		
 	// Save options
 	options_shutdown();

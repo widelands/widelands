@@ -51,6 +51,9 @@ static void show_usage(void)
 "\n"
 " --<config-entry-name>=value overwrites a config file setting\n"
 "\n"
+" --record         Record all events to the given filename for later playback\n"
+" --playback       Playback given filename (see --record)\n"
+"\n"
 " --help           Show this help\n"
 " --version        Show version\n"
 "\n"
@@ -94,15 +97,23 @@ static bool parse_command_line(int argc, char** argv)
 			show_version();
 			return false;
 		}
-
+		
 		value = strchr(opt, '=');
 		if (!value) {
 			show_usage();
 			return false;
 		}
-
 		*value++ = 0;
-
+		
+		if (!strcmp(opt, "record")) {
+			Sys_SetRecordFile(value);
+			continue;
+		}
+		if (!strcmp(opt, "playback")) {
+			Sys_SetPlaybackFile(value);
+			continue;
+		}
+		
 		g_options.pull_section("global")->create_val(opt, value);
 	}
 

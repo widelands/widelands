@@ -412,10 +412,9 @@ enum { // use 1<<MOUSE_xxx for bitmasks
 	MOUSE_RIGHT
 };
 
-/** class System
-
+/*
 All interactions with the OS except for file access and graphics are handled 
-by the System class. Most notably:
+by the Sys_xxx type functions. Most notably:
  - timing
  - input
  - low-level networking
@@ -436,48 +435,32 @@ graphics work is done elsewhere.
 Mouse: Some mouse functions deal with button mask bits. Bits are simply obtained
 as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right are pressed"
 */
-class System {
-public:
-	System();
-	~System();
-	
-	bool should_die();
-	
-	// Timing
-	int get_time();
-	
-	// Input
-	struct InputCallback {
-		void (*mouse_click)(bool down, int btn, uint btns, int x, int y);
-		void (*mouse_move)(uint btns, int x, int y, int xdiff, int ydiff);
-		void (*key)(bool down, int code, char c);
-	};
-	
-	void handle_input(InputCallback *cb);
-	
-	uint get_mouse_buttons();
-	int get_mouse_x();
-	int get_mouse_y();
-	void set_mouse_pos(int x, int y);
-	
-	void set_mouse_swap(bool swap);
-	void set_mouse_speed(float speed);
-	
-	// pseudo-private kludge	
-	void set_max_mouse_coords(int x, int y);
 
-private:
-	bool		m_active;
-	bool		m_should_die;
-	
-	// Input
-	bool		m_mouse_swapped;
-	float		m_mouse_speed;
-	uint		m_mouse_buttons;
-	float		m_mouse_x, m_mouse_y;
-	int		m_mouse_maxx, m_mouse_maxy;
+// basic initialization etc..
+void Sys_Init();
+void Sys_Shutdown();
+
+void Sys_SetRecordFile(const char *filename);
+void Sys_SetPlaybackFile(const char *filename);
+
+bool Sys_ShouldDie();
+
+// timing
+int Sys_GetTime();
+
+// input
+struct InputCallback {
+	void (*mouse_click)(bool down, int btn, uint btns, int x, int y);
+	void (*mouse_move)(uint btns, int x, int y, int xdiff, int ydiff);
+	void (*key)(bool down, int code, char c);
 };
 
-extern System *g_system;
-
-#define g_sys	(*g_system)
+void Sys_HandleInput(InputCallback *cb);
+uint Sys_GetMouseButtons();
+int Sys_GetMouseX();
+int Sys_GetMouseY();
+void Sys_SetMousePos(int x, int y);
+	
+void Sys_SetMouseSwap(bool swap);
+void Sys_SetMouseSpeed(float speed);
+	

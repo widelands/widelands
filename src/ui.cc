@@ -132,14 +132,14 @@ int Panel::run()
 	g_gr.needs_fs_update();
 	while(_running)
 	{
-		static System::InputCallback icb = {
+		static InputCallback icb = {
 			Panel::ui_mouseclick,
 			Panel::ui_mousemove,
 			Panel::ui_key
 		};
 	
-		g_sys.handle_input(&icb);
-		if (g_sys.should_die())
+		Sys_HandleInput(&icb);
+		if (Sys_ShouldDie())
 			end_modal(-1);
 
 		if (_flags & pf_think)
@@ -147,7 +147,7 @@ int Panel::run()
 
 		if (g_gr.does_need_update()) {
 			forefather->do_draw(g_gr.get_screenbmp(), 0, 0);
-			g_cur.draw(g_sys.get_mouse_x(), g_sys.get_mouse_y());
+			g_cur.draw(Sys_GetMouseX(), Sys_GetMouseY());
 			g_gr.update();
 		}
 
@@ -437,7 +437,7 @@ Get mouse position relative to this panel
 int Panel::get_mouse_x()
 {
 	if (!_parent)
-		return g_sys.get_mouse_x() - get_x()-get_lborder();
+		return Sys_GetMouseX() - get_x()-get_lborder();
 	else
 		return _parent->get_mouse_x() - get_x()-get_lborder();
 }
@@ -445,7 +445,7 @@ int Panel::get_mouse_x()
 int Panel::get_mouse_y()
 {
 	if (!_parent)
-		return g_sys.get_mouse_y() - get_y()-get_tborder();
+		return Sys_GetMouseY() - get_y()-get_tborder();
 	else
 		return _parent->get_mouse_y() - get_y()-get_tborder();
 }
@@ -461,7 +461,7 @@ Set mouse position relative to this panel
 void Panel::set_mouse_pos(int x, int y)
 {
 	if (!_parent)
-		g_sys.set_mouse_pos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
+		Sys_SetMousePos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
 	else
 		_parent->set_mouse_pos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
 }

@@ -40,13 +40,13 @@ void Intro::run(void) {
 	g_gr.needs_fs_update();
 	while(!end_run)
 	{
-		static System::InputCallback icb = {
+		static InputCallback icb = {
 			&Intro::mclick,
 		   0,
          0
       };
 	
-		g_sys.handle_input(&icb);
+		Sys_HandleInput(&icb);
 
 		if (g_gr.does_need_update()) {
 			copy_pic(g_gr.get_screenbmp(), &splash, 0, 0, 0, 0, splash.get_w(), splash.get_h());

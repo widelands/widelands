@@ -50,7 +50,7 @@ Game::Game(void)
    cmdqueue = new Cmd_Queue(this);
    map=0;
 
-	m_realtime = g_sys.get_time();
+	m_realtime = Sys_GetTime();
 }
 
 /** Game::~Game(void)
@@ -243,7 +243,7 @@ void Game::think(void)
 {
 	int lasttime = m_realtime;
 	int frametime;
-	m_realtime = g_sys.get_time();
+	m_realtime = Sys_GetTime();
 	frametime = m_realtime - lasttime;
 
 	// Networking: check socket here

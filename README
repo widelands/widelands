@@ -35,3 +35,51 @@ SPACE		Toggles build-help
 M			Toggle minimap
 
 F5			Reveals the entire map
+
+
+Reporting Bugs
+--------------
+
+If you want to report bugs, please send your report to the mailing list,
+<widelands-public@list.sourceforge.net>
+To subscribe, visit the following page:
+http://lists.sourceforge.net/mailman/listinfo/widelands-announce
+
+Please provide enough background information. Tell us:
+- what version of Widelands did you use (i.e. the build number, or whether it's
+  a custom compile from CVS)
+- how to reproduce the bug
+- which map you were playing
+- send us a compressed (zip, gzip, bzip2) session record if possible, unless the
+  bug is trivial to reproduce. In fact, it may be a good idea to always record
+  your sessions in case a bug surfaces. For more explanation, see below.
+
+
+Creating a Session Record
+-------------------------
+
+Widelands can record all your keypresses and mouse movements to a file. It can
+then replay an entire session from starting the game to exiting it. This is
+really helpful for debugging problems.
+
+To create a session record, start the game with the --record parameter. On
+Linux, simply start Widelands like so:
+
+$ ./widelands --record=filename.rec
+
+On Windows, create a shortcut to the file widelands.exe (right-click on 
+widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click
+on the newly created shortcut and choose Properties). The Target field should
+read something like "c:\games\widelands\widelands.exe". Change this to
+"c:\games\widelands\widelands.exe --record=filename.rec".
+
+A binary file called filename.rec will be created.
+To play it back, perform the same steps as outlined above, but replace 
+"--record" with "--playback".
+
+Note that while recorded files are platform independent, they generally won't
+work across different versions of Widelands, because the user interface and the
+order in which low-level functions can be called may change between versions.
+Session records are not intended to serve as demo files; they are mostly a
+debugging tool which helps us to track down bugs.
+

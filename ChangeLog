@@ -1,6 +1,8 @@
 
 build-3:
 - added DirAnimations for convenience
+- added Economy code
+- added record/playback code
 
 build-2:
 - options handling redesigned

@@ -32,6 +32,13 @@ Graphic *g_graphic = 0;
 #define FILL_TRIANGLES
 */
 
+// stupid kludge: this function from system.cc must be imported to report
+// resolution changes
+// ideally, the Graphic setup code would go into system.cc, while the actual
+// graphics code goes into different back-end code (e.g. OpenGL, software,
+// and software+MMX)
+void Sys_SetMaxMouseCoords(int x, int y);
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// bei mir gibt es diese funktion auch im header 'Xutility'
@@ -327,7 +334,7 @@ void Graphic::set_mode(ushort x, ushort y, Mode m)
 
    st = STATE_OK;
 
-	g_sys.set_max_mouse_coords(x, y);
+	Sys_SetMaxMouseCoords(x, y);
 	
    bneeds_fs_update=true;
 
