@@ -25,21 +25,57 @@
 /*
 class Box
 ---------
-A horizontal bar that holds a number of child panels.
+A layouting panel that holds a number of child panels.
 The Panels you add to the Box must be children of the Box.
+The Box automatically resizes itself and positions the added children.
 */
 class Box : public Panel {
 public:
-	Box(Panel* parent, int x, int y);
+	enum {
+		Horizontal = 0,
+		Vertical = 1,
+
+		AlignLeft = 0,
+		AlignTop = 0,
+		AlignCenter = 1,
+		AlignRight = 2,
+		AlignBottom = 2,
+	};
+public:
+	Box(Panel* parent, int x, int y, uint orientation);
 
 	void resize();
-	
-	int get_nrpanels() const { return m_panels.size(); }
-	
-	uint add(Panel* btn);
-	
+
+	int get_nritems() const { return m_items.size(); }
+
+	void add(Panel* panel, uint align);
+	void add_space(uint space);
+
 private:
-	std::vector<Panel*>	m_panels;
+	void get_item_size(uint idx, int* depth, int* breadth);
+	void set_item_pos(uint idx, int pos);
+
+private:
+	struct Item {
+		enum Type {
+			ItemPanel,
+			ItemSpace
+		};
+
+		Type		type;
+
+		union {
+			struct {
+				Panel*	panel;
+				uint		align;
+			} panel;
+			uint		space;
+		} u;
+	};
+
+	uint	m_orientation;
+
+	std::vector<Item>	m_items;
 };
 
 

@@ -255,7 +255,7 @@ void FieldActionWindow::add_buttons_auto()
 	Box* buildbox = 0;
 	Box* watchbox;
 
-	watchbox = new Box(m_tabpanel, 0, 0);
+	watchbox = new Box(m_tabpanel, 0, 0, Box::Horizontal);
 
 	// Add road-building actions
 	if (m_field.field->get_owned_by() == m_player->get_player_number())
@@ -263,7 +263,7 @@ void FieldActionWindow::add_buttons_auto()
 		BaseImmovable *imm = m_map->get_immovable(m_field);
 
 		// The box with road-building buttons
-		buildbox = new Box(m_tabpanel, 0, 0);
+		buildbox = new Box(m_tabpanel, 0, 0, Box::Horizontal);
 
 		if (imm && imm->get_type() == Map_Object::FLAG)
 		{
@@ -299,7 +299,7 @@ void FieldActionWindow::add_buttons_auto()
 
 
 	// Add tabs
-	if (buildbox && buildbox->get_nrpanels())
+	if (buildbox && buildbox->get_nritems())
 		{
 		buildbox->resize();
 		add_tab(pic_tab_buildroad, buildbox);
@@ -383,13 +383,13 @@ Buttons used during road building: Set flag here and Abort
 */
 void FieldActionWindow::add_buttons_road(bool flag)
 {
-	Box* buildbox = new Box(m_tabpanel, 0, 0);
+	Box* buildbox = new Box(m_tabpanel, 0, 0, Box::Horizontal);
 
 	if (flag)
 		add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag);
-	
+
 	add_button(buildbox, pic_abort, &FieldActionWindow::act_abort_buildroad);
-	
+
 	// Add the box as tab
 	buildbox->resize();
 	add_tab(pic_tab_buildroad, buildbox);
@@ -420,7 +420,7 @@ void FieldActionWindow::add_button(Box* box, const char* picname, void (FieldAct
 	b->clicked.set(this, fn);
 	b->set_pic(g_gr->get_picture(PicMod_Game, picname, RGBColor(0,0,255)));
 
-	box->add(b);
+	box->add(b, Box::AlignTop);
 }
 
 /*
