@@ -931,7 +931,8 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 	SDL_WM_SetCaption("Widelands " VERSION, "Widelands");
 
 	//log("Original flags: %08x, final flags: %08x\n", flags, m_sdlsurface->flags);
-
+   
+   m_lock_sdl_surface=SDL_MUSTLOCK(m_sdlsurface);
 #ifdef OPENGL_MODE
 	m_screen.pixels = (uint*)malloc(1024*1024*sizeof(uint));
 	memset(m_screen.pixels, 128, 1024*512*sizeof(uint));
@@ -943,20 +944,19 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 
 	free(m_screen.pixels);
 
-	m_screen.pixels = (uint*)malloc(w*h*sizeof(uint));
+	m_screen.pixels = (uint*)malloc(m_sdlsurface->pitch*h*sizeof(uint));
 	m_screen.pitch = w;
 #else
-   m_lock_sdl_surface=SDL_MUSTLOCK(m_sdlsurface);
    m_screen.pitch = m_sdlsurface->pitch / sizeof(uint);
    if(m_lock_sdl_surface) {
-      m_screen.pixels = (uint*)malloc(w*h*sizeof(uint));
+      m_screen.pixels = (uint*)malloc(m_screen.pitch*h*sizeof(uint));
    } else {
       m_screen.pixels = (uint*)m_sdlsurface->pixels;
    }
 #endif
 	
       
-   m_screen_pixels_size_in_bytes = w*h*sizeof(uint);
+   m_screen_pixels_size_in_bytes = m_screen.pitch*h*sizeof(uint);
    m_screen.w = w;
 	m_screen.h = h;
 

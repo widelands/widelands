@@ -917,10 +917,10 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 	m_screen.w = m_sdlsurface->w;
 	m_screen.h = m_sdlsurface->h;
 	m_screen.pitch = m_sdlsurface->pitch / sizeof(ushort);
-   m_screen_pixels_size_in_bytes=w*h*sizeof(ushort);
+   m_screen_pixels_size_in_bytes=m_screen.pitch*h*sizeof(ushort);
    m_lock_sdl_surface=SDL_MUSTLOCK(m_sdlsurface);
    if(m_lock_sdl_surface) {
-      m_screen.pixels = (ushort*)malloc(w*h*sizeof(ushort));
+      m_screen.pixels = (ushort*)malloc(m_screen.pitch*h*sizeof(ushort));
    } else {
       m_screen.pixels = (ushort*)m_sdlsurface->pixels;
    }
