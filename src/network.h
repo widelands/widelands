@@ -43,6 +43,13 @@ class NetGame {
     public:
 	NetGame ();
 	virtual ~NetGame ();
+
+    public:
+   struct Chat_Message {
+      uint plrnum;
+      std::wstring msg;
+   };
+   
 	
 	int get_playernum () { return playernum; }
 	
@@ -73,14 +80,14 @@ class NetGame {
 	virtual void handle_network ()=0;
 
 	virtual void send_player_command (PlayerCommand*)=0;
-	virtual void send_chat_message (std::wstring)=0;
+	virtual void send_chat_message (Chat_Message)=0;
 	
 	bool have_chat_message();
-	std::wstring get_chat_message();
+   Chat_Message get_chat_message();
 	
 	virtual void syncreport (uint)=0;
 
-    protected:
+       protected:
 	Game*		game;
 	
 	int		playernum;
@@ -92,8 +99,8 @@ class NetGame {
 	
 	PlayerDescriptionGroup*	playerdescr[MAX_PLAYERS];
 	Fullscreen_Menu_LaunchGame*	launch_menu;
-	
-	std::queue<std::wstring>	chat_msg_queue;
+
+	std::queue<Chat_Message>	chat_msg_queue;
 };
 
 class NetHost:public NetGame {
@@ -109,12 +116,12 @@ class NetHost:public NetGame {
 	virtual void handle_network ();
 	
 	virtual void send_player_command (PlayerCommand*);
-	virtual void send_chat_message (std::wstring);
+	virtual void send_chat_message (Chat_Message);
 	
 	virtual void syncreport (uint);
 
     private:
-	void send_chat_message_int (const wchar_t*);
+	void send_chat_message_int ( const Chat_Message );
 	void send_player_info ();
 	void update_network_delay ();
 
@@ -155,7 +162,7 @@ class NetClient:public NetGame {
 	virtual void handle_network ();
 	
 	virtual void send_player_command (PlayerCommand*);
-	virtual void send_chat_message (std::wstring);
+	virtual void send_chat_message (Chat_Message);
     
 	virtual void syncreport (uint);
 

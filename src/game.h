@@ -112,6 +112,9 @@ public:
 
    Interactive_Player* get_ipl(void) { return ipl; }
 
+   // If this has a netgame, return it
+   NetGame* get_netgame( void ) { return m_netgame; }
+
 private:
 	void init_player_controllers ();
 	bool run (bool = false);

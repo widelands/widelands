@@ -20,13 +20,16 @@
 #ifndef __S__INTPLAYER_H
 #define __S__INTPLAYER_H
 
+#include <vector>
 #include "game.h"
 #include "interactive_base.h"
+#include "network.h" // For chat
 
 class CoordPath;
 class MiniMap;
 class Map_View;
 class Player;
+class UIMultiline_Textarea;
 class UITextarea;
 class UIWindow;
 
@@ -113,12 +116,25 @@ class Interactive_Player : public Interactive_Base {
 
       // For load
       virtual void cleanup_for_load( void );
-      
+     
+      // Chat messages
+      bool show_chat_overlay( void ) { return m_do_chat_overlays; }
+      void set_show_chat_overlay( bool t ) { m_do_chat_overlays = t; }
+      const std::vector< NetGame::Chat_Message >* get_chatmsges( void ) { return &m_chatmsges; }
+
+   private:
+      struct Overlay_Chat_Messages {
+         NetGame::Chat_Message msg;
+         uint starttime;
+      };
+
    private:
       Game*		m_game;
       uchar		m_player_number;
 
       UITextarea*	m_label_speed;
+      UIMultiline_Textarea*	m_chat_messages;
+      UITextarea*	m_type_message;
 
       UIUniqueWindowRegistry	m_mainmenu;
       UIUniqueWindowRegistry	m_fieldaction;
@@ -131,6 +147,12 @@ class Interactive_Player : public Interactive_Base {
       BuildingStats m_building_stats;
       std::vector< General_Stats > m_general_stats;
 
+      // Chat message stack
+      std::vector< NetGame::Chat_Message > m_chatmsges;
+      std::vector< Overlay_Chat_Messages > m_show_chatmsg;
+      bool m_do_chat_overlays;
+      bool m_is_typing_msg; // Is the user typing a chat message
+      std::string m_typed_message;
 
    private:
       void sample_statistics( void );

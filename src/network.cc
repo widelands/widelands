@@ -110,11 +110,11 @@ bool NetGame::have_chat_message ()
 	return !chat_msg_queue.empty();
 }
 
-std::wstring NetGame::get_chat_message ()
+NetGame::Chat_Message NetGame::get_chat_message ()
 {
 	assert (!chat_msg_queue.empty());
 	
-	std::wstring msg=chat_msg_queue.front();
+	Chat_Message msg=chat_msg_queue.front();
 	
 	chat_msg_queue.pop ();
 	
@@ -314,8 +314,14 @@ void NetHost::handle_network ()
 			    case NETCMD_CHATMESSAGE:
 				{
 					wchar_t buffer[256];
-					clients[i].deserializer->getwstr (buffer, 256);
-					send_chat_message_int (buffer);
+					uchar plrnum =  clients[i].deserializer->getchar();
+               clients[i].deserializer->getwstr (buffer, 256);
+               
+               Chat_Message m;
+               m.msg = buffer;
+               m.plrnum = plrnum;
+               
+					send_chat_message_int (m);
 				}
 				break;
 			    default:
@@ -380,19 +386,20 @@ void NetHost::handle_network ()
 	}
 }
 
-void NetHost::send_chat_message_int (const wchar_t* str)
+void NetHost::send_chat_message_int (const Chat_Message msg)
 {
 	unsigned int i;
 	
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_CHATMESSAGE);
-	serializer->putwstr (str);
+	serializer->putchar(msg.plrnum);
+	serializer->putwstr (msg.msg.c_str());
 	serializer->end_packet ();
 	
 	for (i=0;i<clients.size();i++)
 		serializer->send (clients[i].sock);
-	
-	chat_msg_queue.push (str);
+
+	chat_msg_queue.push (msg);
 }
 
 void NetHost::update_network_delay ()
@@ -435,9 +442,9 @@ void NetHost::send_player_command (PlayerCommand* cmd)
 	cmds.push (cmd);
 }
 
-void NetHost::send_chat_message (std::wstring str)
+void NetHost::send_chat_message (Chat_Message msg)
 {
-	send_chat_message_int (str.c_str());
+	send_chat_message_int (msg);
 }
 
 void NetHost::syncreport (uint sync)
@@ -567,9 +574,13 @@ void NetClient::handle_network ()
 		    case NETCMD_CHATMESSAGE:
 			{
 				wchar_t buffer[256];
-				
+			   char player = deserializer->getchar();
+            
 				deserializer->getwstr (buffer, 256);
-				chat_msg_queue.push (buffer);
+				Chat_Message t;
+            t.plrnum = player;
+            t.msg = buffer;
+            chat_msg_queue.push (t);
 			}
 			break;
 		    default:
@@ -587,11 +598,12 @@ void NetClient::send_player_command (PlayerCommand* cmd)
 	serializer->send (sock);
 }
 
-void NetClient::send_chat_message (std::wstring msg)
+void NetClient::send_chat_message (Chat_Message msg)
 {
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_CHATMESSAGE);
-	serializer->putwstr (msg.c_str());
+	serializer->putchar(msg.plrnum);
+	serializer->putwstr (msg.msg.c_str());
 	serializer->end_packet ();
 	serializer->send (sock);
 }

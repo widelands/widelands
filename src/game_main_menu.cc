@@ -18,6 +18,7 @@
  */
 
 #include "building_statistics_menu.h"
+#include "game_chat_menu.h"
 #include "game_main_menu.h"
 #include "game_main_menu_save_game.h"
 #include "game_main_menu_load_game.h"
@@ -145,7 +146,10 @@ void GameMainMenu::clicked(int n) {
   
       case 30:
          // Chat Window
-         log("TODO: Chat Window!\n");
+         if (m_windows->chat.window)
+            delete m_windows->chat.window; 
+         else
+            new GameChatMenu(m_player, &m_windows->chat, m_player->get_game()->get_netgame());
          break;
 
       case 50:
