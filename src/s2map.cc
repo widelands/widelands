@@ -1,16 +1,16 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -31,12 +31,12 @@
 #define dec ios::dec 
 
 
-/** int Map::load_s2mf(const char* filen) 
+/** int Map::load_s2mf(const char* filen)
  *
  * this loads a given file as a settlers 2 map file
  *
  * ***** PRIVATE FUNC ******
- * 
+ *
  * Args: 	filen		filename to read
  * Returns: RET_OK or RET_FAILED
  */
@@ -45,9 +45,9 @@ int Map::load_s2mf(const char* filen) {
 		  char* buffer = new char[200];
 		  char c;
 		  int read=0;
-		  int x=0;
-		  int y=0;
-		  
+		  uint x=0;
+		  uint y=0;
+
 		  if(!filen) return ERR_FAILED;
 
 		  file.open(filen, File::READ);
@@ -57,8 +57,8 @@ int Map::load_s2mf(const char* filen) {
 
 		  S2MapDescrHeader header;
 		  file.read(&header, sizeof(header));
-		 
-		  
+
+
 		  strncpy(hd.author, header.author, 26);
 		  hd.author[26]='\0';
 		  strcpy(hd.magic, WLMF_MAGIC);
@@ -69,7 +69,7 @@ int Map::load_s2mf(const char* filen) {
 		  hd.height=header.h;
 		  hd.version=WLMF_VERSION;
 		  strcpy(hd.descr, "Bluebyte Settlers II Map. No comment defined!");
-		 
+
 		  const char* buf;
 		  switch(header.uses_world) {
 					 case 0:
@@ -89,17 +89,17 @@ int Map::load_s2mf(const char* filen) {
 										  if(!buf) assert(0);
 										  w= new World(buf);
 										  strcpy(hd.uses_world, "blackland");
-								}	
+								}
 								break;
 
-					 case 2: 
+					 case 2:
 								// winter world
 								if(!w || strcmp(w->get_name(), "winterland")) {
 										  buf=g_fileloc.locate_file("winterland.wwf", TYPE_WORLD);
 										  if(!buf) assert(0);
 										  w= new World(buf);
 										  strcpy(hd.uses_world, "winterland");
-								}	
+								}
 								break;
 		  }
 
@@ -128,35 +128,14 @@ int Map::load_s2mf(const char* filen) {
 		  //  Don't know what this is!
 		  file.read(buffer, 10 );
 		  read+=10;
-		  
-		  int l, r, t, b;
+
+		  Field *f = fields;
 		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-						 file.read(&c, 1);
-						 read++;
-					    get_field(x,y)->set_pos(x,y,c);
-
-						 l=x-1;
-						 r=x+1;
-						 t=y-1;
-						 b=y+1;
-
-						 if(!x) l=hd.width-1;
-						 if(x==hd.width-1) r=0;
-						 if(!y) t=hd.height-1;
-						 if(y==hd.height-1) b=0;
-
-						 if(y&1) { // %1
-									get_field(x, y)->set_neighb(get_field(l, y), get_field(r, y),
-														 get_field(x, t),  get_field(r, t),
-														 get_field(x, b),  get_field(r, b));
-						 } else {
-									get_field(x, y)->set_neighb(get_field(l, y), get_field(r, y),
-														 get_field(l, t),  get_field(x, t),
-														 get_field(l, b),  get_field(x, b));
-
-						 }
-					 }
+				for(x=0; x<hd.width; x++, f++) {
+					file.read(&c, 1);
+					read++;
+					f->set_height(c);
+				}
 		  }
 
 		  ////				S E C T I O N		2: Landscape
@@ -182,8 +161,9 @@ int Map::load_s2mf(const char* filen) {
 		  file.read(buffer, 10);
 		  read+=10;
 
+		  f = fields;
 		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
+					 for(x=0; x<hd.width; x++, f++) {
 								file.read(&c, sizeof(unsigned char));
 								read++;
 								switch((int)c) {
@@ -211,7 +191,7 @@ int Map::load_s2mf(const char* filen) {
 										  case 0x13: c=4; break; // unknown texture!
 										  default: cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
 								}
-								get_field(x, y)->set_td(w->get_texture(c));
+								f->set_texd(w->get_texture(c));
 					 }
 		  }
 
@@ -239,8 +219,9 @@ int Map::load_s2mf(const char* filen) {
 		  file.read(buffer, 10);
 		  read+=10;
 
+		  f = fields;
 		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
+					 for(x=0; x<hd.width; x++, f++) {
 								file.read(&c, sizeof(unsigned char));
 								read++;
 								switch((int)c) {
@@ -268,7 +249,7 @@ int Map::load_s2mf(const char* filen) {
 										  case 0x13: c=4; break; // unknown texture!
 										  default: cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
 								}
-								get_field(x, y)->set_tr(w->get_texture(c));
+								f->set_texr(w->get_texture(c));
 					 }
 		  }
 
@@ -331,7 +312,7 @@ int Map::load_s2mf(const char* filen) {
 								read++;
 					 }
 		  }
-		  
+
 		  // S E C T I O N 6  -------- Ways
 		  // This describes where you can put ways
 		  // 0xc* == it's not possible to build ways here now
@@ -676,14 +657,10 @@ int Map::load_s2mf(const char* filen) {
 		  }
 
 		  file.close();
-		  delete buffer; 
+		  delete buffer;
 		  buffer=0;
 
-		for(y=0; y<hd.height; y++)
-			for(x=0; x<hd.width; x++)
-				get_field(x,y)->set_brightness();
 
-		  
 /*		  for(y=0; y<hd.height; y++) {
 					 for(x=0; x<hd.width; x++) {
 								if(a_MapGetField(x,y)->can_build_way== 0x80) {
@@ -692,7 +669,7 @@ int Map::load_s2mf(const char* filen) {
 								}
 
 								c=a_MapGetField(x,y)->bob;
-								
+
 								if(a_MapGetField(x,y)->takes_building==0x78) {
 										  switch(c) {
 													 case BOB_STONE1:
@@ -719,10 +696,10 @@ int Map::load_s2mf(const char* filen) {
 																break;
 										  }
 								}
-								
+
 								switch (c) {
 										  case BOB_NONE :
-													 // DO nothing 
+													 // DO nothing
 													 break;
 
 										  case BOB_PEBBLE1:
@@ -902,14 +879,14 @@ int Map::load_s2mf(const char* filen) {
 										  case BOB_SKELETON3:
 													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("skeleton3"));
 													 break;
-													 
+
 										  case BOB_CACTUS1:
 													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("cactus1"));
 													 break;
 										  case BOB_CACTUS2:
 													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("cactus2"));
 													 break;
-													 
+
 										  case BOB_BUSH1:
 													 a_FieldSetBob(a_MapGetField(x,y), a_BobsLoad("bush1"));
 													 break;

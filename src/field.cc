@@ -5,7 +5,7 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -25,44 +25,16 @@
  * a field like it is represented in the game
  */
 
-/** Field::Field(void) 
- *
- * Init. Trivial init (does nothing), because this
- * gets never called (no new, rather malloc)
- *
- * Args: None
- * Returns: Nothing
- */
-Field::Field(void) {
-
-}
-
-/** Field::~Field(void)
- *
- * Cleanups
- */
-Field::~Field(void) {
-}
-					 
-
-void Field::set_neighb(Field* mln, Field* mrn, Field* mtln, Field* mtrn, Field* mbln, Field* mbrn)
-{
-	ln=mln;
-	rn=mrn;
-	tln=mtln;
-	trn=mtrn;
-	bln=mbln;
-	brn=mbrn;
-}
 
 #define V3	(float)0.57735 // sqrt(1/3)
 #define LIGHT_FACTOR		75
 
-/** Field::set_brightness()
+/** Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
  *
- * Find the normal for this vertex and calculate its brightness from that
+ * Setup the field's brightness, based upon the slopes.
+ * Slopes are calulated as this field's height - neighbour's height.
  */
-void Field::set_brightness()
+void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 {
 	static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
 
@@ -80,16 +52,16 @@ void Field::set_brightness()
 #pragma warning(disable:4244)
 #endif
 		  normal = Vector(0, 0, FIELD_WIDTH);
-		  normal.x -= (height - ln->height) * HEIGHT_FACTOR;
-		  normal.x += (height - rn->height) * HEIGHT_FACTOR;
-		  normal.x -= (float)((height - tln->height) * HEIGHT_FACTOR) * COS60;
-		  normal.y -= (float)((height - tln->height) * HEIGHT_FACTOR) * SIN60;
-		  normal.x += (float)((height - trn->height) * HEIGHT_FACTOR) * COS60;
-		  normal.y -= (float)((height - trn->height) * HEIGHT_FACTOR) * SIN60;
-		  normal.x -= (float)((height - bln->height) * HEIGHT_FACTOR) * COS60;
-		  normal.y += (float)((height - bln->height) * HEIGHT_FACTOR) * SIN60;
-		  normal.x += (float)((height - brn->height) * HEIGHT_FACTOR) * COS60;
-		  normal.y += (float)((height - brn->height) * HEIGHT_FACTOR) * SIN60;
+		  normal.x -= l * HEIGHT_FACTOR;
+		  normal.x += r * HEIGHT_FACTOR;
+		  normal.x -= (float)(tl * HEIGHT_FACTOR) * COS60;
+		  normal.y -= (float)(tl * HEIGHT_FACTOR) * SIN60;
+		  normal.x += (float)(tr * HEIGHT_FACTOR) * COS60;
+		  normal.y -= (float)(tr * HEIGHT_FACTOR) * SIN60;
+		  normal.x -= (float)(bl * HEIGHT_FACTOR) * COS60;
+		  normal.y += (float)(bl * HEIGHT_FACTOR) * SIN60;
+		  normal.x += (float)(br * HEIGHT_FACTOR) * COS60;
+		  normal.y += (float)(br * HEIGHT_FACTOR) * SIN60;
 		  normal.normalize();
 #ifdef _MSC_VER
 #pragma warning(default:4244)
@@ -103,3 +75,4 @@ void Field::set_brightness()
 	else if (b > 127) b = 127;
 	brightness = (char)b;
 }
+

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
+ * Copyright (C) 2002 by Holger Rapp
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -76,12 +76,12 @@ void Map::set_size(uint w, uint h) {
 
 
 
-/** int Map::load_wlmf(const char* file) 
+/** int Map::load_wlmf(const char* file)
  *
  * this loads a given file as a widelands map file
  *
  * ***** PRIVATE FUNC ******
- * 
+ *
  * Args: 	file		filename to read
  * Returns: RET_OK or RET_FAILED
  */
@@ -106,23 +106,22 @@ int Map::load_wlmf(const char* file) {
 					 }
 		  }
 
-		  // ignore the player descriptions, probably the user has chnanged them. 
+		  // ignore the player descriptions, probably the user has chnanged them.
 		  // as long as the game knows how many players are around, everything is ok
 		  PlayerDescr pl;
 		  for(uint i=0; i<hd.nplayers; i++) {
 					 f.read(&pl, sizeof(pl));
 		  }
-		  
+
 		  set_size(hd.width, hd.height);
 
-		  
-		  // now, read in the fields, one at a time and init the map 
+
+		  // now, read in the fields, one at a time and init the map
 		  FieldDescr fd;
-		  int y;
+		  uint y;
 		  Pic *td, *tr;
-		  int l, r, t, b;
 		  for(y=0; y<hd.height; y++) {
-					 for(int x=0; x<hd.width; x++) {
+					 for(uint x=0; x<hd.width; x++) {
 								f.read(&fd, sizeof(fd));
 
 								// TEMP
@@ -139,37 +138,11 @@ int Map::load_wlmf(const char* file) {
 								// TEMP end
 
 								Field* f=get_field(x,y);
-								f->set_pos(x,y, fd.height);
-								f->set_tr(tr);
-								f->set_td(td);
-
-								l=x-1;
-								r=x+1;
-								t=y-1;
-								b=y+1;
-
-								if(!x) l=hd.width-1;
-								if(x==hd.width-1) r=0;
-								if(!y) t=hd.height-1;
-								if(y==hd.height-1) b=0;
-
-								if(y&1) { // %1
-										  get_field(x, y)->set_neighb(get_field(l, y), get_field(r, y),
-																get_field(x, t),  get_field(r, t),
-																get_field(x, b),  get_field(r, b));
-								} else {
-										  get_field(x, y)->set_neighb(get_field(l, y), get_field(r, y),
-																get_field(l, t),  get_field(x, t),
-																get_field(l, b),  get_field(x, b));
-
-								}
+								f->set_height(fd.height);
+								f->set_texr(tr);
+								f->set_texd(td);
 					 }
 		  }
-
-		for (y=0; y<hd.height; y++)
-			for (int x=0; x<hd.width; x++)
-				get_field(x,y)->set_brightness();
-
 
 		  return RET_OK;
 }
@@ -181,19 +154,73 @@ int Map::load_wlmf(const char* file) {
  * Args: file	filename to read
  * Returns: RET_OK or ERR_FAILED
  */
-int Map::load_map(const char* file) {
-		  if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX)) {
-					 // It ends like a wide lands map file. try to load
-					 // it as such 
-					 return load_wlmf(file);
-		  }
+int Map::load_map(const char* file)
+{
+	int ret;
 
-		  if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX)) {
-					 // it is a S2 Map file. load it as such
-					 return load_s2mf(file);
-		  }
-		  
-		  // Never here, or file is invalid (which can't happen)
-		  assert(0);
-		  return ERR_FAILED;
+	if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+	{
+		// It ends like a wide lands map file. try to load
+		// it as such
+		ret = load_wlmf(file);
+	}
+	else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+	{
+		// it is a S2 Map file. load it as such
+		ret = load_s2mf(file);
+	}
+	else
+	{
+		assert(0);
+		return ERR_FAILED;
+	}
+
+	if (ret != RET_OK)
+		return ret;
+
+	// post process the map
+	for(uint y=0; y<hd.height; y++)
+		for(uint x=0; x<hd.width; x++)
+			recalc_brightness(x, y);
+
+	return RET_OK;
+}
+
+/** Map::recalc_brightness(int fx, int fy)
+ *
+ * Fetch the slopes to neighbours and call the actual logic in Field
+ */
+void Map::recalc_brightness(int fx, int fy)
+{
+	Field *f, *n;
+	int dx, dy;
+	int l, r, tl, tr, bl, br;
+
+	f = get_field(fx, fy);
+
+	// left
+	get_ln(fx, fy, f, &dx, &dy, &n);
+	l = f->get_height() - n->get_height();
+
+	// right
+	get_rn(fx, fy, f, &dx, &dy, &n);
+	r = f->get_height() - n->get_height();
+
+	// top-left
+	get_tln(fx, fy, f, &dx, &dy, &n);
+	tl = f->get_height() - n->get_height();
+
+	// top-right
+	get_rn(dx, dy, n, &dx, &dy, &n);
+	tr = f->get_height() - n->get_height();
+
+	// bottom-left
+	get_bln(fx, fy, f, &dx, &dy, &n);
+	bl = f->get_height() - n->get_height();
+
+	// bottom-right
+	get_rn(dx, dy, n, &dx, &dy, &n);
+	br = f->get_height() - n->get_height();
+
+	f->set_brightness(l, r, tl, tr, bl, br);
 }

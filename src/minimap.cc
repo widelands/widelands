@@ -100,27 +100,25 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 		sy = 0;
 
 	ex = dst->get_w() - ofsx;
-	if (ex > _map->get_w())
+	if (ex > (int)_map->get_w())
 		ex = _map->get_w();
 	ey = dst->get_h() - ofsy;
-	if (ey > _map->get_h())
+	if (ey > (int)_map->get_h())
 		ey = _map->get_h();
 			
-   ushort clr;
+	ushort clr;
 	Field* f;
-   for(int y = sy; y < ey; y++)
+	for(int y = sy; y < ey; y++)
 	{
 		ushort *pix = dst->get_pixels() + (y+ofsy)*dst->get_pitch() + (sx+ofsx);
-			
-      f = _map->get_field(sx, y);
-		for(int x = sx; x < ex; x++)
-		{
 
+		f = _map->get_field(sx, y);
+		for(int x = sx; x < ex; x++, f++)
+		{
 			clr = *f->get_texd()->get_pixels();
 			clr = bright_up_clr2(clr, f->get_brightness());
 
 			*pix++ = clr;
-         f = _map->get_nfield();
 		}
 	}
 
@@ -141,7 +139,7 @@ bool MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
 
 	if (down) {
 		// make sure x/y is within range
-		if (x >= 0 && x < _map->get_w() && y > 0 && y < _map->get_h())
+		if (x >= 0 && x < (int)_map->get_w() && y > 0 && y < (int)_map->get_h())
 			warpview.call(x * FIELD_WIDTH, y * (FIELD_HEIGHT>>1));
 	}
 

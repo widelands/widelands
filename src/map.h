@@ -57,10 +57,10 @@ struct MapDescrHeader {
 		  char 	uses_world[32];
 		  ulong	world_checksum;
 		  ushort version;
-		  ushort	width;
-		  ushort	height;
-		  ushort	nplayers;
-} /* size: 1196 bytes */;
+		  ushort nplayers;
+		  uint width;
+		  uint height;
+} /* size: 1200 bytes */;
 
 
 /** struct PlayerDescr
@@ -108,84 +108,49 @@ class Bob;
  *
  * a field like it is represented in the game
  */
-#define FIELD_WIDTH   58
-#define FIELD_HEIGHT  58
-//#define FIELD_HEIGHT 48
-//#define FIELD_WIDTH 48
-#define HEIGHT_MAX    58
+#define FIELD_WIDTH 56
+#define FIELD_HEIGHT 64
+//#define FIELD_WIDTH   58
+//#define FIELD_HEIGHT  58
 #define HEIGHT_FACTOR 6
+
 class Field {
-		  Field(const Field&);
-		  Field& operator=(const Field&);
+	friend class Map;
+private:
+	uchar height;
+	char brightness;
+	Pic *texr, *texd;
 
-		  public:
-					 Field();
-					 ~Field(void);
+public:
+	inline uchar get_height() const { return height; }
 
-					 // setting funcs
-					 inline void set_pos(ushort x, ushort y, uchar h) {
-								xpos=x;
-								ypos=y;
-								height=h;
+	inline Pic *get_texr() const { return texr; }
+	inline Pic *get_texd() const { return texd; }
+	inline void set_texr(Pic *p) { texr = p; }
+	inline void set_texd(Pic *p) { texd = p; }
 
-								ypix=(((y+1)*FIELD_HEIGHT)>>1)-(h*HEIGHT_FACTOR);
+	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
+	inline char get_brightness() const { return brightness; }
 
-								if((y&1)) { // %2
-										  xpix=((((x<<1)+1)*FIELD_WIDTH)>>1);
-								} else {
-										  xpix=(x*FIELD_WIDTH);
-								}
-					 }
-					 inline void set_td(Pic* p) {
-								texd=p;
-					 }
-					 inline void set_tr(Pic* p) {
-								texr=p;
-					 }
-					 void set_neighb(Field *, Field *, Field *, Field *, Field *, Field *);
-
-					 // Getting funcs
-					 inline uchar get_height(void) const { return height; }
-					 inline int get_xpix(void) const { return xpix; }
-					 inline int get_ypix(void) const { return ypix; }
-
-					 inline int get_xpos() const { return xpos; }
-					 inline int get_ypos() const { return ypos; }
-
-					 // Get neigbor fields
-					 inline Field* get_ln(void) const { return ln; }
-					 inline Field* get_rn(void) const { return rn; }
-					 inline Field* get_tln(void) const { return tln; }
-					 inline Field* get_trn(void) const { return trn; }
-					 inline Field* get_bln(void) const { return bln; }
-					 inline Field* get_brn(void) const { return brn; }
-
-					 // get textures
-					 inline Pic* get_texr(void) { return texr; }
-					 inline Pic* get_texd(void) { return texd; }
-
-					 inline char get_brightness() const { return brightness; }
-					 void set_brightness();
-
-					 // ----- for class creature
-					 void remove_creature(Creature*) {};
-					 // -----
-
-		  private:
-					 Building* building;
-					 Bob* bob;
-					 Field *ln, *rn, *tln, *trn, *bln, *brn;
-
-					 ushort xpos, ypos;
-					 int	xpix, ypix;
-					 uchar height;
-					 char brightness;
-					 Pic *texr, *texd;
+private:
+	// note: you must reset this field's + neighbor's brightness when you change the height
+	// Map's set_height does this
+	inline void set_height(uchar h) { height = h; }
 };
 
 /** class Map
  *
  * This really identifies a map like it is in the game
+ *
+ * Odd rows are shifted FIELD_WIDTH/2 to the right. This means that moving
+ * up and down depends on the row numbers:
+ *               even   odd
+ * top-left      -1/-1   0/-1
+ * top-right      0/-1  +1/-1
+ * bottom-left   -1/+1   0/+1
+ * bottom-right   0/+1  +1/+1
+ *
+ * Warning: width and height must be even
  *
  * Depends: class File
  * 			class g_fileloc
@@ -207,41 +172,239 @@ class Map {
 					 inline const char* get_world(void) { return hd.uses_world; }
 					 inline const ushort get_version(void) { return hd.version; }
 					 inline ushort get_nplayers(void) { return hd.nplayers; }
-					 inline ushort get_w(void) { return hd.width; }
-					 inline ushort get_h(void) { return hd.height; }
+					 inline uint get_w(void) { return hd.width; }
+					 inline uint get_h(void) { return hd.height; }
 
-					 // THEY DON'T CHECK FOR OVERFLOWS!!
-					 inline Field* get_field(const uint x, const uint y) {
-								lfield=(y)*(hd.width) + (x);
-								return &fields[lfield];
-					 }
-					 inline Field* get_nfield(void) {
-								return &fields[++lfield];
-					 }
-					 inline Field* get_pfield(void) {
-								return &fields[--lfield];
-					 }
-					 inline Field* get_ffield(void) {
-								lfield=0;
-								return &fields[0];
-					 }
+					// Field logic
+					inline Field *get_field(const int x, const int y);
+					inline void normalize_coords(int *x, int *y);
+					inline Field *get_safe_field(int x, int y);
 
-					 // rewinding or forwarding widthithout change
-					 inline void nfield(void) { ++lfield; }
-					 inline void pfield(void) { --lfield; }
-					 inline void ffield(void) { lfield=0; }
-					 inline void set_cfield(const uint x, const uint y) { lfield=y*hd.width + x; }
+					inline void get_ln(const int fx, const int fy, int *ox, int *oy);
+					inline void get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_rn(const int fx, const int fy, int *ox, int *oy);
+					inline void get_rn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_tln(const int fx, const int fy, int *ox, int *oy);
+					inline void get_tln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_trn(const int fx, const int fy, int *ox, int *oy);
+					inline void get_trn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_bln(const int fx, const int fy, int *ox, int *oy);
+					inline void get_bln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_brn(const int fx, const int fy, int *ox, int *oy);
+					inline void get_brn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+
+					// Field/screen coordinates
+					inline void get_basepix(const int fx, const int fy, int *px, int *py);
+					inline void get_pix(const int fx, const int fy, Field * const f, int *px, int *py);
+					inline void get_pix(const int fx, const int fy, int *px, int *py);
 
 		  private:
 					 MapDescrHeader hd;
 					 World* w;
 					 Field* fields;
-					 uint lfield;
 
 					 // funcs
 					 int load_s2mf(const char*);
 					 int load_wlmf(const char*);
 					 void set_size(uint, uint);
+
+					 void recalc_brightness(int fx, int fy);
 };
+
+/*
+==============================================================================
+
+Field arithmetics
+
+==============================================================================
+*/
+
+inline Field *Map::get_field(const int x, const int y)
+{
+	return &fields[y*hd.width + x];
+}
+
+inline void Map::normalize_coords(int *x, int *y)
+{
+	if (*x < 0) {
+		do { *x += hd.width; } while(*x < 0);
+	} else {
+		while(*x >= (int)hd.width) { *x -= hd.width; }
+	}
+
+	if (*y < 0) {
+		do { *y += hd.height; } while(*y < 0);
+	} else {
+		while(*y >= (int)hd.height) { *y -= hd.height; }
+	}
+}
+
+inline Field *Map::get_safe_field(int x, int y)
+{
+	normalize_coords(&x, &y);
+	return &fields[y*hd.width + x];
+}
+
+
+/** get_ln, get_rn, get_tln, get_trn, get_bln, get_brn
+ *
+ * Calculate the coordinates and Field pointer of a neighboring field.
+ * Assume input coordinates are valid.
+ */
+inline void Map::get_ln(const int fx, const int fy, int *ox, int *oy)
+{
+	*oy = fy;
+	*ox = fx-1;
+	if (*ox < 0) *ox += hd.width;
+}
+
+inline void Map::get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
+{
+	*oy = fy;
+	*ox = fx-1;
+	*o = f-1;
+	if (*ox < 0) { *ox += hd.width; *o += hd.width; }
+}
+
+inline void Map::get_rn(const int fx, const int fy, int *ox, int *oy)
+{
+	*oy = fy;
+	*ox = fx+1;
+	if (*ox >= (int)hd.width) *ox = 0;
+}
+
+inline void Map::get_rn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
+{
+	*oy = fy;
+	*ox = fx+1;
+	*o = f+1;
+	if (*ox >= (int)hd.width) { *ox = 0; *o -= hd.width; }
+}
+
+// top-left: even: -1/-1  odd: 0/-1
+inline void Map::get_tln(const int fx, const int fy, int *ox, int *oy)
+{
+	*oy = fy-1;
+	*ox = fx;
+	if (*oy & 1) {
+		if (*oy < 0) { *oy += hd.height; }
+		(*ox)--;
+		if (*ox < 0) { *ox += hd.width; }
+	}
+}
+
+inline void Map::get_tln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
+{
+	*oy = fy-1;
+	*ox = fx;
+	*o = f-hd.width;
+	if (*oy & 1) {
+		if (*oy < 0) { *oy += hd.height; *o += hd.width*hd.height; }
+		(*ox)--;
+		(*o)--;
+		if (*ox < 0) { *ox += hd.width; *o += hd.width; }
+	}
+}
+
+// top-right: even: 0/-1  odd: +1/-1
+inline void Map::get_trn(const int fx, const int fy, int *ox, int *oy)
+{
+	*ox = fx;
+	if (fy & 1) {
+		(*ox)++;
+		if (*ox >= (int)hd.width) { *ox = 0; }
+	}
+	*oy = fy-1;
+	if (*oy < 0) { *oy += hd.height; }
+}
+
+inline void Map::get_trn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
+{
+	*ox = fx;
+	*o = f-hd.width;
+	if (fy & 1) {
+		(*ox)++;
+		(*o)++;
+		if (*ox >= (int)hd.width) { *ox = 0; *o -= hd.width; }
+	}
+	*oy = fy-1;
+	if (*oy < 0) { *oy += hd.height; *o += hd.width*hd.height; }
+}
+
+// bottom-left: even: -1/+1  odd: 0/+1
+inline void Map::get_bln(const int fx, const int fy, int *ox, int *oy)
+{
+	*oy = fy+1;
+	*ox = fx;
+	if (*oy >= (int)hd.height) { *oy = 0; }
+	if (*oy & 1) {
+		(*ox)--;
+		if (*ox < 0) { *ox += hd.width; }
+	}
+}
+
+inline void Map::get_bln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
+{
+	*oy = fy+1;
+	*ox = fx;
+	*o = f+hd.width;
+	if (*oy >= (int)hd.height) { *oy = 0; *o -= hd.width*hd.height; }
+	if (*oy & 1) {
+		(*ox)--;
+		(*o)--;
+		if (*ox < 0) { *ox += hd.width; *o += hd.width; }
+	}
+}
+
+// bottom-right: even: 0/+1  odd: +1/+1
+inline void Map::get_brn(const int fx, const int fy, int *ox, int *oy)
+{
+	*ox = fx;
+	if (fy & 1) {
+		(*ox)++;
+		if (*ox >= (int)hd.width) { *ox = 0; }
+	}
+	*oy = fy+1;
+	if (*oy >= (int)hd.height) { *oy = 0; }
+}
+
+inline void Map::get_brn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
+{
+	*ox = fx;
+	*o = f+hd.width;
+	if (fy & 1) {
+		(*ox)++;
+		(*o)++;
+		if (*ox >= (int)hd.width) { *ox = 0; *o -= hd.width; }
+	}
+	*oy = fy+1;
+	if (*oy >= (int)hd.height) { *oy = 0; *o -= hd.width*hd.height; }
+}
+
+
+/** Map::get_basepix(const int fx, const int fy, int *px, int *py)
+ *
+ * Calculate the on-screen position of the field without taking height
+ * into account.
+ */
+inline void Map::get_basepix(const int fx, const int fy, int *px, int *py)
+{
+	*py = fy * (FIELD_HEIGHT>>1);
+	*px = fx * FIELD_WIDTH;
+	if (fy & 1)
+		*px += FIELD_WIDTH>>1;
+}
+
+inline void Map::get_pix(const int fx, const int fy, Field * const f, int *px, int *py)
+{
+	get_basepix(fx, fy, px, py);
+	*py -= f->get_height() * HEIGHT_FACTOR;
+}
+
+// assumes valid fx/fy!
+inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
+{
+	get_pix(fx, fy, get_field(fx, fy), px, py);
+}
 
 #endif // __S__MAP_H

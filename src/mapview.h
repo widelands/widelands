@@ -49,6 +49,7 @@ public:
 
 	// Drawing
 	void draw(Bitmap *bmp, int ofsx, int ofsx);
+	void draw_ground(Bitmap *bmp, int effvpx, int effvpy);
 
 	// Event handling
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
@@ -64,8 +65,8 @@ private:
 	bool dragging;
 	int fselx, fsely; // field the mouse is over
 
-	void draw_field(Bitmap *, Field*);
-	void draw_polygon(Bitmap *, Field*, Field*, Field*, Pic*);
+	void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+			const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy);
 };
 
 

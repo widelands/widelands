@@ -68,71 +68,30 @@ Map_View::~Map_View(void) {
  */
 void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 {
-/*	g_gr.set_pixel(0, 0, 0);
-	for (int z=0; z<640*480; z++)
-		g_gr.set_npixel(0);*/
+//	bmp->fill_rect(0, 0, get_w(), get_h(), pack_rgb(255, 0, 0)); // TEST
 
 	// Prepare an improved bitmap which we can draw into without using ofsx/ofsy
-	int orig_vpx = vpx;
-	int orig_vpy = vpy;
+	int effvpx = vpx;
+	int effvpy = vpy;
 	Bitmap dst;
 
 	if (!dst.make_partof(bmp, ofsx, ofsy, get_w(), get_h(), &ofsx, &ofsy))
 		return;
 	if (ofsx < 0)
-		vpx -= ofsx;
+		effvpx -= ofsx;
 	if (ofsy < 0)
-		vpy -= ofsy;
+		effvpy -= ofsy;
 
-	// Now draw the view
-	Field *f;
-	static bool xtrans;
-	static bool ytrans;
-
-	f=map->get_ffield();
-	if( (f->get_rn()->get_xpix()-vpx >=0) && (f->get_bln()->get_xpix()-vpx < (int)g_gr.get_xres()) )
-		draw_field(&dst, f);
-
-	for(int i=(map->get_w()*(map->get_h()-1)); --i; )
-	{
-		f=map->get_nfield();
-		// X-check
-		if(f->get_rn()->get_xpix()-vpx <0) continue;
-		if(f->get_bln()->get_xpix()-vpx >= (int)g_gr.get_xres()) continue;
-		// Y-check
-		if(f->get_ypix()-vpy >= (int)g_gr.get_yres()) continue;
-		if(f->get_bln()->get_ypix()-vpy < 0 &&
-		   f->get_brn()->get_ypix()-vpy < 0) continue;
-		draw_field(&dst, f);
-	}
-
-	if(!xtrans && (uint)vpx> map->get_w()*FIELD_WIDTH-g_gr.get_xres())
-	{
-		int ovpx=vpx;
-		vpx-=map->get_w()*FIELD_WIDTH;
-		xtrans=true;
-		draw(&dst, 0, 0);
-		xtrans=false;
-		vpx=ovpx;
-	}
-
-	if(!ytrans && (uint)vpy> (((map->get_h()-1)*FIELD_HEIGHT)>>1)-g_gr.get_yres())
-	{
-		int ovpy=vpy;
-		vpy-=(((map->get_h()+1)*FIELD_HEIGHT)>>1);
-		ytrans=true;
-		draw(&dst, 0, 0);
-		ytrans=false;
-		vpy=ovpy;
-	}
-
-	vpx = orig_vpx;
-	vpy = orig_vpy;
+	draw_ground(&dst, effvpx, effvpy);
 
 	// Draw the fsel
-	f = map->get_field(fselx, fsely);
-	int x = f->get_xpix() - vpx;
-	int y = f->get_ypix() - vpy;
+	int x;
+	int y;
+
+	Field *f = map->get_field(fselx, fsely);
+	map->get_pix(fselx, fsely, f, &x, &y);
+	x -= effvpx;
+	y -= effvpy;
 
 	if (x < -(int)fsel.get_w())
 		x += map->get_w() * FIELD_WIDTH;
@@ -141,28 +100,136 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 
 	x -= fsel.get_w()>>1;
 	y -= fsel.get_h()>>1;
-	copy_pic(bmp, &fsel, x+ofsx, y+ofsx, 0, 0, fsel.get_w(), fsel.get_h());
+	copy_pic(&dst, &fsel, x, y, 0, 0, fsel.get_w(), fsel.get_h());
+
+	// debug: show fsel coordinates
+	char buf[16];
+	sprintf(buf, "%i %i", fselx, fsely);
+	Pic *p = g_fh.get_string(buf, 0);
+	copy_pic(bmp, p, ofsx+5, ofsy+5, 0, 0, p->get_w(), p->get_h());
+	delete p;
 }
 
-void Map_View::draw_field(Bitmap *dst, Field* f)
+/** Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
+ *
+ * Draw the ground only (i.e. the shaded triangles)
+ *
+ * Args: dst	bitmap to draw in
+ *       effvpx	viewpoint coordinates
+ */
+void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 {
-	// for plain terrain, this param order will avoid swapping in
-	// Graphic::render_triangle
-	draw_polygon(dst, f, f->get_bln(), f->get_brn(), f->get_texd());
-	draw_polygon(dst, f, f->get_rn(), f->get_brn(), f->get_texr());
+	int minfx, minfy;
+	int maxfx, maxfy;
+
+	minfx = (effvpx + (FIELD_WIDTH>>1)) / FIELD_WIDTH - 1; // hack to prevent negative numbers
+	minfy = effvpy / (FIELD_HEIGHT>>1);
+	maxfx = (effvpx + (FIELD_WIDTH>>1) + dst->get_w()) / FIELD_WIDTH;
+	maxfy = (effvpy + dst->get_h()) / (FIELD_HEIGHT>>1);
+	maxfy += 10; // necessary because of heights
+
+//	printf("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
+
+	int dx = maxfx - minfx + 1;
+	int dy = maxfy - minfy + 1;
+	int linear_fy = minfy;
+
+	while(dy--) {
+		int linear_fx = minfx;
+		int fx, fy;
+		int lx, ly;
+		Field *f, *fl;
+		int posx, posy;
+		int blposx, blposy;
+
+		// Use linear (non-wrapped) coordinates to calculate on-screen pos
+		map->get_basepix(linear_fx, linear_fy, &posx, &posy);
+		posx -= effvpx;
+		posy -= effvpy;
+
+		// Get linear bottom-left coordinate
+		ly = linear_fy+1;
+		lx = linear_fx - (ly&1);
+
+		map->get_basepix(lx, ly, &blposx, &blposy);
+		blposx -= effvpx;
+		blposy -= effvpy;
+
+		// Calculate safe (bounded) field coordinates and get field pointers
+		fx = linear_fx;
+		fy = linear_fy;
+		map->normalize_coords(&fx, &fy);
+		map->normalize_coords(&lx, &ly);
+
+		f = map->get_field(fx, fy);
+		fl = map->get_field(lx, ly);
+
+		int count = dx;
+		while(count--) {
+			Field *rf, *rfl;
+			int rposx, rblposx;
+
+			map->get_rn(fx, fy, f, &fx, &fy, &rf);
+			rposx = posx + FIELD_WIDTH;
+
+			map->get_rn(lx, ly, fl, &lx, &ly, &rfl);
+			rblposx = blposx + FIELD_WIDTH;
+
+			draw_field(dst, f, rf, fl, rfl, posx, rposx, posy, blposx, rblposx, blposy);
+
+			f = rf;
+			fl = rfl;
+			posx = rposx;
+			blposx = rblposx;
+		}
+
+		linear_fy++;
+	}
 }
 
-inline void Map_View::draw_polygon(Bitmap *dst, Field* l, Field* r, Field* m, Pic* pic)
+/* void Map_View::draw_field(Bitmap *dst, Field *f, Field *rf, Field *fl, Field *rfl,
+ *                           int posx, int rposx, int posy, int blposx, int rblposx, int blposy)
+ *
+ * Draw the two triangles associated with one field.
+ */
+void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+           const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy)
 {
-	Point p[3];
-	p[0] = Point(l->get_xpix()-vpx, l->get_ypix()-vpy);
-	p[1] = Point(r->get_xpix()-vpx, r->get_ypix()-vpy);
-	p[2] = Point(m->get_xpix()-vpx, m->get_ypix()-vpy);
-	int b[3];
-	b[0] = l->get_brightness();
-	b[1] = r->get_brightness();
-	b[2] = m->get_brightness();
-	render_triangle(dst, p, b, pic);
+	// points are ordered: right, left, bottom-right, bottom-left
+	// note that as long as render_triangle messes with the arrays, we need to
+	// copy them to a safe place first
+	Point p[4];
+	int b[4];
+
+	p[0] = Point(rposx, posy - rf->get_height()*HEIGHT_FACTOR);
+	p[1] = Point(posx, posy - f->get_height()*HEIGHT_FACTOR);
+	p[2] = Point(rblposx, blposy - rfl->get_height()*HEIGHT_FACTOR);
+	p[3] = Point(blposx, blposy - fl->get_height()*HEIGHT_FACTOR);
+
+	if ((p[2].y < 0 && p[3].y < 0) ||
+	    (p[0].y >= (int)dst->get_h() && p[1].y >= (int)dst->get_h()))
+		return;
+
+	b[0] = rf->get_brightness();
+	b[1] = f->get_brightness();
+	b[2] = rfl->get_brightness();
+	b[3] = fl->get_brightness();
+
+/*
+	b[0] += 20; // debug override for shading (make field borders visible)
+	b[3] -= 20;
+*/
+
+	// Render right triangle
+	Point ptmp[3];
+	int btmp[3];
+
+	memcpy(ptmp, p, sizeof(Point)*3);
+	memcpy(btmp, b, sizeof(int)*3);
+	render_triangle(dst, ptmp, btmp, f->get_texr());
+
+	// Render bottom triangle
+	render_triangle(dst, p+1, b+1, f->get_texd());
 }
 
 /** Map_View::set_viewpoint(int x, int y)
@@ -175,8 +242,8 @@ void Map_View::set_viewpoint(int x, int y)
 		return;
 
 	vpx=x; vpy=y;
-	while(vpx>FIELD_WIDTH*map->get_w())			vpx-=(FIELD_WIDTH*map->get_w());
-	while(vpy>(FIELD_HEIGHT*map->get_h())>>1)	vpy-=(FIELD_HEIGHT*map->get_h())>>1;
+	while(vpx>(int)(FIELD_WIDTH*map->get_w()))			vpx-=(FIELD_WIDTH*map->get_w());
+	while(vpy>(int)((FIELD_HEIGHT*map->get_h())>>1))	vpy-=(FIELD_HEIGHT*map->get_h())>>1;
 	while(vpx< 0)  vpx+=(FIELD_WIDTH*map->get_w());
 	while(vpy< 0)  vpy+=(FIELD_HEIGHT*map->get_h())>>1;
 
@@ -243,49 +310,58 @@ void Map_View::track_fsel(int mx, int my)
 {
 	// First of all, get a preliminary field coordinate based on the basic
 	// grid (not taking heights into account)
-	int fy = my + vpy;
-	fsely = (fy + (FIELD_HEIGHT>>2)) / (FIELD_HEIGHT>>1) - 1;
-	while(fsely >= map->get_h()) fsely -= map->get_h();
-	while(fsely < 0) fsely += map->get_h();
+	my += vpy;
+	fsely = (my + (FIELD_HEIGHT>>2)) / (FIELD_HEIGHT>>1) - 1;
 
-	int fx = mx + vpx;
-	fselx = fx;
+	mx += vpx;
+	fselx = mx;
 	if (fsely & 1)
 		fselx -= FIELD_WIDTH>>1;
 	fselx = (fselx + (FIELD_WIDTH>>1)) / FIELD_WIDTH;
-	while(fselx >= map->get_w()) fselx -= map->get_w();
-	while(fselx < 0) fselx += map->get_w();
+
+	map->normalize_coords(&fselx, &fsely);
 
 	// Now, fselx and fsely point to where we'd be if the field's height
 	// was 0.
 	// We now recursively move towards the correct field. Because height cannot
-	// be negative, we can only move to the bottom-left or bottom-right neighbour
-	Field *f = map->get_field(fselx, fsely);
+	// be negative, we only need to consider the bottom-left or bottom-right neighbour
 	int mapheight = map->get_h()*(FIELD_HEIGHT>>1);
-	//printf("%i %i\n", fx, fy);
+	int mapwidth = map->get_w()*FIELD_WIDTH;
+	Field *f;
+	int fscrx, fscry;
+
+	f = map->get_field(fselx, fsely);
+	map->get_pix(fselx, fsely, f, &fscrx, &fscry);
 
 	for(;;) {
-		Field *bln = f->get_bln();
-		Field *brn = f->get_brn();
+		Field *bln, *brn;
+		int blx, bly, brx, bry;
+		int blscrx, blscry, brscrx, brscry;
 		bool movebln, movebrn;
 		int fd, blnd, brnd;
 		int d2;
 
+		map->get_bln(fselx, fsely, f, &blx, &bly, &bln);
+		map->get_brn(fselx, fsely, f, &brx, &bry, &brn);
+
+		map->get_pix(blx, bly, bln, &blscrx, &blscry);
+		map->get_pix(brx, bry, brn, &brscrx, &brscry);
+
 		// determine which field the mouse is closer to on the y-axis
 		// bit messy because it has to be aware of map wrap-arounds
-		fd = fy - f->get_ypix();
-		d2 = fy - mapheight - f->get_ypix();
+		fd = my - fscry;
+		d2 = my - mapheight - fscry;
 		if (abs(d2) < abs(fd))
 			fd = d2;
 
-		blnd = bln->get_ypix() - fy;
-		d2 = bln->get_ypix() - (fy - mapheight);
+		blnd = blscry - my;
+		d2 = blscry - (my - mapheight);
 		if (abs(d2) < abs(blnd))
 			blnd = d2;
 		movebln = blnd < fd;
 
-		brnd = brn->get_ypix() - fy;
-		d2 = brn->get_ypix() - (fy - mapheight);
+		brnd = brscry - my;
+		d2 = brscry - (my - mapheight);
 		if (abs(d2) < abs(brnd))
 			brnd = d2;
 		movebrn = brnd < fd;
@@ -293,30 +369,47 @@ void Map_View::track_fsel(int mx, int my)
 		if (!movebln && !movebrn)
 			break;
 
-		//printf("  %i %i (%s %s)\n", f->get_xpix(), f->get_ypix(), movebln?"left":"", movebrn?"right":"");
-		//printf("   %i <> %i\n", bln->get_xpix(), brn->get_xpix());
+		// determine which field is closer on the x-axis
+		blnd = mx - blscrx;
+		d2 = mx - mapwidth - blscrx;
+		if (abs(d2) < abs(blnd))
+			blnd = d2;
 
-		// descend one field
-		if (brn->get_xpix()-fx < fx-bln->get_xpix()) {
-			if (movebrn)
+		brnd = brscrx - mx;
+		d2 = brscrx - (mx - mapwidth);
+		if (abs(d2) < abs(brnd))
+			brnd = d2;
+
+		if (brnd < blnd) {
+			if (movebrn) {
 				f = brn;
-			else if (movebln)
+				fselx = brx;
+				fsely = bry;
+				fscrx = brscrx;
+				fscry = brscry;
+			} else if (movebln) {
 				f = bln;
-			else
+				fselx = blx;
+				fsely = bly;
+				fscrx = blscrx;
+				fscry = blscry;
+			} else
 				break;
 		} else {
-			if (movebln)
+			if (movebln)  {
 				f = bln;
-			else if (movebrn)
+				fselx = blx;
+				fsely = bly;
+				fscrx = blscrx;
+				fscry = blscry;
+			} else if (movebrn) {
 				f = brn;
-			else
+				fselx = brx;
+				fsely = bry;
+				fscrx = brscrx;
+				fscry = brscry;
+			} else
 				break;
 		}
 	}
-
-	//printf("  %i %i\n", f->get_xpix(), f->get_ypix());
-
-	// Store the final field coordinates
-	fselx = f->get_xpos();
-	fsely = f->get_ypos();
 }
