@@ -48,10 +48,10 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title("Host a New Game");
 
-/*	b = new UIButton(this, 60, 250, 174, 24, 1, INTERNETGAME);
+	b = new UIButton(this, 60, 250, 174, 24, 1, INTERNETGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title("Play in Internet");
-*/
+
 	b = new UIButton(this, 60, 290, 174, 24, 0, CANCEL);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title("Back");
