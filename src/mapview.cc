@@ -38,7 +38,7 @@
 Map_View::Map_View(Map* m) {
 		  vpx=vpy=0;
 		  map=m;
-		  
+		
 		  // TEMP
 		  tmpg.set_size(50, 50);
 		  tmpg.set_clrkey(Graph::pack_rgb(51, 114, 44));
@@ -69,17 +69,37 @@ Map_View::~Map_View(void) {
  */
 void Map_View::draw(void) {
 		  Field *f;
+		  static bool xtrans;
+		  static bool ytrans;
 		  
-		  for(int y=1; y<map->get_h()-1; y++) {
-					 for(int x=1; x<map->get_w()-1; x++) {
-								f=map->get_field(x,y);
-								// X-check
-								if(f->get_rn()->get_xpix()-vpx <0) continue;
-								if(f->get_bln()->get_xpix()-vpx >= (int)g_gr.get_xres()) continue;
-								draw_field(f); 
-					 }
+		  f=map->get_ffield();
+		  if( (f->get_rn()->get_xpix()-vpx >=0) && (f->get_bln()->get_xpix()-vpx < (int)g_gr.get_xres()) ) 
+					 draw_field(f); 
+		  for(int i=(map->get_w()*(map->get_h()-1)); --i; )  {
+					 f=map->get_nfield();
+					 // X-check
+					 if(f->get_rn()->get_xpix()-vpx <0) continue;
+					 if(f->get_bln()->get_xpix()-vpx >= (int)g_gr.get_xres()) continue;
+					 draw_field(f); 
+		  } 
+
+		  if(!xtrans && (uint)vpx> map->get_w()*FIELD_WIDTH-g_gr.get_xres()) {
+					 int ovpx=vpx;
+					 vpx-=map->get_w()*FIELD_WIDTH;
+					 xtrans=true;
+					 draw();
+					 xtrans=false;
+					 vpx=ovpx; 
 		  }
 
+		  if(!ytrans && (uint)vpy> map->get_h()*(FIELD_HEIGHT>>1)-g_gr.get_yres()) {
+					 int ovpy=vpy;
+					 vpy-=map->get_h()*(FIELD_HEIGHT>>1);
+					 ytrans=true;
+					 draw();
+					 ytrans=false;
+					 vpy=ovpy; 
+		  }
 }
 					 
 void Map_View::draw_field(Field* f) {
@@ -92,7 +112,6 @@ void Map_View::draw_field(Field* f) {
 #define MIN2(a, b) (a<b?a:b<a?b:a)
 #define MIN3(a, b, c) (MIN2(MIN2(a,b),MIN2(b,c)))
 
-#include <iostream>
 void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 		  int ystart, ystop;
 		  long xstart, xstop;
@@ -105,18 +124,11 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 		  // ycheck
 		  if(ystop < 0) return; 
 		  if(ystart >= (int)g_gr.get_yres()) return;
-		
-		  // TEMP
-		  // if(ystop >= (int) g_gr.get_yres()) return;
-		  
 					 
 		  get_starts(l,r, m, ystart, ystop);
-					 
 		  ystop= ystop>= (int)g_gr.get_yres() ? (int)(g_gr.get_yres())-1 : ystop;
 					 
 		  for(y_d= ystart<0 ? 0 : ystart; y_d<ystop; y_d++) {
-					 assert(y_d>=0); 
-
 					 xstart=(long)g_starts[y_d-ystart].border1;
 					 xstop=(long)g_stops[y_d-ystart].border1;
 
@@ -129,9 +141,9 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 					 xstart= xstart<0 ? 0 : xstart;
 					 xstop= xstop>= (int)g_gr.get_xres() ? (int)(g_gr.get_xres())-1 : xstop;
 								
-					 
+					 g_gr.set_cpixel(xstart-1, y_d);
 					 for(x_d=xstart; x_d<xstop; x_d++) {
-								g_gr.set_pixel(x_d, y_d, p->get_pixel(0, 0));
+								g_gr.set_npixel(p->get_fpixel());
 					 }
 
 		  }
@@ -178,11 +190,12 @@ void Map_View::get_starts(const Field* l, const Field* r, const Field* m, int ys
 void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int ystart) {
 		  long slope=0, x;
 		  long count=0;   
-
+		  int ystop;
 
 		  // check, if this saves cycles
-		  if(r->get_ypix()-vpy <0 && l->get_ypix()-vpy <0) return;
-		  if(r->get_ypix()-vpy >= (int)g_gr.get_yres() && l->get_ypix()-vpy >= (int)g_gr.get_yres()) return;
+		  // no, it doesn't
+//		  if(r->get_ypix()-vpy <0 && l->get_ypix()-vpy <0) return;
+//		  if(r->get_ypix()-vpy >= (int)g_gr.get_yres() && l->get_ypix()-vpy >= (int)g_gr.get_yres()) return;
 
 		  slope=((l->get_xpix()-vpx)-(r->get_xpix()-vpx))<<16;
 
@@ -191,18 +204,26 @@ void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int yst
 		  } else { 
 					 slope=0;
 		  }
-
 		  
 		  x=(r->get_xpix()-vpx)<<16; 
 		  count=r->get_ypix()-vpy;
 
 		  if(count-ystart<0) { x+=slope*(ystart-count); count=ystart; }
+		  ystop=l->get_ypix()-vpy < (int) g_gr.get_yres()  ? l->get_ypix()-vpy : g_gr.get_yres();
 
-		  while(count < l->get_ypix()-vpy) {
+		  while(count < ystop) {
 					 start[count-ystart].border1=x>>16;
 					 x+=slope;
 					 count++; 
 		  }
 
 }
+					 
 
+void Map_View::set_viewpoint(uint x,  uint y) { 
+		  vpx=x; vpy=y; 
+		  while(vpx>FIELD_WIDTH*map->get_w())    	  vpx-=(FIELD_WIDTH*map->get_w());
+		  while(vpy>(FIELD_HEIGHT*map->get_h())/2)  vpy-=(FIELD_HEIGHT*map->get_h())/2;
+		  while(vpx< 0)  vpx+=(FIELD_WIDTH*map->get_w());
+		  while(vpy< 0)  vpy+=(FIELD_HEIGHT*map->get_h())/2;
+}

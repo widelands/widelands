@@ -93,7 +93,11 @@ void single_player_menue(void) {
 					 g_ui.delete_window(win);
 //#warning "You'll run into problems here!"
 					 Game g;
+#ifdef WIN32
 					 g.run("Eden.wmf", 0);
+#else
+					 g.run("/home/sirver/.widelands/Eden.wmf", 0);
+#endif
 					 
 		  }
 		  else if(*brunc) {

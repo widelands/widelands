@@ -41,13 +41,8 @@ class Map_View {
 					 ~Map_View(void);
 
 					 // Function to set the viewpoint
-					 void set_viewpoint(uint x,  uint y) { 
-											 vpx=x; vpy=y; 
-								  while(vpx>FIELD_WIDTH*map->get_w())    	  vpx-=(FIELD_WIDTH*map->get_w());
-								  while(vpy>(FIELD_HEIGHT*map->get_h())/2)  vpy-=(FIELD_HEIGHT*map->get_h())/2;
-								  while(vpx< 0)  vpx+=(FIELD_WIDTH*map->get_w());
-								  while(vpy< 0)  vpy+=(FIELD_HEIGHT*map->get_h())/2;
-					 }
+					 void set_viewpoint(uint,  uint); 
+					
 											 
 					 void set_rel_viewpoint(int x, int y) { set_viewpoint(vpx+x,  vpy+y); }
 
@@ -65,6 +60,7 @@ class Map_View {
 					 void draw_polygon(Field*, Field*, Field*, Pic*);
 					 void get_starts(const Field*, const Field*, const Field*, int, int);
 					 void scanconv(const Field*, const Field*, __starts*, int ystart);
+					 
 					 Pic tmpg, tmpr;
 };
 
