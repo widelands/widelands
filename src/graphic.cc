@@ -173,21 +173,13 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture, int 
 
       ushort *pix = dst->get_pixels() + (points[0].y + y)*dst->get_pitch() + start;
       ushort *texp = texture->get_pixels() + ((points[0].y + y+vpy) % texture->get_h())*texture->get_w();
-      uint tp = start - starts[y].x;
 
-      int counter=0;
-      for(int cnt = start; cnt <=end;  cnt++)
+		int txend = end + vpx;
+      for(int tx = start + vpx; tx <= txend; tx++)
       {
          //*pix++ = pack_rgb((b >> 16) + 128, (b >> 16) + 128, (b >> 16) + 128); // shading test
-         *pix++ = bright_up_clr2(texp[(start+counter+vpx)%texture->get_w()], b >> 16);
+         *pix++ = bright_up_clr2(texp[tx & 63], b >> 16);
          b += bd;
-         tp++;
-         ++counter;
-         
-         // replacing tp %= texture->w with the following conditional
-         // makes this _entire function_ two times faster on my Athlon
-         if (tp == texture->get_w())
-            tp = 0;
       }
    }
 }

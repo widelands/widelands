@@ -98,7 +98,7 @@ endif
 endif
 
 ifdef OPTIMIZE
-ADD_CFLAGS += -O3
+ADD_CFLAGS += -O3 -march=pentiumpro -mcpu=pentiumpro
 endif
 
 ifdef DEBUG
