@@ -773,50 +773,51 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 }
 
 /*
-===============
-RenderTargetImpl::renderminimap
+ ===============
+ RenderTargetImpl::renderminimap
 
-Renders a minimap into the topleft of the clipping window
-===============
-*/
-void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx, uint fy)
+ Renders a minimap into the topleft of the clipping window
+ ===============
+ */
+void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx, uint fy, int vp_x, int vp_y, char flags)
 {
-	Rect rc;
+    Rect rc;
 
-	pt.x += m_offset.x;
-	pt.y += m_offset.y;
+    pt.x += m_offset.x;
+    pt.y += m_offset.y;
 
-	rc.x = 0;
-	rc.y = 0;
-	rc.w = mri->egbase->get_map()->get_width();
-	rc.h = mri->egbase->get_map()->get_height();
+    rc.x = 0;
+    rc.y = 0;
+    rc.w = mri->egbase->get_map()->get_width();
+    rc.h = mri->egbase->get_map()->get_height();
 
-/*
- * I don't know for what this is. i guess it's no longer needed for In game minimaprendering.
- * But it's a nuicance for the editor. that's why it's commented.
- *
-	if (pt.x < 0) {
-		rc.x -= pt.x;
-		rc.w += pt.x;
-		pt.x = 0;
-	}
-	if (pt.x + rc.w > m_rect.w)
-		rc.w = m_rect.w - pt.x;
-	if (rc.w <= 0)
-		return;
 
-	if (pt.y < 0) {
-		rc.y -= pt.y;
-		rc.w += pt.y;
-		pt.y = 0;
-	}
-	if (pt.y + rc.h > m_rect.h)
-		rc.h = m_rect.h - pt.y;
-	if (rc.h <= 0)
-		return;
-*/
+    /*
+     * I don't know for what this is. i guess it's no longer needed for In game minimaprendering.
+     * But it's a nuicance for the editor. that's why it's commented.
+     *
+     if (pt.x < 0) {
+         rc.x -= pt.x;
+         rc.w += pt.x;
+         pt.x = 0;
+     }
+     if (pt.x + rc.w > m_rect.w)
+     rc.w = m_rect.w - pt.x;
+     if (rc.w <= 0)
+     return;
 
-	m_bitmap->draw_minimap(Point(pt.x + m_rect.x, pt.y + m_rect.y), mri, rc, fx, fy);
+     if (pt.y < 0) {
+         rc.y -= pt.y;
+         rc.w += pt.y;
+         pt.y = 0;
+     }
+     if (pt.y + rc.h > m_rect.h)
+     rc.h = m_rect.h - pt.y;
+     if (rc.h <= 0)
+     return;
+     */
+
+    m_bitmap->draw_minimap(Point(pt.x + m_rect.x, pt.y + m_rect.y), mri, rc, fx, fy, vp_x, vp_y, flags);
 }
 
 

@@ -292,8 +292,8 @@ public:
 	virtual int get_h() const = 0;
 
 	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr) = 0;
-   virtual void fill_rect(int x, int y, int w, int h, RGBColor clr) = 0;
-   virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
+        virtual void fill_rect(int x, int y, int w, int h, RGBColor clr) = 0;
+        virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
 	virtual void clear() = 0;
 
 	virtual void blit(int dstx, int dsty, uint picture) = 0;
@@ -302,7 +302,7 @@ public:
 	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy) = 0;
 
 	virtual void rendermap(const MapRenderInfo* mri, Point viewofs) = 0;
-	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint, uint) = 0;
+	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint, uint, int vp_x, int vp_y, char flags) = 0;
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs) = 0;
 	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,

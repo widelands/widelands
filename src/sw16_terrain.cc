@@ -23,6 +23,7 @@ Texture implementation and terrain rendering for the 16-bit software renderer.
 #include "widelands.h"
 #include "graphic.h"
 #include "map.h"
+#include "player.h"
 #include "world.h"
 
 #include "sw16_graphic.h"
@@ -239,15 +240,66 @@ Texture::~Texture ()
 
 
 /** Texture::get_minimap_color
- *
- * Return the colour to be used in the minimap.
- */
-unsigned short Texture::get_minimap_color(char shade) const
+*
+* Return the colour to be used in the minimap.
+* Flags are bits: 1. mapcolor, 2. owner, 3. flags, 4. roads, 5. buildings
+*/
+unsigned short Texture::get_minimap_color(char shade, const MapRenderInfo* mri, ushort p_x, ushort p_y, uchar owner, char flags)
 {
-	uchar clr = m_pixels[0]; // just use the top-left pixel
-	uint table = (uchar)shade;
-	
-	return (m_colormap->get_colormap())[clr | table << 8];
+    uchar clr = m_pixels[0]; // just use the top-left pixel
+    uint table = (uchar)shade;
+    ushort pixelcolor = 0;
+
+    // the different options can be combined
+
+    if (flags & 0x01) {
+        // show mapcolor
+        pixelcolor = (m_colormap->get_colormap())[clr | table << 8];
+    }
+
+    if (flags & 0x02) {
+        // show owner
+        if (owner > 0) {
+            // if it's owned by someone, get the player's color
+            Player *ownerplayer = mri->egbase->get_player(owner);
+            const RGBColor* playercolors = ownerplayer->get_playercolor();
+
+            // and add the player's color to the old color
+            pixelcolor = add_color(pixelcolor, playercolors[3].pack16());
+        }
+        // otherwise no change, just keep the old color
+    }
+
+    if (flags & 0x04) {
+        // show flags
+        if (mri->egbase->get_map()->find_immovables(Coords(p_x, p_y), 0, 0, FindImmovableType(Map_Object::FLAG)))
+            pixelcolor = 0xFFFF;
+    }
+
+    if (flags & 0x08) {
+        // show roads
+        if (mri->egbase->get_map()->find_immovables(Coords(p_x, p_y), 0, 0, FindImmovableType(Map_Object::ROAD)))
+            pixelcolor = add_color(pixelcolor, 0xFFFF);
+    }
+
+    if (flags & 0x10) {
+        // show buildings
+        if (mri->egbase->get_map()->find_immovables(Coords(p_x, p_y), 0, 0, FindImmovableType(Map_Object::BUILDING)))
+            pixelcolor = 0xFFFF;
+    }
+
+    return pixelcolor;
+}
+
+/** Texture::add_color
+*
+* Adds a given color to a pixel and returns that for 16-Bit colors.
+*/
+unsigned short Texture::add_color(ushort old_pixel, ushort aColor)
+{
+    return (((((old_pixel & 0xF800) + (aColor & 0xF800))/2) & 0xF800) +
+            ((((old_pixel & 0x07E1) + (aColor & 0x07E1))/2) & 0x07E1) +
+            ((((old_pixel & 0x001F) + (aColor & 0x001F))/2) & 0x001F));
 }
 
 
