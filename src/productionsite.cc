@@ -79,12 +79,26 @@ struct ProductionAction {
 		actProduce, // sparem1 = ware to produce. the worker carries it outside
 		actCheck,   // sparam1 = check if the given input ware is available
 		actMine,    // iparam1 = mineXXX type to mine for
+		actCall,		// sparam1 = name of sub-program
+		actSet,		// iparam1 = flags to set, iparam2 = flags to unset
 	};
 
 	enum {
 		mineCoal,
 		mineGold,
 		mineIron
+	};
+
+	enum {
+		// When pfCatch is set, failures of the current program cause the
+		// termination of this program, but the parent program will continue
+		// to run.
+		// When pfCatch is not set, the parent program will fail as well.
+		pfCatch = (1 << 0),
+
+		// Ending this program has no effect on productivity statistics.
+		// However, child programs can still affect statistics
+		pfNoStats = (1 << 1),
 	};
 
 	Type        type;
@@ -245,6 +259,44 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			else
 				throw wexception("Resource must be gold, coal or iron (not '%s')",
 					cmd[1].c_str());
+		} else if (cmd[0] == "call") {
+			if (cmd.size() != 2)
+				throw wexception("Usage: call <program>");
+
+			act.type = ProductionAction::actCall;
+
+			act.sparam1 = cmd[1];
+		} else if (cmd[0] == "set") {
+			if (cmd.size() < 2)
+				throw wexception("Usage: set <+/-flag>...");
+
+			act.type = ProductionAction::actSet;
+
+			act.iparam1 = act.iparam2 = 0;
+
+			for(uint i = 1; i < cmd.size(); ++i) {
+				std::string name;
+				int flag;
+				char c = cmd[i][0];
+
+				name = cmd[i].substr(1);
+				if (name == "catch")
+					flag = ProductionAction::pfCatch;
+				else if (name == "nostats")
+					flag = ProductionAction::pfNoStats;
+				else
+					throw wexception("Unknown flag name '%s'", name.c_str());
+
+				if (c == '+')
+					act.iparam1 |= flag;
+				else if (c == '-')
+					act.iparam2 |= flag;
+				else
+					throw wexception("+/- expected in front of flag (%s)", cmd[i].c_str());
+			}
+
+			if (act.iparam1 & act.iparam2)
+				throw wexception("Ambiguous set command");
 		} else
 			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
 
@@ -393,9 +445,6 @@ ProductionSite::ProductionSite(ProductionSite_Descr* descr)
 
 	m_fetchfromflag = 0;
 
-	m_program = 0;
-	m_program_ip = 0;
-	m_program_phase = 0;
 	m_program_timer = false;
 	m_program_time = 0;
 	m_statistics_changed = true;
@@ -651,20 +700,25 @@ Advance the program state if applicable.
 */
 void ProductionSite::act(Game* g, uint data)
 {
-	if (m_program_timer && (int)(g->get_gametime() - m_program_time) >= 0) {
-		if (!m_program)
-		{
-			m_program = get_descr()->get_program("work");
-			m_program_ip = 0;
-			m_program_phase = 0;
-		}
+	Building::act(g, data);
 
-		if (m_program_ip >= m_program->get_size()) {
-			program_end(g, true);
+	if (m_program_timer && (int)(g->get_gametime() - m_program_time) >= 0) {
+		m_program_timer = false;
+
+		if (!m_program.size())
+		{
+			program_start(g, "work");
 			return;
 		}
 
-		m_program_timer = false;
+		State* state = get_current_program();
+
+		assert(state);
+
+		if (state->ip >= state->program->get_size()) {
+			program_end(g, true);
+			return;
+		}
 
 		if (m_anim != get_descr()->get_idle_anim()) {
 			// Restart idle animation, which is the default
@@ -673,7 +727,6 @@ void ProductionSite::act(Game* g, uint data)
 
 		program_act(g);
 	}
-	Building::act(g, data);
 }
 
 
@@ -689,9 +742,10 @@ Post: (Potentially indirect) scheduling for the next step has been done.
 */
 void ProductionSite::program_act(Game* g)
 {
-	const ProductionAction* action = m_program->get_action(m_program_ip);
+	State* state = get_current_program();
+	const ProductionAction* action = state->program->get_action(state->ip);
 
-	molog("PSITE: program %s#%i\n", m_program->get_name().c_str(), m_program_ip);
+	molog("PSITE: program %s#%i\n", state->program->get_name().c_str(), state->ip);
 
 	switch(action->type) {
 		case ProductionAction::actSleep:
@@ -900,6 +954,23 @@ void ProductionSite::program_act(Game* g)
 			m_program_time = schedule_act(g, 10);
 			return;
 		}
+
+		case ProductionAction::actCall:
+			molog("  Call %s\n", action->sparam1.c_str());
+
+			program_step();
+			program_start(g, action->sparam1);
+			return;
+
+		case ProductionAction::actSet:
+			molog("  Set %08X, unset %08X\n", action->iparam1, action->iparam2);
+
+			state->flags = (state->flags | action->iparam1) & ~action->iparam2;
+
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, 10);
+			return;
 	}
 }
 
@@ -934,13 +1005,17 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 {
 	assert(w == m_worker);
 
-	// If unsuccessful: Check if we need to abort current program
-	if (!success && m_program && m_program_ip < m_program->get_size())
-	{
-		const ProductionAction* action = m_program->get_action(m_program_ip);
+	State* state = get_current_program();
 
-		if (action->type == ProductionAction::actWorker)
+	// If unsuccessful: Check if we need to abort current program
+	if (!success && state)
+	{
+		const ProductionAction* action = state->program->get_action(state->ip);
+
+		if (action->type == ProductionAction::actWorker) {
 			program_end(g, false);
+			state = 0;
+		}
 	}
 
 	// Default actions first
@@ -964,20 +1039,20 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 	}
 
 	// Start program if we haven't already done so
-	if (!m_program)
+	if (!state)
 	{
 		m_program_timer = true;
 		m_program_time = schedule_act(g, 10);
 	}
-	else if (m_program_ip < m_program->get_size())
+	else if (state->ip < state->program->get_size())
 	{
-		const ProductionAction* action = m_program->get_action(m_program_ip);
+		const ProductionAction* action = state->program->get_action(state->ip);
 
 		if (action->type == ProductionAction::actWorker) {
-			if (m_program_phase == 0)
+			if (state->phase == 0)
 			{
 				w->start_task_program(g, action->sparam1);
-				m_program_phase++;
+				state->phase++;
 				return true;
 			}
 			else
@@ -1007,8 +1082,36 @@ Advance the program to the next step, but does not schedule anything.
 */
 void ProductionSite::program_step()
 {
-	m_program_ip++;
-	m_program_phase = 0;
+	State* state = get_current_program();
+
+	assert(state);
+
+	state->ip++;
+	state->phase = 0;
+}
+
+
+/*
+===============
+ProductionSite::program_start
+
+Push the given program onto the stack and schedule acting.
+===============
+*/
+void ProductionSite::program_start(Game* g, std::string name)
+{
+	molog("ProductionSite: program start: %s\n", name.c_str());
+
+	State state;
+
+	state.program = get_descr()->get_program(name);
+	state.ip = 0;
+	state.phase = 0;
+
+	m_program.push_back(state);
+
+	m_program_timer = true;
+	m_program_time = schedule_act(g, 10);
 }
 
 
@@ -1026,11 +1129,26 @@ void ProductionSite::program_end(Game* g, bool success)
 {
 	molog("ProductionSite: program ends (%s)\n", success ? "success" : "failure");
 
-	m_program = 0;
-	m_program_ip = 0;
-	m_program_phase = 0;
+	assert(m_program.size());
+
+	bool dostats = true;
+
+	if (get_current_program()->flags & ProductionAction::pfNoStats)
+		dostats = false;
+
+	do
+	{
+		bool caught = get_current_program()->flags & ProductionAction::pfCatch;
+
+		m_program.pop_back();
+
+		if (caught)
+			break;
+	} while(m_program.size());
+
+	if (dostats)
+		add_statistics_value(success);
+
 	m_program_timer = true;
 	m_program_time = schedule_act(g, 10);
-
-	add_statistics_value(success);
 }

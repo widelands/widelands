@@ -103,12 +103,21 @@ protected:
 		UIWindow** registry);
 
 private:
+	struct State {
+		const ProductionProgram* program;	// currently running program
+		int                      ip;			// instruction pointer
+		int                      phase;		// micro-step index (instruction dependent)
+		uint                     flags;		// pfXXX flags
+	};
+
 	void request_worker(Game* g);
 	static void request_worker_callback(Game* g, Request* rq, int ware,
 		Worker* w, void* data);
 
+	State* get_current_program() { return m_program.size() ? &*m_program.rbegin() : 0; }
 	void program_act(Game* g);
 	void program_step();
+	void program_start(Game* g, std::string name);
 	void program_end(Game* g, bool success);
 	void add_statistics_value(bool val);
 
@@ -120,12 +129,8 @@ private:
 
 	int m_fetchfromflag; // # of items to fetch from flag
 
-	const ProductionProgram* m_program;       // currently running program
-	int                      m_program_ip;    // instruction pointer
-	int                      m_program_phase; // micro-step index
-																						// (instruction dependent)
-	bool                     m_program_timer; // execute next instruction based
-																						// on pointer
+	std::vector<State>       m_program;			// program stack
+	bool                     m_program_timer; // execute next instruction based on pointer
 	int                      m_program_time;	// timer time
 
 	std::vector<WaresQueue*> m_input_queues; //  input queues for all inputs
