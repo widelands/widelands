@@ -67,7 +67,7 @@ void Widelands_Map_Terrain_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
             Field* f=map->get_field(Coords(x,y));
             terr=fr->Unsigned8();
             terd=fr->Unsigned8();
-            log("[Map Loader] Setting terrain of (%i,%i) to '%s','%s'\n", x, y, smap[terr]->get_name(), smap[terd]->get_name());
+           // log("[Map Loader] Setting terrain of (%i,%i) to '%s','%s'\n", x, y, smap[terr]->get_name(), smap[terd]->get_name());
             f->set_terrainr(smap[terr]);
             f->set_terraind(smap[terd]);
          }

@@ -68,7 +68,7 @@ int Widelands_Map_Loader::preload_map() {
  * Load the complete map and make sure that it runs without problems
  */
 int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase) {
- 
+
    // now, load the world, load the rest infos from the map
    m_map->load_world();
    // Postload the world which provides all the immovables found on a map

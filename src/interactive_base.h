@@ -60,7 +60,10 @@ class Interactive_Base : public UIPanel {
       // called to recalc all stuff 
       // after a map change
       void map_changed(void);
-   
+  
+      // turn recalculation off (for map and game loading)
+      void never_recalculate(bool t) { m_never_recalculate=t; }
+
       // logic handler func
       void think();
 
@@ -98,6 +101,7 @@ class Interactive_Base : public UIPanel {
 		uint					m_avg_usframetime;	// in microseconds!
 
       UIUniqueWindowRegistry m_minimap;
+      bool              m_never_recalculate;
 
    protected:
       void toggle_minimap(void);
@@ -112,6 +116,7 @@ class Interactive_Base : public UIPanel {
       void unset_fsel_picture(void) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, "pics/fsel.png", RGBColor(0,0,255)); }
 
 		virtual void draw_overlay(RenderTarget* dst);
+      bool              do_never_recalculate(void) { return m_never_recalculate; }
 
       // map rendering stuff. this is still protected since this is
       // used quite often

@@ -94,7 +94,7 @@ void Main_Menu_Save_Map::clicked(int id) {
       }
       delete wms;
    }
-   delete this;
+   die();
 }
 
 

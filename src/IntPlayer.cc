@@ -591,6 +591,8 @@ Recalculate build help and borders for the given field
 */
 void Interactive_Player::recalc_overlay(FCoords fc)
 {
+   if(do_never_recalculate()) return;
+   
    // Only do recalcs after maprenderinfo has been setup
 	if (!m_maprenderinfo.egbase)
 		return;

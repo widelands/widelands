@@ -62,6 +62,8 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
    m_mapview=0;
    m_mm=0;
 
+   m_never_recalculate=false;
+
    set_fieldsel_radius(0);
    unset_fsel_picture(); // set default fsel
 }

@@ -137,7 +137,7 @@ void Main_Menu_New_Map::button_clicked(int n) {
                  // Tell the user interface that the map has changed
                  m_parent->map_changed();
 
-                 delete this;
+                 die();
                  return ; 
               }
    }

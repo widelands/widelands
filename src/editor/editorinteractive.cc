@@ -143,6 +143,8 @@ Recalculate build help and borders for the given field
 */
 void Editor_Interactive::recalc_overlay(FCoords fc)
 {
+   if(do_never_recalculate()) return;
+   
    Map* map = m_maprenderinfo.egbase->get_map();
 
    // Only do recalcs after maprenderinfo has been setup

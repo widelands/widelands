@@ -97,9 +97,14 @@ void Main_Menu_Load_Map::clicked(int id) {
 //   realname+=S2MF_SUFFIX; 
    Map_Loader* ml=m_map->get_correct_loader(realname.c_str());
 
+   // Ignore user interface for now, it is not valid with map 
+   // and is therefore not to update
+   m_parent->never_recalculate(true);
+   
    try {
       //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
       ml->preload_map();
+
       ml->load_map_complete(m_parent->get_editor());
    }  catch(std::exception& exe) {
       // This really shoudn't fail since maps are already preloaded (in map preview)
@@ -115,17 +120,21 @@ void Main_Menu_Load_Map::clicked(int id) {
       mbox->run();
       delete mbox;
    }
-   
+  
    m_parent->get_editor()->postload();
    m_parent->get_editor()->load_graphics();
+      
+   // Ok, now user interface can sync itself with the 
+   // new map, everything is set up
+   m_parent->never_recalculate(false);
    
-   // Tell the user interface that the map has changed
+   // Inform user interface about map change. 
    m_parent->map_changed();
+ 
    
    delete ml;
    }
-   delete this;
-   
+   die();
 }
 
 
