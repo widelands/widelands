@@ -261,7 +261,10 @@ void File_Locator::init_filelisting( const int type, const char postfix[5] ) {
 		  if(ncurdir<(int) MAX_DIRS) 
 					 open_next_dir();
 
-		  if(!curdir) return;
+		  if(!curdir) {
+					 la=LA_NOMOREFILES;
+					 return;
+		  }
 
 		  if(postfix[0]!='\0') {
 					 strncpy(suf, postfix, 5);
@@ -346,6 +349,7 @@ const char* File_Locator::get_next_file(void) {
 					 return NULL;
 		  }
 
+		 
 		  assert(curdir);
 		  
 		  struct dirent *file;

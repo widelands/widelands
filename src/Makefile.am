@@ -6,8 +6,8 @@ CXXFLAGS= $(EXTRA_FLAGS)
 
 # EXTRA_DIST=worlds pics 
 
-bin_PROGRAMS=widelands
-widelands_LDADD = @SDL_LIBS@
+bin_PROGRAMS=widelands 
+widelands_LDADD = @SDL_LIBS@ 
 widelands_SOURCES=main.cc \
 						unix_m.cc \
 						os.h \
@@ -69,7 +69,10 @@ widelands_SOURCES=main.cc \
 						button.cc \
 						textarea.cc \
 						window.cc \
-						checkbox.cc
+						checkbox.cc \
+						listselect.cc \
+						cardselectmenue.h \
+						cardselectmenue.cc
 						
 
 

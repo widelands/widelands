@@ -114,7 +114,9 @@ void setup_ui(void) {
 		  bmp.load(buf);
 		  Checkbox::set_graph(&bmp);
 
-
+		  // list select class
+		  Listselect::set_font(0);
+		  Listselect::set_clrs(Graph::pack_rgb(67, 32, 10), Graph::pack_rgb(0, 0, 0), Graph::pack_rgb(248, 201, 135));
 }
 
 /** void setup_searchpaths(void) 
@@ -136,8 +138,8 @@ void setup_searchpaths(void)
 	strcat(cmd, "/.widelands");
 	g_fileloc.add_searchdir(cmd, MAX_DIRS-1);
 	g_fileloc.set_def_writedir(MAX_DIRS-1);
-	
 	g_fileloc.add_searchdir(PKGDATADIR, MAX_DIRS-2);
+
 #else
 	uint i=0, n=0;
 	buf = GetCommandLine();

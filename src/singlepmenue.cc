@@ -16,7 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-
+#include "cardselectmenue.h"
 #include "singlepmenue.h"
 #include "graphic.h"
 #include "input.h"
@@ -91,14 +91,7 @@ void single_player_menue(void) {
 		  }
 		  else if(*brunsc) {
 					 g_ui.delete_window(win);
-//#warning "You'll run into problems here!"
-					 Game g;
-#ifdef WIN32
-					 g.run("Eden.wmf", 0);
-#else
-					 g.run("/home/sirver/.widelands/Eden.wmf", 0);
-#endif
-					 
+					 card_select_menue();
 		  }
 		  else if(*brunc) {
 					 g_ui.delete_window(win);

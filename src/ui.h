@@ -24,6 +24,9 @@
 #include "singleton.h"
 #include "font.h"
 
+// predeclaration
+class Window;
+
 /** class Button
  *
  * This defines a button.
@@ -34,7 +37,7 @@
  */
 #define BUTTON_EDGE_BRIGHT_FACTOR 60
 #define MOUSE_OVER_BRIGHT_FACTOR  15
-typedef void (*BUT_FUNC)(void*);
+typedef void (*BUT_FUNC)(Window*, void*);
 
 class Button {
 		  Button(const Button&);
@@ -42,7 +45,7 @@ class Button {
 
 		  
 		  friend class Window;
-
+		  
 		  public:
 					 /** void register_func(BUT_FUNC f, void* arg)
 					  * 
@@ -109,16 +112,16 @@ class Button {
 					
 					 
 
-					 /** void run(void) 
+					 /** void run(Window* par) 
 					  *
 					  * This runs the registered button func (if any) 
 					  *
-					  * Args:	none
+					  * Args:	par	Parent window of this button
 					  * Returns: Nothing
 					  */
-					 void run(void) {
+					 void run(Window* par) {
 								if(func) 
-										  func(funca);
+										  func(par, funca);
 					 }
 
 					 // some functions to set informations and to get informations
@@ -202,6 +205,71 @@ class Checkbox {
 					 Pic* dp;
 };
 
+/** class Listselect
+ *
+ * This class defines a list-select box. 
+ *
+ * Depends: class Graph::Pic
+ * 			g_fh
+ * 			class Button
+ */
+#define MAX_LISTENTRYS	1024	// TODO: replace this with growablearray, as soon as it is faster
+class Listselect {
+		  Listselect(const Listselect&);
+		  Listselect& operator=(const Listselect&);
+
+		  friend class Window;
+		  friend void listselect_but_up(Window*,   void*);
+		  friend void listselect_but_down(Window*, void*);
+					 
+		  public:
+					 // Function to set the font
+					 static void set_font(uint n) { nfont=n; }
+					 static void set_clrs(ushort b, ushort f, ushort s) { bgclr=b; frameclr=f; selclr=s; }
+					 void add_entry(const char*, const char* =0) ;
+					 inline const char* get_selection(void) {
+								if(cursel==-1) return 0;
+								return ent[cursel].value;
+					 }
+
+		  
+		  private:
+					 Listselect(const uint, const uint, const uint, const uint, Pic*, const uint, const uint);
+					 ~Listselect(void);
+					 int draw(void);
+					 void move_up(uint i) { firstvis-=i; if(firstvis<0) firstvis=0; draw(); }
+					 void move_down(uint i) { firstvis+=i; if(firstvis+h > nent) firstvis=nent-h; if(firstvis<0) firstvis=0; draw(); }   
+					 void select(uint);
+					 
+					 // Information funcs
+					 inline uint get_w(void) { return w; }
+					 inline uint get_h(void) { return (g_fh.get_fh(nfont)+2)*h; }
+					 inline uint get_xpos(void) { return x+xp; }
+					 inline uint get_ypos(void) { return y+yp; }
+
+
+					 // Vars
+					 struct Entry {
+								Pic* p;
+								char value[255];
+					 };
+					 
+					 static uint nfont;
+					 static ushort bgclr, frameclr, selclr;
+					 
+					 Entry ent[MAX_LISTENTRYS];
+					 uint nent;
+
+					 int firstvis;
+					 int cursel;
+					 uint w, h;
+					 uint x, y;
+					 uint xp, yp;
+					 Pic* dp;
+					 
+};
+
+					 
 					 
 /** class Textarea 
  *
@@ -294,6 +362,7 @@ class Textarea {
 #define MAX_BUT 100  // these values don't get checked. you better don't ignore them
 #define MAX_TA   40	 
 #define MAX_CHECKBOX   10
+#define MAX_LISTSELECT   2
 
 class Window {
 		  // Copy is non trivial and shouldn't be needed
@@ -312,6 +381,7 @@ class Window {
 					 Textarea* create_textarea(const uint, const uint, const char* ,  Textarea::Align = Textarea::LEFTA);
 					 Button*   create_button(const uint, const uint, const uint, const uint, const uint);
 					 Checkbox*   create_checkbox(const uint, const uint, const bool b);
+					 Listselect*   create_listselect(const uint, const uint, const uint, const uint);
 					 void set_new_bg(Pic* p);
 
 					 /** static void Window::set_l_border(Pic* p) 
@@ -334,19 +404,20 @@ class Window {
 					 static void set_bg(Pic* p) { Window::bg=*p; }
 					
 
-		  private:
-					  // The next two functions are there to get the different between asked window size and given window size
-					 // Ex: you want a 100x100 window. Now, the User_Interface class makes sure that border widths and top,bottom heights
-					 // are added to the size and still the window musn't leave the screen on any edges.
-					 inline const static uint get_border(void) { return (CORNER<<1); }
-
 					 // inline functions to get some informations
 					 inline uint get_xpos(void) { return x; }
 					 inline uint get_ypos(void) { return y; }
 					 inline uint get_w(void) { return w; }
 					 inline uint get_h(void) { return h; }
 					 inline Flags get_flags(void) { return myf; }					 
-					 
+
+		  private:
+					  // The next two functions are there to get the different between asked window size and given window size
+					 // Ex: you want a 100x100 window. Now, the User_Interface class makes sure that border widths and top,bottom heights
+					 // are added to the size and still the window musn't leave the screen on any edges.
+					 inline const static uint get_border(void) { return (CORNER<<1); }
+
+					 					 
 					 int handle_click(const uint, const bool, const uint, const uint);
 					 int handle_mm(const uint, const uint, const bool, const bool);
 					 void draw(void);	
@@ -379,7 +450,11 @@ class Window {
 					 // for checkboxes
 					 uint ncheckbox;
 					 Checkbox** checkbox;
-					 
+					
+					 // for listselects
+					 uint nlistselect;
+					 Listselect** listselect;
+
 					 //closefunc dfkj;
 					 static Pic l_border;
 					 static Pic r_border;

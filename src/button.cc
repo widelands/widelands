@@ -86,7 +86,8 @@ Button::Button(const uint mx, const uint my, const uint mw, const uint mh, const
  */
 Button::~Button(void) {
 		  if(myp) delete myp;
-		  if(funca) free(funca);
+		  // we do not care for function args. someone else must free them
+//		  if(funca) free(funca);
 }
 					 
 

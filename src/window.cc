@@ -79,6 +79,9 @@ Window::Window(const uint px, const uint py, const uint wi, const uint he, const
 		  ncheckbox=0;
 		  checkbox=(Checkbox**) malloc(sizeof(Checkbox)*MAX_CHECKBOX);
 
+		  nlistselect=0;
+		  listselect=(Listselect**) malloc(sizeof(Listselect)*MAX_LISTSELECT);
+
 		  winpic=new Pic();
 		  winpic->set_size(w, h);
 		  
@@ -112,6 +115,10 @@ Window::~Window(void) {
 					 delete checkbox[i];
 		  free(checkbox);
 		  
+		  for(i=0; i<nlistselect; i++) 
+					 delete listselect[i];
+		  free(listselect);
+		  
 		  delete winpic;
 		  if(own_bg) delete own_bg;
 		  
@@ -132,8 +139,55 @@ void Window::set_pos(uint posx, uint posy) {
 		  x=posx; y=posy;
 		  g_gr.register_update_rect(x, y, w, h);
 }
-					 
-/** Textarea Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
+					
+/** Listselect* Window::create_listselect(const uint px, const uint py, const uint w, const uint h) 
+ *
+ * This creates a listselect at the given point
+ *
+ * Args: px, py	pos in window
+ * 		w,h		dimensions
+ * Returns: Pointer to listselect-box just created
+ */
+Listselect* Window::create_listselect(const uint px, const uint py, const uint w, const uint h) {
+		  uint myw=w;
+		  uint myh=h;
+		  uint add=0;
+
+		  if(myf!=FLAT) {
+					 myw-=get_border();
+					 myh-=get_border();
+					 add=get_border()>>1;
+		  }
+
+		  listselect[nlistselect]=new Listselect(px, py, myw-20-Button::get_border(), myh, winpic, add, add);
+		  listselect[nlistselect]->draw();
+
+		  g_gr.register_update_rect(x+listselect[nlistselect]->get_xpos(), y+listselect[nlistselect]->get_ypos(), 
+								listselect[nlistselect]->get_w(), listselect[nlistselect]->get_h());
+
+		  assert(nlistselect<MAX_TA);
+
+		  // set the move button
+		  Button* b=create_button(listselect[nlistselect]->get_xpos()+myw-20-Button::get_border(), 
+								listselect[nlistselect]->get_ypos(),
+								20, 20, 1);
+		  b->register_func(listselect_but_up, listselect[nlistselect]);
+		  b->set_pic(g_fh.get_string("U", 0));
+		  b=create_button(listselect[nlistselect]->get_xpos()+myw-20-Button::get_border(), 
+								listselect[nlistselect]->get_ypos()+20+Button::get_border(),
+								20, 20, 1);
+		  b->set_pic(g_fh.get_string("D", 0));
+		  b->register_func(listselect_but_down, listselect[nlistselect]);
+								
+		  nlistselect++;
+		  
+		  g_gr.register_update_rect(x+px, y+py, myw, myh);
+		  
+		  return listselect[nlistselect-1];
+}
+
+
+/** Textarea* Window::create_textarea(const uint px, const uint py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
  * 
  * This function creates a textarea with a given text. The size will be set through the 
  * text width
@@ -271,10 +325,13 @@ void Window::redraw_win(void) {
 					 Graph::copy_pic(winpic, usebg, 0, 0, 0, 0, mw, mh);
 		  }
 		  
+		  // Draw listselects
+		  for(i=0; i< nlistselect; i++) 
+					 listselect[i]->draw();
+  
 		  // Draw textareas
 		  for(i=0 ; i< nta; i++) 
 					 ta[i]->draw();
-
 
 		  // Draw Buttons
 		  for(i=0; i< nbut; i++) 
@@ -412,8 +469,7 @@ int Window::handle_mm(const uint x, const uint y, const bool b1, const bool b2) 
 		  
 					 if(but[i]->draw()) g_gr.register_update_rect(this->x+but[i]->get_xpos(), this->y+but[i]->get_ypos(), but[i]->get_w(), but[i]->get_h());
 		  }
-		
-
+	
 		  // We do not care for checkboxes, since they only react on clicks
 		  // we do not care for ta, because they are non responsive to mouse movements or clicks
 		  
@@ -443,7 +499,7 @@ int Window::handle_click(const uint pbut, const bool b, const uint x, const uint
 								if(but[i]->is_pressed() && !b) {
 										  // button was pressed, mouse is now released over the button
 										  // Run the button func!
-										  but[i]->run();
+										  but[i]->run(this);
 								}
 								but[i]->set_pressed(b);
 					 } else {
@@ -467,7 +523,20 @@ int Window::handle_click(const uint pbut, const bool b, const uint x, const uint
 					 }
 		  }
 		  
-		  
+		  // Check for select boxes
+		  if(b) {
+					 for(i=0; i<nlistselect; i++) {
+								if(listselect[i]->get_xpos()<x && listselect[i]->get_xpos()+listselect[i]->get_w()>x &&
+													 listselect[i]->get_ypos()<y && listselect[i]->get_ypos()+listselect[i]->get_h()>y) {
+										  // is inside!
+										  listselect[i]->select(y-listselect[i]->get_ypos());
+								}
+
+								if(listselect[i]->draw()) g_gr.register_update_rect(this->x+listselect[i]->get_xpos(), 
+													 this->y+listselect[i]->get_ypos(), listselect[i]->get_w(), listselect[i]->get_h());
+					 }
+		  }
+	
 		  // we do not care for textareas, they are unresponsive to clicks
 		  
 		  return INPUT_UNHANDLED;

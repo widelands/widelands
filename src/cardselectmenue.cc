@@ -1,0 +1,130 @@
+/*
+ * Copyright (C) 2002 by Holger Rapp 
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#include "cardselectmenue.h"
+#include "ui.h"
+#include "font.h"
+#include "fileloc.h"
+#include "input.h"
+#include "menuecommon.h"
+#include "map.h"
+#include "singlepmenue.h"
+#include "game.h"
+
+/** void card_select_menue(void) 
+ *
+ *	Here, you chose a card out of a given listbox
+ *
+ * Args:	None
+ * Returns:	nothing
+ */
+void card_select_menue(void) {
+		  bool* bexit= new bool(false);
+		  bool* bselect= new bool(false);
+		  
+		  // We do not need to care for the resolution, since this menue just gets called by other menues
+		  // So we know for sure, we've got 640x480 resolution
+		  // make the background window, fill it with the splash screen
+		  Window* win=g_ui.create_window(0, 0, g_gr.get_xres(), g_gr.get_yres(), Window::FLAT);
+		  Pic* p = new Pic;
+		  const char* str=g_fileloc.locate_file("splash.bmp", TYPE_PIC);
+		  assert(str);
+		  p->load(str);
+		  assert(p);
+
+		  win->set_new_bg(p);		 
+		  // Create the different areas
+		  win->create_textarea(0, 150, 640, Textarea::CENTER)->set_text("Choose your map!");
+
+		  // Create the buttons
+		  Button* b;
+		  b=win->create_button(400, 400, 170, 20, 0);
+		  b->register_func(menue_butclick_func, bexit);
+		  b->set_pic(g_fh.get_string("Back", 0));
+		  b=win->create_button(400, 430, 170, 20, 2);
+		  b->register_func(menue_butclick_func, bselect);
+		  b->set_pic(g_fh.get_string("OK", 0));
+		  
+		  // Create the list area
+		  Listselect* sel= win->create_listselect(20, 170, 360, 300);
+		  // Fill it with the files: Widelands map files
+		  g_fileloc.init_filelisting(TYPE_MAP, WLMF_SUFFIX);
+		  while(g_fileloc.get_state() != File_Locator::LA_NOMOREFILES) {
+					 // TODO: make this nicer
+					 sel->add_entry(g_fileloc.get_next_file());
+		  }
+		  g_fileloc.end_filelisting();
+
+		  // Fill it with more files: Settlers2 map files
+		  g_fileloc.init_filelisting(TYPE_MAP, S2MF_SUFFIX);
+		  while(g_fileloc.get_state() != File_Locator::LA_NOMOREFILES) {
+					 sel->add_entry(g_fileloc.get_next_file());
+		  }
+		  g_fileloc.end_filelisting();
+
+		  // Add info fields
+		  win->create_textarea(380, 210, "Name:",  Textarea::CENTER);
+		  win->create_textarea(460, 210, "Eden",  Textarea::CENTER);
+		  win->create_textarea(380, 230, "Author:",  Textarea::CENTER);
+		  win->create_textarea(460, 230, "Widelands Development Team",  Textarea::CENTER);
+		  win->create_textarea(380, 250, "Size:", Textarea::CENTER);
+		  win->create_textarea(460, 250, "255x255", Textarea::CENTER);
+		  win->create_textarea(380, 270, "World:", Textarea::CENTER);
+		  win->create_textarea(460, 270, "Greenland", Textarea::CENTER);
+		  win->create_textarea(380, 290, "Players:", Textarea::CENTER);
+		  win->create_textarea(460, 290, "7      ", Textarea::CENTER);
+		 
+		  // TODO: Add description (multiline text box) 
+		  
+		  // Register the resposible mouse funtions
+		  g_ip.register_mcf(menue_lclick, Input::BUT1);
+		  g_ip.register_mcf(menue_rclick, Input::BUT2);
+	     g_ip.register_mmf(menue_mmf);
+
+		  while(!g_ip.should_die() && !*bexit) {
+					 if(*bselect) {
+								if(sel->get_selection()) break;
+								else *bselect=false;
+					 }
+					 menue_loop();
+		  }		
+
+		  
+		  if(*bexit) {
+					 g_ui.delete_window(win);
+					 single_player_menue();
+					 return;
+		  }
+
+		  if(*bselect) {
+					 // a selection has been done
+					 char* map = new char[strlen(sel->get_selection())+1];
+					 strcpy(map, sel->get_selection());
+					 g_ui.delete_window(win);
+					 Game *g=new Game;
+					 g->run(map, 7);
+					 delete map;
+					 delete g;
+					 return;
+		  } 
+
+		  // Never here
+		  assert(0);
+		  return;
+}

@@ -22,6 +22,8 @@
 
 #include "mytypes.h"
 
+#define S2MF_SUFFIX     ".swd"
+
 #define WLMF_VERSION 	0x0001
 
 #define WLMF_SUFFIX		".wmf"

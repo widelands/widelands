@@ -22,7 +22,7 @@
 #include "graphic.h"
 #include "cursor.h"
 
-/** void menue_butclick_func(void* b) 
+/** void menue_butclick_func(Window*, void* b) 
  *
  * This function is used to register button clicks in a menue.
  * it expects a pt to bool in b and sets it true.
@@ -30,7 +30,7 @@
  * Args:	b	pointer to bool
  * Returns: nothing
  */
-void menue_butclick_func(void* b) { *((bool*) b)=true; }
+void menue_butclick_func(Window*, void* b) { *((bool*) b)=true; }
 
 
 /** int int menue_lclick(const bool b, const uint x, const uint y, void* )

@@ -17,22 +17,11 @@
  *
  */
 
-#ifndef __S__MENUECOMMON_H
-#define __S__MENUECOMMON_H
-
-#include "mytypes.h"
-#include "ui.h"
-
-#define MENU_XRES	640
-#define MENU_YRES	480
-
-int menue_lclick(const bool, const uint, const uint, void* );
-int menue_rclick(const bool, const uint, const uint, void* );
-int menue_mmf(const uint, const uint, const int, const int, const bool, const bool, void*);
-void menue_loop(void);
-void menue_butclick_func(Window*, void*);
+#ifndef __S__CARDSELECTMENUE_H
+#define __S__CARDSELECTMENUE_H
 
 
+void card_select_menue(void);
 
 
-#endif // __S__MENUECOMMON_H
+#endif
