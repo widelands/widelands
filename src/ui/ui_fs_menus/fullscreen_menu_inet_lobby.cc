@@ -30,6 +30,7 @@
 #include "ui_modal_messagebox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
+#include "unicode.h"
 #include "util.h"
 
 /*
