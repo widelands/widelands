@@ -1,0 +1,45 @@
+[global]
+descname=Well		# nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=small
+buildable=yes
+buildicon=well_build.bmp
+worker=carpenter
+program=work
+output=water
+
+[inputs]
+
+[work]
+0=sleep 20000
+1=animation working 20000
+2=produce water
+
+[buildcost]
+plank=1
+stone=1
+
+[idle]
+pics=well_i_??.bmp  # ???
+hot_spot_x=32
+hot_spot_y=44
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=well_w_??.bmp  # ???
+hot_spot_x=32
+hot_spot_y=44
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+
