@@ -92,27 +92,11 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;cc"
 # Begin Source File
 
-SOURCE=..\src\auto_pic.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\bob.cc
 # End Source File
 # Begin Source File
 
 SOURCE=..\src\building.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\button.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\checkbox.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\cmd_queue.cc
 # End Source File
 # Begin Source File
 
@@ -128,10 +112,6 @@ SOURCE=..\src\criterr.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\cursor.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\field.cc
 # End Source File
 # Begin Source File
@@ -144,15 +124,7 @@ SOURCE=..\src\fileloc.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\font.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\game.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\graphic.cc
 # End Source File
 # Begin Source File
 
@@ -161,10 +133,6 @@ SOURCE=..\src\growablearray.cc
 # Begin Source File
 
 SOURCE=..\src\helper.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\input.cc
 # End Source File
 # Begin Source File
 
@@ -180,7 +148,7 @@ SOURCE=..\src\intro.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\listselect.cc
+SOURCE=..\src\launchmenu.cc
 # End Source File
 # Begin Source File
 
@@ -188,15 +156,7 @@ SOURCE=..\src\main.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\mainmenue.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\map.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\mapselectmenue.cc
 # End Source File
 # Begin Source File
 
@@ -212,18 +172,6 @@ SOURCE=..\src\md5file.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\menuecommon.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\minimap.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\multiline_textarea.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\mydirent.cc
 # End Source File
 # Begin Source File
@@ -236,15 +184,7 @@ SOURCE=..\src\options.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\optionsmenu.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\parser.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\pic.cc
 # End Source File
 # Begin Source File
 
@@ -256,15 +196,7 @@ SOURCE=..\src\profile.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\radiobutton.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\s2map.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\scrollbar.cc
 # End Source File
 # Begin Source File
 
@@ -272,31 +204,11 @@ SOURCE=..\src\setup.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\singlepmenue.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\textarea.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\tribe.cc
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\ui.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\ware.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\watchwindow.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\window.cc
 # End Source File
 # Begin Source File
 
@@ -365,10 +277,6 @@ SOURCE=..\src\font.h
 # Begin Source File
 
 SOURCE=..\src\game.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\graphic.h
 # End Source File
 # Begin Source File
 
@@ -514,6 +422,114 @@ SOURCE=..\src\worlddata.h
 # Begin Group "Resource Files"
 
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+# End Group
+# Begin Group "graphics"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\src\auto_pic.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\cursor.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\font.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\graphic.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\graphic.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\pic.cc
+# End Source File
+# End Group
+# Begin Group "ui"
+
+# PROP Default_Filter ""
+# Begin Group "menus"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\src\mainmenue.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\mapselectmenue.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\menuecommon.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\optionsmenu.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\singlepmenue.cc
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=..\src\button.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\checkbox.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\cmd_queue.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\input.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\listselect.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\minimap.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\multiline_textarea.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\radiobutton.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\scrollbar.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\textarea.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ui.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\watchwindow.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\window.cc
+# End Source File
 # End Group
 # End Target
 # End Project

@@ -39,122 +39,6 @@ template <typename T> inline void swap(T& a, T& b)
    b = temp;
 }
 
-
-#define V3	(float)0.57735
-
-#if SHADING == SHADING_FLAT || !defined(FILL_TRIANGLES)
-/* int make_triangle_lines(Vector* points, int* starts, int* ends)
- * fills arrays with horizontal start- and end-points of a triangle
- * returns number of lines written to the arrays
- *
- * points are expected to be sorted top-down
- * in comments, points 0 1 2 will be 'A' 'B' 'C', the opposite edge for
- * point 'A' will be 'a' etc as common in math, but: the points ABC are
- * not always labeled in counterclockwise order (as it would be in math),
- * they are labeled top-down.
- */
-inline int make_triangle_lines(Point* points, int* starts, int* ends)
-{
-   int ydiff1 = points[1].y - points[0].y;
-   int ydiff2 = points[2].y - points[0].y;
-   int ydiff3 = points[2].y - points[1].y;
-   int xdiff1 = points[1].x - points[0].x;
-   int xdiff2 = points[2].x - points[0].x;
-   int xdiff3 = points[2].x - points[1].x;
-
-   if (!ydiff2)
-      // triangle has height 0
-      return 0;
-
-   // calculate x for line b at height of point B
-   int midx = points[0].x + (xdiff2 * ydiff1) / ydiff2;
-   // is B left from b?
-   if (points[1].x < midx)
-      // arrays have to be swapped
-      swap<int*>(starts, ends);
-
-   int y;
-   // upper part of triangle
-   for (y=0; y<ydiff1; y++)
-   {
-      // calculate x for line b at height y
-      starts[y] = points[0].x + (xdiff2 * y) / ydiff2;
-      // calculate x for line c at height y
-      ends[y] = points[0].x + (xdiff1 * y) / ydiff1;
-   }
-   // lower part
-   for (y=0; y<ydiff3; y++)
-   {
-      // calculate x for line b at height y
-      starts[ydiff1 + y] = points[0].x + (xdiff2 * (y + ydiff1)) / ydiff2;
-      // calculate x for line a at height y
-      ends[ydiff1 + y] = points[1].x + (xdiff3 * y) / ydiff3;
-   }
-   return ydiff2;
-}
-
-// render_triangle for flat shading
-void render_triangle(Bitmap *dst, Point* points, Vector* normals, Pic* texture)
-{
-   static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
-
-   //don't need to swap normals here, they are summed up anyway
-   if (points[0].y > points[1].y)
-      swap<Point>(points[0], points[1]);
-   if (points[1].y > points[2].y)
-      swap<Point>(points[1], points[2]);
-   if (points[0].y > points[1].y)
-      swap<Point>(points[0], points[1]);
-
-   Vector normal = normals[0] + normals[1] + normals[2];
-   normal.normalize();
-   float b = normal * sun;
-   int lfactor = (int)(b * LIGHT_FACTOR);
-
-   int starts[200];		// FEAR!!
-   int ends[200];			// don't use to high triangles
-
-   int ymax = make_triangle_lines(points, starts, ends);
-   int ystart = points[0].y < 0 ? -points[0].y : 0;
-   ymax = ymax + points[0].y <= yres ? ymax : yres-points[0].y;
-   for (int y=ystart; y<ymax; y++)
-   {
-      if (starts[y] >= xres)
-         continue;
-      if (ends[y] < 0)
-         continue;
-
-      int start = starts[y] < 0 ? 0 : starts[y];
-      int end = ends[y] < xres ? ends[y] : xres-1;
-#ifdef FILL_TRIANGLES
-      int p = (points[0].y + y) * xres + start;
-      for (int x=start; x<=end; x++)
-      {
-         //				pixels[(points[0].y + y)*xres + x] = pack_rgb(clr, clr, clr);
-         uint tp = (y % texture->h)*texture->w + (x-starts[y])%texture->w;
-         //				uint tp = ((points[0].y + y) % texture->h)*texture->w + x%texture->w;
-         //				pixels[p++] = bright_up_clr2(texture->pixels[tp], -lfactor);
-         pixels[p++] = bright_up_clr2(texture->pixels[tp], -lfactor);
-      }
-#else
-      if (y == 0 || y == ymax-1)
-         for (int x=start; x<=end; x++)
-         {
-            uint p = (y % texture->h)*texture->w + (x-starts[y])%texture->w;
-            pixels[(points[0].y + y)*xres + x] = texture->pixels[p];
-         }
-      else
-      {
-         uint p = (y % texture->h)*texture->w + (start-starts[y])%texture->w;
-         pixels[(points[0].y + y)*xres + start] = texture->pixels[p];
-         p = (y % texture->h)*texture->w + (end-starts[y])%texture->w;
-         pixels[(points[0].y + y)*xres + end] = texture->pixels[p];
-      }
-#endif
-
-   }
-}
-#else
 struct _go
 {
    int x;
@@ -163,30 +47,30 @@ struct _go
 
 int make_triangle_lines(Point* points, int* bright, _go* starts, _go* ends)
 {
-   int ydiff1 = points[1].y - points[0].y;
-   int ydiff2 = points[2].y - points[0].y;
-   int ydiff3 = points[2].y - points[1].y;
-   int xdiff1 = points[1].x - points[0].x;
-   int xdiff2 = points[2].x - points[0].x;
-   int xdiff3 = points[2].x - points[1].x;
-   int bdiff1 = bright[1] - bright[0];
-   int bdiff2 = bright[2] - bright[0];
-   int bdiff3 = bright[2] - bright[1];
+	int ydiff1 = points[1].y - points[0].y;
+	int ydiff2 = points[2].y - points[0].y;
+	int ydiff3 = points[2].y - points[1].y;
+	int xdiff1 = points[1].x - points[0].x;
+	int xdiff2 = points[2].x - points[0].x;
+	int xdiff3 = points[2].x - points[1].x;
+	int bdiff1 = bright[1] - bright[0];
+	int bdiff2 = bright[2] - bright[0];
+	int bdiff3 = bright[2] - bright[1];
 
-   if (!ydiff2)
-      // triangle has height 0
-      return 0;
+	if (!ydiff2)
+		// triangle has height 0
+		return 0;
 
-   // calculate x for line b at height of point B
-   int midx = points[0].x + (xdiff2 * ydiff1) / ydiff2;
-   // is B left from b?
-   if (points[1].x < midx)
-      // arrays have to be swapped
-      swap<_go*>(starts, ends);
+	// calculate x for line b at height of point B
+	int midx = points[0].x + (xdiff2 * ydiff1) / ydiff2;
+	// is B left from b?
+	if (points[1].x < midx)
+		// arrays have to be swapped
+		swap<_go*>(starts, ends);
 
    int y;
-   int xd1=0, xd2=0, xd3=0;
-   int bd1=0, bd2=0, bd3=0;
+   int xd1 = 0, xd2 = 0, xd3 = 0;
+   int bd1 = 0, bd2 = 0, bd3 = 0;
    // upper part of triangle
    for (y=0; y<ydiff1; y++)
    {
@@ -200,12 +84,12 @@ int make_triangle_lines(Point* points, int* bright, _go* starts, _go* ends)
       bd2 += bdiff2;
    }
    // lower part
-   for (y=0; y<ydiff3; y++)
+   for (y=ydiff1; y<ydiff2; y++)
    {
-      starts[ydiff1 + y].x = points[0].x + xd2 / ydiff2;
-      starts[ydiff1 + y].b = bright[0] + bd2 / ydiff2;
-      ends[ydiff1 + y].x = points[1].x + xd3 / ydiff3;
-      ends[ydiff1 + y].b = bright[1] + bd3 / ydiff3;
+      starts[y].x = points[0].x + xd2 / ydiff2;
+      starts[y].b = bright[0] + bd2 / ydiff2;
+      ends[y].x = points[1].x + xd3 / ydiff3;
+      ends[y].b = bright[1] + bd3 / ydiff3;
       xd2 += xdiff2;
       xd3 += xdiff3;
       bd2 += bdiff2;
@@ -281,7 +165,6 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture)
       }
    }
 }
-#endif
 
 /** class Graphic
  *

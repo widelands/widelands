@@ -69,10 +69,6 @@ inline void unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b)
 inline ushort bright_up_clr(const ushort clr, const ushort factor)
 {
    uchar r, g, b;
-   // das hier stimmt so nicht, oder?
-   // so kommt gruen ins rot und blau ins gruen
-   // siehe auch bright_up_clr2
-   // Florian
    r= ((clr<<3)>>11);
    g= ((clr<<2)>>5);
    b= (clr<<3);
@@ -83,6 +79,23 @@ inline ushort bright_up_clr(const ushort clr, const ushort factor)
 }
 
 #if 1
+// the voodoo version..., rev 2.
+// why use goto?
+inline uint bright_up_clr2(uint clr, int factor)
+{
+   int r = ((clr >> 11) << 3);
+   int g = ((clr >> 5)  << 2) & 0xFF;
+   int b = ((clr)       << 3) & 0xFF;
+
+   r += factor;
+   if (r & 0xFF00) r = (~r) >> 24;
+   g += factor;
+   if (g & 0xFF00) g = (~g) >> 24;
+   b += factor;
+   if (b & 0xFF00) b = (~b) >> 24;
+   return pack_rgb(r, g, b);
+}
+#elif 1
 // the voodoo version...
 // it's quite a bit faster than the original on my CPU
 inline uint bright_up_clr2(uint clr, int factor)

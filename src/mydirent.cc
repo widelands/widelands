@@ -44,7 +44,7 @@ DIR* opendir(const char* n)
 	int nlen = strlen(n);
 	char* name = new char[nlen + 1];
 	strcpy(name, n);
-	if (name[nlen-1] == '\\')
+	if (name[nlen-1] == '\\' || name[nlen-1] == '/')
 		name[nlen-1] = 0;
 
 	WIN32_FIND_DATA wfd;

@@ -70,7 +70,7 @@ Cmd_Queue::~Cmd_Queue(void)
  *
  * Insert a new command into the queue; it will be executed at the given time
  */
-void Cmd_Queue::queue(int time, char sender, int cmd, int arg1=0, int arg2=0, void *arg3=0)
+void Cmd_Queue::queue(int time, char sender, int cmd, int arg1, int arg2, void *arg3)
 {
 	Cmd *c; // our command
 	Cmd **pp; // where we put it

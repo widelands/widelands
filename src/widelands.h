@@ -32,7 +32,8 @@
 #include <fstream.h>
 
 #ifdef WIN32
-#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*
+	#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*
+	#pragma warning(disable : 4800) // forcing values to bool is fine to me.
 	#define WIN32_LEAN_AND_MEAN
 	#include <windows.h>
 	#ifdef _DEBUG			//chk ths plz. Acked by Holger
