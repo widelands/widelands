@@ -30,7 +30,7 @@
 // class World;
 //class Pic;
 
-// Eh? WTH is this used for? If it is what I think it is, attributes
+// Eh? Is this used for anything? If it is what I think it is, attributes
 // are better to solve this because it's transparent wrt buildings etc...
 enum {
    NOTHING = 0,

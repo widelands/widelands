@@ -208,7 +208,7 @@ bool Game::run(void)
 
 			player->setup();
 		
-			const Cords* c = map->get_starting_pos(i);
+			const Coords* c = map->get_starting_pos(i);
 			if (player->get_type() == Player::playerLocal)
 				ipl->move_view_to(c->x, c->y);
 		}

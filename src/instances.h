@@ -71,7 +71,7 @@ class Map_Object {
 	friend class Object_Ptr;
 
 		MO_DESCR(Map_Object_Descr)
-	   
+
 	public:
 		// Some default, globally valid, attributes.
 		// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
@@ -91,7 +91,7 @@ class Map_Object {
 			// (assert ROBUST && !UNPASSABLE): this is a flag (can be used as road endpoint)
 			FLAG = 3,
 		};
-      
+
 		// the enums tell us where we are going
       enum WalkingDir {
          IDLE, 
@@ -124,31 +124,31 @@ class Map_Object {
 
       inline void set_owned_by(char plnum) { m_owned_by = plnum; }
 		inline char get_owned_by() { return m_owned_by; }
- //     uint handle_click(void); // is this good here?
- 
-		void set_position(Game* g, uint x, uint y, Field* f = 0);
+
+		void set_position(Game* g, int x, int y, Field* f = 0);
 		inline bool get_position(int *px, int *py, Field **pf = 0) {
 			if (!m_field) return false;
 			if (pf) *pf = m_field;
-			*px = m_px;
-			*py = m_py;
+			*px = m_pos.x;
+			*py = m_pos.y;
 			return true;
 		}
 		inline Map_Object* get_next_object(void) { return m_linknext; }
 
    protected:
 		void set_animation(Game* g, Animation* anim);
-	
-		void end_walk();
-		bool start_walk(Game* g, WalkingDir dir, Animation* a);
 
-	protected:		
+		bool start_walk(Game* g, WalkingDir dir, Animation* a);
+		bool act_walk(Game* g);
+		bool is_walking();
+
+	protected:
 		Map_Object_Descr *m_descr;
 		uint m_serial;
       char m_owned_by; // player number, or -1 if neutral (like animals, trees)
       
 		Field* m_field; // where are we right now?
-      uint m_px, m_py;
+      Coords m_pos;
 		Map_Object* m_linknext; // next object on this field
 		Map_Object** m_linkpprev;
 		

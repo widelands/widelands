@@ -64,6 +64,14 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
+// Structure used to store map coordinates
+struct Coords {
+   int x;
+   int y;
+};
+
+inline bool operator==(const Coords& c1, const Coords& c2) { return (c1.x == c2.x) && (c1.y == c2.y); }
+
 /*
 ==============================================================================
 
@@ -128,14 +136,10 @@ void inline tell_user(const char* str) {
 ======================================================================================
 */
 
-// a frame is the time between two updates of the game logic
-// this includes: AI, NETWORK, CMD_QUEUES
-// this excludes: the whole User_Interface, this is updated independent from the 
-//   logic frame length (more often)
+// the actual game logic doesn't know about frames (it works with millisecond-precise
+// timing)
+// FRAME_LENGTH is just the default animation speed
 #define FRAME_LENGTH 250   
 
-// TODO: make this configurable through conf file or cmdline
-#define MAX_OBJS 50000  // might not be enough
-
-#define USE_SEE_AREA 1
+//#define USE_SEE_AREA 1
 

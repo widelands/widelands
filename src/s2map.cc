@@ -203,8 +203,8 @@ int Map::load_s2mf(const char* filen, Game *game) {
    hd.version=WLMF_VERSION;
    strcpy(hd.descr, "Bluebyte Settlers II Map. No comment defined!");
 
-	starting_pos = (Cords*)malloc(sizeof(Cords) * hd.nplayers);
-	memset(starting_pos, 0, sizeof(Cords) * hd.nplayers);
+	starting_pos = (Coords*)malloc(sizeof(Coords) * hd.nplayers);
+	memset(starting_pos, 0, sizeof(Coords) * hd.nplayers);
 
    const char* buf;
    switch(header.uses_world) {

@@ -22,6 +22,26 @@
 #include "myfile.h"
 #include "worlddata.h"
 
+/** Map::Pathfield
+ *
+ * Used in pathfinding. For better encapsulation, pathfinding structures
+ * are seperate from normal fields
+ *
+ * Costs are in milliseconds to walk.the route.
+ *
+ * Note: member sizes chosen so that we get a 16byte (=nicely aligned) 
+ * structure
+ */
+struct Map::Pathfield {
+	int		heap_index;		// index of this field in heap, for backlinking
+	int		real_cost;		// true cost up to this field
+	int		estim_cost;		// estimated cost till goal
+	ushort	cycle;
+	uchar		backlink;		// how we got here (Map_Object::WALK_*)
+	
+	inline int cost() { return real_cost + estim_cost; }
+};
+
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -34,22 +54,28 @@
  *
  * inits
  */
-Map::Map(void) {
-		  w=0;
-		  fields=0;
-        starting_pos=0;
+Map::Map(void)
+{
+	w=0;
+	fields=0;
+   starting_pos=0;
+	m_pathcycle = 0;
+	m_pathfields = 0;
 }
 
 /** Map::~Map(void)
  *
  * cleanups
  */
-Map::~Map(void) {
+Map::~Map(void)
+{
    if(fields) {
       // WARNING: if Field has to free something, we have to do
       // it here manually!!!
       free(fields);
    }
+	if (m_pathfields)
+		free(m_pathfields);
 
    if(starting_pos) {
       free(starting_pos);
@@ -76,6 +102,10 @@ void Map::set_size(uint w, uint h) {
    }
    else fields = (Field*) malloc(sizeof(Field)*hd.height*hd.width);
 
+	if (m_pathfields)
+		free(m_pathfields);
+	m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*hd.height*hd.width);
+	memset(m_pathfields, 0, sizeof(Pathfield)*hd.height*hd.width);
 }
 
 
@@ -636,7 +666,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
  */
 void Map::recalc_for_field(int fx, int fy)
 {
-	Map_Region_Cords mrc;
+	Map_Region_Coords mrc;
 	int x, y;
 	Field *f;
 	
@@ -685,6 +715,460 @@ Field::Build_Symbol Map::get_build_symbol(int x, int y)
 		return Field::FLAG;
 		
 	return Field::NOTHING;
+}
+
+/** Map::calc_distance(Coords a, Coords b)
+ *
+ * Calculate the (Manhattan) distance from a to b
+ * a and b are expected to be normalized!
+ */
+int Map::calc_distance(Coords a, Coords b)
+{
+	uint dist;
+	int dy;
+	
+	// do we fly up or down?
+	dy = b.y - a.y;
+	if (dy > (int)(hd.height>>1)) // wrap-around!
+		dy -= hd.height;
+	else if (dy < -(int)(hd.height>>1))
+		dy += hd.height;
+	
+	dist = abs(dy);
+	
+	if (dist >= hd.width) // no need to worry about x movement at all
+		return dist;
+	
+	// [lx..rx] is the x-range we can cover simply by walking vertically
+	// towards b
+	// Hint: (~a.y & 1) is 1 for even rows, 0 for odd rows.
+	// This means we round UP for even rows, and we round DOWN for odd rows.
+	int lx, rx;
+	
+	lx = a.x - ((dist + (~a.y & 1))>>1); // div 2
+	rx = lx + dist;
+	
+	// Allow for wrap-around
+	// Yes, the second is an else if; see the above if (dist >= hd.width)
+	if (lx < 0)
+		lx += hd.width;
+	else if (rx >= (int)hd.width)
+		rx -= hd.width;
+	
+	// Normal, non-wrapping case
+	if (lx <= rx)
+	{
+		if (b.x < lx)
+		{
+			int dx1 = lx - b.x;
+			int dx2 = b.x - (rx - hd.width);
+			dist += min(dx1, dx2);
+		}
+		else if (b.x > rx)
+		{
+			int dx1 = b.x - rx;
+			int dx2 = (lx + hd.width) - b.x;
+			dist += min(dx1, dx2);
+		}
+	}
+	else
+	{
+		// Reverse case
+		if (b.x > rx && b.x < lx)
+		{
+			int dx1 = b.x - rx;
+			int dx2 = lx - b.x;
+			dist += min(dx1, dx2);
+		}
+	}
+	
+//	cerr << a.x << "," << a.y << " -> " << b.x << "," << b.y << " : " << dist << endl;
+	
+	return dist;
+}
+
+/** class StarQueue
+ *
+ * Provides the flexible priority queue to maintain the open list.
+ */
+class StarQueue {
+	vector<Map::Pathfield*> m_data;
+
+public:
+	StarQueue() { }
+	~StarQueue() { }
+
+	void flush() { m_data.clear(); }
+
+	// Return the best node and readjust the tree
+	// Basic idea behind the algorithm:
+	//  1. the top slot of the tree is empty
+	//  2. if this slot has both children:
+	//       fill this slot with one of its children or with slot[_size], whichever
+	//       is best;
+	//       if we filled with slot[_size], stop
+	//       otherwise, repeat the algorithm with the child slot
+	//     if it doesn't have any children (l >= _size)
+	//       put slot[_size] in its place and stop
+	//     if only the left child is there
+	//       arrange left child and slot[_size] correctly and stop
+	Map::Pathfield* pop()
+	{
+		if (m_data.empty())
+			return 0;
+
+		Map::Pathfield* head = m_data[0];
+
+		unsigned nsize = m_data.size()-1;
+		unsigned fix = 0;
+		while(fix < nsize) {
+			unsigned l = fix*2 + 1;
+			unsigned r = fix*2 + 2;
+			if (l >= nsize) {
+				m_data[fix] = m_data[nsize];
+				m_data[fix]->heap_index = fix;
+				break;
+			}
+			if (r >= nsize) {
+				if (m_data[nsize]->cost() <= m_data[l]->cost()) {
+					m_data[fix] = m_data[nsize];
+					m_data[fix]->heap_index = fix;
+				} else {
+					m_data[fix] = m_data[l];
+					m_data[fix]->heap_index = fix;
+					m_data[l] = m_data[nsize];
+					m_data[l]->heap_index = l;
+				}
+				break;
+			}
+
+			if (m_data[nsize]->cost() <= m_data[l]->cost() && m_data[nsize]->cost() <= m_data[r]->cost()) {
+				m_data[fix] = m_data[nsize];
+				m_data[fix]->heap_index = fix;
+				break;
+			}
+			if (m_data[l]->cost() <= m_data[r]->cost()) {
+				m_data[fix] = m_data[l];
+				m_data[fix]->heap_index = fix;
+				fix = l;
+			} else {
+				m_data[fix] = m_data[r];
+				m_data[fix]->heap_index = fix;
+				fix = r;
+			}
+		}
+		
+		m_data.pop_back();
+
+		debug(0, "pop");
+		
+		head->heap_index = -1;
+		return head;
+	}
+
+	// Add a new node and readjust the tree
+	// Basic idea:
+	//  1. Put the new node in the last slot
+	//  2. If parent slot is worse than self, exchange places and recurse
+	// Note that I rearranged this a bit so swap isn't necessary
+	void push(Map::Pathfield *t)
+	{
+		unsigned slot = m_data.size();
+		m_data.push_back();
+
+		while(slot > 0) {
+			unsigned parent = (slot - 1) / 2;
+
+			if (m_data[parent]->cost() < t->cost())
+				break;
+
+			m_data[slot] = m_data[parent];
+			m_data[slot]->heap_index = slot;
+			slot = parent;
+		}
+		m_data[slot] = t;
+		t->heap_index = slot;
+		
+		debug(0, "push");
+	}
+
+	// Rearrange the tree after a node has become better, i.e. move the
+	// node up
+	// Pushing algorithm is basically the same as in push()
+	void boost(Map::Pathfield *t)
+	{
+		unsigned slot = t->heap_index;
+
+		assert(m_data[slot] == t);
+
+		while(slot > 0) {
+			unsigned parent = (slot - 1) / 2;
+
+			if (m_data[parent]->cost() <= t->cost())
+				break;
+
+			m_data[slot] = m_data[parent];
+			m_data[slot]->heap_index = slot;
+			slot = parent;
+		}
+		m_data[slot] = t;
+		t->heap_index = slot;
+		
+		debug(0, "boost");
+	}
+
+	// Recursively check integrity
+	void debug(unsigned node, const char *str)
+	{
+		unsigned l = node*2 + 1;
+		unsigned r = node*2 + 2;
+		if (m_data[node]->heap_index != (int)node) {
+			fprintf(stderr, "%s: heap_index integrity!\n", str);
+			exit(-1);
+		}
+		if (l < m_data.size()) {
+			if (m_data[node]->cost() > m_data[l]->cost()) {
+				fprintf(stderr, "%s: Integrity failure\n", str);
+				exit(-1);
+			}
+			debug(l, str);
+		}
+		if (r < m_data.size()) {
+			if (m_data[node]->cost() > m_data[r]->cost()) {
+				fprintf(stderr, "%s: Integrity failure\n", str);
+				exit(-1);
+			}
+			debug(r, str);
+		}
+	}
+
+};
+
+/** Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path)
+ *
+ * Pathfinding entry-point.
+ * Finds a path from startx/starty to endx/endy for a Map_object with the given movecaps.
+ *
+ * The path is stored in path, in terms of Map_Object::MOVE_* constants.
+ * persist tells the function how hard it should try to find a path:
+ * If persist is 0, the function will never give up early. Otherwise, the
+ * function gives up when it becomes clear that the path must be longer than
+ * persist*bird's distance fields long. 
+ * [not implement right now]: If the terrain contains lots of hills, the cost
+ * calculation will cause the search to terminate earlier than this. If persist==1,
+ * findpath() can only find a path if the terrain is completely flat.
+ *
+ * The function returns the cost of the path (in milliseconds of normal walking
+ * speed) or -1 if no path has been found.
+ *
+ * TODO: terrain impacts movement speed
+ */
+#define COST_PER_FIELD		2000 // TODO
+ 
+int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path)
+{
+	Field *startf, *endf;
+	int upper_cost_limit;
+	Field *curf;
+	Coords cur;
+
+	path->m_path.clear();
+	
+	normalize_coords(&start.x, &start.y);
+	normalize_coords(&end.x, &end.y);
+	
+	// Some stupid cases...
+	if (start == end) {
+		path->m_map = this;
+		path->m_start = start;
+		path->m_end = end;
+		return 0; // duh...
+	}
+		
+	startf = get_field(start);
+	if (!(startf->get_caps() & movecaps)) {
+		if (!(movecaps & MOVECAPS_SWIM))
+			return -1;
+		
+		if (!can_reach_by_water(start))
+			return -1;
+	}
+
+	endf = get_field(end);
+	if (!(endf->get_caps() & movecaps)) {
+		if (!(movecaps & MOVECAPS_SWIM))
+			return -1;
+		
+		if (!can_reach_by_water(end))
+			return -1;
+	}
+	
+	// Increase the counter
+	// If the counter wrapped, clear the entire pathfinding array
+	// This means we clear the array only every 65536 runs
+	m_pathcycle++;
+	if (!m_pathcycle) {
+		memset(m_pathfields, 0, sizeof(Pathfield)*hd.height*hd.width);
+		m_pathcycle++;
+	}
+	
+	if (!persist)
+		upper_cost_limit = 0;
+	else
+		upper_cost_limit = persist * calc_distance(start, end) * COST_PER_FIELD; // assume 2 secs per field
+	
+	// Actual pathfinding
+	StarQueue Open;
+	Pathfield *curpf;
+	
+	curpf = m_pathfields + (startf-fields);
+	curpf->cycle = m_pathcycle;
+	curpf->real_cost = 0;
+	curpf->estim_cost = calc_distance(start, end) * COST_PER_FIELD;
+	curpf->backlink = Map_Object::IDLE;
+	
+	Open.push(curpf);
+
+	while((curpf = Open.pop()))
+	{
+		curf = fields + (curpf-m_pathfields);
+		
+		get_coords(curf, &cur);
+
+		if (upper_cost_limit && curpf->real_cost > upper_cost_limit)
+			break; // upper cost limit reached, give up
+		if (curf == endf)
+			break; // found our target
+
+		// avoid bias by using different orders when pathfinding
+		static const char order1[6] = { Map_Object::WALK_NW, Map_Object::WALK_NE, 
+			Map_Object::WALK_E, Map_Object::WALK_SE, Map_Object::WALK_SW, Map_Object::WALK_W };
+		static const char order2[6] = { Map_Object::WALK_NW, Map_Object::WALK_W, 
+			Map_Object::WALK_SW, Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE };
+		const char *direction;
+		
+		if ((cur.x+cur.y) & 1)
+			direction = order1;
+		else
+			direction = order2;
+
+		// Check all the 6 neighbours		
+		for(uint i = 6; i; i--, direction++) {
+			Field *neighbf;
+			Pathfield *neighbpf;
+			Coords neighb;
+			int cost;
+		
+			switch(*direction) {
+			case Map_Object::WALK_NW: get_tln(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
+			case Map_Object::WALK_NE: get_trn(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
+			case Map_Object::WALK_E: get_rn(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
+			case Map_Object::WALK_SE: get_brn(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
+			case Map_Object::WALK_SW: get_bln(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
+			case Map_Object::WALK_W: get_ln(cur.x, cur.y, curf, &neighb.x, &neighb.y, &neighbf); break;
+			}
+			
+			neighbpf = m_pathfields + (neighbf-fields);
+			
+			// Is the field Closed already?
+			if (neighbpf->cycle == m_pathcycle && neighbpf->heap_index < 0)
+				continue;
+			
+			// Calculate cost and passability
+			if (!(neighbf->get_caps() & movecaps)) {
+				if (!(curf->get_caps() & movecaps & MOVECAPS_SWIM))
+					continue;
+			}
+			
+			cost = curpf->real_cost + COST_PER_FIELD;
+
+			if (neighbpf->cycle != m_pathcycle) {
+				// add to open list
+				neighbpf->cycle = m_pathcycle;
+				neighbpf->real_cost = cost;
+				neighbpf->estim_cost = calc_distance(neighb, end) * COST_PER_FIELD;
+				neighbpf->backlink = *direction;
+				Open.push(neighbpf);
+			} else if (neighbpf->cost() > cost+neighbpf->estim_cost) {
+				// found a better path to a field that's already Open
+				neighbpf->real_cost = cost;
+				neighbpf->backlink = *direction;
+				Open.boost(neighbpf);
+			}
+		}
+	}
+	if (!curpf) // there simply is no path
+		return -1;
+	
+	// Now unwind the taken route (even if we couldn't find a complete one!)
+	int retval;
+	
+	if (curf == endf)
+		retval = curpf->real_cost;
+	else
+		retval = -1;
+	
+	path->m_map = this;
+	path->m_start = start;
+	path->m_end = cur;
+	
+	path->m_path.clear();
+	
+	while(curpf->backlink != Map_Object::IDLE) {
+		path->m_path.push_back(curpf->backlink);
+		
+		// Reverse logic! (WALK_NW needs to find the SE neighbour)
+		switch(curpf->backlink) {
+		case Map_Object::WALK_NW: get_brn(cur.x, cur.y, curf, &cur.x, &cur.y, &curf); break;
+		case Map_Object::WALK_NE: get_bln(cur.x, cur.y, curf, &cur.x, &cur.y, &curf); break;
+		case Map_Object::WALK_E: get_ln(cur.x, cur.y, curf, &cur.x, &cur.y, &curf); break;
+		case Map_Object::WALK_SE: get_tln(cur.x, cur.y, curf, &cur.x, &cur.y, &curf); break;
+		case Map_Object::WALK_SW: get_trn(cur.x, cur.y, curf, &cur.x, &cur.y, &curf); break;
+		case Map_Object::WALK_W: get_rn(cur.x, cur.y, curf, &cur.x, &cur.y, &curf); break;
+		}
+
+		curpf = m_pathfields + (curf-fields);
+	}
+	
+	return retval;
+}
+
+/** Map::can_reach_by_water(Coords field)
+ *
+ * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
+ * MOVECAPS_WALK and at least one of the neighbours has MOVECAPS_SWIM
+ */
+bool Map::can_reach_by_water(Coords field)
+{
+	Field *f = get_field(field);
+	
+	if (f->get_caps() & MOVECAPS_SWIM)
+		return true;
+	if (!(f->get_caps() & MOVECAPS_WALK))
+		return false;
+	
+	Coords n;
+	Field *nf;
+
+	get_tln(field.x, field.y, f, &n.x, &n.y, &nf);
+	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+
+	get_trn(field.x, field.y, f, &n.x, &n.y, &nf);
+	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+
+	get_rn(field.x, field.y, f, &n.x, &n.y, &nf);
+	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+
+	get_brn(field.x, field.y, f, &n.x, &n.y, &nf);
+	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+
+	get_bln(field.x, field.y, f, &n.x, &n.y, &nf);
+	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+
+	get_ln(field.x, field.y, f, &n.x, &n.y, &nf);
+	if (nf->get_caps() & MOVECAPS_SWIM) return true;
+	
+	return false;
 }
 
 // 
@@ -744,9 +1228,9 @@ Field* Map_Region::next(void) {
 }
 
 // 
-// class Map_Region_Cords
+// class Map_Region_Coords
 // 
-void Map_Region_Cords::init(int x, int y, int area, Map *m)
+void Map_Region_Coords::init(int x, int y, int area, Map *m)
 {
 	backwards=0;
 	_area=area;
@@ -767,7 +1251,7 @@ void Map_Region_Cords::init(int x, int y, int area, Map *m)
 	cx=tlx; cy=tly;
 }
 
-int Map_Region_Cords::next(int* retx, int* rety) {
+int Map_Region_Coords::next(int* retx, int* rety) {
    int retval=0;
  
    if(_lf) retval=1;

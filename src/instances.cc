@@ -97,7 +97,7 @@ Map_Object::Map_Object(Map_Object_Descr* descr)
 
 	m_owned_by = -1;
 	m_field = 0; // not linked anywhere
-	m_px = m_py = 0;
+	m_pos.x = m_pos.y = 0;
 	m_linknext = 0;
 	m_linkpprev = 0;
 
@@ -152,12 +152,12 @@ void Map_Object::draw(Game *game, Bitmap* dst, int posx, int posy)
 	sy = ey;
 	
 	switch(m_walking) {
-	case WALK_NW: map->get_brn(m_px, m_py, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
-	case WALK_NE: map->get_bln(m_px, m_py, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
-	case WALK_W: map->get_rn(m_px, m_py, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH; break;
-	case WALK_E: map->get_ln(m_px, m_py, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH; break;
-	case WALK_SW: map->get_trn(m_px, m_py, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
-	case WALK_SE: map->get_tln(m_px, m_py, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
+	case WALK_NW: map->get_brn(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
+	case WALK_NE: map->get_bln(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
+	case WALK_W: map->get_rn(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH; break;
+	case WALK_E: map->get_ln(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH; break;
+	case WALK_SW: map->get_trn(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
+	case WALK_SE: map->get_tln(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
 	
 	case IDLE: break;
 	}
@@ -189,14 +189,24 @@ void Map_Object::set_animation(Game* g, Animation* anim)
 	m_animstart = g->get_gametime();
 }
 
-
-/** Map_Object::end_walk()
+/** Map_Object::is_walking()
  *
- * You must call this function when handling act() after a period of walking
+ * Return true if we're currently walking
  */
-void Map_Object::end_walk()
+bool Map_Object::is_walking()
+{
+	return m_walking != IDLE;
+}
+
+/** Map_Object::act_walk(Game* g)
+ *
+ * Call this from your act() function when is_walking()
+ */
+bool Map_Object::act_walk(Game* g)
 {
 	m_walking = IDLE;
+	
+	return false; // no longer walking
 }
 
 
@@ -215,12 +225,12 @@ bool Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
 	
 	switch(dir) {
 	case IDLE: assert(0); break;
-	case WALK_NW: g->get_map()->get_tln(m_px, m_py, m_field, &newx, &newy, &newf); break;
-	case WALK_NE: g->get_map()->get_trn(m_px, m_py, m_field, &newx, &newy, &newf); break;
-	case WALK_W: g->get_map()->get_ln(m_px, m_py, m_field, &newx, &newy, &newf); break;
-	case WALK_E: g->get_map()->get_rn(m_px, m_py, m_field, &newx, &newy, &newf); break;
-	case WALK_SW: g->get_map()->get_bln(m_px, m_py, m_field, &newx, &newy, &newf); break;
-	case WALK_SE: g->get_map()->get_brn(m_px, m_py, m_field, &newx, &newy, &newf); break;
+	case WALK_NW: g->get_map()->get_tln(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
+	case WALK_NE: g->get_map()->get_trn(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
+	case WALK_W: g->get_map()->get_ln(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
+	case WALK_E: g->get_map()->get_rn(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
+	case WALK_SW: g->get_map()->get_bln(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
+	case WALK_SE: g->get_map()->get_brn(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
 	}
 
 	// Move capability check by ANDing with the field caps
@@ -247,11 +257,11 @@ bool Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
 	return true; // yep, we were successful
 }
 
-/** Map_Object::set_position(Game* g, uint x, uint y, Field* f=0)
+/** Map_Object::set_position(Game* g, int x, int y, Field* f=0)
  *
  * Moves the Map_Object to the given position.
  */
-void Map_Object::set_position(Game* g, uint x, uint y, Field* f)
+void Map_Object::set_position(Game* g, int x, int y, Field* f)
 {
 	if (m_field) {
 		*m_linkpprev = m_linknext;
@@ -263,8 +273,8 @@ void Map_Object::set_position(Game* g, uint x, uint y, Field* f)
 		f = g->get_map()->get_field(x, y);
 
 	m_field = f;		
-	m_px = x;
-	m_py = y;
+	m_pos.x = x;
+	m_pos.y = y;
 	
 	m_linknext = f->objects;
 	m_linkpprev = &f->objects;

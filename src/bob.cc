@@ -23,6 +23,7 @@
 #include "bob.h"
 #include "game.h"
 #include "cmd_queue.h"
+#include "map.h"
 
 //
 // this is a function which reads a animation from a file
@@ -141,11 +142,17 @@ class Critter_Bob : public Map_Object {
 		
 		void init(Game *g);
 		void act(Game* g);
+	
+	private:
+		bool m_walkpath;
+		Path m_path;
+		int m_pathstep;
 };
 
 Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
 	: Map_Object(d)
 {
+	m_walkpath = false;
 }
 
 Critter_Bob::~Critter_Bob()
@@ -164,37 +171,63 @@ void Critter_Bob::init(Game *g)
 
 void Critter_Bob::act(Game* g)
 {
-	if (m_walking != IDLE) {
-		end_walk();
-
-//		cerr << "Critter stops walking" << endl;
-				
-		// 30% chance of stopping
-		if (g->logic_rand() % 100 < 30) {
-			int t = g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
+	if (m_walkpath)
+	{
+		assert(is_walking());
+		
+		if (act_walk(g))
+			return;
+		
+		m_pathstep++;
+		
+		// finished walking that path?
+		if (m_pathstep >= m_path.get_nsteps()) {
+			m_walkpath = false;
+			
+			assert(m_pos == m_path.get_end());
+		
+			int t = 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
 
 			set_animation(g, get_descr()->get_anim());			
 			g->get_cmdqueue()->queue(g->get_gametime()+t, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
 			return;
 		}
 	}
+	else
+	{
+		// Pick a target at random
+		Coords dst;
+		dst.x = m_pos.x + (rand()%5) - 2;
+		dst.y = m_pos.y + (rand()%5) - 2;
+		
+		if (g->get_map()->findpath(m_pos, dst, get_movecaps(), 3, &m_path) <= 0) {
+			g->get_cmdqueue()->queue(g->get_gametime()+g->logic_rand()%1000, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+			return;
+		}
+		
+		m_walkpath = true;
+		m_pathstep = 0;
+	}
 	
 	Animation *a = 0;
-	WalkingDir dir = IDLE;
+	char dir = m_path.get_step(m_pathstep);
 	
-	switch(g->logic_rand() % 6) {
-	case 0: dir = WALK_NW; a = get_descr()->get_walk_nw_anim(); break;
-	case 1: dir = WALK_NE; a = get_descr()->get_walk_ne_anim(); break;
-	case 2: dir = WALK_W; a = get_descr()->get_walk_w_anim(); break;
-	case 3: dir = WALK_E; a = get_descr()->get_walk_e_anim(); break;
-	case 4: dir = WALK_SW; a = get_descr()->get_walk_sw_anim(); break;
-	case 5: dir = WALK_SE; a = get_descr()->get_walk_se_anim(); break;
+	switch(dir) {
+	case WALK_NW: a = get_descr()->get_walk_nw_anim(); break;
+	case WALK_NE: a = get_descr()->get_walk_ne_anim(); break;
+	case WALK_W: a = get_descr()->get_walk_w_anim(); break;
+	case WALK_E: a = get_descr()->get_walk_e_anim(); break;
+	case WALK_SW: a = get_descr()->get_walk_sw_anim(); break;
+	case WALK_SE: a = get_descr()->get_walk_se_anim(); break;
 	}
 	
 //	cerr << "Critter attempts to walk" << endl;
 	
-	if (!start_walk(g, dir, a))
+	if (!start_walk(g, (WalkingDir)dir, a)) {
+		cerr << "critter: What the fuck?" << endl;
+		m_walkpath = false;
 		g->get_cmdqueue()->queue(g->get_gametime()+g->logic_rand()%1000, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+	}
 }
 
 // DOWN HERE: DECRIPTION CLASSES

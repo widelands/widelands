@@ -17,7 +17,6 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
 #include "tribedata.h"
 #include "myfile.h"
@@ -196,7 +195,7 @@ void Building::init(Game* g)
 
 	assert(player);
    
-	player->set_area_seen(m_px, m_py, get_descr()->get_see_area(), true);
+	player->set_area_seen(m_pos.x, m_pos.y, get_descr()->get_see_area(), true);
 }
 
 // 
@@ -531,7 +530,7 @@ void Building_HQ::init(Game* g)
 	set_animation(g, get_descr()->get_idle_anim());
 
    // conquer area
-	conquer_area(get_owned_by(), g->get_map(), m_px, m_py, get_descr()->get_conquers());
+	conquer_area(get_owned_by(), g->get_map(), m_pos.x, m_pos.y, get_descr()->get_conquers());
 }
 
 // HQ description

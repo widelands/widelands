@@ -90,20 +90,10 @@ struct FieldDescr {
 class Building;
 class Creature;
 class Bob;
+class Path;
 
-/*
- * this is mainly the same as in graphic.h the 
- * class Point. but this represents coordinates
- * on the map and is a struct, has no overhead
- * for creation and deletion. this will be a
- * good thing, when this class is used in command
- * queues and so on
- */
-struct Cords {
-   uint x;
-   uint y;
-};
-   
+
+
 /** class Field
  *
  * a field like it is represented in the game
@@ -136,7 +126,9 @@ class Map {
 		  Map& operator=(const Map&);
 
 		  public:
-               Map(void);
+					struct Pathfield;
+               
+					Map(void);
                ~Map(void);
 
                int load_map(const char*, Game*);
@@ -158,12 +150,16 @@ class Map {
 					void recalc_for_field(int fx, int fy);
                Field::Build_Symbol get_build_symbol(int x, int y);
 
-					inline const Cords* get_starting_pos(int plnum) { return &starting_pos[plnum]; }
+					inline const Coords* get_starting_pos(int plnum) { return &starting_pos[plnum]; }
 					
                // Field logic
+               inline Field *get_field(const Coords c);
                inline Field *get_field(const int x, const int y);
                inline void normalize_coords(int *x, int *y);
                inline Field *get_safe_field(int x, int y);
+					inline void get_coords(Field * const f, Coords *c);
+					
+					int calc_distance(Coords a, Coords b);
 
                inline void get_ln(const int fx, const int fy, int *ox, int *oy);
 					inline void get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
@@ -183,11 +179,19 @@ class Map {
 					inline void get_pix(const int fx, const int fy, Field * const f, int *px, int *py);
 					inline void get_pix(const int fx, const int fy, int *px, int *py);
 
+					// Pathfinding
+					int findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path);
+					
+					bool can_reach_by_water(Coords field);
+					
         private:
-               Cords* starting_pos;
+               Coords* starting_pos;
                MapDescrHeader hd;
                World* w;
                Field* fields;
+
+					ushort m_pathcycle;
+					Pathfield* m_pathfields;
 
                // funcs
                int load_s2mf(const char*, Game*);
@@ -199,7 +203,31 @@ class Map {
 
                void recalc_brightness(int fx, int fy, Field *f);
 					void recalc_fieldcaps_pass1(int fx, int fy, Field *f);
-					void recalc_fieldcaps_pass2(int fx, int fy, Field *f);				
+					void recalc_fieldcaps_pass2(int fx, int fy, Field *f);
+};
+
+/** class Path
+ *
+ * Represents a cross-country path found by Path::findpath, for example
+ */
+class Path {
+	friend class Map;
+	
+public:
+	Path() { m_map = 0; }
+	
+	inline bool is_valid() const { return m_map; }
+	inline const Coords &get_start() const { return m_start; }
+	inline const Coords &get_end() const { return m_end; }
+
+	inline int get_nsteps() const { return m_path.size(); }
+	inline char get_step(int idx) const { return m_path[m_path.size()-idx-1]; }
+	
+private:
+	Map *m_map;
+	Coords m_start;
+	Coords m_end;
+	vector<char> m_path;
 };
 
 /*
@@ -209,6 +237,11 @@ Field arithmetics
 
 ==============================================================================
 */
+
+inline Field *Map::get_field(const Coords c)
+{
+	return &fields[c.y*hd.width + c.x];
+}
 
 inline Field *Map::get_field(const int x, const int y)
 {
@@ -236,6 +269,16 @@ inline Field *Map::get_safe_field(int x, int y)
 	return &fields[y*hd.width + x];
 }
 
+/** get_coords
+ *
+ * Calculate the field coordates from the pointer
+ */
+inline void Map::get_coords(Field * const f, Coords *c)
+{
+	int i = f - fields;
+	c->x = i % hd.width;
+	c->y = i / hd.width;
+}
 
 /** get_ln, get_rn, get_tln, get_trn, get_bln, get_brn
  *
@@ -424,16 +467,16 @@ class Map_Region {
 };
 
 // 
-// class Map_Region_Cords
+// class Map_Region_Coords
 //
 // This class is init with a center field and
 // a sourrounding. it then returns the next field
-// in this region with each call to next() by map_cords
-class Map_Region_Cords {
+// in this region with each call to next() by map_Coords
+class Map_Region_Coords {
    public:
-		Map_Region_Cords() { }
-      Map_Region_Cords(int x, int y, int area, Map* m) { init(x, y, area, m); }
-      ~Map_Region_Cords() { }
+		Map_Region_Coords() { }
+      Map_Region_Coords(int x, int y, int area, Map* m) { init(x, y, area, m); }
+      ~Map_Region_Coords() { }
 		
 		void init(int x, int y, int area, Map *m);
 		int next(int*, int*);
