@@ -334,7 +334,8 @@ void Map::cleanup(void) {
             ev->unregister_trigger(t, this);
          }
       }
-      while(!t->is_unreferenced())
+      
+      while(get_number_of_triggers() && t == get_trigger(0) && !t->is_unreferenced())
          t->decr_reference();
       delete_unreferenced_triggers();
    }

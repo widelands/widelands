@@ -38,7 +38,7 @@ class Message_Box_Event_Message_Box : public UIWindow {
 
    private:
       void clicked(int);
-      Event_Message_Box* m_event;
+      bool m_is_modal;
       std::vector<Trigger_Null*> m_trigger;
 };
 

@@ -136,6 +136,8 @@ Unregister from the registry pointer
 */
 Editor_Event_Menu_Choose_Trigger::~Editor_Event_Menu_Choose_Trigger()
 {
+   m_available->selected.unset();
+   m_selected->selected.unset();
    int i=0;
    for(i=0; i<m_selected->get_nr_entries(); i++) {
       m_selected->select(i);
@@ -152,7 +154,7 @@ Editor_Event_Menu_Choose_Trigger::~Editor_Event_Menu_Choose_Trigger()
  */
 void Editor_Event_Menu_Choose_Trigger::update(void) {
 
-    m_available->sort();
+   m_available->sort();
    m_selected->sort();
 
    if(m_available->get_selection()==0)
