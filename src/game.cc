@@ -58,7 +58,7 @@ void Game::run(const char* map, uint nipl) {
 		  Interactive_Player* ip;
 		 
 		  // TEMP
-		  g_ui.create_window(0, 0, 640, 480, Window::FLAT);
+		  Window* win=g_ui.create_window(0, 0, 640, 480, Window::FLAT);
 		  
 		  c=new Map();
 		  if(c->load_map(map)) {
@@ -72,6 +72,7 @@ void Game::run(const char* map, uint nipl) {
 					 ip->interact();
 		  }
 
+		  g_ui.delete_window(win);
 		
 		  delete ip;
 		  delete c;
