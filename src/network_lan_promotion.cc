@@ -30,7 +30,6 @@
 
 LAN_Base::LAN_Base ()
 {
-    int i;
     
     // open the socket
     sock=socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -40,6 +39,8 @@ LAN_Base::LAN_Base ()
     setsockopt (sock, SOL_SOCKET, SO_BROADCAST, (char*) &opt, sizeof(opt));
 
 #ifndef WIN32
+    int i;
+    
     // get a list of all local broadcast addresses
     struct if_nameindex* ifnames=if_nameindex();
     struct ifreq ifr;
@@ -98,12 +99,12 @@ bool LAN_Base::avail ()
 ssize_t LAN_Base::recv (void* buf, size_t len, sockaddr_in* addr)
 {
     socklen_t addrlen=sizeof(sockaddr_in);
-    return recvfrom (sock, buf, len, 0, (sockaddr*) addr, &addrlen);
+    return recvfrom (sock, (DATATYPE) buf, len, 0, (sockaddr*) addr, &addrlen);
 }
 
 void LAN_Base::send (const void* buf, size_t len, const sockaddr_in* addr)
 {
-    sendto (sock, buf, len, 0, (const sockaddr*) addr, sizeof(sockaddr_in));
+    sendto (sock, (const DATATYPE) buf, len, 0, (const sockaddr*) addr, sizeof(sockaddr_in));
 }
 
 void LAN_Base::broadcast (const void* buf, size_t len, unsigned short port)
@@ -117,7 +118,7 @@ void LAN_Base::broadcast (const void* buf, size_t len, unsigned short port)
 	addr.sin_addr.s_addr=*i;
 	addr.sin_port=htons(port);
 	
-	sendto (sock, buf, len, 0, (const sockaddr*) &addr, sizeof(addr));
+	sendto (sock, (const DATATYPE) buf, len, 0, (const sockaddr*) &addr, sizeof(addr));
     }
 }
 
@@ -129,7 +130,7 @@ LAN_Game_Promoter::LAN_Game_Promoter ()
     
     needupdate=true;
     
-    bzero (&gameinfo, sizeof(gameinfo));
+    memset (&gameinfo, 0, sizeof(gameinfo));
     strcpy (gameinfo.magic, "GAME");
 
     gameinfo.version=LAN_PROMOTION_PROTOCOL_VERSION;
@@ -202,7 +203,7 @@ void LAN_Game_Finder::run ()
 	LAN_Game_Info info;
 	sockaddr_in addr;
     
-	if (recv(&info, sizeof(info), &addr) < sizeof(info))
+	if (recv(&info, sizeof(info), &addr) < (int)sizeof(info))
 	    continue;
 	
 	printf ("Received %s packet\n", info.magic);

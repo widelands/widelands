@@ -32,6 +32,7 @@
 
 // be compatible to microsoft
 #define closesocket close
+#define DATATYPE    void*
 
 #else
 
@@ -39,11 +40,17 @@
 // at msdn.microsoft.com
 #include <winsock2.h>
 
+#define DATATYPE    char*
 // microsoft doesn't have these
 typedef unsigned short in_port_t;
 typedef unsigned long in_addr_t;
 
+#ifndef s_addr
 #define s_addr S_addr
+#endif
+
+// This is no typedef on purpose
+#define socklen_t int
 
 #endif
 
