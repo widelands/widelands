@@ -120,6 +120,7 @@ public:
 	inline Bob* get_next_bob(void) { return m_linknext; }
 
 public: // default tasks
+	void reset_tasks(Game*);
 	void send_signal(Game*, std::string sig);
 
 	void start_task_idle(Game*, uint anim, int timeout);

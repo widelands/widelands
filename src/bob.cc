@@ -547,6 +547,32 @@ void Bob::send_signal(Game* g, std::string sig)
 
 /*
 ===============
+Bob::reset_tasks
+
+Force a complete reset of the state stack.
+The state stack is emptied completely, and an init auto task is scheduled
+as if the Bob has just been created and initialized.
+===============
+*/
+void Bob::reset_tasks(Game* g)
+{
+	molog("reset_tasks\n");
+
+	while(m_stack.size()) {
+		m_stack_dirty = false;
+
+		pop_task(g);
+	}
+
+	set_signal("");
+	schedule_act(g, 1);
+	m_sched_init_task = true;
+	m_stack_dirty = false;
+}
+
+
+/*
+===============
 Bob::set_signal
 
 Simply set the signal string without calling any functions.

@@ -72,7 +72,6 @@ public:
 
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
-	virtual void act(Game *g, uint data);
 
 	virtual bool burn_on_destroy();
 
@@ -81,10 +80,10 @@ public:
 	uint get_nrwaresqueues() { return m_wares.size(); }
 	WaresQueue* get_waresqueue(uint idx) { return m_wares[idx]; }
 
+	virtual bool get_building_work(Game* g, Worker* w, bool success);
+
 protected:
 	virtual UIWindow *create_options_window(Interactive_Player *plr, UIWindow **registry);
-
-	void check_work(Game* g);
 
 	void request_builder(Game* g);
 	static void request_builder_callback(Game* g, Request* rq, int ware, Worker* w, void* data);

@@ -912,6 +912,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		Building* bld = m_building->create(g, get_owner(), m_position, false);
 
 		// Walk the builder home safely
+		m_builder->reset_tasks((Game*)g);
 		m_builder->set_location(bld);
 		m_builder->start_task_gowarehouse((Game*)g);
 	}
@@ -971,41 +972,27 @@ void ConstructionSite::request_builder_callback(Game* g, Request* rq, int ware, 
 	delete rq;
 	cs->m_builder_request = 0;
 
-	w->start_task_idle(g, w->get_idle_anim(), -1); // TODO: useful idle animations
-
-	cs->check_work(g);
+	w->start_task_buildingwork(g);
 }
 
 
 /*
 ===============
-ConstructionSite::act [virtual]
+ConstructionSite::get_building_work
 
-Check whether a work step has been completed in this timer function.
+Called by our builder to get instructions.
 ===============
 */
-void ConstructionSite::act(Game *g, uint data)
+bool ConstructionSite::get_building_work(Game* g, Worker* w, bool success)
 {
-	check_work(g);
+	assert(w == m_builder);
 
-	Building::act(g, data);
-}
-
-
-/*
-===============
-ConstructionSite::check_work
-
-If we're currently working, check if the next step is finished.
-If we're not working, check if we can start to work now.
-===============
-*/
-void ConstructionSite::check_work(Game* g)
-{
-	// Check if we're done building
-	if (m_working)
-	{
-		if ((int)(g->get_gametime() - m_work_steptime) >= 0) {
+	// Check if one step has completed
+	if (m_working) {
+		if ((int)(g->get_gametime() - m_work_steptime) < 0) {
+			w->start_task_idle(g, w->get_idle_anim(), m_work_steptime - g->get_gametime());
+			return true;
+		} else {
 			molog("ConstructionSite::check_work: step %i completed\n", m_work_completed);
 
 			m_work_completed++;
@@ -1017,7 +1004,7 @@ void ConstructionSite::check_work(Game* g)
 	}
 
 	// Check if we've got wares to consume
-	if (!m_working && m_work_completed < m_work_steps && m_builder)
+	if (m_work_completed < m_work_steps)
 	{
 		for(uint i = 0; i < m_wares.size(); i++) {
 			WaresQueue* wq = m_wares[i];
@@ -1033,10 +1020,14 @@ void ConstructionSite::check_work(Game* g)
 			wq->update(g);
 
 			m_working = true;
-			m_work_steptime = schedule_act(g, CONSTRUCTIONSITE_STEP_TIME);
-			break;
+			m_work_steptime = g->get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
+
+			w->start_task_idle(g, w->get_idle_anim(), CONSTRUCTIONSITE_STEP_TIME);
+			return true;
 		}
 	}
+
+	return false; // sorry, got no work for you
 }
 
 
@@ -1051,8 +1042,8 @@ void ConstructionSite::wares_queue_callback(Game* g, WaresQueue* wq, int ware, v
 {
 	ConstructionSite* cs = (ConstructionSite*)data;
 
-	if (!cs->m_working)
-		cs->check_work(g);
+	if (!cs->m_working && cs->m_builder)
+		cs->m_builder->update_task_buildingwork(g);
 }
 
 
@@ -2318,7 +2309,7 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 					item->get_ware_descr()->get_name());
 
 		molog("ProductionSite::get_building_work: start dropoff\n");
-		
+
 		w->start_task_dropoff(g, item);
 		return true;
 	}

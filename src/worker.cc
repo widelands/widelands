@@ -1455,7 +1455,9 @@ void Worker::buildingwork_signal(Game* g, State* state)
 ===============
 Worker::update_task_buildingwork
 
-Wake up the buildingwork task.
+Wake up the buildingwork task if it was sleeping.
+Otherwise, the buildingwork task will update as soon as the previous task
+is finished.
 ===============
 */
 void Worker::update_task_buildingwork(Game* g)
