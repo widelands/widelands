@@ -211,7 +211,7 @@ void Worker::set_location(PlayerImmovable *location)
 		// Our location has been destroyed, we are now fugitives.
 		// Interrupt whatever we've been doing.
 		if (m_state > State_None)
-			interrupt_task(get_owner()->get_game());
+			interrupt_task(static_cast<Game*>(get_owner()->get_game()));
 	
 		set_economy(0);
 	}
@@ -286,7 +286,7 @@ void Worker::change_job_request(bool cancel)
 	if (cancel) {
 		m_request = 0;
 	} else {
-		if (m_route && !m_route->verify(get_owner()->get_game())) {
+		if (m_route && !m_route->verify(static_cast<Game*>(get_owner()->get_game()))) {
 			delete m_route;
 			m_route = 0;
 		}
@@ -352,7 +352,7 @@ Worker::init
 Initialize the worker
 ===============
 */
-void Worker::init(Game *g)
+void Worker::init(Editor_Game_Base *g)
 {
 	Bob::init(g);
 	
@@ -367,7 +367,7 @@ Worker::cleanup
 Remove the worker.
 ===============
 */
-void Worker::cleanup(Game *g)
+void Worker::cleanup(Editor_Game_Base *g)
 {
 	if (get_location(g))
 		set_location(0);

@@ -104,7 +104,7 @@ struct FindBob {
  * Warning: width and height must be even
  */
 class Map {
-	friend class Game;
+	friend class Editor_Game_Base;
 
 public:
 	struct Pathfield;

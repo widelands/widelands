@@ -43,7 +43,7 @@ Object_Manager::cleanup
 Clear all objects
 ===============
 */
-void Object_Manager::cleanup(Game *g)
+void Object_Manager::cleanup(Editor_Game_Base *g)
 {
 	while(!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
@@ -83,7 +83,7 @@ void Object_Manager::remove(Map_Object *obj)
 Object_Ptr::get
 ===============
 */
-Map_Object* Object_Ptr::get(Game* game)
+Map_Object* Object_Ptr::get(Editor_Game_Base* game)
 {
 	if (!m_serial) return 0;
 	Map_Object* obj = game->get_objects()->get_object(m_serial);
@@ -174,7 +174,7 @@ Call this function if you want to remove the object immediately, without
 any effects.
 ===============
 */
-void Map_Object::remove(Game *g)
+void Map_Object::remove(Editor_Game_Base *g)
 {
 	cleanup(g);
 	delete this;
@@ -191,7 +191,7 @@ performed:
 ...
 ===============
 */
-void Map_Object::destroy(Game *g)
+void Map_Object::destroy(Editor_Game_Base *g)
 {
 	remove(g);
 }
@@ -218,9 +218,23 @@ Make sure you call this from derived classes!
 Initialize the object by adding it to the object manager.
 ===============
 */
-void Map_Object::init(Game* g)
+void Map_Object::init(Editor_Game_Base* g)
 {
 	g->get_objects()->insert(this);
+}
+
+/*
+===============
+Map_Object::init_for_game
+
+Make sure you call this from derived classes!
+
+Initialize the object by adding it to the object manager.
+===============
+*/
+void Map_Object::init_for_game(Game* g)
+{
+	// nothing to do
 }
 
 
@@ -231,9 +245,21 @@ Map_Object::cleanup
 Make sure you call this from derived classes!
 ===============
 */
-void Map_Object::cleanup(Game *g)
+void Map_Object::cleanup(Editor_Game_Base *g)
 {
 	g->get_objects()->remove(this);
+}
+
+/*
+===============
+Map_Object::cleanup_for_game
+
+Make sure you call this from derived classes!
+===============
+*/
+void Map_Object::cleanup_for_game(Game *g)
+{
+   // nothing to do
 }
 
 /*

@@ -25,6 +25,7 @@
 #include "tribe.h"
 #include "cmd_queue.h"
 #include "ware.h"
+#include "editor_game_base.h"
 
 /** class Game
  *
@@ -42,7 +43,7 @@ enum {
 class Player;
 class Interactive_Player;
 
-class Game {
+class Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands 
 
 public:
@@ -54,11 +55,8 @@ public:
 	void think(void);
 	
 	// startup phase
-	inline Map *get_map() { return m_map; }
 	void set_map(Map* map);
 	
-	void remove_player(int plnum);
-	void add_player(int plnum, int type, const char* tribe, const uchar *playercolor);
 
 	bool can_start();
 	void postload();
@@ -68,15 +66,12 @@ public:
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
    inline int get_gametime(void) { return cmdqueue->get_time(); }
 
-	inline Object_Manager* get_objects() { return m_objects; }
-	
 	// Start using logic_rand() for the actual gamelogic (e.g. critter).
 	// Do NOT use for random events in the UI or other display code.
 	// This will allow us to plug another PRNG in here for game playbacks
 	// and other fancy stuff.
 	inline int logic_rand() { return rand(); }
 	
-	inline Player* get_player(int n) { assert(n>=1 && n<=MAX_PLAYERS); return m_players[n-1]; }
 	bool get_allow_cheats();
 	
 	inline int get_ware_id(const char *name) { return m_wares.get_index(name); }
@@ -84,15 +79,14 @@ public:
 	int get_safe_ware_id(const char *name);
 	inline Ware_Descr *get_ware_description(int id) { return m_wares.get(id); }
 	
-public:
 	void send_player_command(int pid, int cmd, int arg1=0, int arg2=0, int arg3=0);
 
 	Building *warp_building(int x, int y, char owner, int idx);
 	Bob *create_bob(int x, int y, int idx);
 	Immovable *create_immovable(int x, int y, int idx);
 
-	void conquer_area(uchar playernr, Coords coords, int radius);
-	void recalc_for_field(Coords coords, int radius = 0);
+   // TEMP
+   inline Interactive_Player* get_ipl(void) { return ipl; } 
 	
 private:
 	void init_wares();
@@ -100,11 +94,7 @@ private:
 	int		m_state;
 
 	Interactive_Player*			ipl;
-	std::vector<Tribe_Descr*>	m_tribes;
-	Map*								m_map;
  	Cmd_Queue*						cmdqueue;
-	Player*							m_players[MAX_PLAYERS];
-   Object_Manager*				m_objects;
 
 	Descr_Maintainer<Ware_Descr>	m_wares;
 	

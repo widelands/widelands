@@ -90,12 +90,14 @@ public:
 	void hide_options();
 
 protected:
-	void start_animation(Game *g, uint anim);
+	void start_animation(Editor_Game_Base *g, uint anim);
 
-	virtual void init(Game *g);
-	virtual void cleanup(Game *g);
+	virtual void init(Editor_Game_Base *g);
+	virtual void cleanup(Editor_Game_Base *g);
+	virtual void init_for_game(Game *g);
+	virtual void cleanup_for_game(Game *g);
 
-	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, Point pos);
+	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 	
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry) = 0;
 	
@@ -140,8 +142,10 @@ public:
 	Warehouse(Warehouse_Descr *descr);
 	virtual ~Warehouse();
 
-	virtual void init(Game *g);
-	virtual void cleanup(Game *g);
+	virtual void init(Editor_Game_Base *g);
+	virtual void cleanup(Editor_Game_Base *g);
+	virtual void init_for_game(Game *g);
+	virtual void cleanup_for_game(Game *g);
 
 	virtual void act(Game *g);
 	

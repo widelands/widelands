@@ -94,7 +94,7 @@ Flag::create [static]
 Create a flag at the given location
 ===============
 */
-Flag *Flag::create(Game *g, Player *owner, Coords coords)
+Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
 {
 	Road *road = 0;
 	BaseImmovable *imm = g->get_map()->get_immovable(coords);
@@ -190,7 +190,7 @@ Flag::attach_building
 Call this only from the Building init!
 ===============
 */
-void Flag::attach_building(Game *g, Building *building)
+void Flag::attach_building(Editor_Game_Base *g, Building *building)
 {
 	assert(!m_building);
 	
@@ -213,7 +213,7 @@ Flag::detach_building
 Call this only from the Building cleanup!
 ===============
 */
-void Flag::detach_building(Game *g)
+void Flag::detach_building(Editor_Game_Base *g)
 {
 	assert(m_building);
 
@@ -321,7 +321,7 @@ Road *Flag::get_road(Flag *flag)
 Flag::init
 ===============
 */
-void Flag::init(Game *g)
+void Flag::init(Editor_Game_Base *g)
 {
 	PlayerImmovable::init(g);
 
@@ -333,12 +333,22 @@ void Flag::init(Game *g)
 
 /*
 ===============
+Flag::init_for_game
+===============
+*/
+void Flag::init_for_game(Game *g)
+{
+	PlayerImmovable::init_for_game(g);
+}
+
+/*
+===============
 Flag::cleanup
 
 Detach building and free roads.
 ===============
 */
-void Flag::cleanup(Game *g)
+void Flag::cleanup(Editor_Game_Base *g)
 {
 	if (m_building) {
 		m_building->remove(g); // immediate death
@@ -361,12 +371,24 @@ void Flag::cleanup(Game *g)
 
 /*
 ===============
+Flag::cleanup_for_game
+
+Detach building and free roads.
+===============
+*/
+void Flag::cleanup_for_game(Game *g)
+{
+	PlayerImmovable::cleanup_for_game(g);
+}
+
+/*
+===============
 Flag::draw
 
 Draw the flag.
 ===============
 */
-void Flag::draw(Game* game, RenderTarget* dst, FCoords coords, Point pos)
+void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
 {
 	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, 
 	              get_owner()->get_playercolor());
@@ -426,7 +448,7 @@ Road::create [static]
 Create a road between the given flags, using the given path.
 ===============
 */
-Road *Road::create(Game *g, int type, Flag *start, Flag *end, const Path &path)
+Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path)
 {
 	assert(start->get_position() == path.get_start());
 	assert(end->get_position() == path.get_end());
@@ -438,10 +460,12 @@ Road *Road::create(Game *g, int type, Flag *start, Flag *end, const Path &path)
 	r->m_end = end;
 	r->set_path(g, path);
 	r->init(g);
-	return r;
+	// TEMP
+	r->init_for_game(static_cast<Game*>(g));
+
+   return r;
 }
 
-	
 /*
 ===============
 Road::get_type
@@ -495,7 +519,7 @@ Road::set_path
 Set the new path, calculate costs.
 ===============
 */
-void Road::set_path(Game *g, const Path &path)
+void Road::set_path(Editor_Game_Base *g, const Path &path)
 {
 	assert(path.get_start() == m_start->get_position());
 	assert(path.get_end() == m_end->get_position());
@@ -511,7 +535,7 @@ Road::mark_map
 Add road markings to the map
 ===============
 */
-void Road::mark_map(Game *g)
+void Road::mark_map(Editor_Game_Base *g)
 {
 	Map *map = g->get_map();
 	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
@@ -549,7 +573,7 @@ Road::unmark_map
 Remove road markings from the map
 ===============
 */
-void Road::unmark_map(Game *g)
+void Road::unmark_map(Editor_Game_Base *g)
 {
 	Map *map = g->get_map();
 	FCoords curf(m_path.get_start(), map->get_field(m_path.get_start()));
@@ -587,9 +611,11 @@ Road::init
 Initialize the road.
 ===============
 */
-void Road::init(Game *g)
+void Road::init(Editor_Game_Base *gg)
 {
 	assert(m_path.get_nsteps() >= 2);
+
+   Game* g = static_cast<Game*>(gg); 
 
 	PlayerImmovable::init(g);
 
@@ -622,9 +648,11 @@ Road::cleanup
 Cleanup the road
 ===============
 */
-void Road::cleanup(Game *g)
+void Road::cleanup(Editor_Game_Base *gg)
 {
-	// Release carrier
+   Game* g = static_cast<Game*>(gg); 
+	
+   // Release carrier
 	if (m_carrier_request) {
 		get_economy()->remove_request(m_carrier_request);
 		delete m_carrier_request;
@@ -659,7 +687,7 @@ the new flag initializes. We remove markings to avoid interference with the
 flag.
 ===============
 */
-void Road::presplit(Game *g, Coords split)
+void Road::presplit(Editor_Game_Base *g, Coords split)
 {
 	unmark_map(g);
 }
@@ -674,9 +702,11 @@ After the split, this road will span [start...new flag]. A new road will
 be created to span [new flag...end]
 ===============
 */
-void Road::postsplit(Game *g, Flag *flag)
+void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 {
-	Flag *oldend = m_end;
+   Game* g = static_cast<Game*>(gg); 
+	
+   Flag *oldend = m_end;
 	int dir;
 	
 	// detach from end
@@ -753,7 +783,7 @@ Road::draw
 The road is drawn by the terrain renderer via marked fields.
 ===============
 */
-void Road::draw(Game* game, RenderTarget* dst, FCoords coords, Point pos)
+void Road::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
 {
 }
 
@@ -1633,7 +1663,7 @@ is handled by the actual split/merge functions.
 void Economy::remove_request(Request *req)
 {
 	if (req->get_state() == Request::TRANSFER)
-		req->cancel_transfer(get_owner()->get_game());
+		req->cancel_transfer(static_cast<Game*>(get_owner()->get_game()));
 	
 	m_requests[req->get_ware()].remove(req);
 }
@@ -1732,7 +1762,7 @@ void Economy::do_split(Flag *f)
 	log("  split %i flags\n", e->get_nrflags());
 	
 	// Split the requests by looking at their owner
-	Game *game = get_owner()->get_game();
+	Game *game = static_cast<Game*>(get_owner()->get_game());
 	
 	for(int ware = 0; ware < (int)m_requests.size(); ware++) {
 		int idx = 0;
@@ -1789,7 +1819,7 @@ bool Economy::process_request(Request *req)
 	Warehouse *best_warehouse = 0;
 	Route *best_route = 0;
 	int best_cost = -1;
-	Flag *target_flag = req->get_target_flag(get_owner()->get_game());
+	Flag *target_flag = req->get_target_flag(static_cast<Game*>(get_owner()->get_game()));
 	
 	// TODO: traverse idle wares
 	
@@ -1819,7 +1849,7 @@ bool Economy::process_request(Request *req)
 	if (!best_route)
 		return false;
 	
-	req->start_transfer(get_owner()->get_game(), best_warehouse, best_route);
+	req->start_transfer(static_cast<Game*>(get_owner()->get_game()), best_warehouse, best_route);
 	return true;
 }
 
@@ -1851,7 +1881,7 @@ int Economy::match_requests(Warehouse *wh)
 				continue;
 			
 			// Good, there's a request to fulfill
-			Flag *target_flag = req->get_target_flag(get_owner()->get_game());
+			Flag *target_flag = req->get_target_flag(static_cast<Game*>(get_owner()->get_game()));
 			Route route;
 			bool success;
 			
@@ -1859,7 +1889,7 @@ int Economy::match_requests(Warehouse *wh)
 			if (!success)
 				throw wexception("match_requests(): find_route failed");
 			
-			req->start_transfer(get_owner()->get_game(), wh, &route);
+			req->start_transfer(static_cast<Game*>(get_owner()->get_game()), wh, &route);
 			
 			transfers++;
 			if (!--stock)

@@ -53,11 +53,11 @@ public:
 	virtual int get_size() = 0;
 	virtual bool get_passable() = 0;
 	
-	virtual void draw(Game*, RenderTarget* dst, FCoords coords, Point pos) = 0;
+	virtual void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos) = 0;
 	
 protected:
-	void set_position(Game *g, Coords c);
-	void unset_position(Game *g, Coords c);
+	void set_position(Editor_Game_Base *g, Coords c);
+	void unset_position(Editor_Game_Base *g, Coords c);
 };
 
 class Immovable;
@@ -98,7 +98,7 @@ public:
 	void init(Game *g);
 	void cleanup(Game *g);
 
-	void draw(Game*, RenderTarget* dst, FCoords coords, Point pos);
+	void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos);
 
 protected:
 	Coords		m_position;
@@ -136,8 +136,10 @@ public:
 protected:
 	void set_owner(Player *owner);
 	
-	virtual void init(Game *g);
-	virtual void cleanup(Game *g);
+	virtual void init(Editor_Game_Base *g);
+	virtual void cleanup(Editor_Game_Base *g);
+	virtual void init_for_game(Game *g);
+	virtual void cleanup_for_game(Game *g);
 		
 private:
 	Player		*m_owner;

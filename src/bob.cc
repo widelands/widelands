@@ -79,7 +79,8 @@ Bob *Bob_Descr::create(Game *g, Player *owner, Coords coords)
 	bob->set_owner(owner);
 	bob->set_position(g, coords);
 	bob->init(g);
-	return bob;
+	
+   return bob;
 }
 
 
@@ -179,14 +180,28 @@ Bob::init
 
 Make sure you call this from derived classes!
 
+Initialize the object
+===============
+*/
+void Bob::init(Editor_Game_Base* g)
+{
+	Map_Object::init(g);
+}
+
+/*
+===============
+Bob::init_for_game
+
+Make sure you call this from derived classes!
+
 Initialize the object by setting the initial task.
 ===============
 */
-void Bob::init(Game* g)
+void Bob::init_for_game(Game* g)
 {
-	Map_Object::init(g);
+   Map_Object::init_for_game(g);
 
-	// Initialize task system
+   // Initialize task system
 	m_lasttask = 0;
 	m_lasttask_success = true;
 	m_nexttask = 0;
@@ -194,29 +209,39 @@ void Bob::init(Game* g)
 	do_next_task(g);
 }
 
-
 /*
 ===============
 Bob::cleanup
 
+Perform independant cleanup as necessary.
+===============
+*/
+void Bob::cleanup(Editor_Game_Base *g)
+{
+   Map_Object::cleanup(g);
+}
+
+/*
+===============
+Bob::cleanup_for_game
+
 Perform Game-related cleanup as necessary.
 ===============
 */
-void Bob::cleanup(Game *g)
+void Bob::cleanup_for_game(Game *g)
 {
 	if (get_current_task())
 		task_end(g); // subtle...
-	
-	if (m_position.field) {
+
+   if (m_position.field) {
 		m_position.field = 0;
 		*m_linkpprev = m_linknext;
 		if (m_linknext)
 			m_linknext->m_linkpprev = m_linkpprev;
-	}
-	
-	Map_Object::cleanup(g);
+	}	
+   
+   Map_Object::cleanup_for_game(g);
 }
-
 
 /*
 ===============

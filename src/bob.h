@@ -78,8 +78,10 @@ public:
 	virtual int get_type();
 	virtual uint get_movecaps() { return 0; }
 		
-	virtual void init(Game*);
-	virtual void cleanup(Game*);
+	virtual void init(Editor_Game_Base*);
+	virtual void cleanup(Editor_Game_Base*);
+	virtual void init_for_game(Game*);
+	virtual void cleanup_for_game(Game*);
 	virtual void act(Game*);
 		
 	virtual void draw(Game* game, RenderTarget* dst, Point pos);

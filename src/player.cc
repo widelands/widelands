@@ -29,12 +29,12 @@
 // class Player
 //
 //
-Player::Player(Game* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor)
+Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor)
 {
    m_type = type; 
 	m_plnum = plnum;
 	m_tribe = tribe;
-	m_game = g;
+	m_egbase = g;
    seen_fields = 0;
 	
 	for(int i = 0; i < 4; i++)
@@ -49,14 +49,17 @@ Player::~Player(void)
 
 /*
 ===============
-Player::setup
+Player::init_for_game
 
 Prepare the player for in-game action
+
+we could use static cast to upcast our Editor_Game_Base object
+but instead, we let us pass the object once again
 ===============
 */
-void Player::setup()
+void Player::init_for_game(Game* game) 
 {
-	Map *map = m_game->get_map();
+	Map *map = game->get_map();
 
 	seen_fields = new std::vector<bool>(map->get_width()*map->get_height(), false);
 
@@ -65,10 +68,10 @@ void Player::setup()
 	int idx = get_tribe()->get_building_index("headquarters");
 	if (idx < 0)
 		throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
-	Warehouse *wh = (Warehouse *)m_game->warp_building(c.x, c.y, m_plnum, idx);
+	Warehouse *wh = (Warehouse *)game->warp_building(c.x, c.y, m_plnum, idx);
 
 	//	Add starting wares
-	wh->create_wares(m_game->get_safe_ware_id("carrier"), 20);
+	wh->create_wares(game->get_safe_ware_id("carrier"), 20);
 }
 
 /*
@@ -80,7 +83,7 @@ Return filtered buildcaps that take the player's territory into account.
 */
 int Player::get_buildcaps(Coords coords)
 {
-	FCoords fc = m_game->get_map()->get_fcoords(coords);
+	FCoords fc = m_egbase->get_map()->get_fcoords(coords);
 	int buildcaps = fc.field->get_caps();
 	
 	if (fc.field->get_owned_by() != get_player_number())
@@ -90,7 +93,7 @@ int Player::get_buildcaps(Coords coords)
 	FCoords neighb[6];
 	
 	for(int dir = 1; dir <= 6; dir++) {
-		m_game->get_map()->get_neighbour(fc, dir, &neighb[dir-1]);
+		m_egbase->get_map()->get_neighbour(fc, dir, &neighb[dir-1]);
 		
 		if (neighb[dir-1].field->get_owned_by() != get_player_number())
 			return 0;
@@ -110,7 +113,7 @@ Mark the given area as (un)seen
 */
 void Player::set_area_seen(int x, int y, uint area, bool on)
 {
-	Map_Region_Coords r(Coords(x, y), area, m_game->get_map());
+	Map_Region_Coords r(Coords(x, y), area, m_egbase->get_map());
   
 	while(r.next(&x, &y)) {
       set_field_seen(x, y, on);
@@ -129,7 +132,7 @@ void Player::build_flag(Coords c)
 	int buildcaps = get_buildcaps(c);
 	
 	if (buildcaps & BUILDCAPS_FLAG)
-		Flag::create(m_game, this, c);
+		Flag::create(m_egbase, this, c);
 }
 
 /*
@@ -142,11 +145,11 @@ by the player.
 */
 void Player::rip_flag(Coords c)
 {
-	BaseImmovable *imm = m_game->get_map()->get_immovable(c);
+	BaseImmovable *imm = m_egbase->get_map()->get_immovable(c);
 	
 	if (imm && imm->get_type() == Map_Object::FLAG) {
 		if (((Flag *)imm)->get_owner() == this)
-			imm->destroy(m_game);
+			imm->destroy(m_egbase);
 	}
 }
 
@@ -163,7 +166,7 @@ in some situations over the network.
 */
 void Player::build_road(const Path *path)
 {
-	Map *map = m_game->get_map();
+	Map *map = m_egbase->get_map();
 	BaseImmovable *imm;
 	Flag *start, *end;
 	
@@ -201,7 +204,7 @@ void Player::build_road(const Path *path)
 	}
 	
 	// fine, we can build the road
-	Road::create(m_game, Road_Normal, start, end, *path);
+	Road::create(m_egbase, Road_Normal, start, end, *path);
 }
 
 /*
@@ -216,5 +219,5 @@ void Player::remove_road(Road *road)
 	if (road->get_flag_start()->get_owner() != this)
 		return;
 	
-	road->destroy(m_game);
+	road->destroy(m_egbase);
 }

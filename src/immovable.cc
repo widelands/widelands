@@ -59,7 +59,7 @@ Associate the given field with this immovable. Recalculate if necessary.
 Only call this during init.
 ===============
 */
-void BaseImmovable::set_position(Game *g, Coords c)
+void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 {
 	Field *f = g->get_map()->get_field(c);
 
@@ -86,7 +86,7 @@ Remove the link to the given field.
 Only call this during cleanup.
 ===============
 */
-void BaseImmovable::unset_position(Game *g, Coords c)
+void BaseImmovable::unset_position(Editor_Game_Base *g, Coords c)
 {
 	Field *f = g->get_map()->get_field(c);
 
@@ -266,7 +266,7 @@ Draw the immovable at the given position.
 coords is the field that draw() was called for.
 ===============
 */
-void Immovable::draw(Game* game, RenderTarget* dst, FCoords coords, Point pos)
+void Immovable::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
 {
 	if (!m_anim)
 		return;
@@ -402,9 +402,21 @@ PlayerImmovable::init
 Initialize the immovable.
 ===============
 */
-void PlayerImmovable::init(Game *g)
+void PlayerImmovable::init(Editor_Game_Base *g)
 {
 	BaseImmovable::init(g);
+}
+
+/*
+===============
+PlayerImmovable::init_for_game
+
+Initialize the immovable.
+===============
+*/
+void PlayerImmovable::init_for_game(Game *g)
+{
+	BaseImmovable::init_for_game(g);
 }
 
 /*
@@ -414,11 +426,26 @@ PlayerImmovable::cleanup
 Release workers
 ===============
 */
-void PlayerImmovable::cleanup(Game *g)
+void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
 	while(m_workers.size())
 		m_workers[0]->set_location(0);
 
 	BaseImmovable::cleanup(g);
+}
+
+/*
+===============
+PlayerImmovable::cleanup_for_game
+
+Release workers
+===============
+*/
+void PlayerImmovable::cleanup_for_game(Game *g)
+{
+	while(m_workers.size())
+		m_workers[0]->set_location(0);
+	
+   BaseImmovable::cleanup_for_game(g);
 }
 

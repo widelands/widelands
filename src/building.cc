@@ -176,7 +176,7 @@ Building::start_animation
 Start the given animation
 ===============
 */
-void Building::start_animation(Game *g, uint anim)
+void Building::start_animation(Editor_Game_Base *g, uint anim)
 {
 	m_anim = anim;
 	m_animstart = g->get_gametime();
@@ -189,7 +189,7 @@ Building::init
 Common building initialization code. You must call this from derived class' init.
 ===============
 */
-void Building::init(Game* g)
+void Building::init(Editor_Game_Base* g)
 {
 	PlayerImmovable::init(g);
 
@@ -231,12 +231,24 @@ void Building::init(Game* g)
 
 /*
 ===============
+Building::init_for_game
+
+Game building initialization code. You must call this from derived class' init.
+===============
+*/
+void Building::init_for_game(Game* g)
+{
+	PlayerImmovable::init_for_game(g);
+}
+
+/*
+===============
 Building::cleanup
 
 Cleanup the building
 ===============
 */
-void Building::cleanup(Game *g)
+void Building::cleanup(Editor_Game_Base *g)
 {
 	// Remove from flag
 	m_flag->detach_building(g);
@@ -263,12 +275,25 @@ void Building::cleanup(Game *g)
 
 /*
 ===============
+Building::cleanup_for_game
+
+Cleanup the building
+===============
+*/
+void Building::cleanup_for_game(Game *g)
+{
+	PlayerImmovable::cleanup_for_game(g);
+}
+
+
+/*
+===============
 Building::draw
 
 Draw the building.
 ===============
 */
-void Building::draw(Game* game, RenderTarget* dst, FCoords coords, Point pos)
+void Building::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
 {
 	if (coords != m_position)
 		return; // draw big buildings only once
@@ -377,14 +402,26 @@ Warehouse::init
 Conquer the land around the HQ on init.
 ===============
 */	
-void Warehouse::init(Game* g)
+void Warehouse::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
 	if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
 		g->conquer_area(get_owner()->get_player_number(), m_position, get_descr()->get_conquers());
-	
-	g->get_cmdqueue()->queue(g->get_gametime()+CARRIER_SPAWN_INTERVAL,
+}
+
+/*
+===============
+Warehouse::init_for_game
+
+Conquer the land around the HQ on init.
+===============
+*/	
+void Warehouse::init_for_game(Game* g)
+{
+	Building::init_for_game(g);
+
+   g->get_cmdqueue()->queue(g->get_gametime()+CARRIER_SPAWN_INTERVAL,
 			SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
 }
 
@@ -395,12 +432,25 @@ Warehouse::cleanup
 Destroy the warehouse.
 ===============
 */
-void Warehouse::cleanup(Game *g)
+void Warehouse::cleanup(Editor_Game_Base *g)
 {
 	// TODO: un-conquer the area?
 
 	Building::cleanup(g);
 }
+
+/*
+===============
+Warehouse::cleanup_for_game
+
+Destroy the warehouse.
+===============
+*/
+void Warehouse::cleanup_for_game(Game *g)
+{
+	Building::cleanup_for_game(g);
+}
+
 
 /*
 ===============

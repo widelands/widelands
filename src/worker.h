@@ -92,7 +92,7 @@ public:
 	
 	virtual uint get_movecaps();
 	
-	inline PlayerImmovable *get_location(Game *g) { return (PlayerImmovable*)m_location.get(g); }
+	inline PlayerImmovable *get_location(Editor_Game_Base *g) { return (PlayerImmovable*)m_location.get(g); }
 	inline Economy *get_economy() { return m_economy; }
 
 	void set_location(PlayerImmovable *location);
@@ -108,8 +108,8 @@ public:
 	
 	inline Route *get_route() { return m_route; }
 	
-	virtual void init(Game *g);
-	virtual void cleanup(Game *g);
+	virtual void init(Editor_Game_Base *g);
+	virtual void cleanup(Editor_Game_Base *g);
 
 protected:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);

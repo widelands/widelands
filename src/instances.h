@@ -22,7 +22,9 @@
 
 #include "field.h"
 
+class Editor_Game_Base;
 class Game;
+class Object_Manager;
 class RenderTarget;
 class Animation;
 class Path;
@@ -124,16 +126,22 @@ public:
 	inline int get_serial(void) const { return m_serial; }
 	inline bool has_attribute(uint attr) { return m_descr->has_attribute(attr); }
 	
-	void remove(Game*);
-	virtual void destroy(Game*);
+	void remove(Editor_Game_Base*);
+	virtual void destroy(Editor_Game_Base*);
 
+   // The next two functions are really only needed in games.
+   // Not in Editor
 	void schedule_destroy(Game *g);
-	
 	virtual void act(Game*);
 
 protected:	
-	virtual void init(Game*);
-	virtual void cleanup(Game*);
+   // init for editor and game
+	virtual void init(Editor_Game_Base*);
+	virtual void cleanup(Editor_Game_Base*);
+
+   // init for game alone
+   virtual void init_for_game(Game*);
+   virtual void cleanup_for_game(Game*);
 
 protected:
 	Map_Object_Descr *m_descr;
@@ -154,7 +162,7 @@ public:
 	Object_Manager() { m_lastserial = 0; }
 	~Object_Manager(void);
 
-	void cleanup(Game *g);
+	void cleanup(Editor_Game_Base *g);
 		
 	inline Map_Object* get_object(uint serial) {
 		objmap_t::iterator it = m_objects.find(serial);
@@ -184,9 +192,9 @@ public:
 	inline void set(Map_Object* obj) { if (obj) m_serial = obj->m_serial; else m_serial = 0; }
 	inline Object_Ptr& operator = (Map_Object* obj) { set(obj); return *this; }
 	
-	// dammit... without a Game object, we can't implement a Map_Object* operator
+	// dammit... without a Editor_Game_Base object, we can't implement a Map_Object* operator
 	// (would be _really_ nice)
-	Map_Object* get(Game* g);
+	Map_Object* get(Editor_Game_Base* g);
 		
 private:
 	uint m_serial;

@@ -121,55 +121,6 @@ void Game::set_map(Map* map)
 }
 
 
-/*
-===============
-Game::remove_player
-
-Remove the player with the given number
-===============
-*/
-void Game::remove_player(int plnum)
-{
-	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
-	assert(m_state != gs_running);
-	
-	if (m_players[plnum-1]) {
-		delete m_players[plnum-1];
-		m_players[plnum-1] = 0;
-	}		
-}
-
-
-/*
-===============
-Game::add_player
-
-Create the player structure for the given plnum.
-Note that AI player structures and the Interactive_Player are created when
-the game starts. Similar for remote players.
-===============
-*/
-void Game::add_player(int plnum, int type, const char* tribe, const uchar *playercolor)
-{
-	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
-	assert(m_state != gs_running);
-	
-	if (m_players[plnum-1])
-		remove_player(plnum);
-
-	// Get the player's tribe
-	uint i;
-	
-	for(i = 0; i < m_tribes.size(); i++)
-		if (!strcmp(m_tribes[i]->get_name(), tribe))
-			break;
-	
-	if (i == m_tribes.size())
-		m_tribes.push_back(new Tribe_Descr(tribe));
-	
-	m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], playercolor);
-}
-
 
 /** Game::can_start()
  *
@@ -318,7 +269,7 @@ bool Game::run(void)
 			if (!player)
 				continue;
 
-			player->setup();
+			player->init_for_game(this);
 
 			const Coords &c = m_map->get_starting_pos(i);
 			if (player->get_type() == Player::playerLocal)
@@ -478,79 +429,4 @@ Immovable *Game::create_immovable(int x, int y, int idx)
 	return descr->create(this, Coords(x, y));
 }
 
-/*
-===============
-Game::conquer_area
-
-Conquers the given area for that player.
-Additionally, it updates the visible area for that player.
-===============
-*/
-void Game::conquer_area(uchar playernr, Coords coords, int radius)
-{
-	Map_Region m(coords, radius, m_map);
-	Field* f;
-
-	while((f = m.next()))
-	{
-		if (f->get_owned_by() == playernr)
-			continue;
-		if (!f->get_owned_by()) {
-			f->set_owned_by(playernr);
-			continue;
-		}
-		
-      // TODO: add support here what to do if some fields are already
-      // occupied by another player
-		// Probably the best thing to just don't grab it. Players should fight
-		// for their land.
-      //cerr << "warning: already occupied field is claimed by another user!" << endl;
-   }
-	
-	Player *player = get_player(playernr);
-	
-	player->set_area_seen(coords.x, coords.y, radius+4, true);
-	
-	recalc_for_field(coords, radius);
-}
-
-
-/*
-===============
-Game::recalc_for_field
-
-Call this function whenever the field at fx/fy has changed in one of the ways:
- - height has changed
- - robust Map_Object has been added or removed
- 
-This performs the steps outlined in the comment above Map::recalc_brightness()
-and recalcs the interactive player's overlay.
-===============
-*/
-void Game::recalc_for_field(Coords coords, int radius)
-{
-	Map_Region_Coords mrc;
-	int x, y;
-	Field *f;
-	
-	// First pass
-	mrc.init(coords, 2+radius, m_map);
-
-	while(mrc.next(&x, &y)) {
-		f = m_map->get_field(x, y);
-		m_map->recalc_brightness(x, y, f);
-		m_map->recalc_fieldcaps_pass1(x, y, f);
-	}
-	
-	// Second pass
-	mrc.init(coords, 2+radius, m_map);
-	
-	while(mrc.next(&x, &y)) {
-		f = m_map->get_field(x, y);
-		m_map->recalc_fieldcaps_pass2(x, y, f);
-		
-		if (ipl)
-			ipl->recalc_overlay(FCoords(x, y, f));
-	}
-}
 

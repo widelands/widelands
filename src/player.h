@@ -41,7 +41,7 @@ class Road;
  *                      -- Nicolai
  */
 class Player {
-   friend class Game;
+   friend class Editor_Game_Base;
    
    public:
 		enum {
@@ -50,22 +50,22 @@ class Player {
 			playerAI
 		};
 		
-      Player(Game* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor);
+      Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor);
       ~Player(void);
 
-		inline Game *get_game() const { return m_game; }
+		inline Editor_Game_Base *get_game() const { return m_egbase; }
       inline int get_type() const { return m_type; }
 		inline int get_player_number() const { return m_plnum; }
 		inline const RGBColor* get_playercolor() const { return m_playercolor; }
 		inline Tribe_Descr *get_tribe() const { return m_tribe; }
 		
-		void setup();
+		void init_for_game(Game*);
 		
 		int get_buildcaps(Coords coords);
 		
 		// See area
 		inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
-		inline bool is_field_seen(Coords c) { return (*seen_fields)[c.y*m_game->get_map()->get_width() + c.x]; }
+		inline bool is_field_seen(Coords c) { return (*seen_fields)[c.y*m_egbase->get_map()->get_width() + c.x]; }
 		inline bool is_field_seen(int x, int y) { return is_field_seen(Coords(x, y)); }
 		inline std::vector<bool>* get_visibility() { return seen_fields; }
 		
@@ -81,10 +81,10 @@ class Player {
       // set functions
       inline void set_field_seen(int i, bool t) { (*seen_fields)[i]=t; }
       inline void set_field_seen(int x, int y, bool t) { 
-			(*seen_fields)[y*m_game->get_map()->get_width() + x]=t; 
+			(*seen_fields)[y*m_egbase->get_map()->get_width() + x]=t; 
       }
       
-      Game*				m_game; 
+      Editor_Game_Base*				m_egbase; 
 		int				m_type;
 		int				m_plnum;
       Tribe_Descr*	m_tribe; // buildings, wares, workers, sciences

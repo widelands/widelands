@@ -55,7 +55,7 @@ public:
 	Flag();
 	virtual ~Flag();
 	
-	static Flag *create(Game *g, Player *owner, Coords coords);
+	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords);
 	
 	virtual int get_type();
 	virtual int get_size();
@@ -68,8 +68,8 @@ public:
 	virtual void set_economy(Economy *e);
 	
 	inline Building *get_building() { return m_building; }
-	void attach_building(Game *g, Building *building);
-	void detach_building(Game *g);
+	void attach_building(Editor_Game_Base *g, Building *building);
+	void detach_building(Editor_Game_Base *g);
 	
 	inline Road *get_road(int dir) { return m_roads[dir-1]; }
 	void attach_road(int dir, Road *road);
@@ -79,10 +79,12 @@ public:
 	Road *get_road(Flag *flag);
 	
 protected:
-	virtual void init(Game*);
-	virtual void cleanup(Game*);
+	virtual void init(Editor_Game_Base*);
+	virtual void cleanup(Editor_Game_Base*);
+	virtual void init_for_game(Game*);
+	virtual void cleanup_for_game(Game*);
 	
-	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, Point pos);
+	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
 	Coords		m_position;
@@ -119,7 +121,7 @@ public:
 	Road();
 	virtual ~Road();
 
-	static Road *create(Game *g, int type, Flag *start, Flag *end, const Path &path);
+	static Road *create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path);
 
 	inline Flag *get_flag_start() const { return m_start; }
 	inline Flag *get_flag_end() const { return m_end; }
@@ -133,21 +135,21 @@ public:
 	int get_cost(bool reverse);
 	inline const Path &get_path() const { return m_path; }
 	
-	void presplit(Game *g, Coords split);
-	void postsplit(Game *g, Flag *flag);
+	void presplit(Editor_Game_Base *g, Coords split);
+	void postsplit(Editor_Game_Base *g, Flag *flag);
 	
 protected:
-	void set_path(Game *g, const Path &path);
+	void set_path(Editor_Game_Base *g, const Path &path);
 
-	void mark_map(Game *g);
-	void unmark_map(Game *g);
+	void mark_map(Editor_Game_Base *g);
+	void unmark_map(Editor_Game_Base *g);
 
-	virtual void init(Game *g);
-	virtual void cleanup(Game *g);
+	virtual void init(Editor_Game_Base *g);
+	virtual void cleanup(Editor_Game_Base *g);
 	
 	virtual void request_success(Request *req);
 	
-	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, Point pos);
+	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
 	int		m_type;		// use Field::Road_XXX
