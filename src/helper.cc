@@ -19,9 +19,12 @@
 
 #include "widelands.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 #include "helper.h"
+
+using std::cout;
+
 
 void zmem(void* mem, const ulong size) {
    uint i;

@@ -480,9 +480,9 @@ void Interactive_Player::finish_build_road()
 		// awkward... path changes ownership
 		Path *path = new Path(*m_buildroad);
 		m_game->send_player_command(get_player_number(), CMD_BUILD_ROAD, (int)path, 0, 0);
-	} else {
-		delete m_buildroad;
 	}
+	
+	delete m_buildroad;
 	m_buildroad = 0;
 }
 

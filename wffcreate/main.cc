@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 }
 
 #include "../src/widelands.h"
-#include <iostream.h>
+#include <iostream>
 #include "../src/font.h"
 #include "../src/graphic.h"
 

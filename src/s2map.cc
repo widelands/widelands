@@ -22,6 +22,10 @@
 #include "s2map.h"
 #include "map.h"
 
+using std::cerr;
+using std::ios;
+using std::endl;
+
 // TEMP
 #define hex ios::hex
 #define dec ios::dec

@@ -23,6 +23,8 @@
 #include "bob.h"
 #include "map.h"
 
+using std::swap;
+
 Graphic *g_graphic = 0;
 
 // stupid kludge: this function from system.cc must be imported to report

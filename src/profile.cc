@@ -20,6 +20,8 @@
 #include "widelands.h"
 #include "profile.h"
 
+#include <cstdarg>
+
 #define TRUE_WORDS 4
 const char* trueWords[TRUE_WORDS] =
 {
@@ -224,7 +226,7 @@ Section::Value *Section::get_val(const char *name)
 	for(Value_list::iterator v = m_values.begin(); v != m_values.end(); v++) {
 		if (!strcasecmp(v->get_name(), name)) {
 			v->mark_used();
-			return v;
+			return &*v;
 		}
 	}
 
@@ -246,7 +248,7 @@ Section::Value *Section::get_next_val(const char *name)
 			continue;
 		if (!name || !strcasecmp(v->get_name(), name)) {
 			v->mark_used();
-			return v;
+			return &*v;
 		}
 	}
 
@@ -266,7 +268,7 @@ Section::Value *Section::create_val(const char *name, const char *value, bool du
 		for(Value_list::iterator old = m_values.begin(); old != m_values.end(); old++) {
 			if (!strcasecmp(old->get_name(), name)) {
 				old->set_string(value);
-				return old;
+				return &*old;
 			}
 		}
 	}
@@ -626,7 +628,7 @@ Section *Profile::get_section(const char *name)
 	for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
 		if (!strcasecmp(s->get_name(), name)) {
 			s->mark_used();
-			return s;
+			return &*s;
 		}
 	}
 
@@ -674,7 +676,7 @@ Section *Profile::get_next_section(const char *name)
 			continue;
 		if (!name || !strcasecmp(s->get_name(), name)) {
 			s->mark_used();
-			return s;
+			return &*s;
 		}
 	}
 
@@ -687,12 +689,12 @@ Section *Profile::get_next_section(const char *name)
  * If duplicate is true, a duplicate section may be created. Otherwise, a 
  * pointer to an existing section is returned.
  */
-Section *Profile::create_section(const char *name, bool duplicate = false)
+Section *Profile::create_section(const char *name, bool duplicate)
 {
 	if (!duplicate) {
 		for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
 			if (!strcasecmp(s->get_name(), name))
-				return s;
+				return &*s;
 		}
 	}
 	

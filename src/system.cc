@@ -230,6 +230,15 @@ void Sys_Shutdown()
 {
 	SDL_Quit();
 	sys.active = false;
+	
+	if (sys.frecord) {
+		fclose(sys.frecord);
+		sys.frecord = 0;
+	}
+	if (sys.fplayback) {
+		fclose(sys.fplayback);
+		sys.fplayback = 0;
+	}
 }
 
 /*

@@ -25,7 +25,7 @@ ifeq ($(CROSS),NO)
 CC=gcc
 
 # c++ compiler
-CXX=g++
+CXX=g++-3.0
 
 # additional build flags. if you're not a developer, you don't want
 # to change this
@@ -155,7 +155,8 @@ clean:
 DEP_SED:=sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@'
 
 $(OBJECT_DIR)/%.o: src/%.cc
-	$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
+#	$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -Wp,-MMD,"$*.d" -c -o $@ $<
 	$(DEP_SED) $*.d > $(OBJECT_DIR)/$*.d
 	rm $*.d
 

@@ -23,6 +23,9 @@
 #include "game.h"
 #include "player.h"
 
+using std::cerr;
+using std::endl;
+
 /*
 ==============================================================================
 

@@ -25,6 +25,8 @@
 #include "md5.h"
 #include "profile.h"
 
+using std::cerr;
+using std::endl;
 
 void Resource_Descr::parse(Section *s)
 {
