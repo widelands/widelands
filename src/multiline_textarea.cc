@@ -134,7 +134,7 @@ up:
 						goto up;
 					}
 
-					_lines.add(g_fh.get_string(buf, _font));
+					_lines.add(add);
 				}
 			} else {
 				// Everything is fine

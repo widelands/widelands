@@ -516,6 +516,7 @@ int Map::load_s2mf(const char* filen, Game *game) {
       cerr << "Section 12 --> NOT FOUND in file" << endl;
       return ERR_FAILED;
    }
+	free(section);
 
 
    // S E C T I O N 13  -------- Bergflanken.

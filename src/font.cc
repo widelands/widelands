@@ -171,6 +171,6 @@ Pic* Font_Handler::get_string(const char* str, const ushort f) {
 					 x+=fonts[f].p[c].get_w();
 		  }
 
-		  delete buf;
+		  delete[] buf;
 		  return retval;
 }
