@@ -1,16 +1,16 @@
 /*
  * Copyright (C) 2002 by the Wide Lands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -20,7 +20,7 @@
 #ifndef __S__GRAPHIC_H
 #define __S__GRAPHIC_H
 
-#define 	DEF_CLRKEY	Graph::pack_rgb(0,0,255)	
+#define 	DEF_CLRKEY	Graph::pack_rgb(0,0,255)
 
 #include <SDL/SDL.h>
 #include <stdlib.h>
@@ -32,7 +32,7 @@
 namespace Graph
 {
 	/** inline ushort Graph::pack_rgb(const uchar r, const uchar g, const uchar b);
-	  * 
+	  *
 	  * This functions packs a RGB tribble into a short
 	  *
 	  * Args: r 	red value
@@ -46,7 +46,7 @@ namespace Graph
 	}
 
 	/** inline void Graph::unpack_rgb(const ushort clr, uchar* r, uchar* g, uchar* b) ;
-	  *	
+	  *
 	  * this unpacks a clr and returns the RGB tribble
 	  *
 	  * Args: 	clr	clr to unpack
@@ -86,32 +86,65 @@ namespace Graph
 		return pack_rgb(r, g, b);
 	}
 
-	// TEMP
+#if 1
+	// the voodoo version...
+	// it's quite a bit faster than the original on my CPU
+	inline uint bright_up_clr2(uint clr, int factor)
+	{
+		int r = ((clr >> 11) << 3);
+		int g = ((clr >> 5)  << 2) & 0xFF;
+		int b = ((clr)       << 3) & 0xFF;
+
+		r += factor;
+		if (r & 0xFF00) goto fix_r;
+	end_r:
+		g += factor;
+		if (g & 0xFF00) goto fix_g;
+	end_g:
+		b += factor;
+		if (b & 0xFF00) goto fix_b;
+		goto end;
+
+	fix_r: r = (~r) >> 24; goto end_r;
+	fix_g: g = (~g) >> 24; goto end_g;
+	fix_b: b = (~b) >> 24;
+	end:
+		return pack_rgb(r, g, b);
+	}
+#else
 	inline uint bright_up_clr2(uint clr, int factor)
 	{
 		if (factor == 0)
 			return clr;
-		int r = ((clr << 3) >> 11) & 0xFF;
-		int g = ((clr << 2) >>  5) & 0xFF;
-		int b =  (clr << 3)        & 0xFF;
+		int r = ((clr >> 11) << 3);
+		int g = ((clr >> 5)  << 2) & 0xFF;
+		int b = ((clr)       << 3) & 0xFF;
+
 		if (factor > 0)
 		{
-			r = (r+factor) > 255 ? 255 : r+factor;
-			g = (g+factor) > 255 ? 255 : g+factor;
-			b = (b+factor) > 255 ? 255 : b+factor;
+			r += factor;
+			if (r > 255) r = 255;
+			g += factor;
+			if (g > 255) g = 255;
+			b += factor;
+			if (b > 255) b = 255;
 		}
 		else
 		{
-			r = (r+factor) < 0 ? 0 : r+factor;
-			g = (g+factor) < 0 ? 0 : g+factor;
-			b = (b+factor) < 0 ? 0 : b+factor;
+			r += factor;
+			if (r < 0) r = 0;
+			g += factor;
+			if (g < 0) g = 0;
+			b += factor;
+			if (b < 0) b = 0;
 		}
 		return Graph::pack_rgb(r, g, b);
 	}
+#endif
 
 	/** class Pic
-	  * 
-	  * This class represents a picture  
+	  *
+	  * This class represents a picture
 	  */
 	class Pic
 	{
@@ -142,7 +175,7 @@ namespace Graph
 		inline uint get_w(void) const { return w; }
 
 		/** inline uint Pic::get_h(void) const
-		  * 
+		  *
 		  * This function returns the height
 		  * Args: none
 		  * returns: height
@@ -243,7 +276,7 @@ namespace Graph
 	  *
 	  * This class is responsible for all graphics stuff. It's
 	  * modified/optimized to work only for 16bit colordepth and nothing else
-	  * 
+	  *
 	  * It's a singleton
 	  */
 	#define MAX_RECTS 20
@@ -277,7 +310,7 @@ namespace Graph
       void screenshot(const char*);
 		void render_triangle(Point* points, Vector* normals, Pic* texture);
 
-		/** Graphic::State Graphic::get_state(void) 
+		/** Graphic::State Graphic::get_state(void)
 		  *
 		  * returns the current state of the graphics class
 		  *
@@ -288,7 +321,7 @@ namespace Graph
 
 		/** inline Mode Graphic::get_mode(void)
 		  *
-		  * return the current mode (fs or window) 
+		  * return the current mode (fs or window)
 		  *
 		  * Args: none
 		  * Returns: the current mode
@@ -296,7 +329,7 @@ namespace Graph
 		inline Mode get_mode(void) {  st=STATE_OK; return mode; }
 
 		/** inline uint Graphic::get_xres(void) const
-		  * 
+		  *
 		  * This function returns the X Resoultion of the current screen
 		  * Args: none
 		  * returns: XRes
@@ -304,14 +337,14 @@ namespace Graph
 		inline uint get_xres(void) const { return xres; }
 
 		/** inline uint Graphic::get_yres(void) const
-		  * 
+		  *
 		  * This function returns the Y Resoultion of the current screen
 		  * Args: none
 		  * returns: YRes
 		  */
 		inline uint get_yres(void) const { return yres; }
 
-		/** inline void Graphics::needs_fs_update(void) 
+		/** inline void Graphics::needs_fs_update(void)
 		  *
 		  * This functions tells the graphic that it should redraw the whole screen
 		  *
@@ -320,7 +353,7 @@ namespace Graph
 		  */
 		inline void needs_fs_update(void) { bneeds_fs_update=bneeds_update=true; }
 
-		/** inline bool does_need_update(void) 
+		/** inline bool does_need_update(void)
 		  *
 		  * This returns if the object needs to be updated
 		  *
@@ -328,12 +361,12 @@ namespace Graph
 		  * Returns: true if the screen should be redrawn
 		  */
 		inline bool does_need_update(void) { return bneeds_update; }
-					 
+
 		// this function really needs faaast blitting
-		friend	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort, 
+		friend	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort,
 			  const ushort, const ushort);
 
-		
+
 	private:
 		ushort* pixels;
 		ushort xres, yres;
@@ -347,9 +380,9 @@ namespace Graph
 		bool bneeds_update;
 	};
 
-	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort, 
+	void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort,
 		const ushort, const ushort);
-	void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort, 
+	void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort,
 		const ushort, const ushort);
 }
 

@@ -96,7 +96,7 @@ void Section::check_used()
 	for(int i = 0; i < values.elements(); i++) {
 		Value *v = (Value *)values.element_at(i);
 		if (!v->used)
-			err << "Section [" << sname << "], key '" << v->name << "' not used (did you spell the name correctly?)" << endl;
+			err << "Section [" << sname << "], key '" << v->name << "' not used (did you spell the name correctly?)" << std::endl;
 	}
 }
 
@@ -199,7 +199,7 @@ bool Section::get_boolean(const char *name, bool def)
 		if (!strcmpi(v->val, falseWords[i]))
 			return false;
 
-	err << "[" << sname << "], key '" << name << "' is not a boolean value" << endl;
+	err << "[" << sname << "], key '" << name << "' is not a boolean value" << std::endl;
 	return def;
 }
 
@@ -268,7 +268,7 @@ const char *Section::get_next_boolean(const char *name, bool *value)
 				return v->name;
 			}
 
-		err << "[" << sname << "], key '" << v->name << "' is not a boolean value" << endl;
+		err << "[" << sname << "], key '" << v->name << "' is not a boolean value" << std::endl;
 		// we can't really return anything, so just get the next value
 		// I guess a goto would be more logical in this rare situation ;p
 	}
@@ -319,7 +319,7 @@ Profile::~Profile()
 	for(int i = sections.elements()-1; i >= 0; i--) {
 		Section *s = (Section *)sections.element_at(i);
 		if (!s->used)
-			err << "Section [" << s->get_name() << "] not used (did you spell the name correctly?)" << endl;
+			err << "Section [" << s->get_name() << "] not used (did you spell the name correctly?)" << std::endl;
 		else
 			s->check_used();
 		delete s;
@@ -448,9 +448,9 @@ void Profile::parse(const char *filename)
 				if (s)
 					s->add_val(p, tail);
 				else
-					err << filename<<", line "<<linenr<<": key "<<p<<" outside section" << endl;
+					err << filename<<", line "<<linenr<<": key "<<p<<" outside section" << std::endl;
 			} else
-				err << filename<<", line "<<linenr<<": syntax error" << endl;
+				err << filename<<", line "<<linenr<<": syntax error" << std::endl;
 		}
 	}
 }
@@ -459,7 +459,7 @@ void Profile::parse(const char *filename)
 int main(int argc, char **argv)
 {
 	if (argc != 2) {
-		cerr << "Usage: "<<argv[0]<<" <ini-file>" << endl;
+		cerr << "Usage: "<<argv[0]<<" <ini-file>" << std::endl;
 		return 3;
 	}
 
@@ -469,28 +469,28 @@ int main(int argc, char **argv)
 	while((s = p.get_next_section("test"))) {
 		const char *value;
 
-		cout << "["<<s->get_name()<<"]" << endl;
+		cout << "["<<s->get_name()<<"]" << std::endl;
 
 		while(s->get_next_string("test", &value))
-			cout << "test: \""<<value<<"\"" << endl;
+			cout << "test: \""<<value<<"\"" << std::endl;
 	}
 
 	if ((s = p.get_section("bool"))) {
 		const char *key;
 		bool v;
 
-		cout << "[bool]" << endl;
+		cout << "[bool]" << std::endl;
 		while((key = s->get_next_boolean(0, &v)))
-			cout << key<<"="<<v << endl;
+			cout << key<<"="<<v << std::endl;
 	}
 
 	if ((s = p.get_section("int"))) {
 		const char *key;
 		int v;
 
-		cout << "[int]" << endl;
+		cout << "[int]" << std::endl;
 		while((key = s->get_next_int(0, &v)))
-			cout << key<<"="<<v << endl;
+			cout << key<<"="<<v << std::endl;
 	}
 }
 #endif /* TEST_PROFILE */

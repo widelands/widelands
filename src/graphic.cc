@@ -1,16 +1,16 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -163,7 +163,7 @@ namespace Graph
 		float b;
 	};
 
-	inline int make_triangle_lines(Point* points, float* bright, _go* starts, _go* ends)
+	int make_triangle_lines(Point* points, float* bright, _go* starts, _go* ends)
 	{
 		int ydiff1 = points[1].y - points[0].y;
 		int ydiff2 = points[2].y - points[0].y;
@@ -185,7 +185,7 @@ namespace Graph
 		if (points[1].x < midx)
 			// arrays have to be swapped
 			swap<_go*>(starts, ends);
-		
+
 		int y;
 		int xd1=0, xd2=0, xd3=0;
 		float bd1=0, bd2=0, bd3=0;
@@ -254,22 +254,35 @@ namespace Graph
 			if (ends[y].x < 0)
 				continue;
 
-			int start = starts[y].x < 0 ? 0 : starts[y].x;
-			int end = ends[y].x < xres ? ends[y].x : xres-1;
-			int p = (points[0].y + y) * xres + start;
-			float xdiff = (float)(end - start);
+			int xdiff = ends[y].x - starts[y].x;
+			if (!xdiff)
+				xdiff = 0;
 			float bdiff = ends[y].b - starts[y].b;
-			float bd = 0;
-			uint tb = (y % texture->h) * texture->w;
-			if(!xdiff)
-					  xdiff=1;
-			for (int x=start; x<=end; x++)
+			int b = -(int)(65536 * starts[y].b * LIGHT_FACTOR);
+			int bd = -(int)(65536 * LIGHT_FACTOR * bdiff / xdiff);
+
+			int end = ends[y].x < xres ? ends[y].x : xres-1;
+			int start = starts[y].x;
+			if (start < 0) {
+				b -= bd * start;
+				start = 0;
+			}
+
+			ushort *pix = pixels + (points[0].y + y)*xres + start;
+			ushort *texp = texture->pixels + (y % texture->h)*texture->w;
+			uint tp = start - starts[y].x;
+
+			for(int cnt = end-start; cnt >= 0; cnt--)
 			{
-				uint tp = tb + (x - starts[y].x) % texture->w;
-				float b = starts[y].b + bd / xdiff;
-				int lfactor = (int)(b * LIGHT_FACTOR);	
-				pixels[p++] = bright_up_clr2(texture->pixels[tp], -lfactor);
-				bd += bdiff;
+				//*pix++ = pack_rgb((b >> 16) + 128, (b >> 16) + 128, (b >> 16) + 128); // shading test
+				*pix++ = bright_up_clr2(texp[tp], b >> 16);
+				b += bd;
+				tp++;
+
+				// replacing tp %= texture->w with the following conditional
+				// makes this _entire function_ two times faster on my Athlon
+				if (tp == texture->w)
+					tp = 0;
 			}
 		}
 	}
@@ -282,7 +295,7 @@ namespace Graph
 			* This is a singleton
 			*/
 
-		  /** Graphic::Graphic(void) 
+		  /** Graphic::Graphic(void)
 			*
 			* Default Constructor. Simple Inits
 			*
@@ -303,7 +316,7 @@ namespace Graph
 
 		  /** Graphic::~Graphic(void) 
 			*
-			* simple cleanups. 
+			* simple cleanups.
 			*
 			* Args: none
 			* Returns: nothing
