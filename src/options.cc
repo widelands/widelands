@@ -30,6 +30,8 @@
 #include "os.h"
 #include "graphic.h"
 #include "input.h"
+#include "menuecommon.h"
+#include "game.h"
 #include <iostream.h>
 #include <string.h>
 #include <stdlib.h>
@@ -105,8 +107,8 @@ static void show_usage(void);
  * Returns: Nothing
  */
 static void tell_user(const char* str) {
-#ifdef WINDOWS
-#error 	tell_user function not defined for windows yet!!
+#ifdef WIN32
+#error 	tell_user function not defined for windows yet!! Use messagebox
 #else
 		  cout << str << endl;
 #endif
@@ -411,13 +413,16 @@ static int consume_options(Options* o) {
 		  static Input myip; // global input class. here defined for whole game
 
 		  // Graphics, TODO
+		  // set in game resolution (res for menues is fixed)
+		  Game::set_resolution(o->xres, o->yres);
+		  
 		  if(o->fullscreen) {
-					 g_gr.set_mode(o->xres, o->yres, Graphic::MODE_FS);
+					 g_gr.set_mode(MENU_XRES, MENU_YRES, Graphic::MODE_FS);
 		  } else {
-					 g_gr.set_mode(o->xres, o->yres, Graphic::MODE_WIN);
+					 g_gr.set_mode(MENU_XRES, MENU_YRES, Graphic::MODE_WIN);
 					 g_ip.grab_input(true);
 		  }
-		  g_ip.set_max_cords(o->xres, o->yres);
+		  g_ip.set_max_cords(MENU_XRES, MENU_YRES);
 
 		  // Dirs
 		  g_fileloc.add_searchdir(o->searchdir0, 0);

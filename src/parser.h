@@ -23,7 +23,7 @@
 #include "mytypes.h"
 
 #define MAX_OPT_LENGTH	255
-#define MAX_OPTS		1024
+#define MAX_OPTS		100
 /** class Parser
  *
  * This is a simple Text parser. you register keywords, what kind
@@ -39,8 +39,7 @@ class Parser {
 					 void register_int_opt(const char*, int*);
 					 void register_bool_opt(const char*, bool*);
 
-					 int parse_line(const char*);
-					 
+					 int parse_line(const char*);					 
 					 
 
 		  private:

@@ -22,6 +22,9 @@
 
 #include "mytypes.h"
 
+#define MENU_XRES	640
+#define MENU_YRES	480
+
 int menue_lclick(const bool, const uint, const uint, void* );
 int menue_rclick(const bool, const uint, const uint, void* );
 int menue_mmf(const uint, const uint, const int, const int, const bool, const bool, void*);

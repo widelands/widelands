@@ -51,8 +51,12 @@ class Game {
 					 ~Game(void);
 					
 					 void run(const char*, const uint /* other flags ? */);
+
+					 // Set the in-game resolution
+					 static void set_resolution(uint x, uint y) { xresolution=x; yresolution=y; } 
 					 
 		  private:
+					 static uint xresolution, yresolution;
 					 Player** pls;
 					 Interactive_Player* ipl; 
 };

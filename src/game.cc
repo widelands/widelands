@@ -20,13 +20,15 @@
 #include <assert.h>
 #include "game.h"
 #include "map.h"
-
+#include "input.h"
 
 /** class Game
  *
  * This game handels one game. This class is not a all portabel, 
  * it depends on nearly everything else in widelands
  */
+
+uint Game::xresolution, Game::yresolution;
 
 /** Game::Game(void) 
  *
@@ -56,9 +58,13 @@ Game::~Game(void) {
 void Game::run(const char* map, uint nipl) {	
 		  Map* c;
 		  Interactive_Player* ip;
-		 
+		
+		  // set graphics and input
+		  g_gr.set_mode(xresolution, yresolution, g_gr.get_mode());
+		  g_ip.set_max_cords(xresolution, yresolution);
+
 		  // TEMP
-		  Window* win=g_ui.create_window(0, 0, 640, 480, Window::FLAT);
+		  Window* win=g_ui.create_window(0, 0, xresolution, yresolution, Window::FLAT);
 		  
 		  c=new Map();
 		  if(c->load_map(map)) {

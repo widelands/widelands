@@ -39,6 +39,7 @@ Map_View::Map_View(Map* m) {
 		  vpx=vpy=0;
 		  map=m;
 		  
+		  // TEMP
 		  tmpg.set_size(50, 50);
 		  tmpg.set_clrkey(Graph::pack_rgb(51, 114, 44));
 		  tmpg.clear_all();
@@ -46,6 +47,7 @@ Map_View::Map_View(Map* m) {
 		  tmpr.set_size(50, 50);
 		  tmpr.set_clrkey(Graph::pack_rgb(255, 0, 0));
 		  tmpr.clear_all();
+		  // TEMP
 }
 
 /** Map_View::~Map_View(void) 

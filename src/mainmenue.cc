@@ -51,12 +51,12 @@ void main_menue(void) {
 		  bool* doreadme = new bool(false);
 		  bool* doabout = new bool(false);
 		  
-		  // Set to 640x480 so that we know on what we are and the pictures
+		  // Set to MENU_XRESxMENU_YRES so that we know on what we are and the pictures
 		  // look good
 		  //uint lx=g_gr.get_xres();
 		  //uint ly=g_gr.get_yres();
-		  g_gr.set_mode(640, 480, g_gr.get_mode());
-		  g_ip.set_max_cords(640-g_cur.get_w(), 480-g_cur.get_h());
+		  g_gr.set_mode(MENU_XRES, MENU_YRES, g_gr.get_mode());
+		  g_ip.set_max_cords(MENU_YRES-g_cur.get_w(), MENU_YRES-g_cur.get_h());
 
 		  // make the background window, fill it with the splash screen
 		  Window* win=g_ui.create_window(0, 0, g_gr.get_xres(), g_gr.get_yres(), Window::FLAT);
@@ -71,7 +71,7 @@ void main_menue(void) {
 		  char buf[100];
 		  strcpy(buf, "Version ");
 		  strcat(buf, VERSION);
-		  win->create_textarea(640, 480, buf, Textarea::RIGHTA);
+		  win->create_textarea(MENU_XRES, MENU_YRES, buf, Textarea::RIGHTA);
 		  win->create_textarea(0, 480, "(C) 2002 by the Widelands Development Team"); 
 
 		  // Create the buttons
