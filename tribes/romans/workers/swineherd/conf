@@ -1,0 +1,37 @@
+[global]
+descname=Swineherd
+help=Raises pigs
+type=generic
+menu_pic=swineherd_menu.png
+
+# Here come the animations
+# For the walk animation, [walk] is a default for all walk animations.
+# You can, however, create [walk_nw] etc.. sections for sub-animations in a
+# given direction
+
+# The normal idle animation (non-directional)
+[idle]
+pics=idle_??.png
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
+hot_spot_x=5
+hot_spot_y=13
+
+# Walking empty-handed
+[walk]
+dirpics=walk_!!_??.png
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
+hot_spot_x=5
+hot_spot_y=13
+
+# Walking with a ware
+[walkload]
+dirpics=walk_!!_??.png
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
+hot_spot_x=5
+hot_spot_y=13
