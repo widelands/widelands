@@ -31,6 +31,8 @@
 #include <iostream.h>
 #include <fstream.h>
 
+#include <map>
+
 #ifdef WIN32
 	#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*
 	#pragma warning(disable : 4800) // forcing values to bool is fine to me.

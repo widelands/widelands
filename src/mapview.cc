@@ -191,14 +191,14 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 			// are there any overdraw issues with the current rendering order?
 			
 		   // check if a instance is hooked to this field, if so, draw it
-	   	if(f->get_first_inst()) {
+	   	if(f->get_first_object()) {
 	      	//    cerr << p[1].x << ":" << p[1].y << endl;
-	   	   Instance_Link* inst=f->get_first_inst();
-		      while(inst) {
+				Map_Object* obj = f->get_first_object();
+		      while(obj) {
 					// Let instances draw themselves; more logical as a OO design
    	   	   //copy_animation_pic(dst, inst->inst, p[1].x, p[1].y, 0, 0, 0, 0);
-					inst->inst->draw(m_game, dst, posx, posy);
-	      	   inst=inst->next;
+					obj->draw(m_game, dst, posx, posy);
+	      	   obj = obj->get_next_object();
    		   }
 	   	}
 

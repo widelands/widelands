@@ -45,7 +45,7 @@ Game::Game(void)
 	m_state = gs_none;
 	m_mapname = 0;
 
-   hinst = new Instance_Handler(MAX_OBJS);
+   m_objects = new Object_Manager;
    cmdqueue = new Cmd_Queue(this);
    map=0;
 
@@ -56,8 +56,9 @@ Game::Game(void)
  *
  * cleanup
  */
-Game::~Game(void) {
-   delete hinst; 
+Game::~Game(void)
+{
+	delete m_objects;
 	delete cmdqueue;
 	if (map)
 		delete map;
@@ -121,8 +122,6 @@ void Game::run(void)
 	   ipl = new Interactive_Player(this);
 	   ipl->run();
 	   delete ipl;
-		delete map;
-		map = 0;
 	   delete tribe;
 	}
 
@@ -163,18 +162,13 @@ void Game::think(void)
  */
 void Game::warp_building(int x, int y, uchar owner, int idx)
 {
-	Instance *inst;
 	Building_Descr *descr;
-	int i;
-
-	i = hinst->get_free_inst_id();
-	inst = hinst->get_inst(i);
-
+	Map_Object* obj;
+	
 	descr = get_player_tribe(owner)->get_building_descr(idx);
-
-	inst->create(this, descr);
-	inst->hook_field(x, y, map->get_field(x, y));
-	inst->set_owned_by(owner);
+	obj = m_objects->create_object(this, descr);
+	obj->set_owned_by(owner);
+	obj->set_position(this, x, y);
 }
 
 /** Game::create_bob(int x, int y, int idx)
@@ -185,16 +179,11 @@ void Game::warp_building(int x, int y, uchar owner, int idx)
  */
 void Game::create_bob(int x, int y, int idx)
 {
-	Instance *inst;
 	Logic_Bob_Descr *descr;
-	int i;
-            
-	i = hinst->get_free_inst_id();
-	inst = hinst->get_inst(i);
-	
+	Map_Object* obj;
+
 	descr = map->get_world()->get_bob_descr(idx);
-	
-	inst->create(this, descr);
-	inst->hook_field(x, y, map->get_field(x, y));
+	obj = m_objects->create_object(this, descr);
+	obj->set_position(this, x, y);
 }
 

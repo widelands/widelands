@@ -57,7 +57,7 @@ Building_HQ::Building_HQ(HQ_Descr *d)
 	descr=d;
 }
 
-void Building_HQ::init(Game* g, Instance* i)
+void Building_HQ::init(Game* g)
 {
 	set_animation(g, descr->get_idle_anim());
 }

@@ -34,7 +34,7 @@
 // ---------------------- BEGINN OF CMDS ----------------------------------
 enum {
    UNUSED = 0,
-   CMD_ACT		// arg1 = instance
+   CMD_ACT		// arg1 = serialnum
 };
 // ---------------------- END    OF CMDS ----------------------------------
 

@@ -25,7 +25,6 @@
 class Game;
 class Bitmap;
 class Animation;
-struct Animation_Pic;
 
 //
 // Base class for descriptions of worker, files and so on. this must just
@@ -48,12 +47,20 @@ enum MoveCaps {
 
 //
 // Map_Object is a class representing a base class for all objects. like buildings, animals
-// ... so on. Every 'Instance' has one of those classes
+// ... so on.
+// Every Map_Object has a unique serial number. This serial number is used as key in the
+// Object_Manager map, and in the safe Object_Ptr.
+// Since Map_Objects can be destroyed at pretty much any time, you shouldn't point to a
+// Map_Object directly; use an Object_Ptr instead.
+//
+// DO NOT allocate/free Map_Objects directly; use the Object_Manager for this.
+// Note that convenient creation functions are defined in class Game.
 // 
 class Map_Object {
-   friend class Instance;
-
-   public:
+   friend class Object_Manager;
+	friend class Object_Ptr;
+   
+	public:
 		//TODO: do we really need enum Type? implementation details should be hidden,
 		// that's what generic interfaces are for
       enum Type {
@@ -74,37 +81,46 @@ class Map_Object {
          WALK_W,
          WALK_NW
       };
-      
+		
+	protected:
       Map_Object(Type t);
-      virtual ~Map_Object(void) { }
+      virtual ~Map_Object(void);
 
+	public:
 		virtual uint get_movecaps() { return 0; }
 		
 		// init() is called from Instance::create, just after the constructor
 		// use it to trigger initial CMD_ACTs
-		virtual void init(Game*, Instance*) { }
+		virtual void init(Game*) { }
 
 		// act() is called whenever a CMD_ACT triggers.
 		// Some bobs may not want to act (e.g. borings)
-		virtual void act(Game*, Instance*) { }
+		virtual void act(Game*) { }
 		
 		// Let the Map_Object draw itself
 		virtual void draw(Game* game, Bitmap* dst, int posx, int posy);
-		
+
       inline void set_owned_by(uchar plnum) { owned_by=plnum; }
  //     uint handle_click(void); // is this good here?
  
+		void set_position(Game* g, uint x, uint y, Field* f = 0);
+		inline Map_Object* get_next_object(void) { return m_linknext; }
+
    protected:
 		void set_animation(Game* g, Animation* anim);
 	
 		void end_walk();
-		bool start_walk(Game* g, Instance* i, WalkingDir dir, Animation* a);
+		bool start_walk(Game* g, WalkingDir dir, Animation* a);
 		
       Type type;
-      Field* field;		// where are we right now?
-      ushort px, py;
+		uint m_serial;
       uchar owned_by; // player number
-
+      
+		Field* m_field; // where are we right now?
+      uint m_px, m_py;
+		Map_Object* m_linknext; // next object on this field
+		Map_Object** m_linkpprev;
+		
 		Animation* m_anim;
 		int m_animstart; // gametime when the animation was started
 
@@ -113,72 +129,52 @@ class Map_Object {
 		int m_walkend;
 };
 
-//
-// an Instance is a representation of every object on the map, like animals
-// buildings, people, trees....
-// 
-class Instance {
-   friend class Instance_Handler;
-	friend class Field;
-   
+
+/** class Object_Manager
+ *
+ * Keeps the list of all objects currently in the game.
+ * You must use create_object() and free_object() to allocate/free Map_Objects!
+ */
+class Object_Manager {
+		typedef std::map<uint, Map_Object *> objmap_t;
+
    public:
-      enum State {
-         UNUSED,
-         USED
-      };
-     
-      Instance(void) { obj=0; state=UNUSED; }
-      virtual ~Instance(void) { }
-      
-      inline State get_state(void) { return state; }
-		void create(Game *g, Map_Object_Descr *d);
+      Object_Manager() { m_lastserial = 0; }
+      ~Object_Manager(void);
 
-      inline Map_Object::Type get_type(void) { assert(obj); return obj->type; }
-      
-		inline void act(Game* g) { assert(obj); obj->act(g, this); }
-      inline void set_owned_by(uchar plnum) { assert(obj); obj->set_owned_by(plnum); }
-		inline void draw(Game* game, Bitmap* dst, int posx, int posy) { assert(obj); obj->draw(game, dst, posx, posy); }
-      
-      inline void hook_field(ushort x, ushort y, Field* f) {
-         obj->px=x;
-         obj->py=y;
-         obj->field=f;
-         f->hook_instance(this);
-      }
-
-   private:
-		Map_Object* obj;
-		State state;
-};
-      
-class Instance_Handler {
-   public:
-      Instance_Handler(uint max) { inst=new Instance[max]; nobj=max; }
-      ~Instance_Handler(void) { delete[] inst; }
-
-      inline Instance* get_inst(uint n) { assert(n<nobj); return &inst[n]; }
-      inline uint get_free_inst_id(void) { 
-         uint i; for(i=0; i<nobj; i++) {
-            if(inst[i].state==Instance::UNUSED) {
-               // we guess, now it _is_ used
-               inst[i].state=Instance::USED;
-               return i;
-            }
-         }
-         assert(0); // this is bad!
-         return ((uint) -1);
-      }
-
-      inline void free_inst(uint n) {
-         if(inst[n].obj) delete inst[n].obj; 
-         inst[n].obj=0;
-         inst[n].state=Instance::UNUSED;
-      }
-     
+		inline Map_Object* get_object(uint serial) {
+			objmap_t::iterator it = m_objects.find(serial);
+			if (it == m_objects.end())
+				return 0;
+			return it->second;
+		}
+		Map_Object* create_object(Game* g, Map_Object_Descr* d);
+		void free_object(Map_Object* obj);
+		
 	private:
-      uint nobj;
-      Instance* inst;
+		uint m_lastserial;
+		objmap_t m_objects;
 };
-         
-#endif // __S__INSTANCE_H
 
+/** class Object_Ptr
+ *
+ * Provides a safe pointer to a Map_Object
+ */
+class Object_Ptr {
+	public:
+		inline Object_Ptr() { m_serial = 0; }
+		inline Object_Ptr(Map_Object* obj) { m_serial = obj->m_serial; }
+		// can use standard copy constructor and assignment operator
+	
+		inline void set(Map_Object* obj) { m_serial = obj->m_serial; }
+		inline Object_Ptr& operator = (Map_Object* obj) { m_serial = obj->m_serial; return *this; }
+		
+		// dammit... without a Game object, we can't implement a Map_Object* operator
+		// (would be _really_ nice)
+		Map_Object* get(Game* g);
+		
+	private:
+		uint m_serial;
+};
+
+#endif // __S__INSTANCE_H

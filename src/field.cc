@@ -76,46 +76,18 @@ void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 	brightness = (char)b;
 }
 
+/* can we get rid of this?
+if we were to store passability and possible building objects inside the Field,
+this function should be pretty unnecessary. Passability recalculations can be done
+in Map_Object::set_position()
 
-// functions to move one instance from a field to another
-Instance_Link* Field::unhook_inst_link(Map_Object* obj) {
-   // assumes that obj is indeed hooked to this field
-   Instance_Link* i=inst_first;
-   while(i->inst->obj != obj) i=i->next;
-
-   if(i==inst_first) {
-      if(i->next) {
-         i->next->prev=0;
-         inst_first=i->next;
-      } else {
-         inst_first=0;
-      } 
-   } else {
-      i->prev->next=i->next;
-      if(i->next) i->next->prev=i->prev;
-   }
-   return i;
+bool Field::has_hooked(uchar t)
+{
+	Map_Object* obj = objects;
+	while(obj) {
+		if (obj->get_type() == t) return true;
+		obj = obj->get_next_object();
+	}
+	return false;
 }
-void Field::hook_inst_link(Instance_Link* link) {
-   if(!inst_first) {
-      inst_first=link;
-      inst_first->prev=0;
-      inst_first->next=0;
-   } else {
-      Instance_Link* i=inst_first;
-      while(i->next) i=i->next;
-      i->next=link;
-      link->prev=i;
-      link->next=0;
-   }
-}
-
-bool Field::has_hooked(uchar t) {
-   Instance_Link* i=inst_first;
-   while(i) { 
-      if(i->inst->get_type() == t) return true;
-      i=i->next;
-   }
-   return false;
-}
-
+*/

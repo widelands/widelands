@@ -61,7 +61,7 @@ Diminishing_Bob::Diminishing_Bob(Diminishing_Bob_Descr* d)
 	descr=d;
 } 
 
-void Diminishing_Bob::init(Game *g, Instance *i)
+void Diminishing_Bob::init(Game *g)
 {
 	set_animation(g, descr->get_anim());
 }
@@ -75,7 +75,7 @@ Boring_Bob::Boring_Bob(Boring_Bob_Descr *d)
 	descr = d;
 }
 
-void Boring_Bob::init(Game *g, Instance *i)
+void Boring_Bob::init(Game *g)
 {
 	set_animation(g, descr->get_anim());
 }
@@ -93,15 +93,15 @@ Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
 
 uint Critter_Bob::get_movecaps() { return descr->is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK; }
 
-void Critter_Bob::init(Game *g, Instance *i)
+void Critter_Bob::init(Game *g)
 {
 	set_animation(g, descr->get_anim());
 	
 	// gotcha... need to schedule an initial act() ;)
-	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_ACT, (int)i, 0, 0);
+	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
 }
 
-void Critter_Bob::act(Game* g, Instance *i)
+void Critter_Bob::act(Game* g)
 {
 	if (m_walking != IDLE) {
 		end_walk();
@@ -113,7 +113,7 @@ void Critter_Bob::act(Game* g, Instance *i)
 			int t = g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
 
 			set_animation(g, descr->get_anim());			
-			g->get_cmdqueue()->queue(g->get_gametime()+t, SENDER_MAPOBJECT, CMD_ACT, (int)i, 0, 0);
+			g->get_cmdqueue()->queue(g->get_gametime()+t, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
 			return;
 		}
 	}
@@ -132,8 +132,8 @@ void Critter_Bob::act(Game* g, Instance *i)
 	
 //	cerr << "Critter attempts to walk" << endl;
 	
-	if (!start_walk(g, i, dir, a))
-		g->get_cmdqueue()->queue(g->get_gametime()+g->logic_rand()%1000, SENDER_MAPOBJECT, CMD_ACT, (int)i, 0, 0);
+	if (!start_walk(g, dir, a))
+		g->get_cmdqueue()->queue(g->get_gametime()+g->logic_rand()%1000, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
 }
 
 // DOWN HERE: DECRIPTION CLASSES
@@ -244,9 +244,8 @@ int Growing_Bob_Descr::read(Binary_file* f) {
 
 Map_Object *Growing_Bob_Descr::create_object()
 {
-   cerr << "Growing_Bob_Descr::create_instance() TODO!" << endl;
+   cerr << "Growing_Bob_Descr::create_object() TODO!" << endl;
 	
 	return 0; // uh oh
 }
-
 

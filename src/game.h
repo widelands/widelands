@@ -70,6 +70,8 @@ public:
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
    inline int get_gametime(void) { return cmdqueue->get_time(); }
 
+	inline Object_Manager* get_objects() { return m_objects; }
+	
 	// Start using logic_rand() for the actual gamelogic (e.g. critter).
 	// Do NOT use for random events in the UI or other display code.
 	// This will allow us to plug another PRNG in here for game playbacks
@@ -97,7 +99,7 @@ private:
 	Map *map;
 	Player** pls;
    Cmd_Queue* cmdqueue;
-   Instance_Handler* hinst;
+   Object_Manager* m_objects;
    Counter counter; // used to obtain realtime
 
 	int m_realtime; // # of ms passed since game was created (including pauses etc..)

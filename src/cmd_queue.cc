@@ -127,12 +127,13 @@ void Cmd_Queue::exec_cmd(Cmd *c)
 	switch(c->cmd) {
 	case CMD_ACT:
 	{
-		// an instance has requested to act again after a time
-		// arg1==(Instance*) pointer_to_instance to act
+		// an object has requested to act again after a time
+		// arg1: serial number of the Map_Object
 		assert(c->arg1);
-		Instance *inst = (Instance*)c->arg1;
-		inst->act(m_game);
-		// the instance must queue the next CMD_ACT itself if necessary
+		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
+		if (obj)
+			obj->act(m_game);
+		// the object must queue the next CMD_ACT itself if necessary
 		break;
 	}
 	

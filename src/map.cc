@@ -149,7 +149,7 @@ int Map::load_wlmf(const char* file, Game *game) {
          f->set_height((uchar)fd.height);
          f->set_terrainr(tr);
          f->set_terraind(td);
-         f->hook_instance(0); 
+			f->objects = 0;
       }
    }
 

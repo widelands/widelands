@@ -32,12 +32,15 @@
 	// den header gibts aber glaub ich beim linux nicht
 	// egal, inline kostet nichts
 // florian
+/* this comes for free from the STL headers (if it doesn't in a non-glibc implementation,
+   please add the necessary header(s) to widelands.h)
 template <typename T> inline void swap(T& a, T& b)
 {
    T temp = a;
    a = b;
    b = temp;
 }
+*/
 
 struct _go
 {

@@ -492,7 +492,7 @@ class Building_HQ : public Map_Object {
       Building_HQ(HQ_Descr* d);
       virtual ~Building_HQ(void) { }
 
-		void init(Game* g, Instance* i);
+		void init(Game* g);
 
 		// the HQ doesn't act (if anything, it acts like any other building, i.e. door opens)
 		

@@ -202,7 +202,7 @@ class Boring_Bob : public Map_Object {
       Boring_Bob(Boring_Bob_Descr *d);
       virtual ~Boring_Bob(void) { }
 
-		void init(Game *g, Instance *i);
+		void init(Game *g);
    
 	private:
       Boring_Bob_Descr* descr;
@@ -218,8 +218,8 @@ class Critter_Bob : public Map_Object {
 
 		uint get_movecaps();
 		
-		void init(Game *g, Instance *i);
-		void act(Game* g, Instance *i);
+		void init(Game *g);
+		void act(Game* g);
 
    private:
       Critter_Bob_Descr* descr;
@@ -234,7 +234,7 @@ class Diminishing_Bob : public Map_Object {
 		Diminishing_Bob(Diminishing_Bob_Descr* d);
       virtual ~Diminishing_Bob(void) { }
 
-		void init(Game *g, Instance *i);
+		void init(Game *g);
    
 	private:
       Diminishing_Bob_Descr* descr;

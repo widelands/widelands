@@ -262,7 +262,7 @@ int Map::load_s2mf(const char* filen, Game *game) {
    for(y=0; y<hd.height; y++) {
       for(x=0; x<hd.width; x++, f++, pc++) {
          f->set_height(*pc);
-         f->hook_instance(0); // we bring the field in a acceptable init state 
+			f->objects = 0;
       }
    }
    free(section);
