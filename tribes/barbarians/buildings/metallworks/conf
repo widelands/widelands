@@ -1,0 +1,69 @@
+[global]
+descname=Metallworks
+
+type=production		# basic type (warehouse, production, military)
+size=medium
+buildable=yes 
+buildicon=build.png
+worker=blacksmith
+output=helm  # TODO: this is wroong
+enhances_to=axefactory
+program=work
+program=produce_helm
+
+[inputs]
+iron=8
+trunk=8
+
+[work]
+0=set +nostats
+1=call produce_helm 
+
+[produce_helm]
+0=set +catch
+1=sleep 32000
+2=check trunk 
+3=check iron
+4=consume iron
+5=animation working 35000
+6=produce helm
+
+[buildcost]
+trunk=2
+raw_stone=2
+grindstone=1
+thatchfern=1
+
+[idle]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+

@@ -1,0 +1,22 @@
+# The Headquarters of the barbarians is from the apperance a stable military
+# Building, fortified base and some towers made of black wood. Some flags 
+# in the player colors may be present
+
+[global]
+descname=Headquarters	
+
+type=warehouse		# basic type (warehouse, production, military)
+size=big
+buildable=no
+
+subtype=HQ		# possible values: none, HQ, port
+conquers=9		
+
+
+[idle]
+pics=hq_i_??.png 
+hot_spot_x=81
+hot_spot_y=115
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0

@@ -1,0 +1,16 @@
+[global]
+descname=Coalearth
+help=This earth is found in the deep coal mines. It needs to be enhanced to get proper coal
+menu_pic=menu.png
+queue_full_pic=queue_full.png
+queue_empty_pic=queue_empty.png
+
+# The "animation" used when the item rests on a flag
+[idle]
+pics=idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=4
+hot_spot_y=4
+

@@ -1,0 +1,84 @@
+[global]
+descname=Smelting Works
+
+type=production		# basic type (warehouse, production, military)
+size=medium
+buildable=yes 
+buildicon=build.png
+worker=smelter 
+output=iron
+output=gold
+
+program=work
+program=smelt_iron
+program=smelt_gold
+
+[inputs]
+ironore=8
+goldstone=8
+coal=8
+
+[work]
+0=set +nostats
+1=call smelt_iron
+2=call smelt_gold
+
+[smelt_iron]
+0=set +catch
+1=sleep 32000
+2=check ironore
+3=check coal
+4=consume ironore
+5=consume coal
+6=animation working 35000
+7=produce iron
+
+[smelt_gold]
+0=set +catch
+1=sleep 32000
+2=check goldstone 
+3=check coal
+4=consume goldstone
+5=consume coal
+6=animation working 35000
+7=produce gold
+
+[buildcost]
+trunk=3
+raw_stone=1
+grindstone=1
+thatchfern=2
+
+[idle]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+

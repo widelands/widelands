@@ -1,0 +1,69 @@
+[global]
+descname=Big Inn   # nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=medium
+buildable=no
+enhanced_building=yes
+buildicon=build.png
+worker=innkeeper*2
+program=work
+output=meal
+
+[inputs]
+fish=4
+pittabread=4
+meat=4
+beer=4
+strongbeer=4
+
+
+[work]
+0=sleep 30000
+1=check pittabread
+2=check beer,strongbeer
+3=check fish,meat
+4=consume pittabread
+5=consume fish,meat
+6=consume beer,strongbeer
+7=produce meal
+
+[buildcost]
+trunk=1
+grindstone=3
+thatchfern=2
+
+[idle]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[

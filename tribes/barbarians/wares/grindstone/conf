@@ -1,0 +1,19 @@
+[global]
+descname=Grindstone
+help=Raw stone can be enhanced to grind stone which delivers solid, non burning build material.
+menu_pic=menu.png
+queue_full_pic=queue_full.png
+queue_empty_pic=queue_empty.png
+
+
+# Grindstone is something between a pulver and a liquid, it is 
+# caried in wooden boxes and has a dark greyish color.
+
+[idle]
+pics=idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=8
+hot_spot_y=11
+

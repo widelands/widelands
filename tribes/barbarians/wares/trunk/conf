@@ -1,0 +1,18 @@
+[global]
+descname=Trunk
+help=Trunks are the primary build ware of the barbarians.
+menu_pic=trunk_menu.png
+queue_full_pic=trunk_queue_full.png
+queue_empty_pic=trunk_queue_empty.png
+
+
+# Barbarian trunks are made of black wood from the black forrests
+# they come from. 
+[idle]
+pics=trunk_idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=8
+hot_spot_y=11
+

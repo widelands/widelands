@@ -1,0 +1,41 @@
+[global]
+descname=Quarry		# nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=small
+buildable=yes
+buildicon=b_quarry_build.png
+worker=stonemason
+program=work
+
+[work]
+0=sleep 25000
+1=worker cut
+
+[buildcost]
+trunk=2
+raw_stone=1
+
+[idle]
+pics=b_quarry_i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=b_quarry_b_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+

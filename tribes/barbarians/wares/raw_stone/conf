@@ -1,0 +1,20 @@
+[global]
+descname=Raw Stone
+help=Raw Stones are the secondary build ware of the barbarians
+menu_pic=menu.png
+queue_full_pic=queue_full.png
+queue_empty_pic=queue_empty.png
+
+
+# The stonemasons of the barbarians are not very talented workers,
+# therefore the stones miss a certain profesionality: rough, hard edges
+# and not completly cubic.
+
+[idle]
+pics=idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=8
+hot_spot_y=11
+
