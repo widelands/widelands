@@ -80,5 +80,6 @@ class Editor_Interactive : public Interactive_Base {
       UIUniqueWindowRegistry m_toolsizemenu;
       UIUniqueWindowRegistry m_mainmenu;
       UIUniqueWindowRegistry m_eventmenu;
+      UIUniqueWindowRegistry m_options_menu;
 };
 #endif // __S__EDITOR_H

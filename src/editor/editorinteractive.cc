@@ -217,9 +217,10 @@ void Editor_Interactive::field_clicked() {
  */
 void Editor_Interactive::set_fieldsel_pos(Coords c) {
    uint btns = Sys_GetMouseButtons();
-   if(btns & ( 1 << MOUSE_LEFT ) && get_fieldsel_pos()!=c)
-      field_clicked();
+   bool should_click= (c!=get_fieldsel_pos()) && (btns & ( 1 << MOUSE_LEFT ));
    Interactive_Base::set_fieldsel_pos(c);
+   if(should_click)
+      field_clicked();
 }
 
 /*
@@ -246,7 +247,7 @@ void Editor_Interactive::tool_menu_btn()
 	if (m_toolmenu.window)
 		delete m_toolmenu.window;
 	else
-		new Editor_Tool_Menu(this, &m_toolmenu, &tools);
+		new Editor_Tool_Menu(this, &m_toolmenu, &tools, &m_options_menu);
 }
 
 /*

@@ -46,12 +46,12 @@ Create all the buttons etc...
 ===============
 */
 Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry,
-                                   Editor_Interactive::Editor_Tools* tools)
+                                   Editor_Interactive::Editor_Tools* tools, UIUniqueWindowRegistry* options)
 	: UIUniqueWindow(parent, registry, 350, 400, "Tool Menu")
 {
    m_tools=tools;
    m_parent=parent;
-
+   m_options=options;
 
    // UIButtons
    const int offsx=5;
@@ -115,8 +115,8 @@ called when the radiogroup changes or is reclicked
 void Editor_Tool_Menu::changed_to(void) {
    int n=m_radioselect->get_state();
 
-   if (m_options.window) {
-      delete m_options.window;
+   if (m_options->window) {
+      delete m_options->window;
    }
 
    switch(n) {
@@ -124,49 +124,49 @@ void Editor_Tool_Menu::changed_to(void) {
          m_parent->select_tool(1, 0);
          new Editor_Tool_Change_Height_Options_Menu(m_parent,
                static_cast<Editor_Increase_Height_Tool*>(m_tools->tools[1]),
-               &m_options);
+               m_options);
          break;
 
       case 1:
          m_parent->select_tool(2,0);
          new Editor_Tool_Noise_Height_Options_Menu(m_parent,
                static_cast<Editor_Noise_Height_Tool*>(m_tools->tools[2]),
-               &m_options);
+               m_options);
          break;
 
       case 2:
          m_parent->select_tool(3,0);
          new Editor_Tool_Set_Terrain_Tool_Options_Menu(m_parent,
                static_cast<Editor_Set_Both_Terrain_Tool*>(m_tools->tools[3]),
-               &m_options);
+               m_options);
          break;
 
       case 3:
          m_parent->select_tool(4,0);
          new Editor_Tool_Place_Immovable_Options_Menu(m_parent,
                static_cast<Editor_Place_Immovable_Tool*>(m_tools->tools[4]),
-               &m_options);
+               m_options);
          break;
 
       case 4:
          m_parent->select_tool(5,0);
          new Editor_Tool_Set_Starting_Pos_Options_Menu(m_parent, 
                static_cast<Editor_Set_Starting_Pos_Tool*>(m_tools->tools[5]),
-               &m_options);
+               m_options);
          break;
          
       case 5:
          m_parent->select_tool(6,0);
          new Editor_Tool_Place_Bob_Options_Menu(m_parent, 
                static_cast<Editor_Place_Bob_Tool*>(m_tools->tools[6]),
-               &m_options);
+               m_options);
          break;
  
       case 6:
          m_parent->select_tool(7, 0);
          new Editor_Tool_Change_Resources_Options_Menu(m_parent,
                static_cast<Editor_Increase_Resources_Tool*>(m_tools->tools[7]),
-               &m_options);
+               m_options);
          break;
 
  

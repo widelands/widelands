@@ -28,6 +28,7 @@
 #include "ui_checkbox.h"
 #include "editor_set_both_terrain_tool.h"
 #include "keycodes.h"
+#include "rendertarget.h"
 
 /*
 =================================================
@@ -58,27 +59,90 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    int nr_textures=get_parent()->get_map()->get_world()->get_nr_terrains();
    int textures_in_row=(int)(sqrt((float)nr_textures));
    if(textures_in_row*textures_in_row<nr_textures) { textures_in_row++; }
-   int i=1;
 
    set_inner_size((textures_in_row)*(TEXTURE_W+1+space)+xstart, (textures_in_row)*(TEXTURE_H+1+space)+ystart+yend);
 
    int ypos=ystart;
    int xpos=xstart;
    int cur_x=0;
-   while(i<=nr_textures) {
-      if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
 
-      UICheckbox* cb=new UICheckbox(this, xpos , ypos, g_gr->get_picture(PicMod_Game, g_gr->get_maptexture_picture(i), false));
+   int check[] = {
+      0,                   // "green"
+      TERRAIN_DRY,         // "dry" 
+      TERRAIN_DRY|TERRAIN_MOUNTAIN,   // "mountain"
+      TERRAIN_DRY|TERRAIN_UNPASSABLE, // "unpassable"
+      TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE, // "dead" or "acid"                   
+      TERRAIN_UNPASSABLE|TERRAIN_DRY|TERRAIN_WATER,
+   };
 
-      cb->set_size(TEXTURE_W+1, TEXTURE_H+1);
-      cb->set_id(i-1);
-      cb->set_state(m_sbt->is_enabled(i-1));
-      cb->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
+   m_checkboxes.resize(nr_textures);
 
-      m_checkboxes.push_back(cb);
-      xpos+=TEXTURE_W+1+space;
-      ++cur_x;
-      ++i;
+   for(int checkfor=0; checkfor<6; checkfor++) { 
+      int i=1;
+      while(i<=nr_textures) {
+         if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
+         // Get Terrain
+         Terrain_Descr* ter=get_parent()->get_map()->get_world()->get_terrain(i-1);
+         if(ter->get_is()!=check[checkfor]) { i++; continue; }
+
+         // Create a surface for this
+         int picw, pich;
+         g_gr->get_picture_size(g_gr->get_picture(PicMod_Game, g_gr->get_maptexture_picture(i), false), &picw, &pich);
+         uint surface=g_gr->create_surface(picw,pich);
+
+         // Get the rendertarget for this
+         RenderTarget* target=g_gr->get_surface_renderer(surface);
+
+         // firts, blit the terrain texture
+         target->blit(0,0,g_gr->get_picture(PicMod_Game, g_gr->get_maptexture_picture(i), false));
+
+         int small_picw, small_pich;
+         g_gr->get_picture_size(g_gr->get_picture(PicMod_Game, "pics/terrain_water.png", true), &small_picw, &small_pich);
+
+         int pic_x=1;
+         int pic_y=pich-small_pich-1;
+
+         // Check is green
+         if(ter->get_is()==0) {
+            target->blit(pic_x,pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_green.png", true)); 
+            pic_x+=small_picw+1;
+         } 
+         else if(ter->get_is()&TERRAIN_WATER) {
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_water.png", true)); 
+            pic_x+=small_picw+1;
+         } 
+         else if(ter->get_is()&TERRAIN_MOUNTAIN) {
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png", true)); 
+            pic_x+=small_picw+1;
+         } 
+         else if(ter->get_is()&TERRAIN_ACID) {
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png", true)); 
+            pic_x+=small_picw+1;
+         } 
+         else if(ter->get_is()&TERRAIN_UNPASSABLE) {
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png", true)); 
+            pic_x+=small_picw+1;
+         }
+         else if(ter->get_is()&TERRAIN_DRY) {
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png", true)); 
+            pic_x+=small_picw+1;
+         }
+
+         // Save this surface, so we can free it later on
+         m_surfaces.push_back(surface);
+
+         UICheckbox* cb=new UICheckbox(this, xpos , ypos, surface);
+
+         cb->set_size(TEXTURE_W+1, TEXTURE_H+1);
+         cb->set_id(i-1);
+         cb->set_state(m_sbt->is_enabled(i-1));
+         cb->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
+
+         m_checkboxes[i-1]=cb;
+         xpos+=TEXTURE_W+1+space;
+         ++cur_x;
+         ++i;
+      }
    }
    ypos+=TEXTURE_H+1+space+5;
 
@@ -95,12 +159,10 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
          --j;
       }
    }
+   m_textarea=new UITextarea(this, 5, get_inner_h()-25, get_inner_w()-10, 20, buf, Align_Center);
 
    set_can_focus(true);
    focus();
-
-   m_textarea=new UITextarea(this, 5, ypos, buf);
-   m_textarea->set_pos((get_inner_w()-m_textarea->get_w())/2, ypos);
 }
       
 /*
@@ -108,6 +170,9 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
  */
 Editor_Tool_Set_Terrain_Tool_Options_Menu::~Editor_Tool_Set_Terrain_Tool_Options_Menu()  {
    set_can_focus(false);
+
+   for(uint i=0; i<m_surfaces.size(); i++)
+      g_gr->free_surface(m_surfaces[i]);
 }
 
 /*
