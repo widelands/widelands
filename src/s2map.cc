@@ -575,38 +575,45 @@ void Map::load_s2mf(const char* filen, Game *game)
 					case BOB_DEADTREE3: bobname = "deadtree3"; break;
 					case BOB_DEADTREE4: bobname = "deadtree4"; break;
 
-					case BOB_TREE1: bobname = "tree1"; break;
-					case BOB_TREE2: bobname = "tree2"; break;
-					case BOB_TREE3: bobname = "tree3"; break;
-					case BOB_TREE4: bobname = "tree4"; break;
-					case BOB_TREE5: bobname = "tree5"; break;
-					case BOB_TREE6: bobname = "tree6"; break;
-					case BOB_TREE7: bobname = "tree7"; break;
-					case BOB_TREE8: bobname = "tree8"; break;
-					case BOB_TREE9: bobname = "tree9"; break;
-					case BOB_TREE10: bobname = "tree10"; break;
-					case BOB_TREE11: bobname = "tree11"; break;
-					case BOB_TREE12: bobname = "tree12"; break;
-					case BOB_TREE13: bobname = "tree13"; break;
-					case BOB_TREE14: bobname = "tree14"; break;
-					case BOB_TREE15: bobname = "tree15"; break;
-					case BOB_TREE16: bobname = "tree16"; break;
-					case BOB_TREE17: bobname = "tree17"; break;
-					case BOB_TREE18: bobname = "tree18"; break;
-					case BOB_TREE19: bobname = "tree19"; break;
-					case BOB_TREE20: bobname = "tree20"; break;
-					case BOB_TREE21: bobname = "tree21"; break;
-					case BOB_TREE22: bobname = "tree22"; break;
-					case BOB_TREE23: bobname = "tree23"; break;
-					case BOB_TREE24: bobname = "tree24"; break;
-					case BOB_TREE25: bobname = "tree25"; break;
-					case BOB_TREE26: bobname = "tree26"; break;
-					case BOB_TREE27: bobname = "tree27"; break;
-					case BOB_TREE28: bobname = "tree28"; break;
-					case BOB_TREE29: bobname = "tree29"; break;
-					case BOB_TREE30: bobname = "tree30"; break;
-					case BOB_TREE31: bobname = "tree31"; break;
-					case BOB_TREE32: bobname = "tree32"; break;
+					case BOB_TREE1:
+					case BOB_TREE2:
+					case BOB_TREE3:
+					case BOB_TREE4: bobname = "tree1"; break;
+					
+					case BOB_TREE5:
+					case BOB_TREE6:
+					case BOB_TREE7:
+					case BOB_TREE8: bobname = "tree2"; break;
+					
+					case BOB_TREE9:
+					case BOB_TREE10:
+					case BOB_TREE11:
+					case BOB_TREE12: bobname = "tree3"; break;
+					
+					case BOB_TREE13:
+					case BOB_TREE14:
+					case BOB_TREE15:
+					case BOB_TREE16: bobname = "tree4"; break;
+					
+					case BOB_TREE17:
+					case BOB_TREE18:
+					case BOB_TREE19:
+					case BOB_TREE20: bobname = "tree6"; break;
+					
+					case BOB_TREE21:
+					case BOB_TREE22:
+					case BOB_TREE23:
+					case BOB_TREE24: bobname = "tree6"; break;
+					
+					case BOB_TREE25:
+					case BOB_TREE26:
+					case BOB_TREE27:
+					case BOB_TREE28: bobname = "tree7"; break;
+					
+					case BOB_TREE29:
+					case BOB_TREE30:
+					case BOB_TREE31:
+					case BOB_TREE32: bobname = "tree8"; break;
 
 					case BOB_GRASS1: bobname = "grass1"; break;
 					case BOB_GRASS2: bobname = "grass2"; break;

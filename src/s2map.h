@@ -85,9 +85,12 @@ struct S2MapDescrHeader {
 #define BOB_BUSH4           0x12
 #define BOB_BUSH5           0xa
 
-// interesting side note: bits 4+5 of all trees are set
-// at least groups of 4 trees (bits 0+1) must be the animation
-// states of a single trees (S2 doesn't have 32 different trees)
+// Settlers 2 has 8 types of trees.
+// I assume that different animation states are stored in the map file
+// to create the following 32 values. I assume that 4 trees are grouped
+// together.
+// Unfortunately, I can't verify that (can't run the S2 editor).
+// In the end, it doesn't matter much anyway.
 #define BOB_TREE1           0x70
 #define BOB_TREE2           0x71
 #define BOB_TREE3           0x72
