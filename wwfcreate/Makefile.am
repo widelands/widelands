@@ -11,7 +11,8 @@ wwfcreate_LDADD =@SDL_LIBS@ ../src/profile.o ../src/growablearray.o ../src/myfil
 wwfcreate_SOURCES=main.cc \
 						confreader.h \
 						confreader.cc \
-						picturereader.cc
+						picturereader.cc \
+						picturereader.h
 
 #  uncomment the following if widelands requires the math library
 #widelands_LDADD=-lm

@@ -83,7 +83,7 @@ EXTRA_DIST = README
 
 bin_PROGRAMS = wwfcreate 
 wwfcreate_LDADD = -L/usr/lib -lSDL -lpthread -L/usr/X11R6/lib -lXxf86dga -lXxf86vm -lXv ../src/profile.o ../src/growablearray.o ../src/myfile.o
-wwfcreate_SOURCES = main.cc 						confreader.h 						confreader.cc 						picturereader.cc
+wwfcreate_SOURCES = main.cc 						confreader.h 						confreader.cc 						picturereader.cc 						picturereader.h
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../src/config.h

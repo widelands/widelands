@@ -78,7 +78,7 @@ SUBDIRS = src wffcreate wwfcreate wtfcreate
 EXTRA_DIST = pics fonts worlds maps
 
 EXTRADATADIRS = pics/ fonts/ worlds/ maps/
-EXTRADATA = pics/*.bmp fonts/*.wff worlds/*.wwf maps/*.swd maps/*.wmf
+EXTRADATA = pics/*.bmp fonts/*.wff worlds/*.wwf maps/*.swd
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ./src/config.h
@@ -365,6 +365,9 @@ install-data-local: datainstalldirs
 	        for i in $(EXTRADATA); do \
 						         $(INSTALL_DATA) $$i $(DESTDIR)$(pkgdatadir)/$$i; \
 									        done
+
+uninstall-am:
+		  rm -rf $(pkgdatadir)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

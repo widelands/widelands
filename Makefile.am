@@ -3,7 +3,7 @@ SUBDIRS= src wffcreate wwfcreate wtfcreate
 EXTRA_DIST=pics fonts worlds maps
 
 EXTRADATADIRS=pics/ fonts/ worlds/ maps/
-EXTRADATA=pics/*.bmp fonts/*.wff worlds/*.wwf maps/*.swd maps/*.wmf
+EXTRADATA=pics/*.bmp fonts/*.wff worlds/*.wwf maps/*.swd
 
 datainstalldirs:
 	   for dir in $(EXTRADATADIRS) ; do \
@@ -15,4 +15,7 @@ install-data-local: datainstalldirs
 	        for i in $(EXTRADATA); do \
 						         $(INSTALL_DATA) $$i $(DESTDIR)$(pkgdatadir)/$$i; \
 									        done
+
+uninstall-am:
+		  rm -rf $(pkgdatadir)
 

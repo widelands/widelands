@@ -61,11 +61,13 @@ widelands_SOURCES=main.cc \
 						mapview.cc \
 						field.cc \
 						profile.cc \
+						profile.h \
 						world.cc \
 						world.h \
 						bob.cc \
 						bob.h \
 						worldfiletypes.h \
+						tribefiletypes.h \
 						button.cc \
 						textarea.cc \
 						window.cc \
