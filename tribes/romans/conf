@@ -48,6 +48,9 @@ clrkey_b=255
 plank=300
 log=100
 stone=300
+bread=5
+water=100
+wheat=50
 
 [startworkers]
 carrier=20
@@ -56,3 +59,6 @@ lumberjack=80
 forrester=20
 stonecutter=20
 carpenter=20
+baker=5
+farmer=5
+miller=5

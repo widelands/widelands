@@ -1,0 +1,16 @@
+[global]
+descname=Flour
+help=Flour, Mehl, Farine
+menu_pic=flour_menu.bmp
+queue_full_pic=flour_queue_full.bmp
+queue_empty_pic=flour_queue_empty.bmp
+
+# The "animation" used when the item rests on a flag
+[idle]
+pics=flour_idle.bmp
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=6
+hot_spot_y=5
+
