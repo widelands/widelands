@@ -60,28 +60,17 @@ protected:
 	void unset_position(Editor_Game_Base *g, Coords c);
 };
 
+
 class Immovable;
+class ImmovableProgram;
+struct ImmovableAction;
 
 /*
 Immovable represents a standard immovable such as trees or stones.
 */
 class Immovable_Descr : public Map_Object_Descr {
 public:
-	enum Type {
-		actAnimation,		// iparam1 = anim, iparam2 = duration (-1 = forever)
-		actTransform,		// sparam = transform into
-		actRemove
-	};
-
-	struct Action {
-		Type			type;
-		int			iparam1;
-		int			iparam2;
-		std::string	sparam;
-	};
-
-	typedef std::vector<Action> Program;
-	typedef std::map<std::string, Program*> ProgramMap;
+	typedef std::map<std::string, ImmovableProgram*> ProgramMap;
 	typedef std::map<std::string, uint> AnimationMap;
 
 public:
@@ -91,12 +80,12 @@ public:
 	inline const char* get_name(void) const { return m_name; }
 	inline int get_size(void) const { return m_size; }
    inline const char* get_picture(void) const { return m_picture.c_str(); }
-	inline const Program* get_program(std::string name) const;
+	inline const ImmovableProgram* get_program(std::string name) const;
 	inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
 
 	void parse(const char *directory, Profile *s);
 	void parse_program(std::string directory, Profile* prof, std::string name);
-	uint parse_animation(const char* directory, Profile* s, std::string name);
+	uint parse_animation(std::string directory, Profile* prof, std::string name);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
 protected:
@@ -142,9 +131,9 @@ protected:
 	uint			m_anim;
 	int			m_animstart;
 
-	const Immovable_Descr::Program*	m_program;
-	uint										m_program_ptr;			// index of next instruction to execute
-	int										m_program_step;		// time of next step
+	const ImmovableProgram*	m_program;
+	uint							m_program_ptr;			// index of next instruction to execute
+	int							m_program_step;		// time of next step
 };
 
 

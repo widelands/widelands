@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,14 +42,14 @@ class Road;
  */
 class Player {
    friend class Editor_Game_Base;
-   
+
    public:
 		enum {
 			playerLocal = 0,
 			//playerRemote,
 			playerAI
 		};
-		
+
       Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor);
       ~Player(void);
 
@@ -58,19 +58,21 @@ class Player {
 		inline int get_player_number() const { return m_plnum; }
 		inline const RGBColor* get_playercolor() const { return m_playercolor; }
 		inline Tribe_Descr *get_tribe() const { return m_tribe; }
-		
-	
+
+
       void init_for_game(Game*);
+
+		bool is_field_owned(Coords coords);
 		int get_buildcaps(Coords coords);
-		
+
 		// See area
 		inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
 		inline bool is_field_seen(Coords c) { return (*seen_fields)[c.y*m_egbase->get_map()->get_width() + c.x]; }
 		inline bool is_field_seen(int x, int y) { return is_field_seen(Coords(x, y)); }
 		inline std::vector<bool>* get_visibility() { return seen_fields; }
-		
+
 		void set_area_seen(int x, int y, uint area, bool on);
-		
+
 		// Player commands
 		void build_flag(Coords c);
 		void build_road(const Path *path);

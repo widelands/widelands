@@ -409,15 +409,7 @@ void Map::find_reachable(Coords coord, uint radius, const CheckStep* checkstep, 
 			Pathfield *neighbpf;
 			FCoords neighb;
 
-			switch(dir) {
-			case Map_Object::WALK_NW: get_tln(cur, &neighb); break;
-			case Map_Object::WALK_NE: get_trn(cur, &neighb); break;
-			case Map_Object::WALK_E: get_rn(cur, &neighb); break;
-			case Map_Object::WALK_SE: get_brn(cur, &neighb); break;
-			case Map_Object::WALK_SW: get_bln(cur, &neighb); break;
-			case Map_Object::WALK_W: get_ln(cur, &neighb); break;
-			}
-
+			get_neighbour(cur, dir, &neighb);
 			neighbpf = m_pathfields + (neighb.field-m_fields);
 
 			// Have we already visited this field?
@@ -1631,15 +1623,7 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path, const C
 			FCoords neighb;
 			int cost;
 
-			switch(*direction) {
-			case Map_Object::WALK_NW: get_tln(cur, &neighb); break;
-			case Map_Object::WALK_NE: get_trn(cur, &neighb); break;
-			case Map_Object::WALK_E: get_rn(cur, &neighb); break;
-			case Map_Object::WALK_SE: get_brn(cur, &neighb); break;
-			case Map_Object::WALK_SW: get_bln(cur, &neighb); break;
-			case Map_Object::WALK_W: get_ln(cur, &neighb); break;
-			}
-
+			get_neighbour(cur, *direction, &neighb);
 			neighbpf = m_pathfields + (neighb.field-m_fields);
 
 			// Is the field Closed already?
@@ -1698,15 +1682,7 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path, const C
 		path->m_path.push_back(curpf->backlink);
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
-		switch(curpf->backlink) {
-		case Map_Object::WALK_NW: get_brn(cur, &cur); break;
-		case Map_Object::WALK_NE: get_bln(cur, &cur); break;
-		case Map_Object::WALK_E: get_ln(cur, &cur); break;
-		case Map_Object::WALK_SE: get_tln(cur, &cur); break;
-		case Map_Object::WALK_SW: get_trn(cur, &cur); break;
-		case Map_Object::WALK_W: get_rn(cur, &cur); break;
-		}
-
+		get_neighbour(cur, get_reverse_dir(curpf->backlink), &cur);
 		curpf = m_pathfields + (cur.field-m_fields);
 	}
 
@@ -2043,17 +2019,23 @@ CheckStepWalkOn
 */
 bool CheckStepWalkOn::allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const
 {
+	uchar startcaps = start.field->get_caps();
 	uchar endcaps = end.field->get_caps();
+
+	// Make sure that we don't find paths where we walk onto an unwalkable field,
+	// then move back onto a walkable field.
+	if (!m_onlyend && id != stepFirst && !(startcaps & m_movecaps))
+		return false;
 
 	if (endcaps & m_movecaps)
 		return true;
 
+	// We can't move onto the field using normal rules.
+	// If onlyend is true, exception rules only apply for the last step.
 	if (m_onlyend && id != stepLast)
 		return false;
 
 	// If the previous field was walkable, we can move onto this one
-	uchar startcaps = start.field->get_caps();
-
 	if (startcaps & m_movecaps)
 		return true;
 

@@ -92,11 +92,153 @@ void BaseImmovable::unset_position(Editor_Game_Base *g, Coords c)
 	Field *f = g->get_map()->get_field(c);
 
 	assert(f->immovable == this);
-	
+
 	f->immovable = 0;
 
 	if (get_size() >= SMALL)
 		g->recalc_for_field(c);
+}
+
+
+/*
+==============================================================================
+
+ImmovableProgram IMPLEMENTATION
+
+==============================================================================
+*/
+
+struct ImmovableAction {
+	enum Type {
+		actAnimation,		// iparam1 = anim, iparam2 = duration (-1 = forever)
+		actTransform,		// sparam = transform into
+		actRemove
+	};
+
+	Type			type;
+	int			iparam1;
+	int			iparam2;
+	std::string	sparam;
+};
+
+
+class ImmovableProgram {
+public:
+	ImmovableProgram(std::string name);
+
+	std::string get_name() const { return m_name; }
+	uint get_size() const { return m_actions.size(); }
+	const ImmovableAction& get_action(uint idx) const { assert(idx < m_actions.size()); return m_actions[idx]; }
+
+	void add_action(const ImmovableAction& act);
+	void parse(Immovable_Descr* descr, std::string directory, Profile* prof);
+
+private:
+	std::string							m_name;
+	std::vector<ImmovableAction>	m_actions;
+};
+
+ImmovableProgram::ImmovableProgram(std::string name)
+{
+	m_name = name;
+}
+
+
+/*
+===============
+ImmovableProgram::add_action
+
+Append the given action
+===============
+*/
+void ImmovableProgram::add_action(const ImmovableAction& act)
+{
+	m_actions.push_back(act);
+}
+
+
+/*
+===============
+ImmovableProgram::parse
+
+Actually parse a program
+===============
+*/
+void ImmovableProgram::parse(Immovable_Descr* descr, std::string directory, Profile* prof)
+{
+	Section* s = prof->get_safe_section(m_name.c_str());
+	uint line;
+
+	for(line = 0; ; line++)
+	{
+		try
+		{
+			std::vector<std::string> command;
+			ImmovableAction action;
+			char buf[256];
+			const char* string;
+
+			snprintf(buf, sizeof(buf), "%i", line);
+			string = s->get_string(buf, 0);
+
+			if (!string)
+				break;
+
+			split_string(string, &command, " \t\r\n");
+			if (!command.size())
+				continue;
+
+			if (command[0] == "animation")
+			{
+				if (command.size() != 3)
+					throw wexception("Syntax: animation [name] [duration]");
+
+				action.type = ImmovableAction::actAnimation;
+				action.iparam1 = descr->parse_animation(directory, prof, command[1]);
+				action.iparam2 = atoi(command[2].c_str());
+
+				if (action.iparam2 == 0 || action.iparam2 < -1)
+					throw wexception("duration out of range (-1, 1..+inf) '%s'", command[2].c_str());
+			}
+			else if (command[0] == "transform")
+			{
+				if (command.size() != 2)
+					throw wexception("Syntax: transform [bob name]");
+
+				action.type = ImmovableAction::actTransform;
+				action.sparam = command[1];
+			}
+			else if (command[0] == "remove")
+			{
+				if (command.size() != 1)
+					throw wexception("Syntax: remove");
+
+				action.type = ImmovableAction::actRemove;
+			}
+			else
+				throw wexception("Unknown instruction '%s'", command[0].c_str());
+
+			m_actions.push_back(action);
+		}
+		catch(std::exception& e)
+		{
+			log("WARNING: %s:%s:%i: %s\n", directory.c_str(), m_name.c_str(), line, e.what());
+		}
+	}
+
+	// Fallback (default) program
+	if (!m_actions.size())
+	{
+		ImmovableAction act;
+
+		log("WARNING: %s: [%s] is empty, using default\n", directory.c_str(), m_name.c_str());
+
+		act.type = ImmovableAction::actAnimation;
+		act.iparam1 = descr->parse_animation(directory, prof, "idle");
+		act.iparam2 = -1;
+
+		m_actions.push_back(act);
+	}
 }
 
 
@@ -147,7 +289,7 @@ Immovable_Descr::get_program
 Find the program of the given name.
 ===============
 */
-const Immovable_Descr::Program* Immovable_Descr::get_program(std::string name) const
+const ImmovableProgram* Immovable_Descr::get_program(std::string name) const
 {
 	ProgramMap::const_iterator it = m_programs.find(name);
 
@@ -235,14 +377,14 @@ void Immovable_Descr::parse(const char *directory, Profile *prof)
 		}
 		else
 		{
-			Program* prog = new Program;
-			Action act;
+			ImmovableProgram* prog = new ImmovableProgram("program");
+			ImmovableAction act;
 
-			act.type = actAnimation;
+			act.type = ImmovableAction::actAnimation;
 			act.iparam1 = parse_animation(directory, prof, "idle");
 			act.iparam2 = -1;
+			prog->add_action(act);
 
-			prog->push_back(act);
 			m_programs["program"] = prog;
 		}
 	}
@@ -258,85 +400,15 @@ Parse a program.
 */
 void Immovable_Descr::parse_program(std::string directory, Profile* prof, std::string name)
 {
-	Section* s = prof->get_safe_section(name.c_str());
-	Program* prog = 0;
+	ImmovableProgram* prog = 0;
+
+	if (m_programs.find(name) != m_programs.end())
+		throw wexception("Duplicate program '%s'", name.c_str());
 
 	try
 	{
-		uint line;
-
-		prog = new Program;
-
-		for(line = 0; ; line++) {
-			try
-			{
-				std::vector<std::string> command;
-				Action action;
-				char buf[256];
-				const char* string;
-
-				snprintf(buf, sizeof(buf), "%i", line);
-				string = s->get_string(buf, 0);
-
-				if (!string)
-					break;
-
-				split_string(string, &command, " \t\r\n");
-				if (!command.size())
-					continue;
-
-				if (command[0] == "animation")
-				{
-					if (command.size() != 3)
-						throw wexception("Syntax: animation [name] [duration]");
-
-					action.type = actAnimation;
-					action.iparam1 = parse_animation(directory.c_str(), prof, command[1]);
-					action.iparam2 = atoi(command[2].c_str());
-
-					if (action.iparam2 == 0 || action.iparam2 < -1)
-						throw wexception("duration out of range (-1, 1..+inf) '%s'", command[2].c_str());
-				}
-				else if (command[0] == "transform")
-				{
-					if (command.size() != 2)
-						throw wexception("Syntax: transform [bob name]");
-
-					action.type = actTransform;
-					action.sparam = command[1];
-				}
-				else if (command[0] == "remove")
-				{
-					if (command.size() != 1)
-						throw wexception("Syntax: remove");
-
-					action.type = actRemove;
-				}
-				else
-					throw wexception("Unknown instruction '%s'", command[0].c_str());
-
-				prog->push_back(action);
-			}
-			catch(std::exception& e)
-			{
-				log("WARNING: %s:%s:%i: %s\n", directory.c_str(), name.c_str(), line, e.what());
-			}
-		}
-
-		// Fallback (default) program
-		if (!prog->size())
-		{
-			Action act;
-
-			log("WARNING: %s: [%s] is empty, using default\n", directory.c_str(), name.c_str());
-
-			act.type = actAnimation;
-			act.iparam1 = parse_animation(directory.c_str(), prof, "idle");
-			act.iparam2 = -1;
-
-			prog->push_back(act);
-		}
-
+		prog = new ImmovableProgram(name);
+		prog->parse(this, directory, prof);
 		m_programs[name] = prog;
 	}
 	catch(...)
@@ -356,7 +428,7 @@ Immovable_Descr::parse_animation
 Parse the animation of the given name.
 ===============
 */
-uint Immovable_Descr::parse_animation(const char* directory, Profile* s, std::string name)
+uint Immovable_Descr::parse_animation(std::string directory, Profile* s, std::string name)
 {
 	AnimationMap::iterator it = m_animations.find(name);
 
@@ -379,11 +451,11 @@ uint Immovable_Descr::parse_animation(const char* directory, Profile* s, std::st
 	}
 
 	if (!anim) {
-		log("%s: Animation %s not defined.\n", directory, name.c_str());
+		log("%s: Animation %s not defined.\n", directory.c_str(), name.c_str());
 		return 0;
 	}
 
-   animid = g_anim.get(directory, anim, picname, &m_default_encodedata);
+   animid = g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
 
 	m_animations[name] = animid;
 
@@ -501,14 +573,14 @@ Set animation data according to current program state.
 */
 void Immovable::set_program_animation(Editor_Game_Base* g)
 {
-	const Immovable_Descr::Program* prog = m_program;
+	const ImmovableProgram* prog = m_program;
 
 	if (!prog)
 		prog = get_descr()->get_program("program");
 
-	const Immovable_Descr::Action& action = (*prog)[m_program_ptr];
+	const ImmovableAction& action = prog->get_action(m_program_ptr);
 
-	if (action.type == Immovable_Descr::actAnimation) {
+	if (action.type == ImmovableAction::actAnimation) {
 		m_anim = action.iparam1;
 		m_animstart = g->get_gametime();
 	}
@@ -561,12 +633,12 @@ void Immovable::run_program(Game* g, bool killable)
 
 	do
 	{
-		const Immovable_Descr::Action& action = (*m_program)[m_program_ptr];
+		const ImmovableAction& action = m_program->get_action(m_program_ptr);
 
-		m_program_ptr = (m_program_ptr+1) % m_program->size();
+		m_program_ptr = (m_program_ptr+1) % m_program->get_size();
 
 		switch(action.type) {
-		case Immovable_Descr::actAnimation:
+		case ImmovableAction::actAnimation:
 			m_anim = action.iparam1;
 			m_animstart = g->get_gametime();
 
@@ -574,12 +646,12 @@ void Immovable::run_program(Game* g, bool killable)
 				m_program_step = schedule_act(g, action.iparam2);
 			return;
 
-		case Immovable_Descr::actTransform:
+		case ImmovableAction::actTransform:
 			{
 				Coords c = m_position;
 
 				if (!killable) { // we need to reschedule and remove self from act()
-					m_program_ptr = (m_program_ptr+m_program->size()-1) % m_program->size();
+					m_program_ptr = (m_program_ptr+m_program->get_size()-1) % m_program->get_size();
 					m_program_step = schedule_act(g, 1);
 					return;
 				}
@@ -590,9 +662,9 @@ void Immovable::run_program(Game* g, bool killable)
 				return;
 			}
 
-		case Immovable_Descr::actRemove:
+		case ImmovableAction::actRemove:
 			if (!killable) {
-				m_program_ptr = (m_program_ptr+m_program->size()-1) % m_program->size();
+				m_program_ptr = (m_program_ptr+m_program->get_size()-1) % m_program->get_size();
 				m_program_step = schedule_act(g, 1);
 				return;
 			}
@@ -603,7 +675,8 @@ void Immovable::run_program(Game* g, bool killable)
 	}
 	while(origptr != m_program_ptr);
 
-	molog("WARNING: %s has infinite loop in program\n", get_descr()->get_name());
+	molog("WARNING: %s has infinite loop in program %s\n", get_descr()->get_name(),
+					m_program->get_name().c_str());
 }
 
 
