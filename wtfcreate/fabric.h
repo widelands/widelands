@@ -21,6 +21,7 @@
 #define __S__FABRIC_H
 
 #include <string.h>
+#include <assert.h>
 #include "../src/mytypes.h"
 
 /*
@@ -38,12 +39,26 @@ template <class T> class Fabric {
       T* get_nitem(void) { n++; if(n<nitems) return items[n]; return NULL; }
       void add(T* item);
       ushort get_nitems(void) { return nitems; }
-
+      ushort get_index(const char* name);
+      
    protected:
       uint n;
       uint nitems;
       T** items;
 };
+
+template <class T>
+ushort Fabric<T>::get_index(const char* name) {
+  
+   ushort i;
+   for(i=0; i<nitems; i++) {
+      if(!strcasecmp(name, items[i]->get_name())) return i;
+   }
+
+   
+   assert(0); // we should never be here!
+   return 0;
+}
 
 template <class T> 
 T* Fabric<T>::get(const char* name) {

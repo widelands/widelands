@@ -52,7 +52,7 @@ class Bob_Data_Pic_Descr : public Pic {
  */
 void Bob_Data_Pic_Descr::write(Binary_file* f) {
 
-//   cerr << "Bob_Data_Pix_Descr::write()!! TODO!" << endl;
+//   cerr << "Bob_Data_Pix_Descr::write()!!" << endl;
 
    // normally, the compressed data will be slightly smaller, but make things sure here: use 
    // double size!
@@ -71,7 +71,7 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
       if(has_clrkey() && pixels[i]==get_clrkey()) {
          data[n]|=CMD_TRANS;
          count=0;
-         while(pixels[i]==get_clrkey() && i<npix) { count++; i++; }
+         while(i<npix && pixels[i]==get_clrkey()) { count++; i++; }
          data[n]|=count;
          n++;
          i--;
@@ -86,7 +86,7 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
       } else if(has_shadow && pixels[i]==shadowclr) {
          data[n]|=CMD_SHAD;
          count=0;
-         while(pixels[i]==shadowclr && i<npix) { count++; i++; }
+         while(i<npix && pixels[i]==shadowclr) { count++; i++; }
          data[n]|=count;
          n++;
          i--;
@@ -106,7 +106,7 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
                data[n]|=idx;
                count=0;
                n++;
-               while(pixels[i]==play_clr[idx] && i<npix) { count++; i++; }
+               while(i<npix && pixels[i]==play_clr[idx]) { count++; i++; }
                data[n]=count;
                n++;
                i--;
@@ -179,8 +179,8 @@ Bob_Descr::~Bob_Descr(void) {
 uint Bob_Descr::construct(const char* pfile_names, const char* dirname, const char* subdir, ushort clrkey, ushort shadowclr, ushort* w, ushort *h, bool pl_clr) {
 
    npics=0;
-   *w=0;
-   *h=0;
+//   *w=0;
+  // *h=0;
 
    uint len=strlen(dirname)+strlen(pfile_names)+1;
    if(subdir) len+=strlen(subdir)+1;

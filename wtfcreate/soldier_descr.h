@@ -42,10 +42,9 @@ class Soldier_Descr : virtual public Worker_Descr,
    public:
          virtual ~Soldier_Descr(void);
          virtual int construct(Profile* p, Section* s);
-          
+         virtual int write(Binary_file* f);
+
    private:
-         Pic_Descr *menu_pic;
-         ushort clrkey;
          uint energy;
 
          Bob_Descr attack_l;

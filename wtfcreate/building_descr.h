@@ -44,7 +44,23 @@ class Building_Descr : virtual public File_Descr {
       virtual Worker_Descr* get_worker(void)=0;
 
    protected:
-      int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob);
+      enum {
+         SIT = 0,
+         SIT_PRODU_WORKER,
+         DIG,
+         SEARCH,
+         GROW,
+         PLANT, 
+         SCIENCE,
+         MILITARY,
+         CANNON,
+         SPEC_HQ,
+         SPEC_STORE,
+         SPEC_PORT,
+         SPEC_DOCKYARD
+      };
+
+      int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew=0, ushort* eh=0);
 
    private: 
       char name[30];
@@ -368,6 +384,7 @@ class Cannon_Descr : virtual public Boring_Building_Descr,
          ushort idle_time;
          ushort projectile_speed;
          bool fires_balistic;
+         ushort wproj, hproj;
          Bob_Descr bob_projectile;
          Bob_Descr bob_fire_ne;
          Bob_Descr bob_fire_e;

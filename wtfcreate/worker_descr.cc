@@ -17,7 +17,10 @@
  *
  */
 
+#define KEEP_STANDART_ASSERT 1 // no graphical assert in this file
+
 #include <string.h>
+#include <assert.h>
 #include "worker_descr.h"
 #include "../src/helper.h"
 #include "../src/graphic.h"
@@ -101,6 +104,16 @@ Worker_Descr* Worker_Fabric::get_nitem(void) {
    return 0;
 }
 
+ushort Worker_Fabric::get_nitems(void) {
+   ushort retval=scientistf.get_nitems() +
+      searcherf.get_nitems() +
+      planterf.get_nitems() +
+      growerf.get_nitems() +
+      sit_digf.get_nitems();
+
+   return retval;
+}
+
 Scientist_Descr*  Worker_Fabric::get_scientist(const char* name) {
    if(sit_digf.exists(name)  || searcherf.exists(name) ||
          planterf.exists(name) || growerf.exists(name))  return NULL;
@@ -139,6 +152,19 @@ Sit_Dig_Base_Descr* Worker_Fabric::get_sit_dig(const char* name) {
    return sit_digf.get(name);
 }
 
+ushort Worker_Fabric::get_index(const char* name) {
+   uint i=0;
+
+   Worker_Descr* w=start_enum();
+   while(w) {
+      if(!strcasecmp(w->get_name(), name)) return i;
+      i++;
+      w=get_nitem();
+   }
+
+   assert(0);
+   return 0;
+}
 
 //
 // class Worker_Descr
@@ -330,7 +356,37 @@ int Worker_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Worker_Descr::write(Binary_file* f) {
-   cerr << "Worker_Descr_Descr::write() TODO!" << endl;
+
+   f->write(name, sizeof(name));
+   uchar temp=is_enabled;
+   f->write(&temp, sizeof(uchar));
+   f->write(&walking_speed, sizeof(ushort));
+
+   // write need list
+   f->write(&nneeds, sizeof(short));
+   int i;
+   ushort temp1;
+   for(i=0; i<nneeds; i++) {
+      temp1=needs[i].num;
+      f->write(&temp1, sizeof(ushort));
+      temp1=waref.get_index(needs[i].ware->get_name());
+      f->write(&temp1, sizeof(ushort));
+   }
+
+   f->write(&w, sizeof(ushort));
+   f->write(&h, sizeof(ushort));
+   f->write(&hsx, sizeof(ushort));
+   f->write(&hsy, sizeof(ushort));
+
+   // Write bobs
+   bob_walk_ne.write(f);
+   bob_walk_e.write(f);
+   bob_walk_se.write(f);
+   bob_walk_sw.write(f);
+   bob_walk_w.write(f);
+   bob_walk_nw.write(f);
+
+   //cerr << "Worker_Descr_Descr::write()" << endl.write(f);
    return OK;
 }
 
@@ -411,7 +467,12 @@ int Menu_Worker_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Menu_Worker_Descr::write(Binary_file* f) {
-   cerr << "Menu_Worker_Descr::write() TODO!" << endl;
+
+   // write clrkey and pic
+   f->write(&clrkey, sizeof(ushort));
+   menu_pic->write(f);
+
+   // cerr << "Menu_Worker_Descr::write()" << endl;
    return OK;
 }
 
@@ -432,7 +493,10 @@ int Has_Working_Worker_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Has_Working_Worker_Descr::write(Binary_file* f) {
-   cerr << "Has_Working_Worker_Descr::write() TODO!" << endl;
+      
+   bob_working.write(f);
+
+   // cerr << "Has_Working_Worker_Descr::write()" << endl;
    return OK;
 }
 
@@ -454,7 +518,12 @@ int Has_Working1_Worker_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Has_Working1_Worker_Descr::write(Binary_file* f) {
-   cerr << "Has_Working1_Worker_Descr::write() TODO!" << endl;
+
+   // cerr << "Has_Working1_Worker_Descr::write()" << endl;
+      
+   bob_working1.write(f);
+   
+   
    return OK;
 }
 
@@ -488,7 +557,14 @@ int Has_Walk1_Worker_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Has_Walk1_Worker_Descr::write(Binary_file* f) {
-   cerr << "Has_Walk1_Worker_Descr::write() TODO!" << endl;
+   bob_walk_ne1.write(f);
+   bob_walk_e1.write(f);
+   bob_walk_se1.write(f);
+   bob_walk_sw1.write(f);
+   bob_walk_w1.write(f);
+   bob_walk_nw1.write(f);
+
+//   cerr << "Has_Walk1_Worker_Descr::write()" << endl;
    return OK;
 }
 
@@ -517,7 +593,14 @@ int Scientist_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Scientist_Descr::write(Binary_file* f) {
-   cerr << "Scientist_Descr::write() TODO!" << endl;
+   
+   uchar id=SCIENTIST;
+   f->write(&id, sizeof(uchar));
+
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   
+  // cerr << "Scientist_Descr::write()!" << endl;
    return OK;
 }
 
@@ -548,7 +631,17 @@ int Searcher_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Searcher_Descr::write(Binary_file* f) {
-   cerr << "Searcher_Descr::write() TODO!" << endl;
+  
+   uchar id=SEARCHER;
+   f->write(&id, sizeof(uchar));
+
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Has_Walk1_Worker_Descr::write(f);
+   Has_Working_Worker_Descr::write(f);
+
+   // nothing additional 
+//   cerr << "Searcher_Descr::write()" << endl;
    return OK;
 }
 
@@ -581,7 +674,17 @@ int Grower_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Grower_Descr::write(Binary_file* f) {
-   cerr << "Grower_Descr::write() TODO!" << endl;
+   
+   uchar id=GROWER;
+   f->write(&id, sizeof(uchar));
+   
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Has_Walk1_Worker_Descr::write(f);
+   Has_Working_Worker_Descr::write(f);
+   Has_Working1_Worker_Descr::write(f);
+
+   // cerr << "Grower_Descr::write()!" << endl;
    return OK;
 }
 
@@ -612,7 +715,16 @@ int Planter_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Planter_Descr::write(Binary_file* f) {
-   cerr << "Planter_Descr::write() TODO!" << endl;
+
+   uchar id=PLANTER;
+   f->write(&id, sizeof(uchar));
+
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Has_Walk1_Worker_Descr::write(f);
+   Has_Working_Worker_Descr::write(f);
+   
+   // cerr << "Planter_Descr::write()!" << endl;
    return OK;
 }
 
@@ -632,7 +744,10 @@ int Sit_Dig_Base_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Sit_Dig_Base_Descr::write(Binary_file* f) {
-   cerr << "Sit_Dig_Base_Descr::write() TODO!" << endl;
+  
+   // Nothing to do
+   
+   //cerr << "Sit_Dig_Base_Descr::write()!" << endl;
    return OK;
 }
 
@@ -658,7 +773,18 @@ int Sit_Dig_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Sit_Dig_Descr::write(Binary_file* f) {
-   cerr << "Sit_Dig_Descr::write() TODO!" << endl;
+   
+   // write id
+   uchar id=SITDIG;
+   f->write(&id, sizeof(uchar));
+
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Sit_Dig_Base_Descr::write(f);
+   
+   // Nothing of our own stuff to write
+//   cerr << "Sit_Dig_Descr::write()" << endl;
+   
    return OK;
 }
 
@@ -681,7 +807,9 @@ int Carrier_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Carrier_Descr::write(Binary_file* f) {
-   cerr << "Carrier_Descr::write() TODO!" << endl;
+
+   //cerr << "Carrier_Descr::write()" << endl;
+   // nothing to do
    return OK;
 }
 
@@ -716,7 +844,18 @@ int Def_Carrier_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Def_Carrier_Descr::write(Binary_file* f) {
-   cerr << "Def_Carrier_Descr::write() TODO!" << endl;
+   
+   uchar id=SPEC_DEF_CARRIER;
+   f->write(&id, sizeof(uchar));
+
+   Worker_Descr::write(f);
+   Sit_Dig_Base_Descr::write(f);
+   Carrier_Descr::write(f);
+   Has_Walk1_Worker_Descr::write(f);
+   Has_Working_Worker_Descr::write(f);
+   Has_Working1_Worker_Descr::write(f);
+
+   // cerr << "Def_Carrier_Descr::write()" << endl;
    return OK;
 }
 
@@ -751,7 +890,18 @@ int Add_Carrier_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Add_Carrier_Descr::write(Binary_file* f) {
-   cerr << "Add_Carrier_Descr::write() TODO!" << endl;
+   
+   uchar id=SPEC_ADD_CARRIER;
+   f->write(&id, sizeof(uchar));
+
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Sit_Dig_Base_Descr::write(f);
+   Carrier_Descr::write(f);
+   Has_Walk1_Worker_Descr::write(f);
+   Has_Working_Worker_Descr::write(f);
+   Has_Working1_Worker_Descr::write(f);
+
    return OK;
 }
 
@@ -784,7 +934,17 @@ int Builder_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Builder_Descr::write(Binary_file* f) {
-   cerr << "Builder_Descr::write() TODO!" << endl;
+   
+   uchar id=SPEC_BUILDER;
+   f->write(&id, sizeof(uchar));
+   
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Sit_Dig_Base_Descr::write(f);
+   Has_Working_Worker_Descr::write(f);
+   Has_Working1_Worker_Descr::write(f);
+   
+   //cerr << "Builder_Descr::write()" << endl;
    return OK;
 }
 
@@ -813,7 +973,16 @@ int Planer_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Planer_Descr::write(Binary_file* f) {
-   cerr << "Planer_Descr::write() TODO!" << endl;
+
+   uchar id=SPEC_PLANER;
+   f->write(&id, sizeof(uchar));
+   
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Sit_Dig_Base_Descr::write(f);
+   Has_Working_Worker_Descr::write(f);
+      
+  // cerr << "Planer_Descr::write()" << endl;
    return OK;
 }
 
@@ -840,7 +1009,15 @@ int Explorer_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Explorer_Descr::write(Binary_file* f) {
-   cerr << "Explorer_Descr::write() TODO!" << endl;
+
+   uchar id=SPEC_EXPLORER;
+   f->write(&id, sizeof(uchar));
+
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Sit_Dig_Base_Descr::write(f);
+
+   //cerr << "Explorer_Descr::write()!" << endl;
    return OK;
 }
 
@@ -872,7 +1049,17 @@ int Geologist_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Geologist_Descr::write(Binary_file* f) {
-   cerr << "Geologist_Descr::write() TODO!" << endl;
+   uchar id=SPEC_GEOLOGIST;
+   f->write(&id, sizeof(uchar));
+
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   Sit_Dig_Base_Descr::write(f);
+   Has_Working_Worker_Descr::write(f);
+   Has_Working1_Worker_Descr::write(f);
+   
+   // cerr << "Geologist_Descr::write()!" << endl;
+   
    return OK;
 }
 

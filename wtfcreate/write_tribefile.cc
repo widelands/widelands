@@ -23,6 +23,7 @@
 #include "write_tribefile.h"
 #include "tribedata.h"
 #include "need_list.h"
+#include "soldier_descr.h"
 
 #define OK 0
 #define ERROR 1
@@ -54,6 +55,75 @@ void write_bobs(Binary_file* f) {
    }
 }
 
+void write_wares(Binary_file* f) {
+   ushort temp;
+
+   // write magics and nwares
+   f->write("Wares\0", 6);
+   temp=waref.get_nitems();
+   f->write(&temp, sizeof(ushort));
+
+   // write each ware
+   Ware_Descr* w;
+   w=waref.start_enum();
+   while(w) {
+      w->write(f);
+      w=waref.get_nitem();
+   }
+}
+
+void write_soldiers(Binary_file* f) {
+   ushort temp;
+
+   // write magic and nitems
+   f->write("Soldiers\0", 9);
+   temp=soldierf.get_nitems();
+   f->write(&temp, sizeof(ushort));
+
+   // write each soldier
+   Soldier_Descr* s;
+   s=soldierf.start_enum();
+   while(s) {
+      s->write(f);
+      s=soldierf.get_nitem();
+   }
+}
+
+void write_workers(Binary_file* f) {
+   ushort temp;
+
+   // write magic and nitems
+   f->write("Workers\0", 8);
+   temp=workerf.get_nitems();
+   f->write(&temp, sizeof(ushort));
+
+   // write each worker
+   Worker_Descr* w;
+   w=workerf.start_enum();
+   while(w) {
+      w->write(f);
+      w=workerf.get_nitem();
+   }
+}
+  
+void write_buildings(Binary_file* f, Buildings_Descr* b) {
+   // write magic
+   f->write("Buildings\0", 10);
+   f->write(&b->nbuilds, sizeof(ushort));
+
+   // write each building
+   uint i;
+   for(i=0; i<b->nbuilds; i++) {
+      b->builds[i]->write(f);
+   }
+}
+
+void write_checksum(MD5_Binary_file* f) {
+   ulong* sum=f->get_chksum();
+   
+   f->write(sum, 16);
+}
+
 int write_tribefile(MD5_Binary_file* f,  Buildings_Descr* buildings, Tribe_Header* header, Regent_Descr* regent) {
   
    // header out
@@ -67,12 +137,29 @@ int write_tribefile(MD5_Binary_file* f,  Buildings_Descr* buildings, Tribe_Heade
 
    // write bobs
    write_bobs(f);
+  
+   // write wares
+   write_wares(f);
+  
+   // write soldiers
+   write_soldiers(f);
+
+   // write workers
+   write_workers(f);
    
+   // write Buildings
+   write_buildings(f, buildings);
+   
+   // write checksum
+   write_checksum(f);
+
    // print out checksum for debugging
-   uchar* buf= (uchar*) f->get_chksum();
-   printf("%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x\n",
-         buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7],
-         buf[8], buf[9], buf[10], buf[11], buf[12], buf[13], buf[14], buf[15]);
+//   uchar* buf= (uchar*) f->get_chksum();
+//   printf("%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x\n",
+  //       buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7],
+    //     buf[8], buf[9], buf[10], buf[11], buf[12], buf[13], buf[14], buf[15]);
+    
+    // DONE!!!
    return OK;
 }
 

@@ -38,11 +38,26 @@ class Worker_Descr : virtual public File_Descr {
    friend class Worker_Fabric;
 
    protected:
+      enum {
+         SITDIG = 0,
+         SEARCHER,
+         GROWER,
+         PLANTER,
+         SCIENTIST,
+         SOLDIER,
+         SPEC_DEF_CARRIER,
+         SPEC_ADD_CARRIER,
+         SPEC_BUILDER,
+         SPEC_PLANER,
+         SPEC_EXPLORER,
+         SPEC_GEOLOGIST
+      };
+
       Worker_Descr(const char* gname);
       int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob);
       virtual const char* get_subdir(void) { return WORKERS_DIR; }
 
-            
+
    public:
       virtual ~Worker_Descr(void);
       const char* get_name(void) { return name; }
@@ -73,7 +88,7 @@ class Worker_Descr : virtual public File_Descr {
 class Menu_Worker_Descr : virtual public Worker_Descr {
    protected:
       Menu_Worker_Descr(const char* gname);
-      
+
    public:
       virtual ~Menu_Worker_Descr(void);
 
@@ -91,7 +106,7 @@ class Menu_Worker_Descr : virtual public Worker_Descr {
 class Has_Walk1_Worker_Descr : virtual public Worker_Descr {
    protected:
       Has_Walk1_Worker_Descr(const char*);
-   
+
    public:
       virtual ~Has_Walk1_Worker_Descr();
       virtual int construct(Profile* p, Section* s);
@@ -155,6 +170,8 @@ class Sit_Dig_Base_Descr : virtual public Worker_Descr {
 
       virtual int construct(Profile* p, Section *s);
       virtual int write(Binary_file* f);
+
+   private:
 };
 
 //
@@ -368,16 +385,19 @@ class Worker_Fabric {
 
       Worker_Descr*     start_enum(void);
       Worker_Descr*     get_nitem(void);
+      ushort            get_nitems(void);
 
       Scientist_Descr*     get_scientist(const char* name);
       Searcher_Descr*      get_searcher(const char* name);
       Planter_Descr*       get_planter(const char* name);
       Grower_Descr*        get_grower(const char* name);
       Sit_Dig_Base_Descr*  get_sit_dig(const char* name);
- 
+       
       void              add_sit_dig(Sit_Dig_Base_Descr* sitter) {
          sit_digf.add(sitter);
       }
+      
+      ushort get_index(const char* name);
 
    private:
       Fabric<Scientist_Descr> scientistf;

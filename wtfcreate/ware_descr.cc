@@ -138,7 +138,25 @@ int Ware_Descr::construct(Profile* p, Section *s) {
 }
 
 int Ware_Descr::write(Binary_file* f) {
-   cerr << "Ware_Descr::write() TODO!" << endl;
+  
+   // write name
+   f->write(name, sizeof(name));
+      
+   // write width and height of small pic + clrkey
+   ushort temp;
+   temp=pic->get_w();
+   f->write(&temp, sizeof(ushort));
+   temp=pic->get_h();
+   f->write(&temp, sizeof(ushort));
+   f->write(&clrkey, sizeof(ushort));
+   
+   // write menu_pic
+   menu_pic->write(f);
+   
+   // write_small pic
+   pic->write(f);
+
+   // cerr << "Ware_Descr::write()" << endl;
    return OK;
 }
 

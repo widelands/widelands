@@ -579,22 +579,17 @@ int parse(Buildings_Descr* buildings, Tribe_Header* header, Regent_Descr* regent
       goto cleanup;
    }
 
-   // TODO: create need list
-
 cleanup:
-   // deleting buildings
-   if(buildings->nbuilds) {   
-      uint i;
-      for(i=0; i<buildings->nbuilds; i++) {
-         //         cout << buildings->builds[i]->get_name();
-         if(buildings->builds[i]->get_worker()) {
-            //      cout << ":" << buildings->builds[i]->get_worker()->get_name();
-         } 
-         //  cout << endl;
-         delete buildings->builds[i];
-      }
-   } 
-   free(buildings->builds);
+   if(retval) {
+      // deleting buildings
+      if(buildings->nbuilds) {   
+         uint i;
+         for(i=0; i<buildings->nbuilds; i++) {
+            delete buildings->builds[i];
+         }
+      } 
+      free(buildings->builds);
+   }
 
    return retval ;
 

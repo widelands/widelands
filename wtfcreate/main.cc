@@ -85,6 +85,16 @@ int main(int argc, char** argv) {
    delete[] name;
   
    write_tribefile(&f, &buildings, &header, &regent);
+  
    
+   // deleting buildings, rest is cleaned up automatically
+   if(buildings.nbuilds) {   
+      uint i;
+      for(i=0; i<buildings.nbuilds; i++) {
+         delete buildings.builds[i];
+      }
+   } 
+   free(buildings.builds);
+
    return OK;
 }

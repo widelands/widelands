@@ -27,11 +27,9 @@ Fabric<Soldier_Descr> soldierf;
 // 
 Soldier_Descr::Soldier_Descr(const char* gname) : Worker_Descr(gname), 
          Menu_Worker_Descr(gname) {
-   menu_pic=0;
    energy=0;
 }
 Soldier_Descr::~Soldier_Descr(void) {
-   if(menu_pic) delete menu_pic;
 }
 
 int Soldier_Descr::construct(Profile* p, Section* s) {
@@ -52,7 +50,7 @@ int Soldier_Descr::construct(Profile* p, Section* s) {
       return KEY_MISSING;
    }
 
-   uchar r=255;
+/*   uchar r=255;
    uchar g=255;
    uchar b=255;
    Section* def= p->get_section("defaults");
@@ -61,11 +59,11 @@ int Soldier_Descr::construct(Profile* p, Section* s) {
       g=def->get_int("clrkey_g", g);
       b=def->get_int("clrkey_b", b);
    }
-   // Now, parse ware description itself
    r=s->get_int("clrkey_r", r);
    g=s->get_int("clrkey_g", g);
    b=s->get_int("clrkey_b", b);
    clrkey=pack_rgb(r, g, b);
+  */
    
    // parsing extra bobs
    retval=create_bob(p, s, "_attackl_??.bmp", "attack_left", &attack_l);
@@ -86,5 +84,33 @@ int Soldier_Descr::construct(Profile* p, Section* s) {
    if(retval) return retval; 
 
    return OK;
+}
+         
+int Soldier_Descr::write(Binary_file* f) {
+   
+   // First, write recognition
+   uchar temp;
+   temp=SOLDIER;
+   f->write(&temp, sizeof(uchar));
+
+   // write standart worker descr 
+   Worker_Descr::write(f);
+   Menu_Worker_Descr::write(f);
+   
+   // write soldier extras
+   ushort temp1=energy;
+   f->write(&temp1, sizeof(ushort));
+   
+   // write bobs
+   attack_l.write(f);
+   attack1_l.write(f);
+   evade_l.write(f);
+   evade1_l.write(f);
+   attack_r.write(f);
+   attack1_r.write(f);
+   evade_r.write(f);
+   evade1_r.write(f);
+   
+   return 0;
 }
 

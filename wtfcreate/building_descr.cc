@@ -42,7 +42,7 @@ Building_Descr::Building_Descr(void) {
 Building_Descr::~Building_Descr(void) {
 }
 
-int Building_Descr::create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob) {
+int Building_Descr::create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew, ushort* eh) {
    const char* str;
 
    Section* def=p->get_section("defaults");
@@ -80,7 +80,13 @@ int Building_Descr::create_bob(Profile* p, Section* s, const char* def_suffix, c
 
    //   cerr << g_dirname << subdir << buf << endl;
 
-   uint retval=bob->construct(buf, g_dirname, subdir, clrkey, shadowclr, &w, &h, 1); 
+   uint retval;
+   if(ew && eh) {
+      retval=bob->construct(buf, g_dirname, subdir, clrkey, shadowclr, ew, eh, 1); 
+   } else {
+      retval=bob->construct(buf, g_dirname, subdir, clrkey, shadowclr, &w, &h, 1); 
+   }
+   
    if(retval) {
       switch (retval) {
          case Bob_Descr::ERROR:
@@ -145,7 +151,18 @@ int Building_Descr::construct(Profile* p, Section *s) {
 }
 
 int Building_Descr::write(Binary_file* f) {
-   cerr << "Building_Descr::write() TODO!" << endl;
+ 
+   f->write(name, sizeof(name));
+   uchar temp=is_enabled;
+   f->write(&temp, sizeof(uchar));
+   f->write(&see_area, sizeof(ushort));
+   f->write(&w, sizeof(ushort));
+   f->write(&h, sizeof(ushort));
+   f->write(&hsx, sizeof(ushort));
+   f->write(&hsy, sizeof(ushort));
+   bob_idle.write(f);
+
+//   cerr << "Building_Descr::write()" << endl;
    return OK;
 }
 
@@ -165,7 +182,9 @@ int Boring_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Boring_Building_Descr::write(Binary_file* f) {
-   cerr << "Boring_Building_Descr::write() TODO!" << endl;
+   // Nothing to do
+   
+   // cerr << "Boring_Building_Descr::write() " << endl;
    return OK;
 }
 
@@ -189,7 +208,10 @@ int Working_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Working_Building_Descr::write(Binary_file* f) {
-   cerr << "Working_Building_Descr::write() TODO!" << endl;
+   
+   bob_working.write(f);
+   
+   // cerr << "Working_Building_Descr::write()" << endl;
    return OK;
 }
 
@@ -224,7 +246,9 @@ int Has_Is_A_Building_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Has_Is_A_Building_Descr::write(Binary_file* f) {
-   cerr << "Has_Is_A_Building_Descr::write() TODO!" << endl;
+
+   f->write(&is_a, sizeof(ushort));
+   // cerr << "Has_Is_A_Building_Descr::write()" << endl;
    return OK;
 }
 
@@ -310,7 +334,24 @@ int Buildable_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Buildable_Building_Descr::write(Binary_file* f) {
-   cerr << "Buildable_Building_Descr::write() TODO!" << endl;
+   // cerr << "Buildable_Building_Descr::write()" << endl;
+   
+   f->write(category, sizeof(category));
+   f->write(&build_time, sizeof(ushort));
+  
+   // write cost
+   f->write(&ncost, sizeof(ushort));
+   int i;
+   ushort temp;
+   for(i=0; i<ncost; i++) {
+      temp=cost[i].num;
+      f->write(&temp, sizeof(ushort));
+      temp=waref.get_index(cost[i].ware->get_name());
+      f->write(&temp, sizeof(ushort));
+   }
+  
+   bob_build.write(f);
+   
    return OK;
 }
 
@@ -430,7 +471,24 @@ int Has_Needs_Building_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Has_Needs_Building_Descr::write(Binary_file* f) {
-   cerr << "Has_Needs_Building_Descr::write() TODO!" << endl;
+      
+   uchar temp=needs_or;
+   f->write(&temp, sizeof(uchar));
+
+   // write needs
+   f->write(&nneeds, sizeof(ushort));
+   int i;
+   ushort temp1;
+   for(i=0; i<nneeds; i++) {
+      temp1=needs[i].num;
+      f->write(&temp1, sizeof(ushort));
+      temp1=waref.get_index(needs[i].ware->get_name());
+      f->write(&temp1, sizeof(ushort));
+      temp1=needs[i].stock;
+      f->write(&temp1, sizeof(ushort));
+   }
+  
+  // cerr << "Has_Needs_Building_Descr::write()" << endl;
    return OK;
 }
 
@@ -520,7 +578,22 @@ int Has_Products_Building_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Has_Products_Building_Descr::write(Binary_file* f) {
-   cerr << "Has_Products_Building_Descr::write() TODO!" << endl;
+  // cerr << "Has_Products_Building_Descr::write()!" << endl;
+ 
+   uchar temp=products_or;
+   f->write(&temp, sizeof(uchar));
+
+   // write needs
+   f->write(&nproducts, sizeof(ushort));
+   int i;
+   ushort temp1;
+   for(i=0; i<nproducts; i++) {
+      temp1=products[i].num;
+      f->write(&temp1, sizeof(ushort));
+      temp1=waref.get_index(products[i].ware->get_name());
+      f->write(&temp1, sizeof(ushort));
+   }
+   
    return OK;
 }
 
@@ -633,7 +706,28 @@ int Search_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Search_Building_Descr::write(Binary_file* f) {
-   cerr << "Search_Building_Descr::write() TODO!" << endl;
+
+   uchar id=SEARCH;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Boring_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   Has_Needs_Building_Descr::write(f);
+   Has_Products_Building_Descr::write(f);
+
+   // write our own stuff
+   f->write(&working_time, sizeof(ushort));
+   f->write(&idle_time, sizeof(ushort));
+   f->write(&working_area, sizeof(ushort));
+   ushort temp;
+   temp=workerf.get_index(worker->get_name());
+   f->write(&temp, sizeof(ushort));
+   f->write(&nbobs, sizeof(nbobs));
+   f->write(bobs, nbobs*30);
+   
+   // cerr << "Search_Building_Descr::write()" << endl;
    return OK;
 }
 
@@ -743,7 +837,27 @@ int Plant_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Plant_Building_Descr::write(Binary_file* f) {
-   cerr << "Plant_Building_Descr::write() TODO!" << endl;
+   // cerr << "Plant_Building_Descr::write()" << endl;
+
+   uchar id=PLANT;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Boring_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   Has_Needs_Building_Descr::write(f);
+
+   // write our own stuff
+   f->write(&working_time, sizeof(ushort));
+   f->write(&idle_time, sizeof(ushort));
+   f->write(&working_area, sizeof(ushort));
+   ushort temp;
+   temp=workerf.get_index(worker->get_name());
+   f->write(&temp, sizeof(ushort));
+   f->write(&nbobs, sizeof(nbobs));
+   f->write(bobs, nbobs*30);
+
    return OK;
 }
 
@@ -847,7 +961,27 @@ int Grow_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Grow_Building_Descr::write(Binary_file* f) {
-   cerr << "Grow_Building_Descr::write() TODO!" << endl;
+      uchar id=GROW;
+      f->write(&id, sizeof(uchar));
+
+      Building_Descr::write(f);
+      Boring_Building_Descr::write(f);
+      Buildable_Building_Descr::write(f);
+      Has_Is_A_Building_Descr::write(f);
+      Has_Needs_Building_Descr::write(f);
+      Has_Products_Building_Descr::write(f);
+
+      // own stuff
+      f->write(&working_time, sizeof(ushort));
+      f->write(&idle_time, sizeof(ushort));
+      f->write(&working_area, sizeof(ushort));
+      ushort temp;
+      temp=workerf.get_index(worker->get_name());
+      f->write(&temp, sizeof(ushort));
+      f->write(plant_bob, sizeof(plant_bob));
+      f->write(search_bob, sizeof(search_bob));
+
+      // cerr << "Grow_Building_Descr::write()" << endl;
    return OK;
 }
 
@@ -876,6 +1010,14 @@ int Science_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Science_Building_Descr::write(Binary_file* f) {
+   uchar id=SCIENCE;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Working_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   
    cerr << "Science_Building_Descr::write() TODO!" << endl;
    return OK;
 }
@@ -954,7 +1096,27 @@ int Dig_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Dig_Building_Descr::write(Binary_file* f) {
-   cerr << "Dig_Building_Descr::write() TODO!" << endl;
+  
+   uchar id=DIG;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Working_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   Has_Needs_Building_Descr::write(f);
+   Has_Products_Building_Descr::write(f);
+   
+   // own
+   f->write(&working_time, sizeof(ushort));
+   f->write(&idle_time, sizeof(ushort));
+   ushort temp;
+   temp=workerf.get_index(worker->get_name());
+   f->write(&temp, sizeof(ushort));
+   f->write(resource, sizeof(resource));
+   
+   // cerr << "Dig_Building_Descr::write()" << endl;
+   
    return OK;
 }
 
@@ -1030,7 +1192,28 @@ int Sit_Building_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Sit_Building_Descr::write(Binary_file* f) {
-   cerr << "Sit_Building_Descr::write() TODO!" << endl;
+
+   uchar id=SIT;
+   f->write(&id, sizeof(uchar));
+  
+
+   Building_Descr::write(f);
+   Working_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   Has_Needs_Building_Descr::write(f);
+   Has_Products_Building_Descr::write(f);
+                      
+   // our stuff
+   f->write(&working_time, sizeof(ushort));
+   f->write(&idle_time, sizeof(ushort));
+   ushort temp;
+   temp=workerf.get_index(worker->get_name());
+   f->write(&temp, sizeof(ushort));
+   id=order_worker;
+   f->write(&id, sizeof(uchar));
+
+   // cerr << "Sit_Building_Descr::write()!" << endl;
    return OK;
 }
 
@@ -1114,7 +1297,25 @@ int Sit_Building_Produ_Worker_Descr::construct(Profile* p, Section *s) {
    return OK;
 }
 int Sit_Building_Produ_Worker_Descr::write(Binary_file* f) {
-   cerr << "Sit_Building_Produ_Descr::write() TODO!" << endl;
+   uchar id=SIT_PRODU_WORKER;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Working_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   Has_Needs_Building_Descr::write(f);
+
+   // own stuff
+   f->write(&working_time, sizeof(ushort));
+   f->write(&idle_time, sizeof(ushort));
+   ushort temp;
+   temp=workerf.get_index(worker->get_name());
+   f->write(&temp, sizeof(ushort));
+   temp=workerf.get_index(prod_worker->get_name());
+   f->write(&temp, sizeof(ushort));
+   
+   // cerr << "Sit_Building_Produ_Descr::write()!" << endl;
    return OK;
 }
 
@@ -1183,7 +1384,23 @@ int Military_Building_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Military_Building_Descr::write(Binary_file* f) {
-   cerr << "Military_Building_Descr::write() TODO!" << endl;
+//   cerr << "Military_Building_Descr::write()" << endl;
+   
+   uchar id=MILITARY;
+   f->write(&id, sizeof(uchar));
+   
+   Building_Descr::write(f);
+   Boring_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   Has_Needs_Building_Descr::write(f);
+
+   // own stuff
+   f->write(&beds, sizeof(ushort));
+   f->write(&conquers, sizeof(ushort));
+   f->write(&idle_time, sizeof(ushort));
+   f->write(&nupgr, sizeof(ushort));
+   
    return OK;
 }
 
@@ -1195,6 +1412,8 @@ Cannon_Descr::Cannon_Descr(void) {
    projectile_speed=0;
    fires_balistic=false;
    idle_time=0;
+   wproj=0;
+   hproj=0;
 }
 Cannon_Descr::~Cannon_Descr(void) {
 }
@@ -1262,7 +1481,7 @@ int Cannon_Descr::construct(Profile* p, Section* s) {
    }
 
    // Load the bobs
-   retval=create_bob(p, s, "_a_??.bmp", "projectile_bob", &bob_projectile);
+   retval=create_bob(p, s, "_a_??.bmp", "projectile_bob", &bob_projectile, &wproj, &hproj);
    if(retval) return retval;
    retval=create_bob(p, s, "_fire_ne_??.bmp", "fire_ne_anim", &bob_fire_ne);
    if(retval) return retval;
@@ -1280,7 +1499,37 @@ int Cannon_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Cannon_Descr::write(Binary_file* f) {
-   cerr << "Cannon_Descr::write() TODO!" << endl;
+   uchar id=CANNON;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Boring_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   Has_Needs_Building_Descr::write(f);
+
+   // own stuff
+   f->write(&idle_time, sizeof(ushort));
+   f->write(&projectile_speed, sizeof(ushort));
+   id=fires_balistic;
+   f->write(&id, sizeof(uchar));
+   ushort temp;
+   temp=workerf.get_index(worker->get_name());
+   f->write(&temp, sizeof(ushort));
+   // width and height ob projectile bob
+   temp=wproj;
+   f->write(&temp, sizeof(ushort));
+   temp=hproj;
+   f->write(&temp, sizeof(ushort));
+   bob_projectile.write(f);
+   bob_fire_ne.write(f);
+   bob_fire_e.write(f);
+   bob_fire_se.write(f);
+   bob_fire_sw.write(f);
+   bob_fire_w.write(f);
+   bob_fire_nw.write(f);
+
+  // cerr << "Cannon_Descr::write()" << endl;
    return OK;
 }
 
@@ -1320,7 +1569,16 @@ int HQ_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int HQ_Descr::write(Binary_file* f) {
-   cerr << "HQ_Descr::write() TODO!" << endl;
+   uchar id=SPEC_HQ;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Boring_Building_Descr::write(f);
+
+   // own
+   f->write(&conquers, sizeof(ushort));
+
+   // cerr << "HQ_Descr::write()" << endl;
    return OK;
 }
 
@@ -1348,7 +1606,15 @@ int Store_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Store_Descr::write(Binary_file* f) {
-   cerr << "Store_Descr::write() TODO!" << endl;
+   uchar id=SPEC_STORE;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Boring_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+
+   // cerr << "Store_Descr::write()!" << endl;
    return OK;
 }
 
@@ -1412,7 +1678,23 @@ int Dockyard_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Dockyard_Descr::write(Binary_file* f) {
-   cerr << "Dockyard_Descr::write() TODO!" << endl;
+   uchar id=SPEC_DOCKYARD;
+   f->write(&id, sizeof(uchar));
+   
+   Building_Descr::write(f);
+   Boring_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+   Has_Is_A_Building_Descr::write(f);
+   Has_Needs_Building_Descr::write(f);
+
+   // own
+   f->write(&working_time, sizeof(ushort));
+   f->write(&idle_time, sizeof(ushort));
+   ushort temp;
+   temp=workerf.get_index(worker->get_name());
+   f->write(&temp, sizeof(ushort));
+
+      // cerr << "Dockyard_Descr::write()!" << endl;
    return OK;
 }
 
@@ -1441,7 +1723,14 @@ int Port_Descr::construct(Profile* p, Section* s) {
    return OK;
 }
 int Port_Descr::write(Binary_file* f) {
-   cerr << "Port_Descr::write() TODO!" << endl;
+   uchar id=SPEC_PORT;
+   f->write(&id, sizeof(uchar));
+
+   Building_Descr::write(f);
+   Boring_Building_Descr::write(f);
+   Buildable_Building_Descr::write(f);
+
+   // cerr << "Port_Descr::write()" << endl;
    return OK;
 }
 

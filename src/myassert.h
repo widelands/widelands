@@ -21,34 +21,37 @@
 #define __S__MYASSERT_H
 
 #ifdef DEBUG
-#include <iostream>
-#include <stdio.h>
-#include "output.h"
-#include "criterr.h"
-#ifdef assert
-#undef assert
-#endif
-#define assert(condition) myassert(__LINE__, __FILE__, (int)(condition), #condition)
-extern int graph_is_init; 
+   #include <iostream>
+   #include <stdio.h>
+   #include "output.h"
+   #include "criterr.h"
+   #ifndef KEEP_STANDART_ASSERT
+      #ifdef assert
+         #undef assert
+      #endif
+      #define assert(condition) myassert(__LINE__, __FILE__, (int)(condition), #condition)
+      extern int graph_is_init; 
 
-inline void myassert(int line, const char* file, int cond, const char* condt) {
-		  if(!cond) {
-					 char buf[200];
-					 sprintf(buf, "%s (%i): assertion \"%s\" failed!\n", file, line, condt);
+      inline void myassert(int line, const char* file, int cond, const char* condt) {
+         if(!cond) {
+            char buf[200];
+            sprintf(buf, "%s (%i): assertion \"%s\" failed!\n", file, line, condt);
 
-					if(graph_is_init) {
-								critical_error(buf);
-								// User chooses, if it goes on
-					 } else {
-								tell_user(buf);
-								exit(-1);
-					 }
-		  }
-}
+            if(graph_is_init) {
+               critical_error(buf);
+               // User chooses, if it goes on
+            } else {
+               tell_user(buf);
+               exit(-1);
+            }
+         }
+      }
+   #endif
 #else
-#define NDEBUG 1
-#include <assert.h>
+      #define NDEBUG 1
+      #include <assert.h>
 #endif
+
 
 
 #endif /* __S__MYASSERT_H */
