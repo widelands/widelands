@@ -83,7 +83,7 @@ public:
 	virtual void cleanup(Game*);
 	virtual void act(Game*);
 		
-	virtual void draw(Game* game, Bitmap* dst, int posx, int posy);
+	virtual void draw(Game* game, RenderTarget* dst, int posx, int posy);
 
 	inline void set_owner(Player *player) { m_owner = player; }
 	inline Player *get_owner() { return m_owner; }

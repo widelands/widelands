@@ -22,6 +22,89 @@
 
 class Animation;
 
+/*
+==============================================================================
+
+INTERFACES
+
+==============================================================================
+*/
+
+class BlitSource;
+class BlitSourceRect;
+
+/*
+class RenderTarget
+
+This abstract class represents anything that can be rendered to.
+
+enter_window() is used to obtain a RenderTarget that can be used to draw into
+the given rectangle whle clipping and so on. It returns the new target only if
+the window is actually visible.
+After you're finished rendering into that window, call leave_window() on the
+RenderTarget that was returned from enter_window().
+*/
+class RenderTarget {
+public:
+	virtual RenderTarget* enter_window(int x, int y, int w, int h) = 0;
+	virtual void leave_window() = 0;
+
+	virtual int get_w() const = 0;
+	virtual int get_h() const = 0;
+	
+	virtual void draw_rect(int x, int y, int w, int h, uchar r, uchar g, uchar b) = 0;
+   virtual void fill_rect(int x, int y, int w, int h, uchar r, uchar g, uchar b) = 0;
+   virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
+	virtual void clear() = 0;
+
+	virtual void blit(int dstx, int dsty, BlitSource* src) = 0;
+	virtual void blitrect(int dstx, int dsty, BlitSourceRect* src, 
+	                      int srcx, int srcy, int w, int h) = 0;
+};
+
+/*
+class BlitSource
+
+This abstract class represents any kind of picture that can be copied into a
+RenderTarget.
+
+TODO: Add a blit-offset feature here (makes sense for animations)?
+*/
+class Bitmap;
+
+class BlitSource {
+	friend class Bitmap;
+
+public:
+	virtual int get_w() const = 0;
+	virtual int get_h() const = 0;
+	
+private:
+	virtual void blit_to_bitmap16(Bitmap* dst, int dstx, int dsty) = 0;
+};
+
+/*
+class BlitSourceRect
+
+This is a more general source for blits into RenderTarget which allows a
+source rectangle to be specified.
+*/
+class BlitSourceRect : public BlitSource {
+	friend class Bitmap;
+
+private:
+	virtual void blit_to_bitmap16rect(Bitmap* dst, int dstx, int dsty, int srcx, int srcy, int w, int h) = 0;
+};
+
+
+/*
+==============================================================================
+
+IMPLEMENTATIONS
+
+==============================================================================
+*/
+
 /** class Bitmap
  *
  * Rectangle of 16bit pixels, can be colorkeyed.
@@ -29,56 +112,50 @@ class Animation;
  * This class provides a common interface for both loaded and run-time
  * generated pictures (i.e. class Pic) and the framebuffer.
  */
-class Bitmap {
+class Bitmap : public RenderTarget, public BlitSourceRect {
    public:
-      Bitmap() { pixels = 0; w = pitch = h = sh_clrkey = bhas_clrkey = 0; }
+      Bitmap();
 
-      inline uint get_w() const { return w; }
-      inline uint get_h() const { return h; }
-      inline uint get_pitch() const { return pitch; }
-      inline ushort *get_pixels() const { return pixels; }
-      inline bool has_clrkey(void) const { return bhas_clrkey; }
+      inline int get_w() const { return m_w; }
+      inline int get_h() const { return m_h; }
+      inline uint get_pitch() const { return m_pitch; }
+      inline ushort *get_pixels() const { return m_pixels; }
+      inline bool has_clrkey(void) const { return m_bhas_clrkey; }
       inline ushort get_clrkey(void) const
       {
-         if (bhas_clrkey) return sh_clrkey;
+         if (m_bhas_clrkey) return m_clrkey;
          return 0;
       }
-
-      void draw_rect(int x, int y, int w, int h, ushort color);
-      void fill_rect(int x, int y, int w, int h, ushort color);
-      inline void clear(void) {
-         // this function clears the bitmap completly (draws it black)
-         // it assumes, that: (w*h)%4 == 0.
-         // This function is speedy
-			if (w != pitch)
-				fill_rect(0, 0, w, h, 0);
-			else {
-				int i=(w*h);
-				assert(!(i&3));
-				i>>=1;
-				while(--i) *(((long*)(pixels))+i)=0; // faster than a memset?
-				*pixels=0;
-			}
-      }
-      
-      void brighten_rect(int x, int y, int w, int h, int factor);
 
       void set_clrkey(const ushort);
       void set_clrkey(const uchar, const uchar, const uchar);
 
-      bool make_partof(const Bitmap *other, int x, int y, uint nw, uint nh,
-            int *ofsx, int *ofsy);
+		// interface RenderTarget
+		RenderTarget* enter_window(int x, int y, int w, int h);
+		void leave_window();
+      
+		void draw_rect(int x, int y, int w, int h, uchar r, uchar g, uchar b);
+      void fill_rect(int x, int y, int w, int h, uchar r, uchar g, uchar b);
+      void brighten_rect(int x, int y, int w, int h, int factor);
+      void clear(void);
+      
+		void blit(int dstx, int dsty, BlitSource* src);
+		void blitrect(int dstx, int dsty, BlitSourceRect* src, int srcx, int srcy, int w, int h);
+
+	private:
+		// interface BlitSource
+		void blit_to_bitmap16(Bitmap* dst, int dstx, int dsty);
+		void blit_to_bitmap16rect(Bitmap* dst, int dstx, int dsty, int srcx, int srcy, int w, int h);
 
    protected:
-      ushort *pixels;
-      uint w, h;
-      uint pitch; // every row in the bitmap is pitch pixels long
-      ushort sh_clrkey;
-      bool bhas_clrkey;
+      ushort *m_pixels;
+      uint m_w, m_h;
+      uint m_pitch; // every row in the bitmap is pitch pixels long
+      ushort m_clrkey;
+      bool m_bhas_clrkey;
+		int m_ofsx, m_ofsy; // added to every destination position (necessary when used as RenderTarget)
 
-      friend void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
-            uint src_x, uint src_y, int w, int h);
-      friend void copy_animation_pic(Bitmap* dst, Animation* anim, uint time,
+      friend void copy_animation_pic(RenderTarget* dst, Animation* anim, uint time,
 		      int dst_x, int dst_y, const uchar *plrclrs);
       friend class Graphic;
 };
@@ -93,7 +170,7 @@ class Pic : public Bitmap
 {
    public:
       Pic(void) : Bitmap() { }
-      ~Pic(void) { if (pixels) free(pixels); }
+      virtual ~Pic(void) { if (m_pixels) free(m_pixels); }
 
       Pic(const Pic& p) { *this = p; }
       Pic& operator=(const Pic&);

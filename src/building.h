@@ -95,7 +95,7 @@ protected:
 	virtual void init(Game *g);
 	virtual void cleanup(Game *g);
 
-	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
+	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy);
 	
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry) = 0;
 	

@@ -67,19 +67,35 @@ However, 64 bit platforms are currently not supported.
 #define RFC_MAGIC		0x0ACAD100 // change this and I will ensure your death will be a most unpleasant one
 
 enum {
-	RFC_GETTIME = 1,
-	RFC_EVENT,
-	RFC_ENDEVENTS,
+	RFC_GETTIME = 0x01,
+	RFC_EVENT = 0x02,
+	RFC_ENDEVENTS = 0x03,
 };
 
 enum {
-	RFC_KEYDOWN,
-	RFC_KEYUP,
-	RFC_MOUSEBUTTONDOWN,
-	RFC_MOUSEBUTTONUP,
-	RFC_MOUSEMOTION,
-	RFC_QUIT
+	RFC_KEYDOWN = 0x10,
+	RFC_KEYUP = 0x11,
+	RFC_MOUSEBUTTONDOWN = 0x12,
+	RFC_MOUSEBUTTONUP = 0x13,
+	RFC_MOUSEMOTION = 0x14,
+	RFC_QUIT = 0x15
 };
+
+
+/*
+===============
+get_playback_offset
+
+Returns the position in the playback file
+===============
+*/
+static int get_playback_offset()
+{
+	assert(sys.fplayback);
+	
+	return ftell(sys.fplayback);
+}
+
 
 /*
 ===============
@@ -148,8 +164,8 @@ static void read_record_code(uchar code)
 	filecode = read_record_char();
 	
 	if (filecode != code)
-		throw wexception("Bad code %02X during playback (%02X expected). Mismatching executable versions?",
-						filecode, code);
+		throw wexception("%08X: Bad code %02X during playback (%02X expected). Mismatching executable versions?",
+						get_playback_offset()-1, filecode, code);
 }
 
 
@@ -350,7 +366,7 @@ restart:
 				break;
 			
 			default:
-				throw wexception("Unknown event type %02X in playback.", code);
+				throw wexception("%08X: Unknown event type %02X in playback.", get_playback_offset()-1, code);
 			}
 			
 			haveevent = true;
@@ -360,7 +376,7 @@ restart:
 			haveevent = false;
 		}
 		else 
-			throw wexception("Bad code %02X in event playback.", code);
+			throw wexception("%08X: Bad code %02X in event playback.", get_playback_offset()-1, code);
 	}
 	else
 		haveevent = SDL_PollEvent(ev);
@@ -369,11 +385,10 @@ restart:
 	{
 		if (haveevent)
 		{
-			write_record_char(RFC_EVENT);
-			
 			switch(ev->type) {
 			case SDL_KEYDOWN:
 			case SDL_KEYUP:
+				write_record_char(RFC_EVENT);
 				write_record_char((ev->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
 				write_record_int(ev->key.keysym.sym);
 				write_record_int(ev->key.keysym.unicode);
@@ -381,17 +396,20 @@ restart:
 			
 			case SDL_MOUSEBUTTONDOWN:
 			case SDL_MOUSEBUTTONUP:
+				write_record_char(RFC_EVENT);
 				write_record_char((ev->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
 				write_record_char(ev->button.button);
 				break;
 			
 			case SDL_MOUSEMOTION:
+				write_record_char(RFC_EVENT);
 				write_record_char(RFC_MOUSEMOTION);
 				write_record_int(ev->motion.x);
 				write_record_int(ev->motion.y);
 				break;
 			
 			case SDL_QUIT:
+				write_record_char(RFC_EVENT);
 				write_record_char(RFC_QUIT);
 				break;
 			

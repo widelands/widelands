@@ -31,7 +31,7 @@ public:
 	BaseMenu(const char *bgpic);
 
 	virtual void start();
-	virtual void draw(Bitmap *dst, int ofsx, int ofsy);
+	virtual void draw(RenderTarget* dst);
 };
 
 

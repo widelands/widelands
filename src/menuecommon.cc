@@ -54,12 +54,14 @@ void BaseMenu::start()
 	g_gr.set_mode(MENU_XRES, MENU_YRES, g_gr.get_mode());
 }
 
-/** BaseMenu::draw(Bitmap *dst, int ofsx, int ofsy)
- *
- * Draw the splash screen
- */
-void BaseMenu::draw(Bitmap *dst, int ofsx, int ofsy)
-{
-	copy_pic(dst, &bg, 0, 0, 0, 0, bg.get_w(), bg.get_h());
-}
+/*
+===============
+BaseMenu::draw
 
+Draw the splash screen
+===============
+*/
+void BaseMenu::draw(RenderTarget* dst)
+{
+	dst->blit(0, 0, &bg);
+}

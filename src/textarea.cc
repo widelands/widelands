@@ -106,12 +106,12 @@ Textarea::draw
 Redraw the Textarea
 ===============
 */
-void Textarea::draw(Bitmap *dst, int ofsx, int ofsy)
+void Textarea::draw(RenderTarget* dst)
 {
 	if (m_text.length())
 		{
-		int x = ofsx;
-		int y = ofsy;
+		int x = 0;
+		int y = 0;
 		
 		if (m_align & Align_HCenter)
 			x += get_w()/2;

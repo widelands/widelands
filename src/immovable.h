@@ -53,7 +53,7 @@ public:
 	virtual int get_size() = 0;
 	virtual bool get_passable() = 0;
 	
-	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy) = 0;
+	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy) = 0;
 	
 protected:
 	void set_position(Game *g, Coords c);
@@ -98,7 +98,7 @@ public:
 	void init(Game *g);
 	void cleanup(Game *g);
 
-	void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
+	void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy);
 
 protected:
 	Coords				m_position;

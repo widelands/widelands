@@ -82,7 +82,7 @@ protected:
 	virtual void init(Game*);
 	virtual void cleanup(Game*);
 	
-	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
+	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy);
 
 private:
 	Coords		m_position;
@@ -147,7 +147,7 @@ protected:
 	
 	virtual void request_success(Request *req);
 	
-	virtual void draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy);
+	virtual void draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy);
 
 private:
 	int		m_type;		// use Field::Road_XXX

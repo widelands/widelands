@@ -82,7 +82,7 @@ public:
 	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, Window **registry);
 	virtual ~Warehouse_Window();
 
-	virtual void draw(Bitmap *dst, int ofsx, int ofsy);
+	virtual void draw(RenderTarget* dst);
 	virtual void think();
 
 private:
@@ -136,7 +136,7 @@ Warehouse_Window::draw
 Draw the wares
 ===============
 */
-void Warehouse_Window::draw(Bitmap *dst, int ofsx, int ofsy)
+void Warehouse_Window::draw(RenderTarget* dst)
 {
 	Game *game = m_player->get_game();
 	Tribe_Descr *tribe = m_player->get_player()->get_tribe();
@@ -157,13 +157,13 @@ void Warehouse_Window::draw(Bitmap *dst, int ofsx, int ofsy)
 			pic = ((Item_Ware_Descr*)wd)->get_menu_pic();
 		
 		assert(pic);
-		copy_pic(dst, pic, x+ofsx, y+ofsy, 0, 0, pic->get_w(), pic->get_h());
-		dst->fill_rect(x+ofsx, y+ofsy+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, pack_rgb(0,0,0));
+		dst->blit(x, y, pic);
+		dst->fill_rect(x, y+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, 0, 0, 0);
 		
 		char buf[32];
 		snprintf(buf, sizeof(buf), "%i", m_warehouse->get_wares().stock(id));
 		
-		g_font->draw_string(dst, x+ofsx+WARE_MENU_PIC_W, y+ofsy+WARE_MENU_PIC_H,
+		g_font->draw_string(dst, x+WARE_MENU_PIC_W, y+WARE_MENU_PIC_H,
 		                    buf, Align_Right);
 		
 		if (id % 4 < 3)

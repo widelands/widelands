@@ -268,7 +268,7 @@ Building::draw
 Draw the building.
 ===============
 */
-void Building::draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy)
+void Building::draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy)
 {
 	if (coords != m_position)
 		return; // draw big buildings only once

@@ -146,7 +146,7 @@ int Panel::run()
 			think();
 
 		if (g_gr.does_need_update()) {
-			forefather->do_draw(g_gr.get_screenbmp(), 0, 0);
+			forefather->do_draw(g_gr.get_screenbmp());
 			g_cur.draw(Sys_GetMouseX(), Sys_GetMouseY());
 			g_gr.update();
 		}
@@ -304,28 +304,26 @@ void Panel::set_visible(bool on)
 	update(0, 0, _w, _h);
 }
 
-/** Panel::draw(Bitmap *dst, int ofsx, int ofsy) [virtual]
- *
- * Redraw the panel. Note that all drawing coordinates are relative to the
- * inner area: you cannot overwrite the panel border in this function.
- *
- * Args: dst	the destination bitmap
- *       ofsx	an offset that should be added to all coordinates
- *       ofsy
- */
-void Panel::draw(Bitmap *dst, int ofsx, int ofsy)
+/*
+===============
+Panel::draw [virtual]
+
+Redraw the panel. Note that all drawing coordinates are relative to the
+inner area: you cannot overwrite the panel border in this function.
+===============
+*/
+void Panel::draw(RenderTarget* dst)
 {
 }
 
-/** Panel::draw_border(Bitmap *dst, int ofsx, int ofsy) [virtual]
- *
- * Redraw the panel border.
- *
- * Args: dst	the destination bitmap
- *       ofsx	an offset that should be added to all coordinates
- *       ofsy
- */
-void Panel::draw_border(Bitmap *dst, int ofsx, int ofsy)
+/*
+===============
+Panel::draw_border [virtual]
+
+Redraw the panel border.
+===============
+*/
+void Panel::draw_border(RenderTarget* dst)
 {
 }
 
@@ -655,74 +653,70 @@ void Panel::check_child_death()
 	_flags &= ~pf_child_die;
 }
 
-/** Panel::do_draw(Bitmap *dst, int ofsx, int ofsy) [private]
- *
- * Adjust the drawing bitmap to clip to our own rectangle.
- * Draw child panels after drawing self.
- */
-void Panel::do_draw(Bitmap *dst, int ofsx, int ofsy)
-{
-	int dx, dy;
-	uint dw, dh;
+/*
+===============
+Panel::do_draw [private]
 
+dst is the RenderTarget for the parent Panel.
+Subset for the border first and draw the border, then subset for the inner area
+and draw the inner area.
+Draw child panels after drawing self.
+===============
+*/
+void Panel::do_draw(RenderTarget* dst)
+{
 	if (!get_visible())
 		return;
 	
 	if (!_cache)
 	{
-		dx = _x+ofsx;
-		dy = _y+ofsy;
-		dw = _w+ofsx;
-		dh = _h+ofsy;
+		RenderTarget* outer = dst->enter_window(_x, _y, _w, _h);
+		
+		if (outer) {
+			draw_border(outer);
+			
+			RenderTarget* inner = outer->enter_window(_lborder, _tborder, 
+			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
+			
+			if (inner) {
+				draw(inner);
 
-		Bitmap outer;
-		if (!outer.make_partof(dst, dx, dy, dw, dh, &ofsx, &ofsy))
-			return;
-
-		draw_border(&outer, ofsx, ofsy);
-
-		dx = _lborder+ofsx;
-		dy = _tborder+ofsy;
-		dw = _w-(_lborder+_rborder)+ofsx;
-		dh = _h-(_tborder+_bborder)+ofsy;
-
-		Bitmap inner;
-		if (!inner.make_partof(&outer, dx, dy, dw, dh, &ofsx, &ofsy))
-			return;
-
-		draw(&inner, ofsx, ofsy);
-
-		// draw back to front
-		for(Panel *child = _lchild; child; child = child->_prev)
-			child->do_draw(&inner, ofsx, ofsy);
+				// draw back to front
+				for(Panel *child = _lchild; child; child = child->_prev)
+					child->do_draw(inner);
+				
+				inner->leave_window();
+			}
+			
+			outer->leave_window();
+		}
 	}
 	else
 	{
 		// redraw only if explicitly requested
 		if (_needdraw) {
-			draw_border(_cache, 0, 0);
+			draw_border(_cache);
 
-			dx = _lborder;
-			dy = _tborder;
-			dw = _w-(_lborder+_rborder);
-			dh = _h-(_tborder+_bborder);
-
-			Bitmap inner;
-			int iox, ioy;
-			if (inner.make_partof(_cache, dx, dy, dw, dh, &iox, &ioy)) {
-				draw(&inner, iox, ioy);
+			RenderTarget* inner = _cache->enter_window(_lborder, _tborder, 
+			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
+			
+			if (inner) {
+				draw(inner);
 
 				for(Panel *child = _lchild; child; child = child->_prev)
-					child->do_draw(&inner, iox, ioy);
+					child->do_draw(inner);
+				
+				inner->leave_window();
 			}
 
 			_needdraw = false;
 		}
 
 		// now just blit from the cache
-		copy_pic(dst, _cache, ofsx+_x, ofsy+_y, 0, 0, _w, _h);
+		dst->blit(_x, _y, _cache);
 	}
 }
+
 
 /** Panel::get_mousein(int x, int y)
  *

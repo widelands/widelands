@@ -150,7 +150,7 @@ Window::draw_border
 Redraw the window frame and background
 ===============
 */
-void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
+void Window::draw_border(RenderTarget* dst)
 {
 	Pic *usebg = _custom_bg ? _custom_bg : &bg;
 	int px, py;
@@ -158,52 +158,52 @@ void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
 	// fill background
 	for(py = CORNER; py < get_h()-CORNER; py += usebg->get_h()) {
 		for(px = CORNER; px < get_w()-CORNER; px += usebg->get_w())
-			copy_pic(dst, usebg, ofsx+px, ofsy+py, 0, 0, usebg->get_w(), usebg->get_h());
+			dst->blit(px, py, usebg);
 	}
 
 	// top left corner
-	copy_pic(dst, &top, ofsx, ofsy, 0, 0, CORNER, CORNER);
+	dst->blitrect(0, 0, &top, 0, 0, CORNER, CORNER);
 	// bottom left corner
-	copy_pic(dst, &bot, ofsx, ofsy+get_h()-CORNER, 0, 0, CORNER, CORNER);
+	dst->blitrect(0, get_h()-CORNER, &bot, 0, 0, CORNER, CORNER);
 
 	// top & bottom bar
 	for(px = CORNER; px < get_w()-CORNER-MIDDLE; px += MIDDLE) {
-		copy_pic(dst, &top, ofsx+px, ofsy, CORNER, 0, MIDDLE, CORNER);
-		copy_pic(dst, &bot, ofsx+px, ofsy+get_h()-CORNER, CORNER, 0, MIDDLE, CORNER);
+		dst->blitrect(px, 0, &top, CORNER, 0, MIDDLE, CORNER);
+		dst->blitrect(px, get_h()-CORNER, &bot, CORNER, 0, MIDDLE, CORNER);
 	}
 	// odd pixels of top & bottom bar
-	copy_pic(dst, &top, ofsx+px, ofsy, CORNER, 0, get_w()-px-CORNER, CORNER);
-	copy_pic(dst, &bot, ofsx+px, ofsy+get_h()-CORNER, CORNER, 0, get_w()-px-CORNER, CORNER);
+	dst->blitrect(px, 0, &top, CORNER, 0, get_w()-px-CORNER, CORNER);
+	dst->blitrect(px, get_h()-CORNER, &bot, CORNER, 0, get_w()-px-CORNER, CORNER);
 
 	// top right corner
-	copy_pic(dst, &top, ofsx+get_w()-CORNER, ofsy, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+	dst->blitrect(get_w()-CORNER, 0, &top, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 	// bottom right corner
-	copy_pic(dst, &bot, ofsx+get_w()-CORNER, ofsy+get_h()-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+	dst->blitrect(get_w()-CORNER, get_h()-CORNER, &bot, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 
 	// left top thingy
-	copy_pic(dst, &l_border, ofsx, ofsy+CORNER, 0, 0, CORNER, CORNER);
+	dst->blitrect(0, CORNER, &l_border, 0, 0, CORNER, CORNER);
 	// right top thingy
-	copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+CORNER, 0, 0, CORNER, CORNER);
+	dst->blitrect(get_w()-CORNER, CORNER, &r_border, 0, 0, CORNER, CORNER);
 
 	// left & right bars
 	for(py = 2*CORNER; py < get_h()-2*CORNER-MIDDLE; py += MIDDLE) {
-		copy_pic(dst, &l_border, ofsx, ofsy+py, 0, CORNER, CORNER, MIDDLE);
-		copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+py, 0, CORNER, CORNER, MIDDLE);
+		dst->blitrect(0, py, &l_border, 0, CORNER, CORNER, MIDDLE);
+		dst->blitrect(get_w()-CORNER, py, &r_border, 0, CORNER, CORNER, MIDDLE);
 	}
 	// odd pixels of left & right bars
-	copy_pic(dst, &l_border, ofsx, ofsy+py, 0, CORNER, CORNER, get_h()-py-2*CORNER);
-	copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+py, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+	dst->blitrect(0, py, &l_border, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+	dst->blitrect(get_w()-CORNER, py, &r_border, 0, CORNER, CORNER, get_h()-py-2*CORNER);
 
 	// left bottom thingy
-	copy_pic(dst, &l_border, ofsx, ofsy+get_h()-2*CORNER, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
+	dst->blitrect(0, get_h()-2*CORNER, &l_border, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
 	// right bottom thingy
-	copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+get_h()-2*CORNER, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
+	dst->blitrect(get_w()-CORNER, get_h()-2*CORNER, &r_border, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
 
 	// draw the title if we have one
 	if (m_title.length()) {
 		px = get_w() >> 1;
 		py = CORNER>>1;
-		g_font->draw_string(dst, ofsx+px, ofsy+py, m_title.c_str(), Align_Center);
+		g_font->draw_string(dst, px, py, m_title.c_str(), Align_Center);
 	}
 }
 

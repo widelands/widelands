@@ -266,7 +266,7 @@ Draw the immovable at the given position.
 coords is the field that draw() was called for.
 ===============
 */
-void Immovable::draw(Game* game, Bitmap* dst, FCoords coords, int posx, int posy)
+void Immovable::draw(Game* game, RenderTarget* dst, FCoords coords, int posx, int posy)
 {
 	if (!m_anim)
 		return;

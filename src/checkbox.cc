@@ -29,16 +29,10 @@ Statebox
 */
 
 AutoPic Statebox::_gr("checkbox.bmp", STATEBOX_WIDTH*2, STATEBOX_HEIGHT);
-ushort Statebox::dflt_highlightcolor;
+uchar Statebox::dflt_highlightcolor_r = 100;
+uchar Statebox::dflt_highlightcolor_g = 100;
+uchar Statebox::dflt_highlightcolor_b = 80;
 
-/** Statebox::setup_ui() [static]
- *
- * Initialize default colors; called once by setup_ui
- */
-void Statebox::setup_ui()
-{
-	dflt_highlightcolor = pack_rgb(100, 100, 80);
-}
 
 /** Statebox::Statebox(Panel *parent, int x, int y)
  *
@@ -92,11 +86,14 @@ void Statebox::set_state(bool on)
 	update(0, 0, get_w(), get_h());
 }
 
-/** Statebox::draw(Bitmap *dst, int ofsx, int ofsy)
- *
- * Redraw the entire checkbox
- */
-void Statebox::draw(Bitmap *dst, int ofsx, int ofsy)
+/*
+===============
+Statebox::draw
+
+Redraw the entire checkbox
+===============
+*/
+void Statebox::draw(RenderTarget* dst)
 {
 	int x;
 
@@ -104,14 +101,14 @@ void Statebox::draw(Bitmap *dst, int ofsx, int ofsy)
 		x = STATEBOX_WIDTH;
 	else
 		x = 0;
-	copy_pic(dst, &_gr, ofsx, ofsy, x, 0, STATEBOX_WIDTH, STATEBOX_HEIGHT);
+	dst->blitrect(0, 0, &_gr, x, 0, STATEBOX_WIDTH, STATEBOX_HEIGHT);
 
 	if (_highlighted)
 	{
-		dst->fill_rect(ofsx, ofsy, get_w(), 1, dflt_highlightcolor);
-		dst->fill_rect(ofsx, ofsy, 1, get_h(), dflt_highlightcolor);
-		dst->fill_rect(ofsx, ofsy+get_h()-1, get_w(), 1, dflt_highlightcolor);
-		dst->fill_rect(ofsx+get_w()-1, ofsy, 1, get_h(), dflt_highlightcolor);
+		dst->fill_rect(0, 0, get_w(), 1, dflt_highlightcolor_r, dflt_highlightcolor_g, dflt_highlightcolor_b);
+		dst->fill_rect(0, 0, 1, get_h(), dflt_highlightcolor_r, dflt_highlightcolor_g, dflt_highlightcolor_b);
+		dst->fill_rect(0, get_h()-1, get_w(), 1, dflt_highlightcolor_r, dflt_highlightcolor_g, dflt_highlightcolor_b);
+		dst->fill_rect(get_w()-1, 0, 1, get_h(), dflt_highlightcolor_r, dflt_highlightcolor_g, dflt_highlightcolor_b);
 	}
 }
 

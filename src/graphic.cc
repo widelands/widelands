@@ -47,6 +47,7 @@ void Sys_SetMaxMouseCoords(int x, int y);
 // first is alway the toppest one
 void render_bottom_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bright* second, Point_with_bright* third, Pic* texture, int vpx, int vpy)
 {
+	int dstw = dst->get_w(); // cache
    int xd1_add=0, bd1_add=0, xd2_add=0, bd2_add=0, bd3_add=0, xd3_add=0;
    int xd1 = 0, xd2 = 0, xd3 = 0;
    int bd1 = 0, bd2 = 0, bd3 = 0;
@@ -125,7 +126,7 @@ void render_bottom_triangle(Bitmap *dst, Point_with_bright* first, Point_with_br
       while(x!=xstop) {
          //     cerr << x << ":" << xstart << ":" << xstop << ":" << xdiff << ":" << add << endl;
          if(x<0) goto go_onx1;
-         if(x>=(int)dst->get_w()) goto go_onx1;
+         if(x>=dstw) goto go_onx1;
          *pix = bright_up_clr(*texture->get_pixels(), (b>>8));
 go_onx1:
          ++pix;
@@ -176,7 +177,7 @@ go_on1:
       while(x!=xstop) {
          //  cerr << x << ":" << xstart << ":" << xstop << ":" << xdiff << ":" << add << endl;
          if(x<0) goto go_onx2;
-         if(x>=(int)dst->get_w()) goto go_onx2;
+         if(x>=dstw) goto go_onx2;
          *pix = bright_up_clr(*texture->get_pixels(), b>>8);
 go_onx2:
          ++pix;
@@ -201,6 +202,7 @@ go_on2:
 //  the third point is always the lowest one!
 void render_right_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bright* second, Point_with_bright* third, Pic* texture, int vpx, int vpy)
 {
+	int dstw = dst->get_w(); // cache
    int xd1_add=0, bd1_add=0, xd2_add=0, bd2_add=0, bd3_add=0, xd3_add=0;
    int xd1 = 0, xd2 = 0, xd3 = 0;
    int bd1 = 0, bd2 = 0, bd3 = 0;
@@ -275,7 +277,7 @@ void render_right_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bri
       while(x!=xstop) {
          //     cerr << x << ":" << xstart << ":" << xstop << ":" << xdiff << ":" << add << endl;
          if(x<0) goto go_onx1;
-         if(x>=(int)dst->get_w()) goto go_onx1;
+         if(x>=dstw) goto go_onx1;
          *pix = bright_up_clr(*texture->get_pixels(), (b>>8));
 go_onx1:
          ++pix;
@@ -326,7 +328,7 @@ go_on1:
       while(x!=xstop) {
          //  cerr << x << ":" << xstart << ":" << xstop << ":" << xdiff << ":" << add << endl;
          if(x<0) goto go_onx2;
-         if(x>=(int)dst->get_w()) goto go_onx2;
+         if(x>=dstw) goto go_onx2;
          *pix = bright_up_clr(*texture->get_pixels(), b>>8);
 go_onx2:
          ++pix;
@@ -353,17 +355,20 @@ Render a road. This is really dumb right now, not using a texture
 */
 void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color)
 {
+	int dstw = dst->get_w();
+	int dsth = dst->get_h();
+
 	int ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int centery = start.y << 16;
 
 	for(int x = start.x; x < end.x; x++, centery += ydiff) {
-		if (x < 0 || x >= (int)dst->get_w())
+		if (x < 0 || x >= dstw)
 			continue;
 		
 		int y = (centery >> 16) - 2;
 		
 		for(int i = 0; i < 5; i++, y++) {
-			if (y < 0 || y >= (int)dst->get_h())
+			if (y < 0 || y >= dsth)
 				continue;
 			
 	      ushort *pix = dst->get_pixels() + y*dst->get_pitch() + x;
@@ -374,17 +379,20 @@ void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color)
 
 void render_road_vert(Bitmap *dst, Point start, Point end, ushort color)
 {
+	int dstw = dst->get_w();
+	int dsth = dst->get_h();
+
 	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int centerx = start.x << 16;
 
 	for(int y = start.y; y < end.y; y++, centerx += xdiff) {
-		if (y < 0 || y >= (int)dst->get_h())
+		if (y < 0 || y >= dsth)
 			continue;
 		
 		int x = (centerx >> 16) - 2;
 		
 		for(int i = 0; i < 5; i++, x++) {
-			if (x < 0 || x >= (int)dst->get_w())
+			if (x < 0 || x >= dstw)
 				continue;
 			
 			ushort *pix = dst->get_pixels() + y*dst->get_pitch() + x;
@@ -439,7 +447,7 @@ Graphic::~Graphic(void)
       SDL_FreeSurface(sc);
       sc=NULL;
    }
-   screenbmp.pixels = 0;
+   screenbmp.m_pixels = 0;
    st = STATE_NOT_INIT;
 }
 
@@ -456,10 +464,10 @@ Graphic::~Graphic(void)
 void Graphic::set_mode(ushort x, ushort y, Mode m)
 {
    if (!x && !y) {
-		x = screenbmp.w;
-		y = screenbmp.h;
+		x = screenbmp.m_w;
+		y = screenbmp.m_h;
 	}
-   if (screenbmp.w==x && screenbmp.h==y && mode==m)
+   if (screenbmp.m_w==x && screenbmp.m_h==y && mode==m)
 		return;
    if(sc)
       SDL_FreeSurface(sc);
@@ -478,10 +486,10 @@ void Graphic::set_mode(ushort x, ushort y, Mode m)
 	}
 	
    mode=m;
-   screenbmp.w = x;
-   screenbmp.pitch = sc->pitch / (16/8);
-   screenbmp.h = y;
-   screenbmp.pixels = (ushort*) sc->pixels;
+   screenbmp.m_w = x;
+   screenbmp.m_pitch = sc->pitch / (16/8);
+   screenbmp.m_h = y;
+   screenbmp.m_pixels = (ushort*) sc->pixels;
 
    st = STATE_OK;
 
@@ -571,8 +579,10 @@ plrclrs is an array of R/G/B values for the 4 playercolors:
 	plrclrs[11] = brightest_b;
 ===============
 */
-void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y, const uchar *plrclrs)
+void copy_animation_pic(RenderTarget* tgt, Animation* anim, uint time, int dst_x, int dst_y, const uchar *plrclrs)
 {
+	Bitmap* dst = static_cast<Bitmap*>(tgt); // HACKHACKHACK
+
    int x, y;
 	Animation_Pic* pic = anim->get_time_pic(time);
 	ushort cmd;
@@ -616,8 +626,8 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
    //            cerr << count << ":" << hex << clr << endl;
 //               clr=pic->data[i];
                if(x>=0 && y>=0) {
-                  if( (((uint)x)<dst->get_w()) && (((uint)y)<dst->get_h()) ) {
-                     dst->pixels[y*dst->pitch + x]=clr; //pic->data[i];
+                  if( (x<dst->get_w()) && (y<dst->get_h()) ) {
+                     dst->m_pixels[y*dst->m_pitch + x]=clr; //pic->data[i];
                   }
                }
                ++x;
@@ -646,8 +656,8 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
             
             while(count) {
              if(x>=0 && y>=0) {
-                  if( (((uint)x)<dst->get_w()) && (((uint)y)<dst->get_h()) ) {
-                     dst->pixels[y*dst->pitch + x]=clr; 
+                  if( (x<dst->get_w()) && (y<dst->get_h()) ) {
+                     dst->m_pixels[y*dst->m_pitch + x]=clr; 
                   }
                }
                ++x;
@@ -679,90 +689,4 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
 
 //   assert(0);
 }
-
-/** void copy_pic(Bitmap +dst, Bitmap *src, const int dst_x, const int dst_y,
-*                const uint src_x, const uint src_y, const uint w, const uint h)
- *
- * Copy an area of the source bitmap to the destination bitmap, using
- * source colorkey if necessary.
- *
- * Assumes a valid source rectangle!
- * Destination clipping is performed
- *
- * Args: dst	destination bitmap
-*       src	source bitmap
-*       dst_x	destination coordinates
-*       dst_y
-*       src_x	source coordinates
-*       src_y
-*       w		width
-*       h		height
-*/
-void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
-      uint src_x, uint src_y, int w, int h)
-{
-   if (dst_x < 0) {
-      w += dst_x;
-      src_x -= dst_x;
-      dst_x = 0;
-   }
-   if (dst_x+w > (int)dst->w)
-      w = dst->w - dst_x;
-   if (w <= 0)
-      return;
-
-   if (dst_y < 0) {
-      h += dst_y;
-      src_y -= dst_y;
-      dst_y = 0;
-   }
-   if (dst_y+h > (int)dst->h)
-      h = dst->h - dst_y;
-   if (h <= 0)
-      return;
-
-   if (src->has_clrkey())
-   {
-      // Slow blit, checking for clrkeys. This could probably speed up by copying
-      // 2 pixels (==4bytes==register width)
-      // in one rush. But this is a nontrivial task
-      // This could also use MMX assembly on targets that support it...
-      for (int y=0; y<h; y++)
-      {
-         int sp = (src_y++)*src->pitch + src_x;
-         int dp = (dst_y++)*dst->pitch + dst_x;
-         for (int x=0; x<w; x++)
-         {
-            ushort clr = src->pixels[sp++];
-            if (clr != src->get_clrkey())
-               dst->pixels[dp] = clr;
-            dp++;
-         }
-      }
-   }
-   else
-   {
-      if (w == (int)dst->pitch && w == (int)src->pitch)
-      {
-         // copy entire rows, so it can be all done in a single memcpy
-         uint soffs = src_y * src->w;
-         uint doffs = dst_y * dst->w;
-         memcpy(dst->pixels+doffs, src->pixels+soffs, (w*h) << 1);
-      }
-      else
-      {
-         // fast blitting, using one memcpy per row
-         uint soffs = src_y * src->pitch + src_x;
-         uint doffs = dst_y * dst->pitch + dst_x;
-         int bw = w << 1; // w*sizeof(short)
-         for (int y=0; y<h; y++)
-         {
-            memcpy (dst->pixels+doffs, src->pixels+soffs, bw);
-            soffs += src->pitch;
-            doffs += dst->pitch;
-         }
-      }
-   }
-}
-
 

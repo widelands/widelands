@@ -53,8 +53,8 @@ public:
 	inline int get_vpy() const { return vpy; }
 
 	// Drawing
-	void draw(Bitmap *bmp, int ofsx, int ofsy);
-	void draw_ground(Bitmap *bmp, int effvpx, int effvpy, bool use_see_area);
+	void draw(RenderTarget* dst);
+	void draw_ground(RenderTarget* dst, int effvpx, int effvpy, bool use_see_area);
 	
 	// Event handling
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
@@ -81,11 +81,11 @@ private:
 	bool dragging;
    bool show_buildhelp;
 	  
-   void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+   void draw_field(RenderTarget* dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
                  const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, 
 					  uchar roads, bool render_r, bool render_b);
-	void draw_overlay(Bitmap *dst, FCoords coords, int posx, int posy);
-	void draw_overlay_road(Bitmap *dst, FCoords coords, int posx, int posy);
+	void draw_overlay(RenderTarget* dst, FCoords coords, int posx, int posy);
+	void draw_overlay_road(RenderTarget* dst, FCoords coords, int posx, int posy);
 	
 	uchar get_overlay_roads(FCoords coords);
 };

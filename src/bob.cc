@@ -566,7 +566,7 @@ Note that the current field is actually the field we're walking to, not
 the one we start from.
 ===============
 */
-void Bob::draw(Game *game, Bitmap* dst, int posx, int posy)
+void Bob::draw(Game *game, RenderTarget* dst, int posx, int posy)
 {
 	if (!m_anim)
 		return;

@@ -50,11 +50,6 @@ void setup_ui(void)
 
 	// Button class
 	Button::setup_ui();
-
-	// list select class
-	Listselect::setup_ui();
-
-	Checkbox::setup_ui();
 }
 
 /** void setup_searchpaths(int argc, char **argv)

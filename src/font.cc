@@ -309,7 +309,7 @@ The function honours line-breaks.
 If wrap is positive, the function will wrap a line after that many pixels.
 ===============
 */
-void Font::draw_string(Bitmap* dst, int dstx, int dsty, const char* string,
+void Font::draw_string(RenderTarget* dst, int dstx, int dsty, const char* string,
                        Align align, int wrap)
 {
 	// Adjust for vertical alignment
@@ -364,7 +364,7 @@ void Font::draw_string(Bitmap* dst, int dstx, int dsty, const char* string,
 					c = 127;
 
 				c -= 32;
-				copy_pic(dst, &m_pictures[c], x, dsty, 0, 0, m_pictures[c].get_w(), m_height);
+				dst->blit(x, dsty, &m_pictures[c]);
 				x += m_pictures[c].get_w();
 				}
 			

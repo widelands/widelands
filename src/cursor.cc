@@ -95,8 +95,11 @@ void Cursor::set_pic(Pic* p) {
  * 		y	y pos of cursor
  * Returns: Nothing
  */
-void Cursor::draw(const uint x, const uint y) {
-		  if(!show_c) return;
-		  copy_pic(g_gr.get_screenbmp(), pic, x, y, 0,0, pic->get_w(), pic->get_h());
+void Cursor::draw(const uint x, const uint y)
+{
+	if(!show_c)
+		return;
+	
+	g_gr.get_screenbmp()->blit(x, y, pic);
 }
 

@@ -49,7 +49,7 @@ void Intro::run(void) {
 		Sys_HandleInput(&icb);
 
 		if (g_gr.does_need_update()) {
-			copy_pic(g_gr.get_screenbmp(), &splash, 0, 0, 0, 0, splash.get_w(), splash.get_h());
+			g_gr.get_screenbmp()->blit(0, 0, &splash);
 			g_gr.update();
 		}
 	

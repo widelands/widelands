@@ -46,7 +46,7 @@ public:
 
 	void exit() { ::exit(-1); }
 
-	void draw(Bitmap *dst, int ofsx, int ofsy);
+	void draw(RenderTarget* dst);
 };
 
 Critical_Error::Critical_Error(const char *text)
@@ -68,9 +68,9 @@ Critical_Error::Critical_Error(const char *text)
 	b->set_title("!! Continue execution !!");
 }
 
-void Critical_Error::draw(Bitmap *dst, int ofsx, int ofsy)
+void Critical_Error::draw(RenderTarget* dst)
 {
-	dst->fill_rect(ofsx, ofsy, get_w(), get_h(), 0);
+	dst->fill_rect(0, 0, get_w(), get_h(), 0, 0, 0);
 }
 
 /** void critical_error(const char* str)

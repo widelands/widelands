@@ -23,7 +23,7 @@
 #include "field.h"
 
 class Game;
-class Bitmap;
+class RenderTarget;
 class Animation;
 class Path;
 class Player;

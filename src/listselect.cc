@@ -29,18 +29,18 @@
  * 			g_fh
  * 			class Button
  */
-ushort Listselect::dflt_bgcolor, Listselect::dflt_framecolor, Listselect::dflt_selcolor;
+uchar Listselect::dflt_bgcolor_r = 67;
+uchar Listselect::dflt_bgcolor_g = 32;
+uchar Listselect::dflt_bgcolor_b = 10;
 
-/** Listselect::setup_ui() [static]
- *
- * Initialize global variables; called once from setup_ui
- */
-void Listselect::setup_ui()
-{
-	dflt_bgcolor = pack_rgb(67, 32, 10);
-	dflt_framecolor = pack_rgb(0, 0, 0);
-	dflt_selcolor = pack_rgb(248, 201, 135);
-}
+uchar Listselect::dflt_framecolor_r = 0;
+uchar Listselect::dflt_framecolor_g = 0;
+uchar Listselect::dflt_framecolor_b = 0;
+
+uchar Listselect::dflt_selcolor_r = 248;
+uchar Listselect::dflt_selcolor_g = 201;
+uchar Listselect::dflt_selcolor_b = 135;
+
 
 /*
 ===============
@@ -61,9 +61,17 @@ Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align)
 {
 	set_think(false);
 
-	_bgcolor = dflt_bgcolor;
-	_framecolor = dflt_framecolor;
-	_selcolor = dflt_selcolor;
+	m_bgcolor_r = dflt_bgcolor_r;
+	m_bgcolor_g = dflt_bgcolor_g;
+	m_bgcolor_b = dflt_bgcolor_b;
+	
+	m_framecolor_r = dflt_framecolor_r;
+	m_framecolor_g = dflt_framecolor_g;
+	m_framecolor_b = dflt_framecolor_b;
+	
+	m_selcolor_r = dflt_selcolor_r;
+	m_selcolor_g = dflt_selcolor_g;
+	m_selcolor_b = dflt_selcolor_b;
 	
 	set_align(align);
 
@@ -191,21 +199,51 @@ void Listselect::move_down(int i)
 	update(0, 0, get_eff_w(), get_h());
 }
 
-/** Listselect::set_colors(ushort bg, ushort frame, ushort sel)
- *
- * Overwrite the default colors used by the listselect
- *
- * Args: bg		background color
- *       frame	frame color
- *       sel	selection color
- */
-void Listselect::set_colors(ushort bg, ushort frame, ushort sel)
+/*
+===============
+Listselect::set_bgcolor
+
+Set a custom background color
+===============
+*/
+void Listselect::set_bgcolor(uchar r, uchar g, uchar b)
 {
-	_bgcolor = bg;
-	_framecolor = frame;
-	_selcolor = sel;
+	m_bgcolor_r = r;
+	m_bgcolor_g = g;
+	m_bgcolor_b = b;
 	update(0, 0, get_eff_w(), get_h());
 }
+
+/*
+===============
+Listselect::set_framecolor
+
+Set a custom frame color
+===============
+*/
+void Listselect::set_framecolor(uchar r, uchar g, uchar b)
+{
+	m_framecolor_r = r;
+	m_framecolor_g = g;
+	m_framecolor_b = b;
+	update(0, 0, get_eff_w(), get_h());
+}
+
+/*
+===============
+Listselect::set_selcolor
+
+Set a custom selection color
+===============
+*/
+void Listselect::set_selcolor(uchar r, uchar g, uchar b)
+{
+	m_selcolor_r = r;
+	m_selcolor_g = g;
+	m_selcolor_b = b;
+	update(0, 0, get_eff_w(), get_h());
+}
+
 
 /** Listselect::select(int i)
  *
@@ -245,11 +283,11 @@ Listselect::draw
 Redraw the listselect box
 ===============
 */
-void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
+void Listselect::draw(RenderTarget* dst)
 {
 	// draw frame and fill with background color
-	dst->draw_rect(ofsx, ofsy, get_eff_w(), get_h(), _framecolor);
-	dst->fill_rect(ofsx+1, ofsy+1, get_eff_w()-2, get_h()-2, _bgcolor);
+	dst->draw_rect(0, 0, get_eff_w(), get_h(), m_framecolor_r, m_framecolor_g, m_framecolor_b);
+	dst->fill_rect(1, 1, get_eff_w()-2, get_h()-2, m_bgcolor_r, m_bgcolor_g, m_bgcolor_b);
 
 	// draw text lines
 	int lineheight = get_lineheight();
@@ -264,7 +302,7 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 		Entry* e = m_entries[idx];
 		
 		if (idx == m_selection)
-			dst->fill_rect(ofsx+1, ofsy+y, get_eff_w()-2, g_font->get_fontheight(), _selcolor);
+			dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor_r, m_selcolor_g, m_selcolor_b);
 
 		int x;
 		if (m_align & Align_Right)
@@ -274,7 +312,7 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 		else
 			x = 1;
 		
-		g_font->draw_string(dst, x+ofsx, y+ofsy, e->name, m_align, -1);
+		g_font->draw_string(dst, x, y, e->name, m_align, -1);
 		
 		y += lineheight;
 		idx++;

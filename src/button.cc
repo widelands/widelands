@@ -209,7 +209,7 @@ Button::draw
 Redraw the button
 ===============
 */
-void Button::draw(Bitmap *dst, int ofsx, int ofsy)
+void Button::draw(RenderTarget* dst)
 {
 	Pic *bg;
 
@@ -225,7 +225,7 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 		int srcx = get_x() % bg->get_w();
 		int w = bg->get_w() - srcx;
 		for(int x = 0; x < get_w(); x += w, srcx = 0, w = bg->get_w())
-			copy_pic(dst, bg, x+ofsx, y+ofsy, srcx, srcy, w, h);
+			dst->blitrect(x, y, bg, srcx, srcy, w, h);
 	}
 
 	// if we got a picture, draw it centered
@@ -234,45 +234,43 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 		int x = (get_w() - _mypic->get_w()) >> 1;
 		int y = (get_h() - _mypic->get_h()) >> 1;
 
-		copy_pic(dst, _mypic, x+ofsx, y+ofsy, 0, 0, _mypic->get_w(), _mypic->get_h());
+		dst->blit(x, y, _mypic);
 		}
 	else if (m_title.length()) // otherwise draw the title string centered
 		{
-		g_font->draw_string(dst, ofsx + get_w()>>1, ofsy + get_h()>>1, 
+		g_font->draw_string(dst, get_w()>>1, get_h()>>1, 
 		                    m_title.c_str(), Align_Center);
 		}
 
 	// draw border
-#define BLACK 0x000000	//TEMP
 	// a pressed but not highlighted button occurs when the user has pressed
 	// the left mouse button and then left the area of the button
 	if (!_pressed || !_highlighted)
 	{
 		// top edge
-		dst->brighten_rect(ofsx, ofsy, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
+		dst->brighten_rect(0, 0, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
 		// left edge
-		dst->brighten_rect(ofsx, ofsy+2, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
+		dst->brighten_rect(0, 2, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
 		// bottom edge
-		dst->fill_rect(ofsx+2, ofsy+get_h()-2, get_w()-2, 1, BLACK);
-		dst->fill_rect(ofsx+1, ofsy+get_h()-1, get_w()-1, 1, BLACK);
+		dst->fill_rect(2, get_h()-2, get_w()-2, 1, 0, 0, 0);
+		dst->fill_rect(1, get_h()-1, get_w()-1, 1, 0, 0, 0);
 		// right edge
-		dst->fill_rect(ofsx+get_w()-2, ofsy+2, 1, get_h()-2, BLACK);
-		dst->fill_rect(ofsx+get_w()-1, ofsy+1, 1, get_h()-1, BLACK);
+		dst->fill_rect(get_w()-2, 2, 1, get_h()-2, 0, 0, 0);
+		dst->fill_rect(get_w()-1, 1, 1, get_h()-1, 0, 0, 0);
 	}
 	else
 	{
 		// bottom edge
-		dst->brighten_rect(ofsx, ofsy+get_h()-2, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
+		dst->brighten_rect(0, get_h()-2, get_w(), 2, BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
-		dst->brighten_rect(ofsx+get_w()-2, ofsy, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
+		dst->brighten_rect(get_w()-2, 0, 2, get_h()-2, BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst->fill_rect(ofsx, ofsy+0, get_w()-1, 1, BLACK);
-		dst->fill_rect(ofsx, ofsy+1, get_w()-2, 1, BLACK);
+		dst->fill_rect(0, 0, get_w()-1, 1, 0, 0, 0);
+		dst->fill_rect(0, 1, get_w()-2, 1, 0, 0, 0);
 		// left edge
-		dst->fill_rect(ofsx+0, ofsy, 1, get_h()-1, BLACK);
-		dst->fill_rect(ofsx+1, ofsy, 1, get_h()-2, BLACK);
+		dst->fill_rect(0, 0, 1, get_h()-1, 0, 0, 0);
+		dst->fill_rect(1, 0, 1, get_h()-2, 0, 0, 0);
 	}
-#undef BLACK
 }
 
 /** Button::handle_mousein(bool inside)

@@ -61,7 +61,7 @@ public:
 	Pic* get_string(const char* string);
 
 	int calc_linewidth(const char* string, int wrap, const char** nextline);
-	void draw_string(Bitmap* dst, int x, int y, const char* string, Align align = Align_Left,
+	void draw_string(RenderTarget* dst, int x, int y, const char* string, Align align = Align_Left,
 						  int wrap = -1);
 	void get_size(const char* string, int* pw, int* ph, int wrap = -1);
 	int get_fontheight();

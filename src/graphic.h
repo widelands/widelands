@@ -268,11 +268,9 @@ void render_right_triangle(Bitmap*, Point_with_bright*, Point_with_bright*, Poin
 void render_bottom_triangle(Bitmap*, Point_with_bright*, Point_with_bright*, Point_with_bright*, Pic*, int, int);
 void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color);
 void render_road_vert(Bitmap *dst, Point start, Point end, ushort color);
-void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
-      uint src_x, uint src_y, int w, int h);
 
 class Animation;
 
-void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y, const uchar *plrclrs);
+void copy_animation_pic(RenderTarget* dst, Animation* anim, uint time, int dst_x, int dst_y, const uchar *plrclrs);
 
 #endif /* __S__GRAPHIC_H */

@@ -182,9 +182,9 @@ Multiline_Textarea::draw
 Redraw the textarea
 ===============
 */
-void Multiline_Textarea::draw(Bitmap *bmp, int ofsx, int ofsy)
+void Multiline_Textarea::draw(RenderTarget* dst)
 {
 	// Let the font handler worry about all the complicated stuff..
-	g_font->draw_string(bmp, ofsx, ofsy - m_textpos, m_text.c_str(), m_align, get_eff_w());
+	g_font->draw_string(dst, 0, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w());
 }
 

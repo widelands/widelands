@@ -155,8 +155,8 @@ public:
 	inline bool get_visible() const { return (_flags & pf_visible) ? true : false; }
 	void set_visible(bool on);
 	
-	virtual void draw(Bitmap *dst, int ofsx, int ofsy);
-	virtual void draw_border(Bitmap *dst, int ofsx, int ofsy);
+	virtual void draw(RenderTarget* dst);
+	virtual void draw_border(RenderTarget* dst);
 	void update(int x, int y, int w, int h);
 	void update_inner(int x, int y, int w, int h);
 	void set_cache(bool enable);
@@ -196,7 +196,7 @@ protected:
 private:
 	void check_child_death();
 
-	void do_draw(Bitmap *dst, int ofsx, int ofsy);
+	void do_draw(RenderTarget* dst);
 
 	Panel *get_mousein(int x, int y);
 	void do_mousein(bool inside);
@@ -261,7 +261,7 @@ public:
 	void set_enabled(bool on);
 
 	// Drawing and event handlers
-	void draw(Bitmap *dst, int ofsx, int ofsy);
+	void draw(RenderTarget* dst);
 
 	void handle_mousein(bool inside);
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
@@ -291,9 +291,9 @@ private:
 #define STATEBOX_HEIGHT 20
 
 class Statebox : public Panel {
-	friend void setup_ui(void);
-	static ushort dflt_highlightcolor;
-	static void setup_ui();
+	static uchar dflt_highlightcolor_r;
+	static uchar dflt_highlightcolor_g;
+	static uchar dflt_highlightcolor_b;
 
 public:
 	Statebox(Panel *parent, int x, int y);
@@ -308,7 +308,7 @@ public:
 	void set_state(bool on);
 
 	// Drawing and event handlers
-	void draw(Bitmap *dst, int ofsx, int ofsy);
+	void draw(RenderTarget* dst);
 
 	void handle_mousein(bool inside);
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
@@ -382,7 +382,7 @@ public:
 	void set_align(Align align);
 
 	// Drawing and event handlers
-	void draw(Bitmap *dst, int ofsx, int ofsy);
+	void draw(RenderTarget* dst);
 
 private:
 	void collapse();
@@ -416,7 +416,7 @@ public:
 	inline uint get_eff_w() { return get_w(); }
 
 	// Drawing and event handlers
-	void draw(Bitmap *bmp, int ofsx, int ofsy);
+	void draw(RenderTarget* dst);
 
 private:
 	Align				m_align;
@@ -434,9 +434,9 @@ private:
  * 			class Button
  */
 class Listselect : public Panel {
-	friend void setup_ui(void);
-	static ushort dflt_bgcolor, dflt_framecolor, dflt_selcolor;
-	static void setup_ui();
+	static uchar dflt_bgcolor_r, dflt_bgcolor_g, dflt_bgcolor_b;
+	static uchar dflt_framecolor_r, dflt_framecolor_g, dflt_framecolor_b;
+	static uchar dflt_selcolor_r, dflt_selcolor_g, dflt_selcolor_b;
 
 public:
 	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left);
@@ -452,7 +452,9 @@ public:
 	void move_up(int i);
 	void move_down(int i);
 
-	void set_colors(ushort bg, ushort frame, ushort sel);
+	void set_bgcolor(uchar r, uchar g, uchar b);
+	void set_framecolor(uchar r, uchar g, uchar b);
+	void set_selcolor(uchar r, uchar g, uchar b);
 
 	void select(int i);
 	inline void *get_selection() {
@@ -464,7 +466,7 @@ public:
 	inline uint get_eff_w() { return get_w(); }
 
 	// Drawing and event handling
-	void draw(Bitmap *dst, int ofsx, int ofsy);
+	void draw(RenderTarget* dst);
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
@@ -473,7 +475,9 @@ private:
 		char		name[1];
 	};
 
-	ushort _bgcolor, _framecolor, _selcolor;
+	uchar		m_bgcolor_r, m_bgcolor_g, m_bgcolor_b;
+	uchar		m_framecolor_r, m_framecolor_g, m_framecolor_b;
+	uchar		m_selcolor_r, m_selcolor_g, m_selcolor_b;
 	
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
@@ -540,7 +544,7 @@ public:
 	void move_to_mouse();
 
 	// Drawing and event handlers
-	void draw_border(Bitmap *dst, int ofsx, int ofsy);
+	void draw_border(RenderTarget* dst);
 
 	bool handle_mouseclick(uint btn, bool down, int mx, int my);
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);

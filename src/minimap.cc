@@ -46,7 +46,7 @@ public:
 	void set_view_pos(int x, int y);
 
 	// Drawing & event handling
-	void draw(Bitmap *dst, int ofsx, int ofsy);
+	void draw(RenderTarget* dst);
 
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
@@ -92,29 +92,30 @@ void MiniMapView::set_view_pos(int x, int y)
 	update(0, 0, get_w(), get_h());
 }
 
-/** MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
- *
- * Redraw the view of the map
- */
-void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
+/*
+===============
+MiniMapView::draw
+
+Redraw the view of the map
+===============
+*/
+void MiniMapView::draw(RenderTarget* dst)
 {
+	Bitmap* bmp = static_cast<Bitmap*>(dst); // HACKHACKHACK
+
 	bool use_see_area = !m_player->get_ignore_shadow();
 	Player *player = m_player->get_player();
 	int sx, sy;
 	int ex, ey;
 	int x, y;
 
-	sx = -ofsx;
-	if (sx < 0)
-		sx = 0;
-	sy = -ofsy;
-	if (sy < 0)
-		sy = 0;
+	sx = 0;
+	sy = 0;
 
-	ex = dst->get_w() - ofsx;
+	ex = dst->get_w();
 	if (ex > (int)m_map->get_width())
 		ex = m_map->get_width();
-	ey = dst->get_h() - ofsy;
+	ey = dst->get_h();
 	if (ey > (int)m_map->get_height())
 		ey = m_map->get_height();
 			
@@ -122,7 +123,7 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 	Field* f;
 	for(y = sy; y < ey; y++)
 	{
-		ushort *pix = dst->get_pixels() + (y+ofsy)*dst->get_pitch() + (sx+ofsx);
+		ushort *pix = bmp->get_pixels() + y*bmp->get_pitch() + sx;
 
 		f = m_map->get_field(sx, y);
 		for(x = sx; x < ex; x++, f++)
@@ -139,9 +140,9 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 	}
 
 	// draw the view pos marker
-	x = ofsx + m_viewx - (map_spot.get_w()>>1);
-	y = ofsy + m_viewy - (map_spot.get_h()>>1);
-	copy_pic(dst, &map_spot, x, y, 0, 0, map_spot.get_w(), map_spot.get_h());
+	x = m_viewx - (map_spot.get_w()>>1);
+	y = m_viewy - (map_spot.get_h()>>1);
+	dst->blit(x, y, &map_spot);
 }
 
 /** MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)

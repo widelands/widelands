@@ -22,7 +22,7 @@
 #include "widelands.h"
 #include "graphic.h"
 
-#define PIXEL(x, y)		pixels[(y)*pitch+(x)]
+#define PIXEL(x, y)		m_pixels[(y)*m_pitch+(x)]
 
 /*
 ==========================================================================
@@ -34,13 +34,39 @@ Bitmap
 
 /*
 ===============
+Bitmap::Bitmap
+
+Initialize a Bitmap.
+===============
+*/
+Bitmap::Bitmap()
+{
+	m_pixels = 0;
+	
+	m_w = m_pitch = 0;
+	m_h = 0;
+	
+	m_clrkey = 0;
+	m_bhas_clrkey = false;
+	
+	m_ofsx = m_ofsy = 0;
+}
+
+
+/*
+===============
 Bitmap::draw_rect
 
 Draws the outline of a rectangle
 ===============
 */
-void Bitmap::draw_rect(int rx, int ry, int rw, int rh, ushort color)
+void Bitmap::draw_rect(int rx, int ry, int rw, int rh, uchar r, uchar g, uchar b)
 {
+	ushort color = pack_rgb(r, g, b);
+
+	rx += m_ofsx;
+	ry += m_ofsy;
+	
    rw += rx;
    rh += ry;
 	
@@ -48,10 +74,10 @@ void Bitmap::draw_rect(int rx, int ry, int rw, int rh, ushort color)
 		rx = 0;
 	if (ry < 0)
 		ry = 0;
-	if (rw > (int)w)
-		rw = w;
-	if (rh > (int)h)
-		rh = h;
+	if (rw > (int)m_w)
+		rw = m_w;
+	if (rh > (int)m_h)
+		rh = m_h;
 	
 	if (rx > rw || ry > rh)
 		return;
@@ -76,28 +102,33 @@ Bitmap::fill_rect
 Draws a filled rectangle
 ===============
 */
-void Bitmap::fill_rect(int rx, int ry, int rw, int rh, ushort color)
+void Bitmap::fill_rect(int rx, int ry, int rw, int rh, uchar r, uchar g, uchar b)
 {
-   rw += rx;
+	ushort color = pack_rgb(r, g, b);
+   
+	rx += m_ofsx;
+	ry += m_ofsy;
+	
+	rw += rx;
    rh += ry;
 	
 	if (rx < 0)
 		rx = 0;
 	if (ry < 0)
 		ry = 0;
-	if (rw > (int)w)
-		rw = w;
-	if (rh > (int)h)
-		rh = h;
+	if (rw > (int)m_w)
+		rw = m_w;
+	if (rh > (int)m_h)
+		rh = m_h;
 	
 	if (rx > rw || ry > rh)
 		return;
 	
    for (int y=ry; y<rh; y++)
    {
-      uint p = y * pitch + rx;
+      uint p = y * m_pitch + rx;
       for (int x=rx; x<rw; x++)
-         pixels[p++]= color;
+         m_pixels[p++]= color;
    }
 }
 
@@ -110,26 +141,159 @@ Change the brightness of the given rectangle
 */
 void Bitmap::brighten_rect(int rx, int ry, int rw, int rh, int factor)
 {
-   rw += rx;
+	rx += m_ofsx;
+	ry += m_ofsy;
+   
+	rw += rx;
    rh += ry;
 	
 	if (rx < 0)
 		rx = 0;
 	if (ry < 0)
 		ry = 0;
-	if (rw > (int)w)
-		rw = w;
-	if (rh > (int)h)
-		rh = h;
+	if (rw > (int)m_w)
+		rw = m_w;
+	if (rh > (int)m_h)
+		rh = m_h;
 	
 	if (rx > rw || ry > rh)
 		return;
 	
    for (int y=ry; y<rh; y++)
    {
-      uint p = y * pitch + rx;
+      uint p = y * m_pitch + rx;
       for (int x=rx; x<rw; x++)
-         pixels[p++]= bright_up_clr(pixels[p], factor);
+         m_pixels[p++]= bright_up_clr(m_pixels[p], factor);
+   }
+}
+
+
+/*
+===============
+Bitmap::clear
+
+Clear the entire bitmap to black
+===============
+*/
+void Bitmap::clear()
+{
+	// this function clears the bitmap completly (draws it black)
+	// it assumes, that: (2*w*h)%4 == 0.
+	// This function is speedy
+	if (m_w != m_pitch || (m_w & 1 && m_h & 1))
+		fill_rect(0, 0, m_w, m_h, 0, 0, 0);
+	else {
+		int i=(m_w*m_h);
+		assert(!(i&3));
+		i>>=1;
+		while(--i) *(((long*)(m_pixels))+i)=0; // faster than a memset?
+		*m_pixels=0;
+	}
+}
+
+
+/*
+===============
+Bitmap::blit
+
+Blits a blitsource into this bitmap
+===============
+*/
+void Bitmap::blit(int dstx, int dsty, BlitSource* src)
+{
+	src->blit_to_bitmap16(this, dstx + m_ofsx, dsty + m_ofsy);
+}
+
+
+/*
+===============
+Bitmap::blitrect
+
+Blits a blitsource into this bitmap, using a source rectangle
+===============
+*/
+void Bitmap::blitrect(int dstx, int dsty, BlitSourceRect* src, int srcx, int srcy, int w, int h)
+{
+	src->blit_to_bitmap16rect(this, dstx + m_ofsx, dsty + m_ofsy, srcx, srcy, w, h);
+}
+
+
+/*
+===============
+Bitmap::blit_to_bitmap16
+===============
+*/
+void Bitmap::blit_to_bitmap16(Bitmap* dst, int dstx, int dsty)
+{
+	blit_to_bitmap16rect(dst, dstx, dsty, 0, 0, m_w, m_h);
+}
+
+/*
+===============
+Bitmap::blit_to_bitmap16rect
+
+Blit this bitmap to the given destination, clipping as necessary.
+===============
+*/
+void Bitmap::blit_to_bitmap16rect(Bitmap* dst, int dstx, int dsty, int srcx, int srcy, int w, int h)
+{
+	// Clip the rectangle
+	if (dstx < 0) {
+		srcx -= dstx;
+		w += dstx;
+		dstx = 0;
+	}
+	if (dstx + w > (int)dst->m_w)
+		w = dst->m_w - dstx;
+	if (w <= 0)
+		return;
+	
+	if (dsty < 0) {
+		srcy -= dsty;
+		h += dsty;
+		dsty = 0;
+	}
+	if (dsty + h > (int)dst->m_h)
+		h = dst->m_h - dsty;
+	if (h <= 0)
+		return;
+	
+	// Actual blitting
+	ushort* dstpixels = dst->m_pixels + dsty*dst->m_pitch + dstx;
+	ushort* srcpixels = m_pixels + srcy*m_pitch + srcx;
+	
+	if (m_bhas_clrkey)
+   {
+		uint dstskip = dst->m_pitch - w;
+		uint srcskip = m_pitch - w;
+		
+      // Slow blit, checking for clrkeys. This could probably speed up by copying
+      // 2 pixels (==4bytes==register width)
+      // in one rush. But this is a nontrivial task
+      // This could also use MMX assembly on targets that support it...
+      for (int i = h; i; i--, dstpixels += dstskip, srcpixels += srcskip) {
+         for (int j = w; j; j--, dstpixels++, srcpixels++) {
+            ushort clr = *srcpixels;
+            if (clr != m_clrkey)
+               *dstpixels = clr;
+         }
+      }
+   }
+   else
+   {
+      if (w == (int)dst->m_pitch && w == (int)m_pitch)
+      {
+         // copying entire rows, so it can be all done in a single memcpy
+			memcpy(dstpixels, srcpixels, (w*h) << 1);
+      }
+      else
+      {
+         // fast blitting, using one memcpy per row
+			int bw = w << 1;
+			
+			for(int i = h; i; i--, dstpixels += dst->m_pitch, srcpixels += m_pitch)
+				memcpy(dstpixels, srcpixels, bw);
+      }
    }
 }
 
@@ -141,8 +305,8 @@ void Bitmap::brighten_rect(int rx, int ry, int rw, int rh, int factor)
  */
 void Bitmap::set_clrkey(ushort dclrkey)
 {
-   sh_clrkey = dclrkey;
-   bhas_clrkey=true;
+   m_clrkey = dclrkey;
+   m_bhas_clrkey=true;
 }
 
 /** Bitmap::set_clrkey(uchar r, uchar g, uchar b)
@@ -156,66 +320,80 @@ void Bitmap::set_clrkey(ushort dclrkey)
 void Bitmap::set_clrkey(uchar r, uchar g, uchar b)
 {
    ushort dclrkey = pack_rgb(r,g,b);
-   sh_clrkey=dclrkey;
-   bhas_clrkey=true;
+   m_clrkey=dclrkey;
+   m_bhas_clrkey=true;
 }
 
-/** Bitmap::make_partof(const Bitmap *other, uint x, uint y, uint w, uint h,
-*                      int *ofsx, int *ofsy)
- *
- * Makes this bitmap an alias of a part of another bitmap.
- * The given rectangle is automatically clipped. If x and y lie outside of
- * the bitmap, subsequent drawing operations need to be offset. The necessary
- * offset is returned in the provided pointers.
- *
- * Args: other	the source bitmap
-*       x		coordinates of the rectangle you are going to use
-*       y
-*       nw
-*       nh
-*       ofsx	pointers to the offset that is going to be necessary
-*       ofsy
- *
- * Returns: false if the resulting bitmap size is 0. In this case, this
-*          bitmap may end up in an invalid state.
+
+/*
+===============
+Bitmap::enter_window
+
+Create a new bitmap that represents the requested subset of this bitmap.
+Clipping is ensured as appropriate.
+
+Returns zero if the requested subwindow is not visible at all.
+
+TODO: Can we avoid all this allocating and deleting of objects somehow?
+===============
 */
-bool Bitmap::make_partof(const Bitmap *other, int x, int y, uint nw, uint nh,
-      int *ofsx, int *ofsy)
+RenderTarget* Bitmap::enter_window(int x, int y, int w, int h)
 {
-   pitch = other->pitch;
-   sh_clrkey = other->sh_clrkey;
-   bhas_clrkey = other->bhas_clrkey;
+	int newofsx = 0;
+	int newofsy = 0;
 
-   // clipping
-   w = nw;
-   h = nh;
-   *ofsx = 0;
-   *ofsy = 0;
-   if (x < 0) {
-      if (-x >= (int)w)
-         return false;
-      *ofsx = x;
-      w += x;
-      x = 0;
-   } else if (x > (int)other->w)
-      return false;
-   if (x+w > other->w)
-      w = other->w - x;
-
-   if (y < 0) {
-      if (-y >= (int)h)
-         return false;
-      *ofsy = y;
-      h += y;
-      y = 0;
-   } else if (y > (int)other->h)
-      return false;
-   if (y+h > other->h)
-      h = other->h - y;
-
-   pixels = other->pixels + y*pitch + x;
-   return true;
+	x += m_ofsx;
+	y += m_ofsy;
+	
+	// Clipping
+	if (x < 0) {
+		newofsx = x;
+		w += x;
+		x = 0;
+	}
+	if (x + w > (int)m_w)
+		w = m_w - x;
+	if (w <= 0)
+		return 0;
+	
+	if (y < 0) {
+		newofsy = y;
+		h += y;
+		y = 0;
+	}
+	if (y + h > (int)m_h)
+		h = m_h - y;
+	if (h <= 0)
+		return 0;
+	
+	// Create the new bitmap
+	Bitmap* subset = new Bitmap;
+	
+	subset->m_pixels = m_pixels + y*m_pitch + x;
+	subset->m_pitch = m_pitch;
+	subset->m_w = w;
+	subset->m_h = h;
+	subset->m_ofsx = newofsx;
+	subset->m_ofsy = newofsy;
+	
+	subset->m_bhas_clrkey = m_bhas_clrkey;
+	subset->m_clrkey = m_clrkey;
+	
+	return subset;
 }
+
+/*
+===============
+Bitmap::leave_window
+
+Finish using this sub-window
+===============
+*/
+void Bitmap::leave_window()
+{
+	delete this;
+}
+
 
 /*
 ==========================================================================
@@ -232,13 +410,14 @@ Pic
  * Args: p 	pic to copy
  * returns: *this
  */
-Pic& Pic::operator=(const Pic& p) {
-   sh_clrkey=p.sh_clrkey;
-   bhas_clrkey=p.bhas_clrkey;
+Pic& Pic::operator=(const Pic& p)
+{
+   m_clrkey=p.m_clrkey;
+   m_bhas_clrkey=p.m_bhas_clrkey;
 
-   set_size(p.w, p.h);
+   set_size(p.m_w, p.m_h);
 
-   memcpy(pixels, p.pixels, sizeof(short)*w*h);
+   memcpy(m_pixels, p.m_pixels, sizeof(short)*m_w*m_h);
 
    return *this;
 }
@@ -251,23 +430,16 @@ Pic& Pic::operator=(const Pic& p) {
  * 		 nh	= new height
  * Returns: nothinh
  */
-void Pic::set_size(const uint nw, const uint nh) {
-   if(pixels) free(pixels);
-   w=nw;
-   h=nh;
+void Pic::set_size(const uint nw, const uint nh)
+{
+   if (m_pixels)
+		free(m_pixels);
+	
+   m_w = nw;
+   m_h = nh;
+	m_pitch = nw;
 
-   // We make sure, that everything pic is aligned to 4bytes, so that clearing can
-   // goes fast with dwords
-   if(w & 1) w++; // %2
-   if(h & 1) h++;  // %2
-   if(!w) w=2;
-   if(!h) h=2;
-
-   pixels=(ushort*) malloc(sizeof(short)*w*h);
-
-   w=nw;
-   pitch=nw;
-   h=nh;
+	m_pixels = (ushort*)malloc(m_w*m_h*sizeof(ushort));
    
    clear_all();
 }
@@ -278,10 +450,11 @@ void Pic::set_size(const uint nw, const uint nh) {
  */
 void Pic::clear_all(void)
 {
-   if(!bhas_clrkey) return;
+   if(!m_bhas_clrkey) return;
 
-   for(int i = w*h-1; i >= 0; i--)
-      pixels[i] = sh_clrkey;
+	ushort* dst = m_pixels;
+   for(int i = m_w*m_h; i; i--)
+      *dst++ = m_clrkey;
 }
 
 /** int Pic::load(const char* file)
@@ -301,16 +474,16 @@ int Pic::load(const char* file)
 
    set_size(bmp->w, bmp->h);
 
-   int i=0;
-   for (uint y=0; y<h; y++)
+   for (uint y=0; y<m_h; y++)
    {
       uchar* bits = (uchar*)bmp->pixels + y * bmp->pitch;
-      for (uint x=0; x<w; x++)
+		ushort* dst = m_pixels + y*m_pitch;
+      for (uint x=0; x<m_w; x++, dst++)
       {
          uchar r = *(bits + (bmp->format->Rshift >> 3));
          uchar g = *(bits + (bmp->format->Gshift >> 3));
          uchar b = *(bits + (bmp->format->Bshift >> 3));
-         pixels[i++] = pack_rgb(r, g, b);
+			*dst = pack_rgb(r, g, b);
          bits += bmp->format->BytesPerPixel;
       }
    }
@@ -332,10 +505,11 @@ int Pic::create(const ushort mw, const ushort mh, ushort* data)
 {
    if (!mw || !mh)
       return ERR_FAILED;
-   this->set_size(mw, mh);
-   memcpy(pixels, data, mw*mh*sizeof(ushort));
+   set_size(mw, mh);
+	
+	for(int y = 0; y < mh; y++, data += mw)
+		memcpy(m_pixels + y*m_pitch, data, mw*sizeof(ushort));
+	
    return RET_OK;
 }
-
-
 

@@ -98,7 +98,7 @@ map the user can see. we spend a lot of time
 in this function
 ===============
 */
-void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
+void Map_View::draw(RenderTarget* dst)
 {
    // TEMP DEBUG TODO fps counter
    static long start_fps_counter=Sys_GetTime();
@@ -108,30 +108,20 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
    static float fps_average=0;
    static int fps_av_count=0;
    
-	// Prepare an improved bitmap which we can draw into without using ofsx/ofsy
 	int effvpx = vpx;
 	int effvpy = vpy;
-	Bitmap dst;
 	bool use_see_area = !m_player->get_ignore_shadow();
 	
-	if (!dst.make_partof(bmp, ofsx, ofsy, get_w(), get_h(), &ofsx, &ofsy))
-		return;
-	
-	if (ofsx < 0)
-		effvpx -= ofsx;
-	if (ofsy < 0)
-		effvpy -= ofsy;
-
    // completly clear the screen once. 
-   dst.clear();
+   dst->clear();
 
- 	draw_ground(&dst, effvpx, effvpy, use_see_area);
+ 	draw_ground(dst, effvpx, effvpy, use_see_area);
 
 	// debug: show fsel coordinates
 	Coords fsel = m_player->get_fieldsel();
 	char buf[100];
 	sprintf(buf, "%3i %3i", fsel.x, fsel.y);
-	g_font->draw_string(bmp, ofsx+5, ofsy+5, buf);
+	g_font->draw_string(dst, 5, 5, buf);
 
    // debug show fps
    ++framecount;
@@ -146,7 +136,7 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
       start_fps_counter=cur_fps_counter;
    }
    sprintf(buf, "%4f fps (av: %4f fps)", fps, fps_average/(float)fps_av_count );
-	g_font->draw_string(bmp, ofsx+75, ofsy+5, buf);
+	g_font->draw_string(dst, 75, 5, buf);
 }
 
 /*
@@ -157,7 +147,7 @@ Draw the Map. ground, bobs, you_name_it
 effvpx/effvpy are the viewpoint coordinates
 ===============
 */
-void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_area)
+void Map_View::draw_ground(RenderTarget* dst, int effvpx, int effvpy, bool use_see_area)
 {
    // TODO: change this function name. it's not really about drawing the ground only
 	Player *player = m_player->get_player();
@@ -381,10 +371,13 @@ Map_View::draw_field
 Draw the two triangles and the roads associated with one field.
 ===============
 */
-void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+void Map_View::draw_field(RenderTarget* dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
            const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, 
 			  uchar roads, bool render_r, bool render_b)
 {
+	// TODO: move render_*_triangle functions into RenderTarget
+	Bitmap* bmp = static_cast<Bitmap*>(dst); // HACKHACKHACK
+
    // points are ordered: right, left, bottom-right, bottom-left
 	// note that as long as render_triangle messes with the arrays, we need to
 	// copy them to a safe place first
@@ -405,12 +398,12 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 
 	// Render right triangle
    if(render_r) {
-      render_right_triangle(dst, &r, &l, &br, f->get_terr()->get_texture(), vpx, vpy);
+      render_right_triangle(bmp, &r, &l, &br, f->get_terr()->get_texture(), vpx, vpy);
 	}
 
 	// Render bottom triangle
    if(render_b) {
-      render_bottom_triangle(dst, &l, &br, &bl, f->get_terd()->get_texture(), vpx, vpy);
+      render_bottom_triangle(bmp, &l, &br, &bl, f->get_terd()->get_texture(), vpx, vpy);
 	}
 
 	// Render roads
@@ -425,7 +418,7 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 			color = pack_rgb(96, 96, 96);
 		else
 			color = pack_rgb(0, 0, 128);
-		render_road_horiz(dst, l, r, color);
+		render_road_horiz(bmp, l, r, color);
 	}
 	
 	road = (roads >> Road_SouthEast) & Road_Mask;
@@ -436,7 +429,7 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 			color = pack_rgb(96, 96, 96);
 		else
 			color = pack_rgb(0, 0, 128);
-		render_road_vert(dst, l, br, color);
+		render_road_vert(bmp, l, br, color);
 	}
 	
 	road = (roads >> Road_SouthWest) & Road_Mask;
@@ -447,7 +440,7 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 			color = pack_rgb(96, 96, 96);
 		else
 			color = pack_rgb(0, 0, 128);
-		render_road_vert(dst, l, bl, color);
+		render_road_vert(bmp, l, bl, color);
 	}
 }
 
@@ -459,7 +452,7 @@ Draw overlay pictures such as buildhelp.
 Note: this is only called for visible fields.
 ===============
 */
-void Map_View::draw_overlay(Bitmap *dst, FCoords coords, int posx, int posy)
+void Map_View::draw_overlay(RenderTarget* dst, FCoords coords, int posx, int posy)
 {
 	posy -= MULTIPLY_WITH_HEIGHT_FACTOR(coords.field->get_height()); 
 
@@ -469,36 +462,27 @@ void Map_View::draw_overlay(Bitmap *dst, FCoords coords, int posx, int posy)
 	// In other words, it can't go before rendering bobs.
 	if (show_buildhelp && coords.field->get_owned_by() == m_player->get_player_number()) {
 		int buildcaps = m_player->get_player()->get_buildcaps(coords);
+		BlitSource* icon;
+		int ofsy = 0; // TODO: these icons should really be animations w/ offset and everything
 
-		if (buildcaps & BUILDCAPS_PORT)
-		{
-			// blah
-		}
-		else if (buildcaps & BUILDCAPS_MINE)
-		{
-			copy_pic(dst, &mine_building, posx-(mine_building.get_w()>>1),  posy-(mine_building.get_h()>>1), 
-					0, 0, mine_building.get_w(), mine_building.get_h());
-		}
+		if (buildcaps & BUILDCAPS_MINE)
+			icon = &mine_building;
 		else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
-		{
-			copy_pic(dst, &big_building, posx-(big_building.get_w()>>1), posy-(big_building.get_h()>>1),
-					0, 0, big_building.get_w(), big_building.get_h());
-		}
+			icon = &big_building;
 		else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
-		{
-			copy_pic(dst, &medium_building, posx-(medium_building.get_w()>>1), posy-(medium_building.get_h()>>1), 
-					0, 0, medium_building.get_w(), medium_building.get_h());
-		}
+			icon = &medium_building;
 		else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
-		{
-			copy_pic(dst, &small_building, posx-(small_building.get_w()>>1), posy-(small_building.get_h()>>1), 
-					0, 0, small_building.get_w(), small_building.get_h());
-		}
+			icon = &small_building;
 		else if (buildcaps & BUILDCAPS_FLAG)
-		{
-			copy_pic(dst, &setable_flag, posx-(setable_flag.get_w()>>1), posy-(setable_flag.get_h()), 
-					0, 0, setable_flag.get_w(), setable_flag.get_h());
-		}
+			{
+			icon = &setable_flag;
+			ofsy = -(setable_flag.get_h()>>1);
+			}	
+		else
+			icon = 0;
+		
+		if (icon)
+			dst->blit(posx - (icon->get_w()>>1), posy - (icon->get_h()>>1) + ofsy, icon);
 	}
 
 	// Draw road building help
@@ -506,10 +490,8 @@ void Map_View::draw_overlay(Bitmap *dst, FCoords coords, int posx, int posy)
 		draw_overlay_road(dst, coords, posx, posy);
 	
 	// Draw the fsel last
-	if (m_player->get_fieldsel() == coords) {
-		copy_pic(dst, &pic_fsel, posx - (pic_fsel.get_w()/2), posy - (pic_fsel.get_h()/2), 
-				0, 0, pic_fsel.get_w(), pic_fsel.get_h());
-	}
+	if (m_player->get_fieldsel() == coords)
+		dst->blit(posx - (pic_fsel.get_w()/2), posy - (pic_fsel.get_h()/2), &pic_fsel);
 }
 
 
@@ -520,7 +502,7 @@ Map_View::draw_overlay_road
 Draw the road build help overlay
 ===============
 */
-void Map_View::draw_overlay_road(Bitmap *dst, FCoords coords, int posx, int posy)
+void Map_View::draw_overlay_road(RenderTarget* dst, FCoords coords, int posx, int posy)
 {
 	Coords tail = m_player->get_build_road_end();
 	int dir = m_map->is_neighbour(coords, tail);
@@ -563,8 +545,7 @@ void Map_View::draw_overlay_road(Bitmap *dst, FCoords coords, int posx, int posy
 	else
 		pic = &pic_roadb_red;
 
-	copy_pic(dst, pic, posx - (pic->get_w()/2), posy - (pic->get_h()/2), 
-			0, 0, pic->get_w(), pic->get_h());
+	dst->blit(posx - (pic->get_w()/2), posy - (pic->get_h()/2), pic);
 }
 
 /*
