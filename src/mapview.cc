@@ -155,8 +155,8 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
       int tl_x, tl_y;
 		Field *f, *f_bl, *f_tl;
 		int posx, posy;
-		int blposx, blposy;
-	   int tlposx, tlposy;
+		int blposx, bposy;
+	   int tlposx, tposy;
       
       // Use linear (non-wrapped) coordinates to calculate on-screen pos
 		map->get_basepix(linear_fx, linear_fy, &posx, &posy);
@@ -167,17 +167,17 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 		bl_y = linear_fy+1;
 		bl_x = linear_fx - (bl_y&1);
 
-		map->get_basepix(bl_x, bl_y, &blposx, &blposy);
+		map->get_basepix(bl_x, bl_y, &blposx, &bposy);
 		blposx -= effvpx;
-		blposy -= effvpy;
+		bposy -= effvpy;
 
-      // Get lineear top-left coordinates TODO
-      tl_y = linear_fx-1;
+      // Get linear top-left coordinates 
+      tl_y = linear_fy-1;
       tl_x = linear_fx - (tl_y&1);
 
-      map->get_basepix(tl_x, tl_y, &tlposx, &tlposy);
+      map->get_basepix(tl_x, tl_y, &tlposx, &tposy);
       tlposx -= effvpx;
-      tlposy -= effvpy;
+      tposy -= effvpy;
       
 		// Calculate safe (bounded) field coordinates and get field pointers
 		fx = linear_fx;
@@ -222,21 +222,66 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
                render_r=false;
          }
 #endif
-			draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, blposy, render_r, render_b);
+			draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, render_r, render_b);
          
          // Render ways TODO
 		
 			
-         // Render frontier TODO
-			// Frontier is a kind of bob, therefore the change of order
+         // Render frontier
+         // Note: Frontiers hot spot must be the lowest y-pixel in the picture
+         // otherwise, the bob will get 'clipped' (read: overdrawn) by the fields that are drawn
+         // below this field.
+         // This could be avoided by either pre-rendering all ground-fields before drawing a bob (time-costy!)
+         // or by different (more complicated, also with build-help) checking here below.  - Holger
          if(f->get_owned_by() != FIELD_OWNED_BY_NOONE) {
-//            if(f_tl->get_owned_by() != f->get_owned_by() &&
-  //                f_tr->get_owned_by() == f->get_owned_by()) {
-          //     cerr << posx << ":" << trposx << ":" << ((posx+trposx)>>1) << endl;
+            if(f_tl->get_owned_by() != f->get_owned_by()) {
                copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
-                     (posx+trposx)>>1, ((posy - f->get_height()*HEIGHT_FACTOR)+(tlposy - f_tr->get_height()*HEIGHT_FACTOR))>>1); // + (tlposy - f_tr->get_height()*HEIGHT_FACTOR))>>1);
-               //      (posx+tr_posx)>>1, ((posy - f->get_height()*HEIGHT_FACTOR)+(tr_posy - tr_neighbour->get_height()*HEIGHT_FACTOR))>>1);
-            // }
+                     tlposx, tposy - f_tl->get_height()*HEIGHT_FACTOR);
+               // left to top-left
+               if(f_l->get_owned_by() != f->get_owned_by()) {
+                  copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
+                        (lposx+tlposx)>>1, ((posy - f_l->get_height()*HEIGHT_FACTOR)+(tposy - f_tl->get_height()*HEIGHT_FACTOR))>>1);
+               }
+               // top-left to top-right
+               if(f_tr->get_owned_by() != f->get_owned_by()) {
+                  copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
+                        (tlposx+trposx)>>1, ((tposy - f_tl->get_height()*HEIGHT_FACTOR)+(tposy - f_tr->get_height()*HEIGHT_FACTOR))>>1);
+               }
+            }
+            if(f_br->get_owned_by() != f->get_owned_by()) {
+               copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
+                     brposx, bposy - f_br->get_height()*HEIGHT_FACTOR);
+               // bottom-right to right
+               if(f_r->get_owned_by() != f->get_owned_by()) {
+                  copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
+                        (brposx+rposx)>>1, ((bposy - f_br->get_height()*HEIGHT_FACTOR)+(posy - f_r->get_height()*HEIGHT_FACTOR))>>1);
+               }
+               // bottom-left to bottom-left
+               if(f_bl->get_owned_by() != f->get_owned_by()) {
+                  copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
+                        (brposx+blposx)>>1, ((bposy - f_br->get_height()*HEIGHT_FACTOR)+(bposy - f_bl->get_height()*HEIGHT_FACTOR))>>1);
+               }
+            }
+            // right to top-right
+            if(f_tr->get_owned_by() != f->get_owned_by() &&
+                  f_r->get_owned_by() != f->get_owned_by()) {
+               copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
+                     rposx, posy - f_r->get_height()*HEIGHT_FACTOR);
+               copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
+                     trposx, tposy - f_tr->get_height()*HEIGHT_FACTOR);
+               copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
+                     (trposx+rposx)>>1, ((tposy - f_tr->get_height()*HEIGHT_FACTOR)+(posy - f_r->get_height()*HEIGHT_FACTOR))>>1);
+            }
+            // left to bottom-left
+            if(f_l->get_owned_by() != f->get_owned_by() &&
+                  f_bl->get_owned_by() != f->get_owned_by()) {
+               copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
+                     lposx, posy - f_l->get_height()*HEIGHT_FACTOR);
+               copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
+                     blposx, bposy - f_bl->get_height()*HEIGHT_FACTOR);
+               copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
+                     (blposx+lposx)>>1, ((bposy - f_bl->get_height()*HEIGHT_FACTOR)+(posy - f_l->get_height()*HEIGHT_FACTOR))>>1);
+            }
          }
                   
 			// Render bobs

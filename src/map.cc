@@ -568,6 +568,8 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 		return;
 		
 	// 6) TODO: Reduce building size if buildings/roads/robusts(?) are near
+   // TODO: even worse: in S2 stones (granit) laying around reduce all their neighbours to flags
+   // while trees only reduces their neighbours to small buildings (except it's top-left neighbour, obviously -Holger
 	uchar building = BUILDCAPS_BIG;
 	bool harbour = false;
 	
@@ -590,6 +592,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 
 	// Special case for bottom-right neighbour (where our flag is)
 	// Is this correct?	
+   // Yep, it is - Holger
 	slope = abs((int)brn->get_height() - f->get_height());
 	if (slope >= 2) return;
 	
@@ -606,6 +609,8 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	//     is >= 3, we can only build a small house here.
 	//    Additionally, we can potentially build a harbour on this field if one
 	//    of the second order neighbours is swimmable.
+   //    TODO: didn't we agree that it would be easier to make harbours only on specially set
+   //    fields? - Holger
 	//
 	// Processes the neighbours in clockwise order, starting from the right-most
 	int secx, secy;
