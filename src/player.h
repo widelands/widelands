@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp
+ * Copyright (C) 2002 by Holger Rapp 
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,25 @@
  *
  */
 
-#ifndef __S__TRIBEDATA_H
-#define __S__TRIBEDATA_H
+#ifndef __S__PLAYER_H
+#define __S__PLAYER_H
 
-#ifndef PACK_VERSION
-#define PACK_VERSION(major, minor) (  (ushort) (((uchar) (major))<<8) | (((uchar) (minor))) ) 
-#endif
+#include "tribe.h"
 
-#ifndef VERSION_MAJOR
-#define VERSION_MAJOR(vers) ((ushort) (((ushort) (vers)>>8) & 0xff))
-#endif
+//
+// This defines a player class. 
+// A player is 
+//  a) the one who has the track of all it's buildings, units and wares
+//  b) the logic (e.g network code or AI code) 
+//  c) the one who triggers commands to the game
+//
+class Player {
+   public:
+      // much TODO
+      //
+   private:
+      // regent data: name, pics so on
+      Tribe_Descr* tribe; // buildings, wares, workers, sciences
+};
 
-#ifndef VERSION_MINOR
-#define VERSION_MINOR(vers) ((ushort) (((ushort) (vers)) & 0xff))
-#endif
-
-#define WLTF_VERSION			PACK_VERSION(1,0)
-
-#endif /* __S__TRIBEDATA_H */
+#endif 

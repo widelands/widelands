@@ -36,6 +36,7 @@
 Map::Map(void) {
 		  w=0;
 		  fields=0;
+        starting_pos=0;
 }
 
 /** Map::~Map(void)
@@ -48,6 +49,10 @@ Map::~Map(void) {
 					 // it here manually!!!
 					 free(fields);
 		  }
+
+        if(starting_pos) {
+           free(starting_pos);
+        }
 
 		  if(w) delete w;
 }
@@ -83,7 +88,9 @@ void Map::set_size(uint w, uint h) {
  * Args: 	file		filename to read
  * Returns: RET_OK or RET_FAILED
  */
-int Map::load_wlmf(const char* file) {
+
+// TODO: This function is not working!!
+int Map::load_wlmf(const char* file, Cmd_Queue* q) {
 		  Binary_file f;
 
 		  f.open(file, File::READ);
@@ -145,6 +152,33 @@ int Map::load_wlmf(const char* file) {
 		  return RET_OK;
 }
 
+/** 
+ * This functions load a map header, for previewing maps.
+ */
+int Map::load_map_header(const char* file) {
+   int ret=RET_OK;
+   
+   if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+	{
+		// It ends like a wide lands map file. try to load
+		// it as such
+      // TODO: do this
+		// ret = load_wlmf(file, q);
+	}
+	else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+	{
+		// it is a S2 Map file. load it as such
+		ret = load_s2mf_header(file);
+	}
+	else
+	{
+		assert(0);
+		return ERR_FAILED;
+	}
+
+   return ret;
+}
+
 /** int Map::load_map(const char* file)
  *
  * This loads a complete map from a file
@@ -152,7 +186,7 @@ int Map::load_wlmf(const char* file) {
  * Args: file	filename to read
  * Returns: RET_OK or ERR_FAILED
  */
-int Map::load_map(const char* file)
+int Map::load_map(const char* file, Cmd_Queue* q)
 {
 	int ret;
 
@@ -160,12 +194,12 @@ int Map::load_map(const char* file)
 	{
 		// It ends like a wide lands map file. try to load
 		// it as such
-		ret = load_wlmf(file);
+		ret = load_wlmf(file, q);
 	}
 	else if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
 	{
 		// it is a S2 Map file. load it as such
-		ret = load_s2mf(file);
+		ret = load_s2mf(file, q);
 	}
 	else
 	{

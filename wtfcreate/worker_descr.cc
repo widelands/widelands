@@ -25,6 +25,7 @@
 #include "worker_descr.h"
 #include "../src/helper.h"
 #include "../src/graphic.h"
+#include "../src/tribedata.h"
 
 Worker_Fabric workerf;
 

@@ -20,6 +20,12 @@
 #ifndef __S__GAME_H
 #define __S__GAME_H
 
+// a frame is the time between two updates of the game logic
+// this includes: AI, NETWORK, CMD_QUEUES
+// this excludes: the whole User_Interface, this is updated independent from the 
+//   logic frame length (more often)
+#define FRAME_LENGTH 250   
+
 /** class Player
  *
  * pure virtual class to define, what a player must be able to do
@@ -34,6 +40,9 @@ class Player {
 // TODO: NetworkPlayer
 // TODO: AIPlayer
 
+#include "counter.h"
+#include "descr_maintainer.h"
+#include "cmd_queue.h"
 
 /** class Game
  *
@@ -44,18 +53,25 @@ class Game {
 		  Game(const Game&);
 		  Game& operator=(const Game&);
 
+        friend class Cmd_Queue; // this class handles the commands 
+
 		  public:
 					 Game(void);
 					 ~Game(void);
 
-					 void run(const char*, const uint /* other flags ? */);
+					 void think(void); 
+                void run(void);
 
-					 inline Map *get_map() { return map; }
+					 int set_map(const char* mapname);
+                inline Map *get_map() { return map; }
 
 		  private:
 					 Map *map;
 					 Player** pls;
 					 Interactive_Player* ipl;
+                Cmd_Queue* queue;
+                Counter counter;
+                ulong frame_count;
 };
 
 

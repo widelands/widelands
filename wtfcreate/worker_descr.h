@@ -38,22 +38,7 @@ class Worker_Descr : virtual public File_Descr {
    friend class Worker_Fabric;
 
    protected:
-      enum {
-         SITDIG = 0,
-         SEARCHER,
-         GROWER,
-         PLANTER,
-         SCIENTIST,
-         SOLDIER,
-         SPEC_DEF_CARRIER,
-         SPEC_ADD_CARRIER,
-         SPEC_BUILDER,
-         SPEC_PLANER,
-         SPEC_EXPLORER,
-         SPEC_GEOLOGIST
-      };
-
-      Worker_Descr(const char* gname);
+     Worker_Descr(const char* gname);
       int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob);
       virtual const char* get_subdir(void) { return WORKERS_DIR; }
 

@@ -10,6 +10,7 @@ EXTRA_DIST=README
 bin_PROGRAMS=wtfcreate
 wtfcreate_LDADD =@SDL_LIBS@  ../src/md5file.o ../src/myfile.o ../src/md5.o ../src/helper.o ../src/profile.o ../src/growablearray.o ../src/pic.o 
 wtfcreate_SOURCES=main.cc \
+                  wtfcreate.h \
                   building_descr.h \
                   building_descr.cc \
                   file_descr.h \
@@ -21,7 +22,6 @@ wtfcreate_SOURCES=main.cc \
                   fabric.h \
                   worker_descr.cc \
                   worker_descr.h \
-                  tribedata.h \
                   soldier_descr.cc \
                   soldier_descr.h \
                   tribe_descr.h \

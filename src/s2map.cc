@@ -87,6 +87,74 @@ uchar *Map::load_s2mf_section(Binary_file *file, int width, int height)
 	return section;
 }
 
+//
+// load the header of a S2 map
+//
+int Map::load_s2mf_header(const char* filen) {
+		  Binary_file file;
+
+		  if(!filen) return ERR_FAILED;
+
+		  file.open(filen, File::READ);
+		  if(file.get_state() != File::OPEN) {
+					 return ERR_FAILED;
+		  }
+
+		  S2MapDescrHeader header;
+		  file.read(&header, sizeof(header));
+
+
+		  strncpy(hd.author, header.author, 26);
+		  hd.author[26]='\0';
+		  strcpy(hd.magic, WLMF_MAGIC);
+		  strncpy(hd.name, header.name, 20);
+		  hd.name[21]='\0';
+		  hd.nplayers=header.nplayers;
+		  hd.width=header.w;
+		  hd.height=header.h;
+		  hd.version=WLMF_VERSION;
+		  strcpy(hd.descr, "Bluebyte Settlers II Map. No comment defined!");
+
+		  const char* buf;
+		  switch(header.uses_world) {
+					 case 0:
+								// green world
+								if(!w || strcmp(w->get_name(), "greenland")) {
+										  buf=g_fileloc.locate_file("greenland.wwf", TYPE_WORLD);
+										  if(!buf) assert(0);
+										  w= new World(buf);
+										  strcpy(hd.uses_world, "greenland");
+								}
+								break;
+
+					 case 1:
+								// black world
+								if(!w || strcmp(w->get_name(), "blackland")) {
+										  buf=g_fileloc.locate_file("blackland.wwf", TYPE_WORLD);
+										  if(!buf) assert(0);
+										  w= new World(buf);
+										  strcpy(hd.uses_world, "blackland");
+								}
+								break;
+
+					 case 2:
+								// winter world
+								if(!w || strcmp(w->get_name(), "winterland")) {
+										  buf=g_fileloc.locate_file("winterland.wwf", TYPE_WORLD);
+										  if(!buf) assert(0);
+										  w= new World(buf);
+										  strcpy(hd.uses_world, "winterland");
+								}
+								break;
+		  }
+
+		  // set size
+		  set_size(hd.width, hd.height);
+
+   
+        return RET_OK;
+}
+
 /** int Map::load_s2mf(const char* filen)
  *
  * this loads a given file as a settlers 2 map file
@@ -96,7 +164,7 @@ uchar *Map::load_s2mf_section(Binary_file *file, int width, int height)
  * Args: 	filen		filename to read
  * Returns: RET_OK or RET_FAILED
  */
-int Map::load_s2mf(const char* filen) {
+int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
 		  Binary_file file;
 		  uchar *section, *pc;
 		  uint x=0;

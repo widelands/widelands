@@ -21,6 +21,7 @@
 #include "cursor.h"
 #include "game.h"
 #include "map.h"
+#include "cmd_queue.h"
 
 /** class Game
  *
@@ -33,6 +34,9 @@
  * init
  */
 Game::Game(void) {
+   queue = new Cmd_Queue(this);
+   map=0;
+   frame_count=0;
 }
 
 
@@ -41,31 +45,62 @@ Game::Game(void) {
  * cleanup
  */
 Game::~Game(void) {
-
+   delete queue;
+   delete map;
 }
 
-/** void Game::run(const char* mapname, uint nipl)
+//
+//this function loads the map for the game. this must be done, before
+//Game::run() is called
+//
+int Game::set_map(const char* mapname) {
+   if(map) return ERR_FAILED;
+
+   queue->queue(SENDER_LOADER, CMD_LOAD_MAP, 0, 0, strdup(mapname));
+
+   return RET_OK;
+}
+/** void Game::run(void)
  *
- * This runs a game with the given map.
- *
- * Args:	mapname	file name of map to load
- * 		nipl	the player number of the interactive player
- * Returns: nothing
+ * This runs a game 
  */
 #include "ui.h"
 #include "fileloc.h"
 #include "worldfiletypes.h"
-void Game::run(const char* mapname, uint nipl) {
+#include "tribe.h"
+void Game::run(void) {
+   // TEMP
+   Tribe_Descr tribe;
+   const char* str=g_fileloc.locate_file("testtribe.wtf", TYPE_TRIBE);
+   assert(str);
+   assert(!tribe.load(str));
+   // TEMP
 
-		  map = new Map();
-		  if(map->load_map(mapname)) {
-					 // TODO: make this better
-					 assert(0) ;
-		  }
+   // run the cmd queue, so all the load cmds are worked through
+   queue->run_queue();
+   
+   ipl = new Interactive_Player(this);
+   counter.start();
+   ipl->run();
+   delete ipl;
+}
 
-		  ipl = new Interactive_Player(this);
-		  ipl->run();
-		  delete ipl;
+//
+// This is called by IntPlayer, in each of his loop. This
+// function checks, if a frame (time) has passed, if it has, it 
+// runs the command queue. 
+// 
+// think(), mmh, i don't know if i like the name
+// 
+void Game::think(void) {
+   static ulong lticks;
+   ulong curticks=counter.get_ticks();
+   
+   while(curticks-lticks > FRAME_LENGTH) {
+      cerr << "Working frame number: " << frame_count << endl;
 
-		  delete map;
+      queue->run_queue();
+      frame_count++;
+      lticks=curticks;
+   }
 }

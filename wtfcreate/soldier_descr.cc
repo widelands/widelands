@@ -20,6 +20,7 @@
 #include "../src/widelands.h"
 #include "soldier_descr.h"
 #include "../src/graphic.h"
+#include "../src/tribedata.h"
 
 Fabric<Soldier_Descr> soldierf;
 

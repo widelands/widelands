@@ -1,9 +1,9 @@
 SUBDIRS= src wffcreate wwfcreate wtfcreate
 
-EXTRA_DIST=pics fonts worlds maps
+EXTRA_DIST=pics fonts worlds maps tribes
 
-EXTRADATADIRS=pics/ fonts/ worlds/ maps/
-EXTRADATA=pics/*.bmp fonts/*.wff worlds/*.wwf maps/*.swd
+EXTRADATADIRS=pics/ fonts/ worlds/ maps/ tribes/
+EXTRADATA=pics/*.bmp fonts/*.wff worlds/*.wwf maps/*.swd tribes/*.wtf
 
 datainstalldirs:
 	   for dir in $(EXTRADATADIRS) ; do \

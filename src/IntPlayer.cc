@@ -155,7 +155,9 @@ void Interactive_Player::field_action(int fx, int fy)
 void Interactive_Player::think()
 {
 	// Call game logic here
-
+   // The game advances
+   game->think();
+   
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
 	g_gr.needs_fs_update();
 }

@@ -31,6 +31,7 @@
 #define WLMF_VERSIONMAJOR(a)  (a >> 8)
 #define WLMF_VERSIONMINOR(a)  (a & 0xFF)
 
+#include "cmd_queue.h"
 #include "world.h"
 
 /** struct Map_Header
@@ -89,6 +90,19 @@ class Building;
 class Creature;
 class Bob;
 
+/*
+ * this is mainly the same as in graphic.h the 
+ * class Point. but this represents coordinates
+ * on the map and is a struct, has no overhead
+ * for creation and deletion. this will be a
+ * good thing, when this class is used in command
+ * queues and so on
+ */
+struct Cords {
+   uint x;
+   uint y;
+};
+   
 /** class Field
  *
  * a field like it is represented in the game
@@ -148,7 +162,8 @@ class Map {
 					 Map(void);
 					 ~Map(void);
 
-					 int load_map(const char*);
+					 int load_map(const char*, Cmd_Queue*);
+                int load_map_header(const char*); 
 
 					 // informational functions
 					 inline const char* get_author(void) { return hd.author; }
@@ -183,19 +198,21 @@ class Map {
 					inline void get_pix(const int fx, const int fy, Field * const f, int *px, int *py);
 					inline void get_pix(const int fx, const int fy, int *px, int *py);
 
-		  private:
-					 MapDescrHeader hd;
-					 World* w;
-					 Field* fields;
+        private:
+               Cords* starting_pos;
+               MapDescrHeader hd;
+               World* w;
+               Field* fields;
 
-					 // funcs
-					 int load_s2mf(const char*);
-					 uchar *load_s2mf_section(Binary_file *file, int width, int height);
+               // funcs
+               int load_s2mf(const char*, Cmd_Queue*);
+               int load_s2mf_header(const char*);
+               uchar *load_s2mf_section(Binary_file *file, int width, int height);
 
-					 int load_wlmf(const char*);
-					 void set_size(uint, uint);
+               int load_wlmf(const char*, Cmd_Queue*);
+               void set_size(uint, uint);
 
-					 void recalc_brightness(int fx, int fy);
+               void recalc_brightness(int fx, int fy);
 };
 
 /*

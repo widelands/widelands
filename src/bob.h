@@ -25,6 +25,52 @@
 class World;
 //class Pic;
 
+class Animation {
+   public:
+      enum {
+         HAS_TRANSPARENCY = 1,
+         HAS_SHADOW = 2,
+         HAS_PL_CLR = 3
+      };
+
+      Animation(void) { npics=0; pics=0;}
+      ~Animation(void) { 
+         if(npics) {
+            uint i; 
+            for(i=0; i<npics; i++)
+               free(pics[i]);
+            free(pics);
+         }
+      }
+   
+      inline ushort get_w(void) { return w; }
+      inline ushort get_h(void) { return h; }
+      inline ushort get_hsx(void) { return hsx; }
+      inline ushort get_hsy(void) { return hsy; }
+      void add_pic(ushort size, ushort* data) {
+         if(!npics) {
+            npics=1;
+            pics=(ushort**) malloc(sizeof(ushort*));
+         } else {
+            npics++;
+            pics=(ushort**) realloc(pics, sizeof(ushort*)*npics);
+         }
+         pics[npics-1]=(ushort*)malloc(size);
+         memcpy(pics[npics-1], data, size);
+      }
+
+      void set_flags(uint mflags) { flags=mflags; }
+      void set_dimensions(ushort mw, ushort mh) { w=mw; h=mh; }
+      void set_hotspot(ushort x, ushort y) { hsx=x; hsy=y; }
+      
+   private:
+      uint flags;
+      ushort w, h;
+      ushort hsx, hsy;
+      ushort npics;
+      ushort **pics;
+};
+
 /** class Bob
   *
   * This class represents a bob.

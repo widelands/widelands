@@ -133,7 +133,11 @@ void Bob_Data_Pic_Descr::write(Binary_file* f) {
          }
       }
    } 
-  
+ 
+   // write the size of the data
+   ushort size=n*sizeof(ushort);
+   f->write(&size, sizeof(ushort));
+   
    // data packed, lets write it
    f->write(data, n*sizeof(ushort));
    

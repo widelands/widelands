@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Florian Bluemel
+ * Copyright (C) 2002 by Holger Rapp 
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,31 +17,7 @@
  *
  */
 
-#ifndef __S__BUILDING_H
-#define __S__BUIlDING_H
+#include "widelands.h"
+#include "player.h"
 
-#include "tribefiletypes.h"
-
-//
-// This class describes a in-game building
-//
-class Building {
-
-};
-
-/*
- * This is the base class for every building, a tribe can 
- * build.
- * It is pure virtual, mainly a interface class.
- */
-class Building_Descr {
-   public:
-      Building_Descr(void);
-      virtual ~Building_Descr(void);
-
-      virtual is_a(void);
-      
-
-};
-
-#endif // __S__BUILDING_H
+// GREAT TODO

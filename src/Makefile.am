@@ -9,7 +9,6 @@ CXXFLAGS= $(EXTRA_FLAGS)
 bin_PROGRAMS=widelands
 widelands_LDADD = @SDL_LIBS@
 widelands_SOURCES=main.cc \
-						os.h \
 						singleton.h \
 						fileloc.cc \
 						fileloc.h \
@@ -19,7 +18,6 @@ widelands_SOURCES=main.cc \
 						parser.cc \
 						options.cc \
 						options.h \
-						output.h \
 						graphic.cc \
 						pic.cc \
 						graphic.h \
@@ -35,7 +33,6 @@ widelands_SOURCES=main.cc \
 						ui.h \
 						font.h \
 						font.cc \
-						errors.h \
 						setup.cc \
 						setup.h \
 						counter.h \
@@ -48,7 +45,6 @@ widelands_SOURCES=main.cc \
 						menuecommon.h \
 						growablearray.cc \
 						growablearray.h \
-						mytypes.h \
 						map.h \
 						map.cc \
 						game.cc \
@@ -71,7 +67,6 @@ widelands_SOURCES=main.cc \
 						bob.cc \
 						bob.h \
 						worldfiletypes.h \
-						tribefiletypes.h \
 						button.cc \
 						textarea.cc \
 						multiline_textarea.cc \
@@ -82,12 +77,11 @@ widelands_SOURCES=main.cc \
 						scrollbar.cc \
 						mapselectmenue.h \
 						mapselectmenue.cc \
+						optionsmenu.h \
 						optionsmenu.cc \
 						s2map.h \
 						s2map.cc \
-						criterr.h \
 						criterr.cc \
-						myassert.h \
 						md5.cc \
 						md5.h \
                   pic.h \
@@ -96,7 +90,20 @@ widelands_SOURCES=main.cc \
                   md5file.h \
                   md5file.cc \
                   helper.cc \
-                  helper.h
+                  helper.h \
+                  tribe.h \
+                  tribe.cc \
+                  tribedata.h \
+                  player.h \
+                  player.cc \
+                  descr_maintainer.h \
+                  cmd_queue.h \
+                  cmd_queue.cc \
+                  widelands.h \
+                  buildings.h \
+                  buildings.cc \
+                  creature.h \
+                  creature.cc 
 
 
 

@@ -130,7 +130,7 @@ void MapSelectMenu::map_selected(int id)
 	if (get_map())
 	{
 		Map m;
-		if (m.load_map(get_map()) == RET_OK) {
+		if (m.load_map_header(get_map()) == RET_OK) {
 			char buf[256];
 			taname->set_text(m.get_name());
 			taauthor->set_text(m.get_author());
@@ -139,7 +139,8 @@ void MapSelectMenu::map_selected(int id)
 			sprintf(buf, "%i", m.get_nplayers());
 			tanplayers->set_text(buf);
 			tadescr->set_text(m.get_descr());
-			ok->set_enabled(true);
+			taworld->set_text(m.get_world());
+         ok->set_enabled(true);
 		} else {
 			taname->set_text("(bad map file)");
 			taauthor->set_text(0);
@@ -172,9 +173,10 @@ bool map_select_menue(void)
 
 	if (map) {
 		Game *g = new Game;
-		g->run(map, 7);
-		delete g;
+		g->set_map(map);
 		free(map);
+      g->run();
+		delete g;
 		return true;
 	}
 
