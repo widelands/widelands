@@ -58,7 +58,8 @@ void World::load_world(const char* name)
 		parse_root_conf(directory, name);
 		parse_resources(directory);
 		parse_terrains(directory);
-		parse_bobs(directory);		
+		parse_bobs(directory);
+		// parse_wares(directory); // TODO
 	}
 	catch(std::exception &e)
 	{
@@ -217,6 +218,19 @@ void World::parse_bobs(const char *directory)
 		}
 	}
 }
+
+/*
+===============
+World::parse_wares
+
+Parse the wares belonging to the world. This is delayed until the game starts,
+and is called by the Game class
+===============
+*/
+void World::parse_wares(Descr_Maintainer<Ware_Descr> *wares)
+{
+}
+
 
 // 
 // Down here: subclasses of world

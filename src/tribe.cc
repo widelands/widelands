@@ -49,9 +49,7 @@ void Tribe_Descr::load(const char* name)
 		m_default_encdata.clear();
 		parse_root_conf(directory);
 		parse_buildings(directory);
-		//parse_workers(directory);
-		//parse_soldiers(directory);
-		//parse_wares(directory); //???
+		parse_workers(directory);
 	}
 	catch(std::exception &e)
 	{
@@ -165,136 +163,26 @@ Read all worker descriptions
 */
 void Tribe_Descr::parse_workers(const char *directory)
 {
-/*
-	char directory[256];
-	char fname[256];
+	char subdir[256];
+	filenameset_t dirs;
 	
-	snprintf(directory, sizeof(directory), "%s/workers", rootdir);
-	snprintf(fname, sizeof(fname), "%s/conf", directory);
+	snprintf(subdir, sizeof(subdir), "%s/workers", directory);
 	
-	try
-	{
-		Profile prof(fname);
-		Section *s, *defaults;
-		EncodeData encdata;
+	g_fs->FindFiles(subdir, "*", &dirs);
+	
+	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
+		Worker_Descr *descr = 0;
 
-		// Section [defaults]
-		defaults = prof.get_safe_section("defaults");
-		
-		encdata = m_default_encdata;
-		encdata.parse(defaults);
-		
-		// Parse all buildings
-		while((s = prof.get_next_section(0))) {
-			Worker_Descr *descr = 0;
-			
-			try {
-				descr = Worker_Descr::create_from_section(this, directory, s, defaults, &encdata);
-			} catch(std::exception &e) {
-				log("Worker %s failed: %s\n", s->get_name(), e.what());
-			} catch(...) {
-				log("Worker %s failed: unknown exception\n", s->get_name());
-			}
-			
-			if (descr)
-				workers.add(descr);
+		try {
+			descr = Worker_Descr::create_from_dir(this, it->c_str(), &m_default_encdata);
+		} catch(std::exception &e) {
+			log("Worker %s failed: %s (garbage directory?)\n", it->c_str(), e.what());
+		} catch(...) {
+			log("Worker %s failed: unknown exception (garbage directory?)\n", it->c_str());
 		}
+
+		if (descr)
+			m_workers.add(descr);
 	}
-	catch(std::exception &e) {
-		throw wexception("%s: %s", fname, e.what());
-	}
-*/
 }
-
-
-/*
-===============
-Tribe_Descr::parse_soldiers
-
-Parse soldier descriptions
-===============
-*/
-void Tribe_Descr::parse_soldiers(const char *directory)
-{
-/*
-	char directory[256];
-	char fname[256];
-	
-	snprintf(directory, sizeof(directory), "%s/soldiers", rootdir);
-	snprintf(fname, sizeof(fname), "%s/conf", directory);
-	
-	try
-	{
-		Profile prof(fname);
-		Section *s, *defaults;
-		EncodeData encdata;
-
-		// Section [defaults]
-		defaults = prof.get_safe_section("defaults");
-		
-		encdata = m_default_encdata;
-		encdata.parse(defaults);
-		
-		// Parse all buildings
-		while((s = prof.get_next_section(0))) {
-			Soldier_Descr *descr = 0;
-			
-			try {
-				descr = Soldier_Descr::create_from_section(this, directory, s, defaults, &encdata);
-			} catch(std::exception &e) {
-				log("Soldier %s failed: %s\n", s->get_name(), e.what());
-			} catch(...) {
-				log("Soldier %s failed: unknown exception\n", s->get_name());
-			}
-			
-			if (descr)
-				soldiers.add(descr);
-		}
-	}
-	catch(std::exception &e) {
-		throw wexception("%s: %s", fname, e.what());
-	}
-*/
-}
-
-
-/*
-===============
-Tribe_Descr::parse_wares
-
-===============
-*/
-void Tribe_Descr::parse_wares(const char *directory)
-{
-/*
-   // read magic
-   if(strcasecmp(f->CString(), "Wares"))
-		throw wexception("Wrong wares magic");
-
-   ushort nware;
-   nware = f->Unsigned16();
-   
-   Ware_Descr* ware;
-	ushort *ptr;
-   ushort w, h, clrkey;
-   uint i;
-   for(i=0; i<nware; i++) {
-      ware=new Ware_Descr;
-      memcpy(ware->name, f->Data(sizeof(ware->name)), sizeof(ware->name));
-      w = f->Unsigned16();
-      h = f->Unsigned16();
-      clrkey = f->Unsigned16();
-
-		ptr = (ushort*)f->Data(24*24*2);
-      ware->menu_pic.create(24, 24, ptr);
-		
-      ptr = (ushort*)f->Data(w*h*sizeof(ushort));
-      ware->pic.create(w, h, ptr);
-      ware->menu_pic.set_clrkey(clrkey);
-      ware->pic.set_clrkey(clrkey);
-      wares.add(ware);
-   }
-*/
-}
-
 

@@ -24,6 +24,7 @@
 #include "instances.h"
 #include "tribe.h"
 #include "cmd_queue.h"
+#include "ware.h"
 
 
 /** class Game
@@ -91,16 +92,20 @@ public:
 	void conquer_area(uchar playernr, Coords coords, int radius);
 	
 private:
-	int m_state;
-	char* m_mapname;
+	void init_wares();
 
-	Interactive_Player *ipl;
-	Tribe_Descr* tribe;
-	Map *map;
-   Cmd_Queue* cmdqueue;
-	Player* m_players[MAX_PLAYERS];
-   Object_Manager* m_objects;
+	int		m_state;
+	char*		m_mapname;
 
+	Interactive_Player*	ipl;
+	Tribe_Descr*			tribe;
+	Map*						map;
+ 	Cmd_Queue*				cmdqueue;
+	Player*					m_players[MAX_PLAYERS];
+   Object_Manager*		m_objects;
+
+	Descr_Maintainer<Ware_Descr>	m_wares;
+	
 	int m_realtime; // the real time (including) pauses in milliseconds
 
 public: // items to reconsider

@@ -202,7 +202,9 @@ bool Game::run(void)
 			m_state = gs_none;
 			return false;
 		}
-
+		
+		init_wares();
+		
       // TEMP: player number
 		ipl = new Interactive_Player(this, 1);
 	  
@@ -230,6 +232,44 @@ bool Game::run(void)
 	
 	return played;
 }
+
+
+/*
+===============
+Game::init_wares
+
+Called just before the game loop starts.
+Collects all wares from world and tribes and puts them into a global list
+===============
+*/
+void Game::init_wares()
+{
+	World *world = map->get_world();
+	
+	world->parse_wares(&m_wares);
+	
+	for(int pid = 1; pid <= MAX_PLAYERS; pid++) {
+		Player *plr = get_player(pid);
+		if (!plr)
+			continue;
+		
+		Tribe_Descr *tribe = plr->get_tribe();
+		
+		for(int i = 0; i < tribe->get_nrworkers(); i++) {
+			Worker_Descr *worker = tribe->get_worker_descr(i);
+			if (!worker)
+				continue;
+			
+			int idx = m_wares.get_index(worker->get_name());
+			if (idx < 0)
+				idx = m_wares.add(new Worker_Ware_Descr(worker->get_name()));
+			
+			Worker_Ware_Descr *descr = (Worker_Ware_Descr*)m_wares.get(idx);
+			descr->add_worker(tribe, worker);
+		}
+	}
+}
+
 
 //
 // think() is called by the UI objects initiated during Game::run()

@@ -20,31 +20,76 @@
 #ifndef __S__WORKER_DESCR_H
 #define __S__WORKER_DESCR_H
 
-#include "ware.h"
+#include "bob.h"
 
-class Worker_Descr {
+class Economy;
+
+/*
+Worker is the base class for all humans (and actually potential non-humans, too) 
+that belong to a tribe.
+
+Every worker can carry one (item) ware.
+*/
+class Worker_Descr : public Bob_Descr {
    friend class Tribe_Descr;
-   
-   public:
-      Worker_Descr(void) {  }
-      virtual ~Worker_Descr(void) { }
-       
-   protected:
-      virtual int read(FileRead* f);
 
-      char name[30];
-      bool is_enabled;
-      ushort walking_speed;
-      short nneeds;
-      Need_List needs;   
-      Animation walk_ne;
-      Animation walk_nw;
-      Animation walk_e;
-      Animation walk_w;
-      Animation walk_se;
-      Animation walk_sw;
+public:
+	Worker_Descr(Tribe_Descr *tribe, const char *name);
+	virtual ~Worker_Descr(void);
+
+	inline Tribe_Descr *get_tribe() { return m_tribe; }
+	inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
+	inline DirAnimations *get_walkload_anims() { return &m_walkload_anims; }
+	
+protected:
+	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+	static Worker_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata);
+
+	Tribe_Descr*	m_tribe;
+	DirAnimations	m_walk_anims;
+	DirAnimations	m_walkload_anims;
 }; 
 
+class Worker : public Bob {
+	MO_DESCR(Worker_Descr);
+
+public:
+	Worker(Worker_Descr *descr);
+	virtual ~Worker();
+
+protected:
+	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
+	
+private:
+	Economy*	m_economy;			// Economy this worker is registered in
+	int		m_carried_ware;	// Ware ID (-1 if none carried)
+};
+
+
+/*
+Carrier is a worker who is employed by a Road.
+*/
+class Carrier_Descr : public Worker_Descr {
+public:
+	Carrier_Descr(Tribe_Descr *tribe, const char *name);
+	virtual ~Carrier_Descr(void);
+	
+protected:
+	virtual Bob *create_object();
+	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+}; 
+
+class Carrier : public Worker {
+	MO_DESCR(Carrier_Descr);
+
+public:
+	Carrier(Carrier_Descr *descr);
+	virtual ~Carrier();
+
+private:
+};
+
+/*
 class Menu_Worker_Descr : virtual public Worker_Descr {
    friend class Tribe_Descr;
 
@@ -314,7 +359,7 @@ class Geologist : virtual public SitDigger_Base,
 
    private:
 };
-
+*/
 
 
 #endif // __S__WORKER_DESCR_H

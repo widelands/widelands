@@ -22,7 +22,7 @@ The entire transport subsystem comes into this file.
 What does _not_ belong in here: road renderer, client-side road building.
 
 What _does_ belong in here:
-Flags, Roads, Carriers, the logic behind ware pulls and pushes.
+Flags, Roads, the logic behind ware pulls and pushes.
 */
 
 #include "widelands.h"
@@ -1045,7 +1045,12 @@ void Economy::do_merge(Economy *e)
 {
 	log("Economy: merge %i + %i\n", get_nrflags(), e->get_nrflags());
 
-	while(e->get_nrflags()) {
+	// Be careful around here. The last e->remove_flag() will cause the other
+	// economy to delete itself.
+	int i = e->get_nrflags();
+	while(i--) {
+		assert(i+1 == e->get_nrflags());
+		
 		Flag *flag = e->m_flags[0];
 		e->remove_flag(flag);
 		add_flag(flag);

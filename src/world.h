@@ -24,8 +24,10 @@
 #include "bob.h"
 #include "worlddata.h"
 #include "immovable.h"
+#include "ware.h"
 
 class Section;
+class Game;
 
 struct World_Descr_Header {
    char name[30];
@@ -88,6 +90,8 @@ class Terrain_Descr {
   */
 class World
 {
+	friend class Game;
+
    public:
       enum {
          OK = 0,
@@ -107,13 +111,15 @@ class World
 		inline Bob_Descr* get_bob_descr(ushort index) { return bobs.get(index); }
       inline int get_immovable_index(const char* l) { return immovables.get_index(l); }
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
-
+		
       inline void animate(int time) {
          uint i;
          for(i=0; i<ters.get_nitems(); i++)
 				ters.get(i)->animate(time);
       }
  
+		void parse_wares(Descr_Maintainer<Ware_Descr> *wares);
+		
    private:
       Descr_Maintainer<Bob_Descr> bobs;
 		Descr_Maintainer<Immovable_Descr> immovables;

@@ -19,29 +19,129 @@
 
 #include "widelands.h"
 #include "pic.h"
+#include "tribe.h"
 #include "ware.h"
+#include "worker.h"
 
-// 
-// Need List
-// 
-int Need_List::read(FileRead* f)
+
+/*
+==============================================================================
+
+Ware_Descr IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+Ware_Descr::Ware_Descr
+Ware_Descr::~Ware_Descr
+===============
+*/
+Ware_Descr::Ware_Descr(const char *name)
 {
-   nneeds = f->Unsigned16();
-   if(!nneeds) {
-      // we're done, this guy is for free
-      return RET_OK;
-   } else if(nneeds==-1) {
-      // this guy can't be assembled in stores
-      return RET_OK;
-   }
-
-   list=(List*) malloc(sizeof(List)*nneeds);
-   
-   int i;
-   for(i=0; i< nneeds; i++) {
-      list[i].count = f->Unsigned16();
-      list[i].index = f->Unsigned16();
-   }
-
-   return RET_OK;
+	snprintf(m_name, sizeof(m_name), "%s", name);
 }
+
+Ware_Descr::~Ware_Descr()
+{
+}
+
+
+/*
+==============================================================================
+
+Item_Ware_Descr IMPLEMENTATION
+	
+==============================================================================
+*/
+
+/*
+===============
+Item_Ware_Descr::Item_Ware_Descr
+Item_Ware_Descr::~Item_Ware_Descr
+===============
+*/
+Item_Ware_Descr::Item_Ware_Descr(const char *name)
+	: Ware_Descr(name)
+{
+}
+
+Item_Ware_Descr::~Item_Ware_Descr()
+{
+}
+
+/*
+===============
+Item_Ware_Descr::is_worker
+===============
+*/	
+bool Item_Ware_Descr::is_worker()
+{
+	return false;
+}
+
+
+/*
+==============================================================================
+
+Worker_Ware_Descr IMPLEMENTATION
+	
+==============================================================================
+*/
+
+/*
+===============
+Worker_Ware_Descr::Worker_Ware_Descr
+Worker_Ware_Descr::~Worker_Ware_Descr
+===============
+*/
+Worker_Ware_Descr::Worker_Ware_Descr(const char *name)
+	: Ware_Descr(name)
+{
+}
+
+Worker_Ware_Descr::~Worker_Ware_Descr()
+{
+}
+
+/*
+===============
+Worker_Ware_Descr::is_worker
+===============
+*/
+bool Worker_Ware_Descr::is_worker()
+{
+	return true;
+}
+
+/*
+===============
+Worker_Ware_Descr::get_worker
+
+Return the worker corresponding to the given tribe.
+===============
+*/
+Worker_Descr *Worker_Ware_Descr::get_worker(Tribe_Descr *tribe)
+{
+	Worker_map::iterator it = m_workers.find(tribe);
+	if (it == m_workers.end())
+		throw wexception("No worker %s in tribe %s", get_name(), tribe->get_name());
+	return it->second;
+}
+
+/*
+===============
+Worker_Ware_Descr::add_worker
+
+Add a worker for the given tribe
+===============
+*/
+void Worker_Ware_Descr::add_worker(Tribe_Descr *tribe, Worker_Descr *worker)
+{
+	assert(!strcmp(worker->get_name(), get_name()));
+	assert(worker->get_tribe() == tribe);
+	
+	m_workers[tribe] = worker;
+}
+

@@ -18,55 +18,242 @@
  */
 
 #include "widelands.h"
+#include "profile.h"
 #include "pic.h"
 #include "bob.h"
 #include "worker.h"
 #include "tribe.h"
 
-// 
-// class Worker_Descr
-//
-int Worker_Descr::read(FileRead* f)
-{
-   uchar temp;
-   
-   memcpy(name, f->Data(sizeof(name)), sizeof(name));
 
-   temp = f->Unsigned8();
-   is_enabled = temp ? true : false;
-   walking_speed = f->Unsigned16();
-
-   needs.read(f);
-
-   ushort w, h, sx, sy;
-   w = f->Unsigned16();
-   h = f->Unsigned16();
-   sx = f->Unsigned16();
-   sy = f->Unsigned16();
 /*
-   walk_ne.set_dimensions(w, h);
-   walk_nw.set_dimensions(w, h);
-   walk_w.set_dimensions(w, h);
-   walk_sw.set_dimensions(w, h);
-   walk_se.set_dimensions(w, h);
-   walk_e.set_dimensions(w, h);
-   walk_ne.set_hotspot(sx, sy);
-   walk_nw.set_hotspot(sx, sy);
-   walk_w.set_hotspot(sx, sy);
-   walk_sw.set_hotspot(sx, sy);
-   walk_se.set_hotspot(sx, sy);
-   walk_e.set_hotspot(sx, sy);
-   
-   walk_ne.read(f);
-   walk_e.read(f);
-   walk_se.read(f);
-   walk_sw.read(f);
-   walk_w.read(f);
-   walk_nw.read(f);
+==============================================================================
+
+Worker IMPLEMENTATION
+
+==============================================================================
 */
-   return RET_OK;
+
+/*
+===============
+Worker_Descr::Worker_Descr
+Worker_Descr::~Worker_Descr
+===============
+*/
+Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
+	: Bob_Descr(name)
+{
+	m_tribe = tribe;
 }
 
+Worker_Descr::~Worker_Descr(void)
+{
+}
+
+/*
+===============
+Worker_Descr::parse
+
+Parse the worker data from configuration
+===============
+*/
+void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
+{
+	Section *s;
+
+	Bob_Descr::parse(directory, prof, encdata);
+	
+	// Read the walking animations
+	s = prof->get_section("walk");
+	m_walk_anims.parse(directory, prof, "walk_??", s, encdata);
+
+	s = prof->get_section("walkload");
+	m_walkload_anims.parse(directory, prof, "walkload_??", s, encdata);
+}
+
+
+/*
+==============================
+
+IMPLEMENTATION
+
+==============================
+*/
+
+/*
+===============
+Worker::Worker
+Worker::~Worker
+===============
+*/
+Worker::Worker(Worker_Descr *descr)
+	: Bob(descr)
+{
+	m_economy = 0;
+	m_carried_ware = -1;
+}
+
+Worker::~Worker()
+{
+}
+
+
+/*
+===============
+Worker::task_start_best
+
+Give the worker something to do after the last task has finished.
+===============
+*/
+void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
+{
+	start_task_idle(g, get_descr()->get_idle_anim(), -1);
+}
+
+
+/*
+==============================================================================
+
+Carrier IMPLEMENTATION
+	
+==============================================================================
+*/
+
+/*
+===============
+Carrier_Descr::Carrier_Descr
+Carrier_Descr::~Carrier_Descr
+===============
+*/
+Carrier_Descr::Carrier_Descr(Tribe_Descr *tribe, const char *name)
+	: Worker_Descr(tribe, name)
+{
+}
+
+Carrier_Descr::~Carrier_Descr(void)
+{
+}
+	
+/*
+===============
+Carrier_Descr::parse
+
+Parse carrier-specific configuration data
+===============
+*/
+void Carrier_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
+{
+	Worker_Descr::parse(directory, prof, encdata);
+}
+
+
+/*
+==============================
+
+IMPLEMENTATION
+
+==============================
+*/
+
+/*
+===============
+Carrier::Carrier
+Carrier::~Carrier
+===============
+*/
+Carrier::Carrier(Carrier_Descr *descr)
+	: Worker(descr)
+{
+}
+
+Carrier::~Carrier()
+{
+}
+
+
+/*
+===============
+Carrier_Descr::create_object
+
+Create a carrier of this type.
+===============
+*/
+Bob *Carrier_Descr::create_object()
+{
+	return new Carrier(this);
+}
+
+/*
+==============================================================================
+
+Worker factory
+	
+==============================================================================
+*/
+
+/*
+===============
+Worker_Descr::create_from_dir [static]
+
+Automatically create the appropriate Worker_Descr type from the given
+config data.
+May return 0.
+===============
+*/
+Worker_Descr *Worker_Descr::create_from_dir(Tribe_Descr *tribe, const char *directory, const EncodeData *encdata)
+{
+	const char *name;
+	
+	// name = last element of path
+	const char *slash = strrchr(directory, '/');
+	const char *backslash = strrchr(directory, '\\');
+	
+	if (backslash && (!slash || backslash > slash))
+		slash = backslash;
+	
+	if (slash)
+		name = slash+1;
+	else
+		name = directory;
+
+	// Open the config file
+	Worker_Descr *descr = 0;
+	char fname[256];
+	
+	snprintf(fname, sizeof(fname), "%s/conf", directory);
+	
+	if (!g_fs->FileExists(fname))
+		return 0;
+		
+	try
+	{
+		Profile prof(fname);
+		Section *s = prof.get_safe_section("global");
+		const char *type = s->get_safe_string("type");
+		
+		if (!strcasecmp(type, "carrier"))
+			descr = new Carrier_Descr(tribe, name);
+		else
+			throw wexception("Unknown carrier type '%s' [supported: carrier]", type);
+		
+		descr->parse(directory, &prof, encdata);
+		prof.check_used();
+	}
+	catch(std::exception &e) {
+		if (descr)
+			delete descr;
+		throw wexception("Error reading worker %s: %s", name, e.what());
+	}
+	catch(...) {
+		if (descr)
+			delete descr;
+		throw;
+	}
+	
+	return descr;
+}
+
+
+#if 0
 // 
 // class Soldier_Descr
 // 
@@ -260,3 +447,4 @@ int Geologist::read(FileRead* f) {
    
    return RET_OK;
 }
+#endif

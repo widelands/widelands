@@ -22,16 +22,18 @@
 
 #include "pic.h"
 #include "bob.h"
-#include "ware.h"
 #include "worker.h"
 #include "building.h"
 #include "descr_maintainer.h"
 
 /*
- * this class represents a tribe file as it is read out of 
- * a file + the distributing of informations and bobs of 
- * it
- */
+Tribes
+------
+
+Every player chooses a tribe. A tribe has distinct properties such as the
+buildings it can build and the associated graphics.
+Two players can choose the same tribe.
+*/
 class Tribe_Descr {
    public:
       enum {
@@ -46,11 +48,11 @@ class Tribe_Descr {
 
 		inline const char *get_name() const { return m_name; }
 		
-		inline Ware_Descr* get_ware_descr(uint idx) { return wares.get(idx); }
-      inline Soldier_Descr* get_soldier_descr(uint idx) { return soldiers.get(idx); }
-      inline Worker_Descr* get_worker_descr(uint idx) { return workers.get(idx); }
+		inline int get_nrworkers() { return m_workers.get_nitems(); }
+      inline Worker_Descr* get_worker_descr(uint idx) { return m_workers.get(idx); }
 		inline int get_building_index(const char *name) { return buildings.get_index(name); }
 		inline Building_Descr *get_building_descr(uint idx) { return buildings.get(idx); }
+		
       inline Animation* get_frontier_anim(void) { return &m_anim_frontier; }
 		inline Animation* get_flag_anim(void) { return &m_anim_flag; }
 
@@ -60,9 +62,7 @@ class Tribe_Descr {
       Animation m_anim_frontier;
 		Animation m_anim_flag;
 		
-		Descr_Maintainer<Ware_Descr> wares;
-      Descr_Maintainer<Soldier_Descr> soldiers;
-      Descr_Maintainer<Worker_Descr> workers;
+      Descr_Maintainer<Worker_Descr> m_workers;
       Descr_Maintainer<Building_Descr> buildings;
 
       // Parsing the tribe
@@ -71,8 +71,6 @@ class Tribe_Descr {
 		void parse_root_conf(const char *directory);
 		void parse_buildings(const char *directory);
 		void parse_workers(const char *directory);
-		void parse_soldiers(const char *directory);
-		void parse_wares(const char *directory);
 };
 
 #endif //__TRIBE_H

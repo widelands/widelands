@@ -31,10 +31,12 @@ especially in the area of graphics, to make Widelands an actual game.
 Keyboard shortcuts (in-game)
 ------------------
 
-SPACE		Toggles build-help
-M			Toggle minimap
+SPACE    Toggles build-help
+M        Toggle minimap
 
-F5			Reveals the entire map
+F5       Reveals the entire map
+F10      Quit the game immediately
+F11      Take a screenshot
 
 
 Reporting Bugs

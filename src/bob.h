@@ -38,16 +38,16 @@ public:
 	virtual ~Bob_Descr(void);
 
 	inline const char* get_name(void) { return m_name; }
-	inline Animation* get_anim(void) { return &anim; }
+	inline Animation* get_idle_anim(void) { return &m_idle_anim; }
 
 	Bob *create(Game *g, Player *owner, Coords coords);
 	
 protected:
 	virtual Bob *create_object() = 0;
-	virtual void read(const char *directory, Profile *prof);
+	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	
 	char m_name[30];
-	Animation anim; // the default animation
+	Animation m_idle_anim; // the default animation
 
 public:
 	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof);

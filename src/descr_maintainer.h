@@ -32,7 +32,7 @@ template <class T> class Descr_Maintainer {
       T* exists(const char* name);
       T* start_enum(void) { n=0; if(nitems) return items[0]; return NULL; }
       T* get_nitem(void) { n++; if(n<nitems) return items[n]; return NULL; }
-      void add(T* item);
+      int add(T* item);
       ushort get_nitems(void) { return nitems; }
       int get_index(const char* name); // can return -1!
       void reserve(uint n) {
@@ -84,12 +84,13 @@ T* Descr_Maintainer<T>::get(const char* name) {
 }*/
       
 template <class T>
-void Descr_Maintainer<T>::add(T* item) {
+int Descr_Maintainer<T>::add(T* item) {
    nitems++;
    if(nitems>=place_for) {
       reserve(nitems);
    }
    items[nitems-1]=item;
+	return nitems-1;
 }
 
 //

@@ -326,8 +326,8 @@ Read an animation which sits in the given directory.
 The animation is described by the given section.
 
 This function looks for pictures in this order:
-	picnametempl, if not null
 	key 'pics', if present
+	picnametempl, if not null
 	<sectionname>_??.bmp
 ===============
 */
@@ -336,8 +336,9 @@ void Animation::parse(const char *directory, Section *s, const char *picnametemp
 	char templbuf[256]; // used when picnametempl == 0
 	char pictempl[256];
 
-	if (!picnametempl) {
+	if (s->get_string("pics"))
 		picnametempl = s->get_string("pics");
+	else {
 		if (!picnametempl) {
 			snprintf(templbuf, sizeof(templbuf), "%s_??.bmp", s->get_name());
 			picnametempl = templbuf;

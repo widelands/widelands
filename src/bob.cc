@@ -57,14 +57,12 @@ Bob_Descr::read
 Parse additional information from the config file
 ===============
 */
-void Bob_Descr::read(const char *directory, Profile *prof)
+void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
-	Section *s = prof->get_safe_section("global");
-
 	char picname[256];
 	
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
-   anim.parse(directory, s, picname);
+	m_idle_anim.parse(directory, prof->get_safe_section("idle"), picname, encdata);
 }
 
 /*
@@ -669,7 +667,7 @@ class Critter_Bob_Descr : public Bob_Descr {
       Critter_Bob_Descr(const char *name);
       virtual ~Critter_Bob_Descr(void) { } 
 
-      virtual void read(const char *directory, Profile *prof);
+      virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
       Bob *create_object();
 
       inline bool is_swimming(void) { return m_swimming; }
@@ -686,20 +684,21 @@ Critter_Bob_Descr::Critter_Bob_Descr(const char *name)
 	m_swimming = 0;
 }
 
-void Critter_Bob_Descr::read(const char *directory, Profile *prof)
+void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
-	Bob_Descr::read(directory, prof);
+	Bob_Descr::parse(directory, prof, encdata);
 
 	Section *s = prof->get_safe_section("global");
 	
 	s->get_int("stock", 0);
 	m_swimming = s->get_bool("swimming", false);
-
-   // read all the other animatins
+	
+   // Read all walking animations.
+	// Default settings are in [walk]
 	char sectname[256];
 	
 	snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
-	m_walk_anims.parse(directory, prof, sectname, s);
+	m_walk_anims.parse(directory, prof, sectname, prof->get_section("walk"), encdata);
 }
 
 
@@ -744,12 +743,12 @@ void Critter_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthin
 		if (start_task_movepath(g, dst, 3, get_descr()->get_walk_anims()))
 			return;
 	
-		start_task_idle(g, get_descr()->get_anim(), 1 + g->logic_rand()%1000);
+		start_task_idle(g, get_descr()->get_idle_anim(), 1 + g->logic_rand()%1000);
 		return;
 	}
 	
 	// idle for a longer period
-	start_task_idle(g, get_descr()->get_anim(), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
+	start_task_idle(g, get_descr()->get_idle_anim(), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
 }
 
 Bob *Critter_Bob_Descr::create_object()
@@ -788,7 +787,7 @@ Bob_Descr *Bob_Descr::create_from_dir(const char *name, const char *directory, P
 		} else
 			throw wexception("Unsupported bob type '%s'", type);
 
-		bob->read(directory, prof);
+		bob->parse(directory, prof, 0);
 	}
 	catch(std::exception &e) {
 		if (bob)
