@@ -17,19 +17,25 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__EDITOR_DELETE_BOB_TOOL
+#define __S__EDITOR_DELETE_BOB_TOOL
+
+#include "editor_tool.h"
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
- */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
-#define PACKET_BOB              5
+=============================
+class Editor_Delete_Bob_Tool
+
+this deletes bob from the map
+=============================
+*/
+class Editor_Delete_Bob_Tool : public Editor_Tool {
+   public:
+      Editor_Delete_Bob_Tool() : Editor_Tool(this,this) { }
+      ~Editor_Delete_Bob_Tool() { }
+
+      virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_delete.png"; }
+};
 
 #endif
-

@@ -45,6 +45,7 @@ Bob_Descr::~Bob_Descr
 Bob_Descr::Bob_Descr(const char *name)
 {
 	snprintf(m_name, sizeof(m_name), "%s", name);
+   m_default_encodedata.clear();
 }
 
 Bob_Descr::~Bob_Descr(void)
@@ -62,6 +63,16 @@ Parse additional information from the config file
 void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
 {
 	char picname[256];
+   char buf[256];
+
+   Section* global = prof->get_safe_section("idle");
+      
+   // Global options
+	snprintf(buf, sizeof(buf), "%s_00.bmp", m_name);
+	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));
+   m_picture = picname;
+
+	m_default_encodedata.parse(global);
 
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
 	m_idle_anim = g_anim.get(directory, prof->get_safe_section("idle"), picname, encdata);

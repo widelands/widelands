@@ -50,8 +50,8 @@ void Widelands_Map_Player_Position_Data_Packet::Read(FileRead* fr, Editor_Game_B
       int i;
       for(i=1; i<=map->get_nrplayers(); i++) {
          Coords c;
-         c.x=fr->Unsigned16();
-         c.y=fr->Unsigned16();
+         c.x=fr->Signed16();
+         c.y=fr->Signed16();
          map->set_starting_pos(i,c);
       } 
       return;
@@ -75,7 +75,7 @@ void Widelands_Map_Player_Position_Data_Packet::Write(FileWrite* fw, Editor_Game
    int i=0;
    for(i=1; i<=map->get_nrplayers(); i++) {
       Coords c=map->get_starting_pos(i);
-      fw->Unsigned16(c.x);
-      fw->Unsigned16(c.y);
+      fw->Signed16(c.x);
+      fw->Signed16(c.y);
    }
 }

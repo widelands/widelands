@@ -132,6 +132,7 @@ void Main_Menu_Load_Map::clicked(int id) {
       text+="_starting_pos.png";
       Coords fc=m_parent->get_map()->get_starting_pos(i);
 
+      if(fc.x==-1 && fc.y==-1) continue;
       int w, h;
       int picid=g_gr->get_picture(PicMod_Game, text.c_str(), RGBColor(0,0,255));
       g_gr->get_picture_size(picid, &w, &h);

@@ -23,6 +23,7 @@
 #include <string>
 #include "geometry.h"
 #include "instances.h"
+#include "animation.h"
 
 class Bob;
 class DirAnimations;
@@ -46,6 +47,8 @@ public:
 	inline uint get_idle_anim(void) const { return m_idle_anim; }
 
 	Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
+   inline const char* get_picture(void) const { return m_picture.c_str(); }
+   inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
 
 protected:
 	virtual Bob *create_object() = 0;
@@ -53,6 +56,9 @@ protected:
 
 	char	m_name[30];
 	uint	m_idle_anim; // the default animation
+   std::string m_picture;
+   EncodeData  m_default_encodedata;
+      
 
 public:
 	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof);

@@ -38,6 +38,7 @@
 #include "editor_increase_height_tool.h"
 #include "editor_noise_height_tool.h"
 #include "editor_set_starting_pos_tool.h"
+#include "editor_place_bob_tool.h"
 
 /**********************************************
  *
@@ -97,6 +98,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Set_Both_Terrain_Tool(new Editor_Set_Down_Terrain_Tool(), new Editor_Set_Right_Terrain_Tool()));
    tools.tools.push_back(new Editor_Place_Immovable_Tool(new Editor_Delete_Immovable_Tool()));
    tools.tools.push_back(new Editor_Set_Starting_Pos_Tool());
+   tools.tools.push_back(new Editor_Place_Bob_Tool(new Editor_Delete_Bob_Tool()));
 
 /*   tools.tools.push_back(new Tool_Info(1, 3, new Editor_Decrease_Height_Tool()));
    tools.tools.push_back(new Tool_Info(1, 2, new Editor_Set_Height_Tool()));

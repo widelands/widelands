@@ -17,19 +17,23 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__WIDELANDS_MAP_BOB_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_BOB_DATA_PACKET_H
+
+#include "widelands_map_data_packet.h"
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
+ * This data packet contains the various bobs on 
+ * the map (animals for now) 
  */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
-#define PACKET_BOB              5
+class Widelands_Map_Bob_Data_Packet : public Widelands_Map_Data_Packet {
+   public:
+      virtual ~Widelands_Map_Bob_Data_Packet();
+
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
+};
+
 
 #endif
 

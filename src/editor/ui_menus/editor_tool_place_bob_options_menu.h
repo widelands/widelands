@@ -17,19 +17,25 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__EDITOR_TOOL_PLACE_BOB_OPTIONS_MENU
+#define __S__EDITOR_TOOL_PLACE_BOB_OPTIONS_MENU
 
-/*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
- */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
-#define PACKET_BOB              5
+#include "editor_tool_options_menu.h"
+
+class Editor_Interactive;
+class Editor_Place_Bob_Tool;
+class UITextarea;
+
+class Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
+   public:
+      Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive*, Editor_Place_Bob_Tool*,
+		                                         UIUniqueWindowRegistry*);
+      virtual ~Editor_Tool_Place_Bob_Options_Menu() { };
+
+   private:
+      Editor_Place_Bob_Tool* m_pit;
+      UITextarea* m_name;
+      void clicked(int, bool);
+};
 
 #endif
-

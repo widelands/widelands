@@ -26,6 +26,7 @@
 #include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_immovable_data_packet.h"
 #include "widelands_map_player_position_data_packet.h"
+#include "widelands_map_bob_data_packet.h"
 
 /*
  * Constructor
@@ -77,7 +78,13 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    dp=new Widelands_Map_Player_Position_Data_Packet();
    dp->Write(&fw, m_egbase);
    delete dp;
+  
+   // now bobs
+   dp=new Widelands_Map_Bob_Data_Packet();
+   dp->Write(&fw, m_egbase);
+   delete dp;
    
+ 
    // NON MANDATORY PACKETS
    fw.Write(g_fs,m_filename); 
 }

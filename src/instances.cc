@@ -228,7 +228,7 @@ performed:
 ...
 ===============
 */
-void Map_Object::destroy(Editor_Game_Base *g)
+void Map_Object::destroy(Editor_Game_Base* g)
 {
 	remove(g);
 }
