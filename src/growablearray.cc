@@ -34,7 +34,6 @@ Growable_Array::Growable_Array(int size, int inc)
 
 Growable_Array::~Growable_Array()
 {
-	//delete this->elementData;
 	free(this->elementData);
 }
 
@@ -44,7 +43,6 @@ void Growable_Array::flush(int size)
 	if (size > 0)
 	{
 		free(this->elementData);
-	//	delete[] this->elementData;
 		this->elementData = (void**)malloc(size * sizeof(void*));//new void*[this->increase];
 		this->capacity = size;
 #ifdef G_ARRAY_SAFE
@@ -70,14 +68,17 @@ void Growable_Array::grow(int inc)
 		newCapacity += inc;
 	else
 		newCapacity *= 2;
-	void** newData = (void**)malloc(newCapacity * sizeof(void*));//new void*[newCapacity];
+/*	void** newData = (void**)malloc(newCapacity * sizeof(void*));//new void*[newCapacity];
 #ifdef G_ARRAY_SAFE
 	memset(newData, 0, newCapacity * sizeof(void*));
 #endif
 	memcpy(newData, this->elementData, this->capacity * sizeof(void*));
-	//delete this->elementData;
 	free(this->elementData);
-	this->elementData = newData;
+	this->elementData = newData;*/
+	realloc(this->elementData, newCapacity * sizeof(void*));
+#ifdef G_ARRAY_SAFE
+	memset(this->elementData + this->capacity, 0, (newCapacity - this->capacity) * sizeof(void*));
+#endif	
 	this->capacity = newCapacity;
 }
 
