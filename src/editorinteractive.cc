@@ -461,19 +461,18 @@ void Editor_Interactive::start()
 	int maph;
 
    m_maprenderinfo.egbase = m_editor; 
-	m_maprenderinfo.map = m_editor->get_map();
 	m_maprenderinfo.visibility = 0; 
 	m_maprenderinfo.show_buildhelp = true;
 	
-	mapw = m_maprenderinfo.map->get_width();
-	maph = m_maprenderinfo.map->get_height();
+	mapw = m_maprenderinfo.egbase->get_map()->get_width();
+	maph = m_maprenderinfo.egbase->get_map()->get_height();
 	m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
 	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
 	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
 	
 	for(int y = 0; y < maph; y++)
 		for(int x = 0; x < mapw; x++) {
-			FCoords coords(x, y, m_maprenderinfo.map->get_field(x,y));
+			FCoords coords(x, y, m_maprenderinfo.egbase->get_map()->get_field(x,y));
 			
 			recalc_overlay(coords);
 		}
@@ -488,7 +487,7 @@ Recalculate build help and borders for the given field
 */
 void Editor_Interactive::recalc_overlay(FCoords fc)
 {
-   Map* map = m_maprenderinfo.map;
+   Map* map = m_maprenderinfo.egbase->get_map();
 
    // Only do recalcs after maprenderinfo has been setup
    if (!map)

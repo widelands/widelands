@@ -766,7 +766,7 @@ class Map_Loader {
       virtual int preload_map()=0;
       virtual int load_map_complete(Editor_Game_Base*)=0;
 
-      inline Map* get_map() { assert(m_map); return m_map; }
+      inline Map* get_map() { return m_map; }
       
    protected:
       bool exists_world(const char*);

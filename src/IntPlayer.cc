@@ -105,7 +105,8 @@ Initialize
 Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g)
 {
 
-	// Setup all screen elements
+   
+   // Setup all screen elements
 	m_game = g;
 	m_player_number = plyn;
 	
@@ -139,6 +140,7 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	b = new Button(this, x+102, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.bmp", RGBColor(0,0,255)));
+   
 }
 
 /*
@@ -168,19 +170,18 @@ void Interactive_Player::start()
 	int maph;
 
    m_maprenderinfo.egbase = m_game; 
-	m_maprenderinfo.map = m_game->get_map();
 	m_maprenderinfo.visibility = get_player()->get_visibility();
 	m_maprenderinfo.show_buildhelp = false;
 	
-	mapw = m_maprenderinfo.map->get_width();
-	maph = m_maprenderinfo.map->get_height();
+	mapw = m_maprenderinfo.egbase->get_map()->get_width();
+	maph = m_maprenderinfo.egbase->get_map()->get_height();
 	m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
 	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
 	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
 	
 	for(int y = 0; y < maph; y++)
 		for(int x = 0; x < mapw; x++) {
-			FCoords coords(x, y, m_maprenderinfo.map->get_field(x,y));
+			FCoords coords(x, y, m_maprenderinfo.egbase->get_map()->get_field(x,y));
 			
 			recalc_overlay(coords);
 		}
@@ -538,12 +539,13 @@ Recalculate build help and borders for the given field
 */
 void Interactive_Player::recalc_overlay(FCoords fc)
 {
-	Map* map = m_maprenderinfo.map;
-
-	// Only do recalcs after maprenderinfo has been setup
-	if (!map)
+   // Only do recalcs after maprenderinfo has been setup
+	if (!m_maprenderinfo.egbase)
 		return;
-	
+
+	Map* map = m_maprenderinfo.egbase->get_map();
+   assert(map); // must be setup
+      
 	uchar code = 0;
 	int owner = fc.field->get_owned_by();
 	

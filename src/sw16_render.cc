@@ -26,7 +26,7 @@ Rendering functions of the 16-bit software renderer.
 #include "map.h"
 
 #include "sw16_graphic.h"
-
+#include "editor_game_base.h"
 
 namespace Renderer_Software16
 {
@@ -191,11 +191,11 @@ void Bitmap::draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx,
    if(fx==(uint)rc.w && fy==(uint)rc.h) {
       // forced size == natural size. 
       // use fast rendering
-      int mapwidth = mri->map->get_width();
+      int mapwidth = mri->egbase->get_map()->get_width();
 
       for(int y = 0; y < rc.h; y++) {
          ushort* pix = pixels + (dst.y+y)*pitch + dst.x;
-         Field* f = mri->map->get_field(rc.x, rc.y+y);
+         Field* f = mri->egbase->get_map()->get_field(rc.x, rc.y+y);
 
          for(int x = 0; x < rc.w; x++, f++, pix++)
          {
@@ -212,17 +212,17 @@ void Bitmap::draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx,
    } else {
       // fored size is somehow different. slow rendering needed
       // we center the minimap in the area we got.
-      int mapwidth = mri->map->get_width();
+      int mapwidth = mri->egbase->get_map()->get_width();
 
-      float xslope=(float)mri->map->get_width()/(float)fx;
-      float yslope=(float)mri->map->get_height()/(float)fy;
+      float xslope=(float)mri->egbase->get_map()->get_width()/(float)fx;
+      float yslope=(float)mri->egbase->get_map()->get_height()/(float)fy;
       float xfield=0, yfield=0;
       for(uint y = 0; y < fy; y++, yfield+=yslope) {
          ushort* pix = pixels + (dst.y+y)*pitch + dst.x;
 
          for(uint x = 0; x < fx; x++, pix++, xfield+=xslope)
          {
-            Field* f = mri->map->get_field((int)(xfield), (int)(yfield));
+            Field* f = mri->egbase->get_map()->get_field((int)(xfield), (int)(yfield));
             if (mri->visibility && !(*mri->visibility)[((int)(yfield))*mapwidth + (int)(xfield)])
                *pix = 0;
             else {

@@ -473,7 +473,7 @@ Draw build help (buildings and roads) and the field sel
 static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
                  FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr, bool draw_fsel)
 {
-	int mapwidth = mri->map->get_width();
+	int mapwidth = mri->egbase->get_map()->get_width();
 	uchar overlay_basic = mri->overlay_basic[fc.y*mapwidth + fc.x];
 	int icon;
 	uint picid;
@@ -573,7 +573,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	// Completely clear the window
 	dst.clear();
    
-   Map_Region_Coords fsel_coords_int(mri->fieldsel, mri->fieldsel_radius, mri->map);
+   Map_Region_Coords fsel_coords_int(mri->fieldsel, mri->fieldsel_radius, mri->egbase->get_map());
    int next_fieldsel_cord_x, next_fieldsel_cord_y;
    fsel_coords_int.next(&next_fieldsel_cord_x, &next_fieldsel_cord_y);
    
@@ -581,7 +581,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	// For each field, draw ground textures, then roads, then immovables 
 	// (and borders), then bobs, then overlay stuff (build icons etc...)
 	//Player *player = m_player->get_player();
-	Map* map = mri->map;
+	Map* map = mri->egbase->get_map();
 	int mapwidth = map->get_width();
 	int minfx, minfy;
 	int maxfx, maxfy;
@@ -760,8 +760,8 @@ void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx
 	
 	rc.x = 0;
 	rc.y = 0;
-	rc.w = mri->map->get_width();
-	rc.h = mri->map->get_height();
+	rc.w = mri->egbase->get_map()->get_width();
+	rc.h = mri->egbase->get_map()->get_height();
 
 /*
  * I don't know for what this is. i guess it's no longer needed for In game minimaprendering.

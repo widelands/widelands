@@ -244,7 +244,6 @@ class Game;
 
 struct MapRenderInfo {
 	Editor_Game_Base*    egbase;
-   Map*		map;
    Coords	fieldsel; // field selection marker, moved by cursor
    int fieldsel_radius; // how many fields around shall the fieldsel mark? important for 
                      // edtor or when a area shall be selected in the game

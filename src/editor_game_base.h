@@ -29,12 +29,14 @@
 class Interactive_Base;
 
 class Editor_Game_Base {
+   friend class Interactive_Base;
+
    public:
       Editor_Game_Base(); 
       virtual ~Editor_Game_Base(); 
 	
       void set_map(Map* map);
-      inline Map *get_map() { assert(m_map); return m_map; }
+      inline Map *get_map() { return m_map; }
       inline Object_Manager* get_objects() { return m_objects; }
 	
 	
@@ -83,8 +85,8 @@ class Editor_Game_Base {
       Object_Manager*				m_objects;
       std::vector<Tribe_Descr*>	m_tribes;
       Descr_Maintainer<Ware_Descr>	m_wares;
-      Map*								m_map;
       Interactive_Base*          m_iabase;
+      Map*								m_map;
 };
 
 #endif // __S__EDITOR_GAME_BASE_H
