@@ -26,7 +26,7 @@
 #include "singleton.h"
 
 // let sdl wrap main into its own main
-#include <sdl/sdl.h>
+#include <SDL/SDL.h>
 
 
 #if !defined(WIN32) || (defined(WIN32) && defined(_CONSOLE))

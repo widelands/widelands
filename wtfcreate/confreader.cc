@@ -21,6 +21,7 @@
 #include "../src/growablearray.h"
 #include "../src/profile.h"
 //#include "../src/worldfiletypes.h"
+#include "../src/os.h"
 #include <string.h>
 #include <stdio.h>
 
