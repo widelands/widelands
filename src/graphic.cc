@@ -180,6 +180,57 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture)
    }
 }
 
+/*
+===============
+render_road_horiz
+render_road_vert
+
+Render a road. This is really dumb right now, not using a texture
+===============
+*/
+void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color)
+{
+	int ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
+	int centery = start.y << 16;
+
+	for(int x = start.x; x < end.x; x++, centery += ydiff) {
+		if (x < 0 || x >= dst->get_w())
+			continue;
+		
+		int y = (centery >> 16) - 2;
+		
+		for(int i = 0; i < 5; i++, y++) {
+			if (y < 0 || y >= dst->get_h())
+				continue;
+			
+	      ushort *pix = dst->get_pixels() + y*dst->get_pitch() + x;
+			*pix = color;
+		}
+	}
+}
+
+void render_road_vert(Bitmap *dst, Point start, Point end, ushort color)
+{
+	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
+	int centerx = start.x << 16;
+
+	for(int y = start.y; y < end.y; y++, centerx += xdiff) {
+		if (y < 0 || y >= dst->get_h())
+			continue;
+		
+		int x = (centerx >> 16) - 2;
+		
+		for(int i = 0; i < 5; i++, x++) {
+			if (x < 0 || x >= dst->get_w())
+				continue;
+			
+			ushort *pix = dst->get_pixels() + y*dst->get_pitch() + x;
+			*pix = color;
+		}
+	}
+}
+
+
 /** class Graphic
  *
  * This functions is responsible for displaying graphics and keeping them up to date
@@ -343,24 +394,51 @@ void Graphic::update(void)
    bneeds_update=false;
 }
 
-/** 
- * This function copys from a bob picture
- *
- * TODO: one more parameter (player color) is needed
- */
-void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y) {
+/*
+===============
+copy_animation_pic
+ 
+This function renders a frame of an Animation.
+time is in milliseconds into the animation.
+dst_x/dst_y are the coordinates of the animation's hotspot.
+plrclrs is an array of R/G/B values for the 4 playercolors:
+	plrclrs[0] = darkest_r;
+	plrclrs[1] = darkest_g;
+	plrclrs[3] = dark_r;
+	plrclrs[11] = brightest_b;
+===============
+*/
+void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y, const uchar *plrclrs)
+{
    int x, y;
-   Animation_Pic* pic = anim->get_time_pic(time);
-   ushort cmd;
-   ushort count;
-   ushort i=0;
-   ushort clr;
+	Animation_Pic* pic = anim->get_time_pic(time);
+	ushort cmd;
+	ushort count;
+	ushort i;
+	ushort clr;
+	ushort plrclrs_packed[4];
 
+	// build packed player colors
+	if (!plrclrs) {
+		static uchar ownerless_playercolor[12] = {
+			10,   79,  54,
+			15,  110,  75,
+			28,  208, 142,
+			35,  255, 174
+		};
+		plrclrs = ownerless_playercolor;
+	}
+	
+	for(i = 0; i < 4; i++)
+		plrclrs_packed[i] = pack_rgb(plrclrs[i*3+0], plrclrs[i*3+1], plrclrs[i*3+2]);
+	
+	// get destination relative to top-left corner
 	dst_x -= anim->get_hsx();
 	dst_y -= anim->get_hsy();
 	   
-   x=dst_x;
-   for(y=dst_y; y<dst_y+anim->get_h(); ) {
+	i = 0;
+   x = dst_x;
+   for(y = dst_y; y<dst_y+anim->get_h(); ) {
 //      for(x=0; x<bob->get_w(); x++) {
          cmd=((pic->data[i]>> 14));
          count=pic->data[i] & 0x3fff;
@@ -398,19 +476,10 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
             }
             continue;
          } else if(cmd==2) {
-            // Should draw player color pixels. TODO
-            clr=pic->data[i];
-            switch(clr) {
-               case 0: clr=pack_rgb(0, 0, 165); break;
-               case 1: clr=pack_rgb(0,55,190); break;
-               case 2: clr=pack_rgb(0, 120, 215); break;
-               case 3: clr=pack_rgb(0, 210, 245); break;
-               default:
-                       // this should never happen!!
-                       cerr << hex << clr << dec << endl;
-                       assert(0);
-                       break;
-            }
+				// Should draw player color pixels.
+            clr = pic->data[i];
+				assert(clr < 4);
+				clr = plrclrs_packed[clr];
             
             while(count) {
              if(x>=0 && y>=0) {

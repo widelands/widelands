@@ -245,11 +245,8 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
 			}
 			
 			// Render stuff that belongs to ground triangles
-			if (render_b || render_r) {
+			if (render_b || render_r)
          	draw_field(dst, f, f_r, f_bl, f_br, posx, rposx, posy, blposx, brposx, bposy, render_r, render_b);
-
-				// Render ways TODO
-			}
 			
 			// Render stuff that belongs to the field node
 			if (!use_see_area || player->is_field_seen(fx, fy))
@@ -261,53 +258,63 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
 				// This could be avoided by either pre-rendering all ground-fields before drawing a bob (time-costy!)
 				// or by different (more complicated, also with build-help) checking here below.  - Holger
 				if(f->get_owned_by()) {
+					Player *ownerplayer = m_game->get_player(f->get_owned_by());
+					Animation *frontier = ownerplayer->get_tribe()->get_frontier_anim();
+					const uchar *playercolors = ownerplayer->get_playercolor_rgb();
+				
 					if(f_tl->get_owned_by() != f->get_owned_by()) {
-						copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
-								tlposx, tposy - f_tl->get_height()*HEIGHT_FACTOR);
+						copy_animation_pic(dst, frontier, 0, 
+								tlposx, tposy - f_tl->get_height()*HEIGHT_FACTOR, playercolors);
 						// left to top-left
 						if(f_l->get_owned_by() != f->get_owned_by()) {
-							copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
-									(lposx+tlposx)>>1, ((posy - f_l->get_height()*HEIGHT_FACTOR)+(tposy - f_tl->get_height()*HEIGHT_FACTOR))>>1);
+							copy_animation_pic(dst,  frontier, 0, 
+									(lposx+tlposx)>>1, ((posy - f_l->get_height()*HEIGHT_FACTOR)+(tposy - f_tl->get_height()*HEIGHT_FACTOR))>>1,
+									playercolors);
 						}
 						// top-left to top-right
 						if(f_tr->get_owned_by() != f->get_owned_by()) {
-							copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
-									(tlposx+trposx)>>1, ((tposy - f_tl->get_height()*HEIGHT_FACTOR)+(tposy - f_tr->get_height()*HEIGHT_FACTOR))>>1);
+							copy_animation_pic(dst, frontier, 0,
+									(tlposx+trposx)>>1, ((tposy - f_tl->get_height()*HEIGHT_FACTOR)+(tposy - f_tr->get_height()*HEIGHT_FACTOR))>>1,
+									playercolors);
 						}
 					}
 					if(f_br->get_owned_by() != f->get_owned_by()) {
-						copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
-								brposx, bposy - f_br->get_height()*HEIGHT_FACTOR);
+						copy_animation_pic(dst,  frontier, 0, 
+								brposx, bposy - f_br->get_height()*HEIGHT_FACTOR, playercolors);
 						// bottom-right to right
 						if(f_r->get_owned_by() != f->get_owned_by()) {
-							copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
-									(brposx+rposx)>>1, ((bposy - f_br->get_height()*HEIGHT_FACTOR)+(posy - f_r->get_height()*HEIGHT_FACTOR))>>1);
+							copy_animation_pic(dst, frontier, 0,
+									(brposx+rposx)>>1, ((bposy - f_br->get_height()*HEIGHT_FACTOR)+(posy - f_r->get_height()*HEIGHT_FACTOR))>>1,
+									playercolors);
 						}
 						// bottom-left to bottom-left
 						if(f_bl->get_owned_by() != f->get_owned_by()) {
-							copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
-									(brposx+blposx)>>1, ((bposy - f_br->get_height()*HEIGHT_FACTOR)+(bposy - f_bl->get_height()*HEIGHT_FACTOR))>>1);
+							copy_animation_pic(dst, frontier, 0,
+									(brposx+blposx)>>1, ((bposy - f_br->get_height()*HEIGHT_FACTOR)+(bposy - f_bl->get_height()*HEIGHT_FACTOR))>>1,
+									playercolors);
 						}
 					}
 					// right to top-right
 					if(f_tr->get_owned_by() != f->get_owned_by() &&
 							f_r->get_owned_by() != f->get_owned_by()) {
-						copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
-								rposx, posy - f_r->get_height()*HEIGHT_FACTOR);
-						copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
-								trposx, tposy - f_tr->get_height()*HEIGHT_FACTOR);
-						copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
-								(trposx+rposx)>>1, ((tposy - f_tr->get_height()*HEIGHT_FACTOR)+(posy - f_r->get_height()*HEIGHT_FACTOR))>>1);
+						copy_animation_pic(dst,  frontier, 0, 
+								rposx, posy - f_r->get_height()*HEIGHT_FACTOR, playercolors);
+						copy_animation_pic(dst,  frontier, 0, 
+								trposx, tposy - f_tr->get_height()*HEIGHT_FACTOR, playercolors);
+						copy_animation_pic(dst, frontier, 0,
+								(trposx+rposx)>>1, ((tposy - f_tr->get_height()*HEIGHT_FACTOR)+(posy - f_r->get_height()*HEIGHT_FACTOR))>>1,
+								playercolors);
 					}
 					// left to bottom-left
 					if(f_l->get_owned_by() != f->get_owned_by() &&
 							f_bl->get_owned_by() != f->get_owned_by()) {
-						copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
-								lposx, posy - f_l->get_height()*HEIGHT_FACTOR);
-						copy_animation_pic(dst,  m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0, 
-								blposx, bposy - f_bl->get_height()*HEIGHT_FACTOR);
-						copy_animation_pic(dst, m_game->get_player_tribe(f->get_owned_by())->get_frontier_anim(), 0,
-								(blposx+lposx)>>1, ((bposy - f_bl->get_height()*HEIGHT_FACTOR)+(posy - f_l->get_height()*HEIGHT_FACTOR))>>1);
+						copy_animation_pic(dst,  frontier, 0, 
+								lposx, posy - f_l->get_height()*HEIGHT_FACTOR, playercolors);
+						copy_animation_pic(dst,  frontier, 0, 
+								blposx, bposy - f_bl->get_height()*HEIGHT_FACTOR, playercolors);
+						copy_animation_pic(dst, frontier, 0,
+								(blposx+lposx)>>1, ((bposy - f_bl->get_height()*HEIGHT_FACTOR)+(posy - f_l->get_height()*HEIGHT_FACTOR))>>1,
+								playercolors);
 					}
 				}
 
@@ -434,6 +441,43 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 	// Render bottom triangle
    if(render_b) 
       render_triangle(dst, p+1, b+1, f->get_terd()->get_texture());
+	
+	// Render roads
+	ushort color;
+	int road;
+	
+	road = f->get_road(Road_East);
+	if (render_r && road) {
+		if (road == Road_Normal)
+			color = pack_rgb(192, 192, 192);
+		else if (road == Road_Busy)
+			color = pack_rgb(96, 96, 96);
+		else
+			color = pack_rgb(0, 0, 128);
+		render_road_horiz(dst, p[1], p[0], color);
+	}
+	
+	road = f->get_road(Road_SouthEast);
+	if (road) {
+		if (road == Road_Normal)
+			color = pack_rgb(192, 192, 192);
+		else if (road == Road_Busy)
+			color = pack_rgb(96, 96, 96);
+		else
+			color = pack_rgb(0, 0, 128);
+		render_road_vert(dst, p[1], p[2], color);
+	}
+	
+	road = f->get_road(Road_SouthWest);
+	if (road) {
+		if (road == Road_Normal)
+			color = pack_rgb(192, 192, 192);
+		else if (road == Road_Busy)
+			color = pack_rgb(96, 96, 96);
+		else
+			color = pack_rgb(0, 0, 128);
+		render_road_vert(dst, p[1], p[3], color);
+	}
 }
 
 /** Map_View::set_viewpoint(int x, int y)

@@ -24,6 +24,7 @@
 #include "tribe.h"
 #include "game.h"
 #include "player.h"
+#include "transport.h"
 
 
 /*
@@ -109,15 +110,6 @@ Implementation
 
 ==============================
 */
-class Building : public Map_Object {
-	MO_DESCR(Building_Descr)
-
-public:
-	Building(Building_Descr *descr);
-	
-	virtual void init(Game* g);
-};
-
 Building::Building(Building_Descr *descr)
 	: Map_Object(descr)
 {
@@ -133,6 +125,39 @@ Common building initialization code. You must call this from derived class' init
 void Building::init(Game* g)
 {
 	Map_Object::init(g);
+	
+	// Make sure the flag is there
+	std::vector<Map_Object*> objs;
+	Map *map = g->get_map();
+	Flag *flag;
+	Coords brc;
+	
+	map->get_brn(m_pos, &brc);
+	
+	if (map->find_objects(brc.x, brc.y, 0, FLAG, &objs)) {
+		flag = (Flag *)objs[0];
+	} else {
+		flag = Flag::create(g, get_owned_by(), brc);
+	}
+	
+	flag->attach_building(g, this);
+	m_flag = flag;
+}
+
+/*
+===============
+Building::cleanup
+
+Cleanup the building
+===============
+*/
+void Building::cleanup(Game *g)
+{
+	Flag *flag = (Flag *)m_flag.get(g);
+	if (flag) // may have been deleted
+		flag->detach_building(g);
+	
+	Map_Object::cleanup(g);
 }
 
 

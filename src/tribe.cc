@@ -108,6 +108,13 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 		
 		m_anim_frontier.parse(directory, s, 0, &m_default_encdata);
 		
+		// Section [flag]
+		s = prof.get_section("flag");
+		if (!s)
+			throw wexception("Missing section [flag]");
+		
+		m_anim_flag.parse(directory, s, 0, &m_default_encdata);
+		
 		prof.check_used();
 	}
 	catch(std::exception &e) {

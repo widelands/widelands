@@ -274,16 +274,20 @@ int Map::load_map(const char* file, Game* g)
    return RET_OK;
 }
 
-/** Map::find_objects(int x, int y, uint radius, uint attribute, vector<Map_Object*> *list)
- *
- * Find Map_Objects in the given area that have the requested attribute.
- * If radius is 0, only the field x/y is checked.
- *
- * If list is non-zero, pointers to the relevant objects will be stored in the list.
- *
- * Returns true if objects could be found
- */
-bool Map::find_objects(int x, int y, uint radius, uint attribute, std::vector<Map_Object*> *list)
+/*
+===============
+Map::find_objects
+
+Find Map_Objects in the given area that have the requested attribute.
+If reverse is true, all objects without the attribute are returned.
+If radius is 0, only the field x/y is checked.
+
+If list is non-zero, pointers to the relevant objects will be stored in the list.
+
+Returns true if objects could be found
+===============
+*/
+bool Map::find_objects(int x, int y, uint radius, uint attribute, std::vector<Map_Object*> *list, bool reverse)
 {
 	Map_Region mr(x, y, radius, this);
 	Field *f;
@@ -293,7 +297,9 @@ bool Map::find_objects(int x, int y, uint radius, uint attribute, std::vector<Ma
 		Map_Object *obj = f->get_first_object();
 		
 		while(obj) {
-			if (obj->has_attribute(attribute)) {
+			bool hasattrib = obj->has_attribute(attribute);
+			
+			if (reverse != hasattrib) {
 				if (list) {
 					list->push_back(obj);
 					found = true;
@@ -462,8 +468,10 @@ void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
 	if (f->caps & MOVECAPS_WALK)
 	{
 		// 4b) Flags must be at least 1 field apart
-		if (!find_objects(fx, fy, 1, Map_Object::FLAG, 0))
-			f->caps |= BUILDCAPS_FLAG;
+		if (find_objects(fx, fy, 1, Map_Object::FLAG, 0))
+			return;
+		
+		f->caps |= BUILDCAPS_FLAG;
 	}
 }
 

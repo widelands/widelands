@@ -49,10 +49,11 @@ class Player {
 			playerAI
 		};
 		
-      Player(Game* g, int type, int plnum);
+      Player(Game* g, int type, int plnum, const uchar *playercolor);
       ~Player(void);
 
       inline int get_type() { return m_type; }
+		inline uchar *get_playercolor_rgb() { return m_playercolor; }
 		Tribe_Descr *get_tribe();
 		
 		void setup();
@@ -72,6 +73,7 @@ class Player {
       
 		int m_type;
 		int m_plnum;
+		uchar m_playercolor[12];
       Game* game; 
       std::vector<bool>* seen_fields; 
       

@@ -29,9 +29,11 @@
 // class Player
 //
 //
-Player::Player(Game* g, int type, int plnum) {
+Player::Player(Game* g, int type, int plnum, const uchar *playercolor)
+{
    m_type = type; 
 	m_plnum = plnum;
+	memcpy(m_playercolor, playercolor, sizeof(m_playercolor));
    game=g;
    seen_fields=0;
 }

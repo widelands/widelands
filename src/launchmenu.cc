@@ -29,6 +29,58 @@
 #include "map.h"
 #include "player.h"
 
+// hard-coded playercolors
+uchar g_playercolors[MAX_PLAYERS][12] = {
+	{ // blue
+		  0,   0, 165,
+		  0,  55, 190,
+		  0, 120, 215,
+		  0, 210, 245
+	},
+	{ // red
+		119,  19,   0,
+		166,  27,   0,
+		209,  34,   0,
+		255,  41,   0
+	},
+	{ // yellow
+		112, 103,   0,
+		164, 150,   0,
+		209, 191,   0,
+		255, 232,   0
+	},
+	{ // green
+		 26,  99,   1,
+		 37, 143,   2,
+		 48, 183,   3,
+		 59, 223,   3
+	},
+	{ // black/dark gray
+		  0,   0,   0,
+		 19,  19,  19,
+		 35,  35,  35,
+		 57,  57,  57
+	},
+	{ // orange
+		119,  80,   0,
+		162, 109,   0,
+		209, 141,   0,
+		255, 172,   0,
+	},
+	{ // purple
+		 91,   0,  93,
+		139,   0, 141,
+		176,   0, 179,
+		215,   0, 218,
+	},
+	{ // white
+		119, 119, 119,
+		166, 166, 166,
+		210, 210, 210,
+		255, 255, 255
+	}
+};
+
 /*
 ==============================================================================
 
@@ -107,7 +159,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 	else
 	{
 		if (m_btnEnablePlayer->get_state())
-			m_game->add_player(m_plnum, m_playertype);
+			m_game->add_player(m_plnum, m_playertype, g_playercolors[m_plnum-1]);
 			
 		const char* string = 0;
 		switch(m_playertype) {
@@ -130,7 +182,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 void PlayerDescriptionGroup::enable_player(bool on)
 {
 	if (on) {
-		m_game->add_player(m_plnum, m_playertype);
+		m_game->add_player(m_plnum, m_playertype, g_playercolors[m_plnum-1]);
 	} else {
 		m_game->remove_player(m_plnum);
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001 by the Widelands Development Team
+ * Copyright (C) 2002 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,6 +59,18 @@ enum FieldCaps {
 	MOVECAPS_SWIM = 128,	
 };
 
+enum Roads {
+	Road_None = 0,
+	Road_Normal = 1,
+	Road_Busy = 2,
+	Road_Water = 3,
+	Road_Mask = 3,
+	
+	Road_East = 0,	// shift values
+	Road_SouthEast = 2,
+	Road_SouthWest = 4,
+};
+
 class Terrain_Descr;
 class Map_Object;
 
@@ -69,8 +81,9 @@ class Field {
 private:
    uchar height;
 	char brightness;
-	uchar caps; // what can we build here, who can walk here
+	uchar caps; // what can we build here, who can walk here [8 bits used]
 	uchar owned_by; // 0 = neutral; otherwise: player number
+	uchar roads; // are any roads on this field? [6 bits used]
 	Terrain_Descr *terr, *terd;
 	Map_Object* objects; // linked list, see Map_Object::m_linknext
 
@@ -92,15 +105,21 @@ public:
    inline Terrain_Descr *get_terd() const { return terd; }
    inline void set_terrainr(Terrain_Descr *p) { assert(p); terr = p; }
    inline void set_terraind(Terrain_Descr *p) { assert(p); terd = p; }
-   
-   inline Map_Object* get_first_object(void) { return objects; }
 
-   void set_brightness(int l, int r, int tl, int tr, int bl, int br);
+	inline Map_Object* get_first_object(void) { return objects; }
+
+	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
    inline char get_brightness() const { return brightness; }
 
    inline void set_owned_by(uint pln) { owned_by = pln; }
    inline uchar get_owned_by(void) { return owned_by; }
 
+	inline int get_road(int dir) const { return (roads >> dir) & Road_Mask; }
+	inline void set_road(int dir, int type) {
+		roads &= ~(Road_Mask << dir); 
+		roads |= type << dir;
+	}
+	
 private:
    // note: you must reset this field's + neighbor's brightness when you change the height
    // Map's set_height does this

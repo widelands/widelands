@@ -18,7 +18,7 @@
  */
 
 #ifndef __S__BUILDING_H
-#define __S__BUIlDING_H
+#define __S__BUILDING_H
 
 #include "instances.h"
 
@@ -52,6 +52,20 @@ class Building_Descr : public Map_Object_Descr {
 	public:
 		static Building_Descr *create_from_dir(Tribe_Descr *tribe, const char *directory,
 		                                       const EncodeData *encdata);
+};
+
+
+class Building : public Map_Object {
+	MO_DESCR(Building_Descr)
+
+public:
+	Building(Building_Descr *descr);
+	
+	virtual void init(Game *g);
+	virtual void cleanup(Game *g);
+
+private:
+	Object_Ptr	m_flag;
 };
 
 

@@ -122,13 +122,16 @@ void Game::remove_player(int plnum)
 	}		
 }
 
-/** Game::add_player(int plnum, int type)
- *
- * Create the player structure for the given plnum.
- * Note that AI player structures and the Interactive_Player are created when
- * the game starts. Similar for remote players.
- */
-void Game::add_player(int plnum, int type)
+/*
+===============
+Game::add_player
+
+Create the player structure for the given plnum.
+Note that AI player structures and the Interactive_Player are created when
+the game starts. Similar for remote players.
+===============
+*/
+void Game::add_player(int plnum, int type, const uchar *playercolor)
 {
 	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 	assert(m_state != gs_running);
@@ -136,7 +139,7 @@ void Game::add_player(int plnum, int type)
 	if (m_players[plnum-1])
 		remove_player(plnum);
 	
-	m_players[plnum-1] = new Player(this, type, plnum);
+	m_players[plnum-1] = new Player(this, type, plnum, playercolor);
 }
 
 /** Game::can_start()
@@ -216,6 +219,8 @@ bool Game::run(void)
 				ipl->move_view_to(c->x, c->y);
 		}
 		ipl->run();
+		
+		m_objects->cleanup(this);
 	   delete ipl;
 	   delete tribe;
 		played = true;
@@ -287,7 +292,7 @@ void Game::create_bob(int x, int y, int idx)
 	if (!descr)
 		throw wexception("create_bob: no description for %i", idx);
 	
-	obj = m_objects->create_object(this, descr, -1, x, y);
+	obj = m_objects->create_object(this, descr, 0, x, y);
 }
 
 /*

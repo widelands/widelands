@@ -22,7 +22,7 @@ SDL_CONFIG:=sdl-config
 
 # additional build flags. if you're not a developer, you don't want
 # to change this
-ADD_CFLAGS:=-O3 -DDEBUG
+ADD_CFLAGS:=-g -O3 -DDEBUG
 
 # additional link flags. if you're not a developer, you don't want 
 # to change this

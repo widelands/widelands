@@ -318,11 +318,13 @@ extern Graphic *g_graphic;
 
 
 void render_triangle(Bitmap *dst, Point* points, int *brightness, Pic* texture);
+void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color);
+void render_road_vert(Bitmap *dst, Point start, Point end, ushort color);
 void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
       uint src_x, uint src_y, int w, int h);
 
 class Animation;
 
-void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y);
+void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y, const uchar *plrclrs);
 
 #endif /* __S__GRAPHIC_H */

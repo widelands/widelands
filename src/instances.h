@@ -26,6 +26,7 @@ class Game;
 class Bitmap;
 class Animation;
 class Path;
+class Player;
 
 //
 // Base class for descriptions of worker, files and so on. this must just
@@ -153,6 +154,8 @@ class Map_Object {
       virtual ~Map_Object(void);
 
 	public:
+		void die(Game*);
+	
 		virtual uint get_movecaps() { return 0; }
 		inline bool has_attribute(uint attr) { return m_descr->has_attribute(attr); }
 		
@@ -160,6 +163,7 @@ class Map_Object {
 		// use it to trigger initial CMD_ACTs
 		// make sure to always call Map_Object::init()!
 		virtual void init(Game*);
+		virtual void cleanup(Game*);
 
 		// act() is called whenever a CMD_ACT triggers.
 		// Some bobs may not want to act (e.g. borings)
@@ -170,7 +174,7 @@ class Map_Object {
 
       inline void set_owned_by(char plnum) { m_owned_by = plnum; }
 		inline char get_owned_by() { return m_owned_by; }
-
+		
 		void set_position(Game* g, int x, int y, Field* f = 0);
 		inline bool get_position(int *px, int *py, Field **pf = 0) {
 			if (!m_field) return false;
@@ -221,7 +225,7 @@ class Map_Object {
 	protected:
 		Map_Object_Descr *m_descr;
 		uint m_serial;
-      int m_owned_by; // 0 = neutral, otherwise player number
+		int m_owned_by; // 0 = neutral, otherwise player number
       
 		Field* m_field; // where are we right now?
       Coords m_pos;
@@ -256,6 +260,8 @@ class Map_Object {
 		} task;
 };
 
+inline int get_reverse_dir(int dir) { return 1 + ((dir-1)+3)%6; }
+
 
 /** class Object_Manager
  *
@@ -269,6 +275,8 @@ class Object_Manager {
       Object_Manager() { m_lastserial = 0; }
       ~Object_Manager(void);
 
+		void cleanup(Game *g);
+		
 		inline Map_Object* get_object(uint serial) {
 			objmap_t::iterator it = m_objects.find(serial);
 			if (it == m_objects.end())

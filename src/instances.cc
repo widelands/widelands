@@ -21,6 +21,7 @@
 #include "instances.h"
 #include "game.h"
 #include "map.h"
+#include "player.h"
 
 /** Object_Manager::~Object_Manager()
  *
@@ -28,9 +29,23 @@
  */
 Object_Manager::~Object_Manager(void)
 {
+	// better not throw an exception in a destructor...
+	if (!m_objects.empty())
+		log("Object_Manager: ouch! remaining objects\n");
+}
+
+/*
+===============
+Object_Manager::cleanup
+
+Clear all objects
+===============
+*/
+void Object_Manager::cleanup(Game *g)
+{
 	while(!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
-		free_object(0, it->second);
+		free_object(g, it->second);
 	}
 }
 
@@ -42,6 +57,22 @@ Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owne
 {
 	assert(d);
 
+	// If the object is stationary, kill any other stationary objects on the field
+	if (!d->has_attribute(Map_Object::MOVABLE)) {
+		std::vector<Map_Object*> objs;
+		
+		g->get_map()->find_objects(x, y, 0, Map_Object::MOVABLE, &objs, true);
+		for(uint i = 0; i < objs.size(); i++) {
+			Map_Object *obj = objs[i];
+			
+			assert(!obj->has_attribute(Map_Object::ROBUST));
+				
+			obj->die(g);
+		}
+	
+	}
+	
+	// Create the object
 	Map_Object* obj = d->create_object();
 	
 	m_lastserial++;
@@ -54,9 +85,6 @@ Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owne
 	obj->set_position(g, x, y);
 	obj->init(g);
 	
-	if (obj->has_attribute(Map_Object::ROBUST))
-		g->get_map()->recalc_for_field(x, y);
-	
 	return obj;
 }
 
@@ -68,14 +96,7 @@ void Object_Manager::free_object(Game* g, Map_Object* obj)
 {
 	int x, y;
 
-	if (g) {
-		if (obj->get_current_task())
-			obj->task_end(g); // subtle...
-	
-		if (obj->get_position(&x, &y))
-			if (obj->has_attribute(Map_Object::ROBUST))
-				g->get_map()->recalc_for_field(x, y);
-	}
+	obj->cleanup(g);
 
 	m_objects.erase(obj->m_serial);
 	delete obj;
@@ -173,11 +194,26 @@ Map_Object::Map_Object(Map_Object_Descr* descr)
 Map_Object::~Map_Object()
 {
 	if (m_field) {
-		m_field = 0;
-		*m_linkpprev = m_linknext;
-		if (m_linknext)
-			m_linknext->m_linkpprev = m_linkpprev;
+		log("Map_Object::~Map_Object: m_field != 0, cleanup() not called!\n");
+		*(int *)0 = 0;
 	}
+}
+
+
+/*
+===============
+Map_Object::die
+
+Call this function if you want to remove the object.
+It schedules the object for immediate deletion by the Cmd_Queue.
+
+You should not delete an object directly through the Object_Manager because
+it's hard to tell the backtrace you're called from.
+===============
+*/
+void Map_Object::die(Game *g)
+{
+	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_REMOVE, m_serial, 0, 0);
 }
 
 
@@ -210,20 +246,52 @@ call the base class' task_*() functions in the default branch.
 Most likely, you'll also want a start_task_*()-type function.
 */
 
-/** Map_Object::init(Game*)
- *
- * Make sure you call this from derived classes!
- *
- * Initialize the object by setting the initial task.
- */
+/*
+===============
+Map_Object::init
+
+Make sure you call this from derived classes!
+
+Initialize the object by setting the initial task.
+===============
+*/
 void Map_Object::init(Game* g)
 {
+	if (has_attribute(ROBUST))
+		g->get_map()->recalc_for_field(m_pos.x, m_pos.y);
+
+	// Initialize task system
 	m_lasttask = 0;
 	m_lasttask_success = true;
 	m_nexttask = 0;
 	
 	do_next_task(g);
 }
+
+
+/*
+===============
+Map_Object::cleanup
+
+Perform Game-related cleanup as necessary.
+===============
+*/
+void Map_Object::cleanup(Game *g)
+{
+	if (get_current_task())
+		task_end(g); // subtle...
+	
+	if (m_field) {
+		m_field = 0;
+		*m_linkpprev = m_linknext;
+		if (m_linknext)
+			m_linknext->m_linkpprev = m_linkpprev;
+		
+		if (has_attribute(Map_Object::ROBUST))
+			g->get_map()->recalc_for_field(m_pos.x, m_pos.y);
+	}
+}
+
 
 /** Map_Object::act(Game*)
  *
@@ -486,6 +554,12 @@ void Map_Object::draw(Game *game, Bitmap* dst, int posx, int posy)
 	int dummyx, dummyy;
 	int sx, sy;
 	int ex, ey;
+	const uchar *playercolors = 0;
+	
+	if (get_owned_by()) {
+		Player *player = game->get_player(get_owned_by());
+		playercolors = player->get_playercolor_rgb();
+	}
 	
 	end = m_field;
 	ex = posx;
@@ -519,7 +593,7 @@ void Map_Object::draw(Game *game, Bitmap* dst, int posx, int posy)
 		ey = (int)(f*ey + (1-f)*sy);
 	}
 
-	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, ex, ey);
+	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, ex, ey, playercolors);
 }
 
 

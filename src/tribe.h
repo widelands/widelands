@@ -52,11 +52,13 @@ class Tribe_Descr {
 		inline int get_building_index(const char *name) { return buildings.get_index(name); }
 		inline Building_Descr *get_building_descr(uint idx) { return buildings.get(idx); }
       inline Animation* get_frontier_anim(void) { return &m_anim_frontier; }
+		inline Animation* get_flag_anim(void) { return &m_anim_flag; }
 
    private:
       char m_name[30];
       
       Animation m_anim_frontier;
+		Animation m_anim_flag;
 		
 		Descr_Maintainer<Ware_Descr> wares;
       Descr_Maintainer<Soldier_Descr> soldiers;

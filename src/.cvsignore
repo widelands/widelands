@@ -1,5 +1,7 @@
 *.da
 *.s
+*.d
+*.o
 .deps
 Makefile
 Makefile.in

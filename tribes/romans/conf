@@ -2,6 +2,18 @@
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
+plrclr0_r=0
+plrclr0_g=0
+plrclr0_b=165
+plrclr1_r=0
+plrclr1_g=55
+plrclr1_b=190
+plrclr2_r=0
+plrclr2_g=120
+plrclr2_b=215
+plrclr3_r=0
+plrclr3_g=210
+plrclr3_b=245
 
 [tribe]
 author=Widelands Development Team
@@ -18,3 +30,10 @@ pics=pics/frontier_??.bmp
 hot_spot_x=5
 hot_spot_y=19
 
+[flag]
+pics=pics/flag_??.bmp
+hot_spot_x=1
+hot_spot_y=31
+clrkey_r=255
+clrkey_g=0
+clrkey_b=255

@@ -145,7 +145,7 @@ class Map {
                inline uint get_h(void) { return hd.height; }
                inline World* get_world(void) { return w; }
 					
-			   bool find_objects(int x, int y, uint radius, uint attribute, std::vector<Map_Object*> *list);
+			   bool find_objects(int x, int y, uint radius, uint attribute, std::vector<Map_Object*> *list, bool reverse = false);
 					
 					void recalc_for_field(int fx, int fy);
                Field::Build_Symbol get_build_symbol(int x, int y);
@@ -162,16 +162,22 @@ class Map {
 					int calc_distance(Coords a, Coords b);
 
                inline void get_ln(const int fx, const int fy, int *ox, int *oy);
+               inline void get_ln(const Coords f, Coords *o);
 					inline void get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 					inline void get_rn(const int fx, const int fy, int *ox, int *oy);
+					inline void get_rn(const Coords f, Coords *o);
 					inline void get_rn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 					inline void get_tln(const int fx, const int fy, int *ox, int *oy);
+					inline void get_tln(const Coords f, Coords *o);
 					inline void get_tln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 					inline void get_trn(const int fx, const int fy, int *ox, int *oy);
+					inline void get_trn(const Coords f, Coords *o);
 					inline void get_trn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 					inline void get_bln(const int fx, const int fy, int *ox, int *oy);
+					inline void get_bln(const Coords f, Coords *o);
 					inline void get_bln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 					inline void get_brn(const int fx, const int fy, int *ox, int *oy);
+					inline void get_brn(const Coords f, Coords *o);
 					inline void get_brn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 
 					// Field/screen coordinates
@@ -218,6 +224,8 @@ class Path {
 	
 public:
 	Path() { m_map = 0; }
+	
+	inline Map *get_map() const { return m_map; }
 	
 	inline bool is_valid() const { return m_map; }
 	inline const Coords &get_start() const { return m_start; }
@@ -295,6 +303,13 @@ inline void Map::get_ln(const int fx, const int fy, int *ox, int *oy)
 	if (*ox < 0) *ox += hd.width;
 }
 
+inline void Map::get_ln(const Coords f, Coords *o)
+{
+	o->y = f.y;
+	o->x = f.x-1;
+	if (o->x < 0) o->x += hd.width;
+}
+
 inline void Map::get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
 {
 	*oy = fy;
@@ -308,6 +323,13 @@ inline void Map::get_rn(const int fx, const int fy, int *ox, int *oy)
 	*oy = fy;
 	*ox = fx+1;
 	if (*ox >= (int)hd.width) *ox = 0;
+}
+
+inline void Map::get_rn(const Coords f, Coords *o)
+{
+	o->y = f.y;
+	o->x = f.x+1;
+	if (o->x >= (int)hd.width) o->x = 0;
 }
 
 inline void Map::get_rn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
@@ -327,6 +349,17 @@ inline void Map::get_tln(const int fx, const int fy, int *ox, int *oy)
 		if (*oy < 0) { *oy += hd.height; }
 		(*ox)--;
 		if (*ox < 0) { *ox += hd.width; }
+	}
+}
+
+inline void Map::get_tln(const Coords f, Coords *o)
+{
+	o->y = f.y-1;
+	o->x = f.x;
+	if (o->y & 1) {
+		if (o->y < 0) { o->y += hd.height; }
+		(o->x)--;
+		if (o->x < 0) { o->x += hd.width; }
 	}
 }
 
@@ -355,6 +388,17 @@ inline void Map::get_trn(const int fx, const int fy, int *ox, int *oy)
 	if (*oy < 0) { *oy += hd.height; }
 }
 
+inline void Map::get_trn(const Coords f, Coords *o)
+{
+	o->x = f.x;
+	if (f.y & 1) {
+		(o->x)++;
+		if (o->x >= (int)hd.width) { o->x = 0; }
+	}
+	o->y = f.y-1;
+	if (o->y < 0) { o->y += hd.height; }
+}
+
 inline void Map::get_trn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)
 {
 	*ox = fx;
@@ -377,6 +421,17 @@ inline void Map::get_bln(const int fx, const int fy, int *ox, int *oy)
 	if (*oy & 1) {
 		(*ox)--;
 		if (*ox < 0) { *ox += hd.width; }
+	}
+}
+
+inline void Map::get_bln(const Coords f, Coords *o)
+{
+	o->y = f.y+1;
+	o->x = f.x;
+	if (o->y >= (int)hd.height) { o->y = 0; }
+	if (o->y & 1) {
+		(o->x)--;
+		if (o->x < 0) { o->x += hd.width; }
 	}
 }
 
@@ -403,6 +458,17 @@ inline void Map::get_brn(const int fx, const int fy, int *ox, int *oy)
 	}
 	*oy = fy+1;
 	if (*oy >= (int)hd.height) { *oy = 0; }
+}
+
+inline void Map::get_brn(const Coords f, Coords *o)
+{
+	o->x = f.x;
+	if (f.y & 1) {
+		(o->x)++;
+		if (o->x >= (int)hd.width) { o->x = 0; }
+	}
+	o->y = f.y+1;
+	if (o->y >= (int)hd.height) { o->y = 0; }
 }
 
 inline void Map::get_brn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o)

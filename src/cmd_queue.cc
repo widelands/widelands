@@ -117,6 +117,16 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		break;
 	}
 	
+	case CMD_REMOVE:
+	{
+		// remove a Map_Object safely
+		assert(c->arg1);
+		Map_Object *obj = m_game->get_objects()->get_object(c->arg1);
+		if (obj)
+			m_game->get_objects()->free_object(m_game, obj);
+		break;
+	}
+	
 	default:
 		assert(0);
 		break;

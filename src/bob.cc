@@ -61,6 +61,7 @@ shadowclr_[r,g,b]	color for shadow pixels
 */
 void EncodeData::parse(Section *s)
 {
+	int i;
 	int r, g, b;
 
 	// Read color key
@@ -85,7 +86,27 @@ void EncodeData::parse(Section *s)
 		shadow_b = b;
 	}
 
-	// TODO: read player color codes	
+	// Read player color codes	
+	for(i = 0; i < 4; i++) {
+		char keyname[32];
+		
+		snprintf(keyname, sizeof(keyname), "plrclr%i_r", i);
+		r = s->get_int(keyname, -1);
+		snprintf(keyname, sizeof(keyname), "plrclr%i_g", i);
+		g = s->get_int(keyname, -1);
+		snprintf(keyname, sizeof(keyname), "plrclr%i_b", i);
+		b = s->get_int(keyname, -1);
+		
+		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+			break;
+		
+		plrclr_r[i] = r;
+		plrclr_g[i] = g;
+		plrclr_b[i] = b;
+	}
+	
+	if (i == 4)
+		hasplrclrs = true;
 }
 
 
