@@ -102,6 +102,8 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
    but->set_title("OK");
+   m_ok_btn=but;
+   but->set_enabled(false);
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
    but->set_title("Cancel");
@@ -159,6 +161,8 @@ void Main_Menu_Load_Map::clicked(int id) {
  */
 void Main_Menu_Load_Map::selected(int i) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
+
+   m_ok_btn->set_enabled(true);
 
    if(!g_fs->IsDirectory(name)) {
       Map* map=new Map();

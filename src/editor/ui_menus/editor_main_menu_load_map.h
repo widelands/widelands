@@ -28,6 +28,7 @@ class UIEdit_Box;
 class UIListselect;
 class UITextarea;
 class UIMultiline_Textarea;
+class UIButton;
 
 /*
 =================================================
@@ -55,7 +56,8 @@ class Main_Menu_Load_Map : public UIWindow {
       UIMultiline_Textarea* m_descr;
       Editor_Interactive *m_parent;
       UIListselect* m_ls;
-       
+      UIButton* m_ok_btn;
+
       std::string m_basedir;
       std::string m_curdir;
       std::string m_parentdir;
