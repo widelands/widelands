@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "widelands.h"
 #include "ui.h"
-#include "font.h"
 
 /*
 ==============================================================================
@@ -35,8 +34,7 @@ Panel *Panel::_g_mousein = 0;
 uint Panel::s_default_cursor = 0;
 
 
-/** Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh)
- *
+/**
  * Initialize a panel, link it into the parent's queue.
  */
 Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh)
@@ -72,8 +70,7 @@ Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const ui
 	update(0, 0, _w, _h);
 }
 
-/** Panel::~Panel()
- *
+/** 
  * Unlink the panel from the parent's queue
  */
 Panel::~Panel()
@@ -111,12 +108,8 @@ Panel::~Panel()
 }
 
 
-/*
-===============
-Panel::free_children
-
+/**
 Free all of the panel's children.
-===============
 */
 void Panel::free_children()
 {
@@ -125,14 +118,9 @@ void Panel::free_children()
 }
 
 
-/*
-===============
-Panel::run
-
-Enters the event loop; all events will be handled by this panel.
-
-Returns the return code passed to end_modal
-===============
+/**
+ * Enters the event loop; all events will be handled by this panel.
+ * Returns the return code passed to end_modal
 */
 int Panel::run()
 {
@@ -188,11 +176,8 @@ int Panel::run()
 	return _retcode;
 }
 
-/** Panel::end_modal(int code)
- *
+/**
  * Cause run() to return as soon as possible, with the given return code
- *
- * Args: code	run() return code
  */
 void Panel::end_modal(int code)
 {
@@ -200,28 +185,22 @@ void Panel::end_modal(int code)
 	_retcode = code;
 }
 
-/** Panel::start()
- *
+/** 
  * Called once before the event loop in run is started
  */
 void Panel::start()
 {
 }
 
-/** Panel::end()
- *
+/** 
  * Called once after the event loop in run() has ended
  */
 void Panel::end()
 {
 }
 
-/** Panel::set_size(const uint nw, const uint nh)
- *
+/** 
  * Resizes the panel.
- *
- * Args: nw		new width
- *       nh		new height
  */
 void Panel::set_size(const uint nw, const uint nh)
 {
@@ -241,12 +220,8 @@ void Panel::set_size(const uint nw, const uint nh)
 	update(0, 0, upw, uph);
 }
 
-/** Panel::set_pos(const int nx, const int ny)
- *
+/** 
  * Move the panel. Panel's position is relative to the parent.
- *
- * Args: nx		new x coordinate
- *       ny		new y coordinate
  */
 void Panel::set_pos(const int nx, const int ny)
 {
@@ -258,26 +233,18 @@ void Panel::set_pos(const int nx, const int ny)
 	_needdraw = nd;
 }
 
-/*
-===============
-Panel::set_inner_size
-
-Set the size of the inner area (total area minus border)
-===============
-*/
+/**
+ * Set the size of the inner area (total area minus border)
+ */
 void Panel::set_inner_size(uint nw, uint nh)
 {
 	set_size(nw+_lborder+_rborder, nh+_tborder+_bborder);
 }
 
 
-/*
-===============
-Panel::fit_inner
-
-Resize so that we match the size of the inner panel.
-===============
-*/
+/**
+ * Resize so that we match the size of the inner panel.
+ */
 void Panel::fit_inner(Panel* inner)
 {
 	set_inner_size(inner->get_w(), inner->get_h());
@@ -285,16 +252,10 @@ void Panel::fit_inner(Panel* inner)
 }
 
 
-/** Panel::set_border(uint l, uint r, uint t, uint b)
- *
+/** 
  * Change the border dimensions.
  * Note that since position and total size aren't changed, so that the size
  * and position of the inner area will change.
- *
- * Args: l	size of left border, in pixels
- *       r	size of right border, in pixels
- *       t	size of top border, in pixels
- *       b	size of bottom border, in pixels
  */
 void Panel::set_border(uint l, uint r, uint t, uint b)
 {
@@ -305,8 +266,7 @@ void Panel::set_border(uint l, uint r, uint t, uint b)
 	update(0, 0, get_w(), get_h());
 }
 
-/** Panel::move_to_top()
- *
+/** 
  * Make this panel the top-most panel in the parent's Z-order.
  */
 void Panel::move_to_top()
@@ -334,8 +294,7 @@ void Panel::move_to_top()
 		_parent->_lchild = this;
 }
 
-/** Panel::set_visible(bool on)
- *
+/** 
  * Makes the panel visible or invisible
  */
 void Panel::set_visible(bool on)
@@ -344,56 +303,29 @@ void Panel::set_visible(bool on)
    _flags &= ~pf_visible;
 	if (on)
 		_flags |= pf_visible;
-
+		
 	update(0, 0, _w, _h);
 }
 
-/*
-===============
-Panel::draw [virtual]
-
-Redraw the panel. Note that all drawing coordinates are relative to the
-inner area: you cannot overwrite the panel border in this function.
-Child panels will be drawn over anything drawn in this function.
-===============
-*/
+/**
+ * [virtual]
+ * Redraw the panel. Note that all drawing coordinates are relative to the
+ * inner area: you cannot overwrite the panel border in this function.
+ */
 void Panel::draw(RenderTarget* dst)
 {
 }
 
-/*
-===============
-Panel::draw_border [virtual]
-
-Redraw the panel border.
-===============
-*/
+/**
+ * [virtual]
+ * Redraw the panel border.
+ */
 void Panel::draw_border(RenderTarget* dst)
 {
 }
 
-
-/*
-===============
-Panel::draw_overlay [virtual]
-
-Draw overlays that appear over all child panels.
-This can be used e.g. for debug information.
-===============
-*/
-void Panel::draw_overlay(RenderTarget* dst)
-{
-}
-
-
-/** Panel::update(int x, int y, int w, int h);
- *
+/** 
  * Mark a part of a panel for updating.
- *
- * Args: x	coordinates of the rectangle, relative to the panel
- *       y
- *       w	size of the rectangle
- *       h
  */
 void Panel::update(int x, int y, int w, int h)
 {
@@ -428,22 +360,15 @@ void Panel::update(int x, int y, int w, int h)
 	}
 }
 
-/** Panel::update_inner(int x, int y, int w, int h)
- *
+/**
  * Mark a part of a panel for updating.
- *
- * Args: x	coordinates of the rectangle, relative to the inner rectangle
- *       y
- *       w	size of the rectangle
- *       h
  */
 void Panel::update_inner(int x, int y, int w, int h)
 {
 	update(x-_lborder, y-_tborder, w, h);
 }
 
-/** Panel::set_cache(bool enable)
- *
+/** 
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
@@ -470,8 +395,7 @@ void Panel::set_cache(bool enable)
 */
 }
 
-/** Panel::think()
- *
+/** 
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.
  * The default implementation calls the children's think function.
@@ -485,13 +409,8 @@ void Panel::think()
 }
 
 
-/*
-===============
-Panel::get_mouse_x
-Panel::get_mouse_y
-
-Get mouse position relative to this panel
-===============
+/**
+ * Get mouse position relative to this panel
 */
 int Panel::get_mouse_x()
 {
@@ -510,12 +429,8 @@ int Panel::get_mouse_y()
 }
 
 
-/*
-===============
-Panel::set_mouse_pos
-
-Set mouse position relative to this panel
-===============
+/**
+ * Set mouse position relative to this panel
 */
 void Panel::set_mouse_pos(int x, int y)
 {
@@ -527,11 +442,7 @@ void Panel::set_mouse_pos(int x, int y)
 
 
 /*
-===============
-Panel::center_mouse
-
-Center the mouse on this panel.
-===============
+ * Center the mouse on this panel.
 */
 void Panel::center_mouse()
 {
@@ -539,29 +450,20 @@ void Panel::center_mouse()
 }
 
 
-/** Panel::handle_mousein(uint x, uint y, bool inside)
- *
+/** 
  * Called whenever the mouse enters or leaves the panel. The inside state
  * is relative to the outer area of a panel. This means that the mouse
  * position received in handle_mousemove may be negative while the mouse is
  * still inside the panel as far as handle_mousein is concerned.
- *
- * Args: inside	true if the cursor has entered the panel
  */
 void Panel::handle_mousein(bool inside)
 {
 }
 
-/** Panel::handle_mouseclick(uint btn, bool down, int x, int y)
- *
+/** 
  * Called whenever the user clicks into the panel.
  * If the panel doesn't process the mouse-click, it is handed to the panel's
  * parent.
- *
- * Args: btn	0 = left, 1 = right
- *       down	true if the button was pressed, false if released
- *       x		mouse coordinates relative to the inner rectangle
- *       y
  *
  * Returns: true if the mouseclick was processed
  */
@@ -570,37 +472,27 @@ bool Panel::handle_mouseclick(uint btn, bool down, int x, int y)
 	return false;
 }
 
-/** Panel::handle_mousemove(int x, int y, uint btns)
- *
+/**
  * Called when the mouse is moved while inside the panel
  *
- * Args: x		mouse coordinates relative to the inner rectangle
- *       y
- *       xdiff	relative mouse movement
- *       ydiff
- *       btns	bitmask of currently pressed buttons: (1<<0) left, (1<<1) right
  */
 void Panel::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 }
 
-/*
-===============
-Panel::handle_key
-
-Receive a keypress or keyrelease event.
-code is one of the KEY_xxx constants, c is the corresponding printable
-character or 0 for special, unprintable keys.
-
-Return true if you processed the key.
-===============
+/**
+ * Receive a keypress or keyrelease event.
+ * code is one of the KEY_xxx constants, c is the corresponding printable
+ * character or 0 for special, unprintable keys.
+ *
+ * Return true if you processed the key.
 */
 bool Panel::handle_key(bool down, int code, char c)
 {
 	return false;
 }
 
-/** Panel::set_handle_mouse(bool yes)
+/** 
  *
  * Enable/Disable mouse handling by this panel
  * Default is enabled. Note that when mouse handling is disabled, child panels
@@ -616,14 +508,12 @@ void Panel::set_handle_mouse(bool yes)
 		_flags &= ~pf_handle_mouse;
 }
 
-/** Panel::grab_mouse(bool grab)
+/** 
  *
  * Enable/Disable mouse grabbing. If a panel grabs the mouse, all mouse
  * related events will be sent directly to that panel.
  * You should only grab the mouse as a response to a mouse event (e.g.
  * clicking a mouse button)
- *
- * Args: grab	true if grabbing is to be enabled
  */
 void Panel::grab_mouse(bool grab)
 {
@@ -635,31 +525,25 @@ void Panel::grab_mouse(bool grab)
 	}
 }
 
-/*
-===============
-Panel::set_can_focus
-===============
+/**
+ * Set if this panel can receive the keyboard focus
 */
 void Panel::set_can_focus(bool yes)
 {
-
+   
 	if (yes) {
 		_flags |= pf_can_focus;
    }	else {
 		_flags &= ~pf_can_focus;
-
+		
 		if (_parent && _parent->_focus == this)
 			_parent->_focus = 0;
 	}
 }
 
-/*
-===============
-Panel::focus
-
-Grab the keyboard focus
-===============
-*/
+/**
+ * Grab the keyboard focus, if it can
+ */
 void Panel::focus()
 {
 
@@ -677,8 +561,7 @@ void Panel::focus()
 	_parent->focus();
 }
 
-/** Panel::set_think(bool yes)
- *
+/** 
  * Enables/Disables calling think() during the event loop.
  * The default is enabled.
  *
@@ -692,8 +575,7 @@ void Panel::set_think(bool yes)
 		_flags &= ~pf_think;
 }
 
-/** Panel::die()
- *
+/** 
  * Cause this panel to be removed on the next frame.
  * Use this for a panel that needs to destroy itself after a button has
  * been pressed (e.g. non-modal dialogs).
@@ -710,7 +592,7 @@ void Panel::die()
 	}
 }
 
-/** Panel::check_child_death() [private]
+/** [private]
  *
  * Recursively walk the panel tree, killing panels that are marked for death
  * using die().
@@ -731,41 +613,36 @@ void Panel::check_child_death()
    _flags &= ~pf_child_die;
 }
 
-/*
-===============
-Panel::do_draw [private]
-
-dst is the RenderTarget for the parent Panel.
-Subset for the border first and draw the border, then subset for the inner area
-and draw the inner area.
-Draw child panels after drawing self.
-===============
+/**
+ * [private]
+ * dst is the RenderTarget for the parent Panel.
+ * Subset for the border first and draw the border, then subset for the inner area
+ * and draw the inner area.
+ * Draw child panels after drawing self.
 */
 void Panel::do_draw(RenderTarget* dst)
 {
 	if (!get_visible())
 		return;
-
+	
 	if (!_cache)
 	{
 		Rect outerrc;
 		Point outerofs;
-
+		
 		if (dst->enter_window(Rect(_x, _y, _w, _h), &outerrc, &outerofs)) {
 			draw_border(dst);
-
+			
 			Rect innerwindow(_lborder, _tborder, _w-(_lborder+_rborder), _h-(_tborder+_bborder));
-
+			
 			if (dst->enter_window(innerwindow, 0, 0)) {
 				draw(dst);
 
 				// draw back to front
 				for(Panel *child = _lchild; child; child = child->_prev)
 					child->do_draw(dst);
-
-				draw_overlay(dst);
 			}
-
+			
 			dst->set_window(outerrc, outerofs);
 		}
 	}
@@ -776,9 +653,9 @@ void Panel::do_draw(RenderTarget* dst)
 		if (_needdraw) {
 			draw_border(_cache);
 
-			RenderTarget* inner = _cache->enter_window(_lborder, _tborder,
+			RenderTarget* inner = _cache->enter_window(_lborder, _tborder, 
 			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
-
+			
 			if (inner) {
 				draw(inner);
 
@@ -798,13 +675,8 @@ void Panel::do_draw(RenderTarget* dst)
 }
 
 
-/** Panel::get_mousein(int x, int y)
- *
+/**
  * Return the panel that receives mouse clicks at the given location
- *
- * Args: x	mouse coordinates relative to panel inner rectangle
- *       y
- *
  * Returns: topmost panel at the given coordinates
  */
 Panel *Panel::get_mousein(int x, int y)
@@ -828,12 +700,9 @@ Panel *Panel::get_mousein(int x, int y)
 	return child;
 }
 
-/** Panel::do_mousein(bool inside)
- *
+/** 
  * Propagate mouseleave events (e.g. for buttons that are inside a different
  * window)
- *
- * Args: inside		true if the mouse enters the panel
  */
 void Panel::do_mousein(bool inside)
 {
@@ -844,14 +713,8 @@ void Panel::do_mousein(bool inside)
 	handle_mousein(inside);
 }
 
-/** Panel::do_mouseclick(uint btn, bool down, int x, int y)
- *
+/** 
  * Propagate mouse clicks to the appropriate panel.
- *
- * Args: btn	button number (0 = left, 1 = right)
- *       down	true if button was pressed
- *       x		mouse coordinates relative to panel
- *       y
  *
  * Returns: true, if the click was processed
  */
@@ -878,15 +741,8 @@ bool Panel::do_mouseclick(uint btn, bool down, int x, int y)
 	}
 }
 
-/** Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
- *
+/** 
  * Propagate mouse movement to the appropriate panel.
- *
- * Args: x		mouse coordinates relative to panel
- *       y
- *       xdiff	relative mouse movement
- *       ydiff
- *       btns	bitmask of pressed buttons
  */
 void Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
@@ -906,13 +762,9 @@ void Panel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 	}
 }
 
-/*
-===============
-Panel::do_key
-
-Pass the key event to the focussed child.
-If it doesn't process the key, we'll see if we can use the event.
-===============
+/**
+ * Pass the key event to the focussed child.
+ * If it doesn't process the key, we'll see if we can use the event.
 */
 bool Panel::do_key(bool down, int code, char c)
 {
@@ -924,12 +776,9 @@ bool Panel::do_key(bool down, int code, char c)
 	return handle_key(down, code, c);
 }
 
-/** Panel::ui_trackmouse(int *x, int *y) [static]
+/** 
  *
  * Determine which panel is to receive a mouse event.
- *
- * Args: x	mouse coordinates, relative to the screen
- *       y	converted to coordinates local to the panel
  *
  * Returns: the panel which receives the mouse event
  */
@@ -967,13 +816,10 @@ Panel *Panel::ui_trackmouse(int *x, int *y)
 	return rcv;
 }
 
-/*
-===============
-Panel::ui_mouseclick [static]
- 
-Input callback function. Pass the mouseclick event to the currently modal
-panel.
-===============
+/**
+ * [static]
+ * Input callback function. Pass the mouseclick event to the currently modal
+ * panel.
 */
 void Panel::ui_mouseclick(bool down, int button, uint btns, int x, int y)
 {
@@ -986,13 +832,11 @@ void Panel::ui_mouseclick(bool down, int button, uint btns, int x, int y)
 	p->do_mouseclick(button, down, x, y);
 }
 
-/*
-===============
-Panel::ui_mousemove [static]
-
-Input callback function. Pass the mousemove event to the currently modal
-panel.
-===============
+/**
+ * [static]
+ * 
+ * Input callback function. Pass the mousemove event to the currently modal
+ * panel.
 */
 void Panel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 {
@@ -1014,13 +858,11 @@ void Panel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 	p->do_mousemove(x, y, xdiff, ydiff, btns);
 }
 
-/*
-===============
-Panel::ui_key [static]
-
-Input callback function. Pass the key event to the currently modal panel
-===============
-*/
+/**
+ * [static]
+ * 
+ * Input callback function. Pass the key event to the currently modal panel
+ */
 void Panel::ui_key(bool down, int code, char c)
 {
 	_modal->do_key(down, code, c);

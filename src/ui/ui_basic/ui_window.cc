@@ -24,7 +24,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/** class Window
+/* class Window
  *
  * The graphics (see pictures) are used in the following manner: (Example)
  *
@@ -40,8 +40,7 @@
  */
 
 
-/** Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
- *
+/** 
  * Initialize a framed window.
  *
  * Args: parent	parent panel
@@ -70,7 +69,7 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
 	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/win_bg.png");
 }
 
-/** Window::~Window()
+/** 
  *
  * Resource cleanup
  */
@@ -79,12 +78,8 @@ Window::~Window()
 }
 
 
-/*
-===============
-Window::set_title
-
-Replace the current title with a new one
-===============
+/**
+ * Replace the current title with a new one
 */
 void Window::set_title(const char *text)
 {
@@ -92,13 +87,9 @@ void Window::set_title(const char *text)
 	update(0, 0, get_w(), WINDOW_BORDER);
 }
 
-/*
-===============
-Window::move_to_mouse
-
+/**
 Move the window so that it is under the mouse cursor.
 Ensure that the window doesn't move out of the screen.
-===============
 */
 void Window::move_to_mouse()
 {
@@ -124,12 +115,8 @@ void Window::move_to_mouse()
 }
 
 
-/*
-===============
-Window::center_to_parent
-
+/**
 Move the window so that it is centered wrt the parent.
-===============
 */
 void Window::center_to_parent()
 {
@@ -141,12 +128,8 @@ void Window::center_to_parent()
 }
 
 
-/*
-===============
-Window::draw_border
-
+/**
 Redraw the window frame and background
-===============
 */
 void Window::draw_border(RenderTarget* dst)
 {
@@ -201,8 +184,7 @@ void Window::draw_border(RenderTarget* dst)
 	}
 }
 
-/** Window::handle_mouseclick(uint btn, bool down, int mx, int my)
- *
+/** 
  * Left-click: drag the window
  * Right-click: close the window
  */
@@ -224,8 +206,7 @@ bool Window::handle_mouseclick(uint btn, bool down, int mx, int my)
 	return true;
 }
 
-/** Window::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
- *
+/** 
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
@@ -254,70 +235,3 @@ void Window::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
 
 
 
-/*
-==============================================================================
-
-UniqueWindow IMPLEMENTATION
-
-==============================================================================
-*/
-
-
-/*
-===============
-UniqueWindowRegistry::~UniqueWindowRegistry
-
-In order to avoid dangling pointers, we need to kill our contained window here.
-===============
-*/
-UniqueWindowRegistry::~UniqueWindowRegistry()
-{
-	if (window)
-		delete window;
-}
-
-
-/*
-===============
-UniqueWindow::UniqueWindow
-
-Register, position according to the registry information.
-===============
-*/
-UniqueWindow::UniqueWindow(Panel* parent, UniqueWindowRegistry* reg, int w, int h, std::string title)
-	: Window(parent, 0, 0, w, h, title.c_str())
-{
-	m_registry = reg;
-	m_usedefaultpos = true;
-
-	if (m_registry)
-	{
-		if (m_registry->window)
-			delete m_registry->window;
-
-		m_registry->window = this;
-		if (m_registry->x >= 0) {
-			set_pos(m_registry->x, m_registry->y);
-			m_usedefaultpos = false;
-		}
-	}
-}
-
-
-/*
-===============
-UniqueWindow::~UniqueWindow
-
-Unregister, save latest position.
-===============
-*/
-UniqueWindow::~UniqueWindow()
-{
-	if (m_registry) {
-		assert(m_registry->window == this);
-
-		m_registry->window = 0;
-		m_registry->x = get_x();
-		m_registry->y = get_y();
-	}
-}

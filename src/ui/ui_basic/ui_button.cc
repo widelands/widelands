@@ -20,17 +20,8 @@
 #include "widelands.h"
 #include "ui.h"
 
-/** class Button
- *
- * This defines a button.
- */
-
-/*
-===============
-Button::Button
-
+/**
 Initialize a Button
-===============
 */
 Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int id, bool flat)
 	: Panel(parent, x, y, w, h)
@@ -56,12 +47,8 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 }
 
 
-/*
-===============
-Button::~Button
-
+/**
 Free any resources associated with the button
-===============
 */
 Button::~Button()
 {
@@ -69,12 +56,8 @@ Button::~Button()
 }
 
 
-/*
-===============
-Button::remove_title
-
+/**
 Remove any title the button currently carries.
-===============
 */
 void Button::remove_title()
 {
@@ -83,12 +66,8 @@ void Button::remove_title()
 }
 
 
-/*
-===============
-Button::set_pic
-
+/**
 Sets a new picture for the button.
-===============
 */
 void Button::set_pic(uint picid)
 {
@@ -100,12 +79,8 @@ void Button::set_pic(uint picid)
 }
 
 
-/*
-===============
-Button::set_title
-
+/**
 Set a text title for the button
-===============
 */
 void Button::set_title(const char* title)
 {
@@ -118,13 +93,9 @@ void Button::set_title(const char* title)
 }
 
 
-/*
-===============
-Button::set_enabled
-
+/**
 Enable/Disable the button (disabled buttons can't be clicked).
 Buttons are enabled by default
-===============
 */
 void Button::set_enabled(bool on)
 {
@@ -140,12 +111,8 @@ void Button::set_enabled(bool on)
 }
 
 
-/*
-===============
-Button::draw
-
+/**
 Redraw the button
-===============
 */
 void Button::draw(RenderTarget* dst)
 {
@@ -217,12 +184,8 @@ void Button::draw(RenderTarget* dst)
 }
 
 
-/*
-===============
-Button::handle_mousein
-
+/**
 Update highlighted status
-===============
 */
 void Button::handle_mousein(bool inside)
 {
@@ -234,12 +197,8 @@ void Button::handle_mousein(bool inside)
 }
 
 
-/*
-===============
-Button::handle_mouseclick
-
+/**
 Update the pressed status of the button
-===============
 */
 bool Button::handle_mouseclick(uint btn, bool down, int x, int y)
 {
