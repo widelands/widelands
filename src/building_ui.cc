@@ -148,7 +148,7 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Player* parent, Building* building,
 	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_ok, RGBColor(0,0,255)));
 
 	btn = new UIButton(this, 94, 50, 60, 34, 2);
-	btn->clicked.set(this, &UIPanel::die);
+	btn->clicked.set(this, &BulldozeConfirm::die);
 	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_cancel, RGBColor(0,0,255)));
 
 	btn->center_mouse();
