@@ -347,6 +347,12 @@ void Graphic::set_mode(ushort x, ushort y, Mode m) {
    } else {
       sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
    }
+   if (!sc) {
+      char buf[256];
+	  sprintf(buf, "Couldn't set video mode: %s", SDL_GetError());
+      tell_user(buf);
+	  exit(0);
+   }
    mode=m;
    screenbmp.w=x;
    screenbmp.pitch=x;

@@ -145,7 +145,7 @@ void MapSelectMenu::map_selected(int id)
 			ok->set_enabled(true);
 		} else {
 			taname->set_text("(bad map file)");
-			taname->set_text(0);
+			taauthor->set_text(0);
 			tasize->set_text(0);
 			tanplayers->set_text(0);
 			tadescr->set_text(0);

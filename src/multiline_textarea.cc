@@ -84,6 +84,8 @@ void Multiline_Textarea::clear()
 		delete (Pic *)_lines.element_at(i);
 	_lines.flush(1);
 	_firstvis = 0;
+
+	update(0, 0, get_w(), get_h());
 }
 
 /** Multiline_Textarea::set_text(const char *text)
@@ -96,6 +98,9 @@ void Multiline_Textarea::clear()
 void Multiline_Textarea::set_text(const char *text)
 {
 	clear();
+
+	if (!text) // consistency with Textarea
+		return;
 
 	int i=0;
 	int n=0;

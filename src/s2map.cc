@@ -28,8 +28,67 @@
 // TEMP
 #include <iostream.h>
 #define hex ios::hex
-#define dec ios::dec 
+#define dec ios::dec
 
+/** uchar *Map::load_s2mf_section(Binary_file *file, int width, int height)
+ *
+ * Some of the original S2 maps have rather odd sizes. In that case, however,
+ * width (and height?) are rounded up to some alignment. The in-file size of
+ * a section is stored in the section header (I think ;)).
+ * This is the work-around.
+ *
+ * Args: file	the file to read from
+ *       width	desired width to pack to
+ *       height	desired height to pack to
+ *
+ * Returns: Pointer to the (packed) contents of the section. 0 if the read
+ *          failed.
+ *          If successful, you must free() the returned are of memory
+ */
+uchar *Map::load_s2mf_section(Binary_file *file, int width, int height)
+{
+	ushort dw, dh;
+	char buffer[256];
+	ushort one;
+	long size;
+
+	file->read(buffer, 6);
+	if ((buffer[0] != 0x10) ||
+	    (buffer[1] != 0x27) ||
+	    (buffer[2] != 0x00) ||
+	    (buffer[3] != 0x00) ||
+	    (buffer[4] != 0x00) ||
+	    (buffer[5] != 0x00)) {
+		cerr << "Section marker not found" << endl;
+		return 0;
+	}
+
+	file->read(&dw, 2);
+	file->read(&dh, 2);
+
+	file->read(&one, 2);
+	assert(one == 1);
+	file->read(&size, 4);
+	assert(size == dw*dh);
+
+	if (dw < width || dh < height) {
+		cerr << "Section not big enough" << endl;
+		return 0;
+	}
+
+	uchar *section = (uchar *)malloc(dw * dh);
+	int y;
+	for(y = 0; y < height; y++) {
+		file->read(section + y*width, width);
+		file->read(buffer, dw-width); // alignment junk
+	}
+	while(y < dh) {
+		file->read(buffer, dw); // more alignment junk
+		y++;
+	}
+
+	return section;
+}
 
 /** int Map::load_s2mf(const char* filen)
  *
@@ -42,9 +101,7 @@
  */
 int Map::load_s2mf(const char* filen) {
 		  Binary_file file;
-		  char* buffer = new char[200];
-		  char c;
-		  int read=0;
+		  uchar *section, *pc;
 		  uint x=0;
 		  uint y=0;
 
@@ -108,64 +165,34 @@ int Map::load_s2mf(const char* filen) {
 
 		  ////           S E C T I O N    1 : H E I G H T S
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
-					 cerr << "Heights --> NOT FOUND in file" << endl;
-					 return ERR_FAILED;
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
+					cerr << "Heights --> NOT FOUND in file" << endl;
+					return ERR_FAILED;
 		  }
-		  read+=6;
-
-		  //  Don't know what this is!
-		  file.read(buffer, 10 );
-		  read+=10;
 
 		  Field *f = fields;
+		  pc = section;
 		  for(y=0; y<hd.height; y++) {
-				for(x=0; x<hd.width; x++, f++) {
-					file.read(&c, 1);
-					read++;
-					f->set_height(c);
-				}
+				for(x=0; x<hd.width; x++, f++, pc++)
+					f->set_height(*pc);
 		  }
+		  free(section);
 
 		  ////				S E C T I O N		2: Landscape
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
-					  cerr << "LANDSCAPE --> NOT FOUND in file" << endl;
-					 return ERR_FAILED;
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
+					cerr << "LANDSCAPE --> NOT FOUND in file" << endl;
+					return ERR_FAILED;
 		  }
-		  read+=6;
-
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
 
 		  f = fields;
+		  pc = section;
 		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++, f++) {
-								file.read(&c, sizeof(unsigned char));
-								read++;
+					 for(x=0; x<hd.width; x++, f++, pc++) {
+					 			char c = *pc;
+								c &= 0x1f;
 								switch((int)c) {
 										  case 0x00: c=0; break;
 										  case 0x01: c=1; break;
@@ -186,44 +213,31 @@ int Map::load_s2mf(const char* filen) {
 										  case 0x10: c=14; break;
 										  case 0x12: c=15; break;
 
-										  case 0x40: /*ERR("Ships (and Havens) are not supported!!\n"); c=6; break;*/
 										  case 0x07: c=4; break; // Unknown texture
 										  case 0x13: c=4; break; // unknown texture!
-										  default: cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
+										  default: c = 7; cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
 								}
 								f->set_texd(w->get_texture(c));
 					 }
 		  }
+		  free(section);
 
 
 
 		  // S E C T I O N 3  -------- LANDSCAPE 2
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "LANDSCAPE 2 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
 
 		  f = fields;
+		  pc = section;
 		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++, f++) {
-								file.read(&c, sizeof(unsigned char));
-								read++;
+					 for(x=0; x<hd.width; x++, f++, pc++) {
+					 			char c = *pc;
+								c &= 0x1f;
 								switch((int)c) {
 										  case 0x00: c=0; break;
 										  case 0x01: c=1; break;
@@ -244,74 +258,33 @@ int Map::load_s2mf(const char* filen) {
 										  case 0x10: c=14; break;
 										  case 0x12: c=15; break;
 
-										  case 0x40: /*ERR("Ships (and Havens) are not supported!!\n"); c=6;*/ break;
 										  case 0x07: c=4; break; // Unknown texture
 										  case 0x13: c=4; break; // unknown texture!
-										  default: cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
+										  default: c = 7; cerr << "ERROR: Unknown texture1: " << hex << c << dec << " (" << x << "," << y << ") (defaults to water!)" << endl;
 								}
 								f->set_texr(w->get_texture(c));
 					 }
 		  }
+		  free(section);
 
 
 		  // S E C T I O N 4  -------- UNKNOWN !!! Skip
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section UNKNOWN --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-								read++;
-					 }
-		  }
+		  free(section);
 
 		 // S E C T I O N 5  -------- Landscape (rocks, stuff..)
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 5 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-								// ret->get_field(x,y)->bob=c;
-								read++;
-					 }
-		  }
+		  free(section);
 
 		  // S E C T I O N 6  -------- Ways
 		  // This describes where you can put ways
@@ -325,33 +298,12 @@ int Map::load_s2mf(const char* filen) {
 		  //      bob == 6 green
 		  //      bob == 6 orange
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 6 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-								// ret->get_field(x,y)->can_build_way=c;
-								read++;
-					 }
-		  }
+		  free(section);
 
 		  // S E C T I O N 7  -------- Animals
 		  // 0x01 == Bunny
@@ -361,62 +313,21 @@ int Map::load_s2mf(const char* filen) {
 		  // 0x05 == duck
 		  // 0x06 == sheep
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 7 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								// ret->get_field(x,y)->animal=c;
-								file.read(&c, sizeof(unsigned char));
-								read++;
-					 }
-		  }
+		  free(section);
 
 		 // S E C T I O N 8  --------UNKNOWN
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 8 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-								read++;
-					 }
-		  }
+		  free(section);
 
 		  // S E C T I O N 9  -------- What buildings can be build?
 		  // 0x01 == flags (?? )
@@ -429,31 +340,16 @@ int Map::load_s2mf(const char* filen) {
 		  // 0x68 == trees
 		  // 0x78 == no buildings
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 9 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
+/*
+		pc = section;
 		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-#if 0
-								switch(c) {
+					 for(x=0; x<hd.width; x++, pc++) {
+								switch(*pc) {
 										  case 0x01:
 										  case 0x09:
 													 c=0x01;
@@ -466,43 +362,23 @@ int Map::load_s2mf(const char* filen) {
 													 c=0x04;
 													 break;
 								}
-#endif
+
 								//a_MapGetField(x,y)->takes_building=c;
 								//a_MapGetField(x,y)->orig_takes_building=c;
 								//if(c==0x68 || c==0x78) a_MapGetField(x,y)->zeroed_by++;
 								// ret->get_field(x,y)->takes_building=c;
-								read++;
 					 }
 		  }
+*/
 
 		  // S E C T I O N 10  -------- UNKNOWN
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 10 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-								read++;
-					 }
-		  }
+		  free(section);
 
 		  // S E C T I O N 11  -------- STARTING_POINT
 		  // I don't know what this does. It really identifies some points
@@ -510,32 +386,12 @@ int Map::load_s2mf(const char* filen) {
 		  //  But this points don't make sense....
 		  //  We skip it.
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 11 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-								read++;
-					 }
-		  }
+		  free(section);
 
 		  // S E C T I O N 12  -------- Mining
 		  // 0x00 == Water
@@ -547,76 +403,39 @@ int Map::load_s2mf(const char* filen) {
 		  // 0x41-47 == cowl 1-7
 		  // 0x59-5f == stones 1-7
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 12 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
 
+/*
+		pc = section;
 		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-#if 0
-								switch(c) {
+					 for(x=0; x<hd.width; x++, pc++) {
+								switch(*pc) {
 										  case 0x21:
 										  case 0x87:
 										  case 0x40:
 													 c=0x40;
 													 break;
 								}
-#endif
 								// ret->get_field(x,y)->resource=c;
-								read++;
 					 }
 		  }
+*/
 
 		  // S E C T I O N 13  -------- Bergflanken.
 		  //
 		  // ?? for what is that ??
 		  // Skip
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 13 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-//								a_MapGetField(x,y)->bergflanken=c;
-								read++;
-					 }
-		  }
+		  free(section);
 
 		  // S E C T I O N 14  -------- Fieldcount
 		  // Describes to which island the field sticks
@@ -627,38 +446,14 @@ int Map::load_s2mf(const char* filen) {
 		  //  fe == killing field (lava)
 		  //
 		  // New section??
-		  file.read(&buffer[0], 1);
-		  file.read(&buffer[1], 1);
-		  file.read(&buffer[2], 1);
-		  file.read(&buffer[3], 1);
-		  file.read(&buffer[4], 1);
-		  file.read(&buffer[5], 1);
-		  if((buffer[0] != 0x10) ||
-								(buffer[1] != 0x27) ||
-								(buffer[2] != 0x00) ||
-								(buffer[3] != 0x00) ||
-								(buffer[4] != 0x00) ||
-								(buffer[5] != 0x00)) {
+		  section = load_s2mf_section(&file, hd.width, hd.height);
+		  if (!section) {
 					 cerr << "Section 14 --> NOT FOUND in file" << endl;
 					 return ERR_FAILED;
 		  }
-		  read+=6;
-		  //  Don't know what this is!
-		  file.read(buffer, 10);
-		  read+=10;
-
-
-		  for(y=0; y<hd.height; y++) {
-					 for(x=0; x<hd.width; x++) {
-								file.read(&c, sizeof(unsigned char));
-								// ret->get_field(x,y)->on_island=c;
-								read++;
-					 }
-		  }
+		  free(section);
 
 		  file.close();
-		  delete buffer;
-		  buffer=0;
 
 
 /*		  for(y=0; y<hd.height; y++) {

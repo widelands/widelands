@@ -80,10 +80,11 @@ void Textarea::set_text(const char *text)
 	}
 
 	if (text) {
-		collapse();
+		collapse(); // collapse() implicitly updates
 		_textpic = g_fh.get_string(text, _font);
 		expand();
-	}
+	} else
+		update(0, 0, get_w(), get_h());
 }
 
 /** Textarea::set_align(Align align)
