@@ -60,7 +60,7 @@ struct WorldFileHeader
 struct TerrainType
 {
 	char name[16];
-	uint attributes;
+//	uint attributes;
 	uint texture;			// index in WorldFileHeader::picture
 	uint heightMax;
 	uint heightMin;
@@ -70,6 +70,7 @@ struct TerrainType
 
 enum AnimKey
 {
+	NONE=0,
 	TIME,
 	STOCK
 	// ...
@@ -78,13 +79,14 @@ enum AnimKey
 struct BobDesc
 {
 	char name[16];
-	uint attributes;
+//	uint attributes;
 	//uint texture;
 	uint anim;
-	int stock;
+	uint stock;
 	int resource;
 	AnimKey animKey;
 	uint animFactor;
+	uint lifetime;
 	int heir;
 };
 

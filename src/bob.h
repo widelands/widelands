@@ -27,22 +27,40 @@ class World;
 
 /** class Bob
   *
-  * This class does something. I won't tell you what.
+  * This class represents a bob.
+  * Depends on World, Pic, world file types.
   */
 class Bob
 {
 	friend class World;
 	BobDesc desc;
 	World* world;
+	int lastAct;
+
+	/** Bob(BobDesc*, World*)
+	  * This constructor creates a bob. Only worlds will create bobs.
+	  */
 	Bob(BobDesc*, World*);
 public:
 	~Bob();
-	Pic* get_pic();
-	// zieht von den resources des bobs 1 ab und gibt den neuen vorrat zurueck
+
+	/** Pic* get_pic(int timekey)
+	  * Returns the actual animation frame needed to paint the bob.
+	  */
+	Pic* get_pic(int timekey);
+
+	/** int consume()
+	  * Decreases the resources in the bob's stock by 1.
+	  * Returns the new stock size.
+	  */
 	int consume();
-	// laesst den bob sterben und gibt ggf einen neuen bob zurueck,
-	// der an die stelle des alten kommt; oder halt NULL
-	Bob* die();
+
+	/** Bob* act(int timekey)
+	  * Performs bob action. For now, this is nothing but occasional dying.
+	  * Returns the bob to take the place of this bob (usually that's just
+	  * this bob, but it may be its heir or NULL).
+	  */
+	Bob* act(int timekey);
 };
 
 #endif

@@ -21,34 +21,48 @@
 #include "world.h"
 #include "os.h"
 
+/** Bob(BobDesc*, World*)
+  * This constructor creates a bob. Only worlds will create bobs.
+  */
 Bob::Bob(BobDesc* bob, World* w)
 {
 	this->world = w;
 	this->desc = *bob;
+	this->lastAct = 0;
 }
 
-Pic* Bob::get_pic()
+/** Pic* get_pic(int timekey)
+  * Returns the actual animation frame needed to paint the bob.
+  */
+Pic* Bob::get_pic(int timekey)
 {
-
-	int key = 0;
+	int key = NONE;
 	switch (desc.animKey)
 	{
 	case STOCK:
 		key = desc.stock;
-//	case TIME:
-//		key = 0167254123;
+		break;
+	case TIME:
+		// this scale allows 1 per second as slowest animation; hm.
+		// are there slower anims?
+		key = (timekey * desc.animFactor) / 1000;
 	}
 	Anim* anim = world->get_anim(desc.anim);
 	key %= anim->pics;
 	return world->get_texture(anim->pic[key]);
-	
-	return 0;
 }
 
+/** ~Bob()
+  * Does nothing.
+  */
 Bob::~Bob()
 {
 }
 
+/** int consume()
+  * Decreases the resources in the bob's stock by 1.
+  * Returns the new stock size.
+  */
 int Bob::consume()
 {
 	if (!desc.stock)
@@ -56,9 +70,28 @@ int Bob::consume()
 	return --desc.stock;
 }
 
-Bob* Bob::die()
+/** Bob* act(int timekey)
+  * Performs bob action. For now, this is nothing but occasional dying.
+  * Returns the bob to take the place of this bob (usually that's just
+  * this bob, but it may be its heir or NULL).
+  */
+Bob* Bob::act(int timekey)
 {
-	if (desc.heir < 0)
-		return NULL;
-	return world->create_bob(desc.heir);
+	if (desc.lifetime)
+	{
+		int secondsAfterUpdate = (lastAct - timekey) / 1000;
+		if ((desc.lifetime -= secondsAfterUpdate) <= 0)
+		{
+			Bob* bob = world->create_bob(desc.heir);
+			delete this;
+			return bob;
+		}
+	}
+	if (desc.stock == 0)
+	{
+			Bob* bob = world->create_bob(desc.heir);
+			delete this;
+			return bob;
+	}
+	return this;
 }

@@ -89,10 +89,10 @@ void Conf_Reader::read_terrains()
 		
 		memset(&terrain[i], 0, sizeof(TerrainType));
 		conf->get_string(sectionName, "name", terrain[i].name, sectionName);
-		terrain[i].attributes = 0;
+		//terrain[i].attributes = 0;
 		terrain[i].heightMax = conf->get_int(sectionName, "heightMax");
 		terrain[i].heightMin = conf->get_int(sectionName, "heightMin");
-		terrain[i].resources = 0;
+		//terrain[i].resources = 0;
 		char resList[MAX_VAL_LEN];
 		conf->get_string(sectionName, "resources", resList, "");
 		char* resName = strtok(resList, ",");
@@ -127,10 +127,11 @@ void Conf_Reader::read_bobs()
 		bob[i].heir = conf->get_int(sectionName, "heir", -1);
 		bob[i].stock = conf->get_int(sectionName, "stock", 1);
 		bob[i].resource = conf->get_int(sectionName, "resource", -1);
+		bob[i].lifetime = conf->get_int(sectionName, "lifetime", 0);
 		//bob[i].anim = 0;
 		//bob[i].animFactor = conf->get_int(sectionName, "animFactor", -1);
 		//bob[i].animKey = ...
-		//bob[i].attributes = ...
+		//**bob[i].attributes = ...
 	}
 }
 
