@@ -761,7 +761,9 @@ void ProductionSite::program_act(Game* g)
          }
 
          // how much is digged
-         int digged_percentage= 100 - (totalres*100 / totalstart); 
+         int digged_percentage=100;
+         if(totalstart) 
+            digged_percentage = 100 - (totalres*100 / totalstart); 
          if(!totalres) 
             digged_percentage=100;
          molog("  Mine has already digged %i percent (%i/%i)!\n", digged_percentage, totalres, totalstart);

@@ -24,13 +24,14 @@
 #include "fullscreen_menu_base.h"
 #include "ui_listselect.h"
 
+class Editor_Game_Base;
 class Game;
 class Map;
+class Map_Loader;
+class RenderTarget;
 class UIButton;
 class UIMultiline_Textarea;
 class UITextarea;
-class Map_Loader;
-class Editor_Game_Base;
 
 /**
  * Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu
@@ -42,6 +43,7 @@ class Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	UITextarea *tamapname;
 	UITextarea *tagametime;
 	UIButton *m_ok;
+   std::string m_filename;
 
 	filenameset_t	m_gamefiles;
 
@@ -49,7 +51,7 @@ public:
 	Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer);
 	~Fullscreen_Menu_LoadGame();
 
-	const char *get_gamename() { return (const char*)list->get_selection(); }
+	const char *get_gamename() { return m_filename.c_str(); }
 
 	void ok();
 	void map_selected(int id);

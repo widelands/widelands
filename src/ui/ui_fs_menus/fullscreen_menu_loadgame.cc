@@ -40,8 +40,6 @@ Fullscreen_Menu_LoadGame
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer)
 	: Fullscreen_Menu_Base("choosemapmenu.jpg")
 {
-	game = g;
-
 	// Text
    UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, "Choose saved game!", Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
@@ -80,14 +78,8 @@ void Fullscreen_Menu_LoadGame::ok()
 {
    std::string filename=static_cast<const char*>(list->get_selection());
 
-   // We have to create an empty map, otherwise nothing will load properly
-   Map* map = new Map;
-   game->set_map(map);
-   
-   Game_Loader* gl=new Game_Loader(filename.c_str(), game);
-   gl->load_game();
-   delete gl;
-   
+   m_filename = filename;
+
    end_modal(1);
 }
 

@@ -23,6 +23,7 @@
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
 #include "game.h"
+#include "game_loader.h"
 #include "graphic.h"
 #include "player.h"
 #include "soldier.h"
@@ -141,6 +142,19 @@ bool Game::run_load_game(bool is_splayer) {
    
    Fullscreen_Menu_LoadGame* ssg = new Fullscreen_Menu_LoadGame(this, true);
    int code = ssg->run();
+
+   if(code) {
+   // We have to create an empty map, otherwise nothing will load properly
+   Map* map = new Map;
+   set_map(map);
+   
+   Game_Loader* gl=new Game_Loader(ssg->get_gamename(), this);
+   gl->load_game();
+   delete gl;
+
+ 
+   }
+   
    delete ssg;
 
    if(code==0) 

@@ -3326,6 +3326,10 @@ Economy::Economy(Player *player)
 	m_rebuilding = false;
 	m_request_timer = false;
 	mpf_cycle = 0;
+   
+   m_worker_supplies.resize( player->get_tribe()->get_nrworkers() );
+   m_ware_supplies.resize( player->get_tribe()->get_nrwares() );
+
    player->add_economy(this);
 }
 
@@ -3513,6 +3517,15 @@ public:
 	{
 		unsigned slot = t->mpf_heapindex;
 
+#ifdef DEBUG
+      /* This is here temporarilly till the bugs are fixed
+       * which trigger the asserts below 
+       */
+      log("DBG: slot: %i, m_data.size(): %i\n", slot, m_data.size());
+      if(slot >= m_data.size()) asm("int $3");
+      log("DBG: m_data[slot]: %p, t: %p\n", m_data[slot], t);
+      if(m_data[slot] != t) asm("int $3");
+#endif
 		assert(slot < m_data.size());
 		assert(m_data[slot] == t);
 
@@ -3871,6 +3884,9 @@ void Economy::add_request(Request* req)
 	assert(req->is_open());
    assert(!have_request(req));
 
+   if(!get_owner()) // our owner is deleted, we are cleaning up. So ignore this
+      return;
+   
    if(req->get_type()==Request::WORKER) {
       log("%p: add_request(%p) for worker %s, target is %u\n", this, req,
             get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
