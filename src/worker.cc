@@ -880,10 +880,10 @@ bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
 	{
 		uint res = position.field->get_resources();
       uint amount = position.field->get_resources_amount();
-		
+
       std::string immname;
       Resource_Descr* rdescr=g->get_map()->get_world()->get_resource(res);
-      if(rdescr->is_detectable() && amount) { 
+      if(rdescr->is_detectable() && amount) {
          immname = g->get_map()->get_world()->get_resource(res)->get_indicator(amount);
       } else {
          immname = g->get_map()->get_world()->get_resource(0)->get_indicator(amount);
@@ -2896,7 +2896,7 @@ void Worker::geologist_update(Game* g, State* state)
 
          // is center a mountain piece?
          bool is_center_mountain= (map->get_field(center)->get_terd()->get_is() & TERRAIN_MOUNTAIN) |
-            (map->get_field(center)->get_terr()->get_is() & TERRAIN_MOUNTAIN);  
+            (map->get_field(center)->get_terr()->get_is() & TERRAIN_MOUNTAIN);
          // Only run towards fields that are on a mountain (or not)
          // depending on position of center
          bool is_target_mountain;
@@ -2914,7 +2914,7 @@ void Worker::geologist_update(Game* g, State* state)
 
          if(!n) {
             // no suitable field found, this is no fail, there's just nothing else to do
-            // so let's go home 
+            // so let's go home
             // FALLTHROUGH TO RETURN HOME
          } else {
             molog("[geologist]: Walk towards free field\n");
@@ -3244,7 +3244,7 @@ void Carrier::transport_update(Game* g, State* state)
 		BaseImmovable* pos = g->get_map()->get_immovable(get_position());
 
 		// tough luck, the building has disappeared
-		if (!pos) {
+		if (!pos || (pos->get_type() != BUILDING && pos->get_type() != FLAG)) {
 			molog("[transport]: Building disappeared while in building.\n");
 
 			set_location(0);
@@ -3272,9 +3272,6 @@ void Carrier::transport_update(Game* g, State* state)
 		}
 
 		// We're done
-		if (pos->get_type() != Map_Object::FLAG)
-			throw wexception("MO(%u): [transport]: inbuilding, but neither on building nor on flag", get_serial());
-
 		pop_task(g);
 		return;
 	}
