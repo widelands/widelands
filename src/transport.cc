@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1881,19 +1881,6 @@ Economy *Request::get_target_economy(Game *g)
 
 /*
 ===============
-Request::get_worker
-
-Get the worker this request is all about.
-===============
-*/
-Worker* Request::get_worker()
-{
-	return m_worker;
-}
-
-
-/*
-===============
 Request::start_transfer
 
 Begin transfer of the requested ware from the given warehouse.
@@ -1901,7 +1888,7 @@ This function does not take ownership of route, i.e. the caller is responsible
 for its deletion.
 ===============
 */
-void Request::start_transfer(Game *g, Warehouse *wh, Route *route)
+void Request::start_transfer(Game* g, Supply* supp, Route* route)
 {
 	Ware_Descr *descr = g->get_ware_description(get_ware());
 
@@ -1912,7 +1899,7 @@ void Request::start_transfer(Game *g, Warehouse *wh, Route *route)
 		// worker starts walking
 		log("Request: start worker transfer for %i\n", get_ware());
 
-		m_worker = wh->launch_worker(g, get_ware());
+		m_worker = supp->launch_worker(g, get_ware());
 
 		m_state = TRANSFER;
 		m_worker->start_task_request(g, this);
@@ -1924,7 +1911,7 @@ void Request::start_transfer(Game *g, Warehouse *wh, Route *route)
 		// Once it's on the flag, the flag code will decide what to do with it.
 		log("Request: start item transfer for %i\n", get_ware());
 
-		m_item = wh->launch_item(g, get_ware());
+		m_item = supp->launch_item(g, get_ware());
 
 		m_state = TRANSFER;
 		m_item->set_request(g, this, route);
@@ -2067,9 +2054,6 @@ A request list should be empty when it's destroyed.
 */
 RequestList::~RequestList()
 {
-	if (m_requests.size())
-		log("RequestList: %i requests of type %i left.\n", m_requests.size(),
-				m_requests[0]->get_ware());
 }
 
 /*
@@ -2105,6 +2089,73 @@ void RequestList::remove(Request *req)
 	throw wexception("RequestList::remove: not in list");
 }
 
+
+/*
+==============================================================================
+
+SupplyList IMPLEMENTATION
+
+==============================================================================
+*/
+
+
+/*
+===============
+SupplyList::SupplyList
+
+Zero-initialize
+===============
+*/
+SupplyList::SupplyList()
+{
+}
+
+
+/*
+===============
+SupplyList::~SupplyList
+
+A supply list should be empty when it's destroyed.
+===============
+*/
+SupplyList::~SupplyList()
+{
+}
+
+
+/*
+===============
+SupplyList::add
+
+Add a supply to the list.
+===============
+*/
+void SupplyList::add(Supply* supp)
+{
+	m_supplies.push_back(supp);
+}
+
+
+/*
+===============
+SupplyList::remove
+
+Remove a supply from the list.
+===============
+*/
+void SupplyList::remove(Supply* supp)
+{
+	for(uint idx = 0; idx < m_supplies.size(); idx++) {
+		if (m_supplies[idx] == supp) {
+			if (idx != m_supplies.size()-1)
+				m_supplies[idx] = m_supplies[m_supplies.size()-1];
+			m_supplies.pop_back();
+			return;
+		}
+	}
+
+	throw wexception("SupplyList::remove: not in list");
+}
 
 
 /*
@@ -2337,16 +2388,20 @@ Economy::~Economy
 Economy::Economy(Player *player)
 {
 	m_owner = player;
+	m_rebuilding = false;
 	mpf_cycle = 0;
 }
 
 Economy::~Economy()
 {
+	assert(!m_rebuilding);
+
 	if (m_flags.size())
 		log("Warning: Economy still has flags left on destruction\n");
 	if (m_warehouses.size())
 		log("Warning: Economy still has warehouses left on destruction\n");
 }
+
 
 /*
 ===============
@@ -2354,7 +2409,7 @@ Economy::check_merge [static]
 
 Two flags have been connected; check whether their economies should be
 merged.
-Since we could merge into both directions, we preserver the economy that is
+Since we could merge into both directions, we preserve the economy that is
 currently bigger (should be more efficient).
 ===============
 */
@@ -2770,6 +2825,8 @@ a merger.
 */
 void Economy::add_wares(int id, int count)
 {
+	//log("%p: add(%i, %i)\n", this, id, count);
+
 	m_wares.add(id, count);
 
 	// TODO: add to global player inventory?
@@ -2787,6 +2844,8 @@ a split of the Economy.
 */
 void Economy::remove_wares(int id, int count)
 {
+	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
+
 	m_wares.remove(id, count);
 
 	// TODO: remove from global player inventory?
@@ -2804,9 +2863,6 @@ added to the warehouse in the future, add_wares() must be called.
 void Economy::add_warehouse(Warehouse *wh)
 {
 	m_warehouses.push_back(wh);
-	m_wares.add(wh->get_wares());
-
-	match_requests(wh);
 }
 
 /*
@@ -2818,8 +2874,6 @@ Remove the warehouse and its wares from the economy.
 */
 void Economy::remove_warehouse(Warehouse *wh)
 {
-	m_wares.remove(wh->get_wares());
-
 	// fast remove
 	uint i;
 	for(i = 0; i < m_warehouses.size(); i++) {
@@ -2832,6 +2886,7 @@ void Economy::remove_warehouse(Warehouse *wh)
 	assert(i != m_warehouses.size());
 	m_warehouses.pop_back();
 }
+
 
 /*
 ===============
@@ -2850,8 +2905,10 @@ void Economy::add_request(Request *req)
 	m_requests[req->get_ware()].add(req);
 
 	// Try to fulfill the request
-	process_request(req); // if unsuccessful, the request is simply left open
+	if (!m_rebuilding)
+		process_request(req); // if unsuccessful, the request is simply left open
 }
+
 
 /*
 ===============
@@ -2871,6 +2928,44 @@ void Economy::remove_request(Request *req)
 	m_requests[req->get_ware()].remove(req);
 }
 
+
+/*
+===============
+Economy::add_supply
+
+Add a supply to our list of supplies.
+===============
+*/
+void Economy::add_supply(int ware, Supply* supp)
+{
+	//log("add_supply(%i, %p)\n", ware, supp);
+
+	if (ware >= (int)m_supplies.size())
+		m_supplies.resize(ware+1);
+
+	m_supplies[ware].add(supp);
+
+	if (!m_rebuilding)
+		process_requests(); // I'm too lazy right now, and I plan a completely
+									// different final solution anyway
+}
+
+
+/*
+===============
+Economy::remove_supply
+
+Remove a supply from our list of supplies.
+===============
+*/
+void Economy::remove_supply(int ware, Supply* supp)
+{
+	//log("remove_supply(%i, %p)\n", ware, supp);
+
+	m_supplies[ware].remove(supp);
+}
+
+
 /*
 ===============
 Economy::do_merge
@@ -2885,6 +2980,8 @@ void Economy::do_merge(Economy *e)
 	int i;
 
 	log("Economy: merge %i + %i\n", get_nrflags(), e->get_nrflags());
+
+	m_rebuilding = true;
 
 	// Be careful around here. The last e->remove_flag() will cause the other
 	// economy to delete itself.
@@ -2921,7 +3018,12 @@ void Economy::do_merge(Economy *e)
 		}
 	}
 
-	// implicity delete the economy
+	// Fix up after rebuilding
+	m_rebuilding = false;
+
+	process_requests();
+
+	// implicitly delete the economy
 	delete e;
 }
 
@@ -2937,6 +3039,9 @@ void Economy::do_split(Flag *f)
 	log("Economy: split %i\n", get_nrflags());
 
 	Economy *e = new Economy(m_owner);
+
+	m_rebuilding = true;
+	e->m_rebuilding = true;
 
 	std::set<Flag*> open;
 
@@ -3003,7 +3108,15 @@ void Economy::do_split(Flag *f)
 			}
 		}
 	}
+
+	// Fix requests
+	m_rebuilding = false;
+	e->m_rebuilding = false;
+
+	process_requests();
+	e->process_requests();
 }
+
 
 /*
 ===============
@@ -3018,35 +3131,35 @@ bool Economy::process_request(Request *req)
 {
 	assert(req->get_state() == Request::OPEN);
 
+	Game* g = static_cast<Game*>(get_owner()->get_game());
 	Route buf_route0, buf_route1;
-	Warehouse *best_warehouse = 0;
+	Supply *best_supply = 0;
 	Route *best_route = 0;
 	int best_cost = -1;
-	Flag *target_flag = req->get_target_flag(static_cast<Game*>(get_owner()->get_game()));
+	Flag* target_flag = req->get_target_flag(g);
+	int ware = req->get_ware();
 
-	// TODO: traverse idle wares
+	// Look for matches in all possible supplies in this economy
+	if (ware >= (int)m_supplies.size())
+		return false; // tough luck, we have definitely no supplies for this ware
 
-	// Look for matches in all warehouses in this economy
-	for(uint i = 0; i < m_warehouses.size(); i++) {
-		Warehouse *wh = m_warehouses[i];
+	for(int i = 0; i < m_supplies[ware].get_nrsupplies(); i++) {
+		Supply* supp = m_supplies[ware].get_supply(i);
 		Route *route;
-
-		if (!wh->get_wares().stock(req->get_ware()))
-			continue;
 
 		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
 
 		int cost_cutoff = best_cost;
 
-		if (!find_route(wh->get_base_flag(), target_flag, route, cost_cutoff)) {
+		if (!find_route(supp->get_position(g)->get_base_flag(), target_flag, route, cost_cutoff)) {
 			if (!best_route)
 				throw wexception("Economy::process_request: COULDN'T FIND A ROUTE!");
 			continue;
 		}
 
 		// cost_cutoff guarantuees us that the route is better than what we have
-		best_warehouse = wh;
+		best_supply = supp;
 		best_route = route;
 		best_cost = route->get_totalcost();
 	}
@@ -3055,75 +3168,30 @@ bool Economy::process_request(Request *req)
 		return false;
 
 	// Now that all options have been checked, start the transfer
-	req->start_transfer(static_cast<Game*>(get_owner()->get_game()), best_warehouse, best_route);
+	req->start_transfer(g, best_supply, best_route);
 	return true;
 }
 
 
 /*
 ===============
-Economy::match_requests
+Economy::process_requests
 
-Find any open requests concerning the give ware id that can be fulfilled by
-this warehouse.
-This is called by match_requests(wh) and by Warehouse code.
-
-Returns the number of initiated transfers.
+Find any open requests that can be fulfilled by supplies.
 ===============
 */
-int Economy::match_requests(Warehouse* wh, int ware)
+void Economy::process_requests()
 {
-	int transfers = 0;
-	int stock;
+	for(uint ware = 0; ware < m_requests.size(); ware++) {
+		if (m_requests[ware].get_nrrequests()) {
+			for(int idx = 0; idx < m_requests[ware].get_nrrequests(); idx++) {
+				Request *req = m_requests[ware].get_request(idx);
 
-	if (ware >= (int)m_requests.size())
-		return 0;
+				if (req->get_state() != Request::OPEN)
+					continue;
 
-	stock = wh->get_wares().stock(ware);
-	if (!stock)
-		return 0;
-
-	for(int idx = 0; idx < m_requests[ware].get_nrrequests(); idx++) {
-		Request *req = m_requests[ware].get_request(idx);
-
-		if (req->get_state() != Request::OPEN)
-			continue;
-
-		// Good, there's a request to fulfill
-		Flag *target_flag = req->get_target_flag(static_cast<Game*>(get_owner()->get_game()));
-		Route route;
-		bool success;
-
-		success = find_route(wh->get_base_flag(), target_flag, &route);
-		if (!success)
-			throw wexception("match_requests(): find_route failed");
-
-		req->start_transfer(static_cast<Game*>(get_owner()->get_game()), wh, &route);
-
-		transfers++;
-		if (!--stock)
-			break; // stock depleted
+				process_request(req);
+			}
+		}
 	}
-
-	return transfers;
-}
-
-
-/*
-===============
-Economy::match_requests
-
-Find any open requests that can be fulfilled by this warehouse.
-This is usually called by add_warehouse().
-===============
-*/
-int Economy::match_requests(Warehouse *wh)
-{
-	const WareList *wl = &wh->get_wares();
-	int transfers = 0;
-
-	for(int ware = 0; ware < wl->get_nrwareids(); ware++)
-		transfers += match_requests(wh, ware);
-
-	return transfers;
 }

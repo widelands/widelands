@@ -159,6 +159,8 @@ protected:
 /*
 Warehouse
 */
+class WarehouseSupply;
+
 class Warehouse_Descr : public Building_Descr {
 public:
 	enum {
@@ -195,7 +197,7 @@ public:
 
 	virtual void set_economy(Economy *e);
 
-	inline const WareList &get_wares() const { return m_wares; }
+	const WareList &get_wares() const;
 	void create_wares(int id, int count);
 	void destroy_wares(int id, int count);
 
@@ -211,7 +213,7 @@ protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
 private:
-	WareList		m_wares;
+	WarehouseSupply*	m_supply;
 
 	uint			m_next_carrier_spawn;		// time of next carrier growth
 };

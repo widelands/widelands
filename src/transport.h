@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -296,6 +296,45 @@ private:
 
 
 /*
+A Supply is a virtual base class representing something that can offer
+wares of any type for any purpose.
+
+Subsequent calls to get_position() can return different results.
+
+Important note: The implementation of Supply is responsible for adding
+and removing itself from Economies. This rule holds true for Economy
+changes.
+*/
+class Supply {
+public:
+	virtual PlayerImmovable* get_position(Game* g) = 0;
+	virtual int get_amount(Game* g, int ware) = 0;
+
+	virtual WareInstance* launch_item(Game* g, int ware) = 0;
+	virtual Worker* launch_worker(Game* g, int ware) = 0;
+};
+
+
+/*
+SupplyList is used in the Economy to keep track of supplies.
+*/
+class SupplyList {
+public:
+	SupplyList();
+	~SupplyList();
+
+	void add(Supply* supp);
+	void remove(Supply* supp);
+
+	inline int get_nrsupplies() const { return m_supplies.size(); }
+	inline Supply* get_supply(int idx) const { return m_supplies[idx]; }
+
+private:
+	std::vector<Supply*>	m_supplies;
+};
+
+
+/*
 A Request is issued whenever some object (road or building) needs a ware.
 
 Important: While you must reassign the wares that e.g. a building owns when
@@ -326,9 +365,8 @@ public:
 
 	Flag *get_target_flag(Game *g);
 	Economy *get_target_economy(Game *g);
-	Worker* get_worker();
 
-	void start_transfer(Game *g, Warehouse *wh, Route *route);
+	void start_transfer(Game *g, Supply* supp, Route *route);
 
 	void check_transfer(Game *g);
 	void cancel_transfer(Game *g);
@@ -445,11 +483,11 @@ public:
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);
 
-	void add_request(Request *req);
-	void remove_request(Request *req);
+	void add_request(Request* req);
+	void remove_request(Request* req);
 
-	int match_requests(Warehouse* wh, int ware);
-	int match_requests(Warehouse *wh);
+	void add_supply(int ware, Supply* supp);
+	void remove_supply(int ware, Supply* supp);
 
 private:
 	void do_remove_flag(Flag *f);
@@ -458,14 +496,18 @@ private:
 	void do_split(Flag *f);
 
 	bool process_request(Request *req);
+	void process_requests();
 
 private:
-	Player	*m_owner;
+	Player*	m_owner;
+	bool		m_rebuilding;	// true while rebuilding Economies (i.e. during split/merge)
+
 	std::vector<Flag*>		m_flags;
 	WareList						m_wares;		// virtual storage with all wares in this Economy
 	std::vector<Warehouse*>	m_warehouses;
 
 	std::vector<RequestList>	m_requests; // requests by ware id
+	std::vector<SupplyList>		m_supplies; // supplies by ware id
 
 	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
 };

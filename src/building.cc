@@ -1102,6 +1102,209 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 /*
 ==============================================================================
 
+WarehouseSupply IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+WarehouseSupply is the implementation of Supply that is used by Warehouses.
+It also manages the list of wares in the warehouse.
+*/
+class WarehouseSupply : public Supply {
+public:
+	WarehouseSupply(Warehouse* wh);
+	virtual ~WarehouseSupply();
+
+	void set_economy(Economy* e);
+
+	const WareList &get_wares() const { return m_wares; }
+	int stock(int id) const { return m_wares.stock(id); }
+	void add_wares(int id, int count);
+	void remove_wares(int id, int count);
+
+public: // Supply implementation
+	virtual PlayerImmovable* get_position(Game* g);
+	virtual int get_amount(Game* g, int ware);
+
+	virtual WareInstance* launch_item(Game* g, int ware);
+	virtual Worker* launch_worker(Game* g, int ware);
+
+private:
+	Economy*		m_economy;
+	WareList		m_wares;
+	Warehouse*	m_warehouse;
+};
+
+
+/*
+===============
+WarehouseSupply::WarehouseSupply
+
+Initialize the supply
+===============
+*/
+WarehouseSupply::WarehouseSupply(Warehouse* wh)
+{
+	m_warehouse = wh;
+	m_economy = 0;
+}
+
+
+/*
+===============
+WarehouseSupply::~WarehouseSupply
+
+Destroy the supply.
+===============
+*/
+WarehouseSupply::~WarehouseSupply()
+{
+	if (m_economy) {
+		log("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to an economy",
+				m_warehouse->get_serial());
+		set_economy(0);
+	}
+
+	// We're removed from the Economy. Therefore, the wares can simply
+	// be cleared out. The global inventory will be okay.
+	m_wares.clear();
+}
+
+
+/*
+===============
+WarehouseSupply::set_economy
+
+Add and remove our wares and the Supply to the economies as necessary.
+===============
+*/
+void WarehouseSupply::set_economy(Economy* e)
+{
+	if (e == m_economy)
+		return;
+
+	if (m_economy) {
+		for(int i = 0; i < m_wares.get_nrwareids(); i++) {
+			if (m_wares.stock(i)) {
+				m_economy->remove_wares(i, m_wares.stock(i));
+				m_economy->remove_supply(i, this);
+			}
+		}
+	}
+
+	m_economy = e;
+
+	if (m_economy) {
+		for(int i = 0; i < m_wares.get_nrwareids(); i++) {
+			if (m_wares.stock(i)) {
+				m_economy->add_wares(i, m_wares.stock(i));
+				m_economy->add_supply(i, this);
+			}
+		}
+	}
+}
+
+
+/*
+===============
+WarehouseSupply::add_wares
+
+Add wares and update the economy.
+===============
+*/
+void WarehouseSupply::add_wares(int id, int count)
+{
+	if (!count)
+		return;
+
+	if (!m_wares.stock(id))
+		m_economy->add_supply(id, this);
+
+	m_economy->add_wares(id, count);
+	m_wares.add(id, count);
+}
+
+
+/*
+===============
+WarehouseSupply::remove_wares
+
+Remove wares and update the economy.
+===============
+*/
+void WarehouseSupply::remove_wares(int id, int count)
+{
+	if (!count)
+		return;
+
+	m_wares.remove(id, count);
+	m_economy->remove_wares(id, count);
+
+	if (!m_wares.stock(id))
+		m_economy->remove_supply(id, this);
+}
+
+
+/*
+===============
+WarehouseSupply::get_position
+
+Return the position of the Supply, i.e. the owning Warehouse.
+===============
+*/
+PlayerImmovable* WarehouseSupply::get_position(Game* g)
+{
+	return m_warehouse;
+}
+
+
+/*
+===============
+WarehouseSupply::get_amount
+
+Return our stock of the given ware.
+===============
+*/
+int WarehouseSupply::get_amount(Game* g, int ware)
+{
+	return m_wares.stock(ware);
+}
+
+
+/*
+===============
+WarehouseSupply::launch_item
+
+Launch a ware as item.
+===============
+*/
+WareInstance* WarehouseSupply::launch_item(Game* g, int ware)
+{
+	assert(m_wares.stock(ware));
+
+	return m_warehouse->launch_item(g, ware);
+}
+
+
+/*
+===============
+WarehouseSupply::launch_worker
+
+Launch a ware as worker.
+===============
+*/
+Worker* WarehouseSupply::launch_worker(Game* g, int ware)
+{
+	assert(m_wares.stock(ware));
+
+	return m_warehouse->launch_worker(g, ware);
+}
+
+
+/*
+==============================================================================
+
 Warehouse building
 
 ==============================================================================
@@ -1133,7 +1336,7 @@ void Warehouse_Descr::parse(const char *directory, Profile *prof, const EncodeDa
 	add_attribute(Map_Object::WAREHOUSE);
 
 	Building_Descr::parse(directory, prof, encdata);
-   
+
 	Section *global = prof->get_safe_section("global");
 	const char *string;
 
@@ -1170,6 +1373,7 @@ Initialize a warehouse (zero contents, etc...)
 Warehouse::Warehouse(Warehouse_Descr *descr)
 	: Building(descr)
 {
+	m_supply = new WarehouseSupply(this);
 	m_next_carrier_spawn = 0;
 }
 
@@ -1183,10 +1387,7 @@ Cleanup
 */
 Warehouse::~Warehouse()
 {
-	// During building cleanup, we're removed from the Economy.
-	// Therefore, the wares can simply be cleared out. The global inventory
-	// will be okay.
-	m_wares.clear();
+	delete m_supply;
 }
 
 
@@ -1243,7 +1444,7 @@ void Warehouse::act(Game *g, uint data)
 	if (g->get_gametime() - m_next_carrier_spawn >= 0)
 	{
 		int id = g->get_safe_ware_id("carrier");
-		int stock = m_wares.stock(id);
+		int stock = m_supply->stock(id);
 		int tdelta = CARRIER_SPAWN_INTERVAL;
 
 		if (stock < 100) {
@@ -1280,11 +1481,24 @@ void Warehouse::set_economy(Economy *e)
 	if (old)
 		old->remove_warehouse(this);
 
+	m_supply->set_economy(e);
 	Building::set_economy(e);
 
 	if (e)
 		e->add_warehouse(this);
 }
+
+
+/*
+===============
+Warehouse::get_wares
+===============
+*/
+const WareList& Warehouse::get_wares() const
+{
+	return m_supply->get_wares();
+}
+
 
 /*
 ===============
@@ -1295,12 +1509,11 @@ Magically create wares in this warehouse. Updates the economy accordingly.
 */
 void Warehouse::create_wares(int id, int count)
 {
-	m_wares.add(id, count);
-
 	assert(get_economy());
 
-	get_economy()->add_wares(id, count);
+	m_supply->add_wares(id, count);
 }
+
 
 /*
 ===============
@@ -1311,11 +1524,9 @@ Magically destroy wares.
 */
 void Warehouse::destroy_wares(int id, int count)
 {
-	m_wares.remove(id, count);
-
 	assert(get_economy());
 
-	get_economy()->remove_wares(id, count);
+	m_supply->remove_wares(id, count);
 }
 
 
@@ -1333,7 +1544,7 @@ bool Warehouse::fetch_from_flag(Game* g)
 
 	carrierid = g->get_ware_id("carrier");
 
-	if (!m_wares.stock(carrierid)) // yep, let's cheat
+	if (!m_supply->stock(carrierid)) // yep, let's cheat
 		create_wares(carrierid, 1);
 
 	worker = launch_worker(g, carrierid);
@@ -1352,7 +1563,7 @@ Start a worker of a given type. The worker will be assigned a job by the caller.
 */
 Worker *Warehouse::launch_worker(Game *g, int ware)
 {
-	assert(m_wares.stock(ware));
+	assert(m_supply->stock(ware));
 
 	Ware_Descr *waredescr;
 	Worker_Descr *workerdescr;
@@ -1365,8 +1576,7 @@ Worker *Warehouse::launch_worker(Game *g, int ware)
 
 	worker = workerdescr->create(g, get_owner(), this, m_position);
 
-	m_wares.remove(ware, 1);
-	get_economy()->remove_wares(ware, 1); // re-added by the worker himself
+	m_supply->remove_wares(ware, 1);
 
 	return worker;
 }
@@ -1389,10 +1599,7 @@ void Warehouse::incorporate_worker(Game *g, Worker *w)
 
 	w->remove(g);
 
-	m_wares.add(ware, 1);
-	get_economy()->add_wares(ware, 1);
-
-	get_economy()->match_requests(this, ware);
+	m_supply->add_wares(ware, 1);
 
 	if (item)
 		incorporate_item(g, item);
@@ -1422,17 +1629,14 @@ WareInstance* Warehouse::launch_item(Game* g, int ware)
 	worker = workerdescr->create(g, get_owner(), this, m_position);
 
 	// Yup, this is cheating.
-	if (m_wares.stock(carrierid)) {
-		m_wares.remove(carrierid, 1);
-		get_economy()->remove_wares(carrierid, 1);
-	}
+	if (m_supply->stock(carrierid))
+		m_supply->remove_wares(carrierid, 1);
 
 	// Create the item
 	item = new WareInstance(ware);
 	item->init(g);
 
-	m_wares.remove(ware, 1);
-	get_economy()->remove_wares(ware, 1); // re-added by the item itself
+	m_supply->remove_wares(ware, 1);
 
 	// Setup the carrier
 	worker->start_task_dropoff(g, item);
@@ -1454,10 +1658,7 @@ void Warehouse::incorporate_item(Game* g, WareInstance* item)
 
 	item->destroy(g);
 
-	m_wares.add(ware, 1);
-	get_economy()->add_wares(ware, 1);
-
-	get_economy()->match_requests(this, ware);
+	m_supply->add_wares(ware, 1);
 }
 
 
@@ -2505,479 +2706,3 @@ Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *
 	return descr;
 }
 
-
-
-#if 0
-//
-// Need List
-// 
-int NeedWares_List::read(FileRead* f)
-{
-   nneeds = f->Signed16();
-   if(!nneeds) {
-      // we're done, this guy is for free
-      return RET_OK;
-   }
-   
-
-   list=(List*) malloc(sizeof(List)*nneeds);
-
-   int i;
-   for(i=0; i< nneeds; i++) {
-      list[i].count = f->Unsigned16();
-      list[i].index = f->Unsigned16();
-      list[i].stock = f->Unsigned16();
-   }
-
-   return RET_OK;
-}
-
-// 
-// Down here: Descriptions
-
-int Has_Needs_Building_Descr::read(FileRead *f)
-{
-   uchar temp;
-   temp = f->Unsigned8();
-   needs_or=temp ? true : false;
-
-   // read needs
-   needs.read(f);
-   
-   return RET_OK;
-}
-
-int Has_Products_Building_Descr::read(FileRead *f)
-{
-   uchar temp;
-	temp = f->Unsigned8();
-	products_or = temp ? true : false;
-
-   // read products
-   products.read(f);
-
-   return RET_OK;
-}
-
-int Has_Is_A_Building_Descr::read(FileRead *f)
-{
-	is_a = f->Unsigned16();
-
-	return RET_OK;
-}
-
-int Buildable_Building_Descr::read(FileRead *f)
-{
-	memcpy(category, f->Data(sizeof(category)), sizeof(category));
-	build_time = f->Unsigned16();;
-
-	// read cost
-	cost.read(f);
-
-	build.set_dimensions(idle.get_w(), idle.get_h());
-	build.set_hotspot(idle.get_hsx(), idle.get_hsy());
-	
-	build.read(f);
-	
-	return RET_OK;
-}
-
-int Working_Building_Descr::read(FileRead *f)
-{
-   working.set_dimensions(idle.get_w(), idle.get_h());
-   working.set_hotspot(idle.get_w(), idle.get_h());
-   
-   working.read(f);
-
-   return RET_OK;
-}
-
-int Boring_Building_Descr::read(FileRead *f)
-{
-   // nothing to do
-   return RET_OK;
-}
-
-
-// 
-// DOWN HERE: The real buildings, no abstractions
-// 
-/*
-==============================================================================
-
-Dig Building
-
-==============================================================================
-*/
-
-int Dig_Building_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Working_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-   Has_Products_Building_Descr::read(f);
-
-   // own 
-   working_time = f->Unsigned16();
-   idle_time = f->Unsigned16();
-   worker = f->Unsigned16();
-   memcpy(resource, f->Data(sizeof(resource)), sizeof(resource));
-
-   return RET_OK;
-}
-Map_Object *Dig_Building_Descr::create_object()
-{
-   cerr << "Dig_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-   return 0;
-}
-
-/*
-==============================================================================
-
-Search Building
-
-==============================================================================
-*/
-
-int Search_Building_Descr::read(FileRead *f)
-{
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-   Has_Products_Building_Descr::read(f);
-
-   // read our own stuff
-   working_time = f->Unsigned16();
-   idle_time = f->Unsigned16();
-   working_area = f->Unsigned16();
-   worker = f->Unsigned16();
-   nbobs = f->Unsigned16();
-   bobs = (char*)malloc(nbobs*30);
-	memcpy(bobs, f->Data(nbobs*30), nbobs*30);
-
-   return RET_OK;
-}
-Map_Object *Search_Building_Descr::create_object()
-{
-   cerr << "Search_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-   return 0;
-}
-
-/*
-==============================================================================
-
-Plant Building
-
-==============================================================================
-*/
-
-int Plant_Building_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-
-   // read our own stuff
-   working_time = f->Unsigned16();
-   idle_time = f->Unsigned16();
-   working_area = f->Unsigned16();
-   worker = f->Unsigned16();
-   nbobs = f->Unsigned16();
-   bobs = (char*)malloc(nbobs*30);
-   memcpy(bobs, f->Data(nbobs*30), nbobs*30);
-
-   return RET_OK;
-}
-Map_Object *Plant_Building_Descr::create_object()
-{
-   cerr << "Plant_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-
-/*
-==============================================================================
-
-Grow Building
-
-==============================================================================
-*/
-
-int Grow_Building_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-   Has_Products_Building_Descr::read(f);
-
-   // own stuff
-   working_time = f->Unsigned16();
-   idle_time = f->Unsigned16();
-   working_area = f->Unsigned16();
-   worker = f->Unsigned16();
-   memcpy(plant_bob, f->Data(sizeof(plant_bob)), sizeof(plant_bob));
-	memcpy(search_bob, f->Data(sizeof(search_bob)), sizeof(search_bob));
-
-   return RET_OK;
-}
-Map_Object *Grow_Building_Descr::create_object()
-{
-   cerr << "Grow_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-
-/*
-==============================================================================
-
-Sitter Building
-
-==============================================================================
-*/
-
-int Sit_Building_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Working_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-   Has_Products_Building_Descr::read(f);
-
-   // our stuff 
-   working_time = f->Unsigned16();
-   idle_time = f->Unsigned16();
-   worker = f->Unsigned16();
-   uchar temp; 
-   temp = f->Unsigned8();
-   order_worker=temp ? true : false;
-
-   return RET_OK;
-}
-Map_Object *Sit_Building_Descr::create_object()
-{
-   cerr << "Sit_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-   return 0;
-}
-
-
-int Sit_Building_Produ_Worker_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Working_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-
-   // own stuff 
-   working_time = f->Unsigned16();
-   idle_time = f->Unsigned16();
-   worker = f->Unsigned16();
-   prod_worker = f->Unsigned16();
-
-   return RET_OK;
-}
-Map_Object *Sit_Building_Produ_Worker_Descr::create_object()
-{
-   cerr << "Sit_Building_Produ_Worker_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-
-/*
-==============================================================================
-
-Science Building
-
-==============================================================================
-*/
-
-int Science_Building_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Working_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-
-   cerr << "Science_Building_Descr::read() TODO!" << endl;
-
-   return RET_OK;
-}
-Map_Object *Science_Building_Descr::create_object()
-{
-   cerr << "Science_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-
-/*
-==============================================================================
-
-Military Building
-
-==============================================================================
-*/
-
-int Military_Building_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-
-   // own stuff
-   beds = f->Unsigned16();
-   conquers = f->Unsigned16();
-   idle_time = f->Unsigned16();
-   nupgr = f->Unsigned16();
-
-   return RET_OK;
-}
-Map_Object *Military_Building_Descr::create_object()
-{
-   cerr << "Military_Building_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-
-/*
-==============================================================================
-
-Cannon
-
-==============================================================================
-*/
-
-int Cannon_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-
-   uchar temp;
-   // own stuff 
-   idle_time = f->Unsigned16();
-   projectile_speed = f->Unsigned16();
-   temp = f->Unsigned8();
-   fires_balistic=temp ? true : false;
-   worker = f->Unsigned16();
-   //                         // width and height ob projectile bob
-   ushort wproj, hproj;
-   wproj = f->Unsigned16();
-   hproj = f->Unsigned16();
-
-   projectile.set_dimensions(wproj, hproj);
-   projectile.set_hotspot(wproj/2, hproj/2);
-
-   fire_ne.set_dimensions(idle.get_w(), idle.get_h());
-   fire_ne.set_hotspot(idle.get_hsx(), idle.get_hsy());
-   fire_e.set_dimensions(idle.get_w(), idle.get_h());
-   fire_e.set_hotspot(idle.get_hsx(), idle.get_hsy());
-   fire_se.set_dimensions(idle.get_w(), idle.get_h());
-   fire_se.set_hotspot(idle.get_hsx(), idle.get_hsy());
-   fire_sw.set_dimensions(idle.get_w(), idle.get_h());
-   fire_sw.set_hotspot(idle.get_hsx(), idle.get_hsy());
-   fire_w.set_dimensions(idle.get_w(), idle.get_h());
-   fire_w.set_hotspot(idle.get_hsx(), idle.get_hsy());
-   fire_nw.set_dimensions(idle.get_w(), idle.get_h());
-   fire_nw.set_hotspot(idle.get_hsx(), idle.get_hsy());
-
-   projectile.read(f);
-   fire_ne.read(f);
-   fire_e.read(f);
-   fire_se.read(f);
-   fire_sw.read(f);
-   fire_w.read(f);
-   fire_nw.read(f);
-
-   return RET_OK;
-}
-Map_Object *Cannon_Descr::create_object()
-{
-   cerr << "Cannon_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-/*
-==============================================================================
-
-Store
-
-==============================================================================
-*/
-
-int Store_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-
-   // nothing else
-
-   return RET_OK;
-}
-Map_Object *Store_Descr::create_object()
-{
-   cerr << "Store_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-
-/*
-==============================================================================
-
-Dockyard
-
-==============================================================================
-*/
-
-int Dockyard_Descr::read(FileRead *f) {
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-   Has_Is_A_Building_Descr::read(f);
-   Has_Needs_Building_Descr::read(f);
-
-   // own
-   working_time = f->Unsigned16();
-   idle_time = f->Unsigned16();
-   worker = f->Unsigned16();
-
-   return RET_OK;
-}
-Map_Object *Dockyard_Descr::create_object()
-{
-   cerr << "Dockyard_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-
-/*
-==============================================================================
-
-Port
-
-==============================================================================
-*/
-
-int Port_Descr::read(FileRead *f) {
-
-   Building_Descr::read(f);
-   Boring_Building_Descr::read(f);
-   Buildable_Building_Descr::read(f);
-
-   // nothing else
-
-   return RET_OK;
-}
-Map_Object *Port_Descr::create_object()
-{
-   cerr << "Port_Descr::create_instance() not yet implemented: TODO!" << endl;
-	return 0;
-}
-
-
-#endif
