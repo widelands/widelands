@@ -74,6 +74,13 @@ class Editor_Game_Base {
       inline int get_gametime(void) { return m_gametime; }
 		Interactive_Base* get_iabase() { return m_iabase; }
 
+		// safe system for storing pointers to non-Map_Object C++ objects
+		// unlike objects in the Object_Manager, these pointers need not be
+		// synchronized across the network, and they are not saved in savegames
+		uint add_trackpointer(void* ptr);
+		void* get_trackpointer(uint serial);
+		void remove_trackpointer(uint serial);
+
    protected:
       // next function is used to update the current gametime,
       // for queue runs e.g.
@@ -100,6 +107,9 @@ class Editor_Game_Base {
       Descr_Maintainer<Ware_Descr>	m_wares;
       Interactive_Base*          m_iabase;
       Map*								m_map;
+
+		uint								m_lasttrackserial;
+		std::map<uint, void*>		m_trackpointers;
 };
 
 #endif // __S__EDITOR_GAME_BASE_H

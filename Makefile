@@ -181,4 +181,4 @@ $(OBJECT_DIR)/%.o: src/%.cc
 	rm $@.d
 
 tags: $(SRC) $(HEADERS)
-	@ if [ -x /usr/bin/ctags ]; then ctags -R || true ; else true; fi
+	@ if [ -x /usr/bin/ctags ]; then ctags $(SRC) $(HEADERS) || true ; else true; fi

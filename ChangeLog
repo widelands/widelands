@@ -1,3 +1,12 @@
+
+- improve in-game UI
+- movement speed depends on slope of terrain
+- improved watch window functionality
+- improved the transport system
+- added a 32 bit software renderer
+- added infrastructure for real-time in-game debugging and inspection
+- various code cleanups and bug fixes
+
 build-6:
 - graphics reworked
 - added functionality for the first few buildings

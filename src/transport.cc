@@ -2582,12 +2582,16 @@ Economy::Economy(Player *player)
 {
 	m_owner = player;
 	m_rebuilding = false;
+	m_trackserial = m_owner->get_game()->add_trackpointer(this);
+	m_request_timer = false;
 	mpf_cycle = 0;
 }
 
 Economy::~Economy()
 {
 	assert(!m_rebuilding);
+
+	m_owner->get_game()->remove_trackpointer(m_trackserial);
 
 	if (m_flags.size())
 		log("Warning: Economy still has flags left on destruction\n");
@@ -3102,8 +3106,7 @@ void Economy::add_request(Request *req)
 	m_requests[req->get_ware()].add(req);
 
 	// Try to fulfill the request
-	if (!m_rebuilding)
-		process_request(req); // if unsuccessful, the request is simply left open
+	start_request_timer();
 }
 
 
@@ -3142,9 +3145,7 @@ void Economy::add_supply(int ware, Supply* supp)
 
 	m_supplies[ware].add(supp);
 
-	if (!m_rebuilding)
-		process_requests(); // I'm too lazy right now, and I plan a completely
-									// different final solution anyway
+	start_request_timer();
 }
 
 
@@ -3194,8 +3195,6 @@ void Economy::do_merge(Economy *e)
 
 	// Fix up Supply/Request after rebuilding
 	m_rebuilding = false;
-
-	process_requests();
 
 	// implicitly delete the economy
 	delete e;
@@ -3247,9 +3246,29 @@ void Economy::do_split(Flag *f)
 	// Fix Supply/Request after rebuilding
 	m_rebuilding = false;
 	e->m_rebuilding = false;
+}
 
-	process_requests();
-	e->process_requests();
+
+/*
+===============
+Economy::start_request_timer
+
+Make sure the request timer is running.
+===============
+*/
+void Economy::start_request_timer()
+{
+	if (!m_owner->get_game()->is_game())
+		return;
+
+	if (!m_request_timer) {
+		Game* game = (Game*)m_owner->get_game();
+		Cmd_Queue* cq = game->get_cmdqueue();
+
+		cq->queue(game->get_gametime() + 200, SENDER_MAPOBJECT, CMD_CALL,
+					(int)(&Economy::request_timer_cb), m_trackserial, 0);
+		m_request_timer = true;
+	}
 }
 
 
@@ -3324,9 +3343,30 @@ void Economy::process_requests()
 
 				assert(req->get_state() == Request::OPEN);
 
-				if (!process_request(req))
+				if (!process_request(req)) {
 					break;
+				}
 			}
 		}
 	}
+}
+
+
+/*
+===============
+Economy::request_timer_cb [static]
+
+Called by Cmd_Queue as requested by start_request_timer().
+Call non-static functions to balance supply and request.
+===============
+*/
+void Economy::request_timer_cb(Game* g, int serial, int unused)
+{
+	Economy* e = (Economy*)g->get_trackpointer(serial);
+
+	if (!e)
+		return;
+
+	e->m_request_timer = false;
+	e->process_requests();
 }

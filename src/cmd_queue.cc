@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -128,6 +128,14 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		Worker *worker = (Worker*)m_game->get_objects()->get_object(c->arg1);
 		if (worker)
 			worker->incorporate(m_game);
+		break;
+	}
+
+	case CMD_CALL:
+	{
+		call_fn_t* fn = (call_fn_t*)c->arg1;
+
+		(*fn)(m_game, c->arg2, c->arg3);
 		break;
 	}
 

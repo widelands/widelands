@@ -470,6 +470,7 @@ public:
 	~Economy();
 
 	inline Player *get_owner() const { return m_owner; }
+	uint get_serial() const { return m_trackserial; }
 
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
@@ -499,11 +500,16 @@ private:
 	void do_merge(Economy *e);
 	void do_split(Flag *f);
 
+	void start_request_timer();
+
 	bool process_request(Request *req);
 	void process_requests();
 
+	static void request_timer_cb(Game* g, int serial, int unused);
+
 private:
 	Player*	m_owner;
+	uint		m_trackserial;
 	bool		m_rebuilding;	// true while rebuilding Economies (i.e. during split/merge)
 
 	std::vector<Flag*>		m_flags;
@@ -512,6 +518,8 @@ private:
 
 	std::vector<RequestList>	m_requests; // requests by ware id
 	std::vector<SupplyList>		m_supplies; // supplies by ware id
+
+	bool		m_request_timer;	// true if we started the request timer
 
 	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
 };

@@ -35,9 +35,11 @@ Editor_Game_Base::Editor_Game_Base() {
 
    m_objects = new Object_Manager;
 	memset(m_players, 0, sizeof(m_players));
-   
+
    m_gametime=0;
    m_iabase=0;
+
+	m_lasttrackserial = 0;
 }
 
 /*
@@ -303,7 +305,7 @@ void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const 
 
 	// Get the player's tribe
 	uint i;
-	
+
 	for(i = 0; i < m_tribes.size(); i++)
 		if (!strcmp(m_tribes[i]->get_name(), tribe))
 			break;
@@ -327,7 +329,7 @@ void Editor_Game_Base::set_map(Map* map)
 {
 	if (m_map)
 		delete m_map;
-	
+
 	m_map = map;
 }
 
@@ -337,7 +339,7 @@ void Editor_Game_Base::set_map(Map* map)
 Editor_Game_Base::postload
 
 Load and prepare detailled game data.
-This happens once just after the host has started the game and before the 
+This happens once just after the host has started the game and before the
 graphics are loaded.
 ===============
 */
@@ -559,3 +561,54 @@ int Editor_Game_Base::get_safe_ware_id(const char *name)
 }
 
 
+/*
+===============
+Editor_Game_Base::add_trackpointer
+
+Add a registered pointer.
+Returns the serial number that can be used to retrieve or remove the pointer.
+===============
+*/
+uint Editor_Game_Base::add_trackpointer(void* ptr)
+{
+	m_lasttrackserial++;
+
+	if (!m_lasttrackserial)
+		throw wexception("Dude, you play too long. Track serials exceeded.");
+
+	m_trackpointers[m_lasttrackserial] = ptr;
+	return m_lasttrackserial;
+}
+
+
+/*
+===============
+Editor_Game_Base::get_trackpointer
+
+Retrieve a previously stored pointer using the serial number.
+Returns 0 if the pointer has been removed.
+===============
+*/
+void* Editor_Game_Base::get_trackpointer(uint serial)
+{
+	std::map<uint, void*>::iterator it = m_trackpointers.find(serial);
+
+	if (it != m_trackpointers.end())
+		return it->second;
+
+	return 0;
+}
+
+
+/*
+===============
+Editor_Game_Base::remove_trackpointer
+
+Remove the registered track pointer. Subsequent calls to get_trackpointer()
+using this serial number will return 0.
+===============
+*/
+void Editor_Game_Base::remove_trackpointer(uint serial)
+{
+	m_trackpointers.erase(serial);
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@ enum {
    CMD_ACT,				// arg1 = serialnum, arg2 = user-defined data
 	CMD_DESTROY,		// arg1 = serialnum
 	CMD_INCORPORATE,	// arg1 = serialnum (Worker)
+	CMD_CALL,			// arg1 = fnptr (Cmd_Queue::call_fn), arg2, arg3 = args for function
 
 	// Begin commands sent by players
 	CMD_BUILD_FLAG,	// arg1 = x, arg2 = y
@@ -68,6 +69,9 @@ class Cmd_Queue {
 		}
 	};
 	typedef std::priority_queue<Cmd, std::vector<Cmd>, CmdCompare> queue_t;
+
+	public:
+		typedef void (call_fn_t)(Game* g, int arg1, int arg2);
 
    public:
       Cmd_Queue(Game *g);
