@@ -1926,7 +1926,7 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
 
 	// Check for numbering problems
 	if (sprogram->get_num_values() != m_actions.size())
-		throw wexception("Line numbers appears to be bad");
+		throw wexception("Line numbers appear to be wrong");
 }
 
 

@@ -186,7 +186,7 @@ void WorkerProgram::parse(Parser* parser, std::string name)
 
 	// Check for line numbering problems
 	if (sprogram->get_num_values() != m_actions.size())
-		throw wexception("Line numbers appears to be bad");
+		throw wexception("Line numbers appear to be wrong");
 }
 
 
