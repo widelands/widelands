@@ -41,9 +41,7 @@ void setup_fonthandler(void) {
 		  // Setting Font_Handler up
 		  const char* buf=g_fileloc.locate_file("fixed_font1.wff", TYPE_FONT);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("fixed_font1.wwf:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  if(g_fh.load_font( buf, FIXED_FONT1 ) != RET_OK) {
@@ -66,9 +64,7 @@ void setup_ui(void) {
 		  Pic *cursor=new Pic;
 		  const char* buf=g_fileloc.locate_file("cursor.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("cursor.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 
@@ -82,9 +78,7 @@ void setup_ui(void) {
 		  Pic bmp;
 		  buf=g_fileloc.locate_file("win_l_border.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("win_l_border.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
@@ -93,9 +87,7 @@ void setup_ui(void) {
 
 		  buf=g_fileloc.locate_file("win_r_border.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("win_r_border.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
@@ -104,9 +96,7 @@ void setup_ui(void) {
 
 		  buf=g_fileloc.locate_file("win_top.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("win_top.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
@@ -115,9 +105,7 @@ void setup_ui(void) {
 
 		  buf=g_fileloc.locate_file("win_bot.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("win_bot.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
@@ -126,9 +114,7 @@ void setup_ui(void) {
 
 		  buf=g_fileloc.locate_file("win_bg.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("win_bg.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
@@ -138,9 +124,7 @@ void setup_ui(void) {
 		  // Button class
 		  buf=g_fileloc.locate_file("but0.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("but0.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
@@ -148,9 +132,7 @@ void setup_ui(void) {
 
 		  buf=g_fileloc.locate_file("but1.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("but1.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
@@ -158,9 +140,7 @@ void setup_ui(void) {
 
 		  buf=g_fileloc.locate_file("but2.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("but2.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
@@ -169,9 +149,7 @@ void setup_ui(void) {
 		  // Checkbox class
 		  buf=g_fileloc.locate_file("checkbox.bmp", TYPE_PIC);
 		  if(!buf) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: File not found. Check your installation.", buf);
-					 tell_user(mbuf);
+					 tell_user("checkbox.bmp:  File not found. Check your installation.");
 					 exit(0);
 		  }
 		  bmp.load(buf);
