@@ -180,3 +180,6 @@ $(OBJECT_DIR)/%.o: src/%.cc
 
 tags: $(SRC) $(HEADERS)
 	@ if [ -x /usr/bin/ctags ]; then ctags $(SRC) $(HEADERS) 2>/dev/null|| true ; else true; fi
+
+update up:
+	@cvs -q up -APd
