@@ -59,8 +59,12 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 
    m_fsd.fieldsel_freeze = false;
    m_egbase=g;
-	m_display_flags = dfDebug;
 
+#ifdef DEBUG
+   // Not in releases
+	m_display_flags = dfDebug;
+#endif 
+   
 	m_lastframe = Sys_GetTime();
 	m_frametime = 0;
 	m_avg_usframetime = 0;

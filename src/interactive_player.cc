@@ -406,11 +406,14 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 		}
 		return true;
 
+#ifdef DEBUG
+   // Only in debug builds
 	case KEY_F5:
 		if (down) {
          get_player()->set_see_all(!get_player()->get_see_all());
 		}
 		return true;
+#endif
 	}
 
 	return false;

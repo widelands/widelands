@@ -110,7 +110,7 @@ int S2_Map_Loader::preload_map(bool scenario) {
       };
 
       for(int i=1; i<=m_map->get_nrplayers(); i++) {
-         m_map->set_scenario_player_tribe(i, "romans");
+         m_map->set_scenario_player_tribe(i, "barbarians"); // TODO: here should be The Empire
          m_map->set_scenario_player_name(i, names[i-1]);
       }
    }
