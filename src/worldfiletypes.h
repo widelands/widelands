@@ -70,14 +70,14 @@ enum PictureType
 								// we'll see if it works
 };
 
-struct Picture
+struct PictureInfo
 {
 	// name & type: not really needed, but safe, editor- & debugger-friendly
 	char name[16];
 	PictureType type;		// terrain-texture/bob-picture/resource-picture
 	
 	dword width;
-	dword heigth;
+	dword height;
 	dword depth;			// bits per pixel
 	dword flags;
 	// image data

@@ -119,8 +119,6 @@ void setup_ui(void) {
  * Args: None
  * Returns: Nothing
  */
-#include <stdio.h>
-
 void setup_searchpaths(void)
 {
 	static File_Locator fileloc;
@@ -153,7 +151,6 @@ void setup_searchpaths(void)
 			cmd[j] = 0;
 			break;
 		}
-	printf(cmd);
 	g_fileloc.add_searchdir(cmd, MAX_DIRS-2);
 #endif
 }

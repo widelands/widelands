@@ -29,6 +29,9 @@
 #include "errors.h"
 #include "singleton.h"
 
+struct PictureInfo;		// declare here to avoid including, include in pic.cc
+						// (weisst du noch, was ich ueber include-waechter gesagt hab? :)
+
 namespace Graph {
 
 		 
@@ -92,6 +95,7 @@ namespace Graph {
 					 void set_clrkey(const unsigned short);
 					 void set_clrkey(const unsigned char, const unsigned char, const unsigned char);
 					 int  load(const char*);
+					 int  create(PictureInfo*, unsigned short* data);
 					 void clear_all(void);
 					 Pic& operator=(const Pic&);
 					 Pic(const Pic&);
