@@ -33,11 +33,4 @@
 #define swprintf snwprintf
 #endif
 
-/*
- * std::string<wchar_t> doesn't seem to work under my windows version
- */
-#ifdef WIN32
-#define std::string<wchar_t> std::wstring 
-#endif
-
 #endif 

@@ -22,6 +22,7 @@
 
 #include <cassert>
 #include <set>
+#include <string>
 #include "machdep.h"
 #include "types.h"
 #include "wexception.h"
