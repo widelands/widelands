@@ -246,19 +246,20 @@ bool Button::handle_mouseclick(uint btn, bool down, int x, int y)
 		return false;
 
 	if (down && _enabled) {
-		if(!m_no_automatic_pressed) 
-         grab_mouse(true);
-		_pressed = true;
-   } else {
-      grab_mouse(false);
-      if (_highlighted && _enabled) {
-         _pressed=false;
+		if(m_no_automatic_pressed) {
          clicked.call();
          clickedid.call(_id);
-         _pressed=true;
-      }
-		if(!m_no_automatic_pressed) 
+      } else grab_mouse(true);
+		_pressed = true;
+   } else {
+      if(!m_no_automatic_pressed && _pressed) {
+         grab_mouse(false);
+         if (_highlighted && _enabled) {
+            clicked.call();
+            clickedid.call(_id);
+         }
          _pressed = false;
+      }
    }
 	update(0, 0, get_w(), get_h());
 
