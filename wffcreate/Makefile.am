@@ -1,4 +1,4 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -Wall -O2
+EXTRA_FLAGS=@SDL_CFLAGS@ -Wall -O2 -I../src
 #EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
@@ -7,8 +7,10 @@ CXXFLAGS= $(EXTRA_FLAGS)
 # EXTRA_DIST=worlds pics 
 
 bin_PROGRAMS=wffcreate
-widelands_LDADD = @SDL_LIBS@
-widelands_SOURCES=main.cc 
+wffcreate_LDADD =@SDL_LIBS@
+wffcreate_SOURCES=main.cc \
+						pic.cc \
+						myfile.cc
 
 #  uncomment the following if widelands requires the math library
 #widelands_LDADD=-lm
