@@ -82,7 +82,7 @@ CXXFLAGS = $(EXTRA_FLAGS)
 EXTRA_DIST = README
 
 bin_PROGRAMS = wffcreate
-wffcreate_LDADD = -L/usr/lib -lSDL -lpthread -L/usr/X11R6/lib -lXxf86dga -lXxf86vm -lXv ../src/pic.o ../src/myfile.o
+wffcreate_LDADD = -L/usr/lib -lSDL -lpthread -L/usr/X11R6/lib -lXxf86dga -lXxf86vm -lXv ../src/myfile.o
 wffcreate_SOURCES = main.cc 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../src/config.h
@@ -95,7 +95,7 @@ CPPFLAGS =
 LDFLAGS = 
 LIBS = 
 wffcreate_OBJECTS =  main.o
-wffcreate_DEPENDENCIES =  ../src/pic.o ../src/myfile.o
+wffcreate_DEPENDENCIES =  ../src/myfile.o
 wffcreate_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)

@@ -69,31 +69,31 @@ inline int g_main(int argn, char** argc) {
 		  tmp=Graph::pack_rgb(atoi(argc[2]), atoi(argc[3]), atoi(argc[4]));
 		  f.write((char*) &tmp, sizeof(ushort));
 		 
-		  Pic p;
+		  SDL_Surface* sur;
 		  uint h=0;
 		  for(uchar c=32; c<=127; c++) {
 					 sprintf(buf, "%i.bmp", c);
-					 if(p.load(buf)) {
+					 sur=SDL_LoadBMP(buf);
+					 if(!sur) {
 								cerr << buf << ": file not found or other error!" << endl;
 								return -1;
 					 }
 					 
 					 if(!h) {
-								h=p.get_h();
+								h=sur->h;
 								f.write((char*) &h, sizeof(ushort));
 								// HEADER FINISHED
 					 }
 
 					 f.write((char*) &c, 1);
-					 tmp=p.get_w();
+					 tmp=sur->w;
 					 f.write((char*) &tmp, sizeof(ushort));
-
+					 ushort* pixel=((ushort*) sur->pixels);
 					 for(unsigned int y=0; y<h; y++) {
-								tmp=p.get_pixel(0, y);
-								f.write((char*) &tmp, sizeof(ushort));
-								for(unsigned int x=1; x<p.get_w(); x++) {
-										  tmp=p.get_npixel();
+								for(int x=0; x<sur->w; x++) {
+										  tmp=*pixel;
 										  f.write((char*) &tmp, sizeof(ushort));
+										  ++pixel;
 								}
 					 }
 		  }
