@@ -7,10 +7,8 @@ CXXFLAGS= $(EXTRA_FLAGS)
 EXTRA_DIST=README
 
 bin_PROGRAMS=wffcreate
-wffcreate_LDADD =@SDL_LIBS@
-wffcreate_SOURCES=main.cc \
-						pic.cc \
-						myfile.cc
+wffcreate_LDADD =@SDL_LIBS@ ../src/pic.o ../src/myfile.o
+wffcreate_SOURCES=main.cc 
 
 #  uncomment the following if widelands requires the math library
 #widelands_LDADD=-lm

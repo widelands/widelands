@@ -1,3 +1,5 @@
+You need to compile widelands before you can compile this!
+
 usage is simple:
 
 make sure, that you have the files 32.bmp to 127.bmp (for the different ascii numbers) in 

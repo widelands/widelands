@@ -82,9 +82,8 @@ CXXFLAGS = $(EXTRA_FLAGS)
 EXTRA_DIST = README
 
 bin_PROGRAMS = wffcreate
-wffcreate_LDADD = @SDL_LIBS@
-wffcreate_SOURCES = main.cc 						pic.cc 						myfile.cc
-
+wffcreate_LDADD = @SDL_LIBS@ ../src/pic.o ../src/myfile.o
+wffcreate_SOURCES = main.cc 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../src/config.h
 CONFIG_CLEAN_FILES = 
@@ -95,8 +94,8 @@ DEFS = @DEFS@ -I. -I$(srcdir) -I../src
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-wffcreate_OBJECTS =  main.o pic.o myfile.o
-wffcreate_DEPENDENCIES = 
+wffcreate_OBJECTS =  main.o
+wffcreate_DEPENDENCIES =  ../src/pic.o ../src/myfile.o
 wffcreate_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
@@ -108,7 +107,7 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = tar
 GZIP_ENV = --best
-DEP_FILES =  .deps/main.P .deps/myfile.P .deps/pic.P
+DEP_FILES =  .deps/main.P
 SOURCES = $(wffcreate_SOURCES)
 OBJECTS = $(wffcreate_OBJECTS)
 
