@@ -37,12 +37,13 @@ int parse_bobs(void) {
    char* dir= new char[strlen(g_dirname)+strlen(BOBS_DIR)+2];
 
    strcpy(dir, g_dirname);
-   strcat(dir, SSEPERATOR);
+//   strcat(dir, SSEPERATOR);
    strcat(dir, BOBS_DIR);
 
    DIR* d=opendir(dir);
    if(!d) {
       cerr << dir << ": dir not found or read error!" << endl;
+      return ERROR;
    }
    struct dirent *file;
    Profile* p;

@@ -19,6 +19,7 @@
 
 #ifdef WIN32
 #include "mydirent.h"
+#include <iostream.h>
 
 Dir::Dir(const char* n)
 {
@@ -38,9 +39,21 @@ Dir::~Dir()
 	delete name;
 }
 
-DIR* opendir(const char* name)
+DIR* opendir(const char* n)
 {
-	return new DIR(name);
+	int nlen = strlen(n);
+	char* name = new char[nlen + 1];
+	strcpy(name, n);
+	if (name[nlen-1] == '\\')
+		name[nlen-1] = 0;
+
+	WIN32_FIND_DATA wfd;
+	HANDLE found = FindFirstFile(name, &wfd);
+	delete[] name;
+
+	if (found == INVALID_HANDLE_VALUE)
+		return NULL;
+	return new DIR(n);
 }
 
 dirent* readdir(DIR* dir)
@@ -56,9 +69,9 @@ dirent* readdir(DIR* dir)
 		if (!FindNextFile(dir->find, &wfd))
 			return NULL;
 
-	while (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-		if (!FindNextFile(dir->find, &wfd))
-			return NULL;
+//	while (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+//		if (!FindNextFile(dir->find, &wfd))
+//			return NULL;
 
 	strcpy(dir->ret.d_name, wfd.cFileName);
 	return &dir->ret;

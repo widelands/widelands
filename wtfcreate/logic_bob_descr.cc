@@ -122,21 +122,27 @@ int Logic_Bob_Descr::create_bob(Profile* p, Section* s, const char* def_suffix, 
 
    uint retval=bob->construct(buf, g_dirname, subdir, clrkey, shadowclr, &w, &h, 0); 
    if(retval) {
-      switch (retval) {
-         case Bob_Descr::ERROR:
-         case Bob_Descr::ERR_INVAL_FILE_NAMES:
-         case Bob_Descr::ERR_INVAL_DIMENSIONS:
-         case Bob_Descr::ERR_NOPICS:
             strcpy(err_sec,s->get_name());
             strcpy(err_key,key_name);
             strcpy(err_msg, subdir);
-            strcat(err_msg, buf);
-            strcat(err_msg,": Some bob error. check if all got the same dimensions and if the picture names are valid!");
-            delete[] buf;
-            delete[] subdir;
-            return ERROR;  
+			strcat(err_msg, buf);
+      switch (retval) {
+         case Bob_Descr::ERROR:
+            strcat(err_msg,": some bob error.");
+            break;
+         case Bob_Descr::ERR_INVAL_FILE_NAMES:
+            strcat(err_msg,": picture file names are invalid.");
+            break;
+         case Bob_Descr::ERR_INVAL_DIMENSIONS:
+            strcat(err_msg,": picture dimensions differ.");
+            break;
+         case Bob_Descr::ERR_NOPICS:
+            strcat(err_msg,": bob has no pictures.");
             break;
       }
+      delete[] buf;
+      delete[] subdir;
+      return ERROR;  
    }
 
    if((hsx >= w) || (hsy >= h)) {

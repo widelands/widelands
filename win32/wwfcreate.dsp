@@ -187,6 +187,10 @@ SOURCE=..\src\md5file.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\mydirent.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\myfile.h
 # End Source File
 # Begin Source File
