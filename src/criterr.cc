@@ -27,6 +27,10 @@
 #include "ui_panel.h"
 #include "options.h"
 
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 /*
 ==============================================================================
 

@@ -65,14 +65,15 @@ endif
 
 ifneq ($(CROSS),NO)
 # CROSS COMPILE, for developer only
-PREFIX:=/usr/local/cross-tools
-TARGET:=i386-mingw32msvc
+TARGET:=i586-mingw32msvc
+PREFIX:=/usr
 PATH:=$(PREFIX)/$(TARGET)/bin:$(PREFIX)/bin:$(PATH)
 
 CXX=$(TARGET)-g++
 
 # manually overwrite
-SDL_CONFIG=$(PREFIX)/$(TARGET)/bin/sdl-config
+#SDL_CONFIG=$(PREFIX)/bin/$(TARGET)-sdl-config
+SDL_CONFIG=$(PREFIX)/$(TARGET)/bin/$(TARGET)-sdl-config
 
 else
 TARGET:=native
@@ -178,4 +179,4 @@ $(OBJECT_DIR)/%.o: src/%.cc
 	rm $@.d
 
 tags: $(SRC) $(HEADERS)
-	@ if [ -x /usr/bin/ctags ]; then ctags $(SRC) $(HEADERS) || true ; else true; fi
+	@ if [ -x /usr/bin/ctags ]; then ctags $(SRC) $(HEADERS) 2>/dev/null|| true ; else true; fi
