@@ -496,7 +496,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 
    case KEY_BACKSPACE:
       if( down ) {
-         if( m_is_typing_msg ) {
+         if( m_is_typing_msg && m_typed_message.size() ) {
             m_typed_message.erase( m_typed_message.begin() + m_typed_message.size() - 1);
             return true;
          }
