@@ -62,12 +62,16 @@ void Map_View::warp_mouse_to_field(Coords c)
 {
 	int x, y;
 
-	m_intbase->get_map()->get_pix(c, &x, &y);
+	m_intbase->get_map()->get_save_pix(c, &x, &y);
 	x -= m_viewpoint.x;
 	y -= m_viewpoint.y;
 
-	if (x >= 0 && x < get_w() && y >= 0 && y < get_h())
-		set_mouse_pos(x, y);
+	assert(x<get_w());
+   assert(y<get_h());
+   if(x<=0) { warp_mouse_to_field(Coords(c.x+m_intbase->get_map()->get_width(),c.y)); return; }
+   if(y<=0) { warp_mouse_to_field(Coords(c.x, c.y+m_intbase->get_map()->get_height())); return; }
+
+   set_mouse_pos(x, y);
 }
 
 

@@ -229,6 +229,7 @@ public:
 	inline void get_basepix(const Coords fc, int *px, int *py);
 	inline void get_pix(const FCoords fc, int *px, int *py);
 	inline void get_pix(const Coords c, int *px, int *py);
+	inline void get_save_pix(const Coords c, int *px, int *py);
 
 	// Pathfinding
 	int findpath(Coords start, Coords end, int persist, Path *path, const CheckStep* checkstep,
@@ -719,19 +720,26 @@ inline void Map::get_basepix(const Coords fc, int *px, int *py)
 	if (fc.y & 1)
 		*px += FIELD_WIDTH>>1;
 }
-
+// assumes valid fx/fy!
 inline void Map::get_pix(const FCoords fc, int *px, int *py)
 {
 	get_basepix(fc, px, py);
 	*py -= MULTIPLY_WITH_HEIGHT_FACTOR(fc.field->get_height());
 }
-
-// assumes valid fx/fy!
 inline void Map::get_pix(const Coords fc, int *px, int *py)
 {
 	get_pix(get_fcoords(fc), px, py);
 }
-
+// fx and fy might be out of range, must be normalized for the field
+// theres no need for such a function for FCoords, since x,y out of range
+// but field valid doesn't make sense
+inline void Map::get_save_pix(const Coords c, int* px, int *py) {
+   Coords c1=c;
+   normalize_coords(&c1);
+   FCoords fc= get_fcoords(c1);
+   fc.x=c.x; fc.y=c.y;
+   get_pix(fc, px, py);
+}
 
 
 /*

@@ -446,7 +446,6 @@ It resets the mouse to its original position and closes the window
 */
 void FieldActionWindow::okdialog()
 {
-   log("Ok dialog: %i,%i\n", m_field.x, m_field.y);
    m_player->warp_mouse_to_field(m_field);
 	die();
 }
