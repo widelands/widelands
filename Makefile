@@ -142,7 +142,7 @@ LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image
 
 ##############################################################################
 # Building
-all: tags $(OBJECT_DIR)/widelands
+all: makedirs tags $(OBJECT_DIR)/widelands
 	cp $(OBJECT_DIR)/widelands .
 	@echo -ne "\nCongrats. Build seems to be complete. If there was no "
 	@echo -ne "error (ignore file not found errors), you can run the game "
@@ -165,18 +165,19 @@ CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 SRC := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.cc))
 HEADERS := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.h))
 OBJ := $(patsubst src/%.cc,$(OBJECT_DIR)/%.o$,$(SRC))
+DEP := $(OBJ:.o=.d)
 
 makedirs:
 	-mkdir -p $(OBJECT_DIR) $(patsubst src/%,$(OBJECT_DIR)/%,$(SUBDIRS))
 
-$(OBJECT_DIR)/widelands: makedirs $(OBJ)
+$(OBJECT_DIR)/widelands: $(OBJ)
 	$(CXX) $(OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
 
--include $(OBJ:.o=.d)
+-include $(DEP)
 
 $(OBJECT_DIR)/%.o: src/%.cc
 	$(CXX) -pipe $(CXXFLAGS) -MMD -MP -MF $@.d -c -o $@ $<
-	sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@' $@.d > $(OBJECT_DIR)/$*.d
+	sed -e 's@^\(.*\)\.o:@\1.d \1.o:@' $@.d > $(OBJECT_DIR)/$*.d
 	rm $@.d
 
 tags: $(SRC) $(HEADERS)
