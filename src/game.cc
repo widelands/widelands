@@ -28,7 +28,7 @@
 #include "worker.h"
 #include "tribe.h"
 #include "player.h"
-#include "mapselectmenue.h"
+#include "ui/ui_fs_menus/fullscreen_menu_launchgame.h"
 #include "IntPlayer.h"
 #include "player.h"
 #include "building.h"
@@ -127,7 +127,11 @@ bool Game::run(void)
 
 	m_state = gs_menu;
 
-	if (launch_game_menu(this))
+   Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this);
+	int code = lgm->run();
+	delete lgm;
+
+	if (code)
 	{
 		assert(get_map());
 

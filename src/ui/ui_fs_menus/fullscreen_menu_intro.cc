@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,20 +16,28 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
- 
-#ifndef FIELDACTION_H
-#define FIELDACTION_H
 
-class Building;
-class PlayerImmovable;
-class Interactive_Player;
-struct UniqueWindowRegistry;
+#include "widelands.h"
+#include "fullscreen_menu_intro.h"
 
-// fieldaction.cc
-void show_field_action(Interactive_Player *parent, UniqueWindowRegistry* registry);
 
-// building_ui.cc
-void show_bulldoze_confirm(Interactive_Player* player, Building* building, PlayerImmovable* todestroy);
+/*
+==============================================================================
 
-#endif /* FIELDACTION_H */
+Fullscreen_Menu_Intro IMPLEMENTATION
 
+==============================================================================
+*/
+
+Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
+	: Fullscreen_Menu_Base("splash.jpg")
+{
+}
+
+bool Fullscreen_Menu_Intro::handle_mouseclick(uint btn, bool down, int x, int y)
+{
+	if (down)
+		end_modal(0);
+	
+	return true;
+}

@@ -20,10 +20,15 @@
 #include "widelands.h"
 #include "ui.h"
 #include "options.h"
-#include "mainmenue.h"
 #include "setup.h"
 #include "font.h"
-#include "intro.h"
+#include "fullscreen_menu_intro.h"
+#include "fullscreen_menu_main.h"
+#include "fullscreen_menu_singleplayer.h"
+#include "fullscreen_menu_options.h"
+#include "fullscreen_menu_fileview.h"
+#include "game.h"
+#include "editor.h"
 
 #include <SDL.h>
 
@@ -125,8 +130,94 @@ void g_main(int argc, char** argv)
 		g_init(argc, argv);
 
 		try {
-			intro();
-         main_menue();
+         Fullscreen_Menu_Intro r;
+         r.run();
+         bool done=false;
+         
+         while(!done) {
+            Fullscreen_Menu_Main *mm = new Fullscreen_Menu_Main;
+            int code = mm->run();
+            delete mm;
+
+            switch(code) {
+               case Fullscreen_Menu_Main::mm_singleplayer:
+                  {
+                     bool done=false;
+                     while(!done) {
+                        Fullscreen_Menu_SinglePlayer *sp = new Fullscreen_Menu_SinglePlayer;
+                        int code = sp->run();
+                        delete sp;
+
+                        switch(code) {
+                           case Fullscreen_Menu_SinglePlayer::sp_skirmish:
+                              {
+                                 Game *g = new Game;
+                                 bool ran = g->run();
+                                 delete g;
+                                 if (ran) {
+                                    // game is over. everything's good. restart Main Menu
+                                    done=true;
+                                 }
+                                 continue;
+                              }
+
+                           default:
+                           case Fullscreen_Menu_SinglePlayer::sp_back:
+                              break; 
+                        }
+                     }
+                  }
+                  break;
+
+               case Fullscreen_Menu_Main::mm_options:
+                  {
+                     Section *s = g_options.pull_section("global");
+                     Fullscreen_Menu_Options *om = new Fullscreen_Menu_Options(s->get_int("xres", 640), s->get_int("yres", 640), s->get_bool("fullscreen", false), s->get_bool("inputgrab", false));
+                     int code = om->run();
+
+                     if (code == Fullscreen_Menu_Options::om_ok) {
+                        Section *s = g_options.pull_section("global");
+
+                        s->set_int("xres", om->get_xres());
+                        s->set_int("yres", om->get_yres());
+                        s->set_bool("fullscreen", om->get_fullscreen());
+                        s->set_bool("inputgrab", om->get_inputgrab());
+                        Sys_SetInputGrab(om->get_inputgrab());
+                     }
+                     delete om;
+                  }
+                  break;
+
+               case Fullscreen_Menu_Main::mm_readme:
+                  {
+                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView("README","README");
+                     ff->run();
+                     delete ff;
+                  }
+                  break;
+
+               case Fullscreen_Menu_Main::mm_license:
+                  {
+                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView("COPYING","COPYING");
+                     ff->run();
+                     delete ff;
+                  }
+                  break;
+
+               case Fullscreen_Menu_Main::mm_editor: 
+                  {
+                     Editor* e=new Editor();
+                     e->run();
+                     delete e;
+                     break;
+                  }
+
+               default:
+               case Fullscreen_Menu_Main::mm_exit:
+                  done=true;
+                  break;
+            }
+         }
 		} catch(std::exception &e) {
 			critical_error("Unhandled exception: %s", e.what());
 		}

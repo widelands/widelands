@@ -52,3 +52,7 @@ II. Releasing
 1) Upload files to SourceForge
 
 2) Announce in news and widelands-announce
+
+3) Announce on Homepage
+
+4) Update Homepage, especially roadmap 

@@ -54,7 +54,7 @@ static void show_usage(void)
 " --record         Record all events to the given filename for later playback\n"
 " --playback       Playback given filename (see --record)\n"
 "\n"
-" --coredump       Generates a core dump on segaults instead of using the SDL\n"
+" --coredump       Generates a core dump on segfaults instead of using the SDL\n"
 "\n"
 " --help           Show this help\n"
 " --version        Show version\n"

@@ -136,19 +136,13 @@ endif
 # Object files and directories, final compilation flags
 
 OBJECT_DIR:=src/$(TARGET)-$(BUILD)
-
-# note: all src/*.cc files are considered source code
-WIDELANDS_SRC:=$(wildcard src/*.cc)
-WIDELANDS_OBJ:=$(patsubst src/%.cc,$(OBJECT_DIR)/%.o,$(WIDELANDS_SRC))
-WIDELANDS_DEP:=$(WIDELANDS_OBJ:.o=.d)
-
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
 LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image
 
 ##############################################################################
 # Building
-all: $(OBJECT_DIR) $(OBJECT_DIR)/widelands
+all: tags $(OBJECT_DIR)/widelands 
 	cp $(OBJECT_DIR)/widelands .
 	@echo -ne "\nCongrats. Build seems to be complete. If there was no "
 	@echo -ne "error (ignore file not found errors), you can run the game "
@@ -167,20 +161,30 @@ clean:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
+SUBDIRS=src src/ui/ui_fs_menus/
+
+CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
+CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
+SRC += $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.cc))
+
+OBJ := $(patsubst %.cc,$(OBJECT_DIR)/%.o$,$(notdir $(SRC)))
+
+#	$(patsubst %.cc,%.o, \
+#	$(filter %.cc,$(SRC)))
+
+$(OBJECT_DIR)/widelands: $(OBJ) 
+	$(CXX) $(OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
+
 %.h:
 
--include $(WIDELANDS_DEP)
+-include $(OBJ:.o=.d)
 
-DEP_SED:=sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@'
+$(OBJECT_DIR)/%.d: $(filter %/$(notdir $(basename $@)).cc,$(SRC))
+	$(CXX) -MM -MG $(CFLAGS) $(filter %/$(notdir $(basename $@)).cc,$(SRC)) | \
+	    sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@' > $@
 
-$(OBJECT_DIR)/%.o: src/%.cc
-	$(CXX) $(CXXFLAGS) -Wp,-MMD,"$*.d" -c -o $@ $<
-	$(DEP_SED) $*.d > $(OBJECT_DIR)/$*.d
-	rm $*.d
-
-
-$(OBJECT_DIR)/widelands: tags $(WIDELANDS_OBJ)
-	$(CXX) $(WIDELANDS_OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
+$(OBJECT_DIR)/%.o:  $(filter %/$(notdir $(basename $@)).cc,$(SRC))
+	$(CXX) $(CXXFLAGS) -c -o $@ $(filter %/$(notdir $(basename $@)).cc,$(SRC)) 
 
 tags: $(wildcard src/*.cc src/*.h)
 	@ if [ -x /usr/bin/ctags ]; then ctags -R || true ; else true; fi

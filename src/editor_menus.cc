@@ -24,7 +24,7 @@
 #include "editor_tools_option_menus.h"
 #include "editor_tools.h"
 #include "ui_editbox.h"
-#include "fileviewscreen.h"
+#include "ui/ui_fs_menus/fullscreen_menu_fileview.h"
 #include <string>
 
 static const char* EDITOR_README =

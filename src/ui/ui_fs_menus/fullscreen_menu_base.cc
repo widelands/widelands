@@ -21,23 +21,23 @@
 #include "options.h"
 #include "ui.h"
 #include "graphic.h"
-#include "menuecommon.h"
+#include "fullscreen_menu_base.h"
 
 /*
 ==============================================================================
 
-BaseMenu
+Fullscreen_Menu_Base
 
 ==============================================================================
 */
 
-/** BaseMenu::BaseMenu(const char *bgpic)
+/** Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
  *
  * Initialize a pre-game menu
  *
  * Args: bgpic	name of the background picture
  */
-BaseMenu::BaseMenu(const char *bgpic)
+Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 	: Panel(0, 0, 0, MENU_XRES, MENU_YRES)
 {
 	// Switch graphics mode if necessary
@@ -52,14 +52,10 @@ BaseMenu::BaseMenu(const char *bgpic)
 }
 
 
-/*
-===============
-BaseMenu::draw
-
+/**
 Draw the splash screen
-===============
 */
-void BaseMenu::draw(RenderTarget* dst)
+void Fullscreen_Menu_Base::draw(RenderTarget* dst)
 {
 	dst->blit(0, 0, m_pic_background);
 }

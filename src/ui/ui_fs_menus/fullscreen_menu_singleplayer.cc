@@ -20,36 +20,12 @@
 #include "widelands.h"
 #include "graphic.h"
 #include "ui.h"
-#include "mainmenue.h"
-#include "menuecommon.h"
-#include "game.h"
-#include "singlepmenue.h"
-#include "mapselectmenue.h"
+#include "fullscreen_menu_base.h"
+#include "fullscreen_menu_singleplayer.h"
 
-/*
-==============================================================================
 
-SinglePlayerMenu
-
-==============================================================================
-*/
-
-enum {
-	sp_skirmish,
-	//sp_campaign, // BIG TODO
-	//sp_loadgame,
-	sp_back
-};
-
-class SinglePlayerMenu : public BaseMenu {
-public:
-	SinglePlayerMenu();
-
-	void not_supported();
-};
-
-SinglePlayerMenu::SinglePlayerMenu()
-	: BaseMenu("singleplmenu.jpg")
+Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
+	: Fullscreen_Menu_Base("singleplmenu.jpg")
 {
 	// Text
 	new Textarea(this, MENU_XRES/2, 140, "Single Player Menu", Align_HCenter);
@@ -58,55 +34,23 @@ SinglePlayerMenu::SinglePlayerMenu()
 	Button* b;
 
 	b = new Button(this, 60, 170, 174, 24, 1, sp_skirmish);
-	b->clickedid.set(this, &SinglePlayerMenu::end_modal);
+	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title("Single Map");
 
 	b = new Button(this, 60, 210, 174, 24, 1);
-	b->clicked.set(this, &SinglePlayerMenu::not_supported);
+	b->clicked.set(this, &Fullscreen_Menu_SinglePlayer::not_supported);
 	b->set_title("Campaign");
 
 	b = new Button(this, 60, 250, 174, 24, 1);
-	b->clicked.set(this, &SinglePlayerMenu::not_supported);
+	b->clicked.set(this, &Fullscreen_Menu_SinglePlayer::not_supported);
 	b->set_title("Load Game");
 
 	b = new Button(this, 60, 370, 174, 24, 0, sp_back);
-	b->clickedid.set(this, &SinglePlayerMenu::end_modal);
+	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
 	b->set_title("Back");
 }
 
-void SinglePlayerMenu::not_supported()
+void Fullscreen_Menu_SinglePlayer::not_supported()
 {
 	critical_error("This is not yet supported. You can safely click on continue.");
-}
-
-
-/** void single_player_menue(void)
- *
- * This takes care for the single player menue, chosing campaign or
- * single player maps and so on, so on.
- */
-void single_player_menue(void)
-{
-	for(;;)
-	{
-		SinglePlayerMenu *sp = new SinglePlayerMenu;
-		int code = sp->run();
-		delete sp;
-
-		switch(code) {
-		case sp_skirmish:
-		{
-			Game *g = new Game;
-			bool ran = g->run();
-			delete g;
-			if (ran)
-				return;
-			break;
-		}
-		
-		default:
-		case sp_back:
-			return;
-		}
-	}
 }
