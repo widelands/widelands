@@ -72,9 +72,10 @@ Section
 ==============================================================================
 */
 
-Section::Section(std::ostream &errstream, const char *name)
+Section::Section(std::ostream &errstream, const char *name, bool supress_error)
 	: err(errstream), values(8, 8)
 {
+   supr_err=supress_error;
 	used = false;
 	sname = strdup(name);
 }
@@ -95,8 +96,9 @@ void Section::check_used()
 {
 	for(int i = 0; i < values.elements(); i++) {
 		Value *v = (Value *)values.element_at(i);
-		if (!v->used)
-			err << "Section [" << sname << "], key '" << v->name << "' not used (did you spell the name correctly?)" << std::endl;
+		if (!v->used) {
+			if(!supr_err) err << "Section [" << sname << "], key '" << v->name << "' not used (did you spell the name correctly?)" << std::endl;
+      }
 	}
 }
 
@@ -199,7 +201,7 @@ bool Section::get_boolean(const char *name, bool def)
 		if (!strcmpi(v->val, falseWords[i]))
 			return false;
 
-	err << "[" << sname << "], key '" << name << "' is not a boolean value" << std::endl;
+	if(!supr_err) err << "[" << sname << "], key '" << name << "' is not a boolean value" << std::endl;
 	return def;
 }
 
@@ -275,7 +277,7 @@ const char *Section::get_next_boolean(const char *name, bool *value)
 				return v->name;
 			}
 
-		err << "[" << sname << "], key '" << v->name << "' is not a boolean value" << std::endl;
+		if(!supr_err) err << "[" << sname << "], key '" << v->name << "' is not a boolean value" << std::endl;
 		// we can't really return anything, so just get the next value
 		// I guess a goto would be more logical in this rare situation ;p
 	}
@@ -315,11 +317,12 @@ Profile
  * Args: errstream	all syntax errors etc.. are written to this stream
  *       filename	name of the .ini file
  */
-Profile::Profile(std::ostream &errstream, const char* filename, bool section_less_file )
+Profile::Profile(std::ostream &errstream, const char* filename, bool section_less_file,  bool suppress_error_msg )
 	: err(errstream), sections(8, 8)
 {
+   supr_err=suppress_error_msg;
    if(section_less_file) {
-      sections.add(new Section(errstream, "[__NO_SEC__]"));
+      sections.add(new Section(errstream, "[__NO_SEC__]", supr_err));
    }
    parse(filename, section_less_file);
 }
@@ -328,10 +331,11 @@ Profile::~Profile()
 {
 	for(int i = sections.elements()-1; i >= 0; i--) {
 		Section *s = (Section *)sections.element_at(i);
-		if (!s->used)
-			err << "Section [" << s->get_name() << "] not used (did you spell the name correctly?)" << std::endl;
-		else
+		if (!s->used) {
+			if(!supr_err) err << "Section [" << s->get_name() << "] not used (did you spell the name correctly?)" << std::endl;
+      } else {
 			s->check_used();
+      }
 		delete s;
 	}
 }
@@ -443,11 +447,11 @@ void Profile::parse(const char *filename, bool section_less_file )
 
       if (p[0] == '[') {
          if(section_less_file) {
-            err << filename<<", line "<<linenr<<": Section "<<p<<" in sectionless file!" << std::endl;
+            if(!supr_err) err << filename<<", line "<<linenr<<": Section "<<p<<" in sectionless file!" << std::endl;
          } else {
             p++;
             setEndAt(p, ']');
-            s = new Section(err, p);
+            s = new Section(err, p, supr_err);
             sections.add(s);
          }
       } else {
@@ -460,17 +464,19 @@ void Profile::parse(const char *filename, bool section_less_file )
             rtrim(p);
 
             if(!section_less_file) {
-               if (s)
+               if (s) {
                   s->add_val(p, tail);
-               else
-                  err << filename<<", line "<<linenr<<": key "<<p<<" outside section" << std::endl;
+               } else {
+                  if(!supr_err) err << filename<<", line "<<linenr<<": key "<<p<<" outside section" << std::endl;
+               }
             } else {
                ((Section*) sections.element_at(0))->add_val(p, tail);
                // add to default section
             }
 
-         } else
-            err << filename<<", line "<<linenr<<": syntax error" << std::endl;
+         } else {
+            if(!supr_err) err << filename<<", line "<<linenr<<": syntax error" << std::endl;
+         }
       }
    }
 }

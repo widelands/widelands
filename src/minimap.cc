@@ -105,20 +105,22 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 	ey = dst->get_h() - ofsy;
 	if (ey > _map->get_h())
 		ey = _map->get_h();
-
-	for(int y = sy; y < ey; y++)
+			
+   ushort clr;
+	Field* f;
+   for(int y = sy; y < ey; y++)
 	{
 		ushort *pix = dst->get_pixels() + (y+ofsy)*dst->get_pitch() + (sx+ofsx);
-
+			
+      f = _map->get_field(sx, y);
 		for(int x = sx; x < ex; x++)
 		{
-			Field *f = _map->get_field(x, y);
-			ushort clr;
 
 			clr = *f->get_texd()->get_pixels();
 			clr = bright_up_clr2(clr, f->get_brightness());
 
 			*pix++ = clr;
+         f = _map->get_nfield();
 		}
 	}
 

@@ -47,6 +47,7 @@ class Section {
 	friend Profile;
 
 	std::ostream &err;
+   bool supr_err;
 	bool used;
 	char *sname;
 
@@ -60,7 +61,7 @@ class Section {
 		~Value();
 	};
 
-	Section(std::ostream &errstream, const char *name);
+	Section(std::ostream &errstream, const char *name, bool supress_error);
 	~Section();
 
 	void check_used();
@@ -96,10 +97,11 @@ have been used. name can be 0 to retrieve any remaining sections.
 class Profile {
 	std::ostream &err;
 	Growable_Array sections;
+   bool supr_err;
 
 	void parse(const char *filename, bool section_less_file);
 public:
-	Profile(std::ostream &errstream, const char* filename, bool section_less_file = false);
+	Profile(std::ostream &errstream, const char* filename, bool section_less_file = false, bool suppress_error_msg = false);
 	~Profile();
 
 	Section *get_section(const char *name);
