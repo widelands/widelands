@@ -3433,11 +3433,12 @@ Important: This must only be called by the Request class.
 void Economy::add_request(Request* req)
 {
 	assert(req->is_open());
+	assert(!have_request(req));
 
 	log("%p: add_request(%p) for %u\n", this, req,
 			req->get_target((Game*)get_owner()->get_game())->get_serial());
 
-	m_requests.insert(req);
+	m_requests.push_back(req);
 
 	// Try to fulfill the request
 	start_request_timer();
@@ -3453,7 +3454,9 @@ Return true if the given Request is registered with the Economy.
 */
 bool Economy::have_request(Request* req)
 {
-	return m_requests.find(req) != m_requests.end();
+	RequestList::iterator it = std::find(m_requests.begin(), m_requests.end(), req);
+
+	return it != m_requests.end();
 }
 
 
@@ -3470,7 +3473,17 @@ void Economy::remove_request(Request* req)
 	log("%p: remove_request(%p) for %u\n", this, req,
 			req->get_target((Game*)get_owner()->get_game())->get_serial());
 
-	m_requests.erase(req);
+	RequestList::iterator it = std::find(m_requests.begin(), m_requests.end(), req);
+
+	if (it == m_requests.end()) {
+		log("WARNING: remove_request(%p) not in list\n", req);
+		return;
+	}
+
+	if (it != m_requests.end()-1)
+		*it = *m_requests.rbegin();
+
+	m_requests.pop_back();
 }
 
 

@@ -587,7 +587,7 @@ private:
 	static void request_timer_cb(Game* g, int serial, int unused);
 
 private:
-	typedef std::set<Request*> RequestList;
+	typedef std::vector<Request*> RequestList;
 
 	Player*	m_owner;
 	uint		m_trackserial;
