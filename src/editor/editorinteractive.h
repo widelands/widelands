@@ -58,13 +58,17 @@ class Editor_Interactive : public Interactive_Base {
 
       void exit_editor();
 
+      void set_need_save(bool t) { m_need_save=t; }
+
    private:
-      static const int PANEL_HEIGHT=100;
       void toggle_buildhelp();
       void tool_menu_btn();
       void toolsize_menu_btn();
       void toggle_mainmenu();
       void toggle_eventmenu();
+
+      // State variables
+      bool m_need_save;
 
       // Tool
       Editor_Tools tools;

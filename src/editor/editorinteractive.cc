@@ -26,6 +26,7 @@
 #include "mapview.h"
 #include "player.h"
 #include "ui_button.h"
+#include "ui_modal_messagebox.h"
 #include "editor_main_menu.h"
 #include "editor_event_menu.h"
 #include "editor_tool_menu.h"
@@ -41,7 +42,6 @@
 #include "editor_set_starting_pos_tool.h"
 #include "editor_place_bob_tool.h"
 #include "editor_increase_resources_tool.h"
-
 
 /**********************************************
  *
@@ -115,6 +115,9 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Tool_Info(5, 7, new Editor_Set_Down_Terrain_Tool()));
    tools.tools.push_back(new Tool_Info(5, 6, new Editor_Set_Both_Terrain_Tool()));
   */
+
+   m_need_save=false;
+
    select_tool(1, 0);
 }
 
@@ -155,7 +158,13 @@ exit the editor
 */
 void Editor_Interactive::exit_editor()
 {
-	end_modal(0);
+	if(m_need_save) {
+      UIModal_Message_Box* mmb=new UIModal_Message_Box(this, "Map unsaved", "The Map is unsaved, do you really want to quit?", UIModal_Message_Box::YESNO); 
+      int code=mmb->run();
+      delete mmb;
+      if(code==0) return;
+   }
+   end_modal(0);
 }
 
 /*
@@ -197,6 +206,7 @@ void Editor_Interactive::field_clicked() {
    Map* m=get_map();
    FCoords cords(get_fieldsel_pos(), m->get_field(get_fieldsel_pos()));
    tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, cords, m, this);
+   set_need_save(true);
 }
 
 /*

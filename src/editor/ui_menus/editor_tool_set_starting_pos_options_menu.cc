@@ -173,10 +173,10 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
       Coords c=m_parent->get_map()->get_starting_pos(n);
       if(c.x!= -1 && c.y!= -1) 
          m_parent->move_view_to(c.x,c.y);
-   
+
       // Reselect tool, so everything is in a defined state
       m_parent->select_tool(m_parent->get_selected_tool(),0);
-     
+
       // Register callback function to make sure that only valid fields are selected.
       m_parent->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Tool_Set_Starting_Pos_Callback, m_parent->get_map());
       m_parent->get_map()->recalc_whole_map();
@@ -198,6 +198,7 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
          else t=m_tribes[++i];
       }
       m_parent->get_map()->set_scenario_player_tribe(m+1,t); 
+      m_parent->set_need_save(true);
    } else if(n<1000) {
       // Player name has been changed
       int m=n-750;   
@@ -207,6 +208,7 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
          m_plr_names[m]->set_text(text.c_str());
       }
       m_parent->get_map()->set_scenario_player_name(m+1, text);
+      m_parent->set_need_save(true);
    } else {
       int nr_players=m_parent->get_map()->get_nrplayers();
       // Up down button
@@ -224,12 +226,14 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
          m_parent->get_map()->set_nrplayers(nr_players);
          m_parent->get_map()->set_scenario_player_name(nr_players, name);
          m_parent->get_map()->set_scenario_player_tribe(nr_players, "<undefined>");
+         m_parent->set_need_save(true);
       } else {
          std::string name= m_parent->get_map()->get_scenario_player_name(nr_players);
          std::string tribe=  m_parent->get_map()->get_scenario_player_tribe(nr_players);
          m_parent->get_map()->set_nrplayers(nr_players);
          m_parent->get_map()->set_scenario_player_name(nr_players, name); 
          m_parent->get_map()->set_scenario_player_tribe(nr_players, tribe);
+         m_parent->set_need_save(true);
       }
    }
    update();

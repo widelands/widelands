@@ -164,6 +164,9 @@ void Main_Menu_Load_Map::clicked(int id) {
    for(i=0; i<m_map->get_number_of_triggers(); i++)
       m_map->reference_trigger(m_map->get_trigger(i));
 
+   // Tell the interactive that the map is saved and all
+   m_parent->set_need_save(false);
+
    delete ml;
    }
    die();

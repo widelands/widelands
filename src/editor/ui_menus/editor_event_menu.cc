@@ -162,6 +162,7 @@ void Editor_Event_Menu::clicked(int id) {
             ntm->run();
             delete ntm;
             update();
+            m_parent->set_need_save(true);
          }
       } else if(id==1) {
          // Delete event
@@ -170,11 +171,13 @@ void Editor_Event_Menu::clicked(int id) {
          event->cleanup(m_parent->get_egbase());
          // Some paranoia
          m_parent->get_map()->delete_unreferenced_triggers();
+         m_parent->set_need_save(true);
          update();
       } else if(id==2) {
          Event* event=static_cast<Event*>(m_event_list->get_selection());
          Editor_Event_Menu_Choose_Trigger* ntm=new Editor_Event_Menu_Choose_Trigger(m_parent, event);
-         ntm->run();
+         if(ntm->run())
+            m_parent->set_need_save(true);
          delete ntm;
          update();
       }
@@ -183,13 +186,16 @@ void Editor_Event_Menu::clicked(int id) {
          // New Trigger
          Editor_Event_Menu_New_Trigger* ntm=new Editor_Event_Menu_New_Trigger(m_parent);
          int retval=ntm->run();
-         if(retval) 
+         if(retval)  {
             update();
+            m_parent->set_need_save(true);
+         }
          delete ntm;
       } else if(id==4) {
          // Edit trigger
          Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
          trig=Trigger_Factory::make_trigger_with_option_dialog(trig->get_id(), m_parent, trig);
+         m_parent->set_need_save(true);
          update();
       } else if(id==5) {
          // Delete trigger
@@ -203,6 +209,7 @@ void Editor_Event_Menu::clicked(int id) {
             return;
          }
          m_parent->get_map()->unregister_trigger(trig);
+         m_parent->set_need_save(true);
          update();
       }
    }

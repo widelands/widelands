@@ -85,6 +85,7 @@ void Main_Menu_Save_Map::clicked(int id) {
       Widelands_Map_Saver* wms=new Widelands_Map_Saver(realname, m_parent->get_editor());
       try {
          wms->save();
+         m_parent->set_need_save(false);
       } catch(std::exception& exe) {
          std::string s="Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason given:\n";
          s+=exe.what();
