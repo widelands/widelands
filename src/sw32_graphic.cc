@@ -1173,7 +1173,8 @@ void GraphicImpl::refresh()
 //	if (m_update_fullscreen)
 		//SDL_UpdateRect(m_sdlsurface, 0, 0, 0, 0);
    if(m_lock_sdl_surface) { 
-      SDL_LockSurface(m_sdlsurface);
+      if(SDL_LockSurface(m_sdlsurface)) // If lock fails, do not draw this frame
+         return;
       memcpy(m_sdlsurface->pixels, m_screen.pixels, m_screen_pixels_size_in_bytes);
       SDL_UnlockSurface(m_sdlsurface);
    } 

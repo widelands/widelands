@@ -1099,7 +1099,8 @@ void GraphicImpl::refresh()
 {
 //	if (m_update_fullscreen)
    if(m_lock_sdl_surface) { 
-      SDL_LockSurface(m_sdlsurface);
+      if(SDL_LockSurface(m_sdlsurface)) // When lock failed, do not draw this frame
+         return; 
       memcpy(m_sdlsurface->pixels, m_screen.pixels, m_screen_pixels_size_in_bytes);
       SDL_UnlockSurface(m_sdlsurface);
    } 
