@@ -74,9 +74,8 @@ class Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Men
 
    private:
       Textarea* m_textarea;
-      Radiogroup* m_radiogroup;
       Editor_Set_Both_Terrain_Tool* m_sbt;
-      void selected(int);
+      void selected(int,bool);
 };
 
 class Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu {

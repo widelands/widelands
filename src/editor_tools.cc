@@ -236,89 +236,34 @@ int Editor_Noise_Height_Tool::handle_click_impl(const Coords* coordinates, Field
 /*
 =============================
 
-class Editor_Set_Down_Terrain_Tool
+class Set_Terrain
 
 =============================
 */
 
 /*
 ===========
-Editor_Set_Down_Terrain_Tool::handle_click_impl()
+Set_Terrain::set_terrain()
 
-decrease the height of the current field by one,
-this decreases the height of the surrounding fields also
-if this is needed.
+This changes the terrain in the given area. It randoms through all selected
+terrains.
 ===========
 */
-int Editor_Set_Down_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+int Set_Terrain::set_terrain(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent, bool right, bool down) {
+   if(!get_nr_enabled()) return parent->get_fieldsel_radius();
    MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
-
-   int i, max;
+   
+   int i, j, max;
    max=0;
    while(mrc.next(&c)) {
-      i=map->change_field_terrain(c,m_terrain,true, false);
+      i=j=0;
+      if(right) 
+         i=map->change_field_terrain(c,get_random_enabled(),false,true);
+      if(down)
+         j=map->change_field_terrain(c,get_random_enabled(),true,false);
       if(i>max) max=i;
-   }
-   return parent->get_fieldsel_radius()+max;
-}
-
-/*
-=============================
-
-class Editor_Set_Right_Terrain_Tool
-
-=============================
-*/
-
-/*
-===========
-Editor_Set_Right_Terrain_Tool::handle_click_impl()
-
-decrease the height of the current field by one,
-this decreases the height of the surrounding fields also
-if this is needed.
-===========
-*/
-int Editor_Set_Right_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
-   Coords c;
-
-   int i, max;
-   max=0;
-   while(mrc.next(&c)) {
-      i=map->change_field_terrain(c,m_terrain,false,true);
-      if(i>max) max=i;
-   }
-   return parent->get_fieldsel_radius()+max;
-}
-
-/*
-=============================
-
-class Editor_Set_Both_Terrain_Tool
-
-=============================
-*/
-
-/*
-===========
-Editor_Set_Both_Terrain_Tool::handle_click_impl()
-
-decrease the height of the current field by one,
-this decreases the height of the surrounding fields also
-if this is needed.
-===========
-*/
-int Editor_Set_Both_Terrain_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
-   Coords c;
-
-   int i, max;
-   max=0;
-   while(mrc.next(&c)) {
-      i=map->change_field_terrain(c,m_terrain,true,true);
-      if(i>max) max=i;
+      if(j>max) max=j;
    }
    return parent->get_fieldsel_radius()+max;
 }
@@ -340,22 +285,18 @@ and places this on the current field
 ===========
 */
 int Editor_Place_Immovable_Tool::handle_click_impl(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   if(!m_nr_enabled) return parent->get_fieldsel_radius();
+   if(!get_nr_enabled()) return parent->get_fieldsel_radius();
 
    MapRegion mrc(map, *coordinates, parent->get_fieldsel_radius());
    Coords c;
 
    while(mrc.next(&c)) {
-      int rand_value=(int) ((double)(m_nr_enabled)*rand()/(RAND_MAX+1.0));
-      int i=0;
-      int j=rand_value+1;
-      while(j) { if(m_immovables_enabled[i]==true) j--; ++i; }
       Field *f = parent->get_map()->get_field(c);
       if (f->get_immovable()) {
          if(f->get_immovable()->get_size() != BaseImmovable::NONE)
             continue;
       }
-      parent->get_editor()->create_immovable(c.x, c.y, i-1);
+      parent->get_editor()->create_immovable(c.x, c.y, get_random_enabled());
    }
    return parent->get_fieldsel_radius()+2;
 }

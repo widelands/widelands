@@ -327,7 +327,6 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    if(textures_in_row*textures_in_row<nr_textures) { textures_in_row++; }
    int i=1;
 
-   m_radiogroup = new Radiogroup();
    set_inner_size((textures_in_row)*(TEXTURE_W+1+space)+xstart, (textures_in_row)*(TEXTURE_H+1+space)+ystart+yend);
 
    int ypos=ystart;
@@ -336,7 +335,12 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    while(i<=nr_textures) {
       if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
 
-      m_radiogroup->add_button(this, xpos , ypos, g_gr->get_picture(PicMod_Game, get_graphicimpl()->get_maptexture_data(i)->get_texture_picture()));
+      Checkbox* cb=new Checkbox(this, xpos , ypos, g_gr->get_picture(PicMod_Game, get_graphicimpl()->get_maptexture_data(i)->get_texture_picture()));
+
+      cb->set_size(TEXTURE_W+1, TEXTURE_H+1);
+      cb->set_id(i-1);
+      cb->set_state(m_sbt->is_enabled(i-1));
+      cb->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
 
       xpos+=TEXTURE_W+1+space;
       ++cur_x;
@@ -347,16 +351,19 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    Textarea* ta=new Textarea(this, 0, 5, "Choose Terrain Menu", Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
-   char buf[250];
-   sprintf(buf, "Current: %s", parent->get_map()->get_world()->get_terrain(sbt->get_terrain())->get_name());
+
+   std::string buf="Current: ";
+   int j=m_sbt->get_nr_enabled();
+   for(int i=0; j; i++) {
+      if(m_sbt->is_enabled(i)) {
+         buf+=get_parent()->get_map()->get_world()->get_terrain(i)->get_name();
+         buf+=" ";
+         --j;
+      }
+   }
+   
    m_textarea=new Textarea(this, 5, ypos, buf);
    m_textarea->set_pos((get_inner_w()-m_textarea->get_w())/2, ypos);
-
-   m_radiogroup->changedto.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
-
-   if (m_radiogroup->get_state() < 0)
-      m_radiogroup->set_state(sbt->get_terrain());
-
 }
 
 /*
@@ -367,12 +374,21 @@ called, when one of the up/down buttons is pressed
 id: 0 is up, 1 is down
 ===========
 */
-void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n) {
-   m_sbt->set_terrain(n);
+void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
+   m_sbt->enable(n,t);
 
-   char buf[250];
-   sprintf(buf, "Current: %s", get_parent()->get_map()->get_world()->get_terrain(n)->get_name());
-   m_textarea->set_text(buf);
+   std::string buf="Current: ";
+   int j=m_sbt->get_nr_enabled();
+   for(int i=0; j; i++) {
+      if(m_sbt->is_enabled(i)) {
+         buf+=get_parent()->get_map()->get_world()->get_terrain(i)->get_name();
+         buf+=" ";
+         --j;
+      }
+   }
+   
+   m_textarea->set_text(buf.c_str());
+   m_textarea->set_pos((get_inner_w()-m_textarea->get_w())/2, m_textarea->get_y());
 }
 
 /*
@@ -470,5 +486,5 @@ this is called when one of the state boxes is toggled
 ===========
 */
 void Editor_Tool_Place_Immovable_Options_Menu::clicked(int n, bool t) {
-   m_pit->enable_immovable(n,t);
+   m_pit->enable(n,t);
 }
