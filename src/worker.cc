@@ -1469,10 +1469,14 @@ void Worker::init_auto_task(Game* g)
 	PlayerImmovable* location = get_location(g);
 
 	if (location) {
-		molog("init_auto_task: go warehouse\n");
+		if (get_economy()->get_nr_warehouses()) {
+			molog("init_auto_task: go warehouse\n");
 
-		start_task_gowarehouse(g);
-		return;
+			start_task_gowarehouse(g);
+			return;
+		}
+
+		set_location(0);
 	}
 
 	molog("init_auto_task: become fugitive\n");
@@ -2136,9 +2140,20 @@ void Worker::gowarehouse_update(Game* g, State* state)
 		return;
 	}
 
+	if (!get_economy()->get_nr_warehouses()) {
+		molog("[gowarehouse]: No warehouse left in Economy\n");
+		pop_task(g);
+		return;
+	}
+
+	// Idle until we are assigned a transfer.
+	// The delay length is rather arbitrary, but we need some kind of
+	// check against disappearing warehouses, or the worker will just
+	// idle on a flag until the end of days (actually, until either the
+	// flag is removed or a warehouse connects to the Economy).
 	molog("[gowarehouse]: Idle\n");
 
-	start_task_idle(g, get_idle_anim(), -1);
+	start_task_idle(g, get_idle_anim(), 1000);
 }
 
 

@@ -270,6 +270,7 @@ void Bob::act(Game* g, uint data)
 
 		m_stack_dirty = false;
 		init_auto_task(g);
+		m_sched_init_task = false;
 
 		if (!m_stack.size())
 			throw wexception("MO(%u): init_auto_task() failed to set a task", get_serial());

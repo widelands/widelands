@@ -563,6 +563,7 @@ public:
 
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);
+	uint get_nr_warehouses() const { return m_warehouses.size(); }
 
 	void add_request(Request* req);
 	bool have_request(Request* req);
