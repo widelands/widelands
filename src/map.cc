@@ -545,6 +545,7 @@ Some events can change the map in a way that run-time calculated attributes
 
 These events include:
 - change of height (e.g. by planing)
+- change of terrain (in the editor)
 - insertion of a "robust" Map_Object
 - removal of a "robust" Map_Object
 

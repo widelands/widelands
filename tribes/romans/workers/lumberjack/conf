@@ -11,7 +11,7 @@ program=chop
 # given direction
 
 [chop]
-0=findobject attrib:tree radius:7	# find an object matching the given criteria, put it into the object slot
+0=findobject attrib:tree radius:8	# find an object matching the given criteria, put it into the object slot
 1=walk object								# walk to the object in the object slot
 2=animation idle 10000					# play an animation (TODO: hacking animtion)
 3=object fall								# cause the object to change its program (to 'fall')

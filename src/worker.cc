@@ -1193,7 +1193,7 @@ void Worker::program_update(Game* g, State* state)
 
 				molog("  FindSpace(%i): for %i\n", act->iparam1, state->ivar2);
 
-				if (state->ivar2 < 0 || state->ivar2 >= w->get_nr_bobs()) {
+				if (state->ivar2 < 0 || state->ivar2 >= w->get_nr_immovables()) {
 					molog("  WARNING: [actFindSpace]: bad immovable index %i\n", state->ivar2);
 					set_signal("fail");
 					pop_task(g);
@@ -1220,6 +1220,7 @@ void Worker::program_update(Game* g, State* state)
 
 				state->ivar1++;
 				schedule_act(g, 10);
+				return;
 			}
 
 		case WorkerAction::actWalk:
