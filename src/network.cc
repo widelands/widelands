@@ -27,6 +27,7 @@
 #include "network_system.h"
 #include "game.h"
 #include "player.h"
+#include "interactive_player.h"
 #include "playercommand.h"
 #include "playerdescrgroup.h"
 #include "tribe.h"
@@ -35,6 +36,8 @@
 #include "network_lan_promotion.h"
 #include "wexception.h"
 #include "fullscreen_menu_launchgame.h"
+#include "ui_window.h"
+#include "ui_table.h"
 
 
 #define CHECK_SYNC_INTERVAL	2000
@@ -50,7 +53,10 @@ enum {
 	NETCMD_DISCONNECT_PLAYER,
 	NETCMD_SELECTMAP,
 	NETCMD_PLAYERINFO,
-	NETCMD_START,
+	NETCMD_PREGAME_STATUS,
+	NETCMD_BEGIN_PREGAME,
+	NETCMD_BEGIN_GAME,
+	NETCMD_READY,
 	NETCMD_PING,
 	NETCMD_PONG,
 	NETCMD_ADVANCETIME,
@@ -76,6 +82,25 @@ class Cmd_NetCheckSync:public BaseCommand {
 	virtual int get_id(void) { return QUEUE_CMD_NETCHECKSYNC; }
 };
 
+
+class NetStatusWindow:public UIWindow {
+    public:
+	NetStatusWindow (UIPanel*);
+	
+	void add_player (int);
+	void set_ready (int);
+    
+    private:
+	struct Entry {
+		UITable_Entry*	entry;
+		int		plnum;
+	};
+	
+	UITable*		table;
+	
+	std::vector<Entry>	entries;
+};
+
 /* A note on simulation timing:
 In a network game, in addition to the regular game time the concept of network
 time (NetGame::net_game_time) is introduced. Network time is always ahead of game
@@ -95,8 +120,11 @@ NetGame::NetGame ()
 	game=0;
 	net_game_time=0;
 	playernum=0;
+	phase=PH_SETUP;
 	
 	players_changed=false;
+	
+	statuswnd=0;
 }
 
 NetGame::~NetGame ()
@@ -114,6 +142,23 @@ void NetGame::run ()
 	delete game;
 
 	game=0;
+}
+
+void NetGame::begin_game ()
+{
+	int i;
+	
+	phase=PH_PREGAME;
+	
+	statuswnd=new NetStatusWindow(game->get_ipl());
+	statuswnd->center_to_parent ();
+	
+	for (i=0;i<MAX_PLAYERS;i++)
+	    if (player_human & (1<<i))
+		statuswnd->add_player (i+1);
+	
+	statuswnd->set_ready (playernum);
+	player_ready=1<<(playernum-1);
 }
 
 bool NetGame::have_chat_message ()
@@ -211,25 +256,24 @@ void NetHost::update_map ()
 
 void NetHost::send_player_info ()
 {
-	unsigned char playerenabled, playerhuman;
 	Player* pl;
 	int i;
 	
-	playerenabled=0;
-	playerhuman=0;
+	player_enabled=0;
+	player_human=0;
 	
 	for (i=0;i<MAX_PLAYERS;i++)
 		if ((pl=game->get_player(i+1))!=0) {
-			playerenabled|=1<<i;
+			player_enabled|=1<<i;
 			
 			if (pl->get_type()!=Player::playerAI)
-				playerhuman|=1<<i;
+				player_human|=1<<i;
 		}
 	
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_PLAYERINFO);
-	serializer->putchar (playerenabled);
-	serializer->putchar (playerhuman);
+	serializer->putchar (player_enabled);
+	serializer->putchar (player_human);
 	serializer->end_packet ();
 	
 	for (unsigned int i=0;i<clients.size();i++)
@@ -250,18 +294,20 @@ void NetHost::begin_game ()
 	game->logic_rand_seed (common_rand_seed);
 	
 	serializer->begin_packet ();
-	serializer->putchar (NETCMD_START);
+	serializer->putchar (NETCMD_BEGIN_PREGAME);
 	serializer->putlong (common_rand_seed);
 	serializer->end_packet ();
 	
 	for (unsigned int i=0;i<clients.size();i++)
 		serializer->send (clients[i].sock);
+	
+	NetGame::begin_game ();
 }
 
 void NetHost::handle_network ()
 {
 	TCPsocket sock;
-	unsigned int i;
+	unsigned int i,j;
 	
 	if (promoter!=0)
 	    promoter->run ();
@@ -339,6 +385,32 @@ void NetHost::handle_network ()
 	for (i=0;i<clients.size();i++)
 		while (clients[i].deserializer->avail())
 			switch (clients[i].deserializer->getchar()) {
+			    case NETCMD_READY:
+				assert (phase==PH_PREGAME);
+				assert (statuswnd!=0);
+				
+				statuswnd->set_ready (clients[i].playernum);
+				
+				player_ready|=1<<(clients[i].playernum-1);
+				
+				serializer->begin_packet ();
+				serializer->putchar (NETCMD_PREGAME_STATUS);
+				serializer->putchar (player_ready);
+				
+				if (player_ready==player_human) {
+				    serializer->putchar (NETCMD_BEGIN_GAME);
+
+				    phase=PH_INGAME;
+				    
+				    delete statuswnd;
+				    statuswnd=0;
+				}
+				
+				serializer->end_packet ();
+
+				for (j=0;j<clients.size();j++)
+				    serializer->send (clients[j].sock);
+				break;
 			    case NETCMD_PONG:
 				if (clients[i].lag>0) {
 				    printf ("Duplicate pong received\n");
@@ -382,7 +454,7 @@ void NetHost::handle_network ()
 	// according to the network speed and lag.
 	// The values used here should be alright for a
 	// slow dialup connection.
-	if (net_game_time - game->get_gametime() < net_delay/2) {
+	if (phase==PH_INGAME && net_game_time - game->get_gametime() < net_delay/2) {
 		serializer->begin_packet ();
 
 		// send any outstanding player commands
@@ -415,7 +487,7 @@ void NetHost::handle_network ()
 	}
     
 	// see if it is time to check network lag again
-	if (SDL_GetTicks()>=next_ping_due) {
+	if (phase==PH_INGAME && SDL_GetTicks()>=next_ping_due) {
 		printf ("Ping!\n");
 		
 		last_ping_sent=SDL_GetTicks();
@@ -572,10 +644,18 @@ NetClient::~NetClient ()
 
 void NetClient::begin_game ()
 {
+	NetGame::begin_game ();
+	
+	serializer->begin_packet ();
+	serializer->putchar (NETCMD_READY);
+	serializer->end_packet ();
+	serializer->send (sock);
 }
 
 void NetClient::handle_network ()
 {
+	int i;
+	
 	// What does this do here? It probably doesn't belong here.
 	NetGGZ::ref()->data();
 
@@ -616,29 +696,45 @@ void NetClient::handle_network ()
 			}
 			break;
 		    case NETCMD_PLAYERINFO:
+			player_enabled=deserializer->getchar();
+			player_human=deserializer->getchar();
+				
+			for (i=0;i<MAX_PLAYERS;i++)
+			    if (i!=playernum-1)
+				if (player_enabled & (1<<i)) {
+				    playerdescr[i]->set_player_type ((player_human&(1<<i))?Player::playerRemote:Player::playerAI);
+				    playerdescr[i]->enable_player (true);
+				}
+				else
+				    playerdescr[i]->enable_player (false);
+			break;
+		    case NETCMD_PREGAME_STATUS:
 			{
-				unsigned char enabled,human;
-				int i;
-				
-				enabled=deserializer->getchar();
-				human=deserializer->getchar();
-				
-				for (i=0;i<MAX_PLAYERS;i++)
-					if (i!=playernum-1)
-						if (enabled & (1<<i)) {
-					    		playerdescr[i]->set_player_type ((human&(1<<i))?Player::playerRemote:Player::playerAI);
-					    		playerdescr[i]->enable_player (true);
-						}
-						else
-							playerdescr[i]->enable_player (false);
+			    uchar ready=deserializer->getchar();
+			    
+			    assert (phase==PH_PREGAME);
+			    assert (statuswnd!=0);
+			    
+			    for (i=0;i<MAX_PLAYERS;i++)
+				if (ready & ~player_ready & (1<<i))
+				    statuswnd->set_ready (i+1);
 			}
 			break;
-		    case NETCMD_START:
+		    case NETCMD_BEGIN_PREGAME:
 			common_rand_seed=deserializer->getlong();
 			game->logic_rand_seed (common_rand_seed);
 			
 			assert (launch_menu!=0);
 			launch_menu->start_clicked();
+			
+			phase=PH_PREGAME;
+			break;
+		    case NETCMD_BEGIN_GAME:
+			assert (statuswnd!=0);
+			delete statuswnd;
+			statuswnd=0;
+			
+			phase=PH_INGAME;
 			break;
 		    case NETCMD_PING:	// got a ping, reply with a pong
 			serializer->begin_packet ();
@@ -729,6 +825,40 @@ void NetClient::disconnect ()
     // Since we are now independent of the host, we are not bound to network
     // time anymore (nor are we receiving NETCMD_ADVANCETIME packets).
     net_game_time=INT_MAX;
+}
+
+/*** class NetStatusWindow ***/
+
+NetStatusWindow::NetStatusWindow (UIPanel* parent)
+	:UIWindow(parent, 0, 0, 256, 192, "Starting network game")
+{
+    table=new UITable(this, 0, 0, 256, 192);
+    table->add_column ("Player", UITable::STRING, 192);
+    table->add_column ("Status", UITable::STRING, 64);
+}
+
+void NetStatusWindow::add_player (int num)
+{
+    char buffer[64];
+    Entry entry;
+    
+    snprintf (buffer, 64, "Player %d", num);
+    
+    entry.plnum=num;
+    entry.entry=new UITable_Entry(table, 0);
+    entry.entry->set_string (0, buffer);
+    entry.entry->set_string (1, "Waiting");
+    
+    entries.push_back (entry);
+}
+
+void NetStatusWindow::set_ready (int num)
+{
+    unsigned int i;
+    
+    for (i=0;i<entries.size();i++)
+	if (entries[i].plnum==num)
+	    entries[i].entry->set_string (1, "Ready");
 }
 
 /*** class Serializer ***/
@@ -857,13 +987,34 @@ int Deserializer::read_packet (TCPsocket sock)
 	return 0;
 }
 
+short Deserializer::getshort ()
+{
+	short val;
+	
+	val=getchar() << 8;
+	val|=getchar() & 0xFF;
+	
+	return val;
+}
+
+long Deserializer::getlong ()
+{
+	long val;
+	
+	val=getchar() << 24;
+	val|=(getchar() & 0xFF) << 16;
+	val|=(getchar() & 0xFF) << 8;
+	val|=getchar() & 0xFF;
+	
+	return val;
+}
+
 wchar_t Deserializer::getwchar ()
 {
 	wchar_t chr,tmp;
 	int n;
 
-	chr=queue.front();
-	queue.pop ();
+	chr=getchar() & 0xFF;
 	
 	if (chr<128)
 	    return chr;
@@ -877,8 +1028,7 @@ wchar_t Deserializer::getwchar ()
 	chr<<=n*6;
 	
 	while (n-->0) {
-		tmp=queue.front();
-		queue.pop ();
+		tmp=getchar() & 0xFF;
 		
 		if ((tmp&0xC0)!=0x80)
 			throw wexception("Illegal UTF-8 character encountered");

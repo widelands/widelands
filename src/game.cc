@@ -213,8 +213,6 @@ bool Game::run_multi_player (NetGame* ng)
 	
 	if (code==0 || get_map()==0)
 	    return false;
-
-	m_netgame->begin_game();
 	    
 	g_gr->flush(PicMod_Menu);
 
@@ -226,6 +224,8 @@ bool Game::run_multi_player (NetGame* ng)
 	m_maploader->load_map_complete(this, false); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
+
+	m_netgame->begin_game();
 
 	return run();
 }

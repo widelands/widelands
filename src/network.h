@@ -39,6 +39,8 @@ class Fullscreen_Menu_LaunchGame;
 
 class LAN_Game_Promoter;
 
+class NetStatusWindow;
+
 class NetGame {
     public:
 	struct Chat_Message {
@@ -73,7 +75,7 @@ class NetGame {
 	uint get_max_frametime();
 	
 	virtual bool is_host ()=0;
-	virtual void begin_game ()=0;
+	virtual void begin_game ();
 
 	virtual void handle_network ()=0;
 
@@ -88,6 +90,12 @@ class NetGame {
     protected:
 	void disconnect_player (int);
 	
+	enum {
+		PH_SETUP,
+		PH_PREGAME,
+		PH_INGAME
+	}		phase;
+	
 	Game*		game;
 	
 	int		playernum;
@@ -97,8 +105,14 @@ class NetGame {
 	
 	bool		players_changed;
 	
+	uchar		player_enabled;
+	uchar		player_human;
+	uchar		player_ready;
+	
 	PlayerDescriptionGroup*	playerdescr[MAX_PLAYERS];
 	Fullscreen_Menu_LaunchGame*	launch_menu;
+	
+	NetStatusWindow*		statuswnd;
 
 	std::queue<Chat_Message>	chat_msg_queue;
 };
@@ -229,38 +243,15 @@ class Deserializer {
 	
 	char getchar ()
 	{
+		assert (avail());
+		
 		char v=queue.front();
 		queue.pop();
 		return v;
 	}
 	
-	short getshort ()
-	{
-		short v;
-		
-		v=queue.front() << 8;
-		queue.pop();
-		v|=queue.front();
-		queue.pop();
-		
-		return v;
-	}
-    
-	long getlong ()
-	{
-		long v;
-		
-		v=queue.front() << 24;
-		queue.pop();
-		v|=queue.front() << 16;
-		queue.pop();
-		v|=queue.front() << 8;
-		queue.pop();
-		v|=queue.front();
-		queue.pop();
-		
-		return v;
-	}
+	short getshort ();
+	long getlong ();
 	
 	wchar_t getwchar ();
 	
