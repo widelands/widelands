@@ -100,6 +100,10 @@ Window::~Window(void) {
 /** void Window::draw(void)
  *
  * This function draws the current window on the g_gr object
+ * 
+ * NOTE: This function is quite slow, it could be a better idea to give every window a Pic* of him
+ * self which he simply plots on the screen and which gets updated, whenever the window changes.
+ * Somone really should give it a try!
  *
  * Args: None
  * Returns: Nothing

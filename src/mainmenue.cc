@@ -27,8 +27,18 @@
 #include "counter.h"
 #include "output.h"
 
-void click(const bool b, void* ) {
-		  exit(0);
+bool should_update;
+
+void click(const bool b, const unsigned int x, const unsigned int y, void* ) {
+		 exit(0);
+}
+
+void mcf1(const bool b, const unsigned int x, const unsigned int y, void*) {
+}
+
+void mmf(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, 
+					 void* ) {
+		  should_update=1;
 }
 
 /** void main_menue(void);
@@ -57,17 +67,18 @@ void main_menue(void) {
 		  
 */
 		  g_ip.register_mcf(click, Input::BUT1);
-	//	  g_ip.register_mcf(mcf1, Input::BUT2);
-	//	  g_ip.register_mmf(mmf);
+		  g_ip.register_mcf(mcf1, Input::BUT2);
+	  g_ip.register_mmf(mmf);
 		 
 		  Counter c;
 		  c.start();
 		  while(!g_ip.should_die()) {
 					 g_ip.handle_pending_input(); 
-					 if(c.get_ticks()> 500) {
+					 if(should_update) {
 								g_ui.draw();
 								g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
 								g_gr.update_screen(); // g_gr.update_quarter();
+								should_update=0;
 					 }
 		  }
 		  return; 

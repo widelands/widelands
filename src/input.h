@@ -20,8 +20,8 @@
 #ifndef __S__INPUT_H
 #define __S__INPUT_H
 
-typedef void (*MOUSE_CLICK_FUNCTION)(const bool, void*);
-typedef void (*MOUSE_MOVE_FUNCTION)(const unsigned int, const unsigned int, const signed int, const signed int, void*);
+typedef void (*MOUSE_CLICK_FUNCTION)(const bool, const unsigned int, const unsigned int, void*);
+typedef void (*MOUSE_MOVE_FUNCTION)(const unsigned int, const unsigned int, const signed int, const signed int, const bool, const bool, void*);
 typedef void (*KBD_HANDLER)(const char*, void*);
 
 #include "singleton.h"
@@ -108,6 +108,7 @@ class Input : public Singleton<Input> {
 					bool input_grabbed;
 					bool b1_pressed, b2_pressed;
 					bool bshould_die;
+					 int levx, levy;
 };
 
 #define g_ip	Input::get_singleton()

@@ -59,6 +59,9 @@ Input::Input(void) {
 		  maxx=maxy=0;
 
 		  SDL_ShowCursor(0);
+		  levx=maxx>>1;
+		  levy=maxy>>1;
+		  SDL_WarpMouse(levx, levy);
 }
 
 /** Input::~Input(void) 
@@ -201,42 +204,9 @@ void Input::set_mouse_pos(unsigned int x, unsigned int y) { mpx=mplx=x; mpy=mply
  * Returns: Nothing
  */
 void Input::handle_pending_input(void) {
+		  static SDL_Event ev;
 		  SDL_PumpEvents();    
 		  
-		  int x=0, y=0;
-		  static unsigned char lm_state;
-		  unsigned char m_state;
-		  SDL_Event ev;
-		  
-		  m_state=SDL_GetRelativeMouseState(&x, &y);
-					 
-		  SDL_WarpMouse(maxx>>1,maxy>>1);
-		  SDL_PumpEvents();
-		  SDL_GetRelativeMouseState(NULL, NULL);
-
-		  mplx=mpx;
-		  mply=mpy;
-		  mpx=mpx+ ((unsigned int) (x*mouse_speed));
-		  if((int)mpx < 0) mpx=0; 
-		  else if(mpx >=maxx) mpx=maxx-1;
-		  mpy=mpy+ ((unsigned int) (y*mouse_speed));
-		  if((int)mpy < 0) mpy=0;
-		  else if(mpy >=maxy) mpy=maxy-1;
-
-			if(/*!x && !y &&*/ lm_state!=m_state) {
-					 if((m_state & SDL_BUTTON(1)) && cf[0]) cf[0](1, cfa[0]); 
-					 else if((lm_state & SDL_BUTTON(1)) && cf[0]) cf[0](0, cfa[0]); 
-
-					 if((m_state & SDL_BUTTON(3)) && cf[1]) cf[1](1, cfa[1]); 
-					 else if((lm_state & SDL_BUTTON(3)) && cf[1]) cf[1](0, cfa[1]); 
-		  } else if(x && y) { 
-					 if(mmf) {
-								mmf(mpx, mpy, x, y, mmfa);
-					 }
-		  }
-
-		  lm_state=m_state;
-
 		  while(SDL_PollEvent(&ev)) { 
 					 switch(ev.type) {
 								case SDL_KEYDOWN:
@@ -245,6 +215,51 @@ void Input::handle_pending_input(void) {
 
 								case SDL_KEYUP:
 										  //                              DBG("Key released!\n");
+										  break;
+
+		
+								case SDL_MOUSEBUTTONDOWN:
+								case SDL_MOUSEBUTTONUP:
+										  unsigned int but;
+										  if(ev.button.button==3) but=1;
+										  else if(ev.button.button==1) but=0;
+										  else break;
+
+										  if(cf[but])
+													 cf[but](ev.button.state, mpx, mpy, cfa[but]);
+										  break;
+
+								case SDL_MOUSEMOTION:
+										  if(ev.motion.x!=maxx>>1 && ev.motion.y!=maxy>>1) {
+													 mplx=mpx; mply=mpy;
+													 int xdiff = (int) ((ev.motion.x-levx)*mouse_speed);
+													 int ydiff = (int) ((ev.motion.y-levy)*mouse_speed);
+													 mpx+=xdiff;
+													 mpy+=ydiff;
+													 
+													 if((int)mpx < 0) mpx=0; 
+													 else if(mpx >=maxx) mpx=maxx-1;
+													 if((int)mpy < 0) mpy=0;
+													 else if(mpy >=maxy) mpy=maxy-1;
+
+													 if(mmf) {
+																if(!buts_swapped) {
+																		  mmf(mpx, mpy, xdiff, ydiff, SDL_BUTTON(1) & ev.motion.state,
+																								SDL_BUTTON(3) & ev.motion.state, mmfa);
+																} else {
+																		  mmf(mpx, mpy, xdiff, ydiff, SDL_BUTTON(3) & ev.motion.state,
+																								SDL_BUTTON(1) & ev.motion.state, mmfa);
+																}
+													 }
+
+													 levx=ev.motion.x;
+													 levy=ev.motion.y;
+		
+													 SDL_WarpMouse(maxx>>1,maxy>>1);
+										  } else {
+													 levy=maxy>>1;
+													 levx=maxx>>1;
+										  }
 										  break;
 
 								case SDL_QUIT:
