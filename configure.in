@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(README)
 dnl Every other copy of the package version number gets its value from here
-AM_INIT_AUTOMAKE(widelands, 0.0.15)
+AM_INIT_AUTOMAKE(widelands, build-0)
 
 dnl create a config.h file (Automake will add -DHAVE_CONFIG_H)
 AM_CONFIG_HEADER(src/config.h)
@@ -41,4 +41,4 @@ dnl Checks for library functions.
 AC_SUBST(LIBSDL_LIB)
 AC_SUBST(src pkgdatadir)
 
-AC_OUTPUT([Makefile src/Makefile wffcreate/Makefile wtfcreate/Makefile wwfcreate/Makefile])
+AC_OUTPUT([Makefile src/Makefile wffcreate/Makefile])

@@ -292,7 +292,9 @@ void Graphic::register_update_rect(const ushort x, const ushort y, const ushort 
  * Args: f 	Filename to use
  * Returns: Nothing
  */
-void Graphic::screenshot(const char* f) {
+void Graphic::screenshot(const char* f)
+{
+	// TODO: this is incorrect; it bypasses the files code
    SDL_SaveBMP(sc, f);
 }
 

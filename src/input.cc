@@ -22,6 +22,7 @@
 #include <SDL.h>
 
 #include "input.h"
+#include "graphic.h"
 
 ///////////////////////////////////////////////////////////////////////////7
 
@@ -219,10 +220,22 @@ void Input::handle_pending_input(void) {
 		  while(SDL_PollEvent(&ev)) {
 					 switch(ev.type) {
 								case SDL_KEYDOWN:
-										  if (ev.key.keysym.sym == SDLK_F10) // TEMP
+										if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
 										  		bshould_die = true;
-										  if(kbdh) kbdh(SDL_GetKeyName(ev.key.keysym.sym), kbdha);
-										  break;
+										else if (ev.key.keysym.sym == SDLK_F11) // take screenshot
+										{
+											char buf[256];
+											int nr;
+											for(nr = 0; nr < 10000; nr++) {
+												snprintf(buf, sizeof(buf), "shot%04i.bmp", nr);
+												if (g_fs->FileExists(buf))
+													continue;
+												g_gr.screenshot(buf);
+												break;
+											}
+										}
+										else if (kbdh) kbdh(SDL_GetKeyName(ev.key.keysym.sym), kbdha);
+										break;
 
 								case SDL_KEYUP:
 										  //                              DBG("Key released!\n");

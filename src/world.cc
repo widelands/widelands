@@ -178,7 +178,7 @@ void World::parse_bobs(const char *directory)
 	g_fs->FindFiles(subdir, "*", &dirs);
 	
 	for(filenameset_t::iterator it = dirs.begin(); it != dirs.end(); it++) {
-		cerr << "a bob in " << *it << endl;
+		//cerr << "a bob in " << *it << endl;
 		
 		Logic_Bob_Descr *descr;
 		try {
