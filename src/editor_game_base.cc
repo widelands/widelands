@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by The Widelands Development Team
+ * Copyright (C) 2002-2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,7 +105,7 @@ void Editor_Game_Base::recalc_for_field(Coords coords, int radius)
 ===============
 Editor_Game_Base::unconquer_area
 
-This unconquers a area. This is only possible, when there 
+This unconquers a area. This is only possible, when there
 is a building placed on this field
 ===============
 */
@@ -114,6 +114,8 @@ void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
    assert(get_map()->get_immovable(coords)->get_type() == Map_Object::BUILDING);
 
    uint i=0;
+	int radius;
+
    while(i<m_conquer_info.size() && m_conquer_info[i].middle_point!=coords) ++i;
    assert(i<m_conquer_info.size());
 
@@ -122,7 +124,8 @@ void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
 
 
    // step 1: unconquer area of this building
-   do_conquer_area(playernr, coords, m_conquer_info[i].area, false);
+	radius = m_conquer_info[i].area;
+   do_conquer_area(playernr, coords, radius, false);
 
    // step 2: remove this building out ot m_conquer_info
    // std::vector erase doen't work on my system. I manually erase this
@@ -141,11 +144,14 @@ void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
       if(player==playernr) continue;
 
       for(i=0; i<m_conquer_info.size(); i++) {
-         if(m_conquer_info[i].player==player) { 
+         if(m_conquer_info[i].player==player) {
             do_conquer_area(player, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
          }
       }
    }
+
+	// step 5: deal with player immovables in the lost area
+	cleanup_playerimmovables_area(coords, radius);
 }
 
 /*
@@ -153,7 +159,7 @@ void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
 Editor_Game_Base::conquer_area
 
 This conquers a given area because of a new (military) building
-that is set there. 
+that is set there.
 ===============
 */
 void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, Building_Descr* b) {
@@ -185,7 +191,7 @@ void Editor_Game_Base::conquer_area_no_building(uchar playernr, Coords coords, i
 ===============
 Editor_Game_Base::do_conquer_area [private]
 
-Conquers the given area for that player; does the actual work 
+Conquers the given area for that player; does the actual work
 Additionally, it updates the visible area for that player.
 ===============
 */
@@ -202,7 +208,7 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
          if (!f->get_owned_by()) {
             f->set_owned_by(playernr);
             continue;
-         } 
+         }
 
 
          // TODO: add support here what to do if some fields are already
@@ -226,6 +232,38 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 	recalc_for_field(coords, radius);
 }
 
+
+/*
+===============
+Editor_Game_Base::cleanup_playerimmovables_area
+
+Make sure that buildings cannot exist outside their owner's territory.
+===============
+*/
+void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
+{
+	std::vector<ImmovableFound> immovables;
+
+	m_map->find_immovables(coords, radius, &immovables, FindImmovablePlayerImmovable());
+
+	for(uint i = 0; i < immovables.size(); i++) {
+		PlayerImmovable* imm = (PlayerImmovable*)immovables[i].object;
+		Coords f = immovables[i].coords;
+
+		if (!imm->get_owner()->is_field_owned(f))
+		{
+			if (is_game())
+				imm->schedule_destroy((Game*)this);
+			else {
+				// We can't simply call remove(), because this will delete
+				// big buildings multiple times
+				//imm->remove(this);
+			}
+		}
+	}
+}
+
+
 /*
 ===============
 Editor_Game_Base::remove_player
@@ -236,11 +274,11 @@ Remove the player with the given number
 void Editor_Game_Base::remove_player(int plnum)
 {
 	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
-	
+
 	if (m_players[plnum-1]) {
 		delete m_players[plnum-1];
 		m_players[plnum-1] = 0;
-	}		
+	}
 }
 
 

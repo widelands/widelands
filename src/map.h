@@ -297,6 +297,11 @@ struct FindImmovableAttribute : public FindImmovable {
 
 	int m_attrib;
 };
+struct FindImmovablePlayerImmovable : public FindImmovable {
+	FindImmovablePlayerImmovable() { }
+
+	virtual bool accept(BaseImmovable* imm) const;
+};
 
 struct FindFieldCaps : public FindField {
 	FindFieldCaps(uchar mincaps) : m_mincaps(mincaps) { }

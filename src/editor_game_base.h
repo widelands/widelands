@@ -91,6 +91,7 @@ class Editor_Game_Base {
 
    private:
       void init_wares();
+		void cleanup_playerimmovables_area(Coords coords, int radius);
 
       int m_gametime;
       Player*							m_players[MAX_PLAYERS];

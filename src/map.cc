@@ -2152,6 +2152,11 @@ bool FindImmovableAttribute::accept(BaseImmovable *imm) const
 	return imm->has_attribute(m_attrib);
 }
 
+bool FindImmovablePlayerImmovable::accept(BaseImmovable* imm) const
+{
+	return imm->get_type() >= Map_Object::BUILDING;
+}
+
 
 /*
 ==============================================================================
