@@ -23,7 +23,7 @@ ifeq ($(CROSS),NO)
 CC=gcc
 
 # c++ compiler
-CXX=c++
+CXX=g++
 
 # additional build flags. if you're not a developer, you don't want
 # to change this
@@ -33,19 +33,14 @@ ADD_CFLAGS:=
 # to change this
 ADD_LDFLAGS:=
 
-# This are additional build flags, you don't want to change them, unless
-# you know what you're doing
-ifndef DEBUG
-DEBUG=YES
+# Different build-types:
+#  debug    optimized, debugging symbols
+#  release  optimized
+#  profile  optimized, debugging symbols, profiling
+#
+ifndef BUILD
+BUILD=debug
 endif
-ifndef PROFILE
-PROFILE=NO
-endif
-ifndef OPTIMIZE
-OPTIMIZE=YES
-endif
-# RELEASE_BUILD disables debug and profile
-RELEASE_BUILD=NO
 
 endif
 
@@ -58,6 +53,13 @@ endif
 #  NO USER CHANGES BELOW THIS POINT											 #
 ####################################################################
 
+ifneq ($(IS_MAKEFILE_EDITED),YES)
+$(error Please edit the Makefile and set the IS_MAKEFILE_EDITED variable to YES)
+endif
+
+##############################################################################
+# Cross compiling options
+
 ifneq ($(CROSS),NO) 
 # CROSS COMPILE, for developer only
 PREFIX:=/usr/local/cross-tools
@@ -65,72 +67,96 @@ TARGET:=i386-mingw32msvc
 PATH:=$(PREFIX)/$(TARGET)/bin:$(PREFIX)/bin:$(PATH)
 
 CC=$(TARGET)-gcc
-CXX=$(TARGET)-c++
+CXX=$(TARGET)-g++
 
 # manually overwrite
 SDL_CONFIG=$(PREFIX)/$(TARGET)/bin/sdl-config
 
-# is for sure a release
-ADD_CFLAGS=-O3 
-
-endif
-
-ifeq ($(RELEASE_BUILD),YES)
-DEBUG:=NO
-PROFILE:=NO
-OPTIMIZE:=YES
-endif
-
-ifeq ($(OPTIMIZE),YES)
-ADD_CFLAGS:=-O3
-endif
-
-ifeq ($(DEBUG),YES) 
-ADD_CFLAGS:=$(ADD_CFLAGS) -DDEBUG
 else
-ADD_CFLAGS:=$(ADD_CFLAGS) -DNDEBUG
+TARGET:=native
 endif
 
-ifeq ($(PROFILE),YES)
-ADD_CFLAGS:=$(ADD_CFLAGS) -pg -fprofile-arcs
-endif
-	
-all: dotest widelands 
-	@echo -ne "\nCongrats. Build seems to be complete. If there was no "
-	@echo -ne "error (ignore file not found errors), you can run the game "
-	@echo -ne "now. just type: './widelands' and enjoy!\n\n"
-	@echo -e "\tTHE WIDELANDS DEVELOPMENT TEAM"
 
-dotest:
-ifneq ($(IS_MAKEFILE_EDITED),YES)
-		$(error Please edit the Makefile and set the IS_MAKEFILE_EDITED \
-		variable to YES)
+##############################################################################
+# Flags configuration
+BUILD:=$(strip $(BUILD))
+
+ifeq ($(BUILD),release)
+OPTIMIZE:=yes
+else
+ifeq ($(BUILD),profile)
+OPTIMIZE:=yes
+DEBUG:=yes
+PROFILE:=yes
+else
+BUILD:=debug
+OPTIMIZE:=yes
+DEBUG:=yes
+endif
 endif
 
-clean:
-	@rm -rf widelands 
-	@rm -rf src/*.da src/*.o *.da
-	@rm -rf *~ */*~ */*/*/*~
-	
-# WIDELANDS MAIN PROGRAM BUILD RULES
+ifdef OPTIMIZE
+ADD_CFLAGS += -O3
+endif
+
+ifdef DEBUG
+ADD_CFLAGS += -DDEBUG
+else
+ADD_CFLAGS += -DNDEBUG
+endif
+
+ifdef PROFILE
+ADD_CFLAGS += -pg -fprofile-arcs
+endif
+
+##############################################################################
+# Object files and directories, final compilation flags
+
+OBJECT_DIR:=src/$(TARGET)-$(BUILD)
 
 # note: all src/*.cc files are considered source code
 WIDELANDS_SRC:=$(wildcard src/*.cc)
-WIDELANDS_OBJ:=$(WIDELANDS_SRC:.cc=.o)
+WIDELANDS_OBJ:=$(patsubst src/%.cc,$(OBJECT_DIR)/%.o,$(WIDELANDS_SRC))
+WIDELANDS_DEP:=$(WIDELANDS_OBJ:.o=.d)
 
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
 LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS)
 
-include $(WIDELANDS_OBJ:.o=.d)
+##############################################################################
+# Building
+all: $(OBJECT_DIR) $(OBJECT_DIR)/widelands
+	cp $(OBJECT_DIR)/widelands .
+	@echo -ne "\nCongrats. Build seems to be complete. If there was no "
+	@echo -ne "error (ignore file not found errors), you can run the game "
+	@echo -ne "now. just type: './widelands' and enjoy!\n\n"
+	@echo -e "\tTHE WIDELANDS DEVELOPMENT TEAM"
 
-%.d: %.cc
-	$(CC) $(CFLAGS) -MM -MG "$<" | sed -e 's@^\(.*\)\.o:@src/\1.d src/\1.o:@' > $@ 
+$(OBJECT_DIR):
+	-mkdir -p $(OBJECT_DIR)
+
+clean:
+	@-rm -rf widelands
+	@-rm -rf *.da src/*.da
+	@-rm -rf src/*.o src/*/*.o
+	@-rm -rf src/*.d src/*/*.d
+	@-rm -rf *~ */*~ */*/*/*~
+
+# WIDELANDS MAIN PROGRAM BUILD RULES
+
+-include $(WIDELANDS_DEP)
 
 %.h: 
-	
 
-widelands: tags $(WIDELANDS_OBJ)
+DEP_SED:=sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@'
+
+$(OBJECT_DIR)/%.o: src/%.cc
+	$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
+	$(DEP_SED) $*.d > $(OBJECT_DIR)/$*.d
+	rm $*.d
+
+
+$(OBJECT_DIR)/widelands: tags $(WIDELANDS_OBJ)
 	$(CXX) $(WIDELANDS_OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
 
 tags: $(wildcard src/*.cc src/*.h)
