@@ -80,6 +80,7 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
 	m_idle_anim = g_anim.get(directory, prof->get_safe_section("idle"), picname, encdata);
 
 	// Parse attributes
+   const char* string;
 	while(global->get_next_string("attrib", &string)) {
 		uint attrib = get_attribute_id(string);
 

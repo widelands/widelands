@@ -796,11 +796,7 @@ bool Worker::run_object(Game* g, State* state, const WorkerAction* act)
 
 	if (obj->get_type() == IMMOVABLE)
 		((Immovable*)obj)->switch_program(g, act->sparam1);
-	else if(obj->get_type() == BOB) {
-      if(act->sparam1
-      ((Bob*)obj)
-
-   } else 
+   else 
 		throw wexception("MO(%u): [actObject]: bad object type = %i", get_serial(), obj->get_type());
 
 	state->ivar1++;
