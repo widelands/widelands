@@ -6,6 +6,7 @@ size=small
 buildable=yes
 buildicon=quarry_build.png
 worker=stonecutter
+stopable=yes
 program=work
 #subtype=none      # possible values: for warehouse: HQ, port
 

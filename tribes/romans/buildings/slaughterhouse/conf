@@ -6,6 +6,7 @@ size=medium
 buildable=yes
 buildicon=slaught_build.png
 worker=butcher
+stopable=yes
 program=work
 output=meat
 

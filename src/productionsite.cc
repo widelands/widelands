@@ -335,6 +335,9 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 	Section* sglobal = prof->get_section("global");
 	const char* string;
 
+   // Stopabple defaults to true for Production sites
+   m_stopable=true;
+   
 	Building_Descr::parse(directory, prof, encdata);
 
 	// Get inputs and outputs
@@ -462,6 +465,8 @@ std::string ProductionSite::get_statistics_string()
 {
 	if (!m_worker)
 		return "(not occupied)";
+	if (m_stop)
+		return "(stopped)";
 	if (m_statistics_changed)
 		calc_statistics();
 	return m_statistics_buf;
@@ -738,6 +743,12 @@ void ProductionSite::program_act(Game* g)
 
 	molog("PSITE: program %s#%i\n", state->program->get_name().c_str(), state->ip);
 
+	if (m_stop) {
+		program_end(g,false);
+		m_program_timer = true;
+		m_program_time = schedule_act(g,20000);
+		return;  
+	}
 	switch(action->type) {
 		case ProductionAction::actSleep:
 			molog("  Sleep(%i)\n", action->iparam1);

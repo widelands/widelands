@@ -8,6 +8,7 @@ buildicon=bakery_build.png
 worker=baker
 program=work
 output=bread
+stopable=yes
 
 [inputs]
 flour=6

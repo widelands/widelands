@@ -324,7 +324,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	{
 		// Put the real building in place
 		Building* bld = m_building->create(g, get_owner(), m_position, false);
-
+		bld->set_stop(get_stop());
 		// Walk the builder home safely
 		m_builder->reset_tasks((Game*)g);
 		m_builder->set_location(bld);

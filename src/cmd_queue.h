@@ -50,6 +50,7 @@ enum {
 	CMD_BULLDOZE,		// arg1 = serialnum (PlayerImmovable)
 
 	CMD_FLAGACTION,	// arg1 = serialnum of flag, arg2 = action number
+	CMD_START_STOP_BUILDING,  //start/stop building
 };
 
 // arg2 of CMD_FLAGACTION is one of these:

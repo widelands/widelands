@@ -305,6 +305,14 @@ void Player::bulldoze(PlayerImmovable* imm)
 	imm->destroy(get_game());
 }
 
+void Player::start_stop_building(PlayerImmovable* imm) {
+	if (imm->get_owner() != this)
+		return;
+	if (imm->get_type() == Map_Object::BUILDING) {
+		Building *bld = (Building*)imm;
+		bld->set_stop(!bld->get_stop());
+	}
+}
 
 /*
 ===============

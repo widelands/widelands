@@ -67,6 +67,7 @@ Building_Descr::Building_Descr(Tribe_Descr* tribe, const char* name)
 	m_buildicon_fname = 0;
 	m_size = BaseImmovable::SMALL;
 	m_mine = false;
+	m_stopable = false;
 }
 
 
@@ -159,6 +160,23 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 			m_buildcost.push_back(CostItem(val->get_name(), val->get_int()));
 		}
 
+	m_stopable = global->get_bool("stopable",m_stopable);
+	if (m_stopable) {
+		if (global->get_string("stopicon")) {
+			m_stop_icon = directory;
+			m_stop_icon+="/";
+			m_stop_icon+=global->get_string("stopicon");
+		}
+		else
+			m_stop_icon = "pics/stop.png";
+		if (global->get_string("continueicon")) {
+			m_continue_icon = directory;
+			m_continue_icon+="/";
+			m_continue_icon+=global->get_string("continueicon");
+		}
+		else
+			m_continue_icon = "pics/continue.png";
+	}   
 
 	// Parse basic animation data
 	s = prof->get_section("idle");
@@ -286,6 +304,7 @@ Building::Building(Building_Descr* descr)
 {
 	m_flag = 0;
 	m_optionswindow = 0;
+	m_stop = false;
 }
 
 Building::~Building()
@@ -339,6 +358,8 @@ uint Building::get_playercaps()
 	if (get_descr()->get_buildable())
 		caps |= 1 << PCap_Bulldoze;
 
+	if (get_descr()->get_stopable())
+		caps |= 1 << PCap_Stopable;
 	return caps;
 }
 
@@ -692,4 +713,8 @@ void Building::draw_help(Editor_Game_Base* game, RenderTarget* dst,
 
 		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, pos.x, pos.y - 35, txt.c_str(), Align_Center);
 	}
+}
+
+void Building::set_stop(bool stop) {
+	m_stop = stop;
 }

@@ -5,6 +5,7 @@ size=medium
 buildable=yes
 buildicon=mill_build.png
 worker=miller
+stopable=yes
 program=work
 output=flour
 

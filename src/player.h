@@ -85,6 +85,7 @@ class Player {
 		void build(Coords c, int idx);
 		void bulldoze(PlayerImmovable* imm);
 		void flagaction(Flag* flag, int action);
+		void start_stop_building(PlayerImmovable* imm);
 
 	private:
 		// set functions

@@ -6,6 +6,7 @@ size=big
 buildable=yes
 buildicon=farm_build.png
 worker=farmer
+stopable=yes
 
 program=work
 program=plant

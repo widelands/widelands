@@ -62,6 +62,10 @@ public:
 	inline int get_size(void) const { return m_size; }
 	inline bool get_ismine() const { return m_mine; }
 
+	inline bool get_stopable() const { return m_stopable;}
+	inline std::string get_stop_icon() const { return m_stop_icon;}
+	inline std::string get_continue_icon() const { return m_continue_icon;}
+
 	Building* create(Editor_Game_Base* g, Player* owner, Coords pos,
 		bool construct);
 	virtual void parse(const char* directory, Profile* prof,
@@ -74,6 +78,9 @@ protected:
 	virtual Building* create_object() = 0;
 	Building* create_constructionsite();
 	inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
+	bool         m_stopable;
+	std::string  m_stop_icon;
+	std::string  m_continue_icon;
 
 private:
 	Tribe_Descr* m_tribe;           // the tribe this building belongs to
@@ -102,6 +109,7 @@ public:
 	// Player capabilities: which commands can a player issue for this building?
 	enum {
 		PCap_Bulldoze = 0, // can bulldoze/remove this buildings
+		PCap_Stopable = 1,
 	};
 
 public:
@@ -135,6 +143,10 @@ public:
 	bool leave_check_and_wait(Game* g, Worker* w);
 	inline int get_conquers(void) const { return get_descr()->get_conquers(); }
 
+	inline std::string get_stop_icon() const { return get_descr()->get_stop_icon(); }
+	inline std::string get_continue_icon() const { return get_descr()->get_continue_icon(); }
+	inline bool get_stop() const { return m_stop; }
+	virtual void set_stop(bool stop);
 protected:
 	void start_animation(Editor_Game_Base* g, uint anim);
 
@@ -161,6 +173,7 @@ protected:
 	std::vector<Object_Ptr> m_leave_queue; // FIFO queue of workers leaving the building
 	uint                    m_leave_time;  // when to wake the next one from leave queue
 	Object_Ptr              m_leave_allow; // worker that is allowed to leave now
+	bool m_stop;
 };
 
 #endif

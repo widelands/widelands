@@ -5,6 +5,7 @@ size=medium
 buildable=yes
 buildicon=piggery_build.png
 worker=swineherd
+stopable=yes
 program=work
 output=pig
 

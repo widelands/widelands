@@ -5,6 +5,7 @@ size=small
 buildable=yes
 buildicon=forrester_build.png
 worker=forrester
+stopicon="thisstopicon.png"
 
 program=work
 

@@ -6,6 +6,7 @@ size=medium
 buildable=yes
 buildicon=sawmill_build.bmp
 worker=carpenter
+stopable=yes
 program=work
 output=plank
 

@@ -8,6 +8,7 @@ buildicon=coalmine_build.png
 worker=miner
 program=work
 output=coal
+stopable=yes
 
 [inputs]
 bread=6

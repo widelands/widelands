@@ -6,6 +6,7 @@ size=small
 buildable=yes
 buildicon=well_build.bmp
 worker=carpenter
+stopable=yes
 program=work
 output=water
 

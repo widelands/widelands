@@ -447,6 +447,7 @@ private:
 
 	void act_bulldoze();
 	void act_debug();
+	void act_start_stop();
 
 private:
 	UIWindow**				m_registry;
@@ -572,6 +573,18 @@ void Building_Window::setup_capsbuttons()
 
 	x = 0;
 
+	if (m_capscache & (1 << Building::PCap_Stopable)) {
+		std::string icon;
+		if (m_building->get_stop())
+			icon = m_building->get_continue_icon();
+		else
+			icon = m_building->get_stop_icon();
+		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
+		btn->clicked.set(this, &Building_Window::act_start_stop);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, icon.c_str(), RGBColor(0,0,255)));
+		x += 34;
+	}
+   
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
 		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
 		btn->clicked.set(this, &Building_Window::act_bulldoze);
@@ -598,6 +611,14 @@ Callback for bulldozing request
 void Building_Window::act_bulldoze()
 {
 	new BulldozeConfirm(m_player, m_building);
+}
+
+void Building_Window::act_start_stop() {
+	Game* g = m_player->get_game();
+	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Stopable))
+		g->send_player_command(m_player->get_player_number(), CMD_START_STOP_BUILDING, m_building->get_serial());
+
+	die();
 }
 
 

@@ -226,6 +226,16 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		break;
 	}
 
+	case CMD_START_STOP_BUILDING:
+	{
+		assert(c->arg1);
+		Player* plr = m_game->get_player(c->sender);
+		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
+		if (obj && obj->get_type() >= Map_Object::BUILDING)
+		plr->start_stop_building((PlayerImmovable*)obj);
+	break;
+	}
+
 	default:
 		assert(0);
 		break;
