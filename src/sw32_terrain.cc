@@ -230,7 +230,7 @@ Return the basic terrain colour to be used in the minimap.
 */
 uint Texture::get_minimap_color(char shade)
 {
-	uchar clr = m_curframe[0]; // just use the top-left pixel
+	uchar clr = m_pixels[0]; // just use the top-left pixel
 	uint table = (uchar)shade;
 
 	return (m_colormap->get_colormap())[clr | (table << 8)];
