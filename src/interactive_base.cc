@@ -91,13 +91,13 @@ overlays have to be recalculated
 ==============
 */
 void Interactive_Base::map_changed(void) {
-	int mapw;
-	int maph;
+   int mapw;
+   int maph;
 
-	mapw = m_maprenderinfo.egbase->get_map()->get_width();
-	maph = m_maprenderinfo.egbase->get_map()->get_height();
-	
-   
+   mapw = m_maprenderinfo.egbase->get_map()->get_width();
+   maph = m_maprenderinfo.egbase->get_map()->get_height();
+
+
    if(!m_maprenderinfo.overlay_basic && !m_maprenderinfo.overlay_roads) {
       // first time call
       m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
@@ -106,15 +106,16 @@ void Interactive_Base::map_changed(void) {
    } else {
       m_maprenderinfo.overlay_basic = (uchar*)realloc(m_maprenderinfo.overlay_basic, mapw*maph);
       m_maprenderinfo.overlay_roads = (uchar*)realloc(m_maprenderinfo.overlay_roads, mapw*maph);
-      memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
-
-      for(int y = 0; y < maph; y++)
-         for(int x = 0; x < mapw; x++) {
-            FCoords coords = m_maprenderinfo.egbase->get_map()->get_fcoords(Coords(x,y));
-
-            recalc_overlay(coords);
-         }
+      memset(m_maprenderinfo.overlay_roads, 0, mapw*maph); // set to zero, either it is in game (to load) or this is editor
    }
+
+   for(int y = 0; y < maph; y++)
+      for(int x = 0; x < mapw; x++) {
+         FCoords coords = m_maprenderinfo.egbase->get_map()->get_fcoords(Coords(x,y));
+
+         recalc_overlay(coords);
+      }
+
 }
 
 

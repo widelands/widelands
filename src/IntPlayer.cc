@@ -185,8 +185,8 @@ void Interactive_Player::start()
 	m_maprenderinfo.visibility = get_player()->get_visibility();
 	m_maprenderinfo.show_buildhelp = false;
 
-	mapw = m_maprenderinfo.egbase->get_map()->get_width();
-	maph = m_maprenderinfo.egbase->get_map()->get_height();
+	mapw = 0;
+	maph = 0; 
 	m_maprenderinfo.overlay_basic = 0; 
 	m_maprenderinfo.overlay_roads = 0;
 

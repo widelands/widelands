@@ -127,18 +127,9 @@ Called just before the game starts, after postload, init and gfxload
 */
 void Editor_Interactive::start()
 {
-   int mapw;
-	int maph;
-
    m_maprenderinfo.egbase = m_editor;
 	m_maprenderinfo.visibility = 0;
 	m_maprenderinfo.show_buildhelp = true;
-
-	mapw = m_maprenderinfo.egbase->get_map()->get_width();
-	maph = m_maprenderinfo.egbase->get_map()->get_height();
-	m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
-	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
-	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
 
    Interactive_Base::map_changed();
 }
