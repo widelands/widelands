@@ -27,6 +27,8 @@
 #include "intro.h"
 #include "mainmenue.h"
 #include "setup.h"
+#include "font.h"
+#include "ui.h"
 #include <stdlib.h>
 #include <iostream>
 #include <string.h>
@@ -40,12 +42,19 @@
  * return Exitcode of App
  */
 int g_main(int argn, char** argc) {
+		  static Font_Handler f; // Global instance for the hole game
+		  static User_Interface ui; // Global instance for the hole game
 		  
 		  // Setup default searchpaths
 		  setup_searchpaths();
 		  
 		  // Handle options
 		  handle_options(argn, argc);
+
+
+		  // Setup font handler and user interface for the use in widelands
+		  setup_fonthandler();
+		  setup_ui();
 
 		  // run intro
 		  run_intro();

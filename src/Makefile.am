@@ -1,4 +1,4 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -fprofile-arcs -pg
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O2 -g -fprofile-arcs -pg
 #EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
@@ -7,7 +7,7 @@ CXXFLAGS= $(EXTRA_FLAGS)
 # EXTRA_DIST=worlds pics 
 
 bin_PROGRAMS=widelands
-widelands_LDADD = @SDL_LIBS@  
+widelands_LDADD = @SDL_LIBS@ -lefence 
 widelands_SOURCES=main.cc \
 						unix_m.cc \
 						os.h \
@@ -43,7 +43,11 @@ widelands_SOURCES=main.cc \
 						counter.h \
 						counter.cc \
 						mydirent.cc \
-						mydirent.h
+						mydirent.h \
+						singlepmenue.cc \
+						singlepmenue.h \
+						menuecommon.cc \
+						menuecommon.h
 
 
 #  uncomment the following if widelands requires the math library

@@ -89,6 +89,8 @@ Input::~Input(void) {
  * Returns: Nothing
  */
 void Input::set_max_cords(uint x, const uint y) {
+		  if(maxx==x && maxy==y) return;
+
 		  maxx=x; maxy=y;
 		  levx=maxx>>1;
 		  levy=maxy>>1;

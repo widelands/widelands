@@ -152,7 +152,7 @@ Textarea* Window::create_textarea(const uint px, const uint py, const char* t , 
 		  
 		  ta[nta]=new Textarea(px, py, t, a, myw, myh, winpic, add, add);
 		  ta[nta]->draw();
-		  g_gr.register_update_rect(x+px, y+py, ta[nta]->get_w(), ta[nta]->get_h());
+		  g_gr.register_update_rect(x+ta[nta]->get_xpos(), y+ta[nta]->get_ypos(), ta[nta]->get_w(), ta[nta]->get_h());
 		  nta++;
 
 		  assert(nta<MAX_TA);
@@ -182,7 +182,7 @@ Textarea* Window::create_textarea(const uint px, const uint py, const uint myw ,
 
 		  ta[nta]=new Textarea(px, mypy, rw, a, winpic, add>>1, add>>1);
 		  ta[nta]->draw();
-		  g_gr.register_update_rect(x+px, y+py, ta[nta]->get_w(), ta[nta]->get_h());
+		  g_gr.register_update_rect(x+ta[nta]->get_xpos(), y+ta[nta]->get_ypos(), ta[nta]->get_w(), ta[nta]->get_h());
 		  nta++;
 
 		  assert(nta<MAX_TA);
@@ -302,7 +302,7 @@ Button* Window::create_button(const uint px, const uint py, const uint rw, const
 		  
 		  but[nbut]=new Button(mypx, mypy, myw, myh, bg, winpic, add>>1, add>>1);
 		  but[nbut]->draw();
-		  g_gr.register_update_rect(x+px, y+py, but[nbut]->get_w(), but[nbut]->get_h());
+		  g_gr.register_update_rect(x+but[nbut]->get_xpos(), y+but[nbut]->get_ypos(), but[nbut]->get_w(), but[nbut]->get_h());
 		  nbut++;
 
 		  assert(nbut<MAX_BUT);
@@ -784,7 +784,6 @@ void Textarea::draw(void) const {
 		  }
 
 		  Graph::copy_pic(dp, txt, posx, yp+y, 0, 0, myw, h);
-
 }
 
 
@@ -877,6 +876,7 @@ void Button::set_pic(Pic* p) {
 		  myp=p;
 		  
 		  needs_draw=true;
+		  draw();
 }
 
 /** int Button::draw(void) 

@@ -84,6 +84,7 @@ namespace Graph {
 			* Returns: Nothing
 			*/
 		  void Graphic::set_mode(const ushort x, const ushort y, const Mode m) {
+					 if(xres==x && yres==y && mode==m) return;
 					 if(sc)
 								SDL_FreeSurface(sc);
 
@@ -141,13 +142,13 @@ namespace Graph {
 					 if(bneeds_fs_update) {
 								SDL_UpdateRect(sc, 0, 0, xres, yres);
 					 } else {
-	/*							cerr << "##########################" << endl;
+/*								cerr << "##########################" << endl;
 								cerr << nupr << endl;
 								for(uint i=0; i<nupr; i++) 
 										  cerr << upd_rects[i].x << ":" << upd_rects[i].y << ":" << 
 													 upd_rects[i].w << ":" << upd_rects[i].h << endl;
 								cerr << "##########################" << endl;
-	*/							SDL_UpdateRects(sc, nupr, upd_rects);
+*/								SDL_UpdateRects(sc, nupr, upd_rects);
 					 }
 					 nupr=0;
 					 bneeds_fs_update=false;

@@ -26,39 +26,14 @@
 #include "setup.h"
 #include "counter.h"
 #include "output.h"
+#include "singlepmenue.h"
+#include "menuecommon.h"
 
 #ifndef VERSION
 #include "config.h"
 #endif /* VERSION */
 
 #include <string.h>
-
-#include <SDL/SDL_thread.h>
-
-int click(const bool b, const uint x, const uint y, void* ) {
-		  if(g_ui.handle_click(1, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
-		  return INPUT_HANDLED;
-}
-
-int mcf1(const bool b, const uint x, const uint y, void*) {
-		  if(g_ui.handle_click(2, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
-		  return INPUT_HANDLED;
-}
-
-int mmf(const uint x, const uint y, const int xdiff, const int ydiff, const bool b1, const bool b2, 
-					 void* ) {
-		  g_gr.register_update_rect(x, y, g_cur.get_w(), g_cur.get_h());
-		  g_gr.register_update_rect(g_ip.get_mplx(), g_ip.get_mply(), g_cur.get_w(), g_cur.get_h());
-
-		  g_ui.handle_mm(x, y, xdiff, ydiff, b1, b2, NULL); 
-
-		  return INPUT_HANDLED;
-}
-
-void do_exit(void* ) {
-
-		  exit(0);
-}
 
 /** void main_menue(void);
  * 
@@ -69,13 +44,13 @@ void do_exit(void* ) {
  * Returns: Nothing
  */
 void main_menue(void) {
-		  static Font_Handler f; // Global instance for the hole game
-		  static User_Interface ui; // Global instance for the hole game
-
-		  // Setup font handler and user interface for the use in widelands
-		  setup_fonthandler();
-		  setup_ui();
-
+		  bool* doexit = new bool(false);
+		  bool* dosingle_player = new bool(false);
+		  bool* domulti_player = new bool(false);
+		  bool* dooptions = new bool(false);
+		  bool* doreadme = new bool(false);
+		  bool* doabout = new bool(false);
+		  
 		  // Set to 640x480 so that we know on what we are and the pictures
 		  // look good
 		  //uint lx=g_gr.get_xres();
@@ -102,46 +77,69 @@ void main_menue(void) {
 		  // Create the buttons
 		  Button* b;
 		  b=win->create_button(60, 150, 170, 20, 1);
-		  // b->set_func(single_player, 0);
+		  b->register_func(menue_butclick_func, dosingle_player);
 		  b->set_pic(g_fh.get_string("Single Player", 0));
 		  
 		  b=win->create_button(60, 190, 170, 20, 1);
-		  // b->set_func(single_player, 0);
+		  b->register_func(menue_butclick_func, domulti_player);
 		  b->set_pic(g_fh.get_string("Multi Player", 0));
 		  
 		  b=win->create_button(60, 230, 170, 20, 1);
-		  // b->set_func(single_player, 0);
+		  b->register_func(menue_butclick_func, dooptions);
 		  b->set_pic(g_fh.get_string("Options", 0));
 		 
 		  b=win->create_button(60, 270, 170, 20, 1);
-		  // b->set_func(single_player, 0);
+		  b->register_func(menue_butclick_func, doreadme);
 		  b->set_pic(g_fh.get_string("View Readme", 0));
 		  
 		  b=win->create_button(60, 310, 170, 20, 1);
-		  // b->set_func(single_player, 0);
+		  b->register_func(menue_butclick_func, doabout);
 		  b->set_pic(g_fh.get_string("About", 0));
 		  
 
 		  
 		  b=win->create_button(60, 370, 170, 20, 0);
-		  b->register_func(do_exit, NULL);
+		  b->register_func(menue_butclick_func, doexit);
 		  b->set_pic(g_fh.get_string("Exit Game", 0));
 		  
 		  // Register the resposible mouse funtions
-		  g_ip.register_mcf(click, Input::BUT1);
-		  g_ip.register_mcf(mcf1, Input::BUT2);
-	     g_ip.register_mmf(mmf);
+		  g_ip.register_mcf(menue_lclick, Input::BUT1);
+		  g_ip.register_mcf(menue_rclick, Input::BUT2);
+	     g_ip.register_mmf(menue_mmf);
 		
-		  Counter c;
-		  c.start();
-		  while(!g_ip.should_die()) {
-					 g_ip.handle_pending_input(); 
-					 if(g_gr.does_need_update()) {
-								g_ui.draw();
-								g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
-								g_gr.update();
-								//g_gr.update_quarter();
-					 }
+		  while(!g_ip.should_die() && !*doexit && !*dosingle_player &&  
+								!*domulti_player && !*dooptions &&  !*doreadme && !*doabout) {
+					 menue_loop();
 		  }
-		  return; 
+		  
+
+		  
+		  if(*doexit) {
+					 g_ui.delete_window(win);
+					 return;
+		  }
+		  else if(*dosingle_player) { 
+					 g_ui.delete_window(win);
+					 single_player_menue();
+		  }
+		  else if(*domulti_player) {
+					 g_ui.delete_window(win);
+					 // Todo
+		  }
+		  else if(*dooptions) {
+					 g_ui.delete_window(win);
+					 // Todo
+		  }
+		  else if(*doreadme) {
+					 g_ui.delete_window(win);
+					 // Todo
+		  }
+		  else if(*doabout) {
+					 g_ui.delete_window(win);
+					 // Todo
+		  }
+
+		  // everything done.
+		  // we return, this will end the game
+		  return;
 }
