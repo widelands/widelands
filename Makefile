@@ -21,11 +21,6 @@ endif
 SDL_CONFIG:=sdl-config
 
 ifeq ($(CROSS),NO)
-# C compiler
-ifndef GCC
-CC:=gcc
-endif
-
 # c++ compiler
 ifndef CXX
 CXX:=g++
@@ -74,7 +69,6 @@ PREFIX:=/usr/local/cross-tools
 TARGET:=i386-mingw32msvc
 PATH:=$(PREFIX)/$(TARGET)/bin:$(PREFIX)/bin:$(PATH)
 
-CC=$(TARGET)-gcc
 CXX=$(TARGET)-g++
 
 # manually overwrite
