@@ -122,7 +122,10 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Place_Bob_Tool(new Editor_Delete_Bob_Tool()));
    tools.tools.push_back(new Editor_Increase_Resources_Tool(new Editor_Decrease_Resources_Tool(), new Editor_Set_Resources_Tool()));
    tools.tools.push_back(new Editor_Make_Infrastructure_Tool());
-   
+  
+   // Option menus
+   m_options_menus.resize(tools.tools.size());
+
    // Load all tribes into memory
    std::vector<std::string> tribes;
    Tribe_Descr::get_all_tribes(&tribes);
@@ -261,7 +264,7 @@ void Editor_Interactive::tool_menu_btn()
 	if (m_toolmenu.window)
 		delete m_toolmenu.window;
 	else
-		new Editor_Tool_Menu(this, &m_toolmenu, &tools, &m_options_menu);
+		new Editor_Tool_Menu(this, &m_toolmenu, &tools, &m_options_menus);
 }
 
 /*

@@ -39,9 +39,9 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu()
 constructor
 ===========
 */
-Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent,
+Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent, int index,
       Editor_Increase_Height_Tool* iht, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, registry, "Height Tools Options") {
+   Editor_Tool_Options_Menu(parent, index, registry, "Height Tools Options") {
 
    m_iht=iht;
    m_dht=iht->get_dht();
@@ -120,6 +120,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked(int n) {
    }
    m_sht->set_set_to(set);
 
+   select_correct_tool();
    update();
 }
 

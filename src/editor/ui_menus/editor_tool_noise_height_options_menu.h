@@ -28,7 +28,7 @@ class UITextarea;
 
 class Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
    public:
-      Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive*, Editor_Noise_Height_Tool*, UIUniqueWindowRegistry*);
+      Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive*, int, Editor_Noise_Height_Tool*, UIUniqueWindowRegistry*);
       virtual ~Editor_Tool_Noise_Height_Options_Menu() { }
 
    private:

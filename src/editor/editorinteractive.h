@@ -93,8 +93,6 @@ class Editor_Interactive : public Interactive_Base {
       UIUniqueWindowRegistry m_playermenu;
       UIUniqueWindowRegistry m_mainmenu;
       UIUniqueWindowRegistry m_eventmenu;
-      UIUniqueWindowRegistry m_options_menu;
-
-   
+      std::vector<UIUniqueWindowRegistry> m_options_menus;
 };
 #endif // __S__EDITOR_H

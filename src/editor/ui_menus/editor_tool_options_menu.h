@@ -26,12 +26,14 @@ class Editor_Interactive;
 
 class Editor_Tool_Options_Menu : public UIUniqueWindow {
       public:
-         Editor_Tool_Options_Menu(Editor_Interactive*, UIUniqueWindowRegistry*, const char* title);
+         Editor_Tool_Options_Menu(Editor_Interactive*, int index, UIUniqueWindowRegistry*, const char* title);
          ~Editor_Tool_Options_Menu();
 
          inline Editor_Interactive* get_parent() { return m_parent; }
-
+         void select_correct_tool(void) ;
+         
       private:
+         int m_index;
          Editor_Interactive* m_parent;
 };
 

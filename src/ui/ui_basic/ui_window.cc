@@ -24,6 +24,7 @@
 #include "system.h"
 #include "ui_window.h"
 #include "constants.h"
+#include "keycodes.h"
 
 /* class UIWindow
  *
@@ -55,6 +56,7 @@ UIWindow::UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *ti
 	: UIPanel(parent, x, y, w+WINDOW_BORDER*2, h+WINDOW_BORDER*2)
 {
 	_dragging = false;
+   _small = false;
 
 	if (title)
 		set_title(title);
@@ -134,55 +136,63 @@ Redraw the window frame and background
 */
 void UIWindow::draw_border(RenderTarget* dst)
 {
-	int px, py;
+   int px, py;
 
-	// background
-	dst->tile(CORNER, CORNER, get_w() - (2*CORNER), get_h() - (2*CORNER), m_pic_background, 0, 0);
+   // background
+   dst->tile(CORNER, CORNER, get_w() - (2*CORNER), get_h() - (2*CORNER), m_pic_background, 0, 0);
 
-	// top left corner
-	dst->blitrect(0, 0, m_pic_top, 0, 0, CORNER, CORNER);
-	// bottom left corner
-	dst->blitrect(0, get_h()-CORNER, m_pic_bottom, 0, 0, CORNER, CORNER);
+   // top left corner
+   dst->blitrect(0, 0, m_pic_top, 0, 0, CORNER, CORNER);
+   // top bar
+   for(px = CORNER; px < get_w()-CORNER-MIDDLE; px += MIDDLE) {
+      dst->blitrect(px, 0, m_pic_top, CORNER, 0, MIDDLE, CORNER);
+   }
+   // odd pixels of top bar
+   dst->blitrect(px, 0, m_pic_top, CORNER, 0, get_w()-px-CORNER, CORNER);
+   // top right corner
+   dst->blitrect(get_w()-CORNER, 0, m_pic_top, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+   // left top thingy
+   dst->blitrect(0, CORNER, m_pic_lborder, 0, 0, CORNER, CORNER);
+   // right top thingy
+   dst->blitrect(get_w()-CORNER, CORNER, m_pic_rborder, 0, 0, CORNER, CORNER);
 
-	// top & bottom bar
-	for(px = CORNER; px < get_w()-CORNER-MIDDLE; px += MIDDLE) {
-		dst->blitrect(px, 0, m_pic_top, CORNER, 0, MIDDLE, CORNER);
-		dst->blitrect(px, get_h()-CORNER, m_pic_bottom, CORNER, 0, MIDDLE, CORNER);
-	}
-	// odd pixels of top & bottom bar
-	dst->blitrect(px, 0, m_pic_top, CORNER, 0, get_w()-px-CORNER, CORNER);
-	dst->blitrect(px, get_h()-CORNER, m_pic_bottom, CORNER, 0, get_w()-px-CORNER, CORNER);
 
-	// top right corner
-	dst->blitrect(get_w()-CORNER, 0, m_pic_top, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
-	// bottom right corner
-	dst->blitrect(get_w()-CORNER, get_h()-CORNER, m_pic_bottom, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+   if(!_small) { // Only draw this, if we are not minimized 
+      // bottom left corner
+      dst->blitrect(0, get_h()-CORNER, m_pic_bottom, 0, 0, CORNER, CORNER);
 
-	// left top thingy
-	dst->blitrect(0, CORNER, m_pic_lborder, 0, 0, CORNER, CORNER);
-	// right top thingy
-	dst->blitrect(get_w()-CORNER, CORNER, m_pic_rborder, 0, 0, CORNER, CORNER);
+      // bottom bar
+      for(px = CORNER; px < get_w()-CORNER-MIDDLE; px += MIDDLE) {
+         dst->blitrect(px, get_h()-CORNER, m_pic_bottom, CORNER, 0, MIDDLE, CORNER);
+      }
+      // odd pixels of bottom bar
+      dst->blitrect(px, get_h()-CORNER, m_pic_bottom, CORNER, 0, get_w()-px-CORNER, CORNER);
 
-	// left & right bars
-	for(py = 2*CORNER; py < get_h()-2*CORNER-MIDDLE; py += MIDDLE) {
-		dst->blitrect(0, py, m_pic_lborder, 0, CORNER, CORNER, MIDDLE);
-		dst->blitrect(get_w()-CORNER, py, m_pic_rborder, 0, CORNER, CORNER, MIDDLE);
-	}
-	// odd pixels of left & right bars
-	dst->blitrect(0, py, m_pic_lborder, 0, CORNER, CORNER, get_h()-py-2*CORNER);
-	dst->blitrect(get_w()-CORNER, py, m_pic_rborder, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+      // bottom right corner
+      dst->blitrect(get_w()-CORNER, get_h()-CORNER, m_pic_bottom, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 
-	// left bottom thingy
-	dst->blitrect(0, get_h()-2*CORNER, m_pic_lborder, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
-	// right bottom thingy
-	dst->blitrect(get_w()-CORNER, get_h()-2*CORNER, m_pic_rborder, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
 
-	// draw the title if we have one
-	if (m_title.length()) {
-		px = get_w() >> 1;
-		py = CORNER>>1;
-		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, px, py, m_title.c_str(), Align_Center);
-	}
+      // left & right bars
+      for(py = 2*CORNER; py < get_h()-2*CORNER-MIDDLE; py += MIDDLE) {
+         dst->blitrect(0, py, m_pic_lborder, 0, CORNER, CORNER, MIDDLE);
+         dst->blitrect(get_w()-CORNER, py, m_pic_rborder, 0, CORNER, CORNER, MIDDLE);
+      }
+      // odd pixels of left & right bars
+      dst->blitrect(0, py, m_pic_lborder, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+      dst->blitrect(get_w()-CORNER, py, m_pic_rborder, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+
+      // left bottom thingy
+      dst->blitrect(0, get_h()-2*CORNER, m_pic_lborder, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
+      // right bottom thingy
+      dst->blitrect(get_w()-CORNER, get_h()-2*CORNER, m_pic_rborder, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
+   }
+
+   // draw the title if we have one
+   if (m_title.length()) {
+      px = get_w() >> 1;
+      py = CORNER>>1;
+      g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, px, py, m_title.c_str(), Align_Center);
+   }
 }
 
 /**
@@ -191,8 +201,14 @@ void UIWindow::draw_border(RenderTarget* dst)
  */
 bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
 {
-	if (btn == MOUSE_LEFT)
-	{
+   bool should_minimize = 
+      ((( Sys_GetKeyState(KEY_LCTRL) | Sys_GetKeyState(KEY_RCTRL) ) && (btn == MOUSE_LEFT)) ||
+      (btn == MOUSE_MIDDLE)) && down;
+
+
+   if(should_minimize) {
+      minimize(!is_minimized());
+   } else if (btn == MOUSE_LEFT) {
 		if (down) {
 			_dragging = true;
 			grab_mouse(true);
@@ -200,11 +216,28 @@ bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
 			grab_mouse(false);
 			_dragging = false;
 		}
-	}
-	else if (btn == MOUSE_RIGHT && down)
+	} 
+	else if (btn == MOUSE_RIGHT && down) 
 		delete this; // is this 100% safe?
 
 	return true;
+}
+
+/*
+ * minimize this window
+ */
+void UIWindow::minimize(bool t) {
+   if(t==_small) return;
+   
+   if(_small) {
+      set_inner_size(get_inner_w(), _oldh);
+      _small=false;
+   } else {
+      _oldh=get_inner_h();
+      set_size(get_w(), WINDOW_BORDER);
+      set_pos(get_x(),get_y()); // If on border, this feels more natural
+      _small=true;
+   }
 }
 
 /**

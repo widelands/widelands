@@ -40,9 +40,9 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 Create all the buttons etc...
 ===============
 */
-Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive *parent,
+Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive *parent, int index,
 				Editor_Noise_Height_Tool* nht, UIUniqueWindowRegistry* registry)
-   : Editor_Tool_Options_Menu(parent, registry, "Noise Height Options")
+   : Editor_Tool_Options_Menu(parent, index, registry, "Noise Height Options")
 {
    char buf[250];
    sprintf(buf, "Minimum: %i", 10);
@@ -108,6 +108,8 @@ void Editor_Tool_Noise_Height_Options_Menu::update(void) {
 
    sprintf(buf, "%i", m_nht->get_sht()->get_set_to());
    m_set->set_text(buf);
+   
+   select_correct_tool();
 
 }
 

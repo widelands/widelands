@@ -35,12 +35,13 @@ Editor_Tool_Options_Menu::Editor_Tool_Options_Menu()
 constructor
 ===========
 */
-Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent,
+Editor_Tool_Options_Menu::Editor_Tool_Options_Menu(Editor_Interactive* parent, int index,
 													UIUniqueWindowRegistry* registry, const char* title) :
    UIUniqueWindow(parent, registry, 100, 100, title)
 {
    m_parent=parent;
-
+   m_index=index;
+   
 	if (get_usedefaultpos())
 		move_to_mouse();
 }
@@ -54,4 +55,13 @@ destructor
 */
 Editor_Tool_Options_Menu::~Editor_Tool_Options_Menu()
 {
+}
+
+/*
+ * Selects the correct tool from the parent. 
+ * This is needed when a selection was made in the 
+ * options menus
+ */
+void Editor_Tool_Options_Menu::select_correct_tool(void) {
+   m_parent->select_tool(m_index, 0);
 }

@@ -39,6 +39,9 @@
  *
  * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
  * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
+ *
+ * A click with the middle mouse button (or STRG+LClick) minimizes a window. Minimize means, that 
+ * the window is only the caption bar, nothing inside. Another click on this bar resizes the window again
  */
 
 // widht/height the graphs above must have
@@ -58,6 +61,9 @@ public:
 	void move_to_mouse();
 	void center_to_parent();
 
+   inline bool is_minimized(void) { return _small; }
+   void minimize(bool t);
+
 	// Drawing and event handlers
 	void draw_border(RenderTarget* dst);
 
@@ -65,8 +71,9 @@ public:
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
 
 private:
-
-	bool _dragging;
+   bool _small;       // Is this window "hidden"
+	uint _oldw,_oldh;  // if it is, these are the old formats
+   bool _dragging;
 
 	std::string		m_title;
 

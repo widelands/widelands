@@ -18,17 +18,18 @@
  */
 
 
+#include "editor_set_both_terrain_tool.h"
 #include "editor_tool_set_terrain_options_menu.h"
 #include "editorinteractive.h"
-#include "ui_panel.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
-#include "map.h"
-#include "world.h"
-#include "ui_checkbox.h"
-#include "editor_set_both_terrain_tool.h"
 #include "keycodes.h"
+#include "map.h"
 #include "rendertarget.h"
+#include "system.h"
+#include "ui_button.h"
+#include "ui_panel.h"
+#include "ui_textarea.h"
+#include "ui_checkbox.h"
+#include "world.h"
 
 /*
 =================================================
@@ -45,12 +46,11 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
 Create all the buttons etc...
 ===============
 */
-Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent,
+Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent, int index,
 						Editor_Set_Both_Terrain_Tool* sbt, UIUniqueWindowRegistry *registry)
-	: Editor_Tool_Options_Menu(parent, registry, "Terrain Select")
+	: Editor_Tool_Options_Menu(parent, index, registry, "Terrain Select")
 {
    m_sbt=sbt;
-   m_multiselect=false;
 
    const int space=5;
    const int xstart=5;
@@ -160,27 +160,14 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
       }
    }
    m_textarea=new UITextarea(this, 5, get_inner_h()-25, get_inner_w()-10, 20, buf, Align_Center);
-
-   set_can_focus(true);
-   focus();
 }
 
 /*
  * Cleanup
  */
 Editor_Tool_Set_Terrain_Tool_Options_Menu::~Editor_Tool_Set_Terrain_Tool_Options_Menu()  {
-   set_can_focus(false);
-
    for(uint i=0; i<m_surfaces.size(); i++)
       g_gr->free_surface(m_surfaces[i]);
-}
-
-/*
- * handle key. When STRG is pressed, set multiselect to on
- */
-bool Editor_Tool_Set_Terrain_Tool_Options_Menu::handle_key(bool down, int code, char c) {
-   if(code==KEY_LCTRL || code==KEY_RCTRL) m_multiselect=down;
-   return false;
 }
 
 /* do nothing */
@@ -194,9 +181,10 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::selected()
 ===========
 */
 void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
-   if(t==false && (!m_multiselect || m_sbt->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
+   bool multiselect = Sys_GetKeyState(KEY_LCTRL) | Sys_GetKeyState(KEY_RCTRL);
+   if(t==false && (!multiselect || m_sbt->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
 
-   if(!m_multiselect) {
+   if(!multiselect) {
       int i=0;
       while(m_sbt->get_nr_enabled()) {
          m_sbt->enable(i++,false);
@@ -211,6 +199,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
    }
 
    m_sbt->enable(n,t);
+   select_correct_tool();
 
    std::string buf="Current: ";
    int j=m_sbt->get_nr_enabled();

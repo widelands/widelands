@@ -37,11 +37,11 @@ Here, you can select the tool you wish to use the next time
 */
 class Editor_Tool_Menu : public UIUniqueWindow {
    public:
-      Editor_Tool_Menu(Editor_Interactive*, UIUniqueWindowRegistry*, Editor_Interactive::Editor_Tools*, UIUniqueWindowRegistry* );
+      Editor_Tool_Menu(Editor_Interactive*, UIUniqueWindowRegistry*, Editor_Interactive::Editor_Tools*, std::vector<UIUniqueWindowRegistry>* );
       virtual ~Editor_Tool_Menu();
 
    private:
-      UIUniqueWindowRegistry* m_options;
+      std::vector<UIUniqueWindowRegistry>* m_options_menus;
       Editor_Interactive::Editor_Tools* m_tools;
       Editor_Interactive* m_parent;
       UIRadiogroup* m_radioselect;

@@ -45,9 +45,9 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
 constructor
 ===========
 */
-Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_Menu(Editor_Interactive* parent,
+Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_Menu(Editor_Interactive* parent, int index,
       Editor_Increase_Resources_Tool* iht, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, registry, "Resources Tools Options") {
+   Editor_Tool_Options_Menu(parent, index, registry, "Resources Tools Options") {
 
    m_parent=parent;
    m_irt=iht;
@@ -175,6 +175,7 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked(int n) {
       if(set<0) set=0;
    }
    m_srt->set_set_to(set);
+   select_correct_tool();
 
    update();
 }
@@ -191,6 +192,7 @@ void Editor_Tool_Change_Resources_Options_Menu::selected(void) {
 
    m_parent->get_map()->get_overlay_manager()->register_overlay_callback_function(&Editor_Change_Resource_Tool_Callback, static_cast<void*>(m_parent->get_map()), n+1);
    m_parent->get_map()->recalc_whole_map();
+   select_correct_tool();
 
    update();
 }

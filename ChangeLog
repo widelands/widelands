@@ -1,3 +1,6 @@
+- Windows can be minimized (middle mouse or CTRL+left mouse)
+- fixed crash when using 32-bit fullscreen mode under win32
+
 build-8:
 - some ui ergonomics (new mapselect dialog, 
   double click function in listselects)

@@ -738,6 +738,16 @@ int Sys_GetMouseY()
 	return (int)sys.mouse_y;
 }
 
+/*
+===============
+Get the state of the current KeyBoard Button
+
+warning: this function doesn't check for dumbness
+===============
+*/
+bool Sys_GetKeyState(uint key) {
+   return SDL_GetKeyState(0)[key];
+}
 
 /*
 ===============

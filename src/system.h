@@ -92,6 +92,7 @@ uint Sys_GetMouseButtons();
 int Sys_GetMouseX();
 int Sys_GetMouseY();
 void Sys_SetMousePos(int x, int y);
+bool Sys_GetKeyState(uint key);
 
 void Sys_SetInputGrab(bool grab);
 void Sys_SetMouseSwap(bool swap);

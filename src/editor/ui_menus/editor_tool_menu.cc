@@ -44,12 +44,12 @@ Create all the buttons etc...
 ===============
 */
 Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry,
-                                   Editor_Interactive::Editor_Tools* tools, UIUniqueWindowRegistry* options)
+                                   Editor_Interactive::Editor_Tools* tools, std::vector<UIUniqueWindowRegistry>* options)
 	: UIUniqueWindow(parent, registry, 350, 400, "Tool Menu")
 {
    m_tools=tools;
    m_parent=parent;
-   m_options=options;
+   m_options_menus=options;
 
    // UIButtons
    const int offsx=5;
@@ -111,54 +111,76 @@ called when the radiogroup changes or is reclicked
 void Editor_Tool_Menu::changed_to(void) {
    int n=m_radioselect->get_state();
 
-   if (m_options->window) {
-      delete m_options->window;
-   }
-
+   int index=-1;
    switch(n) {
-      case 0:
-         m_parent->select_tool(1, 0);
-         new Editor_Tool_Change_Height_Options_Menu(m_parent,
-               static_cast<Editor_Increase_Height_Tool*>(m_tools->tools[1]),
-               m_options);
-         break;
-
-      case 1:
-         m_parent->select_tool(2,0);
-         new Editor_Tool_Noise_Height_Options_Menu(m_parent,
-               static_cast<Editor_Noise_Height_Tool*>(m_tools->tools[2]),
-               m_options);
-         break;
-
-      case 2:
-         m_parent->select_tool(3,0);
-         new Editor_Tool_Set_Terrain_Tool_Options_Menu(m_parent,
-               static_cast<Editor_Set_Both_Terrain_Tool*>(m_tools->tools[3]),
-               m_options);
-         break;
-
-      case 3:
-         m_parent->select_tool(4,0);
-         new Editor_Tool_Place_Immovable_Options_Menu(m_parent,
-               static_cast<Editor_Place_Immovable_Tool*>(m_tools->tools[4]),
-               m_options);
-         break;
-
-      case 4:
-         m_parent->select_tool(6,0);
-         new Editor_Tool_Place_Bob_Options_Menu(m_parent,
-               static_cast<Editor_Place_Bob_Tool*>(m_tools->tools[6]),
-               m_options);
-         break;
-
-      case 5:
-         m_parent->select_tool(7, 0);
-         new Editor_Tool_Change_Resources_Options_Menu(m_parent,
-               static_cast<Editor_Increase_Resources_Tool*>(m_tools->tools[7]),
-               m_options);
-         break;
-
-
+      case 0: index=1; break;
+      case 1: index=2; break;
+      case 2: index=3; break;
+      case 3: index=4; break;
+      case 4: index=6; break;
+      case 5: index=7; break;
       default: break;
+   }
+   assert(index!=-1); 
+   
+   // Select tool
+   m_parent->select_tool(index, 0);
+   
+   UIWindow* w=(*m_options_menus)[index].window;
+   bool create_window=false;
+   if(w) {
+      // There is already a window. If it is small, 
+      // make it big.
+      if(w->is_minimized()) { 
+         w->minimize(false);
+      } else {
+         delete w;
+      }
+   } else {
+      create_window=true;
+   }
+   
+   if(create_window) {
+      // Create window
+      switch(n) {
+         case 0:
+            new Editor_Tool_Change_Height_Options_Menu(m_parent, index,
+                  static_cast<Editor_Increase_Height_Tool*>(m_tools->tools[index]),
+                  &((*m_options_menus)[index]));
+            break;
+
+         case 1:
+            new Editor_Tool_Noise_Height_Options_Menu(m_parent, index,
+                  static_cast<Editor_Noise_Height_Tool*>(m_tools->tools[index]),
+                  &((*m_options_menus)[index]));
+            break;
+
+         case 2:
+            new Editor_Tool_Set_Terrain_Tool_Options_Menu(m_parent, index,
+                  static_cast<Editor_Set_Both_Terrain_Tool*>(m_tools->tools[index]),
+                  &((*m_options_menus)[index]));
+            break;
+
+         case 3:
+            new Editor_Tool_Place_Immovable_Options_Menu(m_parent, index, 
+                  static_cast<Editor_Place_Immovable_Tool*>(m_tools->tools[index]),
+                  &((*m_options_menus)[index]));
+            break;
+
+         case 4:
+            new Editor_Tool_Place_Bob_Options_Menu(m_parent, index,
+                  static_cast<Editor_Place_Bob_Tool*>(m_tools->tools[index]),
+                  &((*m_options_menus)[index]));
+            break;
+
+         case 5:
+            new Editor_Tool_Change_Resources_Options_Menu(m_parent, index, 
+                  static_cast<Editor_Increase_Resources_Tool*>(m_tools->tools[index]),
+                  &((*m_options_menus)[index]));
+            break;
+
+
+         default: break;
+      }
    }
 }

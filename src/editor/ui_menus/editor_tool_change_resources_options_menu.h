@@ -31,7 +31,7 @@ class UITextarea;
 
 class Editor_Tool_Change_Resources_Options_Menu : public Editor_Tool_Options_Menu {
    public:
-      Editor_Tool_Change_Resources_Options_Menu(Editor_Interactive*, Editor_Increase_Resources_Tool*,
+      Editor_Tool_Change_Resources_Options_Menu(Editor_Interactive*, int, Editor_Increase_Resources_Tool*,
             UIUniqueWindowRegistry*);
       ~Editor_Tool_Change_Resources_Options_Menu() { delete m_radiogroup; }
 

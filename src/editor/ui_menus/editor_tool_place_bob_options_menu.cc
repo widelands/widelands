@@ -17,17 +17,18 @@
  *
  */
 
-#include "editor_tool_place_bob_options_menu.h"
 #include "editorinteractive.h"
-#include "ui_button.h"
-#include "ui_textarea.h"
-#include "ui_tabpanel.h"
-#include "ui_box.h"
-#include "ui_checkbox.h"
-#include "map.h"
-#include "world.h"
 #include "editor_place_bob_tool.h"
+#include "editor_tool_place_bob_options_menu.h"
 #include "keycodes.h"
+#include "map.h"
+#include "system.h"
+#include "ui_box.h"
+#include "ui_button.h"
+#include "ui_checkbox.h"
+#include "ui_tabpanel.h"
+#include "ui_textarea.h"
+#include "world.h"
 
 /*
 =================================================
@@ -44,14 +45,13 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 constructor
 ===========
 */
-Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive* parent,
+Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive* parent, int index,
 		Editor_Place_Bob_Tool* pit, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, registry, "Bobs Menu") {
+   Editor_Tool_Options_Menu(parent, index, registry, "Bobs Menu") {
    const int max_items_in_tab=24;
    const int min_items_in_tab=12;
 
    m_pit=pit;
-   m_multiselect=false;
 
    const int space=5;
    const int xstart=5;
@@ -117,17 +117,12 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_In
    m_tabpanel->activate(0);
    box->resize();
    m_tabpanel->resize();
-
-   // Keyboard stuff
-   set_can_focus(true);
-   focus();
 }
 
 /*
  * Cleanup
  */
 Editor_Tool_Place_Bob_Options_Menu::~Editor_Tool_Place_Bob_Options_Menu(void) {
-   set_can_focus(false);
 }
 
 /*
@@ -138,9 +133,10 @@ this is called when one of the state boxes is toggled
 ===========
 */
 void Editor_Tool_Place_Bob_Options_Menu::clicked(int n, bool t) {
-   if(t==false && (!m_multiselect || m_pit->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
+   bool multiselect = Sys_GetKeyState(KEY_LCTRL) | Sys_GetKeyState(KEY_RCTRL);
+   if(t==false && (!multiselect || m_pit->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
 
-   if(!m_multiselect) {
+   if(!multiselect) {
       int i=0;
       while(m_pit->get_nr_enabled()) {
          m_pit->enable(i++,false);
@@ -155,15 +151,7 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked(int n, bool t) {
    }
 
    m_pit->enable(n,t);
-}
-
-
-/*
- * handle key. When STRG is pressed, set multiselect to on
- */
-bool Editor_Tool_Place_Bob_Options_Menu::handle_key(bool down, int code, char c) {
-   if(code==KEY_LCTRL || code==KEY_RCTRL) m_multiselect=down;
-   return false;
+   select_correct_tool();
 }
 
 /* do nothing */

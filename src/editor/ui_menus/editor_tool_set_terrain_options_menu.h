@@ -30,14 +30,12 @@ class UICheckbox;
 
 class Editor_Tool_Set_Terrain_Tool_Options_Menu : public Editor_Tool_Options_Menu {
    public:
-      Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive*, Editor_Set_Both_Terrain_Tool*,
+      Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive*, int, Editor_Set_Both_Terrain_Tool*,
 		                                          UIUniqueWindowRegistry* );
       virtual ~Editor_Tool_Set_Terrain_Tool_Options_Menu() ;
-      virtual bool handle_key(bool down, int code, char c) ;
 
    private:
       std::vector<uint> m_surfaces;
-      bool m_multiselect;
       UITextarea* m_textarea;
       Editor_Set_Both_Terrain_Tool* m_sbt;
       void selected(int,bool);
