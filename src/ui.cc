@@ -443,7 +443,7 @@ void Panel::do_draw(Bitmap *dst, int ofsx, int ofsy)
 		}
 
 		// now just blit from the cache
-		Graph::copy_pic(dst, _cache, ofsx+_x, ofsy+_y, 0, 0, _w, _h);
+		copy_pic(dst, _cache, ofsx+_x, ofsy+_y, 0, 0, _w, _h);
 	}
 }
 

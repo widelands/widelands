@@ -26,7 +26,7 @@
  *
  * This class defines a list-select box. 
  *
- * Depends: class Graph::Pic
+ * Depends: class Pic
  * 			g_fh
  * 			class Button
  */
@@ -38,9 +38,9 @@ ushort Listselect::dflt_bgcolor, Listselect::dflt_framecolor, Listselect::dflt_s
  */
 void Listselect::setup_ui()
 {
-	dflt_bgcolor = Graph::pack_rgb(67, 32, 10);
-	dflt_framecolor = Graph::pack_rgb(0, 0, 0);
-	dflt_selcolor = Graph::pack_rgb(248, 201, 135);
+	dflt_bgcolor = pack_rgb(67, 32, 10);
+	dflt_framecolor = pack_rgb(0, 0, 0);
+	dflt_selcolor = pack_rgb(248, 201, 135);
 }
 
 /** Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = 0, uint font = 0)
@@ -217,7 +217,7 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 			x = get_eff_w()-e->pic->get_w()-2;
 		else if (_align == H_CENTER)
 			x = (get_eff_w()-e->pic->get_w()-2) >> 1;
-		Graph::copy_pic(dst, e->pic, x+ofsx, y+ofsx, 0, 0, e->pic->get_w(), e->pic->get_h());
+		copy_pic(dst, e->pic, x+ofsx, y+ofsx, 0, 0, e->pic->get_w(), e->pic->get_h());
 		y += e->pic->get_h() + 2;
 	}
 }

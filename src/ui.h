@@ -24,6 +24,7 @@
 #include "singleton.h"
 #include "font.h"
 #include "growablearray.h"
+#include "auto_pic.h"
 
 #if 0
 // predeclaration

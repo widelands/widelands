@@ -207,7 +207,7 @@ void Multiline_Textarea::draw(Bitmap *bmp, int ofsx, int ofsy)
 		else if (_align == H_CENTER)
 			x = (get_eff_w() - txt->get_w()) >> 1;
 
-		Graph::copy_pic(bmp, txt, x+ofsx, y+ofsy, 0, 0, txt->get_w(), txt->get_h());
+		copy_pic(bmp, txt, x+ofsx, y+ofsy, 0, 0, txt->get_w(), txt->get_h());
 		y += txt->get_h() + 2;
 	}
 }

@@ -134,52 +134,52 @@ void Window::draw(Bitmap *dst, int ofsx, int ofsy)
 	// fill background
 	for(py = CORNER; py < get_h()-CORNER; py += usebg->get_h()) {
 		for(px = CORNER; px < get_w()-CORNER; px += usebg->get_w())
-			Graph::copy_pic(dst, usebg, ofsx+px, ofsy+py, 0, 0, usebg->get_w(), usebg->get_h());
+			copy_pic(dst, usebg, ofsx+px, ofsy+py, 0, 0, usebg->get_w(), usebg->get_h());
 	}
 
 	// top left corner
-	Graph::copy_pic(dst, &top, ofsx, ofsy, 0, 0, CORNER, CORNER);
+	copy_pic(dst, &top, ofsx, ofsy, 0, 0, CORNER, CORNER);
 	// bottom left corner
-	Graph::copy_pic(dst, &bot, ofsx, ofsy+get_h()-CORNER, 0, 0, CORNER, CORNER);
+	copy_pic(dst, &bot, ofsx, ofsy+get_h()-CORNER, 0, 0, CORNER, CORNER);
 
 	// top & bottom bar
 	for(px = CORNER; px < get_w()-2*CORNER-MIDDLE; px += MIDDLE) {
-		Graph::copy_pic(dst, &top, ofsx+px, ofsy, CORNER, 0, MIDDLE, CORNER);
-		Graph::copy_pic(dst, &bot, ofsx+px, ofsy+get_h()-CORNER, CORNER, 0, MIDDLE, CORNER);
+		copy_pic(dst, &top, ofsx+px, ofsy, CORNER, 0, MIDDLE, CORNER);
+		copy_pic(dst, &bot, ofsx+px, ofsy+get_h()-CORNER, CORNER, 0, MIDDLE, CORNER);
 	}
 	// odd pixels of top & bottom bar
-	Graph::copy_pic(dst, &top, ofsx+px, ofsy, CORNER, 0, get_w()-px-CORNER, CORNER);
-	Graph::copy_pic(dst, &bot, ofsx+px, ofsy+get_h()-CORNER, CORNER, 0, get_w()-px-CORNER, CORNER);
+	copy_pic(dst, &top, ofsx+px, ofsy, CORNER, 0, get_w()-px-CORNER, CORNER);
+	copy_pic(dst, &bot, ofsx+px, ofsy+get_h()-CORNER, CORNER, 0, get_w()-px-CORNER, CORNER);
 
 	// top right corner
-	Graph::copy_pic(dst, &top, ofsx+get_w()-CORNER, ofsy, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+	copy_pic(dst, &top, ofsx+get_w()-CORNER, ofsy, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 	// bottom right corner
-	Graph::copy_pic(dst, &bot, ofsx+get_w()-CORNER, ofsy+get_h()-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+	copy_pic(dst, &bot, ofsx+get_w()-CORNER, ofsy+get_h()-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 
 	// left top thingy
-	Graph::copy_pic(dst, &l_border, ofsx, ofsy+CORNER, 0, 0, CORNER, CORNER);
+	copy_pic(dst, &l_border, ofsx, ofsy+CORNER, 0, 0, CORNER, CORNER);
 	// right top thingy
-	Graph::copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+CORNER, 0, 0, CORNER, CORNER);
+	copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+CORNER, 0, 0, CORNER, CORNER);
 
 	// left & right bars
 	for(py = 2*CORNER; py < get_h()-4*CORNER-MIDDLE; py += MIDDLE) {
-		Graph::copy_pic(dst, &l_border, ofsx, ofsy+py, 0, CORNER, CORNER, MIDDLE);
-		Graph::copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+py, 0, CORNER, CORNER, MIDDLE);
+		copy_pic(dst, &l_border, ofsx, ofsy+py, 0, CORNER, CORNER, MIDDLE);
+		copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+py, 0, CORNER, CORNER, MIDDLE);
 	}
 	// odd pixels of left & right bars
-	Graph::copy_pic(dst, &l_border, ofsx, ofsy+py, 0, CORNER, CORNER, get_h()-py-2*CORNER);
-	Graph::copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+py, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+	copy_pic(dst, &l_border, ofsx, ofsy+py, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+	copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+py, 0, CORNER, CORNER, get_h()-py-2*CORNER);
 
 	// left bottom thingy
-	Graph::copy_pic(dst, &l_border, ofsx, ofsy+get_h()-2*CORNER, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
+	copy_pic(dst, &l_border, ofsx, ofsy+get_h()-2*CORNER, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
 	// right bottom thingy
-	Graph::copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+get_h()-2*CORNER, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
+	copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+get_h()-2*CORNER, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
 
 	// draw the title if we have one
 	if (_title) {
 		px = (get_w()-_title->get_w()) >> 1;
 		py = (CORNER-_title->get_h()) >> 1;
-		Graph::copy_pic(dst, _title, ofsx+px, ofsy+py, 0, 0, _title->get_w(), _title->get_h());
+		copy_pic(dst, _title, ofsx+px, ofsy+py, 0, 0, _title->get_w(), _title->get_h());
 	}
 }
 

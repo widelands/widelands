@@ -29,9 +29,6 @@
 #endif
 
 
-#define WLTF_MAGIC				"WLtf"
-#define WLTF_VERSION			0x0001
-
 struct TribeFileHeader
 {
 	char magic[6];			// "WLtf\0\0"

@@ -106,7 +106,7 @@ void Textarea::set_align(Align align)
 void Textarea::draw(Bitmap *dst, int ofsx, int ofsy)
 {
 	if (_textpic)
-		Graph::copy_pic(dst, _textpic, ofsx, ofsy, 0, 0, _textpic->get_w(), _textpic->get_h());
+		copy_pic(dst, _textpic, ofsx, ofsy, 0, 0, _textpic->get_w(), _textpic->get_h());
 }
 
 /** Textarea::collapse()

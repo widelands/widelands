@@ -154,7 +154,7 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 		int srcx = get_x() % bg->get_w();
 		int w = bg->get_w() - srcx;
 		for(uint x = 0; x < get_w(); x += w, srcx = 0, w = bg->get_w())
-			Graph::copy_pic(dst, bg, x+ofsx, y+ofsy, srcx, srcy, w, h);
+			copy_pic(dst, bg, x+ofsx, y+ofsy, srcx, srcy, w, h);
 	}
 
 	// if we got a picture, draw it centered
@@ -162,7 +162,7 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 		int x = (get_w() - _mypic->get_w()) >> 1;
 		int y = (get_h() - _mypic->get_h()) >> 1;
 
-		Graph::copy_pic(dst, _mypic, x+ofsx, y+ofsy, 0, 0, _mypic->get_w(), _mypic->get_h());
+		copy_pic(dst, _mypic, x+ofsx, y+ofsy, 0, 0, _mypic->get_w(), _mypic->get_h());
 	}
 
 	// draw border

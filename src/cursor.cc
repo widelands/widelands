@@ -96,6 +96,6 @@ void Cursor::set_pic(Pic* p) {
  */
 void Cursor::draw(const uint x, const uint y) {
 		  if(!show_c) return;
-		  Graph::copy_pic(g_gr.get_screenbmp(), pic, x, y, 0,0, pic->get_w(), pic->get_h());
+		  copy_pic(g_gr.get_screenbmp(), pic, x, y, 0,0, pic->get_w(), pic->get_h());
 }
 

@@ -65,6 +65,6 @@ void BaseMenu::start()
  */
 void BaseMenu::draw(Bitmap *dst, int ofsx, int ofsy)
 {
-	Graph::copy_pic(dst, &bg, 0, 0, 0, 0, bg.get_w(), bg.get_h());
+	copy_pic(dst, &bg, 0, 0, 0, 0, bg.get_w(), bg.get_h());
 }
 

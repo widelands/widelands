@@ -164,7 +164,7 @@ Pic* Font_Handler::get_string(const char* str, const ushort f) {
 					 // change c, so we get correct offsets in our font file
 					 c-=32;
 
-					 Graph::copy_pic(retval, &fonts[f].p[c], x, 0, 0, 0, fonts[f].p[c].get_w(), fonts[f].h);
+					 copy_pic(retval, &fonts[f].p[c], x, 0, 0, 0, fonts[f].p[c].get_w(), fonts[f].h);
 					 x+=fonts[f].p[c].get_w();
 		  }
 

@@ -81,7 +81,10 @@ widelands_SOURCES=main.cc \
 						criterr.cc \
 						myassert.h \
 						md5.cc \
-						md5.h
+						md5.h \
+                  pic.h \
+                  auto_pic.h \
+                  auto_pic.cc
 
 
 

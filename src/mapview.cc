@@ -136,15 +136,15 @@ void Map_View::draw_field(Bitmap *dst, Field* f)
 
 inline void Map_View::draw_polygon(Bitmap *dst, Field* l, Field* r, Field* m, Pic* pic)
 {
-	Graph::Point p[3];
-	p[0] = Graph::Point(l->get_xpix()-vpx, l->get_ypix()-vpy);
-	p[1] = Graph::Point(r->get_xpix()-vpx, r->get_ypix()-vpy);
-	p[2] = Graph::Point(m->get_xpix()-vpx, m->get_ypix()-vpy);
+	Point p[3];
+	p[0] = Point(l->get_xpix()-vpx, l->get_ypix()-vpy);
+	p[1] = Point(r->get_xpix()-vpx, r->get_ypix()-vpy);
+	p[2] = Point(m->get_xpix()-vpx, m->get_ypix()-vpy);
 	Vector n[3];
 	n[0] = l->get_normal();
 	n[1] = r->get_normal();
 	n[2] = m->get_normal();
-	Graph::render_triangle(dst, p, n, pic);
+	render_triangle(dst, p, n, pic);
 }
 
 void Map_View::set_viewpoint(uint x,  uint y)
