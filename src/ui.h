@@ -254,8 +254,10 @@ public:
 	UISignal clicked;
 	UISignal1<int> clickedid;
 
+	void remove_title();
 	void set_pic(Pic *pic);
 	void set_pic(AutoPic *pic);
+	void set_title(const char* title);
 	void set_enabled(bool on);
 
 	// Drawing and event handlers
@@ -276,6 +278,8 @@ private:
 	bool _highlighted; // mouse is over the button
 	bool _pressed;
 	bool _enabled;
+	
+	std::string		m_title;		// title string used when _mypic == 0
 };
 
 /** class Statebox [virtual]
@@ -399,18 +403,12 @@ private:
  */
 class Multiline_Textarea : public Panel {
 public:
-	enum Align {
-		H_LEFT = 0,
-		H_RIGHT = 1,
-		H_CENTER = 2
-	};
-
 	Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h, const char *text,
-	                   Align align = H_LEFT, uint font = 0);
+	                   Align align = Align_Left, uint font = 0);
 	~Multiline_Textarea();
 
-	void clear();
 	void set_text(const char *text);
+	void set_align(Align align);
 
 	void move_up(int i);
 	void move_down(int i);
@@ -421,10 +419,11 @@ public:
 	void draw(Bitmap *bmp, int ofsx, int ofsy);
 
 private:
-	uint _font;
-	Align _align;
-	Growable_Array _lines;
-	uint _firstvis;
+	uint				m_font;
+	Align				m_align;
+	std::string		m_text;
+	int				m_textheight;	// total height of wrapped text, in pixels
+	int				m_textpos;		// current scrolling position in pixels (0 is top)
 };
 
 /** class Listselect
@@ -441,33 +440,28 @@ class Listselect : public Panel {
 	static void setup_ui();
 
 public:
-	enum Align {
-		H_LEFT = 0,
-		H_RIGHT = 1,
-		H_CENTER = 2
-	};
-
-	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = H_LEFT, uint font = 0);
+	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, uint font = 0);
 	~Listselect();
-	static Listselect *create_scrolling(Panel *parent, int x, int y, uint w, uint h,
-	                                    Align align = H_LEFT, uint font = 0);
 
 	UISignal1<int> selected;
 
 	void clear();
-	void add_entry(const char *name, const char *value = 0);
+	void add_entry(const char *name, void *value);
 
+	void set_align(Align align);
+	
 	void move_up(int i);
 	void move_down(int i);
 
 	void set_colors(ushort bg, ushort frame, ushort sel);
 
 	void select(int i);
-	inline const char *get_selection() {
-		if (_selection < 0) return 0;
-		return ((Entry *)_entries.element_at(_selection))->str;
+	inline void *get_selection() {
+		if (m_selection < 0) return 0;
+		return m_entries[m_selection]->value;
 	}
 
+	int get_lineheight();
 	inline uint get_eff_w() { return get_w(); }
 
 	// Drawing and event handling
@@ -476,16 +470,17 @@ public:
 
 private:
 	struct Entry {
-		Pic *pic;
-		char str[1]; // variable size
+		void*		value;
+		char		name[1];
 	};
 
 	ushort _bgcolor, _framecolor, _selcolor;
-	uint _font;
-	Align _align;
-	Growable_Array _entries;
-	uint _firstvis;
-	int _selection;
+	
+	uint						m_font;
+	Align						m_align;
+	std::vector<Entry*>	m_entries;
+	int						m_scrollpos;	// in pixels
+	int						m_selection;	// -1 when nothing is selected
 };
 
 /** class Scrollbar
@@ -553,10 +548,11 @@ public:
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
 
 private:
-	Pic *_title;
 	Pic *_custom_bg; // custom background, set through set_new_bg()
 	bool _dragging;
 
+	std::string		m_title;
+	
 	static AutoPic l_border;
 	static AutoPic r_border;
 	static AutoPic top;

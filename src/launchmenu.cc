@@ -166,7 +166,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 		case Player::playerLocal: string = "Human"; break;
 		case Player::playerAI: string = "Computer"; break;
 		}
-		m_btnPlayerType->set_pic(g_fh.get_string(string, 0));
+		m_btnPlayerType->set_title(string);
 		m_btnPlayerType->set_visible(m_btnEnablePlayer->get_state());
 		
 		set_visible(true);
@@ -234,18 +234,18 @@ LaunchGameMenu::LaunchGameMenu(Game *g)
 
 	b = new Button(this, 410, 406, 174, 24, 0, 0);
 	b->clickedid.set(this, &LaunchGameMenu::end_modal);
-	b->set_pic(g_fh.get_string("Back", 0));
+	b->set_title("Back");
 
 	m_ok = new Button(this, 410, 436, 174, 24, 2, 1);
 	m_ok->clickedid.set(this, &LaunchGameMenu::end_modal);
-	m_ok->set_pic(g_fh.get_string("Start game", 0));
+	m_ok->set_title("Start game");
 	m_ok->set_enabled(false);
 
 	// Map selection fields
 	m_mapname = new Textarea(this, 497, 184, "(no map)", Align_HCenter);
 	b = new Button(this, 410, 200, 174, 24, 1, 0);
 	b->clicked.set(this, &LaunchGameMenu::select_map);
-	b->set_pic(g_fh.get_string("Select map", 0));
+	b->set_title("Select map");
 	
 	// Player settings
 	int i;

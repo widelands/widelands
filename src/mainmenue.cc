@@ -52,7 +52,7 @@ FileViewScreen::FileViewScreen(const char *text)
 
 	b = new Button(this, 233, 420, 174, 24, 0);
 	b->clickedid.set(this, &FileViewScreen::end_modal);
-	b->set_pic(g_fh.get_string("Close", 0));
+	b->set_title("Close");
 }
 
 /** fileview_screen(const char *fname)
@@ -100,28 +100,28 @@ MainMenu::MainMenu()
 
 	b = new Button(this, 60, 150, 174, 24, 1, mm_singleplayer);
 	b->clickedid.set(this, &MainMenu::end_modal);
-	b->set_pic(g_fh.get_string("Single Player", 0));
+	b->set_title("Single Player");
 
 	b = new Button(this, 60, 190, 174, 24, 1);
 	b->clicked.set(this, &MainMenu::not_supported);
-	b->set_pic(g_fh.get_string("Multi Player", 0));
+	b->set_title("Multi Player");
 
 	b = new Button(this, 60, 230, 174, 24, 1, mm_options);
 	b->clickedid.set(this, &MainMenu::end_modal);
-	b->set_pic(g_fh.get_string("Options", 0));
+	b->set_title("Options");
 
 	b = new Button(this, 60, 270, 174, 24, 1, mm_readme);
 	b->clickedid.set(this, &MainMenu::end_modal);
-	b->set_pic(g_fh.get_string("View Readme", 0));
+	b->set_title("View Readme");
 
 	b = new Button(this, 60, 310, 174, 24, 1, mm_license);
 	b->clickedid.set(this, &MainMenu::end_modal);
-	b->set_pic(g_fh.get_string("License", 0));
+	b->set_title("License");
 
 
 	b = new Button(this, 60, 370, 174, 24, 0, mm_exit);
 	b->clickedid.set(this, &MainMenu::end_modal);
-	b->set_pic(g_fh.get_string("Exit Game", 0));
+	b->set_title("Exit Game");
 
 	// Text
 	new Textarea(this, MENU_XRES, MENU_YRES, "Version " VERSION, Align_BottomRight);

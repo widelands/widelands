@@ -91,51 +91,97 @@ Button::Button(Panel *parent, int x, int y, uint w, uint h, uint background, int
 	_enabled = true;
 }
 
-/** Button::~Button()
- *
- * Free any resources associated with the button
- */
+/*
+===============
+Button::~Button
+
+Free any resources associated with the button
+===============
+*/
 Button::~Button()
 {
-	if (_mypic && _must_delete_mypic)
-		delete _mypic;
+	remove_title();
 }
 
-/** Button::set_pic(Pic *pic)
- *
- * Sets a new picture for the button.
- *
- * Args: pic	the picture
- */
+
+/*
+===============
+Button::remove_title
+
+Remove any title the button currently carries.
+===============
+*/
+void Button::remove_title()
+{
+	if (_mypic)
+		{
+		if (_must_delete_mypic)
+			delete _mypic;
+		_mypic = 0;
+		}
+	
+	m_title = "";
+}
+
+
+/*
+===============
+Button::set_pic
+
+Sets a new picture for the button.
+
+
+TODO: The two different set_pic()s are really dangerous.
+Once font reorganization has been done, we can probably just remove this
+set_pic() and only allow AutoPics (eventually only Images that have been
+loaded from disk). Or at least give the two functions different names,
+and use two seperate member variables.
+===============
+*/
 void Button::set_pic(Pic *pic)
 {
-	if (_mypic) {
-      assert(_must_delete_mypic);
-		delete _mypic;
-   }
+	remove_title();
+	
 	_mypic = pic;
+   _must_delete_mypic=true;
 
 	update(0, 0, get_w(), get_h());
-   _must_delete_mypic=true;
 }
 
-/** Button::set_pic(AutoPic *pic)
- *
- * Sets a new picture for the button.
- * But: AutoPics must not be deleted
- *
- * Args: pic	the picture
- */
+/*
+===============
+Button::set_pic
+
+Sets a new picture for the button.
+But: AutoPics must not be deleted
+===============
+*/
 void Button::set_pic(AutoPic *pic)
 {
-	if (_mypic) {
-      assert(_must_delete_mypic);
-		delete _mypic;
-   }
+	remove_title();
+	
 	_mypic = pic;
+   _must_delete_mypic=false;
 
 	update(0, 0, get_w(), get_h());
-   _must_delete_mypic=false;
+}
+
+
+/*
+===============
+void set_title(const char* title);
+
+Set a text title for the button
+===============
+*/
+void Button::set_title(const char* title)
+{
+	remove_title();
+	
+	if (title)
+		m_title = title;
+	
+	update(0, 0, get_w(), get_h());
 }
 
 
@@ -159,10 +205,14 @@ void Button::set_enabled(bool on)
 	update(0, 0, get_w(), get_h());
 }
 
-/** Button::draw(Bitmap *dst, int ofsx, int ofsy)
- *
- * Redraw the button
- */
+
+/*
+===============
+Button::draw
+
+Redraw the button
+===============
+*/
 void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 {
 	Pic *bg;
@@ -183,12 +233,18 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 	}
 
 	// if we got a picture, draw it centered
-	if (_mypic) {
+	if (_mypic)
+		{
 		int x = (get_w() - _mypic->get_w()) >> 1;
 		int y = (get_h() - _mypic->get_h()) >> 1;
 
 		copy_pic(dst, _mypic, x+ofsx, y+ofsy, 0, 0, _mypic->get_w(), _mypic->get_h());
-	}
+		}
+	else if (m_title.length()) // otherwise draw the title string centered
+		{
+		g_fh.draw_string(dst, ofsx + get_w()>>1, ofsy + get_h()>>1, 
+		                 m_title.c_str(), Align_Center);
+		}
 
 	// draw border
 #define BLACK 0x000000	//TEMP

@@ -61,19 +61,19 @@ SinglePlayerMenu::SinglePlayerMenu()
 
 	b = new Button(this, 60, 170, 174, 24, 1, sp_skirmish);
 	b->clickedid.set(this, &SinglePlayerMenu::end_modal);
-	b->set_pic(g_fh.get_string("Single Map", 0));
+	b->set_title("Single Map");
 
 	b = new Button(this, 60, 210, 174, 24, 1);
 	b->clicked.set(this, &SinglePlayerMenu::not_supported);
-	b->set_pic(g_fh.get_string("Campaign", 0));
+	b->set_title("Campaign");
 
 	b = new Button(this, 60, 250, 174, 24, 1);
 	b->clicked.set(this, &SinglePlayerMenu::not_supported);
-	b->set_pic(g_fh.get_string("Load Game", 0));
+	b->set_title("Load Game");
 
 	b = new Button(this, 60, 370, 174, 24, 0, sp_back);
 	b->clickedid.set(this, &SinglePlayerMenu::end_modal);
-	b->set_pic(g_fh.get_string("Back", 0));
+	b->set_title("Back");
 }
 
 void SinglePlayerMenu::not_supported()

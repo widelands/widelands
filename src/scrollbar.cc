@@ -53,12 +53,12 @@ Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
 		// left button
 		b = new Button(this, 0, 0, btnw, h, 1);
 		b->clicked.set(this, &Scrollbar::btn_up);
-		b->set_pic(g_fh.get_string("L", 0));
+		b->set_title("L");
 
 		// right button
 		b = new Button(this, w-btnw, 0, btnw, h, 1);
 		b->clicked.set(this, &Scrollbar::btn_down);
-		b->set_pic(g_fh.get_string("R", 0));
+		b->set_title("R");
 	}
 	else
 	{

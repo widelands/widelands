@@ -32,50 +32,99 @@ Bitmap
 ==========================================================================
 */
 
-/** Bitmap::draw_rect(uint rx, uint ry, uint rw, uint rh, ushort color)
- *
- * Draws the outline of a rectangle
- */
-void Bitmap::draw_rect(uint rx, uint ry, uint rw, uint rh, ushort color)
+/*
+===============
+Bitmap::draw_rect
+
+Draws the outline of a rectangle
+===============
+*/
+void Bitmap::draw_rect(int rx, int ry, int rw, int rh, ushort color)
 {
    rw += rx;
    rh += ry;
-   for (uint x=rx+1; x<rw-1; x++)
+	
+	if (rx < 0)
+		rx = 0;
+	if (ry < 0)
+		ry = 0;
+	if (rw > w)
+		rw = w;
+	if (rh > h)
+		rh = h;
+	
+	if (rx > rw || ry > rh)
+		return;
+	
+   for (int x=rx+1; x<rw-1; x++)
    {
       PIXEL(x, ry) = color;
       PIXEL(x, rh-1) = color;
    }
-   for (uint y=ry; y<rh; y++)
+   for (int y=ry; y<rh; y++)
    {
       PIXEL(rx, y) = color;
       PIXEL(rw-1, y) = color;
    }
 }
 
-/** Bitmap::fill_rect(uint rx, uint ry, uint rw, uint rh, ushort color)
- *
- * Draws a filled rectangle
- */
-void Bitmap::fill_rect(uint rx, uint ry, uint rw, uint rh, ushort color)
+
+/*
+===============
+Bitmap::fill_rect
+
+Draws a filled rectangle
+===============
+*/
+void Bitmap::fill_rect(int rx, int ry, int rw, int rh, ushort color)
 {
    rw += rx;
    rh += ry;
-   for (uint y=ry; y<rh; y++)
+	
+	if (rx < 0)
+		rx = 0;
+	if (ry < 0)
+		ry = 0;
+	if (rw > w)
+		rw = w;
+	if (rh > h)
+		rh = h;
+	
+	if (rx > rw || ry > rh)
+		return;
+	
+   for (int y=ry; y<rh; y++)
    {
       uint p = y * pitch + rx;
-      for (uint x=rx; x<rw; x++)
+      for (int x=rx; x<rw; x++)
          pixels[p++]= color;
    }
 }
 
-/** Bitmap::brighten_rect(uint rx, uint ry, uint rw, uint rh, int factor)
- *
- * Change the brightness of the given rectangle
- */
-void Bitmap::brighten_rect(uint rx, uint ry, uint rw, uint rh, int factor)
+/*
+===============
+Bitmap::brighten_rect
+
+Change the brightness of the given rectangle
+===============
+*/
+void Bitmap::brighten_rect(int rx, int ry, int rw, int rh, int factor)
 {
    rw += rx;
    rh += ry;
+	
+	if (rx < 0)
+		rx = 0;
+	if (ry < 0)
+		ry = 0;
+	if (rw > w)
+		rw = w;
+	if (rh > h)
+		rh = h;
+	
+	if (rx > rw || ry > rh)
+		return;
+	
    for (uint y=ry; y<rh; y++)
    {
       uint p = y * pitch + rx;

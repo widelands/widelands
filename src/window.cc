@@ -64,7 +64,6 @@ AutoPic Window::bg("win_bg.bmp");
 Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
 	: Panel(parent, x, y, w+WINDOW_BORDER*2, h+WINDOW_BORDER*2)
 {
-	_title = 0;
 	_custom_bg = 0;
 	_dragging = false;
 
@@ -82,26 +81,21 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
  */
 Window::~Window()
 {
-	if (_title)
-		delete _title;
 	if (_custom_bg)
 		delete _custom_bg;
 }
 
-/** Window::set_title(const char *text)
- *
- * Replace the current title with a new one
- *
- * Args: text	title string
- */
+
+/*
+===============
+Window::set_title
+
+Replace the current title with a new one
+===============
+*/
 void Window::set_title(const char *text)
 {
-	if (_title) {
-		delete _title;
-		_title = 0;
-	}
-	if (text)
-		_title = g_fh.get_string(text, 0);
+	m_title = text;
 	update(0, 0, get_w(), WINDOW_BORDER);
 }
 
@@ -149,10 +143,13 @@ void Window::move_to_mouse()
 	set_pos(px, py);
 }
 
-/** Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
- *
- * Redraw the window frame and background
- */
+/*
+===============
+Window::draw_border
+
+Redraw the window frame and background
+===============
+*/
 void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
 {
 	Pic *usebg = _custom_bg ? _custom_bg : &bg;
@@ -203,10 +200,10 @@ void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
 	copy_pic(dst, &r_border, ofsx+get_w()-CORNER, ofsy+get_h()-2*CORNER, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
 
 	// draw the title if we have one
-	if (_title) {
-		px = (get_w()-_title->get_w()) >> 1;
-		py = (CORNER-_title->get_h()) >> 1;
-		copy_pic(dst, _title, ofsx+px, ofsy+py, 0, 0, _title->get_w(), _title->get_h());
+	if (m_title.length()) {
+		px = get_w() >> 1;
+		py = CORNER>>1;
+		g_fh.draw_string(dst, ofsx+px, ofsy+py, m_title.c_str(), Align_Center);
 	}
 }
 

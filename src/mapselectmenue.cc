@@ -48,10 +48,12 @@ class MapSelectMenu : public BaseMenu {
 	Multiline_Textarea *tadescr;
 	Button *m_ok;
 
+	filenameset_t	m_mapfiles;
+	
 public:
 	MapSelectMenu(Game *g);
 
-	const char *get_map() { return list->get_selection(); }
+	const char *get_map() { return (const char*)list->get_selection(); }
 
 	void ok();
 	void map_selected(int id);
@@ -70,11 +72,11 @@ MapSelectMenu::MapSelectMenu(Game *g)
 
 	b = new Button(this, 410, 406, 174, 24, 0, 0);
 	b->clickedid.set(this, &MapSelectMenu::end_modal);
-	b->set_pic(g_fh.get_string("Back", 0));
+	b->set_title("Back");
 
 	m_ok = new Button(this, 410, 436, 174, 24, 2, 0);
 	m_ok->clicked.set(this, &MapSelectMenu::ok);
-	m_ok->set_pic(g_fh.get_string("OK", 0));
+	m_ok->set_title("OK");
 	m_ok->set_enabled(false);
 
 	// Create the list area
@@ -82,12 +84,10 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	list->selected.set(this, &MapSelectMenu::map_selected);
 
 	// Fill it with the files: Widelands map files
-	filenameset_t mapfiles;
+	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &m_mapfiles);
+	g_fs->FindFiles("maps", "*"S2MF_SUFFIX, &m_mapfiles);
 	
-	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &mapfiles);
-	g_fs->FindFiles("maps", "*"S2MF_SUFFIX, &mapfiles);
-	
-	for(filenameset_t::iterator pname = mapfiles.begin(); pname != mapfiles.end(); pname++) {
+	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 		const char *name = pname->c_str();
 		const char *slash = strrchr(name, '/');
 		const char *backslash = strrchr(name, '\\');
@@ -95,7 +95,7 @@ MapSelectMenu::MapSelectMenu(Game *g)
 		if (backslash && (!slash || backslash > slash))
 			slash = backslash;
 
-		list->add_entry(slash?slash+1:name, name);
+		list->add_entry(slash?slash+1:name, (void*)name);
 	}
 
 	// Info fields

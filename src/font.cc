@@ -109,114 +109,75 @@ int Font_Handler::load_font(const char* str, ushort fn)
 	return RET_OK;
 }
 
-/** Pic* Font_Handler::get_string(const uchar* str, const ushort f);
- *
- * This function constructs a Picture containing the given text and
- * returns it. It just makes ONE line. Not a whole paragraph
- *
- * Args:	str	String to construct
- * 		f		Font to use
- * Returns:	Pointer to picture, caller must free it later on
- */
-Pic* Font_Handler::get_string(const char* str, const ushort f) {
-		  assert(f<MAX_FONTS);
+/*
+===============
+Font_Handler::get_string
 
-		  char* buf = new char[strlen(str)+1];
-		  uchar c;
-		  uint n=0;
-		  uint x=0;
-		  uint w=0;
+This function constructs a Picture containing the given text and
+returns it
 
-		  for(uint i=0; i<strlen(str); i++) {
-					 c=(uchar) str[i];
-					 if(c=='\t' || c=='\r' || c=='\n' || c=='\b' || c=='\a') continue;
-					 buf[n]=c;
-					 ++n;
-					 if(c < 32  || c > 127) {
-								// c is NOT an international ASCII char, we skip it silently
-								c=127;
-					 }
-					 w+= fonts[f].p[c-32].get_w();
-		  }
-		  buf[n]='\0';
-
-		  // Now buf contains only valid chars
-		  Pic* retval=new Pic;
-		  retval->set_clrkey(fonts[f].p[0].get_clrkey());
-		  retval->set_size(w, fonts[f].h);
-
-		  for(uint j=0; j<strlen(buf); j++) {
-					 c=buf[j];
-					 if(c < 32  || c > 127) {
-								// c is NOT an international ASCII char, we skip it silently
-								c=127;
-					 }
-
-					 // change c, so we get correct offsets in our font file
-					 c-=32;
-
-					 copy_pic(retval, &fonts[f].p[c], x, 0, 0, 0, fonts[f].p[c].get_w(), fonts[f].h);
-					 x+=fonts[f].p[c].get_w();
-		  }
-
-		  delete[] buf;
-		  return retval;
+TODO: Does it make sense to keep this function? It's not used, but I'll leave
+it around for now.
+===============
+*/
+Pic* Font_Handler::get_string(const char* str, const ushort f)
+{
+	int w, h;
+	Pic* pic;
+	
+	get_size(str, &w, &h, -1, f);
+	
+	pic = new Pic;
+	pic->set_clrkey(fonts[f].p[0].get_clrkey());
+	pic->set_size(w, h);
+	
+	draw_string(pic, 0, 0, str, Align_Left, -1, f);
+	
+	return pic;
 }
 
 
 /*
 ===============
-Font_Handler::draw_string
+Font_Handler::calc_linewidth
 
-Draw a string directly into the destination bitmap with the desired alignment.
-The function honours line-breaks.
-If wrap is positive, the function will wrap a line after that many pixels.
+Calculates the width of the given line (up to \n or NUL).
+If wrap is positive, the function will wrap the line after that many pixels.
+*nextline will point to the first character on the next line. That is, it 
+points to:
+- the character after the \n if the line is ended by a line-break
+- the NUL if the string ends after the line
+- the first visible character on the next line in case the line is wrapped
+
+The function returns the width of the line, in pixels.
 ===============
 */
-void Font_Handler::draw_string(Bitmap* dst, int dstx, int dsty, const char* string,
-                               Align align, int wrap, ushort font)
+int Font_Handler::calc_linewidth(const char* line, int wrap, const char** nextline, ushort font)
 {
-	// Adjust for vertical alignment
-	if (align & (Align_VCenter|Align_Bottom))
-		{
-		int h;
-		
-		get_size(string, 0, &h, wrap, font);
-		
-		if (align & Align_VCenter)
-			dsty -= h/2;
-		else
-			dsty -= h;
-		}
+	const char* string = line; // current pointer into the string
+	int width = 0; // width of line
 	
-	// Draw the string
-	const char* line = string; // beginning of current line
-	int width = 0; // width of current line
-	bool finished = false;
-	
-	while(!finished)
+	// Loop forward
+	for(;;)
 		{
-		bool flushline = false;
-		
 		if (*string == ' ' || *string == '\t') // whitespace
 			{
 			int cw = fonts[font].p[0].get_w();
 			if (*string == '\t')
 				cw *= 8;
 			
+			string++;
+			
 			if (wrap > 0 && width+cw > wrap)
-				flushline = true;
+				break;
 			else
 				width += cw;
-			
-			string++;
 			}
 		else if (!*string || *string == '\n') // explicit end of line
 			{
-			if (!*string)
-				finished = true;
-			flushline = true;
-			string++;
+			if (*string)
+				string++;
+			break;
 			}
 		else // normal word
 			{
@@ -243,51 +204,95 @@ void Font_Handler::draw_string(Bitmap* dst, int dstx, int dsty, const char* stri
 				}
 			
 			if (wrap > 0 && width && width+wordwidth > wrap)
-				flushline = true;
+				break;
 			else
 				{
 				string = p;
 				width += wordwidth;
 				}
 			}
+		}
+	
+	// That's it
+	if (nextline)
+		*nextline = string;
+	
+	return width;
+}
+
+
+/*
+===============
+Font_Handler::draw_string
+
+Draw a string directly into the destination bitmap with the desired alignment.
+The function honours line-breaks.
+If wrap is positive, the function will wrap a line after that many pixels.
+===============
+*/
+void Font_Handler::draw_string(Bitmap* dst, int dstx, int dsty, const char* string,
+                               Align align, int wrap, ushort font)
+{
+	// Adjust for vertical alignment
+	if (align & (Align_VCenter|Align_Bottom))
+		{
+		int h;
 		
-		// Draw the current line if appropriate
-		if (flushline)
+		get_size(string, 0, &h, wrap, font);
+		
+		if (align & Align_VCenter)
+			dsty -= (h+1)/2; // +1 for slight bias to top
+		else
+			dsty -= h;
+		}
+	
+	// Draw the string
+	while(*string)
+		{
+		const char* nextline;
+		int x = dstx;
+		
+		if (wrap <= 0 && (align & Align_Horizontal) == Align_Left)
 			{
-			int x = dstx;
+			// straightforward path with no alignment and no wrapping
+			nextline = string + strcspn(string, "\n");
+			}
+		else
+			{
+			int width = calc_linewidth(string, wrap, &nextline, font);
 			
 			if (align & Align_HCenter)
 				x -= width/2;
 			else if (align & Align_Right)
 				x -= width;
+			}
+		
+		while(string < nextline)
+			{
+			uchar c = (uchar)*string;
 			
-			for(const char* p = line; p < string; p++)
+			if (c == ' ' || c == '\t') // whitespace
 				{
-				uchar c = (uchar)*p;
-				
-				if (c == ' ' || c == '\t') // whitespace
-					{
-					int cw = fonts[font].p[0].get_w();
-					if (c == '\t')
-						cw *= 8;
-					
-					x += cw;
-					}
-				else if (c && c != '\n')
-					{
-					if (c < 32 || c > 127)
-						c = 127;
-					
-					c -= 32;
-					copy_pic(dst, &fonts[font].p[c], x, dsty, 0, 0, fonts[font].p[c].get_w(), fonts[font].h);
-					x += fonts[font].p[c].get_w();
-					}
+				int cw = fonts[font].p[0].get_w();
+				if (c == '\t')
+					cw *= 8;
+
+				x += cw;
+				}
+			else if (c && c != '\n')
+				{
+				if (c < 32 || c > 127)
+					c = 127;
+
+				c -= 32;
+				copy_pic(dst, &fonts[font].p[c], x, dsty, 0, 0, fonts[font].p[c].get_w(), fonts[font].h);
+				x += fonts[font].p[c].get_w();
 				}
 			
-			width = 0;
-			line = string;
-			dsty += fonts[font].h;
+			string++;
 			}
+		
+		dsty += fonts[font].h;
 		}
 }
 		
@@ -305,77 +310,17 @@ void Font_Handler::get_size(const char* string, int* pw, int* ph, int wrap, usho
 {
 	int maxw = 0; // width of widest line
 	int maxh = 0; // total height
-	const char* line = string; // beginning of current line
-	int width = 0; // width of current line
-	bool finished = false;
 	
-	while(!finished)
+	while(*string)
 		{
-		bool flushline = false;
+		const char* nextline;
+		int width = calc_linewidth(string, wrap, &nextline, font);
 		
-		if (*string == ' ' || *string == '\t') // whitespace
-			{
-			int cw = fonts[font].p[0].get_w();
-			if (*string == '\t')
-				cw *= 8;
-			
-			if (wrap > 0 && width+cw > wrap)
-				flushline = true;
-			else
-				width += cw;
-			
-			string++;
-			}
-		else if (!*string || *string == '\n') // explicit end of line
-			{
-			if (!*string)
-				finished = true;
-			flushline = true;
-			string++;
-			}
-		else // normal word
-			{
-			const char* p;
-			int wordwidth = 0;
-			
-			for(p = string;; p++)
-				{
-				if (!*p || *p == ' ' || *p == '\t' || *p == '\n') // whitespace break
-					break;
-				
-				uchar c = (uchar)*p;
-				if (c < 32 || c > 127)
-					c = 127;
-				
-				c -= 32;
-				wordwidth += fonts[font].p[c].get_w();
-				
-				if (*p == '-') // printable character break
-					{
-					p++;
-					break;
-					}
-				}
-			
-			if (wrap > 0 && width && width+wordwidth > wrap)
-				flushline = true;
-			else
-				{
-				string = p;
-				width += wordwidth;
-				}
-			}
-		
-		// Update maxw/maxh
-		if (flushline)
-			{
-			if (width > maxw)
-				maxw = width;
-			maxh += fonts[font].h;
-			
-			width = 0;
-			line = string;
-			}
+		if (width > maxw)
+			maxw = width;
+		maxh += fonts[font].h;
+
+		string = nextline;
 		}
 	
 	if (pw)

@@ -61,11 +61,11 @@ Critical_Error::Critical_Error(const char *text)
 
 	b = new Button(this, (g_gr.get_xres()/2)-85, g_gr.get_yres()-200, 174, 24, 1);
 	b->clicked.set(this, &Critical_Error::exit);
-	b->set_pic(g_fh.get_string("Exit", 0));
+	b->set_title("Exit");
 
 	b = new Button(this, (g_gr.get_xres()/2)-85, g_gr.get_yres()-250, 174, 24, 1);
 	b->clickedid.set(this, &Critical_Error::end_modal);
-	b->set_pic(g_fh.get_string("!! Continue execution !!", 0));
+	b->set_title("!! Continue execution !!");
 }
 
 void Critical_Error::draw(Bitmap *dst, int ofsx, int ofsy)

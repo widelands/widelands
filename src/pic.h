@@ -44,8 +44,8 @@ class Bitmap {
          return 0;
       }
 
-      void draw_rect(uint x, uint y, uint w, uint h, ushort color);
-      void fill_rect(uint x, uint y, uint w, uint h, ushort color);
+      void draw_rect(int x, int y, int w, int h, ushort color);
+      void fill_rect(int x, int y, int w, int h, ushort color);
       inline void clear(void) {
          // this function clears the bitmap completly (draws it black)
          // it assumes, that: (w*h)%4 == 0.
@@ -56,8 +56,8 @@ class Bitmap {
          while(--i) *(((long*)(pixels))+i)=0;
          *pixels=0;
       }
-          
-      void brighten_rect(uint x, uint y, uint w, uint h, int factor);
+      
+      void brighten_rect(int x, int y, int w, int h, int factor);
 
       void set_clrkey(const ushort);
       void set_clrkey(const uchar, const uchar, const uchar);

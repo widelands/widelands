@@ -104,7 +104,7 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
    static long start_fps_counter=Sys_GetTime();
    static long cur_fps_counter=start_fps_counter;
    static long framecount=0;
-   static Pic* framecount_pic=g_fh.get_string("0 fps", 0);
+	static float fps = 0;
    static float fps_average=0;
    static int fps_av_count=0;
    
@@ -130,27 +130,23 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 	// debug: show fsel coordinates
 	Coords fsel = m_player->get_fieldsel();
 	char buf[100];
-	sprintf(buf, "%i %i", fsel.x, fsel.y);
-	Pic *p = g_fh.get_string(buf, 0);
-	copy_pic(bmp, p, ofsx+5, ofsy+5, 0, 0, p->get_w(), p->get_h());
+	sprintf(buf, "%3i %3i", fsel.x, fsel.y);
+	g_fh.draw_string(bmp, ofsx+5, ofsy+5, buf);
 
    // debug show fps
    ++framecount;
    cur_fps_counter=Sys_GetTime();
    if(cur_fps_counter-start_fps_counter > 1000) {
-      float fps= (((float)framecount*1000)/(float)(cur_fps_counter-start_fps_counter));
+      fps = (((float)framecount*1000)/(float)(cur_fps_counter-start_fps_counter));
       fps_av_count++;
       fps_average+=fps;
          
       // one second has passed
-      delete framecount_pic;
-      sprintf(buf, "%4f fps (av: %4f fps)", fps, fps_average/(float)fps_av_count );
-      framecount_pic=g_fh.get_string(buf, 0);
       framecount=0;
       start_fps_counter=cur_fps_counter;
    }
-   copy_pic(bmp, framecount_pic, ofsx+p->get_w()+25, ofsy+5, 0, 0, framecount_pic->get_w(), framecount_pic->get_h());
-	delete p;
+   sprintf(buf, "%4f fps (av: %4f fps)", fps, fps_average/(float)fps_av_count );
+	g_fh.draw_string(bmp, ofsx+75, ofsy+5, buf);
 }
 
 /*

@@ -28,10 +28,12 @@ enum Align {
 	Align_Left = 0,
 	Align_HCenter = 1,
 	Align_Right = 2,
+	Align_Horizontal = 3,
 	
 	Align_Top = 0,
 	Align_VCenter = 4,
 	Align_Bottom = 8,
+	Align_Vertical = 12,
 
 	Align_TopLeft = 0,
 	Align_CenterLeft = Align_VCenter,
@@ -86,7 +88,9 @@ class Font_Handler : public Singleton<Font_Handler> {
 					 int load_font(const char*, const ushort);
 					 Pic* get_string(const char*, const ushort);
 					 
-					 void draw_string(Bitmap* dst, int x, int y, const char* string, Align align, int wrap = -1, ushort font = 0);
+					 int calc_linewidth(const char* string, int wrap, const char** nextline, ushort font = 0);
+					 void draw_string(Bitmap* dst, int x, int y, const char* string, Align align = Align_Left,
+					                  int wrap = -1, ushort font = 0);
 					 void get_size(const char* string, int* pw, int* ph, int wrap = -1, ushort font = 0);
 					 
 					 /** inline ushort get_fh(ushort f) 

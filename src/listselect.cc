@@ -42,118 +42,154 @@ void Listselect::setup_ui()
 	dflt_selcolor = pack_rgb(248, 201, 135);
 }
 
-/** Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = 0, uint font = 0)
- *
- * Initialize a list select panel
- *
- * Args: parent	parent panel
- *       x		coordinates of the Listselect
- *       y
- *       w		dimensions, in pixels, of the Listselect
- *       h
- *       align	alignment of text inside the Listselect
- *       font	font to be used for listselect
- */
+/*
+===============
+Listselect::Listselect
+
+Initialize a list select panel
+
+Args: parent	parent panel
+      x		coordinates of the Listselect
+      y
+      w		dimensions, in pixels, of the Listselect
+      h
+      align	alignment of text inside the Listselect
+      font	font to be used for listselect
+===============
+*/
 Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align, uint font)
-	: Panel(parent, x, y, w-24, h), _entries(5, 5)
+	: Panel(parent, x, y, w-24, h)
 {
 	set_think(false);
 
 	_bgcolor = dflt_bgcolor;
 	_framecolor = dflt_framecolor;
 	_selcolor = dflt_selcolor;
-	_font = font;
-	_align = align;
+	
+	m_font = font;
+	set_align(align);
 
-	_firstvis = 0;
-	_selection = -1;
+	m_scrollpos = 0;
+	m_selection = -1;
 
 	Scrollbar *sb = new Scrollbar(parent, x+get_w(), y, 24, h, false);
 	sb->up.set(this, &Listselect::move_up);
 	sb->down.set(this, &Listselect::move_down);
 }
 
-/** Listselect::~Listselect()
- *
- * Free allocated resources
- */
+
+/*
+===============
+Listselect::~Listselect
+
+Free allocated resources
+===============
+*/
 Listselect::~Listselect()
 {
 	clear();
 }
 
-/** Listselect::clear()
- *
- * Remove all entries from the listselect
- */
+
+/*
+===============
+Listselect::clear
+
+Remove all entries from the listselect
+===============
+*/
 void Listselect::clear()
 {
-	for(int i = 0; i < _entries.elements(); i++) {
-		Entry *e = (Entry *)_entries.element_at(i);
-		delete e->pic;
-		free(e);
-	}
-	_entries.flush(1);
+	for(uint i = 0; i < m_entries.size(); i++)
+		free(m_entries[i]);
+	m_entries.clear();
 
-	_firstvis = 0;
-	_selection = -1;
+	m_scrollpos = 0;
+	m_selection = -1;
 }
 
-/** Listselect::add_entry(const char *name, const char *value = 0)
- *
- * Add a new entry to the listselect.
- *
- * Args: name	name that will be displayed
- *       value	string returned by get_select() (can be 0, in which case name is used)
- */
-void Listselect::add_entry(const char *name, const char *value)
-{
-	if (!value)
-		value = name;
 
-	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(value));
-	e->pic = g_fh.get_string(name, _font);
-	strcpy(e->str, value);
-	_entries.add(e);
+/*
+===============
+Listselect::add_entry
+
+Add a new entry to the listselect.
+
+Args: name	name that will be displayed
+      value	value returned by get_select()
+===============
+*/
+void Listselect::add_entry(const char *name, void* value)
+{
+	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(name));
+	
+	e->value = value;
+	strcpy(e->name, name);
+	
+	m_entries.push_back(e);
 
 	update(0, 0, get_eff_w(), get_h());
 }
 
-/** Listselect::move_up(int i)
- *
- * Scroll the listselect up
- *
- * Args: i	number of lines to scroll
- */
+
+/*
+===============
+Listselect::set_align
+
+Set the list alignment (only horizontal alignment works)
+===============
+*/
+void Listselect::set_align(Align align)
+{
+	m_align = (Align)(align & Align_Horizontal);
+}
+
+
+/*
+===============
+Listselect::move_up
+
+Scroll the listselect up
+
+Args: i	number of lines to scroll
+===============
+*/
 void Listselect::move_up(int i)
 {
-	if (i < 0)
-		return;
-	if (i > (int)_firstvis)
-		i = _firstvis;
-	if (!i)
+	int delta = i * g_fh.get_fh(m_font);
+
+	if (delta > m_scrollpos)
+		delta = m_scrollpos;
+	if (delta <= 0)
 		return;
 
-	_firstvis -= i;
+	m_scrollpos -= delta;
 	update(0, 0, get_eff_w(), get_h());
 }
 
-/** Listselect::move_down(int i)
- *
- * Scroll the listselect down
- *
- * Args: i	number of lines to scroll
- */
+
+/*
+===============
+Listselect::move_down
+
+Scroll the listselect down
+  
+Args: i	number of lines to scroll
+===============
+*/
 void Listselect::move_down(int i)
 {
-	if (i < 0)
+	int delta = i * get_lineheight();
+	int max = (m_entries.size()+1) * get_lineheight() - get_h();
+	if (max < 0)
+		max = 0;
+	
+	if (m_scrollpos + delta > max)
+		delta = max - m_scrollpos;
+	if (delta <= 0)
 		return;
-	if ((int)(_firstvis+i) >= _entries.elements())
-		i = _entries.elements()-_firstvis-1;
-	if (i <= 0)
-		return;
-
-	_firstvis += i;
+	
+	m_scrollpos += delta;
 	update(0, 0, get_eff_w(), get_h());
 }
 
@@ -181,19 +217,36 @@ void Listselect::set_colors(ushort bg, ushort frame, ushort sel)
  */
 void Listselect::select(int i)
 {
-	if (_selection == i)
+	if (m_selection == i)
 		return;
 
-	_selection = i;
+	m_selection = i;
 
-	selected.call(_selection);
+	selected.call(m_selection);
 	update(0, 0, get_eff_w(), get_h());
 }
 
-/** Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
- *
- * Redraw the listselect box
- */
+
+/*
+===============
+Listselect::get_lineheight
+
+Return the total height (text + spacing) occupied by a single line
+===============
+*/
+int Listselect::get_lineheight()
+{
+	return g_fh.get_fh(m_font) + 2;
+}
+
+
+/*
+===============
+Listselect::draw
+
+Redraw the listselect box
+===============
+*/
 void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 {
 	// draw frame and fill with background color
@@ -201,25 +254,35 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 	dst->fill_rect(ofsx+1, ofsy+1, get_eff_w()-2, get_h()-2, _bgcolor);
 
 	// draw text lines
-	int y = 1;
-	for(int i = _firstvis; i < _entries.elements(); i++) {
+	int lineheight = get_lineheight();
+	int idx = m_scrollpos / lineheight;
+	int y = 1 + idx*lineheight - m_scrollpos;
+	
+	while(idx < (int)m_entries.size())
+		{
 		if (y >= get_h())
 			return;
+		
+		Entry* e = m_entries[idx];
+		
+		if (idx == m_selection)
+			dst->fill_rect(ofsx+1, ofsy+y, get_eff_w()-2, g_fh.get_fh(m_font), _selcolor);
 
-		Entry *e = (Entry *)_entries.element_at(i);
-
-		if (i == _selection)
-			dst->fill_rect(ofsx+1, ofsy+y, get_eff_w()-2, e->pic->get_h(), _selcolor);
-
-		int x = 1;
-		if (_align == H_RIGHT)
-			x = get_eff_w()-e->pic->get_w()-2;
-		else if (_align == H_CENTER)
-			x = (get_eff_w()-e->pic->get_w()-2) >> 1;
-		copy_pic(dst, e->pic, x+ofsx, y+ofsx, 0, 0, e->pic->get_w(), e->pic->get_h());
-		y += e->pic->get_h() + 2;
+		int x;
+		if (m_align & Align_Right)
+			x = get_eff_w() - 1;
+		else if (m_align & Align_HCenter)
+			x = get_eff_w()>>1;
+		else
+			x = 1;
+		
+		g_fh.draw_string(dst, x+ofsx, y+ofsy, e->name, m_align, -1, m_font);
+		
+		y += lineheight;
+		idx++;
 	}
 }
+
 
 /** Listselect::handle_mouseclick(uint btn, bool down, int x, int y)
  *
@@ -231,9 +294,8 @@ bool Listselect::handle_mouseclick(uint btn, bool down, int x, int y)
 		return false;
 
 	if (down) {
-		y = y / (g_fh.get_fh(_font)+2);
-		y += _firstvis;
-		if ((int)y < _entries.elements())
+		y = (y + m_scrollpos) / get_lineheight();
+		if (y >= 0 && y < (int)m_entries.size())
 			select(y);
 	}
 

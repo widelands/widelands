@@ -75,11 +75,11 @@ OptionsMenu::OptionsMenu()
 
 	b = new Button(this, 330, 420, 174, 24, 0, om_cancel);
 	b->clickedid.set(this, &OptionsMenu::end_modal);
-	b->set_pic(g_fh.get_string("Cancel", 0));
+	b->set_title("Cancel");
 
 	b = new Button(this, 136, 420, 174, 24, 2, om_ok);
 	b->clickedid.set(this, &OptionsMenu::end_modal);
-	b->set_pic(g_fh.get_string("Apply", 0));
+	b->set_title("Apply");
 
 	// Fullscreen mode
 	fullscreen = new Checkbox(this, 100, 180);
