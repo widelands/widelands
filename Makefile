@@ -2,15 +2,15 @@
 #     W I D E L A N D S			M A K E F I L E                       #
 #####################################################################
 
-# Please edit everything in the general and in the OS specific sections
-# after this, set the first variable to YES and start the build by
-# running GNU make
+# Please edit everything until NO USER CHANGES 
+# then, run gnu make
 
 ########################### GLOBAL SECTION ##########################
 # NON CROSS COMPILE
-#
-#  set this to YES if you're done here
-IS_MAKEFILE_EDITED:=YES
+
+# Compile time includes
+# Use the GGZ Gamingzone? Enable for releases.
+USE_GGZ:=NO
 
 # Is this a cross compile?
 ifndef CROSS
@@ -34,6 +34,7 @@ endif
 # to change this
 #ADD_LDFLAGS:=
 
+
 # Different build-types:
 #  debug-no-parachute optimized, debugging symbols, disable SDLs parachute
 #  debug-slow debugging symbols
@@ -47,17 +48,16 @@ endif
 
 endif
 
-########################### LINUX SECTION ##########################
-
-# nothing special about linux at the moment
-
-
 ####################################################################
 #  NO USER CHANGES BELOW THIS POINT											 #
 ####################################################################
 
-ifneq ($(IS_MAKEFILE_EDITED),YES)
-$(error Please edit the Makefile and set the IS_MAKEFILE_EDITED variable to YES)
+### 
+# 
+# COMPILE TIME configuration
+ifeq ($(USE_GGZ),YES) 
+ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ=1
+ADD_LDFLAGS:=-lggzmod -lggzcore -lggz
 endif
 
 ##############################################################################
@@ -66,7 +66,7 @@ endif
 ifneq ($(CROSS),NO)
 # CROSS COMPILE, for developer only
 TARGET:=i586-mingw32msvc
-PREFIX:=/usr
+PREFIX:=/usr/local/cross-tools
 PATH:=$(PREFIX)/$(TARGET)/bin:$(PREFIX)/bin:$(PATH)
 
 CXX=$(TARGET)-g++
@@ -133,7 +133,7 @@ endif
 OBJECT_DIR:=src/$(TARGET)-$(BUILD)
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
-LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image -lSDL_ttf -lSDL_net
+LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image -lSDL_ttf -lSDL_net 
 
 ##############################################################################
 # Building

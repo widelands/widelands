@@ -524,6 +524,8 @@ void NetClient::begin_game ()
 
 void NetClient::handle_network ()
 {
+	NetGGZ::ref()->data();
+
 	// check if data is available on the socket
 	while (SDLNet_CheckSockets(sockset, 0) > 0)
 		deserializer->read_packet (sock);
@@ -824,5 +826,317 @@ void Cmd_NetCheckSync::Write(FileWrite* file, Editor_Game_Base* egb, Widelands_M
 
 void Cmd_NetCheckSync::Read(FileRead* file, Editor_Game_Base* egb, Widelands_Map_Map_Object_Loader* ld)
 {
+}
+
+static NetGGZ *ggzobj = 0;
+#ifdef HAVE_GGZ
+static GGZMod *mod;
+static GGZServer *ggzserver;
+#endif
+
+NetGGZ::NetGGZ()
+{
+	use_ggz = 0;
+	fd = -1;
+	ip_address = NULL;
+}
+
+NetGGZ* NetGGZ::ref()
+{
+	if(!ggzobj) ggzobj = new NetGGZ();
+	return ggzobj;
+}
+
+void NetGGZ::init()
+{
+	use_ggz = true;
+	printf(">> GGZ: initialized\n");
+
+	//initcore(); /* FIXME: embedded ggzcore */
+}
+
+bool NetGGZ::used()
+{
+	return use_ggz;
+	printf(">> GGZ: is used\n");
+}
+
+bool NetGGZ::connect()
+{
+#ifdef HAVE_GGZ
+	int ret;
+
+	if(!used()) return false;
+
+	printf("GGZ ## connect\n");
+	mod = ggzmod_new(GGZMOD_GAME);
+	ggzmod_set_handler(mod, GGZMOD_EVENT_SERVER, &NetGGZ::ggzmod_server);
+	ret = ggzmod_connect(mod);
+	if(ret)
+	{
+		printf("GGZ ## connection failed\n");
+		return false;
+	}
+
+	int fd = ggzmod_get_fd(mod);
+	printf("GGZ ## connection fd %i\n", fd);
+	struct timeval timeout;
+	timeout.tv_sec = 0;
+	timeout.tv_usec = 999 * 1000;
+	fd_set fdset;
+	FD_ZERO(&fdset);
+	FD_SET(fd, &fdset);
+	while(ggzmod_get_state(mod) != GGZMOD_STATE_PLAYING)
+	{
+		select(fd + 1, &fdset, NULL, NULL, &timeout);
+		ggzmod_dispatch(mod);
+		//printf("GGZ ## timeout!\n");
+	}
+
+	return true;
+#else
+	return false;
+#endif
+}
+
+#ifdef HAVE_GGZ
+void NetGGZ::ggzmod_server(GGZMod *mod, GGZModEvent e, void *data)
+{
+	printf("GGZ ## ggzmod_server\n");
+	int fd = *(int*)data;
+	ggzobj->fd = fd;
+	printf("GGZ ## got fd: %i\n", fd);
+	ggzmod_set_state(mod, GGZMOD_STATE_PLAYING);
+}
+#endif
+
+void NetGGZ::data()
+{
+#ifdef HAVE_GGZ
+	int op;
+	char *ip;
+	char *greeter;
+	int greeterversion;
+	char ipaddress[17];
+
+	if(!used()) return;
+
+	struct timeval timeout;
+	timeout.tv_sec = 0;
+	timeout.tv_usec = 0;
+	fd_set fdset;
+	FD_ZERO(&fdset);
+	FD_SET(fd, &fdset);
+	int ret = select(fd + 1, &fdset, NULL, NULL, &timeout);
+	if(ret <= 0) return;
+	printf("GGZ ## select() returns: %i for fd %i\n", ret, fd);
+
+	ggz_read_int(fd, &op);
+	printf("GGZ ## received opcode: %i\n", op);
+
+	switch(op)
+	{
+		case op_greeting:
+			ggz_read_string_alloc(fd, &greeter);
+			ggz_read_int(fd, &greeterversion);
+			printf("GGZ ## server is: '%s' '%i'\n", greeter, greeterversion);
+			ggz_free(greeter);
+			break;
+		case op_request_ip:
+			printf("GGZ ## ip request!\n");
+			snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 127, 0, 0, 1);
+			ggz_write_int(fd, op_reply_ip);
+			ggz_write_string(fd, ipaddress);
+			break;
+		case op_broadcast_ip:
+			ggz_read_string_alloc(fd, &ip);
+			printf("GGZ ## ip broadcast: '%s'\n", ip);
+			ip_address = ggz_strdup(ip);
+			ggz_free(ip);
+			break;
+		default:
+			printf("GGZ ## opcode unknown!\n");
+	}
+#endif
+}
+
+bool NetGGZ::host()
+{
+#ifdef HAVE_GGZ
+	int spectator, seat;
+
+	if(!used()) return false;
+
+	do
+	{
+		ggzmod_dispatch(mod);
+		ggzmod_get_player(mod, &spectator, &seat);
+	}
+	while(seat == -1);
+
+	printf("GGZ ## host? seat=%i\n", seat);
+	if(!seat) return true;
+	return false;
+#else
+	return false;
+#endif
+}
+
+const char *NetGGZ::ip()
+{
+	return ip_address;
+}
+
+void NetGGZ::initcore()
+{
+#ifdef HAVE_GGZ
+	GGZOptions opt;
+	int ret;
+
+	printf("GGZCORE ## initialization\n");
+	ggzcore_login = true;
+	use_ggz = false; /* FIXME: use_ggz != use_ggzcore */
+
+	opt.flags = (GGZOptionFlags)(GGZ_OPT_PARSER | GGZ_OPT_MODULES);
+	ret = ggzcore_init(opt);
+
+	ggzserver = ggzcore_server_new();
+	ggzcore_server_add_event_hook(ggzserver, GGZ_CONNECTED, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook(ggzserver, GGZ_NEGOTIATED, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook(ggzserver, GGZ_LOGGED_IN, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook(ggzserver, GGZ_ENTERED, &NetGGZ::callback_server);
+
+	ggzcore_server_add_event_hook(ggzserver, GGZ_CONNECT_FAIL, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook(ggzserver, GGZ_NEGOTIATE_FAIL, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook(ggzserver, GGZ_LOGIN_FAIL, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook(ggzserver, GGZ_ENTER_FAIL, &NetGGZ::callback_server);
+
+	ggzcore_server_add_event_hook(ggzserver, GGZ_ROOM_LIST, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook(ggzserver, GGZ_TYPE_LIST, &NetGGZ::callback_server);
+
+	ggzcore_server_add_event_hook(ggzserver, GGZ_NET_ERROR, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook(ggzserver, GGZ_PROTOCOL_ERROR, &NetGGZ::callback_server);
+
+	ggzcore_server_set_hostinfo(ggzserver, "live.ggzgamingzone.org", 5688, 0);
+	ggzcore_server_connect(ggzserver);
+
+	printf("GGZCORE ## start loop\n");
+	while(ggzcore_login)
+	{
+		if(ggzcore_server_data_is_pending(ggzserver))
+			ggzcore_server_read_data(ggzserver, ggzcore_server_get_fd(ggzserver));
+	}
+#endif
+}
+
+#ifdef HAVE_GGZ
+GGZHookReturn NetGGZ::callback_server(unsigned id, void *data, void *user)
+{
+	printf("GGZCORE ## callback: %i\n", id);
+	ggzobj->event_server(id, data);
+
+	return GGZ_HOOK_OK;
+}
+#endif
+
+#ifdef HAVE_GGZ
+GGZHookReturn NetGGZ::callback_room(unsigned id, void *data, void *user)
+{
+	printf("GGZCORE/room ## callback: %i\n", id);
+	ggzobj->event_room(id, data);
+
+	return GGZ_HOOK_OK;
+}
+#endif
+
+void NetGGZ::event_server(unsigned int id, void *data)
+{
+#ifdef HAVE_GGZ
+	GGZRoom *room;
+	int num, i;
+	int joined;
+
+	switch(id)
+	{
+		case GGZ_CONNECTED:
+			printf("GGZCORE ## -- connected\n");
+			break;
+		case GGZ_NEGOTIATED:
+			printf("GGZCORE ## -- negotiated\n");
+			ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, "widelands#ggz", "");
+			ggzcore_server_login(ggzserver);
+			break;
+		case GGZ_LOGGED_IN:
+			printf("GGZCORE ## -- logged in\n");
+			ggzcore_server_list_rooms(ggzserver, -1, 1);
+			break;
+		case GGZ_ENTERED:
+			printf("GGZCORE ## -- entered\n");
+			room = ggzcore_server_get_cur_room(ggzserver);
+			ggzcore_room_add_event_hook(room, GGZ_TABLE_LIST, &NetGGZ::callback_room);
+			ggzcore_room_list_tables(room, -1, 0);
+			break;
+		case GGZ_ROOM_LIST:
+			printf("GGZCORE ## -- (room list)\n");
+			num = ggzcore_server_get_num_rooms(ggzserver);
+			joined = 0;
+			for(i = 0; i < num; i++)
+			{
+				room = ggzcore_server_get_nth_room(ggzserver, i);
+				if(!strcmp(ggzcore_room_get_name(room), "TicTacToe"))
+				{
+					ggzcore_server_join_room(ggzserver, i);
+					joined = 1;
+					break;
+				}
+			}
+			if(!joined)
+			{
+				printf("GGZCORE ## couldn't find room! :(\n");
+			}
+			break;
+		case GGZ_TYPE_LIST:
+			printf("GGZCORE ## -- (type list)\n");
+			break;
+		case GGZ_CONNECT_FAIL:
+		case GGZ_NEGOTIATE_FAIL:
+		case GGZ_LOGIN_FAIL:
+		case GGZ_ENTER_FAIL:
+		case GGZ_NET_ERROR:
+		case GGZ_PROTOCOL_ERROR:
+			printf("GGZCORE ## -- error! :(\n");
+			break;
+	}
+#endif
+}
+
+void NetGGZ::event_room(unsigned int id, void *data)
+{
+#ifdef HAVE_GGZ
+	GGZRoom *room;
+	int i, num;
+	GGZTable *table;
+
+	switch(id)
+	{
+		case GGZ_TABLE_LIST:
+			printf("GGZCORE/room ## -- table list\n");
+			room = ggzcore_server_get_cur_room(ggzserver);
+			num = ggzcore_room_get_num_tables(room);
+			for(i = 0; i < num; i++)
+			{
+				table = ggzcore_room_get_nth_table(room, i);
+				printf("GGZCORE/room ## table: %s\n", ggzcore_table_get_desc(table));
+				tablelist.push_back(ggzcore_table_get_desc(table));
+			}
+			ggzcore_login = false;
+			break;
+	}
+#endif
+}
+
+std::list<std::string> NetGGZ::tables()
+{
+	return tablelist;
 }
 

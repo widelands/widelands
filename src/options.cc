@@ -23,6 +23,7 @@
 #include "error.h"
 #include "options.h"
 #include "system.h"
+#include "network.h"
 
 Profile g_options(Profile::err_log);
 
@@ -56,6 +57,8 @@ static void show_usage(void)
 " --playback       Playback given filename (see --record)\n"
 "\n"
 " --coredump       Generates a core dump on segfaults instead of using the SDL\n"
+"\n"
+" --ggz            Starts game as GGZ Gaming Zone client (don't use!)\n"
 "\n"
 " --help           Show this help\n"
 " --version        Show version\n"
@@ -99,6 +102,10 @@ static bool parse_command_line(int argc, char** argv)
 		if (!strcmp(opt, "version")) {
 			show_version();
 			return false;
+		}
+		if (!strcmp(opt, "ggz")) {
+			NetGGZ::ref()->init();
+			continue;
 		}
 
 		value = strchr(opt, '=');

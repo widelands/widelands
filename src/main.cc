@@ -140,6 +140,26 @@ void g_main(int argc, char** argv)
 	{
 		g_init(argc, argv);
 
+		if(NetGGZ::ref()->used())
+		{
+			if(NetGGZ::ref()->connect())
+			{
+				NetGame *netgame;
+				
+				if(NetGGZ::ref()->host()) netgame = new NetHost();
+				else
+				{
+					while(!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
+
+					IPaddress peer;
+					SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(), WIDELANDS_PORT);
+					netgame = new NetClient(&peer);
+				}
+				netgame->run();
+				delete netgame;
+			}
+		}
+
 		try {
          Fullscreen_Menu_Intro r;
          r.run();
@@ -214,6 +234,7 @@ void g_main(int argc, char** argv)
 	       case Fullscreen_Menu_Main::mm_multiplayer:
 		  {
 			Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
+			if(NetGGZ::ref()->tables().size() > 0) ns->fill(NetGGZ::ref()->tables());
 			int code=ns->run();
 			
 			NetGame* netgame = 0;

@@ -20,6 +20,8 @@
 #ifndef __S__NETSETUP_H
 #define __S__NETSETUP_H
 
+#include <list>
+
 #include "fullscreen_menu_base.h"
 
 class UIEdit_Box;
@@ -46,6 +48,8 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	
 		bool get_host_address (ulong&, ushort&);
 		// return true if the selected or entered hostname is valid
+
+		void fill(std::list<std::string> tables);
 	
 	private:
 		UIEdit_Box*		hostname;

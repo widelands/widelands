@@ -29,6 +29,9 @@
 #include "wexception.h"
 #include "font_handler.h"
 
+#include "constants.h"
+#include "network.h"
+
 Graphic *g_gr = 0;
 
 /*
@@ -610,6 +613,8 @@ void Sys_HandleInput(InputCallback *cb)
 {
 	bool gotevents = false;
 	SDL_Event ev;
+
+	NetGGZ::ref()->data();
 
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
