@@ -37,6 +37,7 @@ LAN_Base::LAN_Base ()
     int opt=1;
     setsockopt (sock, SOL_SOCKET, SO_BROADCAST, &opt, sizeof(opt));
 
+#ifndef WIN32
     // get a list of all local broadcast addresses
     struct if_nameindex* ifnames=if_nameindex();
     struct ifreq ifr;
@@ -56,6 +57,11 @@ LAN_Base::LAN_Base ()
     }
     
     if_freenameindex (ifnames);
+#else
+    // as Microsoft does not seem to support if_nameindex,
+    // we just broadcast to INADDR_BROADCAST
+    broadcast_addresses.push_back (INADDR_BROADCAST);
+#endif
 }
 
 LAN_Base::~LAN_Base ()

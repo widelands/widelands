@@ -20,14 +20,23 @@
 #ifndef __NETWORK_SYSTEM_H__
 #define __NETWORK_SYSTEM_H__
 
+#ifndef WIN32
+
 // These includes work on Linux and should be fine on any other Unix-alike.
 // If not, this is the right place to conditionally include what is needed.
-
-#include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <net/if.h>
 #include <netinet/in.h>
 #include <netdb.h>
 
+#else
+
+// This is the header to include according to the documentation
+// at msdn.microsoft.com
+#include <winsock2.h>
+
 #endif
+
+#endif
+
