@@ -1,6 +1,6 @@
 [global]
 descname=Meal
-help=A real meal which satisfies all needs
+help=A real meal which satisfies all miners needs
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
@@ -11,6 +11,9 @@ pics=idle.png
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
-hot_spot_x=6
-hot_spot_y=5
+shadowclr_r=0
+shadowclr_g=0
+shadowclr_b=0
+hot_spot_x=7
+hot_spot_y=15
 

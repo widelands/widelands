@@ -7,7 +7,7 @@ buildable=yes
 buildicon=build.png
 worker=innkeeper
 program=work
-output=snack
+output=ration
 enhances_to=inn
 
 [inputs]
@@ -21,7 +21,7 @@ meat=4
 1=check fish,pittabread,meat 
 2=consume fish,pittabread,meat 
 3=animation working 19000
-4=produce snack 
+4=produce ration 
 
 
 [buildcost]

@@ -9,7 +9,7 @@ enhances_to=big_inn
 buildicon=build.png
 worker=innkeeper
 program=work
-output=ration
+output=snack
 
 [inputs]
 fish=4
@@ -24,7 +24,7 @@ meat=4
 3=consume pittabread
 4=consume fish,meat
 5=animation working 20000
-6=produce ration
+6=produce snack
 
 [buildcost]
 trunk=2
