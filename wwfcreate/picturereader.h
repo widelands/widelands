@@ -36,3 +36,4 @@ public:
 };
 
 #endif //__PICTUREREADER_H
+

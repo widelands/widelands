@@ -23,6 +23,7 @@
 #include "bob.h"
 #include "myfile.h"
 #include <cassert>
+#include <string.h>
 
 /** World(const char* file)
   * Creates a new world from the file.

@@ -19,10 +19,7 @@
 
 #include "font.h"
 #include "myfile.h"
-
-#ifdef WIN32
 #include <string.h>
-#endif
 
 /** class Font_Handler
  *

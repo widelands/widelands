@@ -39,3 +39,4 @@ public:
 	bool	get_boolean(const char* section, const char* name, bool def = false);
 	void	get_string(const char* section, const char* name, char* buffer, const char* def = "");
 };
+

@@ -41,6 +41,8 @@ WordFile
 
 #ifdef _MSC_VER
 #pragma pack(push, 1)
+#else
+#pragma pack(1)
 #endif
 
 struct WorldFileHeader
@@ -130,6 +132,8 @@ struct Anim
 
 #ifdef _MSC_VER
 #pragma pack(pop)
+#else
+#pragma pack()
 #endif
 
 #endif //__WORLDFILETYPES_H

@@ -67,3 +67,4 @@ void closedir(DIR* dir)
 }
 
 #endif //WIN32
+

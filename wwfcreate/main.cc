@@ -45,6 +45,7 @@ void printHelp()
 	printf("\twwfcreate <inputdir> [outputfile]\n");
 }
 
+#include <iostream>
 void wwfcreate(Binary_file* output)
 {
 	char confName[1024];

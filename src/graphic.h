@@ -71,8 +71,10 @@ namespace Graph {
 			* Returns: Brighter color
 			*/
 		  inline ushort bright_up_clr(const ushort clr, const ushort factor) {
-					 static uchar r, g, b;
-					 unpack_rgb(clr, &r, &g, &b);
+					 uchar r, g, b;
+					 r= ((clr<<3)>>11);
+					 g= ((clr<<2)>>5);
+					 b= (clr<<3);
 					 r= ((long) r+factor) > 255 ? 255 : r+factor;
 					 g= ((long) g+factor) > 255 ? 255 : g+factor;
 					 b= ((long) b+factor) > 255 ? 255 : b+factor;

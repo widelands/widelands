@@ -71,7 +71,7 @@ class Button {
 					  */
 					 static void set_bg(Pic* p, uint n) { 
 								assert(n<3); 
-								Pic* ep;
+								Pic* ep=0;
 								
 								if(n==0) { bg0=*p; bg0e=*p; ep=&bg0e;}
 								if(n==1) { bg1=*p; bg1e=*p; ep=&bg1e; }

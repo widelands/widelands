@@ -24,6 +24,8 @@
 
 #if defined(WIN32) && defined(_MSC_VER)
 #pragma pack(push, 1)
+#else
+#pragma pack(1)
 #endif
 
 
@@ -87,6 +89,8 @@ struct Ware
 
 #if defined(WIN32) && defined(_MSC_VER)
 #pragma pack(pop, 1)
+#else 
+#pragma pack()
 #endif
 
 #endif //__TRIBEFILETYPES_H
