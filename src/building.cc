@@ -150,6 +150,15 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 		snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 
 		m_buildicon_fname = strdup(fname);
+   
+      // build animation
+      s = prof->get_section("build");
+      if(s->get_int("fps", -1)!=-1) 
+         throw wexception("fps defined for build animation!");
+
+      if(!s) 
+         throw wexception("Missing build animation");
+      m_build = g_anim.get(directory, s, 0, encdata);
 
 		// Get costs
 		s = prof->get_safe_section("buildcost");
@@ -183,6 +192,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	if (!s)
 		throw wexception("Missing idle animation");
 	m_idle = g_anim.get(directory, s, 0, encdata);
+
 }
 
 

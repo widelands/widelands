@@ -250,6 +250,7 @@ public:
 	// Animations
 	virtual void load_animations();
 	AnimationGfx* get_animation(uint anim);
+	virtual int get_animation_nr_frames(uint anim);
 	virtual void get_animation_size(uint anim, uint time, int* w, int* h);
 
 	// Misc functions

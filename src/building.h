@@ -56,6 +56,7 @@ public:
 	inline const char* get_name(void) const { return m_name; }
 	inline const char* get_descname() const { return m_descname; }
 	inline uint get_idle_anim(void) const { return m_idle; }
+	inline uint get_build_anim(void) const { return m_build; }
 	inline bool get_buildable(void) const { return m_buildable; }
 	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
 	inline uint get_buildicon() const { return m_buildicon; }
@@ -93,6 +94,7 @@ private:
 	int          m_size;            // size of the building
 	bool         m_mine;
 	uint         m_idle;            // idle animation
+   uint         m_build;           // build animation
 
 public:
 	static Building_Descr* create_from_dir(Tribe_Descr* tribe,

@@ -26,7 +26,8 @@
 #include "rendertarget.h"
 #include "transport.h"
 #include "worker.h"
-
+#include "animation.h"
+#include "graphic.h"
 
 static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
 
@@ -495,7 +496,7 @@ Draw the construction site.
 */
 void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coords, Point pos)
 {
-	uint tanim = g->get_gametime() - m_animstart;
+   uint tanim = g->get_gametime() - m_animstart;
 
 	if (coords != m_position)
 		return; // draw big buildings only once
@@ -516,10 +517,20 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 	if (m_working)
 		completedtime += CONSTRUCTIONSITE_STEP_TIME + g->get_gametime() - m_work_steptime;
 
-	anim = get_building()->get_idle_anim();
-	g_gr->get_animation_size(anim, tanim, &w, &h);
+	anim = get_building()->get_build_anim();
+   int nr_pics=g_gr->get_animation_nr_frames(anim);
+   uint anim_pic = completedtime * nr_pics / totaltime;
+	// Redefine tanim 
+   tanim = anim_pic*FRAME_LENGTH; 
+	
+   g_gr->get_animation_size(anim, tanim, &w, &h);
 
-	lines = completedtime * h / totaltime;
+	lines = h * completedtime * nr_pics / totaltime;
+   lines -= h*anim_pic; // This won't work if pictures have various sizes
+
+   log("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
+   if(anim_pic) // not the first pic
+      dst->drawanim(pos.x, pos.y, anim, tanim-FRAME_LENGTH, get_owner()->get_playercolor()); // draw the prev pic completly
 
 	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor(), 0, h-lines, w, lines);
 

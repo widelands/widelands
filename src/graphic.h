@@ -73,6 +73,7 @@ public:
 	virtual void animate_maptextures(uint time) = 0;
 
 	virtual void load_animations() = 0;
+	virtual int get_animation_nr_frames(uint anim) = 0;
 	virtual void get_animation_size(uint anim, uint time, int* w, int* h) = 0;
 
 	virtual void screenshot(const char* fname) = 0;

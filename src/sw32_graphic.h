@@ -261,6 +261,7 @@ public:
 	virtual void load_animations();
 	AnimationGfx* get_animation(uint anim);
 	virtual void get_animation_size(uint anim, uint time, int* w, int* h);
+	virtual int get_animation_nr_frames(uint anim);
 
 	// Misc functions
 	virtual void screenshot(const char* fname);

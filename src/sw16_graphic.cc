@@ -1422,6 +1422,13 @@ AnimationGfx* GraphicImpl::get_animation(uint anim)
 	return m_animations[anim-1];
 }
 
+/*
+ * Return the number of frames in this animation
+ */
+int GraphicImpl::get_animation_nr_frames(uint anim) {
+   AnimationGfx* gfx=get_animation(anim);
+   return gfx->get_nrframes();
+}
 
 /*
 ===============
