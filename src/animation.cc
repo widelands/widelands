@@ -114,7 +114,7 @@ void EncodeData::add(const EncodeData *other)
 		hasclrkey = true;
 		clrkey = other->clrkey;
 	}
-	
+
 	if (other->hasshadow) {
 		hasshadow = true;
 		shadow = other->shadow;
@@ -183,7 +183,7 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 
 	m_animations.push_back(AnimationData());
 	id = m_animations.size();
-	
+
 	ad = &m_animations[id-1];
 	ad->frametime = FRAME_LENGTH;
 	ad->hotspot.x = 0;
@@ -251,7 +251,7 @@ const AnimationData* AnimationManager::get_animation(uint id) const
 {
 	if (!id || id > m_animations.size())
 		return 0;
-	
+
 	return &m_animations[id-1];
 }
 
@@ -283,7 +283,7 @@ DirAnimations::~DirAnimations()
 DirAnimations::parse
 
 Parse an animation from the given directory and config.
-sectnametempl is of the form "foowalk_??", where ?? will be replaced with 
+sectnametempl is of the form "foowalk_??", where ?? will be replaced with
 nw, ne, e, se, sw and w to get the section names for the animations.
 
 If defaults is not zero, the additional sections are not actually necessary.
@@ -294,33 +294,46 @@ are used.
 void DirAnimations::parse(const char *directory, Profile *prof, const char *sectnametempl,
                           Section *defaults, const EncodeData *encdefaults)
 {
+	char dirpictempl[256];
 	char sectnamebase[256];
 	char *repl;
-	
+	const char* string;
+
 	if (strchr(sectnametempl, '%'))
 		throw wexception("sectnametempl %s contains %%", sectnametempl);
-	
+
 	snprintf(sectnamebase, sizeof(sectnamebase), "%s", sectnametempl);
 	repl = strstr(sectnamebase, "??");
 	if (!repl)
 		throw wexception("DirAnimations section name template %s does not contain %%s", sectnametempl);
 	strncpy(repl, "%s", 2);
-	
+
+	string = defaults->get_string("dirpics", 0);
+	if (string) {
+		snprintf(dirpictempl, sizeof(dirpictempl), "%s", string);
+		repl = strstr(dirpictempl, "!!");
+		if (!repl)
+			throw wexception("DirAnimations dirpics name templates %s does not contain !!", dirpictempl);
+		strncpy(repl, "%s", 2);
+	} else {
+		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.bmp", sectnamebase);
+	}
+
 	for(int dir = 1; dir <= 6; dir++) {
 		static const char *dirstrings[6] = { "ne", "e", "se", "sw", "w", "nw" };
 		char sectname[300];
 		Section *s;
-		
+
 		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
-		
+
 		s = prof->get_section(sectname);
 		if (!s) {
 			if (!defaults)
 				throw wexception("Section [%s] missing and no default supplied", sectname);
 			s = defaults;
 		}
-		
-		strcat(sectname, "_??.bmp");
+
+		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir-1]);
 		m_animations[dir-1] = g_anim.get(directory, s, sectname, encdefaults);
 	}
 }
