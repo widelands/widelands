@@ -107,6 +107,7 @@ private:
 	uchar owned_by; // 0 = neutral; otherwise: player number
 	uchar roads; // are any roads on this field? [6 bits used]
 	uchar m_resources;
+   uchar m_starting_res_amount; // how much has there been
    uchar m_res_amount;
 	Terrain_Descr *terr, *terd;
 	Bob* bobs; // linked list, see Bob::m_linknext
@@ -140,6 +141,8 @@ public:
 	inline uchar get_resources() const { return m_resources; }
    inline uchar get_resources_amount() const { return m_res_amount; }
 	inline void set_resources(uchar res, uchar amount) { m_resources = res; m_res_amount=amount; }
+   inline void set_starting_res_amount(int amount) { m_starting_res_amount=amount; }
+   inline int get_starting_res_amount(void) { return m_starting_res_amount; }
 
    // note: you must reset this field's + neighbor's brightness when you change the height
    // Map's change_height does this

@@ -78,7 +78,7 @@ struct ProductionAction {
 		actAnimate, // sparam1 = activate this animation until timeout
 		actProduce, // sparem1 = ware to produce. the worker carries it outside
 		actCheck,   // sparam1 = check if the given input ware is available, iparam1 number to check for
-		actMine,    // iparam1 = mineXXX type to mine for
+		actMine,    // sparam1 = resource, iparam1=how far to mine, iparam2=up to max mine, iparam3=chance below 
 		actCall,		// sparam1 = name of sub-program
 		actSet,		// iparam1 = flags to set, iparam2 = flags to unset
 	};
@@ -98,6 +98,7 @@ struct ProductionAction {
 	Type        type;
 	int         iparam1;
 	int         iparam2;
+	int         iparam3;
 	std::string	sparam1;
 };
 
@@ -267,14 +268,20 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 		} else if (cmd[0] == "mine") {
          char* endp;
 
-			if (cmd.size() != 3)
-				throw wexception("Usage: mine <resource> <area>");
+			if (cmd.size() != 5)
+				throw wexception("Usage: mine <resource> <area> <up to %%> <chance after %%>");
 
 			act.type = ProductionAction::actMine;
 			act.sparam1=cmd[1]; // what to mine
          act.iparam1=strtol(cmd[2].c_str(),&endp, 0);
          if(endp && *endp)
             throw wexception("Bad area '%s'", cmd[2].c_str());
+         act.iparam2=strtol(cmd[3].c_str(),&endp, 0);
+         if(endp && *endp || act.iparam2>100)
+            throw wexception("Bad maximum amount: '%s'", cmd[3].c_str());
+         act.iparam3=strtol(cmd[4].c_str(),&endp, 0);
+         if(endp && *endp || act.iparam3>100)
+            throw wexception("Bad chance after maximum amount is empty: '%s'", cmd[4].c_str());
 
 		} else if (cmd[0] == "call") {
 			if (cmd.size() != 2)
@@ -954,93 +961,118 @@ void ProductionSite::program_act(Game* g)
 		}
 
 		case ProductionAction::actMine:
-		{
-			Map* map = g->get_map();
-			MapRegion mr;
-			uchar res;
+      {
+         Map* map = g->get_map();
+         MapRegion mr;
+         uchar res;
 
-			molog("  Mine '%s'", action->sparam1.c_str());
+         molog("  Mine '%s'", action->sparam1.c_str());
 
          res=map->get_world()->get_resource(action->sparam1.c_str());
          if(static_cast<char>(res)==-1)
             throw wexception("ProductionAction::actMine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
                   " with world!!\n",  action->sparam1.c_str());
 
-			// Select one of the fields randomly
-			uint totalres = 0;
-			uint totalchance = 0;
-			int pick;
-			Field* f;
+         // Select one of the fields randomly
+         uint totalres = 0;
+         uint totalchance = 0;
+         uint totalstart = 0;
+         int pick;
+         Field* f;
 
-			mr.init(map, get_position(), action->iparam1);
+         mr.init(map, get_position(), action->iparam1);
 
-			while((f = mr.next())) {
-				uchar fres = f->get_resources();
-				uint amount = f->get_resources_amount();
+         while((f = mr.next())) {
+            uchar fres = f->get_resources();
+            uint amount = f->get_resources_amount();
+            uint start_amount = f->get_starting_res_amount();
 
             // In the future, we might want to support amount = 0 for
             // fields that can produce an infinite amount of resources.
             // Rather -1 or something similar. not 0
-				if (fres != res)
-					amount = 0;
+            if (fres != res) {
+               amount = 0;
+               start_amount=0;
+            }
 
-				totalres += amount;
-				totalchance += 8 * amount;
+            totalres += amount;
+            totalstart += start_amount;
+            totalchance += 8 * amount;
 
-				// Add penalty for fields that are running out
-				if (amount == 0)
-					// we already know it's completely empty, so punish is less
-					totalchance += 1;
-				else if (amount <= 2)
-					totalchance += 6;
-				else if (amount <= 4)
-					totalchance += 4;
-				else if (amount <= 6)
-					totalchance += 2;
-			}
+            // Add penalty for fields that are running out
+            if (amount == 0)
+               // we already know it's completely empty, so punish is less
+               totalchance += 1;
+            else if (amount <= 2)
+               totalchance += 6;
+            else if (amount <= 4)
+               totalchance += 4;
+            else if (amount <= 6)
+               totalchance += 2;
+         }
 
-			if (totalres == 0) {
-				molog("  Run out of resources\n");
-				program_end(g, false);
-				return;
-			}
+         // how much is digged
+         int digged_percentage= 100 - (totalres*100 / totalstart); 
+         if(!totalres) 
+            digged_percentage=100;
+         molog("  Mine has already digged %i percent (%i/%i)!\n", digged_percentage, totalres, totalstart);
 
-			// Second pass through fields
-			pick = g->logic_rand() % totalchance;
+         if(digged_percentage<action->iparam2) {
+            // Mine can produce normally
+            if (totalres == 0) {
+               molog("  Run out of resources\n");
+               program_end(g, false);
+               return;
+            }
 
-			mr.init(map, get_position(), action->iparam1);
+            // Second pass through fields
+            pick = g->logic_rand() % totalchance;
 
-			while((f = mr.next())) {
-				uchar fres = f->get_resources();
-				uint amount = f->get_resources_amount();;
+            mr.init(map, get_position(), action->iparam1);
 
-				if (fres != res)
-					amount = 0;
+            while((f = mr.next())) {
+               uchar fres = f->get_resources();
+               uint amount = f->get_resources_amount();;
 
-				pick -= 8*amount;
-				if (pick < 0) {
-					assert(amount > 0);
+               if (fres != res)
+                  amount = 0;
 
-					amount--;
+               pick -= 8*amount;
+               if (pick < 0) {
+                  assert(amount > 0);
 
-					f->set_resources(res,amount);
-					break;
-				}
-			}
+                  amount--;
 
-			if (pick >= 0) {
-				molog("  Not successful this time\n");
-				program_end(g, false);
-				return;
-			}
+                  f->set_resources(res,amount);
+                  break;
+               }
+            }
 
-			molog("  Mined one item\n");
+            if (pick >= 0) {
+               molog("  Not successful this time\n");
+               program_end(g, false);
+               return;
+            }
 
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, 10);
-			return;
-		}
+            molog("  Mined one item\n");
+         } else {
+            // Mine has reached it's limits, still try to produce something
+            // but independant of sourrunding resources. Do not decrease resources further
+            int chance= g->logic_rand() % 100;
+            if(chance>=action->iparam3) {
+               // Not successfull
+               molog("  Not successful this time in fallback programm\n");
+               program_end(g, false);
+               return;
+            }
+         }
+
+         // Done successfull
+         program_step();
+         m_program_timer = true;
+         m_program_time = schedule_act(g, 10);
+         return;
+      }
 
 		case ProductionAction::actCall:
 			molog("  Call %s\n", action->sparam1.c_str());

@@ -278,10 +278,13 @@ void Map::recalc_default_resources(void) {
          }
          amount/=6;
 
-         if(res==-1 || !amount)
+         if(res==-1 || !amount) {
             f.field->set_resources(0,0);
-         else
+            f.field->set_starting_res_amount(0);
+         } else {
             f.field->set_resources(res,amount);
+            f.field->set_starting_res_amount(amount);
+         }
 
       }
    }

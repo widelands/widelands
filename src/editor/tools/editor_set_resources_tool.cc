@@ -68,8 +68,10 @@ int Editor_Set_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_I
          }
          if(!amount) {
             f->set_resources(0,0);
+            f->set_starting_res_amount(0);
          } else {
             f->set_resources(m_cur_res,amount);
+            f->set_starting_res_amount(amount);
             // set new overlay
             str=map->get_world()->get_resource(m_cur_res)->get_editor_pic(amount);
             int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), true);

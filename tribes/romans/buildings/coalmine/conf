@@ -17,7 +17,7 @@ bread=6
 0=sleep 20000
 1=consume bread
 2=animation working 20000
-3=mine coal 2 
+3=mine coal 2 25 5       # mine coal in a radius of 2 up to 25% of total available, 3% chances to hit after this 
 4=produce coal
 
 [buildcost]
