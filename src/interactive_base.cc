@@ -52,9 +52,8 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
    m_fieldsel_freeze = false;
    m_egbase=g;
 
-   m_minimapview=0;
    m_mapview=0;
-	
+   m_mm=0;	
    
    set_fieldsel_radius(0);
    unset_fsel_picture(); // set default fsel
@@ -149,7 +148,7 @@ void Interactive_Base::think()
  */
 void Interactive_Base::mainview_move(int x, int y)
 {
-   if (get_minimapview()) {
+   if (m_minimap.window) {
       int maxx = MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
       int maxy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
 
@@ -158,7 +157,8 @@ void Interactive_Base::mainview_move(int x, int y)
       y += get_mapview()->get_h()>>1;
       if (y >= maxy) y -= maxy;
 
-      get_minimapview()->set_view_pos(x, y);
+
+      m_mm->get_minimapview()->set_view_pos(x, y);
    }
 }
 
@@ -186,8 +186,8 @@ void Interactive_Base::move_view_to(int fx, int fy)
 	int x = MULTIPLY_WITH_FIELD_WIDTH(fx);
 	int y = MULTIPLY_WITH_HALF_FIELD_HEIGHT(fy);
 
-	if (get_minimapview())
-		get_minimapview()->set_view_pos(x, y);
+	if (m_minimap.window)
+		m_mm->get_minimapview()->set_view_pos(x, y);
 	
 	x -= get_mapview()->get_w()>>1;
 	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
@@ -209,4 +209,23 @@ void Interactive_Base::warp_mouse_to_field(Coords c)
 	get_mapview()->warp_mouse_to_field(c);
 }
 
+/*
+===========
+Interactive_Base::toggle_minimap()
 
+Open the minimap or close it if it's open
+===========
+*/
+void Interactive_Base::toggle_minimap() {
+	if (m_minimap.window) {
+		delete m_minimap.window;
+   }
+	else {
+		m_mm = new MiniMap(this, &m_minimap);
+      m_mm->get_minimapview()->warpview.set(this, 
+            &Interactive_Base::minimap_warp);
+
+		// make sure the viewpos marker is at the right pos to start with
+		mainview_move(get_mapview()->get_vpx(), get_mapview()->get_vpy());
+	}
+}

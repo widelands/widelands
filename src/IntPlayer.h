@@ -46,7 +46,6 @@ class Interactive_Player : public Interactive_Base {
 		
 		void exit_game_btn();
 		void main_menu_btn();
-		void minimap_btn();
 		void toggle_buildhelp();
 
 		void field_action();
@@ -78,7 +77,6 @@ class Interactive_Player : public Interactive_Base {
 		uchar		m_player_number;
 		
 		UniqueWindow	m_mainmenu;
-		UniqueWindow	m_minimap;
 		UniqueWindow	m_fieldaction;
 		
 		CoordPath		*m_buildroad; // path for the new road

@@ -467,26 +467,7 @@ void Editor_Interactive::toolsize_menu_btn()
 }
 
 
-/*
-===========
-Editor_Interactive::toggle_minimap()
 
-Open the minimap or close it if it's open
-===========
-*/
-void Editor_Interactive::toggle_minimap() {
-	if (m_minimap.window) {
-		delete m_minimap.window;
-   }
-	else {
-		MiniMap *mm = new MiniMap(this, &m_minimap);
-		set_minimapview(mm->get_minimapview());
-      get_minimapview()->warpview.set(this, &Editor_Interactive::minimap_warp);
-
-		// make sure the viewpos marker is at the right pos to start with
-		mainview_move(get_mapview()->get_vpx(), get_mapview()->get_vpy());
-	}
-}
 
 /*
 ===========

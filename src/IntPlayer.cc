@@ -133,7 +133,7 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.bmp", RGBColor(0,0,255)));
 
 	b = new Button(this, x+68, y, 34, 34, 2);
-	b->clicked.set(this, &Interactive_Player::minimap_btn);
+	b->clicked.set(this, &Interactive_Player::toggle_minimap);
 	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.bmp", RGBColor(0,0,255)));
 
 	b = new Button(this, x+102, y, 34, 34, 2);
@@ -220,27 +220,6 @@ void Interactive_Player::toggle_buildhelp(void)
 	m_maprenderinfo.show_buildhelp = !m_maprenderinfo.show_buildhelp;
 }
 
-/** Interactive_Player::minimap_btn()
- *
- * Handle minimap button by opening the minimap (or closing it if it's
- * currently open).
- */
-void Interactive_Player::minimap_btn()
-{
-	if (m_minimap.window) {
-		delete m_minimap.window;
-   }
-	else {
-		MiniMap *mm = new MiniMap(this, &m_minimap);
-		set_minimapview(mm->get_minimapview());
-      get_minimapview()->warpview.set(this, &Interactive_Player::minimap_warp);
-
-		// make sure the viewpos marker is at the right pos to start with
-		mainview_move(get_mapview()->get_vpx(), get_mapview()->get_vpy());
-	}
-}
-
-
 /*
 ===============
 Interactive_Player::field_action
@@ -288,7 +267,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 	
 	case KEY_m:
 		if (down)
-			minimap_btn();
+			toggle_minimap();
 		return true;
 		
 	case KEY_F5:

@@ -25,6 +25,7 @@
 #include "editor_game_base.h"
 
 class Map;
+class MiniMap;
 class MiniMapView;
 class Map_View;
 
@@ -65,17 +66,19 @@ class Interactive_Base : public Panel {
 
    private:
       Map_View* m_mapview;
-      MiniMapView* m_minimapview;
+      MiniMap* m_mm;
       Editor_Game_Base* m_egbase;
       bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
-         
+        
+      UniqueWindow m_minimap;
+
    protected:
+      void toggle_minimap(void);
+
       void mainview_move(int x, int y);
 		void minimap_warp(int x, int y);
 
 	   inline void set_mapview(Map_View* w) { m_mapview=w; }
-      inline void set_minimapview(MiniMapView* w) { m_minimapview=w; }
-      inline MiniMapView* get_minimapview() { return m_minimapview; }
       inline Map_View* get_mapview() { return m_mapview; }
     
       void set_fsel_picture(const char* file) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); }

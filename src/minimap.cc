@@ -31,6 +31,7 @@ MiniMapView
 ==============================================================================
 */
 
+
 /*
 ===============
 MiniMapView::MiniMapView
@@ -42,16 +43,14 @@ MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Base *plr, uin
 	: Panel(parent, x, y, 10, 10)
 {
 	m_player = plr;
-	m_map = plr->get_map();
-
 	m_viewx = m_viewy = 0;
 	
 	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.bmp", RGBColor(0,0,255));
    m_fx=fx;
    m_fy=fy;
 
-   if(m_fx==0) m_fx=m_map->get_width();
-   if(m_fy==0) m_fy=m_map->get_height();
+   if(m_fx==0) m_fx=m_player->get_map()->get_width();
+   if(m_fy==0) m_fy=m_player->get_map()->get_height();
 	
    set_size(m_fx, m_fy);
 
@@ -68,10 +67,13 @@ void MiniMapView::set_view_pos(int x, int y)
 {
    m_viewx = x / FIELD_WIDTH;
    m_viewy = y / (FIELD_HEIGHT>>1);
-
-   if(get_w()!=(int)m_map->get_width() && get_h()!=(int)m_map->get_height()) {
-      m_viewx=(int)(((float)m_viewx/(float)m_map->get_width())*get_w());
-      m_viewy=(int)(((float)m_viewy/(float)m_map->get_height())*get_h());
+  
+   if(get_w()!=(int)m_player->get_map()->get_width() && get_h()!=(int)m_player->get_map()->get_height()) {
+      
+      if(get_w() && get_h() && m_player->get_map()->get_width() && m_player->get_map()->get_height()) { 
+         m_viewx=(int)(((float)m_viewx/(float)m_player->get_map()->get_width())*get_w());
+         m_viewy=(int)(((float)m_viewy/(float)m_player->get_map()->get_height())*get_h());
+      }
    }
    update(0, 0, get_w(), get_h());
 }
@@ -110,15 +112,15 @@ bool MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
 
 
    if (down) {
-      if(get_w()==(int)m_map->get_width() && get_h()==(int)m_map->get_height()) {
+      if(get_w()==(int)m_player->get_map()->get_width() && get_h()==(int)m_player->get_map()->get_height()) {
          // make sure x/y is within range
-         if (x >= 0 && x < (int)m_map->get_width() && y > 0 && y < (int)m_map->get_height())
+         if (x >= 0 && x < (int)m_player->get_map()->get_width() && y > 0 && y < (int)m_player->get_map()->get_height())
             warpview.call(MULTIPLY_WITH_FIELD_WIDTH(x), MULTIPLY_WITH_HALF_FIELD_HEIGHT(y));
       } else {
          if(x>=0 && x < get_w() && y>=0 && y < get_h()) {
             int mx, my;
-            mx=(int)(((double)x/(double)get_w())*m_map->get_width());
-            my=(int)(((double)y/(double)get_h())*m_map->get_height());
+            mx=(int)(((double)x/(double)get_w())*m_player->get_map()->get_width());
+            my=(int)(((double)y/(double)get_h())*m_player->get_map()->get_height());
             warpview.call(MULTIPLY_WITH_FIELD_WIDTH(mx), MULTIPLY_WITH_HALF_FIELD_HEIGHT(my));
          }
       }

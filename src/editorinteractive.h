@@ -70,7 +70,6 @@ class Editor_Interactive : public Interactive_Base {
 
       void exit_game_btn();
       void toggle_buildhelp();
-      void toggle_minimap();
       void tool_menu_btn();
       void toolsize_menu_btn();
    
@@ -81,7 +80,6 @@ class Editor_Interactive : public Interactive_Base {
       // UI ownings
       Editor* m_editor;
       UniqueWindow m_toolmenu;
-      UniqueWindow m_minimap;
       UniqueWindow m_toolsizemenu;
 };
 #endif // __S__EDITOR_H

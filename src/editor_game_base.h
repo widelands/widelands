@@ -34,7 +34,7 @@ class Editor_Game_Base {
       virtual ~Editor_Game_Base(); 
 	
       void set_map(Map* map);
-      inline Map *get_map() { return m_map; }
+      inline Map *get_map() { assert(m_map); return m_map; }
       inline Object_Manager* get_objects() { return m_objects; }
 	
 	

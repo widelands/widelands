@@ -26,7 +26,7 @@ class Interactive_Base;
 class Player;
 class Map;
 struct UniqueWindow;
-
+class MiniMapView;
 
 /** class MiniMapView
  *
@@ -48,12 +48,12 @@ public:
 
 private:
 	Interactive_Base	*m_player;
-	Map						*m_map;
 	int						m_viewx, m_viewy;
 	uint                  m_fx, m_fy;
 
 	uint			m_pic_map_spot;
 };
+
 
 /* class MiniMap
  *
@@ -66,7 +66,7 @@ public:
 	MiniMap(Interactive_Base *parent, UniqueWindow *reg);
 	~MiniMap();
 
-   inline MiniMapView* get_minimapview() { return m_view; }
+   inline MiniMapView* get_minimapview(void) { return m_view; }
 
 private:
 	UniqueWindow	*m_registry;
