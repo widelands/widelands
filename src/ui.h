@@ -121,6 +121,8 @@ public:
 
 	inline Panel *get_parent() const { return _parent; }
 
+	void free_children();
+
 	// Modal
 	int run();
 	void end_modal(int code);
@@ -138,6 +140,7 @@ public:
 	inline int get_h() const { return _h; }
 
 	void set_inner_size(uint nw, uint nh);
+	void fit_inner(Panel* inner);
 	void set_border(uint l, uint r, uint t, uint b);
 
 	inline uint get_lborder() const { return _lborder; }
@@ -153,7 +156,7 @@ public:
 	// Drawing, visibility
 	inline bool get_visible() const { return (_flags & pf_visible) ? true : false; }
 	void set_visible(bool on);
-	
+
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_border(RenderTarget* dst);
 	void update(int x, int y, int w, int h);
@@ -166,7 +169,8 @@ public:
 	int get_mouse_x();
 	int get_mouse_y();
 	void set_mouse_pos(int x, int y);
-	
+	void center_mouse();
+
 	virtual void handle_mousein(bool inside);
 	virtual bool handle_mouseclick(uint btn, bool down, int x, int y);
 	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
@@ -179,7 +183,7 @@ public:
 	void set_can_focus(bool yes);
 	inline bool get_can_focus() const { return (_flags & pf_can_focus) ? true : false; }
 	void focus();
-	
+
 	void set_think(bool yes);
 	inline bool get_think() const { return (_flags & pf_think) ? true : false; }
 
@@ -366,10 +370,12 @@ private:
  */
 class Textarea : public Panel {
 public:
-	Textarea(Panel *parent, int x, int y, const char *text, Align align = Align_Left);
+	Textarea(Panel *parent, int x, int y, std::string text, Align align = Align_Left);
+	Textarea(Panel *parent, int x, int y, int w, int h, std::string text,
+			   Align align = Align_Left, bool multiline = false);
 	~Textarea();
 
-	void set_text(const char *text);
+	void set_text(std::string text);
 	void set_align(Align align);
 
 	// Drawing and event handlers
@@ -381,6 +387,7 @@ private:
 
 	std::string		m_text;
 	Align				m_align;
+	bool				m_multiline;
 };
 
 /** class Multiline_textarea

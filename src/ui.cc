@@ -90,8 +90,7 @@ Panel::~Panel()
 		_g_mousein = 0;
 
 	// Free children
-	while(_fchild)
-		delete _fchild;
+	free_children();
 
 	// Unlink
 	if (_parent) {
@@ -110,6 +109,21 @@ Panel::~Panel()
 			_parent->_lchild = _prev;
 	}
 }
+
+
+/*
+===============
+Panel::free_children
+
+Free all of the panel's children.
+===============
+*/
+void Panel::free_children()
+{
+	while(_fchild)
+		delete _fchild;
+}
+
 
 /*
 ===============
@@ -132,7 +146,7 @@ int Panel::run()
 		forefather = forefather->_parent;
 
 	s_default_cursor = g_gr->get_picture(PicMod_UI, "pics/cursor.bmp", RGBColor(0,0,255));
-	
+
 	// Loop
 	_running = true;
 	start();
@@ -244,16 +258,32 @@ void Panel::set_pos(const int nx, const int ny)
 	_needdraw = nd;
 }
 
-/** Panel::set_inner_size(uint nw, uint nh)
- *
- * Set the size of the inner area (total area minus border)
- *
- * Args: nw	new dimensions of the inner area
- */
+/*
+===============
+Panel::set_inner_size
+
+Set the size of the inner area (total area minus border)
+===============
+*/
 void Panel::set_inner_size(uint nw, uint nh)
 {
 	set_size(nw+_lborder+_rborder, nh+_tborder+_bborder);
 }
+
+
+/*
+===============
+Panel::fit_inner
+
+Resize so that we match the size of the inner panel.
+===============
+*/
+void Panel::fit_inner(Panel* inner)
+{
+	set_inner_size(inner->get_w(), inner->get_h());
+	inner->set_pos(0, 0);
+}
+
 
 /** Panel::set_border(uint l, uint r, uint t, uint b)
  *
@@ -480,7 +510,19 @@ void Panel::set_mouse_pos(int x, int y)
 }
 
 
-	
+/*
+===============
+Panel::center_mouse
+
+Center the mouse on this panel.
+===============
+*/
+void Panel::center_mouse()
+{
+	set_mouse_pos(get_w() / 2, get_h() / 2);
+}
+
+
 /** Panel::handle_mousein(uint x, uint y, bool inside)
  *
  * Called whenever the mouse enters or leaves the panel. The inside state

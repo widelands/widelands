@@ -61,6 +61,7 @@ public:
 	virtual ~ConstructionSite();
 
 	virtual int get_size();
+	virtual uint get_playercaps();
 
 	void set_building(Building_Descr* descr);
 	inline Building_Descr* get_building() const { return m_building; }

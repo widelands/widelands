@@ -38,13 +38,11 @@ enum {
 	CMD_DESTROY,		// arg1 = serialnum
 	CMD_INCORPORATE,	// arg1 = serialnum (Worker)
 
+	// Begin commands sent by players
 	CMD_BUILD_FLAG,	// arg1 = x, arg2 = y
-	CMD_RIP_FLAG,		// arg1 = x, arg2 = y
-
 	CMD_BUILD_ROAD,	// arg1 = Path*
-	CMD_REMOVE_ROAD,	// arg1 = serialnum
-
 	CMD_BUILD,			// arg1 = x, arg2 = y, arg3 = build_descr idx
+	CMD_BULLDOZE,		// arg1 = serialnum (PlayerImmovable)
 };
 // ---------------------- END    OF CMDS ----------------------------------
 

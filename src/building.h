@@ -91,6 +91,12 @@ class Building : public PlayerImmovable {
 	MO_DESCR(Building_Descr)
 
 public:
+	// Player capabilities: which commands can a player issue for this building?
+	enum {
+		PCap_Bulldoze = 0,	// can bulldoze/remove this buildings
+	};
+
+public:
 	Building(Building_Descr *descr);
 	virtual ~Building();
 
@@ -99,6 +105,7 @@ public:
 	virtual bool get_passable();
 
 	virtual Flag *get_base_flag();
+	virtual uint get_playercaps();
 
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }

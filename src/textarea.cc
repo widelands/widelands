@@ -32,26 +32,37 @@
 ===============
 Textarea::Textarea
 
-Initialize a Textarea. The dimension are set automatically, depending on the text.
-
-Args: parent	parent panel
-      x			coordinates of the textarea
-      y
-      text		text on the Textarea (can be 0)
-      align		alignment for the text
+Initialize a Textarea. For non-multiline textareas, the dimensions are set
+automatically, depending on the text.
+For multiline textareas, only the height and vertical position is adjusted
+automatically. A multiline Textarea differs from a Multiline_Textarea in that
+Multiline_Textarea provides scrollbars.
 ===============
 */
-Textarea::Textarea(Panel *parent, int x, int y, const char *text, Align align)
+Textarea::Textarea(Panel *parent, int x, int y, std::string text, Align align)
 	: Panel(parent, x, y, 0, 0)
 {
 	set_handle_mouse(false);
 	set_think(false);
 
 	m_align = align;
-	
-	if (text)
-		set_text(text);
+	m_multiline = false;
+
+	set_text(text);
 }
+
+Textarea::Textarea(Panel *parent, int x, int y, int w, int h, std::string text, Align align, bool multiline)
+	: Panel(parent, x, y, w, h)
+{
+	set_handle_mouse(false);
+	set_think(false);
+
+	m_align = align;
+	m_multiline = multiline;
+
+	set_text(text);
+}
+
 
 /*
 ===============
@@ -72,15 +83,12 @@ Textarea::set_text
 Set the text of the Textarea. Size is automatically adjusted
 ===============
 */
-void Textarea::set_text(const char *text)
+void Textarea::set_text(std::string text)
 {
 	collapse(); // collapse() implicitly updates
-	
-	if (text) {
-		m_text = text;
-		expand();
-	} else
-		m_text = "";
+
+	m_text = text;
+	expand();
 }
 
 
@@ -112,18 +120,18 @@ void Textarea::draw(RenderTarget* dst)
 		{
 		int x = 0;
 		int y = 0;
-		
+
 		if (m_align & Align_HCenter)
 			x += get_w()/2;
 		else if (m_align & Align_Right)
 			x += get_w();
-		
+
 		if (m_align & Align_VCenter)
 			y += get_h()/2;
 		else if (m_align & Align_Bottom)
 			y += get_h();
-		
-		g_font->draw_string(dst, x, y, m_text.c_str(), m_align);
+
+		g_font->draw_string(dst, x, y, m_text.c_str(), m_align, m_multiline ? get_w() : -1);
 		}
 }
 
@@ -142,10 +150,13 @@ void Textarea::collapse()
 	int w = get_w();
 	int h = get_h();
 
-	if (m_align & Align_HCenter)
-		x += w >> 1;
-	else if (m_align & Align_Right)
-		x += w;
+	if (!m_multiline)
+	{
+		if (m_align & Align_HCenter)
+			x += w >> 1;
+		else if (m_align & Align_Right)
+			x += w;
+	}
 
 	if (m_align & Align_VCenter)
 		y += h >> 1;
@@ -153,7 +164,7 @@ void Textarea::collapse()
 		y += h;
 
 	set_pos(x, y);
-	set_size(0, 0);
+	set_size(m_multiline ? get_w() : 0, 0);
 }
 
 
@@ -172,13 +183,16 @@ void Textarea::expand()
 	int x = get_x();
 	int y = get_y();
 	int w, h;
-	 
-	g_font->get_size(m_text.c_str(), &w, &h);
-	
-	if (m_align & Align_HCenter)
-		x -= w >> 1;
-	else if (m_align & Align_Right)
-		x -= w;
+
+	g_font->get_size(m_text.c_str(), &w, &h, m_multiline ? get_w() : -1);
+
+	if (!m_multiline)
+	{
+		if (m_align & Align_HCenter)
+			x -= w >> 1;
+		else if (m_align & Align_Right)
+			x -= w;
+	}
 
 	if (m_align & Align_VCenter)
 		y -= h >> 1;
@@ -186,6 +200,6 @@ void Textarea::expand()
 		y -= h;
 
 	set_pos(x, y);
-	set_size(w, h);
+	set_size(m_multiline ? get_w() : w, h);
 }
 

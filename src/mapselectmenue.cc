@@ -106,17 +106,17 @@ MapSelectMenu::MapSelectMenu(Editor_Game_Base *g)
 
 	// Info fields
 	new Textarea(this, 450, 160, "Name:", Align_Right);
-	taname = new Textarea(this, 460, 160, 0);
+	taname = new Textarea(this, 460, 160, "");
 	new Textarea(this, 450, 180, "Author:", Align_Right);
-	taauthor = new Textarea(this, 460, 180, 0);
+	taauthor = new Textarea(this, 460, 180, "");
 	new Textarea(this, 450, 200, "Size:", Align_Right);
-	tasize = new Textarea(this, 460, 200, 0);
+	tasize = new Textarea(this, 460, 200, "");
 	new Textarea(this, 450, 220, "World:", Align_Right);
-	taworld = new Textarea(this, 460, 220, 0);
+	taworld = new Textarea(this, 460, 220, "");
 	new Textarea(this, 450, 240, "Players:", Align_Right);
-	tanplayers = new Textarea(this, 460, 240, 0);
+	tanplayers = new Textarea(this, 460, 240, "");
 	new Textarea(this, 450, 260, "Descr:", Align_Right);
-	tadescr = new Multiline_Textarea(this, 460, 260, 160, 80, 0);
+	tadescr = new Multiline_Textarea(this, 460, 260, 160, 80, "");
 }
 
 MapSelectMenu::~MapSelectMenu()
@@ -169,13 +169,13 @@ void MapSelectMenu::map_selected(int id)
          m_ok->set_enabled(true);
 		} catch(std::exception& e) {
 			log("Failed to load map %s: %s\n", get_mapname(), e.what());
-			
+
 			taname->set_text("(bad map file)");
-			taauthor->set_text(0);
-			tasize->set_text(0);
-			tanplayers->set_text(0);
-			tadescr->set_text(0);
-			taworld->set_text(0);
+			taauthor->set_text("");
+			tasize->set_text("");
+			tanplayers->set_text("");
+			tadescr->set_text("");
+			taworld->set_text("");
 			m_ok->set_enabled(false);
 		}
 	}

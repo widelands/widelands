@@ -185,7 +185,7 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *regi
 	if (registry->window)
 		delete registry->window;
 	registry->window = this;
-	
+
 	Field *f = m_map->get_field(m_player->get_fieldsel());
 	m_field = FCoords(m_player->get_fieldsel(), f);
 
@@ -228,7 +228,7 @@ void FieldActionWindow::init()
 	// where the field is, to allow better view
 	int mousex = get_mouse_x();
 	int mousey = get_mouse_y();
-	
+
 	if (mousex >= 0 && mousex < get_w() &&
 	    mousey >= 0 && mousey < get_h()) {
 		if (mousey < get_h()/2)
@@ -274,7 +274,7 @@ void FieldActionWindow::add_buttons_auto()
 
 			Building *building = flag->get_building();
 
-			if (!building || strcasecmp(building->get_name(), "headquarters"))
+			if (!building || building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag);
 		}
 		else
@@ -479,11 +479,31 @@ Remove the flag at this field
 void FieldActionWindow::act_ripflag()
 {
 	Game *g = m_player->get_game();
-	
-	g->send_player_command(m_player->get_player_number(), CMD_RIP_FLAG, m_field.x, m_field.y);
+	BaseImmovable* imm = g->get_map()->get_immovable(m_field);
+	Flag* flag;
+	Building* building;
 
 	okdialog();
+
+	if (!imm || imm->get_type() != Map_Object::FLAG)
+		return;
+
+	flag = (Flag*)imm;
+	building = flag->get_building();
+
+	if (building)
+	{
+		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+			return;
+
+		show_bulldoze_confirm(m_player, building, flag);
+	}
+	else
+	{
+		g->send_player_command(m_player->get_player_number(), CMD_BULLDOZE, flag->get_serial());
+	}
 }
+
 
 /*
 ===============
@@ -522,10 +542,10 @@ void FieldActionWindow::act_removeroad()
 {
 	Game *g = m_player->get_game();
 	BaseImmovable *imm = g->get_map()->get_immovable(m_field);
-	
+
 	if (imm && imm->get_type() == Map_Object::ROAD)
-		g->send_player_command(m_player->get_player_number(), CMD_REMOVE_ROAD, imm->get_serial());
-	
+		g->send_player_command(m_player->get_player_number(), CMD_BULLDOZE, imm->get_serial());
+
 	okdialog();
 }
 
@@ -540,9 +560,9 @@ Start construction of the building with the give description index
 void FieldActionWindow::act_build(int idx)
 {
 	Game *g = m_player->get_game();
-	
+
 	g->send_player_command(m_player->get_player_number(), CMD_BUILD, m_field.x, m_field.y, idx);
-	
+
 	okdialog();
 }
 
@@ -566,7 +586,7 @@ void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
 		return;
 	}
 
-	// we're building a road right now	
+	// we're building a road right now
 	Map *map = parent->get_game()->get_map();
 	Coords target = parent->get_fieldsel();
 	

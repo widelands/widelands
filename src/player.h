@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -73,27 +73,26 @@ class Player {
 		
 		// Player commands
 		void build_flag(Coords c);
-		void rip_flag(Coords c);
 		void build_road(const Path *path);
-		void remove_road(Road *road);
 		void build(Coords c, int idx);
+		void bulldoze(PlayerImmovable* imm);
 
    private:
       // set functions
       inline void set_field_seen(int i, bool t) { (*seen_fields)[i]=t; }
-      inline void set_field_seen(int x, int y, bool t) { 
-			(*seen_fields)[y*m_egbase->get_map()->get_width() + x]=t; 
+      inline void set_field_seen(int x, int y, bool t) {
+			(*seen_fields)[y*m_egbase->get_map()->get_width() + x]=t;
       }
-      
-      Editor_Game_Base*				m_egbase; 
+
+      Editor_Game_Base*				m_egbase;
 		int				m_type;
 		int				m_plnum;
       Tribe_Descr*	m_tribe; // buildings, wares, workers, sciences
 		RGBColor			m_playercolor[4];
-		
-      std::vector<bool>* seen_fields; 
-      
+
+      std::vector<bool>* seen_fields;
+
 		// regent data: name, pics so on
 };
 
-#endif 
+#endif

@@ -238,6 +238,27 @@ Flag *Building::get_base_flag()
 	return m_flag;
 }
 
+
+/*
+===============
+Building::get_playercaps
+
+Return a bitfield of commands the owning player can issue for this building.
+The bits are (1 << PCap_XXX).
+By default, all buildable buildings can be bulldozed.
+===============
+*/
+uint Building::get_playercaps()
+{
+	uint caps = 0;
+
+	if (get_descr()->get_buildable())
+		caps |= 1 << PCap_Bulldoze;
+
+	return caps;
+}
+
+
 /*
 ===============
 Building::start_animation
@@ -549,6 +570,24 @@ Override: construction size is always the same size as the building
 int ConstructionSite::get_size()
 {
 	return m_building->get_size();
+}
+
+
+/*
+===============
+ConstructionSite::get_playercaps
+
+Override: Even though construction sites cannot be built themselves, you can
+bulldoze them.
+===============
+*/
+uint ConstructionSite::get_playercaps()
+{
+	uint caps = Building::get_playercaps();
+
+	caps |= 1 << PCap_Bulldoze;
+
+	return caps;
 }
 
 

@@ -1,16 +1,16 @@
 /*
- * Copyright (C) 2002 by Widelands Development Team
- * 
+ * Copyright (C) 2002-2003 by Widelands Development Team
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -31,8 +31,17 @@ class.
 #include "game.h"
 #include "player.h"
 #include "worker.h"
+#include "fieldaction.h"
 
 #include "building_int.h"
+#include "ui_box.h"
+#include "waresdisplay.h"
+
+
+static const char* pic_ok = "pics/menu_okay.bmp";
+static const char* pic_cancel = "pics/menu_abort.bmp";
+
+static const char* pic_bulldoze = "pics/menu_bld_bulldoze.bmp";
 
 
 /*
@@ -75,22 +84,321 @@ void Building::hide_options()
 /*
 ==============================================================================
 
+class BulldozeConfirm
+
+==============================================================================
+*/
+
+/*
+class BulldozeConfirm
+---------------------
+Confirm the bulldoze request for a building.
+*/
+class BulldozeConfirm : public Window {
+public:
+	BulldozeConfirm(Interactive_Player* parent, Building* building, PlayerImmovable* todestroy = 0);
+	virtual ~BulldozeConfirm();
+
+	virtual void think();
+
+private:
+	void bulldoze();
+
+private:
+	Interactive_Player*	m_player;
+	Object_Ptr				m_building;
+	Object_Ptr				m_todestroy;
+};
+
+
+/*
+===============
+BulldozeConfirm::BulldozeConfirm
+
+Create the panels.
+If todestroy is 0, the building will be destroyed when the user confirms it.
+Otherwise, todestroy is destroyed when the user confirms it. This is useful to
+confirm building destruction when the building's base flag is removed.
+===============
+*/
+BulldozeConfirm::BulldozeConfirm(Interactive_Player* parent, Building* building, PlayerImmovable* todestroy)
+	: Window(parent, 0, 0, 160, 90, "Destroy building?")
+{
+	Button* btn;
+	std::string text;
+
+	m_player = parent;
+	m_building = building;
+
+	if (!todestroy)
+		m_todestroy = building;
+	else
+		m_todestroy = todestroy;
+
+	text = "Do you really want to destroy this ";
+	text += building->get_name();
+	text += "?";
+	new Textarea(this, 0, 0, 160, 44, text, Align_Center, true);
+
+	btn = new Button(this, 6, 50, 60, 34, 2);
+	btn->clicked.set(this, &BulldozeConfirm::bulldoze);
+	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_ok, RGBColor(0,0,255)));
+
+	btn = new Button(this, 94, 50, 60, 34, 2);
+	btn->clicked.set(this, &Panel::die);
+	btn->set_pic(g_gr->get_picture(PicMod_Game, pic_cancel, RGBColor(0,0,255)));
+
+	btn->center_mouse();
+}
+
+
+/*
+===============
+BulldozeConfirm::~BulldozeCOnfirm
+===============
+*/
+BulldozeConfirm::~BulldozeConfirm()
+{
+}
+
+
+/*
+===============
+BulldozeConfirm::think
+
+Make sure the building still exists and can in fact be bulldozed.
+===============
+*/
+void BulldozeConfirm::think()
+{
+	Game* g = m_player->get_game();
+	Building* building = (Building*)m_building.get(g);
+	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(g);
+
+	if (!todestroy || !building ||
+	    !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+		die();
+}
+
+
+/*
+===============
+BulldozeConfirm::bulldoze
+
+Issue the CMD_BULLDOZE command for this building.
+===============
+*/
+void BulldozeConfirm::bulldoze()
+{
+	Game* g = m_player->get_game();
+	Building* building = (Building*)m_building.get(g);
+	PlayerImmovable* todestroy = (PlayerImmovable*)m_todestroy.get(g);
+
+	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+		g->send_player_command(m_player->get_player_number(), CMD_BULLDOZE, todestroy->get_serial());
+
+	die();
+}
+
+
+/*
+===============
+show_bulldoze_confirm
+
+Create a BulldozeConfirm window.
+building is the building that the confirmation dialog displays.
+todestroy is the immovable that will be bulldozed if the user confirms the
+dialog.
+===============
+*/
+void show_bulldoze_confirm(Interactive_Player* player, Building* building, PlayerImmovable* todestroy)
+{
+	new BulldozeConfirm(player, building, todestroy);
+}
+
+
+/*
+==============================================================================
+
+class Building_Window
+
+==============================================================================
+*/
+
+/*
+class Building_Window
+---------------------
+Baseclass providing common tools for building windows.
+*/
+class Building_Window : public Window {
+public:
+	enum {
+		Width = 136		// 4*34, 4 normally sized buttons
+	};
+
+public:
+	Building_Window(Interactive_Player* parent, Building* building, Window** registry);
+	virtual ~Building_Window();
+
+	Interactive_Player* get_player() { return m_player; }
+	Building* get_building() { return m_building; }
+
+	virtual void think();
+
+	Panel* create_capsbuttons(Panel* parent);
+
+private:
+	void setup_capsbuttons();
+
+	void act_bulldoze();
+
+private:
+	Window**					m_registry;
+	Interactive_Player*	m_player;
+	Building*				m_building;
+
+	Panel*	m_capsbuttons;		// Panel that contains capabilities buttons
+	uint		m_capscache;		// capabilities that were last used in setting up the caps panel
+};
+
+
+/*
+===============
+Building_Window::Building_Window
+
+Create the window, add it to the registry.
+===============
+*/
+Building_Window::Building_Window(Interactive_Player* parent, Building* building, Window** registry)
+	: Window(parent, 0, 0, Width, 0, building->get_name())
+{
+	m_registry = registry;
+	if (*m_registry)
+		delete *m_registry;
+	*m_registry = this;
+
+	m_player = parent;
+	m_building = building;
+
+	m_capsbuttons = 0;
+	m_capscache = 0;
+
+	move_to_mouse();
+
+	set_think(true);
+}
+
+
+/*
+===============
+Building_Window::~Building_Window
+
+Add to registry
+===============
+*/
+Building_Window::~Building_Window()
+{
+	*m_registry = 0;
+}
+
+
+/*
+===============
+Building_Window::think
+
+Check the capabilities and setup the capsbutton panel in case they've changed.
+===============
+*/
+void Building_Window::think()
+{
+	if (m_capsbuttons) {
+		if (get_building()->get_playercaps() != m_capscache)
+			setup_capsbuttons();
+	}
+
+	Window::think();
+}
+
+
+/*
+===============
+Building_Window::create_capsbuttons
+
+Create the capsbuttons panel with the given parent window, set it up and return
+it.
+===============
+*/
+Panel* Building_Window::create_capsbuttons(Panel* parent)
+{
+	if (m_capsbuttons)
+		delete m_capsbuttons;
+
+	m_capsbuttons = new Panel(parent, 0, 0, Width, 34);
+	setup_capsbuttons();
+
+	return m_capsbuttons;
+}
+
+
+/*
+===============
+Building_Window::setup_capsbuttons
+
+Clear the capsbuttons panel and re-setup.
+===============
+*/
+void Building_Window::setup_capsbuttons()
+{
+	int x;
+
+	assert(m_capsbuttons);
+
+	m_capsbuttons->free_children();
+	m_capscache = get_building()->get_playercaps();
+
+	x = 0;
+
+	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
+		Button* btn = new Button(m_capsbuttons, x, 0, 34, 34, 2);
+		btn->clicked.set(this, &Building_Window::act_bulldoze);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_bulldoze, RGBColor(0,0,255)));
+		x += 34;
+	}
+}
+
+
+/*
+===============
+Building_Window::act_bulldoze
+
+Callback for bulldozing request
+===============
+*/
+void Building_Window::act_bulldoze()
+{
+	new BulldozeConfirm(m_player, m_building);
+}
+
+
+
+/*
+==============================================================================
+
 ConstructionSite UI IMPLEMENTATION
 
 ==============================================================================
 */
 
-class ConstructionSite_Window : public Window {
+class ConstructionSite_Window : public Building_Window {
 public:
 	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, Window** registry);
 	virtual ~ConstructionSite_Window();
 
+	ConstructionSite* get_constructionsize() { return (ConstructionSite*)get_building(); }
+
 	virtual void think();
 
 private:
-	Window**					m_registry;		// pointer to this window, cleared in destructor
-	Interactive_Player*	m_player;		// player the construction site belongs to
-	ConstructionSite*		m_constructionsite;	// production site this window has been opened for
 };
 
 
@@ -98,36 +406,31 @@ private:
 ===============
 ConstructionSite_Window::ConstructionSite_Window
 
-Create the window and its panels, add it to the registry.
+Create the window and its panels
 ===============
 */
-ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, 
+ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs,
                                                  Window** registry)
-	: Window(parent, 0, 0, 136, 260, cs->get_name())
+	: Building_Window(parent, cs, registry)
 {
-	m_registry = registry;
-	if (*m_registry)
-		delete *m_registry;
-	*m_registry = this;
-	
-	m_player = parent;
-	m_constructionsite = cs;
-	
-	move_to_mouse();
-	
-	set_think(true);
+	Box* box = new Box(this, 0, 0, Box::Vertical);
+
+	// Add the caps buttons
+	box->add(create_capsbuttons(box), Box::AlignCenter);
+
+	fit_inner(box);
 }
+
 
 /*
 ===============
 ConstructionSite_Window::~ConstructionSite_Window
 
-Deinitialize, remove from registry
+Deinitialize
 ===============
 */
 ConstructionSite_Window::~ConstructionSite_Window()
 {
-	*m_registry = 0;
 }
 
 
@@ -164,19 +467,17 @@ Warehouse UI IMPLEMENTATION
 ==============================================================================
 */
 
-class Warehouse_Window : public Window {
+class Warehouse_Window : public Building_Window {
 public:
 	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, Window **registry);
 	virtual ~Warehouse_Window();
 
-	virtual void draw(RenderTarget* dst);
+	Warehouse* get_warehouse() { return (Warehouse*)get_building(); }
+
 	virtual void think();
 
 private:
-	Window					**m_registry;
-	Interactive_Player	*m_player;
-	Warehouse				*m_warehouse;
-	WareList					m_warecache;
+	WaresDisplay*			m_waresdisplay;
 };
 
 /*
@@ -187,20 +488,20 @@ Open the window, create the window buttons and add to the registry.
 ===============
 */
 Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, Window **registry)
-	: Window(parent, 0, 0, 136, 260, wh->get_name())
+	: Building_Window(parent, wh, registry)
 {
-	m_registry = registry;
-	if (*m_registry)
-		delete *m_registry;
-	*m_registry = this;
-	
-	m_player = parent;
-	m_warehouse = wh;
-	
-	move_to_mouse();
-	
-	set_think(true);
+	Box* box = new Box(this, 0, 0, Box::Vertical);
+
+	// Add wares display
+	m_waresdisplay = new WaresDisplay(box, 0, 0, parent->get_game(), parent->get_player());
+	box->add(m_waresdisplay, Box::AlignCenter);
+
+	// Add caps buttons
+	box->add(create_capsbuttons(box), Box::AlignCenter);
+
+	fit_inner(box);
 }
+
 
 /*
 ===============
@@ -211,76 +512,21 @@ Deinitialize, remove from registry
 */
 Warehouse_Window::~Warehouse_Window()
 {
-	*m_registry = 0;
-
-	m_warecache.clear();
 }
 
-/*
-===============
-Warehouse_Window::draw
-
-Draw the wares
-===============
-*/
-void Warehouse_Window::draw(RenderTarget* dst)
-{
-	Editor_Game_Base* game = m_player->get_game();
-	Tribe_Descr *tribe = m_player->get_player()->get_tribe();
-	int x, y;
-	
-	x = 2;
-	y = 2;
-	
-	for(int id = 0; id < game->get_nrwares(); id++)	{
-		Ware_Descr *wd = game->get_ware_description(id);
-		uint pic;
-		
-		// Figure out the picture
-		if (wd->is_worker()) {
-			Worker_Descr *worker = ((Worker_Ware_Descr*)wd)->get_worker(tribe);
-			pic = worker->get_menu_pic();
-		} else
-			pic = ((Item_Ware_Descr*)wd)->get_menu_pic();
-		
-		dst->blit(x, y, pic);
-		dst->fill_rect(x, y+WARE_MENU_PIC_H, WARE_MENU_PIC_W, 8, RGBColor(0, 0, 0));
-		
-		char buf[32];
-		snprintf(buf, sizeof(buf), "%i", m_warehouse->get_wares().stock(id));
-		
-		g_font->draw_string(dst, x+WARE_MENU_PIC_W, y+WARE_MENU_PIC_H,
-		                    buf, Align_Right);
-		
-		if (id % 4 < 3)
-			x += WARE_MENU_PIC_W + 3;
-		else {
-			x = 2;
-			y += WARE_MENU_PIC_H+8 + 3;
-		}
-	}
-	
-	m_warecache = m_warehouse->get_wares();
-}
 
 /*
 ===============
 Warehouse_Window::think
 
-Check whether we need to redraw.
-I use this instead of a push-model (Warehouse code calling  update() when 
-necessary) because
-a) it's less intrusive on the actual game logic code
-b) the UI may know better whether we _really_ need to redraw (e.g. it may 
-   not be necessary to redraw if the window currently shows a different "page",
-	such as soldiers in the HQ).
+Push the current wares status to the WaresDisplay.
 ===============
 */
 void Warehouse_Window::think()
 {
-	if (m_warecache != m_warehouse->get_wares())
-		update_inner(0, 0, get_inner_w(), get_inner_h());
+	m_waresdisplay->set_wares(get_warehouse()->get_wares());
 }
+
 
 /*
 ===============
@@ -331,12 +577,12 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 	if (*m_registry)
 		delete *m_registry;
 	*m_registry = this;
-	
+
 	m_player = parent;
 	m_productionsite = ps;
-	
+
 	move_to_mouse();
-	
+
 	set_think(true);
 }
 

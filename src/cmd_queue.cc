@@ -138,13 +138,6 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		break;
 	}
 
-	case CMD_RIP_FLAG:
-	{
-		Player *plr = m_game->get_player(c->sender);
-		plr->rip_flag(Coords(c->arg1, c->arg2));
-		break;
-	}
-
 	case CMD_BUILD_ROAD:
 	{
 		Player *plr = m_game->get_player(c->sender);
@@ -152,20 +145,20 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		break;
 	}
 
-	case CMD_REMOVE_ROAD:
-	{
-		assert(c->arg1);
-		Player *plr = m_game->get_player(c->sender);
-		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
-		if (obj && obj->get_type() == Map_Object::ROAD)
-			plr->remove_road((Road*)obj);
-		break;
-	}
-
 	case CMD_BUILD:
 	{
 		Player* plr = m_game->get_player(c->sender);
 		plr->build(Coords(c->arg1, c->arg2), c->arg3);
+		break;
+	}
+
+	case CMD_BULLDOZE:
+	{
+		assert(c->arg1);
+		Player* plr = m_game->get_player(c->sender);
+		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
+		if (obj && obj->get_type() >= Map_Object::BUILDING)
+			plr->bulldoze((PlayerImmovable*)obj);
 		break;
 	}
 

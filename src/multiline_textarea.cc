@@ -50,11 +50,12 @@ Args: parent	parent panel
       h
       text	text for the textarea (can be 0)
       align	text alignment
+		scrollbar	wether we create a vertical scrollbar
 ===============
 */
 Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h,
                                        const char *text, Align align)
-	: Panel(parent, x, y, w-24, h)
+	: Panel(parent, x, y, w - 24, h)
 {
 	set_handle_mouse(false);
 	set_think(false);

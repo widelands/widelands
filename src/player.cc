@@ -88,22 +88,22 @@ int Player::get_buildcaps(Coords coords)
 {
 	FCoords fc = m_egbase->get_map()->get_fcoords(coords);
 	int buildcaps = fc.field->get_caps();
-	
+
 	if (fc.field->get_owned_by() != get_player_number())
 		return 0;
-	
+
 	// If any neighbour belongs to somebody else, we can't build here
 	FCoords neighb[6];
-	
+
 	for(int dir = 1; dir <= 6; dir++) {
 		m_egbase->get_map()->get_neighbour(fc, dir, &neighb[dir-1]);
-		
+
 		if (neighb[dir-1].field->get_owned_by() != get_player_number())
 			return 0;
 	}
-	
+
 	// TODO: check if a building's flag can't be build due to ownership
-	
+
 	return buildcaps;
 }
 
@@ -117,11 +117,12 @@ Mark the given area as (un)seen
 void Player::set_area_seen(int x, int y, uint area, bool on)
 {
 	Map_Region_Coords r(Coords(x, y), area, m_egbase->get_map());
-  
+
 	while(r.next(&x, &y)) {
       set_field_seen(x, y, on);
    }
 }
+
 
 /*
 ===============
@@ -133,28 +134,11 @@ Build a flag, checking that it's legal to do so.
 void Player::build_flag(Coords c)
 {
 	int buildcaps = get_buildcaps(c);
-	
+
 	if (buildcaps & BUILDCAPS_FLAG)
 		Flag::create(m_egbase, this, c);
 }
 
-/*
-===============
-Player::rip_flag
-
-Rip out the flag at the given coordinates, if there is one that is owned
-by the player.
-===============
-*/
-void Player::rip_flag(Coords c)
-{
-	BaseImmovable *imm = m_egbase->get_map()->get_immovable(c);
-
-	if (imm && imm->get_type() == Map_Object::FLAG) {
-		if (((Flag *)imm)->get_owner() == this)
-			imm->destroy(m_egbase);
-	}
-}
 
 /*
 ===============
@@ -210,21 +194,6 @@ void Player::build_road(const Path *path)
 	Road::create(m_egbase, Road_Normal, start, end, *path);
 }
 
-/*
-===============
-Player::remove_road
-
-Remove that road, if it belongs to the player.
-===============
-*/
-void Player::remove_road(Road *road)
-{
-	if (road->get_flag(Road::FlagStart)->get_owner() != this)
-		return;
-	
-	road->destroy(m_egbase);
-}
-
 
 /*
 ===============
@@ -237,20 +206,20 @@ void Player::build(Coords c, int idx)
 {
 	int buildcaps;
 	Building_Descr* descr;
-	
+
 	// Validate building type
 	if (idx < 0 || idx >= get_tribe()->get_nrbuildings())
 		return;
 	descr = get_tribe()->get_building_descr(idx);
-	
+
 	if (!descr->get_buildable())
 		return;
-	
-	
+
+
 	// Validate build position
 	get_game()->get_map()->normalize_coords(&c);
 	buildcaps = get_buildcaps(c);
-	
+
 	if (descr->get_ismine())
 		{
 		if (!(buildcaps & BUILDCAPS_MINE))
@@ -261,7 +230,51 @@ void Player::build(Coords c, int idx)
 		if ((buildcaps & BUILDCAPS_SIZEMASK) < (descr->get_size() - BaseImmovable::SMALL + 1))
 			return;
 		}
-	
+
 	get_game()->warp_constructionsite(c.x, c.y, m_plnum, idx);
+}
+
+
+/*
+===============
+Player::bulldoze
+
+Bulldoze the given road, flag or building.
+===============
+*/
+void Player::bulldoze(PlayerImmovable* imm)
+{
+	Building* building;
+
+	// General security check
+	if (imm->get_owner() != this)
+		return;
+
+	// Extended security check
+	switch(imm->get_type()) {
+	case Map_Object::BUILDING:
+		building = (Building*)imm;
+		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+			return;
+		break;
+
+	case Map_Object::FLAG:
+		building = ((Flag*)imm)->get_building();
+		if (building && !(building->get_playercaps() & (1 << Building::PCap_Bulldoze))) {
+			log("Player trying to rip flag (%u) with undestroyable building (%u)\n", imm->get_serial(),
+					building->get_serial());
+			return;
+		}
+		break;
+
+	case Map_Object::ROAD:
+		break; // no additional check
+
+	default:
+		throw wexception("Player::bulldoze(%u): bad immovable type %u", imm->get_serial(), imm->get_type());
+	}
+
+	// Now destroy it
+	imm->destroy(get_game());
 }
 

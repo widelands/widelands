@@ -20,9 +20,15 @@
 #ifndef FIELDACTION_H
 #define FIELDACTION_H
 
+class Building;
+class PlayerImmovable;
 class Interactive_Player;
 struct UniqueWindow;
 
+// fieldaction.cc
 void show_field_action(Interactive_Player *parent, UniqueWindow *registry);
+
+// building_ui.cc
+void show_bulldoze_confirm(Interactive_Player* player, Building* building, PlayerImmovable* todestroy);
 
 #endif /* FIELDACTION_H */
