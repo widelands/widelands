@@ -33,7 +33,7 @@ EOF
 
 echo
 echo Editing the makefile
-$EDITOR src/Makefile
+$EDITOR widelands/Makefile
 
 echo 
 echo Compiling the source now
