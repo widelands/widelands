@@ -629,13 +629,60 @@ void Bob::task_end(Game*)
 	}
 }
 
+
+/*
+===============
+Bob::calc_drawpos
+
+Calculates the actual position to draw on from the base field position.
+This function takes walking etc. into account.
+===============
+*/
+void Bob::calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos)
+{
+	Map *map = game->get_map();
+	FCoords end;
+	FCoords start;
+	Point spos;
+	Point epos;
+
+	end = m_position;
+	epos = pos;
+	spos = epos;
+
+	switch(m_walking) {
+	case WALK_NW: map->get_brn(end, &start); spos.x += FIELD_WIDTH/2; spos.y += FIELD_HEIGHT/2; break;
+	case WALK_NE: map->get_bln(end, &start); spos.x -= FIELD_WIDTH/2; spos.y += FIELD_HEIGHT/2; break;
+	case WALK_W: map->get_rn(end, &start); spos.x += FIELD_WIDTH; break;
+	case WALK_E: map->get_ln(end, &start); spos.x -= FIELD_WIDTH; break;
+	case WALK_SW: map->get_trn(end, &start); spos.x += FIELD_WIDTH/2; spos.y -= FIELD_HEIGHT/2; break;
+	case WALK_SE: map->get_tln(end, &start); spos.x -= FIELD_WIDTH/2; spos.y -= FIELD_HEIGHT/2; break;
+
+	case IDLE: start.field = 0; break;
+	}
+
+	if (start.field) {
+		spos.y += MULTIPLY_WITH_HEIGHT_FACTOR(end.field->get_height());
+		spos.y -= MULTIPLY_WITH_HEIGHT_FACTOR(start.field->get_height());
+
+		float f = (float)(game->get_gametime() - m_walkstart) / (m_walkend - m_walkstart);
+		if (f < 0) f = 0;
+		else if (f > 1) f = 1;
+
+		epos.x = (int)(f*epos.x + (1-f)*spos.x);
+		epos.y = (int)(f*epos.y + (1-f)*spos.y);
+	}
+
+	*drawpos = epos;
+}
+
+
 /*
 ===============
 Bob::draw
 
 Draw the map object.
-posx/posy is the on-bitmap position of the field we're currently on,
-WITHOUT height taken into account.
+posx/posy is the on-bitmap position of the field we're currently on.
 
 It LERPs between start and end position when we're walking.
 Note that the current field is actually the field we're walking to, not
@@ -647,47 +694,15 @@ void Bob::draw(Editor_Game_Base *game, RenderTarget* dst, Point pos)
 	if (!m_anim)
 		return;
 
-	Map *map = game->get_map();
-	FCoords end;
-	FCoords start;
-	int sx, sy;
-	int ex, ey;
 	const RGBColor* playercolors = 0;
+	Point drawpos;
+
+	calc_drawpos(game, pos, &drawpos);
 
 	if (get_owner())
 		playercolors = get_owner()->get_playercolor();
 
-	end = m_position;
-	ex = pos.x;
-	ey = pos.y;
-
-	sx = ex;
-	sy = ey;
-
-	switch(m_walking) {
-	case WALK_NW: map->get_brn(end, &start); sx += FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
-	case WALK_NE: map->get_bln(end, &start); sx -= FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
-	case WALK_W: map->get_rn(end, &start); sx += FIELD_WIDTH; break;
-	case WALK_E: map->get_ln(end, &start); sx -= FIELD_WIDTH; break;
-	case WALK_SW: map->get_trn(end, &start); sx += FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
-	case WALK_SE: map->get_tln(end, &start); sx -= FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
-
-	case IDLE: start.field = 0; break;
-	}
-
-	if (start.field) {
-		sy += MULTIPLY_WITH_HEIGHT_FACTOR(end.field->get_height());
-		sy -= MULTIPLY_WITH_HEIGHT_FACTOR(start.field->get_height());
-
-		float f = (float)(game->get_gametime() - m_walkstart) / (m_walkend - m_walkstart);
-		if (f < 0) f = 0;
-		else if (f > 1) f = 1;
-
-		ex = (int)(f*ex + (1-f)*sx);
-		ey = (int)(f*ey + (1-f)*sy);
-	}
-
-	dst->drawanim(ex, ey, m_anim, game->get_gametime() - m_animstart, playercolors);
+	dst->drawanim(drawpos.x, drawpos.y, m_anim, game->get_gametime() - m_animstart, playercolors);
 }
 
 

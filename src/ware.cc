@@ -5,7 +5,7 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -19,9 +19,11 @@
 
 #include "widelands.h"
 #include "profile.h"
+#include "game.h"
 #include "tribe.h"
 #include "ware.h"
 #include "worker.h"
+#include "transport.h"
 
 
 /*
@@ -289,7 +291,7 @@ void WareList::clear()
 {
 	m_wares.clear();
 }
-	
+
 /*
 ===============
 WareList::add
@@ -303,7 +305,7 @@ void WareList::add(int id, int count)
 		return;
 
 	assert(id >= 0);
-	
+
 	if (id >= (int)m_wares.size())
 		m_wares.resize(id+1, 0);
 	m_wares[id] += count;
@@ -314,7 +316,7 @@ void WareList::add(const WareList &wl)
 {
 	if (wl.m_wares.size() > m_wares.size())
 		m_wares.reserve(wl.m_wares.size());
-		
+
 	for(uint id = 0; id < wl.m_wares.size(); id++)
 		if (wl.m_wares[id])
 			add(id, wl.m_wares[id]);
@@ -397,4 +399,173 @@ bool operator==(const WareList &wl1, const WareList &wl2)
 bool operator!=(const WareList &wl1, const WareList &wl2)
 {
 	return !(wl1 == wl2);
+}
+
+
+/*
+==============================================================================
+
+WareInstance IMPLEMENTATION
+
+==============================================================================
+*/
+
+
+/*
+===============
+WareInstance::WareInstance
+===============
+*/
+WareInstance::WareInstance(int ware)
+{
+	m_ware = ware;
+	m_ware_descr = 0;
+
+	m_state = State_None;
+	m_route = 0;
+
+	m_request = 0;
+}
+
+
+/*
+===============
+WareInstance::~WareInstance
+===============
+*/
+WareInstance::~WareInstance()
+{
+}
+
+
+/*
+===============
+WareInstance::init
+===============
+*/
+void WareInstance::init(Game* g)
+{
+	Ware_Descr* descr = g->get_ware_description(m_ware);
+
+	assert(!descr->is_worker());
+
+	m_ware_descr = (Item_Ware_Descr*)descr;
+
+	get_location(g)->get_economy()->add_wares(m_ware, 1);
+}
+
+
+/*
+===============
+WareInstance::cleanup
+===============
+*/
+void WareInstance::cleanup(Game* g)
+{
+	PlayerImmovable* loc = get_location(g);
+
+	if (loc) {
+		assert(loc->get_economy());
+
+		loc->get_economy()->remove_wares(m_ware, 1);
+	}
+
+	switch(m_state) {
+	case State_Request:
+		assert(m_request);
+
+		log("WareInstance: cleanup fails request\n");
+
+		m_request->transfer_fail(g);
+		end_state_request(g);
+		break;
+
+	default:
+		break;
+	}
+}
+
+
+/*
+===============
+WareInstance::remove_from_economy
+WareInstance::add_to_economy
+
+Ware accounting
+===============
+*/
+void WareInstance::remove_from_economy(Economy* e)
+{
+	e->remove_wares(m_ware, 1);
+}
+
+void WareInstance::add_to_economy(Economy* e)
+{
+	e->add_wares(m_ware, 1);
+}
+
+
+/*
+===============
+WareInstance::set_location
+
+Change the current location.
+A change of location must never result in a change of economy!
+===============
+*/
+void WareInstance::set_location(PlayerImmovable* loc)
+{
+	m_location = loc;
+}
+
+
+/*
+===============
+WareInstance::set_state_request
+
+Set ware state so that it fulfills the given request.
+===============
+*/
+void WareInstance::set_state_request(Game* g, Request* rq, const Route* route)
+{
+	assert(m_state == State_None);
+
+	m_state = State_Request;
+
+	m_request = rq;
+	m_route = new Route(*route);
+}
+
+
+/*
+===============
+WareInstance::end_state_request
+===============
+*/
+void WareInstance::end_state_request(Game* g)
+{
+	assert(m_state == State_Request);
+
+	m_state = State_None;
+
+	m_request = 0;
+	if (m_route) {
+		delete m_route;
+		m_route = 0;
+	}
+}
+
+
+/*
+===============
+WareInstance::set_state_idle
+
+Set ware state so that it idles on a flag and eventually returns home.
+===============
+*/
+void WareInstance::set_state_idle(Game* g)
+{
+	assert(m_state == State_None);
+
+	m_state = State_Idle;
 }

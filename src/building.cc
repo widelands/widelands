@@ -458,6 +458,33 @@ void ConstructionSite::set_building(Building_Descr* descr)
 
 /*
 ===============
+ConstructionSite::set_economy
+
+Change the economy for the wares queues.
+Note that the workers are dealt with in the PlayerImmovable code.
+===============
+*/
+void ConstructionSite::set_economy(Economy* e)
+{
+	Economy* old = get_economy();
+	uint i;
+
+	if (old) {
+		for(i = 0; i < m_wares.size(); i++)
+			m_wares[i]->remove_from_economy(old);
+	}
+
+	Building::set_economy(e);
+
+	if (e) {
+		for(i = 0; i < m_wares.size(); i++)
+			m_wares[i]->add_to_economy(e);
+	}
+}
+
+
+/*
+===============
 ConstructionSite::init
 
 Initialize the construction site by starting orders
@@ -467,10 +494,23 @@ void ConstructionSite::init(Editor_Game_Base* g)
 {
 	Building::init(g);
 
-	if (get_logic()) {
+	if (g->is_game()) {
+		uint i;
+
 		// TODO: figure out whether planing is necessary
 
-		// TODO: order construction material
+		// Initialize the wares queues
+		const Building_Descr::BuildCost* bc = m_building->get_buildcost();
+
+		m_wares.resize(bc->size());
+
+		for(i = 0; i < bc->size(); i++) {
+			WaresQueue* wq = new WaresQueue(this);
+
+			m_wares[i] = wq;
+
+			wq->init((Game*)g, g->get_safe_ware_id((*bc)[i].name.c_str()), (*bc)[i].amount);
+		}
 
 		request_builder((Game*)g);
 	}
@@ -497,7 +537,12 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	if (m_builder)
 		m_builder->stop_job_idleloop((Game*)g);
 
-	// TODO: release wares
+
+	// Cleanup the wares queues
+	for(uint i = 0; i < m_wares.size(); i++) {
+		m_wares[i]->cleanup((Game*)g);
+		delete m_wares[i];
+	}
 
 	Building::cleanup(g);
 
@@ -791,6 +836,7 @@ Worker *Warehouse::launch_worker(Game *g, int ware)
 	return worker;
 }
 
+
 /*
 ===============
 Warehouse::incorporate_worker
@@ -802,6 +848,7 @@ appropriate ware to our warelist
 void Warehouse::incorporate_worker(Game *g, Worker *w)
 {
 	int ware = w->get_ware_id();
+	WareInstance* item = w->fetch_carried_item(); // rescue an item
 
 	w->remove(g);
 
@@ -809,7 +856,75 @@ void Warehouse::incorporate_worker(Game *g, Worker *w)
 	get_economy()->add_wares(ware, 1);
 
 	get_economy()->match_requests(this, ware);
+
+	if (item)
+		incorporate_item(g, item);
 }
+
+
+/*
+===============
+Warehouse::launch_item
+
+Create an instance of a ware, and make sure it gets carried out of the warehouse.
+===============
+*/
+WareInstance* Warehouse::launch_item(Game* g, int ware)
+{
+	WareInstance* item;
+	int carrierid;
+	Ware_Descr* waredescr;
+	Worker_Descr* workerdescr;
+	Worker* worker;
+
+	item = new WareInstance(ware);
+	item->set_location(this);
+	item->init(g);
+
+	m_wares.remove(ware, 1);
+	get_economy()->remove_wares(ware, 1); // re-added by the item itself
+
+	// Create a carrier
+	carrierid = g->get_ware_id("carrier");
+	waredescr = g->get_ware_description(carrierid);
+	workerdescr = ((Worker_Ware_Descr*)waredescr)->get_worker(get_owner()->get_tribe());
+
+	worker = workerdescr->create(g, get_owner(), this, m_position, g->is_game());
+
+	// Yup, this is cheating.
+	if (m_wares.stock(carrierid)) {
+		m_wares.remove(carrierid, 1);
+		get_economy()->remove_wares(carrierid, 1);
+	}
+
+	// Setup the carrier
+	worker->set_job_dropoff(g, item);
+
+	return item;
+}
+
+
+/*
+===============
+Warehouse::incorporate_item
+
+Swallow the item, adding it to out inventory.
+===============
+*/
+void Warehouse::incorporate_item(Game* g, WareInstance* item)
+{
+	int ware = item->get_ware();
+
+	item->cleanup(g);
+	delete item;
+	item = 0;
+
+	m_wares.add(ware, 1);
+	get_economy()->add_wares(ware, 1);
+
+	get_economy()->match_requests(this, ware);
+}
+
 
 /*
 ===============

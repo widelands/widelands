@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -78,6 +78,10 @@ public:
 	void get_neighbours(Neighbour_list *neighbours);
 	Road *get_road(Flag *flag);
 
+	bool has_capacity();
+	void wait_for_capacity(Game* g, Bob* bob);
+	void add_item(Game* g, WareInstance* item);
+
 protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
@@ -85,19 +89,23 @@ protected:
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
 private:
-	Coords		m_position;
-	uint			m_anim;
-	int			m_animstart;
+	Coords			m_position;
+	uint				m_anim;
+	int				m_animstart;
 
-	Building		*m_building;	// attached building (replaces road WALK_NW)
-	Road			*m_roads[6];	// Map_Object::WALK_xx-1 as index
+	Building			*m_building;	// attached building (replaces road WALK_NW)
+	Road				*m_roads[6];	// Map_Object::WALK_xx-1 as index
+
+	int				m_item_capacity;	// size of m_items array
+	int				m_item_filled;		// number of items currently on the flag
+	WareInstance**	m_items;				// items currently on the flag
 
 	// The following are only used during pathfinding
-	uint			mpf_cycle;
-	int			mpf_heapindex;
-	int			mpf_realcost;	// real cost of getting to this flag
-	Flag*			mpf_backlink;	// flag where we came from
-	int			mpf_estimate;	// estimate of cost to destination
+	uint				mpf_cycle;
+	int				mpf_heapindex;
+	int				mpf_realcost;	// real cost of getting to this flag
+	Flag*				mpf_backlink;	// flag where we came from
+	int				mpf_estimate;	// estimate of cost to destination
 
 	inline int cost() const { return mpf_realcost+mpf_estimate; }
 };
@@ -192,6 +200,7 @@ private:
 	std::vector<Object_Ptr>		m_route;	// includes start and end flags
 };
 
+
 /*
 A Request is issued whenever some object (road or building) needs a ware.
 
@@ -226,7 +235,6 @@ public:
 	Worker* get_worker();
 
 	void start_transfer(Game *g, Warehouse *wh, Route *route);
-	void start_transfer(Game *g, Worker *worker, Route *route);
 
 	void check_transfer(Game *g);
 	void cancel_transfer(Game *g);
@@ -242,7 +250,9 @@ private:
 	void*			m_callbackdata;
 
 	int			m_state;
-	Worker*		m_worker;		// non-null if ware is a worker
+
+	WareInstance*	m_item;			// non-null if ware is an item and transferring
+	Worker*			m_worker;		// non-null if ware is a worker and transferring
 };
 
 
@@ -263,6 +273,42 @@ public:
 
 private:
 	std::vector<Request*>	m_requests;
+};
+
+
+/*
+WaresQueue
+----------
+This micro storage room can hold any number of items of a fixed ware.
+*/
+class WaresQueue {
+public:
+	WaresQueue(PlayerImmovable* bld);
+	~WaresQueue();
+
+	int get_ware() const { return m_ware; }
+	int get_size() const { return m_size; }
+	int get_filled() const { return m_filled; }
+
+	void init(Game*, int ware, int size);
+	void cleanup(Game*);
+	void update(Game*);
+
+	void remove_from_economy(Economy* e);
+	void add_to_economy(Economy* e);
+
+	void set_size(int size);
+	void set_filled(int size);
+
+private:
+	static void request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
+
+private:
+	PlayerImmovable*	m_owner;
+	int					m_ware;		// ware ID
+	int					m_size;		// # of items that fit into the queue
+	int					m_filled;	// # of items that are currently in the queue
+	Request*				m_request;	// currently pending request
 };
 
 

@@ -28,6 +28,7 @@ class Route;
 class Road;
 class PlayerImmovable;
 class Pic;
+class WareInstance;
 class Tribe_Descr;
 
 /*
@@ -91,6 +92,7 @@ public:
 		State_Request,			// fulfilling a ware request
 		State_Fugitive,		// lost our location, trying to get back to warehouse
 		State_GoWarehouse,	// return to warehouse
+		State_DropOff,			// drop an item outside a building and go back inside
 
 		State_Worker_Last		// must be last
 	};
@@ -110,6 +112,10 @@ public:
 	void set_location(PlayerImmovable *location);
 	void set_economy(Economy *economy);
 
+	WareInstance* get_carried_item() const { return m_carried_item; }
+	void set_carried_item(Game* g, WareInstance* item);
+	WareInstance* fetch_carried_item();
+
 	void set_job_request(Request *req, const Route *route);
 	void change_job_request(bool cancel);
 
@@ -117,6 +123,8 @@ public:
 
 	void set_job_idleloop(Game*, uint anim);
 	void stop_job_idleloop(Game*);
+
+	void set_job_dropoff(Game*, WareInstance* item);
 
 	void schedule_incorporate(Game *g);
 	void incorporate(Game *g);
@@ -136,23 +144,26 @@ protected:
 	void run_state_request(Game *g, uint prev, bool success, uint nexthint);
 	void run_state_fugitive(Game *g, uint prev, bool success, uint nexthint);
 	void run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthint);
+	void run_state_dropoff(Game* g, uint prev, bool success, uint nexthint);
 
 	int run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgoal);
 
+	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
+
 private:
-	Object_Ptr	m_location;			// meta location of the worker, a PlayerImmovable
-	Economy*		m_economy;			// Economy this worker is registered in
-	int			m_state;				// one of State_XXX
-	int			m_carried_ware;	// Ware ID (-1 if none carried)
-	Route			*m_route;			// used by Request, GoWarehouse
+	Object_Ptr		m_location;			// meta location of the worker, a PlayerImmovable
+	Economy*			m_economy;			// Economy this worker is registered in
+	int				m_state;				// one of State_XXX
+	WareInstance*	m_carried_item;	// Item we are carrying
+	Route				*m_route;			// used by Request, GoWarehouse
 
-	Request		*m_request;			// the request we're supposed to fulfill
+	Request			*m_request;			// the request we're supposed to fulfill
 
-	int			m_fugitive_death;	// when are we going to die?
+	int				m_fugitive_death;	// when are we going to die?
 
-	Object_Ptr	m_gowarehouse;		// the warehouse we're trying to reach
+	Object_Ptr		m_gowarehouse;		// the warehouse we're trying to reach
 
-	uint			m_job_anim;			// animation to be used in idleloop
+	uint				m_job_anim;			// animation to be used in idleloop
 };
 
 

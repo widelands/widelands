@@ -102,7 +102,7 @@ public:
 
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }
-	
+
 	void show_options(Interactive_Player *plr);
 	void hide_options();
 
@@ -161,17 +161,20 @@ public:
 	virtual void cleanup(Editor_Game_Base *g);
 
 	virtual void act(Game *g, uint data);
-	
+
 	virtual void set_economy(Economy *e);
 
 	inline const WareList &get_wares() const { return m_wares; }
 	void create_wares(int id, int count);
 	void destroy_wares(int id, int count);
 
-	Worker *launch_worker(Game *g, int ware);
+	Worker* launch_worker(Game* g, int ware);
 	void incorporate_worker(Game *g, Worker *w);
-	
-protected:	
+
+	WareInstance* launch_item(Game* g, int ware);
+	void incorporate_item(Game* g, WareInstance* item);
+
+protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 	
 private:

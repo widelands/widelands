@@ -65,16 +65,19 @@ public:
 
 		// Move one field without passability checks. Use start_task_forcemove()
 		TASK_FORCEMOVE = 3,
-		
+
 		// descendants of Map_Objects must use task IDs greater than this
 		TASK_FIRST_USER = 10,
 	};
-		
+
 protected:
 	Bob(Bob_Descr *descr, bool);
 	virtual ~Bob(void);
 
 public:
+	uint get_current_anim() const { return m_anim; }
+	int get_animstart() const { return m_animstart; }
+
 	virtual int get_type();
 	virtual uint get_movecaps() { return 0; }
 
@@ -82,6 +85,7 @@ public:
 	virtual void cleanup(Editor_Game_Base*);
 	virtual void act(Game*, uint data);
 
+	void calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos);
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
 
 	inline void set_owner(Player *player) { m_owner = player; }

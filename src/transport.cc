@@ -66,6 +66,10 @@ Flag::Flag(bool logic)
 	m_building = 0;
 	for(int i = 0; i < 6; i++)
 		m_roads[i] = 0;
+
+	m_item_capacity = 8;
+	m_item_filled = 0;
+	m_items = new WareInstance*[m_item_capacity];
 }
 
 
@@ -79,9 +83,13 @@ cleanup() first.
 */
 Flag::~Flag()
 {
+	if (m_item_filled)
+		log("Flag: ouch! items left\n");
+	delete[] m_items;
+
 	if (m_building)
 		log("Flag: ouch! building left\n");
-	
+
 	for(int i = 0; i < 6; i++)
 		if (m_roads[i])
 			log("Flag: ouch! road left\n");
@@ -102,7 +110,7 @@ Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic
 	Flag *flag = new Flag(g->is_game());
 	flag->set_owner(owner);
 	flag->m_position = coords;
-	
+
 	if (imm && imm->get_type() == Map_Object::ROAD)
 	{
 		// we split a road
@@ -135,7 +143,7 @@ int Flag::get_type()
 {
 	return FLAG;
 }
-	
+
 int Flag::get_size()
 {
 	return SMALL;
@@ -166,20 +174,22 @@ void Flag::set_economy(Economy *e)
 		return;
 
 	if (old) {
-		// TODO: remove flag's wares from economy
+		for(int i = 0; i < m_item_filled; i++)
+			m_items[i]->remove_from_economy(old);
 	}
 
 	PlayerImmovable::set_economy(e);
-	
+
 	if (m_building)
 		m_building->set_economy(e);
 	for(int i = 0; i < 6; i++) {
 		if (m_roads[i])
 			m_roads[i]->set_economy(e);
 	}
-	
+
 	if (e) {
-		// TODO: add flag's wares to economy
+		for(int i = 0; i < m_item_filled; i++)
+			m_items[i]->add_to_economy(e);
 	}
 }
 
@@ -198,10 +208,10 @@ void Flag::attach_building(Editor_Game_Base *g, Building *building)
 
 	Map *map = g->get_map();
 	Coords tln;
-	
+
 	map->get_tln(m_position, &tln);
 	map->get_field(tln)->set_road(Road_SouthEast, Road_Normal);
-	
+
 	m_building->set_economy(get_economy());
 }
 
@@ -218,20 +228,20 @@ void Flag::detach_building(Editor_Game_Base *g)
 	assert(m_building);
 
 	m_building->set_economy(0);
-	
+
 	Map *map = g->get_map();
 	Coords tln;
-	
+
 	map->get_tln(m_position, &tln);
 	map->get_field(tln)->set_road(Road_SouthEast, Road_None);
-	
+
 	m_building = 0;
 }
 
 
 /*
 ===============
-Flag::attach_road	
+Flag::attach_road
 
 Call this only from the Road init!
 ===============
@@ -316,6 +326,49 @@ Road *Flag::get_road(Flag *flag)
 	return 0;
 }
 
+
+/*
+===============
+Flag::has_capacity
+
+Returns true if the flag can hold more items.
+===============
+*/
+bool Flag::has_capacity()
+{
+	return (m_item_filled < m_item_capacity);
+}
+
+
+/*
+===============
+Flag::wait_for_capacity
+
+Signal the given bob by interrupting its task as soon as capacity becomes free.
+===============
+*/
+void Flag::wait_for_capacity(Game* g, Bob* bob)
+{
+	throw wexception("Flag::wait_for_capacity: TODO");
+}
+
+
+/*
+===============
+Flag::add_item
+===============
+*/
+void Flag::add_item(Game* g, WareInstance* item)
+{
+	assert(m_item_filled < m_item_capacity);
+
+	m_items[m_item_filled++] = item;
+	item->set_location(this);
+	
+	// TODO: figure out where the item should go
+}
+
+
 /*
 ===============
 Flag::init
@@ -340,11 +393,18 @@ Detach building and free roads.
 */
 void Flag::cleanup(Editor_Game_Base *g)
 {
+	while(m_item_filled) {
+		WareInstance* item = m_items[--m_item_filled];
+
+		item->cleanup((Game*)g);
+		delete item;
+	}
+
 	if (m_building) {
 		m_building->remove(g); // immediate death
 		assert(!m_building);
 	}
-	
+
 	for(int i = 0; i < 6; i++) {
 		if (m_roads[i]) {
 			m_roads[i]->remove(g); // immediate death
@@ -353,9 +413,9 @@ void Flag::cleanup(Editor_Game_Base *g)
 	}
 
 	get_economy()->remove_flag(this);
-	
+
 	unset_position(g, m_position);
-	
+
 	PlayerImmovable::cleanup(g);
 }
 
@@ -368,11 +428,38 @@ Draw the flag.
 */
 void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
 {
-	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, 
+	static struct { int x, y; } ware_offsets[8] = {
+		{ -5,  1 },
+		{ -1,  3 },
+		{  3,  3 },
+		{  7,  1 },
+		{ -6, -3 },
+		{ -1, -2 },
+		{ -3, -2 },
+		{  8, -3 }
+	};
+
+	int i;
+
+	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart,
 	              get_owner()->get_playercolor());
 
-	// TODO: draw wares
+	// Draw wares
+	for(i = 0; i < m_item_filled; i++) {
+		WareInstance* item = m_items[i];
+		Point warepos = pos;
+
+		if (i < 8) {
+			warepos.x += ware_offsets[i].x;
+			warepos.y += ware_offsets[i].y;
+		} else
+			warepos.y -= 6 + (i - 8) * 3;
+
+		dst->drawanim(warepos.x, warepos.y, item->get_ware_descr()->get_idle_anim(), 0,
+		              get_owner()->get_playercolor());
+	}
 }
+
 
 /*
 ==============================================================================
@@ -905,7 +992,7 @@ Remove the first count steps from the route.
 void Route::starttrim(int count)
 {
 	assert(count < (int)m_route.size());
-	
+
 	m_route.erase(m_route.begin(), m_route.begin()+count);
 }
 
@@ -933,6 +1020,7 @@ Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdat
 
 	m_state = OPEN;
 	m_worker = 0;
+	m_item = 0;
 }
 
 Request::~Request()
@@ -989,32 +1077,32 @@ void Request::start_transfer(Game *g, Warehouse *wh, Route *route)
 {
 	Ware_Descr *descr = g->get_ware_description(get_ware());
 
-	if (descr->is_worker()) {
-		Worker *worker = wh->launch_worker(g, get_ware());
-		start_transfer(g, worker, route);
-	} else {
-		throw wexception("TODO: implement ware transfers");
-		//Ware *ware = wh->launch_ware(g, get_ware());
-		//start_transfer(g, ware, route);
+	if (descr->is_worker())
+	{
+		// Begin the transfer of a worker.
+		// launch_worker() creates the worker, set_job_request() makes sure the
+		// worker starts walking
+		log("Request: start worker transfer for %i\n", get_ware());
+
+		m_worker = wh->launch_worker(g, get_ware());
+
+		m_state = TRANSFER;
+		m_worker->set_job_request(this, route);
+	}
+	else
+	{
+		// Begin the transfer of an item. The item itself is passive.
+		// launch_item() ensures the WareInstance is transported out of the warehouse
+		// Once it's on the flag, the flag code will decide what to do with it.
+		log("Request: start item transfer for %i\n", get_ware());
+
+		m_item = wh->launch_item(g, get_ware());
+
+		m_state = TRANSFER;
+		m_item->set_state_request(g, this, route);
 	}
 }
 
-/*
-===============
-Request::start_transfer
-
-Cause the given worker to fulfill the transfer
-===============
-*/
-void Request::start_transfer(Game *g, Worker *worker, Route *route)
-{
-	log("Request: start worker transfer for %i\n", get_ware());
-
-	m_state = TRANSFER;
-	m_worker = worker;
-
-	worker->set_job_request(this, route);
-}
 
 /*
 ===============
@@ -1022,24 +1110,50 @@ Request::check_transfer
 
 Check whether our transfer can still finish (verify route).
 Cause a route recalculation if necessary.
+
+Called by Economy splitting code.
 ===============
 */
 void Request::check_transfer(Game *g)
 {
 	assert(m_state == TRANSFER);
 
+	Route* route;
+	PlayerImmovable* location;
+	PlayerImmovable* target = get_target(g);
+
+	// Get the route
 	if (m_worker) {
-		if (m_worker->get_route()) {
-			// cause a recalculation if the route is broken
-			// the recalc is asynchronous, and the Worker will call
-			// transfer_fail() if necessary
-			if (!m_worker->get_route()->verify(g))
-				m_worker->change_job_request(false);
-		}
+		assert(!m_item);
+
+		route = m_worker->get_route();
+		location = m_worker->get_location(g);
 	} else {
-		throw wexception("TODO: check ware transfer");
+		assert(!m_worker);
+
+		route = m_item->get_route();
+		location = m_item->get_location(g);
+	}
+
+	if (!location)
+		throw wexception("Request::check_transfer(): current location disappeared!");
+
+	// Verify the route, and fix it if necessary
+	if (!route->verify(g))
+	{
+		if (!target || target->get_economy() != location->get_economy())
+		{
+			log("Request::check_transfer(): target unreachable\n");
+			cancel_transfer(g);
+			get_target_economy(g)->process_request(this);
+			return;
+		}
+
+		if (!target->get_economy()->find_route(location->get_base_flag(), target->get_base_flag(), route))
+			throw wexception("Request::check_transfer(): re-routing failed");
 	}
 }
+
 
 /*
 ===============
@@ -1053,12 +1167,22 @@ void Request::cancel_transfer(Game *g)
 {
 	assert(m_state == TRANSFER);
 
-	if (m_worker) {
+	if (m_worker)
+	{
+		assert(!m_item);
+
 		m_worker->change_job_request(true); // cancel
 		m_worker = 0;
 		m_state = OPEN;
-	} else {
-		throw wexception("TODO: cancel ware transfer");
+	}
+	else
+	{
+		assert(m_item);
+
+		m_item->end_state_request(g);
+		m_item->set_state_idle(g);
+		m_item = 0;
+		m_state = OPEN;
 	}
 }
 
@@ -1077,7 +1201,16 @@ void Request::transfer_finish(Game *g)
 	assert(m_state == TRANSFER);
 
 	m_state = CLOSED;
+
+	if (m_item) {
+		m_item->cleanup(g);
+		delete m_item;
+		m_item = 0;
+	}
+
 	(*m_callbackfn)(g, this, m_ware, m_worker, m_callbackdata);
+
+	// this should no longer be valid here
 }
 
 
@@ -1086,6 +1219,8 @@ void Request::transfer_finish(Game *g)
 Request::transfer_fail
 
 Callback from ware/worker code that the scheduled transfer has failed.
+The calling code has already dealt with the worker/item.
+
 Re-open the request.
 ===============
 */
@@ -1094,6 +1229,7 @@ void Request::transfer_fail(Game *g)
 	assert(m_state == TRANSFER);
 
 	m_worker = 0;
+	m_item = 0;
 	m_state = OPEN;
 	get_target_economy(g)->process_request(this);
 }
@@ -1164,6 +1300,200 @@ void RequestList::remove(Request *req)
 
 	throw wexception("RequestList::remove: not in list");
 }
+
+
+
+/*
+==============================================================================
+
+WaresQueue IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+WaresQueue::WaresQueue
+
+Pre-initialize a WaresQueue
+===============
+*/
+WaresQueue::WaresQueue(PlayerImmovable* bld)
+{
+	m_owner = bld;
+	m_ware = -1;
+	m_size = 0;
+	m_filled = 0;
+	m_request = 0;
+}
+
+
+/*
+===============
+WaresQueue::~WaresQueue
+
+cleanup() must be called!
+===============
+*/
+WaresQueue::~WaresQueue()
+{
+	assert(m_ware == -1);
+}
+
+
+/*
+===============
+WaresQueue::init
+
+Initialize the queue. This also issues the first request, if necessary.
+===============
+*/
+void WaresQueue::init(Game* g, int ware, int size)
+{
+	assert(m_ware == -1);
+
+	m_ware = ware;
+	m_size = size;
+	m_filled = 0;
+
+	update(g);
+}
+
+
+/*
+===============
+WaresQueue::cleanup
+
+Clear the queue appropriately.
+===============
+*/
+void WaresQueue::cleanup(Game* g)
+{
+	assert(m_ware != -1);
+
+	if (m_filled)
+		m_owner->get_economy()->remove_wares(m_ware, m_filled);
+
+	m_filled = 0;
+	m_size = 0;
+
+	update(g);
+
+	m_ware = -1;
+}
+
+
+/*
+===============
+WaresQueue::update
+
+Fix filled <= size and requests.
+You must call this after every call to set_*()
+===============
+*/
+void WaresQueue::update(Game* g)
+{
+	assert(m_ware != -1);
+
+	if (m_filled > m_size) {
+		m_owner->get_economy()->remove_wares(m_ware, m_filled - m_size);
+		m_filled = m_size;
+	}
+
+	if (m_filled < m_size)
+	{
+		if (!m_request) {
+			m_request = new Request(m_owner, m_ware, &WaresQueue::request_callback, this);
+			m_owner->get_economy()->add_request(m_request);
+		}
+	}
+	else
+	{
+		if (m_request) {
+			m_owner->get_economy()->remove_request(m_request);
+			delete m_request;
+			m_request = 0;
+		}
+	}
+}
+
+
+/*
+===============
+WaresQueue::request_callback [static]
+
+Called when an item arrives at the owning building.
+===============
+*/
+void WaresQueue::request_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+{
+	WaresQueue* wq = (WaresQueue*)data;
+
+	assert(!w); // WaresQueue can't hold workers
+	assert(wq->m_filled < wq->m_size);
+	assert(wq->m_ware == ware);
+
+	// Ack the request
+	wq->m_owner->get_economy()->remove_request(rq);
+	delete rq;
+	wq->m_request = 0;
+
+	// Update
+	wq->set_filled(wq->m_filled + 1);
+	wq->update(g);
+}
+
+
+/*
+===============
+WaresQueue::remove_from_economy
+
+Remove the wares in this queue from the given economy (used in accounting).
+===============
+*/
+void WaresQueue::remove_from_economy(Economy* e)
+{
+	e->remove_wares(m_ware, m_filled);
+}
+
+
+/*
+===============
+WaresQueue::add_to_economy
+
+Add the wares in this queue to the given economy (used in accounting)
+===============
+*/
+void WaresQueue::add_to_economy(Economy* e)
+{
+	e->add_wares(m_ware, m_filled);
+}
+
+
+/*
+===============
+WaresQueue::set_size
+WaresQueue::set_filled
+
+Change size and fill status of the queue.
+Important: that you must call update() after calling any of these functions.
+===============
+*/
+void WaresQueue::set_size(int size)
+{
+	m_size = size;
+}
+
+void WaresQueue::set_filled(int filled)
+{
+	if (filled > m_filled)
+		m_owner->get_economy()->add_wares(m_ware, filled - m_filled);
+	else if (filled < m_filled)
+		m_owner->get_economy()->remove_wares(m_ware, m_filled - filled);
+
+	m_filled = filled;
+}
+
 
 
 /*

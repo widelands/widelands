@@ -24,27 +24,7 @@
 
 
 class Request;
-
-
-/*
-class WaresQueue {
-public:
-	WaresQueue();
-	~WaresQueue();
-
-	int get_size() const { return m_size; }
-	int get_filled() const { return m_filled; }
-
-	void init(Game*, int ware, int size);
-	void cleanup(Game*);
-
-private:
-	int			m_ware;		// ware ID
-	int			m_size;		// # of items that fit into the queue
-	int			m_filled;	// # of items that are currently in the queue
-	Request*		m_request;	// currently pending request
-};
-*/
+class WaresQueue;
 
 
 /*
@@ -88,6 +68,8 @@ public:
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
 
+	virtual void set_economy(Economy* e);
+
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
@@ -99,6 +81,8 @@ private:
 
 	Request*				m_builder_request;
 	Worker*				m_builder;
+
+	std::vector<WaresQueue*>	m_wares;
 };
 
 

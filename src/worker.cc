@@ -156,7 +156,7 @@ Worker::Worker(Worker_Descr *descr, bool logic)
 	m_economy = 0;
 	m_location = 0;
 	m_state = State_None;
-	m_carried_ware = -1;
+	m_carried_item = 0;
 	m_route = 0;
 }
 
@@ -241,8 +241,8 @@ void Worker::set_economy(Economy *economy)
 	if (m_economy) {
 		m_economy->remove_wares(get_descr()->get_ware_id(), 1);
 
-		if (m_carried_ware >= 0)
-			m_economy->remove_wares(m_carried_ware, 1);
+		if (m_carried_item)
+			m_carried_item->remove_from_economy(m_economy);
 	}
 
 	m_economy = economy;
@@ -250,10 +250,52 @@ void Worker::set_economy(Economy *economy)
 	if (m_economy) {
 		m_economy->add_wares(get_descr()->get_ware_id(), 1);
 
-		if (m_carried_ware >= 0)
-			m_economy->add_wares(m_carried_ware, 1);
+		if (m_carried_item)
+			m_carried_item->add_to_economy(m_economy);
 	}
 }
+
+
+/*
+===============
+Worker::set_carried_item
+
+Set the item we carry.
+If we carry an item right now, it will be destroyed (see fetch_carried_item()).
+===============
+*/
+void Worker::set_carried_item(Game* g, WareInstance* item)
+{
+	if (m_carried_item) {
+		m_carried_item->cleanup(g);
+		delete m_carried_item;
+		m_carried_item = 0;
+	}
+
+	m_carried_item = item;
+	m_carried_item->set_location(get_location(g));
+}
+
+
+/*
+===============
+Worker::fetch_carried_item
+
+Stop carrying the current item, and return a pointer to it.
+===============
+*/
+WareInstance* Worker::fetch_carried_item()
+{
+	WareInstance* item = m_carried_item;
+
+	if (m_carried_item) {
+		m_carried_item->set_location(0);
+		m_carried_item = 0;
+	}
+
+	return item;
+}
+
 
 /*
 ===============
@@ -275,6 +317,7 @@ void Worker::set_job_request(Request *req, const Route *route)
 	// issued by either Bob::init() or by whatever the guy is currently doing
 }
 
+
 /*
 ===============
 Worker::change_job_request
@@ -288,15 +331,23 @@ void Worker::change_job_request(bool cancel)
 {
 	assert(m_state == State_Request);
 
-	if (cancel) {
+	if (cancel)
+	{
 		m_request = 0;
-	} else {
+		if (m_route) {
+			delete m_route;
+			m_route = 0;
+		}
+	}
+	else
+	{
 		if (m_route && !m_route->verify(static_cast<Game*>(get_owner()->get_game()))) {
 			delete m_route;
 			m_route = 0;
 		}
 	}
 }
+
 
 /*
 ===============
@@ -347,6 +398,16 @@ void Worker::stop_job_idleloop(Game* g)
 }
 
 
+void Worker::set_job_dropoff(Game* g, WareInstance* item)
+{
+	assert(m_state == State_None);
+	assert(item);
+
+	m_state = State_DropOff;
+	set_carried_item(g, item);
+}
+
+
 /*
 ===============
 Worker::schedule_incorporate
@@ -359,6 +420,7 @@ void Worker::schedule_incorporate(Game *g)
 {
 	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_INCORPORATE, m_serial);
 }
+
 
 /*
 ===============
@@ -382,6 +444,7 @@ void Worker::incorporate(Game *g)
 	// our location has been deleted from under us
 }
 
+
 /*
 ===============
 Worker::init
@@ -397,6 +460,7 @@ void Worker::init(Editor_Game_Base *g)
 	assert(get_location(g));
 }
 
+
 /*
 ===============
 Worker::cleanup
@@ -406,11 +470,18 @@ Remove the worker.
 */
 void Worker::cleanup(Editor_Game_Base *g)
 {
+	if (m_carried_item) {
+		m_carried_item->cleanup((Game*)g);
+		delete m_carried_item;
+		m_carried_item = 0;
+	}
+
 	if (get_location(g))
 		set_location(0);
 
 	Bob::cleanup(g);
 }
+
 
 /*
 ===============
@@ -461,6 +532,10 @@ void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 
 	case State_GoWarehouse:
 		run_state_gowarehouse(g, prev, success, nexthint);
+		return;
+
+	case State_DropOff:
+		run_state_dropoff(g, prev, success, nexthint);
 		return;
 	}
 
@@ -529,7 +604,7 @@ void Worker::do_end_state(Game* g, int oldstate, bool success)
 	case State_IdleLoop:
 		log("Worker::end_state [State_IdleLoop]\n");
 		break;
-		
+
 	case State_Request:
 		{
 			Request *request = m_request;
@@ -562,6 +637,10 @@ void Worker::do_end_state(Game* g, int oldstate, bool success)
 			m_route = 0;
 		}
 		log("Worker::end_state [State_GoWarehouse]\n");
+		break;
+
+	case State_DropOff:
+		log("Worker::end_state [State_DropOff]\n");
 		break;
 
 	default:
@@ -791,6 +870,95 @@ void Worker::run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthi
 	}
 }
 
+
+/*
+===============
+Worker::run_state_dropoff
+
+Drop the carried item on the base flag of the current building, and return
+into the building.
+===============
+*/
+void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
+{
+	PlayerImmovable* owner = get_location(g);
+	WareInstance* item = get_carried_item();
+
+	if (!owner) {
+		log("Worker: DropOff: owner disappeared\n");
+		end_state(g, false);
+		return;
+	}
+
+	BaseImmovable* location = g->get_map()->get_immovable(get_position());
+
+	// Deliver the item
+	if (item)
+	{
+		// We're in the building, walk onto the flag
+		if (location->get_type() == Map_Object::BUILDING)
+		{
+			Flag* flag = ((PlayerImmovable*)location)->get_base_flag();
+
+			if (!flag->has_capacity()) {
+				log("Worker: DropOff: wait for capacity\n");
+
+				flag->wait_for_capacity(g, this);
+				start_task_idle(g, get_descr()->get_idle_anim(), -1);
+				return;
+			}
+
+			log("Worker: DropOff: move from building to flag\n");
+
+			// TODO: add building exit throttle
+
+			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
+			return;
+		}
+
+		// We're on the flag, drop the item and pause a little
+		if (location->get_type() == Map_Object::FLAG)
+		{
+			Flag* flag = (Flag*)location;
+
+			if (flag->has_capacity()) {
+				log("Worker: DropOff: dropping the item\n");
+
+				item = fetch_carried_item();
+				flag->add_item(g, item);
+
+				start_task_idle(g, get_descr()->get_idle_anim(), 50);
+				return;
+			}
+
+			log("Worker: DropOff: flag is overloaded\n");
+
+			start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+			return;
+		}
+
+		throw wexception("Worker: DropOff: not on building or on flag - fishy");
+	}
+
+	// We don't have the item any more, return home
+	if (location->get_type() == Map_Object::FLAG) {
+		start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+		return;
+	}
+
+	if (location->get_type() != Map_Object::BUILDING)
+		throw wexception("Worker: DropOff: not on building or on flag on return");
+
+	if (location->has_attribute(WAREHOUSE)) {
+		schedule_incorporate(g);
+		end_state(g, true);
+		return;
+	}
+
+	throw wexception("Worker: DropOff: TODO: return into non-warehouse");
+}
+
+
 /*
 ===============
 Worker::run_route
@@ -835,6 +1003,8 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 			assert(location->get_base_flag() == current);
 
 			log("run_route: move from building to flag\n");
+
+			// TODO: add building exit throttle
 
 			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
 			return 0;
@@ -912,6 +1082,39 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 	start_task_idle(g, get_descr()->get_idle_anim(), 50);
 
 	return 0;
+}
+
+
+/*
+===============
+Worker::draw
+
+Draw the worker, taking the carried item into account.
+===============
+*/
+void Worker::draw(Editor_Game_Base* game, RenderTarget* dst, Point pos)
+{
+	uint anim = get_current_anim();
+
+	if (!anim)
+		return;
+
+	const RGBColor* playercolors = 0;
+	Point drawpos;
+
+	calc_drawpos(game, pos, &drawpos);
+
+	if (get_owner())
+		playercolors = get_owner()->get_playercolor();
+
+	dst->drawanim(drawpos.x, drawpos.y, anim, game->get_gametime() - get_animstart(), playercolors);
+
+	// Draw the currently carried item
+	if (m_carried_item) {
+		uint itemanim = m_carried_item->get_ware_descr()->get_idle_anim();
+
+		dst->drawanim(drawpos.x, drawpos.y - 15, itemanim, 0, playercolors);
+	}
 }
 
 

@@ -1,16 +1,16 @@
 /*
  * Copyright (C) 2002 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -20,8 +20,13 @@
 #ifndef __WARE_DESCR_H
 #define __WARE_DESCR_H
 
+class Economy;
+class PlayerImmovable;
+class Request;
+class Route;
 class Tribe_Descr;
 class Worker_Descr;
+
 
 /*
 Wares
@@ -70,6 +75,7 @@ public:
 	virtual bool is_worker();
 
 	inline uint get_menu_pic() { return m_menu_pic; }
+	inline uint get_idle_anim() { return m_idle_anim; }
 
 private:
 	void parse(const char *directory, Profile *prof);
@@ -132,5 +138,56 @@ private:
 
 bool operator==(const WareList &wl1, const WareList &wl2);
 bool operator!=(const WareList &wl1, const WareList &wl2);
+
+
+/*
+WareInstance
+------------
+WareInstance represents one item while it is being carried around.
+
+The WareInstance never draws itself; the carrying worker or the current flag
+location are responsible for that.
+*/
+class WareInstance {
+public:
+	enum {
+		State_None = 0,
+
+		State_Idle,			// waiting on the nearest flag
+		State_Request,		// moving to fulfill a request
+	};
+
+public:
+	WareInstance(int ware);
+	~WareInstance();
+
+	PlayerImmovable* get_location(Editor_Game_Base* g) { return (PlayerImmovable*)m_location.get(g); }
+	int get_ware() const { return m_ware; }
+	Item_Ware_Descr* get_ware_descr() const { return m_ware_descr; }
+	Route* get_route() { return m_route; }
+
+	void init(Game* g);
+	void cleanup(Game* g);
+
+	void remove_from_economy(Economy* e);
+	void add_to_economy(Economy* e);
+
+	void set_location(PlayerImmovable* loc);
+
+	void set_state_request(Game* g, Request* rq, const Route* route);
+	void end_state_request(Game* g);
+	void set_state_idle(Game* g);
+
+private:
+	Object_Ptr			m_location;
+	int					m_ware;
+	Item_Ware_Descr*	m_ware_descr;
+
+	int		m_state;
+	Route*	m_route;
+
+	Request*	m_request;	// State_Request: the request we need to fulfill
+};
+
 
 #endif
