@@ -19,10 +19,8 @@
 #ifndef __BOB_H
 #define __BOB_H
 
-// #include "worldfiletypes.h"
 #include "graphic.h"
 #include "pic.h"
-#include "myfile.h"
 #include "instances.h"
 
 // class World;
@@ -84,7 +82,7 @@ class Animation {
       void set_dimensions(ushort mw, ushort mh) { w=mw; h=mh; }
       void set_hotspot(ushort x, ushort y) { hsx=x; hsy=y; }
 
-      int read(Binary_file*);
+      int read(FileRead*);
 
       inline Animation_Pic* get_pic(ushort n) { assert(n<npics); return &pics[n]; }
       inline ushort get_npics(void) { return npics; }
@@ -113,7 +111,7 @@ class Logic_Bob_Descr : public Map_Object_Descr {
       Logic_Bob_Descr(void) { }
       virtual ~Logic_Bob_Descr(void) { }
 
-      virtual int read(Binary_file*);
+      virtual int read(FileRead*);
       const char* get_name(void) { return name; }
 
       inline Animation* get_anim(void) { return &anim; }
@@ -131,7 +129,7 @@ class Growing_Bob_Descr : public Logic_Bob_Descr {
       Growing_Bob_Descr(void) { ends_in=0; growing_speed=0; }
       virtual ~Growing_Bob_Descr(void) {  }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
       Map_Object *create_object();
 
    private:
@@ -148,7 +146,7 @@ class Diminishing_Bob_Descr : public Logic_Bob_Descr {
       Diminishing_Bob_Descr(void) { ends_in=0; stock=0; }
       virtual ~Diminishing_Bob_Descr(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
       Map_Object *create_object();
 
    private:
@@ -165,7 +163,7 @@ class Boring_Bob_Descr : public Logic_Bob_Descr {
       Boring_Bob_Descr(void) { ttl=0; }
       virtual ~Boring_Bob_Descr(void) { } 
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
       Map_Object *create_object();
 
    private:
@@ -181,7 +179,7 @@ class Critter_Bob_Descr : public Logic_Bob_Descr {
       Critter_Bob_Descr(void) { stock=swimming=0; }
       virtual ~Critter_Bob_Descr(void) { } 
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
       Map_Object *create_object();
 
       inline bool is_swimming(void) { return swimming; }

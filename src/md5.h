@@ -24,7 +24,7 @@
 #ifndef __S__MD5_H
 #define __S__MD5_H
 
-#include <iostream.h>
+#include <iostream>
 
 /** 
  *
@@ -36,6 +36,15 @@
  * with every junk of data you've read from a file
  *
  * Cons: 16 byte checksum is to big for network transport
+ *
+ * ... sending checksums on every single packet is pointless when it's so
+ * trivial to just fake them anyway.
+ * The checksums are really most useful to verify that the game data
+ * file(s) used on each host haven't accidently been modified.
+ *
+ * Let's face it, certain kinds of cheats can only be fought by security
+ * through obscurity, and that's impossible in open-source (unless we write
+ * absolutely horrible spaghetti code ...)
  */
 class ChkSum {
 		  ChkSum(const ChkSum&);
@@ -81,6 +90,6 @@ class ChkSum {
 // operator overloading
 bool operator==(ChkSum&, ChkSum&);
 bool operator==(ChkSum&, const void*);
-ostream& operator<<(ostream&, ChkSum&);
+std::ostream& operator<<(std::ostream&, ChkSum&);
 
 #endif /* __S__MD5_H */

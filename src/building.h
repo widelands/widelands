@@ -28,7 +28,7 @@ class NeedWares_List {
       NeedWares_List(void) { list=0; }
       ~NeedWares_List(void) { if(list) free(list); }
 
-      int read(Binary_file *f);
+      int read(FileRead *f);
 
    private:
       struct List {
@@ -48,7 +48,7 @@ class Building_Descr : public Map_Object_Descr {
       Building_Descr(void) { }
       virtual ~Building_Descr(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
      
       inline char* get_name(void) { return name; }
       inline Animation* get_idle_anim(void) { return &idle; }
@@ -77,7 +77,7 @@ class Has_Needs_Building_Descr : virtual public Building_Descr {
       Has_Needs_Building_Descr(void) { }
       virtual ~Has_Needs_Building_Descr(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
       
       // functions
       NeedWares_List* get_needs(uint* n, bool* b) { *n=nneeds; *b=needs_or; return &needs; }
@@ -96,7 +96,7 @@ class Has_Products_Building_Descr : virtual public Building_Descr {
       Has_Products_Building_Descr(void) { }
       virtual ~Has_Products_Building_Descr(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    protected:
       Need_List* get_products(uint* n, bool* b) { *n=nproducts; *b=products_or; return &products; }
@@ -125,7 +125,7 @@ class Has_Is_A_Building_Descr : virtual public Building_Descr {
       Has_Is_A_Building_Descr(void) { }
       ~Has_Is_A_Building_Descr(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
       ushort get_is_a(void) { return is_a; }  
 
    private:
@@ -140,7 +140,7 @@ class Buildable_Building_Descr : virtual public Building_Descr {
       Buildable_Building_Descr(void) { }
       virtual ~Buildable_Building_Descr(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
       char* get_category(void) { return category; }
       ushort get_build_time(void) { return build_time; }
@@ -165,7 +165,7 @@ class Working_Building_Descr : virtual public Building_Descr {
       Working_Building_Descr(void) { }
       virtual ~Working_Building_Descr(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
       
       Animation* get_working_anim(void) { return &working; }
 
@@ -182,7 +182,7 @@ class Boring_Building_Descr : virtual public Building_Descr {
       Boring_Building_Descr(void) { }
       virtual ~Boring_Building_Descr(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -200,7 +200,7 @@ class Dig_Building_Descr : virtual public Working_Building_Descr,
          Dig_Building_Descr(void) { }
          ~Dig_Building_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -222,7 +222,7 @@ class Search_Building_Descr : virtual public Boring_Building_Descr,
          Search_Building_Descr(void) { bobs=0; }
          ~Search_Building_Descr(void) { if(bobs) free(bobs);  }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -245,7 +245,7 @@ class Plant_Building_Descr : virtual public Boring_Building_Descr,
          Plant_Building_Descr(void) { bobs=0;}
          ~Plant_Building_Descr(void) { if(bobs) free(bobs); }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -269,7 +269,7 @@ class Grow_Building_Descr : virtual public Boring_Building_Descr,
          Grow_Building_Descr(void) { }
          ~Grow_Building_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -293,7 +293,7 @@ class Sit_Building_Descr : virtual public Working_Building_Descr,
          Sit_Building_Descr(void) { }
          ~Sit_Building_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -311,7 +311,7 @@ class Sit_Building_Produ_Worker_Descr : virtual public Working_Building_Descr,
          Sit_Building_Produ_Worker_Descr(void) { }
          ~Sit_Building_Produ_Worker_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -331,7 +331,7 @@ class Science_Building_Descr : virtual public Working_Building_Descr,
          Science_Building_Descr(void) { }
          ~Science_Building_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -350,7 +350,7 @@ class Military_Building_Descr : virtual public Boring_Building_Descr,
          Military_Building_Descr::Military_Building_Descr(void) { }
          Military_Building_Descr::~Military_Building_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -371,7 +371,7 @@ class Cannon_Descr : virtual public Boring_Building_Descr,
          Cannon_Descr::Cannon_Descr(void) { }
          Cannon_Descr::~Cannon_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -399,7 +399,7 @@ class HQ_Descr : virtual public Boring_Building_Descr {
       HQ_Descr::HQ_Descr(void) { }
       HQ_Descr::~HQ_Descr(void) { }
 
-      int read(Binary_file* f);
+      int read(FileRead* f);
       Map_Object *create_object();
       
       ushort get_conquers(void) { return conquers; }
@@ -418,7 +418,7 @@ class Store_Descr : virtual public Boring_Building_Descr,
          Store_Descr::Store_Descr(void) { }
          Store_Descr::~Store_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -436,7 +436,7 @@ class Dockyard_Descr :  virtual public Boring_Building_Descr,
          Dockyard_Descr::Dockyard_Descr(void) { }
          Dockyard_Descr::~Dockyard_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:
@@ -454,7 +454,7 @@ class Port_Descr : virtual public Boring_Building_Descr,
          Port_Descr::Port_Descr(void) { }
          Port_Descr::~Port_Descr(void) { }
 
-         int read(Binary_file* f);
+         int read(FileRead* f);
          Map_Object *create_object();
 
       private:

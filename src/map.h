@@ -196,7 +196,7 @@ class Map {
                // funcs
                int load_s2mf(const char*, Game*);
                int load_s2mf_header(const char*);
-               uchar *load_s2mf_section(Binary_file *file, int width, int height);
+               uchar *load_s2mf_section(FileRead *file, int width, int height);
 
                int load_wlmf(const char*, Game*);
                void set_size(uint, uint);

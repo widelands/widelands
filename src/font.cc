@@ -18,11 +18,8 @@
  */
 
 #include "widelands.h"
-
-#include <string.h>
-
-#include "myfile.h"
 #include "font.h"
+
 
 /** class Font_Handler
  *
@@ -66,59 +63,50 @@ Font_Handler::~Font_Handler(void) {
  * This registers a certain font with the given
  * objects
  *
- * Args:	str file name of fontfile to load font from
+ * Args:	str	name of the font we want to load
  * 		fn 	number of font to register
  *	Returns: ERR_FAILED, FERR_INVAL_VERSION, FERR_INVAL_FILE, RET_OK
  */
-int Font_Handler::load_font(const char* str, ushort fn) {
-		  assert(fn<MAX_FONTS);
-		  assert(str);
+int Font_Handler::load_font(const char* str, ushort fn)
+{
+	assert(fn<MAX_FONTS);
+	assert(str);
 
-		  Binary_file f;
+	char buf[200];
+	FileRead f;
+	
+	snprintf(buf, sizeof(buf), "fonts/%s.wff", str);
+	f.Open(g_fs, buf);
+	
+	// TODO: actually use FileRead's nice features for endian safety
+	FHeader *fh = (FHeader*)f.Data(sizeof(FHeader));
 
-		  f.open(str, File::READ);
-		  if(f.get_state() != File::OPEN) {
-					 return FERR_INVAL_FILE;
-		  }
+	if(WLFF_VERSIONMAJOR(fh->version) > WLFF_VERSIONMAJOR(WLFF_VERSION)) {
+		return FERR_INVAL_VERSION;
+	}
+	if(WLFF_VERSIONMAJOR(fh->version) == WLFF_VERSIONMAJOR(WLFF_VERSION)) {
+		if(WLFF_VERSIONMINOR(fh->version) > WLFF_VERSIONMINOR(WLFF_VERSION)) {
+			return FERR_INVAL_VERSION;
+		}
+	}
 
-		  // read the header
-		  FHeader fh;
-		  f.read((char*) &fh, sizeof(FHeader));
+	fonts[fn].h = fh->height;
 
-		  if(WLFF_VERSIONMAJOR(fh.version) > WLFF_VERSIONMAJOR(WLFF_VERSION)) {
-					 return FERR_INVAL_VERSION;
-		  }
-		  if(WLFF_VERSIONMAJOR(fh.version) == WLFF_VERSIONMAJOR(WLFF_VERSION)) {
-					 if(WLFF_VERSIONMINOR(fh.version) > WLFF_VERSIONMINOR(WLFF_VERSION)) {
-								return FERR_INVAL_VERSION;
-					 }
-		  }
+	uchar c;
+	ushort w;
+	for(unsigned int i=0; i<96; i++) {
+		c = f.Unsigned8();
+		if (c != (i+32))
+			return FERR_INVAL_FILE;
+		
+		w = f.Unsigned16();
 
-		  fonts[fn].h=fh.height;
-
-		  
-		  char c;
-		  ushort w;
-		  ushort* pix=(ushort*) malloc(1);
-		  ushort pixs=1;
-		  for(unsigned int i=0; i<96; i++) {
-					 f.read((char*) &c, 1);
-					 if((uchar) c!=(i+32)) {
-								return FERR_INVAL_FILE;
-					 }	
-					 
-					 f.read((char*) &w, sizeof(ushort));
-					 if(sizeof(ushort)*w*fonts[fn].h> pixs) {
-								pixs=sizeof(ushort)*w*fonts[fn].h;
-								pix=(ushort*) realloc(pix, pixs);
-					 }
-					 f.read((char*) pix, sizeof(ushort)*w*fonts[fn].h);
-					 fonts[fn].p[i].create(w, fonts[fn].h, pix);
-					 fonts[fn].p[i].set_clrkey(fh.clrkey);
-		  };
-
-		  free(pix);
-		  return RET_OK;
+		ushort *data = (ushort*)f.Data(sizeof(ushort)*w*fonts[fn].h);
+		fonts[fn].p[i].create(w, fonts[fn].h, data);
+		fonts[fn].p[i].set_clrkey(fh->clrkey);
+	}
+	
+	return RET_OK;
 }
 
 /** Pic* Font_Handler::get_string(const uchar* str, const ushort f);

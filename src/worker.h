@@ -30,7 +30,7 @@ class Worker_Descr {
       virtual ~Worker_Descr(void) { }
        
    protected:
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
       char name[30];
       bool is_enabled;
@@ -52,14 +52,12 @@ class Menu_Worker_Descr : virtual public Worker_Descr {
       Menu_Worker_Descr() : Worker_Descr() { }
       virtual ~Menu_Worker_Descr() { };
 
-      virtual int read(Binary_file* f) {
+      virtual int read(FileRead* f) {
             ushort clrkey;
-            f->read(&clrkey, sizeof(ushort));
+            clrkey = f->Unsigned16();
 
             menu_pic.set_clrkey(clrkey);
-            char buf[1152];
-            f->read(buf,1152);
-            menu_pic.create(24, 24, (ushort*) buf);
+            menu_pic.create(24, 24, (ushort*)f->Data(24*24*2));
             
             return RET_OK;
       }
@@ -87,7 +85,7 @@ class Soldier_Descr : virtual public Menu_Worker_Descr {
       Animation evade_r;
       Animation evade1_r;
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 };
 
 //
@@ -97,7 +95,7 @@ class Has_Walk1_Worker_Descr : virtual public Worker_Descr {
    public:
       Has_Walk1_Worker_Descr(void) { }
       virtual ~Has_Walk1_Worker_Descr() { } 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
       Animation walk_ne1;
@@ -116,7 +114,7 @@ class Has_Working_Worker_Descr : virtual public Worker_Descr {
    public:
       Has_Working_Worker_Descr(void) { }
       virtual ~Has_Working_Worker_Descr(void) { }
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
       Animation working;
@@ -129,7 +127,7 @@ class Has_Working1_Worker_Descr : virtual public Worker_Descr {
    public:
       Has_Working1_Worker_Descr(void) { }
       virtual ~Has_Working1_Worker_Descr(void) { }
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
       Animation working1;
@@ -143,7 +141,7 @@ class SitDigger_Base : virtual public Worker_Descr {
       SitDigger_Base(void) { };
       virtual ~SitDigger_Base(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -157,7 +155,7 @@ class SitDigger : virtual public SitDigger_Base,
       SitDigger(void) { }
       virtual ~SitDigger(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -174,7 +172,7 @@ class Searcher : virtual public Worker_Descr,
       Searcher(void) { }
       ~Searcher(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -191,7 +189,7 @@ class Planter : virtual public Worker_Descr,
       Planter(void) { }
       ~Planter(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -209,7 +207,7 @@ class Grower : virtual public Worker_Descr,
       Grower(void) { }
       ~Grower(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -224,7 +222,7 @@ class Scientist : virtual public Worker_Descr,
       Scientist(void) { }
       ~Scientist(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -240,7 +238,7 @@ class Carrier : virtual public SitDigger_Base,
       Carrier(void) { }
       virtual ~Carrier(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
    
    private:
 };
@@ -251,7 +249,7 @@ class Def_Carrier : virtual public Carrier {
       Def_Carrier(void) { }
       virtual ~Def_Carrier(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -262,7 +260,7 @@ class Add_Carrier : virtual public Carrier,
       Add_Carrier(void) { }
       virtual ~Add_Carrier(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -275,7 +273,7 @@ class Builder : virtual public SitDigger_Base,
       Builder(void) { }
       virtual ~Builder(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -288,7 +286,7 @@ class Planer : virtual public SitDigger_Base,
       Planer(void) { }
       virtual ~Planer(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };
@@ -299,7 +297,7 @@ class Explorer : virtual public SitDigger_Base,
       Explorer(void) { }
       virtual ~Explorer(void) { }
 
-      virtual int read(Binary_file* f); 
+      virtual int read(FileRead* f); 
 
    private:
 };
@@ -312,7 +310,7 @@ class Geologist : virtual public SitDigger_Base,
       Geologist(void) { }
       virtual ~Geologist(void) { }
 
-      virtual int read(Binary_file* f);
+      virtual int read(FileRead* f);
 
    private:
 };

@@ -150,7 +150,7 @@ bool operator==(ChkSum& sum1, const void* buf) {
 		  return false;
 }
 
-ostream& operator<<(ostream& o, ChkSum& sum) {
+std::ostream& operator<<(std::ostream& o, ChkSum& sum) {
 		  uchar	*buf=(uchar*) sum.get_chksum();
 		  if(!buf) { 
 					 o << "(inval)";

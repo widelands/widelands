@@ -19,9 +19,7 @@
 
 #include "widelands.h"
 #include "tribedata.h"
-#include "myfile.h"
 #include "helper.h"
-#include "myfile.h"
 #include "tribe.h"
 #include "game.h"
 #include "player.h"
@@ -29,8 +27,9 @@
 // 
 // Need List
 // 
-int NeedWares_List::read(Binary_file* f) {
-   f->read(&nneeds, sizeof(short));
+int NeedWares_List::read(FileRead* f)
+{
+   nneeds = f->Signed16();
    if(!nneeds) {
       // we're done, this guy is for free
       return RET_OK;
@@ -41,9 +40,9 @@ int NeedWares_List::read(Binary_file* f) {
    
    int i;
    for(i=0; i< nneeds; i++) {
-      f->read(&list[i].count, sizeof(ushort));
-      f->read(&list[i].index, sizeof(ushort));
-      f->read(&list[i].stock, sizeof(ushort));
+      list[i].count = f->Unsigned16();
+      list[i].index = f->Unsigned16();
+      list[i].stock = f->Unsigned16();
    }
 
    return RET_OK;
@@ -63,18 +62,19 @@ bool Building_Descr::has_attribute(uint attrib)
 	return false; // no need to call parent has_attribute()
 }
 
-int Building_Descr::read(Binary_file *f) {
-   f->read(name, sizeof(name));
+int Building_Descr::read(FileRead *f)
+{
+   memcpy(name, f->Data(sizeof(name)), sizeof(name));
 
    uchar temp;
-   f->read(&temp, sizeof(uchar));
-   is_enabled=temp ? true : false;
-   f->read(&see_area, sizeof(ushort));
+   temp = f->Unsigned8();
+   is_enabled = temp ? true : false;
+   see_area = f->Unsigned16();
    uint w, h, hsx, hsy;
-   f->read(&w, sizeof(ushort));
-   f->read(&h, sizeof(ushort));
-   f->read(&hsx, sizeof(ushort));
-   f->read(&hsy, sizeof(ushort));
+	w = f->Unsigned16();
+	h = f->Unsigned16();
+	hsx = f->Unsigned16();
+	hsy = f->Unsigned16();
 
    idle.set_dimensions(w, h);
    idle.set_hotspot(hsx, hsy);
@@ -84,9 +84,10 @@ int Building_Descr::read(Binary_file *f) {
    return RET_OK;
 }
 
-int Has_Needs_Building_Descr::read(Binary_file *f) {
+int Has_Needs_Building_Descr::read(FileRead *f)
+{
    uchar temp;
-   f->read(&temp, sizeof(uchar));
+   temp = f->Unsigned8();
    needs_or=temp ? true : false;
    
    // read needs
@@ -95,10 +96,11 @@ int Has_Needs_Building_Descr::read(Binary_file *f) {
    return RET_OK;
 }
 
-int Has_Products_Building_Descr::read(Binary_file *f) {
+int Has_Products_Building_Descr::read(FileRead *f)
+{
    uchar temp;
-    f->read(&temp, sizeof(uchar));
-	products_or=temp ? true : false;
+	temp = f->Unsigned8();
+	products_or = temp ? true : false;
 
    // read products
    products.read(f);
@@ -106,28 +108,31 @@ int Has_Products_Building_Descr::read(Binary_file *f) {
    return RET_OK;
 }
 
-int Has_Is_A_Building_Descr::read(Binary_file *f) {
-  f->read(&is_a, sizeof(ushort));
+int Has_Is_A_Building_Descr::read(FileRead *f)
+{
+	is_a = f->Unsigned16();
 
-  return RET_OK;
+	return RET_OK;
 }
 
-int Buildable_Building_Descr::read(Binary_file *f) {
-     f->read(category, sizeof(category));
-     f->read(&build_time, sizeof(ushort));
+int Buildable_Building_Descr::read(FileRead *f)
+{
+	memcpy(category, f->Data(sizeof(category)), sizeof(category));
+	build_time = f->Unsigned16();;
 
-     // read cost
-     cost.read(f);
+	// read cost
+	cost.read(f);
 
-     build.set_dimensions(idle.get_w(), idle.get_h());
-     build.set_hotspot(idle.get_hsx(), idle.get_hsy());
-     
-     build.read(f);
-     
-     return RET_OK;
+	build.set_dimensions(idle.get_w(), idle.get_h());
+	build.set_hotspot(idle.get_hsx(), idle.get_hsy());
+	
+	build.read(f);
+	
+	return RET_OK;
 }
 
-int Working_Building_Descr::read(Binary_file *f) {
+int Working_Building_Descr::read(FileRead *f)
+{
    working.set_dimensions(idle.get_w(), idle.get_h());
    working.set_hotspot(idle.get_w(), idle.get_h());
    
@@ -136,7 +141,8 @@ int Working_Building_Descr::read(Binary_file *f) {
    return RET_OK;
 }
 
-int Boring_Building_Descr::read(Binary_file *f) {
+int Boring_Building_Descr::read(FileRead *f)
+{
    // nothing to do
    return RET_OK;
 }
@@ -211,7 +217,7 @@ Dig Building
 ==============================================================================
 */
 
-int Dig_Building_Descr::read(Binary_file *f) {
+int Dig_Building_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Working_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -220,10 +226,10 @@ int Dig_Building_Descr::read(Binary_file *f) {
    Has_Products_Building_Descr::read(f);
 
    // own 
-   f->read(&working_time, sizeof(ushort));
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&worker, sizeof(ushort));
-   f->read(resource, sizeof(resource));
+   working_time = f->Unsigned16();
+   idle_time = f->Unsigned16();
+   worker = f->Unsigned16();
+   memcpy(resource, f->Data(sizeof(resource)), sizeof(resource));
 
    return RET_OK;
 }
@@ -241,7 +247,8 @@ Search Building
 ==============================================================================
 */
 
-int Search_Building_Descr::read(Binary_file *f) {
+int Search_Building_Descr::read(FileRead *f)
+{
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -250,13 +257,13 @@ int Search_Building_Descr::read(Binary_file *f) {
    Has_Products_Building_Descr::read(f);
 
    // read our own stuff
-   f->read(&working_time, sizeof(ushort));
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&working_area, sizeof(ushort));
-   f->read(&worker, sizeof(ushort));
-   f->read(&nbobs, sizeof(nbobs));
-   bobs=(char*) malloc(nbobs*30);
-   f->read(bobs, nbobs*30);
+   working_time = f->Unsigned16();
+   idle_time = f->Unsigned16();
+   working_area = f->Unsigned16();
+   worker = f->Unsigned16();
+   nbobs = f->Unsigned16();
+   bobs = (char*)malloc(nbobs*30);
+	memcpy(bobs, f->Data(nbobs*30), nbobs*30);
 
    return RET_OK;
 }
@@ -274,7 +281,7 @@ Plant Building
 ==============================================================================
 */
 
-int Plant_Building_Descr::read(Binary_file *f) {
+int Plant_Building_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -282,13 +289,13 @@ int Plant_Building_Descr::read(Binary_file *f) {
    Has_Needs_Building_Descr::read(f);
 
    // read our own stuff
-   f->read(&working_time, sizeof(ushort));
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&working_area, sizeof(ushort));
-   f->read(&worker, sizeof(ushort));
-   f->read(&nbobs, sizeof(nbobs));
-   bobs=(char*) malloc(nbobs*30);
-   f->read(bobs, nbobs*30);
+   working_time = f->Unsigned16();
+   idle_time = f->Unsigned16();
+   working_area = f->Unsigned16();
+   worker = f->Unsigned16();
+   nbobs = f->Unsigned16();
+   bobs = (char*)malloc(nbobs*30);
+   memcpy(bobs, f->Data(nbobs*30), nbobs*30);
 
    return RET_OK;
 }
@@ -307,7 +314,7 @@ Grow Building
 ==============================================================================
 */
 
-int Grow_Building_Descr::read(Binary_file *f) {
+int Grow_Building_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -316,12 +323,12 @@ int Grow_Building_Descr::read(Binary_file *f) {
    Has_Products_Building_Descr::read(f);
 
    // own stuff 
-   f->read(&working_time, sizeof(ushort));
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&working_area, sizeof(ushort));
-   f->read(&worker, sizeof(ushort));
-   f->read(plant_bob, sizeof(plant_bob));
-   f->read(search_bob, sizeof(search_bob));
+   working_time = f->Unsigned16();
+   idle_time = f->Unsigned16();
+   working_area = f->Unsigned16();
+   worker = f->Unsigned16();
+   memcpy(plant_bob, f->Data(sizeof(plant_bob)), sizeof(plant_bob));
+	memcpy(search_bob, f->Data(sizeof(search_bob)), sizeof(search_bob));
 
    return RET_OK;
 }
@@ -340,7 +347,7 @@ Sitter Building
 ==============================================================================
 */
 
-int Sit_Building_Descr::read(Binary_file *f) {
+int Sit_Building_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Working_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -349,11 +356,11 @@ int Sit_Building_Descr::read(Binary_file *f) {
    Has_Products_Building_Descr::read(f);
 
    // our stuff 
-   f->read(&working_time, sizeof(ushort));
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&worker, sizeof(ushort));
+   working_time = f->Unsigned16();
+   idle_time = f->Unsigned16();
+   worker = f->Unsigned16();
    uchar temp; 
-   f->read(&temp, sizeof(uchar));
+   temp = f->Unsigned8();
    order_worker=temp ? true : false;
 
    return RET_OK;
@@ -365,7 +372,7 @@ Map_Object *Sit_Building_Descr::create_object()
 }
 
 
-int Sit_Building_Produ_Worker_Descr::read(Binary_file *f) {
+int Sit_Building_Produ_Worker_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Working_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -373,10 +380,10 @@ int Sit_Building_Produ_Worker_Descr::read(Binary_file *f) {
    Has_Needs_Building_Descr::read(f);
 
    // own stuff 
-   f->read(&working_time, sizeof(ushort));
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&worker, sizeof(ushort));
-   f->read(&prod_worker, sizeof(ushort));
+   working_time = f->Unsigned16();
+   idle_time = f->Unsigned16();
+   worker = f->Unsigned16();
+   prod_worker = f->Unsigned16();
 
    return RET_OK;
 }
@@ -395,7 +402,7 @@ Science Building
 ==============================================================================
 */
 
-int Science_Building_Descr::read(Binary_file *f) {
+int Science_Building_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Working_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -420,7 +427,7 @@ Military Building
 ==============================================================================
 */
 
-int Military_Building_Descr::read(Binary_file *f) {
+int Military_Building_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -428,10 +435,10 @@ int Military_Building_Descr::read(Binary_file *f) {
    Has_Needs_Building_Descr::read(f);
 
    // own stuff
-   f->read(&beds, sizeof(ushort));
-   f->read(&conquers, sizeof(ushort));
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&nupgr, sizeof(ushort));
+   beds = f->Unsigned16();
+   conquers = f->Unsigned16();
+   idle_time = f->Unsigned16();
+   nupgr = f->Unsigned16();
 
    return RET_OK;
 }
@@ -450,7 +457,7 @@ Cannon
 ==============================================================================
 */
 
-int Cannon_Descr::read(Binary_file *f) {
+int Cannon_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -459,15 +466,15 @@ int Cannon_Descr::read(Binary_file *f) {
 
    uchar temp;
    // own stuff 
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&projectile_speed, sizeof(ushort));
-   f->read(&temp, sizeof(uchar));
+   idle_time = f->Unsigned16();
+   projectile_speed = f->Unsigned16();
+   temp = f->Unsigned8();
    fires_balistic=temp ? true : false;
-   f->read(&worker, sizeof(ushort));
+   worker = f->Unsigned16();
    //                         // width and height ob projectile bob
    ushort wproj, hproj;
-   f->read(&wproj, sizeof(ushort));
-   f->read(&hproj, sizeof(ushort));
+   wproj = f->Unsigned16();
+   hproj = f->Unsigned16();
 
    projectile.set_dimensions(wproj, hproj);
    projectile.set_hotspot(wproj/2, hproj/2);
@@ -541,12 +548,12 @@ void Building_HQ::task_start_best(Game* g, uint prev, bool success, uint nexthin
 }
 
 // HQ description
-int HQ_Descr::read(Binary_file *f) {
+int HQ_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
 
    // own 
-   f->read(&conquers, sizeof(ushort));
+   conquers = f->Unsigned16();
 
    return 0;
 }
@@ -563,7 +570,7 @@ Store
 ==============================================================================
 */
 
-int Store_Descr::read(Binary_file *f) {
+int Store_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -588,7 +595,7 @@ Dockyard
 ==============================================================================
 */
 
-int Dockyard_Descr::read(Binary_file *f) {
+int Dockyard_Descr::read(FileRead *f) {
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);
    Buildable_Building_Descr::read(f);
@@ -596,9 +603,9 @@ int Dockyard_Descr::read(Binary_file *f) {
    Has_Needs_Building_Descr::read(f);
 
    // own
-   f->read(&working_time, sizeof(ushort));
-   f->read(&idle_time, sizeof(ushort));
-   f->read(&worker, sizeof(ushort));
+   working_time = f->Unsigned16();
+   idle_time = f->Unsigned16();
+   worker = f->Unsigned16();
 
    return RET_OK;
 }
@@ -617,7 +624,7 @@ Port
 ==============================================================================
 */
 
-int Port_Descr::read(Binary_file *f) {
+int Port_Descr::read(FileRead *f) {
 
    Building_Descr::read(f);
    Boring_Building_Descr::read(f);

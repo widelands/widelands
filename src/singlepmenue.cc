@@ -17,12 +17,10 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
 #include "graphic.h"
 #include "input.h"
 #include "ui.h"
-#include "fileloc.h"
 #include "cursor.h"
 #include "font.h"
 #include "mainmenue.h"

@@ -20,6 +20,6 @@
 #ifndef __S__OPTIONS_H
 #define __S__OPTIONS_H
 
-void handle_options(uint, char**);
+void handle_options(int argc, char**argv);
 
 #endif /* __S__OPTIONS_H */

@@ -150,7 +150,7 @@ void Listselect::move_down(int i)
 		return;
 	if ((int)(_firstvis+i) >= _entries.elements())
 		i = _entries.elements()-_firstvis-1;
-	if (!i)
+	if (i <= 0)
 		return;
 
 	_firstvis += i;

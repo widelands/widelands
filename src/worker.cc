@@ -18,7 +18,6 @@
  */
 
 #include "widelands.h"
-#include "myfile.h"
 #include "pic.h"
 #include "bob.h"
 #include "worker.h"
@@ -27,22 +26,23 @@
 // 
 // class Worker_Descr
 //
-int Worker_Descr::read(Binary_file* f) {
+int Worker_Descr::read(FileRead* f)
+{
    uchar temp;
    
-   f->read(name, sizeof(name));
+   memcpy(name, f->Data(sizeof(name)), sizeof(name));
 
-   f->read(&temp, sizeof(uchar));
-   is_enabled=temp ? true : false;
-   f->read(&walking_speed, sizeof(ushort));
+   temp = f->Unsigned8();
+   is_enabled = temp ? true : false;
+   walking_speed = f->Unsigned16();
 
    needs.read(f);
 
    ushort w, h, sx, sy;
-   f->read(&w, sizeof(ushort));
-   f->read(&h, sizeof(ushort));
-   f->read(&sx, sizeof(ushort));
-   f->read(&sy, sizeof(ushort));
+   w = f->Unsigned16();
+   h = f->Unsigned16();
+   sx = f->Unsigned16();
+   sy = f->Unsigned16();
 
    walk_ne.set_dimensions(w, h);
    walk_nw.set_dimensions(w, h);
@@ -70,12 +70,12 @@ int Worker_Descr::read(Binary_file* f) {
 // 
 // class Soldier_Descr
 // 
-int Soldier_Descr::read(Binary_file* f) {
-   
+int Soldier_Descr::read(FileRead* f)
+{
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    
-   f->read(&energy, sizeof(ushort));
+   energy = f->Unsigned16();
 
    attack_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    attack_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
@@ -107,20 +107,20 @@ int Soldier_Descr::read(Binary_file* f) {
 }
 
 // Worker class read functions
-int Has_Working_Worker_Descr::read(Binary_file* f) {
+int Has_Working_Worker_Descr::read(FileRead* f) {
    working.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    working.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
    working.read(f);
    return RET_OK;
 }
 
-int Has_Working1_Worker_Descr::read(Binary_file* f) {
+int Has_Working1_Worker_Descr::read(FileRead* f) {
    working1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    working1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
    working1.read(f);
    return RET_OK;
 }
-int Has_Walk1_Worker_Descr::read(Binary_file* f) {
+int Has_Walk1_Worker_Descr::read(FileRead* f) {
    walk_ne1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    walk_nw1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
    walk_w1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
@@ -143,14 +143,14 @@ int Has_Walk1_Worker_Descr::read(Binary_file* f) {
 
    return RET_OK;
 }
-int Scientist::read(Binary_file* f) {
+int Scientist::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    
    return RET_OK;
 }
 
-int Searcher::read(Binary_file* f) {
+int Searcher::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    Has_Walk1_Worker_Descr::read(f);
@@ -160,7 +160,7 @@ int Searcher::read(Binary_file* f) {
    return RET_OK;
 }
 
-int Grower::read(Binary_file* f) {
+int Grower::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    Has_Walk1_Worker_Descr::read(f);
@@ -170,7 +170,7 @@ int Grower::read(Binary_file* f) {
    return RET_OK;
 }
 
-int Planter::read(Binary_file* f) {
+int Planter::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    Has_Walk1_Worker_Descr::read(f);
@@ -178,11 +178,11 @@ int Planter::read(Binary_file* f) {
    
    return RET_OK;
 }
-int SitDigger_Base::read(Binary_file* f) {
+int SitDigger_Base::read(FileRead* f) {
    // Nothing to do
    return RET_OK;
 }
-int SitDigger::read(Binary_file* f) {
+int SitDigger::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    SitDigger_Base::read(f);
@@ -191,13 +191,13 @@ int SitDigger::read(Binary_file* f) {
    return RET_OK;
 }
 
-int Carrier::read(Binary_file* f) {
+int Carrier::read(FileRead* f) {
 
    // nothing to do
    return RET_OK;
 }
 
-int Def_Carrier::read(Binary_file* f) {
+int Def_Carrier::read(FileRead* f) {
    Worker_Descr::read(f);
    SitDigger_Base::read(f);
    Carrier::read(f);
@@ -208,7 +208,7 @@ int Def_Carrier::read(Binary_file* f) {
    return RET_OK;
 }
 
-int Add_Carrier::read(Binary_file* f) {
+int Add_Carrier::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    SitDigger_Base::read(f);
@@ -219,7 +219,7 @@ int Add_Carrier::read(Binary_file* f) {
 
    return RET_OK;
 }
-int Builder::read(Binary_file* f) {
+int Builder::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    SitDigger_Base::read(f);
@@ -229,7 +229,7 @@ int Builder::read(Binary_file* f) {
    return RET_OK;
 }
 
-int Planer::read(Binary_file* f) {
+int Planer::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    SitDigger_Base::read(f);
@@ -238,7 +238,7 @@ int Planer::read(Binary_file* f) {
    return RET_OK;
 }
 
-int Explorer::read(Binary_file* f) {
+int Explorer::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    SitDigger_Base::read(f);
@@ -246,7 +246,7 @@ int Explorer::read(Binary_file* f) {
    return RET_OK;
 }
 
-int Geologist::read(Binary_file* f) {
+int Geologist::read(FileRead* f) {
    Worker_Descr::read(f);
    Menu_Worker_Descr::read(f);
    SitDigger_Base::read(f);

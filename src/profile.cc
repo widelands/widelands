@@ -19,7 +19,6 @@
 
 #include "widelands.h"
 #include "profile.h"
-#include "myfile.h"
 
 #define TRUE_WORDS 4
 const char* trueWords[TRUE_WORDS] =
@@ -429,15 +428,16 @@ inline char *setEndAt(char *str, char c)
  */
 void Profile::parse(const char *filename, bool section_less_file )
 {
-   Ascii_file file;
-   file.open(filename, File::READ);
+	FILE *file = fopen(filename, "r");
+	if (!file && !supr_err)
+		err << "Couldn't open " << filename << std::endl;
 
    char line[1024];
    char *p;
    uint linenr = 0;
    Section *s = 0;
 
-   while(file.read_line(line, sizeof(line)) >= 0)
+   while(fgets(line, sizeof(line), file))
    {
       linenr++;
       p = line;

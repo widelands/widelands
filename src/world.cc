@@ -19,11 +19,9 @@
 
 #include "widelands.h"
 #include "world.h"
-//#include "worldfiletypes.h"
 #include "bob.h"
-#include "myfile.h"
-#include "md5file.h"
 #include "worlddata.h"
+#include "md5.h"
 
 // 
 // class World
@@ -39,33 +37,39 @@ World::~World(void) {
 // 
 // This loads a sane world file
 //
-int World::load_world(const char* name) {
-   MD5_Binary_file f;
-   f.open(name, File::READ);
-   if(f.get_state() != File::OPEN) return ERR_FAILED;
+void World::load_world(const char* name)
+{
+	char filename[256];
 
-   int retval;
-   
-   // read header, skip need list (this is already done)
-   if((retval=parse_header(&f))) return retval;
+	try
+	{	
+		snprintf(filename, sizeof(filename), "worlds/%s.wwf", name);
 
-   if((retval=parse_resources(&f))) return retval;
+		FileRead f;
+		f.Open(g_fs, filename);
 
-   if((retval=parse_terrains(&f))) return retval;
-  
-   if((retval=parse_bobs(&f))) return retval;
-  
-   // checksum check 
-   uchar* sum=(uchar*) f.get_chksum();
-   uchar  sum_read[16];
-   f.read(sum_read, 16);
-   uint i;
-   for(i=0; i<16; i++) {
-      // cerr << hex << (int) sum[i] << ":" << (int) sum_read[i] << endl;
-      if(sum[i] != sum_read[i]) return ERR_FAILED; // chksum inval
-   }
-   
-   return RET_OK;
+		ChkSum chksum;
+		chksum.pass_data(f.Data(0,0), f.GetSize()-16); // don't chksum the chksum ;)
+		chksum.finish_chksum();
+
+		// read header, skip need list (this is already done)
+		parse_header(&f);
+		parse_resources(&f);
+		parse_terrains(&f);
+		parse_bobs(&f);
+
+		// checksum check 
+		uchar *sum=(uchar*)chksum.get_chksum();
+		uchar *sum_read = (uchar*)f.Data(16);
+
+		if (memcmp(sum, sum_read, 16))
+			throw wexception("Checksum failed");
+	}
+	catch(std::exception &e)
+	{
+		// tag with world name
+		throw wexception("Error loading world %s: %s", name, e.what());
+	}
 } 
 
 // 
@@ -75,50 +79,48 @@ int World::load_world(const char* name) {
 //
 //function for loading the header of a worlds file
 //skips the provides list also
-int World::parse_header(Binary_file* f) {
-   char buf[1024];
-   
+void World::parse_header(FileRead* f)
+{
    // read magic
-   f->read(buf, 5);
-   if(strcasecmp(buf, "WLwf\0")) return ERR_FAILED;
+   if(strcasecmp(f->CString(), "WLwf"))
+		throw wexception("Wrong header magic");
 
    // read version
    ushort given_vers;
-   f->read(&given_vers, sizeof(ushort));
-   if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLWF_VERSION)) return ERR_WRONGVERSION;
-   if(VERSION_MAJOR(given_vers)==VERSION_MAJOR(WLWF_VERSION)) 
-      if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLWF_VERSION)) return ERR_WRONGVERSION;
+   given_vers = f->Unsigned16();
+   if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLWF_VERSION) ||
+      (VERSION_MAJOR(given_vers)==VERSION_MAJOR(WLWF_VERSION) &&
+       VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLWF_VERSION)))
+		throw wexception("Unsupported version");
    
    // read name, skip author and description
-   f->read(hd.name, sizeof(hd.name));
-   f->read(hd.author, sizeof(hd.author)); // author
-   f->read(hd.descr, 1024); // description
+   memcpy(hd.name, f->Data(sizeof(hd.name)), sizeof(hd.name));
+   memcpy(hd.author, f->Data(sizeof(hd.author)), sizeof(hd.author)); // author
+   memcpy(hd.descr, f->Data(1024), 1024); // description
 
    // skip provides list
    // read magic
-   f->read(buf, 13);
-   if(strcasecmp(buf, "ProvidesList\0")) return ERR_FAILED;
-   ushort nprovides=0;
-   f->read(&nprovides, sizeof(ushort));
+   if(strcasecmp(f->CString(), "ProvidesList"))
+		throw wexception("Wrong ProvidesList magic");
+	
+   ushort nprovides;
+   nprovides = f->Unsigned16();
 
    uint i;
    ushort is_a;
    for(i=0; i<nprovides; i++) {
-      f->read(&is_a, sizeof(ushort));
-      f->read(buf, 30);
+      is_a = f->Unsigned16();
+      f->Data(30);
    }
-
-   return OK;
 }
 
-int World::parse_resources(Binary_file* f) {
-   char buf[1024];
-
-   f->read(buf, 10);
-   if(strcasecmp(buf, "Resources\0")) return ERR_FAILED;
+void World::parse_resources(FileRead* f)
+{
+   if(strcasecmp(f->CString(), "Resources"))
+		throw wexception("Wrong resources magic");
 
    ushort nres;
-   f->read(&nres, sizeof(ushort));
+   nres = f->Unsigned16();
 
    uint i;
    Resource_Descr* r;
@@ -127,18 +129,15 @@ int World::parse_resources(Binary_file* f) {
       res.add(r);
       r->read(f);
    }
-
-   return RET_OK;
 }
 
-int World::parse_terrains(Binary_file* f) {
-   char buf[1024];
-
-   f->read(buf, 9);
-   if(strcasecmp(buf, "Terrains\0")) return ERR_FAILED;
+void World::parse_terrains(FileRead* f)
+{
+   if(strcasecmp(f->CString(), "Terrains"))
+		throw wexception("Wrong terrains magic");
 
    ushort nters;
-   f->read(&nters, sizeof(ushort));
+   nters = f->Unsigned16();
 
    uint i;
    Terrain_Descr* t;
@@ -147,18 +146,16 @@ int World::parse_terrains(Binary_file* f) {
       ters.add(t);
       t->read(f);
    }
-
-   return RET_OK;
 }
 
-int World::parse_bobs(Binary_file* f) {
-   char buf[1024];
-
-   f->read(buf, 5);
-   if(strcasecmp(buf, "Bobs\0")) return ERR_FAILED;
+void World::parse_bobs(FileRead* f)
+{
+   if(strcasecmp(f->CString(), "Bobs"))
+		throw wexception("Wrong bobs magic");
 
    ushort nbobs;
-   f->read(&nbobs, sizeof(ushort));
+   nbobs = f->Unsigned16();
+	
    Logic_Bob_Descr* b;
    uchar id;
    uint i;
@@ -166,7 +163,7 @@ int World::parse_bobs(Binary_file* f) {
    bobs.reserve(nbobs);
 
    for(i=0; i<nbobs; i++) {
-      f->read(&id, sizeof(uchar));
+      id = f->Unsigned8();
 
       switch(id) {
          case Logic_Bob_Descr::BOB_DIMINISHING:
@@ -183,17 +180,12 @@ int World::parse_bobs(Binary_file* f) {
 
          case Logic_Bob_Descr::BOB_GROWING:
          default:
-            // illegal bob for world
-            assert(0);
-            return ERR_FAILED;
-            break;
+				throw wexception("Unsupported BOB_GROWING");
       }
       assert(b);
       bobs.add(b);
       b->read(f);
    }
-
-   return RET_OK;
 }
 
 // 
@@ -203,38 +195,34 @@ int World::parse_bobs(Binary_file* f) {
 // 
 // read a terrain description in
 // 
-int Terrain_Descr::read(Binary_file* f) {
+void Terrain_Descr::read(FileRead* f)
+{
    // for the moment, we skip a lot of stuff, since it is not yet needed
-   f->read(name, 30);
-   f->read(&is, sizeof(uchar));
+   memcpy(name, f->Data(30), 30);
+   is = f->Unsigned8();
    
-   char buf[100];
-  
    // skip def resource
 //   f->read(&def_res, sizeof(uchar));
 //   f->read(&def_stock, sizeof(ushort));
    // skip maxh, minh
 //   f->read(&minh, sizeof(uchar));
 //   f->read(&maxh, sizeof(uchar));
-   f->read(buf, 5);
+   f->Data(5);
    
    // skip resources
    uchar nres;
-   f->read(&nres, sizeof(uchar));
-   f->read(buf, nres*sizeof(uchar));
+   nres = f->Unsigned8();
+   f->Data(nres);
    
-   f->read(&ntex, sizeof(ushort));
+   ntex = f->Unsigned16();
    
-   char *buf1=(char*) malloc(sizeof(ushort)*TEXTURE_W*TEXTURE_H);
    uint i;
    tex=new Pic*[ntex];
    for(i=0; i<ntex; i++) {
       tex[i]=new Pic();
-      f->read(buf1, sizeof(ushort)*TEXTURE_W*TEXTURE_H);
-      tex[i]->create(TEXTURE_W, TEXTURE_H, (ushort*)buf1);
+      
+		ushort *ptr = (ushort*)f->Data(sizeof(ushort)*TEXTURE_W*TEXTURE_H);
+      tex[i]->create(TEXTURE_W, TEXTURE_H, ptr);
    }
-   free(buf1);
-
-   return RET_OK;
 }
 

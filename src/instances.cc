@@ -79,6 +79,7 @@ void Object_Manager::free_object(Game* g, Map_Object* obj)
 	delete obj;
 }
 
+
 Map_Object* Object_Ptr::get(Game* game)
 {
 	if (!m_serial) return 0;

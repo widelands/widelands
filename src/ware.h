@@ -31,7 +31,7 @@ class Need_List {
       Need_List(void) { list=0; }
       ~Need_List(void) { if(list) free(list); }
 
-      int read(Binary_file *f);
+      int read(FileRead *f);
       
    private:
       struct List {

@@ -17,12 +17,10 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
 #include "ui.h"
 #include "mapselectmenue.h"
 #include "font.h"
-#include "fileloc.h"
 #include "input.h"
 #include "menuecommon.h"
 #include "map.h"
@@ -54,7 +52,7 @@ class MapSelectMenu : public BaseMenu {
 public:
 	MapSelectMenu(Game *g);
 
-	inline const char *get_map() { return list->get_selection(); }
+	const char *get_map() { return list->get_selection(); }
 
 	void ok();
 	void map_selected(int id);
@@ -85,32 +83,21 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	list->selected.set(this, &MapSelectMenu::map_selected);
 
 	// Fill it with the files: Widelands map files
-	g_fileloc.init_filelisting(TYPE_MAP, WLMF_SUFFIX);
-	const char* name;
-	uint i;
-	while(g_fileloc.get_state() != File_Locator::LA_NOMOREFILES) {
-		name = g_fileloc.get_next_file();
-		if(!name) continue;
+	filenameset_t mapfiles;
+	
+	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &mapfiles);
+	g_fs->FindFiles("maps", "*"S2MF_SUFFIX, &mapfiles);
+	
+	for(filenameset_t::iterator pname = mapfiles.begin(); pname != mapfiles.end(); pname++) {
+		const char *name = pname->c_str();
+		const char *slash = strrchr(name, '/');
+		const char *backslash = strrchr(name, '\\');
+		
+		if (backslash && (!slash || backslash > slash))
+			slash = backslash;
 
-		i = strlen(name);
-		while(name[i] != '/' && name[i] != '\\') --i;
-		++i;
-		list->add_entry(name+i, name);
+		list->add_entry(slash?slash+1:name, name);
 	}
-	g_fileloc.end_filelisting();
-
-	// Fill it with more files: Settlers2 map files
-	g_fileloc.init_filelisting(TYPE_MAP, S2MF_SUFFIX);
-	while(g_fileloc.get_state() != File_Locator::LA_NOMOREFILES) {
-		name=g_fileloc.get_next_file();
-		if(!name) continue;
-
-		i=strlen(name);
-		while(name[i] != '/' && name[i] != '\\') --i;
-		++i;
-		list->add_entry(name+i, name);
-	}
-	g_fileloc.end_filelisting();
 
 	// Info fields
 	new Textarea(this, 450, 210, "Name:", Textarea::H_RIGHT);

@@ -19,12 +19,12 @@
 
 // 2002-02-10	sft+	made setup_searchpaths work for win32
 // 2002-02-11	sft+	made setup_searchpaths work PROPERLY for win32
+// 2002-08-07  nh		setup_searchpaths changed for saner default paths
 
 #include "widelands.h"
 #include "graphic.h"
 #include "font.h"
 #include "ui.h"
-#include "fileloc.h"
 #include "setup.h"
 #include "cursor.h"
 
@@ -40,19 +40,14 @@
  * Args: None
  * Returns: Nothing
  */
-void setup_fonthandler(void) {
-		  // Setting Font_Handler up
-		  const char* buf=g_fileloc.locate_file("fixed_font1.wff", TYPE_FONT);
-		  if(!buf) {
-					 tell_user("fixed_font1.wwf:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  if(g_fh.load_font( buf, FIXED_FONT1 ) != RET_OK) {
-					 char mbuf[200];
-					 sprintf(mbuf, "%s: Invalid File, load error, or wrong version. Check for new versions.", buf);
-					 tell_user(mbuf);
-					 exit(0);
-		  }
+void setup_fonthandler(void)
+{
+	if (g_fh.load_font( "fixed_font1", FIXED_FONT1 ) != RET_OK) {
+		char mbuf[200];
+		snprintf(mbuf, sizeof(mbuf), "Failed to load fixed_font1.");
+		tell_user(mbuf);
+		exit(0);
+	}
 }
 
 /** void setup_ui(void)
@@ -62,68 +57,57 @@ void setup_fonthandler(void) {
  * Args: none
  * Returns: Nothing
  */
-void setup_ui(void) {
-		  // Init cursor
-		  Pic *cursor=new Pic;
-		  const char* buf=g_fileloc.locate_file("cursor.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("cursor.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
+void setup_ui(void)
+{
+	// Init cursor
+	Pic *cursor=new Pic;
+	cursor->load("pics/cursor.bmp");
+	cursor->set_clrkey(0,0,255);
+	g_cur.set_pic(cursor);
 
-		  cursor->load(buf);
-		  cursor->set_clrkey(0,0,255);
-		  g_cur.set_pic(cursor);
+	// Button class
+	Button::setup_ui();
 
-		  // Button class
-		  Button::setup_ui();
+	// list select class
+	Listselect::setup_ui();
 
-		  // list select class
-		  Listselect::setup_ui();
-
-		  Checkbox::setup_ui();
+	Checkbox::setup_ui();
 }
 
-/** void setup_searchpaths(void)
+/** void setup_searchpaths(int argc, char **argv)
  *
- * Sets the filelocators default searchpaths, this is OS specific
- *
- * Args: None
- * Returns: Nothing
+ * Sets the filelocators default searchpaths (partly OS specific)
  */
-void setup_searchpaths(void)
+void setup_searchpaths(int argc, char **argv)
 {
-	static File_Locator fileloc;
-
-	char* buf;
-	char cmd[MAX_PATHL];
-#ifndef	WIN32
-	buf=getenv("HOME");
-	strcpy(cmd, buf);
-	strcat(cmd, "/.widelands");
-	mkdir(cmd, 0x1FF);
-	g_fileloc.add_searchdir(cmd, MAX_DIRS-1);
-	g_fileloc.set_def_writedir(MAX_DIRS-1);
-	g_fileloc.add_searchdir(PKGDATADIR, MAX_DIRS-2);
-
-#else
-	uint i=0, n=0;
-	buf = GetCommandLine();
-	while (buf[i]==' ' || buf[i]=='\"' )
-		i++;
-	while (buf[i]!='\"' && i<strlen(buf))
-	{
-		cmd[n] = buf[i];
-		i++;
-		n++;
+	// absolute fallback directory is the CWD
+	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
+	
+	// the directory the executable is in is the default game data directory
+	char *exename = strdup(argv[0]);
+	char *slash = strrchr(exename, '/');
+	char *backslash = strrchr(exename, '\\');
+	
+	if (backslash && (!slash || backslash > slash))
+		slash = backslash;
+	if (slash) {
+		*slash = 0;
+		if (strcmp(exename, "."))
+			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
 	}
-	cmd[n] = 0;
-	for (int j=strlen(cmd)-1; j>=0; j--)
-		if (cmd[j] == '\\')
-		{
-			cmd[j] = 0;
-			break;
-		}
-	g_fileloc.add_searchdir(cmd, MAX_DIRS-2);
+	
+	free(exename);
+
+	// finally, the user's config directory
+	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
+#ifndef	WIN32
+	std::string path;
+	char *buf=getenv("HOME");
+	
+	if (buf) { // who knows, maybe the user's homeless
+		path = std::string(buf) + "/.widelands";
+		mkdir(path.c_str(), 0x1FF);
+		g_fs->AddFileSystem(FileSystem::CreateFromDirectory(path.c_str()));
+	}
 #endif
 }

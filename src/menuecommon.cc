@@ -22,7 +22,6 @@
 #include "input.h"
 #include "graphic.h"
 #include "cursor.h"
-#include "fileloc.h"
 #include "menuecommon.h"
 
 /*
@@ -42,10 +41,9 @@ BaseMenu
 BaseMenu::BaseMenu(const char *bgpic)
 	: Panel(0, 0, 0, MENU_XRES, MENU_YRES)
 {
-	const char *name = g_fileloc.locate_file(bgpic, TYPE_PIC);
-	if (!name)
-		critical_error("%s: File not found. Check your installation.", bgpic);
-	bg.load(name);
+	char buf[256];
+	snprintf(buf, sizeof(buf), "pics/%s", bgpic);
+	bg.load(buf);
 }
 
 /** BaseMenu::start()

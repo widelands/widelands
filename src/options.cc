@@ -22,8 +22,6 @@
 #include "widelands.h"
 #include "options.h"
 #include "parser.h"
-#include "myfile.h"
-#include "fileloc.h"
 #include "config.h"
 #include "graphic.h"
 #include "input.h"
@@ -36,22 +34,6 @@ struct Options {
 		  int xres;
 		  int yres;
 		  bool fullscreen;
-
-		  // Dirs
-		  char searchdir0[MAX_OPT_LENGTH];
-		  char searchdir1[MAX_OPT_LENGTH];
-		  char searchdir2[MAX_OPT_LENGTH];
-		  char txtsdir[MAX_OPT_LENGTH];
-		  char picsdir[MAX_OPT_LENGTH];
-		  char bobsdir[MAX_OPT_LENGTH];
-		  char tribesdir[MAX_OPT_LENGTH];
-		  char worldsdir[MAX_OPT_LENGTH];
-		  char campaignsdir[MAX_OPT_LENGTH];
-		  char mapsdir[MAX_OPT_LENGTH];
-		  char musicsdir[MAX_OPT_LENGTH];
-		  char effectsdir[MAX_OPT_LENGTH];
-		  char fontsdir[MAX_OPT_LENGTH];
-		  char savedir[MAX_OPT_LENGTH];
 
 		  // Gameplay
 		  bool swapmouse;
@@ -85,8 +67,8 @@ struct Options {
 ofstream out, err;
 
 // Declaratiosn
-static int parse_command_line(uint, char**, Options*);
-static int parse_conf_file(Ascii_file&, Options*);
+static int parse_command_line(int, char**, Options*);
+static int parse_conf_file(Options*);
 static int write_conf_file(Options*);
 static int consume_options(Options*);
 static void show_usage(void);
@@ -102,36 +84,20 @@ static void show_usage(void);
  * Args: o	Options to write
  * Returns: RET_OK or ERR_FAILED
  */
-static int write_conf_file(Options* o) {
-		  const char* buf;
-
-		  buf=g_fileloc.get_new_filename("config");
-
-		  ofstream f(buf);
-
-		  f << "# Widelands configfile, written by Version " << VERSION << endl;
-		  f << "# Any comments to the game? mailto:SirVer@gmx.de" << endl;
-		  f << endl;
-		  f << "# Graphics" << endl;
+static int write_conf_file(Options* o)
+{
+	FileWrite fw;
+	
+	fw.Printf("# Widelands configfile, written by Version " VERSION "\n");
+	fw.Printf("# Any comments to the game? Tell us on widelands-public@list.sourceforge.net\n");
+	fw.Printf("\n");
+	fw.Printf("# Graphics\n");
+	// We really need to improve this anyway, so...
+	// Apart from that, most of those options aren't used anyway
+/*
 		  f << "XRES" << "=" << o->xres << endl;
 		  f << "YRES" << "=" << o->yres << endl;
 		  f << "FULLSCREEN" << "=" << o->fullscreen << endl;
-		  f << "" << endl;
-		  f << "# Directorys" << endl;
-		  f << "SEARCHDIR0" << "=\"" << o->searchdir0 << "\"" << endl;
-		  f << "SEARCHDIR1" << "=\"" << o->searchdir1 << "\"" << endl;
-		  f << "SEARCHDIR2" << "=\"" << o->searchdir2 << "\"" << endl;
-		  f << "TXTSDIR" << "=\"" << o->txtsdir << "\"" << endl;
-		  f << "PICSDIR" << "=\"" << o->picsdir << "\"" << endl;
-		  f << "BOBSDIR" << "=\"" << o->bobsdir << "\"" << endl;
-		  f << "TRIBESDIR" << "=\"" << o->tribesdir << "\"" << endl;
-		  f << "WORLDSDIR" << "=\"" << o->worldsdir << "\"" << endl;
-		  f << "CAMPAIGNSDIR" << "=\"" << o->campaignsdir << "\"" << endl;
-		  f << "MAPSDIR" << "=\"" << o->mapsdir << "\"" << endl;
-		  f << "MUSICSDIR" << "=\"" << o->musicsdir << "\"" << endl;
-		  f << "EFFECTSDIR" << "=\"" << o->effectsdir << "\"" << endl;
-		  f << "FONTSDIR" << "=\"" << o->fontsdir << "\"" << endl;
-		  f << "SAVEDIR" << "=\"" << o->savedir << "\"" << endl;
 		  f << "" << endl;
 		  f << "# Gameplay" << endl;
 		  f << "SWAPMOUSE" << "=" << o->swapmouse << endl;
@@ -155,78 +121,63 @@ static int write_conf_file(Options* o) {
 		  f << "STDERR" << "=\"" << o->stderr_file << "\"" << endl;
 		  f << "STDOUT" << "=\"" << o->stdout_file << "\"" << endl;
 		  f.close();
+*/
 
-		  return RET_OK;
+	fw.Write(g_fs, "config");
+
+	return RET_OK;
 }
 
 
-/** static int parse_conf_file(Ascii_file &f, Options* o) 
+/** static int parse_conf_file(Options* o) 
  *
  * parses the config file using the parser class. Saving options in struct
  *
- * Args: f	open file to parse
- * 		o  Optionsstruct to write options inside
  * returns: RET_OK on success, ERR_FAILED otherwise
  */
-static int parse_conf_file(Ascii_file &f, Options* o) {
-		  if(f.get_state() != File::OPEN) return ERR_FAILED; 
-		  
-		  Parser p;
+static int parse_conf_file(Options* o)
+{
+	FileRead f;
+	
+	if (!f.TryOpen(g_fs, "config"))
+		return RET_OK; // yes, this is normal on first startup
+	
+	Parser p;
 
-		  p.register_int_opt("XRES", &o->xres);
-		  p.register_int_opt("YRES", &o->yres);
-		  p.register_bool_opt("FULLSCREEN", &o->fullscreen);
+	p.register_int_opt("XRES", &o->xres);
+	p.register_int_opt("YRES", &o->yres);
+	p.register_bool_opt("FULLSCREEN", &o->fullscreen);
 
-		  p.register_string_opt("SEARCHDIR0", o->searchdir0);
-		  p.register_string_opt("SEARCHDIR1", o->searchdir1);
-		  p.register_string_opt("SEARCHDIR2", o->searchdir2);
-		 
-		  p.register_string_opt("TXTSDIR", o->txtsdir);
-		  p.register_string_opt("PICSDIR", o->picsdir);
-		  p.register_string_opt("BOBSDIR", o->bobsdir);
-		  p.register_string_opt("TRIBESDIR", o->tribesdir);
-		  p.register_string_opt("WORLDSDIR", o->worldsdir);
-		  p.register_string_opt("CAMPAIGNSDIR", o->campaignsdir);
-		  p.register_string_opt("MAPSDIR", o->mapsdir);
-		  p.register_string_opt("MUSICSDIR", o->musicsdir);
-		  p.register_string_opt("EFFECTSDIR", o->effectsdir);
-		  p.register_string_opt("FONTSDIR", o->fontsdir);
-		  p.register_string_opt("SAVEDIR", o->savedir);
+	p.register_bool_opt("SWAPMOUSE", &o->swapmouse);
+	p.register_int_opt("MOUSESPEED", &o->mousespeed);
+	p.register_string_opt("PLAYERCOLOR", o->playercolor);
 
-		  p.register_bool_opt("SWAPMOUSE", &o->swapmouse);
-		  p.register_int_opt("MOUSESPEED", &o->mousespeed);
-		  p.register_string_opt("PLAYERCOLOR", o->playercolor);
-		  
-		  p.register_string_opt("PLAYER", o->player);
-		  p.register_string_opt("LASTSERVER", o->lastserver);
+	p.register_string_opt("PLAYER", o->player);
+	p.register_string_opt("LASTSERVER", o->lastserver);
 
-		  p.register_bool_opt("USEMUSIC", &o->usemusic);
-		  p.register_bool_opt("USEEFFECTS", &o->useeffects);
-		 
-		  p.register_int_opt("VOLUME_MUSIC", &o->music_vol);
-		  p.register_int_opt("VOLUME_EFFECTS", &o->effects_vol);
-		  p.register_string_opt("SNDDEV", o->snddev);
+	p.register_bool_opt("USEMUSIC", &o->usemusic);
+	p.register_bool_opt("USEEFFECTS", &o->useeffects);
 
-		  p.register_string_opt("STDERR", o->stderr_file);
-		  p.register_string_opt("STDOUT", o->stdout_file);
+	p.register_int_opt("VOLUME_MUSIC", &o->music_vol);
+	p.register_int_opt("VOLUME_EFFECTS", &o->effects_vol);
+	p.register_string_opt("SNDDEV", o->snddev);
+
+	p.register_string_opt("STDERR", o->stderr_file);
+	p.register_string_opt("STDOUT", o->stdout_file);
 					 
-		  char buf[1024];
-		  buf[0]='\0';
-		  int line=1;
-		  do {
-					 f.read_line(buf, 1024);
-					 if(f.get_state() != File::END_OF_FILE) {
-								if(p.parse_line(buf)) {
-										  char output[1500];
+	char buf[1024];
+	int line = 1;
+	while(f.ReadLine(buf, sizeof(buf))) {
+		if(p.parse_line(buf)) {
+			char output[1500];
 		 
-										  sprintf(output, "Syntax error in config file (line %i): \"%s\"", line, buf);
-										  tell_user(output);
-								}
-								line++;
-					 }
-		  }  while(f.get_state() != File::END_OF_FILE ); 
+			sprintf(output, "Syntax error in config file (line %i): \"%s\"", line, buf);
+			tell_user(output);
+		}
+		line++;
+	}
 
-		  return RET_OK;
+	return RET_OK;
 }
 
 /** static int parse_command_line(uint argn, char** argc, Options* o)
@@ -239,64 +190,48 @@ static int parse_conf_file(Ascii_file &f, Options* o) {
  *
  * Returns: RET_OK on success
  */
-static int parse_command_line(uint argn, char** argc, Options* o) {
-		  Parser p;
-		  char output[1024];
+static int parse_command_line(int argc, char** argv, Options* o)
+{
+	Parser p;
+	char output[1024];
 		  
-		  p.register_int_opt("--xres", &o->xres);
-		  p.register_int_opt("--yres", &o->yres);
-		  p.register_bool_opt("--fullscreen", &o->fullscreen);
+	p.register_int_opt("--xres", &o->xres);
+	p.register_int_opt("--yres", &o->yres);
+	p.register_bool_opt("--fullscreen", &o->fullscreen);
 
-		  p.register_string_opt("--searchdir0", o->searchdir0);
-		  p.register_string_opt("--searchdir1", o->searchdir1);
-		  p.register_string_opt("--searchdir2", o->searchdir2);
-
-		  p.register_string_opt("--txtsdir", o->txtsdir);
-		  p.register_string_opt("--picsdir", o->picsdir);
-		  p.register_string_opt("--bobsdir", o->bobsdir);
-		  p.register_string_opt("--tribesdir", o->tribesdir);
-		  p.register_string_opt("--worldsdir", o->worldsdir);
-		  p.register_string_opt("--campaignsdir", o->campaignsdir);
-		  p.register_string_opt("--mapsdir", o->mapsdir);
-		  p.register_string_opt("--musicsdir", o->musicsdir);
-		  p.register_string_opt("--effectsdir", o->effectsdir);
-		  p.register_string_opt("--fontsdir", o->fontsdir);
-		  p.register_string_opt("--savedir", o->savedir);
-
-		  p.register_bool_opt("--swapmouse", &o->swapmouse);
-		  p.register_int_opt("--mousespeed", &o->mousespeed);
-		  p.register_string_opt("--playercolor", o->playercolor);
+	p.register_bool_opt("--swapmouse", &o->swapmouse);
+	p.register_int_opt("--mousespeed", &o->mousespeed);
+	p.register_string_opt("--playercolor", o->playercolor);
 		  
-		  p.register_string_opt("--player", o->player);
-		  p.register_string_opt("--lastserver", o->lastserver);
+	p.register_string_opt("--player", o->player);
+	p.register_string_opt("--lastserver", o->lastserver);
 
-		  p.register_bool_opt("--usemusic", &o->usemusic);
-		  p.register_bool_opt("--useeffects", &o->useeffects);
+	p.register_bool_opt("--usemusic", &o->usemusic);
+	p.register_bool_opt("--useeffects", &o->useeffects);
 		 
-		  p.register_int_opt("--volume_music", &o->music_vol);
-		  p.register_int_opt("--volume_effects", &o->effects_vol);
-		  p.register_string_opt("--snddev", o->snddev);
+	p.register_int_opt("--volume_music", &o->music_vol);
+	p.register_int_opt("--volume_effects", &o->effects_vol);
+	p.register_string_opt("--snddev", o->snddev);
 
-		  p.register_string_opt("--stderr", o->stderr_file);
-		  p.register_string_opt("--stdout", o->stdout_file);
+	p.register_string_opt("--stderr", o->stderr_file);
+	p.register_string_opt("--stdout", o->stdout_file);
 
-		  p.register_bool_opt("--help", &o->show_usage);
-		  p.register_bool_opt("--version", &o->show_version);
+	p.register_bool_opt("--help", &o->show_usage);
+	p.register_bool_opt("--version", &o->show_version);
 
-		  for(uint i=1; i<argn; i++) {
-					 if(p.parse_line(argc[i])) {
-								strcpy(output, "Parsing error on arg: ");
-								strcat(output, argc[i]);
-								tell_user(output);
-								o->show_usage=true;
-					 }
-		  }
+	for(int i=1; i<argc; i++) {
+		if(p.parse_line(argv[i])) {
+			strcpy(output, "Parsing error on arg: ");
+			strcat(output, argv[i]);
+			tell_user(output);
+			o->show_usage=true;
+		}
+	}
 
-
-		  return RET_OK;
+	return RET_OK;
 }
 
-/** void Handle_Options(unsigend int argn, char** argc)
+/** void Handle_Options(int argn, char** argc)
  *
  * This function parses the config file and the cmdline,
  * checks the opts and send the different parts of the game
@@ -305,8 +240,7 @@ static int parse_command_line(uint argn, char** argc, Options* o) {
  * Args: argn 	number of cmdline args
  * 		argc	cmdline args
  */
-void handle_options(uint argn, char** argc) {
-		  Ascii_file f;
+void handle_options(int argc, char** argv) {
 		  Options o;
 
 		  // Setting defaults
@@ -314,22 +248,6 @@ void handle_options(uint argn, char** argc) {
 		  o.xres=640;
 		  o.yres=480;
 		  o.fullscreen=1;
-
-		  // Dirs
-		  strcpy(o.searchdir0, "");
-		  strcpy(o.searchdir1, "");
-		  strcpy(o.searchdir2, "");
-		  strcpy(o.txtsdir   , "txts");
-		  strcpy(o.picsdir   , "pics");
-		  strcpy(o.bobsdir   , "bobs");
-		  strcpy(o.tribesdir , "tribes");
-		  strcpy(o.worldsdir , "worlds");
-		  strcpy(o.campaignsdir , "campaigns");
-		  strcpy(o.mapsdir 	 , "maps");
-		  strcpy(o.musicsdir , "musics");
-		  strcpy(o.effectsdir, "effects");
-		  strcpy(o.fontsdir, "fonts");
-		  strcpy(o.savedir, "save");
 
 		  // Gameplay
 		  o.swapmouse=0;
@@ -355,25 +273,12 @@ void handle_options(uint argn, char** argc) {
 		  strcpy(o.stderr_file, "stderr");
 		  strcpy(o.stdout_file, "stdout");
 
-		  const char* buf;
-		  buf=g_fileloc.locate_file("config");
-		  if (buf)
-		  	  f.open(buf, File::READ);
-
-		  if(f.get_state() != File::OPEN) {
-					 // We couldn't open the config file, so we write a default one
-					 write_conf_file(&o);
-		  } else {
-					 // Else, parse the file
-					 // Errors here don't matter, the user will be informed
-					 // and on exit a new conf file will be written
-					 parse_conf_file(f, &o);
-		  }
+			parse_conf_file(&o);
 
 		  // Next, parse the comand line
 		  // Errors don't matter. The user will be informed and a usage function will
 		  // be called
-		  parse_command_line(argn, argc, &o);
+		  parse_command_line(argc, argv, &o);
 
 		  // Options struct is now set up! use them now
 		  consume_options(&o);
@@ -400,22 +305,6 @@ static int consume_options(Options* o) {
 					 g_gr.set_mode(0, 0, Graphic::MODE_WIN);
 					 g_ip.grab_input(true);
 		  }
-
-		  // Dirs
-		  g_fileloc.add_searchdir(o->searchdir0, 0);
-		  g_fileloc.add_searchdir(o->searchdir1, 1);
-		  g_fileloc.add_searchdir(o->searchdir2, 2);
-		  g_fileloc.register_subdir(TYPE_TEXT, o->txtsdir);
-		  g_fileloc.register_subdir(TYPE_PIC, o->picsdir);
-		  g_fileloc.register_subdir(TYPE_BOB, o->bobsdir);
-		  g_fileloc.register_subdir(TYPE_TRIBE, o->tribesdir);
-		  g_fileloc.register_subdir(TYPE_WORLD, o->worldsdir);
-		  g_fileloc.register_subdir(TYPE_CAMPAIGN, o->campaignsdir);
-		  g_fileloc.register_subdir(TYPE_MAP, o->mapsdir);
-		  g_fileloc.register_subdir(TYPE_MUSIC, o->musicsdir);
-		  g_fileloc.register_subdir(TYPE_EFFECT, o->effectsdir);
-		  g_fileloc.register_subdir(TYPE_FONT, o->fontsdir);
-		  g_fileloc.register_subdir(TYPE_SAVE, o->savedir);
 
 		  // Gameplay
 		  g_ip.swap_buttons(o->swapmouse);
@@ -447,14 +336,12 @@ static int consume_options(Options* o) {
 		  if(o->stderr_file[0]=='\0') {
 					 strcpy(o->stderr_file, "stderr");
 		  }
-		  const char* buf=g_fileloc.get_new_filename(o->stderr_file);
-		  err.open(buf);
+		  err.open(o->stderr_file);
 
 		  if(o->stdout_file[0]=='\0') {
 					 strcpy(o->stdout_file, "stdout");
 		  }
-		  buf=g_fileloc.get_new_filename(o->stdout_file);
-		  out.open(buf);
+		  out.open(o->stdout_file);
 
 		  return RET_OK;
 }
@@ -466,28 +353,15 @@ static int consume_options(Options* o) {
  * Args: None
  * Returns: Nothing
  */
-static void show_usage(void) {
-		  char help[] =
+static void show_usage(void)
+{
+	static const char help[] =
 					 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 					 "Options:\n"
 					 "Graphic:\n"
 					 "\t--xres\t\t\tSet X resolution\n"
 					 "\t--yres\t\t\tSet Y resolution\n"
 					 "\t--fullscreen\t\tTurn fullscreen mode on/off\n\n"
-					 "\n"
-					 "Directorys:\n"
-					 "\t--searchdir0\t\tFirst additional searchdir\n"
-					 "\t--searchdir1\t\tSecond additional searchdir\n"
-					 "\t--searchdir2\t\tThird additional searchdir\n"
-					 "\t--txtsdir\t\tSubdir to look for txt resources in\n"
-					 "\t--picsdir\t\tSubdir to look for picture resources in\n"
-					 "\t--bobsdir\t\tSubdir to look for bobs resources in\n"
-					 "\t--tribesdir\t\tSubdir to look for tribes resources in\n"
-					 "\t--worldsdir\t\tSubdir to look for worlds resources in\n"
-					 "\t--campaignsdir\t\tSubdir to look for campaign resources in\n"
-					 "\t--mapsdir\t\tSubdir to look for maps resources in\n"
-					 "\t--musicsdir\t\tSubdir to look for music resources in\n"
-					 "\t--effectsdir\t\tSubdir to look for sound-effect resources in\n"
 					 "\n"
 					 "Gameplay:\n"
 					 "\t--swapmouse\t\tTurns mouse swapping on/off\n"
@@ -512,9 +386,10 @@ static void show_usage(void) {
 					 "\t--help\t\t\tShow this help\n"
 					 "\t--version\t\tShow version\n"
 					 "\n"
-					 "Bug reports? Suggestions? mailto:SirVer@gmx.de\n"
+					 "Bug reports? Suggestions? Check out the project website:\n"
+					 "  http://www.sourceforge.net/f.net/projects/widelands\n"
 					 "Hope you enjoy this game!\n"
 					 "";
 
-		  tell_user(help);
+	tell_user(help);
 }

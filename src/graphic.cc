@@ -41,12 +41,14 @@
   it does NOT come from stl in my win32 (i wouldn't have added it, would i?)
   well i'll leave it here, as this part of code will hopefully disappear soon
   */
+#ifdef WIN32
 template <typename T> inline void swap(T& a, T& b)
 {
    T temp = a;
    a = b;
    b = temp;
 }
+#endif
 
 struct _go
 {

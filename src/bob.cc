@@ -17,7 +17,6 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
 #include "world.h"
 #include "bob.h"
@@ -28,29 +27,21 @@
 //
 // this is a function which reads a animation from a file
 //
-int Animation::read(Binary_file* f) {
+int Animation::read(FileRead* f)
+{
    ushort np;
-   f->read(&np, sizeof(ushort));
+   np = f->Unsigned16();
 
    uint i;
-   char* buf;
-   ushort buf_size=15000;
-   buf=(char*) malloc(buf_size);
    
    ushort size;
    for(i=0; i<np; i++) {
-      f->read(&size, sizeof(ushort));
+      size = f->Unsigned16();;
       
-      if(size > buf_size) {
-         buf_size=size;
-         buf=(char*) realloc(buf, buf_size);
-      }
-      f->read(buf, size);
-      add_pic(size, (ushort*) buf);
+      ushort *ptr = (ushort*)f->Data(size);
+      add_pic(size, ptr);
    }
   
-   free(buf);
-   
    return RET_OK;
 }
 
@@ -191,21 +182,21 @@ void Critter_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthin
 // 
 // class Logic_Bob_Descr
 //
-int Logic_Bob_Descr::read(Binary_file* f) {
-   f->read(name, 30);
+int Logic_Bob_Descr::read(FileRead* f)
+{
+   memcpy(name, f->Data(30), 30);
 
    ushort h, w, hsx, hsy;
 
-   f->read(&w, sizeof(ushort));
-   f->read(&h, sizeof(ushort));
-   f->read(&hsx, sizeof(ushort));
-   f->read(&hsy, sizeof(ushort));
+   w = f->Unsigned16();
+   h = f->Unsigned16();
+   hsx = f->Unsigned16();
+   hsy = f->Unsigned16();
 
    anim.set_dimensions(w,h);
    anim.set_hotspot(hsx, hsy);
 
    anim.read(f);
-
 
    return RET_OK;
 }
@@ -213,10 +204,11 @@ int Logic_Bob_Descr::read(Binary_file* f) {
 //
 // class Boring_Bob_Descr
 //
-int Boring_Bob_Descr::read(Binary_file* f) {
+int Boring_Bob_Descr::read(FileRead* f)
+{
    Logic_Bob_Descr::read(f);
 
-   f->read(&ttl, sizeof(ushort));
+   ttl = f->Unsigned16();
       
    return RET_OK;
 }
@@ -229,12 +221,12 @@ Map_Object *Boring_Bob_Descr::create_object()
 //
 // class Critter_Bob_Descr
 //
-int Critter_Bob_Descr::read(Binary_file* f) {
+int Critter_Bob_Descr::read(FileRead* f) {
    Logic_Bob_Descr::read(f);
 
-   f->read(&stock, sizeof(ushort));
+   stock = f->Unsigned16();
    uchar temp;
-   f->read(&temp, sizeof(uchar));
+   temp = f->Unsigned8();
    swimming=temp;
 
    // read all the other bobs
@@ -269,13 +261,12 @@ Map_Object *Critter_Bob_Descr::create_object()
 //
 // class Diminishing_Bob_Descr
 //
-int Diminishing_Bob_Descr::read(Binary_file* f) {
+int Diminishing_Bob_Descr::read(FileRead* f) {
    Logic_Bob_Descr::read(f);
    
-   f->read(&stock, sizeof(ushort));
+   stock = f->Unsigned16();
    // TODO: ends in should be changed!
-   char buf[30];
-   f->read(buf, 30);
+	f->Data(30);
    
    return RET_OK;
 }
@@ -288,7 +279,7 @@ Map_Object *Diminishing_Bob_Descr::create_object()
 //
 // class Growing_Bob_Descr
 //
-int Growing_Bob_Descr::read(Binary_file* f) {
+int Growing_Bob_Descr::read(FileRead* f) {
    cerr << "Growing_Bob_Descr::read() TODO!" << endl;
    return RET_OK;
 }

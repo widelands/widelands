@@ -20,7 +20,6 @@
 #define __WORLD_H
 
 #include "graphic.h"
-#include "myfile.h"
 #include "descr_maintainer.h"
 #include "bob.h"
 #include "worlddata.h"
@@ -38,11 +37,11 @@ class Resource_Descr {
       Resource_Descr(void) { }
       ~Resource_Descr(void) { }
 
-      int read(Binary_file* f) {
-         f->read(name, 30);
-         f->read(&minh, sizeof(uchar));
-         f->read(&maxh, sizeof(uchar));
-         f->read(&importance, sizeof(uchar));
+      int read(FileRead* f) {
+         memcpy(name, f->Data(30), 30);
+         minh = f->Unsigned8();
+         maxh = f->Unsigned8();
+         importance = f->Unsigned8();
          return RET_OK;
       }
    private:
@@ -68,7 +67,7 @@ class Terrain_Descr {
       inline Pic* get_texture(void) { return tex[curtex]; }
       inline uchar get_is(void) { return is; }
 
-      int read(Binary_file* f);
+      void read(FileRead* f);
 
       
    private:
@@ -98,7 +97,7 @@ class World
 
       World(void);
 		~World();
-      int load_world(const char*);
+      void load_world(const char*);
       
       inline const char* get_name(void) { return hd.name; }
       inline const char* get_author(void) { return hd.author; }
@@ -113,8 +112,6 @@ class World
          for(i=0; i<ters.get_nitems(); i++)
 				ters.get(i)->animate(time);
       }
-
-
  
    private:
       Descr_Maintainer<Logic_Bob_Descr> bobs;
@@ -123,10 +120,10 @@ class World
       World_Descr_Header hd;
 
       // Functions
-      int parse_header(Binary_file* f);
-      int parse_resources(Binary_file* f);
-      int parse_bobs(Binary_file* f);
-      int parse_terrains(Binary_file* f);
+      void parse_header(FileRead* f);
+      void parse_resources(FileRead* f);
+      void parse_bobs(FileRead* f);
+      void parse_terrains(FileRead* f);
 };
 
 #endif

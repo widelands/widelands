@@ -31,9 +31,12 @@
 #include <iostream.h>
 #include <fstream.h>
 
-#include <vector>
+#include <exception>
 #include <map>
 #include <queue>
+#include <set>
+#include <string>
+#include <vector>
 
 #ifdef WIN32
 	#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*
@@ -59,6 +62,14 @@
 
 #include "config.h"
 
+/*
+==============================================================================
+
+Data types
+
+==============================================================================
+*/
+
 typedef unsigned char uchar;
 typedef unsigned short ushort;
 typedef unsigned int uint;
@@ -71,6 +82,55 @@ struct Coords {
 };
 
 inline bool operator==(const Coords& c1, const Coords& c2) { return (c1.x == c2.x) && (c1.y == c2.y); }
+
+
+// TODO: figure out a way to define these portably
+#define P_LITTLE_ENDIAN
+#undef P_BIG_ENDIAN
+
+#ifdef P_LITTLE_ENDIAN
+#define Little16(x)		(x)
+#define Little32(x)		(x)
+#define LittleFloat(x)	(x)
+#define Big16(x)			Swap16((x))
+#define Big32(x)			Swap32((x))
+#define BigFloat(x)		SwapFloat((x))
+#endif
+
+#ifdef P_BIG_ENDIAN
+#define Little16(x)		Swap16((x))
+#define Little32(x)		Swap32((x))
+#define LittleFloat(x)	SwapFloat((x))
+#define Big16(x)			(x)
+#define Big32(x)			(x)
+#define BigFloat(x)		(x)
+#endif
+
+inline short Swap16(short x) {
+	short s;
+	((uchar *)&s)[0] = ((uchar *)&x)[1];
+	((uchar *)&s)[1] = ((uchar *)&x)[0];
+	return s;
+}
+
+inline int Swap32(int x) {
+	int s;
+	((uchar *)&s)[0] = ((uchar *)&x)[3];
+	((uchar *)&s)[1] = ((uchar *)&x)[2];
+	((uchar *)&s)[2] = ((uchar *)&x)[1];
+	((uchar *)&s)[3] = ((uchar *)&x)[0];
+	return s;
+}
+
+inline float SwapFloat(float x)
+{
+	float s;
+	((uchar *)&s)[0] = ((uchar *)&x)[3];
+	((uchar *)&s)[1] = ((uchar *)&x)[2];
+	((uchar *)&s)[2] = ((uchar *)&x)[1];
+	((uchar *)&s)[3] = ((uchar *)&x)[0];
+	return s;
+}
 
 /*
 ==============================================================================
@@ -100,12 +160,29 @@ void inline tell_user(const char* str) {
 #endif
 }
 
+/** class wexception
+ *
+ * Stupid, simple exception class. It has the nice bonus that you can give it
+ * sprintf()-style format strings
+ */
+class wexception : public std::exception {
+	char m_string[256];
+
+public:
+	explicit wexception(const char *fmt, ...) throw();
+	virtual ~wexception() throw();
+	
+	virtual const char *what() const throw();
+};
+
 #ifdef DEBUG
    #ifndef KEEP_STANDART_ASSERT
       #ifdef assert
          #undef assert
       #endif
-      #define assert(condition) myassert(__LINE__, __FILE__, (int)(condition), #condition)
+	
+/* reintroduce when we figure out a way to actually manage the beast that is autotools
+   (problem is: tools include this as well)
       extern int graph_is_init;
 
       inline void myassert(int line, const char* file, int cond, const char* condt) {
@@ -122,11 +199,18 @@ void inline tell_user(const char* str) {
             }
          }
       }
-   #endif
+*/
+		void myassert(int line, const char* file, const char* condt) throw(wexception);
+   
+      #define assert(condition) \
+			do { if (!(condition)) myassert(__LINE__, __FILE__, #condition); } while(0)
+
+	#endif
 #else
       #define NDEBUG 1
       #include <assert.h>
 #endif
+
 
 /*
 ======================================================================================
@@ -141,5 +225,154 @@ void inline tell_user(const char* str) {
 // FRAME_LENGTH is just the default animation speed
 #define FRAME_LENGTH 250   
 
-//#define USE_SEE_AREA 1
+#define USE_SEE_AREA 1
+
+
+/*
+==============================================================================
+
+Filesystem access
+
+==============================================================================
+*/
+
+typedef std::set<std::string> filenameset_t;
+
+// basic path/filename manipulation
+char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
+char *FS_StripExtension(char *fname);
+char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
+bool FS_CanonicalizeName(char *buf, int bufsize, const char *path);
+
+/*
+FileSystem is a base class representing certain filesystem operations.
+*/
+class FileSystem {
+public:
+	virtual ~FileSystem() { }
+
+	virtual bool IsWritable() = 0;
+	
+	virtual int FindFiles(const char *path, const char *pattern, filenameset_t *results) = 0;
+	
+	virtual bool FileExists(const char *path) = 0;
+
+	virtual void *Load(const char *fname, int *length) = 0;
+	virtual void Write(const char *fname, void *data, int length) = 0;
+
+public:
+	static FileSystem *CreateFromDirectory(const char *directory);
+};
+
+/*
+LayeredFileSystem is a file system which basically merges several layered
+real directory structures into a single one. The really funny thing is that 
+those directories aren't represented as absolute paths, but as nested 
+FileSystems. Are you confused yet?
+Ultimately, this provides us with the necessary flexibility to allow file
+overrides on a per-user-basis, nested .zip files acting as Quake-like paks
+and so on.
+
+Note that only the top-most writable filesystem is written to. A typical 
+stack would look like this in real-life:
+
+~/.widelands/
+/where/they/installed/widelands/  <-- this is the directory that the executable is in
+$CWD  <-- the current-working directory; this is useful for debugging, when the executable
+          isn't in the root of the game-data directory
+*/
+class LayeredFileSystem : public FileSystem {
+public:
+	virtual void AddFileSystem(FileSystem *fs) = 0;
+
+public:
+	static LayeredFileSystem *Create();
+};
+
+
+/*
+FileRead can be used to read a file.
+It works quite naively by reading the entire file into memory.
+Convenience functions are available for endian-safe access of common data types
+*/
+class FileRead {
+public:
+	void	*data;
+	int	filepos;
+	int	length;
+
+public:
+	FileRead();
+	~FileRead();
+
+	void Open(FileSystem *fs, const char *fname);
+	bool TryOpen(FileSystem *fs, const char *fname);
+	void Close();
+
+	inline int GetSize() const { return length; }
+	void SetFilePos(int pos);
+
+	inline char Signed8(int pos = -1) { return *(char *)Data(1, pos); }
+	inline uchar Unsigned8(int pos = -1) { return *(uchar *)Data(1, pos); }
+	inline short Signed16(int pos = -1) { return Little16(*(short *)Data(2, pos)); }
+	inline ushort Unsigned16(int pos = -1) { return (ushort)Little16(*(short *)Data(2, pos)); }
+	inline int Signed32(int pos = -1) { return Little32(*(int *)Data(4, pos)); }
+	inline uint Unsigned32(int pos = -1) { return (uint)Little32(*(int *)Data(4, pos)); }
+	inline float Float(int pos = -1) { return LittleFloat(*(float *)Data(4, pos)); }
+	char *CString(int pos = -1);
+	bool ReadLine(char *buf, int buflen);
+	
+	void *Data(int bytes, int pos = -1) {
+		int i;
+
+		assert(data);
+
+		i = pos;
+		if (pos < 0) {
+			i = filepos;
+			filepos += bytes;
+		}
+		if (i+bytes > length)
+			throw wexception("File boundary exceeded");
+
+		return (char*)data + i;
+	}
+};
+
+/*
+Mirror of FileRead: all writes are first stored in a block of memory and finally
+written out when Write() is called.
+*/
+class FileWrite {
+public:
+	void	*data;
+	int	length;
+	int	maxsize;
+	int	filepos;
+
+public:
+	FileWrite();
+	~FileWrite();
+
+	void Write(FileSystem *fs, const char *filename);
+	bool TryWrite(FileSystem *fs, const char *filename);
+	void Clear();
+
+	void SetFilePos(int pos);
+	void Data(const void *data, int size, int pos = -1);
+
+	void Printf(const char *fmt, ...);
+
+	inline void Signed8(char x, int pos = -1) { Data(&x, 1, pos); }
+	inline void Unsigned8(uchar x, int pos = -1) { Data(&x, 1, pos); }
+	inline void Signed16(short x, int pos = -1) { short y = Little16(x); Data(&y, 2, pos); }
+	inline void Unsigned16(ushort x, int pos = -1) { short y = Little16((short)x); Data(&y, 2, pos); }
+	inline void Signed32(int x, int pos = -1) { int y = Little32(x); Data(&y, 4, pos); }
+	inline void Unsigned32(uint x, int pos = -1) { int y = Little32((int)x); Data(&y, 4, pos); }
+	inline void Float(float x, int pos = -1) { float y = LittleFloat(x); Data(&y, 4, pos); }
+	inline void CString(const char *x, int pos = -1) { Data(x, strlen(x)+1, pos); }
+};
+
+// Access all game data files etc.. through this FileSystem
+extern LayeredFileSystem *g_fs;
 

@@ -19,14 +19,14 @@
 
 #include "widelands.h"
 #include "pic.h"
-#include "myfile.h"
 #include "ware.h"
 
 // 
 // Need List
 // 
-int Need_List::read(Binary_file* f) {
-   f->read(&nneeds, sizeof(short));
+int Need_List::read(FileRead* f)
+{
+   nneeds = f->Unsigned16();
    if(!nneeds) {
       // we're done, this guy is for free
       return RET_OK;
@@ -39,8 +39,8 @@ int Need_List::read(Binary_file* f) {
    
    int i;
    for(i=0; i< nneeds; i++) {
-      f->read(&list[i].count, sizeof(ushort));
-      f->read(&list[i].index, sizeof(ushort));
+      list[i].count = f->Unsigned16();
+      list[i].index = f->Unsigned16();
    }
 
    return RET_OK;

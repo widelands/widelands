@@ -19,8 +19,8 @@
 
 #include "widelands.h"
 #include "map.h"
-#include "myfile.h"
 #include "worlddata.h"
+#include "game.h"
 
 /** Map::Pathfield
  *
@@ -108,8 +108,6 @@ void Map::set_size(uint w, uint h) {
 	memset(m_pathfields, 0, sizeof(Pathfield)*hd.height*hd.width);
 }
 
-
-
 /** int Map::load_wlmf(const char* file)
  *
  * this loads a given file as a widelands map file
@@ -121,16 +119,16 @@ void Map::set_size(uint w, uint h) {
  */
 
 // TODO: This function is not working!!
-int Map::load_wlmf(const char* file, Game *game) {
-   Binary_file f;
+//  Well, I wouldn't bother about that as we don't even have a map editor... -- Nicolai
+#if 0
+int Map::load_wlmf(const char* file, Game *game)
+{
+	FileRead f
 
-   f.open(file, File::READ);
-   if(f.get_state() != File::OPEN) {
-      return ERR_FAILED;
-   }
+   f.Load(g_fs, file);
 
    // read header:
-   f.read(&hd, sizeof(hd));
+	memcpy(&hd, f.Data(sizeof(hd)), sizeof(hd));
 
    // check version
    if(WLMF_VERSIONMAJOR(hd.version) > WLMF_VERSIONMAJOR(WLMF_VERSION)) {
@@ -146,28 +144,28 @@ int Map::load_wlmf(const char* file, Game *game) {
    // as long as the game knows how many players are around, everything is ok
    PlayerDescr pl;
    for(uint i=0; i<hd.nplayers; i++) {
-      f.read(&pl, sizeof(pl));
+      f.Data(sizeof(PlayerDescr));
    }
 
    set_size(hd.width, hd.height);
 
 
    // now, read in the fields, one at a time and init the map
-   FieldDescr fd;
+   FieldDescr *fd;
    uint y;
    Terrain_Descr *td, *tr;
    for(y=0; y<hd.height; y++) {
       for(uint x=0; x<hd.width; x++) {
-         f.read(&fd, sizeof(fd));
+			fd = (FieldDescr *)f.Data(sizeof(FieldDescr));
 
          // TEMP
-         tr=w->get_terrain(fd.tex_r);
+         tr=w->get_terrain(fd->tex_r);
          if(!tr) {
             //cerr << "Texture number " << fd.tex_r << " not found in file. Defaults to 0" << endl;
             tr=w->get_terrain(0);
             assert(0); // we should never be here!  
          }
-         td=w->get_terrain(fd.tex_d);
+         td=w->get_terrain(fd->tex_d);
          if(!td) {
             // cerr << "Texture number " << fd.tex_d << " not found in file. Defaults to 0" << endl;
             td=w->get_terrain(0);
@@ -176,7 +174,7 @@ int Map::load_wlmf(const char* file, Game *game) {
          // TEMP end
 
          Field* f=get_field(x,y);
-         f->set_height((uchar)fd.height);
+         f->set_height((uchar)fd->height);
          f->set_terrainr(tr);
          f->set_terraind(td);
 			f->objects = 0;
@@ -185,11 +183,15 @@ int Map::load_wlmf(const char* file, Game *game) {
 
    return RET_OK;
 }
+#endif
 
 /** 
  * This functions load a map header, for previewing maps.
+ *
+ * Returns RET_OK if the map is invalid
  */
-int Map::load_map_header(const char* file) {
+int Map::load_map_header(const char* file)
+{
    int ret=RET_OK;
 
    if(!strcasecmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
@@ -198,11 +200,17 @@ int Map::load_map_header(const char* file) {
       // it as such
       // TODO: do this
       // ret = load_wlmf(file, q);
+		return ERR_FAILED;
    }
    else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {
       // it is a S2 Map file. load it as such
-      ret = load_s2mf_header(file);
+		try {
+      	ret = load_s2mf_header(file);
+		} catch(std::exception &e) {
+			cerr << "Problem loading map " << file << ": " << e.what() << endl;
+			ret = ERR_FAILED;
+		}
    }
    else
    {
@@ -228,11 +236,12 @@ int Map::load_map(const char* file, Game* g)
    {
       // It ends like a wide lands map file. try to load
       // it as such
-      ret = load_wlmf(file, g);
+      //ret = load_wlmf(file, g);
+		return ERR_FAILED;
    }
    else if(!strcasecmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {
-      // it is a S2 Map file. load it as such
+		// it is a S2 Map file. load it as such
       ret = load_s2mf(file, g);
    }
    else

@@ -17,7 +17,6 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
 #include "cursor.h"
 #include "map.h"
@@ -30,8 +29,6 @@
 #include "game.h"
 #include "player.h"
 #include "ui.h"
-#include "fileloc.h"
-#include "myfile.h"
 #include "graphic.h"
 #include "mapselectmenue.h"
 #include "IntPlayer.h"
@@ -182,11 +179,7 @@ bool Game::run(void)
 
 		// TEMP
 		tribe= new Tribe_Descr(); 
-	   const char* str=g_fileloc.locate_file("testtribe.wtf", TYPE_TRIBE);
-		assert(str);
-	   if(tribe->load(str)) {
-		   assert(0);
-	   }
+	   tribe->load("testtribe");
 		// TEMP
 
       // Load the map

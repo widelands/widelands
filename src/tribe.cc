@@ -17,14 +17,12 @@
  *
  */
 
-#include <string.h>
 #include "widelands.h"
-#include "myfile.h"
 #include "graphic.h"
 #include "descr_maintainer.h"
 #include "pic.h"
 #include "bob.h"
-#include "md5file.h"
+#include "md5.h"
 #include "tribedata.h"
 #include "ware.h"
 #include "worker.h"
@@ -38,68 +36,63 @@ Tribe_Descr::Tribe_Descr(void) {
 Tribe_Descr::~Tribe_Descr(void) {
 }
 
-int Tribe_Descr::load(const char* name) {
-   MD5_Binary_file f;
-   f.open(name, File::READ);
-   if(f.get_state() != File::OPEN) return ERR_FAILED;
+void Tribe_Descr::load(const char* name)
+{
+	try
+	{
+		char filename[256];
 
-   int retval;
-   
-   // read header, skip need list (this is already done)
-   if((retval=parse_header(&f))) return retval;
+		snprintf(filename, sizeof(filename), "tribes/%s.wtf", name);
 
-   // read regent data
-   if((retval=parse_regent(&f))) return retval;
+		FileRead f;
+		f.Open(g_fs, filename);
 
-   // read bob data
-   if((retval=parse_bobs(&f))) return retval;
-   
-   // read wares data
-   if((retval=parse_wares(&f))) return retval;
-   
-   // read soldiers data
-   if((retval=parse_soldiers(&f))) return retval;
+		ChkSum chksum;
+		chksum.pass_data(f.Data(0, 0), f.GetSize()-16);
+		chksum.finish_chksum();
 
-   // read workers data
-   if((retval=parse_workers(&f))) return retval;
+		// parse the parts of the tribes file one by one
+		parse_header(&f);
+		parse_regent(&f);
+		parse_bobs(&f);
+		parse_wares(&f);
+		parse_soldiers(&f);
+		parse_workers(&f);
+		parse_buildings(&f);
 
-   // read buildings data
-   if((retval=parse_buildings(&f))) return retval;
-  
-   // read science data!
-   // not yet
+		// read science data!
+		// not yet
 
-   // checksum check 
-   uchar* sum=(uchar*) f.get_chksum();
-   uchar  sum_read[16];
-   f.read(sum_read, 16);
-   uint i;
-   for(i=0; i<16; i++) {
-      // cerr << hex << (int) sum[i] << ":" << (int) sum_read[i] << endl;
-      if(sum[i] != sum_read[i]) return ERR_FAILED; // chksum inval
-   }
-   
-   return RET_OK;
+		// checksum check 
+		uchar *sum=(uchar*) chksum.get_chksum();
+		uchar *sum_read = (uchar*)f.Data(16);
+		
+		if (memcmp(sum, sum_read, 16))
+			throw wexception("Checksum failed");
+	}
+	catch(std::exception &e)
+	{
+		throw wexception("Error loading tribe %s: %s", name, e.what());
+	}
 }
 
 //
 // down here: private read functions for loading
 // 
-int Tribe_Descr::parse_buildings(Binary_file* f) {
-   char buf[1024];
-
+void Tribe_Descr::parse_buildings(FileRead* f)
+{
    // read magic
-   f->read(buf, 10);
-   if(strcasecmp(buf, "Buildings\0")) return ERR_FAILED;
+   if(strcasecmp(f->CString(), "Buildings")) 
+		throw wexception("Wrong buildings magic");
 
    ushort nbuilds;
-   f->read(&nbuilds, sizeof(ushort));
+	nbuilds = f->Unsigned16();
 
    uint i;
    uchar id;
    Building_Descr* b;
    for(i=0; i<nbuilds; i++) {
-      f->read(&id, sizeof(uchar));
+		id = f->Unsigned8();
       switch(id) {
          case SIT:       			
             b=new Sit_Building_Descr();
@@ -148,24 +141,21 @@ int Tribe_Descr::parse_buildings(Binary_file* f) {
       buildings.add(b);
       b->read(f);
    }
-
-   return RET_OK;
 }
 
-int Tribe_Descr::parse_workers(Binary_file* f) {
-   char buf[1024];
-
-   f->read(buf, 8);
-   if(strcasecmp(buf, "Workers\0")) return ERR_FAILED;
+void Tribe_Descr::parse_workers(FileRead* f)
+{
+   if(strcasecmp(f->CString(), "Workers"))
+		throw wexception("Wrong workers magic");
 
    ushort nworkers;
-   f->read(&nworkers, sizeof(ushort));
+   nworkers = f->Unsigned16();
 
    uint i;
    uchar id;
    Worker_Descr* w;
    for(i=0; i<nworkers; i++) {
-      f->read(&id, sizeof(uchar));
+		id = f->Unsigned8();
       switch(id) {
          case SITDIG:
             w=new SitDigger();
@@ -208,138 +198,120 @@ int Tribe_Descr::parse_workers(Binary_file* f) {
       workers.add(w);
       w->read(f);
    }
-
-   return RET_OK;
 }
 
-int Tribe_Descr::parse_soldiers(Binary_file* f) {
-   char buf[1024];
-
+void Tribe_Descr::parse_soldiers(FileRead* f)
+{
    // read magic
-   f->read(buf, 9);
-   if(strcasecmp("Soldiers\0", buf)) return ERR_FAILED;
+   if(strcasecmp(f->CString(), "Soldiers"))
+		throw wexception("Wrong soldiers magic");
 
    ushort nitems;
-   f->read(&nitems, sizeof(ushort));
+   nitems = f->Unsigned16();
    uint i;
    uchar id;
    Soldier_Descr* sol;
    int retval;
    for(i=0; i<nitems; i++) {
-      f->read(&id, sizeof(uchar));
+      id = f->Unsigned8();
       assert(id==SOLDIER);
 
       sol=new Soldier_Descr;
-      if((retval=sol->read(f))) return retval;
+      if((retval=sol->read(f)))
+			throw wexception("Error reading soldier description");
 
       soldiers.add(sol);
    }
-
-   return RET_OK;
 }
 
-int Tribe_Descr::parse_wares(Binary_file* f) {
-   char *buf= (char*) malloc(1152);
-   ushort buf_size=1152;
-   
+void Tribe_Descr::parse_wares(FileRead* f)
+{
    // read magic
-   f->read(buf, 6);
-   if(strcasecmp(buf, "Wares\0")) {
-      free(buf); 
-      return ERR_FAILED;
-   }
+   if(strcasecmp(f->CString(), "Wares"))
+		throw wexception("Wrong wares magic");
 
    ushort nware;
-   f->read(&nware, sizeof(ushort));
+   nware = f->Unsigned16();;
    
    Ware_Descr* ware;
+	ushort *ptr;
    ushort w, h, clrkey;
    uint i;
    for(i=0; i<nware; i++) {
       ware=new Ware_Descr;
-      f->read(ware->name, sizeof(ware->name));
-      f->read(&w, sizeof(ushort));
-      f->read(&h, sizeof(ushort));
-      f->read(&clrkey, sizeof(ushort));
-      if(w*h*sizeof(ushort) > buf_size) {
-         buf_size=w*h*sizeof(ushort);
-         buf= (char*) realloc(buf, buf_size);
-      }
-      f->read(buf, 1152); // menu_pic
-      ware->menu_pic.create(24, 24, (ushort*) buf);
-      f->read(buf, w*h*sizeof(ushort));
-      ware->pic.create(w, h, (ushort*) buf);
+      memcpy(ware->name, f->Data(sizeof(ware->name)), sizeof(ware->name));
+      w = f->Unsigned16();
+      h = f->Unsigned16();
+      clrkey = f->Unsigned16();
+
+		ptr = (ushort*)f->Data(24*24*2);
+      ware->menu_pic.create(24, 24, ptr);
+		
+      ptr = (ushort*)f->Data(w*h*sizeof(ushort));
+      ware->pic.create(w, h, ptr);
       ware->menu_pic.set_clrkey(clrkey);
       ware->pic.set_clrkey(clrkey);
       wares.add(ware);
    }
-   
-   free(buf);
-   return OK;
 }
 
-int Tribe_Descr::parse_bobs(Binary_file* f) {
+void Tribe_Descr::parse_bobs(FileRead* f)
+{
    // TODO: for the moment, this data (since this really belongs to the game or the map) is completly ignored
-   char buf[1024];
    
    // read magic
-   f->read(buf, 5);
-   if(strcasecmp("Bobs\0", buf)) return ERR_FAILED;
+   if(strcasecmp(f->CString(), "Bobs"))
+		throw wexception("Wrong bobs magic");
+	
    ushort nitems;
-   f->read(&nitems, sizeof(ushort));
+   nitems = f->Unsigned16();
 
    uint i;
    ushort npics;
    ushort size;
    for(i=0; i< nitems; i++) {
       // 1 byte type
-      f->read(buf, 1);
+      f->Unsigned8();
       // 30 name
-      f->read(buf, 30);
+      f->Data(30);
       
       // 4 dimensions
       // 4 hot_spot
-      f->read(buf, 8);
-      f->read(&npics, sizeof(ushort));
+      f->Data(8);
+      npics = f->Unsigned16();
       uint j;
       for(j=0; j<npics; j++) {
-         f->read(&size, sizeof(ushort));
-         while(size>1024) {
-            f->read(buf, 1024);
-            size-=1024;
-         }
-         f->read(buf, size);
+			size = f->Unsigned16();
+			f->Data(size);
       }
       // 
       // 32 bytes garbage (ONLY AT THE MOMENT!)
-      f->read(buf, 32);
+      f->Data(32);
    }
-
-   return RET_OK;
 }
 
 //
 // this function reads out the header, skips some fields
 // (like descr, since they just burn memory in game) 
 // and loads others
-int Tribe_Descr::parse_header(Binary_file* f) {
-   char buf[1024];
-   
+void Tribe_Descr::parse_header(FileRead* f)
+{
    // read magic
-   f->read(buf, 5);
-   if(strcasecmp(buf, "WLtf\0")) return ERR_FAILED;
+   if(strcasecmp(f->CString(), "WLtf"))
+		throw wexception("Bad WLtf magic");
 
    // read version
    ushort given_vers;
-   f->read(&given_vers, sizeof(ushort));
-   if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLTF_VERSION)) return ERR_WRONGVERSION;
-   if(VERSION_MAJOR(given_vers)==VERSION_MAJOR(WLTF_VERSION)) 
-      if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLTF_VERSION)) return ERR_WRONGVERSION;
+   given_vers = f->Unsigned16();
+   if(VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLTF_VERSION) ||
+      (VERSION_MAJOR(given_vers)==VERSION_MAJOR(WLTF_VERSION) &&
+       VERSION_MAJOR(given_vers) > VERSION_MAJOR(WLTF_VERSION)))
+		throw wexception("Unsupported version");
    
    // read name, skip author and description
-   f->read(name, sizeof(name));
-   f->read(buf, sizeof(name)); // author
-   f->read(buf, 1024); // description
+   memcpy(name, f->Data(sizeof(name)), sizeof(name));
+   f->Data(sizeof(name)); // author
+   f->Data(1024); // description
 
    // read frontier bob
    // TODO: does this belong into the header (before the need list??!!)
@@ -350,37 +322,33 @@ int Tribe_Descr::parse_header(Binary_file* f) {
 
    // skip need list
    // read magic
-   f->read(buf, 9);
-   if(strcasecmp(buf, "NeedList\0")) return ERR_FAILED;
+   if(strcasecmp(f->CString(), "NeedList"))
+		throw wexception("Wrong NeedList magic");
+	
    ushort nneeds=0;
-   f->read(&nneeds, sizeof(ushort));
+   nneeds = f->Unsigned16();
 
    uint i;
    ushort is_a;
    for(i=0; i<nneeds; i++) {
-      f->read(&is_a, sizeof(ushort));
-      f->read(buf, 30);
+      is_a = f->Unsigned16();
+      f->Data(30);
    }
-
-   return OK;
 }
 
 //
 // this reads out the regent data
 //
-int Tribe_Descr::parse_regent(Binary_file* f) {
-   char buf[14000];
-
+void Tribe_Descr::parse_regent(FileRead* f)
+{
    // read magic
-   f->read(buf, 7);
-   if(strcasecmp(buf, "Regent\0")) return ERR_FAILED;
+   if(strcasecmp(f->CString(), "Regent"))
+		throw wexception("Wrong regent magic");
    
    // we ignore all of the stuff. this is already in the player description
-   f->read(buf, 30); // name
-   f->read(buf, 6300);// small pic
-   f->read(buf, 14000); // big pic
-   
-   return OK;
+   f->Data(30); // name
+   f->Data(6300);// small pic
+   f->Data(14000); // big pic
 }
 
 

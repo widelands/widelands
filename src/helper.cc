@@ -33,3 +33,34 @@ void to_lower(char* str) {
          str[i]+=32;
    }
 }
+
+/*
+==============================================================================
+
+class wexception implementation
+
+==============================================================================
+*/
+
+wexception::wexception(const char *fmt, ...) throw()
+{
+	va_list va;
+	
+	va_start(va, fmt);
+	vsnprintf(m_string, sizeof(m_string), fmt, va);
+	va_end(va);
+}
+
+wexception::~wexception() throw()
+{
+}
+	
+const char *wexception::what() const throw()
+{
+	return m_string;
+}
+
+void myassert(int line, const char* file, const char* condt) throw(wexception)
+{
+	throw wexception("%s:%i: assertion \"%s\" failed!\n", file, line, condt);
+}

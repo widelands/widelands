@@ -18,16 +18,15 @@
  */
 
 #include "widelands.h"
-#include "fileloc.h"
 #include "auto_pic.h"
 
-   /*
+/*
 ==========================================================================
 
    AutoPic
 
 ==========================================================================
-   */
+*/
 
 AutoPic *AutoPic::first = 0;
 
@@ -39,13 +38,8 @@ void AutoPic::load_all()
 {
    while(first) {
       char buf[1024];
-      const char *effname = g_fileloc.locate_file(first->filename, TYPE_PIC);
-      if (!effname) {
-         sprintf(buf, "%s: File not found. Check your installation and --searchdir.", first->filename);
-         tell_user(buf);
-         exit(0);
-      }
-      first->load(effname);
+		snprintf(buf, sizeof(buf), "pics/%s", first->filename);
+      first->load(buf);
       if ((first->desw && first->desw != (int)first->get_w()) ||
             (first->desh && first->desh != (int)first->get_h())) {
          char buf[1024];

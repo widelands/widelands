@@ -20,7 +20,6 @@
 #ifndef __TRIBE_H
 #define __TRIBE_H
 
-#include "myfile.h"
 #include "pic.h"
 #include "bob.h"
 #include "ware.h"
@@ -43,7 +42,7 @@ class Tribe_Descr {
       Tribe_Descr(void);
       ~Tribe_Descr(void);
 
-      int load(const char* name);
+      void load(const char* name);
 
       inline Ware_Descr* get_ware_descr(uint idx) { return wares.get(idx); }
       inline Soldier_Descr* get_soldier_descr(uint idx) { return soldiers.get(idx); }
@@ -60,16 +59,15 @@ class Tribe_Descr {
       Descr_Maintainer<Building_Descr> buildings;
 
       // Functions
-      int parse_header(Binary_file* f);
-      int parse_regent(Binary_file* f);
-      int parse_bobs(Binary_file* f);
-      int parse_wares(Binary_file* f);
-      int parse_soldiers(Binary_file* f);
-      int parse_workers(Binary_file* f);
-      int parse_buildings(Binary_file* f);
-
+      void parse_header(FileRead* f);
+      void parse_regent(FileRead* f);
+      void parse_bobs(FileRead* f);
+      void parse_wares(FileRead* f);
+      void parse_soldiers(FileRead* f);
+      void parse_workers(FileRead* f);
+      void parse_buildings(FileRead* f);
 };
 
-int read_anim(Animation* a, Binary_file* f);
+int read_anim(Animation* a, FileRead* f);
 
 #endif //__TRIBE_H

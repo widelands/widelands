@@ -22,7 +22,6 @@
 #include "ui.h"
 #include "input.h"
 #include "cursor.h"
-#include "fileloc.h"
 #include "font.h"
 #include "setup.h"
 #include "singlepmenue.h"
@@ -63,32 +62,11 @@ FileViewScreen::FileViewScreen(const char *text)
  */
 static void fileview_screen(const char *fname)
 {
-	char *text;
-	const char *buf = g_fileloc.locate_file(fname);
-	FILE *file = 0;
-	if (buf)
-		file = fopen(buf, "r");
-	if (file) {
-		int length;
-
-		// load the entire file in one go
-		fseek(file, 0, SEEK_END);
-		length = ftell(file);
-		fseek(file, 0, SEEK_SET);
-
-		text = (char *)malloc(length + 1);
-		fread(text, length, 1, file);
-		text[length] = 0;
-
-		fclose(file);
-	} else
-		text = strdup("Unable to load file. Check your installation.");
-
-	FileViewScreen *fvs = new FileViewScreen(text);
+	FileRead f;
+	f.Open(g_fs, fname);
+	FileViewScreen *fvs = new FileViewScreen((char*)f.Data(0,0));
 	fvs->run();
 	delete fvs;
-
-	free(text);
 }
 
 /*
