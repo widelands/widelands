@@ -1,0 +1,54 @@
+The Build Process
+-----------------
+
+I. Building
+-----------
+
+1) Increase the build number (configure.in)
+
+2) Commit all changes
+
+After this point, you can create a temporary directory and run
+build1.sh in it. It'll guide you through the rest.
+
+3) Export CVS to a temporary directory
+
+4) ./make_ready.sh
+
+5) Create source package widelands-XXX-source.zip:
+    widelands/
+	 	All files
+	 widelands/src/*
+	 widelands/build/*
+	 widelands/win32/*
+	 widelands/wffcreate/*
+
+6) Copy Win32 Release build widelands.exe + SDL.dll -> widelands/
+
+7) Compile Linux version (./configure && make)
+
+8) Create binary package widelands-XXX-binary.zip:
+	widelands/
+		AUTHORS
+		COPYING
+		ChangeLog
+		README
+		widelands
+		widelands.exe
+		SDL.dll
+	widelands/fonts/*
+	widelands/maps/*
+	widelands/pics/*
+	widelands/tribes/*
+	widelands/worlds/*
+
+
+Testing: Unpack widelands-XXX-binary.zip, run ./widelands
+
+
+II. Releasing
+-------------
+
+1) Upload files to SourceForge
+
+2) Announce in news and widelands-announce
