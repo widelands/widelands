@@ -425,6 +425,49 @@ void Panel::think()
 	}
 }
 
+
+/*
+===============
+Panel::get_mouse_x
+Panel::get_mouse_y
+
+Get mouse position relative to this panel
+===============
+*/
+int Panel::get_mouse_x()
+{
+	if (!_parent)
+		return g_sys.get_mouse_x() - get_x()-get_lborder();
+	else
+		return _parent->get_mouse_x() - get_x()-get_lborder();
+}
+
+int Panel::get_mouse_y()
+{
+	if (!_parent)
+		return g_sys.get_mouse_y() - get_y()-get_tborder();
+	else
+		return _parent->get_mouse_y() - get_y()-get_tborder();
+}
+
+
+/*
+===============
+Panel::set_mouse_pos
+
+Set mouse position relative to this panel
+===============
+*/
+void Panel::set_mouse_pos(int x, int y)
+{
+	if (!_parent)
+		g_sys.set_mouse_pos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
+	else
+		_parent->set_mouse_pos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
+}
+
+
+	
 /** Panel::handle_mousein(uint x, uint y, bool inside)
  *
  * Called whenever the mouse enters or leaves the panel. The inside state

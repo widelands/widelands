@@ -26,6 +26,14 @@ class Game;
 class Player;
 class MiniMap;
 class Map_View;
+class Window;
+
+struct UniqueWindow {
+	Window	*window;
+	int		x, y;
+	
+	inline UniqueWindow() : window(0), x(-1), y(-1) { }
+};
 
 /** class Interactive_Player
  *
@@ -45,8 +53,10 @@ class Interactive_Player : public Panel {
 		void minimap_btn();
 		void toggle_buildhelp();
 
-		void field_action(int fx, int fy);
+		void field_action();
+		
 		void move_view_to(int fx, int fy);
+		void warp_mouse_to_field(Coords c);
 
 		void think();
 
@@ -56,6 +66,11 @@ class Interactive_Player : public Panel {
 		inline uchar get_player_number(void) { return m_player_number; }
 		inline bool get_ignore_shadow() { return m_ignore_shadow; }
 		Player *get_player();
+		
+		inline const Coords &get_fieldsel() const { return m_fieldsel; }
+		inline bool get_fieldsel_freeze() const { return m_fieldsel_freeze; }
+		void set_fieldsel(Coords c);
+		void set_fieldsel_freeze(bool yes);
 		
 		static int get_xres();
 		static int get_yres();
@@ -69,8 +84,12 @@ class Interactive_Player : public Panel {
 		bool		m_ignore_shadow; // if true, draw unseen territory
 		
 		Map_View*	main_mapview;
-		MiniMap		*minimap;
-		Window		*fieldaction;
+		
+		UniqueWindow	m_minimap;
+		UniqueWindow	m_fieldaction;
+		
+		Coords	m_fieldsel; // the selected field below the mouse
+		bool		m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
 };
 
 

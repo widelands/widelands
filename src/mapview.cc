@@ -27,7 +27,7 @@
 #include "IntPlayer.h"
 
 
-AutoPic Map_View::fsel("fsel.bmp", 0, 0, 255);
+AutoPic Map_View::pic_fsel("fsel.bmp", 0, 0, 255);
 AutoPic Map_View::small_building("small.bmp", 0, 0, 255);
 AutoPic Map_View::medium_building("medium.bmp", 0, 0, 255);
 AutoPic Map_View::big_building("big.bmp", 0, 0, 255);
@@ -51,18 +51,40 @@ Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Play
 	vpx = vpy = 0;
 	dragging = false;
 
-	fselx = fsely = 0;
 	show_buildhelp = false;
 }
 
-/** Map_View::~Map_View(void)
- *
- * Cleanups
- */
+/*
+===============
+Map_View::~Map_View
+
+Cleanups
+===============
+*/
 Map_View::~Map_View(void)
 {
-
 }
+
+
+/*
+===============
+Map_View::warp_mouse_to_field
+
+Moves the mouse cursor so that it is directly above the given field
+===============
+*/
+void Map_View::warp_mouse_to_field(Coords c)
+{
+	int x, y;
+
+	m_map->get_pix(c, &x, &y);
+	x -= vpx;
+	y -= vpy;
+	
+	if (x >= 0 && x < get_w() && y >= 0 && y < get_h())
+		set_mouse_pos(x, y);
+}
+
 
 /*
 ===============
@@ -96,26 +118,27 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 	draw_ground(&dst, effvpx, effvpy, use_see_area);
 
 	// Draw the fsel
+	Coords fsel = m_player->get_fieldsel();
 	int x;
 	int y;
 
-	Field *f = m_map->get_field(fselx, fsely);
-	m_map->get_pix(fselx, fsely, f, &x, &y);
+	Field *f = m_map->get_field(fsel);
+	m_map->get_pix(fsel.x, fsel.y, f, &x, &y);
 	x -= effvpx;
 	y -= effvpy;
 
-	if (x < -(int)fsel.get_w())
+	if (x < -(int)pic_fsel.get_w())
 		x += m_map->get_w() * FIELD_WIDTH;
-	if (y < -(int)fsel.get_h())
+	if (y < -(int)pic_fsel.get_h())
 		y += m_map->get_h() * (FIELD_HEIGHT>>1);
 
-	x -= fsel.get_w()>>1;
-	y -= fsel.get_h()>>1;
-	copy_pic(&dst, &fsel, x, y, 0, 0, fsel.get_w(), fsel.get_h());
+	x -= pic_fsel.get_w()>>1;
+	y -= pic_fsel.get_h()>>1;
+	copy_pic(&dst, &pic_fsel, x, y, 0, 0, pic_fsel.get_w(), pic_fsel.get_h());
 
 	// debug: show fsel coordinates
 	char buf[16];
-	sprintf(buf, "%i %i", fselx, fsely);
+	sprintf(buf, "%i %i", fsel.x, fsel.y);
 	Pic *p = g_fh.get_string(buf, 0);
 	copy_pic(bmp, p, ofsx+5, ofsy+5, 0, 0, p->get_w(), p->get_h());
 	delete p;
@@ -444,7 +467,7 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 		if (down) {
          track_fsel(x, y);
 
-         fieldclicked.call(fselx, fsely);
+			fieldclicked.call();
 		}
 	}
 	else if (btn == MOUSE_RIGHT)
@@ -473,38 +496,41 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 	if (dragging)
 	{
 		set_rel_viewpoint(xdiff, ydiff);
-		g_sys.set_mouse_pos(x-xdiff, y-ydiff);
+		set_mouse_pos(x-xdiff, y-ydiff);
 	}
 
-	track_fsel(x, y);
+	if (!m_player->get_fieldsel_freeze())
+		track_fsel(x, y);
 
 	g_gr.needs_fs_update();
 }
 
-/** Map_View::track_fsel(int mx, int my)
- *
- * Move the fsel to the given mouse position
- *
- * Args: mx	new mouse coordinates relative to panel
- *       my
- */
+/*
+===============
+Map_View::track_fsel(int mx, int my)
+
+Move the fsel to the given mouse position.
+Does not honour fieldsel freeze.
+===============
+*/
 void Map_View::track_fsel(int mx, int my)
 {
+	Coords fsel;
+	
 	// First of all, get a preliminary field coordinate based on the basic
 	// grid (not taking heights into account)
 	my += vpy;
-	fsely = (my + (FIELD_HEIGHT>>2)) / (FIELD_HEIGHT>>1) - 1;
+	fsel.y = (my + (FIELD_HEIGHT>>2)) / (FIELD_HEIGHT>>1) - 1;
 
 	mx += vpx;
-	fselx = mx;
-	if (fsely & 1)
-		fselx -= FIELD_WIDTH>>1;
-	fselx = (fselx + (FIELD_WIDTH>>1)) / FIELD_WIDTH;
+	fsel.x = mx;
+	if (fsel.y & 1)
+		fsel.x -= FIELD_WIDTH>>1;
+	fsel.x = (fsel.x + (FIELD_WIDTH>>1)) / FIELD_WIDTH;
 
-	m_map->normalize_coords(&fselx, &fsely);
+	m_map->normalize_coords(&fsel.x, &fsel.y);
 
-	// Now, fselx and fsely point to where we'd be if the field's height
-	// was 0.
+	// Now, fsel point to where we'd be if the field's height was 0.
 	// We now recursively move towards the correct field. Because height cannot
 	// be negative, we only need to consider the bottom-left or bottom-right neighbour
 	int mapheight = m_map->get_h()*(FIELD_HEIGHT>>1);
@@ -512,8 +538,8 @@ void Map_View::track_fsel(int mx, int my)
 	Field *f;
 	int fscrx, fscry;
 
-	f = m_map->get_field(fselx, fsely);
-	m_map->get_pix(fselx, fsely, f, &fscrx, &fscry);
+	f = m_map->get_field(fsel);
+	m_map->get_pix(fsel.x, fsel.y, f, &fscrx, &fscry);
 
 	for(;;) {
 		Field *bln, *brn;
@@ -523,8 +549,8 @@ void Map_View::track_fsel(int mx, int my)
 		int fd, blnd, brnd;
 		int d2;
 
-		m_map->get_bln(fselx, fsely, f, &blx, &bly, &bln);
-		m_map->get_brn(fselx, fsely, f, &brx, &bry, &brn);
+		m_map->get_bln(fsel.x, fsel.y, f, &blx, &bly, &bln);
+		m_map->get_brn(fsel.x, fsel.y, f, &brx, &bry, &brn);
 
 		m_map->get_pix(blx, bly, bln, &blscrx, &blscry);
 		m_map->get_pix(brx, bry, brn, &brscrx, &brscry);
@@ -565,14 +591,14 @@ void Map_View::track_fsel(int mx, int my)
 		if (brnd < blnd) {
 			if (movebrn) {
 				f = brn;
-				fselx = brx;
-				fsely = bry;
+				fsel.x = brx;
+				fsel.y = bry;
 				fscrx = brscrx;
 				fscry = brscry;
 			} else if (movebln) {
 				f = bln;
-				fselx = blx;
-				fsely = bly;
+				fsel.x = blx;
+				fsel.y = bly;
 				fscrx = blscrx;
 				fscry = blscry;
 			} else
@@ -580,18 +606,21 @@ void Map_View::track_fsel(int mx, int my)
 		} else {
 			if (movebln)  {
 				f = bln;
-				fselx = blx;
-				fsely = bly;
+				fsel.x = blx;
+				fsel.y = bly;
 				fscrx = blscrx;
 				fscry = blscry;
 			} else if (movebrn) {
 				f = brn;
-				fselx = brx;
-				fsely = bry;
+				fsel.x = brx;
+				fsel.y = bry;
 				fscrx = brscrx;
 				fscry = brscry;
 			} else
 				break;
 		}
 	}
+	
+	// Apply the new fieldsel
+	m_player->set_fieldsel(fsel);
 }

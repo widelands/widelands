@@ -183,20 +183,23 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-MiniMap::MiniMap(Panel *parent, int x, int y, MiniMap **reg, Interactive_Player *plr)
-	: Window(parent, x, y, 10, 10, "Map")
+MiniMap::MiniMap(Interactive_Player *plr, UniqueWindow *reg)
+	: Window(plr, 200, 150, 10, 10, "Map")
 {
-	_registry = reg;
-	if (_registry) {
-		if (*_registry)
-			delete *_registry;
-		*_registry = this;
+	m_registry = reg;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
 	}
 
-	_view = new MiniMapView(this, 0, 0, plr);
-	_view->warpview.set(&warpview, &UISignal2<int,int>::call);
+	m_view = new MiniMapView(this, 0, 0, plr);
+	m_view->warpview.set(&warpview, &UISignal2<int,int>::call);
 	
-	set_inner_size(_view->get_w(), _view->get_h());
+	set_inner_size(m_view->get_w(), m_view->get_h());
 
 	//set_cache(false); // testing
 }
@@ -207,8 +210,11 @@ MiniMap::MiniMap(Panel *parent, int x, int y, MiniMap **reg, Interactive_Player 
  */
 MiniMap::~MiniMap()
 {
-	if (_registry)
-		*_registry = 0;
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
 }
 
 /** MiniMap::set_view_pos(int x, int y)
@@ -220,5 +226,5 @@ MiniMap::~MiniMap()
  */
 void MiniMap::set_view_pos(int x, int y)
 {
-	_view->set_view_pos(x, y);
+	m_view->set_view_pos(x, y);
 }

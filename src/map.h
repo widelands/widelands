@@ -175,8 +175,11 @@ class Map {
 					inline void get_brn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
 
 					// Field/screen coordinates
+					inline void get_basepix(const Coords fc, int *px, int *py);
 					inline void get_basepix(const int fx, const int fy, int *px, int *py);
+					inline void get_pix(const Coords fc, Field * const f, int *px, int *py);
 					inline void get_pix(const int fx, const int fy, Field * const f, int *px, int *py);
+					inline void get_pix(const Coords c, int *px, int *py);
 					inline void get_pix(const int fx, const int fy, int *px, int *py);
 
 					// Pathfinding
@@ -421,21 +424,36 @@ inline void Map::get_brn(const int fx, const int fy, Field * const f, int *ox, i
  * Calculate the on-screen position of the field without taking height
  * into account.
  */
+inline void Map::get_basepix(const Coords fc, int *px, int *py)
+{
+	*py = fc.y * (FIELD_HEIGHT>>1);
+	*px = fc.x * FIELD_WIDTH;
+	if (fc.y & 1)
+		*px += FIELD_WIDTH>>1;
+}
+
 inline void Map::get_basepix(const int fx, const int fy, int *px, int *py)
 {
-	*py = fy * (FIELD_HEIGHT>>1);
-	*px = fx * FIELD_WIDTH;
-	if (fy & 1)
-		*px += FIELD_WIDTH>>1;
+	get_basepix(Coords(fx, fy), px, py);
+}
+
+inline void Map::get_pix(const Coords fc, Field * const f, int *px, int *py)
+{
+	get_basepix(fc, px, py);
+	*py -= f->get_height() * HEIGHT_FACTOR;
 }
 
 inline void Map::get_pix(const int fx, const int fy, Field * const f, int *px, int *py)
 {
-	get_basepix(fx, fy, px, py);
-	*py -= f->get_height() * HEIGHT_FACTOR;
+	get_pix(Coords(fx, fy), f, px, py);
 }
 
 // assumes valid fx/fy!
+inline void Map::get_pix(const Coords fc, int *px, int *py)
+{
+	get_pix(fc, get_field(fc), px, py);
+}
+
 inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
 {
 	get_pix(fx, fy, get_field(fx, fy), px, py);

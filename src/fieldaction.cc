@@ -26,39 +26,44 @@
 
 class FieldActionWindow : public Window {
 public:
-	FieldActionWindow(Interactive_Player *plr, int fx, int fy, Window **registry);
+	FieldActionWindow(Interactive_Player *plr, UniqueWindow *registry);
 	~FieldActionWindow();
 
 	// Action handlers
 	void act_watch();
 
 private:
+	void okdialog();
+	
 	void act(int action);
 
-	Interactive_Player *_player;
-	int _fx, _fy;
-	Window **_registry;
+	Interactive_Player	*m_player;
+	UniqueWindow			*m_registry;
+	
+	Coords m_field;
 };
 
-/** FieldActionWindow(Interactive_Player *plr, int fx, int fy, Window **registry)
- *
- * Initialize a field action window
- *
- * Args: plr	the controlling player
- *       fx		referenced field coordinates
- *       fy
- */
-FieldActionWindow::FieldActionWindow(Interactive_Player *plr, int fx, int fy, Window **registry)
-	: Window(plr, 0, 0, 68, 34, "Action")
+/*
+===============
+FieldActionWindow::FieldActionWindow
+
+Initialize a field action window, creating the appropriate buttons.
+===============
+*/
+FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *registry)
+	: Window(plr, plr->get_w()/2, plr->get_h()/2, 68, 34, "Action")
 {
-	_player = plr;
-	_fx = fx;
-	_fy = fy;
-	_registry = registry;
+	m_player = plr;
+	m_field = m_player->get_fieldsel();
+	m_registry = registry;
 
-	if (_registry)
-		*_registry = this;
+	if (registry->window)
+		delete registry->window;
+		
+	registry->window = this;
 
+	m_player->set_fieldsel_freeze(true);
+	
 	// Buttons
 	Button *b;
 
@@ -67,6 +72,23 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, int fx, int fy, Wi
 	b->set_pic(g_fh.get_string("WATCH", 0));
 
 	b = new Button(this, 34, 0, 34, 34, 2);
+
+	// Move the window away from the current mouse position, i.e.
+	// where the field is, to allow better view
+	int mousex = get_mouse_x();
+	int mousey = get_mouse_y();
+	
+	if (mousex >= 0 && mousex < get_w() &&
+	    mousey >= 0 && mousey < get_h()) {
+		if (mousey < get_h()/2)
+			set_pos(get_x(), get_y()+get_h());
+		else
+			set_pos(get_x(), get_y()-get_h());
+	}
+	
+	// Now force the mouse onto the first button
+	// TODO: adapt this automatically as more buttons are added
+	set_mouse_pos(17, 17);
 }
 
 /** FieldActionWindow::~FieldActionWindow()
@@ -75,8 +97,22 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, int fx, int fy, Wi
  */
 FieldActionWindow::~FieldActionWindow()
 {
-	if (_registry)
-		*_registry = 0;
+	m_player->set_fieldsel_freeze(false);
+	m_registry->window = 0;
+}
+
+/*
+===============
+FieldActionWindow::okdialog
+
+Call this from the button handlers.
+It resets the mouse to its original position and closes the window
+===============
+*/
+void FieldActionWindow::okdialog()
+{
+	m_player->warp_mouse_to_field(m_field);
+	die();
 }
 
 /** FieldActionWindow::act_watch()
@@ -85,26 +121,18 @@ FieldActionWindow::~FieldActionWindow()
  */
 void FieldActionWindow::act_watch()
 {
-	show_watch_window(_player, _fx, _fy);
-	die();
+	show_watch_window(m_player, m_field.x, m_field.y);
+	okdialog();
 }
 
-/** show_field_action(Interactive_Player *parent, int fx, int fy, Window **registry)
- *
- * Bring up a field action window
- *
- * Args: parent	the interactive player
- *       fx		field coordinates
- *       fy
- *       registry pointer to ensure only one fieldaction window exists at a time
- */
-void show_field_action(Interactive_Player *parent, int fx, int fy, Window **registry)
-{
-	if (registry) {
-		if (*registry)
-			delete *registry;
-	}
+/*
+===============
+show_field_action
 
-	FieldActionWindow *w = new FieldActionWindow(parent, fx, fy, registry);
-	w->move_to_mouse();
+Bring up a field action window
+===============
+*/
+void show_field_action(Interactive_Player *parent, UniqueWindow *registry)
+{
+	new FieldActionWindow(parent, registry);
 }

@@ -21,7 +21,6 @@
 #define __S__UI_H
 
 #include "graphic.h"
-#include "singleton.h"
 #include "font.h"
 #include "growablearray.h"
 #include "auto_pic.h"
@@ -165,6 +164,10 @@ public:
 	// Events
 	virtual void think();
 
+	int get_mouse_x();
+	int get_mouse_y();
+	void set_mouse_pos(int x, int y);
+	
 	virtual void handle_mousein(bool inside);
 	virtual bool handle_mouseclick(uint btn, bool down, int x, int y);
 	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);

@@ -25,6 +25,8 @@
 class Interactive_Player;
 class Player;
 class Map;
+struct UniqueWindow;
+
 
 /* class MiniMap
  *
@@ -35,7 +37,7 @@ class MiniMapView;
 
 class MiniMap : public Window {
 public:
-	MiniMap(Panel *parent, int x, int y, MiniMap **reg, Interactive_Player* ply);
+	MiniMap(Interactive_Player *parent, UniqueWindow *reg);
 	~MiniMap();
 
 	UISignal2<int,int> warpview; // screen coordinates of viewport
@@ -43,8 +45,8 @@ public:
 	void set_view_pos(int x, int y);
 
 private:
-	MiniMap **_registry;
-	MiniMapView *_view;
+	UniqueWindow	*m_registry;
+	MiniMapView		*m_view;
 };
 
 #endif /* MINIMAP_H */

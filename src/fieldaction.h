@@ -21,7 +21,8 @@
 #define FIELDACTION_H
 
 class Interactive_Player;
+struct UniqueWindow;
 
-void show_field_action(Interactive_Player *parent, int fx, int fy, Window **registry);
+void show_field_action(Interactive_Player *parent, UniqueWindow *registry);
 
 #endif /* FIELDACTION_H */

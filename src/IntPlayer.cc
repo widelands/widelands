@@ -30,12 +30,21 @@
 #include "map.h"
 
 
-/** Interactive_Player::Interactive_Player(Game *g)
- *
- * Init
- *
- * Args: g	the game to be played
- */
+/*
+==============================================================================
+
+Interactive_Player IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+===============
+Interactive_Player::Interactive_Player
+ 
+Initialize
+===============
+*/
 Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	: Panel(0, 0, 0, get_xres(), get_yres())
 {
@@ -45,10 +54,11 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
 	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
 	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
-	minimap = 0;
-	fieldaction = 0;
 
 	m_ignore_shadow = false;
+	
+	m_fieldsel.x = m_fieldsel.y = 0;
+	m_fieldsel_freeze = false;
 	
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
@@ -125,6 +135,32 @@ Player *Interactive_Player::get_player()
 }
 
 
+/*
+===============
+Interactive_Player::set_fieldsel
+
+Change the field selection. Does not honour the freeze!
+===============
+*/
+void Interactive_Player::set_fieldsel(Coords c)
+{
+	m_fieldsel = c;
+}
+
+
+/*
+===============
+Interactive_Player::set_fieldsel_freeze
+
+Field selection is frozen while the field action dialog is visible
+===============
+*/
+void Interactive_Player::set_fieldsel_freeze(bool yes)
+{
+	m_fieldsel_freeze = yes;
+}
+
+
 /** Interactive_Player::exit_game_btn(void *a)
  *
  * Handle exit button
@@ -158,12 +194,11 @@ void Interactive_Player::toggle_buildhelp(void)
  */
 void Interactive_Player::minimap_btn()
 {
-	if (minimap)
-		delete minimap;
-	else
-	{
-		new MiniMap(this, 200, 150, &minimap, this);
-		minimap->warpview.set(this, &Interactive_Player::minimap_warp);
+	if (m_minimap.window)
+		delete m_minimap.window;
+	else {
+		MiniMap *mm = new MiniMap(this, &m_minimap);
+		mm->warpview.set(this, &Interactive_Player::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with
 		mainview_move(main_mapview->get_vpx(), main_mapview->get_vpy());
@@ -179,8 +214,8 @@ void Interactive_Player::move_view_to(int fx, int fy)
 	int x = fx * FIELD_WIDTH;
 	int y = fy * (FIELD_HEIGHT/2);
 
-	if (minimap)
-		minimap->set_view_pos(x, y);
+	if (m_minimap.window)
+		((MiniMap *)m_minimap.window)->set_view_pos(x, y);
 	
 	x -= main_mapview->get_w()>>1;
 	if (x < 0) x += m_game->get_map()->get_w() * FIELD_WIDTH;
@@ -189,19 +224,33 @@ void Interactive_Player::move_view_to(int fx, int fy)
 	main_mapview->set_viewpoint(x, y);
 }
 
-/** Interactive_Player::field_action(int fx, int fy)
- *
- * Player has clicked on the given field; bring up the context menu.
- *
- * Args: fx		field coordinates
- *       fy
- */
-void Interactive_Player::field_action(int fx, int fy)
+
+/*
+===============
+Interactive_Player::warp_mouse_to_field
+
+Move the mouse so that it's directly above the given field
+===============
+*/
+void Interactive_Player::warp_mouse_to_field(Coords c)
+{
+	main_mapview->warp_mouse_to_field(c);
+}
+
+
+/*
+===============
+Interactive_Player::field_action
+
+Player has clicked on the given field; bring up the context menu.
+===============
+*/
+void Interactive_Player::field_action()
 {
 	// note: buildings owned by the player must be treated differently
 	// (i.e bring up dialog specific to the building)
 
-	show_field_action(this, fx, fy, &fieldaction);
+	show_field_action(this, &m_fieldaction);
 }
 
 /** Interactive_Player::think()
@@ -235,6 +284,11 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 			toggle_buildhelp();
 		return true;
 	
+	case KEY_m:
+		if (down)
+			minimap_btn();
+		return true;
+		
 	case KEY_F5:
 		if (down) {
 			if (m_ignore_shadow)
@@ -255,7 +309,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
  */
 void Interactive_Player::mainview_move(int x, int y)
 {
-	if (minimap) {
+	if (m_minimap.window) {
 		int maxx = m_game->get_map()->get_w() * FIELD_WIDTH;
 		int maxy = m_game->get_map()->get_h() * (FIELD_HEIGHT>>1);
 
@@ -264,7 +318,7 @@ void Interactive_Player::mainview_move(int x, int y)
 		y += main_mapview->get_h()>>1;
 		if (y >= maxy) y -= maxy;
 
-		minimap->set_view_pos(x, y);
+		((MiniMap*)m_minimap.window)->set_view_pos(x, y);
 	}
 }
 

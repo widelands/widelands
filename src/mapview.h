@@ -41,8 +41,10 @@ public:
 	~Map_View();
 
 	UISignal2<int,int> warpview; // x/y in screen coordinates
-	UISignal2<int,int> fieldclicked;
+	UISignal fieldclicked;
 
+	void warp_mouse_to_field(Coords c);
+	
 	// Function to set the viewpoint
 	void set_viewpoint(int x, int y);
 	void set_rel_viewpoint(int x, int y) { set_viewpoint(vpx+x,  vpy+y); }
@@ -62,7 +64,7 @@ public:
    inline void toggle_buildhelp(void) { show_buildhelp=!show_buildhelp; }
    
 private:
-   static AutoPic fsel;
+   static AutoPic pic_fsel;
    static AutoPic small_building;
    static AutoPic medium_building;
    static AutoPic big_building;
@@ -74,7 +76,6 @@ private:
 	Map* m_map;
 	int vpx, vpy;
 	bool dragging;
-	int fselx, fsely; // field the mouse is over
    bool show_buildhelp;
 	  
    void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
