@@ -16,6 +16,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
+#ifndef __GROWABLE_ARRAY_H
+#define __GROWABLE_ARRAY_H
 
 class Growable_Array
 {
@@ -35,3 +37,5 @@ public:
 	void* element_at(int i);
 	int elements();
 };
+
+#endif
