@@ -998,4 +998,4 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 }
 
 
-}; // namespace Renderer_Software32
+} // namespace Renderer_Software32

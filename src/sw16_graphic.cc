@@ -1568,7 +1568,7 @@ uint GraphicImpl::find_free_picture()
 }
 
 
-}; // namespace Renderer_Software16
+} // namespace Renderer_Software16
 
 
 /*

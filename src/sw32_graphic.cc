@@ -1653,7 +1653,7 @@ uint GraphicImpl::find_free_picture()
 }
 
 
-}; // namespace Renderer_Software32
+} // namespace Renderer_Software32
 
 
 /*

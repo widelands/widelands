@@ -295,6 +295,6 @@ private:
 #define get_graphicimpl() (static_cast<Renderer_Software16::GraphicImpl*>(g_gr))
 
 
-};
+}
 
 #endif // included_sw16_graphic_h
