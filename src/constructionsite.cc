@@ -53,7 +53,9 @@ etc...
 */
 void ConstructionSite_Descr::parse(const char* directory, Profile* prof, const EncodeData* encdata)
 {
-	Building_Descr::parse(directory, prof, encdata);
+	add_attribute(Map_Object::CONSTRUCTIONSITE);
+	
+   Building_Descr::parse(directory, prof, encdata);
 
 	// TODO
 }

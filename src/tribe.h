@@ -27,6 +27,7 @@
 #include "constants.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
+#include "worker.h"
 
 class Building_Descr;
 class Editor_Game_Base;
@@ -62,6 +63,7 @@ class Tribe_Descr {
 
 		inline int get_nrworkers() { return m_workers.get_nitems(); }
       inline Worker_Descr* get_worker_descr(uint idx) { return m_workers.get(idx); }
+      inline int get_worker_index(const char* name) { return m_workers.get_index(name); }
 		inline int get_nrwares() { return m_wares.get_nitems(); }
 		inline int get_ware_index(const char *name) { return m_wares.get_index(name); }
       inline Item_Ware_Descr* get_ware_descr(uint idx) { return m_wares.get(idx); }

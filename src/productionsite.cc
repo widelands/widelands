@@ -654,7 +654,7 @@ Cleanup after a production site is removed
 */
 void ProductionSite::cleanup(Editor_Game_Base* g)
 {
-	// Release worker
+   // Release worker
    if (m_worker_requests.size()) {
       uint i=0;
       for(i=0; i<m_worker_requests.size(); i++) {
@@ -1219,6 +1219,13 @@ void ProductionSite::program_end(Game* g, bool success)
 	if (dostats)
 		add_statistics_value(success);
 
-	m_program_timer = true;
+   // if succesfull, the workers gain experience
+   if(success) { 
+      uint i=0;
+      for(i=0; i<m_workers.size(); i++) 
+         m_workers[i]->gain_experience(g);
+   }
+	
+   m_program_timer = true;
 	m_program_time = schedule_act(g, 10);
 }

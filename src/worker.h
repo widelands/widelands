@@ -72,6 +72,10 @@ public:
 	inline int get_ware_id() const { return m_ware_id; }
 	const WorkerProgram* get_program(std::string name) const;
 
+   // For leveling
+   inline int get_max_exp(void) { return m_max_experience; }
+   inline int get_min_exp(void) { return m_min_experience; }
+   const char* get_becomes(void) { return m_becomes.size() ? m_becomes.c_str() : 0; }
 	void set_ware_id(int idx);
 
 	Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords);
@@ -88,7 +92,8 @@ protected:
 	DirAnimations	m_walk_anims;
 	DirAnimations	m_walkload_anims;
 	int				m_ware_id;
-
+   int            m_max_experience, m_min_experience;
+   std::string    m_becomes;
 	ProgramMap		m_programs;
 };
 
@@ -98,12 +103,21 @@ class Worker : public Bob {
 	MO_DESCR(Worker_Descr);
 
 public:
-	Worker(Worker_Descr *descr);
+	enum Worker_Type {
+      NORMAL = 0,
+      CARRIER, 
+   };
+   
+   Worker(Worker_Descr *descr);
 	virtual ~Worker();
+
+   virtual Worker_Type get_worker_type(void) { return NORMAL; }
 
 	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
 	inline uint get_idle_anim() const { return get_descr()->get_idle_anim(); }
-
+   inline uint get_menu_pic() const { return get_descr()->get_menu_pic(); }
+   const char* get_becomes(void) { return get_descr()->get_becomes(); }
+   
 	virtual uint get_movecaps();
 
 	inline PlayerImmovable *get_location(Editor_Game_Base *g) { return (PlayerImmovable*)m_location.get(g); }
@@ -125,6 +139,10 @@ public:
 	bool wakeup_flag_capacity(Game* g, Flag* flag);
 	bool wakeup_leave_building(Game* g, Building* building);
 
+   // For leveling
+   void level(Game*);
+   void create_needed_experience(Game*);
+   
 protected:
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
 	virtual void init_auto_task(Game* g);
@@ -150,6 +168,11 @@ public: // worker-specific tasks
 	void start_task_fugitive(Game* g);
 
 	void start_task_geologist(Game* g, int attempts, int radius, std::string subcommand);
+   
+   // For leveling
+   void gain_experience(Game*);
+   int get_needed_experience(void) { return m_needed_exp; }
+   int get_current_experience(void) { return m_current_exp; }
 
 private: // task details
 	void transfer_update(Game* g, State* state);
@@ -219,6 +242,8 @@ private:
 	Economy*				m_economy;			// Economy this worker is registered in
 	Object_Ptr			m_carried_item;	// Item we are carrying
 	IdleWorkerSupply*	m_supply;			// supply while gowarehouse and not transfer
+   int               m_needed_exp;     // experience for next level
+   int               m_current_exp;    // current experience
 };
 
 
@@ -245,7 +270,9 @@ public:
 	bool notify_ware(Game* g, int flag);
 
 public:
-	void start_task_road(Game* g, Road* road);
+   virtual Worker_Type get_worker_type(void) { return CARRIER; }
+	
+   void start_task_road(Game* g, Road* road);
 	void update_task_road(Game* g);
 	void start_task_transport(Game* g, int fromflag);
 	bool start_task_walktoflag(Game* g, int flag, bool offset = false);

@@ -38,12 +38,14 @@ class.
 #include "transport.h"
 #include "ui_box.h"
 #include "ui_button.h"
+#include "ui_listselect.h"
 #include "ui_progressbar.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
 #include "warehouse.h"
 #include "waresdisplay.h"
 #include "wexception.h"
+#include "worker.h"
 #include "player.h"
 #include "tribe.h"
 
@@ -54,6 +56,7 @@ static const char* pic_debug = "pics/menu_debug.png";
 static const char* pic_bulldoze = "pics/menu_bld_bulldoze.png";
 static const char* pic_queue_background = "pics/queue_background.png";
 
+static const char* pic_list_worker = "pics/menu_list_workers.png";
 
 /*
 ==============================================================================
@@ -873,6 +876,143 @@ ProductionSite UI IMPLEMENTATION
 ==============================================================================
 */
 
+/*
+ * ProductionSite_Window_ListWorkerWindow
+ */
+class ProductionSite_Window_ListWorkerWindow : public UIWindow{
+   public:
+      ProductionSite_Window_ListWorkerWindow(Interactive_Player*, ProductionSite* ps);
+      virtual ~ProductionSite_Window_ListWorkerWindow();
+     
+      virtual void think();
+   
+   private:
+      void update(void);
+      void fill_list(void);
+     
+      Coords          m_ps_location;
+      ProductionSite* m_ps;
+      Interactive_Player* m_parent;
+      UIListselect* m_ls;
+      UITextarea* m_type, *m_experience, *m_becomes;
+};
+
+/*
+ * Constructor
+ */
+ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)  
+   : UIWindow(parent, 0, 0, 320, 125, "Worker Listing") {
+   m_ps=ps;
+   m_ps_location=ps->get_position();
+   m_parent=parent;
+   
+   // Caption
+   UITextarea* tt=new UITextarea(this, 0, 0, "Worker Listing", Align_Left);
+   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
+
+   int spacing=5;
+   int offsx=spacing;
+   int offsy=30;
+   int posx=offsx;
+   int posy=offsy;
+
+   // listselect
+   m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy);
+
+   // the descriptive areas
+   // Type
+   posx=get_inner_w()/2+spacing;
+   new UITextarea(this, posx, posy, 150, 20, "Type: ", Align_CenterLeft);
+   m_type=new UITextarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
+   posy+=20+spacing;
+
+   // Experience 
+   new UITextarea(this, posx, posy, 150, 20, "Experience: ", Align_CenterLeft);
+   m_experience=new UITextarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
+   posy+=20+spacing;
+
+   // is working to become 
+   new UITextarea(this, posx, posy, 70, 20, "Trying to become: ", Align_CenterLeft);
+   posy+=20;
+   m_becomes=new UITextarea(this, posx+25, posy, 200, 20, "---", Align_CenterLeft);
+   posy+=20+spacing;
+
+   center_to_parent();
+   move_to_top();
+}
+
+/*
+ * desctructor
+ */
+ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow(void) {
+}
+
+/*
+ * think()
+ */
+void ProductionSite_Window_ListWorkerWindow::think(void) {
+   BaseImmovable* imm=m_parent->get_map()->get_field(m_ps_location)->get_immovable();
+   if(imm->get_type()!=Map_Object::BUILDING 
+         || static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
+      // The Productionsite has been removed. Die quickly.
+      die();
+      return;
+   }
+
+   fill_list();
+   UIWindow::think();
+}
+
+/*
+ * fill list()
+ */
+void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
+   int m_last_select=m_ls->get_selection_index();
+   if(m_last_select==-1) m_last_select=0;
+   m_ls->clear();
+   std::vector<Worker*>* workers=m_ps->get_workers();
+   
+   uint i;
+   for(i=0; i<workers->size(); i++) {
+      Worker* worker=(*workers)[i];
+      m_ls->add_entry(worker->get_name().c_str(), worker, false, worker->get_menu_pic());
+   }
+   if(m_ls->get_nr_entries()>m_last_select) 
+      m_ls->select(m_last_select);
+   else if(m_ls->get_nr_entries())
+      m_ls->select(m_ls->get_nr_entries()-1);
+
+   update();
+}
+
+/*
+ * update()
+ */
+void ProductionSite_Window_ListWorkerWindow::update(void) {
+   char buffer[250];
+
+   Worker* worker=static_cast<Worker*>(m_ls->get_selection());
+   if(worker) { 
+
+      sprintf(buffer, "%s", worker->get_name().c_str());
+      m_type->set_text(buffer);
+
+      if(worker->get_current_experience()!=-1 && worker->get_needed_experience()!=-1) {
+         sprintf(buffer, "%i/%i", worker->get_current_experience(), worker->get_needed_experience());
+         m_experience->set_text(buffer);
+         sprintf(buffer, "%s", worker->get_becomes());
+         m_becomes->set_text(buffer);
+      } else {
+         m_experience->set_text("");
+         m_becomes->set_text("");
+      }   
+   } else {
+      m_experience->set_text("");
+      m_becomes->set_text("");
+      m_type->set_text("");
+   }
+}
+
 class ProductionSite_Window : public Building_Window {
 public:
 	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UIWindow** registry);
@@ -881,6 +1021,12 @@ public:
 	inline ProductionSite* get_productionsite() { return (ProductionSite*)get_building(); }
 
 	virtual void think();
+
+private:
+   Interactive_Player* m_parent;
+   UIWindow** m_reg;
+   
+   void list_worker_clicked(void);
 };
 
 
@@ -894,6 +1040,9 @@ Create the window and its panels, add it to the registry.
 ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UIWindow** registry)
 	: Building_Window(parent, ps, registry)
 {
+   m_parent=parent;
+   m_reg=registry;
+
 	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
 
 	// Add the wares queue
@@ -911,6 +1060,12 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 	// Add caps buttons
 	box->add(create_capsbuttons(box), UIBox::AlignCenter);
 
+   // Add list worker button
+   UIButton* b=new UIButton(box, 0,0,32,32,2,100);
+   b->set_pic(g_gr->get_picture(PicMod_Game, pic_list_worker, true)); 
+   b->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
+   box->add(b, UIBox::AlignLeft);
+
 	fit_inner(box);
 }
 
@@ -926,6 +1081,15 @@ ProductionSite_Window::~ProductionSite_Window()
 {
 }
 
+/*
+ * List worker button has been clicked
+ */
+void ProductionSite_Window::list_worker_clicked(void) {
+   assert(*m_reg==this);
+  
+   *m_reg=new ProductionSite_Window_ListWorkerWindow(m_parent, get_productionsite());
+   die();
+}
 
 /*
 ===============

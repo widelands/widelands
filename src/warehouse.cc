@@ -371,18 +371,28 @@ Warehouse::cleanup
 Destroy the warehouse.
 ===============
 */
-void Warehouse::cleanup(Editor_Game_Base* g)
+void Warehouse::cleanup(Editor_Game_Base* gg)
 {
-	while(m_requests.size()) {
-		Request* req = m_requests[m_requests.size()-1];
+   if(gg->is_game()) {
+      Game* g=static_cast<Game*>(gg);
 
-		m_requests.pop_back();
+      while(m_requests.size()) {
+         Request* req = m_requests[m_requests.size()-1];
 
-		delete req;
-	}
+         m_requests.pop_back();
 
+         delete req;
+      }
+
+      // all cached workers are unbound and freed
+      while(m_incroporated_workers.size()) {
+         Worker* w=m_incroporated_workers.begin()->second;
+         w->reset_tasks(g);
+         m_incroporated_workers.erase(m_incroporated_workers.begin());
+      }
+   }
 	// TODO: un-conquer the area?
-	Building::cleanup(g);
+	Building::cleanup(gg);
 }
 
 
@@ -536,9 +546,21 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
 
 	workerdescr =
 		((Worker_Ware_Descr*)waredescr)->get_worker(get_owner()->get_tribe());
-
-	worker = workerdescr->create(g, get_owner(), this, m_position);
-
+   
+   // Look if we got one in stock of those
+   std::string name=workerdescr->get_name();
+   std::multimap<std::string,Worker*>::iterator i=m_incroporated_workers.find(name);
+   
+   if(i==m_incroporated_workers.end()) {
+      // None found, create a new one (if available)
+      worker = workerdescr->create(g, get_owner(), this, m_position);
+   } else {
+      // one found, make him available
+      worker = i->second;
+      worker->reset_tasks(g); // Forget everything you did
+      m_incroporated_workers.erase(i);
+   }
+   
 	m_supply->remove_wares(ware, 1);
 
 	return worker;
@@ -560,7 +582,13 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	int ware = w->get_ware_id();
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
-	w->remove(g);
+   // We remove carrier, but we keep other workers around
+   if(w->get_worker_type()==Worker::CARRIER) {
+      w->remove(g);
+   } else {
+      m_incroporated_workers.insert(std::pair<std::string,Worker*>(w->get_name(),w));
+      w->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
+   }
 
 	m_supply->add_wares(ware, 1);
 

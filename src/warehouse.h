@@ -20,6 +20,7 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
+#include <map>
 #include "building.h"
 
 class Economy;
@@ -95,7 +96,7 @@ private:
 private:
 	WarehouseSupply*			m_supply;
 	std::vector<Request*>	m_requests; // one idle request per ware type
-
+   std::multimap<std::string,Worker*> m_incroporated_workers; // Workers who live here at the moment
 	int m_next_carrier_spawn;		// time of next carrier growth
 };
 

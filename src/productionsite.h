@@ -103,6 +103,9 @@ public:
 	inline std::vector<WaresQueue*>* get_warequeues(void) {
 		return &m_input_queues;
 	}
+   inline std::vector<Worker*>* get_workers(void) {
+      return &m_workers;
+   }
 
 protected:
 	virtual UIWindow* create_options_window(Interactive_Player* plr,

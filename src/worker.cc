@@ -1415,6 +1415,28 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	m_walk_anims.parse(directory, prof, "walk_??", prof->get_section("walk"), encdata);
    m_walkload_anims.parse(directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
 
+   // Read the becomes and experience
+   m_becomes = sglobal->get_string("becomes","");
+   std::string exp=sglobal->get_string("experience", "");
+   m_min_experience=m_max_experience=-1;
+   if(exp.size()) {
+      std::vector<std::string> list;
+      split_string(exp, &list, "-");
+      if(list.size()!=2) 
+         throw wexception("Parse error in experience string: \"%s\" (must be \"min-max\")", exp.c_str());
+      uint i=0;
+      for(i=0; i<list.size(); i++)
+         remove_spaces(&list[i]);
+
+      char* endp;
+      m_min_experience = strtol(list[0].c_str(),&endp, 0);
+      if(endp && *endp)
+         throw wexception("Parse error in experience string: %s is a bad value", list[0].c_str());
+      m_max_experience = strtol(list[1].c_str(),&endp, 0);
+      if(endp && *endp)
+         throw wexception("Parse error in experience string: %s is a bad value", list[1].c_str());
+   }
+
    // Read programs
 	while(sglobal->get_next_string("program", &string)) {
 		WorkerProgram* prog = 0;
@@ -1463,6 +1485,8 @@ Worker::Worker(Worker_Descr *descr)
 	m_economy = 0;
 	m_location = 0;
 	m_supply = 0;
+   m_needed_exp = 0;
+   m_current_exp = 0;
 }
 
 Worker::~Worker()
@@ -1578,6 +1602,9 @@ void Worker::init(Editor_Game_Base *g)
 
 	// a worker should always start out at a fixed location
 	assert(get_location(g));
+  
+   if(g->is_game())
+      create_needed_experience(static_cast<Game*>(g)); // Set his experience
 }
 
 
@@ -1690,6 +1717,64 @@ void Worker::incorporate(Game *g)
 	send_signal(g, "fail");
 }
 
+/*
+ * Calculate needed experience. 
+ * This sets the needed experience on a value between max and min
+ */
+void Worker::create_needed_experience(Game* g) {
+   if(get_descr()->get_min_exp()==-1 && get_descr()->get_max_exp()==-1) {
+      m_needed_exp=m_current_exp=-1;
+      return;
+   }
+   
+   int range=get_descr()->get_max_exp()-get_descr()->get_min_exp();
+   int value=g->logic_rand() % range;
+   m_needed_exp=value+get_descr()->get_min_exp();
+   m_current_exp=0;
+}
+
+/*
+ * Gain experience 
+ * 
+ * This function increases the experience
+ * of the worker by one, if he reaches
+ * needed_experience he levels
+ */
+void Worker::gain_experience(Game* g) {
+   if(m_needed_exp==-1) return; // This worker can not level
+   
+   ++m_current_exp;
+   
+   if(m_current_exp==m_needed_exp) 
+      level(g);
+   
+}
+
+/*
+ * Level this worker to the next higher 
+ * level. this includes creating a new worker
+ * with his propertys and removing this worker
+ */
+void Worker::level(Game* g) {
+  
+   // We do not really remove this worker, all we do 
+   // is to overwrite his description with the new one and to 
+   // reset his needed experience. Congratulations to promotion!
+   // This silently expects that the new worker is the same type as the old
+   // worker and can fullfill the same jobs (which should be given in all
+   // circumstances)
+   assert(get_becomes());
+   int index=get_descr()->get_tribe()->get_worker_index(get_becomes());
+   Worker_Descr* new_descr=get_descr()->get_tribe()->get_worker_descr(index);
+		
+   // Inform the economy, that something has changed
+   m_economy->remove_wares(get_descr()->get_ware_id(), 1);
+   m_economy->add_wares(new_descr->get_ware_id(),1);
+
+   m_descr=new_descr;
+
+   create_needed_experience(g);
+}
 
 /*
 ===============
