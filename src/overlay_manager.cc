@@ -228,6 +228,11 @@ void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords ho
       j=i;
       ++j;
 
+      if( j == m_overlays.end() ) {
+         // j is no longer a valid field, so sorting ends here
+         break;
+      }
+      
       if(j->first==i->first) {
          // there are more elements registered
          if(j->second.level < i->second.level) {
