@@ -83,17 +83,20 @@ inline int g_main(int argn, char** argc)
 	
 	// Handle options
 	handle_options(argn, argc);
-	
+
+	// Load common UI pictures
+	AutoPic::load_all();
+
 	// Setup font handler and user interface for the use in widelands
 	setup_fonthandler();
 	setup_ui();
 
 	// TEMP <-- doesn't really belong here. but we use it anyway
-	g_ip.register_kbdh(kbdh, NULL);	
+	g_ip.register_kbdh(kbdh, NULL);
 	// TEMP Ends
-	
+
 	// Until now, no window is created, nothing is started, just initialized.
-	// By now, we musn't use the tell_user function any longer!! 
+	// By now, we musn't use the tell_user function any longer!!
 	// Rather, we can now use a user_interface window for critical errors, which
 	// terminates the application in a good matter
 #ifdef 	DEBUG

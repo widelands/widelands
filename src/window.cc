@@ -1,16 +1,16 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -35,23 +35,23 @@
  *  as often as needed: 60 pixels of l_border								  <--- > same for r_border
  *  20 bottom pixels of l_border													  <--- > same for r_borde
  *  <--20leftmostpixel_of_bot--><60Pixels as often as possible to reach window with from bot><20rightmost pixel of bot>
- * 
+ *
  * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
  * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
- * 	 
+ *
  * DEPENDS: Graph::Pic
  * 			Graph::draw_pic
  * 			Initalized g_gr object
  */
 
-Pic Window::l_border;
-Pic Window::r_border;
-Pic Window::top;
-Pic Window::bot;
-Pic Window::bg;
-	
-/** Window::Window(const uint px, const uint py, const uint wi, const uint he, const uint gid, 
- * 	const Flags f) 
+AutoPic Window::l_border("win_l_border.bmp", CORNER, MUST_HAVE_NPIX);
+AutoPic Window::r_border("win_r_border.bmp", CORNER, MUST_HAVE_NPIX);
+AutoPic Window::top("win_top.bmp", MUST_HAVE_NPIX, CORNER);
+AutoPic Window::bot("win_bot.bmp", MUST_HAVE_NPIX, CORNER);
+AutoPic Window::bg("win_bg.bmp");
+
+/** Window::Window(const uint px, const uint py, const uint wi, const uint he, const uint gid,
+ * 	const Flags f)
  *
  * 	This is the constructor with which a window gets created
  *
@@ -69,10 +69,10 @@ Window::Window(const uint px, const uint py, const uint wi, const uint he, const
 		  w=wi;
 		  h=he;
 		  myf=f;
-					 
+
 		  nta=0;
 		  ta=(Textarea**) malloc(sizeof(Textarea*)*MAX_TA);
-		
+
 		  nbut=0;
 		  but=(Button**) malloc(sizeof(Button*)*MAX_BUT);
 
@@ -81,14 +81,14 @@ Window::Window(const uint px, const uint py, const uint wi, const uint he, const
 
 		  nlistselect=0;
 		  listselect=(Listselect**) malloc(sizeof(Listselect)*MAX_LISTSELECT);
-					 
+
 		  nmultiline_textarea=0;
 		  multiline_textarea=(Multiline_Textarea**) malloc(sizeof(Multiline_Textarea)*MAX_MULTILINE_TEXTAREA);
 
 		  winpic=new Pic();
 		  winpic->set_size(w, h);
-		  
-		  own_bg=0;					
+
+		  own_bg=0;
 
 		  redraw_win();
 		  g_gr.register_update_rect(x, y, w, h);
@@ -103,17 +103,17 @@ Window::Window(const uint px, const uint py, const uint wi, const uint he, const
  */
 Window::~Window(void) {
 		  uint i;
-		  
+
 		  g_gr.register_update_rect(x, y, w, h);
-		  
-		  for(i=0 ; i< nta; i++) 
+
+		  for(i=0 ; i< nta; i++)
 					 delete ta[i];
 		  free(ta);
-		 
-		  for(i=0; i< nbut; i++) 
+
+		  for(i=0; i< nbut; i++)
 					 delete but[i];
 		  free(but);
-		 
+
 		  for(i=0; i< ncheckbox; i++) 
 					 delete checkbox[i];
 		  free(checkbox);
@@ -128,7 +128,7 @@ Window::~Window(void) {
 
 		  delete winpic;
 		  if(own_bg) delete own_bg;
-		  
+
 }
 
 /** void Window::set_pos(uint posx, uint posy)

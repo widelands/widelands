@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -57,7 +57,7 @@ void setup_fonthandler(void) {
 		  }
 }
 
-/** void setup_ui(void) 
+/** void setup_ui(void)
  *
  * Sets up the user interface for the needs in widelands
  *
@@ -77,88 +77,8 @@ void setup_ui(void) {
 		  cursor->set_clrkey(0,0,255);
 		  g_cur.set_pic(cursor);
 
-
-		  // Init the window
-		  // Window's without clrkey, so it's drawn WAY faster
-		  Pic bmp;
-		  buf=g_fileloc.locate_file("win_l_border.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("win_l_border.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  //		  bmp.set_clrkey(DEF_CLRKEY);
-		  Window::set_l_border(&bmp);
-
-		  buf=g_fileloc.locate_file("win_r_border.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("win_r_border.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  //		  bmp.set_clrkey(DEF_CLRKEY);
-		  Window::set_r_border(&bmp);
-
-		  buf=g_fileloc.locate_file("win_top.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("win_top.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  //		  bmp.set_clrkey(DEF_CLRKEY);
-		  Window::set_top(&bmp);
-
-		  buf=g_fileloc.locate_file("win_bot.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("win_bot.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  //		  bmp.set_clrkey(DEF_CLRKEY);
-		  Window::set_bot(&bmp);
-
-		  buf=g_fileloc.locate_file("win_bg.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("win_bg.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  //		  bmp.set_clrkey(DEF_CLRKEY);
-		  Window::set_bg(&bmp);
-
 		  // Button class
-		  buf=g_fileloc.locate_file("but0.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("but0.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  Button::set_bg(&bmp, 0);
-
-		  buf=g_fileloc.locate_file("but1.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("but1.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  Button::set_bg(&bmp, 1);
-
-		  buf=g_fileloc.locate_file("but2.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("but2.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  Button::set_bg(&bmp, 2);
-
-		  // Checkbox class
-		  buf=g_fileloc.locate_file("checkbox.bmp", TYPE_PIC);
-		  if(!buf) {
-					 tell_user("checkbox.bmp:  File not found. Check your installation.");
-					 exit(0);
-		  }
-		  bmp.load(buf);
-		  Checkbox::set_graph(&bmp);
+		  Button::setup_ui();
 
 		  // list select class
 		  Listselect::set_font(0);

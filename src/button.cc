@@ -28,14 +28,14 @@
  * 			class Font_Handler
  */
 
-Pic Button::bg0;
-Pic Button::bg1;
-Pic Button::bg2;
+AutoPic Button::bg0("but0.bmp");
+AutoPic Button::bg1("but1.bmp");
+AutoPic Button::bg2("but2.bmp");
 Pic Button::bg0e;
 Pic Button::bg1e;
 Pic Button::bg2e;
 
-/** Button::Button(const uint mx, const uint my, const uint mw, const uint mh, const uint bg, Pic* mdp, 
+/** Button::Button(const uint mx, const uint my, const uint mw, const uint mh, const uint bg, Pic* mdp,
  * 		const uint addx, const uint addy);
  *
  * This function finally creates a button

@@ -310,7 +310,7 @@ namespace Graph
 					 st=STATE_NOT_INIT;
 					 nupr=0;
 					 bneeds_fs_update=false;
-					 
+
 					 SDL_Init(SDL_INIT_VIDEO);
 		  }
 
@@ -357,7 +357,7 @@ namespace Graph
 								sc = SDL_SetVideoMode(x, y, 16, SDL_SWSURFACE);
 					 }
 					 mode=m;
-					 xres=x; 
+					 xres=x;
 					 yres=y;
 					 pixels=(ushort*) sc->pixels;
 

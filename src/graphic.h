@@ -150,7 +150,7 @@ namespace Graph
 	{
 		friend class Graphic;
 	public:
-		Pic(void) { pixels=NULL; w=h=lpix=clrkey=sh_clrkey=bhas_clrkey=0; }
+		Pic(void) { pixels=NULL; w=h=clrkey=sh_clrkey=bhas_clrkey=0; }
 		~Pic(void) { if(pixels) free(pixels); }
 
 		void set_size(const ushort, const ushort);
@@ -166,8 +166,8 @@ namespace Graph
 		void fill_rect(uint x, uint y, uint w, uint h, uint color);
 		void brighten_rect(uint x, uint y, uint w, uint h, int factor);
 
-		/** inline uint Pic::get_w(void) const 
-		  * 
+		/** inline uint Pic::get_w(void) const
+		  *
 		  * This function returns the width
 		  * Args: none
 		  * returns: width
@@ -203,11 +203,11 @@ namespace Graph
 		  * Returns: if the pixel has a clrkey or not
 		  */
 		inline bool has_clrkey(void) { return bhas_clrkey; }
-					 
+
 		// this function really needs faaast blitting
-		friend void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort, 
+		friend void copy_pic(Pic*, Pic*, const ushort, const ushort,  const ushort, const ushort,
 		  const ushort, const ushort);
-		friend void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort, 
+		friend void draw_pic(Pic*, const ushort, const ushort,  const ushort, const ushort,
 			const ushort, const ushort);
 	private:
 		bool bhas_clrkey;
@@ -215,9 +215,29 @@ namespace Graph
 		ushort sh_clrkey;
 		ushort* pixels;
 		ushort w, h;
-		uint lpix;
 	};
 
+	/** class AutoPic
+	 *
+	 * This class provides a picture that is automatically loaded on startup.
+	 * Used for UI graphics.
+	 * Do not use for local or dynamically allocated objects.
+	 */
+	class AutoPic : public Pic {
+		static AutoPic *first;
+		AutoPic *next;
+		const char *filename;
+		int desw, desh; // desired width & height
+	public:
+		AutoPic(const char *mfilename, int mdesw = 0, int mdesh = 0) {
+			next = first; first = this;
+			filename = mfilename; desw = mdesw; desh = mdesh;
+		}
+		static void load_all();
+	};
+
+	/** class Point
+	 */
 	struct Point
 	{
 		int x;
@@ -280,7 +300,7 @@ namespace Graph
 	  * It's a singleton
 	  */
 	#define MAX_RECTS 20
-		  
+
 	class Graphic : public Singleton<Graphic>
 	{
 		// forbidden functions
@@ -388,6 +408,7 @@ namespace Graph
 
 using	Graph::Graphic;
 using	Graph::Pic;
+using	Graph::AutoPic;
 using	Graph::Vector;
 #define 	g_gr 	Graph::Graphic::get_singleton()
 
