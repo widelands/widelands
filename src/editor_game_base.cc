@@ -32,7 +32,7 @@ initialization
 */
 Editor_Game_Base::Editor_Game_Base() {
    m_map = 0;
-   
+
    m_objects = new Object_Manager;
 	memset(m_players, 0, sizeof(m_players));
    
@@ -243,23 +243,26 @@ Make sure that buildings cannot exist outside their owner's territory.
 void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
 {
 	std::vector<ImmovableFound> immovables;
+	std::set<PlayerImmovable*> burnset;
 
+	// Find all immovables that need fixing
 	m_map->find_immovables(coords, radius, &immovables, FindImmovablePlayerImmovable());
 
-	for(uint i = 0; i < immovables.size(); i++) {
+	for(uint i = 0; i < immovables.size(); ++i) {
 		PlayerImmovable* imm = (PlayerImmovable*)immovables[i].object;
 		Coords f = immovables[i].coords;
 
 		if (!imm->get_owner()->is_field_owned(f))
-		{
-			if (is_game())
-				imm->schedule_destroy((Game*)this);
-			else {
-				// We can't simply call remove(), because this will delete
-				// big buildings multiple times
-				//imm->remove(this);
-			}
-		}
+			burnset.insert(imm);
+	}
+
+	// Fix all immovables
+	for(std::set<PlayerImmovable*>::iterator it = burnset.begin(); it != burnset.end(); ++it)
+	{
+		if (is_game())
+			(*it)->schedule_destroy((Game*)this);
+		else
+			(*it)->remove(this);
 	}
 }
 
@@ -352,7 +355,7 @@ void Editor_Game_Base::postload()
 			if (plr && plr->get_tribe() == m_tribes[id])
 				break;
 		}
-		
+
 		if (pid <= MAX_PLAYERS) {
 			// the tribe is used, postload it
 			m_tribes[id]->postload(this);
@@ -362,7 +365,7 @@ void Editor_Game_Base::postload()
 			m_tribes.erase(m_tribes.begin() + id);
 		}
 	}
-	
+
 	// TODO: postload players? (maybe)
 
 	// Postload wares
@@ -386,7 +389,7 @@ void Editor_Game_Base::load_graphics()
 	int i;
 
 	m_map->load_graphics(); // especially loads world data
-	
+
 	for(i = 0; i < (int)m_tribes.size(); i++)
 		m_tribes[i]->load_graphics();
 	
