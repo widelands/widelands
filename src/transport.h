@@ -150,8 +150,7 @@ protected:
 	virtual void cleanup(Editor_Game_Base *g);
 
 	void request_carrier(Game* g);
-
-	virtual void request_success(Game* g, Request* req);
+	static void request_carrier_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
@@ -212,7 +211,10 @@ public:
 		CLOSED,		// request successful, waiting for its deletion
 	};
 
-	Request(PlayerImmovable *target, int ware);
+	typedef void (*callback_t)(Game*, Request*, int ware, Worker*, void* data);
+
+public:
+	Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdata);
 	~Request();
 
 	inline PlayerImmovable* get_target(Game* g) { return (PlayerImmovable*)m_target.get(g); }
@@ -236,11 +238,13 @@ private:
 	Object_Ptr	m_target;	// who requested it?
 	int			m_ware;		// the ware type
 
+	callback_t	m_callbackfn;	// called on request success
+	void*			m_callbackdata;
+
 	int			m_state;
-	union {
-		Worker*	worker;		// worker that is supposed to fulfill the request
-	} m_transfer;
+	Worker*		m_worker;		// non-null if ware is a worker
 };
+
 
 /*
 RequestList is used in the Economy to keep track of requests.
@@ -261,24 +265,6 @@ private:
 	std::vector<Request*>	m_requests;
 };
 
-/*
-WareBuffer can be used in Buildings to conveniently store and request wares.
-*/
-/*
-class WareBuffer {
-public:
-	WareBuffer(int ware, int size);
-	~WareBuffer();
-	
-	void add_to_economy(Economy *e);
-	void remove_from_economy(Economy *e);
-
-private:
-	int		m_ware;		// the type of ware that is buffered
-	int		m_size;		// maximum number of items we can hold
-	int		m_amount;	// number of item the buffer currently holds
-};
-*/
 
 /*
 Economy represents a network of Flag through which wares can be transported.
@@ -290,8 +276,8 @@ public:
 	Economy(Player *player);
 	~Economy();
 
-	inline Player *get_owner() const { return m_owner; }	
-	
+	inline Player *get_owner() const { return m_owner; }
+
 	static void check_merge(Flag *f1, Flag *f2);
 	static void check_split(Flag *f1, Flag *f2);
 

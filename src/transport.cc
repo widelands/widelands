@@ -680,8 +680,32 @@ void Road::request_carrier(Game* g)
 {
 	assert(!m_carrier.get(g) && !m_carrier_request);
 
-	m_carrier_request = new Request(this, g->get_safe_ware_id("carrier"));
+	m_carrier_request = new Request(this, g->get_safe_ware_id("carrier"),
+	                                &Road::request_carrier_callback, this);
 	get_economy()->add_request(m_carrier_request);
+}
+
+
+/*
+===============
+Road::request_carrier_callback [static]
+
+The carrier has arrived successfully.
+===============
+*/
+void Road::request_carrier_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
+{
+	assert(w);
+
+	Road* road = (Road*)data;
+	Carrier* carrier = (Carrier*)w;
+
+	road->get_economy()->remove_request(rq);
+	delete rq;
+	road->m_carrier_request = 0;
+
+	road->m_carrier = carrier;
+	carrier->set_job_road(g, road);
 }
 
 
@@ -781,31 +805,6 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 		request_carrier(g);
 }
 
-
-/*
-===============
-Road::request_success
-
-The given request has completed successfully. You should now remove it from
-the economy and delete it.
-===============
-*/
-void Road::request_success(Game* g, Request* req)
-{
-	if (req == m_carrier_request) {
-		Carrier* carrier = (Carrier*)req->get_worker();
-
-		get_economy()->remove_request(m_carrier_request);
-		delete m_carrier_request;
-		m_carrier_request = 0;
-
-		m_carrier = carrier;
-		carrier->set_job_road(g, this);
-		return;
-	}
-
-	PlayerImmovable::request_success(g, req);
-}
 
 /*
 ===============
@@ -924,18 +923,23 @@ Request::Request
 Request::~Request
 ===============
 */
-Request::Request(PlayerImmovable *target, int ware)
+Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdata)
 {
 	m_target = target;
 	m_ware = ware;
-	
+
+	m_callbackfn = cbfn;
+	m_callbackdata = cbdata;
+
 	m_state = OPEN;
+	m_worker = 0;
 }
 
 Request::~Request()
 {
 	// Request must have been removed from the economy before it's deleted
 }
+
 
 /*
 ===============
@@ -970,7 +974,7 @@ Get the worker this request is all about.
 */
 Worker* Request::get_worker()
 {
-	return m_transfer.worker;
+	return m_worker;
 }
 
 
@@ -1007,7 +1011,7 @@ void Request::start_transfer(Game *g, Worker *worker, Route *route)
 	log("Request: start worker transfer for %i\n", get_ware());
 
 	m_state = TRANSFER;
-	m_transfer.worker = worker;
+	m_worker = worker;
 
 	worker->set_job_request(this, route);
 }
@@ -1024,15 +1028,13 @@ void Request::check_transfer(Game *g)
 {
 	assert(m_state == TRANSFER);
 
-	Ware_Descr *descr = g->get_ware_description(get_ware());
-
-	if (descr->is_worker()) {
-		if (m_transfer.worker->get_route()) {
+	if (m_worker) {
+		if (m_worker->get_route()) {
 			// cause a recalculation if the route is broken
 			// the recalc is asynchronous, and the Worker will call
 			// transfer_fail() if necessary
-			if (!m_transfer.worker->get_route()->verify(g))
-				m_transfer.worker->change_job_request(false);
+			if (!m_worker->get_route()->verify(g))
+				m_worker->change_job_request(false);
 		}
 	} else {
 		throw wexception("TODO: check ware transfer");
@@ -1051,10 +1053,9 @@ void Request::cancel_transfer(Game *g)
 {
 	assert(m_state == TRANSFER);
 
-	Ware_Descr *descr = g->get_ware_description(get_ware());
-
-	if (descr->is_worker()) {
-		m_transfer.worker->change_job_request(true); // cancel
+	if (m_worker) {
+		m_worker->change_job_request(true); // cancel
+		m_worker = 0;
 		m_state = OPEN;
 	} else {
 		throw wexception("TODO: cancel ware transfer");
@@ -1075,10 +1076,8 @@ void Request::transfer_finish(Game *g)
 {
 	assert(m_state == TRANSFER);
 
-	PlayerImmovable *target = get_target(g);
-
 	m_state = CLOSED;
-	target->request_success(g, this);
+	(*m_callbackfn)(g, this, m_ware, m_worker, m_callbackdata);
 }
 
 
@@ -1094,6 +1093,7 @@ void Request::transfer_fail(Game *g)
 {
 	assert(m_state == TRANSFER);
 
+	m_worker = 0;
 	m_state = OPEN;
 	get_target_economy(g)->process_request(this);
 }

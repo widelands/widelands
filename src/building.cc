@@ -516,34 +516,34 @@ void ConstructionSite::request_builder(Game* g)
 {
 	assert(!m_builder && !m_builder_request);
 
-	m_builder_request = new Request(this, g->get_safe_ware_id("builder"));
+	m_builder_request = new Request(this, g->get_safe_ware_id("builder"),
+	                                &ConstructionSite::request_builder_callback, this);
 	get_economy()->add_request(m_builder_request);
 }
 
 
 /*
 ===============
-ConstructionSite::request_success
+ConstructionSite::request_builder_callback [static]
 
-A requested item has been delivered successfully.
+Called by transfer code when the builder has arrived on site.
 ===============
 */
-void ConstructionSite::request_success(Game* g, Request* req)
+void ConstructionSite::request_builder_callback(Game* g, Request* rq, int ware, Worker* w, void* data)
 {
-	if (req == m_builder_request) {
-		m_builder = req->get_worker();
-		m_builder->set_job_idleloop(g, m_builder->get_idle_anim());
+	assert(w);
 
-		// TODO: Make the builder walk around or whatever
+	ConstructionSite* cs = (ConstructionSite*)data;
 
-		get_economy()->remove_request(m_builder_request);
-		delete m_builder_request;
-		m_builder_request = 0;
+	cs->m_builder = w;
+	w->set_job_idleloop(g, w->get_idle_anim());
 
-		return;
-	}
+	// TODO: Make the builder walk around or whatever
 
-	Building::request_success(g, req);
+	cs->get_economy()->remove_request(rq);
+	delete rq;
+
+	cs->m_builder_request = 0;
 }
 
 

@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2002 by the Widelands Development Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -366,18 +366,6 @@ void PlayerImmovable::remove_worker(Worker *w)
 	throw wexception("PlayerImmovable::remove_worker: not in list");
 }
 
-/*
-===============
-PlayerImmovable::request_success
-
-The given request has completed successfully. You should now remove it from
-the economy and delete it.
-===============
-*/
-void PlayerImmovable::request_success(Game* g, Request* req)
-{
-	throw wexception("request_success: unhandled");
-}
 
 /*
 ===============

@@ -24,16 +24,19 @@
 
 
 class Request;
+
+
 /*
 class WaresQueue {
 public:
 	WaresQueue();
 	~WaresQueue();
 
-	void init(Game*, int ware);
-	void cleanup(Game*);
+	int get_size() const { return m_size; }
+	int get_filled() const { return m_filled; }
 
-	bool fetch(bool shrink = false);
+	void init(Game*, int ware, int size);
+	void cleanup(Game*);
 
 private:
 	int			m_ware;		// ware ID
@@ -42,6 +45,7 @@ private:
 	Request*		m_request;	// currently pending request
 };
 */
+
 
 /*
 ConstructionSite
@@ -88,7 +92,7 @@ protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
 	void request_builder(Game* g);
-	virtual void request_success(Game* g, Request* req);
+	static void request_builder_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
 private:
 	Building_Descr*	m_building; // type of building that is being built

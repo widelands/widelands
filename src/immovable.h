@@ -74,7 +74,7 @@ public:
 		
 	void parse(const char *directory, Profile *s);
 	Immovable *create(Editor_Game_Base *g, Coords coords, bool);
-	
+
 protected:
 	char		m_name[30];
 	uint		m_anim; // the default animation
@@ -89,11 +89,11 @@ class Immovable : public BaseImmovable {
 public:
 	Immovable(Immovable_Descr *descr, bool);
 	~Immovable();
-	
+
 	int get_type();
 	int get_size();
 	bool get_passable();
-	
+
 	void init(Editor_Game_Base *g);
 	void cleanup(Editor_Game_Base *g);
 
@@ -101,7 +101,7 @@ public:
 
 protected:
 	Coords		m_position;
-	
+
 	uint			m_anim;
 	int			m_animstart;
 };
@@ -124,24 +124,22 @@ public:
 	inline Economy *get_economy() const { return m_economy; }
 
 	virtual Flag *get_base_flag() = 0;
-	
+
 	virtual void set_economy(Economy *e);
-	
+
 	void add_worker(Worker *w);
 	void remove_worker(Worker *w);
 
-	virtual void request_success(Game* g, Request* req);
-
 protected:
 	void set_owner(Player *owner);
-	
+
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
-		
+
 private:
 	Player		*m_owner;
 	Economy		*m_economy;
-	
+
 	std::vector<Worker*>	m_workers;
 };
 
