@@ -773,8 +773,10 @@ bool Worker::run_removeobject(Game* g, State* state, const WorkerAction* act)
 	Map_Object* obj;
 
 	obj = state->objvar1.get(g);
-	obj->remove(g);
-	state->objvar1.set(0);
+	if (obj) {
+		obj->remove(g);
+		state->objvar1.set(0);
+	}
 
 	state->ivar1++;
 	schedule_act(g, 10);
@@ -2084,11 +2086,7 @@ Worker::dropoff_update
 */
 void Worker::dropoff_update(Game* g, State* state)
 {
-	PlayerImmovable* owner = get_location(g);
 	WareInstance* item = get_carried_item(g);
-
-	assert(owner); // expect 'location' signal
-
 	BaseImmovable* location = g->get_map()->get_immovable(get_position());
 
 	// Deliver the item
