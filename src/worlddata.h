@@ -34,9 +34,6 @@
 
 #define WLWF_VERSION			PACK_VERSION(1,0)
 
-#define TEXTURE_W          64
-#define TEXTURE_H          64
-
 
 #define TERRAIN_DRY        1
 // #define TERRAIN_GREEN      1 

@@ -26,6 +26,9 @@
 
 #include <SDL.h> // need SDL_Rect
 
+#define TEXTURE_W          64
+#define TEXTURE_H          64
+
 /** inline ushort pack_rgb(const uchar r, const uchar g, const uchar b);
  *
  * This functions packs a RGB tribble into a short

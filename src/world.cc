@@ -20,6 +20,7 @@
 #include "widelands.h"
 #include "world.h"
 #include "bob.h"
+#include "graphic.h"
 #include "worlddata.h"
 #include "md5.h"
 #include "profile.h"

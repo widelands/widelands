@@ -178,7 +178,7 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture, int 
       for(int tx = start + vpx; tx <= txend; tx++)
       {
          //*pix++ = pack_rgb((b >> 16) + 128, (b >> 16) + 128, (b >> 16) + 128); // shading test
-         *pix++ = bright_up_clr2(texp[tx & 63], b >> 16);
+         *pix++ = bright_up_clr2(texp[tx & (TEXTURE_W-1)], b >> 16);
          b += bd;
       }
    }
