@@ -45,12 +45,14 @@ public:
 
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
+        inline void set_flags(char flags) { m_flags = flags; }
+
 private:
 	Interactive_Base	*m_player;
-	int						m_viewx, m_viewy;
-	uint                  m_fx, m_fy;
-
+	int			m_viewx, m_viewy;
+	uint			m_fx, m_fy;
 	uint			m_pic_map_spot;
+        char 			m_flags;
 };
 
 
@@ -67,8 +69,16 @@ public:
 
    inline MiniMapView* get_minimapview(void) { return m_view; }
 
+   //void toggle_MapFlags(char new_flag);
+   void toggle_color();
+   void toggle_ownedBy();
+   void toggle_flags();
+   void toggle_roads();
+   void toggle_buildings();
+
 private:
 	MiniMapView		*m_view;
+        char 			m_flags;
 };
 
 #endif /* MINIMAP_H */
