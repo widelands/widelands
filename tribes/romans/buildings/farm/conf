@@ -1,0 +1,44 @@
+[global]
+descname=Farm		# nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=big
+buildable=yes
+buildicon=farm_build.bmp
+worker=farmer
+
+program=work
+
+[work]
+0=sleep 20000		# sleep the given amount of time
+1=worker plant		# cause the worker to run the 'plant' program
+2=sleep 5000		# sleep the given amount of time
+3=worker harvest		# cause the worker to run the 'harvest' program
+
+[buildcost]
+plank=2
+stone=4
+
+[idle]
+pics=farm_i_??.bmp  # ???
+hot_spot_x=60
+hot_spot_y=52
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=farm_w_??.bmp  # ???
+hot_spot_x=60
+hot_spot_y=52
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+
