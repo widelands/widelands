@@ -17,6 +17,8 @@
  *
  */
 
+ // just testing - philipp
+
 #include "widelands.h"
 #include "minimap.h"
 #include "map.h"
