@@ -1419,23 +1419,23 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
 				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
 		} 
       else if (cmd[0] == "consume") {
-         if(cmd.size() != 2) 
+         if(cmd.size() != 2)
             throw wexception("Line %i: Usage: consume <ware>", idx);
 
-         
+
          Section* s=prof->get_safe_section("inputs");
-         if(!s->get_string(cmd[1].c_str(), 0)) 
+         if(!s->get_string(cmd[1].c_str(), 0))
             throw wexception("Line %i: Ware %s is not in [inputs]\n", idx, cmd[1].c_str());
-         
+
          act.type = ProductionAction::actConsume;
-         act.sparam1 = cmd[1]; 
+         act.sparam1 = cmd[1];
       } else if (cmd[0] == "produce") {
-         if(cmd.size() != 2) 
+         if(cmd.size() != 2)
             throw wexception("Line %i: Usage: produce <ware>", idx);
 
-         if(!building->is_output(cmd[1])) 
+         if(!building->is_output(cmd[1]))
             throw wexception("Line %i: Ware %s is not in [outputs]\n", idx, cmd[1].c_str());
-        
+
          act.type = ProductionAction::actProduce;
          act.sparam1 = cmd[1];
       } else if (cmd[0] == "worker") {
@@ -1820,9 +1820,16 @@ void ProductionSite::act(Game *g, uint data)
             for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
                if(!strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(), action->sparam1.c_str())) {
                   WaresQueue* wq=m_input_queues[i];
-                  if(wq->get_filled()) 
+                  if(wq->get_filled())
+						{
                      wq->set_filled(wq->get_filled()-1);
-                  else { molog("   Consume failed, program restart\n"); program_restart(); }
+							wq->update(g);
+						}
+                  else
+						{
+							molog("   Consume failed, program restart\n");
+							program_restart();
+						}
                   break;
                }
             }

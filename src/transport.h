@@ -374,6 +374,9 @@ private:
 WaresQueue
 ----------
 This micro storage room can hold any number of items of a fixed ware.
+
+Note that you must call update() after changing the queue's size or filled
+state using one of the set_*() functions.
 */
 class WaresQueue {
 public:
