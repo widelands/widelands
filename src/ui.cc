@@ -747,7 +747,7 @@ Panel *Panel::get_mousein(int x, int y)
 	Panel *child;
 
 	for(child = _fchild; child; child = child->_next) {
-		if (!child->get_handle_mouse())
+		if (!child->get_handle_mouse() || !child->get_visible())
 			continue;
 		if (x < child->_x+(int)child->_w && x >= child->_x &&
 		    y < child->_y+(int)child->_h && y >= child->_y)

@@ -76,6 +76,7 @@ class Player {
 		void rip_flag(Coords c);
 		void build_road(const Path *path);
 		void remove_road(Road *road);
+		void build(Coords c, int idx);
 
    private:
       // set functions

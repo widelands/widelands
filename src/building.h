@@ -39,24 +39,30 @@ class Building_Descr : public Map_Object_Descr {
 public:
 	Building_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Building_Descr(void);
-		
+	
 	inline const char *get_name(void) { return m_name; }
 	inline const char *get_descname() { return m_descname; }
 	inline uint get_idle_anim(void) { return m_idle; }
 	inline bool get_buildable(void) { return m_buildable; }
+	inline uint get_buildicon() const { return m_buildicon; }
 	inline int get_size(void) { return m_size; }
+	inline bool get_ismine() { return m_mine; }
 
-	Building *create(Editor_Game_Base *g, Player *owner, Coords pos, bool logic);
+	Building *create(Editor_Game_Base *g, Player *owner, Coords pos, bool logic, bool construct);
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
+	virtual void load_graphics();
 
 protected:
 	virtual Building *create_object(bool) = 0;
-
+	Building* create_constructionsite(bool logic);
+		
 private: 
 	Tribe_Descr		*m_tribe;			// the tribe this building belongs to
-	char				m_name[15];			// internal codename
+	char				m_name[20];			// internal codename
 	char				m_descname[30];	// descriptive name for GUI
 	bool				m_buildable;		// the player can build this himself
+	uint				m_buildicon;		// if buildable: the picture used in the build dialog
+	char*				m_buildicon_fname; // filename for this icon
 	int				m_size;				// size of the building
 	bool				m_mine;
 	uint				m_idle;		// idle animation
@@ -82,7 +88,7 @@ public:
 	virtual bool get_passable();
 
 	virtual Flag *get_base_flag();
-		
+	
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }
 	

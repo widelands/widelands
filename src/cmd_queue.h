@@ -43,6 +43,8 @@ enum {
 	
 	CMD_BUILD_ROAD,	// arg1 = Path*
 	CMD_REMOVE_ROAD,	// arg1 = serialnum
+	
+	CMD_BUILD,			// arg1 = x, arg2 = y, arg3 = build_descr idx
 };
 // ---------------------- END    OF CMDS ----------------------------------
 

@@ -129,20 +129,10 @@ Redraw the window frame and background
 */
 void Window::draw_border(RenderTarget* dst)
 {
-	int bgw, bgh;
 	int px, py;
 
-	g_gr->get_picture_size(m_pic_background, &bgw, &bgh);
-	
-	// fill background
-   int blitw, blith;
-   for(py = CORNER; py < get_h()-CORNER; py += bgh) {
-      for(px = CORNER; px < get_w()-CORNER; px += bgw) {
-         blitw=(get_w()-px-CORNER) > bgw ? bgw : (get_w()-px-CORNER);
-         blith=(get_h()-py-CORNER) > bgh ? bgh : (get_h()-py-CORNER);
-         dst->blitrect(px, py, m_pic_background, 0, 0, blitw, blith);
-      }
-   }
+	// background
+	dst->tile(CORNER, CORNER, get_w() - (2*CORNER), get_h() - (2*CORNER), m_pic_background, 0, 0);
 
 	// top left corner
 	dst->blitrect(0, 0, m_pic_top, 0, 0, CORNER, CORNER);

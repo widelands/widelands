@@ -147,6 +147,7 @@ public:
 	inline Field* get_field(const int x, const int y);
 	inline FCoords get_fcoords(const Coords c);
 	inline void normalize_coords(int *x, int *y);
+	inline void normalize_coords(Coords *c);
 	inline Field* get_safe_field(int x, int y);
 	inline void get_coords(Field * const f, Coords *c);
 					
@@ -352,6 +353,21 @@ inline void Map::normalize_coords(int *x, int *y)
 		do { *y += m_height; } while(*y < 0);
 	} else {
 		while(*y >= (int)m_height) { *y -= m_height; }
+	}
+}
+
+inline void Map::normalize_coords(Coords* c)
+{
+	if (c->x < 0) {
+		do { c->x += m_width; } while(c->x < 0);
+	} else {
+		while(c->x >= (int)m_width) { c->x -= m_width; }
+	}
+
+	if (c->y < 0) {
+		do { c->y += m_height; } while(c->y < 0);
+	} else {
+		while(c->y >= (int)m_height) { c->y -= m_height; }
 	}
 }
 

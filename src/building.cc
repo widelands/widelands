@@ -26,6 +26,8 @@
 #include "player.h"
 #include "transport.h"
 
+#include "building_int.h"
+
 
 /*
 ==============================================================================
@@ -48,6 +50,8 @@ Building_Descr::Building_Descr(Tribe_Descr *tribe, const char *name)
 	snprintf(m_name, sizeof(m_name), "%s", name);
 	strcpy(m_descname, m_name);
 	m_buildable = true;
+	m_buildicon = 0;
+	m_buildicon_fname = 0;
 	m_size = BaseImmovable::SMALL;
 	m_mine = false;
 }
@@ -62,8 +66,10 @@ Cleanup
 */
 Building_Descr::~Building_Descr(void)
 {
+	if (m_buildicon_fname)
+		free(m_buildicon_fname);
 }
-		
+
 /*
 ===============
 Building_Descr::create
@@ -71,11 +77,11 @@ Building_Descr::create
 Create a building of this type. Does not perform any sanity checks.
 ===============
 */
-Building *Building_Descr::create(Editor_Game_Base *g, Player *owner, Coords pos, bool logic)
+Building *Building_Descr::create(Editor_Game_Base *g, Player *owner, Coords pos, bool logic, bool construct)
 {
 	assert(owner);
 	
-	Building *b = create_object(logic);
+	Building *b = construct ? create_constructionsite(logic) : create_object(logic);
 	b->set_owner(owner);
 	b->m_position = pos;
 	b->init(g);
@@ -94,6 +100,8 @@ void Building_Descr::parse(const char *directory, Profile *prof, const EncodeDat
 {
 	Section *global = prof->get_safe_section("global");
 	const char *string;
+	char buf[256];
+	char fname[256];
 	
 	snprintf(m_descname, sizeof(m_descname), "%s", global->get_safe_string("descname"));
 
@@ -113,10 +121,54 @@ void Building_Descr::parse(const char *directory, Profile *prof, const EncodeDat
 	
 	m_buildable = global->get_bool("buildable", true);
 	
+	if (m_buildable)
+		{
+		snprintf(buf, sizeof(buf), "%s_build.bmp", m_name);
+		string = global->get_string("buildicon", buf);
+		
+		snprintf(fname, sizeof(fname), "%s/%s", directory, string);
+		
+		m_buildicon_fname = strdup(fname);
+		}
+	
 	Section *s = prof->get_section("idle");
 	if (!s)
 		throw wexception("Missing idle animation");
 	m_idle = g_anim.get(directory, s, 0, encdata);
+}
+
+
+/*
+===============
+Building_Descr::load_graphics
+
+Called whenever building graphics need to be loaded.
+===============
+*/
+void Building_Descr::load_graphics()
+{
+	if (m_buildicon_fname)
+		m_buildicon = g_gr->get_picture(PicMod_Game, m_buildicon_fname, RGBColor(0,0,255));
+}
+
+/*
+===============
+Building_Descr::create_constructionsite
+
+Create a construction site for this type of building
+===============
+*/
+Building* Building_Descr::create_constructionsite(bool logic)
+{
+	Building_Descr* descr = m_tribe->get_building_descr(m_tribe->get_building_index("constructionsite"));
+	if (!descr)
+		throw wexception("Tribe %s has no constructionsite", m_tribe->get_name());
+
+	ConstructionSite* csite = (ConstructionSite*)descr->create_object(true);
+	
+	csite->set_building(this);
+	
+	return csite;
 }
 
 
@@ -215,7 +267,7 @@ void Building::init(Editor_Game_Base* g)
 	Flag *flag;
 	
 	map->get_brn(m_position, &neighb);
-	imm = map->get_immovable(m_position);
+	imm = map->get_immovable(neighb);
 	
 	if (imm && imm->get_type() == FLAG)
 		flag = (Flag *)imm;
@@ -277,6 +329,151 @@ void Building::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, P
 	
 	// door animation?
 }
+
+
+/*
+==============================================================================
+
+ConstructionSite BUILDING
+
+==============================================================================
+*/
+
+/*
+===============
+ConstructionSite_Descr::ConstructionSite_Descr
+===============
+*/
+ConstructionSite_Descr::ConstructionSite_Descr(Tribe_Descr* tribe, const char* name)
+	: Building_Descr(tribe, name)
+{
+}
+
+
+/*	
+===============
+ConstructionSite_Descr::parse
+
+Parse tribe-specific construction site data, such as graphics, worker type,
+etc...
+===============
+*/
+void ConstructionSite_Descr::parse(const char* directory, Profile* prof, const EncodeData* encdata)
+{
+	Building_Descr::parse(directory, prof, encdata);
+	
+	// TODO
+}
+
+
+/*
+===============
+ConstructionSite_Descr::create_object
+
+Allocate a ConstructionSite
+===============
+*/
+Building* ConstructionSite_Descr::create_object(bool logic)
+{
+	return new ConstructionSite(this, logic);
+}
+
+
+/*
+==============================
+
+IMPLEMENTATION
+
+==============================
+*/
+
+
+/*
+===============
+ConstructionSite::ConstructionSite
+
+Initialize with default values
+===============
+*/
+ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr, bool logic)
+	: Building(descr, logic)
+{
+	m_building = 0;
+}
+
+
+/*
+===============
+ConstructionSite::~ConstructionSite
+===============
+*/
+ConstructionSite::~ConstructionSite()
+{
+}
+
+
+/*
+===============
+ConstructionSite::get_size
+
+Override: construction size is always the same size as the building
+===============
+*/	
+int ConstructionSite::get_size()
+{
+	return m_building->get_size();
+}
+
+
+/*
+===============
+ConstructionSite::set_building
+
+Set the type of building we're going to build
+===============
+*/
+void ConstructionSite::set_building(Building_Descr* descr)
+{
+	assert(!m_building);
+	
+	m_building = descr;
+}
+
+
+/*
+===============
+ConstructionSite::init
+
+Initialize the construction site by starting orders
+===============
+*/
+void ConstructionSite::init(Editor_Game_Base* g)
+{
+	Building::init(g);
+	
+	// TODO: figure out whether planing is necessary
+	
+	// TODO: order construction material and worker
+}
+
+
+/*
+===============
+ConstructionSite::cleanup
+
+Release worker and material (if any is left).
+If construction was finished successfully, place the building at our position.
+===============
+*/
+void ConstructionSite::cleanup(Editor_Game_Base* g)
+{
+	// TODO: release worker/wares
+	
+	Building::cleanup(g);
+	
+	// TODO: if necessary, warp the building here
+}
+	
 
 
 /*
@@ -553,6 +750,107 @@ Building *Warehouse_Descr::create_object(bool logic)
 /*
 ==============================================================================
 
+ProductionSite BUILDING
+
+==============================================================================
+*/
+
+ProductionSite_Descr::ProductionSite_Descr(Tribe_Descr* tribe, const char* name)
+	: Building_Descr(tribe, name)
+{
+}
+
+
+/*
+===============
+ProductionSite_Descr::parse
+
+Parse the additional information necessary for production buildings
+===============
+*/
+void ProductionSite_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
+{
+	Building_Descr::parse(directory, prof, encdata);
+
+	// TODO
+}
+
+
+/*
+==============================
+
+IMPLEMENTATION
+
+==============================
+*/
+
+/*
+===============
+ProductionSite::ProductionSite
+===============
+*/
+ProductionSite::ProductionSite(ProductionSite_Descr* descr, bool logic)
+	: Building(descr, logic)
+{
+}
+
+
+/*
+===============
+ProductionSite::~ProductionSite
+===============
+*/
+ProductionSite::~ProductionSite()
+{
+}
+
+
+/*
+===============
+ProductionSite::init
+
+Initialize the production site.
+===============
+*/
+void ProductionSite::init(Editor_Game_Base *g)
+{
+	Building::init(g);
+	
+	// TODO: request worker
+}
+
+
+/*
+===============
+ProductionSite::cleanup
+
+Cleanup after a production site is removed
+===============
+*/
+void ProductionSite::cleanup(Editor_Game_Base *g)
+{
+	// TODO: release worker, wares
+
+	Building::cleanup(g);
+}
+
+
+/*
+===============
+ProductionSite_Descr::create_object
+
+Create a new building of this type
+===============
+*/
+Building* ProductionSite_Descr::create_object(bool logic)
+{
+	return new ProductionSite(this, logic);
+}
+
+
+/*
+==============================================================================
+
 Building_Descr Factory
 
 ==============================================================================
@@ -593,7 +891,7 @@ Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *
 	
 	if (!g_fs->FileExists(fname))
 		return 0;
-		
+	
 	try
 	{
 		Profile prof(fname, "global"); // section-less file
@@ -602,6 +900,10 @@ Building_Descr *Building_Descr::create_from_dir(Tribe_Descr *tribe, const char *
 		
 		if (!strcasecmp(type, "warehouse"))
 			descr = new Warehouse_Descr(tribe, name);
+		else if (!strcasecmp(type, "production"))
+			descr = new ProductionSite_Descr(tribe, name);
+		else if (!strcasecmp(type, "construction"))
+			descr = new ConstructionSite_Descr(tribe, name);
 		else
 			throw wexception("Unknown building type '%s'", type);
 		

@@ -221,3 +221,44 @@ void Player::remove_road(Road *road)
 	
 	road->destroy(m_egbase);
 }
+
+
+/*
+===============
+Player::build
+
+Place a construction site, checking that it's legal to do so.
+===============
+*/
+void Player::build(Coords c, int idx)
+{
+	int buildcaps;
+	Building_Descr* descr;
+	
+	// Validate building type
+	if (idx < 0 || idx >= get_tribe()->get_nrbuildings())
+		return;
+	descr = get_tribe()->get_building_descr(idx);
+	
+	if (!descr->get_buildable())
+		return;
+	
+	
+	// Validate build position
+	get_game()->get_map()->normalize_coords(&c);
+	buildcaps = get_buildcaps(c);
+	
+	if (descr->get_ismine())
+		{
+		if (!(buildcaps & BUILDCAPS_MINE))
+			return;
+		}
+	else
+		{
+		if ((buildcaps & BUILDCAPS_SIZEMASK) < (descr->get_size() - BaseImmovable::SMALL + 1))
+			return;
+		}
+	
+	get_game()->warp_constructionsite(c.x, c.y, m_plnum, idx);
+}
+

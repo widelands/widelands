@@ -82,7 +82,8 @@ void Tribe_Descr::load_graphics()
 	for(i = 0; i < m_workers.get_nitems(); i++)
 		m_workers.get(i)->load_graphics();
 
-	// TODO: load building graphics
+	for(i = 0; i < m_buildings.get_nitems(); i++)
+		m_buildings.get(i)->load_graphics();
 }
 
 
@@ -178,7 +179,7 @@ void Tribe_Descr::parse_buildings(const char *rootdir)
 		}
 
 		if (descr)
-			buildings.add(descr);
+			m_buildings.add(descr);
 	}
 }
 

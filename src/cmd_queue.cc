@@ -164,6 +164,13 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		break;
 	}
 	
+	case CMD_BUILD:
+	{
+		Player* plr = m_game->get_player(c->sender);
+		plr->build(Coords(c->arg1, c->arg2), c->arg3);
+		break;
+	}
+	
 	default:
 		assert(0);
 		break;

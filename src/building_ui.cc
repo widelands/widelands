@@ -32,6 +32,8 @@ class.
 #include "player.h"
 #include "worker.h"
 
+#include "building_int.h"
+
 
 /*
 ==============================================================================
@@ -69,6 +71,91 @@ void Building::hide_options()
 		delete m_optionswindow;
 }
 
+
+/*
+==============================================================================
+
+ConstructionSite UI IMPLEMENTATION
+
+==============================================================================
+*/
+
+class ConstructionSite_Window : public Window {
+public:
+	ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, Window** registry);
+	virtual ~ConstructionSite_Window();
+
+	virtual void think();
+
+private:
+	Window**					m_registry;		// pointer to this window, cleared in destructor
+	Interactive_Player*	m_player;		// player the construction site belongs to
+	ConstructionSite*		m_constructionsite;	// production site this window has been opened for
+};
+
+
+/*
+===============
+ConstructionSite_Window::ConstructionSite_Window
+
+Create the window and its panels, add it to the registry.
+===============
+*/
+ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, ConstructionSite* cs, 
+                                                 Window** registry)
+	: Window(parent, 0, 0, 136, 260, cs->get_name())
+{
+	m_registry = registry;
+	if (*m_registry)
+		delete *m_registry;
+	*m_registry = this;
+	
+	m_player = parent;
+	m_constructionsite = cs;
+	
+	move_to_mouse();
+	
+	set_think(true);
+}
+
+/*
+===============
+ConstructionSite_Window::~ConstructionSite_Window
+
+Deinitialize, remove from registry
+===============
+*/
+ConstructionSite_Window::~ConstructionSite_Window()
+{
+	*m_registry = 0;
+}
+
+
+/*
+===============
+ConstructionSite_Window::think
+
+Make sure the window is redrawn when necessary.
+===============
+*/
+void ConstructionSite_Window::think()
+{
+}
+
+
+/*
+===============
+ConstructionSite::create_options_window
+
+Create the status window describing the construction site.
+===============
+*/
+Window *ConstructionSite::create_options_window(Interactive_Player *plr, Window **registry)
+{
+	return new ConstructionSite_Window(plr, this, registry);
+}
+
+
 /*
 ==============================================================================
 
@@ -100,7 +187,7 @@ Open the window, create the window buttons and add to the registry.
 ===============
 */
 Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, Window **registry)
-	: Window(parent, 0, 0, 136, 260, "Warehouse")
+	: Window(parent, 0, 0, 136, 260, wh->get_name())
 {
 	m_registry = registry;
 	if (*m_registry)
@@ -138,7 +225,7 @@ Draw the wares
 */
 void Warehouse_Window::draw(RenderTarget* dst)
 {
-	Game *game = m_player->get_game();
+	Editor_Game_Base* game = m_player->get_game();
 	Tribe_Descr *tribe = m_player->get_player()->get_tribe();
 	int x, y;
 	
@@ -207,3 +294,85 @@ Window *Warehouse::create_options_window(Interactive_Player *plr, Window **regis
 	return new Warehouse_Window(plr, this, registry);
 }
 
+
+/*
+==============================================================================
+
+ProductionSite UI IMPLEMENTATION
+
+==============================================================================
+*/
+
+class ProductionSite_Window : public Window {
+public:
+	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, Window** registry);
+	virtual ~ProductionSite_Window();
+
+	virtual void think();
+
+private:
+	Window**					m_registry;		// pointer to this window, cleared in destructor
+	Interactive_Player*	m_player;		// player the production site belongs to
+	ProductionSite*		m_productionsite;	// production site this window has been opened for
+};
+
+
+/*
+===============
+ProductionSite_Window::ProductionSite_Window
+
+Create the window and its panels, add it to the registry.
+===============
+*/
+ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, Window** registry)
+	: Window(parent, 0, 0, 136, 260, ps->get_name())
+{
+	m_registry = registry;
+	if (*m_registry)
+		delete *m_registry;
+	*m_registry = this;
+	
+	m_player = parent;
+	m_productionsite = ps;
+	
+	move_to_mouse();
+	
+	set_think(true);
+}
+
+/*
+===============
+ProductionSite_Window::~ProductionSite_Window
+
+Deinitialize, remove from registry
+===============
+*/
+ProductionSite_Window::~ProductionSite_Window()
+{
+	*m_registry = 0;
+}
+
+
+/*
+===============
+ProductionSite_Window::think
+
+Make sure the window is redrawn when necessary.
+===============
+*/
+void ProductionSite_Window::think()
+{
+}
+
+
+/*
+===============
+ProductionSite::create_options_window
+
+Create the production site information window.
+===============
+*/
+Window* ProductionSite::create_options_window(Interactive_Player* plr, Window** registry)
+{
+	return new ProductionSite_Window(plr, this, registry);
+}

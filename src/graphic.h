@@ -297,6 +297,7 @@ public:
 	virtual void blit(int dstx, int dsty, uint picture) = 0;
 	virtual void blitrect(int dstx, int dsty, uint picture,
 	                      int srcx, int srcy, int w, int h) = 0;
+	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy) = 0;
 
 	virtual void rendermap(const MapRenderInfo* mri, Point viewofs) = 0;
 	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint, uint) = 0;

@@ -62,7 +62,8 @@ class Editor_Game_Base {
       void load_graphics();
 
       // warping stuff. instantly creating map_objects
-      Building *warp_building(int x, int y, char owner, int idx);
+      Building* warp_building(int x, int y, char owner, int idx);
+		Building* warp_constructionsite(int x, int y, char owner, int idx);
       Bob *create_bob(int x, int y, int idx);
       Immovable *create_immovable(int x, int y, int idx);
 

@@ -388,6 +388,84 @@ void RenderTargetImpl::blitrect(int dstx, int dsty, uint picture,
 
 /*
 ===============
+RenderTargetImpl::tile
+
+Fill the given rectangle with the given picture.
+The pixel from (ofsx/ofsy) inside picture is placed at the top-left corner of
+the filled rectangle.
+===============
+*/
+void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy)
+{
+	GraphicImpl* gfx = get_graphicimpl();
+	Bitmap* src = gfx->get_picture_bitmap(picture);
+
+	// Clipping	
+	x += m_offset.x;
+	y += m_offset.y;
+	
+	if (x < 0) {
+		w += x;
+		x = 0;
+	}
+	if (x + w > m_rect.w)
+		w = m_rect.w - x;
+	if (w <= 0)
+		return;
+	
+	if (y < 0) {
+		h += y;
+		y = 0;
+	}
+	if (y + h > m_rect.h)
+		h = m_rect.h - y;
+	if (h <= 0)
+		return;
+	
+	// Make sure the offset is within bounds
+	ofsx = ofsx % src->w;
+	if (ofsx < 0)
+		ofsx += src->w;
+	
+	ofsy = ofsy % src->h;
+	if (ofsy < 0)
+		ofsy += src->h;
+	
+	// Blit the picture into the rectangle
+	int ty = 0;
+	
+	while(ty < h)
+		{
+		int tx = 0;
+		int tofsx = ofsx;
+		Rect srcrc;
+		
+		srcrc.y = ofsy;
+		srcrc.h = src->h - ofsy;
+		if (ty + srcrc.h > h)
+			srcrc.h = h - ty;
+		
+		while(tx < w)
+			{
+			srcrc.x = tofsx;
+			srcrc.w = src->w - tofsx;
+			if (tx + srcrc.w > w)
+				srcrc.w = w - tx;
+			
+			m_bitmap->blit(Point(m_rect.x + x + tx, m_rect.y + y + ty), src, srcrc);
+			
+			tx += srcrc.w;
+			tofsx = 0;
+			}
+		
+		ty += srcrc.h;
+		ofsy = 0;
+		}
+}
+
+
+/*
+===============
 draw_overlays
 
 Draw build help (buildings and roads) and the field sel

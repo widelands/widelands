@@ -146,21 +146,7 @@ Redraw the button
 void Button::draw(RenderTarget* dst)
 {
 	// Draw the background
-	int bgw, bgh;
-	int srcy;
-	int h;
-	
-	g_gr->get_picture_size(m_pic_background, &bgw, &bgh);
-	
-	srcy = get_y() % bgh;
-	h = bgh - srcy;
-
-	for(int y = 0; y < get_h(); y += h, srcy = 0, h = bgh) {
-		int srcx = get_x() % bgw;
-		int w = bgw - srcx;
-		for(int x = 0; x < get_w(); x += w, srcx = 0, w = bgw)
-			dst->blitrect(x, y, m_pic_background, srcx, srcy, w, h);
-	}
+	dst->tile(0, 0, get_w(), get_h(), m_pic_background, get_x(), get_y());
 
 	if (_enabled && _highlighted)
 		dst->brighten_rect(0, 0, get_w(), get_h(), MOUSE_OVER_BRIGHT_FACTOR);

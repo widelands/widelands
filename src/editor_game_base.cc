@@ -267,7 +267,9 @@ void Editor_Game_Base::load_graphics()
 
 	m_map->load_graphics(); // especially loads world data
 	
-	// TODO: load tribe graphics (buildings, units)
+	for(i = 0; i < (int)m_tribes.size(); i++)
+		m_tribes[i]->load_graphics();
+	
 	// TODO: load player graphics? (maybe)
 	
 	for(i = 0; i < m_wares.get_nitems(); i++)
@@ -332,8 +334,30 @@ Building *Editor_Game_Base::warp_building(int x, int y, char owner, int idx)
 	descr = player->get_tribe()->get_building_descr(idx);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), Coords(x, y), is_game());
+	return descr->create(this, get_player(owner), Coords(x, y), is_game(), false);
 }
+
+
+/*
+===============
+Editor_Game_Base::warp_constructionsite
+
+Create a building site at the given x/y location for the given building type.
+===============
+*/
+Building* Editor_Game_Base::warp_constructionsite(int x, int y, char owner, int idx)
+{
+	Building_Descr* descr;
+	Player *player = get_player(owner);
+	
+	assert(player);
+   
+	descr = player->get_tribe()->get_building_descr(idx);
+	assert(descr);
+
+	return descr->create(this, get_player(owner), Coords(x, y), is_game(), true);
+}
+
 
 /** Editor_Game_Base::create_bob(int x, int y, int idx)
  *
@@ -383,8 +407,5 @@ int Editor_Game_Base::get_safe_ware_id(const char *name)
 		throw wexception("Ware '%s' not found", name);
 	return id;
 }
-
-
-
 
 

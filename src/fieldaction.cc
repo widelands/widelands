@@ -27,7 +27,248 @@
 #include "fieldaction.h"
 #include "watchwindow.h"
 
+#include "ui_tabpanel.h"
+#include "ui_box.h"
 
+
+/*
+==============================================================================
+
+BuildGrid IMPLEMENTATION
+
+==============================================================================
+*/
+
+#define BG_CELL_WIDTH		34 // extents of one cell
+#define BG_CELL_HEIGHT		34
+
+
+// The BuildGrid presents a selection of buildable buildings
+class BuildGrid : public Panel {
+public:
+	BuildGrid(Panel* parent, Tribe_Descr* tribe, int x, int y, int cols);
+	
+	UISignal1<int> clicked;
+	
+	void add(int idx);
+
+protected:
+	void draw(RenderTarget* dst);
+	
+	int index_for_point(int x, int y);
+	void update_for_index(int idx);
+	
+	void handle_mousein(bool inside);
+	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
+	bool handle_mouseclick(uint btn, bool down, int x, int y);
+
+private:
+	Tribe_Descr*		m_tribe;
+	std::vector<int>	m_buildings;
+	
+	int	m_cols;			// max # of columns in the grid
+	int	m_highlight;	// currently highlight building idx (-1 = no highlight)
+	int	m_clicked;		// building that was clicked (only while LMB is down)
+};
+
+
+/*
+===============
+BuildGrid::BuildGrid
+
+Initialize the grid
+===============
+*/
+BuildGrid::BuildGrid(Panel* parent, Tribe_Descr* tribe, int x, int y, int cols)
+	: Panel(parent, x, y, 0, 0)
+{
+	m_tribe = tribe;
+	m_cols = cols;
+	
+	m_highlight = -1;
+	m_clicked = -1;
+}
+
+
+/*
+===============
+BuildGrid::add
+
+Add a new building to the list of buildable buildings and resize appropriately.
+===============
+*/
+void BuildGrid::add(int idx)
+{
+	m_buildings.push_back(idx);
+	
+	if ((int)m_buildings.size() < m_cols)
+		set_size(BG_CELL_WIDTH * m_buildings.size(), BG_CELL_HEIGHT);
+	else
+		set_size(BG_CELL_WIDTH * m_cols, BG_CELL_HEIGHT * (m_buildings.size()+m_cols-1) / m_cols);
+}
+
+
+/*
+===============
+BuildGrid::draw
+
+Draw the building symbols
+===============
+*/
+void BuildGrid::draw(RenderTarget* dst)
+{
+	int x, y;
+
+	// First of all, draw the highlight
+	if (m_highlight >= 0 && (m_clicked < 0 || m_clicked == m_highlight))
+		dst->brighten_rect((m_highlight % m_cols) * BG_CELL_WIDTH, (m_highlight / m_cols) * BG_CELL_HEIGHT,
+		                   BG_CELL_WIDTH, BG_CELL_HEIGHT, MOUSE_OVER_BRIGHT_FACTOR);
+
+	// Draw the symbols
+	x = 0;
+	y = 0;
+	
+	for(uint idx = 0; idx < m_buildings.size(); idx++)
+		{
+		Building_Descr* descr = m_tribe->get_building_descr(m_buildings[idx]);
+		uint picid = descr->get_buildicon();
+		int w, h;
+		
+		g_gr->get_picture_size(picid, &w, &h);
+		
+		dst->blit(x + (BG_CELL_WIDTH-w)/2, y + (BG_CELL_HEIGHT-h)/2, picid);
+				
+		x += BG_CELL_WIDTH;
+		if (x >= get_w())
+			{
+			x = 0;
+			y += BG_CELL_HEIGHT;
+			}
+		}
+}
+
+
+/*
+===============
+BuildGrid::index_for_point
+
+Return the building index for a given point inside the BuildGrid.
+Returns -1 if no building is below the point.
+===============
+*/
+int BuildGrid::index_for_point(int x, int y)
+{
+	if (x < 0 || x >= m_cols * BG_CELL_HEIGHT || y < 0)
+		return -1;
+	
+	int index = m_cols * (y / BG_CELL_HEIGHT) + (x / BG_CELL_WIDTH);
+	
+	if (index < 0 || index >= (int)m_buildings.size())
+		return -1;
+	
+	return index;
+}
+
+
+/*
+===============
+BuildGrid::update_for_index
+
+Issue an update() call for the cell with the given idx.
+===============
+*/
+void BuildGrid::update_for_index(int idx)
+{
+	if (idx >= 0 && idx < (int)m_buildings.size())
+		update((idx % m_cols) * BG_CELL_WIDTH, (idx / m_cols) * BG_CELL_HEIGHT,
+		       BG_CELL_WIDTH, BG_CELL_HEIGHT);
+}
+
+
+/*
+===============
+BuildGrid::handle_mousein
+
+Turn highlight off when the mouse leaves the grid
+===============
+*/
+void BuildGrid::handle_mousein(bool inside)
+{
+	if (!inside)
+		{
+		if (m_highlight != -1)
+			update_for_index(m_highlight);
+		
+		m_highlight = -1;
+		}
+}
+
+
+/*
+===============
+BuildGrid::handle_mousemove
+
+Update highlight under the mouse
+===============
+*/
+void BuildGrid::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
+{
+	int hl = index_for_point(x, y);
+	
+	if (hl != m_highlight)
+		{
+		update_for_index(m_highlight);
+		update_for_index(hl);
+		
+		m_highlight = hl;
+		}
+}
+
+
+/*
+===============
+BuildGrid::handle_mouseclick
+
+Left mouse down selects the building, left mouse up acknowledges and sends the
+signal.
+===============
+*/
+bool BuildGrid::handle_mouseclick(uint btn, bool down, int x, int y)
+{
+	if (btn != 0)
+		return false;
+
+	if (down)
+		{
+		grab_mouse(true);
+		m_clicked = index_for_point(x, y);
+		}
+	else
+		{
+		if (m_clicked >= 0)
+			{
+			int hl = index_for_point(x, y);
+			
+			grab_mouse(false);
+			
+			if (hl == m_clicked)
+				clicked.call(m_buildings[m_clicked]);
+			
+			m_clicked = -1;
+			}
+		}
+
+	return true;
+}
+
+
+/*
+==============================================================================
+
+FieldActionWindow IMPLEMENTATION
+
+==============================================================================
+*/
 class FieldActionWindow : public Window {
 public:
 	FieldActionWindow(Interactive_Player *plr, UniqueWindow *registry);
@@ -35,6 +276,7 @@ public:
 
 	void init();
 	void add_buttons_auto();
+	void add_buttons_build(int buildcaps);
 	void add_buttons_road(bool flag);
 	
 	// Action handlers
@@ -44,19 +286,30 @@ public:
 	void act_buildroad();
 	void act_abort_buildroad();
 	void act_removeroad();
+	void act_build(int idx);
 
 private:
-   void add_button(const char* picname, void (FieldActionWindow::*fn)());
+   void add_tab(const char* picname, Panel* panel);
+   void add_button(Box* box, const char* picname, void (FieldActionWindow::*fn)());
 	void okdialog();
 	
 	Interactive_Player	*m_player;
 	Map						*m_map;
 	UniqueWindow			*m_registry;
 
-	int		m_nbuttons;
-	
-	FCoords	m_field;
+	FCoords		m_field;
+
+	TabPanel*	m_tabpanel;
 };
+
+static const char* pic_tab_buildroad = "pics/menu_tab_buildroad.bmp";
+static const char* pic_tab_watch = "pics/menu_tab_watch.bmp";
+static const char* pic_tab_buildhouse[3] = {
+	"pics/menu_tab_buildsmall.bmp",
+	"pics/menu_tab_buildmedium.bmp",
+	"pics/menu_tab_buildbig.bmp"
+};
+static const char* pic_tab_buildmine = "pics/menu_tab_buildmine.bmp";
 
 static const char* pic_buildroad = "pics/menu_build_way.bmp";
 static const char* pic_remroad = "pics/menu_rem_way.bmp";
@@ -76,6 +329,7 @@ Initialize a field action window, creating the appropriate buttons.
 FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *registry)
 	: Window(plr, plr->get_w()/2, plr->get_h()/2, 68, 34, "Action")
 {
+	// Hooks into the game classes
 	m_player = plr;
 	m_map = m_player->get_game()->get_map();
 	m_registry = registry;
@@ -88,7 +342,9 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *regi
 
 	m_player->set_fieldsel_freeze(true);
 
-	m_nbuttons = 0;
+	//
+	m_tabpanel = new TabPanel(this, 0, 0, 1);
+	m_tabpanel->set_snapparent(true);
 }
 
 /*
@@ -115,7 +371,7 @@ This mainly deals with mouse placement
 */
 void FieldActionWindow::init()
 {
-	set_inner_size(m_nbuttons*34, 34);
+	m_tabpanel->resize();
 
 	// Move the window away from the current mouse position, i.e.
 	// where the field is, to allow better view
@@ -131,8 +387,8 @@ void FieldActionWindow::init()
 	}
 	
 	// Now force the mouse onto the first button
-	// TODO: adapt this automatically as more buttons are added
-	set_mouse_pos(17, 17);
+	// TODO: should be on first tab button if we're building
+	set_mouse_pos(17, 51);
 }
 
 
@@ -145,39 +401,125 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto()
 {
-	// Add actions
+	Box* buildbox = 0;
+	Box* watchbox;
+	
+	watchbox = new Box(m_tabpanel, 0, 0);
+	
+	// Add road-building actions
 	if (m_field.field->get_owned_by() == m_player->get_player_number())
 	{
 		BaseImmovable *imm = m_map->get_immovable(m_field);
 	
+		// The box with road-building buttons
+		buildbox = new Box(m_tabpanel, 0, 0);
+		
 		if (imm && imm->get_type() == Map_Object::FLAG)
 		{
 			// Add flag actions
 			Flag *flag = (Flag*)imm;
 
-			add_button(pic_buildroad, &FieldActionWindow::act_buildroad);
+			add_button(buildbox, pic_buildroad, &FieldActionWindow::act_buildroad);
 
 			Building *building = flag->get_building();
 
 			if (!building || strcasecmp(building->get_name(), "headquarters"))
-				add_button(pic_ripflag, &FieldActionWindow::act_ripflag);
+				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag);
 		}
 		else
 		{
-			// Add build actions
 			int buildcaps = m_player->get_player()->get_buildcaps(m_field);
-
+			
+			// Add house building
+			if ((buildcaps & BUILDCAPS_SIZEMASK) || (buildcaps & BUILDCAPS_MINE))
+				add_buttons_build(buildcaps);
+			
+			// Add build actions
 			if (buildcaps & BUILDCAPS_FLAG)
-				add_button(pic_buildflag, &FieldActionWindow::act_buildflag);
+				add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag);
 			
 			if (imm && imm->get_type() == Map_Object::ROAD)
-				add_button(pic_remroad, &FieldActionWindow::act_removeroad);
+				add_button(buildbox, pic_remroad, &FieldActionWindow::act_removeroad);
 		}
 	}
 	
-	// Common to all fields
-	add_button(pic_watchfield, &FieldActionWindow::act_watch);
+	// Watch actions
+	add_button(watchbox, pic_watchfield, &FieldActionWindow::act_watch);
+	
+	
+	// Add tabs
+	if (buildbox && buildbox->get_nrpanels())
+		{
+		buildbox->resize();
+		add_tab(pic_tab_buildroad, buildbox);
+		}
+	
+	watchbox->resize();
+	add_tab(pic_tab_watch, watchbox);
 }
+
+
+/*
+===============
+FieldActionWindow::add_buttons_build
+
+Add buttons for house building.
+===============
+*/
+void FieldActionWindow::add_buttons_build(int buildcaps)
+{
+	BuildGrid* bbg_house[3] = { 0, 0, 0 };
+	BuildGrid* bbg_mine = 0;
+	
+	Tribe_Descr* tribe = m_player->get_player()->get_tribe();
+	
+	for(int id = 0; id < tribe->get_nrbuildings(); id++)
+		{
+		Building_Descr* descr = tribe->get_building_descr(id);
+		BuildGrid** ppgrid;
+		
+		// Some buildings cannot be built (i.e. construction site, HQ)
+		if (!descr->get_buildable())
+			continue;
+		
+		// Figure out if we can build it here, and in which tab it belongs
+		if (descr->get_ismine())
+			{
+			if (!(buildcaps & BUILDCAPS_MINE))
+				continue;
+			
+			ppgrid = &bbg_mine;
+			}
+		else
+			{
+			int size = descr->get_size() - BaseImmovable::SMALL;
+			
+			if ((buildcaps & BUILDCAPS_SIZEMASK) < (size+1))
+				continue;
+			
+			ppgrid = &bbg_house[size];
+			}
+		
+		// Allocate the tab's grid if necessary
+		if (!*ppgrid)
+			{
+			*ppgrid = new BuildGrid(m_tabpanel, tribe, 0, 0, 5);
+			(*ppgrid)->clicked.set(this, &FieldActionWindow::act_build);
+			}
+		
+		// Add it to the grid
+		(*ppgrid)->add(id);
+		}
+	
+	// Add all necessary tabs
+	for(int i = 0; i < 3; i++)
+		if (bbg_house[i])
+			add_tab(pic_tab_buildhouse[i], bbg_house[i]);
+
+	if (bbg_mine)
+		add_tab(pic_tab_buildmine, bbg_mine);
+}
+
 
 /*
 ===============
@@ -188,10 +530,29 @@ Buttons used during road building: Set flag here and Abort
 */
 void FieldActionWindow::add_buttons_road(bool flag)
 {
+	Box* buildbox = new Box(m_tabpanel, 0, 0);
+
 	if (flag)
-		add_button(pic_buildflag, &FieldActionWindow::act_buildflag);
+		add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag);
 	
-	add_button(pic_abort, &FieldActionWindow::act_abort_buildroad);
+	add_button(buildbox, pic_abort, &FieldActionWindow::act_abort_buildroad);
+	
+	// Add the box as tab
+	buildbox->resize();
+	add_tab(pic_tab_buildroad, buildbox);
+}
+
+
+/*
+===============
+FieldActionWindow::add_tab
+
+Convenience function: Adds a new tab to the main tab panel
+===============
+*/
+void FieldActionWindow::add_tab(const char* picname, Panel* panel)
+{
+	m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname, RGBColor(0,0,255)), panel);
 }
 
 
@@ -200,13 +561,13 @@ void FieldActionWindow::add_buttons_road(bool flag)
 FieldActionWindow::add_button
 ===============
 */
-void FieldActionWindow::add_button(const char* picname, void (FieldActionWindow::*fn)())
+void FieldActionWindow::add_button(Box* box, const char* picname, void (FieldActionWindow::*fn)())
 {
-	Button *b = new Button(this, m_nbuttons*34, 0, 34, 34, 2);
+	Button *b = new Button(box, 0, 0, 34, 34, 2);
 	b->clicked.set(this, fn);
 	b->set_pic(g_gr->get_picture(PicMod_Game, picname, RGBColor(0,0,255)));
 	
-	m_nbuttons++;
+	box->add(b);
 }
 
 /*
@@ -314,6 +675,24 @@ void FieldActionWindow::act_removeroad()
 	
 	okdialog();
 }
+
+
+/*
+===============
+FieldActionWindow::act_build
+
+Start construction of the building with the give description index
+===============
+*/
+void FieldActionWindow::act_build(int idx)
+{
+	Game *g = m_player->get_game();
+	
+	g->send_player_command(m_player->get_player_number(), CMD_BUILD, m_field.x, m_field.y, idx);
+	
+	okdialog();
+}
+
 
 /*
 ===============

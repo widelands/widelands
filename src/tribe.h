@@ -47,8 +47,9 @@ class Tribe_Descr {
 		
 		inline int get_nrworkers() { return m_workers.get_nitems(); }
       inline Worker_Descr* get_worker_descr(uint idx) { return m_workers.get(idx); }
-		inline int get_building_index(const char *name) { return buildings.get_index(name); }
-		inline Building_Descr *get_building_descr(uint idx) { return buildings.get(idx); }
+		inline int get_nrbuildings() { return m_buildings.get_nitems(); }
+		inline int get_building_index(const char *name) { return m_buildings.get_index(name); }
+		inline Building_Descr *get_building_descr(uint idx) { return m_buildings.get(idx); }
 		
       inline uint get_frontier_anim(void) { return m_anim_frontier; }
 		inline uint get_flag_anim(void) { return m_anim_flag; }
@@ -63,7 +64,7 @@ class Tribe_Descr {
 		uint m_anim_flag;
 		
       Descr_Maintainer<Worker_Descr> m_workers;
-      Descr_Maintainer<Building_Descr> buildings;
+      Descr_Maintainer<Building_Descr> m_buildings;
 
       // Parsing the tribe
 		EncodeData	m_default_encdata;

@@ -233,7 +233,8 @@ void Sys_Init()
 		sys.active = true;
 		
 		SDL_ShowCursor(SDL_DISABLE);
-		SDL_WM_GrabInput(SDL_GRAB_ON);
+		if (!sys.fplayback)
+			SDL_WM_GrabInput(SDL_GRAB_ON);
 		SDL_EnableUNICODE(1); // useful for e.g. chat messages
 		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 		

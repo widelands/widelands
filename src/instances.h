@@ -104,7 +104,7 @@ public:
 	enum Attribute {
 		WAREHOUSE = 1,		// assume BUILDING
 	};
-		
+	
 	// the enums tell us where we are going
 	enum WalkingDir {
 		IDLE = 0,

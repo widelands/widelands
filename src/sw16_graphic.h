@@ -191,6 +191,7 @@ public:
 	virtual void blit(int dstx, int dsty, uint picture);
 	virtual void blitrect(int dstx, int dsty, uint picture,
 	                      int srcx, int srcy, int w, int h);
+	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy);
 
 	virtual void rendermap(const MapRenderInfo* mgi, Point viewofs);
 	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint fx, uint fy);

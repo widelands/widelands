@@ -38,7 +38,7 @@ MiniMapView::MiniMapView
 Initialize the minimap object
 ===============
 */
-MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Base *plr, uint fx = 0, uint fy = 0)
+MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Base *plr, uint fx, uint fy)
 	: Panel(parent, x, y, 10, 10)
 {
 	m_player = plr;

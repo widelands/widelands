@@ -1,0 +1,16 @@
+[global]
+descname=Construction Site	# nicer name to display in GUI
+
+type=construction
+size=small				# dummy; overridden by building size
+buildable=no			# counterintuitive, but correct: can't build constructionsite
+
+
+[idle]
+pics=construction_i_??.bmp  # ???
+hot_spot_x=5
+hot_spot_y=5
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+
