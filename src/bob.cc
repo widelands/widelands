@@ -76,12 +76,11 @@ Create a bob of this type
 Bob *Bob_Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords, bool logic)
 {
    Game* g=static_cast<Game*>(gg);
-   assert(g->is_game() == gg->is_game() == logic);
-	Bob *bob = create_object(logic);
-	bob->set_owner(owner);
-	bob->set_position(g, coords);
-	bob->init(g);
-   
+   Bob *bob = create_object(logic);
+   bob->set_owner(owner);
+   bob->set_position(g, coords);
+   bob->init(g);
+
    return bob;
 }
 
@@ -213,13 +212,13 @@ void Bob::cleanup(Editor_Game_Base *gg)
       Game* g=static_cast<Game*>(gg); 
       if (get_current_task())
          task_end(g); // subtle...
+   }	
 
-      if (m_position.field) {
-         m_position.field = 0;
-         *m_linkpprev = m_linknext;
-         if (m_linknext)
-            m_linknext->m_linkpprev = m_linkpprev;
-      }	
+   if (m_position.field) {
+      m_position.field = 0;
+      *m_linkpprev = m_linknext;
+      if (m_linknext)
+         m_linknext->m_linkpprev = m_linkpprev;
 
    }
    Map_Object::cleanup(gg);

@@ -19,7 +19,8 @@
 
 #include "widelands.h"
 #include "interactive_base.h"
-
+#include "map.h"
+#include "options.h"
 
 /*
 ==============================================================================
@@ -36,11 +37,18 @@ Interactive_Base::Interactive_Base
 Initialize
 ===============
 */
-Interactive_Base::Interactive_Base(void)
+Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
+  Panel(0, 0, 0, get_xres(), get_yres())
 {
-	memset(&m_maprenderinfo, 0, sizeof(m_maprenderinfo));
+	// Switch to the new graphics system now, if necessary
+	Section *s = g_options.pull_section("global");
 	
-	m_fieldsel_freeze = false;
+	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
+
+   memset(&m_maprenderinfo, 0, sizeof(m_maprenderinfo));   
+
+   m_fieldsel_freeze = false;
+   m_egbase=g;
 }
 
 /*
@@ -83,4 +91,45 @@ void Interactive_Base::set_fieldsel_freeze(bool yes)
 {
 	m_fieldsel_freeze = yes;
 }
+
+
+/*
+===============
+Interactive_Base::get_xres [static]
+Interactive_Base::get_yres [static]
+
+Retrieve in-game resolution from g_options.
+===============
+*/
+int Interactive_Base::get_xres()
+{
+	return g_options.pull_section("global")->get_int("xres", 640);
+}
+
+int Interactive_Base::get_yres()
+{
+	return g_options.pull_section("global")->get_int("yres", 480);
+}
+
+
+/*
+===============
+Interactive_Base::think
+
+Called once per frame by the UI code
+===============
+*/
+void Interactive_Base::think()
+{
+	// Call game logic here
+   // The game advances
+	m_egbase->think();
+  
+	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
+	g_gr->update_fullscreen();
+	
+	// some of the UI windows need to think()
+	Panel::think();
+}
+
 

@@ -20,7 +20,11 @@
 #ifndef __S__INTBASE_H
 #define __S__INTBASE_H
 
+
 #include "ui.h"
+#include "editor_game_base.h"
+
+class Map;
 
 /** class Interactive_Base
  *
@@ -28,15 +32,19 @@
  * to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-class Interactive_Base {
+class Interactive_Base : public Panel {
 	public:
-		Interactive_Base(void);
+		Interactive_Base(Editor_Game_Base* g);
 		virtual ~Interactive_Base(void);
 
-      // they are not fast, but this is not so important, since they're not
-      // called often
-      virtual Map* get_map() =0 ;
+      inline Map* get_map() { assert(m_egbase); return m_egbase->get_map(); }
       
+		static int get_xres();
+		static int get_yres();
+	   
+      // logic handler func
+      void think();
+
 		inline const Coords &get_fieldsel() const { return m_maprenderinfo.fieldsel; }
 		inline bool get_fieldsel_freeze() const { return m_fieldsel_freeze; }
 		void set_fieldsel(Coords c);
@@ -44,9 +52,14 @@ class Interactive_Base {
 		
 		inline const MapRenderInfo* get_maprenderinfo() const { return &m_maprenderinfo; }
 		
+      virtual void recalc_overlay(FCoords fc) = 0;
+      virtual void start() = 0;
+
    protected:
-		bool		m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
-		MapRenderInfo	m_maprenderinfo;
+		bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
+		MapRenderInfo	   m_maprenderinfo;
+      
+      Editor_Game_Base* m_egbase;
 };
 
 

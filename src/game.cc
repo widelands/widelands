@@ -135,7 +135,9 @@ bool Game::run(void)
 		g_gr->flush(PicMod_Menu);
 		
 		ipl = new Interactive_Player(this, 1);
-
+      // inform base, that we have something interactive
+      set_iabase(ipl);
+      
 		postload();
 		
 		// Prepare the players (i.e. place HQs)

@@ -102,14 +102,9 @@ Interactive_Player::Interactive_Player
 Initialize
 ===============
 */
-Interactive_Player::Interactive_Player(Game *g, uchar plyn)
-	: Panel(0, 0, 0, get_xres(), get_yres())
+Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g)
 {
-	// Switch to the new graphics system now, if necessary
-	Section *s = g_options.pull_section("global");
-	
-	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
-	
+
 	// Setup all screen elements
 	m_game = g;
 	m_player_number = plyn;
@@ -189,37 +184,6 @@ void Interactive_Player::start()
 		}
 }
 
-
-/*
-===============
-Interactive_Player::get_xres [static]
-Interactive_Player::get_yres [static]
-
-Retrieve in-game resolution from g_options.
-===============
-*/
-int Interactive_Player::get_xres()
-{
-	return g_options.pull_section("global")->get_int("xres", 640);
-}
-
-int Interactive_Player::get_yres()
-{
-	return g_options.pull_section("global")->get_int("yres", 480);
-}
-
-
-/*
-===============
-Interactive_Player::get_player
-
-Return the logic player that is controlled by this Interactive_Player
-===============
-*/
-Player *Interactive_Player::get_player()
-{
-	return m_game->get_player(m_player_number);
-}
 
 
 /** Interactive_Player::exit_game_btn(void *a)
@@ -331,26 +295,6 @@ void Interactive_Player::field_action()
 	
 	// everything else can bring up the temporary dialog
 	show_field_action(this, &m_fieldaction);
-}
-
-/*
-===============
-Interactive_Player::think
-
-Called once per frame by the UI code
-===============
-*/
-void Interactive_Player::think()
-{
-	// Call game logic here
-   // The game advances
-	m_game->think();
-   
-	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
-	g_gr->update_fullscreen();
-	
-	// some of the UI windows need to think()
-	Panel::think();
 }
 
 /*
@@ -665,6 +609,7 @@ void Interactive_Player::roadb_remove_overlay()
 		m_maprenderinfo.overlay_roads[neighb.y*mapwidth + neighb.x] = 0;
 	}
 }
+
 
 
 /*

@@ -26,6 +26,8 @@
 #include "cmd_queue.h"
 #include "ware.h"
 
+class Interactive_Base;
+
 class Editor_Game_Base {
    public:
       Editor_Game_Base(); 
@@ -39,7 +41,8 @@ class Editor_Game_Base {
       void conquer_area(uchar playernr, Coords coords, int radius);
       void recalc_for_field(Coords coords, int radius = 0);
 	
-	
+      // logic handler func
+      virtual void think() = 0;	
 	
       // Player commands
       void remove_player(int plnum);
@@ -65,14 +68,12 @@ class Editor_Game_Base {
 
       inline int get_gametime(void) { return m_gametime; }
 
-      // TODO!!
-      virtual Interactive_Player* get_ipl(void) = 0;
-
    protected:
       // next function is used to update the current gametime, 
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
-  
+      inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
+
    private:
       void init_wares();
 
@@ -82,6 +83,7 @@ class Editor_Game_Base {
       std::vector<Tribe_Descr*>	m_tribes;
       Descr_Maintainer<Ware_Descr>	m_wares;
       Map*								m_map;
+      Interactive_Base*          m_iabase;
 };
 
 #endif // __S__EDITOR_GAME_BASE_H

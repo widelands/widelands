@@ -37,6 +37,7 @@ Editor_Game_Base::Editor_Game_Base() {
 	memset(m_players, 0, sizeof(m_players));
    
    m_gametime=0;
+   m_iabase=0;
 }
 
 /*
@@ -97,8 +98,8 @@ void Editor_Game_Base::recalc_for_field(Coords coords, int radius)
 		f = m_map->get_field(x, y);
 		m_map->recalc_fieldcaps_pass2(x, y, f);
 		
-   if (get_ipl())
-      get_ipl()->recalc_overlay(FCoords(x, y, f));
+   if (m_iabase)
+      m_iabase->recalc_overlay(FCoords(x, y, f));
 	}
 }
 
@@ -331,7 +332,7 @@ Building *Editor_Game_Base::warp_building(int x, int y, char owner, int idx)
 	descr = player->get_tribe()->get_building_descr(idx);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), Coords(x, y), 1);
+	return descr->create(this, get_player(owner), Coords(x, y), is_game());
 }
 
 /** Editor_Game_Base::create_bob(int x, int y, int idx)
@@ -347,7 +348,7 @@ Bob *Editor_Game_Base::create_bob(int x, int y, int idx)
 	descr = m_map->get_world()->get_bob_descr(idx);
 	assert(descr);
 	
-	return descr->create(this, 0, Coords(x, y), 1);
+	return descr->create(this, 0, Coords(x, y), is_game());
 }
 
 /*
@@ -365,7 +366,7 @@ Immovable *Editor_Game_Base::create_immovable(int x, int y, int idx)
 	descr = m_map->get_world()->get_immovable_descr(idx);
 	assert(descr);
 	
-	return descr->create(this, Coords(x, y), 1);
+	return descr->create(this, Coords(x, y), is_game());
 }
 
 /*

@@ -44,13 +44,10 @@ struct UniqueWindow {
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-class Interactive_Player : public Panel, public Interactive_Base {
+class Interactive_Player : public Interactive_Base {
 	public:
 		Interactive_Player(Game *g, uchar pln);
 		~Interactive_Player(void);
-
-		static int get_xres();
-		static int get_yres();
 
 		void start();
 		
@@ -64,16 +61,13 @@ class Interactive_Player : public Panel, public Interactive_Base {
 		void move_view_to(int fx, int fy);
 		void warp_mouse_to_field(Coords c);
 
-		void think();
+      void recalc_overlay(FCoords fc) ;
 
 		bool handle_key(bool down, int code, char c);
 	
-      inline Map* get_map() { return m_game->get_map(); }
 		inline Game *get_game() { return m_game; }
 		inline uchar get_player_number(void) { return m_player_number; }
-		Player *get_player();
-		
-		void recalc_overlay(FCoords fc);
+		inline Player *get_player() { assert(m_game); return m_game->get_player(m_player_number) ; }
 		
 		// Road building
 		inline bool is_building_road() const { return m_buildroad; }
