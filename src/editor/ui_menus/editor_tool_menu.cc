@@ -21,14 +21,16 @@
 #include "editorinteractive.h"
 #include "ui_radiobutton.h"
 #include "ui_textarea.h"
-#include "editor_tools_option_menus.h"
-#include "editor_info_tool.h"
+#include "editor_tool_change_height_options_menu.h"
+#include "editor_tool_set_terrain_options_menu.h"
+#include "editor_tool_noise_height_options_menu.h"
+#include "editor_tool_place_immovable_options_menu.h"
+#include "editor_increase_height_tool.h"
+#include "editor_decrease_height_tool.h"
+#include "editor_noise_height_tool.h"
 #include "editor_place_immovable_tool.h"
 #include "editor_set_both_terrain_tool.h"
-#include "editor_set_down_terrain_tool.h"
-#include "editor_set_right_terrain_tool.h"
-#include "editor_increase_height_tool.h"
-#include "editor_noise_height_tool.h"
+
 
 /*
 ===============
