@@ -92,6 +92,7 @@ ConstructionSite::ConstructionSite(ConstructionSite_Descr* descr)
 	: Building(descr)
 {
 	m_building = 0;
+	m_prev_building= 0;
 
 	m_builder = 0;
 	m_builder_request = 0;
@@ -228,6 +229,19 @@ void ConstructionSite::set_building(Building_Descr* descr)
 	m_building = descr;
 }
 
+/*
+ * Set previous building
+ * That is the building that was here before, we're
+ * an enhancement
+ */
+void ConstructionSite::set_previous_building(Building_Descr* descr) {
+   assert(!m_prev_building);
+   
+   m_prev_building=descr;
+   
+   if(!m_prev_building->get_build_anim())
+      throw wexception("Trying to enhance a non buildable building!\n");
+}
 
 /*
 ===============
@@ -531,6 +545,17 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
    // NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
    if(anim_pic) // not the first pic
       dst->drawanim(pos.x, pos.y, anim, tanim-FRAME_LENGTH, get_owner()->get_playercolor()); // draw the prev pic completly
+
+   if(!anim_pic && m_prev_building) {
+      // Is the first building, but there was another building here before,
+      // get its last build picture and draw it instead
+      int w, h;
+      int anim = m_prev_building->get_build_anim();
+      int nr_pics=g_gr->get_animation_nr_frames(anim);
+      g_gr->get_animation_size(anim, tanim, &w, &h);
+      int tanim = (nr_pics-1)*FRAME_LENGTH; 
+      dst->drawanim(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor()); 
+   }
 
 	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor(), 0, h-lines, w, lines);
 

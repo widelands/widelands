@@ -3,9 +3,9 @@ descname=Clearer	# nicer name to display in GUI
 worker=lumberjack
 type=production		# basic type (warehouse, production, military)
 size=small
-buildable=yes
+buildable=no
+enhanced_building=yes
 buildicon=clearer_build.png
-
 #subtype=none      # possible values: for warehouse: HQ, port
 program=work
 
@@ -16,7 +16,7 @@ program=work
 
 
 [buildcost]
-plank=2
+plank=4
 stone=2
 
 

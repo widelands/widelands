@@ -6,7 +6,8 @@ buildable=yes
 buildicon=lumberjack_build.bmp
 worker=lumberjack
 stopable=yes
-
+enhances_to=clearer
+enhances_to=quarry
 #input=
 output=log
 

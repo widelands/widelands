@@ -80,7 +80,10 @@ Cleanup
 */
 Building_Descr::~Building_Descr(void)
 {
-	free(m_buildicon_fname);
+   if(m_buildicon_fname) 
+      free(m_buildicon_fname);
+   for(uint i=0; i<m_enhances_to.size(); i++)
+      free(m_enhances_to[i]);
 }
 
 /*
@@ -88,14 +91,16 @@ Building_Descr::~Building_Descr(void)
 Building_Descr::create
 
 Create a building of this type. Does not perform any sanity checks.
+
+if old != 0 this is an enhancing
 ===============
 */
 Building* Building_Descr::create(Editor_Game_Base* g, Player* owner,
-	Coords pos, bool construct)
+	Coords pos, bool construct, Building_Descr* old)
 {
 	assert(owner);
 
-	Building* b = construct ? create_constructionsite() : create_object();
+	Building* b = construct ? create_constructionsite(old) : create_object();
 	b->set_owner(owner);
 	b->m_position = pos;
 	b->init(g);
@@ -140,10 +145,14 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 
 	// Parse build options
 	m_buildable = global->get_bool("buildable", true);
-
-	if (m_buildable)
+   while(global->get_next_string("enhances_to", &string)) {
+      if(string)
+         m_enhances_to.push_back(strdup(string));
+   }
+   m_enhanced_building=global->get_bool("enhanced_building", false);
+	if (m_buildable || m_enhanced_building)
 		{
-		// Get build icon
+      // Get build icon
 		snprintf(buf, sizeof(buf), "%s_build.bmp", m_name);
 		string = global->get_string("buildicon", buf);
 
@@ -215,9 +224,11 @@ void Building_Descr::load_graphics()
 Building_Descr::create_constructionsite
 
 Create a construction site for this type of building
+
+if old != 0 this is an enhancement from an older building
 ===============
 */
-Building* Building_Descr::create_constructionsite()
+Building* Building_Descr::create_constructionsite(Building_Descr* old)
 {
 	Building_Descr* descr =
 		m_tribe->get_building_descr(
@@ -226,8 +237,10 @@ Building* Building_Descr::create_constructionsite()
 		throw wexception("Tribe %s has no constructionsite", m_tribe->get_name());
 
 	ConstructionSite* csite = (ConstructionSite*)descr->create_object();
-
 	csite->set_building(this);
+   
+   if(old)
+      csite->set_previous_building(old);
 
 	return csite;
 }
@@ -365,11 +378,15 @@ uint Building::get_playercaps()
 {
 	uint caps = 0;
 
-	if (get_descr()->get_buildable())
+	if (get_descr()->get_buildable() || get_descr()->get_enhanced_building())
 		caps |= 1 << PCap_Bulldoze;
 
 	if (get_descr()->get_stopable())
 		caps |= 1 << PCap_Stopable;
+
+   if(get_descr()->get_enhances_to())
+      caps |= 1 << PCap_Enhancable;
+
 	return caps;
 }
 

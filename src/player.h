@@ -86,6 +86,7 @@ class Player {
 		void bulldoze(PlayerImmovable* imm);
 		void flagaction(Flag* flag, int action);
 		void start_stop_building(PlayerImmovable* imm);
+      void enhance_building(PlayerImmovable* imm, int id);
 
 	private:
 		// set functions

@@ -449,19 +449,23 @@ Building *Editor_Game_Base::warp_building(Coords c, char owner, int idx)
 Editor_Game_Base::warp_constructionsite
 
 Create a building site at the given x/y location for the given building type.
+
+if oldi != -1 this is a constructionsite comming from an enhancing action
 ===============
 */
-Building* Editor_Game_Base::warp_constructionsite(Coords c, char owner, int idx)
+Building* Editor_Game_Base::warp_constructionsite(Coords c, char owner, int idx, int old_id)
 {
-	Building_Descr* descr;
+	Building_Descr* descr, *old_descr=0;
 	Player *player = get_player(owner);
 
 	assert(player);
 
 	descr = player->get_tribe()->get_building_descr(idx);
+   if(old_id!=-1) 
+      old_descr= player->get_tribe()->get_building_descr(old_id);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), c, true);
+	return descr->create(this, get_player(owner), c, true, old_descr);
 }
 
 

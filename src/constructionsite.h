@@ -70,7 +70,8 @@ public:
 	uint get_built_per64k();
 
 	void set_building(Building_Descr* descr);
-	inline Building_Descr* get_building() const { return m_building; }
+   void set_previous_building(Building_Descr* descr);
+   inline Building_Descr* get_building() const { return m_building; }
 
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
@@ -100,6 +101,7 @@ protected:
 
 private:
 	Building_Descr* m_building; // type of building that is being built
+   Building_Descr* m_prev_building; // Building that was standing here before
 
 	Request* m_builder_request;
 	Worker*  m_builder;

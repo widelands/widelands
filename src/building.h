@@ -58,6 +58,7 @@ public:
 	inline uint get_idle_anim(void) const { return m_idle; }
 	inline uint get_build_anim(void) const { return m_build; }
 	inline bool get_buildable(void) const { return m_buildable; }
+   inline bool get_enhanced_building(void) const { return m_enhanced_building; }
 	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
 	inline uint get_buildicon() const { return m_buildicon; }
 	inline int get_size(void) const { return m_size; }
@@ -66,9 +67,10 @@ public:
 	inline bool get_stopable() const { return m_stopable;}
 	inline std::string get_stop_icon() const { return m_stop_icon;}
 	inline std::string get_continue_icon() const { return m_continue_icon;}
+   inline const std::vector<char*>* get_enhances_to() const { return &m_enhances_to; }
 
 	Building* create(Editor_Game_Base* g, Player* owner, Coords pos,
-		bool construct);
+		bool construct, Building_Descr* = 0);
 	virtual void parse(const char* directory, Profile* prof,
 		const EncodeData* encdata);
 	virtual void load_graphics();
@@ -77,7 +79,7 @@ public:
 
 protected:
 	virtual Building* create_object() = 0;
-	Building* create_constructionsite();
+	Building* create_constructionsite(Building_Descr* );
 	inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
 	bool         m_stopable;
 	std::string  m_stop_icon;
@@ -95,6 +97,8 @@ private:
 	bool         m_mine;
 	uint         m_idle;            // idle animation
    uint         m_build;           // build animation
+   std::vector<char*> m_enhances_to;     // building to enhance to or 0
+   bool         m_enhanced_building; // if it is one, it is bulldozable
 
 public:
 	static Building_Descr* create_from_dir(Tribe_Descr* tribe,
@@ -111,7 +115,8 @@ public:
 	// Player capabilities: which commands can a player issue for this building?
 	enum {
 		PCap_Bulldoze = 0, // can bulldoze/remove this buildings
-		PCap_Stopable = 1,
+		PCap_Stopable = 1, // is stopable
+		PCap_Enhancable = 3, // can be enhanced to something
 	};
 
 public:
@@ -149,6 +154,9 @@ public:
 	inline std::string get_continue_icon() const { return get_descr()->get_continue_icon(); }
 	inline bool get_stop() const { return m_stop; }
 	virtual void set_stop(bool stop);
+   
+   inline const std::vector<char*>* get_enhances_to() const { return get_descr()->get_enhances_to(); }
+
 protected:
 	void start_animation(Editor_Game_Base* g, uint anim);
 

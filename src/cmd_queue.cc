@@ -239,6 +239,17 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 	break;
 	}
 
+   case CMD_ENHANCE_BUILDING:
+   {
+      assert(c->arg1);
+      assert(c->arg2!=-1);
+		Player* plr = m_game->get_player(c->sender);
+		Map_Object* obj = m_game->get_objects()->get_object(c->arg1);
+      if (obj && obj->get_type() >= Map_Object::BUILDING)
+         plr->enhance_building((PlayerImmovable*)obj, c->arg2);
+      break;
+   }
+   
 	default:
 		assert(0);
 		break;

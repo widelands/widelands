@@ -50,7 +50,8 @@ enum {
 	CMD_BULLDOZE,		// arg1 = serialnum (PlayerImmovable)
 
 	CMD_FLAGACTION,	// arg1 = serialnum of flag, arg2 = action number
-	CMD_START_STOP_BUILDING,  //start/stop building
+	CMD_START_STOP_BUILDING,  // arg1 = serialnummer of building start/stop building
+   CMD_ENHANCE_BUILDING // enhance this building to another arg1 = serialnummer of building, arg2 = Tribe_Descr::get_building() id of new building 
 };
 
 // arg2 of CMD_FLAGACTION is one of these:

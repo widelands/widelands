@@ -44,7 +44,8 @@ class.
 #include "warehouse.h"
 #include "waresdisplay.h"
 #include "wexception.h"
-
+#include "player.h"
+#include "tribe.h"
 
 static const char* pic_ok = "pics/menu_okay.png";
 static const char* pic_cancel = "pics/menu_abort.png";
@@ -448,6 +449,7 @@ private:
 	void act_bulldoze();
 	void act_debug();
 	void act_start_stop();
+   void act_enhance(int);
 
 private:
 	UIWindow**				m_registry;
@@ -584,7 +586,20 @@ void Building_Window::setup_capsbuttons()
 		btn->set_pic(g_gr->get_picture(PicMod_Game, icon.c_str(), true));
 		x += 34;
 	}
-   
+  
+   if(m_capscache & (1 << Building::PCap_Enhancable)) {
+      const std::vector<char*>* buildings=m_building->get_enhances_to();
+      for(uint i=0; i<buildings->size(); i++) {
+         int id=m_player->get_player()->get_tribe()->get_building_index((*buildings)[i]);
+         if(id==-1) 
+            throw wexception("Should enhance to unknown building: %s\n", (*buildings)[i]);
+         UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2, id); // Button id == building id
+         btn->clickedid.set(this, &Building_Window::act_enhance);
+         btn->set_pic(m_player->get_player()->get_tribe()->get_building_descr(id)->get_buildicon());
+         x += 34;
+      }
+   }
+
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
 		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
 		btn->clicked.set(this, &Building_Window::act_bulldoze);
@@ -621,6 +636,21 @@ void Building_Window::act_start_stop() {
 	die();
 }
 
+/*
+===============
+Building_Window::act_bulldoze
+
+Callback for bulldozing request
+===============
+*/
+void Building_Window::act_enhance(int id)
+{
+	Game* g = m_player->get_game();
+	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
+		g->send_player_command(m_player->get_player_number(), CMD_ENHANCE_BUILDING, m_building->get_serial(), id);
+
+	die();
+}
 
 /*
 ===============

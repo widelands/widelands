@@ -77,7 +77,7 @@ class Editor_Game_Base {
 
       // warping stuff. instantly creating map_objects
       Building* warp_building(Coords, char owner, int idx);
-		Building* warp_constructionsite(Coords c, char owner, int idx);
+		Building* warp_constructionsite(Coords c, char owner, int idx, int oldid=-1);
       Bob *create_bob(Coords c, int idx);
       Immovable* create_immovable(Coords c, int idx);
 		Immovable* create_immovable(Coords c, std::string name);
