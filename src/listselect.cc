@@ -54,10 +54,9 @@ Args: parent	parent panel
       w		dimensions, in pixels, of the Listselect
       h
       align	alignment of text inside the Listselect
-      font	font to be used for listselect
 ===============
 */
-Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align, uint font)
+Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align)
 	: Panel(parent, x, y, w-24, h)
 {
 	set_think(false);
@@ -66,7 +65,6 @@ Listselect::Listselect(Panel *parent, int x, int y, uint w, uint h, Align align,
 	_framecolor = dflt_framecolor;
 	_selcolor = dflt_selcolor;
 	
-	m_font = font;
 	set_align(align);
 
 	m_scrollpos = 0;
@@ -156,7 +154,7 @@ Args: i	number of lines to scroll
 */
 void Listselect::move_up(int i)
 {
-	int delta = i * g_fh.get_fh(m_font);
+	int delta = i * g_font->get_fontheight();
 
 	if (delta > m_scrollpos)
 		delta = m_scrollpos;
@@ -236,7 +234,7 @@ Return the total height (text + spacing) occupied by a single line
 */
 int Listselect::get_lineheight()
 {
-	return g_fh.get_fh(m_font) + 2;
+	return g_font->get_fontheight() + 2;
 }
 
 
@@ -266,7 +264,7 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 		Entry* e = m_entries[idx];
 		
 		if (idx == m_selection)
-			dst->fill_rect(ofsx+1, ofsy+y, get_eff_w()-2, g_fh.get_fh(m_font), _selcolor);
+			dst->fill_rect(ofsx+1, ofsy+y, get_eff_w()-2, g_font->get_fontheight(), _selcolor);
 
 		int x;
 		if (m_align & Align_Right)
@@ -276,7 +274,7 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 		else
 			x = 1;
 		
-		g_fh.draw_string(dst, x+ofsx, y+ofsy, e->name, m_align, -1, m_font);
+		g_font->draw_string(dst, x+ofsx, y+ofsy, e->name, m_align, -1);
 		
 		y += lineheight;
 		idx++;

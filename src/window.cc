@@ -203,7 +203,7 @@ void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
 	if (m_title.length()) {
 		px = get_w() >> 1;
 		py = CORNER>>1;
-		g_fh.draw_string(dst, ofsx+px, ofsy+py, m_title.c_str(), Align_Center);
+		g_font->draw_string(dst, ofsx+px, ofsy+py, m_title.c_str(), Align_Center);
 	}
 }
 

@@ -26,9 +26,6 @@
  *
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
- *
- * Depends: class Graph::Pic
- * 			class Font_Handler
  */
 
 /*
@@ -126,7 +123,7 @@ void Textarea::draw(Bitmap *dst, int ofsx, int ofsy)
 		else if (m_align & Align_Bottom)
 			y += get_h();
 		
-		g_fh.draw_string(dst, x, y, m_text.c_str(), m_align);
+		g_font->draw_string(dst, x, y, m_text.c_str(), m_align);
 		}
 }
 
@@ -176,7 +173,7 @@ void Textarea::expand()
 	int y = get_y();
 	int w, h;
 	 
-	g_fh.get_size(m_text.c_str(), &w, &h);
+	g_font->get_size(m_text.c_str(), &w, &h);
 	
 	if (m_align & Align_HCenter)
 		x -= w >> 1;

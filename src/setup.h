@@ -21,7 +21,6 @@
 #define __S__SETUP_H
 
 void setup_searchpaths(int argc, char **argv);
-void setup_fonthandler(void);
 void setup_ui(void);
 
 

@@ -404,7 +404,7 @@ private:
 class Multiline_Textarea : public Panel {
 public:
 	Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h, const char *text,
-	                   Align align = Align_Left, uint font = 0);
+	                   Align align = Align_Left);
 	~Multiline_Textarea();
 
 	void set_text(const char *text);
@@ -419,7 +419,6 @@ public:
 	void draw(Bitmap *bmp, int ofsx, int ofsy);
 
 private:
-	uint				m_font;
 	Align				m_align;
 	std::string		m_text;
 	int				m_textheight;	// total height of wrapped text, in pixels
@@ -440,7 +439,7 @@ class Listselect : public Panel {
 	static void setup_ui();
 
 public:
-	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left, uint font = 0);
+	Listselect(Panel *parent, int x, int y, uint w, uint h, Align align = Align_Left);
 	~Listselect();
 
 	UISignal1<int> selected;
@@ -476,7 +475,6 @@ private:
 
 	ushort _bgcolor, _framecolor, _selcolor;
 	
-	uint						m_font;
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
 	int						m_scrollpos;	// in pixels

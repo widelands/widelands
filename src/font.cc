@@ -20,98 +20,177 @@
 #include "widelands.h"
 #include "font.h"
 
+// Font file definitions - deprecated
+// TODO: Replace font files with more standard formats (ttf, bmp?)
 
-/** class Font_Handler
- *
- * This class generates font Pictures out of strings and returns them
- *
- * It's a singleton
- *
- * It's a little ugly, since every char is hold in it's own pic which is quite a waste of 
- * good resources
- * 
- * DEPENDS: class	Graph::Pic
- * DEPENDS:	func	Graph::copy_pic
- * DEPENDS: class	myfile
- */
+#define WLFF_VERSION 	0x0001
 
-/** Font_Handler::Font_Handler(void)
- *
- * Simple inits
- *
- * Agrs: None
- * Returns: Nothing
- */
-Font_Handler::Font_Handler(void) {
-		  for (uint i=0; i<MAX_FONTS; i++) {
-					 fonts[i].h=0;
-		  }
-}
+#define WLFF_SUFFIX		".wff"
+#define WLFF_MAGIC      "WLff"
+#define WLFF_VERSIONMAJOR(a)  (a >> 8)
+#define WLFF_VERSIONMINOR(a)  (a & 0xFF)
 
-/** Font_Handler::~Font_Handler(void) 
- *
- * Simple cleanups
- *
- * Args: None
- * Returns: Nothing
- */
-Font_Handler::~Font_Handler(void) {
-}
+#define FERR_INVAL_FILE -127
+#define FERR_INVAL_VERSION -128
+// END font file definitions
 
-/** int Font_Handler::load_font(const char* str, ushort fn )
- *
- * This registers a certain font with the given
- * objects
- *
- * Args:	str	name of the font we want to load
- * 		fn 	number of font to register
- *	Returns: ERR_FAILED, FERR_INVAL_VERSION, FERR_INVAL_FILE, RET_OK
- */
-int Font_Handler::load_font(const char* str, ushort fn)
-{
-	assert(fn<MAX_FONTS);
-	assert(str);
+Font* g_font = 0; // the default font
 
-	char buf[200];
-	FileRead f;
-	
-	snprintf(buf, sizeof(buf), "fonts/%s.wff", str);
-	f.Open(g_fs, buf);
-	
-	// TODO: actually use FileRead's nice features for endian safety
-	FHeader *fh = (FHeader*)f.Data(sizeof(FHeader));
+/*
+===============================================================================
 
-	if(WLFF_VERSIONMAJOR(fh->version) > WLFF_VERSIONMAJOR(WLFF_VERSION)) {
-		return FERR_INVAL_VERSION;
-	}
-	if(WLFF_VERSIONMAJOR(fh->version) == WLFF_VERSIONMAJOR(WLFF_VERSION)) {
-		if(WLFF_VERSIONMINOR(fh->version) > WLFF_VERSIONMINOR(WLFF_VERSION)) {
-			return FERR_INVAL_VERSION;
-		}
-	}
+Font IMPLEMENTATION
 
-	fonts[fn].h = fh->height;
+===============================================================================
+*/
 
-	uchar c;
-	ushort w;
-	for(unsigned int i=0; i<96; i++) {
-		c = f.Unsigned8();
-		if (c != (i+32))
-			return FERR_INVAL_FILE;
-		
-		w = f.Unsigned16();
-
-		ushort *data = (ushort*)f.Data(sizeof(ushort)*w*fonts[fn].h);
-		fonts[fn].p[i].create(w, fonts[fn].h, data);
-		fonts[fn].p[i].set_clrkey(fh->clrkey);
-	}
-	
-	return RET_OK;
-}
+std::map<const char*, Font*> Font::m_fonts;
 
 /*
 ===============
-Font_Handler::get_string
+Font::Font [private]
+
+Load and initialize a font
+===============
+*/
+Font::Font(const char* name)
+{
+	m_refs = 0;
+	
+	// Read the font
+	char buf[200];
+	FileRead f;
+	
+	snprintf(buf, sizeof(buf), "fonts/%s.wff", name);
+	f.Open(g_fs, buf);
+	
+	f.Data(6); // skip magic
+	
+	ushort version = f.Unsigned16();
+
+	if(WLFF_VERSIONMAJOR(version) > WLFF_VERSIONMAJOR(WLFF_VERSION))
+		throw wexception("%s: bad font version", buf);
+	if(WLFF_VERSIONMAJOR(version) == WLFF_VERSIONMAJOR(WLFF_VERSION))
+		if(WLFF_VERSIONMINOR(version) > WLFF_VERSIONMINOR(WLFF_VERSION))
+			throw wexception("%s: bad minor font version", buf);
+
+	f.Data(20); // skip name
+	
+	ushort clrkey = f.Unsigned16();
+	m_height = f.Unsigned16();
+
+	// Read in the characters
+	for(int i = 0; i < 96; i++)
+		{
+		uchar c = f.Unsigned8();
+		if (c != (i+32))
+			throw wexception("%s: bad character order", buf);
+		
+		int w = f.Unsigned16();
+
+		ushort *data = (ushort*)f.Data(sizeof(ushort)*w*m_height);
+		m_pictures[i].create(w, m_height, data);
+		m_pictures[i].set_clrkey(clrkey);
+		}
+
+	// Add to list
+	m_name = strdup(name);
+	m_fonts[m_name] = this;
+}
+
+
+/*
+===============
+Font::~Font [private]
+
+Free resources.
+===============
+*/
+Font::~Font()
+{
+	if (m_refs)
+		log("Font::~Font: Oops, m_refs == %i, name = %s\n", m_refs, m_name);
+	
+	if (m_name)
+		{
+		std::map<const char*, Font*>::iterator it;
+		 
+		it = m_fonts.find(m_name);
+		if (it != m_fonts.end())
+			m_fonts.erase(it);
+
+		free(m_name);
+		}
+}
+
+
+/*
+===============
+Font::load [static]
+
+Load the given font. If the font is already loaded, the old object is reused.
+Throws an exception if the font cannot be loaded.
+===============
+*/
+Font* Font::load(const char* name)
+{
+	std::map<const char*, Font*>::iterator it;
+	Font* font;
+	
+	it = m_fonts.find(name);
+	if (it != m_fonts.end())
+		font = it->second;
+	else
+		try
+			{
+			font = new Font(name);
+			}
+		catch(std::exception& e)
+			{
+			throw wexception("Couldn't load font %s: %s\n", name, e.what());
+			}
+	
+	font->addref();
+	return font;
+}
+
+
+/*
+===============
+Font::addref
+
+Increase the reference counter of the font.
+===============
+*/
+void Font::addref()
+{
+	m_refs++;
+	
+	assert(m_refs > 0);
+}
+
+
+/*
+===============
+Font::release
+
+Decrease the reference counter of the font.
+Free the font when the refcount when it reaches zero.
+===============
+*/
+void Font::release()
+{
+	assert(m_refs > 0);
+	
+	m_refs--;
+	if (!m_refs)
+		delete this;
+}
+
+
+/*
+===============
+Font::get_string
 
 This function constructs a Picture containing the given text and
 returns it
@@ -120,18 +199,18 @@ TODO: Does it make sense to keep this function? It's not used, but I'll leave
 it around for now.
 ===============
 */
-Pic* Font_Handler::get_string(const char* str, const ushort f)
+Pic* Font::get_string(const char* str)
 {
 	int w, h;
 	Pic* pic;
 	
-	get_size(str, &w, &h, -1, f);
+	get_size(str, &w, &h, -1);
 	
 	pic = new Pic;
-	pic->set_clrkey(fonts[f].p[0].get_clrkey());
+	pic->set_clrkey(m_pictures[0].get_clrkey());
 	pic->set_size(w, h);
 	
-	draw_string(pic, 0, 0, str, Align_Left, -1, f);
+	draw_string(pic, 0, 0, str, Align_Left, -1);
 	
 	return pic;
 }
@@ -139,7 +218,7 @@ Pic* Font_Handler::get_string(const char* str, const ushort f)
 
 /*
 ===============
-Font_Handler::calc_linewidth
+Font::calc_linewidth
 
 Calculates the width of the given line (up to \n or NUL).
 If wrap is positive, the function will wrap the line after that many pixels.
@@ -152,7 +231,7 @@ points to:
 The function returns the width of the line, in pixels.
 ===============
 */
-int Font_Handler::calc_linewidth(const char* line, int wrap, const char** nextline, ushort font)
+int Font::calc_linewidth(const char* line, int wrap, const char** nextline)
 {
 	const char* string = line; // current pointer into the string
 	int width = 0; // width of line
@@ -162,7 +241,7 @@ int Font_Handler::calc_linewidth(const char* line, int wrap, const char** nextli
 		{
 		if (*string == ' ' || *string == '\t') // whitespace
 			{
-			int cw = fonts[font].p[0].get_w();
+			int cw = m_pictures[0].get_w();
 			if (*string == '\t')
 				cw *= 8;
 			
@@ -194,7 +273,7 @@ int Font_Handler::calc_linewidth(const char* line, int wrap, const char** nextli
 					c = 127;
 				
 				c -= 32;
-				wordwidth += fonts[font].p[c].get_w();
+				wordwidth += m_pictures[c].get_w();
 				
 				if (*p == '-') // other character break
 					{
@@ -223,22 +302,22 @@ int Font_Handler::calc_linewidth(const char* line, int wrap, const char** nextli
 
 /*
 ===============
-Font_Handler::draw_string
+Font::draw_string
 
 Draw a string directly into the destination bitmap with the desired alignment.
 The function honours line-breaks.
 If wrap is positive, the function will wrap a line after that many pixels.
 ===============
 */
-void Font_Handler::draw_string(Bitmap* dst, int dstx, int dsty, const char* string,
-                               Align align, int wrap, ushort font)
+void Font::draw_string(Bitmap* dst, int dstx, int dsty, const char* string,
+                       Align align, int wrap)
 {
 	// Adjust for vertical alignment
 	if (align & (Align_VCenter|Align_Bottom))
 		{
 		int h;
 		
-		get_size(string, 0, &h, wrap, font);
+		get_size(string, 0, &h, wrap);
 		
 		if (align & Align_VCenter)
 			dsty -= (h+1)/2; // +1 for slight bias to top
@@ -259,7 +338,7 @@ void Font_Handler::draw_string(Bitmap* dst, int dstx, int dsty, const char* stri
 			}
 		else
 			{
-			int width = calc_linewidth(string, wrap, &nextline, font);
+			int width = calc_linewidth(string, wrap, &nextline);
 			
 			if (align & Align_HCenter)
 				x -= width/2;
@@ -273,7 +352,7 @@ void Font_Handler::draw_string(Bitmap* dst, int dstx, int dsty, const char* stri
 			
 			if (c == ' ' || c == '\t') // whitespace
 				{
-				int cw = fonts[font].p[0].get_w();
+				int cw = m_pictures[0].get_w();
 				if (c == '\t')
 					cw *= 8;
 
@@ -285,28 +364,28 @@ void Font_Handler::draw_string(Bitmap* dst, int dstx, int dsty, const char* stri
 					c = 127;
 
 				c -= 32;
-				copy_pic(dst, &fonts[font].p[c], x, dsty, 0, 0, fonts[font].p[c].get_w(), fonts[font].h);
-				x += fonts[font].p[c].get_w();
+				copy_pic(dst, &m_pictures[c], x, dsty, 0, 0, m_pictures[c].get_w(), m_height);
+				x += m_pictures[c].get_w();
 				}
 			
 			string++;
 			}
 		
-		dsty += fonts[font].h;
+		dsty += m_height;
 		}
 }
 		
 
 /*
 ===============
-Font_Handler::get_size
+Font::get_size
 
 Calculate the size of the given string.
 pw and ph may be NULL.
 If wrap is positive, the function will wrap a line after that many pixels
 ===============
 */
-void Font_Handler::get_size(const char* string, int* pw, int* ph, int wrap, ushort font)
+void Font::get_size(const char* string, int* pw, int* ph, int wrap)
 {
 	int maxw = 0; // width of widest line
 	int maxh = 0; // total height
@@ -314,11 +393,11 @@ void Font_Handler::get_size(const char* string, int* pw, int* ph, int wrap, usho
 	while(*string)
 		{
 		const char* nextline;
-		int width = calc_linewidth(string, wrap, &nextline, font);
+		int width = calc_linewidth(string, wrap, &nextline);
 		
 		if (width > maxw)
 			maxw = width;
-		maxh += fonts[font].h;
+		maxh += m_height;
 
 		string = nextline;
 		}
@@ -327,4 +406,17 @@ void Font_Handler::get_size(const char* string, int* pw, int* ph, int wrap, usho
 		*pw = maxw;
 	if (ph)
 		*ph = maxh;
+}
+
+
+/*
+===============
+Font::get_fontheight
+
+Returns the height of the font, in pixels.
+===============
+*/
+int Font::get_fontheight()
+{
+	return m_height;
 }

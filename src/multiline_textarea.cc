@@ -50,17 +50,15 @@ Args: parent	parent panel
       h
       text	text for the textarea (can be 0)
       align	text alignment
-      font	font number
 ===============
 */
 Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h,
-                                       const char *text, Align align, uint font)
+                                       const char *text, Align align)
 	: Panel(parent, x, y, w-24, h)
 {
 	set_handle_mouse(false);
 	set_think(false);
 
-	m_font = font;
 	set_align(align);
 
 	m_textpos = 0;
@@ -108,7 +106,7 @@ void Multiline_Textarea::set_text(const char *text)
 		{
 		m_text = text;
 	
-		g_fh.get_size(text, 0, &m_textheight, get_eff_w(), m_font);
+		g_font->get_size(text, 0, &m_textheight, get_eff_w());
 	
 		if (m_textpos > m_textheight - get_h())
 			m_textpos = m_textheight - get_h();
@@ -143,7 +141,7 @@ Scroll the area up i lines
 */
 void Multiline_Textarea::move_up(int i)
 {
-	int delta = i * g_fh.get_fh(m_font);
+	int delta = i * g_font->get_fontheight();
 	
 	if (delta > m_textpos)
 		delta = m_textpos;
@@ -165,7 +163,7 @@ Scroll down i lines
 */
 void Multiline_Textarea::move_down(int i)
 {
-	int delta = i * g_fh.get_fh(m_font);
+	int delta = i * g_font->get_fontheight();
 	
 	if (m_textpos + delta > m_textheight - get_h())
 		delta = m_textheight - get_h() - m_textpos;
@@ -187,6 +185,6 @@ Redraw the textarea
 void Multiline_Textarea::draw(Bitmap *bmp, int ofsx, int ofsy)
 {
 	// Let the font handler worry about all the complicated stuff..
-	g_fh.draw_string(bmp, ofsx, ofsy - m_textpos, m_text.c_str(), m_align, get_eff_w(), m_font);
+	g_font->draw_string(bmp, ofsx, ofsy - m_textpos, m_text.c_str(), m_align, get_eff_w());
 }
 

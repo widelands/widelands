@@ -21,7 +21,6 @@
 #define __S__FONT_H
 
 #include "graphic.h"
-#include "singleton.h"
 
 
 enum Align {
@@ -49,84 +48,36 @@ enum Align {
 };
 
 
-#define MAX_FONTS	5
-
-
-#define WLFF_VERSION 	0x0001
-
-#define WLFF_SUFFIX		".wff"
-#define WLFF_MAGIC      "WLff"
-#define WLFF_VERSIONMAJOR(a)  (a >> 8)
-#define WLFF_VERSIONMINOR(a)  (a & 0xFF)
-
-#define FERR_INVAL_FILE -127
-#define FERR_INVAL_VERSION -128
-
-/** class Font_Handler
+/** class Font
  *
  * This class generates font Pictures out of strings and returns them
- *
- * It's a singleton
- *
- * It's a little ugly, since every char is hold in it's own pic which is quite a waste of 
- * good resources
- * 
- * DEPENDS: class	Graph::Pic
- * DEPENDS:	func	Graph::copy_pic
- * DEPENDS: class	myfile
  */
-class Font_Handler : public Singleton<Font_Handler> {
-		  Font_Handler(const Font_Handler&);
-		  Font_Handler& operator=(const Font_Handler&);
+class Font {
+public:
+	static Font* load(const char* name);
+	void addref();
+	void release();
 
-		  public:
-		  
-					 Font_Handler();
-					 ~Font_Handler();
+	Pic* get_string(const char* string);
 
-					 
-					 int load_font(const char*, const ushort);
-					 Pic* get_string(const char*, const ushort);
-					 
-					 int calc_linewidth(const char* string, int wrap, const char** nextline, ushort font = 0);
-					 void draw_string(Bitmap* dst, int x, int y, const char* string, Align align = Align_Left,
-					                  int wrap = -1, ushort font = 0);
-					 void get_size(const char* string, int* pw, int* ph, int wrap = -1, ushort font = 0);
-					 
-					 /** inline ushort get_fh(ushort f) 
-					  *
-					  * This function returns the height of the given font
-					  * Args: f	which font to check
-					  * Returns: height
-					  */
-					 inline ushort get_fh(ushort f) { assert(f<MAX_FONTS); return fonts[f].h; }
-					 
-					 /** inline ushort get_fw(ushort f) 
-					  *
-					  * This function returns the width of the given font
-					  * Args: f	which font to check
-					  * Returns: width
-					  */
-					// inline ushort get_fw(ushort f) { assert(f<MAX_FONTS); assert(w[f]); return w[f]; }
-					 
-		  private:
-					 struct __font {
-								ushort h;
-								Pic p[96];
-					 } fonts[MAX_FONTS];
-
-					 struct FHeader {
-								char magic[6];
-								ushort version;
-								char name[20];
-								ushort clrkey;
-								ushort height;
-					 };
-					 
+	int calc_linewidth(const char* string, int wrap, const char** nextline);
+	void draw_string(Bitmap* dst, int x, int y, const char* string, Align align = Align_Left,
+						  int wrap = -1);
+	void get_size(const char* string, int* pw, int* ph, int wrap = -1);
+	int get_fontheight();
+	
+private:
+	Font(const char* name);
+	~Font();
+	
+	int	m_refs;
+	char*	m_name;
+	int	m_height;			// height of the font
+	Pic	m_pictures[96];
+	
+	static std::map<const char*, Font*>		m_fonts;		// map of all fonts
 };
 
-#define FIXED_FONT1 0
-
-#define g_fh	Font_Handler::get_singleton()
+extern Font* g_font;	// the default font
 
 #endif /* __S__FONT_H */

@@ -23,10 +23,6 @@
 /** class Button
  *
  * This defines a button.
- *
- * Depends: g_gr
- * 			class Graph::Pic
- * 			class Font_Handler
  */
 
 AutoPic Button::bg0("but0.bmp");
@@ -242,8 +238,8 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 		}
 	else if (m_title.length()) // otherwise draw the title string centered
 		{
-		g_fh.draw_string(dst, ofsx + get_w()>>1, ofsy + get_h()>>1, 
-		                 m_title.c_str(), Align_Center);
+		g_font->draw_string(dst, ofsx + get_w()>>1, ofsy + get_h()>>1, 
+		                    m_title.c_str(), Align_Center);
 		}
 
 	// draw border

@@ -55,20 +55,20 @@ static void g_init(int argc, char **argv)
 		// Create all subsystems after config has been read
 		Sys_Init();
 
-		static Font_Handler f;
 		static Cursor cur;
 
 		AutoPic::load_all();
-
-		setup_fonthandler();
+		
+		g_font = Font::load("fixed_font1");
 		setup_ui();
-
+		
 		g_graphic = new Graphic; // must be last because of critical_error()
 
 		// complain about unknown options in the configuration file and on the 
 		// command line
 		
 		// KLUDGE!
+		// Without this, xres and yres get dropped by check_used().
 		// Profile needs support for a Syntax definition to solve this in a sensible way
 		Section *s = g_options.pull_section("global");
 		s->get_string("xres");
@@ -98,12 +98,16 @@ static void g_shutdown()
 		delete g_graphic;
 		g_graphic = 0;
 	}
+	if (g_font) {
+		g_font->release();
+		g_font = 0;
+	}
 	
 	Sys_Shutdown();
-		
+	
 	// Save options
 	options_shutdown();
-		
+	
 	// Destroy filesystem
 	if (g_fs) {
 		delete g_fs;

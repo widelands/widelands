@@ -163,8 +163,8 @@ void Warehouse_Window::draw(Bitmap *dst, int ofsx, int ofsy)
 		char buf[32];
 		snprintf(buf, sizeof(buf), "%i", m_warehouse->get_wares().stock(id));
 		
-		g_fh.draw_string(dst, x+ofsx+WARE_MENU_PIC_W, y+ofsy+WARE_MENU_PIC_H,
-		                 buf, Align_Right);
+		g_font->draw_string(dst, x+ofsx+WARE_MENU_PIC_W, y+ofsy+WARE_MENU_PIC_H,
+		                    buf, Align_Right);
 		
 		if (id % 4 < 3)
 			x += WARE_MENU_PIC_W + 3;

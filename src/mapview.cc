@@ -131,7 +131,7 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 	Coords fsel = m_player->get_fieldsel();
 	char buf[100];
 	sprintf(buf, "%3i %3i", fsel.x, fsel.y);
-	g_fh.draw_string(bmp, ofsx+5, ofsy+5, buf);
+	g_font->draw_string(bmp, ofsx+5, ofsy+5, buf);
 
    // debug show fps
    ++framecount;
@@ -146,7 +146,7 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
       start_fps_counter=cur_fps_counter;
    }
    sprintf(buf, "%4f fps (av: %4f fps)", fps, fps_average/(float)fps_av_count );
-	g_fh.draw_string(bmp, ofsx+75, ofsy+5, buf);
+	g_font->draw_string(bmp, ofsx+75, ofsy+5, buf);
 }
 
 /*

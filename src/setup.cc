@@ -33,19 +33,6 @@
 #include <sys/types.h>
 #endif
 
-/** void setup_fonthandler(void)
- *
- * Sets up the global font handler for the needs in widelands
- *
- * Args: None
- * Returns: Nothing
- */
-void setup_fonthandler(void)
-{
-	if (g_fh.load_font( "fixed_font1", FIXED_FONT1 ) != RET_OK)
-		critical_error("Failed to load fixed_font1.");
-}
-
 /** void setup_ui(void)
  *
  * Sets up the user interface for the needs in widelands
