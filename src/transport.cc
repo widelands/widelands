@@ -3480,6 +3480,7 @@ public:
 		debug(0, "pop");
 
 		head->mpf_heapindex = -1;
+
 		return head;
 	}
 
@@ -3646,7 +3647,8 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 				// found a better path to a field that's already Open
 				neighbour->mpf_realcost = cost;
 				neighbour->mpf_backlink = current;
-				Open.boost(neighbour);
+            if( neighbour->mpf_heapindex != -1 ) // This neighbour is already 'popped', skip it 
+               Open.boost(neighbour);
 			}
 		}
 	}
