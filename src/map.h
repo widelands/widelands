@@ -66,26 +66,51 @@ class Path;
 class Immovable;
 
 
-/** class Field
- *
- * a field like it is represented in the game
- */
-
 struct ImmovableFound {
 	BaseImmovable	*object;
 	Coords			coords;
 };
+
+/*
+FindImmovable
+FindBob
+FindField
+CheckStep
+
+Predicates used in path finding and find functions.
+*/
 struct FindImmovable {
+	// Return true if this immovable should be returned by find_immovables()
 	virtual bool accept(BaseImmovable *imm) const = 0;
 };
 struct FindBob {
+	// Return true if this immovable should be returned by find_bobs()
 	virtual bool accept(Bob *imm) const = 0;
 };
 struct FindField {
-	virtual bool accept(Coords c, Field* f) const = 0;
+	// Return true if this immovable should be returned by find_fields()
+	virtual bool accept(FCoords coord) const = 0;
+};
+struct CheckStep {
+	enum StepId {
+		stepNormal,		// normal step treatment
+		stepFirst,		// first step of a path
+		stepLast,		// last step of a path
+	};
+
+	// Return true if moving from start to end (single step in the given
+	// direction) is allowed.
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const = 0;
+
+	// Return true if the destination field can be reached at all
+	// (e.g. return false for land-based bobs when dest is in water).
+	virtual bool reachabledest(Map* map, FCoords dest) const = 0;
 };
 
 
+/*
+Some very simple default predicates (more predicates below Map).
+*/
 struct FindImmovableAlwaysTrue : public FindImmovable {
 	virtual bool accept(BaseImmovable* imm) const { return true; }
 };
@@ -145,12 +170,19 @@ public:
 	inline uint get_height(void) { return m_height; }
 	inline World* get_world(void) { return m_world; }
 
-	bool find_bobs(Coords coord, uint radius, std::vector<Bob*> *list,
-								const FindBob &functor = FindBobAlwaysTrue());
 	BaseImmovable *get_immovable(Coords coord);
-	bool find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
+	uint find_bobs(Coords coord, uint radius, std::vector<Bob*> *list,
+								const FindBob &functor = FindBobAlwaysTrue());
+	uint find_reachable_bobs(Coords coord, uint radius, std::vector<Bob*> *list,
+								const CheckStep* checkstep, const FindBob &functor = FindBobAlwaysTrue());
+	uint find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
 								const FindImmovable &functor = FindImmovableAlwaysTrue());
-	bool find_fields(Coords coord, uint radius, std::vector<Coords>* list, const FindField& functor);
+	uint find_reachable_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
+								const CheckStep* checkstep, const FindImmovable &functor = FindImmovableAlwaysTrue());
+	uint find_fields(Coords coord, uint radius, std::vector<Coords>* list,
+								const FindField& functor);
+	uint find_reachable_fields(Coords coord, uint radius, std::vector<Coords>* list,
+								const CheckStep* checkstep, const FindField& functor);
 
 	// Field logic
 	inline Field* get_field(const Coords c);
@@ -205,11 +237,10 @@ public:
 	inline void get_pix(const int fx, const int fy, int *px, int *py);
 
 	// Pathfinding
-	int findpath(Coords start, Coords end, uchar movecaps, int persist, Path *path,
-	             Player *player = 0, bool roadfind = false, const std::vector<Coords> *forbidden = 0);
+	int findpath(Coords start, Coords end, int persist, Path *path, const CheckStep* checkstep);
 
 	bool can_reach_by_water(Coords field);
-	
+
    // change field heights
    int change_field_height(const Coords&, int);
    int change_field_height(int, int, int);
@@ -221,7 +252,7 @@ public:
 private:
 	void set_size(uint w, uint h);
 	void load_world();
-	
+
 	uint		m_nrplayers;		// # of players this map supports (!= Game's number of players)
 	uint		m_width;
 	uint		m_height;
@@ -231,7 +262,7 @@ private:
 	char		m_worldname[1024];
 	World*	m_world;				// world type
 	Coords*	m_starting_pos;	// players' starting positions
-	
+
 	Field*	m_fields;
 
 	ushort		m_pathcycle;
@@ -242,14 +273,21 @@ private:
 	void recalc_fieldcaps_pass1(int fx, int fy, Field *f);
 	void recalc_fieldcaps_pass2(int fx, int fy, Field *f);
    void check_neighbour_heights(int fx, int fy, Field* f, int* area);
+	void increase_pathcycle();
+
+	template<typename functorT>
+	void find_reachable(Coords coord, uint radius, const CheckStep* checkstep, functorT& functor);
+
+	template<typename functorT>
+	void find_radius(Coords coord, uint radius, functorT& functor);
 };
 
 // FindImmovable functor
 struct FindImmovableSize : public FindImmovable {
 	FindImmovableSize(int min, int max) : m_min(min), m_max(max) { }
-	
+
 	virtual bool accept(BaseImmovable *imm) const;
-	
+
 	int m_min, m_max;
 };
 struct FindImmovableType : public FindImmovable {
@@ -270,7 +308,7 @@ struct FindImmovableAttribute : public FindImmovable {
 struct FindFieldCaps : public FindField {
 	FindFieldCaps(uchar mincaps) : m_mincaps(mincaps) { }
 
-	virtual bool accept(Coords c, Field* f) const;
+	virtual bool accept(FCoords coord) const;
 
 	uchar m_mincaps;
 };
@@ -288,10 +326,78 @@ struct FindFieldSize : public FindField {
 
 	FindFieldSize(Size size) : m_size(size) { }
 
-	virtual bool accept(Coords c, Field* f) const;
+	virtual bool accept(FCoords coord) const;
 
 	Size m_size;
 };
+
+
+/*
+CheckStepDefault
+----------------
+Implements the default step checking behaviours that should be used for all
+normal bobs.
+
+Simply check whether the movecaps are matching (basic exceptions for water bobs
+moving onto the shore).
+*/
+class CheckStepDefault : public CheckStep {
+public:
+	CheckStepDefault(uchar movecaps) : m_movecaps(movecaps) { }
+
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
+	virtual bool reachabledest(Map* map, FCoords dest) const;
+
+private:
+	uchar	m_movecaps;
+};
+
+
+/*
+CheckStepWalkOn
+---------------
+Implements the default step checking behaviours with one exception: we can move
+from a walkable field onto an unwalkable one.
+If onlyend is true, we can only do this on the final step.
+*/
+class CheckStepWalkOn : public CheckStep {
+public:
+	CheckStepWalkOn(uchar movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) { }
+
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
+	virtual bool reachabledest(Map* map, FCoords dest) const;
+
+private:
+	uchar	m_movecaps;
+	bool	m_onlyend;
+};
+
+
+/*
+CheckStepRoad
+-------------
+Implements the step checking behaviour for road building.
+
+player is the player who is building the road.
+movecaps are the capabilities with which the road is to be built (swimming
+for boats, walking for normal roads).
+forbidden is an array of coordinates that must not be crossed by the road.
+*/
+class CheckStepRoad : public CheckStep {
+public:
+	CheckStepRoad(Player* player, uchar movecaps, const std::vector<Coords>* forbidden)
+		: m_player(player), m_movecaps(movecaps), m_forbidden(forbidden) { }
+
+	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
+	virtual bool reachabledest(Map* map, FCoords dest) const;
+
+private:
+	Player*							m_player;
+	uchar								m_movecaps;
+	const std::vector<Coords>*	m_forbidden;
+};
+
+
 
 /** class Path
  *
@@ -431,10 +537,14 @@ inline void Map::get_coords(Field * const f, Coords *c)
 	c->y = i / m_width;
 }
 
+
 /** get_ln, get_rn, get_tln, get_trn, get_bln, get_brn
  *
  * Calculate the coordinates and Field pointer of a neighboring field.
  * Assume input coordinates are valid.
+ *
+ * Note: Input coordinates are passed as value because we have to allow
+ *       usage get_XXn(foo, &foo).
  */
 inline void Map::get_ln(const int fx, const int fy, int *ox, int *oy)
 {

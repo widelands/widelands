@@ -107,6 +107,7 @@ public:
 
 	virtual Flag *get_base_flag();
 	virtual uint get_playercaps();
+	virtual Coords get_position() const { return m_position; }
 
 	inline const char *get_name() { return get_descr()->get_name(); }
 	inline const char *get_descname() { return get_descr()->get_descname(); }

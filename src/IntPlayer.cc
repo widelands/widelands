@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002, 2003 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -396,9 +396,9 @@ bool Interactive_Player::append_build_road(Coords field)
 	// Find a path to the clicked-on field
 	Map *map = m_game->get_map();
 	Path path;
-	
-	if (map->findpath(m_buildroad->get_end(), field, MOVECAPS_WALK, 0, &path, 
-	                  get_player(), true, &m_buildroad->get_coords()) < 0)
+	CheckStepRoad cstep(get_player(), MOVECAPS_WALK, &m_buildroad->get_coords());
+
+	if (map->findpath(m_buildroad->get_end(), field, 0, &path, &cstep) < 0)
 		return false; // couldn't find a path
 	
 	roadb_remove_overlay();

@@ -620,6 +620,8 @@ void Bob::idle_signal(Game* g, State* state)
 MOVEPATH task
 
 Move along a predefined path.
+ivar1 is the step number.
+ivar2 is non-zero if we should force moving onto the final field.
 
 Sets the following signal(s):
 "fail" - cannot move along the given path
@@ -647,12 +649,20 @@ Returns false if no path could be found.
 The task finishes once the goal has been reached. It may fail.
 ===============
 */
-bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *anims)
+bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *anims, bool forceonlast)
 {
 	Path* path = new Path;
 	State* state;
+	CheckStepDefault cstep_default(get_movecaps());
+	CheckStepWalkOn cstep_walkon(get_movecaps(), true);
+	CheckStep* cstep;
 
-	if (g->get_map()->findpath(m_position, dest, get_movecaps(), persist, path) < 0) {
+	if (forceonlast)
+		cstep = &cstep_walkon;
+	else
+		cstep = &cstep_default;
+
+	if (g->get_map()->findpath(m_position, dest, persist, path, cstep) < 0) {
 		delete path;
 		return false;
 	}
@@ -662,6 +672,7 @@ bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *
 	state = get_state();
 	state->path = path;
 	state->ivar1 = 0;		// step #
+	state->ivar2 = forceonlast ? 1 : 0;
 	state->diranims = anims;
 
 	return true;
@@ -675,7 +686,7 @@ Bob::start_task_movepath
 Start moving along the given, precalculated path.
 ===============
 */
-void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims)
+void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims, bool forceonlast)
 {
 	State* state;
 
@@ -686,6 +697,7 @@ void Bob::start_task_movepath(Game* g, const Path &path, DirAnimations *anims)
 	state = get_state();
 	state->path = new Path(path);
 	state->ivar1 = 0;
+	state->ivar2 = forceonlast ? 1 : 0;
 	state->diranims = anims;
 }
 
@@ -701,7 +713,7 @@ Return true if a task has been started, or false if we already are on the given
 path index.
 ===============
 */
-bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnimations* anims)
+bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnimations* anims, bool forceonlast)
 {
 	CoordPath path(origpath);
 	int curidx = path.get_index(get_position());
@@ -716,13 +728,13 @@ bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnima
 			path.truncate(index);
 			path.starttrim(curidx);
 
-			start_task_movepath(g, path, anims);
+			start_task_movepath(g, path, anims, forceonlast);
 		} else {
 			path.truncate(curidx);
 			path.starttrim(index);
 			path.reverse();
 
-			start_task_movepath(g, path, anims);
+			start_task_movepath(g, path, anims, forceonlast);
 		}
 
 		return true;
@@ -732,6 +744,11 @@ bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnima
 }
 
 
+/*
+===============
+Bob::movepath_update
+===============
+*/
 void Bob::movepath_update(Game* g, State* state)
 {
 	if (state->ivar1)
@@ -752,8 +769,12 @@ void Bob::movepath_update(Game* g, State* state)
 	}
 
 	char dir = state->path->get_step(state->ivar1);
+	bool forcemove = false;
 
-	int tdelta = start_walk(g, (WalkingDir)dir, state->diranims->get_animation(dir));
+	if (state->ivar2 && (state->ivar1+1) == state->path->get_nsteps())
+		forcemove = true;
+
+	int tdelta = start_walk(g, (WalkingDir)dir, state->diranims->get_animation(dir), forcemove);
 	if (tdelta < 0) {
 		molog("[movepath]: Can't walk.\n");
 		set_signal("fail"); // failure to reach goal

@@ -1206,15 +1206,22 @@ void Worker::program_update(Game* g, State* state)
 
 		case WorkerAction::actFindObject:
 			{
+				Coords pos = get_position();
 				std::vector<ImmovableFound> list;
 				Map* map = g->get_map();
 
 				molog("  FindObject(%i, %i)\n", act->iparam1, act->iparam2);
 
+				if (pos == owner->get_position())
+					pos = owner->get_base_flag()->get_position();
+
+				CheckStepWalkOn cstep(get_movecaps(), false);
+
 				if (act->iparam2 < 0)
-					map->find_immovables(get_position(), act->iparam1, &list);
+					map->find_reachable_immovables(pos, act->iparam1, &list, &cstep);
 				else
-					map->find_immovables(get_position(), act->iparam1, &list, FindImmovableAttribute(act->iparam2));
+					map->find_reachable_immovables(pos, act->iparam1, &list, &cstep,
+																FindImmovableAttribute(act->iparam2));
 
 				molog("  %i found\n", list.size());
 
@@ -1251,7 +1258,9 @@ void Worker::program_update(Game* g, State* state)
 
 				descr = w->get_immovable_descr(state->ivar2);
 
-				if (!map->find_fields(get_position(), act->iparam1, &list,
+				CheckStepDefault cstep(get_movecaps());
+
+				if (!map->find_reachable_fields(get_position(), act->iparam1, &list, &cstep,
 									FindFieldSize((FindFieldSize::Size)act->iparam2))) {
 					molog("  no space found\n");
 					set_signal("fail");
@@ -1275,6 +1284,7 @@ void Worker::program_update(Game* g, State* state)
 			{
 				BaseImmovable* imm = g->get_map()->get_immovable(get_position());
 				Coords dest;
+				bool forceonlast = false;
 
 				molog("  Walk(%i)\n", act->iparam1);
 
@@ -1305,6 +1315,8 @@ void Worker::program_update(Game* g, State* state)
 							dest = ((Immovable*)obj)->get_position();
 						else
 							throw wexception("MO(%u): [actWalk]: bad object type = %i", get_serial(), obj->get_type());
+
+						forceonlast = true;
 						break;
 					}
 
@@ -1325,7 +1337,7 @@ void Worker::program_update(Game* g, State* state)
 				}
 
 				// Walk towards it
-				if (!start_task_movepath(g, dest, 10, get_descr()->get_walk_anims())) {
+				if (!start_task_movepath(g, dest, 10, get_descr()->get_walk_anims(), forceonlast)) {
 					molog("  couldn't find path\n");
 					set_signal("fail");
 					pop_task(g);

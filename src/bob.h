@@ -119,9 +119,9 @@ public: // default tasks
 	void send_signal(Game*, std::string sig);
 
 	void start_task_idle(Game*, uint anim, int timeout);
-	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims);
-	void start_task_movepath(Game*, const Path &path, DirAnimations *anims);
-	bool start_task_movepath(Game* g, const Path& path, int index, DirAnimations* anims);
+	bool start_task_movepath(Game*, Coords dest, int persist, DirAnimations *anims, bool forceonlast = false);
+	void start_task_movepath(Game*, const Path &path, DirAnimations *anims, bool forceonlast = false);
+	bool start_task_movepath(Game* g, const Path& path, int index, DirAnimations* anims, bool forceonlast = false);
 	void start_task_forcemove(Game*, int dir, DirAnimations *anims);
 
 protected: // higher level handling (task-based)
