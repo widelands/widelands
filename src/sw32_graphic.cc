@@ -30,7 +30,7 @@ Management classes and functions of the 32-bit software renderer.
 
 #include "sw32_graphic.h"
 
-#include "SDL_image.h"
+#include "SDL/SDL_image.h"
 
 #ifdef OPENGL_MODE
 #include <GL/gl.h>

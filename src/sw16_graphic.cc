@@ -30,7 +30,7 @@ Management classes and functions of the 16-bit software renderer.
 
 #include "sw16_graphic.h"
 
-#include "SDL_image.h"
+#include "SDL/SDL_image.h"
 
 
 namespace Renderer_Software16

@@ -30,7 +30,7 @@
 #include "game.h"
 #include "editor.h"
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 
 LayeredFileSystem *g_fs;
