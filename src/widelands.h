@@ -43,7 +43,16 @@
 	#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*
 	#pragma warning(disable : 4786) // identifier longer than 255 chars (STL woes)
 	#pragma warning(disable : 4800) // forcing values to bool is fine to me.
-	#endif
+
+   // it's odd, but this is obviously not in the MSVC STL (?!)
+   template <typename T> inline void swap(T& a, T& b)
+   {
+      T temp = a;
+      a = b;
+      b = temp;
+   }
+#endif
+
 #ifdef WIN32
 	#define strcasecmp strcmpi
 	#define strncasecmp strncmpi

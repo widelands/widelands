@@ -122,9 +122,8 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 	if (ofsy < 0)
 		effvpy -= ofsy;
 
-	if (use_see_area) {
-   	dst.fill_rect(0, 0, dst.get_w(), dst.get_h(), pack_rgb(0,0,0));
-	}
+   // completly clear the screen once. 
+   dst.clear();
 
  	draw_ground(&dst, effvpx, effvpy, use_see_area);
 
@@ -405,16 +404,19 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 	bl.b -= 20;
 */
 
+//    render_r=false; // debug overwrite: just render b triangle
+//    render_b=false; // debug overwrite: just render r triangle
+
 	// Render right triangle
    if(render_r) {
-      render_triangle(dst, &r, &l, &br, f->get_terr()->get_texture(), vpx, vpy);
+      render_right_triangle(dst, &r, &l, &br, f->get_terr()->get_texture(), vpx, vpy);
 	}
 
 	// Render bottom triangle
    if(render_b) {
-      render_triangle(dst, &l, &br, &bl, f->get_terd()->get_texture(), vpx, vpy);
+      render_bottom_triangle(dst, &l, &br, &bl, f->get_terd()->get_texture(), vpx, vpy);
 	}
-	
+
 	// Render roads
 	ushort color;
 	uchar road;

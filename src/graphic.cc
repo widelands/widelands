@@ -21,6 +21,7 @@
 #include "options.h"
 #include "graphic.h"
 #include "bob.h"
+#include "map.h"
 
 Graphic *g_graphic = 0;
 
@@ -33,79 +34,62 @@ void Sys_SetMaxMouseCoords(int x, int y);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// bei mir gibt es diese funktion auch im header 'Xutility'
-	// den header gibts aber glaub ich beim linux nicht
-	// egal, inline kostet nichts
-// florian
-/* this comes for free from the STL headers (if it doesn't in a non-glibc implementation,
-   please add the necessary header(s) to widelands.h)
-
-  it does NOT come from stl in my win32 (i wouldn't have added it, would i?)
-  well i'll leave it here, as this part of code will hopefully disappear soon
-  */
-
-#if defined(WIN32) && !defined(__GNUC__)
-template <typename T> inline void swap(T& a, T& b)
+// 
+// next are the two render triangle functions. they are very similar and were once only one function (render triangle)
+// but I splitted it for speed and different texture maps. This makes the code longer and more 'stupid' (lots of repeatings), 
+// but this is the function that is spent most of the time in, so speed is absolutly crucial!!
+// points are ordered:
+// first=left points
+// second=right_bottom points
+// third=left_bottom
+// first is alway the toppest one
+void render_bottom_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bright* second, Point_with_bright* third, Pic* texture, int vpx, int vpy)
 {
-   T temp = a;
-   a = b;
-   b = temp;
-}
-#else
-using std::swap;
-#endif
+   int xd1_add=0, bd1_add=0, xd2_add=0, bd2_add=0, bd3_add=0, xd3_add=0;
+   int xd1 = 0, xd2 = 0, xd3 = 0;
+   int bd1 = 0, bd2 = 0, bd3 = 0;
+   int temp;
 
-struct _go
-{
-   int x;
-   int b; // 16.16 fixed point
-};
-
-// render_triangle for gouraud shading
-void render_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bright* second, Point_with_bright* third, Pic* texture, int vpx, int vpy)
-{
-   if (first->y > second->y)
-   {
-      swap<Point_with_bright*>(first, second);
-   }
    if (second->y > third->y)
    {
       swap<Point_with_bright*>(second, third);
-   }
-   if (first->y > second->y)
-   {
-      swap<Point_with_bright*>(first, second);
-   }
-   
-   int ydiff2_0 = third->y - first->y;
-   
-   if (!ydiff2_0) 
-      return;
-   
-   int ydiff1_0 = second->y - first->y;
-   int ydiff2_1 = third->y - second->y;
-   int xdiff1_0 = second->x - first->x;
-   int xdiff2_0 = third->x - first->x;
-   int xdiff2_1 = third->x - second->x;
-   int bdiff1_0 = second->b - first->b;
-   int bdiff2_0 = third->b - first->b;
-   int bdiff2_1 = third->b - second->b;
 
+      temp=(second->y-first->y);
+      xd1_add=-(FIELD_WIDTH<<7)/temp;
+      bd1_add=((second->b-first->b)<<8)/temp;
 
-   int xd1 = 0, xd2 = 0, xd3 = 0;
-   int bd1 = 0, bd2 = 0, bd3 = 0;
-   int xd1_add= ydiff1_0 ? (xdiff1_0<<8)/ydiff1_0 : 0;
-   int bd1_add= ydiff1_0 ? (bdiff1_0<<8)/ydiff1_0 : 0;
-   int xd2_add= ydiff2_0 ? (xdiff2_0<<8)/ydiff2_0 : 0;
-   int bd2_add= ydiff2_0 ? (bdiff2_0<<8)/ydiff2_0 : 0;
-   
+      temp=(third->y-first->y);
+      xd2_add=+(FIELD_WIDTH<<7)/temp;
+      bd2_add=((third->b-first->b)<<8)/temp;
+      
+      temp=(third->y-second->y);
+      if(temp) {
+         xd3_add=+(FIELD_WIDTH<<8)/temp;
+         bd3_add=((third->b-second->b)<<8)/temp;
+      }
+   } else {
+      temp=(second->y-first->y);
+      xd1_add=+(FIELD_WIDTH<<7)/temp;
+      bd1_add=((second->b-first->b)<<8)/temp;
+
+      temp=(third->y-first->y);
+      xd2_add=-(FIELD_WIDTH<<7)/temp;
+      bd2_add=((third->b-first->b)<<8)/temp;
+
+      temp=(third->y-second->y);
+      if(temp) {
+         xd3_add=-(FIELD_WIDTH<<8)/temp;
+         bd3_add=((third->b-second->b)<<8)/temp;
+      }
+   }
+
    // upper part of triangle
    int xstart, bstart, bstop, xstop;
    long xdiff, bdiff, bd; // known to be 4 bytes
    int b, x;
    ushort* pix;
    int onscreen_y=(first->y)+1;
-   while(onscreen_y<=(first->y + ydiff1_0)) {
+   while(onscreen_y<=(second->y)) {
       if(onscreen_y>=(int)dst->get_h()) {
          // we're already outside the screen
          return;
@@ -117,7 +101,7 @@ void render_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bright* s
 
       bstart=(first->b<<8) + (bd2);
       bstop=(first->b<<8) + (bd1);
-      
+
       if(xstart>xstop) {
          swap<int>(xstart,xstop);
          swap<int>(bstart,bstop);
@@ -146,7 +130,7 @@ go_onx1:
          ++x; 
          b+=bd;
       } 
-      
+
 go_on1:
       xd1 += xd1_add;
       xd2 += xd2_add;
@@ -156,9 +140,7 @@ go_on1:
    }
 
    // lower part
-   int xd3_add= ydiff2_1 ? (xdiff2_1<<8)/ydiff2_1 : 0;
-   int bd3_add= ydiff2_1 ? (bdiff2_1<<8)/ydiff2_1 : 0;
-   while(onscreen_y<=(first->y + ydiff2_0)) {
+   while(onscreen_y<=(third->y)) {
       if(onscreen_y>=(int)dst->get_h()) {
          // we're already outside the screen
          return;
@@ -175,7 +157,7 @@ go_on1:
          swap<int>(xstart,xstop);
          swap<int>(bstart,bstop);
       }
-      
+
       // since our scanline algorythm is flawed, we add 1 to xstop. 
       ++xstop;
 
@@ -199,7 +181,7 @@ go_onx2:
          ++x; 
          b+=bd;
       } 
-      
+
 go_on2:
       xd2 += xd2_add;
       xd3 += xd3_add;
@@ -207,11 +189,156 @@ go_on2:
       bd3 += bd3_add;
       ++onscreen_y;
    }
+}
 
-   /* no need to convert back, since light is not used again
-   first->b >>= 8; // convert back 
-   second->b >>= 8;
-   third->b >>= 8;*/
+// render_right_triangle: render the right triangle
+// The points given are
+//  first==right point
+//  second==left point
+//  third==bottom_right_point
+//  the third point is always the lowest one!
+void render_right_triangle(Bitmap *dst, Point_with_bright* first, Point_with_bright* second, Point_with_bright* third, Pic* texture, int vpx, int vpy)
+{
+   int xd1_add=0, bd1_add=0, xd2_add=0, bd2_add=0, bd3_add=0, xd3_add=0;
+   int xd1 = 0, xd2 = 0, xd3 = 0;
+   int bd1 = 0, bd2 = 0, bd3 = 0;
+   int temp;
+
+   if (first->y > second->y)
+   {
+      swap<Point_with_bright*>(first, second);
+
+      temp=(third->y - first->y);
+      xd2_add= +(FIELD_WIDTH<<7)/temp;  // xdiff2_0 is always FIELD_WIDTH/2, and this shifted to the left 8 times
+      bd2_add=((third->b - first->b)<<8)/temp;
+      temp=(second->y - first->y);
+      if(temp) {
+         xd1_add=+(FIELD_WIDTH<<8)/temp;   // xdiff between first and second is always FIELD_WIDTH
+         bd1_add=((second->b - first->b)<<8)/temp;
+      } 
+      temp=(third->y - second->y);
+      xd3_add=-(FIELD_WIDTH<<7)/temp;
+      bd3_add=((third->b - second->b)<<8)/temp;
+   } else {
+      temp=(third->y - first->y);
+      xd2_add= -(FIELD_WIDTH<<7)/temp;  // xdiff2_0 is always FIELD_WIDTH/2, and this shifted to the left 8 times
+      bd2_add= ((third->b - first->b)<<8)/temp;
+      temp=(second->y - first->y);
+      if(temp) {
+         xd1_add=-(FIELD_WIDTH<<8)/temp;   // xdiff between first and second is always FIELD_WIDTH
+         bd1_add=((second->b - first->b)<<8)/temp;
+      } 
+      temp=(third->y - second->y);
+      xd3_add=+(FIELD_WIDTH<<7)/temp;
+      bd3_add=((third->b - second->b)<<8)/temp;
+   }
+
+   // upper part of triangle
+   int bstart, bstop, xstart, xstop;
+   long xdiff, bdiff, bd; // known to be 4 bytes
+   int b, x;
+   ushort* pix;
+   int onscreen_y=(first->y)+1;
+   while(onscreen_y<=second->y) {
+      if(onscreen_y>=(int)dst->get_h()) {
+         // we're already outside the screen
+         return;
+      } 
+      if(onscreen_y<0) goto go_on1;
+
+      xstart=first->x + (xd2>>8);
+      xstop=first->x + (xd1>>8);
+
+      bstart=(first->b<<8) + (bd2);
+      bstop=(first->b<<8) + (bd1);
+
+      if(xstart>xstop) {
+         swap<int>(xstart,xstop);
+         swap<int>(bstart,bstop);
+      }
+      // since our scanline algorythm is flawed, we add 1 to xstop, xdiff is therefore always >0. 
+      ++(xstop);
+
+      // xdiff is always > 0
+      xdiff=xstop-xstart;
+
+      // bdiff is not always positiv
+      bdiff = bstop-bstart; 
+
+      b = bstart;
+      bd = bdiff / xdiff;
+
+      pix = dst->get_pixels() + (onscreen_y)*dst->get_pitch() + xstart;
+      x=xstart;
+      while(x!=xstop) {
+         //     cerr << x << ":" << xstart << ":" << xstop << ":" << xdiff << ":" << add << endl;
+         if(x<0) goto go_onx1;
+         if(x>=(int)dst->get_w()) goto go_onx1;
+         *pix = bright_up_clr(*texture->get_pixels(), (b>>8));
+go_onx1:
+         ++pix;
+         ++x; 
+         b+=bd;
+      } 
+
+go_on1:
+      xd1 += xd1_add;
+      xd2 += xd2_add;
+      bd1 += bd1_add;
+      bd2 += bd2_add;
+      ++onscreen_y;
+   }
+
+   // lower part
+   while(onscreen_y<=third->y) {
+      if(onscreen_y>=(int)dst->get_h()) {
+         // we're already outside the screen
+         return;
+      } 
+      if(onscreen_y<0) goto go_on2;
+
+      xstart=first->x + (xd2>>8);
+      xstop=second->x + (xd3>>8);
+
+      bstart=(first->b<<8) + (bd2);
+      bstop=(second->b<<8) + (bd3);
+
+      if(xstart>xstop) {
+         swap<int>(xstart,xstop);
+         swap<int>(bstart,bstop);
+      }
+
+      // since our scanline algorythm is flawed, we add 1 to xstop. 
+      ++xstop;
+
+      // xdiff is always > 0
+      xdiff=xstop-xstart;
+
+      // bdiff is not always positiv
+      bdiff = bstop-bstart; 
+      b = bstart;
+      bd = bdiff / xdiff ;
+
+      pix = dst->get_pixels() + (onscreen_y)*dst->get_pitch() + xstart;
+      x=xstart;
+      while(x!=xstop) {
+         //  cerr << x << ":" << xstart << ":" << xstop << ":" << xdiff << ":" << add << endl;
+         if(x<0) goto go_onx2;
+         if(x>=(int)dst->get_w()) goto go_onx2;
+         *pix = bright_up_clr(*texture->get_pixels(), b>>8);
+go_onx2:
+         ++pix;
+         ++x; 
+         b+=bd;
+      } 
+
+go_on2:
+      xd2 += xd2_add;
+      xd3 += xd3_add;
+      bd2 += bd2_add;
+      bd3 += bd3_add;
+      ++onscreen_y;
+   }
 }
 
 /*
