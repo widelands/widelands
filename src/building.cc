@@ -2058,7 +2058,8 @@ ProductionSite::ProductionSite
 ===============
 */
 ProductionSite::ProductionSite(ProductionSite_Descr* descr)
-	: Building(descr)
+	: Building(descr),
+	  m_statistics(STATISTICS_VECTOR_LENGTH, false)
 {
 	m_worker = 0;
 	m_worker_request = 0;
@@ -2106,19 +2107,18 @@ ProductionSite::calc_statistic
 Calculate statistic.
 ===============
 */
-void ProductionSite::calc_statistics() {
-   std::vector<bool>::const_iterator pos;
-   uint i=0;
+void ProductionSite::calc_statistics()
+{
+	uint pos;
    uint ok=0;
    uint lastOk=0;
 
-   for (pos=m_statistics.begin();pos<m_statistics.end();pos++) {
-      if (*pos) {
+   for(pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
+      if (m_statistics[pos]) {
          ok++;
-         if (i>=STATISTICS_VECTOR_LENGTH/2)
+         if (pos >= STATISTICS_VECTOR_LENGTH/2)
             lastOk++;
       }
-      i++;
    }
    double percOk = (ok*100) / STATISTICS_VECTOR_LENGTH;
    double lastPercOk = (lastOk*100) / (STATISTICS_VECTOR_LENGTH/2);
@@ -2132,9 +2132,9 @@ void ProductionSite::calc_statistics() {
       trendBuf = "=";
 
    if (percOk > 0 && percOk < 100)
-     snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%% %s",percOk,trendBuf);
+		snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%% %s",percOk,trendBuf);
    else
-     snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%",percOk);
+		snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%",percOk);
    molog("stat: lastOk: %.0f%% percOk: %.0f%% trend: %s\n",lastPercOk,percOk,trendBuf);
    m_statistics_changed = false;
 }
@@ -2147,7 +2147,8 @@ ProductionSite::add_statistic_value
 Add a value to statistic vector.
 ===============
 */
-void ProductionSite::add_statistics_value(bool val) {
+void ProductionSite::add_statistics_value(bool val)
+{
    m_statistics_changed = true;
    m_statistics.erase(m_statistics.begin(),m_statistics.begin()+1);
    m_statistics.push_back(val);
@@ -2178,11 +2179,6 @@ void ProductionSite::init(Editor_Game_Base *g)
          m_input_queues.push_back(wq);
          //         wq->set_callback(&ConstructionSite::wares_queue_callback, this);
          wq->init((Game*)g, g->get_safe_ware_id((*inputs)[i].get_ware()->get_name()), (*inputs)[i].get_max());
-      }
-
-      //Initialize statistics vector
-      for (uint i=0;i<STATISTICS_VECTOR_LENGTH;i++) {
-         m_statistics.push_back(false);
       }
    }
 }
