@@ -162,7 +162,7 @@ MiniMap::MiniMap(Interactive_Base *plr, UniqueWindow *reg)
 	}
 
 	m_view = new MiniMapView(this, 0, 0, plr);
-	m_view->warpview.set(&warpview, &UISignal2<int,int>::call);
+//	m_view->warpview.set(&warpview, &UISignal2<int,int>::call);
 	
 	set_inner_size(m_view->get_w(), m_view->get_h());
 
@@ -180,16 +180,4 @@ MiniMap::~MiniMap()
 		m_registry->y = get_y();
 		m_registry->window = 0;
 	}
-}
-
-/** MiniMap::set_view_pos(int x, int y)
- *
- * Forward the viewpos change to the actual view.
- *
- * Args: x	new view pos screen coordinates
- *       y
- */
-void MiniMap::set_view_pos(int x, int y)
-{
-	m_view->set_view_pos(x, y);
 }

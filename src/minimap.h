@@ -66,9 +66,7 @@ public:
 	MiniMap(Interactive_Base *parent, UniqueWindow *reg);
 	~MiniMap();
 
-	UISignal2<int,int> warpview; // screen coordinates of viewport
-
-	void set_view_pos(int x, int y);
+   inline MiniMapView* get_minimapview() { return m_view; }
 
 private:
 	UniqueWindow	*m_registry;

@@ -25,6 +25,8 @@
 #include "editor_game_base.h"
 
 class Map;
+class MiniMapView;
+class Map_View;
 
 /** class Interactive_Base
  *
@@ -52,14 +54,30 @@ class Interactive_Base : public Panel {
 		
 		inline const MapRenderInfo* get_maprenderinfo() const { return &m_maprenderinfo; }
 		
+      void move_view_to(int fx, int fy);
+		void warp_mouse_to_field(Coords c);
+
       virtual void recalc_overlay(FCoords fc) = 0;
       virtual void start() = 0;
 
-   protected:
-		bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
-		MapRenderInfo	   m_maprenderinfo;
-      
+   private:
+      Map_View* m_mapview;
+      MiniMapView* m_minimapview;
       Editor_Game_Base* m_egbase;
+      bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
+      
+   protected:
+      void mainview_move(int x, int y);
+		void minimap_warp(int x, int y);
+
+	   inline void set_mapview(Map_View* w) { m_mapview=w; }
+      inline void set_minimapview(MiniMapView* w) { m_minimapview=w; }
+      inline MiniMapView* get_minimapview() { return m_minimapview; }
+      inline Map_View* get_mapview() { return m_mapview; }
+     
+      // cart rendering stuff. this is still protected since this is 
+      // used quite often
+		MapRenderInfo	   m_maprenderinfo;
 };
 
 

@@ -21,6 +21,8 @@
 #include "interactive_base.h"
 #include "map.h"
 #include "options.h"
+#include "mapview.h"
+#include "minimap.h"
 
 /*
 ==============================================================================
@@ -49,6 +51,9 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 
    m_fieldsel_freeze = false;
    m_egbase=g;
+
+   m_minimapview=0;
+   m_mapview=0;
 }
 
 /*
@@ -130,6 +135,74 @@ void Interactive_Base::think()
 	
 	// some of the UI windows need to think()
 	Panel::think();
+}
+
+
+/** Interactive_Base::mainview_move(int x, int y)
+ *
+ * Signal handler for the main view's warpview updates the mini map's
+ * viewpos marker position
+ */
+void Interactive_Base::mainview_move(int x, int y)
+{
+	if (get_minimapview()) {
+		int maxx = MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
+		int maxy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
+
+		x += get_mapview()->get_w()>>1;
+		if (x >= maxx) x -= maxx;
+		y += get_mapview()->get_h()>>1;
+		if (y >= maxy) y -= maxy;
+
+		get_minimapview()->set_view_pos(x, y);
+	}
+}
+
+/** Interactive_Base::minimap_warp(int x, int y)
+ *
+ * Called whenever the player clicks on a location on the minimap.
+ * Warps the main mapview position to the clicked location.
+ */
+void Interactive_Base::minimap_warp(int x, int y)
+{
+	x -= get_mapview()->get_w()>>1;
+	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
+	y -= get_mapview()->get_h()>>1;
+	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
+	get_mapview()->set_viewpoint(x, y);
+}
+
+
+/** Interactive_Base::move_view_to(int fx, int fy)
+ *
+ * Move the mainview to the given position (in field coordinates)
+ */
+void Interactive_Base::move_view_to(int fx, int fy)
+{
+	int x = MULTIPLY_WITH_FIELD_WIDTH(fx);
+	int y = MULTIPLY_WITH_HALF_FIELD_HEIGHT(fy);
+
+	if (get_minimapview())
+		get_minimapview()->set_view_pos(x, y);
+	
+	x -= get_mapview()->get_w()>>1;
+	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
+	y -= get_mapview()->get_h()>>1;
+	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
+	get_mapview()->set_viewpoint(x, y);
+}
+
+
+/*
+===============
+Interactive_Base::warp_mouse_to_field
+
+Move the mouse so that it's directly above the given field
+===============
+*/
+void Interactive_Base::warp_mouse_to_field(Coords c)
+{
+	get_mapview()->warp_mouse_to_field(c);
 }
 
 

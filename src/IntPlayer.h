@@ -58,9 +58,6 @@ class Interactive_Player : public Interactive_Base {
 
 		void field_action();
 		
-		void move_view_to(int fx, int fy);
-		void warp_mouse_to_field(Coords c);
-
       void recalc_overlay(FCoords fc) ;
 
 		bool handle_key(bool down, int code, char c);
@@ -84,13 +81,8 @@ class Interactive_Player : public Interactive_Base {
 		void roadb_add_overlay();
 		void roadb_remove_overlay();
 	
-      void mainview_move(int x, int y);
-		void minimap_warp(int x, int y);
-
 		Game		*m_game;
 		uchar		m_player_number;
-		
-		Map_View*	main_mapview;
 		
 		UniqueWindow	m_mainmenu;
 		UniqueWindow	m_minimap;

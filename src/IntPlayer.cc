@@ -109,9 +109,11 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	m_game = g;
 	m_player_number = plyn;
 	
-	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
-	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
-	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
+	Map_View* mview;
+   mview = new Map_View(this, 0, 0, get_w(), get_h(), this);
+	mview->warpview.set(this, &Interactive_Player::mainview_move);
+	mview->fieldclicked.set(this, &Interactive_Player::field_action);
+   set_mapview(mview);
 
 	m_buildroad = false;
 	
@@ -225,47 +227,18 @@ void Interactive_Player::toggle_buildhelp(void)
  */
 void Interactive_Player::minimap_btn()
 {
-	if (m_minimap.window)
+	if (m_minimap.window) {
 		delete m_minimap.window;
+      set_minimapview(0);
+   }
 	else {
 		MiniMap *mm = new MiniMap(this, &m_minimap);
-		mm->warpview.set(this, &Interactive_Player::minimap_warp);
+		set_minimapview(mm->get_minimapview());
+      get_minimapview()->warpview.set(this, &Interactive_Player::minimap_warp);
 
 		// make sure the viewpos marker is at the right pos to start with
-		mainview_move(main_mapview->get_vpx(), main_mapview->get_vpy());
+		mainview_move(get_mapview()->get_vpx(), get_mapview()->get_vpy());
 	}
-}
-
-/** Interactive_Player::move_view_to(int fx, int fy)
- *
- * Move the mainview to the given position (in field coordinates)
- */
-void Interactive_Player::move_view_to(int fx, int fy)
-{
-	int x = MULTIPLY_WITH_FIELD_WIDTH(fx);
-	int y = MULTIPLY_WITH_HALF_FIELD_HEIGHT(fy);
-
-	if (m_minimap.window)
-		((MiniMap *)m_minimap.window)->set_view_pos(x, y);
-	
-	x -= main_mapview->get_w()>>1;
-	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_game->get_map()->get_width());
-	y -= main_mapview->get_h()>>1;
-	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_game->get_map()->get_height());
-	main_mapview->set_viewpoint(x, y);
-}
-
-
-/*
-===============
-Interactive_Player::warp_mouse_to_field
-
-Move the mouse so that it's directly above the given field
-===============
-*/
-void Interactive_Player::warp_mouse_to_field(Coords c)
-{
-	main_mapview->warp_mouse_to_field(c);
 }
 
 
@@ -330,40 +303,6 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 	}
 	
 	return false;
-}
-
-/** Interactive_Player::mainview_move(int x, int y)
- *
- * Signal handler for the main view's warpview updates the mini map's
- * viewpos marker position
- */
-void Interactive_Player::mainview_move(int x, int y)
-{
-	if (m_minimap.window) {
-		int maxx = MULTIPLY_WITH_FIELD_WIDTH(m_game->get_map()->get_width());
-		int maxy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_game->get_map()->get_height());
-
-		x += main_mapview->get_w()>>1;
-		if (x >= maxx) x -= maxx;
-		y += main_mapview->get_h()>>1;
-		if (y >= maxy) y -= maxy;
-
-		((MiniMap*)m_minimap.window)->set_view_pos(x, y);
-	}
-}
-
-/** Interactive_Player::minimap_warp(int x, int y)
- *
- * Called whenever the player clicks on a location on the minimap.
- * Warps the main mapview position to the clicked location.
- */
-void Interactive_Player::minimap_warp(int x, int y)
-{
-	x -= main_mapview->get_w()>>1;
-	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_game->get_map()->get_width());
-	y -= main_mapview->get_h()>>1;
-	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_game->get_map()->get_height());
-	main_mapview->set_viewpoint(x, y);
 }
 
 

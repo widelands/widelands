@@ -37,6 +37,8 @@ class Editor_Interactive : public Interactive_Base {
       ~Editor_Interactive();
 
       inline Editor* get_editor(void) { return m_editor; }
+
+      // leaf functions from base class
       void recalc_overlay(FCoords fc);
       void start();
 
@@ -44,12 +46,8 @@ class Editor_Interactive : public Interactive_Base {
       static const int PANEL_HEIGHT=100;
 
       void exit_game_btn();
-      void minimap_warp(int, int);
-      void mainview_move(int, int);
 
       ToolPanel* m_panel;
       Editor* m_editor;
-      Map_View* m_mapview;
-      MiniMapView* m_minimap;
 };
 #endif // __S__EDITOR_H
