@@ -273,18 +273,36 @@ TERRAIN RENDERING
 ==============================================================================
 */
 
+#define ftofix(f) ((int) ((f)*0x10000))
+#define itofix(i) ((i)<<16)
+#define fixtoi(f) ((f)>>16)
 
-#define fix(v) ((int) ((v)*0x10000))
+/*  get lambda and mu so that lambda*u+mu*v=(1 0)^T
+    with u=(u1 u2)^T and v=(v1 v2)^T */
+static inline void get_horiz_linearcomb (int u1, int u2, int v1, int v2, float& lambda, float& mu)
+{
+    float det;
+    
+    det=u1*v2 - u2*v1;		// determinant of (u v)
+    
+    lambda=v2/det;		// by Cramer's rule
+    mu=-u2/det;
+}
 
 static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y2)
 {
-	int x,y,y1,w,h,ix1,ix2,itx,ity,l;
-	float x1,x2,dx1,dx2;
-	float b1,b2,db1,db2;
-	float tx1,tx2,dtx1,dtx2, ty1,ty2,dty1,dty2;
+	int y,y1,w,h,ix1,ix2,count;
+	int x1,x2,dx1,dx2;
+	int b1,db1, tx1,dtx1, ty1,dty1;
 	int b,db,tx,dtx,ty,dty;
+	float lambda, mu;
 	unsigned char *texpixels;
 	unsigned short *texcolormap;
+	
+	get_horiz_linearcomb (p2->x-p1->x, p2->y-p1->y, p3->x-p1->x, p3->y-p1->y, lambda, mu);
+	db=ftofix((p2->b-p1->b)*lambda + (p3->b-p1->b)*mu);
+	dtx=ftofix((p2->tx-p1->tx)*lambda + (p3->tx-p1->tx)*mu);
+	dty=ftofix((p2->ty-p1->ty)*lambda + (p3->ty-p1->ty)*mu);
 
 	w=dst->w;
 	h=dst->h;
@@ -294,40 +312,27 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 
 	y1=p1->y;
 
-	x1=x2=p1->x;
-	dx1=(float) (p2->x - x1) / (p2->y - y1);
-	dx2=(float) (p3->x - x1) / (p3->y - y1);
+	x1=x2=itofix(p1->x);
+	dx1=(itofix(p2->x) - x1) / (p2->y - y1);
+	dx2=(itofix(p3->x) - x1) / (p3->y - y1);
 
-	b1=b2=p1->b;
-	db1=(float) (p2->b - b1) / (p2->y - y1);
-	db2=(float) (p3->b - b1) / (p3->y - y1);
+	b1=itofix(p1->b);
+	db1=(itofix(p2->b) - b1) / (p2->y - y1);
 
-	tx1=tx2=p1->tx;
-	dtx1=(float) (p2->tx - tx1) / (p2->y - y1);
-	dtx2=(float) (p3->tx - tx1) / (p3->y - y1);
+	tx1=itofix(p1->tx);
+	dtx1=(itofix(p2->tx) - tx1) / (p2->y - y1);
 
-	ty1=ty2=p1->ty;
-	dty1=(float) (p2->ty - ty1) / (p2->y - y1);
-	dty2=(float) (p3->ty - ty1) / (p3->y - y1);
+	ty1=itofix(p1->ty);
+	dty1=(itofix(p2->ty) - ty1) / (p2->y - y1);
 
-	for (y=y1;y<=y2;y++) {
-		if (y>=0 && y<h) {
-			ix1=(int) x1;
-			ix2=(int) x2;
-
-			l=ix2-ix1;
-			if (l<1) l=1;
-
-			b=fix(b1);
-			db=fix(b2-b1)/l;
-
-			tx=fix(tx1);
-			dtx=fix(tx2-tx1)/l;
-
-			ty=fix(ty1);
-			dty=fix(ty2-ty1)/l;
-
-			unsigned short *scanline=dst->pixels + y*dst->pitch;
+	for (y=y1;y<=y2 && y<h;y++) {
+		if (y>=0) {
+			ix1=fixtoi(x1);
+			ix2=fixtoi(x2);
+			
+			b=b1;
+			tx=tx1;
+			ty=ty1;
 
 			if (ix2>=w) ix2=w-1;
 			if (ix1<0) {
@@ -336,12 +341,15 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 				ty-=ix1*dty;
 				ix1=0;
 			}
+			
+			count=ix2-ix1;
 
-			for (x=ix1;x<=ix2;x++) {
-				itx=(tx>>16) & (TEXTURE_W-1);
-				ity=(ty>>16) & (TEXTURE_H-1);
+			unsigned short *scanline=dst->pixels + y*dst->pitch + ix1;
 
-				scanline[x]=texcolormap[texpixels[itx+(ity<<6)] | ((b>>8) & 0xFF00)];
+			while (count-- >= 0) {
+				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
+
+				*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
 
 				b+=db;
 				tx+=dtx;
@@ -352,23 +360,25 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 		x1+=dx1;
 		x2+=dx2;
 		b1+=db1;
-		b2+=db2;
 		tx1+=dtx1;
-		tx2+=dtx2;
 		ty1+=dty1;
-		ty2+=dty2;
 	}
 }
 
 static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y1)
 {
-	int x,y,y2,w,h,ix1,ix2,itx,ity,l;
-	float x1,x2,dx1,dx2;
-	float b1,b2,db1,db2;
-	float tx1,tx2,dtx1,dtx2, ty1,ty2,dty1,dty2;
+	int y,y2,w,h,ix1,ix2,count;
+	int x1,x2,dx1,dx2;
+	int b1,db1, tx1,dtx1, ty1,dty1;
 	int b,db,tx,dtx,ty,dty;
+	float lambda, mu;
 	unsigned char *texpixels;
 	unsigned short *texcolormap;
+
+	get_horiz_linearcomb (p2->x-p1->x, p2->y-p1->y, p3->x-p1->x, p3->y-p1->y, lambda, mu);
+	db=ftofix((p2->b-p1->b)*lambda + (p3->b-p1->b)*mu);
+	dtx=ftofix((p2->tx-p1->tx)*lambda + (p3->tx-p1->tx)*mu);
+	dty=ftofix((p2->ty-p1->ty)*lambda + (p3->ty-p1->ty)*mu);
 
 	w=dst->w;
 	h=dst->h;
@@ -378,40 +388,27 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 
 	y2=p3->y;
 
-	x1=x2=p3->x;
-	dx1=-(float) (p1->x - x1) / (p1->y - y2);
-	dx2=-(float) (p2->x - x1) / (p2->y - y2);
+	x1=x2=itofix(p3->x);
+	dx1=-(itofix(p1->x) - x1) / (p1->y - y2);
+	dx2=-(itofix(p2->x) - x1) / (p2->y - y2);
 
-	b1=b2=p3->b;
-	db1=-(float) (p1->b - b1) / (p1->y - y2);
-	db2=-(float) (p2->b - b1) / (p2->y - y2);
+	b1=itofix(p3->b);
+	db1=-(itofix(p1->b) - b1) / (p1->y - y2);
 
-	tx1=tx2=p3->tx;
-	dtx1=-(float) (p1->tx - tx1) / (p1->y - y2);
-	dtx2=-(float) (p2->tx - tx1) / (p2->y - y2);
+	tx1=itofix(p3->tx);
+	dtx1=-(itofix(p1->tx) - tx1) / (p1->y - y2);
 
-	ty1=ty2=p3->ty;
-	dty1=-(float) (p1->ty - ty1) / (p1->y - y2);
-	dty2=-(float) (p2->ty - ty1) / (p2->y - y2);
+	ty1=itofix(p3->ty);
+	dty1=-(itofix(p1->ty) - ty1) / (p1->y - y2);
 
-	for (y=y2;y>=y1;y--) {
-		if (y>=0 && y<h) {
-			ix1=(int) x1;
-			ix2=(int) x2;
+	for (y=y2;y>=y1 && y>=0;y--) {
+		if (y<h) {
+			ix1=fixtoi(x1);
+			ix2=fixtoi(x2);
 
-			l=ix2-ix1;
-			if (l<1) l=1;
-
-			b=fix(b1);
-			db=fix(b2-b1)/l;
-
-			tx=fix(tx1);
-			dtx=fix(tx2-tx1)/l;
-
-			ty=fix(ty1);
-			dty=fix(ty2-ty1)/l;
-
-			unsigned short *scanline=dst->pixels + y*dst->pitch;
+			b=b1;
+			tx=tx1;
+			ty=ty1;
 
 			if (ix2>=w) ix2=w-1;
 			if (ix1<0) {
@@ -420,12 +417,15 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 				ty-=ix1*dty;
 				ix1=0;
 			}
+			
+			count=ix2-ix1;
          
-			for (x=ix1;x<=ix2;x++) {
-				itx=(tx>>16) & (TEXTURE_W-1);
-				ity=(ty>>16) & (TEXTURE_H-1);
+			unsigned short *scanline=dst->pixels + y*dst->pitch + ix1;
 
-				scanline[x]=texcolormap[texpixels[itx+(ity<<6)] | ((b>>8) & 0xFF00)];
+			while (count-- >= 0) {
+				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
+
+				*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
 
 				b+=db;
 				tx+=dtx;
@@ -436,11 +436,8 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 		x1+=dx1;
 		x2+=dx2;
 		b1+=db1;
-		b2+=db2;
 		tx1+=dtx1;
-		tx2+=dtx2;
 		ty1+=dty1;
-		ty2+=dty2;
 	}
 }
 
@@ -560,9 +557,9 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	Vertex r, l, br, bl;
 
 	r = Vertex(rposx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(rf->get_height()), rf->get_brightness(), 0, 0);
-	l = Vertex(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()), f->get_brightness(), 63, 0);
-	br = Vertex(rblposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(rfl->get_height()), rfl->get_brightness(), 0, 63);
-	bl = Vertex(blposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(fl->get_height()), fl->get_brightness(), 63, 63);
+	l = Vertex(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()), f->get_brightness(), 64, 0);
+	br = Vertex(rblposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(rfl->get_height()), rfl->get_brightness(), 0, 64);
+	bl = Vertex(blposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(fl->get_height()), fl->get_brightness(), 64, 64);
 
 /*
 	r.b += 20; // debug override for shading (make field borders visible)
