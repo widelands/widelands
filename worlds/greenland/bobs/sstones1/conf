@@ -1,6 +1,8 @@
-type="boring"
-life_time=0
+type=boring
+size=small
 
+[idle]
+pics=sstones1_??.bmp
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255

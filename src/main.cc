@@ -28,12 +28,17 @@
 #include "fullscreen_menu_options.h"
 #include "fullscreen_menu_singleplayer.h"
 #include "fullscreen_menu_netsetup.h"
+#include "fullscreen_menu_inet_server_options.h"
+#include "fullscreen_menu_inet_lobby.h"
 #include "game.h"
+#include "game_server_connection.h"
+#include "game_server_proto.h"
 #include "graphic.h"
+#include "network.h"
 #include "options.h"
 #include "setup.h"
 #include "system.h"
-#include "network.h"
+#include "util.h"
 
 LayeredFileSystem *g_fs;
 
@@ -192,7 +197,7 @@ void g_main(int argc, char** argv)
 			Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
 			int code=ns->run();
 			
-			NetGame* netgame;
+			NetGame* netgame = 0;
 			
 			if (code==Fullscreen_Menu_NetSetup::HOSTGAME)
 			    netgame=new NetHost();
@@ -203,7 +208,35 @@ void g_main(int argc, char** argv)
 				    throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
 
 			    netgame=new NetClient(&peer);
-			}
+			} else if(code==Fullscreen_Menu_NetSetup::INTERNETGAME) {
+            delete ns;
+            Fullscreen_Menu_InetServerOptions* igo = new Fullscreen_Menu_InetServerOptions();
+            int code=igo->run();
+           
+            // Get informations here
+            std::string host = igo->get_server_name();
+            std::string player = igo->get_player_name();
+            delete igo;
+            
+            if(code) {
+               Game_Server_Connection csc(host, GAME_SERVER_PORT);
+
+               try {
+                  csc.connect();
+               } catch(...) {
+                  // TODO: error handling here
+                  throw;
+               }
+
+               csc.set_username(widen_string(player).c_str());
+               
+               // Wowi, we are connected. Let's start the lobby
+               Fullscreen_Menu_InetLobby* il = new Fullscreen_Menu_InetLobby(&csc);
+               il->run();
+               delete il;
+            }
+            break;
+         }
 			else
 			    break;
 			

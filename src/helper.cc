@@ -65,6 +65,35 @@ void remove_spaces(std::string* in) {
 }
 
 /*
+ * Convert this string from an ASCII to an unicode 
+ * string. This function should eventually no longer be 
+ * needed (when everything is unicode)
+ */
+std::string<wchar_t> widen_string(std::string in) {
+   std::string<wchar_t> retval;
+
+   for(uint i=0; i<in.size(); i++) 
+      retval.append(1, in[i]);
+   return retval;
+}
+
+/*
+ * Convert this string from an uncicode to an ASCII 
+ * string. Wide characters are silently ignored. 
+ * This function should eventually no longer be used
+ */
+std::string narrow_string(std::string<wchar_t> in) {
+   std::string retval;
+
+   for(uint i=0; i<in.size(); i++) { 
+      wchar_t str = in[i];
+      if(str >= 255) continue;
+      retval.append(1, in[i]);
+   }
+   return retval;
+}
+
+/*
 ===============
 log
 
@@ -84,6 +113,7 @@ void log(const char *fmt, ...)
 	cout << buf;
 	cout.flush();
 }
+
 
 
 /*

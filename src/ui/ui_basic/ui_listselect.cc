@@ -316,3 +316,16 @@ void UIListselect::remove_entry(int i) {
       m_selection=-1;
 }
 
+/*
+ * Remove an entry by name. This only removes
+ * the first entry with this name. If none is found, nothing
+ * is done
+ */
+void UIListselect::remove_entry(const char *str ) {
+   for(uint i=0; i<m_entries.size(); i++) {
+      if(!strcmp(m_entries[i]->name,str)) {
+         remove_entry(i);
+         return;
+      }
+   }
+}

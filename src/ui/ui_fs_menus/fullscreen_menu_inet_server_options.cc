@@ -17,43 +17,38 @@
  *
  */
 
-#include "fullscreen_menu_netsetup.h"
+#include "fullscreen_menu_inet_server_options.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "constants.h"
 
-Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
+Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this
 {
 	// Text
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Begin Network Game", Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Internet Options", Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
 	UIButton* b;
 
-	b = new UIButton(this, 60, 170, 174, 24, 1, HOSTGAME);
-	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
-	b->set_title("Host a New Game");
+	b = new UIButton(this, 60, 170, 174, 24, 1, 1);
+	b->clickedid.set(this, &Fullscreen_Menu_InetServerOptions::end_modal);
+	b->set_title("Run Game");
 
-	b = new UIButton(this, 60, 210, 174, 24, 1, JOINGAME);
-	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
-	b->set_title("Join a Game");
-
-   b = new UIButton(this, 60, 250, 174, 24, 1, INTERNETGAME);
-	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
-	b->set_title("Play in Internet");
-
-	b = new UIButton(this, 60, 290, 174, 24, 0, CANCEL);
-	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
+	b = new UIButton(this, 60, 250, 174, 24, 0, 0);
+	b->clickedid.set(this, &Fullscreen_Menu_InetServerOptions::end_modal);
 	b->set_title("Back");
 	
 	// Hostname
 	hostname=new UIEdit_Box(this, 288, 210, 174, 24, 2, 0);
 	hostname->set_text("localhost");	
+	// Player 
+	playername=new UIEdit_Box(this, 288, 240, 174, 24, 2, 0);
+	playername->set_text("nobody");	
 }
 
-Fullscreen_Menu_NetSetup::~Fullscreen_Menu_NetSetup ()
+Fullscreen_Menu_InetServerOptions::~Fullscreen_Menu_InetServerOptions ()
 {
 }
 

@@ -17,30 +17,25 @@
  *
  */
 
-#ifndef __S__NETSETUP_H
-#define __S__NETSETUP_H
+#ifndef __S__INET_SERVER_OPTIONS_H
+#define __S__INET_SERVER_OPTIONS_H
 
 #include "fullscreen_menu_base.h"
 #include "ui_editbox.h"
 
 
-class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
+class Fullscreen_Menu_InetServerOptions : public Fullscreen_Menu_Base {
 	public:
-		enum {
-			CANCEL=0,
-			HOSTGAME,
-			JOINGAME,
-			INTERNETGAME
-		};
-		
-		Fullscreen_Menu_NetSetup ();
-		~Fullscreen_Menu_NetSetup ();
+		Fullscreen_Menu_InetServerOptions ();
+		~Fullscreen_Menu_InetServerOptions ();
 
-		const char* get_host_address ()
+		const char* get_player_name()
+		{ return playername->get_text(); }
+		const char* get_server_name()
 		{ return hostname->get_text(); }
-	
+	   
 	private:
-		UIEdit_Box*	hostname;
+		UIEdit_Box*	playername, *hostname;
 };
 
 #endif

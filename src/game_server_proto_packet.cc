@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 by the Widelands Development Team
+ * Copyright (C) 2002-4 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,31 +17,6 @@
  *
  */
 
-#ifndef __S__NETSETUP_H
-#define __S__NETSETUP_H
+#include "game_server_proto_packet.h"
 
-#include "fullscreen_menu_base.h"
-#include "ui_editbox.h"
-
-
-class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
-	public:
-		enum {
-			CANCEL=0,
-			HOSTGAME,
-			JOINGAME,
-			INTERNETGAME
-		};
-		
-		Fullscreen_Menu_NetSetup ();
-		~Fullscreen_Menu_NetSetup ();
-
-		const char* get_host_address ()
-		{ return hostname->get_text(); }
-	
-	private:
-		UIEdit_Box*	hostname;
-};
-
-#endif
-
+// Nothing here, all in header
