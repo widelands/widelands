@@ -17,6 +17,8 @@
  *
  */
 
+#if 0
+
 #include "widelands.h"
 #include "map.h"
 #include "building.h"
@@ -168,3 +170,5 @@ int Creature::produce(uint timekey)
 	int ret = taskTime + desc->prodTime - timekey;
 	return ret > 0 ? ret : 0;
 }
+
+#endif // 0

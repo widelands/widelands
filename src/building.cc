@@ -17,6 +17,8 @@
  *
  */
 
+#if 0 
+
 #include "widelands.h"
 #include "map.h"
 #include "building.h"
@@ -87,3 +89,5 @@ bool Building::add_ware(uint ware)
 	// return false if this building does not accept that ware
 	return false;
 }
+
+#endif // 0

@@ -100,8 +100,8 @@ widelands_SOURCES=main.cc \
                   cmd_queue.h \
                   cmd_queue.cc \
                   widelands.h \
-                  buildings.h \
-                  buildings.cc \
+                  building.h \
+                  building.cc \
                   creature.h \
                   creature.cc 
 

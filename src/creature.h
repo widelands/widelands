@@ -19,10 +19,7 @@
 
 #ifndef __CREATURE_H
 #define __CREATURE_H
-
-#include "tribefiletypes.h"
-#include "os.h"
-
+/*
 class Growable_Array;
 class Field;
 
@@ -66,5 +63,5 @@ public:
 	void			live(uint timekey);
 	Field*			find_bob_to_consume();
 };
-
+*/
 #endif __CREATURE_H
