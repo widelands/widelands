@@ -313,7 +313,7 @@ void Player::start_stop_building(PlayerImmovable* imm) {
 		bld->set_stop(!bld->get_stop());
 	}
 }
-	
+
 /*
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing
@@ -326,7 +326,7 @@ void Player::enhance_building(PlayerImmovable* imm, int id) {
       int cur_id=get_tribe()->get_building_index(b->get_name());
       Coords c = b->get_position();
       assert(cur_id!=-1);
-      
+
       b->remove(get_game()); // No fire or stuff
 
       get_game()->warp_constructionsite(c, m_plnum, id, cur_id);

@@ -586,12 +586,12 @@ void Building_Window::setup_capsbuttons()
 		btn->set_pic(g_gr->get_picture(PicMod_Game, icon.c_str(), true));
 		x += 34;
 	}
-  
+
    if(m_capscache & (1 << Building::PCap_Enhancable)) {
       const std::vector<char*>* buildings=m_building->get_enhances_to();
       for(uint i=0; i<buildings->size(); i++) {
          int id=m_player->get_player()->get_tribe()->get_building_index((*buildings)[i]);
-         if(id==-1) 
+         if(id==-1)
             throw wexception("Should enhance to unknown building: %s\n", (*buildings)[i]);
          UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2, id); // Button id == building id
          btn->clickedid.set(this, &Building_Window::act_enhance);

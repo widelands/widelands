@@ -30,15 +30,15 @@ class Map;
 
 
 /*
- * The Overlay Manager is responsible for the map overlays. He 
+ * The Overlay Manager is responsible for the map overlays. He
  * manages overlays in the following way:
  *   - When someone registered one (or more) special overlays
  *     for a field he draws them accordingly
  *   - If nothing was registered for this field, the Overlay Manager
- *     automatically returns 
- *        - borders 
+ *     automatically returns
+ *        - borders
  *        - buildhelp (if activated)
- *   
+ *
  *   Advantages are:
  *    - buildcaps do not need to be recalculated all the time
  *    - flexible system
@@ -46,13 +46,13 @@ class Map;
  *    about the level variable:
  *     the level describe when the overlay should be drawn
  *     buildhelp graphics have a level of 5, lower means the
- *     buildhelp will cover the old overlays, otherways the new 
+ *     buildhelp will cover the old overlays, otherways the new
  *     overlay will cover the buildhelp.
  *
  *    about jobid:
  *     the jobid can be given to the register function, whenever
- *     the job is finished or canceld, a simple remove_overlay 
- *     with the jobid can be called and all overlays created in the 
+ *     the job is finished or canceld, a simple remove_overlay
+ *     with the jobid can be called and all overlays created in the
  *     job are removed. This is usefull for interactive road building.
  */
 #define MAX_OVERLAYS_PER_FIELD 5    // this should be enough
@@ -74,7 +74,7 @@ class Overlay_Manager {
 
       // register callback function (see data below for description)
       void register_overlay_callback_function(Overlay_Callback_Function func, void* data, int iparam1 = 0) {
-         m_callback=func; m_callback_data=data;  m_callback_data_i=iparam1; 
+         m_callback=func; m_callback_data=data;  m_callback_data_i=iparam1;
       }
 
       inline int get_a_job_id(void) { ++m_cur_jobid; if(m_cur_jobid>=std::numeric_limits<int>::max()) m_cur_jobid=1000; return m_cur_jobid; }
@@ -87,14 +87,14 @@ class Overlay_Manager {
       int get_overlays(FCoords& c, Overlay_Info* overlays);
 
       void show_buildhelp(bool t) { m_showbuildhelp= t; }
-      void toggle_buildhelp(void) { m_showbuildhelp=!m_showbuildhelp; } 
+      void toggle_buildhelp(void) { m_showbuildhelp=!m_showbuildhelp; }
 
       void recalc_field_overlays(FCoords& f, FCoords* neighbours);
 
       // Road overlays are registered like normal overlays and removed like normal overlays
       // but they use are handled internally completly different. When a road overlay information is requested
-      // the same data as for a field is returned (a uchar which needs to be ANDed) 
-      void register_road_overlay(Coords c, uchar where, int jobid = -1); 
+      // the same data as for a field is returned (a uchar which needs to be ANDed)
+      void register_road_overlay(Coords c, uchar where, int jobid = -1);
       void remove_road_overlay(Coords c);
       void remove_road_overlay(int jobid);
       inline uchar get_road_overlay(Coords& c) {
@@ -111,7 +111,7 @@ class Overlay_Manager {
          // index pointer and m_overlay_basic are invalid
          m_index_pointer=fc.y*m_w + fc.x;
          m_overlay_basic = m_overlay_fields[m_index_pointer];
-         if (m_overlay_basic > Overlay_Frontier_Base && m_overlay_basic <= Overlay_Frontier_Max) 
+         if (m_overlay_basic > Overlay_Frontier_Base && m_overlay_basic <= Overlay_Frontier_Max)
             return (m_overlay_basic - Overlay_Frontier_Base);
          return 0;
       }
@@ -119,11 +119,11 @@ class Overlay_Manager {
          // index pointer points to field, m_overlay_basic should be valid
          int index=m_index_pointer;
          if(fc.x==m_w-1) { index-=fc.x; } else { ++index; } // right neighbour
-         if(m_overlay_fields[index] == m_overlay_basic) return true; 
+         if(m_overlay_fields[index] == m_overlay_basic) return true;
          return false;
       }
       inline uchar Overlay_Manager::draw_border_to_bottom_left(Coords& fc) {
-         // index pointer points to field, m_overlay_basic should be valid         
+         // index pointer points to field, m_overlay_basic should be valid
          m_index_pointer+=m_w; // increase by one row
          if(fc.y == m_h-1) m_index_pointer=fc.x;
          if(!(fc.y & 1)) {
@@ -135,7 +135,7 @@ class Overlay_Manager {
       }
 
    private:
-      // this is always sorted by (y<<8)+x. a unique coordinate which is sortable 
+      // this is always sorted by (y<<8)+x. a unique coordinate which is sortable
       struct Registered_Overlays {
          int jobid;
          int picid;

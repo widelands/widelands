@@ -53,7 +53,7 @@ Editor_Event_Menu_Choose_Trigger::Editor_Event_Menu_Choose_Trigger(Editor_Intera
    const int spacing=5;
    int posx=offsx;
    int posy=offsy;
-   
+
    // Event List
    new UITextarea(this, spacing, offsy, "Registered Triggers: ", Align_Left);
    m_selected=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing-20, get_inner_h()-offsy-85);
@@ -84,44 +84,44 @@ Editor_Event_Menu_Choose_Trigger::Editor_Event_Menu_Choose_Trigger(Editor_Intera
    b->set_title("Cancel");
    b->clickedid.set(this, &Editor_Event_Menu_Choose_Trigger::clicked);
    posx+=80+spacing;
-  
+
    // Event options
    posx=(get_inner_w()/2)-40;
    b=new UIButton(this, posx, posy, 80, 20, 1, 4);
    b->set_title("Options");
    b->clickedid.set(this, &Editor_Event_Menu_Choose_Trigger::clicked);
-	
+
    // Left to right button
    posx=get_inner_w()/2-20;
    posy=offsy+50;
    m_btn_ltor=new UIButton(this, posx, posy, 40, 20, 1, 2);
    m_btn_ltor->set_title("->");
    m_btn_ltor->clickedid.set(this, &Editor_Event_Menu_Choose_Trigger::clicked);
-  
+
    // Right to left button
    posx=get_inner_w()/2-20;
    posy=offsy+70+spacing;
    m_btn_rtol=new UIButton(this, posx, posy, 40, 20, 1, 3);
    m_btn_rtol->set_title("<-");
    m_btn_rtol->clickedid.set(this, &Editor_Event_Menu_Choose_Trigger::clicked);
-   
+
    center_to_parent();
 
-   // Fill the list boxes, construct our data 
+   // Fill the list boxes, construct our data
    int i;
    Map* map=m_parent->get_map();
    for(i=0; i<map->get_number_of_triggers(); i++) {
       Trigger_Data* data=new Trigger_Data();
       data->trig=map->get_trigger(i);
       data->run_enabled=true;
-      if(m_event->trigger_exists(data->trig)) { 
+      if(m_event->trigger_exists(data->trig)) {
          data->run_enabled=m_event->reacts_when_trigger_is_set(data->trig);
          m_selected->add_entry(data->trig->get_name(), data);
       } else {
          m_available->add_entry(data->trig->get_name(), data);
       }
    }
-  
+
    update();
 }
 
@@ -134,7 +134,7 @@ Unregister from the registry pointer
 */
 Editor_Event_Menu_Choose_Trigger::~Editor_Event_Menu_Choose_Trigger()
 {
-   int i=0; 
+   int i=0;
    for(i=0; i<m_selected->get_nr_entries(); i++) {
       m_selected->select(i);
       delete static_cast<Trigger_Data*>(m_selected->get_selection());
@@ -153,7 +153,7 @@ void Editor_Event_Menu_Choose_Trigger::update(void) {
     m_available->sort();
    m_selected->sort();
 
-   if(m_available->get_selection()==0) 
+   if(m_available->get_selection()==0)
       m_btn_rtol->set_enabled(false);
    if(m_selected->get_selection()==0) {
       m_btn_ltor->set_enabled(false);
@@ -163,13 +163,13 @@ void Editor_Event_Menu_Choose_Trigger::update(void) {
       Trigger_Data* t=static_cast<Trigger_Data*>(m_selected->get_selection());
       if(t->run_enabled)
          m_btn_toggle_event->set_title("set");
-      else 
+      else
          m_btn_toggle_event->set_title("unset");
    }
 }
 
 /*
- * handle mouseclick, so that we can be run as 
+ * handle mouseclick, so that we can be run as
  * a modal
  */
 bool Editor_Event_Menu_Choose_Trigger::handle_mouseclick(uint btn, bool down, int mx, int my) {
@@ -177,7 +177,7 @@ bool Editor_Event_Menu_Choose_Trigger::handle_mouseclick(uint btn, bool down, in
       clicked(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 }
 
 /*
@@ -190,7 +190,7 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
             end_modal(0);
             return;
          }
-         
+
    case 1:
       {
          // OK Button
@@ -198,7 +198,7 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
          for(i=0; i<m_selected->get_nr_entries(); i++) {
             m_selected->select(i);
             Trigger_Data* t=static_cast<Trigger_Data*>(m_selected->get_selection());
-            if(!m_event->trigger_exists(t->trig)) 
+            if(!m_event->trigger_exists(t->trig))
                   m_event->register_trigger(t->trig, m_parent->get_map(), t->run_enabled);
             m_event->set_reacts_when_trigger_is_set(t->trig, t->run_enabled);
          }
@@ -212,7 +212,7 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
          return;
       }
       break;
-      
+
    case 2:
       {
          // Left to right button
@@ -220,9 +220,9 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
          m_selected->remove_entry(m_selected->get_selection_index());
          m_available->add_entry(t->trig->get_name(), t);
          update();
-      } 
+      }
       break;
-         
+
    case 3:
       {
          // Right to left button
@@ -232,7 +232,7 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
          update();
       }
       break;
-         
+
    case 4:
       {
          // Option Button
@@ -246,7 +246,7 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
          Trigger_Data* t=static_cast<Trigger_Data*>(m_selected->get_selection());
          t->run_enabled=!t->run_enabled;
          update();
-      } 
+      }
    }
 }
 

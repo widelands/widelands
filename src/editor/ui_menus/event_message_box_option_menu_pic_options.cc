@@ -28,10 +28,10 @@
 #include "ui_modal_messagebox.h"
 #include "system.h"
 
-Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Picture_Options(Editor_Interactive* parent, 
+Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Picture_Options(Editor_Interactive* parent,
       bool* clrkey, uint* picid, int* position) :
    UIWindow(parent, 0, 0, 460, 350, "Event Option Menu") {
-   
+
    m_parent=parent;
    m_clrkey_var=clrkey;
    m_picid_var=picid;
@@ -47,7 +47,7 @@ Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Pic
    const int spacing=5;
    int posx=offsx;
    int posy=offsy;
-  
+
 
    // Only run once CB
    new UITextarea(this, spacing, posy, 150, 20, "Uses Clrkey: ", Align_CenterLeft);
@@ -77,7 +77,7 @@ Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Pic
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 300, 20, "Picture currently assigned: ", Align_CenterLeft);
    m_pic_assigned=new UITextarea(this, spacing+300, posy, 50, 20, "No", Align_CenterLeft);
-   if(static_cast<int>(*picid)!=-1) 
+   if(static_cast<int>(*picid)!=-1)
       m_pic_assigned->set_text("Yes");
 
    // Picture positions
@@ -125,8 +125,8 @@ Event_Message_Box_Option_Menu_Picture_Options::~Event_Message_Box_Option_Menu_Pi
 /*
  * Handle mouseclick
  *
- * we're a modal, therefore we can not delete ourself 
- * on close (the caller must do this) instead 
+ * we're a modal, therefore we can not delete ourself
+ * on close (the caller must do this) instead
  * we simulate a cancel click
  */
 bool Event_Message_Box_Option_Menu_Picture_Options::handle_mouseclick(uint btn, bool down, int mx, int my) {
@@ -134,9 +134,9 @@ bool Event_Message_Box_Option_Menu_Picture_Options::handle_mouseclick(uint btn, 
       clicked(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 }
-  
+
 /*
  * a button has been clicked
  */
@@ -145,14 +145,14 @@ void Event_Message_Box_Option_Menu_Picture_Options::clicked(int i) {
       case 0:
          {
             // Cancel has been clicked
-            if(static_cast<int>(*m_picid_var)!=m_picid) 
+            if(static_cast<int>(*m_picid_var)!=m_picid)
                if(static_cast<int>(m_picid)!=-1)
                   g_gr->flush_picture(m_picid);
                end_modal(0);
             return;
          }
          break;
-      
+
       case 1:
          {
             // ok button

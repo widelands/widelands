@@ -72,7 +72,7 @@ void Map_View::warp_mouse_to_field(Coords c)
       // want to jump there
       return;
    }
-   
+
    if(x<=0) { warp_mouse_to_field(Coords(c.x+m_intbase->get_map()->get_width(),c.y)); return; }
    if(y<=0) { warp_mouse_to_field(Coords(c.x, c.y+m_intbase->get_map()->get_height())); return; }
 

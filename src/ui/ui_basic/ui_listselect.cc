@@ -96,7 +96,7 @@ void UIListselect::add_entry(const char *name, void* value, bool select)
 	m_scrollbar->set_steps(m_entries.size() * g_fh->get_fontheight(UI_FONT_SMALL) - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
-   if(select) 
+   if(select)
       m_selection=m_entries.size()-1;
 }
 
@@ -106,17 +106,17 @@ void UIListselect::add_entry(const char *name, void* value, bool select)
  */
 void UIListselect::sort(void) {
    Entry *ei, *ej;
-   for(uint i=0; i<m_entries.size(); i++) 
+   for(uint i=0; i<m_entries.size(); i++)
       for(uint j=i; j<m_entries.size(); j++) {
          ei=m_entries[i];
          ej=m_entries[j];
          if(strcmp(ei->name, ej->name) > 0)  {
-            if(m_selection==((int)i)) 
+            if(m_selection==((int)i))
                m_selection=j;
-            else if(m_selection==((int)j)) 
+            else if(m_selection==((int)j))
                m_selection=i;
             m_entries[i]=ej;
-            m_entries[j]=ei;  
+            m_entries[j]=ei;
          }
       }
 }
@@ -179,7 +179,7 @@ void UIListselect::draw(RenderTarget* dst)
 	int y = 1 + idx*lineheight - m_scrollpos;
 
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
-   
+
 	while(idx < (int)m_entries.size())
 		{
 		if (y >= get_h())
@@ -231,9 +231,9 @@ bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)
 void UIListselect::remove_entry(int i) {
    if(i<0 || ((uint)i)>=m_entries.size()) return;
 
-   free(m_entries[i]); 
-   m_entries.erase(m_entries.begin() + i); 
-   if(m_selection==i) 
+   free(m_entries[i]);
+   m_entries.erase(m_entries.begin() + i);
+   if(m_selection==i)
       m_selection=-1;
 }
 

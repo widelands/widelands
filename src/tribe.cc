@@ -328,7 +328,7 @@ bool Tribe_Descr::exists_tribe(std::string name) {
 }
 
 /*
- * Returns all tribes that exists 
+ * Returns all tribes that exists
  */
 void Tribe_Descr::get_all_tribes(std::vector<std::string>* retval) {
    retval->resize(0);

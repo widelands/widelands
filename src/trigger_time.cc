@@ -24,7 +24,7 @@
 
 static const int TRIGGER_VERSION = 1;
 
-/* 
+/*
  * Init and cleanup
  */
 Trigger_Time::Trigger_Time(void) {
@@ -62,16 +62,16 @@ void Trigger_Time::Write(FileWrite* fw) {
    // Name
    fw->Data(get_name(), strlen(get_name()));
    fw->Unsigned8('\0');
-   
+
    // triggers only once?
    fw->Unsigned8(is_one_time_trigger());
 
    // Wait time
    fw->Unsigned32(m_wait_time);
-  
+
    // done
 }
-      
+
 /*
  * check if trigger conditions are done
  */
@@ -89,7 +89,7 @@ void Trigger_Time::reset_trigger(Game* game) {
    assert(!is_one_time_trigger());
 
    // save new start time
-   // NOTE: if it took a while for an event to note us, 
+   // NOTE: if it took a while for an event to note us,
    // this time the trigger wasn't counting
    m_last_start_time=game->get_gametime();
 

@@ -123,7 +123,7 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
 }
 
 /*
- * Cleanup 
+ * Cleanup
  */
 Editor_Tool_Place_Immovable_Options_Menu::~Editor_Tool_Place_Immovable_Options_Menu(void) {
    set_can_focus(false);
@@ -140,7 +140,7 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int n, bool t) {
    if(t==false && (!m_multiselect || m_pit->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
 
    if(!m_multiselect) {
-      int i=0; 
+      int i=0;
       while(m_pit->get_nr_enabled()) {
          m_pit->enable(i++,false);
       }

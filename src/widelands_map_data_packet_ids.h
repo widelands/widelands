@@ -22,7 +22,7 @@
 
 /*
  * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
+ * so that the packet creation fabric can create the right packet
  * reader, all IDs are ushorts
  *
  * Scenario packets have the highest bit set
@@ -33,7 +33,7 @@
 #define PACKET_PLAYER_POSITION  4
 #define PACKET_BOB              5
 #define PACKET_RESOURCES        6
-#define PACKET_PLAYER_NAM_TRIB  7        // Scenario packet 
+#define PACKET_PLAYER_NAM_TRIB  7        // Scenario packet
 #define PACKET_TRIGGER          8        // Scenraio packet, non obligatory
 #define PACKET_EVENT            9        // Scenraio packet, non obligatory
 

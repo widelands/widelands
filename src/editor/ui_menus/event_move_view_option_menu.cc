@@ -47,13 +47,13 @@ Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* par
    int spacing=5;
    int posx=offsx;
    int posy=offsy;
-   
-   // Name editbox 
+
+   // Name editbox
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
    m_name->set_text(event->get_name());
    posy+=20+spacing;
-  
+
    // Only run once CB
    new UITextarea(this, spacing, posy, 150, 20, "Only run once: ", Align_CenterLeft);
    m_is_one_time_event=new UICheckbox(this, spacing+150, posy);
@@ -84,7 +84,7 @@ Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* par
    b->clickedid.set(this, &Event_Move_View_Option_Menu::clicked);
    new UITextarea(this, spacing+20, posy+20, 20, 20, "X: ", Align_CenterLeft);
    m_x_ta=new UITextarea(this, spacing+40, posy+20, 20, 20, "X: ", Align_CenterLeft);
-  
+
    // Y
    int oldspacing=spacing;
    spacing=get_inner_w()/2+spacing;
@@ -109,7 +109,7 @@ Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* par
    new UITextarea(this, spacing, posy+20, 20, 20, "Y: ", Align_CenterLeft);
    m_y_ta=new UITextarea(this, spacing+20, posy+20, 20, 20, "Y: ", Align_CenterLeft);
    spacing=oldspacing;
- 
+
    // Ok/Cancel Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-20-spacing;
@@ -134,8 +134,8 @@ Event_Move_View_Option_Menu::~Event_Move_View_Option_Menu(void) {
 /*
  * Handle mouseclick
  *
- * we're a modal, therefore we can not delete ourself 
- * on close (the caller must do this) instead 
+ * we're a modal, therefore we can not delete ourself
+ * on close (the caller must do this) instead
  * we simulate a cancel click
  */
 bool Event_Move_View_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, int my) {
@@ -143,10 +143,10 @@ bool Event_Move_View_Option_Menu::handle_mouseclick(uint btn, bool down, int mx,
       clicked(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 
 }
-  
+
 /*
  * a button has been clicked
  */
@@ -171,7 +171,7 @@ void Event_Move_View_Option_Menu::clicked(int i) {
             return;
          }
          break;
-   
+
       case 3: m_x+=100; break;
       case 4: m_x-=100; break;
       case 5: m_x+=10; break;

@@ -52,7 +52,7 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    m_ls_selected=0;
    m_picid=m_event->get_pic_id();
    m_position=m_event->get_pic_position();
-   if(static_cast<int>(m_picid)!=-1) 
+   if(static_cast<int>(m_picid)!=-1)
       m_clrkey=g_gr->has_clrkey(m_picid);
    else
       m_clrkey=false;
@@ -62,21 +62,21 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    m_buttons[2].name="Button 2";
    m_buttons[3].name="Button 3";
    m_buttons[0].trigger=m_buttons[1].trigger=m_buttons[2].trigger=m_buttons[3].trigger=-1;
-  
-  
-   // Name editbox 
+
+
+   // Name editbox
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
    m_name->set_text(event->get_name());
-  
+
    // Only run once CB
    new UITextarea(this, get_inner_w()/2+spacing, posy, 150, 20, "Only run once: ", Align_CenterLeft);
    m_is_one_time_event=new UICheckbox(this, get_inner_w()-STATEBOX_WIDTH-spacing, posy);
    m_is_one_time_event->set_state(m_event->is_one_time_event());
 
    posy+=20+spacing;
-   
-   // Caption 
+
+   // Caption
    new UITextarea(this, spacing, posy, 60, 20, "Caption:", Align_CenterLeft);
    m_caption=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 1);
    m_caption->set_text(m_event->get_caption());
@@ -85,32 +85,32 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    new UITextarea(this, get_inner_w()/2+spacing, posy, 150, 20, "Is Modal: ", Align_CenterLeft);
    m_is_modal=new UICheckbox(this, get_inner_w()-STATEBOX_WIDTH-spacing, posy);
    m_is_modal->set_state(m_event->get_is_modal());
-   
+
    posy+=20+spacing;
-  
+
    // Window Title
    new UITextarea(this, spacing, posy, 50, 20, "Window Title:", Align_CenterLeft);
    m_window_title=new UIEdit_Box(this, spacing+100, posy, get_inner_w()-100-2*spacing, 20, 0, 2);
    m_window_title->set_text(m_event->get_window_title());
-   
+
    // Text
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 50, 20, "Text:", Align_CenterLeft);
    posy+=20+spacing;
    m_text=new UIMultiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, event->get_text());
-  
+
    posy+=80+spacing;
 
    // Nur Buttons
    new UITextarea(this, spacing, posy, 130, 20, "Number of Buttons: ", Align_CenterLeft);
-   UIButton* b=new UIButton(this, spacing+140, posy, 20, 20, 0, 2); 
+   UIButton* b=new UIButton(this, spacing+140, posy, 20, 20, 0, 2);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
    m_nr_buttons_ta=new UITextarea(this, spacing+160+spacing, posy,15,20,"1", Align_CenterLeft);
    b=new UIButton(this, spacing+175+spacing, posy, 20, 20, 0, 3);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
-  
+
    // Button name
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 100, 20, "Button Name: ", Align_CenterLeft);
@@ -118,23 +118,23 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    m_button_name->changedid.set(this, &Event_Message_Box_Option_Menu::edit_box_edited);
 
    // Listbox for buttons
-   m_buttons_ls=new UIListselect(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, 80, Align_Left); 
+   m_buttons_ls=new UIListselect(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, 80, Align_Left);
    m_buttons_ls->selected.set(this, &Event_Message_Box_Option_Menu::ls_selected);
 
    // Select trigger
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 100, 20, "Select Trigger: ", Align_CenterLeft);
-   b=new UIButton(this, spacing+110, posy, 20, 20, 0, 4); 
+   b=new UIButton(this, spacing+110, posy, 20, 20, 0, 4);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
    b=new UIButton(this, spacing+130+spacing, posy, 20, 20, 0, 5);
    b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
-  
+
    // Current Trigger
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 100, 20, "Current: ", Align_CenterLeft);
-   m_current_trigger_ta=new UITextarea(this, spacing+15, posy+15+spacing, get_inner_w()/2, 20, "Keine Trigger gewaehlt!", Align_CenterLeft); 
+   m_current_trigger_ta=new UITextarea(this, spacing+15, posy+15+spacing, get_inner_w()/2, 20, "Keine Trigger gewaehlt!", Align_CenterLeft);
 
 
    // Uses picture checkbox
@@ -150,7 +150,7 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    b->set_title("Picture options");
    b->set_enabled(m_uses_picture->get_state());
    m_btn_picture_options=b;
-   
+
    // Ok/Cancel Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-30;
@@ -165,17 +165,17 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    int i=0;
    for(i=0; i<m_parent->get_map()->get_number_of_triggers(); i++) {
       Trigger* trig=m_parent->get_map()->get_trigger(i);
-      if(trig->get_id()==TRIGGER_NULL) 
+      if(trig->get_id()==TRIGGER_NULL)
          m_null_triggers.push_back(i);
    }
 
    for(int i=0; i<m_event->get_nr_buttons(); i++) {
       m_buttons[i].name=m_event->get_button_name(i);
-      for(int j=0; j<((int)m_null_triggers.size()); j++) 
-         if(m_parent->get_map()->get_trigger_index(m_event->get_button_trigger(i))==m_null_triggers[j]) 
+      for(int j=0; j<((int)m_null_triggers.size()); j++)
+         if(m_parent->get_map()->get_trigger_index(m_event->get_button_trigger(i))==m_null_triggers[j])
             m_buttons[i].trigger=j;
    }
-  
+
    center_to_parent();
    update();
 }
@@ -189,8 +189,8 @@ Event_Message_Box_Option_Menu::~Event_Message_Box_Option_Menu(void) {
 /*
  * Handle mouseclick
  *
- * we're a modal, therefore we can not delete ourself 
- * on close (the caller must do this) instead 
+ * we're a modal, therefore we can not delete ourself
+ * on close (the caller must do this) instead
  * we simulate a cancel click
  */
 bool Event_Message_Box_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, int my) {
@@ -198,9 +198,9 @@ bool Event_Message_Box_Option_Menu::handle_mouseclick(uint btn, bool down, int m
       clicked(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 }
-  
+
 /*
  * a button has been clicked
  */
@@ -249,7 +249,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
                g_gr->use_clrkey(m_event->get_pic_id(), m_clrkey);
             } else {
                int picid=m_event->get_pic_id();
-               if(static_cast<int>(picid)!=-1) { 
+               if(static_cast<int>(picid)!=-1) {
                   log("Flushing picture unten: %i\n", m_event->get_pic_id());
                   g_gr->flush_picture(picid);
                }
@@ -302,7 +302,7 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
          {
             // Picture options
             Event_Message_Box_Option_Menu_Picture_Options* epo=new Event_Message_Box_Option_Menu_Picture_Options(m_parent,&m_clrkey, &m_picid, &m_position);
-            if(epo->run()) 
+            if(epo->run())
                update();
             delete epo;
          }
@@ -315,30 +315,30 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
  */
 void Event_Message_Box_Option_Menu::update(void) {
    if(m_ls_selected>=m_nr_buttons) m_buttons_ls->select(0);
-  
+
    if(!m_null_triggers.size()) {
       // No triggers, no other buttons
       m_nr_buttons=1;
-   } 
-   
+   }
+
    m_buttons_ls->clear();
    int i;
-   for(i=0; i<m_nr_buttons; i++) 
+   for(i=0; i<m_nr_buttons; i++)
       m_buttons_ls->add_entry(m_buttons[i].name.c_str(), 0);
 
    std::string text;
    text.append(1,static_cast<uchar>(m_nr_buttons+0x30));
    m_nr_buttons_ta->set_text(text.c_str());
 
-   
+
    m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());
-   
+
    if(m_nr_buttons && m_null_triggers.size()) {
-      if(m_buttons[m_ls_selected].trigger==-1) 
+      if(m_buttons[m_ls_selected].trigger==-1)
          m_current_trigger_ta->set_text("none");
       else
          m_current_trigger_ta->set_text(m_parent->get_map()->get_trigger(m_null_triggers[m_buttons[m_ls_selected].trigger])->get_name());
-   } else { 
+   } else {
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;
    }

@@ -76,11 +76,11 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &m_mapfiles);
 	g_fs->FindFiles("maps", "*"S2MF_SUFFIX, &m_mapfiles);
 
-   
+
    Map* map=new Map();
 	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 		const char *name = pname->c_str();
-       
+
       Map_Loader* m_ml = map->get_correct_loader(name);
       try {
          m_ml->preload_map(true);
@@ -89,7 +89,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
          // we simply skip illegal entries
       }
 	   delete m_ml;
-			
+
    }
    list->sort();
    delete map;
@@ -118,7 +118,7 @@ Fullscreen_Menu_MapSelect::~Fullscreen_Menu_MapSelect()
    }
 }
 
-/* 
+/*
  * Gets called when the Checkbox changes
  */
 void Fullscreen_Menu_MapSelect::changed(bool t) {
@@ -136,9 +136,9 @@ void Fullscreen_Menu_MapSelect::ok()
 		m_map = 0;
 	}
 
-   if(m_is_scenario) 
+   if(m_is_scenario)
       end_modal(2);
-   else 
+   else
       end_modal(1);
 }
 

@@ -53,7 +53,7 @@ void Widelands_Map_Player_Position_Data_Packet::Read(FileRead* fr, Editor_Game_B
          c.x=fr->Signed16();
          c.y=fr->Signed16();
          map->set_starting_pos(i,c);
-      } 
+      }
       return;
    }
    assert(0); // never here
@@ -69,7 +69,7 @@ void Widelands_Map_Player_Position_Data_Packet::Write(FileWrite* fw, Editor_Game
 
    // Now packet version
    fw->Unsigned16(CURRENT_PACKET_VERSION);
-   
+
    // Now, all positions in order, first x, then y
    Map* map=egbase->get_map();
    int i=0;

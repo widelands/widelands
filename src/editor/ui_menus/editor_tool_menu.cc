@@ -62,7 +62,7 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowReg
    int posx=offsx;
    int posy=offsy;
 
-  
+
    int num_tools=7;
    m_radioselect=new UIRadiogroup();
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_change_height.png", true));
@@ -150,18 +150,18 @@ void Editor_Tool_Menu::changed_to(void) {
 
       case 4:
          m_parent->select_tool(5,0);
-         new Editor_Tool_Set_Starting_Pos_Options_Menu(m_parent, 
+         new Editor_Tool_Set_Starting_Pos_Options_Menu(m_parent,
                static_cast<Editor_Set_Starting_Pos_Tool*>(m_tools->tools[5]),
                m_options);
          break;
-         
+
       case 5:
          m_parent->select_tool(6,0);
-         new Editor_Tool_Place_Bob_Options_Menu(m_parent, 
+         new Editor_Tool_Place_Bob_Options_Menu(m_parent,
                static_cast<Editor_Place_Bob_Tool*>(m_tools->tools[6]),
                m_options);
          break;
- 
+
       case 6:
          m_parent->select_tool(7, 0);
          new Editor_Tool_Change_Resources_Options_Menu(m_parent,
@@ -169,7 +169,7 @@ void Editor_Tool_Menu::changed_to(void) {
                m_options);
          break;
 
- 
+
       default: break;
    }
 }

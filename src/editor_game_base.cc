@@ -461,7 +461,7 @@ Building* Editor_Game_Base::warp_constructionsite(Coords c, char owner, int idx,
 	assert(player);
 
 	descr = player->get_tribe()->get_building_descr(idx);
-   if(old_id!=-1) 
+   if(old_id!=-1)
       old_descr= player->get_tribe()->get_building_descr(old_id);
 	assert(descr);
 

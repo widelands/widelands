@@ -65,12 +65,12 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    dp->Write(&fw, m_egbase);
    delete dp;
 
-   // now player names and tribes 
+   // now player names and tribes
    dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
    dp->Write(&fw, m_egbase);
    delete dp;
 // PRELOAD DATA END
-   
+
    // now heights
    dp=new Widelands_Map_Heights_Data_Packet();
    dp->Write(&fw, m_egbase);
@@ -81,7 +81,7 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    dp->Write(&fw, m_egbase);
    delete dp;
 
-   // now immovables 
+   // now immovables
    dp=new Widelands_Map_Immovable_Data_Packet();
    dp->Write(&fw, m_egbase);
    delete dp;
@@ -90,12 +90,12 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    dp=new Widelands_Map_Player_Position_Data_Packet();
    dp->Write(&fw, m_egbase);
    delete dp;
-  
+
    // now bobs
    dp=new Widelands_Map_Bob_Data_Packet();
    dp->Write(&fw, m_egbase);
    delete dp;
-   
+
    // now resources
    dp=new Widelands_Map_Resources_Data_Packet();
    dp->Write(&fw, m_egbase);
@@ -111,7 +111,7 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
       dp=new Widelands_Map_Event_Data_Packet();
       dp->Write(&fw, m_egbase);
       delete dp;
-   } 
-   fw.Write(g_fs,m_filename); 
+   }
+   fw.Write(g_fs,m_filename);
 }
 

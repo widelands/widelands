@@ -43,7 +43,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, Map_Loader** ml)
 	// Title
    UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Launch Game", Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
- 
+
 	// UIButtons
 	UIButton* b;
 
@@ -93,9 +93,9 @@ void Fullscreen_Menu_LaunchGame::clicked(int id) {
       end_modal(0);
    } else {
       // Ok
-      if(m_is_scenario) 
+      if(m_is_scenario)
          end_modal(2);
-      else 
+      else
          end_modal(1);
    }
 }
@@ -142,7 +142,7 @@ void Fullscreen_Menu_LaunchGame::select_map()
    Fullscreen_Menu_MapSelect* msm=new Fullscreen_Menu_MapSelect(m_game, m_ml);
    if(msm->run()==2)
       m_is_scenario=true;
-   else 
+   else
       m_is_scenario=false;
 
    delete msm;

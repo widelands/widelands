@@ -154,7 +154,7 @@ public:
 	inline std::string get_continue_icon() const { return get_descr()->get_continue_icon(); }
 	inline bool get_stop() const { return m_stop; }
 	virtual void set_stop(bool stop);
-   
+
    inline const std::vector<char*>* get_enhances_to() const { return get_descr()->get_enhances_to(); }
 
 protected:

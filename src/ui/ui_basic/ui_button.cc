@@ -91,9 +91,9 @@ void UIButton::set_title(const char* title)
 {
    remove_title();
 
-   if (title) 
+   if (title)
       m_title = title;
-   
+
 
    update(0, 0, get_w(), get_h());
 }

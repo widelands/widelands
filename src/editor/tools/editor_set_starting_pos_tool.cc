@@ -34,23 +34,23 @@ int Editor_Tool_Set_Starting_Pos_Callback(FCoords& c, void* data, int) {
    // data is here an integer indentifying the current player
    Map* map = static_cast<Map*>(data);
 
-   // Area around already placed players 
-   int i=0; 
+   // Area around already placed players
+   int i=0;
    for(i=1; i<=map->get_nrplayers(); i++) {
       if(i==m_current_player) continue;
       Coords sp=map->get_starting_pos(i);
       if(sp.x==-1 && sp.y==-1) continue;
       MapRegion mr(map, sp, MIN_PLACE_AROUND_PLAYERS);
       FCoords fc;
-      while(mr.next(&fc)) 
+      while(mr.next(&fc))
          if(fc.x==c.x && fc.y==c.y) return 0;
    }
-  
+
    int caps=c.field->get_caps();
-   if((caps&BUILDCAPS_SIZEMASK)==BUILDCAPS_BIG) 
+   if((caps&BUILDCAPS_SIZEMASK)==BUILDCAPS_BIG)
       return caps;
 
-    
+
    return 0;
 }
 /*
@@ -86,20 +86,20 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
       int w, h;
       int picid=g_gr->get_picture(PicMod_Game, picsname.c_str(), true);
       g_gr->get_picture_size(picid, &w, &h);
-     
+
       // check if field is valid
       if(Editor_Tool_Set_Starting_Pos_Callback(fc, map,0)) {
-         // Remove old overlay if any      
+         // Remove old overlay if any
          Coords c=map->get_starting_pos(m_current_player);
-         if(c.x!=-1 && c.y!=-1) 
-            map->get_overlay_manager()->remove_overlay(c,picid); 
+         if(c.x!=-1 && c.y!=-1)
+            map->get_overlay_manager()->remove_overlay(c,picid);
 
          // Add new overlay
-         map->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y)); 
+         map->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
 
          // And set new player pos
          map->set_starting_pos(m_current_player, fc);
-      
+
          // Now recalc neeed areas
          map->recalc_for_field_area(c,MIN_PLACE_AROUND_PLAYERS);
          map->recalc_for_field_area(fc,MIN_PLACE_AROUND_PLAYERS);
@@ -113,11 +113,11 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
  */
 void Editor_Set_Starting_Pos_Tool::set_current_player(int i) {
       m_current_player=i;
-         
+
       std::string picsname="pics/fsel_editor_set_player_";
       picsname+=static_cast<char>((m_current_player/10) + 0x30);
       picsname+=static_cast<char>((m_current_player%10) + 0x30);
       picsname+="_pos.png";
       m_current_fieldsel_pic=picsname;
-} 
+}
 

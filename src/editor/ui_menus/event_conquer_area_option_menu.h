@@ -30,7 +30,7 @@ class UICheckbox;
 class UITextarea;
 
 /*
- * This is a modal box - The user must end this first 
+ * This is a modal box - The user must end this first
  * before it can return
  */
 class Event_Conquer_Area_Option_Menu : public UIWindow {

@@ -28,7 +28,7 @@ class Trigger_Null;
 class UIEdit_Box;
 
 /*
- * This is a modal box - The user must end this first 
+ * This is a modal box - The user must end this first
  * before it can return
  */
 class Trigger_Null_Option_Menu : public UIWindow {

@@ -45,7 +45,7 @@ class UIUniqueWindow : public UIWindow {
       virtual ~UIUniqueWindow();
 
       inline bool get_usedefaultpos() { return m_usedefaultpos; }
-   
+
    private:
       UIUniqueWindowRegistry*	m_registry;
       bool							m_usedefaultpos;

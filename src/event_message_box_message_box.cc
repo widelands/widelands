@@ -33,18 +33,18 @@
  */
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* egbase, Event_Message_Box* event) :
   UIWindow(egbase->get_iabase(), 0, 0, 600, 400, event->get_window_title()) {
-  
+
      m_event=event;
-     
+
      UIMultiline_Textarea* m_text=0;
      UITextarea* m_caption=0;
-       
+
      int spacing=5;
      int offsy=5;
      int offsx=spacing;
      int posx=offsx;
      int posy=offsy;
-     
+
      if(static_cast<int>(m_event->get_pic_id())==-1) {
         // No picture, so we can optimaly assign all things its place
         set_inner_size(400,300);
@@ -62,7 +62,7 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
                  set_inner_size(picw*2+2*spacing+50, pich+110);
                  m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
                  posy+=50;
-                 b=new UIButton(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, pich, 0, 0, 1); 
+                 b=new UIButton(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, pich, 0, 0, 1);
                  b->set_enabled(false);
                  b->set_pic(event->get_pic_id());
                  m_text=new UIMultiline_Textarea(this, spacing, posy, get_inner_w()/2-2*spacing, pich, "", Align_Left);
@@ -74,7 +74,7 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
                  set_inner_size(picw*2+2*spacing+50, pich+110);
                  m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
                  posy+=50;
-                 b=new UIButton(this, spacing, posy, get_inner_w()/2-2*spacing, pich, 0, 0, 1); 
+                 b=new UIButton(this, spacing, posy, get_inner_w()/2-2*spacing, pich, 0, 0, 1);
                  b->set_enabled(false);
                  b->set_pic(event->get_pic_id());
                  m_text=new UIMultiline_Textarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, pich, "", Align_Left);
@@ -86,7 +86,7 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
                  set_inner_size(picw+2*15, pich+300);
                  m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
                  posy+=50;
-                 b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1); 
+                 b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1);
                  b->set_enabled(false);
                  b->set_pic(event->get_pic_id());
                  posy+=pich+spacing;
@@ -97,7 +97,7 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
             case Event_Message_Box::Center_over:
               {
                  set_inner_size(picw+2*15, pich+300);
-                 b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1); 
+                 b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1);
                  b->set_enabled(false);
                  b->set_pic(event->get_pic_id());
                  posy+=pich+spacing;
@@ -132,7 +132,7 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
         m_trigger[i]=m_event->get_button_trigger(i);
      }
 
-     
+
      center_to_parent();
 }
 
@@ -148,7 +148,7 @@ bool Message_Box_Event_Message_Box::handle_mouseclick(uint btn, bool down, int m
       clicked(-1);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 }
 
 /*

@@ -513,24 +513,24 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 	// Render frontier
    uchar player;
    if((player=mri->egbase->get_map()->get_overlay_manager()->is_frontier_field(fc))) {
-      Player *ownerplayer = mri->egbase->get_player(player); 
+      Player *ownerplayer = mri->egbase->get_player(player);
       uint anim = ownerplayer->get_tribe()->get_frontier_anim();
       const RGBColor* playercolors = ownerplayer->get_playercolor();
 
       dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
 
       // check to the right
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc)) 
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc))
          dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
-      // check to the bottom left 
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc)) 
+      // check to the bottom left
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc))
          dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
       // check to the bottom right
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl)) 
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl))
          dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
    }
-   
-	// Draw normal buildhelp 
+
+	// Draw normal buildhelp
    Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_FIELD];
    int num_overlays=mri->egbase->get_map()->get_overlay_manager()->get_overlays(fc, overlay_info);
 
@@ -1233,7 +1233,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 
 	m_pictures[id].mod |= mod;
    use_clrkey(id,buse_clrkey);
-	
+
    return id;
 }
 
@@ -1583,9 +1583,9 @@ uint GraphicImpl::find_free_picture()
 	return id;
 }
 
-/* 
+/*
  *  GraphicImpl::flush_picture(int)
- */ 
+ */
 void GraphicImpl::flush_picture(uint picindex) {
    Picture* pic = &m_pictures[picindex];
 
@@ -1604,7 +1604,7 @@ void GraphicImpl::flush_picture(uint picindex) {
 #define PICTURE_VERSION 1
 void GraphicImpl::save_pic_to_file(uint pic_index, FileWrite* fw) {
    Picture* pic = &m_pictures[pic_index];
-   
+
    // First the version
    fw->Unsigned16(PICTURE_VERSION);
 
@@ -1645,7 +1645,7 @@ uint GraphicImpl::load_pic_from_file(FileRead* fr, int mod) {
             r=fr->Unsigned8();
             g=fr->Unsigned8();
             b=fr->Unsigned8();
-            *clr= (r<<16) + (g << 8) + b; 
+            *clr= (r<<16) + (g << 8) + b;
          }
       }
 
@@ -1659,7 +1659,7 @@ uint GraphicImpl::load_pic_from_file(FileRead* fr, int mod) {
       pic->bitmap.h = g_h;
       pic->bitmap.pitch = g_w;
       pic->bitmap.hasclrkey = has_clrkey;
-      pic->bitmap.clrkey = *pixels; // Upper left pixel 
+      pic->bitmap.clrkey = *pixels; // Upper left pixel
 
       return id;
    }

@@ -24,7 +24,7 @@
 
 static const int TRIGGER_VERSION = 1;
 
-/* 
+/*
  * Init and cleanup
  */
 Trigger_Null::Trigger_Null(void) {
@@ -60,10 +60,10 @@ void Trigger_Null::Write(FileWrite* fw) {
    // Name
    fw->Data(get_name(), strlen(get_name()));
    fw->Unsigned8('\0');
-   
+
    // done
 }
-      
+
 /*
  * check if trigger conditions are done
  */

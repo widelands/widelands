@@ -27,7 +27,7 @@
 
 static const int EVENT_VERSION = 1;
 
-/* 
+/*
  * Init and cleanup
  */
 Event_Unhide_Area::Event_Unhide_Area(void) {
@@ -44,7 +44,7 @@ Event_Unhide_Area::~Event_Unhide_Area(void) {
 /*
  * cleanup()
  */
-void Event_Unhide_Area::cleanup(Editor_Game_Base* g) {  
+void Event_Unhide_Area::cleanup(Editor_Game_Base* g) {
    // Nothing todo
    Event::cleanup(g);
 }
@@ -98,7 +98,7 @@ void Event_Unhide_Area::Write(FileWrite* fw, Editor_Game_Base *egbase) {
    // Name
    fw->Data(get_name(), strlen(get_name()));
    fw->Unsigned8('\0');
-   
+
    // triggers only once?
    fw->Unsigned8(is_one_time_event());
 
@@ -116,9 +116,9 @@ void Event_Unhide_Area::Write(FileWrite* fw, Editor_Game_Base *egbase) {
    write_triggers(fw, egbase);
    // done
 }
-      
+
 /*
- * run the event 
+ * run the event
  */
 void Event_Unhide_Area::run(Game* game) {
    assert(m_pt.x!=-1 && m_pt.y!=-1);
@@ -126,8 +126,8 @@ void Event_Unhide_Area::run(Game* game) {
 
    Player* player=game->get_player(m_player);
    player->set_area_seen(Coords(m_pt.x,m_pt.y),get_area(), true);
-   
-   // If this is a one timer, release our triggers 
+
+   // If this is a one timer, release our triggers
    // and forget about us
    reinitialize(game);
 }

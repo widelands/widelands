@@ -30,7 +30,7 @@ class UITextarea;
 class UIEdit_Box;
 
 /*
- * This is a modal box - The user must end this first 
+ * This is a modal box - The user must end this first
  * before it can return
  */
 class Trigger_Time_Option_Menu : public UIWindow {
@@ -42,7 +42,7 @@ class Trigger_Time_Option_Menu : public UIWindow {
 
    private:
       void clicked(int);
-      void cb_changed(bool); 
+      void cb_changed(bool);
       void update(void);
 
       bool m_is_one_time_trigger;

@@ -40,7 +40,7 @@ public:
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
-      
+
    inline void set_font(std::string name, int size, RGBColor fg) { m_fontname=name; m_fontsize=size; m_fcolor=fg; g_fh->load_font(name, size, fg, RGBColor(0,0,0)); set_text(m_text.c_str()); }
 
 private:

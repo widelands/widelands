@@ -57,7 +57,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    int offsy=30;
    int posx=offsx;
    int posy=offsy;
-   
+
    // listselect
    m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-40);
    m_ls->selected.set(this, &Main_Menu_Load_Map::selected);
@@ -69,7 +69,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    Map* map=new Map();
 	for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
 		const char *name = pname->c_str();
-       
+
       Map_Loader* m_ml = map->get_correct_loader(name);
       try {
          m_ml->preload_map(true);
@@ -78,7 +78,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
          // we simply skip illegal entries
       }
 	   delete m_ml;
-			
+
    }
    m_ls->sort();
    delete map;
@@ -110,15 +110,15 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    new UITextarea(this, posx, posy, 70, 20, "Players: ", Align_CenterLeft);
    m_nrplayers=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
-   
+
 
    // Description
    new UITextarea(this, posx, posy, 70, 20, "Descr: ", Align_CenterLeft);
    m_descr=new UIMultiline_Textarea(this, posx+70, posy, get_inner_w()-posx-spacing-70, get_inner_h()-posy-spacing-40, "---", Align_CenterLeft);
- 
+
    posx=5;
    posy=get_inner_h()-30;
-   
+
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
    but->set_title("OK");
@@ -145,7 +145,7 @@ Main_Menu_Load_Map::~Main_Menu_Load_Map()
 
 /*
 ===========
-called when the ok button has been clicked 
+called when the ok button has been clicked
 ===========
 */
 void Main_Menu_Load_Map::clicked(int id) {
@@ -205,20 +205,20 @@ void Main_Menu_Load_Map::clicked(int id) {
          }
 
          /* Resources. we do not calculate default resources, therefore we do
-          * not expect to meet them here. */ 
+          * not expect to meet them here. */
          uint x,y;
          for(y=0; y<m_map->get_height(); y++) {
             for(x=0; x<m_map->get_width(); x++) {
-               Field *f=m_map->get_field(Coords(x,y));  
+               Field *f=m_map->get_field(Coords(x,y));
                int res=f->get_resources();
                int amount=f->get_resources_amount();
                std::string immname="";
-               if(amount) 
+               if(amount)
                   immname = m_parent->get_editor()->get_map()->get_world()->get_resource(res)->get_editor_pic(amount);
                if(immname!="") {
-                  int picid=g_gr->get_picture(PicMod_Game, immname.c_str(), true); 
+                  int picid=g_gr->get_picture(PicMod_Game, immname.c_str(), true);
                   m_parent->get_map()->get_overlay_manager()->register_overlay(Coords(x,y),picid,4);
-               } 
+               }
             }
          }
 
@@ -232,7 +232,7 @@ void Main_Menu_Load_Map::clicked(int id) {
 
          delete ml;
       }
-   } 
+   }
    die();
 }
 
@@ -251,13 +251,13 @@ void Main_Menu_Load_Map::selected(int i) {
    m_author->set_text(map->get_author());
    m_descr->set_text(map->get_description());
    m_world->set_text(map->get_world_name());
-   
+
    char buf[200];
    sprintf(buf, "%i", map->get_nrplayers());
    m_nrplayers->set_text(buf);
-   
+
    sprintf(buf, "%ix%i", map->get_width(), map->get_height());
    m_size->set_text(buf);
-   
+
    delete map;
 }

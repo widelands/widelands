@@ -46,11 +46,11 @@ void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileRead* fr, Map* map) throw
 
    // check packet version
    int packet_version=fr->Unsigned16();
-   
+
    if(packet_version == CURRENT_PACKET_VERSION) {
       map->m_width=fr->Unsigned16();
       map->m_height=fr->Unsigned16();
-      map->set_nrplayers(fr->Unsigned8()); 
+      map->set_nrplayers(fr->Unsigned8());
 
       // World name
       memcpy(buf, fr->Data(WORLD_NAME_LEN), WORLD_NAME_LEN);
@@ -105,13 +105,13 @@ void Widelands_Map_Elemental_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
 
    // World name
    fw->Data(map->get_world_name(), WORLD_NAME_LEN);
-   
+
    // Name
    fw->Data(map->get_name(), MAP_NAME_LEN);
-   
+
    // Author
    fw->Data(map->get_author(), MAP_AUTHOR_LEN);
-   
+
    // Descr
    fw->Data(map->get_description(), WORLD_DESCR_LEN);
 }

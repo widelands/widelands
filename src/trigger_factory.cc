@@ -56,24 +56,24 @@ Trigger* Trigger_Factory::get_correct_trigger(uint id) {
 
 /*
  * create the correct option dialog and initialize it with the given
- * trigger. if the given trigger is zero, create a new trigger 
+ * trigger. if the given trigger is zero, create a new trigger
  * and let it be initalised through it.
  * if it fails, return zero/unmodified given trigger, elso return the created/modified trigger
  */
 Trigger* Trigger_Factory::make_trigger_with_option_dialog(uint id, Editor_Interactive* m_parent, Trigger* gtrig) {
    Trigger* trig=gtrig;
-   if(!trig) 
+   if(!trig)
       trig=get_correct_trigger(id);
 
    int retval=-100;
    switch(id) {
-      case TRIGGER_TIME: { Trigger_Time_Option_Menu* t=new Trigger_Time_Option_Menu(m_parent, static_cast<Trigger_Time*>(trig)); retval=t->run(); delete t; } break; 
-      case TRIGGER_NULL: { Trigger_Null_Option_Menu* t=new Trigger_Null_Option_Menu(m_parent, static_cast<Trigger_Null*>(trig)); retval=t->run(); delete t; } break; 
+      case TRIGGER_TIME: { Trigger_Time_Option_Menu* t=new Trigger_Time_Option_Menu(m_parent, static_cast<Trigger_Time*>(trig)); retval=t->run(); delete t; } break;
+      case TRIGGER_NULL: { Trigger_Null_Option_Menu* t=new Trigger_Null_Option_Menu(m_parent, static_cast<Trigger_Null*>(trig)); retval=t->run(); delete t; } break;
       default: break;
    }
-   if(retval==-100) 
+   if(retval==-100)
       throw wexception("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger id found: %i\n", id);
-   if(retval) 
+   if(retval)
       return trig;
    if(!gtrig) {
       delete trig;
@@ -85,10 +85,10 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(uint id, Editor_Intera
 /*
  * Get the correct trigger descriptions and names from the
  * id header
- */   
+ */
 Trigger_Descr* Trigger_Factory::get_correct_trigger_descr(uint id) {
    assert(id<Trigger_Factory::get_nr_of_available_triggers());
-   
+
    return &TRIGGER_DESCRIPTIONS[id];
 }
 

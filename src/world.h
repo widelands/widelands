@@ -61,7 +61,7 @@ private:
       std::string    picname;
       int            upperlimit;
    };
-   
+
    bool                    m_is_detectable;
    int                     m_max_amount;
 	std::string					m_name;
@@ -83,7 +83,7 @@ class Terrain_Descr {
       inline uchar get_is(void) { return m_is; }
       inline const char* get_name() { return m_name; }
 
-      inline bool is_resource_valid(int res) { 
+      inline bool is_resource_valid(int res) {
          int i=0;
          for(i=0; i<m_nr_valid_resources; i++)
             if(m_valid_resources[i]==res) return true;
@@ -123,7 +123,7 @@ class World
 
       World(const char* name);
 		~World();
-      
+
       // Check if a world really exists
       static bool exists_world(std::string);
       static void get_all_worlds(std::vector<std::string>*);
@@ -146,7 +146,7 @@ class World
 		inline Immovable_Descr* get_immovable_descr(int index) { return immovables.get(index); }
 
       inline uchar get_resource(const char* l) { return m_resources.get_index(l); }
-		inline Resource_Descr* get_resource(int res) 
+		inline Resource_Descr* get_resource(int res)
 		{ assert(res < m_resources.get_nitems()); return m_resources.get(res); }
       inline int get_nr_resources(void) { return m_resources.get_nitems(); }
 

@@ -50,7 +50,7 @@ class PlayerDescriptionGroup : public UIPanel {
    bool      m_allow_changes;
    std::vector<std::string> m_tribes;
    uint      m_current_tribe;
-   
+
 public:
 	PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum);
 

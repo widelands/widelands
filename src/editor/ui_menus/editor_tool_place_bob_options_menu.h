@@ -27,7 +27,7 @@ class Editor_Interactive;
 class Editor_Place_Bob_Tool;
 class UITextarea;
 class UICheckbox;
- 
+
 class Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
    public:
       Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive*, Editor_Place_Bob_Tool*,

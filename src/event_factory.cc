@@ -61,13 +61,13 @@ Event* Event_Factory::get_correct_event(uint id) {
 
 /*
  * create the correct option dialog and initialize it with the given
- * event. if the given event is zero, create a new event 
+ * event. if the given event is zero, create a new event
  * and let it be initalised through it.
  * if it fails, return zero/unmodified given event, elso return the created/modified event
  */
 Event* Event_Factory::make_event_with_option_dialog(uint id, Editor_Interactive* m_parent, Event* gevent) {
    Event* event=gevent;
-   if(!event) 
+   if(!event)
       event=get_correct_event(id);
 
    int retval=-100;
@@ -78,9 +78,9 @@ Event* Event_Factory::make_event_with_option_dialog(uint id, Editor_Interactive*
       case EVENT_CONQUER_AREA: { Event_Conquer_Area_Option_Menu* t=new Event_Conquer_Area_Option_Menu(m_parent, static_cast<Event_Conquer_Area*>(event)); retval=t->run(); delete t; } break;
       default: break;
    }
-   if(retval==-100) 
+   if(retval==-100)
       throw wexception("Event_Factory::make_event_with_option_dialog: Unknown event id found: %i\n", id);
-   if(retval) 
+   if(retval)
       return event;
    if(!gevent) {
       delete event;
@@ -92,10 +92,10 @@ Event* Event_Factory::make_event_with_option_dialog(uint id, Editor_Interactive*
 /*
  * Get the correct event descriptions and names from the
  * id header
- */   
+ */
 Event_Descr* Event_Factory::get_correct_event_descr(uint id) {
    assert(id<Event_Factory::get_nr_of_available_events());
-   
+
    return &EVENT_DESCRIPTIONS[id];
 }
 

@@ -65,7 +65,7 @@ class UIMultiline_Textarea : public UIPanel {
       inline const char* get_font_name() { return m_fontname.c_str(); }
       inline const int get_font_size() { return m_fontsize; }
       inline RGBColor& get_font_clr() { return m_fcolor; }
-      
+
    private:
 	Align				m_align;
 	std::string		m_text;

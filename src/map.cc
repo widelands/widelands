@@ -81,7 +81,7 @@ Map::Map(void) {
 	m_world = 0;
 
    m_overlay_manager=0;
-   
+
    // Paranoia
    cleanup();
 }
@@ -96,7 +96,7 @@ cleanups
 Map::~Map()
 {
    cleanup();
-   if(m_overlay_manager) { 
+   if(m_overlay_manager) {
       delete m_overlay_manager;
       m_overlay_manager=0;
    }
@@ -117,7 +117,7 @@ and recalcs the interactive player's overlay.
 void Map::recalc_for_field_area(Coords coords, int radius)
 {
    assert(m_overlay_manager);
-   
+
    MapRegion mr;
    FCoords c;
 
@@ -203,7 +203,7 @@ void Map::recalc_whole_map(void)
 /*
  * recalculates all default resources.
  *
- * This just needed for the game, not for 
+ * This just needed for the game, not for
  * the editor. Since there, default resources
  * are not shown.
  */
@@ -214,7 +214,7 @@ void Map::recalc_default_resources(void) {
          FCoords f,f1;
          f=get_fcoords(Coords(x,y));
          // only on unset fields
-         if(f.field->get_resources()!=0 && f.field->get_resources_amount()) continue; 
+         if(f.field->get_resources()!=0 && f.field->get_resources_amount()) continue;
          std::map<int,int> m;
          int amount=0;
          Terrain_Descr* terr, *terd;
@@ -236,13 +236,13 @@ void Map::recalc_default_resources(void) {
          terd=f1.field->get_terd();
          resd=terd->get_default_resources();
          resr=terr->get_default_resources();
-         if(terd->get_is()&TERRAIN_UNPASSABLE && resd!=-1) 
-            m[resd]+=3; 
-         else 
+         if(terd->get_is()&TERRAIN_UNPASSABLE && resd!=-1)
+            m[resd]+=3;
+         else
             m[resd]++;
-         if(terr->get_is()&TERRAIN_UNPASSABLE && resr!=-1) 
+         if(terr->get_is()&TERRAIN_UNPASSABLE && resr!=-1)
             m[resr]+=3;
-         else 
+         else
             m[resr]++;
          amount+=terr->get_default_resources_amount()+terd->get_default_resources_amount();
 
@@ -250,9 +250,9 @@ void Map::recalc_default_resources(void) {
          get_neighbour(f, Map_Object::WALK_NE, &f1);
          terd=f1.field->get_terd();
          resd=terd->get_default_resources();
-         if(terd->get_is()&TERRAIN_UNPASSABLE && resd!=-1) 
-            m[resd]+=3; 
-         else 
+         if(terd->get_is()&TERRAIN_UNPASSABLE && resd!=-1)
+            m[resd]+=3;
+         else
             m[resd]++;
          amount+=terd->get_default_resources_amount();
 
@@ -260,9 +260,9 @@ void Map::recalc_default_resources(void) {
          get_neighbour(f, Map_Object::WALK_W, &f1);
          terr=f1.field->get_terr();
          resr=terr->get_default_resources();
-         if(terr->get_is()&TERRAIN_UNPASSABLE && resr!=-1) 
+         if(terr->get_is()&TERRAIN_UNPASSABLE && resr!=-1)
             m[resr]+=3;
-         else 
+         else
             m[resr]++;
          amount+=terr->get_default_resources_amount();
 
@@ -273,14 +273,14 @@ void Map::recalc_default_resources(void) {
             if(i->second>lv) {
                lv=i->second;
                res=i->first;
-            } 
+            }
             i++;
          }
-         amount/=6; 
+         amount/=6;
 
          if(res==-1 || !amount)
             f.field->set_resources(0,0);
-         else 
+         else
             f.field->set_resources(res,amount);
 
       }
@@ -317,13 +317,13 @@ void Map::cleanup(void) {
    m_scenario_tribes.clear();
    m_scenario_names.clear();
 
-   if(m_overlay_manager) 
+   if(m_overlay_manager)
       m_overlay_manager->cleanup();
 
 
    while(get_number_of_triggers()) {
       Trigger* t=get_trigger(0);
-      int i=0; 
+      int i=0;
       for(i=0; i<get_number_of_events(); i++) {
          Event* ev=get_event(i);
          if(ev->trigger_exists(t)) {
@@ -2397,8 +2397,8 @@ bool FindFieldResource::accept(FCoords coord) const
 {
 	uchar res = coord.field->get_resources();
    uchar amount = coord.field->get_resources_amount();
-   
-	if ((res==m_resource) && amount) 
+
+	if ((res==m_resource) && amount)
 		return false;
 
 	return true;

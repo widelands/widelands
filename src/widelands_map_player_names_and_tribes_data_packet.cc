@@ -63,7 +63,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileRead* fr, M
       }
       return;
    }
-   throw wexception("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i\n", packet_version); 
+   throw wexception("Wrong packet version for Player_Names_And_Tribes_Data_Packet: %i\n", packet_version);
 }
 
 /*
@@ -76,7 +76,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write(FileWrite* fw, Edi
    // now packet version
    fw->Unsigned16(CURRENT_PACKET_VERSION);
 
-   int i=0; 
+   int i=0;
    Map* map=egbase->get_map();
    std::string name, tribe;
    for(i=1; i<=map->get_nrplayers(); i++) {

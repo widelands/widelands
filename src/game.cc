@@ -159,7 +159,7 @@ bool Game::run(void)
       get_map()->delete_events_without_trigger();
 
       // Now let all triggers check once, if they are in the right state
-      for(int i=0; i<get_map()->get_number_of_triggers(); i++) 
+      for(int i=0; i<get_map()->get_number_of_triggers(); i++)
          get_map()->get_trigger(i)->check_set_conditions(this);
 
 		load_graphics();
@@ -167,7 +167,7 @@ bool Game::run(void)
       // Everything prepared, send the first trigger event
       // We lie about the sender here. Hey, what is one lie in a lifetime?
       cmdqueue->queue(get_gametime(), SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, -1, 0, 0);
-      
+
 		ipl->run();
 		get_objects()->cleanup(this);
 	   delete ipl;

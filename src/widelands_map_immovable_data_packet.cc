@@ -46,7 +46,7 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_immovables=fr->Unsigned16();
-      if(nr_immovables>world->get_nr_immovables()) throw wexception("Number of immovables in map (%i) is bigger than in world (%i)", 
+      if(nr_immovables>world->get_nr_immovables()) throw wexception("Number of immovables in map (%i) is bigger than in world (%i)",
             nr_immovables, world->get_nr_immovables());
 
       // construct ids and map
@@ -59,7 +59,7 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
          smap[id]=world->get_immovable_descr(world->get_immovable_index(buffer));
       }
 
-      // Now get all the the immovables 
+      // Now get all the the immovables
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
             int id=fr->Unsigned16();
@@ -85,13 +85,13 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
    fw->Unsigned16(CURRENT_PACKET_VERSION);
 
    // This is a bit more complicated saved so that the order of loading
-   // of the immovables at run time doens't matter. 
+   // of the immovables at run time doens't matter.
    // (saved like terrains)
-   // Write the number of immovables 
+   // Write the number of immovables
    World* world=egbase->get_map()->get_world();
    int nr_ter=world->get_nr_immovables();
    fw->Unsigned16(nr_ter);
-  
+
    // Write all immovable names and their id's
    std::map<std::string,uchar> smap;
    for(int i=0; i<nr_ter; i++) {
@@ -101,8 +101,8 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
       fw->Data(imm->get_name(), strlen(imm->get_name()));
       fw->Unsigned8('\0');
    }
-   
-   // Now, all immovables as unsigned shorts in order 
+
+   // Now, all immovables as unsigned shorts in order
    // while ffff means no immovables
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
@@ -111,7 +111,7 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
          // We do not write player immovables or bobs and stuff
          if(immovable) {
             if(immovable->get_type()!=Map_Object::IMMOVABLE) continue;
-            Immovable* imm=static_cast<Immovable*>(immovable); 
+            Immovable* imm=static_cast<Immovable*>(immovable);
             // write id
             fw->Unsigned16(smap[imm->get_name()]);
          } else {

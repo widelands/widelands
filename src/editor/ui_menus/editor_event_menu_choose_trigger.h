@@ -41,7 +41,7 @@ class Editor_Event_Menu_Choose_Trigger : public UIWindow {
       virtual ~Editor_Event_Menu_Choose_Trigger();
 
       bool handle_mouseclick(uint btn, bool down, int mx, int my);
-      
+
 
    private:
       struct Trigger_Data {

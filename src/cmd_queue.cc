@@ -157,12 +157,12 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
             break;
          }
       }
-      Trigger* trig=m_game->get_map()->get_trigger(trigger_id); 
+      Trigger* trig=m_game->get_map()->get_trigger(trigger_id);
       assert(trig);
-      log("Trigger %s is going to get checked!\n", trig->get_name()); 
+      log("Trigger %s is going to get checked!\n", trig->get_name());
       bool trig_state=trig->is_set();
       trig->check_set_conditions(m_game);
-      if(trig->is_set()!=trig_state) { 
+      if(trig->is_set()!=trig_state) {
          log("Trigger has changed state: %s gone to %i\n", trig->get_name(), trig->is_set());
          int i=0;
          for(i=0; i<m_game->get_map()->get_number_of_events(); i++) {
@@ -249,7 +249,7 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
          plr->enhance_building((PlayerImmovable*)obj, c->arg2);
       break;
    }
-   
+
 	default:
 		assert(0);
 		break;

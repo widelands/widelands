@@ -29,7 +29,7 @@
 
 static const int EVENT_VERSION = 1;
 
-/* 
+/*
  * Init and cleanup
  */
 Event_Message_Box::Event_Message_Box(void) {
@@ -53,10 +53,10 @@ Event_Message_Box::~Event_Message_Box(void) {
 /*
  * cleanup()
  */
-void Event_Message_Box::cleanup(Editor_Game_Base* g) {  
-   uint i=0; 
-   for(i=0; i<m_buttons.size(); i++) 
-      if(m_buttons[i].trigger) { 
+void Event_Message_Box::cleanup(Editor_Game_Base* g) {
+   uint i=0;
+   for(i=0; i<m_buttons.size(); i++)
+      if(m_buttons[i].trigger) {
          set_button_trigger(i, 0, g->get_map());
       }
    m_buttons.resize(0);
@@ -81,7 +81,7 @@ void Event_Message_Box::reinitialize(Game* g) {
 void Event_Message_Box::set_nr_buttons(int i) {
    int oldsize=m_buttons.size();
    m_buttons.resize(i);
-   for(uint i=oldsize; i<m_buttons.size(); i++) 
+   for(uint i=oldsize; i<m_buttons.size(); i++)
       m_buttons[i].trigger=0;
 }
 int Event_Message_Box::get_nr_buttons(void) {
@@ -91,10 +91,10 @@ void Event_Message_Box::set_button_trigger(int i, Trigger_Null* t, Map* map) {
    assert(i<get_nr_buttons());
    if(m_buttons[i].trigger==t) return;
 
-   if(m_buttons[i].trigger) 
+   if(m_buttons[i].trigger)
       map->release_trigger(m_buttons[i].trigger);
-   
-   if(t) 
+
+   if(t)
       map->reference_trigger(t);
    m_buttons[i].trigger=t;
 }
@@ -141,9 +141,9 @@ void Event_Message_Box::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) 
                throw wexception("Trigger of message box %s is not a Null Trigger!\n", get_name());
             set_button_trigger(i, static_cast<Trigger_Null*>(trig), egbase->get_map());
          } else
-            set_button_trigger(i,0,egbase->get_map()); 
+            set_button_trigger(i,0,egbase->get_map());
       }
-    
+
       read_triggers(fr,egbase, skip);
       return;
    }
@@ -160,12 +160,12 @@ void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
    // Name
    fw->Data(get_name(), strlen(get_name()));
    fw->Unsigned8('\0');
-   
+
    // triggers only once?
    fw->Unsigned8(is_one_time_event());
 
 
-   // Description string 
+   // Description string
    fw->Data(m_text.c_str(), m_text.size());
    fw->Unsigned8('\0');
 
@@ -186,16 +186,16 @@ void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
       // Write picture
       // Pic position
       fw->Unsigned8(get_pic_position());
-      g_gr->save_pic_to_file(get_pic_id(), fw); 
+      g_gr->save_pic_to_file(get_pic_id(), fw);
    }
- 
+
    // Number of buttons
    fw->Unsigned8(get_nr_buttons());
    int i=0;
    for(i=0; i<get_nr_buttons(); i++) {
       fw->Data(m_buttons[i].name.c_str(), m_buttons[i].name.size());
       fw->Unsigned8('\0');
-      if(m_buttons[i].trigger) 
+      if(m_buttons[i].trigger)
          fw->Signed16(egbase->get_map()->get_trigger_index(m_buttons[i].trigger));
       else
          fw->Signed16(-1);
@@ -205,7 +205,7 @@ void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
    write_triggers(fw, egbase);
    // done
 }
-      
+
 /*
  * check if trigger conditions are done
  */
@@ -217,7 +217,7 @@ void Event_Message_Box::run(Game* game) {
       delete mb;
    }
 
-   // If this is a one timer, release our triggers 
+   // If this is a one timer, release our triggers
    // and forget about us
    reinitialize(game);
 }

@@ -35,7 +35,7 @@ class Map_Loader;
 class Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Game* m_game;
    Map_Loader** m_ml;
-   
+
 	UIButton*						m_ok;
 	UITextarea*					m_mapname;
 	PlayerDescriptionGroup* m_players[MAX_PLAYERS];

@@ -33,7 +33,7 @@ class Set_Terrain
 
 This is the base class for the terrain set tools.
 If offers the functionality to enable/disable terrains
-and to set the texture effectivly, but it isn't a tool for 
+and to set the texture effectivly, but it isn't a tool for
 itself
 =============================
 */

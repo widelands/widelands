@@ -49,9 +49,9 @@ Font* Font_Handler::find_correct_font(std::string name, int size, RGBColor fg, R
    Font* f=0;
    std::vector<Font*>::iterator it;
    for(it = m_fonts.begin(); it != m_fonts.end(); it++) {
-      if((*it)->get_name() == name && (*it)->get_point_height()==size && 
-            (*it)->get_fg_clr().r()==fg.r() && (*it)->get_fg_clr().g()==fg.g() && (*it)->get_fg_clr().b()==fg.b() && 
-            (*it)->get_bg_clr().r()==bg.r() && (*it)->get_bg_clr().g()==bg.g() && (*it)->get_bg_clr().b()==bg.b()) { 
+      if((*it)->get_name() == name && (*it)->get_point_height()==size &&
+            (*it)->get_fg_clr().r()==fg.r() && (*it)->get_fg_clr().g()==fg.g() && (*it)->get_fg_clr().b()==fg.b() &&
+            (*it)->get_bg_clr().r()==bg.r() && (*it)->get_bg_clr().g()==bg.g() && (*it)->get_bg_clr().b()==bg.b()) {
          assert(!f);
          f=*it;
       }
@@ -66,11 +66,11 @@ Font* Font_Handler::find_correct_font(std::string name, int size, RGBColor fg, R
  * Draw a string directly into the destination bitmap with the desired alignment.
  * The function honours line-breaks.
  * If wrap is positive, the function will wrap a line after that many pixels.
- */ 
+ */
 void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty, const char* string,
       Align align, int wrap, int mark_char, int mark_value)
 {
-   Font* f; 
+   Font* f;
    f=find_correct_font(font, size);
 
    // Adjust for vertical alignment
@@ -198,7 +198,7 @@ void Font_Handler::get_size(std::string font, int size, const char* string, int*
  *   - the character after the \n if the line is ended by a line-break
  *   - the NUL if the string ends after the line
  *   - the first visible character on the next line in case the line is wrapped
- *   
+ *
  *   The function returns the width of the line, in pixels.
  */
 int Font_Handler::calc_linewidth(std::string name, int size, const char* line, int wrap, const char** nextline)
@@ -280,7 +280,7 @@ int Font_Handler::calc_linewidth(std::string name, int size, const char* line, i
  */
 Font_Handler::Font_Handler(void) {
    if(TTF_Init()==-1) throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
-} 
+}
 
 /*
  * Plain Destructor
@@ -297,7 +297,7 @@ Font_Handler::~Font_Handler(void) {
 
 
 /*
- * Wrapper around Font() 
+ * Wrapper around Font()
  * the constructor of Font does the main work
  */
 void Font_Handler::load_font(std::string name, int size, RGBColor fg, RGBColor bg) {
@@ -339,8 +339,8 @@ void Font_Handler::unload_font(std::string name, int size) {
       }
    }
 }
- 
-   
+
+
 /*
  * Call the do_load() function for every Font.
 */

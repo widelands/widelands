@@ -50,7 +50,7 @@ enum Align {
 	Align_BottomRight = Align_Right|Align_Bottom,
 };
 
-   
+
 /** class Font_Handler
  *
  * This class generates font Pictures out of strings and returns them
@@ -59,7 +59,7 @@ class Font_Handler {
 public:
 	Font_Handler();
    ~Font_Handler();
-   
+
    void reload_all();
 	void load_font(std::string name, int size, RGBColor fg, RGBColor bg);
    void unload_font(std::string name, int size = 0);
@@ -72,10 +72,10 @@ public:
 
 private:
 	std::vector<Font*>		m_fonts;		// map of all fonts
-   
+
    Font* find_correct_font(std::string name, int size);
    Font* find_correct_font(std::string name, int size, RGBColor fg, RGBColor bg);
-   
+
 };
 
 extern Font_Handler* g_fh;	// the default font

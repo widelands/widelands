@@ -56,7 +56,7 @@ class Interactive_Base : public UIPanel {
 
 		static int get_xres();
 		static int get_yres();
-      
+
       // logic handler func
       void think();
 
@@ -92,7 +92,7 @@ class Interactive_Base : public UIPanel {
          int               fieldsel_pic;
          int               fieldsel_jobid;
       } m_fsd;
-      
+
 		uint					m_display_flags;
 
 		uint					m_lastframe;			// system time (milliseconds)
@@ -109,7 +109,7 @@ class Interactive_Base : public UIPanel {
 
 	   inline void set_mapview(Map_View* w) { m_mapview=w; }
       inline Map_View* get_mapview() { return m_mapview; }
-		
+
 		virtual void draw_overlay(RenderTarget* dst);
 
       void unset_fieldsel_picture();

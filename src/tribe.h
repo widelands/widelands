@@ -52,8 +52,8 @@ class Tribe_Descr {
       // Static function to check for tribes
       static bool exists_tribe(std::string);
       static void get_all_tribes(std::vector<std::string>*);
-		
-      
+
+
       inline const char *get_name() const { return m_name; }
 
 		inline int get_nrworkers() { return m_workers.get_nitems(); }

@@ -31,21 +31,21 @@ class Trigger_Time : public Trigger {
    public:
       Trigger_Time();
       ~Trigger_Time();
-      
+
       // one liner functions
-      uint get_id(void) { return TRIGGER_TIME; } 
+      uint get_id(void) { return TRIGGER_TIME; }
 
       void check_set_conditions(Game*);
       void reset_trigger(Game*);
-      
+
       // File Functions
       void Write(FileWrite*);
       void Read(FileRead*);
-  
+
       inline void set_wait_time(int i) { m_wait_time=i; }
       inline void set_last_start_time(int i) { m_last_start_time = i; }
       inline int get_wait_time(void) { return m_wait_time; }
-      
+
    private:
       ulong m_wait_time; // in seconds
       uint m_last_start_time;

@@ -195,7 +195,7 @@ void Interactive_Player::start()
 	m_maprenderinfo.visibility = get_player()->get_visibility();
 
 	mapw = 0;
-	maph = 0; 
+	maph = 0;
 
    get_map()->get_overlay_manager()->show_buildhelp(false);
    get_map()->get_overlay_manager()->register_overlay_callback_function(&Int_Player_overlay_callback_function, static_cast<void*>(this));
@@ -582,14 +582,14 @@ void Interactive_Player::roadb_remove_overlay()
 	assert(m_buildroad);
 
 	//log("Remove overlay\n");
-	
+
    // preview of the road
-   if(m_jobid) 
+   if(m_jobid)
        get_map()->get_overlay_manager()->remove_road_overlay(m_jobid);
    m_jobid=0;
 
 	// build hints
-   if(m_road_buildhelp_overlay_jobid) 
+   if(m_road_buildhelp_overlay_jobid)
       get_map()->get_overlay_manager()->remove_overlay(m_road_buildhelp_overlay_jobid);
    m_road_buildhelp_overlay_jobid=0;
 }

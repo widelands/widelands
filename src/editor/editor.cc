@@ -61,7 +61,7 @@ void Editor::run() {
    // set empty map, defaults
    Map* map=new Map;
    map->create_empty_map();
-   
+
 
    set_map(map);
 

@@ -23,7 +23,7 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * This packet contains all the events the map defines 
+ * This packet contains all the events the map defines
  */
 class Widelands_Map_Event_Data_Packet : public Widelands_Map_Data_Packet {
    public:

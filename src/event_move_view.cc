@@ -27,7 +27,7 @@
 
 static const int EVENT_VERSION = 1;
 
-/* 
+/*
  * Init and cleanup
  */
 Event_Move_View::Event_Move_View(void) {
@@ -42,7 +42,7 @@ Event_Move_View::~Event_Move_View(void) {
 /*
  * cleanup()
  */
-void Event_Move_View::cleanup(Editor_Game_Base* g) {  
+void Event_Move_View::cleanup(Editor_Game_Base* g) {
    // Nothing todo
    Event::cleanup(g);
 }
@@ -93,7 +93,7 @@ void Event_Move_View::Write(FileWrite* fw, Editor_Game_Base *egbase) {
    // Name
    fw->Data(get_name(), strlen(get_name()));
    fw->Unsigned8('\0');
-   
+
    // triggers only once?
    fw->Unsigned8(is_one_time_event());
 
@@ -105,7 +105,7 @@ void Event_Move_View::Write(FileWrite* fw, Editor_Game_Base *egbase) {
    write_triggers(fw, egbase);
    // done
 }
-      
+
 /*
  * check if trigger conditions are done
  */
@@ -115,7 +115,7 @@ void Event_Move_View::run(Game* game) {
    Interactive_Base* iab=game->get_iabase();
    iab->move_view_to(m_pt.x, m_pt.y);
 
-   // If this is a one timer, release our triggers 
+   // If this is a one timer, release our triggers
    // and forget about us
    reinitialize(game);
 }

@@ -47,7 +47,7 @@ Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, T
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
    m_name->set_text(trigger->get_name());
-   
+
    // Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy+=20+spacing;
@@ -72,8 +72,8 @@ Trigger_Null_Option_Menu::~Trigger_Null_Option_Menu(void) {
 /*
  * Handle mouseclick
  *
- * we're a modal, therefore we can not delete ourself 
- * on close (the caller must do this) instead 
+ * we're a modal, therefore we can not delete ourself
+ * on close (the caller must do this) instead
  * we simulate a cancel click
  */
 bool Trigger_Null_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, int my) {
@@ -81,9 +81,9 @@ bool Trigger_Null_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, in
       clicked(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 }
-  
+
 /*
  * a button has been clicked
  */

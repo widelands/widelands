@@ -68,16 +68,16 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
 
    int check[] = {
       0,                   // "green"
-      TERRAIN_DRY,         // "dry" 
+      TERRAIN_DRY,         // "dry"
       TERRAIN_DRY|TERRAIN_MOUNTAIN,   // "mountain"
       TERRAIN_DRY|TERRAIN_UNPASSABLE, // "unpassable"
-      TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE, // "dead" or "acid"                   
+      TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE, // "dead" or "acid"
       TERRAIN_UNPASSABLE|TERRAIN_DRY|TERRAIN_WATER,
    };
 
    m_checkboxes.resize(nr_textures);
 
-   for(int checkfor=0; checkfor<6; checkfor++) { 
+   for(int checkfor=0; checkfor<6; checkfor++) {
       int i=1;
       while(i<=nr_textures) {
          if(cur_x==textures_in_row) { cur_x=0; ypos+=TEXTURE_H+1+space; xpos=xstart; }
@@ -104,27 +104,27 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
 
          // Check is green
          if(ter->get_is()==0) {
-            target->blit(pic_x,pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_green.png", true)); 
+            target->blit(pic_x,pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_green.png", true));
             pic_x+=small_picw+1;
-         } 
+         }
          else if(ter->get_is()&TERRAIN_WATER) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_water.png", true)); 
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_water.png", true));
             pic_x+=small_picw+1;
-         } 
+         }
          else if(ter->get_is()&TERRAIN_MOUNTAIN) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png", true)); 
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png", true));
             pic_x+=small_picw+1;
-         } 
+         }
          else if(ter->get_is()&TERRAIN_ACID) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png", true)); 
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png", true));
             pic_x+=small_picw+1;
-         } 
+         }
          else if(ter->get_is()&TERRAIN_UNPASSABLE) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png", true)); 
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png", true));
             pic_x+=small_picw+1;
          }
          else if(ter->get_is()&TERRAIN_DRY) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png", true)); 
+            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png", true));
             pic_x+=small_picw+1;
          }
 
@@ -164,7 +164,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    set_can_focus(true);
    focus();
 }
-      
+
 /*
  * Cleanup
  */
@@ -197,7 +197,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
    if(t==false && (!m_multiselect || m_sbt->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
 
    if(!m_multiselect) {
-      int i=0; 
+      int i=0;
       while(m_sbt->get_nr_enabled()) {
          m_sbt->enable(i++,false);
       }
@@ -209,7 +209,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
          m_checkboxes[i]->changedtoid.set(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
       }
    }
- 
+
    m_sbt->enable(n,t);
 
    std::string buf="Current: ";

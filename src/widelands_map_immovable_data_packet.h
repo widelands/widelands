@@ -23,8 +23,8 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * This data packet contains the various immovables on 
- * the map (trees, rocks) 
+ * This data packet contains the various immovables on
+ * the map (trees, rocks)
  */
 class Widelands_Map_Immovable_Data_Packet : public Widelands_Map_Data_Packet {
    public:

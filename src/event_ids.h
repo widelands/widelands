@@ -21,10 +21,10 @@
 #define __S__EVENT_IDS_H
 
 /*
- * If you change anything here, 
+ * If you change anything here,
  * make sure that you also change event_factory.cc
  *
- * Make sure that the orders of this enum and in the 
+ * Make sure that the orders of this enum and in the
  * description structure in event_factory.cc stay the same
  */
 enum {

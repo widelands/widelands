@@ -77,7 +77,7 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
    buf+=buf1;
 
    sprintf(buf1, " Roads: TODO!\n"); buf+=buf1;
-   
+
    buf += "\n";
    Terrain_Descr* ter=f->get_terr();
    buf += "2) Right Terrain Info\n";

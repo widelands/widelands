@@ -42,7 +42,7 @@ class Trigger_Factory {
    public:
       static Trigger* get_correct_trigger(uint id);
       static Trigger* make_trigger_with_option_dialog(uint id, Editor_Interactive*, Trigger*);
-      
+
       static Trigger_Descr* get_correct_trigger_descr(uint id);
       static const uint get_nr_of_available_triggers(void);
 };

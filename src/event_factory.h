@@ -41,7 +41,7 @@ class Event_Factory {
    public:
       static Event* get_correct_event(uint id);
       static Event* make_event_with_option_dialog(uint id, Editor_Interactive*, Event*);
-      
+
       static Event_Descr* get_correct_event_descr(uint id);
       static const uint get_nr_of_available_events(void);
 };

@@ -66,7 +66,7 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
    char buf[256];
 
    Section* global = prof->get_safe_section("idle");
-      
+
    // Global options
 	snprintf(buf, sizeof(buf), "%s_00.bmp", m_name);
 	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));

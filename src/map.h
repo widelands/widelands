@@ -147,7 +147,7 @@ public:
 
    // For overlays
    inline Overlay_Manager* get_overlay_manager() { return m_overlay_manager; }
-   
+
    // For loading
    Map_Loader* get_correct_loader(const char*);
    void cleanup(void);
@@ -159,7 +159,7 @@ public:
    void recalc_whole_map();
    void recalc_for_field_area(Coords coords, int radius);
    void recalc_default_resources(void);
-   
+
 	void set_nrplayers(uint nrplayers);
 
 	void set_starting_pos(uint plnum, Coords c);
@@ -179,7 +179,7 @@ public:
 	inline uint get_width(void) { return m_width; }
 	inline uint get_height(void) { return m_height; }
 	inline World* get_world(void) { return m_world; }
-   // The next few functions are only valid 
+   // The next few functions are only valid
    // when the map is loaded as an scenario.
    std::string get_scenario_player_tribe(uint i);
    std::string get_scenario_player_name(uint i);
@@ -270,7 +270,7 @@ public:
    inline int get_number_of_triggers(void) { return m_triggers.size(); }
    inline void unregister_trigger(Trigger* t) {
       std::vector<Trigger*>::iterator i;
-      for(i=m_triggers.begin(); i!=m_triggers.end(); i++) 
+      for(i=m_triggers.begin(); i!=m_triggers.end(); i++)
          if(*i==t) {
             assert(t->is_unreferenced());
             delete t;
@@ -281,7 +281,7 @@ public:
    }
    inline bool trigger_exists(Trigger* trig) {
       std::vector<Trigger*>::iterator i;
-      for(i=m_triggers.begin(); i!=m_triggers.end(); i++) 
+      for(i=m_triggers.begin(); i!=m_triggers.end(); i++)
          if(*i==trig) {
             return true;
          }
@@ -289,22 +289,22 @@ public:
    }
    inline Trigger* get_trigger(int i) { assert(i<get_number_of_triggers()); return m_triggers[i]; }
    inline int get_trigger_index(Trigger* trig) {
-      int i=0; 
-      for(i=0; i<get_number_of_triggers(); i++) 
+      int i=0;
+      for(i=0; i<get_number_of_triggers(); i++)
          if(m_triggers[i]==trig) {
             return i;
          }
       return -1;
    }
    void delete_unreferenced_triggers(void) {
-      int i=0; 
-      for(i=0; i<get_number_of_triggers(); i++) 
-         if(m_triggers[i]->is_unreferenced()) { 
+      int i=0;
+      for(i=0; i<get_number_of_triggers(); i++)
+         if(m_triggers[i]->is_unreferenced()) {
             unregister_trigger(m_triggers[i]);
             --i;
          }
    }
- 
+
    // Event functions, also all inlines
    inline void register_new_event(Event* t) {
       assert(!event_exists(t));
@@ -313,7 +313,7 @@ public:
    inline void unregister_event(Event* t) {
       assert(event_exists(t));
       std::vector<Event*>::iterator i;
-      for(i=m_events.begin(); i!=m_events.end(); i++) 
+      for(i=m_events.begin(); i!=m_events.end(); i++)
          if(*i==t) {
             assert(!t->get_nr_triggers());
             delete t;
@@ -325,7 +325,7 @@ public:
    inline int get_number_of_events(void) { return m_events.size(); }
    inline bool event_exists(Event* trig) {
       std::vector<Event*>::iterator i;
-      for(i=m_events.begin(); i!=m_events.end(); i++) 
+      for(i=m_events.begin(); i!=m_events.end(); i++)
          if(*i==trig) {
             return true;
          }
@@ -333,9 +333,9 @@ public:
    }
    inline Event* get_event(int i) { assert(i<get_number_of_events()); return m_events[i]; }
    void delete_events_without_trigger(void) {
-      int i=0; 
-      for(i=0; i<get_number_of_events(); i++) 
-         if(!m_events[i]->get_nr_triggers()) { 
+      int i=0;
+      for(i=0; i<get_number_of_events(); i++)
+         if(!m_events[i]->get_nr_triggers()) {
             unregister_event(m_events[i]);
             --i;
          }
@@ -362,7 +362,7 @@ private:
    Overlay_Manager* m_overlay_manager;
 
    std::vector<std::string> m_scenario_tribes; // only alloced when really needed
-   std::vector<std::string> m_scenario_names;  
+   std::vector<std::string> m_scenario_names;
    std::vector<Trigger*>    m_triggers;        // Triggers are available on all maps. All game types can be done through triggers.
    std::vector<Event*>      m_events;        // Events are available on all maps. (At least the win trigger or the loose trigger)
 

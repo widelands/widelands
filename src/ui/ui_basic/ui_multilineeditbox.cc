@@ -33,10 +33,10 @@
 Initialize a edibox that supports multiline strings.
 */
 UIMultiline_Editbox::UIMultiline_Editbox(UIPanel *parent, int x, int y, uint w, uint h,
-                                       const char *text) 
+                                       const char *text)
    : UIMultiline_Textarea(parent, x, y, w, h, text, Align_Left, true) {
    m_maxchars=0xffff;
-   
+
    set_scrollmode(ScrollLog);
 
    m_needs_update=false;
@@ -59,7 +59,7 @@ UIMultiline_Editbox::~UIMultiline_Editbox() {
 a key event must be handled
 */
 bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
-   
+
    m_needs_update=true;
 
    if(down) {
@@ -68,8 +68,8 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
          case KEY_BACKSPACE:
             if(m_text.size() && m_cur_pos) {
                m_cur_pos--;
-            } else { 
-               break; 
+            } else {
+               break;
             }
             // Fallthrough
 
@@ -97,18 +97,18 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
                while(begin_of_line>0 && m_text[begin_of_line]!='\n') --begin_of_line;
                if(begin_of_line!=0) ++begin_of_line;
                uint begin_of_next_line=m_cur_pos;
-               while(m_text[begin_of_next_line]!='\n' && begin_of_next_line<m_text.size()) 
+               while(m_text[begin_of_next_line]!='\n' && begin_of_next_line<m_text.size())
                   ++begin_of_next_line;
-               if(begin_of_next_line==m_text.size()) 
+               if(begin_of_next_line==m_text.size())
                   --begin_of_next_line;
-                else 
+                else
                   ++begin_of_next_line;
                uint end_of_next_line=begin_of_next_line;
-               while(m_text[end_of_next_line]!='\n' && end_of_next_line<m_text.size()) 
+               while(m_text[end_of_next_line]!='\n' && end_of_next_line<m_text.size())
                   ++end_of_next_line;
-               if(begin_of_next_line+m_cur_pos-begin_of_line > end_of_next_line) 
+               if(begin_of_next_line+m_cur_pos-begin_of_line > end_of_next_line)
                   m_cur_pos=end_of_next_line;
-               else 
+               else
                   m_cur_pos=begin_of_next_line+m_cur_pos-begin_of_line;
             }
             break;
@@ -125,18 +125,18 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
                if(m_text[begin_of_lastline]=='\n') --begin_of_lastline;
                while(begin_of_lastline>0 && m_text[begin_of_lastline]!='\n') --begin_of_lastline;
                if(begin_of_lastline!=0) ++begin_of_lastline;
-               if(begin_of_lastline+(m_cur_pos-begin_of_line) > end_of_last_line) 
+               if(begin_of_lastline+(m_cur_pos-begin_of_line) > end_of_last_line)
                   m_cur_pos=end_of_last_line;
                else
                   m_cur_pos=begin_of_lastline+(m_cur_pos-begin_of_line);
             }
-            break;   
+            break;
 
          case KEY_RETURN:
             c='\n';
             // fallthrough
          default:
-            if(c && m_text.size()<m_maxchars) { 
+            if(c && m_text.size()<m_maxchars) {
                m_text.insert(m_cur_pos,1,c);
                m_cur_pos++;
             }
@@ -165,39 +165,39 @@ bool UIMultiline_Editbox::handle_mouseclick(uint btn, bool down, int x, int y) {
 }
 
 /**
-Redraw the Editbox 
+Redraw the Editbox
 */
 void UIMultiline_Editbox::draw(RenderTarget* dst)
 {
    // make the whole area a bit darker
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
-  
+
    std::string m_text=get_text();
    m_text.append(1,' ');
    if (m_text.size() )
    {
       // Let the font handler worry about all the complicated stuff..
-      if(has_focus()) 
+      if(has_focus())
          g_fh->draw_string(dst, get_font_name(), get_font_size(), get_font_clr(), RGBColor(0,0,0), 0, 0 - get_m_textpos(), m_text.c_str(), Align_Left, get_eff_w(),m_cur_pos,-ms_darken_value*4);
-      else 
+      else
          g_fh->draw_string(dst, get_font_name(), get_font_size(), get_font_clr(), RGBColor(0,0,0), 0, 0 - get_m_textpos(), m_text.c_str(), Align_Left, get_eff_w());
    }
 
    // now draw the textarea
    UIMultiline_Textarea::draw(dst);
 }
-      
+
 /*
  * Set text function needs to take care of the current
  * position
  */
 void UIMultiline_Editbox::set_text(const char* str) {
-   if(strlen(str)) 
+   if(strlen(str))
       m_cur_pos=strlen(str);
-   else 
+   else
       m_cur_pos=0;
 
    UIMultiline_Textarea::set_text(str);
-   
+
 }
 

@@ -80,7 +80,7 @@ Cleanup
 */
 Building_Descr::~Building_Descr(void)
 {
-   if(m_buildicon_fname) 
+   if(m_buildicon_fname)
       free(m_buildicon_fname);
    for(uint i=0; i<m_enhances_to.size(); i++)
       free(m_enhances_to[i]);
@@ -159,13 +159,13 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 		snprintf(fname, sizeof(fname), "%s/%s", directory, string);
 
 		m_buildicon_fname = strdup(fname);
-   
+
       // build animation
       s = prof->get_section("build");
-      if(s->get_int("fps", -1)!=-1) 
+      if(s->get_int("fps", -1)!=-1)
          throw wexception("fps defined for build animation!");
 
-      if(!s) 
+      if(!s)
          throw wexception("Missing build animation");
       m_build = g_anim.get(directory, s, 0, encdata);
 
@@ -194,7 +194,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 		}
 		else
 			m_continue_icon = "pics/continue.png";
-	}   
+	}
 
 	// Parse basic animation data
 	s = prof->get_section("idle");
@@ -216,7 +216,7 @@ void Building_Descr::load_graphics()
 {
 	if (m_buildicon_fname)
 		m_buildicon =
-			g_gr->get_picture(PicMod_Game, m_buildicon_fname, true); 
+			g_gr->get_picture(PicMod_Game, m_buildicon_fname, true);
 }
 
 /*
@@ -238,7 +238,7 @@ Building* Building_Descr::create_constructionsite(Building_Descr* old)
 
 	ConstructionSite* csite = (ConstructionSite*)descr->create_object();
 	csite->set_building(this);
-   
+
    if(old)
       csite->set_previous_building(old);
 

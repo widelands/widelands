@@ -26,7 +26,7 @@
 #include "error.h"
 #include "filesystem.h"
 
-Font_Handler* g_fh = 0; // the font handler 
+Font_Handler* g_fh = 0; // the font handler
 
 /*
 ===============================================================================
@@ -38,21 +38,21 @@ Font IMPLEMENTATION
 
 /*
 ===============
-Font::Font 
+Font::Font
 
 Initialize a font and load it.
 ===============
 */
 Font::Font(std::string name, int size, RGBColor fg, RGBColor bg)
 {
-	m_name = name; 
+	m_name = name;
    m_pointheight=size;
 
    m_fg=fg;
    m_bg=bg;
 
    m_pointheight=size;
-     
+
    if (g_gr) // otherwise, reload_all() does it
 		do_load();
 }
@@ -60,7 +60,7 @@ Font::Font(std::string name, int size, RGBColor fg, RGBColor bg)
 
 /*
 ===============
-Font::~Font 
+Font::~Font
 
 Free resources.
 ===============
@@ -71,7 +71,7 @@ Font::~Font()
 
 /*
 ===============
-Font::do_load 
+Font::do_load
 
 Actually load the font from disk.
 ===============
@@ -91,7 +91,7 @@ void Font::do_load()
    // For better readability (cause of Antialiasing)
    TTF_SetFontStyle(ttff, TTF_STYLE_BOLD);
 
-   m_height = 0; 
+   m_height = 0;
 
 	// Read in the characters
 	for(int i = 0; i < 96; i++) // 96
@@ -102,7 +102,7 @@ void Font::do_load()
       SDL_Color bg = { m_bg.r(), m_bg.g(), m_bg.b(),0 };
 
       char c[2]= { i+32, '\0' };
-      std::string str=c; 
+      std::string str=c;
       SDL_Surface *surface=TTF_RenderText_Shaded(ttff, str.c_str(),fg,bg);
 
 //      log("char '%c', surface->h: %i\n", i+32, surface->h);
@@ -118,7 +118,7 @@ void Font::do_load()
             uchar* real_pixel= ((uchar*)surface->pixels) + surface->pitch*y +  (x*surface->format->BytesPerPixel);
 
             uchar r, g, b;
-            ulong pixel=0; 
+            ulong pixel=0;
             switch(surface->format->BytesPerPixel) {
                case 1: pixel=*((uchar*)real_pixel);    break;
                case 2: pixel=*((ushort*)real_pixel);    break;
@@ -132,7 +132,7 @@ void Font::do_load()
       }
       uchar r,g,b;
       unpack_rgb(*real_data, &r, &g, &b);
-      RGBColor clrkey(r,g,b); 
+      RGBColor clrkey(r,g,b);
 
 
       m_pictures[i].width = w;
@@ -140,7 +140,7 @@ void Font::do_load()
       SDL_FreeSurface(surface);
       free(real_data);
       }
-   
+
    fr.Close();
    TTF_CloseFont(ttff);
 }

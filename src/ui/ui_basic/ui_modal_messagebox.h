@@ -24,9 +24,9 @@
 #include "ui_window.h"
 
 /*
-========================== 
+==========================
 
-Shows a modal messagebox, user must click something 
+Shows a modal messagebox, user must click something
 
 ==========================
 */

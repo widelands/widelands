@@ -75,7 +75,7 @@ private:
 private:
 	bool		m_horizontal;
    bool     m_force_draw; // draw this scrollbar, even if it can't do anything
-   
+
 	uint		m_pos;		///< from 0 to m_range - 1
 	uint		m_pagesize;
 	uint		m_steps;

@@ -33,9 +33,9 @@ class Event_Message_Box : public Event {
    public:
      Event_Message_Box();
       ~Event_Message_Box();
-      
+
       // one liner functions
-      uint get_id(void) { return EVENT_MESSAGE_BOX; } 
+      uint get_id(void) { return EVENT_MESSAGE_BOX; }
 
       void run(Game*);
       virtual void reinitialize(Game*);
@@ -44,7 +44,7 @@ class Event_Message_Box : public Event {
       // File Functions
       void Write(FileWrite*, Editor_Game_Base*);
       void Read(FileRead*, Editor_Game_Base*, bool);
-  
+
       inline void set_text(const char* str) { m_text=str; }
       inline const char* get_text(void) { return m_text.c_str(); }
       inline void set_caption(const char* str) { m_caption=str; }
@@ -61,20 +61,20 @@ class Event_Message_Box : public Event {
       Trigger_Null* get_button_trigger(int i);
       void set_button_name(int i, std::string);
       const char* get_button_name(int i);
-      void set_nr_buttons(int i); 
-      int get_nr_buttons(void); 
-     
+      void set_nr_buttons(int i);
+      int get_nr_buttons(void);
+
       enum {
          Right = 0,
          Left,
-         Center_under, 
+         Center_under,
          Center_over,
-      }; 
-   
+      };
+
    protected:
-      
+
    private:
-      
+
       struct Button_Descr {
          std::string name;
          Trigger_Null *trigger;
@@ -88,7 +88,7 @@ class Event_Message_Box : public Event {
       int m_pic_position;
 
       std::vector<Button_Descr> m_buttons;
-      
+
 };
 
 

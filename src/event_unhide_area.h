@@ -32,9 +32,9 @@ class Event_Unhide_Area : public Event {
    public:
      Event_Unhide_Area();
       ~Event_Unhide_Area();
-      
+
       // one liner functions
-      uint get_id(void) { return EVENT_UNHIDE_AREA; } 
+      uint get_id(void) { return EVENT_UNHIDE_AREA; }
 
       void run(Game*);
       virtual void reinitialize(Game*);
@@ -43,7 +43,7 @@ class Event_Unhide_Area : public Event {
       // File Functions
       void Write(FileWrite*, Editor_Game_Base*);
       void Read(FileRead*, Editor_Game_Base*, bool);
-  
+
       inline void set_coords(Coords pt) { m_pt=pt; }
       inline Coords get_coords(void) { return m_pt; }
       inline int get_player(void) { return m_player; }

@@ -23,7 +23,7 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * This data packet contains player names 
+ * This data packet contains player names
  * and tribes (scenario packet)
  */
 class Widelands_Map_Player_Names_And_Tribes_Data_Packet : public Widelands_Map_Data_Packet {

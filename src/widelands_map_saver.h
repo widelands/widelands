@@ -38,7 +38,7 @@ class Widelands_Map_Saver {
    public:
       Widelands_Map_Saver(std::string filename, Editor_Game_Base* egbase);
       ~Widelands_Map_Saver(void);
-      
+
       void save() throw(wexception) ;
 
    private:

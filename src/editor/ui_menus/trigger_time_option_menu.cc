@@ -65,7 +65,7 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
    m_name->set_text(trigger->get_name());
-   
+
    posy+=20+spacing;
 
    UIButton* b;
@@ -161,8 +161,8 @@ Trigger_Time_Option_Menu::~Trigger_Time_Option_Menu(void) {
 /*
  * Handle mouseclick
  *
- * we're a modal, therefore we can not delete ourself 
- * on close (the caller must do this) instead 
+ * we're a modal, therefore we can not delete ourself
+ * on close (the caller must do this) instead
  * we simulate a cancel click
  */
 bool Trigger_Time_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, int my) {
@@ -170,9 +170,9 @@ bool Trigger_Time_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, in
       clicked(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 }
-  
+
 /*
  * a button has been clicked
  */
@@ -185,7 +185,7 @@ void Trigger_Time_Option_Menu::clicked(int i) {
       int hours=m_values[0]*10+m_values[1];
       int minutes=m_values[2]*10+m_values[3];
       int seconds=m_values[4]*10+m_values[5];
-      int total=hours*3600+minutes*60+seconds;   
+      int total=hours*3600+minutes*60+seconds;
       // ok button
       m_trigger->set_is_one_time_trigger(m_is_one_time_trigger);
       m_trigger->set_wait_time(total);

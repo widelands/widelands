@@ -64,8 +64,8 @@ int Editor_Decrease_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Edi
             int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), true);
             map->get_overlay_manager()->remove_overlay(c,picid);
 
-         }   
-         if(!amount) { 
+         }
+         if(!amount) {
             f->set_resources(0,0);
          } else {
             f->set_resources(m_cur_res,amount);

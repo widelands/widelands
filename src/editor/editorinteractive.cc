@@ -74,11 +74,11 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
 
    b = new UIButton(this, x, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_mainmenu);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png", true)); 
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png", true));
 
    b = new UIButton(this, x+34, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::tool_menu_btn);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.png", true)); 
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.png", true));
 
    b = new UIButton(this, x+68, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toolsize_menu_btn);
@@ -160,7 +160,7 @@ exit the editor
 void Editor_Interactive::exit_editor()
 {
 	if(m_need_save) {
-      UIModal_Message_Box* mmb=new UIModal_Message_Box(this, "Map unsaved", "The Map is unsaved, do you really want to quit?", UIModal_Message_Box::YESNO); 
+      UIModal_Message_Box* mmb=new UIModal_Message_Box(this, "Map unsaved", "The Map is unsaved, do you really want to quit?", UIModal_Message_Box::YESNO);
       int code=mmb->run();
       delete mmb;
       if(code==0) return;
@@ -209,9 +209,9 @@ void Editor_Interactive::field_clicked() {
    tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, cords, m, this);
    set_need_save(true);
 }
-		
+
 /*
- * Set the current fieldsel position and, if 
+ * Set the current fieldsel position and, if
  * a tool is selected and the first mouse button is pressed
  * click this field
  */
@@ -368,7 +368,7 @@ select a new tool
 */
 void Editor_Interactive::select_tool(int n, int which) {
    if(which==0 && n!=tools.current_tool_index) {
-      // A new tool has been selected. Remove all 
+      // A new tool has been selected. Remove all
       // registered overlay callback functions
       get_map()->get_overlay_manager()->register_overlay_callback_function(0,0);
       get_map()->recalc_whole_map();

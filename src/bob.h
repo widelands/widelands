@@ -58,7 +58,7 @@ protected:
 	uint	m_idle_anim; // the default animation
    std::string m_picture;
    EncodeData  m_default_encodedata;
-      
+
 
 public:
 	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof);

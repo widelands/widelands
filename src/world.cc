@@ -50,11 +50,11 @@ Parse a resource description section.
 void Resource_Descr::parse(Section *s, std::string basedir)
 {
    const char* string;
-   
-   
+
+
    m_name = s->get_string("name", s->get_name());
      m_is_detectable=s->get_bool("detectable", true);
-   
+
    while(s->get_next_string("indicator", &string))
    {
       std::vector<std::string> args;
@@ -86,7 +86,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 
       m_indicators.push_back(i);
    }
-   if(strcmp(s->get_name(),"none")) { 
+   if(strcmp(s->get_name(),"none")) {
       m_max_amount = s->get_safe_int("max_amount");
       while(s->get_next_string("editor_pic", &string))
       {
@@ -120,11 +120,11 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 
          m_editor_pics.push_back(i);
       }
-      if(!m_editor_pics.size()) 
+      if(!m_editor_pics.size())
          throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
    }
-   
-   if(m_is_detectable && !m_indicators.size()) 
+
+   if(m_is_detectable && !m_indicators.size())
       throw wexception("Resource '%s' has no indicators", m_name.c_str());
    if(!m_is_detectable && m_indicators.size())
       throw wexception("Resource '%s' is not detectable, but has indicators defined!", m_name.c_str());
@@ -237,7 +237,7 @@ std::string Resource_Descr::get_editor_pic(uint amount) {
 
 	return m_editor_pics[bestmatch].picname;
 }
-   
+
 
 /*
 =============================================================================
@@ -359,7 +359,7 @@ void World::parse_resources()
       section=prof.get_safe_section("none");
       descr->parse(section,m_basedir);
       m_resources.add(descr);
-      
+
       while((section=prof.get_next_section(0))) {
          descr=new Resource_Descr();
          descr->parse(section,m_basedir);
@@ -484,7 +484,7 @@ Terrain_Descr
 ==============================================================================
 */
 
-Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>* resources) 
+Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>* resources)
 {
 	const char *str;
 
@@ -513,7 +513,7 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer
       m_default_resources=res;
       m_default_amount=amount;
    }
-   
+
    // Parse valid resources
    std::string str1=s->get_string("resources", "");
    if(str1!="") {
@@ -522,7 +522,7 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer
       while(i < str1.size()) { if(str1[i]==',') { nres++; }  i++; }
 
       m_nr_valid_resources=nres;
-      if(nres==1) 
+      if(nres==1)
          m_valid_resources=new uchar;
       else
          m_valid_resources=new uchar[nres];
@@ -532,8 +532,8 @@ Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer
       while(i<=str1.size()) {
          if(str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') { ++i; continue; }
          if(str1[i]==',' || i==str1.size()) {
-            int res=resources->get_index(curres.c_str());;    
-            if(res==-1) 
+            int res=resources->get_index(curres.c_str());;
+            if(res==-1)
                throw wexception("Terrain %s has valid resource %s which doesn't exist in world!\n", s->get_name(), curres.c_str());
             m_valid_resources[cur_res++]=res;
             curres="";
@@ -586,7 +586,7 @@ Terrain_Descr::~Terrain_Descr()
 		free(m_picnametempl);
    if(m_nr_valid_resources==1) {
       delete m_valid_resources;
-   } 
+   }
    if(m_nr_valid_resources>1) {
       delete[] m_valid_resources;
    }

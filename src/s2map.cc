@@ -94,23 +94,23 @@ int S2_Map_Loader::preload_map(bool scenario) {
    }
 
    if(scenario) {
-      // Load this as scenario. 
+      // Load this as scenario.
       // there is no such a think as S2 scenarios, therefore
       // set the tribes and some default names
-      
+
       // Just for fun: some roman names
       const char* names[] = {
          "Marius",
          "Avitus",
          "Silvanus",
-         "Caius", 
+         "Caius",
          "Augustus",
          "Maximus",
          "Titus",
          "Rufus",
       };
-        
-      for(int i=1; i<=m_map->get_nrplayers(); i++) { 
+
+      for(int i=1; i<=m_map->get_nrplayers(); i++) {
          m_map->set_scenario_player_tribe(i, "romans");
          m_map->set_scenario_player_name(i, names[i-1]);
       }
@@ -397,7 +397,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			throw wexception("Section UNKNOWN not found");
 		free(section);
 		section = 0;
-     
+
 		// S E C T I O N 5  -------- Landscape (rocks, stuff..)
 		// New section??
 		bobs = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());
@@ -543,7 +543,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		for(y=0; y<m_map->get_height(); y++) {
 			for(x=0; x<m_map->get_width(); x++, f++, pc++) {
 				char c = *pc;
-            
+
 				switch(c & 0xF8) {
 				case 0x40: res = "coal"; amount=c&7; break;
 				case 0x48: res = "iron"; amount=c&7; break;
@@ -551,11 +551,11 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 				case 0x59: res = "granit"; amount=c&7; break;
 				default: res = ""; amount=0;
 				}
-  
+
             uchar nres=0;
             if(res!="") {
                nres=m_map->get_world()->get_resource(res.c_str());
-               if(static_cast<char>(nres)==-1) 
+               if(static_cast<char>(nres)==-1)
                   throw wexception("World doesn't define Resource %s\n, you can't play settler maps here!\n", res.c_str());
             }
             f->set_resources(nres,amount);

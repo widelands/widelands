@@ -49,12 +49,12 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    int posy=30;
    UITextarea* ta= new UITextarea(this, posx, posy+5, "Enter File Name", Align_Center);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
-   
+
    posy+=20;
    m_editbox=new UIEdit_Box(this, posx, posy, get_inner_w()-(posx*2), 20, 1, 0);
    m_editbox->set_text("noname");
    posy+=30;
-   
+
    UIButton* but= new UIButton(this, (get_inner_w()-60)/2, posy, 60, 20, 0, 0);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
    but->set_title("OK");
@@ -74,7 +74,7 @@ Main_Menu_Save_Map::~Main_Menu_Save_Map()
 
 /*
 ===========
-called when the ok button has been clicked 
+called when the ok button has been clicked
 ===========
 */
 void Main_Menu_Save_Map::clicked(int id) {

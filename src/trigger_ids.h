@@ -21,10 +21,10 @@
 #define __S__TRIGGER_IDS_H
 
 /*
- * If you change anything here, 
+ * If you change anything here,
  * make sure that you also change trigger_factory.cc
  *
- * Make sure that the orders of this enum and in the 
+ * Make sure that the orders of this enum and in the
  * description structure in trigger_factory.cc stay the same
  */
 enum {

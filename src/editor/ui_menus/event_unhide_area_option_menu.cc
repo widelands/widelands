@@ -49,14 +49,14 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
    int spacing=5;
    int posx=offsx;
    int posy=offsy;
-  
 
-   // Name editbox 
+
+   // Name editbox
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
    m_name->set_text(event->get_name());
    posy+=20+spacing;
-  
+
    // Only run once CB
    new UITextarea(this, spacing, posy, 150, 20, "Only run once: ", Align_CenterLeft);
    m_is_one_time_event=new UICheckbox(this, spacing+150, posy);
@@ -87,7 +87,7 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
    new UITextarea(this, spacing+20, posy+20, 20, 20, "X: ", Align_CenterLeft);
    m_x_ta=new UITextarea(this, spacing+40, posy+20, 20, 20, "X: ", Align_CenterLeft);
-  
+
    // Y
    int oldspacing=spacing;
    spacing=get_inner_w()/2+spacing;
@@ -123,7 +123,7 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
    b=new UIButton(this, spacing+110, posy, 20, 20, 0, 16);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
-   
+
    // Area
    posy+=20+spacing;
    new UITextarea(this, spacing, posy+20, 70, 20, "Area: ", Align_CenterLeft);
@@ -146,7 +146,7 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
    m_area_ta=new UITextarea(this, spacing+90, posy+20, 20, 20, "2", Align_Center);
-   
+
 
    // Ok/Cancel Buttons
    posx=(get_inner_w()/2)-60-spacing;
@@ -172,8 +172,8 @@ Event_Unhide_Area_Option_Menu::~Event_Unhide_Area_Option_Menu(void) {
 /*
  * Handle mouseclick
  *
- * we're a modal, therefore we can not delete ourself 
- * on close (the caller must do this) instead 
+ * we're a modal, therefore we can not delete ourself
+ * on close (the caller must do this) instead
  * we simulate a cancel click
  */
 bool Event_Unhide_Area_Option_Menu::handle_mouseclick(uint btn, bool down, int mx, int my) {
@@ -181,10 +181,10 @@ bool Event_Unhide_Area_Option_Menu::handle_mouseclick(uint btn, bool down, int m
       clicked(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 
 }
-  
+
 /*
  * a button has been clicked
  */
@@ -211,7 +211,7 @@ void Event_Unhide_Area_Option_Menu::clicked(int i) {
             return;
          }
          break;
-   
+
       case 3: m_x+=100; break;
       case 4: m_x-=100; break;
       case 5: m_x+=10; break;
@@ -227,7 +227,7 @@ void Event_Unhide_Area_Option_Menu::clicked(int i) {
 
       case 15: m_player++; break;
       case 16: m_player++; break;
-      
+
       case 17: m_area+=100; break;
       case 18: m_area-=100; break;
       case 19: m_area+=10; break;
@@ -246,7 +246,7 @@ void Event_Unhide_Area_Option_Menu::update(void) {
    if(m_y<0) m_y=0;
    if(m_x>=((int)m_parent->get_map()->get_width())) m_x=m_parent->get_map()->get_width()-1;
    if(m_y>=((int)m_parent->get_map()->get_height())) m_y=m_parent->get_map()->get_height()-1;
-   
+
    if(m_player<=0) m_player=1;
    if(m_player>m_parent->get_map()->get_nrplayers()) m_player=m_parent->get_map()->get_nrplayers();
 

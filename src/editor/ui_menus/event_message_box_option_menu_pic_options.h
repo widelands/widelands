@@ -31,7 +31,7 @@ class UIRadiogroup;
 class UITextarea;
 
 /*
- * This is a modal box - The user must end this first 
+ * This is a modal box - The user must end this first
  * before it can return
  */
 class Event_Message_Box_Option_Menu_Picture_Options : public UIWindow {
@@ -44,9 +44,9 @@ class Event_Message_Box_Option_Menu_Picture_Options : public UIWindow {
    private:
       void update(void);
       void clicked(int);
-      
+
       UIPanel* m_parent;
-      
+
       bool *m_clrkey_var;
       uint* m_picid_var;
       int* m_pos_var;

@@ -31,13 +31,13 @@ class Trigger_Null : public Trigger {
    public:
       Trigger_Null();
       ~Trigger_Null();
-      
+
       // one liner functions
-      uint get_id(void) { return TRIGGER_NULL; } 
+      uint get_id(void) { return TRIGGER_NULL; }
 
       void check_set_conditions(Game*);
       void reset_trigger(Game*);
-      
+
       // File Functions
       void Write(FileWrite*);
       void Read(FileRead*);

@@ -50,7 +50,7 @@ MiniMapView::MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactiv
 	m_viewx = m_viewy = 0;
    m_flags = Minimap_Terrain;
 
-	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.png", true); 
+	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.png", true);
 
    if (!w)
 		w = m_player->get_map()->get_width();

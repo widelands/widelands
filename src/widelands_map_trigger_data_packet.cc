@@ -45,17 +45,17 @@ void Widelands_Map_Trigger_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
    if(packet_version==CURRENT_PACKET_VERSION) {
       // Get number of triggers
       int nr_trig=fr->Unsigned16();
-      
-      // Read all the triggers 
+
+      // Read all the triggers
       Map* map=egbase->get_map();
       int i=0;
       for(i=0; i<nr_trig; i++) {
          Trigger* trig = Trigger_Factory::get_correct_trigger(fr->Unsigned16());
          assert(trig);
          trig->Read(fr);
-         if(get_scenario_skip()) 
-            delete trig; 
-         else 
+         if(get_scenario_skip())
+            delete trig;
+         else
             map->register_new_trigger(trig);
       }
       return; // done
@@ -75,9 +75,9 @@ void Widelands_Map_Trigger_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* e
    fw->Unsigned16(CURRENT_PACKET_VERSION);
 
    // Now number of triggers
-   Map* map=egbase->get_map(); 
+   Map* map=egbase->get_map();
    fw->Unsigned16(map->get_number_of_triggers());
-   
+
    // Now write all the triggers
    int i=0;
    for(i=0; i<map->get_number_of_triggers(); i++)

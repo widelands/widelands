@@ -28,7 +28,7 @@ class FileRead;
 class FileWrite;
 
 /*
- * A trigger is a switch for events. Each event can register 
+ * A trigger is a switch for events. Each event can register
  * one or more triggers with himself; when all triggers are set
  * the event runs.
  */
@@ -44,7 +44,7 @@ class Trigger {
       // Toggle the triggers state (if it isn't a one timer)
       // and give it a chance to reinitialize
       virtual void reset_trigger(Game*)=0;
-      
+
       // Functions needed by all
       void set_name(const char* name) { m_name=name; }
       void set_name(std::string name) { m_name=name; }
@@ -59,12 +59,12 @@ class Trigger {
       // File functions, to save or load this trigger
       virtual void Write(FileWrite*)=0;
       virtual void Read(FileRead*)=0;
-      
+
 
    protected:
       // This is only for child classes to toggle the trigger
       inline void set_trigger(bool t) { m_is_set=t; }
-      
+
    private:
       std::string m_name;
       bool        m_is_set;

@@ -30,7 +30,7 @@ class Trigger_Null;
 //
 // This is kept in this file, since only this file will
 // ever need to create one of those
-// 
+//
 class Message_Box_Event_Message_Box : public UIWindow {
    public:
       Message_Box_Event_Message_Box(Editor_Game_Base*, Event_Message_Box*);

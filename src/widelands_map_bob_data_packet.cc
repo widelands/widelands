@@ -46,7 +46,7 @@ void Widelands_Map_Bob_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase)
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_bobs=fr->Unsigned16();
-      if(nr_bobs>world->get_nr_bobs()) throw wexception("Number of bobs in map (%i) is bigger than in world (%i)", 
+      if(nr_bobs>world->get_nr_bobs()) throw wexception("Number of bobs in map (%i) is bigger than in world (%i)",
             nr_bobs, world->get_nr_bobs());
 
       // construct ids and map
@@ -59,7 +59,7 @@ void Widelands_Map_Bob_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase)
          smap[id]=world->get_bob_descr(world->get_bob(buffer));
       }
 
-      // Now get all the the bobs 
+      // Now get all the the bobs
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
             int nr_bobs=fr->Unsigned8();
@@ -88,13 +88,13 @@ void Widelands_Map_Bob_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbas
    fw->Unsigned16(CURRENT_PACKET_VERSION);
 
    // This is a bit more complicated saved so that the order of loading
-   // of the bobs at run time doens't matter. 
+   // of the bobs at run time doens't matter.
    // (saved like terrains)
-   // Write the number of bobs 
+   // Write the number of bobs
    World* world=egbase->get_map()->get_world();
    int nr_ter=world->get_nr_bobs();
    fw->Unsigned16(nr_ter);
-  
+
    // Write all bob names and their id's
    std::map<std::string,uchar> smap;
    for(int i=0; i<nr_ter; i++) {
@@ -104,14 +104,14 @@ void Widelands_Map_Bob_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbas
       fw->Data(bob->get_name(), strlen(bob->get_name()));
       fw->Unsigned8('\0');
    }
-   
-   // Now, all bobs as unsigned shorts in order 
+
+   // Now, all bobs as unsigned shorts in order
    // A Field can have more
    // than one bob, we have to take this into account
    //  uchar   numbers of bob for field
-   //      bob1 
+   //      bob1
    //      bob2
-   //      ... 
+   //      ...
    //      bobn
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
@@ -119,12 +119,12 @@ void Widelands_Map_Bob_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbas
          Bob* bob=map->get_field(Coords(x,y))->get_first_bob();
          if(bob) {
             int nrbobs=1;
-            while((bob=bob->get_next_bob())) 
+            while((bob=bob->get_next_bob()))
                ++nrbobs;
-           
+
             // write number
             fw->Unsigned8(nrbobs);
-   
+
             // write in back directed order (last goes first)
             Bob** bobs=new Bob*[nrbobs];
             int i;
@@ -133,7 +133,7 @@ void Widelands_Map_Bob_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbas
                bobs[i]=bob;
                bob=bob->get_next_bob();
             }
-            
+
             for(i=0;i<nrbobs; i++) {
                // write id
                fw->Unsigned16(smap[bobs[i]->get_name()]);

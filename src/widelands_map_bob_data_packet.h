@@ -23,8 +23,8 @@
 #include "widelands_map_data_packet.h"
 
 /*
- * This data packet contains the various bobs on 
- * the map (animals for now) 
+ * This data packet contains the various bobs on
+ * the map (animals for now)
  */
 class Widelands_Map_Bob_Data_Packet : public Widelands_Map_Data_Packet {
    public:

@@ -45,7 +45,7 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_res=fr->Unsigned16();
-      if(nr_res>world->get_nr_resources()) throw wexception("Number of resources in map (%i) is bigger than in world (%i)", 
+      if(nr_res>world->get_nr_resources()) throw wexception("Number of resources in map (%i) is bigger than in world (%i)",
             nr_res, world->get_nr_resources());
 
       // construct ids and map
@@ -59,10 +59,10 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
          smap[id]=world->get_resource(res);
       }
 
-      // Now get all the the resources 
+      // Now get all the the resources
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
-            
+
             int id=fr->Unsigned8();
             int amount=fr->Unsigned8();
             // NoLog("[Map Loader] Setting resource of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
@@ -92,9 +92,9 @@ void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
    fw->Unsigned16(CURRENT_PACKET_VERSION);
 
    // This is a bit more complicated saved so that the order of loading
-   // of the resources at run time doesn't matter. 
+   // of the resources at run time doesn't matter.
    // (saved like terrains)
-   // Write the number of resources 
+   // Write the number of resources
    World* world=egbase->get_map()->get_world();
    int nr_res=world->get_nr_resources();
    fw->Unsigned16(nr_res);
@@ -109,9 +109,9 @@ void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
       fw->Unsigned8('\0');
    }
 
-   // Now, all resouces as unsigned chars in order 
+   // Now, all resouces as unsigned chars in order
    //  - resource id
-   //  - amount 
+   //  - amount
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {

@@ -59,19 +59,19 @@ int Overlay_Manager::get_overlays(FCoords& c, Overlay_Info* overlays) {
    int fieldindex= (c.y<<8) + c.x;
    int nov=0;
    if((nov=m_overlays.count(fieldindex))) {
-      // there are overlays registered 
+      // there are overlays registered
       std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex);
-      while(i->first==fieldindex && i->second.level<=5) {   
+      while(i->first==fieldindex && i->second.level<=5) {
          overlays[num_ret].picid=i->second.picid;
          overlays[num_ret].hotspot_x=i->second.hotspot_x;
          overlays[num_ret].hotspot_y=i->second.hotspot_y;
          ++num_ret;
          ++i;
-      } 
-   
+      }
+
       // now overlays
       num_ret+=get_build_overlay(c,overlays,num_ret);
-     
+
       while(i->first==fieldindex) {
          overlays[num_ret].picid=i->second.picid;
          overlays[num_ret].hotspot_x=i->second.hotspot_x;
@@ -93,7 +93,7 @@ int Overlay_Manager::get_overlays(FCoords& c, Overlay_Info* overlays) {
  * returns one if a overlay was set
  */
 inline int Overlay_Manager::get_build_overlay(FCoords& c, Overlay_Info* overlays, int i) {
-   uchar overlay_field = m_overlay_fields[c.y*m_w+c.x];  
+   uchar overlay_field = m_overlay_fields[c.y*m_w+c.x];
    if(m_showbuildhelp && overlay_field >= Overlay_Build_Min &&
          overlay_field <= Overlay_Build_Max) {
       int build_overlay = overlay_field - Overlay_Build_Min;
@@ -103,10 +103,10 @@ inline int Overlay_Manager::get_build_overlay(FCoords& c, Overlay_Info* overlays
    }
    return 0;
 }
-      
+
 
 /*
- * remove all registered overlays. The Overlay_Manager 
+ * remove all registered overlays. The Overlay_Manager
  * can than be reused without needing to be delete()ed
  */
 void Overlay_Manager::cleanup(void) {
@@ -124,14 +124,14 @@ void Overlay_Manager::cleanup(void) {
 }
 
 /*
- * called when the map changes size 
+ * called when the map changes size
  * everything should already be invalid
  */
 void Overlay_Manager::init(int w, int h) {
    assert(!m_w);
    assert(!m_h);
    assert(!m_overlay_fields);
-   
+
    m_w=w;
    m_h=h;
 
@@ -143,7 +143,7 @@ void Overlay_Manager::init(int w, int h) {
  */
 void Overlay_Manager::recalc_field_overlays(FCoords& fc, FCoords* neighbours) {
    assert(m_overlay_fields);
-   
+
    uchar code = 0;
    int owner = fc.field->get_owned_by();
 
@@ -165,7 +165,7 @@ void Overlay_Manager::recalc_field_overlays(FCoords& fc, FCoords* neighbours) {
       if(m_callback) {
          buildcaps = m_callback(fc, m_callback_data, m_callback_data_i);
       } else {
-         buildcaps = fc.field->get_caps(); 
+         buildcaps = fc.field->get_caps();
       }
 
       if (buildcaps & BUILDCAPS_MINE)
@@ -209,9 +209,9 @@ void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords ho
       hsx>>=1;
       hsy>>=1;
    }
-      
+
    Registered_Overlays info= {
-      jobid, 
+      jobid,
       picid,
       hsx, hsy,
       level
@@ -219,15 +219,15 @@ void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords ho
 
    m_overlays.insert(std::pair<int,Registered_Overlays>(fieldindex, info));
 
-   // Now manually sort, so that they are ordered 
+   // Now manually sort, so that they are ordered
    //  * first by fieldindex (done by std::multimap)
    //  * second by levels (done manually here)
    std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex); // theres at least one registered
-   std::map<int, Registered_Overlays>::iterator j; 
+   std::map<int, Registered_Overlays>::iterator j;
    do {
       j=i;
       ++j;
-     
+
       if(j->first==i->first) {
          // there are more elements registered
          if(j->second.level < i->second.level) {
@@ -280,7 +280,7 @@ void Overlay_Manager::remove_overlay(int jobid) {
    }
 }
 
-/* 
+/*
  * Register road overlays
  */
 void Overlay_Manager::register_road_overlay(Coords c, uchar where, int jobid) {
@@ -340,25 +340,25 @@ void Overlay_Manager::remove_road_overlay(int jobid) {
 void Overlay_Manager::load_graphics(void) {
    // Load all the needed graphics
    m_buildhelp_infos[0].picid=g_gr->get_picture(PicMod_Game, "pics/set_flag.png", true);
-   g_gr->get_picture_size(m_buildhelp_infos[0].picid, &m_buildhelp_infos[0].hotspot_x, &m_buildhelp_infos[0].hotspot_y); 
+   g_gr->get_picture_size(m_buildhelp_infos[0].picid, &m_buildhelp_infos[0].hotspot_x, &m_buildhelp_infos[0].hotspot_y);
    m_buildhelp_infos[0].hotspot_x/=2; m_buildhelp_infos[0].hotspot_y-=1;
-   
-   m_buildhelp_infos[1].picid=g_gr->get_picture(PicMod_Game, "pics/small.png", true); 
-   g_gr->get_picture_size(m_buildhelp_infos[1].picid, &m_buildhelp_infos[1].hotspot_x, &m_buildhelp_infos[1].hotspot_y); 
+
+   m_buildhelp_infos[1].picid=g_gr->get_picture(PicMod_Game, "pics/small.png", true);
+   g_gr->get_picture_size(m_buildhelp_infos[1].picid, &m_buildhelp_infos[1].hotspot_x, &m_buildhelp_infos[1].hotspot_y);
    m_buildhelp_infos[1].hotspot_x/=2; m_buildhelp_infos[1].hotspot_y/=2;
-  
-   m_buildhelp_infos[2].picid=g_gr->get_picture(PicMod_Game, "pics/medium.png", true); 
-   g_gr->get_picture_size(m_buildhelp_infos[2].picid, &m_buildhelp_infos[2].hotspot_x, &m_buildhelp_infos[2].hotspot_y); 
+
+   m_buildhelp_infos[2].picid=g_gr->get_picture(PicMod_Game, "pics/medium.png", true);
+   g_gr->get_picture_size(m_buildhelp_infos[2].picid, &m_buildhelp_infos[2].hotspot_x, &m_buildhelp_infos[2].hotspot_y);
    m_buildhelp_infos[2].hotspot_x/=2; m_buildhelp_infos[2].hotspot_y/=2;
-   
-   m_buildhelp_infos[3].picid=g_gr->get_picture(PicMod_Game, "pics/big.png", true); 
-   g_gr->get_picture_size(m_buildhelp_infos[3].picid, &m_buildhelp_infos[3].hotspot_x, &m_buildhelp_infos[3].hotspot_y); 
+
+   m_buildhelp_infos[3].picid=g_gr->get_picture(PicMod_Game, "pics/big.png", true);
+   g_gr->get_picture_size(m_buildhelp_infos[3].picid, &m_buildhelp_infos[3].hotspot_x, &m_buildhelp_infos[3].hotspot_y);
    m_buildhelp_infos[3].hotspot_x/=2; m_buildhelp_infos[3].hotspot_y/=2;
-   
-   m_buildhelp_infos[4].picid=g_gr->get_picture(PicMod_Game, "pics/mine.png", true); 
-   g_gr->get_picture_size(m_buildhelp_infos[4].picid, &m_buildhelp_infos[4].hotspot_x, &m_buildhelp_infos[4].hotspot_y); 
+
+   m_buildhelp_infos[4].picid=g_gr->get_picture(PicMod_Game, "pics/mine.png", true);
+   g_gr->get_picture_size(m_buildhelp_infos[4].picid, &m_buildhelp_infos[4].hotspot_x, &m_buildhelp_infos[4].hotspot_y);
    m_buildhelp_infos[4].hotspot_x/=2; m_buildhelp_infos[4].hotspot_y/=2;
-   
+
    m_are_graphics_loaded=true;
 }
 

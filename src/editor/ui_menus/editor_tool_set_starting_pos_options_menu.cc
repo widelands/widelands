@@ -84,7 +84,7 @@ Editor_Tool_Set_Starting_Pos_Options_Menu::Editor_Tool_Set_Starting_Pos_Options_
 
    m_posy=posy;
 
-   int i=0; 
+   int i=0;
    for(i=0; i<MAX_PLAYERS; i++) {
       m_plr_names[i]=0;
       m_plr_set_pos_buts[i]=0;
@@ -105,11 +105,11 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::update(void) {
    std::string text="";
    if(nr_players/10) text+=static_cast<char>(nr_players/10 + 0x30);
    text+=static_cast<char>((nr_players%10) + 0x30);
-  
+
    m_nr_of_players_ta->set_text(text.c_str());
 
-   // Now remove all the unneeded stuff 
-   int i=0; 
+   // Now remove all the unneeded stuff
+   int i=0;
    for(i=nr_players; i<MAX_PLAYERS; i++) {
       if(m_plr_names[i]) {
          delete m_plr_names[i];
@@ -135,7 +135,7 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::update(void) {
           m_plr_names[i]=new UIEdit_Box(this, posx, posy, 140, size, 0, 750+i);
           m_plr_names[i]->changedid.set(this, &Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked);
           posx+=140+spacing;
-      } 
+      }
       m_plr_names[i]->set_text(m_parent->get_map()->get_scenario_player_name(i+1).c_str());
       if(!m_plr_set_tribes_buts[i]) {
          m_plr_set_tribes_buts[i]=new UIButton(this, posx, posy, 140, size, 0, i+500);
@@ -146,15 +146,15 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::update(void) {
       if(!m_plr_set_pos_buts[i]) {
           m_plr_set_pos_buts[i]=new UIButton(this, get_inner_w()-size-spacing, posy, size, size, 0, i+1);
           m_plr_set_pos_buts[i]->clickedid.set(this, &Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked);
-      } 
+      }
       text="pics/fsel_editor_set_player_";
       text+=static_cast<char>(((i+1)/10) + 0x30);
       text+=static_cast<char>(((i+1)%10) + 0x30);
-      text+="_pos.png"; 
+      text+="_pos.png";
       m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture(PicMod_Game, text.c_str(), true));
       posy+=size+spacing;
       posx=spacing;
-   } 
+   }
    set_inner_size(get_inner_w(),posy+spacing);
 }
 
@@ -171,7 +171,7 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
       m_spt->set_current_player(n);
       // jump to the current field
       Coords c=m_parent->get_map()->get_starting_pos(n);
-      if(c.x!= -1 && c.y!= -1) 
+      if(c.x!= -1 && c.y!= -1)
          m_parent->move_view_to(c.x,c.y);
 
       // Reselect tool, so everything is in a defined state
@@ -189,19 +189,19 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
       if(t=="<undefined>") {
          t=m_tribes[0];
       } else {
-         if(!Tribe_Descr::exists_tribe(t)) 
+         if(!Tribe_Descr::exists_tribe(t))
             throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
          uint i;
-         for(i=0; i<m_tribes.size(); i++) 
+         for(i=0; i<m_tribes.size(); i++)
             if(m_tribes[i]==t) break;
          if(i==m_tribes.size()-1) t="<undefined>";
          else t=m_tribes[++i];
       }
-      m_parent->get_map()->set_scenario_player_tribe(m+1,t); 
+      m_parent->get_map()->set_scenario_player_tribe(m+1,t);
       m_parent->set_need_save(true);
    } else if(n<1000) {
       // Player name has been changed
-      int m=n-750;   
+      int m=n-750;
       std::string text=m_plr_names[m]->get_text();
       if(text=="") {
          text=m_parent->get_map()->get_scenario_player_name(m+1);
@@ -212,7 +212,7 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
    } else {
       int nr_players=m_parent->get_map()->get_nrplayers();
       // Up down button
-      if(n==1000) ++nr_players; 
+      if(n==1000) ++nr_players;
       if(n==1001) --nr_players;
       if(nr_players<1) nr_players=1;
       if(nr_players>MAX_PLAYERS) nr_players=MAX_PLAYERS;
@@ -231,7 +231,7 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
          std::string name= m_parent->get_map()->get_scenario_player_name(nr_players);
          std::string tribe=  m_parent->get_map()->get_scenario_player_tribe(nr_players);
          m_parent->get_map()->set_nrplayers(nr_players);
-         m_parent->get_map()->set_scenario_player_name(nr_players, name); 
+         m_parent->get_map()->set_scenario_player_name(nr_players, name);
          m_parent->get_map()->set_scenario_player_tribe(nr_players, tribe);
          m_parent->set_need_save(true);
       }

@@ -27,7 +27,7 @@
 #define TEXTURE_H TEXTURE_W // TEXTURE_H is just defined for easier understandement of the code
 
 // Fonts TODO: make this configurable (at least the sizes)
-#define UI_FONT_BIG "Vera.ttf", 18 
+#define UI_FONT_BIG "Vera.ttf", 18
 #define UI_FONT_SMALL "Vera.ttf", 10
 #define UI_FONT_CLR_FG  RGBColor(255,255,0)
 #define UI_FONT_BIG_CLR UI_FONT_CLR_FG, RGBColor(0,0,0)

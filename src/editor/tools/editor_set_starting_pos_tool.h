@@ -40,7 +40,7 @@ Set the starting position of the various players
 */
 class Editor_Set_Starting_Pos_Tool : public Editor_Tool {
    public:
-      Editor_Set_Starting_Pos_Tool();  
+      Editor_Set_Starting_Pos_Tool();
       virtual ~Editor_Set_Starting_Pos_Tool();
 
       virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
@@ -49,7 +49,7 @@ class Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 
       // tool functions
       void set_current_player(int i);
-      
+
    private:
       std::string m_current_fieldsel_pic;
 };

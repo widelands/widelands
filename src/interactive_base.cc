@@ -91,18 +91,18 @@ Change the field selection. Does not honour the freeze!
 void Interactive_Base::set_fieldsel_pos(Coords c)
 {
    // Remove old fieldsel pointer
-   if(m_fsd.fieldsel_jobid) 
+   if(m_fsd.fieldsel_jobid)
       get_map()->get_overlay_manager()->remove_overlay(m_fsd.fieldsel_jobid);
 	m_fsd.fieldsel_jobid= get_map()->get_overlay_manager()->get_a_job_id();
    m_fsd.fieldsel_pos=c;
    // register fieldsel overlay position
    MapRegion mr(get_map(), c, m_fsd.fieldsel_radius);
    FCoords fc;
-   while(mr.next(&fc)) { 
+   while(mr.next(&fc)) {
       get_map()->get_overlay_manager()->register_overlay(fc, m_fsd.fieldsel_pic, 7, Coords(-1,-1), m_fsd.fieldsel_jobid);
    }
 }
-         
+
 /*
  * Set the current fieldsel selection radius.
  */
@@ -112,15 +112,15 @@ void Interactive_Base::set_fieldsel_radius(int n) {
 }
 
 /*
- *  [ protected functions ] 
+ *  [ protected functions ]
  *
  * Set/Unset fieldsel picture
  */
-void Interactive_Base::set_fieldsel_picture(const char* file) { 
-   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, file, true); 
+void Interactive_Base::set_fieldsel_picture(const char* file) {
+   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, file, true);
    set_fieldsel_pos(get_fieldsel_pos()); // redraw
-}   
-void Interactive_Base::unset_fieldsel_picture(void) { 
+}
+void Interactive_Base::unset_fieldsel_picture(void) {
    set_fieldsel_picture("pics/fsel.png");
 }
 

@@ -45,17 +45,17 @@ void Widelands_Map_Event_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbas
    if(packet_version==CURRENT_PACKET_VERSION) {
       // Get number of events
       int nr_event=fr->Unsigned16();
-      
-      // Read all the events 
+
+      // Read all the events
       Map* map=egbase->get_map();
       int i=0;
       for(i=0; i<nr_event; i++) {
          Event* event = Event_Factory::get_correct_event(fr->Unsigned16());
          assert(event);
          event->Read(fr, egbase, get_scenario_skip());
-         if(get_scenario_skip()) 
+         if(get_scenario_skip())
             delete event;
-         else 
+         else
             map->register_new_event(event);
       }
       return; // done
@@ -75,9 +75,9 @@ void Widelands_Map_Event_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egb
    fw->Unsigned16(CURRENT_PACKET_VERSION);
 
    // Now number of events
-   Map* map=egbase->get_map(); 
+   Map* map=egbase->get_map();
    fw->Unsigned16(map->get_number_of_events());
-   
+
    // Now write all the events
    int i=0;
    for(i=0; i<map->get_number_of_events(); i++)

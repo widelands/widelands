@@ -52,13 +52,13 @@ UIScrollbar::UIScrollbar(UIPanel *parent, int x, int y, uint w, uint h, bool hor
 
 	if (m_horizontal)
 	{
-		m_pic_minus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png", true); 
+		m_pic_minus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png", true);
 		m_pic_plus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png", true);
 	}
 	else
 	{
-		m_pic_minus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true); 
-		m_pic_plus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true); 
+		m_pic_minus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true);
+		m_pic_plus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true);
 	}
 
 	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/scrollbar_background.png", false);
@@ -291,7 +291,7 @@ void UIScrollbar::draw(RenderTarget* dst)
 	uint knobpos = get_knob_pos();
 
    if(m_steps==1 && !m_force_draw) return; // don't draw a not doing scrollbar
-   
+
 	if (m_horizontal)
 	{
 		draw_button(dst, Minus, 0, 0, Size, get_h());

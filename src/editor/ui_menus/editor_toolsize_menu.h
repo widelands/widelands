@@ -51,4 +51,4 @@ class Editor_Toolsize_Menu : public UIUniqueWindow {
 };
 
 
-#endif 
+#endif

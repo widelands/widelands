@@ -32,7 +32,7 @@ class Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
 
       virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
       virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
-      
+
       // The following function prereads a given map without
       // the need of a properly configured Editor_Game_Base
       // object

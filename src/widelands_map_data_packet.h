@@ -30,14 +30,14 @@ class Editor_Game_Base;
 /*
 ========================================
 
-This class represents a data packet in a widelands 
+This class represents a data packet in a widelands
 map file. it is an abstract base class
 
 ========================================
 */
 class Widelands_Map_Data_Packet {
    public:
-      virtual ~Widelands_Map_Data_Packet() { m_skip=false; }    
+      virtual ~Widelands_Map_Data_Packet() { m_skip=false; }
 
       virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception) = 0;
       virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception) = 0;
@@ -46,9 +46,9 @@ class Widelands_Map_Data_Packet {
 
    protected:
       inline bool get_scenario_skip(void) { return m_skip; }
-      
+
    private:
       bool m_skip;
 };
 
-#endif 
+#endif

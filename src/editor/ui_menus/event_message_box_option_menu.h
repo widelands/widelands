@@ -35,7 +35,7 @@ class UIListselect;
 class Trigger;
 
 /*
- * This is a modal box - The user must end this first 
+ * This is a modal box - The user must end this first
  * before it can return
  */
 class Event_Message_Box_Option_Menu : public UIWindow {
@@ -47,7 +47,7 @@ class Event_Message_Box_Option_Menu : public UIWindow {
 
    private:
       static const int MAX_BUTTONS=4;
-   
+
       void update(void);
       void clicked(int);
       void ls_selected(int);
@@ -56,7 +56,7 @@ class Event_Message_Box_Option_Menu : public UIWindow {
 
       Event_Message_Box* m_event;
       Editor_Interactive* m_parent;
-      
+
       struct Button_Descr {
          std::string name;
          int trigger;
@@ -66,7 +66,7 @@ class Event_Message_Box_Option_Menu : public UIWindow {
       UICheckbox* m_is_modal;
       UIEdit_Box* m_caption;
       UIEdit_Box* m_name;
-      UIEdit_Box* m_window_title; 
+      UIEdit_Box* m_window_title;
       UIEdit_Box* m_button_name;
       UIButton*   m_btn_picture_options;
       UITextarea* m_nr_buttons_ta;

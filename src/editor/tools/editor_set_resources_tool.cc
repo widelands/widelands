@@ -52,7 +52,7 @@ int Editor_Set_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_I
       int res=f->get_resources();
       int amount=f->get_resources_amount();
       int max_amount=map->get_world()->get_resource(m_cur_res)->get_max_amount();
-      
+
       amount=m_set_to;
       if(amount<0) amount=0;
       if(amount>max_amount) amount=max_amount;
@@ -65,8 +65,8 @@ int Editor_Set_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_I
             int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), true);
             map->get_overlay_manager()->remove_overlay(c,picid);
 
-         }   
-         if(!amount) { 
+         }
+         if(!amount) {
             f->set_resources(0,0);
          } else {
             f->set_resources(m_cur_res,amount);

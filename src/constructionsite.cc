@@ -236,9 +236,9 @@ void ConstructionSite::set_building(Building_Descr* descr)
  */
 void ConstructionSite::set_previous_building(Building_Descr* descr) {
    assert(!m_prev_building);
-   
+
    m_prev_building=descr;
-   
+
    if(!m_prev_building->get_build_anim())
       throw wexception("Trying to enhance a non buildable building!\n");
 }
@@ -534,9 +534,9 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 	anim = get_building()->get_build_anim();
    int nr_pics=g_gr->get_animation_nr_frames(anim);
    uint anim_pic = completedtime * nr_pics / totaltime;
-	// Redefine tanim 
-   tanim = anim_pic*FRAME_LENGTH; 
-	
+	// Redefine tanim
+   tanim = anim_pic*FRAME_LENGTH;
+
    g_gr->get_animation_size(anim, tanim, &w, &h);
 
 	lines = h * completedtime * nr_pics / totaltime;
@@ -553,8 +553,8 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
       int anim = m_prev_building->get_build_anim();
       int nr_pics=g_gr->get_animation_nr_frames(anim);
       g_gr->get_animation_size(anim, tanim, &w, &h);
-      int tanim = (nr_pics-1)*FRAME_LENGTH; 
-      dst->drawanim(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor()); 
+      int tanim = (nr_pics-1)*FRAME_LENGTH;
+      dst->drawanim(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor());
    }
 
 	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor(), 0, h-lines, w, lines);

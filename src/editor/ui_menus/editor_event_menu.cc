@@ -53,7 +53,7 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    const int spacing=5;
    int posx=offsx;
    int posy=offsy;
-   
+
    // Event List
    new UITextarea(this, spacing, offsy, "Registered Events: ", Align_Left);
    m_event_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
@@ -79,8 +79,8 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    m_btn_edit_event->set_title("Edit");
    m_btn_edit_event->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_edit_event->set_enabled(false);
-   
-   
+
+
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 80, 20, 4, 3);
    b->set_title("New Trigger");
@@ -95,7 +95,7 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    m_btn_del_trigger->set_title("Del");
    m_btn_del_trigger->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_del_trigger->set_enabled(false);
-   
+
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -124,14 +124,14 @@ void Editor_Event_Menu::update(void) {
       trig=m_parent->get_map()->get_trigger(i);
       m_trigger_list->add_entry(trig->get_name(), trig);
    }
-  
+
    Event* event=0;
    m_event_list->clear();
    for(i=0; i<m_parent->get_map()->get_number_of_events(); i++) {
       event=m_parent->get_map()->get_event(i);
       m_event_list->add_entry(event->get_name(), event);
    }
-   
+
    m_trigger_list->sort();
    m_event_list->sort();
 

@@ -44,7 +44,7 @@ class Editor_Tool_Set_Starting_Pos_Options_Menu : public Editor_Tool_Options_Men
       UIButton* m_plr_set_pos_buts[MAX_PLAYERS];
       UIButton* m_plr_set_tribes_buts[MAX_PLAYERS];
       std::vector<std::string> m_tribes;
-      
+
       int m_posy;
 
       void button_clicked(int);

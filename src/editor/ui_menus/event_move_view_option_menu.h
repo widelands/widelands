@@ -30,7 +30,7 @@ class UICheckbox;
 class UITextarea;
 
 /*
- * This is a modal box - The user must end this first 
+ * This is a modal box - The user must end this first
  * before it can return
  */
 class Event_Move_View_Option_Menu : public UIWindow {
@@ -46,7 +46,7 @@ class Event_Move_View_Option_Menu : public UIWindow {
 
       Event_Move_View* m_event;
       Editor_Interactive* m_parent;
-      
+
       UICheckbox* m_is_one_time_event;
       UIEdit_Box* m_name;
       int         m_x, m_y;

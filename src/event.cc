@@ -30,7 +30,7 @@
  */
 bool Event::trigger_exists(Trigger* trig) {
    std::vector<Trigger_Info>::iterator i;
-   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) 
+   for(i=m_triggers.begin(); i!=m_triggers.end(); i++)
       if((*i).t==trig) {
          return true;
       }
@@ -39,7 +39,7 @@ bool Event::trigger_exists(Trigger* trig) {
 
 /*
  * register and unregister triggers
- * with this event. 
+ * with this event.
  */
 void Event::register_trigger(Trigger* trig, Map* m, bool up) {
    assert(!trigger_exists(trig));
@@ -51,7 +51,7 @@ void Event::register_trigger(Trigger* trig, Map* m, bool up) {
 void Event::unregister_trigger(Trigger* t, Map* m) {
    assert(trigger_exists(t));
    std::vector<Trigger_Info>::iterator i;
-   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) { 
+   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) {
       if((*i).t==t) {
          m_triggers.erase(i);
          m->release_trigger(t);
@@ -67,7 +67,7 @@ void Event::unregister_trigger(Trigger* t, Map* m) {
 void Event::write_triggers(FileWrite* fw, Editor_Game_Base* egbase) {
    fw->Unsigned16(get_nr_triggers());
    int i=0;
-   for(i=0; i<get_nr_triggers(); i++) { 
+   for(i=0; i<get_nr_triggers(); i++) {
       fw->Unsigned16(egbase->get_map()->get_trigger_index(m_triggers[i].t));
       fw->Unsigned8(m_triggers[i].up);
    }
@@ -75,7 +75,7 @@ void Event::write_triggers(FileWrite* fw, Editor_Game_Base* egbase) {
 }
 void Event::read_triggers(FileRead* fr, Editor_Game_Base* egbase, bool skip) {
    int nr_triggers=fr->Unsigned16();
-   int i=0; 
+   int i=0;
    for(i=0; i<nr_triggers; i++) {
       int id=fr->Unsigned16();
       bool up=fr->Unsigned8();
@@ -91,7 +91,7 @@ void Event::read_triggers(FileRead* fr, Editor_Game_Base* egbase, bool skip) {
  * return true
  */
 bool Event::check_triggers(void) {
-   for(int i=0; i<get_nr_triggers(); i++) 
+   for(int i=0; i<get_nr_triggers(); i++)
       if(m_triggers[i].t->is_set()!=m_triggers[i].up)
          return false;
    return true;
@@ -105,8 +105,8 @@ void Event::reinitialize(Game* game) {
      Event::cleanup(game);
    } else {
       // toggle all those triggers back
-      int i=0; 
-      for(i=0; i<get_nr_triggers(); i++) 
+      int i=0;
+      for(i=0; i<get_nr_triggers(); i++)
          m_triggers[i].t->reset_trigger(game);
    }
 }
@@ -120,7 +120,7 @@ void Event::cleanup(Editor_Game_Base* g) {
    while(get_nr_triggers())
       unregister_trigger(m_triggers[0].t, map);
    log("Unregistering event: %s. %p\n", get_name(), this);
-   g->get_map()->unregister_event(this);  
+   g->get_map()->unregister_event(this);
 }
 
 /*
@@ -129,24 +129,24 @@ void Event::cleanup(Editor_Game_Base* g) {
 bool Event::reacts_when_trigger_is_set(Trigger* t) {
    assert(trigger_exists(t));
    std::vector<Trigger_Info>::iterator i;
-   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) { 
+   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) {
       if((*i).t==t) {
          return i->up==true;
       }
    }
    assert(0);
    throw;
-} 
-   
+}
+
 bool Event::set_reacts_when_trigger_is_set(Trigger* t, bool up) {
    assert(trigger_exists(t));
    std::vector<Trigger_Info>::iterator i;
-   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) { 
+   for(i=m_triggers.begin(); i!=m_triggers.end(); i++) {
       if((*i).t==t) {
          return i->up=up;
       }
    }
    assert(0);
    throw;
-} 
+}
 

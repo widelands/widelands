@@ -46,7 +46,7 @@ void Widelands_Map_Terrain_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_terrains=fr->Unsigned16();
-      if(nr_terrains>world->get_nr_terrains()) throw wexception("Number of terrains in file (%i) is bigger than in world (%i)", 
+      if(nr_terrains>world->get_nr_terrains()) throw wexception("Number of terrains in file (%i) is bigger than in world (%i)",
             nr_terrains, world->get_nr_terrains());
 
       // construct ids and map
@@ -95,7 +95,7 @@ void Widelands_Map_Terrain_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* e
    World* world=egbase->get_map()->get_world();
    int nr_ter=world->get_nr_terrains();
    fw->Unsigned16(nr_ter);
-  
+
    // Write all terrain names and their id's
    std::map<std::string,uchar> smap;
    for(int i=0; i<nr_ter; i++) {
@@ -105,7 +105,7 @@ void Widelands_Map_Terrain_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* e
       fw->Data(ter->get_name(), strlen(ter->get_name()));
       fw->Unsigned8('\0');
    }
-   
+
    // Now, all terrains as unsigned chars in order
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {

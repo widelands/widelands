@@ -32,9 +32,9 @@ class Event_Move_View : public Event {
    public:
      Event_Move_View();
       ~Event_Move_View();
-      
+
       // one liner functions
-      uint get_id(void) { return EVENT_MOVE_VIEW; } 
+      uint get_id(void) { return EVENT_MOVE_VIEW; }
 
       void run(Game*);
       virtual void reinitialize(Game*);
@@ -43,10 +43,10 @@ class Event_Move_View : public Event {
       // File Functions
       void Write(FileWrite*, Editor_Game_Base*);
       void Read(FileRead*, Editor_Game_Base*, bool);
-  
+
       inline void set_coords(Coords pt) { m_pt=pt; }
       inline Coords get_coords(void) { return m_pt; }
-      
+
    private:
       Coords m_pt;
 };

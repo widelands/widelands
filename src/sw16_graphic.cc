@@ -499,7 +499,7 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 ===============
 draw_overlays
 
-Draw build help, frontier and registered overlays 
+Draw build help, frontier and registered overlays
 ===============
 */
 static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
@@ -508,24 +508,24 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 	// Render frontier
    uchar player;
    if((player=mri->egbase->get_map()->get_overlay_manager()->is_frontier_field(fc))) {
-      Player *ownerplayer = mri->egbase->get_player(player); 
+      Player *ownerplayer = mri->egbase->get_player(player);
       uint anim = ownerplayer->get_tribe()->get_frontier_anim();
       const RGBColor* playercolors = ownerplayer->get_playercolor();
 
       dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
 
       // check to the right
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc)) 
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc))
          dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
-      // check to the bottom left 
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc)) 
+      // check to the bottom left
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc))
          dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
       // check to the bottom right
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl)) 
+      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl))
          dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
    }
-   
-	// Draw normal buildhelp 
+
+	// Draw normal buildhelp
    Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_FIELD];
    int num_overlays=mri->egbase->get_map()->get_overlay_manager()->get_overlays(fc, overlay_info);
 
@@ -690,7 +690,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
                bob = bob->get_next_bob();
             }
 
-            // Draw buildhelp, road buildhelp 
+            // Draw buildhelp, road buildhelp
             draw_overlays(this, mri, f, wh_pos,
                   r, Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(r.field->get_height())),
                   bl, Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(bl.field->get_height())),
@@ -1144,7 +1144,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 
 		for(int y = 0; y < cv->h; y++)
 			memcpy(pic->bitmap.pixels + y*cv->w, (Uint8*)cv->pixels + y*cv->pitch, cv->w*2);
-		
+
 
 		SDL_FreeSurface(cv);
 		SDL_FreeSurface(bmp);
@@ -1157,7 +1157,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname, bool buse_clrkey)
 
 	return id;
 }
-	
+
 void GraphicImpl::use_clrkey(uint id, bool t) {
    if (id  >= m_pictures.size() || !m_pictures[id].mod)
       throw wexception("get_picture_size(%i): picture doesn't exist", id);
@@ -1517,14 +1517,14 @@ void GraphicImpl::flush_picture(uint pic_index) {
    free(pic->bitmap.pixels);
    pic->bitmap.pixels=0;
 }
-   
+
 /*
  * Save and load pictures
  */
 #define PICTURE_VERSION 1
 void GraphicImpl::save_pic_to_file(uint pic_index, FileWrite* fw) {
    Picture* pic = &m_pictures[pic_index];
-   
+
    // First the version
    fw->Unsigned16(PICTURE_VERSION);
 
@@ -1582,7 +1582,7 @@ uint GraphicImpl::load_pic_from_file(FileRead* fr, int mod) {
       pic->bitmap.h = g_h;
       pic->bitmap.pitch = g_w;
       pic->bitmap.hasclrkey = has_clrkey;
-      pic->bitmap.clrkey = *pixels; // Upper left pixel 
+      pic->bitmap.clrkey = *pixels; // Upper left pixel
 
       return id;
    }

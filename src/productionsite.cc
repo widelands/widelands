@@ -240,14 +240,14 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 				throw wexception("animation duration must be positive");
 		} else if (cmd[0] == "mine") {
          char* endp;
-         
+
 			if (cmd.size() != 3)
 				throw wexception("Usage: mine <resource> <area>");
 
 			act.type = ProductionAction::actMine;
 			act.sparam1=cmd[1]; // what to mine
          act.iparam1=strtol(cmd[2].c_str(),&endp, 0);
-         if(endp && *endp) 
+         if(endp && *endp)
             throw wexception("Bad area '%s'", cmd[2].c_str());
 
 		} else if (cmd[0] == "call") {
@@ -337,7 +337,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
 
    // Stopabple defaults to true for Production sites
    m_stopable=true;
-   
+
 	Building_Descr::parse(directory, prof, encdata);
 
 	// Get inputs and outputs
@@ -747,7 +747,7 @@ void ProductionSite::program_act(Game* g)
 		program_end(g,false);
 		m_program_timer = true;
 		m_program_time = schedule_act(g,20000);
-		return;  
+		return;
 	}
 	switch(action->type) {
 		case ProductionAction::actSleep:
@@ -853,7 +853,7 @@ void ProductionSite::program_act(Game* g)
 
 			molog("  Mine '%s'", action->sparam1.c_str());
 
-         res=map->get_world()->get_resource(action->sparam1.c_str()); 
+         res=map->get_world()->get_resource(action->sparam1.c_str());
          if(static_cast<char>(res)==-1)
             throw wexception("ProductionAction::actMine: Should mine resource %s, which doesn't exist in world. Tribe is not compatible"
                   " with world!!\n",  action->sparam1.c_str());

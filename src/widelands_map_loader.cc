@@ -44,12 +44,12 @@ Widelands_Map_Loader::~Widelands_Map_Loader(void) {
 
 /*
  * This function preloads map so that
- * the map class returns valid data for all 
+ * the map class returns valid data for all
  * the get_info() functions (_width, _nrplayers..)
  */
 int Widelands_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
-   
+
    m_map->cleanup();
 
    // Load elemental data block
@@ -58,19 +58,19 @@ int Widelands_Map_Loader::preload_map(bool scenario) {
 
    fr.Open(g_fs, m_filename.c_str());
    mp.Pre_Read(&fr, m_map);
-   
+
    if(!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
-  
 
-   if(fr.Unsigned16()!=PACKET_PLAYER_NAM_TRIB) 
+
+   if(fr.Unsigned16()!=PACKET_PLAYER_NAM_TRIB)
       throw wexception("Wrong packet order in map!\n");
 
    Widelands_Map_Player_Names_And_Tribes_Data_Packet* dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
-   if(!scenario) 
+   if(!scenario)
       dp->set_scenario_skip(true);
-   else 
+   else
       dp->set_scenario_skip(false);
    dp->Pre_Read(&fr, m_map);
    delete dp;
@@ -91,7 +91,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    // Postload the world which provides all the immovables found on a map
    m_map->get_world()->postload(egbase);
    m_map->set_size(m_map->m_width, m_map->m_height);
-    
+
    // Load elemental data block (again)
    Widelands_Map_Elemental_Data_Packet mp;
    FileRead fr;
@@ -104,20 +104,20 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
       Widelands_Map_Data_Packet_Factory fac;
 
       ushort id;
-      Widelands_Map_Data_Packet* pak; 
+      Widelands_Map_Data_Packet* pak;
       while(!fr.IsEOF()) {
          id=fr.Unsigned16();
          pak=fac.create_correct_packet(id);
-         if(!scenario) 
+         if(!scenario)
             pak->set_scenario_skip(true);
          pak->Read(&fr, egbase);
          delete pak;
-      } 
+      }
    }
 
    m_map->recalc_whole_map();
 
    set_state(STATE_LOADED);
-   
+
    return 0;
 }

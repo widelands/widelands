@@ -44,7 +44,7 @@ class Editor_Decrease_Resources_Tool : public Editor_Tool {
       inline void set_changed_by(int n) { m_changed_by=n; }
       inline int get_cur_res(void) { return m_cur_res; }
       inline void set_cur_res(int res) { m_cur_res=res; }
-      
+
    private:
       int m_cur_res;
       int m_changed_by;

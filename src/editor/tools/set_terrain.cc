@@ -78,7 +78,7 @@ int Set_Terrain::set_terrain(FCoords& fc, Map* map, Editor_Interactive* parent, 
       // click ln
       map->get_ln(fc,&nb);
       mrc.init(map,nb,radius);
-      while(mrc.next(&curc)) { 
+      while(mrc.next(&curc)) {
          i=map->change_field_terrain(curc,get_random_enabled(),false, true);
          if(i>max) max=i;
       }

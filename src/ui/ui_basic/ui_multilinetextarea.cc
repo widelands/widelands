@@ -32,7 +32,7 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 {
 	set_handle_mouse(false);
 	set_think(false);
-   
+
 
 	set_align(align);
 
@@ -49,10 +49,10 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 
    set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
 
-   
+
 	if (text)
 		set_text(text);
-   
+
 }
 
 

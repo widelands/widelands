@@ -44,12 +44,12 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
    const int spacing=5;
    int posx=offsx;
    int posy=offsy;
-   
+
    // Trigger List
    new UITextarea(this, spacing, offsy, "Available Triggers: ", Align_Left);
    m_trigger_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
-   uint i=0; 
+   uint i=0;
    for(i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
       Trigger_Descr* d=Trigger_Factory::get_correct_trigger_descr(i);
       m_trigger_list->add_entry(d->name, d);
@@ -83,8 +83,8 @@ Editor_Event_Menu_New_Trigger::~Editor_Event_Menu_New_Trigger(void) {
 /*
  * Handle mouseclick
  *
- * we're a modal, therefore we can not delete ourself 
- * on close (the caller must do this) instead 
+ * we're a modal, therefore we can not delete ourself
+ * on close (the caller must do this) instead
  * we simulate a cancel click
  */
 bool Editor_Event_Menu_New_Trigger::handle_mouseclick(uint btn, bool down, int mx, int my) {
@@ -92,9 +92,9 @@ bool Editor_Event_Menu_New_Trigger::handle_mouseclick(uint btn, bool down, int m
       clicked(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 }
-  
+
 /*
  * a button has been clicked
  */
@@ -104,14 +104,14 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
       end_modal(0);
       return;
    }
-   
+
    Trigger_Descr* d=static_cast<Trigger_Descr*>(m_trigger_list->get_selection());
    // Create new trigger
    Trigger* trig=
       Trigger_Factory::make_trigger_with_option_dialog(d->id, m_parent, 0);
    if(!trig) {
-      end_modal(0); 
-      return; 
+      end_modal(0);
+      return;
    }
    if(m_parent->get_map()->trigger_exists(trig)) {
       trig->decr_reference();

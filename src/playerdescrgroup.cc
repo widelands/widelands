@@ -93,13 +93,13 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	m_plnum = plnum;
    m_allow_changes=true;
    m_current_tribe=0;
-   
+
 	m_enabled = false;
 	set_visible(false);
 
 	// create sub-panels
 	m_plr_name=new UITextarea(this, 0, 0, 100, 20, "Player 1", Align_Left);
-   
+
    m_btnEnablePlayer = new UICheckbox(this, 88, 0);
 	m_btnEnablePlayer->set_state(true);
 	m_btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
@@ -111,7 +111,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	else
 		m_playertype = Player::playerAI;
 
-   
+
    m_btnPlayerTribe = new UIButton(this, 244, 0, 120, 20, 1);
    m_btnPlayerTribe->clicked.set(this, &PlayerDescriptionGroup::toggle_playertribe);
 
@@ -198,10 +198,10 @@ void PlayerDescriptionGroup::toggle_playertribe(void) {
  * set the current player tribe
  */
 void PlayerDescriptionGroup::set_player_tribe(std::string str) {
-   uint i=0; 
+   uint i=0;
    for(i=0; i<m_tribes.size(); i++) {
       if(m_tribes[i]==str) {
-         m_current_tribe=i; 
+         m_current_tribe=i;
          m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
          // set the player
          m_game->remove_player(m_plnum);

@@ -52,15 +52,15 @@ UIModal_Message_Box::~UIModal_Message_Box(void) {
 /*
  * Handle mouseclick
  *
- * we're a modal, therefore we can not delete ourself 
- * on close (the caller must do this) instead 
- * we call end_modal() with NO (=0) 
+ * we're a modal, therefore we can not delete ourself
+ * on close (the caller must do this) instead
+ * we call end_modal() with NO (=0)
  */
 bool UIModal_Message_Box::handle_mouseclick(uint btn, bool down, int mx, int my) {
    if(btn == MOUSE_RIGHT) {
       end_modal(0);
       return true;
    } else
-      return false; // we're not dragable 
+      return false; // we're not dragable
 }
-   
+

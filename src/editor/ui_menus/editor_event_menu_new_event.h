@@ -29,7 +29,7 @@ class UIMultiline_Textarea;
 class UIButton;
 
 /*
- * This is a modal box - The user must end this first 
+ * This is a modal box - The user must end this first
  * before it can return
  */
 class Editor_Event_Menu_New_Event : public UIWindow {
@@ -42,7 +42,7 @@ class Editor_Event_Menu_New_Event : public UIWindow {
    private:
       void clicked(int);
       void selected(int);
-      
+
       UIListselect* m_event_list;
       UIMultiline_Textarea* m_description;
       Editor_Interactive* m_parent;

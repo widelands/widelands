@@ -45,13 +45,13 @@ int Editor_Change_Resource_Tool_Callback(FCoords& f, void* data, int curres) {
    terd=f.field->get_terd();
    bool is_valid_d = curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : 0;
    bool is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
-   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_d) 
-      count+=8; 
-   else 
-      count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
-   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r) 
+   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_d)
       count+=8;
-   else 
+   else
+      count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
+   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
+      count+=8;
+   else
       count+= curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : -1;
 
 
@@ -62,36 +62,36 @@ int Editor_Change_Resource_Tool_Callback(FCoords& f, void* data, int curres) {
    terd=f1.field->get_terd();
    is_valid_d = curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : 0;
    is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
-   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_d) 
-      count+=8; 
-   else 
-      count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
-   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r) 
+   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_d)
       count+=8;
-   else 
+   else
+      count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
+   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
+      count+=8;
+   else
       count+= curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : -1;
 
    // top right neigbour
    map->get_neighbour(f, Map_Object::WALK_NE, &f1);
    terd=f1.field->get_terd();
    is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
-   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_r) 
-      count+=8; 
-   else 
+   if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
+      count+=8;
+   else
       count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
 
    // left neighbour
    map->get_neighbour(f, Map_Object::WALK_W, &f1);
    terr=f1.field->get_terr();
    is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
-   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r) 
+   if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
       count+=8;
-   else 
+   else
       count+= curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : -1;
 
-   if(count<=3) 
+   if(count<=3)
       return 0;
-   else 
+   else
       return f.field->get_caps();
 }
 
@@ -106,18 +106,18 @@ there is not already another resource there.
 int Editor_Increase_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* parent) {
    MapRegion mrc(map, fc, parent->get_fieldsel_radius());
    FCoords c;
-   
+
    while(mrc.next(&c)) {
       Field* f=map->get_field(c);
-      
+
       int res=f->get_resources();
       int amount=f->get_resources_amount();
       int max_amount=map->get_world()->get_resource(m_cur_res)->get_max_amount();
 
       amount+=m_changed_by;
       if(amount>max_amount) amount=max_amount;
-     
-      
+
+
       if((res==m_cur_res || !res) && Editor_Change_Resource_Tool_Callback(c,map,m_cur_res)) {
          // Ok, we're doing something. First remove the current overlays
          std::string str;
@@ -126,8 +126,8 @@ int Editor_Increase_Resources_Tool::handle_click_impl(FCoords& fc, Map* map, Edi
             int picid=g_gr->get_picture(PicMod_Menu, str.c_str(), true);
             map->get_overlay_manager()->remove_overlay(c,picid);
 
-         }   
-         if(!amount) { 
+         }
+         if(!amount) {
             f->set_resources(0,0);
          } else {
             f->set_resources(m_cur_res,amount);

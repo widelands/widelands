@@ -42,7 +42,7 @@ void Widelands_Map_Heights_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
    int packet_version=fr->Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
-      // Read all the heights 
+      // Read all the heights
       Map* map=egbase->get_map();
 
       for(ushort y=0; y<map->get_height(); y++) {
@@ -67,7 +67,7 @@ void Widelands_Map_Heights_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* e
 
    // Now packet version
    fw->Unsigned16(CURRENT_PACKET_VERSION);
-   
+
    // Now, all heights as unsigned chars in order
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {

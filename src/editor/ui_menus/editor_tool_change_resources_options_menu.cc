@@ -76,7 +76,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
       if(h>height) height=h;
    }
 
-   int innsize= (resources_in_row)*(width+1+space)+xstart > 135 ? (resources_in_row)*(width+1+space)+xstart : 135; 
+   int innsize= (resources_in_row)*(width+1+space)+xstart > 135 ? (resources_in_row)*(width+1+space)+xstart : 135;
    set_inner_size(innsize, (resources_in_row)*(height+1+space)+ystart+yend+80);
 
    int offsx=5;
@@ -116,8 +116,8 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    posy+=button_width+spacing;
 
    m_cur_selection=new UITextarea(this, 0, 0, "Current Selection", Align_Left);
-         
-   // Now the available resources 
+
+   // Now the available resources
    posx=xstart;
    int cur_x=0;
    i=1;
@@ -131,16 +131,16 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
 
       std::string editor_pic=res->get_editor_pic(100000);
       int picid=g_gr->get_picture(PicMod_Game, editor_pic.c_str(),true);
-     
-      
+
+
       m_radiogroup->add_button(this, posx,posy,picid);
-      
+
       posx+=width+1+space;
       ++cur_x;
       ++i;
    }
    posy+=height+1+space+5;
-  
+
    m_radiogroup->set_state(m_irt->get_cur_res()-1);
 
    update();
@@ -208,11 +208,11 @@ void Editor_Tool_Change_Resources_Options_Menu::update(void) {
    m_increase->set_text(buf);
    sprintf(buf, "%i", m_srt->get_set_to());
    m_set->set_text(buf);
-  
+
    int cursel=m_srt->get_cur_res();
-   if(cursel) 
+   if(cursel)
       m_cur_selection->set_text(m_parent->get_map()->get_world()->get_resource(m_srt->get_cur_res())->get_name());
-   else 
+   else
       m_cur_selection->set_text("");
    m_cur_selection->set_pos((get_inner_w()-m_cur_selection->get_w())/2, get_inner_h()-20);
 }

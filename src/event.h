@@ -33,14 +33,14 @@ class Editor_Game_Base;
 class Map;
 
 /*
- * Event is a in game event of some kind 
+ * Event is a in game event of some kind
  */
 class Event {
    public:
       Event(void) { };
       virtual ~Event(void) { };
 
-      // virtual functions, implemented by the real events 
+      // virtual functions, implemented by the real events
       virtual void run(Game*)=0;
       virtual uint get_id(void)=0; // this function is needed to recreate the correct option window
       virtual void cleanup(Editor_Game_Base*); // release triggers, no memory release
@@ -50,26 +50,26 @@ class Event {
       void set_name(const char* name) { m_name=name; }
       void set_name(std::string name) { m_name=name; }
       inline const char* get_name() { return m_name.c_str(); }
-      
-       
+
+
       void register_trigger(Trigger*, Map*, bool up );
       void unregister_trigger(Trigger*, Map*);
-      inline int get_nr_triggers(void) { return m_triggers.size(); }         
+      inline int get_nr_triggers(void) { return m_triggers.size(); }
       bool trigger_exists(Trigger* trig);
-      
+
       inline bool is_one_time_event(void) { return m_is_one_time_event; }
-      inline void set_is_one_time_event(bool t) { m_is_one_time_event=t; } 
-     
+      inline void set_is_one_time_event(bool t) { m_is_one_time_event=t; }
+
       bool reacts_when_trigger_is_set(Trigger* t);
       bool set_reacts_when_trigger_is_set(Trigger*, bool);
 
       // Check if triggers are set
       bool check_triggers(void);
-      
-      // File functions, to save or load this event 
+
+      // File functions, to save or load this event
       virtual void Write(FileWrite*, Editor_Game_Base*)=0;
       virtual void Read(FileRead*, Editor_Game_Base*, bool)=0;
-      
+
 
    protected:
       // only for child classes
@@ -81,13 +81,13 @@ class Event {
          Trigger* t;
          bool     up;
       };
-         
+
       std::vector<Trigger_Info> m_triggers;
       std::string m_name;
       bool        m_is_one_time_event;    // Can this trigger occur only once?
 
-      
-      
+
+
  };
 
 #endif
