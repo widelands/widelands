@@ -49,11 +49,14 @@ void Object_Manager::cleanup(Game *g)
 	}
 }
 
-/** Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner)
- *
- * Create an object of type d
- */
-Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner, int x, int y)
+/*
+===============
+Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner)
+
+Create an object of type d
+===============
+*/
+Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owner, Coords coords)
 {
 	assert(d);
 
@@ -61,7 +64,7 @@ Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owne
 	if (!d->has_attribute(Map_Object::MOVABLE)) {
 		std::vector<Map_Object*> objs;
 		
-		g->get_map()->find_objects(x, y, 0, Map_Object::MOVABLE, &objs, true);
+		g->get_map()->find_objects(coords, 0, Map_Object::MOVABLE, &objs, true);
 		for(uint i = 0; i < objs.size(); i++) {
 			Map_Object *obj = objs[i];
 			
@@ -82,7 +85,7 @@ Map_Object* Object_Manager::create_object(Game *g, Map_Object_Descr *d, int owne
 	m_objects[m_lastserial] = obj;
 
 	obj->set_owned_by(owner);
-	obj->set_position(g, x, y);
+	obj->set_position(g, coords);
 	obj->init(g);
 	
 	return obj;
@@ -171,8 +174,8 @@ Map_Object::Map_Object(Map_Object_Descr* descr)
 	m_serial = 0;
 
 	m_owned_by = 0;
-	m_field = 0; // not linked anywhere
-	m_pos.x = m_pos.y = 0;
+	m_pos.x = m_pos.y = 0; // not linked anywhere
+	m_pos.field = 0;
 	m_linknext = 0;
 	m_linkpprev = 0;
 
@@ -193,8 +196,8 @@ Map_Object::Map_Object(Map_Object_Descr* descr)
  */
 Map_Object::~Map_Object()
 {
-	if (m_field) {
-		log("Map_Object::~Map_Object: m_field != 0, cleanup() not called!\n");
+	if (m_pos.field) {
+		log("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not called!\n");
 		*(int *)0 = 0;
 	}
 }
@@ -258,7 +261,7 @@ Initialize the object by setting the initial task.
 void Map_Object::init(Game* g)
 {
 	if (has_attribute(ROBUST))
-		g->get_map()->recalc_for_field(m_pos.x, m_pos.y);
+		g->get_map()->recalc_for_field(m_pos);
 
 	// Initialize task system
 	m_lasttask = 0;
@@ -281,14 +284,14 @@ void Map_Object::cleanup(Game *g)
 	if (get_current_task())
 		task_end(g); // subtle...
 	
-	if (m_field) {
-		m_field = 0;
+	if (m_pos.field) {
+		m_pos.field = 0;
 		*m_linkpprev = m_linknext;
 		if (m_linknext)
 			m_linknext->m_linkpprev = m_linkpprev;
 		
 		if (has_attribute(Map_Object::ROBUST))
-			g->get_map()->recalc_for_field(m_pos.x, m_pos.y);
+			g->get_map()->recalc_for_field(m_pos);
 	}
 }
 
@@ -550,7 +553,8 @@ void Map_Object::draw(Game *game, Bitmap* dst, int posx, int posy)
 		return;
 
 	Map *map = game->get_map();
-	Field *start, *end;
+	FCoords end;
+	FCoords start;
 	int dummyx, dummyy;
 	int sx, sy;
 	int ex, ey;
@@ -560,30 +564,29 @@ void Map_Object::draw(Game *game, Bitmap* dst, int posx, int posy)
 		Player *player = game->get_player(get_owned_by());
 		playercolors = player->get_playercolor_rgb();
 	}
-	
-	end = m_field;
+
+	end = m_pos;
 	ex = posx;
 	ey = posy;
 
-	start = 0;
 	sx = ex;
 	sy = ey;
 	
 	switch(m_walking) {
-	case WALK_NW: map->get_brn(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
-	case WALK_NE: map->get_bln(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
-	case WALK_W: map->get_rn(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH; break;
-	case WALK_E: map->get_ln(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH; break;
-	case WALK_SW: map->get_trn(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx += FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
-	case WALK_SE: map->get_tln(m_pos.x, m_pos.y, end, &dummyx, &dummyy, &start); sx -= FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
+	case WALK_NW: map->get_brn(end, &start); sx += FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
+	case WALK_NE: map->get_bln(end, &start); sx -= FIELD_WIDTH/2; sy += FIELD_HEIGHT/2; break;
+	case WALK_W: map->get_rn(end, &start); sx += FIELD_WIDTH; break;
+	case WALK_E: map->get_ln(end, &start); sx -= FIELD_WIDTH; break;
+	case WALK_SW: map->get_trn(end, &start); sx += FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
+	case WALK_SE: map->get_tln(end, &start); sx -= FIELD_WIDTH/2; sy -= FIELD_HEIGHT/2; break;
 	
-	case IDLE: break;
+	case IDLE: start.field = 0; break;
 	}
 
-	ey -= end->get_height()*HEIGHT_FACTOR;
+	ey -= end.field->get_height()*HEIGHT_FACTOR;
 	
-	if (start) {
-		sy -= start->get_height()*HEIGHT_FACTOR;
+	if (start.field) {
+		sy -= start.field->get_height()*HEIGHT_FACTOR;
 
 		float f = (float)(game->get_gametime() - m_walkstart) / (m_walkend - m_walkstart);
 		if (f < 0) f = 0;
@@ -637,17 +640,16 @@ void Map_Object::end_walk(Game* g)
  */
 int Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
 {
-	int newx, newy;
-	Field *newf;
+	FCoords newf;
 	
 	switch(dir) {
 	case IDLE: assert(0); break;
-	case WALK_NW: g->get_map()->get_tln(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
-	case WALK_NE: g->get_map()->get_trn(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
-	case WALK_W: g->get_map()->get_ln(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
-	case WALK_E: g->get_map()->get_rn(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
-	case WALK_SW: g->get_map()->get_bln(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
-	case WALK_SE: g->get_map()->get_brn(m_pos.x, m_pos.y, m_field, &newx, &newy, &newf); break;
+	case WALK_NW: g->get_map()->get_tln(m_pos, &newf); break;
+	case WALK_NE: g->get_map()->get_trn(m_pos, &newf); break;
+	case WALK_W: g->get_map()->get_ln(m_pos, &newf); break;
+	case WALK_E: g->get_map()->get_rn(m_pos, &newf); break;
+	case WALK_SW: g->get_map()->get_bln(m_pos, &newf); break;
+	case WALK_SE: g->get_map()->get_brn(m_pos, &newf); break;
 	}
 
 	// Move capability check by ANDing with the field caps
@@ -656,8 +658,8 @@ int Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
 	// temporarily land.
 	uint movecaps = get_movecaps();
 
-	if (!(m_field->get_caps() & movecaps & MOVECAPS_SWIM && newf->get_caps() & MOVECAPS_WALK) &&
-	    !(newf->get_caps() & movecaps))
+	if (!(m_pos.field->get_caps() & movecaps & MOVECAPS_SWIM && newf.field->get_caps() & MOVECAPS_WALK) &&
+	    !(newf.field->get_caps() & movecaps))
 		return -1;
 
 	// Move is go
@@ -667,35 +669,33 @@ int Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
 	m_walkstart = g->get_gametime();
 	m_walkend = m_walkstart + tdelta;
 	
-	set_position(g, newx, newy, newf);
+	set_position(g, newf);
 	set_animation(g, a);
 	
 	return tdelta; // yep, we were successful
 }
 
-/** Map_Object::set_position(Game* g, int x, int y, Field* f=0)
- *
- * Moves the Map_Object to the given position.
- */
-void Map_Object::set_position(Game* g, int x, int y, Field* f)
+/*
+===============
+Map_Object::set_position
+
+Moves the Map_Object to the given position.
+===============
+*/
+void Map_Object::set_position(Game* g, Coords coords)
 {
-	if (m_field) {
+	if (m_pos.field) {
 		*m_linkpprev = m_linknext;
 		if (m_linknext)
 			m_linknext->m_linkpprev = m_linkpprev;
 	}
 
-	if (!f)
-		f = g->get_map()->get_field(x, y);
-
-	m_field = f;		
-	m_pos.x = x;
-	m_pos.y = y;
+	m_pos = FCoords(coords, g->get_map()->get_field(coords));
 	
-	m_linknext = f->objects;
-	m_linkpprev = &f->objects;
+	m_linknext = m_pos.field->objects;
+	m_linkpprev = &m_pos.field->objects;
 	if (m_linknext)
 		m_linknext->m_linkpprev = &m_linknext;
-	f->objects = this;
+	m_pos.field->objects = this;
 }
 

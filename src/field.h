@@ -88,16 +88,6 @@ private:
 	Map_Object* objects; // linked list, see Map_Object::m_linknext
 
 public:
-   enum Build_Symbol {
-      NOTHING,
-      FLAG,
-      SMALL,
-      MEDIUM,
-      BIG,
-      MINE,
-      PORT
-   };
-
    inline uchar get_height() const { return height; }
 	inline uchar get_caps() const { return caps; }
 	

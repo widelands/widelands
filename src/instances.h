@@ -175,15 +175,8 @@ class Map_Object {
       inline void set_owned_by(char plnum) { m_owned_by = plnum; }
 		inline char get_owned_by() { return m_owned_by; }
 		
-		void set_position(Game* g, int x, int y, Field* f = 0);
-		inline bool get_position(int *px, int *py, Field **pf = 0) {
-			if (!m_field) return false;
-			if (pf) *pf = m_field;
-			*px = m_pos.x;
-			*py = m_pos.y;
-			return true;
-		}
-		inline const Coords &get_position() const { return m_pos; }
+		void set_position(Game* g, Coords f);
+		inline const FCoords &get_position() const { return m_pos; }
 		inline Map_Object* get_next_object(void) { return m_linknext; }
 
 	protected: // default tasks
@@ -227,8 +220,7 @@ class Map_Object {
 		uint m_serial;
 		int m_owned_by; // 0 = neutral, otherwise player number
       
-		Field* m_field; // where are we right now?
-      Coords m_pos;
+		FCoords m_pos; // where are we right now?
 		Map_Object* m_linknext; // next object on this field
 		Map_Object** m_linkpprev;
 		
@@ -283,7 +275,7 @@ class Object_Manager {
 				return 0;
 			return it->second;
 		}
-		Map_Object* create_object(Game* g, Map_Object_Descr* d, int owner, int x, int y);
+		Map_Object* create_object(Game* g, Map_Object_Descr* d, int owner, Coords coords);
 		void free_object(Game* g, Map_Object* obj);
 		
 	private:

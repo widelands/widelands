@@ -19,10 +19,14 @@
 
 #include "widelands.h"
 #include "ui.h"
+#include "game.h"
 #include "map.h"
 #include "IntPlayer.h"
+#include "player.h"
+#include "transport.h"
 #include "fieldaction.h"
 #include "watchwindow.h"
+
 
 class FieldActionWindow : public Window {
 public:
@@ -31,16 +35,20 @@ public:
 
 	// Action handlers
 	void act_watch();
+	void act_buildflag();
+	void act_ripflag();
 
 private:
+	void add_button(const char *name, void (FieldActionWindow::*fn)());
 	void okdialog();
 	
-	void act(int action);
-
 	Interactive_Player	*m_player;
+	Map						*m_map;
 	UniqueWindow			*m_registry;
+
+	int		m_nbuttons;
 	
-	Coords m_field;
+	FCoords	m_field;
 };
 
 /*
@@ -54,24 +62,50 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *regi
 	: Window(plr, plr->get_w()/2, plr->get_h()/2, 68, 34, "Action")
 {
 	m_player = plr;
-	m_field = m_player->get_fieldsel();
+	m_map = m_player->get_game()->get_map();
 	m_registry = registry;
-
 	if (registry->window)
 		delete registry->window;
-		
 	registry->window = this;
+	
+	Field *f = m_map->get_field(m_player->get_fieldsel());
+	m_field = FCoords(m_player->get_fieldsel(), f);
 
 	m_player->set_fieldsel_freeze(true);
 	
-	// Buttons
-	Button *b;
+	// Add actions
+	std::vector<Map_Object*> objs;
+	
+	m_nbuttons = 0;
+	
+	if (m_field.field->get_owned_by() == m_player->get_player_number())
+	{
+		if (m_map->find_objects(m_field, 0, Map_Object::FLAG, &objs))
+		{
+			// Add flag actions
+			Flag *flag = (Flag*)objs[0];
 
-	b = new Button(this, 0, 0, 34, 34, 2);
-	b->clicked.set(this, &FieldActionWindow::act_watch);
-	b->set_pic(g_fh.get_string("WATCH", 0));
+			//add_button("ROAD", &FieldActionWindow::act_buildroad);
 
-	b = new Button(this, 34, 0, 34, 34, 2);
+			Building *building = flag->get_building();
+
+			if (!building || strcasecmp(building->get_name(), "headquarters"))
+				add_button("RIP", &FieldActionWindow::act_ripflag);
+		}
+		else
+		{
+			// Add build actions
+			int buildcaps = m_player->get_player()->get_buildcaps(m_field);
+
+			if (buildcaps & BUILDCAPS_FLAG)
+				add_button("FLAG", &FieldActionWindow::act_buildflag);
+		}
+	}
+	
+	// Common to all fields
+	add_button("WATCH", &FieldActionWindow::act_watch);
+
+	set_inner_size(m_nbuttons*34, 34);
 
 	// Move the window away from the current mouse position, i.e.
 	// where the field is, to allow better view
@@ -91,14 +125,32 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *regi
 	set_mouse_pos(17, 17);
 }
 
-/** FieldActionWindow::~FieldActionWindow()
- *
- * Free allocated resources, remove from registry.
- */
+/*
+===============
+FieldActionWindow::~FieldActionWindow
+
+Free allocated resources, remove from registry.
+===============
+*/
 FieldActionWindow::~FieldActionWindow()
 {
 	m_player->set_fieldsel_freeze(false);
 	m_registry->window = 0;
+}
+
+
+/*
+===============
+FieldActionWindow::add_button
+===============
+*/
+void FieldActionWindow::add_button(const char *name, void (FieldActionWindow::*fn)())
+{
+	Button *b = new Button(this, m_nbuttons*34, 0, 34, 34, 2);
+	b->clicked.set(this, fn);
+	b->set_pic(g_fh.get_string(name, 0));
+	
+	m_nbuttons++;
 }
 
 /*
@@ -115,10 +167,13 @@ void FieldActionWindow::okdialog()
 	die();
 }
 
-/** FieldActionWindow::act_watch()
- *
- * Open a watch window for the given field and delete self.
- */
+/*
+===============
+FieldActionWindow::act_watch()
+
+Open a watch window for the given field and delete self.
+===============
+*/
 void FieldActionWindow::act_watch()
 {
 	show_watch_window(m_player, m_field.x, m_field.y);
@@ -127,9 +182,42 @@ void FieldActionWindow::act_watch()
 
 /*
 ===============
+FieldActionWindow::act_buildflag
+
+Build a flag at this field
+===============
+*/
+void FieldActionWindow::act_buildflag()
+{
+	Game *g = m_player->get_game();
+	
+	g->send_player_command(m_player->get_player_number(), CMD_BUILD_FLAG, m_field.x, m_field.y);
+	
+	okdialog();
+}
+
+/*
+===============
+FieldActionWindow::act_ripflag
+
+Remove the flag at this field
+===============
+*/
+void FieldActionWindow::act_ripflag()
+{
+	Game *g = m_player->get_game();
+	
+	g->send_player_command(m_player->get_player_number(), CMD_RIP_FLAG, m_field.x, m_field.y);
+
+	okdialog();
+}
+
+/*
+===============
 show_field_action
 
-Bring up a field action window
+Perform a field action (other than building options).
+Bring up a field action window or continue road building.
 ===============
 */
 void show_field_action(Interactive_Player *parent, UniqueWindow *registry)

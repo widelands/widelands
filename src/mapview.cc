@@ -337,40 +337,36 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy, bool use_see_are
 				// but so, animals are below the build help, which might reduce weirdness
 				// In other words, it can't go before rendering bobs.
 				if (show_buildhelp && f->get_owned_by() == m_player->get_player_number()) {
-					switch(m_map->get_build_symbol(fx, fy)) {
-						case Field::NOTHING:
-							break;
-
-						case Field::FLAG:
-							copy_pic(dst, &setable_flag, posx-(setable_flag.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(setable_flag.get_h()), 
-									0, 0, setable_flag.get_w(), setable_flag.get_h());
-							break;
-
-						case Field::SMALL:
-							copy_pic(dst, &small_building, posx-(small_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(small_building.get_h()>>1), 
-									0, 0, small_building.get_w(), small_building.get_h());
-							break;
-
-						case Field::MEDIUM:
-							copy_pic(dst, &medium_building, posx-(medium_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(medium_building.get_h()>>1), 
-									0, 0, medium_building.get_w(), medium_building.get_h());
-							break;
-
-						case Field::BIG:
-							copy_pic(dst, &big_building, posx-(big_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(big_building.get_h()>>1), 
-									0, 0, big_building.get_w(), big_building.get_h());
-							break;
-
-						case Field::MINE:
-							copy_pic(dst, &mine_building, posx-(mine_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(mine_building.get_h()>>1), 
-									0, 0, mine_building.get_w(), mine_building.get_h());
-							break;
-
-
-						case Field::PORT:
-						default:
-							assert(0);
-							break;
+					int buildcaps = m_player->get_player()->get_buildcaps(Coords(fx, fy));
+					
+					if (buildcaps & BUILDCAPS_PORT)
+					{
+						// blah
+					}
+					else if (buildcaps & BUILDCAPS_MINE)
+					{
+						copy_pic(dst, &mine_building, posx-(mine_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(mine_building.get_h()>>1), 
+								0, 0, mine_building.get_w(), mine_building.get_h());
+					}
+					else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
+					{
+						copy_pic(dst, &big_building, posx-(big_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(big_building.get_h()>>1), 
+								0, 0, big_building.get_w(), big_building.get_h());
+					}
+					else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
+					{
+						copy_pic(dst, &medium_building, posx-(medium_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(medium_building.get_h()>>1), 
+								0, 0, medium_building.get_w(), medium_building.get_h());
+					}
+					else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
+					{
+						copy_pic(dst, &small_building, posx-(small_building.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(small_building.get_h()>>1), 
+								0, 0, small_building.get_w(), small_building.get_h());
+					}
+					else if (buildcaps & BUILDCAPS_FLAG)
+					{
+						copy_pic(dst, &setable_flag, posx-(setable_flag.get_w()>>1),  (posy - f->get_height()*HEIGHT_FACTOR)-(setable_flag.get_h()), 
+								0, 0, setable_flag.get_w(), setable_flag.get_h());
 					}
 				}
 			}

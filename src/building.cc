@@ -134,7 +134,7 @@ void Building::init(Game* g)
 	
 	map->get_brn(m_pos, &brc);
 	
-	if (map->find_objects(brc.x, brc.y, 0, FLAG, &objs)) {
+	if (map->find_objects(brc, 0, FLAG, &objs)) {
 		flag = (Flag *)objs[0];
 	} else {
 		flag = Flag::create(g, get_owned_by(), brc);
@@ -248,6 +248,8 @@ public:
 
 	virtual void init(Game *g);
 	virtual void task_start_best(Game *g, uint prev, bool success, uint nexthint);
+
+	virtual void show_options(Interactive_Player *plr);
 };
 
 /*
@@ -289,6 +291,17 @@ void Warehouse::task_start_best(Game *g, uint prev, bool success, uint nexthint)
 	start_task_idle(g, get_descr()->get_idle_anim(), -1);
 }
 
+/*
+===============
+Warehouse::show_options
+
+Show the warehouse information window
+===============
+*/
+void Warehouse::show_options(Interactive_Player *plr)
+{
+	log("Warehouse::show_options(): not implemented\n");
+}
 
 /*
 ===============

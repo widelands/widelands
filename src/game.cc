@@ -256,6 +256,22 @@ void Game::think(void)
 	}
 }
 
+
+/*
+===============
+Game::send_player_command
+
+All player-issued commands must enter the queue through this function.
+It takes the appropriate action, i.e. either add to the cmd_queue or send
+across the network.
+===============
+*/
+void Game::send_player_command(int pid, int cmd, int arg1, int arg2, int arg3)
+{
+	cmdqueue->queue(get_gametime(), pid, cmd, arg1, arg2, arg3);
+}
+
+
 /** Game::warp_building(int x, int y, char owner, int idx)
  *
  * Instantly create a building at the given x/y location. There is no build time.
@@ -274,7 +290,7 @@ void Game::warp_building(int x, int y, char owner, int idx)
 	if (!descr)
 		throw wexception("warp_building: no description for %i", idx);
 
- 	obj = m_objects->create_object(this, descr, owner, x, y);
+ 	obj = m_objects->create_object(this, descr, owner, Coords(x, y));
 }
 
 /** Game::create_bob(int x, int y, int idx)
@@ -292,7 +308,7 @@ void Game::create_bob(int x, int y, int idx)
 	if (!descr)
 		throw wexception("create_bob: no description for %i", idx);
 	
-	obj = m_objects->create_object(this, descr, 0, x, y);
+	obj = m_objects->create_object(this, descr, 0, Coords(x, y));
 }
 
 /*
@@ -305,7 +321,7 @@ Additionally, it updates the visible area for that player.
 */
 void Game::conquer_area(uchar playernr, Coords coords, int radius)
 {
-	Map_Region m(coords.x, coords.y, radius, map);
+	Map_Region m(coords, radius, map);
 	Field* f;
 
 	while((f = m.next()))

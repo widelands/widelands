@@ -91,6 +91,7 @@ class Building;
 class Creature;
 class Bob;
 class Path;
+struct FCoords;
 
 
 
@@ -144,11 +145,10 @@ class Map {
                inline uint get_w(void) { return hd.width; }
                inline uint get_h(void) { return hd.height; }
                inline World* get_world(void) { return w; }
+									   
+				bool find_objects(Coords coord, uint radius, uint attribute, std::vector<Map_Object*> *list, bool reverse = false);
 					
-			   bool find_objects(int x, int y, uint radius, uint attribute, std::vector<Map_Object*> *list, bool reverse = false);
-					
-					void recalc_for_field(int fx, int fy);
-               Field::Build_Symbol get_build_symbol(int x, int y);
+					void recalc_for_field(Coords coords);
 
 					inline const Coords* get_starting_pos(int plnum) { return &starting_pos[plnum-1]; } // players are numbered 1-100, not 0-99
 					
@@ -162,23 +162,29 @@ class Map {
 					int calc_distance(Coords a, Coords b);
 
                inline void get_ln(const int fx, const int fy, int *ox, int *oy);
-               inline void get_ln(const Coords f, Coords *o);
+               inline void get_ln(const Coords f, Coords * const o);
 					inline void get_ln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_ln(const FCoords f, FCoords * const o);
 					inline void get_rn(const int fx, const int fy, int *ox, int *oy);
-					inline void get_rn(const Coords f, Coords *o);
+					inline void get_rn(const Coords f, Coords * const o);
 					inline void get_rn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_rn(const FCoords f, FCoords * const o);
 					inline void get_tln(const int fx, const int fy, int *ox, int *oy);
-					inline void get_tln(const Coords f, Coords *o);
+					inline void get_tln(const Coords f, Coords * const o);
 					inline void get_tln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_tln(const FCoords f, FCoords * const o);
 					inline void get_trn(const int fx, const int fy, int *ox, int *oy);
-					inline void get_trn(const Coords f, Coords *o);
+					inline void get_trn(const Coords f, Coords * const o);
 					inline void get_trn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_trn(const FCoords f, FCoords * const o);
 					inline void get_bln(const int fx, const int fy, int *ox, int *oy);
-					inline void get_bln(const Coords f, Coords *o);
+					inline void get_bln(const Coords f, Coords * const o);
 					inline void get_bln(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_bln(const FCoords f, FCoords * const o);
 					inline void get_brn(const int fx, const int fy, int *ox, int *oy);
-					inline void get_brn(const Coords f, Coords *o);
+					inline void get_brn(const Coords f, Coords * const o);
 					inline void get_brn(const int fx, const int fy, Field * const f, int *ox, int *oy, Field **o);
+					inline void get_brn(const FCoords f, FCoords * const o);
 
 					// Field/screen coordinates
 					inline void get_basepix(const Coords fc, int *px, int *py);
@@ -240,6 +246,7 @@ private:
 	Coords m_end;
 	std::vector<char> m_path;
 };
+
 
 /*
 ==============================================================================
@@ -303,7 +310,7 @@ inline void Map::get_ln(const int fx, const int fy, int *ox, int *oy)
 	if (*ox < 0) *ox += hd.width;
 }
 
-inline void Map::get_ln(const Coords f, Coords *o)
+inline void Map::get_ln(const Coords f, Coords * const o)
 {
 	o->y = f.y;
 	o->x = f.x-1;
@@ -318,6 +325,14 @@ inline void Map::get_ln(const int fx, const int fy, Field * const f, int *ox, in
 	if (*ox < 0) { *ox += hd.width; *o += hd.width; }
 }
 
+inline void Map::get_ln(const FCoords f, FCoords * const o)
+{
+	o->y = f.y;
+	o->x = f.x-1;
+	o->field = f.field-1;
+	if (o->x < 0) { o->x += hd.width; o->field += hd.width; }
+}
+
 inline void Map::get_rn(const int fx, const int fy, int *ox, int *oy)
 {
 	*oy = fy;
@@ -325,7 +340,7 @@ inline void Map::get_rn(const int fx, const int fy, int *ox, int *oy)
 	if (*ox >= (int)hd.width) *ox = 0;
 }
 
-inline void Map::get_rn(const Coords f, Coords *o)
+inline void Map::get_rn(const Coords f, Coords * const o)
 {
 	o->y = f.y;
 	o->x = f.x+1;
@@ -340,6 +355,14 @@ inline void Map::get_rn(const int fx, const int fy, Field * const f, int *ox, in
 	if (*ox >= (int)hd.width) { *ox = 0; *o -= hd.width; }
 }
 
+inline void Map::get_rn(const FCoords f, FCoords * const o)
+{
+	o->y = f.y;
+	o->x = f.x+1;
+	o->field = f.field+1;
+	if (o->x >= (int)hd.width) { o->x = 0; o->field -= hd.width; }
+}
+
 // top-left: even: -1/-1  odd: 0/-1
 inline void Map::get_tln(const int fx, const int fy, int *ox, int *oy)
 {
@@ -352,7 +375,7 @@ inline void Map::get_tln(const int fx, const int fy, int *ox, int *oy)
 	}
 }
 
-inline void Map::get_tln(const Coords f, Coords *o)
+inline void Map::get_tln(const Coords f, Coords * const o)
 {
 	o->y = f.y-1;
 	o->x = f.x;
@@ -376,6 +399,19 @@ inline void Map::get_tln(const int fx, const int fy, Field * const f, int *ox, i
 	}
 }
 
+inline void Map::get_tln(const FCoords f, FCoords * const o)
+{
+	o->y = f.y-1;
+	o->x = f.x;
+	o->field = f.field - hd.width;
+	if (o->y & 1) {
+		if (o->y < 0) { o->y += hd.height; o->field += hd.width*hd.height; }
+		o->x--;
+		o->field--;
+		if (o->x < 0) { o->x += hd.width; o->field += hd.width; }
+	}
+}
+
 // top-right: even: 0/-1  odd: +1/-1
 inline void Map::get_trn(const int fx, const int fy, int *ox, int *oy)
 {
@@ -388,7 +424,7 @@ inline void Map::get_trn(const int fx, const int fy, int *ox, int *oy)
 	if (*oy < 0) { *oy += hd.height; }
 }
 
-inline void Map::get_trn(const Coords f, Coords *o)
+inline void Map::get_trn(const Coords f, Coords * const o)
 {
 	o->x = f.x;
 	if (f.y & 1) {
@@ -412,6 +448,19 @@ inline void Map::get_trn(const int fx, const int fy, Field * const f, int *ox, i
 	if (*oy < 0) { *oy += hd.height; *o += hd.width*hd.height; }
 }
 
+inline void Map::get_trn(const FCoords f, FCoords * const o)
+{
+	o->x = f.x;
+	o->field = f.field - hd.width;
+	if (f.y & 1) {
+		o->x++;
+		o->field++;
+		if (o->x >= (int)hd.width) { o->x = 0; o->field -= hd.width; }
+	}
+	o->y = f.y - 1;
+	if (o->y < 0) { o->y += hd.height; o->field += hd.width*hd.height; }
+}
+
 // bottom-left: even: -1/+1  odd: 0/+1
 inline void Map::get_bln(const int fx, const int fy, int *ox, int *oy)
 {
@@ -424,7 +473,7 @@ inline void Map::get_bln(const int fx, const int fy, int *ox, int *oy)
 	}
 }
 
-inline void Map::get_bln(const Coords f, Coords *o)
+inline void Map::get_bln(const Coords f, Coords * const o)
 {
 	o->y = f.y+1;
 	o->x = f.x;
@@ -448,6 +497,19 @@ inline void Map::get_bln(const int fx, const int fy, Field * const f, int *ox, i
 	}
 }
 
+inline void Map::get_bln(const FCoords f, FCoords * const o)
+{
+	o->y = f.y + 1;
+	o->x = f.x;
+	o->field = f.field + hd.width;
+	if (o->y >= (int)hd.height) { o->y = 0; o->field -= hd.width*hd.height; }
+	if (o->y & 1) {
+		o->x--;
+		o->field--;
+		if (o->x < 0) { o->x += hd.width; o->field += hd.width; }
+	}
+}
+
 // bottom-right: even: 0/+1  odd: +1/+1
 inline void Map::get_brn(const int fx, const int fy, int *ox, int *oy)
 {
@@ -460,7 +522,7 @@ inline void Map::get_brn(const int fx, const int fy, int *ox, int *oy)
 	if (*oy >= (int)hd.height) { *oy = 0; }
 }
 
-inline void Map::get_brn(const Coords f, Coords *o)
+inline void Map::get_brn(const Coords f, Coords * const o)
 {
 	o->x = f.x;
 	if (f.y & 1) {
@@ -482,6 +544,19 @@ inline void Map::get_brn(const int fx, const int fy, Field * const f, int *ox, i
 	}
 	*oy = fy+1;
 	if (*oy >= (int)hd.height) { *oy = 0; *o -= hd.width*hd.height; }
+}
+
+inline void Map::get_brn(const FCoords f, FCoords * const o)
+{
+	o->x = f.x;
+	o->field = f.field + hd.width;
+	if (f.y & 1) {
+		o->x++;
+		o->field++;
+		if (o->x >= (int)hd.width) { o->x = 0; o->field -= hd.width; }
+	}
+	o->y = f.y+1;
+	if (o->y >= (int)hd.height) { o->y = 0; o->field -= hd.width*hd.height; }
 }
 
 
@@ -534,10 +609,10 @@ inline void Map::get_pix(const int fx, const int fy, int *px, int *py)
 class Map_Region {
    public:
 		Map_Region() { }
-      Map_Region(int x, int y, int area, Map* m) { init(x, y, area, m); }
+      Map_Region(Coords coords, int area, Map* m) { init(coords, area, m); }
       ~Map_Region() { }
 		 
-		void init(int x, int y, int area, Map *m);      
+		void init(Coords coords, int area, Map *m);      
       Field* next(void);
 
    private:
@@ -559,10 +634,10 @@ class Map_Region {
 class Map_Region_Coords {
    public:
 		Map_Region_Coords() { }
-      Map_Region_Coords(int x, int y, int area, Map* m) { init(x, y, area, m); }
+      Map_Region_Coords(Coords coords, int area, Map* m) { init(coords, area, m); }
       ~Map_Region_Coords() { }
 		
-		void init(int x, int y, int area, Map *m);
+		void init(Coords coords, int area, Map *m);
 		int next(int*, int*);
 
    private:

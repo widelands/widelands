@@ -53,7 +53,7 @@ public:
 	Flag(Flag_Descr *descr);
 	virtual ~Flag();
 	
-	static Flag *create(Game *g, int owner, Coords &coords);
+	static Flag *create(Game *g, int owner, Coords coords);
 	
 	inline Building *get_building() { return m_building; }
 	void attach_building(Game *g, Building *building);

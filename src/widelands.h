@@ -92,6 +92,25 @@ struct Coords {
 };
 
 inline bool operator==(const Coords& c1, const Coords& c2) { return (c1.x == c2.x) && (c1.y == c2.y); }
+inline bool operator!=(const Coords& c1, const Coords& c2) { return !(c1 == c2); }
+
+class Field;
+
+struct FCoords : public Coords {
+	Field		*field;
+	
+	inline FCoords() { }
+	inline FCoords(Coords nc, Field *nf) : Coords(nc), field(nf) { }
+	inline FCoords(int nx, int ny, Field *nf) : Coords(nx, ny), field(nf) { }
+};
+
+inline bool operator==(const FCoords& c1, const FCoords& c2) { 
+	bool equal = (c1.field == c2.field);
+	assert(equal == ((const Coords&)c1 == (const Coords&)c2));
+	return equal;
+}
+inline bool operator!=(const FCoords& c1, const FCoords& c2) { return !(c1 == c2); }
+
 
 
 // TODO: figure out a way to define these portably

@@ -52,29 +52,36 @@ class Player {
       Player(Game* g, int type, int plnum, const uchar *playercolor);
       ~Player(void);
 
-      inline int get_type() { return m_type; }
-		inline uchar *get_playercolor_rgb() { return m_playercolor; }
+      inline int get_type() const { return m_type; }
+		inline int get_player_number() const { return m_plnum; }
+		inline const uchar *get_playercolor_rgb() const { return m_playercolor; }
 		Tribe_Descr *get_tribe();
 		
 		void setup();
 		
-		// get functions
-      inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
-      inline bool is_field_seen(int x, int y) { return (*seen_fields)[y*game->get_map()->get_w() + x]; }
+		int get_buildcaps(Coords coords);
+		
+		// See area
+		inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
+		inline bool is_field_seen(int x, int y) { return (*seen_fields)[y*m_game->get_map()->get_w() + x]; }
 		
 		void set_area_seen(int x, int y, uint area, bool on);
+		
+		// Flags
+		void build_flag(Coords c);
+		void rip_flag(Coords c);
 
    private:
       // set functions
       inline void set_field_seen(int i, bool t) { (*seen_fields)[i]=t; }
       inline void set_field_seen(int x, int y, bool t) { 
-         (*seen_fields)[y*game->get_map()->get_w() + x]=t; 
+			(*seen_fields)[y*m_game->get_map()->get_w() + x]=t; 
       }
       
 		int m_type;
 		int m_plnum;
 		uchar m_playercolor[12];
-      Game* game; 
+      Game* m_game; 
       std::vector<bool>* seen_fields; 
       
 		// regent data: name, pics so on

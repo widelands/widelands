@@ -22,7 +22,7 @@
 
 #include "instances.h"
 
-
+class Interactive_Player;
 class Tribe_Descr;
 class Profile;
 struct EncodeData;
@@ -61,8 +61,13 @@ class Building : public Map_Object {
 public:
 	Building(Building_Descr *descr);
 	
+	inline const char *get_name() { return get_descr()->get_name(); }
+	inline const char *get_descname() { return get_descr()->get_descname(); }
+	
 	virtual void init(Game *g);
 	virtual void cleanup(Game *g);
+
+	virtual void show_options(Interactive_Player *plr) = 0;
 
 private:
 	Object_Ptr	m_flag;

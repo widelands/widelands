@@ -82,6 +82,8 @@ public:
 	bool get_allow_cheats();
 	
 public:
+	void send_player_command(int pid, int cmd, int arg1=0, int arg2=0, int arg3=0);
+
 	void warp_building(int x, int y, char owner, int idx);
 	void create_bob(int x, int y, int idx);
 

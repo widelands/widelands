@@ -34,8 +34,11 @@
 // ---------------------- BEGINN OF CMDS ----------------------------------
 enum {
    UNUSED = 0,
-   CMD_ACT,		// arg1 = serialnum
-	CMD_REMOVE,	// arg1 = serialnum
+   CMD_ACT,				// arg1 = serialnum
+	CMD_REMOVE,			// arg1 = serialnum
+	
+	CMD_BUILD_FLAG,	// arg1 = x, arg2 = y
+	CMD_RIP_FLAG,		// arg1 = x, arg2 = y
 };
 // ---------------------- END    OF CMDS ----------------------------------
 
@@ -46,20 +49,13 @@ enum {
 class Game;
 
 class Cmd_Queue {
-	//
-	// This struct defines the commands, which are possible
-	//
-	// [I must've accidently deleted a comment about different access rights
-	//  here; either way, filtering commands at the network level should
-	//  really be enough]
-	//
 	struct Cmd {
 		int time; // scheduled time of execution
 		char sender;
 		int cmd;
-		int arg1;
+		int arg1; // the meaning of arg? depends on cmd
 		int arg2;
-		void *arg3; // pointer to malloc()ed memory
+		int arg3;
 	};
 	struct CmdCompare {
 	public:
@@ -73,7 +69,7 @@ class Cmd_Queue {
       Cmd_Queue(Game *g);
       ~Cmd_Queue(void);
 
-		void queue(int time, char sender, int cmd, int arg1=0, int arg2=0, void *arg3=0);
+		void queue(int time, char sender, int cmd, int arg1=0, int arg2=0, int arg3=0);
       int run_queue(int interval);
    
 		inline int get_time() { return m_time; }

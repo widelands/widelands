@@ -8,3 +8,7 @@ build-2:
 - unique windows now remember their position
 - improved fieldaction mouse placement for fast click-through
 - new structure for tribe data
+- new terrain textures
+- added "fps" key to animations
+- renderer uses player colors
+- added flags

@@ -17,11 +17,11 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
 #include "game.h"
 #include "map.h"
 #include "cmd_queue.h"
+#include "player.h"
 
 /*
 TODO:
@@ -42,17 +42,18 @@ Cmd_Queue::~Cmd_Queue(void)
 {
 	while(!m_cmds.empty()) {
 		const Cmd &c = m_cmds.top();
-		if (c.arg3)
-			free(c.arg3);
 		m_cmds.pop();
 	}
 }
 
-/** Cmd_Queue::queue(int time, char sender, int cmd, int arg1=0, int arg2=0, void *arg3=0)
- *
- * Insert a new command into the queue; it will be executed at the given time
- */
-void Cmd_Queue::queue(int time, char sender, int cmd, int arg1, int arg2, void *arg3)
+/*
+===============
+Cmd_Queue::queue
+
+Insert a new command into the queue; it will be executed at the given time
+===============
+*/
+void Cmd_Queue::queue(int time, char sender, int cmd, int arg1, int arg2, int arg3)
 {
 	Cmd c; // our command
 	
@@ -88,8 +89,6 @@ int Cmd_Queue::run_queue(int interval)
 		m_time = c.time;
 		exec_cmd(&c);
 		
-		if (c.arg3)
-			free(c.arg3);
 		m_cmds.pop();
 	}
 	
@@ -124,6 +123,20 @@ void Cmd_Queue::exec_cmd(const Cmd *c)
 		Map_Object *obj = m_game->get_objects()->get_object(c->arg1);
 		if (obj)
 			m_game->get_objects()->free_object(m_game, obj);
+		break;
+	}
+	
+	case CMD_BUILD_FLAG:
+	{
+		Player *plr = m_game->get_player(c->sender);
+		plr->build_flag(Coords(c->arg1, c->arg2));
+		break;
+	}
+	
+	case CMD_RIP_FLAG:
+	{
+		Player *plr = m_game->get_player(c->sender);
+		plr->rip_flag(Coords(c->arg1, c->arg2));
 		break;
 	}
 	

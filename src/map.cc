@@ -287,9 +287,9 @@ If list is non-zero, pointers to the relevant objects will be stored in the list
 Returns true if objects could be found
 ===============
 */
-bool Map::find_objects(int x, int y, uint radius, uint attribute, std::vector<Map_Object*> *list, bool reverse)
+bool Map::find_objects(Coords coords, uint radius, uint attribute, std::vector<Map_Object*> *list, bool reverse)
 {
-	Map_Region mr(x, y, radius, this);
+	Map_Region mr(coords, radius, this);
 	Field *f;
 	bool found = false;
 	
@@ -454,10 +454,10 @@ void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
 		
 	// 3) General buildability check: if a "robust" Map_Object is on this field
 	//    we cannot build anything on it
-	if (find_objects(fx, fy, 0, Map_Object::ROBUST, 0))
+	if (find_objects(Coords(fx, fy), 0, Map_Object::ROBUST, 0))
 	{
 		// 3b) [OVERRIDE] check for "unpassable" Map_Objects
-		if (find_objects(fx, fy, 0, Map_Object::UNPASSABLE, 0))
+		if (find_objects(Coords(fx, fy), 0, Map_Object::UNPASSABLE, 0))
 			f->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 		return;
 	}
@@ -468,7 +468,7 @@ void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
 	if (f->caps & MOVECAPS_WALK)
 	{
 		// 4b) Flags must be at least 1 field apart
-		if (find_objects(fx, fy, 1, Map_Object::FLAG, 0))
+		if (find_objects(Coords(fx, fy), 1, Map_Object::FLAG, 0))
 			return;
 		
 		f->caps |= BUILDCAPS_FLAG;
@@ -548,7 +548,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	//     - are not blocked by "robust" Map_Objects
 	if (!(f->caps & MOVECAPS_WALK) ||
 	    cnt_water ||
-	    find_objects(fx, fy, 0, Map_Object::ROBUST, 0))
+	    find_objects(Coords(fx, fy), 0, Map_Object::ROBUST, 0))
 		return;
 		
 	// 3) We can only build something if there is a flag on the bottom-right neighbour
@@ -557,7 +557,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	// NOTE: This dependency on the bottom-right neighbour is the reason why the caps
 	// calculation is split into two passes
 	if (!(brn->caps & BUILDCAPS_FLAG) &&
-	    !find_objects(brnx, brny, 0, Map_Object::FLAG, 0))
+	    !find_objects(Coords(brnx, brny), 0, Map_Object::FLAG, 0))
 		return;
 	
 	// === passability and flags allow us to build something beyond this point ===
@@ -574,7 +574,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	uchar building = BUILDCAPS_BIG;
 	vector<Map_Object*> objectlist;
 	
-	find_objects(fx, fy, 2, Map_Object::ROBUST, &objectlist);
+	find_objects(Coords(fx, fy), 2, Map_Object::ROBUST, &objectlist);
 	for(uint i = 0; i < objectlist.size(); i++) {
 		Map_Object *obj = objectlist[i];
 		int dist = calc_distance(Coords(fx, fy), obj->get_position());
@@ -582,8 +582,12 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 		if (obj->has_attribute(Map_Object::SMALL))
 		{
 			if (dist == 1) {
-		 		if (building > BUILDCAPS_MEDIUM)
-					building = BUILDCAPS_MEDIUM;
+		 		if (building > BUILDCAPS_MEDIUM) {
+					// a flag to the bottom-right does not reduce building size (obvious)
+					if (obj->get_position() != Coords(brnx, brny) ||
+					    !obj->has_attribute(Map_Object::FLAG))
+						building = BUILDCAPS_MEDIUM;
+				}
 			}
 		}
 		else if (!obj->has_attribute(Map_Object::BIG))
@@ -709,22 +713,25 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 }
 
 
-/** Map::recalc_for_field(int fx, int fy)
- *
- * Call this function whenever the field at fx/fy has changed in one of the ways:
- *  - height has changed
- *  - robust Map_Object has been added or removed
- *
- * This performs the steps outlined in the comment above recalc_brightness()
- */
-void Map::recalc_for_field(int fx, int fy)
+/*
+===============
+Map::recalc_for_field
+
+Call this function whenever the field at fx/fy has changed in one of the ways:
+ - height has changed
+ - robust Map_Object has been added or removed
+ 
+This performs the steps outlined in the comment above recalc_brightness()
+===============
+*/
+void Map::recalc_for_field(Coords coords)
 {
 	Map_Region_Coords mrc;
 	int x, y;
 	Field *f;
 	
 	// First pass
-	mrc.init(fx, fy, 2, this);
+	mrc.init(coords, 2, this);
 
 	while(mrc.next(&x, &y)) {
 		f = get_field(x, y);
@@ -733,7 +740,7 @@ void Map::recalc_for_field(int fx, int fy)
 	}
 	
 	// Second pass
-	mrc.init(fx, fy, 2, this);
+	mrc.init(coords, 2, this);
 	
 	while(mrc.next(&x, &y)) {
 		f = get_field(x, y);
@@ -741,35 +748,6 @@ void Map::recalc_for_field(int fx, int fy)
 	}
 }
 	
-/** Field::Build_Symbol Map::get_build_symbol(int x, int y)
- *
- * This function returns the build symbol on this field.
- *
- * This is done by consulting the appropriate Field::caps
- */
-Field::Build_Symbol Map::get_build_symbol(int x, int y)
-{
-   Field *f;
-	
-	f = get_safe_field(x, y);
-
-	if (f->caps & BUILDCAPS_PORT)
-		return Field::PORT;
-	if (f->caps & BUILDCAPS_MINE)
-		return Field::MINE;
-		
-	switch(f->caps & BUILDCAPS_SIZEMASK) {
-	case BUILDCAPS_BIG: return Field::BIG;
-	case BUILDCAPS_MEDIUM: return Field::MEDIUM;
-	case BUILDCAPS_SMALL: return Field::SMALL;
-	}
-	
-	if (f->caps & BUILDCAPS_FLAG)
-		return Field::FLAG;
-		
-	return Field::NOTHING;
-}
-
 /** Map::calc_distance(Coords a, Coords b)
  *
  * Calculate the (Manhattan) distance from a to b
@@ -1227,16 +1205,16 @@ bool Map::can_reach_by_water(Coords field)
 // 
 // class Map_Region
 // 
-void Map_Region::init(int x, int y, int area, Map *m)
+void Map_Region::init(Coords coords, int area, Map *m)
 {
 	backwards=0;
 	_area=area;
 	_map=m;
-	_lf=m->get_safe_field(x, y);
+	_lf=m->get_field(coords);
 	_tl=_tr=_bl=_br=_lf;
-	tlx=trx=blx=brx=x;
-	tly=tr_y=bly=bry=y;
-	sx=x; sy=y;
+	tlx=trx=blx=brx=coords.x;
+	tly=tr_y=bly=bry=coords.y;
+	sx=coords.x; sy=coords.y;
 	int i;
 	for(i=0; i<area; i++) {
 		m->get_tln(tlx, tly, _tl, &tlx, &tly, &_tl);
@@ -1283,16 +1261,16 @@ Field* Map_Region::next(void) {
 // 
 // class Map_Region_Coords
 // 
-void Map_Region_Coords::init(int x, int y, int area, Map *m)
+void Map_Region_Coords::init(Coords coords, int area, Map *m)
 {
 	backwards=0;
 	_area=area;
 	_map=m;
-	_lf=m->get_safe_field(x, y);
+	_lf=m->get_field(coords);
 	_tl=_tr=_bl=_br=_lf;
-	tlx=trx=blx=brx=x;
-	tly=tr_y=bly=bry=y;
-	sx=x; sy=y;
+	tlx=trx=blx=brx=coords.x;
+	tly=tr_y=bly=bry=coords.y;
+	sx=coords.x; sy=coords.y;
 	int i;
 	for(i=0; i<area; i++) {
 		m->get_tln(tlx, tly, _tl, &tlx, &tly, &_tl);

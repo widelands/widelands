@@ -55,6 +55,7 @@ Map_Object *Flag_Descr::create_object()
 
 Flag_Descr g_flag_descr;
 
+
 /*
 ==============================================================================
 
@@ -104,9 +105,9 @@ Flag::create [static]
 Create a flag at the given location
 ===============
 */
-Flag *Flag::create(Game *g, int owner, Coords &coords)
+Flag *Flag::create(Game *g, int owner, Coords coords)
 {
-	return (Flag *)g->get_objects()->create_object(g, &g_flag_descr, owner, coords.x, coords.y);
+	return (Flag *)g->get_objects()->create_object(g, &g_flag_descr, owner, coords);
 }
 
 /*

@@ -23,6 +23,7 @@
 #include "descr_maintainer.h"
 #include "tribe.h"
 #include "player.h"
+#include "transport.h"
 
 //
 //
@@ -34,8 +35,8 @@ Player::Player(Game* g, int type, int plnum, const uchar *playercolor)
    m_type = type; 
 	m_plnum = plnum;
 	memcpy(m_playercolor, playercolor, sizeof(m_playercolor));
-   game=g;
-   seen_fields=0;
+   m_game = g;
+   seen_fields = 0;
 }
 
 Player::~Player(void) {
@@ -52,7 +53,7 @@ Return the tribe this player uses
 */
 Tribe_Descr *Player::get_tribe()
 {
-	return game->get_player_tribe(m_plnum);
+	return m_game->get_player_tribe(m_plnum);
 }
 
 /*
@@ -64,25 +65,82 @@ Prepare the player for in-game action
 */
 void Player::setup()
 {
-	seen_fields = new std::vector<bool>(game->get_map()->get_w()*game->get_map()->get_h(), false);
+	Map *map = m_game->get_map();
+
+	seen_fields = new std::vector<bool>(map->get_w()*map->get_h(), false);
 
 	// place the HQ
-	const Coords *c = game->get_map()->get_starting_pos(m_plnum);
+	const Coords *c = map->get_starting_pos(m_plnum);
 	int idx = get_tribe()->get_building_index("headquarters");
 	if (idx < 0)
 		throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
-	game->warp_building(c->x, c->y, m_plnum, idx);
+	m_game->warp_building(c->x, c->y, m_plnum, idx);
 }
 
-/** Player::set_area_seen(int x, int y, uint area, bool on)
- *
- * Mark the given area as (un)seen
- */
+/*
+===============
+Player::get_buildcaps
+
+Return filtered buildcaps that take the player's territory into account.
+===============
+*/
+int Player::get_buildcaps(Coords coords)
+{
+	Field *f = m_game->get_map()->get_field(coords);
+	int buildcaps = f->get_caps();
+	
+	if (f->get_owned_by() != get_player_number())
+		buildcaps = 0;
+	
+	return buildcaps;
+}
+
+/*
+===============
+Player::set_area_seen
+
+Mark the given area as (un)seen
+===============
+*/
 void Player::set_area_seen(int x, int y, uint area, bool on)
 {
-	Map_Region_Coords r(x, y, area, game->get_map());
+	Map_Region_Coords r(Coords(x, y), area, m_game->get_map());
   
 	while(r.next(&x, &y)) {
       set_field_seen(x, y, on);
    }
+}
+
+/*
+===============
+Player::build_flag
+
+Build a flag, checking that it's legal to do so.
+===============
+*/
+void Player::build_flag(Coords c)
+{
+	int buildcaps = get_buildcaps(c);
+	
+	if (buildcaps & BUILDCAPS_FLAG)
+		Flag::create(m_game, get_player_number(), c);
+}
+
+/*
+===============
+Player::rip_flag
+
+Rip out the flag at the given coordinates, if there is one that is owned
+by the player.
+===============
+*/
+void Player::rip_flag(Coords c)
+{
+	std::vector<Map_Object*> objs;
+	
+	if (m_game->get_map()->find_objects(c, 0, Map_Object::FLAG, &objs)) {
+		Map_Object *obj = objs[0];
+		if (obj->get_owned_by() == get_player_number())
+			m_game->get_objects()->free_object(m_game, objs[0]);
+	}
 }

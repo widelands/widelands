@@ -247,9 +247,19 @@ Player has clicked on the given field; bring up the context menu.
 */
 void Interactive_Player::field_action()
 {
-	// note: buildings owned by the player must be treated differently
-	// (i.e bring up dialog specific to the building)
-
+	// Special case for buildings
+	std::vector<Map_Object*> objs;
+	
+	if (m_game->get_map()->find_objects(m_fieldsel, 0, Map_Object::BUILDING, &objs)) {
+		Building *building = (Building *)objs[0];
+		
+		if (building->get_owned_by() == get_player_number()) {
+			building->show_options(this);
+			return;
+		}
+	}
+	
+	// everything else can bring up the temporary dialog
 	show_field_action(this, &m_fieldaction);
 }
 
