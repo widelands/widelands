@@ -787,7 +787,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	}
 
 	road = (roads >> Road_SouthEast) & Road_Mask;
-	if (road) {
+	if ((render_r || render_b) && road) {
 		if (road == Road_Normal)
 			color = RGBColor(192, 192, 192).pack32();
 		else if (road == Road_Busy)
@@ -798,7 +798,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	}
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
-	if (road) {
+	if (render_b && road) {
 		if (road == Road_Normal)
 			color = RGBColor(192, 192, 192).pack32();
 		else if (road == Road_Busy)
