@@ -75,12 +75,12 @@ WarehouseSupply::~WarehouseSupply()
  * are to be handled
  */
 void WarehouseSupply::set_nrwares( int i ) {
-   assert(m_wares.size()==0);
+   assert(m_wares.get_nrwareids()==0);
 
    m_wares.set_nrwares(i);
 }
 void WarehouseSupply::set_nrworkers( int i ) {
-   assert(m_workers.size()==0);
+   assert(m_workers.get_nrwareids()==0);
 
    m_workers.set_nrwares(i);
 }
