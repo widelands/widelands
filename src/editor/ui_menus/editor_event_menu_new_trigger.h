@@ -42,6 +42,7 @@ class Editor_Event_Menu_New_Trigger : public UIWindow {
    private:
       void clicked(int);
       void selected(int);
+      void double_clicked(int);
 
       UIListselect* m_trigger_list;
       UIMultiline_Textarea* m_description;

@@ -18,11 +18,13 @@
  */
 
 #include <string>
+#include "editor.h"
+#include "editorinteractive.h"
 #include "editor_tool.h"
 #include "editor_set_starting_pos_tool.h"
-#include "overlay_manager.h"
 #include "graphic.h"
 #include "map.h"
+#include "overlay_manager.h"
 
 // global variable to pass data from callback to class
 static int m_current_player;
@@ -79,6 +81,13 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
          // fsel pointer is the only thing that stays wrong, but this is not important
          m_current_player=1;
       }
+
+      if(ei->get_editor()->get_player(m_current_player)) {
+         // The player exists, do not change it's starting pos
+         // since there's already an HQ placed for him
+         return 1;
+      }
+
       std::string picsname="pics/editor_player_";
       picsname+=static_cast<char>((m_current_player/10) + 0x30);
       picsname+=static_cast<char>((m_current_player%10) + 0x30);

@@ -40,7 +40,7 @@ class Trigger_Null : public Trigger {
 
       // File Functions
       void Write(FileWrite*);
-      void Read(FileRead*);
+      void Read(FileRead*, Editor_Game_Base*);
 
       void set_trigger_manually(bool t) { m_should_toggle=true; m_value=t; }
 

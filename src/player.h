@@ -78,6 +78,10 @@ class Player {
 
 		void set_area_seen(Coords c, uint area, bool on);
 
+      // Allowed buildings
+      inline bool is_building_allowed(int i) { return m_allowed_buildings[i]; }
+      void allow_building(int i, bool t);
+
 		// Player commands
 		// Only to be called indirectly via CmdQueue
 		void build_flag(Coords c);
@@ -102,7 +106,7 @@ class Player {
 		RGBColor			m_playercolor[4];
 
 		std::vector<bool>* seen_fields;
-
+      std::vector<bool> m_allowed_buildings;
 		// regent data: name, pics so on
 };
 

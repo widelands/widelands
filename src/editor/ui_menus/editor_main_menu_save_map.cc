@@ -59,6 +59,8 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
    but->set_title("OK");
 
+   center_to_parent();
+   move_to_top();
 }
 
 /*

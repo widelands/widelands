@@ -17,12 +17,14 @@
  *
  */
 
-#include "trigger_building.h"
+#include "building.h"
+#include "editor_game_base.h"
+#include "editorinteractive.h"
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
 #include "map.h"
-#include "building.h"
+#include "trigger_building.h"
 
 static const int TRIGGER_VERSION = 1;
 
@@ -48,7 +50,7 @@ Trigger_Building::~Trigger_Building(void) {
 /*
  * File Read, File Write
  */
-void Trigger_Building::Read(FileRead* fr) {
+void Trigger_Building::Read(FileRead* fr, Editor_Game_Base* egbase) {
    int version=fr->Unsigned16();
    if(version <= TRIGGER_VERSION) {
       set_name(fr->CString());
@@ -59,6 +61,8 @@ void Trigger_Building::Read(FileRead* fr) {
       set_area(fr->Signed16());
       int player=fr->Signed8();
       set_player(player);
+      if(!egbase->is_game()) 
+         static_cast<Editor_Interactive*>(egbase->get_iabase())->reference_player_tribe(player, this);
       set_building_count(fr->Signed8());
       set_building(fr->CString());
       return;

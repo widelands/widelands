@@ -58,11 +58,13 @@ Editor_Event_Menu_Choose_Trigger::Editor_Event_Menu_Choose_Trigger(Editor_Intera
    new UITextarea(this, spacing, offsy, "Registered Triggers: ", Align_Left);
    m_selected=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing-20, get_inner_h()-offsy-85);
    m_selected->selected.set(this, &Editor_Event_Menu_Choose_Trigger::selected_list_selected);
-
+   m_selected->double_clicked.set(this, &Editor_Event_Menu_Choose_Trigger::selected_list_double_clicked);
+   
    // Trigger List
    new UITextarea(this, (get_inner_w()/2)+spacing, offsy, "Available Triggers", Align_Left);
    m_available=new UIListselect(this, (get_inner_w()/2)+spacing+20, offsy+20, (get_inner_w()/2)-2*spacing-20, get_inner_h()-offsy-85);
    m_available->selected.set(this, &Editor_Event_Menu_Choose_Trigger::available_list_selected);
+   m_available->double_clicked.set(this, &Editor_Event_Menu_Choose_Trigger::available_list_double_clicked);
 
    // Toggle when to run button
    new UITextarea(this, spacing, get_inner_h()-60+spacing, 200, 20, "Event runs when trigger is: ", Align_Center);
@@ -263,3 +265,14 @@ void Editor_Event_Menu_Choose_Trigger::selected_list_selected(int i) {
    update();
 }
 
+/*
+ * listbox was double clicked
+ */
+void Editor_Event_Menu_Choose_Trigger::available_list_double_clicked(int i) {
+   // click right to left button
+   clicked(3);
+}
+void Editor_Event_Menu_Choose_Trigger::selected_list_double_clicked(int i) {
+   // click left to right button
+   clicked(2);
+}

@@ -41,7 +41,7 @@ Trigger_Null::~Trigger_Null(void) {
 /*
  * File Read, File Write
  */
-void Trigger_Null::Read(FileRead* fr) {
+void Trigger_Null::Read(FileRead* fr, Editor_Game_Base*) {
    int version=fr->Unsigned16();
    if(version <= TRIGGER_VERSION) {
       set_name(fr->CString());

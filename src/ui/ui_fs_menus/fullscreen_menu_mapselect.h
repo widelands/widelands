@@ -62,6 +62,7 @@ public:
 	void ok();
 	void map_selected(int id);
    void changed(bool);
+   void double_clicked(int);
 };
 
 

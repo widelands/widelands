@@ -17,39 +17,36 @@
  *
  */
 
-#ifndef __S__EDITOR_EVENT_MENU_H
-#define __S__EDITOR_EVENT_MENU_H
+#ifndef __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
+#define __S__EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 
 #include "ui_unique_window.h"
 
-class Editor_Interactive;
+class Player;
 class UIListselect;
 class UIButton;
 
 /*
-=============================
-
-class Editor_Event_Menu
-
-=============================
-*/
-class Editor_Event_Menu : public UIUniqueWindow {
+ * Let's the user choose which buildings should be available
+ * for this player for this scenario. Used to throttle AI and
+ * to advance technology slowly through the missions
+ */
+class Editor_Player_Menu_Allowed_Buildings_Menu : public UIUniqueWindow {
    public:
-      Editor_Event_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
-      virtual ~Editor_Event_Menu();
+      Editor_Player_Menu_Allowed_Buildings_Menu(UIPanel* parent, Player* player, UIUniqueWindowRegistry* );
+      virtual ~Editor_Player_Menu_Allowed_Buildings_Menu();
 
    private:
-      Editor_Interactive *m_parent;
-
-      UIListselect* m_event_list, *m_trigger_list;
-      UIButton *m_btn_del_event, *m_btn_edit_event, *m_btn_del_trigger, *m_btn_edit_trigger;
-      void trigger_list_selected(int);
-      void event_list_selected(int);
-      void trigger_double_clicked(int);
-      void event_double_clicked(int);
+      Player* m_player;
+      UIListselect* m_allowed, *m_forbidden;
+      UIButton* m_rtl_button, *m_ltr_button;
+      void allowed_selected(int);
+      void forbidden_selected(int);
+      void allowed_double_clicked(int);
+      void forbidden_double_clicked(int);
       void clicked(int);
       void update();
 };
 
-
 #endif
+

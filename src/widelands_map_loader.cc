@@ -107,10 +107,12 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
       Widelands_Map_Data_Packet* pak;
       while(!fr.IsEOF()) {
          id=fr.Unsigned16();
+         log("Creating packet for id: %i. Reading packet ... ", id);
          pak=fac.create_correct_packet(id);
          if(!scenario)
             pak->set_scenario_skip(true);
          pak->Read(&fr, egbase);
+         log("done\n");
          delete pak;
       }
    }

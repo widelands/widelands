@@ -26,6 +26,7 @@
 class Game;
 class FileRead;
 class FileWrite;
+class Editor_Game_Base;
 
 /*
  * A trigger is a switch for events. Each event can register
@@ -58,7 +59,7 @@ class Trigger {
 
       // File functions, to save or load this trigger
       virtual void Write(FileWrite*)=0;
-      virtual void Read(FileRead*)=0;
+      virtual void Read(FileRead*, Editor_Game_Base*)=0;
 
 
    protected:

@@ -109,8 +109,7 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
       for(ushort x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
          // We do not write player immovables or bobs and stuff
-         if(immovable) {
-            if(immovable->get_type()!=Map_Object::IMMOVABLE) continue;
+         if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
             Immovable* imm=static_cast<Immovable*>(immovable);
             // write id
             fw->Unsigned16(smap[imm->get_name()]);

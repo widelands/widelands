@@ -199,7 +199,8 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 
 	Player *player = get_player(playernr);
 
-	player->set_area_seen(coords, radius+4, true);
+   if(is_game()) // For editor all fields are visible and players don't manage view area at the moment (may change)
+      player->set_area_seen(coords, radius+4, true);
 
 	m_map->recalc_for_field_area(coords, radius);
 }
@@ -248,7 +249,7 @@ Remove the player with the given number
 */
 void Editor_Game_Base::remove_player(int plnum)
 {
-	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
+   assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 
 	if (m_players[plnum-1]) {
 		delete m_players[plnum-1];
@@ -268,7 +269,7 @@ the game starts. Similar for remote players.
 */
 void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const uchar *playercolor)
 {
-	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
+assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 
 	if (m_players[plnum-1])
 		remove_player(plnum);
@@ -611,4 +612,29 @@ using this serial number will return 0.
 void Editor_Game_Base::remove_trackpointer(uint serial)
 {
 	m_trackpointers.erase(serial);
+}
+
+/*
+ * Cleanup for load
+ *
+ * make this object ready to load new data
+ */
+void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animations) {
+        // Clean all the stuff up, so we can load
+         get_objects()->cleanup(this);
+
+         // We do not flush the animations in the editor since all tribes are loaded and
+         // animations can not change a lot, or?
+         // TODO: check this when another world is needed
+         if(flush_animations) 
+            g_anim.flush();
+         if(flush_graphics)
+            g_gr->flush(0);
+         
+         int i;
+         for(i=1; i<=MAX_PLAYERS; i++)
+            if (m_players[i-1])
+               remove_player(i);
+
+         m_map->cleanup();
 }

@@ -37,10 +37,11 @@ public:
 	~UIListselect();
 
 	UISignal1<int> selected;
+   UISignal1<int> double_clicked;
 
 	void clear();
    void sort();
-	void add_entry(const char *name, void *value, bool select = false);
+	void add_entry(const char *name, void *value, bool select = false, int picid = -1);
    void remove_entry(int i);
 
 	void set_align(Align align);
@@ -62,6 +63,7 @@ public:
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
+   static const int DOUBLE_CLICK_INTERVAL=500; // half a second
 	void set_scrollpos(int pos);
 
 private:
@@ -69,14 +71,19 @@ private:
 
    struct Entry {
 		void*		value;
+      int      picid;
 		char		name[1];
 	};
 
+   int                  m_max_pic_width;
+   int                  m_lineheight;
 	Align						m_align;
 	std::vector<Entry*>	m_entries;
 	UIScrollbar*		   m_scrollbar;
 	int						m_scrollpos;	// in pixels
 	int						m_selection;	// -1 when nothing is selected
+   int                  m_last_click_time;
+   int                  m_last_selection;  // for double clicks
 };
 
 #endif

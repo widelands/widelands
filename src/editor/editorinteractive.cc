@@ -18,32 +18,36 @@
  */
 
 #include "editor.h"
-#include "interactive_base.h"
 #include "editorinteractive.h"
-#include "keycodes.h"
-#include "overlay_manager.h"
-#include "map.h"
-#include "mapview.h"
-#include "player.h"
-#include "ui_button.h"
-#include "ui_modal_messagebox.h"
-#include "editor_main_menu.h"
-#include "editor_event_menu.h"
-#include "editor_tool_menu.h"
-#include "editor_toolsize_menu.h"
 #include "editor_delete_immovable_tool.h"
+#include "editor_event_menu.h"
+#include "editor_increase_height_tool.h"
+#include "editor_increase_resources_tool.h"
 #include "editor_info_tool.h"
+#include "editor_main_menu.h"
+#include "editor_main_menu_load_map.h"
+#include "editor_main_menu_save_map.h"
+#include "editor_noise_height_tool.h"
 #include "editor_place_immovable_tool.h"
+#include "editor_place_bob_tool.h"
+#include "editor_player_menu.h"
 #include "editor_set_both_terrain_tool.h"
 #include "editor_set_down_terrain_tool.h"
 #include "editor_set_right_terrain_tool.h"
-#include "editor_increase_height_tool.h"
-#include "editor_noise_height_tool.h"
 #include "editor_set_starting_pos_tool.h"
-#include "editor_place_bob_tool.h"
-#include "editor_increase_resources_tool.h"
+#include "editor_tool_menu.h"
+#include "editor_toolsize_menu.h"
+#include "interactive_base.h"
+#include "keycodes.h"
+#include "map.h"
+#include "mapview.h"
+#include "overlay_manager.h"
+#include "player.h"
 #include "system.h"
 #include "tribe.h"
+#include "ui_button.h"
+#include "ui_modal_messagebox.h"
+
 
 /**********************************************
  *
@@ -69,7 +73,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    set_mapview(mm);
 
    // user interface buttons
-   int x = (get_w() - (5*34)) >> 1;
+   int x = (get_w() - (7*34)) >> 1;
    int y = get_h() - 34;
    UIButton *b;
 
@@ -93,7 +97,11 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", true));
 
-   b = new UIButton(this, x+170, y, 34, 34, 2);
+   b = new UIButton(this, x+170, y, 34, 43, 2);
+   b->clicked.set(this, &Editor_Interactive::toggle_playermenu);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_player_menu.png", true));
+
+   b = new UIButton(this, x+204, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_eventmenu);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_event_menu.png", true));
 
@@ -118,7 +126,8 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
       e->manually_load_tribe(tribes[i].c_str());
 
    m_need_save=false;
-
+   m_ctrl_down=false;
+   
    select_tool(1, 0);
 }
 
@@ -239,7 +248,7 @@ void Editor_Interactive::toggle_buildhelp(void)
 ===============
 Editor_Interactive::tool_menu_btn
 
-Bring up or close the main menu
+Bring up or close the tool menu
 ===============
 */
 void Editor_Interactive::tool_menu_btn()
@@ -248,6 +257,26 @@ void Editor_Interactive::tool_menu_btn()
 		delete m_toolmenu.window;
 	else
 		new Editor_Tool_Menu(this, &m_toolmenu, &tools, &m_options_menu);
+}
+
+/*
+===============
+Editor_Interactive::toggle_playermenu
+
+Bring up or close the Player Menu
+===============
+*/
+void Editor_Interactive::toggle_playermenu()
+{
+	if (m_playermenu.window)
+		delete m_playermenu.window;
+	else {
+         this->select_tool(5,0);
+         new Editor_Player_Menu(this,
+               &tools, 5, 8,
+               &m_playermenu);
+   }
+
 }
 
 /*
@@ -276,22 +305,12 @@ Handles a keyboard event
 ===========
 */
 bool Editor_Interactive::handle_key(bool down, int code, char c) {
+   if(code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
+   
    if(down) {
       // only on down events
       switch(code) {
-         case KEY_SPACE:
-            toggle_buildhelp();
-            return true;
-
-         case KEY_m:
-            toggle_minimap();
-            return true;
-
-         case KEY_t:
-            tool_menu_btn();
-            return true;
-
-            // Fieldsel radius
+                  // Fieldsel radius
          case KEY_1:
             set_fieldsel_radius(0);
             return true;
@@ -338,9 +357,45 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
             }
             return true;
 
+         case KEY_SPACE:
+            toggle_buildhelp();
+            return true;
+
+         case KEY_e:
+            toggle_eventmenu();
+            return true;
+
+         case KEY_h:
+            toggle_mainmenu();
+            return true;
+         
          case KEY_i:
             select_tool(0, 0);
             return true;
+
+         case KEY_m:
+            toggle_minimap();
+            return true;
+                 
+         case KEY_l:
+            if(m_ctrl_down) 
+               new Main_Menu_Load_Map(this);
+            return true;
+
+         case KEY_p:
+            toggle_playermenu();
+            return true;
+
+         case KEY_s:
+            if(m_ctrl_down) 
+               new Main_Menu_Save_Map(this);
+            return true;
+            
+         case KEY_t:
+            tool_menu_btn();
+            return true;
+
+
       }
    } else {
       // key up events
@@ -384,6 +439,9 @@ void Editor_Interactive::select_tool(int n, int which) {
 
 /*
  * Reference functions
+ *
+ *  data is either a pointer to a trigger, event
+ *  or a tribe (for buildings)
  */
 void Editor_Interactive::reference_player_tribe(int player, void *data) {
    assert(player>0 && player<=m_editor->get_map()->get_nrplayers());

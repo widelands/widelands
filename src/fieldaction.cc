@@ -345,7 +345,8 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 		BuildGrid** ppgrid;
 
 		// Some buildings cannot be built (i.e. construction site, HQ)
-		if (!descr->get_buildable())
+      // and not allowed buildings
+		if (!descr->get_buildable() || !m_player->get_player()->is_building_allowed(id))
 			continue;
 
 		// Figure out if we can build it here, and in which tab it belongs

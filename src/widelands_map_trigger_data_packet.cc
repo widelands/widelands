@@ -52,7 +52,7 @@ void Widelands_Map_Trigger_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
       for(i=0; i<nr_trig; i++) {
          Trigger* trig = Trigger_Factory::get_correct_trigger(fr->Unsigned16());
          assert(trig);
-         trig->Read(fr);
+         trig->Read(fr, egbase);
          if(get_scenario_skip())
             delete trig;
          else

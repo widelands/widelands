@@ -72,6 +72,7 @@ class Editor_Interactive : public Interactive_Base {
       void toolsize_menu_btn();
       void toggle_mainmenu();
       void toggle_eventmenu();
+      void toggle_playermenu();
 
       // State variables
       bool m_need_save;
@@ -80,6 +81,7 @@ class Editor_Interactive : public Interactive_Base {
          void *object;
       };
       std::vector<Player_References> m_player_tribe_references;
+      bool m_ctrl_down;
 
       // Tool
       Editor_Tools tools;
@@ -88,6 +90,7 @@ class Editor_Interactive : public Interactive_Base {
       Editor* m_editor;
       UIUniqueWindowRegistry m_toolmenu;
       UIUniqueWindowRegistry m_toolsizemenu;
+      UIUniqueWindowRegistry m_playermenu;
       UIUniqueWindowRegistry m_mainmenu;
       UIUniqueWindowRegistry m_eventmenu;
       UIUniqueWindowRegistry m_options_menu;

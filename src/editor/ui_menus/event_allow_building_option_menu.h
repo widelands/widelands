@@ -17,38 +17,43 @@
  *
  */
 
-#ifndef __S__EDITOR_TOOL_SET_STARTING_POS_OPTIONS_MENU_H
-#define __S__EDITOR_TOOL_SET_STARTING_POS_OPTIONS_MENU_H
+#ifndef __S__EVENT_ALLOW_BUILDING_OPTION_MENU_H
+#define __S__EVENT_ALLOW_BUILDING_OPTION_MENU_H
 
-#include "editor_tool_options_menu.h"
-#include "constants.h"
 #include <string>
 #include <vector>
+#include "ui_window.h"
 
 class Editor_Interactive;
-class Editor_Set_Starting_Pos_Tool;
-class UITextarea;
+class Event_Allow_Building;
 class UIEdit_Box;
-class UIButton;
+class UICheckbox;
+class UITextarea;
 
-class Editor_Tool_Set_Starting_Pos_Options_Menu : public Editor_Tool_Options_Menu {
+/*
+ * This is a modal box - The user must end this first
+ * before it can return
+ */
+class Event_Allow_Building_Option_Menu : public UIWindow {
    public:
-      Editor_Tool_Set_Starting_Pos_Options_Menu(Editor_Interactive*, Editor_Set_Starting_Pos_Tool*, UIUniqueWindowRegistry*);
-      virtual ~Editor_Tool_Set_Starting_Pos_Options_Menu() { }
+      Event_Allow_Building_Option_Menu(Editor_Interactive*, Event_Allow_Building*);
+      ~Event_Allow_Building_Option_Menu();
+
+      bool handle_mouseclick(uint btn, bool down, int mx, int my);
 
    private:
-      Editor_Set_Starting_Pos_Tool* m_spt;
+      void update(void);
+      void clicked(int);
+
+      Event_Allow_Building* m_event;
       Editor_Interactive* m_parent;
-      UITextarea *m_nr_of_players_ta;
-      UIEdit_Box* m_plr_names[MAX_PLAYERS];
-      UIButton* m_plr_set_pos_buts[MAX_PLAYERS];
-      UIButton* m_plr_set_tribes_buts[MAX_PLAYERS];
-      std::vector<std::string> m_tribes;
-
-      int m_posy;
-
-      void button_clicked(int);
-      void update();
+      UITextarea *m_player_ta, *m_building_ta;
+      UICheckbox* m_is_one_time_event, *m_allow;
+      UIEdit_Box* m_name;
+      int         m_player, m_building;
+      std::vector<std::string> m_buildings;
 };
 
 #endif
+
+

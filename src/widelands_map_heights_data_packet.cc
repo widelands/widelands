@@ -54,6 +54,7 @@ void Widelands_Map_Heights_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
       }
       return;
    }
+   throw wexception("Unknown version in Widelands_Map_Heights_Data_Packet: %i\n", packet_version);
    assert(0); // never here
 }
 

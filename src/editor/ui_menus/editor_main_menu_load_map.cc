@@ -61,6 +61,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    // listselect
    m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-40);
    m_ls->selected.set(this, &Main_Menu_Load_Map::selected);
+   m_ls->double_clicked.set(this, &Main_Menu_Load_Map::double_clicked);
 
 	// Fill it with the files: Widelands map files
 	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &m_mapfiles);
@@ -127,6 +128,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    but->set_title("Cancel");
 
    center_to_parent();
+   move_to_top();
 
    if(m_ls->get_nr_entries())
       m_ls->select(0);
@@ -155,14 +157,10 @@ void Main_Menu_Load_Map::clicked(int id) {
       Map* m_map=m_parent->get_editor()->get_map();
 
       if(filename!="") {
-         // Clean all the stuff up, so we can load
-         m_parent->get_editor()->get_objects()->cleanup(m_parent->get_editor());
-         g_anim.flush();
-         g_gr->flush(0);
 
-         m_map->cleanup();
+         m_parent->get_editor()->cleanup_for_load(true, false);
 
-         Map_Loader* ml=m_map->get_correct_loader(filename.c_str());
+         Widelands_Map_Loader* ml=new Widelands_Map_Loader(filename.c_str(), m_map);
 
          try {
             //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
@@ -173,7 +171,7 @@ void Main_Menu_Load_Map::clicked(int id) {
             // This really shoudn't fail since maps are already preloaded (in map preview)
             // and therefore valid, but if it does, a valid map must be displayed, therefore
             // we create an empty one from scratch
-            m_map->cleanup();
+            m_parent->get_editor()->cleanup_for_load(true, false);
             m_map->create_empty_map();
 
             std::string s="Map Loading Error!\n\nReason given:\n";
@@ -201,7 +199,9 @@ void Main_Menu_Load_Map::clicked(int id) {
             int w, h;
             int picid=g_gr->get_picture(PicMod_Game, text.c_str(), true);
             g_gr->get_picture_size(picid, &w, &h);
-            m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
+            // only register, when the player is not created (HQ placed)
+            if(!m_parent->get_editor()->get_player(i))
+               m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
          }
 
          /* Resources. we do not calculate default resources, therefore we do
@@ -260,4 +260,11 @@ void Main_Menu_Load_Map::selected(int i) {
    m_size->set_text(buf);
 
    delete map;
+}
+
+/*
+ * An Item has been doubleclicked
+ */
+void Main_Menu_Load_Map::double_clicked(int) {
+   clicked(1);
 }

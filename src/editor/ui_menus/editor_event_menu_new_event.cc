@@ -49,6 +49,8 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* par
    new UITextarea(this, spacing, offsy, "Available Events: ", Align_Left);
    m_event_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
+   m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
+   
    uint i=0;
    for(i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
       Event_Descr* d=Event_Factory::get_correct_event_descr(i);
@@ -110,7 +112,7 @@ void Editor_Event_Menu_New_Event::clicked(int i) {
    Event* event=
       Event_Factory::make_event_with_option_dialog(d->id, m_parent, 0);
    if(!event) {
-      end_modal(0);
+      // No event created, choose another, user
       return;
    }
    if(!m_parent->get_map()->event_exists(event)) {
@@ -129,3 +131,10 @@ void Editor_Event_Menu_New_Event::selected(int i) {
    m_ok_button->set_enabled(true);
 }
 
+/*
+ * listbox got double clicked
+ */
+void Editor_Event_Menu_New_Event::double_clicked(int i) {
+   // Ok
+   clicked(1);
+}

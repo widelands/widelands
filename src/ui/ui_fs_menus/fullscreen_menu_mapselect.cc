@@ -71,6 +71,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 	// Create the list area
 	list = new UIListselect(this, 12, 163, 363, 297);
 	list->selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
+   list->double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
 
 	// Fill it with the files: Widelands map files
 	g_fs->FindFiles("maps", "*"WLMF_SUFFIX, &m_mapfiles);
@@ -179,4 +180,12 @@ void Fullscreen_Menu_MapSelect::map_selected(int id)
 			m_ok->set_enabled(false);
 		}
 	}
+}
+
+/*
+ * listbox got double clicked
+ */
+void Fullscreen_Menu_MapSelect::double_clicked(int i) {
+   // Ok
+   ok();
 }

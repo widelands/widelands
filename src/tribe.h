@@ -23,6 +23,7 @@
 #include <map>
 #include <vector>
 #include "animation.h"
+#include "constants.h"
 #include "descr_maintainer.h"
 
 class Building_Descr;
@@ -95,5 +96,8 @@ class Tribe_Descr {
 		void parse_wares(const char *wares);
 
 };
+
+// And the tribe colors
+extern uchar g_playercolors[MAX_PLAYERS][12];
 
 #endif //__TRIBE_H

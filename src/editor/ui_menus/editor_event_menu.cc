@@ -58,11 +58,13 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    new UITextarea(this, spacing, offsy, "Registered Events: ", Align_Left);
    m_event_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
+   m_event_list->double_clicked.set(this, &Editor_Event_Menu::event_double_clicked);
 
    // Trigger List
    new UITextarea(this, (get_inner_w()/2)+spacing, offsy, "Registered Triggers", Align_Left);
    m_trigger_list=new UIListselect(this, (get_inner_w()/2)+spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu::trigger_list_selected);
+   m_trigger_list->double_clicked.set(this, &Editor_Event_Menu::trigger_double_clicked);
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
@@ -167,6 +169,7 @@ void Editor_Event_Menu::clicked(int id) {
       } else if(id==1) {
          // Delete event
          Event* event=static_cast<Event*>(m_event_list->get_selection());
+         m_parent->unreference_player_tribe(0, event);  // Remove all references done by this event 
          // event unregisters itself from the map
          event->cleanup(m_parent->get_egbase());
          // Some paranoia
@@ -174,6 +177,7 @@ void Editor_Event_Menu::clicked(int id) {
          m_parent->set_need_save(true);
          update();
       } else if(id==2) {
+         // Edit event
          Event* event=static_cast<Event*>(m_event_list->get_selection());
          Editor_Event_Menu_Choose_Trigger* ntm=new Editor_Event_Menu_Choose_Trigger(m_parent, event);
          if(ntm->run())
@@ -226,5 +230,15 @@ void Editor_Event_Menu::trigger_list_selected(int i) {
 void Editor_Event_Menu::event_list_selected(int i) {
    m_btn_del_event->set_enabled(true);
    m_btn_edit_event->set_enabled(true);
+}
+
+/*
+ * listbox was double clicked
+ */
+void Editor_Event_Menu::trigger_double_clicked(int n) {
+   clicked(4);
+}
+void Editor_Event_Menu::event_double_clicked(int n) {
+   clicked(2);
 }
 

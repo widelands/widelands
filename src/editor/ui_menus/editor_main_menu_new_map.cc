@@ -117,14 +117,9 @@ void Main_Menu_New_Map::button_clicked(int n) {
               {
                  Map* m_map=m_parent->get_egbase()->get_map();
                  // Clean all the stuff up, so we can load
-                 m_parent->get_editor()->get_objects()->cleanup(m_parent->get_editor());
-                 g_anim.flush();
-                 g_gr->flush(0);
-
-                 m_map->cleanup();
+                 m_parent->get_editor()->cleanup_for_load(true, true);
 
                  m_map->create_empty_map(MAP_DIMENSIONS[m_w],MAP_DIMENSIONS[m_h],(*m_worlds)[m_currentworld]);
-
 
                  // Postload the world which provides all the immovables found on a map
                  m_map->get_world()->postload(m_parent->get_editor());

@@ -40,7 +40,7 @@ class Trigger_Time : public Trigger {
 
       // File Functions
       void Write(FileWrite*);
-      void Read(FileRead*);
+      void Read(FileRead*, Editor_Game_Base*);
 
       inline void set_wait_time(int i) { m_wait_time=i; }
       inline void set_last_start_time(int i) { m_last_start_time = i; }

@@ -49,6 +49,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
    new UITextarea(this, spacing, offsy, "Available Triggers: ", Align_Left);
    m_trigger_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
+   m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
    uint i=0;
    for(i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
       Trigger_Descr* d=Trigger_Factory::get_correct_trigger_descr(i);
@@ -110,7 +111,7 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
    Trigger* trig=
       Trigger_Factory::make_trigger_with_option_dialog(d->id, m_parent, 0);
    if(!trig) {
-      end_modal(0);
+      // No trigger created, don't close us. let user choose other trigger
       return;
    }
    if(m_parent->get_map()->trigger_exists(trig)) {
@@ -132,3 +133,10 @@ void Editor_Event_Menu_New_Trigger::selected(int i) {
    m_ok_button->set_enabled(true);
 }
 
+/*
+ * listbox got double clicked
+ */
+void Editor_Event_Menu_New_Trigger::double_clicked(int i) {
+   // Ok
+   clicked(1);
+}

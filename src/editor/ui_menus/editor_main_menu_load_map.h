@@ -46,6 +46,7 @@ class Main_Menu_Load_Map : public UIWindow {
    private:
       void clicked(int);
       void selected(int);
+      void double_clicked(int);
 
       UITextarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;
       UIMultiline_Textarea* m_descr;

@@ -46,6 +46,7 @@ int Editor_Delete_Immovable_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
       Field *f = parent->get_map()->get_field(c);
       BaseImmovable* mim=f->get_immovable();
       if (mim) {
+         if(mim->get_type()!=Map_Object::IMMOVABLE) continue; // Delete no buildings or stuff 
          mim->remove(parent->get_editor());
       }
    }

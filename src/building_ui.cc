@@ -593,6 +593,13 @@ void Building_Window::setup_capsbuttons()
          int id=m_player->get_player()->get_tribe()->get_building_index((*buildings)[i]);
          if(id==-1)
             throw wexception("Should enhance to unknown building: %s\n", (*buildings)[i]);
+
+         if(!m_player->get_player()->is_building_allowed(id)) {
+            // This buildings is disabled for this scenario, sorry. 
+            // Try again later!!
+            continue;
+         }
+
          UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2, id); // Button id == building id
          btn->clickedid.set(this, &Building_Window::act_enhance);
          btn->set_pic(m_player->get_player()->get_tribe()->get_building_descr(id)->get_buildicon());

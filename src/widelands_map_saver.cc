@@ -17,21 +17,24 @@
  *
  */
 
-#include "widelands_map_saver.h"
-#include "wexception.h"
+#include "editor_game_base.h"
 #include "filesystem.h"
 #include "map.h"
-#include "editor_game_base.h"
-#include "widelands_map_elemental_data_packet.h"
-#include "widelands_map_heights_data_packet.h"
-#include "widelands_map_terrain_data_packet.h"
-#include "widelands_map_immovable_data_packet.h"
-#include "widelands_map_player_position_data_packet.h"
+#include "player.h"
+#include "tribe.h"
+#include "wexception.h"
+#include "widelands_map_allowed_buildings_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
-#include "widelands_map_resources_data_packet.h"
-#include "widelands_map_player_names_and_tribes_data_packet.h"
-#include "widelands_map_trigger_data_packet.h"
+#include "widelands_map_elemental_data_packet.h"
 #include "widelands_map_event_data_packet.h"
+#include "widelands_map_heights_data_packet.h"
+#include "widelands_map_immovable_data_packet.h"
+#include "widelands_map_player_names_and_tribes_data_packet.h"
+#include "widelands_map_player_position_data_packet.h"
+#include "widelands_map_resources_data_packet.h"
+#include "widelands_map_saver.h"
+#include "widelands_map_terrain_data_packet.h"
+#include "widelands_map_trigger_data_packet.h"
 
 /*
  * Constructor
@@ -101,17 +104,41 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    dp->Write(&fw, m_egbase);
    delete dp;
 
-   // NON MANDATORY PACKETS
+   // NON MANDATORY PACKETS BELOW THIS POINT
+
+   // Triggers
    if(m_egbase->get_map()->get_number_of_triggers()) {
       dp=new Widelands_Map_Trigger_Data_Packet();
       dp->Write(&fw, m_egbase);
       delete dp;
    }
-  if(m_egbase->get_map()->get_number_of_events()) {
+   // Events
+   if(m_egbase->get_map()->get_number_of_events()) {
       dp=new Widelands_Map_Event_Data_Packet();
       dp->Write(&fw, m_egbase);
       delete dp;
    }
+
+   // Allowed buildings
+   bool write_allowed_buildings=false;
+   int i;
+   for(i=1; i<=m_egbase->get_map()->get_nrplayers(); i++) {
+      int b=0;
+      Player* player=m_egbase->get_player(i);
+      if(!player) continue;
+      for(b=0; b<player->get_tribe()->get_nrbuildings(); b++) 
+         if(player->is_building_allowed(b)) {
+            write_allowed_buildings=true;
+            break;
+         }
+      if(write_allowed_buildings) break;
+   }
+   if(write_allowed_buildings) {
+      dp=new Widelands_Map_Allowed_Buildings_Data_Packet();
+      dp->Write(&fw, m_egbase);
+      delete dp;
+   }
+   
    fw.Write(g_fs,m_filename);
 }
 

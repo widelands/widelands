@@ -74,6 +74,7 @@ class Editor_Game_Base {
       // loading stuff
       void postload();
       void load_graphics();
+      void cleanup_for_load(bool flush_graphics=true, bool flush_animations=true);
 
       // warping stuff. instantly creating map_objects
       Building* warp_building(Coords, char owner, int idx);

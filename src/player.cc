@@ -37,15 +37,22 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
 	m_plnum = plnum;
 	m_tribe = tribe;
 	m_egbase = g;
-	seen_fields = 0;
-
+   seen_fields=0;
+   
 	for(int i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
+
+   // Allow all buildings per default
+   int i; 
+   m_allowed_buildings.resize(m_tribe->get_nrbuildings());
+   for(i=0; i<m_tribe->get_nrbuildings(); i++) 
+      m_allowed_buildings[i]=true;
 }
 
 Player::~Player(void)
 {
-	delete seen_fields;
+   if(seen_fields)
+      delete seen_fields;
 }
 
 /*
@@ -374,3 +381,14 @@ void Player::flagaction(Flag* flag, int action)
 	}
 }
 
+/*
+ * allow building
+ *
+ * Disable or enable a building for a player
+ */
+void Player::allow_building(int i, bool t) {
+   assert(m_tribe && i<m_tribe->get_nrbuildings());
+   m_allowed_buildings.resize(m_tribe->get_nrbuildings());
+
+   m_allowed_buildings[i]=t;
+}

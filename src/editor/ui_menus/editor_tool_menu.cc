@@ -25,14 +25,12 @@
 #include "editor_tool_set_terrain_options_menu.h"
 #include "editor_tool_noise_height_options_menu.h"
 #include "editor_tool_place_immovable_options_menu.h"
-#include "editor_tool_set_starting_pos_options_menu.h"
 #include "editor_tool_place_bob_options_menu.h"
 #include "editor_increase_height_tool.h"
 #include "editor_decrease_height_tool.h"
 #include "editor_noise_height_tool.h"
 #include "editor_place_immovable_tool.h"
 #include "editor_set_both_terrain_tool.h"
-#include "editor_set_starting_pos_tool.h"
 #include "editor_place_bob_tool.h"
 #include "editor_tool_change_resources_options_menu.h"
 #include "editor_increase_resources_tool.h"
@@ -63,7 +61,7 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowReg
    int posy=offsy;
 
 
-   int num_tools=7;
+   int num_tools=6;
    m_radioselect=new UIRadiogroup();
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_change_height.png", true));
    posx+=width+spacing;
@@ -72,8 +70,6 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowReg
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_set_terrain.png", true));
    posx+=width+spacing;
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_place_immovable.png", true));
-   posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_set_starting_pos.png", true));
    posx+=width+spacing;
    m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_place_bob.png", true));
    posx+=width+spacing;
@@ -149,20 +145,13 @@ void Editor_Tool_Menu::changed_to(void) {
          break;
 
       case 4:
-         m_parent->select_tool(5,0);
-         new Editor_Tool_Set_Starting_Pos_Options_Menu(m_parent,
-               static_cast<Editor_Set_Starting_Pos_Tool*>(m_tools->tools[5]),
-               m_options);
-         break;
-
-      case 5:
          m_parent->select_tool(6,0);
          new Editor_Tool_Place_Bob_Options_Menu(m_parent,
                static_cast<Editor_Place_Bob_Tool*>(m_tools->tools[6]),
                m_options);
          break;
 
-      case 6:
+      case 5:
          m_parent->select_tool(7, 0);
          new Editor_Tool_Change_Resources_Options_Menu(m_parent,
                static_cast<Editor_Increase_Resources_Tool*>(m_tools->tools[7]),

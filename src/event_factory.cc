@@ -20,20 +20,23 @@
 
 #include "editorinteractive.h"
 #include "event.h"
-#include "event_ids.h"
+#include "event_allow_building.h"
+#include "event_allow_building_option_menu.h"
+#include "event_conquer_area.h"
+#include "event_conquer_area_option_menu.h"
 #include "event_factory.h"
-#include "error.h"
-#include "wexception.h"
+#include "event_ids.h"
 #include "event_message_box.h"
 #include "event_message_box_option_menu.h"
 #include "event_move_view.h"
 #include "event_move_view_option_menu.h"
 #include "event_unhide_area.h"
 #include "event_unhide_area_option_menu.h"
-#include "event_conquer_area.h"
-#include "event_conquer_area_option_menu.h"
+#include "error.h"
+#include "wexception.h"
 
-static const int nr_of_events=4;
+
+static const int nr_of_events=5;
 
 Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
    { EVENT_MESSAGE_BOX, "Message Box", "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned"
@@ -41,6 +44,7 @@ Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
    { EVENT_MOVE_VIEW, "Move View", "This Event centers the Players View on a certain field" },
    { EVENT_UNHIDE_AREA, "Unhide Area", "This Event makes a user definable part of the map visible for a selectable user" },
    { EVENT_CONQUER_AREA, "Conquer Area", "This Event conquers a user definable part of the map for one player if there isn't a player already there" },
+   { EVENT_ALLOW_BUILDING, "Allow Building", "Allows/Disables a certain building for a player so that it can be build or it can't any longer" },
 };
 
 /*
@@ -52,6 +56,7 @@ Event* Event_Factory::get_correct_event(uint id) {
       case EVENT_MOVE_VIEW: return new Event_Move_View(); break;
       case EVENT_UNHIDE_AREA: return new Event_Unhide_Area(); break;
       case EVENT_CONQUER_AREA: return new Event_Conquer_Area(); break;
+      case EVENT_ALLOW_BUILDING: return new Event_Allow_Building(); break;
       default: break;
    }
    throw wexception("Event_Factory::get_correct_event: Unknown event id found: %i\n", id);
@@ -76,6 +81,7 @@ Event* Event_Factory::make_event_with_option_dialog(uint id, Editor_Interactive*
       case EVENT_MOVE_VIEW: { Event_Move_View_Option_Menu* t=new Event_Move_View_Option_Menu(m_parent, static_cast<Event_Move_View*>(event)); retval=t->run(); delete t; } break;
       case EVENT_UNHIDE_AREA: { Event_Unhide_Area_Option_Menu* t=new Event_Unhide_Area_Option_Menu(m_parent, static_cast<Event_Unhide_Area*>(event)); retval=t->run(); delete t; } break;
       case EVENT_CONQUER_AREA: { Event_Conquer_Area_Option_Menu* t=new Event_Conquer_Area_Option_Menu(m_parent, static_cast<Event_Conquer_Area*>(event)); retval=t->run(); delete t; } break;
+      case EVENT_ALLOW_BUILDING: { Event_Allow_Building_Option_Menu* t=new Event_Allow_Building_Option_Menu(m_parent, static_cast<Event_Allow_Building*>(event)); retval=t->run(); delete t; } break;
       default: break;
    }
    if(retval==-100)

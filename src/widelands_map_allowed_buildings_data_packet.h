@@ -17,39 +17,23 @@
  *
  */
 
-#ifndef __S__EDITOR_EVENT_MENU_H
-#define __S__EDITOR_EVENT_MENU_H
+#ifndef __S__WIDELANDS_MAP_ALLOWED_BUILDINGS_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_ALLOWED_BUILDINGS_DATA_PACKET_H
 
-#include "ui_unique_window.h"
-
-class Editor_Interactive;
-class UIListselect;
-class UIButton;
+#include "widelands_map_data_packet.h"
 
 /*
-=============================
-
-class Editor_Event_Menu
-
-=============================
-*/
-class Editor_Event_Menu : public UIUniqueWindow {
+ * If present, this contains all buildings that are allowed to be build
+ * by players. If absent, all buildings are allowed per default
+ */
+class Widelands_Map_Allowed_Buildings_Data_Packet : public Widelands_Map_Data_Packet {
    public:
-      Editor_Event_Menu(Editor_Interactive*, UIUniqueWindowRegistry*);
-      virtual ~Editor_Event_Menu();
+      virtual ~Widelands_Map_Allowed_Buildings_Data_Packet();
 
-   private:
-      Editor_Interactive *m_parent;
-
-      UIListselect* m_event_list, *m_trigger_list;
-      UIButton *m_btn_del_event, *m_btn_edit_event, *m_btn_del_trigger, *m_btn_edit_trigger;
-      void trigger_list_selected(int);
-      void event_list_selected(int);
-      void trigger_double_clicked(int);
-      void event_double_clicked(int);
-      void clicked(int);
-      void update();
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
 };
 
 
 #endif
+

@@ -17,17 +17,18 @@
  *
  */
 
+#include "widelands_map_allowed_buildings_data_packet.h"
+#include "widelands_map_bob_data_packet.h"
+#include "widelands_map_event_data_packet.h"
 #include "widelands_map_data_packet_factory.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_heights_data_packet.h"
-#include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_immovable_data_packet.h"
-#include "widelands_map_player_position_data_packet.h"
-#include "widelands_map_bob_data_packet.h"
-#include "widelands_map_resources_data_packet.h"
 #include "widelands_map_player_names_and_tribes_data_packet.h"
+#include "widelands_map_player_position_data_packet.h"
+#include "widelands_map_resources_data_packet.h"
+#include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_trigger_data_packet.h"
-#include "widelands_map_event_data_packet.h"
 
 Widelands_Map_Data_Packet* Widelands_Map_Data_Packet_Factory::create_correct_packet(ushort id) throw(wexception) {
     switch(id) {
@@ -40,6 +41,7 @@ Widelands_Map_Data_Packet* Widelands_Map_Data_Packet_Factory::create_correct_pac
       case PACKET_PLAYER_NAM_TRIB: return new Widelands_Map_Player_Names_And_Tribes_Data_Packet(); break;
       case PACKET_TRIGGER: return new Widelands_Map_Trigger_Data_Packet(); break;
       case PACKET_EVENT: return new Widelands_Map_Event_Data_Packet(); break;
+      case PACKET_ALLOWED_BUILDINGS: return new Widelands_Map_Allowed_Buildings_Data_Packet(); break;
       default: throw wexception("Unknown Packet_Data_ID in map file: %i\n", id); break;
     }
     // never here

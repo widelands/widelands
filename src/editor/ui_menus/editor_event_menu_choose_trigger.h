@@ -56,6 +56,8 @@ class Editor_Event_Menu_Choose_Trigger : public UIWindow {
       void update(void);
       void available_list_selected(int);
       void selected_list_selected(int);
+      void selected_list_double_clicked(int);
+      void available_list_double_clicked(int);
       void clicked(int);
 };
 

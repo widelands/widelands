@@ -17,51 +17,46 @@
  *
  */
 
-#ifndef __S__TRIGGER_BUILDING_H
-#define __S__TRIGGER_BUILDING_H
+#ifndef __S__EVENT_ALLOW_BUILDING_H
+#define __S__EVENT_ALLOW_BUILDING_H
 
-#include <string>
-#include "trigger_ids.h"
-#include "trigger.h"
-#include "geometry.h"
+#include "event.h"
+
+class Editor_Game_Base;
 
 /*
- * For documentation see the description in editor or trigger_factory.cc
- * or see trigger.h
+ * Allows/denies the player to build a certain building 
  */
-class Trigger_Building : public Trigger {
+class Event_Allow_Building : public Event {
    public:
-      Trigger_Building();
-      ~Trigger_Building();
+     Event_Allow_Building();
+      ~Event_Allow_Building();
 
       // one liner functions
-      uint get_id(void) { return TRIGGER_BUILDING; }
+      uint get_id(void) { return EVENT_ALLOW_BUILDING; }
 
-      void check_set_conditions(Game*);
-      void reset_trigger(Game*);
+      void run(Game*);
+      virtual void reinitialize(Game*);
+      virtual void cleanup(Editor_Game_Base* g);
 
       // File Functions
-      void Write(FileWrite*);
-      void Read(FileRead*, Editor_Game_Base*);
+      void Write(FileWrite*, Editor_Game_Base*);
+      void Read(FileRead*, Editor_Game_Base*, bool);
 
-      inline void set_coords(Coords pt) { m_pt=pt; }
-      inline Coords get_coords(void) { return m_pt; }
       inline int get_player(void) { return m_player; }
       inline void set_player(int i) { m_player=i; }
-      inline int get_area(void) { return m_area; }
-      inline void set_area(int i) { m_area=i; }
       const char* get_building(void) { return m_building.c_str(); }
       void set_building(const char* b) { m_building=b; }
-      void set_building_count(int n) { m_count=n; }
-      int get_building_count(void) { return m_count; }
- 
+      inline void set_allow(bool t) { m_allow=t; }
+      inline bool get_allow(void) { return m_allow; }
+
    private:
-      Coords m_pt;
+      bool m_allow;
       std::string m_building;
       int m_player;
-      int m_area;
-      int m_count;
 };
+
+
 
 #endif
 

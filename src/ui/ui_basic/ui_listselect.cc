@@ -17,11 +17,13 @@
  *
  */
 
+#include "constants.h"
+#include "graphic.h"
 #include "rendertarget.h"
+#include "system.h"
 #include "types.h"
 #include "ui_listselect.h"
 #include "ui_scrollbar.h"
-#include "constants.h"
 
 /**
 Initialize a list select panel
@@ -48,6 +50,12 @@ UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align 
 
 	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar->set_steps(1);
+
+   m_lineheight=g_fh->get_fontheight(UI_FONT_SMALL); 
+
+   m_max_pic_width=0;
+   m_last_click_time=-10000;
+   m_last_selection=-1;
 }
 
 
@@ -84,16 +92,28 @@ Args: name	name that will be displayed
       value	value returned by get_select()
       select if true, directly select the new entry
 */
-void UIListselect::add_entry(const char *name, void* value, bool select)
+void UIListselect::add_entry(const char *name, void* value, bool select, int picid)
 {
 	Entry *e = (Entry *)malloc(sizeof(Entry) + strlen(name));
 
 	e->value = value;
+   e->picid = picid;
 	strcpy(e->name, name);
 
-	m_entries.push_back(e);
+   int entry_height=0;
+   if(picid==-1) {
+      entry_height=g_fh->get_fontheight(UI_FONT_SMALL);
+   } else {
+      int w,h;
+      g_gr->get_picture_size(picid, &w, &h);
+      entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);  
+      if(m_max_pic_width<w) m_max_pic_width=w;
+   }
+   if(entry_height>m_lineheight) m_lineheight=entry_height;
 
-	m_scrollbar->set_steps(m_entries.size() * g_fh->get_fontheight(UI_FONT_SMALL) - get_h());
+   m_entries.push_back(e);
+
+	m_scrollbar->set_steps(m_entries.size() * m_lineheight - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
    if(select)
@@ -164,7 +184,7 @@ Return the total height (text + spacing) occupied by a single line
 */
 int UIListselect::get_lineheight()
 {
-	return g_fh->get_fontheight(UI_FONT_SMALL) + 2;
+	return m_lineheight+2; 
 }
 
 
@@ -189,7 +209,7 @@ void UIListselect::draw(RenderTarget* dst)
 
 		if (idx == m_selection) {
 			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
-			dst->brighten_rect(1, y, get_eff_w()-2, g_fh->get_fontheight(UI_FONT_SMALL), -ms_darken_value);
+			dst->brighten_rect(1, y, get_eff_w()-2, m_lineheight, -ms_darken_value);
       }
 
 		int x;
@@ -197,11 +217,23 @@ void UIListselect::draw(RenderTarget* dst)
 			x = get_eff_w() - 1;
 		else if (m_align & Align_HCenter)
 			x = get_eff_w()>>1;
-		else
-			x = 1;
+		else {
+         // Pictures are always left aligned, leave some space here
+			if(m_max_pic_width)
+            x= m_max_pic_width + 10;
+         else 
+            x=1;
+      }
 
-		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, x, y, e->name, m_align, -1);
+      // Horizontal center the string
+		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->name, m_align, -1);
 
+      // Now draw pictures
+      if(e->picid!=-1) {
+         int w,h;
+         g_gr->get_picture_size(e->picid, &w, &h);
+         dst->blit(1, y + (get_lineheight()-h)/2, e->picid);
+      }
 		y += lineheight;
 		idx++;
 	}
@@ -217,10 +249,19 @@ bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)
 		return false;
 
 	if (down) {
+      // check if doubleclicked
+     
 		y = (y + m_scrollpos) / get_lineheight();
 		if (y >= 0 && y < (int)m_entries.size())
 			select(y);
-	}
+	
+      int time=Sys_GetTime();
+      if(time-m_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1) 
+         double_clicked.call(m_selection);
+      
+      m_last_selection=m_selection;
+      m_last_click_time=time;
+     }
 
 	return true;
 }
