@@ -87,7 +87,7 @@ void Main_Menu_Save_Map::clicked(int id) {
          std::string s="Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason given:\n";
          s+=exe.what();
          UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, "Save Map Error!!", s, UIModal_Message_Box::OK);
-         int code= mbox->run();
+         mbox->run();
          delete mbox;
       }
       delete wms;

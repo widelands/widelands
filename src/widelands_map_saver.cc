@@ -24,6 +24,7 @@
 #include "widelands_map_elemental_data_packet.h"
 #include "widelands_map_heights_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
+#include "widelands_map_immovable_data_packet.h"
 
 /*
  * Constructor
@@ -50,6 +51,7 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    FileWrite fw;
    Widelands_Map_Data_Packet* dp;
 
+   // MANDATORY PACKETS
    // Start with writing the map out, first Elemental data
    dp= new Widelands_Map_Elemental_Data_Packet();
    dp->Write(&fw, m_egbase);
@@ -65,7 +67,12 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    dp->Write(&fw, m_egbase);
    delete dp;
 
-   
+   // now immovables  
+   dp=new Widelands_Map_Immovable_Data_Packet();
+   dp->Write(&fw, m_egbase);
+   delete dp;
+
+   // NON MANDATORY PACKETS
    fw.Write(g_fs,m_filename); 
 }
 
