@@ -111,6 +111,103 @@ int Editor_Info_Tool::handle_click(const Coords* coordinates, Field* f, Map* map
 /*
 =============================
 
+class Editor_Increase_Height_Tool_Options_Menu
+
+this is the option menu for this tool
+
+=============================
+*/
+class Editor_Increase_Height_Tool_Options_Menu : public Window {
+   public:
+      Editor_Increase_Height_Tool_Options_Menu(Editor_Interactive*, UniqueWindow*, int*);
+      virtual ~Editor_Increase_Height_Tool_Options_Menu();
+
+   private:
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+      int* m_changed_by;
+      Textarea* m_textarea; 
+      
+      void button_clicked(int);
+};
+
+/*
+===============
+Editor_Increase_Height_Tool_Options_Menu::Editor_Increase_Height_Tool_Options_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Increase_Height_Tool_Options_Menu::Editor_Increase_Height_Tool_Options_Menu(Editor_Interactive *parent, UniqueWindow *registry, int* changed_by)
+	: Window(parent, (parent->get_w()-400)/2, (parent->get_h()-100)/2, 210, 70, "Option Menu")
+{
+   m_registry = registry;
+	if (m_registry) {
+		if (m_registry->window)
+			delete m_registry->window;
+		
+		m_registry->window = this;
+		if (m_registry->x >= 0)
+			set_pos(m_registry->x, m_registry->y);
+	}
+   m_changed_by=changed_by;
+   
+   new Textarea(this, 5, 5, "Increase Height Tool Options", Align_Left);
+   char buf[250];
+   sprintf(buf, "Increase by: %i", *m_changed_by);
+   m_textarea=new Textarea(this, 50, 25, buf);
+
+   Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Increase_Height_Tool_Options_Menu::button_clicked);
+   b=new Button(this, 105, 40, 20, 20, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Increase_Height_Tool_Options_Menu::button_clicked);
+}
+
+/*
+===============
+Editor_Increase_Height_Tool_Options_Menu::~Editor_Increase_Height_Tool_Options_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Increase_Height_Tool_Options_Menu::~Editor_Increase_Height_Tool_Options_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Increase_Height_Tool_Options_Menu::button_clicked()
+
+called, when one of the up/down buttons is pressed
+id: 0 is up, 1 is down
+===========
+*/
+void Editor_Increase_Height_Tool_Options_Menu::button_clicked(int n) {
+   int val=*m_changed_by;
+   if(n==0) {
+      ++val;
+      if(val>MAX_FIELD_HEIGHT) val=MAX_FIELD_HEIGHT;
+   } else if(n==1) {
+      --val;
+      if(val<0) val=0;
+   }
+   *m_changed_by=val;
+   
+   char buf[250];
+   sprintf(buf, "Increase by: %i", *m_changed_by);
+   m_textarea->set_text(buf);
+}
+
+/*
+=============================
+
 class Editor_Increase_Height_Tool
 
 =============================
@@ -134,9 +231,46 @@ int Editor_Increase_Height_Tool::handle_click(const Coords* coordinates, Field* 
 ===========
 Editor_Increase_Height_Tool::tool_options_dialog()
 
+Launch the option window
+===========
+*/
+int Editor_Increase_Height_Tool::tool_options_dialog(Editor_Interactive* parent) {
+   if (m_w.window)
+		delete m_w.window;
+	else
+		new Editor_Increase_Height_Tool_Options_Menu(parent, &m_w, &m_increase_by);
+   return 0;
+}
+
+/*
+=============================
+
+class Editor_Decrease_Height_Tool
+
+=============================
+*/
+
+/*
+===========
+Editor_Decrease_Height_Tool::handle_click()
+
+decrease the height of the current field by one,
+this decreases the height of the surrounding fields also
+if this is needed.
+===========
+*/
+int Editor_Decrease_Height_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
+   map->change_field_height(*coordinates, -m_decrease_by);
+   return 0;
+}
+
+/*
+===========
+Editor_Decrease_Height_Tool::tool_options_dialog()
+
 TODO
 ===========
 */
-int Editor_Increase_Height_Tool::tool_options_dialog(Editor_Interactive*) {
+int Editor_Decrease_Height_Tool::tool_options_dialog(Editor_Interactive*) {
    return 0;
 }

@@ -19,7 +19,6 @@
 
 #include "widelands.h"
 #include "editorinteractive.h"
-#include "e_ui.h"
 #include "options.h"
 #include "editor.h"
 #include "map.h"
@@ -47,8 +46,10 @@ class Editor_Tool_Menu : public Window {
       Editor_Interactive::Editor_Tools* m_tools;
       UniqueWindow* m_registry;
       Editor_Interactive* m_parent;
+      Radiogroup* m_radioselect;
 
       void changed_to_function(int);
+      void options_button_clicked(int);
 };
 
 /*
@@ -71,20 +72,25 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UniqueWindow *reg
 			set_pos(m_registry->x, m_registry->y);
 	}
    m_tools=tools;
+   m_parent=parent;
 
-   Radiogroup* r=new Radiogroup();
-   r->changedto.set(this, &Editor_Tool_Menu::changed_to_function);
+   m_radioselect=new Radiogroup();
+   m_radioselect->changedto.set(this, &Editor_Tool_Menu::changed_to_function);
 
-   int y = 20;
+   int y = 5;
    uint i;
    for(i = 0; i < m_tools->tools.size(); i++, y+= 25) {
       char buf[32];
-      r->add_button(this, 100, y);
+      m_radioselect->add_button(this, 5, y);
       sprintf(buf, "%s", m_tools->tools[i]->get_name());
-      new Textarea(this, 125, y+10, buf, Align_VCenter);
-
+      if(m_tools->tools[i]->has_options()) {
+         Button* b = new Button(this, 30, y+3, 14, 14, 0, i);
+         b->set_title("O");
+         b->clickedid.set(this, &Editor_Tool_Menu::options_button_clicked);
+      }
+      new Textarea(this, 60, y+10, buf, Align_VCenter);
    }
-   r->set_state(m_tools->current_tool);
+   m_radioselect->set_state(m_tools->current_tool);
 
 }
 
@@ -116,6 +122,19 @@ void Editor_Tool_Menu::changed_to_function(int n) {
    // TODO: call some kind of 'you've been selected' function
 }
 
+/*
+===========
+Editor_Tool_Menu::options_button_clicked()
+
+called when one of the options buttons has been clicked
+===========
+*/
+void Editor_Tool_Menu::options_button_clicked(int n) {
+   m_tools->tools[n]->tool_options_dialog(m_parent);
+   m_radioselect->set_state(n);
+}
+
+
 /**********************************************
  *
  * class EditorInteractive
@@ -138,20 +157,17 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    mm->warpview.set(this, &Editor_Interactive::mainview_move);
    mm->fieldclicked.set(this, &Editor_Interactive::field_clicked);
    set_mapview(mm);
-     
-   // The panel. Tools, infos and gimmicks
-   m_panel = new ToolPanel(this, 0, get_h()-PANEL_HEIGHT, get_w(), PANEL_HEIGHT);
-		
 
    // user interface buttons
    int x = (get_w() - (4*34)) >> 1;
    int y = get_h() - 34;
    Button *b;
 
-   MiniMapView* minimapview;
+/*   MiniMapView* minimapview;
 	minimapview= new MiniMapView(m_panel, m_panel->get_w()-PANEL_HEIGHT, 0, this, PANEL_HEIGHT, PANEL_HEIGHT);
    minimapview->warpview.set(this, &Editor_Interactive::minimap_warp);
    set_minimapview(minimapview);
+*/
 
    // temp (should be Main menu)
    b = new Button(this, x, y, 34, 34, 2);
@@ -175,6 +191,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.current_tool=0;
    tools.tools.push_back(new Editor_Info_Tool());
    tools.tools.push_back(new Editor_Increase_Height_Tool());
+   tools.tools.push_back(new Editor_Decrease_Height_Tool());
 }
 
 /****************************************

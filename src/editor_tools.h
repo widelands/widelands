@@ -22,6 +22,7 @@
 
 class Editor_Interactive;
 #include "map.h"
+#include "ui.h"
 
 /*
 =============================
@@ -40,6 +41,7 @@ class Editor_Tool {
 
       virtual int handle_click(const Coords*, Field* field, Map* m, Editor_Interactive* parent) = 0;
       virtual int tool_options_dialog(Editor_Interactive* parent) { return 0; } // not needed by every tool
+      virtual bool has_options(void) { return false; }
       virtual const char* get_name(void) = 0;
 };
 
@@ -73,11 +75,37 @@ class Editor_Increase_Height_Tool : public Editor_Tool {
   
       virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
       virtual int tool_options_dialog(Editor_Interactive* parent);
+      virtual bool has_options(void) { return true; }
       
       virtual const char* get_name(void) { return "Increase Field Height"; }
       
    private:
+      UniqueWindow m_w;
       int m_increase_by;
 };
+
+/*
+=============================
+class Editor_Decrease_Height_Tool
+
+this decreases the height of a field by a value
+=============================
+*/
+class Editor_Decrease_Height_Tool : public Editor_Tool {
+   public:
+      Editor_Decrease_Height_Tool() { m_decrease_by=1; }
+      virtual ~Editor_Decrease_Height_Tool() { }
+  
+      virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
+      virtual int tool_options_dialog(Editor_Interactive* parent);
+      virtual bool has_options(void) { return true; }
+      
+      virtual const char* get_name(void) { return "Decrease Field Height"; }
+      
+   private:
+      UniqueWindow m_w;
+      int m_decrease_by;
+};
+
 
 #endif // __S__EDITOR_TOOLS_H

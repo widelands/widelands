@@ -134,8 +134,8 @@ public:
 	
 private:
    // note: you must reset this field's + neighbor's brightness when you change the height
-   // Map's set_height does this
-   inline void set_height(uchar h) { if(h>MAX_FIELD_HEIGHT) h=MAX_FIELD_HEIGHT; height = h; }
+   // Map's change_height does this
+   inline void set_height(uchar h) { if((char)h<0) h=0; if(h>MAX_FIELD_HEIGHT) h=MAX_FIELD_HEIGHT; height = h; }
 };
 
 

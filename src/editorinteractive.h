@@ -20,7 +20,6 @@
 #ifndef __S__EDITORINTERACTIVE_H
 #define __S__EDITORINTERACTIVE_H
 
-#include "e_ui.h"
 #include "mapview.h"
 #include "interactive_base.h"
 
@@ -62,7 +61,6 @@ class Editor_Interactive : public Interactive_Base {
       Editor_Tools tools;
 
       // UI ownings
-      ToolPanel* m_panel;
       Editor* m_editor;
       UniqueWindow m_toolmenu;
 };
