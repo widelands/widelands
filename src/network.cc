@@ -312,8 +312,6 @@ void NetClient::handle_network ()
 			break;
 		    case NETCMD_SELECTMAP:
 			{
-				assert (launch_map!=0);
-
 				char buffer[256];
 				deserializer->getstr (buffer,sizeof(buffer));
 				log ("Map '%s' selected\n", buffer);
