@@ -796,7 +796,7 @@ bool Warehouse::can_create_worker(Game *g, int worker)
 {
 	Worker_Descr *w_desc = 0;
 	
-	if (worker >= m_supply->get_wares().get_nrwareids ())
+	if (worker >= m_supply->get_workers().get_nrwareids ())
 		throw wexception ("Worker type %d doesn't exists!", worker);
 
    w_desc=get_owner()->get_tribe()->get_worker_descr(worker);
