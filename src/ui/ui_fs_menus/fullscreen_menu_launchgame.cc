@@ -103,43 +103,28 @@ void Fullscreen_Menu_LaunchGame::clicked(int id) {
 
 void Fullscreen_Menu_LaunchGame::refresh()
 {
-   ALIVE();
    Map* map = m_game->get_map();
-   ALIVE();
 	int maxplayers = 0;
-   ALIVE();
 
 	// update the mapname
 	if (map)
 	{
-   ALIVE();
 		m_mapname->set_text(map->get_name());
-   ALIVE();
 		maxplayers = map->get_nrplayers();
-   ALIVE();
 	}
 	else
 		m_mapname->set_text("(no map)");
 
-   ALIVE();
 	// update the player description groups
 	int i;
-   ALIVE();
 	for(i = 0; i < MAX_PLAYERS; i++) {
-   ALIVE();
       m_players[i]->allow_changes(true);
-   ALIVE();
 		m_players[i]->set_enabled(i < maxplayers);
-   ALIVE();
       if(m_is_scenario && (i<maxplayers) && map) {
          // set player to the by the map given
-   ALIVE();
          m_players[i]->allow_changes(false);
-   ALIVE();
          m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
-   ALIVE();
          m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
-   ALIVE();
       } else if(i<maxplayers && map ) {
          std::string name="Player ";
          if((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
@@ -147,9 +132,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
          m_players[i]->set_player_name(name);
          m_players[i]->allow_changes(true);
       }
-   ALIVE();
    }
-   ALIVE();
 
 	m_ok->set_enabled(m_game->can_start());
 }

@@ -121,9 +121,7 @@ bool Game::run(void)
 
    Map_Loader* ml=0;
    Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, &ml);
-   ALIVE();
 	int code = lgm->run();
-   ALIVE();
    delete lgm;
 
 	if (code && get_map())

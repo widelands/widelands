@@ -96,37 +96,24 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
 
             case Event_Message_Box::Center_over:
               {
-                 ALIVE();
                  set_inner_size(picw+2*15, pich+300);
-                 ALIVE();
                  b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1); 
-                 ALIVE();
                  b->set_enabled(false);
-                 ALIVE();
                  b->set_pic(event->get_pic_id());
-                 ALIVE();
                  posy+=pich+spacing;
-                 ALIVE();
                  m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, m_event->get_caption(), Align_Center);
-                 ALIVE();
                  posy+=50;
-                 ALIVE();
                  m_text=new UIMultiline_Textarea(this, spacing, posy, get_inner_w()-2*spacing, get_inner_h()-2*spacing-posy, "", Align_Left);
-                 ALIVE();
               }
               break;
         }
      }
-     ALIVE();
      if(m_caption)
         m_caption->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-     ALIVE();
      if(m_text)
         m_text->set_text(m_event->get_text());
-     ALIVE();
 
 
-     ALIVE();
      // Buttons
      int but_width=80;
      int space=get_inner_w()-2*spacing;
@@ -135,24 +122,15 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
      UIButton* b;
      posx=spacing;
      posy=get_inner_h()-30;
-     ALIVE();
      for(int i=0; i<m_event->get_nr_buttons(); i++) {
-     ALIVE();
         posx+=space;
-     ALIVE();
         b=new UIButton(this, posx, posy, but_width, 20, 0, i);
-     ALIVE();
         posx+=but_width;
-     ALIVE();
         b->clickedid.set(this, &Message_Box_Event_Message_Box::clicked);
-     ALIVE();
         b->set_title(m_event->get_button_name(i));
-     ALIVE();
      } 
      
-     ALIVE();
      center_to_parent();
-     ALIVE();
 }
 
 

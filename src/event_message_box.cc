@@ -54,15 +54,11 @@ Event_Message_Box::~Event_Message_Box(void) {
  * cleanup()
  */
 void Event_Message_Box::cleanup(Editor_Game_Base* g) {  
-   ALIVE();
    uint i=0; 
-     ALIVE();
    for(i=0; i<m_buttons.size(); i++) 
       if(m_buttons[i].trigger) 
          set_button_trigger(i, 0, g->get_map());
-     ALIVE();
    m_buttons.resize(0);
-     ALIVE();
 
      Event::cleanup(g);
 }
@@ -71,13 +67,11 @@ void Event_Message_Box::cleanup(Editor_Game_Base* g) {
  * reinitialize
  */
 void Event_Message_Box::reinitialize(Game* g) {
-   ALIVE();
    if(is_one_time_event()) {
       cleanup(g); // Also calls event cleanup
    } else {
       Event::reinitialize(g);
    }
-   ALIVE();
 }
 
 /*
@@ -216,7 +210,6 @@ void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
  */
 void Event_Message_Box::run(Game* game) {
 
-   ALIVE();
    Message_Box_Event_Message_Box* mb=new Message_Box_Event_Message_Box(game, this);
    if(get_is_modal()) {
       mb->run();
@@ -225,9 +218,7 @@ void Event_Message_Box::run(Game* game) {
 
    // If this is a one timer, release our triggers 
    // and forget about us
-   ALIVE();
    reinitialize(game);
-   ALIVE();
 }
 
 
