@@ -245,7 +245,7 @@ Map::postload
 Actually load the entire map, initialize map elements etc...
 ===============
 */
-void Map::postload(Game* g)
+void Map::postload(Editor_Game_Base* g)
 {
 	try
 	{
@@ -421,7 +421,7 @@ If list is not 0, found immovables are stored in list.
 */
 bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list, const FindImmovable &functor)
 {
-	Map_Region mr(coord, radius, this);
+   Map_Region mr(coord, radius, this);
 	Field *f;
 	bool found = false;
 	
@@ -430,7 +430,7 @@ bool Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound>
 		
 		if (!imm)
 			continue;
-		
+
 		if (functor.accept(imm)) {
 			if (!list)
 				return true; // no need to look any further
@@ -576,6 +576,7 @@ void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
    // 2b) If all neighbouring triangles are water, the field is swimable
    if (cnt_water == 6)
       f->caps |= MOVECAPS_SWIM;
+   
 
    // 2c) [OVERRIDE] If any of the neighbouring triangles is really
    //     "bad" (such as lava), we can neither walk nor swim to this field.
@@ -597,21 +598,17 @@ void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
       return;
    }
 
-   cerr << "Hier ... ";
-
    // 4) Flags
    //    We can build flags on anything that's walkable and buildable, with some 
    //    restrictions
    if (f->caps & MOVECAPS_WALK)
    {
-      cerr << "und ...";
       // 4b) Flags must be at least 1 field apart
-      if (find_immovables(Coords(fx, fy), 1, 0, FindImmovableType(Map_Object::FLAG)))
+      if (find_immovables(Coords(fx, fy), 1, 0, FindImmovableType(Map_Object::FLAG))) {
          return;
-      cerr << "nicht ..."; 
+      }
       f->caps |= BUILDCAPS_FLAG;
    }
-   cerr << "jetzt!" << endl;
 }
 
 /** Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
@@ -631,6 +628,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	// 1a) Get all the neighbours to make life easier
 	int tlnx, tlny, trnx, trny, lnx, lny, rnx, rny, blnx, blny, brnx, brny;
 	Field *tln, *trn, *ln, *rn, *bln, *brn;
+   
 	
 	get_tln(fx, fy, f, &tlnx, &tlny, &tln);
 	get_trn(fx, fy, f, &trnx, &trny, &trn);
@@ -686,7 +684,7 @@ void Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
 	//     - have no water triangles next to them
 	//     - are not blocked by "robust" Map_Objects
 	BaseImmovable *immovable = get_immovable(Coords(fx, fy));
-	
+
 	if (!(f->caps & MOVECAPS_WALK) ||
 	    cnt_water ||
 	    (immovable && immovable->get_size() >= BaseImmovable::SMALL))

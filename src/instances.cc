@@ -47,7 +47,6 @@ void Object_Manager::cleanup(Editor_Game_Base *g)
 {
 	while(!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
-		cerr << it->second->get_type() << endl;
       it->second->remove(g);
 	}
 }

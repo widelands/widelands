@@ -136,7 +136,7 @@ Map::load_s2mf [private]
 This loads a given file as a settlers 2 map file
 ===============
 */
-void Map::load_s2mf(Game *game)
+void Map::load_s2mf(Editor_Game_Base *game)
 {
    uchar *section = 0;
 	uchar *bobs = 0;

@@ -27,7 +27,7 @@
 #include "ware.h"
 
 class Section;
-class Game;
+class Editor_Game_Base;
 
 struct World_Descr_Header {
    char name[30];
@@ -89,7 +89,7 @@ class World
       World(const char* name);
 		~World();
       
-		void postload(Game*);
+		void postload(Editor_Game_Base*);
 		void load_graphics();
 		
       inline const char* get_name(void) { return hd.name; }

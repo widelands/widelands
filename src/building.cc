@@ -238,41 +238,27 @@ Cleanup the building
 */
 void Building::cleanup(Editor_Game_Base *g)
 {
-	cerr << "Building::cleanup()1" << endl;
 	// Remove from flag
 	m_flag->detach_building(g);
-	cerr << "Building::cleanup()2" << endl;
 	
 	// Unset the building
-	unset_position(g, m_position);
-	cerr << "Building::cleanup()3" << endl;
+   unset_position(g, m_position);
 	
 	if (get_size() == BIG) {
-	cerr << "Building::cleanup()4" << endl;
 		Map *map = g->get_map();
-	cerr << "Building::cleanup()5" << endl;
 		Coords neighb;
-	cerr << "Building::cleanup()6" << endl;
 		
 		map->get_ln(m_position, &neighb);
-	cerr << "Building::cleanup()7" << endl;
 		unset_position(g, neighb);
-	cerr << "Building::cleanup()8" << endl;
 		
 		map->get_tln(m_position, &neighb);
-	cerr << "Building::cleanup()9" << endl;
 		unset_position(g, neighb);
-	cerr << "Building::cleanup()10" << endl;
 		
 		map->get_trn(m_position, &neighb);
-	cerr << "Building::cleanup()11" << endl;
 		unset_position(g, neighb);
-	cerr << "Building::cleanup()12" << endl;
 	}
 	
-	
 	PlayerImmovable::cleanup(g);
-   cerr << "Building::cleanup()13" << endl;
 }
 
 /*
@@ -415,11 +401,8 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base *g)
 {
-	cerr << "Warehouse::cleanup()" << endl;
    // TODO: un-conquer the area?
-
 	Building::cleanup(g);
-	cerr << "Warehouse::cleanup()1" << endl;
 }
 
 

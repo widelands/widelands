@@ -94,10 +94,8 @@ void BaseImmovable::unset_position(Editor_Game_Base *g, Coords c)
 	
 	f->immovable = 0;
 
-   cerr << "Unset positions!" << endl;
 	if (get_size() >= SMALL)
 		g->recalc_for_field(c);
-   cerr << "Unset positions1!" << endl;
 }
 
 
@@ -237,7 +235,7 @@ Immovable::init
 Actually initialize the immovable.
 ===============
 */
-void Immovable::init(Game *g)
+void Immovable::init(Editor_Game_Base *g)
 {
 	BaseImmovable::init(g);
 	
@@ -254,10 +252,10 @@ Immovable::cleanup
 Cleanup before destruction
 ===============
 */
-void Immovable::cleanup(Game *g)
+void Immovable::cleanup(Editor_Game_Base *g)
 {
-	unset_position(g, m_position);
-	
+   unset_position(g, m_position);
+
 	BaseImmovable::cleanup(g);
 }
 
@@ -419,10 +417,8 @@ Release workers
 */
 void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
-	if(get_logic()) {
-      while(m_workers.size())
-         m_workers[0]->set_location(0);
-   }
+   while(m_workers.size())
+      m_workers[0]->set_location(0);
 
 	BaseImmovable::cleanup(g);
 }

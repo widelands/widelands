@@ -54,17 +54,11 @@ public:
    bool run(void);
 	void think(void);
 	
-	// startup phase
-	void set_map(Map* map);
-	
 
 	bool can_start();
-	void postload();
-	void load_graphics();
 	
 	// in-game logic
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
-   inline int get_gametime(void) { return cmdqueue->get_time(); }
 
 	// Start using logic_rand() for the actual gamelogic (e.g. critter).
 	// Do NOT use for random events in the UI or other display code.
@@ -74,33 +68,21 @@ public:
 	
 	bool get_allow_cheats();
 	
-	inline int get_ware_id(const char *name) { return m_wares.get_index(name); }
-	inline int get_nrwares() const { return m_wares.get_nitems(); }
-	int get_safe_ware_id(const char *name);
-	inline Ware_Descr *get_ware_description(int id) { return m_wares.get(id); }
-	
+
 	void send_player_command(int pid, int cmd, int arg1=0, int arg2=0, int arg3=0);
 
-	Building *warp_building(int x, int y, char owner, int idx);
-	Bob *create_bob(int x, int y, int idx);
-	Immovable *create_immovable(int x, int y, int idx);
-
-   // is this base a game
+  // is this base a game
    inline bool is_game() { return true; }
    
    // TEMP
    inline Interactive_Player* get_ipl(void) { return ipl; } 
 	
 private:
-	void init_wares();
-
 	int		m_state;
 
 	Interactive_Player*			ipl;
  	Cmd_Queue*						cmdqueue;
 
-	Descr_Maintainer<Ware_Descr>	m_wares;
-	
 	int m_realtime; // the real time (including) pauses in milliseconds
 };
 

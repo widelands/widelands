@@ -76,7 +76,8 @@ Create a bob of this type
 Bob *Bob_Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords, bool logic)
 {
    Game* g=static_cast<Game*>(gg);
-	Bob *bob = create_object(g->is_game());
+   assert(g->is_game() == gg->is_game() == logic);
+	Bob *bob = create_object(logic);
 	bob->set_owner(owner);
 	bob->set_position(g, coords);
 	bob->init(g);

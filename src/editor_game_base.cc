@@ -22,6 +22,45 @@
 #include "map.h"
 #include "IntPlayer.h"
 #include "player.h"
+   
+/*
+============
+Editor_Game_Base::Editor_Game_Base()
+
+initialization
+============
+*/
+Editor_Game_Base::Editor_Game_Base() {
+   m_map = 0;
+   
+   m_objects = new Object_Manager;
+	memset(m_players, 0, sizeof(m_players));
+   
+   m_gametime=0;
+}
+
+/*
+============
+Editor_Game_Base::~Editor_Game_Base()
+
+last few cleanups
+============
+*/
+Editor_Game_Base::~Editor_Game_Base() {
+   int i;
+
+   delete m_objects;
+   for(i = 1; i <= MAX_PLAYERS; i++)
+      if (m_players[i-1])
+         remove_player(i);
+	
+   if (m_map)
+		delete m_map;
+
+   for(i = 0; i < (int)m_tribes.size(); i++)
+		delete m_tribes[i];
+	m_tribes.resize(0);
+}
 
 /*
 ===============
@@ -37,47 +76,30 @@ and recalcs the interactive player's overlay.
 */
 void Editor_Game_Base::recalc_for_field(Coords coords, int radius)
 {
-   cerr << "Hier und alive!" << endl;
 	Map_Region_Coords mrc;
-   cerr << "Hier und alive!" << endl;
 	int x, y;
-   cerr << "Hier und alive!" << endl;
 	Field *f;
-   cerr << "Hier und alive!" << endl;
 	
 	// First pass
-   cerr << "Hier und alive!" << endl;
 	mrc.init(coords, 2+radius, m_map);
-   cerr << "Hier und alive!" << endl;
 
 	while(mrc.next(&x, &y)) {
-		cerr << 1 << endl;
       f = m_map->get_field(x, y);
-		cerr << 2 << endl;
 		m_map->recalc_brightness(x, y, f);
-		cerr << 3 << endl;
-		m_map->recalc_fieldcaps_pass1(x, y, f);
-		cerr << 4 << endl;
-	}
+      m_map->recalc_fieldcaps_pass1(x, y, f);
+   }
 
-   cerr << "Hier und alive!" << endl;
 
 	// Second pass
 	mrc.init(coords, 2+radius, m_map);
-   cerr << "Hier und alive!" << endl;
 	
 	while(mrc.next(&x, &y)) {
-   cerr << "Hier und alive!" << endl;
 		f = m_map->get_field(x, y);
-   cerr << "Hier und alive!" << endl;
 		m_map->recalc_fieldcaps_pass2(x, y, f);
-   cerr << "Hier und alive!" << endl;
 		
-   cerr << "Hier und alive!" << endl;
-		if (get_ipl())
-			get_ipl()->recalc_overlay(FCoords(x, y, f));
+   if (get_ipl())
+      get_ipl()->recalc_overlay(FCoords(x, y, f));
 	}
-   cerr << "Hier und alive!" << endl;
 }
 
 /*
@@ -164,5 +186,204 @@ void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const 
 	
 	m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], playercolor);
 }
+
+
+/*
+===============
+Editor_Game_Base::set_map
+
+Replaces the current map with the given one. Ownership of the map is transferred
+to the Editor_Game_Base object.
+===============
+*/
+void Editor_Game_Base::set_map(Map* map)
+{
+	if (m_map)
+		delete m_map;
+	
+	m_map = map;
+}
+
+
+/*
+===============
+Editor_Game_Base::postload
+
+Load and prepare detailled game data.
+This happens once just after the host has started the game and before the 
+graphics are loaded.
+===============
+*/
+void Editor_Game_Base::postload()
+{
+	uint id;
+	int pid;
+
+	// Postload the map
+	m_map->postload(this);
+	
+	// Postload tribes
+	id = 0;
+	while(id < m_tribes.size()) {
+		for(pid = 1; pid <= MAX_PLAYERS; pid++) {
+			Player* plr = get_player(pid);
+			
+			if (plr && plr->get_tribe() == m_tribes[id])
+				break;
+		}
+		
+		if (pid <= MAX_PLAYERS) {
+			// the tribe is used, postload it
+			m_tribes[id]->postload(this);
+			id++;
+		} else {
+			delete m_tribes[id]; // the tribe is no longer used, remove it
+			m_tribes.erase(m_tribes.begin() + id);
+		}
+	}
+	
+	// TODO: postload players? (maybe)
+
+	// Postload wares
+	init_wares();
+}
+
+
+/*
+===============
+Editor_Game_Base::load_graphics
+
+Load all graphics.
+This function needs to be called once at startup when the graphics system
+is ready.
+If the graphics system is to be replaced at runtime, the function must be
+called after that has happened.
+===============
+*/
+void Editor_Game_Base::load_graphics()
+{
+	int i;
+
+	m_map->load_graphics(); // especially loads world data
+	
+	// TODO: load tribe graphics (buildings, units)
+	// TODO: load player graphics? (maybe)
+	
+	for(i = 0; i < m_wares.get_nitems(); i++)
+		m_wares.get(i)->load_graphics();
+	
+	g_gr->load_animations();
+}
+
+/*
+===============
+Editor_Game_Base::init_wares
+
+Called during postload.
+Collects all wares from world and tribes and puts them into a global list
+===============
+*/
+void Editor_Game_Base::init_wares()
+{
+	World *world = m_map->get_world();
+	
+	world->parse_wares(&m_wares);
+	
+	for(int pid = 1; pid <= MAX_PLAYERS; pid++) {
+		Player *plr = get_player(pid);
+		if (!plr)
+			continue;
+		
+		Tribe_Descr *tribe = plr->get_tribe();
+		
+		for(int i = 0; i < tribe->get_nrworkers(); i++) {
+			Worker_Descr *worker = tribe->get_worker_descr(i);
+			if (!worker)
+				continue;
+			
+			int idx = m_wares.get_index(worker->get_name());
+			if (idx < 0)
+				idx = m_wares.add(new Worker_Ware_Descr(worker->get_name()));
+			
+			worker->set_ware_id(idx);
+				
+			Worker_Ware_Descr *descr = (Worker_Ware_Descr*)m_wares.get(idx);
+			descr->add_worker(tribe, worker);
+		}
+	}
+}
+
+
+/** Editor_Game_Base::warp_building(int x, int y, char owner, int idx)
+ *
+ * Instantly create a building at the given x/y location. There is no build time.
+ *
+ * owner is the player number of the building's owner.
+ * idx is the building type index.
+ */
+Building *Editor_Game_Base::warp_building(int x, int y, char owner, int idx)
+{
+	Building_Descr *descr;
+	Player *player = get_player(owner);
+	
+	assert(player);
+   
+	descr = player->get_tribe()->get_building_descr(idx);
+	assert(descr);
+
+	return descr->create(this, get_player(owner), Coords(x, y), 1);
+}
+
+/** Editor_Game_Base::create_bob(int x, int y, int idx)
+ *
+ * Instantly create a bob at the given x/y location.
+ *
+ * idx is the bob type.
+ */
+Bob *Editor_Game_Base::create_bob(int x, int y, int idx)
+{
+	Bob_Descr *descr;
+
+	descr = m_map->get_world()->get_bob_descr(idx);
+	assert(descr);
+	
+	return descr->create(this, 0, Coords(x, y), 1);
+}
+
+/*
+===============
+Editor_Game_Base::create_immovable
+
+Create an immovable at the given location.
+Does not perform any placability checks.
+===============
+*/
+Immovable *Editor_Game_Base::create_immovable(int x, int y, int idx)
+{
+	Immovable_Descr *descr;
+
+	descr = m_map->get_world()->get_immovable_descr(idx);
+	assert(descr);
+	
+	return descr->create(this, Coords(x, y), 1);
+}
+
+/*
+===============
+Editor_Game_Base::get_safe_ware_id
+
+Return the corresponding ware id. Throws an exception if ware can't be found.
+===============
+*/
+int Editor_Game_Base::get_safe_ware_id(const char *name)
+{
+	int id = m_wares.get_index(name);
+	if (id < 0)
+		throw wexception("Ware '%s' not found", name);
+	return id;
+}
+
+
+
 
 

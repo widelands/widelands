@@ -42,12 +42,8 @@ Game::Game(void)
 {
 	m_state = gs_none;
 
-	m_map = 0;
-   m_objects = new Object_Manager;
    cmdqueue = new Cmd_Queue(this);
-
-	memset(m_players, 0, sizeof(m_players));
-	
+   
 	m_realtime = Sys_GetTime();
 }
 
@@ -57,20 +53,7 @@ Game::Game(void)
  */
 Game::~Game(void)
 {
-	int i;
-	
-	delete m_objects;
-	delete cmdqueue;
-	if (m_map)
-		delete m_map;
-	
-	for(i = 1; i <= MAX_PLAYERS; i++)
-		if (m_players[i-1])
-			remove_player(i);
-	
-	for(i = 0; i < (int)m_tribes.size(); i++)
-		delete m_tribes[i];
-	m_tribes.resize(0);
+   delete cmdqueue;
 }
 
 
@@ -86,42 +69,6 @@ bool Game::get_allow_cheats()
 	return true;
 }
 
-/*
-===============
-Game::get_safe_ware_id
-
-Return the corresponding ware id. Throws an exception if ware can't be found.
-===============
-*/
-int Game::get_safe_ware_id(const char *name)
-{
-	int id = m_wares.get_index(name);
-	if (id < 0)
-		throw wexception("Ware '%s' not found", name);
-	return id;
-}
-
-
-/*
-===============
-Game::set_map
-
-Replaces the current map with the given one. Ownership of the map is transferred
-to the Game object.
-===============
-*/
-void Game::set_map(Map* map)
-{
-	assert(m_state <= gs_menu);
-
-	if (m_map)
-		delete m_map;
-	
-	m_map = map;
-}
-
-
-
 /** Game::can_start()
  *
  + Returns true if the game settings are valid.
@@ -131,16 +78,16 @@ bool Game::can_start()
 	int local_num;
 	int i;
 
-	if (!m_map)
+	if (!get_map())
 		return false;
 	
 	// we need exactly one local player
 	local_num = -1;
-	for(i = 0; i < MAX_PLAYERS; i++) {
-		if (!m_players[i])
+	for(i = 1; i <= MAX_PLAYERS; i++) {
+		if (!get_player(i))
 			continue;
 		
-		if (m_players[i]->get_type() == Player::playerLocal) {
+		if (get_player(i)->get_type() == Player::playerLocal) {
 			if (local_num < 0)
 				local_num = i;
 			else
@@ -152,78 +99,6 @@ bool Game::can_start()
 	
 	return true;
 }
-
-
-/*
-===============
-Game::postload
-
-Load and prepare detailled game data.
-This happens once just after the host has started the game and before the 
-graphics are loaded.
-===============
-*/
-void Game::postload()
-{
-	uint id;
-	int pid;
-
-	// Postload the map
-	m_map->postload(this);
-	
-	// Postload tribes
-	id = 0;
-	while(id < m_tribes.size()) {
-		for(pid = 1; pid <= MAX_PLAYERS; pid++) {
-			Player* plr = get_player(pid);
-			
-			if (plr && plr->get_tribe() == m_tribes[id])
-				break;
-		}
-		
-		if (pid <= MAX_PLAYERS) {
-			// the tribe is used, postload it
-			m_tribes[id]->postload(this);
-			id++;
-		} else {
-			delete m_tribes[id]; // the tribe is no longer used, remove it
-			m_tribes.erase(m_tribes.begin() + id);
-		}
-	}
-	
-	// TODO: postload players? (maybe)
-
-	// Postload wares
-	init_wares();
-}
-
-
-/*
-===============
-Game::load_graphics
-
-Load all graphics.
-This function needs to be called once at startup when the graphics system
-is ready.
-If the graphics system is to be replaced at runtime, the function must be
-called after that has happened.
-===============
-*/
-void Game::load_graphics()
-{
-	int i;
-
-	m_map->load_graphics(); // especially loads world data
-	
-	// TODO: load tribe graphics (buildings, units)
-	// TODO: load player graphics? (maybe)
-	
-	for(i = 0; i < m_wares.get_nitems(); i++)
-		m_wares.get(i)->load_graphics();
-	
-	g_gr->load_animations();
-}
-
 
 /*
 ===============
@@ -253,7 +128,7 @@ bool Game::run(void)
 
 	if (launch_game_menu(this))
 	{
-		assert(m_map);
+		assert(get_map());
 
 		m_state = gs_running;
 
@@ -264,14 +139,14 @@ bool Game::run(void)
 		postload();
 		
 		// Prepare the players (i.e. place HQs)
-		for(int i = 1; i <= m_map->get_nrplayers(); i++) {
+		for(int i = 1; i <= get_map()->get_nrplayers(); i++) {
 			Player* player = get_player(i);
 			if (!player)
 				continue;
 
 			player->init_for_game(this);
 
-			const Coords &c = m_map->get_starting_pos(i);
+			const Coords &c = get_map()->get_starting_pos(i);
 			if (player->get_type() == Player::playerLocal)
 				ipl->move_view_to(c.x, c.y);
 		}
@@ -280,20 +155,14 @@ bool Game::run(void)
 		
 		ipl->run();
 
-      cerr << "ALIVE1!" << endl;
 
-		m_objects->cleanup(this);
-      cerr << "ALIVE2!" << endl;
+		get_objects()->cleanup(this);
 	   delete ipl;
-      cerr << "ALIVE3!" << endl;
 		
 		g_gr->flush(PicMod_Game);
-      cerr << "ALIVE4!" << endl;
 		g_anim.flush();
-      cerr << "ALIVE5!" << endl;
 
 		played = true;
-      cerr << "ALIVE6!" << endl;
 	}
 
 	m_state = gs_none;
@@ -301,44 +170,6 @@ bool Game::run(void)
 	return played;
 }
 
-
-/*
-===============
-Game::init_wares
-
-Called during postload.
-Collects all wares from world and tribes and puts them into a global list
-===============
-*/
-void Game::init_wares()
-{
-	World *world = m_map->get_world();
-	
-	world->parse_wares(&m_wares);
-	
-	for(int pid = 1; pid <= MAX_PLAYERS; pid++) {
-		Player *plr = get_player(pid);
-		if (!plr)
-			continue;
-		
-		Tribe_Descr *tribe = plr->get_tribe();
-		
-		for(int i = 0; i < tribe->get_nrworkers(); i++) {
-			Worker_Descr *worker = tribe->get_worker_descr(i);
-			if (!worker)
-				continue;
-			
-			int idx = m_wares.get_index(worker->get_name());
-			if (idx < 0)
-				idx = m_wares.add(new Worker_Ware_Descr(worker->get_name()));
-			
-			worker->set_ware_id(idx);
-				
-			Worker_Ware_Descr *descr = (Worker_Ware_Descr*)m_wares.get(idx);
-			descr->add_worker(tribe, worker);
-		}
-	}
-}
 
 
 //
@@ -360,10 +191,10 @@ void Game::think(void)
 
 	if (m_state == gs_running)
 	{
-		cmdqueue->run_queue(frametime);
+      cmdqueue->run_queue(frametime, get_game_time_pointer());
 		
 		g_gr->animate_maptextures(get_gametime());
-	}
+   }
 }
 
 
@@ -381,59 +212,5 @@ void Game::send_player_command(int pid, int cmd, int arg1, int arg2, int arg3)
 	cmdqueue->queue(get_gametime(), pid, cmd, arg1, arg2, arg3);
 }
 
-
-/** Game::warp_building(int x, int y, char owner, int idx)
- *
- * Instantly create a building at the given x/y location. There is no build time.
- *
- * owner is the player number of the building's owner.
- * idx is the building type index.
- */
-Building *Game::warp_building(int x, int y, char owner, int idx)
-{
-	Building_Descr *descr;
-	Player *player = get_player(owner);
-	
-	assert(player);
-   
-	descr = player->get_tribe()->get_building_descr(idx);
-	assert(descr);
-
-	return descr->create(this, get_player(owner), Coords(x, y), 1);
-}
-
-/** Game::create_bob(int x, int y, int idx)
- *
- * Instantly create a bob at the given x/y location.
- *
- * idx is the bob type.
- */
-Bob *Game::create_bob(int x, int y, int idx)
-{
-	Bob_Descr *descr;
-
-	descr = m_map->get_world()->get_bob_descr(idx);
-	assert(descr);
-	
-	return descr->create(this, 0, Coords(x, y), 1);
-}
-
-/*
-===============
-Game::create_immovable
-
-Create an immovable at the given location.
-Does not perform any placability checks.
-===============
-*/
-Immovable *Game::create_immovable(int x, int y, int idx)
-{
-	Immovable_Descr *descr;
-
-	descr = m_map->get_world()->get_immovable_descr(idx);
-	assert(descr);
-	
-	return descr->create(this, Coords(x, y), 1);
-}
 
 

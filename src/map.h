@@ -112,7 +112,7 @@ public:
 	Map(const char* filename);
 	~Map();
 
-	void postload(Game* g);
+	void postload(Editor_Game_Base* g);
 	void load_graphics();
 	
 	void set_nrplayers(uint nrplayers);
@@ -219,7 +219,7 @@ private:
 	Pathfield*	m_pathfields;
 
 	// funcs
-	void load_s2mf(Game*);
+	void load_s2mf(Editor_Game_Base*);
 	void load_s2mf_header();
 	uchar *load_s2mf_section(FileRead *file, int width, int height);
 

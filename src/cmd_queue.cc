@@ -31,7 +31,6 @@
 Cmd_Queue::Cmd_Queue(Game *g)
 {
 	m_game = g;
-	m_time = 0;
 }
 
 Cmd_Queue::~Cmd_Queue(void)
@@ -70,11 +69,15 @@ void Cmd_Queue::queue(int time, char sender, int cmd, int arg1, int arg2, int ar
  *
  * Run all commands scheduled for the next interval milliseconds, and update the
  * internal time as well.
+ * the game_time_var represents the current game time, which we update and with 
+ * which we must mess around (to run all queued cmd.s) and which we update (add
+ * the interval)
  */
-int Cmd_Queue::run_queue(int interval)
+int Cmd_Queue::run_queue(int interval, int* game_time_var)
 {
-	int final = m_time + interval;
+	int final = *game_time_var + interval;
 	int cnt = 0;
+
 
 	while(!m_cmds.empty()) {
 		const Cmd &c = m_cmds.top();
@@ -83,15 +86,15 @@ int Cmd_Queue::run_queue(int interval)
 		
 		//cerr << "run(" << c.time << ", " << c.arg1 << ")" << endl;
 			
-		m_time = c.time;
+		*game_time_var = c.time;
 		exec_cmd(&c);
 		clear_cmd((Cmd *)&c);
 		
 		m_cmds.pop();
 	}
 	
-	m_time = final;
-	
+	*game_time_var = final;
+   
 	return cnt;
 }
 

@@ -53,7 +53,7 @@ class Tribe_Descr {
       inline uint get_frontier_anim(void) { return m_anim_frontier; }
 		inline uint get_flag_anim(void) { return m_anim_flag; }
 
-		void postload(Game*);
+		void postload(Editor_Game_Base*);
 		void load_graphics();
 		
    private:

@@ -20,42 +20,67 @@
 #ifndef __S__EDITOR_GAME_BASE_H
 #define __S__EDITOR_GAME_BASE_H
 
-class Map;
-class Object_Manager;
-class Interactive_Player;
-class Player;
-class Tribe_Descr;
+#include "descr_maintainer.h"
+#include "instances.h"
+#include "tribe.h"
+#include "cmd_queue.h"
+#include "ware.h"
 
 class Editor_Game_Base {
    public:
-      Editor_Game_Base() { }
-      virtual ~Editor_Game_Base() { }
+      Editor_Game_Base(); 
+      virtual ~Editor_Game_Base(); 
 	
+      void set_map(Map* map);
       inline Map *get_map() { return m_map; }
       inline Object_Manager* get_objects() { return m_objects; }
 	
-      
+	
       void conquer_area(uchar playernr, Coords coords, int radius);
       void recalc_for_field(Coords coords, int radius = 0);
+	
+	
 	
       // Player commands
       void remove_player(int plnum);
       void add_player(int plnum, int type, const char* tribe, const uchar *playercolor);
       inline Player* get_player(int n) { assert(n>=1 && n<=MAX_PLAYERS); return m_players[n-1]; }
   
-      virtual bool is_game() { cerr <<"ERR: Editor_Game_Base::is_game() called!"; return 0; };
+      virtual bool is_game() = 0; 
  
+      // Ware stuff
+      inline int get_ware_id(const char *name) { return m_wares.get_index(name); }
+      inline int get_nrwares() const { return m_wares.get_nitems(); }
+      int get_safe_ware_id(const char *name);
+      inline Ware_Descr *get_ware_description(int id) { return m_wares.get(id); }
+	
+      // loading stuff
+      void postload();
+      void load_graphics();
+
+      // warping stuff. instantly creating map_objects
+      Building *warp_building(int x, int y, char owner, int idx);
+      Bob *create_bob(int x, int y, int idx);
+      Immovable *create_immovable(int x, int y, int idx);
+
+      inline int get_gametime(void) { return m_gametime; }
 
       // TODO!!
-      virtual int get_gametime(void) { cerr <<"ERR: Editor_Game_Base::get_gametime() called!"; return 0; };
-      virtual Interactive_Player* get_ipl(void)  { cerr <<"ERR: Editor_Game_Base::get_ipl() called!"; return 0; };
-; 
- 
-   
+      virtual Interactive_Player* get_ipl(void) = 0;
+
    protected:
+      // next function is used to update the current gametime, 
+      // for queue runs e.g.
+      inline int* get_game_time_pointer(void) { return &m_gametime; }
+  
+   private:
+      void init_wares();
+
+      int m_gametime;
       Player*							m_players[MAX_PLAYERS];
       Object_Manager*				m_objects;
       std::vector<Tribe_Descr*>	m_tribes;
+      Descr_Maintainer<Ware_Descr>	m_wares;
       Map*								m_map;
 };
 

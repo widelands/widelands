@@ -74,17 +74,14 @@ class Cmd_Queue {
       ~Cmd_Queue(void);
 
 		void queue(int time, char sender, int cmd, int arg1=0, int arg2=0, int arg3=0);
-      int run_queue(int interval);
+      int run_queue(int interval, int* game_time_var);
    
-		inline int get_time() { return m_time; }
-		   
    private:
 		void exec_cmd(const Cmd *c);
 		void clear_cmd(Cmd *c);
 		
       Game *m_game;
 		queue_t m_cmds;
-		int m_time;	
 };
 
 #endif // __S__CMD_QUEUE_H 

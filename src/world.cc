@@ -73,7 +73,7 @@ World::postload
 Load all logic game data now
 ===============
 */
-void World::postload(Game* g)
+void World::postload(Editor_Game_Base* g)
 {
 	// TODO: move more loads to postload
 }

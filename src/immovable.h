@@ -50,9 +50,8 @@ public:
 	BaseImmovable(Map_Object_Descr *descr, bool);
 	virtual ~BaseImmovable();
 	
-	virtual int get_size() = 0;
-	virtual bool get_passable() = 0;
-	
+	virtual int get_size() = 0; 
+	virtual bool get_passable() = 0; 
 	virtual void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos) = 0;
 	
 protected:
@@ -95,8 +94,8 @@ public:
 	int get_size();
 	bool get_passable();
 	
-	void init(Game *g);
-	void cleanup(Game *g);
+	void init(Editor_Game_Base *g);
+	void cleanup(Editor_Game_Base *g);
 
 	void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos);
 
