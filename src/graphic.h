@@ -24,6 +24,8 @@
 #include "types.h"
 
 class RenderTarget;
+class FileWrite;
+class FileRead;
 
 enum { // picture module flags
 	PicMod_UI = 1,
@@ -39,7 +41,8 @@ This interface represents the framebuffer / screen.
 Picture IDs can be allocated using get_picture() and used in RenderTarget::blit().
 Pictures are only loaded from disk once and thrown out of memory when the
 graphics system is unloaded, or when flush() is called with the appropriate
-module flag.
+module flag; the user can request to flush one single picture alone, but this is only
+used (and usefull) in the editor.
 */
 class Graphic {
 public:
@@ -57,7 +60,10 @@ public:
 	virtual uint get_picture(int mod, const char* fname) = 0;
 	virtual uint get_picture(int mod, const char* fname, RGBColor clrkey) = 0;
 	virtual void get_picture_size(uint pic, int* pw, int* ph) = 0;
-	virtual uint create_surface(int w, int h) = 0;
+	virtual void flush_picture(uint pic)=0;
+   virtual void save_pic_to_file(uint, FileWrite*)=0;
+   virtual uint load_pic_from_file(FileRead*, int)=0;
+   virtual uint create_surface(int w, int h) = 0;
 	virtual uint create_surface(int w, int h, RGBColor clrkey) = 0;
 	virtual void free_surface(uint pic) = 0;
 	virtual RenderTarget* get_surface_renderer(uint pic) = 0;

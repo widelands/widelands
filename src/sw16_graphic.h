@@ -230,11 +230,14 @@ public:
 	// Pictures
 	virtual uint get_picture(int mod, const char* fname);
 	virtual uint get_picture(int mod, const char* fname, RGBColor clrkey);
+   virtual void flush_picture(uint pic);
 	virtual void get_picture_size(uint pic, int* pw, int* ph);
 	virtual uint create_surface(int w, int h);
 	virtual uint create_surface(int w, int h, RGBColor clrkey);
 	virtual void free_surface(uint pic);
 	virtual RenderTarget* get_surface_renderer(uint pic);
+   virtual void save_pic_to_file(uint, FileWrite*);
+   virtual uint load_pic_from_file(FileRead*, int);
 
 	Bitmap* get_picture_bitmap(uint id);
 

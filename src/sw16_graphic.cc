@@ -31,6 +31,7 @@ Management classes and functions of the 16-bit software renderer.
 #include "sw16_graphic.h"
 #include "tribe.h"
 #include "overlay_manager.h"
+#include "filesystem.h"
 
 namespace Renderer_Software16
 {
@@ -1045,43 +1046,47 @@ If mod is 0, all pictures are flushed.
 */
 void GraphicImpl::flush(int mod)
 {
-	uint i;
+   uint i;
 
-	// Flush pictures
-	for(i = 0; i < m_pictures.size(); i++) {
-		Picture* pic = &m_pictures[i];
+   // Flush pictures
+   for(i = 0; i < m_pictures.size(); i++) {
+      Picture* pic = &m_pictures[i];
 
-		if (!pic->mod)
-			continue;
+//      NoLog("Flushing picture: %i while flushing all!\n", i);
+      if (!pic->mod)
+         continue;
 
-		if (pic->mod < 0) {
-			if (!mod)
-				log("LEAK: SW16: flush(0): non-picture %i left.\n", i+1);
-			continue;
-		}
 
-		pic->mod &= ~mod; // unmask the mods that should be flushed
+      if (pic->mod < 0) {
+         if (!mod)
+            log("LEAK: SW16: flush(0): non-picture %i left.\n", i+1);
+         continue;
+      }
 
-		// Once the picture is no longer in any mods, free it
-		if (!pic->mod) {
-			m_picturemap.erase(pic->u.fname);
+      pic->mod &= ~mod; // unmask the mods that should be flushed
 
-			if (pic->u.fname)
-				free(pic->u.fname);
-			free(pic->bitmap.pixels);
-		}
-	}
+      // Once the picture is no longer in any mods, free it
+      if (!pic->mod) {
 
-	// Flush game items
-	if (!mod || mod & PicMod_Game) {
-		for(i = 0; i < m_maptextures.size(); i++)
-			delete m_maptextures[i];
-		m_maptextures.resize(0);
+         if (pic->u.fname) {
+            m_picturemap.erase(pic->u.fname);
+            free(pic->u.fname);
+         }
+         if(pic->bitmap.pixels)
+            free(pic->bitmap.pixels);
+      }
+   }
 
-		for(i = 0; i < m_animations.size(); i++)
-			delete m_animations[i];
-		m_animations.resize(0);
-	}
+   // Flush game items
+   if (!mod || mod & PicMod_Game) {
+      for(i = 0; i < m_maptextures.size(); i++)
+         delete m_maptextures[i];
+      m_maptextures.resize(0);
+
+      for(i = 0; i < m_animations.size(); i++)
+         delete m_animations[i];
+      m_animations.resize(0);
+   }
 }
 
 
@@ -1484,6 +1489,92 @@ uint GraphicImpl::find_free_picture()
 	return id;
 }
 
+/*
+ * GraphicImpl::flush_picture(int)
+ */
+void GraphicImpl::flush_picture(uint pic_index) {
+   Picture* pic = &m_pictures[pic_index];
+
+
+   if (pic->u.fname) {
+      m_picturemap.erase(pic->u.fname);
+      free(pic->u.fname);
+      pic->u.fname=0;
+   }
+   free(pic->bitmap.pixels);
+   pic->bitmap.pixels=0;
+}
+   
+/*
+ * Save and load pictures
+ */
+#define PICTURE_VERSION 1
+void GraphicImpl::save_pic_to_file(uint pic_index, FileWrite* fw) {
+   Picture* pic = &m_pictures[pic_index];
+   
+   // First the version
+   fw->Unsigned16(PICTURE_VERSION);
+
+   // Now has clrkey
+   fw->Unsigned8(pic->bitmap.hasclrkey);
+
+   // Now width and height
+   fw->Unsigned16(pic->bitmap.w);
+   fw->Unsigned16(pic->bitmap.h);
+
+   // now all the data as RGB values
+   for(int h=0; h<pic->bitmap.h; h++) {
+      for(int w=0; w<pic->bitmap.w; w++) {
+         ushort clr=pic->bitmap.pixels[h*pic->bitmap.pitch+w];
+         uchar r, g, b;
+         unpack_rgb(clr, &r,&g,&b);
+         fw->Unsigned8(r);
+         fw->Unsigned8(g);
+         fw->Unsigned8(b);
+      }
+   }
+}
+
+uint GraphicImpl::load_pic_from_file(FileRead* fr, int mod) {
+   // First the version
+   int version=fr->Unsigned16();
+   if(version<=PICTURE_VERSION) {
+      bool has_clrkey=fr->Unsigned8();
+//     NoLog("Load picture:\n has clrkey: %i\n", has_clrkey);
+      int g_w=fr->Unsigned16();
+      int g_h=fr->Unsigned16();
+//      NoLog(" Width: %i, Height: %i\n", g_w, g_h);
+
+      ushort* pixels=(ushort*)malloc(sizeof(ushort)*g_w*g_h);
+      for(int h=0; h<g_h; h++) {
+         for(int w=0; w<g_w; w++) {
+            ushort* clr=&pixels[h*g_w+w];
+            uchar r,g,b;
+            r=fr->Unsigned8();
+            g=fr->Unsigned8();
+            b=fr->Unsigned8();
+//             NoLog(" Pixel: (%i,%i) has color RGB(%i,%i,%i)\n", w, h, r, g, b);
+            *clr=pack_rgb(r,g,b);
+         }
+      }
+
+      uint id = find_free_picture();
+//     NoLog(" Got Free id: %i\n", id);
+      Picture* pic = &m_pictures[id];
+
+      pic->mod = mod;
+      pic->u.fname = 0;
+      pic->bitmap.pixels = pixels;
+      pic->bitmap.w = g_w;
+      pic->bitmap.h = g_h;
+      pic->bitmap.pitch = g_w;
+      pic->bitmap.hasclrkey = has_clrkey;
+      pic->bitmap.clrkey = *pixels; // Upper left pixel 
+
+      return id;
+   }
+   throw wexception("Unknown picture version %i in file!\n", version);
+}
 
 } // namespace Renderer_Software16
 

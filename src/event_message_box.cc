@@ -22,19 +22,9 @@
 #include "filesystem.h"
 #include "game.h"
 #include "editor_game_base.h"
-#include "ui_window.h"
-#include "editor_game_base.h"
-#include "interactive_base.h"
-#include "ui_multilinetextarea.h"
-
-//
-// This is kept in this file, since only this file will
-// ever need to create one of those
-// 
-class Message_Box_Event_Message_Box : public UIWindow {
-   public:
-      Message_Box_Event_Message_Box(Editor_Game_Base*, Event_Message_Box*);
-};
+#include "event_message_box_message_box.h"
+#include "map.h"
+#include "graphic.h"
 
 static const int EVENT_VERSION = 1;
 
@@ -44,9 +34,66 @@ static const int EVENT_VERSION = 1;
 Event_Message_Box::Event_Message_Box(void) {
    set_name("Message Box");
    set_is_one_time_event(true);
+   set_text("No text defined");
+   set_caption("Caption");
+   set_window_title("Window Title");
+   set_is_modal(false);
+   set_pic_id(-1);
+   set_pic_position(Right);
+   set_pic_has_clrkey(true);
+
+   set_nr_buttons(1);
+   m_buttons[0].name="Continue";
+   m_buttons[0].trigger=0;
 }
 
 Event_Message_Box::~Event_Message_Box(void) {
+}
+
+/*
+ * cleanup. release the triggers we've set
+ */
+void Event_Message_Box::cleanup(Map* map) {
+// The triggers, that we set are not yet dereferenced
+   int i=0; 
+   for(i=0; i<get_nr_buttons(); i++)
+      set_button_trigger(i,0,map);
+}
+
+/*
+ * functions for button handling
+ */
+void Event_Message_Box::set_nr_buttons(int i) {
+   int oldsize=m_buttons.size();
+   m_buttons.resize(i);
+   for(uint i=oldsize; i<m_buttons.size(); i++) 
+      m_buttons[i].trigger=0;
+}
+int Event_Message_Box::get_nr_buttons(void) {
+   return m_buttons.size();
+}
+void Event_Message_Box::set_button_trigger(int i, Trigger* t, Map* map) {
+   assert(i<get_nr_buttons());
+   if(m_buttons[i].trigger==t) return;
+
+   if(m_buttons[i].trigger) 
+      map->release_trigger(m_buttons[i].trigger);
+   
+   if(t) 
+      map->reference_trigger(t);
+   m_buttons[i].trigger=t;
+}
+Trigger* Event_Message_Box::get_button_trigger(int i) {
+   assert(i<get_nr_buttons());
+   return m_buttons[i].trigger;
+}
+void Event_Message_Box::set_button_name(int i, std::string str) {
+   assert(i<get_nr_buttons());
+   m_buttons[i].name=str;
+}
+const char* Event_Message_Box::get_button_name(int i) {
+   assert(i<get_nr_buttons());
+   return m_buttons[i].name.c_str();
 }
 
 /*
@@ -57,7 +104,29 @@ void Event_Message_Box::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) 
    if(version <= EVENT_VERSION) {
       set_name(fr->CString());
       set_is_one_time_event(fr->Unsigned8());
-      m_string=fr->CString();
+      set_text(fr->CString());
+      set_caption(fr->CString());
+      set_window_title(fr->CString());
+      set_is_modal(fr->Unsigned8());
+      bool has_pic=fr->Unsigned8();
+      if(has_pic) {
+         set_pic_position(fr->Unsigned8());
+         set_pic_has_clrkey(fr->Unsigned8());
+         set_pic_id(g_gr->load_pic_from_file(fr, PicMod_Game));
+         if(skip)
+            g_gr->flush_picture(get_pic_id());
+      }
+      set_nr_buttons(fr->Unsigned8());
+      int i=0;
+      for(i=0; i<get_nr_buttons(); i++) {
+         set_button_name(i,fr->CString());
+         int id=fr->Signed16();
+         if(id!=-1 && !skip) 
+            set_button_trigger(i, egbase->get_map()->get_trigger(id), egbase->get_map());
+         else
+            set_button_trigger(i,0,egbase->get_map()); 
+      }
+    
       read_triggers(fr,egbase, skip);
       return;
    }
@@ -78,9 +147,43 @@ void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
    // triggers only once?
    fw->Unsigned8(is_one_time_event());
 
+
    // Description string 
-   fw->Data(m_string.c_str(), m_string.size());
+   fw->Data(m_text.c_str(), m_text.size());
    fw->Unsigned8('\0');
+
+   // Caption
+   fw->Data(m_caption.c_str(), m_caption.size());
+   fw->Unsigned8('\0');
+
+   // Window Title
+   fw->Data(m_window_title.c_str(), m_window_title.size());
+   fw->Unsigned8('\0');
+
+   // is modal
+   fw->Unsigned8(get_is_modal());
+
+   // has picture
+   fw->Unsigned8(static_cast<int>(get_pic_id())!=-1);
+   if(static_cast<int>(get_pic_id())!=-1) {
+      // Write picture
+      // Pic position
+      fw->Unsigned8(get_pic_position());
+      fw->Unsigned8(get_pic_has_clrkey());
+      g_gr->save_pic_to_file(get_pic_id(), fw); 
+   }
+ 
+   // Number of buttons
+   fw->Unsigned8(get_nr_buttons());
+   int i=0;
+   for(i=0; i<get_nr_buttons(); i++) {
+      fw->Data(m_buttons[i].name.c_str(), m_buttons[i].name.size());
+      fw->Unsigned8('\0');
+      if(m_buttons[i].trigger) 
+         fw->Signed16(egbase->get_map()->get_trigger_index(m_buttons[i].trigger));
+      else
+         fw->Signed16(-1);
+   }
 
    // Write all trigger ids
    write_triggers(fw, egbase);
@@ -98,14 +201,4 @@ void Event_Message_Box::run(Game* game) {
    reinitialize(game);
 }
 
-/*
- * The message box himself
- */
-Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* egbase, Event_Message_Box* m_event) :
-  UIWindow(egbase->get_iabase(), 0, 0, 400, 300, "Message Box") {
-   
-     new UIMultiline_Textarea(this, 0,0,get_w(),get_h(), m_event->get_string(), Align_Left);
-
-     center_to_parent();
-}
 

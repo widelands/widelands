@@ -23,6 +23,7 @@
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
+#include "ui_modal_messagebox.h"
 #include "error.h"
 #include "editor_event_menu_new_trigger.h"
 #include "editor_event_menu_new_event.h"
@@ -165,6 +166,7 @@ void Editor_Event_Menu::clicked(int id) {
       } else if(id==1) {
          // Delete event
          Event* event=static_cast<Event*>(m_event_list->get_selection());
+         event->cleanup(m_parent->get_map());
          m_parent->get_map()->unregister_event(event);
          update();
       } else if(id==2) {
@@ -191,9 +193,13 @@ void Editor_Event_Menu::clicked(int id) {
          // Delete trigger
          Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
          trig->decr_reference();
-         int i;
-         for(i=0; i<m_parent->get_map()->get_number_of_events(); i++) 
-            m_parent->get_map()->get_event(i)->unregister_trigger(trig, m_parent->get_map());
+         if(!trig->is_unreferenced()) {
+            trig->incr_reference();
+            UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", "Can't delete Trigger. It is in use!", UIModal_Message_Box::OK);
+            mmb->run();
+            delete mmb;
+            return;
+         }
          m_parent->get_map()->unregister_trigger(trig);
          update();
       }

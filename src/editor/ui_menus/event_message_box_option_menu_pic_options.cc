@@ -25,12 +25,18 @@
 #include "ui_textarea.h"
 #include "ui_editbox.h"
 #include "ui_checkbox.h"
+#include "ui_modal_messagebox.h"
 #include "system.h"
 
 Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Picture_Options(Editor_Interactive* parent, 
-      bool* clrkey, int* picid, int* position) :
+      bool* clrkey, uint* picid, int* position) :
    UIWindow(parent, 0, 0, 460, 350, "Event Option Menu") {
+   
    m_parent=parent;
+   m_clrkey_var=clrkey;
+   m_picid_var=picid;
+   m_pos_var=position;
+   m_picid=*picid;
 
    // Caption
    UITextarea* tt=new UITextarea(this, 0, 0, "Message Box Event Picture Options", Align_Left);
@@ -42,10 +48,11 @@ Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Pic
    int posx=offsx;
    int posy=offsy;
   
+
    // Only run once CB
    new UITextarea(this, spacing, posy, 150, 20, "Uses Clrkey: ", Align_CenterLeft);
-   UICheckbox* m_is_one_time_event=new UICheckbox(this, get_inner_w()/2-STATEBOX_WIDTH-spacing, posy);
-   m_is_one_time_event->set_state(m_is_one_time_event);
+   m_clrkey=new UICheckbox(this, get_inner_w()/2-STATEBOX_WIDTH-spacing, posy);
+   m_clrkey->set_state(*clrkey);
    UITextarea* ta=new UITextarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, 40, "Colorkeys (Clrkey) define the"
          " transparent color which is not visible. If you enable this checkbox, the upper left pixel of you picture"
          " is used as the transparent color", Align_Left, true);
@@ -55,20 +62,23 @@ Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Pic
    posy+=ta->get_h()+spacing;
    new UITextarea(this, spacing, posy, 100, 20, "Filename: ", Align_CenterLeft);
    m_filename=new UIEdit_Box(this, spacing+100+spacing, posy, get_inner_w()-100-3*spacing, 20, 0,0);
+   m_filename->set_text("noname.png");
 
    // Load button, save button
    posy+=20+spacing;
    UIButton* b=new UIButton(this, get_inner_w()/2-80-spacing, posy, 80, 20, 0, 2);
    b->clickedid.set(this, &Event_Message_Box_Option_Menu_Picture_Options::clicked);
    b->set_title("Load");
-   b=new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 0, 3);
+/*   b=new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 0, 3);
    b->clickedid.set(this, &Event_Message_Box_Option_Menu_Picture_Options::clicked);
    b->set_title("Save");
-
+*/
    // Picture currently assigned
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 300, 20, "Picture currently assigned: ", Align_CenterLeft);
    m_pic_assigned=new UITextarea(this, spacing+300, posy, 50, 20, "No", Align_CenterLeft);
+   if(static_cast<int>(*picid)!=-1) 
+      m_pic_assigned->set_text("Yes");
 
    // Picture positions
    posy+=20+spacing;
@@ -88,7 +98,8 @@ Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Pic
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 300, 20, "Center/Top (over Caption): ", Align_CenterLeft);
    m_radiogroup->add_button(this, spacing+300, posy);
-   
+   m_radiogroup->set_state(*m_pos_var);
+
    // Ok/Cancel Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-30;
@@ -101,6 +112,7 @@ Event_Message_Box_Option_Menu_Picture_Options::Event_Message_Box_Option_Menu_Pic
    b->clickedid.set(this, &Event_Message_Box_Option_Menu_Picture_Options::clicked);
 
    center_to_parent();
+   update();
 }
 
 /*
@@ -133,7 +145,10 @@ void Event_Message_Box_Option_Menu_Picture_Options::clicked(int i) {
       case 0:
          {
             // Cancel has been clicked
-            end_modal(0);
+            if(static_cast<int>(*m_picid_var)!=m_picid) 
+               if(static_cast<int>(m_picid)!=-1)
+                  g_gr->flush_picture(m_picid);
+               end_modal(0);
             return;
          }
          break;
@@ -141,6 +156,9 @@ void Event_Message_Box_Option_Menu_Picture_Options::clicked(int i) {
       case 1:
          {
             // ok button
+            *m_clrkey_var=m_clrkey->get_state();
+            *m_picid_var=m_picid;
+            *m_pos_var=m_radiogroup->get_state();
             end_modal(1);
             return;
          }
@@ -148,26 +166,25 @@ void Event_Message_Box_Option_Menu_Picture_Options::clicked(int i) {
 
       case 2:
          {
-            // Number of buttons: down
+            // Load button
+            if((m_picid=g_gr->get_picture(PicMod_Game, m_filename->get_text(), RGBColor(1,1,1)))) {
+               m_pic_assigned->set_text("yes");
+            } else {
+               m_picid=*m_picid_var;
+               std::string msg="Couldn't load file ";
+               msg+=m_filename->get_text();
+               msg+=", check file!";
+               UIModal_Message_Box* mb=new UIModal_Message_Box(m_parent, "Load Error!!", msg, UIModal_Message_Box::OK);
+               mb->run();
+               delete mb;
+            }
          }
          break;
 
       case 3:
          {
-            // Number of buttons up
-         }
-         break;
-
-      case 4:
-         {
-            // Trigger sel, down
-         }
-         break;
-
-
-      case 5:
-         {
-            // Trigger sel, up
+            // Save button
+            // not currently supported (copyright issues)
          }
          break;
    }

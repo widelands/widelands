@@ -43,12 +43,13 @@ class Event {
       // virtual functions, implemented by the real events 
       virtual void run(Game*)=0;
       virtual uint get_id(void)=0; // this function is needed to recreate the correct option window
+      virtual void cleanup(Map* )=0;     // some events have things registered, which they must free
 
       // Functions needed by all
       void set_name(const char* name) { m_name=name; }
       void set_name(std::string name) { m_name=name; }
       inline const char* get_name() { return m_name.c_str(); }
-      
+       
       void register_trigger(Trigger*, Map*, bool up );
       void unregister_trigger(Trigger*, Map*);
       inline int get_nr_triggers(void) { return m_triggers.size(); }         

@@ -565,8 +565,6 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	dst.h = m_rect.h;
 	dst.hasclrkey = false; // should be irrelevant
 
-	get_graphicimpl()->allocate_gameicons();
-
 	// Completely clear the window
 	//dst.clear();
 
@@ -906,8 +904,6 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 	m_nr_update_rects = 0;
 	m_update_fullscreen = false;
 
-	m_gameicons = 0;
-
 	// Set video mode using SDL
 	int flags;
 
@@ -1146,11 +1142,13 @@ void GraphicImpl::flush(int mod)
 
 		// Once the picture is no longer in any mods, free it
 		if (!pic->mod) {
-			m_picturemap.erase(pic->u.fname);
 
-			if (pic->u.fname)
-				free(pic->u.fname);
-			free(pic->bitmap.pixels);
+         if (pic->u.fname) {
+            m_picturemap.erase(pic->u.fname);
+            free(pic->u.fname);
+         }
+			if(pic->bitmap.pixels)
+            free(pic->bitmap.pixels);
 		}
 	}
 
@@ -1163,11 +1161,6 @@ void GraphicImpl::flush(int mod)
 		for(i = 0; i < m_animations.size(); i++)
 			delete m_animations[i];
 		m_animations.resize(0);
-
-		if (m_gameicons) {
-			delete m_gameicons;
-			m_gameicons = 0;
-		}
 	}
 }
 
@@ -1561,40 +1554,6 @@ void GraphicImpl::screenshot(const char* fname)
 
 /*
 ===============
-GraphicImpl::allocate_gameicons
-
-Allocate the pictures used by rendermap()
-===============
-*/
-void GraphicImpl::allocate_gameicons()
-{
-	static const char* roadb_names[3] = {
-		"pics/roadb_green.png",
-		"pics/roadb_yellow.png",
-		"pics/roadb_red.png"
-	};
-	static const char* build_names[5] = {
-		"pics/set_flag.png",
-		"pics/small.png",
-		"pics/medium.png",
-		"pics/big.png",
-		"pics/mine.png"
-	};
-
-	if (m_gameicons)
-		return;
-
-	m_gameicons = new GameIcons;
-
-	for(int i = 0; i < 3; i++)
-		m_gameicons->pics_roadb[i] = g_gr->get_picture(PicMod_Game, roadb_names[i], RGBColor(0,0,255));
-	for(int i = 0; i < 5; i++)
-		m_gameicons->pics_build[i] = g_gr->get_picture(PicMod_Game, build_names[i], RGBColor(0,0,255));
-}
-
-
-/*
-===============
 GraphicImpl::find_free_picture
 
 Find a free picture slot and return it.
@@ -1613,6 +1572,88 @@ uint GraphicImpl::find_free_picture()
 	return id;
 }
 
+/* 
+ *  GraphicImpl::flush_picture(int)
+ */ 
+void GraphicImpl::flush_picture(uint picindex) {
+   Picture* pic = &m_pictures[picindex];
+
+   if (pic->u.fname) {
+      m_picturemap.erase(pic->u.fname);
+      free(pic->u.fname);
+      pic->u.fname=0;
+   }
+   free(pic->bitmap.pixels);
+   pic->bitmap.pixels=0;
+}
+
+/*
+ * Save and load pictures
+ */
+#define PICTURE_VERSION 1
+void GraphicImpl::save_pic_to_file(uint pic_index, FileWrite* fw) {
+   Picture* pic = &m_pictures[pic_index];
+   
+   // First the version
+   fw->Unsigned16(PICTURE_VERSION);
+
+   // Now has clrkey
+   fw->Unsigned8(pic->bitmap.hasclrkey);
+
+   // Now width and height
+   fw->Unsigned16(pic->bitmap.w);
+   fw->Unsigned16(pic->bitmap.h);
+
+   // now all the data as RGB values
+   for(int h=0; h<pic->bitmap.h; h++) {
+      for(int w=0; w<pic->bitmap.w; w++) {
+         uint clr=pic->bitmap.pixels[h*pic->bitmap.pitch+w];
+         uchar r=clr&0x00ff0000;
+         uchar g=clr&0x0000ff00;
+         uchar b=clr&0x000000ff;
+         fw->Unsigned8(r);
+         fw->Unsigned8(g);
+         fw->Unsigned8(b);
+      }
+   }
+}
+
+uint GraphicImpl::load_pic_from_file(FileRead* fr, int mod) {
+   // First the version
+   int version=fr->Unsigned16();
+   if(version<=PICTURE_VERSION) {
+      bool has_clrkey=fr->Unsigned8();
+      int g_w=fr->Unsigned16();
+      int g_h=fr->Unsigned16();
+
+      uint* pixels=(uint*)malloc(sizeof(uint)*g_w*g_h);
+      for(int h=0; h<g_h; h++) {
+         for(int w=0; w<g_w; w++) {
+            uint* clr=&pixels[h*g_w+w];
+            uchar r,g,b;
+            r=fr->Unsigned8();
+            g=fr->Unsigned8();
+            b=fr->Unsigned8();
+            *clr= (r<<16) + (g << 8) + b; 
+         }
+      }
+
+      uint id = find_free_picture();
+      Picture* pic = &m_pictures[id];
+
+      pic->mod = mod;
+      pic->u.fname = 0;
+      pic->bitmap.pixels = pixels;
+      pic->bitmap.w = g_w;
+      pic->bitmap.h = g_h;
+      pic->bitmap.pitch = g_w;
+      pic->bitmap.hasclrkey = has_clrkey;
+      pic->bitmap.clrkey = *pixels; // Upper left pixel 
+
+      return id;
+   }
+   throw wexception("Unknown picture version %i in file!\n", version);
+}
 
 } // namespace Renderer_Software32
 

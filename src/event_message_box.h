@@ -35,16 +35,55 @@ class Event_Message_Box : public Event {
       uint get_id(void) { return EVENT_MESSAGE_BOX; } 
 
       void run(Game*);
-      
+      void cleanup(Map*);
+
       // File Functions
       void Write(FileWrite*, Editor_Game_Base*);
       void Read(FileRead*, Editor_Game_Base*, bool);
   
-      inline void set_string(const char* str) { m_string=str; }
-      inline const char* get_string(void) { return m_string.c_str(); }
+      inline void set_text(const char* str) { m_text=str; }
+      inline const char* get_text(void) { return m_text.c_str(); }
+      inline void set_caption(const char* str) { m_caption=str; }
+      inline const char* get_caption(void) { return m_caption.c_str(); }
+      inline void set_window_title(const char* str) { m_window_title=str; }
+      inline const char* get_window_title(void) { return m_window_title.c_str(); }
+      inline void set_pic_id(int i) { m_pic_id=i; }
+      inline uint get_pic_id(void) { return m_pic_id; }
+      inline void set_pic_position(int i) { m_pic_position=i; }
+      inline int  get_pic_position(void) { return m_pic_position; }
+      inline void set_pic_has_clrkey(bool t) {  m_pic_has_clrkey=t; }
+      inline bool get_pic_has_clrkey(void) { return m_pic_has_clrkey; }
+      inline void set_is_modal(bool t) {  m_is_modal=t; }
+      inline bool get_is_modal(void) { return m_is_modal; }
+      void set_button_trigger(int i, Trigger* t, Map*);
+      Trigger* get_button_trigger(int i);
+      void set_button_name(int i, std::string);
+      const char* get_button_name(int i);
+      void set_nr_buttons(int i); 
+      int get_nr_buttons(void); 
       
    private:
-      std::string m_string;
+      enum {
+         Right = 0,
+         Left,
+         Center_under, 
+         Center_over,
+      };
+      struct Button_Descr {
+         std::string name;
+         Trigger *trigger;
+      };
+
+      std::string m_text;
+      std::string m_caption;
+      std::string m_window_title;
+      bool m_is_modal;
+      uint m_pic_id;
+      int m_pic_position;
+      bool m_pic_has_clrkey;
+
+      std::vector<Button_Descr> m_buttons;
+      
 };
 
 

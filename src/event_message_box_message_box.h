@@ -17,51 +17,26 @@
  *
  */
 
-#ifndef __S__EVENT_MESSAGE_BOX_OPTION_MENU_PIC_OPTIONS_H
-#define __S__EVENT_MESSAGE_BOX_OPTION_MENU_PIC_OPTIONS_H
+#ifndef __S__EVENT_MESSAGE_BOX_MESSAGE_BOX_H
+#define __S__EVENT_MESSAGE_BOX_MESSAGE_BOX_H
+
+class Event_Message_Box;
+class Editor_Game_Base;
 
 #include "ui_window.h"
 
-class Editor_Interactive;
-class Event_Message_Box;
-class Event_Message_Box_Option_Menu;
-class UICheckbox;
-class UIEdit_Box;
-class UIRadiogroup;
-class UITextarea;
-
-/*
- * This is a modal box - The user must end this first 
- * before it can return
- */
-class Event_Message_Box_Option_Menu_Picture_Options : public UIWindow {
+//
+// This is kept in this file, since only this file will
+// ever need to create one of those
+// 
+class Message_Box_Event_Message_Box : public UIWindow {
    public:
-      Event_Message_Box_Option_Menu_Picture_Options(Editor_Interactive*, bool*, uint*, int*);
-      ~Event_Message_Box_Option_Menu_Picture_Options();
-
+      Message_Box_Event_Message_Box(Editor_Game_Base*, Event_Message_Box*);
       bool handle_mouseclick(uint btn, bool down, int mx, int my);
 
    private:
-      void update(void);
       void clicked(int);
-      
-      UIPanel* m_parent;
-      
-      bool *m_clrkey_var;
-      uint* m_picid_var;
-      int* m_pos_var;
-      int  m_picid;
-      UICheckbox* m_clrkey;
-      UIEdit_Box* m_filename;
-      UIRadiogroup *m_radiogroup;
-      UITextarea* m_pic_assigned;
+      Event_Message_Box* m_event;
 };
 
-
-
-
-
-
-
 #endif
-
