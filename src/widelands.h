@@ -39,27 +39,22 @@
 #include <string>
 #include <vector>
 
-#ifdef WIN32
+#if defined(WIN32) && !defined(__GNUC__)
 	#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*
 	#pragma warning(disable : 4786) // identifier longer than 255 chars (STL woes)
 	#pragma warning(disable : 4800) // forcing values to bool is fine to me.
+	#endif
+#ifdef WIN32
+	#define strcasecmp strcmpi
+	#define strncasecmp strncmpi
 	#define WIN32_LEAN_AND_MEAN
 	#include <windows.h>
-	#ifdef _DEBUG			//chk ths plz. Acked by Holger
+	#ifdef _DEBUG
 		#define DEBUG
 	#endif //_DEBUG
 
 	#define snprintf _snprintf
 	#define vsnprintf _vsnprintf
-	#define strcasecmp strcmpi
-	#define strncasecmp strncmpi
-#else //WIN32
-//   #include <sys/types.h>
-//   #include <sys/stat.h>
-//   #include <fcntl.h>
-//   #include <unistd.h>
-//	#define strcmpi strcasecmp
-//	#define strncmpi strncasecmp
 #endif //WIN32
 
 #include "config.h"
