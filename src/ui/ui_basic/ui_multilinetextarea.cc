@@ -137,7 +137,6 @@ void UIMultiline_Textarea::draw(RenderTarget* dst)
    if (m_text.length())
    {
       int x = 0;
-      int y = 0;
 
       // Only HAlignment allowed
       if (m_align & Align_HCenter)

@@ -94,16 +94,18 @@ void Main_Menu_Load_Map::clicked(int id) {
    std::string realname="maps/";
    realname+=filename;
    realname+=WLMF_SUFFIX;
-   Widelands_Map_Loader wml(realname.c_str(), m_map);
+//   realname+=S2MF_SUFFIX; 
+   Map_Loader* ml=m_map->get_correct_loader(realname.c_str());
 
    try {
       //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
-      wml.preload_map();
-      wml.load_map_complete(m_parent->get_editor());
+      ml->preload_map();
+      ml->load_map_complete(m_parent->get_editor());
    }  catch(std::exception& exe) {
       // This really shoudn't fail since maps are already preloaded (in map preview)
       // and therefore valid, but if it does, a valid map must be displayed, therefore
       // we create an empty one from scratch
+      m_map->cleanup();
       m_map->create_empty_map();
       m_parent->map_changed();
 
@@ -119,8 +121,11 @@ void Main_Menu_Load_Map::clicked(int id) {
    
    // Tell the user interface that the map has changed
    m_parent->map_changed();
+   
+   delete ml;
    }
    delete this;
+   
 }
 
 

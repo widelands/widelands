@@ -25,6 +25,7 @@
 #include "world.h"
 #include "worlddata.h"
 #include "widelands_map_loader.h"
+#include "error.h"
 
 /*
 ==============================================================================
@@ -53,21 +54,6 @@ struct Map::Pathfield {
 
 	inline int cost() { return real_cost + estim_cost; }
 };
-
-/*
-=============================
-
-class Map_Loader
-
-=============================
-*/
-bool Map_Loader::exists_world(const char* worldname) {
-   char buf[256];
-
-   snprintf(buf, sizeof(buf), "worlds/%s/conf", worldname);
-   FileRead f;
-   return f.TryOpen(g_fs, buf);
-}
 
 /*
 =============================
@@ -119,7 +105,7 @@ int S2_Map_Loader::preload_map() {
 
    load_s2mf_header();
 
-   if(!exists_world(m_map->get_world_name())) {
+   if(!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
 
@@ -168,6 +154,16 @@ Inits a clean, empty map
 ===============
 */
 Map::Map(void) {
+ 	m_nrplayers = 0;
+	m_width = m_height = 0;
+   m_world=0;
+	m_pathcycle = 0;
+	m_fields = 0;
+	m_pathfields = 0;
+	m_starting_pos = 0;
+	m_world = 0;
+
+   // Paranoia
    cleanup();
 }
 
@@ -203,7 +199,7 @@ void Map::recalc_whole_map(void)
       for(uint x=0; x<m_width; x++) {
          int area;
 
-			f = get_fcoords(Coords(x, y));
+         f = get_fcoords(Coords(x, y));
          check_neighbour_heights(f,&area);
          recalc_brightness(f);
          recalc_fieldcaps_pass1(f);
@@ -229,11 +225,8 @@ go back to your initial state
 void Map::cleanup(void) {
  	m_nrplayers = 0;
 	m_width = m_height = 0;
-	m_fields = 0;
-	m_starting_pos = 0;
    m_world=0;
 	m_pathcycle = 0;
-	m_pathfields = 0;
 
    if (m_fields)
       free(m_fields);
@@ -266,8 +259,8 @@ void Map::create_empty_map(int w, int h, std::string worldname) {
    set_author("Unknown");
    set_description("no description defined");
 
-   for(int y=0; y<64; y++) {
-      for(int x=0; x<64; x++) {
+   for(int y=0; y<h; y++) {
+      for(int x=0; x<w; x++) {
 			FCoords coords = get_fcoords(Coords(x, y));
 
          coords.field->set_height(10);
@@ -974,6 +967,7 @@ above recalc_brightness.
 void Map::recalc_fieldcaps_pass1(FCoords f)
 {
    f.field->caps = 0;
+
 
    // 1a) Get all the neighbours to make life easier
 	FCoords tln, trn, ln, rn, bln, brn;

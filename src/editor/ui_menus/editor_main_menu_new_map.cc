@@ -17,13 +17,17 @@
  *
  */
 
+#include <string>
+#include <vector>
 #include "editor_main_menu_new_map.h"
 #include "ui_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "editorinteractive.h"
 #include "map.h"
+#include "world.h"
 #include "error.h"
+#include "editor.h"
 
 /*
 ===============
@@ -71,9 +75,14 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=20+spacing+spacing;
 
-   m_worldstr="greenland";
+   // get all worlds
+   m_worlds=new std::vector<std::string>;
+   World::get_all_worlds(m_worlds);
+
+   assert(m_worlds->size());
+   m_currentworld=0;
    m_world=new UIButton(this, posx, posy, width, height, 1, 4);
-   m_world->set_title(m_worldstr.c_str());
+   m_world->set_title((*m_worlds)[m_currentworld].c_str());
    m_world->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=height+spacing+spacing+spacing;
 
@@ -81,7 +90,9 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    b->set_title("Create Map");
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=height+spacing;
-}
+
+
+   }
 
 
 /*
@@ -97,8 +108,38 @@ void Main_Menu_New_Map::button_clicked(int n) {
       case 1: m_w--; break;
       case 2: m_h++; break;
       case 3: m_h--; break;
-      case 4: log("TODO: switch worlds!\n"); break;
-      case 5: log("TODO: create new map!\n"); break;
+      case 4: 
+              ++m_currentworld; 
+              if(m_currentworld==m_worlds->size()) m_currentworld=0;    
+              m_world->set_title((*m_worlds)[m_currentworld].c_str()); 
+              break;
+      case 5: 
+              {
+                 Map* m_map=m_parent->get_egbase()->get_map();
+                 // Clean all the stuff up, so we can load
+                 m_parent->get_editor()->get_objects()->cleanup(m_parent->get_editor());
+                 g_anim.flush();
+                 g_gr->flush(0);
+   
+                 m_map->cleanup();
+
+                 m_map->create_empty_map(MAP_DIMENSIONS[m_w],MAP_DIMENSIONS[m_h],(*m_worlds)[m_currentworld]);
+                
+
+                 // Postload the world which provides all the immovables found on a map
+                 m_map->get_world()->postload(m_parent->get_editor());
+
+                 m_parent->get_editor()->postload();
+                 m_parent->get_editor()->load_graphics();
+                 
+                 m_map->recalc_whole_map();
+
+                 // Tell the user interface that the map has changed
+                 m_parent->map_changed();
+
+                 delete this;
+                 return ; 
+              }
    }
 
    char buf[200];
@@ -121,6 +162,7 @@ Unregister from the registry pointer
 */
 Main_Menu_New_Map::~Main_Menu_New_Map()
 {
+   delete m_worlds;
 }
 
 

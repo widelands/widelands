@@ -124,10 +124,10 @@ void S2_Map_Loader::load_s2mf_header()
         header.h=Swap16(header.h);
 #endif
 
-	// don't really set size, but make the structures
-        // valid
-        m_map->m_width=header.w;
-        m_map->m_height=header.h;
+   // don't really set size, but make the structures
+   // valid
+   m_map->m_width=header.w;
+   m_map->m_height=header.h;
 
 	m_map->set_author(header.author);
 	m_map->set_name(header.name);
@@ -191,7 +191,6 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 		}
 		free(section);
 		section = 0;
-
 
 		////				S E C T I O N		2: Landscape
 		// New section??
@@ -286,7 +285,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
 			throw wexception("Section UNKNOWN not found");
 		free(section);
 		section = 0;
-
+     
 		// S E C T I O N 5  -------- Landscape (rocks, stuff..)
 		// New section??
 		bobs = load_s2mf_section(&file, m_map->get_width(), m_map->get_height());

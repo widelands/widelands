@@ -128,7 +128,8 @@ class Map {
    friend class Widelands_Map_Loader;
 	friend class Widelands_Map_Elemental_Data_Packet;
    friend class Editor;
-   
+   friend class Main_Menu_New_Map;
+
 public:
 	enum { // flags for findpath()
 		fpBidiCost = 1,		// use bidirection cost instead of normal cost calculations
@@ -793,8 +794,6 @@ class Map_Loader {
       inline Map* get_map() { return m_map; }
 
    protected:
-      bool exists_world(const char*);
-
       enum State {
          STATE_INIT,
          STATE_PRELOADED,

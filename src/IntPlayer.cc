@@ -187,9 +187,8 @@ void Interactive_Player::start()
 
 	mapw = m_maprenderinfo.egbase->get_map()->get_width();
 	maph = m_maprenderinfo.egbase->get_map()->get_height();
-	m_maprenderinfo.overlay_basic = (uchar*)malloc(mapw*maph);
-	m_maprenderinfo.overlay_roads = (uchar*)malloc(mapw*maph);
-	memset(m_maprenderinfo.overlay_roads, 0, mapw*maph);
+	m_maprenderinfo.overlay_basic = 0; 
+	m_maprenderinfo.overlay_roads = 0;
 
    map_changed();
 }

@@ -89,6 +89,7 @@ class World
 	friend class Game;
 
    public:
+
       enum {
          OK = 0,
          ERR_WRONGVERSION
@@ -107,6 +108,10 @@ class World
 
       World(const char* name);
 		~World();
+      
+      // Check if a world really exists
+      static bool exists_world(std::string);
+      static void get_all_worlds(std::vector<std::string>*);
 
 		void postload(Editor_Game_Base*);
 		void load_graphics();

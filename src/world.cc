@@ -347,6 +347,33 @@ void World::parse_bobs()
 	}
 }
 
+/*
+ * World::exists_world()
+ */
+bool World::exists_world(std::string worldname) {
+   std::string buf;
+   buf="worlds/" + worldname + "/conf";;
+
+   FileRead f;
+   return f.TryOpen(g_fs, buf.c_str());
+}
+
+/*
+ * World::get_all_worlds()
+ */
+void World::get_all_worlds(std::vector<std::string>* retval) {
+   retval->resize(0);
+
+   // get all worlds
+   filenameset_t m_worlds;
+   g_fs->FindFiles("worlds", "*", &m_worlds);
+   for(filenameset_t::iterator pname = m_worlds.begin(); pname != m_worlds.end(); pname++) {
+      std::string world=*pname;
+      world.erase(0,7); // remove worlds/
+      if(World::exists_world(world.c_str()))
+         retval->push_back(world);
+   }
+}
 
 
 /*

@@ -249,7 +249,7 @@ bool FileRead::TryOpen(FileSystem *fs, std::string fname)
 		data = fs->Load(fname, &length);
 		filepos = 0;
 	} catch(std::exception &e) {
-		log("%s\n", e.what());
+		//log("%s\n", e.what());
 		return false;
 	}
 

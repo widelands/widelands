@@ -22,6 +22,7 @@
 #include "rendertarget.h"
 #include "types.h"
 #include "ui_button.h"
+#include "error.h"
 
 /**
 Initialize a UIButton
@@ -87,12 +88,13 @@ Set a text title for the button
 */
 void UIButton::set_title(const char* title)
 {
-	remove_title();
+   remove_title();
 
-	if (title)
-		m_title = title;
+   if (title) 
+      m_title = title;
+   
 
-	update(0, 0, get_w(), get_h());
+   update(0, 0, get_w(), get_h());
 }
 
 

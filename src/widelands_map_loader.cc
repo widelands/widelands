@@ -55,7 +55,7 @@ int Widelands_Map_Loader::preload_map() {
    fr.Open(g_fs, m_filename.c_str());
    mp.Pre_Read(&fr, m_map);
    
-   if(!exists_world(m_map->get_world_name())) {
+   if(!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
    

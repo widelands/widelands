@@ -21,6 +21,7 @@
 #define __S__EDITOR_MAIN_MENU_NEW_MAP_H
 
 #include <string>
+#include <vector>
 #include "ui_window.h"
 
 class Editor_Interactive;
@@ -48,7 +49,8 @@ class Main_Menu_New_Map : public UIWindow {
       UITextarea *m_width, *m_height;
       UIButton* m_world;
       int m_w, m_h;
-      std::string m_worldstr;
+      uint m_currentworld;
+      std::vector<std::string>* m_worlds;
 
       void button_clicked(int);
 };

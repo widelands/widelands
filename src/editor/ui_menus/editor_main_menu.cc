@@ -72,7 +72,6 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UIUniqueWindowReg
    // Caption
    UITextarea* tt=new UITextarea(this, 0, 0, "Editor Main Menu", Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
-
    // UIButtons
    const int offsx=5;
    const int offsy=30;
