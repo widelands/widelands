@@ -170,8 +170,6 @@ public:
 
 	virtual void set_economy(Economy* e);
 
-	virtual void calc_statistics();
-
    inline std::vector<WaresQueue*>* get_warequeues(void) { return &m_input_queues; }
 
 protected:
@@ -185,6 +183,8 @@ private:
 	void program_step();
 	void program_end(Game* g, bool success);
 	void add_statistics_value(bool val);
+
+	void calc_statistics();
 
 private:
 	Request*		m_worker_request;
