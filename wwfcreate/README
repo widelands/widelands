@@ -1,0 +1,28 @@
+world file tags definition
+
+[world]
+author
+name
+terrains		number of terrain definions in this file
+resources		number of resource definions in this file
+bobs			number of bob definions in this file
+
+[terrain_x]
+name
+texture		texture for this terrain [TODO: anim?]
+heightmin		minimum height for this terrain
+heightmax		maximum height for this terrain
+resources		comma-seperated list of resource names allowed on this terrain
+
+[resource_x]
+name
+occurence		standard occurence of this resource for a map
+
+[bob_x]
+name
+resource		resource this bob contains
+stock			amount of resources in this bob
+heir			bob this bob will be when it dies
+anim			anim for this bob
+animkey		key for animation; can be "time" or "stock"
+animfactor		animation speed
