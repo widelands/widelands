@@ -33,6 +33,7 @@
 #ifdef _MSC_VER
 #pragma pack(push, 1)
 #endif
+#define BITMAP_MAGIC	0x4D42		// 'MB' -> "BM" in file
 struct BitmapFileHeader
 {
 	ushort	type;
@@ -123,7 +124,7 @@ void Picture_Reader::read_bmp(Binary_file* file, PictureInfo* pic, ushort** p)
 	file->read(&fileHeader, sizeof(BitmapFileHeader));
 	file->read(&infoHeader, sizeof(BitmapInfoHeader));
 
-	if (fileHeader.type != 'MB')
+	if (fileHeader.type != BITMAP_MAGIC)
 		return;
 	if (infoHeader.bitCount != 24 && infoHeader.bitCount != 32)
 		return;
