@@ -17,43 +17,37 @@
  *
  */
 
-#ifndef __S__EDITOR_SET_STARTING_POS_TOOL_H
-#define __S__EDITOR_SET_STARTING_POS_TOOL_H
+#ifndef __S__EDITOR_DECREASE_RESOURCES_TOOL_H
+#define __S__EDITOR_DECREASE_RESOURCES_TOOL_H
 
-#include <string>
 #include "editor_tool.h"
-
-
-// How much place should be left around a player position
-// where no other player can start
-#define MIN_PLACE_AROUND_PLAYERS 24
-#define STARTING_POS_HOTSPOT_Y 55
-
-
+#include "editor_set_resources_tool.h"
+#include "editor_increase_resources_tool.h"
 
 /*
 =============================
-class Editor_Set_Starting_Pos_Tool
+class Editor_Decrease_Resources_Tool
 
-Set the starting position of the various players
+this decreases the resources of a field by a value
 =============================
 */
-class Editor_Set_Starting_Pos_Tool : public Editor_Tool {
+class Editor_Decrease_Resources_Tool : public Editor_Tool {
    public:
-      Editor_Set_Starting_Pos_Tool();  
-      virtual ~Editor_Set_Starting_Pos_Tool();
+      Editor_Decrease_Resources_Tool() : Editor_Tool(this,this) { m_changed_by=1; m_cur_res=0; }
+      virtual ~Editor_Decrease_Resources_Tool() { }
 
       virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
 
-      virtual const char* get_fsel_impl(void) { if(m_current_fieldsel_pic.size()) return m_current_fieldsel_pic.c_str(); return 0; }
+      virtual const char* get_fsel_impl(void) { return "pics/fsel_editor_decrease_resources.png"; }
 
-      // tool functions
-      void set_current_player(int i);
+      inline int get_changed_by(void) { return m_changed_by; }
+      inline void set_changed_by(int n) { m_changed_by=n; }
+      inline int get_cur_res(void) { return m_cur_res; }
+      inline void set_cur_res(int res) { m_cur_res=res; }
       
    private:
-      std::string m_current_fieldsel_pic;
+      int m_cur_res;
+      int m_changed_by;
 };
-
-int Editor_Tool_Set_Starting_Pos_Callback(FCoords& c, void* data, int);
 
 #endif

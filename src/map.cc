@@ -357,8 +357,7 @@ void Map::recalc_default_resources(void) {
             if(i->second>lv) {
                lv=i->second;
                res=i->first;
-            } else if(i->second==lv) {
-            }   
+            } 
             i++;
          }
          amount/=6; 

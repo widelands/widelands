@@ -163,7 +163,7 @@ void Overlay_Manager::recalc_field_overlays(FCoords& fc, FCoords* neighbours) {
       // Determine the buildhelp icon for that field
       int buildcaps=0;
       if(m_callback) {
-         buildcaps = m_callback(fc, m_callback_data);
+         buildcaps = m_callback(fc, m_callback_data, m_callback_data_i);
       } else {
          buildcaps = fc.field->get_caps(); 
       }
@@ -227,10 +227,10 @@ void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords ho
    do {
       j=i;
       ++j;
-      
+     
       if(j->first==i->first) {
          // there are more elements registered
-         if(j->second.level > i->second.level) {
+         if(j->second.level < i->second.level) {
             std::swap<Overlay_Manager::Registered_Overlays>(i->second,j->second);
             i=m_overlays.lower_bound(fieldindex);
          } else {

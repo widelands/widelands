@@ -17,34 +17,22 @@
  *
  */
 
-#include "editor_increase_height_tool.h"
-#include "map.h"
-#include "field.h"
-#include "editorinteractive.h"
+#ifndef __S__WIDELANDS_MAP_RESOURCES_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_RESOURCES_DATA_PACKET_H
+
+#include "widelands_map_data_packet.h"
 
 /*
-=============================
+ * The resources data packet contains the resources of all fields
+ */
+class Widelands_Map_Resources_Data_Packet : public Widelands_Map_Data_Packet {
+   public:
+      virtual ~Widelands_Map_Resources_Data_Packet();
 
-class Editor_Increase_Height_Tool
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
+};
 
-=============================
-*/
 
-/*
-===========
-Editor_Increase_Height_Tool::handle_click_impl()
+#endif
 
-===========
-*/
-int Editor_Increase_Height_Tool::handle_click_impl(FCoords& fc, Map* map, Editor_Interactive* parent) {
-   MapRegion mrc(map, fc, parent->get_fieldsel_radius());
-	Coords c;
-
-   int max, i;
-   max=0;
-   while(mrc.next(&c)) {
-      i=map->change_field_height(c, m_changed_by);
-      if(i>max) max=i;
-   }
-   return parent->get_fieldsel_radius()+max;
-}

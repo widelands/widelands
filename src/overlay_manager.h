@@ -20,6 +20,7 @@
 #ifndef __S__OVERLAY_HANDLER_H
 #define __S__OVERLAY_HANDLER_H
 
+#include <string>
 #include <map>
 #include <limits>
 #include "types.h"
@@ -55,7 +56,7 @@ class Map;
  *     job are removed. This is usefull for interactive road building.
  */
 #define MAX_OVERLAYS_PER_FIELD 5    // this should be enough
-typedef int (*Overlay_Callback_Function)(FCoords&, void*);
+typedef int (*Overlay_Callback_Function)(FCoords&, void*, int);
 class Overlay_Manager {
    public:
       struct Overlay_Info {
@@ -72,8 +73,8 @@ class Overlay_Manager {
       void init(int w, int h);
 
       // register callback function (see data below for description)
-      void register_overlay_callback_function(Overlay_Callback_Function func, void* data) {
-         m_callback=func; m_callback_data=data; 
+      void register_overlay_callback_function(Overlay_Callback_Function func, void* data, int iparam1 = 0) {
+         m_callback=func; m_callback_data=data;  m_callback_data_i=iparam1; 
       }
 
       inline int get_a_job_id(void) { ++m_cur_jobid; if(m_cur_jobid>=std::numeric_limits<int>::max()) m_cur_jobid=1000; return m_cur_jobid; }
@@ -173,6 +174,7 @@ class Overlay_Manager {
       Overlay_Callback_Function m_callback;           // this callback is used to define we're overlays are set and were not
       // since we only care for map stuff, not for player stuff or editor issues
       void *m_callback_data;
+      int m_callback_data_i;
       int m_cur_jobid;                                // current job id
       int m_index_pointer;                            // used for frontier drawing
       uchar m_overlay_basic;                          // used for frontier drawing too

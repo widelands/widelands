@@ -30,7 +30,7 @@ static int m_current_player;
 /*
  * static callback function for overlay calculation
  */
-int Editor_Tool_Set_Starting_Pos_Callback(FCoords& c, void* data) {
+int Editor_Tool_Set_Starting_Pos_Callback(FCoords& c, void* data, int) {
    // data is here an integer indentifying the current player
    Map* map = static_cast<Map*>(data);
 
@@ -88,7 +88,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
       g_gr->get_picture_size(picid, &w, &h);
      
       // check if field is valid
-      if(Editor_Tool_Set_Starting_Pos_Callback(fc, map)) {
+      if(Editor_Tool_Set_Starting_Pos_Callback(fc, map,0)) {
          // Remove old overlay if any      
          Coords c=map->get_starting_pos(m_current_player);
          if(c.x!=-1 && c.y!=-1) 

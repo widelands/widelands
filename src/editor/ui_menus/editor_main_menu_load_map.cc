@@ -96,8 +96,8 @@ void Main_Menu_Load_Map::clicked(int id) {
 
    std::string realname="maps/";
    realname+=filename;
-//   realname+=WLMF_SUFFIX;
-   realname+=S2MF_SUFFIX; 
+   realname+=WLMF_SUFFIX;
+//   realname+=S2MF_SUFFIX; 
    Map_Loader* ml=m_map->get_correct_loader(realname.c_str());
 
    try {

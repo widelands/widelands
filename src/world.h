@@ -48,7 +48,7 @@ public:
 	std::string get_indicator(uint amount) const;
 
    inline bool is_detectable(void) { return m_is_detectable; }
-   inline bool get_max_amount(void) { return m_max_amount; }
+   inline int get_max_amount(void) { return m_max_amount; }
 
    std::string get_editor_pic(uint amount, RGBColor* m_clrkey);
 
@@ -149,6 +149,7 @@ class World
       inline uchar get_resource(const char* l) { return m_resources.get_index(l); }
 		inline Resource_Descr* get_resource(int res) 
 		{ assert(res < m_resources.get_nitems()); return m_resources.get(res); }
+      inline int get_nr_resources(void) { return m_resources.get_nitems(); }
 
    private:
 		std::string				m_basedir;	// base directory, where the main conf file resides

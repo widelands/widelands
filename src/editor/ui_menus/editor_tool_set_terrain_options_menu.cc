@@ -100,8 +100,6 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
 ===========
 Editor_Tool_Set_Terrain_Tool_Options_Menu::selected()
 
-called, when one of the up/down buttons is pressed
-id: 0 is up, 1 is down
 ===========
 */
 void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {

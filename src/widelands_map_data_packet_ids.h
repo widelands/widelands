@@ -30,6 +30,7 @@
 #define PACKET_IMMOVABLE        3
 #define PACKET_PLAYER_POSITION  4
 #define PACKET_BOB              5
+#define PACKET_RESOURCES        6
 
 #endif
 
