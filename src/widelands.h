@@ -27,6 +27,7 @@
 #include <cctype>
 
 #include <cmath>
+#include <cassert>
 
 #include <iostream>
 #include <fstream>
