@@ -21,8 +21,9 @@
 #define __S__MAPSELECTMENUE_H
 
 class Game;
+class Editor_Game_Base;
 
 bool launch_game_menu(Game *g);
-void map_select_menue(Game *g);
+void map_select_menue(Editor_Game_Base *g);
 
 #endif

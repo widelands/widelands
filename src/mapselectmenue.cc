@@ -37,7 +37,7 @@ MapSelectMenu
 
 
 class MapSelectMenu : public BaseMenu {
-	Game		*game;
+	Editor_Game_Base		*egbase;
 
 	Listselect *list;
 	Textarea *taname;
@@ -54,7 +54,7 @@ class MapSelectMenu : public BaseMenu {
 	Map*              m_map;
    
 public:
-	MapSelectMenu(Game *g);
+	MapSelectMenu(Editor_Game_Base *g);
 	~MapSelectMenu();
 
 	const char *get_mapname() { return (const char*)list->get_selection(); }
@@ -63,10 +63,10 @@ public:
 	void map_selected(int id);
 };
 
-MapSelectMenu::MapSelectMenu(Game *g)
+MapSelectMenu::MapSelectMenu(Editor_Game_Base *g)
 	: BaseMenu("choosemapmenu.bmp")
 {
-	game = g;
+	egbase = g;
 	m_maploader = 0;
    m_map = new Map;
    
@@ -135,8 +135,8 @@ MapSelectMenu::~MapSelectMenu()
 
 void MapSelectMenu::ok()
 {
-	game->set_map(m_maploader->get_map());
-	m_maploader->load_map_complete(game);
+	egbase->set_map(m_maploader->get_map());
+	m_maploader->load_map_complete(egbase);
    m_map=0;
    
 	end_modal(1);
@@ -181,13 +181,13 @@ void MapSelectMenu::map_selected(int id)
 	}
 }
 
-/** void map_select_menue(Game *g)
+/** void map_select_menue(Editor_Game_Base *g)
  *
  * Here, you chose a map out of a given listbox
  *
- * Args:	g	the game
+ * Args:	g	the egbase
  */
-void map_select_menue(Game *g)
+void map_select_menue(Editor_Game_Base *g)
 {
 	MapSelectMenu ms(g);
 	ms.run();
