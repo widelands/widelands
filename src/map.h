@@ -37,35 +37,16 @@ class World;
 #define WLMF_MAGIC      "WLmf"
 #define S2MF_MAGIC		"WORLD_V1.0"
 
-#define WLMF_VERSIONMAJOR(a)  (a >> 8)
-#define WLMF_VERSIONMINOR(a)  (a & 0xFF)
+#define MAP_NAME_LEN   30
+#define MAP_AUTHOR_LEN 30
+#define MAP_DESCR_LEN  1024
+
 
 const ushort NUMBER_OF_MAP_DIMENSIONS=15;
 const ushort MAP_DIMENSIONS[] = {
    64, 96, 128, 160, 192, 224, 256,
    288, 320, 352, 384, 416, 448, 480,
    512 };
-
-
-/** struct Map_Header
- *
- * This is the header of a widelands map format
- * it's designed to be fastly read to give the user informations
- * about the map while browsing it.
- *   --> no pointers (oh wonder!)
- */
-/*struct MapDescrHeader {
-		  char   magic[6]; // "WLmf\0\0"
-		  char	author[61];
-		  char	name[61];
-		  char   descr[1024];
-		  char 	uses_world[32];
-		  ulong	world_checksum;
-		  ushort version;
-		  ushort nplayers;
-		  uint width;
-		  uint height;
-}*/
 
 
 class Path;
@@ -143,8 +124,10 @@ class Map {
 	friend class Editor_Game_Base;
    friend class Map_Loader;
    friend class S2_Map_Loader;
-	friend class Editor;
-
+   friend class Widelands_Map_Loader;
+	friend class Widelands_Map_Elemental_Data_Packet;
+   friend class Editor;
+   
 public:
 	enum { // flags for findpath()
 		fpBidiCost = 1,		// use bidirection cost instead of normal cost calculations

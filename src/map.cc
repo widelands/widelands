@@ -24,7 +24,7 @@
 #include "player.h"
 #include "world.h"
 #include "worlddata.h"
-
+#include "widelands_map_loader.h"
 
 /*
 ==============================================================================
@@ -1568,7 +1568,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
 
    if(!strcasecmp(filename+(strlen(filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
    {
-      throw wexception("TODO: WLMF not implemented");
+      retval=new Widelands_Map_Loader(filename, this);
    }
    else if (!strcasecmp(filename+(strlen(filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {

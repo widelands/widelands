@@ -17,6 +17,28 @@
  *
  */
 
+#ifndef __S__WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
+
 #include "widelands_map_data_packet.h"
 
-// NOTHING HERE, all in header
+/*
+ * The elemental data packet contains all basic and elemental data
+ * like number of players, map size, world name, magic bytes and so on
+ */
+class Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
+   public:
+      virtual ~Widelands_Map_Elemental_Data_Packet();
+
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
+      
+      // The following function prereads a given map without
+      // the need of a properly configured Editor_Game_Base
+      // object
+      void Pre_Read(FileRead*, Map*) throw(wexception);
+};
+
+
+#endif
+

@@ -27,10 +27,13 @@
 class Section;
 class Editor_Game_Base;
 
+#define WORLD_NAME_LEN 30
+#define WORLD_AUTHOR_LEN 30
+#define WORLD_DESCR_LEN 1024
 struct World_Descr_Header {
-   char name[30];
-   char author[30];
-   char descr[1024];
+   char name[WORLD_NAME_LEN];
+   char author[WORLD_AUTHOR_LEN];
+   char descr[WORLD_DESCR_LEN];
 };
 
 class Resource_Descr {

@@ -37,15 +37,10 @@ map file. it is an abstract base class
 */
 class Widelands_Map_Data_Packet {
    public:
-      Widelands_Map_Data_Packet(void) { }
       virtual ~Widelands_Map_Data_Packet() { }    
 
-      void Read(FileRead*);
-      void Write(FileWrite*);
-
-      // After the packet has been read from a file, it needs to
-      // make information public (set height on maps, set nr players and so on)
-      void distriubute_information(Editor_Game_Base*);
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception) = 0;
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception) = 0;
 };
 
 #endif 

@@ -19,12 +19,16 @@
 
 #include "widelands_map_saver.h"
 #include "wexception.h"
+#include "filesystem.h"
+#include "map.h"
+#include "widelands_map_elemental_data_packet.h"
 
 /*
  * Constructor
  */
 Widelands_Map_Saver::Widelands_Map_Saver(std::string filename, Editor_Game_Base* egbase) {
-
+   m_filename=filename;
+   m_egbase=egbase;
 }
 
 /*
@@ -38,6 +42,18 @@ Widelands_Map_Saver::~Widelands_Map_Saver(void) {
  * save function
  */
 void Widelands_Map_Saver::save(void) throw(wexception) {
-   throw wexception("Not yet implemented!");
+   std::string filename=m_filename;
+   m_filename+=WLMF_SUFFIX;
+
+   FileWrite fw;
+   Widelands_Map_Data_Packet* dp;
+
+   // Start with writing the map out, first Elemental data
+   dp= new Widelands_Map_Elemental_Data_Packet();
+   dp->Write(&fw, m_egbase);
+   delete dp;
+
+
+   fw.Write(g_fs,m_filename); 
 }
 

@@ -20,10 +20,20 @@
 #ifndef __S__WIDELANDS_MAP_LOADER_H
 #define __S__WIDELANDS_MAP_LOADER_H
 
+#include <string>
 #include "map.h"
 
 class Widelands_Map_Loader : public Map_Loader {
-   Widelands_Map_Loader(const char* file, Map* map) : Map_Loader(file, map) { };
+   public:
+      Widelands_Map_Loader(const char* file, Map* map);
+      virtual ~Widelands_Map_Loader(void);
+   
+      virtual int preload_map();
+      virtual int load_map_complete(Editor_Game_Base*);
+
+   private:
+      Map* m_map;
+      std::string m_filename;
 };
 
 #endif
