@@ -2155,7 +2155,6 @@ int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright)
       f->set_terrainr(ter);
 
    MapRegion mr;
-   FCoords coords;
 
    recalc_for_field_area(c,2);
 
