@@ -18,6 +18,7 @@
  */
 
 // 2002-02-10	sft+	made setup_searchpaths work for win32
+// 2002-02-11	sft+	made setup_searchpaths work PROPERLY for win32
 
 #include "fileloc.h"
 #include "setup.h"
@@ -101,38 +102,41 @@ void setup_ui(void) {
  * Args: None
  * Returns: Nothing
  */
-void setup_searchpaths(void) {
-		  static File_Locator fileloc;
-		 
-		  char* buf;
-		  char cmd[MAX_PATHL];
-#ifdef WIN32
-		  int i=0, n=0;
-		  char drive[_MAX_DRIVE];
-		  char dir[_MAX_DIR];
-#endif
+#include <stdio.h>
 
+void setup_searchpaths(void)
+{
+	static File_Locator fileloc;
+
+	char* buf;
+	char cmd[MAX_PATHL];
 #ifndef	WIN32
-		  buf=getenv("HOME");
-		  strcpy(cmd, buf);
-		  strcat(cmd, "/.widelands");
-		  g_fileloc.add_searchdir(cmd, MAX_DIRS-2);
-		  g_fileloc.set_def_writedir(MAX_DIRS-2);
-		  
-		  g_fileloc.add_searchdir(PKGDATADIR, MAX_DIRS-2);
+	buf=getenv("HOME");
+	strcpy(cmd, buf);
+	strcat(cmd, "/.widelands");
+	g_fileloc.add_searchdir(cmd, MAX_DIRS-2);
+	g_fileloc.set_def_writedir(MAX_DIRS-2);
+	
+	g_fileloc.add_searchdir(PKGDATADIR, MAX_DIRS-2);
 #else
-
-//#error	Code buggy!
-		  buf=GetCommandLine();
-		  while(buf[i]==' ' || buf[i]=='\"' ) i++;
-		  while(buf[i]!='\"' && i<strlen(buf)) { cmd[n]=buf[i]; i++; n++; }
-		  cmd[n]='\0';
-		  _splitpath(cmd, drive, dir, NULL, NULL);
-		  //a_MemFree(buf);
-
-		  strcpy(cmd, drive);
-		  strcat(cmd, dir);
-//		  a_ResHandlerAddSearchDir(cmd);
-		  g_fileloc.add_searchdir(cmd, MAX_DIRS-2);
+	int i=0, n=0;
+	buf = GetCommandLine();
+	while (buf[i]==' ' || buf[i]=='\"' )
+		i++;
+	while (buf[i]!='\"' && i<strlen(buf))
+	{
+		cmd[n] = buf[i];
+		i++;
+		n++;
+	}
+	cmd[n] = 0;
+	for (int j=strlen(cmd)-1; j>=0; j--)
+		if (cmd[j] == '\\')
+		{
+			cmd[j] = 0;
+			break;
+		}
+	printf(cmd);
+	g_fileloc.add_searchdir(cmd, MAX_DIRS-2);
 #endif
 }
