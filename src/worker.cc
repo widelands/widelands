@@ -2565,12 +2565,13 @@ void Worker::leavebuilding_update(Game* g, State* state)
 	}
 
 	molog("[leavebuilding]: Leave (%s)\n", state->ivar1 ? "change location" : "stay in location");
-	start_task_forcemove(g, WALK_SE, get_descr()->get_right_walk_anims(does_carry_ware()));
 
 	if (state->ivar1)
 	{
 		set_location(building->get_base_flag());
 	}
+
+	start_task_forcemove(g, WALK_SE, get_descr()->get_right_walk_anims(does_carry_ware()));
 }
 
 
