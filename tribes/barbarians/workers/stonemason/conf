@@ -6,6 +6,7 @@ menu_pic=stonemason_menu.png
 program=cut
 
 [buildcost]
+pick=1
 carrier=1
 
 [cut]

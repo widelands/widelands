@@ -1,6 +1,6 @@
 [global]
 descname=Bakingtray
-help=
+help=The bakingtray is the tool of the baker, each baker needs its own. It is produced in the metallworks like all tools.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png

@@ -1,6 +1,6 @@
 [global]
 descname=Warriors Axe
-help=
+help=The Warriors Axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerfull axes. Build at the axefactory.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
@@ -11,6 +11,6 @@ pics=idle.png
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
-hot_spot_x=8
+hot_spot_x=7
 hot_spot_y=11
 

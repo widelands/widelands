@@ -10,6 +10,7 @@ menu_pic=baker_menu.png
 # given direction
 
 [buildcost] 
+bakingtray=1
 carrier=1
 
 # The normal idle animation (non-directional)

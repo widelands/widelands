@@ -18,12 +18,13 @@ meat=4
 
 
 [work]
-0=sleep 30000
+0=sleep 15000
 1=check pittabread
 2=check fish,meat
 3=consume pittabread
 4=consume fish,meat
-5=produce ration
+5=animation working 20000
+6=produce ration
 
 [buildcost]
 trunk=2

@@ -6,6 +6,7 @@ menu_pic=ranger_menu.png
 program=plant
 
 [buildcost]
+shovel=1
 carrier=1
 
 # Here come the animations

@@ -12,7 +12,7 @@ program=work
 trunk=4
 
 [work]
-0=sleep 11000		# sleep the given amount of time
+0=sleep 16000		# sleep the given amount of time
 1=worker plant		# cause the worker to run the 'plant' program
 
 

@@ -1,6 +1,6 @@
 [global]
 descname=Sharp Axe
-help=
+help=Real warriors consider the Sharp axe the first real weapon, after being able to handle an ordinary axe, this weapon is tackled. It is heavier and sharper than the ordinary axe. Build in the axefactory.
 menu_pic=menu.png
 queue_full_pic=queue_full.png
 queue_empty_pic=queue_empty.png
