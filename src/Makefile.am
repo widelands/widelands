@@ -1,4 +1,4 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -UDONT_USE_ASM -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -g -fprofile-arcs -pg
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -UDONT_USE_ASM -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 # -g -fprofile-arcs -pg
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
 CXXFLAGS= $(EXTRA_FLAGS)
@@ -6,7 +6,7 @@ CXXFLAGS= $(EXTRA_FLAGS)
 # EXTRA_DIST=worlds pics 
 
 bin_PROGRAMS=widelands
-widelands_LDADD = @SDL_LIBS@ -lefence 
+widelands_LDADD = @SDL_LIBS@  # -lefence 
 widelands_SOURCES=main.cc \
 						unix_m.cc \
 						os.h \

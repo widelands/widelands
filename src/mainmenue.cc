@@ -48,7 +48,7 @@ void main_menue(void) {
 		  setup_ui();
 
 		  // make a window
-//		  Window* win=g_ui.create_window(0,0,320,320, Window::FLAT);
+		  Window* win=g_ui.create_window(0,0,320, 320);
 /*		  Pic* p = new Pic;
 		  p->load("/home/sirver/.widelands/pics/s2.bmp");
 		  win->set_new_bg(p);
@@ -64,7 +64,7 @@ void main_menue(void) {
 		  c.start();
 		  while(!g_ip.should_die()) {
 					 g_ip.handle_pending_input(); 
-					 if(c.get_ticks()> 250) {
+					 if(c.get_ticks()> 500) {
 								g_ui.draw();
 								g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
 								g_gr.update_screen(); // g_gr.update_quarter();

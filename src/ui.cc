@@ -147,14 +147,15 @@ void Window::draw(void) {
 					 draw_pic(&r_border, x+w-CORNER, i, 0, CORNER, CORNER, h+y-CORNER-i);
 					 draw_pic(&r_border, x+w-CORNER, y+h-CORNER-CORNER, 0, r_border.get_h()-CORNER, CORNER, CORNER);
 
+
 					 // bg
-					 for(j=y+CORNER; (int)j<(int)((h+y)-CORNER-CORNER-usebg->get_h()); j+=usebg->get_h()) {
-								for(i=x+CORNER; (int)i<(int)((x+w)-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
+					 for(j=y+CORNER; (int)j<=(int)((h+y)-CORNER-CORNER-usebg->get_h()); j+=usebg->get_h()) {
+								for(i=x+CORNER; (int)i<=(int)((x+w)-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
 										  draw_pic(usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
 								} 
 								draw_pic(usebg, i, j, 0, 0, w+x-i-CORNER, usebg->get_h());
 					 }
-					 for(i=x+CORNER; (int)i<(int)((w+x)-CORNER-usebg->get_w()); i+=usebg->get_w()) {
+					 for(i=x+CORNER; (int)i<=(int)((w+x)-CORNER-usebg->get_w()); i+=usebg->get_w()) {
 								draw_pic(usebg, i, j, 0, 0, usebg->get_w(), y+h-j-CORNER);
 					 } 
 					 draw_pic(usebg, i, j, 0, 0, w+x-i-CORNER, y+h-j-bot.get_h());
@@ -282,7 +283,12 @@ Window*  User_Interface::create_window(const unsigned int x, const unsigned int 
 		  if(f==Window::FLAT) {
 					 win=new Window(x, y, w, h, f);
 		  } else {
-					 assert(0 && "TODO!!");
+					 unsigned int get_b=Window::get_border();
+					 unsigned int mw=w+get_b;
+					 unsigned int mh=h+get_b;
+					 if(x+mw > g_gr.get_xres()) mw=g_gr.get_xres();
+					 if(y+mh > g_gr.get_yres()) mh=g_gr.get_yres(); 
+					 win= new Window(x, y, mw, mh, f);
 		  }
 
 		  last->w=win;

@@ -126,8 +126,7 @@ class Window {
 					 // The next two functions are there to get the different between asked window size and given window size
 					 // Ex: you want a 100x100 window. Now, the User_Interface class makes sure that border widths and top,bottom heights
 					 // are added to the size and still the window musn't leave the screen on any edges.
-					 inline unsigned int get_borderw(void) { return (l_border.get_w()+r_border.get_w()); }
-					 inline unsigned int get_borderh(void) { return (top.get_h()+bot.get_h()); }
+					 inline const static unsigned int get_border(void) { return (CORNER<<1); }
 
 					 // inline functions to get some informations
 					 inline unsigned int get_xpos(void) { return x; }
