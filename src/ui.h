@@ -31,7 +31,10 @@
  * 			class Graph::Pic
  * 			class Font_Handler
  */
-#define BUTTON_EDGE_BRIGHT_FACTOR 60 
+#define BUTTON_EDGE_BRIGHT_FACTOR 60
+#define MOUSE_OVER_BRIGHT_FACTOR  15
+typedef void (*BUT_FUNC)(void*);
+
 class Button {
 		  Button(const Button&);
 		  Button& operator=(const Button&);
@@ -41,7 +44,6 @@ class Button {
 										  const unsigned int);
 					 ~Button();
 
-					 void set_text(const char*) ;
 					 void set_pic(Pic*);
 					 void draw();
 
@@ -55,9 +57,25 @@ class Button {
 					  */
 					 static void set_bg(Pic* p, unsigned int n) { 
 								assert(n<3); 
-								if(n==0) bg0=*p; 
-								if(n==1) bg1=*p;
-								if(n==2) bg2=*p;
+								Pic* ep;
+								
+								if(n==0) { bg0=*p; bg0e=*p; ep=&bg0e;}
+								if(n==1) { bg1=*p; bg1e=*p; ep=&bg1e; }
+								if(n==2) { bg2=*p; bg2e=*p; ep=&bg2e; }
+								
+							
+								
+								unsigned int mx, my;
+								unsigned short clr;
+								for(my=0; my<(p->get_h()); my++) {
+										  mx=0;
+										  clr=p->get_pixel(mx, my);
+										  ep->set_pixel(mx,my, Graph::bright_up_clr(clr, MOUSE_OVER_BRIGHT_FACTOR));
+										  for(mx=1; mx<p->get_w(); mx++) {
+													 clr=p->get_npixel();
+													 ep->set_npixel(Graph::bright_up_clr(clr, MOUSE_OVER_BRIGHT_FACTOR));
+										  }
+								}
 					 }
 
 					 /** static unsigned int Button::get_border(void) 
@@ -68,12 +86,50 @@ class Button {
 					  * Returns: width in pixel of button borders
 					  */
 					 static unsigned int get_border(void) { return 4; }
+					
+					 /** void register_func(BUT_FUNC f, void* arg)
+					  *
+					  * This funtion registers the click func for this button
+					  *
+					  * Args:	f func to use
+					  * 			a	user definde argument given to the function
+					  * returns: Nothing
+					  */
+					 void register_func(BUT_FUNC f, void* arg) {
+								func=f;
+								funca=arg;
+					 }
+
+					 /** void run(void) 
+					  *
+					  * This runs the registered button func (if any) 
+					  *
+					  * Args:	none
+					  * Returns: Nothing
+					  */
+					 void run(void) {
+								if(func) 
+										  func(funca);
+					 }
+
+					 // some functions to set informations and to get informations
+					 inline void set_bright(const bool b) { if(benlighted!=b) { benlighted=b; draw(); }  }
+					 inline void set_pressed(const bool b) { if(bpressed!=b) { bpressed=b; draw() ; } }
+					 inline unsigned int get_xpos(void) { return x+xp; }
+					 inline unsigned int get_ypos(void) { return y+yp; }
+					 inline unsigned int get_w(void) { return w; }
+					 inline unsigned int get_h(void) { return h; }
+					 inline bool is_pressed(void) { return bpressed; } 
 					 
 		  private:
 					 bool bpressed;
-					 static Pic bg0, bg1, bg2;
+					 bool	benlighted;
+					 static Pic bg0, bg1, bg2, bg0e, bg1e, bg2e;
 					 unsigned int x, y, w, h, xp, yp;
-					 Pic* mybg;
+					 BUT_FUNC func; 
+					 void* funca;
+					 
+					 Pic* mybg, *myebg;
 					 Pic* dp;
 					 Pic* myp;
 };
@@ -114,6 +170,7 @@ class Textarea {
 					  * Returns:	nothing
 					  */
 					 static void set_font(unsigned int n) { nfont=n; }
+
 					 
 		  private: 
 					 static unsigned int nfont;
@@ -151,6 +208,9 @@ class Textarea {
 // width/height to use as the corner
 #define CORNER			20
 #define MIDDLE			(MUST_HAVE_NPIX-(CORNER*2))
+
+#define MAX_BUT 100  // these values don't get checked. you better don't ignore them
+#define MAX_TA   40	 
 
 class Window {
 		  // Copy is non trivial and shouldn't be needed
@@ -192,10 +252,10 @@ class Window {
 					 inline unsigned int get_ypos(void) { return y; }
 					 inline unsigned int get_w(void) { return w; }
 					 inline unsigned int get_h(void) { return h; }
+					 inline Flags get_flags(void) { return myf; }					 
 					 
-					 
-					 void handle_click(const unsigned int, const unsigned int); // TODO
-					 void handle_mmove(const unsigned int, const unsigned int); // TODO
+					 int handle_click(const unsigned int, const bool, const unsigned int, const unsigned int);
+					 int handle_mm(const unsigned int, const unsigned int, const bool, const bool);
 					 void draw(void);	
 					 void set_new_bg(Pic* p);
 					 
@@ -262,13 +322,16 @@ class User_Interface : public Singleton<User_Interface> {
 		  void delete_window(Window*); 
 		  void move_window(Window*, const unsigned int, const unsigned int);
 		  void draw(void);
-					 
+		  int handle_mm(const unsigned int, const unsigned int, const int, const int, const bool, const bool, void*);
+		  int handle_click(const unsigned int, const bool, const unsigned int, const unsigned int, void* );
+
 		  private:
 		  struct win_p {
 					 win_p* next; 
 					 win_p* prev; 
 					 Window* w;
 		  };
+		  Window* dragwin;
 		  
 		  win_p* first;
 		  win_p* last;

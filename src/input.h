@@ -20,9 +20,9 @@
 #ifndef __S__INPUT_H
 #define __S__INPUT_H
 
-typedef void (*MOUSE_CLICK_FUNCTION)(const bool, const unsigned int, const unsigned int, void*);
-typedef void (*MOUSE_MOVE_FUNCTION)(const unsigned int, const unsigned int, const signed int, const signed int, const bool, const bool, void*);
-typedef void (*KBD_HANDLER)(const char*, void*);
+typedef int (*MOUSE_CLICK_FUNCTION)(const bool, const unsigned int, const unsigned int, void*);
+typedef int (*MOUSE_MOVE_FUNCTION)(const unsigned int, const unsigned int, const signed int, const signed int, const bool, const bool, void*);
+typedef int (*KBD_HANDLER)(const char*, void*);
 
 #include "singleton.h"
 
@@ -34,6 +34,8 @@ typedef void (*KBD_HANDLER)(const char*, void*);
  *
  * It's a singleton
  */
+#define INPUT_HANDLED 0
+#define INPUT_UNHANDLED -1
 class Input : public Singleton<Input> {
 		  Input(const Input&);
 		  Input& operator=(const Input&);

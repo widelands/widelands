@@ -19,6 +19,7 @@
 
 #include "ui.h"
 #include "font.h"
+#include "input.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -71,10 +72,10 @@ Window::Window(const unsigned int px, const unsigned int py, const unsigned int 
 		  myf=f;
 					 
 		  nta=0;
-		  ta=(Textarea**) malloc(sizeof(Textarea*));
+		  ta=(Textarea**) malloc(sizeof(Textarea*)*MAX_TA);
 		
 		  nbut=0;
-		  but=(Button**) malloc(sizeof(Button*));
+		  but=(Button**) malloc(sizeof(Button*)*MAX_BUT);
 
 		  winpic=new Pic();
 		  winpic->set_size(w, h);
@@ -121,6 +122,7 @@ Window::~Window(void) {
  */
 void Window::set_pos(unsigned int posx, unsigned int posy) {
 		  x=posx; y=posy;
+		  draw();
 }
 					 
 /** Textarea Window::create_textarea(const unsigned int px, const unsigned int py, const char* t ,  Textarea::Align a = Textarea::LEFTA)
@@ -150,9 +152,8 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
 		  ta[nta]->draw();
 		  nta++;
 
-		  ta=(Textarea**) realloc(ta, sizeof(Textarea*)*nta);
-		 
-		  
+		  assert(nta<MAX_TA);
+
 		  return ta[nta-1];
 }
   
@@ -179,8 +180,8 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
 		  ta[nta]=new Textarea(px, mypy, rw, a, winpic, add>>1, add>>1);
 		  nta++;
 
-		  ta=(Textarea**) realloc(ta, sizeof(Textarea*)*nta);
-		  
+		  assert(nta<MAX_TA);
+
 		  return ta[nta-1];
 }
 
@@ -299,8 +300,8 @@ Button* Window::create_button(const unsigned int px, const unsigned int py, cons
 		  but[nbut]=new Button(mypx, mypy, myw, myh, bg, winpic, add>>1, add>>1);
 		  nbut++;
 
-		  but=(Button**) realloc(but, sizeof(Button*)*nbut);
-		  
+		  assert(nbut<MAX_BUT);
+
 		  return but[nbut-1];
 }
 
@@ -314,6 +315,7 @@ Button* Window::create_button(const unsigned int px, const unsigned int py, cons
  */
 void Window::draw(void) {
 		  Graph::draw_pic(winpic, x, y, 0, 0, w, h);
+		  g_gr.needs_update();
 }
 					 
 /** void Window::set_new_bg(Pic* p);
@@ -331,7 +333,75 @@ void Window::set_new_bg(Pic* p) {
 
 		  redraw_win();
 }
+					 
+/** int Window::handle_mm(const unsigned int x, const unsigned int y, const bool b1, const bool b2)
+ *
+ * This func cares for mouse movements
+ *
+ * Args:	x	xpos in window
+ * 		y	ypos in window
+ * 		b1, b2	state of the mouse buttons
+ * Returns: INPUT_HANDLED or -1
+ */
+int Window::handle_mm(const unsigned int x, const unsigned int y, const bool b1, const bool b2) {
+		  unsigned int i;
+		  
+		  // check for buttons
+		  for(i=0; i<nbut; i++) {
+					 if(but[i]->get_xpos()<x && but[i]->get_xpos()+but[i]->get_w()>x &&
+										  but[i]->get_ypos()<y && but[i]->get_ypos()+but[i]->get_h()>y) {
+								// is inside!
+								but[i]->set_bright(true);
+								but[i]->set_pressed(b1);
+					 } else {
+								but[i]->set_bright(false);
+								but[i]->set_pressed(false);
+					 }
+		  }
+					 
 
+		  // we do not care for ta, because they are non responsive to mouse movements or clicks
+		  
+		  return INPUT_UNHANDLED;
+}
+
+/** int Window::handle_click(const unsigned int pbut, const bool b, const unsigned int x, const unsigned int y) 
+ *
+ * This cares for mouseclicks into the window
+ *
+ * Args:	pbut	1 / 2
+ * 		b		true if pressed, false if released
+ * 		x, y	position in window
+ *
+ * Returns: INPUT_HANDLED, or INPUT_UNHANDLED
+ */
+int Window::handle_click(const unsigned int pbut, const bool b, const unsigned int x, const unsigned int y) {
+		  if(pbut==2) return INPUT_UNHANDLED; // we do not react on this
+		  unsigned int i;
+
+		  
+		  // check buttons
+		  for(i=0; i<nbut; i++) {
+					 if(but[i]->get_xpos()<x && but[i]->get_xpos()+but[i]->get_w()>x &&
+										  but[i]->get_ypos()<y && but[i]->get_ypos()+but[i]->get_h()>y) {
+								// is inside!
+								if(but[i]->is_pressed() && !b) {
+										  // button was pressed, mouse is now released over the button
+										  // Run the button func!
+										  but[i]->run();
+								}
+								but[i]->set_pressed(b);
+					 } else {
+								but[i]->set_pressed(false);
+					 }
+		  }
+			 
+		  
+
+		  // we do not care for textareas, they are unresponsive to clicks
+		  
+		  return INPUT_UNHANDLED;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -360,9 +430,79 @@ User_Interface::User_Interface(void) {
 		  first->next=0;
 		  first->prev=0;
 		  first->w=0;
-
+		  dragwin=0;
+		  
 		  last=first;
 }
+		  
+/** int User_Interface::handle_click(const unsigned int but, const bool b, const unsigned int x, const unsigned int y, void* a);
+ *
+ * This functions cares for clicks on the User_Interface
+ *
+ * Args:	but	1 / 2
+ * 		b		true if pressed, false if released
+ * 		x, y	position on the screen
+ * 		a 		user defined argument
+ * Returns: INPUT_HANDLED / INPUT_UNHANDLED
+*/
+int User_Interface::handle_click(const unsigned int but, const bool b, const unsigned int x, const unsigned int y, void* a) {
+
+		  
+		  // Check every window
+		  for(win_p* p=first; p &&  p->w; p=p->next) {
+					 if(p->w->get_xpos()<x && p->w->get_xpos()+p->w->get_w()>x &&
+										  p->w->get_ypos()<y && p->w->get_ypos()+p->w->get_h()>y) {
+								// Mouse is inside this window. 
+								if(p->w->get_flags() != Window::FLAT && but==2) delete_window(p->w);
+								if(p->w->handle_click(but, b, x-p->w->get_xpos(), y-p->w->get_ypos()) == INPUT_UNHANDLED) {
+										  if(p->w->get_flags() != Window::FLAT && b && but==1) {					 
+													 dragwin=p->w;
+													 return INPUT_HANDLED;
+										  }
+								} else return INPUT_HANDLED;
+					 }
+		  }
+
+		  return INPUT_UNHANDLED;
+}
+  
+
+/** int User_Interface::handle_mm(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, void* a);
+ *
+ * This function cares for a mouse move over the windows. It's also responsible for dragging (read: moving) the
+ * windows.
+ *
+ * Args:	x	x click on screen
+ * 		y	y click on screen
+ * 		xdiff	difference since last movement
+ * 		ydiff	difference since last movement
+ * 		b1, b2	true or false, depends if buttons are pressed or not
+ * 		a	user defined argument
+ * Returns: INPUT_HANDLED or -1
+ */
+int User_Interface::handle_mm(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, void* a) {
+		  if(b1 && dragwin) {
+					 move_window(dragwin, dragwin->get_xpos()+xdiff, dragwin->get_ypos()+ydiff);
+					 return INPUT_HANDLED;
+		  }
+
+		  // Check every window
+		  for(win_p* p=first; p &&  p->w; p=p->next) {
+					 if(p->w->get_xpos()<x && p->w->get_xpos()+p->w->get_w()>x &&
+										  p->w->get_ypos()<y && p->w->get_ypos()+p->w->get_h()>y) {
+								// Mouse is inside this window. 
+								if(p->w->handle_mm(x-p->w->get_xpos(), y-p->w->get_ypos(), b1, b2) == INPUT_UNHANDLED) {
+										  if(p->w->get_flags() != Window::FLAT && b1) {					 
+													 dragwin=p->w;
+													 return INPUT_HANDLED;
+										  }
+								}
+					 }
+		  }
+
+		  return -1;
+}
+
 
 /** User_Interface::~User_Interface(void) 
  *
@@ -655,6 +795,9 @@ void Textarea::draw(void) const {
 Pic Button::bg0;
 Pic Button::bg1;
 Pic Button::bg2;
+Pic Button::bg0e;
+Pic Button::bg1e;
+Pic Button::bg2e;
 
 /** Button::Button(const unsigned int mx, const unsigned int my, const unsigned int mw, const unsigned int mh, const unsigned int bg, Pic* mdp, 
  * 		const unsigned int addx, const unsigned int addy);
@@ -680,9 +823,9 @@ Button::Button(const unsigned int mx, const unsigned int my, const unsigned int 
 		  h=mh;
 		  w=mw;
 
-		  if(bg==0) mybg=&bg0;
-		  if(bg==1) mybg=&bg1;
-		  if(bg==2) mybg=&bg2;
+		  if(bg==0) { mybg=&bg0; myebg=&bg0e; }
+		  if(bg==1) { mybg=&bg1; myebg=&bg1e; } 
+		  if(bg==2) { mybg=&bg2; myebg=&bg2e; }
 
 		  dp=mdp;
 		  xp=addx;
@@ -691,6 +834,10 @@ Button::Button(const unsigned int mx, const unsigned int my, const unsigned int 
 		  myp=0;
 
 		  bpressed=false;
+		  benlighted=false;
+
+		  func=0;
+		  funca=0;
 
 		  draw();
 }
@@ -704,6 +851,25 @@ Button::Button(const unsigned int mx, const unsigned int my, const unsigned int 
  */
 Button::~Button(void) {
 		  if(myp) delete myp;
+		  if(funca) free(funca);
+		  g_gr.needs_update();
+}
+					 
+
+/** void Button::set_pic(Pic* p) 
+ *
+ * This sets the button picture
+ *
+ * Args:	p	picture to set
+ * Returns: Nothing
+ */
+void Button::set_pic(Pic* p) {
+		  assert(p);
+
+		  if(myp) delete myp;
+		  myp=p;
+
+		  draw();
 		  g_gr.needs_update();
 }
 
@@ -717,9 +883,22 @@ Button::~Button(void) {
 void Button::draw(void) {
 		  unsigned int j;
 		  unsigned short clr;
-		  
-		  copy_pic(dp, mybg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
-		  
+		 
+		  if(!benlighted || bpressed) {
+					 copy_pic(dp, mybg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
+		  } else {
+					 copy_pic(dp, myebg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
+		  }
+		 
+
+		  // if we got a picture, draw it
+		  if(myp) {
+					 // we simply center it, without checkin
+					 unsigned int mw = myp->get_w() > w ? w : myp->get_w();
+					 unsigned int mh = myp->get_h() > h ? h : myp->get_h();
+
+					 copy_pic(dp, myp, (x+xp+(w>>1))-(mw>>1), (y+yp+(h>>1))-(mh>>1), 0, 0, mw, mh);
+		  }
 		  
 		  // draw the borders
 
@@ -819,6 +998,7 @@ void Button::draw(void) {
 
  
 		  }
+		 
 		  g_gr.needs_update();
 }
 		  

@@ -34,16 +34,27 @@
 #include <string.h>
 
 
-void click(const bool b, const unsigned int x, const unsigned int y, void* ) {
-		 exit(0);
+int click(const bool b, const unsigned int x, const unsigned int y, void* ) {
+		  if(g_ui.handle_click(1, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
+		  return INPUT_HANDLED;
 }
 
-void mcf1(const bool b, const unsigned int x, const unsigned int y, void*) {
+int mcf1(const bool b, const unsigned int x, const unsigned int y, void*) {
+		  if(g_ui.handle_click(2, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED; 
+		  return INPUT_HANDLED;
 }
 
-void mmf(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, 
+int mmf(const unsigned int x, const unsigned int y, const int xdiff, const int ydiff, const bool b1, const bool b2, 
 					 void* ) {
+		  if(g_ui.handle_mm(x, y, xdiff, ydiff, b1, b2, NULL) == INPUT_HANDLED) return INPUT_HANDLED;
 		  g_gr.needs_update();
+
+		  return INPUT_HANDLED;
+}
+
+void do_exit(void* ) {
+
+		  exit(0);
 }
 
 /** void main_menue(void);
@@ -85,9 +96,34 @@ void main_menue(void) {
 		  win->create_textarea(640, 480, buf, Textarea::RIGHTA);
 		  win->create_textarea(0, 480, "(C) 2002 by the Widelands Development Team"); 
 
+		  // Create the buttons
 		  Button* b;
-		  b=win->create_button(0, 0, 75, 75, 1);
+		  b=win->create_button(60, 150, 170, 20, 1);
+		  // b->set_func(single_player, 0);
+		  b->set_pic(g_fh.get_string("Single Player", 0));
+		  
+		  b=win->create_button(60, 190, 170, 20, 1);
+		  // b->set_func(single_player, 0);
+		  b->set_pic(g_fh.get_string("Multi Player", 0));
+		  
+		  b=win->create_button(60, 230, 170, 20, 1);
+		  // b->set_func(single_player, 0);
+		  b->set_pic(g_fh.get_string("Options", 0));
+		 
+		  b=win->create_button(60, 270, 170, 20, 1);
+		  // b->set_func(single_player, 0);
+		  b->set_pic(g_fh.get_string("View Readme", 0));
+		  
+		  b=win->create_button(60, 310, 170, 20, 1);
+		  // b->set_func(single_player, 0);
+		  b->set_pic(g_fh.get_string("About", 0));
+		  
 
+		  
+		  b=win->create_button(60, 370, 170, 20, 0);
+		  b->register_func(do_exit, NULL);
+		  b->set_pic(g_fh.get_string("Exit Game", 0));
+		  
 		  // Register the resposible mouse funtions
 		  g_ip.register_mcf(click, Input::BUT1);
 		  g_ip.register_mcf(mcf1, Input::BUT2);
