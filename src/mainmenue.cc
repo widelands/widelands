@@ -80,10 +80,11 @@ void main_menue(void) {
 		  win->set_new_bg(p);		 
 		  // Create the different areas
 		  char buf[100];
-		  strcpy(buf, "Version: ");
+		  strcpy(buf, "Version ");
 		  strcat(buf, VERSION);
 		  win->create_textarea(640, 480, buf, Textarea::RIGHTA);
-
+		  win->create_textarea(0, 480, "(C) 2002 by the Widelands Development Team"); 
+		  
 		  // Register the resposible mouse funtions
 		  g_ip.register_mcf(click, Input::BUT1);
 		  g_ip.register_mcf(mcf1, Input::BUT2);

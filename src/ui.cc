@@ -167,10 +167,11 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
 		  if(myf!=FLAT) add=get_border();
 		 
 		  int rw=myw;
-		  
+		  int mypy=py;
 		  if(px+add+rw > w) rw=w-add-px;
-		  
-		  ta[nta]=new Textarea(px, py, rw, a, winpic, add>>1, add>>1);
+		  if(py+add+FONT_H > h) mypy=h-FONT_H;
+
+		  ta[nta]=new Textarea(px, mypy, rw, a, winpic, add>>1, add>>1);
 		  nta++;
 
 		  ta=(Textarea**) realloc(ta, sizeof(Textarea*)*nta);
@@ -524,9 +525,8 @@ Textarea::Textarea(const unsigned int px, const unsigned int py, const char* t, 
 Textarea::Textarea(const unsigned int px, const unsigned int py, const unsigned int myw, const Align a, Pic* mdp, const unsigned int addx, 
 					 const unsigned int addy) {
 		 
+		  
 		  txt=0; 
-		  x=px; 
-		  y=py; 
 		  w=myw; 
 		  h=FONT_H;
 		  dp=mdp;
@@ -534,6 +534,8 @@ Textarea::Textarea(const unsigned int px, const unsigned int py, const unsigned 
 
 		  xp=addx;
 		  yp=addy;
+		  x=px;
+		  y=py;
 }
 
 /** void Textarea::set_text(const char* str)
@@ -587,6 +589,7 @@ void Textarea::draw(void) const {
 					 // Never here!!
 					 assert(0);
 		  }
+
 		  Graph::copy_pic(dp, txt, posx, yp+y, 0, 0, myw, h);
 		  
 		  g_gr.needs_update();
