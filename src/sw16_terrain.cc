@@ -316,7 +316,7 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 			tx=tx1;
 			ty=ty1;
 
-			if (ix2>=w) ix2=w-1;
+			if (ix2>w) ix2=w;
 			if (ix1<0) {
 				b-=ix1*db;
 				tx-=ix1*dtx;
@@ -328,7 +328,7 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 
 			unsigned short *scanline=dst->pixels + y*dst->pitch + ix1;
 
-			while (count-- >= 0) {
+			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
 
 				*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
@@ -373,6 +373,10 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 	x1=x2=itofix(p3->x);
 	dx1=-(itofix(p1->x) - x1) / (p1->y - y2);
 	dx2=-(itofix(p2->x) - x1) / (p2->y - y2);
+	
+	// this may seem redundant but reduces rounding artifacts
+	x1=itofix(p1->x) + dx1*(p1->y-y2);
+	x2=itofix(p2->x) + dx2*(p2->y-y2);
 
 	b1=itofix(p3->b);
 	db1=-(itofix(p1->b) - b1) / (p1->y - y2);
@@ -392,7 +396,7 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 			tx=tx1;
 			ty=ty1;
 
-			if (ix2>=w) ix2=w-1;
+			if (ix2>w) ix2=w;
 			if (ix1<0) {
 				b-=ix1*db;
 				tx-=ix1*dtx;
@@ -404,7 +408,7 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 
 			unsigned short *scanline=dst->pixels + y*dst->pitch + ix1;
 
-			while (count-- >= 0) {
+			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
 
 				*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
@@ -710,7 +714,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 			Field * const lf, Field * const ft,
 	                const int posx, const int rposx, const int posy,
 	                const int blposx, const int rblposx, const int blposy,
-	                uchar roads, bool render_r, bool render_b)
+	                uchar roads, uchar darken)
 {
 	Vertex r, l, br, bl;
 
@@ -719,33 +723,27 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	br = Vertex(rblposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(rfl->get_height()), rfl->get_brightness(), 0, 64);
 	bl = Vertex(blposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(fl->get_height()), fl->get_brightness(), 64, 64);
 
-/*
-	r.b += 20; // debug override for shading (make field borders visible)
-	bl.b -= 20;
-*/
+	if (darken&1) l.b=-128;
+	if (darken&2) r.b=-128;
+	if (darken&4) bl.b=-128;
+	if (darken&8) br.b=-128;
 
-//	render_r=false; // debug overwrite: just render b triangle
-//	render_b=false; // debug overwrite: just render r triangle
-
-   Bitmap* rt_normal = get_graphicimpl()->get_road_texture(Road_Normal);
-   Bitmap* rt_busy = get_graphicimpl()->get_road_texture(Road_Busy);
+	Bitmap* rt_normal = get_graphicimpl()->get_road_texture(Road_Normal);
+	Bitmap* rt_busy = get_graphicimpl()->get_road_texture(Road_Busy);
 
 	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
-	if(render_r && rtex)
-		render_triangle(this, &r, &l, &br, rtex);
-
 	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
-	if(render_b && btex)
-		render_triangle(this, &l, &br, &bl, btex);
-
 	Texture* ltex = get_graphicimpl()->get_maptexture_data(lf->get_terr()->get_texture());
 	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd()->get_texture());
+
+	render_triangle(this, &r, &l, &br, rtex);
+	render_triangle(this, &l, &br, &bl, btex);
 
 	// Render roads and dither polygon edges
 	uchar road;
 
 	road = (roads >> Road_East) & Road_Mask;
-	if (render_r) {
+	if ((darken&3)!=3) {
       if (road) {
          switch(road) {
             case Road_Normal: render_road_horiz(this, l, r, rt_normal); break; 
@@ -757,9 +755,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 			dither_edge_horiz(this, l, r, rtex, ttex);
 	}
 
-	// FIXME: this will try to work on some undiscovered terrain
 	road = (roads >> Road_SouthEast) & Road_Mask;
-	if (render_r || render_b) {
+	if ((darken&9)!=9) {
       if (road) {
          switch(road) {
             case Road_Normal: render_road_vert(this, l, br, rt_normal); break; 
@@ -772,7 +769,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	}
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
-	if (render_b) {
+	if ((darken&5)!=5) {
 		if (road) {
          switch(road) {
             case Road_Normal: render_road_vert(this, l, bl, rt_normal); break; 

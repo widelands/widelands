@@ -945,7 +945,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	uchar road;
 
 	road = (roads >> Road_East) & Road_Mask;
-	if (!(darken&3)) {
+	if ((darken&3)!=3) {
       if (road) {
          switch(road) {
             case Road_Normal: render_road_horiz(this, l, r, rt_normal); break; 
@@ -959,7 +959,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 
 	// FIXME: this will try to work on some undiscovered terrain
 	road = (roads >> Road_SouthEast) & Road_Mask;
-	if (!(darken&9)) {
+	if ((darken&9)!=9) {
       if (road) {
          switch(road) {
             case Road_Normal: render_road_vert(this, l, br, rt_normal); break; 
@@ -972,7 +972,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	}
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
-	if (!(darken&5)) {
+	if ((darken&5)!=5) {
 		if (road) {
          switch(road) {
             case Road_Normal: render_road_vert(this, l, bl, rt_normal); break; 

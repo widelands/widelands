@@ -619,7 +619,7 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 	dst.hasclrkey = false; // should be irrelevant
 
 	// Completely clear the window
-	dst.clear();
+//	dst.clear();
 
 	// Actually draw the map. Loop through fields row by row
 	// For each field, draw ground textures, then roads, then immovables
@@ -685,8 +685,9 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 		while(count--) {
 			FCoords br, r, l, tr;
 			int rposx, brposx, lposx, trposx;
-			bool render_r=true;
-			bool render_b=true;
+			uchar darken=0;
+//			bool render_r=true;
+//			bool render_b=true;
 
 			map->get_rn(f, &r);
 			rposx = posx + FIELD_WIDTH;
@@ -701,6 +702,13 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 			trposx = tlposx + FIELD_WIDTH;
 
 			if (visibility) {
+				if (!(*visibility)[f.y*mapwidth + f.x]) darken|=1;
+				if (!(*visibility)[r.y*mapwidth + r.x]) darken|=2;
+				if (!(*visibility)[bl.y*mapwidth + bl.x]) darken|=4;
+				if (!(*visibility)[br.y*mapwidth + br.x]) darken|=8;
+			}
+
+/*			if (visibility) {
 				if (!(*visibility)[f.y*mapwidth + f.x] ||
 					 !(*visibility)[br.y*mapwidth + br.x]) {
 					render_r=false;
@@ -711,17 +719,15 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 					if(!(*visibility)[r.y*mapwidth + r.x])
 						render_r=false;
 				}
-			}
+			}*/
 
 			// Render stuff that belongs to ground triangles
-			if (render_b || render_r) {
-				uchar roads = f.field->get_roads();
+			uchar roads = f.field->get_roads();
 
-				roads |= egbase->get_map()->get_overlay_manager()->get_road_overlay(f);
+			roads |= egbase->get_map()->get_overlay_manager()->get_road_overlay(f);
 
-				dst.draw_field(f.field, r.field, bl.field, br.field, l.field, tr.field,
-						posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
-			}
+			dst.draw_field(f.field, r.field, bl.field, br.field, l.field, tr.field,
+				posx, rposx, posy, blposx, brposx, bposy, roads, darken);
 
          // Render stuff that belongs to the field node
 			if (!visibility || (*visibility)[f.y*mapwidth + f.x])

@@ -154,7 +154,7 @@ void Computer_Player::think ()
 	if (!buildable_fields.empty() && buildable_fields.front().next_update_due<=game->get_gametime()) {
 		update_buildable_field (buildable_fields.front());
 		
-		buildable_fields.front().next_update_due=game->get_gametime() + 2000;
+		buildable_fields.front().next_update_due=game->get_gametime() + 750;
 		buildable_fields.push_back (buildable_fields.front());
 		buildable_fields.pop_front ();
 	}
@@ -182,14 +182,14 @@ void Computer_Player::think ()
 	
 	// wait a moment so that all fields are classified
 	if (next_construction_due==0)
-	    next_construction_due=game->get_gametime() + 4000;
+	    next_construction_due=game->get_gametime() + 3000;
 	
 	// now build something if possible
 	if (next_construction_due<=game->get_gametime()) {
-	    next_construction_due=game->get_gametime() + 1000;
+	    next_construction_due=game->get_gametime() + 1500;
 	
 	    if (construct_building()) {
-		inhibit_road_building=game->get_gametime() + 1500;
+		inhibit_road_building=game->get_gametime() + 2000;
 		return;
 	    }
 	}
