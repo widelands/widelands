@@ -66,7 +66,7 @@ class Cmd_Queue {
 			return c1.time > c2.time;
 		}
 	};
-	typedef std::priority_queue<Cmd, vector<Cmd>, CmdCompare> queue_t;
+	typedef std::priority_queue<Cmd, std::vector<Cmd>, CmdCompare> queue_t;
 	
    public:
       Cmd_Queue(Game *g);

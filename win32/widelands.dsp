@@ -92,6 +92,10 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;cc"
 # Begin Source File
 
+SOURCE=..\src\auto_pic.cc
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\bob.cc
 # End Source File
 # Begin Source File
@@ -125,6 +129,10 @@ SOURCE=..\src\fileloc.cc
 # Begin Source File
 
 SOURCE=..\src\game.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\graphic.cc
 # End Source File
 # Begin Source File
 
@@ -185,6 +193,10 @@ SOURCE=..\src\options.cc
 # Begin Source File
 
 SOURCE=..\src\parser.cc
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\pic.cc
 # End Source File
 # Begin Source File
 
@@ -428,27 +440,11 @@ SOURCE=..\src\worlddata.h
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\src\auto_pic.cc
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\cursor.cc
 # End Source File
 # Begin Source File
 
 SOURCE=..\src\font.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\graphic.cc
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\graphic.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\pic.cc
 # End Source File
 # End Group
 # Begin Group "ui"
@@ -531,5 +527,9 @@ SOURCE=..\src\watchwindow.cc
 SOURCE=..\src\window.cc
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=..\src\config.h.in
+# End Source File
 # End Target
 # End Project

@@ -37,13 +37,16 @@
 // florian
 /* this comes for free from the STL headers (if it doesn't in a non-glibc implementation,
    please add the necessary header(s) to widelands.h)
+
+  it does NOT come from stl in my win32 (i wouldn't have added it, would i?)
+  well i'll leave it here, as this part of code will hopefully disappear soon
+  */
 template <typename T> inline void swap(T& a, T& b)
 {
    T temp = a;
    a = b;
    b = temp;
 }
-*/
 
 struct _go
 {

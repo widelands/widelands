@@ -246,7 +246,8 @@ int Map::load_map(const char* file, Game* g)
 
    // Post process the map in the necessary two passes
 	Field *f;
-   for(uint y=0; y<hd.height; y++) {
+	uint y;
+   for(y=0; y<hd.height; y++) {
       for(uint x=0; x<hd.width; x++) {
 			f = get_field(x, y);
          recalc_brightness(x, y, f);
@@ -254,7 +255,7 @@ int Map::load_map(const char* file, Game* g)
 		}
 	}
 
-   for(uint y=0; y<hd.height; y++) {
+   for(y=0; y<hd.height; y++) {
       for(uint x=0; x<hd.width; x++) {
 			f = get_field(x, y);
 			recalc_fieldcaps_pass2(x, y, f);
@@ -273,7 +274,7 @@ int Map::load_map(const char* file, Game* g)
  *
  * Returns true if objects could be found
  */
-bool Map::find_objects(int x, int y, uint radius, uint attribute, vector<Map_Object*> *list)
+bool Map::find_objects(int x, int y, uint radius, uint attribute, std::vector<Map_Object*> *list)
 {
 	Map_Region mr(x, y, radius, this);
 	Field *f;
@@ -792,7 +793,7 @@ int Map::calc_distance(Coords a, Coords b)
  * Provides the flexible priority queue to maintain the open list.
  */
 class StarQueue {
-	vector<Map::Pathfield*> m_data;
+	std::vector<Map::Pathfield*> m_data;
 
 public:
 	StarQueue() { }

@@ -145,7 +145,7 @@ class Map {
                inline uint get_h(void) { return hd.height; }
                inline World* get_world(void) { return w; }
 					
-					bool find_objects(int x, int y, uint radius, uint attribute, vector<Map_Object*> *list);
+			   bool find_objects(int x, int y, uint radius, uint attribute, std::vector<Map_Object*> *list);
 					
 					void recalc_for_field(int fx, int fy);
                Field::Build_Symbol get_build_symbol(int x, int y);
@@ -227,7 +227,7 @@ private:
 	Map *m_map;
 	Coords m_start;
 	Coords m_end;
-	vector<char> m_path;
+	std::vector<char> m_path;
 };
 
 /*

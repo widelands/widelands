@@ -43,7 +43,7 @@ class Cursor : public Singleton<Cursor> {
 					 ~Cursor(void);
 
 					 void show_cursor(const bool);
-					 void set_pic(Pic* );
+					 void set_pic(Pic*);
 					 void draw(const uint, const uint);
 					 
 					 // some information functions
