@@ -109,7 +109,7 @@ void Conf_Reader::read_terrains()
 		};
 		char* picName = new char[1024];
 		conf->get_string(sectionName, "texture", picName, "");
-		terrain[i].texture = pics->elements();
+		terrain[i].texture = header.pictures++;
 		pics->add(picName);
 	}
 }

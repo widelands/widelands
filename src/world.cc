@@ -69,6 +69,8 @@ void World::read_header(Binary_file* file)
 
 void World::read_bobs(Binary_file* file)
 {
+	if (!bobCount)
+		return;
 	bob = new BobDesc[bobCount];
 	for (uint i=0; i<bobCount; i++)
 		file->read(&bob[i], sizeof(BobDesc));
@@ -76,6 +78,8 @@ void World::read_bobs(Binary_file* file)
 
 void World::read_textures(Binary_file* file)
 {
+	if (!textureCount)
+		return;
 	texture = new Pic*[textureCount];
 	for (uint i=0; i<textureCount; i++)
 	{
@@ -91,6 +95,9 @@ void World::read_textures(Binary_file* file)
 
 void World::read_anims(Binary_file* file)
 {
+	if (!animCount)
+		return;
+	anim = new Anim[animCount];
 	for (uint i=0; i<animCount; i++)
 	{
 		file->read(&anim[i].pics, sizeof(uint));
