@@ -10,12 +10,11 @@ program=work
 output=plank
 
 [inputs]
-plank=6
-stone=4
 log=6
 
 [work]
 0=sleep 20000
+1=consume log
 
 [buildcost]
 plank=2

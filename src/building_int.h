@@ -77,6 +77,7 @@ public:
 	uint get_nrwaresqueues() { return m_wares.size(); }
 	WaresQueue* get_waresqueue(uint idx) { return m_wares[idx]; }
 
+   
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
@@ -127,7 +128,7 @@ public:
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual Building *create_object();
-
+	
 	std::string get_worker() const { return m_worker; }
 	bool is_output(std::string name) const { return m_output.find(name) != m_output.end(); }
 	const std::set<std::string>* get_outputs() const { return &m_output; }
@@ -155,6 +156,9 @@ public:
 	virtual void remove_worker(Worker *w);
 
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
+   
+   virtual void set_economy(Economy* e);
+
 
    inline std::vector<WaresQueue*>* get_warequeues(void) { return &m_input_queues; }
 
@@ -166,6 +170,7 @@ private:
 	static void request_worker_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
 	void program_step();
+   void program_restart();
 
 private:
 	Request*		m_worker_request;
@@ -176,7 +181,7 @@ private:
 	int								m_program_phase;	// micro-step index (instruction dependent)
 	bool								m_program_timer;	// execute next instruction based on pointer
 	int								m_program_time;	// timer time
-
+   bool                       m_program_needs_restart; // program shall be restarted on next act()
    std::vector<WaresQueue*>   m_input_queues;   //  input queues for all inputs
 };
 

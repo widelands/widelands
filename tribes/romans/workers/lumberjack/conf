@@ -21,13 +21,23 @@ program=burn
 6=return										# return home
 
 [burn]
-0=findobject attrib:tree radius:12
-1=walk object
-2=animation idle 5000  # TODO: burn animation
-3=removeobject
-4=setdescription fire
+0=setdescription fire
+1=findobject attrib:tree radius:12
+2=walk object
+3=animation idle 5000  # TODO: burn animation
+4=removeobject
 5=plant
-6=return 
+6=findobject attrib:tree radius:12
+7=walk object
+8=animation idle 5000  # TODO: burn animation
+9=removeobject
+10=plant
+11=findobject attrib:tree radius:12
+12=walk object
+13=animation idle 5000  # TODO: burn animation
+14=removeobject
+15=plant
+16=return 
 
 # The normal idle animation (non-directional)
 [idle]

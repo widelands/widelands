@@ -1332,6 +1332,7 @@ struct ProductionAction {
 	enum Type {
 		actSleep,		// iparam1 = sleep time in milliseconds
 		actWorker,		// sparam1 = worker program to run
+      actConsume    // sparam1 = consume this ware, has to be an input
 	};
 
 	Type			type;
@@ -1413,7 +1414,19 @@ void ProductionProgram::parse(std::string directory, Profile* prof, std::string 
 
 			if (endp && *endp)
 				throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
-		}
+		} 
+      else if (cmd[0] == "consume") {
+         if(cmd.size() != 2) 
+            throw wexception("Line %i: Usage: consume <ware>", idx);
+
+         
+         Section* s=prof->get_safe_section("inputs");
+         if(!s->get_string(cmd[1].c_str(), 0)) 
+            throw wexception("Line %i: Ware %s is not in [inputs]\n", idx, cmd[1].c_str());
+         
+         act.type = ProductionAction::actConsume;
+         act.sparam1 = cmd[1]; 
+      }
 		else if (cmd[0] == "worker")
 		{
 			if (cmd.size() != 2)
@@ -1587,7 +1600,6 @@ void ProductionSite::init(Editor_Game_Base *g)
       const std::vector<Input>* inputs=((ProductionSite_Descr*)get_descr())->get_inputs();
 
       for(uint i = 0; i < inputs->size(); i++) {
-         ALIVE();
          WaresQueue* wq = new WaresQueue(this);
 
          m_input_queues.push_back(wq);
@@ -1595,6 +1607,32 @@ void ProductionSite::init(Editor_Game_Base *g)
          wq->init((Game*)g, g->get_safe_ware_id((*inputs)[i].get_ware()->get_name()), (*inputs)[i].get_max());
       }
    }
+}
+
+/*
+===============
+ProductionSite::set_economy
+
+Change the economy for the wares queues.
+Note that the workers are dealt with in the PlayerImmovable code.
+===============
+*/
+void ProductionSite::set_economy(Economy* e)
+{
+   Economy* old = get_economy();
+	uint i;
+
+	if (old) {
+		for(i = 0; i < m_input_queues.size(); i++)
+			m_input_queues[i]->remove_from_economy(old);
+	}
+
+	Building::set_economy(e);
+
+	if (e) {
+		for(i = 0; i < m_input_queues.size(); i++)
+			m_input_queues[i]->add_to_economy(e);
+	}
 }
 
 /*
@@ -1710,27 +1748,45 @@ void ProductionSite::act(Game *g, uint data)
 		const ProductionAction* action = m_program->get_action(m_program_ip);
 
 		m_program_timer = false;
+		m_program_needs_restart=false;
 
 		molog("PSITE: program %s#%i\n", m_program->get_name().c_str(), m_program_ip);
 
-		switch(action->type) {
-		case ProductionAction::actSleep:
-			molog("  Sleep(%i)\n", action->iparam1);
+      switch(action->type) {
+         case ProductionAction::actSleep:
+            molog("  Sleep(%i)\n", action->iparam1);
 
-			program_step();
-			m_program_timer = true;
-			m_program_time = schedule_act(g, action->iparam1);
-			break;
+            program_step();
+            m_program_timer = true;
+            m_program_time = schedule_act(g, action->iparam1);
+            break;
 
-		case ProductionAction::actWorker:
-			molog("  Worker(%s)\n", action->sparam1.c_str());
+         case ProductionAction::actWorker:
+            molog("  Worker(%s)\n", action->sparam1.c_str());
 
-			m_worker->update_task_buildingwork(g);
-			break;
-		}
-	}
+            m_worker->update_task_buildingwork(g);
+            break;
 
-	Building::act(g, data);
+         case ProductionAction::actConsume:
+            molog("  Consume(%s)\n", action->sparam1.c_str());
+            for(uint i=0; i<get_descr()->get_inputs()->size(); i++) {
+               if(!strcmp((*get_descr()->get_inputs())[i].get_ware()->get_name(), action->sparam1.c_str())) {
+                  WaresQueue* wq=m_input_queues[i];
+                  if(wq->get_filled()) 
+                     wq->set_filled(wq->get_filled()-1);
+                  else { molog("   Consume failed, program restart\n"); program_restart(); }
+                  break;
+               }
+            }
+            molog("  Consume done!\n");
+            program_step();
+            m_program_timer=true;
+            m_program_time=schedule_act(g, 10);
+            break;
+      }
+   }
+
+   Building::act(g, data);
 }
 
 
@@ -1763,7 +1819,8 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 		m_program_ip = 0;
 		m_program_phase = 0;
 		m_program_timer = true;
-		m_program_time = schedule_act(g, 10);
+		m_program_needs_restart=false;
+      m_program_time = schedule_act(g, 10);
 	}
 	else
 	{
@@ -1798,8 +1855,26 @@ Advance the program to the next step, but does not schedule anything.
 */
 void ProductionSite::program_step()
 {
-	m_program_ip = (m_program_ip + 1) % m_program->get_size();
+	if(m_program_needs_restart) return;
+
+   m_program_ip = (m_program_ip + 1) % m_program->get_size();
 	m_program_phase = 0;
+}
+
+/*
+===============
+ProductionSite::program_restart()
+
+The program needs to restart (maybe because of failure). all further 
+schedules are ignored
+===============
+*/
+void ProductionSite::program_restart() {
+   m_program_ip=0;
+   m_program_phase=0;
+   m_program_timer=false;
+   m_program_time=0;
+   m_program_needs_restart=true;
 }
 
 
