@@ -32,6 +32,7 @@ resources=
 def_res=fisch
 def_stock=10 
 is=water
+fps=4
 
 [wiese1]
 # texture=tex6.bmp

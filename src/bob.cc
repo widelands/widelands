@@ -135,7 +135,7 @@ Animation::Animation(void)
 {
 	npics = 0;
 	pics = 0;
-	frametime = FRAME_LENGTH;
+	m_frametime = FRAME_LENGTH;
 	w = h = 0;
 	hsx = hsy = 0;
 }
@@ -357,8 +357,12 @@ void Animation::parse(const char *directory, Section *s, const char *picnametemp
 	
 	encdata.parse(s);
 
+	// Get animation speed
+	int fps = s->get_int("fps");
+	if (fps > 0)
+		m_frametime = 1000 / fps;
+	
 	// TODO: Frames of varying size / hotspot?
-
 	hsx = s->get_int("hot_spot_x", 0);
 	hsy = s->get_int("hot_spot_y", 0);
 	

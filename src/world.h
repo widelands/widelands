@@ -51,7 +51,7 @@ class Terrain_Descr {
    friend class World;
    
    public:
-      Terrain_Descr(void) { ntex=0; tex=0; curtex=0; }
+      Terrain_Descr(void) { ntex=0; tex=0; curtex=0; m_frametime = FRAME_LENGTH; }
       ~Terrain_Descr(void) { 
          if(ntex) {
             uint i;
@@ -68,11 +68,12 @@ class Terrain_Descr {
 
       
    private:
-      inline void animate(int time) {
-			curtex = (time / FRAME_LENGTH) % ntex;
+      inline void animate(uint time) {
+			curtex = (time / m_frametime) % ntex;
       }
 
       char name[30];
+		uint m_frametime;
       uchar is;
       Pic** tex;
       ushort ntex;

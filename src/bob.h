@@ -79,12 +79,12 @@ class Animation {
       inline Animation_Pic* get_pic(ushort n) { assert(n<npics); return &pics[n]; }
       inline ushort get_npics(void) { return npics; }
 
-		inline uint get_duration() { return frametime * npics; }
-		inline Animation_Pic* get_time_pic(uint time) { return &pics[(time / frametime) % npics]; }
+		inline uint get_duration() { return m_frametime * npics; }
+		inline Animation_Pic* get_time_pic(uint time) { return &pics[(time / m_frametime) % npics]; }
 		
    private:
       uint flags;
-		uint frametime;
+		uint m_frametime;
       ushort w, h;
       ushort hsx, hsy;
       ushort npics;

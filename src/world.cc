@@ -227,6 +227,10 @@ void Terrain_Descr::read(const char *directory, Section *s)
 	}
 	s->get_string("resources");
 	
+	int fps = s->get_int("fps");
+	if (fps > 0)
+		m_frametime = 1000 / fps;
+	
    // switch is
    str = s->get_string("is", 0);
 	if (!str)
