@@ -345,44 +345,37 @@ Field::Build_Symbol Map::get_build_symbol(const int x, const int y) {
    get_brn(x, y, f, &x1, &y1, &f1);
    h1=f1->get_height();
    if((h1-h)>=2) {
-      //      cerr << "is ne flagge!, da bottom-right neighbour >=2!" << endl;
       return Field::FLAG;
    } else {
       // check sourroundings: if height diff>=4 (can't be higher) --> flag
       get_rn(x, y, f, &x1, &y1, &f1);
       h1=f1->get_height();
       if(abs(h1-h) >=4) {
-         //         cerr << "is ne flagge, da right neighbour unterschied >=4" << endl;
          return Field::FLAG;
       }
       get_ln(x, y, f, &x1, &y1, &f1);
       h1=f1->get_height();
       if(abs(h1-h) >=4) {
-         //         cerr << "is ne flagge, da left neighbour unterschied >=4" << endl;
          return Field::FLAG;
       }   
       get_tln(x, y, f, &x1, &y1, &f1);
       h1=f1->get_height();
       if(abs(h1-h)>=4) {
-         //         cerr << "is ne flagge, da top-left neighbour unterschied >=4" << endl;
          return Field::FLAG;
       }   
       get_trn(x, y, f, &x1, &y1, &f1);
       h1=f1->get_height();
       if(abs(h1-h)>=4) {
-         //         cerr << "is ne flagge, da top-right neighbour unterschied >=4" << endl;
          return Field::FLAG;
       }   
       get_bln(x, y, f, &x1, &y1, &f1);
       h1=f1->get_height();
       if(abs(h1-h)>=4) {
-         //         cerr << "is ne flagge, da bottom-left neighbour unterschied >=4" << endl;
          return Field::FLAG;
       }   
       get_brn(x, y, f, &x1, &y1, &f1);
       h1=f1->get_height();
       if(abs(h1-h)>=4) {
-         //         cerr << "is ne flagge, da bottom-right neighbour unterschied >=4" << endl;
          return Field::FLAG;
       }   
    } 
@@ -392,46 +385,74 @@ Field::Build_Symbol Map::get_build_symbol(const int x, const int y) {
    get_rn(x1, y1, f1, &x1, &y1, &f1);
    h1=f1->get_height();
    if(abs(h1-h) >=3) {
-      //      cerr << "ist ein kleines gebauede, da right neighbour unterschied >=3" << endl;
       return Field::SMALL;
    }
    get_ln(x, y, f, &x1, &y1, &f1);
    get_ln(x1, y1, f1, &x1, &y1, &f1);
    h1=f1->get_height();
    if(abs(h1-h) >=3) {
-      //      cerr << "ist ein kleines gebauede, da left neighbour unterschied >=3" << endl;
       return Field::SMALL;
    }   
    get_tln(x, y, f, &x1, &y1, &f1);
    get_tln(x1, y1, f1, &x1, &y1, &f1);
    h1=f1->get_height();
    if(abs(h1-h)>=3) {
-      //      cerr << "ist ein kleines gebauede, da top-left neighbour unterschied >=3" << endl;
       return Field::SMALL;
    }   
    get_trn(x, y, f, &x1, &y1, &f1);
    get_trn(x1, y1, f1, &x1, &y1, &f1);
    h1=f1->get_height();
    if(abs(h1-h)>=3) {
-      //      cerr << "ist ein kleines gebauede, da top-right neighbour unterschied >=3" << endl;
       return Field::SMALL;
    }   
    get_bln(x, y, f, &x1, &y1, &f1);
    get_bln(x1, y1, f1, &x1, &y1, &f1);
    h1=f1->get_height();
    if(abs(h1-h)>=3) {
-      //      cerr << "ist ein kleines gebauede, da bottom-left neighbour unterschied >=3" << endl;
       return Field::SMALL;
    }   
    get_brn(x, y, f, &x1, &y1, &f1);
    get_brn(x1, y1, f1, &x1, &y1, &f1);
    h1=f1->get_height();
    if(abs(h1-h)>=3) {
-      //      cerr << "ist ein kleines gebauede, da bottom-right neighbour unterschied >=3" << endl;
       return Field::SMALL;
    }   
-
-   //   cerr << "Is ein big building!" << endl;
+   get_brn(x, y, f, &x1, &y1, &f1);
+   get_bln(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      return Field::SMALL;
+   }   
+   get_brn(x, y, f, &x1, &y1, &f1);
+   get_rn(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      return Field::SMALL;
+   }
+   get_bln(x, y, f, &x1, &y1, &f1);
+   get_ln(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      return Field::SMALL;
+   }
+   get_tln(x, y, f, &x1, &y1, &f1);
+   get_ln(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      return Field::SMALL;
+   }
+   get_trn(x, y, f, &x1, &y1, &f1);
+   get_rn(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      return Field::SMALL;
+   }
+   get_trn(x, y, f, &x1, &y1, &f1);
+   get_tln(x1, y1, f1, &x1, &y1, &f1);
+   h1=f1->get_height();
+   if(abs(h1-h)>=3) {
+      return Field::SMALL;
+   }
    return Field::BIG;
 }
 
