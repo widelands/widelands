@@ -26,6 +26,7 @@
 #include "transport.h"
 #include "fieldaction.h"
 #include "watchwindow.h"
+#include "game_debug_ui.h"
 
 #include "ui_tabpanel.h"
 #include "ui_box.h"
@@ -131,6 +132,7 @@ public:
 	void act_watch();
 	void act_show_census();
 	void act_show_statistics();
+	void act_debug();
 	void act_buildflag();
 	void act_ripflag();
 	void act_buildroad();
@@ -168,6 +170,7 @@ static const char* pic_ripflag = "pics/menu_rip_flag.png";
 static const char* pic_watchfield = "pics/menu_watch_field.png";
 static const char* pic_showcensus = "pics/menu_show_census.png";
 static const char* pic_showstatistics = "pics/menu_show_statistics.png";
+static const char* pic_debug = "pics/menu_debug.png";
 static const char* pic_abort = "pics/menu_abort.png";
 
 
@@ -299,6 +302,8 @@ void FieldActionWindow::add_buttons_auto()
 	add_button(watchbox, pic_showcensus, &FieldActionWindow::act_show_census);
 	add_button(watchbox, pic_showstatistics, &FieldActionWindow::act_show_statistics);
 
+	if (m_player->get_display_flag(Interactive_Base::dfDebug))
+		add_button(watchbox, pic_debug, &FieldActionWindow::act_debug);
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())
@@ -473,6 +478,19 @@ void FieldActionWindow::act_show_statistics()
 	m_player->set_display_flag(Interactive_Base::dfShowStatistics,
 		!m_player->get_display_flag(Interactive_Base::dfShowStatistics));
 	okdialog();
+}
+
+
+/*
+===============
+FieldActionWindow::act_debug
+
+Show a debug widow for this field.
+===============
+*/
+void FieldActionWindow::act_debug()
+{
+	show_field_debug(m_player, m_field);
 }
 
 

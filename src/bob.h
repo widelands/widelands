@@ -57,6 +57,8 @@ public:
 };
 
 class Bob : public Map_Object {
+	MO_DESCR(Bob_Descr);
+
 public:
 	struct State;
 
@@ -95,6 +97,7 @@ public:
 
 	virtual int get_type();
 	virtual uint get_movecaps() { return 0; }
+	std::string get_name() const { return get_descr()->get_name(); }
 
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);

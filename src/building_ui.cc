@@ -33,6 +33,7 @@ class.
 #include "worker.h"
 #include "fieldaction.h"
 #include "transport.h"
+#include "game_debug_ui.h"
 
 #include "building_int.h"
 #include "ui_box.h"
@@ -42,6 +43,7 @@ class.
 
 static const char* pic_ok = "pics/menu_okay.png";
 static const char* pic_cancel = "pics/menu_abort.png";
+static const char* pic_debug = "pics/menu_debug.png";
 
 static const char* pic_bulldoze = "pics/menu_bld_bulldoze.png";
 static const char* pic_queue_background = "pics/queue_background.png";
@@ -439,6 +441,7 @@ private:
 	void setup_capsbuttons();
 
 	void act_bulldoze();
+	void act_debug();
 
 private:
 	Window**					m_registry;
@@ -570,6 +573,13 @@ void Building_Window::setup_capsbuttons()
 		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_bulldoze, RGBColor(0,0,255)));
 		x += 34;
 	}
+
+	if (m_player->get_display_flag(Interactive_Base::dfDebug)) {
+		Button* btn = new Button(m_capsbuttons, x, 0, 34, 34, 2);
+		btn->clicked.set(this, &Building_Window::act_debug);
+		btn->set_pic(g_gr->get_picture(PicMod_Game, pic_debug, RGBColor(0,0,255)));
+		x += 34;
+	}
 }
 
 
@@ -585,6 +595,18 @@ void Building_Window::act_bulldoze()
 	new BulldozeConfirm(m_player, m_building);
 }
 
+
+/*
+===============
+Building_Window::act_debug
+
+Callback for debug window
+===============
+*/
+void Building_Window::act_debug()
+{
+	show_mapobject_debug(m_player, m_building);
+}
 
 
 /*

@@ -48,6 +48,7 @@ class Interactive_Base : public Panel {
 		virtual ~Interactive_Base(void);
 
       inline Map* get_map() { return m_egbase->get_map(); }
+		inline Editor_Game_Base* get_egbase() { return m_egbase; }
 
 		static int get_xres();
 		static int get_yres();

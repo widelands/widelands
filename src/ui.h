@@ -470,13 +470,23 @@ private:
  */
 class Multiline_Textarea : public Panel {
 public:
+	enum ScrollMode {
+		ScrollNormal = 0,		// (default) only explicit or forced scrolling
+		ScrollLog = 1,			// follow the bottom of the text
+	};
+
+public:
 	Multiline_Textarea(Panel *parent, int x, int y, uint w, uint h, const char *text,
 	                   Align align = Align_Left);
 	~Multiline_Textarea();
 
+	std::string get_text() const { return m_text; }
+	ScrollMode get_scrollmode() const { return m_scrollmode; }
+
 	void set_text(const char *text);
 	void set_align(Align align);
 	void set_scrollpos(int pixels);
+	void set_scrollmode(ScrollMode mode);
 
 	inline uint get_eff_w() { return get_w(); }
 
@@ -487,6 +497,7 @@ private:
 	Align				m_align;
 	std::string		m_text;
 	Scrollbar*		m_scrollbar;
+	ScrollMode		m_scrollmode;
 	int				m_textheight;	// total height of wrapped text, in pixels
 	int				m_textpos;		// current scrolling position in pixels (0 is top)
 };

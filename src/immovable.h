@@ -113,6 +113,7 @@ public:
 	int get_type();
 	int get_size();
 	bool get_passable();
+	std::string get_name() const { return get_descr()->get_name(); }
 
 	void init(Editor_Game_Base *g);
 	void cleanup(Editor_Game_Base *g);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,8 @@ class RenderTarget;
 class Animation;
 class Path;
 class Player;
+class TabPanel;
+
 
 //
 // Base class for descriptions of worker, files and so on. this must just
@@ -132,6 +134,10 @@ public:
 		WALK_NW = 6,
 	};
 
+	struct LogSink {
+		virtual void log(std::string str) = 0;
+	};
+
 protected:
 	Map_Object(Map_Object_Descr *descr);
 	virtual ~Map_Object(void);
@@ -151,6 +157,12 @@ public:
 	uint schedule_act(Game* g, uint tdelta, uint data = 0);
 	virtual void act(Game*, uint data);
 
+	// implementation is in game_debug_ui.cc
+	virtual void create_debug_panels(Editor_Game_Base* egbase, TabPanel* tabs);
+
+	LogSink* get_logsink() { return m_logsink; }
+	void set_logsink(LogSink* sink);
+
 protected:
    // init for editor and game
 	virtual void init(Editor_Game_Base*);
@@ -159,8 +171,9 @@ protected:
 	void molog(const char* fmt, ...);
 
 protected:
-	Map_Object_Descr *m_descr;
-	uint m_serial;
+	Map_Object_Descr*		m_descr;
+	uint						m_serial;
+	LogSink*					m_logsink;
 };
 
 inline int get_reverse_dir(int dir) { return 1 + ((dir-1)+3)%6; }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -188,6 +188,7 @@ Map_Object::Map_Object(Map_Object_Descr* descr)
 {
 	m_descr = descr;
 	m_serial = 0;
+	m_logsink = 0;
 }
 
 /*
@@ -304,6 +305,19 @@ void Map_Object::act(Game* g, uint data)
 
 /*
 ===============
+Map_Object::set_logsink
+
+Set the logsink. This should only be used by the debugging facilities.
+===============
+*/
+void Map_Object::set_logsink(LogSink* sink)
+{
+	m_logsink = sink;
+}
+
+
+/*
+===============
 Map_Object::molog
 
 Prints a log message prepended by the object's serial number.
@@ -318,5 +332,9 @@ void Map_Object::molog(const char* fmt, ...)
 	vsnprintf(buf, sizeof(buf), fmt, va);
 	va_end(va);
 
+	if (m_logsink)
+		m_logsink->log(buf);
+
 	log("MO(%u): %s", m_serial, buf);
 }
+

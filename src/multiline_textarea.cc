@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,6 +64,7 @@ Multiline_Textarea::Multiline_Textarea(Panel *parent, int x, int y, uint w, uint
 
 	m_textpos = 0;
 	m_textheight = 0;
+	m_scrollmode = ScrollNormal;
 
 	m_scrollbar = new Scrollbar(parent, x+get_w(), y, 24, h, false);
 	m_scrollbar->moved.set(this, &Multiline_Textarea::set_scrollpos);
@@ -109,16 +110,24 @@ void Multiline_Textarea::set_text(const char *text)
 		}
 	else
 		{
+		bool setbottom = false;
+
+		if (m_scrollmode == ScrollLog) {
+			if (m_textpos >= m_textheight - get_h() - g_font->get_fontheight())
+				setbottom = true;
+		}
+
 		m_text = text;
 
 		g_font->get_size(text, 0, &m_textheight, get_eff_w());
 
-		if (m_textpos > m_textheight - get_h())
+		if (setbottom || m_textpos > m_textheight - get_h())
 			m_textpos = m_textheight - get_h();
 		if (m_textpos < 0)
 			m_textpos = 0;
 
 		m_scrollbar->set_steps(m_textheight - get_h());
+		m_scrollbar->set_pos(m_textpos);
 		}
 
 	update(0, 0, get_eff_w(), get_h());
@@ -151,6 +160,20 @@ void Multiline_Textarea::set_scrollpos(int pixels)
 	m_textpos = pixels;
 
 	update(0, 0, get_eff_w(), get_h());
+}
+
+
+/*
+===============
+Multiline_Textarea::set_scrollmode
+
+Change the scroll mode. This will not change the current scroll position;
+it only affects the behaviour of set_text().
+===============
+*/
+void Multiline_Textarea::set_scrollmode(ScrollMode mode)
+{
+	m_scrollmode = mode;
 }
 
 
