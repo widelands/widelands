@@ -30,11 +30,20 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
+// be compatible to microsoft
+#define closesocket close
+
 #else
 
 // This is the header to include according to the documentation
 // at msdn.microsoft.com
 #include <winsock2.h>
+
+// microsoft doesn't have these
+typedef unsigned short in_port_t;
+typedef unsigned long in_addr_t;
+
+#define s_addr S_addr
 
 #endif
 

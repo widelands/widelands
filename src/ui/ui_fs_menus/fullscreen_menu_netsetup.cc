@@ -102,8 +102,6 @@ bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
 	addr=((in_addr*) (he->h_addr_list[0]))->s_addr;
 	port=htons(WIDELANDS_PORT);
 	
-	endhostent ();
-	
 	return true;
 }
 

@@ -49,14 +49,14 @@ class LAN_Base {
 	LAN_Base ();
 	~LAN_Base ();
 	
-	void bind (uint16_t);
+	void bind (unsigned short);
 	
 	bool avail ();
     
 	ssize_t recv (void*, size_t, sockaddr_in*);
 	
 	void send (const void*, size_t, const sockaddr_in*);
-	void broadcast (const void*, size_t, uint16_t);
+	void broadcast (const void*, size_t, unsigned short);
     
     private:
 	int			sock;

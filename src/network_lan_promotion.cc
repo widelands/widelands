@@ -17,6 +17,7 @@
  *
  */
 
+#include <stdio.h>
 #include <string.h>
 #include "network_lan_promotion.h"
 #include "constants.h"
@@ -35,7 +36,8 @@ LAN_Base::LAN_Base ()
     sock=socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
     
     int opt=1;
-    setsockopt (sock, SOL_SOCKET, SO_BROADCAST, &opt, sizeof(opt));
+    // the cast to char* is because microsoft wants it that way
+    setsockopt (sock, SOL_SOCKET, SO_BROADCAST, (char*) &opt, sizeof(opt));
 
 #ifndef WIN32
     // get a list of all local broadcast addresses
@@ -66,10 +68,10 @@ LAN_Base::LAN_Base ()
 
 LAN_Base::~LAN_Base ()
 {
-    close (sock);
+    closesocket (sock);
 }
 
-void LAN_Base::bind (uint16_t port)
+void LAN_Base::bind (unsigned short port)
 {
     sockaddr_in addr;
     addr.sin_family=AF_INET;
@@ -104,7 +106,7 @@ void LAN_Base::send (const void* buf, size_t len, const sockaddr_in* addr)
     sendto (sock, buf, len, 0, (const sockaddr*) addr, sizeof(sockaddr_in));
 }
 
-void LAN_Base::broadcast (const void* buf, size_t len, uint16_t port)
+void LAN_Base::broadcast (const void* buf, size_t len, unsigned short port)
 {
     std::list<in_addr_t>::iterator i;
     
