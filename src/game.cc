@@ -17,12 +17,11 @@
  *
  */
 
-#include <assert.h>
 #include "game.h"
 #include "map.h"
 #include "input.h"
 #include "cursor.h"
-
+#include "criterr.h"
 
 /** class Game
  *
@@ -68,7 +67,7 @@ void Game::run(const char* map, uint nipl) {
 		  g_ip.set_max_cords( xresolution-g_cur.get_w(), yresolution-g_cur.get_h());
 
 		  // TEMP
-		  Window* win=g_ui.create_window(0, 0, xresolution, yresolution, Window::FLAT);
+//		  Window* win=g_ui.create_window(0, 0, xresolution, yresolution, Window::FLAT);
 		  
 		  c=new Map();
 		  if(c->load_map(map)) {
@@ -81,9 +80,8 @@ void Game::run(const char* map, uint nipl) {
 		  while(!ip->should_end_game()) {
 					 ip->interact();
 		  }
+//		  g_ui.delete_window(win);
 
-		  g_ui.delete_window(win);
-		
 		  delete ip;
 		  delete c;
 }

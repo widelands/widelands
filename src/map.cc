@@ -191,6 +191,5 @@ int Map::load_map(const char* file) {
 		  
 		  // Never here, or file is invalid (which can't happen)
 		  assert(0);
-		  
-
+		  return ERR_FAILED;
 }

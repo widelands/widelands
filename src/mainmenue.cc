@@ -28,6 +28,7 @@
 #include "output.h"
 #include "singlepmenue.h"
 #include "menuecommon.h"
+#include "criterr.h"
 
 #ifndef VERSION
 #include "config.h"
@@ -51,10 +52,13 @@ void main_menue(void) {
 		  bool* doreadme = new bool(false);
 		  bool* doabout = new bool(false);
 		  
+		  // Register the resposible mouse funtions
+		  g_ip.register_mcf(menue_lclick, Input::BUT1);
+		  g_ip.register_mcf(menue_rclick, Input::BUT2);
+	     g_ip.register_mmf(menue_mmf);
+
 		  // Set to MENU_XRESxMENU_YRES so that we know on what we are and the pictures
 		  // look good
-		  //uint lx=g_gr.get_xres();
-		  //uint ly=g_gr.get_yres();
 		  g_gr.set_mode(MENU_XRES, MENU_YRES, g_gr.get_mode());
 		  g_ip.set_max_cords(MENU_XRES-g_cur.get_w(), MENU_YRES-g_cur.get_h());
 
@@ -62,9 +66,10 @@ void main_menue(void) {
 		  Window* win=g_ui.create_window(0, 0, g_gr.get_xres(), g_gr.get_yres(), Window::FLAT);
 		  Pic* p = new Pic;
 		  const char* str=g_fileloc.locate_file("splash.bmp", TYPE_PIC);
-		  assert(str);
+		  if(!str) {
+					 critical_error("splash.bmp:  File not found. Check your installation.");
+		  }
 		  p->load(str);
-		  assert(p);
 		  
 		  win->set_new_bg(p);		 
 		  // Create the different areas
@@ -102,11 +107,7 @@ void main_menue(void) {
 		  b->register_func(menue_butclick_func, doexit);
 		  b->set_pic(g_fh.get_string("Exit Game", 0));
 		  
-		  // Register the resposible mouse funtions
-		  g_ip.register_mcf(menue_lclick, Input::BUT1);
-		  g_ip.register_mcf(menue_rclick, Input::BUT2);
-	     g_ip.register_mmf(menue_mmf);
-		
+	
 		  while(!g_ip.should_die() && !*doexit && !*dosingle_player &&  
 								!*domulti_player && !*dooptions &&  !*doreadme && !*doabout) {
 					 menue_loop();

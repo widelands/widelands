@@ -17,30 +17,16 @@
  *
  */
 
-#ifndef __S__SINGLETON_H
-#define __S__SINGLETON_H
-
-/* Referenz: Game Programming Gems I, P. 38 
- * Excellent code!!
- */
-
-#include "myassert.h"
-
-template <typename T> class Singleton {
-		  static T* ms;
-
-		  public:
-		  Singleton(void) { 
-					 assert (!ms) ; 
-					 int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1; 
-					 ms=(T*)((int)this+offset); 
-		  }
-		  ~Singleton(void) { assert(ms); ms=0; }
-		  static inline T& get_singleton(void) { assert (ms); return *ms; }
-		  static inline T* get_ptsingleton(void) { assert(ms); return ms; }
-};
-
-template <typename T> T* Singleton <T>::ms=0;
+#ifndef __S__CRITERR_H
+#define __S__CRITERR_H
 
 
-#endif
+
+void critical_error(const char*);
+
+
+
+
+
+
+#endif // __S__CRITERR_H

@@ -161,6 +161,7 @@ void Textarea::draw(void) const {
 		  } else {
 					 // Never here!!
 					 assert(0);
+					 return;
 		  }
 
 		  Graph::copy_pic(dp, bak, posx, yp+y, 0, 0, w, h);

@@ -20,7 +20,6 @@
 #ifndef __S__ERRORS_H
 #define __S__ERRORS_H
 
-
 #define RET_OK 				0
 #define RET_EXIT           1
 #define ERR_NOT_IMPLEMENTED -1

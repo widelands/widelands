@@ -22,7 +22,7 @@
 //#include "worldfiletypes.h"
 #include "bob.h"
 #include "myfile.h"
-#include <cassert>
+#include "myassert.h"
 #include <string.h>
 
 /** World(const char* file)

@@ -32,6 +32,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef DEBUG
+// This is set for the assert function, to skip over to graphical asserts
+int graph_is_init=0; 
+#endif
+
 /** g_main function 
  * This is the OS Independant main function.
  * 
@@ -54,12 +59,14 @@ int g_main(int argn, char** argc) {
 		  // Setup font handler and user interface for the use in widelands
 		  setup_fonthandler();
 		  setup_ui();
-		  
+
 		  // Until now, no window is created, nothing is started, just initialized.
 		  // By now, we musn't use the tell_user function any longer!! 
 		  // Rather, we can now use a user_interface window for critical errors, which
 		  // terminates the application in a good matter
-		  
+#ifdef 	DEBUG
+		  graph_is_init=1;
+#endif
 		  // run intro
 		  run_intro();
 		 

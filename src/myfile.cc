@@ -19,7 +19,7 @@
 
 #include "myfile.h"
 #include "errors.h"
-#include <cassert>
+#include "myassert.h"
 #include <string.h>
 
 /** class File

@@ -17,30 +17,35 @@
  *
  */
 
-#ifndef __S__SINGLETON_H
-#define __S__SINGLETON_H
+#ifndef __S__MYASSERT_H
+#define __S__MYASSERT_H
 
-/* Referenz: Game Programming Gems I, P. 38 
- * Excellent code!!
- */
+#ifdef DEBUG
+#include <iostream>
+#include <stdio.h>
+#include "output.h"
+#include "criterr.h"
+#define assert(condition) myassert(__LINE__, __FILE__, (int)(condition), #condition)
+extern int graph_is_init; 
 
-#include "myassert.h"
+inline void myassert(int line, const char* file, int cond, const char* condt) {
+		  if(!cond) {
+					 char buf[200];
+					 sprintf(buf, "%s (%i): assertion \"%s\" failed!\n", file, line, condt);
 
-template <typename T> class Singleton {
-		  static T* ms;
-
-		  public:
-		  Singleton(void) { 
-					 assert (!ms) ; 
-					 int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1; 
-					 ms=(T*)((int)this+offset); 
+					if(graph_is_init) {
+								critical_error(buf);
+								// User chooses, if it goes on
+					 } else {
+								tell_user(buf);
+								exit(-1);
+					 }
 		  }
-		  ~Singleton(void) { assert(ms); ms=0; }
-		  static inline T& get_singleton(void) { assert (ms); return *ms; }
-		  static inline T* get_ptsingleton(void) { assert(ms); return ms; }
-};
-
-template <typename T> T* Singleton <T>::ms=0;
-
-
+}
+#else
+#define NDEBUG 1
+#include <assert.h>
 #endif
+
+
+#endif /* __S__MYASSERT_H */

@@ -1,5 +1,5 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -g -pg -fprofile-arcs
-#EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 # -g -pg -fprofile-arcs
+#EXTRA_FLAGS=@SDL_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -fomit-frame-pointer -ffast-math -fexpensive-optimizations -malign-loops=2 -malign-jumps=2 -malign-functions=2 -O3
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
 CXXFLAGS= $(EXTRA_FLAGS)
@@ -7,7 +7,7 @@ CXXFLAGS= $(EXTRA_FLAGS)
 # EXTRA_DIST=worlds pics 
 
 bin_PROGRAMS=widelands 
-widelands_LDADD = @SDL_LIBS@ -lefence 
+widelands_LDADD = @SDL_LIBS@
 widelands_SOURCES=main.cc \
 						unix_m.cc \
 						os.h \
@@ -74,7 +74,10 @@ widelands_SOURCES=main.cc \
 						cardselectmenue.h \
 						cardselectmenue.cc \
 						s2map.h \
-						s2map.cc
+						s2map.cc \
+						criterr.h \
+						criterr.cc \
+						myassert.h
 						
 
 

@@ -28,6 +28,7 @@
 #include "mainmenue.h"
 #include "menuecommon.h"
 #include "game.h"
+#include "criterr.h"
 
 /** void single_player_menue(void) 
  *
@@ -50,9 +51,10 @@ void single_player_menue(void) {
 		  Window* win=g_ui.create_window(0, 0, g_gr.get_xres(), g_gr.get_yres(), Window::FLAT);
 		  Pic* p = new Pic;
 		  const char* str=g_fileloc.locate_file("splash.bmp", TYPE_PIC);
-		  assert(str);
+		  if(!str) {
+					 critical_error("splash.bmp:  File not found. Check your installation.");
+		  }
 		  p->load(str);
-		  assert(p);
 
 		  win->set_new_bg(p);		 
 		  // Create the different areas
