@@ -1,4 +1,8 @@
-# mmh, resources indicators should rather be delivered by trbie
+# this is for the pictures
+[default]
+clrkey_r=255
+clrkey_g=255
+clrkey_b=255
 
 [none]
 indicator=resi_none
@@ -7,29 +11,46 @@ indicator=resi_none
 name=Coal
 indicator=resi_coal1 4
 indicator=resi_coal2
+editor_pic=coal1.png 3
+editor_pic=coal2.png 6
+editor_pic=coal3.png 9
+editor_pic=coal4.png
 max_amount=12
 
 [gold]
 name=Gold
 indicator=resi_gold1 4
 indicator=resi_gold2
+editor_pic=gold1.png 3
+editor_pic=gold2.png 6
+editor_pic=gold3.png 9
+editor_pic=gold4.png
 max_amount=12
 
 [iron]
 name=Iron
 indicator=resi_iron1 4
 indicator=resi_iron2
+editor_pic=iron1.png 3
+editor_pic=iron2.png 6
+editor_pic=iron3.png 9
+editor_pic=iron4.png
 max_amount=12
 
 [granit]
 name=Granit
 indicator=resi_granit1 5
 indicator=resi_granit2
+editor_pic=granit1.png 3
+editor_pic=granit2.png 6
+editor_pic=granit3.png 9
+editor_pic=granit4.png
 max_amount=12
 
 [water]
 name=Water
 indicator=resi_water
+editor_pic=water_resource.png
 max_amount=50
 
 [fish]
@@ -38,4 +59,5 @@ max_amount=50
 name=Fish
 detectable=false
 max_amount=20
+editor_pic=fish_resource.png
 

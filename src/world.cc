@@ -47,15 +47,20 @@ Resource_Descr::parse
 Parse a resource description section.
 ==============
 */
-void Resource_Descr::parse(Section *s)
+void Resource_Descr::parse(Section *s, RGBColor def_clrkey, std::string basedir)
 {
    const char* string;
+   
+   m_clrkey.set(
+         s->get_int("clrkey_r", def_clrkey.r()),
+         s->get_int("clrkey_g", def_clrkey.g()),
+         s->get_int("clrkey_b", def_clrkey.b())
+         );
 
+   
    m_name = s->get_string("name", s->get_name());
-   if(strcmp(s->get_name(),"none")) { 
-      m_max_amount = s->get_safe_int("max_amount");
-   }
-   m_is_detectable=s->get_bool("detectable", true);
+     m_is_detectable=s->get_bool("detectable", true);
+   
    while(s->get_next_string("indicator", &string))
    {
       std::vector<std::string> args;
@@ -87,7 +92,44 @@ void Resource_Descr::parse(Section *s)
 
       m_indicators.push_back(i);
    }
+   if(strcmp(s->get_name(),"none")) { 
+      m_max_amount = s->get_safe_int("max_amount");
+      while(s->get_next_string("editor_pic", &string))
+      {
+         std::vector<std::string> args;
+         Editor_Pic i;
 
+         split_string(string, &args, " \t");
+
+         if (args.size() != 1 && args.size() != 2)
+         {
+            log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
+            continue;
+         }
+
+         i.picname = basedir + "/pics/";
+         i.picname += args[0];
+         i.upperlimit = -1;
+
+         if (args.size() >= 2)
+         {
+            char* endp;
+
+            i.upperlimit = strtol(args[1].c_str(), &endp, 0);
+
+            if (endp && *endp)
+            {
+               log("Resource '%s' has bad editor_pic=%s\n", m_name.c_str(), string);
+               continue;
+            }
+         }
+
+         m_editor_pics.push_back(i);
+      }
+      if(!m_editor_pics.size()) 
+         throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
+   }
+   
    if(m_is_detectable && !m_indicators.size()) 
       throw wexception("Resource '%s' has no indicators", m_name.c_str());
    if(!m_is_detectable && m_indicators.size())
@@ -139,7 +181,7 @@ std::string Resource_Descr::get_indicator(uint amount) const
 		}
 
 		// This indicator is higher than the actual amount
-		if (m_indicators[bestmatch].upperlimit < 0 || diff1 > diff2) {
+		if (m_indicators[bestmatch].upperlimit < 0 || diff1 > diff2 || diff1 < 0) {
 			bestmatch = i;
 			continue;
 		}
@@ -151,6 +193,58 @@ std::string Resource_Descr::get_indicator(uint amount) const
 	return m_indicators[bestmatch].bobname;
 }
 
+/*
+ * Get the correct editor pic for this amount of this resource
+ */
+std::string Resource_Descr::get_editor_pic(uint amount, RGBColor* clrkey) {
+	uint bestmatch = 0;
+
+	assert(m_editor_pics.size());
+
+	for(uint i = 1; i < m_editor_pics.size(); ++i)
+	{
+		int diff1 = m_editor_pics[bestmatch].upperlimit - (int)amount;
+		int diff2 = m_editor_pics[i].upperlimit - (int)amount;
+
+		// This is a catch-all for high amounts
+		if (m_editor_pics[i].upperlimit < 0)
+		{
+			if (diff1 < 0) {
+				bestmatch = i;
+				continue;
+			}
+
+			continue;
+		}
+
+		// This is lower than the actual amount
+		if (diff2 < 0)
+		{
+			if (m_editor_pics[bestmatch].upperlimit < 0)
+				continue;
+
+			if (diff1 < diff2) {
+				bestmatch = i; // still better than previous best match
+				continue;
+			}
+
+			continue;
+		}
+
+		// This is higher than the actual amount
+		if (m_editor_pics[bestmatch].upperlimit < 0 || diff1 > diff2 || diff1 < 0) {
+			bestmatch = i;
+			continue;
+		}
+	}
+
+//	noLog("Resource(%s): Editor_Pic '%s' for amount = %u\n",
+//		m_name.c_str(), m_editor_pics[bestmatch].picname.c_str(), amount);
+
+   *clrkey=m_clrkey;
+	return m_editor_pics[bestmatch].picname;
+}
+   
 
 /*
 =============================================================================
@@ -266,15 +360,24 @@ void World::parse_resources()
 	try
 	{
 		Profile prof(fname);
-
+      
+      RGBColor clrkey;
+      Section* section=prof.get_section("default");
+      if(section)
+         clrkey.set(
+            section->get_int("clrkey_r", 0),
+            section->get_int("clrkey_g", 0),
+            section->get_int("clrkey_b", 0)
+            );
+            
       Resource_Descr* descr=new Resource_Descr();
-      Section* section=prof.get_safe_section("none");
-      descr->parse(section);
+      section=prof.get_safe_section("none");
+      descr->parse(section,clrkey,m_basedir);
       m_resources.add(descr);
       
       while((section=prof.get_next_section(0))) {
          descr=new Resource_Descr();
-         descr->parse(section);
+         descr->parse(section,clrkey,m_basedir);
          m_resources.add(descr);
       }
 	}

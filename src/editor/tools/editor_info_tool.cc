@@ -67,8 +67,17 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
    sprintf(buf1, " Owned by: %i\n", f->get_owned_by()); buf+=buf1;
    sprintf(buf1, " Has base immovable: %s (TODO! more info)\n", f->get_immovable() ? "Yes" : "No"); buf+=buf1;
    sprintf(buf1, " Has bobs: %s (TODO: more informations)\n", f->get_first_bob() ? "Yes" : "No"); buf+=buf1;
-   sprintf(buf1, " Roads: TODO!\n"); buf+=buf1;
+   int res=f->get_resources();
+   int amount=f->get_resources_amount();
+   if(!res) {
+      sprintf(buf1, " Has resources: No\n");
+   } else {
+      sprintf(buf1, " Has resources: Yes, %i amount of '%s'\n", amount, map->get_world()->get_resource(res)->get_name());
+   }
+   buf+=buf1;
 
+   sprintf(buf1, " Roads: TODO!\n"); buf+=buf1;
+   
    buf += "\n";
    Terrain_Descr* ter=f->get_terr();
    buf += "2) Right Terrain Info\n";

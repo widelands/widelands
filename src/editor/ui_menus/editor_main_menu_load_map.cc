@@ -96,8 +96,8 @@ void Main_Menu_Load_Map::clicked(int id) {
 
    std::string realname="maps/";
    realname+=filename;
-   realname+=WLMF_SUFFIX;
-//   realname+=S2MF_SUFFIX; 
+//   realname+=WLMF_SUFFIX;
+   realname+=S2MF_SUFFIX; 
    Map_Loader* ml=m_map->get_correct_loader(realname.c_str());
 
    try {
@@ -140,19 +140,25 @@ void Main_Menu_Load_Map::clicked(int id) {
       m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
    }
 
-   /* Resources 
+   /* Resources, we do not calculate default resources, therefore we do
+    * not expect to meet them here. */ 
    uint x,y;
    for(y=0; y<m_map->get_height(); y++) {
       for(x=0; x<m_map->get_width(); x++) {
          Field *f=m_map->get_field(Coords(x,y));  
          int res=f->get_resources();
          int amount=f->get_resources_amount();
-         if(amount) {
-            std::string str= m_map->get_world()->get_resource(res)->get_indicator(amount);
-         }
+         std::string immname="";
+         RGBColor clrkey;
+         if(amount) 
+            immname = m_parent->get_editor()->get_map()->get_world()->get_resource(res)->get_editor_pic(amount, &clrkey);
+         if(immname!="") {
+            int picid=g_gr->get_picture(PicMod_Game, immname.c_str(), clrkey); 
+            m_parent->get_map()->get_overlay_manager()->register_overlay(Coords(x,y),picid,4);
+         } 
       }
    }
-  */
+  
 
    delete ml;
    }
