@@ -286,7 +286,6 @@ void File_Locator::init_filelisting( const int type, const char postfix[5] ) {
  * Args:	none
  * Returns: Nothing
  */
-#include <errno.h>
 void File_Locator::open_next_dir(void)  {
 		  if(ncurdir<0) return;
 

@@ -30,6 +30,11 @@
 
 #include <string.h>
 
+#ifndef WIN32
+#include <sys/stat.h>
+#include <sys/types.h>
+#endif
+
 /** void setup_fonthandler(void) 
  *
  * Sets up the global font handler for the needs in widelands
@@ -177,6 +182,7 @@ void setup_searchpaths(void)
 	buf=getenv("HOME");
 	strcpy(cmd, buf);
 	strcat(cmd, "/.widelands");
+	mkdir(cmd, 0x1FF);
 	g_fileloc.add_searchdir(cmd, MAX_DIRS-1);
 	g_fileloc.set_def_writedir(MAX_DIRS-1);
 	g_fileloc.add_searchdir(PKGDATADIR, MAX_DIRS-2);
