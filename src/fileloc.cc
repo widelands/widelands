@@ -239,8 +239,6 @@ void File_Locator::set_def_writedir(const uint id) {
 		  la=LA_SUCCESS;
 }
 
-#include <iostream>
-
 /* void File_Locator::init_filelisting( const int type, const uchar postfix[5] );
  *
  * This functions inits the filelisting. it registeres the prefix and opens the first dir
@@ -260,10 +258,8 @@ void File_Locator::init_filelisting( const int type, const char postfix[5] ) {
 		  nlisttype=type;
 		  ncurdir=0;
 
-		  cerr << dirs[4] << endl;
 		  if(ncurdir<(int) MAX_DIRS) 
 					 open_next_dir();
-		  cerr << ncurdir << endl;
 
 		  if(!curdir) {
 					 la=LA_NOMOREFILES;
