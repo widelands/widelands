@@ -92,9 +92,9 @@ void Map_View::draw(void) {
 					 vpx=ovpx; 
 		  }
 
-		  if(!ytrans && (uint)vpy> map->get_h()*(FIELD_HEIGHT>>1)-g_gr.get_yres()) {
+		  if(!ytrans && (uint)vpy> (((map->get_h()-1)*FIELD_HEIGHT)>>1)-g_gr.get_yres()) {
 					 int ovpy=vpy;
-					 vpy-=map->get_h()*(FIELD_HEIGHT>>1);
+					 vpy-=(((map->get_h()+1)*FIELD_HEIGHT)>>1);
 					 ytrans=true;
 					 draw();
 					 ytrans=false;
@@ -223,7 +223,7 @@ void Map_View::scanconv(const Field* r, const Field* l, __starts* start, int yst
 void Map_View::set_viewpoint(uint x,  uint y) { 
 		  vpx=x; vpy=y; 
 		  while(vpx>FIELD_WIDTH*map->get_w())    	  vpx-=(FIELD_WIDTH*map->get_w());
-		  while(vpy>(FIELD_HEIGHT*map->get_h())/2)  vpy-=(FIELD_HEIGHT*map->get_h())/2;
+		  while(vpy>(FIELD_HEIGHT*map->get_h())>>1)  vpy-=(FIELD_HEIGHT*map->get_h())>>1;
 		  while(vpx< 0)  vpx+=(FIELD_WIDTH*map->get_w());
-		  while(vpy< 0)  vpy+=(FIELD_HEIGHT*map->get_h())/2;
+		  while(vpy< 0)  vpy+=(FIELD_HEIGHT*map->get_h())>>1;
 }
