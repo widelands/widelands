@@ -21,6 +21,7 @@
 #include "types.h"
 #include "ui_listselect.h"
 #include "ui_scrollbar.h"
+#include "constants.h"
 
 /**
 Initialize a list select panel
@@ -45,7 +46,7 @@ UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align 
 	m_scrollbar = new UIScrollbar(parent, x+get_w(), y, 24, h, false);
 	m_scrollbar->moved.set(this, &UIListselect::set_scrollpos);
 
-	m_scrollbar->set_pagesize(h - 2*g_font->get_fontheight());
+	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar->set_steps(1);
 }
 
@@ -91,7 +92,7 @@ void UIListselect::add_entry(const char *name, void* value)
 
 	m_entries.push_back(e);
 
-	m_scrollbar->set_steps(m_entries.size() * g_font->get_fontheight() - get_h());
+	m_scrollbar->set_steps(m_entries.size() * g_fh->get_fontheight(UI_FONT_SMALL) - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
 }
@@ -140,7 +141,7 @@ Return the total height (text + spacing) occupied by a single line
 */
 int UIListselect::get_lineheight()
 {
-	return g_font->get_fontheight() + 2;
+	return g_fh->get_fontheight(UI_FONT_SMALL) + 2;
 }
 
 
@@ -163,7 +164,7 @@ void UIListselect::draw(RenderTarget* dst)
 
 		if (idx == m_selection) {
 			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
-			dst->brighten_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), ms_darken_value);
+			dst->brighten_rect(1, y, get_eff_w()-2, g_fh->get_fontheight(UI_FONT_SMALL), ms_darken_value);
       }
 
 		int x;
@@ -174,7 +175,7 @@ void UIListselect::draw(RenderTarget* dst)
 		else
 			x = 1;
 
-		g_font->draw_string(dst, x, y, e->name, m_align, -1);
+		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, x, y, e->name, m_align, -1);
 
 		y += lineheight;
 		idx++;

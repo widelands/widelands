@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-4 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,73 +20,45 @@
 #ifndef __S__FONT_H
 #define __S__FONT_H
 
-#include <map>
+#include <string>
 #include "types.h"
+#include "rgbcolor.h"
 
-class RenderTarget;
-
-enum Align {
-	Align_Left = 0,
-	Align_HCenter = 1,
-	Align_Right = 2,
-	Align_Horizontal = 3,
-
-	Align_Top = 0,
-	Align_VCenter = 4,
-	Align_Bottom = 8,
-	Align_Vertical = 12,
-
-	Align_TopLeft = 0,
-	Align_CenterLeft = Align_VCenter,
-	Align_BottomLeft = Align_Bottom,
-
-	Align_TopCenter = Align_HCenter,
-	Align_Center = Align_HCenter|Align_VCenter,
-	Align_BottomCenter = Align_HCenter|Align_Bottom,
-
-	Align_TopRight = Align_Right,
-	Align_CenterRight = Align_Right|Align_VCenter,
-	Align_BottomRight = Align_Right|Align_Bottom,
-};
-
-
-/** class Font
+/*
+ * Font 
  *
- * This class generates font Pictures out of strings and returns them
+ * this represents a loaded font used by the FontHandler
  */
 class Font {
-public:
-	static void reload_all();
-	static Font* load(const char* name);
+   public:
+      Font(std::string name, int pointsize, RGBColor fg, RGBColor bg);
+      ~Font();
 
-	void addref();
-	void release();
+      // TODO: hackish: c==index to m_pictures
+      void  get_char_size(int c, int* w, int *h) { *w=m_pictures[c].width, *h=get_pixel_height(); }
+      int get_char_pic(int c) { return m_pictures[c].pic; }
+      int get_font_height(void) { return m_height; }
+   
+      std::string get_name(void) const { return m_name; }
+      int get_pixel_height(void) const { return m_height; }
+      int get_point_height(void) const { return m_pointheight; }
+      RGBColor get_fg_clr(void) const { return m_fg; }
+      RGBColor get_bg_clr(void) const { return m_bg; }
 
-	int calc_linewidth(const char* string, int wrap, const char** nextline);
-	void draw_string(RenderTarget* dst, int x, int y, const char* string, Align align = Align_Left,
-						  int wrap = -1);
-	void get_size(const char* string, int* pw, int* ph, int wrap = -1);
-	int get_fontheight();
+      void do_load();
 
-private:
-	Font(const char* name);
-	~Font();
-
-	void do_load();
-
-	struct Char {
+   private:
+     struct Char {
 		int	width;
 		uint	pic;
 	};
 
-	int	m_refs;
-	char*	m_name;
-	int	m_height;			// height of the font
-	Char	m_pictures[96];
+     std::string m_name;
+      int m_height; // height in pixeln. a 12pt TT-Font has m_height>12
+      int m_pointheight;
+      Char m_pictures[96];
+      RGBColor m_fg, m_bg;
 
-	static std::map<const char*, Font*>		s_fonts;		// map of all fonts
 };
 
-extern Font* g_font;	// the default font
-
-#endif /* __S__FONT_H */
+#endif // __S__FONT_H

@@ -17,10 +17,11 @@
  *
  */
 
-#include "font.h"
+#include "font_handler.h"
 #include "types.h"
 #include "ui_multilinetextarea.h"
 #include "ui_scrollbar.h"
+#include "constants.h"
 
 /**
 Initialize a textarea that supports multiline strings.
@@ -31,6 +32,7 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 {
 	set_handle_mouse(false);
 	set_think(false);
+   
 
 	set_align(align);
 
@@ -41,11 +43,14 @@ UIMultiline_Textarea::UIMultiline_Textarea(UIPanel *parent, int x, int y, uint w
 	m_scrollbar = new UIScrollbar(parent, x+get_w(), y, 24, h, false);
 	m_scrollbar->moved.set(this, &UIMultiline_Textarea::set_scrollpos);
 
-	m_scrollbar->set_pagesize(h - 2*g_font->get_fontheight());
+	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_BIG));
 	m_scrollbar->set_steps(1);
+   
+   set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
 
 	if (text)
 		set_text(text);
+   
 }
 
 
@@ -77,13 +82,13 @@ void UIMultiline_Textarea::set_text(const char *text)
 		bool setbottom = false;
 
 		if (m_scrollmode == ScrollLog) {
-			if (m_textpos >= m_textheight - get_h() - g_font->get_fontheight())
+			if (m_textpos >= m_textheight - get_h() - g_fh->get_fontheight(m_fontname, m_fontsize))
 				setbottom = true;
 		}
 
 		m_text = text;
 
-		g_font->get_size(text, 0, &m_textheight, get_eff_w());
+		g_fh->get_size(m_fontname, m_fontsize, text, 0, &m_textheight, get_eff_w());
 
 		if (setbottom || m_textpos > m_textheight - get_h())
 			m_textpos = m_textheight - get_h();
@@ -145,7 +150,7 @@ void UIMultiline_Textarea::draw(RenderTarget* dst)
          x += get_w();
 
       // Let the font handler worry about all the complicated stuff..
-      g_font->draw_string(dst, x, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w());
+      g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), x, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w());
    }
 }
 

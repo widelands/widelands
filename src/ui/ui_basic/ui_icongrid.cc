@@ -22,7 +22,8 @@
 #include "rendertarget.h"
 #include "types.h"
 #include "ui_icongrid.h"
-#include "font.h"
+#include "font_handler.h"
+#include "constants.h"
 
 /**
 Initialize the grid
@@ -60,7 +61,7 @@ int UIIcon_Grid::add(uint picid, void* data, std::string descr)
 	m_items.push_back(it);
 
 	if (it.descr.size() && !m_font_height)
-		m_font_height = g_font->get_fontheight() + 2;
+		m_font_height = g_fh->get_fontheight(UI_FONT_SMALL) + 2;
 
 
 	// resize
@@ -179,7 +180,7 @@ void UIIcon_Grid::draw(RenderTarget* dst)
 	}
 
 	if (highlight)
-		g_font->draw_string(dst, 1, get_h() - m_font_height, m_items[m_highlight].descr.c_str());
+		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, 1, get_h() - m_font_height, m_items[m_highlight].descr.c_str());
 }
 
 /**

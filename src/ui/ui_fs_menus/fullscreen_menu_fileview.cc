@@ -23,15 +23,18 @@
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
+#include "constants.h"
 
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string title, std::string text)
 	: Fullscreen_Menu_Base("fileviewmenu.jpg")
 {
 	// Text view
 	mlta=new UIMultiline_Textarea(this, 40, 150, 560, 240, text.c_str());
+   mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
-   // Title
+   // Menu title
    UITextarea* ta= new UITextarea(this, 50, 50, title, Align_Left);
+   ta->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 113);
 
 	// Close button
@@ -69,7 +72,8 @@ public:
 TextViewWindow::TextViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text)
 	: UIUniqueWindow(parent, reg, 0, 0, title)
 {
-	new UIMultiline_Textarea(this, 0, 0, 560, 240, text.c_str());
+	UIMultiline_Textarea* mlta=new UIMultiline_Textarea(this, 0, 0, 560, 240, text.c_str());
+   mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);
 

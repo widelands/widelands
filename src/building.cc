@@ -22,7 +22,7 @@
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
-#include "font.h"
+#include "font_handler.h"
 #include "game.h"
 #include "graphic.h"
 #include "interactive_base.h"
@@ -37,7 +37,7 @@
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
-
+#include "constants.h"
 
 static const int BUILDING_LEAVE_INTERVAL = 1000;
 
@@ -682,13 +682,14 @@ void Building::draw_help(Editor_Game_Base* game, RenderTarget* dst,
 	{
 		std::string txt = get_census_string();
 
-		g_font->draw_string(dst, pos.x, pos.y - 45, txt.c_str(), Align_Center);
+      // TODO: Make more here
+		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, pos.x, pos.y - 45, txt.c_str(), Align_Center);
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics)
 	{
 		std::string txt = get_statistics_string();
 
-		g_font->draw_string(dst, pos.x, pos.y - 35, txt.c_str(), Align_Center);
+		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, pos.x, pos.y - 35, txt.c_str(), Align_Center);
 	}
 }

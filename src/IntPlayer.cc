@@ -21,7 +21,7 @@
 #include "building.h"
 #include "cmd_queue.h"
 #include "fieldaction.h"
-#include "font.h"
+#include "font_handler.h"
 #include "keycodes.h"
 #include "immovable.h"
 #include "mapview.h"

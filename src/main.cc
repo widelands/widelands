@@ -21,7 +21,7 @@
 #include "editor.h"
 #include "error.h"
 #include "filesystem.h"
-#include "font.h"
+#include "font_handler.h"
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
 #include "fullscreen_menu_main.h"
@@ -58,7 +58,10 @@ static void g_init(int argc, char **argv)
 		// Create all subsystems after config has been read
 		Sys_Init();
 
-		g_font = Font::load("fixed_font1");
+		g_fh = new Font_Handler();
+      // Load the standart fonts
+      g_fh->load_font(UI_FONT_SMALL, UI_FONT_SMALL_CLR);
+      g_fh->load_font(UI_FONT_BIG, UI_FONT_BIG_CLR);
 
 		// Initialize graphics
 		Section *s = g_options.pull_section("global");
@@ -97,9 +100,9 @@ static void g_shutdown()
 	// Shutdown subsystems
 	Sys_InitGraphics(GFXSYS_NONE, 0, 0, false);
 
-	if (g_font) {
-		g_font->release();
-		g_font = 0;
+	if (g_fh) {
+		delete g_fh;
+      g_fh = 0;
 	}
 
 	Sys_Shutdown();

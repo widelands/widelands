@@ -18,11 +18,12 @@
  */
 
 #include <cstdio>
-#include "font.h"
+#include "font_handler.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
 #include "types.h"
 #include "ui_progressbar.h"
+#include "constants.h"
 
 /**
 Initialize the progress bar.
@@ -100,6 +101,6 @@ void UIProgress_Bar::draw(RenderTarget* dst)
 
 	snprintf(buf, sizeof(buf), "%u%%", (uint)(percent * 100));
 
-	g_font->draw_string(dst, get_w() / 2, get_h() / 2, buf, Align_Center);
+	g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, get_w() / 2, get_h() / 2, buf, Align_Center);
 }
 

@@ -17,13 +17,14 @@
  *
  */
 
-#include "font.h"
+#include "font_handler.h"
 #include "interactive_base.h"
 #include "map.h"
 #include "mapview.h"
 #include "minimap.h"
 #include "options.h"
 #include "system.h"
+#include "constants.h"
 
 /*
 ==============================================================================
@@ -210,12 +211,12 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
 		Coords fsel = get_fieldsel();
 
 		sprintf(buf, "%3i %3i", fsel.x, fsel.y);
-		g_font->draw_string(dst, 5, 5, buf);
+		g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  5, 5, buf);
 
 		// Show FPS
 		sprintf(buf, "%5.1f fps (avg: %5.1f fps)",
 				1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
-		g_font->draw_string(dst, 75, 5, buf);
+		g_fh->draw_string(dst, UI_FONT_BIG, UI_FONT_BIG_CLR,  75, 5, buf);
 	}
 }
 

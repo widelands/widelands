@@ -22,7 +22,7 @@
 #define __S__LISTSELECT_H
 
 #include <vector>
-#include "font.h"
+#include "font_handler.h"
 #include "ui_panel.h"
 #include "ui_signal.h"
 

@@ -30,7 +30,7 @@ class.
 #include "cmd_queue.h"
 #include "constructionsite.h"
 #include "error.h"
-#include "font.h"
+#include "font_handler.h"
 #include "game_debug_ui.h"
 #include "militarysite.h"
 #include "productionsite.h"

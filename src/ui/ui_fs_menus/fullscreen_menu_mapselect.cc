@@ -42,7 +42,8 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g)
    m_map = new Map;
 
 	// Text
-	new UITextarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
+   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
 	UIButton* b;

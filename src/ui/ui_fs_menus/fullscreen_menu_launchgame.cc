@@ -39,8 +39,9 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g)
 	m_game = g;
 
 	// Title
-	new UITextarea(this, MENU_XRES/2, 140, "Launch game", Align_HCenter);
-
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Launch Game", Align_HCenter);
+   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+ 
 	// UIButtons
 	UIButton* b;
 

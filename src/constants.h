@@ -26,6 +26,16 @@
 #define TEXTURE_W 64        // texture have a fixed size and are squares
 #define TEXTURE_H TEXTURE_W // TEXTURE_H is just defined for easier understandement of the code
 
+// Fonts TODO: make this configurable (at least the sizes)
+#define UI_FONT_BIG "Vera.ttf", 18 
+#define UI_FONT_SMALL "Vera.ttf", 10
+#define UI_FONT_CLR_FG  RGBColor(255,255,0)
+#define UI_FONT_BIG_CLR UI_FONT_CLR_FG, RGBColor(0,0,0)
+#define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, RGBColor(0,0,0)
+#define PROSA_FONT       "Knights.ttf", 14
+#define PROSA_FONT_CLR_FG   RGBColor(255,255,0)
+
+
 /*
 ================================================================================
 

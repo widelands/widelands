@@ -21,13 +21,14 @@
 #include "fullscreen_menu_singleplayer.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
-
+#include "constants.h"
 
 Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	: Fullscreen_Menu_Base("singleplmenu.jpg")
 {
 	// Text
-	new UITextarea(this, MENU_XRES/2, 140, "Single Player Menu", Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Single Player Menu", Align_HCenter);
+   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
 	UIButton* b;

@@ -20,6 +20,7 @@
 #include "fullscreen_menu_options.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
+#include "constants.h"
 
 /*
 ==============================================================================
@@ -40,7 +41,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(int cur_x, int cur_y, bool full
 {
 
 	// Menu title
-	new UITextarea(this, MENU_XRES/2, 140, "Options", Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Options", Align_HCenter);
+   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
 	UIButton* b;

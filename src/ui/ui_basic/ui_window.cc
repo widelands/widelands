@@ -18,11 +18,12 @@
  */
 
 #include <cassert>
-#include "font.h"
+#include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
 #include "system.h"
 #include "ui_window.h"
+#include "constants.h"
 
 /* class UIWindow
  *
@@ -180,7 +181,7 @@ void UIWindow::draw_border(RenderTarget* dst)
 	if (m_title.length()) {
 		px = get_w() >> 1;
 		py = CORNER>>1;
-		g_font->draw_string(dst, px, py, m_title.c_str(), Align_Center);
+		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, px, py, m_title.c_str(), Align_Center);
 	}
 }
 

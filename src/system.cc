@@ -26,6 +26,7 @@
 #include "profile.h"
 #include "system.h"
 #include "wexception.h"
+#include "font_handler.h"
 
 Graphic *g_gr = 0;
 
@@ -853,8 +854,6 @@ Note: Because of the way pictures are handled now, this function must not be
 */
 Graphic* SW16_CreateGraphics(int w, int h, bool fullscreen);
 Graphic* SW32_CreateGraphics(int w, int h, bool fullscreen);
-void Font_ReloadAll();
-
 void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 {
 	if (system == sys.gfx_system && w == sys.gfx_w && h == sys.gfx_h && fullscreen == sys.gfx_fullscreen)
@@ -886,7 +885,7 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 
 	// Fonts need to reload images...
 	if (g_gr)
-		Font_ReloadAll();
+		g_fh->reload_all();
 }
 
 

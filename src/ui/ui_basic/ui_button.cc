@@ -17,12 +17,13 @@
  *
  */
 
-#include "font.h"
+#include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
 #include "types.h"
 #include "ui_button.h"
 #include "error.h"
+#include "constants.h"
 
 /**
 Initialize a UIButton
@@ -139,7 +140,7 @@ void UIButton::draw(RenderTarget* dst)
 		}
 	else if (m_title.length()) // otherwise draw the title string centered
 		{
-		g_font->draw_string(dst, get_w()>>1, get_h()>>1,
+		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, get_w()>>1, get_h()>>1,
 		                    m_title.c_str(), Align_Center);
 		}
 

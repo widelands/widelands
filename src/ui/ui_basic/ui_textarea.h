@@ -21,7 +21,7 @@
 #define __S__TEXTAREA_H
 
 #include <string>
-#include "font.h"
+#include "font_handler.h"
 #include "ui_panel.h"
 
 /**
@@ -40,6 +40,8 @@ public:
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);
+      
+   inline void set_font(std::string name, int size, RGBColor fg) { m_fontname=name; m_fontsize=size; m_fcolor=fg; g_fh->load_font(name, size, fg, RGBColor(0,0,0)); set_text(m_text.c_str()); }
 
 private:
 	void collapse();
@@ -48,6 +50,9 @@ private:
 	std::string		m_text;
 	Align				m_align;
 	bool				m_multiline;
+   std::string    m_fontname;
+   int            m_fontsize;
+   RGBColor       m_fcolor;
 };
 
 #endif // __S__TEXTAREA_H
