@@ -31,7 +31,7 @@
 #include "ui.h"
 #include <stdlib.h>
 #include <string.h>
-#include <sdl/sdl.h>
+#include <SDL/SDL.h>
 
 #ifdef DEBUG
 // This is set for the assert function, to skip over to graphical asserts

@@ -28,6 +28,7 @@
 #include "singlepmenue.h"
 #include "game.h"
 #include "criterr.h"
+#include "mainmenue.h"
 
 /** void card_select_menue(void) 
  *

@@ -102,8 +102,8 @@ class Bob;
  */
 #define FIELD_WIDTH   64
 #define FIELD_HEIGHT  64
-#define FIELD_SW_W    6   // 1<<FIELD_SW_HEIGHT == FIELD_WIDTH
-#define FIELD_SW_H    6
+//#define FIELD_HEIGHT 48
+//#define FIELD_WIDTH 48
 #define HEIGHT_MAX    54 
 #define HEIGHT_FACTOR 3
 #define HEIGHT_CLR_FACTOR 2
@@ -121,12 +121,12 @@ class Field {
 								ypos=y;
 								height=h;
 
-								ypix=(((y+1)<<FIELD_SW_H)>>1)-(h<<HEIGHT_FACTOR);
+								ypix=(((y+1)*FIELD_HEIGHT)>>1)-(h<<HEIGHT_FACTOR);
 
 								if((y&1)) { // %2 
-										  xpix=((((x<<1)+1)<<FIELD_SW_W)>>1);
+										  xpix=((((x<<1)+1)*FIELD_WIDTH)>>1);
 								} else {
-										  xpix=(x<<FIELD_SW_W);
+										  xpix=(x*FIELD_WIDTH);
 								}			 
 					 }
 					 inline void set_td(Pic* p) {

@@ -98,10 +98,14 @@ void single_player_menue(void) {
 		  else if(*brunc) {
 					 g_ui.delete_window(win);
 					 // TODO
+					 critical_error("This is not yet supported. You can savly click on continue.");
+					 single_player_menue();
 		  }
 		  else if(*bloadg) {
 					 g_ui.delete_window(win);
 					 // TODO
+					 critical_error("This is not yet supported. You can savly click on continue.");
+					 single_player_menue();
 		  }
 		  
 		  

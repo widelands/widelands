@@ -156,7 +156,7 @@ void Map_View::draw_polygon(Field* l, Field* r, Field* m, Pic* p) {
 					 }
 								
 					 g_gr.set_cpixel(xstart-1, y_d);
-					 p->set_cpixel((xstart+vpx) % (p->get_w()),(y_d+vpy) % (p->get_h()>>1));
+					 p->set_cpixel((xstart+vpx) % (p->get_w()),(y_d+vpy) % (p->get_h()-2));
 								//p->set_cpixel(xstart-vpx % (p->get_w()>>1), ystart-vpy % (p->get_h()>>1));
 					 for(x_d=xstart; x_d<xstop; x_d++) {
 								g_gr.set_npixel(Graph::bright_up_clr(p->get_npixel(), h>>(16-HEIGHT_CLR_FACTOR)));
