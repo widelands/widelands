@@ -29,6 +29,7 @@ class Road;
 class Request;
 class Economy;
 class Item_Ware_Descr;
+class IdleWareSupply;
 
 struct Neighbour {
 	Flag	*flag;
@@ -86,7 +87,8 @@ private:
 	int					m_ware;
 	Item_Ware_Descr*	m_ware_descr;
 
-	Request*		m_request;
+	Request*				m_request;
+	IdleWareSupply*	m_supply;
 
 	bool			m_return_watchdog;	// scheduled return-to-warehouse watchdog
 	bool			m_flag_dirty;			// true if we need to tell the flag to take care of us

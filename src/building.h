@@ -207,6 +207,7 @@ public:
 	void incorporate_worker(Game *g, Worker *w);
 
 	WareInstance* launch_item(Game* g, int ware);
+	void do_launch_item(Game* g, WareInstance* item);
 	void incorporate_item(Game* g, WareInstance* item);
 
 protected:

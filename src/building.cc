@@ -1616,6 +1616,28 @@ Create an instance of a ware, and make sure it gets carried out of the warehouse
 WareInstance* Warehouse::launch_item(Game* g, int ware)
 {
 	WareInstance* item;
+
+	// Create the item
+	item = new WareInstance(ware);
+	item->init(g);
+
+	m_supply->remove_wares(ware, 1);
+
+	do_launch_item(g, item);
+
+	return item;
+}
+
+
+/*
+===============
+Warehouse::do_launch_item
+
+Get a carrier to actually move this item out of the warehouse.
+===============
+*/
+void Warehouse::do_launch_item(Game* g, WareInstance* item)
+{
 	int carrierid;
 	Ware_Descr* waredescr;
 	Worker_Descr* workerdescr;
@@ -1632,16 +1654,8 @@ WareInstance* Warehouse::launch_item(Game* g, int ware)
 	if (m_supply->stock(carrierid))
 		m_supply->remove_wares(carrierid, 1);
 
-	// Create the item
-	item = new WareInstance(ware);
-	item->init(g);
-
-	m_supply->remove_wares(ware, 1);
-
 	// Setup the carrier
 	worker->start_task_dropoff(g, item);
-
-	return item;
 }
 
 

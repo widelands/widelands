@@ -32,6 +32,150 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "building.h"
 
 
+/*
+==============================================================================
+
+IdleWareSupply IMPLEMENTATION
+
+==============================================================================
+*/
+
+/*
+Whenever a WareInstance is idle, it issues an IdleWareSupply.
+*/
+class IdleWareSupply : public Supply {
+public:
+	IdleWareSupply(WareInstance* ware);
+	virtual ~IdleWareSupply();
+
+	void set_economy(Economy* e);
+
+public: // implementation of Supply
+	virtual PlayerImmovable* get_position(Game* g);
+	virtual int get_amount(Game* g, int ware);
+
+	virtual WareInstance* launch_item(Game* g, int ware);
+	virtual Worker* launch_worker(Game* g, int ware);
+
+private:
+	WareInstance*		m_ware;
+	Economy*				m_economy;
+};
+
+
+/*
+===============
+IdleWareSupply::IdleWareSupply
+
+Initialize the Supply and update the economy.
+===============
+*/
+IdleWareSupply::IdleWareSupply(WareInstance* ware)
+{
+	m_ware = ware;
+	m_economy = 0;
+
+	set_economy(m_ware->get_economy());
+}
+
+
+/*
+===============
+IdleWareSupply::~IdleWareSupply
+
+Cleanup.
+===============
+*/
+IdleWareSupply::~IdleWareSupply()
+{
+	set_economy(0);
+}
+
+
+/*
+===============
+IdleWareSupply::set_economy
+
+Add/remove self from economies as necessary.
+===============
+*/
+void IdleWareSupply::set_economy(Economy* e)
+{
+	if (e == m_economy)
+		return;
+
+	int ware = m_ware->get_ware();
+
+	if (m_economy)
+		m_economy->remove_supply(ware, this);
+
+	m_economy = e;
+
+	if (m_economy)
+		m_economy->add_supply(ware, this);
+}
+
+
+/*
+===============
+IdleWareSupply::get_position
+
+Figure out the player immovable that this ware belongs to.
+===============
+*/
+PlayerImmovable* IdleWareSupply::get_position(Game* g)
+{
+	Map_Object* loc = m_ware->get_location(g);
+
+	if (loc->get_type() >= Map_Object::BUILDING)
+		return (PlayerImmovable*)loc;
+
+	if (loc->has_attribute(Map_Object::WORKER))
+		return ((Worker*)loc)->get_location(g);
+
+	return 0;
+}
+
+
+/*
+===============
+IdleWareSupply::get_amount
+===============
+*/
+int IdleWareSupply::get_amount(Game* g, int ware)
+{
+	return (ware == m_ware->get_ware()) ? 1 : 0;
+}
+
+
+/*
+===============
+IdleWareSupply::launch_item
+
+The item is already "launched", so we only need to return it.
+===============
+*/
+WareInstance* IdleWareSupply::launch_item(Game* g, int ware)
+{
+	if (ware != m_ware->get_ware())
+		throw wexception("IdleWareSupply: ware(%u) (type = %i) requested for %i",
+				m_ware->get_serial(), m_ware->get_ware(), ware);
+
+	return m_ware;
+}
+
+
+/*
+===============
+IdleWareSupply::launch_worker
+===============
+*/
+Worker* IdleWareSupply::launch_worker(Game* g, int ware)
+{
+	throw wexception("IdleWareSupply::launch_worker makes no sense");
+}
+
+
 
 /*
 ==============================================================================
@@ -58,6 +202,7 @@ WareInstance::WareInstance(int ware)
 	m_ware_descr = 0;
 
 	m_request = 0;
+	m_supply = 0;
 	m_return_watchdog = false;
 	m_moving = false;
 	m_move_route = 0;
@@ -71,6 +216,10 @@ WareInstance::~WareInstance
 */
 WareInstance::~WareInstance()
 {
+	if (!m_supply) {
+		molog("Ware %i still has supply %p\n", m_ware, m_supply);
+		delete m_supply;
+	}
 }
 
 
@@ -111,6 +260,11 @@ void WareInstance::cleanup(Editor_Game_Base* g)
 {
 	molog("WareInstance::cleanup\n");
 
+	if (m_supply) {
+		delete m_supply;
+		m_supply = 0;
+	}
+
 	if (g->is_game()) {
 		cancel_moving((Game*)g);
 		set_location((Game*)g, 0);
@@ -136,6 +290,8 @@ void WareInstance::set_economy(Economy* e)
 		m_economy->remove_wares(m_ware, 1);
 
 	m_economy = e;
+	if (m_supply)
+		m_supply->set_economy(e);
 
 	if (m_economy)
 		m_economy->add_wares(m_ware, 1);
@@ -242,6 +398,7 @@ WareInstance::update
 Performs the state updates necessary for the current location:
 - if it's a building, acknowledge the Request or incorporate into warehouse
 - if it's a flag and we have no request, start the return to warehouse timer
+  and issue a Supply
 
 Note: update() may result in the deletion of this object.
 ===============
@@ -266,12 +423,34 @@ void WareInstance::update(Game* g)
 		{
 			Request* rq = m_request;
 
-			if (loc != rq->get_target(g))
-				throw wexception("WareInstance::update: End in building, but not request target");
+			if (loc == rq->get_target(g))
+			{
+				m_request = 0;
+				rq->transfer_finish(g);
+				return;
+			}
 
-			m_request = 0;
-			rq->transfer_finish(g);
-			return; // *this should now be freed
+			// There are some situations where we might end up in a warehouse as
+			// part of a requested route, and we need to move out of it again, e.g.:
+			//  - we were requested just when we were being carried into the warehouse
+			//  - we were carried into a harbour/warehouse to be shipped across the sea,
+			//    but a better, land-based route has been found
+			if (loc->has_attribute(WAREHOUSE))
+			{
+				Warehouse* wh = (Warehouse*)loc;
+				PlayerImmovable* nextstep = get_next_move_step(g);
+
+				molog("WareInstance::update() on warehouse %u. nextstep is %u\n",
+						wh->get_serial(), nextstep->get_serial());
+
+				if (nextstep == wh->get_base_flag()) {
+					wh->do_launch_item(g, this);
+					return;
+				}
+			}
+
+			throw wexception("MO(%u): WareInstance::update: End in building, but not request target",
+							get_serial());
 		}
 		else
 		{
@@ -294,6 +473,9 @@ void WareInstance::update(Game* g)
 						CMD_ACT, m_serial, 0, 0);
 				m_return_watchdog = true;
 			}
+
+			if (!m_supply)
+				m_supply = new IdleWareSupply(this);
 		}
 
 		if (m_flag_dirty) {
@@ -319,6 +501,11 @@ Set ware state so that it fulfills the given request.
 void WareInstance::set_request(Game* g, Request* rq, const Route* route)
 {
 	// Reset current movement & request
+	if (m_supply) {
+		delete m_supply;
+		m_supply = 0;
+	}
+
 	if (m_request) {
 		m_request->transfer_fail(g);
 		m_request = 0;
@@ -403,6 +590,18 @@ bool WareInstance::is_moving(Game* g)
 	{
 		PlayerImmovable* reroutestart = 0;
 		bool recalc = false;
+
+		// If we're in a building, the building's flag must be the first on the
+		// route.
+		// IMPORTANT: This rule must be modified when harbours etc. are implemented
+		if (m_move_route && loc->get_type() == Map_Object::BUILDING) {
+			Flag* baseflag = ((Building*)loc)->get_base_flag();
+
+			if (m_move_route->get_flag(g, 0) != baseflag) {
+				recalc = true;
+				reroutestart = baseflag;
+			}
+		}
 
 		// If we're on a flag, it should be either the first or second on the route
 		// If we're on the second flag, we finished the first part of the route,
