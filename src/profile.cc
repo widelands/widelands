@@ -79,7 +79,7 @@ Profile::Profile(const char* filename)
 			continue;
 		else if (line[0] == '[')
 		{
-			strncpy(inSection, setEndAt(line, ']'), MAX_NAME_LEN);
+			strncpy(inSection, setEndAt(line, ']') + 1, MAX_NAME_LEN);
 			inSection[MAX_NAME_LEN-1] = 0;
 		}
 		else
