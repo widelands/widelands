@@ -150,7 +150,7 @@ all: tags $(OBJECT_DIR)/widelands
 	@echo -e "\tTHE WIDELANDS DEVELOPMENT TEAM"
 
 $(OBJECT_DIR):
-	-mkdir -p $(OBJECT_DIR)
+	-mkdir $(OBJECT_DIR)
 
 clean:
 	@-rm -rf widelands
@@ -172,14 +172,14 @@ OBJ := $(patsubst %.cc,$(OBJECT_DIR)/%.o$,$(notdir $(SRC)))
 #	$(patsubst %.cc,%.o, \
 #	$(filter %.cc,$(SRC)))
 
-$(OBJECT_DIR)/widelands: $(OBJ) 
+$(OBJECT_DIR)/widelands: $(OBJECT_DIR) $(OBJ) 
 	$(CXX) $(OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
 
 %.h:
 
 -include $(OBJ:.o=.d)
 
-$(OBJECT_DIR)/%.d: $(filter %/$(notdir $(basename $@)).cc,$(SRC))
+$(OBJECT_DIR)/%.d: $(OBJECT_DIR) $(filter %/$(notdir $(basename $@)).cc,$(SRC))
 	$(CXX) -MM -MG $(CFLAGS) $(filter %/$(notdir $(basename $@)).cc,$(SRC)) | \
 	    sed -e 's@^\(.*\)\.o:@$(OBJECT_DIR)/\1.d $(OBJECT_DIR)/\1.o:@' > $@
 
