@@ -22,7 +22,6 @@
 
 #include "game.h"
 #include <list>
-#include <map>
 #include <string>
 
 class Player;
@@ -54,24 +53,26 @@ class Computer_Player {
 		void connect_flag_to_another_economy (Flag*);
 		
 		struct BuildableField:FCoords {
+			long			next_update_due;
+			
 			bool			reachable;
 			
-			unsigned char		unowned_land;
+			unsigned char		unowned_land_nearby;
 			
-			unsigned char		trees;
-			unsigned char		stones;
+			unsigned char		trees_nearby;
+			unsigned char		stones_nearby;
+			unsigned char		tree_consumers_nearby;
+			unsigned char		stone_consumers_nearby;
+			
+			short			military_influence;
 
-			unsigned char		frontierhouses;
-			unsigned char		lumberjacks;
-			unsigned char		foresters;
-			unsigned char		quarries;
-			
 			BuildableField (const FCoords& fc):FCoords (fc)
 			{
+			    next_update_due=0;
 			    reachable=false;
-			    unowned_land=0;
-			    trees=stones=0;
-			    frontierhouses=lumberjacks=foresters=quarries=0;
+			    unowned_land_nearby=0;
+			    trees_nearby=0;
+			    stones_nearby=0;
 			}
 		};
 		
@@ -87,8 +88,22 @@ class Computer_Player {
 		};
 		
 		struct BuildingObserver {
+			const char*		name;
 			int			id;
-			bool			is_constructionsite;
+			Building_Descr*		desc;
+
+			enum {
+				BORING,
+				CONSTRUCTIONSITE,
+				PRODUCTIONSITE,
+				MILITARYSITE,
+				MINE
+			}			type;
+			
+			bool			need_trees;
+			bool			need_stones;
+			
+			std::vector<int>	outputs;
 			
 			int			cnt_built;
 			int			cnt_under_construction;
@@ -104,7 +119,7 @@ class Computer_Player {
 		Player*				player;
 		Tribe_Descr*			tribe;
 		
-		std::map<std::string,BuildingObserver>	buildings;
+		std::list<BuildingObserver>	buildings;
 		int				total_constructionsites;
 		
 		std::list<FCoords>		unusable_fields;
@@ -116,9 +131,12 @@ class Computer_Player {
 		
 		EconomyObserver& get_economy_observer (Economy*);
 		
-		int				delay_frontierhouse;
+		long				next_construction_due;
 		
 		void update_buildable_field (BuildableField&);
+		void consider_productionsite_influence (BuildableField&, const Coords&, const BuildingObserver&);
+		
+		BuildingObserver& get_building_observer(const char*);
 };
 
 

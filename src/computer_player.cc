@@ -17,12 +17,15 @@
  *
  */
 
+#include <typeinfo>
 #include "error.h"
 #include "map.h"
 #include "transport.h"
 #include "player.h"
 #include "tribe.h"
 #include "constructionsite.h"
+#include "productionsite.h"
+#include "militarysite.h"
 #include "computer_player.h"
 
 class CheckStepRoadAI : public CheckStep {
@@ -51,29 +54,74 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 
 	// collect information about which buildings our tribe can construct
 	for (int i=0; i<tribe->get_nrbuildings();i++) {
-		const char* name=tribe->get_building_descr(i)->get_name();
-		log ("\tcan build '%s', id is %d\n",name,i);
+		Building_Descr* bld=tribe->get_building_descr(i);
+		log ("\tcan build '%s', id is %d\n",bld->get_name(),i);
 		
-		BuildingObserver& bo=buildings[name];
+		buildings.push_back (BuildingObserver());
+		
+		BuildingObserver& bo=buildings.back();
+		bo.name=bld->get_name();
 		bo.id=i;
-		bo.is_constructionsite=false;
+		bo.desc=bld;
+		bo.type=BuildingObserver::BORING;
 		bo.cnt_built=0;
 		bo.cnt_under_construction=0;
+		
+		bo.need_trees=false;
+		bo.need_stones=false;
+		
+		// FIXME: define these properties in the building's conf file
+		if (!strcmp(bld->get_name(), "quarry"))
+		    bo.need_stones=true;
+
+		if (!strcmp(bld->get_name(), "lumberjack"))
+		    bo.need_trees=true;
+		
+		if (typeid(*bld)==typeid(ConstructionSite_Descr)) {
+			bo.type=BuildingObserver::CONSTRUCTIONSITE;
+			continue;
+		}
+		
+		if (typeid(*bld)==typeid(MilitarySite_Descr)) {
+			bo.type=BuildingObserver::MILITARYSITE;
+			continue;
+		}
+		
+		if (typeid(*bld)==typeid(ProductionSite_Descr)) {
+		    ProductionSite_Descr* prod=static_cast<ProductionSite_Descr*>(bld);
+		    
+		    bo.type=BuildingObserver::PRODUCTIONSITE;
+		    
+		    std::set<std::string>::iterator j;
+		    for (j=prod->get_outputs()->begin();j!=prod->get_outputs()->end();j++)
+			bo.outputs.push_back (tribe->get_ware_index(j->c_str()));
+
+		    continue;
+		}
 	}
 	
-	buildings["constructionsite"].is_constructionsite=true;
-	
 	total_constructionsites=0;
-	delay_frontierhouse=0;
+	next_construction_due=0;
 }
 
 Computer_Player::~Computer_Player ()
 {
 }
 
+Computer_Player::BuildingObserver& Computer_Player::get_building_observer (const char* name)
+{
+	std::list<BuildingObserver>::iterator i;
+    
+	for (i=buildings.begin();i!=buildings.end();i++)
+		if (!strcmp(i->name, name))
+			return *i;
+    
+	throw wexception("Help: I don't know what to do with a %s", name);
+}
+
 void Computer_Player::think ()
 {
-/*	// update our fields 
+	// update our fields 
 	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end();) {
 		// check whether we lost ownership of the field
 		if (i->field->get_owned_by()!=player_number) {
@@ -94,9 +142,10 @@ void Computer_Player::think ()
 	}
 	
 	// update statistics about only one field at a time
-	if (!buildable_fields.empty()) {
+	if (!buildable_fields.empty() && buildable_fields.front().next_update_due<=game->get_gametime()) {
 		update_buildable_field (buildable_fields.front());
 		
+		buildable_fields.front().next_update_due=game->get_gametime() + 2000;
 		buildable_fields.push_back (buildable_fields.front());
 		buildable_fields.pop_front ();
 	}
@@ -122,7 +171,14 @@ void Computer_Player::think ()
 		i++;
 	}
 	
+	// wait a moment so that all fields are classified
+	if (next_construction_due==0)
+	    next_construction_due=game->get_gametime() + 5000;
+	
 	// now build something if possible
+	if (next_construction_due<=game->get_gametime()) {
+	    next_construction_due=game->get_gametime() + 2500;
+	
 	int proposed_building=-1;
 	int proposed_priority=0;
 	Coords proposed_coords;
@@ -134,128 +190,46 @@ void Computer_Player::think ()
 		int maxsize=i->field->get_caps() & BUILDCAPS_SIZEMASK;
 		int prio;
 		
-		// frontierhouse
-		if (delay_frontierhouse<=game->get_gametime()) {
-			prio=i->unowned_land;
-			prio-=i->frontierhouses*64;
-				
-			if (prio>proposed_priority) {
-				proposed_building=buildings["frontierhouse"].id;
-				proposed_priority=prio;
-				proposed_coords=*i;
-			}
-		}
+		std::list<BuildingObserver>::iterator j;
+		for (j=buildings.begin();j!=buildings.end();j++) {
+		    if (j->type==BuildingObserver::MINE)
+			    continue;
 		
-		// lumberjack
-		prio=i->trees;
-		prio-=i->lumberjacks*8;
-		prio+=i->foresters*4;
-		prio-=buildings["lumberjack"].cnt_built*4;
-		prio-=buildings["lumberjack"].cnt_under_construction*16;
-		
-		if (maxsize>BUILDCAPS_SMALL)
-			prio-=6;
-		
-		if (prio>proposed_priority) {
-			proposed_building=buildings["lumberjack"].id;
-			proposed_priority=prio;
-			proposed_coords=*i;
-		}
-		
-		// forester
-		prio=-4;
-		prio+=i->lumberjacks*4;
-		prio-=i->foresters*12;
-		prio-=buildings["forrester"].cnt_built*4;
-		prio-=buildings["forrester"].cnt_under_construction*16;
-		
-		if (prio>proposed_priority) {
-			proposed_building=buildings["forrester"].id;
-			proposed_priority=prio;
-			proposed_coords=*i;
-		}
-		
-		// quarry
-		prio=i->stones;
-		prio-=i->quarries*8;
-		prio-=buildings["quarry"].cnt_built*4;
-		prio-=buildings["quarry"].cnt_under_construction*16;
-		
-		if (maxsize>BUILDCAPS_SMALL)
-			prio-=6;
-		
-		if (prio>proposed_priority) {
-			proposed_building=buildings["quarry"].id;
-			proposed_priority=prio;
-			proposed_coords=*i;
-		}
-		
-		// sawmill
-		if (maxsize>=BUILDCAPS_MEDIUM) {
-			prio=8;
-    			prio-=buildings["sawmill"].get_total_count() * 8;
-		
-			if (prio>proposed_priority) {
-				proposed_building=buildings["sawmill"].id;
-				proposed_priority=prio;
-				proposed_coords=*i;
-			}
-		}
-		
-		// farm
-		if (maxsize==BUILDCAPS_BIG) {
-			prio=4;
-    			prio-=buildings["farm"].get_total_count() * 2;
-			prio-=i->trees;
-			prio-=i->stones;
-			prio-=i->foresters*8;
-			if (total_constructionsites>4)
-				prio-=6;
-		
-			if (prio>proposed_priority) {
-				proposed_building=buildings["farm"].id;
-				proposed_priority=prio;
-				proposed_coords=*i;
-			}
-		}
-		
-		// mill
-		if (maxsize>=BUILDCAPS_MEDIUM) {
-			prio=buildings["farm"].get_total_count() * 8;
-    			prio-=buildings["mill"].get_total_count() * 8;
-			if (total_constructionsites>4)
-				prio-=6;
-		
-			if (prio>proposed_priority) {
-				proposed_building=buildings["mill"].id;
-				proposed_priority=prio;
-				proposed_coords=*i;
-			}
-		}
-		
-		// bakery
-		if (maxsize>=BUILDCAPS_MEDIUM) {
-			prio=buildings["mill"].get_total_count() * 8;
-    			prio-=buildings["bakery"].get_total_count() * 8;
-			if (total_constructionsites>4)
-				prio-=6;
-		
-			if (prio>proposed_priority) {
-				proposed_building=buildings["bakery"].id;
-				proposed_priority=prio;
-				proposed_coords=*i;
-			}
+		    if (j->desc->get_size()>maxsize)
+			    continue;
+		    
+		    prio=0;
+		    
+		    if (j->type==BuildingObserver::MILITARYSITE)
+			    prio=i->unowned_land_nearby - i->military_influence*2;
+
+		    if (j->type==BuildingObserver::PRODUCTIONSITE) {
+			    if (j->need_trees)
+				    prio+=i->trees_nearby - 8*i->tree_consumers_nearby;
+
+			    if (j->need_stones)
+				    prio+=i->stones_nearby - 8*i->stone_consumers_nearby;
+		    }
+
+		    // don't waste good land for small huts
+		    prio-=(maxsize - j->desc->get_size()) * 6;
+
+		    if (prio>proposed_priority) {
+			    proposed_building=j->id;
+			    proposed_priority=prio;
+			    proposed_coords=*i;
+		    }
 		}
 	}
 	
 	// if we want to construct a new building, send the command now
 	if (proposed_building>=0) {
+		log ("want to construct building %d\n", proposed_building);
+		
 		game->send_player_build (player_number, proposed_coords, proposed_building);
 		
-		if (buildings["frontierhouse"].id==proposed_building)
-			delay_frontierhouse=game->get_gametime() + 10000;
-		
 		return;
+	}
 	}
 	
 	// if nothing else is to do, update flags and economies
@@ -328,7 +302,6 @@ void Computer_Player::think ()
 		roads.push_back (roads.front());
 		roads.pop_front ();
 	}
-*/
 }
 
 struct FindFieldUnowned:FindField {
@@ -345,7 +318,7 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 	// look if there is any unowned land nearby
 	FindFieldUnowned find_unowned;
 	
-	field.unowned_land=map->find_fields(field, 8, 0, find_unowned);
+	field.unowned_land_nearby=map->find_fields(field, 8, 0, find_unowned);
 	
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
@@ -356,44 +329,69 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 	map->find_immovables (field, 8, &immovables);
 	
 	field.reachable=false;	
-	field.frontierhouses=0;
-	field.lumberjacks=0;
-	field.foresters=0;
-	field.quarries=0;
-	field.trees=0;
-	field.stones=0;
+	field.military_influence=0;
+	field.trees_nearby=0;
+	field.stones_nearby=0;
+	field.tree_consumers_nearby=0;
+	field.stone_consumers_nearby=0;
 	
 	for (unsigned int i=0;i<immovables.size();i++) {
-		if (immovables[i].object->get_type()>=BaseImmovable::BUILDING)
+		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
 			field.reachable=true;
 
-		if (immovables[i].object->get_type()==BaseImmovable::BUILDING && map->calc_distance(field,immovables[i].coords)<=6) {
-			std::string name=static_cast<Building*>(immovables[i].object)->get_name();
+		if (immovables[i].object->get_type()==BaseImmovable::BUILDING) {
+			Building* bld=static_cast<Building*>(immovables[i].object);
+
+			if (bld->get_building_type()==Building::CONSTRUCTIONSITE) {
+			    Building_Descr* con=static_cast<ConstructionSite*>(bld)->get_building();
+			    
+			    if (typeid(*con)==typeid(MilitarySite_Descr)) {
+				MilitarySite_Descr* mil=static_cast<MilitarySite_Descr*>(con);
+				
+				int v=mil->get_conquers() - map->calc_distance(field, immovables[i].coords);
+				
+				if (v>0)
+				    field.military_influence+=(v*v+v)*6;
+			    }
+			    
+			    if (typeid(*con)==typeid(ProductionSite_Descr))
+				consider_productionsite_influence (field, immovables[i].coords,
+					get_building_observer(con->get_name()));
+			}
+
+			if (bld->get_building_type()==Building::MILITARYSITE) {
+			    MilitarySite* mil=static_cast<MilitarySite*>(bld);
+			    
+			    int v=mil->get_conquers() - map->calc_distance(field, immovables[i].coords);
+			    
+			    if (v>0)
+				field.military_influence+=v*v*mil->get_capacity();
+			}
 			
-			if (buildings[name].is_constructionsite)
-				name=static_cast<ConstructionSite*>(immovables[i].object)->get_building()->get_name();
-			
-			if (name=="frontierhouse")
-				field.frontierhouses++;
-
-			if (name=="lumberjack")
-				field.lumberjacks++;
-
-			if (name=="forrester")
-				field.foresters++;
-
-			if (name=="quarry")
-				field.quarries++;
+			if (bld->get_building_type()==Building::PRODUCTIONSITE)
+			    consider_productionsite_influence (field, immovables[i].coords,
+				    get_building_observer(bld->get_name()));
 
 			continue;
 		}
 		
 		if (immovables[i].object->has_attribute(tree_attr))
-			field.trees++;
+			field.trees_nearby++;
 
 		if (immovables[i].object->has_attribute(stone_attr))
-			field.stones++;
+			field.stones_nearby++;
 	}
+	
+	log ("Military influence for updated field is %d\n", field.military_influence);
+}
+
+void Computer_Player::consider_productionsite_influence (BuildableField& field, const Coords& coord, const BuildingObserver& bo)
+{
+	if (bo.need_trees)
+		field.tree_consumers_nearby++;
+
+	if (bo.need_stones)
+		field.stone_consumers_nearby++;
 }
 
 Computer_Player::EconomyObserver& Computer_Player::get_economy_observer (Economy* economy)
@@ -411,11 +409,11 @@ Computer_Player::EconomyObserver& Computer_Player::get_economy_observer (Economy
 
 void Computer_Player::gain_building (Building* b)
 {
-	BuildingObserver& bo=buildings[b->get_name()];
+	BuildingObserver& bo=get_building_observer(b->get_name());
 	
-	if (bo.is_constructionsite) {
-		buildings[static_cast<ConstructionSite*>(b)->get_building()->get_name()].cnt_under_construction++;
-		total_constructionsites++;
+	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
+		get_building_observer(static_cast<ConstructionSite*>(b)->get_building()->get_name()).cnt_under_construction++;
+	    	total_constructionsites++;
 	}
 	else
 		bo.cnt_built++;
@@ -423,10 +421,10 @@ void Computer_Player::gain_building (Building* b)
 
 void Computer_Player::lose_building (Building* b)
 {
-	BuildingObserver& bo=buildings[b->get_name()];
+	BuildingObserver& bo=get_building_observer(b->get_name());
 	
-	if (bo.is_constructionsite) {
-		buildings[static_cast<ConstructionSite*>(b)->get_building()->get_name()].cnt_under_construction--;
+	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
+		get_building_observer(static_cast<ConstructionSite*>(b)->get_building()->get_name()).cnt_under_construction--;
 		total_constructionsites--;
 	}
 	else
