@@ -85,7 +85,7 @@ void Critical_Error::draw(RenderTarget* dst)
 void Critical_Error::crash()
 {
 	log("Trigger a segmentation fault\n");
-	*(int*)0 = 0;
+	abort();
 }
 
 
@@ -122,7 +122,7 @@ void critical_error(const char* str, ...)
 			if(s->get_bool("coredump", false))
 			{
 				log("Trigger a segmentation fault\n");
-				*(int*)0 = 0;
+				abort();
 			}
 		}
 
