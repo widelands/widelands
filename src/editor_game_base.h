@@ -97,6 +97,9 @@ class Editor_Game_Base {
       void manually_load_tribe(const char* tribe);
       // Get a tribe from the loaded list, when available
       Tribe_Descr* get_tribe(const char* tribe); 
+
+	enum losegain_t { LOSE=0, GAIN };
+	virtual void player_immovable_notification (PlayerImmovable*, losegain_t)=0;
       
    protected:
       // next function is used to update the current gametime,

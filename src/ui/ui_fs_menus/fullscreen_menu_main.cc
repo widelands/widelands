@@ -40,8 +40,8 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title("Single Player");
 
-	b = new UIButton(this, 60, 140, 174, 24, 3);
-	b->clicked.set(this, &Fullscreen_Menu_Main::not_supported);
+	b = new UIButton(this, 60, 140, 174, 24, 3, mm_multiplayer);
+	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title("Multi Player");
 
 	b = new UIButton(this, 60, 180, 174, 24, 3, mm_options);

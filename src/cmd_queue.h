@@ -66,39 +66,61 @@ enum {
 //
 class Game;
 
-class Cmd_Queue {
-	struct Cmd {
-		int time; // scheduled time of execution
-		char sender;
-		int cmd;
-		int arg1; // the meaning of arg? depends on cmd
-		int arg2;
-		int arg3;
-	};
-	struct CmdCompare {
+class BaseCommand {
+	private:
+		int duetime;
+
 	public:
-		bool operator() (const Cmd& c1, const Cmd& c2) {
-			return c1.time > c2.time;
+		BaseCommand (int);
+		virtual ~BaseCommand ();
+
+		virtual void execute (Game*)=0;
+		
+		int get_duetime() const { return duetime; }
+};
+
+class Cmd_Queue {
+	struct CmdCompare {
+		bool operator() (const BaseCommand* c1, const BaseCommand* c2) {
+			return c1->get_duetime() > c2->get_duetime();
 		}
 	};
-	typedef std::priority_queue<Cmd, std::vector<Cmd>, CmdCompare> queue_t;
 
-	public:
-		typedef void (call_fn_t)(Game* g, int arg1, int arg2);
+	typedef std::priority_queue<BaseCommand*, std::vector<BaseCommand*>, CmdCompare> queue_t;
+
 
    public:
-      Cmd_Queue(Game *g);
-      ~Cmd_Queue(void);
+	Cmd_Queue(Game *g);
+	~Cmd_Queue(void);
 
-		void queue(int time, char sender, int cmd, int arg1=0, int arg2=0, int arg3=0);
-      int run_queue(int interval, int* game_time_var);
+	void enqueue (BaseCommand*);
+	int run_queue (int interval, int* game_time_var);
 
    private:
-		void exec_cmd(const Cmd *c);
-		void clear_cmd(const Cmd* c);
+	Game *m_game;
+	queue_t m_cmds;
+};
 
-      Game *m_game;
-		queue_t m_cmds;
+
+class Cmd_Call:public BaseCommand {
+    public:
+	typedef void (call_fn_t) (Game* g, int arg1, int arg2);
+	
+	Cmd_Call (int t, call_fn_t* c, int a1, int a2) : BaseCommand (t)
+	{
+		callee=c;
+		arg1=a1;
+		arg2=a2;
+	}	
+	
+	void execute (Game* g)
+	{
+		callee (g, arg1, arg2);
+	}
+	
+    private:
+	call_fn_t*	callee;
+	int		arg1, arg2;
 };
 
 #endif // __S__CMD_QUEUE_H

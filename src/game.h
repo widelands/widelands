@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,10 @@ enum {
 
 class Player;
 class Interactive_Player;
+class Computer_Player;
+class Map_Loader;
+class BaseCommand;
+class PlayerCommand;
 
 class Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
@@ -46,11 +50,15 @@ public:
 	~Game(void);
 
 	// life cycle
-   bool run(void);
+	bool run_single_player ();
+	bool run_multi_player ();
+
 	void think(void);
 
 
 	bool can_start();
+	
+	inline bool is_multiplayer() { return m_multiplayer; }
 
 	// in-game logic
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
@@ -65,19 +73,36 @@ public:
 	void set_speed(int speed);
 
 	bool get_allow_cheats();
+	
+	virtual void player_immovable_notification (PlayerImmovable*, losegain_t);
 
+	void enqueue_command (BaseCommand*);
 
-	void send_player_command(int pid, int cmd, int arg1=0, int arg2=0, int arg3=0);
+	void send_player_command (PlayerCommand*);
 
-  // is this base a game
-   inline bool is_game() { return true; }
+	void send_player_bulldoze (PlayerImmovable*);
+	void send_player_build (int, const Coords&, int);
+	void send_player_build_flag (int, const Coords&);
+	void send_player_build_road (int, Path*);
+	void send_player_flagaction (Flag*, int);
+	void send_player_start_stop_building (Building*);
+	void send_player_enhance_building (Building*, int);
+
+	// is this base a game
+	inline bool is_game() { return true; }
 
 private:
+	void init_player_controllers ();
+	bool run ();
+
+	bool		m_multiplayer;
+	
 	int		m_state;
 	int		m_speed;		// frametime multiplier
 
 	Interactive_Player*			ipl;
- 	Cmd_Queue*						cmdqueue;
+	std::vector<Computer_Player*>		cpl;
+ 	Cmd_Queue*				cmdqueue;
 
 	int m_realtime; // the real time (including) pauses in milliseconds
 };

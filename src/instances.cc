@@ -24,6 +24,42 @@
 #include "game.h"
 #include "instances.h"
 
+
+class Cmd_Destroy_Map_Object:public BaseCommand {
+	private:
+		int obj_serial;
+
+	public:
+		Cmd_Destroy_Map_Object (int t, Map_Object* o) : BaseCommand (t)
+		{ obj_serial=o->get_serial(); }
+		
+		virtual void execute (Game* g)
+		{
+			Map_Object* obj = g->get_objects()->get_object(obj_serial);
+
+			if (obj)
+				obj->destroy (g);
+		}
+};
+
+class Cmd_Act:public BaseCommand {
+	private:
+		int obj_serial;
+		int arg;
+
+	public:
+		Cmd_Act (int t, Map_Object* o, int a) : BaseCommand (t)
+		{ obj_serial=o->get_serial(); arg=a; }
+		
+		virtual void execute (Game* g)
+		{
+			Map_Object* obj = g->get_objects()->get_object(obj_serial);
+			if (obj)
+				obj->act(g, arg);
+			// the object must queue the next CMD_ACT itself if necessary
+		}
+};
+
 /** Object_Manager::~Object_Manager()
  *
  * Remove all map objects
@@ -243,7 +279,7 @@ This can be used to safely destroy the object from within an act function.
 */
 void Map_Object::schedule_destroy(Game *g)
 {
-	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_DESTROY, m_serial);
+	g->get_cmdqueue()->enqueue (new Cmd_Destroy_Map_Object(g->get_gametime(), this));
 }
 
 /*
@@ -285,7 +321,7 @@ uint Map_Object::schedule_act(Game* g, uint tdelta, uint data)
 {
 	uint time = g->get_gametime() + tdelta;
 
-	g->get_cmdqueue()->queue(time, SENDER_MAPOBJECT, CMD_ACT, m_serial, data, 0);
+	g->get_cmdqueue()->enqueue (new Cmd_Act(time, this, data));
 
 	return time;
 }

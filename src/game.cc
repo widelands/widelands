@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
  */
 
 #include "IntPlayer.h"
+#include "CompPlayer.h"
 #include "cmd_queue.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
@@ -25,6 +26,9 @@
 #include "player.h"
 #include "system.h"
 #include "map_loader.h"
+#include "playercommand.h"
+#include "trigger.h"
+
 
 /** Game::Game(void)
  *
@@ -93,6 +97,53 @@ bool Game::can_start()
 	return true;
 }
 
+
+bool Game::run_single_player ()
+{
+	m_state = gs_menu;
+	m_multiplayer = false;
+
+	Map_Loader* ml=0;
+	Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, &ml);
+	int code = lgm->run();
+	delete lgm;
+	
+	if (code==0 || get_map()==0)
+	    return false;
+
+	g_gr->flush(PicMod_Menu);
+
+	m_state = gs_running;
+
+	init_player_controllers ();
+
+	// Now first, completly load the map
+	ml->load_map_complete(this, code==2); // if code==2 is a scenario
+	delete ml;
+
+	return run();
+}
+
+
+bool Game::run_multi_player ()
+{
+	return false;
+}
+
+
+void Game::init_player_controllers ()
+{
+	ipl = new Interactive_Player(this, 1);
+	// inform base, that we have something interactive
+	set_iabase(ipl);
+
+	// set up computer controlled players
+	// FIXME: control which player should actually be controlled by AI
+	for (int i=2; i<=get_map()->get_nrplayers(); i++)
+		cpl.push_back (new Computer_Player(this,i));
+
+}
+
 /*
 ===============
 void Game::run(void)
@@ -113,74 +164,53 @@ stages.
 3. After this has happened, the game graphics are loaded.
 ===============
 */
-bool Game::run(void)
+bool Game::run()
 {
-	bool played = false;
+	postload();
 
-	m_state = gs_menu;
+	// Prepare the players (i.e. place HQs)
+	for (int i = 1; i <= get_map()->get_nrplayers(); i++) {
+		Player* player = get_player(i);
+		if (!player)
+			continue;
 
-   Map_Loader* ml=0;
-   Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, &ml);
-	int code = lgm->run();
-   delete lgm;
+		player->init_for_game(this);
 
-	if (code && get_map())
-	{
-		m_state = gs_running;
-
-		g_gr->flush(PicMod_Menu);
-
-		ipl = new Interactive_Player(this, 1);
-      // inform base, that we have something interactive
-      set_iabase(ipl);
-
-      // Now first, completly load the map
-      ml->load_map_complete(this, code==2); // if code==2 is a scenario
-      delete ml;
-
-		postload();
-
-		// Prepare the players (i.e. place HQs)
-		for(int i = 1; i <= get_map()->get_nrplayers(); i++) {
-			Player* player = get_player(i);
-			if (!player)
-				continue;
-
-			player->init_for_game(this);
-
-			const Coords &c = get_map()->get_starting_pos(i);
-			if (player->get_type() == Player::playerLocal)
-				ipl->move_view_to(c.x, c.y);
-		}
-
-      // Prepare the map, set default textures
-      get_map()->recalc_default_resources();
-      get_map()->delete_unreferenced_triggers();
-      get_map()->delete_events_without_trigger();
-
-      // Now let all triggers check once, if they are in the right state
-      for(int i=0; i<get_map()->get_number_of_triggers(); i++)
-         get_map()->get_trigger(i)->check_set_conditions(this);
-
-		load_graphics();
-
-      // Everything prepared, send the first trigger event
-      // We lie about the sender here. Hey, what is one lie in a lifetime?
-      cmdqueue->queue(get_gametime(), SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, -1, 0, 0);
-
-		ipl->run();
-		get_objects()->cleanup(this);
-	   delete ipl;
-
-		g_gr->flush(PicMod_Game);
-		g_anim.flush();
-
-		played = true;
+		const Coords &c = get_map()->get_starting_pos(i);
+		if (player->get_type() == Player::playerLocal)
+			ipl->move_view_to(c.x, c.y);
 	}
+
+	// Prepare the map, set default textures
+	get_map()->recalc_default_resources();
+	get_map()->delete_unreferenced_triggers();
+	get_map()->delete_events_without_trigger();
+
+	// Now let all triggers check once, if they are in the right state
+	for (int i=0; i<get_map()->get_number_of_triggers(); i++)
+		get_map()->get_trigger(i)->check_set_conditions(this);
+
+	load_graphics();
+
+	// Everything prepared, send the first trigger event
+	// We lie about the sender here. Hey, what is one lie in a lifetime?
+	enqueue_command (new Cmd_CheckTrigger(get_gametime(), -1));
+//	cmdqueue->queue(get_gametime(), SENDER_CMDQUEUE, CMD_CHECK_TRIGGER, -1, 0, 0);
+
+	ipl->run();
+
+	get_objects()->cleanup(this);
+	delete ipl;
+
+	for (unsigned int i=0; i<cpl.size(); i++)
+		delete cpl[i];
+
+	g_gr->flush(PicMod_Game);
+	g_anim.flush();
 
 	m_state = gs_none;
 
-	return played;
+	return true;
 }
 
 
@@ -193,10 +223,10 @@ bool Game::run(void)
 //
 void Game::think(void)
 {
-	int lasttime = m_realtime;
-	int frametime;
+	int frametime = -m_realtime;
+	
 	m_realtime = Sys_GetTime();
-	frametime = m_realtime - lasttime;
+	frametime += m_realtime;
 
 	// prevent frametime escalation in case the game logic is the performance bottleneck
 	if (frametime > 1000)
@@ -206,12 +236,14 @@ void Game::think(void)
 
 	// Networking: check socket here
 
-	if (m_state == gs_running)
-	{
-      cmdqueue->run_queue(frametime, get_game_time_pointer());
+	if (m_state == gs_running) {
+		for (unsigned int i=0;i<cpl.size();i++)
+		    cpl[i]->think();
+	
+		cmdqueue->run_queue(frametime, get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
-   }
+	}
 }
 
 
@@ -230,6 +262,16 @@ void Game::set_speed(int speed)
 }
 
 
+void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
+{
+	for (unsigned int i=0;i<cpl.size();i++)
+		if (cpl[i]->get_player_number()==pi->get_owner()->get_player_number())
+			if (lg==GAIN)
+				cpl[i]->gain_immovable (pi);
+			else
+				cpl[i]->lose_immovable (pi);
+}
+
 /*
 ===============
 Game::send_player_command
@@ -239,10 +281,51 @@ It takes the appropriate action, i.e. either add to the cmd_queue or send
 across the network.
 ===============
 */
-void Game::send_player_command(int pid, int cmd, int arg1, int arg2, int arg3)
+void Game::send_player_command (PlayerCommand* pc)
 {
-	cmdqueue->queue(get_gametime(), pid, cmd, arg1, arg2, arg3);
+	enqueue_command (pc);
 }
 
+void Game::enqueue_command (BaseCommand* cmd)
+{
+	cmdqueue->enqueue (cmd);
+}
 
+// we might want to make these inlines:
+void Game::send_player_bulldoze (PlayerImmovable* pi)
+{
+	send_player_command (new Cmd_Bulldoze(get_gametime(), pi->get_owner()->get_player_number(), pi));
+}
+
+void Game::send_player_build (int pid, const Coords& coords, int id)
+{
+	send_player_command (new Cmd_Build(get_gametime(), pid, coords, id));
+}
+
+void Game::send_player_build_flag (int pid, const Coords& coords)
+{
+	send_player_command (new Cmd_BuildFlag(get_gametime(), pid, coords));
+}
+
+void Game::send_player_build_road (int pid, Path* path)
+{
+	send_player_command (new Cmd_BuildRoad(get_gametime(), pid, path));
+}
+
+void Game::send_player_flagaction (Flag* flag, int action)
+{
+	send_player_command (new Cmd_FlagAction(get_gametime(), flag->get_owner()->get_player_number(), flag, action));
+}
+
+void Game::send_player_start_stop_building (Building* b)
+{
+	send_player_command (new Cmd_StartStopBuilding(get_gametime(), b->get_owner()->get_player_number(), b));
+}
+
+void Game::send_player_enhance_building (Building* b, int id)
+{
+	assert(id!=-1);
+
+	send_player_command (new Cmd_EnhanceBuilding(get_gametime(), b->get_owner()->get_player_number(), b, id));
+}
 

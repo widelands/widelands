@@ -22,6 +22,7 @@
 
 #include <string>
 #include "error.h"
+#include "cmd_queue.h"
 
 class Game;
 class FileRead;
@@ -71,6 +72,16 @@ class Trigger {
       bool        m_is_set;
       bool        m_is_one_time_trigger;    // Can this trigger occur only once?
       int         m_reference;
+};
+
+class Cmd_CheckTrigger:public BaseCommand {
+    private:
+	int trigger_id;
+
+    public:
+	Cmd_CheckTrigger (int, int);
+	
+	virtual void execute (Game*);
 };
 
 #endif

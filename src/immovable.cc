@@ -22,6 +22,7 @@
 #include "field.h"
 #include "game.h"
 #include "immovable.h"
+#include "player.h"
 #include "map.h"
 #include "profile.h"
 #include "rendertarget.h"
@@ -922,6 +923,8 @@ void PlayerImmovable::set_owner(Player *owner)
 	assert(owner);
 
 	m_owner = owner;
+	
+	m_owner->get_game()->player_immovable_notification (this, Editor_Game_Base::GAIN);
 }
 
 /*
@@ -945,9 +948,12 @@ Release workers
 */
 void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
-   while(m_workers.size())
-      m_workers[0]->set_location(0);
-
+	while(m_workers.size())
+		m_workers[0]->set_location(0);
+	
+	if (m_owner!=0)
+		m_owner->get_game()->player_immovable_notification (this, Editor_Game_Base::LOSE);
+	
 	BaseImmovable::cleanup(g);
 }
 

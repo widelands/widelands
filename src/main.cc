@@ -27,6 +27,7 @@
 #include "fullscreen_menu_main.h"
 #include "fullscreen_menu_options.h"
 #include "fullscreen_menu_singleplayer.h"
+#include "fullscreen_menu_netsetup.h"
 #include "game.h"
 #include "graphic.h"
 #include "options.h"
@@ -155,7 +156,7 @@ void g_main(int argc, char** argv)
                            case Fullscreen_Menu_SinglePlayer::sp_skirmish:
                               {
                                  Game *g = new Game;
-                                 bool ran = g->run();
+                                 bool ran = g->run_single_player();
                                  delete g;
                                  if (ran) {
                                     // game is over. everything's good. restart Main Menu
@@ -172,6 +173,16 @@ void g_main(int argc, char** argv)
                      }
                   }
                   break;
+	       
+	       
+	       case Fullscreen_Menu_Main::mm_multiplayer:
+		  {
+			Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
+			int code=ns->run();
+			delete ns;
+		  }
+		  break;
+
 
                case Fullscreen_Menu_Main::mm_options:
                   {

@@ -31,7 +31,7 @@ public:
 	Fullscreen_Menu_Main();
    enum {
       mm_singleplayer,
-      //mm_multiplayer, // BIG TODO
+      mm_multiplayer,
       mm_options,
       mm_editor,
       mm_readme,

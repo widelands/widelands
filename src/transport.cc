@@ -3655,8 +3655,10 @@ void Economy::start_request_timer(int delta)
 
 	m_request_timer = true;
 	m_request_timer_time = game->get_gametime() + delta;
-	cq->queue(m_request_timer_time, SENDER_MAPOBJECT, CMD_CALL,
-					(int)(&Economy::request_timer_cb), m_trackserial, 0);
+	cq->enqueue (new Cmd_Call(m_request_timer_time, &Economy::request_timer_cb, m_trackserial, 0));
+	
+//	cq->queue(m_request_timer_time, SENDER_MAPOBJECT, CMD_CALL,
+//					(int)(&Economy::request_timer_cb), m_trackserial, 0);
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,29 +17,24 @@
  *
  */
 
-#ifndef __S__EDITOR_H
-#define __S__EDITOR_H
+#ifndef __S__NETSETUP_H
+#define __S__NETSETUP_H
 
-#include "editor_game_base.h"
+#include "fullscreen_menu_base.h"
 
-class Editor_Interactive;
+class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
+	public:
+		enum {
+			CANCEL=0,
+			HOSTGAME,
+			JOINGAME
+		};
+		
+		Fullscreen_Menu_NetSetup ();
+		~Fullscreen_Menu_NetSetup ();
 
-class Editor : public Editor_Game_Base {
-      public:
-         Editor();
-         ~Editor();
-
-         bool is_game() { return false; }
-         void think();
-
-         void run();
-
-	virtual void player_immovable_notification (PlayerImmovable*, losegain_t) {}
-	
-      private:
-         int m_realtime;
-         Editor_Interactive* m_eia;
+		void not_supported();
 };
 
-#endif // __S__EDITOR_H
+#endif
 

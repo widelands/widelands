@@ -34,6 +34,24 @@
 #include "worker.h"
 #include "world.h"
 
+
+class Cmd_Incorporate:public BaseCommand {
+    private:
+	    Worker* worker;
+	    
+    public:
+	    Cmd_Incorporate (int t, Worker* w) : BaseCommand (t)
+	    {
+		    worker=w;
+	    }
+	    
+	    void execute (Game* g)
+	    {
+		    worker->incorporate (g);
+	    }
+};
+
+
 /*
 ==============================================================================
 
@@ -1751,7 +1769,8 @@ the warehouse he is standing on.
 */
 void Worker::schedule_incorporate(Game* g)
 {
-	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_INCORPORATE, m_serial);
+	g->get_cmdqueue()->enqueue (new Cmd_Incorporate(g->get_gametime(), this));
+//	g->get_cmdqueue()->queue(g->get_gametime(), SENDER_MAPOBJECT, CMD_INCORPORATE, m_serial);
 	force_skip_act(g);
 }
 
