@@ -183,7 +183,7 @@ MiniMap::MiniMap(Panel *parent, int x, int y, Map *m, MiniMap **reg)
 	_view = new MiniMapView(this, 0, 0, m);
 	_view->warpview.set(&warpview, &UISignal2<int,int>::call);
 
-	set_cache(false);
+	//set_cache(false); // testing
 }
 
 /** MiniMap::~MiniMap()

@@ -120,6 +120,34 @@ void Window::set_new_bg(Pic* p)
 	update(0, 0, get_w(), get_h());
 }
 
+/** Window::move_to_mouse()
+ *
+ * Move the window so that it is under the mouse cursor.
+ * Ensure that the window doesn't move out of the screen.
+ */
+void Window::move_to_mouse()
+{
+	int px, py;
+
+	px = g_ip.get_mpx() - get_w()/2;
+	py = g_ip.get_mpy() - get_h()/2;
+
+	Panel *parent = get_parent();
+	if (parent) {
+		if (px < 0)
+			px = 0;
+		if (px+(int)get_w() > parent->get_inner_w())
+			px = parent->get_inner_w() - get_w();
+
+		if (py < 0)
+			py = 0;
+		if (py+(int)get_h() > parent->get_inner_h())
+			py = parent->get_inner_h() - get_h();
+	}
+
+	set_pos(px, py);
+}
+
 /** Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
  *
  * Redraw the window frame and background
@@ -127,7 +155,7 @@ void Window::set_new_bg(Pic* p)
 void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
 {
 	Pic *usebg = _custom_bg ? _custom_bg : &bg;
-	uint px, py;
+	int px, py;
 
 	// fill background
 	for(py = CORNER; py < get_h()-CORNER; py += usebg->get_h()) {
@@ -215,13 +243,13 @@ void Window::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
 		int ny = get_y() + ydiff;
 
 		if (get_parent()) {
-			if (nx+get_w() > get_parent()->get_w())
-				nx = get_parent()->get_w()-get_w();
+			if (nx+(int)get_w() > get_parent()->get_inner_w())
+				nx = get_parent()->get_inner_w()-get_w();
 			if (nx < 0)
 				nx = 0;
 
-			if (ny+get_h() > get_parent()->get_h())
-				ny = get_parent()->get_h()-get_h();
+			if (ny+(int)get_h() > get_parent()->get_inner_h())
+				ny = get_parent()->get_inner_h()-get_h();
 			if (ny < 0)
 				ny = 0;
 		}

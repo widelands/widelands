@@ -149,6 +149,9 @@ class Field {
 					 inline int get_xpix(void) const { return xpix; }
 					 inline int get_ypix(void) const { return ypix; }
 
+					 inline int get_xpos() const { return xpos; }
+					 inline int get_ypos() const { return ypos; }
+
 					 // Get neigbor fields
 					 inline Field* get_ln(void) const { return ln; }
 					 inline Field* get_rn(void) const { return rn; }

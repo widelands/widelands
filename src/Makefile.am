@@ -59,6 +59,8 @@ widelands_SOURCES=main.cc \
 						mapview.cc \
 						minimap.h \
 						minimap.cc \
+						fieldaction.h \
+						fieldaction.cc \
 						field.cc \
 						profile.cc \
 						profile.h \

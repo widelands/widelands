@@ -194,7 +194,7 @@ void Multiline_Textarea::draw(Bitmap *bmp, int ofsx, int ofsy)
 	if (!_lines.elements())
 		return;
 
-	uint y = 0;
+	int y = 0;
 	for(int i = _firstvis; i < _lines.elements(); i++) {
 		if (y >= get_h())
 			return;

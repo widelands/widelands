@@ -125,8 +125,8 @@ public:
 
 	inline int get_x() const { return _x; }
 	inline int get_y() const { return _y; }
-	inline uint get_w() const { return _w; }
-	inline uint get_h() const { return _h; }
+	inline int get_w() const { return _w; }
+	inline int get_h() const { return _h; }
 
 	void set_inner_size(uint nw, uint nh);
 	void set_border(uint l, uint r, uint t, uint b);
@@ -520,6 +520,8 @@ public:
 
 	void set_title(const char *text);
 	void set_new_bg(Pic* p);
+
+	void move_to_mouse();
 
 	// Drawing and event handlers
 	void draw_border(Bitmap *dst, int ofsx, int ofsy);

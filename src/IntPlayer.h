@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2002 by Holger Rapp
- * 
+ * Copyright (C) 2002 by The Widelands Development Team
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -45,7 +45,11 @@ class Interactive_Player : public Panel {
 					 void main_menu_btn();
 					 void minimap_btn();
 
+					 void field_action(int fx, int fy);
+
 					 void think();
+
+					 inline Game *get_game() { return game; }
 
 					 // Set the in-game resolution
 					 static void set_resolution(uint x, uint y) { xresolution=x; yresolution=y; }
@@ -60,6 +64,7 @@ class Interactive_Player : public Panel {
 					 Game *game;
 					 Map_View* main_mapview;
 					 MiniMap *minimap;
+					 Window *fieldaction;
 };
 
 

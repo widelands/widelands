@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by Holger Rapp
+ * Copyright (C) 2002 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "cursor.h"
 #include "game.h"
 #include "minimap.h"
+#include "fieldaction.h"
 
 
 /** class Interactive_Player
@@ -48,10 +49,13 @@ uint Interactive_Player::yresolution;
 Interactive_Player::Interactive_Player(Game *g)
 	: Panel(0, 0, 0, get_xres(), get_yres())
 {
+	game = g;
+
 	main_mapview = new Map_View(this, 0, 0, get_w(), get_h(), g->get_map());
 	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
+	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
 	minimap = 0;
-	game = g;
+	fieldaction = 0;
 
 	// user interface buttons
 	int x = (get_w() - (4*34)) >> 1;
@@ -126,6 +130,21 @@ void Interactive_Player::minimap_btn()
 		// make sure the viewpos marker is at the right pos to start with
 		mainview_move(main_mapview->get_vpx(), main_mapview->get_vpy());
 	}
+}
+
+/** Interactive_Player::field_action(int fx, int fy)
+ *
+ * Player has clicked on the given field; bring up the context menu.
+ *
+ * Args: fx		field coordinates
+ *       fy
+ */
+void Interactive_Player::field_action(int fx, int fy)
+{
+	// note: buildings owned by the player must be treated differently
+	// (i.e bring up dialog specific to the building)
+
+	show_field_action(this, fx, fy, &fieldaction);
 }
 
 /** Interactive_Player::think()

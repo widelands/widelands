@@ -31,6 +31,8 @@
  * 			g_gr
  */
 
+AutoPic Map_View::fsel("fsel.bmp", 0, 0, 255);
+
 /** Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m)
  *
  * Init
@@ -43,6 +45,8 @@ Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Map *m)
 	vpx = vpy = 0;
 	map = m;
 	dragging = false;
+
+	fselx = fsely = 0;
 }
 
 /** Map_View::~Map_View(void)
@@ -124,6 +128,20 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 
 	vpx = orig_vpx;
 	vpy = orig_vpy;
+
+	// Draw the fsel
+	f = map->get_field(fselx, fsely);
+	int x = f->get_xpix() - vpx;
+	int y = f->get_ypix() - vpy;
+
+	if (x < -(int)fsel.get_w())
+		x += map->get_w() * FIELD_WIDTH;
+	if (y < -(int)fsel.get_h())
+		y += map->get_h() * (FIELD_HEIGHT>>1);
+
+	x -= fsel.get_w()>>1;
+	y -= fsel.get_h()>>1;
+	copy_pic(bmp, &fsel, x+ofsx, y+ofsx, 0, 0, fsel.get_w(), fsel.get_h());
 }
 
 void Map_View::draw_field(Bitmap *dst, Field* f)
@@ -173,8 +191,14 @@ void Map_View::set_viewpoint(int x, int y)
  */
 void Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 {
-	// right-click
-	if (btn == 1)
+	if (btn == 0)
+	{
+		if (down) {
+			track_fsel(x, y);
+			fieldclicked.call(fselx, fsely);
+		}
+	}
+	else if (btn == 1)
 	{
 		if (down) {
 			dragging = true;
@@ -194,11 +218,103 @@ void Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 	if (!(btns & 2))
 		dragging = false;
-	if (!dragging)
-		return;
 
-	set_rel_viewpoint(xdiff, ydiff);
+	if (dragging)
+	{
+		set_rel_viewpoint(xdiff, ydiff);
+		g_ip.set_mouse_pos(g_ip.get_mplx(), g_ip.get_mply());
+	}
+
+	track_fsel(x, y);
+
 	g_gr.needs_fs_update();
-	g_ip.set_mouse_pos(g_ip.get_mplx(), g_ip.get_mply());
 }
 
+/** Map_View::track_fsel(int mx, int my)
+ *
+ * Move the fsel to the given mouse position
+ *
+ * Args: mx	new mouse coordinates relative to panel
+ *       my
+ */
+void Map_View::track_fsel(int mx, int my)
+{
+	// First of all, get a preliminary field coordinate based on the basic
+	// grid (not taking heights into account)
+	int fy = my + vpy;
+	fsely = (fy + (FIELD_HEIGHT>>2)) / (FIELD_HEIGHT>>1) - 1;
+	while(fsely >= map->get_h()) fsely -= map->get_h();
+	while(fsely < 0) fsely += map->get_h();
+
+	int fx = mx + vpx;
+	fselx = fx;
+	if (fsely & 1)
+		fselx -= FIELD_WIDTH>>1;
+	fselx = (fselx + (FIELD_WIDTH>>1)) / FIELD_WIDTH;
+	while(fselx >= map->get_w()) fselx -= map->get_w();
+	while(fselx < 0) fselx += map->get_w();
+
+	// Now, fselx and fsely point to where we'd be if the field's height
+	// was 0.
+	// We now recursively move towards the correct field. Because height cannot
+	// be negative, we can only move to the bottom-left or bottom-right neighbour
+	Field *f = map->get_field(fselx, fsely);
+	int mapheight = map->get_h()*(FIELD_HEIGHT>>1);
+	//printf("%i %i\n", fx, fy);
+
+	for(;;) {
+		Field *bln = f->get_bln();
+		Field *brn = f->get_brn();
+		bool movebln, movebrn;
+		int fd, blnd, brnd;
+		int d2;
+
+		// determine which field the mouse is closer to on the y-axis
+		// bit messy because it has to be aware of map wrap-arounds
+		fd = fy - f->get_ypix();
+		d2 = fy - mapheight - f->get_ypix();
+		if (abs(d2) < abs(fd))
+			fd = d2;
+
+		blnd = bln->get_ypix() - fy;
+		d2 = bln->get_ypix() - (fy - mapheight);
+		if (abs(d2) < abs(blnd))
+			blnd = d2;
+		movebln = blnd < fd;
+
+		brnd = brn->get_ypix() - fy;
+		d2 = brn->get_ypix() - (fy - mapheight);
+		if (abs(d2) < abs(brnd))
+			brnd = d2;
+		movebrn = brnd < fd;
+
+		if (!movebln && !movebrn)
+			break;
+
+		//printf("  %i %i (%s %s)\n", f->get_xpix(), f->get_ypix(), movebln?"left":"", movebrn?"right":"");
+		//printf("   %i <> %i\n", bln->get_xpix(), brn->get_xpix());
+
+		// descend one field
+		if (brn->get_xpix()-fx < fx-bln->get_xpix()) {
+			if (movebrn)
+				f = brn;
+			else if (movebln)
+				f = bln;
+			else
+				break;
+		} else {
+			if (movebln)
+				f = bln;
+			else if (movebrn)
+				f = brn;
+			else
+				break;
+		}
+	}
+
+	//printf("  %i %i\n", f->get_xpix(), f->get_ypix());
+
+	// Store the final field coordinates
+	fselx = f->get_xpos();
+	fsely = f->get_ypos();
+}

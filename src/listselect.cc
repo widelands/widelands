@@ -202,7 +202,7 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
 	dst->fill_rect(ofsx+1, ofsy+1, get_eff_w()-2, get_h()-2, _bgcolor);
 
 	// draw text lines
-	uint y = 1;
+	int y = 1;
 	for(int i = _firstvis; i < _entries.elements(); i++) {
 		if (y >= get_h())
 			return;

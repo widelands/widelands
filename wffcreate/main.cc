@@ -66,7 +66,7 @@ inline int g_main(int argn, char** argc) {
 		  tmp=WLFF_VERSION;
 		  f.write((char*) &tmp, sizeof(ushort));
 		  f.write(name, 20);
-		  tmp=Graph::pack_rgb(atoi(argc[2]), atoi(argc[3]), atoi(argc[4]));
+		  tmp=pack_rgb(atoi(argc[2]), atoi(argc[3]), atoi(argc[4]));
 		  f.write((char*) &tmp, sizeof(ushort));
 		 
 		  SDL_Surface* sur;

@@ -150,10 +150,10 @@ void Button::draw(Bitmap *dst, int ofsx, int ofsy)
 	int srcy = get_y() % bg->get_h();
 	int h = bg->get_h() - srcy;
 
-	for(uint y = 0; y < get_h(); y += h, srcy = 0, h = bg->get_h()) {
+	for(int y = 0; y < get_h(); y += h, srcy = 0, h = bg->get_h()) {
 		int srcx = get_x() % bg->get_w();
 		int w = bg->get_w() - srcx;
-		for(uint x = 0; x < get_w(); x += w, srcx = 0, w = bg->get_w())
+		for(int x = 0; x < get_w(); x += w, srcx = 0, w = bg->get_w())
 			copy_pic(dst, bg, x+ofsx, y+ofsy, srcx, srcy, w, h);
 	}
 

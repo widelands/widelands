@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2002 by Holger Rapp
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -38,6 +38,7 @@ public:
 	~Map_View();
 
 	UISignal2<int,int> warpview; // x/y in screen coordinates
+	UISignal2<int,int> fieldclicked;
 
 	// Function to set the viewpoint
 	void set_viewpoint(int x, int y);
@@ -53,10 +54,15 @@ public:
 	void handle_mouseclick(uint btn, bool down, int x, int y);
 	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
+	void track_fsel(int mx, int my);
+
 private:
+	static AutoPic fsel;
+
 	Map* map;
 	int vpx, vpy;
 	bool dragging;
+	int fselx, fsely; // field the mouse is over
 
 	void draw_field(Bitmap *, Field*);
 	void draw_polygon(Bitmap *, Field*, Field*, Field*, Pic*);
