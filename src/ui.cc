@@ -885,9 +885,9 @@ void Button::draw(void) {
 		  unsigned short clr;
 		 
 		  if(!benlighted || bpressed) {
-					 copy_pic(dp, mybg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
+					 Graph::copy_pic(dp, mybg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
 		  } else {
-					 copy_pic(dp, myebg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
+					 Graph::copy_pic(dp, myebg, x+xp+2, y+yp+2, 2, 2, w-4, h-4);
 		  }
 		 
 
@@ -897,7 +897,7 @@ void Button::draw(void) {
 					 unsigned int mw = myp->get_w() > w ? w : myp->get_w();
 					 unsigned int mh = myp->get_h() > h ? h : myp->get_h();
 
-					 copy_pic(dp, myp, (x+xp+(w>>1))-(mw>>1), (y+yp+(h>>1))-(mh>>1), 0, 0, mw, mh);
+					 Graph::copy_pic(dp, myp, (x+xp+(w>>1))-(mw>>1), (y+yp+(h>>1))-(mh>>1), 0, 0, mw, mh);
 		  }
 		  
 		  // draw the borders
