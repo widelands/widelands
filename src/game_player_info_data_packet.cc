@@ -19,7 +19,7 @@
 
 #include "game.h"
 #include "game_player_info_data_packet.h"
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "player.h"
 #include "tribe.h"
 

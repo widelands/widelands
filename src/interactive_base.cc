@@ -23,7 +23,7 @@
 #include "font_handler.h"
 #include "game.h"
 #include "interactive_base.h"
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "keycodes.h"
 #include "map.h"
 #include "mapview.h"

@@ -24,7 +24,7 @@
 #include "game_loader.h"
 #include "game_main_menu_save_game.h"
 #include "game_main_menu_load_game.h"
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "keycodes.h"
 #include "immovable.h"
 #include "mapview.h"

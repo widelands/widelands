@@ -17,8 +17,8 @@
  *
  */
 
-#include "IntPlayer.h"
-#include "CompPlayer.h"
+#include "interactive_player.h"
+#include "computer_player.h"
 #include "cmd_queue.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"

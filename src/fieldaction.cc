@@ -17,7 +17,7 @@
  *
  */
 
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "cmd_queue.h"
 #include "editorinteractive.h"
 #include "fieldaction.h"

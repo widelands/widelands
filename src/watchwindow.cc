@@ -17,7 +17,7 @@
  *
  */
 
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "bob.h"
 #include "game.h"
 #include "map.h"

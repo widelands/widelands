@@ -22,7 +22,7 @@
 #include "game_main_menu_save_game.h"
 #include "game_preload_data_packet.h"
 #include "game_saver.h"
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"

@@ -20,7 +20,7 @@
 #include "filesystem.h"
 #include "game.h"
 #include "game_saver.h"
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"

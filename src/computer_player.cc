@@ -23,7 +23,7 @@
 #include "player.h"
 #include "tribe.h"
 #include "constructionsite.h"
-#include "CompPlayer.h"
+#include "computer_player.h"
 
 class CheckStepRoadAI : public CheckStep {
 public:

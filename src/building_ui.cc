@@ -25,7 +25,7 @@ buildings directly. Instead, they must send a player command through the Game
 class.
 */
 
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "building.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"

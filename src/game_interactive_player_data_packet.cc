@@ -19,13 +19,13 @@
 
 #include "game.h"
 #include "game_interactive_player_data_packet.h"
-#include "IntPlayer.h"
+#include "interactive_player.h"
 #include "mapview.h"
 #include "overlay_manager.h"
 
 #define CURRENT_PACKET_VERSION 1
 
-// Forward declaration. Defined in IntPlayer.cc
+// Forward declaration. Defined in interactive_player.cc
 int Int_Player_overlay_callback_function(FCoords& fc, void* data, int);
 
 /*
