@@ -20,10 +20,15 @@
 #ifndef __S__OS_H
 #define __S__OS_H
 
+#ifndef NULL
+#define NULL 0
+#endif
+
 #ifdef WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #else
+
 #include <unistd.h>
 #endif
 

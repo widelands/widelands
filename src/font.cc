@@ -119,7 +119,7 @@ Pic* Font_Handler::get_string(const char* str, const unsigned short f) {
 		  retval->set_size(strlen(buf)*w[f], h[f]);
 		  retval->set_clrkey(pics[f]->get_clrkey());
 
-		  for(unsigned int j=0; i<strlen(buf); j++) {
+		  for(unsigned int j=0; j<strlen(buf); j++) {
 					 c=buf[j];
 					 if(c < 32  || c > 127) {
 								// c is NOT an international ASCII char, we skip it silently

@@ -95,9 +95,9 @@ namespace Graph {
 			*/
 		  void Pic::clear_all(void)
 		  {
-				if(!clrkey) return;
+				if(!bhas_clrkey) return;
 
-				int clear = clrkey;
+				unsigned long clear = clrkey;
 				for (unsigned int i=(w*h-2); i; i-=2)
 					pixels[i]=clear;
 		  }
