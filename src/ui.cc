@@ -59,18 +59,21 @@ Pic Window::bg;
  * 			y 	y pos of window
  * 			w	width of window
  * 			h	height of window
- * 			id the identifier of this window
  * 			f	what window to create
  */
-Window::Window(const unsigned int px, const unsigned int py, const unsigned int wi, const unsigned int he, const unsigned int gid, const Flags f) {
+Window::Window(const unsigned int px, const unsigned int py, const unsigned int wi, const unsigned int he, const Flags f) {
 		  assert(bg.get_w() && r_border.get_w() && l_border.get_w() && top.get_w() && bot.get_w() && "Window class is not fully initalized!");
 
 		  x=px;
 		  y=py;
 		  w=wi;
 		  h=he;
-		  id=gid;
 		  myf=f;
+					 
+		  nta=0;
+		  ta=(Textarea**) malloc(sizeof(Textarea*));
+					 
+		  subids=0;
 
 		  own_bg=0;
 					
@@ -85,6 +88,12 @@ Window::Window(const unsigned int px, const unsigned int py, const unsigned int 
  * Returns: Nothing
  */
 Window::~Window(void) {
+		  //unsigned int i;
+		  
+/*		  for(i=0 ; i< nta; i++) 
+					 delete ta[i];
+		  free(ta);
+*/		  
 		  if(own_bg) delete own_bg;
 }
 
@@ -100,55 +109,62 @@ void Window::draw(void) {
 		 
 		  Pic* usebg= own_bg ? own_bg : &bg ;
 		
-		  // Top n Bottom
-		  // top
-		  draw_pic(&top, x, y, 0, 0, CORNER, CORNER);
-		  // bot
-		  draw_pic(&bot, x, y+h-CORNER, 0, 0, CORNER, CORNER);
-		  for(i=x+CORNER; i<(w+x)-CORNER-MIDDLE; i+=MIDDLE) {
+		  if(myf != FLAT) {
+					 // Top n Bottom
 					 // top
-					 draw_pic(&top, i, y, CORNER, 0, MIDDLE, CORNER);
+					 draw_pic(&top, x, y, 0, 0, CORNER, CORNER);
 					 // bot
-					 draw_pic(&bot, i, y+h-CORNER, CORNER, 0, MIDDLE, CORNER);
-		  } 
-		  // top
-		  draw_pic(&top, i, y, CORNER, 0, w+x-CORNER-i, CORNER);
-		  draw_pic(&top, (x+w)-CORNER, y, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
-		  // bot
-		  draw_pic(&bot, i, y+h-CORNER, CORNER, 0, w+x-CORNER-i, CORNER);
-		  draw_pic(&bot, (x+w)-CORNER, y+h-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
-
-		  
-		  // borders
-		  // left
-		  draw_pic(&l_border, x, y+CORNER, 0, 0, CORNER, CORNER);
-		  // right
-		  draw_pic(&r_border, x+w-CORNER, y+CORNER, 0, 0, CORNER, CORNER);
-		  for(i=y+CORNER+CORNER; i<(h+y)-CORNER-CORNER-MIDDLE; i+=MIDDLE) {
-					 // left
-					 draw_pic(&l_border, x, i, 0, CORNER, CORNER, MIDDLE);
-					 // right
-					 draw_pic(&r_border, x+w-CORNER, i, 0, CORNER, CORNER, MIDDLE);
-		  } 
-		  // left
-		  draw_pic(&l_border, x, i, 0, CORNER, CORNER, h+y-CORNER-i);
-		  draw_pic(&l_border, x, y+h-CORNER-CORNER, 0, l_border.get_h()-CORNER, CORNER, CORNER);
-		  // right
-		  draw_pic(&r_border, x+w-CORNER, i, 0, CORNER, CORNER, h+y-CORNER-i);
-		  draw_pic(&r_border, x+w-CORNER, y+h-CORNER-CORNER, 0, r_border.get_h()-CORNER, CORNER, CORNER);
-
-		  // bg
-		  for(j=y+CORNER; (int)j<(int)(h+y)-CORNER-CORNER-usebg->get_h(); j+=usebg->get_h()) {
-					 for(i=x+CORNER; (int)i<(int)(x+w)-CORNER-CORNER-usebg->get_w(); i+=usebg->get_w()) {
-								draw_pic(usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
+					 draw_pic(&bot, x, y+h-CORNER, 0, 0, CORNER, CORNER);
+					 for(i=x+CORNER; i<(w+x)-CORNER-MIDDLE; i+=MIDDLE) {
+								// top
+								draw_pic(&top, i, y, CORNER, 0, MIDDLE, CORNER);
+								// bot
+								draw_pic(&bot, i, y+h-CORNER, CORNER, 0, MIDDLE, CORNER);
 					 } 
-					 draw_pic(usebg, i, j, 0, 0, w+x-i-CORNER, usebg->get_h());
-		  }
-		  for(i=x+CORNER; (int)i<(int)(w+x)-CORNER-usebg->get_w(); i+=usebg->get_w()) {
-					 draw_pic(usebg, i, j, 0, 0, usebg->get_w(), y+h-j-CORNER);
-		  } 
-		  draw_pic(usebg, i, j, 0, 0, w+x-i-CORNER, y+h-j-bot.get_h());
+					 // top
+					 draw_pic(&top, i, y, CORNER, 0, w+x-CORNER-i, CORNER);
+					 draw_pic(&top, (x+w)-CORNER, y, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+					 // bot
+					 draw_pic(&bot, i, y+h-CORNER, CORNER, 0, w+x-CORNER-i, CORNER);
+					 draw_pic(&bot, (x+w)-CORNER, y+h-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 
+
+					 // borders
+					 // left
+					 draw_pic(&l_border, x, y+CORNER, 0, 0, CORNER, CORNER);
+					 // right
+					 draw_pic(&r_border, x+w-CORNER, y+CORNER, 0, 0, CORNER, CORNER);
+					 for(i=y+CORNER+CORNER; i<(h+y)-CORNER-CORNER-MIDDLE; i+=MIDDLE) {
+								// left
+								draw_pic(&l_border, x, i, 0, CORNER, CORNER, MIDDLE);
+								// right
+								draw_pic(&r_border, x+w-CORNER, i, 0, CORNER, CORNER, MIDDLE);
+					 } 
+					 // left
+					 draw_pic(&l_border, x, i, 0, CORNER, CORNER, h+y-CORNER-i);
+					 draw_pic(&l_border, x, y+h-CORNER-CORNER, 0, l_border.get_h()-CORNER, CORNER, CORNER);
+					 // right
+					 draw_pic(&r_border, x+w-CORNER, i, 0, CORNER, CORNER, h+y-CORNER-i);
+					 draw_pic(&r_border, x+w-CORNER, y+h-CORNER-CORNER, 0, r_border.get_h()-CORNER, CORNER, CORNER);
+
+					 // bg
+					 for(j=y+CORNER; (int)j<(int)((h+y)-CORNER-CORNER-usebg->get_h()); j+=usebg->get_h()) {
+								for(i=x+CORNER; (int)i<(int)((x+w)-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
+										  draw_pic(usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
+								} 
+								draw_pic(usebg, i, j, 0, 0, w+x-i-CORNER, usebg->get_h());
+					 }
+					 for(i=x+CORNER; (int)i<(int)((w+x)-CORNER-usebg->get_w()); i+=usebg->get_w()) {
+								draw_pic(usebg, i, j, 0, 0, usebg->get_w(), y+h-j-CORNER);
+					 } 
+					 draw_pic(usebg, i, j, 0, 0, w+x-i-CORNER, y+h-j-bot.get_h());
+		  } else {
+					 // has no borders. Simply paste once the pic
+					 unsigned int mw = usebg->get_w() > w ? w : usebg->get_w();
+					 unsigned int mh = usebg->get_h() > h ? h : usebg->get_h();
+		 
+					 draw_pic(usebg, x, y, 0, 0, mw, mh);
+		  }
 }
 					 
 /** void Window::set_new_bg(Pic* p);
@@ -166,6 +182,23 @@ void Window::set_new_bg(Pic* p) {
 		  own_bg=p;
 }
 
+/** 
+ * unsigned int Window::create_textarea(const unsigned int x, const unsigned int y, const unsigned int w, const unsigned int h, const Textarea::Align t 
+ *  	= Textarea::RIGHTA) 
+ *
+ *  This function creates a new textarea
+ *  Args: x,y	position of the textarea relative to left/top edge of window
+ *  		 h,w	height and width
+ *  		 f		Alignment of the text in the area
+ *  Returns: ID of this thingy
+ */
+unsigned int Window::create_textarea(const unsigned int x, const unsigned int y, const unsigned int w, const unsigned int h, const Textarea::Align t 
+					   = Textarea::RIGHTA) {
+
+		  return 0;
+
+}
+					  
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -191,8 +224,12 @@ void Window::set_new_bg(Pic* p) {
  * Returns: Nothing
  */
 User_Interface::User_Interface(void) {
-		  wins=(Window**) malloc(sizeof(Window*));
-		  nwins=0;
+		  first = new win_p;
+		  first->next=0;
+		  first->prev=0;
+		  first->w=0;
+
+		  last=first;
 }
 
 /** User_Interface::~User_Interface(void) 
@@ -203,12 +240,12 @@ User_Interface::User_Interface(void) {
  * Returns: Nothing
  */
 User_Interface::~User_Interface(void) {
-		  if(wins) {    
-					 for(unsigned int i=0; i<nwins; i++) {
-								delete wins[i];
-					 }
-					 free(wins);
-					 nwins=0;
+		  win_p* t;
+		  for(win_p* p=first; p &&  p->w; ) {
+					 t=p->next;
+					 delete p->w;
+					 delete p;
+					 p=t;
 		  }
 
 }
@@ -221,29 +258,12 @@ User_Interface::~User_Interface(void) {
  * Returns: Nothing
  */
 void User_Interface::draw(void) {
-		  if(nwins) {
-					 for(unsigned int i=0; i<nwins; i++) {
-								wins[i]->draw();
-					 }
+		  for(win_p* p=first; p && p->w; p=p->next) {
+					 p->w->draw();
 		  }
 }
-		  
-/** void User_Interface::set_win_bg(const unsigned int id, Pic* p);
- *
- * This sets a new background for the window
- * 
- *	Args: id	Id of window to set
- *			p	picture to use
- *	Returns: Nothing
- */
-void User_Interface::set_win_bg(const unsigned int id, Pic* p) {
-		  Window* win=get_window(id);
 
-		  win->set_new_bg(p);
-
-}
-
-/** unsigned int User_Interface::create_window(const unsigned int x, const unsigned int y, const unsigned int w, 
+/** Window* User_Interface::create_window(const unsigned int x, const unsigned int y, const unsigned int w, 
  *   	const unsigned int h, const Window::Flags f=Window::DEFAULT) 
  *
  * This function creates a window
@@ -253,18 +273,81 @@ void User_Interface::set_win_bg(const unsigned int id, Pic* p) {
  * 		w	width
  * 		h	height
  * 		f	Flags
- * returns: window id
+ * returns: pt to window 
  */
-unsigned int User_Interface::create_window(const unsigned int x, const unsigned int y, const unsigned int w, 
+Window*  User_Interface::create_window(const unsigned int x, const unsigned int y, const unsigned int w, 
 					 const unsigned int h, const Window::Flags f=Window::DEFAULT) {
-		  static unsigned int id=0;
-		 
-		  nwins++;
-		  wins=(Window**) realloc(wins, sizeof(Window*)*nwins);
+		  Window* win;
 		  
-		  wins[nwins-1]=new Window(x, y, w, h, id, f);
+		  if(f==Window::FLAT) {
+					 win=new Window(x, y, w, h, f);
+		  } else {
+					 assert(0 && "TODO!!");
+		  }
+
+		  last->w=win;
+		  last->next=new win_p;
 		  
-		  ++id;
-		  
-		  return (id-1); 
+		  last->next->prev=last;
+		  last=last->next;
+		  last->next=0;
+		  last->w=0;
+
+		  return win;
 }
+		  
+/** void User_Interface::delete_window(Window* win) 
+ *
+ * This function finally removes a window
+ *
+ * Args: win 	pointer to window to delete
+ * Returns: Nothing
+ */
+void User_Interface::delete_window(Window* win) { 
+		  assert(win);
+		  
+		  win_p* w=first;
+		  while(w && w->w!=win) w=w->next;
+
+		  assert(w!=last);
+
+
+		  delete w->w;
+		  w->w=0;
+		  if(w==first) {
+					 w->next->prev=0;
+					 first=w->next;
+		  } else {
+					 w->prev->next=w->next;
+					 w->next->prev=w->prev;
+		  }
+		  delete w;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////7
+
+/** class Textarea 
+ *
+ * This defines a non responsive (to clicks) text area, where a text
+ * can easily be printed
+ *
+ * Depends: class Graph::Pic
+ * 			class Font_Handler
+ */
+					 
+/*
+Textarea(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Align = LEFT);
+					 ~Textarea(void);
+					 
+					 void set_text(const char*);
+					 void draw(const unsigned int, const unsigned int) const ;
+					 
+		  private: 
+					 static unsigned int nfont;
+					 unsigned int x, y, w, h;
+					 Align myal;
+					 
+					 Pic* txt;
+};
+*/

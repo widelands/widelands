@@ -48,36 +48,27 @@ void main_menue(void) {
 		  setup_ui();
 
 		  // make a window
-		  unsigned int win=g_ui.create_window(0,0,320,320);
-		  Pic* p = new Pic;
+//		  Window* win=g_ui.create_window(0,0,320,320, Window::FLAT);
+/*		  Pic* p = new Pic;
 		  p->load("/home/sirver/.widelands/pics/s2.bmp");
-		  cerr << p->get_w() << endl;
-		  g_ui.set_win_bg(win, p);
-		  cerr << p->get_w() << endl;
-		  
+		  win->set_new_bg(p);
+		 
 		  assert(p);
 		  
+*/
 		  g_ip.register_mcf(click, Input::BUT1);
 	//	  g_ip.register_mcf(mcf1, Input::BUT2);
 	//	  g_ip.register_mmf(mmf);
 		 
 		  Counter c;
 		  c.start();
-		  unsigned long frames=0;
-		  
 		  while(!g_ip.should_die()) {
-					 if(c.get_ticks()> 1000) {
-								c.start();
-								out << frames << endl;
-								frames=0;
-					 }
 					 g_ip.handle_pending_input(); 
-					 g_ui.draw();
-					 g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
-					 g_gr.update_quarter();
-					 ++frames;
+					 if(c.get_ticks()> 250) {
+								g_ui.draw();
+								g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
+								g_gr.update_screen(); // g_gr.update_quarter();
+					 }
 		  }
-	
-
 		  return; 
 }

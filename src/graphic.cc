@@ -174,9 +174,9 @@ namespace Graph {
 			*/
 		  void draw_pic(Pic* p, const unsigned short d_x_pos, const unsigned short d_y_pos,  const unsigned short p_x_pos, const unsigned short p_y_pos, 
 								const unsigned short i_w, const unsigned short i_h) {
-					 unsigned short clr;
-					 unsigned short w=i_w;
-					 unsigned short h=i_h; 
+					 unsigned int clr;
+					 unsigned int w=i_w;
+					 unsigned int h=i_h; 
 
 					 if(d_x_pos+w>g_gr.get_xres()) w=g_gr.get_xres()-d_x_pos;
 					 if(d_y_pos+h>g_gr.get_yres()) h=g_gr.get_yres()-d_y_pos;
@@ -196,14 +196,19 @@ namespace Graph {
 										  }
 								}
 					 } else {
-								unsigned long poffs=p->get_w()*p_y_pos + p_x_pos;
-								unsigned long doffs=g_gr.get_xres()*d_y_pos + d_x_pos;
+								if(w == g_gr.get_xres() && h == g_gr.get_yres()) {
+										  // one memcpy and we're settled
+										  memcpy(g_gr.pixels, p->pixels, (p->get_w()*p->get_h()<<1));
+								} else {
+										  unsigned long poffs=p->get_w()*p_y_pos + p_x_pos;
+										  unsigned long doffs=g_gr.get_xres()*d_y_pos + d_x_pos;
 
-								// fast blitting, using memcpy
-								for(unsigned long y=0; y<h; y++) {
-										  memcpy(g_gr.pixels+doffs, p->pixels+poffs, w<<1); // w*sizeof(short) 
-										  doffs+=g_gr.get_xres();
-										  poffs+=p->get_w();
+										  // fast blitting, using memcpy
+										  for(unsigned long y=0; y<h; y++) {
+													 memcpy(g_gr.pixels+doffs, p->pixels+poffs, w<<1); // w*sizeof(short) 
+													 doffs+=g_gr.get_xres();
+													 poffs+=p->get_w();
+										  }
 								}
 					 }
 		  }
@@ -228,11 +233,11 @@ namespace Graph {
 		  void copy_pic(Pic* dst, Pic* src, const unsigned short d_x_pos, const unsigned short d_y_pos,  const unsigned short p_x_pos, 
 								const unsigned short p_y_pos, const unsigned short i_w, const unsigned short i_h) {
 					 unsigned short clr;
-					 unsigned short w=i_w;
-					 unsigned short h=i_h; 
+					 unsigned int w=i_w;
+					 unsigned int h=i_h; 
 
-					 if(d_x_pos+w>g_gr.get_xres()) w=g_gr.get_xres()-d_x_pos;
-					 if(d_y_pos+h>g_gr.get_yres()) h=g_gr.get_yres()-d_y_pos;
+					 if(d_x_pos+w>dst->get_w()) w=dst->get_w()-d_x_pos;
+					 if(d_y_pos+h>dst->get_h()) h=dst->get_h()-d_y_pos;
 
 					 if(src->has_clrkey() && (dst->get_clrkey()!=src->get_clrkey())) {
 								for(unsigned long  y=0; y<h; y++) {

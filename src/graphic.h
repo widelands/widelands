@@ -76,21 +76,21 @@ namespace Graph {
 					 Pic& operator=(const Pic&);
 					 Pic(const Pic&);
 
-					 /** inline int Pic::get_w(void) const 
+					 /** inline unsigned int Pic::get_w(void) const 
 					  * 
 					  * This function returns the width
 					  * Args: none
 					  * returns: width
 					  */
-					 inline int get_w(void) const { return w; }
+					 inline unsigned int get_w(void) const { return w; }
 
-					 /** inline int Pic::get_h(void) const
+					 /** inline unsigned int Pic::get_h(void) const
 					  * 
 					  * This function returns the height
 					  * Args: none
 					  * returns: height
 					  */
-					 inline int get_h(void) const { return h; }
+					 inline unsigned int get_h(void) const { return h; }
 
 					 /** inline unsigned short get_clrkey(void) const
 					  *
@@ -235,21 +235,21 @@ namespace Graph {
 					  */
 					 inline bool is_fs(void) { return bis_fs; st=OK; }
 
-					 /** inline int Graphic::get_xres(void) const
+					 /** inline unsigned int Graphic::get_xres(void) const
 					  * 
 					  * This function returns the X Resoultion of the current screen
 					  * Args: none
 					  * returns: XRes
 					  */
-					 inline int get_xres(void) const { return xres; }
+					 inline unsigned int get_xres(void) const { return xres; }
 
-					 /** inline void Graphic::get_yres(void) const
+					 /** inline unsigned int Graphic::get_yres(void) const
 					  * 
 					  * This function returns the Y Resoultion of the current screen
 					  * Args: none
 					  * returns: YRes
 					  */
-					 inline int get_yres(void) const { return yres; }
+					 inline unsigned int get_yres(void) const { return yres; }
 
 
 					 // optimized pixel get functions

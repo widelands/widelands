@@ -24,6 +24,48 @@
 #include "singleton.h"
 
 
+/** class Textarea 
+ *
+ * This defines a non responsive (to clicks) text area, where a text
+ * can easily be printed
+ *
+ * Depends: class Graph::Pic
+ * 			class Font_Handler
+ */
+class Textarea {
+		  Textarea( const Textarea&);
+		  Textarea& operator=(const Textarea&);
+
+		  public:
+					 enum Align {
+								RIGHTA, 
+								LEFTA, 
+								CENTER
+					 };
+					 
+					 Textarea(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Align = LEFTA);
+					 ~Textarea(void);
+					 
+					 void set_text(const char*);
+					 void draw(const unsigned int, const unsigned int) const ;
+					 
+					 /** static void set_font(unsigned int n)
+					  * This function sets the font to use for textareas
+					  * defaults to zero
+					  *
+					  * Args: n 	font to use
+					  * Returns:	nothing
+					  */
+					 static void set_font(unsigned int n) { nfont=n; }
+					 
+		  private: 
+					 static unsigned int nfont;
+					 unsigned int x, y, w, h;
+					 Align myal;
+					 
+					 Pic* txt;
+};
+
 /** class Window
  *
  * This class offers a window. Should't be user directly
@@ -43,6 +85,7 @@
  * DEPENDS: Graph::Pic
  * 			Graph::draw_pic
  * 			Initalized g_gr object
+ * 			User_Interface
  */
 class Window {
 		  // Copy is non trivial and shouldn't be needed
@@ -91,7 +134,6 @@ class Window {
 					 inline unsigned int get_ypos(void) { return y; }
 					 inline unsigned int get_w(void) { return w; }
 					 inline unsigned int get_h(void) { return h; }
-					 inline unsigned int get_id(void) { return id ; }
 					 
 					 
 					 void handle_click(const unsigned int, const unsigned int); // TODO
@@ -99,17 +141,30 @@ class Window {
 					 void draw(void);	
 					 void set_pos(const unsigned int, const unsigned int);  // TODO
 					 void set_new_bg(Pic* p);
-//					 void set_closefunc(...)
+					 
+					 // creation functions
+					 unsigned int create_textarea(const unsigned int, const unsigned int,const unsigned int,const unsigned int, const Textarea::Align = Textarea::RIGHTA);
+					 //					 void set_closefunc(...)
 
-					 Window(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Flags); 
-					 ~Window();
+
+		  friend class User_Interface;
 
 		  private:
+					 // Only friends can create and destroy us
+					 Window(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Flags); 
+					 ~Window();
+
 					 unsigned int x, y, w, h;
 					 Pic* own_bg;
-					 unsigned int id;
 					 Flags myf;
-					
+				
+					 // for textareas
+					 unsigned int nta;
+					 Textarea** ta;
+					 
+					 // common
+					 unsigned int subids;
+					 
 					 //closefunc dfkj;
 					 static Pic l_border;
 					 static Pic r_border;
@@ -136,34 +191,22 @@ class User_Interface : public Singleton<User_Interface> {
 		  User_Interface& operator=(const User_Interface&);
 
 		  public:
-		  static const unsigned int MAX_WINS=20;
-
 		  User_Interface(void);
 		  ~User_Interface(void);
 		  
-		  unsigned int create_window(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Window::Flags=Window::DEFAULT); 
-		  void delete_window(const unsigned int); // TODO
-		  void set_win_bg(const unsigned int, Pic*);
+		  Window* create_window(const unsigned int, const unsigned int, const unsigned int, const unsigned int, const Window::Flags=Window::DEFAULT); 
+		  void delete_window(Window* win); 
 		  void draw(void);
 					 
 		  private:
-		  Window **wins;
-		  unsigned int nwins;
-
-		  /** inline Window* get_window(const unsigned int id)
-			*
-			* This function returns the window with the given id. It's inlined for speeds sake
-			*
-			* PRIVATE FUNCTION
-			*
-			* Args: id	id to find
-			* Returns: window or NULL
-			*/
-		  inline Window* get_window(const unsigned int id) {
-					 for(unsigned int i=0; i<nwins; i++) 
-								if(wins[i]->get_id()==id) return wins[i];
-					 return NULL;
-		  }
+		  struct win_p {
+					 win_p* next; 
+					 win_p* prev; 
+					 Window* w;
+		  };
+		  
+		  win_p* first;
+		  win_p* last;
 };
 
 
