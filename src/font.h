@@ -23,22 +23,29 @@
 #include "graphic.h"
 #include "singleton.h"
 
-// Ugly: Size of chars is hard coded for widelands. 
-// Somebody's feeling like defining a font file format?
-#define FONT_H 		7
-#define FONT_W		7
+#define MAX_FONTS	5
 
-#define MAX_FONTS	2
+
+#define WLFF_VERSION 	0x0001
+
+#define WLFF_SUFFIX		".wff"
+#define WLFF_MAGIC      "WLff"
+#define WLFF_VERSIONMAJOR(a)  (a >> 8)
+#define WLFF_VERSIONMINOR(a)  (a & 0xFF)
+
 
 /** class Font_Handler
  *
  * This class generates font Pictures out of strings and returns them
- * This is sure that the user want's fixed font strings
  *
  * It's a singleton
+ *
+ * It's a little ugly, since every char is hold in it's own pic which is quite a waste of 
+ * good resources
  * 
  * DEPENDS: class	Graph::Pic
  * DEPENDS:	func	Graph::copy_pic
+ * DEPENDS: class	myfile
  */
 class Font_Handler : public Singleton<Font_Handler> {
 		  Font_Handler(const Font_Handler&);
@@ -50,7 +57,7 @@ class Font_Handler : public Singleton<Font_Handler> {
 					 ~Font_Handler();
 
 					 
-					 void set_font(const ushort, Pic*, const ushort, const ushort);
+					 void load_font(const char*, const ushort);
 					 Pic* get_string(const char*, const ushort);
 					 
 					 /** inline ushort get_fh(ushort f) 
@@ -59,7 +66,7 @@ class Font_Handler : public Singleton<Font_Handler> {
 					  * Args: f	which font to check
 					  * Returns: height
 					  */
-					 inline ushort get_fh(ushort f) { assert(f<MAX_FONTS); assert(h[f]); return h[f]; }
+					 inline ushort get_fh(ushort f) { assert(f<MAX_FONTS); return fonts[f].h; }
 					 
 					 /** inline ushort get_fw(ushort f) 
 					  *
@@ -67,14 +74,25 @@ class Font_Handler : public Singleton<Font_Handler> {
 					  * Args: f	which font to check
 					  * Returns: width
 					  */
-					 inline ushort get_fw(ushort f) { assert(f<MAX_FONTS); assert(w[f]); return w[f]; }
+					// inline ushort get_fw(ushort f) { assert(f<MAX_FONTS); assert(w[f]); return w[f]; }
 					 
 		  private:
-					 ushort w[MAX_FONTS];
-					 ushort h[MAX_FONTS];
-					 Pic*	pics[MAX_FONTS];
-		  
+					 struct {
+								ushort h;
+								Pic p[96];
+					 } fonts[MAX_FONTS];
+
+					 struct FHeader {
+								char magic[6];
+								ushort version;
+								char name[20];
+								ushort clrkey;
+								ushort height;
+					 };
+								
 };
+
+#define FIXED_FONT1 0
 
 #define g_fh	Font_Handler::get_singleton()
 

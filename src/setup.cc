@@ -37,19 +37,17 @@
  */
 void setup_fonthandler(void) {
 		  // Setting Font_Handler up
-		  Pic *bmp = new Pic;
-		  const char* buf=g_fileloc.locate_file("fixed_font1.bmp", TYPE_PIC);
+		  const char* buf=g_fileloc.locate_file("fixed_font1.wff", TYPE_FONT);
 		  assert(buf);
-		  bmp->load(buf);
-		  bmp->set_clrkey(DEF_CLRKEY);
-		  g_fh.set_font(0, bmp, FONT_W, FONT_H);
+		  g_fh.load_font( buf, FIXED_FONT1 );
 		  
-		  buf=g_fileloc.locate_file("fixed_font2.bmp", TYPE_PIC);
+/*		  buf=g_fileloc.locate_file("fixed_font2.bmp", TYPE_PIC);
 		  assert(buf);
 		  bmp = new Pic;
 		  bmp->load(buf);
 		  bmp->set_clrkey(DEF_CLRKEY);
 		  g_fh.set_font(1, bmp, FONT_W, FONT_H);
+*/
 }
 
 /** void setup_ui(void) 

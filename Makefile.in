@@ -73,9 +73,9 @@ SDL_LIBS_FOR_PLUGINS = @SDL_LIBS_FOR_PLUGINS@
 VERSION = @VERSION@
 src = @src@
 
-SUBDIRS = src
+SUBDIRS = src wffcreate
 
-EXTRA_DIST = pics 
+EXTRA_DIST = pics
 
 EXTRADATADIRS = pics/
 EXTRADATA = pics/*.bmp

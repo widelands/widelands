@@ -20,7 +20,6 @@
 // 2002-02-10	sft+	minor speedup in Pic::clear_all
 
 #include "graphic.h"
-#include "worldfiletypes.h"
 
 #ifdef WIN32
 #include <string.h>
@@ -139,23 +138,21 @@ namespace Graph {
 					 return RET_OK;
 		  }
 
-		/** void Pic::create(PictureInfo* info, ushort* data)
+		/** void Pic::create(const ushort w, const ushort h, ushort* data)
 		  *
 		  * This function creates the picture described by the args
 		  *
-		  * Args:	info	a description of the picture to create
+		  * Args:	mw, mh	widht/height of image	
 		  *			data	the image data
 		  * Returns:		RET_OK or ERR_FAILED
 		  */
-		int Pic::create(PictureInfo* info, ushort* data)
+		int Pic::create(const ushort mw, const ushort mh, ushort* data)
 		{
-			if (info->width < 0 || info->height < 0)
+			if (!mw || !mh)
 				return ERR_FAILED;
-			this->set_size(info->width, info->height);
-			for (uint y=0; y<info->height; y++)
-				for (uint x=0; x<info->width; x++)
-					set_pixel(x, y, data[x + y*info->width]);
-			return ERR_FAILED;
+			this->set_size(mw, mh);
+			memcpy(pixels, data, mw*mh*sizeof(ushort));
+			return RET_OK;
 		}
 
 		  /** void Pic::set_clrkey(ushort dclrkey) 

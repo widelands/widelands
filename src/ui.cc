@@ -178,7 +178,7 @@ Textarea* Window::create_textarea(const uint px, const uint py, const uint myw ,
 		  int rw=myw;
 		  int mypy=py;
 		  if(px+add+rw > w) rw=w-add-px;
-		  if(py+add+FONT_H > h) mypy=h-FONT_H;
+		  if(py+add+Textarea::get_fh() > h) mypy=h-Textarea::get_fh();
 
 		  ta[nta]=new Textarea(px, mypy, rw, a, winpic, add>>1, add>>1);
 		  ta[nta]->draw();
@@ -721,7 +721,7 @@ Textarea::Textarea(const uint px, const uint py, const uint myw, const Align a, 
 		  
 		  txt=0; 
 		  w=myw; 
-		  h=FONT_H;
+		  h=get_fh();
 		  dp=mdp;
 		  al=a;
 

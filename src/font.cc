@@ -18,6 +18,7 @@
  */
 
 #include "font.h"
+#include "myfile.h"
 
 #ifdef WIN32
 #include <string.h>
@@ -26,11 +27,15 @@
 /** class Font_Handler
  *
  * This class generates font Pictures out of strings and returns them
- * This is sure that the user want's fixed font strings
  *
  * It's a singleton
+ *
+ * It's a little ugly, since every char is hold in it's own pic which is quite a waste of 
+ * good resources
  * 
  * DEPENDS: class	Graph::Pic
+ * DEPENDS:	func	Graph::copy_pic
+ * DEPENDS: class	myfile
  */
 
 /** Font_Handler::Font_Handler(void)
@@ -42,9 +47,7 @@
  */
 Font_Handler::Font_Handler(void) {
 		  for (uint i=0; i<MAX_FONTS; i++) {
-					 w[i]=0;
-					 h[i]=0;
-					 pics[i]=0;
+					 fonts[i].h=0;
 		  }
 }
 
@@ -56,33 +59,73 @@ Font_Handler::Font_Handler(void) {
  * Returns: Nothing
  */
 Font_Handler::~Font_Handler(void) {
-		  for (uint i=0; i<MAX_FONTS; i++) {
-					 w[i]=0;
-					 h[i]=0;
-					 if(pics[i]) delete pics[i];
-		  }
 }
 
-/** void Font_Handler::set_font(ushort f, Graph::Pic * p, ushort w, ushort h)
+/** void Font_Handler::load_font(const char* str, ushort fn )
  *
  * This registers a certain font with the given
  * objects
  *
- * Args:	f 	number of font to register
- * 	  	p	Pic to register
- * 	  	w	width of one char
- * 	  	h	height of one char
+ * Args:	str file name of fontfile to load font from
+ * 		fn 	number of font to register
  *	Returns: Nothing
  */
-void Font_Handler::set_font(ushort f, Graph::Pic * p, ushort gw, ushort gh) {
-// was soll das denn hier? hat keine auswirkung auf das assert
-//		  assert(f<MAX_FONTS && "attempt to register a font with a big number, which is not allowed!");
-		  assert(f<MAX_FONTS);
-		  assert(p);
+void Font_Handler::load_font(const char* str, ushort fn) {
+		  assert(fn<MAX_FONTS);
+		  assert(str);
 
-		  w[f]=gw;
-		  h[f]=gh;
-		  pics[f]=p;
+		  Binary_file f;
+
+		  f.open(str, File::READ);
+		  if(f.get_state() != File::OPEN) {
+					 assert(0);
+					 // TODO: inform the user		 
+					 return;
+		  }
+
+		  // read the header
+		  FHeader fh;
+		  f.read((char*) &fh, sizeof(FHeader));
+
+		  if(WLFF_VERSIONMAJOR(fh.version) > WLFF_VERSIONMAJOR(WLFF_VERSION)) {
+					 assert(0);
+					 // TODO: inform the user      
+					 return;
+		  }
+		  if(WLFF_VERSIONMAJOR(fh.version) == WLFF_VERSIONMAJOR(WLFF_VERSION)) {
+					 if(WLFF_VERSIONMINOR(fh.version) > WLFF_VERSIONMINOR(WLFF_VERSION)) {
+								assert(0);
+								// TODO: inform the user      
+								return;
+					 }
+		  }
+
+		  fonts[fn].h=fh.height;
+
+		  
+		  char c;
+		  ushort w;
+		  ushort* pix=(ushort*) malloc(1);
+		  ushort pixs=1;
+		  for(unsigned int i=0; i<96; i++) {
+					 f.read((char*) &c, 1);
+					 if((uchar) c!=(i+32)) {
+								assert(0);
+								// TODO: inform the user      
+								return;
+					 }	
+					 
+					 f.read((char*) &w, sizeof(ushort));
+					 if(sizeof(ushort)*w*fonts[fn].h> pixs) {
+								pixs=sizeof(ushort)*w*fonts[fn].h;
+								pix=(ushort*) realloc(pix, pixs);
+					 }
+					 f.read((char*) pix, sizeof(ushort)*w*fonts[fn].h);
+					 fonts[fn].p[i].create(w, fonts[fn].h, pix);
+					 fonts[fn].p[i].set_clrkey(fh.clrkey);
+		  };
+
+		  free(pix);
 }
 		 
 /** Pic* Font_Handler::get_string(const uchar* str, const ushort f);
@@ -95,29 +138,27 @@ void Font_Handler::set_font(ushort f, Graph::Pic * p, ushort gw, ushort gh) {
  * Returns:	Pointer to picture, caller must free it later on
  */
 Pic* Font_Handler::get_string(const char* str, const ushort f) {
-// siehe oben; keine auswirkung auf das assert
-//		  assert(f<MAX_FONTS && "attempt to get a string with a font with a big number, which is not allowed!");
 		  assert(f<MAX_FONTS);
-		  assert(pics[f]);
 		  
 		  char* buf = new char[strlen(str)+1];
 		  uchar c;
 		  uint n=0;
 		  uint x=0;
+		  uint w=0;
 		  
 		  for(uint i=0; i<strlen(str); i++) {
 					 c=(uchar) str[i];
 					 if(c=='\t' || c=='\r' || c=='\n' || c=='\b' || c=='\a') continue;
 					 buf[n]=c;
 					 ++n;
-					 
+					 w+= fonts[f].p[c-32].get_w();
 		  }
 		  buf[n]='\0';
 		  
 		  // Now buf contains only valid chars
 		  Pic* retval=new Pic;
-		  retval->set_size(strlen(buf)*w[f], h[f]);
-		  retval->set_clrkey(pics[f]->get_clrkey());
+		  retval->set_size(w, fonts[f].h);
+		  retval->set_clrkey(fonts[f].p[0].get_clrkey());
 
 		  for(uint j=0; j<strlen(buf); j++) {
 					 c=buf[j];
@@ -129,8 +170,8 @@ Pic* Font_Handler::get_string(const char* str, const ushort f) {
 					 // change c, so we get correct offsets in our font file
 					 c-=32;
 
-					 Graph::copy_pic(retval, pics[f], x, 0, c*w[f], 0, w[f], h[f]);
-					 x+=w[f];
+					 Graph::copy_pic(retval, &fonts[f].p[c], x, 0, 0, 0, fonts[f].p[c].get_w(), fonts[f].h);
+					 x+=fonts[f].p[c].get_w();
 		  }
 		  delete buf;
 		  return retval;

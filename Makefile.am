@@ -1,11 +1,9 @@
-SUBDIRS= src
+SUBDIRS= src wffcreate
 
 EXTRA_DIST=pics
 
-EXTRA_DIST=pics 
-
-EXTRADATADIRS=pics/
-EXTRADATA=pics/*.bmp
+EXTRADATADIRS=pics/ fonts/
+EXTRADATA=pics/*.bmp fonts/*.wff
 
 datainstalldirs:
 	   for dir in $(EXTRADATADIRS) ; do \

@@ -30,9 +30,6 @@
 #include "singleton.h"
 #include "mytypes.h"
 
-struct PictureInfo;		// declare here to avoid including, include in pic.cc
-						// (weisst du noch, was ich ueber include-waechter gesagt hab? :)
-
 namespace Graph {
 
 		 
@@ -96,7 +93,7 @@ namespace Graph {
 					 void set_clrkey(const ushort);
 					 void set_clrkey(const uchar, const uchar, const uchar);
 					 int  load(const char*);
-					 int  create(PictureInfo*, ushort* data);
+					 int  create(const ushort, const ushort, ushort* data);
 					 void clear_all(void);
 					 Pic& operator=(const Pic&);
 					 Pic(const Pic&);

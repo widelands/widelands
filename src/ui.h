@@ -22,6 +22,7 @@
 
 #include "graphic.h"
 #include "singleton.h"
+#include "font.h"
 
 /** class Button
  *
@@ -171,7 +172,10 @@ class Textarea {
 					  * Returns:	nothing
 					  */
 					 static void set_font(uint n) { nfont=n; }
-			
+		
+					 // information funcs
+					 static inline ushort get_fh(void) { return g_fh.get_fh(nfont); }
+
 					 // some information funcs
 					 inline uint get_xpos(void) { return x+xp; }
 					 inline uint get_ypos(void) { return y+yp; }
