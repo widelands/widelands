@@ -153,8 +153,9 @@ public:
 	enum {
 		State_None = 0,
 
-		State_Idle,			// waiting on the nearest flag
 		State_Request,		// moving to fulfill a request
+		State_Idle,			// waiting on the nearest flag
+		State_Return,		// return to warehouse
 	};
 
 public:
@@ -177,6 +178,13 @@ public:
 	void set_state_request(Game* g, Request* rq, const Route* route);
 	void end_state_request(Game* g);
 	void set_state_idle(Game* g);
+
+	bool is_moving(Game* g);
+	PlayerImmovable* get_next_move_step(Game* g);
+	PlayerImmovable* get_final_move_step(Game* g);
+
+	void arrived(Game* g);
+	void cancel(Game* g);
 
 private:
 	Object_Ptr			m_location;

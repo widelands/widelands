@@ -1,4 +1,8 @@
 
+- added item ware code
+- add ware transportation (carriers stay on roads and can carry wares)
+- construction sites order builders and wares
+
 build-4:
 - added Warehouse options window
 - added ware requests

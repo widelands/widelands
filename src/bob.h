@@ -44,7 +44,7 @@ public:
 protected:
 	virtual Bob *create_object(bool) = 0;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	
+
 	char	m_name[30];
 	uint	m_idle_anim; // the default animation
 
@@ -105,7 +105,7 @@ protected: // higher level handling (task-based)
 	inline int get_current_task() { return m_task; }
 	void start_task(Game*, uint task);
 	void end_task(Game*, bool success, uint nexttask);
-	void interrupt_task(Game*, bool hard);
+	void interrupt_task(Game*, bool hard, uint nexthint = 0);
 
 	// handler functions
 	virtual int task_begin(Game*);

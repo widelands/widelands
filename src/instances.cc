@@ -23,6 +23,9 @@
 #include "map.h"
 #include "player.h"
 
+#include <stdarg.h>
+
+
 /** Object_Manager::~Object_Manager()
  *
  * Remove all map objects
@@ -185,7 +188,7 @@ void Map_Object::remove(Editor_Game_Base *g)
 ===============
 Map_Object::destroy [virtual]
 
-Destroy the object immediately. Unlike remove(), special actions may be 
+Destroy the object immediately. Unlike remove(), special actions may be
 performed:
 - create a decaying skeleton (humans)
 - create a burning fire (buildings)
@@ -247,3 +250,22 @@ void Map_Object::act(Game* g, uint data)
 {
 }
 
+
+/*
+===============
+Map_Object::molog
+
+Prints a log message prepended by the object's serial number.
+===============
+*/
+void Map_Object::molog(const char* fmt, ...)
+{
+	va_list va;
+	char buf[2048];
+
+	va_start(va, fmt);
+	vsnprintf(buf, sizeof(buf), fmt, va);
+	va_end(va);
+
+	log("MO(%u): %s", m_serial, buf);
+}

@@ -1408,7 +1408,7 @@ int Map::findpath(Coords start, Coords end, uchar movecaps, int persist, Path *p
 	curpf->real_cost = 0;
 	curpf->estim_cost = calc_cost_estimate(start, end);
 	curpf->backlink = Map_Object::IDLE;
-	
+
 	Open.push(curpf);
 
 	while((curpf = Open.pop()))
@@ -1783,11 +1783,28 @@ Initialize from a path, calculating the coordinates as needed
 */
 CoordPath::CoordPath(const Path &path)
 {
+	m_map = 0;
+	*this = path;
+}
+
+
+/*
+===============
+CoordPath::operator=
+
+Assign from a path, calculating coordinates as needed.
+===============
+*/
+CoordPath& CoordPath::operator=(const Path& path)
+{
+	m_coords.clear();
+	m_path.clear();
+
 	m_map = path.get_map();
 	m_coords.push_back(path.get_start());
-	
+
 	Coords c = path.get_start();
-	
+
 	for(int i = 0; i < path.get_nsteps(); i++) {
 		int dir = path.get_step(i);
 
@@ -1795,7 +1812,10 @@ CoordPath::CoordPath(const Path &path)
 		m_map->get_neighbour(c, dir, &c);
 		m_coords.push_back(c);
 	}
+
+	return *this;
 }
+
 
 /*
 ===============
@@ -1841,6 +1861,9 @@ Truncate the path after the given number of steps
 */
 void CoordPath::truncate(int after)
 {
+	assert(after >= 0);
+	assert((uint)after <= m_path.size());
+
 	m_path.erase(m_path.begin()+after, m_path.end());
 	m_coords.erase(m_coords.begin()+after+1, m_coords.end());
 }
@@ -1854,6 +1877,9 @@ Opposite of truncate: remove the first n steps of the path.
 */
 void CoordPath::starttrim(int before)
 {
+	assert(before >= 0);
+	assert((uint)before <= m_path.size());
+
 	m_path.erase(m_path.begin(), m_path.begin()+before);
 	m_coords.erase(m_coords.begin(), m_coords.begin()+before);
 }

@@ -495,18 +495,24 @@ void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 	switch(m_state) {
 	case State_None:
 		{
-			// this will be executed once before our creator gets the chance to
-			// assign a job; therefore, just idle if this is the first call
-			if (prev != TASK_NONE) {
+			// This will be executed once before our creator gets the chance to
+			// assign a job; it can also be called as a result of interrupt_task()
+			// from end_state()
+			// In those cases, we simply idle a bit to give the creator/owner a
+			// chance to assign a job.
+			if (prev != TASK_NONE && nexthint != TASK_IDLE) {
 				PlayerImmovable *location = get_location(g);
 
+				if (get_carried_item())
+					get_carried_item()->cancel(g);
+
 				if (location && location->get_type() == Map_Object::FLAG) {
-					log("Worker::task_start_best [State_None]: return to warehouse\n");
+					molog("Worker::task_start_best [State_None]: return to warehouse\n");
 					set_job_gowarehouse();
 				}
 
 				if (m_state == State_None) {
-					log("Worker::task_start_best [State_None]: become fugitive\n");
+					molog("Worker::task_start_best [State_None]: become fugitive\n");
 
 					set_location(0);
 					m_state = State_Fugitive;
@@ -514,7 +520,7 @@ void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 				}
 			}
 
-			start_task_idle(g, get_descr()->get_idle_anim(), 2);
+			start_task_idle(g, get_descr()->get_idle_anim(), 1);
 		}
 		return;
 
@@ -545,6 +551,27 @@ void Worker::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 
 /*
 ===============
+Worker::wakeup_flag_capacity [virtual]
+
+Called when the flag we waited on has now got capacity left.
+Return true if we actually woke up due to this.
+===============
+*/
+bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
+{
+	if (m_state == State_DropOff && get_carried_item()) {
+		molog("State_DropOff: Wake up: flag capacity.\n");
+
+		interrupt_task(g, false);
+		return true;
+	}
+
+	return false;
+}
+
+
+/*
+===============
 Worker::set_state
 
 Change the current state. However, the current task is not interrupted.
@@ -552,6 +579,8 @@ Change the current state. However, the current task is not interrupted.
 */
 void Worker::set_state(int state)
 {
+	molog("Set state to %i\n", state);
+
 	assert(m_state == State_None);
 
 	m_state = state;
@@ -580,7 +609,7 @@ void Worker::end_state(Game *g, bool success)
 
 	// Make sure task_start_best() is called again soon
 	if (get_current_task())
-		interrupt_task(g, false);
+		interrupt_task(g, false, TASK_IDLE);
 	else
 		start_task_idle(g, get_descr()->get_idle_anim(), 2);
 }
@@ -598,18 +627,18 @@ void Worker::do_end_state(Game* g, int oldstate, bool success)
 {
 	switch(oldstate) {
 	case State_None:
-		log("Worker::end_state [State_None]\n");
+		molog("Worker::end_state [State_None]\n");
 		break;
 
 	case State_IdleLoop:
-		log("Worker::end_state [State_IdleLoop]\n");
+		molog("Worker::end_state [State_IdleLoop]\n");
 		break;
 
 	case State_Request:
 		{
 			Request *request = m_request;
 
-			log("Worker::end_state [State_Request] %s\n", success ? "success" : "fail");
+			molog("Worker::end_state [State_Request] %s\n", success ? "success" : "fail");
 
 			if (m_route) {
 				delete m_route;
@@ -628,7 +657,7 @@ void Worker::do_end_state(Game* g, int oldstate, bool success)
 
 	case State_Fugitive:
 		// note that run_state_fugitive should have scheduled either incorporate or destroy
-		log("Worker::end_state [State_Fugitive]\n");
+		molog("Worker::end_state [State_Fugitive]\n");
 		break;
 
 	case State_GoWarehouse:
@@ -636,11 +665,11 @@ void Worker::do_end_state(Game* g, int oldstate, bool success)
 			delete m_route;
 			m_route = 0;
 		}
-		log("Worker::end_state [State_GoWarehouse]\n");
+		molog("Worker::end_state [State_GoWarehouse]\n");
 		break;
 
 	case State_DropOff:
-		log("Worker::end_state [State_DropOff]\n");
+		molog("Worker::end_state [State_DropOff]\n");
 		break;
 
 	default:
@@ -664,7 +693,7 @@ void Worker::run_state_request(Game *g, uint prev, bool success, uint nexthing)
 {
 	// if our previous task failed, reset to State_None
 	if (!success) {
-		log("State_Request: previous task failed\n");
+		molog("State_Request: previous task failed\n");
 		end_state(g, false);
 		return;
 	}
@@ -681,7 +710,7 @@ void Worker::run_state_request(Game *g, uint prev, bool success, uint nexthing)
 	if (ret == -2)
 	{
 		// we won't ever be able to walk any route again
-		log("State_Request: total failure\n");
+		molog("State_Request: total failure\n");
 		end_state(g, false);
 		return;
 	}
@@ -689,7 +718,7 @@ void Worker::run_state_request(Game *g, uint prev, bool success, uint nexthing)
 	{
 		// the current route won't lead us to the target
 		if (!target || target->get_economy() != get_economy()) {
-			log("State_Request: target unreachable\n");
+			molog("State_Request: target unreachable\n");
 			end_state(g, false);
 			return;
 		}
@@ -721,7 +750,7 @@ void Worker::run_state_fugitive(Game *g, uint prev, bool success, uint nexthint)
 	PlayerImmovable *location = get_location(g);
 
 	if (location) {
-		log("Worker: State_Fugitive: we're on location\n");
+		molog("Worker: State_Fugitive: we're on location\n");
 
 		if (location->has_attribute(WAREHOUSE)) {
 			schedule_incorporate(g);
@@ -742,7 +771,7 @@ void Worker::run_state_fugitive(Game *g, uint prev, bool success, uint nexthint)
 			Building *building = flag->get_building();
 
 			if (building && building->has_attribute(WAREHOUSE)) {
-				log("Worker: State_Fugitive: move into warehouse\n");
+				molog("Worker: State_Fugitive: move into warehouse\n");
 				start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
 				set_location(building);
 				return;
@@ -750,7 +779,7 @@ void Worker::run_state_fugitive(Game *g, uint prev, bool success, uint nexthint)
 		}
 
 		if (g->get_gametime() - m_fugitive_death >= 0) {
-			log("Worker: State_Fugitive: die\n");
+			molog("Worker: State_Fugitive: die\n");
 			schedule_destroy(g);
 			return;
 		}
@@ -766,7 +795,7 @@ void Worker::run_state_fugitive(Game *g, uint prev, bool success, uint nexthint)
 		int bestdist = -1;
 		Warehouse *best = 0;
 
-		log("Worker: State_Fugitive: found warehouse(s)\n");
+		molog("Worker: State_Fugitive: found warehouse(s)\n");
 
 		for(uint i = 0; i < warehouses.size(); i++) {
 			Warehouse *wh = (Warehouse*)warehouses[i].object;
@@ -789,7 +818,7 @@ void Worker::run_state_fugitive(Game *g, uint prev, bool success, uint nexthint)
 		if (use) {
 			Flag *flag = best->get_base_flag();
 
-			log("Worker: State_Fugitive: try to move to warehouse\n");
+			molog("Worker: State_Fugitive: try to move to warehouse\n");
 
 			// the warehouse could be on a different island, so check for failure
 			if (start_task_movepath(g, flag->get_position(), 0, get_descr()->get_walk_anims()))
@@ -800,7 +829,7 @@ void Worker::run_state_fugitive(Game *g, uint prev, bool success, uint nexthint)
 	// just walk into a random direction
 	Coords dst;
 
-	log("Worker: State_Fugitive: wander randomly\n");
+	molog("Worker: State_Fugitive: wander randomly\n");
 
 	dst.x = m_position.x + (g->logic_rand()%5) - 2;
 	dst.y = m_position.y + (g->logic_rand()%5) - 2;
@@ -824,13 +853,13 @@ void Worker::run_state_gowarehouse(Game *g, uint prev, bool success, uint nexthi
 	PlayerImmovable *location = get_location(g);
 
 	if (!success) {
-		log("State_GoWarehouse: previous task failed\n");
+		molog("State_GoWarehouse: previous task failed\n");
 		end_state(g, false);
 		return;
 	}
 
 	if (!location) {
-		log("State_GoWarehouse: location removed\n");
+		molog("State_GoWarehouse: location removed\n");
 		end_state(g, false);
 		return;
 	}
@@ -885,7 +914,7 @@ void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
 	WareInstance* item = get_carried_item();
 
 	if (!owner) {
-		log("Worker: DropOff: owner disappeared\n");
+		molog("Worker: DropOff: owner disappeared\n");
 		end_state(g, false);
 		return;
 	}
@@ -901,14 +930,14 @@ void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
 			Flag* flag = ((PlayerImmovable*)location)->get_base_flag();
 
 			if (!flag->has_capacity()) {
-				log("Worker: DropOff: wait for capacity\n");
+				molog("Worker: DropOff: wait for capacity\n");
 
 				flag->wait_for_capacity(g, this);
 				start_task_idle(g, get_descr()->get_idle_anim(), -1);
 				return;
 			}
 
-			log("Worker: DropOff: move from building to flag\n");
+			molog("Worker: DropOff: move from building to flag\n");
 
 			// TODO: add building exit throttle
 
@@ -922,7 +951,7 @@ void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
 			Flag* flag = (Flag*)location;
 
 			if (flag->has_capacity()) {
-				log("Worker: DropOff: dropping the item\n");
+				molog("Worker: DropOff: dropping the item\n");
 
 				item = fetch_carried_item();
 				flag->add_item(g, item);
@@ -931,7 +960,7 @@ void Worker::run_state_dropoff(Game *g, uint prev, bool success, uint nexthint)
 				return;
 			}
 
-			log("Worker: DropOff: flag is overloaded\n");
+			molog("Worker: DropOff: flag is overloaded\n");
 
 			start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
 			return;
@@ -979,7 +1008,7 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 	PlayerImmovable *location = get_location(g);
 
 	if (!location) {
-		log("run_route: location has been removed from under us\n");
+		molog("run_route: location has been removed from under us\n");
 		return -2;
 	}
 
@@ -987,7 +1016,7 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 	if (prev == TASK_IDLE)
 	{
 		if (!finalgoal || !route) {
-			log("run_route: goal/route not available\n");
+			molog("run_route: goal/route not available\n");
 			return -1;
 		}
 
@@ -1002,7 +1031,7 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 			assert(location->get_type() == Map_Object::BUILDING);
 			assert(location->get_base_flag() == current);
 
-			log("run_route: move from building to flag\n");
+			molog("run_route: move from building to flag\n");
 
 			// TODO: add building exit throttle
 
@@ -1017,7 +1046,7 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 			Road *finalroad = (Road*)finalgoal;
 
 			if (finalroad->get_flag(Road::FlagEnd) == current) {
-				log("run_route: arrived at end flag of target road\n");
+				molog("run_route: arrived at end flag of target road\n");
 
 				set_location(finalroad);
 				return 1;
@@ -1029,7 +1058,7 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 			Flag *dest = m_route->get_flag(g, 1);
 			Road *road = current->get_road(dest);
 
-			log("run_route: move to next flag\n");
+			molog("run_route: move to next flag\n");
 
 			Path path(road->get_path());
 
@@ -1046,14 +1075,14 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 		if (finalgoal->get_type() == Map_Object::BUILDING) {
 			assert(finalgoal->get_base_flag() == current);
 
-			log("run_route: move from flag to building\n");
+			molog("run_route: move from flag to building\n");
 
 			start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
 			set_location(finalgoal);
 			return 0;
 		}
 
-		log("run_route: arrived at goal (road/flag)\n");
+		molog("run_route: arrived at goal (road/flag)\n");
 
 		if (finalgoal->get_type() == Map_Object::ROAD)
 			set_location(finalgoal);
@@ -1065,13 +1094,13 @@ int Worker::run_route(Game *g, uint prev, Route *route, PlayerImmovable *finalgo
 	if (location == finalgoal) {
 		assert(finalgoal->get_type() == Map_Object::BUILDING);
 
-		log("run_route: arrived at goal (building)\n");
+		molog("run_route: arrived at goal (building)\n");
 
 		return 1;
 	}
 
 	// Wait a little bit on the flag
-	log("run_route: wait on flag\n");
+	molog("run_route: wait on flag\n");
 
 	BaseImmovable *imm = g->get_map()->get_immovable(get_position());
 	if (!imm || imm->get_type() != FLAG)
@@ -1184,6 +1213,7 @@ Carrier::~Carrier
 Carrier::Carrier(Carrier_Descr *descr, bool logic)
 	: Worker(descr, logic)
 {
+	m_inbuilding = false;
 }
 
 Carrier::~Carrier()
@@ -1214,7 +1244,17 @@ void Carrier::set_job_road(Game* g, Road* road)
 		{
 			if (get_state() == State_WorkIdle)
 			{
-				interrupt_task(g, false); // Wake up and readjust our sleeping position
+				// Wake up and readjust our sleeping position
+				interrupt_task(g, false);
+			}
+			else if (get_state() == State_WorkTransport)
+			{
+				// This should do the right thing. Since the orientation of the
+				// flags does not change, the item will still travel in the right
+				// direction, and run_state_worktransport() is rather
+				// fault-tolerant.
+				molog("Carrier::set_job_road: Interrupt while transporting\n");
+				interrupt_task(g, false);
 			}
 			else
 				throw wexception("Carrier::set_job_road: unhandled state\n");
@@ -1222,15 +1262,35 @@ void Carrier::set_job_road(Game* g, Road* road)
 	}
 	else
 	{
-		assert(get_state() == State_WorkIdle);
+		assert(get_state() == State_WorkIdle || get_state() == State_WorkTransport);
 
-		// TODO: drop ware
-
-		if (get_current_task() == TASK_MOVEPATH)
-			interrupt_task(g, false);
-
-		set_state(State_None); // become a fugitive
+		// Wake up from idling
+		interrupt_task(g, false);
+		end_state(g, false); // become a fugitive
 	}
+}
+
+
+/*
+===============
+Carrier::notify_ware
+
+Called by Road code to indicate that a new item has arrived on a flag
+(0 = start, 1 = end).
+Returns true if the carrier is going to fetch it.
+===============
+*/
+bool Carrier::notify_ware(Game* g, int flag)
+{
+	if (get_state() != State_WorkIdle)
+		return false;
+
+	end_state(g, false); // This also interrupts the idling
+	set_state(State_WorkTransport);
+
+	m_fetch_flag = flag;
+
+	return true;
 }
 
 
@@ -1246,6 +1306,10 @@ void Carrier::task_start_best(Game* g, uint prev, bool success, uint nexthint)
 	switch(get_state()) {
 	case State_WorkIdle:
 		run_state_workidle(g, prev, success, nexthint);
+		return;
+
+	case State_WorkTransport:
+		run_state_worktransport(g, prev, success, nexthint);
 		return;
 	}
 
@@ -1264,11 +1328,98 @@ void Carrier::do_end_state(Game *g, int oldstate, bool success)
 {
 	switch(oldstate) {
 	case State_WorkIdle:
+	case State_WorkTransport:
 		break;
 
 	default:
 		Worker::do_end_state(g, oldstate, success);
 	}
+}
+
+
+/*
+===============
+Carrier::find_pending_item
+
+Find a pending item on one of the road's flags, and set m_fetch_flag
+accordingly.
+Returns true if an item has been found, or false otherwise.
+===============
+*/
+bool Carrier::find_pending_item(Game* g)
+{
+	Road* road = (Road*)get_location(g);
+	CoordPath startpath;
+	CoordPath endpath;
+	int curidx = -1;
+	uint haveitembits = 0;
+
+	if (road->get_flag(Road::FlagStart)->has_pending_item(g, road->get_flag(Road::FlagEnd)))
+	{
+		haveitembits |= 1;
+
+		startpath = road->get_path();
+
+		curidx = startpath.get_index(get_position());
+
+		startpath.truncate(curidx);
+		startpath.reverse();
+	}
+
+	if (road->get_flag(Road::FlagEnd)->has_pending_item(g, road->get_flag(Road::FlagStart)))
+	{
+		haveitembits |= 2;
+
+		endpath = road->get_path();
+
+		if (curidx < 0)
+			curidx = endpath.get_index(get_position());
+
+		endpath.starttrim(curidx);
+	}
+
+	// If both roads have an item, we pick the one closer to us
+	if (haveitembits == 3)
+	{
+		int startcost, endcost;
+
+		g->get_map()->calc_cost(startpath, &startcost, 0);
+		g->get_map()->calc_cost(endpath, &endcost, 0);
+
+		if (startcost < endcost)
+			haveitembits = 1;
+		else
+			haveitembits = 2;
+	}
+
+	// Ack our decision
+	if (haveitembits == 1)
+	{
+		bool ok = false;
+
+		m_fetch_flag = 0;
+
+		ok = road->get_flag(Road::FlagStart)->ack_pending_item(g, road->get_flag(Road::FlagEnd));
+		if (!ok)
+			throw wexception("Carrier::find_pending_item: start flag is messed up");
+
+		return true;
+	}
+
+	if (haveitembits == 2)
+	{
+		bool ok = false;
+
+		m_fetch_flag = 1;
+
+		ok = road->get_flag(Road::FlagEnd)->ack_pending_item(g, road->get_flag(Road::FlagStart));
+		if (!ok)
+			throw wexception("Carrier::find_pending_item: end flag is messed up");
+
+		return true;
+	}
+
+	return false;
 }
 
 
@@ -1283,50 +1434,278 @@ void Carrier::run_state_workidle(Game *g, uint prev, bool success, uint nexthint
 {
 	Road* road = (Road*)get_location(g);
 
-	log("Carrier::run_state_workidle.\n");
+	molog("Carrier::run_state_workidle.\n");
 
 	// Note: success is false when new wares appear and when the road is destroyed,
 	// so it isn't very helpful in this case.
 	if (!road) {
-		log("Carrier::run_state_workidle: Road disappeared, become fugitive.\n");
+		molog("Carrier::run_state_workidle: Road disappeared, become fugitive.\n");
 		end_state(g, false);
 		return;
 	}
 
-	// TODO: Check if we can pick up an item at the flag
+	// Check if we can pick up an item at the flag
+	if (find_pending_item(g)) {
+		molog("Carrier: WorkIdle: Go pick up item from %i\n", m_fetch_flag);
+		end_state(g, true);
+		set_state(State_WorkTransport);
+		return;
+	}
 
 	// Move into idle position if necessary
+	if (walk_to_index(g, road->get_idle_index()))
+		return;
+
+	// Be bored. There's nothing good on TV, either.
+	molog("Carrier::run_state_workidle: Idle.\n");
+
+	// TODO: idle animations
+
+	start_task_idle(g, get_descr()->get_idle_anim(), -1);
+}
+
+
+/*
+===============
+Carrier::run_state_worktransport
+
+Fetch an item at one flag and drop it at the other.
+
+This function has to be rather fault tolerant, especially because the road we're
+on could get split while we're on it.
+===============
+*/
+void Carrier::run_state_worktransport(Game* g, uint prev, bool success, uint nexthint)
+{
+	WareInstance* item;
+	Road* road = (Road*)get_location(g);
+
+	molog("Carrier::run_state_worktransport.\n");
+
+	if (!road) {
+		molog("Carrier: WorkTransport: Road disappeared, become fugitive.\n");
+		m_inbuilding = false;
+		end_state(g, false);
+		return;
+	}
+
+	// If we're "in" the target building, special code applies
+	if (m_inbuilding)
+	{
+		BaseImmovable* pos = g->get_map()->get_immovable(get_position());
+
+		// tough luck, the building has disappeared
+		if (!pos) {
+			molog("Carrier: WorkTransport: Building disappeared while in building.\n");
+			m_inbuilding = false;
+			end_state(g, false);
+			return;
+		}
+
+		// Drop the item, indicating success
+		if (pos->get_type() == Map_Object::BUILDING) {
+			item = fetch_carried_item();
+
+			if (item) {
+				molog("Carrier: WorkTransport: Arrived in building.\n");
+				item->set_location((Building*)pos);
+				item->arrived(g); // The item disappears from under us
+
+				start_task_idle(g, get_descr()->get_idle_anim(), 20);
+				return;
+			}
+
+			// Now walk back onto the flag
+			molog("Carrier: WorkTransport: Move out of building.\n");
+			start_task_forcemove(g, WALK_SE, get_descr()->get_walk_anims());
+			return;
+		}
+
+		// Wait a little on
+		if (pos->get_type() != Map_Object::FLAG)
+			throw wexception("Carrier: WorkTransport: inbuilding, but neither on building nor flag");
+
+		m_inbuilding = false;
+
+		// Check for pending items
+		if (!find_pending_item(g)) {
+			molog("Carrier: WorkTransport: back to idle.\n");
+			end_state(g, true);
+			set_state(State_WorkIdle);
+			return;
+		}
+
+		start_task_idle(g, get_descr()->get_idle_anim(), 50);
+		return;
+	}
+
+	// If we don't carry something, walk to the flag
+	if (!get_carried_item()) {
+		Flag* flag;
+		Flag* otherflag;
+
+		if (walk_to_flag(g, m_fetch_flag))
+			return;
+
+		molog("Carrier: WorkTransport: pick up from flag.\n");
+
+		flag = road->get_flag((Road::FlagId)m_fetch_flag);
+		otherflag = road->get_flag((Road::FlagId)(m_fetch_flag ^ 1));
+		item = flag->fetch_pending_item(g, otherflag);
+
+		if (!item) {
+			molog("Carrier: WorkTransport: Nothing on flag.\n");
+			end_state(g, false);
+			set_state(State_WorkIdle);
+			return;
+		}
+
+		set_carried_item(g, item);
+		start_task_idle(g, get_descr()->get_idle_anim(), 20);
+		return;
+	}
+
+	// If the item should go to the building attached to our flag, walk directly
+	// into said building
+	Flag* flag;
+
+	item = get_carried_item();
+	flag = road->get_flag((Road::FlagId)(m_fetch_flag ^ 1));
+
+	// A sanity check is necessary, in case the building has been destroyed
+	if (item->is_moving(g))
+	{
+		PlayerImmovable* final = item->get_final_move_step(g);
+
+		if (final != flag && final->get_base_flag() == flag)
+		{
+			if (walk_to_flag(g, m_fetch_flag ^ 1))
+				return;
+
+			molog("Carrier: WorkTransport: Move into building.\n");
+			start_task_forcemove(g, WALK_NW, get_descr()->get_walk_anims());
+			m_inbuilding = true;
+			return;
+		}
+	}
+
+	// Move into waiting position if the flag is overloaded
+	if (!flag->has_capacity())
+	{
+		if (walk_to_flag(g, m_fetch_flag ^ 1, true))
+			return;
+
+		// Wait one field away
+		flag->wait_for_capacity(g, this);
+		start_task_idle(g, get_descr()->get_idle_anim(), -1);
+		return;
+	}
+
+	// If there is capacity, walk to the flag
+	if (walk_to_flag(g, m_fetch_flag ^ 1))
+		return;
+
+	item = fetch_carried_item();
+	flag->add_item(g, item);
+
+	// Check for pending items
+	if (!find_pending_item(g)) {
+		molog("Carrier: WorkTransport: back to idle.\n");
+		end_state(g, true);
+		set_state(State_WorkIdle);
+		return;
+	}
+
+	// Even the strongest human can't work non-stop
+	start_task_idle(g, get_descr()->get_idle_anim(), 50);
+}
+
+
+/*
+===============
+Carrier::wakeup_flag_capacity [virtual]
+
+Called by flag code when our target flag has capacity.
+===============
+*/
+bool Carrier::wakeup_flag_capacity(Game* g, Flag* flag)
+{
+	if (get_state() == State_WorkTransport && get_carried_item()) {
+		interrupt_task(g, false);
+		return true;
+	}
+
+	return Worker::wakeup_flag_capacity(g, flag);
+}
+
+
+/*
+===============
+Carrier::walk_to_index
+
+Walk to the given index on the owning road.
+Returns true if a move task has been started, or false if we're already on
+the target field.
+===============
+*/
+bool Carrier::walk_to_index(Game* g, int index)
+{
+	Road* road = (Road*)get_location(g);
 	CoordPath path(road->get_path());
 	int curidx = path.get_index(get_position());
-	int idleidx = road->get_idle_index();
 
 	assert(curidx != -1);
 
-	if (curidx != idleidx) {
-		log("Carrier::run_state_workidle: Move into idle position\n");
+	if (curidx != index) {
+		molog("Carrier::walk_to_index: Move from %i to %i.\n", curidx, index);
 
-		if (curidx < idleidx) {
-			path.truncate(idleidx);
+		if (curidx < index) {
+			path.truncate(index);
 			path.starttrim(curidx);
 
 			start_task_movepath(g, path, get_descr()->get_walk_anims());
 		} else {
 			path.truncate(curidx);
-			path.starttrim(idleidx);
+			path.starttrim(index);
 			path.reverse();
 
 			start_task_movepath(g, path, get_descr()->get_walk_anims());
 		}
 
-		return;
+		return true;
 	}
 
-	// Be bored. There's nothing good on TV, either.
-	log("Carrier::run_state_workidle: Idle.\n");
+	return false;
+}
 
-	// TODO: idle animations
 
-	start_task_idle(g, get_descr()->get_idle_anim(), -1);
+/*
+===============
+Carrier::walk_to_flag
+
+Walk to the given flag, or one field before it if offset is true.
+Returns true if a move task has been started, or false if we're already on
+the target field.
+===============
+*/
+bool Carrier::walk_to_flag(Game* g, int flag, bool offset)
+{
+	int idx;
+
+	if (!flag) {
+		idx = 0;
+		if (offset)
+			idx++;
+	} else {
+		Road* road = (Road*)get_location(g);
+		const Path& path = road->get_path();
+
+		idx = path.get_nsteps();
+		if (offset)
+			idx--;
+	}
+
+	return walk_to_index(g, idx);
 }
 
 

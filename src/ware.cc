@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -464,24 +464,12 @@ void WareInstance::cleanup(Game* g)
 {
 	PlayerImmovable* loc = get_location(g);
 
+	cancel(g);
+
 	if (loc) {
 		assert(loc->get_economy());
 
 		loc->get_economy()->remove_wares(m_ware, 1);
-	}
-
-	switch(m_state) {
-	case State_Request:
-		assert(m_request);
-
-		log("WareInstance: cleanup fails request\n");
-
-		m_request->transfer_fail(g);
-		end_state_request(g);
-		break;
-
-	default:
-		break;
 	}
 }
 
@@ -568,4 +556,165 @@ void WareInstance::set_state_idle(Game* g)
 	assert(m_state == State_None);
 
 	m_state = State_Idle;
+}
+
+
+/*
+===============
+WareInstance::is_moving
+
+Update the move state, figure out whether we should be moving, etc.
+===============
+*/
+bool WareInstance::is_moving(Game* g)
+{
+	PlayerImmovable* loc;
+	PlayerImmovable* target;
+
+	if (m_state != State_Request)
+		return false;
+
+	assert(m_request);
+
+	loc = get_location(g);
+	target = m_request->get_target(g);
+
+	assert(loc);
+	assert(target);
+
+	if (m_route)
+	{
+		PlayerImmovable* reroutestart = 0;
+		bool recalc = false;
+
+		// If we're on a flag, it must be either the first or second on the route
+		// If we're on the second flag, we finished the first part of the route,
+		// so trim it
+		if (loc->get_type() == Map_Object::FLAG) {
+			if (loc == m_route->get_flag(g, 1))
+			{
+				m_route->starttrim(1);
+				if (!m_route->get_nrsteps()) {
+					delete m_route;
+					m_route = 0;
+				}
+			}
+			else if (loc != m_route->get_flag(g, 0))
+			{
+				// This might happen when a road is split while the item is carried
+				// on it.
+				// Try to deal gracefully
+				log("WareInstance::is_moving: Not on first or second flag of route.\n");
+				recalc = true;
+			}
+
+			reroutestart = loc;
+		}
+
+		// Now validate the route
+		if (m_route && (!m_route->verify(g) || recalc)) {
+			if (target->get_economy() != loc->get_economy()) {
+				log("WareInstance::is_moving: Target unreachable\n");
+
+				m_request->transfer_fail(g);
+				end_state_request(g);
+				return false;
+			}
+
+			if (!reroutestart)
+				reroutestart = m_route->get_flag(g, 0);
+
+			if (!loc->get_economy()->find_route(reroutestart->get_base_flag(), target->get_base_flag(), m_route))
+				throw wexception("WareInstance::is_moving: Failed to find route within economy");
+		}
+	}
+
+	return true;
+}
+
+
+/*
+===============
+WareInstance::get_next_move_step
+
+Return the next flag we should be moving to, or the final target if the route
+has been completed successfully.
+===============
+*/
+PlayerImmovable* WareInstance::get_next_move_step(Game* g)
+{
+	assert(m_state == State_Request);
+
+	if (m_route) {
+		assert(m_route->get_nrsteps());
+
+		Flag* flag = m_route->get_flag(g, 0);
+
+		if (get_location(g) == flag)
+			return m_route->get_flag(g, 1);
+
+		return flag;
+	}
+
+	return m_request->get_target(g);
+}
+
+
+/*
+===============
+WareInstance::get_final_move_step
+
+Returns the final target.
+===============
+*/
+PlayerImmovable* WareInstance::get_final_move_step(Game* g)
+{
+	assert(m_state == State_Request);
+
+	return m_request->get_target(g);
+}
+
+
+/*
+===============
+WareInstance::arrived
+
+Called by transport code to indicate the ware has arrived.
+Acknowledge the request. The request will delete this object.
+===============
+*/
+void WareInstance::arrived(Game* g)
+{
+	assert(m_state == State_Request);
+
+	Request* rq = m_request;
+
+	end_state_request(g);
+	rq->transfer_finish(g);
+}
+
+
+/*
+===============
+WareInstance::cancel
+
+Something bad has happened, so that our current task can not be completed.
+===============
+*/
+void WareInstance::cancel(Game* g)
+{
+
+	switch(m_state) {
+	case State_Request:
+		assert(m_request);
+
+		log("WareInstance: cancel() fails request\n");
+
+		m_request->transfer_fail(g);
+		end_state_request(g);
+		break;
+
+	default:
+		break;
+	}
 }

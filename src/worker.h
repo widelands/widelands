@@ -23,6 +23,7 @@
 #include "bob.h"
 
 class Economy;
+class Flag;
 class Request;
 class Route;
 class Road;
@@ -134,6 +135,8 @@ public:
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
+	virtual bool wakeup_flag_capacity(Game* g, Flag* flag);
+
 protected:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 
@@ -186,23 +189,32 @@ class Carrier : public Worker {
 public:
 	enum {
 		State_WorkIdle = State_Worker_Last + 1,	// idling on the road
-		//State_WorkTransport,								// transport something
+		State_WorkTransport,								// transport something
 	};
 
 	Carrier(Carrier_Descr *descr, bool ingamelogic);
 	virtual ~Carrier();
 
 	void set_job_road(Game*, Road* road);
-	// TODO bool notify_ware(int flag);
+	bool notify_ware(Game* g, int flag);
+
+	virtual bool wakeup_flag_capacity(Game* g, Flag* flag);
 
 protected:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 	virtual void do_end_state(Game* g, int oldstate, bool success);
 
+	bool find_pending_item(Game* g);
+
 	void run_state_workidle(Game* g, uint prev, bool success, uint nexthint);
+	void run_state_worktransport(Game* g, uint prev, bool success, uint nexthint);
+
+	bool walk_to_index(Game* g, int index);
+	bool walk_to_flag(Game* g, int flag, bool offset = false);
 
 private:
 	int			m_fetch_flag;	// fetch from start_flag if 0, end_flag if 1; drop at the other flag
+	bool			m_inbuilding;	// transporting worker walked into the target building
 };
 
 
@@ -296,7 +308,7 @@ class Has_Working1_Worker_Descr : virtual public Worker_Descr {
 };
 
 //
-// Sit_Dig_Base class. this is the fundament for the sitters, 
+// Sit_Dig_Base class. this is the fundament for the sitters,
 // diggers and the specials
 class SitDigger_Base : virtual public Worker_Descr {
    public:

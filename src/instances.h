@@ -33,16 +33,16 @@ class Player;
 //
 // Base class for descriptions of worker, files and so on. this must just
 // link them together
-// 
+//
 class Map_Object;
 
 class Map_Object_Descr {
 public:
 	Map_Object_Descr(void) { }
 	virtual ~Map_Object_Descr(void) { }
-		
+
 	bool has_attribute(uint attr);
-		
+
 protected:
 	void add_attribute(uint attr);
 
@@ -56,7 +56,7 @@ Notes on Map_Object
 -------------------
 
 Map_Object is the base class for everything that can be on the map: buildings, animals,
-decorations, etc... most of the time, however, you'll deal with one of the derived 
+decorations, etc... most of the time, however, you'll deal with one of the derived
 classes, BaseImmovable or Bob.
 
 Every Map_Object has a unique serial number. This serial number is used as key in the
@@ -143,6 +143,8 @@ protected:
 
    // is this a game (with logic) or a editor run (without logic)
    inline bool get_logic(void) { return m_logic; }
+
+	void molog(const char* fmt, ...);
 
 protected:
 	Map_Object_Descr *m_descr;

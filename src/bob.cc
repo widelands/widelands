@@ -132,7 +132,7 @@ Cleanup an object. Removes map links
 Bob::~Bob()
 {
 	if (m_position.field) {
-		log("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not called!\n");
+		molog("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not called!\n");
 		*(int *)0 = 0;
 	}
 }
@@ -370,7 +370,7 @@ is okay to interrupt the task immediately. Otherwise, the task will be
 interrupted on the next task_act().
 ===============
 */
-void Bob::interrupt_task(Game *g, bool hard)
+void Bob::interrupt_task(Game *g, bool hard, uint nexthint)
 {
 	assert(!m_task_acting);
 	assert(!m_task_switching);
@@ -396,7 +396,7 @@ void Bob::interrupt_task(Game *g, bool hard)
 
 	m_lasttask = m_task;
 	m_lasttask_success = false;
-	m_nexttask = 0;
+	m_nexttask = nexthint;
 
 	m_task = 0;
 
@@ -555,7 +555,7 @@ int Bob::task_act(Game* g, bool interrupt)
 			end_walk(g);
 
 		if (interrupt) {
-			log("TASK_MOVEPATH: interrupted\n");
+			molog("TASK_MOVEPATH: interrupted\n");
 			end_task(g, false, 0); // failure
 			return 0; // will be ignored
 		}
@@ -570,7 +570,7 @@ int Bob::task_act(Game* g, bool interrupt)
 
 		int tdelta = start_walk(g, (WalkingDir)dir, task.movepath.anims->get_animation(dir));
 		if (tdelta < 0) {
-			log("TASK_MOVEPATH: can't walk\n");
+			molog("TASK_MOVEPATH: can't walk\n");
 			end_task(g, false, 0); // failure to reach goal
 			return 0;
 		}

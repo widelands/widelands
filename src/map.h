@@ -98,8 +98,8 @@ class Map {
 
 public:
 	struct Pathfield;
-               
-   Map(); 
+
+   Map();
    ~Map();
 
    // For loading
@@ -111,12 +111,12 @@ public:
 
 	void set_starting_pos(uint plnum, Coords c);
 	inline const Coords &get_starting_pos(uint plnum) { return m_starting_pos[plnum-1]; }
-	
+
 	void set_author(const char *string);
 	void set_world_name(const char *string);
 	void set_name(const char *string);
 	void set_description(const char *string);
-	
+
 	// informational functions
 	inline const char* get_author(void) { return m_author; }
 	inline const char* get_name(void) { return m_name; }
@@ -141,7 +141,7 @@ public:
 	inline void normalize_coords(Coords *c);
 	inline Field* get_safe_field(int x, int y);
 	inline void get_coords(Field * const f, Coords *c);
-					
+
 	int calc_distance(Coords a, Coords b);
 	int is_neighbour(const Coords start, const Coords end);
 
@@ -242,7 +242,7 @@ struct FindImmovableAttribute : public FindImmovable {
 	FindImmovableAttribute(uint attrib) : m_attrib(attrib) { }
 	
 	virtual bool accept(BaseImmovable *imm) const;
-	
+
 	int m_attrib;
 };
 
@@ -284,8 +284,11 @@ private:
 // CoordPath is an extended path that also caches related Coords
 class CoordPath {
 public:
+	CoordPath() { m_map = 0; }
 	CoordPath(Map *map, Coords c) : m_map(map) { m_coords.push_back(c); }
 	CoordPath(const Path &path);
+
+	CoordPath& operator=(const Path& path);
 
 	inline Map *get_map() const { return m_map; }
 	inline bool is_valid() const { return m_map; }
@@ -720,7 +723,7 @@ class Map_Region_Coords {
 		Map_Region_Coords() { }
       Map_Region_Coords(Coords coords, int area, Map* m) { init(coords, area, m); }
       ~Map_Region_Coords() { }
-		
+
 		void init(Coords coords, int area, Map *m);
 		int next(int*, int*);
 

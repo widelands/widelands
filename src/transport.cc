@@ -69,7 +69,7 @@ Flag::Flag(bool logic)
 
 	m_item_capacity = 8;
 	m_item_filled = 0;
-	m_items = new WareInstance*[m_item_capacity];
+	m_items = new PendingItem[m_item_capacity];
 }
 
 
@@ -175,7 +175,7 @@ void Flag::set_economy(Economy *e)
 
 	if (old) {
 		for(int i = 0; i < m_item_filled; i++)
-			m_items[i]->remove_from_economy(old);
+			m_items[i].item->remove_from_economy(old);
 	}
 
 	PlayerImmovable::set_economy(e);
@@ -189,7 +189,7 @@ void Flag::set_economy(Economy *e)
 
 	if (e) {
 		for(int i = 0; i < m_item_filled; i++)
-			m_items[i]->add_to_economy(e);
+			m_items[i].item->add_to_economy(e);
 	}
 }
 
@@ -347,9 +347,9 @@ Flag::wait_for_capacity
 Signal the given bob by interrupting its task as soon as capacity becomes free.
 ===============
 */
-void Flag::wait_for_capacity(Game* g, Bob* bob)
+void Flag::wait_for_capacity(Game* g, Worker* bob)
 {
-	throw wexception("Flag::wait_for_capacity: TODO");
+	m_capacity_wait.push_back(bob);
 }
 
 
@@ -360,12 +360,220 @@ Flag::add_item
 */
 void Flag::add_item(Game* g, WareInstance* item)
 {
+	PendingItem* pi;
+
 	assert(m_item_filled < m_item_capacity);
 
-	m_items[m_item_filled++] = item;
+	pi = &m_items[m_item_filled++];
+	pi->item = item;
+	pi->pending = false;
+	pi->flag = 0;
+
 	item->set_location(this);
-	
-	// TODO: figure out where the item should go
+
+	update_item(g, pi);
+}
+
+
+/*
+===============
+Flag::has_pending_item
+
+Returns true if an item is currently waiting for a carrier to the given flag.
+===============
+*/
+bool Flag::has_pending_item(Game* g, Flag* destflag)
+{
+	int i;
+
+	for(i = 0; i < m_item_filled; i++) {
+		if (!m_items[i].pending)
+			continue;
+
+		if (m_items[i].flag != destflag)
+			continue;
+
+		return true;
+	}
+
+	return false;
+}
+
+
+/*
+===============
+Flag::ack_pending_item
+
+Called by carrier code to indicate that the carrier is moving to pick up an
+item.
+Returns true if an item is actually waiting for the carrier.
+===============
+*/
+bool Flag::ack_pending_item(Game* g, Flag* destflag)
+{
+	int i;
+
+	for(i = 0; i < m_item_filled; i++) {
+		if (!m_items[i].pending)
+			continue;
+
+		if (m_items[i].flag != destflag)
+			continue;
+
+		m_items[i].pending = false;
+		return true;
+	}
+
+	return false;
+}
+
+
+/*
+===============
+Flag::fetch_pending_item
+
+Called by carrier code to retrieve one of the items on the flag that is meant
+for that carrier.
+This function may return 0 even if ack_pending_item() has already been called
+successfully.
+===============
+*/
+WareInstance* Flag::fetch_pending_item(Game* g, Flag* destflag)
+{
+	int i;
+
+	for(i = 0; i < m_item_filled; i++) {
+		WareInstance* item = m_items[i].item;
+
+		if (m_items[i].flag != destflag)
+			continue;
+
+		// move the other items up the list and return this one
+		m_item_filled--;
+		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
+
+		item->set_location(0);
+
+		// wake up capacity wait queue
+		while(m_capacity_wait.size()) {
+			Worker* w = (Worker*)m_capacity_wait[0].get(g);
+
+			m_capacity_wait.erase(m_capacity_wait.begin());
+
+			if (!w)
+				continue;
+
+			log("Flag: wake up one from wait queue.\n");
+
+			if (w->wakeup_flag_capacity(g, this))
+				break;
+		}
+
+		return item;
+	}
+
+	return 0;
+}
+
+
+/*
+===============
+Flag::update_item
+
+Look at the given item and see if something needs to be done with it.
+If an item is going to the flag renotify_flag, the corresponding roads will
+_always_ be renotified, even if there was no change.
+===============
+*/
+void Flag::update_item(Game* g, PendingItem* pi, Flag* renotify_flag)
+{
+	WareInstance* item = pi->item;
+
+	if (item->is_moving(g))
+	{
+		PlayerImmovable* next = item->get_next_move_step(g);
+
+		assert(next);
+
+		if (next->get_type() == Map_Object::FLAG)
+		{
+			if (next == pi->flag && next != renotify_flag)
+				return; // nothing to do, move along
+
+			pi->flag = (Flag*)next;
+
+			for(int dir = 1; dir <= 6; dir++) {
+				Road* road = get_road(dir);
+				Flag* other;
+				Road::FlagId flagid;
+
+				if (!road)
+					continue;
+
+				if (road->get_flag(Road::FlagStart) == this) {
+					flagid = Road::FlagStart;
+					other = road->get_flag(Road::FlagEnd);
+				} else {
+					flagid = Road::FlagEnd;
+					other = road->get_flag(Road::FlagStart);
+				}
+
+				if (other != next)
+					continue;
+
+				// Yes, this is the road we want; inform it
+				if (road->notify_ware(g, flagid)) {
+					pi->pending = false;
+					return;
+				}
+
+				// If the road doesn't react to the ware immediately, we try other roads:
+				// They might lead to the same flag!
+			}
+
+			// Nothing found, just let it be picked up by somebody
+			pi->pending = true;
+			return;
+		}
+
+		pi->flag = 0;
+
+		if (next->get_type() == Map_Object::BUILDING)
+		{
+			if (next != get_building())
+				throw wexception("Flag::update_item: move to disjoint building");
+
+			throw("TODO: Fetch item from flag into building");
+		}
+
+		throw("Flag::update_item: can only move to flag or building");
+	}
+
+	// The item is idling for now; set an idle timeout
+	pi->flag = 0;
+
+	// TODO: Set an idle timeout for return to warehouse
+}
+
+
+/*
+===============
+Flag::update_items
+
+Called whenever a road gets broken or split.
+Make sure all items on this flag are rerouted if necessary.
+
+Note: When two roads connect the same two flags, and one of these roads
+      is removed, this might cause the carrier(s) on the other road to
+		move unnecessarily. Fixing this could potentially be very expensive and
+		fragile.
+		A similar thing can happen when a road is split.
+===============
+*/
+void Flag::update_items(Game* g, Flag* other)
+{
+	for(int i = 0; i < m_item_filled; i++)
+		update_item(g, &m_items[i], other);
 }
 
 
@@ -394,7 +602,7 @@ Detach building and free roads.
 void Flag::cleanup(Editor_Game_Base *g)
 {
 	while(m_item_filled) {
-		WareInstance* item = m_items[--m_item_filled];
+		WareInstance* item = m_items[--m_item_filled].item;
 
 		item->cleanup((Game*)g);
 		delete item;
@@ -446,7 +654,7 @@ void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point
 
 	// Draw wares
 	for(i = 0; i < m_item_filled; i++) {
-		WareInstance* item = m_items[i];
+		WareInstance* item = m_items[i].item;
 		Point warepos = pos;
 
 		if (i < 8) {
@@ -745,6 +953,9 @@ void Road::cleanup(Editor_Game_Base *gg)
 
 	Economy::check_split(m_flags[FlagStart], m_flags[FlagEnd]);
 
+	m_flags[FlagStart]->update_items(g, m_flags[FlagEnd]);
+	m_flags[FlagEnd]->update_items(g, m_flags[FlagStart]);
+
 	PlayerImmovable::cleanup(g);
 }
 
@@ -885,6 +1096,29 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 	// routing might not work correctly
 	if (!m_carrier.get(g) && !m_carrier_request)
 		request_carrier(g);
+
+	// Make sure items waiting on the original endpoint flags are dealt with
+	m_flags[FlagStart]->update_items(g, oldend);
+	oldend->update_items(g, m_flags[FlagStart]);
+}
+
+
+/*
+===============
+Road::notify_ware
+
+Called by Flag code: an item should be picked up from the given flag.
+Return true if a carrier has been sent on its way, or false otherwise.
+===============
+*/
+bool Road::notify_ware(Game* g, FlagId flagid)
+{
+	Carrier* carrier = (Carrier*)m_carrier.get(g);
+
+	if (!carrier)
+		return false;
+
+	return carrier->notify_ware(g, flagid);
 }
 
 
@@ -1123,15 +1357,24 @@ void Request::check_transfer(Game *g)
 
 		route = m_worker->get_route();
 		location = m_worker->get_location(g);
+
+		// worker should phone home if that happens
+		if (!location)
+			throw wexception("Request::check_transfer(): current location disappeared!");
 	} else {
 		assert(!m_worker);
 
 		route = m_item->get_route();
 		location = m_item->get_location(g);
+
+		// since wares often have a zero location temporarily, this can happen
+		if (!location) {
+			cancel_transfer(g);
+			get_target_economy(g)->process_request(this);
+			return;
+		}
 	}
 
-	if (!location)
-		throw wexception("Request::check_transfer(): current location disappeared!");
 
 	// Verify the route, and fix it if necessary
 	if (!route->verify(g))
@@ -1834,6 +2077,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 
 	return true;
 }
+
 
 /*
 ===============

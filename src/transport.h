@@ -51,6 +51,13 @@ class Flag : public PlayerImmovable {
 	friend class Economy;
 	friend class FlagQueue;
 
+private:
+	struct PendingItem {
+		WareInstance*	item;		// the item itself
+		bool				pending;	// if the item is pending
+		Flag*				flag;		// other flag that this item is sent to
+	};
+
 public:
 	Flag(bool);
 	virtual ~Flag();
@@ -79,8 +86,13 @@ public:
 	Road *get_road(Flag *flag);
 
 	bool has_capacity();
-	void wait_for_capacity(Game* g, Bob* bob);
+	void wait_for_capacity(Game* g, Worker* bob);
 	void add_item(Game* g, WareInstance* item);
+	bool has_pending_item(Game* g, Flag* destflag);
+	bool ack_pending_item(Game* g, Flag* destflag);
+	WareInstance* fetch_pending_item(Game* g, Flag* destflag);
+
+	void update_items(Game* g, Flag* other);
 
 protected:
 	virtual void init(Editor_Game_Base*);
@@ -88,17 +100,22 @@ protected:
 
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
+	void update_item(Game* g, PendingItem* pi, Flag* renotify_flag = 0);
+
 private:
 	Coords			m_position;
 	uint				m_anim;
 	int				m_animstart;
 
-	Building			*m_building;	// attached building (replaces road WALK_NW)
-	Road				*m_roads[6];	// Map_Object::WALK_xx-1 as index
+	Building			*m_building;		// attached building (replaces road WALK_NW)
+	Road*				m_roads[6];			// Map_Object::WALK_xx-1 as index
+	int				m_items_pending[6];
 
 	int				m_item_capacity;	// size of m_items array
 	int				m_item_filled;		// number of items currently on the flag
-	WareInstance**	m_items;				// items currently on the flag
+	PendingItem*	m_items;				// items currently on the flag
+
+	std::vector<Object_Ptr>	m_capacity_wait;	// workers waiting for capacity
 
 	// The following are only used during pathfinding
 	uint				mpf_cycle;
@@ -152,6 +169,8 @@ public:
 
 	void presplit(Editor_Game_Base *g, Coords split);
 	void postsplit(Editor_Game_Base *g, Flag *flag);
+
+	bool notify_ware(Game* g, FlagId flagid);
 
 protected:
 	void set_path(Editor_Game_Base *g, const Path &path);
