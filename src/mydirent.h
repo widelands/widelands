@@ -60,8 +60,6 @@ class Dir
 DIR* opendir(const char* name);
 dirent* readdir(DIR* dir);
 void closedir(DIR* dir);
-// is there anything like this in unix dirent?
-int readdircomplete(const char* name, char*** buf);
 
 #endif //WIN32
 

@@ -21,6 +21,7 @@
 #include "map.h"
 #include "errors.h"
 #include "myfile.h"
+#include <string.h>
 
 /** class Map
  *
@@ -113,7 +114,8 @@ int Map::load_map(const char* file) {
 
 		  // now, read in the fields, one at a time and init the card
 		  FieldDescr fd;
-		  for(int y=0; y<height; y++) {
+		  int y;
+		  for(y=0; y<height; y++) {
 					 for(int x=0; x<width; x++) {
 								f.read(&fd, sizeof(fd));
 	
@@ -121,9 +123,8 @@ int Map::load_map(const char* file) {
 							 			// TODO care for the real fields;
 					 }
 		  }
-		  
 		  int l, r, t, b;
-		  for(int y=0; y<height; y++) {
+		  for(y=0; y<height; y++) {
 					 for(int x=0; x<width; x++) {
 
 		 						l=x-1; 
