@@ -65,6 +65,7 @@ public:
 protected:
 	virtual Building *create_object() = 0;
 	Building* create_constructionsite();
+   inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
 
 private:
 	Tribe_Descr		*m_tribe;			// the tribe this building belongs to

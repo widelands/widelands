@@ -381,9 +381,9 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 
 	// Read the walking animations
 	m_walk_anims.parse(directory, prof, "walk_??", prof->get_section("walk"), encdata);
-	m_walkload_anims.parse(directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
-
-	// Read programs
+   m_walkload_anims.parse(directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
+	
+   // Read programs
 	while(sglobal->get_next_string("program", &string)) {
 		WorkerProgram* prog = 0;
 

@@ -48,7 +48,8 @@ class Tribe_Descr {
 		inline int get_nrworkers() { return m_workers.get_nitems(); }
       inline Worker_Descr* get_worker_descr(uint idx) { return m_workers.get(idx); }
 		inline int get_nrwares() { return m_wares.get_nitems(); }
-      inline Ware_Descr* get_ware_descr(uint idx) { return m_wares.get(idx); }
+		inline int get_ware_index(const char *name) { return m_wares.get_index(name); }
+      inline Item_Ware_Descr* get_ware_descr(uint idx) { return m_wares.get(idx); }
       inline int get_nrbuildings() { return m_buildings.get_nitems(); }
 		inline int get_building_index(const char *name) { return m_buildings.get_index(name); }
 		inline Building_Descr *get_building_descr(uint idx) { return m_buildings.get(idx); }
@@ -69,7 +70,7 @@ class Tribe_Descr {
 		
       Descr_Maintainer<Worker_Descr> m_workers;
       Descr_Maintainer<Building_Descr> m_buildings;
-      Descr_Maintainer<Ware_Descr> m_wares;
+      Descr_Maintainer<Item_Ware_Descr> m_wares;
      
       std::map<std::string, int> m_startwares;
       std::map<std::string, int> m_startworkers;

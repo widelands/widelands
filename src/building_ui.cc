@@ -612,7 +612,7 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 
 	box->add_space(8);
 
-	// Add the caps buttons
+	// Add the caps button
 	box->add(create_capsbuttons(box), Box::AlignCenter);
 
 	fit_inner(box);
@@ -769,6 +769,18 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
 	: Building_Window(parent, ps, registry)
 {
 	Box* box = new Box(this, 0, 0, Box::Vertical);
+
+	// Add the wares queue
+   std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
+	for(uint i = 0; i < warequeues->size(); i++)
+	{
+		WaresQueueDisplay* wqd = new WaresQueueDisplay(box, 0, 0, get_w(),
+					(*warequeues)[i], parent->get_game());
+
+		box->add(wqd, Box::AlignLeft);
+	}
+
+	box->add_space(8);
 
 	// Add caps buttons
 	box->add(create_capsbuttons(box), Box::AlignCenter);

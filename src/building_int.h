@@ -116,6 +116,7 @@ A production site can have one (or more) input wares types. Every input
   wares type has an associated store.
 */
 class ProductionProgram;
+class Input;
 
 class ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram*> ProgramMap;
@@ -128,16 +129,15 @@ public:
 	virtual Building *create_object();
 
 	std::string get_worker() const { return m_worker; }
-	bool is_input(std::string name) const { return m_input.find(name) != m_input.end(); }
 	bool is_output(std::string name) const { return m_output.find(name) != m_output.end(); }
-	const std::set<std::string>* get_inputs() const { return &m_input; }
 	const std::set<std::string>* get_outputs() const { return &m_output; }
-	const ProductionProgram* get_program(std::string name) const;
+	std::vector<Input>* get_inputs() { return &m_inputs; }
+   const ProductionProgram* get_program(std::string name) const;
 
 private:
 	std::string					m_worker;	// name of worker type
-	std::set<std::string>	m_input;		// input wares type names
-	std::set<std::string>	m_output;	// output wares type names
+   std::vector<Input>      m_inputs;
+   std::set<std::string>	m_output;	// output wares type names
 	ProgramMap					m_programs;
 };
 
@@ -155,7 +155,9 @@ public:
 	virtual void remove_worker(Worker *w);
 
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
-
+   
+   inline std::vector<WaresQueue*>* get_warequeues(void) { return &m_input_queues; }
+   
 protected:
 	virtual Window *create_options_window(Interactive_Player *plr, Window **registry);
 
@@ -174,7 +176,37 @@ private:
 	int								m_program_phase;	// micro-step index (instruction dependent)
 	bool								m_program_timer;	// execute next instruction based on pointer
 	int								m_program_time;	// timer time
+
+   std::vector<WaresQueue*>   m_input_queues;   //  input queues for all inputs
 };
+
+/*
+=============================
+
+class Input 
+
+This class descripes, how many items of a certain
+ware can be stored in a house. 
+This class will be extended to support ordering of 
+certain wares directly or releasing some wares
+out of a building
+
+=============================
+*/
+class Input {
+   public:
+      Input(Ware_Descr* ware, int max) { m_ware=ware; m_max=max; }
+      ~Input(void) { }
+
+      inline void set_max(int n) { m_max=n; }
+      inline int get_max(void) { return m_max; }
+      inline Ware_Descr* get_ware() const { return m_ware; }
+
+   private:
+      Ware_Descr* m_ware;
+      int m_max;
+};
+
 
 
 #endif // included_building_int_h

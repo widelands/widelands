@@ -1,0 +1,37 @@
+[global]
+descname=Carpenter
+help=The Carpenter works in the Sawmill and reduces one trunk to one wood.
+type=generic
+menu_pic=carpenter_menu.png
+
+# Here come the animations
+# For the walk animation, [walk] is a default for all walk animations.
+# You can, however, create [walk_nw] etc.. sections for sub-animations in a
+# given direction
+
+# The normal idle animation (non-directional)
+[idle]
+pics=idle_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13
+
+
+# Walking empty-handed
+[walk]
+dirpics=walk_!!_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13
+
+[walkload]
+dirpics=walkload_!!_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13

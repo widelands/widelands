@@ -983,7 +983,7 @@ void Warehouse_Descr::parse(const char *directory, Profile *prof, const EncodeDa
 	add_attribute(Map_Object::WAREHOUSE);
 
 	Building_Descr::parse(directory, prof, encdata);
-
+   
 	Section *global = prof->get_safe_section("global");
 	const char *string;
 
@@ -1463,17 +1463,33 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
 {
 	Section* sglobal = prof->get_section("global");
 	const char* string;
-
+   
 	Building_Descr::parse(directory, prof, encdata);
+   
+   // Get inputs and outputs
+   while(sglobal->get_next_string("output", &string))
+      m_output.insert(string);
+
+   Section* s=prof->get_section("inputs");
+   if(s) {
+      // This house obviously requests wares and works on them
+
+      Section::Value* val;
+      while(val=s->get_next_val(0)) {
+
+         int idx=get_tribe()->get_ware_index(val->get_name());
+         if(idx==-1) 
+            throw wexception("Error in [inputs], ware %s is unknown!", val->get_name());
+
+
+         Item_Ware_Descr* ware= get_tribe()->get_ware_descr(idx);
+
+         Input input(ware,val->get_int());
+         m_inputs.push_back(input);
+      }
+   }
 
 	m_worker = sglobal->get_safe_string("worker");
-
-	// Get inputs and outputs
-	while(sglobal->get_next_string("input", &string))
-		m_input.insert(string);
-
-	while(sglobal->get_next_string("output", &string))
-		m_output.insert(string);
 
 	// Get programs
 	while(sglobal->get_next_string("program", &string)) {
@@ -1562,11 +1578,24 @@ void ProductionSite::init(Editor_Game_Base *g)
 {
 	Building::init(g);
 
-	// Request worker
-	if (g->is_game() && !m_worker)
-		request_worker((Game*)g);
-}
+   if (g->is_game()) {
+   // Request worker
+      if(!m_worker) 
+         request_worker((Game*)g);
 
+      // Init input ware queues
+      std::vector<Input>* inputs=((ProductionSite_Descr*)get_descr())->get_inputs();
+
+      for(uint i = 0; i < inputs->size(); i++) {
+         ALIVE();
+         WaresQueue* wq = new WaresQueue(this);
+
+         m_input_queues.push_back(wq);
+         //         wq->set_callback(&ConstructionSite::wares_queue_callback, this);
+         wq->init((Game*)g, g->get_safe_ware_id((*inputs)[i].get_ware()->get_name()), (*inputs)[i].get_max());
+      }
+   }
+}
 
 /*
 ===============
@@ -1590,6 +1619,15 @@ void ProductionSite::cleanup(Editor_Game_Base *g)
 		m_worker = 0;
 		w->set_location(0);
 	}
+
+   
+   // Cleanup the wares queues
+	for(uint i = 0; i < m_input_queues.size(); i++) {
+		m_input_queues[i]->cleanup((Game*)g);
+		delete m_input_queues[i];
+	}
+	m_input_queues.clear();
+
 
 	Building::cleanup(g);
 }

@@ -252,7 +252,7 @@ and is called by the Game class
 */
 void Tribe_Descr::parse_wares(const char* directory)
 {
-   Descr_Maintainer<Ware_Descr>* wares=&m_wares;
+   Descr_Maintainer<Item_Ware_Descr>* wares=&m_wares;
    char subdir[256];
 	filenameset_t dirs;
 
