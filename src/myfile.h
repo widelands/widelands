@@ -52,7 +52,7 @@ class File {
 					 virtual void open(const char*,  For)=0;
 					 virtual void close()=0;
 					 virtual int read(void*, int)=0;
-					 virtual int write(void*, int)=0;
+					 virtual int write(const void*, int)=0;
 					 
 					 // Common functions
 					 State get_state();
@@ -85,7 +85,7 @@ class Ascii_file : public File {
 					 void open(const char*, For);
 					 void close(void);
 					 int read(void*, int);
-					 int write(void*, int);
+					 int write(const void*, int);
 	
 		  private:
 					 FILE* f;
@@ -103,7 +103,7 @@ class Binary_file : public File {
 					 void open(const char*, For);
 					 void close(void);
 					 int read(void*, int);
-					 int write(void*, int);
+					 int write(const void*, int);
 
 		  private:
 					 FILE* f;

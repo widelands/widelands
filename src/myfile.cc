@@ -182,7 +182,7 @@ int Binary_file::read(void* buf, int size) {
  *
  * Returns: bytes written or -1
  */
-int Binary_file::write(void* buf, int size) {
+int Binary_file::write(const void* buf, int size) {
 		  if(get_state() != OPEN) return -1;
 
 		  set_state(WRITES);
@@ -303,7 +303,7 @@ int Ascii_file::read(void* buf, int size) {
  *
  * Returns: bytes written or -1
  */
-int Ascii_file::write(void* buf, int size) {
+int Ascii_file::write(const void* buf, int size) {
 		  if(get_state() != OPEN) return -1;
 
 		  set_state(WRITES);
