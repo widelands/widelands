@@ -23,8 +23,10 @@
 #include "ui_unique_window.h"
 
 class Editor_Interactive;
-class UIListselect;
 class UIButton;
+class UITable;
+class UITextarea;
+class MapObjective;
 
 /*
 =============================
@@ -40,6 +42,16 @@ class Editor_Objectives_Menu : public UIUniqueWindow {
 
    private:
       Editor_Interactive *m_parent;
+      UITable            *m_table;
+      UIButton           *m_edit_button;
+      UIButton           *m_delete_button;
+      UITextarea         *m_trigger;
+
+   private:
+      void insert_objective( MapObjective* );
+      void clicked( int );
+      void table_selected( int );
+      void table_dblclicked( int );
 };
 
 

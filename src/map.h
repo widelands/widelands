@@ -33,6 +33,7 @@ class Player;
 class World;
 class Overlay_Manager;
 class MapVariableManager;
+class MapObjectiveManager;
 
 #define WLMF_VERSION 	0x0001
 
@@ -354,10 +355,12 @@ public:
    }
 
    /*
-    * Get the map variable manager for registering or removing
-    * some variables
+    * Get the a manager for registering or removing
+    * something 
     */
    MapVariableManager* get_mvm( void ) { return m_mvm; }
+   MapObjectiveManager* get_mom( void ) { return m_mom; }
+
 
 private:
 	void set_size(uint w, uint h);
@@ -386,6 +389,7 @@ private:
    std::vector<Event*>      m_events;        // Events are available on all maps. (At least the win trigger or the loose event)
 
    MapVariableManager*       m_mvm;           // The mapvariable manager makes sure for handling all the variables
+   MapObjectiveManager*      m_mom;           // The mapobjective manager lists all scenarios objectives.
 
 	void recalc_brightness(FCoords coords);
 	void recalc_fieldcaps_pass1(FCoords coords);

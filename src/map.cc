@@ -23,6 +23,7 @@
 #include "filesystem.h"
 #include "map.h"
 #include "map_variable_manager.h"
+#include "map_objective_manager.h"
 #include "player.h"
 #include "world.h"
 #include "worlddata.h"
@@ -86,6 +87,7 @@ Map::Map(void)
 	m_overlay_manager=0;
 
    m_mvm = new MapVariableManager();
+   m_mom = new MapObjectiveManager();
 
 	// Paranoia
 	cleanup();
@@ -108,6 +110,10 @@ Map::~Map()
    if(m_mvm) {
       delete m_mvm;
       m_mvm = 0;
+   }
+   if(m_mom) {
+      delete m_mom;
+      m_mom = 0;
    }
 }
 
