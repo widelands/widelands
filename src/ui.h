@@ -32,6 +32,12 @@
  * to provide the base class for signal function pointers.
  */
 class UIObject {
+public:
+	// Yeah right... force a VMT so that MSVC++ gets the pointers-to-members
+	// right *sigh*
+	// OTOH, looking at the gcc assembly, gcc seems to use a less efficient
+	// pointer representation. Can anyone clear this up? -- Nicolai
+	virtual ~UIObject() { }
 };
 
 /** class UISignal
@@ -157,17 +163,17 @@ public:
 	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	void set_handle_mouse(bool yes);
-	inline bool get_handle_mouse() const { return _flags & pf_handle_mouse; }
+	inline bool get_handle_mouse() const { return (bool)(_flags & pf_handle_mouse); }
 	void grab_mouse(bool grab);
 
 	void set_think(bool yes);
-	inline bool get_think() const { return _flags & pf_think; }
+	inline bool get_think() const { return (bool)(_flags & pf_think); }
 
 	inline void set_top_on_click(bool on) {
 		if (on) _flags |= pf_top_on_click;
 		else _flags &= ~pf_top_on_click;
 	}
-	inline bool get_top_on_click() const { return _flags & pf_top_on_click; }
+	inline bool get_top_on_click() const { return (bool)(_flags & pf_top_on_click); }
 
 private:
 	void do_draw(Bitmap *dst, int ofsx, int ofsy);

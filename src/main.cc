@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2002 by Holger Rapp 
- * 
+ * Copyright (C) 2002 by Holger Rapp
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -177,7 +177,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR /*cmdLine*/, int)
 	char* cmdLine = new char[strlen(GetCommandLine()) + 1];
 	strcpy(cmdLine, GetCommandLine());
 
-	char** args = new char*[ParseCommandLine(cmdLine, NULL)];
+	char** args = new char*[ParseCommandLine(cmdLine, NULL)+1];
 	int argcount = ParseCommandLine(cmdLine, args);
 
 	int ret =  g_main(argcount, args);

@@ -18,6 +18,8 @@
  *
  */
 
+#include <string.h>
+
 #include "ui.h"
 #include "font.h"
 

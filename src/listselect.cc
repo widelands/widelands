@@ -24,7 +24,7 @@
 
 /** class Listselect
  *
- * This class defines a list-select box. 
+ * This class defines a list-select box.
  *
  * Depends: class Pic
  * 			g_fh
@@ -107,7 +107,7 @@ void Listselect::clear()
  * Args: name	name that will be displayed
  *       value	string returned by get_select() (can be 0, in which case name is used)
  */
-void Listselect::add_entry(const char *name, const char *value = 0)
+void Listselect::add_entry(const char *name, const char *value)
 {
 	if (!value)
 		value = name;

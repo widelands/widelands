@@ -222,7 +222,7 @@ bool Section::get_boolean(const char *name, bool def)
  * Returns: the string associated with the key; never returns 0 if the key
  *          has been found
  */
-const char *Section::get_string(const char *name, const char *def = 0)
+const char *Section::get_string(const char *name, const char *def)
 {
 	Value *v = get_val(name);
 	if (!v)

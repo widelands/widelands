@@ -91,6 +91,7 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 {
 	int sx, sy;
 	int ex, ey;
+	int x, y;
 
 	sx = -ofsx;
 	if (sx < 0)
@@ -108,12 +109,12 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 			
 	ushort clr;
 	Field* f;
-	for(int y = sy; y < ey; y++)
+	for(y = sy; y < ey; y++)
 	{
 		ushort *pix = dst->get_pixels() + (y+ofsy)*dst->get_pitch() + (sx+ofsx);
 
 		f = _map->get_field(sx, y);
-		for(int x = sx; x < ex; x++, f++)
+		for(x = sx; x < ex; x++, f++)
 		{
 			clr = *f->get_texd()->get_pixels();
 			clr = bright_up_clr2(clr, f->get_brightness());
@@ -123,8 +124,8 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 	}
 
 	// draw the view pos marker
-	int x = ofsx + _viewx - (map_spot.get_w()>>1);
-	int y = ofsy + _viewy - (map_spot.get_h()>>1);
+	x = ofsx + _viewx - (map_spot.get_w()>>1);
+	y = ofsy + _viewy - (map_spot.get_h()>>1);
 	copy_pic(dst, &map_spot, x, y, 0, 0, map_spot.get_w(), map_spot.get_h());
 }
 
