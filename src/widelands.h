@@ -31,7 +31,9 @@
 #include <iostream.h>
 #include <fstream.h>
 
+#include <vector>
 #include <map>
+#include <queue>
 
 #ifdef WIN32
 	#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*

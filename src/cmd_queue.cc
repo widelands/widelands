@@ -28,41 +28,22 @@ TODO:
 - use a better algorithm (heap?)
 */
 
-//
-// This struct defines the commands, which are possible
-//
-// [I must've accidently deleted a comment about different access rights
-//  here; either way, filtering commands at the network level should
-//  really be enough]
-//
-struct Cmd_Queue::Cmd {
-   Cmd* next; // next command in queue
-	int time; // scheduled time of execution
-	char sender;
-	int cmd;
-	int arg1;
-	int arg2;
-	void *arg3; // pointer to malloc()ed memory
-};
-
-
 // 
 // class Cmd_Queue
 //
 Cmd_Queue::Cmd_Queue(Game *g)
 {
 	m_game = g;
-	m_cmds = 0;
 	m_time = 0;
 }
 
 Cmd_Queue::~Cmd_Queue(void)
 {
-	while(m_cmds) {
-		Cmd *c = m_cmds;
-		m_cmds = c->next;
-		
-		free_cmd(c);
+	while(m_cmds.empty()) {
+		const Cmd &c = m_cmds.top();
+		if (c.arg3)
+			free(c.arg3);
+		m_cmds.pop();
 	}
 }
 
@@ -72,25 +53,18 @@ Cmd_Queue::~Cmd_Queue(void)
  */
 void Cmd_Queue::queue(int time, char sender, int cmd, int arg1, int arg2, void *arg3)
 {
-	Cmd *c; // our command
-	Cmd **pp; // where we put it
+	Cmd c; // our command
 	
-	// Initialize the command 
-	c = (Cmd *)malloc(sizeof(Cmd));
-	c->time = time;
-	c->sender = sender;
-	c->cmd = cmd;
-	c->arg1 = arg1;
-	c->arg2 = arg2;	
-	c->arg3 = arg3;
+	c.time = time;
+	c.sender = sender;
+	c.cmd = cmd;
+	c.arg1 = arg1;
+	c.arg2 = arg2;	
+	c.arg3 = arg3;
 	
-	// Insert it into the queue
-	pp = &m_cmds;
-	while(*pp && (*pp)->time <= time)
-		pp = &(*pp)->next;
+	m_cmds.push(c);
 	
-	c->next = *pp;
-	*pp = c;
+	//cerr << "queue(" << time << ", " << arg1 << ")" << endl;
 }
 
 /** Cmd_Queue::run_queue(int interval)
@@ -103,14 +77,19 @@ int Cmd_Queue::run_queue(int interval)
 	int final = m_time + interval;
 	int cnt = 0;
 
-	while(m_cmds && final - m_cmds->time >= 0) {
-		Cmd *c = m_cmds;
-		m_cmds = c->next;
+	while(!m_cmds.empty()) {
+		const Cmd &c = m_cmds.top();
+		if (final - c.time < 0)
+			break;
 		
-		m_time = c->time;
-		exec_cmd(c);
-		free_cmd(c);
-		cnt++;
+		//cerr << "run(" << c.time << ", " << c.arg1 << ")" << endl;
+			
+		m_time = c.time;
+		exec_cmd(&c);
+		
+		if (c.arg3)
+			free(c.arg3);
+		m_cmds.pop();
 	}
 	
 	m_time = final;
@@ -118,11 +97,11 @@ int Cmd_Queue::run_queue(int interval)
 	return cnt;
 }
 
-/** Cmd_Queue::exec_cmd(Cmd *c) [private]
+/** Cmd_Queue::exec_cmd(const Cmd *c) [private]
  *
  * Execute the given command now
  */
-void Cmd_Queue::exec_cmd(Cmd *c)
+void Cmd_Queue::exec_cmd(const Cmd *c)
 {
 	switch(c->cmd) {
 	case CMD_ACT:
@@ -142,15 +121,3 @@ void Cmd_Queue::exec_cmd(Cmd *c)
 		break;
 	}
 }
-
-/** Cmd_Queue::free_cmd(Cmd *c) [private]
- *
- * Unuse a command structure
- */
-void Cmd_Queue::free_cmd(Cmd *c)
-{
-	if (c->arg3)
-		free(c->arg3);
-	free(c);
-}
-
