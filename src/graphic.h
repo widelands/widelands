@@ -251,6 +251,23 @@ namespace Graph {
 					  */
 					 inline unsigned int get_yres(void) const { return yres; }
 
+					 /** inline void Graphics::needs_update(void) 
+					  *
+					  * This functions tells the graphic that it should redraw itself
+					  *
+					  * Args: None
+					  * returns: Nothing
+					  */
+					 inline void needs_update(void) { bneeds_update=true; }
+
+					 /** inline bool does_need_update(void) 
+					  *
+					  * This returns if the object needs to be updated
+					  *
+					  * Args: None
+					  * Returns: true if the screen should be redrawn
+					  */
+					 inline bool does_need_update(void) { return bneeds_update; }
 
 					 // optimized pixel get functions
 					 // They are rather simple,
@@ -321,6 +338,8 @@ namespace Graph {
 					 Mode mode;
 					 SDL_Surface* sc;
 					 State st;
+
+					 bool bneeds_update;
 		  };
 
 		  void draw_pic(Pic*, const unsigned short, const unsigned short,  const unsigned short, const unsigned short, 

@@ -99,6 +99,8 @@ Window::~Window(void) {
 		  
 		  delete winpic;
 		  if(own_bg) delete own_bg;
+		  
+		  g_gr.needs_update();
 }
 
 /** void Window::set_pos(unsigned int posx, unsigned int posy)
@@ -188,6 +190,8 @@ void Window::redraw_win(void) {
 		  unsigned int px=x; 
 		  unsigned int py=y;
 		
+		  g_gr.needs_update();
+		 
 		  Pic* usebg= own_bg ? own_bg : &bg ;
 		
 		  if(myf != FLAT) {
@@ -415,6 +419,7 @@ Window*  User_Interface::create_window(const unsigned int x, const unsigned int 
 		  last->next=0;
 		  last->w=0;
 
+
 		  return win;
 }
 		  
@@ -499,6 +504,8 @@ Textarea::Textarea(const unsigned int px, const unsigned int py, const char* t, 
 		  yp=addy;
 
 		  al=a;
+		 
+		  draw();
 }
 
 /* Textarea::Textarea(const unsigned int px, const unsigned int py, const unsigned int myw, const Align a, Pic* mdp)
@@ -581,4 +588,6 @@ void Textarea::draw(void) const {
 					 assert(0);
 		  }
 		  Graph::copy_pic(dp, txt, posx, yp+y, 0, 0, myw, h);
+		  
+		  g_gr.needs_update();
 }

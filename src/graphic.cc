@@ -93,6 +93,8 @@ namespace Graph {
 					 pixels=(unsigned short*) sc->pixels;
 
 					 st=OK;
+					 
+					 bneeds_update=true;
 
 					 return;
 		  }
@@ -111,6 +113,8 @@ namespace Graph {
 					 }
 
 					 SDL_UpdateRect(sc, 0, 0, xres, yres);
+
+					 bneeds_update=false;
 		  }
 		  
 		  /** void Graphic::update_rect(const unsigned short x, const unsigned short y, const unsigned short w, const unsigned short h);
@@ -129,6 +133,7 @@ namespace Graph {
 					 }
 
 					 SDL_UpdateRect(sc, x, y, w, h);
+					 bneeds_update=false;
 		  }
 
 		  /** void Graphic::update_quarter(void) 
@@ -152,6 +157,7 @@ namespace Graph {
 
 					SDL_UpdateRect(sc, x, y, xadd, yadd);
 					x+=xadd;
+					bneeds_update=false;
 		  }
 		  
 		  /** void draw_pic(Pic* p, const unsigned short d_x_pos, const unsigned short d_y_pos,  const unsigned short p_x_pos, 

@@ -1,4 +1,4 @@
-EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -UDONT_USE_ASM -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -g -fprofile-arcs -pg
+EXTRA_FLAGS=@SDL_CFLAGS@ -DDEBUG -DPKGDATADIR=\"$(pkgdatadir)\" -Wall -O3 -g -fprofile-arcs -pg
 # LDFLAGS=
 CFLAGS= $(EXTRA_FLAGS)
 CXXFLAGS= $(EXTRA_FLAGS)
