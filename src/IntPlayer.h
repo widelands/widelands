@@ -20,9 +20,10 @@
 #ifndef __S__INTPLAYER_H
 #define __S__INTPLAYER_H
 
+#include "game.h"
 #include "ui.h"
+#include "interactive_base.h"
 
-class Game;
 class Player;
 class MiniMap;
 class Map_View;
@@ -43,7 +44,7 @@ struct UniqueWindow {
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-class Interactive_Player : public Panel {
+class Interactive_Player : public Panel, public Interactive_Base {
 	public:
 		Interactive_Player(Game *g, uchar pln);
 		~Interactive_Player(void);
@@ -66,17 +67,11 @@ class Interactive_Player : public Panel {
 		void think();
 
 		bool handle_key(bool down, int code, char c);
-		
+	
+      inline Map* get_map() { return m_game->get_map(); }
 		inline Game *get_game() { return m_game; }
 		inline uchar get_player_number(void) { return m_player_number; }
 		Player *get_player();
-		
-		inline const Coords &get_fieldsel() const { return m_maprenderinfo.fieldsel; }
-		inline bool get_fieldsel_freeze() const { return m_fieldsel_freeze; }
-		void set_fieldsel(Coords c);
-		void set_fieldsel_freeze(bool yes);
-		
-		inline const MapRenderInfo* get_maprenderinfo() const { return &m_maprenderinfo; }
 		
 		void recalc_overlay(FCoords fc);
 		
@@ -106,10 +101,6 @@ class Interactive_Player : public Panel {
 		UniqueWindow	m_mainmenu;
 		UniqueWindow	m_minimap;
 		UniqueWindow	m_fieldaction;
-		
-		bool		m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
-		
-		MapRenderInfo	m_maprenderinfo;
 		
 		CoordPath		*m_buildroad; // path for the new road
 };

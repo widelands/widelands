@@ -38,8 +38,7 @@ Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Play
 	: Panel(parent, x, y, w, h)
 {
 	m_player = player;
-	m_game = player->get_game();
-	m_map = m_game->get_map();
+	m_map = player->get_map();
 	
 	vpx = vpy = 0;
 	dragging = false;

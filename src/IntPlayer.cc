@@ -110,8 +110,6 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	
 	Sys_InitGraphics(GFXSYS_SW16, get_xres(), get_yres(), s->get_bool("fullscreen", false));
 	
-	memset(&m_maprenderinfo, 0, sizeof(m_maprenderinfo));
-	
 	// Setup all screen elements
 	m_game = g;
 	m_player_number = plyn;
@@ -120,8 +118,6 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn)
 	main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
 	main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
 
-	m_fieldsel_freeze = false;
-	
 	m_buildroad = false;
 	
 	// user interface buttons
@@ -157,12 +153,7 @@ cleanups
 */
 Interactive_Player::~Interactive_Player(void)
 {
-	if (m_maprenderinfo.overlay_basic)
-		free(m_maprenderinfo.overlay_basic);
-	if (m_maprenderinfo.overlay_roads)
-		free(m_maprenderinfo.overlay_roads);
-	
-	if (m_buildroad)
+		if (m_buildroad)
 		abort_build_road();
 }
 
@@ -228,32 +219,6 @@ Return the logic player that is controlled by this Interactive_Player
 Player *Interactive_Player::get_player()
 {
 	return m_game->get_player(m_player_number);
-}
-
-
-/*
-===============
-Interactive_Player::set_fieldsel
-
-Change the field selection. Does not honour the freeze!
-===============
-*/
-void Interactive_Player::set_fieldsel(Coords c)
-{
-	m_maprenderinfo.fieldsel = c;
-}
-
-
-/*
-===============
-Interactive_Player::set_fieldsel_freeze
-
-Field selection is frozen while the field action dialog is visible
-===============
-*/
-void Interactive_Player::set_fieldsel_freeze(bool yes)
-{
-	m_fieldsel_freeze = yes;
 }
 
 

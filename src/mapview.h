@@ -63,7 +63,6 @@ public:
    
 private:
    Interactive_Player *m_player;
-	Game* m_game;
 	Map* m_map;
 	int vpx, vpy;
 	bool dragging;

@@ -23,6 +23,7 @@
 #include "singlepmenue.h"
 #include "menuecommon.h"
 #include "optionsmenu.h"
+#include "editor.h"
 
 
 /*
@@ -77,7 +78,8 @@ enum {
 	mm_singleplayer,
 	//mm_multiplayer, // BIG TODO
 	mm_options,
-	mm_readme,
+	mm_editor,
+   mm_readme,
 	mm_license,
 	mm_exit
 };
@@ -95,23 +97,27 @@ MainMenu::MainMenu()
 	// Buttons
 	Button *b;
 
-	b = new Button(this, 60, 150, 174, 24, 3, mm_singleplayer);
+	b = new Button(this, 60, 100, 174, 24, 3, mm_singleplayer);
 	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_title("Single Player");
 
-	b = new Button(this, 60, 190, 174, 24, 3);
+	b = new Button(this, 60, 140, 174, 24, 3);
 	b->clicked.set(this, &MainMenu::not_supported);
 	b->set_title("Multi Player");
 
-	b = new Button(this, 60, 230, 174, 24, 3, mm_options);
+	b = new Button(this, 60, 180, 174, 24, 3, mm_options);
 	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_title("Options");
 
-	b = new Button(this, 60, 270, 174, 24, 3, mm_readme);
+	b = new Button(this, 60, 220, 174, 24, 3, mm_editor);
+	b->clickedid.set(this, &MainMenu::end_modal);
+	b->set_title("Editor");
+
+   b = new Button(this, 60, 260, 174, 24, 3, mm_readme);
 	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_title("View Readme");
 
-	b = new Button(this, 60, 310, 174, 24, 3, mm_license);
+	b = new Button(this, 60, 300, 174, 24, 3, mm_license);
 	b->clickedid.set(this, &MainMenu::end_modal);
 	b->set_title("License");
 
@@ -162,6 +168,14 @@ void main_menue(void)
 			fileview_screen("COPYING");
 			break;
 
+      case mm_editor: 
+         {
+         Editor* e=new Editor();
+         e->run();
+         delete e;
+         break;
+         }
+         
 		default:
 		case mm_exit:
 			return;
