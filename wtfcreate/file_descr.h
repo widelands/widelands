@@ -24,6 +24,13 @@
 #include "../src/profile.h"
 #include "bob_descr.h"
 
+// ERROR is already #define'd in msvc. for now i will solve this like:
+#ifdef ERROR
+#undef ERROR
+#endif
+// this will work, but the one who wrote this file should change it.
+// sft+
+
 /** 
  * virtual class to define the functionality of a 
  * class that can save itself to and construct itself 

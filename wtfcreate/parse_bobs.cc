@@ -63,7 +63,7 @@ int parse_bobs(void) {
       strcat(filename, CONF_NAME);
 
       // Parse file, check if it is a diminishing bob
-      p=new Profile(cout , filename, true);
+      p=new Profile(std::cout , filename, true);
 
       s=p->get_next_section(NULL);
       type=s->get_string("type", 0);

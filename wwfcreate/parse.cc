@@ -63,7 +63,7 @@ int parse_root_conf(char* name, char* author, char* descr) {
    strcat(file, SSEPERATOR);
    strcat(file, CONF_NAME);
 
-   Profile *p = new Profile(cout, file);
+   Profile *p = new Profile(std::cout, file);
    Section* s;
    
    s=p->get_section("world");
@@ -118,7 +118,7 @@ int parse_resource_conf(void) {
    strcat(file, SSEPERATOR);
    strcat(file, RESCONF);
 
-   Profile* p=new Profile(cout, file, 0, 0);
+   Profile* p=new Profile(std::cout, file, 0, 0);
    Section* s=0;
    
    s=p->get_next_section(0);
@@ -142,7 +142,7 @@ int parse_terrains_conf(void) {
    strcat(file, SSEPERATOR);
    strcat(file, TERRAINCONF);
 
-   Profile* p=new Profile(cout, file, 0, 0);
+   Profile* p=new Profile(std::cout, file, 0, 0);
    Section* s=0;
 
    s=p->get_next_section(0);

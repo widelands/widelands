@@ -34,6 +34,13 @@
 
 class Bob_Data_Pic_Descr;
 
+// ERROR is already #define'd in msvc. for now i will solve this like:
+#ifdef ERROR
+#undef ERROR
+#endif
+// this will work, but the one who wrote this file should change it.
+// sft+
+
 class Bob_Descr {
    public:
       enum {
