@@ -1,6 +1,5 @@
 type="diminishing"
-ends_in=""
-stock=2
+ends_in="stones5"
 
 size=big
 attrib=stone
@@ -10,11 +9,11 @@ clrkey_r=0
 clrkey_g=0
 clrkey_b=255
 shadowclr_r=255
-shadowclr_g=0
-shadowclr_b=0
+shadowclr_g=255
+shadowclr_b=255
 hot_spot_x=25
-hot_spot_y=30
+hot_spot_y=73
+picture=stones1_00.png
 
 [shrink]
 0=remove
-

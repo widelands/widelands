@@ -11,6 +11,6 @@ pics=plank_idle.png
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
-hot_spot_x=6
-hot_spot_y=5
+hot_spot_x=13
+hot_spot_y=6
 
