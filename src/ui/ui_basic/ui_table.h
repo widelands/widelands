@@ -33,7 +33,7 @@ class UITable;
 
 class UITable_Entry {
    public:
-      UITable_Entry(UITable*, void*, int picid=-1);
+      UITable_Entry(UITable*, void*, int picid=-1, bool select = false);
       ~UITable_Entry(void);
 
       // Data Functions
@@ -42,13 +42,23 @@ class UITable_Entry {
       int  get_picid(void) { return m_picid; }
       void* get_user_data(void) { return m_user_data; }
       
+      void set_color( RGBColor col ) {
+         m_use_clr = true;
+         m_color = col;
+      }
+
+      inline bool use_color( void ) { return m_use_clr; }
+      inline RGBColor get_color( void ) { return m_color; }
+
    private:
       struct _data {
          std::string d_string;
       };
       std::vector<_data> m_data;
-      void* m_user_data;
-      int   m_picid;
+      void*    m_user_data;
+      int      m_picid;
+      bool     m_use_clr;
+      RGBColor m_color;
 };
 
 
@@ -76,7 +86,6 @@ public: // FUNCTIONS
 	UISignal1<int> selected;
    UISignal1<int> double_clicked;
 
-#define add_colum add_column
    void add_column(const char*, Type, int);
 
    // Information functions
@@ -141,7 +150,7 @@ private: // DATA
 
 private: // FUNCTIONS
    void header_button_clicked(int);
-   void add_entry(UITable_Entry* t); 
+   void add_entry(UITable_Entry* t, bool); 
 	std::vector<UITable_Entry*>	m_entries;
 	void set_scrollpos(int pos);
 };

@@ -74,6 +74,8 @@ class Editor_Interactive : public Interactive_Base {
       void toggle_mainmenu();
       void toggle_eventmenu();
       void toggle_playermenu();
+      void toggle_variablesmenu();
+      void toggle_objectivesmenu();
 
       // State variables
       bool m_need_save;
@@ -94,6 +96,8 @@ class Editor_Interactive : public Interactive_Base {
       UIUniqueWindowRegistry m_playermenu;
       UIUniqueWindowRegistry m_mainmenu;
       UIUniqueWindowRegistry m_eventmenu;
+      UIUniqueWindowRegistry m_variablesmenu;
+      UIUniqueWindowRegistry m_objectivesmenu;
       std::vector<UIUniqueWindowRegistry> m_options_menus;
 };
 #endif // __S__EDITOR_H

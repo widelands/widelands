@@ -32,6 +32,7 @@ class FileRead;
 class Player;
 class World;
 class Overlay_Manager;
+class MapVariableManager;
 
 #define WLMF_VERSION 	0x0001
 
@@ -352,6 +353,12 @@ public:
          }
    }
 
+   /*
+    * Get the map variable manager for registering or removing
+    * some variables
+    */
+   MapVariableManager* get_mvm( void ) { return m_mvm; }
+
 private:
 	void set_size(uint w, uint h);
 	void load_world();
@@ -376,7 +383,9 @@ private:
    std::vector<std::string> m_scenario_tribes; // only alloced when really needed
    std::vector<std::string> m_scenario_names;
    std::vector<Trigger*>    m_triggers;        // Triggers are available on all maps. All game types can be done through triggers.
-   std::vector<Event*>      m_events;        // Events are available on all maps. (At least the win trigger or the loose trigger)
+   std::vector<Event*>      m_events;        // Events are available on all maps. (At least the win trigger or the loose event)
+
+   MapVariableManager*       m_mvm;           // The mapvariable manager makes sure for handling all the variables
 
 	void recalc_brightness(FCoords coords);
 	void recalc_fieldcaps_pass1(FCoords coords);

@@ -175,6 +175,10 @@ void UITable::draw(RenderTarget* dst)
          dst->blit(1, y + (get_lineheight()-h)/2, e->get_picid());
       }
 
+      RGBColor col = UI_FONT_CLR_FG;
+      if( e->use_color() ) 
+         col = e->get_color();
+      
       int i=0;
       int curx=0;
       int curw;
@@ -194,7 +198,7 @@ void UITable::draw(RenderTarget* dst)
          }
 
          // Horizontal center the string
-         g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->get_string(i), m_align, -1);
+         g_fh->draw_string(dst, UI_FONT_SMALL, col, RGBColor(0,0,0), x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->get_string(i), m_align, -1);
          
          curx+=curw; 
       }
@@ -255,7 +259,7 @@ void UITable::select(int i)
 /**
 Add a new entry to the table.
 */
-void UITable::add_entry(UITable_Entry* e) { 
+void UITable::add_entry(UITable_Entry* e, bool do_select) { 
    int entry_height=0;
    int picid=e->get_picid();
    if(picid==-1) {
@@ -272,7 +276,10 @@ void UITable::add_entry(UITable_Entry* e) {
 
 	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2 )); 
 
-	update(0, 0, get_eff_w(), get_h());
+   if( do_select )
+      select( m_entries.size() - 1 );
+	
+   update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -364,11 +371,14 @@ Table Entry
 /*
  * constructor
  */
-UITable_Entry::UITable_Entry(UITable* table, void* data, int picid) {
+UITable_Entry::UITable_Entry(UITable* table, void* data, int picid, bool select) {
    m_picid=picid;
    m_user_data=data;
    m_data.resize(table->get_nr_columns());
-   table->add_entry(this);
+
+   m_use_clr = false;
+
+   table->add_entry(this, select);
 }
 
 /*

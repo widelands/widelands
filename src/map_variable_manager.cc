@@ -1,0 +1,96 @@
+/*
+ * Copyright (C) 2002-5 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#include <wchar.h>
+#include <vector>
+#include "map_variable_manager.h"
+
+/*
+ * Map Variable Manager implementation
+ */
+MapVariableManager::MapVariableManager( void ) {
+   // Create a default variable
+   String_MapVariable* smv = new String_MapVariable( 1 );
+   smv->set_name(L"Next scenario");
+   smv->set_value(L"<undefined>");
+   register_new_variable( smv );
+}
+
+MapVariableManager::~MapVariableManager( void ) {
+   for( uint i = 0; i < m_variables.size(); i++) 
+      delete m_variables[i];
+   m_variables.resize( 0 );
+}
+
+/*
+ * Register a new variable
+ */
+bool MapVariableManager::register_new_variable( MapVariable* mv ) {
+   // check if this variable is already known
+   if( get_variable( mv->get_name() ) ) 
+         return 0;
+
+   m_variables.push_back( mv );
+   return true;
+}
+
+/*
+ * Get variables
+ */
+Int_MapVariable* MapVariableManager::get_int_variable( const wchar_t* name ) {
+   MapVariable* v = get_variable( name );
+   if( v && v->get_type() != MapVariable::MVT_INT)
+      return 0;
+   
+   return static_cast<Int_MapVariable*>(v);
+}
+String_MapVariable* MapVariableManager::get_string_variable( const wchar_t* name ) {
+   MapVariable* v = get_variable( name );
+   if( v && v->get_type() != MapVariable::MVT_STRING)
+      return 0;
+   return static_cast<String_MapVariable*>(v);
+}
+
+MapVariable* MapVariableManager::get_variable( const wchar_t* name ) {
+   uint i;
+   MapVariable* retval = 0;
+   for( i = 0; i < m_variables.size(); i++) {
+      if( !wcscmp( m_variables[i]->get_name(), name ) ) {
+         retval = m_variables[i];
+         break;
+      }
+   }
+   
+   return retval;
+}
+
+/*
+ * Remove a variable 
+ */
+void MapVariableManager::delete_variable( const wchar_t* name ) {
+   for( uint i = 0; i < m_variables.size(); i++) {
+      if( !wcscmp( m_variables[i]->get_name(), name ) ) {
+         delete m_variables[i];
+         m_variables[i] = m_variables[m_variables.size() - 1];
+         m_variables.resize( m_variables.size() - 1 );
+         break;
+      }
+   }
+}
+

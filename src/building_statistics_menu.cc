@@ -64,10 +64,10 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
 
    // Building list
    m_table=new UITable(this, (get_inner_w()-BUILDING_LIST_WIDTH)/2, offsy, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT, Align_Left, UITable::UP);
-	m_table->add_colum("Name", UITable::STRING, 160);
-	m_table->add_colum("Prod", UITable::STRING, 40);
-	m_table->add_colum("Owned", UITable::STRING, 40);
-	m_table->add_colum("Build", UITable::STRING, 40);
+	m_table->add_column("Name", UITable::STRING, 160);
+	m_table->add_column("Prod", UITable::STRING, 40);
+	m_table->add_column("Owned", UITable::STRING, 40);
+	m_table->add_column("Build", UITable::STRING, 40);
    m_table->selected.set(this, &Building_Statistics_Menu::table_changed);
 
    posy += BUILDING_LIST_HEIGHT + 2*spacing;

@@ -21,6 +21,8 @@
 #include "editorinteractive.h"
 #include "editor_delete_immovable_tool.h"
 #include "editor_event_menu.h"
+#include "editor_objectives_menu.h"
+#include "editor_variables_menu.h"
 #include "editor_increase_height_tool.h"
 #include "editor_increase_resources_tool.h"
 #include "editor_info_tool.h"
@@ -109,6 +111,15 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b->clicked.set(this, &Editor_Interactive::toggle_eventmenu);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_event_menu.png", true));
 
+   b = new UIButton(this, x+238, y, 34, 34, 2);
+   b->clicked.set(this, &Editor_Interactive::toggle_variablesmenu);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_variables_menu.png", true));
+   
+   b = new UIButton(this, x+272, y, 34, 34, 2);
+   b->clicked.set(this, &Editor_Interactive::toggle_objectivesmenu);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_objectives_menu.png", true));
+
+
    // Init Tools
    tools.current_tool_index=1;
    tools.use_tool=0;
@@ -195,6 +206,38 @@ void Editor_Interactive::toggle_mainmenu(void) {
    }
    else {
       new Editor_Main_Menu(this, &m_mainmenu);
+   }
+}
+
+/*
+===========
+Editor_Interactive::toggle_objectivesmenu()
+
+toggles the objectivesmenu
+===========
+*/
+void Editor_Interactive::toggle_objectivesmenu(void) {
+   if (m_objectivesmenu.window) {
+      delete m_objectivesmenu.window;
+   }
+   else {
+      new Editor_Objectives_Menu(this, &m_objectivesmenu);
+   }
+}
+
+/*
+===========
+Editor_Interactive::toggle_variablesmenu()
+
+toggles the variablesmenu
+===========
+*/
+void Editor_Interactive::toggle_variablesmenu(void) {
+   if (m_variablesmenu.window) {
+      delete m_variablesmenu.window;
+   }
+   else {
+      new Editor_Variables_Menu(this, &m_variablesmenu);
    }
 }
 

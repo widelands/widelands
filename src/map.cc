@@ -22,6 +22,7 @@
 #include "overlay_manager.h"
 #include "filesystem.h"
 #include "map.h"
+#include "map_variable_manager.h"
 #include "player.h"
 #include "world.h"
 #include "worlddata.h"
@@ -84,6 +85,8 @@ Map::Map(void)
 
 	m_overlay_manager=0;
 
+   m_mvm = new MapVariableManager();
+
 	// Paranoia
 	cleanup();
 }
@@ -101,6 +104,10 @@ Map::~Map()
    if(m_overlay_manager) {
       delete m_overlay_manager;
       m_overlay_manager=0;
+   }
+   if(m_mvm) {
+      delete m_mvm;
+      m_mvm = 0;
    }
 }
 
