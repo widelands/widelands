@@ -25,6 +25,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_panel.h"
+#include "options.h"
 
 /*
 ==============================================================================
@@ -44,6 +45,7 @@ public:
 	Critical_Error(const char *text);
 
 	void exit() { ::exit(-1); }
+	void crash();
 
 	void draw(RenderTarget* dst);
 };
@@ -65,12 +67,27 @@ Critical_Error::Critical_Error(const char *text)
 	b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-250, 174, 24, 1);
 	b->clickedid.set(this, &Critical_Error::end_modal);
 	b->set_title("!! Continue execution !!");
+
+	Section *s = g_options.pull_section("global");
+
+	if(s->get_bool("coredump", false)) {
+		b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-100, 174, 24, 1);
+		b->clicked.set(this, &Critical_Error::crash);
+		b->set_title("Crash");
+	}
 }
 
 void Critical_Error::draw(RenderTarget* dst)
 {
 	dst->fill_rect(0, 0, get_w(), get_h(), RGBColor(0, 0, 0));
 }
+
+void Critical_Error::crash()
+{
+	log("Trigger a segmentation fault\n");
+	*(int*)0 = 0;
+}
+
 
 /** void critical_error(const char* str)
  *
@@ -95,8 +112,20 @@ void critical_error(const char* str, ...)
 	if (in_criterr || !g_gr)
 	{
 #ifdef WIN32
-		MessageBox(NULL, buf, "Wide Lands", MB_ICONINFORMATION);
+		MessageBox(NULL, buf, "Widelands", MB_ICONINFORMATION);
 #endif
+
+		if (in_criterr <= 1)
+		{
+			Section *s = g_options.pull_section("global");
+
+			if(s->get_bool("coredump", false))
+			{
+				log("Trigger a segmentation fault\n");
+				*(int*)0 = 0;
+			}
+		}
+
 		exit(0);
 	}
 	else
