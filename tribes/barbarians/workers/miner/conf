@@ -3,7 +3,7 @@ descname=Miner
 help=Works deep in the mines to produce coal,iron or gold.
 type=generic
 menu_pic=menu.png
-experience=60-70
+experience=18-21
 becomes=chief-miner
 
 [buildcost]

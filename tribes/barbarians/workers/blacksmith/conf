@@ -3,7 +3,7 @@ descname=Blacksmith
 help=
 type=generic
 menu_pic=menu.png
-experience=130-150
+experience=23-25
 becomes=master-blacksmith
 
 [buildcost]
