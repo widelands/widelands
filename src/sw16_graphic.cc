@@ -1553,7 +1553,7 @@ uint GraphicImpl::load_pic_from_file(FileRead* fr, int mod) {
             r=fr->Unsigned8();
             g=fr->Unsigned8();
             b=fr->Unsigned8();
-//             NoLog(" Pixel: (%i,%i) has color RGB(%i,%i,%i)\n", w, h, r, g, b);
+             // NoLog(" Pixel: (%i,%i) has color RGB(%i,%i,%i)\n", w, h, r, g, b);
             *clr=pack_rgb(r,g,b);
          }
       }

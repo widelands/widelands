@@ -1608,9 +1608,9 @@ void GraphicImpl::save_pic_to_file(uint pic_index, FileWrite* fw) {
    for(int h=0; h<pic->bitmap.h; h++) {
       for(int w=0; w<pic->bitmap.w; w++) {
          uint clr=pic->bitmap.pixels[h*pic->bitmap.pitch+w];
-         uchar r=clr&0x00ff0000;
-         uchar g=clr&0x0000ff00;
-         uchar b=clr&0x000000ff;
+         uchar r=(clr>>16)&0xff;
+         uchar g=(clr>>8)&0xff;
+         uchar b=(clr&0xff);
          fw->Unsigned8(r);
          fw->Unsigned8(g);
          fw->Unsigned8(b);
