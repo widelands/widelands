@@ -224,7 +224,7 @@ be handled like a normal C string.
 Throws an exception if the file couldn't be loaded for whatever reason.
 ==============
 */
-void FileRead::Open(FileSystem *fs, const char *fname)
+void FileRead::Open(FileSystem *fs, std::string fname)
 {
 	assert(!data);
 
@@ -239,7 +239,7 @@ FileRead::TryOpen
 Works just like Open, but returns false when the load fails.
 ==============
 */
-bool FileRead::TryOpen(FileSystem *fs, const char *fname)
+bool FileRead::TryOpen(FileSystem *fs, std::string fname)
 {
 	assert(!data);
 
@@ -424,7 +424,7 @@ is raised but the buffer remains intact (don't worry, it will be
 cleared by the destructor).
 ==============
 */
-void FileWrite::Write(FileSystem *fs, const char *filename)
+void FileWrite::Write(FileSystem *fs, std::string filename)
 {
 	fs->Write(filename, data, length);
 
@@ -438,7 +438,7 @@ FileWrite::TryWrite
 Same as Write, but returns falls if the write fails
 ==============
 */
-bool FileWrite::TryWrite(FileSystem *fs, const char *filename)
+bool FileWrite::TryWrite(FileSystem *fs, std::string filename)
 {
 	try {
 		fs->Write(filename, data, length);
@@ -538,25 +538,25 @@ private:
 	std::string m_directory;
 
 public:
-	RealFSImpl(const char *pszDirectory);
+	RealFSImpl(std::string sDirectory);
 	~RealFSImpl();
 
 	virtual bool IsWritable();
-	
-	virtual int FindFiles(const char *path, const char *pattern, filenameset_t *results);
 
-	virtual bool FileExists(const char *path);
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results);
 
-	virtual void *Load(const char *fname, int *length);
-	virtual void Write(const char *fname, void *data, int length);
+	virtual bool FileExists(std::string path);
+
+	virtual void *Load(std::string fname, int *length);
+	virtual void Write(std::string fname, void *data, int length);
 };
 
 /** RealFSImpl::RealFSImpl(const char *pszDirectory)
  *
  * Initialize the real file-system
  */
-RealFSImpl::RealFSImpl(const char *pszDirectory)
-	: m_directory(pszDirectory)
+RealFSImpl::RealFSImpl(std::string sDirectory)
+	: m_directory(sDirectory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
 }
@@ -578,15 +578,18 @@ bool RealFSImpl::IsWritable()
 	return true; // should be checked in constructor
 }
 
-/** RealFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *results)
- *
- * Returns the number of files found, and stores the filenames (without the pathname) in the results.
- * There doesn't seem to be an even remotely cross-platform way of
- * doing this
- */
+/*
+===============
+RealFSImpl::FindFiles
+
+Returns the number of files found, and stores the filenames (without the pathname) in the results.
+There doesn't seem to be an even remotely cross-platform way of
+doing this
+===============
+*/
 #ifdef _WIN32
 // note: the Win32 version may be broken, feel free to fix it
-int RealFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *results)
+int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results)
 {
 	std::string buf;
 	struct _finddata_t c_file;
@@ -613,21 +616,21 @@ int RealFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *
 	return results->size();
 }
 #else
-int RealFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *results)
+int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results)
 {
 	std::string buf;
 	glob_t gl;
 	int i, count;
 	int ofs;
 
-	if (path) {
+	if (path.size()) {
 		buf = m_directory + '/' + path + '/' + pattern;
 		ofs = m_directory.length()+1;
 	} else {
 		buf = m_directory + '/' + pattern;
 		ofs = m_directory.length()+1;
 	}
-	
+
 	if (glob(buf.c_str(), 0, NULL, &gl))
 		return 0;
 
@@ -643,18 +646,21 @@ int RealFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *
 }
 #endif
 
-/** RealFSImpl::FileExists(const char *path)
- *
- * Returns true if the given file exists, and false if it doesn't.
- * Also returns false if the pathname is invalid
- */
-bool RealFSImpl::FileExists(const char *path)
+/*
+===============
+RealFSImpl::FileExists
+
+Returns true if the given file exists, and false if it doesn't.
+Also returns false if the pathname is invalid
+===============
+*/
+bool RealFSImpl::FileExists(std::string path)
 {
 	char canonical[256]; // erm...
 	std::string fullname;
 	struct stat st;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), path))
+	if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
 		return false;
 
 	fullname = m_directory + '/' + canonical;
@@ -665,12 +671,15 @@ bool RealFSImpl::FileExists(const char *path)
 	return true;
 }
 
-/** RealFSImpl::Load(const char *fname, int *length)
- *
- * Read the given file into alloced memory; called by FileRead::Open.
- * Throws an exception if the file couldn't be opened.
- */
-void *RealFSImpl::Load(const char *fname, int *length)
+/*
+===============
+RealFSImpl::Load
+
+Read the given file into alloced memory; called by FileRead::Open.
+Throws an exception if the file couldn't be opened.
+===============
+*/
+void *RealFSImpl::Load(std::string fname, int *length)
 {
 	char canonical[256];
 	std::string fullname;
@@ -678,8 +687,8 @@ void *RealFSImpl::Load(const char *fname, int *length)
 	void *data;
 	int size;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), fname))
-		throw wexception("Bad filename: %s", fname);
+	if (!FS_CanonicalizeName(canonical, sizeof(canonical), fname.c_str()))
+		throw wexception("Bad filename: %s", fname.c_str());
 
 	fullname = m_directory + '/' + canonical;
 
@@ -690,7 +699,7 @@ void *RealFSImpl::Load(const char *fname, int *length)
 	{
 		file = fopen(fullname.c_str(), "rb");
 		if (!file)
-			throw wexception("Couldn't open %s (%s)", fname, fullname.c_str());
+			throw wexception("Couldn't open %s (%s)", fname.c_str(), fullname.c_str());
 
 		// determine the size of the file (rather quirky, but it doesn't require
 		// potentially unportable functions)
@@ -701,7 +710,7 @@ void *RealFSImpl::Load(const char *fname, int *length)
 		// allocate a buffer and read the entire file into it
 		data = malloc(size + 1);
 		if (fread(data, size, 1, file) != 1)
-			throw wexception("Read failed for %s (%s)", fname, fullname.c_str());
+			throw wexception("Read failed for %s (%s)", fname.c_str(), fullname.c_str());
 		((char *)data)[size] = 0;
 
 		fclose(file);
@@ -724,39 +733,45 @@ void *RealFSImpl::Load(const char *fname, int *length)
 	return data;
 }
 
-/** RealFSImpl::Write(const char *fname, void *data, int length)
- *
- * Write the given block of memory to the repository.
- * Throws an exception if it fails.
- */
-void RealFSImpl::Write(const char *fname, void *data, int length)
+/*
+===============
+RealFSImpl::Write
+
+Write the given block of memory to the repository.
+Throws an exception if it fails.
+===============
+*/
+void RealFSImpl::Write(std::string fname, void *data, int length)
 {
 	char canonical[256];
 	std::string fullname;
 	FILE *f;
 	int c;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), fname))
-		throw wexception("Bad filename: %s", fname);
-	
+	if (!FS_CanonicalizeName(canonical, sizeof(canonical), fname.c_str()))
+		throw wexception("Bad filename: %s", fname.c_str());
+
 	fullname = m_directory + '/' + canonical;
 
 	f = fopen(fullname.c_str(), "wb");
 	if (!f)
-		throw wexception("Couldn't open %s (%s) for writing", fname, fullname.c_str());
+		throw wexception("Couldn't open %s (%s) for writing", fname.c_str(), fullname.c_str());
 
 	c = fwrite(data, length, 1, f);
 	fclose(f);
 
 	if (c != 1)
-		throw wexception("Write to %s (%s) failed", fname, fullname.c_str());
+		throw wexception("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 }
 
-/** RealFSImpl::CreateFromDirectory(const char *directory);
- *
- * Create a filesystem to access the given directory as served by the OS
- */
-FileSystem *FileSystem::CreateFromDirectory(const char *directory)
+/*
+===============
+RealFSImpl::CreateFromDirectory [static]
+
+Create a filesystem to access the given directory as served by the OS
+===============
+*/
+FileSystem *FileSystem::CreateFromDirectory(std::string directory)
 {
 	return new RealFSImpl(directory);
 }
@@ -775,15 +790,15 @@ public:
 	virtual ~LayeredFSImpl();
 
 	virtual bool IsWritable();
-	
-	virtual void AddFileSystem(FileSystem *fs);
-	
-	virtual int FindFiles(const char *path, const char *pattern, filenameset_t *results);
-	
-	virtual bool FileExists(const char *path);
 
-	virtual void *Load(const char *fname, int *length);
-	virtual void Write(const char *fname, void *data, int length);
+	virtual void AddFileSystem(FileSystem *fs);
+
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results);
+
+	virtual bool FileExists(std::string path);
+
+	virtual void *Load(std::string fname, int *length);
+	virtual void Write(std::string fname, void *data, int length);
 
 private:
 	typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;
@@ -830,14 +845,17 @@ void LayeredFSImpl::AddFileSystem(FileSystem *fs)
 	m_filesystems.push_back(fs);
 }
 
-/** LayeredFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *results)
- *
- * Find files in all sub-filesystems in the given path, with the given pattern.
- * Store all found files in results.
- *
- * Returns the number of files found.
- */
-int LayeredFSImpl::FindFiles(const char *path, const char *pattern, filenameset_t *results)
+/*
+===============
+LayeredFSImpl::FindFiles
+
+Find files in all sub-filesystems in the given path, with the given pattern.
+Store all found files in results.
+
+Returns the number of files found.
+===============
+*/
+int LayeredFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		filenameset_t files;
@@ -848,63 +866,74 @@ int LayeredFSImpl::FindFiles(const char *path, const char *pattern, filenameset_
 		for(filenameset_t::iterator fnit = files.begin(); fnit != files.end(); fnit++)
 			results->insert(*fnit);
 	}
-	
+
 	return results->size();
 }
 
-/** LayeredFSImpl::FileExists(const char *path)
- *
- * Returns true if the file can be found in at least one of the sub-filesystems
- */
-bool LayeredFSImpl::FileExists(const char *path)
+/*
+===============
+LayeredFSImpl::FileExists
+
+Returns true if the file can be found in at least one of the sub-filesystems
+===============
+*/
+bool LayeredFSImpl::FileExists(std::string path)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		if ((*it)->FileExists(path))
 			return true;
 	}
-	
+
 	return false;
 }
 
-/** LayeredFSImpl::Load(const char *fname, int *length)
- *
- * Read the given file into alloced memory; called by FileRead::Open.
- * Throws an exception if the file couldn't be opened.
- *
- * Note: We first query the sub-filesystem whether the file exists. Otherwise,
- * we'd have problems differentiating the errors returned by the sub-FS.
- * Let's just avoid any possible hassles with that.
- */
-void *LayeredFSImpl::Load(const char *fname, int *length)
+/*
+===============
+LayeredFSImpl::Load
+
+Read the given file into alloced memory; called by FileRead::Open.
+Throws an exception if the file couldn't be opened.
+
+Note: We first query the sub-filesystem whether the file exists. Otherwise,
+we'd have problems differentiating the errors returned by the sub-FS.
+Let's just avoid any possible hassles with that.
+===============
+*/
+void *LayeredFSImpl::Load(std::string fname, int *length)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		if (!(*it)->FileExists(fname))
 			continue;
-		
+
 		return (*it)->Load(fname, length);
 	}
-	
-	throw wexception("Couldn't find file %s", fname);
+
+	throw wexception("Couldn't find file %s", fname.c_str());
 }
 
-/** LayeredFSImpl::Write(const char *fname, void *data, int length)
- *
- * Write the given block of memory out as a file to the first writable sub-FS.
- * Throws an exception if it fails.
- */
-void LayeredFSImpl::Write(const char *fname, void *data, int length)
+
+/*
+===============
+LayeredFSImpl::Write
+
+Write the given block of memory out as a file to the first writable sub-FS.
+Throws an exception if it fails.
+===============
+*/
+void LayeredFSImpl::Write(std::string fname, void *data, int length)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		if (!(*it)->IsWritable())
 			continue;
-		
+
 		(*it)->Write(fname, data, length);
 		return;
 	}
-	
+
 	throw wexception("LayeredFSImpl: No writable filesystem!");
 }
-	
+
+
 /** LayeredFileSystem::Create
  *
  * Create a LayeredFileSystem. This is mainly to hide the implementation details

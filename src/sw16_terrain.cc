@@ -150,13 +150,20 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 			break;
 
 		// Load it
-		SDL_Surface* surf = SDL_LoadBMP(fname);
-		if(!m_texture_picture) {
-         m_texture_picture=get_graphicimpl()->get_picture(PicMod_Game, fname);
-      };
+		SDL_Surface* surf;
 
-		if (!surf)
+		if (!m_texture_picture)
+         m_texture_picture = get_graphicimpl()->get_picture(PicMod_Game, fname);
+
+		try
+		{
+			surf = LoadImage(fname);
+		}
+		catch(std::exception& e)
+		{
+			log("WARNING: Failed to load texture frame %s: %s\n", fname, e.what());
 			break;
+		}
 
 		if (surf->w != TEXTURE_W || surf->h != TEXTURE_H) {
 			SDL_FreeSurface(surf);

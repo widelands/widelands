@@ -65,7 +65,7 @@ OptionsMenu::res OptionsMenu::resolutions[NUM_RESOLUTIONS] = {
 };
 
 OptionsMenu::OptionsMenu()
-	: BaseMenu("optionsmenu.bmp")
+	: BaseMenu("optionsmenu.jpg")
 {
 	Section *s = g_options.pull_section("global");
 	

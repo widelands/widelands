@@ -126,21 +126,21 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 	// temp (should be toggle messages)
 	b = new Button(this, x, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::exit_game_btn);
-	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.bmp", RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png", RGBColor(0,0,255)));
 	// temp
 
 	b = new Button(this, x+34, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::main_menu_btn);
-	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.bmp", RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png", RGBColor(0,0,255)));
 
 	b = new Button(this, x+68, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_minimap);
-	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.bmp", RGBColor(0,0,255)));
+	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png", RGBColor(0,0,255)));
 
 	b = new Button(this, x+102, y, 34, 34, 2);
 	b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
-	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.bmp", RGBColor(0,0,255)));
-   
+	b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", RGBColor(0,0,255)));
+
 }
 
 /*

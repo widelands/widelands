@@ -29,6 +29,8 @@ class EncodeData;
 namespace Renderer_Software16
 {
 
+SDL_Surface* LoadImage(std::string filename);
+
 /*
 class AnimationGfx
 
@@ -49,7 +51,7 @@ private:
 public:
 	AnimationGfx(const AnimationData* data);
 	~AnimationGfx();
-	
+
 	inline int get_nrframes() const { return m_nrframes; }
 	inline const AnimFrame* get_frame(int i) const
 	{ assert(i>=0 && i<m_nrframes); return &m_frames[i]; }
@@ -76,7 +78,7 @@ struct Bitmap {
 	void draw_rect(Rect rc, RGBColor clr);
 	void fill_rect(Rect rc, RGBColor clr);
 	void brighten_rect(Rect rc, int factor);
-	
+
 	void blit(Point dst, Bitmap* src, Rect srcrc);
 
 	void draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx, uint fy);
@@ -244,7 +246,7 @@ public:
 	// Animations
 	virtual void load_animations();
 	AnimationGfx* get_animation(uint anim);
-	
+
 	// Misc functions
 	virtual void screenshot(const char* fname);
 

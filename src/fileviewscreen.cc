@@ -29,7 +29,7 @@ FileViewScreen
 */
 
 FileViewScreen::FileViewScreen(const char* title, const char *text)
-	: BaseMenu("fileviewmenu.bmp")
+	: BaseMenu("fileviewmenu.jpg")
 {
 	// Text view
 	new Multiline_Textarea(this, 40, 150, 560, 240, text);

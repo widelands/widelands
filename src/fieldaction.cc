@@ -151,21 +151,21 @@ private:
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
 };
 
-static const char* pic_tab_buildroad = "pics/menu_tab_buildroad.bmp";
-static const char* pic_tab_watch = "pics/menu_tab_watch.bmp";
+static const char* pic_tab_buildroad = "pics/menu_tab_buildroad.png";
+static const char* pic_tab_watch = "pics/menu_tab_watch.png";
 static const char* pic_tab_buildhouse[3] = {
-	"pics/menu_tab_buildsmall.bmp",
-	"pics/menu_tab_buildmedium.bmp",
-	"pics/menu_tab_buildbig.bmp"
+	"pics/menu_tab_buildsmall.png",
+	"pics/menu_tab_buildmedium.png",
+	"pics/menu_tab_buildbig.png"
 };
-static const char* pic_tab_buildmine = "pics/menu_tab_buildmine.bmp";
+static const char* pic_tab_buildmine = "pics/menu_tab_buildmine.png";
 
-static const char* pic_buildroad = "pics/menu_build_way.bmp";
-static const char* pic_remroad = "pics/menu_rem_way.bmp";
-static const char* pic_buildflag = "pics/menu_build_flag.bmp";
-static const char* pic_ripflag = "pics/menu_rip_flag.bmp";
-static const char* pic_watchfield = "pics/menu_watch_field.bmp";
-static const char* pic_abort = "pics/menu_abort.bmp";
+static const char* pic_buildroad = "pics/menu_build_way.png";
+static const char* pic_remroad = "pics/menu_rem_way.png";
+static const char* pic_buildflag = "pics/menu_build_flag.png";
+static const char* pic_ripflag = "pics/menu_rip_flag.png";
+static const char* pic_watchfield = "pics/menu_watch_field.png";
+static const char* pic_abort = "pics/menu_abort.png";
 
 
 /*

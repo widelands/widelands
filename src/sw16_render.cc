@@ -397,10 +397,15 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 			break;
 	
 		// Load the image
-		SDL_Surface* bmp = SDL_LoadBMP(fname);
-		
-		if (!bmp) {
-			log("WARNING: Couldn't load animation frame %s\n", fname);
+		SDL_Surface* bmp;
+
+		try
+		{
+			bmp = LoadImage(fname);
+		}
+		catch(std::exception& e)
+		{
+			log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
 			break;
 		}
 

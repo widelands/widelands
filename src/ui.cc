@@ -145,7 +145,7 @@ int Panel::run()
 	while(forefather->_parent)
 		forefather = forefather->_parent;
 
-	s_default_cursor = g_gr->get_picture(PicMod_UI, "pics/cursor.bmp", RGBColor(0,0,255));
+	s_default_cursor = g_gr->get_picture(PicMod_UI, "pics/cursor.png", RGBColor(0,0,255));
 
 	// Loop
 	_running = true;

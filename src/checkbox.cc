@@ -54,7 +54,7 @@ Statebox::Statebox(Panel *parent, int x, int y, uint picid)
 	else
 	{
 		m_custom_picture = false;
-		m_pic_graphics = g_gr->get_picture(PicMod_UI, "pics/checkbox.bmp");
+		m_pic_graphics = g_gr->get_picture(PicMod_UI, "pics/checkbox.png");
 	}
 
 	m_highlighted = false;

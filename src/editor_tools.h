@@ -62,7 +62,7 @@ class Editor_Info_Tool : public Editor_Tool {
 
       virtual int handle_click(const Coords*, Field*, Map*, Editor_Interactive*);
       virtual const char* get_name(void) { return "Field Informations"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_info.bmp"; }
+      virtual const char* get_fsel(void) { return "pics/fsel_editor_info.png"; }
 };
 
 /*
@@ -82,7 +82,7 @@ class Editor_Increase_Height_Tool : public Editor_Tool {
       virtual bool has_options(void) { return true; }
       
       virtual const char* get_name(void) { return "Increase Field Height"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_increase_height.bmp"; }
+      virtual const char* get_fsel(void) { return "pics/fsel_editor_increase_height.png"; }
       
    private:
       UniqueWindow m_w;
@@ -106,7 +106,7 @@ class Editor_Decrease_Height_Tool : public Editor_Tool {
       virtual bool has_options(void) { return true; }
       
       virtual const char* get_name(void) { return "Decrease Field Height"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_decrease_height.bmp"; }
+      virtual const char* get_fsel(void) { return "pics/fsel_editor_decrease_height.png"; }
       
    private:
       UniqueWindow m_w;
@@ -130,7 +130,7 @@ class Editor_Set_Height_Tool : public Editor_Tool {
       virtual bool has_options(void) { return true; }
       
       virtual const char* get_name(void) { return "Set Field Height"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_set_height.bmp"; }
+      virtual const char* get_fsel(void) { return "pics/fsel_editor_set_height.png"; }
       
    private:
       UniqueWindow m_w;
@@ -154,7 +154,7 @@ class Editor_Noise_Height_Tool : public Editor_Tool {
       virtual bool has_options(void) { return true; }
       
       virtual const char* get_name(void) { return "Noise Field Height"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_noise_height.bmp"; }
+      virtual const char* get_fsel(void) { return "pics/fsel_editor_noise_height.png"; }
       
    private:
       UniqueWindow m_w;
@@ -179,7 +179,7 @@ class Editor_Set_Down_Terrain_Tool : public Editor_Tool {
       virtual bool has_options(void) { return true; }
       
       virtual const char* get_name(void) { return "Set Down Terrain"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_down.bmp"; }
+      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_down.png"; }
       
    private:
       UniqueWindow m_w;
@@ -203,7 +203,7 @@ class Editor_Set_Right_Terrain_Tool : public Editor_Tool {
       virtual bool has_options(void) { return true; }
       
       virtual const char* get_name(void) { return "Set Right Terrain"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_right.bmp"; }
+      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_right.png"; }
       
    private:
       UniqueWindow m_w;
@@ -227,7 +227,7 @@ class Editor_Set_Both_Terrain_Tool : public Editor_Tool {
       virtual bool has_options(void) { return true; }
       
       virtual const char* get_name(void) { return "Set Both Terrains"; }
-      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_both.bmp"; }
+      virtual const char* get_fsel(void) { return "pics/fsel_editor_terrain_both.png"; }
       
    private:
       UniqueWindow m_w;

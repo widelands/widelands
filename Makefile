@@ -22,28 +22,28 @@ SDL_CONFIG:=sdl-config
 
 ifeq ($(CROSS),NO)
 # C compiler
-CC=distcc gcc
+CC:=gcc
 
 # c++ compiler
-CXX=distcc g++
+CXX:=g++
 
 # additional build flags. if you're not a developer, you don't want
 # to change this
 ADD_CFLAGS:=
 
-# additional link flags. if you're not a developer, you don't want 
+# additional link flags. if you're not a developer, you don't want
 # to change this
 ADD_LDFLAGS:=
 
 # Different build-types:
-#  debug-no-parachute optimized, debugging symbols, disable SDLs parachute 
+#  debug-no-parachute optimized, debugging symbols, disable SDLs parachute
 #  debug-slow debugging symbols
 #  debug      optimized, debugging symbols
 #  release    optimized
 #  profile    optimized, debugging symbols, profiling
 #
 ifndef BUILD
-BUILD=debug
+BUILD:=debug
 endif
 
 endif
@@ -140,7 +140,7 @@ WIDELANDS_DEP:=$(WIDELANDS_OBJ:.o=.d)
 
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
-LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS)
+LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image
 
 ##############################################################################
 # Building

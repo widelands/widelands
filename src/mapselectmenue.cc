@@ -64,7 +64,7 @@ public:
 };
 
 MapSelectMenu::MapSelectMenu(Editor_Game_Base *g)
-	: BaseMenu("choosemapmenu.bmp")
+	: BaseMenu("choosemapmenu.jpg")
 {
 	egbase = g;
 	m_maploader = 0;

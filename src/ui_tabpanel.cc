@@ -43,12 +43,12 @@ TabPanel::TabPanel(Panel* parent, int x, int y, uint background)
 
 	switch(background) {
 	default:
-	case 0: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.bmp"); break;
-	case 1: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.bmp"); break;
-	case 2: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.bmp"); break;
-	case 3: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.bmp"); break;
+	case 0: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.png"); break;
+	case 1: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.png"); break;
+	case 2: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.png"); break;
+	case 3: m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.png"); break;
 	}
-	
+
 	m_highlight = -1;
 }
 

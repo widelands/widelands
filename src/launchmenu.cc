@@ -220,7 +220,7 @@ public:
 };
 
 LaunchGameMenu::LaunchGameMenu(Game *g)
-	: BaseMenu("launchgamemenu.bmp")
+	: BaseMenu("launchgamemenu.jpg")
 {
 	m_game = g;
 

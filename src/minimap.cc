@@ -45,7 +45,7 @@ MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Base *plr, uin
 	m_player = plr;
 	m_viewx = m_viewy = 0;
 	
-	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.bmp", RGBColor(0,0,255));
+	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.png", RGBColor(0,0,255));
    m_fx=fx;
    m_fy=fy;
 

@@ -54,7 +54,7 @@ public:
 };
 
 MainMenu::MainMenu()
-	: BaseMenu("mainmenu.bmp")
+	: BaseMenu("mainmenu.jpg")
 {
 	// Buttons
 	Button *b;

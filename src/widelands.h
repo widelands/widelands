@@ -286,28 +286,28 @@ public:
 	virtual ~FileSystem() { }
 
 	virtual bool IsWritable() = 0;
-	
-	virtual int FindFiles(const char *path, const char *pattern, filenameset_t *results) = 0;
-	
-	virtual bool FileExists(const char *path) = 0;
 
-	virtual void *Load(const char *fname, int *length) = 0;
-	virtual void Write(const char *fname, void *data, int length) = 0;
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results) = 0;
+
+	virtual bool FileExists(std::string path) = 0;
+
+	virtual void *Load(std::string fname, int *length) = 0;
+	virtual void Write(std::string fname, void *data, int length) = 0;
 
 public:
-	static FileSystem *CreateFromDirectory(const char *directory);
+	static FileSystem *CreateFromDirectory(std::string directory);
 };
 
 /*
 LayeredFileSystem is a file system which basically merges several layered
-real directory structures into a single one. The really funny thing is that 
-those directories aren't represented as absolute paths, but as nested 
+real directory structures into a single one. The really funny thing is that
+those directories aren't represented as absolute paths, but as nested
 FileSystems. Are you confused yet?
 Ultimately, this provides us with the necessary flexibility to allow file
 overrides on a per-user-basis, nested .zip files acting as Quake-like paks
 and so on.
 
-Note that only the top-most writable filesystem is written to. A typical 
+Note that only the top-most writable filesystem is written to. A typical
 stack would look like this in real-life:
 
 ~/.widelands/
@@ -339,8 +339,8 @@ public:
 	FileRead();
 	~FileRead();
 
-	void Open(FileSystem *fs, const char *fname);
-	bool TryOpen(FileSystem *fs, const char *fname);
+	void Open(FileSystem *fs, std::string fname);
+	bool TryOpen(FileSystem *fs, std::string fname);
 	void Close();
 
 	inline int GetSize() const { return length; }
@@ -355,7 +355,7 @@ public:
 	inline float Float(int pos = -1) { return LittleFloat(*(float *)Data(4, pos)); }
 	char *CString(int pos = -1);
 	bool ReadLine(char *buf, int buflen);
-	
+
 	void *Data(int bytes, int pos = -1) {
 		int i;
 
@@ -388,8 +388,8 @@ public:
 	FileWrite();
 	~FileWrite();
 
-	void Write(FileSystem *fs, const char *filename);
-	bool TryWrite(FileSystem *fs, const char *filename);
+	void Write(FileSystem *fs, std::string filename);
+	bool TryWrite(FileSystem *fs, std::string filename);
 	void Clear();
 
 	void SetFilePos(int pos);
@@ -434,7 +434,7 @@ enum { // which graphics subsystem to use
 
 
 /*
-All interactions with the OS except for file access and graphics are handled 
+All interactions with the OS except for file access and graphics are handled
 by the Sys_xxx type functions. Most notably:
  - timing
  - input
@@ -442,13 +442,13 @@ by the Sys_xxx type functions. Most notably:
 
 System will be the one place for complete session playback technology.
 Using a command line option, all input etc.. that passes through System can be
-saved in a file and played back later for intensive and slow profiling and 
+saved in a file and played back later for intensive and slow profiling and
 testing (valgrind comes to mind).
 (This is completely independent from recorded games; recorded games consist of
 saved player commands and can be recorded and played back from the GUI)
 
 Note/TODO: Graphics are currently not handled by System, and it is non-essential
-for playback anyway. Additionally, we'll want several rendering backends 
+for playback anyway. Additionally, we'll want several rendering backends
 (software and OpenGL).
 Maybe the graphics backend loader code should be in System, while the actual
 graphics work is done elsewhere.
@@ -481,7 +481,7 @@ uint Sys_GetMouseButtons();
 int Sys_GetMouseX();
 int Sys_GetMouseY();
 void Sys_SetMousePos(int x, int y);
-	
+
 void Sys_SetMouseSwap(bool swap);
 void Sys_SetMouseSpeed(float speed);
 

@@ -161,10 +161,10 @@ Editor_Increase_Height_Tool_Options_Menu::Editor_Increase_Height_Tool_Options_Me
    m_textarea=new Textarea(this, 50, 25, buf);
 
    Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Increase_Height_Tool_Options_Menu::button_clicked);
    b=new Button(this, 105, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Increase_Height_Tool_Options_Menu::button_clicked);
 }
 
@@ -304,10 +304,10 @@ Editor_Decrease_Height_Tool_Options_Menu::Editor_Decrease_Height_Tool_Options_Me
    m_textarea=new Textarea(this, 50, 25, buf);
 
    Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Decrease_Height_Tool_Options_Menu::button_clicked);
    b=new Button(this, 105, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Decrease_Height_Tool_Options_Menu::button_clicked);
 }
 
@@ -447,10 +447,10 @@ Editor_Set_Height_Tool_Options_Menu::Editor_Set_Height_Tool_Options_Menu(Editor_
    m_textarea=new Textarea(this, 59, 25, buf);
 
    Button* b = new Button(this, 75, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Set_Height_Tool_Options_Menu::button_clicked);
    b=new Button(this, 95, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Set_Height_Tool_Options_Menu::button_clicked);
 }
 
@@ -597,16 +597,16 @@ Editor_Noise_Height_Tool_Options_Menu::Editor_Noise_Height_Tool_Options_Menu(Edi
    m_textarea_upper=new Textarea(this, 105, 25, buf);
 
    Button* b = new Button(this, 30, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Noise_Height_Tool_Options_Menu::button_clicked);
    b=new Button(this, 50, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Noise_Height_Tool_Options_Menu::button_clicked);
    b=new Button(this, 130, 40, 20, 20, 0, 2);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Noise_Height_Tool_Options_Menu::button_clicked);
    b=new Button(this, 150, 40, 20, 20, 0, 3);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Noise_Height_Tool_Options_Menu::button_clicked);
 }
 
@@ -759,10 +759,10 @@ Editor_Set_Down_Terrain_Tool_Options_Menu::Editor_Set_Down_Terrain_Tool_Options_
    m_textarea=new Textarea(this, 50, 25, buf);
 
    Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Set_Down_Terrain_Tool_Options_Menu::button_clicked);
    b=new Button(this, 105, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Set_Down_Terrain_Tool_Options_Menu::button_clicked);
 }
 
@@ -903,10 +903,10 @@ Editor_Set_Right_Terrain_Tool_Options_Menu::Editor_Set_Right_Terrain_Tool_Option
    m_textarea=new Textarea(this, 50, 25, buf);
 
    Button* b = new Button(this, 85, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Set_Right_Terrain_Tool_Options_Menu::button_clicked);
    b=new Button(this, 105, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
    b->clickedid.set(this, &Editor_Set_Right_Terrain_Tool_Options_Menu::button_clicked);
 }
 

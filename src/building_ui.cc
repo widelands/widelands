@@ -38,10 +38,10 @@ class.
 #include "waresdisplay.h"
 
 
-static const char* pic_ok = "pics/menu_okay.bmp";
-static const char* pic_cancel = "pics/menu_abort.bmp";
+static const char* pic_ok = "pics/menu_okay.png";
+static const char* pic_cancel = "pics/menu_abort.png";
 
-static const char* pic_bulldoze = "pics/menu_bld_bulldoze.bmp";
+static const char* pic_bulldoze = "pics/menu_bld_bulldoze.png";
 
 
 /*

@@ -63,11 +63,11 @@ Window::Window(Panel *parent, int x, int y, uint w, uint h, const char *title)
 	set_cache(true);
 	set_top_on_click(true);
 
-	m_pic_lborder = g_gr->get_picture(PicMod_UI, "pics/win_l_border.bmp", WINDOW_CLRKEY);
-	m_pic_rborder = g_gr->get_picture(PicMod_UI, "pics/win_r_border.bmp", WINDOW_CLRKEY);
-	m_pic_top = g_gr->get_picture(PicMod_UI, "pics/win_top.bmp", WINDOW_CLRKEY);
-	m_pic_bottom = g_gr->get_picture(PicMod_UI, "pics/win_bot.bmp", WINDOW_CLRKEY);
-	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/win_bg.bmp");
+	m_pic_lborder = g_gr->get_picture(PicMod_UI, "pics/win_l_border.png", WINDOW_CLRKEY);
+	m_pic_rborder = g_gr->get_picture(PicMod_UI, "pics/win_r_border.png", WINDOW_CLRKEY);
+	m_pic_top = g_gr->get_picture(PicMod_UI, "pics/win_top.png", WINDOW_CLRKEY);
+	m_pic_bottom = g_gr->get_picture(PicMod_UI, "pics/win_bot.png", WINDOW_CLRKEY);
+	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/win_bg.png");
 }
 
 /** Window::~Window()

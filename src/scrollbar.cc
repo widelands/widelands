@@ -68,12 +68,12 @@ Scrollbar::Scrollbar(Panel *parent, int x, int y, uint w, uint h, bool horiz)
 		// up button
 		b = new Button(this, 0, 0, w, btnh, 1);
 		b->clicked.set(this, &Scrollbar::btn_up);
-		b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+		b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", RGBColor(0,0,255)));
 
 		// down button
 		b = new Button(this, 0, h-btnh, w, btnh, 1);
 		b->clicked.set(this, &Scrollbar::btn_down);
-		b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+		b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", RGBColor(0,0,255)));
 	}
 }
 

@@ -49,7 +49,7 @@ public:
 };
 
 SinglePlayerMenu::SinglePlayerMenu()
-	: BaseMenu("singleplmenu.bmp")
+	: BaseMenu("singleplmenu.jpg")
 {
 	// Text
 	new Textarea(this, MENU_XRES/2, 140, "Single Player Menu", Align_HCenter);

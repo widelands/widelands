@@ -30,15 +30,42 @@ Management classes and functions of the 16-bit software renderer.
 
 #include "sw16_graphic.h"
 
+#include "SDL_image.h"
+
 
 namespace Renderer_Software16
 {
+
+
+/*
+===============
+LoadImage
+
+Helper function wraps around SDL_image. Returns the given image file as a
+surface.
+Cannot return 0, throws an exception on error.
+===============
+*/
+SDL_Surface* LoadImage(std::string filename)
+{
+	FileRead fr;
+	SDL_Surface* surf;
+
+	fr.Open(g_fs, filename);
+
+	surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+	if (!surf)
+		throw wexception("%s", IMG_GetError());
+
+	return surf;
+}
+
 
 /*
 ==============================================================================
 
 RenderTargetImpl -- wrapper around a Bitmap that can be rendered into
-		
+
 ==============================================================================
 */
 
@@ -54,7 +81,7 @@ deleted by the destructor.
 RenderTargetImpl::RenderTargetImpl(Bitmap* bmp)
 {
 	m_bitmap = bmp;
-	
+
 	reset();
 }
 
@@ -151,7 +178,7 @@ bool RenderTargetImpl::enter_window(const Rect& rc, Rect* previous, Point* prevo
 {
 	Point newofs(0,0);
 	Rect newrect;
-	
+
 	newrect.x = rc.x + m_offset.x;
 	newrect.y = rc.y + m_offset.y;
 	newrect.w = rc.w;
@@ -421,7 +448,7 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 		h = m_rect.h - y;
 	if (h <= 0)
 		return;
-	
+
 	// Make sure the offset is within bounds
 	ofsx = ofsx % src->w;
 	if (ofsx < 0)
@@ -593,10 +620,10 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	maxfy += 10; // necessary because of heights
    minfx -= mri->fieldsel_radius; // to make fieldsel work properly. better than having if()s in every loop
    minfy -= mri->fieldsel_radius; 
-   
+
 	//log("%i %i -> %i %i\n", minfx, minfy, maxfx, maxfy);
 	int dx = maxfx - minfx + mri->fieldsel_radius + 1;
-	int dy = maxfy - minfy + mri->fieldsel_radius + 1; 
+	int dy = maxfy - minfy + mri->fieldsel_radius + 1;
    int linear_fy = minfy;
 
 	while(dy--) {
@@ -639,7 +666,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 		f = map->get_field(fx, fy);
 		f_bl = map->get_field(bl_x, bl_y);
 		f_tl = map->get_field(tl_x, tl_y);
-            
+
 		int count = dx;
 		while(count--) {
 			Field *f_br, *f_r, *f_l, *f_tr;
@@ -679,7 +706,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
             draw_fsel=true;
             fsel_coords_int.next(&next_fieldsel_cord_x, &next_fieldsel_cord_y);
          }
-         
+
 			// Render stuff that belongs to ground triangles
 			if (render_b || render_r) {
 				uchar roads = f->get_roads();
@@ -805,12 +832,12 @@ void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, c
 	const AnimationGfx* gfx = get_graphicimpl()->get_animation(animation);
 	const AnimFrame* frame;
 	Rect rc;
-	
+
 	if (!data || !gfx) {
 		log("WARNING: Animation %i doesn't exist\n", animation);
 		return;
 	}
-	
+
 	// Get the frame and its data
 	frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes());
 	dstx += m_offset.x;
@@ -1042,7 +1069,7 @@ void GraphicImpl::flush(int mod)
 			free(pic->bitmap.pixels);
 		}
 	}
-	
+
 	// Flush game items
 	if (!mod || mod & PicMod_Game) {
 		for(i = 0; i < m_maptextures.size(); i++)
@@ -1075,31 +1102,36 @@ Returns 0 (a null-picture) if the picture cannot be loaded.
 uint GraphicImpl::get_picture(int mod, const char* fname)
 {
 	uint id;
-	
+
 	// Check if the picture's already loaded
 	picmap_t::iterator it = m_picturemap.find(fname);
-	
+
 	if (it != m_picturemap.end())
 	{
 		id = it->second;
 	}
 	else
 	{
-		SDL_Surface* bmp = SDL_LoadBMP(fname); // TODO: incorrect, it bypasses the file code
+		SDL_Surface* bmp;
 
-		if (!bmp) {
-			log("WARNING: Couldn't open %s: %s\n", fname, SDL_GetError());
+		try
+		{
+			bmp = LoadImage(fname);
+		}
+		catch(std::exception& e)
+		{
+			log("WARNING: Couldn't open %s: %s\n", fname, e.what());
 			return 0;
 		}
 
 		SDL_Surface* cv = SDL_ConvertSurface(bmp, m_sdlsurface->format, 0);
-		
+
 		// Fill in a free slot in the pictures array
 		Picture* pic;
-		
+
 		id = find_free_picture();
 		pic = &m_pictures[id];
-		
+
 		pic->mod = 0; // will be filled in by caller
 		pic->u.fname = strdup(fname);
 		pic->bitmap.pixels = (ushort*)malloc(cv->w*cv->h*2);
@@ -1113,10 +1145,10 @@ uint GraphicImpl::get_picture(int mod, const char* fname)
 
 		SDL_FreeSurface(cv);
 		SDL_FreeSurface(bmp);
-		
+
 		m_picturemap[pic->u.fname] = id;
 	}
-	
+
 	m_pictures[id].mod |= mod;
 	return id;
 }
@@ -1124,12 +1156,12 @@ uint GraphicImpl::get_picture(int mod, const char* fname)
 uint GraphicImpl::get_picture(int mod, const char* fname, RGBColor clrkey)
 {
 	uint id = get_picture(mod, fname);
-	
+
 	if (id) {
 		m_pictures[id].bitmap.hasclrkey = true;
 		m_pictures[id].bitmap.clrkey = clrkey.pack16();
 	}
-	
+
 	return id;
 }
 
@@ -1138,7 +1170,7 @@ uint GraphicImpl::get_picture(int mod, int w, int h, const ushort* data, RGBColo
 {
 	uint id = find_free_picture();
 	Picture* pic = &m_pictures[id];
-	
+
 	pic->mod = mod;
 	pic->u.fname = 0;
 	pic->bitmap.pixels = (ushort*)malloc(w*h*2);
@@ -1147,9 +1179,9 @@ uint GraphicImpl::get_picture(int mod, int w, int h, const ushort* data, RGBColo
 	pic->bitmap.pitch = w;
 	pic->bitmap.hasclrkey = true;
 	pic->bitmap.clrkey = clrkey.pack16();
-	
+
 	memcpy(pic->bitmap.pixels, data, w*h*2);
-	
+
 	return id;
 }
 
@@ -1166,9 +1198,9 @@ void GraphicImpl::get_picture_size(uint pic, int* pw, int* ph)
 {
 	if (pic >= m_pictures.size() || !m_pictures[pic].mod)
 		throw wexception("get_picture_size(%i): picture doesn't exist", pic);
-	
+
 	Bitmap* bmp = &m_pictures[pic].bitmap;
-	
+
 	*pw = bmp->w;
 	*ph = bmp->h;
 }
@@ -1179,7 +1211,7 @@ void GraphicImpl::get_picture_size(uint pic, int* pw, int* ph)
 GraphicImpl::create_surface
 
 Create an offscreen surface that can be used both as target and as source for
-rendering operations. The surface is put into a normal slot in the picture 
+rendering operations. The surface is put into a normal slot in the picture
 array so the surface can be used in normal blit() operations.
 A RenderTarget for the surface can be obtained using get_surface_renderer().
 Note that surfaces do not belong to a module and must be freed explicitly.
@@ -1392,23 +1424,23 @@ Allocate the pictures used by rendermap()
 void GraphicImpl::allocate_gameicons()
 {
 	static const char* roadb_names[3] = {
-		"pics/roadb_green.bmp",
-		"pics/roadb_yellow.bmp",
-		"pics/roadb_red.bmp"
+		"pics/roadb_green.png",
+		"pics/roadb_yellow.png",
+		"pics/roadb_red.png"
 	};
 	static const char* build_names[5] = {
-		"pics/set_flag.bmp",
-		"pics/small.bmp",
-		"pics/medium.bmp",
-		"pics/big.bmp",
-		"pics/mine.bmp"
+		"pics/set_flag.png",
+		"pics/small.png",
+		"pics/medium.png",
+		"pics/big.png",
+		"pics/mine.png"
 	};
 
 	if (m_gameicons)
 		return;
-	
+
 	m_gameicons = new GameIcons;
-	
+
 	for(int i = 0; i < 3; i++)
 		m_gameicons->pics_roadb[i] = g_gr->get_picture(PicMod_Game, roadb_names[i], RGBColor(0,0,255));
 	for(int i = 0; i < 5; i++)
