@@ -192,13 +192,13 @@ public:
 	bool can_reach_by_water(Coords field);
 	
    // change field heights
-   void change_field_height(const Coords&, int);
-   void change_field_height(int, int, int);
-   void set_field_height(const Coords&, int);
-   void set_field_height(int, int, int);
+   int change_field_height(const Coords&, int);
+   int change_field_height(int, int, int);
+   int set_field_height(const Coords&, int);
+   int set_field_height(int, int, int);
    // change terrain of a field, recalculate buildcaps
-   void change_field_terrain(int, int, int, bool, bool);
-   void change_field_terrain(Coords, int, bool, bool);
+   int change_field_terrain(int, int, int, bool, bool);
+   int change_field_terrain(Coords, int, bool, bool);
 
 private:
 	void set_size(uint w, uint h);

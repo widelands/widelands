@@ -171,4 +171,4 @@ $(OBJECT_DIR)/widelands: tags $(WIDELANDS_OBJ)
 	$(CXX) $(WIDELANDS_OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
 
 tags: $(wildcard src/*.cc src/*.h)
-	@ if [ -x /usr/bin/ctags ]; then ctags -R ; else true; fi
+	@ if [ -x /usr/bin/ctags ]; then ctags -R || true ; else true; fi

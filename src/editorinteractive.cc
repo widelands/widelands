@@ -409,11 +409,11 @@ the function of the currently selected tool
 */
 void Editor_Interactive::field_clicked() {
    Map* m=get_map();
-   tools.tools[tools.current_tool]->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
+   int radius=tools.tools[tools.current_tool]->handle_click(&m_maprenderinfo.fieldsel, m->get_field(m_maprenderinfo.fieldsel), m, this);
 
    // Some things have changed, map is informed, logic is informed. But overlays may still be wrong. Recalc them
-   Map_Region_Coords mrc(m_maprenderinfo.fieldsel, m_maprenderinfo.fieldsel_radius, m);
-   Map_Region mr(m_maprenderinfo.fieldsel, m_maprenderinfo.fieldsel_radius, m);
+   Map_Region_Coords mrc(m_maprenderinfo.fieldsel, radius, m);
+   Map_Region mr(m_maprenderinfo.fieldsel, radius, m);
    FCoords f;
    while((f.field=mr.next())) {
       mrc.next(&f.x, &f.y);

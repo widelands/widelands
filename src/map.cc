@@ -1586,9 +1586,11 @@ this happens in the editor and might happen in the game
 too if some kind of land increasement is implemented (like
 drying swamps). 
 The fieldcaps need to be recalculated
+
+returns the radius of changes (which are always 2)
 ===========
 */
-void Map::change_field_terrain(int mx, int my, int terrain, bool tdown, bool tright) {
+int Map::change_field_terrain(int mx, int my, int terrain, bool tdown, bool tright) {
    assert(tdown || tright);
    
    Field* f=get_field(mx,my);
@@ -1613,10 +1615,13 @@ void Map::change_field_terrain(int mx, int my, int terrain, bool tdown, bool tri
       mrc.next(&fcord.x,&fcord.y);
       recalc_fieldcaps_pass2(fcord.x, fcord.y, fcord.field);
    }   
+
+   return 2;
 }
 
-void Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright) {
-   change_field_terrain(c.x, c.y, terrain, tdown, tright);
+
+int Map::change_field_terrain(Coords c, int terrain, bool tdown, bool tright) {
+   return change_field_terrain(c.x, c.y, terrain, tdown, tright);
 }
 
 /*
@@ -1627,15 +1632,15 @@ sets the field height to an absolut value. This changes the surrounding
 fields are changed as well
 ===========
 */
-void Map::set_field_height(int x, int y, int to) {
-   set_field_height(Coords(x,y),to);
+int Map::set_field_height(int x, int y, int to) {
+   return set_field_height(Coords(x,y),to);
 }
 
-void Map::set_field_height(const Coords& coordinates, int to) {
+int Map::set_field_height(const Coords& coordinates, int to) {
    Field* m_field=get_field(coordinates);
    int val=m_field->get_height();
    int diff=to-val;
-   change_field_height(coordinates, diff);
+   return change_field_height(coordinates, diff);
 }
 
 /*
@@ -1645,9 +1650,11 @@ Map::change_field_height()
 relativly change field height, recalculate brightness and 
 if needed change surrounding fields so that walking is still
 possible
+
+returns the area of fields, that have been changed
 ===========
 */
-void Map::change_field_height(const Coords& coordinates, int by) {
+int Map::change_field_height(const Coords& coordinates, int by) {
    Field* m_field=get_field(coordinates);
    int height=m_field->get_height();
    
@@ -1682,11 +1689,13 @@ void Map::change_field_height(const Coords& coordinates, int by) {
    }
    
    recalc_fieldcaps_pass2(coordinates.x,coordinates.y,m_field);
+
+   return radius;
 }
  
 
-void Map::change_field_height(int x, int y, int by) {
-   change_field_height(Coords(x,y), by);
+int Map::change_field_height(int x, int y, int by) {
+   return change_field_height(Coords(x,y), by);
 }
   
 /*
