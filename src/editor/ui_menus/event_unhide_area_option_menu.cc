@@ -226,7 +226,7 @@ void Event_Unhide_Area_Option_Menu::clicked(int i) {
       case 14: m_y-=1; break;
 
       case 15: m_player++; break;
-      case 16: m_player++; break;
+      case 16: m_player--; break;
 
       case 17: m_area+=100; break;
       case 18: m_area-=100; break;

@@ -22,6 +22,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_editbox.h"
+#include "ui_modal_messagebox.h"
 #include "graphic.h"
 #include "editorinteractive.h"
 #include "error.h"
@@ -184,31 +185,38 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
    } else if(n<750) {
       // Tribe button has been clicked
       int m=n-500;
-      UIButton* but=m_plr_set_tribes_buts[m];
-      std::string t= but->get_title();
-      if(t=="<undefined>") {
-         t=m_tribes[0];
+      if(!m_parent->is_player_tribe_referenced(m+1)) { 
+         UIButton* but=m_plr_set_tribes_buts[m];
+         std::string t= but->get_title();
+         if(t=="<undefined>") {
+            t=m_tribes[0];
+         } else {
+            if(!Tribe_Descr::exists_tribe(t))
+               throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
+            uint i;
+            for(i=0; i<m_tribes.size(); i++)
+               if(m_tribes[i]==t) break;
+            if(i==m_tribes.size()-1) t="<undefined>";
+            else t=m_tribes[++i];
+         }
+         m_parent->get_map()->set_scenario_player_tribe(m+1,t);
+         m_parent->set_need_save(true);
       } else {
-         if(!Tribe_Descr::exists_tribe(t))
-            throw wexception("Map defines tribe %s, but it doesn't exist!\n", t.c_str());
-         uint i;
-         for(i=0; i<m_tribes.size(); i++)
-            if(m_tribes[i]==t) break;
-         if(i==m_tribes.size()-1) t="<undefined>";
-         else t=m_tribes[++i];
+         UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", "Can't change player tribe. It is referenced in some place."
+                 "Remove all buildings, bobs, triggers and events that depend on this tribe and try again", UIModal_Message_Box::OK);
+         mmb->run();
+         delete mmb;
       }
-      m_parent->get_map()->set_scenario_player_tribe(m+1,t);
-      m_parent->set_need_save(true);
    } else if(n<1000) {
-      // Player name has been changed
-      int m=n-750;
-      std::string text=m_plr_names[m]->get_text();
-      if(text=="") {
-         text=m_parent->get_map()->get_scenario_player_name(m+1);
-         m_plr_names[m]->set_text(text.c_str());
-      }
-      m_parent->get_map()->set_scenario_player_name(m+1, text);
-      m_parent->set_need_save(true);
+         // Player name has been changed
+         int m=n-750;
+         std::string text=m_plr_names[m]->get_text();
+         if(text=="") {
+            text=m_parent->get_map()->get_scenario_player_name(m+1);
+            m_plr_names[m]->set_text(text.c_str());
+         }
+         m_parent->get_map()->set_scenario_player_name(m+1, text);
+         m_parent->set_need_save(true);
    } else {
       int nr_players=m_parent->get_map()->get_nrplayers();
       // Up down button
@@ -228,12 +236,19 @@ void Editor_Tool_Set_Starting_Pos_Options_Menu::button_clicked(int n) {
          m_parent->get_map()->set_scenario_player_tribe(nr_players, "<undefined>");
          m_parent->set_need_save(true);
       } else {
-         std::string name= m_parent->get_map()->get_scenario_player_name(nr_players);
-         std::string tribe=  m_parent->get_map()->get_scenario_player_tribe(nr_players);
-         m_parent->get_map()->set_nrplayers(nr_players);
-         m_parent->get_map()->set_scenario_player_name(nr_players, name);
-         m_parent->get_map()->set_scenario_player_tribe(nr_players, tribe);
-         m_parent->set_need_save(true);
+         if(!m_parent->is_player_tribe_referenced(nr_players)) { 
+            std::string name= m_parent->get_map()->get_scenario_player_name(nr_players);
+            std::string tribe=  m_parent->get_map()->get_scenario_player_tribe(nr_players);
+            m_parent->get_map()->set_nrplayers(nr_players);
+            m_parent->get_map()->set_scenario_player_name(nr_players, name);
+            m_parent->get_map()->set_scenario_player_tribe(nr_players, tribe);
+            m_parent->set_need_save(true);
+         } else {
+            UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", "Can't remove player. It is referenced in some place."
+                  "Remove all buildings, bobs, triggers and events that depend of this player and try again", UIModal_Message_Box::OK);
+            mmb->run();
+            delete mmb;
+         }
       }
    }
    update();

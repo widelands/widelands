@@ -48,17 +48,22 @@ class Editor_Interactive : public Interactive_Base {
       // gets called when a keyboard event occurs
       bool handle_key(bool down, int code, char c);
 
+      void select_tool(int, int);
+      int get_selected_tool(void) { return tools.current_tool_index; }
       struct Editor_Tools {
          int current_tool_index;
          int use_tool;
          std::vector<Editor_Tool*> tools;
       };
 
-      void select_tool(int, int);
-      int get_selected_tool(void) { return tools.current_tool_index; }
 
+      // action functions 
       void exit_editor();
 
+      // reference functions
+      void reference_player_tribe(int, void*);
+      void unreference_player_tribe(int, void*);
+      bool is_player_tribe_referenced(int);
       void set_need_save(bool t) { m_need_save=t; }
 
    private:
@@ -70,6 +75,11 @@ class Editor_Interactive : public Interactive_Base {
 
       // State variables
       bool m_need_save;
+      struct Player_References {
+         int player;
+         void *object;
+      };
+      std::vector<Player_References> m_player_tribe_references;
 
       // Tool
       Editor_Tools tools;
@@ -81,5 +91,7 @@ class Editor_Interactive : public Interactive_Base {
       UIUniqueWindowRegistry m_mainmenu;
       UIUniqueWindowRegistry m_eventmenu;
       UIUniqueWindowRegistry m_options_menu;
+
+   
 };
 #endif // __S__EDITOR_H

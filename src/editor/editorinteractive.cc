@@ -43,6 +43,7 @@
 #include "editor_place_bob_tool.h"
 #include "editor_increase_resources_tool.h"
 #include "system.h"
+#include "tribe.h"
 
 /**********************************************
  *
@@ -108,14 +109,13 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Set_Starting_Pos_Tool());
    tools.tools.push_back(new Editor_Place_Bob_Tool(new Editor_Delete_Bob_Tool()));
    tools.tools.push_back(new Editor_Increase_Resources_Tool(new Editor_Decrease_Resources_Tool(), new Editor_Set_Resources_Tool()));
-
-/*   tools.tools.push_back(new Tool_Info(1, 3, new Editor_Decrease_Height_Tool()));
-   tools.tools.push_back(new Tool_Info(1, 2, new Editor_Set_Height_Tool()));
-   tools.tools.push_back(new Tool_Info(4, 4, new Editor_Noise_Height_Tool()));
-   tools.tools.push_back(new Tool_Info(6, 7, new Editor_Set_Right_Terrain_Tool()));
-   tools.tools.push_back(new Tool_Info(5, 7, new Editor_Set_Down_Terrain_Tool()));
-   tools.tools.push_back(new Tool_Info(5, 6, new Editor_Set_Both_Terrain_Tool()));
-  */
+   
+   // Load all tribes into memory
+   std::vector<std::string> tribes;
+   Tribe_Descr::get_all_tribes(&tribes);
+   uint i=0;
+   for(i=0; i<tribes.size(); i++) 
+      e->manually_load_tribe(tribes[i].c_str());
 
    m_need_save=false;
 
@@ -382,4 +382,49 @@ void Editor_Interactive::select_tool(int n, int which) {
    else set_fieldsel_picture(fselpic);
 }
 
+/*
+ * Reference functions
+ */
+void Editor_Interactive::reference_player_tribe(int player, void *data) {
+   assert(player>0 && player<=m_editor->get_map()->get_nrplayers());
 
+   Player_References r;
+   r.player=player;
+   r.object=data;
+
+   m_player_tribe_references.push_back(r);
+}
+
+/*
+ * unreference !once!, if referenced many times, this 
+ * will leace a reference
+ */
+void Editor_Interactive::unreference_player_tribe(int player, void* data) {
+   assert(player>=0 && player<=m_editor->get_map()->get_nrplayers());
+   assert(data);
+   
+   int i=0;
+   if(player>0) {
+      for(i=0; i<static_cast<int>(m_player_tribe_references.size()); i++) 
+         if(m_player_tribe_references[i].player==player && m_player_tribe_references[i].object==data) break;
+
+      m_player_tribe_references.erase(m_player_tribe_references.begin() + i);
+   } else {
+      // Player is invalid, remove all references from this object
+      for(i=0; i<static_cast<int>(m_player_tribe_references.size()); i++) {
+         if(m_player_tribe_references[i].object==data) {
+            m_player_tribe_references.erase(m_player_tribe_references.begin() + i); i=-1; 
+         }
+      }
+   }
+}
+
+bool Editor_Interactive::is_player_tribe_referenced(int player) {
+   assert(player>0 && player<=m_editor->get_map()->get_nrplayers());
+
+   uint i=0;
+   for(i=0; i<m_player_tribe_references.size(); i++) 
+         if(m_player_tribe_references[i].player==player) return true;
+
+   return false;
+}

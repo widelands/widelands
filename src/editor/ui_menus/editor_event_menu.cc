@@ -208,6 +208,7 @@ void Editor_Event_Menu::clicked(int id) {
             delete mmb;
             return;
          }
+         m_parent->unreference_player_tribe(0, trig);  // Remove all references done by this trigger
          m_parent->get_map()->unregister_trigger(trig);
          m_parent->set_need_save(true);
          update();

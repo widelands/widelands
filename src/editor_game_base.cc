@@ -286,6 +286,32 @@ void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const 
 	m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], playercolor);
 }
 
+/*
+ * Load the given tribe into structure and postload it on 
+ * the same go
+ */
+void Editor_Game_Base::manually_load_tribe(const char* tribe) {
+	uint i;
+
+	for(i = 0; i < m_tribes.size(); i++)
+		if (!strcmp(m_tribes[i]->get_name(), tribe))
+			break;
+
+	if (i == m_tribes.size()) 
+		m_tribes.push_back(new Tribe_Descr(tribe));
+}
+
+/*
+ * Returns a tribe description from the internally loaded list
+ */
+Tribe_Descr* Editor_Game_Base::get_tribe(const char* tribe) {
+	uint i;
+   for(i = 0; i < m_tribes.size(); i++) {
+		if (!strcmp(m_tribes[i]->get_name(), tribe))
+			return m_tribes[i];
+   }
+   return 0;
+}
 
 /*
 ===============
@@ -328,7 +354,7 @@ void Editor_Game_Base::postload()
 				break;
 		}
 
-		if (pid <= MAX_PLAYERS) {
+		if (pid <= MAX_PLAYERS || !is_game()) { // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
 			m_tribes[id]->postload(this);
 			id++;

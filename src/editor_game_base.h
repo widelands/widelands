@@ -91,13 +91,19 @@ class Editor_Game_Base {
 		uint add_trackpointer(void* ptr);
 		void* get_trackpointer(uint serial);
 		void remove_trackpointer(uint serial);
-
+      
+      // Manually load a tribe into memory. Used by the editor
+      void manually_load_tribe(const char* tribe);
+      // Get a tribe from the loaded list, when available
+      Tribe_Descr* get_tribe(const char* tribe); 
+      
    protected:
       // next function is used to update the current gametime,
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
       inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
 
+      
    private:
       struct Conquer_Info {
          uchar  player;

@@ -30,6 +30,7 @@
 enum {
    TRIGGER_TIME = 0,
    TRIGGER_NULL,
+   TRIGGER_BUILDING,
 };
 
 #endif
