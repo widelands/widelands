@@ -17,35 +17,30 @@
  *
  */
 
-#ifndef __S__EDITORINTERACTIVE_H
-#define __S__EDITORINTERACTIVE_H
+#ifndef __S__E_UI_H
+#define __S__E_UI_H 
 
-#include "e_ui.h"
-#include "mapview.h"
-#include "interactive_base.h"
-
-class Editor;
+#include "ui.h"
 
 /*
- * This is the EditorInteractive. It is like the InteractivePlayer class,
- * but for the Editor instead of the game
- */
-class Editor_Interactive : public Interactive_Base {
-   public:
-      Editor_Interactive(Editor*);
-      ~Editor_Interactive();
+============================================
 
-      inline Editor* get_editor(void) { return m_editor; }
-      void recalc_overlay(FCoords fc);
-      void start();
+In here: all the classes needed only for the editor. 
 
-   private:
-      static const int PANEL_HEIGHT=100;
+============================================
+*/
 
-      void exit_game_btn();
-     
-      ToolPanel* m_panel;
-      Editor* m_editor;
-      Map_View* m_mapview;
+class ToolPanel : public Panel {
+public:
+   ToolPanel(Panel *parent, int x, int y, uint w, uint h);
+	~ToolPanel();
+
+	// Drawing and event handlers
+	void draw_border(RenderTarget* dst);
+
+private:
+	uint	m_pic_top;
+	uint	m_pic_background;
 };
-#endif // __S__EDITOR_H
+
+#endif // __S__E_UI_H
