@@ -23,6 +23,8 @@
 #include <vector>
 #include <queue>
 #include <SDL/SDL_net.h>
+#include "wexception.h"
+#include "types.h"
 
 
 #define WIDELANDS_PORT		7396
@@ -71,12 +73,16 @@ class NetGame {
 	virtual void handle_network ()=0;
 
 	virtual void send_player_command (PlayerCommand*)=0;
+	
+	virtual void syncreport (uint)=0;
 
     protected:
 	Game*		game;
 	
 	int		playernum;
 	int		net_game_time;
+	
+	uint		common_rand_seed;
 	
 	bool		players_changed;
 	
@@ -98,6 +104,8 @@ class NetHost:public NetGame {
 	
 	virtual void send_player_command (PlayerCommand*);
 	
+	virtual void syncreport (uint);
+
     private:
 	void send_player_info ();
 
@@ -105,6 +113,7 @@ class NetHost:public NetGame {
 		TCPsocket		sock;
 		Deserializer*		deserializer;
 		int			playernum;
+		std::queue<uint>	syncreports;
 	};
 	
 	TCPsocket			svsock;
@@ -114,6 +123,8 @@ class NetHost:public NetGame {
 	std::vector<Client>		clients;
 	
 	Serializer*			serializer;
+	
+	std::queue<uint>		mysyncreports;
 };
 
 class NetClient:public NetGame {
@@ -128,6 +139,8 @@ class NetClient:public NetGame {
 	
 	virtual void send_player_command (PlayerCommand*);
     
+	virtual void syncreport (uint);
+
     private:
 	TCPsocket			sock;
 	SDLNet_SocketSet		sockset;

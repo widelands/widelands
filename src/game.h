@@ -21,6 +21,7 @@
 #define __S__GAME_H
 
 #include "editor_game_base.h"
+#include "random.h"
 
 #define WLGF_SUFFIX		".wgf"
 #define WLGF_MAGIC      "WLgf"
@@ -77,7 +78,9 @@ public:
 	// Do NOT use for random events in the UI or other display code.
 	// This will allow us to plug another PRNG in here for game playbacks
 	// and other fancy stuff.
-	inline int logic_rand() { return rand(); }
+	inline uint logic_rand() { return rng->rand(); }
+	
+	void logic_rand_seed (uint seed) { rng->seed (seed); }
 
 	int get_speed() const { return m_speed; }
 	void set_speed(int speed);
@@ -117,6 +120,8 @@ private:
 	
 	int		m_state;
 	int		m_speed;		// frametime multiplier
+	
+	RNG*		rng;
 
 	Interactive_Player*			ipl;
 	std::vector<Computer_Player*>		cpl;

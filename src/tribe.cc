@@ -376,7 +376,7 @@ the conf files
 */
 void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Warehouse* wh) {
    std::map<std::string, int>::iterator cur;
-
+   
    for(cur=m_startwares.begin(); cur!=m_startwares.end(); cur++) {
       wh->insert_wares(get_safe_ware_index((*cur).first.c_str()), (*cur).second);
    }

@@ -26,6 +26,10 @@
 #include "wexception.h"
 #include "fullscreen_menu_launchgame.h"
 
+
+#define CHECK_SYNC_INTERVAL	1000
+
+
 enum {
 	NETCMD_UNUSED=0,
 	NETCMD_HELLO,
@@ -33,7 +37,26 @@ enum {
 	NETCMD_PLAYERINFO,
 	NETCMD_START,
 	NETCMD_ADVANCETIME,
-	NETCMD_PLAYERCOMMAND
+	NETCMD_PLAYERCOMMAND,
+	NETCMD_SYNCREPORT
+};
+
+
+class Cmd_NetCheckSync:public BaseCommand {
+    private:
+	NetGame*	netgame;
+	
+    public:
+	Cmd_NetCheckSync (int dt, NetGame* ng) : BaseCommand (dt) { netgame=ng; }
+//	Cmd_NetCheckSync () : BaseCommand(0) { } // For savegame loading
+       
+	virtual void execute (Game* g);
+	
+	// Write these commands to a file (for savegames)
+	virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+	virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
+	virtual int get_id(void) { return QUEUE_CMD_NETCHECKSYNC; }
 };
 
 /* A note on simulation timing:
@@ -66,6 +89,10 @@ NetGame::~NetGame ()
 void NetGame::run ()
 {
 	game=new Game();
+	
+	game->enqueue_command (
+	    new Cmd_NetCheckSync(game->get_gametime()+CHECK_SYNC_INTERVAL, this));
+	
 	game->run_multi_player (this);
 	delete game;
 
@@ -165,8 +192,12 @@ void NetHost::begin_game ()
 	SDLNet_TCP_Close (svsock);
 	svsock=0;
 	
+	common_rand_seed=rand();
+	game->logic_rand_seed (common_rand_seed);
+	
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_START);
+	serializer->putlong (common_rand_seed);
 	serializer->end_packet ();
 	
 	for (unsigned int i=0;i<clients.size();i++)
@@ -230,7 +261,17 @@ void NetHost::handle_network ()
 	// if so, deserialize player commands
 	for (i=0;i<clients.size();i++)
 		while (clients[i].deserializer->avail())
-			cmds.push (PlayerCommand::deserialize(clients[i].deserializer));
+			switch (clients[i].deserializer->getchar()) {
+			    case NETCMD_PLAYERCOMMAND:
+				cmds.push (PlayerCommand::deserialize(clients[i].deserializer));
+				break;
+			    case NETCMD_SYNCREPORT:
+				clients[i].syncreports.push (
+					clients[i].deserializer->getlong());
+				break;
+			    default:
+				throw wexception("Invalid network data received");
+			}
 	
 	// Do not send out packets too often.
 	// The length of the interval should be set
@@ -273,6 +314,35 @@ void NetHost::handle_network ()
 void NetHost::send_player_command (PlayerCommand* cmd)
 {
 	cmds.push (cmd);
+}
+
+void NetHost::syncreport (uint sync)
+{
+    unsigned int i;
+    
+    mysyncreports.push (sync);
+    
+    // TODO: Check whether the list of pending syncreports is getting too
+    // long. This might happen if a client is not sending syncreports.
+    
+    // Now look whether there is at least one syncreport from everyone.
+    // If so, make sure they match.
+    for (i=0;i<clients.size();i++)
+	if (clients[i].syncreports.empty())
+	    return;
+    
+    sync=mysyncreports.front();
+    mysyncreports.pop();
+    
+    for (i=0;i<clients.size();i++) {
+	if (clients[i].syncreports.front()!=sync)
+	    throw wexception("Synchronization lost");
+	    // TODO: handle this more gracefully
+	
+	clients[i].syncreports.pop();
+    }
+    
+    printf ("synchronization is good so far\n");
 }
 
 /*** class NetClient ***/
@@ -347,6 +417,9 @@ void NetClient::handle_network ()
 			}
 			break;
 		    case NETCMD_START:
+			common_rand_seed=deserializer->getlong();
+			game->logic_rand_seed (common_rand_seed);
+			
 			assert (launch_menu!=0);
 			launch_menu->start_clicked();
 			break;
@@ -368,9 +441,18 @@ void NetClient::handle_network ()
 void NetClient::send_player_command (PlayerCommand* cmd)
 {
 	// send the packet to the server instead of queuing it locally
-	// note that currently clients can only send player commands, this may change in the future
 	serializer->begin_packet ();
+	serializer->putchar (NETCMD_PLAYERCOMMAND);
 	cmd->serialize (serializer);
+	serializer->end_packet ();
+	serializer->send (sock);
+}
+
+void NetClient::syncreport (uint sync)
+{
+	serializer->begin_packet ();
+	serializer->putchar (NETCMD_SYNCREPORT);
+	serializer->putlong (sync);
 	serializer->end_packet ();
 	serializer->send (sock);
 }
@@ -462,4 +544,28 @@ void Deserializer::getstr (char* buffer, int maxlength)
 			throw wexception("Deserializer: string too long");
 }
 
+
+/*** class Cmd_NetCheckSync ***/
+
+void Cmd_NetCheckSync::execute (Game* g)
+{
+	// because the random number generator is made dependant
+	// on the command queue, it is a good indicator for synchronization
+	
+	printf ("sync report...\n");
+	
+	netgame->syncreport (g->logic_rand());
+	
+	g->enqueue_command (new Cmd_NetCheckSync(get_duetime()+CHECK_SYNC_INTERVAL, netgame));
+}
+
+void Cmd_NetCheckSync::Write(FileWrite* file, Editor_Game_Base* egb, Widelands_Map_Map_Object_Saver* sv)
+{
+	// this command should not be written to a file
+	throw wexception("Cdm_NetCheckSync is not supposed to be written to a file");
+}
+
+void Cmd_NetCheckSync::Read(FileRead* file, Editor_Game_Base* egb, Widelands_Map_Map_Object_Loader* ld)
+{
+}
 

@@ -43,12 +43,14 @@ Game::Game(void)
 {
 	m_state = gs_none;
 	m_speed = 1;
+	
+	rng = new RNG();
 
 	cmdqueue = new Cmd_Queue(this);
 
 	m_realtime = Sys_GetTime();
 
-   ipl = 0;
+	ipl = 0;
 }
 
 /** Game::~Game(void)
@@ -57,7 +59,8 @@ Game::Game(void)
  */
 Game::~Game(void)
 {
-   delete cmdqueue;
+	delete cmdqueue;
+	delete rng;
 }
 
 
@@ -252,7 +255,7 @@ stages.
 bool Game::run(bool is_savegame)
 {
    postload();
-
+   
    if(!is_savegame) {
       // Prepare the players (i.e. place HQs)
       for (int i = 1; i <= get_map()->get_nrplayers(); i++) {

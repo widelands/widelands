@@ -26,6 +26,7 @@ Texture implementation and terrain rendering for the 16-bit software renderer.
 #include "filesystem.h"
 #include "sw16_graphic.h"
 #include "world.h"
+#include "random.h"
 
 using namespace std;
 
@@ -509,7 +510,8 @@ static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& e
 	dty=(itofix(end.ty)-ty) / (end.x-start.x+1);
 	db=(itofix(end.b)-b) / (end.x-start.x+1);
 
-	unsigned long rnd=0x726C9F4B;
+	// TODO: seed this depending on field coordinates
+	uint rnd=0;
 
 	int dstw = dst->w;
 	int dsth = dst->h;
@@ -518,6 +520,8 @@ static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& e
 	int centery = itofix(start.y);
 
 	for(int x = start.x; x < end.x; x++, centery += ydiff) {
+		rnd=SIMPLE_RAND(rnd);
+		
 		if (x>=0 && x<dstw) {
 			int y = fixtoi(centery) - DITHER_WIDTH;
 
@@ -556,8 +560,6 @@ static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& e
 		tx+=dtx;
 		ty+=dty;
 		b+=db;
-
-		rnd=(rnd<<2) + rnd + 0x1C4035;		// linear congruent generator
 	}
 }
 
@@ -581,7 +583,8 @@ static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& en
 	dty=(itofix(end.ty)-ty) / (end.y-start.y+1);
 	db=(itofix(end.b)-b) / (end.y-start.y+1);
 
-	unsigned long rnd=0x726C9F4B;
+	// TODO: seed this depending on field coordinates
+	uint rnd=0;
 
 	int dstw = dst->w;
 	int dsth = dst->h;
@@ -590,6 +593,8 @@ static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& en
 	int centerx = itofix(start.x);
 
 	for(int y = start.y; y < end.y; y++, centerx += xdiff) {
+		rnd=SIMPLE_RAND(rnd);
+		
 		if (y>=0 && y<dsth) {
 			int x = fixtoi(centerx) - DITHER_WIDTH;
 
@@ -628,8 +633,6 @@ static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& en
 		tx+=dtx;
 		ty+=dty;
 		b+=db;
-
-		rnd=(rnd<<2) + rnd + 0x1C4035;		// linear congruent generator
 	}
 }
 
