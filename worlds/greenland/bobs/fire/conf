@@ -1,6 +1,7 @@
 [global]
 type=immovable
 size=big
+program=program
 picture=fire_burn_00.png
 clrkey_r=0
 clrkey_g=0
