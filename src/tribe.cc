@@ -19,12 +19,20 @@
 
 #include <string.h>
 #include "widelands.h"
+#include "myfile.h"
+#include "graphic.h"
+#include "descr_maintainer.h"
+#include "pic.h"
+#include "bob.h"
 #include "md5file.h"
-#include "tribe.h"
 #include "tribedata.h"
+#include "ware.h"
+#include "worker.h"
+#include "building.h"
+#include "tribe.h"
 
 //
-// this is a function local to this file which reads a animation from a file
+// this is a function which reads a animation from a file
 //
 int read_anim(Animation* a, Binary_file* f) {
    ushort npics;
@@ -86,6 +94,19 @@ int Tribe_Descr::load(const char* name) {
 
    // read buildings data
    if((retval=parse_buildings(&f))) return retval;
+  
+   // read science data!
+   // not yet
+
+   // checksum check 
+   uchar* sum=(uchar*) f.get_chksum();
+   uchar  sum_read[16];
+   f.read(sum_read, 16);
+   uint i;
+   for(i=0; i<16; i++) {
+      // cerr << hex << (int) sum[i] << ":" << (int) sum_read[i] << endl;
+      if(sum[i] != sum_read[i]) return ERR_FAILED; // chksum inval
+   }
    
    return RET_OK;
 }
@@ -104,8 +125,57 @@ int Tribe_Descr::parse_buildings(Binary_file* f) {
    f->read(&nbuilds, sizeof(ushort));
 
    uint i;
+   uchar id;
+   Building_Descr* b;
    for(i=0; i<nbuilds; i++) {
-
+      f->read(&id, sizeof(uchar));
+      switch(id) {
+         case SIT:       			
+            b=new Sit_Building_Descr();
+            break;
+         case SIT_PRODU_WORKER:
+            b=new Sit_Building_Produ_Worker_Descr();
+            break;
+         case DIG:	        
+            b=new Dig_Building_Descr();
+            break;
+         case SEARCH:			     
+            b=new Search_Building_Descr();
+            break;
+         case GROW:			    
+            b=new Grow_Building_Descr();
+            break;
+         case PLANT:		   
+            b=new Plant_Building_Descr();
+            break;
+         case SCIENCE:		
+            b=new Science_Building_Descr();
+            break;
+         case MILITARY:	
+            b=new Military_Building_Descr();
+            break;
+         case CANNON:		
+            b=new Cannon_Descr();
+            break;
+         case SPEC_HQ:	
+            b=new HQ_Descr();
+            break;
+         case SPEC_STORE:	
+            b=new Store_Descr();
+            break;
+         case SPEC_PORT:
+            b=new Port_Descr();
+            break;
+         case SPEC_DOCKYARD:
+            b=new Dockyard_Descr();
+            break;
+         default:   
+            b=0;
+            assert(0); // never here!
+            break;
+      }
+      buildings.add(b);
+      b->read(f);
    }
 
    return RET_OK;
@@ -335,259 +405,4 @@ int Tribe_Descr::parse_regent(Binary_file* f) {
    return OK;
 }
 
-// 
-// Need List
-// 
-int Need_List::read(Binary_file* f) {
-   f->read(&nneeds, sizeof(short));
-   if(!nneeds) {
-      // we're done, this guy is for free
-      return RET_OK;
-   } else if(nneeds==-1) {
-      // this guy can't be assembled in stores
-      return RET_OK;
-   }
 
-   list=(List*) malloc(sizeof(List)*nneeds);
-   
-   int i;
-   for(i=0; i< nneeds; i++) {
-      f->read(&list[i].count, sizeof(ushort));
-      f->read(&list[i].index, sizeof(ushort));
-   }
-
-   return RET_OK;
-}
-
-
-// 
-// class Worker_Descr
-//
-int Worker_Descr::read(Binary_file* f) {
-   uchar temp;
-   
-   f->read(name, sizeof(name));
-
-   f->read(&temp, sizeof(uchar));
-   is_enabled=temp;
-   f->read(&walking_speed, sizeof(ushort));
-
-   needs.read(f);
-
-   ushort w, h, sx, sy;
-   f->read(&w, sizeof(ushort));
-   f->read(&h, sizeof(ushort));
-   f->read(&sx, sizeof(ushort));
-   f->read(&sy, sizeof(ushort));
-
-   walk_ne.set_dimensions(w, h);
-   walk_nw.set_dimensions(w, h);
-   walk_w.set_dimensions(w, h);
-   walk_sw.set_dimensions(w, h);
-   walk_se.set_dimensions(w, h);
-   walk_w.set_dimensions(w, h);
-   walk_ne.set_hotspot(sx, sy);
-   walk_nw.set_hotspot(sx, sy);
-   walk_w.set_hotspot(sx, sy);
-   walk_sw.set_hotspot(sx, sy);
-   walk_se.set_hotspot(sx, sy);
-   walk_w.set_hotspot(sx, sy);
-   
-   read_anim(&walk_ne, f);
-   read_anim(&walk_e, f);
-   read_anim(&walk_se, f);
-   read_anim(&walk_sw, f);
-   read_anim(&walk_w, f);
-   read_anim(&walk_nw, f);
-
-   return RET_OK;
-}
-
-// 
-// class Soldier_Descr
-// 
-int Soldier_Descr::read(Binary_file* f) {
-   
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   
-   f->read(&energy, sizeof(ushort));
-
-   attack_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   attack_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&attack_l, f);
-   attack1_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   attack1_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&attack1_l, f);
-   evade_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   evade_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&evade_l, f);
-   evade1_l.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   evade1_l.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&evade1_l, f);
-
-   attack_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   attack_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&attack_r, f);
-   attack1_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   attack1_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&attack1_r, f);
-   evade_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   evade_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&evade_r, f);
-   evade1_r.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   evade1_r.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&evade1_r, f);
-     
-   return RET_OK;
-}
-
-// Worker class read functions
-int Has_Working_Worker_Descr::read(Binary_file* f) {
-   working.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   working.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&working, f);
-   return RET_OK;
-}
-
-int Has_Working1_Worker_Descr::read(Binary_file* f) {
-   working1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   working1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   read_anim(&working1, f);
-   return RET_OK;
-}
-int Has_Walk1_Worker_Descr::read(Binary_file* f) {
-   walk_ne1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_nw1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_w1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_sw1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_se1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_w1.set_dimensions(walk_ne.get_w(), walk_ne.get_h());
-   walk_ne1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_nw1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_w1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_sw1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_se1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   walk_w1.set_hotspot(walk_ne.get_hsx(), walk_ne.get_hsy());
-   
-   read_anim(&walk_ne1, f);
-   read_anim(&walk_e1, f);
-   read_anim(&walk_se1, f);
-   read_anim(&walk_sw1, f);
-   read_anim(&walk_w1, f);
-   read_anim(&walk_nw1, f);
-
-   return RET_OK;
-}
-int Scientist::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   
-   return RET_OK;
-}
-
-int Searcher::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-
-   // nothing additional 
-   return RET_OK;
-}
-
-int Grower::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-
-   return RET_OK;
-}
-
-int Planter::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-   
-   return RET_OK;
-}
-int SitDigger_Base::read(Binary_file* f) {
-   // Nothing to do
-   return RET_OK;
-}
-int SitDigger::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   
-   // Nothing of our own stuff to read
-   return RET_OK;
-}
-
-int Carrier::read(Binary_file* f) {
-
-   // nothing to do
-   return RET_OK;
-}
-
-int Def_Carrier::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Carrier::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-
-   return RET_OK;
-}
-
-int Add_Carrier::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Carrier::read(f);
-   Has_Walk1_Worker_Descr::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-
-   return RET_OK;
-}
-int Builder::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-   
-   return RET_OK;
-}
-
-int Planer::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Has_Working_Worker_Descr::read(f);
-      
-   return RET_OK;
-}
-
-int Explorer::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-
-   return RET_OK;
-}
-
-int Geologist::read(Binary_file* f) {
-   Worker_Descr::read(f);
-   Menu_Worker_Descr::read(f);
-   SitDigger_Base::read(f);
-   Has_Working_Worker_Descr::read(f);
-   Has_Working1_Worker_Descr::read(f);
-   
-   return RET_OK;
-}

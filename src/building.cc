@@ -17,77 +17,349 @@
  *
  */
 
-#if 0 
-
 #include "widelands.h"
-#include "map.h"
+#include "tribedata.h"
+#include "myfile.h"
+#include "helper.h"
+#include "myfile.h"
+#include "bob.h"
+#include "ware.h"
+#include "worker.h"
 #include "building.h"
-#include "creature.h"
+#include "descr_maintainer.h"
+#include "tribe.h"
 
-Building::Building()
-{
-	this->worker = 0;
-	this->working = false;
+// 
+// Need List
+// 
+int NeedWares_List::read(Binary_file* f) {
+   f->read(&nneeds, sizeof(short));
+   if(!nneeds) {
+      // we're done, this guy is for free
+      return RET_OK;
+   }
+   
+
+   list=(List*) malloc(sizeof(List)*nneeds);
+   
+   int i;
+   for(i=0; i< nneeds; i++) {
+      f->read(&list[i].count, sizeof(ushort));
+      f->read(&list[i].index, sizeof(ushort));
+      f->read(&list[i].stock, sizeof(ushort));
+   }
+
+   return RET_OK;
 }
 
-Building::~Building()
-{
+// 
+// Down here: Descriptions
+
+int Building_Descr::read(Binary_file *f) {
+   f->read(name, sizeof(name));
+
+   uchar temp;
+   f->read(&temp, sizeof(uchar));
+   is_enabled=temp;
+   f->read(&see_area, sizeof(ushort));
+   f->read(&w, sizeof(ushort));
+   f->read(&h, sizeof(ushort));
+   f->read(&hsx, sizeof(ushort));
+   f->read(&hsy, sizeof(ushort));
+
+   idle.set_dimensions(w, h);
+   idle.set_hotspot(hsx, hsy);
+
+   read_anim(&idle, f);
+
+   return RET_OK;
 }
 
-void Building::get_pic(int timekey)
-{
+int Has_Needs_Building_Descr::read(Binary_file *f) {
+   uchar temp;
+   f->read(&temp, sizeof(uchar));
+   needs_or=temp;
+   
+   // read needs
+   needs.read(f);
+   
+   return RET_OK;
 }
 
-void Building::work(int timekey)
-{
-	if (worker)
-	{
-		if (desc.professionType == PROFESSION_SEARCH)
-		{
-			Field* field = worker->find_bob_to_consume();
-			worker->add_task(Creature::TASK_GO, field);
-			worker->add_task(Creature::TASK_PRODUCE, location->get_brn());
-			worker->add_task(Creature::TASK_GO, location);
-			worker->add_task(Creature::TASK_WORK);
-			worker->live(timekey);
-		}
-		else
-		{
-			worker->add_task(Creature::TASK_PRODUCE, location->get_brn());
-			worker->add_task(Creature::TASK_GO, location);
-			worker->add_task(Creature::TASK_WORK);
-			worker->live(timekey);
-		}
-		worker = NULL;
-		working = true;	// fuer die animation; mag sein, dass man den
-						// schmied beim klopfen sieht, mag sein, dass
-						// aus der huette des holzfaellers kein rauch
-						// kommt oder das licht aus ist oder was weiss ich
+int Has_Products_Building_Descr::read(Binary_file *f) {
+   uchar temp;
+    f->read(&temp, sizeof(uchar));
+   products_or=temp;
 
-	}
-	// ausserdem hier: waren anfordern!
+   // read products
+   products.read(f);
+
+   return RET_OK;
 }
 
-void Building::worker_idle(Creature* w)
-{
-	worker = w;
-	working = false;
+int Has_Is_A_Building_Descr::read(Binary_file *f) {
+  f->read(&is_a, sizeof(ushort));
+
+  return RET_OK;
 }
 
-void Building::destroy()
-{
-	if (worker)
-	{
-		worker->clear_tasks();
-		worker->add_task(Creature::TASK_GOHOME);
-	}
+int Buildable_Building_Descr::read(Binary_file *f) {
+     f->read(category, sizeof(category));
+     f->read(&build_time, sizeof(ushort));
+
+     // read cost
+     cost.read(f);
+
+     build.set_dimensions(idle.get_w(), idle.get_h());
+     build.set_hotspot(idle.get_hsx(), idle.get_hsy());
+     
+     read_anim(&build, f); 
+     
+     return RET_OK;
 }
 
-bool Building::add_ware(uint ware)
-{
-	// add ware to this building's stock
-	// return false if this building does not accept that ware
-	return false;
+int Working_Building_Descr::read(Binary_file *f) {
+   working.set_dimensions(idle.get_w(), idle.get_h());
+   working.set_hotspot(idle.get_w(), idle.get_h());
+   
+   read_anim(&working, f);
+
+   return RET_OK;
 }
 
-#endif // 0
+int Boring_Building_Descr::read(Binary_file *f) {
+   // nothing to do
+   return RET_OK;
+}
+
+int Dig_Building_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Working_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+   Has_Products_Building_Descr::read(f);
+
+   // own 
+   f->read(&working_time, sizeof(ushort));
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&worker, sizeof(ushort));
+   f->read(resource, sizeof(resource));
+
+   return RET_OK;
+}
+
+int Search_Building_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+   Has_Products_Building_Descr::read(f);
+
+   // read our own stuff
+   f->read(&working_time, sizeof(ushort));
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&working_area, sizeof(ushort));
+   f->read(&worker, sizeof(ushort));
+   f->read(&nbobs, sizeof(nbobs));
+   bobs=(char*) malloc(nbobs*30);
+   f->read(bobs, nbobs*30);
+
+   return RET_OK;
+}
+
+int Plant_Building_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+
+   // read our own stuff
+   f->read(&working_time, sizeof(ushort));
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&working_area, sizeof(ushort));
+   f->read(&worker, sizeof(ushort));
+   f->read(&nbobs, sizeof(nbobs));
+   bobs=(char*) malloc(nbobs*30);
+   f->read(bobs, nbobs*30);
+
+   return RET_OK;
+}
+
+int Grow_Building_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+   Has_Products_Building_Descr::read(f);
+
+   // own stuff 
+   f->read(&working_time, sizeof(ushort));
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&working_area, sizeof(ushort));
+   f->read(&worker, sizeof(ushort));
+   f->read(plant_bob, sizeof(plant_bob));
+   f->read(search_bob, sizeof(search_bob));
+
+   return RET_OK;
+}
+
+int Sit_Building_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Working_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+   Has_Products_Building_Descr::read(f);
+
+   // our stuff 
+   f->read(&working_time, sizeof(ushort));
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&worker, sizeof(ushort));
+   uchar temp; 
+   f->read(&temp, sizeof(uchar));
+   order_worker=temp;
+
+   return RET_OK;
+}
+
+int Sit_Building_Produ_Worker_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Working_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+
+   // own stuff 
+   f->read(&working_time, sizeof(ushort));
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&worker, sizeof(ushort));
+   f->read(&prod_worker, sizeof(ushort));
+
+   return RET_OK;
+}
+
+int Science_Building_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Working_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+
+   cerr << "Science_Building_Descr::read() TODO!" << endl;
+
+   return RET_OK;
+}
+
+int Military_Building_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+
+   // own stuff
+   f->read(&beds, sizeof(ushort));
+   f->read(&conquers, sizeof(ushort));
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&nupgr, sizeof(ushort));
+
+   return RET_OK;
+}
+
+int Cannon_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+
+   uchar temp;
+   // own stuff 
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&projectile_speed, sizeof(ushort));
+   f->read(&temp, sizeof(uchar));
+   fires_balistic=temp;
+   f->read(&worker, sizeof(ushort));
+   //                         // width and height ob projectile bob
+   ushort wproj, hproj;
+   f->read(&wproj, sizeof(ushort));
+   f->read(&hproj, sizeof(ushort));
+
+   projectile.set_dimensions(wproj, hproj);
+   projectile.set_hotspot(wproj/2, hproj/2);
+
+   fire_ne.set_dimensions(idle.get_w(), idle.get_h());
+   fire_ne.set_hotspot(idle.get_hsx(), idle.get_hsy());
+   fire_e.set_dimensions(idle.get_w(), idle.get_h());
+   fire_e.set_hotspot(idle.get_hsx(), idle.get_hsy());
+   fire_se.set_dimensions(idle.get_w(), idle.get_h());
+   fire_se.set_hotspot(idle.get_hsx(), idle.get_hsy());
+   fire_sw.set_dimensions(idle.get_w(), idle.get_h());
+   fire_sw.set_hotspot(idle.get_hsx(), idle.get_hsy());
+   fire_w.set_dimensions(idle.get_w(), idle.get_h());
+   fire_w.set_hotspot(idle.get_hsx(), idle.get_hsy());
+   fire_nw.set_dimensions(idle.get_w(), idle.get_h());
+   fire_nw.set_hotspot(idle.get_hsx(), idle.get_hsy());
+
+   read_anim(&projectile, f);
+   read_anim(&fire_ne, f);
+   read_anim(&fire_e, f);
+   read_anim(&fire_se, f);
+   read_anim(&fire_sw, f);
+   read_anim(&fire_w, f);
+   read_anim(&fire_nw, f);
+
+   return RET_OK;
+}
+
+int HQ_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+
+   // own 
+   f->read(&conquers, sizeof(ushort));
+
+   return RET_OK;
+}
+
+int Store_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+
+   // nothing else
+
+   return RET_OK;
+}
+
+int Dockyard_Descr::read(Binary_file *f) {
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+   Has_Is_A_Building_Descr::read(f);
+   Has_Needs_Building_Descr::read(f);
+
+   // own
+   f->read(&working_time, sizeof(ushort));
+   f->read(&idle_time, sizeof(ushort));
+   f->read(&worker, sizeof(ushort));
+
+   return RET_OK;
+}
+
+int Port_Descr::read(Binary_file *f) {
+
+   Building_Descr::read(f);
+   Boring_Building_Descr::read(f);
+   Buildable_Building_Descr::read(f);
+
+   // nothing else
+
+   return RET_OK;
+}
+
+

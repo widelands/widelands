@@ -21,6 +21,7 @@
 #define __S__HELPER_H
 
 // TODO: This _has_ to be rearranged, and those functions aren't used anyway
+// mmh, i use them. this should go somewhere into widelands.h, don't you agree? // Holger 
 
 // helper.cc define some helper functions which are
 // either usefull or sometimes strangely defined (for example

@@ -34,6 +34,7 @@
  * init
  */
 Game::Game(void) {
+   hinst= new Instance_Handler(MAX_OBJS);
    queue = new Cmd_Queue(this);
    map=0;
    frame_count=0;
@@ -45,6 +46,7 @@ Game::Game(void) {
  * cleanup
  */
 Game::~Game(void) {
+   delete hinst; 
    delete queue;
    delete map;
 }
@@ -67,6 +69,13 @@ int Game::set_map(const char* mapname) {
 #include "ui.h"
 #include "fileloc.h"
 #include "worldfiletypes.h"
+#include "myfile.h"
+#include "graphic.h"
+#include "descr_maintainer.h"
+#include "bob.h"
+#include "ware.h"
+#include "worker.h"
+#include "building.h"
 #include "tribe.h"
 void Game::run(void) {
    // TEMP

@@ -44,23 +44,7 @@ class Building_Descr : virtual public File_Descr {
       virtual Worker_Descr* get_worker(void)=0;
 
    protected:
-      enum {
-         SIT = 0,
-         SIT_PRODU_WORKER,
-         DIG,
-         SEARCH,
-         GROW,
-         PLANT, 
-         SCIENCE,
-         MILITARY,
-         CANNON,
-         SPEC_HQ,
-         SPEC_STORE,
-         SPEC_PORT,
-         SPEC_DOCKYARD
-      };
-
-      int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew=0, ushort* eh=0);
+     int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew=0, ushort* eh=0);
 
    private: 
       char name[30];

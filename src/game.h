@@ -26,6 +26,9 @@
 //   logic frame length (more often)
 #define FRAME_LENGTH 250   
 
+// TODO: make this configurable through conf file or cmdline
+#define MAX_OBJS 50000  // might not be enough
+
 /** class Player
  *
  * pure virtual class to define, what a player must be able to do
@@ -43,6 +46,7 @@ class Player {
 #include "counter.h"
 #include "descr_maintainer.h"
 #include "cmd_queue.h"
+#include "instances.h"
 
 /** class Game
  *
@@ -70,6 +74,7 @@ class Game {
 					 Player** pls;
 					 Interactive_Player* ipl;
                 Cmd_Queue* queue;
+                Instance_Handler* hinst;
                 Counter counter;
                 ulong frame_count;
 };

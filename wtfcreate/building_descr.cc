@@ -19,6 +19,7 @@
 
 #include "../src/widelands.h"
 #include "../src/graphic.h"
+#include "../src/tribedata.h"
 #include "building_descr.h"
 #include "need_list.h"
 

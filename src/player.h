@@ -20,7 +20,6 @@
 #ifndef __S__PLAYER_H
 #define __S__PLAYER_H
 
-#include "tribe.h"
 
 //
 // This defines a player class. 

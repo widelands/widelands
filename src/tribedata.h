@@ -47,5 +47,20 @@
 #define SPEC_EXPLORER	   10
 #define SPEC_GEOLOGIST     11
 
+#define SIT       			0
+#define SIT_PRODU_WORKER	1
+#define DIG			         2
+#define SEARCH			      3
+#define GROW			      4
+#define PLANT			      5 
+#define SCIENCE			   6
+#define MILITARY			   7
+#define CANNON			      8
+#define SPEC_HQ			   9
+#define SPEC_STORE		   10
+#define SPEC_PORT			   11
+#define SPEC_DOCKYARD      12
+
+ 
  
 #endif /* __S__TRIBEDATA_H */

@@ -103,8 +103,15 @@ widelands_SOURCES=main.cc \
                   building.h \
                   building.cc \
                   creature.h \
-                  creature.cc 
+                  creature.cc \
+                  instances.h \
+                  instances.cc \
+                  ware.h \
+                  ware.cc \
+                  worker.h \
+                  worker.cc
 
+# TO INCLUDE IN CVS: ab instances.h
 
 
 #  uncomment the following if widelands requires the math library

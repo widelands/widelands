@@ -374,8 +374,9 @@ int Map::load_s2mf(const char* filen, Cmd_Queue* q) {
            for(x=0; x<hd.width; x++, i++) {
               // ignore everything but HQs
               if(section[i]==0x80) {
-                 // cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl; 
-                 q->queue(SENDER_LOADER, CMD_WARP_BUILDING, bobs[i], 0, 0);
+                 // cerr << x << ":" << y << ": HQ here! player: " << (int) bobs[i] << endl;
+                 Point* p = (Point*) malloc(sizeof(Point)); 
+                 q->queue(SENDER_LOADER, CMD_WARP_BUILDING, bobs[i], 0, p);
               }
            }
         }

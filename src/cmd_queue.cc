@@ -67,7 +67,6 @@ int Cmd_Queue::run_queue(void) {
                // TODO: make this better
                assert(0) ;
             }
-            free(c->arg3); c->arg3=0;
             break;
 
          case CMD_WARP_BUILDING:
@@ -78,6 +77,11 @@ int Cmd_Queue::run_queue(void) {
          default:
             cerr << "Unknown Queue_Cmd: " << c->cmd << endl;
             break;
+      }
+            
+      if(c->arg3) {
+         free(c->arg3); 
+         c->arg3=0;
       }
       
       i++;
