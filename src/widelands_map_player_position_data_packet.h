@@ -17,17 +17,22 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_IDS_H
+#ifndef __S__WIDELANDS_MAP_PLAYER_POSITION_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_PLAYER_POSITION_DATA_PACKET_H
+
+#include "widelands_map_data_packet.h"
 
 /*
- * This file contains the ids (the magic bytes) of all data packets
- * so that the packet creation fabric can create the right packet 
- * reader, all IDs are ushorts
+ * The heights data packet contains the heights of all fields
  */
-#define PACKET_HEIGHTS          1
-#define PACKET_TERRAINS         2
-#define PACKET_IMMOVABLE        3
-#define PACKET_PLAYER_POSITION  4
+class Widelands_Map_Player_Position_Data_Packet : public Widelands_Map_Data_Packet {
+   public:
+      virtual ~Widelands_Map_Player_Position_Data_Packet();
+
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
+};
+
+
 #endif
 

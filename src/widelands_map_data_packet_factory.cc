@@ -22,12 +22,14 @@
 #include "widelands_map_heights_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_immovable_data_packet.h"
+#include "widelands_map_player_position_data_packet.h"
 
 Widelands_Map_Data_Packet* Widelands_Map_Data_Packet_Factory::create_correct_packet(ushort id) throw(wexception) {
     switch(id) {
       case PACKET_HEIGHTS: return new Widelands_Map_Heights_Data_Packet(); break;
       case PACKET_TERRAINS: return new Widelands_Map_Terrain_Data_Packet(); break;
       case PACKET_IMMOVABLE: return new Widelands_Map_Immovable_Data_Packet(); break;
+      case PACKET_PLAYER_POSITION: return new Widelands_Map_Player_Position_Data_Packet(); break;
       default: throw wexception("Unknown Packet_Data_ID in map file: %i\n", id); break;
     }
     // never here

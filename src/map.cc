@@ -330,6 +330,7 @@ void Map::create_empty_map(int w, int h, std::string worldname) {
    set_name("No Name");
    set_author("Unknown");
    set_description("no description defined");
+   set_nrplayers(1);
 
    for(int y=0; y<h; y++) {
       for(int x=0; x<w; x++) {
@@ -393,7 +394,7 @@ void Map::set_nrplayers(uint nrplayers)
 
 	m_starting_pos = (Coords*)realloc(m_starting_pos, sizeof(Coords)*nrplayers);
 	while(m_nrplayers < nrplayers)
-		m_starting_pos[m_nrplayers++] = Coords(0, 0);
+		m_starting_pos[m_nrplayers++] = Coords(-1, -1);
 
 	m_nrplayers = nrplayers; // in case the number players got less
 }

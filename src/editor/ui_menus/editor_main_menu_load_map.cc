@@ -29,6 +29,8 @@
 #include "wexception.h"
 #include "error.h"
 #include "editor_game_base.h"
+#include "editor_set_starting_pos_tool.h"
+#include "overlay_manager.h"
 
 /*
 ===============
@@ -118,7 +120,24 @@ void Main_Menu_Load_Map::clicked(int id) {
   
    m_parent->get_editor()->postload();
    m_parent->get_editor()->load_graphics();
-      
+     
+   // Now update all the visualisations
+   // Player positions
+   std::string text;
+   int i=0;
+   for(i=1; i<=m_parent->get_map()->get_nrplayers(); i++) {
+      text="pics/editor_player_";
+      text+=static_cast<char>(((i)/10) + 0x30);
+      text+=static_cast<char>(((i)%10) + 0x30);
+      text+="_starting_pos.png";
+      Coords fc=m_parent->get_map()->get_starting_pos(i);
+
+      int w, h;
+      int picid=g_gr->get_picture(PicMod_Game, text.c_str(), RGBColor(0,0,255));
+      g_gr->get_picture_size(picid, &w, &h);
+      m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
+   }
+
    delete ml;
    }
    die();

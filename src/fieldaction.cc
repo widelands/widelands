@@ -31,6 +31,7 @@
 #include "ui_tabpanel.h"
 #include "ui_unique_window.h"
 #include "watchwindow.h"
+#include "error.h"
 
 class Building_Descr;
 
@@ -445,7 +446,8 @@ It resets the mouse to its original position and closes the window
 */
 void FieldActionWindow::okdialog()
 {
-	m_player->warp_mouse_to_field(m_field);
+   log("Ok dialog: %i,%i\n", m_field.x, m_field.y);
+   m_player->warp_mouse_to_field(m_field);
 	die();
 }
 

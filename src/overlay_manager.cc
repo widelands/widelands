@@ -162,7 +162,7 @@ void Overlay_Manager::recalc_field_overlays(FCoords& fc, FCoords* neighbours) {
    if(!code) { // do not calculate further if there is a border
       // Determine the buildhelp icon for that field
       int buildcaps=0;
-      if(m_callback) { 
+      if(m_callback) {
          buildcaps = m_callback(fc, m_callback_data);
       } else {
          buildcaps = fc.field->get_caps(); 

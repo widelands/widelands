@@ -37,6 +37,7 @@
 #include "editor_set_right_terrain_tool.h"
 #include "editor_increase_height_tool.h"
 #include "editor_noise_height_tool.h"
+#include "editor_set_starting_pos_tool.h"
 
 /**********************************************
  *
@@ -95,6 +96,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Noise_Height_Tool(sht));
    tools.tools.push_back(new Editor_Set_Both_Terrain_Tool(new Editor_Set_Down_Terrain_Tool(), new Editor_Set_Right_Terrain_Tool()));
    tools.tools.push_back(new Editor_Place_Immovable_Tool(new Editor_Delete_Immovable_Tool()));
+   tools.tools.push_back(new Editor_Set_Starting_Pos_Tool());
 
 /*   tools.tools.push_back(new Tool_Info(1, 3, new Editor_Decrease_Height_Tool()));
    tools.tools.push_back(new Tool_Info(1, 2, new Editor_Set_Height_Tool()));
@@ -200,7 +202,6 @@ void Editor_Interactive::tool_menu_btn()
 	if (m_toolmenu.window)
 		delete m_toolmenu.window;
 	else
-		//new Editor_Preliminary_Tool_Menu(this, &m_toolmenu, &tools);
 		new Editor_Tool_Menu(this, &m_toolmenu, &tools);
 }
 
@@ -312,10 +313,17 @@ select a new tool
 ===========
 */
 void Editor_Interactive::select_tool(int n, int which) {
+   // A new tool has been selected. Remove all 
+   // registered overlay callback functions
+   get_map()->get_overlay_manager()->register_overlay_callback_function(0,0);
+   get_map()->recalc_whole_map();
+
    tools.current_tool_index=n;
    tools.use_tool=which;
 
-   set_fieldsel_picture(tools.tools[n]->get_fsel(which));
+   const char* fselpic= tools.tools[n]->get_fsel(which);
+   if(!fselpic) unset_fieldsel_picture();
+   else set_fieldsel_picture(fselpic);
 }
 
 
