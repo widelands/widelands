@@ -25,8 +25,8 @@
 #include "map.h"
 #include "fileloc.h"
 
-// TEMP
-// #include <iostream.h>
+// TEMP, TODO
+#include <iostream.h>
 
 /** int Map::load_s2mf(const char* filen) 
  *
