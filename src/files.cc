@@ -596,7 +596,7 @@ int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *
 	long hFile;
 	int count;
 
-	if (path)
+	if (path.size())
 		buf = m_directory + '\\' + path + '\\' + pattern;
 	else
 		buf = m_directory + '\\' + pattern;

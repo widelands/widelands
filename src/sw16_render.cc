@@ -397,7 +397,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 			break;
 	
 		// Load the image
-		SDL_Surface* bmp;
+		SDL_Surface* bmp = 0;
 
 		try
 		{
