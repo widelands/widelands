@@ -204,11 +204,6 @@ void Editor_Increase_Height_Tool_Options_Menu::button_clicked(int n) {
    char buf[250];
    sprintf(buf, "Increase by: %i", *m_changed_by);
    m_textarea->set_text(buf);
-   
-   // TEMP, TODO
-   std::cerr << "Actual: " << m_parent->get_fieldsel_radius() << ", New: " << val << std::endl;
-   m_parent->set_fieldsel_radius(val);
-   // TEMP ENDS
 }
 
 /*

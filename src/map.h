@@ -92,14 +92,18 @@ struct FindBob {
  */
 class Map {
 	friend class Editor_Game_Base;
-
+   friend class Map_Loader;
+   friend class S2_Map_Loader;
+   
 public:
 	struct Pathfield;
                
-	Map(const char* filename);
-	~Map();
+   Map(); 
+   ~Map();
 
-	void postload(Editor_Game_Base* g);
+   // For loading
+   Map_Loader* get_correct_loader(const char*);
+   
 	void load_graphics();
 	
 	void set_nrplayers(uint nrplayers);
@@ -108,16 +112,15 @@ public:
 	inline const Coords &get_starting_pos(uint plnum) { return m_starting_pos[plnum-1]; }
 	
 	void set_author(const char *string);
+	void set_world_name(const char *string);
 	void set_name(const char *string);
 	void set_description(const char *string);
 	
-	void load_map_header();
-
 	// informational functions
 	inline const char* get_author(void) { return m_author; }
 	inline const char* get_name(void) { return m_name; }
 	inline const char* get_description(void) { return m_description; }
-	inline const char* get_world_name(void) { return m_world->get_name(); }
+	inline const char* get_world_name(void) { return m_worldname; }
 	inline ushort get_nrplayers(void) { return m_nrplayers; }
 	inline uint get_width(void) { return m_width; }
 	inline uint get_height(void) { return m_height; }
@@ -195,15 +198,15 @@ public:
 
 private:
 	void set_size(uint w, uint h);
-	void set_world_name(const char *string);
+	void load_world();
 	
-	char		m_filename[128];
 	uint		m_nrplayers;		// # of players this map supports (!= Game's number of players)
 	uint		m_width;
 	uint		m_height;
 	char		m_author[61];
 	char		m_name[61];
 	char		m_description[1024];
+	char		m_worldname[1024];
 	World*	m_world;				// world type
 	Coords*	m_starting_pos;	// players' starting positions
 	
@@ -211,11 +214,6 @@ private:
 
 	ushort		m_pathcycle;
 	Pathfield*	m_pathfields;
-
-	// funcs
-	void load_s2mf(Editor_Game_Base*);
-	void load_s2mf_header();
-	uchar *load_s2mf_section(FileRead *file, int width, int height);
 
 	//int load_wlmf(const char*, Game*);
 	void recalc_brightness(int fx, int fy, Field *f);
@@ -735,5 +733,60 @@ class Map_Region_Coords {
       Map* _map;
 };
 
+/*
+=============================
+
+class Map_Loader
+
+This class loads a map from a file. It firsts only loads
+small junks of informations like size, nr of players for the
+map select dialog. For this loading function the same class Map* can be reused.
+Then, when the player has a map selected, the Map is completly filled with
+objects and information. When now the player selects another map, this class Map* 
+must be deleted, a new one must be selected
+
+=============================
+*/
+class Map_Loader {
+   public:
+      Map_Loader(const char*, Map*) { m_s=STATE_INIT; m_map=0; }
+      virtual ~Map_Loader() { };
+      
+      virtual int preload_map()=0;
+      virtual int load_map_complete(Editor_Game_Base*)=0;
+
+      inline Map* get_map() { assert(m_map); return m_map; }
+      
+   protected:
+      bool exists_world(const char*);
+
+      enum State {
+         STATE_INIT,
+         STATE_PRELOADED,
+         STATE_LOADED
+      };
+      void set_state(State s) { m_s=s; }
+      State get_state(void) { return m_s; }
+      Map* m_map;
+      
+   private:
+      State m_s;
+};
+
+class S2_Map_Loader : public Map_Loader {
+   public:
+      S2_Map_Loader(const char*, Map*);
+      virtual ~S2_Map_Loader();
+
+      virtual int preload_map();
+      virtual int load_map_complete(Editor_Game_Base*);
+   
+   private:
+      char  m_filename[256];
+
+      uchar *load_s2mf_section(FileRead *, int width, int height);
+      void  load_s2mf_header();
+      void  load_s2mf(Editor_Game_Base*);
+};
 
 #endif // __S__MAP_H

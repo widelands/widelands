@@ -220,9 +220,6 @@ void Editor_Game_Base::postload()
 	uint id;
 	int pid;
 
-	// Postload the map
-	m_map->postload(this);
-	
 	// Postload tribes
 	id = 0;
 	while(id < m_tribes.size()) {

@@ -57,7 +57,7 @@ and go for it
 void Editor::run() {
   
    // TEMP
-   set_map(new Map("maps/duell.swd"));
+//   set_map(new Map("maps/duell.swd"));
 //   set_map(new Map("maps/deutsch.swd"));
 
    g_gr->flush(PicMod_Menu);

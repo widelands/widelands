@@ -55,6 +55,124 @@ struct Map::Pathfield {
 	inline int cost() { return real_cost + estim_cost; }
 };
 
+/*
+=============================
+
+class Map_Loader
+
+=============================
+*/
+bool Map_Loader::exists_world(const char* worldname) {
+   char buf[256];
+
+   snprintf(buf, sizeof(buf), "worlds/%s/conf", worldname);
+   FileRead f;
+   return f.TryOpen(g_fs, buf);
+}
+
+/*
+=============================
+
+class S2_Map_Loader
+
+implementation of the S2 Map Loader
+
+=============================
+*/
+
+/*
+===========
+S2_Map_Loader::S2_Map_Loader()
+
+inits the map loader
+===========
+*/
+S2_Map_Loader::S2_Map_Loader(const char* filename, Map* map) :
+   Map_Loader(filename, map) {
+	snprintf(m_filename, sizeof(m_filename), "%s", filename);
+   m_map=map;
+   
+}
+
+/*
+===========
+S2_Map_Loader::~S2_Map_Loader()
+
+cleanups
+===========
+*/
+S2_Map_Loader::~S2_Map_Loader() {
+}
+
+/*
+===========
+S2_Map_Loader::preload_map() 
+
+preloads the map. The map will then return valid
+infos when get_width() or get_nrplayers(), 
+get_author() and so on are called
+
+load the header
+===========
+*/
+int S2_Map_Loader::preload_map() {
+   assert(get_state()!=STATE_LOADED);
+   
+   load_s2mf_header();
+	
+   if(!exists_world(m_map->get_world_name())) {
+      throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
+   }
+   
+   set_state(STATE_PRELOADED);
+   
+   return 0;
+}
+
+/*
+===========
+S2_Map_Loader::load_map_complete()
+
+Completly loads the map, loads the 
+corresponding world, loads the graphics 
+and places all the objects. From now on
+the Map* can't be set to another one.
+===========
+*/
+int S2_Map_Loader::load_map_complete(Editor_Game_Base* game) {
+
+   // now, load the world, load the rest infos from the map
+   m_map->load_world(); 
+   // Postload the world which provides all the immovables found on a map
+   m_map->m_world->postload(game);
+   m_map->set_size(m_map->m_width, m_map->m_height);
+   load_s2mf(game);
+
+
+   // Post process the map in the necessary two passes to calculate 
+   // brightness and building caps
+   Field *f;
+   uint y;
+   for(y=0; y<m_map->m_height; y++) {
+      for(uint x=0; x<m_map->m_width; x++) {
+         f = m_map->get_field(x, y);
+         m_map->recalc_brightness(x, y, f);
+         m_map->recalc_fieldcaps_pass1(x, y, f);
+      }
+   }
+
+   for(y=0; y<m_map->m_height; y++) {
+      for(uint x=0; x<m_map->m_width; x++) {
+         f = m_map->get_field(x, y);
+         m_map->recalc_fieldcaps_pass2(x, y, f);
+      }
+   }
+   
+   set_state(STATE_LOADED);
+   
+   return 0;
+}
+
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -64,13 +182,11 @@ struct Map::Pathfield {
 ===============
 Map::Map
 
+Inits a clean, empty map
 Preload the map. This only loads the map header.
 ===============
 */
-Map::Map(const char* filename)
-{
-	snprintf(m_filename, sizeof(m_filename), "%s", filename);
-
+Map::Map(void) {
 	m_nrplayers = 0;
 	m_width = m_height = 0;
 	m_world = 0;
@@ -79,8 +195,6 @@ Map::Map(const char* filename)
 
 	m_pathcycle = 0;
 	m_pathfields = 0;
-	
-	load_map_header();
 }
 
 /*
@@ -175,6 +289,7 @@ void Map::set_starting_pos(uint plnum, Coords c)
 Map::set_author
 Map::set_name
 Map::set_description
+Map::set_world_name
 
 Set informational strings
 ===============
@@ -194,101 +309,25 @@ void Map::set_description(const char *string)
 	snprintf(m_description, sizeof(m_description), "%s", string);
 }
 
+void Map::set_world_name(const char *string)
+{
+	snprintf(m_worldname, sizeof(m_worldname), "%s", string);
+}
+
 /*
 ===============
-Map::set_world_name
+Map::load_world
 
-Set the world name and load the corresponding world. This should only happen
+load the corresponding world. This should only happen
 once during initial load.
 ===============
 */
-void Map::set_world_name(const char *string)
+void Map::load_world(void)
 {
 	assert(!m_world);
 	
-	m_world = new World(string);
+	m_world = new World(m_worldname);
 }
-
-
-/*
-===============
-Map::load_map_header [private]
-
-Loads the map header, called from the constructor.
-Throws an exception if the loader failed (map is invalid).
-===============
-*/
-void Map::load_map_header()
-{
-   if(!strcasecmp(m_filename+(strlen(m_filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
-   {
-		throw wexception("TODO: WLMF not implemented");
-   }
-   else if (!strcasecmp(m_filename+(strlen(m_filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
-   {
-      // it is a S2 Map file. load it as such
-		try {
-			load_s2mf_header();
-		} catch(std::exception &e) {
-			throw wexception("Couldn't load map %s: %s", m_filename, e.what());
-		}
-	}
-	else
-		throw wexception("Map filename %s has unknown extension", m_filename);
-}
-
-
-/*
-===============
-Map::postload
-
-Actually load the entire map, initialize map elements etc...
-===============
-*/
-void Map::postload(Editor_Game_Base* g)
-{
-	try
-	{
-		// Postload the world which provides all the immovables found on a map
-		m_world->postload(g);
-	
-		// Now load the bulk of the map
-		if(!strcasecmp(m_filename+(strlen(m_filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
-		{
-			throw wexception("TODO: WLMF not supported");
-		}
-		else if(!strcasecmp(m_filename+(strlen(m_filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
-		{
-			// it is a S2 Map file. load it
-			load_s2mf(g);
-		}
-		else
-			throw wexception("Unknown map file format");
-
-		// Post process the map in the necessary two passes to calculate 
-		// brightness and building caps
-		Field *f;
-		uint y;
-		for(y=0; y<m_height; y++) {
-			for(uint x=0; x<m_width; x++) {
-				f = get_field(x, y);
-				recalc_brightness(x, y, f);
-				recalc_fieldcaps_pass1(x, y, f);
-			}
-		}
-
-		for(y=0; y<m_height; y++) {
-			for(uint x=0; x<m_width; x++) {
-				f = get_field(x, y);
-				recalc_fieldcaps_pass2(x, y, f);
-			}
-		}
-	}
-	catch(std::exception &e) {
-		throw wexception("Postloading map failed: %s", e.what());
-	}
-}
-
 
 /*
 ===============
@@ -1078,6 +1117,31 @@ void Map::get_neighbour(const FCoords f, int dir, FCoords * const o)
 	}
 }
 
+/*
+===========
+Map::get_correct_loader()
+
+returns the correct initialized loader for
+the given mapfile
+===========
+*/
+Map_Loader* Map::get_correct_loader(const char* filename) {
+   Map_Loader* retval=0;
+   
+   if(!strcasecmp(filename+(strlen(filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+   {
+      throw wexception("TODO: WLMF not implemented");
+   }
+   else if (!strcasecmp(filename+(strlen(filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
+   {
+      // it is a S2 Map file. load it as such
+      retval=new S2_Map_Loader(filename, this);
+   }
+   else
+      throw wexception("Map filename %s has unknown extension", filename);
+
+   return retval;
+}
 
 /** class StarQueue
  *

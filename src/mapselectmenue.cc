@@ -50,8 +50,9 @@ class MapSelectMenu : public BaseMenu {
 
 	filenameset_t	m_mapfiles;
 	
-	Map*			m_map;
-	
+	Map_Loader*			m_maploader;
+	Map*              m_map;
+   
 public:
 	MapSelectMenu(Game *g);
 	~MapSelectMenu();
@@ -66,8 +67,9 @@ MapSelectMenu::MapSelectMenu(Game *g)
 	: BaseMenu("choosemapmenu.bmp")
 {
 	game = g;
-	m_map = 0;
-
+	m_maploader = 0;
+   m_map = new Map;
+   
 	// Text
 	new Textarea(this, MENU_XRES/2, 140, "Choose your map!", Align_HCenter);
 
@@ -119,33 +121,42 @@ MapSelectMenu::MapSelectMenu(Game *g)
 
 MapSelectMenu::~MapSelectMenu()
 {
-	if (m_map) {
-		delete m_map;
-		m_map = 0;
+	if (m_maploader) {
+		delete m_maploader;
+		m_maploader = 0;
 	}
+   if(m_map) {
+      // upsy, obviously ok was not pressed
+      delete m_map;
+      m_map=0;
+   }
 }
 
 
 void MapSelectMenu::ok()
 {
-	game->set_map(m_map);
-	m_map = 0;
-	
+	game->set_map(m_maploader->get_map());
+	m_maploader->load_map_complete(game);
+   m_map=0;
+   
 	end_modal(1);
 }
 
 void MapSelectMenu::map_selected(int id)
 {
-	if (m_map) {
-		delete m_map;
-		m_map = 0;
+	if (m_maploader) {
+		delete m_maploader;
+		m_maploader = 0;
 	}
 	
 	if (get_mapname())
 	{
-		try {
-			m_map = new Map(get_mapname());
-		
+		assert(m_map); 
+      
+      try {
+         m_maploader = m_map->get_correct_loader(get_mapname());
+	      m_maploader->preload_map();
+
 			char buf[256];
 			taname->set_text(m_map->get_name());
 			taauthor->set_text(m_map->get_author());

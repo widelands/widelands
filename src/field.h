@@ -94,6 +94,8 @@ class BaseImmovable;
 
 class Field {
    friend class Map;
+   friend class Map_Loader;
+   friend class S2_Map_Loader;
 	friend class Bob;
 	friend class BaseImmovable;
 	
