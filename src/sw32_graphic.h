@@ -20,7 +20,7 @@
 #ifndef included_sw32_graphic_h
 #define included_sw32_graphic_h
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 class AnimationData;
 class EncodeData;

@@ -19,7 +19,7 @@
 
 #include "widelands.h"
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #include "options.h"
 #include "graphic.h"
