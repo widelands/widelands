@@ -99,11 +99,10 @@ void setup_searchpaths(int argc, char **argv)
 	if (slash != std::string::npos) {
 		exename.erase(slash);
 		if (exename != ".") {
+			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
 #ifdef USE_DATAFILE
 			exename.append ("/widelands.dat");
 			g_fs->AddFileSystem(new Datafile(exename.c_str()));
-#else
-			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
 #endif
 		}
 	}

@@ -95,7 +95,7 @@ struct Bitmap {
 			Field * const lf, Field * const ft,
 	                const int posx, const int rposx, const int posy,
 	                const int blposx, const int rblposx, const int blposy,
-	                uchar roads, bool render_r, bool render_b);
+	                uchar roads, uchar darken);
 };
 
 

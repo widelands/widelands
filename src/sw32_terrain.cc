@@ -482,7 +482,7 @@ static void render_triangle(Bitmap* dst, const Vertex& p1, const Vertex& p2,
 	}
 }
 
-
+#if 0
 struct Edge {
 	Point start;
 	Point end;
@@ -562,7 +562,6 @@ static void calculate_edges(EdgeBuffer* buf, Point p1, Point p2, Point p3)
 
 	assert(buf->numedges != 1);
 }
-
 
 /*
 ===============
@@ -664,6 +663,7 @@ static void fill_triangle(Bitmap* dst, Point p1, Point p2, Point p3, uint color)
 		}
 	}
 }
+#endif
 
 
 #define ftofix(f) ((int) ((f)*0x10000))
@@ -910,7 +910,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 			Field * const lf, Field * const ft,
 	                const int posx, const int rposx, const int posy,
 	                const int blposx, const int rblposx, const int blposy,
-	                uchar roads, bool render_r, bool render_b)
+	                uchar roads, uchar darken)
 {
 	Vertex r, l, br, bl;
 
@@ -919,36 +919,24 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	br = Vertex(rblposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(rfl->get_height()), rfl->get_brightness(), 0, 63);
 	bl = Vertex(blposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(fl->get_height()), fl->get_brightness(), 63, 63);
 
-/*
-	r.b += 20; // debug override for shading (make field borders visible)
-	bl.b -= 20;
-*/
-
-//	render_r=false; // debug overwrite: just render b triangle
-//	render_b=false; // debug overwrite: just render r triangle
+	if (darken&1) l.b=-128;
+	if (darken&2) r.b=-128;
+	if (darken&4) bl.b=-128;
+	if (darken&8) br.b=-128;
 
 	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
 	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
 
-   Bitmap *rt_normal= get_graphicimpl()->get_road_texture( Road_Normal );
-   Bitmap *rt_busy= get_graphicimpl()->get_road_texture( Road_Busy );
+	Bitmap *rt_normal= get_graphicimpl()->get_road_texture( Road_Normal );
+	Bitmap *rt_busy= get_graphicimpl()->get_road_texture( Road_Busy );
 
 	// Render right triangle
-	if(render_r)
-	{
-		if (rtex)
-			render_triangle(this, r, l, br, rtex);
-	}
-	else
-		fill_triangle(this, r, l, br, 0);
+	if (rtex)
+		render_triangle(this, r, l, br, rtex);
 
-	if(render_b)
-	{
-		if (btex)
-			render_triangle(this, l, br, bl, btex);
-	}
-	else
-		fill_triangle(this, l, br, bl, 0);
+	// Render bottom triangle
+	if (btex)
+		render_triangle(this, l, br, bl, btex);
 
 	Texture* ltex = get_graphicimpl()->get_maptexture_data(lf->get_terr()->get_texture());
 	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd()->get_texture());
@@ -957,7 +945,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	uchar road;
 
 	road = (roads >> Road_East) & Road_Mask;
-	if (render_r) {
+	if (!(darken&3)) {
       if (road) {
          switch(road) {
             case Road_Normal: render_road_horiz(this, l, r, rt_normal); break; 
@@ -971,7 +959,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 
 	// FIXME: this will try to work on some undiscovered terrain
 	road = (roads >> Road_SouthEast) & Road_Mask;
-	if (render_r || render_b) {
+	if (!(darken&9)) {
       if (road) {
          switch(road) {
             case Road_Normal: render_road_vert(this, l, br, rt_normal); break; 
@@ -984,7 +972,7 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	}
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
-	if (render_b) {
+	if (!(darken&5)) {
 		if (road) {
          switch(road) {
             case Road_Normal: render_road_vert(this, l, bl, rt_normal); break; 
