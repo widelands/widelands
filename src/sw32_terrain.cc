@@ -846,7 +846,7 @@ render_road_vert
 Render a road. This is really dumb right now, not using a texture
 ===============
 */
-static void render_road_horiz(Bitmap *dst, Point start, Point end, uint color)
+static void render_road_horiz(Bitmap *dst, Point start, Point end, Bitmap* src)
 {
 	int dstw = dst->w;
 	int dsth = dst->h;
@@ -854,7 +854,7 @@ static void render_road_horiz(Bitmap *dst, Point start, Point end, uint color)
 	int ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int centery = start.y << 16;
 
-	for(int x = start.x; x < end.x; x++, centery += ydiff) {
+	for(int x = start.x, sx = 0; x < end.x; x++, centery += ydiff, sx ++) {
 		if (x < 0 || x >= dstw)
 			continue;
 
@@ -865,12 +865,12 @@ static void render_road_horiz(Bitmap *dst, Point start, Point end, uint color)
 				continue;
 
 	      uint *pix = dst->pixels + y*dst->pitch + x;
-			*pix = color;
+			*pix = * (src->pixels + i*src->pitch + sx ) ;
 		}
 	}
 }
 
-static void render_road_vert(Bitmap *dst, Point start, Point end, uint color)
+static void render_road_vert(Bitmap *dst, Point start, Point end, Bitmap* src)
 {
 	int dstw = dst->w;
 	int dsth = dst->h;
@@ -878,7 +878,7 @@ static void render_road_vert(Bitmap *dst, Point start, Point end, uint color)
 	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int centerx = start.x << 16;
 
-	for(int y = start.y; y < end.y; y++, centerx += xdiff) {
+	for(int y = start.y, sy = 0; y < end.y; y++, centerx += xdiff, sy ++ ) {
 		if (y < 0 || y >= dsth)
 			continue;
 
@@ -889,7 +889,7 @@ static void render_road_vert(Bitmap *dst, Point start, Point end, uint color)
 				continue;
 
 			uint *pix = dst->pixels + y*dst->pitch + x;
-			*pix = color;
+			*pix = * (src->pixels + sy*src->pitch + i ) ;
 		}
 	}
 }
@@ -927,6 +927,8 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
 	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
 
+   Road_Textures* rt = get_graphicimpl()->get_road_textures();
+
 	// Render right triangle
 	if(render_r)
 	{
@@ -948,19 +950,17 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd()->get_texture());
 
 	// Render roads and dither polygon edges
-	uint color;
 	uchar road;
 
 	road = (roads >> Road_East) & Road_Mask;
 	if (render_r) {
-		if (road) {
-			switch (road) {
-				case Road_Normal: color = RGBColor(192, 192, 192).pack32(); break;
-				case Road_Busy:   color = RGBColor( 96,  96,  96).pack32(); break;
-				default:          color = RGBColor(  0,   0, 128).pack32(); break;
-			}
-			render_road_horiz(this, l, r, color);
-		}
+      if (road) {
+         switch(road) {
+            case Road_Normal: render_road_horiz(this, l, r, rt->bm_road_normal); break; 
+            case Road_Busy: render_road_horiz(this, l, r, rt->bm_road_busy); break;
+            default: assert(0); break; // never here
+         }
+      }
 		else if (rtex!=0 && ttex!=0 && rtex!=ttex)
 			dither_edge_horiz(this, l, r, rtex, ttex);
 	}
@@ -968,14 +968,13 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	// FIXME: this will try to work on some undiscovered terrain
 	road = (roads >> Road_SouthEast) & Road_Mask;
 	if (render_r || render_b) {
-		if (road) {
-			switch (road) {
-				case Road_Normal: color = RGBColor(192, 192, 192).pack32(); break;
-				case Road_Busy:   color = RGBColor( 96,  96,  96).pack32(); break;
-				default:          color = RGBColor(  0,   0, 128).pack32(); break;
-			}
-			render_road_vert(this, l, br, color);
-		}
+      if (road) {
+         switch(road) {
+            case Road_Normal: render_road_vert(this, l, br, rt->bm_road_normal); break; 
+            case Road_Busy: render_road_vert(this, l, br, rt->bm_road_busy); break;
+            default: assert(0); break; // never here
+         }
+      }
 		else if (rtex!=0 && btex!=0 && rtex!=btex)
 			dither_edge_vert(this, l, br, rtex, btex);
 	}
@@ -983,14 +982,13 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	road = (roads >> Road_SouthWest) & Road_Mask;
 	if (render_b) {
 		if (road) {
-			switch (road) {
-				case Road_Normal: color = RGBColor(192, 192, 192).pack32(); break;
-				case Road_Busy:   color = RGBColor( 96,  96,  96).pack32(); break;
-				default:          color = RGBColor(  0,   0, 128).pack32(); break;
-			}
-			render_road_vert(this, l, bl, color);
-		}
-		else if (ltex!=0 && btex!=0 && ltex!=btex)
+         switch(road) {
+            case Road_Normal: render_road_vert(this, l, bl, rt->bm_road_normal); break; 
+            case Road_Busy: render_road_vert(this, l, bl, rt->bm_road_busy); break;
+            default: assert(0); break; // never here
+         }
+      }
+			else if (ltex!=0 && btex!=0 && ltex!=btex)
 			dither_edge_vert(this, l, bl, btex, ltex);
 	}
 

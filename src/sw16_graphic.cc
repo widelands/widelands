@@ -32,6 +32,12 @@ Management classes and functions of the 16-bit software renderer.
 #include "overlay_manager.h"
 #include "filesystem.h"
 
+/*
+ * Names of road terrains
+ */
+#define ROAD_NORMAL_PIC "pics/roadt_normal.png"
+#define ROAD_BUSY_PIC   "pics/roadt_busy.png"
+
 namespace Renderer_Software16
 {
 
@@ -902,6 +908,7 @@ GraphicImpl::GraphicImpl(int w, int h, bool fullscreen)
 {
 	m_nr_update_rects = 0;
 	m_update_fullscreen = false;
+   m_roadtextures = 0;
 
 	// Set video mode using SDL
 	int flags = SDL_SWSURFACE;
@@ -942,6 +949,11 @@ GraphicImpl::~GraphicImpl()
 
    flush(0);
 
+   if(m_roadtextures) {
+      delete m_roadtextures;
+      m_roadtextures = 0;
+   }
+   
 	delete m_rendertarget;
 	SDL_FreeSurface(m_sdlsurface);
 }
@@ -1101,6 +1113,11 @@ void GraphicImpl::flush(int mod)
       for(i = 0; i < m_animations.size(); i++)
          delete m_animations[i];
       m_animations.resize(0);
+
+      if( m_roadtextures ) {
+         delete m_roadtextures; 
+         m_roadtextures = 0;
+      }
    }
 }
 
@@ -1389,6 +1406,23 @@ Texture* GraphicImpl::get_maptexture_data(uint id)
 		return m_maptextures[id];
 	else
 		return 0;
+}
+
+/*
+================
+GraphicImp::get_road_textures
+
+returns the road textures 
+================
+*/
+Road_Textures* GraphicImpl::get_road_textures( void ) {
+   if(! m_roadtextures ) {
+      // Load the road textures
+      m_roadtextures = new Road_Textures();
+      m_roadtextures->bm_road_normal = get_picture_bitmap(get_picture(PicMod_Game, ROAD_NORMAL_PIC, 1)); 
+      m_roadtextures->bm_road_busy   = get_picture_bitmap(get_picture(PicMod_Game, ROAD_BUSY_PIC  , 1)); 
+   }
+   return m_roadtextures;
 }
 
 /*

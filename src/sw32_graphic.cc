@@ -38,6 +38,13 @@ Management classes and functions of the 32-bit software renderer.
   #include <GL/gl.h>
 #endif
 
+/*
+ * Names of road terrains
+ */
+#define ROAD_NORMAL_PIC "pics/roadt_normal.png"
+#define ROAD_BUSY_PIC   "pics/roadt_busy.png"
+
+
 namespace Renderer_Software32
 {
 
@@ -1140,45 +1147,49 @@ If mod is 0, all pictures are flushed.
 */
 void GraphicImpl::flush(int mod)
 {
-	uint i;
+   uint i;
 
-	// Flush pictures
-	for(i = 0; i < m_pictures.size(); i++) {
-		Picture* pic = &m_pictures[i];
+   // Flush pictures
+   for(i = 0; i < m_pictures.size(); i++) {
+      Picture* pic = &m_pictures[i];
 
-		if (!pic->mod)
-			continue;
+      if (!pic->mod)
+         continue;
 
-		if (pic->mod < 0) {
-			if (!mod)
-				log("LEAK: SW32: flush(0): non-picture %i left.\n", i+1);
-			continue;
-		}
+      if (pic->mod < 0) {
+         if (!mod)
+            log("LEAK: SW32: flush(0): non-picture %i left.\n", i+1);
+         continue;
+      }
 
-		pic->mod &= ~mod; // unmask the mods that should be flushed
+      pic->mod &= ~mod; // unmask the mods that should be flushed
 
-		// Once the picture is no longer in any mods, free it
-		if (!pic->mod) {
+      // Once the picture is no longer in any mods, free it
+      if (!pic->mod) {
 
          if (pic->u.fname) {
             m_picturemap.erase(pic->u.fname);
             free(pic->u.fname);
          }
-			if(pic->bitmap.pixels)
+         if(pic->bitmap.pixels)
             free(pic->bitmap.pixels);
-		}
-	}
+      }
+   }
 
-	// Flush game items
-	if (!mod || mod & PicMod_Game) {
-		for(i = 0; i < m_maptextures.size(); i++)
-			delete m_maptextures[i];
-		m_maptextures.resize(0);
+   // Flush game items
+   if (!mod || mod & PicMod_Game) {
+      for(i = 0; i < m_maptextures.size(); i++)
+         delete m_maptextures[i];
+      m_maptextures.resize(0);
 
-		for(i = 0; i < m_animations.size(); i++)
-			delete m_animations[i];
-		m_animations.resize(0);
-	}
+      for(i = 0; i < m_animations.size(); i++)
+         delete m_animations[i];
+      m_animations.resize(0);
+   }
+   if( m_roadtextures ) {
+      delete m_roadtextures; 
+      m_roadtextures = 0;
+   }
 }
 
 
@@ -1476,6 +1487,23 @@ Texture* GraphicImpl::get_maptexture_data(uint id)
 		return m_maptextures[id];
 	else
 		return 0;
+}
+
+/*
+================
+GraphicImp::get_road_textures
+
+returns the road textures 
+================
+*/
+Road_Textures* GraphicImpl::get_road_textures( void ) {
+   if(! m_roadtextures ) {
+      // Load the road textures
+      m_roadtextures = new Road_Textures();
+      m_roadtextures->bm_road_normal = get_picture_bitmap(get_picture(PicMod_Game, ROAD_NORMAL_PIC, 1)); 
+      m_roadtextures->bm_road_busy   = get_picture_bitmap(get_picture(PicMod_Game, ROAD_BUSY_PIC  , 1)); 
+   }
+   return m_roadtextures;
 }
 
 /*

@@ -157,7 +157,13 @@ public:
 	void animate(uint time);
 };
 
-
+/*
+ * This contains all the road textures needed to render roads
+ */
+struct Road_Textures {
+   Bitmap* bm_road_normal;
+   Bitmap* bm_road_busy;
+};
 
 /*
 class RenderTargetImpl
@@ -246,6 +252,9 @@ public:
 	virtual void animate_maptextures(uint time);
 	Texture* get_maptexture_data(uint id);
 
+   // Road textures
+   Road_Textures* get_road_textures( void );
+      
 	// Animations
 	virtual void load_animations();
 	AnimationGfx* get_animation(uint anim);
@@ -286,6 +295,7 @@ private:
 	std::vector<Picture>	m_pictures;
 	picmap_t					m_picturemap; // hash of filename/picture ID pairs
 
+   Road_Textures*        m_roadtextures;
 	std::vector<Texture*>		m_maptextures;
 	std::vector<AnimationGfx*>	m_animations;
 };
