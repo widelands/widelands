@@ -864,8 +864,9 @@ void PlayerImmovable::set_owner(Player *owner)
 {
 	// Change these asserts once you've made really sure that changing owners
 	// works (necessary for military building)
-	assert(!m_owner);
-	assert(owner);
+/*	   THIS IS A TEST 
+   assert(!m_owner);
+	assert(owner);*/
 
 	m_owner = owner;
 	

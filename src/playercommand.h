@@ -276,6 +276,31 @@ class Cmd_ChangeSoldierCapacity:public PlayerCommand {
 		virtual void serialize (Serializer*);
 };
 
+/////////////TESTING STUFF
+class Cmd_EnemyFlagAction:public PlayerCommand {
+    private:
+	int serial;
+	int action;
+   int attacker;
+
+    public:
+	Cmd_EnemyFlagAction(void) : PlayerCommand() { } // For savegame loading
+	Cmd_EnemyFlagAction (int t, int p, Flag* f, int a, int at):PlayerCommand(t,p)
+	{ serial=f->get_serial(); action=a; attacker=at; }
+   
+   // Write these commands to a file (for savegames)
+   virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+   virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
+   virtual int get_id(void) { return QUEUE_CMD_ENEMYFLAGACTION; } // Get this command id
+
+
+	Cmd_EnemyFlagAction (Deserializer*);
+	
+	virtual void execute (Game* g);
+	virtual void serialize (Serializer*);
+};
+
 
 #endif
 

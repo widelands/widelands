@@ -105,6 +105,7 @@ public:
    void send_player_change_training_options(Building*, int, int);
    void send_player_drop_soldier(Building*, int);
 	void send_player_change_soldier_capacity(Building*, int);
+	void send_player_enemyflagaction (Flag*, int, int);
 
 	// is this base a game
 	inline bool is_game() { return true; }

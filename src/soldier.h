@@ -57,6 +57,7 @@ public:
    uint get_defense_level_pic(uint level) { assert(level<=m_max_defense_level && level>=0); return m_defense_pics[level]; }
    uint get_evade_level_pic(uint level) { assert(level<=m_max_evade_level && level>=0); return m_evade_pics[level]; }
 
+   uint get_rand_anim (std::string);
 protected:
 	virtual Bob *create_object();
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
@@ -116,7 +117,7 @@ public:
 public:
    virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
 
-   // Draw this soldier
+   /// Draw this soldier
    void draw(Editor_Game_Base* g, RenderTarget* dst, Point pos);
 
    // Information function from description
@@ -139,15 +140,59 @@ public:
    uint get_defense_level_pic(void) { return get_descr()->get_defense_level_pic(m_defense_level); }
    uint get_evade_level_pic(void) { return get_descr()->get_evade_level_pic(m_evade_level); }
 
-	// Heal quantity of hit points instantly
+   /// Sets a random animation of desired type and start playing it
+   void start_animation (Editor_Game_Base*, std::string, uint);
+   
+	/// Heal quantity of hit points instantly
 	void heal (uint);
+   
+   /// Damage quantity of hit points
+   void damage (uint);
 
-	//  This are used to control Requests (only called by Warehouse)
+	///  This are used to control Requests (only called by Warehouse)
 	bool is_marked ()	 { return (m_marked == true); }
 	void mark (bool b) { m_marked = b; }
 public: // Worker-specific redefinitions
    virtual void start_task_gowarehouse(Game* g);
 
+      /// Task that move the soldier to a combat target flag position
+   void start_task_launchattack(Game*, Flag*);
+      
+      /// Starts fighting against soldier
+   void start_task_defendbuilding(Game*, Building*, Bob*);
+      
+      /// Starts loops fighting till bulding is empty
+   bool start_task_waitforassault(Game*, Building*);   
+
+      /// Enter on selected building, changing his own !! 
+   void start_task_conquerbuilding (Game*, Building*);
+
+   void log_general_info(Editor_Game_Base* egbase);
+private:   
+   void  launchattack_update (Game*, State*);
+   void  launchattack_signal (Game*, State*);
+   
+   void  waitforassault_update (Game*, State*);
+   void  waitforassault_signal (Game*, State*);
+
+   void defendbuilding_update (Game*, State*);
+   void defendbuilding_signal (Game*, State*);
+/*   void  combat_update (Game*, State*);
+   void  combat_signal (Game*, State*);
+   
+   
+   void  conquerbuilding_update (Game*, State*);
+   void  conquerbuilding_signal (Game*, State*);*/
+   
+protected:
+//    static Task taskCombat;
+   static Task taskLaunchAttack;    // Handle all the attack
+   static Task taskWaitForAssault;  // Wait while the building isn't empty
+//    static Task taskConquerBuilding;
+//    static Task taskWaitForInvadeBuilding;
+
+      // Defending stuff tasks
+   static Task taskDefendBuilding;  // Defend the building under attack!!
 private:
    // Private data
    uint m_hp_current;

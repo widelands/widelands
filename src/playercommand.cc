@@ -40,6 +40,8 @@ enum {
 	PLCMD_CHANGETRAININGOPTIONS,
 	PLCMD_DROPSOLDIER,
 	PLCMD_CHANGESOLDIERCAPACITY,
+/// TESTING STUFF
+	PLCMD_ENEMYFLAGACTION,
 };
 
 /*** class PlayerCommand ***/
@@ -76,6 +78,9 @@ PlayerCommand* PlayerCommand::deserialize (Deserializer* des)
 			return new Cmd_DropSoldier(des);
 		case PLCMD_CHANGESOLDIERCAPACITY:
 			return new Cmd_ChangeSoldierCapacity(des);
+   ///   TESTING STUFF
+      case PLCMD_ENEMYFLAGACTION:
+			return new Cmd_EnemyFlagAction(des);
 		default:
 			throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
 	}
@@ -690,5 +695,80 @@ void Cmd_ChangeSoldierCapacity::Write(FileWrite *fw, Editor_Game_Base* egbase, W
 	// Now capacity
 	fw->Unsigned16(val);
 
+}
+
+/// TESTING STUFF
+/*** Cmd_EnemyFlagAction ***/
+
+Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (Deserializer* des):PlayerCommand (0, des->getchar())
+{
+	action=des->getchar();
+	attacker=des->getchar();
+	serial=des->getlong();
+}
+
+void Cmd_EnemyFlagAction::execute (Game* g)
+{
+	Player* player = g->get_player(get_sender());
+	Map_Object* obj = g->get_objects()->get_object(serial);
+   PlayerImmovable* imm = static_cast<PlayerImmovable*>(obj);
+   
+   Player* real_player = g->get_player(attacker);
+
+   log("player(%d)    imm->get_owner (%d)   real_player (%d)\n", 
+      player->get_player_number(),
+      imm->get_owner()->get_player_number(),
+      real_player->get_player_number());
+   
+	if (obj &&
+       obj->get_type() == Map_Object::FLAG && 
+       imm->get_owner() != real_player)
+		real_player->enemyflagaction (static_cast<Flag*>(obj), action, attacker);
+   else
+      log ("Cmd_EnemyFlagAction Player invalid.\n");
+}
+
+void Cmd_EnemyFlagAction::serialize (Serializer* ser)
+{
+	ser->putchar (PLCMD_ENEMYFLAGACTION);
+	ser->putchar (get_sender());
+	ser->putchar (action);
+	ser->putchar (attacker);
+	ser->putlong (serial);
+}
+#define PLAYER_CMD_ENEMYFLAGACTION_VERSION 1
+void Cmd_EnemyFlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
+      // Read Player Command
+      PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+   
+      // action
+      action=fr->Unsigned8();
+      
+      // param
+      attacker=fr->Unsigned8();
+
+      // Serial
+      int fileserial=fr->Unsigned32();
+      assert(mol->is_object_known(fileserial));
+      serial=mol->get_object_by_file_index(fileserial)->get_serial();
+   } else
+      throw wexception("Unknown version in Cmd_FlagAction::Read: %i", version);
+}
+void Cmd_EnemyFlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_CMD_ENEMYFLAGACTION_VERSION);
+   // Write base classes
+   PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+   // Now action
+   fw->Unsigned8(action);
+   // Now param
+   fw->Unsigned8(attacker);
+
+   // Now serial
+   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   assert(mos->is_object_known(obj));
+   fw->Unsigned32(mos->get_object_file_index(obj)); 
 }
 

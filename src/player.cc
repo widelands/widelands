@@ -19,6 +19,7 @@
 
 #include "error.h"
 #include "game.h"
+#include "militarysite.h"
 #include "player.h"
 #include "transport.h"
 #include "trainingsite.h"
@@ -490,5 +491,86 @@ void Player::change_soldier_capacity (PlayerImmovable* imm, int val) {
 		else
 			((Building*)imm)->soldier_capacity_down();
 	}
+}
+
+
+/*
+===============
+Player::enemyflagaction
+
+Perform an action on the given enemy flag.
+===============
+*/
+void Player::enemyflagaction(Flag* flag, int action, int attacker)
+{
+   Editor_Game_Base* eg = get_game();
+
+   if (attacker != get_player_number())
+      throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
+   
+   if (!eg->is_game())
+      return;
+
+   Game* g = (Game*)eg;
+   Map* map = g->get_map();
+
+log("++Player::EnemyFlagAction()\n");
+   // Additional security check LOOK, if equal exit!!
+   if (flag->get_owner() == this)
+      return;
+log("--Player::EnemyFlagAction() Checkpoint!\n");
+
+   switch(action) {
+      
+      case ENEMYFLAGACTION_ATTACK:
+         {
+            int id = get_tribe()->get_worker_index("soldier");
+
+            if (id < 0) {
+               log("Tribe defines no soldier\n");
+               return;
+            }
+// TODO : Make this more flexible
+            int radius = 15;
+            std::vector<ImmovableFound> list;
+            CheckStepWalkOn cstep(MOVECAPS_WALK, false);
+            
+            map->find_reachable_immovables(flag->get_position(), radius, &list, &cstep);
+
+            if (!list.size()) 
+            {
+log("Player::EnemyFlagAction() No militarysites found!\n");
+               return;
+            }
+log("Player::EnemyFlagAction() %d immovables found\n", list.size());
+            
+            for (uint i = 0; i < list.size(); i++)
+            {
+               BaseImmovable* imm = list[i].object;
+
+               if (imm->get_type() == Building::BUILDING &&
+                  ((PlayerImmovable*)imm)->get_owner() == this && 
+                  ((Building*)imm)->get_building_type() == Building::MILITARYSITE)
+                  {
+log("Player::EnemyFlagAction() MilitarySite %p found!\n", &list[i]);
+                     MilitarySite* ms = static_cast<MilitarySite*>(imm);
+                     // Percent is the percentage of available soldiers that will be launched to the
+                     // attack
+                     int percent = 50;
+
+                     if (ms->launch_attack (flag, percent) > 0)
+                     {
+                        //ms->call_soldiers(g);
+                        break;
+                     }
+                  }
+            }
+            
+            break;
+         }
+      
+      default:
+         log("Player sent bad enemyflagaction = %i\n", action);
+   }
 }
 

@@ -2775,7 +2775,6 @@ for its deletion.
 void Request::start_transfer(Game* g, Supply* supp)
 {
 	assert(is_open());
-	log(">>Request::StartTransfer\n");
 	Transfer* t = 0;
 	try
 	{
@@ -2825,7 +2824,6 @@ void Request::start_transfer(Game* g, Supply* supp)
 	m_transfers.push_back(t);
 	if (!is_open())
 		m_economy->remove_request(this);
-	log("<<Request::StartTransfer\n");
 }
 
 
@@ -2840,7 +2838,6 @@ for removing and deleting the request.
 */
 void Request::transfer_finish(Game *g, Transfer* t)
 {
-log (">>Request::transfer_finish()\n");
 	Worker* w = 0;
 	Soldier* s = 0;
 

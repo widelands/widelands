@@ -22,6 +22,7 @@
 
 #include "productionsite.h"
 #include "types.h"
+#include "transport.h"
 
 class Soldier;
 
@@ -73,10 +74,34 @@ public:
 
 	int	get_capacity() { return m_capacity; }
 	// Overload of building functions
-    virtual void drop_soldier (uint serial);
-	virtual	void soldier_capacity_up ()		{ change_soldier_capacity(1); }
-	virtual	void soldier_capacity_down ()	{ change_soldier_capacity(-1); }
+   virtual void drop_soldier (uint serial);
+	virtual void soldier_capacity_up ()		{ change_soldier_capacity(1); }
+	virtual void soldier_capacity_down ()	{ change_soldier_capacity(-1); }
 
+      
+   /**
+      This methods are helper for use at configure this site.
+   */   
+   void set_requeriments (Requeriments*);
+   void  clear_requeriments ();
+   Requeriments get_requeriments () { return m_soldier_requeriments; }
+   
+   /*
+      So, to set a new requeriment to the request you should do something like:
+      
+         Requeriments new_req = ms->get_requeriments();
+         new_req.set (atribute, min_value, max_value);
+         new_req.set (atribute, min_value, max_value);
+         ms->set_requeriments (&new_req);
+      
+   */   
+      
+   /// Testing stuff
+   int launch_attack(PlayerImmovable*, int);
+
+   virtual bool has_soldiers() { return m_soldiers.size() > 0; }
+   virtual void defend (Game*, Soldier*);
+   virtual void conquered_by (Player*);
 protected:
 	virtual UIWindow* create_options_window(Interactive_Player* plr,
 		UIWindow** registry);
@@ -90,7 +115,7 @@ private:
 	void call_soldiers(Game *g);
 	void change_soldier_capacity (int);
 private:
-//	Request* m_soldier_request;
+	Requeriments m_soldier_requeriments;
 	std::vector<Request*> m_soldier_requests;
 	std::vector<Soldier*> m_soldiers;
 	bool		m_didconquer;

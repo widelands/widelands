@@ -109,10 +109,12 @@ class Player {
       inline Economy* get_economy_by_number(int i) { return m_economies[i]; } // for loading
       inline uint get_nr_economies( void ) { return m_economies.size(); } 
 
-		// Military stuff
+      // Military stuff
       void drop_soldier(PlayerImmovable* imm, Soldier* worker);
-		void change_soldier_capacity (PlayerImmovable* , int val);
+      void change_soldier_capacity (PlayerImmovable* , int val);
       void change_training_options(PlayerImmovable* imm, int atr, int val);
+         // Launch an attack
+      void enemyflagaction(Flag* flag, int action, int param);
 	private:
 		bool m_see_all;
       

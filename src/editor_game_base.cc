@@ -101,6 +101,7 @@ Editor_Game_Base::Editor_Game_Base() {
    m_iabase=0;
 
 	m_lasttrackserial = 0;
+   memset (m_conquer_map, 0, sizeof (m_conquer_map));
 }
 
 /*
@@ -124,6 +125,8 @@ Editor_Game_Base::~Editor_Game_Base() {
    for(i = 0; i < (int)m_tribes.size(); i++)
 		delete m_tribes[i];
 	m_tribes.resize(0);
+   
+   memset (m_conquer_map, 0, sizeof (m_conquer_map));
 }
 
 /*
@@ -158,8 +161,11 @@ void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
    m_conquer_info.pop_back();
 
    // step 3: recalculate for all claimed areas of this player with a building
-   for(i=0; i<m_conquer_info.size(); i++) {
+// BEGIN : If you wanna to disable the dinamic conquer (by influences) , uncomment this block
+/*   for(i=0; i<m_conquer_info.size(); i++) {
       if(m_conquer_info[i].player==playernr) {
+           // Unconquer and reconquer the area
+         do_conquer_area(playernr, m_conquer_info[i].middle_point, m_conquer_info[i].area, false);
          do_conquer_area(playernr, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
       }
    }
@@ -170,10 +176,23 @@ void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
 
       for(i=0; i<m_conquer_info.size(); i++) {
          if(m_conquer_info[i].player==player) {
+              // Unconquer and reconquer the area
+            do_conquer_area(player, m_conquer_info[i].middle_point, m_conquer_info[i].area, false);
             do_conquer_area(player, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
          }
       }
    }
+*/
+// END : If you wanna to disable the dinamic conquer (by influences) , uncomment this block
+// BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
+   // step 3 and 4: Need to reconquer the full map, so it's easier and faster to do only one loop because
+   // of the use of an influence map, where the sorting of the m_conquer_info isn't important
+   for(i=0; i<m_conquer_info.size(); i++) 
+   {
+      do_conquer_area(m_conquer_info[i].player, m_conquer_info[i].middle_point, m_conquer_info[i].area, false);
+      do_conquer_area(m_conquer_info[i].player, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
+   }
+// END : If you wanna to disable the dinamic conquer (by influences) , comment this block
 
 	// step 5: deal with player immovables in the lost area
 	cleanup_playerimmovables_area(coords, radius);
@@ -195,6 +214,7 @@ void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, Building_Desc
    m_conquer_info.push_back(ci);
 
    do_conquer_area(playernr, coords, b->get_conquers(), true);
+   cleanup_playerimmovables_area(coords, b->get_conquers());
 }
 
 
@@ -212,7 +232,58 @@ void Editor_Game_Base::conquer_area_no_building(uchar playernr, Coords coords, i
    do_conquer_area(playernr, coords, radius, true);
 }
 
-/*
+/**
+ * Editor_Game_Base::calc_influence
+ *
+ *    Returns the influence that a position with a given radius has to another point.
+ * As the function is defined here, many functions can be tested without changing lots
+ * of code, only by adding another "if" with method and setting method to proper value.
+ *    If changing type of influence will be allowed at game, will be needed to add new
+ * parameter at this function.
+ */
+#define MAX_RADIUS 64
+int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
+{
+   int w = m_map->get_width(),
+       h = m_map->get_height(),
+       influence = 0,
+       method = 1;
+   uint minx = std::min (std::min(abs(a.x - b.x), abs(a.x - b.x + w)), abs(a.x - b.x - w));
+   uint miny = std::min (std::min(abs(a.y - b.y), abs(a.y - b.y + h)), abs(a.y - b.y - h));
+    
+    // Now "std::max (minx, miny)" is the distance between the points
+   influence = std::max (minx, miny);
+   
+   if (method == 0)
+   {
+         // This method makes a "parabola" like x^2, but the maxium radius is MAX_RADIUS,
+         // Warning : it seems that doesn't work fine
+      if (influence > radius)
+         influence = 0;
+      else if (influence == 0)
+         influence = MAX_RADIUS;
+      else
+         influence = MAX_RADIUS - radius;
+   
+      influence *= influence;
+   }
+   else if (method == 1)
+   {
+      //    The function used here to calculate the influence is (d*(d-1))/2 + 1 and this
+      // functions returns something like: 1, 2, 4, 7, 11, 15, 21, 27 ... 
+      // Works well, but lacks with the bug of cleaning immovables ...
+      influence = radius - influence;
+
+      if (influence < 1)
+         influence = 0;
+      else
+         influence = ((influence*(influence-1))>>1) + 1;
+   }
+       
+   return influence;
+}
+
+/**
 ===============
 Editor_Game_Base::do_conquer_area [private]
 
@@ -225,33 +296,65 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 	MapRegion mr(m_map, coords, radius);
 	Field* f;
 
-	while((f = mr.next())) {
-		if(conquer) {
-			if (f->get_owned_by() == playernr)
-				continue;
-			
-			if (!f->get_owned_by()) {
-				f->set_owned_by(playernr);
-				player_field_notification (m_map->get_fcoords(f), GAIN);
-				continue;
-			}
-			// TODO: add support here what to do if some fields are already
-			// occupied by another player
-			// Probably the best thing to just don't grab it. Players should fight
-			// for their land.
-			// Too simple. What should be done when too HQ are too close and the area interact.
-			// Also, when one user gets close to another, he might not be able to see a military building
-			// when his land doesn't increase
-			//cerr << "warning: already occupied field is claimed by another user!" << endl;
-		} else {
-			if(f->get_owned_by() != playernr)
-				continue;
-				
-			player_field_notification (m_map->get_fcoords(f), LOSE);
-			f->set_owned_by(0);
-		}
-	}
+   while((f = mr.next())) 
+   {
+      Coords c;
+      int influence;
+      
+      c = (Coords) m_map->get_fcoords(f);
 
+      influence = calc_influence(c, coords, radius);
+      
+         // This is for put a weight to every field, its equal to the next array:
+         // 1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56, 67, 79, 92, 106, 121, 137, 154, 172 ... 1+(x*(x-1)/2)
+         // This method will make harder to conquer an area already owner by any other player.
+         // This don't have conflict with changing radius of conquer of an specific building, the only
+         // that is needed to do is first: unconquer the area with inital values, second: reconquer the area
+         // with new values. Will be usefull to save this values at the building. 
+         // -- RFerriz
+      if(conquer) 
+      {
+          // Adds the influence
+         m_conquer_map[playernr][c.x][c.y] += influence;
+
+            // Else, do the things that should be done
+         if (f->get_owned_by() == playernr)
+            continue;
+         
+         if (!f->get_owned_by() && m_conquer_map[0][c.x][c.y] == playernr) 
+         {
+            f->set_owned_by(playernr);
+            m_conquer_map[0][c.x][c.y] = playernr;
+            player_field_notification (m_map->get_fcoords(f), GAIN);
+            continue;
+         }
+         
+           // See if we can get the own
+// BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
+         if (m_conquer_map[playernr][c.x][c.y] > m_conquer_map[f->get_owned_by()][c.x][c.y])
+         {
+            player_field_notification (m_map->get_fcoords(f), LOSE);
+            f->set_owned_by (playernr);
+            m_conquer_map[0][c.x][c.y] = playernr;
+            player_field_notification (m_map->get_fcoords(f), GAIN);
+         }
+// END : If you wanna to disable the dinamic conquer (by influences) , comment this block
+      } 
+      else
+      {
+         m_conquer_map[playernr][c.x][c.y] -= influence;
+
+         if(f->get_owned_by() != playernr)
+            continue;
+         
+         m_conquer_map[0][c.x][c.y] = 0;
+
+            // ALWAYS set to 0. So is needed to call do_conquer_area with TRUE if you want to have the real
+            // map of incluence
+         player_field_notification (m_map->get_fcoords(f), LOSE);
+         f->set_owned_by(0);
+      }
+   }
 	Player *player = get_player(playernr);
 
 	if(is_game()) // For editor all fields are visible and players don't manage view area at the moment (may change)
@@ -266,6 +369,8 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 Editor_Game_Base::cleanup_playerimmovables_area
 
 Make sure that buildings cannot exist outside their owner's territory.
+TODO: By now something goes wrong at unconquer_area and this function, because
+the game crashes a bit time after unconquer an area with some buildings.
 ===============
 */
 void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
@@ -644,7 +749,7 @@ void Editor_Game_Base::remove_trackpointer(uint serial)
 	m_trackpointers.erase(serial);
 }
 
-/*
+/**
  * Cleanup for load
  *
  * make this object ready to load new data
@@ -680,6 +785,88 @@ void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animatio
 
       static_cast<Game*>(this)->get_cmdqueue()->flush();
    }
-   
-   m_iabase->cleanup_for_load();
 }
+
+/**
+ * Editor_Game_Base::get_attack_points
+ *
+ *    Returns all the positions of MilitarySites (buildings that can be attacked) of
+ * a given player. If the player has no buildings that can be attacked, rare, then
+ * returns 0
+ */   
+std::vector<Coords>* 
+Editor_Game_Base::get_attack_points(uchar player)
+{
+   std::vector<Coords>* tmp = 0;
+   
+   for (uint i = 0; i < m_conquer_info.size(); ++i)
+   {
+      if (m_conquer_info[i].player == player)
+      {
+         // First initialization
+         if (!tmp)
+            tmp = new std::vector<Coords>;
+         
+         tmp->push_back (m_conquer_info[i].middle_point);
+
+      }
+   }
+
+   return tmp;
+}
+
+// BEGIN Support for influece map in load/saved games
+/**
+ * Editor_Game_Base::make_influence_map
+ *
+ *    This method rebuilds the influence map of the full game. It should be called just after
+ * load a game, and it can be called after every MilitarySite creation/remove, but may not
+ * be efficient enought.
+ */
+void Editor_Game_Base::make_influence_map ()
+{
+   log("Making inluence map\n");
+   
+   Coords c;
+   int influence;
+            
+      // Clean influce maps
+   memset (m_conquer_map, 0, sizeof (m_conquer_map));
+      
+   for(uint i=0; i<m_conquer_info.size(); i++) 
+   {
+         // First, update influence map of the player
+      MapRegion mr(m_map,  m_conquer_info[i].middle_point, m_conquer_info[i].area);
+      Field* f;
+         
+      while((f = mr.next())) 
+      {
+         c = (Coords) m_map->get_fcoords(f);
+         influence = calc_influence(c, m_conquer_info[i].middle_point, m_conquer_info[i].area);
+         m_conquer_map[m_conquer_info[i].player][c.x][c.y] += influence;
+      }
+   }
+
+     // Now create the real influence map !
+   for (int x = 0; x < MAX_X; x++)
+   {
+      for (int y = 0; y < MAX_Y; y++)
+      {
+         int best_player = 0;
+         int best_value = 0;
+         int npl = 1;
+            // Find the most player influence over this position
+         while (npl < MAX_PLAYERS)
+         {
+            if (m_conquer_map[npl][x][y] > best_value)
+            {
+               best_value = m_conquer_map[npl][x][y];
+               best_player = npl;
+            }
+            npl++;
+         }
+         m_conquer_map[0][x][y] = npl;
+      }
+   }
+}
+// END Support for influece map in load/saved games

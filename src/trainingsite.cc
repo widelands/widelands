@@ -272,7 +272,7 @@ void TrainingSite::cleanup(Editor_Game_Base* g)
 {
 	// Release soldier
 	if (m_soldier_requests.size()) {
-		for (uint i = 0; i < m_soldier_requests.size()-1; i++) {
+		for (uint i = 0; i < m_soldier_requests.size(); i++) {
 			delete m_soldier_requests[i];
 			m_soldier_requests[i] = 0;
 		}
@@ -361,6 +361,7 @@ void TrainingSite::request_soldier_callback(Game* g, Request* rq, int ware,
 	tsite->m_soldiers.push_back(s);
 	tsite->m_total_soldiers = tsite->m_soldiers.size() + tsite->m_soldier_requests.size();
 	s->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
+   s->mark(false);
 }
 
 /*
@@ -433,6 +434,7 @@ void TrainingSite::drop_soldier (Game *g, uint nr) {
 		// Walk the soldier home safely
 		s->reset_tasks(g);
 		s->set_location(this);
+      s->mark(true);
 		s->start_task_leavebuilding(g,true);
 	}
 }
@@ -541,7 +543,7 @@ void TrainingSite::find_next_program (Game *g) {
 
 		split_string (m_list_upgrades[i], &str, "_");
 
-		assert (str.size()==2); // upgrade what
+		assert (str.size() == 2); // upgrade what
 
 		if (str[1] == "hp") attrib = atrHP;
 		else if (str[1] == "attack") attrib = atrAttack;
@@ -598,9 +600,9 @@ void TrainingSite::find_next_program (Game *g) {
 				case atrDefense:	level += m_pri_defense_mod; break;
 				case atrEvade:		level += m_pri_evade_mod; break;
             case atrTotal: break;
-         }
+			}
 
-			if ((level >= 0) && (level <= MAX_level)) {
+			if ((level >= 0) && (level < MAX_level)) {
 				sprintf (buf, "%s%d", (m_list_upgrades[i]).c_str(), level);
 				m_list_upgrades[i] = buf;
 				program_start (g, m_list_upgrades[i]);

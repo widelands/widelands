@@ -45,6 +45,9 @@ class Widelands_Map_Map_Object_Loader;
 
 enum {
 	FLAGACTION_GEOLOGIST = 0,	// call a geologist
+   
+   
+   ENEMYFLAGACTION_ATTACK = 10,   // Performs an attack
 };
 // ---------------------- END    OF CMDS ----------------------------------
 

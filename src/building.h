@@ -179,7 +179,8 @@ public:
    virtual void change_train_priority(uint, int) { };
 	virtual void switch_train_mode () { };
 
-      
+   /// Testing stuff
+   virtual bool has_soldiers() { return false; };
 
 protected:
 	void start_animation(Editor_Game_Base* g, uint anim);

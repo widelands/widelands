@@ -193,6 +193,8 @@ bool Game::run_load_game(bool is_splayer) {
 
    m_state = gs_running;
 
+   make_influence_map ();  // This is needed to call after load a map :)
+   
    return run(true);
 }
 
@@ -522,5 +524,11 @@ void Game::send_player_drop_soldier (Building* b, int ser)
 void Game::send_player_change_soldier_capacity (Building* b, int val)
 {
 	send_player_command (new Cmd_ChangeSoldierCapacity(get_gametime(), b->get_owner()->get_player_number(), b, val));
+}
+
+/////////////////////// TESTING STUFF
+void Game::send_player_enemyflagaction (Flag* flag, int action, int who_attacks)
+{
+	send_player_command (new Cmd_EnemyFlagAction(get_gametime(), flag->get_owner()->get_player_number(), flag, action, who_attacks));
 }
 

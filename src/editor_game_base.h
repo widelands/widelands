@@ -97,6 +97,14 @@ class Editor_Game_Base {
 	virtual void player_immovable_notification (PlayerImmovable*, losegain_t)=0;
 	virtual void player_field_notification (const FCoords&, losegain_t)=0;
       
+      // Military stuff
+   std::vector<Coords>* get_attack_points(uchar player);
+   
+   virtual void make_influence_map ();
+
+      /// Returns the influence value of one position (a) with the radius (radius) about (b)
+   virtual int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius);
+   
    protected:
       // next function is used to update the current gametime,
       // for queue runs e.g.
@@ -124,6 +132,10 @@ class Editor_Game_Base {
 
 		uint								m_lasttrackserial;
 		std::map<uint, void*>		m_trackpointers;
+#define MAX_X     256
+#define MAX_Y     256      
+      int  m_conquer_map[MAX_PLAYERS+1][MAX_X][MAX_Y]; // m_conquer_map[playernr][x][y] = [quantity of influence]
+                                                         // The playernr 0 is the REAL OWNER
 };
 
 extern const uchar g_playercolors[MAX_PLAYERS][12];

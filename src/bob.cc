@@ -810,7 +810,7 @@ bool Bob::start_task_movepath(Game* g, const Path& origpath, int index, DirAnima
 		throw wexception("MO(%u): start_task_movepath(index): not on path", get_serial());
 
 	if (curidx != index) {
-		molog("Carrier::walk_to_index: Move from %i to %i.\n", curidx, index);
+		molog("Bob::walk_to_index: Move from %i to %i.\n", curidx, index);
 
 		if (curidx < index) {
 			path.truncate(index);

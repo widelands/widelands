@@ -143,6 +143,7 @@ public:
 	void act_removeroad();
 	void act_build(int idx);
 	void act_geologist();
+   void act_attack();
 
 private:
    void add_tab(const char* picname, UIPanel* panel);
@@ -178,6 +179,8 @@ static const char* const pic_showstatistics = "pics/menu_show_statistics.png";
 static const char* const pic_debug = "pics/menu_debug.png";
 static const char* const pic_abort = "pics/menu_abort.png";
 static const char* const pic_geologist = "pics/menu_geologist.png";
+/// TESTING STUFF
+static const char* const pic_attack = "pics/menu_attack.png";
 
 
 /*
@@ -306,6 +309,27 @@ void FieldActionWindow::add_buttons_auto()
 				add_button(buildbox, pic_remroad, &FieldActionWindow::act_removeroad);
 		}
 	}
+      // There goes actions that can be done to non-owner fields ;)
+   else
+   {
+      BaseImmovable *imm = m_map->get_immovable(m_field);
+      // The box with road-building buttons
+      buildbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
+
+      if (imm && imm->get_type() == Map_Object::FLAG)
+      {
+         //Add flag actions
+         Flag *flag = (Flag*)imm;
+
+         Building *building = flag->get_building();
+         if (building && 
+               m_iabase->get_egbase()->is_game() &&
+               ((building->get_building_type() == Building::MILITARYSITE) ||
+                (building->get_building_type() == Building::WAREHOUSE))
+            )
+            add_button(buildbox, pic_attack, &FieldActionWindow::act_attack);
+      }
+   }
 
 	// Watch actions, only when game (no use in editor)
    // same for statistics. census is ok
@@ -675,6 +699,28 @@ void FieldActionWindow::act_geologist()
 
    if (imm && imm->get_type() == Map_Object::FLAG)
 	g->send_player_flagaction (static_cast<Flag*>(imm), FLAGACTION_GEOLOGIST);
+
+   okdialog();
+}
+
+/**
+ * Here there are a problem: the sender of an event is allways the owner of were is done this even.
+ * But for attacks, the owner of an event is the player who start an attack, so is needed to get an
+ * extra parameter to the send_player_enemyflagaction, the player number
+ *
+ */
+void FieldActionWindow::act_attack()
+{
+   assert(m_iabase->get_egbase()->is_game());
+   Interactive_Player* m_player=static_cast<Interactive_Player*>(m_iabase);
+   Game* g = m_player->get_game();
+   BaseImmovable *imm = g->get_map()->get_immovable(m_field);
+
+   if (imm && imm->get_type() == Map_Object::FLAG)
+	g->send_player_enemyflagaction (
+      static_cast<Flag*>(imm), 
+      ENEMYFLAGACTION_ATTACK, 
+      m_player->get_player_number());
 
    okdialog();
 }
