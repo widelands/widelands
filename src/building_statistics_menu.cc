@@ -245,6 +245,12 @@ void Building_Statistics_Menu::clicked(int id) {
                      }
                   }
                }
+            if(!found) { // Now look at the old
+               Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
+               if( b->get_building_type() == Building::PRODUCTIONSITE) 
+                  if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD ) 
+                     found = true;
+            }
          }
          break;
 
@@ -262,6 +268,12 @@ void Building_Statistics_Menu::clicked(int id) {
                         break;
                      }
                   }
+               }
+            if(!found) { // Now look at the old
+               Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
+               if( b->get_building_type() == Building::PRODUCTIONSITE) 
+                     if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD ) 
+                        found = true;
                }
          }
          break;
