@@ -22,7 +22,7 @@
 #include "rendertarget.h"
 #include "types.h"
 #include "ui_icongrid.h"
-
+#include "font.h"
 
 /**
 Initialize the grid
@@ -39,6 +39,7 @@ UIIcon_Grid::UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, ui
 	m_highlight = -1;
 	m_clicked = -1;
 	m_selected = -1;
+	m_font_height = 0;
 
 	m_selectbox_color.set(255, 255, 0);
 }
@@ -48,14 +49,19 @@ UIIcon_Grid::UIIcon_Grid(UIPanel* parent, int x, int y, int cellw, int cellh, ui
 Add a new icon to the list and resize appropriately.
 Returns the index of the newly added icon.
 */
-int UIIcon_Grid::add(uint picid, void* data)
+int UIIcon_Grid::add(uint picid, void* data, std::string descr)
 {
 	Item it;
 
 	it.picid = picid;
 	it.data = data;
+	it.descr = descr;
 
 	m_items.push_back(it);
+
+	if (it.descr.size() && !m_font_height)
+		m_font_height = g_font->get_fontheight() + 2;
+
 
 	// resize
 	if (get_orientation() == Grid_Horizontal)
@@ -63,18 +69,18 @@ int UIIcon_Grid::add(uint picid, void* data)
 		int rows = (m_items.size() + m_columns - 1) / m_columns;
 
 		if (rows <= 1)
-			set_size(m_cell_width * m_items.size(), m_cell_height);
+			set_size(m_cell_width * m_items.size(), m_cell_height + m_font_height);
 		else
-			set_size(m_cell_width * m_columns, m_cell_height * rows);
+			set_size(m_cell_width * m_columns, m_cell_height * rows + m_font_height);
 	}
 	else
 	{
 		int cols = (m_items.size() + m_columns - 1) / m_columns;
 
 		if (cols <= 1)
-			set_size(m_cell_width, m_cell_height * m_items.size());
+			set_size(m_cell_width, m_cell_height * m_items.size() + m_font_height);
 		else
-			set_size(m_cell_width * cols, m_cell_height * m_columns);
+			set_size(m_cell_width * cols, m_cell_height * m_columns + m_font_height);
 	}
 
 	return m_items.size() - 1;
@@ -123,11 +129,13 @@ Draw the building symbols
 void UIIcon_Grid::draw(RenderTarget* dst)
 {
 	int x, y;
+	bool highlight = false;
 
 	// First of all, draw the highlight
 	if (m_highlight >= 0 && (m_clicked < 0 || m_clicked == m_highlight)) {
 		get_cell_position(m_highlight, &x, &y);
 		dst->brighten_rect(x, y, m_cell_width, m_cell_height, MOUSE_OVER_BRIGHT_FACTOR);
+		highlight = true;
 	}
 
 	// Draw the symbols
@@ -169,8 +177,10 @@ void UIIcon_Grid::draw(RenderTarget* dst)
 			dst->draw_rect(x, y, m_cell_width, m_cell_height, m_selectbox_color);
 		}
 	}
-}
 
+	if (highlight)
+		g_font->draw_string(dst, 1, get_h() - m_font_height, m_items[m_highlight].descr.c_str());
+}
 
 /**
 Return the item index for a given point inside the UIIcon_Grid.

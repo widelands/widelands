@@ -91,7 +91,7 @@ void BuildGrid::add(int id)
 	Building_Descr* descr = m_tribe->get_building_descr(id);
 	uint picid = descr->get_buildicon();
 
-	UIIcon_Grid::add(picid, (void*)id);
+	UIIcon_Grid::add(picid, (void*)id, descr->get_descname());
 }
 
 

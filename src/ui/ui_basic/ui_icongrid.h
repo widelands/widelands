@@ -21,7 +21,9 @@
 #ifndef included_ui_icongrid_h
 #define included_ui_icongrid_h
 
+#include <string>
 #include <vector>
+
 #include "rgbcolor.h"
 #include "ui_panel.h"
 #include "ui_signal.h"
@@ -54,7 +56,7 @@ public:
 	bool is_persistant() const { return m_flags & Grid_Persistant; }
 	uint get_orientation() const { return m_flags & Grid_Orientation_Mask; }
 
-	int add(uint picid, void* data);
+	int add(uint picid, void* data, std::string descr = std::string());
 	void* get_data(int idx);
 
 	void set_selection(int idx);
@@ -77,6 +79,7 @@ private:
 	struct Item {
 		uint		picid;
 		void*		data;
+		std::string	descr;
 	};
 
 	uint	m_flags;
@@ -87,6 +90,7 @@ private:
 
 	int	m_cell_width;	///< size of one cell
 	int	m_cell_height;
+	int	m_font_height;
 
 	std::vector<Item>	m_items;
 
