@@ -76,7 +76,7 @@ SinglePlayerMenu::SinglePlayerMenu()
 
 void SinglePlayerMenu::not_supported()
 {
-	critical_error("This is not yet supported. You can savly click on continue.");
+	critical_error("This is not yet supported. You can safely click on continue.");
 }
 
 
