@@ -36,6 +36,7 @@ class.
 
 #include "building_int.h"
 #include "ui_box.h"
+#include "ui_progressbar.h"
 #include "waresdisplay.h"
 
 
@@ -604,6 +605,7 @@ public:
 	virtual void think();
 
 private:
+	ProgressBar*	m_progress;
 };
 
 
@@ -619,6 +621,14 @@ ConstructionSite_Window::ConstructionSite_Window(Interactive_Player* parent, Con
 	: Building_Window(parent, cs, registry)
 {
 	Box* box = new Box(this, 0, 0, Box::Vertical);
+
+	// Add the progress bar
+	m_progress = new ProgressBar(box, 0, 0, ProgressBar::DefaultWidth, ProgressBar::DefaultHeight,
+							ProgressBar::Horizontal);
+	m_progress->set_total(1 << 16);
+	box->add(m_progress, Box::AlignCenter);
+
+	box->add_space(8);
 
 	// Add the wares queue
 	for(uint i = 0; i < cs->get_nrwaresqueues(); i++)
@@ -660,6 +670,8 @@ Make sure the window is redrawn when necessary.
 void ConstructionSite_Window::think()
 {
 	Building_Window::think();
+
+	m_progress->set_state(((ConstructionSite*)get_building())->get_built_per64k());
 }
 
 

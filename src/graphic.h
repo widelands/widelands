@@ -310,8 +310,8 @@ public:
 	virtual int get_h() const = 0;
 
 	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr) = 0;
-        virtual void fill_rect(int x, int y, int w, int h, RGBColor clr) = 0;
-        virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
+	virtual void fill_rect(int x, int y, int w, int h, RGBColor clr) = 0;
+	virtual void brighten_rect(int x, int y, int w, int h, int factor) = 0;
 	virtual void clear() = 0;
 
 	virtual void blit(int dstx, int dsty, uint picture) = 0;
