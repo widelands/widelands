@@ -17,61 +17,50 @@
  *
  */
 
-#ifndef __S__EVENT_MESSAGE_BOX_OPTION_MENU_H
-#define __S__EVENT_MESSAGE_BOX_OPTION_MENU_H
+#ifndef __S__EVENT_MESSAGE_BOX_OPTION_MENU_PIC_OPTIONS_H
+#define __S__EVENT_MESSAGE_BOX_OPTION_MENU_PIC_OPTIONS_H
 
-#include <string>
 #include "ui_window.h"
 
 class Editor_Interactive;
-class UIButton;
 class Event_Message_Box;
-class UITextarea;
-class UIMultiline_Editbox;
-class UIEdit_Box;
+class Event_Message_Box_Option_Menu;
 class UICheckbox;
-class UIListselect;
-class Trigger;
+class UIEdit_Box;
+class UIRadiogroup;
+class UITextarea;
 
 /*
  * This is a modal box - The user must end this first 
  * before it can return
  */
-class Event_Message_Box_Option_Menu : public UIWindow {
+class Event_Message_Box_Option_Menu_Picture_Options : public UIWindow {
    public:
-      Event_Message_Box_Option_Menu(Editor_Interactive*, Event_Message_Box*);
-      ~Event_Message_Box_Option_Menu();
+      Event_Message_Box_Option_Menu_Picture_Options(Editor_Interactive*, bool*, int*, int*);
+      ~Event_Message_Box_Option_Menu_Picture_Options();
 
       bool handle_mouseclick(uint btn, bool down, int mx, int my);
 
    private:
-      static const int MAX_BUTTONS=4;
-   
       void update(void);
       void clicked(int);
       
-      Event_Message_Box* m_event;
-      Editor_Interactive* m_parent;
+      UIPanel* m_parent;
       
-      struct Button_Descr {
-         std::string name;
-         Trigger* trig;
-      } m_buttons[MAX_BUTTONS];
-
-      UICheckbox* m_is_one_time_event;
-      UICheckbox* m_is_modal;
-      UIEdit_Box* m_caption;
-      UIEdit_Box* m_name;
-      UIEdit_Box* m_window_title; 
-      UIEdit_Box* m_button_name;
-      UITextarea* m_nr_buttons_ta;
-      int         m_nr_buttons;
-      UIMultiline_Editbox* m_text;
-      UITextarea* m_current_trigger_ta;
-      UIListselect* m_buttons_ls;
-      UICheckbox* m_uses_picture;
+      bool *m_clrkey_var;
+      int* m_picid_var;
+      int* m_pos_var;
+      UICheckbox* m_clrkey;
+      UIEdit_Box* m_filename;
+      UIRadiogroup *m_radiogroup;
+      UITextarea* m_pic_assigned;
 };
 
-#endif
 
+
+
+
+
+
+#endif
 
