@@ -143,7 +143,7 @@ void card_select_menue(void) {
 
 
 		  if(*bexit) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 single_player_menue();
 					 return;
 		  }
@@ -152,7 +152,7 @@ void card_select_menue(void) {
 					 // a selection has been done
 					 char* map = new char[strlen(sel->get_selection())+1];
 					 strcpy(map, sel->get_selection());
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 Game *g=new Game;
 					 g->run(map, 7);
 					 delete map;

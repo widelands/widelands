@@ -116,33 +116,33 @@ void main_menue(void) {
 
 		  
 		  if(*doexit) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 return;
 		  }
 		  else if(*dosingle_player) { 
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 single_player_menue();
 		  }
 		  else if(*domulti_player) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 // TODO
 					 critical_error("This is not yet supported. You can savly click on continue.");
 					 main_menue();
 		  }
 		  else if(*dooptions) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 // TODO
 					 critical_error("This is not yet supported. You can savly click on continue.");
 					 main_menue();
 		  }
 		  else if(*doreadme) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 // TODO
 					 critical_error("This is not yet supported. You can savly click on continue.");
 					 main_menue();
 		  }
 		  else if(*doabout) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 // TODO
 					 critical_error("This is not yet supported. You can savly click on continue.");
 					 main_menue();

@@ -47,6 +47,20 @@ Interactive_Player::Interactive_Player(Map* m) {
 		  bshould_endgame=false;
 
 		  mv= new Map_View(m);
+
+		  // Creating the user interface (lots, and lots to do)
+		  mwin=g_ui.create_window((g_gr.get_xres()>>1)-(MAIN_WINDOW_WIDTH>>1), g_gr.get_yres()-MAIN_WINDOW_HEIGHT, MAIN_WINDOW_WIDTH,
+								MAIN_WINDOW_HEIGHT, Window::FLAT);
+		  Button* b=mwin->create_button(0,0,30,30,2);
+		  b->set_pic(g_fh.get_string("EXIT", 0));
+		  b->register_func(exit_click, this);
+		  
+		  b=mwin->create_button(34,0,30,30,2);
+		  b->set_pic(g_fh.get_string("WIN", 0));
+		  b->register_func(window_click, this);
+
+		  mwin->create_button(68,0,30,30,2);
+		  mwin->create_button(102,0,30,30,2);
 }
 
 /** Interactive_Player::~Interactive_Player(void) 
@@ -54,6 +68,7 @@ Interactive_Player::Interactive_Player(Map* m) {
  * cleanups
  */
 Interactive_Player::~Interactive_Player(void)  {
+		  g_ui.delete_all_windows();
 		  delete mv;
 }
 
@@ -69,8 +84,8 @@ void Interactive_Player::interact(void) {
 
 		  g_ip.handle_pending_input(); 
 		  if(g_gr.does_need_update()) {
-					 g_ui.draw();
 					 mv->draw();
+					 g_ui.draw();
 					 g_cur.draw(g_ip.get_mpx(), g_ip.get_mpy());
 					 g_gr.update();
 					 //g_gr.update_quarter();
@@ -103,9 +118,8 @@ void Interactive_Player::grab_input(void) {
 int IP_lclick(const bool b, const uint x, const uint y, void* a) {
 		  if(g_ui.handle_click(1, b, x, y, NULL) == INPUT_HANDLED) return INPUT_HANDLED;
 		  
-		  Interactive_Player* pl= (Interactive_Player*) a;
+		  // Interactive_Player* pl= (Interactive_Player*) a;
 		  
-		  pl->bshould_endgame=true;
 		  return INPUT_HANDLED;
 }
 
@@ -156,3 +170,21 @@ int IP_mmf(const uint x, const uint y, const int xdiff, const int ydiff, const b
 
 		  return INPUT_HANDLED;
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BUTTON FUNCS down here. Will be a hole bunch of them, i guess
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Main Window: Second leftest button is clicked.
+void window_click(Window* par, void* a) {
+	//	  Interactive_Player* pl= (Interactive_Player*) a;
+		  
+		  g_ui.create_window(40, 40, 100, 100);
+};
+// Main Window: Leftest button is clicked.
+void exit_click(Window* par, void* a) {
+		  Interactive_Player* pl= (Interactive_Player*) a;
+		  
+		  pl->bshould_endgame=true;
+};

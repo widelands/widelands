@@ -88,21 +88,21 @@ void single_player_menue(void) {
 		  }		
 
 		  if(*brunmm) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 main_menue();
 		  }
 		  else if(*brunsc) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 card_select_menue();
 		  }
 		  else if(*brunc) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 // TODO
 					 critical_error("This is not yet supported. You can savly click on continue.");
 					 single_player_menue();
 		  }
 		  else if(*bloadg) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 // TODO
 					 critical_error("This is not yet supported. You can savly click on continue.");
 					 single_player_menue();

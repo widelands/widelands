@@ -22,6 +22,10 @@
 
 #include "mytypes.h"
 #include "mapview.h"
+#include "ui.h"
+
+#define MAIN_WINDOW_WIDTH 136
+#define MAIN_WINDOW_HEIGHT 34
 
 class Interactive_Player {
 		 Interactive_Player(const Interactive_Player&);
@@ -41,11 +45,16 @@ class Interactive_Player {
 		  friend int IP_mmf(const uint, const uint, const int, const int, const bool, const bool, void*);
 		  friend int IP_lclick(const bool, const uint, const uint, void* );
 		  friend int IP_rclick(const bool, const uint, const uint, void* );
-		  
+		 
+		  // Button funcs, all are our friends
+		  friend void exit_click(Window*, void*);
+		  friend void window_click(Window*, void*);
+
 		  private:
 					 Map_View* mv;
 					 bool bshould_endgame;
 					 bool bshould_exit;
+					 Window* mwin;
 };
 
 

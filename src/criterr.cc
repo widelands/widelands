@@ -72,11 +72,11 @@ void critical_error(const char* str) {
 		  }		
 
 		  if(*bquit) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 exit(-1);
 		  }
 		  else if(*breturn) {
-					 g_ui.delete_window(win);
+					 g_ui.delete_all_windows();
 					 // we return, though this might kill the app
 					 return;
 		  }

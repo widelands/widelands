@@ -65,19 +65,48 @@ User_Interface::User_Interface(void) {
  * Returns: INPUT_HANDLED / INPUT_UNHANDLED
 */
 int User_Interface::handle_click(const uint but, const bool b, const uint x, const uint y, void* a) {
-
+		  
+		  dragwin=0;
 		  
 		  // Check every window
-		  for(win_p* p=first; p &&  p->w; p=p->next) {
+		  for(win_p* p=last->prev; p &&  p->w; p=p->prev) {
 					 if(p->w->get_xpos()<x && p->w->get_xpos()+p->w->get_w()>x &&
 										  p->w->get_ypos()<y && p->w->get_ypos()+p->w->get_h()>y) {
 								// Mouse is inside this window. 
-								if(p->w->get_flags() != Window::FLAT && but==2) delete_window(p->w);
+								if(p->w->get_flags() != Window::FLAT && b && but==2) {
+										  delete_window(p->w);
+										  return INPUT_HANDLED;
+								}
+								// make this the topmost window
+								if(p->w->get_flags() != Window::FLAT) {
+										  if(p==first) {
+													 p->next->prev=0;
+													 first=p->next;
+													 last->prev->next=p; 
+													 p->prev=last->prev;
+													 p->next=last;
+													 last->prev=p;
+													 g_gr.register_update_rect(p->w->get_xpos(), p->w->get_ypos(),
+																		  p->w->get_w(), p->w->get_h());
+										  } else if(p!=last->prev) {
+													 // p is not topmost
+													 p->next->prev=p->prev;
+													 p->prev->next=p->next;
+													 last->prev->next=p; 
+													 p->prev=last->prev;
+													 p->next=last;
+													 last->prev=p;
+													 g_gr.register_update_rect(p->w->get_xpos(), p->w->get_ypos(),
+																		  p->w->get_w(), p->w->get_h());
+										  }
+								}
+
 								if(p->w->handle_click(but, b, x-p->w->get_xpos(), y-p->w->get_ypos()) == INPUT_UNHANDLED) {
 										  if(p->w->get_flags() != Window::FLAT && b && but==1) {					 
 													 dragwin=p->w;
 													 return INPUT_HANDLED;
 										  }
+										  return INPUT_UNHANDLED;
 								} else return INPUT_HANDLED;
 					 }
 		  }
@@ -104,9 +133,11 @@ int User_Interface::handle_mm(const uint x, const uint y, const int xdiff, const
 					 move_window(dragwin, dragwin->get_xpos()+xdiff, dragwin->get_ypos()+ydiff);
 					 return INPUT_HANDLED;
 		  }
+		  
+		  dragwin=0;
 
 		  // Check every window
-		  for(win_p* p=first; p &&  p->w; p=p->next) {
+		  for(win_p* p=last->prev; p &&  p->w; p=p->prev) {
 					 if(p->w->get_xpos()<x && p->w->get_xpos()+p->w->get_w()>x &&
 										  p->w->get_ypos()<y && p->w->get_ypos()+p->w->get_h()>y) {
 								// Mouse is inside this window. 
@@ -171,9 +202,9 @@ void User_Interface::move_window(Window* win, const uint x, const uint y) {
 		  uint mh=win->get_h();
 
 		  if(myx+mw >= g_gr.get_xres()) myx=g_gr.get_xres()-mw;
-		  if(myx<0) return;
+		  if(myx<0) myx=0; 
 		  if(myy+mh >= g_gr.get_yres()) myy=g_gr.get_yres()-mh;
-		  if(myy<0) return;
+		  if(myy<0) myy=0; 
 
 		  win->set_pos(myx, myy);
 }
@@ -225,7 +256,30 @@ Window*  User_Interface::create_window(const uint x, const uint y, const uint w,
 
 		  return win;
 }
-		  
+		 
+/** void User_Interface::delete_all_windows(void) 
+ *
+ * This function cleans the whole screen from windows. It's used
+ * to clean up after each menue and after each game.
+ *
+ * Args: none
+ * Returns: Nothing
+ */
+void User_Interface::delete_all_windows(void) {
+		  win_p* p;
+		  win_p* temp;
+		  for(p=last->prev; p; p=temp) {
+					 temp=p->prev;
+					 delete p->w;
+					 delete p;
+		  }
+		  last->prev=0;
+		  last->next=0;
+		  last->w=0;
+		  first=last;
+		  dragwin=0;
+}
+
 /** void User_Interface::delete_window(Window* win) 
  *
  * This function finally removes a window
@@ -235,12 +289,11 @@ Window*  User_Interface::create_window(const uint x, const uint y, const uint w,
  */
 void User_Interface::delete_window(Window* win) { 
 		  assert(win);
-		  
+		 
 		  win_p* w=first;
 		  while(w && w->w!=win) w=w->next;
 
 		  assert(w!=last);
-
 
 		  delete w->w;
 		  w->w=0;

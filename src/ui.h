@@ -556,12 +556,13 @@ class User_Interface : public Singleton<User_Interface> {
 		  ~User_Interface(void);
 		  
 		  Window* create_window(const uint, const uint, const uint, const uint, const Window::Flags=Window::DEFAULT); 
+		  void delete_all_windows(void);
 		  void delete_window(Window*); 
 		  void move_window(Window*, const uint, const uint);
 		  void draw(void);
 		  int handle_mm(const uint, const uint, const int, const int, const bool, const bool, void*);
 		  int handle_click(const uint, const bool, const uint, const uint, void* );
-
+		  
 		  private:
 		  struct win_p {
 					 win_p* next; 

@@ -143,6 +143,7 @@ Window::~Window(void) {
  * Returns: Nothing
  */
 void Window::set_pos(uint posx, uint posy) {
+		  g_gr.register_update_rect(x, y, w, h);
 		  x=posx; y=posy;
 		  g_gr.register_update_rect(x, y, w, h);
 }
@@ -559,7 +560,6 @@ int Window::handle_click(const uint pbut, const bool b, const uint x, const uint
 		  if(pbut==2) return INPUT_UNHANDLED; // we do not react on this
 		  uint i;
 
-		  
 		  // check buttons
 		  for(i=0; i<nbut; i++) {
 					 if(but[i]->get_xpos()<x && but[i]->get_xpos()+but[i]->get_w()>x &&
@@ -607,7 +607,6 @@ int Window::handle_click(const uint pbut, const bool b, const uint x, const uint
 		  }
 	
 		  // we do not care for textareas, they are unresponsive to clicks
-		  
 		  return INPUT_UNHANDLED;
 }
 
