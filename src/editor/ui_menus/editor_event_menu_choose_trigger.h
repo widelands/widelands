@@ -51,7 +51,7 @@ class Editor_Event_Menu_Choose_Trigger : public UIWindow {
 
       Editor_Interactive *m_parent;
       UIListselect* m_available, *m_selected;
-      UIButton *m_btn_ltor, *m_btn_rtol;
+      UIButton *m_btn_ltor, *m_btn_rtol, *m_btn_toggle_event;
       Event* m_event;
       void update(void);
       void available_list_selected(int);

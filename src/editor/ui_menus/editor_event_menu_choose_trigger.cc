@@ -39,13 +39,13 @@ Create all the buttons etc...
 ===============
 */
 Editor_Event_Menu_Choose_Trigger::Editor_Event_Menu_Choose_Trigger(Editor_Interactive *parent, Event* event)
-	: UIWindow(parent, 0, 0, 380, 250, "Choose Triggers")
+	: UIWindow(parent, 0, 0, 380, 270, "Choose Triggers")
 {
    m_parent=parent;
    m_event=event;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Event Menu", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, "Choose Triggers for Event", Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -56,13 +56,20 @@ Editor_Event_Menu_Choose_Trigger::Editor_Event_Menu_Choose_Trigger(Editor_Intera
    
    // Event List
    new UITextarea(this, spacing, offsy, "Registered Triggers: ", Align_Left);
-   m_selected=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing-20, get_inner_h()-offsy-55);
+   m_selected=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing-20, get_inner_h()-offsy-85);
    m_selected->selected.set(this, &Editor_Event_Menu_Choose_Trigger::selected_list_selected);
 
    // Trigger List
    new UITextarea(this, (get_inner_w()/2)+spacing, offsy, "Available Triggers", Align_Left);
-   m_available=new UIListselect(this, (get_inner_w()/2)+spacing, offsy+20, (get_inner_w()/2)-2*spacing-20, get_inner_h()-offsy-55);
+   m_available=new UIListselect(this, (get_inner_w()/2)+spacing+20, offsy+20, (get_inner_w()/2)-2*spacing-20, get_inner_h()-offsy-85);
    m_available->selected.set(this, &Editor_Event_Menu_Choose_Trigger::available_list_selected);
+
+   // Toggle when to run button
+   new UITextarea(this, spacing, get_inner_h()-60+spacing, 200, 20, "Event runs when trigger is: ", Align_Center);
+
+   m_btn_toggle_event=new UIButton(this, spacing+200,  get_inner_h()-60+spacing, 60, 20, 1, 5);
+   m_btn_toggle_event->set_title("---");
+   m_btn_toggle_event->clickedid.set(this, &Editor_Event_Menu_Choose_Trigger::clicked);
 
    // OK button
    posy=get_inner_h()-30;
@@ -77,7 +84,7 @@ Editor_Event_Menu_Choose_Trigger::Editor_Event_Menu_Choose_Trigger(Editor_Intera
    b->set_title("Cancel");
    b->clickedid.set(this, &Editor_Event_Menu_Choose_Trigger::clicked);
    posx+=80+spacing;
-   
+  
    // Event options
    posx=(get_inner_w()/2)-40;
    b=new UIButton(this, posx, posy, 80, 20, 1, 4);
@@ -85,14 +92,14 @@ Editor_Event_Menu_Choose_Trigger::Editor_Event_Menu_Choose_Trigger(Editor_Intera
    b->clickedid.set(this, &Editor_Event_Menu_Choose_Trigger::clicked);
 	
    // Left to right button
-   posx=get_w()/2-20;
+   posx=get_inner_w()/2-20;
    posy=offsy+50;
    m_btn_ltor=new UIButton(this, posx, posy, 40, 20, 1, 2);
    m_btn_ltor->set_title("->");
    m_btn_ltor->clickedid.set(this, &Editor_Event_Menu_Choose_Trigger::clicked);
   
    // Right to left button
-   posx=get_w()/2-20;
+   posx=get_inner_w()/2-20;
    posy=offsy+70+spacing;
    m_btn_rtol=new UIButton(this, posx, posy, 40, 20, 1, 3);
    m_btn_rtol->set_title("<-");
@@ -148,8 +155,17 @@ void Editor_Event_Menu_Choose_Trigger::update(void) {
 
    if(m_available->get_selection()==0) 
       m_btn_rtol->set_enabled(false);
-   if(m_selected->get_selection()==0) 
+   if(m_selected->get_selection()==0) {
       m_btn_ltor->set_enabled(false);
+      m_btn_toggle_event->set_enabled(false);
+      m_btn_toggle_event->set_title("---");
+   } else {
+      Trigger_Data* t=static_cast<Trigger_Data*>(m_selected->get_selection());
+      if(t->run_enabled)
+         m_btn_toggle_event->set_title("set");
+      else 
+         m_btn_toggle_event->set_title("unset");
+   }
 }
 
 /*
@@ -223,6 +239,14 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
          Event_Factory::make_event_with_option_dialog(m_event->get_id(), m_parent, m_event);
       }
       break;
+
+   case 5:
+      {
+         // Toggle button
+         Trigger_Data* t=static_cast<Trigger_Data*>(m_selected->get_selection());
+         t->run_enabled=!t->run_enabled;
+         update();
+      } 
    }
 }
 
@@ -231,8 +255,11 @@ void Editor_Event_Menu_Choose_Trigger::clicked(int id) {
  */
 void Editor_Event_Menu_Choose_Trigger::available_list_selected(int i) {
    m_btn_rtol->set_enabled(true);
+   update();
 }
 void Editor_Event_Menu_Choose_Trigger::selected_list_selected(int i) {
+   m_btn_toggle_event->set_enabled(true);
    m_btn_ltor->set_enabled(true);
+   update();
 }
 
