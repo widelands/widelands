@@ -17,12 +17,10 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
 #include "instances.h"
 #include "game.h"
 #include "map.h"
-
 
 /** Object_Manager::~Object_Manager()
  *
@@ -68,10 +66,14 @@ void Object_Manager::free_object(Game* g, Map_Object* obj)
 {
 	int x, y;
 
-	if (g)
+	if (g) {
+		if (obj->get_current_task())
+			obj->task_end(g); // subtle...
+	
 		if (obj->get_position(&x, &y))
 			if (obj->has_attribute(Map_Object::ROBUST))
 				g->get_map()->recalc_for_field(x, y);
+	}
 
 	m_objects.erase(obj->m_serial);
 	delete obj;
@@ -106,6 +108,10 @@ Map_Object::Map_Object(Map_Object_Descr* descr)
 	
 	m_walking = IDLE;
 	m_walkstart = m_walkend = 0;
+	
+	m_task = 0;
+	m_task_acting = false;
+	m_task_switching = false;
 }
 
 /** Map_Object::~Map_Object()
@@ -119,6 +125,292 @@ Map_Object::~Map_Object()
 		*m_linkpprev = m_linknext;
 		if (m_linknext)
 			m_linknext->m_linkpprev = m_linkpprev;
+	}
+}
+
+
+/*
+Objects and tasks
+-----------------
+
+Every object _always_ has a current task which it is doing.
+For a boring object, this task is always an IDLE task, which will be
+reduced to effectively 0 CPU overhead.
+
+For another simple example, look at animals. They have got two states:
+moving or not moving. This is actually represented as two tasks, 
+IDLE and MOVE_PATH, which are both part of the default package that comes
+with Map_Object.
+
+Now there are some important considerations:
+- every object must always have a task, even if it's IDLE
+- be careful as to when you call task handling functions; the comments
+  above each function tell you when you can call them, and which functions
+  you can call from them
+- a task can only end itself; it cannot be ended by someone else
+- there are default, predefined tasks (TASK_IDLE, TASK_MOVEPATH); use them
+- you must call start_task_*() for the default tasks. Do not start them
+  directly!
+
+To implement a new task, you need to create a new task_begin(), task_act()
+and perhaps task_end(). Create a switch()-statement for the new task(s) and
+call the base class' task_*() functions in the default branch.
+Most likely, you'll also want a start_task_*()-type function.
+*/
+
+/** Map_Object::init(Game*)
+ *
+ * Make sure you call this from derived classes!
+ *
+ * Initialize the object by setting the initial task.
+ */
+void Map_Object::init(Game* g)
+{
+	m_lasttask = 0;
+	m_lasttask_success = true;
+	m_nexttask = 0;
+	
+	do_next_task(g);
+}
+
+/** Map_Object::act(Game*)
+ *
+ * Hand the acting over to the task
+ * 
+ * Change to the next task if necessary.
+ */
+void Map_Object::act(Game* g)
+{
+	m_task_acting = true;
+	int tdelta = task_act(g);
+	// a tdelta == 0 is probably NOT what you want - make your intentions clear
+	assert(!m_task || tdelta < 0 || tdelta > 0);
+	m_task_acting = false;
+
+	if (!m_task) {
+		do_next_task(g);
+		return;
+	}
+		
+	if (tdelta > 0)
+		g->get_cmdqueue()->queue(g->get_gametime()+tdelta, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+}
+
+/** Map_Object::do_next_task(Game*) [private]
+ *
+ * Try to get the next task running.
+ */
+void Map_Object::do_next_task(Game* g)
+{
+	int task_retries = 0;
+	
+	assert(!m_task);
+	
+	while(!m_task) {
+		assert(task_retries < 5); // detect infinite loops early
+	
+		m_task_switching = true;
+		task_start_best(g, m_lasttask, m_lasttask_success, m_nexttask);
+		m_task_switching = false;
+
+		do_start_task(g);
+				
+		task_retries++;
+	}
+}
+
+/** Map_Object::start_task(Game*, uint task)
+ *
+ * Start the given task.
+ *
+ * Only allowed when m_task_switching, i.e. from init() and act().
+ * Consequently, derived classes can only call this from task_start_best().
+ */
+void Map_Object::start_task(Game* g, uint task)
+{
+	assert(m_task_switching);
+	assert(!m_task);
+	
+	m_task = task;
+}
+
+/** Map_Object::do_start_task(Game*) [private]
+ *
+ * Actually start the task (m_task is set already)
+ */
+void Map_Object::do_start_task(Game* g)
+{
+	assert(m_task);
+
+	m_task_acting = true;
+	int tdelta = task_begin(g);
+	// a tdelta == 0 is probably NOT what you want - make your intentions clear
+	assert(!m_task || tdelta < 0 || tdelta > 0);
+	m_task_acting = false;
+	
+	if (m_task && tdelta > 0)
+		g->get_cmdqueue()->queue(g->get_gametime()+tdelta, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+}
+
+/** Map_Object::end_task(Game*, bool success, uint nexttask)
+ *
+ * Let the task end itself, indicating success or failure.
+ * nexttask will be passed to task_start_best() to help the decision.
+ *
+ * Only allowed when m_task_acting, i.e. from act() or start_task()
+ * and thus only from task_begin() and task_act()
+ *
+ * Be aware that end_task() calls task_end() which may cleanup some
+ * structures belonging to your task.
+ */
+void Map_Object::end_task(Game* g, bool success, uint nexttask)
+{
+	assert(m_task_acting);
+	assert(m_task);
+
+	task_end(g);
+		
+	m_lasttask = m_task;
+	m_lasttask_success = success;
+	m_nexttask = nexttask;
+	
+	m_task = 0;
+}
+
+/** Map_Object::start_task_idle(Game*, Animation* anim, int timeout)
+ *
+ * Start an idle phase, using the given animation
+ * If the timeout is a positive value, the idle phase stops after the given
+ * time.
+ *
+ * This task always succeeds.
+ */
+void Map_Object::start_task_idle(Game* g, Animation* anim, int timeout)
+{
+	// timeout == 0 will wait indefinitely - probably NOT what you want (use -1 for infinite)
+	assert(timeout < 0 || timeout > 0);
+
+	set_animation(g, anim);
+	task.idle.timeout = timeout;
+	start_task(g, TASK_IDLE);
+}
+
+/** Map_Object::start_task_movepath(Game* g, Coords dest, int persist, Animation **anims)
+ *
+ * Start moving to the given destination. persist is the same parameter as
+ * for Map::findpath().
+ * anims is an array of 6 animations, one for each direction.
+ * The order is the canonical NE, E, SE, SW, W, NW (order of the enum)
+ *
+ * Returns false if no path could be found.
+ *
+ * The task finishes once the goal has been reached. It may fail.
+ */
+bool Map_Object::start_task_movepath(Game* g, Coords dest, int persist, Animation **anims)
+{
+	task.movepath.path = new Path;
+
+	if (g->get_map()->findpath(m_pos, dest, get_movecaps(), persist, task.movepath.path) < 0) {
+		delete task.movepath.path;
+		return false;
+	}
+	
+	task.movepath.step = 0;
+	memcpy(task.movepath.anims, anims, sizeof(Animation*)*6);
+	
+	start_task(g, TASK_MOVEPATH);
+	return true;
+}
+		
+/** Map_Object::task_begin(Game*) [virtual]
+ *
+ * This function is called to start a task.
+ *
+ * In this function, you may:
+ *  - call end_task()
+ *  - call set_animation(), start_walk(), set_position() and similar functions
+ *  - call task_act() for "array-based" tasks
+ *
+ * You can schedule a call to task_act() by returning the time, in milliseconds,
+ * until task_act() should be could. NOTE: this time is relative to the current
+ * time!
+ * If you return a value <= 0, task_act() will _never_ be called. This means that
+ * the task can never end - it will continue till infinity (note that this may
+ * be changed at a later point, introducing something like interrupt_task).
+ */
+int Map_Object::task_begin(Game* g)
+{
+	switch(get_current_task()) {
+	case TASK_IDLE:
+		return task.idle.timeout;
+		
+	case TASK_MOVEPATH:
+		return task_act(g);
+	}
+
+	cerr << "task_begin: Unhandled task " << m_task << endl;
+	assert(!"task_begin: Unhandled task ");
+	return -1; // shut up compiler
+}
+
+/** Map_Object::task_act(Game*) [virtual]
+ *
+ * Calls to this function are scheduled by this function and task_begin().
+ *
+ * In this function you may call all the functions available in task_begin().
+ *
+ * As with task_begin(), you can also schedule another call to task_act() by
+ * returning a value > 0
+ */
+int Map_Object::task_act(Game* g)
+{
+	switch(get_current_task()) {
+	case TASK_IDLE:
+		end_task(g, true, 0); // success, no next task
+		return 0; /* will be ignored */
+	
+	case TASK_MOVEPATH:
+	{
+		if (task.movepath.step)
+			end_walk(g);
+		
+		if (task.movepath.step >= task.movepath.path->get_nsteps()) {
+			assert(m_pos == task.movepath.path->get_end());
+			end_task(g, true, 0); // success
+			return 0;
+		}
+
+		char dir = task.movepath.path->get_step(task.movepath.step);
+		Animation *a = task.movepath.anims[dir-1];
+	
+		int tdelta = start_walk(g, (WalkingDir)dir, a);
+		if (tdelta < 0) {
+			end_task(g, false, 0); // failure to reach goal
+			return 0;
+		}
+
+		task.movepath.step++;		
+		return tdelta;
+	}
+	}
+
+	cerr << "task_act: Unhandled task " << m_task << endl;
+	assert(!"task_act: Unhandled task ");
+	return -1; // shut up compiler
+}
+
+/** Map_Object::task_end(Game*) [virtual]
+ *
+ * Called by end_task(). Use it to clean up any structures allocated in
+ * task_begin() or a start_task_*() type function.
+ */
+void Map_Object::task_end(Game*)
+{
+	switch(get_current_task()) {
+	case TASK_MOVEPATH:
+		if (task.movepath.path)
+			delete task.movepath.path;
+		break;
 	}
 }
 
@@ -198,15 +490,13 @@ bool Map_Object::is_walking()
 	return m_walking != IDLE;
 }
 
-/** Map_Object::act_walk(Game* g)
+/** Map_Object::end_walk(Game* g)
  *
- * Call this from your act() function when is_walking()
+ * Call this from your task_act() function that was scheduled after start_walk().
  */
-bool Map_Object::act_walk(Game* g)
+void Map_Object::end_walk(Game* g)
 {
 	m_walking = IDLE;
-	
-	return false; // no longer walking
 }
 
 
@@ -214,11 +504,12 @@ bool Map_Object::act_walk(Game* g)
  *
  * Cause the object to walk, honoring passable/impassable parts of the map using movecaps.
  *
- * Important: this function schedules a CMD_ACT event which you must deal with correctly,
- *   which is a bit nasty. Ideally, all this acting business should be handled using an
- *   extensible state machine or even better, member function pointers.
+ * Returns the number of milliseconds after which the walk has ended. You must 
+ * call end_walk() after this time, so schedule a task_act().
+ *
+ * Returns a negative value when we can't walk into the requested direction.
  */
-bool Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
+int Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
 {
 	int newx, newy;
 	Field *newf;
@@ -241,20 +532,19 @@ bool Map_Object::start_walk(Game *g, WalkingDir dir, Animation *a)
 
 	if (!(m_field->get_caps() & movecaps & MOVECAPS_SWIM && newf->get_caps() & MOVECAPS_WALK) &&
 	    !(newf->get_caps() & movecaps))
-		return false;
+		return -1;
 
 	// Move is go
+	int tdelta = 2000; // :TODO: height-based speed changes
+	
 	m_walking = dir;
 	m_walkstart = g->get_gametime();
-	m_walkend = m_walkstart + 2000; // :TODO: height-based speed changes
+	m_walkend = m_walkstart + tdelta;
 	
 	set_position(g, newx, newy, newf);
-	
-	g->get_cmdqueue()->queue(m_walkend, SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
-	
 	set_animation(g, a);
 	
-	return true; // yep, we were successful
+	return tdelta; // yep, we were successful
 }
 
 /** Map_Object::set_position(Game* g, int x, int y, Field* f=0)

@@ -196,6 +196,8 @@ void Building::init(Game* g)
 	assert(player);
    
 	player->set_area_seen(m_pos.x, m_pos.y, get_descr()->get_see_area(), true);
+
+	Map_Object::init(g);
 }
 
 // 
@@ -514,7 +516,8 @@ class Building_HQ : public Building {
    public:
       Building_HQ(HQ_Descr* d);
 		
-		void init(Game* g);
+		virtual void init(Game* g);
+		virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 };
 
 // HQ code
@@ -526,11 +529,15 @@ Building_HQ::Building_HQ(HQ_Descr *d)
 
 void Building_HQ::init(Game* g)
 {
-	Building::init(g);
-	set_animation(g, get_descr()->get_idle_anim());
-
    // conquer area
 	conquer_area(get_owned_by(), g->get_map(), m_pos.x, m_pos.y, get_descr()->get_conquers());
+	
+	Building::init(g);
+}
+
+void Building_HQ::task_start_best(Game* g, uint prev, bool success, uint nexthint)
+{
+	start_task_idle(g, get_descr()->get_idle_anim(), -1);
 }
 
 // HQ description

@@ -25,6 +25,7 @@
 class Game;
 class Bitmap;
 class Animation;
+class Path;
 
 //
 // Base class for descriptions of worker, files and so on. this must just
@@ -94,14 +95,27 @@ class Map_Object {
 
 		// the enums tell us where we are going
       enum WalkingDir {
-         IDLE, 
-         WALK_NE,
-         WALK_E,
-         WALK_SE,
-         WALK_SW,
-         WALK_W,
-         WALK_NW
+         IDLE = 0,
+         WALK_NE = 1,
+         WALK_E = 2,
+         WALK_SE = 3,
+         WALK_SW = 4,
+         WALK_W = 5,
+         WALK_NW = 6,
       };
+		
+		enum {
+			TASK_NONE = 0,
+			
+			// Do nothing. Use start_task_idle() to invoke this task.
+			TASK_IDLE = 1,
+			
+			// Move along a path. Use start_task_movepath() to invoke this task
+			TASK_MOVEPATH = 2,
+		
+			// descendants of Map_Objects must use task IDs greater than this
+			TASK_FIRST_USER = 10,
+		};
 		
 	protected:
       Map_Object(Map_Object_Descr *descr);
@@ -113,11 +127,12 @@ class Map_Object {
 		
 		// init() is called from Instance::create, just after the constructor
 		// use it to trigger initial CMD_ACTs
-		virtual void init(Game*) { }
+		// make sure to always call Map_Object::init()!
+		virtual void init(Game*);
 
 		// act() is called whenever a CMD_ACT triggers.
 		// Some bobs may not want to act (e.g. borings)
-		virtual void act(Game*) { }
+		void act(Game*);
 		
 		// Let the Map_Object draw itself
 		virtual void draw(Game* game, Bitmap* dst, int posx, int posy);
@@ -135,11 +150,40 @@ class Map_Object {
 		}
 		inline Map_Object* get_next_object(void) { return m_linknext; }
 
-   protected:
+	protected: // default tasks
+		void start_task_idle(Game*, Animation* anim, int timeout);
+		bool start_task_movepath(Game*, Coords dest, int persist, Animation **anims);
+		
+	protected: // higher level handling (task-based)
+		inline int get_current_task() { return m_task; }
+		void start_task(Game*, uint task);
+		void end_task(Game*, bool success, uint nexttask);
+		
+		// handler functions
+		virtual int task_begin(Game*);
+		virtual int task_act(Game*);
+		virtual void task_end(Game*);
+		
+		/** Map_Object::task_start_best(Game*, uint prev, bool success) [virtual]
+		 *
+		 * prev is the task that was last run (can be 0 on initial startup).
+		 * success is the success parameter passed to end_task().
+		 * nexthint is the nexttask parameter passed to end_task().
+		 *
+		 * You must call start_task() (directly or indirectly) from this function.
+		 * Therefor, you MUST override this function in derived classes.
+		 */
+		virtual void task_start_best(Game*, uint prev, bool success, uint nexthint) = 0;
+
+	private:
+		void do_next_task(Game*);
+		void do_start_task(Game*);
+		
+   protected: // low level handling
 		void set_animation(Game* g, Animation* anim);
 
-		bool start_walk(Game* g, WalkingDir dir, Animation* a);
-		bool act_walk(Game* g);
+		int start_walk(Game* g, WalkingDir dir, Animation* a);
+		void end_walk(Game* g);
 		bool is_walking();
 
 	protected:
@@ -158,6 +202,26 @@ class Map_Object {
 		WalkingDir m_walking;
 		int m_walkstart; // start and end time used for interpolation
 		int m_walkend;
+
+		// Task framework variables		
+		uint m_task; // the task we are currently performing
+		bool m_task_acting;
+		bool m_task_switching;
+		bool m_lasttask_success;
+		uint m_lasttask;
+		uint m_nexttask;
+		
+		// Variables used by the default tasks
+		union {
+			struct {
+				int timeout;
+			} idle;
+			struct {
+				int step;
+				Animation* anims[6];
+				Path* path;
+			} movepath;
+		} task;
 };
 
 

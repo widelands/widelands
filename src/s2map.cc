@@ -29,6 +29,9 @@
 #define hex ios::hex
 #define dec ios::dec
 
+// this is a detail of S2 maps
+#define CRITTER_PER_DEFINITION   1
+
 /** uchar *Map::load_s2mf_section(Binary_file *file, int width, int height)
  *
  * Some of the original S2 maps have rather odd sizes. In that case, however,

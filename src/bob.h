@@ -25,8 +25,6 @@
 #include "myfile.h"
 #include "instances.h"
 
-#define CRITTER_PER_DEFINITION   1
-
 // class World;
 //class Pic;
 
