@@ -124,6 +124,10 @@ public:
 	virtual ~WarehouseSupply();
 
 	void set_economy(Economy* e);
+   
+   void set_nrworkers( int i );
+   void set_nrwares( int i ); 
+
 
 	const WareList &get_wares() const { return m_wares; }
 	const WareList &get_workers() const { return m_workers; }

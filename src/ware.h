@@ -111,6 +111,8 @@ public:
 	void remove(const WareList &wl);
 	int stock(int id) const;
 
+   void set_nrwares( int i ) { assert(m_wares.size()==0); m_wares.resize(i, 0); }
+
 private:
 	std::vector<int>	m_wares;
 

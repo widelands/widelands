@@ -70,6 +70,22 @@ WarehouseSupply::~WarehouseSupply()
    m_workers.clear();
 }
 
+/*
+ * Inform this supply, how much wares
+ * are to be handled
+ */
+void WarehouseSupply::set_nrwares( int i ) {
+   assert(m_wares.size()==0);
+
+   m_wares.set_nrwares(i);
+}
+void WarehouseSupply::set_nrworkers( int i ) {
+   assert(m_workers.size()==0);
+
+   m_workers.set_nrwares(i);
+}
+
+
 
 /*
 ===============
@@ -410,7 +426,10 @@ void Warehouse::init(Editor_Game_Base* gg)
 
 	if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
 		gg->conquer_area(get_owner()->get_player_number(), m_position, get_descr());
-	
+
+   m_supply->set_nrwares(get_owner()->get_tribe()->get_nrwares());
+   m_supply->set_nrworkers(get_owner()->get_tribe()->get_nrworkers());
+
    if (gg->is_game()) {
       for(int i = 0; i < get_owner()->get_tribe()->get_nrwares(); i++) {
          Request* req = new Request(this, i, &Warehouse::idle_request_cb, this, Request::WARE);
@@ -1002,9 +1021,10 @@ bool Warehouse::can_create_worker(Game *g, int worker)
 {
 	Worker_Descr *w_desc = 0;
 	
-	if (worker >= m_supply->get_workers().get_nrwareids())
+	if (worker >= m_supply->get_workers().get_nrwareids()) {
 		throw wexception ("Worker type %d doesn't exists! (max is %d)", worker,
             m_supply->get_workers().get_nrwareids());
+   }
 
    w_desc=get_owner()->get_tribe()->get_worker_descr(worker);
 
