@@ -223,7 +223,7 @@ This structure contains all the information that is needed by the renderer.
 It includes the map itself as well as overlay data (build symbols, road 
 building symbols, ...)
 */
-class Game;
+class Editor_Game_Base;
 class Map;
 
 enum {
@@ -240,8 +240,10 @@ enum {
 	Overlay_Build_Max = Overlay_Build_Mine,
 };
 
+class Game;
+
 struct MapRenderInfo {
-	Game*    game;
+	Editor_Game_Base*    egbase;
    Map*		map;
 	Coords	fieldsel; // field selection marker, moved by cursor
 	uchar*	overlay_basic; // borders and build help

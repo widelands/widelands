@@ -93,9 +93,11 @@ void BaseImmovable::unset_position(Editor_Game_Base *g, Coords c)
 	assert(f->immovable == this);
 	
 	f->immovable = 0;
-	
+
+   cerr << "Unset positions!" << endl;
 	if (get_size() >= SMALL)
 		g->recalc_for_field(c);
+   cerr << "Unset positions1!" << endl;
 }
 
 

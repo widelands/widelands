@@ -82,7 +82,7 @@ public:
 	virtual void cleanup(Editor_Game_Base*);
 	virtual void act(Game*);
 		
-	virtual void draw(Game* game, RenderTarget* dst, Point pos);
+	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
 
 	inline void set_owner(Player *player) { m_owner = player; }
 	inline Player *get_owner() { return m_owner; }

@@ -573,7 +573,7 @@ Note that the current field is actually the field we're walking to, not
 the one we start from.
 ===============
 */
-void Bob::draw(Game *game, RenderTarget* dst, Point pos)
+void Bob::draw(Editor_Game_Base *game, RenderTarget* dst, Point pos)
 {
 	if (!m_anim)
 		return;

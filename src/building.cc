@@ -220,7 +220,7 @@ void Building::init(Editor_Game_Base* g)
 	if (imm && imm->get_type() == FLAG)
 		flag = (Flag *)imm;
 	else
-		flag = Flag::create(g, get_owner(), neighb, 1);
+		flag = Flag::create(g, get_owner(), neighb, g->is_game());
 	
 	m_flag = flag;
 	m_flag->attach_building(g, this);
@@ -238,27 +238,41 @@ Cleanup the building
 */
 void Building::cleanup(Editor_Game_Base *g)
 {
+	cerr << "Building::cleanup()1" << endl;
 	// Remove from flag
 	m_flag->detach_building(g);
+	cerr << "Building::cleanup()2" << endl;
 	
 	// Unset the building
 	unset_position(g, m_position);
+	cerr << "Building::cleanup()3" << endl;
 	
 	if (get_size() == BIG) {
+	cerr << "Building::cleanup()4" << endl;
 		Map *map = g->get_map();
+	cerr << "Building::cleanup()5" << endl;
 		Coords neighb;
+	cerr << "Building::cleanup()6" << endl;
 		
 		map->get_ln(m_position, &neighb);
+	cerr << "Building::cleanup()7" << endl;
 		unset_position(g, neighb);
+	cerr << "Building::cleanup()8" << endl;
 		
 		map->get_tln(m_position, &neighb);
+	cerr << "Building::cleanup()9" << endl;
 		unset_position(g, neighb);
+	cerr << "Building::cleanup()10" << endl;
 		
 		map->get_trn(m_position, &neighb);
+	cerr << "Building::cleanup()11" << endl;
 		unset_position(g, neighb);
+	cerr << "Building::cleanup()12" << endl;
 	}
 	
+	
 	PlayerImmovable::cleanup(g);
+   cerr << "Building::cleanup()13" << endl;
 }
 
 /*
@@ -401,9 +415,11 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base *g)
 {
-	// TODO: un-conquer the area?
+	cerr << "Warehouse::cleanup()" << endl;
+   // TODO: un-conquer the area?
 
 	Building::cleanup(g);
+	cerr << "Warehouse::cleanup()1" << endl;
 }
 
 
@@ -514,7 +530,7 @@ Worker *Warehouse::launch_worker(Game *g, int ware)
 	
 	workerdescr = ((Worker_Ware_Descr*)waredescr)->get_worker(get_owner()->get_tribe());
 	
-	worker = workerdescr->create(g, get_owner(), this, m_position, 1);
+	worker = workerdescr->create(g, get_owner(), this, m_position, g->is_game());
 	
 	m_wares.remove(ware, 1);
 	get_economy()->remove_wares(ware, 1); // re-added by the worker himself

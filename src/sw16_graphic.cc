@@ -405,7 +405,7 @@ static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoor
 	// Render frontier
 	if (overlay_basic > Overlay_Frontier_Base && overlay_basic <= Overlay_Frontier_Max)
 	{
-		Player *ownerplayer = mri->game->get_player(overlay_basic - Overlay_Frontier_Base);
+		Player *ownerplayer = mri->egbase->get_player(overlay_basic - Overlay_Frontier_Base);
 		uint anim = ownerplayer->get_tribe()->get_frontier_anim();
 		const RGBColor* playercolors = ownerplayer->get_playercolor();
 		uchar ovln;
@@ -616,11 +616,11 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 
 				if (imm)
 					// imm->draw(mri->game, this, FCoords(fx, fy, f), wh_pos);
-					imm->draw(mri->game, this, FCoords(fx, fy, f), wh_pos);
+					imm->draw(mri->egbase, this, FCoords(fx, fy, f), wh_pos);
 
 				Bob *bob = f->get_first_bob();
 				while(bob) {
-					bob->draw(mri->game, this, wh_pos);
+					bob->draw(mri->egbase, this, wh_pos);
 					bob = bob->get_next_bob();
 				}
 

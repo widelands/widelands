@@ -132,7 +132,7 @@ void Player::build_flag(Coords c)
 	int buildcaps = get_buildcaps(c);
 	
 	if (buildcaps & BUILDCAPS_FLAG)
-		Flag::create(m_egbase, this, c, 1);
+		Flag::create(m_egbase, this, c, m_egbase->is_game());
 }
 
 /*
@@ -204,7 +204,7 @@ void Player::build_road(const Path *path)
 	}
 	
 	// fine, we can build the road
-	Road::create(m_egbase, Road_Normal, start, end, *path, 1);
+	Road::create(m_egbase, Road_Normal, start, end, *path, m_egbase->is_game());
 }
 
 /*

@@ -279,14 +279,21 @@ bool Game::run(void)
 		load_graphics();
 		
 		ipl->run();
-		
+
+      cerr << "ALIVE1!" << endl;
+
 		m_objects->cleanup(this);
+      cerr << "ALIVE2!" << endl;
 	   delete ipl;
+      cerr << "ALIVE3!" << endl;
 		
 		g_gr->flush(PicMod_Game);
+      cerr << "ALIVE4!" << endl;
 		g_anim.flush();
+      cerr << "ALIVE5!" << endl;
 
 		played = true;
+      cerr << "ALIVE6!" << endl;
 	}
 
 	m_state = gs_none;

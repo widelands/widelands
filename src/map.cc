@@ -526,88 +526,92 @@ void Map::recalc_brightness(int fx, int fy, Field *f)
  */
 void Map::recalc_fieldcaps_pass1(int fx, int fy, Field *f)
 {
-	f->caps = 0;
+   f->caps = 0;
 
-	// 1a) Get all the neighbours to make life easier
-	int tlnx, tlny, trnx, trny, lnx, lny, rnx, rny, blnx, blny, brnx, brny;
-	Field *tln, *trn, *ln, *rn, *bln, *brn;
-	
-	get_tln(fx, fy, f, &tlnx, &tlny, &tln);
-	get_trn(fx, fy, f, &trnx, &trny, &trn);
-	get_ln(fx, fy, f, &lnx, &lny, &ln);
-	get_rn(fx, fy, f, &rnx, &rny, &rn);
-	get_bln(fx, fy, f, &blnx, &blny, &bln);
-	get_brn(fx, fy, f, &brnx, &brny, &brn);
+   // 1a) Get all the neighbours to make life easier
+   int tlnx, tlny, trnx, trny, lnx, lny, rnx, rny, blnx, blny, brnx, brny;
+   Field *tln, *trn, *ln, *rn, *bln, *brn;
 
-	// 1b) Collect some information about the neighbours
-	int cnt_unpassable = 0;
-	int cnt_water = 0;
-	int cnt_acid = 0;
-	
-	if (f->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (f->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (ln->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (tln->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (tln->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	if (trn->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
-	
-	if (f->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (f->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (ln->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (tln->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (tln->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
-	if (trn->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+   get_tln(fx, fy, f, &tlnx, &tlny, &tln);
+   get_trn(fx, fy, f, &trnx, &trny, &trn);
+   get_ln(fx, fy, f, &lnx, &lny, &ln);
+   get_rn(fx, fy, f, &rnx, &rny, &rn);
+   get_bln(fx, fy, f, &blnx, &blny, &bln);
+   get_brn(fx, fy, f, &brnx, &brny, &brn);
 
-	if (f->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (f->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (ln->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (tln->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (tln->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
-	if (trn->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
-	
-		
-	// 2) Passability
-	
-	// 2a) If any of the neigbouring triangles is walkable this field is
-	//     walkable.
-	if (cnt_unpassable < 6)
-		f->caps |= MOVECAPS_WALK;
-	
-	// 2b) If all neighbouring triangles are water, the field is swimable
-	if (cnt_water == 6)
-		f->caps |= MOVECAPS_SWIM;
-	
-	// 2c) [OVERRIDE] If any of the neighbouring triangles is really
-	//     "bad" (such as lava), we can neither walk nor swim to this field.
-	if (cnt_acid)
-		f->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
-	
-	// === everything below is used to check buildability ===
-		
-	// 3) General buildability check: if a "robust" Map_Object is on this field
-	//    we cannot build anything on it.
-	//    Exception: we can build flags on roads
-	BaseImmovable *imm = get_immovable(Coords(fx, fy));
-	
-	if (imm && imm->get_type() != Map_Object::ROAD && imm->get_size() >= BaseImmovable::SMALL)
-	{
-		// 3b) [OVERRIDE] check for "unpassable" Map_Objects
-		if (!imm->get_passable())
-			f->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
-		return;
-	}
-	
-	// 4) Flags
-	//    We can build flags on anything that's walkable and buildable, with some 
-	//    restrictions
-	if (f->caps & MOVECAPS_WALK)
-	{
-		// 4b) Flags must be at least 1 field apart
-		if (find_immovables(Coords(fx, fy), 1, 0, FindImmovableType(Map_Object::FLAG)))
-			return;
-		
-		f->caps |= BUILDCAPS_FLAG;
-	}
+   // 1b) Collect some information about the neighbours
+   int cnt_unpassable = 0;
+   int cnt_water = 0;
+   int cnt_acid = 0;
+
+   if (f->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (f->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (ln->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (tln->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (tln->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+   if (trn->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
+
+   if (f->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (f->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (ln->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (tln->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (tln->get_terr()->get_is() & TERRAIN_WATER) cnt_water++;
+   if (trn->get_terd()->get_is() & TERRAIN_WATER) cnt_water++;
+
+   if (f->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (f->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (ln->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (tln->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (tln->get_terr()->get_is() & TERRAIN_ACID) cnt_acid++;
+   if (trn->get_terd()->get_is() & TERRAIN_ACID) cnt_acid++;
+
+
+   // 2) Passability
+
+   // 2a) If any of the neigbouring triangles is walkable this field is
+   //     walkable.
+   if (cnt_unpassable < 6)
+      f->caps |= MOVECAPS_WALK;
+
+   // 2b) If all neighbouring triangles are water, the field is swimable
+   if (cnt_water == 6)
+      f->caps |= MOVECAPS_SWIM;
+
+   // 2c) [OVERRIDE] If any of the neighbouring triangles is really
+   //     "bad" (such as lava), we can neither walk nor swim to this field.
+   if (cnt_acid)
+      f->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+
+   // === everything below is used to check buildability ===
+
+   // 3) General buildability check: if a "robust" Map_Object is on this field
+   //    we cannot build anything on it.
+   //    Exception: we can build flags on roads
+   BaseImmovable *imm = get_immovable(Coords(fx, fy));
+
+   if (imm && imm->get_type() != Map_Object::ROAD && imm->get_size() >= BaseImmovable::SMALL)
+   {
+      // 3b) [OVERRIDE] check for "unpassable" Map_Objects
+      if (!imm->get_passable())
+         f->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+      return;
+   }
+
+   cerr << "Hier ... ";
+
+   // 4) Flags
+   //    We can build flags on anything that's walkable and buildable, with some 
+   //    restrictions
+   if (f->caps & MOVECAPS_WALK)
+   {
+      cerr << "und ...";
+      // 4b) Flags must be at least 1 field apart
+      if (find_immovables(Coords(fx, fy), 1, 0, FindImmovableType(Map_Object::FLAG)))
+         return;
+      cerr << "nicht ..."; 
+      f->caps |= BUILDCAPS_FLAG;
+   }
+   cerr << "jetzt!" << endl;
 }
 
 /** Map::recalc_fieldcaps_pass2(int fx, int fy, Field *f)
