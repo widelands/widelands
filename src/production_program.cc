@@ -159,7 +159,9 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
             Section* s = prof->get_safe_section(cmd[1].c_str());
             act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
             building->add_animation(cmd[1].c_str(),act.iparam1);
-         }
+         } else 
+            act.iparam1 = building->get_animation(cmd[1].c_str());
+
 			if (cmd[1] == "idle")
 				/* XXX */
 				throw wexception("Idle animation is default, no calling senseful!");
