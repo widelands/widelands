@@ -43,20 +43,20 @@ class Player {
    friend class Game;
    
    public:
-      Player(Game* g, int type);
-      ~Player(void);
-
-      // get functions
-      inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
-      inline bool is_field_seen(int x, int y) { return (*seen_fields)[y*game->get_map()->get_w() + x]; }
-   
 		enum {
 			playerLocal = 0,
 			//playerRemote,
 			playerAI
 		};
 		
+      Player(Game* g, int type);
+      ~Player(void);
+
       inline int get_type() { return m_type; }
+      
+		// get functions
+      inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
+      inline bool is_field_seen(int x, int y) { return (*seen_fields)[y*game->get_map()->get_w() + x]; }
 		
    private:
       // set functions

@@ -16,7 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-
+ 
 #ifndef __S__MYFILE_H
 #define __S__MYFILE_H
 

@@ -64,7 +64,7 @@ class Bitmap {
       friend void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
             uint src_x, uint src_y, int w, int h);
       friend void copy_animation_pic(Bitmap* dst, Animation* anim, uint time,
-		      int dst_x, int dst_y, uint src_x, uint src_y, int w, int h);
+		      int dst_x, int dst_y);
       friend class Graphic;
 };
 

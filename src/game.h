@@ -44,7 +44,6 @@ enum {
 
 class Player;
 class Interactive_Player;
-class Player;
 
 class Game {
 	friend class Cmd_Queue; // this class handles the commands 

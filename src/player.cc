@@ -17,7 +17,6 @@
  *
  */
 
-#include <vector>
 #include "widelands.h"
 #include "pic.h"
 #include "bob.h"
@@ -32,9 +31,9 @@
 //
 //
 Player::Player(Game* g, int type) {
-    m_type = type; 
-    game=g;
-    seen_fields=0;
+   m_type = type; 
+   game=g;
+   seen_fields=0;
 }
 
 Player::~Player(void) {

@@ -212,23 +212,18 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 			// draw_ground implies that this doesn't render map objects.
 			// are there any overdraw issues with the current rendering order?
 			
-		   // check if a instance is hooked to this field, if so, draw it
-	   	if(f->get_first_object()) {
+		   // draw Map_Objects hooked to this field
 #ifdef USE_SEE_AREA
-            if(m_game->get_player(player_number)->is_field_seen(fx, fy)) {
+         if(m_game->get_player(player_number)->is_field_seen(fx, fy)) {
 #endif
-	      	//    cerr << p[1].x << ":" << p[1].y << endl;
 				Map_Object* obj = f->get_first_object();
-		      while(obj) {
-					// Let instances draw themselves; more logical as a OO design
-   	   	   //copy_animation_pic(dst, inst->inst, p[1].x, p[1].y, 0, 0, 0, 0);
+	      	while(obj) {
 					obj->draw(m_game, dst, posx, posy);
-	      	   obj = obj->get_next_object();
-   		   }
+   	   	   obj = obj->get_next_object();
+  			   }
 #ifdef USE_SEE_AREA
-            }
+         }
 #endif
-	   	}
 
 #if 0
         // TODO: TEMP DEBUG: render buildhelp over everything

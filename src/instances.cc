@@ -163,7 +163,7 @@ void Map_Object::draw(Game *game, Bitmap* dst, int posx, int posy)
 		ey = (int)(f*ey + (1-f)*sy);
 	}
 
-	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, ex, ey, 0, 0, 0, 0);
+	copy_animation_pic(dst, m_anim, game->get_gametime() - m_animstart, ex, ey);
 }
 
 

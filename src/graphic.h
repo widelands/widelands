@@ -321,7 +321,7 @@ void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
 
 class Animation;
 
-void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y, uint src_x, uint src_y, int w, int h);
+void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y);
 
 #define 	g_gr 	Graphic::get_singleton()
 

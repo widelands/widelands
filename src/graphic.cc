@@ -19,12 +19,15 @@
 
 #include "widelands.h"
 #include "graphic.h"
+#include "bob.h"
 
+/* apparently deprecated -- Nicolai
 // wireframe or filled triangles?
 #define SHADING_FLAT		1
 #define SHADING_GOURAUD	2
 #define SHADING				SHADING_GOURAUD
 #define FILL_TRIANGLES
+*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -315,12 +318,9 @@ void Graphic::update(void) {
 /** 
  * This function copys from a bob picture
  *
- * TODO: it needs to much information (players etc. etc.)
+ * TODO: one more parameter (player color) is needed
  */
-#include "instances.h"
-#include "bob.h"
-
-void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y, uint src_x, uint src_y, int w, int h) {
+void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int dst_y) {
    int x, y;
    Animation_Pic* pic = anim->get_time_pic(time);
    ushort cmd;
@@ -328,10 +328,13 @@ void copy_animation_pic(Bitmap* dst, Animation* anim, uint time, int dst_x, int 
    ushort i=0;
    ushort clr;
 
-   // TODO: proper hotspot implementation
-   dst_x -=(int) (anim->get_w()>>1);
-   dst_y -=(int) (anim->get_h()>>1);
-   
+	// TODO: looks like the gfx data doesn't actually use hotspots
+	//cerr << anim->get_hsx() << " " << anim->get_hsy() << endl;
+	//dst_x -= anim->get_hsx();
+	//dst_y -= anim->get_hsy();
+   dst_x -= (int) (anim->get_w()>>1);
+   dst_y -= (int) (anim->get_h()>>1);
+	   
    x=dst_x;
    for(y=dst_y; y<dst_y+anim->get_h(); ) {
 //      for(x=0; x<bob->get_w(); x++) {
