@@ -49,6 +49,10 @@ Soldier_Descr::Soldier_Descr(Tribe_Descr *tribe, const char *name)
 
 Soldier_Descr::~Soldier_Descr(void)
 {
+   m_hp_pics_fn.resize(0);
+   m_attack_pics_fn.resize(0);
+   m_defense_pics_fn.resize(0);
+   m_evade_pics_fn.resize(0);
 }
 
 /*
@@ -164,11 +168,6 @@ void Soldier_Descr::load_graphics(void) {
    for(i=0; i<=m_max_evade_level; i++) {
       m_evade_pics[i]=g_gr->get_picture(PicMod_Game, m_evade_pics_fn[i].c_str(), true);
    }
-   m_hp_pics_fn.resize(0);
-   m_attack_pics_fn.resize(0);
-   m_defense_pics_fn.resize(0);
-   m_evade_pics_fn.resize(0);
-
    Worker_Descr::load_graphics();
 }
 
