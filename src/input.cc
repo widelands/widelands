@@ -102,7 +102,7 @@ void Input::set_max_cords(unsigned int x, const unsigned int y) {
  * Args: f	function to register
  * 		a	pointer to userdata
  */
- void Input::register_mmf(const MOUSE_MOVE_FUNCTION f, void* a= 0) {
+ void Input::register_mmf(const MOUSE_MOVE_FUNCTION f, void* a) {
 			if(mmfa) free(mmfa);
 
 			mmfa=a;
@@ -117,7 +117,7 @@ void Input::set_max_cords(unsigned int x, const unsigned int y) {
  * 		b 	button to register the function for
  * 		a	pointer to userdata
  */
-void Input::register_mcf(const MOUSE_CLICK_FUNCTION f, const Button b, void* a = 0) {
+void Input::register_mcf(const MOUSE_CLICK_FUNCTION f, const Button b, void* a) {
 		  unsigned int n;
 		  
 		  if(b==BUT1) n=0;
@@ -139,7 +139,7 @@ void Input::register_mcf(const MOUSE_CLICK_FUNCTION f, const Button b, void* a =
  * 		a	pointer to userdata
  * Returns: Nothing
  */
-void Input::register_kbdh(const KBD_HANDLER f, void* a = 0) {
+void Input::register_kbdh(const KBD_HANDLER f, void* a) {
 		  if(kbdha) free(kbdha);
 
 		  kbdh=f;

@@ -17,6 +17,8 @@
  *
  */
 
+// 2002-02-10	sft+	renamed State members
+
 #ifndef __S__GRAPHIC_H
 #define __S__GRAPHIC_H
 
@@ -38,7 +40,7 @@ namespace Graph {
 			* 		b	blue value (SUPRISE!)
 			* Returns: packed value
 			*/
-		  inline unsigned short Graph::pack_rgb(const unsigned char r, const unsigned char g, const unsigned char b) {
+		  inline unsigned short pack_rgb(const unsigned char r, const unsigned char g, const unsigned char b) {
 					 return ((b>>3) + ((g>>2)<<5)+ ((r>>3)<<11) );
 		  }
 
@@ -52,7 +54,7 @@ namespace Graph {
 			*			b		ptr to var to hold blue value
 			* Returns: Nothing
 			*/
-		  inline void Graph::unpack_rgb(const unsigned short clr, unsigned char* r, unsigned char* g, unsigned char* b) {
+		  inline void unpack_rgb(const unsigned short clr, unsigned char* r, unsigned char* g, unsigned char* b) {
 					 *r= ((clr<<3)>>11);
 					 *g= ((clr<<2)>>5);
 					 *b= (clr<<3);
@@ -204,9 +206,9 @@ namespace Graph {
 					 };
 
 					 enum State {
-								NOT_INIT,
-								OK,
-								ERROR
+								STATE_NOT_INIT,
+								STATE_OK,
+								STATE_ERROR
 					 };
 
 					 Graphic(void);
@@ -233,7 +235,7 @@ namespace Graph {
 					  * Args: none
 					  * Returns: the current mode
 					  */
-					 inline Mode get_mode(void) {  st=OK; return mode; }
+					 inline Mode get_mode(void) {  st=STATE_OK; return mode; }
 
 					 /** inline unsigned int Graphic::get_xres(void) const
 					  * 

@@ -17,6 +17,8 @@
  *
  */
 
+// 2002-02-10	sft+	added config-existing check in handle_options
+
 #include "options.h"
 #include "parser.h"
 #include "myfile.h"
@@ -38,44 +40,44 @@ struct Options {
 		  bool fullscreen;
 
 		  // Dirs
-		  char searchdir0[Parser::MAX_OPT_LENGTH];
-		  char searchdir1[Parser::MAX_OPT_LENGTH];
-		  char searchdir2[Parser::MAX_OPT_LENGTH];
-		  char txtsdir[Parser::MAX_OPT_LENGTH];
-		  char picsdir[Parser::MAX_OPT_LENGTH];
-		  char bobsdir[Parser::MAX_OPT_LENGTH];
-		  char tribesdir[Parser::MAX_OPT_LENGTH];
-		  char worldsdir[Parser::MAX_OPT_LENGTH];
-		  char campaignsdir[Parser::MAX_OPT_LENGTH];
-		  char mapsdir[Parser::MAX_OPT_LENGTH];
-		  char musicsdir[Parser::MAX_OPT_LENGTH];
-		  char effectsdir[Parser::MAX_OPT_LENGTH];
+		  char searchdir0[MAX_OPT_LENGTH];
+		  char searchdir1[MAX_OPT_LENGTH];
+		  char searchdir2[MAX_OPT_LENGTH];
+		  char txtsdir[MAX_OPT_LENGTH];
+		  char picsdir[MAX_OPT_LENGTH];
+		  char bobsdir[MAX_OPT_LENGTH];
+		  char tribesdir[MAX_OPT_LENGTH];
+		  char worldsdir[MAX_OPT_LENGTH];
+		  char campaignsdir[MAX_OPT_LENGTH];
+		  char mapsdir[MAX_OPT_LENGTH];
+		  char musicsdir[MAX_OPT_LENGTH];
+		  char effectsdir[MAX_OPT_LENGTH];
 		  
 		  // Gameplay
 		  bool swapmouse;
 		  int  mousespeed;
-		  char playercolor[Parser::MAX_OPT_LENGTH];
+		  char playercolor[MAX_OPT_LENGTH];
 
 		  /* Keyboard still to define */
 
 		  // Network
-		  char player[Parser::MAX_OPT_LENGTH];
-		  char lastserver[Parser::MAX_OPT_LENGTH];
+		  char player[MAX_OPT_LENGTH];
+		  char lastserver[MAX_OPT_LENGTH];
 
 		  // Sound
 		  bool usemusic;
 		  bool useeffects;
 		  int  music_vol;
 		  int  effects_vol;
-		  char snddev[Parser::MAX_OPT_LENGTH];
+		  char snddev[MAX_OPT_LENGTH];
 
 		  // Cmdline stuff
 		  bool show_version;
 		  bool show_usage;
 		  
 		  // Debug
-		  char stderr_file[Parser::MAX_OPT_LENGTH];
-		  char stdout_file[Parser::MAX_OPT_LENGTH];
+		  char stderr_file[MAX_OPT_LENGTH];
+		  char stdout_file[MAX_OPT_LENGTH];
 
 };
 
@@ -364,7 +366,8 @@ void handle_options(unsigned int argn, char** argc) {
 
 		  const char* buf;
 		  buf=g_fileloc.locate_file("config");
-		  f.open(buf, File::READ);
+		  if (buf)
+		  	  f.open(buf, File::READ);
 
 		  if(f.get_state() != File::OPEN) {
 					 // We couldn't open the config file, so we write a default one

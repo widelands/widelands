@@ -20,6 +20,8 @@
 #ifndef __S__PARSER_H
 #define __S__PARSER_H
 
+#define MAX_OPT_LENGTH	255
+#define MAX_OPTS		1024
 /** class Parser
  *
  * This is a simple Text parser. you register keywords, what kind
@@ -38,10 +40,8 @@ class Parser {
 					 int parse_line(const char*);
 					 
 					 
-					 static const unsigned int MAX_OPT_LENGTH=255;
 
 		  private:
-					 static const unsigned int MAX_OPTS=1024;
 					
 					 
 					 enum Type {

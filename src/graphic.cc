@@ -18,6 +18,9 @@
  */
 
 #include "graphic.h"
+#ifdef WIN32
+#include <string.h>
+#endif
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +46,7 @@ namespace Graph {
 					 sc=NULL;
 					 pixels=NULL;
 					 xres=yres=0;
-					 st=NOT_INIT;
+					 st=STATE_NOT_INIT;
 
 					 SDL_Init(SDL_INIT_VIDEO);
 		  }
@@ -63,7 +66,7 @@ namespace Graph {
 					 }
 					 pixels=NULL;
 					 xres=yres=0;
-					 st=NOT_INIT;
+					 st=STATE_NOT_INIT;
 
 					 SDL_Quit();
 		  }
@@ -92,7 +95,7 @@ namespace Graph {
 					 yres=y;
 					 pixels=(unsigned short*) sc->pixels;
 
-					 st=OK;
+					 st=STATE_OK;
 					 
 					 bneeds_update=true;
 
@@ -108,7 +111,7 @@ namespace Graph {
 			*/
 		  void Graphic::update_screen(void) {
 					 if(!sc) {
-								st=ERROR;
+								st=STATE_ERROR;
 								return;
 					 }
 
@@ -128,7 +131,7 @@ namespace Graph {
 			*/
 		  void Graphic::update_rect(const unsigned short x, const unsigned short y, const unsigned short w, const unsigned short h) {
 					 if(!sc) {
-								st=ERROR;
+								st=STATE_ERROR;
 								return;
 					 }
 

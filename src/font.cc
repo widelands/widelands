@@ -19,6 +19,10 @@
 
 #include "font.h"
 
+#ifdef WIN32
+#include <string.h>
+#endif
+
 /** class Font_Handler
  *
  * This class generates font Pictures out of strings and returns them
@@ -71,7 +75,9 @@ Font_Handler::~Font_Handler(void) {
  *	Returns: Nothing
  */
 void Font_Handler::set_font(unsigned short f, Graph::Pic * p, unsigned short gw, unsigned short gh) {
-		  assert(f<MAX_FONTS && "attempt to register a font with a big number, which is not allowed!");
+// was soll das denn hier? hat keine auswirkung auf das assert
+//		  assert(f<MAX_FONTS && "attempt to register a font with a big number, which is not allowed!");
+		  assert(f<MAX_FONTS);
 		  assert(p);
 
 		  w[f]=gw;
@@ -89,10 +95,12 @@ void Font_Handler::set_font(unsigned short f, Graph::Pic * p, unsigned short gw,
  * Returns:	Pointer to picture, caller must free it later on
  */
 Pic* Font_Handler::get_string(const char* str, const unsigned short f) {
-		  assert(f<MAX_FONTS && "attempt to get a string with a font with a big number, which is not allowed!");
+// siehe oben; keine auswirkung auf das assert
+//		  assert(f<MAX_FONTS && "attempt to get a string with a font with a big number, which is not allowed!");
+		  assert(f<MAX_FONTS);
 		  assert(pics[f]);
 		  
-		  char buf[strlen(str)+1];
+		  char* buf = new char[strlen(str)+1];
 		  unsigned char c;
 		  unsigned int n=0;
 		  unsigned int x=0;
@@ -111,8 +119,8 @@ Pic* Font_Handler::get_string(const char* str, const unsigned short f) {
 		  retval->set_size(strlen(buf)*w[f], h[f]);
 		  retval->set_clrkey(pics[f]->get_clrkey());
 
-		  for(unsigned int i=0; i<strlen(buf); i++) {
-					 c=buf[i];
+		  for(unsigned int j=0; i<strlen(buf); j++) {
+					 c=buf[j];
 					 if(c < 32  || c > 127) {
 								// c is NOT an international ASCII char, we skip it silently
 								c=127;
@@ -124,7 +132,6 @@ Pic* Font_Handler::get_string(const char* str, const unsigned short f) {
 					 Graph::copy_pic(retval, pics[f], x, 0, c*w[f], 0, w[f], h[f]);
 					 x+=w[f];
 		  }
- 
+		  delete buf;
 		  return retval;
 }
-					 

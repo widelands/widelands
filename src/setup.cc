@@ -17,6 +17,8 @@
  *
  */
 
+// 2002-02-10	sft+	made setup_searchpaths work for win32
+
 #include "fileloc.h"
 #include "setup.h"
 #include "graphic.h"
@@ -103,33 +105,34 @@ void setup_searchpaths(void) {
 		  static File_Locator fileloc;
 		 
 		  char* buf;
-		  char cmd[File_Locator::MAX_PATHL];
-#ifdef WINDOWS
+		  char cmd[MAX_PATHL];
+#ifdef WIN32
 		  int i=0, n=0;
 		  char drive[_MAX_DRIVE];
 		  char dir[_MAX_DIR];
 #endif
 
-#ifndef	WINDOWS
+#ifndef	WIN32
 		  buf=getenv("HOME");
 		  strcpy(cmd, buf);
 		  strcat(cmd, "/.widelands");
-		  g_fileloc.add_searchdir(cmd, File_Locator::MAX_DIRS-2);
-		  g_fileloc.set_def_writedir(File_Locator::MAX_DIRS-2);
+		  g_fileloc.add_searchdir(cmd, MAX_DIRS-2);
+		  g_fileloc.set_def_writedir(MAX_DIRS-2);
 		  
-		  g_fileloc.add_searchdir(PKGDATADIR, File_Locator::MAX_DIRS-2);
+		  g_fileloc.add_searchdir(PKGDATADIR, MAX_DIRS-2);
 #else
 
-#error	Code buggy!
+//#error	Code buggy!
 		  buf=GetCommandLine();
 		  while(buf[i]==' ' || buf[i]=='\"' ) i++;
 		  while(buf[i]!='\"' && i<strlen(buf)) { cmd[n]=buf[i]; i++; n++; }
 		  cmd[n]='\0';
 		  _splitpath(cmd, drive, dir, NULL, NULL);
-		  a_MemFree(buf);
+		  //a_MemFree(buf);
 
 		  strcpy(cmd, drive);
 		  strcat(cmd, dir);
-		  a_ResHandlerAddSearchDir(cmd);
+//		  a_ResHandlerAddSearchDir(cmd);
+		  g_fileloc.add_searchdir(cmd, MAX_DIRS-2);
 #endif
 }

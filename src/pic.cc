@@ -17,7 +17,13 @@
  *
  */
 
+// 2002-02-10	sft+	minor speedup in Pic::clear_all
+
 #include "graphic.h"
+
+#ifdef WIN32
+#include <string.h>
+#endif
 
 namespace Graph {
 		  /** Pic::Pic(const Pic& p)
@@ -87,12 +93,13 @@ namespace Graph {
 			* Args: none
 			* Returns: nothing
 			*/
-		  void Pic::clear_all(void) {
-					 if(!clrkey) return;
+		  void Pic::clear_all(void)
+		  {
+				if(!clrkey) return;
 
-					 for(unsigned int i=(w*h-2); i; i-=2) {
-								pixels[i]=clrkey;
-					 }
+				int clear = clrkey;
+				for (unsigned int i=(w*h-2); i; i-=2)
+					pixels[i]=clear;
 		  }
 
 		  /** int Pic::load(const char* file)

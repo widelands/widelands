@@ -129,7 +129,7 @@ void Window::set_pos(unsigned int posx, unsigned int posy) {
  * 		a	alignment to use 
  * Returns: textarea just created
  */
-Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, const char* t ,  Textarea::Align a = Textarea::LEFTA) {
+Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, const char* t ,  Textarea::Align a) {
 	
 		  unsigned int myw=w;
 		  unsigned int myh=h;
@@ -161,7 +161,7 @@ Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, 
  * 		a	alignment to use 
  * Returns: textarea just created
  */
-Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, const unsigned int myw ,  Textarea::Align a = Textarea::LEFTA) {
+Textarea* Window::create_textarea(const unsigned int px, const unsigned int py, const unsigned int myw ,  Textarea::Align a) {
 
 		  unsigned int add=0;
 		  if(myf!=FLAT) add=get_border();
@@ -201,57 +201,57 @@ void Window::redraw_win(void) {
 
 					 // Top n Bottom
 					 // top
-					 copy_pic(winpic, &top, 0, 0, 0, 0, CORNER, CORNER);
+					 Graph::copy_pic(winpic, &top, 0, 0, 0, 0, CORNER, CORNER);
 					 // bot
-					 copy_pic(winpic, &bot, 0, h-CORNER, 0, 0, CORNER, CORNER);
+					 Graph::copy_pic(winpic, &bot, 0, h-CORNER, 0, 0, CORNER, CORNER);
 					 for(i=CORNER; i<w-CORNER-MIDDLE; i+=MIDDLE) {
 								// top
-								copy_pic(winpic, &top, i, 0, CORNER, 0, MIDDLE, CORNER);
+								Graph::copy_pic(winpic, &top, i, 0, CORNER, 0, MIDDLE, CORNER);
 								// bot
-								copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, MIDDLE, CORNER);
+								Graph::copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, MIDDLE, CORNER);
 					 } 
 					 // top
-					 copy_pic(winpic, &top, i, 0, CORNER, 0, w-CORNER-i, CORNER);
-					 copy_pic(winpic, &top, w-CORNER, 0, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+					 Graph::copy_pic(winpic, &top, i, 0, CORNER, 0, w-CORNER-i, CORNER);
+					 Graph::copy_pic(winpic, &top, w-CORNER, 0, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 					 // bot
-					 copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, w-CORNER-i, CORNER);
-					 copy_pic(winpic, &bot, w-CORNER, h-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+					 Graph::copy_pic(winpic, &bot, i, h-CORNER, CORNER, 0, w-CORNER-i, CORNER);
+					 Graph::copy_pic(winpic, &bot, w-CORNER, h-CORNER, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
 
 					 // borders
 					 // left
-					 copy_pic(winpic, &l_border, 0, CORNER, 0, 0, CORNER, CORNER);
+					 Graph::copy_pic(winpic, &l_border, 0, CORNER, 0, 0, CORNER, CORNER);
 					 // right
-					 copy_pic(winpic, &r_border, w-CORNER, CORNER, 0, 0, CORNER, CORNER);
+					 Graph::copy_pic(winpic, &r_border, w-CORNER, CORNER, 0, 0, CORNER, CORNER);
 					 for(i=CORNER+CORNER; i<h-CORNER-CORNER-MIDDLE; i+=MIDDLE) {
 								// left
-								copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, MIDDLE);
+								Graph::copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, MIDDLE);
 								// right
-								copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, MIDDLE);
+								Graph::copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, MIDDLE);
 					 } 
 					 // left
-					 copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, h-CORNER-i);
-					 copy_pic(winpic, &l_border, 0, h-CORNER-CORNER, 0, l_border.get_h()-CORNER, CORNER, CORNER);
+					 Graph::copy_pic(winpic, &l_border, 0, i, 0, CORNER, CORNER, h-CORNER-i);
+					 Graph::copy_pic(winpic, &l_border, 0, h-CORNER-CORNER, 0, l_border.get_h()-CORNER, CORNER, CORNER);
 					 // right
-					 copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, h-CORNER-i);
-					 copy_pic(winpic, &r_border, w-CORNER, h-CORNER-CORNER, 0, r_border.get_h()-CORNER, CORNER, CORNER);
+					 Graph::copy_pic(winpic, &r_border, w-CORNER, i, 0, CORNER, CORNER, h-CORNER-i);
+					 Graph::copy_pic(winpic, &r_border, w-CORNER, h-CORNER-CORNER, 0, r_border.get_h()-CORNER, CORNER, CORNER);
 
 					 // bg
 					 for(j=CORNER; (int)j<=(int)(h-CORNER-CORNER-usebg->get_h()); j+=usebg->get_h()) {
 								for(i=CORNER; (int)i<=(int)(w-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
-										  copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
+										  Graph::copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), usebg->get_h());
 								} 
-								copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, usebg->get_h());
+								Graph::copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, usebg->get_h());
 					 }
 					 for(i=CORNER; (int)i<=(int)(w-CORNER-CORNER-usebg->get_w()); i+=usebg->get_w()) {
-								copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), h-j-CORNER);
+								Graph::copy_pic(winpic, usebg, i, j, 0, 0, usebg->get_w(), h-j-CORNER);
 					 } 
-					 copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, h-j-bot.get_h());
+					 Graph::copy_pic(winpic, usebg, i, j, 0, 0, w-i-CORNER, h-j-bot.get_h());
 		  } else {
 					 // has no borders. Simply paste once the pic
 					 unsigned int mw = usebg->get_w() > w ? w : usebg->get_w();
 					 unsigned int mh = usebg->get_h() > h ? h : usebg->get_h();
 		 
-					 copy_pic(winpic, usebg, 0, 0, 0, 0, mw, mh);
+					 Graph::copy_pic(winpic, usebg, 0, 0, 0, 0, mw, mh);
 		  }
 		  
 		  // Draw textareas
@@ -270,7 +270,7 @@ void Window::redraw_win(void) {
  * Returns: Nothing
  */
 void Window::draw(void) {
-		  draw_pic(winpic, x, y, 0, 0, w, h);
+		  Graph::draw_pic(winpic, x, y, 0, 0, w, h);
 }
 					 
 /** void Window::set_new_bg(Pic* p);
@@ -389,7 +389,7 @@ void User_Interface::move_window(Window* win, const unsigned int x, const unsign
  * returns: pt to window 
  */
 Window*  User_Interface::create_window(const unsigned int x, const unsigned int y, const unsigned int w, 
-					 const unsigned int h, const Window::Flags f=Window::DEFAULT) {
+					 const unsigned int h, const Window::Flags f) {
 		  Window* win;
 		  
 		  unsigned int mw=w;

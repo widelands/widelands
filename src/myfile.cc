@@ -21,6 +21,9 @@
 #include "errors.h"
 #include <cassert>
 
+#ifdef WIN32
+#include <string.h>
+#endif
 
 /** class File
  *

@@ -20,10 +20,26 @@
 #ifndef __S__FILE_LOCATOR
 #define __S__FILE_LOCATOR
 
-#include "dirent.h"
+#include "mydirent.h"
 
 #include "singleton.h"
 
+#ifdef MAX_PATH
+#define MAX_PATHL	MAX_PATH
+#else 
+#define MAX_PATHL	256
+#endif
+#define MAX_DIRS	5
+#define MAX_SUBDIRL	20
+#define MAX_SUBDIRS	10
+		  
+#ifdef WIN32
+#define SEP			"\\"
+#define CSEP		'\\'
+#else
+#define SEP			"/"
+#define CSEP		'/'
+#endif
 /** class File_Locator 
  *
  * This class is responsible for locating files in several directorys
@@ -35,23 +51,6 @@ class File_Locator : public Singleton<File_Locator> {
 		  File_Locator& operator=(const File_Locator&);
 
 		  public:
-#ifdef MAX_PATH
-					 static const unsigned int MAX_PATHL=MAX_PATH;
-#else 
-					 static const unsigned int MAX_PATHL=256;
-#endif
-					 static const unsigned int MAX_DIRS=5; 
-					 static const unsigned int MAX_SUBDIRL=20;
-					 static const unsigned int MAX_SUBDIRS=10;
-		  
-#ifdef WINDOWS
-					 static const unsigned char SEP[]="\\";
-					 static const unsigned char CSEP='\\';
-#else
-					 static const unsigned char SEP[]="/";
-					 static const unsigned char CSEP='/';
-#endif
-
 					 enum Last_action {
 								LA_SUCCESS,
 								LA_NOTEXISTING,

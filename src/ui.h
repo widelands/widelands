@@ -69,6 +69,12 @@ class Textarea {
 					 Pic* dp;
 };
 
+// widht/height the graphs above must have
+#define MUST_HAVE_NPIX	100
+// width/height to use as the corner
+#define CORNER			20
+#define MIDDLE			(MUST_HAVE_NPIX-(CORNER*2))
+
 /** class Window
  *
  * This class offers a window. Should't be user directly
@@ -100,12 +106,6 @@ class Window {
 								DEFAULT, 
 								FLAT // No clicks, no moves, no borders.
 					 };
-
-					 // widht/height the graphs above must have
-					 const static unsigned short MUST_HAVE_NPIX=100;
-					 // width/height to use as the corner
-					 const static unsigned short CORNER=20;
-					 const static unsigned short MIDDLE=MUST_HAVE_NPIX-(CORNER*2);
 
 					 // static Functions to set the standart graphics
 					 /** static void Window::set_l_border(Pic* p) 

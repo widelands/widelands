@@ -20,7 +20,9 @@
 #include "fileloc.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifdef WIN32
 #include <string.h>
+#endif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +45,7 @@ File_Locator::File_Locator(void) {
 		  la=LA_SUCCESS;
 		  
 		  for(unsigned int i=0; i<MAX_DIRS; i++) dirs[i][0]='\0';
-		  for(unsigned int i=0; i<MAX_SUBDIRS; i++) subdirs[i][0]='\0';
+		  for(unsigned int j=0; j<MAX_SUBDIRS; j++) subdirs[j][0]='\0';
 		  retval[0]='\0';
 		  def_writedir=0;
 
@@ -84,7 +86,7 @@ void File_Locator::add_searchdir(const char* dir, const unsigned int prio) {
 					 return;
 		  }
 		  
-		  if(!S_ISDIR(st.st_mode)) {
+		  if(!(S_IFDIR & st.st_mode)) {
 					 la=LA_NOTALLOWED;
 					 return;
 		  }
@@ -142,7 +144,7 @@ void File_Locator::register_subdir(const unsigned int id, const char* subd) {
  *
  * Returns: a pathname to the first valid file found
  */
-const char* File_Locator::locate_file(const char* file, const int type = -1) {
+const char* File_Locator::locate_file(const char* file, const int type) {
 		  if(type >= (int) MAX_SUBDIRS) {
 					 la=LA_NOTALLOWED;
 					 return NULL;
@@ -186,7 +188,7 @@ const char* File_Locator::locate_file(const char* file, const int type = -1) {
  * 		type	file type to create
  * Returns: 	Path to complete filename
  */
-const char* File_Locator::get_new_filename(const char* file, const int type=-1) {
+const char* File_Locator::get_new_filename(const char* file, const int type) {
 		  if(type >= (int) MAX_SUBDIRS) {
 					 la=LA_NOTALLOWED;
 					 return NULL;

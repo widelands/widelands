@@ -25,8 +25,10 @@
 
 // Ugly: Size of chars is hard coded for widelands. 
 // Somebody's feeling like defining a font file format?
-#define FONT_H 	7
+#define FONT_H 		7
 #define FONT_W		7
+
+#define MAX_FONTS	2
 
 /** class Font_Handler
  *
@@ -43,7 +45,6 @@ class Font_Handler : public Singleton<Font_Handler> {
 		  Font_Handler& operator=(const Font_Handler&);
 
 		  public:
-					 const static unsigned short MAX_FONTS=2;
 		  
 					 Font_Handler();
 					 ~Font_Handler();
