@@ -26,24 +26,6 @@
 #include "tribe.h"
 #include "cmd_queue.h"
 
-/** class Player
- *
- * Pleease... no more pure virtual nonsense.
- * What we really need is a Player class that stores e.g. score
- * and diplomacy of a player.
- *
- * These Player classes should be controlled via the cmd queue.
- * Commands are inserted by:
- *  - local player
- *  - network packets
- *  - AI code which is invoked from Game, _not_ from Player
- * So basically the Game knows whether a player is controlled
- * locally, remotely or by AI.
- *                      -- Nicolai
- */
-class Player {
-
-};
 
 /** class Game
  *
@@ -51,6 +33,8 @@ class Player {
  * game and setting options, selecting maps to the actual playing phase and the
  * final statistics screen(s).
  */
+#define MAX_PLAYERS		8
+
 enum {
 	gs_none = 0,	// not connected, nothing
 	gs_menu,			// in the setup menu(s)
@@ -59,6 +43,7 @@ enum {
 };
 
 class Interactive_Player;
+class Player;
 
 class Game {
 	friend class Cmd_Queue; // this class handles the commands 
@@ -67,6 +52,17 @@ public:
 	Game(void);
 	~Game(void);
 
+	// life cycle
+   bool run(void);
+	void think(void);
+	
+	// startup phase
+	void remove_player(int plnum);
+	void add_player(int plnum, int type);
+
+	bool can_start();
+		
+	// in-game logic
 	inline Cmd_Queue *get_cmdqueue() { return cmdqueue; }
    inline int get_gametime(void) { return cmdqueue->get_time(); }
 
@@ -83,9 +79,6 @@ public:
 
    inline Map *get_map() { return map; }
 
-	void think(void);
-   void run(void);
-	
 public:
 	void warp_building(int x, int y, uchar owner, int idx);
 	void create_bob(int x, int y, int idx);
@@ -96,9 +89,9 @@ private:
 
 	Interactive_Player *ipl;
 	Tribe_Descr* tribe;
-	Map *map;
-	Player** pls;
+	Map* map;
    Cmd_Queue* cmdqueue;
+	Player* m_players[MAX_PLAYERS];
    Object_Manager* m_objects;
    Counter counter; // used to obtain realtime
 

@@ -67,7 +67,7 @@ Panel::Panel(Panel *nparent, const int nx, const int ny, const uint nw, const ui
 	_cache = 0;
 	_needdraw = false;
 
-	_flags = pf_handle_mouse|pf_think;
+	_flags = pf_handle_mouse|pf_think|pf_visible;
 	update(0, 0, _w, _h);
 }
 
@@ -286,6 +286,19 @@ void Panel::move_to_top()
 		_next->_prev = this;
 	else
 		_parent->_lchild = this;
+}
+
+/** Panel::set_visible(bool on)
+ *
+ * Makes the panel visible or invisible
+ */
+void Panel::set_visible(bool on)
+{
+	_flags &= ~pf_visible;
+	if (on)
+		_flags |= pf_visible;
+		
+	update(0, 0, _w, _h);
 }
 
 /** Panel::draw(Bitmap *dst, int ofsx, int ofsy) [virtual]
@@ -553,6 +566,9 @@ void Panel::do_draw(Bitmap *dst, int ofsx, int ofsy)
 	int dx, dy;
 	uint dw, dh;
 
+	if (!get_visible())
+		return;
+	
 	if (!_cache)
 	{
 		dx = _x+ofsx;

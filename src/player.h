@@ -20,7 +20,6 @@
 #ifndef __S__PLAYER_H
 #define __S__PLAYER_H
 
-
 //
 // This defines a player class. 
 // A player is 
@@ -30,10 +29,21 @@
 //
 class Player {
    public:
-      // much TODO
-      //
+		enum {
+			playerLocal = 0,
+			//playerRemote,
+			playerAI
+		};
+		
+		Player(int type) { m_type = type; }
+		~Player() { }
+	
+		inline int get_type() { return m_type; }
+		
    private:
-      // regent data: name, pics so on
+		int m_type;
+      
+		// regent data: name, pics so on
       Tribe_Descr* tribe; // buildings, wares, workers, sciences
 };
 

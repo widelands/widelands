@@ -101,8 +101,10 @@ void single_player_menue(void)
 		case sp_skirmish:
 		{
 			Game *g = new Game;
-			g->run();
+			bool ran = g->run();
 			delete g;
+			if (ran)
+				return;
 			break;
 		}
 		

@@ -33,7 +33,7 @@
 #include "graphic.h"
 #include "mapselectmenue.h"
 #include "IntPlayer.h"
-
+#include "player.h"
 
 
 /** Game::Game(void)
@@ -45,6 +45,8 @@ Game::Game(void)
 	m_state = gs_none;
 	m_mapname = 0;
 
+	memset(m_players, 0, sizeof(m_players));
+	
    m_objects = new Object_Manager;
    cmdqueue = new Cmd_Queue(this);
    map=0;
@@ -58,10 +60,17 @@ Game::Game(void)
  */
 Game::~Game(void)
 {
+	int i;
+	
 	delete m_objects;
 	delete cmdqueue;
 	if (map)
 		delete map;
+	
+	for(i = 0; i < MAX_PLAYERS; i++)
+		if (m_players[i])
+			remove_player(i);
+	
 	if (m_mapname)
 		free(m_mapname);
 }
@@ -87,12 +96,78 @@ void Game::set_mapname(const char* mapname)
 	// Networking updates here?
 }
 
+/** Game::remove_player(int plnum)
+ *
+ + Remove the player with the given number
+ */
+void Game::remove_player(int plnum)
+{
+	assert(plnum >= 0 && plnum < MAX_PLAYERS);
+	assert(m_state != gs_running);
+	
+	if (m_players[plnum]) {
+		delete m_players[plnum];
+		m_players[plnum] = 0;
+	}		
+}
+
+/** Game::add_player(int plnum, int type)
+ *
+ * Create the player structure for the given plnum.
+ * Note that AI player structures and the Interactive_Player are created when
+ * the game starts. Similar for remote players.
+ */
+void Game::add_player(int plnum, int type)
+{
+	assert(plnum >= 0 && plnum < MAX_PLAYERS);
+	assert(m_state != gs_running);
+	
+	if (m_players[plnum])
+		remove_player(plnum);
+	
+	m_players[plnum] = new Player(type);
+}
+
+/** Game::can_start()
+ *
+ + Returns true if the game settings are valid.
+ */
+bool Game::can_start()
+{
+	int local_num;
+	int i;
+
+	if (!m_mapname)
+		return false;
+	
+	// we need exactly one local player
+	local_num = -1;
+	for(i = 0; i < MAX_PLAYERS; i++) {
+		if (!m_players[i])
+			continue;
+		
+		if (m_players[i]->get_type() == Player::playerLocal) {
+			if (local_num < 0)
+				local_num = i;
+			else
+				return false;
+		}
+	}
+	if (local_num < 0)
+		return false;
+	
+	return true;
+}
+
 /** void Game::run(void)
  *
- * This runs a game 
+ * This runs a game, including game creation phase.
+ * Returns true if a game actually took place.
  */
-void Game::run(void)
+bool Game::run(void)
 {
+	bool played = false;
+
    counter.start();
 
 	m_state = gs_menu;
@@ -116,16 +191,19 @@ void Game::run(void)
 		map = new Map();
       if (RET_OK != map->load_map(m_mapname, this)) {
 			critical_error("Couldn't load map.");
-			return;
+			return false;
 		}
 
 	   ipl = new Interactive_Player(this);
 	   ipl->run();
 	   delete ipl;
 	   delete tribe;
+		played = true;
 	}
 
 	m_state = gs_none;
+	
+	return played;
 }
 
 //

@@ -39,7 +39,7 @@ Cmd_Queue::Cmd_Queue(Game *g)
 
 Cmd_Queue::~Cmd_Queue(void)
 {
-	while(m_cmds.empty()) {
+	while(!m_cmds.empty()) {
 		const Cmd &c = m_cmds.top();
 		if (c.arg3)
 			free(c.arg3);

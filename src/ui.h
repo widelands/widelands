@@ -114,6 +114,7 @@ public:
 		pf_top_on_click = 4, // bring panel on top when clicked inside it
 		pf_die = 8, // this panel needs to die
 		pf_child_die = 16, // a child needs to die
+		pf_visible = 32, // render the panel
 	};
 
 	Panel(Panel *nparent, const int nx, const int ny, const uint nw, const uint nh);
@@ -151,6 +152,9 @@ public:
 	void move_to_top();
 
 	// Drawing, visibility
+	inline bool get_visible() const { return (_flags & pf_visible) ? true : false; }
+	void set_visible(bool on);
+	
 	virtual void draw(Bitmap *dst, int ofsx, int ofsy);
 	virtual void draw_border(Bitmap *dst, int ofsx, int ofsy);
 	void update(int x, int y, int w, int h);
