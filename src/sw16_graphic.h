@@ -272,7 +272,7 @@ private:
 		
 		Picture() { mod = 0; u.fname = 0; bitmap.pixels = 0; }
 	};
-	typedef std::map<const char*, uint> picmap_t;
+	typedef std::map<std::string, uint> picmap_t;
 	
 	SDL_Surface*			m_sdlsurface;
 	Bitmap					m_screen;
