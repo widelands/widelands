@@ -56,9 +56,20 @@ and go for it
 */
 void Editor::run() {
   
-   // TEMP
-//   set_map(new Map("maps/duell.swd"));
-//   set_map(new Map("maps/deutsch.swd"));
+   // set empty map, defaults
+   Map* map=new Map;
+   map->set_world_name("greenland");
+   map->load_world();
+   map->set_size(64, 64);
+
+   for(int y=0; y<64; y++) {
+      for(int x=0; x<64; x++) {
+         map->get_field(x,y)->set_terraind(map->get_world()->get_terrain(5));
+         map->get_field(x,y)->set_terrainr(map->get_world()->get_terrain(5));
+      }
+   }
+   
+   set_map(map);
 
    g_gr->flush(PicMod_Menu);
 		
@@ -67,32 +78,18 @@ void Editor::run() {
    set_iabase(m_eia);
       
    postload();
-		
-/*   // Prepare the players (i.e. place HQs)
-   for(int i = 1; i <= get_map()->get_nrplayers(); i++) {
-      Player* player = get_player(i);
-      if (!player)
-         continue;
+   load_graphics();
 
-			player->init_for_game(this);
-
-			const Coords &c = get_map()->get_starting_pos(i);
-			if (player->get_type() == Player::playerLocal)
-				ipl->move_view_to(c.x, c.y);
-		}
-*/		
-		load_graphics();
-		
-      m_eia->start();
-      m_eia->run();
+   m_eia->start();
+   m_eia->run();
 
 
-		get_objects()->cleanup(this);
-	   delete m_eia;
-      m_eia=0;
-		
-		g_gr->flush(PicMod_Game);
-		g_anim.flush();
+   get_objects()->cleanup(this);
+   delete m_eia;
+   m_eia=0;
+
+   g_gr->flush(PicMod_Game);
+   g_anim.flush();
 }
 
 /*

@@ -149,24 +149,7 @@ int S2_Map_Loader::load_map_complete(Editor_Game_Base* game) {
    load_s2mf(game);
 
 
-   // Post process the map in the necessary two passes to calculate 
-   // brightness and building caps
-   Field *f;
-   uint y;
-   for(y=0; y<m_map->m_height; y++) {
-      for(uint x=0; x<m_map->m_width; x++) {
-         f = m_map->get_field(x, y);
-         m_map->recalc_brightness(x, y, f);
-         m_map->recalc_fieldcaps_pass1(x, y, f);
-      }
-   }
-
-   for(y=0; y<m_map->m_height; y++) {
-      for(uint x=0; x<m_map->m_width; x++) {
-         f = m_map->get_field(x, y);
-         m_map->recalc_fieldcaps_pass2(x, y, f);
-      }
-   }
+   m_map->recalc_whole_map();
    
    set_state(STATE_LOADED);
    
@@ -221,6 +204,38 @@ Map::~Map()
 	
 	m_nrplayers = 0;
 }
+
+/*
+===========
+Map::recalc_whole_map()
+
+this recalculates all data that needs to be recalculated. 
+This is only needed when all fields have change, this means
+a map has been loaded or newly created
+===========
+*/
+void Map::recalc_whole_map(void) {
+   // Post process the map in the necessary two passes to calculate 
+   // brightness and building caps
+   Field *f;
+   uint y;
+   for(y=0; y<m_height; y++) {
+      for(uint x=0; x<m_width; x++) {
+         f = get_field(x, y);
+         int area;
+         check_neighbour_heights(x,y,f,&area);
+         recalc_brightness(x, y, f);
+         recalc_fieldcaps_pass1(x, y, f);
+      }
+   }
+
+   for(y=0; y<m_height; y++) {
+      for(uint x=0; x<m_width; x++) {
+         f = get_field(x, y);
+         recalc_fieldcaps_pass2(x, y, f);
+      }
+   }
+} 
 
 /*
 ===============

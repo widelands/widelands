@@ -94,7 +94,8 @@ class Map {
 	friend class Editor_Game_Base;
    friend class Map_Loader;
    friend class S2_Map_Loader;
-   
+   friend class Editor;
+
 public:
 	struct Pathfield;
                
@@ -103,9 +104,9 @@ public:
 
    // For loading
    Map_Loader* get_correct_loader(const char*);
-   
 	void load_graphics();
-	
+   void recalc_whole_map();
+
 	void set_nrplayers(uint nrplayers);
 
 	void set_starting_pos(uint plnum, Coords c);
