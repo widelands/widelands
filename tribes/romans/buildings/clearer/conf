@@ -1,0 +1,34 @@
+[global]
+descname=Clearer	# nicer name to display in GUI
+worker=lumberjack
+type=production		# basic type (warehouse, production, military)
+size=small
+buildable=yes
+buildicon=clearer_build.png
+
+#subtype=none      # possible values: for warehouse: HQ, port
+program=work
+
+# TODO: describe what this guy does
+[work]
+0=sleep 20000		# sleep the given time
+1=worker burn		
+
+
+[buildcost]
+plank=2
+stone=2
+
+
+[idle]
+pics=clearer_i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+

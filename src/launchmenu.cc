@@ -280,15 +280,16 @@ void LaunchGameMenu::refresh()
 	
 	// update the player description groups
 	int i;
-	for(i = 0; i < MAX_PLAYERS; i++)
+	for(i = 0; i < MAX_PLAYERS; i++) {
 		m_players[i]->set_enabled(i < maxplayers);
+   }
 	
 	m_ok->set_enabled(m_game->can_start());
 }
 
 void LaunchGameMenu::select_map()
 {
-	map_select_menue(m_game);
+   map_select_menue(m_game);
 	refresh();
 }
 

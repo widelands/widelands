@@ -19,6 +19,12 @@ program=chop
 5=createitem log							# create & carry the given item
 6=return										# return home
 
+[burn]
+0=findobject attrib:tree radius:12
+1=walk object
+2=animation idle 5000  # TODO: burn animation
+3=return # TODO: object should burn like a house
+
 # The normal idle animation (non-directional)
 [idle]
 pics=idle_??.png

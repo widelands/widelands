@@ -135,7 +135,7 @@ MapSelectMenu::~MapSelectMenu()
 
 void MapSelectMenu::ok()
 {
-	egbase->set_map(m_maploader->get_map());
+   egbase->set_map(m_maploader->get_map());
 	m_maploader->load_map_complete(egbase);
    m_map=0;
    

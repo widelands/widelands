@@ -142,8 +142,9 @@ void Tribe_Descr::parse_root_conf(const char *directory)
 			throw wexception("Missing section [flag]");
 		
 		m_anim_flag = g_anim.get(directory, s, 0, &m_default_encdata);
-		
-		prof.check_used();
+
+      // default wares
+      s = prof.get_section("start_wares");
 	}
 	catch(std::exception &e) {
 		throw wexception("%s: %s", fname, e.what());
@@ -216,3 +217,15 @@ void Tribe_Descr::parse_workers(const char *directory)
 	}
 }
 
+/*
+===========
+void Tribe_Descr::load_warehouse_with_start_wares()
+
+This loads a warehouse with the given start wares as defined in 
+the conf files
+===========
+*/
+void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* game, Warehouse* wh) {
+
+}
+      

@@ -415,6 +415,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
          if (nr) // cycled up to maximum possible frame number
             break;
 
+
          // is the frame actually there?
          if (!g_fs->FileExists(fname)) {
             if(i==(nextensions-1)) { alldone=true; break; }
@@ -460,7 +461,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
       }
       if(alldone==true) break;
    }
-	
+
 	if (!m_nrframes)
 		throw wexception("Animation %s has no frames", data->picnametempl.c_str());
 }

@@ -3,6 +3,8 @@ ends_in="stones3"
 stock=2
 
 size=big
+attrib=stone
+program=shrink
 
 clrkey_r=0
 clrkey_g=0
@@ -12,4 +14,7 @@ shadowclr_g=0
 shadowclr_b=0
 hot_spot_x=25
 hot_spot_y=30
+
+[shrink]
+0=transform stones2
 

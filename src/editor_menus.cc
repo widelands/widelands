@@ -390,7 +390,6 @@ void Editor_Main_Menu::load_btn() {
    g_anim.flush();
 
    //map_select_menue(m_parent->get_editor());
-   std::cerr << "ALIVE!" << std::endl;
    //m_parent->map_changed();
 
    g_gr->flush(PicMod_Menu);

@@ -1,0 +1,32 @@
+[global]
+descname=Quarry		# nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=small
+buildable=yes
+buildicon=quarry_build.png
+worker=stonecutter
+program=work
+#subtype=none      # possible values: for warehouse: HQ, port
+
+# TODO: describe what this guy does
+
+[work]
+0=sleep 20000
+1=worker cut
+
+[buildcost]
+plank=2
+
+[idle]
+pics=quarry_i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+

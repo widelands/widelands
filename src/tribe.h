@@ -57,6 +57,8 @@ class Tribe_Descr {
 		void postload(Editor_Game_Base*);
 		void load_graphics();
 		
+      void load_warehouse_with_start_wares(Editor_Game_Base*, Warehouse*);
+      
    private:
       char m_name[30];
       
@@ -68,7 +70,7 @@ class Tribe_Descr {
 
       // Parsing the tribe
 		EncodeData	m_default_encdata;
-		
+	
 		void parse_root_conf(const char *directory);
 		void parse_buildings(const char *directory);
 		void parse_workers(const char *directory);

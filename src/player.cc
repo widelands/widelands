@@ -70,14 +70,18 @@ void Player::init_for_game(Game* game)
 		throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
 	Warehouse *wh = (Warehouse *)game->warp_building(c.x, c.y, m_plnum, idx);
 
-	//	Add starting wares
+	get_tribe()->load_warehouse_with_start_wares(game, wh);
+
+   //	Add starting wares
 	wh->create_wares(game->get_safe_ware_id("carrier"), 20);
 	wh->create_wares(game->get_safe_ware_id("builder"), 4);
 	wh->create_wares(game->get_safe_ware_id("lumberjack"), 6);
 	wh->create_wares(game->get_safe_ware_id("forrester"), 3);
+	wh->create_wares(game->get_safe_ware_id("stonecutter"), 3);
 
 	wh->create_wares(game->get_safe_ware_id("plank"), 30);
 	wh->create_wares(game->get_safe_ware_id("log"), 10);
+	wh->create_wares(game->get_safe_ware_id("stone"), 30);
 }
 
 /*

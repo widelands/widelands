@@ -303,7 +303,7 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 	char sectnamebase[256];
 	char *repl;
 	const char* string;
-   
+  
 	if (strchr(sectnametempl, '%'))
 		throw wexception("sectnametempl %s contains %%", sectnametempl);
 
@@ -313,7 +313,9 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 		throw wexception("DirAnimations section name template %s does not contain %%s", sectnametempl);
 	strncpy(repl, "%s", 2);
 
-	string = defaults->get_string("dirpics", 0);
+	if(defaults) string = defaults->get_string("dirpics", 0);
+   else string=0;
+
 	if (string) {
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s", string);
 		repl = strstr(dirpictempl, "!!");
@@ -329,8 +331,9 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 		char sectname[300];
 		Section *s;
 
-		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
 
+		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
+      
 		s = prof->get_section(sectname);
 		if (!s) {
 			if (!defaults)
@@ -339,7 +342,7 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir-1]);
-		m_animations[dir-1] = g_anim.get(directory, s, sectname, encdefaults);
+      m_animations[dir-1] = g_anim.get(directory, s, sectname, encdefaults);
 	}
 }
 
