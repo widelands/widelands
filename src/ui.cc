@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -344,7 +344,7 @@ void Panel::set_visible(bool on)
    _flags &= ~pf_visible;
 	if (on)
 		_flags |= pf_visible;
-		
+
 	update(0, 0, _w, _h);
 }
 
@@ -354,6 +354,7 @@ Panel::draw [virtual]
 
 Redraw the panel. Note that all drawing coordinates are relative to the
 inner area: you cannot overwrite the panel border in this function.
+Child panels will be drawn over anything drawn in this function.
 ===============
 */
 void Panel::draw(RenderTarget* dst)
@@ -370,6 +371,20 @@ Redraw the panel border.
 void Panel::draw_border(RenderTarget* dst)
 {
 }
+
+
+/*
+===============
+Panel::draw_overlay [virtual]
+
+Draw overlays that appear over all child panels.
+This can be used e.g. for debug information.
+===============
+*/
+void Panel::draw_overlay(RenderTarget* dst)
+{
+}
+
 
 /** Panel::update(int x, int y, int w, int h);
  *
@@ -627,12 +642,12 @@ Panel::set_can_focus
 */
 void Panel::set_can_focus(bool yes)
 {
-   
+
 	if (yes) {
 		_flags |= pf_can_focus;
    }	else {
 		_flags &= ~pf_can_focus;
-		
+
 		if (_parent && _parent->_focus == this)
 			_parent->_focus = 0;
 	}
@@ -730,25 +745,27 @@ void Panel::do_draw(RenderTarget* dst)
 {
 	if (!get_visible())
 		return;
-	
+
 	if (!_cache)
 	{
 		Rect outerrc;
 		Point outerofs;
-		
+
 		if (dst->enter_window(Rect(_x, _y, _w, _h), &outerrc, &outerofs)) {
 			draw_border(dst);
-			
+
 			Rect innerwindow(_lborder, _tborder, _w-(_lborder+_rborder), _h-(_tborder+_bborder));
-			
+
 			if (dst->enter_window(innerwindow, 0, 0)) {
 				draw(dst);
 
 				// draw back to front
 				for(Panel *child = _lchild; child; child = child->_prev)
 					child->do_draw(dst);
+
+				draw_overlay(dst);
 			}
-			
+
 			dst->set_window(outerrc, outerofs);
 		}
 	}
@@ -759,9 +776,9 @@ void Panel::do_draw(RenderTarget* dst)
 		if (_needdraw) {
 			draw_border(_cache);
 
-			RenderTarget* inner = _cache->enter_window(_lborder, _tborder, 
+			RenderTarget* inner = _cache->enter_window(_lborder, _tborder,
 			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
-			
+
 			if (inner) {
 				draw(inner);
 

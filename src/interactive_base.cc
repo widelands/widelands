@@ -35,7 +35,7 @@ Interactive_Base IMPLEMENTATION
 /*
 ===============
 Interactive_Base::Interactive_Base
- 
+
 Initialize
 ===============
 */
@@ -51,11 +51,15 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 
    m_fieldsel_freeze = false;
    m_egbase=g;
-	m_display_flags = 0;
+	m_display_flags = dfDebug;
+
+	m_lastframe = Sys_GetTime();
+	m_frametime = 0;
+	m_avg_usframetime = 0;
 
    m_mapview=0;
-   m_mm=0;	
-   
+   m_mm=0;
+
    set_fieldsel_radius(0);
    unset_fsel_picture(); // set default fsel
 }
@@ -130,15 +134,50 @@ Called once per frame by the UI code
 */
 void Interactive_Base::think()
 {
+	// Timing
+	uint curframe = Sys_GetTime();
+
+	m_frametime = curframe - m_lastframe;
+	m_avg_usframetime = ((m_avg_usframetime * 15) + (m_frametime * 1000)) / 16;
+	m_lastframe = curframe;
+
 	// Call game logic here
    // The game advances
 	m_egbase->think();
- 
+
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
 	g_gr->update_fullscreen();
 
 	// some of the UI windows need to think()
 	Panel::think();
+}
+
+
+/*
+===============
+Interactive_Base::draw_overlay
+
+Draw debug overlay when appropriate.
+===============
+*/
+void Interactive_Base::draw_overlay(RenderTarget* dst)
+{
+	Panel::draw(dst);
+
+	if (get_display_flag(dfDebug))
+	{
+		// Show fsel coordinates
+		char buf[100];
+		Coords fsel = get_fieldsel();
+
+		sprintf(buf, "%3i %3i", fsel.x, fsel.y);
+		g_font->draw_string(dst, 5, 5, buf);
+
+		// Show FPS
+		sprintf(buf, "%4.1f fps (avg: %4.1f fps)",
+				1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
+		g_font->draw_string(dst, 75, 5, buf);
+	}
 }
 
 
@@ -189,7 +228,7 @@ void Interactive_Base::move_view_to(int fx, int fy)
 
 	if (m_minimap.window)
 		m_mm->get_minimapview()->set_view_pos(x, y);
-	
+
 	x -= get_mapview()->get_w()>>1;
 	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
 	y -= get_mapview()->get_h()>>1;

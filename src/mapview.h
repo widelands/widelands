@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2003 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ public:
 	UISignal fieldclicked;
 
 	void warp_mouse_to_field(Coords c);
-	
+
 	// Function to set the viewpoint
 	void set_viewpoint(int x, int y);
 	void set_rel_viewpoint(int x, int y) { set_viewpoint(vpx+x,  vpy+y); }
@@ -54,13 +54,13 @@ public:
 
 	// Drawing
 	void draw(RenderTarget* dst);
-	
+
 	// Event handling
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	void track_fsel(int mx, int my);
-   
+
 private:
    Interactive_Base *m_intbase;
 	int vpx, vpy;

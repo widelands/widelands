@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -159,6 +159,7 @@ public:
 
 	virtual void draw(RenderTarget* dst);
 	virtual void draw_border(RenderTarget* dst);
+	virtual void draw_overlay(RenderTarget* dst);
 	void update(int x, int y, int w, int h);
 	void update_inner(int x, int y, int w, int h);
 	void set_cache(bool enable);

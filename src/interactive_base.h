@@ -40,6 +40,7 @@ class Interactive_Base : public Panel {
 		enum {
 			dfShowCensus = 1,				// show census report on buildings
 			dfShowStatistics = 2,		// show statistics report on buildings
+			dfDebug = 4,					// general debugging info
 		};
 
 	public:
@@ -82,6 +83,10 @@ class Interactive_Base : public Panel {
       bool		         m_fieldsel_freeze; // don't change m_fieldsel even if mouse moves
 		uint					m_display_flags;
 
+		uint					m_lastframe;			// system time (milliseconds)
+		uint					m_frametime;			// in millseconds
+		uint					m_avg_usframetime;	// in microseconds!
+
       UniqueWindowRegistry m_minimap;
 
    protected:
@@ -96,8 +101,9 @@ class Interactive_Base : public Panel {
       void set_fsel_picture(const char* file) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, file, RGBColor(0,0,255)); }
       void unset_fsel_picture(void) { m_maprenderinfo.fsel=g_gr->get_picture(PicMod_Game, "pics/fsel.png", RGBColor(0,0,255)); }
 
+		virtual void draw_overlay(RenderTarget* dst);
 
-      // cart rendering stuff. this is still protected since this is
+      // map rendering stuff. this is still protected since this is
       // used quite often
 		MapRenderInfo	   m_maprenderinfo;
 };

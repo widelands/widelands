@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by The Widelands Development Team
+ * Copyright (C) 2002-2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ Map_View::Map_View(Panel *parent, int x, int y, uint w, uint h, Interactive_Base
 	: Panel(parent, x, y, w, h)
 {
 	m_intbase = player;
-	
+
 	vpx = vpy = 0;
 	dragging = false;
 }
@@ -70,7 +70,7 @@ void Map_View::warp_mouse_to_field(Coords c)
 	m_intbase->get_map()->get_pix(c, &x, &y);
 	x -= vpx;
 	y -= vpy;
-	
+
 	if (x >= 0 && x < get_w() && y >= 0 && y < get_h())
 		set_mouse_pos(x, y);
 }
@@ -79,7 +79,7 @@ void Map_View::warp_mouse_to_field(Coords c)
 /*
 ===============
 Map_View::draw
- 
+
 This is the guts!! this function draws the whole
 map the user can see. we spend a lot of time
 in this function
@@ -87,37 +87,7 @@ in this function
 */
 void Map_View::draw(RenderTarget* dst)
 {
-   // TEMP DEBUG TODO fps counter
-   static long start_fps_counter=Sys_GetTime();
-   static long cur_fps_counter=start_fps_counter;
-   static long framecount=0;
-	static float fps = 0;
-   static float fps_average=0;
-   static int fps_av_count=0;
-	// TEMP
-   
 	dst->rendermap(m_intbase->get_maprenderinfo(), Point(vpx, vpy));
-
-	// debug: show fsel coordinates
-	Coords fsel = m_intbase->get_fieldsel();
-	char buf[100];
-	sprintf(buf, "%3i %3i", fsel.x, fsel.y);
-	g_font->draw_string(dst, 5, 5, buf);
-
-   // debug show fps
-   ++framecount;
-   cur_fps_counter=Sys_GetTime();
-   if(cur_fps_counter-start_fps_counter > 1000) {
-      fps = (((float)framecount*1000)/(float)(cur_fps_counter-start_fps_counter));
-      fps_av_count++;
-      fps_average+=fps;
-         
-      // one second has passed
-      framecount=0;
-      start_fps_counter=cur_fps_counter;
-   }
-   sprintf(buf, "%4f fps (av: %4f fps)", fps, fps_average/(float)fps_av_count );
-	g_font->draw_string(dst, 75, 5, buf);
 }
 
 
