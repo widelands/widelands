@@ -36,7 +36,7 @@ ADD_LDFLAGS:=
 # This are additional build flags, you don't want to change them, unless
 # you know what you're doing
 DEBUG=YES
-PROFILE=YES
+PROFILE=NO
 OPTIMIZE=YES
 # RELEASE_BUILD disables debug and profile
 RELEASE_BUILD=NO

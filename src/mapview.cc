@@ -397,14 +397,14 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
    if(render_r) {
 		memcpy(ptmp, p, sizeof(Point)*3);
 		memcpy(btmp, b, sizeof(int)*3);
-      render_triangle(dst, ptmp, btmp, f->get_terr()->get_texture());
+      render_triangle(dst, ptmp, btmp, f->get_terr()->get_texture(), vpx, vpy);
 	}
 
 	// Render bottom triangle
    if(render_b) {
 		memcpy(ptmp, p+1, sizeof(Point)*3);
 		memcpy(btmp, b+1, sizeof(int)*3);
-      render_triangle(dst, ptmp, btmp, f->get_terd()->get_texture());
+      render_triangle(dst, ptmp, btmp, f->get_terd()->get_texture(), vpx, vpy);
 	}
 	
 	// Render roads

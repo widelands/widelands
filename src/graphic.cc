@@ -113,7 +113,7 @@ int make_triangle_lines(Point* points, int* bright, _go* starts, _go* ends)
 }
 
 // render_triangle for gouraud shading
-void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture)
+void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture, int vpx, int vpy)
 {
    if (points[0].y > points[1].y)
    {
@@ -162,16 +162,18 @@ void render_triangle(Bitmap *dst, Point* points, int* bright, Pic* texture)
       }
 
       ushort *pix = dst->get_pixels() + (points[0].y + y)*dst->get_pitch() + start;
-      ushort *texp = texture->get_pixels() + (y % texture->get_h())*texture->get_w();
+      ushort *texp = texture->get_pixels() + ((points[0].y + y+vpy) % texture->get_h())*texture->get_w();
       uint tp = start - starts[y].x;
 
-      for(int cnt = end-start; cnt >= 0; cnt--)
+      int counter=0;
+      for(int cnt = start; cnt <=end;  cnt++)
       {
          //*pix++ = pack_rgb((b >> 16) + 128, (b >> 16) + 128, (b >> 16) + 128); // shading test
-         *pix++ = bright_up_clr2(texp[tp], b >> 16);
+         *pix++ = bright_up_clr2(texp[(start+counter+vpx)%texture->get_w()], b >> 16);
          b += bd;
          tp++;
-
+         ++counter;
+         
          // replacing tp %= texture->w with the following conditional
          // makes this _entire function_ two times faster on my Athlon
          if (tp == texture->get_w())

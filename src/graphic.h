@@ -317,7 +317,7 @@ extern Graphic *g_graphic;
 #define g_gr (*g_graphic)
 
 
-void render_triangle(Bitmap *dst, Point* points, int *brightness, Pic* texture);
+void render_triangle(Bitmap *dst, Point* points, int *brightness, Pic* texture, int vpx, int vpy);
 void render_road_horiz(Bitmap *dst, Point start, Point end, ushort color);
 void render_road_vert(Bitmap *dst, Point start, Point end, ushort color);
 void copy_pic(Bitmap *dst, Bitmap *src, int dst_x, int dst_y,
