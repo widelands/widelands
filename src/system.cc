@@ -941,13 +941,23 @@ static int pid_me=0, pid_peer=0;
 
 static volatile int may_run=0;
 
-void signal_handler (int sig)
+static void signal_handler (int sig)
 {
 	may_run++;
 }
 
+static void quit_handler ()
+{
+	kill (pid_peer, SIGTERM);
+	sleep (2);
+	kill (pid_peer, SIGKILL);
+}
+
 void yield_double_game ()
 {
+	if (pid_me==0)
+		return;
+	
 	if (may_run>0) {
 		may_run--;
 	        kill (pid_peer, SIGUSR1);
@@ -979,8 +989,7 @@ void init_double_game ()
 	
 	signal (SIGUSR1, signal_handler);
 	
-	if (may_run==0)
-	    sleep (500000);
+	atexit (quit_handler);
 }
 
 #endif
