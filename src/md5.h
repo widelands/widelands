@@ -3,7 +3,7 @@
  *
  * Thanks to Ulrich Drepper for the md5sum example code
  * 
- * Copyright (C) 2002 by Holger Rapp 
+ * Copyright (C) 2002 by the Widelands Development Team
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
