@@ -40,12 +40,12 @@ class Network_Buffer {
       uchar get_8(bool = true);
       ushort get_16(bool = true);
       uint get_32(bool = true);
-      std::string<wchar_t> get_string(bool = true);
+      std::wstring get_string(bool = true);
       
       void put_8(uchar); 
       void put_16(ushort); 
       void put_32(uint); 
-      void put_string( std::string<wchar_t> );
+      void put_string( std::wstring );
 
       // Return value must not be freed by user
       uchar* get_data() { return m_buffer; }

@@ -69,8 +69,8 @@ void remove_spaces(std::string* in) {
  * string. This function should eventually no longer be 
  * needed (when everything is unicode)
  */
-std::string<wchar_t> widen_string(std::string in) {
-   std::string<wchar_t> retval;
+std::wstring widen_string(std::string in) {
+   std::wstring retval;
 
    for(uint i=0; i<in.size(); i++) 
       retval.append(1, in[i]);
@@ -82,7 +82,7 @@ std::string<wchar_t> widen_string(std::string in) {
  * string. Wide characters are silently ignored. 
  * This function should eventually no longer be used
  */
-std::string narrow_string(std::string<wchar_t> in) {
+std::string narrow_string(std::wstring in) {
    std::string retval;
 
    for(uint i=0; i<in.size(); i++) { 

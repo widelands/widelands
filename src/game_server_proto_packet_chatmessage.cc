@@ -30,7 +30,7 @@
 /*
  * Constructor
  */
-Game_Server_Protocol_Packet_ChatMessage::Game_Server_Protocol_Packet_ChatMessage( uchar flags, std::string<wchar_t> msg ) {
+Game_Server_Protocol_Packet_ChatMessage::Game_Server_Protocol_Packet_ChatMessage( uchar flags, std::wstring msg ) {
    m_flags = flags;
    m_msg = msg;
 }
@@ -78,8 +78,8 @@ void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connectio
  */
 void Game_Server_Protocol_Packet_ChatMessage::recv(Game_Server_Connection* gsc, Network_Buffer* buffer) {
    m_flags = buffer->get_8();
-   std::string<wchar_t> user = buffer->get_string();
-   std::string<wchar_t> msg = buffer->get_string();
+   std::wstring user = buffer->get_string();
+   std::wstring msg = buffer->get_string();
 
    gsc->chat_message( user, msg, m_flags );
 }

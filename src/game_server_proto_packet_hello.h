@@ -29,7 +29,7 @@
  */
 class Game_Server_Protocol_Packet_Hello : public Game_Server_Protocol_Packet {
    public:
-      Game_Server_Protocol_Packet_Hello(std::string<wchar_t> name);
+      Game_Server_Protocol_Packet_Hello(std::wstring name);
       virtual ~Game_Server_Protocol_Packet_Hello();
      
       virtual ushort get_id(void);
@@ -40,7 +40,7 @@ class Game_Server_Protocol_Packet_Hello : public Game_Server_Protocol_Packet {
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 
    private:
-      std::string<wchar_t> m_name;
+      std::wstring m_name;
 };
 
 

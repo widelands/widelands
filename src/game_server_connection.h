@@ -36,12 +36,12 @@ class Game_Server_Protocol_Packet;
  *  - chat there, list games, users and so on...
  *  - send commands to the game server
  */
-typedef void (*ServerMessage_Handler)(std::string<wchar_t>, void* data);
-typedef void (*CriticalError_Handler)(std::string<wchar_t>, void* data);
-typedef void (*UserEntered_Handler)(std::string<wchar_t>, std::string<wchar_t>, bool, void*);
-typedef void (*RoomInfo_Handler)(std::vector<std::string<wchar_t> >, void*);
-typedef void (*UserInfo_Handler)(std::string<wchar_t>, std::string<wchar_t>, std::string<wchar_t>, void*);
-typedef void (*ChatMessage_Handler)(std::string<wchar_t>, std::string<wchar_t>, uchar, void*);
+typedef void (*ServerMessage_Handler)(std::wstring, void* data);
+typedef void (*CriticalError_Handler)(std::wstring, void* data);
+typedef void (*UserEntered_Handler)(std::wstring, std::wstring, bool, void*);
+typedef void (*RoomInfo_Handler)(std::vector<std::wstring >, void*);
+typedef void (*UserInfo_Handler)(std::wstring, std::wstring, std::wstring, void*);
+typedef void (*ChatMessage_Handler)(std::wstring, std::wstring, uchar, void*);
 typedef void (*Disconnet_Handler)( void* );
 
 class Game_Server_Connection {
@@ -64,12 +64,12 @@ class Game_Server_Connection {
       void set_disconnect_handler(Disconnet_Handler, void*);
       
       // Call callback functions
-      void server_message(std::string<wchar_t> str);
-      void user_entered(std::string<wchar_t> str, std::string<wchar_t>, uchar);
-      void get_room_info(std::vector<std::string<wchar_t> >);
-      void get_user_info( std::string<wchar_t>, std::string<wchar_t>, std::string<wchar_t>);
-      void chat_message( std::string<wchar_t>, std::string<wchar_t>, uchar );
-      void critical_error(std::string<wchar_t> str);
+      void server_message(std::wstring str);
+      void user_entered(std::wstring str, std::wstring, uchar);
+      void get_room_info(std::vector<std::wstring >);
+      void get_user_info( std::wstring, std::wstring, std::wstring);
+      void chat_message( std::wstring, std::wstring, uchar );
+      void critical_error(std::wstring str);
       
       // Set user data 
       void set_username(const wchar_t* name) { m_username = name; }
@@ -89,9 +89,9 @@ class Game_Server_Connection {
       uint m_last_packet_index;
 
       // User data
-      std::string<wchar_t> m_username;
-      std::string<wchar_t> m_group;
-      std::string<wchar_t> m_room;
+      std::wstring m_username;
+      std::wstring m_group;
+      std::wstring m_room;
 
       // Callback functions
       ServerMessage_Handler m_smh;

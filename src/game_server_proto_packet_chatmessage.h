@@ -28,7 +28,7 @@
  */
 class Game_Server_Protocol_Packet_ChatMessage : public Game_Server_Protocol_Packet {
    public:
-      Game_Server_Protocol_Packet_ChatMessage(uchar, std::string<wchar_t> );
+      Game_Server_Protocol_Packet_ChatMessage(uchar, std::wstring );
       virtual ~Game_Server_Protocol_Packet_ChatMessage();
      
       virtual ushort get_id(void);
@@ -40,7 +40,7 @@ class Game_Server_Protocol_Packet_ChatMessage : public Game_Server_Protocol_Pack
 
    private:
       uchar m_flags;
-      std::string<wchar_t> m_msg;
+      std::wstring m_msg;
 };
 
 

@@ -75,8 +75,8 @@ uint Network_Buffer::get_32(bool remove) {
    return retval;
 }
 
-std::string<wchar_t> Network_Buffer::get_string(bool remove) {
-   std::string<wchar_t> retval;
+std::wstring Network_Buffer::get_string(bool remove) {
+   std::wstring retval;
 
    assert( remove ); // TODO: allow peeking also for string
    
@@ -126,7 +126,7 @@ void Network_Buffer::put_32( uint val ) {
    m_buffer_len += size;
 }
 
-void Network_Buffer::put_string( std::string<wchar_t> string ) {
+void Network_Buffer::put_string( std::wstring string ) {
    put_16(string.size());
    
    for(uint i=0; i<string.size(); i++) { 

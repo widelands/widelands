@@ -40,12 +40,12 @@ class Fullscreen_Menu_InetLobby: public Fullscreen_Menu_Base {
 
       void think( void );
 
-      void server_message( std::string<wchar_t> str );
-      void user_entered(std::string<wchar_t> name, std::string<wchar_t> room, bool enters ) ;
-      void user_info(std::string<wchar_t> name, std::string<wchar_t> name, std::string<wchar_t> room ) ;
-      void room_info(std::vector< std::string<wchar_t> > users);
-      void chat_message(std::string<wchar_t> user, std::string<wchar_t> room, bool is_action);
-      void critical_error( std::string<wchar_t> str );
+      void server_message( std::wstring str );
+      void user_entered(std::wstring name, std::wstring room, bool enters ) ;
+      void user_info(std::wstring name, std::wstring name, std::wstring room ) ;
+      void room_info(std::vector< std::wstring > users);
+      void chat_message(std::wstring user, std::wstring room, bool is_action);
+      void critical_error( std::wstring str );
       void disconnect( void );
       
 	private:

@@ -28,7 +28,7 @@
 /*
  * Constructor
  */
-Game_Server_Protocol_Packet_Hello::Game_Server_Protocol_Packet_Hello(std::string<wchar_t> name) {
+Game_Server_Protocol_Packet_Hello::Game_Server_Protocol_Packet_Hello(std::wstring name) {
    m_name = name;
 }
 
@@ -64,9 +64,9 @@ void Game_Server_Protocol_Packet_Hello::handle_reply(Game_Server_Connection* gsc
 #endif
 
    m_name = buf->get_string();
-   std::string<wchar_t> m_group = buf->get_string();
-   std::string<wchar_t> m_room= buf->get_string();
-   std::string<wchar_t> m_motd= buf->get_string();
+   std::wstring m_group = buf->get_string();
+   std::wstring m_room= buf->get_string();
+   std::wstring m_motd= buf->get_string();
 
    assert(retcode == USER_WELCOME); // no other code defined at the moment
    

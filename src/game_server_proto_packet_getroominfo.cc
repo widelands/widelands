@@ -29,7 +29,7 @@
 /*
  * Constructor
  */
-Game_Server_Protocol_Packet_GetRoomInfo::Game_Server_Protocol_Packet_GetRoomInfo( std::string<wchar_t> room ) {
+Game_Server_Protocol_Packet_GetRoomInfo::Game_Server_Protocol_Packet_GetRoomInfo( std::wstring room ) {
    m_roomname = room;
 }
 
@@ -73,7 +73,7 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 
    ushort nrusers = buf->get_16();
 
-   std::vector< std::string<wchar_t> > users;
+   std::vector< std::wstring > users;
    
    for(uint i = 0; i < nrusers; i++) {
       users.push_back( buf->get_string() );

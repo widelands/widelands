@@ -28,7 +28,7 @@
  */
 class Game_Server_Protocol_Packet_GetUserInfo : public Game_Server_Protocol_Packet {
    public:
-      Game_Server_Protocol_Packet_GetUserInfo( std::string<wchar_t> );
+      Game_Server_Protocol_Packet_GetUserInfo( std::wstring );
       virtual ~Game_Server_Protocol_Packet_GetUserInfo();
      
       virtual ushort get_id(void);
@@ -39,7 +39,7 @@ class Game_Server_Protocol_Packet_GetUserInfo : public Game_Server_Protocol_Pack
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*);
 
    private:
-      std::string<wchar_t> m_username; // which user to query
+      std::wstring m_username; // which user to query
 };
 
 

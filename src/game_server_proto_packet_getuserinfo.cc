@@ -29,7 +29,7 @@
 /*
  * Constructor
  */
-Game_Server_Protocol_Packet_GetUserInfo::Game_Server_Protocol_Packet_GetUserInfo( std::string<wchar_t> user ) {
+Game_Server_Protocol_Packet_GetUserInfo::Game_Server_Protocol_Packet_GetUserInfo( std::wstring user ) {
    m_username = user;
 }
 
@@ -71,8 +71,8 @@ void Game_Server_Protocol_Packet_GetUserInfo::handle_reply(Game_Server_Connectio
 
    assert(flags == UI_ACK); 
 
-   std::string<wchar_t> game = buf->get_string();
-   std::string<wchar_t> room = buf->get_string();
+   std::wstring game = buf->get_string();
+   std::wstring room = buf->get_string();
    gsc->get_user_info(m_username, game, room);
 }
 
