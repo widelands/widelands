@@ -80,7 +80,7 @@ class Ascii_file : public File {
 					 Ascii_file();
 					 ~Ascii_file();
 					 
-					 void read_line(char*, uint);
+					 int read_line(char*, uint);
 					 
 					 void open(const char*, For);
 					 void close(void);

@@ -326,24 +326,32 @@ int Ascii_file::write(char* buf, int size) {
  *
  * Returns: bytes read or -1
  */
-void Ascii_file::read_line(char* buf, uint size) {
-		  if(get_state() != OPEN) return ;
+int Ascii_file::read_line(char* buf, uint size)
+{
+	if(get_state() != OPEN) return ;
 
-		  set_state(READS);
+	set_state(READS);
 		 
-		  char* ret;
-		  ret=fgets(buf, size, f);
+	char* ret;
+	ret = fgets(buf, size, f);
 
-		  for(uint i=0; i<size; i++) {
-					 if(buf[i]=='\n') {
-								if(i && buf[i-1]=='\r') {
-										  buf[i-1]='\0';
-								} else buf[i] = '\0';
-								break;
-					 }
-		  }
+	if(!ret)
+	{
+		set_state(END_OF_FILE);
+		return -1;
+	}
+
+	for (uint i=0; i<size; i++)
+		if (buf[i]=='\n')
+		{
+			if(i && buf[i-1]=='\r')
+				buf[i-1]='\0';
+			else
+				buf[i] = '\0';
+			break;
+		}
 		  
-		  set_state(OPEN);
+	set_state(OPEN);
 
-		  if(!ret) set_state(END_OF_FILE);
+	return i;
 }

@@ -134,7 +134,7 @@ void setup_searchpaths(void)
 	
 	g_fileloc.add_searchdir(PKGDATADIR, MAX_DIRS-2);
 #else
-	int i=0, n=0;
+	uint i=0, n=0;
 	buf = GetCommandLine();
 	while (buf[i]==' ' || buf[i]=='\"' )
 		i++;
