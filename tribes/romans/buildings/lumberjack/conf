@@ -14,7 +14,7 @@ program=work
 #subtype=none		# possible values: for warehouse: HQ, port
 
 [work]
-0=sleep 20000		# sleep the given time
+0=sleep 30000		# sleep the given time
 1=worker chop		# cause the worker to run the 'chop' program
 
 
