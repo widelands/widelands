@@ -48,9 +48,9 @@ void Bitmap::draw_rect(int rx, int ry, int rw, int rh, ushort color)
 		rx = 0;
 	if (ry < 0)
 		ry = 0;
-	if (rw > w)
+	if (rw > (int)w)
 		rw = w;
-	if (rh > h)
+	if (rh > (int)h)
 		rh = h;
 	
 	if (rx > rw || ry > rh)
@@ -85,9 +85,9 @@ void Bitmap::fill_rect(int rx, int ry, int rw, int rh, ushort color)
 		rx = 0;
 	if (ry < 0)
 		ry = 0;
-	if (rw > w)
+	if (rw > (int)w)
 		rw = w;
-	if (rh > h)
+	if (rh > (int)h)
 		rh = h;
 	
 	if (rx > rw || ry > rh)
@@ -117,18 +117,18 @@ void Bitmap::brighten_rect(int rx, int ry, int rw, int rh, int factor)
 		rx = 0;
 	if (ry < 0)
 		ry = 0;
-	if (rw > w)
+	if (rw > (int)w)
 		rw = w;
-	if (rh > h)
+	if (rh > (int)h)
 		rh = h;
 	
 	if (rx > rw || ry > rh)
 		return;
 	
-   for (uint y=ry; y<rh; y++)
+   for (int y=ry; y<rh; y++)
    {
       uint p = y * pitch + rx;
-      for (uint x=rx; x<rw; x++)
+      for (int x=rx; x<rw; x++)
          pixels[p++]= bright_up_clr(pixels[p], factor);
    }
 }

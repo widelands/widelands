@@ -50,11 +50,15 @@ class Bitmap {
          // this function clears the bitmap completly (draws it black)
          // it assumes, that: (w*h)%4 == 0.
          // This function is speedy
-         int i=(w*h);
-         assert(!(i&3));
-         i>>=1;
-         while(--i) *(((long*)(pixels))+i)=0;
-         *pixels=0;
+			if (w != pitch)
+				fill_rect(0, 0, w, h, 0);
+			else {
+				int i=(w*h);
+				assert(!(i&3));
+				i>>=1;
+				while(--i) *(((long*)(pixels))+i)=0; // faster than a memset?
+				*pixels=0;
+			}
       }
       
       void brighten_rect(int x, int y, int w, int h, int factor);
