@@ -18,7 +18,6 @@
  */
 
 
-#ifdef WIN32
 // ok. just a little hack to avoid using msvcrt.dll
 // the point is: if main is declared after including sdl, sdl will use its
 // own main function. if it does not, we will not have to link msvcrt.lib
@@ -30,15 +29,8 @@ int main(int argn, char** argc)
 {
 	return g_main(argn, argc);
 }
-#else
-#define g_main main
-#endif
 
-#ifdef WIN32
 #include <iostream.h>
-#else
-#include <iostream>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include "../src/font.h"
