@@ -33,7 +33,7 @@ class UIScrollbar;
  */
 class UIListselect : public UIPanel {
 public:
-	UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left);
+	UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align = Align_Left, bool show_check = false);
 	~UIListselect();
 
 	UISignal1<int> selected;
@@ -84,6 +84,8 @@ private:
 	int						m_selection;	// -1 when nothing is selected
    int                  m_last_click_time;
    int                  m_last_selection;  // for double clicks
+	bool						m_show_check;	//show a green arrow left of selected element
+	int						m_check_picid;
 };
 
 #endif

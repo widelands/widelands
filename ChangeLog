@@ -1,3 +1,7 @@
+- Added patch from Florian Falkner
+  * new Option Dialog 
+  * UIListselect can have now a selection-indicator
+  * WatchWindow functionality is user selectable
 - Windows can be minimized (middle mouse or CTRL+left mouse)
 - fixed crash when using 32-bit fullscreen mode under win32
 

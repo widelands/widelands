@@ -20,7 +20,9 @@
 #include "fullscreen_menu_options.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
+#include "ui_listselect.h"
 #include "constants.h"
+#include "graphic.h"
 
 /*
 ==============================================================================
@@ -31,17 +33,20 @@ Fullscreen_Menu_Options
 */
 
 Fullscreen_Menu_Options::res Fullscreen_Menu_Options::resolutions[NUM_RESOLUTIONS] = {
-	{ 640, 480 },
-	{ 800, 600 },
-	{ 1024, 768 }
+	{ 640, 480, 16 },
+	{ 800, 600, 16 },
+	{ 1024, 768, 16 },
+	{ 640, 480, 32 },
+	{ 800, 600, 32 },
+	{ 1024, 768, 32 }
 };
 
-Fullscreen_Menu_Options::Fullscreen_Menu_Options(int cur_x, int cur_y, bool fullscreen, bool inputgrab)
-	: Fullscreen_Menu_Base("optionsmenu.jpg")
-{
 
+Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt)
+	: Fullscreen_Menu_Base("optionsmenu.jpg") {
+	
 	// Menu title
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Options", Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 30, "Grapic Options", Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -56,40 +61,82 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(int cur_x, int cur_y, bool full
 	b->set_title("Apply");
 
 	// Fullscreen mode
-	m_fullscreen = new UICheckbox(this, 100, 180);
-	m_fullscreen->set_state(fullscreen);
-	new UITextarea(this, 125, 190, "Fullscreen", Align_VCenter);
+	m_fullscreen = new UICheckbox(this, 260, 70);
+	m_fullscreen->set_state(opt.fullscreen);
+	new UITextarea(this, 285, 80, "Fullscreen", Align_VCenter);
 
 	// input grab
-	m_inputgrab = new UICheckbox(this, 100, 205);
-	m_inputgrab->set_state(inputgrab);
-	new UITextarea(this, 125, 215, "Grab Input", Align_VCenter);
+	m_inputgrab = new UICheckbox(this, 260, 100);
+	m_inputgrab->set_state(opt.inputgrab);
+	new UITextarea(this, 285, 110, "Grab Input", Align_VCenter);
 
 	// In-game resolution
-	new UITextarea(this, 100, 255, "In-game resolution", Align_VCenter);
+	new UITextarea(this, 70, 70, "In-game resolution", Align_VCenter);
 
-	int y = 265;
-	int i;
-	for(i = 0; i < NUM_RESOLUTIONS; i++, y+= 25) {
-		char buf[16];
-		m_resolution.add_button(this, 100, y);
-		sprintf(buf, "%ix%i", resolutions[i].width, resolutions[i].height);
-		new UITextarea(this, 125, y+10, buf, Align_VCenter);
-
-		if (cur_x == resolutions[i].width)
-			m_resolution.set_state(i);
+	m_reslist = new UIListselect(this, 60, 85, 150, 130,Align_Left,true);
+	for(int i = 0; i < NUM_RESOLUTIONS; i++) {
+		char buf[32];
+		sprintf(buf, "%ix%i %i bit", resolutions[i].xres, resolutions[i].yres, resolutions[i].depth);
+		bool selected = ((resolutions[i].xres == opt.xres && resolutions[i].depth == opt.depth) ? true : false);
+		m_reslist->add_entry(buf,NULL,selected);
 	}
-	if (m_resolution.get_state() < 0)
-		m_resolution.set_state(0);
 
-	// Graphics system
-	new UITextarea(this, 400, 255, "Graphics mode", Align_VCenter);
-
-	m_gfxsys.add_button(this, 400, 265);
-	new UITextarea(this, 425, 275, "16 bit software", Align_VCenter);
-
-	m_gfxsys.add_button(this, 400, 290);
-	new UITextarea(this, 425, 300, "32 bit software", Align_VCenter);
-
-	m_gfxsys.set_state(Sys_GetGraphicsSystem() - GFXSYS_SW16);
+	title= new UITextarea(this, MENU_XRES/2, 240, "In-game Options", Align_HCenter);
+   title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
+	
+	m_single_watchwin = new UICheckbox(this,60,280);
+	m_single_watchwin->set_state(opt.single_watchwin);
+	new UITextarea(this,85,290,"Use single Watchwindow Mode", Align_VCenter);
 }
+
+Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
+	Options_Ctrl::Options_Struct opt;
+	int res_index = m_reslist->get_selection_index();
+	opt.xres = resolutions[res_index].xres;
+	opt.yres = resolutions[res_index].yres;
+	opt.depth = resolutions[res_index].depth;
+	opt.fullscreen = m_fullscreen->get_state();
+	opt.inputgrab = m_inputgrab->get_state();
+	opt.single_watchwin = m_single_watchwin->get_state();
+	return opt;
+}
+
+
+//Class Options_Ctrl
+//Handles communication between window class and options
+Options_Ctrl::Options_Ctrl(Section* s) {
+	m_opt_dialog = new Fullscreen_Menu_Options(options_struct(s));
+	m_opt_section = s;
+	int code = m_opt_dialog->run();
+	if (code == Fullscreen_Menu_Options::om_ok)
+		save_options();                  
+}
+
+Options_Ctrl::~Options_Ctrl() {
+	delete m_opt_dialog;
+}
+
+
+Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
+	Options_Struct opt;
+	opt.xres = s->get_int("xres",640);
+	opt.yres = s->get_int("yres",480);
+	opt.depth = (strcmp(s->get_string("gfxsys","sw16"),"sw16") == 0 ? 16 : 32);
+	opt.inputgrab = s->get_bool("inputgrab", false);
+	opt.fullscreen = s->get_bool("fullscreen", false);
+	opt.single_watchwin = s->get_bool("single_watchwin",false);
+	return opt;
+}
+
+void Options_Ctrl::save_options(){
+	Options_Ctrl::Options_Struct opt = m_opt_dialog->get_values();
+	m_opt_section->set_int("xres", opt.xres);
+	m_opt_section->set_int("yres", opt.yres);
+	m_opt_section->set_bool("fullscreen", opt.fullscreen);
+	m_opt_section->set_bool("inputgrab", opt.inputgrab);
+	m_opt_section->set_bool("single_watchwin",opt.single_watchwin);
+	((opt.depth == 32) ? m_opt_section->set_string("gfxsys","sw32") : m_opt_section->set_string("gfxsys","sw16"));
+	
+	Sys_SetInputGrab(opt.inputgrab);
+}
+

@@ -35,7 +35,7 @@ Args: parent	parent panel
       h
       align	alignment of text inside the UIListselect
 */
-UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align)
+UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align align, bool show_check)
 	: UIPanel(parent, x, y, w, h)
 {
 	set_think(false);
@@ -53,9 +53,21 @@ UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align 
 
    m_lineheight=g_fh->get_fontheight(UI_FONT_SMALL); 
 
-   m_max_pic_width=0;
    m_last_click_time=-10000;
    m_last_selection=-1;
+	
+	m_show_check = show_check;
+	if (show_check) {
+		int pic_h;
+		m_check_picid = g_gr->get_picture(PicMod_Game, "pics/list_selected.png", true);
+		g_gr->get_picture_size(m_check_picid, &m_max_pic_width, &pic_h);
+		if (pic_h > m_lineheight)
+			m_lineheight = pic_h;
+	}
+	else {
+		m_max_pic_width=0;
+	}
+		
 }
 
 
@@ -118,9 +130,13 @@ void UIListselect::add_entry(const char *name, void* value, bool select, int pic
 	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
-   if(select)
+   if(select) {
       m_selection=m_entries.size()-1;
+		if (m_show_check)
+			m_entries[m_selection]->picid = m_check_picid;
+	}
 }
+
 
 /*
  * Sort the listbox alphabetically. make sure that the current selection stays
@@ -181,7 +197,12 @@ void UIListselect::select(int i)
 {
 	if (m_selection == i)
 		return;
-
+	
+	if (m_show_check) {
+		if (m_selection != -1)
+			m_entries[m_selection]->picid = -1;
+		m_entries[i]->picid = m_check_picid;
+	}
 	m_selection = i;
 
 	selected.call(m_selection);

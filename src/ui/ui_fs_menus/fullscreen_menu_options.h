@@ -20,42 +20,61 @@
 #ifndef OPTIONSMENU_H
 #define OPTIONSMENU_H
 
-#define NUM_RESOLUTIONS		3
+#define NUM_RESOLUTIONS		6
 
 #include "fullscreen_menu_base.h"
 #include "system.h"
 #include "types.h"
 #include "ui_checkbox.h"
 #include "ui_radiobutton.h"
+#include "ui_listselect.h"
+#include "options.h"
+
+class Fullscreen_Menu_Options;
+
+class Options_Ctrl {
+	public:
+		struct Options_Struct {
+			int xres;
+			int yres;
+			int depth;
+			bool inputgrab;
+			bool fullscreen;
+			bool single_watchwin;
+		};
+		
+		Options_Ctrl(Section *s);
+		~Options_Ctrl();
+		Options_Ctrl::Options_Struct options_struct(Section *s);
+		void save_options();
+	private:
+		Fullscreen_Menu_Options *m_opt_dialog;
+		Section *m_opt_section;
+};
 
 /**
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
+ 
 class Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 public:
-	Fullscreen_Menu_Options(int cur_x, int cur_y, bool fullscreen, bool inputgrab);
-
-	inline bool get_fullscreen() const { return m_fullscreen->get_state(); }
-	inline bool get_inputgrab() const { return m_inputgrab->get_state(); }
-	inline uint get_xres() const { return resolutions[m_resolution.get_state()].width; }
-	inline uint get_yres() const { return resolutions[m_resolution.get_state()].height; }
-	inline int get_gfxsys() const { return GFXSYS_SW16 + m_gfxsys.get_state(); }
-
+	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
+	Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values();
    enum {
       om_cancel = 0,
       om_ok = 1
    };
 
-
 private:
 	UICheckbox*	m_fullscreen;
 	UICheckbox*	m_inputgrab;
-	UIRadiogroup	m_resolution;
-	UIRadiogroup	m_gfxsys;
+	UICheckbox* m_single_watchwin;
+	UIListselect* m_reslist;
 
 	struct res {
-		int width;
-		int height;
+		int xres;
+		int yres;
+		int depth;
 	};
 	static res resolutions[NUM_RESOLUTIONS];
 };
