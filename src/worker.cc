@@ -45,7 +45,8 @@ struct WorkerAction {
 		actReturn,				// iparam1 = 0: don't drop item on flag, 1: do drop item on flag
 		actObject,				// sparam1 = object command
 		actPlant,				// plant the selected description
-	};
+	   actRemoveObject      // delete objvar1, no logic, simply remove it from the map
+   };
 
 	enum {
 		walkObject,			// walk to objvar1
@@ -234,6 +235,10 @@ void WorkerProgram::parse(Worker_Descr* descr, std::string directory, Profile* p
 			{
 				act.type = WorkerAction::actPlant;
 			}
+         else if(cmd[0] == "removeobject") 
+         {
+            act.type = WorkerAction::actRemoveObject;
+         }
 			else
 				throw wexception("unknown command '%s'", cmd[0].c_str());
 
@@ -1356,6 +1361,19 @@ void Worker::program_update(Game* g, State* state)
 				schedule_act(g, 10);
 				return;
 			}
+
+      case WorkerAction::actRemoveObject:
+         {
+            Map_Object* obj;
+
+            obj = state->objvar1.get(g);
+            obj->remove(g);
+            state->objvar1.set(0);
+				
+            state->ivar1++;
+				schedule_act(g, 10);
+            return;
+         }
 		}
 	}
 }

@@ -11,7 +11,7 @@ program=work
 
 # TODO: describe what this guy does
 [work]
-0=sleep 20000		# sleep the given time
+0=sleep 2000		# sleep the given time
 1=worker burn		
 
 

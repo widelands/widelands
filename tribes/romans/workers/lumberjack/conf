@@ -4,6 +4,7 @@ help=Fells trees.
 type=generic
 menu_pic=lumberjack_menu.png
 program=chop
+program=burn
 
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.
@@ -23,7 +24,10 @@ program=chop
 0=findobject attrib:tree radius:12
 1=walk object
 2=animation idle 5000  # TODO: burn animation
-3=return # TODO: object should burn like a house
+3=removeobject
+4=setdescription fire
+5=plant
+6=return 
 
 # The normal idle animation (non-directional)
 [idle]
