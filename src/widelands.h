@@ -137,4 +137,5 @@ void inline tell_user(const char* str) {
 // TODO: make this configurable through conf file or cmdline
 #define MAX_OBJS 50000  // might not be enough
 
+#define USE_SEE_AREA 1
 

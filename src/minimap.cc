@@ -121,11 +121,15 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
 			clr = *f->get_terd()->get_texture()->get_pixels();
 			clr = bright_up_clr2(clr, f->get_brightness());
          
+#ifdef USE_SEE_AREA
          if(player->is_field_seen(x, y)) {
             *pix++ = clr;
          } else {
+#endif
             *pix++ =  pack_rgb(0, 0, 0); // make black
+#ifdef USE_SEE_AREA
          }
+#endif
 		}
 	}
 

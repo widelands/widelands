@@ -22,6 +22,7 @@
 #include "input.h"
 #include "mapview.h"
 #include "game.h"
+#include "player.h"
 
 /* class Map_View
  *
@@ -90,6 +91,10 @@ void Map_View::draw(Bitmap *bmp, int ofsx, int ofsy)
 		effvpx -= ofsx;
 	if (ofsy < 0)
 		effvpy -= ofsy;
+
+#ifdef USE_SEE_AREA
+   dst.fill_rect(0, 0, dst.get_w(), dst.get_h(), pack_rgb(0,0,0));
+#endif
 
 	draw_ground(&dst, effvpx, effvpy);
 
@@ -177,23 +182,41 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 		while(count--) {
 			Field *rf, *rfl;
 			int rposx, rblposx;
-         int map_posx=fx;
-         int map_posy=fy;
+         int rx, ry, rlx, rly;
+         bool render_r=true;
+         bool render_b=true;
          
-			map->get_rn(fx, fy, f, &fx, &fy, &rf);
+			map->get_rn(fx, fy, f, &rx, &ry, &rf);
 			rposx = posx + FIELD_WIDTH;
 
-			map->get_rn(lx, ly, fl, &lx, &ly, &rfl);
+			map->get_rn(lx, ly, fl, &rlx, &rly, &rfl);
 			rblposx = blposx + FIELD_WIDTH;
 
-			draw_field(dst, f, rf, fl, rfl, posx, rposx, posy, blposx, rblposx, blposy);
+#ifdef USE_SEE_AREA
+         if(!m_game->get_player(player_number)->is_field_seen(fx, fy) ||
+               !m_game->get_player(player_number)->is_field_seen(rlx, rly)) {
+            render_r=false;
+            render_b=false;
+         } else {
+            if(!m_game->get_player(player_number)->is_field_seen(lx, ly))
+               render_b=false;
+            if(!m_game->get_player(player_number)->is_field_seen(rx, ry))
+               render_r=false;
+         }
+#endif
 
+			draw_field(dst, f, rf, fl, rfl, posx, rposx, posy, blposx, rblposx, blposy, render_r, render_b);
+
+        
 			//TODO - rendering order?
 			// draw_ground implies that this doesn't render map objects.
 			// are there any overdraw issues with the current rendering order?
 			
 		   // check if a instance is hooked to this field, if so, draw it
 	   	if(f->get_first_object()) {
+#ifdef USE_SEE_AREA
+            if(m_game->get_player(player_number)->is_field_seen(fx, fy)) {
+#endif
 	      	//    cerr << p[1].x << ":" << p[1].y << endl;
 				Map_Object* obj = f->get_first_object();
 		      while(obj) {
@@ -202,10 +225,14 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
 					obj->draw(m_game, dst, posx, posy);
 	      	   obj = obj->get_next_object();
    		   }
+#ifdef USE_SEE_AREA
+            }
+#endif
 	   	}
 
+#if 0
         // TODO: TEMP DEBUG: render buildhelp over everything
-         switch(map->get_build_symbol(map_posx, map_posy)) {
+         switch(map->get_build_symbol(fx, fy)) {
             case Field::NOTHING:
                break;
                
@@ -241,12 +268,16 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
                break;
          }
          // TEMP ENDS
- 
+#endif
 			f = rf;
 			fl = rfl;
 			posx = rposx;
 			blposx = rblposx;
-		}
+         lx = rlx;
+         ly = rly;
+         fx = rx;
+         fy = ry;
+      }
 
 		linear_fy++;
 	}
@@ -258,7 +289,7 @@ void Map_View::draw_ground(Bitmap *dst, int effvpx, int effvpy)
  * Draw the two triangles associated with one field.
  */
 void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-           const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy)
+           const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, bool render_r, bool render_b)
 {
 	// points are ordered: right, left, bottom-right, bottom-left
 	// note that as long as render_triangle messes with the arrays, we need to
@@ -291,10 +322,12 @@ void Map_View::draw_field(Bitmap *dst, Field * const f, Field * const rf, Field 
 
 	memcpy(ptmp, p, sizeof(Point)*3);
 	memcpy(btmp, b, sizeof(int)*3);
-	render_triangle(dst, ptmp, btmp, f->get_terr()->get_texture());
+   if(render_r) 
+      render_triangle(dst, ptmp, btmp, f->get_terr()->get_texture());
 
 	// Render bottom triangle
-	render_triangle(dst, p+1, b+1, f->get_terd()->get_texture());
+   if(render_b) 
+      render_triangle(dst, p+1, b+1, f->get_terd()->get_texture());
 }
 
 /** Map_View::set_viewpoint(int x, int y)

@@ -34,8 +34,11 @@
 Player::Player(Game* g, int type) {
     m_type = type; 
     game=g;
+    seen_fields=0;
 }
 
 Player::~Player(void) {
+   if(seen_fields) 
+      delete seen_fields;
 }
 

@@ -50,35 +50,10 @@ class Building_Descr : public Map_Object_Descr {
 
       virtual int read(Binary_file* f);
      
-      // TODO: think about this. is this a good way to do it?
       inline char* get_name(void) { return name; }
       inline Animation* get_idle_anim(void) { return &idle; }
       inline bool get_is_enabled(void) { return is_enabled; }
       inline ushort get_see_area(void) { return see_area; }
-
-      // for Has_Needs_Building
-      virtual NeedWares_List* get_needs(uint*, bool*) { assert(0); return 0; }
- 
-      // for Has_Products_Building
-      virtual Need_List* get_products(uint*, bool*) { assert(0);  return 0;}
-
-      // Is_a building
-      virtual ushort get_is_a(void) { return (ushort(-1)) ; }  
-
-      // for buildable_building
-      virtual char* get_category(void) { assert(0); return 0; }
-      virtual ushort get_build_time(void) { assert(0); return 0; }
-      virtual Need_List* get_build_cost(uint*) { assert(0); return 0; }
-      virtual Animation* get_build_anim(void) { assert(0); return 0; }
-
-      // for working
-      Animation* get_working_anim(void) { assert(0); return 0; }
-     
-
-      // for military buildings
-      virtual ushort get_conquers(void) { return 0; }
-
-      // TODO: add non abstract buildings
 
    protected:
       //      int create_bob(Profile* p, Section* s, const char* def_suffix, const char* key_name, Bob_Descr* bob, ushort* ew=0, ushort* eh=0);

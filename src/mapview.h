@@ -20,6 +20,7 @@
 #ifndef __S__MAPVIEW_H
 #define __S__MAPVIEW_H
 
+
 #include "map.h"
 #include "graphic.h"
 #include "ui.h"
@@ -73,7 +74,7 @@ private:
 	int fselx, fsely; // field the mouse is over
 
    void draw_field(Bitmap *dst, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
-                 const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy);
+                 const int posx, const int rposx, const int posy, const int blposx, const int rblposx, const int blposy, bool, bool);
 
 };
 

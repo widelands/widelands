@@ -47,8 +47,8 @@ class Player {
       ~Player(void);
 
       // get functions
-      inline bool is_field_seen(int i) { return seen_fields[i]; }
-      inline bool is_field_seen(int x, int y) { return seen_fields[y*game->get_map()->get_w() + x]; }
+      inline bool is_field_seen(int i) { return (*seen_fields)[i]; }
+      inline bool is_field_seen(int x, int y) { return (*seen_fields)[y*game->get_map()->get_w() + x]; }
    
 		enum {
 			playerLocal = 0,
@@ -60,13 +60,12 @@ class Player {
 		
    private:
       // set functions
-      inline void set_field_seen(int i, bool t) { seen_fields.reserve(i); seen_fields[i]=t; }
+      inline void set_field_seen(int i, bool t) { (*seen_fields)[i]=t; }
       inline void set_field_seen(int x, int y, bool t) { 
-         seen_fields.reserve(game->get_map()->get_w()*game->get_map()->get_h());
-         seen_fields[y*game->get_map()->get_w() + x]=t; 
+         (*seen_fields)[y*game->get_map()->get_w() + x]=t; 
       }
       
-      std::bit_vector seen_fields; 
+      std::bit_vector* seen_fields; 
       Game* game; 
 		int m_type;
       

@@ -245,16 +245,20 @@ void Game::warp_building(int x, int y, uchar owner, int idx)
 {
 	Building_Descr *descr;
 	Map_Object* obj;
-	
+   Player* ply=get_player(owner);
+
+   if(!ply) return; // this player is not in the game
+   
 	descr = get_player_tribe(owner)->get_building_descr(idx);
 
 	obj = m_objects->create_object(this, descr);
 	obj->set_owned_by(owner);
 	obj->set_position(this, x, y);
 
-   // TODO: see area
    // TODO: conquers
-   Map_Region_Cords* r=new Map_Region_Cords(x, y, 13, map);
+   Map_Region_Cords* r=new Map_Region_Cords(x, y, descr->get_see_area(), map);
+   if(!ply->seen_fields)  ply->seen_fields=new std::bit_vector(map->get_w()*map->get_h(), false);
+
    while(r->next(&x, &y)) {
       get_player(owner)->set_field_seen(x, y, true);
    }
