@@ -82,7 +82,7 @@ int Cmd_Queue::run_queue(void) {
             cerr << "Hooking instance: " << ((Point*) c->arg3)->x << ":" << ((Point*) c->arg3)->y << endl;
             g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
             temp=g->get_player_tribe(c->arg1)->get_building_descr(c->arg2)->create_instance(inst);
-            inst->set_owned_by(c->arg1);
+            inst->set_owned_by((uchar)c->arg1);
             inst->set_next_acting_frame(g->get_frame()+temp);
             break;
 
@@ -94,7 +94,7 @@ int Cmd_Queue::run_queue(void) {
             temp=g->hinst->get_free_inst_id();
             inst=g->hinst->get_inst(temp);
             g->get_map()->get_field(((Point*) c->arg3)->x, ((Point*) c->arg3)->y)->hook_instance(inst);
-            temp=g->get_map()->get_world()->get_bob_descr(c->arg1)->create_instance(inst);
+            temp=g->get_map()->get_world()->get_bob_descr((ushort)c->arg1)->create_instance(inst);
             inst->set_owned_by(SENDER_LOADER);
             inst->set_next_acting_frame(g->get_frame()+temp);
             break;

@@ -67,7 +67,7 @@ int Building_Descr::read(Binary_file *f) {
 
    uchar temp;
    f->read(&temp, sizeof(uchar));
-   is_enabled=temp;
+   is_enabled=temp ? true : false;
    f->read(&see_area, sizeof(ushort));
    uint w, h, hsx, hsy;
    f->read(&w, sizeof(ushort));
@@ -86,7 +86,7 @@ int Building_Descr::read(Binary_file *f) {
 int Has_Needs_Building_Descr::read(Binary_file *f) {
    uchar temp;
    f->read(&temp, sizeof(uchar));
-   needs_or=temp;
+   needs_or=temp ? true : false;
    
    // read needs
    needs.read(f);
@@ -97,7 +97,7 @@ int Has_Needs_Building_Descr::read(Binary_file *f) {
 int Has_Products_Building_Descr::read(Binary_file *f) {
    uchar temp;
     f->read(&temp, sizeof(uchar));
-   products_or=temp;
+	products_or=temp ? true : false;
 
    // read products
    products.read(f);
@@ -256,7 +256,7 @@ int Sit_Building_Descr::read(Binary_file *f) {
    f->read(&worker, sizeof(ushort));
    uchar temp; 
    f->read(&temp, sizeof(uchar));
-   order_worker=temp;
+   order_worker=temp ? true : false;
 
    return RET_OK;
 }
@@ -340,7 +340,7 @@ int Cannon_Descr::read(Binary_file *f) {
    f->read(&idle_time, sizeof(ushort));
    f->read(&projectile_speed, sizeof(ushort));
    f->read(&temp, sizeof(uchar));
-   fires_balistic=temp;
+   fires_balistic=temp ? true : false;
    f->read(&worker, sizeof(ushort));
    //                         // width and height ob projectile bob
    ushort wproj, hproj;

@@ -21,7 +21,7 @@
 #define __S__INSTANCE_H
 
 class Game;
-class Animation_Pic;
+struct Animation_Pic;
 
 //
 // Base class for descriptions of worker, files and so on. this must just

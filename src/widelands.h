@@ -32,6 +32,7 @@
 #include <fstream.h>
 
 #ifdef WIN32
+#pragma warning(disable : 4250) // *sigh* multiple inheritance *sigh*
 	#define WIN32_LEAN_AND_MEAN
 	#include <windows.h>
 	#ifdef _DEBUG			//chk ths plz. Acked by Holger
@@ -40,13 +41,15 @@
 
 	#define snprintf _snprintf
 	#define vsnprintf _vsnprintf
+	#define strcasecmp strcmpi
+	#define strncasecmp strncmpi
 #else //WIN32
 //   #include <sys/types.h>
 //   #include <sys/stat.h>
 //   #include <fcntl.h>
 //   #include <unistd.h>
-	#define strcmpi strcasecmp
-	#define strncmpi strncasecmp
+//	#define strcmpi strcasecmp
+//	#define strncmpi strncasecmp
 #endif //WIN32
 
 #include "config.h"

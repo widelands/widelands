@@ -33,7 +33,7 @@ int Worker_Descr::read(Binary_file* f) {
    f->read(name, sizeof(name));
 
    f->read(&temp, sizeof(uchar));
-   is_enabled=temp;
+   is_enabled=temp ? true : false;
    f->read(&walking_speed, sizeof(ushort));
 
    needs.read(f);

@@ -64,7 +64,7 @@ class Building_Descr : public Map_Object_Descr {
       virtual Need_List* get_products(uint*, bool*) { assert(0);  return 0;}
 
       // Is_a building
-      virtual uchar get_is_a(void) { return (uchar(-1)) ; }  
+      virtual ushort get_is_a(void) { return (ushort(-1)) ; }  
 
       // for buildable_building
       virtual char* get_category(void) { assert(0); return 0; }
@@ -150,7 +150,7 @@ class Has_Is_A_Building_Descr : virtual public Building_Descr {
       ~Has_Is_A_Building_Descr(void) { }
 
       virtual int read(Binary_file* f);
-      uchar get_is_a(void) { return is_a; }  
+      ushort get_is_a(void) { return is_a; }  
 
    private:
       ushort is_a; // size of building

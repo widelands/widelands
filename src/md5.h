@@ -50,8 +50,8 @@ class ChkSum {
 
 
 		  private:
-					 static const unsigned int BLOCKSIZE=4096; 
-					 static const unsigned char fillbuf[64]  = { 0x80, 0 /* , 0, 0, ...  */ };
+			  enum { BLOCKSIZE = 4096 };
+					 static const unsigned char fillbuf[64];
 
 					 /* Structure to save state of computation between the single steps.  */
 					 struct md5_ctx

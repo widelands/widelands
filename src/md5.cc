@@ -26,8 +26,7 @@
 #include "widelands.h"
 #include "md5.h"
 		   
-const unsigned int ChkSum::BLOCKSIZE; //=4096; 
-const unsigned char ChkSum::fillbuf[64]; //; //   = { 0x80, 0 /* , 0, 0, ...  */ };
+const unsigned char ChkSum::fillbuf[64] = { 0x80, 0 /* , 0, 0, ...  */ };
 
 /**
  * Default Constructor
