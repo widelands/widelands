@@ -28,6 +28,7 @@
 #include "map.h"
 #include "overlay_manager.h"
 #include "tribe.h"
+#include "wexception.h"
 
 /*
 =================================================
