@@ -207,7 +207,12 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 	snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
 
 	ad->picnametempl = pictempl;
-	
+
+   if(ad->picnametempl[strlen(pictempl)-4]=='.') {
+      // delete extension
+      ad->picnametempl[strlen(pictempl)-4]='\0';
+   }
+   
 	// Get descriptive data
 	if (encdefaults)
 		ad->encdata.add(encdefaults);
@@ -298,7 +303,7 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 	char sectnamebase[256];
 	char *repl;
 	const char* string;
-
+   
 	if (strchr(sectnametempl, '%'))
 		throw wexception("sectnametempl %s contains %%", sectnametempl);
 

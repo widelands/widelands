@@ -373,64 +373,87 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 	m_nrframes = 0;
 	m_frames = 0;
 
-	for(;;) {
-		char fname[256];
-		int nr = m_nrframes;
-		char *p;
-		
-		// create the file name by reverse-scanning for '?' and replacing
-		snprintf(fname, sizeof(fname), "%s", data->picnametempl.c_str());
-		p = fname + strlen(fname);
-		while(p > fname) {
-			if (*--p != '?')
-				continue;
-			
-			*p = '0' + (nr % 10);
-			nr = nr / 10;
-		}
-		
-		if (nr) // cycled up to maximum possible frame number
-			break;
-		
-		// is the frame actually there?
-		if (!g_fs->FileExists(fname))
-			break;
-	
-		// Load the image
-		SDL_Surface* bmp = 0;
+   const int nextensions=4;
+   const char extensions[nextensions][5] = {
+      ".bmp",
+      ".png",
+      ".gif",
+      ".jpg"
+   };
+   
+   for(;;) {
+      char fname[256];
+      int nr = m_nrframes;
+      char *p;
 
-		try
-		{
-			bmp = LoadImage(fname);
-		}
-		catch(std::exception& e)
-		{
-			log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
-			break;
-		}
+      bool done=false;
+      bool alldone=false;
+      bool cycling=false;
+      for(int i=0; i<nextensions; i++) {
+         if(done) continue;
 
-		// Get a new AnimFrame
-		AnimFrame* frame;
-		
-		m_frames = (AnimFrame*)realloc(m_frames, sizeof(AnimFrame)*(m_nrframes+1));
-		frame = &m_frames[m_nrframes];
-		
-		frame->width = bmp->w;
-		frame->height = bmp->h;
-		
-		frame->hotspot = data->hotspot;
-		
-		try {
-			encode(frame, bmp, &data->encdata);
-		} catch(std::exception& e) {
-			SDL_FreeSurface(bmp);
-			throw wexception("Error encoding %s: %s", fname, e.what());
-		}
-		
-		m_nrframes++;
-		
-		SDL_FreeSurface(bmp);
-	}
+         // create the file name by reverse-scanning for '?' and replacing
+         nr=m_nrframes;
+         snprintf(fname, sizeof(fname), "%s%s", data->picnametempl.c_str(),extensions[i]);
+         p = fname + strlen(fname);
+         while(p > fname) {
+            if (*--p != '?')
+               continue;
+
+            cycling=true;
+            
+            *p = '0' + (nr % 10);
+            nr = nr / 10;
+         }
+
+         if (nr) // cycled up to maximum possible frame number
+            break;
+
+         // is the frame actually there?
+         if (!g_fs->FileExists(fname)) {
+            if(i==(nextensions-1)) { alldone=true; break; }
+            continue;
+         }
+
+         // Load the image
+         SDL_Surface* bmp = 0;
+
+         try
+         {
+            bmp = LoadImage(fname);
+         }
+         catch(std::exception& e)
+         {
+            log("WARNING: Couldn't load animation frame %s: %s\n", fname, e.what());
+            continue;
+         }
+
+         // Get a new AnimFrame
+         AnimFrame* frame;
+
+         m_frames = (AnimFrame*)realloc(m_frames, sizeof(AnimFrame)*(m_nrframes+1));
+         frame = &m_frames[m_nrframes];
+
+         frame->width = bmp->w;
+         frame->height = bmp->h;
+
+         frame->hotspot = data->hotspot;
+
+         try {
+            encode(frame, bmp, &data->encdata);
+         } catch(std::exception& e) {
+            SDL_FreeSurface(bmp);
+            throw wexception("Error encoding %s: %s", fname, e.what());
+         }
+
+         m_nrframes++;
+         done=true;
+         if(!cycling) alldone=true;
+
+         SDL_FreeSurface(bmp);
+      }
+      if(alldone==true) break;
+   }
 	
 	if (!m_nrframes)
 		throw wexception("Animation %s has no frames", data->picnametempl.c_str());

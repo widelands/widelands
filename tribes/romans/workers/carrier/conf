@@ -2,7 +2,7 @@
 descname=Carrier
 help=Carries items along your roads.
 type=carrier
-menu_pic=carrier_menu.bmp
+menu_pic=carrier_menu.png
 
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.
@@ -11,18 +11,19 @@ menu_pic=carrier_menu.bmp
 
 # The normal idle animation (non-directional)
 [idle]
-pics=idle_??.bmp
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
+pics=idle_??.png
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
 hot_spot_x=5
 hot_spot_y=13
 
 # Walking empty-handed
 [walk]
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
+# pics=walk_??_??.png
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
 hot_spot_x=5
 hot_spot_y=13
 
