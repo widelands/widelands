@@ -32,6 +32,7 @@ int main(int argn, char** argc) {
 					 cout << "This will create the file <fontname>. you can savly rename it." << WLFF_SUFFIX << endl;
 					 cout << "This program depens from the files 32.bmp - 127.bmp (ascii nummers" << endl;
 					 cout << "of the characters)" << endl;
+					 return -1;
 		  }
 
 		  Binary_file f;
