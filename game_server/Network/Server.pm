@@ -166,24 +166,26 @@ sub client_leaves_room {
    my ( $self, $client ) = @_;
 
    # Remove this client from the room index
-   for(my $i = 0; $i < scalar ( @{$self->{ROOMS}->{$client->room()}}) ; $i++ ) {
-      if( @{$self->{ROOMS}->{$client->room()}}[$i] == $client) {
-         splice  @{$self->{ROOMS}->{$client->room()}}, $i, 1;
-         last;
+   if( defined (@{$self->{ROOMS}->{$client->room()}}))  {
+      for(my $i = 0; $i < scalar ( @{$self->{ROOMS}->{$client->room()}}) ; $i++ ) {
+         if( @{$self->{ROOMS}->{$client->room()}}[$i] == $client) {
+            splice  @{$self->{ROOMS}->{$client->room()}}, $i, 1;
+            last;
+         }
       }
-   }
- 
-   # Send all other clients information that the user has left the room
-   foreach my $client (@{$self->{ROOMS}->{$client->room()}} ) {
-      my $flags = 0;
-      my $index = $self->get_next_index();
-      my $packet = ProtocolPacket->generate_from_name("User_Entered", $index, $flags);
 
-      $packet->construct( $client->username(), $client->room(), 0);
-      $packet->write( $self , $client, $flags);
-  
-      print "Pushing a pending packet: $index\n";
-      $self->{PENDING_PACKETS}->{$index} = $packet;
+      # Send all other clients information that the user has left the room
+      foreach my $client (@{$self->{ROOMS}->{$client->room()}} ) {
+         my $flags = 0;
+         my $index = $self->get_next_index();
+         my $packet = ProtocolPacket->generate_from_name("User_Entered", $index, $flags);
+
+         $packet->construct( $client->username(), $client->room(), 0);
+         $packet->write( $self , $client, $flags);
+
+         print "Pushing a pending packet: $index\n";
+         $self->{PENDING_PACKETS}->{$index} = $packet;
+      }
    }
 }
 

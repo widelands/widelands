@@ -73,7 +73,9 @@ sub is_connected {
    my $self = shift;
   
    if(! $self->{SOCKET} ) { return 0; }
-   
+  
+   if( ! getpeername( $self->{SOCKET} ) ) { return 0; }
+
    $self->_read_all();
    if($self->{READBUF}) { return 1; }
    return 0;
@@ -186,22 +188,22 @@ sub write_line {
    
    my $line = shift;
    
-   syswrite $self->{SOCKET}, $line;
+   return syswrite $self->{SOCKET}, $line;
 };
 
 sub write_16 {
    my $self = shift;
-   syswrite( $self->{SOCKET}, pack("n", shift), 2);
+   return syswrite( $self->{SOCKET}, pack("n", shift), 2);
 };
 
 sub write_32 {
    my $self = shift;
-   syswrite( $self->{SOCKET}, pack("N", shift), 4);
+   return syswrite( $self->{SOCKET}, pack("N", shift), 4);
 };
 
 sub write_8 {
    my $self = shift;
-   syswrite( $self->{SOCKET}, pack("C", shift), 1);
+   return syswrite( $self->{SOCKET}, pack("C", shift), 1);
 }
 
 sub write_string {

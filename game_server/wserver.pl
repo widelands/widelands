@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w 
+#!/usr/bin/perl -w  
 
 ###############################################################
 # This programm is the widelands game server. 
@@ -47,7 +47,7 @@ for(;;) {
 
    # now check all clients, if there is something to do
    # We wait 5 seconds, this reduces load 
-   my @clients_to_handle = $server->wait_for_clientdata(5);
+   my @clients_to_handle = $server->wait_for_clientdata(0.25);
    
    foreach $client (@clients_to_handle) {
       unless( $client->is_connected() ) {
