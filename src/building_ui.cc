@@ -835,7 +835,7 @@ MilitarySite UI IMPLEMENTATION
 ==============================================================================
 */
 
-class MilitarySite_Window : public Building_Window {
+class MilitarySite_Window : public ProductionSite_Window {
 public:
 	MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, Window** registry);
 	virtual ~MilitarySite_Window();
@@ -854,7 +854,7 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, Window** registry)
-	: Building_Window(parent, ps, registry)
+	: ProductionSite_Window(parent, ps, registry)
 {
    // TODO
    log("TODO: military options window!. must have all functionality of productionsite + soldier options!\n");

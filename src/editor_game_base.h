@@ -39,8 +39,10 @@ class Editor_Game_Base {
       inline Map *get_map() { return m_map; }
       inline Object_Manager* get_objects() { return m_objects; }
 	
-	
-      void conquer_area(uchar playernr, Coords coords, int radius);
+
+      void unconquer_area(uchar playernr, Coords coords);
+      void conquer_area(uchar playernr, Coords coords, Building_Descr*);
+      void conquer_area_no_building(uchar playernr, Coords coords, int radius);
       void recalc_for_field(Coords coords, int radius = 0);
 	
       // logic handler func
@@ -77,6 +79,15 @@ class Editor_Game_Base {
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
       inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
+
+   private:
+      struct Conquer_Info {
+         uchar  player;
+         Coords middle_point;
+         ushort    area;
+      };
+      std::vector<Conquer_Info> m_conquer_info;
+      void do_conquer_area(uchar playernr, Coords coords, int radius, bool conquer);
 
    private:
       void init_wares();

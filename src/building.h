@@ -62,6 +62,8 @@ public:
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	virtual void load_graphics();
 
+   virtual int get_conquers(void) const { return 0; }
+
 protected:
 	virtual Building *create_object() = 0;
 	Building* create_constructionsite();
@@ -122,6 +124,7 @@ public:
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
 	bool leave_check_and_wait(Game* g, Worker* w);
+   inline int get_conquers(void) const { return get_descr()->get_conquers(); }
 
 protected:
 	void start_animation(Editor_Game_Base *g, uint anim);
@@ -165,7 +168,7 @@ public:
 	virtual Building *create_object();
 
 	inline int get_subtype() const { return m_subtype; }
-	inline int get_conquers() const { return m_conquers; }
+	virtual int get_conquers(void) const { return m_conquers; }
 
 private:
 	int	m_subtype;

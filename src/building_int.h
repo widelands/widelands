@@ -197,7 +197,7 @@ class MilitarySite_Descr : public ProductionSite_Descr {
 
       virtual bool is_only_production_site(void) { return false; }
 
-      inline int get_conquer_radius(void) { return m_conquer_radius; }
+      virtual int get_conquers(void) const { return m_conquer_radius; }
       inline int get_max_number_of_soldiers(void) { return m_num_soldiers; }
       inline int get_max_number_of_medics(void) { return m_num_medics; }
       inline int get_heal_per_second(void) { return m_heal_per_second; }

@@ -103,34 +103,120 @@ void Editor_Game_Base::recalc_for_field(Coords coords, int radius)
 
 /*
 ===============
+Editor_Game_Base::unconquer_area
+
+This unconquers a area. This is only possible, when there 
+is a building placed on this field
+===============
+*/
+void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
+   assert(playernr);
+   assert(get_map()->get_immovable(coords)->get_type() == Map_Object::BUILDING);
+
+   uint i=0;
+   while(i<m_conquer_info.size() && m_conquer_info[i].middle_point!=coords) ++i;
+   assert(i<m_conquer_info.size());
+
+   assert((static_cast<Building*>(get_map()->get_immovable(coords)))->get_conquers() == m_conquer_info[i].area);
+   assert(playernr==m_conquer_info[i].player);
+
+
+   // step 1: unconquer area of this building
+   do_conquer_area(playernr, coords, m_conquer_info[i].area, false);
+
+   // step 2: remove this building out ot m_conquer_info
+   // std::vector erase doen't work on my system. I manually erase this
+   m_conquer_info[i]=m_conquer_info[m_conquer_info.size()-1];
+   m_conquer_info.pop_back();
+
+   // step 3: recalculate for all claimed areas of this player with a building
+   for(i=0; i<m_conquer_info.size(); i++) {
+      if(m_conquer_info[i].player==playernr) {
+         do_conquer_area(playernr, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
+      }
+   }
+
+   // step 4: recalculate for all other players buildings
+   for(uchar player=1; player<=MAX_PLAYERS; player++) {
+      if(player==playernr) continue;
+
+      for(i=0; i<m_conquer_info.size(); i++) {
+         if(m_conquer_info[i].player==player) { 
+            do_conquer_area(player, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
+         }
+      }
+   }
+}
+
+/*
+===============
 Editor_Game_Base::conquer_area
 
-Conquers the given area for that player.
+This conquers a given area because of a new (military) building
+that is set there. 
+===============
+*/
+void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, Building_Descr* b) {
+   Conquer_Info ci;
+   ci.player=playernr;
+   ci.middle_point=coords;
+   ci.area=b->get_conquers();
+   m_conquer_info.push_back(ci);
+
+   do_conquer_area(playernr, coords, b->get_conquers(), true);
+}
+
+
+/*
+===============
+Editor_Game_Base::conquer_area_no_building
+
+Conquers the given area for that player; assumes that there is no military building there
+(so there is nothing on coords that could possibly be attacked!) and this area is not reclaimed
+and might be consumed..
+===============
+*/
+void Editor_Game_Base::conquer_area_no_building(uchar playernr, Coords coords, int radius)
+{
+   do_conquer_area(playernr, coords, radius, true);
+}
+
+/*
+===============
+Editor_Game_Base::do_conquer_area [private]
+
+Conquers the given area for that player; does the actual work 
 Additionally, it updates the visible area for that player.
 ===============
 */
-void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, int radius)
+void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius, bool conquer)
 {
 	MapRegion mr(m_map, coords, radius);
 	Field* f;
 
 	while((f = mr.next()))
 	{
-		if (f->get_owned_by() == playernr)
-			continue;
-		if (!f->get_owned_by()) {
-			f->set_owned_by(playernr);
-			continue;
-		}
+      if(conquer) {
+         if (f->get_owned_by() == playernr)
+            continue;
+         if (!f->get_owned_by()) {
+            f->set_owned_by(playernr);
+            continue;
+         } 
 
-      // TODO: add support here what to do if some fields are already
-      // occupied by another player
-		// Probably the best thing to just don't grab it. Players should fight
-		// for their land.
-      // Too simple. What should be done when too HQ are too close and the area interact.
-      // Also, when one user gets close to another, he might not be able to see a military building
-      // when his land doesn't increase
-      //cerr << "warning: already occupied field is claimed by another user!" << endl;
+
+         // TODO: add support here what to do if some fields are already
+         // occupied by another player
+         // Probably the best thing to just don't grab it. Players should fight
+         // for their land.
+         // Too simple. What should be done when too HQ are too close and the area interact.
+         // Also, when one user gets close to another, he might not be able to see a military building
+         // when his land doesn't increase
+         //cerr << "warning: already occupied field is claimed by another user!" << endl;
+      } else {
+         if(f->get_owned_by() != playernr) continue;
+         f->set_owned_by(0);
+      }
    }
 
 	Player *player = get_player(playernr);
@@ -139,8 +225,6 @@ void Editor_Game_Base::conquer_area(uchar playernr, Coords coords, int radius)
 
 	recalc_for_field(coords, radius);
 }
-
-
 
 /*
 ===============

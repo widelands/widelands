@@ -1052,7 +1052,7 @@ void Warehouse::init(Editor_Game_Base* gg)
    Building::init(gg);
 
    if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
-      gg->conquer_area(get_owner()->get_player_number(), m_position, get_descr()->get_conquers());
+      gg->conquer_area(get_owner()->get_player_number(), m_position, get_descr());
 
 	if (gg->is_game()) {
       Game* g=static_cast<Game*>(gg);
@@ -1539,9 +1539,7 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
       // If not, we might not have a worker
       m_worker_name = sglobal->get_safe_string("worker");
    } else {
-      ALIVE();
       m_worker_name = sglobal->get_string("worker", "");
-      ALIVE();
    }
 
 	// Get programs
@@ -2001,7 +1999,7 @@ MilitarySite_Descr::~MilitarySite_Descr()
 ===============
 MilitarySite_Descr::parse
 
-Parse the additional information necessary for production buildings
+Parse the additional information necessary for miltary buildings
 ===============
 */
 void MilitarySite_Descr::parse(const char *directory, Profile *prof, const EncodeData *encdata)
@@ -2011,7 +2009,7 @@ void MilitarySite_Descr::parse(const char *directory, Profile *prof, const Encod
 	Building_Descr::parse(directory, prof, encdata);
    ProductionSite_Descr::parse(directory,prof,encdata);
 
-   m_conquer_radius=sglobal->get_safe_int("conquer_radius");
+   m_conquer_radius=sglobal->get_safe_int("conquers");
    m_num_soldiers=sglobal->get_safe_int("max_soldiers");
    m_num_medics=sglobal->get_safe_int("max_medics");
    m_heal_per_second=sglobal->get_safe_int("heal_per_second");
@@ -2066,7 +2064,7 @@ MilitarySite::~MilitarySite()
 ===============
 MilitarySite::init
 
-Initialize the production site.
+Initialize the military site.
 ===============
 */
 void MilitarySite::init(Editor_Game_Base *g)
@@ -2115,7 +2113,7 @@ void MilitarySite::set_economy(Economy* e)
 ===============
 MilitarySite::cleanup
 
-Cleanup after a production site is removed
+Cleanup after a military site is removed
 ===============
 */
 void MilitarySite::cleanup(Editor_Game_Base *g)
@@ -2134,6 +2132,8 @@ void MilitarySite::cleanup(Editor_Game_Base *g)
 		w->set_location(0);
 	}
 
+   // unconquer land
+   g->unconquer_area(get_owner()->get_player_number(), get_position());
 
    ProductionSite::cleanup(g);
 }
@@ -2191,7 +2191,7 @@ void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware, Work
 	assert(w);
 	assert(w->get_location(g) == psite);
       
-   g->conquer_area(psite->get_owner()->get_player_number(), psite->get_position(), psite->get_descr()->get_conquer_radius());
+   g->conquer_area(psite->get_owner()->get_player_number(), psite->get_position(), psite->get_descr());
 }
 
 
