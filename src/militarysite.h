@@ -78,7 +78,6 @@ public:
 	virtual void soldier_capacity_up ()		{ change_soldier_capacity(1); }
 	virtual void soldier_capacity_down ()	{ change_soldier_capacity(-1); }
 
-      
    /**
       This methods are helper for use at configure this site.
    */   

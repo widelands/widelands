@@ -694,4 +694,3 @@ void MilitarySite::clear_requeriments ()
    Requeriments R;
    m_soldier_requeriments = R;
 }
-

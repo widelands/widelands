@@ -341,11 +341,33 @@ void Player::enhance_building(PlayerImmovable* imm, int id) {
       int cur_id=get_tribe()->get_building_index(b->get_name());
       Coords c = b->get_position();
       assert(cur_id!=-1);
-
+      
+      // Get workers and soldiers
+      const std::vector<Worker*>& workers =  b->get_workers();
+      std::vector<Worker*> m_workers = workers;
+      std::vector<Soldier*> m_soldiers;
+      
+      if( b->has_soldiers() ) {
+         const std::vector<Soldier*>* soldier =  ((ProductionSite*)b)->get_soldiers();
+         m_soldiers = *soldier;
+      }
+      
       b->remove(get_game()); // No fire or stuff
 
       get_game()->warp_constructionsite(c, m_plnum, id, cur_id);
 
+      // Reassign the workers
+      for( uint i = 0; i < m_workers.size(); i++) {
+         Worker* w = m_workers[i];
+         w->set_location( (Building*)(get_game()->get_map()->get_field(c)->get_immovable()));
+         w->reset_tasks( static_cast<Game*>( get_game() ) );
+      }
+      // Reassign the soldier 
+      for( uint i = 0; i < m_soldiers.size(); i++) {
+         Worker* w = m_soldiers[i];
+         w->set_location( (Building*)(get_game()->get_map()->get_field(c)->get_immovable()));
+         w->reset_tasks( static_cast<Game*>( get_game() ) );
+      }
    }
 }
 
