@@ -2118,6 +2118,10 @@ void Worker::gowarehouse_update(Game* g, State* state)
 
 	if (location->get_type() == BUILDING && location->has_attribute(WAREHOUSE)) {
 		molog("[gowarehouse]: Back in warehouse, schedule incorporate\n");
+
+		delete m_supply;
+		m_supply = 0;
+
 		schedule_incorporate(g);
 		return;
 	}
@@ -2139,6 +2143,10 @@ void Worker::gowarehouse_update(Game* g, State* state)
 
 	if (!get_economy()->get_nr_warehouses()) {
 		molog("[gowarehouse]: No warehouse left in Economy\n");
+
+		delete m_supply;
+		m_supply = 0;
+
 		pop_task(g);
 		return;
 	}
