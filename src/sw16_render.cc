@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2004 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@ Rendering functions of the 16-bit software renderer.
 #include "graphic.h"
 #include "animation.h"
 #include "map.h"
+#include "player.h"
 
 #include "sw16_graphic.h"
 #include "editor_game_base.h"
@@ -180,66 +181,89 @@ void Bitmap::blit(Point dst, Bitmap* src, Rect srcrc)
 
 /*
 ===============
- Bitmap::draw_minimap
+calc_minimap_color
 
- Draw the minimap for the given rectangular part of the map at the given point.
- It centers the curent view point of the player.
- ===============
- */
-void Bitmap::draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx, uint fy, int vp_x, int vp_y, char flags)
+Return the color to be used in the minimap for the given field.
+===============
+*/
+static inline ushort calc_minimap_color(const MapRenderInfo* mri, FCoords f, uint flags)
 {
-    // calculate the offset
-    vp_x = (vp_x + 1 + (int) mri->egbase->get_map()->get_width()/2)%rc.w;
-    vp_y = (vp_y + 1 + (int) mri->egbase->get_map()->get_height()/2)%rc.h;
+	Map* map = mri->egbase->get_map();
+	ushort pixelcolor = 0;
 
-    if(fx==(uint)rc.w && fy==(uint)rc.h) {
-        // forced size == natural size.
-        // use fast rendering
-        int mapwidth = mri->egbase->get_map()->get_width();
+	if (flags & Minimap_Terrain)
+	{
+		Texture* tex = get_graphicimpl()->get_maptexture_data(f.field->get_terd()->get_texture());
+		pixelcolor = tex->get_minimap_color(f.field->get_brightness());
+	}
 
-        for(int y = 0; y < rc.h; y++) {
-            ushort* pix = pixels + (dst.y+y)*pitch + dst.x;
-            Field* f = mri->egbase->get_map()->get_field(Coords(rc.x, (rc.y+y+vp_y)%rc.h));
+	if (flags & Minimap_PlayerColor)
+	{
+		// show owner
+		if (f.field->get_owned_by() > 0)
+		{
+			// if it's owned by someone, get the player's color
+			Player *ownerplayer = mri->egbase->get_player(f.field->get_owned_by());
+			const RGBColor* playercolors = ownerplayer->get_playercolor();
 
-            f = &f[vp_x];  // move by vp_x to begin
-            for(int x = 0; x < rc.w; x++, f++, pix++)
-            {
-                if (x + vp_x%rc.w == rc.w) 	// if we reach the end
-                    f = f - rc.w;		// move from end to begining
+			// and add the player's color to the old color
+			pixelcolor = blend_color16(pixelcolor, playercolors[3].pack16());
+		}
+	}
 
-                if (mri->visibility && !(*mri->visibility)[((y+vp_y)%rc.h)*mapwidth + (x+vp_x)%rc.w])
-                    *pix = 0;
-                else {
-                    Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
-                    *pix = tex->get_minimap_color(f->get_brightness(), mri, Coords((x+vp_x)%rc.w, (y+vp_y)%rc.h), f->get_owned_by(), flags);
-                }
-            }
-        }
+	if (flags & Minimap_Roads) {
+		// show roads
+		if (map->find_immovables(f, 0, 0, FindImmovableType(Map_Object::ROAD)))
+			pixelcolor = blend_color16(pixelcolor, 0xFFFF);
+	}
 
-    } else {
-        // forced size is somehow different. slow rendering needed
-        // we center the minimap in the area we got.
-        int mapwidth = mri->egbase->get_map()->get_width();
+	if (flags & Minimap_Flags) {
+		// show flags
+		if (map->find_immovables(f, 0, 0, FindImmovableType(Map_Object::FLAG)))
+			pixelcolor = 0xFFFF;
+	}
 
-        float xslope=(float)mri->egbase->get_map()->get_width()/(float)fx;
-        float yslope=(float)mri->egbase->get_map()->get_height()/(float)fy;
-        float xfield=0, yfield=0;
-        for(uint y = 0; y < fy; y++, yfield+=yslope) {
-            ushort* pix = pixels + (dst.y+y)*pitch + dst.x;
+	if (flags & Minimap_Buildings) {
+		// show buildings
+		if (map->find_immovables(f, 0, 0, FindImmovableType(Map_Object::BUILDING)))
+			pixelcolor = 0xFFFF;
+	}
 
-            for(uint x = 0; x < fx; x++, pix++, xfield+=xslope)
-            {
-                Field* f = mri->egbase->get_map()->get_field(Coords((int)(xfield+vp_x)%fx, (int)(yfield+vp_y)%fy));
-                if (mri->visibility && !(*mri->visibility)[(int)(yfield+vp_y)%fy*mapwidth + (int)(xfield+vp_x)%fx])
-                    *pix = 0;
-                else {
-                    Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
-                    *pix = tex->get_minimap_color(f->get_brightness(), mri, Coords((x+vp_x)%rc.w, (y+vp_y)%rc.h), f->get_owned_by(), flags);
-                }
-            }
-            xfield=0;
-        }
-    }
+	return pixelcolor;
+}
+
+
+/*
+===============
+Bitmap::draw_minimap
+
+Draw a minimap into the given rectangle of the bitmap.
+viewpt is the field at the top left of the rectangle.
+===============
+*/
+void Bitmap::draw_minimap(const MapRenderInfo* mri, Rect rc, Coords viewpt, uint flags)
+{
+	Map* map = mri->egbase->get_map();
+	int mapwidth = map->get_width();
+
+	for(int y = 0; y < rc.h; y++) {
+		ushort* pix = pixels + (rc.y+y)*pitch + rc.x;
+		Coords normalized(viewpt.x, viewpt.y + y);
+		FCoords f;
+
+		map->normalize_coords(&normalized);
+		f = map->get_fcoords(normalized);
+
+		for(int x = 0; x < rc.w; x++, pix++)
+		{
+			map->get_rn(f, &f);
+
+			if (mri->visibility && !(*mri->visibility)[f.y*mapwidth + f.x])
+				*pix = 0;
+			else
+				*pix = calc_minimap_color(mri, f, flags);
+		}
+  }
 }
 
 

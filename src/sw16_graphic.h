@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Wide Lands Development Team
+ * Copyright (C) 2002-2004 by the Wide Lands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ struct Bitmap {
 
 	void blit(Point dst, Bitmap* src, Rect srcrc);
 
-	void draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx, uint fy, int vp_x, int vp_y, char flags);
+	void draw_minimap(const MapRenderInfo* mri, Rect rc, Coords viewpt, uint flags);
 	void draw_animframe(Point dst, const AnimFrame* frame, Rect rc, const RGBColor* plrclrs);
 
 	// sw16_terrain.cc
@@ -145,8 +145,7 @@ public:
 	unsigned char* get_curpixels() const { return m_curframe; }
 	unsigned short *get_colormap () const { return m_colormap->get_colormap(); }
 
-	unsigned short get_minimap_color(char shade, const MapRenderInfo* mri, Coords coords, uchar owner, char flags);
-   unsigned short add_color(ushort old_pixel, ushort aColor);
+	unsigned short get_minimap_color(char shade);
 
 	void animate(uint time);
 };
@@ -187,8 +186,8 @@ public:
 	virtual int get_h() const;
 	
 	virtual void draw_rect(int x, int y, int w, int h, RGBColor clr);
-        virtual void fill_rect(int x, int y, int w, int h, RGBColor clr);
-        virtual void brighten_rect(int x, int y, int w, int h, int factor);
+	virtual void fill_rect(int x, int y, int w, int h, RGBColor clr);
+	virtual void brighten_rect(int x, int y, int w, int h, int factor);
 	virtual void clear();
 
 	void doblit(Point dst, Bitmap* src, Rect srcrc);
@@ -199,7 +198,7 @@ public:
 	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy);
 
 	virtual void rendermap(const MapRenderInfo* mgi, Point viewofs);
-	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint fx, uint fy, int vp_x, int vp_y, char flags);
+	virtual void renderminimap(const MapRenderInfo* mri, Coords viewpt, uint flags);
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs = 0);
 	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,

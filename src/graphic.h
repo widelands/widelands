@@ -91,6 +91,15 @@ end:
        return pack_rgb(r, g, b);
 }
 
+inline ushort blend_color16(ushort old_pixel, ushort aColor)
+{
+	return (((((old_pixel & 0xF800) + (aColor & 0xF800))/2) & 0xF800) +
+	        ((((old_pixel & 0x07E1) + (aColor & 0x07E1))/2) & 0x07E1) +
+	        ((((old_pixel & 0x001F) + (aColor & 0x001F))/2) & 0x001F));
+}
+
+
+
 /*
 class RGBColor
 */
@@ -220,7 +229,7 @@ struct MapRenderInfo
 
 This structure contains all the information that is needed by the renderer.
 
-It includes the map itself as well as overlay data (build symbols, road 
+It includes the map itself as well as overlay data (build symbols, road
 building symbols, ...)
 */
 class Editor_Game_Base;
@@ -229,31 +238,40 @@ class Map;
 enum {
 	Overlay_Frontier_Base = 0,	// add the player number to mark a border field
 	Overlay_Frontier_Max = 15,
-	
+
 	Overlay_Build_Flag = 16,
 	Overlay_Build_Small,
 	Overlay_Build_Medium,
 	Overlay_Build_Big,
 	Overlay_Build_Mine,
-	
+
 	Overlay_Build_Min = Overlay_Build_Flag,
 	Overlay_Build_Max = Overlay_Build_Mine,
+};
+
+enum {
+	Minimap_Terrain = 1,			// display terrain
+	Minimap_PlayerColor = 2,	// color of owner
+	Minimap_Flags = 4,			// show flags
+	Minimap_Roads = 8,			// show roads
+	Minimap_Buildings = 16,		// show buildings
 };
 
 class Game;
 
 struct MapRenderInfo {
-	Editor_Game_Base*    egbase;
-   Coords	fieldsel; // field selection marker, moved by cursor
-   int fieldsel_radius; // how many fields around shall the fieldsel mark? important for 
-                     // edtor or when a area shall be selected in the game
-   int fsel; // currently selected fieldsel graphic
-   uchar*	overlay_basic; // borders and build help
+	Editor_Game_Base*		egbase;
+	Coords					fieldsel; // field selection marker, moved by cursor
+	int						fieldsel_radius; // how many fields around shall the fieldsel mark? important for
+														// edtor or when a area shall be selected in the game
+
+	int 		fsel; // currently selected fieldsel graphic
+	uchar*	overlay_basic; // borders and build help
 	uchar*	overlay_roads; // needs to be ORed with logical road info
 	bool		show_buildhelp;
 
 	std::vector<bool>*		visibility; // array of fields, true if the field can be seen
-	                     // can be 0, in which case the whole map is visible
+								// can be 0, in which case the whole map is visible
 };
 
 
@@ -273,10 +291,10 @@ This abstract class represents anything that can be rendered to.
 It supports windows, which are composed of a clip rectangle and a drawing
 offset:
 The drawing offset will be added to all coordinates that are passed to drawing
-routines. Therefore, the offset is usually negative. Then the coordinates are 
+routines. Therefore, the offset is usually negative. Then the coordinates are
 interpreted as relative to the clip rectangle and the primitives are clipped
 accordingly.
-enter_window() can be used to enter a sub-window of the current window. When 
+enter_window() can be used to enter a sub-window of the current window. When
 you're finished drawing in the window, restore the old window by calling
 set_window() with the values stored in previous and prevofs.
 Note: If the sub-window would be empty/invisible, enter_window() returns false
@@ -302,7 +320,7 @@ public:
 	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy) = 0;
 
 	virtual void rendermap(const MapRenderInfo* mri, Point viewofs) = 0;
-	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint, uint, int vp_x, int vp_y, char flags) = 0;
+	virtual void renderminimap(const MapRenderInfo* mri, Coords viewpoint, uint flags) = 0;
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs) = 0;
 	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,

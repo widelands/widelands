@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by The Widelands Development Team
+ * Copyright (C) 2002-2004 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,10 +31,15 @@ class MiniMapView;
  *
  * MiniMapView is the panel that represents the pure representation of the
  * map, without any borders or gadgets.
+ *
+ * If the size of MiniMapView is not the same as the size of the map itself,
+ * it will either show a subset of the map, or it will show the map more than
+ * once.
+ * The minimap always centers around the current viewpoint.
  */
 class MiniMapView : public Panel {
 public:
-	MiniMapView(Panel *parent, int x, int y, Interactive_Base *plr, uint fx = 0, uint fy = 0);
+	MiniMapView(Panel *parent, int x, int y, int w, int h, Interactive_Base *plr);
 
 	UISignal2<int,int> warpview;
 
@@ -45,14 +50,13 @@ public:
 
 	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
-        inline void set_flags(char flags) { m_flags = flags; }
+   inline void set_flags(char flags) { m_flags = flags; }
 
 private:
-	Interactive_Base	*m_player;
-	int			m_viewx, m_viewy;
-	uint			m_fx, m_fy;
-	uint			m_pic_map_spot;
-        char 			m_flags;
+	Interactive_Base*	m_player;
+	int					m_viewx, m_viewy;
+	uint					m_pic_map_spot;
+   char 					m_flags;
 };
 
 
@@ -61,7 +65,6 @@ private:
  * Provide a minimap view (eventually with all sorts of gadgets, e.g.
  * show/hide buildings)
  */
-
 class MiniMap : public UniqueWindow {
 public:
 	MiniMap(Interactive_Base *parent, UniqueWindowRegistry *reg);
@@ -78,7 +81,7 @@ public:
 
 private:
 	MiniMapView		*m_view;
-        char 			m_flags;
+   char 				m_flags;
 };
 
 #endif /* MINIMAP_H */
