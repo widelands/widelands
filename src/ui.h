@@ -231,7 +231,11 @@ class Listselect {
 								if(cursel==-1) return 0;
 								return ent[cursel].value;
 					 }
-
+					 inline bool new_selection(void) { 
+								if(!bnew_selection) return false;
+								bnew_selection=false;
+								return true;
+					 }
 		  
 		  private:
 					 Listselect(const uint, const uint, const uint, const uint, Pic*, const uint, const uint);
@@ -260,6 +264,7 @@ class Listselect {
 					 Entry ent[MAX_LISTENTRYS];
 					 uint nent;
 
+					 bool bnew_selection;
 					 int firstvis;
 					 int cursel;
 					 uint w, h;

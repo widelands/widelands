@@ -33,13 +33,6 @@
 #define MAX_SUBDIRL	20
 #define MAX_SUBDIRS	15
 		  
-#ifdef WIN32
-#define SEP			"\\"
-#define CSEP		'\\'
-#else
-#define SEP			"/"
-#define CSEP		'/'
-#endif
 /** class File_Locator 
  *
  * This class is responsible for locating files in several directorys

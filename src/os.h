@@ -27,9 +27,16 @@
 #ifdef WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-#else
+#define SEP			"\\"
+#define CSEP		'\\'
 
+#else
 #include <unistd.h>
+#define strcmpi strcasecmp
+#define strncmpi strncasecmp
+
+#define SEP			"/"
+#define CSEP		'/'
 #endif
 
 #endif /* __S__OS_H */

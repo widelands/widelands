@@ -111,7 +111,11 @@ static void tell_user(const char* str) {
 //#error 	tell_user function not defined for windows yet!! Use messagebox
 // FEAR!! this will probably not work. directx applications do not allow
 // message boxes to paint over the primary surface. sdl hides features that
-// would make this possible.
+// would make this possible. Florian
+// This shouldn't be a problem: This function is just used to inform the user
+// of critical errors, before the game is really started: this includes not finding 
+// the resources or having some memory problems. The real game will define it's own message
+// boxes.
 #ifdef _MSC_VER		// i want to use a msvc pragma
 #pragma message("warning: tell_user function will probably not work")
 #endif

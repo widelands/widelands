@@ -20,12 +20,9 @@
 #include "profile.h"
 #include "growablearray.h"
 #include "myfile.h"
+#include "os.h"
 #include <string.h>
 #include <stdlib.h>
-
-#ifndef WIN32
-#define strcmpi		strcasecmp
-#endif
 
 #define TRUE_WORDS 3
 char* trueWords[TRUE_WORDS] =

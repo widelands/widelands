@@ -22,13 +22,15 @@
 
 #include "mytypes.h"
 
-#define S2MF_SUFFIX     ".swd"
 
 #define WLMF_VERSION 	0x0001
 
 #define WLMF_SUFFIX		".wmf"
+#define S2MF_SUFFIX     ".swd"
 
 #define WLMF_MAGIC      "WLmf"
+#define S2MF_MAGIC		"WORLD_V1.0"
+
 #define WLMF_VERSIONMAJOR(a)  (a >> 8)
 #define WLMF_VERSIONMINOR(a)  (a & 0xFF)
 
@@ -196,6 +198,9 @@ class Map {
 					 uint lfield;
 					 char *name;
 
+					 // funcs
+					 int load_s2mf(const char*);
+					 int load_wlmf(const char*);
 };
 
 #endif // __S__MAP_H 

@@ -17,6 +17,7 @@
  *
  */
 
+#include "os.h"
 #include "cardselectmenue.h"
 #include "ui.h"
 #include "font.h"
@@ -65,16 +66,30 @@ void card_select_menue(void) {
 		  Listselect* sel= win->create_listselect(20, 170, 360, 300);
 		  // Fill it with the files: Widelands map files
 		  g_fileloc.init_filelisting(TYPE_MAP, WLMF_SUFFIX);
+		  const char* name;
+		  uint i;
 		  while(g_fileloc.get_state() != File_Locator::LA_NOMOREFILES) {
-					 // TODO: make this nicer
-					 sel->add_entry(g_fileloc.get_next_file());
+					 name=g_fileloc.get_next_file();
+					 if(!name) continue;
+
+					 i=strlen(name);
+					 while(name[i]!= CSEP) --i;
+					 ++i;
+					 sel->add_entry(name+i, name);
 		  }
 		  g_fileloc.end_filelisting();
+
 
 		  // Fill it with more files: Settlers2 map files
 		  g_fileloc.init_filelisting(TYPE_MAP, S2MF_SUFFIX);
 		  while(g_fileloc.get_state() != File_Locator::LA_NOMOREFILES) {
-					 sel->add_entry(g_fileloc.get_next_file());
+					 name=g_fileloc.get_next_file();
+					 if(!name) continue;
+
+					 i=strlen(name);
+					 while(name[i]!= CSEP) --i;
+					 ++i;
+					 sel->add_entry(name+i, name);
 		  }
 		  g_fileloc.end_filelisting();
 
@@ -90,8 +105,10 @@ void card_select_menue(void) {
 		  win->create_textarea(380, 290, "Players:", Textarea::CENTER);
 		  win->create_textarea(460, 290, "7      ", Textarea::CENTER);
 		 
-		  // TODO: Add description (multiline text box) 
-		  
+		  // TODO: Add description as multiline text box) 
+		  win->create_textarea(380, 310, "Descr:", Textarea::CENTER);
+		  win->create_textarea(460, 310, "Settler 2 Card", Textarea::CENTER);
+
 		  // Register the resposible mouse funtions
 		  g_ip.register_mcf(menue_lclick, Input::BUT1);
 		  g_ip.register_mcf(menue_rclick, Input::BUT2);

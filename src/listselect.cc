@@ -159,6 +159,7 @@ void Listselect::select(uint y) {
 		  if(sel>=nent) sel=nent-1;
 
 		  cursel=sel;
+		  bnew_selection=true;
 }
 
 /** void listselect_but_up(void *a) 

@@ -64,21 +64,16 @@ Map::~Map(void) {
 		  if(w) delete w;
 }
 
-
-/** int Map::load_map(const char* file)
+/** int Map::load_wlmf(const char* file) 
  *
- * This loads a complete map from a file
+ * this loads a given file as a widelands map file
  *
- * Args: file	filename to read
- * Returns: RET_OK or ERR_FAILED
+ * ***** PRIVATE FUNC ******
+ * 
+ * Args: 	file		filename to read
+ * Returns: RET_OK or RET_FAILED
  */
-int Map::load_map(const char* file) {
-		  if(!w) {
-					 // no world loaded.
-					 // We fail
-					 return ERR_FAILED;
-		  }
-		  
+int Map::load_wlmf(const char* file) {
 		  Binary_file f;
 
 		  f.open(file, File::READ);
@@ -177,4 +172,36 @@ int Map::load_map(const char* file) {
 		  }
  
 		  return RET_OK;
+}
+
+/** int Map::load_map(const char* file)
+ *
+ * This loads a complete map from a file
+ *
+ * Args: file	filename to read
+ * Returns: RET_OK or ERR_FAILED
+ */
+#include <iostream>
+int Map::load_map(const char* file) {
+		  if(!w) {
+					 // no world loaded.
+					 // We fail
+					 return ERR_FAILED;
+		  }
+
+		  if(!strcmp(file+(strlen(file)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX)) {
+					 // It ends like a wide lands map file. try to load
+					 // it as such 
+					 return load_wlmf(file);
+		  }
+
+		  if(!strcmp(file+(strlen(file)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX)) {
+					 cerr << "S2Map file, not supported!!" << endl;
+					 return ERR_FAILED;
+		  }
+		  
+		  // Never here, or file is invalid (which can't happen)
+		  assert(0);
+		  
+
 }

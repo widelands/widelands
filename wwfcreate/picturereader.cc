@@ -21,14 +21,8 @@
 #include "../src/myfile.h"
 #include "../src/worldfiletypes.h"
 #include "../src/mytypes.h"
+#include "../src/os.h"
 #include <string.h>
-
-#ifdef WIN32
-#define SEPERATOR	'\\'
-#else
-#define SEPERATOR	'/'
-#define strcmpi		strcasecmp
-#endif
 
 #ifdef _MSC_VER
 #pragma pack(push, 1)
@@ -80,9 +74,9 @@ Picture_Reader::Picture_Reader(const char* picdir)
 {
 	strcpy(this->dir, picdir);
 	int len = strlen(this->dir);
-	if (this->dir[len-1] != SEPERATOR)
+	if (this->dir[len-1] != CSEP)
 	{
-		this->dir[len] = SEPERATOR;
+		this->dir[len] = CSEP;
 		this->dir[len+1] = 0;
 	}
 }
