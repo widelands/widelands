@@ -18,7 +18,9 @@
  */
 
 #include <cstdarg>
+#include <cctype>
 #include <string>
+
 #include "constants.h"
 #include "error.h"
 #include "filesystem.h"
@@ -30,7 +32,7 @@ const char* trueWords[TRUE_WORDS] =
 {
 	"true",
 	"yes",
-	"on", 
+	"on",
    "1"
 };
 
@@ -78,7 +80,7 @@ Section::Value &Section::Value::operator=(const Section::Value &o)
 	m_used = o.m_used;
 	m_name = strdup(o.m_name);
 	m_value = strdup(o.m_value);
-	
+
 	return *this;
 }
 
@@ -96,12 +98,12 @@ int Section::Value::get_int() const
 {
 	char *endp;
 	int i;
-	
+
 	i = strtol(m_value, &endp, 0);
-	
+
 	if (*endp)
 		throw wexception("%s: '%s' is not an integer", get_name(), m_value);
-	
+
 	return i;
 }
 
@@ -109,12 +111,12 @@ float Section::Value::get_float() const
 {
 	char *endp;
 	float f;
-	
+
 	f = strtod(m_value, &endp);
-	
+
 	if (*endp)
 		throw wexception("%s: '%s' is not a float", get_name(), m_value);
-	
+
 	return f;
 }
 
@@ -183,9 +185,9 @@ Section &Section::operator=(const Section &o)
 	m_used = o.m_used;
 	m_section_name = strdup(o.m_section_name);
 	m_values = o.m_values;
-	
+
 	return *this;
-}	
+}
 
 /** Section::is_used()
  *
@@ -260,7 +262,7 @@ Section::Value *Section::get_next_val(const char *name)
 
 /** Section::create_val(const char *name, const char *value, bool duplicate = false)
  *
- * Set the given key. If duplicate is false, an old key with the given name is 
+ * Set the given key. If duplicate is false, an old key with the given name is
  * replaced if possible.
  *
  * Unlike the set_*() class functions, it doesn't mark the key as used.
@@ -275,7 +277,7 @@ Section::Value *Section::create_val(const char *name, const char *value, bool du
 			}
 		}
 	}
-	
+
 	Value v(name, value);
 	m_values.push_back(v);
 	return &m_values.back();
@@ -348,7 +350,7 @@ int Section::get_int(const char *name, int def)
 	Value *v = get_val(name);
 	if (!v)
 		return def;
-	
+
 	try {
 		return v->get_int();
 	} catch(std::exception &e) {
@@ -367,7 +369,7 @@ float Section::get_float(const char *name, float def)
 	Value *v = get_val(name);
 	if (!v)
 		return def;
-	
+
 	try {
 		return v->get_float();
 	} catch(std::exception &e) {
@@ -391,7 +393,7 @@ bool Section::get_bool(const char *name, bool def)
 	Value *v = get_val(name);
 	if (!v)
 		return def;
-	
+
 	try {
 		return v->get_bool();
 	} catch(std::exception &e) {
@@ -433,7 +435,7 @@ const char *Section::get_next_int(const char *name, int *value)
 	Value *v = get_next_val(name);
 	if (!v)
 		return 0;
-	
+
 	*value = v->get_int();
 	return v->get_name();
 }
@@ -447,7 +449,7 @@ const char *Section::get_next_float(const char *name, float *value)
 	Value *v = get_next_val(name);
 	if (!v)
 		return 0;
-	
+
 	*value = v->get_float();
 	return v->get_name();
 }
@@ -485,7 +487,7 @@ const char *Section::get_next_string(const char *name, const char **value)
 	Value *v = get_next_val(name);
 	if (!v)
 		return 0;
-	
+
 	*value = v->get_string();
 	return v->get_name();
 }
@@ -499,7 +501,7 @@ const char *Section::get_next_string(const char *name, const char **value)
 void Section::set_int(const char *name, int value, bool duplicate)
 {
 	char buf[32];
-	
+
 	snprintf(buf, sizeof(buf), "%i", value);
 	create_val(name, buf, duplicate)->mark_used();
 }
@@ -513,7 +515,7 @@ void Section::set_int(const char *name, int value, bool duplicate)
 void Section::set_float(const char *name, float value, bool duplicate)
 {
 	char buf[64];
-	
+
 	snprintf(buf, sizeof(buf), "%f", value);
 	create_val(name, buf, duplicate)->mark_used();
 }
@@ -590,14 +592,14 @@ void Profile::error(const char *fmt, ...) const
 {
 	if (m_error_level == err_ignore)
 		return;
-	
+
 	char buf[256];
 	va_list va;
-	
+
 	va_start(va, fmt);
 	vsnprintf(buf, sizeof(buf), fmt, va);
 	va_end(va);
-	
+
 	if (m_error_level == err_log)
 		log("%s\n", buf);
 	else
@@ -689,7 +691,7 @@ Section *Profile::get_next_section(const char *name)
 /** Profile::create_section(const char *name, bool duplicate = false)
  *
  * Create a section of the given name.
- * If duplicate is true, a duplicate section may be created. Otherwise, a 
+ * If duplicate is true, a duplicate section may be created. Otherwise, a
  * pointer to an existing section is returned.
  */
 Section *Profile::create_section(const char *name, bool duplicate)
@@ -700,7 +702,7 @@ Section *Profile::create_section(const char *name, bool duplicate)
 				return &*s;
 		}
 	}
-	
+
 	m_sections.push_back(Section(this, name));
 	return &m_sections.back();
 }
@@ -753,7 +755,7 @@ void Profile::read(const char *filename, const char *global_section)
 	try
 	{
 		FileRead fr;
-	
+
 		fr.Open(g_fs, filename);
 
 		char line[1024];
@@ -788,7 +790,7 @@ void Profile::read(const char *filename, const char *global_section)
 						char *eot = tail+strlen(tail)-1;
 						if (*eot == '\'' || *eot == '\"')
 							*eot = 0;
-					}  
+					}
 
 					// ready to insert
 					if (!s) {
@@ -818,24 +820,24 @@ void Profile::read(const char *filename, const char *global_section)
 void Profile::write(const char *filename, bool used_only)
 {
 	FileWrite fw;
-	
+
 	fw.Printf("# Automatically created by Widelands " VERSION "\n\n");
 
 	for(Section_list::iterator s = m_sections.begin(); s != m_sections.end(); s++) {
 		if (used_only && !s->is_used())
 			continue;
-		
+
 		fw.Printf("[%s]\n", s->get_name());
-		
+
 		for(Section::Value_list::iterator v = s->m_values.begin(); v != s->m_values.end(); v++) {
 			if (used_only && !v->is_used())
 				continue;
 			fw.Printf("%s=%s\n", v->get_name(), v->get_string());
 		}
-		
+
 		fw.Printf("\n");
 	}
-	
+
 	fw.Write(g_fs, filename);
 }
 
