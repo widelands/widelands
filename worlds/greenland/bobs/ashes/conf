@@ -1,6 +1,7 @@
 [global]
 type=immovable
 size=none
+picture=ashes_00.png
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
