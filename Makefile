@@ -161,16 +161,13 @@ clean:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=src src/ui/ui_fs_menus/
+SUBDIRS=src src/ui/ui_fs_menus src/ui/ui_basic
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
-SRC += $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.cc))
-
+SRC := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.cc))
+HEADERS := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.h))
 OBJ := $(patsubst %.cc,$(OBJECT_DIR)/%.o$,$(notdir $(SRC)))
-
-#	$(patsubst %.cc,%.o, \
-#	$(filter %.cc,$(SRC)))
 
 $(OBJECT_DIR)/widelands: $(OBJECT_DIR) $(OBJ) 
 	$(CXX) $(OBJ) -o $@ $(LDFLAGS) $(CFLAGS)
@@ -186,5 +183,5 @@ $(OBJECT_DIR)/%.d: $(OBJECT_DIR) $(filter %/$(notdir $(basename $@)).cc,$(SRC))
 $(OBJECT_DIR)/%.o:  $(filter %/$(notdir $(basename $@)).cc,$(SRC))
 	$(CXX) $(CXXFLAGS) -c -o $@ $(filter %/$(notdir $(basename $@)).cc,$(SRC)) 
 
-tags: $(wildcard src/*.cc src/*.h)
+tags: $(SRC) $(HEADERS)
 	@ if [ -x /usr/bin/ctags ]; then ctags -R || true ; else true; fi
