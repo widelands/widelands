@@ -92,5 +92,8 @@ include $(WIDELANDS_OBJ:.o=.d)
 %.d: %.cc
 	$(CC) $(CFLAGS) -MM -MG "$<" | sed -e 's@^\(.*\)\.o:@src/\1.d src/\1.o:@' > $@ 
 
+%.h: 
+	
+
 widelands: $(WIDELANDS_OBJ)
 	$(CXX) $^ -o $@ $(LDFLAGS) $(CLAGS)  
