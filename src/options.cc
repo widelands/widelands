@@ -108,7 +108,14 @@ static void show_usage(void);
  */
 static void tell_user(const char* str) {
 #ifdef WIN32
-#error 	tell_user function not defined for windows yet!! Use messagebox
+//#error 	tell_user function not defined for windows yet!! Use messagebox
+// FEAR!! this will probably not work. directx applications do not allow
+// message boxes to paint over the primary surface. sdl hides features that
+// would make this possible.
+#ifdef _MSC_VER		// i want to use a msvc pragma
+#pragma message("warning: tell_user function will probably not work")
+#endif
+	MessageBox(NULL, str, "Wide Lands", MB_ICONINFORMATION);
 #else
 		  cout << str << endl;
 #endif
