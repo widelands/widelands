@@ -10,17 +10,13 @@ buildicon=lumberjack_build.bmp
 
 # TODO: describe what this guy does
 
-# List of wares required for building
-[buildcost]
-plank=2
 
 [idle]
 pics=lumberjack_i_??.bmp  # ???
-hot_spot_x=39
-hot_spot_y=50
+hot_spot_x=38
+hot_spot_y=38
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
-
 
 

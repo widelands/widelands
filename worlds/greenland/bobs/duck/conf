@@ -10,7 +10,7 @@ shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
 hot_spot_x=5
-hot_spot_y=9
+hot_spot_y=10
 
 [walk]
 clrkey_r=0
@@ -20,5 +20,5 @@ shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
 hot_spot_x=5
-hot_spot_y=9
+hot_spot_y=10
 

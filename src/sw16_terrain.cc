@@ -27,6 +27,9 @@ Texture implementation and terrain rendering for the 16-bit software renderer.
 
 #include "sw16_graphic.h"
 
+#include <iostream>
+
+using namespace std;
 
 namespace Renderer_Software16
 {
@@ -323,7 +326,7 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 				itx=(tx>>16) & (TEXTURE_W-1);
 				ity=(ty>>16) & (TEXTURE_H-1);
 
-				scanline[x]=texcolormap[texpixels[itx+ity*TEXTURE_W] | ((b>>8) & 0xFF00)];
+				scanline[x]=texcolormap[texpixels[itx+(ity<<6)] | ((b>>8) & 0xFF00)];
 
 				b+=db;
 				tx+=dtx;
@@ -402,12 +405,12 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 				ty-=ix1*dty;
 				ix1=0;
 			}
-
+         
 			for (x=ix1;x<=ix2;x++) {
 				itx=(tx>>16) & (TEXTURE_W-1);
 				ity=(ty>>16) & (TEXTURE_H-1);
 
-				scanline[x]=texcolormap[texpixels[itx+ity*TEXTURE_W] | ((b>>8) & 0xFF00)];
+				scanline[x]=texcolormap[texpixels[itx+(ity<<6)] | ((b>>8) & 0xFF00)];
 
 				b+=db;
 				tx+=dtx;
