@@ -85,6 +85,9 @@ public:
 	Bob *create_bob(int x, int y, int idx);
 	Immovable *create_immovable(int x, int y, int idx);
 
+   // is this base a game
+   inline bool is_game() { return true; }
+   
    // TEMP
    inline Interactive_Player* get_ipl(void) { return ipl; } 
 	

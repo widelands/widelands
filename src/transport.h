@@ -52,10 +52,10 @@ class Flag : public PlayerImmovable {
 	friend class FlagQueue;
 
 public:
-	Flag();
+	Flag(bool);
 	virtual ~Flag();
 	
-	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords);
+	static Flag *create(Editor_Game_Base *g, Player *owner, Coords coords, bool);
 	
 	virtual int get_type();
 	virtual int get_size();
@@ -81,8 +81,6 @@ public:
 protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
-	virtual void init_for_game(Game*);
-	virtual void cleanup_for_game(Game*);
 	
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 
@@ -118,10 +116,10 @@ Every road has one or more Carriers attached to it.
 */
 class Road : public PlayerImmovable {
 public:
-	Road();
+	Road(bool);
 	virtual ~Road();
 
-	static Road *create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path);
+	static Road *create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path, bool);
 
 	inline Flag *get_flag_start() const { return m_start; }
 	inline Flag *get_flag_end() const { return m_end; }

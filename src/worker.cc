@@ -88,9 +88,12 @@ Worker_Descr::create
 Custom creation routing that accounts for the location.
 ===============
 */
-Worker *Worker_Descr::create(Game *g, Player *owner, PlayerImmovable *location, Coords coords)
+Worker *Worker_Descr::create(Editor_Game_Base *gg, Player *owner, PlayerImmovable *location, Coords coords, bool logic)
 {
-	Worker *worker = (Worker*)create_object();
+   assert(logic); // a worker without logic doesn't make sense
+   Game* g=static_cast<Game*>(gg);
+
+   Worker *worker = (Worker*)create_object(g->is_game());
 	worker->set_owner(owner);
 	worker->set_location(location);
 	worker->set_position(g, coords);
@@ -145,8 +148,8 @@ Worker::Worker
 Worker::~Worker
 ===============
 */
-Worker::Worker(Worker_Descr *descr)
-	: Bob(descr)
+Worker::Worker(Worker_Descr *descr, bool logic)
+	: Bob(descr, logic)
 {
 	m_economy = 0;
 	m_location = 0;
@@ -884,8 +887,8 @@ Carrier::Carrier
 Carrier::~Carrier
 ===============
 */
-Carrier::Carrier(Carrier_Descr *descr)
-	: Worker(descr)
+Carrier::Carrier(Carrier_Descr *descr, bool logic)
+	: Worker(descr, logic)
 {
 }
 
@@ -901,9 +904,9 @@ Carrier_Descr::create_object
 Create a carrier of this type.
 ===============
 */
-Bob *Carrier_Descr::create_object()
+Bob *Carrier_Descr::create_object(bool logic)
 {
-	return new Carrier(this);
+	return new Carrier(this, logic);
 }
 
 /*

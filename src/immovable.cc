@@ -41,8 +41,8 @@ BaseImmovable::~BaseImmovable
 Base immovable creation and destruction
 ===============
 */
-BaseImmovable::BaseImmovable(Map_Object_Descr *descr)
-	: Map_Object(descr)
+BaseImmovable::BaseImmovable(Map_Object_Descr *descr, bool logic)
+	: Map_Object(descr, logic)
 {
 }
 
@@ -172,9 +172,10 @@ Immovable_Descr::create
 Create an immovable of this type
 ===============
 */
-Immovable *Immovable_Descr::create(Game *g, Coords coords)
+Immovable *Immovable_Descr::create(Editor_Game_Base *gg, Coords coords, bool logic)
 {
-	Immovable *im = new Immovable(this);
+   Game* g=static_cast<Game*>(gg);
+   Immovable *im = new Immovable(this, g->is_game());
 	im->m_position = coords;
 	im->init(g);
 	return im;
@@ -195,8 +196,8 @@ Immovable::Immovable
 Immovable::~Immovable
 ===============
 */
-Immovable::Immovable(Immovable_Descr *descr)
-	: BaseImmovable(descr)
+Immovable::Immovable(Immovable_Descr *descr, bool logic)
+	: BaseImmovable(descr, logic)
 {
 	m_anim = 0;
 }
@@ -290,8 +291,8 @@ PlayerImmovable::PlayerImmovable
 Zero-initialize
 ===============
 */
-PlayerImmovable::PlayerImmovable(Map_Object_Descr *descr)
-	: BaseImmovable(descr)
+PlayerImmovable::PlayerImmovable(Map_Object_Descr *descr, bool logic)
+	: BaseImmovable(descr, logic)
 {
 	m_owner = 0;
 	m_economy = 0;
@@ -409,18 +410,6 @@ void PlayerImmovable::init(Editor_Game_Base *g)
 
 /*
 ===============
-PlayerImmovable::init_for_game
-
-Initialize the immovable.
-===============
-*/
-void PlayerImmovable::init_for_game(Game *g)
-{
-	BaseImmovable::init_for_game(g);
-}
-
-/*
-===============
 PlayerImmovable::cleanup
 
 Release workers
@@ -428,24 +417,11 @@ Release workers
 */
 void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
-	while(m_workers.size())
-		m_workers[0]->set_location(0);
+	if(get_logic()) {
+      while(m_workers.size())
+         m_workers[0]->set_location(0);
+   }
 
 	BaseImmovable::cleanup(g);
-}
-
-/*
-===============
-PlayerImmovable::cleanup_for_game
-
-Release workers
-===============
-*/
-void PlayerImmovable::cleanup_for_game(Game *g)
-{
-	while(m_workers.size())
-		m_workers[0]->set_location(0);
-	
-   BaseImmovable::cleanup_for_game(g);
 }
 

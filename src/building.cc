@@ -71,11 +71,11 @@ Building_Descr::create
 Create a building of this type. Does not perform any sanity checks.
 ===============
 */
-Building *Building_Descr::create(Game *g, Player *owner, Coords pos)
+Building *Building_Descr::create(Editor_Game_Base *g, Player *owner, Coords pos, bool logic)
 {
 	assert(owner);
 	
-	Building *b = create_object();
+	Building *b = create_object(logic);
 	b->set_owner(owner);
 	b->m_position = pos;
 	b->init(g);
@@ -128,8 +128,8 @@ Implementation
 ==============================
 */
 
-Building::Building(Building_Descr *descr)
-	: PlayerImmovable(descr)
+Building::Building(Building_Descr *descr, bool logic)
+	: PlayerImmovable(descr, logic)
 {
 	m_flag = 0;
 	m_optionswindow = 0;
@@ -220,25 +220,13 @@ void Building::init(Editor_Game_Base* g)
 	if (imm && imm->get_type() == FLAG)
 		flag = (Flag *)imm;
 	else
-		flag = Flag::create(g, get_owner(), neighb);
+		flag = Flag::create(g, get_owner(), neighb, 1);
 	
 	m_flag = flag;
 	m_flag->attach_building(g, this);
 	
 	// Start the animation
 	start_animation(g, get_descr()->get_idle_anim());
-}
-
-/*
-===============
-Building::init_for_game
-
-Game building initialization code. You must call this from derived class' init.
-===============
-*/
-void Building::init_for_game(Game* g)
-{
-	PlayerImmovable::init_for_game(g);
 }
 
 /*
@@ -272,19 +260,6 @@ void Building::cleanup(Editor_Game_Base *g)
 	
 	PlayerImmovable::cleanup(g);
 }
-
-/*
-===============
-Building::cleanup_for_game
-
-Cleanup the building
-===============
-*/
-void Building::cleanup_for_game(Game *g)
-{
-	PlayerImmovable::cleanup_for_game(g);
-}
-
 
 /*
 ===============
@@ -374,8 +349,8 @@ Warehouse::Warehouse
 Initialize a warehouse (zero contents, etc...)
 ===============
 */
-Warehouse::Warehouse(Warehouse_Descr *descr)
-	: Building(descr)
+Warehouse::Warehouse(Warehouse_Descr *descr, bool logic)
+	: Building(descr, logic)
 {
 }
 
@@ -402,27 +377,19 @@ Warehouse::init
 Conquer the land around the HQ on init.
 ===============
 */	
-void Warehouse::init(Editor_Game_Base* g)
+void Warehouse::init(Editor_Game_Base* gg)
 {
-	Building::init(g);
+   Building::init(gg);
 
-	if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
-		g->conquer_area(get_owner()->get_player_number(), m_position, get_descr()->get_conquers());
-}
+   if (get_descr()->get_subtype() == Warehouse_Descr::Subtype_HQ)
+      gg->conquer_area(get_owner()->get_player_number(), m_position, get_descr()->get_conquers());
 
-/*
-===============
-Warehouse::init_for_game
+   if(get_logic()) {
+      Game* g=static_cast<Game*>(gg);
 
-Conquer the land around the HQ on init.
-===============
-*/	
-void Warehouse::init_for_game(Game* g)
-{
-	Building::init_for_game(g);
-
-   g->get_cmdqueue()->queue(g->get_gametime()+CARRIER_SPAWN_INTERVAL,
-			SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+      g->get_cmdqueue()->queue(g->get_gametime()+CARRIER_SPAWN_INTERVAL,
+            SENDER_MAPOBJECT, CMD_ACT, m_serial, 0, 0);
+   }
 }
 
 /*
@@ -437,18 +404,6 @@ void Warehouse::cleanup(Editor_Game_Base *g)
 	// TODO: un-conquer the area?
 
 	Building::cleanup(g);
-}
-
-/*
-===============
-Warehouse::cleanup_for_game
-
-Destroy the warehouse.
-===============
-*/
-void Warehouse::cleanup_for_game(Game *g)
-{
-	Building::cleanup_for_game(g);
 }
 
 
@@ -559,7 +514,7 @@ Worker *Warehouse::launch_worker(Game *g, int ware)
 	
 	workerdescr = ((Worker_Ware_Descr*)waredescr)->get_worker(get_owner()->get_tribe());
 	
-	worker = workerdescr->create(g, get_owner(), this, m_position);
+	worker = workerdescr->create(g, get_owner(), this, m_position, 1);
 	
 	m_wares.remove(ware, 1);
 	get_economy()->remove_wares(ware, 1); // re-added by the worker himself
@@ -590,9 +545,9 @@ void Warehouse::incorporate_worker(Game *g, Worker *w)
 Warehouse_Descr::create_object
 ===============
 */
-Building *Warehouse_Descr::create_object()
+Building *Warehouse_Descr::create_object(bool logic)
 {
-	return new Warehouse(this);
+	return new Warehouse(this, logic);
 }
 
 

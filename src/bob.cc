@@ -73,13 +73,14 @@ Bob_Descr::create
 Create a bob of this type
 ===============
 */
-Bob *Bob_Descr::create(Game *g, Player *owner, Coords coords)
+Bob *Bob_Descr::create(Editor_Game_Base *gg, Player *owner, Coords coords, bool logic)
 {
-	Bob *bob = create_object();
+   Game* g=static_cast<Game*>(gg);
+	Bob *bob = create_object(g->is_game());
 	bob->set_owner(owner);
 	bob->set_position(g, coords);
 	bob->init(g);
-	
+   
    return bob;
 }
 
@@ -99,8 +100,8 @@ Bob::Bob
 Zero-initialize a map object
 ===============
 */
-Bob::Bob(Bob_Descr* descr)
-	: Map_Object(descr)
+Bob::Bob(Bob_Descr* descr, bool wl)
+	: Map_Object(descr, wl)
 {
 	m_owner = 0;
 	m_position.x = m_position.y = 0; // not linked anywhere
@@ -183,30 +184,19 @@ Make sure you call this from derived classes!
 Initialize the object
 ===============
 */
-void Bob::init(Editor_Game_Base* g)
+void Bob::init(Editor_Game_Base* gg)
 {
-	Map_Object::init(g);
-}
+   Map_Object::init(gg);
 
-/*
-===============
-Bob::init_for_game
+   if(get_logic()) {
+      Game* g=static_cast<Game*>(gg); 
+      // Initialize task system
+      m_lasttask = 0;
+      m_lasttask_success = true;
+      m_nexttask = 0;
 
-Make sure you call this from derived classes!
-
-Initialize the object by setting the initial task.
-===============
-*/
-void Bob::init_for_game(Game* g)
-{
-   Map_Object::init_for_game(g);
-
-   // Initialize task system
-	m_lasttask = 0;
-	m_lasttask_success = true;
-	m_nexttask = 0;
-	
-	do_next_task(g);
+      do_next_task(g);
+   }
 }
 
 /*
@@ -216,31 +206,22 @@ Bob::cleanup
 Perform independant cleanup as necessary.
 ===============
 */
-void Bob::cleanup(Editor_Game_Base *g)
+void Bob::cleanup(Editor_Game_Base *gg)
 {
-   Map_Object::cleanup(g);
-}
+   if(get_logic()) {
+      Game* g=static_cast<Game*>(gg); 
+      if (get_current_task())
+         task_end(g); // subtle...
 
-/*
-===============
-Bob::cleanup_for_game
+      if (m_position.field) {
+         m_position.field = 0;
+         *m_linkpprev = m_linknext;
+         if (m_linknext)
+            m_linknext->m_linkpprev = m_linkpprev;
+      }	
 
-Perform Game-related cleanup as necessary.
-===============
-*/
-void Bob::cleanup_for_game(Game *g)
-{
-	if (get_current_task())
-		task_end(g); // subtle...
-
-   if (m_position.field) {
-		m_position.field = 0;
-		*m_linkpprev = m_linknext;
-		if (m_linknext)
-			m_linknext->m_linkpprev = m_linkpprev;
-	}	
-   
-   Map_Object::cleanup_for_game(g);
+   }
+   Map_Object::cleanup(gg);
 }
 
 /*
@@ -765,7 +746,7 @@ class Critter_Bob_Descr : public Bob_Descr {
       virtual ~Critter_Bob_Descr(void) { } 
 
       virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-      Bob *create_object();
+      Bob *create_object(bool logic);
 
       inline bool is_swimming(void) { return m_swimming; }
       inline DirAnimations* get_walk_anims(void) { return &m_walk_anims; }
@@ -808,7 +789,7 @@ class Critter_Bob : public Bob {
 	MO_DESCR(Critter_Bob_Descr);
 
 public:
-	Critter_Bob(Critter_Bob_Descr *d);
+	Critter_Bob(Critter_Bob_Descr *d, bool);
 	virtual ~Critter_Bob(void);
 
 	uint get_movecaps();
@@ -816,8 +797,8 @@ public:
 	virtual void task_start_best(Game*, uint prev, bool success, uint nexthint);
 };
 
-Critter_Bob::Critter_Bob(Critter_Bob_Descr *d)
-	: Bob(d)
+Critter_Bob::Critter_Bob(Critter_Bob_Descr *d, bool logic)
+	: Bob(d, logic)
 {
 }
 
@@ -848,9 +829,9 @@ void Critter_Bob::task_start_best(Game* g, uint prev, bool success, uint nexthin
 	start_task_idle(g, get_descr()->get_idle_anim(), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
 }
 
-Bob *Critter_Bob_Descr::create_object()
+Bob *Critter_Bob_Descr::create_object(bool logic)
 {
-	return new Critter_Bob(this);
+	return new Critter_Bob(this, logic);
 }
 
 

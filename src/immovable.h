@@ -47,7 +47,7 @@ public:
 		BIG
 	};
 
-	BaseImmovable(Map_Object_Descr *descr);
+	BaseImmovable(Map_Object_Descr *descr, bool);
 	virtual ~BaseImmovable();
 	
 	virtual int get_size() = 0;
@@ -74,7 +74,7 @@ public:
 	inline int get_size(void) { return m_size; }
 		
 	void parse(const char *directory, Profile *s);
-	Immovable *create(Game *g, Coords coords);
+	Immovable *create(Editor_Game_Base *g, Coords coords, bool);
 	
 protected:
 	char		m_name[30];
@@ -88,7 +88,7 @@ class Immovable : public BaseImmovable {
 	MO_DESCR(Immovable_Descr);
 
 public:
-	Immovable(Immovable_Descr *descr);
+	Immovable(Immovable_Descr *descr, bool);
 	~Immovable();
 	
 	int get_type();
@@ -118,7 +118,7 @@ adjusted automatically.
 */
 class PlayerImmovable : public BaseImmovable {
 public:
-	PlayerImmovable(Map_Object_Descr *descr);
+	PlayerImmovable(Map_Object_Descr *descr, bool);
 	virtual ~PlayerImmovable();
 
 	inline Player *get_owner() const { return m_owner; }
@@ -138,8 +138,6 @@ protected:
 	
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
-	virtual void init_for_game(Game *g);
-	virtual void cleanup_for_game(Game *g);
 		
 private:
 	Player		*m_owner;

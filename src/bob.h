@@ -39,10 +39,10 @@ public:
 	inline const char* get_name(void) { return m_name; }
 	inline uint get_idle_anim(void) { return m_idle_anim; }
 
-	Bob *create(Game *g, Player *owner, Coords coords);
+	Bob *create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic);
 	
 protected:
-	virtual Bob *create_object() = 0;
+	virtual Bob *create_object(bool) = 0;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 	
 	char	m_name[30];
@@ -71,7 +71,7 @@ public:
 	};
 		
 protected:
-	Bob(Bob_Descr *descr);
+	Bob(Bob_Descr *descr, bool);
 	virtual ~Bob(void);
 
 public:
@@ -80,8 +80,6 @@ public:
 		
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
-	virtual void init_for_game(Game*);
-	virtual void cleanup_for_game(Game*);
 	virtual void act(Game*);
 		
 	virtual void draw(Game* game, RenderTarget* dst, Point pos);

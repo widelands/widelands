@@ -59,8 +59,8 @@ class Player {
 		inline const RGBColor* get_playercolor() const { return m_playercolor; }
 		inline Tribe_Descr *get_tribe() const { return m_tribe; }
 		
-		void init_for_game(Game*);
-		
+	
+      void init_for_game(Game*);
 		int get_buildcaps(Coords coords);
 		
 		// See area

@@ -59,7 +59,7 @@ public:
 
 	void set_ware_id(int idx);
 		
-	Worker *create(Game *g, Player *owner, PlayerImmovable *location, Coords coords);
+	Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords, bool logic);
 
 protected:
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
@@ -85,7 +85,7 @@ public:
 		State_GoWarehouse,	// return to warehouse
 	};
 	
-	Worker(Worker_Descr *descr);
+	Worker(Worker_Descr *descr, bool);
 	virtual ~Worker();
 
 	inline int get_ware_id() const { return get_descr()->get_ware_id(); }
@@ -145,7 +145,7 @@ public:
 	virtual ~Carrier_Descr(void);
 	
 protected:
-	virtual Bob *create_object();
+	virtual Bob *create_object(bool);
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 }; 
 
@@ -153,7 +153,7 @@ class Carrier : public Worker {
 	MO_DESCR(Carrier_Descr);
 
 public:
-	Carrier(Carrier_Descr *descr);
+	Carrier(Carrier_Descr *descr, bool);
 	virtual ~Carrier();
 
 private:

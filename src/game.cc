@@ -392,7 +392,7 @@ Building *Game::warp_building(int x, int y, char owner, int idx)
 	descr = player->get_tribe()->get_building_descr(idx);
 	assert(descr);
 
-	return descr->create(this, get_player(owner), Coords(x, y));
+	return descr->create(this, get_player(owner), Coords(x, y), 1);
 }
 
 /** Game::create_bob(int x, int y, int idx)
@@ -408,7 +408,7 @@ Bob *Game::create_bob(int x, int y, int idx)
 	descr = m_map->get_world()->get_bob_descr(idx);
 	assert(descr);
 	
-	return descr->create(this, 0, Coords(x, y));
+	return descr->create(this, 0, Coords(x, y), 1);
 }
 
 /*
@@ -426,7 +426,7 @@ Immovable *Game::create_immovable(int x, int y, int idx)
 	descr = m_map->get_world()->get_immovable_descr(idx);
 	assert(descr);
 	
-	return descr->create(this, Coords(x, y));
+	return descr->create(this, Coords(x, y), 1);
 }
 
 

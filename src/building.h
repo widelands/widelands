@@ -46,11 +46,11 @@ public:
 	inline bool get_buildable(void) { return m_buildable; }
 	inline int get_size(void) { return m_size; }
 
-	Building *create(Game *g, Player *owner, Coords pos);
+	Building *create(Editor_Game_Base *g, Player *owner, Coords pos, bool logic);
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 
 protected:
-	virtual Building *create_object() = 0;
+	virtual Building *create_object(bool) = 0;
 
 private: 
 	Tribe_Descr		*m_tribe;			// the tribe this building belongs to
@@ -74,7 +74,7 @@ class Building : public PlayerImmovable {
 	MO_DESCR(Building_Descr)
 
 public:
-	Building(Building_Descr *descr);
+	Building(Building_Descr *descr, bool logic);
 	virtual ~Building();
 
 	virtual int get_type();	
@@ -94,8 +94,6 @@ protected:
 
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
-	virtual void init_for_game(Game *g);
-	virtual void cleanup_for_game(Game *g);
 
 	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
 	
@@ -124,7 +122,7 @@ public:
 	Warehouse_Descr(Tribe_Descr *tribe, const char *name);
 
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
-	virtual Building *create_object();
+	virtual Building *create_object(bool);
 	
 	inline int get_subtype() const { return m_subtype; }
 	inline int get_conquers() const { return m_conquers; }
@@ -139,13 +137,11 @@ class Warehouse : public Building {
 	MO_DESCR(Warehouse_Descr);
 
 public:
-	Warehouse(Warehouse_Descr *descr);
+	Warehouse(Warehouse_Descr *descr, bool);
 	virtual ~Warehouse();
 
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
-	virtual void init_for_game(Game *g);
-	virtual void cleanup_for_game(Game *g);
 
 	virtual void act(Game *g);
 	

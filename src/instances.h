@@ -117,7 +117,7 @@ public:
 	};
 
 protected:
-	Map_Object(Map_Object_Descr *descr);
+	Map_Object(Map_Object_Descr *descr, bool logic); 
 	virtual ~Map_Object(void);
 
 public:
@@ -140,12 +140,16 @@ protected:
 	virtual void cleanup(Editor_Game_Base*);
 
    // init for game alone
-   virtual void init_for_game(Game*);
-   virtual void cleanup_for_game(Game*);
+
+   // is this a game (with logic) or a editor run (without logic)
+   inline bool get_logic(void) { return m_logic; }
 
 protected:
 	Map_Object_Descr *m_descr;
 	uint m_serial;
+
+private:
+   bool m_logic;
 };
 
 inline int get_reverse_dir(int dir) { return 1 + ((dir-1)+3)%6; }

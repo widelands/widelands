@@ -59,8 +59,8 @@ Flag::Flag
 Create the flag. Initially, it doesn't have any attachments.
 ===============
 */
-Flag::Flag()
-	: PlayerImmovable(&g_flag_descr)
+Flag::Flag(bool logic)
+	: PlayerImmovable(&g_flag_descr, logic)
 {
 	m_anim = 0;
 	m_building = 0;
@@ -94,12 +94,12 @@ Flag::create [static]
 Create a flag at the given location
 ===============
 */
-Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
+Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords, bool logic)
 {
 	Road *road = 0;
 	BaseImmovable *imm = g->get_map()->get_immovable(coords);
 
-	Flag *flag = new Flag;
+	Flag *flag = new Flag(g->is_game());
 	flag->set_owner(owner);
 	flag->m_position = coords;
 	
@@ -333,16 +333,6 @@ void Flag::init(Editor_Game_Base *g)
 
 /*
 ===============
-Flag::init_for_game
-===============
-*/
-void Flag::init_for_game(Game *g)
-{
-	PlayerImmovable::init_for_game(g);
-}
-
-/*
-===============
 Flag::cleanup
 
 Detach building and free roads.
@@ -367,18 +357,6 @@ void Flag::cleanup(Editor_Game_Base *g)
 	unset_position(g, m_position);
 	
 	PlayerImmovable::cleanup(g);
-}
-
-/*
-===============
-Flag::cleanup_for_game
-
-Detach building and free roads.
-===============
-*/
-void Flag::cleanup_for_game(Game *g)
-{
-	PlayerImmovable::cleanup_for_game(g);
 }
 
 /*
@@ -424,8 +402,8 @@ Road::~Road
 Construction and destruction. Most of the actual work is done in init/cleanup.
 ===============
 */
-Road::Road()
-	: PlayerImmovable(&g_road_descr)
+Road::Road(bool logic)
+	: PlayerImmovable(&g_road_descr, logic)
 {
 	m_type = 0;
 	m_start = m_end = 0;
@@ -448,20 +426,18 @@ Road::create [static]
 Create a road between the given flags, using the given path.
 ===============
 */
-Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path)
+Road *Road::create(Editor_Game_Base *g, int type, Flag *start, Flag *end, const Path &path, bool logic)
 {
 	assert(start->get_position() == path.get_start());
 	assert(end->get_position() == path.get_end());
 
-	Road *r = new Road;
+	Road *r = new Road(logic);
 	r->set_owner(start->get_owner());
 	r->m_type = type;
 	r->m_start = start;
 	r->m_end = end;
 	r->set_path(g, path);
 	r->init(g);
-	// TEMP
-	r->init_for_game(static_cast<Game*>(g));
 
    return r;
 }
@@ -734,7 +710,7 @@ void Road::postsplit(Editor_Game_Base *gg, Flag *flag)
 	mark_map(g);
 	
 	// create the new road
-	Road *newroad = new Road;
+	Road *newroad = new Road(g->is_game());
 	newroad->set_owner(get_owner());
 	newroad->m_type = m_type;
 	newroad->m_start = flag;

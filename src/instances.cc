@@ -148,8 +148,9 @@ Map_Object::Map_Object
 Zero-initialize a map object
 ===============
 */
-Map_Object::Map_Object(Map_Object_Descr* descr)
+Map_Object::Map_Object(Map_Object_Descr* descr, bool logic)
 {
+   m_logic = logic;
 	m_descr = descr;
 	m_serial = 0;
 }
@@ -225,21 +226,6 @@ void Map_Object::init(Editor_Game_Base* g)
 
 /*
 ===============
-Map_Object::init_for_game
-
-Make sure you call this from derived classes!
-
-Initialize the object by adding it to the object manager.
-===============
-*/
-void Map_Object::init_for_game(Game* g)
-{
-	// nothing to do
-}
-
-
-/*
-===============
 Map_Object::cleanup
 
 Make sure you call this from derived classes!
@@ -248,18 +234,6 @@ Make sure you call this from derived classes!
 void Map_Object::cleanup(Editor_Game_Base *g)
 {
 	g->get_objects()->remove(this);
-}
-
-/*
-===============
-Map_Object::cleanup_for_game
-
-Make sure you call this from derived classes!
-===============
-*/
-void Map_Object::cleanup_for_game(Game *g)
-{
-   // nothing to do
 }
 
 /*
