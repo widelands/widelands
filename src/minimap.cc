@@ -31,33 +31,6 @@ MiniMapView
 ==============================================================================
 */
 
-/** class MiniMapView
- *
- * MiniMapView is the panel that represents the pure representation of the
- * map, without any borders or gadgets.
- */
-class MiniMapView : public Panel {
-public:
-	MiniMapView(Panel *parent, int x, int y, Interactive_Player *plr);
-
-	UISignal2<int,int> warpview;
-
-	void set_view_pos(int x, int y);
-
-	// Drawing & event handling
-	void draw(RenderTarget* dst);
-
-	bool handle_mouseclick(uint btn, bool down, int x, int y);
-
-private:
-	Interactive_Player	*m_player;
-	Map						*m_map;
-	int						m_viewx, m_viewy;
-	
-	uint			m_pic_map_spot;
-};
-
-
 /*
 ===============
 MiniMapView::MiniMapView
@@ -65,17 +38,23 @@ MiniMapView::MiniMapView
 Initialize the minimap object
 ===============
 */
-MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Player *plr)
+MiniMapView::MiniMapView(Panel *parent, int x, int y, Interactive_Base *plr, uint fx = 0, uint fy = 0)
 	: Panel(parent, x, y, 10, 10)
 {
 	m_player = plr;
-	m_map = plr->get_game()->get_map();
+	m_map = plr->get_map();
 
 	m_viewx = m_viewy = 0;
 
 	set_size(m_map->get_width(), m_map->get_height());
 	
 	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.bmp", RGBColor(0,0,255));
+   m_fx=fx;
+   m_fy=fy;
+
+   if(m_fx==0) m_fx=m_map->get_width();
+   if(m_fy==0) m_fy=m_map->get_height();
+
 }
 
 /** MiniMapView::set_view_pos(int x, int y)
@@ -104,7 +83,7 @@ void MiniMapView::draw(RenderTarget* dst)
 	int x, y;
 	int w, h;
 
-	dst->renderminimap(Point(0,0), m_player->get_maprenderinfo());
+	dst->renderminimap(Point(0,0), m_player->get_maprenderinfo(), m_fx, m_fy);
 	
 	// draw the view pos marker
 	g_gr->get_picture_size(m_pic_map_spot, &w, &h);
@@ -154,7 +133,7 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-MiniMap::MiniMap(Interactive_Player *plr, UniqueWindow *reg)
+MiniMap::MiniMap(Interactive_Base *plr, UniqueWindow *reg)
 	: Window(plr, 200, 150, 10, 10, "Map")
 {
 	m_registry = reg;

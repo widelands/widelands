@@ -24,6 +24,10 @@
 #include "editor.h"
 #include "map.h"
 #include "player.h"
+#include "minimap.h"
+
+
+#include "IntPlayer.h"
 
 /**********************************************
  *
@@ -41,20 +45,28 @@ construct editor sourroundings
 Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    m_editor = e;
 
+   // The mapview. watch the map!!!
    m_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
    //      main_mapview->warpview.set(this, &Interactive_Player::mainview_move);
    //     main_mapview->fieldclicked.set(this, &Interactive_Player::field_action);
 
-   //    m_buildroad = false;
+  
+   // The panel. Tools, infos and gimmicks
+   m_panel = new Window(this, 0, get_h()-PANEL_HEIGHT, get_w(), PANEL_HEIGHT, "PANEL");
 
    // user interface buttons
    int x = (get_w() - (4*34)) >> 1;
    int y = get_h() - 34;
    Button *b;
 
+ 		new MiniMapView(this, 50, 50, this, 100, 100);
+
+		// make sure the viewpos marker is at the right pos to start with
+  // new MiniMapView(this, 50, 50, this, 0, 0);
+
    // temp (should be toggle messages)
    b = new Button(this, x, y, 34, 34, 2);
-   //      b->clicked.set(this, &Interactive_Player::exit_game_btn);
+   b->clicked.set(this, &Interactive_Player::exit_game_btn);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.bmp", RGBColor(0,0,255)));
    // temp
 
@@ -69,8 +81,6 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b = new Button(this, x+102, y, 34, 34, 2);
    //      b->clicked.set(this, &Interactive_Player::toggle_buildhelp);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.bmp", RGBColor(0,0,255)));
-   // Setup all screen elements
-   m_mapview = new Map_View(this, 0, 0, get_w(), get_h(), this);
 }
 
 /****************************************
@@ -160,3 +170,15 @@ void Editor_Interactive::recalc_overlay(FCoords fc)
 
    m_maprenderinfo.overlay_basic[fc.y*map->get_width() + fc.x] = code;
 }
+
+
+/** Editor_Interactive::exit_game_btn(void *a)
+ *
+ * Handle exit button
+ */
+void Editor_Interactive::exit_game_btn()
+{
+	end_modal(0);
+}
+
+

@@ -79,7 +79,7 @@ struct Bitmap {
 	
 	void blit(Point dst, Bitmap* src, Rect srcrc);
 
-	void draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc);
+	void draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx, uint fy);
 	void draw_animframe(Point dst, const AnimFrame* frame, Rect rc, const RGBColor* plrclrs);
 	
 	// sw16_terrain.cc
@@ -193,7 +193,7 @@ public:
 	                      int srcx, int srcy, int w, int h);
 
 	virtual void rendermap(const MapRenderInfo* mgi, Point viewofs);
-	virtual void renderminimap(Point pt, const MapRenderInfo* mri);
+	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint fx, uint fy);
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs = 0);
 };

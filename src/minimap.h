@@ -22,22 +22,48 @@
 
 #include "ui.h"
 
-class Interactive_Player;
+class Interactive_Base;
 class Player;
 class Map;
 struct UniqueWindow;
 
+
+/** class MiniMapView
+ *
+ * MiniMapView is the panel that represents the pure representation of the
+ * map, without any borders or gadgets.
+ */
+class MiniMapView : public Panel {
+public:
+	MiniMapView(Panel *parent, int x, int y, Interactive_Base *plr, uint fx = 0, uint fy = 0);
+
+	UISignal2<int,int> warpview;
+
+	void set_view_pos(int x, int y);
+
+	// Drawing & event handling
+	void draw(RenderTarget* dst);
+
+	bool handle_mouseclick(uint btn, bool down, int x, int y);
+
+private:
+	Interactive_Base	*m_player;
+	Map						*m_map;
+	int						m_viewx, m_viewy;
+	uint                  m_fx, m_fy;
+
+	uint			m_pic_map_spot;
+};
 
 /* class MiniMap
  *
  * Provide a minimap view (eventually with all sorts of gadgets, e.g.
  * show/hide buildings)
  */
-class MiniMapView;
 
 class MiniMap : public Window {
 public:
-	MiniMap(Interactive_Player *parent, UniqueWindow *reg);
+	MiniMap(Interactive_Base *parent, UniqueWindow *reg);
 	~MiniMap();
 
 	UISignal2<int,int> warpview; // screen coordinates of viewport

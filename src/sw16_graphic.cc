@@ -660,7 +660,7 @@ RenderTargetImpl::renderminimap
 Renders a minimap into the topleft of the clipping window
 ===============
 */
-void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri)
+void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri, uint fx, uint fy)
 {
 	Rect rc;
 
@@ -692,7 +692,7 @@ void RenderTargetImpl::renderminimap(Point pt, const MapRenderInfo* mri)
 	if (rc.h <= 0)
 		return;
 	
-	m_bitmap->draw_minimap(Point(pt.x + m_rect.x, pt.y + m_rect.y), mri, rc);
+	m_bitmap->draw_minimap(Point(pt.x + m_rect.x, pt.y + m_rect.y), mri, rc, fx, fy);
 }
 
 

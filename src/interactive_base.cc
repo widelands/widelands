@@ -124,7 +124,7 @@ void Interactive_Base::think()
 	// Call game logic here
    // The game advances
 	m_egbase->think();
-  
+ 
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
 	g_gr->update_fullscreen();
 	

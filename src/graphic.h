@@ -299,7 +299,7 @@ public:
 	                      int srcx, int srcy, int w, int h) = 0;
 
 	virtual void rendermap(const MapRenderInfo* mri, Point viewofs) = 0;
-	virtual void renderminimap(Point pt, const MapRenderInfo* mri) = 0;
+	virtual void renderminimap(Point pt, const MapRenderInfo* mri, uint, uint) = 0;
 	
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs) = 0;
 };

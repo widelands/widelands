@@ -185,25 +185,55 @@ Bitmap::draw_minimap
 Draw the minimap for the given rectangular part of the map at the given point.
 ===============
 */
-void Bitmap::draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc)
+void Bitmap::draw_minimap(Point dst, const MapRenderInfo* mri, Rect rc, uint fx, uint fy)
+   
 {
-	int mapwidth = mri->map->get_width();
-	
-	for(int y = 0; y < rc.h; y++) {
-		ushort* pix = pixels + (dst.y+y)*pitch + dst.x;
-		Field* f = mri->map->get_field(rc.x, rc.y+y);
-		
-		for(int x = 0; x < rc.w; x++, f++, pix++)
-		{
-			if (mri->visibility && !(*mri->visibility)[y*mapwidth + x])
-				*pix = 0;
-			else {
-				Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
-				
-				*pix = tex->get_minimap_color(f->get_brightness());
-			}
-		}
-	}
+   if(fx==(uint)rc.w && fy==(uint)rc.h) {
+      // forced size == natural size. 
+      // use fast rendering
+      int mapwidth = mri->map->get_width();
+
+      for(int y = 0; y < rc.h; y++) {
+         ushort* pix = pixels + (dst.y+y)*pitch + dst.x;
+         Field* f = mri->map->get_field(rc.x, rc.y+y);
+
+         for(int x = 0; x < rc.w; x++, f++, pix++)
+         {
+            if (mri->visibility && !(*mri->visibility)[y*mapwidth + x])
+               *pix = 0;
+            else {
+               Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
+
+               *pix = tex->get_minimap_color(f->get_brightness());
+            }
+         }
+      }
+
+   } else {
+      // fored size is somehow different. slow rendering needed
+      // we center the minimap in the area we got.
+      int mapwidth = mri->map->get_width();
+
+      float xslope=(float)mri->map->get_width()/(float)fx;
+      float yslope=(float)mri->map->get_height()/(float)fy;
+      float xfield=0, yfield=0;
+      for(uint y = 0; y < fy; y++, yfield+=yslope) {
+         ushort* pix = pixels + (dst.y+y)*pitch + dst.x;
+
+         for(uint x = 0; x < fx; x++, pix++, xfield+=xslope)
+         {
+            Field* f = mri->map->get_field((int)(xfield), (int)(yfield));
+            if (mri->visibility && !(*mri->visibility)[((int)(yfield))*mapwidth + (int)(xfield)])
+               *pix = 0;
+            else {
+               Texture* tex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
+
+               *pix = tex->get_minimap_color(f->get_brightness());
+            }
+         }
+         xfield=0;
+      }
+   }
 }
 
 

@@ -40,6 +40,11 @@ class Editor_Interactive : public Interactive_Base {
       void start();
 
    private:
+      static const int PANEL_HEIGHT=100;
+
+      void exit_game_btn();
+     
+      Window* m_panel;
       Editor* m_editor;
       Map_View* m_mapview;
 };
