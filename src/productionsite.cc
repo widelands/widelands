@@ -239,11 +239,17 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			if (act.iparam2 <= 0)
 				throw wexception("animation duration must be positive");
 		} else if (cmd[0] == "mine") {
-			if (cmd.size() != 2)
-				throw wexception("Usage: mine <resource>");
+         char* endp;
+         
+			if (cmd.size() != 3)
+				throw wexception("Usage: mine <resource> <area>");
 
 			act.type = ProductionAction::actMine;
 			act.sparam1=cmd[1]; // what to mine
+         act.iparam1=strtol(cmd[2].c_str(),&endp, 0);
+         if(endp && *endp) 
+            throw wexception("Bad area '%s'", cmd[2].c_str());
+
 		} else if (cmd[0] == "call") {
 			if (cmd.size() != 2)
 				throw wexception("Usage: call <program>");
@@ -847,7 +853,7 @@ void ProductionSite::program_act(Game* g)
 			int pick;
 			Field* f;
 
-			mr.init(map, get_position(), 2);
+			mr.init(map, get_position(), action->iparam1);
 
 			while((f = mr.next())) {
 				uchar fres = f->get_resources();
@@ -883,7 +889,7 @@ void ProductionSite::program_act(Game* g)
 			// Second pass through fields
 			pick = g->logic_rand() % totalchance;
 
-			mr.init(map, get_position(), 2);
+			mr.init(map, get_position(), action->iparam1);
 
 			while((f = mr.next())) {
 				uchar fres = f->get_resources();
