@@ -50,12 +50,16 @@ class Computer_Player {
 		void gain_building (Building*);
 		void lose_building (Building*);
 		
-		void connect_flag_to_another_economy (Flag*);
+		bool construct_building ();
+		
+		bool connect_flag_to_another_economy (Flag*);
+		bool improve_roads (Flag*);
 		
 		struct BuildableField:FCoords {
 			long			next_update_due;
 			
 			bool			reachable;
+			bool			preferred;
 			
 			unsigned char		unowned_land_nearby;
 			
@@ -70,6 +74,7 @@ class Computer_Player {
 			{
 			    next_update_due=0;
 			    reachable=false;
+			    preferred=false;
 			    unowned_land_nearby=0;
 			    trees_nearby=0;
 			    stones_nearby=0;
@@ -83,7 +88,7 @@ class Computer_Player {
 		struct EconomyObserver {
 			Economy*		economy;
 			std::list<Flag*>	flags;
-			
+
 			EconomyObserver (Economy* e) { economy=e; }
 		};
 		
@@ -99,6 +104,8 @@ class Computer_Player {
 				MILITARYSITE,
 				MINE
 			}			type;
+			
+			bool			is_buildable;
 			
 			bool			need_trees;
 			bool			need_stones;
@@ -132,6 +139,7 @@ class Computer_Player {
 		EconomyObserver& get_economy_observer (Economy*);
 		
 		long				next_construction_due;
+		long				inhibit_road_building;
 		
 		void update_buildable_field (BuildableField&);
 		void consider_productionsite_influence (BuildableField&, const Coords&, const BuildingObserver&);

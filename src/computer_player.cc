@@ -17,6 +17,7 @@
  *
  */
 
+#include <queue>
 #include <typeinfo>
 #include "error.h"
 #include "map.h"
@@ -30,15 +31,20 @@
 
 class CheckStepRoadAI : public CheckStep {
 public:
-	CheckStepRoadAI(Player* player, uchar movecaps)
-		: m_player(player), m_movecaps(movecaps) { }
+	CheckStepRoadAI(Player* pl, uchar mc, bool oe)
+		: player(pl), movecaps(movecaps), openend(oe)
+	{ }
+	
+	void set_openend (bool oe)
+	{ openend=oe; }
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
 
 private:
-	Player*							m_player;
-	uchar								m_movecaps;
+	Player*		player;
+	uchar		movecaps;
+	bool		openend;
 };
 
 Computer_Player::Computer_Player (Game *g, uchar pid)
@@ -66,6 +72,8 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 		bo.type=BuildingObserver::BORING;
 		bo.cnt_built=0;
 		bo.cnt_under_construction=0;
+		
+		bo.is_buildable=bld->get_buildable();
 		
 		bo.need_trees=false;
 		bo.need_stones=false;
@@ -102,6 +110,7 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 	
 	total_constructionsites=0;
 	next_construction_due=0;
+	inhibit_road_building=0;
 }
 
 Computer_Player::~Computer_Player ()
@@ -173,63 +182,16 @@ void Computer_Player::think ()
 	
 	// wait a moment so that all fields are classified
 	if (next_construction_due==0)
-	    next_construction_due=game->get_gametime() + 5000;
+	    next_construction_due=game->get_gametime() + 4000;
 	
 	// now build something if possible
 	if (next_construction_due<=game->get_gametime()) {
-	    next_construction_due=game->get_gametime() + 2500;
+	    next_construction_due=game->get_gametime() + 1000;
 	
-	int proposed_building=-1;
-	int proposed_priority=0;
-	Coords proposed_coords;
-	
-	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++) {
-		if (!i->reachable)
-			continue;
-		
-		int maxsize=i->field->get_caps() & BUILDCAPS_SIZEMASK;
-		int prio;
-		
-		std::list<BuildingObserver>::iterator j;
-		for (j=buildings.begin();j!=buildings.end();j++) {
-		    if (j->type==BuildingObserver::MINE)
-			    continue;
-		
-		    if (j->desc->get_size()>maxsize)
-			    continue;
-		    
-		    prio=0;
-		    
-		    if (j->type==BuildingObserver::MILITARYSITE)
-			    prio=i->unowned_land_nearby - i->military_influence*2;
-
-		    if (j->type==BuildingObserver::PRODUCTIONSITE) {
-			    if (j->need_trees)
-				    prio+=i->trees_nearby - 8*i->tree_consumers_nearby;
-
-			    if (j->need_stones)
-				    prio+=i->stones_nearby - 8*i->stone_consumers_nearby;
-		    }
-
-		    // don't waste good land for small huts
-		    prio-=(maxsize - j->desc->get_size()) * 6;
-
-		    if (prio>proposed_priority) {
-			    proposed_building=j->id;
-			    proposed_priority=prio;
-			    proposed_coords=*i;
-		    }
-		}
-	}
-	
-	// if we want to construct a new building, send the command now
-	if (proposed_building>=0) {
-		log ("want to construct building %d\n", proposed_building);
-		
-		game->send_player_build (player_number, proposed_coords, proposed_building);
-		
+	    if (construct_building()) {
+		inhibit_road_building=game->get_gametime() + 1500;
 		return;
-	}
+	    }
 	}
 	
 	// if nothing else is to do, update flags and economies
@@ -260,14 +222,23 @@ void Computer_Player::think ()
 			continue;
 		}
 		
-		// try to connect to another economy
-		if (economies.size()>1) {
-			connect_flag_to_another_economy (i->flags.front());
-
-			// cycle through flags one at a time
-			i->flags.push_back (i->flags.front());
-			i->flags.pop_front ();
+		bool finish=false;
+		
+		if (inhibit_road_building<=game->get_gametime()) {
+		    // try to connect to another economy
+		    if (economies.size()>1)
+			finish=connect_flag_to_another_economy(i->flags.front());
+		
+		    if (!finish)
+			finish=improve_roads(i->flags.front());
 		}
+
+		// cycle through flags one at a time
+		i->flags.push_back (i->flags.front());
+		i->flags.pop_front ();
+		
+		if (finish)
+		    return;
 		
 		i++;
 	}
@@ -304,6 +275,92 @@ void Computer_Player::think ()
 	}
 }
 
+bool Computer_Player::construct_building ()
+{
+	int spots_avail[4];
+	int i;
+	
+	for (i=0;i<4;i++)
+		spots_avail[i]=0;
+	
+	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++)
+		spots_avail[i->field->get_caps() & BUILDCAPS_SIZEMASK]++;
+	
+	int expand_factor=1;
+	
+	if (spots_avail[BUILDCAPS_BIG]<2)
+		expand_factor++;
+	if (spots_avail[BUILDCAPS_MEDIUM]+spots_avail[BUILDCAPS_BIG]<4)
+		expand_factor++;
+	if (spots_avail[BUILDCAPS_SMALL]+spots_avail[BUILDCAPS_MEDIUM]+spots_avail[BUILDCAPS_BIG]<8)
+		expand_factor++;
+	
+	int proposed_building=-1;
+	int proposed_priority=0;
+	Coords proposed_coords;
+	
+	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++) {
+		if (!i->reachable)
+			continue;
+		
+		int maxsize=i->field->get_caps() & BUILDCAPS_SIZEMASK;
+		int prio;
+		
+		std::list<BuildingObserver>::iterator j;
+		for (j=buildings.begin();j!=buildings.end();j++) {
+		    if (!j->is_buildable)
+			    continue;
+		
+		    if (j->type==BuildingObserver::MINE)
+			    continue;
+		
+		    if (j->desc->get_size()>maxsize)
+			    continue;
+		    
+		    prio=0;
+		    
+		    if (j->type==BuildingObserver::MILITARYSITE)
+			    prio=(i->unowned_land_nearby - i->military_influence*2) * expand_factor / 4;
+
+		    if (j->type==BuildingObserver::PRODUCTIONSITE) {
+			    if (j->need_trees)
+				    prio+=i->trees_nearby - 8*i->tree_consumers_nearby;
+
+			    if (j->need_stones)
+				    prio+=i->stones_nearby - 8*i->stone_consumers_nearby;
+		    }
+
+		    if (i->preferred)
+			prio+=prio/2 + 1;
+		    else
+			prio--;
+
+		    // don't waste good land for small huts
+		    prio-=(maxsize - j->desc->get_size()) * 6;
+		    
+		    // don't have too many construction sites
+		    prio-=total_constructionsites*total_constructionsites;
+
+		    if (prio>proposed_priority) {
+			    proposed_building=j->id;
+			    proposed_priority=prio;
+			    proposed_coords=*i;
+		    }
+		}
+	}
+	
+	// if we want to construct a new building, send the command now
+	if (proposed_building>=0) {
+		log ("ComputerPlayer(%d): want to construct building %d\n", player_number, proposed_building);
+		
+		game->send_player_build (player_number, proposed_coords, proposed_building);
+		
+		return true;
+	}
+	
+	return false;
+}
+
 struct FindFieldUnowned:FindField {
 	virtual bool accept (const FCoords) const;
 };
@@ -329,11 +386,25 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 	map->find_immovables (field, 8, &immovables);
 	
 	field.reachable=false;	
+	field.preferred=false;
+	
 	field.military_influence=0;
 	field.trees_nearby=0;
 	field.stones_nearby=0;
 	field.tree_consumers_nearby=0;
 	field.stone_consumers_nearby=0;
+	
+	FCoords fse;
+	map->get_neighbour (field, Map_Object::WALK_SE, &fse);
+	
+	BaseImmovable* imm=fse.field->get_immovable();
+	if (imm!=0) {
+	    if (imm->get_type()==BaseImmovable::FLAG)
+		field.preferred=true;
+		
+	    if (imm->get_type()==BaseImmovable::ROAD && (fse.field->get_caps() & BUILDCAPS_FLAG))
+		field.preferred=true;
+	}
 	
 	for (unsigned int i=0;i<immovables.size();i++) {
 		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
@@ -456,10 +527,10 @@ bool FindFieldWithFlagOrRoad::accept (FCoords fc) const
 	return false;
 }
 
-void Computer_Player::connect_flag_to_another_economy (Flag* flag)
+bool Computer_Player::connect_flag_to_another_economy (Flag* flag)
 {
 	FindFieldWithFlagOrRoad functor;
-	CheckStepRoadAI check(player, MOVECAPS_WALK);
+	CheckStepRoadAI check(player, MOVECAPS_WALK, true);
 	std::vector<Coords> reachable;
 	
 	// first look for possible destinations
@@ -467,7 +538,7 @@ void Computer_Player::connect_flag_to_another_economy (Flag* flag)
 	map->find_reachable_fields (flag->get_position(), 16, &reachable, &check, functor);
 	
 	if (reachable.empty())
-		return;
+		return false;
 	
 	// then choose the one closest to the originating flag
 	int closest, distance;
@@ -490,10 +561,95 @@ void Computer_Player::connect_flag_to_another_economy (Flag* flag)
 	
 	// and finally build the road
 	Path* path=new Path();
+	check.set_openend (false);
 	if (map->findpath(flag->get_position(), reachable[closest], 0, path, &check) < 0)
-		return;
+		return false;
 	
 	game->send_player_build_road (player_number, path);
+	return true;
+}
+
+struct NearFlag {
+    Flag*	flag;
+    long	cost;
+    long	distance;
+    
+    NearFlag (Flag* f, long c, long d)
+    { flag=f; cost=c; distance=d; }
+    
+    bool operator< (const NearFlag& f) const
+    { return cost>f.cost; }
+    
+    bool operator== (const Flag* f) const
+    { return flag==f; }
+};
+
+struct CompareDistance {
+    bool operator() (const NearFlag& a, const NearFlag& b) const
+    { return a.distance < b.distance; }
+};
+
+bool Computer_Player::improve_roads (Flag* flag)
+{
+	std::priority_queue<NearFlag> queue;
+	std::vector<NearFlag> nearflags;
+	int i;
+	
+	queue.push (NearFlag(flag, 0, 0));
+	
+	while (!queue.empty()) {
+    	    std::vector<NearFlag>::iterator f=find(nearflags.begin(), nearflags.end(), queue.top().flag);
+	    if (f!=nearflags.end()) {
+		queue.pop ();
+		continue;
+	    }
+	    
+	    nearflags.push_back (queue.top());
+	    queue.pop ();
+	    
+	    NearFlag& nf=nearflags.back();
+	    
+	    for (i=1;i<=6;i++) {
+		Road* road=nf.flag->get_road(i);
+		
+		if (!road) continue;
+		
+		Flag* endflag=road->get_flag(Road::FlagStart);
+		if (endflag==nf.flag)
+		    endflag=road->get_flag(Road::FlagEnd);
+		
+		long dist=map->calc_distance(flag->get_position(), endflag->get_position());
+		if (dist>16)	// out of range
+		    continue;
+		
+		queue.push (NearFlag(endflag, nf.cost+road->get_path().get_nsteps(), dist));
+	    }
+	}
+	
+	sort (nearflags.begin(), nearflags.end(), CompareDistance());
+
+	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
+	
+	for (i=1;i<nearflags.size();i++) {
+	    NearFlag& nf=nearflags[i];
+	    
+	    if (2*nf.distance+2>=nf.cost)
+		continue;
+		
+	    Path* path=new Path();
+	    if (map->findpath(flag->get_position(), nf.flag->get_position(), 0, path, &check)>=0 &&
+		2*path->get_nsteps()+2<nf.cost) {
+
+		log ("Improved road graph: %d -> %d\n", nf.cost, path->get_nsteps());
+
+		game->send_player_build_road (player_number, path);
+		return true;
+	    }
+	    
+	    delete path;
+	}
+
+	return false;
 }
 
 // this is called whenever we gain ownership of a PlayerImmovable
@@ -540,21 +696,23 @@ void Computer_Player::lose_field (const FCoords& fc)
 /* CheckStepRoadAI */
 bool CheckStepRoadAI::allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const
 {
-	uchar endcaps = m_player->get_buildcaps(end);
+	uchar endcaps = player->get_buildcaps(end);
 
 	// Calculate cost and passability
-	if (!(endcaps & m_movecaps)) {
-		uchar startcaps = m_player->get_buildcaps(start);
+	if (!(endcaps & movecaps)) {
+		return false;
+//		uchar startcaps = player->get_buildcaps(start);
 
-		if (!((endcaps & MOVECAPS_WALK) && (startcaps & m_movecaps & MOVECAPS_SWIM)))
-			return false;
+//		if (!((endcaps & MOVECAPS_WALK) && (startcaps & movecaps & MOVECAPS_SWIM)))
+//			return false;
 	}
 
 	// Check for blocking immovables
 	BaseImmovable *imm = map->get_immovable(end);
 	if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-//		if (id != stepLast)
-//			return false;
+		if (id!=stepLast && !openend)
+			return false;
+
 		if (imm->get_type()==Map_Object::FLAG)
 			return true;
 
@@ -569,8 +727,8 @@ bool CheckStepRoadAI::reachabledest(Map* map, FCoords dest) const
 {
 	uchar caps = dest.field->get_caps();
 
-	if (!(caps & m_movecaps)) {
-		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+	if (!(caps & movecaps)) {
+		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
 			return false;
 
 		if (!map->can_reach_by_water(dest))

@@ -222,7 +222,7 @@ void Player::build_road(const Path *path)
 
 		imm = map->get_immovable(coords);
 		if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-			log("%i: building road, small immovable in the way\n", get_player_number());
+			log("%i: building road, small immovable in the way, type=%d\n", get_player_number(), imm->get_type());
 			return;
 		}
 		int caps = get_buildcaps(coords);
