@@ -78,7 +78,9 @@ widelands_SOURCES=main.cc \
 						s2map.cc \
 						criterr.h \
 						criterr.cc \
-						myassert.h
+						myassert.h \
+						md5.cc \
+						md5.h
 						
 
 

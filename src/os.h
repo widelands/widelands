@@ -29,7 +29,7 @@
 	#include <windows.h>
 	#define SEP			"\\"
 	#define CSEP		'\\'
-	#ifdef _DEBUG			//chk ths plz
+	#ifdef _DEBUG			//chk ths plz. Acked by Holger
 		#define DEBUG
 	#endif //_DEBUG
 #else //WIN32
