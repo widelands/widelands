@@ -24,6 +24,7 @@
 #include "profile.h"
 #include "soldier.h"
 #include "transport.h"
+#include "tribe.h"
 #include "worker.h"
 
 
@@ -198,7 +199,8 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
       Soldier* s = m_soldiers[i];
 
       m_soldiers[i] = 0;
-      s->set_location(0);
+      if(g->get_objects()->object_still_available(s))
+         s->set_location(0);
    }
 
 	// unconquer land
@@ -237,10 +239,10 @@ Issue the soldier request
 */
 void MilitarySite::request_soldier(Game* g)
 {
-	int wareid = g->get_safe_ware_id("soldier");
+	int workerid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
 
 	m_soldier_request =
-		new Request(this, wareid, &MilitarySite::request_soldier_callback, this);
+		new Request(this, workerid, &MilitarySite::request_soldier_callback, this, Request::WORKER);
 }
 
 

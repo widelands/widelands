@@ -56,16 +56,19 @@ public:
 };
 
 class ConstructionSite : public Building {
+   friend class Widelands_Map_Buildingdata_Data_Packet;
+
 	MO_DESCR(ConstructionSite_Descr);
 
 public:
 	ConstructionSite(ConstructionSite_Descr* descr);
 	virtual ~ConstructionSite();
 
+   virtual int get_building_type(void) { return Building::CONSTRUCTIONSITE; }
 	virtual int get_size();
 	virtual uint get_playercaps();
 	virtual uint get_ui_anim();
-	virtual std::string get_census_string();
+   virtual std::string get_census_string();
 	virtual std::string get_statistics_string();
 	uint get_built_per64k();
 
@@ -86,6 +89,8 @@ public:
 	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
+   void log_general_info(Editor_Game_Base* egbase);
+      
 protected:
 	virtual UIWindow* create_options_window(Interactive_Player* plr,
 		UIWindow** registry);

@@ -31,17 +31,19 @@
 // class Player
 //
 //
-Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const uchar *playercolor)
+Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, const char* name, const uchar *playercolor)
 {
-	m_type = type;
+   m_see_all = false;
+   m_type = type;
 	m_plnum = plnum;
 	m_tribe = tribe;
 	m_egbase = g;
-   seen_fields=0;
    
 	for(int i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
 
+   set_name(name);
+   
    // Allow all buildings per default
    int i; 
    m_allowed_buildings.resize(m_tribe->get_nrbuildings());
@@ -51,13 +53,11 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
 
 Player::~Player(void)
 {
-   if(seen_fields)
-      delete seen_fields;
 }
 
 /*
 ===============
-Player::init_for_game
+Player::init
 
 Prepare the player for in-game action
 
@@ -65,20 +65,23 @@ we could use static cast to upcast our Editor_Game_Base object
 but instead, we let us pass the object once again
 ===============
 */
-void Player::init_for_game(Game* game)
+void Player::init(Editor_Game_Base* game, bool hq)
 {
 	Map *map = game->get_map();
 
-	seen_fields = new std::vector<bool>(map->get_width()*map->get_height(), false);
+   seen_fields.resize(0);
+	seen_fields.resize(map->get_width()*map->get_height(), false); 
 
 	// place the HQ
-	const Coords &c = map->get_starting_pos(m_plnum);
-	int idx = get_tribe()->get_building_index("headquarters");
-	if (idx < 0)
-		throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
-	Warehouse *wh = (Warehouse *)game->warp_building(c, m_plnum, idx);
+   if(hq) {
+      const Coords &c = map->get_starting_pos(m_plnum);
+      int idx = get_tribe()->get_building_index("headquarters");
+      if (idx < 0)
+         throw wexception("Tribe %s lacks headquarters", get_tribe()->get_name());
+      Warehouse *wh = (Warehouse *)game->warp_building(c, m_plnum, idx);
 
-	get_tribe()->load_warehouse_with_start_wares(game, wh);
+      get_tribe()->load_warehouse_with_start_wares(game, wh);
+   }
 }
 
 
@@ -365,7 +368,7 @@ void Player::flagaction(Flag* flag, int action)
 	switch(action) {
 	case FLAGACTION_GEOLOGIST:
 		{
-		int id = g->get_ware_id("geologist");
+		int id = get_tribe()->get_worker_index("geologist");
 
 		if (id < 0) {
 			log("Tribe defines no geologist\n");
@@ -391,4 +394,45 @@ void Player::allow_building(int i, bool t) {
    m_allowed_buildings.resize(m_tribe->get_nrbuildings());
 
    m_allowed_buildings[i]=t;
+}
+
+/*
+ * Economy stuff below
+ */
+void Player::add_economy(Economy* eco) {
+   if(has_economy(eco)) return;
+   m_economies.push_back(eco);
+}
+
+void Player::remove_economy(Economy* eco) {
+   if(!has_economy(eco)) return;
+   std::vector<Economy*>::iterator i = m_economies.begin();
+   while(i!=m_economies.end()) { 
+      if(*i == eco) {
+         m_economies.erase(i);
+         return;
+      }
+      ++i;
+   }
+   assert(0); // Never here
+}
+
+bool Player::has_economy(Economy* eco) {
+   std::vector<Economy*>::iterator  i = m_economies.begin();
+   while(i!=m_economies.end()) {
+      if( *i == eco) return true;
+      ++i;
+   }
+   return false;
+}
+
+int Player::get_economy_number(Economy* eco) {
+   assert(has_economy(eco));
+
+   std::vector<Economy*>::iterator  i = m_economies.begin();
+   while(i!=m_economies.end()) {
+      if( *i == eco) return (i - m_economies.begin());
+      ++i;
+   }
+   assert(0); // never here
 }

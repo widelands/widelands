@@ -37,7 +37,7 @@ Widelands_Map_Terrain_Data_Packet::~Widelands_Map_Terrain_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Terrain_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Terrain_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    Map* map=egbase->get_map();
    World* world=map->get_world();
 
@@ -81,7 +81,7 @@ void Widelands_Map_Terrain_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
 /*
  * Write Function
  */
-void Widelands_Map_Terrain_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Terrain_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    // first of all the magic bytes
    fw->Unsigned16(PACKET_TERRAINS);
 
@@ -102,8 +102,7 @@ void Widelands_Map_Terrain_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* e
       Terrain_Descr* ter=world->get_terrain(i);
       smap[ter->get_name()]=i;
       fw->Unsigned16(i);
-      fw->Data(ter->get_name(), strlen(ter->get_name()));
-      fw->Unsigned8('\0');
+      fw->CString(ter->get_name());
    }
 
    // Now, all terrains as unsigned chars in order

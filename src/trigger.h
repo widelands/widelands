@@ -23,6 +23,7 @@
 #include <string>
 #include "error.h"
 #include "cmd_queue.h"
+#include "queue_cmd_ids.h"
 
 class Game;
 class FileRead;
@@ -62,6 +63,8 @@ class Trigger {
       virtual void Write(FileWrite*)=0;
       virtual void Read(FileRead*, Editor_Game_Base*)=0;
 
+      
+
 
    protected:
       // This is only for child classes to toggle the trigger
@@ -79,7 +82,15 @@ class Cmd_CheckTrigger:public BaseCommand {
 	int trigger_id;
 
     public:
+   Cmd_CheckTrigger(void) : BaseCommand(0) { } // For savegame loading
 	Cmd_CheckTrigger (int, int);
+      
+   // Write these commands to a file (for savegames)
+   virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+   virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
+   virtual int get_id(void) { return QUEUE_CMD_CHECK_TRIGGER; } // Get this command id
+
 	
 	virtual void execute (Game*);
 };

@@ -77,7 +77,7 @@ void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileRead* fr, Map* map) throw
 /*
  * Read Function
  */
-void Widelands_Map_Elemental_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Elemental_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    Pre_Read(fr, egbase->get_map());
 }
 
@@ -85,7 +85,7 @@ void Widelands_Map_Elemental_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
 /*
  * Write Function
  */
-void Widelands_Map_Elemental_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Elemental_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    // first of all the magic bytes
    fw->Data(WLMF_MAGIC, sizeof(WLMF_MAGIC));
 

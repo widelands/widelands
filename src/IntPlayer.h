@@ -58,6 +58,12 @@ class Interactive_Player : public Interactive_Base {
 		inline uchar get_player_number(void) { return m_player_number; }
 		inline Player *get_player() { assert(m_game); return m_game->get_player(m_player_number) ; }
 
+      // for savegames
+      void set_player_number(uint plrn);
+      
+      // Visibility for drawing
+      std::vector<bool>* get_visibility(void);
+      
    private:
       Game*		m_game;
       uchar		m_player_number;

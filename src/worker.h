@@ -22,6 +22,7 @@
 
 #include "animation.h"
 #include "bob.h"
+#include "cmd_queue.h"
 #include <string>
 #include <vector>
 
@@ -55,6 +56,7 @@ struct WorkerAction;
 class Worker_Descr : public Bob_Descr {
    friend class Tribe_Descr;
    friend class Warehouse;
+   friend class WorkerProgram;
 
    typedef std::map<std::string, WorkerProgram*> ProgramMap;
 
@@ -91,16 +93,14 @@ class Worker_Descr : public Bob_Descr {
    inline uint get_menu_pic() { return m_menu_pic; }
    inline DirAnimations *get_walk_anims() { return &m_walk_anims; }
    inline DirAnimations *get_right_walk_anims(bool carries_ware) { if(carries_ware) return &m_walkload_anims; return &m_walk_anims; }
-   inline int get_ware_id() const { return m_ware_id; }
    const WorkerProgram* get_program(std::string name) const;
 
-   virtual Worker_Type get_worker_type(void) { return NORMAL; }
+   virtual Worker_Type get_worker_type(void) const { return NORMAL; }
 
    // For leveling
    inline int get_max_exp(void) { return m_max_experience; }
    inline int get_min_exp(void) { return m_min_experience; }
    const char* get_becomes(void) { return m_becomes.size() ? m_becomes.c_str() : 0; }
-   void set_ware_id(int idx);
 
    Worker *create(Editor_Game_Base *g, Player *owner, PlayerImmovable *location, Coords coords);
 
@@ -115,7 +115,6 @@ class Worker_Descr : public Bob_Descr {
    uint				m_menu_pic;
    DirAnimations	m_walk_anims;
    DirAnimations	m_walkload_anims;
-   int				m_ware_id;
    bool        m_buildable;
    BuildCost      m_buildcost;
    int            m_max_experience, m_min_experience;
@@ -125,6 +124,7 @@ class Worker_Descr : public Bob_Descr {
 
 class Worker : public Bob {
    friend class WorkerProgram;
+   friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
 
    MO_DESCR(Worker_Descr);
 
@@ -133,14 +133,13 @@ class Worker : public Bob {
    Worker(Worker_Descr *descr);
    virtual ~Worker();
 
-   virtual Worker_Descr::Worker_Type get_worker_type(void) { return get_descr()->get_worker_type(); }
+   virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
    virtual int get_bob_type() { return Bob::WORKER; }
 
-
-   inline int get_ware_id() const { return get_descr()->get_ware_id(); }
-   inline uint get_idle_anim() const { return get_descr()->get_idle_anim(); }
+   inline uint get_animation(const char* str) { return get_descr()->get_animation(str); }
    inline uint get_menu_pic() const { return get_descr()->get_menu_pic(); }
    const char* get_becomes(void) { return get_descr()->get_becomes(); }
+   inline Tribe_Descr *get_tribe() { return get_descr()->get_tribe(); }
 
    virtual uint get_movecaps();
 
@@ -166,7 +165,14 @@ class Worker : public Bob {
    // For leveling
    void level(Game*);
    void create_needed_experience(Game*);
+   // For leveling
+   void gain_experience(Game*);
+   int get_needed_experience(void) { return m_needed_exp; }
+   int get_current_experience(void) { return m_current_exp; }
 
+   // debug
+   void log_general_info(Editor_Game_Base*);
+   
    protected:
    virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
    virtual void init_auto_task(Game* g);
@@ -193,11 +199,7 @@ class Worker : public Bob {
 
    void start_task_geologist(Game* g, int attempts, int radius, std::string subcommand);
 
-   // For leveling
-   void gain_experience(Game*);
-   int get_needed_experience(void) { return m_needed_exp; }
-   int get_current_experience(void) { return m_current_exp; }
-
+   
    private: // task details
    void transfer_update(Game* g, State* state);
    void transfer_signal(Game* g, State* state);
@@ -229,7 +231,7 @@ class Worker : public Bob {
    void fugitive_signal(Game* g, State* state);
 
    void geologist_update(Game* g, State* state);
-
+   
    protected:
    static Task taskTransfer;
    static Task taskBuildingwork;
@@ -279,7 +281,7 @@ class Carrier_Descr : public Worker_Descr {
       Carrier_Descr(Tribe_Descr *tribe, const char *name);
       virtual ~Carrier_Descr(void);
 
-      virtual Worker_Type get_worker_type(void) { return CARRIER; }
+      virtual Worker_Type get_worker_type(void) const { return CARRIER; }
 
    protected:
       virtual Bob *create_object();
@@ -287,6 +289,8 @@ class Carrier_Descr : public Worker_Descr {
 };
 
 class Carrier : public Worker {
+   friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
+
    MO_DESCR(Carrier_Descr);
 
    public:
@@ -296,7 +300,7 @@ class Carrier : public Worker {
    bool notify_ware(Game* g, int flag);
 
    public:
-   virtual Worker_Descr::Worker_Type get_worker_type(void) { return get_descr()->get_worker_type(); }
+   virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
 
    void start_task_road(Game* g, Road* road);
    void update_task_road(Game* g);
@@ -322,5 +326,21 @@ class Carrier : public Worker {
    int	m_acked_ware;	// -1: no ware acked; 0/1: acked ware for start/end flag of road
 };
 
+class Cmd_Incorporate:public BaseCommand {
+    private:
+	    Worker* worker;
+	    
+    public:
+	    Cmd_Incorporate(void) : BaseCommand(0) { } // For savegame loading
+       Cmd_Incorporate (int t, Worker* w);
+       
+	    void execute (Game* g);
+       // Write these commands to a file (for savegames)
+       virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+       virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
+       virtual int get_id(void) { return QUEUE_CMD_INCORPORATE; } // Get this command id
+
+};
 
 #endif // __S__WORKER_DESCR_H

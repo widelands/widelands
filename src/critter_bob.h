@@ -50,6 +50,7 @@ class Critter_Bob_Descr : public Bob_Descr {
 };
 
 class Critter_Bob : public Bob {
+   friend class Widelands_Map_Bobdata_Data_Packet;
 	friend class Critter_BobProgram;
 
    MO_DESCR(Critter_Bob_Descr);

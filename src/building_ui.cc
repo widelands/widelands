@@ -214,8 +214,7 @@ void BulldozeConfirm::bulldoze()
       if(egbase->is_game()) {
          // Game
          Game* g=static_cast<Game*>(egbase);
-         Interactive_Player* player=static_cast<Interactive_Player*>(m_iabase);
-	 g->send_player_bulldoze (todestroy);
+         g->send_player_bulldoze (todestroy);
       } else {
          // Editor
          Player* plr=todestroy->get_owner();
@@ -306,17 +305,13 @@ Initialize the panel.
 WaresQueueDisplay::WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, WaresQueue* queue, Game* g)
 	: UIPanel(parent, x, y, 0, Height)
 {
-	Ware_Descr* descr;
 	Item_Ware_Descr* waredescr;
 
 	m_queue = queue;
 	m_max_width = maxw;
 
-	descr = g->get_ware_description(m_queue->get_ware());
-	if (descr->is_worker())
-		throw wexception("WaresQueueDisplay: not implemented for workers");
+	waredescr = queue->get_owner()->get_tribe()->get_ware_descr(m_queue->get_ware());
 
-	waredescr = (Item_Ware_Descr*)descr;
 	m_pic_empty = waredescr->get_pic_queue_empty();
 	m_pic_full = waredescr->get_pic_queue_full();
 
@@ -854,6 +849,7 @@ Push the current wares status to the WaresDisplay.
 void Warehouse_Window::think()
 {
 	m_waresdisplay->set_wares(get_warehouse()->get_wares());
+	m_waresdisplay->set_workers(get_warehouse()->get_workers());
 }
 
 

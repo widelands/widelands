@@ -40,16 +40,16 @@ Widelands_Map_Allowed_Buildings_Data_Packet::~Widelands_Map_Allowed_Buildings_Da
 /*
  * Read Function
  */
-void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    // read packet version
    int packet_version=fr->Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
-      if(!get_scenario_skip() && egbase->is_game()) {
+      if(!skip && egbase->is_game()) {
          int i=0;
          for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
-            Player* plr=egbase->get_player(i);
+            Player* plr=egbase->get_safe_player(i);
             assert(plr);
             Tribe_Descr* t=plr->get_tribe();
             
@@ -63,18 +63,8 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game
       // Now read all players and buildings
       int i=0;
       for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
-         Player* plr=egbase->get_player(i);
+         Player* plr=egbase->get_safe_player(i);
          Tribe_Descr* t;
-         
-         if(!egbase->is_game() && !plr && !get_scenario_skip()) {
-            // Editor: we better add this player, and place the HQ 
-            egbase->add_player(i, Player::playerLocal, egbase->get_map()->get_scenario_player_tribe(i).c_str());
-            plr=egbase->get_player(i);
-            
-            int idx = plr->get_tribe()->get_building_index("headquarters");
-            egbase->warp_building(egbase->get_map()->get_starting_pos(i), i, idx);
-            static_cast<Editor_Interactive*>(egbase->get_iabase())->reference_player_tribe(i, plr->get_tribe());
-         }
          
          assert(plr);
          t=plr->get_tribe();
@@ -88,7 +78,7 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game
             const char* name=fr->CString();
             bool allowed=fr->Unsigned8();
             
-            if(!get_scenario_skip()) {
+            if(!skip) {
                int index=t->get_building_index(name);
                if(index==-1) 
                   throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->get_name());
@@ -110,7 +100,7 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game
 /*
  * Write Function
  */
-void Widelands_Map_Allowed_Buildings_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Allowed_Buildings_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    // first of all the magic bytes
    fw->Unsigned16(PACKET_ALLOWED_BUILDINGS);
 
@@ -134,8 +124,7 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Write(FileWrite* fw, Editor_Ga
       for(b=0; b<t->get_nrbuildings(); b++) {
          Building_Descr* building=t->get_building_descr(b);
          std::string name=building->get_name();
-         fw->Data(name.c_str(), name.size());
-         fw->Unsigned8('\0');
+         fw->CString(name.c_str());
          if(plr)
             fw->Unsigned8(plr->is_building_allowed(b));
          else 

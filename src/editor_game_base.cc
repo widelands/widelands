@@ -20,6 +20,7 @@
 #include <set>
 #include "building.h"
 #include "editor_game_base.h"
+#include "game.h"
 #include "graphic.h"
 #include "instances.h"
 #include "interactive_base.h"
@@ -321,29 +322,30 @@ Note that AI player structures and the Interactive_Player are created when
 the game starts. Similar for remote players.
 ===============
 */
-void Editor_Game_Base::add_player(int plnum, int type, const char* tribe)
+void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const char* name)
 {
-	assert(plnum >= 1 && plnum <= MAX_PLAYERS);
+   assert(plnum >= 1 && plnum <= MAX_PLAYERS);
 
-	if (m_players[plnum-1])
-		remove_player(plnum);
+   if (m_players[plnum-1])
+      remove_player(plnum);
 
-	// Get the player's tribe
-	uint i;
+   // Get the player's tribe
+   uint i;
 
-	for(i = 0; i < m_tribes.size(); i++)
-		if (!strcmp(m_tribes[i]->get_name(), tribe))
-			break;
+   manually_load_tribe(tribe);
 
-	if (i == m_tribes.size())
-		m_tribes.push_back(new Tribe_Descr(tribe));
+   for(i = 0; i < m_tribes.size(); i++)
+      if (!strcmp(m_tribes[i]->get_name(), tribe))
+         break;
 
-	m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], g_playercolors[plnum-1]);
+   if (i == m_tribes.size())
+      m_tribes.push_back(new Tribe_Descr(tribe));
+
+   m_players[plnum-1] = new Player(this, type, plnum, m_tribes[i], name, g_playercolors[plnum-1]);
 }
 
 /*
- * Load the given tribe into structure and postload it on 
- * the same go
+ * Load the given tribe into structure 
  */
 void Editor_Game_Base::manually_load_tribe(const char* tribe) {
 	uint i;
@@ -420,9 +422,6 @@ void Editor_Game_Base::postload()
 	}
 
 	// TODO: postload players? (maybe)
-
-	// Postload wares
-	init_wares();
 }
 
 
@@ -448,58 +447,8 @@ void Editor_Game_Base::load_graphics()
 
 	// TODO: load player graphics? (maybe)
 
-	for(i = 0; i < m_wares.get_nitems(); i++)
-		m_wares.get(i)->load_graphics();
-
 	g_gr->load_animations();
 }
-
-/*
-===============
-Editor_Game_Base::init_wares
-
-Called during postload.
-Collects all wares from world and tribes and puts them into a global list
-===============
-*/
-void Editor_Game_Base::init_wares()
-{
-	for(int pid = 1; pid <= MAX_PLAYERS; pid++) {
-		Player *plr = get_player(pid);
-		if (!plr)
-			continue;
-
-      // TODO: BUG different wares with same name (different tribes)
-      // do not get inserted ok
-		Tribe_Descr *tribe = plr->get_tribe();
-	   for(int i=0; i < tribe->get_nrwares(); i++) {
-         Ware_Descr* ware = tribe->get_ware_descr(i);
-         if(!ware)
-            continue;
-
-         int idx = m_wares.get_index(ware->get_name());
-         Ware_Descr* m_ware=new Item_Ware_Descr(*(static_cast<Item_Ware_Descr*>(ware)));
-         if(idx < 0)
-            idx = m_wares.add(m_ware);
-      }
-
-		for(int i = 0; i < tribe->get_nrworkers(); i++) {
-			Worker_Descr *worker = tribe->get_worker_descr(i);
-			if (!worker)
-				continue;
-
-			int idx = m_wares.get_index(worker->get_name());
-			if (idx < 0)
-				idx = m_wares.add(new Worker_Ware_Descr(worker->get_name()));
-
-			worker->set_ware_id(idx);
-
-			Worker_Ware_Descr *descr = (Worker_Ware_Descr*)m_wares.get(idx);
-			descr->add_worker(tribe, worker);
-		}
-	}
-}
-
 
 /*
 ===============
@@ -613,22 +562,33 @@ Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name, Tribe_
 	return create_immovable(c, idx, tribe);
 }
 
-
 /*
-===============
-Editor_Game_Base::get_safe_ware_id
+================
+Editor_Game_Base::get_save_player()
 
-Return the corresponding ware id. Throws an exception if ware can't be found.
-===============
+Returns the correct player, creates it
+with the scenario data when he is not yet created
+This should only happen in the editor.
+================
 */
-int Editor_Game_Base::get_safe_ware_id(const char *name)
-{
-	int id = m_wares.get_index(name);
-	if (id < 0)
-		throw wexception("Ware '%s' not found", name);
-	return id;
-}
+Player* Editor_Game_Base::get_safe_player(int n) {
+   Player* plr=get_player(n);
+   if(plr) return plr;
 
+   if(!plr) {
+      // Create this player, but check that 
+      // we are in the editor. In the game, all 
+      // players are known from the beginning. In the
+      // case of savegames, players must be set up
+      // before this is ever called. Only in the editor
+      // players are not always initialized 
+     
+      assert(!is_game()); 
+      add_player(n, Player::playerLocal, get_map()->get_scenario_player_tribe(n).c_str(), get_map()->get_scenario_player_name(n).c_str());
+      get_player(n)->init(this, false);
+   }
+   return get_player(n);
+}
 
 /*
 ===============
@@ -703,6 +663,18 @@ void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animatio
          for(i=1; i<=MAX_PLAYERS; i++)
             if (m_players[i-1])
                remove_player(i);
-
+         
          m_map->cleanup();
+
+         /*
+          * if we aren't in the editor, also kill all our tribes
+          * and the cmd queue
+          */
+         if(is_game()) {
+            for(uint i=0; i<m_tribes.size(); i++) 
+               delete m_tribes[0];
+            m_tribes.resize(0);
+
+            static_cast<Game*>(this)->get_cmdqueue()->flush();
+         }
 }

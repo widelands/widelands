@@ -117,7 +117,8 @@ public:
 	inline int GetSize() const { return length; }
 	inline bool IsEOF() const { if(filepos>=length) return true; return false; }
    void SetFilePos(int pos);
-
+   inline int GetFilePos(void) { return filepos; }
+   
 	inline char Signed8(int pos = -1) { return Deref8(Data(1, pos)); }
 	inline uchar Unsigned8(int pos = -1) { return (uchar)Deref8(Data(1, pos)); }
 	inline short Signed16(int pos = -1) { return Little16(Deref16(Data(2, pos))); }
@@ -155,7 +156,8 @@ public:
 	int	length;
 	int	maxsize;
 	int	filepos;
-
+   int   counter;
+   
 public:
 	FileWrite();
 	~FileWrite();
@@ -164,6 +166,9 @@ public:
 	bool TryWrite(FileSystem *fs, std::string filename);
 	void Clear();
 
+   void ResetByteCounter(void);
+   int  GetByteCounter(void);
+   int  GetFilePos(void); 
 	void SetFilePos(int pos);
 	void Data(const void *data, int size, int pos = -1);
 

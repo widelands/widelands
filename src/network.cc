@@ -196,7 +196,7 @@ void NetHost::handle_network ()
 		const char* tribe=pl->get_tribe()->get_name();
 		
 		game->remove_player (i);
-		game->add_player (i, Player::playerRemote, tribe);
+		game->add_player (i, Player::playerRemote, tribe, "I have no name");
 		
 		Client peer;
 		peer.sock=sock;

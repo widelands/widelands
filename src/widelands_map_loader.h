@@ -24,9 +24,13 @@
 #include "map_loader.h"
 #include "map.h"
 
+class FileRead;
+class Editor_Game_Base;
+
 class Widelands_Map_Loader : public Map_Loader {
    public:
       Widelands_Map_Loader(const char* file, Map* map);
+      Widelands_Map_Loader(FileRead*, Map*);
       virtual ~Widelands_Map_Loader(void);
 
       virtual int get_type(void) { return Map_Loader::WLML; }
@@ -34,8 +38,12 @@ class Widelands_Map_Loader : public Map_Loader {
       virtual int preload_map(bool);
       virtual int load_map_complete(Editor_Game_Base*, bool);
 
+      inline Widelands_Map_Map_Object_Loader* get_map_object_loader(void) { return m_mol; }
+
    private:
+      FileRead* m_fr;
       std::string m_filename;
+      Widelands_Map_Map_Object_Loader* m_mol;
 };
 
 #endif

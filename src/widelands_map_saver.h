@@ -24,6 +24,8 @@
 #include "wexception.h"
 
 class Editor_Game_Base;
+class FileWrite;
+class Widelands_Map_Map_Object_Saver;
 
 /*
 ===========================
@@ -37,13 +39,17 @@ throws wexecption on failure
 class Widelands_Map_Saver {
    public:
       Widelands_Map_Saver(std::string filename, Editor_Game_Base* egbase);
+      Widelands_Map_Saver(FileWrite*, Editor_Game_Base*);
       ~Widelands_Map_Saver(void);
 
       void save() throw(wexception) ;
-
+      inline Widelands_Map_Map_Object_Saver* get_map_object_saver(void) { return m_mos; }
+      
    private:
       std::string m_filename;
       Editor_Game_Base* m_egbase;
+      FileWrite* m_fw;
+      Widelands_Map_Map_Object_Saver* m_mos;
 };
 
 #endif

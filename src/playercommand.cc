@@ -17,11 +17,15 @@
  *
  */
 
-#include "wexception.h"
-#include "player.h"
+#include "filesystem.h"
 #include "game.h"
-#include "playercommand.h"
+#include "instances.h"
 #include "network.h"
+#include "player.h"
+#include "playercommand.h"
+#include "wexception.h"
+#include "widelands_map_map_object_saver.h"
+#include "widelands_map_map_object_loader.h"
 
 enum {
 	PLCMD_UNUSED=0,
@@ -67,6 +71,27 @@ PlayerCommand* PlayerCommand::deserialize (Deserializer* des)
 	}
 }
 
+/*
+ * Write this player command to a file. Call this from base classes
+ */
+#define PLAYER_COMMAND_VERSION 1
+void PlayerCommand::PlayerCmdWrite(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_COMMAND_VERSION);
+      
+   BaseCommand::BaseCmdWrite(fw,egbase,mos);
+   // Now sender
+   fw->Unsigned8(sender);
+}
+void PlayerCommand::PlayerCmdRead(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+   int version=fr->Unsigned16();
+   if(version==PLAYER_COMMAND_VERSION) {
+      BaseCommand::BaseCmdRead(fr,egbase,mol);
+      sender=fr->Unsigned8();
+   } else
+      throw wexception("Unknown version in PlayerCommand::PlayerCmdRead: %i", version);
+}
+
 /*** class Cmd_Bulldoze ***/
 
 Cmd_Bulldoze::Cmd_Bulldoze (Deserializer* des):PlayerCommand (0, des->getchar())
@@ -88,6 +113,28 @@ void Cmd_Bulldoze::serialize (Serializer* ser)
 	ser->putchar (PLCMD_BULLDOZE);
 	ser->putchar (get_sender());
 	ser->putlong (serial);
+}
+#define PLAYER_CMD_BULLDOZE_VERSION 1
+void Cmd_Bulldoze::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==PLAYER_CMD_BULLDOZE_VERSION) {
+      // Read Player Command
+      PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+      int fileserial=fr->Unsigned32();
+      assert(mol->is_object_known(fileserial));
+      serial=mol->get_object_by_file_index(fileserial)->get_serial();
+   } else
+      throw wexception("Unknown version in Cmd_Bulldoze::Read: %i", version);
+}
+void Cmd_Bulldoze::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_CMD_BULLDOZE_VERSION);
+   // Write base classes
+   PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+   // Now serial
+   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   assert(mos->is_object_known(obj));
+   fw->Unsigned32(mos->get_object_file_index(obj)); 
 }
 
 /*** class Cmd_Build ***/
@@ -113,6 +160,32 @@ void Cmd_Build::serialize (Serializer* ser)
 	ser->putshort (coords.x);
 	ser->putshort (coords.y);
 }
+#define PLAYER_CMD_BUILD_VERSION 1
+void Cmd_Build::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==PLAYER_CMD_BUILD_VERSION) {
+      // Read Player Command
+      PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+      // id
+      id=fr->Unsigned16();
+      // Coords
+      coords.x=fr->Unsigned16();
+      coords.y=fr->Unsigned16();
+   } else
+      throw wexception("Unknown version in Cmd_Build::Read: %i", version);
+}
+void Cmd_Build::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_CMD_BUILD_VERSION);
+   // Write base classes
+   PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+   // Now id 
+   fw->Unsigned16(id); 
+   // Now Coords
+   fw->Unsigned16(coords.x);
+   fw->Unsigned16(coords.y);
+}
+
 
 /*** class Cmd_BuildFlag ***/
 
@@ -135,7 +208,27 @@ void Cmd_BuildFlag::serialize (Serializer* ser)
 	ser->putshort (coords.x);
 	ser->putshort (coords.y);
 }
-
+#define PLAYER_CMD_BUILDFLAG_VERSION 1
+void Cmd_BuildFlag::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==PLAYER_CMD_BUILDFLAG_VERSION) {
+      // Read Player Command
+      PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+      // Coords
+      coords.x=fr->Unsigned16();
+      coords.y=fr->Unsigned16();
+   } else
+      throw wexception("Unknown version in Cmd_BuildFlag::Read: %i", version);
+}
+void Cmd_BuildFlag::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
+   // Write base classes
+   PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+   // Now Coords
+   fw->Unsigned16(coords.x);
+   fw->Unsigned16(coords.y);
+}
 /*** class Cmd_BuildRoad ***/
 
 Cmd_BuildRoad::Cmd_BuildRoad (int t, int p, Path* pa):PlayerCommand(t,p)
@@ -198,7 +291,38 @@ void Cmd_BuildRoad::serialize (Serializer* ser)
 	for (int i=0;i<nsteps;i++)
 		ser->putchar (path ? path->get_step(i) : steps[i]);
 }
+#define PLAYER_CMD_BUILDROAD_VERSION 1
+void Cmd_BuildRoad::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==PLAYER_CMD_BUILDROAD_VERSION) {
+      // Read Player Command
+      PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+      // Start Coords
+      start.x=fr->Unsigned16();
+      start.y=fr->Unsigned16();
+      // Now read nsteps
+      nsteps=fr->Unsigned16();
+      steps= new char[nsteps];
+      
+      for (int i=0;i<nsteps;i++)
+         steps[i]=fr->Unsigned8();
+   } else
+      throw wexception("Unknown version in Cmd_BuildRoad::Read: %i", version);
+}
+void Cmd_BuildRoad::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
+   // Write base classes
+   PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+   // Now Start Coords
+   fw->Unsigned16(start.x);
+   fw->Unsigned16(start.y);
 
+   // Now nsteps
+   fw->Unsigned16(nsteps);
+	for (int i=0;i<nsteps;i++)
+		fw->Unsigned8(path ? path->get_step(i) : steps[i]);
+}
 /*** Cmd_FlagAction ***/
 
 Cmd_FlagAction::Cmd_FlagAction (Deserializer* des):PlayerCommand (0, des->getchar())
@@ -223,6 +347,36 @@ void Cmd_FlagAction::serialize (Serializer* ser)
 	ser->putchar (action);
 	ser->putlong (serial);
 }
+#define PLAYER_CMD_FLAGACTION_VERSION 1
+void Cmd_FlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==PLAYER_CMD_FLAGACTION_VERSION) {
+      // Read Player Command
+      PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+   
+      // action
+      action=fr->Unsigned8();
+
+      // Serial
+      int fileserial=fr->Unsigned32();
+      assert(mol->is_object_known(fileserial));
+      serial=mol->get_object_by_file_index(fileserial)->get_serial();
+   } else
+      throw wexception("Unknown version in Cmd_FlagAction::Read: %i", version);
+}
+void Cmd_FlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_CMD_FLAGACTION_VERSION);
+   // Write base classes
+   PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+   // Now action
+   fw->Unsigned8(action);
+
+   // Now serial
+   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   assert(mos->is_object_known(obj));
+   fw->Unsigned32(mos->get_object_file_index(obj)); 
+}
 
 /*** Cmd_StartStopBuilding ***/
 
@@ -246,6 +400,32 @@ void Cmd_StartStopBuilding::serialize (Serializer* ser)
 	ser->putchar (get_sender());
 	ser->putlong (serial);
 }
+#define PLAYER_CMD_STOPBUILDING_VERSION 1
+void Cmd_StartStopBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==PLAYER_CMD_STOPBUILDING_VERSION) {
+      // Read Player Command
+      PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+   
+      // Serial
+      int fileserial=fr->Unsigned32();
+      assert(mol->is_object_known(fileserial));
+      serial=mol->get_object_by_file_index(fileserial)->get_serial();
+   } else
+      throw wexception("Unknown version in Cmd_StartStopBuilding::Read: %i", version);
+}
+void Cmd_StartStopBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_CMD_STOPBUILDING_VERSION);
+   // Write base classes
+   PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+
+   // Now serial
+   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   assert(mos->is_object_known(obj));
+   fw->Unsigned32(mos->get_object_file_index(obj)); 
+}
+
 
 /*** Cmd_EnhanceBuilding ***/
 
@@ -271,4 +451,37 @@ void Cmd_EnhanceBuilding::serialize (Serializer* ser)
 	ser->putlong (serial);
 	ser->putshort (id);
 }
+#define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
+void Cmd_EnhanceBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==PLAYER_CMD_ENHANCEBUILDING_VERSION) {
+      // Read Player Command
+      PlayerCommand::PlayerCmdRead(fr,egbase,mol);
+   
+      // Serial
+      int fileserial=fr->Unsigned32();
+      assert(mol->is_object_known(fileserial));
+      serial=mol->get_object_by_file_index(fileserial)->get_serial();
+
+      // id
+      id=fr->Unsigned16();
+      
+   } else
+      throw wexception("Unknown version in Cmd_EnhanceBuilding::Read: %i", version);
+}
+void Cmd_EnhanceBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(PLAYER_CMD_ENHANCEBUILDING_VERSION);
+   // Write base classes
+   PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
+
+   // Now serial
+   Map_Object* obj=egbase->get_objects()->get_object(serial);
+   assert(mos->is_object_known(obj));
+   fw->Unsigned32(mos->get_object_file_index(obj)); 
+
+   // Now id
+   fw->Unsigned16(id);
+}
+
 

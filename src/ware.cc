@@ -29,43 +29,6 @@
 /*
 ==============================================================================
 
-Ware_Descr IMPLEMENTATION
-
-==============================================================================
-*/
-
-/*
-===============
-Ware_Descr::Ware_Descr
-Ware_Descr::~Ware_Descr
-===============
-*/
-Ware_Descr::Ware_Descr(const char *name)
-{
-	snprintf(m_name, sizeof(m_name), "%s", name);
-}
-
-Ware_Descr::~Ware_Descr()
-{
-}
-
-
-/*
-===============
-Ware_Descr::load_graphics [virtual]
-
-Load descriptive icons etc... here
-===============
-*/
-void Ware_Descr::load_graphics()
-{
-}
-
-
-
-/*
-==============================================================================
-
 Item_Ware_Descr IMPLEMENTATION
 
 ==============================================================================
@@ -78,10 +41,9 @@ Item_Ware_Descr::~Item_Ware_Descr
 ===============
 */
 Item_Ware_Descr::Item_Ware_Descr(const char *name)
-	: Ware_Descr(name)
 {
-	m_menu_pic = 0;
-	m_idle_anim = 0;
+   m_name=name;
+   m_menu_pic = 0;
 	m_pic_queue_full = 0;
 	m_pic_queue_empty = 0;
 }
@@ -122,7 +84,7 @@ void Item_Ware_Descr::parse(const char *directory, Profile *prof)
 	snprintf(buf, sizeof(buf), "%s/%s", directory, string);
 	m_pic_queue_empty_fname = buf;
 
-	m_idle_anim = g_anim.get(directory, prof->get_safe_section("idle"));
+	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle")));
 }
 
 
@@ -137,18 +99,6 @@ void Item_Ware_Descr::load_graphics()
 	m_pic_queue_full = g_gr->get_picture(PicMod_Game, m_pic_queue_full_fname.c_str(), true);
 	m_pic_queue_empty = g_gr->get_picture(PicMod_Game, m_pic_queue_empty_fname.c_str(), true);
 }
-
-
-/*
-===============
-Item_Ware_Descr::is_worker
-===============
-*/
-bool Item_Ware_Descr::is_worker()
-{
-	return false;
-}
-
 
 /*
 ===============
@@ -179,70 +129,6 @@ Item_Ware_Descr* Item_Ware_Descr::create_from_dir(const char* name, const char* 
 	}
 
 	return descr;
-}
-
-
-/*
-==============================================================================
-
-Worker_Ware_Descr IMPLEMENTATION
-
-==============================================================================
-*/
-
-/*
-===============
-Worker_Ware_Descr::Worker_Ware_Descr
-Worker_Ware_Descr::~Worker_Ware_Descr
-===============
-*/
-Worker_Ware_Descr::Worker_Ware_Descr(const char *name)
-	: Ware_Descr(name)
-{
-}
-
-Worker_Ware_Descr::~Worker_Ware_Descr()
-{
-}
-
-/*
-===============
-Worker_Ware_Descr::is_worker
-===============
-*/
-bool Worker_Ware_Descr::is_worker()
-{
-	return true;
-}
-
-/*
-===============
-Worker_Ware_Descr::get_worker
-
-Return the worker corresponding to the given tribe.
-===============
-*/
-Worker_Descr *Worker_Ware_Descr::get_worker(Tribe_Descr *tribe)
-{
-	Worker_map::iterator it = m_workers.find(tribe);
-	if (it == m_workers.end())
-		throw wexception("No worker %s in tribe %s", get_name(), tribe->get_name());
-	return it->second;
-}
-
-/*
-===============
-Worker_Ware_Descr::add_worker
-
-Add a worker for the given tribe
-===============
-*/
-void Worker_Ware_Descr::add_worker(Tribe_Descr *tribe, Worker_Descr *worker)
-{
-	assert(!strcmp(worker->get_name(), get_name()));
-	assert(worker->get_tribe() == tribe);
-
-	m_workers[tribe] = worker;
 }
 
 
@@ -351,7 +237,8 @@ void WareList::remove(int id, int count)
 		return;
 
 	assert(id >= 0 && id < (int)m_wares.size());
-	assert(m_wares[id] >= count);
+	log("WareList: Wanting to remove %i/%i wares of type (%i)\n", count, m_wares[id], id);
+   assert(m_wares[id] >= count);
 	m_wares[id] -= count;
 }
 

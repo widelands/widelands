@@ -23,12 +23,14 @@
 #include "map.h"
 #include "player.h"
 #include "productionsite.h"
+#include "production_program.h"
 #include "profile.h"
 #include "transport.h"
 #include "tribe.h"
 #include "util.h"
 #include "wexception.h"
 #include "worker.h"
+#include "ware.h"
 #include "world.h"
 
 static const size_t STATISTICS_VECTOR_LENGTH = 10;
@@ -49,288 +51,18 @@ out of a building
 */
 class Input {
 public:
-	Input(Ware_Descr* ware, int max) : m_ware(ware), m_max(max) {}
+	Input(Item_Ware_Descr* ware, int max) : m_ware(ware), m_max(max) {}
 	~Input(void) {}
 
 	inline void set_max(int n) { m_max = n; }
 	inline int get_max(void) const { return m_max; }
-	inline Ware_Descr* get_ware() const { return m_ware; }
+	inline Item_Ware_Descr* get_ware() const { return m_ware; }
 
 private:
-	Ware_Descr* m_ware;
+	Item_Ware_Descr* m_ware;
 	int m_max;
 };
 
-
-/*
-==============================================================================
-
-class ProductionProgram
-
-==============================================================================
-*/
-
-struct ProductionAction {
-	enum Type {
-		actSleep,   // iparam1 = sleep time in milliseconds
-		actWorker,  // sparam1 = worker program to run
-		actConsume, // sparam1 = consume this ware, has to be an input, iparam1 number to consume
-		actAnimate, // sparam1 = activate this animation until timeout
-		actProduce, // sparem1 = ware to produce. the worker carries it outside
-		actCheck,   // sparam1 = check if the given input ware is available, iparam1 number to check for
-		actMine,    // sparam1 = resource, iparam1=how far to mine, iparam2=up to max mine, iparam3=chance below 
-		actCall,		// sparam1 = name of sub-program
-		actSet,		// iparam1 = flags to set, iparam2 = flags to unset
-	};
-
-	enum {
-		// When pfCatch is set, failures of the current program cause the
-		// termination of this program, but the parent program will continue
-		// to run.
-		// When pfCatch is not set, the parent program will fail as well.
-		pfCatch = (1 << 0),
-
-		// Ending this program has no effect on productivity statistics.
-		// However, child programs can still affect statistics
-		pfNoStats = (1 << 1),
-	};
-
-	Type        type;
-	int         iparam1;
-	int         iparam2;
-	int         iparam3;
-	std::string	sparam1;
-};
-
-/*
-class ProductionProgram
------------------------
-Holds a series of actions to perform for production.
-*/
-class ProductionProgram {
-public:
-	ProductionProgram(std::string name);
-
-	std::string get_name() const { return m_name; }
-	int get_size() const { return m_actions.size(); }
-	const ProductionAction* get_action(int idx) const {
-		assert(idx >= 0 && (uint)idx < m_actions.size());
-		return &m_actions[idx];
-	}
-
-	void parse(std::string directory, Profile* prof, std::string name,
-		ProductionSite_Descr* building, const EncodeData* encdata);
-
-private:
-	std::string                   m_name;
-	std::vector<ProductionAction> m_actions;
-};
-
-
-/*
-===============
-ProductionProgram::ProductionProgram
-===============
-*/
-ProductionProgram::ProductionProgram(std::string name)
-{
-	m_name = name;
-}
-
-
-/*
-===============
-ProductionProgram::parse
-
-Parse a program. The building is parsed completly. hopefully
-===============
-*/
-void ProductionProgram::parse(std::string directory, Profile* prof,
-	std::string name, ProductionSite_Descr* building, const EncodeData* encdata)
-{
-	Section* sprogram = prof->get_safe_section(name.c_str());
-
-	for(uint idx = 0; ; ++idx) {
-		char buf[32];
-		const char* string;
-		std::vector<std::string> cmd;
-
-		snprintf(buf, sizeof(buf), "%i", idx);
-		string = sprogram->get_string(buf, 0);
-		if (!string)
-			break;
-
-		split_string(string, &cmd, " \t\r\n");
-		if (!cmd.size())
-			continue;
-
-		ProductionAction act;
-
-		if (cmd[0] == "sleep") {
-			char* endp;
-
-			if (cmd.size() != 2)
-				throw wexception("Line %i: Usage: sleep <time in ms>", idx);
-
-			act.type = ProductionAction::actSleep;
-			act.iparam1 = strtol(cmd[1].c_str(), &endp, 0);
-
-			if (endp && *endp)
-            throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
-      } else if (cmd[0] == "consume") {
-         if(cmd.size() != 2 && cmd.size() != 3)
-            throw wexception("Line %i: Usage: consume <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
-
-         std::vector<std::string> wares;
-         split_string(cmd[1],&wares,",");
-         uint i;
-         for(i=0; i<wares.size(); i++) {
-            Section* s=prof->get_safe_section("inputs");
-            if(!s->get_string(wares[i].c_str(), 0))
-               throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
-                     cmd[1].c_str());
-         }
-
-         act.type = ProductionAction::actConsume;
-         act.sparam1 = cmd[1];
-         int how_many=1;
-         if(cmd.size()==3) {
-            char* endp;
-            how_many = strtol(cmd[2].c_str(), &endp, 0);
-            if (endp && *endp)
-               throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
-
-         }
-         act.iparam1 = how_many;
-      }  else if (cmd[0] == "check") {
-			if(cmd.size() != 2 && cmd.size() != 3)
-				throw wexception("Line %i: Usage: checking <ware>[,<ware>,<ware>..] [number] (no blanks between wares)", idx);
-
-         std::vector<std::string> wares;
-         split_string(cmd[1],&wares,",");
-         uint i;
-         for(i=0; i<wares.size(); i++) {
-            Section* s=prof->get_safe_section("inputs");
-            if(!s->get_string(wares[i].c_str(), 0))
-               throw wexception("Line %i: Ware %s is not in [inputs]\n", idx,
-                     cmd[1].c_str());
-         }
-			act.type = ProductionAction::actCheck;
-			act.sparam1 = cmd[1];
-         int how_many=1;
-         if(cmd.size()==3) {
-            char* endp;
-            how_many = strtol(cmd[2].c_str(), &endp, 0);
-            if (endp && *endp)
-               throw wexception("Line %i: bad integer '%s'", idx, cmd[1].c_str());
-
-         }
-         act.iparam1 = how_many;
-
-		} else if (cmd[0] == "produce") {
-			if(cmd.size() != 2)
-				throw wexception("Line %i: Usage: produce <ware>", idx);
-
-			if(!building->is_output(cmd[1]))
-				throw wexception("Line %i: Ware %s is not in [outputs]\n", idx,
-					cmd[1].c_str());
-
-			act.type = ProductionAction::actProduce;
-			act.sparam1 = cmd[1];
-		} else if (cmd[0] == "worker") {
-			if (cmd.size() != 2)
-				throw wexception("Line %i: Usage: worker <program name>", idx);
-
-			act.type = ProductionAction::actWorker;
-			act.sparam1 = cmd[1];
-		} else if (cmd[0] == "animation") {
-			char* endp;
-
-			if (cmd.size() != 3)
-				throw wexception("Usage: animation <name> <time>");
-
-			act.type = ProductionAction::actAnimate;
-
-			// dynamically allocate animations here
-			Section* s = prof->get_safe_section(cmd[1].c_str());
-			act.iparam1 = g_anim.get(directory.c_str(), s, 0, encdata);
-
-			if (cmd[1] == "idle")
-				/* XXX */
-				throw wexception("Idle animation is default, no calling senseful!");
-
-			act.iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-			if (endp && *endp)
-				throw wexception("Bad duration '%s'", cmd[2].c_str());
-
-			if (act.iparam2 <= 0)
-				throw wexception("animation duration must be positive");
-		} else if (cmd[0] == "mine") {
-         char* endp;
-
-			if (cmd.size() != 5)
-				throw wexception("Usage: mine <resource> <area> <up to %%> <chance after %%>");
-
-			act.type = ProductionAction::actMine;
-			act.sparam1=cmd[1]; // what to mine
-         act.iparam1=strtol(cmd[2].c_str(),&endp, 0);
-         if(endp && *endp)
-            throw wexception("Bad area '%s'", cmd[2].c_str());
-         act.iparam2=strtol(cmd[3].c_str(),&endp, 0);
-         if(endp && *endp || act.iparam2>100)
-            throw wexception("Bad maximum amount: '%s'", cmd[3].c_str());
-         act.iparam3=strtol(cmd[4].c_str(),&endp, 0);
-         if(endp && *endp || act.iparam3>100)
-            throw wexception("Bad chance after maximum amount is empty: '%s'", cmd[4].c_str());
-
-		} else if (cmd[0] == "call") {
-			if (cmd.size() != 2)
-				throw wexception("Usage: call <program>");
-
-			act.type = ProductionAction::actCall;
-
-			act.sparam1 = cmd[1];
-		} else if (cmd[0] == "set") {
-			if (cmd.size() < 2)
-				throw wexception("Usage: set <+/-flag>...");
-
-			act.type = ProductionAction::actSet;
-
-			act.iparam1 = act.iparam2 = 0;
-
-			for(uint i = 1; i < cmd.size(); ++i) {
-				std::string name;
-				int flag;
-				char c = cmd[i][0];
-
-				name = cmd[i].substr(1);
-				if (name == "catch")
-					flag = ProductionAction::pfCatch;
-				else if (name == "nostats")
-					flag = ProductionAction::pfNoStats;
-				else
-					throw wexception("Unknown flag name '%s'", name.c_str());
-
-				if (c == '+')
-					act.iparam1 |= flag;
-				else if (c == '-')
-					act.iparam2 |= flag;
-				else
-					throw wexception("+/- expected in front of flag (%s)", cmd[i].c_str());
-			}
-
-			if (act.iparam1 & act.iparam2)
-				throw wexception("Ambiguous set command");
-		} else
-			throw wexception("Line %i: unknown command '%s'", idx, cmd[0].c_str());
-
-		m_actions.push_back(act);
-	}
-
-	// Check for numbering problems
-	if (sprogram->get_num_values() != m_actions.size())
-		throw wexception("Line numbers appear to be wrong");
-}
 
 
 /*
@@ -620,7 +352,7 @@ void ProductionSite::init(Editor_Game_Base* g)
 			m_input_queues.push_back(wq);
 			//wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->init((Game*)g,
-				g->get_safe_ware_id((*inputs)[i].get_ware()->get_name()),
+				get_owner()->get_tribe()->get_safe_ware_index((*inputs)[i].get_ware()->get_name()),
 				(*inputs)[i].get_max());
 		}
 	}
@@ -683,7 +415,8 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
          Worker* w = m_workers[i];
 
          m_workers[i] = 0;
-         w->set_location(0);
+         if(g->get_objects()->object_still_available(w)) 
+            w->set_location(0);
       }
       m_workers.resize(0);
    }
@@ -734,9 +467,9 @@ void ProductionSite::request_worker(Game* g, const char* worker)
 {
    assert(worker);
 
-   int wareid = g->get_safe_ware_id(worker);
+   int wareid = get_owner()->get_tribe()->get_safe_worker_index(worker);
 
-   m_worker_requests.push_back(new Request(this, wareid, &ProductionSite::request_worker_callback, this));
+   m_worker_requests.push_back(new Request(this, wareid, &ProductionSite::request_worker_callback, this, Request::WORKER));
 }
 
 
@@ -809,9 +542,9 @@ void ProductionSite::act(Game* g, uint data)
 			return;
 		}
 
-		if (m_anim != get_descr()->get_idle_anim()) {
+		if (m_anim != get_descr()->get_animation("idle")) {
 			// Restart idle animation, which is the default
-			start_animation(g, get_descr()->get_idle_anim());
+			start_animation(g, get_descr()->get_animation("idle"));
 		}
 
 		program_act(g);
@@ -948,9 +681,9 @@ void ProductionSite::program_act(Game* g)
 		{
 			molog("  Produce(%s)\n", action->sparam1.c_str());
 
-			int wareid = g->get_safe_ware_id(action->sparam1.c_str());
+			int wareid = get_owner()->get_tribe()->get_safe_ware_index(action->sparam1.c_str());
 
-			WareInstance* item = new WareInstance(wareid);
+			WareInstance* item = new WareInstance(wareid,  get_owner()->get_tribe()->get_ware_descr(wareid));
 			item->init(g);
 			m_workers[0]->set_carried_item(g,item);
 

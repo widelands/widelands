@@ -21,6 +21,14 @@
 #define __S__CMD_QUEUE_H
 
 #include <queue>
+#include "filesystem.h"
+#include "queue_cmd_ids.h"
+
+class FileRead;
+class FileWrite;
+class Editor_Game_Base;
+class Widelands_Map_Map_Object_Saver;
+class Widelands_Map_Map_Object_Loader;
 
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
@@ -58,9 +66,22 @@ class BaseCommand {
 		
 		int get_duetime() const { return duetime; }
 		void set_duetime(int t) { duetime=t; }
+      
+      // Write these commands to a file (for savegames)
+      virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*)=0;
+      virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*)=0;
+
+      virtual int get_id(void) = 0; // Get this command id
+      
+      // Write commands for BaseCommand. Must be called from upper classes
+      void BaseCmdWrite(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+      void BaseCmdRead(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
 };
 
 class Cmd_Queue {
+   friend class Game_Saver;
+
 	struct cmditem {
 		BaseCommand*	cmd;
 		unsigned long	serial;
@@ -81,32 +102,12 @@ class Cmd_Queue {
 	void enqueue (BaseCommand*);
 	int run_queue (int interval, int* game_time_var);
 
+   void flush(void); // delete all commands in the queue now
+
    private:
 	Game*				m_game;
 	std::priority_queue<cmditem>	m_cmds;
 	unsigned long			nextserial;
-};
-
-
-class Cmd_Call:public BaseCommand {
-    public:
-	typedef void (call_fn_t) (Game* g, int arg1, int arg2);
-	
-	Cmd_Call (int t, call_fn_t* c, int a1, int a2) : BaseCommand (t)
-	{
-		callee=c;
-		arg1=a1;
-		arg2=a2;
-	}	
-	
-	void execute (Game* g)
-	{
-		callee (g, arg1, arg2);
-	}
-	
-    private:
-	call_fn_t*	callee;
-	int		arg1, arg2;
 };
 
 #endif // __S__CMD_QUEUE_H

@@ -27,7 +27,7 @@ Management classes and functions of the 32-bit software renderer.
 #include "error.h"
 #include "filesystem.h"
 #include "map.h"
-#include "maprenderinfo.h"
+#include "minimap.h"
 #include "player.h"
 #include "sw32_graphic.h"
 #include "tribe.h"
@@ -507,32 +507,32 @@ draw_overlays
 Draw build help (buildings and roads) and the field sel
 ===============
 */
-static void draw_overlays(RenderTargetImpl* dst, const MapRenderInfo* mri, FCoords fc, Point pos,
+static void draw_overlays(RenderTargetImpl* dst, Editor_Game_Base* egbase, const std::vector<bool>* visibility, FCoords fc, Point pos,
                  FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr)
 {
 	// Render frontier
    uchar player;
-   if((player=mri->egbase->get_map()->get_overlay_manager()->is_frontier_field(fc))) {
-      Player *ownerplayer = mri->egbase->get_player(player);
+   if((player=egbase->get_map()->get_overlay_manager()->is_frontier_field(fc))) {
+      Player *ownerplayer = egbase->get_player(player);
       uint anim = ownerplayer->get_tribe()->get_frontier_anim();
       const RGBColor* playercolors = ownerplayer->get_playercolor();
 
       dst->drawanim(pos.x, pos.y, anim, 0, playercolors);
 
       // check to the right
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc))
+      if(egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc))
          dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, playercolors);
       // check to the bottom left
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc))
+      if(egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc))
          dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, playercolors);
       // check to the bottom right
-      if(mri->egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl))
+      if(egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl))
          dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, playercolors);
    }
 
 	// Draw normal buildhelp
    Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_FIELD];
-   int num_overlays=mri->egbase->get_map()->get_overlay_manager()->get_overlays(fc, overlay_info);
+   int num_overlays=egbase->get_map()->get_overlay_manager()->get_overlays(fc, overlay_info);
 
    int i;
    for(i=0; i<num_overlays; i++) {
@@ -552,7 +552,7 @@ viewofs is the offset of the upper left corner of the window into the map,
 in pixels.
 ===============
 */
-void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
+void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Point viewofs)
 {
 	Bitmap dst;
 
@@ -572,7 +572,7 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 	// For each field, draw ground textures, then roads, then immovables
 	// (and borders), then bobs, then overlay stuff (build icons etc...)
 	//Player *player = m_player->get_player();
-	Map* map = mri->egbase->get_map();
+	Map* map = egbase->get_map();
 	int mapwidth = map->get_width();
 	int minfx, minfy;
 	int maxfx, maxfy;
@@ -647,15 +647,15 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 			map->get_rn(tl, &tr);
 			trposx = tlposx + FIELD_WIDTH;
 
-			if (mri->visibility) {
-				if (!(*mri->visibility)[f.y*mapwidth + f.x] ||
-					 !(*mri->visibility)[br.y*mapwidth + br.x]) {
+			if (visibility) {
+				if (!(*visibility)[f.y*mapwidth + f.x] ||
+					 !(*visibility)[br.y*mapwidth + br.x]) {
 					render_r=false;
 					render_b=false;
 				} else {
-					if(!(*mri->visibility)[bl.y*mapwidth + bl.x])
+					if(!(*visibility)[bl.y*mapwidth + bl.x])
 						render_b=false;
-					if(!(*mri->visibility)[r.y*mapwidth + r.x])
+					if(!(*visibility)[r.y*mapwidth + r.x])
 						render_r=false;
 				}
 			}
@@ -663,13 +663,13 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
 			// Render stuff that belongs to ground triangles
 			uchar roads = f.field->get_roads();
 
-			roads |= mri->egbase->get_map()->get_overlay_manager()->get_road_overlay(f);
+			roads |= egbase->get_map()->get_overlay_manager()->get_road_overlay(f);
 
 			dst.draw_field(f.field, r.field, bl.field, br.field, l.field, tr.field,
 					posx, rposx, posy, blposx, brposx, bposy, roads, render_r, render_b);
 
          // Render stuff that belongs to the field node
-			if (!mri->visibility || (*mri->visibility)[f.y*mapwidth + f.x])
+			if (!visibility || (*visibility)[f.y*mapwidth + f.x])
          {
             Point wh_pos(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f.field->get_height()));
 
@@ -684,16 +684,16 @@ void RenderTargetImpl::rendermap(const MapRenderInfo* mri, Point viewofs)
             BaseImmovable *imm = f.field->get_immovable();
 
             if (imm)
-               imm->draw(mri->egbase, this, f, wh_pos);
+               imm->draw(egbase, this, f, wh_pos);
 
             Bob *bob = f.field->get_first_bob();
             while(bob) {
-               bob->draw(mri->egbase, this, wh_pos);
+               bob->draw(egbase, this, wh_pos);
                bob = bob->get_next_bob();
             }
 
             // Draw buildhelp, road buildhelp and fieldsel
-            draw_overlays(this, mri, f, wh_pos,
+            draw_overlays(this, egbase, visibility, f, wh_pos,
                   r, Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(r.field->get_height())),
                   bl, Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(bl.field->get_height())),
                   br, Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(br.field->get_height())));
@@ -725,7 +725,7 @@ The field at viewpt will be in the top-left corner of the window.
 flags specifies what information to display (see Minimap_XXX enums).
 ===============
 */
-void RenderTargetImpl::renderminimap(const MapRenderInfo* mri, Coords viewpt, uint flags)
+void RenderTargetImpl::renderminimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Coords viewpt, uint flags)
 {
 	Rect rc;
 
@@ -736,7 +736,7 @@ void RenderTargetImpl::renderminimap(const MapRenderInfo* mri, Coords viewpt, ui
 	viewpt.x -= m_offset.x;
 	viewpt.y -= m_offset.y;
 
-	m_bitmap->draw_minimap(mri, rc, viewpt, flags);
+	m_bitmap->draw_minimap(egbase, visibility, rc, viewpt, flags);
 }
 
 

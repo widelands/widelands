@@ -21,7 +21,9 @@
 #define __S__INSTANCE_H
 
 #include <map>
+#include <string>
 #include <vector>
+#include "cmd_queue.h"
 #include "types.h"
 
 class Editor_Game_Base;
@@ -43,15 +45,31 @@ class Map_Object;
 class Map_Object_Descr {
 public:
 	Map_Object_Descr(void) { }
-	virtual ~Map_Object_Descr(void) { }
+   virtual ~Map_Object_Descr(void) { 
+      m_anims.clear();
+   }
+
+   inline uint get_animation(const char* name) {
+      std::map<std::string,uint>::iterator i=m_anims.find(name);
+      assert(i!=m_anims.end());
+      return i->second;
+   }
 
 	bool has_attribute(uint attr);
+   
+   std::string get_animation_name(uint anim); // This is needed for save games and debug
 
 protected:
 	void add_attribute(uint attr);
+   
+   void add_animation(const char* name, uint anim);
+   bool is_animation_known(const char* name);
+
 
 private:
 	std::vector<uint>	m_attributes;
+   std::map<std::string,uint> m_anims;
+   
 
 public:
 	static uint get_attribute_id(std::string name);
@@ -149,6 +167,7 @@ protected:
 public:
 	virtual int get_type() = 0;
 
+   inline uint get_file_serial(void) const { return m_file_serial; }
 	inline uint get_serial(void) const { return m_serial; }
 	inline bool has_attribute(uint attr) { return m_descr->has_attribute(attr); }
 
@@ -166,7 +185,7 @@ public:
 
 	LogSink* get_logsink() { return m_logsink; }
 	void set_logsink(LogSink* sink);
-
+   virtual void log_general_info(Editor_Game_Base*); // Called when a new logsink is set, used to give general informations
 protected:
    // init for editor and game
 	virtual void init(Editor_Game_Base*);
@@ -177,6 +196,7 @@ protected:
 protected:
 	Map_Object_Descr*		m_descr;
 	uint						m_serial;
+	uint						m_file_serial;
 	LogSink*					m_logsink;
 };
 
@@ -191,7 +211,7 @@ class Object_Manager {
 	typedef std::map<uint, Map_Object *> objmap_t;
 
 public:
-	Object_Manager() { m_lastserial = 0; }
+	Object_Manager() { m_lastserial = m_last_file_serial = 0; }
 	~Object_Manager(void);
 
 	void cleanup(Editor_Game_Base *g);
@@ -206,9 +226,21 @@ public:
 	void insert(Map_Object *obj);
 	void remove(Map_Object *obj);
 
+   inline bool object_still_available(Map_Object* t) {
+      objmap_t::iterator it = m_objects.begin();
+      while(it!=m_objects.end()) {
+         if(it->second==t) return true;
+         ++it;
+      }
+      return false;
+   }
+
+   void overwrite_file_serial(Map_Object*, uint);
+
 private:
 	uint m_lastserial;
-	objmap_t m_objects;
+	uint m_last_file_serial;
+   objmap_t m_objects;
 };
 
 /** class Object_Ptr
@@ -229,9 +261,45 @@ public:
 	// dammit... without a Editor_Game_Base object, we can't implement a Map_Object* operator
 	// (would be _really_ nice)
 	Map_Object* get(Editor_Game_Base* g);
+	const Map_Object* get(Editor_Game_Base* g) const;
 
 private:
 	uint m_serial;
+};
+
+
+class Cmd_Destroy_Map_Object:public BaseCommand {
+	private:
+		int obj_serial;
+
+	public:
+      Cmd_Destroy_Map_Object(void) : BaseCommand(0) { } // For savegame loading
+		Cmd_Destroy_Map_Object (int t, Map_Object* o);	
+		virtual void execute (Game* g);
+  
+      // Write these commands to a file (for savegames)
+      virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+      virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
+      virtual int get_id(void) { return QUEUE_CMD_DESTROY_MAPOBJECT; } // Get this command id
+};
+
+class Cmd_Act:public BaseCommand {
+	private:
+		int obj_serial;
+		int arg;
+
+	public:
+      Cmd_Act(void) : BaseCommand(0) { } // For savegame loading
+		Cmd_Act (int t, Map_Object* o, int a); 
+		
+		virtual void execute (Game* g);
+      
+      // Write these commands to a file (for savegames)
+      virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+      virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
+      virtual int get_id(void) { return QUEUE_CMD_ACT; } // Get this command id
 };
 
 #endif // __S__INSTANCE_H

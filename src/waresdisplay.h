@@ -24,6 +24,7 @@
 #include "ware.h"
 
 class Editor_Game_Base;
+class UITextarea;
 class Player;
 
 /*
@@ -44,15 +45,20 @@ public:
 	virtual ~WaresDisplay();
 
 	void set_wares(const WareList& wares);
+	void set_workers(const WareList& workers);
+
+   void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 protected:
 	virtual void draw(RenderTarget* dst);
-	virtual void draw_ware(RenderTarget* dst, int x, int y, uint id, uint stock);
+	virtual void draw_ware(RenderTarget* dst, int x, int y, uint id, uint stock, bool);
 
 private:
-	Editor_Game_Base*	m_game;
+	UITextarea*       m_curware;
+   Editor_Game_Base*	m_game;
 	Player*				m_player;
 	WareList				m_wares;
+	WareList				m_workers;
 };
 
 

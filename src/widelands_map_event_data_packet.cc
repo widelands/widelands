@@ -38,7 +38,7 @@ Widelands_Map_Event_Data_Packet::~Widelands_Map_Event_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Event_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Event_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    // read packet version
    int packet_version=fr->Unsigned16();
 
@@ -52,8 +52,8 @@ void Widelands_Map_Event_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbas
       for(i=0; i<nr_event; i++) {
          Event* event = Event_Factory::get_correct_event(fr->Unsigned16());
          assert(event);
-         event->Read(fr, egbase, get_scenario_skip());
-         if(get_scenario_skip())
+         event->Read(fr, egbase, skip);
+         if(skip)
             delete event;
          else
             map->register_new_event(event);
@@ -67,7 +67,7 @@ void Widelands_Map_Event_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbas
 /*
  * Write Function
  */
-void Widelands_Map_Event_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Event_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    // first of all the magic bytes
    fw->Unsigned16(PACKET_EVENT);
 

@@ -22,6 +22,7 @@
 
 #include <map>
 #include "building.h"
+#include "transport.h"
 
 class Economy;
 class Editor_Game_Base;
@@ -61,12 +62,15 @@ private:
 
 
 class Warehouse : public Building {
+   friend class Widelands_Map_Buildingdata_Data_Packet;
+
 	MO_DESCR(Warehouse_Descr);
 
 public:
 	Warehouse(Warehouse_Descr *descr);
 	virtual ~Warehouse();
 
+   virtual int get_building_type(void) { return Building::WAREHOUSE; }
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
@@ -75,9 +79,12 @@ public:
 	virtual void set_economy(Economy *e);
 
 	const WareList &get_wares() const;
-	void create_wares(int id, int count);
-	void destroy_wares(int id, int count);
-
+	const WareList &get_workers() const;
+	void insert_wares(int id, int count);
+	void remove_wares(int id, int count);
+   void insert_workers(int id, int count);
+   void remove_workers(int id, int count);
+   
 	virtual bool fetch_from_flag(Game* g);
 
 	Worker* launch_worker(Game* g, int ware);
@@ -94,13 +101,48 @@ protected:
 
 private:
 	static void idle_request_cb(Game* g, Request* rq, int ware, Worker* w, void* data);
+   void sort_worker_in(Editor_Game_Base*, std::string, Worker*);
 
 private:
 	WarehouseSupply*			m_supply;
 	std::vector<Request*>	m_requests; // one idle request per ware type
-   std::multimap<std::string,Worker*> m_incroporated_workers; // Workers who live here at the moment
+   std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
 	int m_next_carrier_spawn;		// time of next carrier growth
 };
 
+/*
+WarehouseSupply is the implementation of Supply that is used by Warehouses.
+It also manages the list of wares in the warehouse.
+*/
+class WarehouseSupply : public Supply {
+public:
+	WarehouseSupply(Warehouse* wh);
+	virtual ~WarehouseSupply();
+
+	void set_economy(Economy* e);
+
+	const WareList &get_wares() const { return m_wares; }
+	const WareList &get_workers() const { return m_workers; }
+	int stock_wares(int id) const { return m_wares.stock(id); }
+	int stock_workers(int id) const { return m_workers.stock(id); }
+	void add_wares(int id, int count);
+	void remove_wares(int id, int count);
+   void add_workers(int id, int count);
+   void remove_workers(int id, int count);
+
+public: // Supply implementation
+	virtual PlayerImmovable* get_position(Game* g);
+	virtual int get_amount(Game* g, int ware);
+	virtual bool is_active(Game* g);
+
+	virtual WareInstance* launch_item(Game* g, int ware);
+	virtual Worker* launch_worker(Game* g, int ware);
+
+private:
+	Economy*		m_economy;
+	WareList		m_wares;
+	WareList		m_workers;
+	Warehouse*	m_warehouse;
+};
 
 #endif

@@ -18,6 +18,7 @@
  */
 
 #include "cmd_queue.h"
+#include "filesystem.h"
 #include "game.h"
 #include "instances.h"
 #include "player.h"
@@ -36,6 +37,14 @@ Cmd_Queue::Cmd_Queue(Game *g)
 
 Cmd_Queue::~Cmd_Queue(void)
 {
+   flush();
+}
+
+/*
+ * flushs all commands from the queue. Needed for
+ * game loading (while in game)
+ */
+void Cmd_Queue::flush(void) {
 	while(!m_cmds.empty()) {
 		delete m_cmds.top().cmd;
 		m_cmds.pop();
@@ -100,5 +109,23 @@ BaseCommand::BaseCommand (int t)
 
 BaseCommand::~BaseCommand ()
 {
+}
+
+#define BASE_CMD_VERSION 1
+void BaseCommand::BaseCmdWrite(FileWrite* fw, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*) {
+   // First version
+   fw->Unsigned16(BASE_CMD_VERSION);
+   
+   // Write duetime
+   fw->Unsigned32(duetime); 
+}
+
+void BaseCommand::BaseCmdRead(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*)  {
+   int version=fr->Unsigned16();
+   if(version==BASE_CMD_VERSION) {
+   // Read duetime
+      duetime=fr->Unsigned32();
+   } else 
+      throw wexception("BaseCommand::BaseCmdRead: unknown version %i\n", version);
 }
 

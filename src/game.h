@@ -45,6 +45,7 @@ class NetGame;
 
 class Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
+   friend class Game_Saver;
 
 public:
 	Game(void);

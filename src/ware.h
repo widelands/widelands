@@ -24,6 +24,8 @@
 #include <string>
 #include <vector>
 
+#include "instances.h"
+
 class Economy;
 class PlayerImmovable;
 class Profile;
@@ -54,47 +56,32 @@ Note that multiple tribes can define a worker with the same name. The different
 #define WARE_MENU_PIC_W		24
 #define WARE_MENU_PIC_H		24
 
-class Ware_Descr {
-public:
-	Ware_Descr(const char *name);
-	virtual ~Ware_Descr();
-
-	virtual void load_graphics();
-
-	virtual bool is_worker() = 0;
-
-	inline const char *get_name() const { return m_name; }
-
-private:
-	char		m_name[30];
-};
-
-class Item_Ware_Descr : public Ware_Descr {
+class Item_Ware_Descr : public Map_Object_Descr {
 public:
 	Item_Ware_Descr(const char *name);
 	virtual ~Item_Ware_Descr();
 
 	virtual void load_graphics();
 
-	virtual bool is_worker();
-
 	inline uint get_menu_pic() { return m_menu_pic; }
-	inline uint get_idle_anim() { return m_idle_anim; }
 	inline uint get_pic_queue_full() { return m_pic_queue_full; }
 	inline uint get_pic_queue_empty() { return m_pic_queue_empty; }
+	
+   inline const char *get_name() const { return m_name.c_str(); }
+   inline const char *get_descname() const { return m_descname.c_str(); }
 
 private:
 	void parse(const char *directory, Profile *prof);
 
 private:
-	std::string		m_descname;
+   std::string    m_name;
+   std::string		m_descname;
 	std::string		m_helptext;
 	std::string		m_menu_pic_fname;
 	std::string		m_pic_queue_full_fname;
 	std::string		m_pic_queue_empty_fname;
 
 	uint				m_menu_pic;
-	uint				m_idle_anim;
 
 	uint				m_pic_queue_full;
 	uint				m_pic_queue_empty;
@@ -102,24 +89,6 @@ private:
 public:
 	static Item_Ware_Descr* create_from_dir(const char* name, const char* directory);
 };
-
-
-class Worker_Ware_Descr : public Ware_Descr {
-public:
-	Worker_Ware_Descr(const char *name);
-	virtual ~Worker_Ware_Descr();
-
-	virtual bool is_worker();
-
-	Worker_Descr *get_worker(Tribe_Descr *tribe);
-	void add_worker(Tribe_Descr *tribe, Worker_Descr *worker);
-
-private:
-	typedef std::map<Tribe_Descr*,Worker_Descr*> Worker_map;
-
-	Worker_map	m_workers;
-};
-
 
 /*
 WareList is a simple wrapper around an array of ware types.

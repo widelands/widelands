@@ -167,7 +167,9 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 
       if(!s)
          throw wexception("Missing build animation");
-      m_build = g_anim.get(directory, s, 0, encdata);
+      
+      if(!is_animation_known("build")) 
+         add_animation("build", g_anim.get(directory, s, 0, encdata));
 
 		// Get costs
 		s = prof->get_safe_section("buildcost");
@@ -200,7 +202,8 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	s = prof->get_section("idle");
 	if (!s)
 		throw wexception("Missing idle animation");
-	m_idle = g_anim.get(directory, s, 0, encdata);
+   if(!is_animation_known("idle")) 
+      add_animation("idle", g_anim.get(directory, s, 0, encdata));
 
 }
 
@@ -448,7 +451,7 @@ void Building::init(Editor_Game_Base* g)
 	m_flag->attach_building(g, this);
 
 	// Start the animation
-	start_animation(g, get_descr()->get_idle_anim());
+	start_animation(g, get_descr()->get_animation("idle"));
 
 	m_leave_time = g->get_gametime();
 }
@@ -532,7 +535,7 @@ Return the animation ID that is used for the building in UI items
 */
 uint Building::get_ui_anim()
 {
-	return get_descr()->get_idle_anim();
+	return get_descr()->get_animation("idle");
 }
 
 
@@ -745,4 +748,24 @@ void Building::draw_help(Editor_Game_Base* game, RenderTarget* dst,
 
 void Building::set_stop(bool stop) {
 	m_stop = stop;
+}
+
+/*
+ * Log basic infos
+ */
+void Building::log_general_info(Editor_Game_Base* egbase) {
+   PlayerImmovable::log_general_info(egbase);      
+
+   molog("m_position: (%i,%i)\n", m_position.x, m_position.y);
+   molog("m_flag: %p\n", m_flag);
+   molog("* position: (%i,%i)\n", m_flag->get_position().x, m_flag->get_position().y);
+
+   molog("m_anim: %s\n", get_descr()->get_animation_name(m_anim).c_str());
+   molog("m_animstart: %i\n", m_animstart);
+
+	molog("m_leave_time: %i\n", m_leave_time);
+   molog("m_stop: %i\n", m_stop);
+  
+   molog("m_leave_queue.size(): %i\n", m_leave_queue.size());
+   molog("m_leave_allow.get(): %p\n", m_leave_allow.get(egbase));
 }

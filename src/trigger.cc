@@ -17,6 +17,7 @@
  *
  */
 
+#include "filesystem.h"
 #include "game.h"
 #include "map.h"
 #include "trigger.h"
@@ -81,4 +82,27 @@ void Cmd_CheckTrigger::execute (Game* g)
 	int delay=g->get_map()->get_number_of_triggers() ? 1000/g->get_map()->get_number_of_triggers() : 30000;
 	g->enqueue_command (new Cmd_CheckTrigger(g->get_gametime() + delay, trigger_id));
 }
+
+#define CMD_CHECK_TRIGGER_VERSION 1
+void Cmd_CheckTrigger::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==CMD_CHECK_TRIGGER_VERSION) {
+      // Read Base Commands
+      BaseCommand::BaseCmdRead(fr,egbase,mol);
+   
+      // trigger id
+      trigger_id=fr->Unsigned16();
+   } else
+      throw wexception("Unknown version in Cmd_CheckTrigger::Read: %i", version);
+}
+void Cmd_CheckTrigger::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(CMD_CHECK_TRIGGER_VERSION);
+   // Write base classes
+   BaseCommand::BaseCmdWrite(fw, egbase, mos);
+
+   // Now trigger- id
+   fw->Unsigned16(trigger_id);
+}
+
 

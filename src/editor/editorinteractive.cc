@@ -65,7 +65,7 @@ construct editor sourroundings
 */
 Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    m_editor = e;
-
+   
    // Disable debug. it is no use for editor
    set_display_flag(Interactive_Base::dfDebug, false);
    
@@ -161,9 +161,6 @@ Called just before the game starts, after postload, init and gfxload
 */
 void Editor_Interactive::start()
 {
-   m_maprenderinfo.egbase = m_editor;
-	m_maprenderinfo.visibility = 0;
-
    get_map()->get_overlay_manager()->show_buildhelp(true);
 }
 

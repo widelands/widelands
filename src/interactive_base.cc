@@ -57,8 +57,6 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 	Sys_InitGraphics(Sys_GetGraphicsSystemFromString(s->get_string("gfxsys", "sw32")),
 			get_xres(), get_yres(), s->get_bool("fullscreen", false));
 
-   memset(&m_maprenderinfo, 0, sizeof(m_maprenderinfo));
-
    m_fsd.fieldsel_freeze = false;
    m_egbase=g;
 	m_display_flags = dfDebug;

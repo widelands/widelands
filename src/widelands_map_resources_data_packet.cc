@@ -39,7 +39,7 @@ Widelands_Map_Resources_Data_Packet::~Widelands_Map_Resources_Data_Packet(void) 
 /*
  * Read Function
  */
-void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    // read packet version
    int packet_version=fr->Unsigned16();
    Map* map=egbase->get_map();
@@ -112,7 +112,7 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
  * which is also ok. But this is one reason why save game != saved map
  * in nearly all cases.
  */
-void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    // first of all the magic bytes
    fw->Unsigned16(PACKET_RESOURCES);
 
@@ -133,8 +133,7 @@ void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
       Resource_Descr* res=world->get_resource(i);
       smap[res->get_name()]=i;
       fw->Unsigned16(i);
-      fw->Data(res->get_name(), strlen(res->get_name()));
-      fw->Unsigned8('\0');
+      fw->CString(res->get_name());
    }
 
    // Now, all resouces as unsigned chars in order
@@ -146,6 +145,8 @@ void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
          int res=map->get_field(Coords(x,y))->get_resources();
          int amount=map->get_field(Coords(x,y))->get_resources_amount();
          int start_amount=map->get_field(Coords(x,y))->get_starting_res_amount();
+         if(!amount)
+            res=0;
          fw->Unsigned8(res);
          fw->Unsigned8(amount);
          fw->Unsigned8(start_amount);

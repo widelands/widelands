@@ -56,6 +56,7 @@ class Editor_Interactive : public Interactive_Base {
          std::vector<Editor_Tool*> tools;
       };
 
+      std::vector<bool>* get_visibility(void) { return 0; }
 
       // action functions 
       void exit_editor();

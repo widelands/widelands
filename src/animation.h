@@ -84,15 +84,17 @@ class DirAnimations
 Use this class to automatically manage a set of 6 animations, one for each
 possible direction
 */
+class Bob_Descr;
 class DirAnimations {
 public:
 	DirAnimations();
 	~DirAnimations();
 
-	void parse(const char *directory, Profile *prof, const char *sectnametempl, Section *defaults = 0,
+	void parse(Bob_Descr* b, const char *directory, Profile *prof, const char *sectnametempl, Section *defaults = 0,
 	           const EncodeData *encdefaults = 0);
 
 	inline uint get_animation(int dir) { return m_animations[dir-1]; }
+   void overwrite_animation(int dir, uint id) { m_animations[dir-1]=id; } // For manual changing
 
 private:
 	uint	m_animations[6];

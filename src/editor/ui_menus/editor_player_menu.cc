@@ -345,13 +345,10 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
    if(!p) {
       // This player is unknown, register it, place a hq and reference the tribe
       // so that this tribe can not be changed
-      editor->add_player(n, Player::playerLocal, m_plr_set_tribes_buts[n-1]->get_title());
-
+      editor->add_player(n, Player::playerLocal, m_plr_set_tribes_buts[n-1]->get_title(), m_plr_names[n-1]->get_text());
+      
       p=editor->get_player(n);
-	
-      int idx = p->get_tribe()->get_building_index("headquarters");
-
-      editor->warp_building(start_pos, n, idx);
+	   p->init(m_parent->get_egbase(),true);
 
       m_parent->reference_player_tribe(n, p->get_tribe());
    

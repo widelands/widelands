@@ -1,0 +1,57 @@
+/*
+ * Copyright (C) 2002-4 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#ifndef __S__GAME_SAVER_H
+#define __S__GAME_SAVER_H
+
+#include <string>
+#include "wexception.h"
+
+class FileWrite;
+class Game;
+class Widelands_Map_Map_Object_Saver;
+class Widelands_Map_Map_Object_Loader;
+
+/*
+ * This class writes a complete state
+ * of a game out to a file. The world in ONE file
+ *
+ * This might eventually evolve into the same kind of saving/loading
+ * structure as was used for the map stuff - but currently, there's
+ * so little to save, that everything is done by this class
+ */
+
+class Game_Saver {
+   public:
+      Game_Saver(std::string filename, Game* game);
+      ~Game_Saver(void);
+
+      void save(void) throw(wexception);
+      void load(void) throw(wexception);
+   
+   private:
+      void save_game_class(FileWrite*) throw(wexception);
+      void save_cmd_queue_class(FileWrite*, Widelands_Map_Map_Object_Saver*) throw(wexception);
+      void load_game_class(FileRead *) throw(wexception);
+      void load_cmd_queue_class(FileRead *, Widelands_Map_Map_Object_Loader*) throw(wexception);
+      std::string m_filename;
+      Game* m_game;
+};
+
+#endif

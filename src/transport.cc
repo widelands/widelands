@@ -36,6 +36,8 @@ Flags, Roads, the logic behind ware pulls and pushes.
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"
+#include "widelands_map_map_object_loader.h"
+#include "widelands_map_map_object_saver.h"
 #include "worker.h"
 
 /*
@@ -114,12 +116,12 @@ void IdleWareSupply::set_economy(Economy* e)
 	int ware = m_ware->get_ware();
 
 	if (m_economy)
-		m_economy->remove_supply(ware, this);
+		m_economy->remove_ware_supply(ware, this);
 
 	m_economy = e;
 
 	if (m_economy)
-		m_economy->add_supply(ware, this);
+		m_economy->add_ware_supply(ware, this);
 }
 
 
@@ -204,20 +206,18 @@ WareInstance IMPLEMENTATION
 */
 
 
-Map_Object_Descr WareInstance::s_description; // dummy description
-
 /*
 ===============
 WareInstance::WareInstance
 ===============
 */
-WareInstance::WareInstance(int ware)
-	: Map_Object(&s_description)
+WareInstance::WareInstance(int ware, Item_Ware_Descr* descr)
+	: Map_Object(descr)
 {
 	m_economy = 0;
 
 	m_ware = ware;
-	m_ware_descr = 0;
+	m_ware_descr = descr;
 
 	m_transfer = 0;
 	m_supply = 0;
@@ -256,13 +256,7 @@ WareInstance::init
 */
 void WareInstance::init(Editor_Game_Base* g)
 {
-	Ware_Descr* descr = g->get_ware_description(m_ware);
-
-	assert(!descr->is_worker());
-
 	Map_Object::init(g);
-
-	m_ware_descr = (Item_Ware_Descr*)descr;
 }
 
 
@@ -333,7 +327,7 @@ Once you've assigned a ware to its new location, you usually have to call
 update() as well.
 ===============
 */
-void WareInstance::set_location(Game* g, Map_Object* location)
+void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
 {
 	Map_Object* oldlocation = m_location.get(g);
 
@@ -393,6 +387,9 @@ void WareInstance::update(Game* g)
 {
 	Map_Object* loc = m_location.get(g);
 
+   if(!m_ware_descr) // Upsy, we're not even intialized. Happens on load
+      return; 
+   
 	// Reset our state if we're not on location or outside an economy
 	if (!loc || !get_economy()) {
 		cancel_moving(g);
@@ -431,10 +428,10 @@ void WareInstance::update(Game* g)
 			m_transfer = 0;
 
 			if (success) {
-				t->finish();
+				t->has_finished();
 				return;
 			} else {
-				t->fail();
+				t->has_failed();
 
 				cancel_moving(g);
 				update(g);
@@ -487,7 +484,7 @@ void WareInstance::set_transfer(Game* g, Transfer* t)
 {
 	// Reset current transfer
 	if (m_transfer) {
-		m_transfer->fail();
+		m_transfer->has_failed();
 		m_transfer = 0;
 	}
 
@@ -540,7 +537,7 @@ void WareInstance::cancel_moving(Game* g)
 	if (m_transfer) {
 		molog("WareInstance::cancel_moving() fails transfer.\n");
 
-		m_transfer->fail();
+		m_transfer->has_failed();
 		m_transfer = 0;
 	}
 }
@@ -738,7 +735,7 @@ Call this only from the Building init!
 */
 void Flag::attach_building(Editor_Game_Base *g, Building *building)
 {
-	assert(!m_building);
+	assert(!m_building || m_building==building);
 
 	m_building = building;
 
@@ -784,7 +781,7 @@ Call this only from the Road init!
 */
 void Flag::attach_road(int dir, Road *road)
 {
-	assert(!m_roads[dir-1]);
+   assert(!m_roads[dir-1] || m_roads[dir-1]==road);
 
 	m_roads[dir-1] = road;
 	m_roads[dir-1]->set_economy(get_economy());
@@ -1279,7 +1276,7 @@ void Flag::add_flag_job(Game* g, int workerware, std::string programname)
 	FlagJob j;
 
 	j.request = new Request(this, workerware,
-	                        &Flag::flag_job_request_callback, this);
+	                        &Flag::flag_job_request_callback, this, Request::WORKER);
 	j.program = programname;
 
 	m_flag_jobs.push_back(j);
@@ -1352,7 +1349,7 @@ void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point
 		} else
 			warepos.y -= 6 + (i - 8) * 3;
 
-		dst->drawanim(warepos.x, warepos.y, item->get_ware_descr()->get_idle_anim(), 0,
+		dst->drawanim(warepos.x, warepos.y, item->get_ware_descr()->get_animation("idle"), 0,
 		              get_owner()->get_playercolor());
 	}
 }
@@ -1578,11 +1575,25 @@ Initialize the road.
 */
 void Road::init(Editor_Game_Base *gg)
 {
-	assert(m_path.get_nsteps() >= 2);
+   PlayerImmovable::init(gg);
+	
+   if(m_path.get_nsteps() >=2 ) {
+      link_into_flags(gg);
+   }
 
-	Game* g = static_cast<Game*>(gg);
+}
 
-	PlayerImmovable::init(g);
+/*
+ * This links into the flags, calls a carrier 
+ * and so on. This was formerly done in init (and 
+ * still is for normal games). But for save game loading
+ * we needed to have this road already registered
+ * as Map Object, thats why this is moved
+ */
+void Road::link_into_flags(Editor_Game_Base* gg) {
+   assert(m_path.get_nsteps() >= 2);
+
+   Game* g = static_cast<Game*>(gg);
 
 	// Link into the flags (this will also set our economy)
 	int dir;
@@ -1601,8 +1612,9 @@ void Road::init(Editor_Game_Base *gg)
 	// Mark Fields
 	mark_map(g);
 
-	// Request Carrier (if game)
-   if(g->is_game()) {
+   // Request Carrier (if game)
+   if(gg->is_game()) {
+      Game* g=static_cast<Game*>(gg);
 
       Carrier* carrier = (Carrier*)m_carrier.get(g);
 
@@ -1686,8 +1698,8 @@ void Road::request_carrier(Game* g)
 {
 	assert(!m_carrier.get(g) && !m_carrier_request);
 
-	m_carrier_request = new Request(this, g->get_safe_ware_id("carrier"),
-	                                &Road::request_carrier_callback, this);
+	m_carrier_request = new Request(this, get_owner()->get_tribe()->get_safe_worker_index("carrier"),
+	                                &Road::request_carrier_callback, this, Request::WORKER);
 }
 
 
@@ -1974,7 +1986,7 @@ idx == 0 is the start flag, idx == get_nrsteps() is the end flag.
 Every route has at least one flag.
 ===============
 */
-Flag *Route::get_flag(Game *g, int idx)
+Flag *Route::get_flag(Editor_Game_Base *g, int idx)
 {
 	assert(idx >= 0 && idx < (int)m_route.size());
 	return (Flag*)m_route[idx].get(g);
@@ -2064,11 +2076,13 @@ Transfer::~Transfer()
 	{
 		assert(!m_item);
 
-		m_worker->cancel_task_transfer(m_game);
+      if(m_game->get_objects()->object_still_available(m_worker))
+         m_worker->cancel_task_transfer(m_game);
 	}
 	else if (m_item)
 	{
-		m_item->cancel_transfer(m_game);
+      if(m_game->get_objects()->object_still_available(m_item))
+         m_item->cancel_transfer(m_game);
 	}
 }
 
@@ -2101,7 +2115,11 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	Flag* destflag;
 
 	// Catch the simplest cases
-	if (location->get_economy() != destination->get_economy()) {
+   log("Transfer %p, m_request: %p, loc: %p, dest: %p\n", this, m_request, location, destination);
+   log("dest->get_economy: %p\n", destination->get_economy());
+   log("loc->get_economy: %p\n", location->get_economy());
+	if (location->get_economy() != 
+         destination->get_economy()) {
 		tlog("Economy mismatch -> fail\n");
 
 		*psuccess = false;
@@ -2187,9 +2205,9 @@ This Transfer object will be deleted indirectly by finish().
 The caller might be destroyed, too.
 ===============
 */
-void Transfer::finish()
+void Transfer::has_finished()
 {
-	m_request->transfer_finish(m_game, this);
+   m_request->transfer_finish(m_game, this);
 }
 
 
@@ -2201,9 +2219,9 @@ Transfer failed for reasons beyond our control.
 This Transfer object will be deleted indirectly by fail().
 ===============
 */
-void Transfer::fail()
+void Transfer::has_failed()
 {
-	m_request->transfer_fail(m_game, this);
+   m_request->transfer_fail(m_game, this);
 }
 
 
@@ -2252,11 +2270,12 @@ Request::Request
 Request::~Request
 ===============
 */
-Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdata)
+Request::Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbdata, Type w)
 {
-	m_target = target;
+	m_type=w;
+   m_target = target;
 	m_economy = m_target->get_economy();
-	m_ware = ware;
+	m_index = index;
 	m_idle = false;
 	m_count = 1;
 	m_required_time = target->get_owner()->get_game()->get_gametime();
@@ -2265,8 +2284,10 @@ Request::Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdat
 	m_callbackfn = cbfn;
 	m_callbackdata = cbdata;
 
-	if (m_economy)
-		m_economy->add_request(this);
+   log("Created new request: %p\n", this);
+
+   if (m_economy)
+      m_economy->add_request(this);
 }
 
 
@@ -2280,10 +2301,111 @@ Request::~Request()
 	}
 
 	// Cancel all ongoing transfers
-	while(m_transfers.size())
+	while(m_transfers.size()) 
 		cancel_transfer(0);
 }
 
+#define REQUEST_VERSION 1
+/*
+ * Read this request from a file
+ *
+ * it is most probably created by some init function, 
+ * so ad least target/economy is correct. Some Transports
+ * might have been initialized. We have to kill them and replace
+ * them through the data in the file
+ */
+void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+   uint version=fr->Unsigned16();
+
+   if(version==REQUEST_VERSION) {
+      m_type=static_cast<Type>(fr->Unsigned8());
+      m_index=fr->Unsigned32();
+      m_idle=fr->Unsigned8();
+      m_count=fr->Unsigned32();
+      m_required_time=fr->Unsigned32();
+      m_required_interval=fr->Unsigned32();
+
+      assert(!m_transfers.size());
+
+      uint nr_transfers=fr->Unsigned16();
+      uint i=0;
+      for(i=0; i<nr_transfers; i++) {
+         bool is_ware=fr->Unsigned8();
+         uint reg=fr->Unsigned32();
+         Transfer* trans=0;
+         if(egbase->is_game()) {
+            Game* g=static_cast<Game*>(egbase);
+            assert(mol->is_object_known(reg));
+            if(is_ware) {
+               WareInstance* ware=static_cast<WareInstance*>(mol->get_object_by_file_index(reg));
+               trans=new Transfer(g, this, ware);
+            } else {
+               Worker* worker=static_cast<Worker*>(mol->get_object_by_file_index(reg));
+               trans=new Transfer(g, this, worker);
+            }
+            trans->set_idle(fr->Unsigned8());
+            m_transfers.push_back(trans);
+            log("Loaded transfer %p in request %p\n", trans, this);
+         }   
+      }
+
+      if(!is_open() && m_economy) 
+         m_economy->remove_request(this);
+
+      // DONE
+      return;
+   }
+   throw wexception("Unknown request version %i in file!\n", version);
+}
+
+/* 
+ * Write this request to a file
+ */
+void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(REQUEST_VERSION);
+
+   // target and econmy should be set, 
+   // same is true for callback stuff
+   
+   // Write type
+   fw->Unsigned8(m_type);
+
+   // Write ware
+   fw->Unsigned32(m_index);
+  
+   // Write idle
+   fw->Unsigned8(m_idle);
+
+   // Write count
+   fw->Unsigned32(m_count);
+
+   // Write required time
+   fw->Unsigned32(m_required_time);
+   fw->Unsigned32(m_required_interval);
+
+   // Write number of current transfers
+   fw->Unsigned16(m_transfers.size());
+   uint i=0;
+   for(i=0; i<m_transfers.size(); i++) {
+      Transfer* trans=m_transfers[i];
+      // Do no write game, request
+      bool is_ware=trans->m_item ? 1 : 0;
+      // Is this a ware (or a worker)
+      fw->Unsigned8(is_ware);
+      // Write ware/worker
+      if(is_ware) {
+         assert(mos->is_object_known(trans->m_item));
+         fw->Unsigned32(mos->get_object_file_index(trans->m_item));
+      } else {
+         assert(mos->is_object_known(trans->m_worker));
+         fw->Unsigned32(mos->get_object_file_index(trans->m_worker));
+      }
+      // Write idle
+      fw->Unsigned8(trans->is_idle());
+   }
+   // DONE
+}
 
 /*
 ===============
@@ -2355,6 +2477,8 @@ void Request::set_economy(Economy* e)
 
 	m_economy = e;
 
+   log("Set economy, add request!\n");
+
 	if (m_economy && is_open())
 		m_economy->add_request(this);
 }
@@ -2406,6 +2530,8 @@ void Request::set_count(int count)
 		cancel_transfer(m_transfers.size() - 1);
 
 	// Update the economy
+   log("add_request() in set_count()!\n");
+
 	if (m_economy) {
 		if (wasopen && !is_open())
 			m_economy->remove_request(this);
@@ -2455,19 +2581,17 @@ void Request::start_transfer(Game* g, Supply* supp)
 {
 	assert(is_open());
 
-	Ware_Descr* descr = g->get_ware_description(get_ware());
 	Transfer* t = 0;
-
 	try
 	{
-		if (descr->is_worker())
+		if (get_type()==WORKER) 
 		{
 			// Begin the transfer of a worker.
 			// launch_worker() creates the worker, set_job_request() makes sure the
 			// worker starts walking
-			log("Request: start worker transfer for %i\n", get_ware());
+			log("Request: start worker transfer for %i\n", get_index());
 
-			Worker* w = supp->launch_worker(g, get_ware());
+			Worker* w = supp->launch_worker(g, get_index());
 
 			t = new Transfer(g, this, w);
 		}
@@ -2476,9 +2600,9 @@ void Request::start_transfer(Game* g, Supply* supp)
 			// Begin the transfer of an item. The item itself is passive.
 			// launch_item() ensures the WareInstance is transported out of the warehouse
 			// Once it's on the flag, the flag code will decide what to do with it.
-			log("Request: start item transfer for %i\n", get_ware());
+			log("Request: start item transfer for %i\n", get_index());
 
-			WareInstance* item = supp->launch_item(g, get_ware());
+			WareInstance* item = supp->launch_item(g, get_index());
 
 			t = new Transfer(g, this, item);
 		}
@@ -2518,14 +2642,14 @@ void Request::transfer_finish(Game *g, Transfer* t)
 	t->m_worker = 0;
 	t->m_item = 0;
 
-	remove_transfer(find_transfer(t));
+   remove_transfer(find_transfer(t));
 
 	if (!m_idle) {
 		set_required_time(get_base_required_time(g, 1));
 		m_count--;
 	}
 
-	(*m_callbackfn)(g, this, m_ware, w, m_callbackdata);
+	(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
 
 	// this may no longer be valid here
 }
@@ -2548,9 +2672,11 @@ void Request::transfer_fail(Game *g, Transfer* t)
 	t->m_worker = 0;
 	t->m_item = 0;
 
-	remove_transfer(find_transfer(t));
-
-	if (!wasopen)
+   remove_transfer(find_transfer(t));
+   
+	log("Add request in transfer_fail!\n");
+   
+   if (!wasopen)
 		m_economy->add_request(this);
 }
 
@@ -2650,7 +2776,7 @@ SupplyList::add
 Add a supply to the list.
 ===============
 */
-void SupplyList::add(Supply* supp)
+void SupplyList::add_supply(Supply* supp)
 {
 	m_supplies.push_back(supp);
 }
@@ -2658,12 +2784,12 @@ void SupplyList::add(Supply* supp)
 
 /*
 ===============
-SupplyList::remove
+SupplyList::remove_supply
 
 Remove a supply from the list.
 ===============
 */
-void SupplyList::remove(Supply* supp)
+void SupplyList::remove_supply(Supply* supp)
 {
 	for(uint idx = 0; idx < m_supplies.size(); idx++) {
 		if (m_supplies[idx] == supp) {
@@ -2782,7 +2908,7 @@ void WaresQueue::update(Game* g)
 	if (m_filled < m_size)
 	{
 		if (!m_request)
-			m_request = new Request(m_owner, m_ware, &WaresQueue::request_callback, this);
+			m_request = new Request(m_owner, m_ware, &WaresQueue::request_callback, this, Request::WARE);
 
 		m_request->set_count(m_size - m_filled);
 		m_request->set_required_interval(m_consume_interval);
@@ -2844,6 +2970,8 @@ Remove the wares in this queue from the given economy (used in accounting).
 */
 void WaresQueue::remove_from_economy(Economy* e)
 {
+   if(m_ware==-1) return; 
+
 	e->remove_wares(m_ware, m_filled);
 	if (m_request)
 		m_request->set_economy(0);
@@ -2859,7 +2987,9 @@ Add the wares in this queue to the given economy (used in accounting)
 */
 void WaresQueue::add_to_economy(Economy* e)
 {
-	e->add_wares(m_ware, m_filled);
+	if(m_ware==-1) return;
+
+   e->add_wares(m_ware, m_filled);
 	if (m_request)
 		m_request->set_economy(e);
 }
@@ -2904,6 +3034,49 @@ void WaresQueue::set_consume_interval(int time)
 	m_consume_interval = time;
 }
 
+/*
+ * Read and write
+ */
+#define WARES_QUEUE_DATA_PACKET_VERSION 1
+void WaresQueue::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) {
+
+   fw->Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
+
+	// Owner and callback is not saved, but this should be obvious on load
+   fw->CString(m_owner->get_owner()->get_tribe()->get_ware_descr(m_ware)->get_name());
+   fw->Signed32(m_size);
+   fw->Signed32(m_filled);
+   fw->Signed32(m_consume_interval);
+   if(m_request) {
+      fw->Unsigned8(1);
+      m_request->Write(fw,egbase,os);
+   } else 
+      fw->Unsigned8(0);
+}
+void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
+   int version=fr->Unsigned16();
+
+   if(version==WARES_QUEUE_DATA_PACKET_VERSION) {
+      m_ware=m_owner->get_owner()->get_tribe()->get_ware_index(fr->CString());
+      m_size=fr->Signed32();
+      m_filled=fr->Signed32();
+      m_consume_interval=fr->Signed32();
+      bool request=fr->Unsigned8();
+      if(m_request)
+         delete m_request;
+      if(request) {
+         m_request = new Request(m_owner, 0, &WaresQueue::request_callback, this, Request::WORKER);
+         m_request->Read(fr,egbase,ol);
+      } else {
+         m_request=0;
+      }
+     
+      // Now Economy stuff. We have to add our filled items to the economy
+      add_to_economy(m_owner->get_economy());
+      return;
+   }
+   throw wexception("WaresQueue::Read: Unknown WaresQueueVersion %i!\n", version);
+}
 
 /*
 ==============================================================================
@@ -2923,16 +3096,16 @@ Economy::Economy(Player *player)
 {
 	m_owner = player;
 	m_rebuilding = false;
-	m_trackserial = m_owner->get_game()->add_trackpointer(this);
 	m_request_timer = false;
 	mpf_cycle = 0;
+   player->add_economy(this);
 }
 
 Economy::~Economy()
 {
 	assert(!m_rebuilding);
 
-	m_owner->get_game()->remove_trackpointer(m_trackserial);
+   m_owner->remove_economy(this);
 
 	if (m_requests.size())
 		log("Warning: Economy still has requests left on destruction\n");
@@ -3370,8 +3543,19 @@ void Economy::add_wares(int id, int count)
 
 	m_wares.add(id, count);
 
+   log("Economy: add, has now %i of id %i\n", m_wares.stock(id), id);
+
 	// TODO: add to global player inventory?
 }
+void Economy::add_workers(int id, int count)
+{
+	//log("%p: add(%i, %i)\n", this, id, count);
+
+	m_workers.add(id, count);
+
+	// TODO: add to global player inventory?
+}
+
 
 /*
 ===============
@@ -3386,11 +3570,23 @@ a split of the Economy.
 void Economy::remove_wares(int id, int count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
+	
+   log("Economy: remove, has currently %i of id %i, want to remove %i\n", m_wares.stock(id), id, count);
 
 	m_wares.remove(id, count);
+   
 
 	// TODO: remove from global player inventory?
 }
+void Economy::remove_workers(int id, int count)
+{
+	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_workers.stock(id));
+
+	m_workers.remove(id, count);
+
+	// TODO: remove from global player inventory?
+}
+
 
 /*
 ===============
@@ -3415,17 +3611,26 @@ Remove the warehouse and its wares from the economy.
 */
 void Economy::remove_warehouse(Warehouse *wh)
 {
-	// fast remove
-	uint i;
-	for(i = 0; i < m_warehouses.size(); i++) {
-		if (m_warehouses[i] == wh) {
-			if (i < m_warehouses.size()-1)
-				m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
-			break;
-		}
-	}
-	assert(i != m_warehouses.size());
-	m_warehouses.pop_back();
+   // fast remove
+   uint i;
+   for(i = 0; i < m_warehouses.size(); i++) {
+      if (m_warehouses[i] == wh) {
+         if (i < m_warehouses.size()-1)
+            m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
+         break;
+      }
+   }
+   /*
+    * This assert was modified, since on
+    * loading, warehouses might try to remove
+    * themselves from their own economy,
+    * though they weren't added (since they weren't
+    * initialized)
+    * 
+    */
+   assert(i != m_warehouses.size() || !m_warehouses.size()); 
+   if(m_warehouses.size())
+      m_warehouses.pop_back();
 }
 
 
@@ -3440,10 +3645,17 @@ Important: This must only be called by the Request class.
 void Economy::add_request(Request* req)
 {
 	assert(req->is_open());
-	assert(!have_request(req));
+   assert(!have_request(req));
 
-	log("%p: add_request(%p) for %u\n", this, req,
-			req->get_target((Game*)get_owner()->get_game())->get_serial());
+   if(req->get_type()==Request::WORKER) {
+      log("%p: add_request(%p) for worker %s, target is %u\n", this, req,
+            get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
+            req->get_target((Game*)get_owner()->get_game())->get_serial());
+   } else {
+      log("%p: add_request(%p) for ware %s, target is %u\n", this, req,
+            get_owner()->get_tribe()->get_ware_descr(req->get_index())->get_descname(),
+            req->get_target((Game*)get_owner()->get_game())->get_serial());
+   }
 
 	m_requests.push_back(req);
 
@@ -3496,38 +3708,37 @@ void Economy::remove_request(Request* req)
 
 /*
 ===============
-Economy::add_supply
+Economy::add_worker_supply
 
-Add a supply to our list of supplies.
+Add a worker_supply to our list of supplies.
 ===============
 */
-void Economy::add_supply(int ware, Supply* supp)
+void Economy::add_worker_supply(int ware, Supply* supp)
 {
-	//log("add_supply(%i, %p)\n", ware, supp);
+	//log("add_worker_supply(%i, %p)\n", ware, supp);
 
-	if (ware >= (int)m_supplies.size())
-		m_supplies.resize(ware+1);
+	if (ware >= (int)m_worker_supplies.size())
+		m_worker_supplies.resize(ware+1);
 
-	m_supplies[ware].add(supp);
+	m_worker_supplies[ware].add_supply(supp);
 
 	start_request_timer();
 }
 
-
 /*
 ===============
-Economy::have_supply
+Economy::have_worker_supply
 
-Return true if the given supply is registered with the economy.
+Return true if the given worker_supply is registered with the economy.
 ===============
 */
-bool Economy::have_supply(int ware, Supply* supp)
+bool Economy::have_worker_supply(int ware, Supply* supp)
 {
-	if (ware >= (int)m_supplies.size())
+	if (ware >= (int)m_worker_supplies.size())
 		return false;
 
-	for(int i = 0; i < m_supplies[ware].get_nrsupplies(); i++)
-		if (m_supplies[ware].get_supply(i) == supp)
+	for(int i = 0; i < m_worker_supplies[ware].get_nrsupplies(); i++)
+		if (m_worker_supplies[ware].get_supply(i) == supp)
 			return true;
 
 	return false;
@@ -3536,17 +3747,74 @@ bool Economy::have_supply(int ware, Supply* supp)
 
 /*
 ===============
-Economy::remove_supply
+Economy::remove_worker_supply
 
-Remove a supply from our list of supplies.
+Remove a worker_supply from our list of supplies.
 ===============
 */
-void Economy::remove_supply(int ware, Supply* supp)
+void Economy::remove_worker_supply(int ware, Supply* supp)
 {
-	//log("remove_supply(%i, %p)\n", ware, supp);
+	//log("remove_worker_supply(%i, %p)\n", ware, supp);
 
-	m_supplies[ware].remove(supp);
+	m_worker_supplies[ware].remove_supply(supp);
 }
+
+
+/*
+===============
+Economy::add_ware_supply
+
+Add a ware_supply to our list of supplies.
+===============
+*/
+void Economy::add_ware_supply(int ware, Supply* supp)
+{
+	//log("add_ware_supply(%i, %p)\n", ware, supp);
+
+	if (ware >= (int)m_ware_supplies.size())
+		m_ware_supplies.resize(ware+1);
+
+	m_ware_supplies[ware].add_supply(supp);
+
+	start_request_timer();
+}
+
+
+/*
+===============
+Economy::have_ware_supply
+
+Return true if the given ware_supply is registered with the economy.
+===============
+*/
+bool Economy::have_ware_supply(int ware, Supply* supp)
+{
+	if (ware >= (int)m_ware_supplies.size())
+		return false;
+
+	for(int i = 0; i < m_ware_supplies[ware].get_nrsupplies(); i++)
+		if (m_ware_supplies[ware].get_supply(i) == supp)
+			return true;
+
+	return false;
+}
+
+
+/*
+===============
+Economy::remove_ware_supply
+
+Remove a ware_supply from our list of supplies.
+===============
+*/
+void Economy::remove_ware_supply(int ware, Supply* supp)
+{
+   assert(ware>=0); 
+   //log("remove_ware_supply(%i, %p)\n", ware, supp);
+
+	m_ware_supplies[ware].remove_supply(supp);
+}
+
 
 
 /*
@@ -3655,7 +3923,7 @@ void Economy::start_request_timer(int delta)
 
 	m_request_timer = true;
 	m_request_timer_time = game->get_gametime() + delta;
-	cq->enqueue (new Cmd_Call(m_request_timer_time, &Economy::request_timer_cb, m_trackserial, 0));
+   cq->enqueue (new Cmd_Call_Economy_Balance(m_request_timer_time, m_owner->get_player_number(), this));
 	
 //	cq->queue(m_request_timer_time, SENDER_MAPOBJECT, CMD_CALL,
 //					(int)(&Economy::request_timer_cb), m_trackserial, 0);
@@ -3670,7 +3938,7 @@ Find the supply that is best suited to fulfill the given request.
 Returns 0 if no supply is found.
 ===============
 */
-Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost)
+Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost, std::vector<SupplyList>* use_supply)
 {
 	assert(req->is_open());
 
@@ -3681,11 +3949,11 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost)
 	Flag* target_flag = req->get_target_flag(g);
 
 	// Look for matches in all possible supplies in this economy
-	if (ware >= (int)m_supplies.size())
+	if (ware >= (int)use_supply->size())
 		return false; // tough luck, we have definitely no supplies for this ware
 
-	for(int i = 0; i < m_supplies[ware].get_nrsupplies(); i++) {
-		Supply* supp = m_supplies[ware].get_supply(i);
+	for(int i = 0; i < ((*use_supply)[ware]).get_nrsupplies(); i++) {
+		Supply* supp = ((*use_supply)[ware]).get_supply(i);
 		Route* route;
 
 		// idle requests only get active supplies
@@ -3718,6 +3986,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int ware, int* pcost)
 
 
 struct RequestSupplyPair {
+   bool                 is_worker;
 	int						ware;
 	TrackPtr<Request>		request;
 	TrackPtr<Supply>		supply;
@@ -3754,7 +4023,11 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		int cost; // estimated time in milliseconds to fulfill Request
 		int idletime;
 
-		supp = find_best_supply(g, req, req->get_ware(), &cost);
+      if(req->get_type()==Request::WORKER) 
+         supp = find_best_supply(g, req, req->get_index(), &cost, &m_worker_supplies);
+      else 
+         supp = find_best_supply(g, req, req->get_index(), &cost, &m_ware_supplies);
+
 		if (!supp)
 			continue;
 
@@ -3788,8 +4061,9 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 
 		// Otherwise, consider this request/supply pair for queueing
 		RequestSupplyPair rsp;
-
-		rsp.ware = req->get_ware();
+      
+      rsp.is_worker = req->get_type()==Request::WORKER;
+		rsp.ware = req->get_index();
 		rsp.request = req;
 		rsp.supply = supp;
 		rsp.priority = idletime;
@@ -3819,49 +4093,38 @@ void Economy::create_requested_workers(Game* g)
 		Find the request of workers that can not be supplied
 	*/
 	if (get_nr_warehouses() > 0) {
-		Warehouse *wh = m_warehouses[0];
-
 		for(RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
 			Request* req = *it;
 
-			if (!req->is_idle()) {
-				Worker_Descr* w_desc = 0;
-				int ware = req->get_ware();
-				int temp = 0;
+			if (!req->is_idle() && req->get_type()==Request::WORKER) {
+				int index = req->get_index();
 				int num_wares = 0;
-
-				while (temp < wh->get_wares().get_nrwareids()) {
-					w_desc = get_owner()->get_tribe()->get_worker_descr(temp);
-					temp++;
-					if ((w_desc) && (w_desc->get_ware_id() == ware))
-						break;
-					w_desc = 0;
-				} // while
-					
-				// Ignore it if isn't a worker or is a worker that cann't be buildable
-				if ((!w_desc) || (!w_desc->get_buildable()))
+            Worker_Descr* w_desc=get_owner()->get_tribe()->get_worker_descr(index);
+            
+				// Ignore it if is a worker that cann't be buildable
+				if (!w_desc->get_buildable())
 					continue;
 
 //log ("REQ.Worker buildable (%d, %s)\n", ware, w_desc->get_name());
 
-				for(int i = 0; i < m_supplies[ware].get_nrsupplies(); i++) {
-					Supply* supp = m_supplies[ware].get_supply(i);
+				for(int i = 0; i < m_worker_supplies[index].get_nrsupplies(); i++) {
+					Supply* supp = m_worker_supplies[index].get_supply(i);
 
 					if (!supp->is_active(g)) {
 						num_wares++;
 //log ("(%d, %s) act ?: %d  Num:%d There are supplies!\n", ware, w_desc->get_name(), supp->is_active(g), supp->get_amount(g, ware));
 						continue;
 					} // if (supp->is_active)
-				} // for(int i = 0; i < m_supplies)
+				} // for(int i = 0; i < m_worker_supplies)
 
 				// If there aren't enough supplies...
 				if (num_wares == 0) {
 // log ("(%d, %s) There are NOT supplies!\n", ware, w_desc->get_name());
 					uint n_wh = 0;
 					while (n_wh < get_nr_warehouses()) {
-						if (m_warehouses[n_wh]->can_create_worker(g, ware)) {
+						if (m_warehouses[n_wh]->can_create_worker(g, index)) {
 log("Economy::process_request-- Created a '%s' needed\n", w_desc->get_name());
-							m_warehouses[n_wh]->create_worker(g, ware);
+							m_warehouses[n_wh]->create_worker(g, index);
 							break;
 						} // if (m_warehouses[n_wh]
 						n_wh++;
@@ -3887,6 +4150,10 @@ void Economy::balance_requestsupply()
 	Game* g;
 	RSPairStruct rsps;
 
+   m_request_timer = false;
+
+   log("Called balance requestesupply for economy: %p\n", this);
+
 	rsps.nexttimer = -1;
 
 	if (!egbase->is_game())
@@ -3905,7 +4172,9 @@ void Economy::balance_requestsupply()
 		rsps.queue.pop();
 
 		if (!rsp.request || !rsp.supply ||
-		    !have_request(rsp.request) || !have_supply(rsp.ware, rsp.supply)) {
+		    !have_request(rsp.request) || 
+          ((rsp.is_worker) && !have_worker_supply(rsp.ware, rsp.supply) | 
+           (!rsp.is_worker) && !have_ware_supply(rsp.ware, rsp.supply))) {
 			log("NO: ware %i, priority %i\n", rsp.ware, rsp.priority);
 
 			rsps.nexttimer = 200;
@@ -3931,25 +4200,66 @@ void Economy::balance_requestsupply()
 	}
 }
 
-
 /*
 ===============
-Economy::request_timer_cb [static]
+Cmd_Call_Economy_Balance
 
 Called by Cmd_Queue as requested by start_request_timer().
-Call non-static functions to balance supply and request.
+Call economy functions to balance supply and request.
 ===============
 */
-void Economy::request_timer_cb(Game* g, int serial, int unused)
-{
-	Economy* e = (Economy*)g->get_trackpointer(serial);
+void Cmd_Call_Economy_Balance::execute(Game* g) {
+   Player* plr=g->get_player(m_player);
 
-	if (!e)
-		return;
+   // If this economy has vanished, drop this 
+   // call silently
+   if(!plr->has_economy(m_economy))
+      return;
 
-	if (!e->m_request_timer || g->get_gametime() != e->m_request_timer_time)
-		return;
+   if(!m_economy->should_run_balance_check(g->get_gametime()) && !m_force_balance)   
+      return;
 
-	e->m_request_timer = false;
-	e->balance_requestsupply();
+   m_force_balance = false;
+   m_economy->balance_requestsupply();
 }
+
+/*
+ * Read and write
+ */
+#define CURRENT_CMD_CALL_ECONOMY_VERSION 1
+void Cmd_Call_Economy_Balance::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+   int version=fr->Unsigned16();
+
+   if(version==CURRENT_CMD_CALL_ECONOMY_VERSION) {
+      // Read Base Commands
+      BaseCommand::BaseCmdRead(fr,egbase,mol);
+      
+      m_player= fr->Unsigned8();
+      bool exists=fr->Unsigned8();
+      if(!exists) 
+         m_economy=((Economy*) 0xffffffff);
+      else
+         m_economy=egbase->get_player(m_player)->get_economy_by_number(fr->Unsigned16());
+
+      m_force_balance = true; // on load, the first balance has to been forced
+   } else
+      throw wexception("Unknown version %i in Cmd_Call_Economy_Balance::Read()!\n", version);
+}
+void Cmd_Call_Economy_Balance::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   fw->Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
+
+   // Write Base Commands
+   BaseCommand::BaseCmdWrite(fw,egbase,mos);
+   
+   fw->Unsigned8(m_player);
+   
+   // Economy
+   Player* plr = egbase->get_player(m_player);
+   bool has_eco=plr->has_economy(m_economy);
+   
+   fw->Unsigned8(has_eco);
+   
+   if(has_eco) 
+      fw->Unsigned16(plr->get_economy_number(m_economy));
+}
+

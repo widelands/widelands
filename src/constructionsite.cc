@@ -26,6 +26,7 @@
 #include "player.h"
 #include "rendertarget.h"
 #include "transport.h"
+#include "tribe.h"
 #include "wexception.h"
 #include "worker.h"
 
@@ -130,6 +131,38 @@ int ConstructionSite::get_size()
 	return m_building->get_size();
 }
 
+/*
+ * Write infos over this constructionsite
+ */
+void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
+   Building::log_general_info(egbase);
+
+   molog("m_building: %p\n", m_building);
+   molog("* m_building (name): %s\n", m_building->get_name());
+   molog("m_prev_building: %p\n", m_prev_building); 
+   if(m_prev_building)
+      molog("* m_prev_building (name): %s\n", m_prev_building->get_name()); 
+
+   molog("m_builder_request: %p\n", m_builder_request);
+   molog("m_builder: %p\n", m_builder);
+
+   molog("m_fetchfromflag: %i\n", m_fetchfromflag);
+
+	molog("m_working: %i\n", m_working);
+	molog("m_work_steptime: %i\n", m_work_steptime);
+	molog("m_work_completed: %i\n", m_work_completed);
+	molog("m_work_steps: %i\n", m_work_steps);
+	
+   molog("WaresQueue size: %i\n", m_wares.size());
+   for(uint i=0; i<m_wares.size(); i++) {
+      molog("Dumping WaresQueue %i/%i\n", i+1, m_wares.size());
+      molog("* Owner: %i (player nr)\n", m_wares[i]->get_owner()->get_player_number());
+      molog("* Ware: %i (index)\n", m_wares[i]->get_ware());
+      molog("* Size: %i\n", m_wares[i]->get_size());
+      molog("* Filled: %i\n", m_wares[i]->get_filled());
+      molog("* Consume Interval: %i\n", m_wares[i]->get_consume_interval());
+   }
+}
 
 /*
 ===============
@@ -159,7 +192,7 @@ should be more useful to the player.
 */
 uint ConstructionSite::get_ui_anim()
 {
-	return get_building()->get_idle_anim();
+	return get_building()->get_animation("idle");
 }
 
 
@@ -241,7 +274,7 @@ void ConstructionSite::set_previous_building(Building_Descr* descr) {
 
    m_prev_building=descr;
 
-   if(!m_prev_building->get_build_anim())
+   if(!m_prev_building->get_animation("build"))
       throw wexception("Trying to enhance a non buildable building!\n");
 }
 
@@ -302,7 +335,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 
 			wq->set_callback(&ConstructionSite::wares_queue_callback, this);
 			wq->set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-			wq->init((Game*)g, g->get_safe_ware_id((*bc)[i].name.c_str()), (*bc)[i].amount);
+			wq->init((Game*)g, get_owner()->get_tribe()->get_safe_ware_index((*bc)[i].name.c_str()), (*bc)[i].amount);
 
 			m_work_steps += (*bc)[i].amount;
 		}
@@ -343,9 +376,11 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		Building* bld = m_building->create(g, get_owner(), m_position, false);
 		bld->set_stop(get_stop());
 		// Walk the builder home safely
-		m_builder->reset_tasks((Game*)g);
-		m_builder->set_location(bld);
-		m_builder->start_task_gowarehouse((Game*)g);
+      if(g->get_objects()->object_still_available(m_builder)) { 
+         m_builder->reset_tasks((Game*)g);
+         m_builder->set_location(bld);
+         m_builder->start_task_gowarehouse((Game*)g);
+      }
 	}
 }
 
@@ -380,8 +415,8 @@ void ConstructionSite::request_builder(Game* g)
 {
 	assert(!m_builder && !m_builder_request);
 
-	m_builder_request = new Request(this, g->get_safe_ware_id("builder"),
-	                                &ConstructionSite::request_builder_callback, this);
+	m_builder_request = new Request(this, get_owner()->get_tribe()->get_safe_worker_index("builder"),
+	                                &ConstructionSite::request_builder_callback, this, Request::WORKER);
 }
 
 
@@ -439,7 +474,7 @@ bool ConstructionSite::get_building_work(Game* g, Worker* w, bool success)
 	// Check if one step has completed
 	if (m_working) {
 		if ((int)(g->get_gametime() - m_work_steptime) < 0) {
-			w->start_task_idle(g, w->get_idle_anim(), m_work_steptime - g->get_gametime());
+			w->start_task_idle(g, w->get_animation("idle"), m_work_steptime - g->get_gametime());
 			return true;
 		} else {
 			molog("ConstructionSite::check_work: step %i completed\n", m_work_completed);
@@ -478,7 +513,7 @@ bool ConstructionSite::get_building_work(Game* g, Worker* w, bool success)
 			m_working = true;
 			m_work_steptime = g->get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
-			w->start_task_idle(g, w->get_idle_anim(), CONSTRUCTIONSITE_STEP_TIME);
+			w->start_task_idle(g, w->get_animation("idle"), CONSTRUCTIONSITE_STEP_TIME);
 			return true;
 		}
 	}
@@ -533,7 +568,7 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 	if (m_working)
 		completedtime += CONSTRUCTIONSITE_STEP_TIME + g->get_gametime() - m_work_steptime;
 
-	anim = get_building()->get_build_anim();
+	anim = get_building()->get_animation("build");
    int nr_pics=g_gr->get_animation_nr_frames(anim);
    uint anim_pic = completedtime * nr_pics / totaltime;
 	// Redefine tanim
@@ -552,7 +587,7 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
       // Is the first building, but there was another building here before,
       // get its last build picture and draw it instead
       int w, h;
-      int anim = m_prev_building->get_build_anim();
+      int anim = m_prev_building->get_animation("build");
       int nr_pics=g_gr->get_animation_nr_frames(anim);
       g_gr->get_animation_size(anim, tanim, &w, &h);
       int tanim = (nr_pics-1)*FRAME_LENGTH;

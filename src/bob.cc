@@ -78,7 +78,7 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
 	m_default_encodedata.parse(global);
 
 	snprintf(picname, sizeof(picname), "%s_??.bmp", m_name);
-	m_idle_anim = g_anim.get(directory, prof->get_safe_section("idle"), picname, encdata);
+	add_animation("idle", g_anim.get(directory, prof->get_safe_section("idle"), picname, encdata));
 
 	// Parse attributes
    const char* string;
@@ -242,15 +242,16 @@ Initialize the object
 void Bob::init(Editor_Game_Base* gg)
 {
    Map_Object::init(gg);
+		
+   m_sched_init_task = true;
 
    if (gg->is_game()) {
       Game* g=static_cast<Game*>(gg);
 
 		schedule_act(g, 1);
-		m_sched_init_task = true;
    } else {
       // In editor: play idle task forever
-      set_animation(gg, get_descr()->get_idle_anim());
+      set_animation(gg, get_descr()->get_animation("idle"));
    }
 }
 
@@ -475,24 +476,24 @@ fill the state information with parameters for the task.
 */
 void Bob::push_task(Game* g, Task* task)
 {
-	State* state;
+   State* state;
+		
+   if (m_stack_dirty && m_stack.size())
+      throw wexception("MO(%u): push_task(%s): stack already dirty", get_serial(), task->name);
 
-	if (m_stack_dirty && m_stack.size())
-		throw wexception("MO(%u): push_task(%s): stack already dirty", get_serial(), task->name);
+   m_stack.push_back(State());
 
-	m_stack.push_back(State());
+   state = get_state();
+   state->task = task;
+   state->ivar1 = 0;
+   state->ivar2 = 0;
+   state->diranims = 0;
+   state->path = 0;
+   state->transfer = 0;
+   state->route = 0;
+   state->program = 0;
 
-	state = get_state();
-	state->task = task;
-	state->ivar1 = 0;
-	state->ivar2 = 0;
-	state->diranims = 0;
-	state->path = 0;
-	state->transfer = 0;
-	state->route = 0;
-	state->program = 0;
-
-	m_stack_dirty = true;
+   m_stack_dirty = true;
 }
 
 
@@ -505,22 +506,24 @@ Remove the current task from the stack.
 pop_task() itself does not call any parent task functions, but it sets a flag
 to make it happen.
 ===============
-*/
+   */
 void Bob::pop_task(Game* g)
 {
-	State* state = get_state();
+   State* state = get_state();
+   
+   if (m_stack_dirty) 
+      throw wexception("MO(%u): pop_task(%s): stack already dirty", get_serial(), state->task->name);
 
-	if (m_stack_dirty)
-		throw wexception("MO(%u): pop_task(%s): stack already dirty", get_serial(), state->task->name);
-
-	if (state->path)
+   if (state->path)
 		delete state->path;
 	if (state->route)
 		delete state->route;
 	if (state->transfer)
-		state->transfer->fail();
+		state->transfer->has_failed();
+	
+   m_stack.pop_back();
 
-	m_stack.pop_back();
+
 	m_stack_dirty = true;
 }
 
@@ -588,8 +591,6 @@ as if the Bob has just been created and initialized.
 */
 void Bob::reset_tasks(Game* g)
 {
-	molog("reset_tasks\n");
-
 	while(m_stack.size()) {
 		m_stack_dirty = false;
 
@@ -597,8 +598,8 @@ void Bob::reset_tasks(Game* g)
 	}
 
 	set_signal("");
-	schedule_act(g, 1);
-	m_sched_init_task = true;
+   schedule_act(g, 1);
+   m_sched_init_task = true;
 	m_stack_dirty = false;
 }
 
@@ -851,7 +852,7 @@ void Bob::movepath_update(Game* g, State* state)
 
 	if (!state->path || state->ivar1 >= state->path->get_nsteps()) {
 		assert(!state->path || m_position == state->path->get_end());
-		pop_task(g); // success
+      pop_task(g); // success
 		return;
 	} else if(state->ivar1==state->ivar3) {
       // We have stepped all steps that we were asked for.
@@ -1129,7 +1130,56 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 		m_linknext->m_linkpprev = &m_linknext;
 	m_position.field->bobs = this;
 }
+/*
+ * Give debug informations
+ */
+void Bob::log_general_info(Editor_Game_Base* egbase) {
+   molog("Owner: %p\n", m_owner);
+   
+   molog("Postition: (%i,%i)\n", m_position.x, m_position.y);
+   molog("ActID: %i\n", m_actid);
 
+	molog("Animation: %s\n", m_anim ? get_descr()->get_animation_name(m_anim).c_str() : "<none>" );
+   molog("AnimStart: %i\n", m_animstart);
+
+	molog("WalkingDir: %i\n", m_walking);
+	molog("WalkingStart: %i\n", m_walkstart);
+	molog("WalkEnd: %i\n", m_walkend);
+
+	molog("Stack dirty: %i\n", m_stack_dirty);
+	molog("Init auto task: %i\n", m_sched_init_task);
+	molog("Signale: %s\n", m_signal.c_str());
+
+   molog("Stack size: %i\n", m_stack.size());
+   for(uint i=0; i<m_stack.size(); i++) {
+      molog("Stack dump %i/%i\n", i+1, m_stack.size());
+
+      molog("* task->name: %s\n", m_stack[i].task->name);
+      
+      molog("* ivar1: %i\n", m_stack[i].ivar1);
+      molog("* ivar2: %i\n", m_stack[i].ivar2);
+      molog("* ivar3: %i\n", m_stack[i].ivar3);
+
+      molog("* object pointer: %p\n", m_stack[i].objvar1.get(egbase));
+		molog("* svar1: %s\n", m_stack[i].svar1.c_str());
+
+		molog("* coords: (%i,%i)\n", m_stack[i].coords.x, m_stack[i].coords.y);
+		molog("* diranims: %p\n",  m_stack[i].diranims);
+		molog("* path: %p\n",  m_stack[i].path);
+      if(m_stack[i].path) {
+         Path* p=m_stack[i].path;
+         molog("** Path length: %i\n", p->get_nsteps());
+         molog("** Start: (%i,%i)\n", p->get_start().x, p->get_start().y);
+         molog("** End: (%i,%i)\n", p->get_end().x, p->get_end().y);
+         for(int i=0; i<p->get_nsteps(); i++) 
+            molog("** Step %i/%i: %i\n", i+1, p->get_nsteps(), p->get_step(i));
+      }
+		molog("* transfer: %p\n",  m_stack[i].transfer);
+		molog("* route: %p\n",  m_stack[i].route);
+		
+      molog("* program: %p\n",  m_stack[i].route);
+   }
+}
 
 /*
 ==============================================================================

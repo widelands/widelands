@@ -30,8 +30,8 @@ class Widelands_Map_Allowed_Buildings_Data_Packet : public Widelands_Map_Data_Pa
    public:
       virtual ~Widelands_Map_Allowed_Buildings_Data_Packet();
 
-      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
-      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
+      virtual void Read(FileRead*, Editor_Game_Base*, bool, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
 };
 
 

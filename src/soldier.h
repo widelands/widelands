@@ -31,7 +31,7 @@ public:
 	Soldier_Descr(Tribe_Descr *tribe, const char *name);
 	virtual ~Soldier_Descr(void);
    
-   virtual Worker_Type get_worker_type(void) { return SOLDIER; }
+   virtual Worker_Type get_worker_type(void) const { return SOLDIER; }
 
    virtual void load_graphics(void); 
 
@@ -93,6 +93,7 @@ protected:
 };
 
 class Soldier : public Worker {
+   friend class Widelands_Map_Bobdata_Data_Packet; // Writes this to disk
 	MO_DESCR(Soldier_Descr);
 
 public:
@@ -112,7 +113,7 @@ public:
    uint get_evade_level(void) { return m_evade_level; }
    
 public:
-   virtual Worker_Descr::Worker_Type get_worker_type(void) { return get_descr()->get_worker_type(); }
+   virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
 
    // Draw this soldier
    void draw(Editor_Game_Base* g, RenderTarget* dst, Point pos);

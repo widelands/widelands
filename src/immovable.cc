@@ -22,6 +22,7 @@
 #include "field.h"
 #include "game.h"
 #include "immovable.h"
+#include "immovable_program.h"
 #include "player.h"
 #include "map.h"
 #include "profile.h"
@@ -67,15 +68,14 @@ Only call this during init.
 void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
 {
 	Field *f = g->get_map()->get_field(c);
-	
-	if (f->immovable) {
-		BaseImmovable *other = f->immovable;
+   if (f->immovable && f->immovable!=this) {
+      BaseImmovable *other = f->immovable;
 
-		assert(other->get_size() == NONE);
+      assert(other->get_size() == NONE);
 
-		other->cleanup(g);
-		delete other;
-	}
+      other->cleanup(g);
+      delete other;
+   }
 
 	f->immovable = this;
 
@@ -111,58 +111,6 @@ ImmovableProgram IMPLEMENTATION
 
 ==============================================================================
 */
-
-// Additional parameters for op parsing routines
-struct ProgramParser {
-	Immovable_Descr*		descr;
-	std::string				directory;
-	Profile* 				prof;
-};
-
-// One action of a program
-struct ImmovableAction {
-	typedef bool (Immovable::*execute_t)(Game* g, bool killable, const ImmovableAction& action);
-
-	execute_t	function;
-	int			iparam1;
-	int			iparam2;
-	std::string	sparam1;
-   std::string sparam2;
-};
-
-// The ImmovableProgram
-class ImmovableProgram {
-	typedef void (ImmovableProgram::*parse_t)(ImmovableAction* act, const ProgramParser* parser,
-																				const std::vector<std::string>& cmd);
-
-public:
-	ImmovableProgram(std::string name);
-
-	std::string get_name() const { return m_name; }
-	uint get_size() const { return m_actions.size(); }
-	const ImmovableAction& get_action(uint idx) const { assert(idx < m_actions.size()); return m_actions[idx]; }
-
-	void add_action(const ImmovableAction& act);
-	void parse(Immovable_Descr* descr, std::string directory, Profile* prof);
-
-private:
-	void parse_animation(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
-	void parse_transform(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
-	void parse_remove(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd);
-
-private:
-	struct ParseMap {
-		const char*	name;
-		parse_t		function;
-	};
-
-private:
-	std::string							m_name;
-	std::vector<ImmovableAction>	m_actions;
-
-private:
-	static const ParseMap			s_parsemap[];
-};
 
 // Command name -> parser function mapping
 const ImmovableProgram::ParseMap ImmovableProgram::s_parsemap[] = {
@@ -464,16 +412,10 @@ Parse the animation of the given name.
 */
 uint Immovable_Descr::parse_animation(std::string directory, Profile* s, std::string name)
 {
-	AnimationMap::iterator it = m_animations.find(name);
-
-	// Check if the animation has already been loaded
-	if (it != m_animations.end())
-		return it->second;
-
 	// Load the animation
 	Section* anim = s->get_section(name.c_str());
 	char picname[256];
-	uint animid;
+	uint animid=0;
 
 	snprintf(picname, sizeof(picname), "%s_%s_??.bmp", m_name, name.c_str());
 
@@ -489,9 +431,11 @@ uint Immovable_Descr::parse_animation(std::string directory, Profile* s, std::st
 		return 0;
 	}
 
-   animid = g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
-
-	m_animations[name] = animid;
+   if(!is_animation_known(name.c_str())) {
+      animid = g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
+      add_animation(name.c_str(), animid);
+   } else 
+      animid = get_animation(name.c_str());
 
 	return animid;
 }
@@ -768,7 +712,7 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 {
 	Coords c = m_position;
 
-   if(get_descr()->is_world_immovable() && (action.sparam2 != "world")) 
+   if(!get_descr()->get_owner_tribe() && (action.sparam2 != "world")) 
       throw wexception("Should create tribe-immovable %s, but we are no tribe immovable!\n", action.sparam1.c_str());
    
 	if (!killable) { // we need to reschedule and remove self from act()
@@ -864,6 +808,7 @@ void PlayerImmovable::set_economy(Economy *e)
 	if (m_economy == e)
 		return;
 
+   log("Setting economy for object %p, which is a %i to %p\n", this, get_type(), e);
 	for(uint i = 0; i < m_workers.size(); i++)
 		m_workers[i]->set_economy(e);
 
@@ -948,12 +893,25 @@ Release workers
 */
 void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
-	while(m_workers.size())
-		m_workers[0]->set_location(0);
+	while(m_workers.size()) 
+      if(g->get_objects()->object_still_available(m_workers[0]))
+            m_workers[0]->set_location(0);
 	
 	if (m_owner!=0)
 		m_owner->get_game()->player_immovable_notification (this, Editor_Game_Base::LOSE);
 	
 	BaseImmovable::cleanup(g);
 }
+
+/*
+ * Dump general information
+ */
+void PlayerImmovable::log_general_info(Editor_Game_Base* egbase)  {
+   BaseImmovable::log_general_info(egbase);
+
+   molog("m_owner: %p\n", m_owner);
+   molog("* player nr: %i\n", m_owner->get_player_number());
+   molog("m_economy: %p\n", m_economy);
+}
+
 

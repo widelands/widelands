@@ -25,7 +25,7 @@ Rendering functions of the 32-bit software renderer.
 #include "error.h"
 #include "filesystem.h"
 #include "map.h"
-#include "maprenderinfo.h"
+#include "minimap.h"
 #include "player.h"
 #include "sw32_graphic.h"
 #include "world.h"
@@ -183,9 +183,9 @@ calc_minimap_color
 Return the color to be used in the minimap for the given field.
 ===============
 */
-static inline uint calc_minimap_color(const MapRenderInfo* mri, FCoords f, uint flags)
+static inline uint calc_minimap_color(Editor_Game_Base* egbase, const std::vector<bool>* visibility, FCoords f, uint flags)
 {
-	Map* map = mri->egbase->get_map();
+	Map* map = egbase->get_map();
 	uint pixelcolor = 0;
 
 	if (flags & Minimap_Terrain)
@@ -200,7 +200,7 @@ static inline uint calc_minimap_color(const MapRenderInfo* mri, FCoords f, uint 
 		if (f.field->get_owned_by() > 0)
 		{
 			// if it's owned by someone, get the player's color
-			Player *ownerplayer = mri->egbase->get_player(f.field->get_owned_by());
+			Player *ownerplayer = egbase->get_player(f.field->get_owned_by());
 			const RGBColor* playercolors = ownerplayer->get_playercolor();
 
 			// and add the player's color to the old color
@@ -238,9 +238,9 @@ Draw a minimap into the given rectangle of the bitmap.
 viewpt is the field at the top left of the rectangle.
 ===============
 */
-void Bitmap::draw_minimap(const MapRenderInfo* mri, Rect rc, Coords viewpt, uint flags)
+void Bitmap::draw_minimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Rect rc, Coords viewpt, uint flags)
 {
-	Map* map = mri->egbase->get_map();
+	Map* map = egbase->get_map();
 	int mapwidth = map->get_width();
 
 	for(int y = 0; y < rc.h; y++) {
@@ -255,10 +255,10 @@ void Bitmap::draw_minimap(const MapRenderInfo* mri, Rect rc, Coords viewpt, uint
 		{
 			map->get_rn(f, &f);
 
-			if (mri->visibility && !(*mri->visibility)[f.y*mapwidth + f.x])
+			if (visibility && !(*visibility)[f.y*mapwidth + f.x])
 				*pix = 0;
 			else
-				*pix = calc_minimap_color(mri, f, flags);
+				*pix = calc_minimap_color(egbase, visibility, f, flags);
 		}
   }
 }

@@ -91,7 +91,7 @@ in this function
 */
 void Map_View::draw(RenderTarget* dst)
 {
-	dst->rendermap(m_intbase->get_maprenderinfo(), m_viewpoint);
+	dst->rendermap(m_intbase->get_egbase(), m_intbase->get_visibility(), m_viewpoint);
 }
 
 

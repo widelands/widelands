@@ -31,7 +31,6 @@
 
 class AnimationData;
 class EncodeData;
-class MapRenderInfo;
 
 namespace Renderer_Software32
 {
@@ -88,7 +87,7 @@ struct Bitmap {
 
 	void blit(Point dst, Bitmap* src, Rect srcrc);
 
-	void draw_minimap(const MapRenderInfo* mri, Rect rc, Coords viewpt, uint flags);
+	void draw_minimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Rect rc, Coords viewpt, uint flags);
 	void draw_animframe(Point dst, const AnimFrame* frame, Rect rc, const RGBColor* plrclrs);
 
 	// sw32_terrain.cc
@@ -205,8 +204,8 @@ public:
 	                      int srcx, int srcy, int w, int h);
 	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy);
 
-	virtual void rendermap(const MapRenderInfo* mgi, Point viewofs);
-	virtual void renderminimap(const MapRenderInfo* mri, Coords viewpt, uint flags);
+	virtual void rendermap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Point viewofs);
+	virtual void renderminimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Coords viewpt, uint flags);
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs = 0);
 	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,

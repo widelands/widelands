@@ -53,12 +53,14 @@ private:
 };
 
 class MilitarySite : public ProductionSite {
+   friend class Widelands_Map_Buildingdata_Data_Packet;
 	MO_DESCR(MilitarySite_Descr);
 
 public:
 	MilitarySite(MilitarySite_Descr* descr);
 	virtual ~MilitarySite();
 
+   virtual int get_building_type(void) { return Building::MILITARYSITE; }
 	virtual std::string get_statistics_string();
 
 	virtual void init(Editor_Game_Base* g);

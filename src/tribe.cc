@@ -89,6 +89,9 @@ void Tribe_Descr::load_graphics()
 
 	for(i = 0; i < m_workers.get_nitems(); i++)
 		m_workers.get(i)->load_graphics();
+	
+   for(i = 0; i < m_wares.get_nitems(); i++)
+		m_wares.get(i)->load_graphics();
 
 	for(i = 0; i < m_buildings.get_nitems(); i++)
 		m_buildings.get(i)->load_graphics();
@@ -375,10 +378,10 @@ void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Ware
    std::map<std::string, int>::iterator cur;
 
    for(cur=m_startwares.begin(); cur!=m_startwares.end(); cur++) {
-      wh->create_wares(egbase->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
+      wh->insert_wares(get_safe_ware_index((*cur).first.c_str()), (*cur).second);
    }
    for(cur=m_startworkers.begin(); cur!=m_startworkers.end(); cur++) {
-      wh->create_wares(egbase->get_safe_ware_id((*cur).first.c_str()), (*cur).second);
+      wh->insert_workers(get_safe_worker_index((*cur).first.c_str()), (*cur).second);
    }
    for(cur=m_startsoldiers.begin(); cur!=m_startsoldiers.end(); cur++) {
       std::vector<std::string> list;
@@ -491,4 +494,36 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
 	return get_immovable_index(buffer);
 }
 
+/*
+ * Return the given ware or die trying
+ */
+int Tribe_Descr::get_safe_ware_index(const char *name) {
+   int retval=get_ware_index(name);
+
+   if(retval==-1) 
+      throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!", name);
+   return retval;
+}
+
+/*
+ * Return the given worker or die trying
+ */
+int Tribe_Descr::get_safe_worker_index(const char *name) {
+   int retval=get_worker_index(name);
+
+   if(retval==-1) 
+      throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!", name);
+   return retval;
+}
+
+/*
+ * Return the given building or die trying
+ */
+int Tribe_Descr::get_safe_building_index(const char *name) {
+   int retval=get_building_index(name);
+
+   if(retval==-1) 
+      throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!", name);
+   return retval;
+}
 

@@ -20,6 +20,7 @@
 #ifndef MINIMAP_H
 #define MINIMAP_H
 
+
 #include "ui_panel.h"
 #include "ui_signal.h"
 #include "ui_unique_window.h"
@@ -28,6 +29,14 @@ class Interactive_Base;
 class Player;
 class Map;
 class MiniMapView;
+
+enum {
+   Minimap_Terrain = 1,       // display terrain
+   Minimap_PlayerColor = 2,   // color of owner
+   Minimap_Flags = 4,         // show flags
+   Minimap_Roads = 8,         // show roads
+   Minimap_Buildings = 16,    // show buildings
+};
 
 /** class MiniMapView
  *

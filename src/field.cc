@@ -17,6 +17,8 @@
  *
  */
 
+#include <vector>
+#include "bob.h"
 #include "field.h"
 #include "geometry.h"
 
@@ -98,4 +100,5 @@ void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 	else if (b > 127) b = 127;
 	brightness = (char)b;
 }
+
 

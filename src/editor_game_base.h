@@ -28,7 +28,6 @@
 #include "descr_maintainer.h"
 #include "geometry.h"
 #include "types.h"
-#include "ware.h"
 
 class Bob;
 class Building;
@@ -42,7 +41,8 @@ class Tribe_Descr;
 
 class Editor_Game_Base {
    friend class Interactive_Base;
-
+   friend class Game_Saver;
+   
    public:
       Editor_Game_Base();
       virtual ~Editor_Game_Base();
@@ -60,16 +60,11 @@ class Editor_Game_Base {
 
       // Player commands
       void remove_player(int plnum);
-      void add_player(int plnum, int type, const char* tribe);
+      void add_player(int plnum, int type, const char* tribe, const char* name);
       inline Player* get_player(int n) { assert(n>=1 && n<=MAX_PLAYERS); return m_players[n-1]; }
-
+      Player* get_safe_player(int n);
+      
       virtual bool is_game() = 0;
-
-      // Ware stuff
-      inline int get_ware_id(const char *name) { return m_wares.get_index(name); }
-      inline int get_nrwares() const { return m_wares.get_nitems(); }
-      int get_safe_ware_id(const char *name);
-      inline Ware_Descr *get_ware_description(int id) { return m_wares.get(id); }
 
       // loading stuff
       void postload();
@@ -107,7 +102,6 @@ class Editor_Game_Base {
       // for queue runs e.g.
       inline int* get_game_time_pointer(void) { return &m_gametime; }
       inline void set_iabase(Interactive_Base* b) { m_iabase=b; }
-
       
    private:
       struct Conquer_Info {
@@ -119,14 +113,12 @@ class Editor_Game_Base {
       void do_conquer_area(uchar playernr, Coords coords, int radius, bool conquer);
 
    private:
-      void init_wares();
 		void cleanup_playerimmovables_area(Coords coords, int radius);
 
       int m_gametime;
       Player*							m_players[MAX_PLAYERS];
       Object_Manager*				m_objects;
       std::vector<Tribe_Descr*>	m_tribes;
-      Descr_Maintainer<Ware_Descr>	m_wares;
       Interactive_Base*          m_iabase;
       Map*								m_map;
 

@@ -19,6 +19,7 @@
 
 #include "bob.h"
 #include "critter_bob.h"
+#include "critter_bob_program.h"
 #include "field.h"
 #include "game.h"
 #include "util.h"
@@ -32,62 +33,6 @@ class WorkerProgram
 
 ==============================================================================
 */
-
-struct Critter_BobAction {
-	typedef bool (Critter_Bob::*execute_t)(Game* g, Bob::State* state, const Critter_BobAction* act);
-
-	enum {
-		walkObject,			// walk to objvar1
-		walkCoords,			// walk to coords
-	};
-
-	execute_t		function;
-	int				iparam1;
-	int				iparam2;
-	std::string		sparam1;
-
-	std::vector<std::string>	sparamv;
-};
-
-class Critter_BobProgram {
-public:
-	struct Parser {
-		Critter_Bob_Descr*		descr;
-		std::string			directory;
-		Profile*				prof;
-      const EncodeData* encdata;
-	};
-
-	typedef void (Critter_BobProgram::*parse_t)(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd);
-
-public:
-	Critter_BobProgram(std::string name);
-
-	std::string get_name() const { return m_name; }
-	int get_size() const { return m_actions.size(); }
-	const Critter_BobAction* get_action(int idx) const {
-		assert(idx >= 0 && (uint)idx < m_actions.size());
-		return &m_actions[idx];
-	}
-
-	void parse(Parser* parser, std::string name);
-
-private:
-	struct ParseMap {
-		const char*		name;
-		parse_t			function;
-	};
-
-private:
-	void parse_remove(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd);
-
-private:
-	std::string						m_name;
-	std::vector<Critter_BobAction>	m_actions;
-
-private:
-	static const ParseMap		s_parsemap[];
-};
 
 const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
 /*	{ "mine",		      &Critter_BobProgram::parse_mine },
@@ -260,7 +205,7 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 	char sectname[256];
 
 	snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
-	m_walk_anims.parse(directory, prof, sectname, prof->get_section("walk"), encdata);
+	m_walk_anims.parse(this, directory, prof, sectname, prof->get_section("walk"), encdata);
 
 	Section *sglobal = prof->get_safe_section("global");
    const char* string;
@@ -444,7 +389,7 @@ void Critter_Bob::roam_update(Game* g, State* state)
 
 		//molog("        Failed\n");
 
-		start_task_idle(g, get_descr()->get_idle_anim(), 1 + g->logic_rand()%1000);
+		start_task_idle(g, get_descr()->get_animation("idle"), 1 + g->logic_rand()%1000);
 	}
 	else
 	{
@@ -452,7 +397,7 @@ void Critter_Bob::roam_update(Game* g, State* state)
 
 		//molog("[roam]: Idle\n");
 
-		start_task_idle(g, get_descr()->get_idle_anim(), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
+		start_task_idle(g, get_descr()->get_animation("idle"), 1000 + g->logic_rand() % CRITTER_MAX_WAIT_TIME_BETWEEN_WALK);
 	}
 }
 

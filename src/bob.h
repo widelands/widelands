@@ -20,6 +20,7 @@
 #ifndef __BOB_H
 #define __BOB_H
 
+#include <map>
 #include <string>
 #include "geometry.h"
 #include "instances.h"
@@ -34,41 +35,56 @@ class Request;
 class Transfer;
 class Tribe_Descr;
 
+/*
+ * BobProgramBase is only used that 
+ * get_name always works
+ */
+class BobProgramBase {
+   public:
+      BobProgramBase(void) { }
+      virtual~ BobProgramBase(void) { }
+      
+      virtual std::string get_name(void) const =0;
+};
 
 /*
 Bobs are moving map objects: Animals, humans, ships...
 */
 class Bob_Descr : public Map_Object_Descr {
+	friend class DirAnimations; // To add the various direction bobs
+   friend class Widelands_Map_Bobdata_Data_Packet; // To write it to a file
+
 public:
 	Bob_Descr(const char *name, Tribe_Descr* tribe);
 	virtual ~Bob_Descr(void);
 
 	inline const char* get_name(void) const { return m_name; }
-	inline uint get_idle_anim(void) const { return m_idle_anim; }
 
-	Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
+   Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
    inline const char* get_picture(void) const { return m_picture.c_str(); }
    inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
    
    inline Tribe_Descr* get_owner_tribe(void) { return m_owner_tribe; }
-   bool is_world_immovable(void) { return !m_owner_tribe; }
+   bool is_world_bob(void) { return !m_owner_tribe; }
 
 protected:
 	virtual Bob *create_object() = 0;
 	virtual void parse(const char *directory, Profile *prof, const EncodeData *encdata);
 
 	char	m_name[30];
-	uint	m_idle_anim; // the default animation
    std::string m_picture;
    EncodeData  m_default_encodedata;
    Tribe_Descr* m_owner_tribe;
-
+   
 public:
 	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof, Tribe_Descr* tribe);
 };
 
 class Bob : public Map_Object {
-	MO_DESCR(Bob_Descr);
+   friend class Widelands_Map_Bobdata_Data_Packet;
+   friend class Widelands_Map_Bob_Data_Packet;
+
+   MO_DESCR(Bob_Descr);
 
 public:
    enum Bob_Type {
@@ -101,7 +117,7 @@ public:
 		Path*						path;
 		Transfer*				transfer;
 		Route*					route;
-		const void*	         program; // Pointer to current programm class
+		const BobProgramBase*	         program; // Pointer to current programm class
 	};
 
 protected:
@@ -136,7 +152,10 @@ public:
 	inline const FCoords& get_position() const { return m_position; }
 	inline Bob* get_next_bob(void) { return m_linknext; }
    
-   bool is_world_immovable(void) { return get_descr()->is_world_immovable(); }
+   bool is_world_bob(void) { return get_descr()->is_world_bob(); }
+
+   // For debug
+   virtual void log_general_info(Editor_Game_Base* egbase);
 
 public: // default tasks
 	void reset_tasks(Game*);

@@ -625,8 +625,7 @@ void FieldActionWindow::act_removeroad()
       if(m_iabase->get_egbase()->is_game()) {
          // Game
          Game *g = static_cast<Game*>(m_iabase->get_egbase()); 
-         Interactive_Player* player=static_cast<Interactive_Player*>(m_iabase);
-	 g->send_player_bulldoze (static_cast<PlayerImmovable*>(imm));
+         g->send_player_bulldoze (static_cast<PlayerImmovable*>(imm));
       } else {
          Road* road=static_cast<Road*>(imm);
          Player* plr=road->get_owner();

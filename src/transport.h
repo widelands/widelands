@@ -36,6 +36,8 @@
 
 class Building;
 class Economy;
+class FileRead;
+class FileWrite;
 class Flag;
 class IdleWareSupply;
 class Item_Ware_Descr;
@@ -43,6 +45,9 @@ class Request;
 class Road;
 class Transfer;
 class Warehouse;
+class Widelands_Map_Map_Object_Loader;
+class Widelands_Map_Map_Object_Saver;
+
 
 struct Neighbour {
 	Flag	*flag;
@@ -67,8 +72,10 @@ The location of a ware can be one of the following:
   the building somehow
 */
 class WareInstance : public Map_Object {
+   friend class Widelands_Map_Waredata_Data_Packet;
+   
 public:
-	WareInstance(int ware);
+	WareInstance(int, Item_Ware_Descr*);
 	~WareInstance();
 
 	virtual int get_type();
@@ -83,7 +90,7 @@ public:
 	void act(Game*, uint data);
 	void update(Game*);
 
-	void set_location(Game* g, Map_Object* loc);
+	void set_location(Editor_Game_Base* g, Map_Object* loc);
 	void set_economy(Economy* e);
 
 	bool is_moving(Game* g);
@@ -105,7 +112,6 @@ private:
 	Object_Ptr			m_transfer_nextstep; // cached PlayerImmovable, can be 0
 
 private:
-	static Map_Object_Descr	s_description;
 };
 
 
@@ -128,6 +134,9 @@ Map_Object::WALK_xx in all "direction" parameters.
 class Flag : public PlayerImmovable {
 	friend class Economy;
 	friend class FlagQueue;
+   friend class Widelands_Map_Ware_Data_Packet; // has to look at pending items
+   friend class Widelands_Map_Waredata_Data_Packet; // has to look at pending items 
+   friend class Widelands_Map_Flagdata_Data_Packet; // has to read/write this to a file 
 
 private:
 	struct PendingItem {
@@ -239,6 +248,9 @@ All Workers on the Road are attached via add_worker()/remove_worker() in
 PlayerImmovable.
 */
 class Road : public PlayerImmovable {
+   friend class Widelands_Map_Roaddata_Data_Packet; // For saving 
+   friend class Widelands_Map_Road_Data_Packet; // For init() 
+
 public:
 	enum FlagId {
 		FlagStart = 0,
@@ -278,6 +290,8 @@ protected:
 	void unmark_map(Editor_Game_Base *g);
 
 	virtual void init(Editor_Game_Base *g);
+	void link_into_flags(Editor_Game_Base *g);
+	void check_for_carrier(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);
 
 	void request_carrier(Game* g);
@@ -305,7 +319,9 @@ The number of steps is the number of flags stored minus one.
 */
 class Route {
 	friend class Economy;
-
+   friend class Request;
+   friend class Widelands_Map_Bobdata_Data_Packet; // This is in the state structure
+   
 public:
 	Route();
 
@@ -314,7 +330,7 @@ public:
 
 	inline int get_totalcost() const { return m_totalcost; }
 	inline int get_nrsteps() const { return m_route.size()-1; }
-	Flag *get_flag(Game *g, int idx);
+	Flag *get_flag(Editor_Game_Base *g, int idx);
 
 	void starttrim(int count);
 	void truncate(int count);
@@ -349,11 +365,11 @@ public:
 	bool is_idle() const { return m_idle; }
 
 	void set_idle(bool idle);
-
+      
 public: // called by the controlled ware or worker
 	PlayerImmovable* get_next_step(PlayerImmovable* location, bool* psuccess);
-	void finish();
-	void fail();
+	void has_finished();
+	void has_failed();
 
 private:
 	void tlog(const char* fmt, ...) PRINTF_FORMAT(2,3);
@@ -402,8 +418,8 @@ public:
 	SupplyList();
 	~SupplyList();
 
-	void add(Supply* supp);
-	void remove(Supply* supp);
+	void add_supply(Supply* supp);
+	void remove_supply(Supply* supp);
 
 	inline int get_nrsupplies() const { return m_supplies.size(); }
 	inline Supply* get_supply(int idx) const { return m_supplies[idx]; }
@@ -431,12 +447,18 @@ class Request : public Trackable {
 public:
 	typedef void (*callback_t)(Game*, Request*, int ware, Worker*, void* data);
 
+   enum Type {
+      WORKER,
+      WARE,
+   };
+
 public:
-	Request(PlayerImmovable *target, int ware, callback_t cbfn, void* cbdata);
+	Request(PlayerImmovable *target, int index, callback_t cbfn, void* cbdata, Type);
 	~Request();
 
 	PlayerImmovable* get_target(Game* g) { return m_target; }
-	int get_ware() const { return m_ware; }
+	int get_index() const { return m_index; }
+   int get_type() const { return m_type; }
 	bool is_idle() const { return m_idle; }
 	int get_count() const { return m_count; }
 	bool is_open() const { return m_idle || m_count > (int)m_transfers.size(); }
@@ -452,6 +474,12 @@ public:
 	void set_required_interval(int interval);
 
 	void start_transfer(Game *g, Supply* supp);
+   
+
+   // For savegames
+   void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+   void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+   Worker* get_transfer_worker(void);
 
 public: // callbacks for WareInstance/Worker code
 	void transfer_finish(Game* g, Transfer* t);
@@ -464,12 +492,14 @@ private:
 	void remove_transfer(uint idx);
 	uint find_transfer(Transfer* t);
 
+
 private:
 	typedef std::vector<Transfer*> TransferList;
 
+   Type              m_type;
 	PlayerImmovable*	m_target;	// who requested it?
 	Economy*				m_economy;
-	int					m_ware;		// the ware type
+	int					m_index;		// the index of the ware descr
 	bool					m_idle;
 	int					m_count;		// how many do we need in total
 
@@ -517,6 +547,12 @@ public:
 	void set_filled(int size);
 	void set_consume_interval(int time);
 
+   Player* get_owner(void) { return m_owner->get_owner(); }
+   
+   // For savegames
+   void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+   void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
 private:
 	static void request_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
@@ -560,6 +596,9 @@ public:
 
 	void add_wares(int id, int count = 1);
 	void remove_wares(int id, int count = 1);
+	
+   void add_workers(int id, int count = 1);
+	void remove_workers(int id, int count = 1);
 
 	void add_warehouse(Warehouse *wh);
 	void remove_warehouse(Warehouse *wh);
@@ -569,9 +608,20 @@ public:
 	bool have_request(Request* req);
 	void remove_request(Request* req);
 
-	void add_supply(int ware, Supply* supp);
-	bool have_supply(int ware, Supply* supp);
-	void remove_supply(int ware, Supply* supp);
+	void add_ware_supply(int ware, Supply* supp);
+	bool have_ware_supply(int ware, Supply* supp);
+	void remove_ware_supply(int ware, Supply* supp);
+	void add_worker_supply(int worker, Supply* supp);
+	bool have_worker_supply(int worker, Supply* supp);
+	void remove_worker_supply(int worker, Supply* supp);
+
+   inline bool should_run_balance_check(int gametime) { 
+      if (m_request_timer && (gametime == m_request_timer_time)) return true;
+      return false;
+   }
+
+   // Called by cmd queue
+   void balance_requestsupply();
 
 private:
 	void do_remove_flag(Flag *f);
@@ -581,12 +631,9 @@ private:
 
 	void start_request_timer(int delta = 200);
 
-	Supply* find_best_supply(Game* g, Request* req, int ware, int* pcost);
+	Supply* find_best_supply(Game* g, Request* req, int ware, int* pcost, std::vector<SupplyList>*);
 	void process_requests(Game* g, RSPairStruct* s);
 	void create_requested_workers(Game* g);
-	void balance_requestsupply();
-
-	static void request_timer_cb(Game* g, int serial, int unused);
 
 private:
 	typedef std::vector<Request*> RequestList;
@@ -597,15 +644,43 @@ private:
 
 	std::vector<Flag*>		m_flags;
 	WareList						m_wares;		// virtual storage with all wares in this Economy
+	WareList						m_workers;		// virtual storage with all wares in this Economy
 	std::vector<Warehouse*>	m_warehouses;
 
 	RequestList						m_requests; // requests
-	std::vector<SupplyList>		m_supplies; // supplies by ware id
+	std::vector<SupplyList>		m_ware_supplies; // supplies by ware id
+	std::vector<SupplyList>		m_worker_supplies; // supplies by ware id
 
 	bool		m_request_timer;	// true if we started the request timer
 	int		m_request_timer_time;
 
 	uint		mpf_cycle;		// pathfinding cycle, see Flag::mpf_cycle
 };
+
+class Cmd_Call_Economy_Balance : public BaseCommand {
+   public:
+      Cmd_Call_Economy_Balance (void) : BaseCommand (0) { } // For load and save 
+
+      Cmd_Call_Economy_Balance (int starttime, int player, Economy* economy) :
+         BaseCommand(starttime)
+      {  
+         m_player=player;
+         m_economy=economy;
+         m_force_balance = false;
+      }     
+
+      void execute (Game* g);
+
+      virtual int get_id(void) { return QUEUE_CMD_CALL_ECONOMY_BALANCE; } 
+
+      virtual void Write(FileWrite* fw, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
+      virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
+
+   private:
+      bool     m_force_balance;
+      int      m_player;
+      Economy* m_economy;
+};
+
 
 #endif // included_transport_h

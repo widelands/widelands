@@ -145,6 +145,7 @@ public:
 	virtual void think();
 
 private:
+   bool           m_log_general_info;
 	Object_Ptr		m_object;
 	uint				m_serial;
 	UITab_Panel*	m_tabs;
@@ -176,6 +177,8 @@ MapObjectDebugWindow::MapObjectDebugWindow(Interactive_Base* parent, Map_Object*
 
 	m_tabs->set_snapparent(true);
 	m_tabs->resize();
+
+   m_log_general_info = true;
 }
 
 
@@ -189,6 +192,11 @@ Remove self when the object disappears.
 void MapObjectDebugWindow::think()
 {
 	Map_Object* obj = m_object.get(get_iabase()->get_egbase());
+
+   if(obj && m_log_general_info)  {
+      obj->log_general_info(get_iabase()->get_egbase());
+      m_log_general_info = false;
+   }
 
 	if (!obj) {
 		char buf[128];
@@ -329,7 +337,7 @@ void FieldDebugWindow::think()
 
 	m_ui_bobs->clear();
 
-	m_map->find_bobs(m_coords, 1, &bobs);
+	m_map->find_bobs(m_coords, 0, &bobs);
 	for(std::vector<Bob*>::iterator it = bobs.begin(); it != bobs.end(); ++it) {
 		snprintf(buf, sizeof(buf), "%s (%u)", (*it)->get_name().c_str(), (*it)->get_serial());
 		m_ui_bobs->add_entry(buf, (void*)(*it)->get_serial());

@@ -24,7 +24,6 @@
 #include "geometry.h"
 #include "graphic.h"
 #include "map.h"
-#include "maprenderinfo.h"
 #include "ui_panel.h"
 #include "ui_unique_window.h"
 
@@ -56,6 +55,9 @@ class Interactive_Base : public UIPanel {
 
 		static int get_xres();
 		static int get_yres();
+      
+      // get visibility, for drawing
+      virtual std::vector<bool>* get_visibility(void) = 0;
 
       // logic handler func
       void think();
@@ -66,8 +68,6 @@ class Interactive_Base : public UIPanel {
 		virtual void set_fieldsel_pos(Coords c);
 		void set_fieldsel_freeze(bool yes);
       void set_fieldsel_radius(int n);
-
-		inline const MapRenderInfo* get_maprenderinfo() const { return &m_maprenderinfo; }
 
       void move_view_to(int fx, int fy);
 		void move_view_to_point(Point pos);
@@ -135,11 +135,6 @@ class Interactive_Base : public UIPanel {
 
       void unset_fieldsel_picture();
       void set_fieldsel_picture(const char*);
-
-      // map rendering stuff. this is still protected since this is
-      // used quite often
-		MapRenderInfo	   m_maprenderinfo;
-
 };
 
 

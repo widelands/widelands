@@ -411,6 +411,7 @@ FileWrite::FileWrite()
 	length = 0;
 	maxsize = 0;
 	filepos = 0;
+   counter = 0;
 }
 
 /*
@@ -442,6 +443,32 @@ void FileWrite::Clear()
 	length = 0;
 	maxsize = 0;
 	filepos = 0;
+   counter = 0;
+}
+
+/*
+==============
+FileWrite::ResetByteCounter
+
+Reset the byte counter to zero.
+All bytes written then are added
+to the byte counter
+==============
+*/
+void FileWrite::ResetByteCounter(void) {
+   counter = 0;
+}
+
+/*
+==============
+FileWrite::GetByteCounter
+
+Returns the number of bytes written since
+last ResetByteCounter
+==============
+*/
+int FileWrite::GetByteCounter(void) {
+   return counter;
 }
 
 /*
@@ -497,6 +524,20 @@ void FileWrite::SetFilePos(int pos)
 
 /*
 ==============
+FileWrite::GetFilePos
+
+Set the file pointer to a new location. The position can be beyond
+the current end of file.
+==============
+*/
+int FileWrite::GetFilePos(void)
+{
+	return filepos;
+}
+
+
+/*
+==============
 FileWrite::Data
 
 Write data at the given location. If pos is -1, write at the
@@ -526,6 +567,8 @@ void FileWrite::Data(const void *buf, int size, int pos)
 
 		length = i+size;
 	}
+
+   counter += size; 
 
 	memcpy((char*)data + i, buf, size);
 }

@@ -27,6 +27,18 @@
 #include "tribe.h"
 #include "wexception.h"
 
+static const char* default_names[MAX_PLAYERS+1] = {
+   "", 
+   "Player 1",
+   "Player 2", 
+   "Player 3", 
+   "Player 4", 
+   "Player 5", 
+   "Player 6", 
+   "Player 7", 
+   "Player 8", 
+   };
+
 void PlayerDescriptionGroup::allow_changes(changemode_t t) {
    m_allow_changes=t;
    m_btnEnablePlayer->set_visible(t & CHANGE_ENABLED);
@@ -86,10 +98,12 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 	}
 	else
 	{
-		if (m_btnEnablePlayer->get_state())
-			m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
-
-		const char* string = 0;
+		if (m_btnEnablePlayer->get_state()) {
+			m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+         m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
+      }
+      
+      const char* string = 0;
 		switch(m_playertype) {
 		case Player::playerLocal:
 		case Player::playerRemote: string = "Human"; break;
@@ -113,9 +127,10 @@ void PlayerDescriptionGroup::enable_player(bool on)
 {
 //	if (!(m_allow_changes&CHANGE_ENABLED)) return;
 
-	if (on)
-		m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
-	else
+	if (on) {
+      m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+      m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
+   } else
 		m_game->remove_player(m_plnum);
 
 	m_btnPlayerType->set_visible(on);
@@ -133,7 +148,7 @@ void PlayerDescriptionGroup::toggle_playertype()
  */
 void PlayerDescriptionGroup::toggle_playertribe(void)
 {
-	if (!(m_allow_changes==CHANGE_TRIBE))
+	if (!(m_allow_changes&CHANGE_TRIBE))
 		return;
 
 	++m_current_tribe;
@@ -142,7 +157,8 @@ void PlayerDescriptionGroup::toggle_playertribe(void)
 
 	// set the player
 	m_game->remove_player(m_plnum);
-	m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
+	m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+   m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
 }
 
 /*
@@ -156,7 +172,8 @@ void PlayerDescriptionGroup::set_player_tribe(std::string str) {
          m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
          // set the player
          m_game->remove_player(m_plnum);
-         m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
+         m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+         m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
          return;
       }
    }
@@ -182,7 +199,8 @@ void PlayerDescriptionGroup::set_player_type(int type)
 		m_btnPlayerType->set_title((type!=Player::playerAI)?"Human":"Computer");
 		
 		m_game->remove_player (m_plnum);
-		m_game->add_player (m_plnum, m_playertype, m_tribes[m_current_tribe].c_str());
+		m_game->add_player (m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
+      m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
 	}
 }
 

@@ -18,6 +18,8 @@
  */
 
 #include "animation.h"
+#include "bob.h"
+#include "error.h"
 #include "constants.h"
 #include "profile.h"
 #include "wexception.h"
@@ -295,7 +297,7 @@ If they don't exist, the data is taken from defaults and the bitmaps foowalk_??_
 are used.
 ===============
 */
-void DirAnimations::parse(const char *directory, Profile *prof, const char *sectnametempl,
+void DirAnimations::parse(Bob_Descr* b, const char *directory, Profile *prof, const char *sectnametempl,
                           Section *defaults, const EncodeData *encdefaults)
 {
 	char dirpictempl[256];
@@ -333,6 +335,8 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 
 		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
 
+      std::string anim_name=sectname;
+      
 		s = prof->get_section(sectname);
 		if (!s) {
 			if (!defaults)
@@ -342,6 +346,7 @@ void DirAnimations::parse(const char *directory, Profile *prof, const char *sect
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir-1]);
       m_animations[dir-1] = g_anim.get(directory, s, sectname, encdefaults);
-	}
+      b->add_animation(anim_name.c_str(), m_animations[dir-1]);
+   }
 }
 

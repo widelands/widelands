@@ -39,14 +39,14 @@ Widelands_Map_Player_Names_And_Tribes_Data_Packet::~Widelands_Map_Player_Names_A
  *
  * this is a scenario packet, it might be that we have to skip it
  */
-void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase) throw(wexception) {
-   Pre_Read(fr, egbase->get_map());
+void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+   Pre_Read(fr, egbase->get_map(), skip);
 }
 
 /*
  * Pre Read function
  */
-void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileRead* fr, Map* map) {
+void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileRead* fr, Map* map, bool skip) {
    // First packet version
    int packet_version=fr->Unsigned16();
 
@@ -56,7 +56,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileRead* fr, M
       for(i=1; i<=map->get_nrplayers(); i++) {
          name=fr->CString();
          tribe=fr->CString();
-         if(!get_scenario_skip()) {
+         if(!skip) {
             map->set_scenario_player_name(i,name);
             map->set_scenario_player_tribe(i,tribe);
          }
@@ -69,7 +69,7 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Pre_Read(FileRead* fr, M
 /*
  * Write Function
  */
-void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase) throw(wexception) {
+void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    // first of all the magic bytes
    fw->Unsigned16(PACKET_PLAYER_NAM_TRIB);
 
@@ -82,10 +82,8 @@ void Widelands_Map_Player_Names_And_Tribes_Data_Packet::Write(FileWrite* fw, Edi
    for(i=1; i<=map->get_nrplayers(); i++) {
       tribe=map->get_scenario_player_tribe(i);
       name=map->get_scenario_player_name(i);
-      fw->Data(name.c_str(), name.size());
-      fw->Unsigned8('\0');
-      fw->Data(tribe.c_str(), tribe.size());
-      fw->Unsigned8('\0');
+      fw->CString(name.c_str());
+      fw->CString(tribe.c_str());
    }
    // DONE
 }

@@ -22,15 +22,98 @@
 #include "cmd_queue.h"
 #include "fieldaction.h"
 #include "font_handler.h"
+#include "game_saver.h"
 #include "keycodes.h"
 #include "immovable.h"
 #include "mapview.h"
 #include "player.h"
+#include "ui_editbox.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "overlay_manager.h"
 
+class Game_Main_Menu_Save_Game : public UIUniqueWindow {
+   public:
+      Game_Main_Menu_Save_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
+      virtual ~Game_Main_Menu_Save_Game(void);
+
+   private:
+      void clicked(int);
+      Interactive_Player* m_parent;
+      UIEdit_Box* m_editbox;
+};
+
+Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) :
+UIUniqueWindow(plr,registry,105,140,"Save_Game") {
+
+   m_parent=plr;
+
+   m_editbox=new UIEdit_Box(this, 5, 5, get_inner_w()-10, 20, 0, 0);
+
+   UIButton* b=new UIButton(this, (get_inner_w()-60)/2, get_inner_h()-30, 60, 20, 0, 1);
+   b->set_title("OK");
+   b->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
+
+   if(get_usedefaultpos())
+      center_to_parent();
+}
+
+Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game(void) {
+}
+
+void Game_Main_Menu_Save_Game::clicked(int) {
+   std::string t=m_editbox->get_text();
+
+   if(t.size()) {
+      Game_Saver gs(m_editbox->get_text(), m_parent->get_game());
+      gs.save();
+      die();
+   }
+}
+
+class Game_Main_Menu_Load_Game : public UIUniqueWindow {
+   public:
+      Game_Main_Menu_Load_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) ;
+      virtual ~Game_Main_Menu_Load_Game(void);
+
+   private:
+      void clicked(int);
+      Interactive_Player* m_parent;
+      UIEdit_Box* m_editbox;
+};
+
+Game_Main_Menu_Load_Game::Game_Main_Menu_Load_Game(Interactive_Player* plr, UIUniqueWindowRegistry* registry) :
+UIUniqueWindow(plr,registry,105,140,"Load_Game") {
+
+   m_parent=plr;
+
+   m_editbox=new UIEdit_Box(this, 5, 5, get_inner_w()-10, 20, 0, 0);
+
+   UIButton* b=new UIButton(this, (get_inner_w()-60)/2, get_inner_h()-30, 60, 20, 0, 1);
+   b->set_title("OK");
+   b->clickedid.set(this, &Game_Main_Menu_Load_Game::clicked);
+
+   if(get_usedefaultpos())
+      center_to_parent();
+}
+
+Game_Main_Menu_Load_Game::~Game_Main_Menu_Load_Game(void) {
+}
+
+void Game_Main_Menu_Load_Game::clicked(int) {
+   std::string t=m_editbox->get_text();
+
+   if(t.size()) {
+      m_parent->get_game()->cleanup_for_load(true,true); // TODO: this should really clean up all
+      // Load Game
+      Game_Saver gs(m_editbox->get_text(), m_parent->get_game());
+      gs.load();
+      m_parent->get_game()->postload();
+      m_parent->get_game()->load_graphics();
+      die();
+   }
+}
 /*
 ==============================================================================
 
@@ -46,7 +129,9 @@ public:
 	virtual ~GameMainMenu();
 
 private:
+   UIUniqueWindowRegistry m_saveload;
 	Interactive_Player	*m_player;
+   void clicked(int);
 };
 
 /*
@@ -59,10 +144,29 @@ Create all the buttons etc...
 GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry)
 	: UIUniqueWindow(plr, registry, 102, 136, "Menu")
 {
+   m_player=plr;
+
+   UIButton* b=new UIButton(this, 5, 5, get_inner_w()-10, 20, 0, 1);
+   b->set_title("Save Game");
+   b->clickedid.set(this, &GameMainMenu::clicked);
+
+   b=new UIButton(this, 5, 30, get_inner_w()-10, 20, 0, 2);
+   b->set_title("Load Game");
+   b->clickedid.set(this, &GameMainMenu::clicked);
+  
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
+void GameMainMenu::clicked(int n) {
+   if(n==1) {
+      // Save
+      new Game_Main_Menu_Save_Game(m_player, &m_saveload);
+   } else {
+      // Load
+      new Game_Main_Menu_Load_Game(m_player, &m_saveload);
+   }
+}
 
 /*
 ===============
@@ -101,7 +205,7 @@ Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g
 {
    // Setup all screen elements
 	m_game = g;
-	m_player_number = plyn;
+	set_player_number(plyn);
 
 	Map_View* mview;
    mview = new Map_View(this, 0, 0, get_w(), get_h(), this);
@@ -185,9 +289,6 @@ void Interactive_Player::start()
 	int mapw;
 	int maph;
 
-   m_maprenderinfo.egbase = m_game;
-	m_maprenderinfo.visibility = get_player()->get_visibility();
-
 	mapw = 0;
 	maph = 0;
 
@@ -241,7 +342,7 @@ Player has clicked on the given field; bring up the context menu.
 */
 void Interactive_Player::field_action()
 {
-	if (m_maprenderinfo.visibility && !get_player()->is_field_seen(get_fieldsel_pos()))
+	if (!get_player()->is_field_seen(get_fieldsel_pos()))
 		return;
 
 	// Special case for buildings
@@ -310,10 +411,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 
 	case KEY_F5:
 		if (down) {
-			if (!m_maprenderinfo.visibility)
-				m_maprenderinfo.visibility = get_player()->get_visibility();
-			else if (get_game()->get_allow_cheats())
-				m_maprenderinfo.visibility = 0;
+         get_player()->set_see_all(!get_player()->get_see_all());
 		}
 		return true;
 	}
@@ -321,4 +419,19 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 	return false;
 }
 
+/*
+ * set the player and the visibility to this
+ * player
+ */
+void Interactive_Player::set_player_number(uint n) {
+   m_player_number=n;
+}
+
+
+/*
+ * Return our players visibility
+ */
+std::vector<bool>* Interactive_Player::get_visibility(void) {
+   return m_game->get_player(m_player_number)->get_visibility(); 
+}
 

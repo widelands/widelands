@@ -39,6 +39,8 @@ class Building;
  * Common to all buildings!
  */
 class Building_Descr : public Map_Object_Descr {
+   friend class Widelands_Map_Buildingdata_Data_Packet;
+
 public:
 	struct CostItem {
 		std::string name;   // name of ware
@@ -55,8 +57,6 @@ public:
 
 	inline const char* get_name(void) const { return m_name; }
 	inline const char* get_descname() const { return m_descname; }
-	inline uint get_idle_anim(void) const { return m_idle; }
-	inline uint get_build_anim(void) const { return m_build; }
 	inline bool get_buildable(void) const { return m_buildable; }
    inline bool get_enhanced_building(void) const { return m_enhanced_building; }
 	inline const BuildCost* get_buildcost() const { return &m_buildcost; }
@@ -96,8 +96,6 @@ private:
 	char*        m_buildicon_fname; // filename for this icon
 	int          m_size;            // size of the building
 	bool         m_mine;
-	uint         m_idle;            // idle animation
-   uint         m_build;           // build animation
    std::vector<char*> m_enhances_to;     // building to enhance to or 0
    bool         m_enhanced_building; // if it is one, it is bulldozable
 
@@ -109,6 +107,7 @@ public:
 
 class Building : public PlayerImmovable {
 	friend class Building_Descr;
+   friend class Widelands_Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Building_Descr)
 
@@ -121,13 +120,22 @@ public:
 	};
 
 public:
+   enum Type {
+      PRODUCTIONSITE=0,
+      CONSTRUCTIONSITE,
+      MILITARYSITE,
+      WAREHOUSE
+   };
+   
 	Building(Building_Descr* descr);
 	virtual ~Building();
+
+   virtual int get_building_type()=0;
 
 	virtual int get_type();
 	virtual int get_size();
 	virtual bool get_passable();
-	virtual uint get_ui_anim();
+   virtual uint get_ui_anim();
 
 	virtual Flag* get_base_flag();
 	virtual uint get_playercaps();
@@ -157,6 +165,9 @@ public:
 	virtual void set_stop(bool stop);
 
    inline const std::vector<char*>* get_enhances_to() const { return get_descr()->get_enhances_to(); }
+   
+   void log_general_info(Editor_Game_Base* egbase);
+      
 
 protected:
 	void start_animation(Editor_Game_Base* g, uint anim);

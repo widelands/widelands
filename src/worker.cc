@@ -24,6 +24,7 @@
 #include "graphic.h"
 #include "player.h"
 #include "profile.h"
+#include "queue_cmd_ids.h"
 #include "rendertarget.h"
 #include "soldier.h"
 #include "transport.h"
@@ -31,25 +32,47 @@
 #include "util.h"
 #include "warehouse.h"
 #include "wexception.h"
+#include "widelands_map_map_object_loader.h"
+#include "widelands_map_map_object_saver.h"
 #include "worker.h"
+#include "worker_program.h"
 #include "world.h"
 
 
-class Cmd_Incorporate:public BaseCommand {
-    private:
-	    Worker* worker;
-	    
-    public:
-	    Cmd_Incorporate (int t, Worker* w) : BaseCommand (t)
-	    {
-		    worker=w;
-	    }
-	    
-	    void execute (Game* g)
-	    {
-		    worker->incorporate (g);
-	    }
-};
+Cmd_Incorporate::Cmd_Incorporate(int t, Worker* w) :
+       BaseCommand(t) {
+          worker=w;
+}
+void Cmd_Incorporate::execute(Game* g) {
+   worker->incorporate(g);
+}
+
+#define CMD_INCORPORATE_VERSION 1
+void Cmd_Incorporate::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* mol) {
+ int version=fr->Unsigned16();
+   if(version==CMD_INCORPORATE_VERSION) {
+      // Read Base Commands
+      BaseCommand::BaseCmdRead(fr,egbase,mol);
+   
+      // Serial of worker
+      int fileserial=fr->Unsigned32();
+      assert(mol->is_object_known(fileserial));
+      worker=static_cast<Worker*>(mol->get_object_by_file_index(fileserial));
+   } else
+      throw wexception("Unknown version in Cmd_Incorporate::Read: %i", version);
+}
+void Cmd_Incorporate::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
+   // First, write version
+   fw->Unsigned16(CMD_INCORPORATE_VERSION);
+   
+   // Write base classes
+   BaseCommand::BaseCmdWrite(fw, egbase, mos);
+   
+   // Now serial
+   assert(mos->is_object_known(worker));
+   fw->Unsigned32(mos->get_object_file_index(worker)); 
+}
+
 
 
 /*
@@ -59,76 +82,6 @@ class WorkerProgram
 
 ==============================================================================
 */
-
-struct WorkerAction {
-	typedef bool (Worker::*execute_t)(Game* g, Bob::State* state, const WorkerAction* act);
-
-	enum {
-		walkObject,			// walk to objvar1
-		walkCoords,			// walk to coords
-	};
-
-	execute_t		function;
-	int				iparam1;
-	int				iparam2;
-	std::string		sparam1;
-
-	std::vector<std::string>	sparamv;
-};
-
-class WorkerProgram {
-public:
-	struct Parser {
-		Worker_Descr*		descr;
-		std::string			directory;
-		Profile*				prof;
-      const EncodeData* encdata;
-	};
-
-	typedef void (WorkerProgram::*parse_t)(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-
-public:
-	WorkerProgram(std::string name);
-
-	std::string get_name() const { return m_name; }
-	int get_size() const { return m_actions.size(); }
-	const WorkerAction* get_action(int idx) const {
-		assert(idx >= 0 && (uint)idx < m_actions.size());
-		return &m_actions[idx];
-	}
-
-	void parse(Parser* parser, std::string name);
-
-private:
-	struct ParseMap {
-		const char*		name;
-		parse_t			function;
-	};
-
-private:
-	void parse_mine(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_createitem(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_setdescription(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_setbobdescription(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_findobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_findspace(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_walk(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_animation(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_return(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_object(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_plant(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_create_bob(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_removeobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_geologist(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-	void parse_geologist_find(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
-
-private:
-	std::string						m_name;
-	std::vector<WorkerAction>	m_actions;
-
-private:
-	static const ParseMap		s_parsemap[];
-};
 
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{ "mine",		      &WorkerProgram::parse_mine },
@@ -171,7 +124,7 @@ WorkerProgram::parse
 Parse a program
 ===============
 */
-void WorkerProgram::parse(Parser* parser, std::string name)
+void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 {
 	Section* sprogram = parser->prof->get_safe_section(name.c_str());
 
@@ -202,7 +155,7 @@ void WorkerProgram::parse(Parser* parser, std::string name)
 			if (!s_parsemap[mapidx].name)
 				throw wexception("unknown command '%s'", cmd[0].c_str());
 
-			(this->*s_parsemap[mapidx].function)(&act, parser, cmd);
+			(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
 
 			m_actions.push_back(act);
 		}
@@ -239,7 +192,7 @@ sparam1 = ware name
 
 ==============================
 */
-void WorkerProgram::parse_createitem(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_createitem(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: createitem <ware type>");
@@ -261,8 +214,8 @@ bool Worker::run_createitem(Game* g, State* state, const WorkerAction* act)
 		item->schedule_destroy(g);
 	}
 
-	wareid = g->get_safe_ware_id(act->sparam1.c_str());
-	item = new WareInstance(wareid);
+	wareid = get_owner()->get_tribe()->get_safe_ware_index(act->sparam1.c_str());
+	item = new WareInstance(wareid, get_owner()->get_tribe()->get_ware_descr(wareid));
 	item->init(g);
 
 	set_carried_item(g, item);
@@ -285,7 +238,7 @@ sparam1 = resource
 
 ==============================
 */
-void WorkerProgram::parse_mine(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_mine(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
    if (cmd.size() != 3)
       throw wexception("Usage: mine <ware type> <area>");
@@ -399,7 +352,7 @@ sparamv = possible bobs
 
 ==============================
 */
-void WorkerProgram::parse_setdescription(WorkerAction* act, Parser* parser,
+void WorkerProgram::parse_setdescription(Worker_Descr*, WorkerAction* act, Parser* parser,
 															const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2)
@@ -457,7 +410,7 @@ sparamv = possible bobs
 
 ==============================
 */
-void WorkerProgram::parse_setbobdescription(WorkerAction* act, Parser* parser,
+void WorkerProgram::parse_setbobdescription(Worker_Descr*, WorkerAction* act, Parser* parser,
 															const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 2)
@@ -527,7 +480,7 @@ sparam1 = type
 
 ==============================
 */
-void WorkerProgram::parse_findobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_findobject(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	uint i;
 
@@ -649,7 +602,7 @@ sparam1 = Resource
 
 ==============================
 */
-void WorkerProgram::parse_findspace(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_findspace(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	uint i;
 
@@ -761,7 +714,7 @@ iparam1 = walkXXX
 
 ==============================
 */
-void WorkerProgram::parse_walk(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_walk(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: walk <where>");
@@ -865,7 +818,7 @@ iparam2 = duration
 
 ==============================
 */
-void WorkerProgram::parse_animation(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_animation(Worker_Descr* descr, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	char* endp;
 
@@ -874,13 +827,12 @@ void WorkerProgram::parse_animation(WorkerAction* act, Parser* parser, const std
 
 	act->function = &Worker::run_animation;
 
-	if (cmd[1] == "idle")
-		act->iparam1 = parser->descr->get_idle_anim();
-	else {
+	if(!descr->is_animation_known(cmd[1].c_str())) {
       // dynamically allocate animations here
       Section* s = parser->prof->get_safe_section(cmd[1].c_str());
-      act->iparam1 = g_anim.get(parser->directory.c_str(), s, 0, parser->encdata);
+      descr->add_animation(cmd[1].c_str(), (g_anim.get(parser->directory.c_str(), s, 0, parser->encdata)));
    }
+   act->iparam1 = descr->get_animation(cmd[1].c_str()); 
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
 	if (endp && *endp)
@@ -913,7 +865,7 @@ iparam1 = 0: don't drop item on flag, 1: do drop item on flag
 
 ==============================
 */
-void WorkerProgram::parse_return(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_return(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	act->function = &Worker::run_return;
 	act->iparam1 = 1; // drop any item on our owner's flag
@@ -940,7 +892,7 @@ sparam1 = object command name
 
 ==============================
 */
-void WorkerProgram::parse_object(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_object(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 2)
 		throw wexception("Usage: object <program name>");
@@ -1000,7 +952,7 @@ selected by a previous command (i.e. setdescription)
 
 ==============================
 */
-void WorkerProgram::parse_plant(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_plant(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	act->function = &Worker::run_plant;
 }
@@ -1041,7 +993,7 @@ selected by a previous command (i.e. setbobdescription).
 
 ==============================
 */
-void WorkerProgram::parse_create_bob(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_create_bob(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	act->function = &Worker::run_create_bob;
 }
@@ -1073,7 +1025,7 @@ Simply remove the currently selected object - make no fuss about it.
 
 ==============================
 */
-void WorkerProgram::parse_removeobject(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_removeobject(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	act->function = &Worker::run_removeobject;
 }
@@ -1108,7 +1060,7 @@ sparam1 = subcommand
 
 ==============================
 */
-void WorkerProgram::parse_geologist(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_geologist(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	char* endp;
 
@@ -1156,7 +1108,7 @@ when possible.
 
 ==============================
 */
-void WorkerProgram::parse_geologist_find(WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_geologist_find(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 1)
 		throw wexception("Usage: geologist-find");
@@ -1269,12 +1221,12 @@ void IdleWorkerSupply::set_economy(Economy* e)
 		return;
 
 	if (m_economy)
-		m_economy->remove_supply(m_worker->get_ware_id(), this);
+		m_economy->remove_worker_supply(m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()), this);
 
 	m_economy = e;
 
 	if (m_economy)
-		m_economy->add_supply(m_worker->get_ware_id(), this);
+		m_economy->add_worker_supply(m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()), this);
 }
 
 
@@ -1300,7 +1252,7 @@ It's just the one worker.
 */
 int IdleWorkerSupply::get_amount(Game* g, int ware)
 {
-	if (ware == m_worker->get_ware_id())
+	if (ware == m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str()))
 		return 1;
 
 	return 0;
@@ -1341,7 +1293,7 @@ No need to explicitly launch the worker.
 */
 Worker* IdleWorkerSupply::launch_worker(Game* g, int ware)
 {
-	assert(ware == m_worker->get_ware_id());
+	assert(ware == m_worker->get_owner()->get_tribe()->get_worker_index(m_worker->get_name().c_str())); 
 
 	return m_worker;
 }
@@ -1367,7 +1319,6 @@ Worker_Descr::Worker_Descr(Tribe_Descr *tribe, const char *name)
 	m_tribe = tribe;
 	m_menu_pic = 0;
 	m_menu_pic_fname = 0;
-	m_ware_id = -1;
 	add_attribute(Map_Object::WORKER);
 }
 
@@ -1393,19 +1344,6 @@ Load graphics (other than animations).
 void Worker_Descr::load_graphics()
 {
 	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname, false);
-}
-
-
-/*
-===============
-Worker_Descr::set_ware_id
-
-Set the worker's ware id. Called by Game::init_wares.
-===============
-*/
-void Worker_Descr::set_ware_id(int idx)
-{
-	m_ware_id = idx;
 }
 
 
@@ -1491,9 +1429,9 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	}
 
 	// Read the walking animations
-	m_walk_anims.parse(directory, prof, "walk_??", prof->get_section("walk"), encdata);
+	m_walk_anims.parse(this, directory, prof, "walk_??", prof->get_section("walk"), encdata);
    if(get_worker_type()!=SOLDIER) // Soldier have no walkload
-      m_walkload_anims.parse(directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
+      m_walkload_anims.parse(this, directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
 
    // Read the becomes and experience
    m_becomes = sglobal->get_string("becomes","");
@@ -1531,7 +1469,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
          parser.encdata = encdata;
 
 			prog = new WorkerProgram(string);
-			prog->parse(&parser, string);
+			prog->parse(this, &parser, string);
 			m_programs[prog->get_name()] = prog;
 		}
 		catch(std::exception& e)
@@ -1572,7 +1510,36 @@ Worker::Worker(Worker_Descr *descr)
 Worker::~Worker()
 {
 }
+   
+/*
+ * Log basic informations
+ */
+void Worker::log_general_info(Editor_Game_Base* egbase) {
+   Bob::log_general_info(egbase);
 
+   PlayerImmovable* loc=static_cast<PlayerImmovable*>(m_location.get(egbase));
+   
+   molog("m_location: %p\n", loc);
+   if(loc) { 
+      molog("* Owner: (%p)\n", loc->get_owner());
+      molog("** Owner (plrnr): %i\n", loc->get_owner()->get_player_number());
+      molog("* Economy: %p\n", loc->get_economy());
+   }
+
+   molog("Economy: %p\n", m_economy);
+   
+   WareInstance* ware=static_cast<WareInstance*>(m_carried_item.get(egbase));
+   molog("m_carried_item: %p\n", ware);
+   if(ware) {
+      molog("* m_carried_item->get_ware() (id): %i\n", ware->get_ware());
+      molog("* m_carried_item->get_economy() (): %p\n", ware->get_economy());
+   }
+   
+   molog("m_needed_exp: %i\n", m_needed_exp);
+   molog("m_current_exp: %i\n", m_current_exp);
+
+   molog("m_supply: %p\n", m_supply);
+}
 
 /*
 ===============
@@ -1653,7 +1620,7 @@ void Worker::set_economy(Economy *economy)
 		return;
 
 	if (m_economy)
-		m_economy->remove_wares(get_descr()->get_ware_id(), 1);
+		m_economy->remove_workers(get_descr()->get_tribe()->get_worker_index(get_name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1665,7 +1632,7 @@ void Worker::set_economy(Economy *economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_wares(get_descr()->get_ware_id(), 1);
+		m_economy->add_workers(get_descr()->get_tribe()->get_worker_index(get_name().c_str()), 1);
 }
 
 
@@ -1681,7 +1648,9 @@ void Worker::init(Editor_Game_Base *g)
 	Bob::init(g);
 
 	// a worker should always start out at a fixed location
-	assert(get_location(g));
+   // (this assert is not longer true for save games. Where it lives
+   // is unknown to this worker till he is initialized
+	// assert(get_location(g));
   
    if(g->is_game())
       create_needed_experience(static_cast<Game*>(g)); // Set his experience
@@ -1704,9 +1673,17 @@ void Worker::cleanup(Editor_Game_Base *g)
 		m_supply = 0;
 	}
 
-	if (item)
-		item->destroy(g);
+	if (item) 
+      if(g->get_objects()->object_still_available(item))
+         item->destroy(g);
 
+   // We are destoryed, but we were maybe idling
+   // or doing something else. Get Location might 
+   // init a gowarehouse task or something and this results
+   // in a dirty stack. Nono, we do not want to end like this
+   if(g->is_game()) 
+      reset_tasks(static_cast<Game*>(g));
+   
 	if (get_location(g))
 		set_location(0);
 
@@ -1849,8 +1826,8 @@ void Worker::level(Game* g) {
    Worker_Descr* new_descr=get_descr()->get_tribe()->get_worker_descr(index);
 		
    // Inform the economy, that something has changed
-   m_economy->remove_wares(get_descr()->get_ware_id(), 1);
-   m_economy->add_wares(new_descr->get_ware_id(),1);
+   m_economy->remove_workers(get_descr()->get_tribe()->get_worker_index(get_descr()->get_name()), 1);
+   m_economy->add_workers(new_descr->get_tribe()->get_worker_index(new_descr->get_name()),1);
 
    m_descr=new_descr;
 
@@ -1967,14 +1944,14 @@ void Worker::transfer_update(Game* g, State* state)
 			molog("[transfer]: Success\n");
 			pop_task(g);
 
-			t->finish();
+			t->has_finished();
 			return;
 		} else {
 			molog("[transfer]: Failed\n");
 			set_signal("fail");
 			pop_task(g);
 
-			t->fail();
+			t->has_failed();
 			return;
 		}
 	}
@@ -2026,7 +2003,7 @@ void Worker::transfer_update(Game* g, State* state)
 
 			molog("[transfer]: set location to road %u\n", road->get_serial());
 			set_location(road);
-			set_animation(g, get_descr()->get_idle_anim());
+			set_animation(g, get_descr()->get_animation("idle"));
 			schedule_act(g, 10); // wait a little
 			return;
 		}
@@ -2067,7 +2044,7 @@ void Worker::transfer_update(Game* g, State* state)
 
 			molog("[transfer]: arrive at flag %u\n", nextstep->get_serial());
 			set_location((Flag*)nextstep);
-			set_animation(g, get_descr()->get_idle_anim());
+			set_animation(g, get_descr()->get_animation("idle"));
 			schedule_act(g, 10); // wait a little
 			return;
 		}
@@ -2344,7 +2321,7 @@ void Worker::return_update(Game* g, State* state)
 
 						flag->add_item(g, item);
 
-						set_animation(g, get_descr()->get_idle_anim());
+						set_animation(g, get_descr()->get_animation("idle"));
 						schedule_act(g, 20); // rest a while
 						return;
 					}
@@ -2562,7 +2539,7 @@ void Worker::gowarehouse_update(Game* g, State* state)
 	// flag is removed or a warehouse connects to the Economy).
 	molog("[gowarehouse]: Idle\n");
 
-	start_task_idle(g, get_idle_anim(), 1000);
+	start_task_idle(g, get_animation("idle"), 1000);
 }
 
 
@@ -2687,7 +2664,7 @@ void Worker::dropoff_update(Game* g, State* state)
 				item = fetch_carried_item(g);
 				flag->add_item(g, item);
 
-				set_animation(g, get_descr()->get_idle_anim());
+				set_animation(g, get_descr()->get_animation("idle"));
 				schedule_act(g, 50);
 				return;
 			}
@@ -2790,7 +2767,7 @@ void Worker::fetchfromflag_update(Game *g, State* state)
 		if (item)
 			set_carried_item(g, item);
 
-		set_animation(g, get_descr()->get_idle_anim());
+		set_animation(g, get_descr()->get_animation("idle"));
 		schedule_act(g, 20);
 		return;
 	}
@@ -3184,7 +3161,7 @@ void Worker::fugitive_update(Game* g, State* state)
 	if (start_task_movepath(g, dst, 4, get_descr()->get_right_walk_anims(does_carry_ware())))
 		return;
 
-	start_task_idle(g, get_descr()->get_idle_anim(), 50);
+	start_task_idle(g, get_descr()->get_animation("idle"), 50);
 }
 
 
@@ -3390,7 +3367,7 @@ void Worker::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos)
 	WareInstance* item = get_carried_item(g);
 
 	if (item) {
-		uint itemanim = item->get_ware_descr()->get_idle_anim();
+		uint itemanim = item->get_ware_descr()->get_animation("idle");
 
 		dst->drawanim(drawpos.x, drawpos.y - 15, itemanim, 0, playercolors);
 	}
@@ -3552,7 +3529,7 @@ void Carrier::road_update(Game* g, State* state)
 			molog("[road]: delay (acked for %i)\n", m_acked_ware);
 			state->ivar1 = 1;
 
-			set_animation(g, get_descr()->get_idle_anim());
+			set_animation(g, get_descr()->get_animation("idle"));
 			schedule_act(g, 50);
 		}
 
@@ -3568,7 +3545,7 @@ void Carrier::road_update(Game* g, State* state)
 
 	// TODO: idle animations
 
-	set_animation(g, get_descr()->get_idle_anim());
+	set_animation(g, get_descr()->get_animation("idle"));
 	skip_act(g); // wait until signal
 	state->ivar1 = 1; // we're available immediately after an idle phase
 }
@@ -3672,7 +3649,7 @@ void Carrier::transport_update(Game* g, State* state)
 				item->set_location(g, (Building*)pos);
 				item->update(g);
 
-				set_animation(g, get_descr()->get_idle_anim());
+				set_animation(g, get_descr()->get_animation("idle"));
 				schedule_act(g, 20);
 				return;
 			}
@@ -3711,7 +3688,7 @@ void Carrier::transport_update(Game* g, State* state)
 
 		set_carried_item(g, item);
 
-		set_animation(g, get_descr()->get_idle_anim());
+		set_animation(g, get_descr()->get_animation("idle"));
 		schedule_act(g, 20);
 		return;
 	}
@@ -3781,7 +3758,7 @@ void Carrier::transport_update(Game* g, State* state)
 			molog("[transport]: strange: acked ware from busy flag no longer present.\n");
 
 			m_acked_ware = -1;
-			set_animation(g, get_descr()->get_idle_anim());
+			set_animation(g, get_descr()->get_animation("idle"));
 			schedule_act(g, 20);
 			return;
 		}
@@ -3799,7 +3776,7 @@ void Carrier::transport_update(Game* g, State* state)
 
 		set_carried_item(g, otheritem);
 
-		set_animation(g, get_descr()->get_idle_anim());
+		set_animation(g, get_descr()->get_animation("idle"));
 		schedule_act(g, 20);
 		return;
 	}

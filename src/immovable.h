@@ -70,9 +70,10 @@ struct ImmovableAction;
 Immovable represents a standard immovable such as trees or stones.
 */
 class Immovable_Descr : public Map_Object_Descr {
+   friend class Widelands_Map_Immovabledata_Data_Packet; // For writing (get_program)
+
 public:
 	typedef std::map<std::string, ImmovableProgram*> ProgramMap;
-	typedef std::map<std::string, uint> AnimationMap;
 
 public:
 	Immovable_Descr(const char *name, Tribe_Descr* owner_tribe);
@@ -81,7 +82,7 @@ public:
 	inline const char* get_name(void) const { return m_name; }
 	inline int get_size(void) const { return m_size; }
    inline const char* get_picture(void) const { return m_picture.c_str(); }
-	inline const ImmovableProgram* get_program(std::string name) const;
+	const ImmovableProgram* get_program(std::string name) const;
 	inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
 
 	void parse(const char *directory, Profile *s);
@@ -90,7 +91,6 @@ public:
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
    inline Tribe_Descr* get_owner_tribe(void) { return m_owner_tribe; }
-   bool is_world_immovable(void) { return !m_owner_tribe; }
 
 protected:
    std::string m_picture;
@@ -99,13 +99,13 @@ protected:
 	EncodeData	m_default_encodedata;
 
 	ProgramMap		m_programs;
-	AnimationMap	m_animations;
    Tribe_Descr*            m_owner_tribe;       // or zero if this is a world immovable
 };
 
 class Immovable : public BaseImmovable {
 	friend class Immovable_Descr;
 	friend class ImmovableProgram;
+   friend class Widelands_Map_Immovabledata_Data_Packet; // For writing
 
 	MO_DESCR(Immovable_Descr);
 
@@ -128,7 +128,7 @@ public:
 
 	void switch_program(Game* g, std::string name);
    
-   bool is_world_immovable(void) { return get_descr()->is_world_immovable(); }
+   inline Tribe_Descr* get_owner_tribe(void) { return get_descr()->get_owner_tribe(); }
 
 protected:
 	void set_program_animation(Editor_Game_Base* g);
@@ -175,6 +175,8 @@ public:
 	virtual void remove_worker(Worker *w);
 
 	const std::vector<Worker*>& get_workers() const { return m_workers; }
+
+   void log_general_info(Editor_Game_Base*);
 
 protected:
 	void set_owner(Player *owner);

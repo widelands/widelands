@@ -22,7 +22,6 @@
 #include "graphic.h"
 #include "interactive_base.h"
 #include "map.h"
-#include "maprenderinfo.h"
 #include "minimap.h"
 #include "rendertarget.h"
 #include "ui_button.h"
@@ -85,7 +84,7 @@ Redraw the view of the map
 */
 void MiniMapView::draw(RenderTarget* dst)
 {
-   dst->renderminimap(m_player->get_maprenderinfo(),
+   dst->renderminimap(m_player->get_egbase(), m_player->get_visibility(),
 			Coords(m_viewx - get_w()/2, m_viewy - get_h()/2), m_flags);
 
 /*

@@ -47,7 +47,8 @@ A production site can have one (or more) input wares types. Every input
 */
 
 class ProductionSite_Descr : public Building_Descr {
-	typedef std::map<std::string, ProductionProgram*> ProgramMap;
+   friend class ProductionProgram; // To add animations
+   typedef std::map<std::string, ProductionProgram*> ProgramMap;
 
 public:
    struct Worker_Info {
@@ -81,6 +82,7 @@ private:
 };
 
 class ProductionSite : public Building {
+   friend class Widelands_Map_Buildingdata_Data_Packet;
 	MO_DESCR(ProductionSite_Descr);
 
 public:
@@ -89,6 +91,7 @@ public:
 
 	virtual std::string get_statistics_string();
 
+   virtual int get_building_type(void) { return Building::PRODUCTIONSITE; }
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
 	virtual void act(Game* g, uint data);
