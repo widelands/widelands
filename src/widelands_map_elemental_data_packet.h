@@ -37,6 +37,11 @@ class Widelands_Map_Elemental_Data_Packet : public Widelands_Map_Data_Packet {
       // the need of a properly configured Editor_Game_Base
       // object
       void Pre_Read(FileRead*, Map*) throw(wexception);
+
+      inline uint get_version(void) { return m_version; }
+
+   private:
+      uint m_version;
 };
 
 

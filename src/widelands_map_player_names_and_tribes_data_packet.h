@@ -17,38 +17,23 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_H
+#ifndef __S__WIDELANDS_MAP_PLAYER_NAMES_AND_TRIBES_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_PLAYER_NAMES_AND_TRIBES_DATA_PACKET_H
 
-#include "map.h"
-#include "wexception.h"
-
-class FileRead;
-class FileWrite;
-class Editor_Game_Base;
+#include "widelands_map_data_packet.h"
 
 /*
-========================================
-
-This class represents a data packet in a widelands 
-map file. it is an abstract base class
-
-========================================
-*/
-class Widelands_Map_Data_Packet {
+ * This data packet contains player names 
+ * and tribes (scenario packet)
+ */
+class Widelands_Map_Player_Names_And_Tribes_Data_Packet : public Widelands_Map_Data_Packet {
    public:
-      virtual ~Widelands_Map_Data_Packet() { m_skip=false; }    
+      virtual ~Widelands_Map_Player_Names_And_Tribes_Data_Packet();
 
-      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception) = 0;
-      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception) = 0;
-
-      void set_scenario_skip(bool t) { m_skip=t; }
-
-   protected:
-      inline bool get_scenario_skip(void) { return m_skip; }
-      
-   private:
-      bool m_skip;
+      virtual void Read(FileRead*, Editor_Game_Base*) throw(wexception);
+      virtual void Write(FileWrite*, Editor_Game_Base*) throw(wexception);
 };
 
-#endif 
+
+#endif
+

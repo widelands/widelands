@@ -25,6 +25,7 @@
 #include "world.h"
 #include "worlddata.h"
 #include "widelands_map_loader.h"
+#include "s2map.h"
 #include "error.h"
 
 /*
@@ -55,92 +56,7 @@ struct Map::Pathfield {
 	inline int cost() { return real_cost + estim_cost; }
 };
 
-/*
-=============================
 
-class S2_Map_Loader
-
-implementation of the S2 Map Loader
-
-=============================
-*/
-
-/*
-===========
-S2_Map_Loader::S2_Map_Loader()
-
-inits the map loader
-===========
-*/
-S2_Map_Loader::S2_Map_Loader(const char* filename, Map* map) :
-   Map_Loader(filename, map) {
-	snprintf(m_filename, sizeof(m_filename), "%s", filename);
-   m_map=map;
-
-}
-
-/*
-===========
-S2_Map_Loader::~S2_Map_Loader()
-
-cleanups
-===========
-*/
-S2_Map_Loader::~S2_Map_Loader() {
-}
-
-/*
-===========
-S2_Map_Loader::preload_map()
-
-preloads the map. The map will then return valid
-infos when get_width() or get_nrplayers(),
-get_author() and so on are called
-
-load the header
-===========
-*/
-int S2_Map_Loader::preload_map() {
-   assert(get_state()!=STATE_LOADED);
-
-   load_s2mf_header();
-
-   if(!World::exists_world(m_map->get_world_name())) {
-      throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
-   }
-
-   set_state(STATE_PRELOADED);
-
-   return 0;
-}
-
-/*
-===========
-S2_Map_Loader::load_map_complete()
-
-Completly loads the map, loads the
-corresponding world, loads the graphics
-and places all the objects. From now on
-the Map* can't be set to another one.
-===========
-*/
-int S2_Map_Loader::load_map_complete(Editor_Game_Base* game) {
-
-
-   // now, load the world, load the rest infos from the map
-   m_map->load_world();
-   // Postload the world which provides all the immovables found on a map
-   m_map->m_world->postload(game);
-   m_map->set_size(m_map->m_width, m_map->m_height);
-   load_s2mf(game);
-
-
-   m_map->recalc_whole_map();
-
-   set_state(STATE_LOADED);
-
-   return 0;
-}
 
 /** class Map
  *
@@ -398,6 +314,9 @@ void Map::cleanup(void) {
 		delete m_world;
 	m_world = 0;
 
+   m_scenario_tribes.clear();
+   m_scenario_names.clear();
+
    if(m_overlay_manager) 
       m_overlay_manager->cleanup();
 }
@@ -418,6 +337,8 @@ void Map::create_empty_map(int w, int h, std::string worldname) {
    set_author("Unknown");
    set_description("no description defined");
    set_nrplayers(1);
+   set_scenario_player_tribe(1, "<undefined>");
+   set_scenario_player_name(1, "Player 1");
 
    for(int y=0; y<h; y++) {
       for(int x=0; x<w; x++) {
@@ -459,6 +380,32 @@ void Map::set_size(uint w, uint h)
       m_overlay_manager->init(w,h);
    }
 
+}
+
+/*
+ * The scenario get/set functions
+ */
+std::string Map::get_scenario_player_tribe(uint i) {
+   assert(m_scenario_tribes.size()==m_nrplayers);
+
+   return m_scenario_tribes[i-1];
+}
+
+std::string Map::get_scenario_player_name(uint i) {
+   assert(m_scenario_names.size()==m_nrplayers);
+
+   return m_scenario_names[i-1];
+}
+
+void Map::set_scenario_player_tribe(uint i, std::string str) {
+   assert(i<=m_nrplayers);
+   m_scenario_tribes.resize(m_nrplayers);
+   m_scenario_tribes[i-1]=str;
+}
+void Map::set_scenario_player_name(uint i, std::string str) {
+   assert(i<=m_nrplayers);
+   m_scenario_names.resize(m_nrplayers);
+   m_scenario_names[i-1]=str;
 }
 
 /*

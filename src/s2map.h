@@ -131,4 +131,22 @@ struct S2MapDescrHeader {
 #define BOB_GRASS2			0x14
 #define BOB_GRASS3			0xf
 
+
+class S2_Map_Loader : public Map_Loader {
+   public:
+      S2_Map_Loader(const char*, Map*);
+      virtual ~S2_Map_Loader();
+
+      virtual int preload_map();
+      virtual int load_map_complete(Editor_Game_Base*, bool scenario);
+
+   private:
+      char  m_filename[256];
+
+      uchar *load_s2mf_section(FileRead *, int width, int height);
+      void  load_s2mf_header();
+      void  load_s2mf(Editor_Game_Base*);
+};
+
+
 #endif /* __S__S2MAP_H */

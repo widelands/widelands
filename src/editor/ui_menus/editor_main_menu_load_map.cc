@@ -32,6 +32,7 @@
 #include "editor_set_starting_pos_tool.h"
 #include "overlay_manager.h"
 #include "world.h"
+#include "map_loader.h"
 
 /*
 ===============
@@ -104,7 +105,7 @@ void Main_Menu_Load_Map::clicked(int id) {
       //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
       ml->preload_map();
 
-      ml->load_map_complete(m_parent->get_editor());
+      ml->load_map_complete(m_parent->get_editor(), true);
    }  catch(std::exception& exe) {
       // This really shoudn't fail since maps are already preloaded (in map preview)
       // and therefore valid, but if it does, a valid map must be displayed, therefore

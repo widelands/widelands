@@ -24,6 +24,7 @@
 #include <vector>
 #include "ui_panel.h"
 #include "ui_signal.h"
+#include "ui_textarea.h"
 
 class Game;
 class UIButton;
@@ -41,7 +42,8 @@ class PlayerDescriptionGroup : public UIPanel {
 
 	bool m_enabled; // is this player allowed at all (map-dependent)
 
-	UICheckbox* m_btnEnablePlayer;
+   UITextarea* m_plr_name;
+   UICheckbox* m_btnEnablePlayer;
 	int m_playertype;
 	UIButton* m_btnPlayerType;
 	UIButton* m_btnPlayerTribe;
@@ -56,6 +58,8 @@ public:
 
 	void set_enabled(bool enable);
    void allow_changes(bool t);
+   void set_player_tribe(std::string str);
+   void set_player_name(std::string name);
 
 private:
 	void enable_player(bool on);

@@ -25,6 +25,7 @@
 #include "ui_textarea.h"
 #include "ui_multilinetextarea.h"
 #include "ui_checkbox.h"
+#include "map_loader.h"
 
 /*
 ==============================================================================
@@ -129,7 +130,7 @@ void Fullscreen_Menu_MapSelect::ok()
 		assert(m_maploader);
 
 		egbase->set_map(m_maploader->get_map());
-		m_maploader->load_map_complete(egbase);
+		m_maploader->load_map_complete(egbase, m_is_scenario);
 		m_map = 0;
 
 		delete m_maploader;

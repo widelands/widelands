@@ -177,6 +177,12 @@ public:
 	inline uint get_width(void) { return m_width; }
 	inline uint get_height(void) { return m_height; }
 	inline World* get_world(void) { return m_world; }
+   // The next few functions are only valid 
+   // when the map is loaded as an scenario.
+   std::string get_scenario_player_tribe(uint i);
+   std::string get_scenario_player_name(uint i);
+   void set_scenario_player_tribe(uint i, std::string);
+   void set_scenario_player_name(uint i, std::string);
 
 	BaseImmovable *get_immovable(Coords coord);
 	uint find_bobs(Coords coord, uint radius, std::vector<Bob*> *list,
@@ -264,6 +270,9 @@ private:
 	ushort		m_pathcycle;
 	Pathfield*	m_pathfields;
    Overlay_Manager* m_overlay_manager;
+
+   std::vector<std::string> m_scenario_tribes; // only alloced when really needed
+   std::vector<std::string> m_scenario_names;  
 
 	void recalc_brightness(FCoords coords);
 	void recalc_fieldcaps_pass1(FCoords coords);
@@ -779,61 +788,6 @@ private:
 
 	FCoords	m_left;			// left-most field of current row
 	FCoords	m_next;			// next field to return
-};
-
-
-/*
-=============================
-
-class Map_Loader
-
-This class loads a map from a file. It firsts only loads
-small junks of informations like size, nr of players for the
-map select dialog. For this loading function the same class Map* can be reused.
-Then, when the player has a map selected, the Map is completly filled with
-objects and information. When now the player selects another map, this class Map*
-must be deleted, a new one must be selected
-
-=============================
-*/
-class Map_Loader {
-   public:
-      Map_Loader(const char*, Map*) { m_s=STATE_INIT; m_map=0; }
-      virtual ~Map_Loader() { };
-
-      virtual int preload_map()=0;
-      virtual int load_map_complete(Editor_Game_Base*)=0;
-
-      inline Map* get_map() { return m_map; }
-
-   protected:
-      enum State {
-         STATE_INIT,
-         STATE_PRELOADED,
-         STATE_LOADED
-      };
-      void set_state(State s) { m_s=s; }
-      State get_state(void) { return m_s; }
-      Map* m_map;
-
-   private:
-      State m_s;
-};
-
-class S2_Map_Loader : public Map_Loader {
-   public:
-      S2_Map_Loader(const char*, Map*);
-      virtual ~S2_Map_Loader();
-
-      virtual int preload_map();
-      virtual int load_map_complete(Editor_Game_Base*);
-
-   private:
-      char  m_filename[256];
-
-      uchar *load_s2mf_section(FileRead *, int width, int height);
-      void  load_s2mf_header();
-      void  load_s2mf(Editor_Game_Base*);
 };
 
 #endif // __S__MAP_H

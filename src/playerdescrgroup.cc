@@ -25,6 +25,7 @@
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "tribe.h"
+#include "wexception.h"
 
 // hard-coded playercolors
 uchar g_playercolors[MAX_PLAYERS][12] = {
@@ -86,7 +87,7 @@ void PlayerDescriptionGroup::allow_changes(bool t) {
 }
 
 PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Game* game, int plnum)
-	: UIPanel(parent, x, y, 300, 20)
+	: UIPanel(parent, x, y, 450, 20)
 {
 	m_game = game;
 	m_plnum = plnum;
@@ -97,11 +98,13 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	set_visible(false);
 
 	// create sub-panels
-	m_btnEnablePlayer = new UICheckbox(this, 0, 0);
+	m_plr_name=new UITextarea(this, 0, 0, 100, 20, "Player 1", Align_Left);
+   
+   m_btnEnablePlayer = new UICheckbox(this, 88, 0);
 	m_btnEnablePlayer->set_state(true);
 	m_btnEnablePlayer->changedto.set(this, &PlayerDescriptionGroup::enable_player);
 
-	m_btnPlayerType = new UIButton(this, 28, 0, 120, 20, 1);
+	m_btnPlayerType = new UIButton(this, 116, 0, 120, 20, 1);
 	m_btnPlayerType->clicked.set(this, &PlayerDescriptionGroup::toggle_playertype);
 	if (plnum==1)
 		m_playertype = Player::playerLocal;
@@ -109,7 +112,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 		m_playertype = Player::playerAI;
 
    
-   m_btnPlayerTribe = new UIButton(this, 156, 0, 120, 20, 1);
+   m_btnPlayerTribe = new UIButton(this, 244, 0, 120, 20, 1);
    m_btnPlayerTribe->clicked.set(this, &PlayerDescriptionGroup::toggle_playertribe);
 
    Tribe_Descr::get_all_tribes(&m_tribes);
@@ -147,6 +150,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 		}
 		m_btnPlayerType->set_title(string);
 		m_btnPlayerType->set_visible(m_btnEnablePlayer->get_state());
+		m_btnPlayerTribe->set_visible(m_btnEnablePlayer->get_state());
 
 		set_visible(true);
 	}
@@ -169,6 +173,7 @@ void PlayerDescriptionGroup::enable_player(bool on)
 	}
 
 	m_btnPlayerType->set_visible(on);
+   m_btnPlayerTribe->set_visible(on);
 	changed.call();
 }
 
@@ -184,5 +189,33 @@ void PlayerDescriptionGroup::toggle_playertribe(void) {
    ++m_current_tribe;
    if(m_current_tribe==m_tribes.size()) m_current_tribe=0;
    m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
+   // set the player
+   m_game->remove_player(m_plnum);
+   m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), g_playercolors[m_plnum-1]);
 }
 
+/*
+ * set the current player tribe
+ */
+void PlayerDescriptionGroup::set_player_tribe(std::string str) {
+   uint i=0; 
+   for(i=0; i<m_tribes.size(); i++) {
+      if(m_tribes[i]==str) {
+         m_current_tribe=i; 
+         m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
+         // set the player
+         m_game->remove_player(m_plnum);
+         m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), g_playercolors[m_plnum-1]);
+         return;
+      }
+   }
+   // never here
+   throw wexception("Map defines tribe %s, but it doens't exist!\n", str.c_str());
+}
+
+/*
+ * Set players name
+ */
+void PlayerDescriptionGroup::set_player_name(std::string str) {
+   m_plr_name->set_text(str.c_str());
+}

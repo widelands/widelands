@@ -25,6 +25,7 @@
 #include "widelands_map_player_position_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
+#include "widelands_map_player_names_and_tribes_data_packet.h"
 
 Widelands_Map_Data_Packet* Widelands_Map_Data_Packet_Factory::create_correct_packet(ushort id) throw(wexception) {
     switch(id) {
@@ -34,6 +35,7 @@ Widelands_Map_Data_Packet* Widelands_Map_Data_Packet_Factory::create_correct_pac
       case PACKET_PLAYER_POSITION: return new Widelands_Map_Player_Position_Data_Packet(); break;
       case PACKET_BOB: return new Widelands_Map_Bob_Data_Packet(); break;
       case PACKET_RESOURCES: return new Widelands_Map_Resources_Data_Packet(); break;
+      case PACKET_PLAYER_NAM_TRIB: return new Widelands_Map_Player_Names_And_Tribes_Data_Packet(); break;
       default: throw wexception("Unknown Packet_Data_ID in map file: %i\n", id); break;
     }
     // never here

@@ -41,9 +41,8 @@ void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileRead* fr, Map* map) throw
    buf[4]='\0';
    if(strcmp(buf, WLMF_MAGIC)) throw wexception("Invalid File! Magic is '%s' instead of '%s'", buf, WLMF_MAGIC);
 
-   uint version;
-   version=fr->Unsigned16();
-   if(version > WLMF_VERSION) throw wexception("Map newer than binary!");
+   m_version=fr->Unsigned16();
+   if(m_version > WLMF_VERSION) throw wexception("Map newer than binary!");
 
    // check packet version
    int packet_version=fr->Unsigned16();

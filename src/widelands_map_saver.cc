@@ -28,6 +28,7 @@
 #include "widelands_map_player_position_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
+#include "widelands_map_player_names_and_tribes_data_packet.h"
 
 /*
  * Constructor
@@ -87,6 +88,11 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    
    // now resources
    dp=new Widelands_Map_Resources_Data_Packet();
+   dp->Write(&fw, m_egbase);
+   delete dp;
+
+   // now player names and tribes 
+   dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
    dp->Write(&fw, m_egbase);
    delete dp;
 

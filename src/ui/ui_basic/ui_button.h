@@ -39,6 +39,7 @@ public:
 	void remove_title();
 	void set_pic(uint picid);
 	void set_title(const char* title);
+   const char* get_title(void) { return m_title.c_str();  }
 	void set_enabled(bool on);
 
 	// Drawing and event handlers

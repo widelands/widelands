@@ -111,7 +111,18 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	for(i = 0; i < MAX_PLAYERS; i++) {
       m_players[i]->allow_changes(true);
 		m_players[i]->set_enabled(i < maxplayers);
-      m_players[i]->allow_changes(!m_is_scenario);
+      if(m_is_scenario && (i<maxplayers) && map) {
+         // set player to the by the map given
+         m_players[i]->allow_changes(false);
+         m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
+         m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
+      } else if(i<maxplayers && map ) {
+         std::string name="Player ";
+         if((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
+         name.append(1, static_cast<char>(((i+1)%10) + 0x30));
+         m_players[i]->set_player_name(name);
+         m_players[i]->allow_changes(true);
+      }
    }
 
 	m_ok->set_enabled(m_game->can_start());

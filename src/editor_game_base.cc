@@ -29,6 +29,7 @@
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"
+#include "error.h"
 
 /*
 ============

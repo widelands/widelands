@@ -21,6 +21,7 @@
 #include "editor_game_base.h"
 #include "filesystem.h"
 #include "map.h"
+#include "map_loader.h"
 #include "s2map.h"
 #include "types.h"
 #include "world.h"
@@ -36,6 +37,115 @@ using std::endl;
 // this is a detail of S2 maps
 #define CRITTER_PER_DEFINITION   1
 
+/*
+=============================
+
+class S2_Map_Loader
+
+implementation of the S2 Map Loader
+
+=============================
+*/
+
+/*
+===========
+S2_Map_Loader::S2_Map_Loader()
+
+inits the map loader
+===========
+*/
+S2_Map_Loader::S2_Map_Loader(const char* filename, Map* map) :
+   Map_Loader(filename, map) {
+	snprintf(m_filename, sizeof(m_filename), "%s", filename);
+   m_map=map;
+
+}
+
+/*
+===========
+S2_Map_Loader::~S2_Map_Loader()
+
+cleanups
+===========
+*/
+S2_Map_Loader::~S2_Map_Loader() {
+}
+
+/*
+===========
+S2_Map_Loader::preload_map()
+
+preloads the map. The map will then return valid
+infos when get_width() or get_nrplayers(),
+get_author() and so on are called
+
+load the header
+===========
+*/
+int S2_Map_Loader::preload_map() {
+   assert(get_state()!=STATE_LOADED);
+
+   load_s2mf_header();
+
+   if(!World::exists_world(m_map->get_world_name())) {
+      throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
+   }
+
+   set_state(STATE_PRELOADED);
+
+   return 0;
+}
+
+/*
+===========
+S2_Map_Loader::load_map_complete()
+
+Completly loads the map, loads the
+corresponding world, loads the graphics
+and places all the objects. From now on
+the Map* can't be set to another one.
+===========
+*/
+int S2_Map_Loader::load_map_complete(Editor_Game_Base* game, bool scenario) {
+
+
+   // now, load the world, load the rest infos from the map
+   m_map->load_world();
+   // Postload the world which provides all the immovables found on a map
+   m_map->m_world->postload(game);
+   m_map->set_size(m_map->m_width, m_map->m_height);
+   load_s2mf(game);
+
+   if(scenario) {
+      // Load this as scenario. 
+      // there is no such a think as S2 scenarios, therefore
+      // set the tribes and some default names
+      
+      // Just for fun: some roman names
+      const char* names[] = {
+         "Marius",
+         "Avitus",
+         "Silvanus",
+         "Caius", 
+         "Augustus",
+         "Maximus",
+         "Titus",
+         "Rufus",
+      };
+        
+      Map* map=game->get_map();
+      for(int i=1; i<=map->get_nrplayers(); i++) { 
+         map->set_scenario_player_tribe(i, "romans");
+         map->set_scenario_player_name(i, names[i-1]);
+      }
+   }
+
+   m_map->recalc_whole_map();
+
+   set_state(STATE_LOADED);
+
+   return 0;
+}
 /*
 ===============
 S2_Map_Loader::load_s2mf_section

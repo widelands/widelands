@@ -99,17 +99,21 @@ bool UIEdit_Box::handle_key(bool down, int code, char c) {
             changedid.call(m_id);
             return true;
 
-         case KEY_DELETE:
          case KEY_BACKSPACE:
             if(m_text.size()) {
                m_text.erase(m_text.end() - 1);
-               set_text(m_text.c_str());
+               set_title(m_text.c_str());
             }
+            return true;
+
+         case KEY_DELETE:
+            m_text.resize(0);
+            set_title(m_text.c_str());
             return true;
 
          default:
             if(c && m_text.size()<m_maxchars) m_text+=c;
-            set_text(m_text.c_str());
+            set_title(m_text.c_str());
             return true;
       }
    }

@@ -21,6 +21,7 @@
 #define __S__WIDELANDS_MAP_LOADER_H
 
 #include <string>
+#include "map_loader.h"
 #include "map.h"
 
 class Widelands_Map_Loader : public Map_Loader {
@@ -29,7 +30,7 @@ class Widelands_Map_Loader : public Map_Loader {
       virtual ~Widelands_Map_Loader(void);
    
       virtual int preload_map();
-      virtual int load_map_complete(Editor_Game_Base*);
+      virtual int load_map_complete(Editor_Game_Base*, bool);
 
    private:
       std::string m_filename;

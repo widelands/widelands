@@ -67,7 +67,7 @@ int Widelands_Map_Loader::preload_map() {
 /*
  * Load the complete map and make sure that it runs without problems
  */
-int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase) {
+int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scenario) {
 
    // now, load the world, load the rest infos from the map
    m_map->load_world();
@@ -81,18 +81,22 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase) {
 
    fr.Open(g_fs, m_filename.c_str());
    mp.Pre_Read(&fr, m_map);
- 
-   // ok, now go on and load the rest
-   Widelands_Map_Data_Packet_Factory fac;
 
-   ushort id;
-   Widelands_Map_Data_Packet* pak; 
-   while(!fr.IsEOF()) {
-      id=fr.Unsigned16();
-      pak=fac.create_correct_packet(id);
-      pak->Read(&fr, egbase);
-     delete pak;
-   } 
+   if(mp.get_version()<=WLMF_VERSION) {
+      // ok, now go on and load the rest
+      Widelands_Map_Data_Packet_Factory fac;
+
+      ushort id;
+      Widelands_Map_Data_Packet* pak; 
+      while(!fr.IsEOF()) {
+         id=fr.Unsigned16();
+         pak=fac.create_correct_packet(id);
+         if(!scenario) 
+            pak->set_scenario_skip(true);
+         pak->Read(&fr, egbase);
+         delete pak;
+      } 
+   }
 
    m_map->recalc_whole_map();
 
