@@ -194,7 +194,7 @@ void Editor_Increase_Height_Tool_Options_Menu::button_clicked(int n) {
    int val=*m_changed_by;
    if(n==0) {
       ++val;
-      if(val>MAX_FIELD_HEIGHT) val=MAX_FIELD_HEIGHT;
+      if(val>MAX_FIELD_HEIGHT_DIFF) val=MAX_FIELD_HEIGHT_DIFF;
    } else if(n==1) {
       --val;
       if(val<0) val=0;
@@ -224,7 +224,11 @@ if this is needed.
 ===========
 */
 int Editor_Increase_Height_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   map->change_field_height(*coordinates, m_increase_by);
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
+  
+   while(mrc.next(&mx, &my)) 
+      map->change_field_height(Coords(mx,my), m_increase_by);
    return 0;
 }
 
@@ -329,7 +333,7 @@ void Editor_Decrease_Height_Tool_Options_Menu::button_clicked(int n) {
    int val=*m_changed_by;
    if(n==0) {
       ++val;
-      if(val>MAX_FIELD_HEIGHT) val=MAX_FIELD_HEIGHT;
+      if(val>MAX_FIELD_HEIGHT_DIFF) val=MAX_FIELD_HEIGHT_DIFF;
    } else if(n==1) {
       --val;
       if(val<0) val=0;
@@ -340,6 +344,7 @@ void Editor_Decrease_Height_Tool_Options_Menu::button_clicked(int n) {
    sprintf(buf, "Decrease by: %i", *m_changed_by);
    m_textarea->set_text(buf);
 }
+
 /*
 =============================
 
@@ -358,7 +363,11 @@ if this is needed.
 ===========
 */
 int Editor_Decrease_Height_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   map->change_field_height(*coordinates, -m_decrease_by);
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
+  
+   while(mrc.next(&mx, &my)) 
+      map->change_field_height(Coords(mx,my), -m_decrease_by);
    return 0;
 }
 
@@ -493,7 +502,14 @@ if this is needed.
 ===========
 */
 int Editor_Set_Height_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   map->set_field_height(*coordinates, m_set_to);
+   
+
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
+   while(mrc.next(&mx, &my)) {
+      map->set_field_height(mx, my, m_set_to);
+   }
+
    return 0;
 }
 
@@ -650,10 +666,13 @@ if this is needed.
 ===========
 */
 int Editor_Noise_Height_Tool::handle_click(const Coords* coordinates, Field* field, Map* map, Editor_Interactive* parent) {
-   int j=m_lower_value+(int) ((double)(m_upper_value-m_lower_value)*rand()/(RAND_MAX+1.0));
+   Map_Region_Coords mrc(*coordinates, parent->get_fieldsel_radius(), map);
+   int mx, my;
 
-   std::cerr << j << std::endl;
-   map->set_field_height(*coordinates, j);
+   while(mrc.next(&mx, &my)) { 
+      int j=m_lower_value+(int) ((double)(m_upper_value-m_lower_value)*rand()/(RAND_MAX+1.0));
+      map->set_field_height(Coords(mx,my), j);
+   }
    return 0;
 }
 

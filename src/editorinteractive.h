@@ -45,10 +45,6 @@ class Editor_Interactive : public Interactive_Base {
       // gets called when a field is clicked
       void field_clicked();
       
-      void toggle_buildhelp();
-      void toggle_minimap();
-      void tool_menu_btn();
-     
       struct Editor_Tools {
          int current_tool;
          std::vector<Editor_Tool*> tools;
@@ -57,6 +53,11 @@ class Editor_Interactive : public Interactive_Base {
       static const int PANEL_HEIGHT=100;
 
       void exit_game_btn();
+      void toggle_buildhelp();
+      void toggle_minimap();
+      void tool_menu_btn();
+      void toolsize_menu_btn();
+
    
       // Tool
       Editor_Tools tools;
@@ -65,5 +66,6 @@ class Editor_Interactive : public Interactive_Base {
       Editor* m_editor;
       UniqueWindow m_toolmenu;
       UniqueWindow m_minimap;
+      UniqueWindow m_toolsizemenu;
 };
 #endif // __S__EDITOR_H

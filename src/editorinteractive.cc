@@ -134,6 +134,104 @@ void Editor_Tool_Menu::options_button_clicked(int n) {
    m_radioselect->set_state(n);
 }
 
+/*
+=============================
+
+class Editor_Toolsize_Menu
+
+This class is the tool selection window/menu. 
+Here, you can select the tool you wish to use the next time
+
+=============================
+*/
+
+class Editor_Toolsize_Menu : public Window {
+   public:
+      Editor_Toolsize_Menu(Editor_Interactive*, UniqueWindow*);
+      virtual ~Editor_Toolsize_Menu();
+
+   private:
+      void button_clicked(int);
+
+      UniqueWindow* m_registry;
+      Editor_Interactive* m_parent;
+      Textarea* m_textarea;
+};
+
+/*
+===============
+Editor_Toolsize_Menu::Editor_Toolsize_Menu
+
+Create all the buttons etc...
+===============
+*/
+Editor_Toolsize_Menu::Editor_Toolsize_Menu(Editor_Interactive *parent, UniqueWindow *registry)
+	: Window(parent, (parent->get_w()-102)/2, (parent->get_h()-136)/2, 160, 65, "Tool Menu")
+{
+   m_registry = registry;
+   if (m_registry) {
+      if (m_registry->window)
+         delete m_registry->window;
+
+      m_registry->window = this;
+      if (m_registry->x >= 0)
+         set_pos(m_registry->x, m_registry->y);
+   }
+   m_parent=parent;
+
+   new Textarea(this, 15, 5, "Set Tool Size Menu", Align_Left);
+   char buf[250];
+   sprintf(buf, "Current Size: %i", m_parent->get_fieldsel_radius()+1);
+   m_textarea=new Textarea(this, 25, 25, buf);
+
+   int bx=60;
+   Button* b = new Button(this, bx, 40, 20, 20, 0, 0);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
+   b=new Button(this, bx+20, 40, 20, 20, 0, 1);
+   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.bmp", RGBColor(0,0,255)));
+   b->clickedid.set(this, &Editor_Toolsize_Menu::button_clicked);
+}
+
+/*
+===============
+Editor_Toolsize_Menu::~Editor_Toolsize_Menu
+
+Unregister from the registry pointer
+===============
+*/
+Editor_Toolsize_Menu::~Editor_Toolsize_Menu()
+{
+	if (m_registry) {
+		m_registry->x = get_x();
+		m_registry->y = get_y();
+		m_registry->window = 0;
+	}
+}
+
+/*
+===========
+Editor_Toolsize_Menu::button_clicked()
+
+called, when one of the up/down buttons is pressed
+id: 0 is up, 1 is down
+===========
+*/
+void Editor_Toolsize_Menu::button_clicked(int n) {
+   int val=m_parent->get_fieldsel_radius();
+   if(n==0) {
+      ++val;
+      if(val>MAX_TOOL_AREA) val=MAX_TOOL_AREA;
+   } else if(n==1) {
+      --val;
+      if(val<0) val=0;
+   }
+   m_parent->set_fieldsel_radius(val);
+
+   char buf[250];
+   sprintf(buf, "Current Size: %i", m_parent->get_fieldsel_radius()+1);
+   m_textarea->set_text(buf);
+}
 
 /**********************************************
  *
@@ -160,7 +258,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    set_mapview(mm);
 
    // user interface buttons
-   int x = (get_w() - (4*34)) >> 1;
+   int x = (get_w() - (5*34)) >> 1;
    int y = get_h() - 34;
    Button *b;
 
@@ -175,10 +273,15 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.bmp", RGBColor(0,0,255)));
 
    b = new Button(this, x+68, y, 34, 34, 2);
-   b->clicked.set(this, &Editor_Interactive::toggle_minimap);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.bmp", RGBColor(0,0,255)));
+   b->clicked.set(this, &Editor_Interactive::toolsize_menu_btn);
+//   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.bmp", RGBColor(0,0,255)));
+   b->set_title("TS");
 
    b = new Button(this, x+102, y, 34, 34, 2);
+   b->clicked.set(this, &Editor_Interactive::toggle_minimap);
+   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.bmp", RGBColor(0,0,255)));
+   
+   b = new Button(this, x+136, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
    b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.bmp", RGBColor(0,0,255)));
 
@@ -243,10 +346,6 @@ Recalculate build help and borders for the given field
 */
 void Editor_Interactive::recalc_overlay(FCoords fc)
 {
-   // TEMP, TODO
-   set_fieldsel_radius(2);
-   // TEMP ENDS
-   
    Map* map = m_maprenderinfo.map;
 
    // Only do recalcs after maprenderinfo has been setup
@@ -336,6 +435,22 @@ void Editor_Interactive::tool_menu_btn()
 	else
 		new Editor_Tool_Menu(this, &m_toolmenu, &tools);
 }
+
+/*
+===============
+Editor_Interactive::toolsize_menu_btn
+
+Bring up or close the main menu
+===============
+*/
+void Editor_Interactive::toolsize_menu_btn()
+{
+	if (m_toolsizemenu.window)
+		delete m_toolsizemenu.window;
+	else
+		new Editor_Toolsize_Menu(this, &m_toolsizemenu);
+}
+
 
 /*
 ===========

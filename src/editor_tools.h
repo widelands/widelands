@@ -24,6 +24,8 @@ class Editor_Interactive;
 #include "map.h"
 #include "ui.h"
 
+#define MAX_TOOL_AREA 6
+
 /*
 =============================
 class Editor_Tool

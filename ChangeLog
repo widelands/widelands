@@ -1,6 +1,8 @@
-
+- added Map_Loader support
+- added support for multifield-fieldsels (for editor and to select areas)
+- added height tools in the editor
 - added item ware code
-- add ware transportation (carriers stay on roads and can carry wares)
+- added ware transportation (carriers stay on roads and can carry wares)
 - construction sites order builders and wares
 
 build-4:

@@ -64,6 +64,7 @@ void Editor::run() {
 
    for(int y=0; y<64; y++) {
       for(int x=0; x<64; x++) {
+         map->get_field(x,y)->set_height(10);
          map->get_field(x,y)->set_terraind(map->get_world()->get_terrain(5));
          map->get_field(x,y)->set_terrainr(map->get_world()->get_terrain(5));
       }

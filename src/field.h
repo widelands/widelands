@@ -94,11 +94,9 @@ class BaseImmovable;
 
 class Field {
    friend class Map;
-   friend class Map_Loader;
-   friend class S2_Map_Loader;
 	friend class Bob;
 	friend class BaseImmovable;
-	
+
 private:
    uchar height;
 	char brightness;
@@ -133,10 +131,11 @@ public:
 		roads &= ~(Road_Mask << dir); 
 		roads |= type << dir;
 	}
-	
-private:
+   
    // note: you must reset this field's + neighbor's brightness when you change the height
    // Map's change_height does this
+   // This function is not private, because the loader and an empty map creator will use them directly
+   // But realize, most of the times you will need Map::set_field_height()
    inline void set_height(uchar h) { if((char)h<0) h=0; if(h>MAX_FIELD_HEIGHT) h=MAX_FIELD_HEIGHT; height = h; }
 };
 
