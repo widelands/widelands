@@ -66,8 +66,13 @@ void Map_View::warp_mouse_to_field(Coords c)
 	x -= m_viewpoint.x;
 	y -= m_viewpoint.y;
 
-	assert(x<get_w());
-   assert(y<get_h());
+	if(x>=get_w() || y>=get_h()) {
+      // The user has scrolled the field outside
+      // the viewable area, he most surely doesn't
+      // want to jump there
+      return;
+   }
+   
    if(x<=0) { warp_mouse_to_field(Coords(c.x+m_intbase->get_map()->get_width(),c.y)); return; }
    if(y<=0) { warp_mouse_to_field(Coords(c.x, c.y+m_intbase->get_map()->get_height())); return; }
 
