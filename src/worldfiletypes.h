@@ -77,8 +77,8 @@ struct BobDesc
 	uint attributes;
 	//uint texture;
 	uint anim;
-	char ware[16];
 	int stock;
+	int resource;
 	AnimKey animKey;
 	uint animFactor;
 	int heir;

@@ -112,8 +112,8 @@ Profile::Value* Profile::get_val(const char* section, const char* name)
 	for (int i=0; i<values->elements(); i++)
 	{
 		Value* v = (Value*)values->element_at(i);
-		if (strcmp(v->name, name) == 0)
-			if (strcmp(v->section, section) == 0)
+		if (strcmpi(v->name, name) == 0)
+			if (strcmpi(v->section, section) == 0)
 				return v;
 	}
 	return NULL;
@@ -134,16 +134,11 @@ bool Profile::get_boolean(const char* section, const char* name, bool def)
 		return def;
 //	if (atoi(v->val))
 //		return true;		// things like "0001" are true
-#ifdef WIN32
-	strlwr(v->val);
-#else
-#warning Profile::get_boolean :: strlwr??? 
-#endif
 	for (int i=0; i<TRUE_WORDS; i++)
-		if (strcmp(v->val, trueWords[i]))
+		if (strcmpi(v->val, trueWords[i]))
 			return true;
 	for (int j=0; j<FALSE_WORDS; j++)
-		if (strcmp(v->val, falseWords[j]))
+		if (strcmpi(v->val, falseWords[j]))
 			return false;
 	return def;
 }
