@@ -215,10 +215,10 @@ void Button::handle_mousein(bool inside)
  *
  * Update the pressed status of the button
  */
-void Button::handle_mouseclick(uint btn, bool down, int x, int y)
+bool Button::handle_mouseclick(uint btn, bool down, int x, int y)
 {
-	if (btn) // only react on left button
-		return;
+	if (btn != 0) // only react on left button
+		return false;
 
 	if (down && _enabled) {
 		grab_mouse(true);
@@ -234,5 +234,7 @@ void Button::handle_mouseclick(uint btn, bool down, int x, int y)
 		}
 	}
 	update(0, 0, get_w(), get_h());
+
+	return true;
 }
 

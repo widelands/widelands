@@ -392,15 +392,20 @@ void Panel::handle_mousein(bool inside)
 
 /** Panel::handle_mouseclick(uint btn, bool down, int x, int y)
  *
- * Called whenever the user clicks into the panel
+ * Called whenever the user clicks into the panel.
+ * If the panel doesn't process the mouse-click, it is handed to the panel's
+ * parent.
  *
  * Args: btn	0 = left, 1 = right
  *       down	true if the button was pressed, false if released
  *       x		mouse coordinates relative to the inner rectangle
  *       y
+ *
+ * Returns: true if the mouseclick was processed
  */
-void Panel::handle_mouseclick(uint btn, bool down, int x, int y)
+bool Panel::handle_mouseclick(uint btn, bool down, int x, int y)
 {
+	return false;
 }
 
 /** Panel::handle_mousemove(int x, int y, uint btns)
@@ -587,22 +592,26 @@ void Panel::do_mousein(bool inside)
  *       down	true if button was pressed
  *       x		mouse coordinates relative to panel
  *       y
+ *
+ * Returns: true, if the click was processed
  */
-void Panel::do_mouseclick(uint btn, bool down, int x, int y)
+bool Panel::do_mouseclick(uint btn, bool down, int x, int y)
 {
 	x -= _lborder;
 	y -= _tborder;
 
 	if (_g_mousegrab == this)
-		handle_mouseclick(btn, down, x, y);
+		return handle_mouseclick(btn, down, x, y);
 	else
 	{
 		Panel *child = get_mousein(x, y);
 
-		if (child)
-			child->do_mouseclick(btn, down, x-child->_x, y-child->_y);
-		else
-			handle_mouseclick(btn, down, x, y);
+		if (child) {
+			if (child->do_mouseclick(btn, down, x-child->_x, y-child->_y))
+				return true;
+		}
+
+		return handle_mouseclick(btn, down, x, y);
 	}
 }
 
@@ -653,9 +662,11 @@ Panel *Panel::ui_trackmouse(int *x, int *y)
 	else
 		mousein = _modal;
 
-	for(Panel *p = mousein; p; p = p->_parent) {
-		*x -= p->_x;
-		*y -= p->_y;
+	*x -= mousein->_x;
+	*y -= mousein->_y;
+	for(Panel *p = mousein->_parent; p; p = p->_parent) {
+		*x -= p->_lborder + p->_x;
+		*y -= p->_tborder + p->_y;
 	}
 
 	if (*x >= 0 && *x < (int)mousein->_w &&

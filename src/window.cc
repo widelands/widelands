@@ -214,7 +214,7 @@ void Window::draw_border(Bitmap *dst, int ofsx, int ofsy)
  * Left-click: drag the window
  * Right-click: close the window
  */
-void Window::handle_mouseclick(uint btn, bool down, int mx, int my)
+bool Window::handle_mouseclick(uint btn, bool down, int mx, int my)
 {
 	if (btn == 0)
 	{
@@ -226,8 +226,10 @@ void Window::handle_mouseclick(uint btn, bool down, int mx, int my)
 			_dragging = false;
 		}
 	}
-	else if (btn == 1)
+	else if (btn == 1 && down)
 		delete this; // is this 100% safe?
+
+	return true;
 }
 
 /** Window::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)

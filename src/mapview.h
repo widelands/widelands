@@ -51,7 +51,7 @@ public:
 	void draw(Bitmap *bmp, int ofsx, int ofsx);
 
 	// Event handling
-	void handle_mouseclick(uint btn, bool down, int x, int y);
+	bool handle_mouseclick(uint btn, bool down, int x, int y);
 	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	void track_fsel(int mx, int my);

@@ -150,7 +150,7 @@ public:
 	virtual void think();
 
 	virtual void handle_mousein(bool inside);
-	virtual void handle_mouseclick(uint btn, bool down, int x, int y);
+	virtual bool handle_mouseclick(uint btn, bool down, int x, int y);
 	virtual void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	void set_handle_mouse(bool yes);
@@ -165,7 +165,7 @@ private:
 
 	Panel *get_mousein(int x, int y);
 	void do_mousein(bool inside);
-	void do_mouseclick(uint btn, bool down, int x, int y);
+	bool do_mouseclick(uint btn, bool down, int x, int y);
 	void do_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	Panel *_parent;
@@ -224,7 +224,7 @@ public:
 	void draw(Bitmap *dst, int ofsx, int ofsy);
 
 	void handle_mousein(bool inside);
-	void handle_mouseclick(uint btn, bool down, int x, int y);
+	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
 	static AutoPic bg0, bg1, bg2; // background pictures
@@ -268,7 +268,7 @@ public:
 	void draw(Bitmap *dst, int ofsx, int ofsy);
 
 	void handle_mousein(bool inside);
-	void handle_mouseclick(uint btn, bool down, int x, int y);
+	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
 	virtual void clicked() = 0;
@@ -451,7 +451,7 @@ public:
 
 	// Drawing and event handling
 	void draw(Bitmap *dst, int ofsx, int ofsy);
-	void handle_mouseclick(uint btn, bool down, int x, int y);
+	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
 	struct Entry {
@@ -526,7 +526,7 @@ public:
 	// Drawing and event handlers
 	void draw_border(Bitmap *dst, int ofsx, int ofsy);
 
-	void handle_mouseclick(uint btn, bool down, int mx, int my);
+	bool handle_mouseclick(uint btn, bool down, int mx, int my);
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
 
 private:

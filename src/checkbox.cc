@@ -128,15 +128,17 @@ void Statebox::handle_mousein(bool inside)
  *
  * Left-click: Toggle checkbox state
  */
-void Statebox::handle_mouseclick(uint btn, bool down, int x, int y)
+bool Statebox::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn != 0)
-		return;
+		return false;
 
 	if (down) {
 		if (_enabled)
 			clicked();
 	}
+
+	return true;
 }
 
 /*

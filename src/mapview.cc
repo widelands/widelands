@@ -189,7 +189,7 @@ void Map_View::set_viewpoint(int x, int y)
  * Right-click: enable/disable dragging
  * Left-click: field action window
  */
-void Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
+bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn == 0)
 	{
@@ -208,6 +208,8 @@ void Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 			dragging = false;
 		}
 	}
+
+	return true;
 }
 
 /** Map_View::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns)

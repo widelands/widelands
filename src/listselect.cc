@@ -226,13 +226,17 @@ void Listselect::draw(Bitmap *dst, int ofsx, int ofsy)
  *
  * Handle mouse clicks: select the appropriate entry
  */
-void Listselect::handle_mouseclick(uint btn, bool down, int x, int y)
+bool Listselect::handle_mouseclick(uint btn, bool down, int x, int y)
 {
-	if (btn || !down) // only left-click
-		return;
+	if (btn != 0) // only left-click
+		return false;
 
-	y = y / (g_fh.get_fh(_font)+2);
-	y += _firstvis;
-	if ((int)y < _entries.elements())
-		select(y);
+	if (down) {
+		y = y / (g_fh.get_fh(_font)+2);
+		y += _firstvis;
+		if ((int)y < _entries.elements())
+			select(y);
+	}
+
+	return true;
 }

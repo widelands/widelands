@@ -46,7 +46,7 @@ public:
 	// Drawing & event handling
 	void draw(Bitmap *dst, int ofsx, int ofsy);
 
-	void handle_mouseclick(uint btn, bool down, int x, int y);
+	bool handle_mouseclick(uint btn, bool down, int x, int y);
 
 private:
 	static AutoPic map_spot;
@@ -134,18 +134,18 @@ void MiniMapView::draw(Bitmap *dst, int ofsx, int ofsy)
  *
  * Left-click: warp the view point to the new position
  */
-void MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
+bool MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
 {
 	if (btn != 0)
-		return;
+		return false;
 
 	if (down) {
 		// make sure x/y is within range
-		if (x < 0 || x >= _map->get_w() || y < 0 || y >= _map->get_h())
-			return;
-
-		warpview.call(x * FIELD_WIDTH, y * (FIELD_HEIGHT>>1));
+		if (x >= 0 && x < _map->get_w() && y > 0 && y < _map->get_h())
+			warpview.call(x * FIELD_WIDTH, y * (FIELD_HEIGHT>>1));
 	}
+
+	return true;
 }
 
 /*
