@@ -300,6 +300,7 @@ private:
 	FCoords		m_field;
 
 	TabPanel*	m_tabpanel;
+	bool			m_fastclick; // if true, put the mouse over first button in first tab
 };
 
 static const char* pic_tab_buildroad = "pics/menu_tab_buildroad.bmp";
@@ -345,6 +346,8 @@ FieldActionWindow::FieldActionWindow(Interactive_Player *plr, UniqueWindow *regi
 	//
 	m_tabpanel = new TabPanel(this, 0, 0, 1);
 	m_tabpanel->set_snapparent(true);
+	
+	m_fastclick = true;
 }
 
 /*
@@ -388,7 +391,7 @@ void FieldActionWindow::init()
 	
 	// Now force the mouse onto the first button
 	// TODO: should be on first tab button if we're building
-	set_mouse_pos(17, 51);
+	set_mouse_pos(17, m_fastclick ? 51 : 17);
 }
 
 
@@ -472,6 +475,8 @@ void FieldActionWindow::add_buttons_build(int buildcaps)
 	BuildGrid* bbg_mine = 0;
 	
 	Tribe_Descr* tribe = m_player->get_player()->get_tribe();
+	
+	m_fastclick = false;
 	
 	for(int id = 0; id < tribe->get_nrbuildings(); id++)
 		{

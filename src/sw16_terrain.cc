@@ -95,7 +95,7 @@ Colormap::Colormap (const SDL_Color *pal)
  */
 Colormap::~Colormap ()
 {
-	delete colormap;
+	delete[] colormap;
 }
 
 
@@ -185,6 +185,7 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 		palette.ncolors = 256;
 		palette.colors = m_colormap->get_palette();
 		
+		memset(&fmt, 0, sizeof(fmt));
 		fmt.BitsPerPixel = 8;
 		fmt.BytesPerPixel = 1;
 		fmt.palette = &palette;

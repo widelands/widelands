@@ -390,7 +390,7 @@ bool Interactive_Player::append_build_road(Coords field)
 	Map *map = m_game->get_map();
 	Path path;
 	
-	if (!map->findpath(m_buildroad->get_end(), field, MOVECAPS_WALK, 0, &path, 
+	if (map->findpath(m_buildroad->get_end(), field, MOVECAPS_WALK, 0, &path, 
 	                  get_player(), true, &m_buildroad->get_coords()) < 0)
 		return false; // couldn't find a path
 	
