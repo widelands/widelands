@@ -1475,7 +1475,7 @@ void ProductionSite_Descr::parse(const char *directory, Profile *prof, const Enc
       // This house obviously requests wares and works on them
 
       Section::Value* val;
-      while(val=s->get_next_val(0)) {
+      while((val=s->get_next_val(0))) {
 
          int idx=get_tribe()->get_ware_index(val->get_name());
          if(idx==-1) 
