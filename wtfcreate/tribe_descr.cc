@@ -19,6 +19,7 @@
 
 #include "../src/widelands.h"
 #include "../src/graphic.h"
+#include "../src/tribedata.h"
 #include "wtfcreate.h"
 #include "tribe_descr.h"
 //
