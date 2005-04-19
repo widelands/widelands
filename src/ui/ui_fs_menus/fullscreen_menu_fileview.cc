@@ -29,13 +29,13 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string title, std::strin
 	: Fullscreen_Menu_Base("fileviewmenu.jpg")
 {
 	// Text view
-	mlta=new UIMultiline_Textarea(this, 40, 150, 560, 240, text.c_str());
+	mlta=new UIMultiline_Textarea(this, 30, 150, 560, 240, text.c_str());
    mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
    // Menu title
    UITextarea* ta= new UITextarea(this, 50, 50, title, Align_Left);
    ta->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
-   ta->set_pos((get_inner_w()-ta->get_w())/2, 113);
+   ta->set_pos((get_inner_w()-ta->get_w())/2, 100);
 
 	// Close button
 	UIButton *b;
