@@ -1,9 +1,11 @@
-     Widelands - an open-source strategy game
-
-
-Introduction
-------------
-
+<p image=wl-ico-64.png image-align=center text-align=center></p>
+<p font-size=38 text-align=center font-face=Domestic_Manners font-color=#2F9131>Widelands</p>
+<p font-size=14 font-style=italic text-align=center>an open source strategy game</p>
+<p> </p>
+<p font-decoration=underline font-size=14>
+Introduction</p>
+<p line-spacing=3 font-size=12>
+ 
 Widelands is a strategy game aiming for gameplay similar to Settlers II by BlueByte. 
 In this game, you start out on a small piece of land with nothing more thana few of useful resources. Using those, you can build yourself an empire with many thousands of inhabitants. On your way towards this goal, you will have to build up an economic infrastructure, explore the lands around you and face enemies who are trying to rule the world just like you do.
 
@@ -11,51 +13,52 @@ Check out the Widelands project homepage:
 http://www.sourceforge.net/projects/widelands
 
 Widelands is licensed under the GNU General Public License (GPL). For more information, see the file 'COPYING' or select the License button from the main menu.
-
-
-Running the game
-----------------
-
+ 
+</p>
+<p font-decoration=underline font-size=14>Running the game</p>
+<p line-spacing=3 font-size=12>
+ 
 Widelands requires the SDL and SDL_image libraries to operate. Windows versions of these libraries are included in the binary release. Most Linux distributions offer precompiled packages for both libraries as well; please refer to your distribution documentation to find out how to install them if necessary. When all else fails, you can still compile them from source. SDL can be obtained from http://www.libsdl.org/, SDL_image can be obtained from http://www.libsdl.org/projects/SDL_image/
 
 Once everything is set up, just start the Widelands executable in order to run the game.
 
 If the game fails to start right away even though both Widelands and the required libraries are properly installed, please make sure that the program working directory is set to the directory the Widelands executable resides in. On Linux, this is best done by launching Widelands through a shell: 
 
-	$ cd /path/to/widelands
-	$ ./widelands
+   $ cd /path/to/widelands
+   $ ./widelands
 
 On Windows, you will have to check the shortcut settings if you start Widelands via a shortcut.
-
-
-Status
-------
-
+ 
+</p>
+<p font-size=14 font-decoration=underline>Status</p>
+<p line-spacing=3 font-size=12 font-weight=bold>
+ 
 Widelands is now on the step of being playable, but to become more playable volunteers are needed. Your contributions (yes, I'm talking to you) are required, especially in the area of graphics, to make Widelands a better game.
-
-
-Keyboard shortcuts (in-game)
-------------------
-
-SPACE    Toggles build-help
-M        Toggle minimap
-
-PAGEUP	Change the speed of the game
-PAGEDOWN
-
-F5       Reveals the entire map
-F10      Quit the game immediately
-F11      Take a screenshot
-
-
-Reporting Bugs
---------------
-
+ 
+</p>
+<p font-size=14 font-decoration=underline>Keyboard shortcuts (in-game)</p>
+<p line-spacing=3 font-size=12>
+ 
+SPACE       Toggles build-help
+M               Toggle minimap
+ 
+PAGEUP         Increase gamespeed
+PAGEDOWN    Decrease gamespeed
+ 
+F5           Reveals the entire map
+F10         Quit the game immediately
+F11         Take a screenshot
+ 
+</p>
+<p font-size=14 font-decoration=underline>Reporting Bugs</p>
+<p line-spacing=3 font-size=12>
+ 
 If you want to report bugs, please send your report to the mailing list, <widelands-public@list.sourceforge.net>
 To subscribe, visit the following page:
 http://lists.sourceforge.net/mailman/listinfo/widelands-announce
-
+ 
 Please provide enough background information. Tell us:
+ 
 - what version of Widelands did you use (i.e. the build number, or whether it's
   a custom compile from CVS)
 - how to reproduce the bug
@@ -63,18 +66,18 @@ Please provide enough background information. Tell us:
 - send us a compressed (zip, gzip, bzip2) session record if possible, unless the
   bug is trivial to reproduce. In fact, it may be a good idea to always record
   your sessions in case a bug surfaces. For more explanation, see below.
-
-
-Creating a Session Record
--------------------------
-
+ 
+</p>
+<p font-size=14 font-decoration=underline>Creating a Session Record</p>
+<p line-spacing=3 font-size=12>
+  
 Widelands can record all your keypresses and mouse movements to a file. It can then replay an entire session from starting the game to exiting it. This is really helpful for debugging problems.
-
+ 
 To create a session record, start the game with the --record parameter. On Linux, simply start Widelands like so: $ ./widelands --record=filename.rec
-
+ 
 On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like "c:\games\widelands\widelands.exe". Change this to "c:\games\widelands\widelands.exe --record=filename.rec".
-
+ 
 A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace "--record" with "--playback".
-
-Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs.
-
+ 
+Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs.</p>
+</p>
