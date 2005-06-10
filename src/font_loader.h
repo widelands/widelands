@@ -20,11 +20,14 @@
 #ifndef __S__FONT_LOADER_H
 #define __S__FONT_LOADER_H
 
-#include <string>
-#include <map>
 #include <SDL_ttf.h>
-#include "types.h"
+#include <map>
+#include <string>
+#include <vector>
 #include "rgbcolor.h"
+#include "types.h"
+
+class FileRead;
 
 /*
  * Font
@@ -40,6 +43,7 @@ class Font_Loader {
 		void clear_fonts();
 	private:
 		std::map<std::string,TTF_Font*> m_font_table;
+      std::vector<FileRead*> m_freads;
 };
 
 #endif // __S__FONT_LOADER_H

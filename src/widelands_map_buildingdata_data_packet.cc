@@ -176,7 +176,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite(Building* bui
       }
       cs->m_wares.resize(size);
       for(uint i=0; i<cs->m_wares.size(); i++) {
-         log("Reading waresqueue %i,%i\n", i+1, cs->m_wares.size());
+         log("Reading waresqueue %i,%i\n", i+1, (int)cs->m_wares.size());
          cs->m_wares[i]->Read(fr,egbase,ol);
       }
      

@@ -23,7 +23,7 @@
 #include <vector>
 #include <queue>
 #include <list>
-#include <SDL/SDL_net.h>
+#include <SDL_net.h>
 #include "wexception.h"
 #include "types.h"
 

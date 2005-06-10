@@ -20,7 +20,7 @@
 #ifndef __S__NETWORK_BUFFER_H
 #define __S__NETWORK_BUFFER_H
 
-#include <SDL/SDL_net.h>
+#include <SDL_net.h>
 #include <string>
 
 #include "types.h"

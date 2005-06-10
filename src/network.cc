@@ -459,7 +459,7 @@ void NetHost::handle_network ()
 
 		// send any outstanding player commands
 		while (!cmds.empty()) {
-			log ("%d player commands queued\n", cmds.size());
+			log ("%d player commands queued\n", (int)cmds.size());
 
 			PlayerCommand* cmd=cmds.front();
 			cmds.pop ();

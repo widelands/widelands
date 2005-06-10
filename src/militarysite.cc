@@ -139,9 +139,9 @@ std::string MilitarySite::get_statistics_string()
 {
    char str[255];
    if (m_soldier_requests.size())
-      sprintf (str, "%d soldiers (+%d)", m_soldiers.size(), m_soldier_requests.size());
+      sprintf (str, "%d soldiers (+%d)", m_soldiers.size(), (int)m_soldier_requests.size());
    else
-      sprintf (str, "%d soldiers", m_soldiers.size());
+      sprintf (str, "%d soldiers", (int)m_soldiers.size());
    
    return str;
 }

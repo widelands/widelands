@@ -230,7 +230,7 @@ std::string ProductionSite::get_statistics_string()
 		return "(not occupied)";
    else if(m_worker_requests.size()) {
       char buf[1000];
-      sprintf(buf, "Waiting for %i workers!", m_worker_requests.size());
+      sprintf(buf, "Waiting for %i workers!", (int)m_worker_requests.size());
       return buf;
    }
 	

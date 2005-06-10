@@ -266,7 +266,7 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
          bool got_text = false;
          bool got_img = false;
          
-         SDL_Surface *image, *text;
+         SDL_Surface *image = 0, *text = 0;
          SDL_Rect img_pos,text_pos;
             
          if (cur->image.size()) {

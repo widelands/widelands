@@ -47,8 +47,22 @@ TTF_Font* Font_Loader::open_font(const std::string& name, int size) {
 	// Load the TrueType Font
    std::string filename="fonts/";
    filename+=name;
-	TTF_Font* font = TTF_OpenFont(filename.c_str(),size);
-   if(!font) throw wexception("Couldn't load font!: %s\n", TTF_GetError());
+
+   // we must keep this File Read open, otherwise the 
+   // following calls are crashing. do not know why...
+	FileRead* fr=new FileRead();
+   fr->Open(g_fs, filename);
+  
+   m_freads.push_back( fr );
+   
+   SDL_RWops* ops = SDL_RWFromMem(fr->Data(0), fr->GetSize());
+   if( !ops ) 
+      throw wexception("Couldn't load font!: RWops Pointer invalid\n");
+      
+   TTF_Font* font = TTF_OpenFontIndexRW(ops, 1, size, 0);
+
+   if(!font) 
+      throw wexception("Couldn't load font!: %s\n", TTF_GetError());
 	return font;
 }
 
@@ -87,6 +101,10 @@ void Font_Loader::clear_fonts() {
 		TTF_CloseFont(i->second);
 	}
 	m_font_table.clear();
+   
+   for( uint i = 0; i < m_freads.size(); i++)
+      delete m_freads[i];
+   m_freads.resize(0);
 }
 
 
