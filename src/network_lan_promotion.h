@@ -89,6 +89,7 @@ class LAN_Game_Finder:LAN_Base {
 	LAN_Game_Finder ();
 	~LAN_Game_Finder ();
 	
+	void reset ();
 	void run ();
 	
 	void set_callback (void(*)(int, const LAN_Open_Game*, void*), void*);

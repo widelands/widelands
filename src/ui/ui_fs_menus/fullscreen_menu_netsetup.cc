@@ -31,11 +31,8 @@
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this
 {
-	if(!NetGGZ::ref()->usedcore())
-	{
-		discovery=new LAN_Game_Finder();
-		discovery->set_callback (discovery_callback, this);
-	}
+	discovery=new LAN_Game_Finder();
+	discovery->set_callback (discovery_callback, this);
 	
 	// Text
 	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Begin Network Game", Align_HCenter);
@@ -45,11 +42,11 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	UIButton* b;
 
 	b = new UIButton(this, 60, 170, 174, 24, 1, JOINGAME);
-	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
+	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::joingame);
 	b->set_title("Join a Game");
 
 	b = new UIButton(this, 60, 210, 174, 24, 1, HOSTGAME);
-	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
+	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::hostgame);
 	b->set_title("Host a New Game");
 
 	b = new UIButton(this, 60, 250, 174, 24, 1, INTERNETGAME);
@@ -59,10 +56,16 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	b = new UIButton(this, 60, 290, 174, 24, 0, CANCEL);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title("Back");
-	
+
 	// Hostname
 	hostname=new UIEdit_Box(this, 288, 170, 174, 24, 2, 0);
 	hostname->set_text("localhost");	
+
+	// LAN or GGZ game
+	networktype = new UIButton(this, 482, 170, 124, 24, 0, -1);
+	networktype->clickedid.set(this, &Fullscreen_Menu_NetSetup::toggle_networktype);
+	networktype->set_title("LAN games");
+	internetgame = false;
 	
 	// List of open games in local network
 	opengames=new UITable(this, 288, 210, 320, 128);
@@ -74,17 +77,17 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 
 Fullscreen_Menu_NetSetup::~Fullscreen_Menu_NetSetup ()
 {
-	if(!NetGGZ::ref()->usedcore())
-	{
-		delete discovery;
-	}
+	delete discovery;
 }
 
 void Fullscreen_Menu_NetSetup::think ()
 {
 	Fullscreen_Menu_Base::think ();
 	
-	discovery->run ();
+	if(!NetGGZ::ref()->usedcore())
+	{
+		discovery->run ();
+	}
 }
 
 bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
@@ -116,13 +119,7 @@ void Fullscreen_Menu_NetSetup::game_selected (int sel)
 {
 	LAN_Open_Game* game=(LAN_Open_Game*) (opengames->get_selection());
 	
-	if(game)
-		hostname->set_text (game->info.hostname);
-	else {
-		UITable_Entry *entry = opengames->get_entry(opengames->get_selection_index());
-		NetGGZ::ref()->join(entry->get_string(1));
-		end_modal(GGZGAME);
-	}
+	if(game) hostname->set_text (game->info.hostname);
 }
 
 void Fullscreen_Menu_NetSetup::update_game_info (UITable_Entry* entry, const LAN_Game_Info& info)
@@ -188,5 +185,55 @@ void Fullscreen_Menu_NetSetup::fill(std::list<std::string> tables)
 		info.state = LAN_GAME_OPEN;
 		update_game_info (new UITable_Entry(opengames, (void*) NULL), info);
 	}
+}
+
+void Fullscreen_Menu_NetSetup::toggle_networktype(int code)
+{
+	if(internetgame)
+	{
+		NetGGZ::ref()->deinitcore();
+	}
+
+	internetgame = !internetgame;
+
+	opengames->clear();
+
+	if(internetgame)
+	{
+		hostname->set_text("live.ggzgamingzone.org");
+		NetGGZ::ref()->initcore(hostname->get_text());
+		networktype->set_title("GGZ games");
+	}
+	else
+	{
+		hostname->set_text("localhost");
+		discovery->reset();
+		networktype->set_title("LAN games");
+	}
+}
+
+//bool Fullscreen_Menu_NetSetup::is_internetgame()
+//{
+//	return internetgame;
+//}
+
+void Fullscreen_Menu_NetSetup::joingame(int code)
+{
+	if(NetGGZ::ref()->usedcore())
+	{
+		int index = opengames->get_selection_index();
+		if(index < 0) return;
+		UITable_Entry *entry = opengames->get_entry(index);
+		if(!entry) return;
+		NetGGZ::ref()->join(entry->get_string(1));
+		end_modal(JOINGGZGAME);
+	}
+	else end_modal(JOINGAME);
+}
+
+void Fullscreen_Menu_NetSetup::hostgame(int code)
+{
+	if(NetGGZ::ref()->usedcore()) end_modal(HOSTGGZGAME);
+	else end_modal(HOSTGAME);
 }
 

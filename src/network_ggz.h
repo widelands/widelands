@@ -57,21 +57,23 @@ class NetGGZ {
 		op_broadcast_ip = 4
 	};
 
-	void initcore();
+ 	void initcore(const char *hostname);
+ 	void deinitcore();
 	bool usedcore();
 	void datacore();
+ 	void launch();
 	void join(const char *tablename);
 
     private:
 #ifdef HAVE_GGZ
-	static void ggzmod_server(GGZMod *mod, GGZModEvent e, void *data);
-	static GGZHookReturn callback_server(unsigned int id, void *data, void *user);
-	static GGZHookReturn callback_room(unsigned int id, void *data, void *user);
-	static GGZHookReturn callback_game(unsigned int id, void *data, void *user);
+	static void ggzmod_server(GGZMod *mod, GGZModEvent e, const void *data);
+	static GGZHookReturn callback_server(unsigned int id, const void *data, const void *user);
+	static GGZHookReturn callback_room(unsigned int id, const void *data, const void *user);
+	static GGZHookReturn callback_game(unsigned int id, const void *data, const void *user);
 #endif
-	void event_server(unsigned int id, void *data);
-	void event_room(unsigned int id, void *data);
-	void event_game(unsigned int id, void *data);
+	void event_server(unsigned int id, const void *data);
+	void event_room(unsigned int id, const void *data);
+	void event_game(unsigned int id, const void *data);
 
 	bool use_ggz;
 	int fd;

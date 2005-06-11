@@ -181,11 +181,18 @@ void LAN_Game_Promoter::set_map (const char* map)
 
 LAN_Game_Finder::LAN_Game_Finder ()
 {
-    char magic[8];
-    
     callback=0;
     
     bind (WIDELANDS_LAN_DISCOVERY_PORT);
+
+    reset();
+}
+
+void LAN_Game_Finder::reset ()
+{
+    char magic[8];
+
+    opengames.clear();
     
     strncpy (magic, "QUERY", 8);
     magic[6]=LAN_PROMOTION_PROTOCOL_VERSION;

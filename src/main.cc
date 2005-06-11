@@ -285,7 +285,9 @@ void g_main(int argc, char** argv)
             }
             break;
          }
-			else if(code == Fullscreen_Menu_NetSetup::GGZGAME) {
+			else if((code == Fullscreen_Menu_NetSetup::JOINGGZGAME)
+				|| (code == Fullscreen_Menu_NetSetup::HOSTGGZGAME)) {
+				if(code == Fullscreen_Menu_NetSetup::HOSTGGZGAME) NetGGZ::ref()->launch();
 				if(NetGGZ::ref()->host()) netgame = new NetHost();
 				else
 				{
