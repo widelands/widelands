@@ -506,21 +506,28 @@ void MilitarySite::change_soldier_capacity(int how)
          else
             m_capacity -= how;
          
-         if (m_capacity < m_soldiers.size() + m_soldier_requests.size())
+         while (m_capacity < m_soldiers.size() + m_soldier_requests.size())
          {
             if (m_soldier_requests.size()) 
             {
-               m_soldier_requests[m_soldier_requests.size()-1]->cancel_transfer(0);
-               m_soldier_requests.pop_back();
+	       std::vector<Request*>::iterator it = m_soldier_requests.begin();
+	       for ( ; it != m_soldier_requests.end() && !(*it)->is_open(); ++it);
+
+	       if (it == m_soldier_requests.end())
+		  (*--it)->cancel_transfer(0);
+	       else
+		  (*it)->get_economy()->remove_request(*it);
+
+	       m_soldier_requests.erase(it, it+1);
             }
             else if (m_soldiers.size()) 
             {
                Soldier *s = m_soldiers[m_soldiers.size()-1];
                drop_soldier (s->get_serial());
-				}
-			}
-		}
-	}
+	    }
+	 }
+      }
+   }
 }
 
 /// Type : STRONGEST - WEAKEST
