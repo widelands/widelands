@@ -19,6 +19,7 @@
 
 #include <SDL.h>
 #include <SDL_net.h>
+#include <SDL_mixer.h>
 #include "error.h"
 #include "filesystem.h"
 #include "graphic.h"
@@ -50,7 +51,7 @@ When GrabInput mode is off
 */
 
 static struct {
-	bool		active;
+	bool		sdl_active;
 	bool		should_die;
 
 	FILE		*frecord;
@@ -78,6 +79,9 @@ static struct {
 	int		gfx_w;
 	int		gfx_h;
 	bool		gfx_fullscreen;
+
+	// Sound
+	bool		snd_active;
 } sys;
 
 static char sys_recordname[256] = "";
@@ -254,7 +258,7 @@ void Sys_Init()
 		if (SDLNet_Init()<0)
 			throw wexception("Failed to initialize SDL_net: %s\n", SDLNet_GetError());
 		
-		sys.active = true;
+		sys.sdl_active = true;
 
 		SDL_ShowCursor(SDL_DISABLE);
 		Sys_SetInputGrab(s->get_bool("inputgrab", false));
@@ -263,15 +267,26 @@ void Sys_Init()
 
 		// Graphics
 		sys.gfx_system = GFXSYS_NONE;
+
+		// Sound
+		SDL_InitSubSystem(SDL_INIT_AUDIO);
+		if ( Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024) == -1 )
+			throw wexception("Failed to initialize sound system: %s\n", Mix_GetError());
+		sys.snd_active=true;
 	}
 	catch(...) {
-		if (sys.active)
+		if (sys.snd_active) {
+			Mix_CloseAudio();
+			SDL_QuitSubSystem(SDL_INIT_AUDIO);
+		}
+		if (sys.sdl_active)
 			SDL_Quit();
 		if (sys.frecord)
 			fclose(sys.frecord);
 		if (sys.fplayback)
 			fclose(sys.fplayback);
-		sys.active = false;
+		sys.sdl_active = false;
+
 	}
 }
 
@@ -284,6 +299,11 @@ Shutdown the system
 */
 void Sys_Shutdown()
 {
+	if (sys.snd_active) {
+		Mix_CloseAudio();
+		SDL_QuitSubSystem(SDL_INIT_AUDIO);
+		sys.snd_active=false;
+	}
 	if (g_gr)
 		{
 		log("Sys_Shutdown: graphics system not shut down\n");
@@ -291,7 +311,7 @@ void Sys_Shutdown()
 		}
 
 	SDL_Quit();
-	sys.active = false;
+	sys.sdl_active = false;
 
 	if (sys.frecord) {
 		fclose(sys.frecord);

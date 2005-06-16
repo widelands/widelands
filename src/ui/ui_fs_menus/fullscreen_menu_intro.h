@@ -22,6 +22,8 @@
 
 #include "fullscreen_menu_base.h"
 #include "types.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_mixer.h>
 
 /**
  * Fullscreen Menu with Splash Screen (at the moment).
@@ -32,7 +34,9 @@ class Fullscreen_Menu_Intro : public Fullscreen_Menu_Base {
 public:
 	Fullscreen_Menu_Intro();
 
+protected:
 	virtual bool handle_mouseclick(uint btn, bool down, int x, int y);
+	virtual bool handle_key(bool down, int code, char c);
 };
 
 #endif // __S__INTRO_H

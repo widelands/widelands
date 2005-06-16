@@ -62,6 +62,7 @@ static void show_usage(void)
 " --coredump       Generates a core dump on segfaults instead of using the SDL\n"
 "\n"
 " --ggz            Starts game as GGZ Gaming Zone client (don't use!)\n"
+" --nosound        Starts the game with sound disabled\n"
 "\n"
 #ifdef DEBUG
 " --double         Start the game twice (for localhost network testing)\n\n"
@@ -113,6 +114,10 @@ static bool parse_command_line(int argc, char** argv)
 			NetGGZ::ref()->init();
 			continue;
 		}
+                if (!strcmp(opt, "nosound")) {
+                        g_options.pull_section("music")->create_val("disable_sound","true");
+                        continue;
+                }
 
 #ifdef DEBUG
 		if (!strcmp(opt, "double")) {

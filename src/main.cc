@@ -41,8 +41,10 @@
 #include "setup.h"
 #include "system.h"
 #include "util.h"
+#include "sound_handler.h"
 
 LayeredFileSystem *g_fs;
+Sound_Handler* sound_handler;
 
 static void g_shutdown();
 
@@ -86,6 +88,8 @@ static void g_init(int argc, char **argv)
 		s->get_string("yres");
 		s->get_bool("workareapreview");
 		// KLUDGE!
+
+	   sound_handler=new Sound_Handler();
 
 		g_options.check_used();
 	}
@@ -161,9 +165,13 @@ void g_main(int argc, char** argv)
 		}
 
 		try {
+                        sound_handler->start_music(Sound_Handler::INTRO);
+
          Fullscreen_Menu_Intro r;
          r.run();
          bool done=false;
+
+         sound_handler->change_music(Sound_Handler::MENU, 1000, 0);
 
          while(!done) {
             Fullscreen_Menu_Main *mm = new Fullscreen_Menu_Main;
@@ -347,6 +355,9 @@ void g_main(int argc, char** argv)
                   break;
             }
          }
+
+        sound_handler->stop_music(500);
+        delete sound_handler;
 		} catch(std::exception &e) {
 			critical_error("Unhandled exception: %s", e.what());
 		}

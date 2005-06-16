@@ -333,7 +333,11 @@ bool Game::run(bool is_savegame)
    
    load_graphics();
 
+   sound_handler->change_music(Sound_Handler::INGAME, 1000, 0);
+
 	ipl->run();
+
+        sound_handler->change_music(Sound_Handler::MENU, 1000, 0);
 
 	get_objects()->cleanup(this);
 	delete ipl;
