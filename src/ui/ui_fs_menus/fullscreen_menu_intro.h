@@ -22,8 +22,8 @@
 
 #include "fullscreen_menu_base.h"
 #include "types.h"
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
 
 /**
  * Fullscreen Menu with Splash Screen (at the moment).

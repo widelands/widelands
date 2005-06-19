@@ -6,3 +6,6 @@
 Makefile
 Makefile.in
 widelands
+*-debug*
+*-release
+*-profile

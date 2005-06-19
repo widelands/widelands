@@ -2,8 +2,9 @@
 #     W I D E L A N D S			M A K E F I L E                       #
 #####################################################################
 
-# Please edit everything until NO USER CHANGES 
-# then, run gnu make
+# Do not change this file, instead create a new Makefile.local
+# and overwrite the vaiables listed here
+
 
 ########################### GLOBAL SECTION ##########################
 # NON CROSS COMPILE
@@ -21,6 +22,9 @@ endif
 
 # on some systems (BSD) this is named sdl12-config or so
 SDL_CONFIG:=sdl-config
+
+# ctags
+CTAGS:=/usr/bin/ctags
 
 ifeq ($(CROSS),NO)
 # c++ compiler
@@ -49,6 +53,8 @@ BUILD:=debug
 endif
 
 endif
+
+-include Makefile.local
 
 ####################################################################
 #  NO USER CHANGES BELOW THIS POINT											 #
@@ -195,7 +201,7 @@ $(OBJECT_DIR)/%.o: src/%.cc
 	rm $@.d
 
 tags: $(SRC) $(HEADERS)
-	@ if [ -x /usr/bin/ctags ]; then ctags $(SRC) $(HEADERS) 2>/dev/null|| true ; else true; fi
+	@ if [ -x $(CTAGS) ]; then $(CTAGS) $(SRC) $(HEADERS) 2>/dev/null|| true ; else true; fi
 
 update up:
 	@cvs -q up -APd

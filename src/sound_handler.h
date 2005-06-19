@@ -23,8 +23,8 @@
 #include <vector>
 #include <map>
 #include <assert.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
 #include "profile.h"
 #include "options.h"
 #include "error.h"
