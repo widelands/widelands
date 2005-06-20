@@ -309,7 +309,7 @@ class WSM_Checkbox : public UICheckbox {
  * Constructor
  */
 WSM_Checkbox::WSM_Checkbox(UIPanel* parent, int x, int y, int id, uint picid, RGBColor color) :
-   UICheckbox(parent, x, y, g_gr->get_picture(PicMod_Game, WARES_DISPLAY_BG, false)) {
+   UICheckbox(parent, x, y, g_gr->get_picture( PicMod_Game,  WARES_DISPLAY_BG )) {
    
    m_pic = picid;
    set_id(id);
@@ -416,7 +416,7 @@ Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueW
    posx = spacing; 
    b = new UIButton(this, posx, posy, 32, 32, 3, 100);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_FOUR_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);

@@ -69,8 +69,10 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    m_editor = e;
    
    // Disable debug. it is no use for editor
+#ifndef DEBUG
    set_display_flag(Interactive_Base::dfDebug, false);
-   
+#endif
+
    // The mapview. watch the map!!!
    Map_View* mm;
    mm = new Map_View(this, 0, 0, get_w(), get_h(), this);
@@ -85,39 +87,39 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
 
    b = new UIButton(this, x, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_mainmenu);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_menu.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_menu.png" ));
 
    b = new UIButton(this, x+34, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::tool_menu_btn);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_toggle_tool_menu.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_toggle_tool_menu.png" ));
 
    b = new UIButton(this, x+68, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toolsize_menu_btn);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_set_toolsize_menu.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_set_toolsize_menu.png" ));
 
    b = new UIButton(this, x+102, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_minimap);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_minimap.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_minimap.png" ));
 
    b = new UIButton(this, x+136, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_buildhelp);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_buildhelp.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_buildhelp.png" ));
 
    b = new UIButton(this, x+170, y, 34, 43, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_playermenu);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/editor_menu_player_menu.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/editor_menu_player_menu.png" ));
 
    b = new UIButton(this, x+204, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_eventmenu);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_event_menu.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_event_menu.png" ));
 
    b = new UIButton(this, x+238, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_variablesmenu);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_variables_menu.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_variables_menu.png" ));
    
    b = new UIButton(this, x+272, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_objectivesmenu);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_toggle_objectives_menu.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_objectives_menu.png" ));
 
 
    // Init Tools

@@ -61,41 +61,41 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    
    int buttonw = (get_inner_w()-5*spacing) / 4;
    UIButton* b=new UIButton(this, posx, posy, buttonw, 34, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_general_stats.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
    posx += buttonw + spacing;
   
    b=new UIButton(this, posx, posy, buttonw, 34, 0, 2);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_ware_stats.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
    posx += buttonw + spacing;
 
    b=new UIButton(this, posx, posy, buttonw, 34, 0, 3);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_building_stats.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
    posx += buttonw + spacing;
   
    b=new UIButton(this, posx, posy, buttonw, 34, 0, 4);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_stock.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_stock.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
    posx = spacing;
    posy += 39;
        
    buttonw = (get_inner_w()-3*spacing) / 2;
    b=new UIButton(this, posx, posy, buttonw, 34, 0, 25);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_objectives.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_objectives.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
    posx += buttonw + spacing;
    
    b=new UIButton(this, posx, posy, buttonw, 34, 0, 30);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_chat.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_chat.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
    posx = spacing;
    posy += 45;
    
    buttonw = (get_inner_w()-2*spacing);
    b=new UIButton(this, posx, posy, buttonw, 34, 1, 50);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_options_menu.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_options_menu.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
    posx = spacing;
    posy += 40;

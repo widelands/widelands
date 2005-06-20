@@ -81,10 +81,10 @@ Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
    posy+=spacing+width;
    UIButton* b=new UIButton(this, posx, posy, width, height, 1, 0);
    b->clickedid.set(this, &Editor_Player_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 1);
    b->clickedid.set(this, &Editor_Player_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    m_nr_of_players_ta=new UITextarea(this, 0, 0, "5", Align_Left);
    m_nr_of_players_ta->set_pos((get_inner_w()-m_nr_of_players_ta->get_w())/2, posy+5);
    posy+=width+spacing+spacing;
@@ -195,7 +195,7 @@ void Editor_Player_Menu::update(void) {
       text+=static_cast<char>(((i+1)/10) + 0x30);
       text+=static_cast<char>(((i+1)%10) + 0x30);
       text+="_pos.png";
-      m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture(PicMod_Game, text.c_str(), true));
+      m_plr_set_pos_buts[i]->set_pic(g_gr->get_picture( PicMod_Game,  text.c_str() ));
       // Build infrastructure but
       if(!m_plr_make_infrastructure_buts[i]) {
          m_plr_make_infrastructure_buts[i]=new UIButton(this, posx, posy, size, size, 0, i+1);
@@ -378,7 +378,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
       picsname+=static_cast<char>((n/10) + 0x30);
       picsname+=static_cast<char>((n%10) + 0x30);
       picsname+="_starting_pos.png";
-      int picid=g_gr->get_picture(PicMod_Game, picsname.c_str(), true);
+      int picid=g_gr->get_picture( PicMod_Game,  picsname.c_str() );
       // Remove old overlay if any
       m_parent->get_editor()->get_map()->get_overlay_manager()->remove_overlay(start_pos,picid);
    }

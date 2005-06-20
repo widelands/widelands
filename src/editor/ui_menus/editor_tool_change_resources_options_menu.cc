@@ -71,7 +71,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    for(i=0; i<nr_resources; i++) {
       Resource_Descr* res=parent->get_map()->get_world()->get_resource(i);
       std::string editor_pic=res->get_editor_pic(100000);
-      int picid=g_gr->get_picture(PicMod_Game, editor_pic.c_str(), true);
+      int picid=g_gr->get_picture( PicMod_Game,  editor_pic.c_str() );
       g_gr->get_picture_size(picid, &w,&h);
       if(w>width) width=w;
       if(h>height) height=h;
@@ -95,10 +95,10 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    posy+=spacing+button_width;
    UIButton* b=new UIButton(this, posx, posy, button_width, resources, 1, 0);
    b->clickedid.set(this, &Editor_Tool_Change_Resources_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b=new UIButton(this, get_inner_w()-spacing-button_width, posy, button_width, resources, 1, 1);
    b->clickedid.set(this, &Editor_Tool_Change_Resources_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    m_increase=new UITextarea(this, 0, 0, "5", Align_Left);
    m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
    posy+=button_width+spacing+spacing;
@@ -108,10 +108,10 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    posy+=button_width+spacing;
    b=new UIButton(this, posx, posy, button_width, resources, 1, 2);
    b->clickedid.set(this, &Editor_Tool_Change_Resources_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b=new UIButton(this, get_inner_w()-spacing-button_width, posy, button_width, resources, 1, 3);
    b->clickedid.set(this, &Editor_Tool_Change_Resources_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    m_set=new UITextarea(this, 0, 0, "5", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
    posy+=button_width+spacing;
@@ -131,7 +131,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
       if(cur_x==resources_in_row) { cur_x=0; posy+=height+1+space; posx=xstart; }
 
       std::string editor_pic=res->get_editor_pic(100000);
-      int picid=g_gr->get_picture(PicMod_Game, editor_pic.c_str(),true);
+      int picid=g_gr->get_picture( PicMod_Game,  editor_pic.c_str() );
 
 
       m_radiogroup->add_button(this, posx,posy,picid);

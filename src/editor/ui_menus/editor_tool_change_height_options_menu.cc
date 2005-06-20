@@ -65,10 +65,10 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    posy+=spacing+width;
    UIButton* b=new UIButton(this, posx, posy, width, height, 1, 0);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 1);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    m_increase=new UITextarea(this, 0, 0, "5", Align_Left);
    m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
    posy+=width+spacing+spacing;
@@ -78,10 +78,10 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    posy+=width+spacing;
    b=new UIButton(this, posx, posy, width, height, 1, 2);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b=new UIButton(this, get_inner_w()-spacing-width, posy, width, height, 1, 3);
    b->clickedid.set(this, &Editor_Tool_Change_Height_Options_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    m_set=new UITextarea(this, 0, 0, "5", Align_Left);
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
    posy+=width+spacing;

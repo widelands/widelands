@@ -42,8 +42,6 @@ Reset the EncodeData to defaults (no special colors)
 */
 void EncodeData::clear()
 {
-	hasclrkey = false;
-	hasshadow = false;
 	hasplrclrs = false;
 }
 
@@ -62,24 +60,6 @@ void EncodeData::parse(Section *s)
 {
 	int i;
 	int r, g, b;
-
-	// Read color key
-	r = s->get_int("clrkey_r", -1);
-	g = s->get_int("clrkey_g", -1);
-	b = s->get_int("clrkey_b", -1);
-	if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
-		hasclrkey = true;
-		clrkey.set(r, g, b);
-	}
-
-	// Read shadow color
-	r = s->get_int("shadowclr_r", -1);
-	g = s->get_int("shadowclr_g", -1);
-	b = s->get_int("shadowclr_b", -1);
-	if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
-		hasshadow = true;
-		shadow.set(r, g, b);
-	}
 
 	// Read player color codes
 	for(i = 0; i < 4; i++) {
@@ -112,16 +92,6 @@ Add another encode data. Already existing color codes are overwritten
 */
 void EncodeData::add(const EncodeData *other)
 {
-	if (other->hasclrkey) {
-		hasclrkey = true;
-		clrkey = other->clrkey;
-	}
-
-	if (other->hasshadow) {
-		hasshadow = true;
-		shadow = other->shadow;
-	}
-
 	if (other->hasplrclrs) {
 		hasplrclrs = true;
 		for(int i = 0; i < 4; i++)

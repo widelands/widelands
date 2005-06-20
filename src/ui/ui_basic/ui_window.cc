@@ -65,11 +65,11 @@ UIWindow::UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *ti
 	set_cache(true);
 	set_top_on_click(true);
 
-	m_pic_lborder = g_gr->get_picture(PicMod_UI, "pics/win_l_border.png", true);
-	m_pic_rborder = g_gr->get_picture(PicMod_UI, "pics/win_r_border.png", true);
-	m_pic_top = g_gr->get_picture(PicMod_UI, "pics/win_top.png", true);
-	m_pic_bottom = g_gr->get_picture(PicMod_UI, "pics/win_bot.png", true);
-	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/win_bg.png", false);
+	m_pic_lborder = g_gr->get_picture( PicMod_UI,  "pics/win_l_border.png" );
+	m_pic_rborder = g_gr->get_picture( PicMod_UI,  "pics/win_r_border.png" );
+	m_pic_top = g_gr->get_picture( PicMod_UI,  "pics/win_top.png" );
+	m_pic_bottom = g_gr->get_picture( PicMod_UI,  "pics/win_bot.png" );
+	m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/win_bg.png" );
 }
 
 /**

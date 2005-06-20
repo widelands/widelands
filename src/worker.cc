@@ -1432,7 +1432,7 @@ Load graphics (other than animations).
 */
 void Worker_Descr::load_graphics()
 {
-	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname, true);
+	m_menu_pic = g_gr->get_picture( PicMod_Game,  m_menu_pic_fname );
 }
 
 
@@ -3444,15 +3444,11 @@ void Worker::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos)
 	if (!anim)
 		return;
 
-	const RGBColor* playercolors = 0;
 	Point drawpos;
 
 	calc_drawpos(g, pos, &drawpos);
 
-	if (get_owner())
-		playercolors = get_owner()->get_playercolor();
-
-	dst->drawanim(drawpos.x, drawpos.y, anim, g->get_gametime() - get_animstart(), playercolors);
+	dst->drawanim(drawpos.x, drawpos.y, anim, g->get_gametime() - get_animstart(), get_owner());
 
 	// Draw the currently carried item
 	WareInstance* item = get_carried_item(g);
@@ -3460,7 +3456,7 @@ void Worker::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos)
 	if (item) {
 		uint itemanim = item->get_ware_descr()->get_animation("idle");
 
-		dst->drawanim(drawpos.x, drawpos.y - 15, itemanim, 0, playercolors);
+		dst->drawanim(drawpos.x, drawpos.y - 15, itemanim, 0, get_owner());
 	}
 }
 

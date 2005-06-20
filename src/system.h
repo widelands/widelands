@@ -37,13 +37,6 @@ enum { // use 1<<MOUSE_xxx for bitmasks
 	MOUSE_RIGHT
 };
 
-enum { // which graphics subsystem to use
-	GFXSYS_NONE = 0,
-	GFXSYS_SW16,			// software, 16-bit depth
-	GFXSYS_SW32,			// software, 32-bit depth IS CURRENTLY DISABLED
-};
-
-
 /*
 All interactions with the OS except for file access and graphics are handled
 by the Sys_xxx type functions. Most notably:
@@ -101,8 +94,6 @@ void Sys_SetMouseSpeed(float speed);
 void Sys_MouseLock(bool locked);
 
 // graphics
-void Sys_InitGraphics(int system, int w, int h, bool fullscreen);
-int Sys_GetGraphicsSystem();
-int Sys_GetGraphicsSystemFromString(std::string str);
+void Sys_InitGraphics(int w, int h, int bpp, bool fullscreen);
 
 #endif

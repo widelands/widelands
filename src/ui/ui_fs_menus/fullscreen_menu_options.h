@@ -78,7 +78,7 @@ private:
 		int yres;
 		int depth;
 	};
-	static res resolutions[NUM_RESOLUTIONS];
+	std::vector<res> m_resolutions;
 };
 
 #endif /* OPTIONSMENU_H */

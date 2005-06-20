@@ -1014,15 +1014,11 @@ void Bob::draw(Editor_Game_Base *game, RenderTarget* dst, Point pos)
 	if (!m_anim)
 		return;
 
-	const RGBColor* playercolors = 0;
 	Point drawpos;
 
 	calc_drawpos(game, pos, &drawpos);
 
-	if (get_owner())
-		playercolors = get_owner()->get_playercolor();
-
-	dst->drawanim(drawpos.x, drawpos.y, m_anim, game->get_gametime() - m_animstart, playercolors);
+	dst->drawanim(drawpos.x, drawpos.y, m_anim, game->get_gametime() - m_animstart, get_owner());
 }
 
 

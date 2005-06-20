@@ -393,7 +393,7 @@ void Editor_Variables_Menu::insert_variable( MapVariable* var ) {
       default: pic = "nothing";
    };
    
-   UITable_Entry* t = new UITable_Entry(m_table, var, g_gr->get_picture(PicMod_UI, pic, true), true);
+   UITable_Entry* t = new UITable_Entry(m_table, var, g_gr->get_picture( PicMod_UI, pic ), true );
    t->set_string(0, narrow_string(var->get_name()).c_str());
 
    std::wstring val;

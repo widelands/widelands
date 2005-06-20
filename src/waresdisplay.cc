@@ -195,7 +195,7 @@ void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stoc
 	}
 
    // Draw a background
-   int picid = g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png", false);
+   int picid = g_gr->get_picture( PicMod_Game,  "pics/ware_list_bg.png" );
    int w, h;
    g_gr->get_picture_size(picid, &w, &h);
    

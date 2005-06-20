@@ -163,6 +163,8 @@ void Player::set_area_seen(Coords center, uint area, bool on)
 
 	while(mr.next(&c))
 		set_field_seen(c, on);
+
+   m_view_changed = true;
 }
 
 

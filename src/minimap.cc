@@ -49,7 +49,7 @@ MiniMapView::MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactiv
 	m_viewx = m_viewy = 0;
    m_flags = Minimap_Terrain;
 
-	m_pic_map_spot = g_gr->get_picture(PicMod_Game, "pics/map_spot.png", true);
+	m_pic_map_spot = g_gr->get_picture( PicMod_Game,  "pics/map_spot.png" );
 
    if (!w)
 		w = m_player->get_map()->get_width();
@@ -164,27 +164,27 @@ MiniMap::MiniMap(Interactive_Base *plr, UIUniqueWindowRegistry *reg)
 	//set_cache(false); // testing
 
 	UIButton* b=new UIButton(this, 0, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_color.png", true));
+	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_color.png" ));
 	//b->set_title("col");
 	b->clicked.set(this, &MiniMap::toggle_color);
 
 	b=new UIButton(this, button_width, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_ownedBy.png", true));
+	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_ownedBy.png" ));
 	//b->set_title("own");
 	b->clicked.set(this, &MiniMap::toggle_ownedBy);
 
 	b=new UIButton(this, 2*button_width, m_view->get_h(), button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_flags.png", true));
+	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_flags.png" ));
 	//b->set_title("Flags");
 	b->clicked.set(this, &MiniMap::toggle_flags);
 
 	b=new UIButton(this, 0, m_view->get_h()+button_height, button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_roads.png", true));
+	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_roads.png" ));
 	//b->set_title("Roads");
 	b->clicked.set(this, &MiniMap::toggle_roads);
 
 	b=new UIButton(this, button_width, m_view->get_h()+button_height, button_width, button_height, 0);
-	b->set_pic(g_gr->get_picture(PicMod_UI, "pics/button_building.png", true));
+	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_building.png" ));
 	//b->set_title("Buildings");
 	b->clicked.set(this, &MiniMap::toggle_buildings);
 

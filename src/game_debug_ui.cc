@@ -117,7 +117,7 @@ building_ui.cc).
 */
 void Map_Object::create_debug_panels(Editor_Game_Base* egbase, UITab_Panel* tabs)
 {
-	tabs->add(g_gr->get_picture(PicMod_Game, "pics/menu_debug.png", true),
+	tabs->add(g_gr->get_picture( PicMod_Game,  "pics/menu_debug.png" ),
 			new MapObjectDebugPanel(tabs, egbase, this));
 }
 

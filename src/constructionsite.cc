@@ -554,7 +554,7 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 		return; // draw big buildings only once
 
 	// Draw the construction site marker
-	dst->drawanim(pos.x, pos.y, m_anim, tanim, get_owner()->get_playercolor());
+	dst->drawanim(pos.x, pos.y, m_anim, tanim, get_owner());
 
 	// Draw the partially finished building
 	int totaltime;
@@ -582,7 +582,7 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 
    // NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
    if(anim_pic) // not the first pic
-      dst->drawanim(pos.x, pos.y, anim, tanim-FRAME_LENGTH, get_owner()->get_playercolor()); // draw the prev pic completly
+      dst->drawanim(pos.x, pos.y, anim, tanim-FRAME_LENGTH, get_owner()); // draw the prev pic completly
 
    if(!anim_pic && m_prev_building) {
       // Is the first building, but there was another building here before,
@@ -592,10 +592,10 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
       int nr_pics=g_gr->get_animation_nr_frames(anim);
       g_gr->get_animation_size(anim, tanim, &w, &h);
       int tanim = (nr_pics-1)*FRAME_LENGTH;
-      dst->drawanim(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor());
+      dst->drawanim(pos.x, pos.y, anim, tanim, get_owner());
    }
 
-	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner()->get_playercolor(), 0, h-lines, w, lines);
+	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner(), 0, h-lines, w, lines);
 
 	// Draw help strings
 	draw_help(g, dst, coords, pos);

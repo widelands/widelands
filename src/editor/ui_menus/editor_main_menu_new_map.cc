@@ -59,20 +59,20 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    sprintf(buf, "Width: %i", MAP_DIMENSIONS[m_w]);
    m_width=new UITextarea(this, posx+spacing+20, posy+7, buf, Align_Left);
    UIButton* b = new UIButton(this, posx, posy, 20, 20, 1, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    b = new UIButton(this, get_inner_w()-spacing-20, posy, 20, 20, 1, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=20+spacing+spacing;
 
    sprintf(buf, "Height: %i", MAP_DIMENSIONS[m_h]);
    m_height=new UITextarea(this, posx+spacing+20, posy+7, buf, Align_Left);
    b = new UIButton(this, posx, posy, 20, 20, 1, 2);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    b = new UIButton(this, get_inner_w()-spacing-20, posy, 20, 20, 1, 3);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=20+spacing+spacing;
 

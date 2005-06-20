@@ -54,8 +54,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 	// Switch to the new graphics system now, if necessary
    Section *s = g_options.pull_section("global");
 
-	Sys_InitGraphics(Sys_GetGraphicsSystemFromString(s->get_string("gfxsys", "sw32")),
-			get_xres(), get_yres(), s->get_bool("fullscreen", false));
+	Sys_InitGraphics(get_xres(), get_yres(), s->get_int("depth",16), s->get_bool("fullscreen", false));
 
    m_fsd.fieldsel_freeze = false;
    m_egbase=g;
@@ -75,7 +74,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
    m_fsd.fieldsel_pos.x=0;
    m_fsd.fieldsel_pos.y=0;
    m_fsd.fieldsel_jobid=0;
-   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, "pics/fsel.png", true);
+   m_fsd.fieldsel_pic=g_gr->get_picture( PicMod_Game,  "pics/fsel.png" );
    m_fsd.fieldsel_radius=0;
    
    m_road_buildhelp_overlay_jobid=0;
@@ -96,6 +95,13 @@ Interactive_Base::~Interactive_Base(void)
 {
 	if (m_buildroad)
 		abort_build_road();
+}
+
+/*
+ * Everything needs to be redrawn. This might take a while
+ */
+void Interactive_Base::need_complete_redraw( void ) {
+   m_mapview->need_complete_redraw();
 }
 
 /*
@@ -132,7 +138,7 @@ void Interactive_Base::set_fieldsel_radius(int n) {
  * Set/Unset fieldsel picture
  */
 void Interactive_Base::set_fieldsel_picture(const char* file) {
-   m_fsd.fieldsel_pic=g_gr->get_picture(PicMod_Game, file, true);
+   m_fsd.fieldsel_pic=g_gr->get_picture( PicMod_Game,  file );
    set_fieldsel_pos(get_fieldsel_pos()); // redraw
 }
 void Interactive_Base::unset_fieldsel_picture(void) {
@@ -424,6 +430,7 @@ void Interactive_Base::start_build_road(Coords start, int player)
    assert(!m_egbase->is_game() || (player==static_cast<Interactive_Player*>(this)->get_player_number()));
 
 	roadb_add_overlay();
+   m_mapview->need_complete_redraw();
 }
 
 
@@ -439,6 +446,7 @@ void Interactive_Base::abort_build_road()
 	assert(m_buildroad);
 
 	roadb_remove_overlay();
+   m_mapview->need_complete_redraw();
 
    m_road_build_player=0;
 
@@ -459,6 +467,7 @@ void Interactive_Base::finish_build_road()
 	assert(m_buildroad);
 
 	roadb_remove_overlay();
+   m_mapview->need_complete_redraw();
 
 	if (m_buildroad->get_nsteps()) {
 		// awkward... path changes ownership
@@ -496,6 +505,7 @@ bool Interactive_Base::append_build_road(Coords field)
 		m_buildroad->truncate(idx);
 		roadb_add_overlay();
 
+      m_mapview->need_complete_redraw();
 		return true;
 	}
 
@@ -510,6 +520,7 @@ bool Interactive_Base::append_build_road(Coords field)
 	roadb_remove_overlay();
 	m_buildroad->append(path);
 	roadb_add_overlay();
+   m_mapview->need_complete_redraw();
 
 	return true;
 }
@@ -637,7 +648,7 @@ void Interactive_Base::roadb_add_overlay()
 
       assert(name!="");
 
-      get_map()->get_overlay_manager()->register_overlay(neighb,  g_gr->get_picture(PicMod_Game, name.c_str(), true),7, Coords(-1,-1), m_road_buildhelp_overlay_jobid);
+      get_map()->get_overlay_manager()->register_overlay(neighb,  g_gr->get_picture( PicMod_Game,  name.c_str() ),7, Coords(-1,-1), m_road_buildhelp_overlay_jobid);
 	}
 }
 

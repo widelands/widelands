@@ -141,7 +141,7 @@ int UIPanel::run()
 	while(forefather->_parent)
 		forefather = forefather->_parent;
 
-	s_default_cursor = g_gr->get_picture(PicMod_UI, "pics/cursor.png", true);
+	s_default_cursor = g_gr->get_picture( PicMod_UI,  "pics/cursor.png" );
 
 	// Loop
 	_running = true;

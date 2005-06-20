@@ -189,7 +189,7 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
       if(!strcmp(FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
       if(!g_fs->IsDirectory(name)) continue;
 
-      m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture(PicMod_Game, "pics/ls_dir.png", true));
+      m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
  
    Game_Preload_Data_Packet gpdp;

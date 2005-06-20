@@ -29,10 +29,6 @@ class Profile;
 class Section;
 
 struct EncodeData {
-	bool		hasclrkey;
-	RGBColor	clrkey;
-	bool		hasshadow;
-	RGBColor	shadow;
 	bool		hasplrclrs;
 	RGBColor	plrclr[4];
 

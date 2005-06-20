@@ -24,15 +24,11 @@ Texture implementation and terrain rendering for the 16-bit software renderer.
 #include "error.h"
 #include "field.h"
 #include "filesystem.h"
-#include "sw16_graphic.h"
+#include "graphic_impl.h"
 #include "world.h"
 #include "random.h"
 
 using namespace std;
-
-namespace Renderer_Software16
-{
-
 
 /*
 ==========================================================================
@@ -47,29 +43,35 @@ Colormap
  * Create a new Colormap, taking the palette as a parameter.
  * It automatically creates the colormap for shading.
  */
-Colormap::Colormap (const SDL_Color *pal)
+Colormap::Colormap (const SDL_Color *pal, SDL_PixelFormat* fmt)
 {
 	int i,j,r,g,b;
 
 	memcpy(palette, pal, sizeof(palette));
 
-	colormap=new unsigned short[65536];
-
+   if( fmt->BytesPerPixel == 2) 
+      colormap=malloc(sizeof(ushort)*65536);
+   else if( fmt->BytesPerPixel == 4)
+      colormap=malloc(sizeof(ulong)*65536);
+      
 //    log ("Creating color map\n");
 	for (i=0;i<256;i++)
 		for (j=0;j<256;j++) {
 			int shade=(j<128)?j:(j-256);
 			shade=256+2*shade;
 
-			r=(palette[i].r*shade)>>11;
-			g=(palette[i].g*shade)>>10;
-			b=(palette[i].b*shade)>>11;
+         r = (palette[i].r*shade)>>8;
+         g = (palette[i].g*shade)>>8;
+         b = (palette[i].b*shade)>>8;
 
-			if (r>31) r=31;
-			if (g>63) g=63;
-			if (b>31) b=31;
+         if (r>255) r=255;
+         if (g>255) g=255;
+         if (b>255) b=255;
 
-			colormap[(j<<8) | i]=(r<<11) | (g<<5) | b;
+         if( fmt->BytesPerPixel == 2) 
+            ((ushort*)colormap)[(j<<8) | i]= (ushort)SDL_MapRGB( fmt, r, g, b );
+         else if( fmt->BytesPerPixel == 4)
+            ((ulong*)colormap)[(j<<8) | i]= (ulong)SDL_MapRGB( fmt, r, g, b );
 		}
 }
 
@@ -80,7 +82,7 @@ Colormap::Colormap (const SDL_Color *pal)
  */
 Colormap::~Colormap ()
 {
-	delete[] colormap;
+	free(colormap);
 }
 
 
@@ -98,12 +100,13 @@ Texture
  * Currently it converts a 16 bit pic to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
-Texture::Texture (const char* fnametmpl, uint frametime)
+Texture::Texture (const char* fnametmpl, uint frametime, SDL_PixelFormat* screenfmt)
 {
 	m_colormap = 0;
 	m_nrframes = 0;
 	m_pixels = 0;
 	m_frametime = frametime;
+   is_32bit = screenfmt->BytesPerPixel == 4;
 
 	// Load the pictures one by one
 	char fname[256];
@@ -154,7 +157,7 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
 			if (surf->format->BitsPerPixel == 8)
-				m_colormap = new Colormap(surf->format->palette->colors);
+				m_colormap = new Colormap(surf->format->palette->colors, screenfmt);
 			else {
 				SDL_Color pal[256];
 
@@ -168,7 +171,7 @@ Texture::Texture (const char* fnametmpl, uint frametime)
 							pal[(r<<5) | (g<<2) | b].b=b<<6;
 						}
 
-				m_colormap = new Colormap(pal);
+				m_colormap = new Colormap(pal, screenfmt);
 			}
 		}
 
@@ -227,12 +230,15 @@ Texture::get_minimap_color
 Return the basic terrain colour to be used in the minimap.
 ===============
 */
-unsigned short Texture::get_minimap_color(char shade)
+ulong Texture::get_minimap_color(char shade)
 {
 	uchar clr = m_pixels[0]; // just use the top-left pixel
 	uint table = (uchar)shade;
 
-	return (m_colormap->get_colormap())[clr | (table << 8)];
+   if( is_32bit ) 
+      return ((ulong*)m_colormap->get_colormap())[clr | (table << 8)];
+   else
+      return ((ushort*)m_colormap->get_colormap())[clr | (table << 8)];
 }
 
 
@@ -244,7 +250,11 @@ void Texture::animate(uint time)
 {
 	int frame = (time / m_frametime) % m_nrframes;
 
+   uchar* lastframe = m_curframe;
+   
 	m_curframe = &m_pixels[TEXTURE_W*TEXTURE_H*frame];
+   if( lastframe != m_curframe ) 
+      m_was_animated = true;
 }
 
 /*
@@ -271,7 +281,7 @@ static inline void get_horiz_linearcomb (int u1, int u2, int v1, int v2, float& 
 	mu=-u2/det;
 }
 
-static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y2)
+static void render_top_triangle (Surface *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y2)
 {
 	int y,y1,w,h,ix1,ix2,count;
 	int x1,x2,dx1,dx2;
@@ -279,15 +289,15 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 	int b,db,tx,dtx,ty,dty;
 	float lambda, mu;
 	unsigned char *texpixels;
-	unsigned short *texcolormap;
+	void *texcolormap;
 
 	get_horiz_linearcomb (p2->x-p1->x, p2->y-p1->y, p3->x-p1->x, p3->y-p1->y, lambda, mu);
 	db=ftofix((p2->b-p1->b)*lambda + (p3->b-p1->b)*mu);
 	dtx=ftofix((p2->tx-p1->tx)*lambda + (p3->tx-p1->tx)*mu);
 	dty=ftofix((p2->ty-p1->ty)*lambda + (p3->ty-p1->ty)*mu);
 
-	w=dst->w;
-	h=dst->h;
+	w=dst->get_w();
+	h=dst->get_h();
 
 	texpixels=tex->get_curpixels();
 	texcolormap=tex->get_colormap();
@@ -307,7 +317,7 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 	ty1=itofix(p1->ty);
 	dty1=(itofix(p2->ty) - ty1) / (p2->y - y1);
 
-	for (y=y1;y<=y2 && y<h;y++) {
+	for (y=y1;y<y2 && y<h;y++) {
 		if (y>=0) {
 			ix1=fixtoi(x1);
 			ix2=fixtoi(x2);
@@ -326,18 +336,25 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 
 			count=ix2-ix1;
 
-			unsigned short *scanline=dst->pixels + y*dst->pitch + ix1;
+         dst->lock();
+			unsigned char *scanline=(uchar*)dst->get_pixels() + y*dst->get_pitch() + ix1*dst->get_format()->BytesPerPixel;
 
 			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
 
-				*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
+            if( dst->get_format()->BytesPerPixel == 2 )    
+               *((ushort*)(scanline))=((ushort*)texcolormap)[texpixels[texel] | ((b>>8) & 0xFF00)];
+            else
+               *((ulong*)(scanline))=((ulong*)texcolormap)[texpixels[texel] | ((b>>8) & 0xFF00)];
+            scanline += dst->get_format()->BytesPerPixel;
 
 				b+=db;
 				tx+=dtx;
 				ty+=dty;
 			}
 		}
+      
+      dst->unlock();
 
 		x1+=dx1;
 		x2+=dx2;
@@ -347,7 +364,7 @@ static void render_top_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,
 	}
 }
 
-static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y1)
+static void render_bottom_triangle (Surface* dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex *p3,int y1)
 {
 	int y,y2,w,h,ix1,ix2,count;
 	int x1,x2,dx1,dx2;
@@ -355,15 +372,15 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 	int b,db,tx,dtx,ty,dty;
 	float lambda, mu;
 	unsigned char *texpixels;
-	unsigned short *texcolormap;
+	void *texcolormap;
 
 	get_horiz_linearcomb (p2->x-p1->x, p2->y-p1->y, p3->x-p1->x, p3->y-p1->y, lambda, mu);
 	db=ftofix((p2->b-p1->b)*lambda + (p3->b-p1->b)*mu);
 	dtx=ftofix((p2->tx-p1->tx)*lambda + (p3->tx-p1->tx)*mu);
 	dty=ftofix((p2->ty-p1->ty)*lambda + (p3->ty-p1->ty)*mu);
 
-	w=dst->w;
-	h=dst->h;
+	w=dst->get_w();
+	h=dst->get_h();
 
 	texpixels=tex->get_curpixels();
 	texcolormap=tex->get_colormap();
@@ -387,7 +404,7 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 	ty1=itofix(p3->ty);
 	dty1=-(itofix(p1->ty) - ty1) / (p1->y - y2);
 
-	for (y=y2;y>=y1 && y>=0;y--) {
+	for (y=y2;y>=y1 && y>0;y--) {
 		if (y<h) {
 			ix1=fixtoi(x1);
 			ix2=fixtoi(x2);
@@ -406,12 +423,17 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
 
 			count=ix2-ix1;
 
-			unsigned short *scanline=dst->pixels + y*dst->pitch + ix1;
+			unsigned char* scanline=(uchar*)dst->get_pixels() + y*dst->get_pitch() + ix1*dst->get_format()->BytesPerPixel;
 
 			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
+            
+            if( dst->get_format()->BytesPerPixel == 2 )    
+               *((ushort*)(scanline))=((ushort*)texcolormap)[texpixels[texel] | ((b>>8) & 0xFF00)];
+            else
+               *((ulong*)(scanline))=((ulong*)texcolormap)[texpixels[texel] | ((b>>8) & 0xFF00)];
 
-				*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
+            scanline += dst->get_format()->BytesPerPixel;
 
 				b+=db;
 				tx+=dtx;
@@ -436,7 +458,7 @@ static void render_bottom_triangle (Bitmap *dst,Texture *tex,Vertex *p1,Vertex *
  * render_bottom_triangle, which require a horizontal edge at the bottom
  * or at the top, respectively.
  */
-static void render_triangle (Bitmap *dst,Vertex *p1,Vertex *p2,Vertex *p3, Texture *tex)
+static void render_triangle (Surface* dst,Vertex *p1,Vertex *p2,Vertex *p3, Texture *tex)
 {
 	Vertex *p[3]={ p1,p2,p3 };
 	int top,bot,mid,y,ym,i;
@@ -495,10 +517,10 @@ static void render_triangle (Bitmap *dst,Vertex *p1,Vertex *p2,Vertex *p3, Textu
 #define DITHER_RAND_MASK	(DITHER_WIDTH*2-1)
 #define DITHER_RAND_SHIFT	(16/DITHER_WIDTH)
 
-static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& end, Texture* ttex, Texture* btex)
+static void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Texture* ttex, Texture* btex)
 {
 	unsigned char *tpixels, *bpixels;
-	unsigned short *tcolormap, *bcolormap;
+	void *tcolormap, *bcolormap;
 
 	tpixels=ttex->get_curpixels();
 	tcolormap=ttex->get_colormap();
@@ -517,8 +539,8 @@ static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& e
 	// TODO: seed this depending on field coordinates
 	uint rnd=0;
 
-	int dstw = dst->w;
-	int dsth = dst->h;
+	int dstw = dst->get_w();
+	int dsth = dst->get_h();
 
 	int ydiff = itofix(end.y - start.y) / (end.x - start.x);
 	int centery = itofix(start.y);
@@ -537,10 +559,14 @@ static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& e
 			// dither above the edge
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && y>=0 && y<dsth) {
-					ushort *pix = dst->pixels + y*dst->pitch + x;
+					uchar *pix = (uchar*)dst->get_pixels() + y*dst->get_pitch() + x*dst->get_format()->BytesPerPixel;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
-					*pix=tcolormap[tpixels[texel] | ((b>>8)&0xFF00)];
-				}
+               if( dst->get_format()->BytesPerPixel == 2 )    
+                  *((ushort*)(pix))=((ushort*)tcolormap)[tpixels[texel] | ((b>>8) & 0xFF00)];
+               else
+                  *((ulong*)(pix))=((ulong*)tcolormap)[tpixels[texel] | ((b>>8) & 0xFF00)];
+
+            }
 
 				tx0+=dty;
 				ty0-=dtx;
@@ -550,10 +576,14 @@ static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& e
 			// dither below the edge
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, y++) {
 				if ((rnd0&DITHER_RAND_MASK)>=i+DITHER_WIDTH && y>=0 && y<dsth) {
-				    ushort *pix = dst->pixels + y*dst->pitch + x;
+				    uchar *pix = (uchar*)dst->get_pixels() + y*dst->get_pitch() + x*dst->get_format()->BytesPerPixel;
 				    int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
-				    *pix=bcolormap[bpixels[texel] | ((b>>8)&0xFF00)];
-				}
+                if( dst->get_format()->BytesPerPixel == 2 )    
+                   *((ushort*)(pix))=((ushort*)bcolormap)[bpixels[texel] | ((b>>8) & 0xFF00)];
+                else
+                   *((ulong*)(pix))=((ulong*)bcolormap)[bpixels[texel] | ((b>>8) & 0xFF00)];
+
+            }
 
 				tx0+=dty;
 				ty0-=dtx;
@@ -568,10 +598,10 @@ static void dither_edge_horiz (Bitmap* dst, const Vertex& start, const Vertex& e
 }
 
 
-static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& end, Texture* ltex, Texture* rtex)
+static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& end, Texture* ltex, Texture* rtex)
 {
 	unsigned char *lpixels, *rpixels;
-	unsigned short *lcolormap, *rcolormap;
+	void* lcolormap, *rcolormap;
 
 	lpixels=ltex->get_curpixels();
 	lcolormap=ltex->get_colormap();
@@ -590,8 +620,8 @@ static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& en
 	// TODO: seed this depending on field coordinates
 	uint rnd=0;
 
-	int dstw = dst->w;
-	int dsth = dst->h;
+	int dstw = dst->get_w();
+	int dsth = dst->get_h();
 
 	int xdiff = itofix(end.x - start.x) / (end.y - start.y);
 	int centerx = itofix(start.x);
@@ -610,10 +640,14 @@ static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& en
 			// dither on left side
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
 				if ((rnd0&DITHER_RAND_MASK)<=i && x>=0 && x<dstw) {
-					ushort *pix = dst->pixels + y*dst->pitch + x;
+					uchar *pix = (uchar*)dst->get_pixels() + y*dst->get_pitch() + x*dst->get_format()->BytesPerPixel;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
-					*pix=lcolormap[lpixels[texel] | ((b>>8)&0xFF00)];
-				}
+				    if( dst->get_format()->BytesPerPixel == 2 )    
+                   *((ushort*)(pix))=((ushort*)lcolormap)[lpixels[texel] | ((b>>8) & 0xFF00)];
+                else
+                   *((ulong*)(pix))=((ulong*)lcolormap)[lpixels[texel] | ((b>>8) & 0xFF00)];
+
+            }
 
 				tx0+=dty;
 				ty0-=dtx;
@@ -623,10 +657,14 @@ static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& en
 			// dither on right side
 			for (unsigned int i = 0; i < DITHER_WIDTH; i++, x++) {
 				if ((rnd0 & DITHER_RAND_MASK)>=i+DITHER_WIDTH && x>=0 && x<dstw) {
-					ushort *pix = dst->pixels + y*dst->pitch + x;
+					uchar *pix = (uchar*)dst->get_pixels() + y*dst->get_pitch() + x*dst->get_format()->BytesPerPixel;
 					int texel=((tx0>>16) & (TEXTURE_W-1)) | ((ty0>>10) & ((TEXTURE_H-1)<<6));
-					*pix=rcolormap[rpixels[texel] | ((b>>8)&0xFF00)];
-				}
+               if( dst->get_format()->BytesPerPixel == 2 )    
+                  *((ushort*)(pix))=((ushort*)rcolormap)[rpixels[texel] | ((b>>8) & 0xFF00)];
+               else
+                  *((ulong*)(pix))=((ulong*)rcolormap)[rpixels[texel] | ((b>>8) & 0xFF00)];
+
+            }
 
 				tx0+=dty;
 				ty0-=dtx;
@@ -646,13 +684,13 @@ static void dither_edge_vert (Bitmap* dst, const Vertex& start, const Vertex& en
 render_road_horiz
 render_road_vert
 
-Render a road. This is really dumb right now, not using a texture
+Render a road. 
 ===============
 */
-static void render_road_horiz(Bitmap *dst, const Point& start, const Point& end, Bitmap* src )
+static void render_road_horiz(Surface* dst, const Point& start, const Point& end, Surface* src )
 {
-	int dstw = dst->w;
-	int dsth = dst->h;
+	int dstw = dst->get_w();
+	int dsth = dst->get_h();
 
 	int ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int centery = start.y << 16;
@@ -667,18 +705,23 @@ static void render_road_horiz(Bitmap *dst, const Point& start, const Point& end,
 			if (y < 0 || y >= dsth)
 				continue;
 
-	      ushort *dpix = dst->pixels + y*dst->pitch + x;
-         ushort *spix = src->pixels + i*src->pitch + sx;
-         
-			*dpix = *spix;
+         if( dst->get_format()->BytesPerPixel == 2) { 
+            ushort* dpix = (ushort*)((uchar*)dst->get_pixels() + y*dst->get_pitch() + x*dst->get_format()->BytesPerPixel);
+            ushort* spix = (ushort*)((uchar*)src->get_pixels() + i*src->get_pitch() + sx*src->get_format()->BytesPerPixel);
+            *dpix = *spix; 
+         } else {
+            ulong* dpix = (ulong*)((uchar*)dst->get_pixels() + y*dst->get_pitch() + x*dst->get_format()->BytesPerPixel);
+            ulong* spix = (ulong*)((uchar*)src->get_pixels() + i*src->get_pitch() + sx*src->get_format()->BytesPerPixel);
+            *dpix = *spix; 
+         }
 		}
 	}
 }
 
-static void render_road_vert(Bitmap *dst, const Point& start, const Point& end, Bitmap* src)
+static void render_road_vert(Surface* dst, const Point& start, const Point& end, Surface* src)
 {
-	int dstw = dst->w;
-	int dsth = dst->h;
+	int dstw = dst->get_w();
+	int dsth = dst->get_h();
 
 	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int centerx = start.x << 16;
@@ -689,14 +732,20 @@ static void render_road_vert(Bitmap *dst, const Point& start, const Point& end, 
 
 		int x = (centerx >> 16) - 2;
 
-		for(int i = 0; i < 5; i++, x++) {
-			if (x < 0 || x >= dstw)
-				continue;
+      for(int i = 0; i < 5; i++, x++) {
+         if (x < 0 || x >= dstw)
+            continue;
 
-			ushort *dpix = dst->pixels + y*dst->pitch + x;
-         ushort *spix = src->pixels + sy*src->pitch + i;
-		
-         *dpix = *spix;
+
+         if( dst->get_format()->BytesPerPixel == 2) { 
+            ushort* dpix = (ushort*)((uchar*)dst->get_pixels() + y*dst->get_pitch() + x*dst->get_format()->BytesPerPixel);
+            ushort* spix = (ushort*)((uchar*)src->get_pixels() + sy*src->get_pitch() + i*src->get_format()->BytesPerPixel);
+            *dpix = *spix; 
+         } else {
+            ulong* dpix = (ulong*)((uchar*)dst->get_pixels() + y*dst->get_pitch() + x*dst->get_format()->BytesPerPixel);
+            ulong* spix = (ulong*)((uchar*)src->get_pixels() + sy*src->get_pitch() + i*src->get_format()->BytesPerPixel);
+            *dpix = *spix; 
+         }
       }
 	}
 }
@@ -704,20 +753,22 @@ static void render_road_vert(Bitmap *dst, const Point& start, const Point& end, 
 
 /*
 ===============
-Bitmap::draw_field
+Surface::draw_field
 
 Draw ground textures and roads for the given parallelogram (two triangles)
 into the bitmap.
 ===============
 */
-void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Field * const rfl,
+void Surface::draw_field(Rect& subwin, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
 			Field * const lf, Field * const ft,
 	                const int posx, const int rposx, const int posy,
 	                const int blposx, const int rblposx, const int blposy,
-	                uchar roads, uchar darken)
+	                uchar roads, uchar darken, bool draw_all)
 {
 	Vertex r, l, br, bl;
 
+   set_subwin( subwin );
+   
 	r = Vertex(rposx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(rf->get_height()), rf->get_brightness(), 0, 0);
 	l = Vertex(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()), f->get_brightness(), 64, 0);
 	br = Vertex(rblposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(rfl->get_height()), rfl->get_brightness(), 0, 64);
@@ -728,18 +779,27 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
 	if (darken&4) bl.b=-128;
 	if (darken&8) br.b=-128;
 
-	Bitmap* rt_normal = get_graphicimpl()->get_road_texture(Road_Normal);
-	Bitmap* rt_busy = get_graphicimpl()->get_road_texture(Road_Busy);
+	Surface* rt_normal = get_graphicimpl()->get_road_texture(Road_Normal);
+	Surface* rt_busy = get_graphicimpl()->get_road_texture(Road_Busy);
 
 	Texture* rtex = get_graphicimpl()->get_maptexture_data(f->get_terr()->get_texture());
 	Texture* btex = get_graphicimpl()->get_maptexture_data(f->get_terd()->get_texture());
 	Texture* ltex = get_graphicimpl()->get_maptexture_data(lf->get_terr()->get_texture());
 	Texture* ttex = get_graphicimpl()->get_maptexture_data(ft->get_terd()->get_texture());
 
-	render_triangle(this, &r, &l, &br, rtex);
-	render_triangle(this, &l, &br, &bl, btex);
+   if( draw_all ) {
+      render_triangle(this, &r, &l, &br, rtex);
+      render_triangle(this, &l, &br, &bl, btex);
+   } else {
+      if( rtex->was_animated()) { 
+         render_triangle(this, &r, &l, &br, rtex);
+      }
+      if( btex->was_animated()) {
+         render_triangle(this, &l, &br, &bl, btex);
+      }
+   }
 
-	// Render roads and dither polygon edges
+   // Render roads and dither polygon edges
 	uchar road;
 
 	road = (roads >> Road_East) & Road_Mask;
@@ -751,8 +811,11 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
             default: assert(0); break; // never here
          }
       }
-		else if (rtex!=0 && ttex!=0 && rtex!=ttex)
-			dither_edge_horiz(this, l, r, rtex, ttex);
+		else {
+         if( draw_all || rtex->was_animated() || ttex->was_animated()) 
+            if (rtex!=0 && ttex!=0 && rtex!=ttex)
+               dither_edge_horiz(this, l, r, rtex, ttex);
+      }
 	}
 
 	road = (roads >> Road_SouthEast) & Road_Mask;
@@ -764,9 +827,12 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
             default: assert(0); break; // never here
          }
       }
-		else if (rtex!=0 && btex!=0 && rtex!=btex)
-			dither_edge_vert(this, l, br, rtex, btex);
-	}
+      else {
+         if( draw_all || rtex->was_animated() || btex->was_animated()) 
+            if (rtex!=0 && btex!=0 && rtex!=btex)
+               dither_edge_vert(this, l, br, rtex, btex);
+      }
+   }
 
 	road = (roads >> Road_SouthWest) & Road_Mask;
 	if ((darken&5)!=5) {
@@ -777,12 +843,15 @@ void Bitmap::draw_field(Field * const f, Field * const rf, Field * const fl, Fie
             default: assert(0); break; // never here
          }
       }
-		else if (ltex!=0 && btex!=0 && ltex!=btex)
-			dither_edge_vert(this, l, bl, btex, ltex);
+		else {
+         if( draw_all || btex->was_animated() || ltex->was_animated()) 
+            if (ltex!=0 && btex!=0 && ltex!=btex)
+               dither_edge_vert(this, l, bl, btex, ltex);
+      }
 	}
 
 	// FIXME: similar textures may not need dithering
+   
+   unset_subwin();
 }
 
-
-} // namespace Renderer_Software16

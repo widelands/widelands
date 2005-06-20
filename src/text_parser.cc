@@ -138,3 +138,4 @@ Align Text_Parser::set_align(std::string align) {
    else
       return Align_Left;
 }
+

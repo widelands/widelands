@@ -73,16 +73,16 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
 
    int buttonw = (get_inner_w()-3*5) / 2;
    b=new UIButton(this, 5, posy, buttonw, 35, 0, 4);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_save_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    
    b=new UIButton(this, 10+buttonw, posy, buttonw, 35, 0, 5);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_load_game.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_load_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 45;
    
    b=new UIButton(this, 5, posy, get_inner_w()-10, 35, 0, 6);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png", 1));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_exit_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 40;
     

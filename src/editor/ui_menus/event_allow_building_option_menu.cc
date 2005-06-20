@@ -84,20 +84,20 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    new UITextarea(this, spacing, posy, 70, 20, "Player: ", Align_CenterLeft);
    m_player_ta=new UITextarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
    UIButton* b=new UIButton(this, spacing+90, posy, 20, 20, 0, 15);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    b=new UIButton(this, spacing+110, posy, 20, 20, 0, 16);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    posy+=20+spacing;
 
    // Building
    new UITextarea(this, spacing, posy, 70, 20, "Building: ", Align_CenterLeft);
    b=new UIButton(this, spacing+70, posy, 20, 20, 0, 23);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    b=new UIButton(this, spacing+90, posy, 20, 20, 0, 24);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    posy+=20+spacing;
    m_building_ta=new UITextarea(this, 0, posy, get_inner_w(), 20, "\"Hauptquartier\"", Align_Center);

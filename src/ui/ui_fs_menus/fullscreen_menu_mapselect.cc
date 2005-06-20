@@ -218,7 +218,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
       strcpy(buffer1,buffer);
       FS_CanonicalizeName(buffer1, sizeof(buffer1), buffer);
       m_parentdir=buffer1;
-      list->add_entry("<parent>", reinterpret_cast<void*>(const_cast<char*>(m_parentdir.c_str())), false, g_gr->get_picture(PicMod_Game, "pics/ls_dir.png", true));
+      list->add_entry("<parent>", reinterpret_cast<void*>(const_cast<char*>(m_parentdir.c_str())), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
       ++ndirs;
    }
 
@@ -229,7 +229,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
       if(!strcmp(FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
       if(!g_fs->IsDirectory(name)) continue;
 
-      list->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture(PicMod_Game, "pics/ls_dir.png", true));
+      list->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
       ++ndirs;
    }
   
@@ -247,7 +247,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
             case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
          }
-         list->add_entry(map->get_name(), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture(PicMod_Game, pic.c_str(), true));
+         list->add_entry(map->get_name(), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  pic.c_str() ));
       } catch(wexception& ) {
          // we simply skip illegal entries
       }

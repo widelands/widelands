@@ -26,6 +26,7 @@
 class RenderTarget;
 class FileWrite;
 class FileRead;
+class Surface;
 
 enum { // picture module flags
 	PicMod_UI = 1,
@@ -58,20 +59,18 @@ public:
 	virtual void refresh() = 0;
 
 	virtual void flush(int mod) = 0;
-	virtual uint get_picture(int mod, const char* fname, bool has_clrkey) = 0;
-   virtual void use_clrkey(uint pic, bool)=0;
-	virtual bool has_clrkey(uint)=0;
+	virtual uint get_picture(int mod, const char* fname) = 0;
    virtual void get_picture_size(uint pic, int* pw, int* ph) = 0;
 	virtual void flush_picture(uint pic)=0;
    virtual void save_pic_to_file(uint, FileWrite*)=0;
    virtual uint load_pic_from_file(FileRead*, int)=0;
    virtual uint create_surface(int w, int h) = 0;
-	virtual uint create_surface(int w, int h, RGBColor clrkey) = 0;
 	virtual void free_surface(uint pic) = 0;
 	virtual RenderTarget* get_surface_renderer(uint pic) = 0;
 
 	virtual uint get_maptexture(const char* fnametempl, uint frametime) = 0;
 	virtual void animate_maptextures(uint time) = 0;
+   virtual void reset_texture_animation_reminder( void ) = 0;
 
 	virtual void load_animations() = 0;
 	virtual int get_animation_nr_frames(uint anim) = 0;
@@ -80,7 +79,7 @@ public:
 	virtual void screenshot(const char* fname) = 0;
 	virtual const char* get_maptexture_picture (uint id) = 0;
 	// HACK: needed to load the old font
-	virtual uint get_picture(int mod, int w, int h, const ushort* data, RGBColor clrkey) = 0;
+	virtual uint get_picture(int mod, Surface* ) = 0; 
 };
 
 extern Graphic* g_gr;

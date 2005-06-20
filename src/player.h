@@ -76,7 +76,7 @@ class Player {
 		int get_buildcaps(Coords coords);
 
       // For cheating
-      void set_see_all(bool t) { m_see_all=t; }
+      void set_see_all(bool t) { m_see_all=t; m_view_changed = true; }
       bool get_see_all(void) { return m_see_all; }
       
 		// See area
@@ -84,6 +84,7 @@ class Player {
 		inline bool is_field_seen(Coords c) { if(m_see_all) return true; return seen_fields[c.y*m_egbase->get_map()->get_width() + c.x]; }
 		inline bool is_field_seen(int x, int y) { if(m_see_all) return true; return is_field_seen(Coords(x, y)); }
 		inline std::vector<bool>* get_visibility() { if(m_see_all) return 0; return &seen_fields; }
+      inline bool has_view_changed( void ) { bool t = m_view_changed; m_view_changed = false; return t; }
 
 		void set_area_seen(Coords c, uint area, bool on);
 
@@ -125,7 +126,8 @@ class Player {
 		}
 
 		Editor_Game_Base*				m_egbase;
-		int				m_type;
+		bool           m_view_changed;
+      int				m_type;
 		int				m_plnum;
 		Tribe_Descr*	m_tribe; // buildings, wares, workers, sciences
 		RGBColor			m_playercolor[4];

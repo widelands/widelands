@@ -52,16 +52,16 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Edi
    m_textarea_upper=new UITextarea(this, 105, 25, buf);
 
    UIButton* b = new UIButton(this, 30, 40, 20, 20, 0, 0);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
    b=new UIButton(this, 50, 40, 20, 20, 0, 1);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
    b=new UIButton(this, 130, 40, 20, 20, 0, 2);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
    b=new UIButton(this, 150, 40, 20, 20, 0, 3);
-   b->set_pic(g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
 
    set_inner_size(200, 115);
@@ -81,10 +81,10 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Edi
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
    b=new UIButton(this, m_set->get_x()-width-spacing, posy, width, height, 1, 4);
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b=new UIButton(this, m_set->get_x()+m_set->get_w()+spacing, posy, width, height, 1, 5);
    b->clickedid.set(this, &Editor_Tool_Noise_Height_Options_Menu::button_clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
 
    m_nht=nht;
 

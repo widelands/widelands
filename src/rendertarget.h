@@ -26,6 +26,7 @@
 #include "types.h"
 
 class Editor_Game_Base;
+class Player;
 
 /*
 class RenderTarget
@@ -64,12 +65,12 @@ public:
 	                      int srcx, int srcy, int w, int h) = 0;
 	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy) = 0;
 
-	virtual void rendermap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Point viewofs) = 0;
+	virtual void rendermap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Point viewofs, bool) = 0;
 	virtual void renderminimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Coords viewpoint, uint flags) = 0;
 
-	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const RGBColor* plrclrs) = 0;
+	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plr) = 0;
 	virtual void drawanimrect(int dstx, int dsty, uint animation, uint time,
-				const RGBColor* plrclrs, int srcx, int srcy, int w, int h) = 0;
+				const Player* plr, int srcx, int srcy, int w, int h) = 0;
 };
 
 #endif /* RENDERTARGET_H */

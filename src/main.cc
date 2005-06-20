@@ -74,8 +74,7 @@ static void g_init(int argc, char **argv)
 		// Initialize graphics
 		Section *s = g_options.pull_section("global");
 
-		Sys_InitGraphics(Sys_GetGraphicsSystemFromString(s->get_string("gfxsys", "sw32")),
-						640, 480, s->get_bool("fullscreen", false));
+      Sys_InitGraphics(640, 480, s->get_int("depth",16), s->get_bool("fullscreen", false));
 
 		// complain about unknown options in the configuration file and on the
 		// command line
@@ -110,7 +109,7 @@ Shutdown all subsystems
 static void g_shutdown()
 {
 	// Shutdown subsystems
-	Sys_InitGraphics(GFXSYS_NONE, 0, 0, false);
+	Sys_InitGraphics(0, 0, 0, false);
 
 	if (g_fh) {
 		delete g_fh;

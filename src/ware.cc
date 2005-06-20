@@ -96,9 +96,9 @@ Item_Ware_Descr::load_graphics
 */
 void Item_Ware_Descr::load_graphics()
 {
-	m_menu_pic = g_gr->get_picture(PicMod_Game, m_menu_pic_fname.c_str(), true);
-	m_pic_queue_full = g_gr->get_picture(PicMod_Game, m_pic_queue_full_fname.c_str(), true);
-	m_pic_queue_empty = g_gr->get_picture(PicMod_Game, m_pic_queue_empty_fname.c_str(), true);
+	m_menu_pic = g_gr->get_picture( PicMod_Game,  m_menu_pic_fname.c_str() );
+	m_pic_queue_full = g_gr->get_picture( PicMod_Game,  m_pic_queue_full_fname.c_str() );
+	m_pic_queue_empty = g_gr->get_picture( PicMod_Game,  m_pic_queue_empty_fname.c_str() );
 }
 
 /*

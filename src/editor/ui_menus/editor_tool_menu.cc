@@ -63,17 +63,17 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowReg
 
    int num_tools=6;
    m_radioselect=new UIRadiogroup();
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_change_height.png", true));
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_change_height.png" ));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_noise_height.png", true));
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_noise_height.png" ));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_set_terrain.png", true));
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_set_terrain.png" ));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_place_immovable.png", true));
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_place_immovable.png" ));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_place_bob.png", true));
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_place_bob.png" ));
    posx+=width+spacing;
-   m_radioselect->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/editor_menu_tool_change_resources.png", true));
+   m_radioselect->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/editor_menu_tool_change_resources.png" ));
 
    set_inner_size(offsx+(width+spacing)*num_tools, offsy+(height+spacing));
 

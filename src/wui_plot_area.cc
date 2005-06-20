@@ -88,7 +88,7 @@ WUIPlot_Area::~WUIPlot_Area( void ) {
 void WUIPlot_Area::draw(RenderTarget* dst) {
 
    // first, tile the background
-   dst->tile(0, 0, get_inner_w(), get_inner_h(), g_gr->get_picture(PicMod_Game, BG_PIC, false), 0, 0);
+   dst->tile(0, 0, get_inner_w(), get_inner_h(), g_gr->get_picture(  PicMod_Game, BG_PIC), 0,  0 );
 
    int spacing = 5;
    int space_at_bottom=15;

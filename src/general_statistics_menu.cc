@@ -113,7 +113,7 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
       
       char buffer[1024];
       sprintf(buffer, "pics/genstats_enable_plr_%02i.png", i);
-      UICheckbox* cb = new UICheckbox(this, posx, posy, g_gr->get_picture(PicMod_Game, buffer, true));
+      UICheckbox* cb = new UICheckbox(this, posx, posy, g_gr->get_picture( PicMod_Game,  buffer ));
       cb->set_size(button_size, 25);
       cb->set_id(i);
       cb->set_state(1);
@@ -128,19 +128,19 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    // Below, Radiobuttons for what to display
    m_radiogroup = new UIRadiogroup();
    button_size = ( get_inner_w()-(spacing*8) ) / 7;
-   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/genstats_landsize.png", true));
+   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/genstats_landsize.png" ));
    posx+=button_size + spacing;
-   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/genstats_nrworkers.png", true));
+   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/genstats_nrworkers.png" ));
    posx+=button_size + spacing;
-   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/genstats_nrbuildings.png", true));
+   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/genstats_nrbuildings.png" ));
    posx+=button_size + spacing;
-   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/genstats_nrwares.png", true));
+   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/genstats_nrwares.png" ));
    posx+=button_size + spacing;
-   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/genstats_productivity.png", true));
+   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/genstats_productivity.png" ));
    posx+=button_size + spacing;
-   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/genstats_kills.png", true));
+   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/genstats_kills.png" ));
    posx+=button_size + spacing;
-   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture(PicMod_Game, "pics/genstats_militarystrength.png", true));
+   m_radiogroup->add_button(this, posx, posy, g_gr->get_picture( PicMod_Game,  "pics/genstats_militarystrength.png" ));
    m_radiogroup->set_state(0);
    m_selected_information = 0;
    m_radiogroup->changedto.set(this, &General_Statistics_Menu::radiogroup_changed);
@@ -171,7 +171,7 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    posx = spacing; 
    b = new UIButton(this, posx, posy, 32, 32, 3, 100);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_FOUR_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);

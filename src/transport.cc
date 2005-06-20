@@ -1372,7 +1372,7 @@ void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point
 	int i;
 
 	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart,
-	              get_owner()->get_playercolor());
+	              get_owner());
 
 	// Draw wares
 	for(i = 0; i < m_item_filled; i++) {
@@ -1386,7 +1386,7 @@ void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point
 			warepos.y -= 6 + (i - 8) * 3;
 
 		dst->drawanim(warepos.x, warepos.y, item->get_ware_descr()->get_animation("idle"), 0,
-		              get_owner()->get_playercolor());
+		              get_owner());
 	}
 }
 

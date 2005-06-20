@@ -52,6 +52,7 @@ public:
 	~WatchWindow();
 	
 	UISignal1<Point> warp_mainview;
+   UISignal         closed;
 
 	void start_tracking(Point pos);
 	void toggle_tracking();
@@ -101,11 +102,11 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 	
 	// UIButtons
 	btn = new UIButton(this, 0, h - 34, 34, 34, 20);
-	btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png", true));
+	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_watch_follow.png" ));
 	btn->clicked.set(this, &WatchWindow::toggle_tracking);
 
 	btn = new UIButton(this, 34, h - 34, 34, 34, 21);
-	btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_goto.png", true));
+	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_goto.png" ));
 	btn->clicked.set(this, &WatchWindow::act_mainview_goto);
 	
 	if (m_single_window) {
@@ -117,7 +118,7 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 		}
 		
 		btn = new UIButton(this, w-34, h - 34, 34, 34, 22);
-		btn->set_pic(g_gr->get_picture(PicMod_UI, "pics/menu_abort.png", true));
+		btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_abort.png" ));
 		btn->clicked.set(this, &WatchWindow::close_cur_view);
 	}
 	m_mapview = new Map_View(this, 0, 0, 200, 166, parent);
@@ -225,6 +226,7 @@ void WatchWindow::show_view(bool first) {
 
 WatchWindow::~WatchWindow() {
 	g_watch_window = NULL;
+   closed.call();
 }
 
 /*
@@ -343,6 +345,9 @@ void WatchWindow::think()
 
 		m_mapview->set_viewpoint(pos - Point(m_mapview->get_w()/2, m_mapview->get_h()/2));
 	}
+
+   // make sure that the view gets updated
+   m_mapview->need_complete_redraw(); 
 }
 
 
@@ -373,12 +378,16 @@ Open a watch window.
 void show_watch_window(Interactive_Player *parent, Coords coords)
 {
 	Section *s = g_options.pull_section("global");
-	if (s->get_bool("single_watchwin",false)) {
+	WatchWindow* win;
+   if (s->get_bool("single_watchwin",false)) {
 		if (g_watch_window != NULL)
 			g_watch_window->add_view(coords);
 		else
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, coords,true);
+      win = g_watch_window;
 	}
-	else
-		new WatchWindow(parent, 250, 150, 200, 200, coords,false);
+	else 
+		win = new WatchWindow(parent, 250, 150, 200, 200, coords,false);
+   win->closed.set( parent, &Interactive_Player::need_complete_redraw);
+   
 }

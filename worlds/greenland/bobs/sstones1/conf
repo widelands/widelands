@@ -3,12 +3,6 @@ size=small
 
 [idle]
 pics=sstones1_??.bmp
-clrkey_r=0
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
 hot_spot_x=4
 hot_spot_y=4
 

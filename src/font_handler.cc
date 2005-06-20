@@ -33,6 +33,8 @@
 #include "wexception.h"
 #include "text_parser.h"
 
+// GRAPHIC_TODO: remove this include
+#include "graphic_impl.h"
 
 /*
  * Plain Constructor
@@ -389,34 +391,11 @@ SDL_Surface* Font_Handler::load_image(std::string file) {
  * Converts a SDLSurface in a widelands one
  */
 uint Font_Handler::convert_sdl_surface( SDL_Surface* surface ) {
-   int w = surface->w;
-   int h = surface->h;
-   ushort *data = (ushort*)malloc(sizeof(ushort)*w*h);
-   ushort* real_data=data;
-
-   for(int y=0; y<h; y++) {
-      for(int x=0; x<w; x++) {
-         uchar* real_pixel= ((uchar*)surface->pixels) + surface->pitch*y +  (x*surface->format->BytesPerPixel);
-
-         uchar r, g, b;
-         ulong pixel=0;
-         switch(surface->format->BytesPerPixel) {
-            case 1: pixel=*((uchar*)real_pixel);    break;
-            case 2: pixel=*((ushort*)real_pixel);    break;
-            case 4: pixel=*((ulong*)real_pixel);    break;
-         }
-
-         SDL_GetRGB(pixel, surface->format, &r, &g, &b);
-         *data=pack_rgb(r,g,b);
-         data++;
-      }
-   }
-   uchar r,g,b;
-   unpack_rgb(*real_data, &r, &g, &b);
-   RGBColor clrkey(r,g,b);
-   uint picid = g_gr->get_picture(PicMod_Font, w, h, real_data, clrkey);
-   free(real_data);
-   SDL_FreeSurface(surface);
+   Surface* surf = new Surface();
+   SDL_SetColorKey( surface, SDL_SRCCOLORKEY, SDL_MapRGB( surface->format, 0, 0, 0 )); 
+   surf->set_sdl_surface( surface );
+   
+   uint picid = g_gr->get_picture(PicMod_Font, surf );
    
    return picid;
 }

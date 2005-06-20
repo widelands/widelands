@@ -61,11 +61,13 @@ public:
 	void handle_mousemove(int x, int y, int xdiff, int ydiff, uint btns);
 
 	void track_fsel(int mx, int my);
+   inline void need_complete_redraw( void ) { m_complete_redraw_needed = true; }
 
 private:
    Interactive_Base*	m_intbase;
 	Point					m_viewpoint;
 	bool					m_dragging;
+   bool              m_complete_redraw_needed;
 };
 
 

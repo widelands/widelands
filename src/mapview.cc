@@ -18,8 +18,10 @@
  */
 
 #include "interactive_base.h"
+#include "interactive_player.h"
 #include "map.h"
 #include "mapview.h"
+#include "player.h"
 #include "rendertarget.h"
 #include "system.h"
 
@@ -36,6 +38,7 @@ Map_View::Map_View(UIPanel *parent, int x, int y, uint w, uint h, Interactive_Ba
 	m_intbase = player;
 	m_viewpoint.x = m_viewpoint.y = 0;
 	m_dragging = false;
+   m_complete_redraw_needed = true;
 }
 
 
@@ -91,7 +94,16 @@ in this function
 */
 void Map_View::draw(RenderTarget* dst)
 {
-	dst->rendermap(m_intbase->get_egbase(), m_intbase->get_visibility(), m_viewpoint);
+   // Check if the view has changed in a game
+   if( m_intbase->get_egbase()->is_game()) {
+      bool viewchanged =
+      static_cast<Interactive_Player*>(m_intbase)->get_player()->has_view_changed();
+      if( viewchanged )
+         m_complete_redraw_needed = true;
+   }
+   
+   dst->rendermap(m_intbase->get_egbase(), m_intbase->get_visibility(), m_viewpoint, m_complete_redraw_needed);
+   m_complete_redraw_needed = false;
 }
 
 
@@ -111,6 +123,8 @@ void Map_View::set_viewpoint(Point vp)
 	m_viewpoint = vp;
 
 	warpview.call(m_viewpoint.x, m_viewpoint.y);
+   
+   m_complete_redraw_needed = true;
 }
 
 /** Map_View::handle_mouseclick(uint btn, bool down, int x, int y)

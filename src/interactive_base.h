@@ -54,6 +54,7 @@ class Interactive_Base : public UIPanel {
 
       inline Map* get_map() { return m_egbase->get_map(); }
 		inline Editor_Game_Base* get_egbase() { return m_egbase; }
+      void need_complete_redraw( void );
 
 		static int get_xres();
 		static int get_yres();

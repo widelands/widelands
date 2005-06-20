@@ -278,7 +278,7 @@ FieldActionWindow::FieldActionWindow
 		char filename[30];
 		snprintf(filename, 30, "pics/workarea%icumulative.png", i);
 		workarea_cumulative_picid[i]
-			= g_gr->get_picture(PicMod_Game, filename, true);
+			= g_gr->get_picture( PicMod_Game,  filename );
 	}
 }
 
@@ -587,7 +587,7 @@ Convenience function: Adds a new tab to the main tab panel
 */
 void FieldActionWindow::add_tab(const char* picname, UIPanel* panel)
 {
-	m_tabpanel->add(g_gr->get_picture(PicMod_Game, picname, true), panel);
+	m_tabpanel->add(g_gr->get_picture(  PicMod_Game,  picname ), panel );
 }
 
 
@@ -600,7 +600,7 @@ void FieldActionWindow::add_button(UIBox* box, const char* picname, void (FieldA
 {
 	UIButton *b = new UIButton(box, 0, 0, 34, 34, 2);
 	b->clicked.set(this, fn);
-	b->set_pic(g_gr->get_picture(PicMod_Game, picname, true));
+	b->set_pic(g_gr->get_picture( PicMod_Game,  picname ));
 
 	box->add(b, UIBox::AlignTop);
 }
@@ -787,6 +787,7 @@ void FieldActionWindow::act_removeroad()
          Player* plr=road->get_owner();
          plr->bulldoze(road);
       }
+   m_iabase->need_complete_redraw();
    okdialog();
 }
 

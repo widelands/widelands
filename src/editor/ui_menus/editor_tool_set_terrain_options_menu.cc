@@ -87,44 +87,44 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
 
          // Create a surface for this
          int picw, pich;
-         g_gr->get_picture_size(g_gr->get_picture(PicMod_Game, g_gr->get_maptexture_picture(i), false), &picw, &pich);
+         g_gr->get_picture_size(g_gr->get_picture( PicMod_Game,  g_gr->get_maptexture_picture(i) ), &picw, &pich);
          uint surface=g_gr->create_surface(picw,pich);
 
          // Get the rendertarget for this
          RenderTarget* target=g_gr->get_surface_renderer(surface);
 
          // firts, blit the terrain texture
-         target->blit(0,0,g_gr->get_picture(PicMod_Game, g_gr->get_maptexture_picture(i), false));
+         target->blit(0,0,g_gr->get_picture( PicMod_Game,  g_gr->get_maptexture_picture(i) ));
 
          int small_picw, small_pich;
-         g_gr->get_picture_size(g_gr->get_picture(PicMod_Game, "pics/terrain_water.png", true), &small_picw, &small_pich);
+         g_gr->get_picture_size(g_gr->get_picture( PicMod_Game,  "pics/terrain_water.png" ), &small_picw, &small_pich);
 
          int pic_x=1;
          int pic_y=pich-small_pich-1;
 
          // Check is green
          if(ter->get_is()==0) {
-            target->blit(pic_x,pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_green.png", true));
+            target->blit(pic_x,pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_green.png" ));
             pic_x+=small_picw+1;
          }
          else if(ter->get_is()&TERRAIN_WATER) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_water.png", true));
+            target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_water.png" ));
             pic_x+=small_picw+1;
          }
          else if(ter->get_is()&TERRAIN_MOUNTAIN) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png", true));
+            target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_mountain.png" ));
             pic_x+=small_picw+1;
          }
          else if(ter->get_is()&TERRAIN_ACID) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png", true));
+            target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_dead.png" ));
             pic_x+=small_picw+1;
          }
          else if(ter->get_is()&TERRAIN_UNPASSABLE) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png", true));
+            target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_unpassable.png" ));
             pic_x+=small_picw+1;
          }
          else if(ter->get_is()&TERRAIN_DRY) {
-            target->blit(pic_x, pic_y,g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png", true));
+            target->blit(pic_x, pic_y,g_gr->get_picture( PicMod_Game,  "pics/terrain_dry.png" ));
             pic_x+=small_picw+1;
          }
 

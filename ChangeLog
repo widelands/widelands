@@ -1,3 +1,9 @@
+- Patch to fix graphic problems:
+ * Alpha instead of clrkey
+ * Fixed all bugs with MacOSx
+ * Caching landscape renderer speeds thinks up
+- Sound patch + Music
+- RTF Renderer
 - show workarea preview
 - new font renderer
 

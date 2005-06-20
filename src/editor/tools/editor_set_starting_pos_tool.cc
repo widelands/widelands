@@ -95,7 +95,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
       picsname+=static_cast<char>((m_current_player%10) + 0x30);
       picsname+="_starting_pos.png";
       int w, h;
-      int picid=g_gr->get_picture(PicMod_Game, picsname.c_str(), true);
+      int picid=g_gr->get_picture( PicMod_Game,  picsname.c_str() );
       g_gr->get_picture_size(picid, &w, &h);
 
       // check if field is valid

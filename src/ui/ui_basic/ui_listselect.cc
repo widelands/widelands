@@ -59,7 +59,7 @@ UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align 
 	m_show_check = show_check;
 	if (show_check) {
 		int pic_h;
-		m_check_picid = g_gr->get_picture(PicMod_Game, "pics/list_selected.png", true);
+		m_check_picid = g_gr->get_picture( PicMod_Game,  "pics/list_selected.png" );
 		g_gr->get_picture_size(m_check_picid, &m_max_pic_width, &pic_h);
 		if (pic_h > m_lineheight)
 			m_lineheight = pic_h;

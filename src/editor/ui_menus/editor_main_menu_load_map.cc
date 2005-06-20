@@ -218,7 +218,7 @@ void Main_Menu_Load_Map::fill_list(void) {
       strcpy(buffer1,buffer);
       FS_CanonicalizeName(buffer1, sizeof(buffer1), buffer);
       m_parentdir=buffer1;
-      m_ls->add_entry("<parent>", reinterpret_cast<void*>(const_cast<char*>(m_parentdir.c_str())), false, g_gr->get_picture(PicMod_Game, "pics/ls_dir.png", true));
+      m_ls->add_entry("<parent>", reinterpret_cast<void*>(const_cast<char*>(m_parentdir.c_str())), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
 
    for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
@@ -228,7 +228,7 @@ void Main_Menu_Load_Map::fill_list(void) {
       if(!strcmp(FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
       if(!g_fs->IsDirectory(name)) continue;
 
-      m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture(PicMod_Game, "pics/ls_dir.png", true));
+      m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
   
    Map* map=new Map();
@@ -246,7 +246,7 @@ void Main_Menu_Load_Map::fill_list(void) {
             case Map_Loader::WLML: pic="pics/ls_wlmap.png"; break;
             case Map_Loader::S2ML: pic="pics/ls_s2map.png"; break;
          }
-         m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture(PicMod_Game, pic.c_str(), true));
+         m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  pic.c_str() ));
       } catch(wexception& ) {
          // we simply skip illegal entries
       }
@@ -305,7 +305,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 
          if(fc.x==-1 && fc.y==-1) continue;
          int w, h;
-         int picid=g_gr->get_picture(PicMod_Game, text.c_str(), true);
+         int picid=g_gr->get_picture( PicMod_Game,  text.c_str() );
          g_gr->get_picture_size(picid, &w, &h);
          // only register, when theres no building there
          BaseImmovable* imm = m_parent->get_map()->get_field(fc)->get_immovable();
@@ -327,7 +327,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
             if(amount)
                immname = m_parent->get_editor()->get_map()->get_world()->get_resource(res)->get_editor_pic(amount);
             if(immname!="") {
-               int picid=g_gr->get_picture(PicMod_Game, immname.c_str(), true);
+               int picid=g_gr->get_picture( PicMod_Game,  immname.c_str() );
                m_parent->get_map()->get_overlay_manager()->register_overlay(Coords(x,y),picid,4);
             }
          }

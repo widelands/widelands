@@ -221,7 +221,7 @@ void Building_Descr::load_graphics()
 {
 	if (m_buildicon_fname)
 		m_buildicon =
-			g_gr->get_picture(PicMod_Game, m_buildicon_fname, true);
+			g_gr->get_picture(PicMod_Game, m_buildicon_fname);
 }
 
 /*
@@ -713,7 +713,7 @@ void Building::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords,
 		return; // draw big buildings only once
 
 	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart,
-		get_owner()->get_playercolor());
+		get_owner());
 
 	// door animation?
 

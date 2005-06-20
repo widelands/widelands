@@ -52,17 +52,17 @@ UIScrollbar::UIScrollbar(UIPanel *parent, int x, int y, uint w, uint h, bool hor
 
 	if (m_horizontal)
 	{
-		m_pic_minus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png", true);
-		m_pic_plus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png", true);
+		m_pic_minus = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" );
+		m_pic_plus = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" );
 	}
 	else
 	{
-		m_pic_minus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png", true);
-		m_pic_plus = g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png", true);
+		m_pic_minus = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" );
+		m_pic_plus = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" );
 	}
 
-	m_pic_background = g_gr->get_picture(PicMod_UI, "pics/scrollbar_background.png", false);
-	m_pic_buttons = g_gr->get_picture(PicMod_UI, "pics/but3.png", false);
+	m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/scrollbar_background.png" );
+	m_pic_buttons = g_gr->get_picture( PicMod_UI,  "pics/but3.png" );
 
 	m_time_nextact = 0;
    m_force_draw = false;

@@ -75,7 +75,6 @@ static struct {
 	int		mouse_internal_compy;
 
 	// Graphics
-	int		gfx_system;
 	int		gfx_w;
 	int		gfx_h;
 	bool		gfx_fullscreen;
@@ -265,9 +264,6 @@ void Sys_Init()
 		SDL_EnableUNICODE(1); // useful for e.g. chat messages
 		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-		// Graphics
-		sys.gfx_system = GFXSYS_NONE;
-
 		// Sound
 		SDL_InitSubSystem(SDL_INIT_AUDIO);
 		if ( Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024) == -1 )
@@ -307,7 +303,7 @@ void Sys_Shutdown()
 	if (g_gr)
 		{
 		log("Sys_Shutdown: graphics system not shut down\n");
-		Sys_InitGraphics(GFXSYS_NONE, 0, 0, false);
+		Sys_InitGraphics(0, 0, 0, false);
 		}
 
 	SDL_Quit();
@@ -893,11 +889,10 @@ Note: Because of the way pictures are handled now, this function must not be
       called while UI elements are active.
 ===============
 */
-Graphic* SW16_CreateGraphics(int w, int h, bool fullscreen);
-Graphic* SW32_CreateGraphics(int w, int h, bool fullscreen);
-void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
+Graphic* SW16_CreateGraphics(int w, int h, int bpp, bool fullscreen);
+void Sys_InitGraphics(int w, int h, int bpp, bool fullscreen)
 {
-	if (system == sys.gfx_system && w == sys.gfx_w && h == sys.gfx_h && fullscreen == sys.gfx_fullscreen)
+	if (w == sys.gfx_w && h == sys.gfx_h && fullscreen == sys.gfx_fullscreen)
 		return;
 
 	if (g_gr)
@@ -906,53 +901,17 @@ void Sys_InitGraphics(int system, int w, int h, bool fullscreen)
 		g_gr = 0;
 		}
 
-	sys.gfx_system = system;
 	sys.gfx_w = w;
 	sys.gfx_h = h;
 	sys.gfx_fullscreen = fullscreen;
 
-	switch(system)
-		{
-		case GFXSYS_SW16:
-			g_gr = SW16_CreateGraphics(w, h, fullscreen);
-			break;
-
-		case GFXSYS_SW32:
-			g_gr = SW32_CreateGraphics(w, h, fullscreen);
-			break;
-		}
-
-	Sys_SetMaxMouseCoords(w, h);
+   // If we are not to be shut down
+   if( w && h ) {
+      g_gr = SW16_CreateGraphics(w, h, bpp, fullscreen);
+      Sys_SetMaxMouseCoords(w, h);
+   }
 }
 
-
-/*
-===============
-Sys_GetGraphicsSystem
-
-Return the currently selected graphics system.
-===============
-*/
-int Sys_GetGraphicsSystem()
-{
-	return sys.gfx_system;
-}
-
-
-/*
-===============
-Sys_GetGraphicsSystemFromString
-
-Get the graphics system that corresponds to the given string.
-===============
-*/
-int Sys_GetGraphicsSystemFromString(std::string str)
-{
-	if (str == "sw16")
-		return GFXSYS_SW16;
-
-	return GFXSYS_SW32;
-}
 
 #ifdef DEBUG
 #include <signal.h>

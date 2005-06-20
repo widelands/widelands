@@ -86,12 +86,12 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
    new UITextarea(this, posx, posy, get_inner_w()/4, 24, "Owned: ", Align_CenterLeft);
    m_owned = new UITextarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
    UIButton* b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 0, 0);
-   b->set_pic( g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png", true));
+   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    m_btn[0] = b;
    b = new UIButton(this, get_inner_w()-29, posy, 24, 24, 0, 1);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   b->set_pic( g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png", true));
+   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
    m_btn[1] = b;
    posy += 25;
 
@@ -99,31 +99,31 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
    new UITextarea(this, posx, posy, get_inner_w()/4, 24, "In Build: ", Align_CenterLeft);
    m_build = new UITextarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
    b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 0, 2);
-   b->set_pic( g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png", true));
+   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    m_btn[2] = b;
    b = new UIButton(this, get_inner_w()-29, posy, 24, 24, 0, 3);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    m_btn[3] = b;
-   b->set_pic( g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png", true));
+   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
    posy += 25;
 
    // Jump to unproductive
    new UITextarea(this, posx, posy, get_inner_w()/4, 24, "Jump to unproductive: ", Align_CenterLeft);
    b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 0, 4);
-   b->set_pic( g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png", true));
+   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    m_btn[4] = b;
    b = new UIButton(this, get_inner_w()-29, posy, 24, 24, 0, 5);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   b->set_pic( g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png", true));
+   b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_right.png" ));
    m_btn[5] = b;
    posy += 25;
 
    // TODO: help button
    b = new UIButton(this, spacing, get_inner_w()-37, 32, 32, 3, 100);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
-   b->set_pic(g_gr->get_picture(PicMod_Game, "pics/menu_help.png", true));
+   b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
  
    m_lastupdate = m_parent->get_game()->get_gametime();
    m_anim = 0;

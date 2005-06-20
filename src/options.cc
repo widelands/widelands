@@ -124,7 +124,7 @@ static bool parse_command_line(int argc, char** argv)
 			init_double_game ();
 			continue;
 		}
-#endif DEBUG
+#endif // DEBUG
 
 		value = strchr(opt, '=');
 		if (!value) {
