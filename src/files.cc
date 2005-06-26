@@ -32,6 +32,7 @@
 #include "zip_filesystem.h"
 
 #ifdef _WIN32
+  #include <windows.h>
   #include <io.h>
   #define stat _stat
 #else
@@ -880,7 +881,6 @@ void RealFSImpl::Unlink(std::string file) {
  * remove directory or file
  */
 void RealFSImpl::m_unlink_file( std::string file ) {
-   log("Unlinking file %s\n", file.c_str());
    assert( FileExists( file ));
    assert(!IsDirectory( file ));
    
@@ -892,7 +892,11 @@ void RealFSImpl::m_unlink_file( std::string file ) {
 
 	fullname = m_directory + '/' + canonical;
 
+#ifndef __WIN32__
    unlink( fullname.c_str());
+#else
+   DeleteFile( fullname.c_str() );
+#endif
 }
 
 void RealFSImpl::m_unlink_directory( std::string file ) {
@@ -904,8 +908,13 @@ void RealFSImpl::m_unlink_directory( std::string file ) {
    FindFiles( file, "*", &files );
    
    for(filenameset_t::iterator pname = files.begin(); pname != files.end(); pname++) {
-      if( *pname == "CVS" ) // HACK: ignore CVS directory for this might be a campaign directory or similar
+	   std::string filename = FS_Filename( (*pname).c_str());
+	if( filename == "CVS" ) // HACK: ignore CVS directory for this might be a campaign directory or similar
          continue;
+	if( filename == ".." )
+	 continue;
+	if( filename == "." )
+	 continue;
 
       if( IsDirectory( *pname ) )
          m_unlink_directory( *pname );
@@ -922,8 +931,11 @@ void RealFSImpl::m_unlink_directory( std::string file ) {
 		return;
 
 	fullname = m_directory + '/' + canonical;
-
+#ifndef __WIN32__
    rmdir( fullname.c_str() );
+#else
+   RemoveDirectory( fullname.c_str());
+#endif
 }
 
 /*

@@ -72,6 +72,7 @@ Widelands_Map_Loader::Widelands_Map_Loader(FileSystem* fs, Map* map) :
 Widelands_Map_Loader::~Widelands_Map_Loader(void) {
    if(m_mol)
       delete m_mol;
+   delete m_fs;
 }
 
 /*
