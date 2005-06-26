@@ -20,6 +20,7 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include "types.h"
 #include <vector>
 
 class Profile;

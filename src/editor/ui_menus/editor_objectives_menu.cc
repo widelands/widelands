@@ -37,6 +37,7 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "ui_listselect.h"
+#include "unicode.h"
 #include "util.h"
 
 /*

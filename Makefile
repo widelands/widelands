@@ -141,7 +141,7 @@ endif
 OBJECT_DIR:=src/$(TARGET)-$(BUILD)
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
-LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net
+LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lz -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net
 
 ##############################################################################
 # Building

@@ -246,7 +246,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    }
 
    // Make a filesystem out of this
-   FileSystem* fs;
+   FileSystem* fs = 0;
    if( !binary ) {
       fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_DIR );
    } else {

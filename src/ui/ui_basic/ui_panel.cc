@@ -25,7 +25,9 @@
 #include "ui_panel.h"
 
 #ifdef DEBUG
+#ifndef __WIN32__
 void yield_double_game ();
+#endif
 #endif
 
 /*
@@ -176,7 +178,9 @@ int UIPanel::run()
 			check_child_death();
 
 #ifdef DEBUG
+#ifndef __WIN32__
 		yield_double_game ();
+#endif
 #endif
 	}
 	g_gr->update_fullscreen();

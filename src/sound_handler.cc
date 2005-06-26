@@ -211,7 +211,7 @@ void Sound_Handler::load_song(const string dir, const string basename)
 void Sound_Handler::load_one_song(const string filename, const string songset_name)
 {
 	FileRead* fr;
-	Mix_Music* m;
+	Mix_Music* m = 0;
 	SDL_RWops* rwops;			
 	
 	fr=new FileRead();
@@ -219,7 +219,11 @@ void Sound_Handler::load_one_song(const string filename, const string songset_na
 	
 	rwops=SDL_RWFromMem(fr->Data(0), fr->GetSize());
 
+#ifdef __WIN32__
+#warning Mix_LoadMUS_RW is not available under windows!!!
+#else
 	m=Mix_LoadMUS_RW(rwops); //TODO: SDL_mixer does not(??) free this RWop itself???
+#endif
 		
 	if (m) {
 		//make sure the required Songset exists

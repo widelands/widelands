@@ -66,7 +66,9 @@ static void show_usage(void)
 " --nozip          Do not save files as binary zip archives.\n"
 "\n"
 #ifdef DEBUG
+#ifndef __WIN32__
 " --double         Start the game twice (for localhost network testing)\n\n"
+#endif
 #endif
 " --help           Show this help\n"
 " --version        Show version\n"
@@ -127,10 +129,12 @@ static bool parse_command_line(int argc, char** argv)
 
 
 #ifdef DEBUG
+#ifndef __WIN32__
 		if (!strcmp(opt, "double")) {
 			init_double_game ();
 			continue;
 		}
+#endif // __WIN32__
 #endif // DEBUG
 
 		value = strchr(opt, '=');

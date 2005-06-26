@@ -19,6 +19,7 @@
 
 #include <queue>
 #include <typeinfo>
+#include <algorithm>
 #include "error.h"
 #include "map.h"
 #include "transport.h"
@@ -749,7 +750,7 @@ bool Computer_Player::improve_roads (Flag* flag)
 	    }
 	}
 	
-	sort (nearflags.begin(), nearflags.end(), CompareDistance());
+	std::sort (nearflags.begin(), nearflags.end(), CompareDistance());
 
 	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
 	

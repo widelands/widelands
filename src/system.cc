@@ -918,7 +918,8 @@ void Sys_InitGraphics(int w, int h, int bpp, bool fullscreen)
 }
 
 
-#ifdef DEBUG
+#ifdef DEBUG 
+#ifndef __WIN32__
 #include <signal.h>
 
 static int pid_me=0, pid_peer=0;
@@ -975,6 +976,6 @@ void init_double_game ()
 	
 	atexit (quit_handler);
 }
-
-#endif
+#endif // WIN32
+#endif // DEBUG
 

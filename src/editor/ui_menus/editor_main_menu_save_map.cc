@@ -343,7 +343,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       g_fs->Unlink( complete_filename );
    }
 
-   FileSystem* fs ;
+   FileSystem* fs = 0;
    if( !binary ) {
    // Make a filesystem out of this
       fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_DIR );
