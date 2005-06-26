@@ -36,8 +36,8 @@ class Game_Map_Data_Packet : public Game_Data_Packet {
       Game_Map_Data_Packet(void) { m_mos = 0; m_mol = 0; m_wms = 0; m_wml = 0; }
       virtual ~Game_Map_Data_Packet();
 
-      virtual void Read(FileRead*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
-      virtual void Write(FileWrite*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
+      virtual void Read(FileSystem*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
+      virtual void Write(FileSystem*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
    
       inline Widelands_Map_Map_Object_Saver* get_map_object_saver(void) { return m_mos; }
       inline Widelands_Map_Map_Object_Loader* get_map_object_loader(void) { return m_mol; }

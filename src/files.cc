@@ -29,6 +29,7 @@
 #include "errno.h"
 #include "error.h"
 #include "filesystem.h"
+#include "zip_filesystem.h"
 
 #ifdef _WIN32
   #include <io.h>
@@ -350,6 +351,41 @@ char *FileRead::CString(int pos)
 	return string;
 }
 
+/*
+==============
+FileRead::WCString
+
+Read a zero-terminated string from the file
+==============
+*/
+wchar_t *FileRead::WCString(int pos)
+{
+	log( "TODO: FileRead::WCString is untested!\n");
+   wchar_t *string, *p;
+	int i;
+
+	assert(data);
+
+	i = pos;
+	if (pos < 0)
+		i = filepos;
+	if (i >= length)
+		throw wexception("File boundary exceeded");
+
+	string = (wchar_t*) ((char*)data + i);
+	for(p = string; *p; p++, i+= sizeof( wchar_t) ) ;
+	i+= sizeof( wchar_t ); // beyond the NUL
+
+	if (i > length)
+		throw wexception("File boundary exceeded");
+
+	if (pos < 0)
+		filepos = i;
+
+	return string;
+}
+
+
 /** FileRead::ReadLine(char *buf, int buflen)
  *
  * Reads a line from the file into the buffer.
@@ -610,6 +646,10 @@ class RealFSImpl : public FileSystem {
 private:
 	std::string m_directory;
 
+private:
+   void m_unlink_directory( std::string file );
+   void m_unlink_file( std::string file );
+
 public:
 	RealFSImpl(std::string sDirectory);
 	~RealFSImpl();
@@ -625,6 +665,10 @@ public:
 
 	virtual void *Load(std::string fname, int *length);
 	virtual void Write(std::string fname, void *data, int length);
+   
+   virtual FileSystem* MakeSubFileSystem( std::string dirname );
+   virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
+   virtual void Unlink(std::string file);
 };
 
 /** RealFSImpl::RealFSImpl(const char *pszDirectory)
@@ -775,6 +819,114 @@ bool RealFSImpl::IsDirectory(std::string path)
 }
 
 /*
+ * Create a sub filesystem out of this filesystem
+ */
+FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
+   assert( FileExists( path ));
+   char canonical[256];
+   std::string fullname;
+
+   if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
+      return false;
+
+   fullname = m_directory + '/' + canonical;
+
+   if( IsDirectory( path )) {
+      return new RealFSImpl( fullname ); 
+   } else {
+      FileSystem* s =  new ZipFilesystem( fullname );
+      return s;
+   }
+}
+
+/*
+ * Create a sub filesystem out of this filesystem
+ */
+FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
+   if( FileExists( path )) 
+      throw wexception( "Path %s already exists. Can't create a filesystem from it!\n", path.c_str()); 
+   
+   char canonical[256];
+   std::string fullname;
+
+   if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
+      return false;
+
+   fullname = m_directory + '/' + canonical;
+
+   if( fs == FileSystem::FS_DIR ) {
+      EnsureDirectoryExists( path );
+      return new RealFSImpl( fullname ); 
+   } else {
+      FileSystem* s =  new ZipFilesystem( fullname );
+      return s;
+   }
+}
+    
+/*
+ * Remove a number of files
+ */
+void RealFSImpl::Unlink(std::string file) {
+   if( !FileExists( file ))
+      return;
+
+   if(IsDirectory( file ))
+      m_unlink_directory( file );
+   else
+      m_unlink_file( file );
+}
+
+/*
+ * remove directory or file
+ */
+void RealFSImpl::m_unlink_file( std::string file ) {
+   log("Unlinking file %s\n", file.c_str());
+   assert( FileExists( file ));
+   assert(!IsDirectory( file ));
+   
+   char canonical[256];
+	std::string fullname;
+
+	if (!FS_CanonicalizeName(canonical, sizeof(canonical), file.c_str()))
+		return;
+
+	fullname = m_directory + '/' + canonical;
+
+   unlink( fullname.c_str());
+}
+
+void RealFSImpl::m_unlink_directory( std::string file ) {
+   assert( FileExists( file ));
+   assert( IsDirectory( file ));
+
+   filenameset_t files;
+   
+   FindFiles( file, "*", &files );
+   
+   for(filenameset_t::iterator pname = files.begin(); pname != files.end(); pname++) {
+      if( *pname == "CVS" ) // HACK: ignore CVS directory for this might be a campaign directory or similar
+         continue;
+
+      if( IsDirectory( *pname ) )
+         m_unlink_directory( *pname );
+      else
+         m_unlink_file( *pname );
+   }
+
+   // NOTE: this might fail if this directory contains CVS dir,
+   // so no error checking here
+   char canonical[256];
+	std::string fullname;
+
+	if (!FS_CanonicalizeName(canonical, sizeof(canonical), file.c_str()))
+		return;
+
+	fullname = m_directory + '/' + canonical;
+
+   rmdir( fullname.c_str() );
+}
+
+/*
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
@@ -910,7 +1062,7 @@ void RealFSImpl::Write(std::string fname, void *data, int length)
 
 /*
 ===============
-RealFSImpl::CreateFromDirectory [static]
+FileSystem::CreateFromDirectory [static]
 
 Create a filesystem to access the given directory as served by the OS
 ===============
@@ -919,6 +1071,19 @@ FileSystem *FileSystem::CreateFromDirectory(std::string directory)
 {
 	return new RealFSImpl(directory);
 }
+
+/*
+===============
+FileSystem::CreateFromZip [static]
+
+Create a filesystem from a zip file 
+===============
+*/
+FileSystem *FileSystem::CreateFromZip(std::string filename)
+{
+	return new ZipFilesystem( filename );
+}
+
 
 /*
 ==============================================================================
@@ -947,6 +1112,10 @@ public:
 
 	virtual void *Load(std::string fname, int *length);
 	virtual void Write(std::string fname, void *data, int length);
+   
+   virtual FileSystem* MakeSubFileSystem( std::string dirname );
+   virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
+   virtual void Unlink(std::string file);
 
 private:
 	typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;
@@ -1135,6 +1304,55 @@ void LayeredFSImpl::EnsureDirectoryExists(std::string dirname) {
 	}
 
 	throw wexception("LayeredFSImpl: No writable filesystem!");
+}
+
+/*
+ * Create a subfilesystem from this directory
+ */
+FileSystem* LayeredFSImpl::MakeSubFileSystem(std::string dirname ) {
+	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+		if (!(*it)->IsWritable())
+			continue;
+      
+      if(! (*it)->FileExists(dirname)) 
+         continue;
+      
+      return (*it)->MakeSubFileSystem(dirname);
+	}
+
+	throw wexception("LayeredFSImpl: Wasn't able to create sub filesystem!");
+}
+
+/*
+ * Create a new subfilesystem 
+ */
+FileSystem* LayeredFSImpl::CreateSubFileSystem(std::string dirname, Type type ) {
+	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+		if (!(*it)->IsWritable())
+			continue;
+     
+      return (*it)->CreateSubFileSystem( dirname, type );
+	}
+
+	throw wexception("LayeredFSImpl: Wasn't able to create sub filesystem!");
+}
+    
+/*
+ * Remove this file or directory. If it is a directory, remove it recursivly
+ */
+void LayeredFSImpl::Unlink( std::string file ) { 
+  if( !FileExists( file ))
+     return;
+  
+   for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
+		if (!(*it)->IsWritable())
+			continue;
+		if (!(*it)->FileExists(file))
+         continue;
+
+		(*it)->Unlink(file);
+		return;
+	}
 }
 
 /** LayeredFileSystem::Create

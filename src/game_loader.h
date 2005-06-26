@@ -24,7 +24,7 @@
 #include "wexception.h"
 
 class Game;
-class FileRead;
+class FileSystem;
 class Widelands_Map_Map_Object_Loader;
 
 class Game_Preload_Data_Packet;
@@ -35,14 +35,14 @@ class Game_Preload_Data_Packet;
  */
 class Game_Loader {
    public:
-      Game_Loader(const char* filename, Game* game);
+      Game_Loader(FileSystem*, Game* game);
       ~Game_Loader(void);
 
       int preload_game(Game_Preload_Data_Packet*);
       int load_game(void);
-      
+     
    private:
-      std::string m_filename;
+      FileSystem* m_fs;
       Game* m_game;
 };
 

@@ -21,14 +21,13 @@
 #define __S__TRIGGER_H
 
 #include <string>
+#include <map>
 #include "error.h"
-#include "cmd_queue.h"
-#include "queue_cmd_ids.h"
 
 class Game;
-class FileRead;
-class FileWrite;
+class Section;
 class Editor_Game_Base;
+class TriggerReferencer;
 
 /*
  * A trigger is a switch for events. Each event can register
@@ -36,63 +35,42 @@ class Editor_Game_Base;
  * the event runs.
  */
 class Trigger {
+   friend class Widelands_Map_Trigger_Data_Packet;
+
    public:
-      Trigger(void) { m_reference=0; };
+      Trigger(void) { } 
       virtual ~Trigger(void) { }
 
       // virtual functions, implemented by the real triggers
-      virtual void check_set_conditions(Game*)=0;
-      virtual uint get_id(void)=0; // this function is needed to recreate the correct option window
+      virtual void check_set_conditions(Game*) = 0;
+      virtual const char* get_id(void) = 0; // this function is needed to recreate the correct option window
 
       // Toggle the triggers state (if it isn't a one timer)
       // and give it a chance to reinitialize
-      virtual void reset_trigger(Game*)=0;
+      virtual void reset_trigger( Game* ) = 0;
 
       // Functions needed by all
-      void set_name(const char* name) { m_name=name; }
-      void set_name(std::string name) { m_name=name; }
-      inline const char* get_name() { return m_name.c_str(); }
+      void set_name(const wchar_t* name) { m_name=name; }
+      inline const wchar_t* get_name() { return m_name.c_str(); }
       inline bool is_set(void) { return m_is_set; }
-      inline bool is_one_time_trigger(void)  { return m_is_one_time_trigger; }
-      inline void set_is_one_time_trigger(bool t) { m_is_one_time_trigger=t; }
-      inline void incr_reference(void) { ++m_reference; }
-      inline void decr_reference(void) { --m_reference; assert(m_reference>=0); }
-      inline bool is_unreferenced(void) { return !m_reference; }
 
       // File functions, to save or load this trigger
-      virtual void Write(FileWrite*)=0;
-      virtual void Read(FileRead*, Editor_Game_Base*)=0;
+      virtual void Write(Section*) = 0;
+      virtual void Read(Section*, Editor_Game_Base*) = 0;
 
-      
-
+      // Reference this event
+      void reference( TriggerReferencer* ref );
+      void unreference( TriggerReferencer* ref);
+      inline const std::map<TriggerReferencer*,uint>& get_referencers( void ) { return m_referencers; }
 
    protected:
       // This is only for child classes to toggle the trigger
       inline void set_trigger(bool t) { m_is_set=t; }
 
    private:
-      std::string m_name;
-      bool        m_is_set;
-      bool        m_is_one_time_trigger;    // Can this trigger occur only once?
-      int         m_reference;
-};
-
-class Cmd_CheckTrigger:public BaseCommand {
-    private:
-	int trigger_id;
-
-    public:
-   Cmd_CheckTrigger(void) : BaseCommand(0) { } // For savegame loading
-	Cmd_CheckTrigger (int, int);
-      
-   // Write these commands to a file (for savegames)
-   virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
-   virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
-
-   virtual int get_id(void) { return QUEUE_CMD_CHECK_TRIGGER; } // Get this command id
-
-	
-	virtual void execute (Game*);
+      std::wstring                m_name;
+      bool                        m_is_set;
+      std::map<TriggerReferencer*,uint> m_referencers;
 };
 
 #endif

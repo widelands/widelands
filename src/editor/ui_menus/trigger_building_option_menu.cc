@@ -33,6 +33,7 @@
 #include "editor.h"
 #include "player.h"
 #include "tribe.h"
+#include "util.h"
 
 Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* parent, Trigger_Building* trigger) :
    UIWindow(parent, 0, 0, 180, 280, "Trigger Option Menu") {
@@ -66,7 +67,7 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
          Building_Descr* b=tribe->get_building_descr(i);
          if(!b->get_buildable() && !b->get_enhanced_building()) continue;
          std::string name=b->get_name();
-         std::string trig_name=m_trigger->get_building();
+         std::string trig_name= narrow_string( m_trigger->get_building());
          if(name==trig_name) m_building=m_buildings.size();
          m_buildings.push_back(name);
       }
@@ -75,7 +76,7 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
    // Name editbox
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text(trigger->get_name());
+   m_name->set_text( narrow_string(trigger->get_name()).c_str() );
    posy+=20+spacing;
 
    // Player
@@ -242,7 +243,7 @@ void Trigger_Building_Option_Menu::clicked(int i) {
          {
             // ok button
             if(m_name->get_text())
-               m_trigger->set_name(m_name->get_text());
+               m_trigger->set_name( widen_string( m_name->get_text()).c_str() );
             m_trigger->set_coords(Coords(m_x,m_y));
             if(m_trigger->get_player()!=m_player && m_trigger->get_player()!=-1) 
                m_parent->unreference_player_tribe(m_trigger->get_player(), m_trigger);
@@ -251,7 +252,7 @@ void Trigger_Building_Option_Menu::clicked(int i) {
                m_parent->reference_player_tribe(m_player, m_trigger);
             }
             m_trigger->set_area(m_area);
-            m_trigger->set_building(m_buildings[m_building].c_str());
+            m_trigger->set_building( widen_string( m_buildings[m_building]).c_str());
             m_trigger->set_building_count(m_count);
             m_parent->set_need_save(true);
             end_modal(1);

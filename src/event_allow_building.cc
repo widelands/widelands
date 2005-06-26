@@ -33,8 +33,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Allow_Building::Event_Allow_Building(void) {
-   set_name("Allow Building");
-   set_is_one_time_event(true);
+   set_name(L"Allow Building");
    set_player(0);
    set_building("<undefined>");
    set_allow(true);
@@ -44,43 +43,26 @@ Event_Allow_Building::~Event_Allow_Building(void) {
 }
 
 /*
- * cleanup()
- */
-void Event_Allow_Building::cleanup(Editor_Game_Base* g) {
-   // Nothing todo
-   Event::cleanup(g);
-}
-
-/*
  * reinitialize
  */
 void Event_Allow_Building::reinitialize(Game* g) {
-   if(is_one_time_event()) {
-      cleanup(g); // Also calls event cleanup
-   } else {
-      Event::reinitialize(g);
-   }
 }
 
 /*
  * File Read, File Write
  */
-void Event_Allow_Building::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) {
-   int version=fr->Unsigned16();
-   if(version <= EVENT_VERSION) {
-      set_name(fr->CString());
-      set_is_one_time_event(fr->Unsigned8());
-      int player=fr->Signed8();
+void Event_Allow_Building::Read(Section* s, Editor_Game_Base* egbase) {
+   int version = s->get_safe_int("version");
+
+   if(version == EVENT_VERSION) {
+      int player= s->get_safe_int( "player" );
       set_player(player);
-      set_building(fr->CString());
-      set_allow(fr->Unsigned8());
-      read_triggers(fr,egbase, skip);
+      set_building( s->get_safe_string("building") );
+      set_allow( s->get_safe_bool("allow"));
+      
       if(player<=0 || player>egbase->get_map()->get_nrplayers() || m_building=="<undefined>") {
-         // we're not configured and can't jump. delete us
-         // but give a warning
+         // give a warning
          log("Conquer Area Event with illegal player orbuilding name: (Player: %i, Building: %s) deleted!\n", m_player, m_building.c_str());
-         set_is_one_time_event(true);
-         cleanup(egbase);
       }
       if(!egbase->is_game()) 
          static_cast<Editor_Interactive*>(egbase->get_iabase())->reference_player_tribe(player, this);
@@ -89,39 +71,26 @@ void Event_Allow_Building::Read(FileRead* fr, Editor_Game_Base* egbase, bool ski
    throw wexception("Allow Building Event with unknown/unhandled version %i in map!\n", version);
 }
 
-void Event_Allow_Building::Write(FileWrite* fw, Editor_Game_Base *egbase) {
-   // First of all the id
-   fw->Unsigned16(get_id());
-
+void Event_Allow_Building::Write(Section* s, Editor_Game_Base *egbase) {
    // Now the version
-   fw->Unsigned16(EVENT_VERSION);
-
-   // Name
-   fw->Data(get_name(), strlen(get_name()));
-   fw->Unsigned8('\0');
-
-   // triggers only once?
-   fw->Unsigned8(is_one_time_event());
+   s->set_int("version", EVENT_VERSION);
 
    // Player
-   fw->Signed8(get_player());
+   s->set_int("player", get_player());
    
    // Building name
-   fw->Data(m_building.c_str(), m_building.size());
-   fw->Unsigned8('\0');
+   s->set_string("building", m_building.c_str());
    
    // Allow or disallow 
-   fw->Unsigned8(m_allow);
+   s->set_bool("allow", m_allow );
 
-   // Write all trigger ids
-   write_triggers(fw, egbase);
    // done
 }
 
 /*
  * run the event
  */
-void Event_Allow_Building::run(Game* game) {
+Event::State Event_Allow_Building::run(Game* game) {
    assert(m_player>0 && m_player<=game->get_map()->get_nrplayers());
 
    Player* plr=game->get_player(m_player);
@@ -135,9 +104,8 @@ void Event_Allow_Building::run(Game* game) {
 
    plr->allow_building(index, m_allow);
 
-   // If this is a one timer, release our triggers
-   // and forget about us
-   reinitialize(game);
+   m_state = DONE;
+   return m_state;
 }
 
 

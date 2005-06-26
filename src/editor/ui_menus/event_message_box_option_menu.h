@@ -58,11 +58,10 @@ class Event_Message_Box_Option_Menu : public UIWindow {
       Editor_Interactive* m_parent;
 
       struct Button_Descr {
-         std::string name;
+         std::wstring name;
          int trigger;
       } m_buttons[MAX_BUTTONS];
 
-      UICheckbox* m_is_one_time_event;
       UICheckbox* m_is_modal;
       UIEdit_Box* m_caption;
       UIEdit_Box* m_name;

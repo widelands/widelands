@@ -24,13 +24,13 @@
 #include "map_loader.h"
 #include "map.h"
 
-class FileRead;
+class FileSystem;
 class Editor_Game_Base;
+class Widelands_Map_Map_Object_Loader;
 
 class Widelands_Map_Loader : public Map_Loader {
    public:
-      Widelands_Map_Loader(const char* file, Map* map);
-      Widelands_Map_Loader(FileRead*, Map*);
+      Widelands_Map_Loader(FileSystem*, Map*);
       virtual ~Widelands_Map_Loader(void);
 
       virtual int get_type(void) { return Map_Loader::WLML; }
@@ -40,8 +40,14 @@ class Widelands_Map_Loader : public Map_Loader {
 
       inline Widelands_Map_Map_Object_Loader* get_map_object_loader(void) { return m_mol; }
 
+      static bool is_widelands_map( std::string filename ) {
+         if( !strcasecmp( &filename.c_str()[filename.size()-4], WLMF_SUFFIX)) 
+            return true;
+         return false;
+      }
+         
    private:
-      FileRead* m_fr;
+      FileSystem* m_fs;
       std::string m_filename;
       Widelands_Map_Map_Object_Loader* m_mol;
 };

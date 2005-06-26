@@ -20,7 +20,6 @@
 #ifndef __S__TRIGGER_TIME_H
 #define __S__TRIGGER_TIME_H
 
-#include "trigger_ids.h"
 #include "trigger.h"
 
 /*
@@ -33,14 +32,14 @@ class Trigger_Time : public Trigger {
       ~Trigger_Time();
 
       // one liner functions
-      uint get_id(void) { return TRIGGER_TIME; }
+      const char* get_id(void) { return "time"; }
 
       void check_set_conditions(Game*);
       void reset_trigger(Game*);
 
       // File Functions
-      void Write(FileWrite*);
-      void Read(FileRead*, Editor_Game_Base*);
+      void Write(Section*);
+      void Read(Section*, Editor_Game_Base*);
 
       inline void set_wait_time(int i) { m_wait_time=i; }
       inline void set_last_start_time(int i) { m_last_start_time = i; }

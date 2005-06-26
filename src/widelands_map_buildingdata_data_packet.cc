@@ -59,21 +59,24 @@ Widelands_Map_Buildingdata_Data_Packet::~Widelands_Map_Buildingdata_Data_Packet(
 /*
  * Read Function
  */
-void Widelands_Map_Buildingdata_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+void Widelands_Map_Buildingdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+   if( skip ) 
+      return;
+
+   FileRead fr;
+   try {
+      fr.Open( fs, "binary/building_data" );
+   } catch ( ... ) {
+      // not there, so skip
+      return ;
+   }
+
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
       
    if(packet_version==CURRENT_PACKET_VERSION) {
-      // Now the rest data len
-      uint len = fr->Unsigned32();
-      if(skip) {
-         // Skip the rest, flags are not our problem here
-         fr->Data(len);
-         return;
-      }
-
       while(1) {
-         uint ser=fr->Unsigned32();
+         uint ser=fr.Unsigned32();
          if(ser==0xffffffff) break; // Last building
 
          log("Loading building with the serial: %i\n", ser);
@@ -86,40 +89,40 @@ void Widelands_Map_Buildingdata_Data_Packet::Read(FileRead* fr, Editor_Game_Base
          log("(%i,%i)\n", building->get_position().x, building->get_position().y);
 
          // Animation
-         if(fr->Unsigned8()) 
-            building->m_anim=building->get_descr()->get_animation(fr->CString());
+         if(fr.Unsigned8()) 
+            building->m_anim=building->get_descr()->get_animation(fr.CString());
          else 
             building->m_anim=0;
-         building->m_animstart=fr->Unsigned32();
+         building->m_animstart=fr.Unsigned32();
 
-         building->m_leave_queue.resize(fr->Unsigned16());
+         building->m_leave_queue.resize(fr.Unsigned16());
          for(uint i=0; i<building->m_leave_queue.size(); i++) {
-            ser=fr->Unsigned32();
+            ser=fr.Unsigned32();
             if(ser) {
                assert(ol->is_object_known(ser));
                building->m_leave_queue[i]=ol->get_object_by_file_index(ser);
             } else 
                building->m_leave_queue[i]=0;
          }
-         building->m_leave_time=fr->Unsigned32();
-         ser=fr->Unsigned32();
+         building->m_leave_time=fr.Unsigned32();
+         ser=fr.Unsigned32();
          if(ser) {
             assert(ol->is_object_known(ser));
             building->m_leave_allow=ol->get_object_by_file_index(ser);
          } else 
             building->m_leave_allow=0;
-         building->m_stop=fr->Unsigned8();
+         building->m_stop=fr.Unsigned8();
 
          // Set economy now, some stuff below will count on this
          building->set_economy(building->m_flag->get_economy());
 
          log("Read building stuff for %p\n", building);
          switch(building->get_building_type()) {
-            case Building::CONSTRUCTIONSITE: read_constructionsite(building, fr,egbase,ol); break;
-            case Building::WAREHOUSE: read_warehouse(building, fr, egbase, ol); break;
-            case Building::PRODUCTIONSITE: read_productionsite(building, fr, egbase, ol); break;
-            case Building::MILITARYSITE: read_militarysite(building, fr, egbase, ol); break;
-            case Building::TRAININGSITE: read_trainingsite(building, fr, egbase, ol); break;
+            case Building::CONSTRUCTIONSITE: read_constructionsite(building, &fr,egbase,ol); break;
+            case Building::WAREHOUSE: read_warehouse(building, &fr, egbase, ol); break;
+            case Building::PRODUCTIONSITE: read_productionsite(building, &fr, egbase, ol); break;
+            case Building::MILITARYSITE: read_militarysite(building, &fr, egbase, ol); break;
+            case Building::TRAININGSITE: read_trainingsite(building, &fr, egbase, ol); break;
             default: throw wexception("Widelands_Map_Buildingdata_Data_Packet::Read: Unknown building type %i!\n", building->get_building_type());
          }
 
@@ -131,6 +134,8 @@ void Widelands_Map_Buildingdata_Data_Packet::Read(FileRead* fr, Editor_Game_Base
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Buildingdata_Data_Packet!\n", packet_version);
+   
+   assert(0);
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_constructionsite(Building* building, FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
@@ -255,7 +260,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_warehouse(Building* building, 
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_militarysite(Building* building, FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
-      MilitarySite* ms=static_cast<MilitarySite*>(building);
+   MilitarySite* ms=static_cast<MilitarySite*>(building);
 
       // read the version
       uint version=fr->Unsigned16();
@@ -295,8 +300,7 @@ void Widelands_Map_Buildingdata_Data_Packet::read_militarysite(Building* buildin
          // DONE
       } else 
          throw wexception("Unknown MilitarySite-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
-
-}
+}  
 
 void Widelands_Map_Buildingdata_Data_Packet::read_productionsite(Building* building, FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
    ProductionSite* ps=static_cast<ProductionSite*>(building);
@@ -357,11 +361,10 @@ void Widelands_Map_Buildingdata_Data_Packet::read_productionsite(Building* build
       memcpy(ps->m_statistics_buf, fr->Data(sizeof(ps->m_statistics_buf)), sizeof(ps->m_statistics_buf));
    } else
       throw wexception("Unknown ProductionSite-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
-
 }
 
 void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite(Building* building, FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
-	TrainingSite* ts=static_cast<TrainingSite*>(building);
+   TrainingSite* ts=static_cast<TrainingSite*>(building);
 
       // read the version
 	uint version=fr->Unsigned16();
@@ -420,7 +423,6 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite(Building* buildin
 		// DONE
 	} else 
 		throw wexception("Unknown TrainingSite-Version %i in Widelands_Map_Buildingdata_Data_Packet!\n", version);
-
 }
 
 
@@ -430,19 +432,12 @@ void Widelands_Map_Buildingdata_Data_Packet::read_trainingsite(Building* buildin
 /*
  * Write Function
  */
-void Widelands_Map_Buildingdata_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_BUILDINGDATA);
-
+void Widelands_Map_Buildingdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
+   FileWrite fw;
+   
    // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
  
-   // Here we will insert skip data (packet lenght) 
-   // later, write a dummy for now
-   int filepos = fw->GetFilePos();
-   fw->Unsigned32(0x00000000);
-   fw->ResetByteCounter();
-  
    // Walk the map again
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_width(); y++) {
@@ -463,39 +458,39 @@ void Widelands_Map_Buildingdata_Data_Packet::Write(FileWrite* fw, Editor_Game_Ba
             }
 
             int ser=os->get_object_file_index(building);
-            fw->Unsigned32(ser);
+            fw.Unsigned32(ser);
 
             // Player immovable owner is already in existance packet
 
             // Write the general stuff
             if(building->m_anim) {
-               fw->Unsigned8(1);
-               fw->CString(building->get_descr()->get_animation_name(building->m_anim).c_str());
+               fw.Unsigned8(1);
+               fw.CString(building->get_descr()->get_animation_name(building->m_anim).c_str());
             } else
-               fw->Unsigned8(0);
+               fw.Unsigned8(0);
             
-            fw->Unsigned32(building->m_animstart);
+            fw.Unsigned32(building->m_animstart);
 
             // Leave queue time
-            fw->Unsigned16(building->m_leave_queue.size());
+            fw.Unsigned16(building->m_leave_queue.size());
             for(uint i=0; i<building->m_leave_queue.size(); i++) {
                assert(os->is_object_known(building->m_leave_queue[i].get(egbase)));
-               fw->Unsigned32(os->get_object_file_index(building->m_leave_queue[i].get(egbase)));
+               fw.Unsigned32(os->get_object_file_index(building->m_leave_queue[i].get(egbase)));
             }
-            fw->Unsigned32(building->m_leave_time);
+            fw.Unsigned32(building->m_leave_time);
             if(building->m_leave_allow.get(egbase)) {
                assert(os->is_object_known(building->m_leave_allow.get(egbase)));
-               fw->Unsigned32(os->get_object_file_index(building->m_leave_allow.get(egbase)));
+               fw.Unsigned32(os->get_object_file_index(building->m_leave_allow.get(egbase)));
             } else
-               fw->Unsigned32(0);
-            fw->Unsigned8(building->m_stop);
+               fw.Unsigned32(0);
+            fw.Unsigned8(building->m_stop);
 
             switch(building->get_building_type()) {
-               case Building::CONSTRUCTIONSITE: write_constructionsite(building, fw,egbase,os); break;
-               case Building::WAREHOUSE: write_warehouse(building, fw, egbase, os); break;
-               case Building::PRODUCTIONSITE: write_productionsite(building, fw, egbase, os); break;
-               case Building::MILITARYSITE: write_militarysite(building, fw, egbase, os); break;
-               case Building::TRAININGSITE: write_trainingsite(building, fw, egbase, os); break;
+               case Building::CONSTRUCTIONSITE: write_constructionsite(building, &fw,egbase,os); break;
+               case Building::WAREHOUSE: write_warehouse(building, &fw, egbase, os); break;
+               case Building::PRODUCTIONSITE: write_productionsite(building, &fw, egbase, os); break;
+               case Building::MILITARYSITE: write_militarysite(building, &fw, egbase, os); break;
+               case Building::TRAININGSITE: write_trainingsite(building, &fw, egbase, os); break;
                default: throw wexception("Widelands_Map_Buildingdata_Data_Packet::Write: Unknown building type %i!\n", building->get_building_type());
             }
          
@@ -505,11 +500,9 @@ void Widelands_Map_Buildingdata_Data_Packet::Write(FileWrite* fw, Editor_Game_Ba
       }
    }
    
-   fw->Unsigned32(0xffffffff); // End of buildings
-   
-   // Now, write the packet length
-   fw->Unsigned32(fw->GetByteCounter(), filepos);
-
+   fw.Unsigned32(0xffffffff); // End of buildings
+  
+   fw.Write( fs, "binary/building_data" );
    // DONE
 }
 
@@ -609,7 +602,6 @@ void Widelands_Map_Buildingdata_Data_Packet::write_warehouse(Building* building,
 
    // Carrier spawn
    fw->Unsigned32(wh->m_next_carrier_spawn);
-
 }
 
 /*

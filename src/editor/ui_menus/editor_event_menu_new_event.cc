@@ -28,6 +28,7 @@
 #include "event.h"
 #include "event_factory.h"
 #include "map.h"
+#include "map_event_manager.h"
 #include "error.h"
 
 
@@ -53,7 +54,7 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* par
    
    uint i=0;
    for(i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
-      Event_Descr* d=Event_Factory::get_correct_event_descr(i);
+      Event_Descr* d=Event_Factory::get_event_descr(i);
       m_event_list->add_entry(d->name, d);
    }
    m_event_list->sort();
@@ -110,14 +111,12 @@ void Editor_Event_Menu_New_Event::clicked(int i) {
    Event_Descr* d=static_cast<Event_Descr*>(m_event_list->get_selection());
    // Create new event
    Event* event=
-      Event_Factory::make_event_with_option_dialog(d->id, m_parent, 0);
+      Event_Factory::make_event_with_option_dialog(d->id.c_str(), m_parent, 0);
    if(!event) {
       // No event created, choose another, user
       return;
    }
-   if(!m_parent->get_map()->event_exists(event)) {
-      m_parent->get_map()->register_new_event(event);
-   }
+   m_parent->get_map()->get_mem()->register_new_event(event);
    end_modal(1);
    return;
 }

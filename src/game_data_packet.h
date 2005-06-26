@@ -26,9 +26,9 @@
 #include "widelands_map_map_object_saver.h"
 #include "widelands_map_map_object_loader.h"
 
-class FileRead;
-class FileWrite;
+class FileSystem;
 class Editor_Game_Base;
+class Game;
 
 /*
 ========================================
@@ -40,8 +40,8 @@ saved game file. it is an abstract base class
 */
 class Game_Data_Packet {
    public:
-      virtual void Read(FileRead*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception) = 0;
-      virtual void Write(FileWrite*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception) = 0;
+      virtual void Read(FileSystem*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception) = 0;
+      virtual void Write(FileSystem*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception) = 0;
 };
 
 #endif

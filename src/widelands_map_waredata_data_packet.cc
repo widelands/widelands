@@ -43,35 +43,38 @@ Widelands_Map_Waredata_Data_Packet::~Widelands_Map_Waredata_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Waredata_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+void Widelands_Map_Waredata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+   if( skip ) 
+      return;
+
+   FileRead fr;
+   try {
+      fr.Open( fs, "binary/ware_data" );
+   } catch ( ... ) {
+      // not there, so skip
+      return ;
+   }
+
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
-      // Now the rest data len
-      uint len = fr->Unsigned32();
-      if(skip) {
-         // Skip the rest, flags are not our problem here
-         fr->Data(len);
-         return;
-      }
-
       while(1) {
-         uint reg=fr->Unsigned32();
+         uint reg=fr.Unsigned32();
          if(reg==0xffffffff) break; // end of wares
          assert(ol->is_object_known(reg));
          assert(ol->get_object_by_file_index(reg)->get_type()==Map_Object::WARE);
 
          WareInstance* ware=static_cast<WareInstance*>(ol->get_object_by_file_index(reg));
 
-         reg=fr->Unsigned32();
+         reg=fr.Unsigned32();
          Map_Object* location;
          assert(reg);
 
          assert(ol->is_object_known(reg));
          location=ol->get_object_by_file_index(reg);
 
-         ware->m_ware=fr->Signed32();
+         ware->m_ware=fr.Signed32();
          switch(location->get_type()) {
             case Map_Object::BUILDING: // Fallthrough 
             case Map_Object::FLAG: 
@@ -95,7 +98,7 @@ void Widelands_Map_Waredata_Data_Packet::Read(FileRead* fr, Editor_Game_Base* eg
          // Do not touch supply or transfer
 
          // m_transfer_nextstep 
-         reg=fr->Unsigned32();
+         reg=fr.Unsigned32();
          if(reg) {
             assert(ol->is_object_known(reg));
             ware->m_transfer_nextstep=ol->get_object_by_file_index(reg);
@@ -114,25 +117,20 @@ void Widelands_Map_Waredata_Data_Packet::Read(FileRead* fr, Editor_Game_Base* eg
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Waredata_Data_Packet!\n", packet_version);
+   
+   assert( 0 );
 }
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Waredata_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_WAREDATA);
-
-   // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
-  
-   // Here we will insert skip data (packet lenght) 
-   // later, write a dummy for know
-   int filepos = fw->GetFilePos();
-   fw->Unsigned32(0x00000000);
-   fw->ResetByteCounter();
+void Widelands_Map_Waredata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
+   FileWrite fw; 
    
+   // now packet version
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
+  
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
    Map* map=egbase->get_map();
    std::vector<uint> ids;
@@ -146,7 +144,7 @@ void Widelands_Map_Waredata_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* 
             Flag* f=static_cast<Flag*>(imm);
             for(int i=0; i<f->m_item_filled; i++) {
                assert(os->is_object_known(f->m_items[i].item));
-               write_ware(fw,egbase,os,f->m_items[i].item);
+               write_ware(&fw,egbase,os,f->m_items[i].item);
             }
          }
       
@@ -158,18 +156,16 @@ void Widelands_Map_Waredata_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* 
                WareInstance* ware=w->get_carried_item(egbase);
                if(ware) {
                   assert(os->is_object_known(ware));
-                  write_ware(fw,egbase,os,ware);
+                  write_ware(&fw,egbase,os,ware);
                }
             }
             b=b->get_next_bob();
          }
       }
    }
-   fw->Unsigned32(0xffffffff); // End of wares
+   fw.Unsigned32(0xffffffff); // End of wares
    
-   // Now, write the packet length
-   fw->Unsigned32(fw->GetByteCounter(), filepos);
-
+   fw.Write( fs, "binary/ware_data" );
    // DONE
 }
 
@@ -196,11 +192,11 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
    // Skip Supply
    
    // Transfer is handled automatically
-/*   if(ware->m_transfer)
-      fw->Unsigned8(1);
-   else
-      fw->Unsigned8(0);
-*/
+//   if(ware->m_transfer)
+//      fw->Unsigned8(1);
+//   else
+//      fw->Unsigned8(0);
+//
    // m_transfer_nextstep
 	obj=ware->m_transfer_nextstep.get(egbase);
    if(obj) {

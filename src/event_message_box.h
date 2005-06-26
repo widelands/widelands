@@ -20,47 +20,53 @@
 #ifndef __S__EVENT_MESSAGEBOX_H
 #define __S__EVENT_MESSAGEBOX_H
 
+#include <vector>
 #include <string>
 #include "event.h"
+#include "trigger_referencer.h"
 
 class Trigger_Null;
 class Editor_Game_Base;
+class UIPanel;
 
 /*
  * This event shows a message box
  */
-class Event_Message_Box : public Event {
+class Event_Message_Box : public Event, public TriggerReferencer {
    public:
      Event_Message_Box();
       ~Event_Message_Box();
 
+      // For trigger referenecer
+      virtual const wchar_t* get_type( void ) { return L"Event:MessageBox"; }
+      virtual const wchar_t* get_name( void ) { return Event::get_name(); }
+      
       // one liner functions
-      uint get_id(void) { return EVENT_MESSAGE_BOX; }
+      const char* get_id(void) { return "message_box"; }
 
-      void run(Game*);
+      State run(Game*);
       virtual void reinitialize(Game*);
-      virtual void cleanup(Editor_Game_Base* g);
 
       // File Functions
-      void Write(FileWrite*, Editor_Game_Base*);
-      void Read(FileRead*, Editor_Game_Base*, bool);
+      void Write(Section*, Editor_Game_Base*);
+      void Read(Section*, Editor_Game_Base*);
 
-      inline void set_text(const char* str) { m_text=str; }
-      inline const char* get_text(void) { return m_text.c_str(); }
-      inline void set_caption(const char* str) { m_caption=str; }
-      inline const char* get_caption(void) { return m_caption.c_str(); }
-      inline void set_window_title(const char* str) { m_window_title=str; }
-      inline const char* get_window_title(void) { return m_window_title.c_str(); }
+      inline void set_text(const wchar_t* str) { m_text=str; }
+      inline const wchar_t* get_text(void) { return m_text.c_str(); }
+      inline void set_caption(const wchar_t* str) { m_caption=str; }
+      inline const wchar_t* get_caption(void) { return m_caption.c_str(); }
+      inline void set_window_title(const wchar_t* str) { m_window_title=str; }
+      inline const wchar_t* get_window_title(void) { return m_window_title.c_str(); }
       inline void set_pic_id(int i) { m_pic_id=i; }
       inline uint get_pic_id(void) { return m_pic_id; }
       inline void set_pic_position(int i) { m_pic_position=i; }
       inline int  get_pic_position(void) { return m_pic_position; }
       inline void set_is_modal(bool t) {  m_is_modal=t; }
       inline bool get_is_modal(void) { return m_is_modal; }
-      void set_button_trigger(int i, Trigger_Null* t, Map*);
+      void set_button_trigger(int i, Trigger_Null* t);
       Trigger_Null* get_button_trigger(int i);
-      void set_button_name(int i, std::string);
-      const char* get_button_name(int i);
+      void set_button_name(int i, std::wstring);
+      const wchar_t* get_button_name(int i);
       void set_nr_buttons(int i);
       int get_nr_buttons(void);
 
@@ -74,21 +80,20 @@ class Event_Message_Box : public Event {
    protected:
 
    private:
-
       struct Button_Descr {
-         std::string name;
+         std::wstring name;
          Trigger_Null *trigger;
       };
 
-      std::string m_text;
-      std::string m_caption;
-      std::string m_window_title;
+      std::wstring m_text;
+      std::wstring m_caption;
+      std::wstring m_window_title;
       bool m_is_modal;
       uint m_pic_id;
       int m_pic_position;
 
       std::vector<Button_Descr> m_buttons;
-
+      UIPanel*      m_window;
 };
 
 

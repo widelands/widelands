@@ -49,6 +49,11 @@ FileSystem is a base class representing certain filesystem operations.
 */
 class FileSystem {
 public:
+   enum Type {
+      FS_DIR,
+      FS_ZIP
+   };
+
 	virtual ~FileSystem() { }
 
 	virtual bool IsWritable() = 0;
@@ -62,9 +67,14 @@ public:
 	virtual void Write(std::string fname, void *data, int length) = 0;
    virtual void EnsureDirectoryExists(std::string dirname) = 0;
    virtual void MakeDirectory(std::string dirname) = 0;
+   
+   virtual FileSystem*  MakeSubFileSystem( std::string dirname ) = 0;
+   virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type ) = 0;
+   virtual void Unlink( std::string ) = 0;
 
 public:
 	static FileSystem *CreateFromDirectory(std::string directory);
+	static FileSystem *CreateFromZip(std::string file);
 };
 
 /*
@@ -128,6 +138,7 @@ public:
 	inline uint Unsigned32(int pos = -1) { return (uint)Little32(Deref32(Data(4, pos))); }
 	inline float Float(int pos = -1) { return LittleFloat(DerefFloat(Data(4, pos))); }
 	char *CString(int pos = -1);
+   wchar_t *WCString(int pos = -1);
 	bool ReadLine(char *buf, int buflen);
 
 	void *Data(int bytes, int pos = -1) {
@@ -183,6 +194,7 @@ public:
 	inline void Unsigned32(uint x, int pos = -1) { int y = Little32((int)x); Data(&y, 4, pos); }
 	inline void Float(float x, int pos = -1) { float y = LittleFloat(x); Data(&y, 4, pos); }
 	inline void CString(const char *x, int pos = -1) { Data(x, strlen(x)+1, pos); }
+	inline void WCString(const wchar_t *x, int pos = -1) { Data(x, (wcslen(x)+1)*sizeof( wchar_t ), pos); }
 };
 
 // Access all game data files etc.. through this FileSystem

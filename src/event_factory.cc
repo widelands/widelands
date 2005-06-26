@@ -25,7 +25,6 @@
 #include "event_conquer_area.h"
 #include "event_conquer_area_option_menu.h"
 #include "event_factory.h"
-#include "event_ids.h"
 #include "event_message_box.h"
 #include "event_message_box_option_menu.h"
 #include "event_move_view.h"
@@ -39,27 +38,26 @@
 static const int nr_of_events=5;
 
 Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
-   { EVENT_MESSAGE_BOX, "Message Box", "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned"
+   { "message_box", "Message Box", "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned"
                                        " to each button to use this as a Choose Dialog for the user" },
-   { EVENT_MOVE_VIEW, "Move View", "This Event centers the Players View on a certain field" },
-   { EVENT_UNHIDE_AREA, "Unhide Area", "This Event makes a user definable part of the map visible for a selectable user" },
-   { EVENT_CONQUER_AREA, "Conquer Area", "This Event conquers a user definable part of the map for one player if there isn't a player already there" },
-   { EVENT_ALLOW_BUILDING, "Allow Building", "Allows/Disables a certain building for a player so that it can be build or it can't any longer" },
+   { "move_view", "Move View", "This Event centers the Players View on a certain field" },
+   { "unhide_area", "Unhide Area", "This Event makes a user definable part of the map visible for a selectable user" },
+   { "conquer_area", "Conquer Area", "This Event conquers a user definable part of the map for one player if there isn't a player already there" },
+   { "allow_building", "Allow Building", "Allows/Disables a certain building for a player so that it can be build or it can't any longer" },
 };
 
 /*
  * return the correct event for this id
  */
-Event* Event_Factory::get_correct_event(uint id) {
-   switch(id) {
-      case EVENT_MESSAGE_BOX: return new Event_Message_Box(); break;
-      case EVENT_MOVE_VIEW: return new Event_Move_View(); break;
-      case EVENT_UNHIDE_AREA: return new Event_Unhide_Area(); break;
-      case EVENT_CONQUER_AREA: return new Event_Conquer_Area(); break;
-      case EVENT_ALLOW_BUILDING: return new Event_Allow_Building(); break;
-      default: break;
-   }
-   throw wexception("Event_Factory::get_correct_event: Unknown event id found: %i\n", id);
+Event* Event_Factory::get_correct_event(const char* id) {
+   std::string str = id;
+   if( str == "message_box" ) return new Event_Message_Box();
+   else if( str == "move_view" ) return new Event_Move_View(); 
+   else if( str == "unhide_area" ) return new Event_Unhide_Area(); 
+   else if( str == "conquer_area" ) return new Event_Conquer_Area(); 
+   else if( str == "allow_building" ) return new Event_Allow_Building(); 
+   else 
+      throw wexception("Event_Factory::get_correct_event: Unknown event id found: %s\n", id);
    // never here
    return 0;
 }
@@ -70,22 +68,21 @@ Event* Event_Factory::get_correct_event(uint id) {
  * and let it be initalised through it.
  * if it fails, return zero/unmodified given event, elso return the created/modified event
  */
-Event* Event_Factory::make_event_with_option_dialog(uint id, Editor_Interactive* m_parent, Event* gevent) {
+Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Interactive* m_parent, Event* gevent) {
    Event* event=gevent;
    if(!event)
       event=get_correct_event(id);
 
    int retval=-100;
-   switch(id) {
-      case EVENT_MESSAGE_BOX: { Event_Message_Box_Option_Menu* t=new Event_Message_Box_Option_Menu(m_parent, static_cast<Event_Message_Box*>(event)); retval=t->run(); delete t; } break;
-      case EVENT_MOVE_VIEW: { Event_Move_View_Option_Menu* t=new Event_Move_View_Option_Menu(m_parent, static_cast<Event_Move_View*>(event)); retval=t->run(); delete t; } break;
-      case EVENT_UNHIDE_AREA: { Event_Unhide_Area_Option_Menu* t=new Event_Unhide_Area_Option_Menu(m_parent, static_cast<Event_Unhide_Area*>(event)); retval=t->run(); delete t; } break;
-      case EVENT_CONQUER_AREA: { Event_Conquer_Area_Option_Menu* t=new Event_Conquer_Area_Option_Menu(m_parent, static_cast<Event_Conquer_Area*>(event)); retval=t->run(); delete t; } break;
-      case EVENT_ALLOW_BUILDING: { Event_Allow_Building_Option_Menu* t=new Event_Allow_Building_Option_Menu(m_parent, static_cast<Event_Allow_Building*>(event)); retval=t->run(); delete t; } break;
-      default: break;
-   }
+   std::string str = id;
+   if( str == "message_box" ) { Event_Message_Box_Option_Menu* t=new Event_Message_Box_Option_Menu(m_parent, static_cast<Event_Message_Box*>(event)); retval=t->run(); delete t; } 
+   else if( str == "move_view" ) { Event_Move_View_Option_Menu* t=new Event_Move_View_Option_Menu(m_parent, static_cast<Event_Move_View*>(event)); retval=t->run(); delete t; } 
+   else if( str == "unhide_area" ) { Event_Unhide_Area_Option_Menu* t=new Event_Unhide_Area_Option_Menu(m_parent, static_cast<Event_Unhide_Area*>(event)); retval=t->run(); delete t; } 
+   else if( str == "conquer_area" ) { Event_Conquer_Area_Option_Menu* t=new Event_Conquer_Area_Option_Menu(m_parent, static_cast<Event_Conquer_Area*>(event)); retval=t->run(); delete t; } 
+   else if( str == "allow_building" ) { Event_Allow_Building_Option_Menu* t=new Event_Allow_Building_Option_Menu(m_parent, static_cast<Event_Allow_Building*>(event)); retval=t->run(); delete t; } 
+   
    if(retval==-100)
-      throw wexception("Event_Factory::make_event_with_option_dialog: Unknown event id found: %i\n", id);
+      throw wexception("Event_Factory::make_event_with_option_dialog: Unknown event id found: %s\n", id);
    if(retval)
       return event;
    if(!gevent) {
@@ -99,11 +96,25 @@ Event* Event_Factory::make_event_with_option_dialog(uint id, Editor_Interactive*
  * Get the correct event descriptions and names from the
  * id header
  */
-Event_Descr* Event_Factory::get_correct_event_descr(uint id) {
+Event_Descr* Event_Factory::get_correct_event_descr( const char* id ) {
+   std::string str = id;
+   for( uint i = 0; i < Event_Factory::get_nr_of_available_events(); i++)
+      if( EVENT_DESCRIPTIONS[i].id == str )
+         return &EVENT_DESCRIPTIONS[i];
+   
+   assert(0); // never here
+   return 0;
+}
+
+/*
+ * Get event description by number
+ */
+Event_Descr* Event_Factory::get_event_descr(uint id) {
    assert(id<Event_Factory::get_nr_of_available_events());
 
    return &EVENT_DESCRIPTIONS[id];
 }
+
 
 /*
  * return the nummer of available events

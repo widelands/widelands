@@ -37,9 +37,20 @@ Widelands_Map_Owned_Fields_Data_Packet::~Widelands_Map_Owned_Fields_Data_Packet(
 /*
  * Read Function
  */
-void Widelands_Map_Owned_Fields_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Widelands_Map_Owned_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+   if( skip ) 
+      return;
+
+   FileRead fr;
+   try {
+      fr.Open( fs, "binary/owned_fields" );
+   } catch ( ... ) {
+      // not there, so skip
+      return ;
+   }
+
    // read packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       // Read all the owned_fields
@@ -47,7 +58,7 @@ void Widelands_Map_Owned_Fields_Data_Packet::Read(FileRead* fr, Editor_Game_Base
 
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
-            uchar h=fr->Unsigned8();
+            uchar h=fr.Unsigned8();
             if(!skip) // On Skip, we ignore this 
                map->get_field(Coords(x,y))->set_owned_by(h);
          }
@@ -55,6 +66,7 @@ void Widelands_Map_Owned_Fields_Data_Packet::Read(FileRead* fr, Editor_Game_Base
       return;
    }
    throw wexception("Unknown version in Widelands_Map_Owned_Fields_Data_Packet: %i\n", packet_version);
+   
    assert(0); // never here
 }
 
@@ -62,18 +74,19 @@ void Widelands_Map_Owned_Fields_Data_Packet::Read(FileRead* fr, Editor_Game_Base
 /*
  * Write Function
  */
-void Widelands_Map_Owned_Fields_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_OWNED_FIELDS);
+void Widelands_Map_Owned_Fields_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+   FileWrite fw;
 
    // Now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // Now, all owned_fields as unsigned chars in order
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
-         fw->Unsigned8(map->get_field(Coords(x,y))->get_owned_by());
+         fw.Unsigned8(map->get_field(Coords(x,y))->get_owned_by());
       }
    }
+
+   fw.Write( fs, "binary/owned_fields" );
 }

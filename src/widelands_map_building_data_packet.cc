@@ -41,29 +41,32 @@ Widelands_Map_Building_Data_Packet::~Widelands_Map_Building_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Building_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+void Widelands_Map_Building_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+   if( skip ) 
+      return;
+
+   FileRead fr;
+   try {
+      fr.Open( fs, "binary/building" );
+   } catch ( ... ) {
+      // not there, so skip
+      return ;
+   }
+   
    Map* map=egbase->get_map();
 
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
    if(packet_version==CURRENT_PACKET_VERSION) {
-      // Now the rest data len
-      uint len = fr->Unsigned32();
-      if(skip) {
-         // Skip the rest, flags are not our problem here
-         fr->Data(len);
-         return;
-      }
-
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
-            uchar exists=fr->Unsigned8();
+            uchar exists=fr.Unsigned8();
             if(exists) {
                // Ok, now read all the additional data
-               uchar owner=fr->Unsigned8();
-               uint serial=fr->Unsigned32();
-               std::string name=fr->CString();
-               bool is_constructionsite=fr->Unsigned8();
+               uchar owner=fr.Unsigned8();
+               uint serial=fr.Unsigned32();
+               std::string name=fr.CString();
+               bool is_constructionsite=fr.Unsigned8();
 
                // No building lives on more than one main place
                assert(!ol->is_object_known(serial));
@@ -101,24 +104,18 @@ void Widelands_Map_Building_Data_Packet::Read(FileRead* fr, Editor_Game_Base* eg
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Building_Data_Packet!\n", packet_version);
+   assert(0); // Never here
 }
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Building_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_BUILDING);
+void Widelands_Map_Building_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
+   FileWrite fw;
 
    // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
-  
-   // Here we will insert skip data (packet lenght) 
-   // later, write a dummy for know
-   int filepos = fw->GetFilePos();
-   fw->Unsigned32(0x00000000);
-   fw->ResetByteCounter();
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
   
    // Write buildings and owner, register this with the map_object_saver so that
    // it's data can be saved later.
@@ -132,7 +129,7 @@ void Widelands_Map_Building_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* 
           
             if(building->get_position()!=Coords(x,y)) {
                // This is not this buildings main position 
-               fw->Unsigned8('\0');
+               fw.Unsigned8('\0');
                continue; 
             }
 
@@ -140,32 +137,31 @@ void Widelands_Map_Building_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* 
             assert(!os->is_object_known(building));
             uint serial=os->register_object(building);
  
-            fw->Unsigned8(1);
-            fw->Unsigned8(building->get_owner()->get_player_number());
+            fw.Unsigned8(1);
+            fw.Unsigned8(building->get_owner()->get_player_number());
             // write id
-            fw->Unsigned32(serial);
+            fw.Unsigned32(serial);
             
             bool constructionsite=building->get_building_type()==Building::CONSTRUCTIONSITE;
 
             if(constructionsite) {
                ConstructionSite* cs=static_cast<ConstructionSite*>(building);
-               fw->CString(cs->get_building()->get_name());
-               fw->Unsigned8(1);
+               fw.CString(cs->get_building()->get_name());
+               fw.Unsigned8(1);
             } else {
             // write name
             std::string name=building->get_name();
-            fw->CString(name.c_str());
-            fw->Unsigned8(0);
+            fw.CString(name.c_str());
+            fw.Unsigned8(0);
             }
             
          } else {
             // No existance, no owner
-            fw->Unsigned8(0);
+            fw.Unsigned8(0);
          }
       }
    }
    
-   // Now, write the packet length
-   fw->Unsigned32(fw->GetByteCounter(), filepos);
+   fw.Write( fs, "binary/building" );
    // DONE
 }

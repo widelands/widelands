@@ -27,6 +27,7 @@
 #include "editorinteractive.h"
 #include "system.h"
 #include "error.h"
+#include "util.h"
 
 Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, Trigger_Time* trigger) :
    UIWindow(parent, 0, 0, 164, 180, "Trigger Option Menu") {
@@ -55,16 +56,9 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
    m_values[4]=(wait_time)/10; // seconds
    m_values[5]=(wait_time)%10;
 
-   new UITextarea(this, spacing, offsy, "Only triggers once: ", Align_Left);
-   UICheckbox* cb=new UICheckbox(this, spacing+130, offsy-3);
-   m_is_one_time_trigger=trigger->is_one_time_trigger();
-   cb->set_state(m_is_one_time_trigger);
-   cb->changedto.set(this, &Trigger_Time_Option_Menu::cb_changed);
-   posy+=20+spacing;
-
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
-   m_name->set_text(trigger->get_name());
+   m_name->set_text( narrow_string( trigger->get_name()).c_str() );
 
    posy+=20+spacing;
 
@@ -187,10 +181,9 @@ void Trigger_Time_Option_Menu::clicked(int i) {
       int seconds=m_values[4]*10+m_values[5];
       int total=hours*3600+minutes*60+seconds;
       // ok button
-      m_trigger->set_is_one_time_trigger(m_is_one_time_trigger);
       m_trigger->set_wait_time(total);
       if(m_name->get_text())
-         m_trigger->set_name(m_name->get_text());
+         m_trigger->set_name( widen_string( m_name->get_text()).c_str() );
       end_modal(1);
       return;
    }
@@ -202,13 +195,6 @@ void Trigger_Time_Option_Menu::clicked(int i) {
    if(m_values[id]>9) m_values[id]=9;
    if( (id==2 || id==4)  && m_values[id]>=6) m_values[id]=5;
    update();
-}
-
-/*
- * checkbox has been changed
- */
-void Trigger_Time_Option_Menu::cb_changed(bool t) {
-   m_is_one_time_trigger=t;
 }
 
 /*

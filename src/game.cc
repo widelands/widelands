@@ -17,23 +17,25 @@
  *
  */
 
-#include "interactive_player.h"
-#include "computer_player.h"
 #include "cmd_queue.h"
+#include "computer_player.h"
+#include "event_chain.h"
+#include "interactive_player.h"
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_loadgame.h"
 #include "game.h"
 #include "game_loader.h"
 #include "graphic.h"
+#include "map_event_manager.h"
+#include "map_trigger_manager.h"
+#include "network.h"
 #include "player.h"
+#include "playercommand.h"
 #include "soldier.h"
 #include "system.h"
 #include "tribe.h"
-#include "map_loader.h"
-#include "playercommand.h"
-#include "trigger.h"
-#include "network.h"
 #include "widelands_map_loader.h"
+
 
 
 /** Game::Game(void)
@@ -115,8 +117,10 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 
    Map *map = new Map();
    set_map(map);
-   
-   m_maploader = new Widelands_Map_Loader(mapname, map);
+  
+   FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
+   m_maploader = new Widelands_Map_Loader(fs, map);
+
    m_maploader->preload_map(scenario);
    
    m_state = gs_running;
@@ -175,15 +179,16 @@ bool Game::run_load_game(bool is_splayer) {
    int code = ssg->run();
 
    if(code) {
-   // We have to create an empty map, otherwise nothing will load properly
-   Map* map = new Map;
-   set_map(map);
-   
-   Game_Loader* gl=new Game_Loader(ssg->get_gamename(), this);
-   gl->load_game();
-   delete gl;
+      // We have to create an empty map, otherwise nothing will load properly
+      Map* map = new Map;
+      set_map(map);
 
- 
+      FileSystem* fs = g_fs->MakeSubFileSystem( ssg->get_gamename());
+      
+      Game_Loader* gl=new Game_Loader( fs, this);
+      gl->load_game();
+      delete fs;
+      delete gl;
    }
    
    delete ssg;
@@ -302,12 +307,8 @@ bool Game::run(bool is_savegame)
 
       // Prepare the map, set default textures
       get_map()->recalc_default_resources();
-      get_map()->delete_unreferenced_triggers();
-      get_map()->delete_events_without_trigger();
-
-      // Now let all triggers check once, if they are in the right state
-      for (int i=0; i<get_map()->get_number_of_triggers(); i++)
-         get_map()->get_trigger(i)->check_set_conditions(this);
+      get_map()->get_mem()->delete_unreferenced_events();
+      get_map()->get_mtm()->delete_unreferenced_triggers();
 
       // Finally, set the scenario names and tribes to represent
       // the correct names of the players
@@ -328,7 +329,7 @@ bool Game::run(bool is_savegame)
 
       // Everything prepared, send the first trigger event
       // We lie about the sender here. Hey, what is one lie in a lifetime?
-      enqueue_command (new Cmd_CheckTrigger(get_gametime(), -1));
+      enqueue_command (new Cmd_CheckEventChain(get_gametime(), -1));
    } 
    
    load_graphics();

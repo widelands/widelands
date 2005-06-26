@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-5 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,22 +17,21 @@
  *
  */
 
-#ifndef __S__EVENT_IDS_H
-#define __S__EVENT_IDS_H
+#ifndef __S__TRIGGER_REFERENCER_H
+#define __S__TRIGGER_REFERENCER_H
+
+class Trigger;
 
 /*
- * If you change anything here,
- * make sure that you also change event_factory.cc
- *
- * Make sure that the orders of this enum and in the
- * description structure in event_factory.cc stay the same
+ * An Trigger referencer is a class, that uses an Trigger (trigger chain, objective)
  */
-enum {
-   EVENT_MESSAGE_BOX = 0,
-   EVENT_MOVE_VIEW,
-   EVENT_UNHIDE_AREA,
-   EVENT_CONQUER_AREA,
-   EVENT_ALLOW_BUILDING,
+class TriggerReferencer {
+   public:
+      virtual const wchar_t* get_type( void ) = 0;
+      virtual const wchar_t* get_name( void ) = 0;
+
+      void reference_trigger( Trigger* );
+      void unreference_trigger( Trigger* );
 };
 
-#endif
+#endif // __S__TRIGGER_REFERENCER_H

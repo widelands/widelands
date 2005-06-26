@@ -30,9 +30,8 @@ static const int TRIGGER_VERSION = 1;
 Trigger_Time::Trigger_Time(void) {
    m_last_start_time=0;
    m_wait_time=60; // defaults to one minute
-   set_name("Time Trigger");
+   set_name(L"Time Trigger");
    set_trigger(false);
-   set_is_one_time_trigger(true);
 }
 
 Trigger_Time::~Trigger_Time(void) {
@@ -41,33 +40,26 @@ Trigger_Time::~Trigger_Time(void) {
 /*
  * File Read, File Write
  */
-void Trigger_Time::Read(FileRead* fr, Editor_Game_Base* ) {
-   int version=fr->Unsigned16();
-   if(version <= TRIGGER_VERSION) {
-      set_name(fr->CString());
-      set_is_one_time_trigger(fr->Unsigned8());
-      m_wait_time=fr->Unsigned32();
+void Trigger_Time::Read(Section* s, Editor_Game_Base* ) {
+   int version= s->get_safe_int( "version" );
+
+   if(version == TRIGGER_VERSION) {
+      m_wait_time = s->get_safe_int( "wait_time" );
+      m_last_start_time = s->get_safe_int( "last_start_time" );
       return;
    }
    throw wexception("Time Trigger with unknown/unhandled version %i in map!\n", version);
 }
 
-void Trigger_Time::Write(FileWrite* fw) {
-   // First of all the id
-   fw->Unsigned16(get_id());
-
-   // Now the version
-   fw->Unsigned16(TRIGGER_VERSION);
-
-   // Name
-   fw->Data(get_name(), strlen(get_name()));
-   fw->Unsigned8('\0');
-
-   // triggers only once?
-   fw->Unsigned8(is_one_time_trigger());
+void Trigger_Time::Write(Section* s) {
+   // version
+   s->set_int( "version", TRIGGER_VERSION );
 
    // Wait time
-   fw->Unsigned32(m_wait_time);
+   s->set_int( "wait_time", m_wait_time );
+
+   // Last start time
+   s->set_int( "last_start_time", m_last_start_time);
 
    // done
 }
@@ -86,8 +78,6 @@ void Trigger_Time::check_set_conditions(Game* game) {
  * Reset this trigger. This is only valid for non one timers
  */
 void Trigger_Time::reset_trigger(Game* game) {
-   assert(!is_one_time_trigger());
-
    // save new start time
    // NOTE: if it took a while for an event to note us,
    // this time the trigger wasn't counting

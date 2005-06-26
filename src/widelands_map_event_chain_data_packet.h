@@ -17,20 +17,22 @@
  *
  */
 
-#ifndef __S__TRIGGER_IDS_H
-#define __S__TRIGGER_IDS_H
+#ifndef __S__WIDELANDS_MAP_EVENTCHAIN_DATA_PACKET_H
+#define __S__WIDELANDS_MAP_EVENTCHAIN_DATA_PACKET_H
+
+#include "widelands_map_data_packet.h"
 
 /*
- * If you change anything here,
- * make sure that you also change trigger_factory.cc
- *
- * Make sure that the orders of this enum and in the
- * description structure in trigger_factory.cc stay the same
+ * This packet contains all the event chains the map defines
  */
-enum {
-   TRIGGER_TIME = 0,
-   TRIGGER_NULL,
-   TRIGGER_BUILDING,
+class Widelands_Map_EventChain_Data_Packet : public Widelands_Map_Data_Packet {
+   public:
+      virtual ~Widelands_Map_EventChain_Data_Packet();
+
+      virtual void Read(FileSystem*, Editor_Game_Base*, bool, Widelands_Map_Map_Object_Loader* = 0) throw(wexception);
+      virtual void Write(FileSystem*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception);
 };
 
+
 #endif
+

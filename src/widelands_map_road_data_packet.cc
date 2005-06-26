@@ -40,21 +40,23 @@ Widelands_Map_Road_Data_Packet::~Widelands_Map_Road_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Road_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+void Widelands_Map_Road_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+   if( skip ) 
+      return;
+
+   FileRead fr;
+   try {
+      fr.Open( fs, "binary/road" );
+   } catch ( ... ) {
+      // not there, so skip
+      return ;
+   }
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
-      // Now the rest data len
-      uint len = fr->Unsigned32();
-      if(skip) {
-         // Skip the rest, flags are not our problem here
-         fr->Data(len);
-         return;
-      }
-
       uint ser;
-      while((ser=fr->Unsigned32())!=0xffffffff) {
+      while((ser=fr.Unsigned32())!=0xffffffff) {
          // If this is already known, get it
          // Road data is read somewhere else
          assert(!ol->is_object_known(ser));
@@ -67,24 +69,19 @@ void Widelands_Map_Road_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Road_Data_Packet!\n", packet_version);
+   assert( 0 );
 }
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Road_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_ROAD);
-
+void Widelands_Map_Road_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
+   
+   FileWrite fw; 
+   
    // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
-
-   // Here we will insert skip data (packet lenght) 
-   // later, write a dummy for know
-   int filepos = fw->GetFilePos();
-   fw->Unsigned32(0x00000000);
-   fw->ResetByteCounter();
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // Write roads, register this with the map_object_saver so that
    // it's data can be saved later.
@@ -102,16 +99,14 @@ void Widelands_Map_Road_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egba
 
             serial=os->register_object(road);
             // write id
-            fw->Unsigned32(serial);
+            fw.Unsigned32(serial);
 
             log("ROAD: writing at (%i,%i): %i\n", x, y, serial);
          } 
       }
    }
-   fw->Unsigned32(0xffffffff);
+   fw.Unsigned32(0xffffffff);
 
-   // Now, write the packet length
-   fw->Unsigned32(fw->GetByteCounter(), filepos);
-
+   fw.Write( fs, "binary/road" );
    // DONE
 }

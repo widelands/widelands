@@ -67,7 +67,6 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
    m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
    m_descr=new UIMultiline_Editbox(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, "Nothing defined!");
-   m_descr->set_maximum_chars(MAP_DESCR_LEN);
    m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
    update();
 }

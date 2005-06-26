@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-5 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,24 +17,15 @@
  *
  */
 
-#ifndef __S__WIDELANDS_MAP_DATA_PACKET_FACTOR_H
-#define __S__WIDELANDS_MAP_DATA_PACKET_FACTOR_H
-
-
-#include "wexception.h"
-#include "types.h"
-
-class Widelands_Map_Data_Packet;
+#include "event.h"
+#include "event_referencer.h"
 
 /*
- * This factory creates the valid map_data packet
- * classes. This is usefull to add new Packets without
- * the need to touch any other code than class
+ * Reference a event
  */
-class Widelands_Map_Data_Packet_Factory {
-   public:
-      Widelands_Map_Data_Packet* create_correct_packet(ushort id) throw(wexception);
-};
-
-
-#endif
+void EventReferencer::reference_event( Event* tr ) {
+   tr->reference( this );
+}
+void EventReferencer::unreference_event( Event* tr) {
+   tr->unreference( this );
+}

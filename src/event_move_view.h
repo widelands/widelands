@@ -34,15 +34,14 @@ class Event_Move_View : public Event {
       ~Event_Move_View();
 
       // one liner functions
-      uint get_id(void) { return EVENT_MOVE_VIEW; }
+      const char* get_id(void) { return "move_view"; }
 
-      void run(Game*);
+      State run(Game*);
       virtual void reinitialize(Game*);
-      virtual void cleanup(Editor_Game_Base* g);
 
       // File Functions
-      void Write(FileWrite*, Editor_Game_Base*);
-      void Read(FileRead*, Editor_Game_Base*, bool);
+      void Write(Section*, Editor_Game_Base*);
+      void Read(Section*, Editor_Game_Base*);
 
       inline void set_coords(Coords pt) { m_pt=pt; }
       inline Coords get_coords(void) { return m_pt; }

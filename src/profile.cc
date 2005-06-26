@@ -751,23 +751,32 @@ inline char *setEndAt(char *str, char c)
  *
  * Args: filename	name of the source file
  */
-void Profile::read(const char *filename, const char *global_section)
+void Profile::read(const char *filename, const char *global_section, FileSystem* fs)
 {
 	try
 	{
 		FileRead fr;
 
-		fr.Open(g_fs, filename);
+      if( !fs ) 
+         fr.Open(g_fs, filename);
+      else 
+         fr.Open(fs, filename);
 
 		char line[1024];
-		char *p;
+		char *p = 0;
 		uint linenr = 0;
 		Section *s = 0;
 
-		while(fr.ReadLine(line, sizeof(line)))
+      bool reading_multiline = 0;
+      std::string data;
+      std::string key;
+      while(fr.ReadLine(line, sizeof(line)))
 		{
 			linenr++;
-			p = line;
+			
+         if( !reading_multiline ) 
+            p = line;
+
 			p = skipwhite(p);
 			if (!p[0] || p[0] == '#' || (p[0] == '/' && p[1] == '/'))
 				continue;
@@ -777,32 +786,46 @@ void Profile::read(const char *filename, const char *global_section)
 				setEndAt(p, ']');
 				s = create_section(p, true); // may create duplicate
 			} else {
-				char *tail = strchr(p, '=');
-				if (tail) {
-					*tail++ = 0;
+            char* tail = 0;
+            if( reading_multiline ) {
+               data += '\n';
+               tail = line;
+            } else {
+               tail = strchr(p, '=');
+               *tail++ = 0;
+               key = p;
 					tail = skipwhite(tail);
 					killcomments(tail);
 					rtrim(tail);
 					rtrim(p);
-
-					// remove surrounding '' or ""
+            
+               // remove surrounding '' or ""
 					if (tail[0] == '\'' || tail[0] == '\"') {
-						tail++;
-						char *eot = tail+strlen(tail)-1;
-						if (*eot == '\'' || *eot == '\"')
-							*eot = 0;
+                  reading_multiline = true;
+                  tail++;
 					}
-
-					// ready to insert
+            }
+				if (tail) {
+               char *eot = tail+strlen(tail)-1;
+               if (*eot == '\'' || *eot == '\"') {
+                  *eot = 0;
+                  reading_multiline = false;
+               }
+					
+               // ready to insert
 					if (!s) {
 						if (global_section)
 							s = create_section(global_section, true);
 						else
 							throw wexception("line %i: key %s outside section", linenr, p);
 					}
-					if (s) // error() may or may not throw
-						s->create_val(p, tail, true); // may create duplicate
-				} else {
+           
+               data += tail;
+               if (s && ! reading_multiline) { // error() may or may not throw
+						s->create_val(key.c_str(), data.c_str(), true); // may create duplicate
+                  data = "";
+               }
+            } else {
 					throw wexception("line %i: syntax error", linenr);
 				}
 			}
@@ -818,7 +841,7 @@ void Profile::read(const char *filename, const char *global_section)
  * Writes all sections out to the given file.
  * If used_only is true, only used sections and keys are written to the file.
  */
-void Profile::write(const char *filename, bool used_only)
+void Profile::write(const char *filename, bool used_only, FileSystem* fs)
 {
 	FileWrite fw;
 
@@ -833,13 +856,26 @@ void Profile::write(const char *filename, bool used_only)
 		for(Section::Value_list::iterator v = s->m_values.begin(); v != s->m_values.end(); v++) {
 			if (used_only && !v->is_used())
 				continue;
-			fw.Printf("%s=%s\n", v->get_name(), v->get_string());
+         
+         const char* str = v->get_string();
+         bool multiline = false;
+         for( uint i = 0; i < strlen( str ); i++)
+            if( str[i] == '\n' )
+               multiline = true;
+
+         if( !multiline )
+            fw.Printf("%s=%s\n", v->get_name(), v->get_string());
+         else
+            fw.Printf("%s='%s'\n", v->get_name(), v->get_string());
 		}
 
 		fw.Printf("\n");
 	}
 
-	fw.Write(g_fs, filename);
+   if( !fs ) 
+      fw.Write(g_fs, filename);
+   else 
+      fw.Write(fs, filename);
 }
 
 

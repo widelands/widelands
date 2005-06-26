@@ -26,9 +26,8 @@
 #include "error.h"
 
 // VERSION 1: initiale version
-// VERSION 2: all resources are multiplied with 1.675 on load 
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 1
 
 /*
  * Destructor
@@ -39,14 +38,18 @@ Widelands_Map_Resources_Data_Packet::~Widelands_Map_Resources_Data_Packet(void) 
 /*
  * Read Function
  */
-void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Widelands_Map_Resources_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+   FileRead fr;
+
+   fr.Open( fs, "binary/resource" );
+
    // read packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
    Map* map=egbase->get_map();
    World* world=egbase->get_map()->get_world();
 
-   if(packet_version==CURRENT_PACKET_VERSION || packet_version==1) { // Nearly the same for the two versions
-      int nr_res=fr->Unsigned16();
+   if(packet_version==CURRENT_PACKET_VERSION) { 
+      int nr_res=fr.Unsigned16();
       if(nr_res>world->get_nr_resources()) log("WARNING: Number of resources in map (%i) is bigger than in world (%i)",
             nr_res, world->get_nr_resources());
 
@@ -54,8 +57,8 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
       std::map<uchar,int> smap;
       char* buffer;
       for(int i=0; i<nr_res; i++) {
-         int id=fr->Unsigned16();
-         buffer=fr->CString();
+         int id=fr.Unsigned16();
+         buffer=fr.CString();
          int res=world->get_resource(buffer);
          if(res==-1) throw wexception("Resource '%s' exists in map, not in world!", buffer);
          smap[id]=res;
@@ -64,19 +67,12 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
       // Now get all the the resources
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
-            int id=fr->Unsigned8();
-            int found_amount=fr->Unsigned8();
+            int id=fr.Unsigned8();
+            int found_amount=fr.Unsigned8();
             int start_amount=0;
             int amount=0;
-            if(packet_version==CURRENT_PACKET_VERSION) 
-               amount=found_amount;
-            else if(packet_version==1) 
-               amount= ((int) (((float)found_amount)*1.675));
-
-            if(packet_version==CURRENT_PACKET_VERSION) 
-               start_amount=fr->Unsigned8();
-            else
-               start_amount=amount;
+            amount=found_amount;
+            start_amount=fr.Unsigned8();
 
             int set_id, set_amount, set_start_amount;
             // if amount is zero, theres nothing here
@@ -89,7 +85,7 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
                set_amount=amount;
                set_start_amount=start_amount;
             }
-               
+
             // NoLog("[Map Loader] Setting resource of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
             if(set_id==-1) 
                throw("Unkown resource in map file. It is not in world!\n");
@@ -112,12 +108,12 @@ void Widelands_Map_Resources_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
  * which is also ok. But this is one reason why save game != saved map
  * in nearly all cases.
  */
-void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_RESOURCES);
-
+void Widelands_Map_Resources_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+   
+   FileWrite fw; 
+   
    // Now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // This is a bit more complicated saved so that the order of loading
    // of the resources at run time doesn't matter.
@@ -125,15 +121,15 @@ void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
    // Write the number of resources
    World* world=egbase->get_map()->get_world();
    int nr_res=world->get_nr_resources();
-   fw->Unsigned16(nr_res);
+   fw.Unsigned16(nr_res);
 
    // Write all resources names and their id's
    std::map<std::string,uchar> smap;
    for(int i=0; i<nr_res; i++) {
       Resource_Descr* res=world->get_resource(i);
       smap[res->get_name()]=i;
-      fw->Unsigned16(i);
-      fw->CString(res->get_name());
+      fw.Unsigned16(i);
+      fw.CString(res->get_name());
    }
 
    // Now, all resouces as unsigned chars in order
@@ -147,9 +143,11 @@ void Widelands_Map_Resources_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
          int start_amount=map->get_field(Coords(x,y))->get_starting_res_amount();
          if(!amount)
             res=0;
-         fw->Unsigned8(res);
-         fw->Unsigned8(amount);
-         fw->Unsigned8(start_amount);
+         fw.Unsigned8(res);
+         fw.Unsigned8(amount);
+         fw.Unsigned8(start_amount);
       }
    }
+
+   fw.Write( fs, "binary/resource" );
 }

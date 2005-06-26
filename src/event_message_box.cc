@@ -33,46 +33,35 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Message_Box::Event_Message_Box(void) {
-   set_name("Message Box");
-   set_is_one_time_event(true);
-   set_text("No text defined");
-   set_caption("Caption");
-   set_window_title("Window Title");
+   set_name(L"Message Box");
+   set_text(L"No text defined");
+   set_caption(L"Caption");
+   set_window_title(L"Window Title");
    set_is_modal(false);
    set_pic_id(-1);
    set_pic_position(Right);
 
    set_nr_buttons(1);
-   m_buttons[0].name="Continue";
+   m_buttons[0].name=L"Continue";
    m_buttons[0].trigger=0;
+   
+   m_window = 0;
 }
 
 Event_Message_Box::~Event_Message_Box(void) {
-}
-
-/*
- * cleanup()
- */
-void Event_Message_Box::cleanup(Editor_Game_Base* g) {
-   uint i=0;
+  uint i=0;
    for(i=0; i<m_buttons.size(); i++)
       if(m_buttons[i].trigger) {
-         set_button_trigger(i, 0, g->get_map());
+         set_button_trigger(i, 0);
       }
    m_buttons.resize(0);
 
-     Event::cleanup(g);
 }
 
 /*
  * reinitialize
  */
 void Event_Message_Box::reinitialize(Game* g) {
-   if(is_one_time_event()) {
-      cleanup(g); // Also calls event cleanup
-   } else {
-      Event::reinitialize(g);
-   }
 }
 
 /*
@@ -87,26 +76,26 @@ void Event_Message_Box::set_nr_buttons(int i) {
 int Event_Message_Box::get_nr_buttons(void) {
    return m_buttons.size();
 }
-void Event_Message_Box::set_button_trigger(int i, Trigger_Null* t, Map* map) {
+void Event_Message_Box::set_button_trigger(int i, Trigger_Null* t) {
    assert(i<get_nr_buttons());
    if(m_buttons[i].trigger==t) return;
 
    if(m_buttons[i].trigger)
-      map->release_trigger(m_buttons[i].trigger);
+      unreference_trigger( m_buttons[i].trigger) ;
 
    if(t)
-      map->reference_trigger(t);
+      reference_trigger(t);
    m_buttons[i].trigger=t;
 }
 Trigger_Null* Event_Message_Box::get_button_trigger(int i) {
    assert(i<get_nr_buttons());
    return m_buttons[i].trigger;
 }
-void Event_Message_Box::set_button_name(int i, std::string str) {
+void Event_Message_Box::set_button_name(int i, std::wstring str) {
    assert(i<get_nr_buttons());
    m_buttons[i].name=str;
 }
-const char* Event_Message_Box::get_button_name(int i) {
+const wchar_t* Event_Message_Box::get_button_name(int i) {
    assert(i<get_nr_buttons());
    return m_buttons[i].name.c_str();
 }
@@ -114,8 +103,12 @@ const char* Event_Message_Box::get_button_name(int i) {
 /*
  * File Read, File Write
  */
-void Event_Message_Box::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) {
-   int version=fr->Unsigned16();
+void Event_Message_Box::Read(Section* fs, Editor_Game_Base* egbase) {
+   log( "TODO: Event_Message_Box::Write\n");
+   assert(0);
+
+#if 0
+    int version=fr->Unsigned16();
    if(version <= EVENT_VERSION) {
       set_name(fr->CString());
       set_is_one_time_event(fr->Unsigned8());
@@ -148,9 +141,14 @@ void Event_Message_Box::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) 
       return;
    }
    throw wexception("Message Box Event with unknown/unhandled version %i in map!\n", version);
+#endif
 }
 
-void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
+void Event_Message_Box::Write(Section* fs, Editor_Game_Base *egbase) {
+    log( "TODO: Event_Message_Box::Write\n");
+    assert(0);
+       
+#if 0 
    // First of all the id
    fw->Unsigned16(get_id());
 
@@ -204,12 +202,13 @@ void Event_Message_Box::Write(FileWrite* fw, Editor_Game_Base *egbase) {
    // Write all trigger ids
    write_triggers(fw, egbase);
    // done
+#endif
 }
 
 /*
  * check if trigger conditions are done
  */
-void Event_Message_Box::run(Game* game) {
+Event::State Event_Message_Box::run(Game* game) {
 
    Message_Box_Event_Message_Box* mb=new Message_Box_Event_Message_Box(game, this);
    if(get_is_modal()) {
@@ -217,9 +216,11 @@ void Event_Message_Box::run(Game* game) {
       delete mb;
    }
 
-   // If this is a one timer, release our triggers
-   // and forget about us
-   reinitialize(game);
+   log( "TODO: message box run: look if window is still open!\n");
+   assert( 0 );
+
+   m_state = DONE;
+   return m_state;
 }
 
 

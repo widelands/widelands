@@ -44,23 +44,34 @@ Widelands_Map_Battle_Data_Packet::~Widelands_Map_Battle_Data_Packet(void)
 /*
  * Read Function
  */
-void Widelands_Map_Battle_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception) 
+void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception) 
 {
+   if( skip ) 
+      return;
+
+   FileRead fr;
+   try {
+      fr.Open( fs, "binary/battle" );
+   } catch ( ... ) {
+      // not there, so skip
+      return ;
+   }
+
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version == CURRENT_PACKET_VERSION)
    {
-      int battles = fr->Unsigned32();
+      int battles = fr.Unsigned32();
       for (int i = 0; i < battles; i++)
       {
          Battle* battle = 0;
 
-         int serial = fr->Unsigned32();
-         int next = fr->Unsigned32();
-         int last = fr->Unsigned32();
-         int sol1 = fr->Unsigned32();
-         int sol2 = fr->Unsigned32();
+         int serial = fr.Unsigned32();
+         int next = fr.Unsigned32();
+         int last = fr.Unsigned32();
+         int sol1 = fr.Unsigned32();
+         int sol2 = fr.Unsigned32();
          
          battle = egbase->create_battle ();
                
@@ -83,7 +94,7 @@ void Widelands_Map_Battle_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egba
          // and register it with the object loader for further loading
          mol->register_object(egbase, serial, battle);
       }
-      if (fr->Unsigned32() != 0xffffffff)
+      if (fr.Unsigned32() != 0xffffffff)
          throw wexception ("Error in Widelands_Map_Battle_Data_Packet : Couldn't find 0xffffffff.");
       return; // End of packet, do not run into assert
    }
@@ -96,21 +107,20 @@ void Widelands_Map_Battle_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egba
  * Write Function.
  * This writes ALL the information about battles !
  */
-void Widelands_Map_Battle_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception) 
+void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception) 
 {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_BATTLE);
-
+   FileWrite fw; 
+   
    // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    std::vector<int> serials = egbase->get_battle_serials();
    
    // Here we will insert skip data (number of battles) 
    // later, write a dummy for know
-   int filepos = fw->GetFilePos();
+   int filepos = fw.GetFilePos();
    int battles = 0;
-   fw->Unsigned32(0x00000000);
+   fw.Unsigned32(0x00000000);
   
    
    for (uint i = 0; i < serials.size(); i++)
@@ -125,36 +135,38 @@ void Widelands_Map_Battle_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* eg
       assert (!mos->is_object_known(b));
       uint reg = mos->register_object(b);
       
-      fw->Unsigned32(reg);  // Something like serial ..
+      fw.Unsigned32(reg);  // Something like serial ..
       
          // Write time to next assault
-      fw->Unsigned32(b->m_next_assault);
+      fw.Unsigned32(b->m_next_assault);
          
          // Write the last try
-      fw->Unsigned32(b->m_last_try);
+      fw.Unsigned32(b->m_last_try);
       
          // And now, the serials of the soldiers !
       if (b->m_first)
       {
          assert(mos->is_object_known(b->m_first));
-         fw->Unsigned32 (mos->get_object_file_index(b->m_first));
+         fw.Unsigned32 (mos->get_object_file_index(b->m_first));
       }
       else
-         fw->Unsigned32 (0);
+         fw.Unsigned32 (0);
             
       if (b->m_second)
       {
          assert(mos->is_object_known(b->m_second));
-         fw->Unsigned32(mos->get_object_file_index(b->m_second));
+         fw.Unsigned32(mos->get_object_file_index(b->m_second));
       }
       else
-         fw->Unsigned32 (0);
+         fw.Unsigned32 (0);
       battles++;
    }
    
    // Now, write the number of battles
-   fw->Unsigned32(0xffffffff);
-   fw->Unsigned32(battles, filepos);
+   fw.Unsigned32(0xffffffff);
+   fw.Unsigned32(battles, filepos);
    // DONE
+
+   fw.Write( fs, "binary/battle" );
 }
 

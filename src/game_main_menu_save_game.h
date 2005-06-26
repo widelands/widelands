@@ -42,7 +42,7 @@ class Game_Main_Menu_Save_Game : public UIUniqueWindow {
       void double_clicked(int);
 
       void fill_list(void);
-      bool save_game(std::string);
+      bool save_game(std::string, bool binary);
       
       Interactive_Player* m_parent;
       UIEdit_Box* m_editbox;

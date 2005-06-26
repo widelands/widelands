@@ -28,9 +28,8 @@ static const int TRIGGER_VERSION = 1;
  * Init and cleanup
  */
 Trigger_Null::Trigger_Null(void) {
-   set_name("Null Trigger");
+   set_name(L"Null Trigger");
    set_trigger(false);
-   set_is_one_time_trigger(true);
 
    m_value=m_should_toggle=false;
 }
@@ -41,26 +40,18 @@ Trigger_Null::~Trigger_Null(void) {
 /*
  * File Read, File Write
  */
-void Trigger_Null::Read(FileRead* fr, Editor_Game_Base*) {
-   int version=fr->Unsigned16();
-   if(version <= TRIGGER_VERSION) {
-      set_name(fr->CString());
+void Trigger_Null::Read(Section* s, Editor_Game_Base*) {
+   int version= s->get_safe_int( "version" );
+   
+   if(version == TRIGGER_VERSION) {
       return;
    }
    throw wexception("Null Trigger with unknown/unhandled version %i in map!\n", version);
 }
 
-void Trigger_Null::Write(FileWrite* fw) {
-   // First of all the id
-   fw->Unsigned16(get_id());
-
-   // Now the version
-   fw->Unsigned16(TRIGGER_VERSION);
-
-   // Name
-   fw->Data(get_name(), strlen(get_name()));
-   fw->Unsigned8('\0');
-
+void Trigger_Null::Write(Section* s) {
+   // version
+   s->set_int( "version", TRIGGER_VERSION );
    // done
 }
 
@@ -78,6 +69,6 @@ void Trigger_Null::check_set_conditions(Game* game) {
  * Reset this trigger. This is only valid for non one timers
  */
 void Trigger_Null::reset_trigger(Game* game) {
-   // This shouldn't be called, this is a one time trigger always
-   assert(0);
+   m_should_toggle = false;
+   m_value = false;
 }

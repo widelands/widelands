@@ -1,3 +1,8 @@
+- added new maps from winterwind
+- implemented new trigger system. This invalidates every scenario, campaign and map.
+- save now changes into zip files, added option nozip for debugging reasons
+- save changed to save into directory
+- added trigger conditionals
 - Patch to fix graphic problems:
  * Alpha instead of clrkey
  * Fixed all bugs with MacOSx

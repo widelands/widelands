@@ -1,0 +1,66 @@
+/*
+ * Copyright (C) 2002-5 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#ifndef __S__EVENTCHAIN_MANAGER_H
+#define __S__EVENTCHAIN_MANAGER_H
+
+#include "error.h"
+#include "event_chain.h"
+#include <string>
+
+class Event;
+
+/*
+ * The Eventchain Manager keeps all event chains
+ * in order
+ *
+ */
+
+/*
+ * The manager himself. 
+ * This is mainly a wrapper, the function
+ * could have also been implemented directly in the map.
+ *
+ * But it is better this way.
+ */
+class MapEventChainManager {
+   public:
+      MapEventChainManager( void );
+      ~MapEventChainManager( void );
+
+      /*
+       * Register a new eventchain
+       */
+      bool register_new_eventchain( EventChain* );
+
+      /*
+       * Get a eventchain
+       */
+      EventChain* get_eventchain( const wchar_t* name );
+      void delete_eventchain( const wchar_t* name );
+
+      inline int get_nr_eventchains( void ) { return m_eventchains.size(); }
+      inline EventChain* get_eventchain_by_nr( int i ) { assert(i < (int)m_eventchains.size()); return m_eventchains[i]; }
+
+   private:
+      std::vector<EventChain*>      m_eventchains; 
+};
+
+#endif
+

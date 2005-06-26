@@ -34,15 +34,14 @@ class Event_Unhide_Area : public Event {
       ~Event_Unhide_Area();
 
       // one liner functions
-      uint get_id(void) { return EVENT_UNHIDE_AREA; }
+      const char* get_id(void) { return "unhide_area"; }
 
-      void run(Game*);
+      State run(Game*);
       virtual void reinitialize(Game*);
-      virtual void cleanup(Editor_Game_Base* g);
 
       // File Functions
-      void Write(FileWrite*, Editor_Game_Base*);
-      void Read(FileRead*, Editor_Game_Base*, bool);
+      void Write(Section*, Editor_Game_Base*);
+      void Read(Section*, Editor_Game_Base*);
 
       inline void set_coords(Coords pt) { m_pt=pt; }
       inline Coords get_coords(void) { return m_pt; }

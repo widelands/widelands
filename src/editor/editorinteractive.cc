@@ -266,6 +266,7 @@ void Editor_Interactive::field_clicked() {
    Map* m=get_map();
    FCoords cords(get_fieldsel_pos(), m->get_field(get_fieldsel_pos()));
    tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, cords, m, this);
+   get_mapview()->need_complete_redraw(); 
    set_need_save(true);
 }
 

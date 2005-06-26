@@ -1,0 +1,93 @@
+/*
+ * Copyright (C) 2002-5 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#include <wchar.h>
+#include <vector>
+#include "map_event_manager.h"
+#include "event.h"
+
+/*
+ * Map Event Manager implementation
+ */
+MapEventManager::MapEventManager( void ) {
+}
+
+MapEventManager::~MapEventManager( void ) {
+   for( uint i = 0; i < m_events.size(); i++) 
+      delete m_events[i];
+   m_events.resize( 0 );
+}
+
+/*
+ * Register a new event
+ */
+bool MapEventManager::register_new_event( Event* mv ) {
+   // check if this event is already known
+   if( get_event( mv->get_name() ) ) 
+         return 0;
+
+   m_events.push_back( mv );
+   return true;
+}
+
+/*
+ * Get events
+ */
+Event* MapEventManager::get_event( const wchar_t* name ) {
+   uint i;
+   Event* retval = 0;
+   for( i = 0; i < m_events.size(); i++) {
+      if( !wcscmp( m_events[i]->get_name(), name ) ) {
+         retval = m_events[i];
+         break;
+      }
+   }
+   
+   return retval;
+}
+
+/*
+ * Remove a event 
+ */
+void MapEventManager::delete_event( const wchar_t* name ) {
+   for( uint i = 0; i < m_events.size(); i++) {
+      if( !wcscmp( m_events[i]->get_name(), name ) ) {
+         delete m_events[i];
+         m_events[i] = m_events[m_events.size() - 1];
+         m_events.resize( m_events.size() - 1 );
+         break;
+      }
+   }
+}
+
+/*
+ * Delete all unreferenced events 
+ */
+void MapEventManager::delete_unreferenced_events( void ) {
+   uint i = 0;
+   while( i < m_events.size() ) {
+      Event* tr = m_events[i];
+      if( tr->get_referencers().empty() ) {
+         delete_event(tr->get_name()); 
+         i = 0; 
+         continue; 
+      }
+      ++i;
+   }
+}

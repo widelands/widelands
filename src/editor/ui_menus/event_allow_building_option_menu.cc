@@ -33,7 +33,7 @@
 #include "ui_editbox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
-
+#include "util.h"
 
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :
    UIWindow(parent, 0, 0, 200, 280, "Event Option Menu") {
@@ -71,13 +71,7 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    // Name editbox
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text(event->get_name());
-   posy+=20+spacing;
-
-   // Only run once CB
-   new UITextarea(this, spacing, posy, 150, 20, "Only run once: ", Align_CenterLeft);
-   m_is_one_time_event=new UICheckbox(this, spacing+150, posy);
-   m_is_one_time_event->set_state(m_event->is_one_time_event());
+   m_name->set_text( narrow_string( event->get_name()).c_str() );
    posy+=20+spacing;
 
    // Player
@@ -164,8 +158,7 @@ void Event_Allow_Building_Option_Menu::clicked(int i) {
          {
             // ok button
             if(m_name->get_text())
-               m_event->set_name(m_name->get_text());
-            m_event->set_is_one_time_event(m_is_one_time_event->get_state());
+               m_event->set_name( widen_string( m_name->get_text()).c_str() );
             if(m_event->get_player()!=m_player && m_event->get_player()!=-1) 
                m_parent->unreference_player_tribe(m_event->get_player(), m_event);
             if(m_event->get_player()!=m_player) { 

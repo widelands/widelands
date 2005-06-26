@@ -112,6 +112,7 @@ void UIListselect::add_entry(const char *name, void* value, bool select, int pic
 
 	e->value = value;
    e->picid = picid;
+   e->use_clr = false;
 	strcpy(e->name, name);
 
    int entry_height=0;
@@ -131,12 +132,26 @@ void UIListselect::add_entry(const char *name, void* value, bool select, int pic
 
 	update(0, 0, get_eff_w(), get_h());
    if(select) {
-      m_selection=m_entries.size()-1;
-		if (m_show_check)
-			m_entries[m_selection]->picid = m_check_picid;
+      UIListselect::select( m_entries.size() - 1);
 	}
 }
 
+/*
+ * Switch two entries 
+ */
+void UIListselect::switch_entries( int n, int m ) {
+   if( n < 0 || m < 0) return;
+   if( n >= get_nr_entries() || m >= get_nr_entries()) return;
+   
+   Entry* temp = m_entries[n];
+   m_entries[n] = m_entries[m];
+   m_entries[m] = temp;
+
+   if( m_selection == n ) 
+      m_selection = m;
+   else if ( m_selection == m )
+      m_selection = n;
+}
 
 /*
  * Sort the listbox alphabetically. make sure that the current selection stays
@@ -256,8 +271,12 @@ void UIListselect::draw(RenderTarget* dst)
             x=1;
       }
 
+      RGBColor col = UI_FONT_CLR_FG;
+      if( e->use_clr ) 
+         col = e->clr;
+  
       // Horizontal center the string
-		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->name, m_align, -1);
+		g_fh->draw_string(dst, UI_FONT_SMALL, col, RGBColor(0,0,0), x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->name, m_align, -1);
 
       // Now draw pictures
       if(e->picid!=-1) {

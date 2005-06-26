@@ -30,6 +30,7 @@
 #include "error.h"
 #include "map.h"
 #include "graphic.h"
+#include "util.h"
 
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* parent, Event_Move_View* event) :
    UIWindow(parent, 0, 0, 180, 200, "Event Option Menu") {
@@ -52,15 +53,9 @@ Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* par
    // Name editbox
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text(event->get_name());
+   m_name->set_text( narrow_string( event->get_name()).c_str() );
    posy+=20+spacing;
 
-   // Only run once CB
-   new UITextarea(this, spacing, posy, 150, 20, "Only run once: ", Align_CenterLeft);
-   m_is_one_time_event=new UICheckbox(this, spacing+150, posy);
-   m_is_one_time_event->set_state(m_event->is_one_time_event());
-
-   posy+=20+spacing;
    // Set Field Buttons
    new UITextarea(this, spacing, posy, get_inner_w(), 15, "Current position: ", Align_CenterLeft);
    posy+=20+spacing;
@@ -164,9 +159,8 @@ void Event_Move_View_Option_Menu::clicked(int i) {
       case 1:
          {
             // ok button
-            m_event->set_is_one_time_event(m_is_one_time_event->get_state());
             if(m_name->get_text())
-               m_event->set_name(m_name->get_text());
+               m_event->set_name( widen_string( m_name->get_text()).c_str() );
             m_event->set_coords(Coords(m_x,m_y));
             end_modal(1);
             return;

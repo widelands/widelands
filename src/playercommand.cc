@@ -17,6 +17,7 @@
  *
  */
 
+#include "error.h"
 #include "filesystem.h"
 #include "game.h"
 #include "instances.h"

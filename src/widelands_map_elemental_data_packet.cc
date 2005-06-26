@@ -17,10 +17,11 @@
  *
  */
 
-#include "widelands_map_elemental_data_packet.h"
-#include "filesystem.h"
 #include "editor_game_base.h"
+#include "filesystem.h"
 #include "map.h"
+#include "profile.h"
+#include "widelands_map_elemental_data_packet.h"
 #include "world.h"
 
 #define CURRENT_PACKET_VERSION 1
@@ -34,39 +35,31 @@ Widelands_Map_Elemental_Data_Packet::~Widelands_Map_Elemental_Data_Packet(void) 
 /*
  * Preread function
  */
-void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileRead* fr, Map* map) throw(wexception) {
-   char buf[2000];
+void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileSystem* fs, Map* map) throw(wexception) {
 
-   memcpy(buf, fr->Data(sizeof(WLMF_MAGIC)), sizeof(WLMF_MAGIC));
-   buf[4]='\0';
-   if(strcmp(buf, WLMF_MAGIC)) throw wexception("Invalid File! Magic is '%s' instead of '%s'", buf, WLMF_MAGIC);
-
-   m_version=fr->Unsigned16();
-   if(m_version > WLMF_VERSION) throw wexception("Map newer than binary!");
+   Profile prof;
+   prof.read( "elemental", 0, fs );
+   Section* s = prof.get_section( "global" );
 
    // check packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=s->get_int( "packet_version" );
 
    if(packet_version == CURRENT_PACKET_VERSION) {
-      map->m_width=fr->Unsigned16();
-      map->m_height=fr->Unsigned16();
-      map->set_nrplayers(fr->Unsigned8());
+      map->m_width= s->get_int( "map_w" );
+      map->m_height= s->get_int( "map_h" );
+      map->set_nrplayers( s->get_int("nr_players"));
 
       // World name
-      memcpy(buf, fr->Data(WORLD_NAME_LEN), WORLD_NAME_LEN);
-      map->set_world_name(buf);
+      map->set_world_name( s->get_string("world"));
 
       // Name
-      memcpy(buf, fr->Data(MAP_NAME_LEN), MAP_NAME_LEN);
-      map->set_name(buf);
+      map->set_name( s->get_string( "name" ));
 
       // Author
-      memcpy(buf, fr->Data(MAP_AUTHOR_LEN), MAP_AUTHOR_LEN);
-      map->set_author(buf);
+      map->set_author( s->get_string( "author" ));
 
       // Descr
-      memcpy(buf, fr->Data(MAP_DESCR_LEN), MAP_DESCR_LEN);
-      map->set_description(buf);
+      map->set_description( s->get_string( "descr" ));
       return;
    }
    assert(0); // should never be here
@@ -77,41 +70,35 @@ void Widelands_Map_Elemental_Data_Packet::Pre_Read(FileRead* fr, Map* map) throw
 /*
  * Read Function
  */
-void Widelands_Map_Elemental_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
-   Pre_Read(fr, egbase->get_map());
+void Widelands_Map_Elemental_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+   Pre_Read(fs, egbase->get_map());
 }
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Elemental_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   // first of all the magic bytes
-   fw->Data(WLMF_MAGIC, sizeof(WLMF_MAGIC));
-
-   // Now, map version
-   fw->Unsigned16(WLMF_VERSION);
+void Widelands_Map_Elemental_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+  
+   Profile prof;
+   Section* s = prof.create_section( "global" );
 
    // Packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
-
-   // Map dimensions
+   s->set_int( "packet_version", CURRENT_PACKET_VERSION );
+   // Map Dimension   
    Map* map=egbase->get_map();
-   fw->Unsigned16(map->get_width());
-   fw->Unsigned16(map->get_height());
-
-   // Nr of players
-   fw->Unsigned8(map->get_nrplayers());
-
-   // World name
-   fw->Data(map->get_world_name(), WORLD_NAME_LEN);
-
-   // Name
-   fw->Data(map->get_name(), MAP_NAME_LEN);
-
+   s->set_int( "map_w", map->get_width());
+   s->set_int( "map_h", map->get_height());
+   // NR players
+   s->set_int( "nr_players", map->get_nrplayers());
+   // Worldname
+   s->set_string( "world", map->get_world_name());
+   // Map Name
+   s->set_string( "name", map->get_name());
    // Author
-   fw->Data(map->get_author(), MAP_AUTHOR_LEN);
-
+   s->set_string( "author", map->get_author());
    // Descr
-   fw->Data(map->get_description(), WORLD_DESCR_LEN);
+   s->set_string( "descr", map->get_description());
+
+   prof.write("elemental", false, fs );
 }

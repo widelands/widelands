@@ -17,30 +17,51 @@
  *
  */
 
-#include "widelands_map_loader.h"
-#include "widelands_map_elemental_data_packet.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_player_names_and_tribes_data_packet.h"
-#include "widelands_map_data_packet_ids.h"
-#include "widelands_map_data_packet_factory.h"
+#include "editor_game_base.h"
+#include "error.h"
 #include "filesystem.h"
 #include "map.h"
+#include "player.h"
+#include "tribe.h"
+#include "widelands_map_allowed_buildings_data_packet.h"
+#include "widelands_map_battle_data_packet.h"
+#include "widelands_map_bob_data_packet.h"
+#include "widelands_map_bobdata_data_packet.h"
+#include "widelands_map_building_data_packet.h"
+#include "widelands_map_buildingdata_data_packet.h"
+#include "widelands_map_elemental_data_packet.h"
+#include "widelands_map_event_data_packet.h"
+#include "widelands_map_event_chain_data_packet.h"
+#include "widelands_map_flag_data_packet.h"
+#include "widelands_map_flagdata_data_packet.h"
+#include "widelands_map_data_packet_ids.h"
+#include "widelands_map_heights_data_packet.h"
+#include "widelands_map_immovable_data_packet.h"
+#include "widelands_map_immovabledata_data_packet.h"
+#include "widelands_map_loader.h"
+#include "widelands_map_map_object_loader.h"
+#include "widelands_map_objective_data_packet.h"
+#include "widelands_map_owned_fields_data_packet.h"
+#include "widelands_map_player_names_and_tribes_data_packet.h"
+#include "widelands_map_player_position_data_packet.h"
+#include "widelands_map_resources_data_packet.h"
+#include "widelands_map_road_data_packet.h"
+#include "widelands_map_roaddata_data_packet.h"
+#include "widelands_map_seen_fields_data_packet.h"
+#include "widelands_map_terrain_data_packet.h"
+#include "widelands_map_trigger_data_packet.h"
+#include "widelands_map_variable_data_packet.h"
+#include "widelands_map_ware_data_packet.h"
+#include "widelands_map_waredata_data_packet.h"
 #include "world.h"
-#include "error.h"
+
 
 /*
  * Constructor
  */
-Widelands_Map_Loader::Widelands_Map_Loader(const char* filename, Map* map) :
-   Map_Loader(filename, map) {
-      m_map=map;
-      m_filename=filename;
-      m_fr=0;
-      m_mol=0;
-}
-Widelands_Map_Loader::Widelands_Map_Loader(FileRead* fr, Map* map) : 
+Widelands_Map_Loader::Widelands_Map_Loader(FileSystem* fs, Map* map) : 
    Map_Loader("", map) {
-   m_fr=fr;
+   m_fs=fs;
    m_map=map;
    m_mol=0;
 }
@@ -61,39 +82,22 @@ Widelands_Map_Loader::~Widelands_Map_Loader(void) {
 int Widelands_Map_Loader::preload_map(bool scenario) {
    assert(get_state()!=STATE_LOADED);
  
-   FileRead* usefr=0;
-  
-   if(m_fr) 
-      usefr=m_fr;
-   else {
-      usefr=new FileRead();
-      usefr->Open(g_fs, m_filename.c_str());
-   }
-    
    m_map->cleanup();
 
    // Load elemental data block
    Widelands_Map_Elemental_Data_Packet mp;
 
-   mp.Pre_Read(usefr, m_map);
+   mp.Pre_Read(m_fs, m_map);
 
    if(!World::exists_world(m_map->get_world_name())) {
       throw wexception("%s: %s", m_map->get_world_name(), "World doesn't exist!");
    }
 
-
-   if(usefr->Unsigned16()!=PACKET_PLAYER_NAM_TRIB)
-      throw wexception("Wrong packet order in map!\n");
-
    Widelands_Map_Player_Names_And_Tribes_Data_Packet* dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
-   dp->Pre_Read(usefr, m_map, !scenario);
+   dp->Pre_Read(m_fs, m_map, !scenario);
    delete dp;
 
    set_state(STATE_PRELOADED);
-
-   if(!m_fr) 
-      delete usefr;
-
 
    return 0;
 }
@@ -102,18 +106,10 @@ int Widelands_Map_Loader::preload_map(bool scenario) {
  * Load the complete map and make sure that it runs without problems
  */
 int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scenario) {
-   FileRead* usefr=0;
-  
-   if(m_fr) 
-      usefr=m_fr;
-   else {
-      usefr=new FileRead();
-      usefr->Open(g_fs, m_filename.c_str());
-   }
    
    // Load elemental data block (again)
    Widelands_Map_Elemental_Data_Packet mp;
-   mp.Pre_Read(usefr, m_map);
+   mp.Pre_Read(m_fs, m_map);
    
    // now, load the world, load the rest infos from the map
    m_map->load_world();
@@ -125,32 +121,205 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
       delete m_mol;
    m_mol=new Widelands_Map_Map_Object_Loader;
    
-   if(mp.get_version()<=WLMF_VERSION) {
-      // ok, now go on and load the rest
-      Widelands_Map_Data_Packet_Factory fac;
+   Widelands_Map_Data_Packet* dp;
 
-      ushort id;
-      Widelands_Map_Data_Packet* pak;
-      while(!usefr->IsEOF()) {
-         id=usefr->Unsigned16();
-         if(id==PACKET_END_OF_MAP_DATA) break;
-         log("Creating packet for id: %i. Reading packet ... ", id);
-         pak=fac.create_correct_packet(id);
-         pak->Read(usefr, egbase, !scenario, m_mol);
-         log("done\n");
-         delete pak;
-      }
-   }
+   // MANDATORY PACKETS
+   // Start with writing the map out, first Elemental data
+   // PRELOAD DATA BEGIN
+   log("Reading Elemental Data ... ");
+   dp= new Widelands_Map_Elemental_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
 
-   if(m_mol->get_nr_unloaded_objects())
-      throw wexception("There are %i unloaded objects. This is a bug, please consider committing!\n", m_mol->get_nr_unloaded_objects());
+   // now player names and tribes
+   log("Reading Player Names And Tribe Data ... ");
+   dp=new Widelands_Map_Player_Names_And_Tribes_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+   // PRELOAD DATA END
+
+   // now heights
+   log("Reading Heights Data ... ");
+   dp=new Widelands_Map_Heights_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+   
+   // and terrains
+   log("Reading Terrain Data ... ");
+   dp=new Widelands_Map_Terrain_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // now immovables
+   log("Reading Immovable Data ... ");
+   dp=new Widelands_Map_Immovable_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // now player pos
+   log("Reading Player Start Position Data ... ");
+   dp=new Widelands_Map_Player_Position_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // now bobs
+   log("Reading Bob Data ... ");
+   dp=new Widelands_Map_Bob_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // now resources
+   log("Reading Resources Data ... ");
+   dp=new Widelands_Map_Resources_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // NON MANDATORY PACKETS BELOW THIS POINT
+   // Triggers
+   log("Reading Trigger Data ... ");
+   dp=new Widelands_Map_Trigger_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+   
+   // Events
+   log("Reading Event Data ... ");
+   dp=new Widelands_Map_Event_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // Event Chains
+   log("Reading Event Chain Data ... ");
+   dp=new Widelands_Map_EventChain_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Allowed Buildings Data ... ");
+   dp=new Widelands_Map_Allowed_Buildings_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // We always write the next few packets since it 
+   // takes too much time looking if it really is needed
+   // !!!!!!!!!! NOTE  
+   // This packet must be before any building or road packet. So do not 
+   // change this order without knowing what you do
+   // EXISTENT PACKETS
+   log("Reading Flag Data ... ");
+   dp=new Widelands_Map_Flag_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Road Data ... ");
+   dp=new Widelands_Map_Road_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Building Data ... ");
+   dp=new Widelands_Map_Building_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+
+   log("Reading Map Ware Data ... ");
+   dp=new Widelands_Map_Ware_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // DATA PACKETS 
+   log("Reading Flagdata Data ... ");
+   dp=new Widelands_Map_Flagdata_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Roaddata Data ... ");
+   dp=new Widelands_Map_Roaddata_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+
+   log("Reading Buildingdata Data ... ");
+   dp=new Widelands_Map_Buildingdata_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+
+   log("Reading Waredata Data ... ");
+   dp=new Widelands_Map_Waredata_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Bobdata Data ... ");
+   dp=new Widelands_Map_Bobdata_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Immovabledata Data ... ");
+   dp=new Widelands_Map_Immovabledata_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Owned-Fields Data ... ");
+   dp=new Widelands_Map_Owned_Fields_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Seen-Fields Data ... ");
+   dp=new Widelands_Map_Seen_Fields_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+
+   // This should be at least after loading Soldiers (Bobs)
+   // NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
+   log("Reading Battle Data ... ");
+   dp=new Widelands_Map_Battle_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+  
+   log("Reading Variable Data ... ");
+   dp=new Widelands_Map_Variable_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   log("Reading Objective Data ... ");
+   dp=new Widelands_Map_Objective_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+ 
+  if(m_mol->get_nr_unloaded_objects())
+      log("WARNING: There are %i unloaded objects. This is a bug, please consider committing!\n", m_mol->get_nr_unloaded_objects());
 
    m_map->recalc_whole_map();
 
    set_state(STATE_LOADED);
-
-   if(!m_fr) 
-      delete usefr;
 
    return 0;
 }

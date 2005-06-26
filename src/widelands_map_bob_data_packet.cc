@@ -28,9 +28,9 @@
 #include "widelands_map_bob_data_packet.h"
 #include "error.h"
 
-// VERSION 1: inital release
-// VERSION 2: workers are also handled here, registering through Map_Object_Loader/Saver
-#define CURRENT_PACKET_VERSION 2
+// VERSION 1: 
+//   - workers are also handled here, registering through Map_Object_Loader/Saver
+#define CURRENT_PACKET_VERSION 1
 
 /*
  * Destructor
@@ -41,31 +41,32 @@ Widelands_Map_Bob_Data_Packet::~Widelands_Map_Bob_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Bob_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception) {
+void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception) {
+
+   FileRead fr; 
+   fr.Open( fs, "binary/bob" );
+
    Map* map=egbase->get_map();
 
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
-   if(packet_version==1) {
-      read_packet_version_1(fr,egbase,skip,mol);
-      return;
-   } else if (packet_version==CURRENT_PACKET_VERSION) {
+   if (packet_version==CURRENT_PACKET_VERSION) {
       // Now get all the the bobs
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
-            uint nr_bobs=fr->Unsigned32();
+            uint nr_bobs=fr.Unsigned32();
       
             uint i=0;
 
             assert(!egbase->get_map()->get_field(Coords(x,y))->get_first_bob());
             
             for(i=0;i<nr_bobs;i++) {
-               std::string owner=fr->CString();
-               std::string name=fr->CString();
-               uchar subtype=fr->Unsigned8();
+               std::string owner=fr.CString();
+               std::string name=fr.CString();
+               uchar subtype=fr.Unsigned8();
                
-               uint reg=fr->Unsigned32();
+               uint reg=fr.Unsigned32();
                assert(!mol->is_object_known(reg));
 
                Bob* bob=0;
@@ -112,22 +113,20 @@ void Widelands_Map_Bob_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase,
       // DONE
       return;
    }
-   
-      assert(0); // never here
+   assert(0); // never here
 }
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Bob_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception) {
+void Widelands_Map_Bob_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception) {
+   FileWrite fw;
+
    assert(mos);
 
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_BOB);
-
    // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // Now, all bob id and registerd it 
    // A Field can have more
@@ -143,7 +142,7 @@ void Widelands_Map_Bob_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbas
             std::vector<Bob*> bobarr;
          
             egbase->get_map()->find_bobs(Coords(x,y), 0, &bobarr);
-            fw->Unsigned32(bobarr.size());
+            fw.Unsigned32(bobarr.size());
 
             for(uint i=0; i<bobarr.size(); i++) {
                Bob* ibob=bobarr[i];
@@ -163,52 +162,19 @@ void Widelands_Map_Bob_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbas
                uint reg=mos->register_object(bobarr[i]);
                // Write its owner
                std::string owner_tribe = bobarr[i]->get_descr()->get_owner_tribe() ? bobarr[i]->get_descr()->get_owner_tribe()->get_name() : "world";
-               fw->CString(owner_tribe.c_str());
+               fw.CString(owner_tribe.c_str());
                // Write it's name
-               fw->CString(bobarr[i]->get_name().c_str());
+               fw.CString(bobarr[i]->get_name().c_str());
                // Write it's subtype
-               fw->Unsigned8(bobarr[i]->get_bob_type());
+               fw.Unsigned8(bobarr[i]->get_bob_type());
                // And it's file register index
-               fw->Unsigned32(reg);
+               fw.Unsigned32(reg);
             }
       }
    }
 
+   fw.Write( fs, "binary/bob");
+
    // DONE
-}
-
-
-/* 
- * Below here are the read functions for old map formats
- */
-void Widelands_Map_Bob_Data_Packet::read_packet_version_1(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) {
-   Map* map=egbase->get_map();
-   World* world=map->get_world(); 
-   int nr_bobs=fr->Unsigned16();
-   if(nr_bobs>world->get_nr_bobs()) throw wexception("Number of bobs in map (%i) is bigger than in world (%i)",
-         nr_bobs, world->get_nr_bobs());
-
-   // construct ids and map
-   std::map<uchar,Bob_Descr*> smap;
-   char* buffer;
-   for(int i=0; i<nr_bobs; i++) {
-      int id=fr->Unsigned16();
-      buffer=fr->CString();
-      if(!world->get_bob_descr(world->get_bob(buffer))) throw wexception("Bob '%s' exists in map, not in world!", buffer);
-      smap[id]=world->get_bob_descr(world->get_bob(buffer));
-   }
-
-   // Now get all the the bobs
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         int nr_bobs=fr->Unsigned8();
-
-         int i=0;
-         for(i=0;i<nr_bobs;i++) {
-            int id=fr->Unsigned16();
-            egbase->create_bob(Coords(x, y), id);
-         }
-      }
-   }
 }
 

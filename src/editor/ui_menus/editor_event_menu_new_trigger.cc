@@ -18,6 +18,7 @@
  */
 
 #include "editor_event_menu_new_trigger.h"
+#include "map_trigger_manager.h"
 #include "ui_window.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
@@ -52,7 +53,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
    uint i=0;
    for(i=0; i<Trigger_Factory::get_nr_of_available_triggers(); i++) {
-      Trigger_Descr* d=Trigger_Factory::get_correct_trigger_descr(i);
+      Trigger_Descr* d=Trigger_Factory::get_trigger_descr(i);
       m_trigger_list->add_entry(d->name, d);
    }
    m_trigger_list->sort();
@@ -109,17 +110,12 @@ void Editor_Event_Menu_New_Trigger::clicked(int i) {
    Trigger_Descr* d=static_cast<Trigger_Descr*>(m_trigger_list->get_selection());
    // Create new trigger
    Trigger* trig=
-      Trigger_Factory::make_trigger_with_option_dialog(d->id, m_parent, 0);
+      Trigger_Factory::make_trigger_with_option_dialog(d->id.c_str(), m_parent, 0);
    if(!trig) {
       // No trigger created, don't close us. let user choose other trigger
       return;
    }
-   if(m_parent->get_map()->trigger_exists(trig)) {
-      trig->decr_reference();
-      m_parent->get_map()->unregister_trigger(trig);
-   }
-   trig->incr_reference(); // Kludge that it doens't get deleted
-   m_parent->get_map()->register_new_trigger(trig);
+   m_parent->get_map()->get_mtm()->register_new_trigger(trig);
    end_modal(1);
    return;
 }

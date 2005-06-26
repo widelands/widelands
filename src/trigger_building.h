@@ -21,7 +21,6 @@
 #define __S__TRIGGER_BUILDING_H
 
 #include <string>
-#include "trigger_ids.h"
 #include "trigger.h"
 #include "geometry.h"
 
@@ -35,14 +34,14 @@ class Trigger_Building : public Trigger {
       ~Trigger_Building();
 
       // one liner functions
-      uint get_id(void) { return TRIGGER_BUILDING; }
+      const char* get_id(void) { return "building"; }
 
       void check_set_conditions(Game*);
       void reset_trigger(Game*);
 
       // File Functions
-      void Write(FileWrite*);
-      void Read(FileRead*, Editor_Game_Base*);
+      void Write(Section*);
+      void Read(Section*, Editor_Game_Base*);
 
       inline void set_coords(Coords pt) { m_pt=pt; }
       inline Coords get_coords(void) { return m_pt; }
@@ -50,14 +49,14 @@ class Trigger_Building : public Trigger {
       inline void set_player(int i) { m_player=i; }
       inline int get_area(void) { return m_area; }
       inline void set_area(int i) { m_area=i; }
-      const char* get_building(void) { return m_building.c_str(); }
-      void set_building(const char* b) { m_building=b; }
+      const wchar_t* get_building(void) { return m_building.c_str(); }
+      void set_building(const wchar_t* b) { m_building=b; }
       void set_building_count(int n) { m_count=n; }
       int get_building_count(void) { return m_count; }
  
    private:
       Coords m_pt;
-      std::string m_building;
+      std::wstring m_building;
       int m_player;
       int m_area;
       int m_count;

@@ -17,6 +17,7 @@
  *
  */
 
+#include "constants.h"
 #include "game.h"
 #include "game_loader.h"
 #include "game_main_menu_save_game.h"
@@ -112,23 +113,9 @@ void Game_Main_Menu_Save_Game::clicked(int id) {
    if(id==1) {
       // Ok
       std::string filename=m_editbox->get_text();
-      
-      if(filename=="") {
-         // Maybe a dir is selected
-         filename=static_cast<const char*>(m_ls->get_selection());
-      }
-
-      if(g_fs->IsDirectory(filename.c_str())) {
-         char buffer[256];
-         FS_CanonicalizeName(buffer, sizeof(buffer), filename.c_str());
-         m_curdir=buffer;
-         m_ls->clear();
-         m_gamefiles.clear();
-         fill_list();
-      } else {
-         if(save_game(filename)) 
-            die();
-      }
+   
+      if(save_game(filename, ! g_options.pull_section("global")->get_bool("nozip", false))) 
+         die();
    } else if(id==0) {
       // Cancel
       die();
@@ -141,32 +128,31 @@ void Game_Main_Menu_Save_Game::clicked(int id) {
 void Game_Main_Menu_Save_Game::selected(int i) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
-   if(!g_fs->IsDirectory(name)) {
-      Game_Loader gl(name, m_parent->get_game());
-      Game_Preload_Data_Packet gpdp;
-      gl.preload_game(&gpdp); // This has worked before, no problem
-     
-      char* fname = strdup(FS_Filename(name));
-      FS_StripExtension(fname);
-      m_editbox->set_text(fname);
-      free(fname);
-      m_ok_btn->set_enabled(true);
-      
-      m_name->set_text(gpdp.get_mapname());
-      
-      char buf[200];
-      uint gametime = gpdp.get_gametime();
+   
+   FileSystem* fs = g_fs->MakeSubFileSystem( name );
+   Game_Loader gl(fs, m_parent->get_game());
+   Game_Preload_Data_Packet gpdp;
+   gl.preload_game(&gpdp); // This has worked before, no problem
 
-      int hours = gametime / 3600000;
-      gametime -= hours * 3600000;
-      int minutes = gametime / 60000;
-      
-      sprintf(buf, "%02i:%02i", hours, minutes);
-      m_gametime->set_text(buf);
-   } else {
-      m_name->set_text("");
-      m_gametime->set_text("");
-   }
+   char* fname = strdup(FS_Filename(name));
+   FS_StripExtension(fname);
+   m_editbox->set_text(fname);
+   free(fname);
+   m_ok_btn->set_enabled(true);
+
+   m_name->set_text(gpdp.get_mapname());
+
+   char buf[200];
+   uint gametime = gpdp.get_gametime();
+
+   int hours = gametime / 3600000;
+   gametime -= hours * 3600000;
+   int minutes = gametime / 60000;
+
+   sprintf(buf, "%02i:%02i", hours, minutes);
+   m_gametime->set_text(buf);
+   
+   delete fs;
 }
 
 /*
@@ -183,23 +169,16 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
    // Fill it with all files we find. 
    g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
   
-   for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
-      const char *name = pname->c_str();
-      if(!strcmp(FS_Filename(name),".")) continue;
-      if(!strcmp(FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
-      if(!g_fs->IsDirectory(name)) continue;
-
-      m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
-   }
- 
    Game_Preload_Data_Packet gpdp;
    
    for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
       
-      Game_Loader* gl = new Game_Loader(name,m_parent->get_game());
-
+      FileSystem* fs = 0;
+      Game_Loader* gl = 0;
       try {
+         fs = g_fs->MakeSubFileSystem( name );
+         gl = new Game_Loader( fs,m_parent->get_game());
          gl->preload_game(&gpdp);
          char* fname = strdup(FS_Filename(name));
          FS_StripExtension(fname);
@@ -208,7 +187,10 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
       } catch(wexception& ) {
          // we simply skip illegal entries
       }
-      delete gl;
+      if( gl )
+         delete gl;
+      if( fs )
+         delete fs;
    }
    
    if(m_ls->get_nr_entries())
@@ -228,8 +210,7 @@ void Game_Main_Menu_Save_Game::edit_box_changed(void) {
  * returns true if dialog should close, false if it
  * should stay open
  */
-bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
-  
+bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    // Make sure that the base directory exists
    g_fs->EnsureDirectoryExists(m_basedir);
 
@@ -259,9 +240,20 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
       delete mbox;
       if(!retval) 
          return false;
+      
+      // Delete this
+      g_fs->Unlink( complete_filename );
    }
 
-   Game_Saver* gs=new Game_Saver(complete_filename.c_str(), m_parent->get_game());
+   // Make a filesystem out of this
+   FileSystem* fs;
+   if( !binary ) {
+      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_DIR );
+   } else {
+      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_ZIP );
+   }
+   
+   Game_Saver* gs=new Game_Saver(fs, m_parent->get_game());
    try {
       gs->save();
    } catch(std::exception& exe) {
@@ -272,8 +264,9 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename) {
       delete mbox;
    }
    delete gs;
+   delete fs;
    die();
-
+   
    return true;
 }
 

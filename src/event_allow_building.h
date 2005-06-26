@@ -33,15 +33,14 @@ class Event_Allow_Building : public Event {
       ~Event_Allow_Building();
 
       // one liner functions
-      uint get_id(void) { return EVENT_ALLOW_BUILDING; }
+      const char* get_id(void) { return "allow_building"; }
 
-      void run(Game*);
+      State run(Game*);
       virtual void reinitialize(Game*);
-      virtual void cleanup(Editor_Game_Base* g);
 
       // File Functions
-      void Write(FileWrite*, Editor_Game_Base*);
-      void Read(FileRead*, Editor_Game_Base*, bool);
+      void Write(Section*, Editor_Game_Base*);
+      void Read(Section*, Editor_Game_Base*);
 
       inline int get_player(void) { return m_player; }
       inline void set_player(int i) { m_player=i; }

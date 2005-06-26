@@ -107,7 +107,6 @@ called when the ok button has been clicked
 void Game_Main_Menu_Load_Game::clicked(int id) {
    if(id==1) {
       // Ok
-      // Maybe a dir is selected
       std::string filename=static_cast<const char*>(m_ls->get_selection());
 
       // Ok, load this map
@@ -125,28 +124,27 @@ void Game_Main_Menu_Load_Game::clicked(int id) {
 void Game_Main_Menu_Load_Game::selected(int i) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
-   if(!g_fs->IsDirectory(name)) {
-      Game_Loader gl(name, m_parent->get_game());
-      Game_Preload_Data_Packet gpdp;
-      gl.preload_game(&gpdp); // This has worked before, no problem
-     
-      m_ok_btn->set_enabled(true);
-      
-      m_name->set_text(gpdp.get_mapname());
-      
-      char buf[200];
-      uint gametime = gpdp.get_gametime();
+   FileSystem* fs = g_fs->MakeSubFileSystem( name );
+   
+   Game_Loader gl(fs, m_parent->get_game());
+   Game_Preload_Data_Packet gpdp;
+   gl.preload_game(&gpdp); // This has worked before, no problem
 
-      int hours = gametime / 3600000;
-      gametime -= hours * 3600000;
-      int minutes = gametime / 60000;
-      
-      sprintf(buf, "%02i:%02i", hours, minutes);
-      m_gametime->set_text(buf);
-   } else {
-      m_name->set_text("");
-      m_gametime->set_text("");
-   }
+   m_ok_btn->set_enabled(true);
+
+   m_name->set_text(gpdp.get_mapname());
+
+   char buf[200];
+   uint gametime = gpdp.get_gametime();
+
+   int hours = gametime / 3600000;
+   gametime -= hours * 3600000;
+   int minutes = gametime / 60000;
+
+   sprintf(buf, "%02i:%02i", hours, minutes);
+   m_gametime->set_text(buf);
+
+   delete fs;
 }
 
 /*
@@ -167,10 +165,13 @@ void Game_Main_Menu_Load_Game::fill_list(void) {
    
    for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
- 
-      Game_Loader* gl = new Game_Loader(name,m_parent->get_game());
 
+      
+      Game_Loader* gl = 0;
+      FileSystem* fs = 0;
       try {
+         fs = g_fs->MakeSubFileSystem( name ); 
+         gl = new Game_Loader(fs,m_parent->get_game());
          gl->preload_game(&gpdp);
          
          char* fname = strdup(FS_Filename(name));
@@ -181,7 +182,10 @@ void Game_Main_Menu_Load_Game::fill_list(void) {
       } catch(wexception& ) {
          // we simply skip illegal entries
       }
-      delete gl;
+      if( gl ) 
+         delete gl;
+      if( fs ) 
+         delete fs;
    }
    
    if(m_ls->get_nr_entries())
@@ -203,8 +207,11 @@ void Game_Main_Menu_Load_Game::edit_box_changed(void) {
  */
 bool Game_Main_Menu_Load_Game::load_game(std::string filename) {
   
-   Game_Loader* gl=new Game_Loader(filename.c_str(), m_parent->get_game());
+   Game_Loader* gl = 0;
+   FileSystem* fs = 0;
    try {
+      fs = g_fs->MakeSubFileSystem( filename );
+      gl=new Game_Loader(fs, m_parent->get_game());
       m_parent->get_game()->cleanup_for_load(true,true);
       gl->load_game();
       m_parent->get_game()->postload();
@@ -216,7 +223,10 @@ bool Game_Main_Menu_Load_Game::load_game(std::string filename) {
       mbox->run();
       delete mbox;
    }
-   delete gl;
+   if( gl )
+      delete gl;
+   if( fs ) 
+      delete fs;
    die();
 
    return true;

@@ -27,7 +27,7 @@
 #include "widelands_map_allowed_buildings_data_packet.h"
 #include "widelands_map_data_packet_ids.h"
 #include "world.h"
-
+#include "profile.h"
 
 #define CURRENT_PACKET_VERSION 1
 
@@ -40,13 +40,26 @@ Widelands_Map_Allowed_Buildings_Data_Packet::~Widelands_Map_Allowed_Buildings_Da
 /*
  * Read Function
  */
-void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
-   // read packet version
-   int packet_version=fr->Unsigned16();
+void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+   if( skip ) 
+      return; 
+   
+   Profile prof;
+   try {
+      prof.read("allow_building", 0, fs ); 
+   } catch( ... ) {
+      // Packet wasn't save. Same as skip
+      return;
+   }
+   Section* s = prof.get_section("global");
 
+   // read packet version
+   int packet_version = s->get_int("packet_version");
+
+   char buf[256];
    if(packet_version==CURRENT_PACKET_VERSION) {
       // First of all: if we shouldn't skip, all buildings default to false in the game (!not editor)
-      if(!skip && egbase->is_game()) {
+      if(egbase->is_game()) {
          int i=0;
          for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
             Player* plr=egbase->get_player(i);
@@ -66,26 +79,21 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game
          Player* plr=egbase->get_safe_player(i);
          if(!plr) continue; // skip this player, is data can not be saved
          Tribe_Descr* t;
-         
+      
          assert(plr);
          t=plr->get_tribe();
 
-         // Read number of buildings
-         ushort nr_buildings=fr->Unsigned16();
-
+         sprintf( buf, "player_%i", i );
+         s = prof.get_safe_section( buf );
+        
          // Write for all buildings if it is enabled
-         int b;
-         for(b=0; b<nr_buildings; b++) {
-            const char* name=fr->CString();
-            bool allowed=fr->Unsigned8();
-            
-            if(!skip) {
-               int index=t->get_building_index(name);
-               if(index==-1) 
-                  throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->get_name());
-
-               plr->allow_building(index, allowed);
-            }
+         const char* name;
+         while( (name=s->get_next_bool(0,0))) {
+            bool allowed = s->get_bool(name);
+            int index=t->get_building_index(name);
+            if(index==-1) 
+               throw wexception("Unknown building found in map (Allowed_Buildings_Data): %s is not in tribe %s", name, t->get_name());
+            plr->allow_building(index, allowed);
          }
       }
 
@@ -101,37 +109,40 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileRead* fr, Editor_Game
 /*
  * Write Function
  */
-void Widelands_Map_Allowed_Buildings_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_ALLOWED_BUILDINGS);
+void Widelands_Map_Allowed_Buildings_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+   Profile prof;
+   Section* s = prof.create_section("global");
 
-   // Now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
-
+   s->set_int("packet_version", CURRENT_PACKET_VERSION );
+  
+   char buf[256];
    int i=0;
    for(i=1; i<=egbase->get_map()->get_nrplayers(); i++) {
       Player* plr=egbase->get_player(i);
       if(!plr) continue; // skip this player, is data can not be saved
       Tribe_Descr* t;
-      if(plr) 
-         t=plr->get_tribe();
+      if( plr ) 
+         t = plr->get_tribe();
       else 
-         t=egbase->get_tribe(egbase->get_map()->get_scenario_player_tribe(i).c_str());
+         t = egbase->get_tribe(egbase->get_map()->get_scenario_player_tribe(i).c_str());
 
-      // Write out number of buildings
-      fw->Unsigned16(t->get_nrbuildings());
+      sprintf( buf, "player_%i", i );
+      s = prof.create_section( buf );
 
       // Write for all buildings if it is enabled
       int b;
       for(b=0; b<t->get_nrbuildings(); b++) {
          Building_Descr* building=t->get_building_descr(b);
          std::string name=building->get_name();
-         fw->CString(name.c_str());
+         bool val; 
          if(plr)
-            fw->Unsigned8(plr->is_building_allowed(b));
+            val = plr->is_building_allowed(b);
          else 
-            fw->Unsigned8(true);  // All known buildings are allowed
+            val = true; // All known buildings are allowed
+         s->set_bool(name.c_str(), val);
       }
    }
+
+   prof.write("allowed_buildings", false, fs );
    // Done
 }

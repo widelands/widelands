@@ -45,9 +45,19 @@ public:
    void remove_entry(int i);
    void remove_entry(const char* name);
 
+   void switch_entries( int, int );
+
+   void set_entry_color( uint n, RGBColor col ) {
+      assert( n < m_entries.size() );
+      m_entries[n]->use_clr = true;
+      m_entries[n]->clr = col;
+   }
+
+
 	void set_align(Align align);
 
 	inline int get_nr_entries(void) { return m_entries.size(); }
+	inline void* get_entry( uint n ) { if( n >= m_entries.size()) return 0; return m_entries[n]->value; }
    inline int get_selection_index(void) { return m_selection; }
 
    void select(int i);
@@ -72,6 +82,8 @@ private:
 
    struct Entry {
 		void*		value;
+      bool     use_clr;
+      RGBColor clr;
       int      picid;
 		char		name[1];
 	};

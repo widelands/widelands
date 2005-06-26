@@ -129,6 +129,8 @@ class Surface {
             case 2: return *((ushort*)(pix));
             case 4: return *((ulong*)(pix));
          }
+         assert(0);
+         return 0; // Should never be here
       }
       inline void set_pixel( uint x, uint y, ulong clr) {
          x+= m_offsx;

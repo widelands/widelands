@@ -33,9 +33,13 @@ Game_Player_Economies_Data_Packet::~Game_Player_Economies_Data_Packet(void) {
 /*
  * Read Function
  */
-void Game_Player_Economies_Data_Packet::Read(FileRead* fr, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Game_Player_Economies_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+   FileRead fr;
+
+   fr.Open( fs, "binary/player_economies" );
+
    // read packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       // DONE
@@ -44,15 +48,15 @@ void Game_Player_Economies_Data_Packet::Read(FileRead* fr, Game* game, Widelands
          Player* plr=game->get_safe_player(i);
          if(!plr) continue;
 
-         uint nr_economies=fr->Unsigned16();
+         uint nr_economies=fr.Unsigned16();
          assert(nr_economies == plr->m_economies.size());
 
          std::vector<Economy*> ecos;
          ecos.resize(nr_economies);
 
          for(uint j=0; j<plr->m_economies.size(); j++) {
-            int x=fr->Unsigned16();
-            int y=fr->Unsigned16();
+            int x=fr.Unsigned16();
+            int y=fr.Unsigned16();
             Flag* flag=static_cast<Flag*>(map->get_field(Coords(x,y))->get_immovable());
             assert(flag);
             ecos[j]=flag->get_economy();
@@ -66,24 +70,24 @@ void Game_Player_Economies_Data_Packet::Read(FileRead* fr, Game* game, Widelands
       return;
    } else
       throw wexception("Unknown version in Game_Player_Economies_Data_Packet: %i\n", packet_version);
+   
    assert(0); // never here
 }
 
 /*
  * Write Function
  */
-void Game_Player_Economies_Data_Packet::Write(FileWrite* fw, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   // First, id
-   fw->Unsigned16(PACKET_PLAYER_ECONOMIES_DATA);
+void Game_Player_Economies_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+   FileWrite fw;
    
    // Now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    bool done=false;
    for(uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
       Player* plr=game->get_player(i);
       if(!plr) continue; 
-      fw->Unsigned16(plr->m_economies.size());
+      fw.Unsigned16(plr->m_economies.size());
       for(uint j=0; j<plr->m_economies.size(); j++) {
          done=false;
          // Walk the map so that we find a representant
@@ -96,8 +100,8 @@ void Game_Player_Economies_Data_Packet::Write(FileWrite* fw, Game* game, Widelan
                if(imm->get_type()==Map_Object::FLAG) {
                   Flag* flag=static_cast<Flag*>(imm);
                   if(flag->get_economy() == plr->m_economies[j]) {
-                     fw->Unsigned16(x);
-                     fw->Unsigned16(y);
+                     fw.Unsigned16(x);
+                     fw.Unsigned16(y);
                      done=true;
                   }
                }
@@ -109,4 +113,5 @@ void Game_Player_Economies_Data_Packet::Write(FileWrite* fw, Game* game, Widelan
       }
    }
 
+   fw.Write( fs, "binary/player_economies" );
 }

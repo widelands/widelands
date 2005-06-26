@@ -48,7 +48,7 @@ class Event_Allow_Building_Option_Menu : public UIWindow {
       Event_Allow_Building* m_event;
       Editor_Interactive* m_parent;
       UITextarea *m_player_ta, *m_building_ta;
-      UICheckbox* m_is_one_time_event, *m_allow;
+      UICheckbox* m_allow;
       UIEdit_Box* m_name;
       int         m_player, m_building;
       std::vector<std::string> m_buildings;

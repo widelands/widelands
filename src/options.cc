@@ -63,6 +63,7 @@ static void show_usage(void)
 "\n"
 " --ggz            Starts game as GGZ Gaming Zone client (don't use!)\n"
 " --nosound        Starts the game with sound disabled\n"
+" --nozip          Do not save files as binary zip archives.\n"
 "\n"
 #ifdef DEBUG
 " --double         Start the game twice (for localhost network testing)\n\n"
@@ -114,11 +115,16 @@ static bool parse_command_line(int argc, char** argv)
 			NetGGZ::ref()->init();
 			continue;
 		}
-                if (!strcmp(opt, "nosound")) {
-                        g_options.pull_section("music")->create_val("disable_music","true");
-			g_options.pull_section("music")->create_val("disable_fx","true");
-                        continue;
-                }
+      if (!strcmp(opt, "nosound")) {
+         g_options.pull_section("music")->create_val("disable_music","true");
+         g_options.pull_section("music")->create_val("disable_fx","true");
+         continue;
+      }
+      if (!strcmp(opt, "nozip")) {
+         g_options.pull_section("global")->create_val("nozip","true");
+         continue;
+      }
+
 
 #ifdef DEBUG
 		if (!strcmp(opt, "double")) {

@@ -21,73 +21,61 @@
 #define __S__EVENT_H
 
 #include <string>
-#include <vector>
+#include <map>
 #include "error.h"
 #include "trigger.h"
-#include "event_ids.h"
 
 class Game;
-class FileRead;
-class FileWrite;
+class Section;
 class Editor_Game_Base;
+class EventReferencer;
 class Map;
 
 /*
  * Event is a in game event of some kind
  */
 class Event {
+   friend class Widelands_Map_Event_Data_Packet;
+
    public:
-      Event(void) { };
+      enum State {
+         INIT,
+         RUNNING,
+         DONE
+      };
+      
+   public:
+      Event(void) { 
+         m_state = INIT;
+      };
       virtual ~Event(void) { };
 
       // virtual functions, implemented by the real events
-      virtual void run(Game*)=0;
-      virtual uint get_id(void)=0; // this function is needed to recreate the correct option window
-      virtual void cleanup(Editor_Game_Base*); // release triggers, no memory release
-      virtual void reinitialize(Game*);             // can be overwritten to reintialize stuff in the child class
+      virtual State run( Game* )       = 0;
+      virtual void reinitialize(Game*) = 0;             // can be overwritten to reintialize stuff in the child class
+      virtual const char* get_id(void)        = 0; // this function is needed to recreate the correct option window
 
       // Functions needed by all
-      void set_name(const char* name) { m_name=name; }
-      void set_name(std::string name) { m_name=name; }
-      inline const char* get_name() { return m_name.c_str(); }
-
-
-      void register_trigger(Trigger*, Map*, bool up );
-      void unregister_trigger(Trigger*, Map*);
-      inline int get_nr_triggers(void) { return m_triggers.size(); }
-      bool trigger_exists(Trigger* trig);
-
-      inline bool is_one_time_event(void) { return m_is_one_time_event; }
-      inline void set_is_one_time_event(bool t) { m_is_one_time_event=t; }
-
-      bool reacts_when_trigger_is_set(Trigger* t);
-      bool set_reacts_when_trigger_is_set(Trigger*, bool);
-
-      // Check if triggers are set
-      bool check_triggers(void);
+      void set_name(const wchar_t* name) { m_name = name; }
+      inline const wchar_t* get_name() { return m_name.c_str(); }
 
       // File functions, to save or load this event
-      virtual void Write(FileWrite*, Editor_Game_Base*)=0;
-      virtual void Read(FileRead*, Editor_Game_Base*, bool)=0;
+      virtual void Write(Section*, Editor_Game_Base*)=0;
+      virtual void Read(Section*, Editor_Game_Base*)=0;
 
+      // Reference this event
+      void reference( EventReferencer* ref );
+      void unreference( EventReferencer* ref);
+      inline const std::map<EventReferencer*,uint>& get_referencers( void ) { return m_referencers; }
+
+      inline State get_state( void ) { return m_state; }
 
    protected:
-      // only for child classes
-      void write_triggers(FileWrite*, Editor_Game_Base*);
-      void read_triggers(FileRead*, Editor_Game_Base*, bool);
-
+      State        m_state;
+      
    private:
-      struct Trigger_Info {
-         Trigger* t;
-         bool     up;
-      };
-
-      std::vector<Trigger_Info> m_triggers;
-      std::string m_name;
-      bool        m_is_one_time_event;    // Can this trigger occur only once?
-
-
-
+      std::wstring                m_name;
+      std::map<EventReferencer*,uint> m_referencers;
  };
 
 #endif

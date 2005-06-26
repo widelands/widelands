@@ -17,6 +17,9 @@
  *
  */
 
+#include "event.h"
+#include "event_chain.h"
+#include "event_factory.h"
 #include "editor_event_menu.h"
 #include "editorinteractive.h"
 #include "ui_unique_window.h"
@@ -25,12 +28,18 @@
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
 #include "error.h"
+#include "editor_event_menu_edit_eventchain.h"
+#include "editor_event_menu_edit_trigger_conditional.h"
 #include "editor_event_menu_new_trigger.h"
 #include "editor_event_menu_new_event.h"
-#include "editor_event_menu_choose_trigger.h"
 #include "trigger.h"
+#include "trigger_referencer.h"
 #include "map.h"
+#include "map_event_manager.h"
+#include "map_eventchain_manager.h"
+#include "map_trigger_manager.h"
 #include "trigger_factory.h"
+#include "util.h"
 
 /*
 ===============
@@ -40,7 +49,7 @@ Create all the buttons etc...
 ===============
 */
 Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 400, 300, "Event Menu")
+	: UIUniqueWindow(parent, registry, 560, 300, "Event Menu")
 {
    m_parent=parent;
 
@@ -53,37 +62,62 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    const int spacing=5;
    int posx=offsx;
    int posy=offsy;
-
+   const int ls_width = 180;
+   
+   // EventChain List
+   new UITextarea(this, posx, offsy, "Event Chains: ", Align_Left);
+   m_eventchain_list=new UIListselect(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
+   m_eventchain_list->selected.set(this, &Editor_Event_Menu::eventchain_list_selected);
+   m_eventchain_list->double_clicked.set(this, &Editor_Event_Menu::eventchain_double_clicked);
+   posx += ls_width + spacing;
+   
    // Event List
-   new UITextarea(this, spacing, offsy, "Registered Events: ", Align_Left);
-   m_event_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   new UITextarea(this, posx, offsy, "Registered Events: ", Align_Left);
+   m_event_list=new UIListselect(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu::event_double_clicked);
-
+   posx += ls_width + spacing;
+   
    // Trigger List
-   new UITextarea(this, (get_inner_w()/2)+spacing, offsy, "Registered Triggers", Align_Left);
-   m_trigger_list=new UIListselect(this, (get_inner_w()/2)+spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
+   new UITextarea(this, posx, offsy, "Registered Triggers", Align_Left);
+   m_trigger_list=new UIListselect(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu::trigger_list_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu::trigger_double_clicked);
+   posx += ls_width + spacing;
 
    posy=get_inner_h()-30;
-   posx=(get_inner_w()/2)-80-spacing;
-   UIButton* b=new UIButton(this, posx, posy, 80, 20, 4, 0);
+   posx=spacing; 
+   UIButton* b=new UIButton(this, posx, posy, 80, 20, 4, 6);
+   b->set_title("New Event Chain");
+   b->clickedid.set(this, &Editor_Event_Menu::clicked);
+   posx+=80+spacing;
+   m_btn_edit_eventchain=new UIButton(this, posx, posy, 45, 20, 0, 8);
+   m_btn_edit_eventchain->set_title("Edit");
+   m_btn_edit_eventchain->clickedid.set(this, &Editor_Event_Menu::clicked);
+   m_btn_edit_eventchain->set_enabled(false);
+   posx+=45+spacing;
+   m_btn_del_eventchain=new UIButton(this, posx, posy, 45, 20, 0, 7);
+   m_btn_del_eventchain->set_title("Del");
+   m_btn_del_eventchain->clickedid.set(this, &Editor_Event_Menu::clicked);
+   m_btn_del_eventchain->set_enabled(false);
+
+   posx=spacing + ls_width + spacing;
+   b=new UIButton(this, posx, posy, 80, 20, 4, 0);
    b->set_title("New Event");
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
-   posx-=45+spacing;
-   m_btn_del_event=new UIButton(this, posx, posy, 45, 20, 0, 1);
-   m_btn_del_event->set_title("Del");
-   m_btn_del_event->clickedid.set(this, &Editor_Event_Menu::clicked);
-   m_btn_del_event->set_enabled(false);
-   posx-=45+spacing;
+   posx+=80+spacing;
    m_btn_edit_event=new UIButton(this, posx, posy, 45, 20, 0, 2);
    m_btn_edit_event->set_title("Edit");
    m_btn_edit_event->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_edit_event->set_enabled(false);
+   posx+=45+spacing;
+   m_btn_del_event=new UIButton(this, posx, posy, 45, 20, 0, 1);
+   m_btn_del_event->set_title("Del");
+   m_btn_del_event->clickedid.set(this, &Editor_Event_Menu::clicked);
+   m_btn_del_event->set_enabled(false);
 
 
-   posx=(get_inner_w()/2)+spacing;
+   posx= 3* spacing + 2*ls_width;
    b=new UIButton(this, posx, posy, 80, 20, 4, 3);
    b->set_title("New Trigger");
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
@@ -122,17 +156,29 @@ void Editor_Event_Menu::update(void) {
    Trigger* trig=0;
    m_trigger_list->clear();
    int i=0;
-   for(i=0; i<m_parent->get_map()->get_number_of_triggers(); i++) {
-      trig=m_parent->get_map()->get_trigger(i);
-      m_trigger_list->add_entry(trig->get_name(), trig);
+   for(i=0; i<m_parent->get_map()->get_mtm()->get_nr_triggers(); i++) {
+      trig=m_parent->get_map()->get_mtm()->get_trigger_by_nr(i);
+      m_trigger_list->add_entry( narrow_string( trig->get_name()).c_str(), trig);
+      if( trig->get_referencers().empty() )
+         m_trigger_list->set_entry_color( m_trigger_list->get_nr_entries()-1, RGBColor(255,0,0));
    }
 
    Event* event=0;
    m_event_list->clear();
-   for(i=0; i<m_parent->get_map()->get_number_of_events(); i++) {
-      event=m_parent->get_map()->get_event(i);
-      m_event_list->add_entry(event->get_name(), event);
+   for(i=0; i<m_parent->get_map()->get_mem()->get_nr_events(); i++) {
+      event=m_parent->get_map()->get_mem()->get_event_by_nr(i);
+      m_event_list->add_entry( narrow_string( event->get_name()).c_str(), event);
+      if( event->get_referencers().empty() )
+         m_event_list->set_entry_color( m_event_list->get_nr_entries()-1, RGBColor(255,0,0));
    }
+
+   EventChain* evc=0;
+   m_eventchain_list->clear();
+   for(i=0; i<m_parent->get_map()->get_mecm()->get_nr_eventchains(); i++) {
+      evc=m_parent->get_map()->get_mecm()->get_eventchain_by_nr(i);
+      m_eventchain_list->add_entry( narrow_string( evc->get_name() ).c_str(), evc);
+   }
+
 
    m_trigger_list->sort();
    m_event_list->sort();
@@ -151,72 +197,127 @@ void Editor_Event_Menu::update(void) {
  * a button has been clicked
  */
 void Editor_Event_Menu::clicked(int id) {
-   if(id<3) {
-      if(id==0) {
-         // New Event
-         Map* map=m_parent->get_map();
-         // Create the event if needed
-         Editor_Event_Menu_New_Event* ntm=new Editor_Event_Menu_New_Event(m_parent);
-         int retval=ntm->run();
-         delete ntm;
-         if(retval) {
-            Editor_Event_Menu_Choose_Trigger* ntm=new Editor_Event_Menu_Choose_Trigger(m_parent, map->get_event(map->get_number_of_events()-1));
-            ntm->run();
-            delete ntm;
-            update();
-            m_parent->set_need_save(true);
-         }
-      } else if(id==1) {
-         // Delete event
-         Event* event=static_cast<Event*>(m_event_list->get_selection());
-         m_parent->unreference_player_tribe(0, event);  // Remove all references done by this event 
-         // event unregisters itself from the map
-         event->cleanup(m_parent->get_egbase());
-         // Some paranoia
-         m_parent->get_map()->delete_unreferenced_triggers();
+   if(id==0) {
+      // New Event
+      // Create the event if needed
+      Editor_Event_Menu_New_Event* ntm=new Editor_Event_Menu_New_Event(m_parent);
+      int retval=ntm->run();
+      delete ntm;
+      if(retval) {
+         update();
          m_parent->set_need_save(true);
-         update();
-      } else if(id==2) {
-         // Edit event
-         Event* event=static_cast<Event*>(m_event_list->get_selection());
-         Editor_Event_Menu_Choose_Trigger* ntm=new Editor_Event_Menu_Choose_Trigger(m_parent, event);
-         if(ntm->run())
-            m_parent->set_need_save(true);
-         delete ntm;
-         update();
       }
-   } else {
-      if(id==3) {
-         // New Trigger
-         Editor_Event_Menu_New_Trigger* ntm=new Editor_Event_Menu_New_Trigger(m_parent);
-         int retval=ntm->run();
-         if(retval)  {
-            update();
-            m_parent->set_need_save(true);
+   } else if(id==1) {
+      // Delete event
+      Event* event=static_cast<Event*>(m_event_list->get_selection());
+      if(!event->get_referencers().empty()) {
+         std::string str="Can't delete Event. It is in use by ";
+         std::map<EventReferencer*,uint>::const_iterator i = event->get_referencers().begin();
+         while( i != event->get_referencers().end() ) {
+            str += narrow_string( i->first->get_type() );
+            str += ":";
+            str += narrow_string( i->first->get_name() );
+            str += "\n";
+            i++;
          }
-         delete ntm;
-      } else if(id==4) {
-         // Edit trigger
-         Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
-         trig=Trigger_Factory::make_trigger_with_option_dialog(trig->get_id(), m_parent, trig);
-         m_parent->set_need_save(true);
+         UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", str.c_str(), UIModal_Message_Box::OK);
+         mmb->run();
+         delete mmb;
+         return;
+      } 
+      
+      m_parent->get_map()->get_mem()->delete_event( event->get_name() );
+      m_parent->unreference_player_tribe(0, event);  // Remove all references done by this event 
+      m_parent->set_need_save(true);
+      update();
+   } else if(id==2) {
+      // Edit event
+      Event* event=static_cast<Event*>(m_event_list->get_selection());
+      Event_Factory::make_event_with_option_dialog(event->get_id(), m_parent, event);
+      update();
+   } else if(id==3) {
+      // New Trigger
+      Editor_Event_Menu_New_Trigger* ntm=new Editor_Event_Menu_New_Trigger(m_parent);
+      int retval=ntm->run();
+      if(retval)  {
          update();
-      } else if(id==5) {
-         // Delete trigger
-         Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
-         trig->decr_reference();
-         if(!trig->is_unreferenced()) {
-            trig->incr_reference();
-            UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", "Can't delete Trigger. It is in use!", UIModal_Message_Box::OK);
-            mmb->run();
-            delete mmb;
-            return;
-         }
-         m_parent->unreference_player_tribe(0, trig);  // Remove all references done by this trigger
-         m_parent->get_map()->unregister_trigger(trig);
          m_parent->set_need_save(true);
-         update();
       }
+      delete ntm;
+   } else if(id==4) {
+      // Edit trigger
+      Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
+      trig=Trigger_Factory::make_trigger_with_option_dialog(trig->get_id(), m_parent, trig);
+      m_parent->set_need_save(true);
+      update();
+   } else if(id==5) {
+      // Delete trigger
+      Trigger* trig=static_cast<Trigger*>(m_trigger_list->get_selection());
+      if(!trig->get_referencers().empty()) {
+         std::string str="Can't delete Trigger. It is in use by ";
+         std::map<TriggerReferencer*,uint>::const_iterator i = trig->get_referencers().begin();
+         while( i != trig->get_referencers().end() ) {
+            str += narrow_string( i->first->get_type() );
+            str += ":";
+            str += narrow_string( i->first->get_name() );
+            str += "\n";
+            i++;
+         }
+         UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", str.c_str(), UIModal_Message_Box::OK);
+         mmb->run();
+         delete mmb;
+         return;
+      }
+      m_parent->unreference_player_tribe(0, trig);  // Remove all references done by this trigger
+      m_parent->get_egbase()->get_map()->get_mtm()->delete_trigger( trig->get_name() );
+      m_parent->set_need_save(true);
+      update();
+   } else if( id == 6) {
+      // First, create new TriggerConditional 
+      EventChain* ev = new EventChain();
+      Editor_Event_Menu_Edit_TriggerConditional* menu = new Editor_Event_Menu_Edit_TriggerConditional( m_parent, 0, ev );
+      int code = menu->run();
+      if( code ) { // TriggerConditional has been accepted
+         ev->set_trigcond( menu->get_trigcond());
+         
+         // Get the a name
+         wchar_t buffer[256];
+
+         int n = 1;
+         while( 1 ) {
+            swprintf(buffer, sizeof(buffer), L"Unnamed%i", n);
+            if( !m_parent->get_egbase()->get_map()->get_mecm()->get_eventchain( buffer ))
+               break;
+            ++n;
+         }
+         
+         ev->set_name( buffer );
+         m_parent->get_egbase()->get_map()->get_mecm()->register_new_eventchain( ev );
+         m_eventchain_list->add_entry( "Unnamed", ev, true);
+         m_eventchain_list->sort();
+      } else {
+         // TriggerConditional was not accepted. Remove this EventChain straithly.
+         // No dereferencing of triggers is needed, since they are not referenced at all on cancel
+         delete ev;
+      }
+      delete menu;
+      if( code ) 
+         clicked(8); // Simulate click on edit
+   } else if( id == 7) {
+      // Delete event chain
+      EventChain* ev = static_cast<EventChain*>(m_eventchain_list->get_selection( ));
+      m_parent->get_egbase()->get_map()->get_mecm()->delete_eventchain( ev->get_name() );
+      m_eventchain_list->remove_entry( m_eventchain_list->get_selection_index() );
+      m_btn_del_eventchain->set_enabled( false );
+      m_btn_edit_eventchain->set_enabled( false );
+      update();
+   } else if( id == 8) {
+      // Edit event chain
+      EventChain* ev = static_cast<EventChain*>(m_eventchain_list->get_selection( ));
+      Editor_Event_Menu_Edit_EventChain* menu = new Editor_Event_Menu_Edit_EventChain( m_parent, ev );
+      menu->run();
+      delete menu;
+      update();
    }
 }
 
@@ -231,6 +332,10 @@ void Editor_Event_Menu::event_list_selected(int i) {
    m_btn_del_event->set_enabled(true);
    m_btn_edit_event->set_enabled(true);
 }
+void Editor_Event_Menu::eventchain_list_selected(int i) {
+   m_btn_del_eventchain->set_enabled(true);
+   m_btn_edit_eventchain->set_enabled(true);
+}
 
 /*
  * listbox was double clicked
@@ -240,5 +345,8 @@ void Editor_Event_Menu::trigger_double_clicked(int n) {
 }
 void Editor_Event_Menu::event_double_clicked(int n) {
    clicked(2);
+}
+void Editor_Event_Menu::eventchain_double_clicked(int n) {
+   clicked(8);
 }
 

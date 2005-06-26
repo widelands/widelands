@@ -42,50 +42,50 @@ Widelands_Map_Ware_Data_Packet::~Widelands_Map_Ware_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Ware_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+void Widelands_Map_Ware_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+   if( skip ) 
+      return;
+
+   FileRead fr;
+   try {
+      fr.Open( fs, "binary/ware" );
+   } catch ( ... ) {
+      // not there, so skip
+      return ;
+   }
+
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       // Now the rest data len
-      uint len = fr->Unsigned32();
-      if(skip) {
-         // Skip the rest, flags are not our problem here
-         fr->Data(len);
-         return;
-      }
-
-      uint nr_files=fr->Unsigned32();
+      uint nr_files=fr.Unsigned32();
 
       WareInstance* w;
       for(uint i=0; i<nr_files; i++) {
          w=new WareInstance(0,0); // data is read somewhere else
          w->init(egbase);
-         ol->register_object(egbase, fr->Unsigned32(), w);
+         ol->register_object(egbase, fr.Unsigned32(), w);
       }
       // DONE
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Ware_Data_Packet!\n", packet_version);
+   
+   assert( 0 );
 }
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Ware_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_WARE);
+void Widelands_Map_Ware_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
+   
+   FileWrite fw;
 
    // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
  
-   // Here we will insert skip data (packet lenght) 
-   // later, write a dummy for know
-   int filepos = fw->GetFilePos();
-   fw->Unsigned32(0x00000000);
-   fw->ResetByteCounter();
-  
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
    Map* map=egbase->get_map();
    std::vector<uint> ids;
@@ -120,12 +120,10 @@ void Widelands_Map_Ware_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egba
    }
 
    // All checked, we only need to save those stuff to disk
-   fw->Unsigned32(ids.size());
+   fw.Unsigned32(ids.size());
    for(uint i=0; i<ids.size(); i++) 
-      fw->Unsigned32(ids[i]);
-   
-   // Now, write the packet length
-   fw->Unsigned32(fw->GetByteCounter(), filepos);
-
+      fw.Unsigned32(ids[i]);
+  
+   fw.Write( fs, "binary/ware" );
    // DONE
 }

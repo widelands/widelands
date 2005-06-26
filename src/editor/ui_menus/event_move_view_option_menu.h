@@ -47,7 +47,6 @@ class Event_Move_View_Option_Menu : public UIWindow {
       Event_Move_View* m_event;
       Editor_Interactive* m_parent;
 
-      UICheckbox* m_is_one_time_event;
       UIEdit_Box* m_name;
       int         m_x, m_y;
       UITextarea* m_x_ta,*m_y_ta;

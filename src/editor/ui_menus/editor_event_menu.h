@@ -41,12 +41,21 @@ class Editor_Event_Menu : public UIUniqueWindow {
    private:
       Editor_Interactive *m_parent;
 
-      UIListselect* m_event_list, *m_trigger_list;
-      UIButton *m_btn_del_event, *m_btn_edit_event, *m_btn_del_trigger, *m_btn_edit_trigger;
+      UIListselect   *m_event_list;
+      UIListselect   *m_eventchain_list;
+      UIListselect   *m_trigger_list;
+      UIButton       *m_btn_del_event;
+      UIButton       *m_btn_edit_event;
+      UIButton       *m_btn_del_trigger;
+      UIButton       *m_btn_edit_trigger;
+      UIButton       *m_btn_del_eventchain;
+      UIButton       *m_btn_edit_eventchain;
       void trigger_list_selected(int);
       void event_list_selected(int);
+      void eventchain_list_selected(int);
       void trigger_double_clicked(int);
       void event_double_clicked(int);
+      void eventchain_double_clicked(int);
       void clicked(int);
       void update();
 };

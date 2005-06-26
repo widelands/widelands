@@ -47,7 +47,7 @@ class Event_Conquer_Area_Option_Menu : public UIWindow {
       Event_Conquer_Area* m_event;
       Editor_Interactive* m_parent;
       UITextarea *m_player_ta, *m_area_ta, *m_x_ta, *m_y_ta;
-      UICheckbox* m_is_one_time_event, *m_enable;
+      UICheckbox *m_enable;
       UIEdit_Box* m_name;
       int         m_x, m_y, m_player, m_area;
 };

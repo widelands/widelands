@@ -20,7 +20,6 @@
 #ifndef __S__TRIGGER_NULL_H
 #define __S__TRIGGER_NULL_H
 
-#include "trigger_ids.h"
 #include "trigger.h"
 
 /*
@@ -33,14 +32,14 @@ class Trigger_Null : public Trigger {
       ~Trigger_Null();
 
       // one liner functions
-      uint get_id(void) { return TRIGGER_NULL; }
+      const char* get_id(void) { return "null"; }
 
       void check_set_conditions(Game*);
       void reset_trigger(Game*);
 
       // File Functions
-      void Write(FileWrite*);
-      void Read(FileRead*, Editor_Game_Base*);
+      void Write(Section*);
+      void Read(Section*, Editor_Game_Base*);
 
       void set_trigger_manually(bool t) { m_should_toggle=true; m_value=t; }
 

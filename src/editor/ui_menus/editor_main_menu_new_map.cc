@@ -131,6 +131,7 @@ void Main_Menu_New_Map::button_clicked(int n) {
                  m_map->recalc_whole_map();
 
                  m_parent->set_need_save(true);
+                 m_parent->need_complete_redraw();
 
                  die();
                  return ;

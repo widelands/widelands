@@ -37,41 +37,40 @@ Game_Map_Data_Packet::~Game_Map_Data_Packet(void) {
 /*
  * Read Function
  */
-void Game_Map_Data_Packet::Read(FileRead* fr, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
-   // read packet version
-   int packet_version=fr->Unsigned16();
+void Game_Map_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+   if( !fs->FileExists( "map" ) || !fs->IsDirectory( "map" ))
+      throw wexception("No map in this save game!\n");
 
-   if(packet_version==CURRENT_PACKET_VERSION) {
-      // Now Load the map as it would be a normal map saving
-      if(m_wml) 
-         delete m_wml;
-      
-      m_wml = new Widelands_Map_Loader(fr, game->get_map());
+   FileSystem* mapfs = fs->MakeSubFileSystem( "map" );
 
-      // Now load the map
-      m_wml->load_map_complete(game, true);
-      m_mol = m_wml->get_map_object_loader();
+   // Now Load the map as it would be a normal map saving
+   if(m_wml) 
+      delete m_wml;
 
-      // DONE
-      return;
-   } else
-      throw wexception("Unknown version in Game_Map_Data_Packet: %i\n", packet_version);
-   assert(0); // never here
+   m_wml = new Widelands_Map_Loader(mapfs, game->get_map());
+
+   // Now load the map
+   m_wml->load_map_complete(game, true);
+   m_mol = m_wml->get_map_object_loader();
+
+   // DONE
+   delete mapfs;
+
+   return;
 }
 
 /*
  * Write Function
  */
-void Game_Map_Data_Packet::Write(FileWrite* fw, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   // First, id
-   fw->Unsigned16(PACKET_MAP_DATA);
+void Game_Map_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    
-   // Now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
-
+   FileSystem* mapfs = fs->CreateSubFileSystem( "map", FileSystem::FS_DIR );
+   
    // Now Write the map as it would be a normal map saving
    if(m_wms) delete m_wms;
-   m_wms=new Widelands_Map_Saver(fw, game);
+   m_wms=new Widelands_Map_Saver(mapfs, game);
    m_wms->save();
    m_mos = m_wms->get_map_object_saver();
+
+   delete mapfs;
 }

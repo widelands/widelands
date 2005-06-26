@@ -51,7 +51,7 @@ class Main_Menu_Save_Map : public UIWindow {
       void double_clicked(int);
 
       void fill_list(void);
-      bool save_map(std::string);
+      bool save_map(std::string, bool);
       
       UIEdit_Box* m_editbox;
       UITextarea *m_name, *m_author, *m_size, *m_world, *m_nrplayers;

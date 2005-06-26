@@ -140,7 +140,7 @@ void Main_Menu_Load_Map::clicked(int id) {
       // Ok
       std::string filename=static_cast<const char*>(m_ls->get_selection());
 
-      if(g_fs->IsDirectory(filename.c_str())) {
+      if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map( filename)) {
          char buffer[256];
          FS_CanonicalizeName(buffer, sizeof(buffer), filename.c_str());
          m_curdir=buffer;
@@ -165,7 +165,7 @@ void Main_Menu_Load_Map::selected(int i) {
 
    m_ok_btn->set_enabled(true);
 
-   if(!g_fs->IsDirectory(name)) {
+   if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
       Map* map=new Map();
       Map_Loader* m_ml = map->get_correct_loader(name);
       m_ml->preload_map(true); // This has worked before, no problem
@@ -227,6 +227,7 @@ void Main_Menu_Load_Map::fill_list(void) {
       if(!strcmp(FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
       if(!strcmp(FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
       if(!g_fs->IsDirectory(name)) continue;
+      if(Widelands_Map_Loader::is_widelands_map( name )) continue;
 
       m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
@@ -270,12 +271,12 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 
       Map_Loader* ml = m_map->get_correct_loader(filename.c_str());
 
-      try {
+//      try {
          //log("[Map_Loader] Loading map '%s'\n", realname.c_str());
          ml->preload_map(true);
 
          ml->load_map_complete(m_parent->get_editor(), true);
-      }  catch(std::exception& exe) {
+/*      }  catch(std::exception& exe) {
          // This really shoudn't fail since maps are already preloaded (in map preview)
          // and therefore valid, but if it does, a valid map must be displayed, therefore
          // we create an empty one from scratch
@@ -288,7 +289,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          mbox->run();
          delete mbox;
       }
-
+*/
       m_parent->get_editor()->postload();
       m_parent->get_editor()->load_graphics();
 
@@ -333,13 +334,11 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          }
       }
 
-      // Touch all triggers once, so that they do not get deleted even
-      // when unreferenced
-      for(i=0; i<m_map->get_number_of_triggers(); i++)
-         m_map->reference_trigger(m_map->get_trigger(i));
-
       // Tell the interactive that the map is saved and all
       m_parent->set_need_save(false);
+      
+      // Redraw everything
+      m_parent->need_complete_redraw();
 
       delete ml;
    }

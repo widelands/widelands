@@ -42,10 +42,8 @@ class Trigger_Time_Option_Menu : public UIWindow {
 
    private:
       void clicked(int);
-      void cb_changed(bool);
       void update(void);
 
-      bool m_is_one_time_trigger;
       Trigger_Time* m_trigger;
       Editor_Interactive* m_parent;
       UIEdit_Box* m_name;

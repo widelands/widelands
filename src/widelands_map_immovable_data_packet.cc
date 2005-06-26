@@ -29,12 +29,11 @@
 #include "error.h"
 
 /* VERSION 1: initial release
-   VERSION 2: 
      - registering through Map_Object_Loader/Saver
      - handling for tribe immovables (ignored on skip)
 */
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 1
 
 /*
  * Destructor
@@ -45,21 +44,26 @@ Widelands_Map_Immovable_Data_Packet::~Widelands_Map_Immovable_Data_Packet(void) 
 /*
  * Read Function
  */
-void Widelands_Map_Immovable_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception) {
+void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception) {
+   assert( mol );
+
+   FileRead fr;
+   fr.Open( fs, "binary/immovable" );
+   
    Map* map=egbase->get_map();
    World* world=map->get_world();
 
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       while(1) {
-         uint reg=fr->Unsigned32();
+         uint reg=fr.Unsigned32();
          if(reg==0xffffffff) break;
-         std::string owner=fr->CString();
-         std::string name=fr->CString();
-         int x=fr->Unsigned16();
-         int y=fr->Unsigned16();
+         std::string owner=fr.CString();
+         std::string name=fr.CString();
+         int x=fr.Unsigned16();
+         int y=fr.Unsigned16();
 
          assert(!mol->is_object_known(reg));
 
@@ -87,22 +91,18 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileRead* fr, Editor_Game_Base* e
          }
       }
       return ;
-   } else if(packet_version==1) {
-      Read_version1(fr,egbase,skip,mol);
-      return;
-   }
+   } 
    assert(0); // never here
 }
 
 /*
  * Write Function
  */
-void Widelands_Map_Immovable_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_IMMOVABLE);
-
+void Widelands_Map_Immovable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception) {
+   FileWrite fw; 
+   
    // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
@@ -117,56 +117,23 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileWrite* fw, Editor_Game_Base*
             assert(!mos->is_object_known(imm));
             uint reg=mos->register_object(imm);
             
-            fw->Unsigned32(reg); 
+            fw.Unsigned32(reg); 
             if(!tribe) 
-               fw->CString("world");
+               fw.CString("world");
             else 
-               fw->CString(tribe->get_name());
+               fw.CString(tribe->get_name());
 
-            fw->CString(imm->get_name().c_str());
-            fw->Unsigned16(x);
-            fw->Unsigned16(y);
+            fw.CString(imm->get_name().c_str());
+            fw.Unsigned16(x);
+            fw.Unsigned16(y);
          }
       }
    }
 
-   fw->Unsigned32(0xffffffff);
+   fw.Unsigned32(0xffffffff);
+  
+   fw.Write( fs, "binary/immovable");
    // DONE
 }
 
-
-void Widelands_Map_Immovable_Data_Packet::Read_version1(FileRead *fr, Editor_Game_Base* egbase, bool, Widelands_Map_Map_Object_Loader*) {
-   Map* map=egbase->get_map();
-   World* world=map->get_world();
-
-   int nr_immovables=fr->Unsigned16();
-   if(nr_immovables>world->get_nr_immovables()) log("WARNING: Number of immovables in map (%i) is bigger than in world (%i)",
-         nr_immovables, world->get_nr_immovables()); // Not necessarily a problem if none of the unknown are placed
-
-   // construct ids and map
-   std::map<uchar,int> smap;
-   char* buffer;
-   for(int i=0; i<nr_immovables; i++) {
-      int id=fr->Unsigned16();
-      buffer=fr->CString();
-      if(!world->get_immovable_descr(world->get_immovable_index(buffer))) {
-         log("WARNING: Immovable '%s' exists in map, not in world! skipped!", buffer);
-         smap[id]=-1;
-      } else {
-         smap[id]=world->get_immovable_index(buffer);
-      }
-   }
-
-   // Now get all the the immovables
-   for(ushort y=0; y<map->get_height(); y++) {
-      for(ushort x=0; x<map->get_width(); x++) {
-         int id=fr->Unsigned16();
-         if(id==0xffff) continue; // nothing here
-         //      log("[Map Loader] Setting immovable of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
-         if(smap[id]==-1) throw wexception("Unknown world immovable in map!\n");
-         egbase->create_immovable(Coords(x, y), smap[id], 0); 
-      }
-   }
-   return;
-}
 

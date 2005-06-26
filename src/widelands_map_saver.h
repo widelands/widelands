@@ -24,31 +24,33 @@
 #include "wexception.h"
 
 class Editor_Game_Base;
-class FileWrite;
+class FileSystem;
 class Widelands_Map_Map_Object_Saver;
 
 /*
 ===========================
 
-This class saves a widelands map into a file
+This class saves a widelands map into a file system
 
 throws wexecption on failure
+
+NOTE: The widelands map format is mostly binary, but some stuff is 
+ascii. The binary is done for speeds sake, and the ASCII for easier
+debugability
 
 ===========================
 */
 class Widelands_Map_Saver {
    public:
-      Widelands_Map_Saver(std::string filename, Editor_Game_Base* egbase);
-      Widelands_Map_Saver(FileWrite*, Editor_Game_Base*);
+      Widelands_Map_Saver(FileSystem*, Editor_Game_Base*);
       ~Widelands_Map_Saver(void);
 
       void save() throw(wexception) ;
       inline Widelands_Map_Map_Object_Saver* get_map_object_saver(void) { return m_mos; }
       
    private:
-      std::string m_filename;
       Editor_Game_Base* m_egbase;
-      FileWrite* m_fw;
+      FileSystem* m_fs;
       Widelands_Map_Map_Object_Saver* m_mos;
 };
 

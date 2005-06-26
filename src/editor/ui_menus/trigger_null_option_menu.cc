@@ -27,6 +27,7 @@
 #include "editorinteractive.h"
 #include "system.h"
 #include "error.h"
+#include "util.h"
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, Trigger_Null* trigger) :
    UIWindow(parent, 0, 0, 164, 100, "Trigger Option Menu") {
@@ -46,7 +47,7 @@ Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, T
 
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
-   m_name->set_text(trigger->get_name());
+   m_name->set_text( narrow_string( trigger->get_name()).c_str() );
 
    // Buttons
    posx=(get_inner_w()/2)-60-spacing;
@@ -95,7 +96,7 @@ void Trigger_Null_Option_Menu::clicked(int i) {
    } else if(i==1) {
       // ok button
       if(m_name->get_text())
-         m_trigger->set_name(m_name->get_text());
+         m_trigger->set_name(widen_string( m_name->get_text()).c_str() );
       end_modal(1);
       return;
    }

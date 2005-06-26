@@ -31,8 +31,10 @@
 #include "system.h"
 #include "error.h"
 #include "map.h"
+#include "map_trigger_manager.h"
 #include "graphic.h"
 #include "trigger_null.h"
+#include "util.h"
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive* parent, Event_Message_Box* event) :
    UIWindow(parent, 0, 0, 430, 400, "Event Option Menu") {
@@ -54,29 +56,22 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    m_position=m_event->get_pic_position();
    m_clrkey=false;
 
-   m_buttons[0].name="Continue";
-   m_buttons[1].name="Button 1";
-   m_buttons[2].name="Button 2";
-   m_buttons[3].name="Button 3";
+   m_buttons[0].name=L"Continue";
+   m_buttons[1].name=L"Button 1";
+   m_buttons[2].name=L"Button 2";
+   m_buttons[3].name=L"Button 3";
    m_buttons[0].trigger=m_buttons[1].trigger=m_buttons[2].trigger=m_buttons[3].trigger=-1;
 
 
    // Name editbox
    new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
-   m_name->set_text(event->get_name());
-
-   // Only run once CB
-   new UITextarea(this, get_inner_w()/2+spacing, posy, 150, 20, "Only run once: ", Align_CenterLeft);
-   m_is_one_time_event=new UICheckbox(this, get_inner_w()-STATEBOX_WIDTH-spacing, posy);
-   m_is_one_time_event->set_state(m_event->is_one_time_event());
-
-   posy+=20+spacing;
+   m_name->set_text( narrow_string( event->get_name()).c_str() );
 
    // Caption
    new UITextarea(this, spacing, posy, 60, 20, "Caption:", Align_CenterLeft);
    m_caption=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 1);
-   m_caption->set_text(m_event->get_caption());
+   m_caption->set_text( narrow_string( m_event->get_caption()).c_str() );
 
    // Modal cb
    new UITextarea(this, get_inner_w()/2+spacing, posy, 150, 20, "Is Modal: ", Align_CenterLeft);
@@ -88,13 +83,13 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    // Window Title
    new UITextarea(this, spacing, posy, 50, 20, "Window Title:", Align_CenterLeft);
    m_window_title=new UIEdit_Box(this, spacing+100, posy, get_inner_w()-100-2*spacing, 20, 0, 2);
-   m_window_title->set_text(m_event->get_window_title());
+   m_window_title->set_text( narrow_string( m_event->get_window_title()).c_str() );
 
    // Text
    posy+=20+spacing;
    new UITextarea(this, spacing, posy, 50, 20, "Text:", Align_CenterLeft);
    posy+=20+spacing;
-   m_text=new UIMultiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, event->get_text());
+   m_text=new UIMultiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, narrow_string( event->get_text()).c_str() );
 
    posy+=80+spacing;
 
@@ -160,17 +155,27 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
 
    int i=0;
-   for(i=0; i<m_parent->get_map()->get_number_of_triggers(); i++) {
-      Trigger* trig=m_parent->get_map()->get_trigger(i);
-      if(trig->get_id()==TRIGGER_NULL)
+   for(i=0; i<m_parent->get_map()->get_mtm()->get_nr_triggers(); i++) {
+      Trigger* trig=m_parent->get_map()->get_mtm()->get_trigger_by_nr(i);
+      std::string trigid = trig->get_id();
+      if( trigid =="null" )
          m_null_triggers.push_back(i);
    }
 
    for(int i=0; i<m_event->get_nr_buttons(); i++) {
       m_buttons[i].name=m_event->get_button_name(i);
-      for(int j=0; j<((int)m_null_triggers.size()); j++)
-         if(m_parent->get_map()->get_trigger_index(m_event->get_button_trigger(i))==m_null_triggers[j])
+      for(int j=0; j<((int)m_null_triggers.size()); j++) {
+         // Get this triggers index
+         int foundidx = -1;
+         for(int trigidx=0; trigidx < m_parent->get_map()->get_mtm()->get_nr_triggers(); trigidx++) 
+            if(m_parent->get_map()->get_mtm()->get_trigger_by_nr(trigidx) == m_event->get_button_trigger(i)) {
+               foundidx = trigidx; 
+               break;
+            }
+
+         if(foundidx==m_null_triggers[j])
             m_buttons[i].trigger=j;
+      }
    }
 
    center_to_parent();
@@ -216,23 +221,22 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
       case 1:
          {
             // ok button
-            m_event->set_is_one_time_event(m_is_one_time_event->get_state());
             if(m_name->get_text())
-               m_event->set_name(m_name->get_text());
+               m_event->set_name( widen_string( m_name->get_text()).c_str() );
             if(m_text->get_text().c_str())
-               m_event->set_text(m_text->get_text().c_str());
+               m_event->set_text( widen_string( m_text->get_text().c_str()).c_str() );
             if(m_caption->get_text())
-               m_event->set_caption(m_caption->get_text());
+               m_event->set_caption( widen_string( m_caption->get_text()).c_str() );
             if(m_window_title->get_text())
-               m_event->set_window_title(m_window_title->get_text());
+               m_event->set_window_title( widen_string( m_window_title->get_text()).c_str() );
             m_event->set_is_modal(m_is_modal->get_state());
             m_event->set_nr_buttons(m_nr_buttons);
             for(int i=0; i<m_nr_buttons; i++) {
                m_event->set_button_name(i, m_buttons[i].name.c_str());
                if(m_buttons[i].trigger!=-1) {
-                  m_event->set_button_trigger(i, static_cast<Trigger_Null*>(m_parent->get_map()->get_trigger(m_null_triggers[m_buttons[i].trigger])), m_parent->get_map());
+                  m_event->set_button_trigger(i, static_cast<Trigger_Null*>(m_parent->get_map()->get_mtm()->get_trigger_by_nr(m_null_triggers[m_buttons[i].trigger])));
                } else {
-                  m_event->set_button_trigger(i, 0, m_parent->get_map());
+                  m_event->set_button_trigger(i, 0);
                }
             }
             if(m_uses_picture->get_state()) {
@@ -320,20 +324,20 @@ void Event_Message_Box_Option_Menu::update(void) {
    m_buttons_ls->clear();
    int i;
    for(i=0; i<m_nr_buttons; i++)
-      m_buttons_ls->add_entry(m_buttons[i].name.c_str(), 0);
+      m_buttons_ls->add_entry( narrow_string( m_buttons[i].name).c_str(), 0);
 
    std::string text;
    text.append(1,static_cast<uchar>(m_nr_buttons+0x30));
    m_nr_buttons_ta->set_text(text.c_str());
 
 
-   m_button_name->set_text(m_buttons[m_ls_selected].name.c_str());
+   m_button_name->set_text( narrow_string( m_buttons[m_ls_selected].name).c_str());
 
    if(m_nr_buttons && m_null_triggers.size()) {
       if(m_buttons[m_ls_selected].trigger==-1)
          m_current_trigger_ta->set_text("none");
       else
-         m_current_trigger_ta->set_text(m_parent->get_map()->get_trigger(m_null_triggers[m_buttons[m_ls_selected].trigger])->get_name());
+         m_current_trigger_ta->set_text( narrow_string( m_parent->get_map()->get_mtm()->get_trigger_by_nr(m_null_triggers[m_buttons[m_ls_selected].trigger])->get_name()).c_str());
    } else {
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;
@@ -352,7 +356,7 @@ void Event_Message_Box_Option_Menu::ls_selected(int i) {
  * Button name edit box edited
  */
 void Event_Message_Box_Option_Menu::edit_box_edited(int i) {
-   m_buttons[m_ls_selected].name=m_button_name->get_text();
+   m_buttons[m_ls_selected].name= widen_string( m_button_name->get_text()) ;
    update();
 }
 

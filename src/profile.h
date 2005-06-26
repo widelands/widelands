@@ -23,6 +23,7 @@
 #include <vector>
 
 class Profile;
+class FileSystem;
 
 /*
 Represents one section inside the .ini-style file, basically as a list of
@@ -153,8 +154,8 @@ public:
 	void error(const char *fmt, ...) const;
 	void check_used();
 
-	void read(const char *filename, const char *global_section = 0);
-	void write(const char *filename, bool used_only = true);
+	void read(const char *filename, const char *global_section = 0, FileSystem* = 0);
+	void write(const char *filename, bool used_only = true, FileSystem* = 0);
 
 	Section *get_section(const char *name);
 	Section *get_safe_section(const char *name);

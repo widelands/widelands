@@ -31,8 +31,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Move_View::Event_Move_View(void) {
-   set_name("Move View");
-   set_is_one_time_event(true);
+   set_name(L"Move View");
    set_coords(Coords(0,0));
 }
 
@@ -40,84 +39,45 @@ Event_Move_View::~Event_Move_View(void) {
 }
 
 /*
- * cleanup()
- */
-void Event_Move_View::cleanup(Editor_Game_Base* g) {
-   // Nothing todo
-   Event::cleanup(g);
-}
-
-/*
  * reinitialize
  */
 void Event_Move_View::reinitialize(Game* g) {
-   if(is_one_time_event()) {
-      cleanup(g); // Also calls event cleanup
-   } else {
-      Event::reinitialize(g);
-   }
 }
 
 /*
  * File Read, File Write
  */
-void Event_Move_View::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) {
-   int version=fr->Unsigned16();
-   if(version <= EVENT_VERSION) {
-      set_name(fr->CString());
-      set_is_one_time_event(fr->Unsigned8());
-      int x=fr->Signed16();
-      int y=fr->Signed16();
-      m_pt.x=x;
-      m_pt.y=y;
-      read_triggers(fr,egbase, skip);
-      if(x<0 || y<0 || x>=((int)egbase->get_map()->get_width()) || y>=((int)egbase->get_map()->get_height()) ) {
-         // we're not configured and can't jump. delete us
-         // but give a warning
-         log("Move View Event with illegal coordinates: (%i,%i) deleted!\n", x,y);
-         set_is_one_time_event(true);
-         cleanup(egbase);
-      }
+void Event_Move_View::Read(Section* s, Editor_Game_Base* egbase) {
+   int version=s->get_safe_int("version"); 
+   if(version == EVENT_VERSION) {
+      m_pt.x=s->get_safe_int("point_x");
+      m_pt.y=s->get_safe_int("point_y");
       return;
    }
    throw wexception("Move View Event with unknown/unhandled version %i in map!\n", version);
 }
 
-void Event_Move_View::Write(FileWrite* fw, Editor_Game_Base *egbase) {
-   // First of all the id
-   fw->Unsigned16(get_id());
-
-   // Now the version
-   fw->Unsigned16(EVENT_VERSION);
-
-   // Name
-   fw->Data(get_name(), strlen(get_name()));
-   fw->Unsigned8('\0');
-
-   // triggers only once?
-   fw->Unsigned8(is_one_time_event());
+void Event_Move_View::Write(Section* s, Editor_Game_Base *egbase) {
+   // the version
+   s->set_int("version", EVENT_VERSION);
 
    // Point
-   fw->Signed16(m_pt.x);
-   fw->Signed16(m_pt.y);
-
-   // Write all trigger ids
-   write_triggers(fw, egbase);
+   s->set_int("point_x", m_pt.x);
+   s->set_int("point_y", m_pt.y);
    // done
 }
 
 /*
  * check if trigger conditions are done
  */
-void Event_Move_View::run(Game* game) {
+Event::State Event_Move_View::run(Game* game) {
    assert(m_pt.x!=-1 && m_pt.y!=-1);
 
    Interactive_Base* iab=game->get_iabase();
    iab->move_view_to(m_pt.x, m_pt.y);
 
-   // If this is a one timer, release our triggers
-   // and forget about us
-   reinitialize(game);
+   m_state = DONE;
+   return m_state;
 }
 
 

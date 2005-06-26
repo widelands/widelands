@@ -37,9 +37,13 @@ Widelands_Map_Heights_Data_Packet::~Widelands_Map_Heights_Data_Packet(void) {
 /*
  * Read Function
  */
-void Widelands_Map_Heights_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Widelands_Map_Heights_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+  
+   FileRead fr;
+   fr.Open( fs, "binary/heights");
+
    // read packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       // Read all the heights
@@ -47,7 +51,7 @@ void Widelands_Map_Heights_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
 
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
-            uchar h=fr->Unsigned8();
+            uchar h=fr.Unsigned8();
             //         log("[Map Loader] Setting height of field (%i,%i) to %i\n", x, y, h);
             map->get_field(Coords(x,y))->set_height(h);
          }
@@ -55,6 +59,7 @@ void Widelands_Map_Heights_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
       return;
    }
    throw wexception("Unknown version in Widelands_Map_Heights_Data_Packet: %i\n", packet_version);
+   
    assert(0); // never here
 }
 
@@ -62,18 +67,19 @@ void Widelands_Map_Heights_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egb
 /*
  * Write Function
  */
-void Widelands_Map_Heights_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_HEIGHTS);
-
+void Widelands_Map_Heights_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+   FileWrite fw;
+   
    // Now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    // Now, all heights as unsigned chars in order
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
-         fw->Unsigned8(map->get_field(Coords(x,y))->get_height());
+         fw.Unsigned8(map->get_field(Coords(x,y))->get_height());
       }
    }
+   
+   fw.Write(fs,  "binary/heights");
 }

@@ -22,8 +22,11 @@
 #include "overlay_manager.h"
 #include "filesystem.h"
 #include "map.h"
+#include "map_event_manager.h"
+#include "map_eventchain_manager.h"
 #include "map_variable_manager.h"
 #include "map_objective_manager.h"
+#include "map_trigger_manager.h"
 #include "player.h"
 #include "world.h"
 #include "worlddata.h"
@@ -88,6 +91,9 @@ Map::Map(void)
 
    m_mvm = new MapVariableManager();
    m_mom = new MapObjectiveManager();
+   m_mecm = new MapEventChainManager();
+   m_mtm = new MapTriggerManager();
+   m_mem = new MapEventManager();
 
 	// Paranoia
 	cleanup();
@@ -114,6 +120,18 @@ Map::~Map()
    if(m_mom) {
       delete m_mom;
       m_mom = 0;
+   }
+   if(m_mecm) {
+      delete m_mecm;
+      m_mecm = 0;
+   }
+   if(m_mem) {
+      delete m_mem;
+      m_mem = 0;
+   }
+   if(m_mem) {
+      delete m_mem;
+      m_mem = 0;
    }
 }
 
@@ -338,23 +356,21 @@ void Map::cleanup(void) {
    if(m_overlay_manager)
       m_overlay_manager->cleanup();
 
+   while( get_mecm()->get_nr_eventchains() )
+      get_mecm()->delete_eventchain( get_mecm()->get_eventchain_by_nr( 0 )->get_name() );
+   get_mem()->delete_unreferenced_events();
+   get_mtm()->delete_unreferenced_triggers();
+   
+   assert(!get_mtm()->get_nr_triggers() && !get_mem()->get_nr_events());
+   
+   delete m_mom;
+   m_mom = new MapObjectiveManager();
+   
+   delete m_mvm;
+   m_mvm = new MapVariableManager();
 
-   while(get_number_of_triggers()) {
-      Trigger* t=get_trigger(0);
-      int i=0;
-      for(i=0; i<get_number_of_events(); i++) {
-         Event* ev=get_event(i);
-         if(ev->trigger_exists(t)) {
-            ev->unregister_trigger(t, this);
-         }
-      }
-      
-      while(get_number_of_triggers() && t == get_trigger(0) && !t->is_unreferenced())
-         t->decr_reference();
-      delete_unreferenced_triggers();
-   }
-   delete_events_without_trigger();
-   assert(!get_number_of_triggers() && !get_number_of_events());
+   delete m_mecm;
+   m_mecm = new MapEventChainManager();
 }
 
 /*
@@ -1756,7 +1772,12 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
 
    if(!strcasecmp(filename+(strlen(filename)-strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
    {
-      retval=new Widelands_Map_Loader(filename, this);
+      try {
+         FileSystem* fs = g_fs->MakeSubFileSystem( filename );
+         retval=new Widelands_Map_Loader(fs, this);
+      } catch( ... ) {
+         // If this fails, it is an illegal file (maybe old plain binary map format)
+      }
    }
    else if (!strcasecmp(filename+(strlen(filename)-strlen(S2MF_SUFFIX)), S2MF_SUFFIX))
    {

@@ -34,9 +34,12 @@ Game_Computer_Player_Data_Packet::~Game_Computer_Player_Data_Packet(void) {
 /*
  * Read Function
  */
-void Game_Computer_Player_Data_Packet::Read(FileRead* fr, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+void Game_Computer_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
+   FileRead fr;
+   
+   fr.Open( fs, "binary/computer_player");
    // read packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       // This packet currently does nothing at all. The AI doesn't has any saved data
@@ -46,18 +49,19 @@ void Game_Computer_Player_Data_Packet::Read(FileRead* fr, Game* game, Widelands_
       return;
    } else
       throw wexception("Unknown version in Game_Computer_Player_Data_Packet: %i\n", packet_version);
+  
    assert(0); // never here
 }
 
 /*
  * Write Function
  */
-void Game_Computer_Player_Data_Packet::Write(FileWrite* fw, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   // First, id
-   fw->Unsigned16(PACKET_COMPUTER_PLAYER_DATA);
+void Game_Computer_Player_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
+   FileWrite fw;
    
    // Now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
-
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
+   
    // Sorry, not anything more currently
+   fw.Write( fs, "binary/computer_player");
 }

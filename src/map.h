@@ -24,8 +24,6 @@
 #include <vector>
 #include "field.h"
 #include "geometry.h"
-#include "trigger.h"
-#include "event.h"
 
 class BaseImmovable;
 class FileRead;
@@ -34,21 +32,17 @@ class World;
 class Overlay_Manager;
 class MapVariableManager;
 class MapObjectiveManager;
-
-#define WLMF_VERSION 	0x0001
+class MapEventManager;
+class MapEventChainManager;
+class MapTriggerManager;
 
 #define WLMF_SUFFIX		".wmf"
 #define S2MF_SUFFIX     ".swd"
 
-#define WLMF_MAGIC      "WLmf"
 #define S2MF_MAGIC		"WORLD_V1.0"
 
-#define MAP_NAME_LEN   30
-#define MAP_AUTHOR_LEN 30
-#define MAP_DESCR_LEN  1024
 
-
-const ushort NUMBER_OF_MAP_DIMENSIONS=15;
+const ushort NUMBER_OF_MAP_DIMENSIONS=29;
 const ushort MAP_DIMENSIONS[] = {
    64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256,
    272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480,
@@ -266,100 +260,15 @@ public:
 	// change terrain of a field, recalculate buildcaps
    int change_field_terrain(Coords coords, int terrain, bool tdown, bool tright);
 
-   // Trigger functions, all inlines
-   inline void register_new_trigger(Trigger* t) {
-      assert(!trigger_exists(t));
-      m_triggers.push_back(t);  // it is the users job to make sure this trigger is not yet registered
-   }
-   inline void reference_trigger(Trigger* t) {
-      assert(trigger_exists(t));
-      t->incr_reference();
-   }
-   inline void release_trigger(Trigger* t) {
-      assert(trigger_exists(t));
-      t->decr_reference();
-      if(t->is_unreferenced()) unregister_trigger(t);
-   }
-   inline int get_number_of_triggers(void) { return m_triggers.size(); }
-   inline void unregister_trigger(Trigger* t) {
-      std::vector<Trigger*>::iterator i;
-      for(i=m_triggers.begin(); i!=m_triggers.end(); i++)
-         if(*i==t) {
-            assert(t->is_unreferenced());
-            delete t;
-            m_triggers.erase(i);
-            return;
-         }
-      assert(0); // never here, this trigger is not known
-   }
-   inline bool trigger_exists(Trigger* trig) {
-      std::vector<Trigger*>::iterator i;
-      for(i=m_triggers.begin(); i!=m_triggers.end(); i++)
-         if(*i==trig) {
-            return true;
-         }
-      return false;
-   }
-   inline Trigger* get_trigger(int i) { assert(i<get_number_of_triggers()); return m_triggers[i]; }
-   inline int get_trigger_index(Trigger* trig) {
-      int i=0;
-      for(i=0; i<get_number_of_triggers(); i++)
-         if(m_triggers[i]==trig) {
-            return i;
-         }
-      return -1;
-   }
-   void delete_unreferenced_triggers(void) {
-      int i=0;
-      for(i=0; i<get_number_of_triggers(); i++)
-         if(m_triggers[i]->is_unreferenced()) {
-            unregister_trigger(m_triggers[i]);
-            --i;
-         }
-   }
-
-   // Event functions, also all inlines
-   inline void register_new_event(Event* t) {
-      assert(!event_exists(t));
-      m_events.push_back(t);
-   }
-   inline void unregister_event(Event* t) {
-      assert(event_exists(t));
-      std::vector<Event*>::iterator i;
-      for(i=m_events.begin(); i!=m_events.end(); i++)
-         if(*i==t) {
-            assert(!t->get_nr_triggers());
-            delete t;
-            m_events.erase(i);
-            return;
-         }
-      assert(0); // never here, this event is not known
-   }
-   inline int get_number_of_events(void) { return m_events.size(); }
-   inline bool event_exists(Event* trig) {
-      std::vector<Event*>::iterator i;
-      for(i=m_events.begin(); i!=m_events.end(); i++)
-         if(*i==trig) {
-            return true;
-         }
-      return false;
-   }
-   inline Event* get_event(int i) { assert(i<get_number_of_events()); return m_events[i]; }
-   void delete_events_without_trigger(void) {
-      int i=0;
-      for(i=0; i<get_number_of_events(); i++)
-         if(!m_events[i]->get_nr_triggers()) {
-            unregister_event(m_events[i]);
-            --i;
-         }
-   }
-
    /*
     * Get the a manager for registering or removing
     * something 
     */
-   MapVariableManager* get_mvm( void ) { return m_mvm; }
-   MapObjectiveManager* get_mom( void ) { return m_mom; }
+   inline MapVariableManager* get_mvm( void ) { return m_mvm; }
+   inline MapObjectiveManager* get_mom( void ) { return m_mom; }
+   inline MapEventChainManager* get_mecm( void ) { return m_mecm; }
+   inline MapTriggerManager* get_mtm( void ) { return m_mtm; }
+   inline MapEventManager* get_mem( void ) { return m_mem; }
 
 
 private:
@@ -383,13 +292,14 @@ private:
 	Pathfield*	m_pathfields;
    Overlay_Manager* m_overlay_manager;
 
-   std::vector<std::string> m_scenario_tribes; // only alloced when really needed
-   std::vector<std::string> m_scenario_names;
-   std::vector<Trigger*>    m_triggers;        // Triggers are available on all maps. All game types can be done through triggers.
-   std::vector<Event*>      m_events;        // Events are available on all maps. (At least the win trigger or the loose event)
+   std::vector<std::string>  m_scenario_tribes; // only alloced when really needed
+   std::vector<std::string>  m_scenario_names;
 
    MapVariableManager*       m_mvm;           // The mapvariable manager makes sure for handling all the variables
    MapObjectiveManager*      m_mom;           // The mapobjective manager lists all scenarios objectives.
+   MapEventChainManager*     m_mecm;           // The mapeventchain manager has a list of all event chains in this map 
+   MapTriggerManager*        m_mtm;            // The maptrigger manager 
+   MapEventManager*          m_mem;            // The mapevent manager 
 
 	void recalc_brightness(FCoords coords);
 	void recalc_fieldcaps_pass1(FCoords coords);

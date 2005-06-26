@@ -20,7 +20,7 @@
 #ifndef __S__TRIGGER_FACTORY_H
 #define __S__TRIGGER_FACTORY_H
 
-#include "trigger_ids.h"
+#include <string>
 #include "types.h"
 
 class Trigger;
@@ -28,7 +28,7 @@ class Editor_Interactive;
 
 
 struct Trigger_Descr {
-   const uint id;
+   std::string id;
    const char* name;
    const char* descr;
 };
@@ -40,11 +40,12 @@ struct Trigger_Descr {
  */
 class Trigger_Factory {
    public:
-      static Trigger* get_correct_trigger(uint id);
-      static Trigger* make_trigger_with_option_dialog(uint id, Editor_Interactive*, Trigger*);
+      static Trigger* get_correct_trigger(const char* id);
+      static Trigger* make_trigger_with_option_dialog(const char* id, Editor_Interactive*, Trigger*);
 
-      static Trigger_Descr* get_correct_trigger_descr(uint id);
+      static Trigger_Descr* get_correct_trigger_descr(const char* id);
       static const uint get_nr_of_available_triggers(void);
+      static Trigger_Descr* get_trigger_descr( uint );  
 };
 
 #endif

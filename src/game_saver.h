@@ -23,10 +23,8 @@
 #include <string>
 #include "wexception.h"
 
-class FileWrite;
 class Game;
-class Widelands_Map_Map_Object_Saver;
-class Widelands_Map_Map_Object_Loader;
+class FileSystem;
 
 /*
  * This class writes a complete state
@@ -39,13 +37,13 @@ class Widelands_Map_Map_Object_Loader;
 
 class Game_Saver {
    public:
-      Game_Saver(std::string filename, Game* game);
+      Game_Saver(FileSystem*, Game* game);
       ~Game_Saver(void);
 
       void save(void) throw(wexception);
    
    private:
-      std::string m_filename;
+      FileSystem* m_fs;
       Game* m_game;
 };
 

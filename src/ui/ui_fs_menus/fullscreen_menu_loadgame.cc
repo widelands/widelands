@@ -90,7 +90,8 @@ void Fullscreen_Menu_LoadGame::map_selected(int id)
 
    if (name)
    {
-      Game_Loader gl(name, game);
+      FileSystem* fs = g_fs->MakeSubFileSystem( name );
+      Game_Loader gl(fs, game);
       Game_Preload_Data_Packet gpdp;
       gl.preload_game(&gpdp); // This has worked before, no problem
 
@@ -106,6 +107,8 @@ void Fullscreen_Menu_LoadGame::map_selected(int id)
 
       sprintf(buf, "%02i:%02i", hours, minutes);
       tagametime->set_text(buf);
+
+      delete fs;
    } else {
       tamapname->set_text("");
       tagametime->set_text("");
@@ -132,10 +135,13 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
    
    for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
- 
-      Game_Loader* gl = new Game_Loader(name,game);
+
+      Game_Loader* gl = 0;  
+      FileSystem* fs = 0;
 
       try {
+         fs = g_fs->MakeSubFileSystem( name );
+         gl = new Game_Loader(fs, game);
          gl->preload_game(&gpdp);
          
          char* fname = strdup(FS_Filename(name));
@@ -146,7 +152,10 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
       } catch(wexception& ) {
          // we simply skip illegal entries
       }
-      delete gl;
+      if( gl ) 
+         delete gl;
+      if( fs ) 
+         delete fs;
    }
    
    if(list->get_nr_entries())

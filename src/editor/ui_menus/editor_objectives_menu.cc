@@ -17,13 +17,17 @@
  *
  */
 
+#include <map>
 #include "editorinteractive.h"
 #include "editor_objectives_menu.h"
 #include "error.h"
 #include "map.h"
 #include "map_objective_manager.h"
+#include "map_trigger_manager.h"
 #include "system.h"
+#include "trigger.h"
 #include "trigger_null.h"
+#include "trigger_referencer.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
@@ -141,13 +145,13 @@ void Edit_Objective_Window::clicked(int i) {
    obj->set_name( widen_string(m_name->get_text()).c_str() );
    obj->set_is_optional( m_optional->get_state() );
    obj->set_is_visible( m_visible->get_state() );
-   obj->set_descr( widen_string(m_name->get_text()).c_str() );
+   obj->set_descr( widen_string(m_descr->get_text()).c_str() );
    m_te->set_string(0, narrow_string(obj->get_name()).c_str()); 
    m_te->set_string(1, obj->get_is_optional() ? "Yes" : "No");
    m_te->set_string(2, obj->get_is_visible() ? "Yes" : "No");
   
    // Set the triggers name
-   obj->get_trigger()->set_name( m_name->get_text());
+   obj->get_trigger()->set_name( widen_string( m_name->get_text()).c_str() );
 
    end_modal(1); 
 }
@@ -245,10 +249,9 @@ void Editor_Objectives_Menu::clicked( int n ) {
          m_parent->get_egbase()->get_map()->get_mom()->register_new_objective( mo );
          // Create a null trigger for this
          Trigger_Null* trig = new Trigger_Null();
-         trig->set_name( narrow_string(buffer) );
-         trig->incr_reference();
+         trig->set_name( buffer );
          mo->set_trigger( trig );
-         m_parent->get_egbase()->get_map()->register_new_trigger( trig );
+         m_parent->get_egbase()->get_map()->get_mtm()->register_new_trigger( trig );
 
          insert_objective( mo );
       }
@@ -261,8 +264,8 @@ void Editor_Objectives_Menu::clicked( int n ) {
          if( evw->run() ) { 
             m_table->sort();
             m_trigger->set_text(
-                  static_cast<MapObjective*>(m_table->get_entry(m_table->get_selection_index())->get_user_data())
-                  ->get_trigger()->get_name());
+                  narrow_string( static_cast<MapObjective*>(m_table->get_entry(m_table->get_selection_index())->get_user_data())
+                  ->get_trigger()->get_name())) ;
          }
          delete evw;
       }
@@ -270,15 +273,29 @@ void Editor_Objectives_Menu::clicked( int n ) {
 
       case 2: 
       {
-         // Delete selected variable
-      /*   int n =  m_table->get_selection_index();
-         MapObjective* mv = static_cast<MapObjective*>( m_table->get_entry( n )->get_user_data() );
+         // Delete selected objective
+         int idx = m_table->get_selection_index();
+         MapObjective* obj = static_cast<MapObjective*>(m_table->get_entry( idx )->get_user_data());
          
-         // Otherwise, delete button should be disabled
-         assert( !mv->is_delete_protected());
+         if( !obj->get_trigger()->get_referencers().empty()) {
+            std::string str="Can't delete Objective, because it's trigger is in use by ";
+            std::map<TriggerReferencer*,uint>::const_iterator i = obj->get_trigger()->get_referencers().begin();
+            while( i != obj->get_trigger()->get_referencers().end() ) {
+               str += narrow_string( i->first->get_type() );
+               str += ":";
+               str += narrow_string( i->first->get_name() );
+               str += " ";
+            }
+            UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", str.c_str(), UIModal_Message_Box::OK);
+            mmb->run();
+            delete mmb;
+            return;
+         }  
 
-         m_parent->get_egbase()->get_map()->get_mvm()->delete_variable( mv->get_name() );
-*/         m_table->remove_entry( n );
+         
+         m_parent->get_egbase()->get_map()->get_mtm()->delete_trigger( obj->get_trigger()->get_name() );
+         m_parent->get_egbase()->get_map()->get_mom()->delete_objective( obj->get_name() );
+         m_table->remove_entry( idx );
          m_table->sort();
 
          m_edit_button->set_enabled( false );
@@ -299,7 +316,7 @@ void Editor_Objectives_Menu::table_selected( int n ) {
 
    MapObjective* obj = static_cast<MapObjective*>(m_table->get_entry( n )->get_user_data());
    // Baad stuff will happen, if trigger got deleted
-   m_trigger->set_text( obj->get_trigger()->get_name() );
+   m_trigger->set_text( narrow_string( obj->get_trigger()->get_name()) );
 }
 
 /*

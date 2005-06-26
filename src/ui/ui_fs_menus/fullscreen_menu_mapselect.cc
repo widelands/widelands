@@ -28,6 +28,7 @@
 #include "ui_multilinetextarea.h"
 #include "ui_checkbox.h"
 #include "map_loader.h"
+#include "widelands_map_loader.h"
 
 /*
 ==============================================================================
@@ -115,7 +116,7 @@ void Fullscreen_Menu_MapSelect::ok()
 {
    std::string filename=static_cast<const char*>(list->get_selection());
 
-   if(g_fs->IsDirectory(filename.c_str())) {
+   if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map( filename )) {
       char buffer[256];
       FS_CanonicalizeName(buffer, sizeof(buffer), filename.c_str());
       m_curdir=buffer;
@@ -143,7 +144,7 @@ void Fullscreen_Menu_MapSelect::map_selected(int id)
 {
    const char* name=static_cast<const char*>(list->get_selection());
 
-   if(!g_fs->IsDirectory(name)) {
+   if(!g_fs->IsDirectory(name) || Widelands_Map_Loader::is_widelands_map( name )) {
       // No directory
       if (*m_ml) {
          delete *m_ml;
@@ -228,6 +229,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
       if(!strcmp(FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
       if(!strcmp(FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
       if(!g_fs->IsDirectory(name)) continue;
+      if(Widelands_Map_Loader::is_widelands_map( name )) continue;
 
       list->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
       ++ndirs;

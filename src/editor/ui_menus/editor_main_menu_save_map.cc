@@ -19,12 +19,14 @@
 
 #include <string>
 #include <stdio.h>
+#include "constants.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_main_menu_save_map.h"
 #include "editor_main_menu_save_map_make_directory.h"
 #include "error.h"
 #include "filesystem.h"
+#include "options.h"
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
@@ -34,7 +36,7 @@
 #include "wexception.h"
 #include "widelands_map_loader.h"
 #include "widelands_map_saver.h"
-
+#include "zip_filesystem.h"
 
 /*
 ===============
@@ -151,7 +153,7 @@ void Main_Menu_Save_Map::clicked(int id) {
          filename=static_cast<const char*>(m_ls->get_selection());
       }
 
-      if(g_fs->IsDirectory(filename.c_str())) {
+      if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
          char buffer[256];
          FS_CanonicalizeName(buffer, sizeof(buffer), filename.c_str());
          m_curdir=buffer;
@@ -160,7 +162,7 @@ void Main_Menu_Save_Map::clicked(int id) {
          fill_list();
       } else {
          // Ok, save this map
-         if(save_map(filename)) 
+         if(save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false))) 
             die();
       }
    } else if(id==0) {
@@ -191,7 +193,7 @@ void Main_Menu_Save_Map::clicked(int id) {
 void Main_Menu_Save_Map::selected(int i) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
-   if(!g_fs->IsDirectory(name)) {
+   if(Widelands_Map_Loader::is_widelands_map(name)) {
       Map* map=new Map();
       Map_Loader* m_ml = map->get_correct_loader(name);
       m_ml->preload_map(true); // This has worked before, no problem
@@ -258,7 +260,8 @@ void Main_Menu_Save_Map::fill_list(void) {
       if(!strcmp(FS_Filename(name),".")) continue;
       if(!strcmp(FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
       if(!g_fs->IsDirectory(name)) continue;
-
+      if(Widelands_Map_Loader::is_widelands_map(name)) continue;
+   
       m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
   
@@ -266,7 +269,7 @@ void Main_Menu_Save_Map::fill_list(void) {
 
    for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
       const char *name = pname->c_str();
-      
+     
       Map_Loader* m_ml = map->get_correct_loader(name);
       if(!m_ml) continue; 
       if(m_ml->get_type()==Map_Loader::S2ML) continue; // we do not list s2 files since we only write wlmf
@@ -305,8 +308,7 @@ void Main_Menu_Save_Map::edit_box_changed(void) {
  * returns true if dialog should close, false if it
  * should stay open
  */
-bool Main_Menu_Save_Map::save_map(std::string filename) {
-  
+bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
    // Make sure that the base directory exists
    g_fs->EnsureDirectoryExists(m_basedir);
 
@@ -336,9 +338,20 @@ bool Main_Menu_Save_Map::save_map(std::string filename) {
       delete mbox;
       if(!retval) 
          return false;
+
+      // Delete this
+      g_fs->Unlink( complete_filename );
    }
 
-   Widelands_Map_Saver* wms=new Widelands_Map_Saver(complete_filename.c_str(), m_parent->get_editor());
+   FileSystem* fs ;
+   if( !binary ) {
+   // Make a filesystem out of this
+      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_DIR );
+   } else {
+      // Make a zipfile
+      fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_ZIP );
+   }
+   Widelands_Map_Saver* wms=new Widelands_Map_Saver(fs, m_parent->get_editor());
    try {
       wms->save();
       m_parent->set_need_save(false);
@@ -350,6 +363,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename) {
       delete mbox;
    }
    delete wms;
+   delete fs;
    die();
 
    return true;

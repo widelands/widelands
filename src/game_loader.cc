@@ -19,19 +19,26 @@
 
 #include "error.h"
 #include "filesystem.h"
-#include "game_loader.h"
-#include "game_data_packet_factory.h"
+#include "game.h"
+#include "game_cmd_queue_data_packet.h"
+#include "game_computer_player_data_packet.h"
 #include "game_data_packet_ids.h"
+#include "game_game_class_data_packet.h"
+#include "game_loader.h"
 #include "game_map_data_packet.h"
 #include "game_preload_data_packet.h"
+#include "game_interactive_player_data_packet.h"
+#include "game_player_economies_data_packet.h"
+#include "game_player_info_data_packet.h"
 #include "widelands_map_map_object_loader.h"
+
 
 /*
  * Constructor
  */
-Game_Loader::Game_Loader(const char* filename, Game* game) { 
+Game_Loader::Game_Loader(FileSystem* fs, Game* game) { 
       m_game=game;
-      m_filename=filename;
+      m_fs=fs;
 }
 
 /*
@@ -44,11 +51,8 @@ Game_Loader::~Game_Loader(void) {
  * This function preloads a game
  */
 int Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
-   FileRead fr;
-   fr.Open(g_fs, m_filename.c_str());
-
    // Load elemental data block
-   mp->Read(&fr, m_game);
+   mp->Read(m_fs, m_game, 0); 
    
    return 0;
 }
@@ -57,38 +61,57 @@ int Game_Loader::preload_game(Game_Preload_Data_Packet* mp) {
  * Load the complete file 
  */
 int Game_Loader::load_game(void) {
-   
-   FileRead fr;
-   fr.Open(g_fs, m_filename.c_str());
+   Game_Data_Packet* gp;
 
-   // Load elemental data block (again)
-   Game_Preload_Data_Packet mp;
-   mp.Read(&fr, m_game);
-   
-   Widelands_Map_Map_Object_Loader* m_mol = 0;
-   
-   // ok, now go on and load the rest
-   Game_Data_Packet_Factory fac;
+   log("Game: Reading Preload Data ... ");
+   gp = new Game_Preload_Data_Packet();
+   gp->Read(m_fs, m_game, 0); 
+   delete gp;
+   log(" done\n");
 
-   Game_Data_Packet* gmdp = 0;
-   
-   ushort id;
-   Game_Data_Packet* pak;
-   while(!fr.IsEOF()) {
-      id=fr.Unsigned16();
-      if(id==PACKET_END_OF_GAME_DATA) break;
-      log("Creating Game-packet for id: %i. Reading packet ... ", id);
-      pak=fac.create_correct_packet(id);
-      pak->Read(&fr, m_game, m_mol);
-      log("done\n");
-      if(id == PACKET_MAP_DATA) { 
-         m_mol = static_cast<Game_Map_Data_Packet*>(pak)->get_map_object_loader();
-         gmdp = pak;
-      } else 
-         delete pak;
-   }
+   log("Game: Reading Game Class Data ... ");
+   gp = new Game_Game_Class_Data_Packet();
+   gp->Read(m_fs, m_game, 0); 
+   delete gp;
+   log(" done\n");
 
-   delete gmdp; // deletes m_mol too
+   log("Game: Reading Player Info ... ");
+   gp = new Game_Player_Info_Data_Packet();
+   gp->Read(m_fs, m_game, 0); 
+   delete gp;
+   log(" done\n");
+   
+   log("Game: Reading Map Data!\n");
+   Game_Map_Data_Packet* gmdp = new Game_Map_Data_Packet();
+   gmdp->Read(m_fs, m_game, 0);
+   Widelands_Map_Map_Object_Loader *mol = gmdp->get_map_object_loader();
+   log("Game: Reading Map Data done!\n");
+
+   log("Game: Reading Player Economies Info ... ");
+   gp = new Game_Player_Economies_Data_Packet();
+   gp->Read(m_fs, m_game, mol); 
+   delete gp;
+   log(" done\n");
+   
+   log("Game: Reading Command Queue Data ... ");
+   gp = new Game_Cmd_Queue_Data_Packet();
+   gp->Read(m_fs, m_game, mol); 
+   delete gp;
+   log(" done\n");
+ 
+   log("Game: Reading Interactive Player Data ... ");
+   gp = new Game_Interactive_Player_Data_Packet();
+   gp->Read(m_fs, m_game, mol); 
+   delete gp;
+   log(" done\n");
+
+   log("Game: Reading Computer Player Data ... ");
+   gp = new Game_Computer_Player_Data_Packet();
+   gp->Read(m_fs, m_game, mol); 
+   delete gp;
+   log(" done\n");
+
+   delete gmdp; // delete m_mol too
 
    return 0;
 }

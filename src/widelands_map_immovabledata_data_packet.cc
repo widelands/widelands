@@ -42,37 +42,40 @@ Widelands_Map_Immovabledata_Data_Packet::~Widelands_Map_Immovabledata_Data_Packe
 /*
  * Read Function
  */
-void Widelands_Map_Immovabledata_Data_Packet::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
+   if( skip ) 
+      return;
+
+   FileRead fr;
+   try {
+      fr.Open( fs, "binary/immovable_data" );
+   } catch ( ... ) {
+      // not there, so skip
+      return ;
+   }
+   
    // First packet version
-   int packet_version=fr->Unsigned16();
+   int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
-      // Now the rest data len
-      uint len = fr->Unsigned32();
-      if(skip) {
-         // Skip the rest, flags are not our problem here
-         fr->Data(len);
-         return;
-      }
-
       while(1) {
-         uint reg=fr->Unsigned32();      
+         uint reg=fr.Unsigned32();      
          if(reg==0xffffffff) break; // Last immovable
 
          assert(ol->is_object_known(reg));
          Immovable* imm=static_cast<Immovable*>(ol->get_object_by_file_index(reg));
 
          // Animation
-         imm->m_anim=imm->get_descr()->get_animation(fr->CString());
-         imm->m_animstart=fr->Signed32();
+         imm->m_anim=imm->get_descr()->get_animation(fr.CString());
+         imm->m_animstart=fr.Signed32();
 
          // Programm
-         if(fr->Unsigned8()) 
-            imm->m_program=imm->get_descr()->get_program(fr->CString());
+         if(fr.Unsigned8()) 
+            imm->m_program=imm->get_descr()->get_program(fr.CString());
          else
             imm->m_program=0;
-         imm->m_program_ptr=fr->Unsigned32();
-         imm->m_program_step=fr->Signed32();
+         imm->m_program_ptr=fr.Unsigned32();
+         imm->m_program_step=fr.Signed32();
 
          ol->mark_object_as_loaded(imm);
       }
@@ -80,25 +83,20 @@ void Widelands_Map_Immovabledata_Data_Packet::Read(FileRead* fr, Editor_Game_Bas
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Immovabledata_Data_Packet!\n", packet_version);
+   
+   assert( 0 );
 }
 
 
 /*
  * Write Function
  */
-void Widelands_Map_Immovabledata_Data_Packet::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   // first of all the magic bytes
-   fw->Unsigned16(PACKET_IMMOVABLEDATA);
+void Widelands_Map_Immovabledata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
+   FileWrite fw; 
 
    // now packet version
-   fw->Unsigned16(CURRENT_PACKET_VERSION);
+   fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Here we will insert skip data (packet lenght) 
-   // later, write a dummy for know
-   int filepos = fw->GetFilePos();
-   fw->Unsigned32(0x00000000);
-   fw->ResetByteCounter();
-  
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
@@ -109,32 +107,30 @@ void Widelands_Map_Immovabledata_Data_Packet::Write(FileWrite* fw, Editor_Game_B
             assert(os->is_object_known(immovable));
             Immovable* imm=static_cast<Immovable*>(immovable);
 
-            fw->Unsigned32(os->get_object_file_index(imm));
+            fw.Unsigned32(os->get_object_file_index(imm));
 
             // My position is not needed, set on creation
              
             // Animations
-            fw->CString(imm->get_descr()->get_animation_name(imm->m_anim).c_str());
-            fw->Signed32(imm->m_animstart);
+            fw.CString(imm->get_descr()->get_animation_name(imm->m_anim).c_str());
+            fw.Signed32(imm->m_animstart);
 
             // Program Stuff
             if(imm->m_program) {
-               fw->Unsigned8(1);
-               fw->CString(imm->m_program->get_name().c_str());
+               fw.Unsigned8(1);
+               fw.CString(imm->m_program->get_name().c_str());
             } else
-               fw->Unsigned8(0);
-            fw->Unsigned32(imm->m_program_ptr);
-            fw->Signed32(imm->m_program_step);
+               fw.Unsigned8(0);
+            fw.Unsigned32(imm->m_program_ptr);
+            fw.Signed32(imm->m_program_step);
          
             os->mark_object_as_saved(imm);
          }
       }
    }
 
-   fw->Unsigned32(0xffffffff);
+   fw.Unsigned32(0xffffffff);
    
-   // Now, write the packet length
-   fw->Unsigned32(fw->GetByteCounter(), filepos);
-
+   fw.Write( fs, "binary/immovable_data" );
    // DONE
 }

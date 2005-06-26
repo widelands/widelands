@@ -31,8 +31,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Unhide_Area::Event_Unhide_Area(void) {
-   set_name("Unhide Area");
-   set_is_one_time_event(true);
+   set_name(L"Unhide Area");
    set_coords(Coords(0,0));
    set_player(1);
    set_area(5);
@@ -42,94 +41,62 @@ Event_Unhide_Area::~Event_Unhide_Area(void) {
 }
 
 /*
- * cleanup()
- */
-void Event_Unhide_Area::cleanup(Editor_Game_Base* g) {
-   // Nothing todo
-   Event::cleanup(g);
-}
-
-/*
  * reinitialize
  */
 void Event_Unhide_Area::reinitialize(Game* g) {
-   if(is_one_time_event()) {
-      cleanup(g); // Also calls event cleanup
-   } else {
-      Event::reinitialize(g);
-   }
 }
 
 /*
  * File Read, File Write
  */
-void Event_Unhide_Area::Read(FileRead* fr, Editor_Game_Base* egbase, bool skip) {
-   int version=fr->Unsigned16();
-   if(version <= EVENT_VERSION) {
-      set_name(fr->CString());
-      set_is_one_time_event(fr->Unsigned8());
-      int x=fr->Signed16();
-      int y=fr->Signed16();
-      m_pt.x=x;
-      m_pt.y=y;
-      set_area(fr->Signed16());
-      int player=fr->Signed8();
+void Event_Unhide_Area::Read(Section* s, Editor_Game_Base* egbase) {
+   int version = s->get_safe_int("version");
+
+   if(version == EVENT_VERSION) {
+      m_pt.x=s->get_safe_int("point_x");
+      m_pt.y=s->get_safe_int("point_y");
+      
+      set_area( s->get_safe_int("area"));
+
+      int player= s->get_safe_int("player");
       set_player(player);
-      read_triggers(fr,egbase, skip);
-      if(x<0 || y<0 || x>=((int)egbase->get_map()->get_width()) || y>=((int)egbase->get_map()->get_height()) || player<=0 || player>egbase->get_map()->get_nrplayers()) {
-         // we're not configured and can't jump. delete us
-         // but give a warning
-         log("Unhide Area Event with illegal coordinates or player: (%i,%i) (Player: %i) deleted!\n", x,y, player);
-         set_is_one_time_event(true);
-         cleanup(egbase);
+      
+      if(m_pt.x<0 || m_pt.y<0 || m_pt.x>=((int)egbase->get_map()->get_width()) || m_pt.y>=((int)egbase->get_map()->get_height()) || player<=0 || player>egbase->get_map()->get_nrplayers()) {
+         // give a warning
+         log("Unhide Area Event with illegal coordinates or player: (%i,%i) (Player: %i) deleted!\n", m_pt.x, m_pt.y, player);
       }
       return;
    }
    throw wexception("Unhide Area Event with unknown/unhandled version %i in map!\n", version);
 }
 
-void Event_Unhide_Area::Write(FileWrite* fw, Editor_Game_Base *egbase) {
-   // First of all the id
-   fw->Unsigned16(get_id());
-
-   // Now the version
-   fw->Unsigned16(EVENT_VERSION);
-
-   // Name
-   fw->Data(get_name(), strlen(get_name()));
-   fw->Unsigned8('\0');
-
-   // triggers only once?
-   fw->Unsigned8(is_one_time_event());
+void Event_Unhide_Area::Write(Section* s, Editor_Game_Base *egbase) {
+   // the version
+   s->set_int("version", EVENT_VERSION);
 
    // Point
-   fw->Signed16(m_pt.x);
-   fw->Signed16(m_pt.y);
+   s->set_int("point_x", m_pt.x );
+   s->set_int("point_y", m_pt.y );
 
    // Area
-   fw->Signed16(get_area());
+   s->set_int("area", get_area());
 
    // Player
-   fw->Signed8(get_player());
-
-   // Write all trigger ids
-   write_triggers(fw, egbase);
-   // done
+   s->set_int("player", get_player());
 }
 
 /*
  * run the event
  */
-void Event_Unhide_Area::run(Game* game) {
+Event::State Event_Unhide_Area::run(Game* game) {
    assert(m_pt.x!=-1 && m_pt.y!=-1);
    assert(m_player>0 && m_player<=game->get_map()->get_nrplayers());
 
    Player* player=game->get_player(m_player);
    player->set_area_seen(Coords(m_pt.x,m_pt.y),get_area(), true);
 
-   // If this is a one timer, release our triggers
-   // and forget about us
-   reinitialize(game);
+   m_state = DONE;
+   return m_state; 
 }
 
 
