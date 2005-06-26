@@ -23,6 +23,7 @@
 #include "editor_game_base.h"
 #include "map.h"
 #include "rgbcolor.h"
+#include "sound_handler.h"
 
 class Game;
 class Path;

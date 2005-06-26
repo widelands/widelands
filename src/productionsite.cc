@@ -953,6 +953,15 @@ void ProductionSite::program_act(Game* g)
 			m_program_time = schedule_act(g, 10);
 			return;
 		}
+		case ProductionAction::actPlayFX:
+		{
+			sound_handler->play_fx(action->sparam1);
+			
+			program_step();
+			m_program_timer = true;
+			m_program_time = schedule_act(g, 10);
+			return;
+		}
 	}
 }
 

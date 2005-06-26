@@ -88,7 +88,8 @@ static void g_init(int argc, char **argv)
 		s->get_bool("workareapreview");
 		// KLUDGE!
 
-	   sound_handler=new Sound_Handler();
+		// Create global sound handler
+		sound_handler=new Sound_Handler();
 
 		g_options.check_used();
 	}
@@ -164,13 +165,13 @@ void g_main(int argc, char** argv)
 		}
 
 		try {
-                        sound_handler->start_music(Sound_Handler::INTRO);
+                        sound_handler->start_music("intro");
 
          Fullscreen_Menu_Intro r;
          r.run();
          bool done=false;
 
-         sound_handler->change_music(Sound_Handler::MENU, 1000, 0);
+         sound_handler->change_music("menu", 1000);
 
          while(!done) {
             Fullscreen_Menu_Main *mm = new Fullscreen_Menu_Main;

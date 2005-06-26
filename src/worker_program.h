@@ -93,6 +93,7 @@ private:
 	void parse_removeobject(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_geologist(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 	void parse_geologist_find(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_playFX(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd);
 
 private:
 	std::string						m_name;

@@ -100,6 +100,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{ "removeobject",		&WorkerProgram::parse_removeobject },
 	{ "geologist",			&WorkerProgram::parse_geologist },
 	{ "geologist-find",	&WorkerProgram::parse_geologist_find },
+	{ "playFX",		&WorkerProgram::parse_playFX },
 
 	{ 0, 0 }
 };
@@ -1157,6 +1158,26 @@ bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
 	return false;
 }
 
+void WorkerProgram::parse_playFX(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 2)
+		throw wexception("Usage: playFX <fx_name>");
+	
+	act->sparam1=cmd[1];
+	act->function = &Worker::run_playFX;
+}
+
+/** Demand from the \ref sound_handler to play a certain sound effect. Whether the effect actually gets played
+ * is decided only by the sound server*/
+bool Worker::run_playFX(Game* g, State* state, const WorkerAction* act)
+{
+	sound_handler->play_fx(act->sparam1);
+	
+	state->ivar1++;
+	schedule_act(g, 10);
+	return true;
+}
+
 
 
 /*
@@ -1521,6 +1542,10 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	m_walk_anims.parse(this, directory, prof, "walk_??", prof->get_section("walk"), encdata);
    if(get_worker_type()!=SOLDIER) // Soldier have no walkload
       m_walkload_anims.parse(this, directory, prof, "walkload_??", prof->get_section("walkload"), encdata);
+   
+   // Read the sound effects
+   while (sglobal->get_next_string("soundfx", &string))  //yes, it's meant to be an assignment
+   	sound_handler->load_fx(directory, string);
 
    // Read the becomes and experience
    m_becomes = sglobal->get_string("becomes","");

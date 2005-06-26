@@ -266,7 +266,7 @@ void Sys_Init()
 
 		// Sound
 		SDL_InitSubSystem(SDL_INIT_AUDIO);
-		if ( Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024) == -1 )
+		if ( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1 )
 			throw wexception("Failed to initialize sound system: %s\n", Mix_GetError());
 		sys.snd_active=true;
 	}
@@ -532,6 +532,11 @@ restart:
 				}
 
 				break;
+			case SDL_USEREVENT:
+				if (ev->user.code==Sound_Handler::CHANGE_MUSIC)
+					sound_handler->change_music();
+				
+				break;				
 			}
 		}
 	}

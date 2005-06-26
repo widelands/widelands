@@ -25,6 +25,7 @@
 #include "cmd_queue.h"
 #include <string>
 #include <vector>
+#include "sound_handler.h"
 
 class Building;
 class Economy;
@@ -263,6 +264,7 @@ class Worker : public Bob {
    bool run_removeobject(Game* g, State* state, const WorkerAction* act);
    bool run_geologist(Game* g, State* state, const WorkerAction* act);
    bool run_geologist_find(Game* g, State* state, const WorkerAction* act);
+   bool run_playFX(Game* g, State* state, const WorkerAction* act);
 
    private:
    Object_Ptr			m_location;			// meta location of the worker, a PlayerImmovable
