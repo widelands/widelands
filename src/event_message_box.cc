@@ -24,8 +24,11 @@
 #include "editor_game_base.h"
 #include "event_message_box_message_box.h"
 #include "map.h"
+#include "map_trigger_manager.h"
 #include "graphic.h"
 #include "trigger_null.h"
+#include "unicode.h"
+#include "util.h"
 
 static const int EVENT_VERSION = 1;
 
@@ -38,8 +41,6 @@ Event_Message_Box::Event_Message_Box(void) {
    set_caption(L"Caption");
    set_window_title(L"Window Title");
    set_is_modal(false);
-   set_pic_id(-1);
-   set_pic_position(Right);
 
    set_nr_buttons(1);
    m_buttons[0].name=L"Continue";
@@ -103,106 +104,72 @@ const wchar_t* Event_Message_Box::get_button_name(int i) {
 /*
  * File Read, File Write
  */
-void Event_Message_Box::Read(Section* fs, Editor_Game_Base* egbase) {
-   log( "TODO: Event_Message_Box::Write\n");
-   assert(0);
+void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
+   int version = s->get_safe_int( "version" );
 
-#if 0
-    int version=fr->Unsigned16();
-   if(version <= EVENT_VERSION) {
-      set_name(fr->CString());
-      set_is_one_time_event(fr->Unsigned8());
-      set_text(fr->CString());
-      set_caption(fr->CString());
-      set_window_title(fr->CString());
-      set_is_modal(fr->Unsigned8());
-      bool has_pic=fr->Unsigned8();
-      if(has_pic) {
-         set_pic_position(fr->Unsigned8());
-         set_pic_id(g_gr->load_pic_from_file(fr, PicMod_Game));
-         if(skip)
-            g_gr->flush_picture(get_pic_id());
-      }
-      set_nr_buttons(fr->Unsigned8());
-      int i=0;
-      for(i=0; i<get_nr_buttons(); i++) {
-         set_button_name(i,fr->CString());
-         int id=fr->Signed16();
-         if(id!=-1 && !skip) {
-            Trigger* trig=egbase->get_map()->get_trigger(id);
-            if(trig->get_id()!=TRIGGER_NULL)
-               throw wexception("Trigger of message box %s is not a Null Trigger!\n", get_name());
-            set_button_trigger(i, static_cast<Trigger_Null*>(trig), egbase->get_map());
+   if( version == EVENT_VERSION ) {
+      set_name( widen_string( s->get_name()).c_str() );
+      set_text( widen_string( s->get_safe_string( "text" )).c_str() );
+      set_caption( widen_string( s->get_safe_string( "caption" )).c_str() );
+      set_window_title( widen_string( s->get_safe_string( "window_title" )).c_str() );
+      set_is_modal( s->get_safe_bool( "is_modal" ));
+
+      uint nr_buttons = s->get_safe_int( "number_of_buttons" );
+      set_nr_buttons( nr_buttons );
+      char buf[256];
+      for(uint i=0; i<nr_buttons; i++) {
+         sprintf( buf, "button_%02i_name", i );
+         set_button_name( i, widen_string( s->get_safe_string( buf )) );
+
+         sprintf( buf, "button_%02i_has_trigger", i );
+         bool trigger = s->get_safe_bool( buf );
+
+         if( trigger ) { 
+            sprintf( buf, "button_%02i_trigger", i );
+            Trigger* t =  egbase->get_map()->get_mtm()->get_trigger( widen_string( s->get_safe_string( buf )).c_str() ); // Hopefully it is a null trigger
+            set_button_trigger( i, static_cast<Trigger_Null*>(t));
          } else
-            set_button_trigger(i,0,egbase->get_map());
+            set_button_trigger( i, 0);
+         set_button_name( i, widen_string( s->get_safe_string( buf ) ));
       }
-
-      read_triggers(fr,egbase, skip);
       return;
    }
-   throw wexception("Message Box Event with unknown/unhandled version %i in map!\n", version);
-#endif
+   throw wexception("Unknown Version in Event_Message_Box::Read: %i\n", version );
 }
 
 void Event_Message_Box::Write(Section* fs, Editor_Game_Base *egbase) {
-    log( "TODO: Event_Message_Box::Write\n");
-    assert(0);
-       
-#if 0 
-   // First of all the id
-   fw->Unsigned16(get_id());
+    // Set Version
+    fs->set_int( "version", EVENT_VERSION );
+    
+    // Set Text
+    fs->set_string( "text", narrow_string( m_text ).c_str());
 
-   // Now the version
-   fw->Unsigned16(EVENT_VERSION);
+    // Caption
+    fs->set_string( "caption", narrow_string( m_caption ).c_str());
 
-   // Name
-   fw->Data(get_name(), strlen(get_name()));
-   fw->Unsigned8('\0');
-
-   // triggers only once?
-   fw->Unsigned8(is_one_time_event());
-
-
-   // Description string
-   fw->Data(m_text.c_str(), m_text.size());
-   fw->Unsigned8('\0');
-
-   // Caption
-   fw->Data(m_caption.c_str(), m_caption.size());
-   fw->Unsigned8('\0');
-
-   // Window Title
-   fw->Data(m_window_title.c_str(), m_window_title.size());
-   fw->Unsigned8('\0');
-
-   // is modal
-   fw->Unsigned8(get_is_modal());
-
-   // has picture
-   fw->Unsigned8(static_cast<int>(get_pic_id())!=-1);
-   if(static_cast<int>(get_pic_id())!=-1) {
-      // Write picture
-      // Pic position
-      fw->Unsigned8(get_pic_position());
-      g_gr->save_pic_to_file(get_pic_id(), fw);
-   }
+    // Window Title
+    fs->set_string( "window_title", narrow_string( m_window_title ).c_str());
+    
+    // is modal
+    fs->set_bool( "is_modal", get_is_modal());
 
    // Number of buttons
-   fw->Unsigned8(get_nr_buttons());
+   fs->set_int( "number_of_buttons", get_nr_buttons());
+   
    int i=0;
+   char buf[256];
    for(i=0; i<get_nr_buttons(); i++) {
-      fw->Data(m_buttons[i].name.c_str(), m_buttons[i].name.size());
-      fw->Unsigned8('\0');
-      if(m_buttons[i].trigger)
-         fw->Signed16(egbase->get_map()->get_trigger_index(m_buttons[i].trigger));
-      else
-         fw->Signed16(-1);
-   }
+      sprintf( buf, "button_%02i_name", i );
+      fs->set_string( buf, narrow_string( m_buttons[i].name ).c_str());
+   
 
-   // Write all trigger ids
-   write_triggers(fw, egbase);
-   // done
-#endif
+      sprintf( buf, "button_%02i_has_trigger", i );
+      fs->set_bool( buf, m_buttons[i].trigger == 0 ? 0 : 1  );
+      if(m_buttons[i].trigger) {
+         sprintf( buf, "button_%02i_trigger", i );
+         fs->set_string( buf, narrow_string( m_buttons[i].trigger->get_name() ).c_str());
+      }
+   }
 }
 
 /*
@@ -215,9 +182,6 @@ Event::State Event_Message_Box::run(Game* game) {
       mb->run();
       delete mb;
    }
-
-   log( "TODO: message box run: look if window is still open!\n");
-   assert( 0 );
 
    m_state = DONE;
    return m_state;

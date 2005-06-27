@@ -32,6 +32,7 @@
 #include "widelands_map_elemental_data_packet.h"
 #include "widelands_map_event_data_packet.h"
 #include "widelands_map_event_chain_data_packet.h"
+#include "widelands_map_extradata_data_packet.h"
 #include "widelands_map_flag_data_packet.h"
 #include "widelands_map_flagdata_data_packet.h"
 #include "widelands_map_data_packet_ids.h"
@@ -184,6 +185,13 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    log("done!\n ");
 
    // NON MANDATORY PACKETS BELOW THIS POINT
+   // Map Extra Data
+   log("Reading Map Extra Data ... ");
+   dp=new Widelands_Map_Extradata_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
    // Triggers
    log("Reading Trigger Data ... ");
    dp=new Widelands_Map_Trigger_Data_Packet();

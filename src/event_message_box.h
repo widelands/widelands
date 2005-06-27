@@ -57,10 +57,6 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       inline const wchar_t* get_caption(void) { return m_caption.c_str(); }
       inline void set_window_title(const wchar_t* str) { m_window_title=str; }
       inline const wchar_t* get_window_title(void) { return m_window_title.c_str(); }
-      inline void set_pic_id(int i) { m_pic_id=i; }
-      inline uint get_pic_id(void) { return m_pic_id; }
-      inline void set_pic_position(int i) { m_pic_position=i; }
-      inline int  get_pic_position(void) { return m_pic_position; }
       inline void set_is_modal(bool t) {  m_is_modal=t; }
       inline bool get_is_modal(void) { return m_is_modal; }
       void set_button_trigger(int i, Trigger_Null* t);
@@ -89,8 +85,6 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       std::wstring m_caption;
       std::wstring m_window_title;
       bool m_is_modal;
-      uint m_pic_id;
-      int m_pic_position;
 
       std::vector<Button_Descr> m_buttons;
       UIPanel*      m_window;

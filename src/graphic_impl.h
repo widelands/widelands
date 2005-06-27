@@ -24,6 +24,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <png.h>
 #include "animation.h"
 #include "constants.h"
 #include "geometry.h"
@@ -84,7 +85,8 @@ The rendering functions do NOT perform any clipping; this is up to the caller.
 */
 class Surface {
    friend class AnimationGfx;
-   
+   friend class Font_Handler; // Needs m_surface for SDL_Blitting 
+
    SDL_Surface* m_surface;
    int m_offsx;
    int m_offsy;
@@ -127,6 +129,7 @@ class Surface {
          switch( m_surface->format->BytesPerPixel ) {
             case 1: return (*pix);
             case 2: return *((ushort*)(pix));
+            case 3: 
             case 4: return *((ulong*)(pix));
          }
          assert(0);
@@ -159,12 +162,14 @@ class Surface {
 
       void draw_minimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Rect rc, Coords viewpt, uint flags);
 
+
       // sw16_terrain.cc
       void draw_field(Rect&, Field * const f, Field * const rf, Field * const fl, Field * const rfl,
             Field * const lf, Field * const ft,
             const int posx, const int rposx, const int posy,
             const int blposx, const int rblposx, const int blposy,
             uchar roads, uchar darken, bool);
+      
 
    private:
       inline void set_subwin( Rect r ) { m_offsx = r.x; m_offsy = r.y; m_w =r.w; m_h = r.h; }
@@ -317,8 +322,7 @@ public:
 	virtual uint create_surface(int w, int h);
 	virtual void free_surface(uint pic);
 	virtual RenderTarget* get_surface_renderer(uint pic);
-   virtual void save_pic_to_file(uint, FileWrite*);
-   virtual uint load_pic_from_file(FileRead*, int);
+   virtual void save_png(uint, FileWrite*);
 
 	Surface* get_picture_surface(uint id);
 
@@ -340,10 +344,13 @@ public:
 	// Misc functions
 	virtual void screenshot(const char* fname);
 
-	virtual uint get_picture(int mod, Surface* surf);
+	virtual uint get_picture(int mod, Surface* surf, const char* = 0 );
 	virtual const char* get_maptexture_picture(uint id);
 
 private:
+   // Static function for png writing
+   static void m_png_write_function( png_structp, png_bytep, png_size_t ); 
+      
 	uint find_free_picture();
 
 	struct Picture {

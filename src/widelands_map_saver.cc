@@ -37,6 +37,7 @@
 #include "widelands_map_elemental_data_packet.h"
 #include "widelands_map_event_data_packet.h"
 #include "widelands_map_event_chain_data_packet.h"
+#include "widelands_map_extradata_data_packet.h"
 #include "widelands_map_flag_data_packet.h"
 #include "widelands_map_flagdata_data_packet.h"
 #include "widelands_map_heights_data_packet.h"
@@ -152,6 +153,12 @@ void Widelands_Map_Saver::save(void) throw(wexception) {
    log("done!\n ");
 
    // NON MANDATORY PACKETS BELOW THIS POINT
+   // Map Extra Data
+   log("Writing Map Extra Data ... ");
+   dp=new Widelands_Map_Extradata_Data_Packet();
+   dp->Write(m_fs, m_egbase, m_mos);
+   delete dp;
+   log("done!\n ");
 
    // Triggers
    if(m_egbase->get_map()->get_mtm()->get_nr_triggers()) {

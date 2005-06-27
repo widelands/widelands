@@ -52,7 +52,6 @@ class Event_Message_Box_Option_Menu : public UIWindow {
       void clicked(int);
       void ls_selected(int);
       void edit_box_edited(int);
-      void pic_checkbox_enabled(bool);
 
       Event_Message_Box* m_event;
       Editor_Interactive* m_parent;
@@ -67,17 +66,12 @@ class Event_Message_Box_Option_Menu : public UIWindow {
       UIEdit_Box* m_name;
       UIEdit_Box* m_window_title;
       UIEdit_Box* m_button_name;
-      UIButton*   m_btn_picture_options;
       UITextarea* m_nr_buttons_ta;
       int         m_nr_buttons;
       int         m_ls_selected;
       UIMultiline_Editbox* m_text;
       UITextarea* m_current_trigger_ta;
       UIListselect* m_buttons_ls;
-      UICheckbox* m_uses_picture;
-      uint         m_picid;
-      int         m_position;
-      bool        m_clrkey;
 
       std::vector<int> m_null_triggers;
 };

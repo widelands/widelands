@@ -1313,14 +1313,17 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 	return id;
 }
 
-// TODO: get rid of this function (needs change of font format)
-uint GraphicImpl::get_picture(int mod, Surface* surf ) 
+uint GraphicImpl::get_picture(int mod, Surface* surf, const char* fname ) 
 {
 	uint id = find_free_picture();
 	Picture* pic = &m_pictures[id];
    pic->mod = mod;
    pic->surface = surf;
-   pic->u.fname =  0;
+   if( fname ) {
+      pic->u.fname = strdup( fname );
+		m_picturemap[pic->u.fname] = id;
+   } else
+      pic->u.fname =  0;
 
 	return id;
 }
@@ -1672,75 +1675,71 @@ void GraphicImpl::flush_picture(uint pic_index) {
 /*
  * Save and load pictures
  */
-#define PICTURE_VERSION 1
-// GRAPHIC_TODO: fix this up for alpha
-void GraphicImpl::save_pic_to_file(uint pic_index, FileWrite* fw) {
-   Picture* pic = &m_pictures[pic_index];
-
-   // First the version
-   fw->Unsigned16(PICTURE_VERSION);
-
-   // Now has clrkey
-   //fw->Unsigned8(pic->surface->has_clrkey());
-
-   // Now width and height
-   fw->Unsigned16(pic->surface->get_w());
-   fw->Unsigned16(pic->surface->get_h());
-
-   // now all the data as RGB values
-   for(int h=0; h<(int)pic->surface->get_h(); h++) {
-      for(int w=0; w<(int)pic->surface->get_w(); w++) {
-         ulong clr= *((ulong*)((uchar*)pic->surface->get_pixels() + h*pic->surface->get_pitch()+w));
-         uchar r, g, b;
-         SDL_GetRGB( clr, pic->surface->get_format(), &r, &g, &b );
-         fw->Unsigned8(r);
-         fw->Unsigned8(g);
-         fw->Unsigned8(b);
-      }
-   }
+void GraphicImpl::m_png_write_function( png_structp png_ptr, png_bytep data, png_size_t length ) {
+   FileWrite* fw = static_cast<FileWrite*>(png_get_io_ptr(png_ptr));
+   fw->Data( data, length );
 }
+void GraphicImpl::save_png(uint pic_index, FileWrite* fw) {
+   Surface* surf = get_picture_surface( pic_index );
 
-uint GraphicImpl::load_pic_from_file(FileRead* fr, int mod) {
-   // First the version
-   int version=fr->Unsigned16();
-   if(version<=PICTURE_VERSION) {
-      fr->Unsigned8();
-//     NoLog("Load picture:\n has clrkey: %i\n", has_clrkey);
-      int g_w=fr->Unsigned16();
-      int g_h=fr->Unsigned16();
-//      NoLog(" Width: %i, Height: %i\n", g_w, g_h);
-
-      SDL_Surface* surf = SDL_CreateRGBSurface( SDL_SWSURFACE, g_w, g_h, m_screen.get_format()->BitsPerPixel, 
-      m_screen.get_format()->Rmask, m_screen.get_format()->Gmask, m_screen.get_format()->Bmask, 
-      m_screen.get_format()->Amask);
-
-      SDL_LockSurface( surf );
-      uchar* pixels=(uchar*)surf->pixels;
-      for(int h=0; h<g_h; h++) {
-         for(int w=0; w<g_w; w++) {
-            ulong* clr=(ulong*) &pixels[h*surf->pitch+w];
-            uchar r,g,b;
-            r=fr->Unsigned8();
-            g=fr->Unsigned8();
-            b=fr->Unsigned8();
-            *clr = SDL_MapRGB( surf->format, r, g, b );
-         }
-      }
-      SDL_UnlockSurface( surf );
-      
-      uint id = find_free_picture();
-//     NoLog(" Got Free id: %i\n", id);
-      Picture* pic = &m_pictures[id];
-
-      pic->mod = mod;
-      pic->u.fname = 0;
-      pic->surface = new Surface();
-      pic->surface->set_sdl_surface( surf );
-      // pic->surface->use_clrkey( has_clrkey );
-
-      return id;
+   // Save a png
+   png_structp png_ptr = png_create_write_struct
+      (PNG_LIBPNG_VER_STRING, (png_voidp)0,
+       0, 0);
+   if (!png_ptr)
+      throw wexception("GraphicImpl::save_png: Couldn't create png struct!\n");
+   
+   // Set another write function
+   png_set_write_fn( png_ptr, fw, &GraphicImpl::m_png_write_function, 0);
+   
+   png_infop info_ptr = png_create_info_struct(png_ptr);
+   if (!info_ptr)
+   {
+      png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
+      throw wexception("GraphicImpl::save_png: Couldn't create png info struct!\n");
    }
-   throw wexception("Unknown picture version %i in file!\n", version);
+
+   // Set jump for error
+   if (setjmp(png_jmpbuf(png_ptr)))
+   {
+      png_destroy_write_struct(&png_ptr, &info_ptr);
+      throw wexception("GraphicImpl::save_png: Couldn't set png setjmp!\n");
+   }
+   
+   // Fill info struct
+   png_set_IHDR(png_ptr, info_ptr, surf->get_w(), surf->get_h(),
+         8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
+         PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+   
+   // png_set_strip_16(png_ptr) ;
+      
+   // Start writing
+   png_write_info(png_ptr, info_ptr);
+
+   // Strip data down
+   png_set_filler(png_ptr, 0, PNG_FILLER_AFTER);
+   png_set_packing( png_ptr );
+
+   png_bytep row = new png_byte[4*surf->get_w()];
+   // Write each row
+   for( uint y = 0; y < surf->get_h(); y++ ) {
+      uint i = 0;
+      for( uint x = 0; x < surf->get_w(); x++ ) {
+         uchar r, g, b, a;
+         SDL_GetRGBA( surf->get_pixel(x,y), surf->get_format(), &r, &g, &b, &a);
+         row[i+0] = r;
+         row[i+1] = g;
+         row[i+2] = b;
+         row[i+3] = a;
+         i += 4;
+      }   
+      png_write_row( png_ptr, row );
+   }
+   delete row;
+
+   // End write
+   png_write_end(png_ptr, info_ptr );
+   png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
 /*

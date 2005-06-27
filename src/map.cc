@@ -371,6 +371,14 @@ void Map::cleanup(void) {
 
    delete m_mecm;
    m_mecm = new MapEventChainManager();
+
+   // Remove all extra datas. Pay attention here, maybe some freeing would be needed
+#ifdef DEBUG
+   for( uint i = 0; i < m_extradatainfos.size(); i++) {
+      assert( m_extradatainfos[i].type == Extradata_Info::PIC ) ;
+   }
+#endif
+   m_extradatainfos.resize( 0 );
 }
 
 /*

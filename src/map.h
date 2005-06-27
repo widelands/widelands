@@ -134,6 +134,7 @@ class Map {
    friend class S2_Map_Loader;
    friend class Widelands_Map_Loader;
 	friend class Widelands_Map_Elemental_Data_Packet;
+   friend class Widelands_Map_Extradata_Data_Packet;
    friend class Editor;
    friend class Main_Menu_New_Map;
 
@@ -300,6 +301,16 @@ private:
    MapEventChainManager*     m_mecm;           // The mapeventchain manager has a list of all event chains in this map 
    MapTriggerManager*        m_mtm;            // The maptrigger manager 
    MapEventManager*          m_mem;            // The mapevent manager 
+   
+   struct Extradata_Info {
+      enum Type {
+         PIC,
+      };
+      void*       data;
+      std::string filename;
+      Type        type;
+   };
+   std::vector<Extradata_Info> m_extradatainfos; // Only for caching of extradata for writing and reading
 
 	void recalc_brightness(FCoords coords);
 	void recalc_fieldcaps_pass1(FCoords coords);

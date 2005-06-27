@@ -267,25 +267,26 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
          
          bool got_text = false;
          bool got_img = false;
-         
-         SDL_Surface *image = 0, *text = 0;
+        
+         Surface* image = 0;
+         SDL_Surface *text = 0;
          SDL_Rect img_pos,text_pos;
             
          if (cur->image.size()) {
             img_pos.x = start_x;
             img_pos.y = 0;
+           
+            image = ((GraphicImpl*)(g_gr))->get_picture_surface( g_gr->get_picture( PicMod_Game, cur->image.c_str() )); // Not Font, but game. 
             
-            image = load_image(cur->image);
-            assert(image);
             if (cur->image_align == Align_Right) {
-               img_pos.x = max_x - image->w;
-               max_x-=(image->w + h_space);
+               img_pos.x = max_x - image->get_w();
+               max_x-=(image->get_h() + h_space);
             }
             else if (cur->image_align == Align_HCenter)
-               img_pos.x = (max_x - image->w) / 2;
+               img_pos.x = (max_x - image->get_w()) / 2;
             else 
-               start_x+=image->w + h_space;
-            surf_h = image->h;
+               start_x+=image->get_w() + h_space;
+            surf_h = image->get_h();
             got_img = true;
          }
          if (cur->text.size()) {
@@ -312,8 +313,8 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
          //blit image after text, so it can possibly cover an empty line
          if (got_img) {
             //log("img pos x: %i y: %i global_width: %i\n",img_pos.x,img_pos.y,max_x);
-            SDL_BlitSurface(image,0,block_surface,&img_pos);
-            SDL_FreeSurface(image);
+            SDL_Surface* sdlimage = image->m_surface;
+            SDL_BlitSurface(sdlimage,0,block_surface,&img_pos);
          }
          if (!got_img && !got_text)
             throw wexception("Got empty block in draw_richtext!");
@@ -370,21 +371,6 @@ SDL_Surface* Font_Handler::join_sdl_surfaces(uint w, uint h, std::vector<SDL_Sur
       SDL_FreeSurface( s );
    }
    return global_surface;  
-}
-
-//loads an image from a file
-//needed for richtext
-SDL_Surface* Font_Handler::load_image(std::string file) {
-      std::string path = "pics/"+file;
-      FileRead fr;
-      SDL_Surface* s;
-
-      fr.Open(g_fs, path);
-
-      s = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-      if (!s)
-         log("WARNING: Couldn't open %s: %s\n", path.c_str(), IMG_GetError());
-      return s;
 }
 
 /* 

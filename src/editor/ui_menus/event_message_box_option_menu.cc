@@ -19,7 +19,6 @@
 
 #include "event_message_box_option_menu.h"
 #include "event_message_box.h"
-#include "event_message_box_option_menu_pic_options.h"
 #include "ui_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
@@ -52,9 +51,6 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    int posy=offsy;
    m_nr_buttons=m_event->get_nr_buttons();
    m_ls_selected=0;
-   m_picid=m_event->get_pic_id();
-   m_position=m_event->get_pic_position();
-   m_clrkey=false;
 
    m_buttons[0].name=L"Continue";
    m_buttons[1].name=L"Button 1";
@@ -128,21 +124,6 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    new UITextarea(this, spacing, posy, 100, 20, "Current: ", Align_CenterLeft);
    m_current_trigger_ta=new UITextarea(this, spacing+15, posy+15+spacing, get_inner_w()/2, 20, "Keine Trigger gewaehlt!", Align_CenterLeft);
 
-
-   // Uses picture checkbox
-   posy=get_inner_h()-60;
-   new UITextarea(this, spacing, posy, 200, 20, "Uses Picture: ", Align_CenterLeft);
-   m_uses_picture=new UICheckbox(this, get_inner_w()/2-STATEBOX_HEIGHT-2*spacing, posy);
-   m_uses_picture->set_state(static_cast<int>(m_event->get_pic_id())!=-1);
-   m_uses_picture->changedto.set(this, &Event_Message_Box_Option_Menu::pic_checkbox_enabled);
-
-   // Picture options Button
-   b=new UIButton(this, get_inner_w()/2+spacing, posy, 120, 20, 0, 6);
-   b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
-   b->set_title("Picture options");
-   b->set_enabled(m_uses_picture->get_state());
-   m_btn_picture_options=b;
-
    // Ok/Cancel Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-30;
@@ -211,8 +192,6 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
       case 0:
          {
             // Cancel has been clicked
-            if(static_cast<int>(m_picid)!=-1 && m_picid!=m_event->get_pic_id())
-               g_gr->flush_picture(m_picid);
             end_modal(0);
             return;
          }
@@ -238,22 +217,6 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
                } else {
                   m_event->set_button_trigger(i, 0);
                }
-            }
-            if(m_uses_picture->get_state()) {
-               if(m_picid!=m_event->get_pic_id() && static_cast<int>(m_event->get_pic_id())!=-1) {
-                  log("Flushing picture: %i\n", m_event->get_pic_id());
-                  g_gr->flush_picture(m_event->get_pic_id());
-               }
-               log("Setting pic id to: %i\n", m_picid);
-               m_event->set_pic_id(m_picid);
-               m_event->set_pic_position(m_position);
-            } else {
-               int picid=m_event->get_pic_id();
-               if(static_cast<int>(picid)!=-1) {
-                  log("Flushing picture unten: %i\n", m_event->get_pic_id());
-                  g_gr->flush_picture(picid);
-               }
-               m_event->set_pic_id(-1);
             }
             end_modal(1);
             return;
@@ -295,16 +258,6 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
             if(m_buttons[m_ls_selected].trigger>=static_cast<int>(m_null_triggers.size()))
                m_buttons[m_ls_selected].trigger=-1;
             update();
-         }
-         break;
-
-      case 6:
-         {
-            // Picture options
-            Event_Message_Box_Option_Menu_Picture_Options* epo=new Event_Message_Box_Option_Menu_Picture_Options(m_parent,&m_clrkey, &m_picid, &m_position);
-            if(epo->run())
-               update();
-            delete epo;
          }
          break;
    }
@@ -357,13 +310,5 @@ void Event_Message_Box_Option_Menu::ls_selected(int i) {
  */
 void Event_Message_Box_Option_Menu::edit_box_edited(int i) {
    m_buttons[m_ls_selected].name= widen_string( m_button_name->get_text()) ;
-   update();
-}
-
-/*
- * The picture checkbox was enabled
- */
-void Event_Message_Box_Option_Menu::pic_checkbox_enabled(bool t) {
-   m_btn_picture_options->set_enabled(t);
    update();
 }

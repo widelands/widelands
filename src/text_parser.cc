@@ -101,9 +101,12 @@ void Text_Parser::parse_attributes(std::string format, Text_Block *element) {
          if (key == "font-face")
             element->font_face = val+".ttf";
          else if (key == "font-color") {
-            std::string r = "0x"+val.substr(1,2);
-            std::string g = "0x"+val.substr(3,2);
-            std::string b = "0x"+val.substr(5,2);
+            int offset = 0;
+            if( val[0] == '#' ) 
+               offset = 1;
+            std::string r = "0x"+val.substr(offset,2);
+            std::string g = "0x"+val.substr(offset+2,2);
+            std::string b = "0x"+val.substr(offset+4,2);
             char *ptr;
             int red = strtol(r.c_str(),&ptr,0);
             int green = strtol(g.c_str(),&ptr,0);

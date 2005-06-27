@@ -86,6 +86,7 @@ static void g_init(int argc, char **argv)
 		s->get_string("xres");
 		s->get_string("yres");
 		s->get_bool("workareapreview");
+		s->get_bool("nozip");
 		// KLUDGE!
 
 		// Create global sound handler

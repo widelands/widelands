@@ -44,69 +44,12 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
      int posx=offsx;
      int posy=offsy;
 
-     if(static_cast<int>(event->get_pic_id())==-1) {
-        // No picture, so we can optimaly assign all things its place
-        set_inner_size(400,300);
-        m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, narrow_string( event->get_caption() ), Align_Center);
-        posy+=50;
-        m_text=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
-     } else {
-        // Picture there
-        int picw, pich;
-        g_gr->get_picture_size(event->get_pic_id(), &picw, &pich);
-        UIButton* b;
-        switch(event->get_pic_position()) {
-           case Event_Message_Box::Right:
-              {
-                 set_inner_size(picw*2+2*spacing+50, pich+110);
-                 m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, narrow_string( event->get_caption()).c_str(), Align_Center);
-                 posy+=50;
-                 b=new UIButton(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, pich, 0, 0, 1);
-                 b->set_enabled(false);
-                 b->set_pic(event->get_pic_id());
-                 m_text=new UIMultiline_Textarea(this, spacing, posy, get_inner_w()/2-2*spacing, pich, "", Align_Left);
-              }
-              break;
+     // No picture, so we can optimaly assign all things its place
+     set_inner_size(400,300);
+     m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, narrow_string( event->get_caption() ), Align_Center);
+     posy+=50;
+     m_text=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
 
-            case Event_Message_Box::Left:
-              {
-                 set_inner_size(picw*2+2*spacing+50, pich+110);
-                 m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, narrow_string( event->get_caption()).c_str(), Align_Center);
-                 posy+=50;
-                 b=new UIButton(this, spacing, posy, get_inner_w()/2-2*spacing, pich, 0, 0, 1);
-                 b->set_enabled(false);
-                 b->set_pic(event->get_pic_id());
-                 m_text=new UIMultiline_Textarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2-2*spacing, pich, "", Align_Left);
-              }
-              break;
-
-            case Event_Message_Box::Center_under:
-              {
-                 set_inner_size(picw+2*15, pich+300);
-                 m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, narrow_string( event->get_caption()).c_str(), Align_Center);
-                 posy+=50;
-                 b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1);
-                 b->set_enabled(false);
-                 b->set_pic(event->get_pic_id());
-                 posy+=pich+spacing;
-                 m_text=new UIMultiline_Textarea(this, spacing, posy, get_inner_w()-2*spacing, get_inner_h()-2*spacing-posy, "", Align_Left);
-              }
-              break;
-
-            case Event_Message_Box::Center_over:
-              {
-                 set_inner_size(picw+2*15, pich+300);
-                 b=new UIButton(this, 15, posy, picw, pich, 0, 0, 1);
-                 b->set_enabled(false);
-                 b->set_pic(event->get_pic_id());
-                 posy+=pich+spacing;
-                 m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, narrow_string( event->get_caption()).c_str(), Align_Center);
-                 posy+=50;
-                 m_text=new UIMultiline_Textarea(this, spacing, posy, get_inner_w()-2*spacing, get_inner_h()-2*spacing-posy, "", Align_Left);
-              }
-              break;
-        }
-     }
      if(m_caption)
         m_caption->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
      if(m_text)
