@@ -31,8 +31,8 @@ thatchfern=2
 
 [idle]
 pics=bakery_i_??.png  # ???
-hot_spot_x=32
-hot_spot_y=44
+hot_spot_x=40
+hot_spot_y=60
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
@@ -41,9 +41,9 @@ shadowclr_g=0
 shadowclr_b=255
 
 [working]
-pics=bakery_w_??.png  # ???
-hot_spot_x=32
-hot_spot_y=44
+pics=bakery_i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=60
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
@@ -53,8 +53,8 @@ shadowclr_b=255
 
 [build]
 pics=bakery_i_??.png  # ???
-hot_spot_x=32
-hot_spot_y=44
+hot_spot_x=40
+hot_spot_y=60
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
