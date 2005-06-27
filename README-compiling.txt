@@ -1,6 +1,21 @@
 This document described steps needed to compile widelands for different
 Systems using different compilers
 
+Needed libraries
+----------------
+
+These are the libraries you need. You also need the headers and link libraries,
+for widelands makes direct use of them:
+   - SDL 
+   - SDL_mixer
+   - SDL_image
+   - SDL_net
+   - SDL_ttf
+   - libpng
+   - zlib
+
+Make sure you have them all.
+
 Unix
 ----
 make sure, you've got the developer libs and include files from libsdl
