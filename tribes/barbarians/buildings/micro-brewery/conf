@@ -4,7 +4,7 @@ descname=Micro brewery
 type=production		# basic type (warehouse, production, military)
 size=medium
 buildable=yes
-buildicon=build.png
+buildicon=micro-brewery_build.png
 worker=brewer    
 program=work
 output=beer
@@ -30,9 +30,9 @@ raw_stone=3
 thatchfern=2
 
 [idle]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=micro-brewery_i_??.png  # ???
+hot_spot_x=36
+hot_spot_y=60
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -41,9 +41,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=micro-brewery_i_??.png  # ???
+hot_spot_x=36
+hot_spot_y=60
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -52,9 +52,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=micro-brewery_i_??.png  # ???
+hot_spot_x=36
+hot_spot_y=60
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
