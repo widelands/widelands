@@ -25,9 +25,9 @@ trunk=3
 raw_stone=1         # expensive
 
 [idle]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=hardener_i_??.png  # ???
+hot_spot_x=55
+hot_spot_y=60
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -36,9 +36,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=hardener_i_??.png  # ???
+hot_spot_x=55
+hot_spot_y=60
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -47,9 +47,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=hardener_i_??.png  # ???
+hot_spot_x=55
+hot_spot_y=60
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
