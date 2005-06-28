@@ -224,10 +224,12 @@ void BulldozeConfirm::bulldoze()
          // Game
          Game* g=static_cast<Game*>(egbase);
          g->send_player_bulldoze (todestroy);
+         m_iabase->need_complete_redraw();
       } else {
          // Editor
          Player* plr=todestroy->get_owner();
          plr->bulldoze(todestroy);
+         m_iabase->need_complete_redraw();
       }
    }
 

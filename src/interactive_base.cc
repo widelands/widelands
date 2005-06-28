@@ -208,10 +208,16 @@ void Interactive_Base::think()
       if(Sys_GetKeyState(KEY_RIGHT)) 		
          get_mapview()->set_rel_viewpoint(Point(scrollval, 0));
    }
-   
+  
    // Call game logic here
    // The game advances
 	m_egbase->think();
+   
+   // Update everythink so and so many milliseconds, to make sure the whole
+   // screen is synced ( another user may have done something, and the screen was 
+   // not redrawn )
+   if( curframe & 1023 ) // % 1024
+      need_complete_redraw();
 
 	// The entire screen needs to be redrawn (unit movement, tile animation, etc...)
 	g_gr->update_fullscreen();

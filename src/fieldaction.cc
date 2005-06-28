@@ -728,10 +728,12 @@ void FieldActionWindow::act_ripflag()
       if(m_iabase->get_egbase()->is_game()) {
          // Game
          Game *g = static_cast<Game*>(m_iabase->get_egbase()); 
+         m_iabase->need_complete_redraw();
 	 g->send_player_bulldoze (flag);
       } else {
          // Editor
          imm->remove(m_iabase->get_egbase());
+         m_iabase->need_complete_redraw();
       }
    }
 }
