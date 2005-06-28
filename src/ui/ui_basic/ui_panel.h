@@ -22,6 +22,9 @@
 #define __S__PANEL_H
 
 #include "ui_object.h"
+#include "../../font_handler.h"
+#include "../../constants.h"
+#include "rendertarget.h"
 #include "types.h"
 #include "error.h"
 
@@ -160,6 +163,18 @@ private:
 
 	bool _running;
 	int _retcode;
+
+	bool _use_tooltip;
+	char _tooltip[255];
+	
+	void draw_tooltip(RenderTarget* dst, UIPanel *lowest);
+	
+public:
+	void set_tooltip(const char tooltip[255]);
+	void unset_tooltip();
+	inline char* get_tooltip(){return _tooltip;}
+	bool use_tooltip(){return _use_tooltip;}
+
 
 private:
 	static UIPanel *ui_trackmouse(int *x, int *y);

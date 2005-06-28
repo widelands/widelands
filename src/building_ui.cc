@@ -320,6 +320,8 @@ WaresQueueDisplay::WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, W
 	m_max_width = maxw;
 
 	waredescr = queue->get_owner()->get_tribe()->get_ware_descr(m_queue->get_ware());
+	
+	set_tooltip(waredescr->get_name());
 
 	m_pic_empty = waredescr->get_pic_queue_empty();
 	m_pic_full = waredescr->get_pic_queue_full();

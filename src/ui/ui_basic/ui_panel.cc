@@ -78,6 +78,8 @@ UIPanel::UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, co
 
 	_flags = pf_handle_mouse|pf_think|pf_visible;
 	update(0, 0, _w, _h);
+
+	_use_tooltip = false;
 }
 
 /**
@@ -170,6 +172,14 @@ int UIPanel::run()
 			forefather->do_draw(rt);
 
 			rt->blit(Sys_GetMouseX(), Sys_GetMouseY(), s_default_cursor);
+
+			if (UIPanel *lowest = _mousein)
+			{
+				while (lowest->_mousein)
+					lowest = lowest->_mousein;
+				if (lowest->use_tooltip())
+					draw_tooltip(rt, lowest);
+			}
 
 			g_gr->refresh();
 		}
@@ -649,6 +659,7 @@ void UIPanel::check_child_death()
  * Subset for the border first and draw the border, then subset for the inner area
  * and draw the inner area.
  * Draw child panels after drawing self.
+ * Draw tooltip if required.
 */
 void UIPanel::do_draw(RenderTarget* dst)
 {
@@ -898,4 +909,40 @@ void UIPanel::ui_mousemove(uint btns, int x, int y, int xdiff, int ydiff)
 void UIPanel::ui_key(bool down, int code, char c)
 {
 	_modal->do_key(down, code, c);
+}
+
+/**
+ * Set the tooltip for the panel.
+ */
+void UIPanel::set_tooltip(const char tooltip[255])
+{
+	snprintf(_tooltip, sizeof(_tooltip), "%s", tooltip);
+	_use_tooltip = true;
+}
+
+/**
+ * Unset the tooltip for the panel.
+ */
+void UIPanel::unset_tooltip()
+{
+	_use_tooltip = false;
+}
+
+/** [private]
+ * Draw the tooltip.
+ */
+void UIPanel::draw_tooltip(RenderTarget* dst, UIPanel *lowest)
+{
+	int tooltipX, tooltipY, tip_width, tip_height;
+	
+	tooltipX = Sys_GetMouseX() + 20;
+	tooltipY = Sys_GetMouseY() + 25;
+
+	g_fh->get_size(UI_FONT_TOOLTIP, lowest->get_tooltip(), &tip_width, &tip_height, 0);
+	tip_width += 4;
+	tip_height += 4;
+	
+	dst->fill_rect(tooltipX-2, tooltipY-2, tip_width, tip_height, RGBColor(230,200,50));
+	dst->draw_rect(tooltipX-2, tooltipY-2, tip_width, tip_height, RGBColor(0,0,0));
+	g_fh->draw_string(dst, UI_FONT_TOOLTIP, UI_FONT_TOOLTIP_CLR, tooltipX, tooltipY, lowest->get_tooltip(), Align_Left);
 }
