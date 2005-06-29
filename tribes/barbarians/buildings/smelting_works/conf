@@ -61,7 +61,7 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=smelting_work_i_??.png  # ???
+pics=smelting_works_i_??.png  # ???
 hot_spot_x=55
 hot_spot_y=56
 clrkey_r=255
