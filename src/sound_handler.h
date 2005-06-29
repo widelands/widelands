@@ -20,7 +20,7 @@
 #ifndef SOUND_HANDLER
 #define SOUND_HANDLER
 
-//needed to enable preliminary support for Mix_LoadMUS_RW in SDL_mixer
+//needed to enable preliminary support for Mix_LoadMUS_RW in SDL_mixer-1.2.6
 #define USE_RWOPS
 
 #include <vector>
@@ -44,21 +44,28 @@ extern Sound_Handler* sound_handler;
  * A Songset encapsulates a number of interchangeable pieces of (background) music, e.g.
  * all songs that might be played while the main menu is being shown. It is possible to 
  * access those songs on after another or in random order. The fact that a Songset really 
- * contains several different songs is hidden from the outside.*/
+ * contains several different songs is hidden from the outside.\n
+ * A songset does not contain the audio data itself, to not use huge amounts of memory.
+ * Instead, each song is loaded on request and the data is free()d afterwards.*/
 class Songset {
 public:
+	Songset();
 	~Songset();
 	
-	void add_song(Mix_Music* song);
+	void add_song(string filename);
 	Mix_Music* get_song();
 	bool empty() {return songs.empty();}
 	
 protected:
-	/** The collection of songs*/
-	vector<Mix_Music*> songs;
+	/** The filenames of all configured songs*/
+	vector<string> songs;
 	/** Pointer to the song that is currently playing (actually the one that was last started);
 	 * needed for linear playback*/
-	vector<Mix_Music*>::iterator current_song;
+	vector<string>::iterator current_song;
+	
+	FileRead* fr;
+	Mix_Music* m;
+	SDL_RWops* rwops;
 };
 
 /** A collection of several soundeffects meant for the same event.
@@ -169,7 +176,6 @@ protected:
  * is not recursive, trust me :-)
  * 
  * \todo Bobs want to make noise too, not just workers *g*
- * \todo Stereo for FX
  * \todo FX should have a priority (e.g. fights are more important than fishermen)
  * \todo Sound_Handler must not play *all* FX but only a select few
  */
@@ -185,11 +191,11 @@ public:
 	
         void read_config();
 	
-	void load_fx(const string dir, const string basename);
+	void load_fx(const string dir, const string basename, const bool recursive=false);
 	void play_fx(const string fx_name, const Coords map_position);
 	void play_fx(const string fx_name);
 	
-	void load_song(const string dir, const string basename);
+	void load_song(const string dir, const string basename, const bool recursive=false);
 	void start_music(const string songset_name, int fadein_ms=0);
 	void stop_music(int fadeout_ms=0);
 	void change_music(const string songset_name="", int fadeout_ms=0, int fadein_ms=0);
@@ -202,9 +208,7 @@ public:
 
 protected:
 	void load_one_fx(const string filename, const string fx_name);
-	void load_one_song(const string filename, const string songset_name);
-	
-	bool coords_visible(const Coords position);
+	int stereo_position(const Coords position);
 	
 	/** Whether to disable background music*/
 	bool disable_music;

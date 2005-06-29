@@ -173,7 +173,6 @@ clean:
 	@-rm -rf $(OBJECT_DIR)/widelands
 	@-rm -rf *~ */*~ */*/*~ */*/*/*~ */*/*/*/*~
 
-.PHONY: doc
 doc:
 	@doxygen Doxyfile
 

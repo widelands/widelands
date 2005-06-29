@@ -28,10 +28,24 @@
 #include "interactive_base.h"
 #include "mapview.h"
 
-/** Delete all songs to avoid memory leaks. This also frees the audio data.*/
+/** Prepare infrastructure for reading song files from disk*/
+Songset::Songset()
+{
+	fr=new FileRead();
+	rwops=NULL;
+	m=NULL;
+}
+
+/** Close and delete all songs to avoid memory leaks.*/
 Songset::~Songset()
 {
 	songs.clear();
+	
+	if (m) //m might be NULL
+		free(m);
+	if (rwops) //rwops might be NULL
+		SDL_FreeRW(rwops);
+	delete fr;
 }
 
 /** Append a song to the end of the songset
@@ -39,10 +53,9 @@ Songset::~Songset()
  * \note The \ref current_song will unconditionally be set to the songset's first song.
  * If you do not want to disturb the (linear) playback order then load all songs before
  * you start playing*/
-void Songset::add_song(Mix_Music* song)
+void Songset::add_song(string filename)
 {
-	songs.push_back(song);
-	
+	songs.push_back(filename);
 	current_song=songs.begin();
 }
 
@@ -52,18 +65,53 @@ void Songset::add_song(Mix_Music* song)
 Mix_Music* Songset::get_song()
 {
 	int songnumber;
+	string filename;
 	
 	if (sound_handler->disable_music || songs.empty())
 		return NULL;
 	
 	if (sound_handler->random_order) {
 		songnumber=sound_handler->rng.rand()%songs.size();
-		return songs.at(songnumber);
+		filename=songs.at(songnumber);
 	} else {
 		if (current_song==songs.end())
 			current_song=songs.begin();	
-		return *(current_song++);
+		filename=*(current_song++);
 	}
+	
+	//first, close the previous song and remove it from memory
+	if (m) //m might be NULL
+		free(m);
+	if (rwops) { //rwops might be NULL
+		SDL_FreeRW(rwops);
+		fr->Close();
+	}
+	
+	
+	//then open the new song
+	fr->Open(g_fs, filename);
+	rwops=SDL_RWFromMem(fr->Data(0), fr->GetSize());
+	
+#ifdef __WIN32__
+#warning Mix_LoadMUS_RW is not available under windows!!!
+	m=NULL;
+#else
+#ifdef OLD_SDL_MIXER
+#warning Please update your SDL_mixer library to at least version 1.2.6!!!
+	m=Mix_LoadMUS(filename.c_str());
+#else
+	m=Mix_LoadMUS_RW(rwops);
+#endif	
+#endif	
+
+	if (m) {
+		log(("Sound_Handler: loaded song \""+filename+"\"\n").c_str());
+	} else {
+		log(("Sound_Handler: loading song \""+filename+"\" failed!\n").c_str());
+		log("Sound_Handler: %s\n",Mix_GetError());
+	}
+	
+	return m;
 }
 
 //--------------------------------------------------------------------------------------
@@ -141,7 +189,6 @@ void Sound_Handler::read_config()
 	load_song("music", "intro");
 	load_song("music", "menu");
 	load_song("music", "ingame");
-	//TODO: load complete directories as ingame songs
 
 	//only systemwide fx, worker/building fx will be loaded by their respective conf-file parsers
 	load_fx("sound","create_construction_site");
@@ -151,16 +198,26 @@ void Sound_Handler::read_config()
  * EFFECT_XX.wav (ogg, wav), where XX is between 00 and 99.
  * \param dir		The directory where the audio files reside
  * \param basename	Name from which filenames will be formed (BASENAME_XX.wav);
- * 			also the name used with \ref play_fx */
-void Sound_Handler::load_fx(const string dir, const string basename)
+ * 			also the name used with \ref play_fx
+ * \param recursive	\internal
+ * If BASENAME_XX (with any extension) is a directory, effects will be loaded recursively.
+ * Subdirectories of and files under BASENAME_XX can be named anything you want*/
+void Sound_Handler::load_fx(const string dir, const string basename, const bool recursive)
 {	
 	filenameset_t files;
 	filenameset_t::const_iterator i;
 	
-	g_fs->FindFiles(dir, basename+"_??.*", &files);
+	if (recursive)
+		g_fs->FindFiles(dir, "*", &files);
+	else
+		g_fs->FindFiles(dir, basename+"_??.*", &files);
 	
-	for (i=files.begin(); i!=files.end(); ++i)
-		load_one_fx(*i, basename);
+	for (i=files.begin(); i!=files.end(); ++i) {
+		if (g_fs->IsDirectory(*i))  {
+			load_fx(*i, basename, true);
+		} else
+			load_one_fx(*i, basename);
+	}
 }
 
 /** Add exactly one file to the given fxset.
@@ -183,17 +240,24 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 			fxs[fx_name]=new FXset();
 		
 		fxs[fx_name]->add_fx(m);
-		log(("Loaded sound effect \""+fx_name+"\" from \""+filename+"\"\n").c_str());
+		log(("Loaded sound effect from \""+filename+"\" for FXset \""+fx_name+"\"\n").c_str());
 	} else
-		log(("Sound_Handler: loading sound effect \""+fx_name+"\" from \""+filename+"\" failed!\n").c_str());
+		log(("Sound_Handler: loading sound effect \""+filename+"\" for FXset \""+fx_name+"\" failed!\n").c_str());
 }
 
-/** Find out whether a logical coordinate is currently visible on screen*/
-bool Sound_Handler::coords_visible(const Coords position)
+/** Calculate  the position of an effect in relation to the visible part of the screen.
+ * \param position	Where the event happened (logical coordinates)
+ * \return left border  = 0, right border=254, not in viewport = -1
+ * \note This function can also be used to check whether a logical coordinate is visible at all*/
+int Sound_Handler::stereo_position(const Coords position)
 {
 	int sx, sy; //screen x,y (without clipping applied, might well be invisible)
+	int xres, yres; //x,y resolutions of game window
 	Interactive_Base* ia;
 	Point vp;
+	
+	xres=ia->get_xres();
+	yres=ia->get_yres();
 	
 	if (the_game) {
 		ia=the_game->get_iabase();
@@ -203,11 +267,11 @@ bool Sound_Handler::coords_visible(const Coords position)
 		sx -= vp.x;
 		sy -= vp.y;
 		
-		if ((sx>0 && sx<ia->get_xres()) && (sy>0 && sy<ia->get_yres()))
-			return true;
+		if (sx>0 && sx<xres && sy>0 && sy<yres) //make sure position is inside viewport
+			return sx*254/xres;
 	}
 		
-	return false;
+	return -1; 
 }
 
 
@@ -218,6 +282,7 @@ bool Sound_Handler::coords_visible(const Coords position)
 void Sound_Handler::play_fx(const string fx_name, const Coords map_position)
 {
 	Mix_Chunk* m;
+	int chan, spos;
 		
 	if (disable_fx) return;
 	
@@ -229,9 +294,12 @@ void Sound_Handler::play_fx(const string fx_name, const Coords map_position)
 		log("Sound_Handler: sound effect \"%s\" does not exist!\n", fx_name.c_str());
 	else {		
 		m=fxs[fx_name]->get_fx();	
-		if(m) {
-			if (coords_visible(map_position))
-				Mix_PlayChannel(-1, m, 0);
+		if(m) {		
+			spos=stereo_position(map_position);
+			if (spos!=-1) {
+				chan=Mix_PlayChannel(-1, m, 0);
+				Mix_SetPanning(chan, 254-spos, spos);
+			}
 		} else
 			log("Sound_Handler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
 	}
@@ -248,67 +316,33 @@ void Sound_Handler::play_fx(const string fx_name)
  * FILE_XX.wav (ogg, wav), where XX is between 00 and 99.
  * \param dir		The directory where the audio files reside
  * \param basename	Name from which filenames will be formed (BASENAME_XX.wav);
- * 			also the name used with \ref play_fx */
-void Sound_Handler::load_song(const string dir, const string basename)
+ * 			also the name used with \ref play_fx
+ * \param recursive	\internal
+ * This just registers the song, actual loading takes place when \ref Songset::get_song()
+ * is called.\n Supported file formats are wav and ogg.
+ * If BASENAME_XX (with any extension) is a directory, effects will be registered recursively.
+ * Subdirectories of and files under BASENAME_XX can be named anything you want*/
+void Sound_Handler::load_song(const string dir, const string basename, const bool recursive)
 {	
 	filenameset_t files;
 	filenameset_t::const_iterator i;
 	
-	g_fs->FindFiles(dir, basename+"_??.*", &files);
+	if (recursive)
+		g_fs->FindFiles(dir, "*", &files);
+	else			
+		g_fs->FindFiles(dir, basename+"_??*", &files);
 	
 	for (i=files.begin(); i!=files.end(); ++i)
-		load_one_song(*i, basename);
-}
-
-/** Add exactly one file to the given songset.
- * \param filename	The song to be loaded
- * \param songset_name	The songset to add the file to
- * \note The file formats are a subset of those supported by SDL_mixer, namely: wav and ogg. If you feed it
- * other files, this call will complain, but fail without consequences.
- * \note Unlike sound effects, songs will not be buffered in memory but are read from disk when playing*/
-void Sound_Handler::load_one_song(const string filename, const string songset_name)
-{
-	FileRead* fr=NULL;
-	Mix_Music* m=NULL;
-	SDL_RWops* rwops=NULL;			
-	
-	try {
-		fr=new FileRead();
-		fr->Open(g_fs, filename); //TODO: close again, part of keeping only one file open at a time
-		
-		rwops=SDL_RWFromMem(fr->Data(0), fr->GetSize());
-
-#ifdef __WIN32__
-#warning Mix_LoadMUS_RW is not available under windows!!!
-		m=NULL;
-#else
-		m=Mix_LoadMUS_RW(rwops); //TODO: SDL_mixer does not(??) free this RWop itself???
-#endif	
-
-#ifdef OLD_SDL_MIXER
-#warning Please update your SDL_mixer library to at least version 1.2.6!!!
-		m=Mix_LoadMUS(filename.c_str());
-#else
-		m=Mix_LoadMUS_RW(rwops); //TODO: SDL_mixer does not(??) free this RWop itself???
-#endif
-			
-		if (m) {
-			//make sure the required Songset exists
-			if (songs.count(songset_name)==0)
-				songs[songset_name]=new Songset();
-			
-			songs[songset_name]->add_song(m);
-			log(("Loaded song \""+songset_name+"\" from \""+filename+"\"\n").c_str());
+	{
+		if (g_fs->IsDirectory(*i)) {
+			load_song(*i, basename, true);
 		} else {
-			log(("Sound_Handler: loading song \""+songset_name+"\" from \""+filename+"\" failed!\n").c_str());
-			log("%s\n",Mix_GetError());
+			if (songs.count(basename)==0)
+				songs[basename]=new Songset();
+			
+			songs[basename]->add_song(*i);
+			log(("Registered music from file \""+*i+"\" for songset \""+basename+"\"\n").c_str());	
 		}
-	}
-	catch (...) {
-		if (m)
-			free(m);
-		if (rwops) SDL_FreeRW(rwops);
-		if (fr) delete fr;
 	}
 }
 
