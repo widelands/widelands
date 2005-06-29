@@ -6,7 +6,7 @@ size=medium
 buildable=no
 enhanced_building=yes
 enhances_to=big_inn
-buildicon=build.png
+buildicon=inn_build.png
 worker=innkeeper
 program=work
 output=snack
@@ -32,20 +32,20 @@ grindstone=2
 thatchfern=1
 
 [idle]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
+pics=inn_i_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
 shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=inn_i_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -54,12 +54,12 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
+pics=inn_i_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
 shadowclr_r=255
 shadowclr_g=0
 shadowclr_b=0
