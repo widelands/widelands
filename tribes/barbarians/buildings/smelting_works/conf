@@ -4,7 +4,7 @@ descname=Smelting Works
 type=production		# basic type (warehouse, production, military)
 size=medium
 buildable=yes 
-buildicon=build.png
+buildicon=smelting_works_build.png
 worker=smelter 
 output=iron
 output=gold
@@ -50,20 +50,20 @@ grindstone=1
 thatchfern=2
 
 [idle]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
+pics=smelting_works_i_??.png  # ???
+hot_spot_x=55
+hot_spot_y=56
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=0
 shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=smelting_work_i_??.png  # ???
+hot_spot_x=55
+hot_spot_y=56
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -72,13 +72,13 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
-clrkey_r=255
-clrkey_g=255
-clrkey_b=0
-shadowclr_r=255
+pics=smelting_works_i_??.png  # ???
+hot_spot_x=55
+hot_spot_y=56
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=0
 shadowclr_g=0
 shadowclr_b=0
 
