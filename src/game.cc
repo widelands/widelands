@@ -35,6 +35,7 @@
 #include "system.h"
 #include "tribe.h"
 #include "widelands_map_loader.h"
+#include "sound_handler.h"
 
 
 
@@ -54,6 +55,8 @@ Game::Game(void)
 	m_realtime = Sys_GetTime();
 
 	ipl = 0;
+	
+	sound_handler->the_game=this;
 }
 
 /** Game::~Game(void)
@@ -62,6 +65,8 @@ Game::Game(void)
  */
 Game::~Game(void)
 {
+	sound_handler->the_game=NULL;
+	
 	delete cmdqueue;
 	delete rng;
 }

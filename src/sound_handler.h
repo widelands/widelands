@@ -20,20 +20,16 @@
 #ifndef SOUND_HANDLER
 #define SOUND_HANDLER
 
-//next one needed to enable preliminary support for Mix_LoadMUS_RW in SDL_mixer
+//needed to enable preliminary support for Mix_LoadMUS_RW in SDL_mixer
 #define USE_RWOPS
 
 #include <vector>
 #include <map>
-#include <assert.h>
 #include <SDL.h>
 #include <SDL_mixer.h>
-#include <SDL_thread.h>
-#include "profile.h"
-#include "options.h"
-#include "error.h"
 #include "random.h"
-#include "filesystem.h"
+#include "geometry.h"
+#include "game.h"
 
 using namespace std;
 
@@ -43,7 +39,7 @@ class Sound_Handler;
 /** Reference to the global \ref Sound_Handler object*/
 extern Sound_Handler* sound_handler;
 
-/** A collection of several pieces of music meant for the sam situation.
+/** A collection of several pieces of music meant for the same situation.
  * 
  * A Songset encapsulates a number of interchangeable pieces of (background) music, e.g.
  * all songs that might be played while the main menu is being shown. It is possible to 
@@ -51,6 +47,8 @@ extern Sound_Handler* sound_handler;
  * contains several different songs is hidden from the outside.*/
 class Songset {
 public:
+	~Songset();
+	
 	void add_song(Mix_Music* song);
 	Mix_Music* get_song();
 	bool empty() {return songs.empty();}
@@ -71,6 +69,8 @@ protected:
  * FXset really contains several different effect is hidden from the outside.*/
 class FXset {
 public:
+	~FXset();
+	
 	void add_fx(Mix_Chunk* fx);
 	Mix_Chunk* get_fx();
 	bool empty() {return fxs.empty();}
@@ -93,7 +93,7 @@ protected:
  * \par Music
  * 
  * Background music for different situations (e.g. 'Menu', 'Gameplay') is collected in
- * songsets. Each \ref songset contains references to one or more songs in any format
+ * songsets. Each \ref Songset contains references to one or more songs in any format
  * understood by SDL_mixer (e.g mp3, ogg, wav). The only ordering inside a soundset is
  * from the order in which the songs were loaded.
  * 
@@ -108,15 +108,15 @@ protected:
  * \li \c menu
  * \li \c ingame
  * 
- * must reside directly in the directory 'music' and must be named SONGSET_XX.??? where
+ * must reside directly in the directory 'sounds' and must be named SONGSET_XX.??? where
  * XX is a number from 00 to 99 and ??? is a filename extension. All subdirectories of
  * 'sounds' will be considered to contain ingame music. The subdirectories and the music
  * found in them can be arbitrarily named.
  *
  * \par Sound effects
  * 
- * Buildings and workers can use sound effects in their programs. To do so, use the command
- * \example playFX blacksmith_hammer
+ * Buildings and workers can use sound effects in their programs. To do so, use e.g.
+ * "playFX blacksmith_hammer"
  * The conf file parser will then load one or more audio files for 'hammering blacksmith'
  * from the building's/worker's configuration directory and store them in an \ref FXset
  * for later access, similar to music stored in songsets. For effects, however, the selection 
@@ -151,9 +151,24 @@ protected:
  * 
  * No, there's no other way. At least none that I found.
  * 
- * \todo Fading music in and out should not block
+ * \par Stopping music without blocking
+ * 
+ * When playing background music with SDL_mixer, we can fade the audio in/out. Unfortunately,
+ * Mix_FadeOutMusic will return immediately - but, as the music is not yet stopped, starting
+ * a new piece of background music will block. So the choice is to block (directly) after
+ * ordering to fade out or indirectly when starting the next piece. Now imagine a fadeout-time
+ * of 20 seconds ......
+ * 
+ * The solution is to work asynchronously which is doable, as we already use a callback to tell
+ * us when the audio is \e completely finished. So in \ref stop_music (or \ref change_music )
+ * we just start the fadeout. The callback then tells us when the audio has actually stopped
+ * and we can start the next music. To differentiate between the to states we can
+ * just take a peek with Mix_MusicPlaying if there is music running. To make sure that nothing
+ * bad happens, that check is not only required in \ref change_music but also in \ref start_music,
+ * which causes the seemingly recursive call to change_music from inside start_music. It really
+ * is not recursive, trust me :-)
+ * 
  * \todo Bobs want to make noise too, not just workers *g*
- * \todo Sound_Handler must actually select the fx
  * \todo Stereo for FX
  * \todo FX should have a priority (e.g. fights are more important than fishermen)
  * \todo Sound_Handler must not play *all* FX but only a select few
@@ -162,7 +177,8 @@ class Sound_Handler {
 	friend class Songset;
 	friend class FXset;
 public:
-	enum {CHANGE_MUSIC=1};
+#define NO_POSITION Coords(-2,-2)
+	enum {SOUND_HANDLER_CHANGE_MUSIC=1};
 	
         Sound_Handler();
 	~Sound_Handler();
@@ -170,6 +186,7 @@ public:
         void read_config();
 	
 	void load_fx(const string dir, const string basename);
+	void play_fx(const string fx_name, const Coords map_position);
 	void play_fx(const string fx_name);
 	
 	void load_song(const string dir, const string basename);
@@ -179,10 +196,15 @@ public:
 	
 	static void music_finished_callback();
 	static void fx_finished_callback(int channel);
+	
+	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
+	Game* the_game;
 
 protected:
 	void load_one_fx(const string filename, const string fx_name);
 	void load_one_song(const string filename, const string songset_name);
+	
+	bool coords_visible(const Coords position);
 	
 	/** Whether to disable background music*/
 	bool disable_music;
@@ -203,7 +225,7 @@ protected:
 	/** Which songset we are currently selecting songs from - not regarding if there actually is a song
 	 * playing \e right \e now*/
 	string current_songset;
-
+	
 	/** The random number generator*/
         RNG rng;
 };

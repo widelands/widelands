@@ -78,9 +78,6 @@ static struct {
 	int		gfx_w;
 	int		gfx_h;
 	bool		gfx_fullscreen;
-
-	// Sound
-	bool		snd_active;
 } sys;
 
 static char sys_recordname[256] = "";
@@ -263,18 +260,8 @@ void Sys_Init()
 		Sys_SetInputGrab(s->get_bool("inputgrab", false));
 		SDL_EnableUNICODE(1); // useful for e.g. chat messages
 		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
-
-		// Sound
-		SDL_InitSubSystem(SDL_INIT_AUDIO);
-		if ( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1 )
-			throw wexception("Failed to initialize sound system: %s\n", Mix_GetError());
-		sys.snd_active=true;
 	}
 	catch(...) {
-		if (sys.snd_active) {
-			Mix_CloseAudio();
-			SDL_QuitSubSystem(SDL_INIT_AUDIO);
-		}
 		if (sys.sdl_active)
 			SDL_Quit();
 		if (sys.frecord)
@@ -295,11 +282,6 @@ Shutdown the system
 */
 void Sys_Shutdown()
 {
-	if (sys.snd_active) {
-		Mix_CloseAudio();
-		SDL_QuitSubSystem(SDL_INIT_AUDIO);
-		sys.snd_active=false;
-	}
 	if (g_gr)
 		{
 		log("Sys_Shutdown: graphics system not shut down\n");
@@ -533,7 +515,7 @@ restart:
 
 				break;
 			case SDL_USEREVENT:
-				if (ev->user.code==Sound_Handler::CHANGE_MUSIC)
+				if (ev->user.code==Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC)
 					sound_handler->change_music();
 				
 				break;				

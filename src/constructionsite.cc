@@ -342,6 +342,8 @@ void ConstructionSite::init(Editor_Game_Base* g)
 		}
 
 		request_builder((Game*)g);
+		
+		sound_handler->play_fx("create_construction_site", m_position);
 	}
 }
 
@@ -479,6 +481,7 @@ bool ConstructionSite::get_building_work(Game* g, Worker* w, bool success)
 			return true;
 		} else {
 			molog("ConstructionSite::check_work: step %i completed\n", m_work_completed);
+			//TODO(fweber): cause "construction sounds" to be played - perhaps dependent on kind of construction?
 
 			m_work_completed++;
 			if (m_work_completed >= m_work_steps)

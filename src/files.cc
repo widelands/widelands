@@ -390,7 +390,7 @@ wchar_t *FileRead::WCString(int pos)
 /** FileRead::ReadLine(char *buf, int buflen)
  *
  * Reads a line from the file into the buffer.
- * The '\r', '\n' are consumed, but not stored in buf
+ * The '\\r', '\\n' are consumed, but not stored in buf
  *
  * Returns true on EOF condition.
  */

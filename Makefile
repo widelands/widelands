@@ -15,6 +15,13 @@ ifndef USE_GGZ
 USE_GGZ:=NO
 endif
 
+#doxygen
+DOXYGEN=/usr/bin/doxygen
+
+ifndef OLD_SDL_MIXER
+OLD_SDL_MIXER:=NO
+endif
+
 # Is this a cross compile?
 ifndef CROSS
 CROSS=NO
@@ -135,6 +142,10 @@ ifdef PROFILE
 ADD_CFLAGS += -pg -fprofile-arcs
 endif
 
+ifeq ($(OLD_SDL_MIXER),YES)
+ADD_CFLAGS += -DOLD_SDL_MIXER
+endif
+
 ##############################################################################
 # Object files and directories, final compilation flags
 
@@ -160,7 +171,11 @@ clean:
 	@-rm -rf $(OBJECT_DIR)/*.o $(OBJECT_DIR)/*/*.o $(OBJECT_DIR)/*/*/*.o $(OBJECT_DIR)/*/*/*/*.o 
 	@-rm -rf $(OBJECT_DIR)/*.d $(OBJECT_DIR)/*/*.d $(OBJECT_DIR)/*/*/*.d $(OBJECT_DIR)/*/*/*/*.d 
 	@-rm -rf $(OBJECT_DIR)/widelands
-	@-rm -rf *~ */*~ */*/*~ */*/*/*~
+	@-rm -rf *~ */*~ */*/*~ */*/*/*~ */*/*/*/*~
+
+.PHONY: doc
+doc:
+	@doxygen Doxyfile
 
 VERSION:=b8
 dist:

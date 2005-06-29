@@ -23,6 +23,7 @@
 #include <string>
 #include <map>
 #include "error.h"
+#include "options.h"
 
 class Game;
 class Section;

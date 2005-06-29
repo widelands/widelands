@@ -19,6 +19,21 @@
 
 #include "sound_handler.h"
 
+#include <assert.h>
+#include "profile.h"
+#include "options.h"
+#include "error.h"
+#include "filesystem.h"
+#include "map.h"
+#include "interactive_base.h"
+#include "mapview.h"
+
+/** Delete all songs to avoid memory leaks. This also frees the audio data.*/
+Songset::~Songset()
+{
+	songs.clear();
+}
+
 /** Append a song to the end of the songset
  * \param song	The song to append
  * \note The \ref current_song will unconditionally be set to the songset's first song.
@@ -29,11 +44,9 @@ void Songset::add_song(Mix_Music* song)
 	songs.push_back(song);
 	
 	current_song=songs.begin();
-	
-	//TODO: remove songs in destructor to not leak memory
 }
 
-/** Get a song from the songset. Depending on \ref random_order, 
+/** Get a song from the songset. Depending on \ref Sound_Handler::random_order, 
  * the selection will either be random or linear (after last song, will 
  * start again with first.*/
 Mix_Music* Songset::get_song()
@@ -55,12 +68,17 @@ Mix_Music* Songset::get_song()
 
 //--------------------------------------------------------------------------------------
 
+/** Delete all fxs to avoid memory leaks. This also frees the audio data.*/
+FXset::~FXset()
+{		
+	fxs.clear();	
+}
+
 /** Append a sound effect to the end of the fxset
  * \param fx	The sound fx to append*/
 void FXset::add_fx(Mix_Chunk* fx)
 {
 	fxs.push_back(fx);
-	//TODO: remove songs in destructor to not leak memory
 }
 
 /** Get a sound effect from the fxset. \e Which variant of the fx is actually given
@@ -84,7 +102,11 @@ Mix_Chunk* FXset::get_fx()
  * 'fx finished playing'*/
 Sound_Handler::Sound_Handler()
 {
-	//TODO:?? Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 32, 512);
+	SDL_InitSubSystem(SDL_INIT_AUDIO);
+	if ( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 512) == -1 ) {
+		SDL_QuitSubSystem(SDL_INIT_AUDIO);
+		throw wexception("Failed to initialize sound system: %s\n", Mix_GetError());
+	}
 	
 	current_songset="";
 	read_config();
@@ -95,13 +117,14 @@ Sound_Handler::Sound_Handler()
 	Mix_ChannelFinished(Sound_Handler::fx_finished_callback);
 }
 
-/** Housekeeping: unset hooks, free all sound data*/
+/** Housekeeping: unset hooks. Audio data will be freed automagically by the \ref Songset and \ref FXset destructors*/
 Sound_Handler::~Sound_Handler()
 {
-	Mix_ChannelFinished(NULL); //unregister callback
-	Mix_HookMusicFinished(NULL); //unregister callback
+	Mix_ChannelFinished(NULL);
+	Mix_HookMusicFinished(NULL);
 	
-	//TODO: actually *do* free :)
+	Mix_CloseAudio();
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
 /** Read the main config file, load background music and systemwide sound effects*/
@@ -112,7 +135,7 @@ void Sound_Handler::read_config()
 	s=g_options.pull_section("global");
 	
 	disable_music=s->get_bool("disable_music",false);
-	disable_fx=s->get_bool("disable_soundfx",false);
+	disable_fx=s->get_bool("disable_fx",false);
 	random_order=s->get_bool("random_order", true);
 	
 	load_song("music", "intro");
@@ -121,11 +144,11 @@ void Sound_Handler::read_config()
 	//TODO: load complete directories as ingame songs
 
 	//only systemwide fx, worker/building fx will be loaded by their respective conf-file parsers
-	load_fx("sounds","create_construction_site");
+	load_fx("sound","create_construction_site");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files named
- * EFFECT_XX.wav (ogg, mp3, ...), where XX is between 00 and 99.
+ * EFFECT_XX.wav (ogg, wav), where XX is between 00 and 99.
  * \param dir		The directory where the audio files reside
  * \param basename	Name from which filenames will be formed (BASENAME_XX.wav);
  * 			also the name used with \ref play_fx */
@@ -142,9 +165,8 @@ void Sound_Handler::load_fx(const string dir, const string basename)
 
 /** Add exactly one file to the given fxset.
  * \param filename	The effect to be loaded
- * \param songset	The fxset to add the file to
- * \note The file format must be supported by SDL_mixer, this is currently the case for
- * wave, aiff, riff, ogg and voc. Otherwise this call will complain, but fail without consequences.
+ * \param fx_name	The fxset to add the file to
+ * The file format must be ogg or wav. Otherwise this call will complain, but fail without consequences.
  * \note The complete audio file will be loaded into memory and stay there until program termination*/
 void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 {
@@ -166,28 +188,64 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 		log(("Sound_Handler: loading sound effect \""+fx_name+"\" from \""+filename+"\" failed!\n").c_str());
 }
 
+/** Find out whether a logical coordinate is currently visible on screen*/
+bool Sound_Handler::coords_visible(const Coords position)
+{
+	int sx, sy; //screen x,y (without clipping applied, might well be invisible)
+	Interactive_Base* ia;
+	Point vp;
+	
+	if (the_game) {
+		ia=the_game->get_iabase();
+		vp=ia->get_mapview()->get_viewpoint();
+		
+		the_game->get_map()->get_basepix(position, &sx, &sy);
+		sx -= vp.x;
+		sy -= vp.y;
+		
+		if ((sx>0 && sx<ia->get_xres()) && (sy>0 && sy<ia->get_yres()))
+			return true;
+	}
+		
+	return false;
+}
+
+
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s) must
  * have been loaded before with \ref load_fx.
- * \param fx_name	The identifying name of the sound effect, see \ref load_fx*/
-void Sound_Handler::play_fx(const string fx_name)
+ * \param fx_name	The identifying name of the sound effect, see \ref load_fx
+ * \param map_position  Logical (not screen) coordinates where the event takes place*/
+void Sound_Handler::play_fx(const string fx_name, const Coords map_position)
 {
 	Mix_Chunk* m;
-	
+		
 	if (disable_fx) return;
+	
+	if (map_position==NO_POSITION)
+		//make sure that it's centered and full volumes
+		;
 	
 	if (fxs.count(fx_name)==0)
 		log("Sound_Handler: sound effect \"%s\" does not exist!\n", fx_name.c_str());
 	else {		
 		m=fxs[fx_name]->get_fx();	
-		if(m)
-			Mix_PlayChannel(-1, m, 0);
-		else
+		if(m) {
+			if (coords_visible(map_position))
+				Mix_PlayChannel(-1, m, 0);
+		} else
 			log("Sound_Handler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
 	}
 }
 
+/** \overload*/
+void Sound_Handler::play_fx(const string fx_name)
+{
+	log("WARNING: play_fx(\"%s\") called without coordinates\n", fx_name.c_str());
+	play_fx(fx_name, NO_POSITION);
+}
+
 /** Load a background song. One song can consist of several audio files named
- * FILE_XX.wav (ogg, wav, perhaps midi(?)), where XX is between 00 and 99.
+ * FILE_XX.wav (ogg, wav), where XX is between 00 and 99.
  * \param dir		The directory where the audio files reside
  * \param basename	Name from which filenames will be formed (BASENAME_XX.wav);
  * 			also the name used with \ref play_fx */
@@ -204,54 +262,72 @@ void Sound_Handler::load_song(const string dir, const string basename)
 
 /** Add exactly one file to the given songset.
  * \param filename	The song to be loaded
- * \param songset	The songset to add the file to
- * \note The file formats are a subset of those supported by SDL_mixer, namely: wave and ogg. If you feed it
+ * \param songset_name	The songset to add the file to
+ * \note The file formats are a subset of those supported by SDL_mixer, namely: wav and ogg. If you feed it
  * other files, this call will complain, but fail without consequences.
  * \note Unlike sound effects, songs will not be buffered in memory but are read from disk when playing*/
 void Sound_Handler::load_one_song(const string filename, const string songset_name)
 {
-	FileRead* fr;
-	Mix_Music* m = 0;
-	SDL_RWops* rwops;			
+	FileRead* fr=NULL;
+	Mix_Music* m=NULL;
+	SDL_RWops* rwops=NULL;			
 	
-	fr=new FileRead();
-	fr->Open(g_fs, filename);
-	
-	rwops=SDL_RWFromMem(fr->Data(0), fr->GetSize());
+	try {
+		fr=new FileRead();
+		fr->Open(g_fs, filename); //TODO: close again, part of keeping only one file open at a time
+		
+		rwops=SDL_RWFromMem(fr->Data(0), fr->GetSize());
 
 #ifdef __WIN32__
 #warning Mix_LoadMUS_RW is not available under windows!!!
+		m=NULL;
 #else
-	m=Mix_LoadMUS_RW(rwops); //TODO: SDL_mixer does not(??) free this RWop itself???
+		m=Mix_LoadMUS_RW(rwops); //TODO: SDL_mixer does not(??) free this RWop itself???
+#endif	
+
+#ifdef OLD_SDL_MIXER
+#warning Please update your SDL_mixer library to at least version 1.2.6!!!
+		m=Mix_LoadMUS(filename.c_str());
+#else
+		m=Mix_LoadMUS_RW(rwops); //TODO: SDL_mixer does not(??) free this RWop itself???
 #endif
-		
-	if (m) {
-		//make sure the required Songset exists
-		if (songs.count(songset_name)==0)
-			songs[songset_name]=new Songset();
-		
-		songs[songset_name]->add_song(m);
-		log(("Loaded song \""+songset_name+"\" from \""+filename+"\"\n").c_str());
-	} else {
-		log(("Sound_Handler: loading song \""+songset_name+"\" from \""+filename+"\" failed!\n").c_str());
-		log("%s\n",Mix_GetError());
+			
+		if (m) {
+			//make sure the required Songset exists
+			if (songs.count(songset_name)==0)
+				songs[songset_name]=new Songset();
+			
+			songs[songset_name]->add_song(m);
+			log(("Loaded song \""+songset_name+"\" from \""+filename+"\"\n").c_str());
+		} else {
+			log(("Sound_Handler: loading song \""+songset_name+"\" from \""+filename+"\" failed!\n").c_str());
+			log("%s\n",Mix_GetError());
+		}
+	}
+	catch (...) {
+		if (m)
+			free(m);
+		if (rwops) SDL_FreeRW(rwops);
+		if (fr) delete fr;
 	}
 }
 
 /** Start playing a songset.
- * \param songset	The songset to play a song from
- * \param fadein_ms	Song will fade from 0% to 100% during fadein_ms
+ * \param songset_name	The songset to play a song from
+ * \param fadein_ms	Song will fade from 0% to 100% during fadein_ms milliseconds
  * 			milliseconds starting from now
- * \attention Will block until fadein is complete!
- * \todo Make nonblocking*/
+ * \note When calling start_music() while music is still fading out from \ref stop_music()
+ * or \ref change_music() this function will block until the fadeout is complete*/
 void Sound_Handler::start_music(const string songset_name, int fadein_ms)
 {
         Mix_Music* m=NULL;
 	
 	if (disable_music)
 		return;	
-	if (fadein_ms==0)
-		fadein_ms=50;  //avoid clicks
+	if (fadein_ms==0) fadein_ms=50;  //avoid clicks
+	
+	if (Mix_PlayingMusic())
+		change_music(songset_name, 0, fadein_ms);
 	
 	if (songs.count(songset_name)==0)
 		log("Sound_Handler: songset \"%s\" does not exist!\n", songset_name.c_str());
@@ -266,34 +342,38 @@ void Sound_Handler::start_music(const string songset_name, int fadein_ms)
 }
 
 /** Stop playing a songset.
- * \param fadeout_ms Song will fade from 100% to 0% during faedout_ms
- * starting from now.
- * \attention Will block until fadeout is complete!
- * \todo Make nonblocking*/
+ * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms milliseconds
+ * starting from now.*/
 void Sound_Handler::stop_music(int fadeout_ms)
 {
         if (disable_music) return;
         if (fadeout_ms==0) fadeout_ms=50;  //avoid clicks
 	
 	Mix_FadeOutMusic(fadeout_ms);
-	
-	//TODO: make nonblocking
-        while( Mix_FadingMusic()==MIX_FADING_OUT ); //wait until music has stopped
 }
 
-/** Play music from a different songset.
+/** Play an other piece of music.
  * This is a member function provided for convenience. It is a wrapper around
  * \ref start_music and \ref stop_music.
+ * \param fadeout_ms	Old song will fade from 100% to 0% during fadeout_ms milliseconds
+ * 			milliseconds starting from now
+ * \param fadein_ms	New song will fade from 0% to 100% during fadein_ms milliseconds
+ * 			milliseconds starting from now
  * If songset_name is empty, another song from the currently active songset will be selected*/
 void Sound_Handler::change_music(const string songset_name, int fadeout_ms, int fadein_ms)
 {
 	string s;
 	
 	s=songset_name;	
-	if (s=="") s=current_songset;
+	if (s=="")
+		s=current_songset;
+	else
+		current_songset=s;
 	
-	stop_music(fadeout_ms);
-	start_music(s, fadein_ms);
+	if (Mix_PlayingMusic())
+		stop_music(fadeout_ms);
+	else
+		start_music(s, fadein_ms);
 }
 
 /** Callback to notify \ref Sound_Handler that a song has finished playing.
@@ -319,7 +399,7 @@ void Sound_Handler::music_finished_callback()
 		SDL_Event* e=new SDL_Event();
 		
 		e->type=SDL_USEREVENT;	
-		e->user.code=CHANGE_MUSIC;
+		e->user.code=SOUND_HANDLER_CHANGE_MUSIC;
 		SDL_PushEvent(e);
 	}
 }

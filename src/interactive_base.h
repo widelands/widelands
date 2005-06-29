@@ -40,6 +40,7 @@ class MiniMapView;
  */
 class Interactive_Base : public UIPanel {
    friend class Game_Interactive_Player_Data_Packet;
+   friend class Sound_Handler;
 
    public:
 		enum {

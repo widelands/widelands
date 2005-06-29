@@ -24,6 +24,7 @@
 #include <map>
 #include "error.h"
 #include "trigger.h"
+#include "options.h"
 
 class Game;
 class Section;
