@@ -253,16 +253,18 @@ int Sound_Handler::stereo_position(const Coords position)
 {
 	int sx, sy; //screen x,y (without clipping applied, might well be invisible)
 	int xres, yres; //x,y resolutions of game window
-	Interactive_Base* ia;
 	Point vp;
-	
-	xres=ia->get_xres();
-	yres=ia->get_yres();
+      
+		
 	
 	if (the_game) {
+      Interactive_Base* ia;
 		ia=the_game->get_iabase();
 		vp=ia->get_mapview()->get_viewpoint();
-		
+   
+      xres=ia->get_xres();
+      yres=ia->get_yres();
+	
 		the_game->get_map()->get_basepix(position, &sx, &sy);
 		sx -= vp.x;
 		sy -= vp.y;
