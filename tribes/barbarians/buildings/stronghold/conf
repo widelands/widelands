@@ -4,7 +4,7 @@ descname=Stronghold
 type=military		# basic type (warehouse, production, military)
 size=medium
 buildable=yes
-buildicon=build.png
+buildicon=stronghold_build.png
 max_soldiers=3
 heal_per_second=2
 conquers=7
@@ -17,9 +17,9 @@ blackwood=3
 raw_stone=3
 
 [idle]
-pics=i_??.png  
-hot_spot_x=30
-hot_spot_y=58
+pics=stronghold_i_??.png  
+hot_spot_x=50
+hot_spot_y=52
 clrkey_r=255
 clrkey_g=0
 clrkey_b=255
@@ -28,9 +28,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  
-hot_spot_x=30
-hot_spot_y=58
+pics=stronghold_b_??.png  
+hot_spot_x=50
+hot_spot_y=52
 clrkey_r=255
 clrkey_g=0
 clrkey_b=255
