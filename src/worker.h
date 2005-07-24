@@ -25,7 +25,6 @@
 #include "cmd_queue.h"
 #include <string>
 #include <vector>
-#include "sound_handler.h"
 
 class Building;
 class Economy;

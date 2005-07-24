@@ -22,7 +22,6 @@
 
 #include "editor_game_base.h"
 #include "random.h"
-#include "sound_handler.h"
 
 #define WLGF_SUFFIX		".wgf"
 #define WLGF_MAGIC      "WLgf"

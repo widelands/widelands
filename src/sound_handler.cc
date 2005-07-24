@@ -116,6 +116,14 @@ Mix_Music* Songset::get_song()
 
 //--------------------------------------------------------------------------------------
 
+/** Create an FXset and set it's \ref priority
+ * \param[in] prio	The desired priority (optional)*/
+FXset::FXset(Uint8 prio)
+{
+	priority=prio;
+	last_used=0;
+}
+
 /** Delete all fxs to avoid memory leaks. This also frees the audio data.*/
 FXset::~FXset()
 {		
@@ -123,9 +131,11 @@ FXset::~FXset()
 }
 
 /** Append a sound effect to the end of the fxset
- * \param fx	The sound fx to append*/
-void FXset::add_fx(Mix_Chunk* fx)
+ * \param[in] fx	The sound fx to append
+ * \param[in] prio	Set previous \ref priority to new value (optional)*/
+void FXset::add_fx(Mix_Chunk* fx, Uint8 prio)
 {
+	priority=prio;
 	fxs.push_back(fx);
 }
 
@@ -139,6 +149,7 @@ Mix_Chunk* FXset::get_fx()
 		return NULL;
 	
 	fxnumber=sound_handler->rng.rand()%fxs.size();
+	last_used=SDL_GetTicks();
 	
 	return fxs.at(fxnumber);
 }
@@ -146,8 +157,7 @@ Mix_Chunk* FXset::get_fx()
 //-----------------------------------------------------------------------------------------
 
 /** Set up \ref Sound_Handler for operation.
- * Initialize RNG, read configuration, set callback for 'song finished playing' and
- * 'fx finished playing'*/
+ * Initialize audio subsystem, and read configuration*/
 Sound_Handler::Sound_Handler()
 {
 	SDL_InitSubSystem(SDL_INIT_AUDIO);
@@ -199,7 +209,7 @@ void Sound_Handler::read_config()
  * \param dir		The directory where the audio files reside
  * \param basename	Name from which filenames will be formed (BASENAME_XX.wav);
  * 			also the name used with \ref play_fx
- * \param recursive	\internal
+ * \param recursive	\internal Whether to recurse into subdirectories
  * If BASENAME_XX (with any extension) is a directory, effects will be loaded recursively.
  * Subdirectories of and files under BASENAME_XX can be named anything you want*/
 void Sound_Handler::load_fx(const string dir, const string basename, const bool recursive)
@@ -232,6 +242,10 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 	
 	fr.Open(g_fs, filename);
 	
+	//TODO: Mix_LoadWAV_RW does not (yet?) exists on windows. As a workaround, implement:
+	// 1. read to memory with RWops
+	// 2. write to tempfile with RWops
+	// 3. open file with Mix_LoadWAV
 	m=Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1); //SDL_mixer will free the RWops itself
 	
 	if (m) {		
@@ -258,12 +272,12 @@ int Sound_Handler::stereo_position(const Coords position)
 		
 	
 	if (the_game) {
-      Interactive_Base* ia;
+		Interactive_Base* ia;
 		ia=the_game->get_iabase();
 		vp=ia->get_mapview()->get_viewpoint();
    
-      xres=ia->get_xres();
-      yres=ia->get_yres();
+		xres=ia->get_xres();
+                yres=ia->get_yres();
 	
 		the_game->get_map()->get_basepix(position, &sx, &sy);
 		sx -= vp.x;
@@ -295,8 +309,12 @@ void Sound_Handler::play_fx(const string fx_name, const Coords map_position)
 	if (fxs.count(fx_name)==0)
 		log("Sound_Handler: sound effect \"%s\" does not exist!\n", fx_name.c_str());
 	else {		
+		printf("============================== %i ==== %i ================================================\n",fxs[fx_name]->last_used,SDL_GetTicks());
+		
+		if (SDL_GetTicks() < fxs[fx_name]->last_used+10000) return;
+		
 		m=fxs[fx_name]->get_fx();	
-		if(m) {		
+		if(m) {			
 			spos=stereo_position(map_position);
 			if (spos!=-1) {
 				chan=Mix_PlayChannel(-1, m, 0);

@@ -34,6 +34,7 @@
 #include "worker.h"
 #include "ware.h"
 #include "world.h"
+#include "sound_handler.h"
 
 static const size_t STATISTICS_VECTOR_LENGTH = 10;
 

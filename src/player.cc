@@ -26,6 +26,7 @@
 #include "tribe.h"
 #include "wexception.h"
 #include "cmd_queue.h"
+#include "sound_handler.h"
 
 
 //

@@ -75,16 +75,29 @@ protected:
  * possible to access the effects on after another or in random order. The fact that an
  * FXset really contains several different effect is hidden from the outside.*/
 class FXset {
+	friend class Sound_Handler;
 public:
+	FXset(Uint8 prio=127);
 	~FXset();
 	
-	void add_fx(Mix_Chunk* fx);
+	void add_fx(Mix_Chunk* fx, Uint8 prio=127);
 	Mix_Chunk* get_fx();
 	bool empty() {return fxs.empty();}
 
 protected:
 	/** The collection of sound effects*/
 	vector<Mix_Chunk*> fxs;
+	
+	/** When the effect was played the last time (milliseconds since sdl initialization). Set via SDL_GetTicks()*/
+	Uint32 last_used;
+	
+	/** Minimum time in milliseconds until the effect may be played again */
+	Uint32 min_interval;
+	
+	/** How important is it to play the effect even when others are running already?
+	 * Range from 0 (do not play at all if anything else is happening) to 255 (always play,
+	 * regardless of other considerations)*/
+	Uint8 priority;
 };
 
 /** The 'sound server' for Widelands.
@@ -131,7 +144,7 @@ protected:
  * 
  * \par Usage of callbacks
  * 
- * SDL_mixers way to notify the application of important sound events, e.g. that a song is
+ * SDL_mixer's way to notify the application of important sound events, e.g. that a song is
  * finished, are callbacks. While callbacks in and of themselves are a fine thing, they can
  * also be a pain in the body part with which we usually touch our chairs.
  * 
@@ -154,7 +167,7 @@ protected:
  * callback (non-sound SDL functions \e can be used) and handle the event inside the main loop
  * (system.cc).
  * 
- * Yeah, that's just a better expression for "polling". And for "ugly".
+ * Yes, that's just a tad ugly.
  * 
  * No, there's no other way. At least none that I found.
  * 
@@ -164,7 +177,7 @@ protected:
  * Mix_FadeOutMusic will return immediately - but, as the music is not yet stopped, starting
  * a new piece of background music will block. So the choice is to block (directly) after
  * ordering to fade out or indirectly when starting the next piece. Now imagine a fadeout-time
- * of 20 seconds ......
+ * of 30 seconds ......
  * 
  * The solution is to work asynchronously which is doable, as we already use a callback to tell
  * us when the audio is \e completely finished. So in \ref stop_music (or \ref change_music )

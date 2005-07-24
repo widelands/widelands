@@ -29,6 +29,7 @@
 #include "system.h"
 #include "wexception.h"
 #include "font_handler.h"
+#include "sound_handler.h"
 
 #include "constants.h"
 #include "network_ggz.h"

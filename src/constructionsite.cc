@@ -30,6 +30,7 @@
 #include "tribe.h"
 #include "wexception.h"
 #include "worker.h"
+#include "sound_handler.h"
 
 static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
 
