@@ -4,7 +4,7 @@ descname=Deep Gold Mine		# nicer name to display in GUI
 type=production		# basic type (warehouse, production, military)
 size=mine
 buildable=no
-buildicon=build.png
+buildicon=deep_goldmine_build.png
 enhanced_building=yes
 worker=chief-miner,miner
 program=work
@@ -27,9 +27,9 @@ trunk=4
 raw_stone=2
 
 [idle]
-pics=i_??.png
-hot_spot_x=25
-hot_spot_y=26
+pics=deep_goldmine_i_??.png
+hot_spot_x=47
+hot_spot_y=61
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
@@ -38,9 +38,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=w_??.png
-hot_spot_x=25
-hot_spot_y=26
+pics=deep_goldmine_i_??.png
+hot_spot_x=47
+hot_spot_y=61
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255
@@ -49,9 +49,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png
-hot_spot_x=25
-hot_spot_y=26
+pics=deep_goldmine_i_??.png
+hot_spot_x=47
+hot_spot_y=61
 clrkey_r=0
 clrkey_g=0
 clrkey_b=255

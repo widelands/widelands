@@ -4,7 +4,7 @@ descname=Stonegrinder		# nicer name to display in GUI
 type=production		# basic type (warehouse, production, military)
 size=medium
 buildable=yes
-buildicon=build.png
+buildicon=stonegrinder_build.png
 worker=stonemason    # like quary
 program=work
 output=grindstone
@@ -28,9 +28,9 @@ trunk=4
 raw_stone=2         # expensive
 
 [idle]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=stonegrinder_i_??.png  # ???
+hot_spot_x=43
+hot_spot_y=50
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -39,9 +39,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=stonegrinder_i_??.png  # ???
+hot_spot_x=43
+hot_spot_y=50
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -50,9 +50,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=stonegrinder_i_??.png  # ???
+hot_spot_x=43
+hot_spot_y=50
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0

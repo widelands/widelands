@@ -5,7 +5,7 @@ type=production		# basic type (warehouse, production, military)
 size=medium
 buildable=no
 enhanced_building=yes
-buildicon=build.png
+buildicon=big_inn_build.png
 worker=innkeeper*2
 program=work
 output=meal
@@ -35,9 +35,9 @@ grindstone=3
 thatchfern=2
 
 [idle]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=big_inn_i_??.png  # ???
+hot_spot_x=63
+hot_spot_y=63
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -46,9 +46,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=big_inn_i_??.png  # ???
+hot_spot_x=63
+hot_spot_y=63
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0
@@ -57,9 +57,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=40
-hot_spot_y=40
+pics=big_inn_i_??.png  # ???
+hot_spot_x=63
+hot_spot_y=63
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0

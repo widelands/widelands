@@ -4,7 +4,7 @@ descname=Trainings Camp
 type=training		# basic type (warehouse, production, military)
 size=big
 buildable=yes
-buildicon=build.png
+buildicon=trainingscamp_build.png
 worker=trainer
 max_soldiers=12		# Number of soldiers that caught at the building
 train=attack,hp				# May be attack,defense,evade,hp Allowed more than one separated by ','
@@ -130,9 +130,9 @@ gold=4
 thatchfern=3
 
 [idle]
-pics=i_??.png  # ???
-hot_spot_x=55
-hot_spot_y=40
+pics=trainingscamp_i_??.png  # ???
+hot_spot_x=82
+hot_spot_y=88
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0  
@@ -141,9 +141,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=55
-hot_spot_y=40
+pics=trainingscamp_i_??.png  # ???
+hot_spot_x=82
+hot_spot_y=88
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0  
@@ -152,9 +152,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=55
-hot_spot_y=40
+pics=trainingscamp_i_??.png  # ???
+hot_spot_x=82
+hot_spot_y=88
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0   

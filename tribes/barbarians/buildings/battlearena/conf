@@ -4,7 +4,7 @@ descname=Battle Arena # nicer name to display in GUI
 type=training		# basic type (warehouse, production, military)
 size=big
 buildable=yes
-buildicon=build.png
+buildicon=battlearena_build.png
 worker=carrier
 max_soldiers=8				# Number of soldiers that caught at the building
 train=evade				# May be attack,defense,evade,hp Allowed more than one separated by ','
@@ -54,9 +54,9 @@ gold=4
 thatchfern=3
 
 [idle]
-pics=i_??.png  # ???
-hot_spot_x=55
-hot_spot_y=40
+pics=battlearena_i_??.png  # ???
+hot_spot_x=82
+hot_spot_y=98
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0 
@@ -65,9 +65,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [working]
-pics=i_??.png  # ???
-hot_spot_x=55
-hot_spot_y=40
+pics=battlearena_i_??.png  # ???
+hot_spot_x=82
+hot_spot_y=98
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0  
@@ -76,9 +76,9 @@ shadowclr_g=0
 shadowclr_b=0
 
 [build]
-pics=i_??.png  # ???
-hot_spot_x=55
-hot_spot_y=40
+pics=battlearena_i_??.png  # ???
+hot_spot_x=82
+hot_spot_y=98
 clrkey_r=255
 clrkey_g=255
 clrkey_b=0  
