@@ -163,7 +163,9 @@ Sound_Handler::Sound_Handler()
 	SDL_InitSubSystem(SDL_INIT_AUDIO);
 	if ( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 512) == -1 ) {
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
-		throw wexception("Failed to initialize sound system: %s\n", Mix_GetError());
+		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
+      disable_music = true;
+      return;
 	}
 	
 	current_songset="";
