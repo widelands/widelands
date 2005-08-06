@@ -146,7 +146,7 @@ void NetGGZ::data()
 			break;
 		case op_request_ip:
 			log("GGZ ## ip request!\n");
-			snlog(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 127, 0, 0, 1);
+			snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
 			ggz_write_int(fd, op_reply_ip);
 			ggz_write_string(fd, ipaddress);
 			break;
@@ -191,7 +191,7 @@ const char *NetGGZ::ip()
 	return ip_address;
 }
 
-void NetGGZ::initcore(const char *hostname)
+void NetGGZ::initcore(const char *hostname, const char *playername)
 {
 #ifdef HAVE_GGZ
 	GGZOptions opt;
@@ -201,6 +201,7 @@ void NetGGZ::initcore(const char *hostname)
 
 	log("GGZCORE ## initialization\n");
 	ggzcore_login = true;
+	ggzcore_ready = false;
 
 	opt.flags = (GGZOptionFlags)(GGZ_OPT_EMBEDDED);
 	ret = ggzcore_init(opt);
@@ -227,6 +228,13 @@ void NetGGZ::initcore(const char *hostname)
 	ggzcore_server_add_event_hook(ggzserver, GGZ_CHANNEL_READY, &NetGGZ::callback_server);
 
 	ggzcore_server_set_hostinfo(ggzserver, hostname, 5688, 0);
+
+#if GGZCORE_VERSION_MICRO < 11
+	ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, playername, NULL);
+#else
+	ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, playername, NULL, NULL);
+#endif
+
 	ggzcore_server_connect(ggzserver);
 
 	log("GGZCORE ## start loop\n");
@@ -244,6 +252,7 @@ void NetGGZ::deinitcore()
 	ggzcore_server_free(ggzserver);
 	ggzserver = 0;
 	ggzcore_destroy();
+	ggzcore_ready = false;
 #endif
 }
 
@@ -322,11 +331,6 @@ void NetGGZ::event_server(unsigned int id, const void *data)
 			break;
 		case GGZ_NEGOTIATED:
 			log("GGZCORE ## -- negotiated\n");
-#if GGZCORE_VERSION_MICRO < 11
-			ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, "widelands#ggz", NULL);
-#else
-			ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, "widelands#ggz", NULL, NULL);
-#endif
 			ggzcore_server_login(ggzserver);
 			break;
 		case GGZ_LOGGED_IN:
@@ -384,6 +388,7 @@ void NetGGZ::event_server(unsigned int id, const void *data)
 		case GGZ_NET_ERROR:
 		case GGZ_PROTOCOL_ERROR:
 			log("GGZCORE ## -- error! (%s) :(\n", (char*)data);
+			ggzcore_login = false;
 			break;
 	}
 #endif
@@ -412,6 +417,7 @@ void NetGGZ::event_room(unsigned int id, const void *data)
 				tablelist.push_back(desc);
 			}
 			ggzcore_login = false;
+			ggzcore_ready = true;
 			break;
 	}
 #endif
@@ -476,6 +482,8 @@ void NetGGZ::join(const char *tablename)
 	GGZTable *table;
 	const char *desc;
 
+	if(!ggzcore_ready) return;
+
 	log("GGZCORE ## join table %s\n", tablename);
 
 	room = ggzcore_server_get_cur_room(ggzserver);
@@ -511,6 +519,8 @@ void NetGGZ::launch()
 {
 #ifdef HAVE_GGZ
 	GGZGame *game;
+
+	if(!ggzcore_ready) return;
 
 	log("GGZCORE ## launch table\n");
 

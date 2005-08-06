@@ -26,6 +26,7 @@
 #include "network.h"
 #include "network_lan_promotion.h"
 #include "network_ggz.h"
+#include "options.h"
 
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
@@ -59,7 +60,12 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 
 	// Hostname
 	hostname=new UIEdit_Box(this, 288, 170, 174, 24, 2, 0);
+	hostname->changed.set(this, &Fullscreen_Menu_NetSetup::toggle_hostname);
 	hostname->set_text("localhost");	
+
+	// Player 
+	playername=new UIEdit_Box(this, 288, 210, 174, 24, 2, 0);
+	playername->set_text("nobody");
 
 	// LAN or GGZ game
 	networktype = new UIButton(this, 482, 170, 124, 24, 0, -1);
@@ -68,7 +74,7 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	internetgame = false;
 	
 	// List of open games in local network
-	opengames=new UITable(this, 288, 210, 320, 128);
+	opengames=new UITable(this, 288, 250, 320, 128);
 	opengames->add_column ("Host", UITable::STRING, 128);
 	opengames->add_column ("Map", UITable::STRING, 128);
 	opengames->add_column ("State", UITable::STRING, 64);
@@ -200,15 +206,37 @@ void Fullscreen_Menu_NetSetup::toggle_networktype(int code)
 
 	if(internetgame)
 	{
-		hostname->set_text("live.ggzgamingzone.org");
-		NetGGZ::ref()->initcore(hostname->get_text());
+		Section *s;
+		const char *defaultserver;
+		s = g_options.pull_section("network");
+		defaultserver = s->get_string("defaultserver", "live.ggzgamingzone.org");
+		hostname->set_text(defaultserver);
+
+		NetGGZ::ref()->initcore(hostname->get_text(), playername->get_text());
 		networktype->set_title("GGZ games");
+		if(NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
 	}
 	else
 	{
 		hostname->set_text("localhost");
 		discovery->reset();
 		networktype->set_title("LAN games");
+	}
+}
+
+void Fullscreen_Menu_NetSetup::toggle_hostname()
+{
+	if(internetgame)
+	{
+		Section *s;
+		s = g_options.pull_section("network");
+		s->set_string("defaultserver", hostname->get_text());
+		g_options.write("config", true);
+
+		NetGGZ::ref()->deinitcore();
+		NetGGZ::ref()->initcore(hostname->get_text(), playername->get_text());
+		networktype->set_title("GGZ games");
+		if(NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
 	}
 }
 
@@ -219,10 +247,11 @@ void Fullscreen_Menu_NetSetup::toggle_networktype(int code)
 
 void Fullscreen_Menu_NetSetup::joingame(int code)
 {
+	int index = opengames->get_selection_index();
+	if(index < 0) return;
+
 	if(NetGGZ::ref()->usedcore())
 	{
-		int index = opengames->get_selection_index();
-		if(index < 0) return;
 		UITable_Entry *entry = opengames->get_entry(index);
 		if(!entry) return;
 		NetGGZ::ref()->join(entry->get_string(1));

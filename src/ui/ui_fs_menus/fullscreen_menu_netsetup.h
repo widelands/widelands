@@ -60,6 +60,7 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 	
 	private:
 		UIEdit_Box*		hostname;
+		UIEdit_Box*		playername;
 		UITable*		opengames;
 		LAN_Game_Finder*	discovery;
 		UIButton*		networktype;
@@ -76,6 +77,7 @@ class Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
 		void update_game_info (UITable_Entry*, const LAN_Game_Info&);
 
 		void toggle_networktype(int code);
+		void toggle_hostname();
 		void joingame(int code);
 		void hostgame(int code);
 };

@@ -57,7 +57,7 @@ class NetGGZ {
 		op_broadcast_ip = 4
 	};
 
- 	void initcore(const char *hostname);
+ 	void initcore(const char *hostname, const char *playername);
  	void deinitcore();
 	bool usedcore();
 	void datacore();
@@ -82,6 +82,7 @@ class NetGGZ {
 	int tableid;
 	char *ip_address;
 	bool ggzcore_login;
+	bool ggzcore_ready;
 
 	std::list<std::string> tablelist;
 };
