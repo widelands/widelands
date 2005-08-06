@@ -1,3 +1,4 @@
+- f now triggers fullscreen ingame 
 - added new maps from winterwind
 - implemented new trigger system. This invalidates every scenario, campaign and map.
 - save now changes into zip files, added option nozip for debugging reasons
