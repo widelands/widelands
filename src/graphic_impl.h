@@ -99,6 +99,7 @@ class Surface {
 
       // Set surface, only call once
       void set_sdl_surface( SDL_Surface* surface ) { m_surface = surface; m_w = m_surface->w; m_h = m_surface->h; }
+	  SDL_Surface* get_sdl_surface() { return m_surface; }
 
       // Get width and height
       inline uint get_w( void ) { return m_w; }
@@ -308,6 +309,7 @@ public:
 	virtual int get_xres();
 	virtual int get_yres();
 	virtual RenderTarget* get_render_target();
+	virtual void toggle_fullscreen();
 	virtual void update_fullscreen();
 	virtual void update_rectangle(int x, int y, int w, int h);
 	virtual bool need_update();

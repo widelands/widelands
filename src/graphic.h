@@ -53,6 +53,7 @@ public:
 	virtual int get_xres() = 0;
 	virtual int get_yres() = 0;
 	virtual RenderTarget* get_render_target() = 0;
+	virtual void toggle_fullscreen() = 0;
 	virtual void update_fullscreen() = 0;
 	virtual void update_rectangle(int x, int y, int w, int h) = 0;
 	virtual bool need_update() = 0;

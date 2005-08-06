@@ -71,8 +71,10 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    // Disable debug. it is no use for editor
 #ifndef DEBUG
    set_display_flag(Interactive_Base::dfDebug, false);
+#else
+   set_display_flag(Interactive_Base::dfDebug, true);
 #endif
-
+   
    // The mapview. watch the map!!!
    Map_View* mm;
    mm = new Map_View(this, 0, 0, get_w(), get_h(), this);

@@ -1120,6 +1120,19 @@ RenderTarget* GraphicImpl::get_render_target()
 
 /*
 ===============
+GraphicImpl::toggle_fullscreen
+
+Switch from fullscreen to windowed mode or vice-versa
+===============
+*/
+void GraphicImpl::toggle_fullscreen()
+{
+	SDL_Surface *surface = m_screen.get_sdl_surface();
+	SDL_WM_ToggleFullScreen(surface);
+}
+
+/*
+===============
 GraphicImpl::update_fullscreen
 
 Mark the entire screen for refreshing
