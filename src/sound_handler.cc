@@ -232,25 +232,67 @@ void Sound_Handler::load_fx(const string dir, const string basename, const bool 
 	}
 }
 
+/** A wrapper for Mix_LoadWAV that supports RWops
+  * \param fr	Pointer to a FileRead RWops with the
+  * For Mix_LoadWAV, there is only preliminary RWops support even in (now current) SDL-1.2.6 for Linux.
+  * In older SDL versions and on other OSes there is no support at all. Widelands' layered filesystem, however,
+  * is utterly dependant on RWops. That's the reason for this wrapper. If RWops support is available in Mix_LoadWAV
+  * we use it, otherwise we use "normal" RWops (that are available on every platform) to create a tempfile
+  * the Mix_LoadWAV can read from.
+  * \note This should be phased out when RWops support in Mix_LoadWAV has been available for a sufficiently long
+  * time
+*/
+Mix_Chunk* Sound_Handler::RWopsify_MixLoadWAV(FileRead* fr)
+{
+	string tempfile;
+	SDL_RWops* target;
+	SDL_RWops* src;
+
+	src=SDL_RWFromMem(fr->Data(0), fr->GetSize());
+
+	if (USE_RWOPS) 
+		return Mix_LoadWAV_RW(src, 1); //SDL_mixer will free the RWops "src" itself
+	else {
+		char* filename;
+		FILE* f;
+		void* buf;
+
+		filename=mktemp("/tmp/widelands-sfx.XXXXXXXX");
+		f=fopen(filename, "w+"); //manpage recommends a minimum suffix length of 6
+		target=SDL_RWFromFP(f, 0);
+		buf=malloc(fr->GetSize());
+
+		SDL_RWread(src, buf, fr->GetSize(), 1);
+		SDL_RWwrite(target, buf, fr->GetSize(), 1);
+		Mix_LoadWAV(filename);
+		
+		SDL_RWclose(target);
+		SDL_FreeRW(target);
+		SDL_FreeRW(src);
+		fclose(f);
+		free(buf);
+
+		unlink(filename);
+	}
+
+	SDL_RWclose(src);
+}
+
 /** Add exactly one file to the given fxset.
  * \param filename	The effect to be loaded
  * \param fx_name	The fxset to add the file to
  * The file format must be ogg or wav. Otherwise this call will complain, but fail without consequences.
- * \note The complete audio file will be loaded into memory and stay there until program termination*/
+ * \note The complete audio file will be loaded into memory and stay there until program termination
+*/
 void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 {
 	FileRead fr;
 	Mix_Chunk* m;
 	
 	fr.Open(g_fs, filename);
+	m=RWopsify_MixLoadWAV(&fr);
 	
-	//TODO: Mix_LoadWAV_RW does not (yet?) exists on windows. As a workaround, implement:
-	// 1. read to memory with RWops
-	// 2. write to tempfile with RWops
-	// 3. open file with Mix_LoadWAV
-	m=Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1); //SDL_mixer will free the RWops itself
-	
-	if (m) {		
+	if (m) {
 		//make sure that requested FXset exists
 		if (fxs.count(fx_name)==0)
 			fxs[fx_name]=new FXset();

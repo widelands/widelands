@@ -20,8 +20,9 @@
 #ifndef SOUND_HANDLER
 #define SOUND_HANDLER
 
-//needed to enable preliminary support for Mix_LoadMUS_RW in SDL_mixer-1.2.6
-#define USE_RWOPS
+//needed to enable preliminary support for Mix_LoadMUS_RW in SDL_mixer-1.2.6 (see RWopsify_MixLoadWAV())
+//TODO: this should really be determined by autoconf or sth. similar
+#define USE_RWOPS 1
 
 #include <vector>
 #include <map>
@@ -220,6 +221,7 @@ public:
 	Game* the_game;
 
 protected:
+	Mix_Chunk* RWopsify_MixLoadWAV(FileRead* fr);
 	void load_one_fx(const string filename, const string fx_name);
 	int stereo_position(const Coords position);
 	
