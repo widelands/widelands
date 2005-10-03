@@ -110,7 +110,7 @@ void Widelands_Map_Extradata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
       fs->EnsureDirectoryExists( "pics" );
       FileWrite fw;
       
-      g_gr->save_png( (uint)edi.data, &fw );
+      g_gr->save_png( (ulong)edi.data, &fw );
 
       fw.Write( fs, edi.filename.c_str() );
    }

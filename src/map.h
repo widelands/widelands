@@ -35,7 +35,8 @@ class MapObjectiveManager;
 class MapEventManager;
 class MapEventChainManager;
 class MapTriggerManager;
-
+class Map;
+class Map_Loader;
 #define WLMF_SUFFIX		".wmf"
 #define S2MF_SUFFIX     ".swd"
 

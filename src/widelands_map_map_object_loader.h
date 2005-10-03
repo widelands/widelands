@@ -21,6 +21,7 @@
 #define __S__WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
 class Map_Object;
+class Editor_Game_Base;
 
 /*
  * This class helps to 

@@ -53,15 +53,16 @@ Overlay_Manager::~Overlay_Manager(void) {
 int Overlay_Manager::get_overlays(FCoords& c, Overlay_Info* overlays) {
    if(!m_are_graphics_loaded) load_graphics();
 
-   int num_ret=0;
-
+   long num_ret=0;
+   
    // are there any below
-   int fieldindex= (c.y<<8) + c.x;
-   int nov=0;
+   long fieldindex= (c.y<<8) + c.x;
+   long nov=0;
    if((nov=m_overlays.count(fieldindex))) {
       // there are overlays registered
       std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex);
-      while(i->first==fieldindex && i->second.level<=5) {
+      // Protect overlays array access : Use MAX_OVERLAYS_PER_FIELD
+      while(i->first==fieldindex && i->second.level<=5 && num_ret < MAX_OVERLAYS_PER_FIELD) {
          overlays[num_ret].picid=i->second.picid;
          overlays[num_ret].hotspot_x=i->second.hotspot_x;
          overlays[num_ret].hotspot_y=i->second.hotspot_y;
@@ -71,13 +72,13 @@ int Overlay_Manager::get_overlays(FCoords& c, Overlay_Info* overlays) {
 
       // now overlays
       num_ret+=get_build_overlay(c,overlays,num_ret);
-
-      while(i->first==fieldindex) {
-         overlays[num_ret].picid=i->second.picid;
-         overlays[num_ret].hotspot_x=i->second.hotspot_x;
-         overlays[num_ret].hotspot_y=i->second.hotspot_y;
-         ++num_ret;
-         ++i;
+      // Protect overlays array access : Use MAX_OVERLAYS_PER_FIELD
+      while(i->first==fieldindex && num_ret < MAX_OVERLAYS_PER_FIELD) {
+        overlays[num_ret].picid=i->second.picid;
+        overlays[num_ret].hotspot_x=i->second.hotspot_x;
+        overlays[num_ret].hotspot_y=i->second.hotspot_y;
+        ++num_ret;
+        ++i;
       }
       return num_ret;
    }

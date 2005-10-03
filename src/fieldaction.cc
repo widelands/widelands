@@ -56,9 +56,9 @@ class BuildGrid : public UIIcon_Grid {
 public:
 	BuildGrid(UIPanel* parent, Tribe_Descr* tribe, int x, int y, int cols);
 
-	UISignal1<int> buildclicked;
-	UISignal1<int> buildmouseout;
-	UISignal1<int> buildmousein;
+	UISignal1<long> buildclicked;
+	UISignal1<long> buildmouseout;
+	UISignal1<long> buildmousein;
 
 	void add(int id);
 
@@ -132,7 +132,7 @@ building it belongs to and trigger signal buildmouseout.
 */
 void BuildGrid::mouseoutslot(int idx)
 {
-	int id = (int)get_data(idx);
+  long id = (long)get_data(idx);
 
 	buildmouseout.call(id);
 }
@@ -148,7 +148,7 @@ building it belongs to and trigger signal buildmousein.
 */
 void BuildGrid::mouseinslot(int idx)
 {
-	int id = (int)get_data(idx);
+	long id = (long)get_data(idx);
 
 	buildmousein.call(id);
 }
@@ -184,9 +184,9 @@ public:
 	void act_buildroad();
 	void act_abort_buildroad();
 	void act_removeroad();
-	void act_build(int idx);
-	void building_icon_mouse_out(int idx);
-	void building_icon_mouse_in(int idx);
+	void act_build(long idx);
+	void building_icon_mouse_out(long idx);
+	void building_icon_mouse_in(long idx);
 	void act_geologist();
    void act_attack();         /// Launch the attack
    void act_attack_more();    /// Increase the number of soldiers to be launched
@@ -801,7 +801,7 @@ FieldActionWindow::act_build
 Start construction of the building with the give description index
 ===============
 */
-void FieldActionWindow::act_build(int idx)
+void FieldActionWindow::act_build(long idx)
 {
    if(m_iabase->get_egbase()->is_game()) {
       // Game
@@ -824,7 +824,7 @@ FieldActionWindow::building_icon_mouse_out
 The mouse pointer has moved away from the icon for the building with the index idx.
 ===============
 */
-void FieldActionWindow::building_icon_mouse_out(int idx) {
+void FieldActionWindow::building_icon_mouse_out(long idx) {
 	if (m_workarea_preview_job_id != -1) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 		m_workarea_preview_job_id = -1;
@@ -839,7 +839,7 @@ FieldActionWindow::building_icon_mouse_in
 The mouse pointer has moved to the icon for the building with the index idx.
 ===============
 */
-void FieldActionWindow::building_icon_mouse_in(int idx) {
+void FieldActionWindow::building_icon_mouse_in(long idx) {
 	if (m_iabase->m_show_workarea_preview) {
 		const Workarea_Info & workarea_info =
 			m_plr->get_tribe()->get_building_descr(idx)->m_recursive_workarea_info;

@@ -306,7 +306,7 @@ void Building_Statistics_Menu::update( void ) {
    
    // List all buildings
    Tribe_Descr* tribe = m_parent->get_player()->get_tribe();
-   for(int i = 0; i < tribe->get_nrbuildings(); i++) {
+   for(long i = 0; i < tribe->get_nrbuildings(); i++) {
       if(!strcmp(tribe->get_building_descr(i)->get_name(), "constructionsite")) continue;
       if(!strcmp(tribe->get_building_descr(i)->get_name(), "headquarters")) continue;
    
@@ -316,7 +316,7 @@ void Building_Statistics_Menu::update( void ) {
       UITable_Entry* te = 0; 
       for( int l = 0; l< m_table->get_nr_entries(); l++) {
          UITable_Entry* entr = m_table->get_entry(l);
-         if( (int)entr->get_user_data() == i) {
+         if( (long)entr->get_user_data() == i) {
             te = entr; 
             break;
          }
@@ -347,7 +347,7 @@ void Building_Statistics_Menu::update( void ) {
           }
 
           // Is this entry selected?
-          bool is_selected = (m_table->get_selection_index() != -1 &&  (int)m_table->get_selection() == i);
+          bool is_selected = (m_table->get_selection_index() != -1 &&  (long)(m_table->get_selection()) == i);
 
           if(is_selected) {
              m_anim = tribe->get_building_descr(i)->get_ui_anim();

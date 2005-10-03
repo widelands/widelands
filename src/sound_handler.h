@@ -35,7 +35,6 @@
 using namespace std;
 
 class Sound_Handler;
-
 /**\file*/
 /** Reference to the global \ref Sound_Handler object*/
 extern Sound_Handler* sound_handler;
