@@ -72,12 +72,11 @@ int Font_Handler::get_fontheight(std::string name, int size) {
  */
 // TODO: rename this to draw text 
 void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty,
-      std::string text, Align align, int wrap, Widget_Cache widget_cache, uint *widget_cache_id) {
+      std::string text, Align align, int wrap, Widget_Cache widget_cache, uint *widget_cache_id, int caret) {
    TTF_Font* f = m_font_loader->get_font(font,size);
    //Width and height of text, needed for alignment
    int w,h;
    uint picid;
-   
    //Fontrender takes care of caching
    if (widget_cache == Widget_Cache_None) {
       // look if text is cached
@@ -129,8 +128,8 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
    //We need to (re)create the picid for the widget
    else {
       if (widget_cache == Widget_Cache_Update)
-         g_gr->free_surface(*widget_cache_id);
-      *widget_cache_id = create_text_surface(f, fg, bg, text, align, wrap);
+      	g_gr->free_surface(*widget_cache_id);
+      *widget_cache_id = create_text_surface(f, fg, bg, text, align, wrap,caret);
       g_gr->get_picture_size(*widget_cache_id,&w,&h);
       picid = *widget_cache_id;
    }
@@ -142,9 +141,9 @@ void Font_Handler::draw_string(RenderTarget* dst, std::string font, int size, RG
 * Creates a Widelands surface of the given text, checks if multiline or not
 */
 uint Font_Handler::create_text_surface(TTF_Font* f, RGBColor fg, RGBColor bg, 
-            std::string text, Align align, int wrap) {
-   SDL_Surface *surface = (wrap > 0 ? create_static_long_text_surface(f, fg, bg, text, align, wrap)
-                                    : create_single_line_text_surface(f, fg, bg, text, align));
+            std::string text, Align align, int wrap, int caret) {
+   SDL_Surface *surface = (wrap > 0 ? create_static_long_text_surface(f, fg, bg, text, align, wrap, 0, caret)
+                                    : create_single_line_text_surface(f, fg, bg, text, align, caret));
    return convert_sdl_surface(surface);
 }
 
@@ -152,7 +151,7 @@ uint Font_Handler::create_text_surface(TTF_Font* f, RGBColor fg, RGBColor bg,
  * This function renders a short (single line) text surface
  */
 SDL_Surface* Font_Handler::create_single_line_text_surface(TTF_Font* f, RGBColor fg, RGBColor bg,
-      std::string text, Align align) {
+      std::string text, Align align, int caret) {
    // render this block in a SDL Surface
    SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
    SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
@@ -168,6 +167,11 @@ SDL_Surface* Font_Handler::create_single_line_text_surface(TTF_Font* f, RGBColor
       return 0; // This will skip this line hopefully
    }
 
+   if (caret != -1) {
+		std::string text_caret_pos = text.substr(0,caret);
+		render_caret(f,surface,text_caret_pos);
+	}
+
    return surface;
 }
 
@@ -179,7 +183,7 @@ SDL_Surface* Font_Handler::create_single_line_text_surface(TTF_Font* f, RGBColor
  * Horizontal alignment is now recognized correctly
  */ 
 SDL_Surface* Font_Handler::create_static_long_text_surface(TTF_Font* f, RGBColor fg, RGBColor bg, 
-            std::string text, Align align, int wrap, int line_spacing) {
+            std::string text, Align align, int wrap, int line_spacing, int caret) {
    assert( wrap > 0); 
    assert( text.size() > 0 );
    
@@ -193,7 +197,10 @@ SDL_Surface* Font_Handler::create_static_long_text_surface(TTF_Font* f, RGBColor
    
    SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
    SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
-
+   
+   uint cur_text_pos = 0;
+   uint i = 0;
+   
    for(std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); it++) {
       std::string line = *it;
       if (line.empty())
@@ -207,14 +214,45 @@ SDL_Surface* Font_Handler::create_static_long_text_surface(TTF_Font* f, RGBColor
          log("Text was: %s\n", text.c_str());
          continue; // Ignore this line
       }
+      
+      uint new_text_pos = cur_text_pos + line.size();
+      if (caret != -1) {
+			if (new_text_pos >= caret - i) {
+				int caret_line_pos = caret - cur_text_pos - i;
+				std::string text_caret_pos = line.substr(0,caret_line_pos);
+				render_caret(f,surface,text_caret_pos);
+				caret = -1;
+			}
+			else {
+				cur_text_pos = new_text_pos;
+			}
+			i++;
+		}
+		
       m_rendered_lines.push_back(surface);
       global_surface_height += surface->h + line_spacing;
       if( global_surface_width < surface->w) 
          global_surface_width = surface->w;
    }
+   
    // blit all this together in one Surface
    return join_sdl_surfaces( global_surface_width, global_surface_height, m_rendered_lines, align, line_spacing);
 
+}
+
+void Font_Handler::render_caret(TTF_Font *f, SDL_Surface *line, const std::string &text_caret_pos) {
+	int caret_x,caret_y;
+	
+	TTF_SizeText(f, text_caret_pos.c_str(), &caret_x, &caret_y);
+	
+	Surface* caret_surf = ((GraphicImpl*)(g_gr))->get_picture_surface( g_gr->get_picture( PicMod_Game, "pics/caret.png" ));
+	SDL_Surface* caret_surf_sdl = caret_surf->m_surface;
+	
+	SDL_Rect r;
+	r.x = caret_x - caret_surf_sdl->w;
+	r.y = (caret_y - caret_surf_sdl->h) / 2;
+	
+	SDL_BlitSurface(caret_surf_sdl, 0, line, &r);
 }
 
 /*
@@ -282,8 +320,10 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
                img_pos.x = max_x - image->get_w();
                max_x-=(image->get_h() + h_space);
             }
-            else if (cur->image_align == Align_HCenter)
+            else if (cur->image_align == Align_HCenter) {
                img_pos.x = (max_x - image->get_w()) / 2;
+            	start_x+= img_pos.x + image->get_w() + h_space;
+            }
             else 
                start_x+=image->get_w() + h_space;
             surf_h = image->get_h();
@@ -370,7 +410,8 @@ SDL_Surface* Font_Handler::join_sdl_surfaces(uint w, uint h, std::vector<SDL_Sur
       
       SDL_FreeSurface( s );
    }
-   return global_surface;  
+   
+   return global_surface;
 }
 
 /* 
@@ -487,9 +528,13 @@ std::string Font_Handler::word_wrap_text(TTF_Font* f, const std::string &unwrapp
     
    // Don't forget to add the text left in cur_line
    if (cur_line != "") {
-      wrapped_text += cur_line + '\n';
+      wrapped_text += cur_line;
    }
    return wrapped_text;
+}
+
+std::string Font_Handler::word_wrap_text(std::string font, int size, const std::string &unwrapped_text,int max_width) {
+	return word_wrap_text(m_font_loader->get_font(font,size),unwrapped_text,max_width);
 }
 
 //removes a leading spacer

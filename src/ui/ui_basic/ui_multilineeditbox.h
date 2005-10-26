@@ -54,6 +54,8 @@ class UIMultiline_Editbox : public UIMultiline_Textarea {
    private:
 	   static const int ms_darken_value=-20;
       uint m_cur_pos;
+      uint m_char_pos;
+      uint m_line_pos;
       uint m_maxchars;
       bool m_needs_update;
 };

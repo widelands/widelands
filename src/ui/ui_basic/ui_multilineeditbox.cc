@@ -63,7 +63,7 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
    m_needs_update=true;
 
    if(down) {
-      std::string m_text=get_text();
+      std::string m_text= g_fh->word_wrap_text(m_fontname,m_fontsize,get_text(),get_eff_w());
       switch(code) {
          case KEY_BACKSPACE:
             if(m_text.size() && m_cur_pos) {
@@ -143,7 +143,6 @@ bool UIMultiline_Editbox::handle_key(bool down, int code, char c) {
             UIMultiline_Textarea::set_text(m_text.c_str());
             break;
       }
-
       UIMultiline_Textarea::set_text(m_text.c_str());
       changed.call();
       return true;
@@ -159,6 +158,8 @@ bool UIMultiline_Editbox::handle_mouseclick(uint btn, bool down, int x, int y) {
    if(!down) return false;
    if(btn==MOUSE_LEFT && !has_focus()) {
       focus();
+      UIMultiline_Textarea::set_text(get_text().c_str());
+      changed.call();
       return true;
    }
    return UIMultiline_Textarea::handle_mouseclick(btn,down,x,y);
@@ -171,21 +172,11 @@ void UIMultiline_Editbox::draw(RenderTarget* dst)
 {
    // make the whole area a bit darker
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
-
-   std::string m_text=get_text();
-   m_text.append(1,' ');
-   if (m_text.size() )
-   {
-      //TODO: Implement in new font handler
-		// Let the font handler worry about all the complicated stuff..
-      //if(has_focus())
-      //   g_fh->draw_string(dst, get_font_name(), get_font_size(), get_font_clr(), RGBColor(0,0,0), 0, 0 - get_m_textpos(), m_text.c_str(), Align_Left, get_eff_w(),m_cur_pos,-ms_darken_value*4);
-      //else
-         g_fh->draw_string(dst, get_font_name(), get_font_size(), get_font_clr(), RGBColor(0,0,0), 0, 0 - get_m_textpos(), m_text.c_str(), Align_Left, get_eff_w());
+   if (get_text().size()) {
+      g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), UIMultiline_Editbox::get_halign(), 0 - m_textpos, get_text().c_str(), m_align, get_eff_w(), m_cache_mode, &m_cache_id, (has_focus() ? m_cur_pos : -1));
    }
-
-   // now draw the textarea
-   UIMultiline_Textarea::draw(dst);
+   UIMultiline_Textarea::draw_scrollbar();
+   m_cache_mode = Widget_Cache_Use;
 }
 
 /*

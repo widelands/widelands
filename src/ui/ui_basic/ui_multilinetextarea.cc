@@ -86,10 +86,9 @@ void UIMultiline_Textarea::set_text(const char *text)
    else
       m_text = text;
    if (m_cache_mode != Widget_Cache_New)
-      m_cache_mode = Widget_Cache_Update; 
+      m_cache_mode = Widget_Cache_Update;
    update(0, 0, get_eff_w(), get_h());
 }
-
 
 /**
 Change alignment of the textarea
@@ -129,41 +128,45 @@ void UIMultiline_Textarea::draw(RenderTarget* dst)
 {
    if (m_text.length())
    {
-      int x = 0;
-
-      // Only HAlignment allowed
-      if (m_align & Align_HCenter)
-         x += get_w()/2;
-      else if (m_align & Align_Right)
-         x += get_w();
-
       // Let the font handler worry about all the complicated stuff..
       if (is_richtext(m_text))
-         g_fh->draw_richtext(dst, RGBColor(0,0,0), x, 0 - m_textpos, m_text , get_eff_w(), m_cache_mode, &m_cache_id);
+         g_fh->draw_richtext(dst, RGBColor(0,0,0), get_halign(), 0 - m_textpos, m_text , get_eff_w(), m_cache_mode, &m_cache_id);
       else
-         g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), x, 0 - m_textpos, m_text.c_str(), m_align, get_eff_w(), m_cache_mode, &m_cache_id);
-      
-      if (m_cache_mode != Widget_Cache_Use) {
-         bool setbottom = false;
-   
-         if (m_scrollmode == ScrollLog) {
-            if (m_textpos >= m_textheight - get_h() - g_fh->get_fontheight(m_fontname, m_fontsize))
-               setbottom = true;
-         }
-   
-         int m_width;
-         //update(0, 0, get_eff_w(), get_h());
-         g_fh->get_size_from_cache(m_cache_id,&m_width, &m_textheight);
-         log("height in textarea: %i\n",m_textheight);
-         
-         if (setbottom || m_textpos > m_textheight - get_h())
-            m_textpos = m_textheight - get_h();
-         if (m_textpos < 0)
-            m_textpos = 0;
-   
-         m_scrollbar->set_steps(m_textheight - get_h());
-         m_scrollbar->set_pos(m_textpos);
-      }
+         g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), get_halign(), 0 - m_textpos, m_text.c_str(), m_align, get_eff_w(), m_cache_mode, &m_cache_id);
+      draw_scrollbar();
       m_cache_mode = Widget_Cache_Use;
    }
+}
+
+void UIMultiline_Textarea::draw_scrollbar() {
+   if (m_cache_mode != Widget_Cache_Use) {
+      bool setbottom = false;
+
+      if (m_scrollmode == ScrollLog) {
+         if (m_textpos >= m_textheight - get_h() - g_fh->get_fontheight(m_fontname, m_fontsize))
+            setbottom = true;
+      }
+
+      int m_width;
+      //update(0, 0, get_eff_w(), get_h());
+      g_fh->get_size_from_cache(m_cache_id,&m_width, &m_textheight);
+      
+      if (setbottom || m_textpos > m_textheight - get_h())
+         m_textpos = m_textheight - get_h();
+      if (m_textpos < 0)
+         m_textpos = 0;
+
+      m_scrollbar->set_steps(m_textheight - get_h());
+      m_scrollbar->set_pos(m_textpos);
+   }
+}
+
+int UIMultiline_Textarea::get_halign() {
+   int x = 0;
+   // Only HAlignment allowed
+   if (m_align & Align_HCenter)
+      x += get_w()/2;
+   else if (m_align & Align_Right)
+      x += get_w();
+   return x;
 }
