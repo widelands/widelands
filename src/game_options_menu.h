@@ -33,9 +33,9 @@ public:
 private:
 	Interactive_Player	*m_player;
    Interactive_Player::Game_Main_Menu_Windows* m_windows;
-	UICheckbox *m_enable_music;
-	UICheckbox *m_enable_soundfx;
 
+   void disable_music_clicked( bool );
+   void disable_fx_clicked( bool );
    void clicked(int);
 };
 
