@@ -118,8 +118,8 @@ static bool parse_command_line(int argc, char** argv)
 			continue;
 		}
       if (!strcmp(opt, "nosound")) {
-         g_options.pull_section("music")->create_val("disable_music","true");
-         g_options.pull_section("music")->create_val("disable_fx","true");
+         g_options.pull_section("global")->create_val("disable_music","true");
+         g_options.pull_section("global")->create_val("disable_fx","true");
          continue;
       }
       if (!strcmp(opt, "nozip")) {

@@ -33,6 +33,7 @@
 #include "productionsite.h"
 #include "profile.h"
 #include "rendertarget.h"
+#include "sound_handler.h"
 #include "trainingsite.h"
 #include "transport.h"
 #include "tribe.h"
@@ -207,6 +208,9 @@ void Building_Descr::parse(const char* directory, Profile* prof,
    if(!is_animation_known("idle")) 
       add_animation("idle", g_anim.get(directory, s, 0, encdata));
 
+	while (global->get_next_string("soundfx", &string)) {
+		if (string) sound_handler->load_fx(directory, string);
+	}
 }
 
 

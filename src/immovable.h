@@ -88,6 +88,7 @@ public:
 	void parse(const char *directory, Profile *s);
 	void parse_program(std::string directory, Profile* prof, std::string name);
 	uint parse_animation(std::string directory, Profile* prof, std::string name);
+	void parse_playFX(std::string directory, Profile* prof, std::string name);
 	Immovable *create(Editor_Game_Base *g, Coords coords);
 
    inline Tribe_Descr* get_owner_tribe(void) { return m_owner_tribe; }
@@ -138,6 +139,7 @@ private:
 	bool run_animation(Game* g, bool killable, const ImmovableAction& action);
 	bool run_transform(Game* g, bool killable, const ImmovableAction& action);
 	bool run_remove(Game* g, bool killable, const ImmovableAction& action);
+	bool run_playFX(Game* g, bool killable, const ImmovableAction& action);
 
 protected:
 	Coords		m_position;

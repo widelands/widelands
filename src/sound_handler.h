@@ -203,25 +203,38 @@ public:
 	~Sound_Handler();
 	
         void read_config();
+	void load_system_sounds();
 	
 	void load_fx(const string dir, const string basename, const bool recursive=false);
 	void play_fx(const string fx_name, const Coords map_position);
 	void play_fx(const string fx_name);
 	
-	void load_song(const string dir, const string basename, const bool recursive=false);
+	void register_song(const string dir, const string basename, const bool recursive=false);
 	void start_music(const string songset_name, int fadein_ms=0);
 	void stop_music(int fadeout_ms=0);
 	void change_music(const string songset_name="", int fadeout_ms=0, int fadein_ms=0);
 	
 	static void music_finished_callback();
 	static void fx_finished_callback(int channel);
-	
+
+	bool get_disable_music() {return disable_music;}
+	bool get_disable_fx() {return disable_fx;}
+	void set_disable_music(bool state) {disable_music=state;}
+	void set_disable_fx(bool state) {disable_fx=state;}
+	void toggle_music() {disable_music=!disable_music;}
+	void toggle_fx() {disable_fx=!disable_fx;}
+
 	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
 	Game* the_game;
 
 protected:
+	/** TODO: comment me*/
 	Mix_Chunk* RWopsify_MixLoadWAV(FileRead* fr);
+
+	/** TODO: comment me*/
 	void load_one_fx(const string filename, const string fx_name);
+
+	/** TODO: comment me*/
 	int stereo_position(const Coords position);
 	
 	/** Whether to disable background music*/
@@ -229,7 +242,7 @@ protected:
 	
 	/** Whether to disable sound effects*/
 	bool disable_fx;
-	
+
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside their \ref FXset, of course)*/
 	bool random_order;

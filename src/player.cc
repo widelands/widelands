@@ -276,7 +276,6 @@ void Player::build(Coords c, int idx)
 			return;
 		}
 
-	sound_handler->play_fx("create_construction_site");
 	get_game()->warp_constructionsite(c, m_plnum, idx);
 }
 

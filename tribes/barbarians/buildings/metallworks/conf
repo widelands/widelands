@@ -26,7 +26,6 @@ program=produce_scythe
 program=produce_shovel
 program=produce_hunting_spear
 
-
 [inputs]
 iron=8
 trunk=8

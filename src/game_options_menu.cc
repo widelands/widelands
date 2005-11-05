@@ -29,6 +29,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ware_statistics_menu.h"
+#include "sound_handler.h"
 
 /*
 ==============================================================================
@@ -69,6 +70,16 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
    b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 0, 3);
    b->set_title("Authors");
    b->clickedid.set(this, &GameOptionsMenu::clicked);
+   posy += 25;
+
+   m_enable_music=new UICheckbox(this, 5, posy);
+   m_enable_music->set_state(!sound_handler->get_disable_music());
+   UITextarea *t=new UITextarea(this, 30, posy+3, "Ingame Music");
+   posy += 25;
+
+   m_enable_soundfx=new UICheckbox(this, 5, posy);
+   m_enable_soundfx->set_state(!sound_handler->get_disable_fx());
+   t=new UITextarea(this, 30, posy+3, "Sound FX");
    posy += 25;
 
    int buttonw = (get_inner_w()-3*5) / 2;

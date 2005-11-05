@@ -90,7 +90,7 @@ static void g_init(int argc, char **argv)
 		// KLUDGE!
 
 		// Create global sound handler
-      sound_handler=new Sound_Handler();
+		sound_handler=new Sound_Handler();
 
 		g_options.check_used();
 	}

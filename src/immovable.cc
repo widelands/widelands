@@ -28,6 +28,7 @@
 #include "map.h"
 #include "profile.h"
 #include "rendertarget.h"
+#include "sound_handler.h"
 #include "util.h"
 #include "wexception.h"
 #include "worker.h"
@@ -118,6 +119,7 @@ const ImmovableProgram::ParseMap ImmovableProgram::s_parsemap[] = {
 	{ "animation",		&ImmovableProgram::parse_animation },
 	{ "transform",		&ImmovableProgram::parse_transform },
 	{ "remove",			&ImmovableProgram::parse_remove },
+	{ "playFX",			&ImmovableProgram::parse_playFX },
 
 	{ 0, 0 }
 };
@@ -675,6 +677,34 @@ bool Immovable::run_animation(Game* g, bool killable, const ImmovableAction& act
 
 	if (action.iparam2 > 0)
 		m_program_step = schedule_act(g, action.iparam2);
+
+	m_program_ptr = (m_program_ptr+1) % m_program->get_size();
+
+	return true;
+}
+
+/*
+===============
+
+playFX <name>
+
+===============
+*/
+
+void ImmovableProgram::parse_playFX(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd)
+{
+	if (cmd.size() != 2)
+		throw wexception("Syntax: playFX [fxname]");
+
+	act->function = &Immovable::run_playFX;
+	act->sparam1 = cmd[1];
+}
+
+/** Demand from the \ref sound_handler to play a certain sound effect. Whether the effect actually gets played
+ * is decided only by the sound server*/
+bool Immovable::run_playFX(Game* g, bool killable, const ImmovableAction& action)
+{
+	sound_handler->play_fx(action.sparam1, get_position());
 
 	m_program_ptr = (m_program_ptr+1) % m_program->get_size();
 

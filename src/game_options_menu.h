@@ -21,6 +21,7 @@
 #define __S__GAME_OPTIONS_MENU_H
 
 #include "interactive_player.h"
+#include "ui_checkbox.h"
 #include "ui_unique_window.h"
 
 // The GameOptionsMenu is a rather dumb window with lots of buttons
@@ -32,6 +33,9 @@ public:
 private:
 	Interactive_Player	*m_player;
    Interactive_Player::Game_Main_Menu_Windows* m_windows;
+	UICheckbox *m_enable_music;
+	UICheckbox *m_enable_soundfx;
+
    void clicked(int);
 };
 
