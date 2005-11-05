@@ -27,7 +27,7 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	: Fullscreen_Menu_Base("singleplmenu.jpg")
 {
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Single Player Menu", Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, _("Single Player Menu"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -35,17 +35,17 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 
 	b = new UIButton(this, 60, 170, 174, 24, 1, sp_skirmish);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title("Single Map");
+	b->set_title(_("Single Map"));
 
 	b = new UIButton(this, 60, 210, 174, 24, 1, sp_tutorial);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title("Tutorial Campaign");
+	b->set_title(_("Tutorial Campaign"));
 
 	b = new UIButton(this, 60, 250, 174, 24, 1, sp_loadgame);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title("Load Game");
+	b->set_title(_("Load Game"));
 
 	b = new UIButton(this, 60, 370, 174, 24, 0, sp_back);
 	b->clickedid.set(this, &Fullscreen_Menu_SinglePlayer::end_modal);
-	b->set_title("Back");
+	b->set_title(_("Back"));
 }

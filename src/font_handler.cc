@@ -161,7 +161,7 @@ SDL_Surface* Font_Handler::create_single_line_text_surface(TTF_Font* f, RGBColor
    if( !text.size() ) 
       text = " ";
 
-   if (!(surface = TTF_RenderText_Shaded(f, text.c_str(), sdl_fg, sdl_bg))) {
+   if (!(surface = TTF_RenderUTF8_Shaded(f, text.c_str(), sdl_fg, sdl_bg))) {
       log("Font_Handler::create_single_line_text_surface, an error : %s\n", TTF_GetError());
       log("Text was: %s\n", text.c_str());
       return 0; // This will skip this line hopefully
@@ -209,7 +209,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface(TTF_Font* f, RGBColor
       // render this block in a SDL Surface
       SDL_Surface *surface;
 
-      if (!(surface = TTF_RenderText_Shaded(f, line.c_str(),sdl_fg,sdl_bg))) {
+      if (!(surface = TTF_RenderUTF8_Shaded(f, line.c_str(),sdl_fg,sdl_bg))) {
          log("Font_Handler::create_static_long_text_surface, an error : %s\n", TTF_GetError());
          log("Text was: %s\n", text.c_str());
          continue; // Ignore this line
@@ -243,7 +243,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface(TTF_Font* f, RGBColor
 void Font_Handler::render_caret(TTF_Font *f, SDL_Surface *line, const std::string &text_caret_pos) {
 	int caret_x,caret_y;
 	
-	TTF_SizeText(f, text_caret_pos.c_str(), &caret_x, &caret_y);
+	TTF_SizeUTF8(f, text_caret_pos.c_str(), &caret_x, &caret_y);
 	
 	Surface* caret_surf = ((GraphicImpl*)(g_gr))->get_picture_surface( g_gr->get_picture( PicMod_Game, "pics/caret.png" ));
 	SDL_Surface* caret_surf_sdl = caret_surf->m_surface;
@@ -563,7 +563,7 @@ void Font_Handler::get_size(std::string font, int size, std::string text, int *w
          line = " ";
 
       int line_w,line_h;
-      TTF_SizeText(f, line.c_str(), &line_w, &line_h);
+      TTF_SizeUTF8(f, line.c_str(), &line_w, &line_h);
       
       if (*w < line_w)
          *w = line_w;
@@ -574,6 +574,6 @@ void Font_Handler::get_size(std::string font, int size, std::string text, int *w
 //calcultes linewidth of a given text
 int Font_Handler::calc_linewidth(TTF_Font* f, std::string &text) {
    int w,h;
-   TTF_SizeText(f, text.c_str(), &w, &h);
+   TTF_SizeUTF8(f, text.c_str(), &w, &h);
    return w;
 }

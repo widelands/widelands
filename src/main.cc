@@ -99,6 +99,18 @@ static void g_init(int argc, char **argv)
 		g_shutdown();
 		exit(-1);
 	}
+
+#define USE_LOCALE 1
+#if USE_LOCALE
+#include <libintl.h>
+
+   
+	// Load message catalog
+	setlocale(LC_ALL, "");
+	bind_textdomain_codeset ("widelands", "UTF-8"); 
+   bindtextdomain("widelands", "locale");
+	textdomain("widelands");
+#endif
 }
 
 /*

@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 12:11+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:41
+msgid "Single Player"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:45
+msgid "Multi Player"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:49
+msgid "Options"
+msgstr "ßäöüÄÖÜ"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:53
+msgid "Editor"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:57
+msgid "View Readme"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:61
+msgid "License"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:66
+msgid "Exit Game"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:30
+msgid "Single Player Menu"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:38
+msgid "Single Map"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:42
+msgid "Tutorial Campaign"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:46
+msgid "Load Game"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:50
+msgid "Back"
+msgstr ""
