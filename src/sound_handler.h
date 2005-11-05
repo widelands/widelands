@@ -219,22 +219,15 @@ public:
 
 	bool get_disable_music() {return disable_music;}
 	bool get_disable_fx() {return disable_fx;}
-	void set_disable_music(bool state) {disable_music=state;}
-	void set_disable_fx(bool state) {disable_fx=state;}
-	void toggle_music() {disable_music=!disable_music;}
-	void toggle_fx() {disable_fx=!disable_fx;}
+	void set_disable_music(bool state);
+	void set_disable_fx(bool state);
 
 	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
 	Game* the_game;
 
 protected:
-	/** TODO: comment me*/
 	Mix_Chunk* RWopsify_MixLoadWAV(FileRead* fr);
-
-	/** TODO: comment me*/
 	void load_one_fx(const string filename, const string fx_name);
-
-	/** TODO: comment me*/
 	int stereo_position(const Coords position);
 	
 	/** Whether to disable background music*/
@@ -257,7 +250,8 @@ protected:
 	 * playing \e right \e now*/
 	string current_songset;
 	
-	/** The random number generator*/
+	/** The random number generator.
+         * \note The RNG here *must* not be the same as the one for the game logic! */
         RNG rng;
 };
 

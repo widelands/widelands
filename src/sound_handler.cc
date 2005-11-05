@@ -226,7 +226,7 @@ void Sound_Handler::load_system_sounds()
  * \param basename	Name from which filenames will be formed (BASENAME_XX.wav);
  * 			also the name used with \ref play_fx
  * \param recursive	\internal Whether to recurse into subdirectories
- * If BASENAME_XX (with any extension) is a directory, effects will be loaded recursively.
+ * If BASENAME_XX (with any or no extension) is a directory, effects will be loaded recursively.
  * Subdirectories of and files under BASENAME_XX can be named anything you want*/
 void Sound_Handler::load_fx(const string dir, const string basename, const bool recursive)
 {	
@@ -262,7 +262,7 @@ Mix_Chunk* Sound_Handler::RWopsify_MixLoadWAV(FileRead* fr)
 	SDL_RWops* target;
 	SDL_RWops* src;
 
-	src=SDL_RWFromMem(fr->data, fr->length); //direct access to member variables is neccessary here
+	src=SDL_RWFromMem(fr->data, fr->GetSize()); //direct access to member variable is neccessary here
 
 	if (USE_RWOPS){
 		Mix_Chunk* m=Mix_LoadWAV_RW(src, 1); //SDL_mixer will free the RWops "src" itself
@@ -325,9 +325,8 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 
 /** Calculate  the position of an effect in relation to the visible part of the screen.
  * \param position	Where the event happened (logical coordinates)
- * \return left border  = 0, right border=254, not in viewport = -1
+ * \return left border=0, right border=254, not in viewport = -1
  * \note This function can also be used to check whether a logical coordinate is visible at all
- * \todo Locations that are exactly on the border are invisible according to this method, but visible on screen
 */
 int Sound_Handler::stereo_position(const Coords position)
 {
@@ -347,7 +346,7 @@ int Sound_Handler::stereo_position(const Coords position)
 		sx -= vp.x;
 		sy -= vp.y;
 		
-		if (sx>0 && sx<xres && sy>0 && sy<yres) //make sure position is inside viewport
+		if (sx>=0 && sx<=xres && sy>=0 && sy<=yres) //make sure position is inside viewport
 			return sx*254/xres;
 	}
 		
@@ -495,6 +494,25 @@ void Sound_Handler::change_music(const string songset_name, int fadeout_ms, int 
 		stop_music(fadeout_ms);
 	else
 		start_music(s, fadein_ms);
+}
+
+//TODO: comment me
+void Sound_Handler::set_disable_music(bool state) {
+	if(state) {
+		stop_music();
+		disable_music=true;
+	} else {
+		disable_music=false;
+		start_music(current_songset);
+	}
+
+	g_options.pull_section("global")->set_bool("disable_music", state, false);
+}
+
+//TODO: comment me
+void Sound_Handler::set_disable_fx(bool state) {
+	disable_fx=state;
+	g_options.pull_section("global")->set_bool("disable_fx", state, false);
 }
 
 /** Callback to notify \ref Sound_Handler that a song has finished playing.
