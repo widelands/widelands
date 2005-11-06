@@ -44,7 +44,12 @@
 #include "sound_handler.h"
 
 LayeredFileSystem *g_fs;
-Sound_Handler* sound_handler;
+
+/** Reference to the global \ref Sound_Handler object
+ * The sound handler is a static object because otherwise it'd be quite difficult to pass the --nosound
+ * command line option 
+*/
+Sound_Handler g_sound_handler;
 
 static void g_shutdown();
 
@@ -71,6 +76,9 @@ static void g_init(int argc, char **argv)
 
 		g_fh = new Font_Handler();
 
+		// Start the audio subsystem
+		g_sound_handler.init();
+
 		// Initialize graphics
 		Section *s = g_options.pull_section("global");
 
@@ -88,9 +96,6 @@ static void g_init(int argc, char **argv)
 		s->get_bool("workareapreview");
 		s->get_bool("nozip");
 		// KLUDGE!
-
-		// Create global sound handler
-		sound_handler=new Sound_Handler();
 
 		g_options.check_used();
 	}
@@ -178,13 +183,13 @@ void g_main(int argc, char** argv)
 		}
 
 		try {
-                        sound_handler->start_music("intro");
+                        g_sound_handler.start_music("intro");
 
          Fullscreen_Menu_Intro r;
          r.run();
          bool done=false;
 
-         sound_handler->change_music("menu", 1000);
+         g_sound_handler.change_music("menu", 1000);
 
          while(!done) {
             Fullscreen_Menu_Main *mm = new Fullscreen_Menu_Main;
@@ -369,9 +374,8 @@ void g_main(int argc, char** argv)
             }
          }
 
-        sound_handler->stop_music(500);
-        delete sound_handler;
-		} catch(std::exception &e) {
+        g_sound_handler.stop_music(500);
+        	} catch(std::exception &e) {
 			critical_error("Unhandled exception: %s", e.what());
 		}
 

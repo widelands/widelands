@@ -56,7 +56,7 @@ Game::Game(void)
 
 	ipl = 0;
 	
-	sound_handler->the_game=this;
+	g_sound_handler.the_game=this;
 }
 
 /** Game::~Game(void)
@@ -65,7 +65,7 @@ Game::Game(void)
  */
 Game::~Game(void)
 {
-	sound_handler->the_game=NULL;
+	g_sound_handler.the_game=NULL;
 	
 	delete cmdqueue;
 	delete rng;
@@ -339,11 +339,11 @@ bool Game::run(bool is_savegame)
    
    load_graphics();
 
-   sound_handler->change_music("ingame", 1000, 0);
+   g_sound_handler.change_music("ingame", 1000, 0);
 
 	ipl->run();
 	
-	sound_handler->change_music("menu", 1000, 0);
+	g_sound_handler.change_music("menu", 1000, 0);
 
 	get_objects()->cleanup(this);
 	delete ipl;

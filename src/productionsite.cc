@@ -956,7 +956,7 @@ void ProductionSite::program_act(Game* g)
 		}
 		case ProductionAction::actPlayFX:
 		{
-			sound_handler->play_fx(action->sparam1, m_position);
+			g_sound_handler.play_fx(action->sparam1, m_position);
 			
 			program_step();
 			m_program_timer = true;

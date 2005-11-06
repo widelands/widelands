@@ -73,13 +73,13 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
    posy += 25;
 
    UICheckbox* cb = new UICheckbox(this, 5, posy);
-   cb->set_state(!sound_handler->get_disable_music());
+   cb->set_state(!g_sound_handler.get_disable_music());
    cb->changedto.set(this, &GameOptionsMenu::disable_music_clicked);
    UITextarea *t=new UITextarea(this, 30, posy+3, "Ingame Music");
    posy += 25;
 
    cb=new UICheckbox(this, 5, posy);
-   cb->set_state(!sound_handler->get_disable_fx());
+   cb->set_state(!g_sound_handler.get_disable_fx());
    cb->changedto.set(this, &GameOptionsMenu::disable_fx_clicked);
    t=new UITextarea(this, 30, posy+3, "Sound FX");
    posy += 25;
@@ -146,11 +146,11 @@ void GameOptionsMenu::clicked(int n) {
  * One of the checkboxes have been toggled
  */
 void GameOptionsMenu::disable_music_clicked( bool t ) {
-   sound_handler->set_disable_music( !t );
+   g_sound_handler.set_disable_music( !t );
 }
 
 void GameOptionsMenu::disable_fx_clicked( bool t ) {
-   sound_handler->set_disable_fx( !t );
+   g_sound_handler.set_disable_fx( !t );
 }
 
 /*

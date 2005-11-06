@@ -700,11 +700,11 @@ void ImmovableProgram::parse_playFX(ImmovableAction* act, const ProgramParser* p
 	act->sparam1 = cmd[1];
 }
 
-/** Demand from the \ref sound_handler to play a certain sound effect. Whether the effect actually gets played
+/** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
 bool Immovable::run_playFX(Game* g, bool killable, const ImmovableAction& action)
 {
-	sound_handler->play_fx(action.sparam1, get_position());
+	g_sound_handler.play_fx(action.sparam1, get_position());
 
 	m_program_ptr = (m_program_ptr+1) % m_program->get_size();
 

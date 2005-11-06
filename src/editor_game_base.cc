@@ -836,7 +836,7 @@ Editor_Game_Base::get_attack_points(uchar player)
  */
 void Editor_Game_Base::make_influence_map ()
 {
-   log("Making inluence map\n");
+   log("Making influence map\n");
    
    Coords c;
    int influence;

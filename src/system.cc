@@ -517,7 +517,7 @@ restart:
 				break;
 			case SDL_USEREVENT:
 				if (ev->user.code==Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC)
-					sound_handler->change_music();
+					g_sound_handler.change_music();
 				
 				break;				
 			}

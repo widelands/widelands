@@ -70,11 +70,11 @@ Mix_Music* Songset::get_song()
 	int songnumber;
 	string filename;
 	
-	if (sound_handler->disable_music || songs.empty())
+	if (g_sound_handler.disable_music || songs.empty())
 		return NULL;
 	
-	if (sound_handler->random_order) {
-		songnumber=sound_handler->rng.rand()%songs.size();
+	if (g_sound_handler.random_order) {
+		songnumber=g_sound_handler.rng.rand()%songs.size();
 		filename=songs.at(songnumber);
 	} else {
 		if (current_song==songs.end())
@@ -143,15 +143,17 @@ void FXset::add_fx(Mix_Chunk* fx, Uint8 prio)
 }
 
 /** Get a sound effect from the fxset. \e Which variant of the fx is actually given
- * out is determined at random*/
+ * out is determined at random
+ * \todo Implement priorities
+*/
 Mix_Chunk* FXset::get_fx()
 {
 	int fxnumber;
 	
-	if (sound_handler->disable_fx || fxs.empty())
+	if (g_sound_handler.disable_fx || fxs.empty())
 		return NULL;
 	
-	fxnumber=sound_handler->rng.rand()%fxs.size();
+	fxnumber=g_sound_handler.rng.rand()%fxs.size();
 	last_used=SDL_GetTicks();
 	
 	return fxs.at(fxnumber);
@@ -159,28 +161,18 @@ Mix_Chunk* FXset::get_fx()
 
 //-----------------------------------------------------------------------------------------
 
-/** Set up \ref Sound_Handler for operation.
- * Initialize audio subsystem, and read configuration*/
+/** This is just a basic constructor. The \ref Sound_Handler must already exist during command line parsing
+ * because --nosound needs to be known. At this time, however, all other information is still unknown,
+ * so a real intialization cannot take place.
+ * \see Sound_Handler::init()
+*/
 Sound_Handler::Sound_Handler()
 {
-	read_config();
+	nosound=false;
+	disable_music=false;
+	disable_fx=false;
+	random_order=true;
 	current_songset="";
-	rng.seed(SDL_GetTicks()); //that's still somewhat predictable, but it's just to avoid identical
-				  //playback patterns
-
-	SDL_InitSubSystem(SDL_INIT_AUDIO);
-	if ( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 512) == -1 ) {
-		SDL_QuitSubSystem(SDL_INIT_AUDIO);
-		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
-		disable_music = true;
-		disable_fx=true;
-      return;
-	}
-	
-	Mix_HookMusicFinished(Sound_Handler::music_finished_callback);
-	Mix_ChannelFinished(Sound_Handler::fx_finished_callback);
-
-	load_system_sounds();
 }
 
 /** Housekeeping: unset hooks. Audio data will be freed automagically by the \ref Songset and \ref FXset destructors*/
@@ -193,6 +185,30 @@ Sound_Handler::~Sound_Handler()
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
+/** The real intialization for Sound_Handler.
+ * \see Sound_Handler::Sound_Handler() 
+*/
+void Sound_Handler::init()
+{
+	read_config();
+	rng.seed(SDL_GetTicks()); //that's still somewhat predictable, but it's just to avoid identical
+				  //playback patterns
+
+	SDL_InitSubSystem(SDL_INIT_AUDIO);
+	if ( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 512) == -1 ) {
+		SDL_QuitSubSystem(SDL_INIT_AUDIO);
+		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
+		disable_music = true;
+		disable_fx=true;
+		return;
+	}
+	
+	Mix_HookMusicFinished(Sound_Handler::music_finished_callback);
+	Mix_ChannelFinished(Sound_Handler::fx_finished_callback);
+
+	load_system_sounds();
+}
+
 /** Read the main config file, load background music and systemwide sound effects*/
 void Sound_Handler::read_config()
 {
@@ -200,11 +216,14 @@ void Sound_Handler::read_config()
 	
 	s=g_options.pull_section("global");
 	
-	//if commandline option --nosound was given, disable_music and disable_fx are already true, otherwise false
-	if(!s->get_bool("disable_music",false))
+	if(nosound) {
+		disable_music=true;
+		disable_fx=true;
+	} else {
 		disable_music=s->get_bool("disable_music",false);
-	if(!s->get_bool("disable_fx",false))
 		disable_fx=s->get_bool("disable_fx",false);
+	}
+//TODO:rename random_order
 	random_order=s->get_bool("random_order", true);
 
 	//TODO: only do this if music/sound enabled. BUT!! if sound gets enabled later on, these must be loaded, too!!
@@ -357,7 +376,8 @@ int Sound_Handler::stereo_position(const Coords position)
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s) must
  * have been loaded before with \ref load_fx.
  * \param fx_name	The identifying name of the sound effect, see \ref load_fx
- * \param map_position  Logical (not screen) coordinates where the event takes place*/
+ * \param map_position  Logical (not screen) coordinates where the event takes place
+*/
 void Sound_Handler::play_fx(const string fx_name, const Coords map_position)
 {
 	Mix_Chunk* m;
@@ -496,7 +516,22 @@ void Sound_Handler::change_music(const string songset_name, int fadeout_ms, int 
 		start_music(s, fadein_ms);
 }
 
-//TODO: comment me
+/** Normal get_* function */
+bool Sound_Handler::get_disable_music()
+{
+	return disable_music;
+
+}
+
+/** Normal get_* function */
+bool Sound_Handler::get_disable_fx()
+{
+	return disable_fx;
+}
+
+/** Normal set_* function, but the music must be started/stopped accordingly
+ * Also, the new value is written back to the config file right away. It might get lost otherwise.
+*/
 void Sound_Handler::set_disable_music(bool state) {
 	if(state) {
 		stop_music();
@@ -509,7 +544,9 @@ void Sound_Handler::set_disable_music(bool state) {
 	g_options.pull_section("global")->set_bool("disable_music", state, false);
 }
 
-//TODO: comment me
+/** Normal set_* function
+ * Also, the new value is written back to the config file right away. It might get lost otherwise.
+*/
 void Sound_Handler::set_disable_fx(bool state) {
 	disable_fx=state;
 	g_options.pull_section("global")->set_bool("disable_fx", state, false);
@@ -524,10 +561,8 @@ void Sound_Handler::music_finished_callback()
 {
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 	
-        assert(sound_handler); //yes, I'm paranoid
-	
         //special case for splashscreen: there, only one song is ever played
-        if (sound_handler->current_songset=="intro") {
+        if (g_sound_handler.current_songset=="intro") {
 	        SDL_Event* e=new SDL_Event();
 
                 e->type=SDL_KEYDOWN;
@@ -547,8 +582,4 @@ void Sound_Handler::music_finished_callback()
 void Sound_Handler::fx_finished_callback(int channel)
 {
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
-	
-	assert(sound_handler); //yes, I'm paranoid
-	
-	//TODO: implement me
 }

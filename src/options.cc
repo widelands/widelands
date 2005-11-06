@@ -22,6 +22,7 @@
 #include "constants.h"
 #include "error.h"
 #include "options.h"
+#include "sound_handler.h"
 #include "system.h"
 #include "network_ggz.h"
 
@@ -118,8 +119,7 @@ static bool parse_command_line(int argc, char** argv)
 			continue;
 		}
       if (!strcmp(opt, "nosound")) {
-         g_options.pull_section("global")->create_val("disable_music","true");
-         g_options.pull_section("global")->create_val("disable_fx","true");
+	 g_sound_handler.nosound=true;
          continue;
       }
       if (!strcmp(opt, "nozip")) {

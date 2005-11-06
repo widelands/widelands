@@ -209,7 +209,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
       add_animation("idle", g_anim.get(directory, s, 0, encdata));
 
 	while (global->get_next_string("soundfx", &string)) {
-		if (string) sound_handler->load_fx(directory, string);
+		if (string) g_sound_handler.load_fx(directory, string);
 	}
 }
 

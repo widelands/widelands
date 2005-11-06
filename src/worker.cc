@@ -1168,11 +1168,11 @@ void WorkerProgram::parse_playFX(Worker_Descr*, WorkerAction* act, Parser* parse
 	act->function = &Worker::run_playFX;
 }
 
-/** Demand from the \ref sound_handler to play a certain sound effect. Whether the effect actually gets played
+/** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
 bool Worker::run_playFX(Game* g, State* state, const WorkerAction* act)
 {
-	sound_handler->play_fx(act->sparam1, get_position());
+	g_sound_handler.play_fx(act->sparam1, get_position());
 	
 	state->ivar1++;
 	schedule_act(g, 10);
@@ -1546,7 +1546,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
    
    // Read the sound effects
    while (sglobal->get_next_string("soundfx", &string))
-   	sound_handler->load_fx(directory, string);
+   	g_sound_handler.load_fx(directory, string);
 
    // Read the becomes and experience
    m_becomes = sglobal->get_string("becomes","");

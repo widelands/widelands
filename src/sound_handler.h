@@ -36,8 +36,11 @@ using namespace std;
 
 class Sound_Handler;
 /**\file*/
-/** Reference to the global \ref Sound_Handler object*/
-extern Sound_Handler* sound_handler;
+/** Reference to the global \ref Sound_Handler object
+ * The sound handler is a static object because otherwise it'd be quite difficult to pass the --nosound
+ * command line option 
+*/
+extern Sound_Handler g_sound_handler;
 
 /** A collection of several pieces of music meant for the same situation.
  * 
@@ -151,7 +154,7 @@ protected:
  * Problem 1:\n
  * Callbacks must use global(or static) functions \e but \e not normal member functions of a
  * class. If you must know why: ask google. But how can a static function share data with it's
- * own class? Usually not at all. Fortunately, \ref sound_handler already is a global variable,
+ * own class? Usually not at all. Fortunately, \ref g_sound_handler already is a global variable,
  * and therefore accessible to global functions. So problem 1 disappears.
  * 
  * Problem 2:\n
@@ -202,6 +205,7 @@ public:
         Sound_Handler();
 	~Sound_Handler();
 	
+	void init();
         void read_config();
 	void load_system_sounds();
 	
@@ -217,19 +221,24 @@ public:
 	static void music_finished_callback();
 	static void fx_finished_callback(int channel);
 
-	bool get_disable_music() {return disable_music;}
-	bool get_disable_fx() {return disable_fx;}
+	bool get_disable_music();
+	bool get_disable_fx();
 	void set_disable_music(bool state);
 	void set_disable_fx(bool state);
 
 	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
 	Game* the_game;
 
+	/** Only for buffering command line option --nosound until real intialization is done
+	 * \see Sound_Handler::Sound_Handler()
+	 * \see Sound_Handler::init() */
+	bool nosound;	
+
 protected:
 	Mix_Chunk* RWopsify_MixLoadWAV(FileRead* fr);
 	void load_one_fx(const string filename, const string fx_name);
 	int stereo_position(const Coords position);
-	
+
 	/** Whether to disable background music*/
 	bool disable_music;
 	
