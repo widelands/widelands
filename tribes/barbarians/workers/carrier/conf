@@ -14,25 +14,17 @@ menu_pic=carrier_menu.png
 # The normal idle animation (non-directional)
 [idle]
 pics=idle_??.png
-clrkey_r=255
-clrkey_g=249
-clrkey_b=137
-hot_spot_x=5
-hot_spot_y=13
+hot_spot_x=7
+hot_spot_y=16
+fps=2
 
 # Walking empty-handed
 [walk]
-hot_spot_x=5
-hot_spot_y=13
-clrkey_r=255
-clrkey_g=249
-clrkey_b=137
-fps=20
+hot_spot_x=7
+hot_spot_y=16
+fps=4
 
 # Walking with a ware
 [walkload]
-hot_spot_x=5
-hot_spot_y=13
-clrkey_r=255
-clrkey_g=249
-clrkey_b=137
+hot_spot_x=7
+hot_spot_y=16
