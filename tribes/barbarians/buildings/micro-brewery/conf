@@ -1,5 +1,5 @@
 [global]
-descname=Micro brewery
+descname=_ Micro brewery
 
 type=production		# basic type (warehouse, production, military)
 size=medium

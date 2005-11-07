@@ -32,8 +32,7 @@ Management classes and functions of the 16-bit software renderer.
 #include "tribe.h"
 #include "overlay_manager.h"
 #include "filesystem.h"
-
-#include "ui/ui_basic/ui_object.h" //just for i18n
+#include "system.h"
 
 /*
  * Names of road terrains

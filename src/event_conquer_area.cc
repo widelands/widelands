@@ -23,7 +23,7 @@
 #include "game.h"
 #include "editor_game_base.h"
 #include "map.h"
-#include "ui/ui_basic/ui_object.h" //just for i18n
+#include "system.h"
 
 static const int EVENT_VERSION = 1;
 

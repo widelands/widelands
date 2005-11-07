@@ -1,5 +1,5 @@
 [global]
-descname=Quarry		# nicer name to display in GUI
+descname=_ Quarry		# nicer name to display in GUI
 
 type=production		# basic type (warehouse, production, military)
 size=small

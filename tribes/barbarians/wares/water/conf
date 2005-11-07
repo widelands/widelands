@@ -1,5 +1,5 @@
 [global]
-descname=Water
+descname=_Water
 help=Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to grind stones.
 menu_pic=water_menu.png
 queue_full_pic=water_queue_full.png

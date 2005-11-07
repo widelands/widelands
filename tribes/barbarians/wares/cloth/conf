@@ -1,5 +1,5 @@
 [global]
-descname=Cloth
+descname=_Cloth
 help=no help for you
 menu_pic=menu.png
 queue_full_pic=queue_full.png

@@ -1,5 +1,5 @@
 [global]
-descname=Brewer
+descname=_Brewer
 help=Produces the finest ales to keep warriors strong and happy in training
 type=generic
 menu_pic=menu.png

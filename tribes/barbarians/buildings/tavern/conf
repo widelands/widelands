@@ -1,5 +1,5 @@
 [global]
-descname=Tavern      # nicer name to display in GUI
+descname=_ Tavern      # nicer name to display in GUI
 
 type=production		# basic type (warehouse, production, military)
 size=medium

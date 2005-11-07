@@ -1,5 +1,5 @@
 [global]
-descname=Geologist
+descname=_Geologist
 help=Discovers resources for mining
 type=generic
 menu_pic=geologist_menu.png

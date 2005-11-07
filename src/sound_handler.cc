@@ -309,6 +309,7 @@ Mix_Chunk* Sound_Handler::RWopsify_MixLoadWAV(FileRead* fr)
 	}
 
 	SDL_RWclose(src);
+   return 0;
 }
 
 /** Add exactly one file to the given fxset.

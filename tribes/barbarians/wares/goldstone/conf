@@ -1,5 +1,5 @@
 [global]
-descname=Goldstone
+descname=_Goldstone
 help=This is the yellow goldstone.
 menu_pic=menu.png
 queue_full_pic=queue_full.png

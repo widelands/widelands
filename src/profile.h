@@ -102,11 +102,13 @@ public:
 	float get_float(const char *name, float def = 0);
 	bool get_bool(const char *name, bool def = false);
 	const char *get_string(const char *name, const char *def = 0);
+	const char *get_translated_string(const char *name, const char *def = 0);
 
 	int get_safe_int(const char *name);
 	float get_safe_float(const char *name);
 	bool get_safe_bool(const char *name);
 	const char *get_safe_string(const char *name);
+	const char *get_safe_translated_string(const char *name);
 
 	const char *get_next_int(const char *name, int *value);
 	const char *get_next_float(const char *name, float *value);

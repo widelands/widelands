@@ -28,6 +28,7 @@
 #include "worlddata.h"
 #include "util.h"
 #include "error.h"
+#include "system.h"
 
 using std::cerr;
 using std::endl;
@@ -160,13 +161,19 @@ World::World(const char* name)
 
 	try
 	{
-		snprintf(directory, sizeof(directory), "worlds/%s", name);
+      // Grab the localisation text domain
+      sprintf( directory, "world_%s", name );
+      Sys_GrabTextdomain( directory );
+		
+      snprintf(directory, sizeof(directory), "worlds/%s", name);
 		m_basedir = directory;
 
 		parse_root_conf(name);
 		parse_resources();
 		parse_terrains();
 		parse_bobs();
+
+      Sys_ReleaseTextdomain();
 	}
 	catch(std::exception &e)
 	{

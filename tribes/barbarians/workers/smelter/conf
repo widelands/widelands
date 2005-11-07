@@ -1,5 +1,5 @@
 [global]
-descname=Smelter
+descname=_Smelter
 help=Smelts iron
 type=generic
 menu_pic=menu.png

@@ -1,5 +1,5 @@
 [global]
-descname=Pressworks  # nicer name to display in GUI
+descname=_ Pressworks  # nicer name to display in GUI
 
 type=production		# basic type (warehouse, production, military)
 size=big

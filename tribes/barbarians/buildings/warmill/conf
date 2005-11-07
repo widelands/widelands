@@ -1,5 +1,5 @@
 [global]
-descname=War Mill
+descname=_ War Mill
 
 type=production		# basic type (warehouse, production, military)
 size=medium

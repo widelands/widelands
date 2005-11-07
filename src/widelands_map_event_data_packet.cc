@@ -29,8 +29,7 @@
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_event_data_packet.h"
 #include "world.h"
-
-#include "ui/ui_basic/ui_object.h" //just for i18n
+#include "system.h"
 
 #define CURRENT_PACKET_VERSION 1
 

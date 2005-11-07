@@ -1,5 +1,5 @@
 [global]
-descname=Ferner
+descname=_Ferner
 help=Grows Fern
 type=generic
 menu_pic=ferner_menu.png

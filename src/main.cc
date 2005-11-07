@@ -105,17 +105,9 @@ static void g_init(int argc, char **argv)
 		exit(-1);
 	}
 
-#define USE_LOCALE 1
-#if USE_LOCALE
-#include <libintl.h>
-
-   
-	// Load message catalog
-	setlocale(LC_ALL, "");
-	bind_textdomain_codeset ("widelands", "UTF-8"); 
-   bindtextdomain("widelands", "locale");
-	textdomain("widelands");
-#endif
+   // Set Locale and grab default domain
+   Sys_SetLocale();
+   Sys_GrabTextdomain("widelands");
 }
 
 /*
@@ -134,6 +126,9 @@ static void g_shutdown()
 		delete g_fh;
       g_fh = 0;
 	}
+
+   // To be proper, release our textdomain
+   Sys_ReleaseTextdomain();
 
 	Sys_Shutdown();
 
@@ -374,10 +369,10 @@ void g_main(int argc, char** argv)
             }
          }
 
-        g_sound_handler.stop_music(500);
-        	} catch(std::exception &e) {
-			critical_error("Unhandled exception: %s", e.what());
-		}
+         g_sound_handler.stop_music(500);
+      } catch(std::exception &e) {
+         critical_error("Unhandled exception: %s", e.what());
+      }
 
 		g_shutdown();
 	}

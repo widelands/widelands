@@ -21,19 +21,6 @@
 #define UI_OBJECT_H
 
 /**
- * Internationalisation
- */
-
-#define USE_LOCALE 1
-#if USE_LOCALE
-#include <locale.h>
-#include <libintl.h>
-#define _(x) gettext(x)
-#else
-#define _(x) (x)
-#endif
-
-/**
  * Serves as a base class for UI related objects. The only purpose is
  * to provide the base class for signal function pointers.
  */

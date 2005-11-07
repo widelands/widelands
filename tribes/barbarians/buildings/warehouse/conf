@@ -1,5 +1,5 @@
 [global]
-descname=Warehouse # nicer name to display in GUI
+descname=_ Warehouse # nicer name to display in GUI
 
 type=warehouse	# basic type (warehouse, production, military)
 subtype=none

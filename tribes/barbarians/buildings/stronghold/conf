@@ -1,5 +1,5 @@
 [global]
-descname=Stronghold
+descname=_ Stronghold
 
 type=military		# basic type (warehouse, production, military)
 size=medium

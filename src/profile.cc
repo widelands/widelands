@@ -26,9 +26,9 @@
 #include "error.h"
 #include "filesystem.h"
 #include "profile.h"
+#include "system.h"
 #include "wexception.h"
-
-#include "ui/ui_basic/ui_object.h" //just for i18n
+#include "system.h"
 
 #define TRUE_WORDS 4
 const char* trueWords[TRUE_WORDS] =
@@ -338,6 +338,17 @@ const char *Section::get_safe_string(const char *name)
 	return v->get_string();
 }
 
+/** Section::get_safe_translated_string
+ *
+ * Returns the value of the given key, translated in the set local
+ * using gettext.
+ *
+ * Note: the textdomain must be set through the system
+ */
+const char* Section::get_safe_translated_string( const char* name ) {
+   return Sys_Translate( get_safe_string( name ) );
+}
+ 
 /** Section::get_int(const char *name, int def)
  *
  * Returns the integer value of the given key. Falls back to a default value
@@ -424,6 +435,21 @@ const char *Section::get_string(const char *name, const char *def)
 	return v->get_string();
 }
 
+/** Section::get_translated_string
+ *
+ * Returns the value of the given key, translated in the set local
+ * using gettext.
+ *
+ * Note: the textdomain must be set through the system
+ */
+const char* Section::get_translated_string(const char* name, const char* def ) {
+   const char* retval = get_string( name, def );
+   if( !retval ) 
+      return 0;
+
+   return Sys_Translate( retval );
+}
+   
 /** Section::get_next_int(const char *name, int *value)
  *
  * Retrieve the next unused key with the given name as an integer.
@@ -796,7 +822,9 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
                tail = strchr(p, '=');
                *tail++ = 0;
                key = p;
-					tail = skipwhite(tail);
+					if(*tail == '_' ) 
+                  tail+= 1; // skip =_, which is only used for translations
+               tail = skipwhite(tail);
 					killcomments(tail);
 					rtrim(tail);
 					rtrim(p);

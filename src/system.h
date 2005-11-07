@@ -20,6 +20,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include <libintl.h>
+#include <locale.h>
 #include <string>
 #include "types.h"
 
@@ -79,6 +81,15 @@ struct InputCallback {
 	void (*mouse_move)(uint btns, int x, int y, int xdiff, int ydiff);
 	void (*key)(bool down, int code, char c);
 };
+
+// locale
+#define _( str ) Sys_Translate( str )
+void Sys_GrabTextdomain( const char* );
+void Sys_ReleaseTextdomain( void );
+void Sys_SetLocale( const char* = 0);
+inline const char* Sys_Translate( const char* str ) {
+   return gettext( str );
+}
 
 void Sys_HandleInput(InputCallback *cb);
 uint Sys_GetMouseButtons();

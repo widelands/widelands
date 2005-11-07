@@ -23,6 +23,12 @@
 // define current version
 #define VERSION "build-9"
 
+// locale path: This would be needed to be changed by a packager
+// The default search path for locales is in the locale directory
+// but if widelands is installed, this changes to something like
+// /usr/locale/share/*. If so, change here
+#define LOCALE_PATH "locale"
+
 #define TEXTURE_W 64        // texture have a fixed size and are squares
 #define TEXTURE_H TEXTURE_W // TEXTURE_H is just defined for easier understandement of the code
 

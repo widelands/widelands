@@ -25,6 +25,7 @@
 #include "profile.h"
 #include "world.h"
 #include "soldier.h"
+#include "system.h"
 #include "tribe.h"
 #include "util.h"
 #include "warehouse.h"
@@ -44,6 +45,10 @@ Tribe_Descr::Tribe_Descr(const char* name)
 	{
 		char directory[256];
 
+      // Grab the localisation text domain
+      sprintf( directory, "tribe_%s", name );
+      Sys_GrabTextdomain( directory );
+      
 		snprintf(directory, sizeof(directory), "tribes/%s", name);
 
 		m_default_encdata.clear();
@@ -52,6 +57,8 @@ Tribe_Descr::Tribe_Descr(const char* name)
 		parse_buildings(directory);
       parse_bobs(directory);
       parse_root_conf(directory);
+      
+      Sys_ReleaseTextdomain( );
 	}
 	catch(std::exception &e)
 	{

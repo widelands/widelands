@@ -17,11 +17,12 @@
  *
  */
 
+#include "constants.h"
 #include "error.h"
 #include "fullscreen_menu_singleplayer.h"
+#include "system.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
-#include "constants.h"
 
 Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	: Fullscreen_Menu_Base("singleplmenu.jpg")

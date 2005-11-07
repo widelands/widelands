@@ -1,5 +1,5 @@
 [global]
-descname=Smelting Works
+descname=_ Smelting Works
 
 type=production		# basic type (warehouse, production, military)
 size=medium

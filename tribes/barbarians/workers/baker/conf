@@ -1,5 +1,5 @@
 [global]
-descname=Baker
+descname=__Baker
 help=Baker
 type=generic
 menu_pic=baker_menu.png

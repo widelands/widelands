@@ -1,5 +1,5 @@
 [global]
-descname=Carrier
+descname=_Carrier
 help=Carries items along your roads.
 type=carrier
 menu_pic=carrier_menu.png

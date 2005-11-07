@@ -1,5 +1,5 @@
 [global]
-descname=Soldier
+descname=_Soldier
 help=Defend and Conquer!
 type=soldier
 buildable=1

@@ -21,8 +21,7 @@
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
-
-#include "ui/ui_basic/ui_object.h" //just for i18n
+#include "system.h"
 
 static const int TRIGGER_VERSION = 1;
 

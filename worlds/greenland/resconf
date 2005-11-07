@@ -1,7 +1,7 @@
 # this is for the pictures
 
 [coal]
-name=Coal
+name=_ Coal
 editor_pic=coal1.png 5
 editor_pic=coal2.png 10
 editor_pic=coal3.png 15
@@ -9,7 +9,7 @@ editor_pic=coal4.png
 max_amount=20
 
 [gold]
-name=Gold
+name=_ Gold
 editor_pic=gold1.png 5
 editor_pic=gold2.png 10
 editor_pic=gold3.png 15
@@ -17,7 +17,7 @@ editor_pic=gold4.png
 max_amount=20
 
 [iron]
-name=Iron
+name=_ Iron
 editor_pic=iron1.png 5
 editor_pic=iron2.png 10
 editor_pic=iron3.png 15
@@ -25,7 +25,7 @@ editor_pic=iron4.png
 max_amount=20
 
 [granit]
-name=Granit
+name=_ Granit
 editor_pic=granit1.png 5
 editor_pic=granit2.png 10
 editor_pic=granit3.png 15
@@ -33,12 +33,12 @@ editor_pic=granit4.png
 max_amount=20
 
 [water]
-name=Water
+name=_ Water
 editor_pic=water_resource.png
 max_amount=50
 
 [fish]
-name=Fish
+name=_ Fish
 detectable=false
 max_amount=20
 editor_pic=fish_resource.png

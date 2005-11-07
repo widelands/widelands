@@ -3,7 +3,7 @@
 # in the player colors may be present
 
 [global]
-descname=Headquarters	
+descname=_ Headquarters	
 
 type=warehouse		# basic type (warehouse, production, military)
 size=big

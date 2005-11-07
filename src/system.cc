@@ -20,6 +20,7 @@
 #include <SDL.h>
 #include <SDL_net.h>
 #include <SDL_mixer.h>
+#include <vector>
 #include "error.h"
 #include "filesystem.h"
 #include "graphic.h"
@@ -35,6 +36,8 @@
 #include "network_ggz.h"
 
 Graphic *g_gr = 0;
+
+static std::vector<std::string> l_textdomains;
 
 /*
 Notes on the implementation
@@ -300,6 +303,46 @@ void Sys_Shutdown()
 		fclose(sys.fplayback);
 		sys.fplayback = 0;
 	}
+}
+
+/*
+ * Localisation functions
+ */
+
+/*
+ * Grab a given TextDomain. We keep a stack
+ * if a new one is grabbed, it is pushed on the stack
+ * on releasing it is dropped and the previous
+ * one is re-grabbed instead.
+ *
+ * So when a tribe loads, it grabs it's textdomain
+ * loads all data and releases it -> we're back in 
+ * widelands domain. Negative: We can't translate error
+ * messages. Who cares?
+ */
+void Sys_GrabTextdomain( const char* domain) {
+   bind_textdomain_codeset (domain, "UTF-8"); 
+   bindtextdomain( domain, LOCALE_PATH ); 
+   textdomain(domain);
+
+   l_textdomains.push_back( domain );
+}
+void Sys_ReleaseTextdomain( void ) {
+   l_textdomains.pop_back();
+
+   const char* domain = l_textdomains.back().c_str();
+   bind_textdomain_codeset (domain, "UTF-8"); 
+   bindtextdomain( domain, LOCALE_PATH ); 
+   textdomain(domain);
+}
+/*
+ * Set The locale to the given string
+ */
+void Sys_SetLocale( const char* str ) {
+   if( str ) 
+      setlocale(LC_ALL, ""); 
+   else
+      setlocale(LC_ALL, str);
 }
 
 /*

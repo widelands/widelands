@@ -24,6 +24,7 @@
 #include "ui_object.h"
 #include "../../font_handler.h"
 #include "../../constants.h"
+#include "../../system.h"  // This is basically needed for translations
 #include "rendertarget.h"
 #include "types.h"
 #include "error.h"

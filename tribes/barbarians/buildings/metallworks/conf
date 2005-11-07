@@ -1,5 +1,5 @@
 [global]
-descname=Metallworks
+descname=_ Metallworks
 type=production		# basic type (warehouse, production, military)
 size=medium
 buildable=yes 

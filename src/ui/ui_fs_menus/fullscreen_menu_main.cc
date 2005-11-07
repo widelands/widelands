@@ -20,6 +20,7 @@
 #include "constants.h"
 #include "error.h"
 #include "fullscreen_menu_main.h"
+#include "system.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 

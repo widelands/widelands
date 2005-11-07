@@ -60,6 +60,13 @@ void Text_Parser::parse(std::string text, std::vector<Text_Block> *blocks) {
       
       if (!block_text.size())
          block_text = " ";
+     
+      // Replace <br> in text block through newlines. This is needed for 
+      // Texts which may not contain newlines ( for example from conf files )
+      uint newline;
+      while( (newline = block_text.find("<br>")) != std::string::npos ) {
+         block_text.replace( newline, 4, "\n" );
+      }
       
       Text_Block new_block = {
          block_text,

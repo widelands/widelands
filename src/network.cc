@@ -841,8 +841,8 @@ void NetStatusWindow::add_player (int num)
 {
     char buffer[64];
     Entry entry;
-    
-    snprintf (buffer, 64, strcat(_("Player"), " %d"), num);
+   
+    snprintf (buffer, 64, "%s %d", _("Player"), num);
     
     entry.plnum=num;
     entry.entry=new UITable_Entry(table, 0);

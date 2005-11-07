@@ -22,8 +22,7 @@
 
 #include "error.h"
 #include <string>
-
-#include "ui/ui_basic/ui_object.h" //just for i18n
+#include "system.h"
 
 class Trigger_Null;
 

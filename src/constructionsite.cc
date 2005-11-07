@@ -26,11 +26,12 @@
 #include "graphic.h"
 #include "player.h"
 #include "rendertarget.h"
+#include "sound_handler.h"
+#include "system.h"
 #include "transport.h"
 #include "tribe.h"
 #include "wexception.h"
 #include "worker.h"
-#include "sound_handler.h"
 
 #include "ui/ui_basic/ui_object.h" //only needed for i18n function _()
 

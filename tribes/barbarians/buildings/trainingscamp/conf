@@ -1,6 +1,5 @@
 [global]
-descname=Trainings Camp
-
+descname=_ Trainingscamp
 type=training		# basic type (warehouse, production, military)
 size=big
 buildable=yes

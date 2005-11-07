@@ -1,5 +1,5 @@
 [global]
-descname=Fishing Rod
+descname=_Fishing Rod
 help=
 menu_pic=menu.png
 queue_full_pic=queue_full.png

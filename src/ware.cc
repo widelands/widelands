@@ -26,8 +26,7 @@
 #include "ware.h"
 #include "wexception.h"
 #include "worker.h"
-
-#include "ui/ui_basic/ui_object.h" //just for i18n
+#include "system.h"
 
 /*
 ==============================================================================

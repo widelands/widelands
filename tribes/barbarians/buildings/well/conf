@@ -1,5 +1,5 @@
 [global]
-descname=Well		# nicer name to display in GUI
+descname=_ Well		# nicer name to display in GUI
 
 type=production		# basic type (warehouse, production, military)
 size=small

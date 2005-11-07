@@ -1,6 +1,7 @@
 [global]
 type="diminishing"
 stock=1
+descname =_Tree
 
 size=normal
 attrib=tree

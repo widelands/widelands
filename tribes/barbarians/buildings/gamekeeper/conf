@@ -1,5 +1,5 @@
 [global]
-descname=Gamekeeper Hut # nicer name to display in GUI
+descname=_ Gamekeeper Hut # nicer name to display in GUI
 type=production		# basic type (warehouse, production, military)
 size=small
 help=The Gamekeeper makes sure that the natural population of animals never drops to low.

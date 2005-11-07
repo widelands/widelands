@@ -193,7 +193,22 @@ SDL_Surface* Font_Handler::create_static_long_text_surface(TTF_Font* f, RGBColor
    std::vector<std::string> lines;
    
    text = word_wrap_text(f,text,wrap);
-   split_string(text, &lines, "\n");
+
+   //split_string( text, &lines, "\n" ); 
+   // We split the string now, but we do not use split_string, since
+   // split string would handle a '\n\n' as only one newline
+   std::string textbak = text;
+   std::string::size_type pos = 0;
+   while( pos != std::string::npos ) {
+      pos = textbak.find( '\n' );
+      if( pos == std::string::npos )
+         break;
+
+      std::string line = textbak.substr(0,pos);
+      textbak.erase(0,pos+1); // also remove newline
+      lines.push_back( line );
+   }
+   lines.push_back( textbak );
    
    SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
    SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };

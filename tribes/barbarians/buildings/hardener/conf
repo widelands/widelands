@@ -1,5 +1,5 @@
 [global]
-descname=Wood hardener# nicer name to display in GUI
+descname=_ Wood hardener# nicer name to display in GUI
 
 type=production		# basic type (warehouse, production, military)
 size=medium

@@ -96,8 +96,8 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 			split_string(string, &cmd, " \t\r\n");
 			if (!cmd.size())
 				continue;
-
-			// Find the appropriate parser
+   
+         // Find the appropriate parser
 			Critter_BobAction act;
 			uint mapidx;
 
@@ -204,8 +204,11 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
    // Read all walking animations.
 	// Default settings are in [walk]
 	char sectname[256];
-
-	snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
+         
+   // Pretty name
+   m_descname = s->get_safe_translated_string("descname");
+	
+   snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
 	m_walk_anims.parse(this, directory, prof, sectname, prof->get_section("walk"), encdata);
 
 	Section *sglobal = prof->get_safe_section("global");

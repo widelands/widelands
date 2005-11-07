@@ -1,5 +1,5 @@
 [global]
-descname=Iron
+descname=_Iron
 help=Weapons and Tools are made of iron.
 menu_pic=menu.png
 queue_full_pic=queue_full.png

@@ -1,5 +1,5 @@
 [global]
-descname=Coalearth
+descname=_Coalearth
 help=This earth is found in the deep coal mines. It needs to be enhanced to get proper coal
 menu_pic=menu.png
 queue_full_pic=queue_full.png

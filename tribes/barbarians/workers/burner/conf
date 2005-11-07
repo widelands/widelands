@@ -1,5 +1,5 @@
 [global]
-descname=Burner
+descname=_Burner
 help=Burns coals
 type=generic
 menu_pic=menu.png

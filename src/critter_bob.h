@@ -40,10 +40,12 @@ class Critter_Bob_Descr : public Bob_Descr {
 
       inline bool is_swimming(void) { return m_swimming; }
       inline DirAnimations* get_walk_anims(void) { return &m_walk_anims; }
-	
+      inline const char* get_descname( void ) { return m_descname.c_str(); }
+
       const Critter_BobProgram* get_program(std::string name) const;
 
    private:
+      std::string    m_descname;
 		DirAnimations	m_walk_anims;
       bool				m_swimming;
       ProgramMap     m_programs;
@@ -65,6 +67,7 @@ public:
 	virtual void init_auto_task(Game* g);
 
 	void start_task_program(Game* g, std::string name);
+   inline const char* get_descname( void ) { return get_descr()->get_descname(); }
 
 private:
 	void roam_update(Game* g, State* state);

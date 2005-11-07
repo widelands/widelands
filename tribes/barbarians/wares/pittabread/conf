@@ -1,5 +1,5 @@
 [global]
-descname=Pittabread
+descname=_Pittabread
 help=The barbarian backers are best in making this flat and tasty pittabread.
 menu_pic=bread_menu.png
 queue_full_pic=bread_queue_full.png

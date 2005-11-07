@@ -1,5 +1,5 @@
 [global]
-descname=Chief Miner
+descname=_Chief Miner
 help=Works deep in the mines to produce coal,iron or gold.
 type=generic
 menu_pic=menu.png

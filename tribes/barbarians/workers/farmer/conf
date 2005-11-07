@@ -1,5 +1,5 @@
 [global]
-descname=Farmer
+descname=_Farmer
 help=plants fields.
 type=generic
 menu_pic=menu.png

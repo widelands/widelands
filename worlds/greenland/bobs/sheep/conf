@@ -1,3 +1,4 @@
+descname=_ Sheep
 type="critter"
 swimming=0  # defaults to 0, is only in the water?
 attrib=eatable

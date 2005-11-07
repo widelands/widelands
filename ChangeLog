@@ -1,3 +1,6 @@
+- Added proper localisation support
+- Font renderer now renders multiple newlines correctly and in richtext
+accepts <br> as newline
 - added localisation patch by Josef + beginning of localisation
 - f now triggers fullscreen ingame 
 - added new maps from winterwind

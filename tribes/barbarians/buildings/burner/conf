@@ -1,5 +1,5 @@
 [global]
-descname=Charcoal Burner
+descname=_ Charcoal Burner
 
 type=production		# basic type (warehouse, production, military)
 size=medium

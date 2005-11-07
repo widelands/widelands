@@ -28,6 +28,7 @@
 #include "ui_multilinetextarea.h"
 #include "ui_checkbox.h"
 #include "map_loader.h"
+#include "system.h"
 #include "widelands_map_loader.h"
 
 /*
@@ -64,7 +65,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 
 	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_MapSelect::end_modal);
-	b->set_title("Back");
+	b->set_title( _("Back") );
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_MapSelect::ok);
