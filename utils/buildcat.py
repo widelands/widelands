@@ -9,7 +9,7 @@ Usage: Edit the available languages to your need, run this script in the 'locale
 # TODO: Scenarios and Campaigns
 # TODO: General Help
 
-LANGUAGES = [ "de_DE", "fr_FR" ]
+LANGUAGES = [ "de_DE" ]  # Add your new language here
 
 #################################################################
 # NO MORE CHANGES BELOW
