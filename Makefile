@@ -18,8 +18,14 @@ endif
 #doxygen
 DOXYGEN=/usr/bin/doxygen
 
+#older versions of SDL_mixer don't have RWops-Variants for loading samples and music
 ifndef OLD_SDL_MIXER
 OLD_SDL_MIXER:=NO
+endif
+
+#most current glibc systems implicitly contain libintl.so
+ifndef IMPLICIT_LIBINTL
+IMPLICIT_LIBINTL:=NO
 endif
 
 # Is this a cross compile?
@@ -146,13 +152,17 @@ ifeq ($(OLD_SDL_MIXER),YES)
 ADD_CFLAGS += -DOLD_SDL_MIXER
 endif
 
+ifeq ($(IMPLICIT_LIBINTL),NO)
+ADD_LDFLAGS += -lintl
+endif
+
 ##############################################################################
 # Object files and directories, final compilation flags
 
 OBJECT_DIR:=src/$(TARGET)-$(BUILD)
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
-LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lintl -lz -lpng -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net
+LDFLAGS:=$(shell $(SDL_CONFIG) --libs) $(ADD_LDFLAGS) -lz -lpng -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net
 
 ##############################################################################
 # Building
