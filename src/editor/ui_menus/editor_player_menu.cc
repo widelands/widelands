@@ -53,7 +53,7 @@ Create all the buttons etc...
 */
 Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
       Editor_Interactive::Editor_Tools* tools, int spt_tool_index, int make_infrs_tindex, UIUniqueWindowRegistry* registry) 
-   : UIUniqueWindow(parent, registry, 340, 400, "Player Options")
+   : UIUniqueWindow(parent, registry, 340, 400, _("Player Options"))
 {
    // Initialisation
    m_parent=parent;
@@ -73,10 +73,10 @@ Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
    Tribe_Descr::get_all_tribes(&m_tribes);
 
    set_inner_size(375, 135);
-   UITextarea* ta=new UITextarea(this, 0, 0, "Player Options", Align_Left);
+   UITextarea* ta=new UITextarea(this, 0, 0, _("Player Options"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
-   ta=new UITextarea(this, 0, 0, "Number of Players", Align_Left);
+   ta=new UITextarea(this, 0, 0, _("Number of Players"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=spacing+width;
    UIButton* b=new UIButton(this, posx, posy, width, height, 1, 0);
@@ -237,7 +237,7 @@ void Editor_Player_Menu::button_clicked(int n) {
       // register new default name for this players
       char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
       char c2= (nr_players%10) + 0x30;
-      std::string name="Player ";
+      std::string name=_("Player ");
       if(c1) name.append(1,c1);
       name.append(1,c2);
       m_parent->get_map()->set_nrplayers(nr_players);
@@ -253,8 +253,7 @@ void Editor_Player_Menu::button_clicked(int n) {
          m_parent->get_map()->set_scenario_player_tribe(nr_players, tribe);
          m_parent->set_need_save(true);
       } else {
-         UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", "Can't remove player. It is referenced in some place."
-               "Remove all buildings, bobs, triggers and events that depend of this player and try again", UIModal_Message_Box::OK);
+         UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, _("Error!"), _("Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend of this player and try again"), UIModal_Message_Box::OK);
          mmb->run();
          delete mmb;
       }
@@ -281,8 +280,7 @@ void Editor_Player_Menu::player_tribe_clicked(int n) {
       m_parent->get_map()->set_scenario_player_tribe(n+1,t);
       m_parent->set_need_save(true);
    } else {
-      UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, "Error!", "Can't change player tribe. It is referenced in some place."
-            "Remove all buildings, bobs, triggers and events that depend on this tribe and try again", UIModal_Message_Box::OK);
+      UIModal_Message_Box* mmb=new UIModal_Message_Box(m_parent, _("Error!"), _("Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"), UIModal_Message_Box::OK);
       mmb->run();
       delete mmb;
    }

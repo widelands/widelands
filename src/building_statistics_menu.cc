@@ -48,7 +48,7 @@ Create all the buttons etc...
 ===============
 */
 Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
-  : UIUniqueWindow(parent,registry,400,400,"Building Statistics") {
+  : UIUniqueWindow(parent,registry,400,400,_("Building Statistics")) {
    m_parent=parent;
 
    // First, we must decide about the size
@@ -59,15 +59,15 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
    int posy=offsy;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Building Statistics", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Building Statistics"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    // Building list
    m_table=new UITable(this, (get_inner_w()-BUILDING_LIST_WIDTH)/2, offsy, BUILDING_LIST_WIDTH, BUILDING_LIST_HEIGHT, Align_Left, UITable::UP);
-	m_table->add_column("Name", UITable::STRING, 160);
-	m_table->add_column("Prod", UITable::STRING, 40);
-	m_table->add_column("Owned", UITable::STRING, 40);
-	m_table->add_column("Build", UITable::STRING, 40);
+	m_table->add_column(_("Name"), UITable::STRING, 160);
+	m_table->add_column(_("Prod"), UITable::STRING, 40);
+	m_table->add_column(_("Owned"), UITable::STRING, 40);
+	m_table->add_column(_("Build"), UITable::STRING, 40);
    m_table->selected.set(this, &Building_Statistics_Menu::table_changed);
 
    posy += BUILDING_LIST_HEIGHT + 2*spacing;
@@ -77,13 +77,13 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
    posx = get_inner_w() / 4 + spacing;
 
    // Toggle when to run button
-   UITextarea* ta = new UITextarea(this, posx, posy, get_inner_w()/4, 24, "Total Productivity: ", Align_CenterLeft );
+   UITextarea* ta = new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("Total Productivity: "), Align_CenterLeft );
    m_progbar = new UIProgress_Bar(this, posx + ta->get_w() + spacing, posy, get_inner_w() - ( posx + ta->get_w() + spacing) - spacing, 24, UIProgress_Bar::Horizontal);
    m_progbar->set_total(100);
    posy += 25;
 
    // owned
-   new UITextarea(this, posx, posy, get_inner_w()/4, 24, "Owned: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("Owned: "), Align_CenterLeft);
    m_owned = new UITextarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
    UIButton* b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 0, 0);
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
@@ -96,7 +96,7 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
    posy += 25;
 
    // build  
-   new UITextarea(this, posx, posy, get_inner_w()/4, 24, "In Build: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("In Build: "), Align_CenterLeft);
    m_build = new UITextarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
    b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 0, 2);
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
@@ -109,7 +109,7 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
    posy += 25;
 
    // Jump to unproductive
-   new UITextarea(this, posx, posy, get_inner_w()/4, 24, "Jump to unproductive: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("Jump to unproductive: "), Align_CenterLeft);
    b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 0, 4);
    b->set_pic( g_gr->get_picture( PicMod_UI,  "pics/scrollbar_left.png" ));
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
@@ -307,8 +307,8 @@ void Building_Statistics_Menu::update( void ) {
    // List all buildings
    Tribe_Descr* tribe = m_parent->get_player()->get_tribe();
    for(long i = 0; i < tribe->get_nrbuildings(); i++) {
-      if(!strcmp(tribe->get_building_descr(i)->get_name(), "constructionsite")) continue;
-      if(!strcmp(tribe->get_building_descr(i)->get_name(), "headquarters")) continue;
+      if(!strcmp(tribe->get_building_descr(i)->get_name(), _("constructionsite"))) continue;
+      if(!strcmp(tribe->get_building_descr(i)->get_name(), _("headquarters"))) continue;
    
       const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(i);
       

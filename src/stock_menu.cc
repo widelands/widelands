@@ -32,7 +32,7 @@ Open the window, create the window buttons and add to the registry.
 ===============
 */
 Stock_Menu::Stock_Menu(Interactive_Player *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 640, 480, "Stock")
+	: UIUniqueWindow(parent, registry, 640, 480, _("Stock"))
 {
    m_parent = parent;
 

@@ -52,8 +52,8 @@ class MapEventChainManager {
       /*
        * Get a eventchain
        */
-      EventChain* get_eventchain( const wchar_t* name );
-      void delete_eventchain( const wchar_t* name );
+      EventChain* get_eventchain( const char* name );
+      void delete_eventchain( const char* name );
 
       inline int get_nr_eventchains( void ) { return m_eventchains.size(); }
       inline EventChain* get_eventchain_by_nr( int i ) { assert(i < (int)m_eventchains.size()); return m_eventchains[i]; }

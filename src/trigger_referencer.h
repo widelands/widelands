@@ -27,8 +27,8 @@ class Trigger;
  */
 class TriggerReferencer {
    public:
-      virtual const wchar_t* get_type( void ) = 0;
-      virtual const wchar_t* get_name( void ) = 0;
+      virtual const char* get_type( void ) = 0;
+      virtual const char* get_name( void ) = 0;
 
       void reference_trigger( Trigger* );
       void unreference_trigger( Trigger* );

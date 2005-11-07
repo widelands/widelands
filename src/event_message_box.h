@@ -38,8 +38,8 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       ~Event_Message_Box();
 
       // For trigger referenecer
-      virtual const wchar_t* get_type( void ) { return L"Event:MessageBox"; }
-      virtual const wchar_t* get_name( void ) { return Event::get_name(); }
+      virtual const char* get_type( void ) { return "Event:MessageBox"; }
+      virtual const char* get_name( void ) { return Event::get_name(); }
       
       // one liner functions
       const char* get_id(void) { return "message_box"; }
@@ -51,18 +51,18 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       void Write(Section*, Editor_Game_Base*);
       void Read(Section*, Editor_Game_Base*);
 
-      inline void set_text(const wchar_t* str) { m_text=str; }
-      inline const wchar_t* get_text(void) { return m_text.c_str(); }
-      inline void set_caption(const wchar_t* str) { m_caption=str; }
-      inline const wchar_t* get_caption(void) { return m_caption.c_str(); }
-      inline void set_window_title(const wchar_t* str) { m_window_title=str; }
-      inline const wchar_t* get_window_title(void) { return m_window_title.c_str(); }
+      inline void set_text(const char* str) { m_text=str; }
+      inline const char* get_text(void) { return m_text.c_str(); }
+      inline void set_caption(const char* str) { m_caption=str; }
+      inline const char* get_caption(void) { return m_caption.c_str(); }
+      inline void set_window_title(const char* str) { m_window_title=str; }
+      inline const char* get_window_title(void) { return m_window_title.c_str(); }
       inline void set_is_modal(bool t) {  m_is_modal=t; }
       inline bool get_is_modal(void) { return m_is_modal; }
       void set_button_trigger(int i, Trigger_Null* t);
       Trigger_Null* get_button_trigger(int i);
-      void set_button_name(int i, std::wstring);
-      const wchar_t* get_button_name(int i);
+      void set_button_name(int i, std::string);
+      const char* get_button_name(int i);
       void set_nr_buttons(int i);
       int get_nr_buttons(void);
 
@@ -77,13 +77,13 @@ class Event_Message_Box : public Event, public TriggerReferencer {
 
    private:
       struct Button_Descr {
-         std::wstring name;
+         std::string name;
          Trigger_Null *trigger;
       };
 
-      std::wstring m_text;
-      std::wstring m_caption;
-      std::wstring m_window_title;
+      std::string m_text;
+      std::string m_caption;
+      std::string m_window_title;
       bool m_is_modal;
 
       std::vector<Button_Descr> m_buttons;

@@ -60,13 +60,13 @@ void Widelands_Map_Objective_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
    if(packet_version==CURRENT_PACKET_VERSION) {
       while(( s = prof.get_next_section(0))) {
          MapObjective* o = new MapObjective();
-         o->set_name( widen_string( s->get_name()).c_str() );
-         o->set_descr( widen_string( s->get_safe_string("descr")).c_str());
+         o->set_name( s->get_name() );
+         o->set_descr( s->get_safe_string("descr"));
          o->set_is_visible( s->get_safe_bool("visible"));
          o->set_is_optional( s->get_safe_bool("optional"));
 
          const char* trigname = s->get_safe_string("trigger");
-         Trigger* trig = egbase->get_map()->get_mtm()->get_trigger( widen_string( trigname ).c_str() );
+         Trigger* trig = egbase->get_map()->get_mtm()->get_trigger( trigname );
          if( !trig ) 
             throw wexception("Unknown trigger referenced in Objective: %s\n", trigname );
          o->set_trigger( static_cast<Trigger_Null*>(trig) ); //mmh, maybe we should check if this is really a Trigger_Null. Aaaa, screw it.
@@ -94,13 +94,13 @@ void Widelands_Map_Objective_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
    // Write all the objectives out
    for(int i=0; i < mom->get_nr_objectives(); i++) {
       MapObjective* o = mom->get_objective_by_nr(i);
-      s = prof.create_section( narrow_string( o->get_name()).c_str() );
-      s->set_string("descr", narrow_string( o->get_descr()).c_str() );
+      s = prof.create_section( o->get_name() );
+      s->set_string("descr", o->get_descr() );
       s->set_bool("visible", o->get_is_visible());
       s->set_bool("optional", o->get_is_optional());
       Trigger_Null* trig = o->get_trigger();
       assert( trig );
-      s->set_string("trigger", narrow_string(trig->get_name()).c_str());
+      s->set_string("trigger", trig->get_name());
    }   
 
    prof.write("objective", false, fs );

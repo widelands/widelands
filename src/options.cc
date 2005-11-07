@@ -51,6 +51,7 @@ void options_shutdown()
  */
 static void show_usage(void)
 {
+	//TODO: i18n this whole block
 	log(
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "Options:\n"

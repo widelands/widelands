@@ -17,7 +17,6 @@
  *
  */
 
-#include <wchar.h>
 #include <vector>
 #include "map_event_manager.h"
 #include "event.h"
@@ -49,11 +48,11 @@ bool MapEventManager::register_new_event( Event* mv ) {
 /*
  * Get events
  */
-Event* MapEventManager::get_event( const wchar_t* name ) {
+Event* MapEventManager::get_event( const char* name ) {
    uint i;
    Event* retval = 0;
    for( i = 0; i < m_events.size(); i++) {
-      if( !wcscmp( m_events[i]->get_name(), name ) ) {
+      if( !strcmp( m_events[i]->get_name(), name ) ) {
          retval = m_events[i];
          break;
       }
@@ -65,9 +64,9 @@ Event* MapEventManager::get_event( const wchar_t* name ) {
 /*
  * Remove a event 
  */
-void MapEventManager::delete_event( const wchar_t* name ) {
+void MapEventManager::delete_event( const char* name ) {
    for( uint i = 0; i < m_events.size(); i++) {
-      if( !wcscmp( m_events[i]->get_name(), name ) ) {
+      if( !strcmp( m_events[i]->get_name(), name ) ) {
          delete m_events[i];
          m_events[i] = m_events[m_events.size() - 1];
          m_events.resize( m_events.size() - 1 );

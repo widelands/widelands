@@ -23,6 +23,8 @@
 #include "error.h"
 #include <string>
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 /*
  * The Map Variable Manager makes sure that variables
  * in the map are watched accordingly.
@@ -50,13 +52,13 @@ class MapVariable {
       virtual ~MapVariable( void ) { }
 
       inline bool is_delete_protected( void ) { return m_delete_protected; }
-      inline const wchar_t* get_name( void ) { return m_name.c_str(); }
-      inline void set_name( const wchar_t* name ) { m_name = name; }
+      inline const char* get_name( void ) { return m_name.c_str(); }
+      inline void set_name( const char* name ) { m_name = name; }
 
       virtual Type get_type( void ) = 0;
       
    private:
-      std::wstring   m_name;
+      std::string   m_name;
       bool           m_delete_protected;
 };
 
@@ -75,15 +77,15 @@ class Int_MapVariable : public MapVariable {
 
 class String_MapVariable : public MapVariable {
    public:
-      String_MapVariable( bool t ) : MapVariable( t ) { m_value = L""; }
+      String_MapVariable( bool t ) : MapVariable( t ) { m_value = ""; }
 
       virtual Type get_type( void ) { return MVT_STRING; }
 
-      const wchar_t* get_value( void ) { return m_value.c_str(); }
-      void set_value( const wchar_t* t ) { m_value = t; }
+      const char* get_value( void ) { return m_value.c_str(); }
+      void set_value( const char* t ) { m_value = t; }
 
    private:
-      std::wstring            m_value;
+      std::string            m_value;
 };
 
 /*
@@ -106,14 +108,14 @@ class MapVariableManager {
       /*
        * This prevents casting
        */
-      Int_MapVariable* get_int_variable( const wchar_t* name );
-      String_MapVariable* get_string_variable( const wchar_t* name );
+      Int_MapVariable* get_int_variable( const char* name );
+      String_MapVariable* get_string_variable( const char* name );
      
       /*
        * Get a variable
        */
-      MapVariable* get_variable( const wchar_t* name );
-      void delete_variable( const wchar_t* name );
+      MapVariable* get_variable( const char* name );
+      void delete_variable( const char* name );
 
       inline int get_nr_variables( void ) { return m_variables.size(); }
       inline MapVariable* get_variable_by_nr( int i ) { assert(i < (int)m_variables.size()); return m_variables[i]; }

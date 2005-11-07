@@ -30,6 +30,8 @@
 #include "util.h"
 #include "worker.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 /*
 =============================
 
@@ -220,9 +222,9 @@ std::string TrainingSite::get_statistics_string()
 		return m_prog_name;
 	} else
 		if (m_success)
-			return "Resting";
+			return _("Resting");
 		else
-			return "Not Working";
+			return _("Not Working");
 }
 
 

@@ -33,14 +33,14 @@
 #include "util.h"
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain) :
-   UIWindow(parent, 0, 0, 465, 340, "Edit Trigger Conditional") {
+   UIWindow(parent, 0, 0, 465, 340, _("Edit Trigger Conditional")) {
    
    m_parent=parent;
    m_given_cond = cond;
    m_event_chain = chain;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Edit Trigger Conditional Menu", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Edit Trigger Conditional Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -51,7 +51,7 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    const int ls_width = 180;
 
    // Trigger List
-   new UITextarea(this, posx, offsy, "Trigger Conditional: ", Align_Left);
+   new UITextarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
    m_construction= new UIListselect(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_construction->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_selected);
    m_construction->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked);
@@ -89,7 +89,7 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    b->set_enabled( false );
    m_insert_btn = b;
    b = new UIButton(this, posx, posy, 80, 20, 0, 21);
-   b->set_title("Delete");
+   b->set_title(_("Delete"));
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    b->set_enabled( false );
    m_delete_btn = b;
@@ -108,24 +108,24 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    posy += 24 + spacing + spacing; 
 
    posx += 80 + spacing;
-   new UITextarea(this, posx, offsy, "Available Triggers: ", Align_Left);
+   new UITextarea(this, posx, offsy, _("Available Triggers: "), Align_Left);
    m_trigger_list=new UIListselect(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
    for(int i=0; i < parent->get_egbase()->get_map()->get_mtm()->get_nr_triggers(); i++) {
       Trigger* tr = parent->get_egbase()->get_map()->get_mtm()->get_trigger_by_nr(i);
-      m_trigger_list->add_entry( narrow_string( tr->get_name()).c_str(), tr);
+      m_trigger_list->add_entry( tr->get_name(), tr);
    }
    m_trigger_list->sort();
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
    b=new UIButton(this, posx, posy, 80, 20, 0, 1);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 80, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
 
    // Add conditional
@@ -141,7 +141,7 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
             case TriggerConditional_Factory::OR: str = "OR"; break;
             case TriggerConditional_Factory::XOR: str = "XOR"; break;
             case TriggerConditional_Factory::NOT: str = "NOT"; break;
-            case TriggerConditional_Factory::TRIGGER: str = narrow_string( static_cast<Trigger*>(t->data)->get_name()); break;
+            case TriggerConditional_Factory::TRIGGER: str = static_cast<Trigger*>(t->data)->get_name(); break;
             default: assert( 0 ); break; // This is not possible
          }
          m_construction->add_entry(str.c_str(), t, true);
@@ -198,7 +198,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
          m_given_cond = cond;
          end_modal( 1 );
       } catch(  TriggerConditional_Factory::SyntaxError err ) {
-         UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, "Syntax Error", "You're conditional contains at least one syntax error. Please correct!\n", 
+         UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, _("Syntax Error"), _("Your conditional contains at least one syntax error. Please correct!\n"), 
                UIModal_Message_Box::OK);
          mb->run();
          delete mb;
@@ -228,7 +228,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
       TriggerConditional_Factory::Token* t = new TriggerConditional_Factory::Token();
       t->data = trig;
       t->token = TriggerConditional_Factory::TRIGGER;
-      m_construction->add_entry( narrow_string( trig->get_name()).c_str(), t, true);
+      m_construction->add_entry( trig->get_name(), t, true);
    }
 
    // Delete a trigger

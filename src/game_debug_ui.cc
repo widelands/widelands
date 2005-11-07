@@ -262,7 +262,7 @@ Initialize the field debug window.
 ===============
 */
 FieldDebugWindow::FieldDebugWindow(Interactive_Base* parent, Coords coords)
-	: UIWindow(parent, 0, 0, 200, 200, "Debug Field")
+	: UIWindow(parent, 0, 0, 200, 200, _("Debug Field"))
 {
 	m_map = parent->get_map();
 	m_coords = m_map->get_fcoords(coords);
@@ -305,8 +305,8 @@ void FieldDebugWindow::think()
 
 	// Select information about the field itself
 	str = "";
-	snprintf(buf, sizeof(buf), "%i, %i - height: %i\n",
-			m_coords.x, m_coords.y, m_coords.field->get_height());
+	snprintf(buf, sizeof(buf), "%i, %i - %s %i\n",
+			m_coords.x, m_coords.y, _("height:"), m_coords.field->get_height());
 	str += buf;
 
 	m_ui_field->set_text(str.c_str());

@@ -29,6 +29,7 @@
 #include "tribe.h"
 #include "worker.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
 
 /**
 =============================
@@ -140,9 +141,9 @@ std::string MilitarySite::get_statistics_string()
 {
    char str[255];
    if (m_soldier_requests.size())
-      sprintf (str, "%d soldiers (+%d)", (int)m_soldiers.size(), (int)m_soldier_requests.size());
+      snprintf (str, 255, "%d %s (+%d)", (int)m_soldiers.size(), _("soldiers"), (int)m_soldier_requests.size());
    else
-      sprintf (str, "%d soldiers", (int)m_soldiers.size());
+      snprintf (str, 255, "%d %s", (int)m_soldiers.size(), _("soldiers"));
    
    return str;
 }

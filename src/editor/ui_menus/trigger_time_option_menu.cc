@@ -30,11 +30,11 @@
 #include "util.h"
 
 Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, Trigger_Time* trigger) :
-   UIWindow(parent, 0, 0, 164, 180, "Trigger Option Menu") {
+   UIWindow(parent, 0, 0, 164, 180, _("Trigger Option Menu")) {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Time Trigger Options", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Time Trigger Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -56,9 +56,9 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
    m_values[4]=(wait_time)/10; // seconds
    m_values[5]=(wait_time)%10;
 
-   new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+50, posy, get_inner_w()-50-2*spacing, 20, 0, 0);
-   m_name->set_text( narrow_string( trigger->get_name()).c_str() );
+   m_name->set_text( trigger->get_name() );
 
    posy+=20+spacing;
 
@@ -135,11 +135,11 @@ Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, T
    // Buttons
    posx=(get_inner_w()/2)-60-spacing;
    b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Trigger_Time_Option_Menu::clicked);
 
    center_to_parent();
@@ -183,7 +183,7 @@ void Trigger_Time_Option_Menu::clicked(int i) {
       // ok button
       m_trigger->set_wait_time(total);
       if(m_name->get_text())
-         m_trigger->set_name( widen_string( m_name->get_text()).c_str() );
+         m_trigger->set_name( m_name->get_text() );
       end_modal(1);
       return;
    }

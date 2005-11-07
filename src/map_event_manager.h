@@ -51,8 +51,8 @@ class MapEventManager {
       /*
        * Get a event
        */
-      Event* get_event( const wchar_t* name );
-      void delete_event( const wchar_t* name );
+      Event* get_event( const char* name );
+      void delete_event( const char* name );
 
       /*
        * Delete all unreferenced events

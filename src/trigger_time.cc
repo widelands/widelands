@@ -22,6 +22,8 @@
 #include "filesystem.h"
 #include "game.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 static const int TRIGGER_VERSION = 1;
 
 /*
@@ -30,7 +32,7 @@ static const int TRIGGER_VERSION = 1;
 Trigger_Time::Trigger_Time(void) {
    m_last_start_time=0;
    m_wait_time=60; // defaults to one minute
-   set_name(L"Time Trigger");
+   set_name(_("Time Trigger"));
    set_trigger(false);
 }
 

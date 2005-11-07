@@ -26,6 +26,8 @@
 #include "types.h"
 #include "world.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 using std::cerr;
 using std::ios;
 using std::endl;
@@ -243,12 +245,12 @@ void S2_Map_Loader::load_s2mf_header()
 	m_map->set_author(header.author);
 	m_map->set_name(header.name);
 	m_map->set_nrplayers(header.nplayers);
-	m_map->set_description("Bluebyte Settlers II Map. No comment defined!");
+	m_map->set_description(_("Bluebyte Settlers II Map. No comment defined!"));
 
 	switch(header.uses_world) {
-	case 0: m_map->set_world_name("greenland"); break;
-	case 1: m_map->set_world_name("blackland"); break;
-	case 2: m_map->set_world_name("winterland"); break;
+	case 0: m_map->set_world_name(_("greenland")); break;
+	case 1: m_map->set_world_name(_("blackland")); break;
+	case 2: m_map->set_world_name(_("winterland")); break;
 	}
 }
 

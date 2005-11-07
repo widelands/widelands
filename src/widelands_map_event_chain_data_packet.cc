@@ -60,7 +60,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
 
    /*
    
-   std::wstring        m_name;
+   std::string        m_name;
       bool                m_repeating;
       TriggerConditional* m_trigconditional;
       std::vector<Event*> m_events;
@@ -77,7 +77,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
          EventChain* e = new EventChain();
          
          // Name
-         e->set_name( widen_string(name).c_str());
+         e->set_name( name.c_str() );
          
          // Repeating
          e->m_repeating = s->get_safe_bool( "repeating" );
@@ -96,7 +96,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
                tok.token = TriggerConditional_Factory::TRIGGER;
                sprintf(buf, "conditional_element_%02i_data", i);
                std::string trigname = s->get_safe_string( buf );
-               Trigger* trig = egbase->get_map()->get_mtm()->get_trigger( widen_string( trigname ).c_str() );
+               Trigger* trig = egbase->get_map()->get_mtm()->get_trigger( trigname.c_str() );
                if( !trig ) 
                   throw wexception( "Trigger Conditional of Event Chain %s references unknown trigger %s!\n", name.c_str(), trigname.c_str());
                tok.data = trig;
@@ -122,7 +122,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
          for( uint i = 0; i < nr_events; i++) {
             sprintf(buf, "event_%02i", i);
             std::string evname = s->get_safe_string( buf );
-            Event* event = egbase->get_map()->get_mem()->get_event( widen_string( evname ).c_str() );
+            Event* event = egbase->get_map()->get_mem()->get_event( evname.c_str() );
             if( !event ) 
                throw wexception( "Event Chain %s references unknown event %s!\n", name.c_str(), evname.c_str());
             e->add_event( event );
@@ -157,7 +157,7 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
    Map* map = egbase->get_map();
    for(int i=0; i<map->get_mecm()->get_nr_eventchains(); i++) {
       EventChain* e = map->get_mecm()->get_eventchain_by_nr(i);
-      s = prof.create_section( narrow_string( e->get_name()).c_str());
+      s = prof.create_section( e->get_name());
 
       s->set_bool( "repeating", e->m_repeating );
       
@@ -175,7 +175,7 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
             case TriggerConditional_Factory::TRIGGER: 
                s->set_string( buf, "trigger");
                sprintf(buf, "conditional_element_%02i_data", i);
-               s->set_string( buf, narrow_string( static_cast<Trigger*>(tok.data)->get_name()).c_str());
+               s->set_string( buf, static_cast<Trigger*>(tok.data)->get_name());
                break;
 
             case TriggerConditional_Factory::RPAREN:
@@ -210,7 +210,7 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
       s->set_int( "nr_events", e->m_events.size());
       for( uint i = 0; i < e->m_events.size(); i++) {
          sprintf(buf, "event_%02i", i);
-         s->set_string( buf, narrow_string( e->m_events[i]->get_name()).c_str());
+         s->set_string( buf, e->m_events[i]->get_name());
       }
 
       // Which is the current event

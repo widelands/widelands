@@ -48,7 +48,7 @@ constructor
 */
 Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_Menu(Editor_Interactive* parent, int index,
       Editor_Increase_Resources_Tool* iht, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, index, registry, "Resources Tools Options") {
+   Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options")) {
 
    m_parent=parent;
    m_irt=iht;
@@ -87,10 +87,10 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    int posx=offsx;
    int posy=offsy;
    int button_width=20;
-   UITextarea* ta=new UITextarea(this, 0, 0, "Resources Tool Options", Align_Left);
+   UITextarea* ta=new UITextarea(this, 0, 0, _("Resources Tool Options"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
-   ta=new UITextarea(this, 0, 0, "In/Decrease Value", Align_Left);
+   ta=new UITextarea(this, 0, 0, _("In/Decrease Value"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=spacing+button_width;
    UIButton* b=new UIButton(this, posx, posy, button_width, resources, 1, 0);
@@ -103,7 +103,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
    posy+=button_width+spacing+spacing;
 
-   ta=new UITextarea(this, 0, 0, "Set Value", Align_Left);
+   ta=new UITextarea(this, 0, 0, _("Set Value"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=button_width+spacing;
    b=new UIButton(this, posx, posy, button_width, resources, 1, 2);
@@ -116,7 +116,7 @@ Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_
    m_set->set_pos((get_inner_w()-m_set->get_w())/2, posy+5);
    posy+=button_width+spacing;
 
-   m_cur_selection=new UITextarea(this, 0, 0, "Current Selection", Align_Left);
+   m_cur_selection=new UITextarea(this, 0, 0, _("Current Selection"), Align_Left);
 
    // Now the available resources
    posx=xstart;

@@ -393,12 +393,12 @@ void Map::create_empty_map(int w, int h, std::string worldname) {
    set_world_name(worldname.c_str());
    load_world();
    set_size(w,h);
-   set_name("No Name");
-   set_author("Unknown");
-   set_description("no description defined");
+   set_name(_("No Name"));
+   set_author(_("Unknown"));
+   set_description(_("no description defined"));
    set_nrplayers(1);
-   set_scenario_player_tribe(1, "<undefined>");
-   set_scenario_player_name(1, "Player 1");
+   set_scenario_player_tribe(1, _("<undefined>"));
+   set_scenario_player_name(1, _("Player 1"));
 
    for(int y=0; y<h; y++) {
       for(int x=0; x<w; x++) {

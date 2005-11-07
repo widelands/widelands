@@ -61,13 +61,13 @@ void Widelands_Map_Variable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
          std::string type = s->get_safe_string("type");
          if( type == "int" ) {
             Int_MapVariable* v = new Int_MapVariable( s->get_safe_bool( "delete_protected" ) );
-            v->set_name( widen_string( s->get_name()).c_str() );
+            v->set_name( s->get_name() );
             v->set_value( s->get_safe_int("value")); 
             mvm->register_new_variable( v );
          } else if( type == "string" ) {
             String_MapVariable* v = new String_MapVariable( s->get_safe_bool( "delete_protected" ) );
-            v->set_name( widen_string( s->get_name()).c_str() );
-            v->set_value( widen_string( s->get_safe_string("value")).c_str() ); 
+            v->set_name( s->get_name() );
+            v->set_value( s->get_safe_string("value") ); 
             mvm->register_new_variable( v );
          } else 
             throw wexception("Unknown Map Variable type %s\n", type.c_str());
@@ -95,7 +95,7 @@ void Widelands_Map_Variable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
    // Now, all positions in order, first x, then y
    for(int i=0; i < mvm->get_nr_variables(); i++) {
       MapVariable* v = mvm->get_variable_by_nr(i);
-      s = prof.create_section( narrow_string( v->get_name()).c_str() );
+      s = prof.create_section( v->get_name() );
       s->set_bool("delete_protected", v->is_delete_protected());
       switch( v->get_type() ) {
          case MapVariable::MVT_INT: 
@@ -108,7 +108,7 @@ void Widelands_Map_Variable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
          case MapVariable::MVT_STRING: 
          {
             s->set_string("type", "string");
-            s->set_string("value", narrow_string( static_cast<String_MapVariable*>(v)->get_value()).c_str());
+            s->set_string("value", static_cast<String_MapVariable*>(v)->get_value());
          }
          break;
 

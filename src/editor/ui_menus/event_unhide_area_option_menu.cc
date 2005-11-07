@@ -33,12 +33,12 @@
 #include "util.h"
 
 Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive* parent, Event_Unhide_Area* event) :
-   UIWindow(parent, 0, 0, 180, 280, "Event Option Menu") {
+   UIWindow(parent, 0, 0, 180, 280, _("Event Option Menu")) {
    m_parent=parent;
    m_event=event;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Unhide Area Event Options", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Unhide Area Event Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    Coords pt=event->get_coords();
@@ -54,13 +54,13 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
 
 
    // Name editbox
-   new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( narrow_string( event->get_name()).c_str() );
+   m_name->set_text( event->get_name() );
    posy+=20+spacing;
 
    // Set Field Buttons
-   new UITextarea(this, spacing, posy, get_inner_w(), 15, "Current position: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
    posy+=20+spacing;
    // X
    UIButton* b=new UIButton(this, spacing+20, posy, 20, 20, 0, 3);
@@ -111,7 +111,7 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
 
    // Player
    posy+=60+spacing;
-   new UITextarea(this, spacing, posy, 70, 20, "Player: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
    m_player_ta=new UITextarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
    b=new UIButton(this, spacing+90, posy, 20, 20, 0, 15);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
@@ -122,7 +122,7 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
 
    // Area
    posy+=20+spacing;
-   new UITextarea(this, spacing, posy+20, 70, 20, "Area: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy+20, 70, 20, _("Area: "), Align_CenterLeft);
    b=new UIButton(this, spacing+70, posy, 20, 20, 0, 17);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
@@ -148,11 +148,11 @@ Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive*
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-20-spacing;
    b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Event_Unhide_Area_Option_Menu::clicked);
 
    center_to_parent();
@@ -198,7 +198,7 @@ void Event_Unhide_Area_Option_Menu::clicked(int i) {
          {
             // ok button
             if(m_name->get_text())
-               m_event->set_name( widen_string( m_name->get_text()).c_str() );
+               m_event->set_name( m_name->get_text() );
             m_event->set_coords(Coords(m_x,m_y));
             m_event->set_player(m_player);
             m_event->set_area(m_area);

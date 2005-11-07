@@ -39,7 +39,7 @@ class Game_Server_Protocol_Packet_UserEntered : public Game_Server_Protocol_Pack
       virtual void handle_reply(Game_Server_Connection*, Network_Buffer*) { };
 
    private:
-      std::wstring m_name;
+      std::string m_name;
 };
 
 

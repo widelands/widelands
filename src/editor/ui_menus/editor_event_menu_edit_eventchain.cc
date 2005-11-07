@@ -37,13 +37,13 @@
 #include "util.h"
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Interactive* parent, EventChain* chain) :
-   UIWindow(parent, 0, 0, 505, 340, "Edit Event Chain") {
+   UIWindow(parent, 0, 0, 505, 340, _("Edit Event Chain")) {
    
    m_parent=parent;
    m_event_chain = chain;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Edit Event Chain Menu", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Edit Event Chain Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -54,20 +54,20 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    const int ls_width = 200;
 
    // Name
-   new UITextarea( this, posx, posy, 60, 20, "Name: ", Align_CenterLeft); 
+   new UITextarea( this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft); 
    m_name = new UIEdit_Box( this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( narrow_string( m_event_chain->get_name()).c_str() ); 
+   m_name->set_text( m_event_chain->get_name() ); 
    posy += 20 + spacing;
    
    // More then once
-   new UITextarea( this, posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT, "Runs multiple times", Align_CenterLeft);
+   new UITextarea( this, posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT, _("Runs multiple times"), Align_CenterLeft);
    m_morethanonce = new UICheckbox( this, posx, posy );
    m_morethanonce->set_state( m_event_chain->get_repeating() );
    posy += STATEBOX_HEIGHT + spacing;
    const int lsoffsy = posy;
 
    // Event List
-   new UITextarea(this, posx, lsoffsy, "Events: ", Align_Left);
+   new UITextarea(this, posx, lsoffsy, _("Events: "), Align_Left);
    m_events= new UIListselect(this, spacing, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::cs_selected);
    m_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::cs_double_clicked);
@@ -75,11 +75,11 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
 
    posy = 75;
    UIButton* b = new UIButton(this, posx, posy, 80, 20, 0, 10);
-   b->set_title("Conditional");
+   b->set_title(_("Conditional"));
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    posy += 20 + spacing + spacing;
    b = new UIButton(this, posx, posy, 80, 20, 0, 11);
-   b->set_title("New Event");
+   b->set_title(_("New Event"));
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    posy += 20 + spacing + spacing;
    b = new UIButton(this, posx, posy, 80, 20, 0, 20);
@@ -89,7 +89,7 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    b->set_enabled( false );
    m_insert_btn = b;
    b = new UIButton(this, posx, posy, 80, 20, 0, 21);
-   b->set_title("Delete");
+   b->set_title(_("Delete"));
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    b->set_enabled( false );
    m_delete_btn = b;
@@ -108,29 +108,29 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    posy += 24 + spacing + spacing; 
 
    posx += 80 + spacing;
-   new UITextarea(this, posx, lsoffsy, "Available Events: ", Align_Left);
+   new UITextarea(this, posx, lsoffsy, _("Available Events: "), Align_Left);
    m_available_events=new UIListselect(this, posx, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_available_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::tl_selected);
    m_available_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::tl_double_clicked);
    for(int i=0; i < parent->get_egbase()->get_map()->get_mem()->get_nr_events(); i++) {
       Event* ev = parent->get_egbase()->get_map()->get_mem()->get_event_by_nr(i);
-      m_available_events->add_entry( narrow_string( ev->get_name() ).c_str(), ev);
+      m_available_events->add_entry( ev->get_name(), ev);
    }
    m_available_events->sort();
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
    b=new UIButton(this, posx, posy, 80, 20, 0, 1);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 80, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
 
    for( uint i = 0; i < m_event_chain->get_nr_events(); i++ ) {
       Event* ev = m_event_chain->get_event( i );
-      m_events->add_entry( narrow_string( ev->get_name()).c_str(), ev );
+      m_events->add_entry( ev->get_name(), ev );
    }
       
    m_edit_trigcond = m_event_chain->get_trigcond() ? false : true;
@@ -182,7 +182,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
    // ok
    if(i == 1) {
       // Name
-      m_event_chain->set_name( widen_string( m_name->get_text() ).c_str() );
+      m_event_chain->set_name( m_name->get_text() );
       // Repeating
       m_event_chain->set_repeating( m_morethanonce->get_state() );
       // Trigger Conditional is always updated
@@ -216,7 +216,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
    // Insert event 
    if( i == 20 ) {
       Event* ev = static_cast<Event*>(m_available_events->get_selection());
-      m_events->add_entry( narrow_string( ev->get_name()).c_str(), ev, true);
+      m_events->add_entry( ev->get_name(), ev, true);
    }
 
    // Delete a event 

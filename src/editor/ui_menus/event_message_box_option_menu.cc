@@ -36,12 +36,12 @@
 #include "util.h"
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive* parent, Event_Message_Box* event) :
-   UIWindow(parent, 0, 0, 430, 400, "Event Option Menu") {
+   UIWindow(parent, 0, 0, 430, 400, _("Event Option Menu")) {
    m_parent=parent;
    m_event=event;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Message Box Event Options", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Message Box Event Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -52,45 +52,45 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    m_nr_buttons=m_event->get_nr_buttons();
    m_ls_selected=0;
 
-   m_buttons[0].name=L"Continue";
-   m_buttons[1].name=L"Button 1";
-   m_buttons[2].name=L"Button 2";
-   m_buttons[3].name=L"Button 3";
+   m_buttons[0].name=_("Continue");
+   m_buttons[1].name=_("Button 1");
+   m_buttons[2].name=_("Button 2");
+   m_buttons[3].name=_("Button 3");
    m_buttons[0].trigger=m_buttons[1].trigger=m_buttons[2].trigger=m_buttons[3].trigger=-1;
 
 
    // Name editbox
-   new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
-   m_name->set_text( narrow_string( event->get_name()).c_str() );
+   m_name->set_text( event->get_name() );
 
    // Caption
-   new UITextarea(this, spacing, posy, 60, 20, "Caption:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 60, 20, _("Caption:"), Align_CenterLeft);
    m_caption=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 1);
-   m_caption->set_text( narrow_string( m_event->get_caption()).c_str() );
+   m_caption->set_text( m_event->get_caption() );
 
    // Modal cb
-   new UITextarea(this, get_inner_w()/2+spacing, posy, 150, 20, "Is Modal: ", Align_CenterLeft);
+   new UITextarea(this, get_inner_w()/2+spacing, posy, 150, 20, _("Is Modal: "), Align_CenterLeft);
    m_is_modal=new UICheckbox(this, get_inner_w()-STATEBOX_WIDTH-spacing, posy);
    m_is_modal->set_state(m_event->get_is_modal());
 
    posy+=20+spacing;
 
    // Window Title
-   new UITextarea(this, spacing, posy, 50, 20, "Window Title:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 50, 20, _("Window Title:"), Align_CenterLeft);
    m_window_title=new UIEdit_Box(this, spacing+100, posy, get_inner_w()-100-2*spacing, 20, 0, 2);
-   m_window_title->set_text( narrow_string( m_event->get_window_title()).c_str() );
+   m_window_title->set_text( m_event->get_window_title() );
 
    // Text
    posy+=20+spacing;
-   new UITextarea(this, spacing, posy, 50, 20, "Text:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 50, 20, _("Text:"), Align_CenterLeft);
    posy+=20+spacing;
-   m_text=new UIMultiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, narrow_string( event->get_text()).c_str() );
+   m_text=new UIMultiline_Editbox(this, spacing, posy, get_inner_w()-2*spacing, 80, event->get_text() );
 
    posy+=80+spacing;
 
    // Nur Buttons
-   new UITextarea(this, spacing, posy, 130, 20, "Number of Buttons: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 130, 20, _("Number of Buttons: "), Align_CenterLeft);
    UIButton* b=new UIButton(this, spacing+140, posy, 20, 20, 0, 2);
    b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
@@ -101,7 +101,7 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
 
    // Button name
    posy+=20+spacing;
-   new UITextarea(this, spacing, posy, 100, 20, "Button Name: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 100, 20, _("Button Name: "), Align_CenterLeft);
    m_button_name=new UIEdit_Box(this, spacing+110, posy, 100, 20, 0, 3);
    m_button_name->changedid.set(this, &Event_Message_Box_Option_Menu::edit_box_edited);
 
@@ -111,7 +111,7 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
 
    // Select trigger
    posy+=20+spacing;
-   new UITextarea(this, spacing, posy, 100, 20, "Select Trigger: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 100, 20, _("Select Trigger: "), Align_CenterLeft);
    b=new UIButton(this, spacing+110, posy, 20, 20, 0, 4);
    b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
@@ -121,18 +121,18 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
 
    // Current Trigger
    posy+=20+spacing;
-   new UITextarea(this, spacing, posy, 100, 20, "Current: ", Align_CenterLeft);
-   m_current_trigger_ta=new UITextarea(this, spacing+15, posy+15+spacing, get_inner_w()/2, 20, "Keine Trigger gewaehlt!", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 100, 20, _("Current: "), Align_CenterLeft);
+   m_current_trigger_ta=new UITextarea(this, spacing+15, posy+15+spacing, get_inner_w()/2, 20, _("No trigger selected!"), Align_CenterLeft);
 
    // Ok/Cancel Buttons
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-30;
    b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
 
    int i=0;
@@ -201,17 +201,17 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
          {
             // ok button
             if(m_name->get_text())
-               m_event->set_name( widen_string( m_name->get_text()).c_str() );
+               m_event->set_name( m_name->get_text() );
             if(m_text->get_text().c_str())
-               m_event->set_text( widen_string( m_text->get_text().c_str()).c_str() );
+               m_event->set_text( m_text->get_text().c_str() );
             if(m_caption->get_text())
-               m_event->set_caption( widen_string( m_caption->get_text()).c_str() );
+               m_event->set_caption( m_caption->get_text() );
             if(m_window_title->get_text())
-               m_event->set_window_title( widen_string( m_window_title->get_text()).c_str() );
+               m_event->set_window_title( m_window_title->get_text() );
             m_event->set_is_modal(m_is_modal->get_state());
             m_event->set_nr_buttons(m_nr_buttons);
             for(int i=0; i<m_nr_buttons; i++) {
-               m_event->set_button_name(i, m_buttons[i].name.c_str());
+               m_event->set_button_name(i, m_buttons[i].name);
                if(m_buttons[i].trigger!=-1) {
                   m_event->set_button_trigger(i, static_cast<Trigger_Null*>(m_parent->get_map()->get_mtm()->get_trigger_by_nr(m_null_triggers[m_buttons[i].trigger])));
                } else {
@@ -277,20 +277,20 @@ void Event_Message_Box_Option_Menu::update(void) {
    m_buttons_ls->clear();
    int i;
    for(i=0; i<m_nr_buttons; i++)
-      m_buttons_ls->add_entry( narrow_string( m_buttons[i].name).c_str(), 0);
+      m_buttons_ls->add_entry( m_buttons[i].name.c_str(), 0);
 
    std::string text;
    text.append(1,static_cast<uchar>(m_nr_buttons+0x30));
    m_nr_buttons_ta->set_text(text.c_str());
 
 
-   m_button_name->set_text( narrow_string( m_buttons[m_ls_selected].name).c_str());
+   m_button_name->set_text( m_buttons[m_ls_selected].name.c_str());
 
    if(m_nr_buttons && m_null_triggers.size()) {
       if(m_buttons[m_ls_selected].trigger==-1)
          m_current_trigger_ta->set_text("none");
       else
-         m_current_trigger_ta->set_text( narrow_string( m_parent->get_map()->get_mtm()->get_trigger_by_nr(m_null_triggers[m_buttons[m_ls_selected].trigger])->get_name()).c_str());
+         m_current_trigger_ta->set_text( m_parent->get_map()->get_mtm()->get_trigger_by_nr(m_null_triggers[m_buttons[m_ls_selected].trigger])->get_name());
    } else {
       m_current_trigger_ta->set_text("---");
       m_buttons[0].trigger=-1;
@@ -309,6 +309,6 @@ void Event_Message_Box_Option_Menu::ls_selected(int i) {
  * Button name edit box edited
  */
 void Event_Message_Box_Option_Menu::edit_box_edited(int i) {
-   m_buttons[m_ls_selected].name= widen_string( m_button_name->get_text()) ;
+   m_buttons[m_ls_selected].name= m_button_name->get_text() ;
    update();
 }

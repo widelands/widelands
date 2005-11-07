@@ -58,9 +58,9 @@ class EventChain : public EventReferencer, public TriggerReferencer {
       } 
       virtual ~EventChain( void ) { }
 
-      const wchar_t* get_name( void ) { return m_name.c_str(); }
-      const wchar_t* get_type( void ) { return L"EventChain"; }
-      inline void set_name( const wchar_t* name ) { m_name = name; }
+      const char* get_name( void ) { return m_name.c_str(); }
+      const char* get_type( void ) { return "EventChain"; }
+      inline void set_name( const char* name ) { m_name = name; }
       inline bool get_repeating( void ) { return m_repeating; }
       inline TriggerConditional* get_trigcond( void ) { return m_trigconditional; }
       inline void set_trigcond( TriggerConditional* t) { m_trigconditional = t; }
@@ -79,7 +79,7 @@ class EventChain : public EventReferencer, public TriggerReferencer {
       State run( Game* g);
 
    private:
-      std::wstring        m_name;
+      std::string        m_name;
       bool                m_repeating;
       TriggerConditional* m_trigconditional;
       std::vector<Event*> m_events;

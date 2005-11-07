@@ -56,8 +56,8 @@ class MapTriggerManager {
       /*
        * Get a trigger
        */
-      Trigger* get_trigger( const wchar_t* name );
-      void delete_trigger( const wchar_t* name );
+      Trigger* get_trigger( const char* name );
+      void delete_trigger( const char* name );
 
       inline int get_nr_triggers( void ) { return m_triggers.size(); }
       inline Trigger* get_trigger_by_nr( int i ) { assert(i < (int)m_triggers.size()); return m_triggers[i]; }

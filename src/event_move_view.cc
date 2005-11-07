@@ -31,7 +31,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Move_View::Event_Move_View(void) {
-   set_name(L"Move View");
+   set_name(_("Move View"));
    set_coords(Coords(0,0));
 }
 

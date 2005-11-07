@@ -46,12 +46,12 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
-	: UIWindow(parent, 0, 0, 500, 330, "Save Map")
+	: UIWindow(parent, 0, 0, 500, 330, _("Save Map"))
 {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Save Map", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Save Map"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    int spacing=5;
@@ -72,33 +72,33 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    // Name
    posx=get_inner_w()/2+spacing;
    posy+=20;
-   new UITextarea(this, posx, posy, 150, 20, "Name: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 150, 20, _("Name: "), Align_CenterLeft);
    m_name=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Author
-   new UITextarea(this, posx, posy, 150, 20, "Author: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 150, 20, _("Author: "), Align_CenterLeft);
    m_author=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Size
-   new UITextarea(this, posx, posy, 70, 20, "Size: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("Size: "), Align_CenterLeft);
    m_size=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // World
-   new UITextarea(this, posx, posy, 70, 20, "World: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("World: "), Align_CenterLeft);
    m_world=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Players
-   new UITextarea(this, posx, posy, 70, 20, "Players: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("Players: "), Align_CenterLeft);
    m_nrplayers=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
 
    // Description
-   new UITextarea(this, posx, posy, 70, 20, "Descr: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
    m_descr=new UIMultiline_Textarea(this, posx+70, posy, get_inner_w()-posx-spacing-70, get_inner_h()-posy-spacing-40, "---", Align_CenterLeft);
    
    
@@ -107,15 +107,15 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    posy=get_inner_h()-30;
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title("OK");
+   but->set_title(_("OK"));
    but->set_enabled(false); 
    m_ok_btn=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title("Cancel");
+   but->set_title(_("Cancel"));
    but= new UIButton(this, spacing, posy, 120, 20, 1, 2);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title("Make Directory");
+   but->set_title(_("Make Directory"));
    
 
    m_basedir="maps";
@@ -170,7 +170,7 @@ void Main_Menu_Save_Map::clicked(int id) {
       die();
    } else if(id==2) {
       // Make directory
-      Main_Menu_Save_Map_Make_Directory* md=new Main_Menu_Save_Map_Make_Directory(this, "unnamed");
+      Main_Menu_Save_Map_Make_Directory* md=new Main_Menu_Save_Map_Make_Directory(this, _("unnamed"));
       if(md->run()) {
          g_fs->EnsureDirectoryExists(m_basedir);
          // Create directory
@@ -331,10 +331,10 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 
    // Check if file exists, if it does, show a warning
    if(g_fs->FileExists(complete_filename)) {
-      std::string s="A File with the name ";
+      std::string s=_("A File with the name ");
       s+=FS_Filename(filename.c_str());
-      s+=" exists already. Overwrite?";
-      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, "Save Map Error!!", s, UIModal_Message_Box::YESNO);
+      s+=_(" exists already. Overwrite?");
+      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Map Error!!"), s, UIModal_Message_Box::YESNO);
       bool retval=mbox->run();
       delete mbox;
       if(!retval) 
@@ -357,9 +357,9 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       wms->save();
       m_parent->set_need_save(false);
    } catch(std::exception& exe) {
-      std::string s="Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason given:\n";
+      std::string s=_("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason given:\n");
       s+=exe.what();
-      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, "Save Map Error!!", s, UIModal_Message_Box::OK);
+      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Map Error!!"), s, UIModal_Message_Box::OK);
       mbox->run();
       delete mbox;
    }

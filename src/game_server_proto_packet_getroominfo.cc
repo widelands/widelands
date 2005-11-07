@@ -26,10 +26,12 @@
 #include "util.h"
 #include "wexception.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 /*
  * Constructor
  */
-Game_Server_Protocol_Packet_GetRoomInfo::Game_Server_Protocol_Packet_GetRoomInfo( std::wstring room ) {
+Game_Server_Protocol_Packet_GetRoomInfo::Game_Server_Protocol_Packet_GetRoomInfo( std::string room ) {
    m_roomname = room;
 }
 
@@ -60,10 +62,9 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
    uchar flags = buf->get_8();
 
    if(flags == RI_NONEXISTANT) {
-      wchar_t buffer[1024];
+      char buffer[1024];
 
-      swprintf(buffer, 1024, L"The Room %s is currently not logged in or unknown to the server.\n", 
-            m_roomname.c_str());
+      snprintf(buffer, 1024, "%s %s %s", _("The Room"), m_roomname.c_str(), _("is currently not logged in or unknown to the server.\n"));
 
       gsc->server_message( buffer );
       return;
@@ -73,7 +74,7 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
 
    ushort nrusers = buf->get_16();
 
-   std::vector< std::wstring > users;
+   std::vector< std::string > users;
    
    for(uint i = 0; i < nrusers; i++) {
       users.push_back( buf->get_string() );

@@ -189,7 +189,7 @@ exit the editor
 void Editor_Interactive::exit_editor()
 {
 	if(m_need_save) {
-      UIModal_Message_Box* mmb=new UIModal_Message_Box(this, "Map unsaved", "The Map is unsaved, do you really want to quit?", UIModal_Message_Box::YESNO);
+      UIModal_Message_Box* mmb=new UIModal_Message_Box(this, _("Map unsaved"), _("The Map is unsaved, do you really want to quit?"), UIModal_Message_Box::YESNO);
       int code=mmb->run();
       delete mmb;
       if(code==0) return;

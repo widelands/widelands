@@ -38,12 +38,11 @@
 static const int nr_of_events=5;
 
 Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
-   { "message_box", "Message Box", "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned"
-                                       " to each button to use this as a Choose Dialog for the user" },
-   { "move_view", "Move View", "This Event centers the Players View on a certain field" },
-   { "unhide_area", "Unhide Area", "This Event makes a user definable part of the map visible for a selectable user" },
-   { "conquer_area", "Conquer Area", "This Event conquers a user definable part of the map for one player if there isn't a player already there" },
-   { "allow_building", "Allow Building", "Allows/Disables a certain building for a player so that it can be build or it can't any longer" },
+   { "message_box", _("Message Box"), _("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user") },
+   { "move_view", _("Move View"), _("This Event centers the Players View on a certain field") },
+   { "unhide_area", _("Unhide Area"), _("This Event makes a user definable part of the map visible for a selectable user") },
+   { "conquer_area", _("Conquer Area"), _("This Event conquers a user definable part of the map for one player if there isn't a player already there") },
+   { "allow_building", _("Allow Building"), _("Allows/Disables a certain building for a player so that it can be build or it can't any longer") },
 };
 
 /*

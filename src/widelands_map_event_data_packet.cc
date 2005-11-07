@@ -30,6 +30,8 @@
 #include "widelands_map_event_data_packet.h"
 #include "world.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 #define CURRENT_PACKET_VERSION 1
 
 /*
@@ -63,7 +65,7 @@ void Widelands_Map_Event_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egb
          std::string type = s->get_safe_string("type");
          std::string state = s->get_safe_string("state");
          Event* e = Event_Factory::get_correct_event( type.c_str());
-         e->set_name( widen_string(name).c_str() );
+         e->set_name( name.c_str() );
          if( state == "init") e->m_state = Event::INIT;
          else if( state == "running") e->m_state = Event::RUNNING;
          else if( state == "done") e->m_state = Event::DONE;
@@ -89,7 +91,7 @@ void Widelands_Map_Event_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* eg
    Map* map = egbase->get_map();
    for(int i=0; i<map->get_mem()->get_nr_events(); i++) {
       Event* e = map->get_mem()->get_event_by_nr(i);
-      s = prof.create_section( narrow_string( e->get_name()).c_str());
+      s = prof.create_section( e->get_name());
       s->set_string("type", e->get_id());
       switch( e->m_state ) {
          case Event::INIT: s->set_string("state", "init"); break;

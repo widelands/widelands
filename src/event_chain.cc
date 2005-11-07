@@ -112,7 +112,7 @@ void Cmd_CheckEventChain::execute (Game* g)
 	EventChain* evchain=g->get_map()->get_mecm()->get_eventchain_by_nr(m_eventchain_id);
 	assert( evchain );
 	
-   log("Eventchain %s is going to get checked!\n", narrow_string( evchain->get_name()).c_str());
+   log("Eventchain %s is going to get checked!\n", evchain->get_name());
 
    switch( evchain->get_state() ) {
       case EventChain::INIT:

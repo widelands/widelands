@@ -352,41 +352,6 @@ char *FileRead::CString(int pos)
 	return string;
 }
 
-/*
-==============
-FileRead::WCString
-
-Read a zero-terminated string from the file
-==============
-*/
-wchar_t *FileRead::WCString(int pos)
-{
-	log( "TODO: FileRead::WCString is untested!\n");
-   wchar_t *string, *p;
-	int i;
-
-	assert(data);
-
-	i = pos;
-	if (pos < 0)
-		i = filepos;
-	if (i >= length)
-		throw wexception("File boundary exceeded");
-
-	string = (wchar_t*) ((char*)data + i);
-	for(p = string; *p; p++, i+= sizeof( wchar_t) ) ;
-	i+= sizeof( wchar_t ); // beyond the NUL
-
-	if (i > length)
-		throw wexception("File boundary exceeded");
-
-	if (pos < 0)
-		filepos = i;
-
-	return string;
-}
-
-
 /** FileRead::ReadLine(char *buf, int buflen)
  *
  * Reads a line from the file into the buffer.

@@ -36,12 +36,12 @@
 #include "util.h"
 
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :
-   UIWindow(parent, 0, 0, 200, 280, "Event Option Menu") {
+   UIWindow(parent, 0, 0, 200, 280, _("Event Option Menu")) {
    m_parent=parent;
    m_event=event;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Allow Building Event Options", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Allow Building Event Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    m_player=m_event->get_player();
@@ -69,13 +69,13 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    }
 
    // Name editbox
-   new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( narrow_string( event->get_name()).c_str() );
+   m_name->set_text( event->get_name() );
    posy+=20+spacing;
 
    // Player
-   new UITextarea(this, spacing, posy, 70, 20, "Player: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
    m_player_ta=new UITextarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
    UIButton* b=new UIButton(this, spacing+90, posy, 20, 20, 0, 15);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
@@ -86,7 +86,7 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    posy+=20+spacing;
 
    // Building
-   new UITextarea(this, spacing, posy, 70, 20, "Building: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 70, 20, _("Building: "), Align_CenterLeft);
    b=new UIButton(this, spacing+70, posy, 20, 20, 0, 23);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
@@ -94,11 +94,11 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    posy+=20+spacing;
-   m_building_ta=new UITextarea(this, 0, posy, get_inner_w(), 20, "\"Hauptquartier\"", Align_Center);
+   m_building_ta=new UITextarea(this, 0, posy, get_inner_w(), 20, _("Headquarters"), Align_Center);
    posy+=20+spacing;
 
    // Enable
-   new UITextarea(this, spacing, posy, 150, 20, "Allow Building: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 150, 20, _("Allow Building: "), Align_CenterLeft);
    m_allow=new UICheckbox(this, spacing+150, posy);
    m_allow->set_state(m_event->get_allow());
    posy+=20+spacing;
@@ -107,11 +107,11 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
    posy+=spacing; // Extra space
    posx=(get_inner_w()/2)-60-spacing;
    b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Event_Allow_Building_Option_Menu::clicked);
 
    set_inner_size(get_inner_w(), posy+20+spacing);
@@ -158,7 +158,7 @@ void Event_Allow_Building_Option_Menu::clicked(int i) {
          {
             // ok button
             if(m_name->get_text())
-               m_event->set_name( widen_string( m_name->get_text()).c_str() );
+               m_event->set_name( m_name->get_text() );
             if(m_event->get_player()!=m_player && m_event->get_player()!=-1) 
                m_parent->unreference_player_tribe(m_event->get_player(), m_event);
             if(m_event->get_player()!=m_player) { 
@@ -192,7 +192,7 @@ void Event_Allow_Building_Option_Menu::update(void) {
    if(m_building<0) m_building=0;
    if(m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
 
-   std::string curbuild="<invalid player tribe>";
+   std::string curbuild=_("<invalid player tribe>");
    if(!m_buildings.size()) {
       m_player=-1;
       m_building=-1;

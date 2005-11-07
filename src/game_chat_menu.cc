@@ -50,7 +50,7 @@ Create all the buttons etc...
 ===============
 */
 GameChatMenu::GameChatMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, NetGame* netgame)
-	: UIUniqueWindow(plr, registry, 340, 160, "Chat Menu")
+	: UIUniqueWindow(plr, registry, 340, 160, _("Chat Menu"))
 {
    m_player=plr;
    m_netgame = netgame;
@@ -59,7 +59,7 @@ GameChatMenu::GameChatMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    int posy = 35;
    
    // Caption
-   new UITextarea(this, 0, spacing, get_inner_w(), 20, "Chat Menu", Align_Center);
+   new UITextarea(this, 0, spacing, get_inner_w(), 20, _("Chat Menu"), Align_Center);
   
    // What has been said? 
    m_chatbox = new UIMultiline_Textarea(this, spacing, posy, get_inner_w()-spacing*2, 150, "", Align_Left, 1); 
@@ -70,11 +70,11 @@ GameChatMenu::GameChatMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
 
    // Send button
    UIButton* b = new UIButton(this, spacing, posy, 80, STATEBOX_HEIGHT, 0, 0);
-   b->set_title("Send");
+   b->set_title(_("Send"));
    b->clickedid.set(this, &GameChatMenu::clicked);
 
    // Textbox
-   new UITextarea(this, 80+2*spacing, posy, 120, STATEBOX_HEIGHT, "Show messages as overlays:", Align_CenterLeft);
+   new UITextarea(this, 80+2*spacing, posy, 120, STATEBOX_HEIGHT, _("Show messages as overlays:"), Align_CenterLeft);
    UICheckbox* cb = new UICheckbox(this, get_inner_w()-STATEBOX_WIDTH-spacing, posy);
    
    cb->set_state( m_player->show_chat_overlay() );
@@ -108,7 +108,7 @@ void GameChatMenu::think( void ) {
    for( uint i = 0; i < msges->size(); i++) {
       str += m_player->get_game()->get_player((*msges)[i].plrnum)->get_name();
       str += ": ";
-      str += narrow_string( (*msges)[i].msg );
+      str += (*msges)[i].msg;
       str += "\n";
    }
    
@@ -123,7 +123,7 @@ void GameChatMenu::cb_changed( bool t ) {
 }
 
 void GameChatMenu::clicked(int n) {
-   std::wstring str = widen_string( m_editbox->get_text() );
+   std::string str = m_editbox->get_text();
    
    if( str.size() && m_netgame ) {
       NetGame::Chat_Message t;

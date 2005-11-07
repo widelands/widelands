@@ -26,6 +26,8 @@
 #include "util.h"
 #include "wexception.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 /*
  * Constructor
  */
@@ -51,7 +53,7 @@ ushort Game_Server_Protocol_Packet_Connect::get_id(void) {
 void Game_Server_Protocol_Packet_Connect::send(Network_Buffer* buffer) {
    ushort version = ( GSP_MAJOR_VERSION << 8 ) | GSP_MINOR_VERSION; 
    buffer->put_16( version );
-   buffer->put_string( L"widelands" );
+   buffer->put_string( "widelands" );
 }
 
 /*
@@ -61,25 +63,25 @@ void Game_Server_Protocol_Packet_Connect::handle_reply(Game_Server_Connection* g
    uchar retcode = buf->get_8();
    ushort version = buf->get_16();
 
-   wchar_t buffer[1024];
+   char buffer[1024];
 
    switch( retcode ) {
       case WELCOME: // Everything is ok
          break;
 
       case PROTOCOL_TO_OLD: 
-         swprintf(buffer, 1024, L"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n",
-               GSP_MAJOR_VERSION, GSP_MINOR_VERSION, version &0xff00 , version & 0x00ff );
+         snprintf(buffer, 1024, "%s (%i.%02i) %s %i.%02i\n", _("Server delivers a connection Error. Your Protocol"),
+               GSP_MAJOR_VERSION, GSP_MINOR_VERSION, _("is too old, Server runs"), version &0xff00 , version &0x00ff );
          gsc->critical_error(buffer);
          break;
 
       case SERVER_FULL: 
-         swprintf(buffer, 1024, L"Server is full!\n");
+         snprintf(buffer, 1024, _("Server is full!\n"));
          gsc->critical_error(buffer);
          break;
 
       case GAME_NOT_SERVED: 
-         swprintf(buffer, 1024, L"This server doesn't serve widelands!\n");
+         snprintf(buffer, 1024, _("This server doesn't serve widelands!\n"));
          gsc->critical_error(buffer);
          break;
 

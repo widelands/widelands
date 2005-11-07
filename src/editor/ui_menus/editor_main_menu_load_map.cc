@@ -45,12 +45,12 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
-	: UIWindow(parent, 0, 0, 500, 300, "Load Map")
+	: UIWindow(parent, 0, 0, 500, 300, _("Load Map"))
 {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Load Map", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Load Map"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    int spacing=5;
@@ -68,33 +68,33 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
    // Name
    posx=get_inner_w()/2+spacing;
    posy+=20;
-   new UITextarea(this, posx, posy, 150, 20, "Name: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 150, 20, _("Name: "), Align_CenterLeft);
    m_name=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Author
-   new UITextarea(this, posx, posy, 150, 20, "Author: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 150, 20, _("Author: "), Align_CenterLeft);
    m_author=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Size
-   new UITextarea(this, posx, posy, 70, 20, "Size: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("Size: "), Align_CenterLeft);
    m_size=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // World
-   new UITextarea(this, posx, posy, 70, 20, "World: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("World: "), Align_CenterLeft);
    m_world=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Players
-   new UITextarea(this, posx, posy, 70, 20, "Players: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("Players: "), Align_CenterLeft);
    m_nrplayers=new UITextarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
 
    // Description
-   new UITextarea(this, posx, posy, 70, 20, "Descr: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
    m_descr=new UIMultiline_Textarea(this, posx+70, posy, get_inner_w()-posx-spacing-70, get_inner_h()-posy-spacing-40, "---", Align_CenterLeft);
 
    posx=5;
@@ -102,12 +102,12 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
-   but->set_title("OK");
+   but->set_title(_("OK"));
    m_ok_btn=but;
    but->set_enabled(false);
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
-   but->set_title("Cancel");
+   but->set_title(_("Cancel"));
 
 
    m_basedir="maps";

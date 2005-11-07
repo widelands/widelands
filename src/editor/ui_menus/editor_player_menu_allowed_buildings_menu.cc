@@ -33,12 +33,12 @@ Create all the buttons etc...
 ===============
 */
 Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu(UIPanel *parent, Player* player, UIUniqueWindowRegistry* registry)
-   : UIUniqueWindow(parent, registry, 540, 400, "Allowed Buildings")
+   : UIUniqueWindow(parent, registry, 540, 400, _("Allowed Buildings"))
 {
    m_player=player;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Allowed Buildings Menu", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Allowed Buildings Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    // UIButtons
@@ -47,13 +47,13 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
    int posy=offsy;
    
    // Allowed List
-   new UITextarea(this, spacing, posy, get_inner_w()/2, 20, "Allowed Buildings: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, get_inner_w()/2, 20, _("Allowed Buildings: "), Align_CenterLeft);
    m_allowed=new UIListselect(this, spacing, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
    m_allowed->selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
    m_allowed->double_clicked.set(this,&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
 
    // Forbidden List
-   new UITextarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2, 20, "Forbidden Buildings: ", Align_CenterLeft);
+   new UITextarea(this, get_inner_w()/2+spacing, posy, get_inner_w()/2, 20, _("Forbidden Buildings: "), Align_CenterLeft);
    m_forbidden=new UIListselect(this, get_inner_w()/2+spacing+20, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
    m_forbidden->selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
    m_forbidden->double_clicked.set(this,&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);

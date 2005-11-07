@@ -17,7 +17,6 @@
  *
  */
 
-#include <wchar.h>
 #include <vector>
 #include "map_objective_manager.h"
 
@@ -48,11 +47,11 @@ bool MapObjectiveManager::register_new_objective( MapObjective* mv ) {
 /*
  * Get objectives
  */
-MapObjective* MapObjectiveManager::get_objective( const wchar_t* name ) {
+MapObjective* MapObjectiveManager::get_objective( const char* name ) {
    uint i;
    MapObjective* retval = 0;
    for( i = 0; i < m_objectives.size(); i++) {
-      if( !wcscmp( m_objectives[i]->get_name(), name ) ) {
+      if( !strcmp( m_objectives[i]->get_name(), name ) ) {
          retval = m_objectives[i];
          break;
       }
@@ -64,9 +63,9 @@ MapObjective* MapObjectiveManager::get_objective( const wchar_t* name ) {
 /*
  * Remove a objective 
  */
-void MapObjectiveManager::delete_objective( const wchar_t* name ) {
+void MapObjectiveManager::delete_objective( const char* name ) {
    for( uint i = 0; i < m_objectives.size(); i++) {
-      if( !wcscmp( m_objectives[i]->get_name(), name ) ) {
+      if( !strcmp( m_objectives[i]->get_name(), name ) ) {
          delete m_objectives[i];
          m_objectives[i] = m_objectives[m_objectives.size() - 1];
          m_objectives.resize( m_objectives.size() - 1 );

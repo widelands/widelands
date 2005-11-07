@@ -17,7 +17,6 @@
  *
  */
 
-#include <wchar.h>
 #include <vector>
 #include "map_trigger_manager.h"
 #include "trigger.h"
@@ -49,11 +48,11 @@ bool MapTriggerManager::register_new_trigger( Trigger* mv ) {
 /*
  * Get triggers
  */
-Trigger* MapTriggerManager::get_trigger( const wchar_t* name ) {
+Trigger* MapTriggerManager::get_trigger( const char* name ) {
    uint i;
    Trigger* retval = 0;
    for( i = 0; i < m_triggers.size(); i++) {
-      if( !wcscmp( m_triggers[i]->get_name(), name ) ) {
+      if( !strcmp( m_triggers[i]->get_name(), name ) ) {
          retval = m_triggers[i];
          break;
       }
@@ -65,9 +64,9 @@ Trigger* MapTriggerManager::get_trigger( const wchar_t* name ) {
 /*
  * Remove a trigger 
  */
-void MapTriggerManager::delete_trigger( const wchar_t* name ) {
+void MapTriggerManager::delete_trigger( const char* name ) {
    for( uint i = 0; i < m_triggers.size(); i++) {
-      if( !wcscmp( m_triggers[i]->get_name(), name ) ) {
+      if( !strcmp( m_triggers[i]->get_name(), name ) ) {
          delete m_triggers[i];
          m_triggers[i] = m_triggers[m_triggers.size() - 1];
          m_triggers.resize( m_triggers.size() - 1 );

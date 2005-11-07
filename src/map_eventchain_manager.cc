@@ -17,7 +17,6 @@
  *
  */
 
-#include <wchar.h>
 #include <vector>
 #include "map_eventchain_manager.h"
 #include "trigger_conditional.h"
@@ -49,11 +48,11 @@ bool MapEventChainManager::register_new_eventchain( EventChain* mv ) {
 /*
  * Get eventchains
  */
-EventChain* MapEventChainManager::get_eventchain( const wchar_t* name ) {
+EventChain* MapEventChainManager::get_eventchain( const char* name ) {
    uint i;
    EventChain* retval = 0;
    for( i = 0; i < m_eventchains.size(); i++) {
-      if( !wcscmp( m_eventchains[i]->get_name(), name ) ) {
+      if( !strcmp( m_eventchains[i]->get_name(), name ) ) {
          retval = m_eventchains[i];
          break;
       }
@@ -65,9 +64,9 @@ EventChain* MapEventChainManager::get_eventchain( const wchar_t* name ) {
 /*
  * Remove a eventchain 
  */
-void MapEventChainManager::delete_eventchain( const wchar_t* name ) {
+void MapEventChainManager::delete_eventchain( const char* name ) {
    for( uint i = 0; i < m_eventchains.size(); i++) {
-      if( !wcscmp( m_eventchains[i]->get_name(), name ) ) {
+      if( !strcmp( m_eventchains[i]->get_name(), name ) ) {
          assert( m_eventchains[i]->get_trigcond() );
          m_eventchains[i]->get_trigcond()->unreference_triggers( m_eventchains[i] );
          m_eventchains[i]->clear_events();

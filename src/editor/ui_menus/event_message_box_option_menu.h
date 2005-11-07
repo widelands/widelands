@@ -57,7 +57,7 @@ class Event_Message_Box_Option_Menu : public UIWindow {
       Editor_Interactive* m_parent;
 
       struct Button_Descr {
-         std::wstring name;
+         std::string name;
          int trigger;
       } m_buttons[MAX_BUTTONS];
 

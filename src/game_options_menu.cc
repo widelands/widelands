@@ -47,41 +47,41 @@ Create all the buttons etc...
 ===============
 */
 GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Interactive_Player::Game_Main_Menu_Windows* windows)
-	: UIUniqueWindow(plr, registry, 102, 160, "Options")
+	: UIUniqueWindow(plr, registry, 102, 160, _("Options"))
 {
    m_player=plr;
    m_windows = windows;
   
    // Caption
-   new UITextarea(this, 0, 5, get_inner_w(), 25, "Options Menu", Align_Center);
+   new UITextarea(this, 0, 5, get_inner_w(), 25, _("Options Menu"), Align_Center);
    int posy = 35;
 
    
    UIButton* b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 0, 1);
-   b->set_title("README");
+   b->set_title(_("README"));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
    
    b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 0, 2);
-   b->set_title("License");
+   b->set_title(_("License"));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
 
    b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 0, 3);
-   b->set_title("Authors");
+   b->set_title(_("Authors"));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
 
    UICheckbox* cb = new UICheckbox(this, 5, posy);
    cb->set_state(!g_sound_handler.get_disable_music());
    cb->changedto.set(this, &GameOptionsMenu::disable_music_clicked);
-   UITextarea *t=new UITextarea(this, 30, posy+3, "Ingame Music");
+   UITextarea *t=new UITextarea(this, 30, posy+3, _("Ingame Music"));
    posy += 25;
 
    cb=new UICheckbox(this, 5, posy);
    cb->set_state(!g_sound_handler.get_disable_fx());
    cb->changedto.set(this, &GameOptionsMenu::disable_fx_clicked);
-   t=new UITextarea(this, 30, posy+3, "Sound FX");
+   t=new UITextarea(this, 30, posy+3, _("Sound FX"));
    posy += 25;
 
    int buttonw = (get_inner_w()-3*5) / 2;
@@ -109,17 +109,17 @@ void GameOptionsMenu::clicked(int n) {
    switch(n) {
       case 1:
          // Readme
-         fileview_window(m_player, &m_windows->readme, "README", "README"); 
+         fileview_window(m_player, &m_windows->readme, _("README"), _("README")); 
          break;
 
       case 2:
          // License
-         fileview_window(m_player, &m_windows->licence, "License", "COPYING"); 
+         fileview_window(m_player, &m_windows->licence, _("License"), _("COPYING")); 
          break;
 
       case 3: 
          // Authors
-         fileview_window(m_player, &m_windows->authors, "Authors", "AUTHORS"); 
+         fileview_window(m_player, &m_windows->authors, _("Authors"), _("AUTHORS")); 
          break;
 
       case 4:

@@ -150,7 +150,7 @@ destructor
 ===============
 */
 MiniMap::MiniMap(Interactive_Base *plr, UIUniqueWindowRegistry *reg)
-	: UIUniqueWindow(plr, reg, 10, 10, "Map")
+	: UIUniqueWindow(plr, reg, 10, 10, _("Map"))
 {
 	m_view = new MiniMapView(this, 0, 0, 0, 0, plr);
    int button_width = (int) (m_view->get_w()/3);
@@ -165,27 +165,27 @@ MiniMap::MiniMap(Interactive_Base *plr, UIUniqueWindowRegistry *reg)
 
 	UIButton* b=new UIButton(this, 0, m_view->get_h(), button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_color.png" ));
-	//b->set_title("col");
+	//b->set_title(_("col"));
 	b->clicked.set(this, &MiniMap::toggle_color);
 
 	b=new UIButton(this, button_width, m_view->get_h(), button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_ownedBy.png" ));
-	//b->set_title("own");
+	//b->set_title(_("own"));
 	b->clicked.set(this, &MiniMap::toggle_ownedBy);
 
 	b=new UIButton(this, 2*button_width, m_view->get_h(), button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_flags.png" ));
-	//b->set_title("Flags");
+	//b->set_title(_("Flags"));
 	b->clicked.set(this, &MiniMap::toggle_flags);
 
 	b=new UIButton(this, 0, m_view->get_h()+button_height, button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_roads.png" ));
-	//b->set_title("Roads");
+	//b->set_title(_("Roads"));
 	b->clicked.set(this, &MiniMap::toggle_roads);
 
 	b=new UIButton(this, button_width, m_view->get_h()+button_height, button_width, button_height, 0);
 	b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/button_building.png" ));
-	//b->set_title("Buildings");
+	//b->set_title(_("Buildings"));
 	b->clicked.set(this, &MiniMap::toggle_buildings);
 
 	if (get_usedefaultpos())

@@ -268,9 +268,9 @@ void ProductionSite::calc_statistics()
 
 	const char* trendBuf;
 	if (lastPercOk > percOk)
-		trendBuf = "UP";
+		trendBuf = _("UP");
 	else if (lastPercOk < percOk)
-		trendBuf = "DOWN";
+		trendBuf = _("DOWN");
 	else
 		trendBuf = "=";
 

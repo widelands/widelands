@@ -148,7 +148,7 @@ void Game_Server_Connection::handle_data( void ) {
          Game_Server_Protocol_Packet* pp = 0;
          switch( id ) {
             case GGSPP_USERENTERED: pp = new Game_Server_Protocol_Packet_UserEntered(); break;
-            case GGSPP_CHATMESSAGE: pp = new Game_Server_Protocol_Packet_ChatMessage(0, L""); break;
+            case GGSPP_CHATMESSAGE: pp = new Game_Server_Protocol_Packet_ChatMessage(0, ""); break;
             case GGSPP_PING: pp = new Game_Server_Protocol_Packet_Ping(); break;
             default: log("Game_Server_Connection: WARNING unknown protocol packet id in server request, dropped!\n"); break;
          }
@@ -175,7 +175,7 @@ void Game_Server_Connection::handle_data( void ) {
  *
  * The room has changed, request informations about the room members
  */
-void Game_Server_Connection::set_room(const wchar_t* room) {
+void Game_Server_Connection::set_room(const char* room) {
    m_room = room; 
    Game_Server_Protocol_Packet_GetRoomInfo* gri = new Game_Server_Protocol_Packet_GetRoomInfo(room);
    send(gri);
@@ -188,7 +188,7 @@ void Game_Server_Connection::set_server_message_handler(ServerMessage_Handler fu
    m_smh = func;
    m_smhd = data; 
 }
-void Game_Server_Connection::server_message(std::wstring msg) {
+void Game_Server_Connection::server_message(std::string msg) {
    (*m_smh)(msg,m_smhd);
 }
 
@@ -196,7 +196,7 @@ void Game_Server_Connection::set_user_entered_handler(UserEntered_Handler func, 
    m_ueh = func;
    m_uehd = data; 
 }
-void Game_Server_Connection::user_entered(std::wstring name, std::wstring room, uchar b) {
+void Game_Server_Connection::user_entered(std::string name, std::string room, uchar b) {
    (*m_ueh)(name,room,b,m_uehd);
 }
 
@@ -204,7 +204,7 @@ void Game_Server_Connection::set_critical_error_handler(CriticalError_Handler fu
    m_ceh= func;
    m_cehd= data; 
 }
-void Game_Server_Connection::critical_error(std::wstring msg) {
+void Game_Server_Connection::critical_error(std::string msg) {
    (*m_ceh)(msg,m_cehd);
 }
 
@@ -212,7 +212,7 @@ void Game_Server_Connection::set_get_room_info_handler(RoomInfo_Handler rih, voi
    m_rih = rih;
    m_rihd = data;
 }
-void Game_Server_Connection::get_room_info(std::vector<std::wstring > users) {
+void Game_Server_Connection::get_room_info(std::vector<std::string > users) {
    (*m_rih)(users, m_rihd);
 }
 
@@ -220,7 +220,7 @@ void Game_Server_Connection::set_get_user_info_handler(UserInfo_Handler uih, voi
    m_uih = uih;
    m_uihd = data;
 }
-void Game_Server_Connection::get_user_info( std::wstring username, std::wstring game, std::wstring room) {
+void Game_Server_Connection::get_user_info( std::string username, std::string game, std::string room) {
    (*m_uih)(username, game, room, m_uihd);
 }
 
@@ -228,7 +228,7 @@ void Game_Server_Connection::set_chat_message_handler(ChatMessage_Handler cmh, v
    m_cmh = cmh;
    m_cmhd = data;
 }
-void Game_Server_Connection::chat_message( std::wstring user, std::wstring msg, uchar flags) {
+void Game_Server_Connection::chat_message( std::string user, std::string msg, uchar flags) {
    (*m_cmh)(user, msg, flags, m_cmhd);
 }
 

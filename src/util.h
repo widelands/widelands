@@ -33,7 +33,5 @@ UTILITIES
 
 void split_string(std::string in, std::vector<std::string>* plist, const char* separators);
 void remove_spaces(std::string* in); 
-std::wstring widen_string(std::string in);
-std::string narrow_string(std::wstring in);
 
 #endif

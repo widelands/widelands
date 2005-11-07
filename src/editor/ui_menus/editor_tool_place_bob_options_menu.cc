@@ -47,7 +47,7 @@ constructor
 */
 Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu(Editor_Interactive* parent, int index,
 		Editor_Place_Bob_Tool* pit, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, index, registry, "Bobs Menu") {
+   Editor_Tool_Options_Menu(parent, index, registry, _("Bobs Menu")) {
    const int max_items_in_tab=24;
    const int min_items_in_tab=12;
 

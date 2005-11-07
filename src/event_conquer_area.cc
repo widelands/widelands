@@ -23,6 +23,7 @@
 #include "game.h"
 #include "editor_game_base.h"
 #include "map.h"
+#include "ui/ui_basic/ui_object.h" //just for i18n
 
 static const int EVENT_VERSION = 1;
 
@@ -30,7 +31,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Conquer_Area::Event_Conquer_Area(void) {
-   set_name(L"Conquer Area");
+   set_name(_("Conquer Area"));
    set_coords(Coords(0,0));
    set_player(0);
    set_area(5);

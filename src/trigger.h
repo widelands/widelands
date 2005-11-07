@@ -51,8 +51,8 @@ class Trigger {
       virtual void reset_trigger( Game* ) = 0;
 
       // Functions needed by all
-      void set_name(const wchar_t* name) { m_name=name; }
-      inline const wchar_t* get_name() { return m_name.c_str(); }
+      void set_name(const char* name) { m_name=name; }
+      inline const char* get_name() { return m_name.c_str(); }
       inline bool is_set(void) { return m_is_set; }
 
       // File functions, to save or load this trigger
@@ -69,7 +69,7 @@ class Trigger {
       inline void set_trigger(bool t) { m_is_set=t; }
 
    private:
-      std::wstring                m_name;
+      std::string                m_name;
       bool                        m_is_set;
       std::map<TriggerReferencer*,uint> m_referencers;
 };

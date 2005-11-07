@@ -46,7 +46,7 @@ Create all the buttons etc...
 ===============
 */
 GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Interactive_Player::Game_Main_Menu_Windows* windows)
-	: UIUniqueWindow(plr, registry, 148, 160, "Main Menu")
+	: UIUniqueWindow(plr, registry, 148, 160, _("Main Menu"))
 {
    m_player=plr;
    m_windows = windows;
@@ -57,7 +57,7 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    int posx = spacing;
    
    // Caption
-   new UITextarea(this, 0, spacing, get_inner_w(), 20, "Main Menu", Align_Center);
+   new UITextarea(this, 0, spacing, get_inner_w(), 20, _("Main Menu"), Align_Center);
    
    int buttonw = (get_inner_w()-5*spacing) / 4;
    UIButton* b=new UIButton(this, posx, posy, buttonw, 34, 0, 1);

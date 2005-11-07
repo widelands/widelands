@@ -53,7 +53,7 @@ Create all the buttons etc...
 ===============
 */
 General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
-  : UIUniqueWindow(parent,registry,400,400,"General Statistics") {
+  : UIUniqueWindow(parent,registry,400,400,_("General Statistics")) {
    m_parent = parent;
    
    uint offsy = 35;
@@ -62,7 +62,7 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    uint posy = offsy;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "General Statistics", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("General Statistics"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    // Plotter
@@ -153,19 +153,19 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    posy +=spacing+spacing;
    UIButton *b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_15_MINS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title("15 m");
+   b->set_title(_("15 m"));
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_30_MINS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title("30 m");
+   b->set_title(_("30 m"));
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_ONE_HOUR);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title("1 h");
+   b->set_title(_("1 h"));
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_TWO_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title("2 h");
+   b->set_title(_("2 h"));
 
    posy += 25 + spacing;
    posx = spacing; 
@@ -175,15 +175,15 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_FOUR_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title("4 h");
+   b->set_title(_("4 h"));
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_EIGHT_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title("8 h");
+   b->set_title(_("8 h"));
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 3, WUIPlot_Area::TIME_16_HOURS);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
-   b->set_title("16 h");
+   b->set_title(_("16 h"));
    posx += button_size+spacing;
    posy += 32+spacing;
 

@@ -57,8 +57,8 @@ class Event {
       virtual const char* get_id(void)        = 0; // this function is needed to recreate the correct option window
 
       // Functions needed by all
-      void set_name(const wchar_t* name) { m_name = name; }
-      inline const wchar_t* get_name() { return m_name.c_str(); }
+      void set_name(const char* name) { m_name = name; }
+      inline const char* get_name() { return m_name.c_str(); }
 
       // File functions, to save or load this event
       virtual void Write(Section*, Editor_Game_Base*)=0;
@@ -75,7 +75,7 @@ class Event {
       State        m_state;
       
    private:
-      std::wstring                m_name;
+      std::string                m_name;
       std::map<EventReferencer*,uint> m_referencers;
  };
 

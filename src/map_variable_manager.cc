@@ -17,7 +17,6 @@
  *
  */
 
-#include <wchar.h>
 #include <vector>
 #include "map_variable_manager.h"
 
@@ -27,8 +26,8 @@
 MapVariableManager::MapVariableManager( void ) {
    // Create a default variable
    String_MapVariable* smv = new String_MapVariable( 1 );
-   smv->set_name(L"Next scenario");
-   smv->set_value(L"<undefined>");
+   smv->set_name(_("Next scenario"));
+   smv->set_value(_("<undefined>"));
    register_new_variable( smv );
 }
 
@@ -53,25 +52,25 @@ bool MapVariableManager::register_new_variable( MapVariable* mv ) {
 /*
  * Get variables
  */
-Int_MapVariable* MapVariableManager::get_int_variable( const wchar_t* name ) {
+Int_MapVariable* MapVariableManager::get_int_variable( const char* name ) {
    MapVariable* v = get_variable( name );
    if( v && v->get_type() != MapVariable::MVT_INT)
       return 0;
    
    return static_cast<Int_MapVariable*>(v);
 }
-String_MapVariable* MapVariableManager::get_string_variable( const wchar_t* name ) {
+String_MapVariable* MapVariableManager::get_string_variable( const char* name ) {
    MapVariable* v = get_variable( name );
    if( v && v->get_type() != MapVariable::MVT_STRING)
       return 0;
    return static_cast<String_MapVariable*>(v);
 }
 
-MapVariable* MapVariableManager::get_variable( const wchar_t* name ) {
+MapVariable* MapVariableManager::get_variable( const char* name ) {
    uint i;
    MapVariable* retval = 0;
    for( i = 0; i < m_variables.size(); i++) {
-      if( !wcscmp( m_variables[i]->get_name(), name ) ) {
+      if( !strcmp( m_variables[i]->get_name(), name ) ) {
          retval = m_variables[i];
          break;
       }
@@ -83,9 +82,9 @@ MapVariable* MapVariableManager::get_variable( const wchar_t* name ) {
 /*
  * Remove a variable 
  */
-void MapVariableManager::delete_variable( const wchar_t* name ) {
+void MapVariableManager::delete_variable( const char* name ) {
    for( uint i = 0; i < m_variables.size(); i++) {
-      if( !wcscmp( m_variables[i]->get_name(), name ) ) {
+      if( !strcmp( m_variables[i]->get_name(), name ) ) {
          delete m_variables[i];
          m_variables[i] = m_variables[m_variables.size() - 1];
          m_variables.resize( m_variables.size() - 1 );

@@ -45,7 +45,7 @@ class NetGame {
     public:
 	struct Chat_Message {
 		uint plrnum;
-		std::wstring msg;
+		std::string msg;
 	};
 	
 	NetGame ();
@@ -135,7 +135,7 @@ class NetHost:public NetGame {
 	virtual void syncreport (uint);
 
     private:
-	void send_game_message (const wchar_t*);
+	void send_game_message (const char*);
 	void send_chat_message_int ( const Chat_Message );
 	void send_player_info ();
 	void update_network_delay ();
@@ -222,10 +222,7 @@ class Serializer {
 		buffer.push_back (v & 0xFF);
 	}
 	
-	void putwchar (wchar_t);
-	
 	void putstr (const char*);
-	void putwstr (const wchar_t*);
     
     private:
 	std::vector<unsigned char>	buffer;
@@ -253,10 +250,7 @@ class Deserializer {
 	short getshort ();
 	long getlong ();
 	
-	wchar_t getwchar ();
-	
 	void getstr (char*, int);
-	void getwstr (wchar_t*, int);
     
     private:
 	std::queue<unsigned char>	queue;

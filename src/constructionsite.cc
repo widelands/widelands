@@ -32,6 +32,8 @@
 #include "worker.h"
 #include "sound_handler.h"
 
+#include "ui/ui_basic/ui_object.h" //only needed for i18n function _()
+
 static const int CONSTRUCTIONSITE_STEP_TIME = 30000;
 
 
@@ -222,7 +224,7 @@ std::string ConstructionSite::get_statistics_string()
 {
 	char buf[40];
 
-	snprintf(buf, sizeof(buf), "%u%% built", (get_built_per64k() * 100) >> 16);
+	snprintf(buf, sizeof(buf), "%u%% %s", (get_built_per64k() * 100) >> 16, _("built"));
 
 	return std::string(buf);
 }

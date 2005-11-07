@@ -23,6 +23,8 @@
 #include "error.h"
 #include <string>
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 class Trigger_Null;
 
 /*
@@ -54,16 +56,16 @@ class MapObjective {
          m_trigger = 0;
          m_is_visible = true;
          m_is_optional = false;
-         m_descr = L"no descr";
-         m_name  = L"";
+         m_descr = _("no descr");
+         m_name  = "";
       } 
       virtual ~MapObjective( void ) { }
 
 
-      inline const wchar_t* get_name( void ) { return m_name.c_str(); }
-      inline void set_name( const wchar_t* name ) { m_name = name; }
-      inline const wchar_t* get_descr( void ) { return m_descr.c_str(); }
-      inline void set_descr( const wchar_t* descr ) { m_descr = descr; }
+      inline const char* get_name( void ) { return m_name.c_str(); }
+      inline void set_name( const char* name ) { m_name = name; }
+      inline const char* get_descr( void ) { return m_descr.c_str(); }
+      inline void set_descr( const char* descr ) { m_descr = descr; }
       inline bool get_is_visible( void ) { return m_is_visible; }
       inline void set_is_visible( bool t ) { m_is_visible = t; }
       inline bool get_is_optional( void ) { return m_is_optional; } 
@@ -78,8 +80,8 @@ class MapObjective {
       inline void set_is_optional( bool t ) { m_is_optional = t; }
       
    private:
-      std::wstring   m_name;
-      std::wstring   m_descr;
+      std::string   m_name;
+      std::string   m_descr;
       Trigger_Null*  m_trigger;
       bool           m_is_visible;
       bool           m_is_optional;
@@ -105,8 +107,8 @@ class MapObjectiveManager {
       /*
        * Get a objective
        */
-      MapObjective* get_objective( const wchar_t* name );
-      void delete_objective( const wchar_t* name );
+      MapObjective* get_objective( const char* name );
+      void delete_objective( const char* name );
 
       inline int get_nr_objectives( void ) { return m_objectives.size(); }
       inline MapObjective* get_objective_by_nr( int i ) { assert(i < (int)m_objectives.size()); return m_objectives[i]; }

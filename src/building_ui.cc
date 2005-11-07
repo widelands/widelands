@@ -147,7 +147,7 @@ confirm building destruction when the building's base flag is removed.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy)
-	: UIWindow(parent, 0, 0, 160, 90, "Destroy building?")
+	: UIWindow(parent, 0, 0, 160, 90, _("Destroy building?"))
 {
 	UIButton* btn;
 	std::string text;
@@ -160,7 +160,7 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, P
 	else
 		m_todestroy = todestroy;
 
-	text = "Do you really want to destroy this ";
+	text = _("Do you really want to destroy this ");
 	text += building->get_name();
 	text += "?";
 	new UITextarea(this, 0, 0, 160, 44, text, Align_Center, true);
@@ -1032,13 +1032,13 @@ class ProductionSite_Window_ListWorkerWindow : public UIWindow{
  * Constructor
  */
 ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)  
-   : UIWindow(parent, 0, 0, 320, 125, "Worker Listing") {
+   : UIWindow(parent, 0, 0, 320, 125, _("Worker Listing")) {
    m_ps=ps;
    m_ps_location=ps->get_position();
    m_parent=parent;
    
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Worker Listing", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Worker Listing"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    int spacing=5;
@@ -1053,17 +1053,17 @@ ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(I
    // the descriptive areas
    // Type
    posx=get_inner_w()/2+spacing;
-   new UITextarea(this, posx, posy, 150, 20, "Type: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
    m_type=new UITextarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Experience 
-   new UITextarea(this, posx, posy, 150, 20, "Experience: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 150, 20, _("Experience: "), Align_CenterLeft);
    m_experience=new UITextarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // is working to become 
-   new UITextarea(this, posx, posy, 70, 20, "Trying to become: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 70, 20, _("Trying to become: "), Align_CenterLeft);
    posy+=20;
    m_becomes=new UITextarea(this, posx+25, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
@@ -1310,12 +1310,12 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 
    // Soldiers view
 	m_table=new UITable(box, 0, 0, 360, 200, Align_Left, UITable::UP);
-	m_table->add_column("Name", UITable::STRING, 100);
-	m_table->add_column("HP", UITable::STRING, 40);
-	m_table->add_column("AT", UITable::STRING, 40);
-	m_table->add_column("DE", UITable::STRING, 40);
-	m_table->add_column("EV", UITable::STRING, 40);
-	m_table->add_column("Level", UITable::STRING, 100); // enough space for scrollbar
+	m_table->add_column(_("Name"), UITable::STRING, 100);
+	m_table->add_column(_("HP"), UITable::STRING, 40);
+	m_table->add_column(_("AT"), UITable::STRING, 40);
+	m_table->add_column(_("DE"), UITable::STRING, 40);
+	m_table->add_column(_("EV"), UITable::STRING, 40);
+	m_table->add_column(_("Level"), UITable::STRING, 100); // enough space for scrollbar
 
    box->add(m_table, UIBox::AlignCenter);
    
@@ -1332,7 +1332,7 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 	// Add the caps button
 	create_capsbuttons(pan);
 
-		new UITextarea (pan, 70, 11, "Capacity", Align_Left);
+		new UITextarea (pan, 70, 11, _("Capacity"), Align_Left);
 	// Capacity buttons
 	b = new UIButton (pan, 140, 4, 24, 24, 0, 2);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
@@ -1507,7 +1507,7 @@ private:
 };
 
 TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps)
-		: UIWindow(parent, 0, 0, 320, 125, "Training Options") {
+		: UIWindow(parent, 0, 0, 320, 125, _("Training Options")) {
 
 	int _bs = 22;
 	int _cn = 20;
@@ -1532,8 +1532,8 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	btn->clicked.set(this, &TrainingSite_Options_Window::heros_clicked);
 	btn = 0;
 
-	new UITextarea(this, _cn - 15, _bs + 2, "Training mode : ", Align_Left);
-	m_style_train = new UITextarea (this, _cb + 4, _bs+2, "Balanced", Align_Left);
+	new UITextarea(this, _cn - 15, _bs + 2, _("Training mode : "), Align_Left);
+	m_style_train = new UITextarea (this, _cb + 4, _bs+2, _("Balanced"), Align_Left);
 
 
 	m_hp_pri			= new UITextarea (this, _cb+3*_bs/2, 3+(3+_bs)*2, "XX", Align_Center);
@@ -1557,7 +1557,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_hp_clicked);
 		btn = 0;
-		new UITextarea (this, _cn, (3+_bs)*2, "Hit Points", Align_Left);
+		new UITextarea (this, _cn, (3+_bs)*2, _("Hit Points"), Align_Left);
 		m_hp_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_attack()) {
@@ -1570,7 +1570,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_attack_clicked);
 		btn = 0;
-		new UITextarea (this, _cn, (3+_bs)*3, "Attack", Align_Left);
+		new UITextarea (this, _cn, (3+_bs)*3, _("Attack"), Align_Left);
 		m_attack_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_defense()) {
@@ -1583,7 +1583,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this,&TrainingSite_Options_Window::up_defense_clicked);
 		btn = 0;
-		new UITextarea (this, _cn, (3+_bs)*4, "Defense", Align_Left);
+		new UITextarea (this, _cn, (3+_bs)*4, _("Defense"), Align_Left);
 		m_defense_pri->set_visible(true);
 	}
 	if (ps->get__descr()->get_train_evade()) {
@@ -1596,7 +1596,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_evade_clicked);
 		btn = 0;
-		new UITextarea (this, _cn, (3+_bs)*5, "Evade", Align_Left);
+		new UITextarea (this, _cn, (3+_bs)*5, _("Evade"), Align_Left);
 		m_evade_pri->set_visible(true);
 	}
 
@@ -1636,9 +1636,9 @@ void TrainingSite_Options_Window::update() {
 	TrainingSite *ts = get_trainingsite();
 
 	if (ts->get_build_heros())
-		m_style_train->set_text("Make heroes");
+		m_style_train->set_text(_("Make heroes"));
 	else
-		m_style_train->set_text("Balanced army");
+		m_style_train->set_text(_("Balanced army"));
 
 	sprintf (buf, "%2d", ts->get_pri(atrHP));
 	str = (const char *) buf;
@@ -1747,12 +1747,12 @@ UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
 
       // Soldiers view
    m_table=new UITable(sold_box, 0, 0, 360, 200, Align_Left, UITable::UP);
-   m_table->add_column("Name", UITable::STRING, 100);
-   m_table->add_column("HP", UITable::STRING, 40);
-   m_table->add_column("AT", UITable::STRING, 40);
-   m_table->add_column("DE", UITable::STRING, 40);
-   m_table->add_column("EV", UITable::STRING, 40);
-   m_table->add_column("Level", UITable::STRING, 100); // enough space for scrollbar
+   m_table->add_column(_("Name"), UITable::STRING, 100);
+   m_table->add_column(_("HP"), UITable::STRING, 40);
+   m_table->add_column(_("AT"), UITable::STRING, 40);
+   m_table->add_column(_("DE"), UITable::STRING, 40);
+   m_table->add_column(_("EV"), UITable::STRING, 40);
+   m_table->add_column(_("Level"), UITable::STRING, 100); // enough space for scrollbar
    sold_box->add (m_table, Align_Left);
 
       // Add drop soldier button
@@ -1768,7 +1768,7 @@ UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
    b->clicked.set(this, &TrainingSite_Window::options_button_clicked);
    box->add (b, Align_Top);
    
-   box->add (new UITextarea (box, 0, 11, "Capacity", Align_Left), Align_Left);
+   box->add (new UITextarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
       // Capacity buttons
    b = new UIButton (box, 70, 4, 24, 24, 0, 2);
    b->set_pic (g_gr->get_picture( PicMod_Game,  pic_down_train ));
@@ -1776,7 +1776,7 @@ UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
    box->add (b, Align_Top);
    b = 0;
    
-   m_capacity = new UITextarea (box, 0, 11, "xx", Align_Center);
+   m_capacity = new UITextarea (box, 0, 11, _("xx"), Align_Center);
    box->add (m_capacity, Align_Top);
    
    b = new UIButton (box, 118, 4, 24, 24, 1, 3);

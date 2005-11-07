@@ -59,7 +59,7 @@ Critical_Error::Critical_Error(const char *text)
 	: UIPanel(0, 0, 0, g_gr->get_xres(), g_gr->get_yres())
 {
 	// Text
-	new UITextarea(this, g_gr->get_xres()/2, 150, "!! CRITICAL ERROR !!", Align_HCenter);
+	new UITextarea(this, g_gr->get_xres()/2, 150, _("!! CRITICAL ERROR !!"), Align_HCenter);
 	new UITextarea(this, g_gr->get_xres()/2, 200, text, Align_HCenter);
 
 	// UIButtons
@@ -67,18 +67,18 @@ Critical_Error::Critical_Error(const char *text)
 
 	b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-200, 174, 24, 1);
 	b->clicked.set(this, &Critical_Error::exit);
-	b->set_title("Exit");
+	b->set_title(_("Exit"));
 
 	b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-250, 174, 24, 1);
 	b->clickedid.set(this, &Critical_Error::end_modal);
-	b->set_title("!! Continue execution !!");
+	b->set_title(_("!! Continue execution !!"));
 
 	Section *s = g_options.pull_section("global");
 
 	if(s->get_bool("coredump", false)) {
 		b = new UIButton(this, (g_gr->get_xres()/2)-85, g_gr->get_yres()-100, 174, 24, 1);
 		b->clicked.set(this, &Critical_Error::crash);
-		b->set_title("Crash");
+		b->set_title(_("Crash"));
 	}
 }
 
@@ -117,7 +117,7 @@ void critical_error(const char* str, ...)
 	if (in_criterr || !g_gr)
 	{
 #ifdef WIN32
-		MessageBox(NULL, buf, "Widelands", MB_ICONINFORMATION);
+		MessageBox(NULL, buf, _("Widelands"), MB_ICONINFORMATION);
 #endif
 
 		if (in_criterr <= 1)

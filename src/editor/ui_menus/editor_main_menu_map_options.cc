@@ -34,12 +34,12 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
-	: UIWindow(parent, (parent->get_w()-200)/2, (parent->get_h()-300)/2, 200, 300, "Map Options")
+	: UIWindow(parent, (parent->get_w()-200)/2, (parent->get_h()-300)/2, 200, 300, _("Map Options"))
 {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "New Map Options", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("New Map Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    // UIButtons
@@ -49,24 +49,24 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
    const int height=20;
    int posx=offsx;
    int posy=offsy;
-   UITextarea* ta= new UITextarea(this, posx, posy+5, "Map Name:", Align_Left);
+   UITextarea* ta= new UITextarea(this, posx, posy+5, _("Map Name:"), Align_Left);
    m_name=new UIEdit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
    m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy+5, "Size:");
+   ta=new UITextarea(this, posx, posy+5, _("Size:"));
    m_size=new UITextarea(this, posx+ta->get_w()+spacing, posy+5, "512x512", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy+5, "Nr Players:");
+   ta=new UITextarea(this, posx, posy+5, _("Nr Players:"));
    m_nrplayers=new UITextarea(this, posx+ta->get_w()+spacing, posy+5, "4", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy+5, "World:");
+   ta=new UITextarea(this, posx, posy+5, _("World:"));
    m_world=new UITextarea(this, posx+ta->get_w()+spacing, posy+5, "\"Greenland\"", Align_Left);
    posy+=height+spacing;
-   ta=new UITextarea(this, posx, posy+5, "Author:", Align_Left);
+   ta=new UITextarea(this, posx, posy+5, _("Author:"), Align_Left);
    m_author=new UIEdit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 1);
    m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
-   m_descr=new UIMultiline_Editbox(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, "Nothing defined!");
+   m_descr=new UIMultiline_Editbox(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, _("Nothing defined!"));
    m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
    update();
 }

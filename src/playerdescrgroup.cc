@@ -29,14 +29,14 @@
 
 static const char* default_names[MAX_PLAYERS+1] = {
    "", 
-   "Player 1",
-   "Player 2", 
-   "Player 3", 
-   "Player 4", 
-   "Player 5", 
-   "Player 6", 
-   "Player 7", 
-   "Player 8", 
+   _("Player 1"),
+   _("Player 2"), 
+   _("Player 3"), 
+   _("Player 4"), 
+   _("Player 5"), 
+   _("Player 6"), 
+   _("Player 7"), 
+   _("Player 8"), 
    };
 
 void PlayerDescriptionGroup::allow_changes(changemode_t t) {
@@ -58,7 +58,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	set_visible(false);
 
 	// create sub-panels
-	m_plr_name=new UITextarea(this, 0, 0, 100, 20, "Player 1", Align_Left);
+	m_plr_name=new UITextarea(this, 0, 0, 100, 20, _("Player 1"), Align_Left);
 
 	m_btnEnablePlayer = new UICheckbox(this, 88, 0);
 	m_btnEnablePlayer->set_state(true);
@@ -106,8 +106,8 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
       const char* string = 0;
 		switch(m_playertype) {
 		case Player::playerLocal:
-		case Player::playerRemote: string = "Human"; break;
-		case Player::playerAI: string = "Computer"; break;
+		case Player::playerRemote: string = _("Human"); break;
+		case Player::playerAI: string = _("Computer"); break;
 		}
 		m_btnPlayerType->set_title(string);
 		m_btnPlayerType->set_visible(m_btnEnablePlayer->get_state());
@@ -196,7 +196,7 @@ void PlayerDescriptionGroup::set_player_type(int type)
 	m_playertype=type;
 	
 	if (m_enabled) {
-		m_btnPlayerType->set_title((type!=Player::playerAI)?"Human":"Computer");
+		m_btnPlayerType->set_title((type!=Player::playerAI)?_("Human"):_("Computer"));
 		
 		m_game->remove_player (m_plnum);
 		m_game->add_player (m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);

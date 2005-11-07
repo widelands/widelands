@@ -64,7 +64,7 @@ void Widelands_Map_Trigger_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
          std::string type = s->get_safe_string("type");
          bool set = s->get_safe_bool("set");
          Trigger* t = Trigger_Factory::get_correct_trigger( type.c_str());
-         t->set_name( widen_string(name).c_str() );
+         t->set_name( name.c_str() );
          t->set_trigger( set );
          t->Read( s, egbase );
 
@@ -89,7 +89,7 @@ void Widelands_Map_Trigger_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
    Map* map = egbase->get_map();
    for(int i=0; i<map->get_mtm()->get_nr_triggers(); i++) {
       Trigger* t = map->get_mtm()->get_trigger_by_nr(i);
-      s = prof.create_section( narrow_string( t->get_name()).c_str());
+      s = prof.create_section( t->get_name());
       s->set_string("type", t->get_id());
       s->set_bool("set", t->is_set());
       t->Write(s);

@@ -262,7 +262,7 @@ void Interactive_Player::think()
    char buf[32] = "";
 
    if (!speed)
-      strcpy(buf, "PAUSE");
+      strcpy(buf, _("PAUSE"));
    else if (speed > 1)
       snprintf(buf, sizeof(buf), "%ix", speed);
 
@@ -292,7 +292,7 @@ void Interactive_Player::think()
          const NetGame::Chat_Message& t = m_show_chatmsg[i].msg;
          str += get_game()->get_player(t.plrnum)->get_name();
          str += ": ";
-         str += narrow_string( t.msg );
+         str += t.msg;
          str += "\n";
       
          if( Sys_GetTime() - m_show_chatmsg[i].starttime > CHAT_DISPLAY_TIME ) {
@@ -307,7 +307,7 @@ void Interactive_Player::think()
    // Is the user typing a message?
    m_type_message->set_text("");
    if( m_is_typing_msg ) {
-      std::string text = "Message: ";
+      std::string text = _("Message: ");
       text += m_typed_message;
       m_type_message->set_text( text.c_str() );
    }
@@ -520,7 +520,7 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
                NetGame::Chat_Message t;
 
                t.plrnum = get_player_number();
-               t.msg = widen_string( m_typed_message );
+               t.msg = m_typed_message;
                m_game->get_netgame()->send_chat_message( t );
             }
             m_typed_message.clear();

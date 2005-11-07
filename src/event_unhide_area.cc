@@ -25,13 +25,15 @@
 #include "map.h"
 #include "player.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 static const int EVENT_VERSION = 1;
 
 /*
  * Init and cleanup
  */
 Event_Unhide_Area::Event_Unhide_Area(void) {
-   set_name(L"Unhide Area");
+   set_name(_("Unhide Area"));
    set_coords(Coords(0,0));
    set_player(1);
    set_area(5);

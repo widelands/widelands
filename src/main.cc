@@ -302,7 +302,7 @@ void g_main(int argc, char** argv)
                   throw;
                }
 
-               csc.set_username(widen_string(player).c_str());
+               csc.set_username(player.c_str());
                
                // Wowi, we are connected. Let's start the lobby
                Fullscreen_Menu_InetLobby* il = new Fullscreen_Menu_InetLobby(&csc);
@@ -345,7 +345,7 @@ void g_main(int argc, char** argv)
 
                case Fullscreen_Menu_Main::mm_readme:
                   {
-                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView("README","README");
+                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView(_("README"),_("README"));
                      ff->run();
                      delete ff;
                   }
@@ -353,7 +353,7 @@ void g_main(int argc, char** argv)
 
                case Fullscreen_Menu_Main::mm_license:
                   {
-                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView("COPYING","COPYING");
+                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView(_("COPYING"),_("COPYING"));
                      ff->run();
                      delete ff;
                   }

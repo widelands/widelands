@@ -62,7 +62,7 @@ void Songset::add_song(string filename)
 	current_song=songs.begin();
 }
 
-/** Get a song from the songset. Depending on \ref Sound_Handler::random_order, 
+/** Get a song from the songset. Depending on \ref Sound_Handler::sound_random_order, 
  * the selection will either be random or linear (after last song, will 
  * start again with first.*/
 Mix_Music* Songset::get_song()
@@ -223,8 +223,7 @@ void Sound_Handler::read_config()
 		disable_music=s->get_bool("disable_music",false);
 		disable_fx=s->get_bool("disable_fx",false);
 	}
-//TODO:rename random_order
-	random_order=s->get_bool("random_order", true);
+	random_order=s->get_bool("sound_random_order", true);
 
 	//TODO: only do this if music/sound enabled. BUT!! if sound gets enabled later on, these must be loaded, too!!
 	register_song("music", "intro");

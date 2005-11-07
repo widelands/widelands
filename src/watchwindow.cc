@@ -92,7 +92,7 @@ Initialize a watch window.
 ===============
 */
 WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords, bool single_window)
-	: UIWindow(parent, x, y, w, h, "Watch")
+	: UIWindow(parent, x, y, w, h, _("Watch"))
 {
 	UIButton* btn;
 	

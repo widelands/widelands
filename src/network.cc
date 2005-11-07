@@ -330,7 +330,7 @@ void NetHost::handle_network ()
 		const char* tribe=pl->get_tribe()->get_name();
 		
 		game->remove_player (i);
-		game->add_player (i, Player::playerRemote, tribe, "I have no name");
+		game->add_player (i, Player::playerRemote, tribe, _("I have no name"));
 		
 		Client peer;
 		peer.sock=sock;
@@ -433,11 +433,11 @@ void NetHost::handle_network ()
 				break;
 			    case NETCMD_CHATMESSAGE:
 				{
-					wchar_t buffer[256];
+					char buffer[256];
 					Chat_Message msg;
 //					uchar plrnum =  clients[i].deserializer->getchar();
 
-					clients[i].deserializer->getwstr (buffer, 256);
+					clients[i].deserializer->getstr (buffer, 256);
                
 					msg.msg=buffer;
 					msg.plrnum=clients[i].playernum;
@@ -514,7 +514,7 @@ void NetHost::send_chat_message_int (const Chat_Message msg)
 	serializer->begin_packet ();
 	serializer->putchar (NETCMD_CHATMESSAGE);
 	serializer->putchar (msg.plrnum);
-	serializer->putwstr (msg.msg.c_str());
+	serializer->putstr (msg.msg.c_str());
 	serializer->end_packet ();
 	
 	for (i=0;i<clients.size();i++)
@@ -571,7 +571,7 @@ void NetHost::send_chat_message (Chat_Message msg)
 	send_chat_message_int (msg);
 }
 
-void NetHost::send_game_message (const wchar_t* msg)
+void NetHost::send_game_message (const char* msg)
 {
 	Chat_Message cm;
 	
@@ -758,12 +758,12 @@ void NetClient::handle_network ()
 			break;
 		    case NETCMD_CHATMESSAGE:
 			{
-				wchar_t buffer[256];
+				char buffer[256];
 				uchar player;
 				Chat_Message msg;
 				
 				player=deserializer->getchar();
-            			deserializer->getwstr (buffer, 256);
+            			deserializer->getstr (buffer, 256);
 
         			msg.plrnum=player;
         			msg.msg=buffer;
@@ -796,7 +796,7 @@ void NetClient::send_chat_message (Chat_Message msg)
 // from someone else (other than us)	
 //	serializer->putchar(msg.plrnum);
 
-	serializer->putwstr (msg.msg.c_str());
+	serializer->putstr (msg.msg.c_str());
 	serializer->end_packet ();
 	
 	if (sock!=0)
@@ -830,11 +830,11 @@ void NetClient::disconnect ()
 /*** class NetStatusWindow ***/
 
 NetStatusWindow::NetStatusWindow (UIPanel* parent)
-	:UIWindow(parent, 0, 0, 256, 192, "Starting network game")
+	:UIWindow(parent, 0, 0, 256, 192, _("Starting network game"))
 {
     table=new UITable(this, 0, 0, 256, 192);
-    table->add_column ("Player", UITable::STRING, 192);
-    table->add_column ("Status", UITable::STRING, 64);
+    table->add_column (_("Player"), UITable::STRING, 192);
+    table->add_column (_("Status"), UITable::STRING, 64);
 }
 
 void NetStatusWindow::add_player (int num)
@@ -842,12 +842,12 @@ void NetStatusWindow::add_player (int num)
     char buffer[64];
     Entry entry;
     
-    snprintf (buffer, 64, "Player %d", num);
+    snprintf (buffer, 64, strcat(_("Player"), " %d"), num);
     
     entry.plnum=num;
     entry.entry=new UITable_Entry(table, 0);
     entry.entry->set_string (0, buffer);
-    entry.entry->set_string (1, "Waiting");
+    entry.entry->set_string (1, _("Waiting"));
     
     entries.push_back (entry);
 }
@@ -858,7 +858,7 @@ void NetStatusWindow::set_ready (int num)
     
     for (i=0;i<entries.size();i++)
 	if (entries[i].plnum==num)
-	    entries[i].entry->set_string (1, "Ready");
+	    entries[i].entry->set_string (1, _("Ready"));
 }
 
 /*** class Serializer ***/
@@ -889,58 +889,12 @@ void Serializer::end_packet ()
 	buffer[1]=length & 0xFF;
 }
 
-void Serializer::putwchar (wchar_t wc)
-{
-	// use UTF-8 encoding so preserve space in the packet
-	
-	if (wc<0x80)
-		buffer.push_back (wc);
-	else if (wc<0x800) {
-		buffer.push_back (0xC0 | (wc>>6));
-		buffer.push_back (0x80 | (wc&0x3F));
-	}
-	else if (wc<0x10000) {
-		buffer.push_back (0xE0 | (wc>>12));
-		buffer.push_back (0x80 | ((wc>>6)&0x3F));
-		buffer.push_back (0x80 | (wc&0x3F));
-	}
-	else if (wc<0x200000) {
-		buffer.push_back (0xF0 | (wc>>18));
-		buffer.push_back (0x80 | ((wc>>12)&0x3F));
-		buffer.push_back (0x80 | ((wc>>6)&0x3F));
-		buffer.push_back (0x80 | (wc&0x3F));
-	}
-	else if (wc<0x4000000) {
-		buffer.push_back (0xF8 | (wc>>24));
-		buffer.push_back (0x80 | ((wc>>18)&0x3F));
-		buffer.push_back (0x80 | ((wc>>12)&0x3F));
-		buffer.push_back (0x80 | ((wc>>6)&0x3F));
-		buffer.push_back (0x80 | (wc&0x3F));
-	}
-	else {
-		buffer.push_back (0xFC | (wc>>30));
-		buffer.push_back (0x80 | ((wc>>24)&0x3F));
-		buffer.push_back (0x80 | ((wc>>18)&0x3F));
-		buffer.push_back (0x80 | ((wc>>12)&0x3F));
-		buffer.push_back (0x80 | ((wc>>6)&0x3F));
-		buffer.push_back (0x80 | (wc&0x3F));
-	}
-}
-
 void Serializer::putstr (const char* str)
 {
 	while (*str)
 		putchar (*str++);
 	
 	putchar (0);
-}
-
-void Serializer::putwstr (const wchar_t* str)
-{
-	while (*str)
-		putwchar (*str++);
-	
-	putwchar (0);
 }
 
 void Serializer::send (TCPsocket sock)
@@ -1009,36 +963,6 @@ long Deserializer::getlong ()
 	return val;
 }
 
-wchar_t Deserializer::getwchar ()
-{
-	wchar_t chr,tmp;
-	int n;
-
-	chr=getchar() & 0xFF;
-	
-	if (chr<128)
-	    return chr;
-	
-	if (chr<0xC0 || chr>=0xFE)
-	    throw wexception("Illegal UTF-8 character encountered");
-	
-	for (n=1;chr&(0x40>>n);n++);
-	
-	chr&=0x3F >> n;
-	chr<<=n*6;
-	
-	while (n-->0) {
-		tmp=getchar() & 0xFF;
-		
-		if ((tmp&0xC0)!=0x80)
-			throw wexception("Illegal UTF-8 character encountered");
-		
-		chr|=tmp << (n*6);
-	}
-	
-	return chr;
-}
-
 void Deserializer::getstr (char* buffer, int maxlength)
 {
 	int i;
@@ -1047,18 +971,6 @@ void Deserializer::getstr (char* buffer, int maxlength)
 		if (i==maxlength)
 			throw wexception("Deserializer: string too long");
 }
-
-void Deserializer::getwstr (wchar_t* buffer, int maxlength)
-{
-	int i;
-	
-	for (i=0;(buffer[i]=getwchar())!=0;i++)
-		if (i==maxlength)
-			throw wexception("Deserializer: string too long");
-}
-
-
-/*** class Cmd_NetCheckSync ***/
 
 void Cmd_NetCheckSync::execute (Game* g)
 {

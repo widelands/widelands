@@ -138,7 +138,6 @@ public:
 	inline uint Unsigned32(int pos = -1) { return (uint)Little32(Deref32(Data(4, pos))); }
 	inline float Float(int pos = -1) { return LittleFloat(DerefFloat(Data(4, pos))); }
 	char *CString(int pos = -1);
-   wchar_t *WCString(int pos = -1);
 	bool ReadLine(char *buf, int buflen);
 
 	void *Data(int bytes, int pos = -1) {
@@ -194,7 +193,6 @@ public:
 	inline void Unsigned32(uint x, int pos = -1) { int y = Little32((int)x); Data(&y, 4, pos); }
 	inline void Float(float x, int pos = -1) { float y = LittleFloat(x); Data(&y, 4, pos); }
 	inline void CString(const char *x, int pos = -1) { Data(x, strlen(x)+1, pos); }
-	inline void WCString(const wchar_t *x, int pos = -1) { Data(x, (wcslen(x)+1)*sizeof( wchar_t ), pos); }
 };
 
 // Access all game data files etc.. through this FileSystem

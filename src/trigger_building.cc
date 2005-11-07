@@ -33,14 +33,14 @@ static const int TRIGGER_VERSION = 1;
  * Init and cleanup
  */
 Trigger_Building::Trigger_Building(void) {
-   set_name(L"Building Trigger");
+   set_name(_("Building Trigger"));
    set_trigger(false);
    m_count=-1;
    m_area=-1;
    m_pt.x=0;
    m_pt.y=0;
    m_player=-1;
-   m_building=L"<unset>";
+   m_building=_("<unset>");
 }
 
 Trigger_Building::~Trigger_Building(void) {
@@ -61,7 +61,7 @@ void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
       if(!egbase->is_game()) 
          static_cast<Editor_Interactive*>(egbase->get_iabase())->reference_player_tribe(player, this);
       set_building_count( s->get_int( "count" ));
-      set_building( widen_string( s->get_safe_string( "building" )).c_str());
+      set_building( s->get_safe_string( "building" ));
       return;
    }
    throw wexception("Building Trigger with unknown/unhandled version %i in map!\n", version);
@@ -85,7 +85,7 @@ void Trigger_Building::Write(Section* s) {
    s->set_int("count", get_building_count());
 
    // Building
-   s->set_string( "building", narrow_string( m_building ).c_str() );
+   s->set_string( "building", m_building.c_str() );
    // done
 }
 
@@ -112,7 +112,7 @@ void Trigger_Building::check_set_conditions(Game* game) {
       Building* b=static_cast<Building*>(imm);
       if(b->get_owner()!=game->get_player(m_player)) continue;
       std::string name=b->get_name();
-      if(name != narrow_string( m_building)) continue;
+      if(name != m_building) continue;
       ++count; 
    }
 

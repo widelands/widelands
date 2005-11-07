@@ -48,7 +48,7 @@ Create all the buttons etc...
 */
 Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent, int index,
 						Editor_Set_Both_Terrain_Tool* sbt, UIUniqueWindowRegistry *registry)
-	: Editor_Tool_Options_Menu(parent, index, registry, "Terrain Select")
+	: Editor_Tool_Options_Menu(parent, index, registry, _("Terrain Select"))
 {
    m_sbt=sbt;
 
@@ -146,11 +146,11 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_
    }
    ypos+=TEXTURE_H+1+space+5;
 
-   UITextarea* ta=new UITextarea(this, 0, 5, "Choose Terrain Menu", Align_Left);
+   UITextarea* ta=new UITextarea(this, 0, 5, _("Choose Terrain Menu"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
 
-   std::string buf="Current: ";
+   std::string buf=_("Current: ");
    int j=m_sbt->get_nr_enabled();
    for(int i=0; j; i++) {
       if(m_sbt->is_enabled(i)) {
@@ -201,7 +201,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
    m_sbt->enable(n,t);
    select_correct_tool();
 
-   std::string buf="Current: ";
+   std::string buf=_("Current: ");
    int j=m_sbt->get_nr_enabled();
    for(int i=0; j; i++) {
       if(m_sbt->is_enabled(i)) {

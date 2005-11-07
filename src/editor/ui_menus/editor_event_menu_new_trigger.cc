@@ -33,11 +33,11 @@
 
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
-   UIWindow(parent, 0, 0, 400, 240, "New Trigger") {
+   UIWindow(parent, 0, 0, 400, 240, _("New Trigger")) {
   m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "New Trigger Menu", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("New Trigger Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -47,7 +47,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
    int posy=offsy;
 
    // Trigger List
-   new UITextarea(this, spacing, offsy, "Available Triggers: ", Align_Left);
+   new UITextarea(this, spacing, offsy, _("Available Triggers: "), Align_Left);
    m_trigger_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_trigger_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
    m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
@@ -59,18 +59,18 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
    m_trigger_list->sort();
 
    // Descr List
-   new UITextarea(this, (get_inner_w()/2)+spacing, offsy, "Description: ", Align_Left);
+   new UITextarea(this, (get_inner_w()/2)+spacing, offsy, _("Description: "), Align_Left);
    m_description=new UIMultiline_Textarea(this, (get_inner_w()/2)+spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55, "", Align_Left);
 
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
    m_ok_button=new UIButton(this, posx, posy, 80, 20, 0, 1);
-   m_ok_button->set_title("Ok");
+   m_ok_button->set_title(_("Ok"));
    m_ok_button->clickedid.set(this, &Editor_Event_Menu_New_Trigger::clicked);
    m_ok_button->set_enabled(0);
    posx=(get_inner_w()/2)+spacing;
    UIButton* b=new UIButton(this, posx, posy, 80, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Editor_Event_Menu_New_Trigger::clicked);
 
    center_to_parent();

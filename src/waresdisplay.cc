@@ -52,7 +52,7 @@ WaresDisplay::WaresDisplay(UIPanel* parent, int x, int y, Editor_Game_Base* game
 	m_player = player;
 
    set_size(Width, 100);
-   m_curware = new UITextarea(this, 0, get_inner_h()-25, get_inner_w(), 20, "Testtext", Align_Center);
+   m_curware = new UITextarea(this, 0, get_inner_h()-25, get_inner_w(), 20, _("Testtext"), Align_Center);
 }
 
 

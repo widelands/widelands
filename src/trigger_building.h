@@ -49,14 +49,14 @@ class Trigger_Building : public Trigger {
       inline void set_player(int i) { m_player=i; }
       inline int get_area(void) { return m_area; }
       inline void set_area(int i) { m_area=i; }
-      const wchar_t* get_building(void) { return m_building.c_str(); }
-      void set_building(const wchar_t* b) { m_building=b; }
+      const char* get_building(void) { return m_building.c_str(); }
+      void set_building(const char* b) { m_building=b; }
       void set_building_count(int n) { m_count=n; }
       int get_building_count(void) { return m_count; }
  
    private:
       Coords m_pt;
-      std::wstring m_building;
+      std::string m_building;
       int m_player;
       int m_area;
       int m_count;

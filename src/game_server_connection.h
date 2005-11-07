@@ -36,12 +36,12 @@ class Game_Server_Protocol_Packet;
  *  - chat there, list games, users and so on...
  *  - send commands to the game server
  */
-typedef void (*ServerMessage_Handler)(std::wstring, void* data);
-typedef void (*CriticalError_Handler)(std::wstring, void* data);
-typedef void (*UserEntered_Handler)(std::wstring, std::wstring, bool, void*);
-typedef void (*RoomInfo_Handler)(std::vector<std::wstring >, void*);
-typedef void (*UserInfo_Handler)(std::wstring, std::wstring, std::wstring, void*);
-typedef void (*ChatMessage_Handler)(std::wstring, std::wstring, uchar, void*);
+typedef void (*ServerMessage_Handler)(std::string, void* data);
+typedef void (*CriticalError_Handler)(std::string, void* data);
+typedef void (*UserEntered_Handler)(std::string, std::string, bool, void*);
+typedef void (*RoomInfo_Handler)(std::vector<std::string >, void*);
+typedef void (*UserInfo_Handler)(std::string, std::string, std::string, void*);
+typedef void (*ChatMessage_Handler)(std::string, std::string, uchar, void*);
 typedef void (*Disconnet_Handler)( void* );
 
 class Game_Server_Connection {
@@ -64,20 +64,20 @@ class Game_Server_Connection {
       void set_disconnect_handler(Disconnet_Handler, void*);
       
       // Call callback functions
-      void server_message(std::wstring str);
-      void user_entered(std::wstring str, std::wstring, uchar);
-      void get_room_info(std::vector<std::wstring >);
-      void get_user_info( std::wstring, std::wstring, std::wstring);
-      void chat_message( std::wstring, std::wstring, uchar );
-      void critical_error(std::wstring str);
+      void server_message(std::string str);
+      void user_entered(std::string str, std::string, uchar);
+      void get_room_info(std::vector<std::string >);
+      void get_user_info( std::string, std::string, std::string);
+      void chat_message( std::string, std::string, uchar );
+      void critical_error(std::string str);
       
       // Set user data 
-      void set_username(const wchar_t* name) { m_username = name; }
-      const wchar_t* get_username(void) { return m_username.c_str(); }
-      void set_group(const wchar_t* name) { m_group = name; }
-      const wchar_t* get_group(void) { return m_group.c_str(); }
-      void set_room(const wchar_t* name); 
-      const wchar_t* get_room(void) { return m_room.c_str(); }
+      void set_username(const char* name) { m_username = name; }
+      const char* get_username(void) { return m_username.c_str(); }
+      void set_group(const char* name) { m_group = name; }
+      const char* get_group(void) { return m_group.c_str(); }
+      void set_room(const char* name); 
+      const char* get_room(void) { return m_room.c_str(); }
 
    private:
       // Connection data
@@ -89,9 +89,9 @@ class Game_Server_Connection {
       uint m_last_packet_index;
 
       // User data
-      std::wstring m_username;
-      std::wstring m_group;
-      std::wstring m_room;
+      std::string m_username;
+      std::string m_group;
+      std::string m_room;
 
       // Callback functions
       ServerMessage_Handler m_smh;

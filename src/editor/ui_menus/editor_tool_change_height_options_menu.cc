@@ -42,7 +42,7 @@ constructor
 */
 Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent, int index,
       Editor_Increase_Height_Tool* iht, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, index, registry, "Height Tools Options") {
+   Editor_Tool_Options_Menu(parent, index, registry, _("Height Tools Options")) {
 
    m_iht=iht;
    m_dht=iht->get_dht();
@@ -57,10 +57,10 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    int posy=offsy;
 
    set_inner_size(135, 135);
-   UITextarea* ta=new UITextarea(this, 0, 0, "Height Tool Options", Align_Left);
+   UITextarea* ta=new UITextarea(this, 0, 0, _("Height Tool Options"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
-   ta=new UITextarea(this, 0, 0, "In/Decrease Value", Align_Left);
+   ta=new UITextarea(this, 0, 0, _("In/Decrease Value"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=spacing+width;
    UIButton* b=new UIButton(this, posx, posy, width, height, 1, 0);
@@ -73,7 +73,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(E
    m_increase->set_pos((get_inner_w()-m_increase->get_w())/2, posy+5);
    posy+=width+spacing+spacing;
 
-   ta=new UITextarea(this, 0, 0, "Set Value", Align_Left);
+   ta=new UITextarea(this, 0, 0, _("Set Value"), Align_Left);
    ta->set_pos((get_inner_w()-ta->get_w())/2, posy+5);
    posy+=width+spacing;
    b=new UIButton(this, posx, posy, width, height, 1, 2);

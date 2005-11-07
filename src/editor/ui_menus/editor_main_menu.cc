@@ -29,6 +29,7 @@
 #include "error.h"
 #include "fullscreen_menu_fileview.h"
 
+//TODO: i18n the whole README
 static const char* EDITOR_README =
 "   README for the Widelands Map Editor\n"
 "\n"
@@ -71,12 +72,12 @@ Create all the buttons etc...
 ===============
 */
 Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 130, 200, "Main Menu")
+	: UIUniqueWindow(parent, registry, 130, 200, _("Main Menu"))
 {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Editor Main Menu", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Editor Main Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
    // UIButtons
    const int offsx=5;
@@ -88,35 +89,35 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UIUniqueWindowReg
    int posy=offsy;
 
    UIButton* b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title("New Map");
+   b->set_title(_("New Map"));
    b->clicked.set(this, &Editor_Main_Menu::new_map_btn);
    posy+=height+spacing;
 
    b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title("Load Map");
+   b->set_title(_("Load Map"));
    b->clicked.set(this, &Editor_Main_Menu::load_btn);
    posy+=height+spacing;
 
    b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title("Save Map");
+   b->set_title(_("Save Map"));
    b->clicked.set(this, &Editor_Main_Menu::save_btn);
    posy+=height+spacing;
 
    posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title("Map Options");
+   b->set_title(_("Map Options"));
    b->clicked.set(this, &Editor_Main_Menu::map_options_btn);
    posy+=height+spacing;
 
    posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title("View Readme");
+   b->set_title(_("View Readme"));
    b->clicked.set(this, &Editor_Main_Menu::readme_btn);
    posy+=height+spacing;
 
    posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 0);
-   b->set_title("Exit Editor");
+   b->set_title(_("Exit Editor"));
    b->clicked.set(this, &Editor_Main_Menu::exit_btn);
    posy+=height+spacing;
 
@@ -153,7 +154,7 @@ void Editor_Main_Menu::exit_btn() {
    m_parent->exit_editor();
 }
 void Editor_Main_Menu::readme_btn() {
-   textview_window(m_parent, &m_window_readme, "Editor README", EDITOR_README);
+   textview_window(m_parent, &m_window_readme, _("Editor README"), EDITOR_README);
 }
 
 /*

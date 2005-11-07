@@ -48,8 +48,8 @@ ushort Game_Server_Protocol_Packet_UserEntered::get_id(void) {
  * Get this packet and execute it
  */
 void Game_Server_Protocol_Packet_UserEntered::recv(Game_Server_Connection* gsc, Network_Buffer* buffer) {
-   std::wstring name = buffer->get_string();
-   std::wstring room = buffer->get_string();
+   std::string name = buffer->get_string();
+   std::string room = buffer->get_string();
    bool enters = buffer->get_8();
 
    gsc->user_entered(name, room, enters);

@@ -28,6 +28,8 @@
 #include "profile.h"
 #include "wexception.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
+
 #define TRUE_WORDS 4
 const char* trueWords[TRUE_WORDS] =
 {
@@ -883,7 +885,7 @@ void Profile::write(const char *filename, bool used_only, FileSystem* fs)
 int main(int argc, char **argv)
 {
 	if (argc != 2) {
-		cerr << "Usage: "<<argv[0]<<" <ini-file>" << std::endl;
+		cerr << _("Usage: ")<<argv[0]<<" <ini-file>" << std::endl;
 		return 3;
 	}
 

@@ -255,7 +255,7 @@ Initialize a field action window, creating the appropriate buttons.
 */
 FieldActionWindow::FieldActionWindow
 (Interactive_Base *iabase, Player* plr, UIUniqueWindowRegistry *registry) :
-	UIUniqueWindow(iabase, registry, 68, 34, "Action"),
+	UIUniqueWindow(iabase, registry, 68, 34, _("Action")),
 	m_iabase(iabase),
 	m_plr(plr),
 	m_map(iabase->get_egbase()->get_map()),

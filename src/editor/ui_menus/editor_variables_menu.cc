@@ -54,22 +54,22 @@ class New_Variable_Window : public UIWindow {
 };
 
 New_Variable_Window::New_Variable_Window(Editor_Interactive* parent) :
-   UIWindow(parent, 0, 0, 135, 55, "New Variable") {
+   UIWindow(parent, 0, 0, 135, 55, _("New Variable")) {
   
    m_parent = parent;
    m_variable = 0;
    
    // What type 
    UIButton* b = new UIButton( this, 5, 5, 60, 20, 0, 0);
-   b->set_title("Integer");
+   b->set_title(_("Integer"));
    b->clickedid.set(this, &New_Variable_Window::clicked);
    b = new UIButton( this, 70, 5, 60, 20, 0, 1);
-   b->set_title("String");
+   b->set_title(_("String"));
    b->clickedid.set(this, &New_Variable_Window::clicked);
 
    // back button
    b = new UIButton( this, (get_inner_w()-80)/2, 30, 80, 20, 1, 2);
-   b->set_title("Back");
+   b->set_title(_("Back"));
    b->clickedid.set(this, &New_Variable_Window::clicked);
 
    center_to_parent();
@@ -96,17 +96,17 @@ bool New_Variable_Window::handle_mouseclick(uint btn, bool down, int mx, int my)
 void New_Variable_Window::clicked(int i) {
    // Get the a name
 
-   wchar_t buffer[256];
+   char buffer[256];
 
    int n = 1;
    while( 1 ) {
-      swprintf(buffer, sizeof(buffer), L"Unnamed%i", n);
+      snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed"), n);
       if( !m_parent->get_egbase()->get_map()->get_mvm()->get_variable( buffer ))
          break;
       ++n;
    }
 
-   std::wstring name = buffer;
+   std::string name = buffer;
    switch( i ) {
       case 0:
          // Integer
@@ -154,7 +154,7 @@ class Edit_Variable_Window : public UIWindow {
 };
 
 Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UITable_Entry* te)
-   : UIWindow(parent, 0, 0, 250, 85, "Edit Variable") {
+   : UIWindow(parent, 0, 0, 250, 85, _("Edit Variable")) {
   
    m_parent=parent;
    m_te = te;
@@ -162,20 +162,20 @@ Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UITable_E
    int spacing = 5;
 
    // What type
-   new UITextarea(this, 5, 5, 120, 20, "Name", Align_CenterLeft);
+   new UITextarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
    m_name = new UIEdit_Box( this, 120, 5, 120, 20, 0, 0);
    m_name->set_text(m_te->get_string(0));
    
-   new UITextarea(this, 5, 30, 120, 20, "Value", Align_CenterLeft);
+   new UITextarea(this, 5, 30, 120, 20, _("Value"), Align_CenterLeft);
    m_val = new UIEdit_Box( this, 120, 35, 120, 20, 0, 0);
    m_val->set_text(m_te->get_string(1));
   
    // back button
    UIButton* b = new UIButton( this, get_inner_w()/2-80-spacing, 60, 80, 20, 1, 0);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Edit_Variable_Window::clicked);
    b = new UIButton( this, get_inner_w()/2 + spacing, 60, 80, 20, 1, 1);
-   b->set_title("Back");
+   b->set_title(_("Back"));
    b->clickedid.set(this, &Edit_Variable_Window::clicked);
 
 
@@ -222,8 +222,8 @@ void Edit_Variable_Window::clicked(int i) {
 
          if (endp && *endp) {
             char buffer[1024];
-            snprintf(buffer, sizeof(buffer), "%s is not a valid integer!", m_val->get_text());
-            UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, "Parse error!", buffer, UIModal_Message_Box::OK); 
+            snprintf(buffer, sizeof(buffer), "%s %s", m_val->get_text(), _("is not a valid integer!"));
+            UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, _("Parse error!"), buffer, UIModal_Message_Box::OK); 
             mb->run();
             delete mb;
             return;
@@ -238,14 +238,14 @@ void Edit_Variable_Window::clicked(int i) {
 
       case MapVariable::MVT_STRING:
       {
-         static_cast<String_MapVariable*>(var)->set_value( widen_string(m_val->get_text()).c_str() );
+         static_cast<String_MapVariable*>(var)->set_value( m_val->get_text() );
          m_te->set_string(1, m_val->get_text() );
       }
       break;
    }
       
-   var->set_name( widen_string(m_name->get_text()).c_str() );
-   m_te->set_string(0, narrow_string(var->get_name()).c_str() );
+   var->set_name( m_name->get_text() );
+   m_te->set_string(0, var->get_name() );
    
    end_modal(1); 
 }
@@ -259,12 +259,12 @@ Create all the buttons etc...
 ===============
 */
 Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 410, 330, "Variables Menu")
+	: UIUniqueWindow(parent, registry, 410, 330, _("Variables Menu"))
 {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Variables Menu", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Variables Menu"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    const int offsx=5;
@@ -274,21 +274,21 @@ Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UIUniqu
    int posy=offsy;
 
    m_table = new UITable(this, posx, posy, get_inner_w()-2*spacing, get_inner_h() - 60);
-   m_table->add_column("Variable", UITable::STRING, 300);
-   m_table->add_column("Value", UITable::STRING, 100);
+   m_table->add_column(_("Variable"), UITable::STRING, 300);
+   m_table->add_column(_("Value"), UITable::STRING, 100);
    m_table->selected.set(this, &Editor_Variables_Menu::table_selected);
    m_table->double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
 
    // Buttons
    UIButton* nbutton = new UIButton( this, get_inner_w()/2 - 180 - spacing, get_inner_h() - 30, 120, 20, 0, 0);
-   nbutton->set_title("New");
+   nbutton->set_title(_("New"));
    nbutton->clickedid.set(this, &Editor_Variables_Menu::clicked);
    m_edit_button = new UIButton( this, get_inner_w()/2 - 60, get_inner_h() - 30, 120, 20, 0, 1);
-   m_edit_button->set_title("Edit");
+   m_edit_button->set_title(_("Edit"));
    m_edit_button->set_enabled(false);
    m_edit_button->clickedid.set(this, &Editor_Variables_Menu::clicked);
    m_delete_button = new UIButton( this, get_inner_w()/2 + 60 + spacing, get_inner_h() - 30, 120, 20, 0, 2);
-   m_delete_button->set_title("Delete");
+   m_delete_button->set_title(_("Delete"));
    m_delete_button->set_enabled(false);
    m_delete_button->clickedid.set(this, &Editor_Variables_Menu::clicked);
 
@@ -395,15 +395,15 @@ void Editor_Variables_Menu::insert_variable( MapVariable* var ) {
    };
    
    UITable_Entry* t = new UITable_Entry(m_table, var, g_gr->get_picture( PicMod_UI, pic ), true );
-   t->set_string(0, narrow_string(var->get_name()).c_str());
+   t->set_string(0, var->get_name());
 
-   std::wstring val;
+   std::string val;
 
    switch( var->get_type() ) {
       case MapVariable::MVT_INT: 
       {
-         wchar_t buffer[256];
-         swprintf(buffer, sizeof(buffer), L"%i", static_cast<Int_MapVariable*>(var)->get_value());
+         char buffer[256];
+         snprintf(buffer, sizeof(buffer), "%li", static_cast<Int_MapVariable*>(var)->get_value());
          val = buffer; 
       }
       break;
@@ -412,10 +412,10 @@ void Editor_Variables_Menu::insert_variable( MapVariable* var ) {
       val = static_cast<String_MapVariable*>(var)->get_value();
       break;
 
-      default: val = L"";
+      default: val = "";
    }
-   t->set_string(0, narrow_string(var->get_name()).c_str()); 
-   t->set_string(1, narrow_string(val).c_str()); 
+   t->set_string(0, var->get_name()); 
+   t->set_string(1, val.c_str()); 
 
    if( var->is_delete_protected()) 
       t->set_color(RGBColor(255,0,0));

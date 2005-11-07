@@ -33,7 +33,7 @@
  * The message box himself
  */
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* egbase, Event_Message_Box* event) :
-  UIWindow(egbase->get_iabase(), 0, 0, 600, 400, narrow_string( event->get_window_title() ).c_str()) {
+  UIWindow(egbase->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
 
      UIMultiline_Textarea* m_text=0;
      UITextarea* m_caption=0;
@@ -46,14 +46,14 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
 
      // No picture, so we can optimaly assign all things its place
      set_inner_size(400,300);
-     m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, narrow_string( event->get_caption() ), Align_Center);
+     m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, event->get_caption() , Align_Center);
      posy+=50;
      m_text=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
 
      if(m_caption)
         m_caption->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
      if(m_text)
-        m_text->set_text(narrow_string( event->get_text()).c_str());
+        m_text->set_text( event->get_text());
 
 
      // Buttons
@@ -70,7 +70,7 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
         b=new UIButton(this, posx, posy, but_width, 20, 0, i);
         posx+=but_width;
         b->clickedid.set(this, &Message_Box_Event_Message_Box::clicked);
-        b->set_title( narrow_string( event->get_button_name(i)).c_str() );
+        b->set_title( event->get_button_name(i) );
         m_trigger[i]=event->get_button_trigger(i);
      }
 

@@ -39,11 +39,11 @@ Create all the buttons etc...
 ===============
 */
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
-  : UIUniqueWindow(parent,registry,400,270,"Save Game") {
+  : UIUniqueWindow(parent,registry,400,270,_("Save Game")) {
    m_parent=parent;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Save Game", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Save Game"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    int spacing=5;
@@ -64,12 +64,12 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
    // Name
    posx=get_inner_w()/2+spacing;
    posy+=20;
-   new UITextarea(this, posx, posy, 150, 20, "Map Name: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 150, 20, _("Map Name: "), Align_CenterLeft);
    m_name=new UITextarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
    // Author
-   new UITextarea(this, posx, posy, 150, 20, "Game Time: ", Align_CenterLeft);
+   new UITextarea(this, posx, posy, 150, 20, _("Game Time: "), Align_CenterLeft);
    m_gametime=new UITextarea(this, posx+90, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
@@ -78,12 +78,12 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
    posy=get_inner_h()-30;
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
-   but->set_title("OK");
+   but->set_title(_("OK"));
    but->set_enabled(false); 
    m_ok_btn=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
-   but->set_title("Cancel");
+   but->set_title(_("Cancel"));
 
    m_basedir="ssave";
    m_curdir="ssave";
@@ -233,10 +233,10 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
 
    // Check if file exists, if it does, show a warning
    if(g_fs->FileExists(complete_filename)) {
-      std::string s="A File with the name ";
+      std::string s=_("A File with the name ");
       s+=FS_Filename(filename.c_str());
-      s+=" exists already. Overwrite?";
-      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, "Save Game Error!!", s, UIModal_Message_Box::YESNO);
+      s+=_(" exists already. Overwrite?");
+      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Game Error!!"), s, UIModal_Message_Box::YESNO);
       bool retval=mbox->run();
       delete mbox;
       if(!retval) 
@@ -258,9 +258,9 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    try {
       gs->save();
    } catch(std::exception& exe) {
-      std::string s="Game Saving Error!\nSaved Game-File may be corrupt!\n\nReason given:\n";
+      std::string s=_("Game Saving Error!\nSaved Game-File may be corrupt!\n\nReason given:\n");
       s+=exe.what();
-      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, "Save Game Error!!", s, UIModal_Message_Box::OK);
+      UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Game Error!!"), s, UIModal_Message_Box::OK);
       mbox->run();
       delete mbox;
    }

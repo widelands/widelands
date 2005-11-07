@@ -45,7 +45,7 @@ Create all the buttons etc...
 */
 Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry,
                                    Editor_Interactive::Editor_Tools* tools, std::vector<UIUniqueWindowRegistry>* options)
-	: UIUniqueWindow(parent, registry, 350, 400, "Tool Menu")
+	: UIUniqueWindow(parent, registry, 350, 400, _("Tool Menu"))
 {
    m_tools=tools;
    m_parent=parent;
@@ -77,7 +77,7 @@ Editor_Tool_Menu::Editor_Tool_Menu(Editor_Interactive *parent, UIUniqueWindowReg
 
    set_inner_size(offsx+(width+spacing)*num_tools, offsy+(height+spacing));
 
-   UITextarea* ta=new UITextarea(this, 0, 0, "Tool Menu");
+   UITextarea* ta=new UITextarea(this, 0, 0, _("Tool Menu"));
    ta->set_pos((get_inner_w()-ta->get_w())/2, 5);
 
    m_radioselect->set_state(parent->get_selected_tool()-1);

@@ -36,12 +36,12 @@
 #include "util.h"
 
 Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* parent, Trigger_Building* trigger) :
-   UIWindow(parent, 0, 0, 180, 280, "Trigger Option Menu") {
+   UIWindow(parent, 0, 0, 180, 280, _("Trigger Option Menu")) {
    m_parent=parent;
    m_trigger=trigger;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Building Trigger Options", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Building Trigger Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    Coords pt=trigger->get_coords();
@@ -67,20 +67,20 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
          Building_Descr* b=tribe->get_building_descr(i);
          if(!b->get_buildable() && !b->get_enhanced_building()) continue;
          std::string name=b->get_name();
-         std::string trig_name= narrow_string( m_trigger->get_building());
+         std::string trig_name= m_trigger->get_building();
          if(name==trig_name) m_building=m_buildings.size();
          m_buildings.push_back(name);
       }
    }
 
    // Name editbox
-   new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( narrow_string(trigger->get_name()).c_str() );
+   m_name->set_text( trigger->get_name() );
    posy+=20+spacing;
 
    // Player
-   new UITextarea(this, spacing, posy, 70, 20, "Player: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
    m_player_ta=new UITextarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
    UIButton* b=new UIButton(this, spacing+90, posy, 20, 20, 0, 15);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
@@ -91,7 +91,7 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
    posy+=20+spacing;
 
    // Building
-   new UITextarea(this, spacing, posy, 70, 20, "Building: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 70, 20, _("Building: "), Align_CenterLeft);
    b=new UIButton(this, spacing+70, posy, 20, 20, 0, 23);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Trigger_Building_Option_Menu::clicked);
@@ -99,11 +99,11 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Trigger_Building_Option_Menu::clicked);
    posy+=20+spacing;
-   m_building_ta=new UITextarea(this, 0, posy, get_inner_w(), 20, "\"Hauptquartier\"", Align_Center);
+   m_building_ta=new UITextarea(this, 0, posy, get_inner_w(), 20, _("Headquarters"), Align_Center);
    posy+=20+spacing;
 
    // Count
-   new UITextarea(this, spacing, posy, 70, 20, "How many: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 70, 20, _("How many: "), Align_CenterLeft);
    m_count_ta=new UITextarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
    b=new UIButton(this, spacing+110, posy, 20, 20, 0, 25);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
@@ -114,7 +114,7 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
    posy+=20+spacing;
  
    // Set Field Buttons
-   new UITextarea(this, spacing, posy, get_inner_w(), 15, "Current position: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
    posy+=20+spacing;
    // X
    b=new UIButton(this, spacing+20, posy, 20, 20, 0, 3);
@@ -165,7 +165,7 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
    posy+=60+spacing;
 
    // Area
-   new UITextarea(this, spacing, posy+20, 70, 20, "Area: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy+20, 70, 20, _("Area: "), Align_CenterLeft);
    b=new UIButton(this, spacing+70, posy, 20, 20, 0, 17);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_up.png" ));
    b->clickedid.set(this, &Trigger_Building_Option_Menu::clicked);
@@ -192,11 +192,11 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
    posy+=spacing; // Extra space
    posx=(get_inner_w()/2)-60-spacing;
    b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Trigger_Building_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Trigger_Building_Option_Menu::clicked);
 
    set_inner_size(get_inner_w(), posy+20+spacing);
@@ -243,7 +243,7 @@ void Trigger_Building_Option_Menu::clicked(int i) {
          {
             // ok button
             if(m_name->get_text())
-               m_trigger->set_name( widen_string( m_name->get_text()).c_str() );
+               m_trigger->set_name( m_name->get_text() );
             m_trigger->set_coords(Coords(m_x,m_y));
             if(m_trigger->get_player()!=m_player && m_trigger->get_player()!=-1) 
                m_parent->unreference_player_tribe(m_trigger->get_player(), m_trigger);
@@ -252,7 +252,7 @@ void Trigger_Building_Option_Menu::clicked(int i) {
                m_parent->reference_player_tribe(m_player, m_trigger);
             }
             m_trigger->set_area(m_area);
-            m_trigger->set_building( widen_string( m_buildings[m_building]).c_str());
+            m_trigger->set_building( m_buildings[m_building].c_str());
             m_trigger->set_building_count(m_count);
             m_parent->set_need_save(true);
             end_modal(1);
@@ -310,7 +310,7 @@ void Trigger_Building_Option_Menu::update(void) {
    if(m_building<0) m_building=0;
    if(m_building>=static_cast<int>(m_buildings.size())) m_building=m_buildings.size()-1;
 
-   std::string curbuild="<invalid player tribe>";
+   std::string curbuild=_("<invalid player tribe>");
    if(!m_buildings.size()) {
       m_player=-1;
       m_building=-1;

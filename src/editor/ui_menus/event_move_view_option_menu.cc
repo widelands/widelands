@@ -33,12 +33,12 @@
 #include "util.h"
 
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* parent, Event_Move_View* event) :
-   UIWindow(parent, 0, 0, 180, 200, "Event Option Menu") {
+   UIWindow(parent, 0, 0, 180, 200, _("Event Option Menu")) {
    m_parent=parent;
    m_event=event;
 
    // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, "Move View Event Options", Align_Left);
+   UITextarea* tt=new UITextarea(this, 0, 0, _("Move View Event Options"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
 
    Coords pt=event->get_coords();
@@ -51,13 +51,13 @@ Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* par
    int posy=offsy;
 
    // Name editbox
-   new UITextarea(this, spacing, posy, 50, 20, "Name:", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( narrow_string( event->get_name()).c_str() );
+   m_name->set_text( event->get_name());
    posy+=20+spacing;
 
    // Set Field Buttons
-   new UITextarea(this, spacing, posy, get_inner_w(), 15, "Current position: ", Align_CenterLeft);
+   new UITextarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
    posy+=20+spacing;
    // X
    UIButton* b=new UIButton(this, spacing+20, posy, 20, 20, 0, 3);
@@ -110,11 +110,11 @@ Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* par
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-20-spacing;
    b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title("Ok");
+   b->set_title(_("Ok"));
    b->clickedid.set(this, &Event_Move_View_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title("Cancel");
+   b->set_title(_("Cancel"));
    b->clickedid.set(this, &Event_Move_View_Option_Menu::clicked);
 
    center_to_parent();
@@ -160,7 +160,7 @@ void Event_Move_View_Option_Menu::clicked(int i) {
          {
             // ok button
             if(m_name->get_text())
-               m_event->set_name( widen_string( m_name->get_text()).c_str() );
+               m_event->set_name( m_name->get_text());
             m_event->set_coords(Coords(m_x,m_y));
             end_modal(1);
             return;

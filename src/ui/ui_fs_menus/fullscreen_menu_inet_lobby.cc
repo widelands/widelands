@@ -36,27 +36,27 @@
 /*
  * Static callback functions for various packets
  */
-static void user_entered(std::wstring name, std::wstring room, bool enters, void* data ) {
+static void user_entered(std::string name, std::string room, bool enters, void* data ) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
    lob->user_entered(name,room,enters);
 }
-static void server_message(std::wstring str, void* data) {
+static void server_message(std::string str, void* data) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
    lob->server_message(str);
 }
-static void room_info(std::vector< std::wstring > users, void* data) {
+static void room_info(std::vector< std::string > users, void* data) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
    lob->room_info( users );
 }
-static void user_info(std::wstring user, std::wstring game, std::wstring room, void* data) {
+static void user_info(std::string user, std::string game, std::string room, void* data) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
    lob->user_info( user, game, room );
 }
-static void chat_message( std::wstring user, std::wstring msg, uchar is_action, void* data) {
+static void chat_message( std::string user, std::string msg, uchar is_action, void* data) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
    lob->chat_message( user, msg, is_action );
 }
-static void critical_error(std::wstring str, void* data) {
+static void critical_error(std::string str, void* data) {
    Fullscreen_Menu_InetLobby* lob = static_cast<Fullscreen_Menu_InetLobby*>(data);
    lob->critical_error(str);
 }
@@ -128,7 +128,7 @@ void Fullscreen_Menu_InetLobby::changed( void ) {
    m_chatbox->set_text("");
 
    // TODO: check here if this is a Server message
-   Game_Server_Protocol_Packet_ChatMessage* cm = new Game_Server_Protocol_Packet_ChatMessage(0,widen_string(text));
+   Game_Server_Protocol_Packet_ChatMessage* cm = new Game_Server_Protocol_Packet_ChatMessage(0,text);
    m_gsc->send(cm);
 }
 
@@ -145,8 +145,8 @@ void Fullscreen_Menu_InetLobby::clicked( int n ) {
  * but not written by any other user, but send by the
  * server (as response to a packet mostly) 
  */
-void Fullscreen_Menu_InetLobby::server_message(std::wstring str) {
-   std::string buf = narrow_string(str); 
+void Fullscreen_Menu_InetLobby::server_message(std::string str) {
+   std::string buf = str; 
    
    m_chatarea->set_text( (m_chatarea->get_text() + buf).c_str() );
 }
@@ -154,13 +154,13 @@ void Fullscreen_Menu_InetLobby::server_message(std::wstring str) {
 /*
  * A room info request has returned
  */
-void Fullscreen_Menu_InetLobby::room_info( std::vector<std::wstring > users ) {
+void Fullscreen_Menu_InetLobby::room_info( std::vector<std::string > users ) {
    /* We clear the list, and refill it */
    m_userlist->clear();
 
    for(uint i = 0; i < users.size(); i++ ) {
       if(users[i] == m_gsc->get_username()) continue;
-      std::string name = narrow_string(users[i]);
+      std::string name = users[i];
       m_userlist->add_entry(name.c_str(), 0);
       // Get User Informations
       Game_Server_Protocol_Packet_GetUserInfo *gui = new Game_Server_Protocol_Packet_GetUserInfo(users[i]);
@@ -172,28 +172,28 @@ void Fullscreen_Menu_InetLobby::room_info( std::vector<std::wstring > users ) {
 /*
  * A user info request has returned
  */
-void Fullscreen_Menu_InetLobby::user_info( std::wstring user, std::wstring game, std::wstring room ) {
-   wchar_t buffer[1024];
+void Fullscreen_Menu_InetLobby::user_info( std::string user, std::string game, std::string room ) {
+   char buffer[1024];
   
-   swprintf(buffer, 1024, L"User %ls is using \"%ls\" in room \"%ls\"\n", user.c_str(), game.c_str(), room.c_str()); 
+   snprintf(buffer, 1024, "User %s is using \"%s\" in room \"%s\"\n", user.c_str(), game.c_str(), room.c_str()); 
    server_message( buffer );
 }
 
 /*
  * A chat message has arrived
  */
-void Fullscreen_Menu_InetLobby::chat_message( std::wstring user, std::wstring msg, bool is_action) {
+void Fullscreen_Menu_InetLobby::chat_message( std::string user, std::string msg, bool is_action) {
    if(is_action) {
-      wchar_t buffer[msg.size()+user.size()+100];
+      char buffer[msg.size()+user.size()+100];
 
-      swprintf(buffer, msg.size()+user.size()+100, L"** %ls %ls\n", user.c_str(), msg.c_str());
+      snprintf(buffer, msg.size()+user.size()+100, "** %s %s\n", user.c_str(), msg.c_str());
       server_message( buffer );
       return;
    } 
       
    char buffer[msg.size()+user.size()+100];
 
-   snprintf(buffer, msg.size()+user.size()+100, "%s: %s\n", narrow_string(user).c_str(), narrow_string(msg).c_str());
+   snprintf(buffer, msg.size()+user.size()+100, "%s: %s\n", user.c_str(), msg.c_str());
    std::string text = m_chatbox->get_text();
    m_chatarea->set_text( (m_chatarea->get_text() + std::string(buffer)).c_str() );
 }
@@ -202,8 +202,8 @@ void Fullscreen_Menu_InetLobby::chat_message( std::wstring user, std::wstring ms
 /* 
  * A User entered the room 
  */
-void Fullscreen_Menu_InetLobby::user_entered(std::wstring gname, std::wstring groom, bool enters ) {
-   std::string name = narrow_string(gname); 
+void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groom, bool enters ) {
+   std::string name = gname; 
   
    if( enters && groom == m_gsc->get_room() ) 
       m_userlist->add_entry(name.c_str(), 0);
@@ -212,14 +212,14 @@ void Fullscreen_Menu_InetLobby::user_entered(std::wstring gname, std::wstring gr
    
    m_userlist->sort();
 
-   std::wstring str = L"User ";
+   std::string str = _("User ");
    str+=gname; 
-   str+=L" has ";
-   if(enters) str+=L"entered";
-   else str+=L"left";
-   str+=L" the room ";
+   str+=_(" has ");
+   if(enters) str+=_("entered");
+   else str+=_("left");
+   str+=_(" the room ");
    str+=groom;
-   str+=L" !\n";
+   str+=" !\n";
    server_message( str );
 
    // Get User Informations
@@ -233,8 +233,8 @@ void Fullscreen_Menu_InetLobby::user_entered(std::wstring gname, std::wstring gr
  * we only have to care for showing the user the
  * message
  */
-void Fullscreen_Menu_InetLobby::critical_error(std::wstring str) {
-   UIModal_Message_Box* mmb = new UIModal_Message_Box(this, "Critical Connection Error!", narrow_string(str), UIModal_Message_Box::OK);
+void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
+   UIModal_Message_Box* mmb = new UIModal_Message_Box(this, "Critical Connection Error!", str, UIModal_Message_Box::OK);
    mmb->run();
    m_disconnect_expected = true;
    delete mmb;

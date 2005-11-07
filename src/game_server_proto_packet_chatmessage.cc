@@ -26,11 +26,12 @@
 #include "util.h"
 #include "wexception.h"
 
+#include "ui/ui_basic/ui_object.h" //just for i18n
 
 /*
  * Constructor
  */
-Game_Server_Protocol_Packet_ChatMessage::Game_Server_Protocol_Packet_ChatMessage( uchar flags, std::wstring msg ) {
+Game_Server_Protocol_Packet_ChatMessage::Game_Server_Protocol_Packet_ChatMessage( uchar flags, std::string msg ) {
    m_flags = flags;
    m_msg = msg;
 }
@@ -53,7 +54,7 @@ ushort Game_Server_Protocol_Packet_ChatMessage::get_id(void) {
  */
 void Game_Server_Protocol_Packet_ChatMessage::send(Network_Buffer* buffer) {
    buffer->put_8(m_flags);
-   buffer->put_string(L"");  // Is ignored by server
+   buffer->put_string("");  // Is ignored by server
    buffer->put_string(m_msg);
 }
 
@@ -64,10 +65,10 @@ void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connectio
    uchar answer = buf->get_8();
 
    if( answer != CM_ACK ) {
-      wchar_t buffer[1024];
+      char buffer[1024];
 
-      swprintf(buffer, 1024, L"Server replied illegally to ChatMessage package. Should have send %i, but send %i. Ignored\n", 
-            CM_ACK, answer);
+      snprintf(buffer, 1024, "%s %i, %s %i. %s\n", _("Server replied illegally to ChatMessage package. Should have sent"), 
+		      CM_ACK, _("but sent"), answer, _("Ignored"));
    
       gsc->server_message( buffer );
    }
@@ -78,8 +79,8 @@ void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connectio
  */
 void Game_Server_Protocol_Packet_ChatMessage::recv(Game_Server_Connection* gsc, Network_Buffer* buffer) {
    m_flags = buffer->get_8();
-   std::wstring user = buffer->get_string();
-   std::wstring msg = buffer->get_string();
+   std::string user = buffer->get_string();
+   std::string msg = buffer->get_string();
 
    gsc->chat_message( user, msg, m_flags );
 }
