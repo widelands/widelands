@@ -17,13 +17,16 @@
  *
  */
 
+#define DEFINE_LANGUAGES  // So that the language array gets defined
+
 #include <stdio.h>
 #include "fullscreen_menu_options.h"
+#include "constants.h"
+#include "graphic.h"
+#include "languages.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_listselect.h"
-#include "constants.h"
-#include "graphic.h"
 
 /*
 ==============================================================================

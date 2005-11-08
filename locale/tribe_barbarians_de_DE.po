@@ -25,7 +25,7 @@ msgstr ""
 
 #: ../tribes/barbarians/workers/baker/conf:2
 msgid "Baker"
-msgstr ""
+msgstr "Bäckerei"
 
 #: ../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Bakingtray"
@@ -408,64 +408,3 @@ msgstr ""
 #: ../tribes/barbarians/buildings/tavern/conf:2
 msgid "Tavern"
 msgstr ""
-
-#: ../tribes/barbarians/wares/thatchfern/conf:2
-msgid "Thatch Fern"
-msgstr ""
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr ""
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr ""
-
-#: ../tribes/barbarians/workers/trainer/conf:2
-msgid "Trainer"
-msgstr ""
-
-#: ../tribes/barbarians/buildings/trainingscamp/conf:2
-msgid "Trainingscamp"
-msgstr ""
-
-#: ../tribes/barbarians/wares/trunk/conf:2
-msgid "Trunk"
-msgstr ""
-
-#: ../tribes/barbarians/wares/warhelmet/conf:2
-msgid "War Helmet"
-msgstr ""
-
-#: ../tribes/barbarians/buildings/warmill/conf:2
-msgid "War Mill"
-msgstr ""
-
-#: ../tribes/barbarians/buildings/warehouse/conf:2
-msgid "Warehouse"
-msgstr ""
-
-#: ../tribes/barbarians/wares/warriorsaxe/conf:2
-msgid "Warriors Axe"
-msgstr ""
-
-#: ../tribes/barbarians/wares/water/conf:2
-msgid "Water"
-msgstr ""
-
-#: ../tribes/barbarians/buildings/well/conf:2
-msgid "Well"
-msgstr ""
-
-#: ../tribes/barbarians/wares/wheat/conf:2
-msgid "Wheat"
-msgstr ""
-
-#: ../tribes/barbarians/bobs/wildboar/conf:1
-msgid "Wildboar"
-msgstr ""
-
-#: ../tribes/barbarians/buildings/hardener/conf:2
-msgid "Wood hardener"
-msgstr ""
-

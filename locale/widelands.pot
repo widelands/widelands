@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-07 21:46+0100\n"
+"POT-Creation-Date: 2005-11-08 11:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -291,6 +291,8 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:105
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:110
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:57
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:57
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:72
 msgid "OK"
 msgstr ""
 
@@ -310,6 +312,7 @@ msgstr ""
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:199
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:60
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:142
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
 msgid "Cancel"
 msgstr ""
 
@@ -333,8 +336,7 @@ msgid "A File with the name "
 msgstr ""
 
 #: ../src/game_main_menu_save_game.cc:238
-#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:336
-msgid " exists already. Overwrite?"
+msgid " already exists. Overwrite?"
 msgstr ""
 
 #: ../src/game_main_menu_save_game.cc:239
@@ -390,23 +392,17 @@ msgid "AUTHORS"
 msgstr ""
 
 #: ../src/game_server_proto_packet_chatmessage.cc:69
-msgid "Server replied illegally to ChatMessage package. Should have sent"
-msgstr ""
-
-#: ../src/game_server_proto_packet_chatmessage.cc:70
-msgid "but sent"
-msgstr ""
-
-#: ../src/game_server_proto_packet_chatmessage.cc:70
-msgid "Ignored"
+#, c-format
+msgid ""
+"Server replied illegally to ChatMessage package. Should have sent %i but "
+"sent %i. Ignored"
 msgstr ""
 
 #: ../src/game_server_proto_packet_connect.cc:72
-msgid "Server delivers a connection Error. Your Protocol"
-msgstr ""
-
-#: ../src/game_server_proto_packet_connect.cc:73
-msgid "is too old, Server runs"
+#, c-format
+msgid ""
+"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
+"Server runs %i.%02i\n"
 msgstr ""
 
 #: ../src/game_server_proto_packet_connect.cc:78
@@ -420,19 +416,13 @@ msgid "This server doesn't serve widelands!\n"
 msgstr ""
 
 #: ../src/game_server_proto_packet_getroominfo.cc:66
-msgid "The Room"
-msgstr ""
-
-#: ../src/game_server_proto_packet_getroominfo.cc:66
-msgid "is currently not logged in or unknown to the server.\n"
+#, c-format
+msgid "The Room %s is currently not logged in or unknown to the server.\n"
 msgstr ""
 
 #: ../src/game_server_proto_packet_getuserinfo.cc:66
-msgid "The User"
-msgstr ""
-
-#: ../src/game_server_proto_packet_getuserinfo.cc:66
-msgid "is currently not logged in or unknown to the server."
+#, c-format
+msgid "The User %s is currently not logged in or unknown to the server.\n"
 msgstr ""
 
 #: ../src/general_statistics_menu.cc:56 ../src/general_statistics_menu.cc:65
@@ -479,7 +469,7 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../src/map.cc:397
+#: ../src/map.cc:397 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:144
 msgid "Unknown"
 msgstr ""
 
@@ -500,11 +490,17 @@ msgstr ""
 msgid "Next scenario"
 msgstr ""
 
-#: ../src/militarysite.cc:143 ../src/militarysite.cc:145
-msgid "soldiers"
+#: ../src/militarysite.cc:143
+#, c-format
+msgid "%d soldiers (+%d)"
 msgstr ""
 
-#: ../src/minimap.cc:153
+#: ../src/militarysite.cc:145
+#, c-format
+msgid "%d soldiers"
+msgstr ""
+
+#: ../src/minimap.cc:153 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
 msgid "Map"
 msgstr ""
 
@@ -1034,10 +1030,12 @@ msgid "New Map Options"
 msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:52
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:66
 msgid "Map Name:"
 msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:56
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:85
 msgid "Size:"
 msgstr ""
 
@@ -1046,10 +1044,12 @@ msgid "Nr Players:"
 msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:62
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:87
 msgid "World:"
 msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:65
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:83
 msgid "Author:"
 msgstr ""
 
@@ -1074,6 +1074,10 @@ msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:173
 msgid "unnamed"
+msgstr ""
+
+#: ../src/editor/ui_menus/editor_main_menu_save_map.cc:336
+msgid " exists already. Overwrite?"
 msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:337
@@ -1112,8 +1116,13 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:105
 #: ../src/editor/ui_menus/editor_variables_menu.cc:72
 #: ../src/editor/ui_menus/editor_variables_menu.cc:178
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:93
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:41
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:55
 #: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:68
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:59
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:51
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:54
 msgid "Back"
 msgstr ""
 
@@ -1149,6 +1158,7 @@ msgid "Player Options"
 msgstr ""
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:240
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:142
 msgid "Player "
 msgstr ""
 
@@ -1326,6 +1336,7 @@ msgstr ""
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:77
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:48
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:59
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:81
 msgid "Name:"
 msgstr ""
 
@@ -1450,24 +1461,73 @@ msgstr ""
 msgid "Time Trigger Options"
 msgstr ""
 
+#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:45
+msgid "Close"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:77
+msgid "Lobby"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:178
+#, c-format
+msgid "User %s is using \"%s\" in room \"%s\"\n"
+msgstr ""
+
 #: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:215
-msgid "User "
+#, c-format
+msgid "User %s has entered the room %s !\n"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:217
-msgid " has "
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:215
+#, c-format
+msgid "User %s has left the room %s !\n"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:218
-msgid "entered"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:230
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:241
+msgid "Critical Connection Error!"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:219
-msgid "left"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:241
+msgid "Server disconnected unexpectedly!"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_lobby.cc:220
-msgid " the room "
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:29
+msgid "Internet Options"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:37
+msgid "Run Game"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_inet_server_options.cc:48
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:68
+msgid "nobody"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:47
+msgid "Launch Game"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:59
+msgid "Start game"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:67
+msgid "Select map"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:130
+msgid "(no map)"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:45
+msgid "Choose saved game!"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:68
+msgid "Gametime:"
 msgstr ""
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:42
@@ -1486,6 +1546,100 @@ msgstr ""
 msgid "Exit Game"
 msgstr ""
 
+#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:71
+msgid "(C) 2002-2005 by the Widelands Development Team"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:54
+msgid "Choose your map!"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:58
+msgid "Load Map as scenario: "
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:89
+msgid "Players:"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:91
+msgid "Descr:"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
+msgid "Begin Network Game"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:47
+msgid "Join a Game"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:51
+msgid "Host a New Game"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:55
+msgid "Play in Internet"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:73
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:223
+msgid "LAN games"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:78
+msgid "Host"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:80
+msgid "State"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:138
+msgid "Open"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:141
+msgid "Closed"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:216
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:238
+msgid "GGZ games"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:44
+msgid "Graphic Options"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:56
+msgid "Apply"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:61
+msgid "Fullscreen"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
+msgid "Grab Input"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:69
+msgid "In-game resolution"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:112
+msgid "In-game Options"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:118
+msgid "Use single Watchwindow Mode"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:121
+msgid "Show buildings area preview"
+msgstr ""
+
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:31
 msgid "Single Player Menu"
 msgstr ""
@@ -1496,4 +1650,17 @@ msgstr ""
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:43
 msgid "Tutorial Campaign"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:38
+msgid "Tutorial Campaign: A new Kingdom"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:46
+msgid "Mission 1: Eyes in the Darkness - Game Basics"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:50
+msgid ""
+"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
 msgstr ""
