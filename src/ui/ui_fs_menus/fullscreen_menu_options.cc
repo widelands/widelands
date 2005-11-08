@@ -24,6 +24,7 @@
 #include "constants.h"
 #include "graphic.h"
 #include "languages.h"
+#include "sound_handler.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_listselect.h"
@@ -41,7 +42,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 	: Fullscreen_Menu_Base("optionsmenu.jpg") {
 	
 	// Menu title
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 30, _("Graphic Options"), Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 30, _("General Options"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -64,6 +65,17 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 	m_inputgrab = new UICheckbox(this, 260, 100);
 	m_inputgrab->set_state(opt.inputgrab);
 	new UITextarea(this, 285, 110, _("Grab Input"), Align_VCenter);
+
+   // Enable Sound 
+	m_music = new UICheckbox(this, 260, 130);
+	m_music->set_state(opt.music);
+	new UITextarea(this, 285, 140, _("Enable Music"), Align_VCenter);
+
+	// Enable FX
+	m_fx = new UICheckbox(this, 260, 160);
+	m_fx->set_state(opt.fx);
+	new UITextarea(this, 285, 170, _("Enable Sound"), Align_VCenter);
+
 
 	// In-game resolution
 	new UITextarea(this, 70, 70, _("In-game resolution"), Align_VCenter);
@@ -109,6 +121,19 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 		m_reslist->add_entry(buf,NULL,selected);
 	}
 
+   // Available locales
+  	// In-game resolution
+	new UITextarea(this, MENU_XRES/2+70, 70, _("Language"), Align_VCenter);
+	m_language_list = new UIListselect(this, MENU_XRES/2 + 60, 85, 150, 130,Align_Left,true);
+   for(uint i = 0; i < NR_LANGUAGES; i++) {
+		bool selected = false;
+	   if(  available_languages[i].abbrev == opt.language )
+         selected = true;
+      m_language_list->add_entry( available_languages[i].name.c_str(), 
+            &available_languages[i].abbrev, selected);
+	}
+
+ 
 	title= new UITextarea(this, MENU_XRES/2, 240, _("In-game Options"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
@@ -131,7 +156,10 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	opt.inputgrab = m_inputgrab->get_state();
 	opt.single_watchwin = m_single_watchwin->get_state();
 	opt.show_warea = m_show_workarea_preview->get_state();
-	return opt;
+	opt.language = ((std::string*)(m_language_list->get_selection()))->c_str();
+   opt.music = m_music->get_state();
+   opt.fx = m_fx->get_state();
+   return opt;
 }
 
 
@@ -159,7 +187,10 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	opt.fullscreen = s->get_bool("fullscreen", false);
 	opt.single_watchwin = s->get_bool("single_watchwin",false);
 	opt.show_warea= s->get_bool("workareapreview",false);
-	return opt;
+	opt.language = s->get_string("language", "");
+   opt.music = !s->get_bool("disable_music", false);
+   opt.fx = !s->get_bool("disable_fx", false );
+   return opt;
 }
 
 void Options_Ctrl::save_options(){
@@ -171,7 +202,12 @@ void Options_Ctrl::save_options(){
 	m_opt_section->set_bool("single_watchwin",opt.single_watchwin);
 	m_opt_section->set_bool("workareapreview",opt.show_warea);
 	m_opt_section->set_int("depth", opt.depth);
-	
+   m_opt_section->set_bool("disable_music", !opt.music);
+   m_opt_section->set_bool("disable_fx", !opt.fx);
+   m_opt_section->set_string("language", opt.language.c_str());
 	Sys_SetInputGrab(opt.inputgrab);
+   Sys_SetLocale( opt.language.c_str() ); 
+   g_sound_handler.set_disable_music( !opt.music );
+   g_sound_handler.set_disable_fx( !opt.fx );
 }
 

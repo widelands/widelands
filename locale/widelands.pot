@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-08 11:56+0100\n"
+"POT-Creation-Date: 2005-11-08 13:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -312,7 +312,7 @@ msgstr ""
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:199
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:60
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:142
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:52
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:53
 msgid "Cancel"
 msgstr ""
 
@@ -362,7 +362,7 @@ msgid "Options Menu"
 msgstr ""
 
 #: ../src/game_options_menu.cc:61 ../src/game_options_menu.cc:112
-#: ../src/main.cc:343
+#: ../src/main.cc:344
 msgid "README"
 msgstr ""
 
@@ -383,7 +383,7 @@ msgstr ""
 msgid "Sound FX"
 msgstr ""
 
-#: ../src/game_options_menu.cc:117 ../src/main.cc:351
+#: ../src/game_options_menu.cc:117 ../src/main.cc:352
 msgid "COPYING"
 msgstr ""
 
@@ -1608,35 +1608,47 @@ msgstr ""
 msgid "GGZ games"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:44
-msgid "Graphic Options"
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:45
+msgid "General Options"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:56
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:57
 msgid "Apply"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:61
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:62
 msgid "Fullscreen"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:67
 msgid "Grab Input"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:69
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:72
+msgid "Enable Music"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:77
+msgid "Enable Sound"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:81
 msgid "In-game resolution"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:112
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:126
+msgid "Language"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:137
 msgid "In-game Options"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:118
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:143
 msgid "Use single Watchwindow Mode"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:121
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:146
 msgid "Show buildings area preview"
 msgstr ""
 

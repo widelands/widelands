@@ -339,10 +339,32 @@ void Sys_ReleaseTextdomain( void ) {
  * Set The locale to the given string
  */
 void Sys_SetLocale( const char* str ) {
-   if( str ) 
-      setlocale(LC_ALL, ""); 
-   else
-      setlocale(LC_ALL, str);
+   if( !str )
+      str = "";
+   
+   // Somehow setlocale doesn't behave same on 
+   // some systems.
+#ifdef __BEOS__
+   setenv ("LANG", str, 1); 
+   setenv ("LC_ALL", str, 1); 
+#endif
+#ifdef __APPLE__
+   setenv ("LANGUAGE", str, 1);
+   setenv ("LC_ALL", str, 1);
+#endif
+
+#ifdef _WIN32
+   const std::string env = "LANG=" + sstr;
+   putenv(env.c_str());
+#endif
+      
+   setlocale(LC_ALL, str);
+   if( l_textdomains.size() ) {
+      const char* domain = l_textdomains.back().c_str();
+      bind_textdomain_codeset (domain, "UTF-8");
+      bindtextdomain( domain, LOCALE_PATH );
+      textdomain(domain);
+   }
 }
 
 /*

@@ -95,7 +95,11 @@ static void g_init(int argc, char **argv)
 		s->get_string("yres");
 		s->get_bool("workareapreview");
 		s->get_bool("nozip");
-		// KLUDGE!
+      // KLUDGE!
+   
+      // Set Locale and grab default domain
+      Sys_SetLocale( s->get_string( "language" ));
+      Sys_GrabTextdomain("widelands");
 
 		g_options.check_used();
 	}
@@ -105,9 +109,6 @@ static void g_init(int argc, char **argv)
 		exit(-1);
 	}
 
-   // Set Locale and grab default domain
-   Sys_SetLocale();
-   Sys_GrabTextdomain("widelands");
 }
 
 /*

@@ -42,6 +42,9 @@ class Options_Ctrl {
 			bool fullscreen;
 			bool single_watchwin;
 			bool show_warea;
+         bool music;
+         bool fx;
+         std::string language;
 		};
 		
 		Options_Ctrl(Section *s);
@@ -69,9 +72,12 @@ public:
 private:
 	UICheckbox*	m_fullscreen;
 	UICheckbox*	m_inputgrab;
+	UICheckbox*	m_music;
+	UICheckbox*	m_fx;
 	UICheckbox* m_single_watchwin;
 	UICheckbox* m_show_workarea_preview;
 	UIListselect* m_reslist;
+	UIListselect* m_language_list;
 
 	struct res {
 		int xres;

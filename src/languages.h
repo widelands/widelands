@@ -38,10 +38,11 @@ struct Languages {
 
 /* 
  * Add your language below in alphabetical order ( as far as possible ). But keep
- * NONE as first entry 
+ * NONE as first entry. Also increase the NR_LANGUAGES variable by one
  */
 #ifdef DEFINE_LANGUAGES  // defined in fullscreen_menu_options.cc
-static Languages g_available_languages[] = {
+#define NR_LANGUAGES 2
+static Languages available_languages[NR_LANGUAGES] = {
    { "NONE", "" },
 // EXTRACT BEGIN (leaves this line untouched)
    { "Deutsch", "de_DE" },
