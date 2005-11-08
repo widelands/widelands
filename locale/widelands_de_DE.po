@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-08 13:20+0100\n"
+"POT-Creation-Date: 2005-11-08 14:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -314,7 +314,7 @@ msgstr ""
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:199
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:60
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:142
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:53
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:54
 msgid "Cancel"
 msgstr ""
 
@@ -1619,49 +1619,53 @@ msgstr ""
 msgid "GGZ games"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:45
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:46
 #, fuzzy
 msgid "General Options"
 msgstr "Optionen"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:57
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
 msgid "Apply"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:62
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:63
 msgid "Fullscreen"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:67
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:68
 msgid "Grab Input"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:72
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:73
 msgid "Enable Music"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:77
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:78
 msgid "Enable Sound"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:81
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:82
 msgid "In-game resolution"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:126
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:127
 msgid "Language"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:137
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:129
+msgid "System default language"
+msgstr "System Standardsprache"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:139
 #, fuzzy
 msgid "In-game Options"
 msgstr "Optionen"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:143
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:145
 msgid "Use single Watchwindow Mode"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:146
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:148
 msgid "Show buildings area preview"
 msgstr ""
 
@@ -1688,4 +1692,8 @@ msgstr ""
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:50
 msgid ""
 "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
+msgstr ""
+
+#: ../src/map_objective_manager.h:58
+msgid "no descr"
 msgstr ""

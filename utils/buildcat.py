@@ -24,7 +24,8 @@ def main( ):
 ###############################
 # here we go: Widelands binarys
 ###############################
-    os.system("xgettext -k_ -o widelands.pot ../src/*.cc ../src/*/*.cc ../src/*/*/*.cc")
+    os.system("xgettext -k_ -o widelands.pot ../src/*.cc ../src/*/*.cc ../src/*/*/*.cc" 
+            " ../src/*.h ../src/*/*.h ../src/*/*/*.h")
 
     for lang in LANGUAGES:
         # merge new strings with existing translations

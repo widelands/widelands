@@ -43,7 +43,7 @@ struct Languages {
 #ifdef DEFINE_LANGUAGES  // defined in fullscreen_menu_options.cc
 #define NR_LANGUAGES 2
 static Languages available_languages[NR_LANGUAGES] = {
-   { "NONE", "" },
+   { "Default system language", "" },
 // EXTRACT BEGIN (leaves this line untouched)
    { "Deutsch", "de_DE" },
 // EXTRACT END (leave this line untouched)

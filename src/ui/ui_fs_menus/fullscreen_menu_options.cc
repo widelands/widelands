@@ -25,6 +25,7 @@
 #include "graphic.h"
 #include "languages.h"
 #include "sound_handler.h"
+#include "system.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_listselect.h"
@@ -124,7 +125,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
    // Available locales
   	// In-game resolution
 	new UITextarea(this, MENU_XRES/2+70, 70, _("Language"), Align_VCenter);
-	m_language_list = new UIListselect(this, MENU_XRES/2 + 60, 85, 150, 130,Align_Left,true);
+	m_language_list = new UIListselect(this, MENU_XRES/2 + 60, 85, 170, 130,Align_Left,true);
+   available_languages[0].name = _( "System default language" ); 
    for(uint i = 0; i < NR_LANGUAGES; i++) {
 		bool selected = false;
 	   if(  available_languages[i].abbrev == opt.language )
