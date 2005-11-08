@@ -235,7 +235,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    if(g_fs->FileExists(complete_filename)) {
       std::string s=_("A File with the name ");
       s+=FS_Filename(filename.c_str());
-      s+=_(" exists already. Overwrite?");
+      s+=_(" already exists. Overwrite?");
       UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Game Error!!"), s, UIModal_Message_Box::YESNO);
       bool retval=mbox->run();
       delete mbox;

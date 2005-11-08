@@ -44,7 +44,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 	m_ml=ml;
 
 	// Title
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Launch Game", Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, _("Launch Game"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -52,11 +52,11 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 
 	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::back_clicked);
-	b->set_title("Back");
+	b->set_title(_("Back"));
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 1);
 	m_ok->clicked.set(this, &Fullscreen_Menu_LaunchGame::start_clicked);
-	m_ok->set_title("Start game");
+	m_ok->set_title(_("Start game"));
 	m_ok->set_enabled(false);
 	m_ok->set_visible(m_netgame==0 || m_netgame->is_host());
 
@@ -64,7 +64,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 	m_mapname = new UITextarea(this, 497, 184, "(no map)", Align_HCenter);
 	b = new UIButton(this, 410, 200, 174, 24, 1, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::select_map);
-	b->set_title("Select map");
+	b->set_title(_("Select map"));
 	b->set_enabled (m_netgame==0 || m_netgame->is_host());
 
 	// Player settings
@@ -127,7 +127,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		maxplayers = map->get_nrplayers();
 	}
 	else
-		m_mapname->set_text("(no map)");
+		m_mapname->set_text(_("(no map)"));
 
 	// update the player description groups
 	for(int i = 0; i < MAX_PLAYERS; i++) {
@@ -139,7 +139,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			m_players[i]->set_player_tribe(map->get_scenario_player_tribe(i+1));
 			m_players[i]->set_player_name(map->get_scenario_player_name(i+1));
 		} else if(i<maxplayers && map ) {
-			std::string name="Player ";
+			std::string name=_("Player ");
 			if((i+1)/10) name.append(1, static_cast<char>((i+1)/10 + 0x30));
 			name.append(1, static_cast<char>(((i+1)%10) + 0x30));
 			m_players[i]->set_player_name(name);

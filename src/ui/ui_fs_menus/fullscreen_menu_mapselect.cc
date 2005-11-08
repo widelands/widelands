@@ -51,11 +51,11 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
    *m_ml=0;
 
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, "Choose your map!", Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, _("Choose your map!"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
    // Checkbox
-   UITextarea* ta=new UITextarea(this, MENU_XRES-300, 130, "Load Map as scenario: ", Align_VCenter);
+   UITextarea* ta=new UITextarea(this, MENU_XRES-300, 130, _("Load Map as scenario: "), Align_VCenter);
    UICheckbox* cb=new UICheckbox(this, (ta->get_x()+ta->get_w()+10), 120);
    cb->changedto.set(this, &Fullscreen_Menu_MapSelect::changed);
    cb->set_state(m_is_scenario);
@@ -69,7 +69,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_MapSelect::ok);
-	m_ok->set_title("OK");
+	m_ok->set_title(_("OK"));
 	m_ok->set_enabled(false);
 
 	// Create the list area
@@ -78,17 +78,17 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
    list->double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
 
 	// Info fields
-	new UITextarea(this, 450, 160, "Name:", Align_Right);
+	new UITextarea(this, 450, 160, _("Name:"), Align_Right);
 	taname = new UITextarea(this, 460, 160, "");
-	new UITextarea(this, 450, 180, "Author:", Align_Right);
+	new UITextarea(this, 450, 180, _("Author:"), Align_Right);
 	taauthor = new UITextarea(this, 460, 180, "");
-	new UITextarea(this, 450, 200, "Size:", Align_Right);
+	new UITextarea(this, 450, 200, _("Size:"), Align_Right);
 	tasize = new UITextarea(this, 460, 200, "");
-	new UITextarea(this, 450, 220, "World:", Align_Right);
+	new UITextarea(this, 450, 220, _("World:"), Align_Right);
 	taworld = new UITextarea(this, 460, 220, "");
-	new UITextarea(this, 450, 240, "Players:", Align_Right);
+	new UITextarea(this, 450, 240, _("Players:"), Align_Right);
 	tanplayers = new UITextarea(this, 460, 240, "");
-	new UITextarea(this, 450, 260, "Descr:", Align_Right);
+	new UITextarea(this, 450, 260, _("Descr:"), Align_Right);
 	tadescr = new UIMultiline_Textarea(this, 460, 260, 160, 80, "");
    
    m_basedir="maps";

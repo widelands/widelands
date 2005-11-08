@@ -38,7 +38,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 	: Fullscreen_Menu_Base("optionsmenu.jpg") {
 	
 	// Menu title
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 30, "Grapic Options", Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 30, _("Graphic Options"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -46,24 +46,24 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 
 	b = new UIButton(this, 330, 420, 174, 24, 0, om_cancel);
 	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
-	b->set_title("Cancel");
+	b->set_title(_("Cancel"));
 
 	b = new UIButton(this, 136, 420, 174, 24, 2, om_ok);
 	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
-	b->set_title("Apply");
+	b->set_title(_("Apply"));
 
 	// Fullscreen mode
 	m_fullscreen = new UICheckbox(this, 260, 70);
 	m_fullscreen->set_state(opt.fullscreen);
-	new UITextarea(this, 285, 80, "Fullscreen", Align_VCenter);
+	new UITextarea(this, 285, 80, _("Fullscreen"), Align_VCenter);
 
 	// input grab
 	m_inputgrab = new UICheckbox(this, 260, 100);
 	m_inputgrab->set_state(opt.inputgrab);
-	new UITextarea(this, 285, 110, "Grab Input", Align_VCenter);
+	new UITextarea(this, 285, 110, _("Grab Input"), Align_VCenter);
 
 	// In-game resolution
-	new UITextarea(this, 70, 70, "In-game resolution", Align_VCenter);
+	new UITextarea(this, 70, 70, _("In-game resolution"), Align_VCenter);
    
    // GRAPHIC_TODO: this shouldn't be here List all resolutions
    SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
@@ -106,16 +106,16 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 		m_reslist->add_entry(buf,NULL,selected);
 	}
 
-	title= new UITextarea(this, MENU_XRES/2, 240, "In-game Options", Align_HCenter);
+	title= new UITextarea(this, MENU_XRES/2, 240, _("In-game Options"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
    // Toggle Options
 	m_single_watchwin = new UICheckbox(this,60,280);
 	m_single_watchwin->set_state(opt.single_watchwin);
-	new UITextarea(this,85,290,"Use single Watchwindow Mode", Align_VCenter);
+	new UITextarea(this,85,290,_("Use single Watchwindow Mode"), Align_VCenter);
 	m_show_workarea_preview= new UICheckbox(this,60,305);
 	m_show_workarea_preview->set_state(opt.show_warea);
-	new UITextarea(this,85,315,"Show buildings area preview", Align_VCenter);
+	new UITextarea(this,85,315,_("Show buildings area preview"), Align_VCenter);
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {

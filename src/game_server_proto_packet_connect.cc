@@ -69,8 +69,8 @@ void Game_Server_Protocol_Packet_Connect::handle_reply(Game_Server_Connection* g
          break;
 
       case PROTOCOL_TO_OLD: 
-         snprintf(buffer, 1024, "%s (%i.%02i) %s %i.%02i\n", _("Server delivers a connection Error. Your Protocol"),
-               GSP_MAJOR_VERSION, GSP_MINOR_VERSION, _("is too old, Server runs"), version &0xff00 , version &0x00ff );
+         snprintf(buffer, 1024, _("Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"),
+			 GSP_MAJOR_VERSION, GSP_MINOR_VERSION, version &0xff00 , version &0x00ff );
          gsc->critical_error(buffer);
          break;
 

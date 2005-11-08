@@ -35,7 +35,7 @@ Fullscreen_Menu_TutorialSelectMap::Fullscreen_Menu_TutorialSelectMap()
 	: Fullscreen_Menu_Base("singleplmenu.jpg")
 {
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 45, "Tutorial Campaign: A new Kingdom", Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 45, _("Tutorial Campaign: A new Kingdom"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -43,15 +43,15 @@ Fullscreen_Menu_TutorialSelectMap::Fullscreen_Menu_TutorialSelectMap()
 
 	b = new UIButton(this, 30, 75, 580, 24, 1, 1);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
-	b->set_title("Mission 1: Eyes in the Darkness - Game Basics");
+	b->set_title(_("Mission 1: Eyes in the Darkness - Game Basics"));
 
 	b = new UIButton(this, 30, 105, 580, 24, 1, 2);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
-	b->set_title("Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions");
+	b->set_title(_("Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"));
 
 	b = new UIButton(this, (get_inner_w()-120)/2, get_inner_h()-80, 120, 24, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
-	b->set_title("Back");
+	b->set_title(_("Back"));
 }
 
 const char* Fullscreen_Menu_TutorialSelectMap::get_mapname( int code ) {

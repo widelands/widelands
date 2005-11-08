@@ -36,7 +36,7 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	discovery->set_callback (discovery_callback, this);
 	
 	// Text
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Begin Network Game", Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, _("Begin Network Game"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -44,19 +44,19 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 
 	b = new UIButton(this, 60, 170, 174, 24, 1, JOINGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::joingame);
-	b->set_title("Join a Game");
+	b->set_title(_("Join a Game"));
 
 	b = new UIButton(this, 60, 210, 174, 24, 1, HOSTGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::hostgame);
-	b->set_title("Host a New Game");
+	b->set_title(_("Host a New Game"));
 
 	b = new UIButton(this, 60, 250, 174, 24, 1, INTERNETGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
-	b->set_title("Play in Internet");
+	b->set_title(_("Play in Internet"));
 
 	b = new UIButton(this, 60, 290, 174, 24, 0, CANCEL);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
-	b->set_title("Back");
+	b->set_title(_("Back"));
 
 	// Hostname
 	hostname=new UIEdit_Box(this, 288, 170, 174, 24, 2, 0);
@@ -65,19 +65,19 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 
 	// Player 
 	playername=new UIEdit_Box(this, 288, 210, 174, 24, 2, 0);
-	playername->set_text("nobody");
+	playername->set_text(_("nobody"));
 
 	// LAN or GGZ game
 	networktype = new UIButton(this, 482, 170, 124, 24, 0, -1);
 	networktype->clickedid.set(this, &Fullscreen_Menu_NetSetup::toggle_networktype);
-	networktype->set_title("LAN games");
+	networktype->set_title(_("LAN games"));
 	internetgame = false;
 	
 	// List of open games in local network
 	opengames=new UITable(this, 288, 250, 320, 128);
-	opengames->add_column ("Host", UITable::STRING, 128);
-	opengames->add_column ("Map", UITable::STRING, 128);
-	opengames->add_column ("State", UITable::STRING, 64);
+	opengames->add_column (_("Host"), UITable::STRING, 128);
+	opengames->add_column (_("Map"), UITable::STRING, 128);
+	opengames->add_column (_("State"), UITable::STRING, 64);
 	opengames->selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
 }
 
@@ -135,13 +135,13 @@ void Fullscreen_Menu_NetSetup::update_game_info (UITable_Entry* entry, const LAN
 	
 	switch (info.state) {
 	    case LAN_GAME_OPEN:
-		entry->set_string (2, "Open");
+		entry->set_string (2, _("Open"));
 		break;
 	    case LAN_GAME_CLOSED:
-		entry->set_string (2, "Closed");
+		entry->set_string (2, _("Closed"));
 		break;
 	    default:
-		entry->set_string (2, "Unknown");
+		entry->set_string (2, _("Unknown"));
 		break;
 	}
 }
@@ -213,14 +213,14 @@ void Fullscreen_Menu_NetSetup::toggle_networktype(int code)
 		hostname->set_text(defaultserver);
 
 		NetGGZ::ref()->initcore(hostname->get_text(), playername->get_text());
-		networktype->set_title("GGZ games");
+		networktype->set_title(_("GGZ games"));
 		if(NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
 	}
 	else
 	{
 		hostname->set_text("localhost");
 		discovery->reset();
-		networktype->set_title("LAN games");
+		networktype->set_title(_("LAN games"));
 	}
 }
 
@@ -235,7 +235,7 @@ void Fullscreen_Menu_NetSetup::toggle_hostname()
 
 		NetGGZ::ref()->deinitcore();
 		NetGGZ::ref()->initcore(hostname->get_text(), playername->get_text());
-		networktype->set_title("GGZ games");
+		networktype->set_title(_("GGZ games"));
 		if(NetGGZ::ref()->tables().size() > 0) fill(NetGGZ::ref()->tables());
 	}
 }

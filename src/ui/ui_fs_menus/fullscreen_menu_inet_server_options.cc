@@ -26,7 +26,7 @@ Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this
 {
 	// Text
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, "Internet Options", Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, _("Internet Options"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -34,18 +34,18 @@ Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 
 	b = new UIButton(this, 60, 170, 174, 24, 1, 1);
 	b->clickedid.set(this, &Fullscreen_Menu_InetServerOptions::end_modal);
-	b->set_title("Run Game");
+	b->set_title(_("Run Game"));
 
 	b = new UIButton(this, 60, 250, 174, 24, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_InetServerOptions::end_modal);
-	b->set_title("Back");
+	b->set_title(_("Back"));
 	
 	// Hostname
 	hostname=new UIEdit_Box(this, 288, 210, 174, 24, 2, 0);
 	hostname->set_text("localhost");	
 	// Player 
 	playername=new UIEdit_Box(this, 288, 240, 174, 24, 2, 0);
-	playername->set_text("nobody");	
+	playername->set_text(_("nobody"));	
 }
 
 Fullscreen_Menu_InetServerOptions::~Fullscreen_Menu_InetServerOptions ()

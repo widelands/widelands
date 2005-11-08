@@ -42,7 +42,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer
 	: Fullscreen_Menu_Base("choosemapmenu.jpg")
 {
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, "Choose saved game!", Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 90, _("Choose saved game!"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons
@@ -54,7 +54,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_LoadGame::ok);
-	m_ok->set_title("OK");
+	m_ok->set_title(_("OK"));
 	m_ok->set_enabled(false);
 
 	// Create the list area
@@ -63,9 +63,9 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer
    list->double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
 
 	// Info fields
-	new UITextarea(this, 450, 180, "Map Name:", Align_Right);
+	new UITextarea(this, 450, 180, _("Map Name:"), Align_Right);
 	tamapname = new UITextarea(this, 460, 180, "");
-	new UITextarea(this, 450, 200, "Gametime:", Align_Right);
+	new UITextarea(this, 450, 200, _("Gametime:"), Align_Right);
 	tagametime = new UITextarea(this, 460, 200, "");
    
    fill_list();

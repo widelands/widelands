@@ -74,7 +74,7 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
    m_disconnect_expected = false;
 
    // Text
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 10, "Lobby", Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 10, _("Lobby"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// Chat area
@@ -90,7 +90,7 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
 
    // Buttons
    UIButton* b = new UIButton(this, (int)(get_inner_w()-get_inner_w()*0.25+5), get_inner_h()-45, 50, 25, 0, 0);
-   b->set_title("Back");
+   b->set_title(_("Back"));
    b->clickedid.set(this, &Fullscreen_Menu_InetLobby::clicked);
 
    m_gsc = gsc;
@@ -175,7 +175,7 @@ void Fullscreen_Menu_InetLobby::room_info( std::vector<std::string > users ) {
 void Fullscreen_Menu_InetLobby::user_info( std::string user, std::string game, std::string room ) {
    char buffer[1024];
   
-   snprintf(buffer, 1024, "User %s is using \"%s\" in room \"%s\"\n", user.c_str(), game.c_str(), room.c_str()); 
+   snprintf(buffer, 1024, _("User %s is using \"%s\" in room \"%s\"\n"), user.c_str(), game.c_str(), room.c_str()); 
    server_message( buffer );
 }
 
@@ -212,14 +212,7 @@ void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groo
    
    m_userlist->sort();
 
-   std::string str = _("User ");
-   str+=gname; 
-   str+=_(" has ");
-   if(enters) str+=_("entered");
-   else str+=_("left");
-   str+=_(" the room ");
-   str+=groom;
-   str+=" !\n";
+   std::string str = enters ? _("User %s has entered the room %s !\n") : _("User %s has left the room %s !\n");
    server_message( str );
 
    // Get User Informations
@@ -234,7 +227,7 @@ void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groo
  * message
  */
 void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
-   UIModal_Message_Box* mmb = new UIModal_Message_Box(this, "Critical Connection Error!", str, UIModal_Message_Box::OK);
+   UIModal_Message_Box* mmb = new UIModal_Message_Box(this, _("Critical Connection Error!"), str, UIModal_Message_Box::OK);
    mmb->run();
    m_disconnect_expected = true;
    delete mmb;
@@ -245,7 +238,7 @@ void Fullscreen_Menu_InetLobby::critical_error(std::string str) {
  */
 void Fullscreen_Menu_InetLobby::disconnect( void ) {
    if(!m_disconnect_expected) {
-      UIModal_Message_Box* mmb = new UIModal_Message_Box(this, "Critical Connection Error!", "Server disconnected unexpectedly!", UIModal_Message_Box::OK);
+      UIModal_Message_Box* mmb = new UIModal_Message_Box(this, _("Critical Connection Error!"), _("Server disconnected unexpectedly!"), UIModal_Message_Box::OK);
       mmb->run();
       delete mmb;
    }
