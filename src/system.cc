@@ -330,10 +330,12 @@ void Sys_GrabTextdomain( const char* domain) {
 void Sys_ReleaseTextdomain( void ) {
    l_textdomains.pop_back();
 
-   const char* domain = l_textdomains.back().c_str();
-   bind_textdomain_codeset (domain, "UTF-8"); 
-   bindtextdomain( domain, LOCALE_PATH ); 
-   textdomain(domain);
+   if (l_textdomains.size()>0) { //don't try to get the previous TD when the very first one ('widelands') just got dropped
+   	const char* domain = l_textdomains.back().c_str();
+   	bind_textdomain_codeset (domain, "UTF-8"); 
+   	bindtextdomain( domain, LOCALE_PATH ); 
+   	textdomain(domain);
+   }
 }
 /*
  * Set The locale to the given string
