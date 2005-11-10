@@ -1,0 +1,94 @@
+# Swedish translation of widelands.
+# Copyright (C) 2005 THE widelands'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the widelands package.
+# Daniel Nylander <po@danielnylander.se>, 2005.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands world greenland\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2005-11-09 17:22+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: swe\n"
+"X-Poedit-Country: swe\n"
+
+#~ msgid "Bunny"
+#~ msgstr "Kanin"
+
+#~ msgid "Bush"
+#~ msgstr "Buske"
+
+#~ msgid "Cactus"
+#~ msgstr "Kaktus"
+
+#~ msgid "Coal"
+#~ msgstr "Kol"
+
+#~ msgid "Dead Tree"
+#~ msgstr "Dött träd"
+
+#~ msgid "Deer"
+#~ msgstr "Hjort"
+
+#~ msgid "Duck"
+#~ msgstr "Anka"
+
+#~ msgid "Fish"
+#~ msgstr "Fisk"
+
+#~ msgid "Fox"
+#~ msgstr "Räv"
+
+#~ msgid "Gold"
+#~ msgstr "Guld"
+
+#~ msgid "Granit"
+#~ msgstr "Granit"
+
+#~ msgid "Grass"
+#~ msgstr "Gräs"
+
+#~ msgid "Greenland"
+#~ msgstr "Grönland"
+
+#~ msgid "Iron"
+#~ msgstr "Järn"
+
+#~ msgid "Mushroom"
+#~ msgstr "Svamp"
+
+#~ msgid "Pebble"
+#~ msgstr "Småsten"
+
+#~ msgid "Reindeer"
+#~ msgstr "Ren"
+
+#~ msgid "Sheep"
+#~ msgstr "Får"
+
+#~ msgid "Skeleton"
+#~ msgstr "Skelett"
+
+#~ msgid "Standing Stones"
+#~ msgstr "Stående stenar"
+
+#~ msgid "Stones"
+#~ msgstr "Stenar"
+
+#~ msgid "The Widelands Development Team"
+#~ msgstr "Widelands utvecklingslag"
+
+#~ msgid "These are the beauty and bountifull countries of the barbarians"
+#~ msgstr "Detta är de vackra och rika barbarländerna"
+
+#~ msgid "Tree"
+#~ msgstr "Trä"
+
+#~ msgid "Water"
+#~ msgstr "Vatten"
