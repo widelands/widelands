@@ -138,6 +138,8 @@ FXset::~FXset()
  * \param[in] prio	Set previous \ref priority to new value (optional)*/
 void FXset::add_fx(Mix_Chunk* fx, Uint8 prio)
 {
+	assert(fx);
+	
 	priority=prio;
 	fxs.push_back(fx);
 }
@@ -225,7 +227,6 @@ void Sound_Handler::read_config()
 	}
 	random_order=s->get_bool("sound_random_order", true);
 
-	//TODO: only do this if music/sound enabled. BUT!! if sound gets enabled later on, these must be loaded, too!!
 	register_song("music", "intro");
 	register_song("music", "menu");
 	register_song("music", "ingame");
@@ -279,6 +280,8 @@ Mix_Chunk* Sound_Handler::RWopsify_MixLoadWAV(FileRead* fr)
 	string tempfile;
 	SDL_RWops* target;
 	SDL_RWops* src;
+	
+	assert(fr);
 
 	src=SDL_RWFromMem(fr->data, fr->GetSize()); //direct access to member variable is neccessary here
 

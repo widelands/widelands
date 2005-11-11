@@ -941,6 +941,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base *g)
 void PlayerImmovable::log_general_info(Editor_Game_Base* egbase)  {
    BaseImmovable::log_general_info(egbase);
 
+   molog("this: %p\n", this);
    molog("m_owner: %p\n", m_owner);
    molog("* player nr: %i\n", m_owner->get_player_number());
    molog("m_economy: %p\n", m_economy);

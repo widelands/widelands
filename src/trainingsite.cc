@@ -70,10 +70,14 @@ Parse the additional information necessary for miltary buildings
 void TrainingSite_Descr::parse(const char* directory, Profile* prof,
 	const EncodeData* encdata)
 {
-	Section* sglobal = prof->get_section("global");
+	Section* sglobal;
 	std::string trainable;
 	std::vector<std::string> str_list;
 
+	assert(directory);
+	assert(prof);
+	
+	sglobal = prof->get_section("global");
 	ProductionSite_Descr::parse(directory,prof,encdata);
 
 	// Defaults to false
@@ -97,21 +101,25 @@ void TrainingSite_Descr::parse(const char* directory, Profile* prof,
 	// Read the range of levels that can update this building
 	if (m_train_hp) {
 		Section* sect = prof->get_section("hp");
+		assert(sect);
 		m_min_hp = sect->get_safe_int("min_level");
 		m_max_hp = sect->get_safe_int("max_level");
 	}
 	if (m_train_attack) {
 		Section* sect = prof->get_section("attack");
+		assert(sect);
 		m_min_attack = sect->get_safe_int("min_level");
 		m_max_attack = sect->get_safe_int("max_level");
 	}
 	if (m_train_defense) {
 		Section* sect = prof->get_section("defense");
+		assert(sect);
 		m_min_defense = sect->get_safe_int("min_level");
 		m_max_defense = sect->get_safe_int("max_level");
 	}
 	if (m_train_evade) {
 		Section* sect = prof->get_section("evade");
+		assert(sect);
 		m_min_evade = sect->get_safe_int("min_level");
 		m_max_evade = sect->get_safe_int("max_level");
 	}
@@ -217,6 +225,9 @@ std::string TrainingSite::get_statistics_string()
 {
 	State *state;
 	state = get_current_program();
+
+	assert(state);
+	
 	if (state) {
 		return m_prog_name;
 	} else
@@ -236,12 +247,10 @@ Initialize the Training site (request worker).
 */
 void TrainingSite::init(Editor_Game_Base* g)
 {
+	assert(g);
+	
 	ProductionSite::init(g);
-
-	if (g->is_game()) {
-		// Request soldiers
-		call_soldiers((Game *)g);
-	}
+	call_soldiers((Game *)g);
 }
 
 /*
@@ -254,6 +263,8 @@ Note that the workers are dealt with in the PlayerImmovable code.
 */
 void TrainingSite::set_economy(Economy* e)
 {
+	assert(e);
+	
 	// TODO: SoldiersQueue migration <--- This it does at call_soldier and drop_soldier
 	ProductionSite::set_economy(e);
 
@@ -272,6 +283,8 @@ Cleanup after a Training site is removed
 */
 void TrainingSite::cleanup(Editor_Game_Base* g)
 {
+	assert(g);
+	
 	// Release soldier
 	if (m_soldier_requests.size()) {
 		for (uint i = 0; i < m_soldier_requests.size(); i++) {
@@ -324,10 +337,15 @@ Issue the soldier request
 */
 void TrainingSite::request_soldier(Game* g)
 {
+	assert(g);
+	
 	int soldierid = get_owner()->get_tribe()->get_safe_worker_index("soldier");
 
 	Request* req = new Request(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::SOLDIER);
 	Requeriments* r = new Requeriments();
+
+	assert(req);
+	assert(r);
 
    // setting requirements to match this site
    int totalmax = 0;
@@ -371,6 +389,11 @@ Called when our soldier arrives.
 void TrainingSite::request_soldier_callback(Game* g, Request* rq, int ware,
 	Worker* w, void* data)
 {
+	assert(g);
+	assert(rq);
+	assert(w);
+	assert(data);
+	
 	TrainingSite* tsite = (TrainingSite*)data;
 	Soldier* s=static_cast<Soldier*>(w);
 
@@ -402,10 +425,10 @@ Send the request for more soldiers if there are not full
 ===========
  */
 void TrainingSite::call_soldiers(Game *g) {
-	if (g->is_game()) {
-		while(m_capacity > m_total_soldiers) {
-			request_soldier(g);
-		}
+	assert(g);
+	
+	while(m_capacity > m_total_soldiers) {
+		request_soldier(g);
 	}
 }
 
@@ -419,7 +442,9 @@ Get out specied soldier from house. (Game queue usage)
 void TrainingSite::drop_soldier (uint serial) {
 	Game* g = (Game *)get_owner()->get_game();
 
-	if (g->is_game() && m_soldiers.size()) {
+	assert(g);
+
+	if (m_soldiers.size()) {
 		int i = 0;
 		Soldier* s = m_soldiers[i];
 		while ((s->get_serial() != serial) && (i < (int)m_soldiers.size())) {
@@ -441,32 +466,29 @@ Note: This function shouldn't be called NEVER directly, use drop_soldier(serial)
 ==========
 */
 void TrainingSite::drop_soldier (Game *g, uint nr) {
+	assert(g);
+	assert(nr<m_soldiers.size());
+	
+	Soldier *s;
 
-	if (g->is_game()) {
-		Soldier *s;
-		// Is out of bounds ?
-		if (nr >= m_soldiers.size())
-			return;
+	s = m_soldiers[nr];
+	s->set_location(0);
 
-		s = m_soldiers[nr];
-		s->set_location(0);
+	m_total_soldiers--;
 
-		m_total_soldiers--;
+	for (uint i = nr; i < m_soldiers.size() - 1 ; i++)
+		m_soldiers[i] = m_soldiers[i+1];
 
-		for (uint i = nr; i < m_soldiers.size() - 1 ; i++)
-			m_soldiers[i] = m_soldiers[i+1];
+	m_soldiers.pop_back();
 
-		m_soldiers.pop_back();
+	// Call more soldiers if are enought space
+	call_soldiers (g);
 
-		// Call more soldiers if are enought space
-		call_soldiers (g);
-
-		// Walk the soldier home safely
-		s->reset_tasks(g);
-		s->set_location(this);
-      s->mark(false);
-		s->start_task_leavebuilding(g,true);
-	}
+	// Walk the soldier home safely
+	s->reset_tasks(g);
+	s->set_location(this);
+	s->mark(false);
+	s->start_task_leavebuilding(g,true);
 }
 
 /*
@@ -478,38 +500,39 @@ This is for drop all the soldiers that can not be upgraded at this building
  */
 void TrainingSite::drop_unupgradable_soldiers(Game *g) {
 	uint count_upgrades = 0;
+
+	assert(g);
+	
 	if (get_descr()->get_train_hp())		count_upgrades++;
 	if (get_descr()->get_train_attack())	count_upgrades++;
 	if (get_descr()->get_train_defense())	count_upgrades++;
 	if (get_descr()->get_train_evade())		count_upgrades++;
 
-	if (g->is_game()) {
-		for (uint i = 0; i < m_soldiers.size(); i++) {
-			uint count;
-			count = 0;
-			if (((m_soldiers[i]->get_level(atrHP) < (uint)get_descr()->get_min_level(atrHP)) ||
-				(m_soldiers[i]->get_level(atrHP) >= (uint)get_descr()->get_max_level(atrHP)))
-				&& (get_descr()->get_train_hp()))
-				count ++;
+	for (uint i = 0; i < m_soldiers.size(); i++) {
+		uint count;
+		count = 0;
+		if (((m_soldiers[i]->get_level(atrHP) < (uint)get_descr()->get_min_level(atrHP)) ||
+			(m_soldiers[i]->get_level(atrHP) >= (uint)get_descr()->get_max_level(atrHP)))
+			&& (get_descr()->get_train_hp()))
+			count ++;
 
-			if (((m_soldiers[i]->get_level(atrAttack) < (uint)get_descr()->get_min_level(atrAttack)) ||
-				(m_soldiers[i]->get_level(atrAttack) >= (uint)get_descr()->get_max_level(atrAttack)))
-				&& (get_descr()->get_train_attack()))
-				count ++;
+		if (((m_soldiers[i]->get_level(atrAttack) < (uint)get_descr()->get_min_level(atrAttack)) ||
+			(m_soldiers[i]->get_level(atrAttack) >= (uint)get_descr()->get_max_level(atrAttack)))
+			&& (get_descr()->get_train_attack()))
+			count ++;
 
-			if (((m_soldiers[i]->get_level(atrDefense) < (uint)get_descr()->get_min_level(atrDefense)) ||
-				(m_soldiers[i]->get_level(atrDefense) >= (uint) get_descr()->get_max_level(atrDefense)))
-				&& (get_descr()->get_train_defense()))
-				count ++;
+		if (((m_soldiers[i]->get_level(atrDefense) < (uint)get_descr()->get_min_level(atrDefense)) ||
+			(m_soldiers[i]->get_level(atrDefense) >= (uint) get_descr()->get_max_level(atrDefense)))
+			&& (get_descr()->get_train_defense()))
+			count ++;
 
-			if (((m_soldiers[i]->get_level(atrEvade) < (uint) get_descr()->get_min_level(atrEvade)) ||
-				(m_soldiers[i]->get_level(atrEvade) >= (uint) get_descr()->get_max_level(atrEvade)))
-				&& (get_descr()->get_train_evade()))
-				count ++;
+		if (((m_soldiers[i]->get_level(atrEvade) < (uint) get_descr()->get_min_level(atrEvade)) ||
+			(m_soldiers[i]->get_level(atrEvade) >= (uint) get_descr()->get_max_level(atrEvade)))
+			&& (get_descr()->get_train_evade()))
+			count ++;
 
-			if (count >= count_upgrades)
-				drop_soldier(g, i);
-		}
+		if (count >= count_upgrades)
+			drop_soldier(g, i);
 	}
 }
 /*
@@ -521,6 +544,8 @@ Advance the program state if applicable, calling the training program to upgrade
 */
 void TrainingSite::act(Game* g, uint data)
 {
+	assert(g);
+	
 	Building::act(g, data);
 	if (m_program_timer && (int)(g->get_gametime() - m_program_time) >= 0) {
 		m_program_timer = false;
@@ -558,6 +583,9 @@ Usefull to find the next program that can be tried. It also start to run it.
  */
 void TrainingSite::find_next_program (Game *g) {
 	tAttribute attrib;
+	
+	assert(g);
+	
 	if (!m_list_upgrades.size())
 		calc_list_upgrades(g);
 
@@ -823,6 +851,8 @@ void TrainingSite::calc_list_upgrades(Game *g) {
 	int r_evade = m_pri_evade;
 	std::vector<std::string> list;
 
+	assert(g);
+
 	if (!get_descr()->get_train_hp())		r_hp = 0;
 	if (!get_descr()->get_train_attack())	r_attack = 0;
 	if (!get_descr()->get_train_defense())	r_defense = 0;
@@ -893,6 +923,8 @@ Hacks the start program of production program (training program).
 ==========
  */
 void TrainingSite::program_start (Game *g, std::string name) {
+	assert(g);
+	
 	set_post_timer (6000);
 	m_prog_name = name;
 	ProductionSite::program_start (g, name);
@@ -910,6 +942,8 @@ that should be loaded at this training site, and to shows what is doing the trai
 void TrainingSite::program_end (Game *g, bool success) {
 	bool relaunch = false;
 	std::string	string;
+
+	assert(g);
 
 	m_success = success;
 
