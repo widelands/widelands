@@ -51,24 +51,25 @@ extern Sound_Handler g_sound_handler;
  * A songset does not contain the audio data itself, to not use huge amounts of memory.
  * Instead, each song is loaded on request and the data is free()d afterwards.*/
 class Songset {
-public:
+      public:
 	Songset();
 	~Songset();
-	
+
 	void add_song(string filename);
-	Mix_Music* get_song();
-	bool empty() {return songs.empty();}
-	
-protected:
+	Mix_Music *get_song();
+	bool empty() {
+		return songs.empty();
+	}
+      protected:
 	/** The filenames of all configured songs*/
-	vector<string> songs;
+	 vector < string > songs;
 	/** Pointer to the song that is currently playing (actually the one that was last started);
 	 * needed for linear playback*/
-	vector<string>::iterator current_song;
-	
-	FileRead* fr;
-	Mix_Music* m;
-	SDL_RWops* rwops;
+	vector < string >::iterator current_song;
+
+	FileRead *fr;
+	Mix_Music *m;
+	SDL_RWops *rwops;
 };
 
 /** A collection of several soundeffects meant for the same event.
@@ -79,24 +80,25 @@ protected:
  * FXset really contains several different effect is hidden from the outside.*/
 class FXset {
 	friend class Sound_Handler;
-public:
-	FXset(Uint8 prio=127);
+      public:
+	 FXset(Uint8 prio = 127);
 	~FXset();
-	
-	void add_fx(Mix_Chunk* fx, Uint8 prio=127);
-	Mix_Chunk* get_fx();
-	bool empty() {return fxs.empty();}
 
-protected:
+	void add_fx(Mix_Chunk * fx, Uint8 prio = 127);
+	Mix_Chunk *get_fx();
+	bool empty() {
+		return fxs.empty();
+	}
+      protected:
 	/** The collection of sound effects*/
-	vector<Mix_Chunk*> fxs;
-	
+	 vector < Mix_Chunk * >fxs;
+
 	/** When the effect was played the last time (milliseconds since sdl initialization). Set via SDL_GetTicks()*/
 	Uint32 last_used;
-	
+
 	/** Minimum time in milliseconds until the effect may be played again */
 	Uint32 min_interval;
-	
+
 	/** How important is it to play the effect even when others are running already?
 	 * Range from 0 (do not play at all if anything else is happening) to 255 (always play,
 	 * regardless of other considerations)*/
@@ -198,26 +200,26 @@ protected:
 class Sound_Handler {
 	friend class Songset;
 	friend class FXset;
-public:
+      public:
 #define NO_POSITION Coords(-2,-2)
-	enum {SOUND_HANDLER_CHANGE_MUSIC=1};
-	
-        Sound_Handler();
+	enum { SOUND_HANDLER_CHANGE_MUSIC = 1 };
+
+	 Sound_Handler();
 	~Sound_Handler();
-	
+
 	void init();
-        void read_config();
+	void read_config();
 	void load_system_sounds();
-	
-	void load_fx(const string dir, const string basename, const bool recursive=false);
+
+	void load_fx(const string dir, const string basename, const bool recursive = false);
 	void play_fx(const string fx_name, const Coords map_position);
 	void play_fx(const string fx_name);
-	
-	void register_song(const string dir, const string basename, const bool recursive=false);
-	void start_music(const string songset_name, int fadein_ms=0);
-	void stop_music(int fadeout_ms=0);
-	void change_music(const string songset_name="", int fadeout_ms=0, int fadein_ms=0);
-	
+
+	void register_song(const string dir, const string basename, const bool recursive = false);
+	void start_music(const string songset_name, int fadein_ms = 0);
+	void stop_music(int fadeout_ms = 0);
+	void change_music(const string songset_name = "", int fadeout_ms = 0, int fadein_ms = 0);
+
 	static void music_finished_callback();
 	static void fx_finished_callback(int channel);
 
@@ -227,41 +229,41 @@ public:
 	void set_disable_fx(bool state);
 
 	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
-	Game* the_game;
+	Game *the_game;
 
 	/** Only for buffering command line option --nosound until real intialization is done
 	 * \see Sound_Handler::Sound_Handler()
 	 * \see Sound_Handler::init() */
-	bool nosound;	
+	bool nosound;
 
-protected:
-	Mix_Chunk* RWopsify_MixLoadWAV(FileRead* fr);
+      protected:
+	 Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
 	void load_one_fx(const string filename, const string fx_name);
 	int stereo_position(const Coords position);
 
 	/** Whether to disable background music*/
 	bool disable_music;
-	
+
 	/** Whether to disable sound effects*/
 	bool disable_fx;
 
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside their \ref FXset, of course)*/
 	bool random_order;
-	
+
 	/** A collection of songsets*/
-	map<string, Songset*> songs;
-	
+	 map < string, Songset * >songs;
+
 	/** A collection of effect sets*/
-	map<string, FXset*> fxs;
-	
+	 map < string, FXset * >fxs;
+
 	/** Which songset we are currently selecting songs from - not regarding if there actually is a song
 	 * playing \e right \e now*/
 	string current_songset;
-	
+
 	/** The random number generator.
          * \note The RNG here *must* not be the same as the one for the game logic! */
-        RNG rng;
+	RNG rng;
 };
 
 #endif

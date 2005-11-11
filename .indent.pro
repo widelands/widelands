@@ -1,0 +1,5 @@
+-kr
+-l120
+-i8
+--tab-size8
+--use-tabs

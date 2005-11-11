@@ -72,13 +72,9 @@ Game::~Game(void)
 }
 
 
-/*
-===============
-Game::get_allow_cheats
-
-Returns true if cheat codes have been activated (single-player only)
-===============
-*/
+/**
+ * Returns true if cheat codes have been activated (single-player only)
+ */
 bool Game::get_allow_cheats()
 {
 	return true;
@@ -86,7 +82,7 @@ bool Game::get_allow_cheats()
 
 /** Game::can_start()
  *
- + Returns true if the game settings are valid.
+ * Returns true if the game settings are valid.
  */
 bool Game::can_start()
 {
@@ -172,7 +168,7 @@ bool Game::run_single_player ()
 	return run();
 }
 
-/*
+/**
  * Load a game
  * argument defines if this is a single player game (true) 
  * or networked (false)
@@ -272,26 +268,23 @@ void Game::init_player_controllers ()
 
 }
 
-/*
-===============
-void Game::run(void)
-
-This runs a game, including game creation phase.
-Returns true if a game actually took place.
-
-The setup and loading of a game happens (or rather: will happen) in three
-stages.
-1. First of all, the host (or single player) configures the game. During this
-   time, only short descriptions of the game data (such as map headers )are
-	loaded to minimize loading times.
-2. Once the game is about to start and the configuration screen is finished,
-   all logic data (map, tribe information, building information) is loaded
-	during postload.
-2b. If a game is created, initial player positions are set. This step is
-    skipped when a game is loaded.
-3. After this has happened, the game graphics are loaded.
-===============
-*/
+/**
+ * This runs a game, including game creation phase.
+ *
+ * The setup and loading of a game happens (or rather: will happen) in three
+ * stages.
+ * 1.  First of all, the host (or single player) configures the game. During this
+ *     time, only short descriptions of the game data (such as map headers )are
+ *     loaded to minimize loading times.
+ * 2a. Once the game is about to start and the configuration screen is finished,
+ *     all logic data (map, tribe information, building information) is loaded
+ *     during postload.
+ * 2b. If a game is created, initial player positions are set. This step is
+ *     skipped when a game is loaded.
+ * 3.  After this has happened, the game graphics are loaded.
+ *
+ * \return true if a game actually took place, false otherwise
+ */
 bool Game::run(bool is_savegame)
 {
    postload();
@@ -361,12 +354,12 @@ bool Game::run(bool is_savegame)
 
 
 
-//
-// think() is called by the UI objects initiated during Game::run()
-// during their modal loop.
-// Depending on the current state we advance game logic and stuff,
-// running the cmd queue etc.
-//
+/**
+ * think() is called by the UI objects initiated during Game::run()
+ * during their modal loop.
+ * Depending on the current state we advance game logic and stuff,
+ * running the cmd queue etc.
+ */
 void Game::think(void)
 {
 	if (m_netgame!=0)
@@ -406,13 +399,9 @@ void Game::think(void)
 }
 
 
-/*
-===============
-Game::set_speed
-
-Change the game speed.
-===============
-*/
+/**
+ * Change the game speed.
+ */
 void Game::set_speed(int speed)
 {
 	assert(speed >= 0);
@@ -447,7 +436,7 @@ void Game::player_field_notification (const FCoords& fc, losegain_t lg)
 				cpl[i]->lose_field (fc);
 }
 
-/*
+/**
  * Cleanup for load
  */
 void Game::cleanup_for_load(bool t1, bool t2) {
@@ -459,15 +448,11 @@ void Game::cleanup_for_load(bool t1, bool t2) {
    }
 }
 
-/*
-===============
-Game::send_player_command
-
-All player-issued commands must enter the queue through this function.
-It takes the appropriate action, i.e. either add to the cmd_queue or send
-across the network.
-===============
-*/
+/**
+ * All player-issued commands must enter the queue through this function.
+ * It takes the appropriate action, i.e. either add to the cmd_queue or send
+ * across the network.
+ */
 void Game::send_player_command (PlayerCommand* pc)
 {
 	if (m_netgame!=0 && get_player(pc->get_sender())->get_type()==Player::playerLocal)

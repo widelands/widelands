@@ -2251,15 +2251,11 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 }
 
 
-/*
-===============
-Transfer::finish
-
-Transfer finished successfully.
-This Transfer object will be deleted indirectly by finish().
-The caller might be destroyed, too.
-===============
-*/
+/**
+ * Transfer finished successfully.
+ * This Transfer object will be deleted indirectly by finish().
+ * The caller might be destroyed, too.
+ */
 void Transfer::has_finished()
 {
    m_request->transfer_finish(m_game, this);
@@ -2483,7 +2479,7 @@ Request::~Request()
 	}
 
 	// Cancel all ongoing transfers
-	while(m_transfers.size()) 
+	while(m_transfers.size())
 		cancel_transfer(0);
 
 	// Remove requeriments
@@ -2494,7 +2490,7 @@ Request::~Request()
 
 // Modified to allow Requeriments and SoldierRequests
 #define REQUEST_VERSION 2
-/*
+/**
  * Read this request from a file
  *
  * it is most probably created by some init function, 
@@ -2555,7 +2551,7 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
    throw wexception("Unknown request version %i in file!\n", version);
 }
 
-/* 
+/**
  * Write this request to a file
  */
 void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
@@ -2849,7 +2845,7 @@ void Request::transfer_finish(Game *g, Transfer* t)
 {
 	Worker* w = 0;
 	Soldier* s = 0;
-
+	
 	if (t->m_worker)
 		w = t->m_worker;
 	else
@@ -2862,7 +2858,7 @@ void Request::transfer_finish(Game *g, Transfer* t)
 	t->m_worker = 0;
 	t->m_item = 0;
 
-   remove_transfer(find_transfer(t));
+	remove_transfer(find_transfer(t));
 
 	if (!m_idle) {
 		set_required_time(get_base_required_time(g, 1));
@@ -2930,15 +2926,11 @@ void Request::cancel_transfer(uint idx)
 }
 
 
-/*
-===============
-Request::remove_transfer
-
-Remove and free the transfer with the given index.
-This does not update the Transfer's worker or item, and it does not update
-whether the Request is registered with the Economy.
-===============
-*/
+/**
+ * Remove and free the transfer with the given index.
+ * This does not update the Transfer's worker or item, and it does not update
+ * whether the Request is registered with the Economy.
+ */
 void Request::remove_transfer(uint idx)
 {
 	Transfer* t = m_transfers[idx];

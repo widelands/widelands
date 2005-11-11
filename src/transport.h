@@ -58,20 +58,18 @@ struct Neighbour {
 typedef std::vector<Neighbour> Neighbour_list;
 
 
-/*
-WareInstance
-------------
-WareInstance represents one item while it is being carried around.
-
-The WareInstance never draws itself; the carrying worker or the current flag
-location are responsible for that.
-
-The location of a ware can be one of the following:
-- a flag
-- a worker that is currently carrying the ware
-- a building; this should only be temporary until the ware is incorporated into
-  the building somehow
-*/
+/**
+ * WareInstance represents one item while it is being carried around.
+ *
+ * The WareInstance never draws itself; the carrying worker or the current flag
+ * location are responsible for that.
+ *
+ * The location of a ware can be one of the following:
+ * - a flag
+ * - a worker that is currently carrying the ware
+ * - a building; this should only be temporary until the ware is incorporated into
+ *   the building somehow
+ */
 class WareInstance : public Map_Object {
    friend class Widelands_Map_Waredata_Data_Packet;
    
@@ -117,21 +115,21 @@ private:
 
 
 
-/*
-Flag represents a flag, obviously.
-A flag itself doesn't do much. However, it can have up to 6 roads attached
-to it. Instead of the WALK_NW road, it can also have a building attached to
-it.
-Flags also have a store of up to 8 wares.
-
-You can also assign an arbitrary number of "jobs" for a flag.
-A job consists of a request for a worker, and the name of a program that the
-worker is to execute. Once execution of the program has finished, the worker
-will return to a warehouse.
-
-Important: Do not access m_roads directly. get_road() and others use
-Map_Object::WALK_xx in all "direction" parameters.
-*/
+/**
+ * Flag represents a flag, obviously.
+ * A flag itself doesn't do much. However, it can have up to 6 roads attached
+ * to it. Instead of the WALK_NW road, it can also have a building attached to
+ * it.
+ * Flags also have a store of up to 8 wares.
+ *
+ * You can also assign an arbitrary number of "jobs" for a flag.
+ * A job consists of a request for a worker, and the name of a program that the
+ * worker is to execute. Once execution of the program has finished, the worker
+ * will return to a warehouse.
+ *
+ * Important: Do not access m_roads directly. get_road() and others use
+ * Map_Object::WALK_xx in all "direction" parameters.
+ */
 class Flag : public PlayerImmovable {
 	friend class Economy;
 	friend class FlagQueue;
@@ -234,21 +232,21 @@ private:
 	inline int cost() const { return mpf_realcost+mpf_estimate; }
 };
 
-/*
-Road is a special object which connects two flags.
-The Road itself is never rendered; however, the appropriate Field::roads are
-set to represent the road visually.
-The actual steps involved in a road are stored as a Path from the staring flag
-to the ending flag. Apart from that, however, the two flags are treated
-exactly the same, as far as most transactions are concerned. There are minor
-exceptions: placement of carriers if the path's length is odd, splitting
-a road when a flag is inserted.
-
-Every road has one or more Carriers attached to it.
-
-All Workers on the Road are attached via add_worker()/remove_worker() in
-PlayerImmovable.
-*/
+/**
+ * Road is a special object which connects two flags.
+ * The Road itself is never rendered; however, the appropriate Field::roads are
+ * set to represent the road visually.
+ * The actual steps involved in a road are stored as a Path from the staring flag
+ * to the ending flag. Apart from that, however, the two flags are treated
+ * exactly the same, as far as most transactions are concerned. There are minor
+ * exceptions: placement of carriers if the path's length is odd, splitting
+ * a road when a flag is inserted.
+ *
+ * Every road has one or more Carriers attached to it.
+ *
+ * All Workers on the Road are attached via add_worker()/remove_worker() in
+ * PlayerImmovable.
+ */
 class Road : public PlayerImmovable {
    friend class Widelands_Map_Roaddata_Data_Packet; // For saving 
    friend class Widelands_Map_Road_Data_Packet; // For init() 
@@ -315,10 +313,10 @@ private:
 };
 
 
-/*
-Route stores a route from flag to flag.
-The number of steps is the number of flags stored minus one.
-*/
+/**
+ * Route stores a route from flag to flag.
+ * The number of steps is the number of flags stored minus one.
+ */
 class Route {
 	friend class Economy;
    friend class Request;
@@ -343,18 +341,18 @@ private:
 };
 
 
-/*
-Whenever an item or worker is transferred to fulfill a Request,
-a Transfer is allocated to describe this transfer.
-
-Transfers are always created and destroyed by a Request instance.
-
-Call get_next_step() to find out where you should go next. If
-get_next_step() returns 0, the transfer is complete or cannot be
-completed. Call finish() if success is true, fail() otherwise.
-Call fail() if something really bad has happened (e.g. the worker
-or ware was destroyed).
-*/
+/**
+ * Whenever an item or worker is transferred to fulfill a Request,
+ * a Transfer is allocated to describe this transfer.
+ *
+ * Transfers are always created and destroyed by a Request instance.
+ *
+ * Call get_next_step() to find out where you should go next. If
+ * get_next_step() returns 0, the transfer is complete or cannot be
+ * completed. Call finish() if success is true, fail() otherwise.
+ * Call fail() if something really bad has happened (e.g. the worker
+ * or ware was destroyed).
+ */
 class Transfer {
 	friend class Request;
 
@@ -389,9 +387,6 @@ private:
 };
 
 
-/*
-*/
-
 class Requeriments
 {
 public:
@@ -413,20 +408,20 @@ private:
 	MinMax m_total;
 };
 
-/*
-A Supply is a virtual base class representing something that can offer
-wares of any type for any purpose.
-
-Subsequent calls to get_position() can return different results.
-If a Supply is "active", it should be transferred to a possible Request
-quickly. Basically, supplies in warehouses (or unused supplies that are
-being carried into a warehouse) are inactive, and supplies that are just
-sitting on a flag are active.
-
-Important note: The implementation of Supply is responsible for adding
-and removing itself from Economies. This rule holds true for Economy
-changes.
-*/
+/**
+ * A Supply is a virtual base class representing something that can offer
+ * wares of any type for any purpose.
+ * 
+ * Subsequent calls to get_position() can return different results.
+ * If a Supply is "active", it should be transferred to a possible Request
+ * quickly. Basically, supplies in warehouses (or unused supplies that are
+ * being carried into a warehouse) are inactive, and supplies that are just
+ * sitting on a flag are active.
+ * 
+ * Important note: The implementation of Supply is responsible for adding
+ * and removing itself from Economies. This rule holds true for Economy
+ * changes.
+ */
 class Supply : public Trackable {
 public:
 	virtual PlayerImmovable* get_position(Game* g) = 0;
@@ -444,9 +439,9 @@ public:
 };
 
 
-/*
-SupplyList is used in the Economy to keep track of supplies.
-*/
+/**
+ * SupplyList is used in the Economy to keep track of supplies.
+ */
 class SupplyList {
 public:
 	SupplyList();
@@ -463,17 +458,17 @@ private:
 };
 
 
-/*
-A Request is issued whenever some object (road or building) needs a ware.
-
-Requests are always created and destroyed by their owner, i.e. the target
-player immovable. The owner is also responsible for calling set_economy()
-when its economy changes.
-
-Idle Requests need not be fulfilled; however, when there's a matching Supply
-left, a transfer may be initiated.
-The required time has no meaning for idle requests.
-*/
+/**
+ * A Request is issued whenever some object (road or building) needs a ware.
+ * 
+ * Requests are always created and destroyed by their owner, i.e. the target
+ * player immovable. The owner is also responsible for calling set_economy()
+ * when its economy changes.
+ * 
+ * Idle Requests need not be fulfilled; however, when there's a matching Supply
+ * left, a transfer may be initiated.
+ * The required time has no meaning for idle requests.
+ */
 class Request : public Trackable {
 	friend class Economy;
 	friend class RequestList;

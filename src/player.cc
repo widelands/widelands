@@ -506,6 +506,7 @@ void Player::drop_soldier(PlayerImmovable* imm, Soldier* soldier) {
     }
 }
 
+//TODO val might (theoretically) be >1 or <-1, but there's always an inc/dec by one
 void Player::change_soldier_capacity (PlayerImmovable* imm, int val) {
 	if (imm->get_owner() != this)
 		return;

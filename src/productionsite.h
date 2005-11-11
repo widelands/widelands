@@ -34,19 +34,16 @@ class Request;
 class WaresQueue;
 
 
-/*
-ProductionSite
---------------
-Every building that is part of the economics system is a production site.
-
-A production site has a worker.
-A production site can have one (or more) output wares types (in theory it
-  should be possible to burn wares for some virtual result such as "mana", or
-  maybe even just for the fun of it, although that's not planned).
-A production site can have one (or more) input wares types. Every input
-  wares type has an associated store.
-*/
-
+/**
+ * Every building that is part of the economics system is a production site.
+ * 
+ * A production site has a worker.
+ * A production site can have one (or more) output wares types (in theory it
+ * should be possible to burn wares for some virtual result such as "mana", or
+ *  maybe even just for the fun of it, although that's not planned).
+ * A production site can have one (or more) input wares types. Every input
+ * wares type has an associated store.
+ */
 class ProductionSite_Descr : public Building_Descr {
    friend class ProductionProgram; // To add animations
    typedef std::map<std::string, ProductionProgram*> ProgramMap;

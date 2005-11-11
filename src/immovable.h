@@ -153,14 +153,14 @@ protected:
 };
 
 
-/*
-PlayerImmovable is an immovable owned by a player that belongs to an economy:
-building, flag or road
-
-A PlayerImmovable can also house a number of workers, which are automatically
-turned into fugitives when the immovable is destroyed, and their economy is also
-adjusted automatically.
-*/
+/**
+ * PlayerImmovable is an immovable owned by a player that belongs to an economy:
+ * building, flag or road
+ *
+ * A PlayerImmovable can also house a number of workers, which are automatically
+ * turned into fugitives when the immovable is destroyed, and their economy is also
+ * adjusted automatically.
+ */
 class PlayerImmovable : public BaseImmovable {
 public:
 	PlayerImmovable(Map_Object_Descr *descr);
