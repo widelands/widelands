@@ -380,16 +380,18 @@ void TrainingSite::request_soldier_callback(Game* g, Request* rq, int ware,
 	g->conquer_area(tsite->get_owner()->get_player_number(),
 		tsite->get_position(), tsite->get_descr());
 
-	uint i=0;
- 	for(i=0; i<tsite->m_soldier_requests.size(); i++)
-		if(rq==tsite->m_soldier_requests[i]) break;
-
-	tsite->m_soldier_requests.erase(tsite->m_soldier_requests.begin() + i);
+	uint i;
+ 	for(i=0; i<tsite->m_soldier_requests.size(); i++) {
+		if(rq==tsite->m_soldier_requests[i]) {
+			tsite->m_soldier_requests.erase(tsite->m_soldier_requests.begin()+i);
+			break;
+		}
+	}
 
 	tsite->m_soldiers.push_back(s);
 	tsite->m_total_soldiers = tsite->m_soldiers.size() + tsite->m_soldier_requests.size();
 	s->start_task_idle(g, 0, -1); // bind the worker into this house, hide him on the map
-   s->mark(false);
+	s->mark(false);
 }
 
 /*
@@ -451,7 +453,7 @@ void TrainingSite::drop_soldier (Game *g, uint nr) {
 
 		m_total_soldiers--;
 
-		for (uint i = nr; i < m_soldiers.size(); i++)
+		for (uint i = nr; i < m_soldiers.size() - 1 ; i++)
 			m_soldiers[i] = m_soldiers[i+1];
 
 		m_soldiers.pop_back();
@@ -775,32 +777,33 @@ Performs an increase of the soldiers capacity at house, if it isn't reached the 
 ==========
  */
 void TrainingSite::change_soldier_capacity (int how) {
-	if (how) {
-    	if (how > 0) {
-        	m_capacity += how;
+	int temp_capacity;
+	temp_capacity = m_capacity + how;
+	
+	if (temp_capacity < 0)
+		m_capacity = 0;
+	else if (temp_capacity > get_descr()->get_max_number_of_soldiers())
+		m_capacity = get_descr()->get_max_number_of_soldiers();
+	else
+		m_capacity = temp_capacity;
 
-            if (m_capacity > (uint) get_descr()->get_max_number_of_soldiers())
-				m_capacity = (uint) get_descr()->get_max_number_of_soldiers();
-			call_soldiers((Game*)get_owner()->get_game());
-		} else {
-			how = -how;
-        	if (how >= (int) m_capacity)
-            	m_capacity = 1;
-			else
-            	m_capacity -= how;
-			if (m_capacity < m_total_soldiers) {
-				if (m_soldier_requests.size()) {
-					m_soldier_requests[0]->cancel_transfer(0);
-					m_soldier_requests.erase(m_soldier_requests.begin());
-					m_total_soldiers --;
-				} else
-					if (m_soldiers.size()) {
-						Soldier *s = m_soldiers[0];
-						drop_soldier (s->get_serial());
-				}
-			}
-		}
+	if (m_capacity > m_total_soldiers)
+		call_soldiers((Game *) get_owner()->get_game());
+
+	while (m_capacity < m_total_soldiers) {
+		if (m_soldier_requests.size()) {
+			delete m_soldier_requests[0];
+			m_soldier_requests[0] = m_soldier_requests[m_soldier_requests.size() - 1];
+			m_soldier_requests.pop_back();
+			break;
+		} else if (m_soldiers.size()) {
+			drop_soldier(m_soldiers[0]->get_serial());
+			break;
+		} else
+			throw wexception ("TrainingSite::change_soldier_capacity(): m_capacity<m_total_soldiers although m_total_soldiers==0");
 	}
+
+	m_total_soldiers = m_soldiers.size() + m_soldier_requests.size();
 }
 
 

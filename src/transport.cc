@@ -2943,9 +2943,7 @@ void Request::remove_transfer(uint idx)
 {
 	Transfer* t = m_transfers[idx];
 
-	if (idx+1 != m_transfers.size())
-		m_transfers[idx] = m_transfers[m_transfers.size()-1];
-	m_transfers.resize(m_transfers.size()-1);
+	m_transfers.erase(m_transfers.begin()+idx);
 
 	delete t;
 }
