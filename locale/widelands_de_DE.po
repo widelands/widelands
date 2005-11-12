@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-10 08:11+0100\n"
+"POT-Creation-Date: 2005-11-12 18:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -365,7 +365,6 @@ msgid "Options Menu"
 msgstr "Optionen"
 
 #: ../src/game_options_menu.cc:61 ../src/game_options_menu.cc:112
-#: ../src/main.cc:344
 msgid "README"
 msgstr ""
 
@@ -386,7 +385,7 @@ msgstr ""
 msgid "Sound FX"
 msgstr ""
 
-#: ../src/game_options_menu.cc:117 ../src/main.cc:352
+#: ../src/game_options_menu.cc:117
 msgid "COPYING"
 msgstr ""
 
@@ -576,7 +575,7 @@ msgstr ""
 msgid "DOWN"
 msgstr ""
 
-#: ../src/profile.cc:916
+#: ../src/profile.cc:918
 msgid "Usage: "
 msgstr ""
 
@@ -600,11 +599,11 @@ msgstr ""
 msgid "Stock"
 msgstr ""
 
-#: ../src/trainingsite.cc:224
+#: ../src/trainingsite.cc:217
 msgid "Resting"
 msgstr ""
 
-#: ../src/trainingsite.cc:226
+#: ../src/trainingsite.cc:219
 msgid "Not Working"
 msgstr ""
 
@@ -1470,7 +1469,7 @@ msgstr ""
 msgid "Time Trigger Options"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:45
+#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:52
 msgid "Close"
 msgstr ""
 
