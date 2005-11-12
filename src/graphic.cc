@@ -877,18 +877,28 @@ void RenderTargetImpl::renderminimap(Editor_Game_Base* egbase, const std::vector
 }
 
 
-/*
-===============
-RenderTargetImpl::drawanim
-
-Draws a frame of an animation at the given location
-===============
+/**
+ * Draws a frame of an animation at the given location
+ * Plays sound effect that is registered with this frame (the \ref Sound_Handler
+ * decides if the fx really does get played)
+ *
+ * \par dstx, dsty
+ * \par animation
+ * \par time
+ * \par player
+ *
+ * \todo Document this method's parameters
+ * \todo Correctly calculate the stereo position for sound effects
 */
 void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, const Player* player)
 {
 	const AnimationData* data = g_anim.get_animation(animation);
 	AnimationGfx* gfx = get_graphicimpl()->get_animation(animation);
 	Rect rc;
+
+	//TODO? assert(player);
+	assert(data);
+	assert(gfx);
 
 	if (!data || !gfx) {
 		log("WARNING: Animation %i doesn't exist\n", animation);
@@ -897,10 +907,11 @@ void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, c
 
 	// Get the frame and its data
 	Surface* frame;
+	int framenumber = (time / data->frametime) % gfx->get_nrframes();
    if( player ) 
-      frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes(), player->get_player_number(), player);
+      frame = gfx->get_frame(framenumber, player->get_player_number(), player);
    else
-      frame = gfx->get_frame((time / data->frametime) % gfx->get_nrframes(), 0, 0);
+      frame = gfx->get_frame(framenumber, 0, 0);
 	dstx += m_offset.x;
 	dsty += m_offset.y;
 
@@ -934,9 +945,12 @@ void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, c
 	if (rc.h <= 0)
 		return;
 
-
 	// Draw it
 	m_surface->blit(Point(dstx + m_rect.x, dsty + m_rect.y), frame, rc);
+
+	// Look if there's a sound effect registered for this frame and trigger the effect
+	uint stereo_position=128; //see Sound_Handler::stereo_position()
+		g_anim.trigger_soundfx(animation, framenumber, stereo_position);
 }
 
 

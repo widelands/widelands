@@ -232,7 +232,9 @@ void Sound_Handler::read_config()
 }
 
 /** Load systemwide sound fx into memory (per_object fx will be loaded by the object)
- * \note This loads only systemwide fx. Worker/building fx will be loaded by their respective conf-file parsers*/
+ * \note This loads only systemwide fx. Worker/building fx will be loaded by their
+ * respective conf-file parsers
+*/
 void Sound_Handler::load_system_sounds()
 {
 	load_fx("sound", "create_construction_site");
@@ -347,8 +349,8 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 }
 
 /** Calculate  the position of an effect in relation to the visible part of the screen.
- * \param position	Where the event happened (logical coordinates)
- * \return left border=0, right border=254, not in viewport = -1
+ * \param position	Where the event happened (map coordinates)
+ * \return position in widelands' game window: left=0, right=254, not in viewport = -1
  * \note This function can also be used to check whether a logical coordinate is visible at all
 */
 int Sound_Handler::stereo_position(const Coords position)
@@ -356,72 +358,88 @@ int Sound_Handler::stereo_position(const Coords position)
 	int sx, sy;		//screen x,y (without clipping applied, might well be invisible)
 	int xres, yres;		//x,y resolutions of game window
 	Point vp;
+	Interactive_Base *ia;
 
-	if (the_game) {
-		Interactive_Base *ia;
-		ia = the_game->get_iabase();
-		vp = ia->get_mapview()->get_viewpoint();
+	assert(the_game);
 
-		xres = ia->get_xres();
-		yres = ia->get_yres();
+	ia = the_game->get_iabase();
+	assert(ia);
+	vp = ia->get_mapview()->get_viewpoint();
 
-		the_game->get_map()->get_basepix(position, &sx, &sy);
-		sx -= vp.x;
-		sy -= vp.y;
+	xres = ia->get_xres();
+	yres = ia->get_yres();
 
-		if (sx >= 0 && sx <= xres && sy >= 0 && sy <= yres)	//make sure position is inside viewport
-			return sx * 254 / xres;
-	}
+	the_game->get_map()->get_basepix(position, &sx, &sy);
+	sx -= vp.x;
+	sy -= vp.y;
+
+	if (sx >= 0 && sx <= xres && sy >= 0 && sy <= yres)	//make sure position is inside viewport
+		return sx * 254 / xres;
 
 	return -1;
 }
 
-
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s) must
  * have been loaded before with \ref load_fx.
  * \param fx_name	The identifying name of the sound effect, see \ref load_fx
- * \param map_position  Logical (not screen) coordinates where the event takes place
+ * \param map_position  Map coordinates where the event takes place
 */
-void Sound_Handler::play_fx(const string fx_name, const Coords map_position)
+void Sound_Handler::play_fx(const string fx_name, Coords map_position)
+{
+	if (map_position==INVALID_POSITION) {
+		log("WARNING: play_fx(\"%s\") called without coordinates\n", fx_name.c_str());
+		map_position=NO_POSITION;
+	}
+	
+	if (map_position == NO_POSITION)
+		play_fx(fx_name, 128);
+
+	play_fx(fx_name, stereo_position(map_position));
+}
+
+/** \overload
+ * \param fx_name		The identifying name of the sound effect, see \ref load_fx
+ * \param stereo_position	position in widelands' game window, see \ref stereo_position
+*/
+void Sound_Handler::play_fx(const string fx_name, int stereo_position)
 {
 	Mix_Chunk *m;
-	int chan, spos;
+	int chan;
+
+	assert(stereo_position>=-1 && stereo_position<=254);
 
 	if (disable_fx)
 		return;
 
-	if (map_position == NO_POSITION)
-		//make sure that it's centered and full volumes
-		;
-
-	if (fxs.count(fx_name) == 0)
+	if (fxs.count(fx_name) == 0) {
 		log("Sound_Handler: sound effect \"%s\" does not exist!\n", fx_name.c_str());
-	else {
-		log("------------------------------------Trying to play %s\n", fx_name.c_str());
+		return;
+	}
+	
+	log("-------------------------------------------------------------Trying to play %s\n", fx_name.c_str());
 
-		if (fx_name != "create_construction_site") {	//create_construction_site gets played every time
-			//TODO: refine the decision whether to play or not
-			if (SDL_GetTicks() < fxs[fx_name]->last_used + 10000)
-				return;
+	if (fx_name != "create_construction_site") {	//create_construction_site gets played every time
+		//TODO: play always should be configurabel in the/a conffile
+		//TODO: refine the decision whether to play or not
+		if (SDL_GetTicks() < fxs[fx_name]->last_used + 5000)
+			return;
+	}
+
+	m = fxs[fx_name]->get_fx();
+	if (m) {
+		if (stereo_position != -1) {
+			
+			chan = Mix_PlayChannel(-1, m, 0);
+			Mix_SetPanning(chan, stereo_position, 254 - stereo_position);
+			//TODO: use chan in the fx callback to absoutely ensure that an effect is playing
+			//      only once. The "play-or-not" decision is not fit to make *that* choice
+			//      Note that a very few effects *always* play, like "start of battle"
+		} else {
+			//TODO: what to do with fx that happen offscreen?
 		}
 
-		m = fxs[fx_name]->get_fx();
-		if (m) {
-			spos = stereo_position(map_position);
-			if (spos != -1) {
-				chan = Mix_PlayChannel(-1, m, 0);
-				Mix_SetPanning(chan, spos, 254 - spos);
-			}
-		} else
-			log("Sound_Handler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
-	}
-}
-
-/** \overload*/
-void Sound_Handler::play_fx(const string fx_name)
-{
-	log("WARNING: play_fx(\"%s\") called without coordinates\n", fx_name.c_str());
-	play_fx(fx_name, NO_POSITION);
+	} else
+		log("Sound_Handler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
 }
 
 /** Load a background song. One song can consist of several audio files named

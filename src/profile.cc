@@ -506,10 +506,10 @@ const char *Section::get_next_bool(const char *name, bool *value)
  *
  * Retrieve the next unused key with the given name.
  *
- * Args: name	name of the key, can be 0 to find all unused keys
- *       value	value of the key is stored here
+ * \param name	name of the key, can be 0 to find all unused keys
+ * \param value	value of the key is stored here
  *
- * Returns: the name of the key, or 0 if none has been found
+ * \return the name of the key, or 0 if none has been found
  */
 const char *Section::get_next_string(const char *name, const char **value)
 {

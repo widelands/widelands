@@ -23,6 +23,7 @@
 #include "error.h"
 #include "constants.h"
 #include "profile.h"
+#include "sound_handler.h"
 #include "wexception.h"
 
 /*
@@ -99,7 +100,6 @@ void EncodeData::add(const EncodeData *other)
 	}
 }
 
-
 /*
 ==============================================================================
 
@@ -131,21 +131,28 @@ void AnimationManager::flush()
 	m_animations.resize(0);
 }
 
-/*
-===============
-AnimationManager::get
-
-Read in basic information about the information.
-The graphics are loaded later by the graphics subsystem.
-
-The animation resides in the given directory and is described by the given
-section.
-
-This function looks for pictures in this order:
-	key 'pics', if present
-	picnametempl, if not null
-	<sectionname>_??.bmp
-===============
+/**
+ * Read in basic information about the animation.
+ * The graphics are loaded later by the graphics subsystem.
+ *
+ * Read in sound effects associated with the animation as well as the
+ * framenumber on which the effect should be played
+ * 
+ * The animation resides in the given directory and is described by the given
+ * section.
+ *
+ * The sound effects reside in the given directory and are described by the given
+ * section.
+ *
+ * This function looks for pictures in this order:
+ * 	key 'pics', if present
+ * 	picnametempl, if not null
+ * 	<sectionname>_??.bmp
+ *
+ * \param directory	which directory to look in for image and sound files
+ * \param s		conffile section to search for data on this animation
+ * \param picnametempl	a template for the picture names
+ * \param encdefaults	default values for player colors, see \ref EncodeData
 */
 uint AnimationManager::get(const char *directory, Section *s, const char *picnametempl,
 	                        const EncodeData *encdefaults)
@@ -175,15 +182,26 @@ uint AnimationManager::get(const char *directory, Section *s, const char *picnam
 			picnametempl = templbuf;
 		}
 	}
-
 	snprintf(pictempl, sizeof(pictempl), "%s/%s", directory, picnametempl);
 
 	ad->picnametempl = pictempl;
 
-   if(ad->picnametempl[strlen(pictempl)-4]=='.') {
-      // delete extension
-      ad->picnametempl[strlen(pictempl)-4]='\0';
-   }
+	if(ad->picnametempl[strlen(pictempl)-4]=='.') {
+		// delete extension
+		ad->picnametempl[strlen(pictempl)-4]='\0';
+	}
+
+	// Read mapping from frame numbers to sound effect names and load effects
+	// will yield strange results if there is a different number of sfx_frame and sfx_name
+	int framenum;
+	const char *fxname;
+	ad->sfx_cues[123456]="dummy";
+	while( s->get_next_int("sfx_frame", &framenum)!=0 && s->get_next_string("sfx_name", &fxname)!=0) {
+		//TODO: error handling
+		g_sound_handler.load_fx(directory, fxname);
+		ad->sfx_cues[framenum]=fxname;
+	}
+	//TODO: complain about mismatched number of sfx_name/sfx_frame
 
 	// Get descriptive data
 	if (encdefaults)
@@ -232,6 +250,30 @@ const AnimationData* AnimationManager::get_animation(uint id) const
 	return &m_animations[id-1];
 }
 
+/**
+ * Find out if there is a sound effect registered for the animation's frame and
+ * try to play it. This is used to have sound effects that are tightly synchronized
+ * to an animation, for example when a geologist is shown hammering on rocks.
+ *
+ * \par animation	The animation to check.
+ * \par framenumber	The framenumber currently on display
+ *
+ * \note uint animation is an ID number that starts at 1, not a vector index that starts at 0 !
+ *
+ * \sa AnimationManager::get
+ * \sa RenderTargetImpl::drawanim
+*/
+void AnimationManager::trigger_soundfx(uint animation, uint framenumber, uint stereo_position)
+{
+	assert(animation>0 && animation<=m_animations.size()); //animation must not be zero!
+	
+	if ( m_animations[animation-1].sfx_cues.count(framenumber)!=0 ) {
+		std::string fxname;
+
+		fxname=m_animations[animation-1].sfx_cues[framenumber];	
+		g_sound_handler.play_fx(fxname, stereo_position);
+	}
+}
 
 /*
 ==============================================================================

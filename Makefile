@@ -183,7 +183,7 @@ clean:
 	@-rm -rf $(OBJECT_DIR)/widelands
 	@-rm -rf *~ */*~ */*/*~ */*/*/*~ */*/*/*/*~
 
-doc:
+doc: $(SRC) $(HEADERS)
 	@doxygen Doxyfile
 
 VERSION:=b8

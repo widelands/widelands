@@ -7,10 +7,11 @@ Needed libraries
 These are the libraries you need. You also need the headers and link libraries,
 for widelands makes direct use of them:
    - SDL 
-   - SDL_mixer
+   - SDL_mixer >= 1.2.6
    - SDL_image
    - SDL_net
-   - SDL_ttf
+   - SDL_ttf >= 2.0.0
+   - gettext
    - libpng
    - zlib
 
@@ -48,8 +49,8 @@ under windows and compiling widelands.
  - if there were no problems, you're done. start developing and commit your
    changes   
 
-compiling wide lands using msvc 6
----------------------------------
+compiling widelands using msvc 6
+--------------------------------
 
 - you will need the sdl headers and lib to compile (and dll to execute); sdl is not included in msvc. sdl can be found at www.libsdl.org
 

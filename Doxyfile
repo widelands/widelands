@@ -1,10 +1,10 @@
-# Doxyfile 1.4.2
+# Doxyfile 1.4.1-KDevelop
 
 #---------------------------------------------------------------------------
 # Project related configuration options
 #---------------------------------------------------------------------------
 PROJECT_NAME           = Widelands
-PROJECT_NUMBER         = 
+PROJECT_NUMBER         = 9half
 OUTPUT_DIRECTORY       = /home/fweber/wl/sound/doc/
 CREATE_SUBDIRS         = YES
 OUTPUT_LANGUAGE        = English
@@ -33,7 +33,6 @@ MULTILINE_CPP_IS_BRIEF = NO
 DETAILS_AT_TOP         = NO
 INHERIT_DOCS           = YES
 DISTRIBUTE_GROUP_DOC   = NO
-SEPARATE_MEMBER_PAGES  = NO
 TAB_SIZE               = 8
 ALIASES                = 
 OPTIMIZE_OUTPUT_FOR_C  = NO

@@ -201,7 +201,8 @@ class Sound_Handler {
 	friend class Songset;
 	friend class FXset;
       public:
-#define NO_POSITION Coords(-2,-2)
+	#define NO_POSITION Coords(-1,-1)
+	#define INVALID_POSITION Coords(-2,-2)
 	enum { SOUND_HANDLER_CHANGE_MUSIC = 1 };
 
 	 Sound_Handler();
@@ -212,8 +213,8 @@ class Sound_Handler {
 	void load_system_sounds();
 
 	void load_fx(const string dir, const string basename, const bool recursive = false);
-	void play_fx(const string fx_name, const Coords map_position);
-	void play_fx(const string fx_name);
+	void play_fx(const string fx_name, Coords map_position=INVALID_POSITION);
+	void play_fx(const string fx_name, int stereo_position);
 
 	void register_song(const string dir, const string basename, const bool recursive = false);
 	void start_music(const string songset_name, int fadein_ms = 0);
@@ -229,7 +230,7 @@ class Sound_Handler {
 	void set_disable_fx(bool state);
 
 	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
-	Game *the_game;
+	Game *the_game; //TODO: can we please get rid of this member variable somehow?
 
 	/** Only for buffering command line option --nosound until real intialization is done
 	 * \see Sound_Handler::Sound_Handler()

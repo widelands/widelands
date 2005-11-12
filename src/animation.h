@@ -22,6 +22,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include "geometry.h"
 #include "rgbcolor.h"
 
@@ -38,10 +39,14 @@ struct EncodeData {
 };
 
 struct AnimationData {
-	uint				frametime;
-	Point				hotspot;
-	EncodeData		encdata;
-	std::string		picnametempl;
+	uint frametime;
+	Point hotspot;
+	EncodeData encdata;
+	std::string picnametempl;
+
+	/** mapping of soundeffect name to frame number, indexed by frame number
+	 * \sa AnimationManager::trigger_sfx */
+	std::map<uint, std::string> sfx_cues;
 };
 
 /*
@@ -68,6 +73,7 @@ public:
 public: // for use by the graphics subsystem
 	uint get_nranimations() const;
 	const AnimationData* get_animation(uint id) const;
+	void trigger_soundfx(uint animation, uint framenumber, uint stereo_position);
 
 private:
 	std::vector<AnimationData>	m_animations;
