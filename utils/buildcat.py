@@ -7,7 +7,6 @@ my shell scripting
 Usage: Edit the available languages to your need, run this script in the 'locale' directory"""
 
 # TODO: Scenarios and Campaigns
-# TODO: General Help
 
 
 import os
@@ -76,7 +75,29 @@ def main( ):
             os.system( "mkdir -p %s/LC_MESSAGES" % lang )
             os.system( "msgfmt -o %s/LC_MESSAGES/world_%s.mo world_%s_%s.po" % ( lang, world, world, lang ))
 
-    
+##############################
+# Texts (General help, Readme and so on) 
+##############################
+    files = [] 
+    for file in glob("../txts/*"):
+        if( file[-3:] == "CVS" or file[-1] == '~'): 
+            continue
+        files.append( file )
+
+    print files
+    catalog = confgettext.parse_conf( files )
+    file = open( "texts.pot", "w")
+    file.write(catalog)
+
+    for lang in LANGUAGES:
+        # merge new strings with existing translations
+        if not os.system( "msgmerge texts_%s.po texts.pot > tmp" % lang ):
+            os.system( "mv tmp texts_%s.po" % lang ) 
+
+        # compile message catalogs
+        os.system( "mkdir -p %s/LC_MESSAGES" % lang )
+        os.system( "msgfmt -o %s/LC_MESSAGES/texts.mo texts_%s.po" % ( lang, lang ))
+ 
 # 
 # This function extracts the available languages from the source files languages.h
 #

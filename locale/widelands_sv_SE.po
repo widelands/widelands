@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 18:56+0100\n"
+"POT-Creation-Date: 2005-11-12 23:25+0100\n"
 "PO-Revision-Date: 2005-11-09 17:22+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -271,7 +271,7 @@ msgid "height:"
 msgstr "höjd:"
 
 #: ../src/game_main_menu.cc:49 ../src/game_main_menu.cc:60
-#: ../src/editor/ui_menus/editor_main_menu.cc:75
+#: ../src/editor/ui_menus/editor_main_menu.cc:40
 msgid "Main Menu"
 msgstr "Huvudmeny"
 
@@ -362,16 +362,16 @@ msgstr "Inställningar"
 msgid "Options Menu"
 msgstr ""
 
-#: ../src/game_options_menu.cc:61 ../src/game_options_menu.cc:112
+#: ../src/game_options_menu.cc:61
 msgid "README"
 msgstr "README"
 
-#: ../src/game_options_menu.cc:66 ../src/game_options_menu.cc:117
+#: ../src/game_options_menu.cc:66
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:62
 msgid "License"
 msgstr "Licens"
 
-#: ../src/game_options_menu.cc:71 ../src/game_options_menu.cc:122
+#: ../src/game_options_menu.cc:71
 msgid "Authors"
 msgstr "Upphovsmän"
 
@@ -382,14 +382,6 @@ msgstr ""
 #: ../src/game_options_menu.cc:84
 msgid "Sound FX"
 msgstr "Ljudeffekter"
-
-#: ../src/game_options_menu.cc:117
-msgid "COPYING"
-msgstr "COPYING"
-
-#: ../src/game_options_menu.cc:122
-msgid "AUTHORS"
-msgstr "AUTHORS"
 
 #: ../src/game_server_proto_packet_chatmessage.cc:69
 #, c-format
@@ -963,43 +955,39 @@ msgstr "Beskrivning: "
 msgid "New Trigger Menu"
 msgstr ""
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:80
+#: ../src/editor/ui_menus/editor_main_menu.cc:45
 msgid "Editor Main Menu"
 msgstr ""
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:92
+#: ../src/editor/ui_menus/editor_main_menu.cc:57
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:43
 msgid "New Map"
 msgstr "Ny karta"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:97
+#: ../src/editor/ui_menus/editor_main_menu.cc:62
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:48
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:53
 msgid "Load Map"
 msgstr "Ladda karta"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:102
+#: ../src/editor/ui_menus/editor_main_menu.cc:67
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:49
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:54
 msgid "Save Map"
 msgstr "Spara karta"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:108
+#: ../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:37
 msgid "Map Options"
 msgstr ""
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:114
+#: ../src/editor/ui_menus/editor_main_menu.cc:79
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:58
 msgid "View Readme"
 msgstr ""
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:120
+#: ../src/editor/ui_menus/editor_main_menu.cc:85
 msgid "Exit Editor"
-msgstr ""
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:157
-msgid "Editor README"
 msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:76
@@ -1689,3 +1677,9 @@ msgstr ""
 #: ../src/map_objective_manager.h:58
 msgid "no descr"
 msgstr "ingen beskr"
+
+#~ msgid "COPYING"
+#~ msgstr "COPYING"
+
+#~ msgid "AUTHORS"
+#~ msgstr "AUTHORS"

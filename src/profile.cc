@@ -790,7 +790,9 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
       else 
          fr.Open(fs, filename);
 
-		char line[1024];
+      // line can become quite big. But this should be enough
+      const ushort LINESIZE = 1024*30;
+      char* line = new char[LINESIZE];
 		char *p = 0;
 		uint linenr = 0;
 		Section *s = 0;
@@ -798,7 +800,7 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
       bool reading_multiline = 0;
       std::string data;
       std::string key;
-      while(fr.ReadLine(line, sizeof(line)))
+      while(fr.ReadLine(line, LINESIZE))
 		{
 			linenr++;
 			

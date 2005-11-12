@@ -29,41 +29,6 @@
 #include "error.h"
 #include "fullscreen_menu_fileview.h"
 
-//TODO: i18n the whole README
-static const char* EDITOR_README =
-"   README for the Widelands Map Editor\n"
-"\n"
-"\n"
-"Introduction\n"
-"------------\n"
-"\n"
-"This Editor is intended for players who'd like to design their own maps to use with Widelands "
-"As you can see, this Editor is heavy work in progress and as the Editor becomes better and better "
-"this text will also get longer and more complete. Probably it will also contain a little tutorial "
-"in a while\n"
-"\n"
-"\n"
-"Keyboard shortcuts\n"
-"------------------\n"
-"\n"
-"SPACE    Toggles build help\n"
-"C        Toggles census on/off\n"
-"E        Toggles event menu\n"
-"H        Toggles main menu\n"
-"M        Toggles minimap\n"
-"P        Toggles player menu\n"
-"T        Toggles tools menu\n"
-"CTRL+L   Load Map\n"
-"CTRL+S   Save Map\n"
-"\n"
-"1-0      Changes tools size\n"
-"SHIFT    (Hold) Selects first alternative tool while pressed\n"
-"ALT      (Hold) Selects second alternative tool while pressed\n"
-"\n"
-"\n";
-
-
-
 /*
 ===============
 Editor_Main_Menu::Editor_Main_Menu
@@ -154,7 +119,7 @@ void Editor_Main_Menu::exit_btn() {
    m_parent->exit_editor();
 }
 void Editor_Main_Menu::readme_btn() {
-   textview_window(m_parent, &m_window_readme, _("Editor README"), EDITOR_README);
+   fileview_window(m_parent, &m_window_readme, "txts/editor_readme"); 
 }
 
 /*

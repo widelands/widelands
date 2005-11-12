@@ -2,7 +2,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: $Id$\n"
+"Project-Id-Version: $Id: tribe_barbarians_fi_FI.po,v 1.1 2005/11/12 17:57:35 "
+"sirver Exp $\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
 "PO-Revision-Date: 2005-11-11 20:55+0200\n"

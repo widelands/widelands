@@ -109,17 +109,17 @@ void GameOptionsMenu::clicked(int n) {
    switch(n) {
       case 1:
          // Readme
-         fileview_window(m_player, &m_windows->readme, _("README"), _("README")); 
+         fileview_window(m_player, &m_windows->readme, "txts/README"); 
          break;
 
       case 2:
          // License
-         fileview_window(m_player, &m_windows->licence, _("License"), _("COPYING")); 
+         fileview_window(m_player, &m_windows->licence, "txts/COPYING");
          break;
 
       case 3: 
          // Authors
-         fileview_window(m_player, &m_windows->authors, _("Authors"), _("AUTHORS")); 
+         fileview_window(m_player, &m_windows->authors, "txts/developers");
          break;
 
       case 4:

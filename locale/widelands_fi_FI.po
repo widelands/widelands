@@ -2,9 +2,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: $Id$\n"
+"Project-Id-Version: $Id: widelands_fi_FI.po,v 1.1 2005/11/12 17:57:35 sirver "
+"Exp $\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 18:56+0100\n"
+"POT-Creation-Date: 2005-11-12 23:25+0100\n"
 "PO-Revision-Date: 2005-11-11 21:04+0200\n"
 "Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
@@ -267,7 +268,7 @@ msgid "height:"
 msgstr "korkeus:"
 
 #: ../src/game_main_menu.cc:49 ../src/game_main_menu.cc:60
-#: ../src/editor/ui_menus/editor_main_menu.cc:75
+#: ../src/editor/ui_menus/editor_main_menu.cc:40
 msgid "Main Menu"
 msgstr ""
 
@@ -358,16 +359,16 @@ msgstr "Asetukset"
 msgid "Options Menu"
 msgstr ""
 
-#: ../src/game_options_menu.cc:61 ../src/game_options_menu.cc:112
+#: ../src/game_options_menu.cc:61
 msgid "README"
 msgstr "LUEMINUT"
 
-#: ../src/game_options_menu.cc:66 ../src/game_options_menu.cc:117
+#: ../src/game_options_menu.cc:66
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:62
 msgid "License"
 msgstr "Lisenssi"
 
-#: ../src/game_options_menu.cc:71 ../src/game_options_menu.cc:122
+#: ../src/game_options_menu.cc:71
 msgid "Authors"
 msgstr "Tekijät"
 
@@ -378,14 +379,6 @@ msgstr "Pelimusiikki"
 #: ../src/game_options_menu.cc:84
 msgid "Sound FX"
 msgstr "Äänitehosteet"
-
-#: ../src/game_options_menu.cc:117
-msgid "COPYING"
-msgstr "KOPIOINTI"
-
-#: ../src/game_options_menu.cc:122
-msgid "AUTHORS"
-msgstr "TEKIJÄT"
 
 #: ../src/game_server_proto_packet_chatmessage.cc:69
 #, c-format
@@ -957,44 +950,40 @@ msgstr "Kuvaus:"
 msgid "New Trigger Menu"
 msgstr ""
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:80
+#: ../src/editor/ui_menus/editor_main_menu.cc:45
 msgid "Editor Main Menu"
 msgstr ""
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:92
+#: ../src/editor/ui_menus/editor_main_menu.cc:57
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:43
 msgid "New Map"
 msgstr "Uusi kartta"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:97
+#: ../src/editor/ui_menus/editor_main_menu.cc:62
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:48
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:53
 msgid "Load Map"
 msgstr "Lataa kartta"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:102
+#: ../src/editor/ui_menus/editor_main_menu.cc:67
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:49
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:54
 msgid "Save Map"
 msgstr "Tallenna kartta"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:108
+#: ../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:37
 msgid "Map Options"
 msgstr "Kartta-asetukset"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:114
+#: ../src/editor/ui_menus/editor_main_menu.cc:79
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:58
 msgid "View Readme"
 msgstr "Näytä LUEMINUT"
 
-#: ../src/editor/ui_menus/editor_main_menu.cc:120
+#: ../src/editor/ui_menus/editor_main_menu.cc:85
 msgid "Exit Editor"
 msgstr "Poistu editorista"
-
-#: ../src/editor/ui_menus/editor_main_menu.cc:157
-msgid "Editor README"
-msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:76
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:80
@@ -1682,3 +1671,9 @@ msgstr ""
 #: ../src/map_objective_manager.h:58
 msgid "no descr"
 msgstr ""
+
+#~ msgid "COPYING"
+#~ msgstr "KOPIOINTI"
+
+#~ msgid "AUTHORS"
+#~ msgstr "TEKIJÄT"

@@ -27,15 +27,14 @@ class UIMultiline_Textarea;
 class UIPanel;
 struct UIUniqueWindowRegistry;
 
-void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string fname);
-void textview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text);
+void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename);
 
 /**
  * Shows a Text in a Fullscreen Menu. Waits for the button Ok to be clicked.
 */
 class Fullscreen_Menu_TextView : public Fullscreen_Menu_Base {
 public:
-	Fullscreen_Menu_TextView(std::string title, std::string text);
+	Fullscreen_Menu_TextView(std::string filename);
 
 protected:
    void set_text(std::string text);
@@ -49,7 +48,7 @@ private:
  */
 class Fullscreen_Menu_FileView : public Fullscreen_Menu_TextView {
    public:
-      Fullscreen_Menu_FileView(std::string title, std::string filename);
+      Fullscreen_Menu_FileView(std::string filename );
 };
 
 

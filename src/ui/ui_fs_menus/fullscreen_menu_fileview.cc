@@ -17,18 +17,29 @@
  *
  */
 
+#include "constants.h"
 #include "filesystem.h"
 #include "fullscreen_menu_fileview.h"
+#include "profile.h"
 #include "ui_button.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
-#include "constants.h"
+#include "../../system.h"
 
-Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string title, std::string text)
+Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
 	: Fullscreen_Menu_Base("fileviewmenu.jpg")
 {
-	// Text view
+   Profile prof(filename.c_str(), "global"); // section-less file
+   Section* s = prof.get_section("global");
+
+
+   Sys_GrabTextdomain( "texts" );
+   std::string title = s->get_safe_translated_string("title");
+   std::string text = s->get_safe_translated_string("text");
+   Sys_ReleaseTextdomain();
+
+   // Text view
 	mlta=new UIMultiline_Textarea(this, 30, 150, 560, 240, text.c_str());
    mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
@@ -49,12 +60,9 @@ void Fullscreen_Menu_TextView::set_text(std::string text) {
    mlta->set_text(text.c_str());
 }
 
-Fullscreen_Menu_FileView::Fullscreen_Menu_FileView(std::string title, std::string filename) :
-   Fullscreen_Menu_TextView(title, "") {
-      FileRead f;
-      f.Open(g_fs, filename);
-      set_text((const char*)f.Data(0,0));
-}
+Fullscreen_Menu_FileView::Fullscreen_Menu_FileView(std::string filename) :
+   Fullscreen_Menu_TextView( filename ) {
+   }
 
 /*
 ==============================================================================
@@ -64,14 +72,24 @@ TextViewWindow
 ==============================================================================
 */
 
-class TextViewWindow : public UIUniqueWindow {
+class FileViewWindow : public UIUniqueWindow {
 public:
-	TextViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text);
+	FileViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename);
 };
 
-TextViewWindow::TextViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text)
-	: UIUniqueWindow(parent, reg, 0, 0, title)
+FileViewWindow::FileViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename)
+	: UIUniqueWindow(parent, reg, 0, 0, "")
 {
+   Sys_GrabTextdomain( "texts" );
+   Profile prof(filename.c_str(), "global"); // section-less file
+   Section* s = prof.get_section("global");
+   Sys_ReleaseTextdomain();
+
+   std::string title = s->get_safe_translated_string("title");
+   std::string text = s->get_safe_translated_string("text");
+   
+   set_title(title.c_str());
+
 	UIMultiline_Textarea* mlta=new UIMultiline_Textarea(this, 0, 0, 560, 240, text.c_str());
    mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
@@ -84,27 +102,12 @@ TextViewWindow::TextViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std
 
 /*
 ===============
-textview_window
-
-Display the text in a scrollable window.
-===============
-*/
-void textview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string text)
-{
-	new TextViewWindow(parent, reg, title, text);
-}
-
-
-/*
-===============
 fileview_screen
 
 Display the contents of a text file in a scrollable window.
 ===============
 */
-void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string title, std::string fname)
+void fileview_window(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename)
 {
-	FileRead f;
-	f.Open(g_fs, fname);
-	textview_window(parent, reg, title, (const char*)f.Data(0,0));
+   new FileViewWindow(parent, reg, filename);
 }

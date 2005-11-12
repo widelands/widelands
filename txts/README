@@ -1,9 +1,9 @@
-<p image=pics/wl-ico-64.png image-align=center text-align=center></p>
+title=_ "README"
+text=_ "<p image=pics/wl-ico-64.png image-align=center text-align=center></p>
 <p font-size=38 text-align=center font-face=Domestic_Manners font-color=#2F9131>Widelands</p>
 <p font-size=14 font-style=italic text-align=center>an open source strategy game</p>
 <p> </p>
-<p font-decoration=underline font-size=14>
-Introduction</p>
+<p font-decoration=underline font-size=14>Introduction</p>
 <p line-spacing=3 font-size=12>
  
 Widelands is a strategy game aiming for gameplay similar to Settlers II by BlueByte. 
@@ -75,9 +75,9 @@ Widelands can record all your keypresses and mouse movements to a file. It can t
  
 To create a session record, start the game with the --record parameter. On Linux, simply start Widelands like so: $ ./widelands --record=filename.rec
  
-On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like "c:\games\widelands\widelands.exe". Change this to "c:\games\widelands\widelands.exe --record=filename.rec".
+On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like c:\games\widelands\widelands.exe. Change this to c:\games\widelands\widelands.exe --record=filename.rec.
  
-A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace "--record" with "--playback".
+A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace --record with --playback.
  
 Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs.</p>
-</p>
+</p>"

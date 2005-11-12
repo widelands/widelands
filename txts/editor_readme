@@ -1,0 +1,22 @@
+title=_ README for the Widelands Editor
+text=_ "<p font-size=38 text-align=center font-face=Domestic_Manners font-color=2F9131>README for the Editor</p>
+<p font-size=14 font-style=italic text-align=center>Introduction</p>
+<p line-spacing=3 font-size=12>
+This Editor is intended for players who d like to design their own maps to use with Widelands.<br>
+As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete. Probably it will also contain a little tutorial in a while<br>
+</p>
+<p font-size=14 font-style=italic text-align=center>Keyboard shortcuts</p>
+<p line-spacing=3 font-size=12>
+SPACE    Toggles build help
+C        Toggles census on/off
+E        Toggles event menu
+H        Toggles main menu
+M        Toggles minimap
+P        Toggles player menu
+T        Toggles tools menu
+CTRL+L   Load Map
+CTRL+S   Save Map<br>
+1-0      Changes tools size
+SHIFT    (Hold) Selects first alternative tool while pressed
+ALT      (Hold) Selects second alternative tool while pressed
+</p>"

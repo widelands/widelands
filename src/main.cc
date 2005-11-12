@@ -341,7 +341,7 @@ void g_main(int argc, char** argv)
 
                case Fullscreen_Menu_Main::mm_readme:
                   {
-                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView(_("README"),_("README"));
+                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView( "txts/README" );
                      ff->run();
                      delete ff;
                   }
@@ -349,7 +349,7 @@ void g_main(int argc, char** argv)
 
                case Fullscreen_Menu_Main::mm_license:
                   {
-                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView(_("COPYING"),_("COPYING"));
+                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView( "txts/COPYING" ); 
                      ff->run();
                      delete ff;
                   }
