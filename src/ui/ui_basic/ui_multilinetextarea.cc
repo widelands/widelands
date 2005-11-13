@@ -139,7 +139,7 @@ void UIMultiline_Textarea::draw(RenderTarget* dst)
 }
 
 void UIMultiline_Textarea::draw_scrollbar() {
-   if (m_cache_mode != Widget_Cache_Use) {
+   if (m_cache_mode != Widget_Cache_Use ) {
       bool setbottom = false;
 
       if (m_scrollmode == ScrollLog) {
@@ -147,9 +147,10 @@ void UIMultiline_Textarea::draw_scrollbar() {
             setbottom = true;
       }
 
-      int m_width;
+      int m_width = 0;
       //update(0, 0, get_eff_w(), get_h());
-      g_fh->get_size_from_cache(m_cache_id,&m_width, &m_textheight);
+      if( m_cache_id )
+         g_fh->get_size_from_cache(m_cache_id,&m_width, &m_textheight);
       
       if (setbottom || m_textpos > m_textheight - get_h())
          m_textpos = m_textheight - get_h();

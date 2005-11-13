@@ -741,13 +741,6 @@ void Sys_HandleInput(InputCallback *cb)
 				}
 				break;
 			}
-			if (ev.key.keysym.sym == SDLK_f)
-			{
-				if (ev.type == SDL_KEYDOWN)
-					g_gr->toggle_fullscreen();
-				break;
-			}
-
 			if (cb && cb->key) {
 				int c;
 

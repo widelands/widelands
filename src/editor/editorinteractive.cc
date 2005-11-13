@@ -423,6 +423,11 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
             toggle_eventmenu();
             return true;
 
+         case KEY_f:
+            if( down )
+               g_gr->toggle_fullscreen();
+            return true;
+
          case KEY_h:
             toggle_mainmenu();
             return true;

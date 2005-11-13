@@ -478,6 +478,11 @@ bool Interactive_Player::handle_key(bool down, int code, char c)
 			set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 		return true;
 
+   case KEY_f:
+      if( down )
+         g_gr->toggle_fullscreen();
+      return true;
+
 	case KEY_PAGEUP:
 		if (down) {
 			int speed = m_game->get_speed();
