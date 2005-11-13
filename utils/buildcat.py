@@ -29,8 +29,8 @@ def main( ):
     for lang in LANGUAGES:
         # merge new strings with existing translations
         if not os.system( "msgmerge widelands_%s.po widelands.pot > tmp" % lang ):
-            os.system( "mv tmp widelands_%s.po" % lang ) 
-
+            os.system("mv tmp widelands_%s.po" % lang )
+        
         # compile message catalogs
         os.system( "mkdir -p %s/LC_MESSAGES" % lang )
         os.system( "msgfmt -o %s/LC_MESSAGES/widelands.mo widelands_%s.po" % ( lang, lang ))
@@ -45,11 +45,12 @@ def main( ):
         catalog = confgettext.parse_conf( files )
         file = open( "tribe_%s.pot" % tribe, "w")
         file.write(catalog)
+        file.close()
 
         for lang in LANGUAGES:
             # merge new strings with existing translations
             if not os.system( "msgmerge tribe_%s_%s.po tribe_%s.pot > tmp" % ( tribe, lang, tribe )):
-                os.system( "mv tmp tribe_%s_%s.po" % ( tribe, lang) ) 
+                os.system("mv tmp tribe_%s_%s.po" % (tribe, lang ) )
             
             # compile message catalogs
             os.system( "mkdir -p %s/LC_MESSAGES" % lang )
@@ -65,11 +66,12 @@ def main( ):
         catalog = confgettext.parse_conf( files )
         file = open( "world_%s.pot" % world, "w")
         file.write(catalog)
+        file.close()
 
         for lang in LANGUAGES:
             # merge new strings with existing translations
             if not os.system( "msgmerge world_%s_%s.po world_%s.pot > tmp" % ( world, lang, world )):
-                os.system( "mv tmp world_%s_%s.po" % ( world, lang) ) 
+                os.system("mv tmp world_%s_%s.po" % ( world, lang ) )
 
             # compile message catalogs
             os.system( "mkdir -p %s/LC_MESSAGES" % lang )
@@ -84,15 +86,15 @@ def main( ):
             continue
         files.append( file )
 
-    print files
     catalog = confgettext.parse_conf( files )
     file = open( "texts.pot", "w")
     file.write(catalog)
+    file.close()
 
     for lang in LANGUAGES:
         # merge new strings with existing translations
         if not os.system( "msgmerge texts_%s.po texts.pot > tmp" % lang ):
-            os.system( "mv tmp texts_%s.po" % lang ) 
+                os.system("mv tmp texts_%s.po" % ( lang ) )
 
         # compile message catalogs
         os.system( "mkdir -p %s/LC_MESSAGES" % lang )

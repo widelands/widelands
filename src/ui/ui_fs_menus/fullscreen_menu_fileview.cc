@@ -30,13 +30,15 @@
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
 	: Fullscreen_Menu_Base("fileviewmenu.jpg")
 {
-   Profile prof(filename.c_str(), "global"); // section-less file
-   Section* s = prof.get_section("global");
 
 
    Sys_GrabTextdomain( "texts" );
-   std::string title = s->get_safe_translated_string("title");
-   std::string text = s->get_safe_translated_string("text");
+   
+   Profile prof(filename.c_str(), "global"); // section-less file
+   Section* s = prof.get_section("global");
+   
+   std::string title = s->get_safe_string("title");
+   std::string text = s->get_safe_string("text");
    Sys_ReleaseTextdomain();
 
    // Text view
@@ -81,12 +83,13 @@ FileViewWindow::FileViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std
 	: UIUniqueWindow(parent, reg, 0, 0, "")
 {
    Sys_GrabTextdomain( "texts" );
+
    Profile prof(filename.c_str(), "global"); // section-less file
    Section* s = prof.get_section("global");
    Sys_ReleaseTextdomain();
 
-   std::string title = s->get_safe_translated_string("title");
-   std::string text = s->get_safe_translated_string("text");
+   std::string title = s->get_safe_string("title");
+   std::string text = s->get_safe_string("text");
    
    set_title(title.c_str());
 

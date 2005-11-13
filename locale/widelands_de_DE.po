@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 23:25+0100\n"
+"POT-Creation-Date: 2005-11-13 15:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -567,7 +567,7 @@ msgstr ""
 msgid "DOWN"
 msgstr ""
 
-#: ../src/profile.cc:918
+#: ../src/profile.cc:929
 msgid "Usage: "
 msgstr ""
 
@@ -1457,7 +1457,7 @@ msgstr ""
 msgid "Time Trigger Options"
 msgstr ""
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:52
+#: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:58
 msgid "Close"
 msgstr ""
 

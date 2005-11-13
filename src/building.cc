@@ -128,7 +128,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	char fname[256];
 
 	snprintf(m_descname, sizeof(m_descname), "%s",
-		global->get_safe_translated_string("descname"));
+		global->get_safe_string("descname"));
 
 	string = global->get_safe_string("size");
 	if (!strcasecmp(string, "small")) {

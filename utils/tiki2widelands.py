@@ -65,13 +65,13 @@ class Widelands_Text( str ):
         if( self.__in_para ):
             return
 
-        self.__mystr += "<p>"
+        self.__mystr += '"<p>"\n'
         self.__in_para = True
 
     def end_paragraph( self ):
         if not self.__in_para:
             return
-        self.__mystr += "</p>\n"
+        self.__mystr += '"</p>"\n'
         self.__in_para = False
 
 #
@@ -121,7 +121,7 @@ class Widelands_Text( str ):
         if( len( line ) and ( line[0] == '+' or line[0] == '-') ):
             line = line[1:]
 
-        self.__parse_inline_tags( """<p font-size=%i font-decoration=%s text-align=%s font-face=Domestic_Manners font-color=%s>%s</p>\n""" 
+        self.__parse_inline_tags( """"<p font-size=%i font-decoration=%s text-align=%s font-face=Domestic_Manners font-color=%s>%s</p>"\n""" 
                 % ( fontsize, decoration, align, color, line ) )
             
     def list( self, line ):
@@ -138,7 +138,7 @@ class Widelands_Text( str ):
             line = line[1:]
             pic = "first"
         
-        self.__parse_inline_tags( """<p image=pics/list_%s_entry.png image-align=left text-align=left font-size=12>%s</p>\n""" % ( pic, line ))
+        self.__parse_inline_tags( """"<p image=pics/list_%s_entry.png image-align=left text-align=left font-size=12>%s</p>"\n""" % ( pic, line ))
             
   
 # 
@@ -150,23 +150,17 @@ def tiki_to_widelands( tikipage ):
     # Remove all unneeded nonsense
     lines = __remove_heading( tikipage )
 
-    retval = Widelands_Text( "Devlopment" )
+    retval = Widelands_Text( "Development" )
     # Parse for known tags
-    in_paragraph = 0
     for line in lines:
-        i = line.find('"') 
-        if( i != -1 ):
-            print 'Illegal character " found in %s. Aborting!' % title
-            sys.exit( -1 )
-        
         # parse for paragraphs of their own
         if( len(line) and line[0] == '!'):
             retval.heading( line )
         elif( len(line) and line[0] == '*'):
             retval.list( line )
         else:
-            retval += line 
-            retval += '\n'
+            # TODO: trim this line down if it is too long
+            retval += '"' + line + '<br>"\n'
     retval.end_paragraph()
 
     print retval 

@@ -206,7 +206,7 @@ void Critter_Bob_Descr::parse(const char *directory, Profile *prof, const Encode
 	char sectname[256];
          
    // Pretty name
-   m_descname = s->get_safe_translated_string("descname");
+   m_descname = s->get_safe_string("descname");
 	
    snprintf(sectname, sizeof(sectname), "%s_walk_??", m_name);
 	m_walk_anims.parse(this, directory, prof, sectname, prof->get_section("walk"), encdata);

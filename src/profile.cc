@@ -338,17 +338,6 @@ const char *Section::get_safe_string(const char *name)
 	return v->get_string();
 }
 
-/** Section::get_safe_translated_string
- *
- * Returns the value of the given key, translated in the set local
- * using gettext.
- *
- * Note: the textdomain must be set through the system
- */
-const char* Section::get_safe_translated_string( const char* name ) {
-   return Sys_Translate( get_safe_string( name ) );
-}
- 
 /** Section::get_int(const char *name, int def)
  *
  * Returns the integer value of the given key. Falls back to a default value
@@ -435,21 +424,6 @@ const char *Section::get_string(const char *name, const char *def)
 	return v->get_string();
 }
 
-/** Section::get_translated_string
- *
- * Returns the value of the given key, translated in the set local
- * using gettext.
- *
- * Note: the textdomain must be set through the system
- */
-const char* Section::get_translated_string(const char* name, const char* def ) {
-   const char* retval = get_string( name, def );
-   if( !retval ) 
-      return 0;
-
-   return Sys_Translate( retval );
-}
-   
 /** Section::get_next_int(const char *name, int *value)
  *
  * Retrieve the next unused key with the given name as an integer.
@@ -800,6 +774,7 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
       bool reading_multiline = 0;
       std::string data;
       std::string key;
+      bool translate_line = false;
       while(fr.ReadLine(line, LINESIZE))
 		{
 			linenr++;
@@ -817,31 +792,64 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 				s = create_section(p, true); // may create duplicate
 			} else {
             char* tail = 0;
+            translate_line = false;
             if( reading_multiline ) {
-               data += '\n';
+               // Note: comments are killed by walking backwards into the string
+               rtrim(p);
+               while( *line != '\'' && *line != '"' && strlen( line )) {
+                  if( *line == '_') translate_line = true;
+                  line++;
+               }
+               if(!strlen(line))
+                  throw wexception("line %i: runaway multiline string", linenr);
+              
+               // skip " or '
+               line++;
+               
+               char *eot = line+strlen(line)-1;
+               while( *eot != '"' && *eot != '\'') {
+                  *eot = 0;
+                  eot = line+strlen(line)-1;
+               }
+               // NOTE: we leave the last '"' and do not remove them
                tail = line;
             } else {
                tail = strchr(p, '=');
                *tail++ = 0;
                key = p;
-					if(*tail == '_' ) 
+					if(*tail == '_' ) { 
                   tail+= 1; // skip =_, which is only used for translations
+                  translate_line = true;
+               }
                tail = skipwhite(tail);
 					killcomments(tail);
 					rtrim(tail);
 					rtrim(p);
             
-               // remove surrounding '' or ""
-					if (tail[0] == '\'' || tail[0] == '\"') {
+               // first, check for multiline string
+					if ( strlen(tail) >= 2 && 
+                    ((tail[0] == '\'' || tail[0] == '\"') && 
+                    (tail[1] == '\'' || tail[1] == '\"'))) {
                   reading_multiline = true;
-                  tail++;
+                  tail += 2;
 					}
+               
+               // then remove surrounding '' or ""
+               if( tail[0] == '\'' || tail[0] == '\"') {
+                  tail++;
+               }
             }
-				if (tail) {
+            if (tail) {
                char *eot = tail+strlen(tail)-1;
                if (*eot == '\'' || *eot == '\"') {
                   *eot = 0;
-                  reading_multiline = false;
+                  if( strlen( tail )) {
+                     char *eot = tail+strlen(tail)-1;
+                     if (*eot == '\'' || *eot == '\"') {
+                        reading_multiline = false;
+                        *eot = 0;
+                     }
+                  }
                }
 					
                // ready to insert
@@ -851,8 +859,11 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 						else
 							throw wexception("line %i: key %s outside section", linenr, p);
 					}
-           
-               data += tail;
+          
+               if( translate_line && strlen( tail )) 
+                  data += Sys_Translate( tail );
+               else
+                  data += tail;
                if (s && ! reading_multiline) { // error() may or may not throw
 						s->create_val(key.c_str(), data.c_str(), true); // may create duplicate
                   data = "";

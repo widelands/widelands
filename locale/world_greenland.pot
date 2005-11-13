@@ -32,10 +32,6 @@ msgstr ""
 msgid "Cactus"
 msgstr ""
 
-#: ../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr ""
-
 #: ../worlds/greenland/bobs/deadtree1/conf:1
 #: ../worlds/greenland/bobs/deadtree2/conf:1
 #: ../worlds/greenland/bobs/deadtree3/conf:1
@@ -51,34 +47,14 @@ msgstr ""
 msgid "Duck"
 msgstr ""
 
-#: ../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr ""
-
 #: ../worlds/greenland/bobs/fox/conf:1
 msgid "Fox"
-msgstr ""
-
-#: ../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr ""
-
-#: ../worlds/greenland/resconf:28
-msgid "Granit"
 msgstr ""
 
 #: ../worlds/greenland/bobs/grass1/conf:1
 #: ../worlds/greenland/bobs/grass2/conf:1
 #: ../worlds/greenland/bobs/grass3/conf:1
 msgid "Grass"
-msgstr ""
-
-#: ../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr ""
-
-#: ../worlds/greenland/resconf:20
-msgid "Iron"
 msgstr ""
 
 #: ../worlds/greenland/bobs/mushroom1/conf:1
@@ -128,14 +104,6 @@ msgstr ""
 msgid "Stones"
 msgstr ""
 
-#: ../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr ""
-
-#: ../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr ""
-
 #: ../worlds/greenland/bobs/tree1/conf:4
 #: ../worlds/greenland/bobs/tree2/conf:4
 #: ../worlds/greenland/bobs/tree3/conf:4
@@ -147,7 +115,39 @@ msgstr ""
 msgid "Tree"
 msgstr ""
 
+#: ../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr ""
+
+#: ../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr ""
+
+#: ../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr ""
+
+#: ../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr ""
+
+#: ../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr ""
+
+#: ../worlds/greenland/resconf:28
+msgid "Granit"
+msgstr ""
+
 #: ../worlds/greenland/resconf:36
 msgid "Water"
+msgstr ""
+
+#: ../worlds/greenland/resconf:41
+msgid "Fish"
 msgstr ""
 

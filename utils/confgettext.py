@@ -36,12 +36,10 @@ class trans_string:
         self.str = ""
 
 def is_multiline( str ):
-    l = firstl( str, '"\'');
+    l = str.find('""')
     if( l == -1 ):
         return False
-    r =  firstr( str, '"\'') 
-    if( r == l ):
-        return True
+    return True
 
 def firstl( str, what ):
     for c in what:
@@ -75,14 +73,26 @@ def parse_conf( files ):
         for i in range(0,len(lines)):
             line = lines[i].rstrip('\n')
             linenr = i+1
+            curstr = 0
             
-            if multiline:
-                rindex = firstr(line, '"\'')
+            if multiline and  len(line) and line[0]=='_':
+                line = line[1:]
+                rindex = line.rfind('""') 
                 if rindex == -1:
-                    curstr.str += line
+                    line = line.strip()
+                    line = line.strip('"')
+                    curstr = trans_string()
+                    curstr.str = line
+                    curstr.occurences.append( occurences( file, linenr )) 
+                    append_string( known_strings, translatable_strings, curstr )
                     continue
                 else:
-                    curstr.str += line[:rindex]
+                    line = line[:(rindex+1)]
+                    line = line.strip()
+                    line = line.strip('"')
+                    curstr = trans_string()
+                    curstr.str = line
+                    curstr.occurences.append( occurences( file, linenr )) 
                     append_string( known_strings, translatable_strings, curstr )
                     multiline = False
                     continue
@@ -96,7 +106,9 @@ def parse_conf( files ):
                 if multiline: # means exactly one "
                     index = firstl( restline, '"\'')
                     restline = restline[index+1:]
-                    curstr.str += restline
+                    restline = restline.strip()
+                    restline = restline.strip('"')
+                    curstr.str += '"' + restline + '"\n'
                     continue
                 # Is not multiline
                 # If there are ' or " its easy
@@ -116,13 +128,19 @@ def parse_conf( files ):
                 curstr.str = restline
                 append_string( known_strings, translatable_strings, curstr )
 
-    translatable_strings.sort( lambda str1,str2: cmp(str1.str,str2.str) ) 
+    translatable_strings.sort( lambda str1,str2: cmp(str1.occurences[0].file,str2.occurences[0].file) ) 
 
     retval = head
     for i in translatable_strings:
         for occ in i.occurences:
             retval += "#: %s:%i\n" % ( occ.file, occ.line )
-        retval += 'msgid "%s"\n' % i.str
+
+        # escape the escapable characters 
+        i.str = i.str.replace('\\', '\\\\')
+        if( i.str.find('\n') == -1 ):
+            retval += 'msgid "%s"\n' % i.str
+        else:
+            retval += 'msgid ""\n%s' % i.str
         retval += 'msgstr ""\n\n'
     return retval 
 
