@@ -22,6 +22,7 @@
 #include "game_main_menu.h"
 #include "game_main_menu_save_game.h"
 #include "game_main_menu_load_game.h"
+#include "game_objectives_menu.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
 #include "interactive_player.h"
@@ -141,7 +142,10 @@ void GameMainMenu::clicked(int n) {
 
       case 25:
          // Mission Objectives 
-         log("TODO: Mission Objectives!\n");
+         if (m_windows->objectives.window)
+            delete m_windows->objectives.window; 
+         else
+            new GameObjectivesMenu(m_player, &m_windows->objectives, m_player->get_game());
          break;
   
       case 30:

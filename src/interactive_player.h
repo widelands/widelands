@@ -75,6 +75,7 @@ class Interactive_Player : public Interactive_Base {
 
          UIUniqueWindowRegistry mission_objectives;
          UIUniqueWindowRegistry chat;
+         UIUniqueWindowRegistry objectives;
       };
 
    public:
