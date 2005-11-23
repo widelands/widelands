@@ -311,8 +311,13 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		fclose(f);
 		free(buf);
 
-		unlink(filename);
-	}
+		
+#ifndef __WIN32__
+      unlink( filename );
+#else
+      DeleteFile( filename ); 
+#endif
+   }
 
 	SDL_RWclose(src);
 	return 0;
