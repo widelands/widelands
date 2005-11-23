@@ -292,6 +292,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		Mix_Chunk *m = Mix_LoadWAV_RW(src, 1);	//SDL_mixer will free the RWops "src" itself
 		return m;
 	} else {
+#ifndef __WIN32__
 		char *filename;
 		FILE *f;
 		void *buf;
@@ -312,11 +313,8 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		free(buf);
 
 		
-#ifndef __WIN32__
       unlink( filename );
 #else
-      DeleteFile( filename ); 
-#endif
    }
 
 	SDL_RWclose(src);

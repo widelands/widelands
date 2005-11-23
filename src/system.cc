@@ -356,7 +356,7 @@ void Sys_SetLocale( const char* str ) {
 #endif
 
 #ifdef _WIN32
-   const std::string env = "LANG=" + sstr;
+   const std::string env = std::string("LANG=") + str;
    putenv(env.c_str());
 #endif
       
