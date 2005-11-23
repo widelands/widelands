@@ -106,7 +106,7 @@ void UITextarea::draw(RenderTarget* dst)
          y += get_h()/2;
       else if (m_align & Align_Bottom)
          y += get_h();
-		g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(0,0,0), x, y, m_text.c_str(), m_align, m_multiline ? get_w() : -1);
+		g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(107,87,55), x, y, m_text.c_str(), m_align, m_multiline ? get_w() : -1);
    }
 }
 

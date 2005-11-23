@@ -38,7 +38,6 @@ static const int EVENT_VERSION = 1;
 Event_Message_Box::Event_Message_Box(void) {
    set_name(_("Message Box"));
    set_text(_("No text defined"));
-   set_caption(_("Caption"));
    set_window_title(_("Window Title"));
    set_is_modal(false);
 
@@ -110,7 +109,6 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
    if( version == EVENT_VERSION ) {
       set_name( s->get_name() );
       set_text( s->get_safe_string( "text" ) );
-      set_caption( s->get_safe_string( "caption" ) );
       set_window_title( s->get_safe_string( "window_title" ) );
       set_is_modal( s->get_safe_bool( "is_modal" ));
 
@@ -143,9 +141,6 @@ void Event_Message_Box::Write(Section* fs, Editor_Game_Base *egbase) {
     
     // Set Text
     fs->set_string( "text", m_text.c_str() );
-
-    // Caption
-    fs->set_string( "caption", m_caption.c_str() );
 
     // Window Title
     fs->set_string( "window_title", m_window_title.c_str() );

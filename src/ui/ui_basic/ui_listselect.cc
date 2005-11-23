@@ -276,7 +276,7 @@ void UIListselect::draw(RenderTarget* dst)
          col = e->clr;
   
       // Horizontal center the string
-		g_fh->draw_string(dst, UI_FONT_SMALL, col, RGBColor(0,0,0), x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->name, m_align, -1);
+		g_fh->draw_string(dst, UI_FONT_SMALL, col, RGBColor(107,87,55), x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->name, m_align, -1);
 
       // Now draw pictures
       if(e->picid!=-1) {

@@ -63,11 +63,7 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    new UITextarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
    m_name=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 0);
    m_name->set_text( event->get_name() );
-
-   // Caption
-   new UITextarea(this, spacing, posy, 60, 20, _("Caption:"), Align_CenterLeft);
-   m_caption=new UIEdit_Box(this, spacing+60, posy, get_inner_w()/2-60-2*spacing, 20, 0, 1);
-   m_caption->set_text( m_event->get_caption() );
+   posy+= 20+spacing;
 
    // Modal cb
    new UITextarea(this, get_inner_w()/2+spacing, posy, 150, 20, _("Is Modal: "), Align_CenterLeft);
@@ -204,8 +200,6 @@ void Event_Message_Box_Option_Menu::clicked(int i) {
                m_event->set_name( m_name->get_text() );
             if(m_text->get_text().c_str())
                m_event->set_text( m_text->get_text().c_str() );
-            if(m_caption->get_text())
-               m_event->set_caption( m_caption->get_text() );
             if(m_window_title->get_text())
                m_event->set_window_title( m_window_title->get_text() );
             m_event->set_is_modal(m_is_modal->get_state());

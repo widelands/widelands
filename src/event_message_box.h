@@ -53,8 +53,6 @@ class Event_Message_Box : public Event, public TriggerReferencer {
 
       inline void set_text(const char* str) { m_text=str; }
       inline const char* get_text(void) { return m_text.c_str(); }
-      inline void set_caption(const char* str) { m_caption=str; }
-      inline const char* get_caption(void) { return m_caption.c_str(); }
       inline void set_window_title(const char* str) { m_window_title=str; }
       inline const char* get_window_title(void) { return m_window_title.c_str(); }
       inline void set_is_modal(bool t) {  m_is_modal=t; }
@@ -82,7 +80,6 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       };
 
       std::string m_text;
-      std::string m_caption;
       std::string m_window_title;
       bool m_is_modal;
 

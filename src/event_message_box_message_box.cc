@@ -36,8 +36,6 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
   UIWindow(egbase->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
 
      UIMultiline_Textarea* m_text=0;
-     UITextarea* m_caption=0;
-
      int spacing=5;
      int offsy=5;
      int offsx=spacing;
@@ -46,15 +44,10 @@ Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* e
 
      // No picture, so we can optimaly assign all things its place
      set_inner_size(400,300);
-     m_caption=new UITextarea(this, posx, posy, get_inner_w()-2*spacing, 50, event->get_caption() , Align_Center);
-     posy+=50;
      m_text=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
 
-     if(m_caption)
-        m_caption->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
      if(m_text)
         m_text->set_text( event->get_text());
-
 
      // Buttons
      int but_width=80;
