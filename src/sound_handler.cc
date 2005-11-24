@@ -314,7 +314,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 
 		
       unlink( filename );
-#else
+#endif
    }
 
 	SDL_RWclose(src);
