@@ -57,6 +57,7 @@ void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
       if( !obj ) {
          throw wexception("Unhide Objective event with unknown objecive %s in map!\n", name.c_str());
       }
+      set_objective( obj );
       set_dounhide(s->get_bool("dounhide"));
       return;
    }

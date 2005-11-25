@@ -23,8 +23,8 @@
 #include "error.h"
 #include <string>
 #include "system.h"
-
-class Trigger_Null;
+#include "trigger_null.h"
+#include "trigger_referencer.h"
 
 /*
  * The Map Objective manager keeps all objectives
@@ -49,7 +49,7 @@ class Trigger_Null;
 /*
  * First, the variables
  */
-class MapObjective {
+class MapObjective : public TriggerReferencer {
    public:
       MapObjective( ) { 
          m_trigger = 0;
@@ -58,7 +58,10 @@ class MapObjective {
          m_descr = _("no descr");
          m_name  = "";
       } 
-      virtual ~MapObjective( void ) { }
+      virtual ~MapObjective( void ) { 
+         if( m_trigger )
+            unreference_trigger( m_trigger );
+      }
 
 
       inline const char* get_name( void ) { return m_name.c_str(); }
@@ -68,14 +71,23 @@ class MapObjective {
       inline bool get_is_visible( void ) { return m_is_visible; }
       inline void set_is_visible( bool t ) { m_is_visible = t; }
       inline bool get_is_optional( void ) { return m_is_optional; } 
-
+   
+      // For trigger referncer
+      const char* get_type( void ) { return "Map Objective"; }
 
       // Get the trigger that is attached to this
       // Trigger is created by Editor or on load
       inline Trigger_Null* get_trigger( void ) { return m_trigger; }
       
       // Setting the values below is only a good idea in editor
-      inline void set_trigger(Trigger_Null* tr) { assert(!m_trigger); m_trigger = tr; }
+      inline void set_trigger(Trigger_Null* tr) { 
+         assert(!m_trigger);
+         if( m_trigger )
+            unreference_trigger( m_trigger );
+         if( tr )
+            reference_trigger( tr );
+         m_trigger = tr; 
+      }
       inline void set_is_optional( bool t ) { m_is_optional = t; }
       
    private:

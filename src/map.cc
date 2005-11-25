@@ -370,6 +370,9 @@ void Map::cleanup(void) {
 
    if(m_overlay_manager)
       m_overlay_manager->cleanup();
+   
+   delete m_mom;
+   m_mom = new MapObjectiveManager();
 
    while( get_mecm()->get_nr_eventchains() )
       get_mecm()->delete_eventchain( get_mecm()->get_eventchain_by_nr( 0 )->get_name() );
@@ -377,9 +380,6 @@ void Map::cleanup(void) {
    get_mtm()->delete_unreferenced_triggers();
    
    assert(!get_mtm()->get_nr_triggers() && !get_mem()->get_nr_events());
-   
-   delete m_mom;
-   m_mom = new MapObjectiveManager();
    
    delete m_mvm;
    m_mvm = new MapVariableManager();

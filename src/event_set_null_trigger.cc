@@ -61,6 +61,7 @@ void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
       if( ! trig ) {
          throw wexception("Set Null Trigger event with unknown trigger %s in map!\n", name.c_str());
       }
+      set_trigger( trig );
       set_setto(s->get_bool("setto"));
       return;
    }
@@ -86,6 +87,7 @@ Event::State Event_Set_Null_Trigger::run(Game* game) {
    assert( m_trigger );
 
    m_trigger->set_trigger_manually( get_setto() );
+   m_trigger->check_set_conditions( game ); // forcefully update this trigger
 
    m_state = DONE;
    return m_state;
