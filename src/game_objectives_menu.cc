@@ -59,7 +59,9 @@ GameObjectivesMenu::GameObjectivesMenu(Interactive_Player *plr, UIUniqueWindowRe
    MapObjectiveManager* mom = game->get_map()->get_mom();
    for( int i = 0; i < mom->get_nr_objectives(); i++) {
       MapObjective* obj = mom->get_objective_by_nr( i );
-      if( !obj->get_is_visible() || !obj->get_trigger()->is_set())
+      if( !obj->get_is_visible())
+         continue;
+      if(obj->get_trigger()->is_set())
          continue;
       
       m_list->add_entry( obj->get_name(), obj);

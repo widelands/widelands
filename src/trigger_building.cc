@@ -24,6 +24,7 @@
 #include "filesystem.h"
 #include "game.h"
 #include "map.h"
+#include "map_variable_manager.h"
 #include "trigger_building.h"
 #include "util.h"
 
@@ -117,6 +118,15 @@ void Trigger_Building::check_set_conditions(Game* game) {
    }
 
    if(count>=m_count) set_trigger(true);
+
+   // Set MapVariable inttemp
+   Int_MapVariable* inttemp = game->get_map()->get_mvm()->get_int_variable( "inttemp" );
+   if( !inttemp ) {
+      inttemp = new Int_MapVariable( false );
+      inttemp->set_name( "inttemp" );
+      game->get_map()->get_mvm()->register_new_variable( inttemp );
+   }
+   inttemp->set_value( count );
 
    return;
 }
