@@ -56,7 +56,7 @@ Game::Game(void)
 
 	ipl = 0;
 	
-	g_sound_handler.the_game=this;
+	g_sound_handler.m_the_game=this;
 }
 
 /** Game::~Game(void)
@@ -65,7 +65,7 @@ Game::Game(void)
  */
 Game::~Game(void)
 {
-	g_sound_handler.the_game=NULL;
+	g_sound_handler.m_the_game=NULL;
 	
 	delete cmdqueue;
 	delete rng;
