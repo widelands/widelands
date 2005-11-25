@@ -18,22 +18,10 @@ raw_stone=4
 
 [idle]
 pics=i_??.png  
-hot_spot_x=30
-hot_spot_y=58
-clrkey_r=255
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
+hot_spot_x=66
+hot_spot_y=72
 
 [build]
 pics=i_??.png  
-hot_spot_x=30
-hot_spot_y=58
-clrkey_r=255
-clrkey_g=0
-clrkey_b=255
-shadowclr_r=0
-shadowclr_g=0
-shadowclr_b=0
+hot_spot_x=66
+hot_spot_y=72
