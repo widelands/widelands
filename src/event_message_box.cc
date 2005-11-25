@@ -27,7 +27,6 @@
 #include "map_trigger_manager.h"
 #include "graphic.h"
 #include "trigger_null.h"
-#include "unicode.h"
 #include "util.h"
 
 static const int EVENT_VERSION = 1;

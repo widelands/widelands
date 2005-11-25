@@ -39,7 +39,6 @@
 #include "map_eventchain_manager.h"
 #include "map_trigger_manager.h"
 #include "trigger_factory.h"
-#include "unicode.h"
 #include "util.h"
 
 /*

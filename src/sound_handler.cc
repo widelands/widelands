@@ -17,6 +17,11 @@
  *
  */
 
+
+#ifdef _WIN32
+  #include <windows.h>
+#endif
+
 #include "sound_handler.h"
 
 #include <assert.h>
@@ -98,8 +103,9 @@ Mix_Music *Songset::get_song()
 #ifdef __WIN32__
 #warning Mix_LoadMUS_RW is not available under windows!!!
 	m_m = NULL;
+   m_m = Mix_LoadMUS( filename.c_str()); // Hack for windows
 #else
-#ifdef OLD_SDL_MIXER
+#ifdef OLD_SDL_MIXER 
 #warning Please update your SDL_mixer library to at least version 1.2.6!!!
 	m_m = Mix_LoadMUS(filename.c_str());
 	//TODO: this should use a RWopsified version!
@@ -302,24 +308,26 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		Mix_Chunk *m = Mix_LoadWAV_RW(src, 1);	//SDL_mixer will free the RWops "src" itself
 		return m;
 	} else {
-#ifdef __WIN32__
-		//write music from src to a tempfile
-		//TODO: code me
-
-		//load music from tempfile
-		Mix_Chunk *m=Mix_LoadWAV(tempfile);
-
-		//remove the tempfile
-		//TODO: code me
-
-		return m
-#else
 		FILE *f;
 		void *buf;
 
 		//create a tempfile
-		tempfile = mktemp("/tmp/widelands-sfx.XXXXXXXX");	//manpage recommends a minimum suffix length of 6
+#ifdef __WIN32__
+      char szTempName[1024];  
+      char lpPathBuffer[1024];
 
+      // Get the temp path.
+      GetTempPath(1024, lpPathBuffer); 
+      // Create a temporary file. 
+      GetTempFileName(lpPathBuffer, // directory for tmp files
+            "widelands",  // temp file name prefix 
+            0,            // create unique name 
+            szTempName);  // buffer for name 
+      tempfile = szTempName;
+#else
+      tempfile = mktemp("/tmp/widelands-sfx.XXXXXXXX");	//manpage recommends a minimum suffix length of 6
+#endif
+      
 		if (tempfile==NULL) {
 			log("Could not create tempfile /tmp/widelands-sfx.XXXXXXXX! Cannot load music.");
 			return NULL;
@@ -351,10 +359,12 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		SDL_FreeRW(src);
 		fclose(f);
 		free(buf);
-		unlink(tempfile);
-
-		return m;
+#ifdef __WIN32__
+      DeleteFile( tempfile );
+#else
+      unlink(tempfile);
 #endif
+		return m;
 	}
 
 	SDL_RWclose(src);

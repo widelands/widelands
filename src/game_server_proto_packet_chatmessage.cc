@@ -22,7 +22,6 @@
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "game_server_proto_packet_chatmessage.h"
-#include "unicode.h"
 #include "util.h"
 #include "wexception.h"
 #include "system.h"
