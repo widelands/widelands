@@ -31,11 +31,14 @@
 #include "event_move_view_option_menu.h"
 #include "event_unhide_area.h"
 #include "event_unhide_area_option_menu.h"
+/* EVENTS BELOW HAVE NO OPTION MENU YET */
+#include "event_set_null_trigger.h"
+#include "event_unhide_objective.h"
 #include "error.h"
 #include "wexception.h"
 
 
-static const int nr_of_events=5;
+static const int nr_of_events=7;
 
 Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
    { "message_box", _("Message Box"), _("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user") },
@@ -43,6 +46,9 @@ Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
    { "unhide_area", _("Unhide Area"), _("This Event makes a user definable part of the map visible for a selectable user") },
    { "conquer_area", _("Conquer Area"), _("This Event conquers a user definable part of the map for one player if there isn't a player already there") },
    { "allow_building", _("Allow Building"), _("Allows/Disables a certain building for a player so that it can be build or it can't any longer") },
+// TODO: Events below are not creatable in the editor. Make UI Windows for them
+   { "set_null_trigger", _("Set Null Trigger"), _("Manually set a Null Trigger to a given value") },
+   { "unhide_objective", _("Unhide Objective"), _("Hide or unhide an objective so that the player can see it") },
 };
 
 /*
@@ -55,6 +61,8 @@ Event* Event_Factory::get_correct_event(const char* id) {
    else if( str == "unhide_area" ) return new Event_Unhide_Area(); 
    else if( str == "conquer_area" ) return new Event_Conquer_Area(); 
    else if( str == "allow_building" ) return new Event_Allow_Building(); 
+   else if( str == "set_null_trigger" ) return new Event_Set_Null_Trigger(); 
+   else if( str == "unhide_objective" ) return new Event_Unhide_Objective(); 
    else 
       throw wexception("Event_Factory::get_correct_event: Unknown event id found: %s\n", id);
    // never here
