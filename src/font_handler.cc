@@ -253,7 +253,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface(TTF_Font* f, RGBColor
    }
    
    // blit all this together in one Surface
-   return join_sdl_surfaces( global_surface_width, global_surface_height, m_rendered_lines, align, line_spacing);
+   return join_sdl_surfaces( global_surface_width, global_surface_height, m_rendered_lines, bg, align, line_spacing);
 
 }
 
@@ -363,6 +363,8 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
          }
          // blit all this together in one Surface
          SDL_Surface *block_surface = create_empty_sdl_surface(wrap,surf_h,text);
+         SDL_FillRect( block_surface, 0, SDL_MapRGB( block_surface->format,  107,87,55  )); // Set background to colorkey
+         
          if (got_text) {
             SDL_BlitSurface(text,0,block_surface,&text_pos);
             SDL_FreeSurface(text);
@@ -378,7 +380,7 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
          rendered_blocks.push_back(block_surface);
          global_height+=surf_h;
       }
-      SDL_Surface* global_surface = join_sdl_surfaces(wrap, global_height, rendered_blocks);
+      SDL_Surface* global_surface = join_sdl_surfaces(wrap, global_height, rendered_blocks, bg);
       picid = convert_sdl_surface(global_surface);
       *widget_cache_id = picid;
    }  
@@ -402,10 +404,11 @@ SDL_Surface* Font_Handler::create_empty_sdl_surface(uint w, uint h, SDL_Surface 
 }
 
 //joins a vectror of surfaces in one big surface
-SDL_Surface* Font_Handler::join_sdl_surfaces(uint w, uint h, std::vector<SDL_Surface*> surfaces, Align align, int line_spacing) {
+SDL_Surface* Font_Handler::join_sdl_surfaces(uint w, uint h, std::vector<SDL_Surface*> surfaces, RGBColor bg, Align align, int line_spacing) {
    SDL_Surface* global_surface = create_empty_sdl_surface(w,h,surfaces[0]);
    assert(global_surface);
    
+   SDL_FillRect( global_surface, 0, SDL_MapRGB( global_surface->format, bg.r(), bg.g(), bg.b()));
    int y = 0;
    
    for( uint i = 0; i < surfaces.size(); i++) {
@@ -436,7 +439,7 @@ SDL_Surface* Font_Handler::join_sdl_surfaces(uint w, uint h, std::vector<SDL_Sur
  */
 uint Font_Handler::convert_sdl_surface( SDL_Surface* surface ) {
    Surface* surf = new Surface();
-   SDL_SetColorKey( surface, SDL_SRCCOLORKEY, SDL_MapRGB( surface->format, 0, 0, 0 )); 
+   SDL_SetColorKey( surface, SDL_SRCCOLORKEY, SDL_MapRGB( surface->format, 107,87,55 )); 
    surf->set_sdl_surface( surface );
    
    uint picid = g_gr->get_picture(PicMod_Font, surf );
