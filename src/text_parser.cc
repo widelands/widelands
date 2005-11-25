@@ -30,7 +30,7 @@ Text_Parser::Text_Parser(){
 Text_Parser::~Text_Parser(){
 }
 
-void Text_Parser::parse(std::string text, std::vector<Text_Block> *blocks) {  
+void Text_Parser::parse(std::string text, std::vector<Text_Block> *blocks, Varibale_Callback vcb, void* vcdata) {  
    while (text.size()) {
       if (text.substr(0,2) != "<p") {
          uint block_start = text.find("<p");
@@ -66,6 +66,18 @@ void Text_Parser::parse(std::string text, std::vector<Text_Block> *blocks) {
       uint newline;
       while( (newline = block_text.find("<br>")) != std::string::npos ) {
          block_text.replace( newline, 4, "\n" );
+      }
+      // Serch for map variables
+      uint offset;
+      while( (offset = block_text.find("<variable name=")) != std::string::npos) {
+         uint end = block_text.find(">");
+         if( end == std::string::npos ) {
+            log("WARNING: <variable> tag not closed!\n");
+         } else {
+            std::string name = block_text.substr(offset+15, end-(offset+15));
+            std::string str = vcb( name, vcdata );
+            block_text.replace( offset, end-offset+1, str );
+         }
       }
       
       Text_Block new_block = {

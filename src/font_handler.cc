@@ -42,6 +42,8 @@
 Font_Handler::Font_Handler(void) {
    if(TTF_Init()==-1) throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
    m_font_loader = new Font_Loader();
+   m_varcallback = 0;
+   m_cbdata = 0;
 }
 
 /*
@@ -306,7 +308,7 @@ void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int ds
    
       std::vector<Text_Block> blocks;
       Text_Parser p;
-      p.parse(text,&blocks);
+      p.parse(text,&blocks,m_varcallback,m_cbdata);
       
       int global_height = 0;
       int h_space = 4;
@@ -592,3 +594,17 @@ int Font_Handler::calc_linewidth(TTF_Font* f, std::string &text) {
    TTF_SizeUTF8(f, text.c_str(), &w, &h);
    return w;
 }
+
+/**
+ * Registers the variable callback which is used (currently, 11.05) 
+ * for rendering map variables.
+ */
+void Font_Handler::register_variable_callback( Varibale_Callback cb, void* cbdata ) {
+   m_varcallback=cb;
+   m_cbdata=cbdata;
+}
+void Font_Handler::unregister_variable_callback( ) {
+   m_varcallback = 0;
+   m_cbdata = 0;
+}
+

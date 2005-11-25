@@ -880,4 +880,5 @@ private:
 	Coords m_next; // next field to return
 };
 
+std::string g_MapVariableCallback( std::string str, void* data );
 #endif // __S__MAP_H

@@ -54,7 +54,8 @@ class MapVariable {
       inline bool is_delete_protected( void ) { return m_delete_protected; }
       inline const char* get_name( void ) { return m_name.c_str(); }
       inline void set_name( const char* name ) { m_name = name; }
-
+      
+      virtual std::string get_string_representation( void ) = 0;
       virtual Type get_type( void ) = 0;
       
    private:
@@ -70,6 +71,11 @@ class Int_MapVariable : public MapVariable {
 
       long get_value( void ) { return m_value; }
       void set_value( long t ) { m_value = t; }
+      std::string get_string_representation( void ) {
+         char buffer[256];
+         sprintf( buffer, "%li", m_value );
+         return buffer;
+      }
 
    private:
       long            m_value;
@@ -83,6 +89,7 @@ class String_MapVariable : public MapVariable {
 
       const char* get_value( void ) { return m_value.c_str(); }
       void set_value( const char* t ) { m_value = t; }
+      std::string get_string_representation( void ) { return m_value; }
 
    private:
       std::string            m_value;

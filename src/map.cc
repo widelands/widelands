@@ -34,6 +34,21 @@
 #include "s2map.h"
 #include "error.h"
 
+/**
+ * Callback function for font renderer.
+ */
+std::string g_MapVariableCallback( std::string str, void* data ) {
+   Map* map = (Map*)data;
+   if(!map) 
+      return (std::string("UNKNOWN:") + str ).c_str();
+   
+   MapVariable* var = map->get_mvm()->get_variable(str.c_str());
+   if(!var) 
+      return (std::string("UNKNOWN:") + str ).c_str();
+   else 
+      return var->get_string_representation();
+}
+
 /*
 ==============================================================================
 

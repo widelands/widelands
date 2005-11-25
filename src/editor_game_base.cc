@@ -491,7 +491,10 @@ void Editor_Game_Base::set_map(Map* map)
 	if (m_map)
 		delete m_map;
 
-	m_map = map;
+   m_map = map;
+
+   // Register map_variable callback
+   g_fh->register_variable_callback( g_MapVariableCallback, m_map);
 }
 
 

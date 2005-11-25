@@ -62,6 +62,7 @@ enum Widget_Cache {
  *
  * This class generates font Pictures out of strings and returns them
  */
+typedef std::string (*Varibale_Callback)( std::string, void* data );
 class Font_Handler {
 public:
    Font_Handler();
@@ -83,6 +84,9 @@ public:
    void draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int dsty, std::string text, int wrap, Widget_Cache widget_cache = Widget_Cache_None, uint *widget_cache_id = 0);
    void get_size_from_cache(uint widget_cache_id, int *w, int *h);
 
+   // Register a callback which is used whenever the tag <variable name="kljdf"> appears
+   void register_variable_callback( Varibale_Callback, void* cbdata );
+   void unregister_variable_callback( );
    
 private:
    struct _Cache_Infos {
@@ -108,6 +112,8 @@ private:
 
    Font_Loader* m_font_loader;
    std::list<_Cache_Infos> m_cache;
+   Varibale_Callback m_varcallback;
+   void* m_cbdata;
    
 private:
    uint create_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int wrap, int caret = -1);

@@ -47,7 +47,7 @@ class Text_Parser {
    public:
       Text_Parser();
       ~Text_Parser();
-      void parse(std::string text, std::vector<Text_Block> *blocks);
+      void parse(std::string text, std::vector<Text_Block> *blocks, Varibale_Callback, void*);
    private:
       void parse_attributes(std::string format, Text_Block *element);
       Align set_align(std::string align);
