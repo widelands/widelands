@@ -58,18 +58,27 @@ class Songset {
 	void add_song(string filename);
 	Mix_Music *get_song();
 	bool empty() {
-		return songs.empty();
+		return m_songs.empty();
 	}
       protected:
 	/** The filenames of all configured songs*/
-	 vector < string > songs;
+	 vector < string > m_songs;
 	/** Pointer to the song that is currently playing (actually the one that was last started);
 	 * needed for linear playback*/
-	vector < string >::iterator current_song;
+	vector < string >::iterator m_current_song;
 
-	FileRead *fr;
-	Mix_Music *m;
-	SDL_RWops *rwops;
+	/** File reader object to fetch songs from disc when they start playing.
+	 * Do not create this for each load, it's a major hassle to code
+         * \sa m_rwops*/
+	FileRead *m_fr;
+
+	/** The current song*/
+	Mix_Music *m_m;
+
+	/** File reader object to fetch songs from disc when they start playing.
+	 * Do not create this for each load, it's a major hassle to code
+	 * \sa m_fr*/
+	SDL_RWops *m_rwops;
 };
 
 /** A collection of several soundeffects meant for the same event.
@@ -87,22 +96,22 @@ class FXset {
 	void add_fx(Mix_Chunk * fx, Uint8 prio = 127);
 	Mix_Chunk *get_fx();
 	bool empty() {
-		return fxs.empty();
+		return m_fxs.empty();
 	}
       protected:
 	/** The collection of sound effects*/
-	 vector < Mix_Chunk * >fxs;
+	 vector < Mix_Chunk * >m_fxs;
 
 	/** When the effect was played the last time (milliseconds since sdl initialization). Set via SDL_GetTicks()*/
-	Uint32 last_used;
+	Uint32 m_last_used;
 
 	/** Minimum time in milliseconds until the effect may be played again */
-	Uint32 min_interval;
+	Uint32 m_min_interval;
 
 	/** How important is it to play the effect even when others are running already?
 	 * Range from 0 (do not play at all if anything else is happening) to 255 (always play,
 	 * regardless of other considerations)*/
-	Uint8 priority;
+	Uint8 m_priority;
 };
 
 /** The 'sound server' for Widelands.
@@ -193,7 +202,6 @@ class FXset {
  * which causes the seemingly recursive call to change_music from inside start_music. It really
  * is not recursive, trust me :-)
  * 
- * \todo Bobs want to make noise too, not just workers *g*
  * \todo FX should have a priority (e.g. fights are more important than fishermen)
  * \todo Sound_Handler must not play *all* FX but only a select few
  */
@@ -230,41 +238,41 @@ class Sound_Handler {
 	void set_disable_fx(bool state);
 
 	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
-	Game *the_game; //TODO: can we please get rid of this member variable somehow?
+	Game *m_the_game; //TODO: can we please get rid of this member variable somehow?
 
 	/** Only for buffering command line option --nosound until real intialization is done
 	 * \see Sound_Handler::Sound_Handler()
 	 * \see Sound_Handler::init() */
-	bool nosound;
+	bool m_nosound;
 
       protected:
-	 Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
+	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
 	void load_one_fx(const string filename, const string fx_name);
 	int stereo_position(const Coords position);
 
 	/** Whether to disable background music*/
-	bool disable_music;
+	bool m_disable_music;
 
 	/** Whether to disable sound effects*/
-	bool disable_fx;
+	bool m_disable_fx;
 
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside their \ref FXset, of course)*/
-	bool random_order;
+	bool m_random_order;
 
 	/** A collection of songsets*/
-	 map < string, Songset * >songs;
+	 map < string, Songset * >m_songs;
 
 	/** A collection of effect sets*/
-	 map < string, FXset * >fxs;
+	 map < string, FXset * >m_fxs;
 
 	/** Which songset we are currently selecting songs from - not regarding if there actually is a song
 	 * playing \e right \e now*/
-	string current_songset;
+	string m_current_songset;
 
 	/** The random number generator.
          * \note The RNG here *must* not be the same as the one for the game logic! */
-	RNG rng;
+	RNG m_rng;
 };
 
 #endif

@@ -120,7 +120,7 @@ static bool parse_command_line(int argc, char** argv)
 			continue;
 		}
       if (!strcmp(opt, "nosound")) {
-	 g_sound_handler.nosound=true;
+	 g_sound_handler.m_nosound=true;
          continue;
       }
       if (!strcmp(opt, "nozip")) {

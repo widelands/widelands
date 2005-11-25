@@ -233,12 +233,11 @@ void TrainingSite::init(Editor_Game_Base * g)
 
 /**
  * Change the economy this site belongs to.
- * \par e	The economy this site belongs to. Can be zero, because unconnected buildings have no economy
- * \note the workers are dealt with in the PlayerImmovable code.
+ * \par e	The new economy. Can be zero, because unconnected buildings have no economy
+ * \note the worker (but not the soldiers) is dealt with in the PlayerImmovable code.
  */
 void TrainingSite::set_economy(Economy * e)
 {
-	// TODO: SoldiersQueue migration <--- This it does at call_soldier and drop_soldier
 	ProductionSite::set_economy(e);
 
 	for (uint i = 0; i < m_soldier_requests.size(); i++) {
