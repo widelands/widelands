@@ -71,14 +71,17 @@ Predicates used in path finding and find functions.
 struct FindImmovable {
 	// Return true if this immovable should be returned by find_immovables()
 	virtual bool accept(BaseImmovable *imm) const = 0;
+   virtual ~FindImmovable() {}  // make gcc shut up
 };
 struct FindBob {
 	// Return true if this immovable should be returned by find_bobs()
 	virtual bool accept(Bob *imm) const = 0;
+   virtual ~FindBob() {}  // make gcc shut up
 };
 struct FindField {
 	// Return true if this immovable should be returned by find_fields()
 	virtual bool accept(FCoords coord) const = 0;
+   virtual ~FindField() {}  // make gcc shut up
 };
 struct CheckStep {
 	enum StepId {
@@ -94,6 +97,7 @@ struct CheckStep {
 	// Return true if the destination field can be reached at all
 	// (e.g. return false for land-based bobs when dest is in water).
 	virtual bool reachabledest(Map* map, FCoords dest) const = 0;
+   virtual ~CheckStep() {}  // make gcc shut up
 };
 
 
@@ -102,9 +106,11 @@ Some very simple default predicates (more predicates below Map).
 */
 struct FindImmovableAlwaysTrue : public FindImmovable {
 	virtual bool accept(BaseImmovable* imm) const { return true; }
+   virtual ~FindImmovableAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAlwaysTrue : public FindBob {
 	virtual bool accept(Bob *imm) const { return true; }
+   virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAttribute : public FindBob {
 	FindBobAttribute(uint attrib) : m_attrib(attrib) { }
@@ -112,6 +118,7 @@ struct FindBobAttribute : public FindBob {
 	virtual bool accept(Bob *imm) const;
 
 	int m_attrib;
+   virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 
 
@@ -329,6 +336,7 @@ private:
 // FindImmovable functor
 struct FindImmovableSize : public FindImmovable {
 	FindImmovableSize(int min, int max) : m_min(min), m_max(max) { }
+   virtual ~FindImmovableSize() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
 
@@ -336,6 +344,7 @@ struct FindImmovableSize : public FindImmovable {
 };
 struct FindImmovableType : public FindImmovable {
 	FindImmovableType(int type) : m_type(type) { }
+   virtual ~FindImmovableType() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
 
@@ -343,6 +352,7 @@ struct FindImmovableType : public FindImmovable {
 };
 struct FindImmovableAttribute : public FindImmovable {
 	FindImmovableAttribute(uint attrib) : m_attrib(attrib) { }
+   virtual ~FindImmovableAttribute() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable *imm) const;
 
@@ -350,12 +360,14 @@ struct FindImmovableAttribute : public FindImmovable {
 };
 struct FindImmovablePlayerImmovable : public FindImmovable {
 	FindImmovablePlayerImmovable() { }
+   virtual ~FindImmovablePlayerImmovable() {}  // make gcc shut up
 
 	virtual bool accept(BaseImmovable* imm) const;
 };
 
 struct FindFieldCaps : public FindField {
 	FindFieldCaps(uchar mincaps) : m_mincaps(mincaps) { }
+   virtual ~FindFieldCaps() {}  // make gcc shut up
 
 	virtual bool accept(FCoords coord) const;
 
@@ -392,6 +404,7 @@ struct FindFieldSize : public FindField {
 	};
 
 	FindFieldSize(Size size) : m_size(size) { }
+   virtual ~FindFieldSize() {}  // make gcc shut up
 
 	virtual bool accept(FCoords coord) const;
 
@@ -402,6 +415,7 @@ struct FindFieldSize : public FindField {
 // a valid resource and amount on it
 struct FindFieldSizeResource : public FindFieldSize {
    FindFieldSizeResource(Size size, int res) : FindFieldSize(size) { m_res=res; }
+   virtual ~FindFieldSizeResource() {}  // make gcc shut up
 
    virtual bool accept(FCoords coord) const;
 
@@ -418,6 +432,7 @@ struct FindFieldImmovableSize : public FindField {
 	};
 
 	FindFieldImmovableSize(uint sizes) : m_sizes(sizes) { }
+   virtual ~FindFieldImmovableSize() {}  // make gcc shut up
 
 	virtual bool accept(FCoords coord) const;
 
@@ -427,6 +442,7 @@ struct FindFieldImmovableSize : public FindField {
 // Accepts a field if it has an immovable with a given attribute
 struct FindFieldImmovableAttribute : public FindField {
 	FindFieldImmovableAttribute(uint attrib) : m_attribute(attrib) { }
+   virtual ~FindFieldImmovableAttribute() {}  // make gcc shut up
 
 	virtual bool accept(FCoords coord) const;
 
@@ -437,6 +453,7 @@ struct FindFieldImmovableAttribute : public FindField {
 // Accepts a field if it has the given resource
 struct FindFieldResource : public FindField {
 	FindFieldResource(uchar res) : m_resource(res) { }
+   virtual ~FindFieldResource() {}  // make gcc shut up
 
 	virtual bool accept(FCoords coord) const;
 
@@ -456,6 +473,7 @@ moving onto the shore).
 class CheckStepDefault : public CheckStep {
 public:
 	CheckStepDefault(uchar movecaps) : m_movecaps(movecaps) { }
+   virtual ~CheckStepDefault() {}  // make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
@@ -475,6 +493,7 @@ If onlyend is true, we can only do this on the final step.
 class CheckStepWalkOn : public CheckStep {
 public:
 	CheckStepWalkOn(uchar movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) { }
+   virtual ~CheckStepWalkOn() {}  // make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;
@@ -499,6 +518,7 @@ class CheckStepRoad : public CheckStep {
 public:
 	CheckStepRoad(Player* player, uchar movecaps, const std::vector<Coords>* forbidden)
 		: m_player(player), m_movecaps(movecaps), m_forbidden(forbidden) { }
+   virtual ~CheckStepRoad() {}  // make gcc shut up
 
 	virtual bool allowed(Map* map, FCoords start, FCoords end, int dir, StepId id) const;
 	virtual bool reachabledest(Map* map, FCoords dest) const;

@@ -47,7 +47,8 @@ and doesn't change the window state at all.
 */
 class RenderTarget {
 public:
-	virtual void get_window(Rect* rc, Point* ofs) const = 0;
+   virtual ~RenderTarget() {} 
+   virtual void get_window(Rect* rc, Point* ofs) const = 0;
 	virtual void set_window(const Rect& rc, const Point& ofs) = 0;
 	virtual bool enter_window(const Rect& rc, Rect* previous, Point* prevofs) = 0;
 

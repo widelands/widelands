@@ -40,6 +40,7 @@ saved game file. it is an abstract base class
 */
 class Game_Data_Packet {
    public:
+      virtual ~Game_Data_Packet() {}
       virtual void Read(FileSystem*, Game*, Widelands_Map_Map_Object_Loader* = 0) throw(wexception) = 0;
       virtual void Write(FileSystem*, Game*, Widelands_Map_Map_Object_Saver* = 0) throw(wexception) = 0;
 };

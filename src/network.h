@@ -99,7 +99,7 @@ class NetGame {
 	Game*		game;
 	
 	int		playernum;
-	uint		net_game_time;
+	ulong    net_game_time;
 	
 	uint		common_rand_seed;
 	

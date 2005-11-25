@@ -27,6 +27,7 @@ class Event;
  */
 class EventReferencer {
    public:
+      virtual ~EventReferencer() {}
       virtual const char* get_type( void ) = 0;
       virtual const char* get_name( void ) = 0;
 

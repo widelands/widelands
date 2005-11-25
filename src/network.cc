@@ -417,7 +417,7 @@ void NetHost::handle_network ()
 				    continue;
 				}
 				
-				clients[i].lag=(SDL_GetTicks() - last_ping_sent) >? 1;
+				clients[i].lag=std::max( (SDL_GetTicks() - last_ping_sent), (ulong)1);
 				pongs_received++;
 				
 				if (pongs_received==clients.size())
@@ -474,7 +474,7 @@ void NetHost::handle_network ()
 		}
 
 		// update network time
-		net_game_time=(game->get_gametime()+net_delay) >? net_game_time;
+		net_game_time=std::max((game->get_gametime()+net_delay), net_game_time);
 	
 		serializer->putchar (NETCMD_ADVANCETIME);
 		serializer->putlong (net_game_time);
@@ -928,7 +928,7 @@ int Deserializer::read_packet (TCPsocket sock)
 	
 	// read packet data in chunks of 256 bytes
 	while (length>0) {
-		amount=length <? 256;
+		amount=std::min( length, 256 );
 		
 		SDLNet_TCP_Recv (sock, buffer, amount);
 		
