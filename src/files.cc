@@ -803,6 +803,8 @@ FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
       FileSystem* s =  new ZipFilesystem( fullname );
       return s;
    }
+   // Never here
+   return 0;
 }
 
 /*
@@ -827,6 +829,8 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
       FileSystem* s =  new ZipFilesystem( fullname );
       return s;
    }
+   // Never here
+   return 0;
 }
     
 /*
