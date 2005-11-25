@@ -39,6 +39,7 @@ UIButton::UIButton(UIPanel *parent, int x, int y, uint w, uint h, uint backgroun
 	case 1: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but1.png" ); break;
 	case 2: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but2.png" ); break;
 	case 3: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but3.png" ); break;
+	case 4: m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/but4.png" ); break;
 	}
 
 	m_id = id;

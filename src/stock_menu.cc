@@ -51,11 +51,11 @@ Stock_Menu::Stock_Menu(Interactive_Player *parent, UIUniqueWindowRegistry *regis
    m_curpage = 0;
 
 
-   UIButton* b = new UIButton(this, posx, posy, button_w, 25, 0, 100);
+   UIButton* b = new UIButton(this, posx, posy, button_w, 25, 4, 100);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
    b->clickedid.set(this, &Stock_Menu::clicked);
    posx += button_w + spacing;
-   b = new UIButton(this, posx, posy, button_w*2+spacing, 25, 0, 1);
+   b = new UIButton(this, posx, posy, button_w*2+spacing, 25, 4, 1);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/warehousewindow_switchpage.png" ));
    b->clickedid.set(this, &Stock_Menu::clicked);
    posx += button_w*2 + 2*spacing;

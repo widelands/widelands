@@ -165,11 +165,11 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, P
 	text += "?";
 	new UITextarea(this, 0, 0, 160, 44, text, Align_Center, true);
 
-	btn = new UIButton(this, 6, 50, 60, 34, 2);
+	btn = new UIButton(this, 6, 50, 60, 34, 4);
 	btn->clicked.set(this, &BulldozeConfirm::bulldoze);
 	btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_ok ));
 
-	btn = new UIButton(this, 94, 50, 60, 34, 2);
+	btn = new UIButton(this, 94, 50, 60, 34, 4);
 	btn->clicked.set(this, &BulldozeConfirm::die);
 	btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_cancel ));
 
@@ -608,7 +608,7 @@ void Building_Window::setup_capsbuttons()
 			icon = m_building->get_continue_icon();
 		else
 			icon = m_building->get_stop_icon();
-		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
+		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_start_stop);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  icon.c_str() ));
 		x += 34;
@@ -627,7 +627,7 @@ void Building_Window::setup_capsbuttons()
             continue;
          }
 
-         UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2, id); // Button id == building id
+         UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4, id); // Button id == building id
          btn->clickedid.set(this, &Building_Window::act_enhance);
          btn->set_pic(m_player->get_player()->get_tribe()->get_building_descr(id)->get_buildicon());
          x += 34;
@@ -635,14 +635,14 @@ void Building_Window::setup_capsbuttons()
    }
 
 	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
-		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
+		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_bulldoze);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_bulldoze ));
 		x += 34;
 	}
 
 	if (m_player->get_display_flag(Interactive_Base::dfDebug)) {
-		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 2);
+		UIButton* btn = new UIButton(m_capsbuttons, x, 0, 34, 34, 4);
 		btn->clicked.set(this, &Building_Window::act_debug);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_debug ));
 		x += 34;
@@ -891,15 +891,15 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
    m_curpage = 0;
 
 
-   UIButton* b = new UIButton(this, posx, posy, button_w, 25, 0, 100);
+   UIButton* b = new UIButton(this, posx, posy, button_w, 25, 4, 100);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
    b->clickedid.set(this, &Warehouse_Window::clicked);
    posx += button_w + spacing;
-   b = new UIButton(this, posx, posy, button_w*2+spacing, 25, 0, 1);
+   b = new UIButton(this, posx, posy, button_w*2+spacing, 25, 4, 1);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/warehousewindow_switchpage.png" ));
    b->clickedid.set(this, &Warehouse_Window::clicked);
    posx += button_w*2 + 2*spacing;
-   b = new UIButton(this, posx, posy, button_w, 25, 0, 101);
+   b = new UIButton(this, posx, posy, button_w, 25, 4, 101);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_goto.png" ));
    b->clickedid.set(this, &Warehouse_Window::clicked);
    posx += button_w + spacing;
@@ -1207,7 +1207,7 @@ ProductionSite_Window::create_production_box (UIPanel* parent, ProductionSite* p
    box->add(create_capsbuttons(box), UIBox::AlignCenter);
 
       // Add list worker button
-   m_list_worker=new UIButton(box, 0,0,32,32,2,100);
+   m_list_worker=new UIButton(box, 0,0,32,32,4,100);
    m_list_worker->set_pic(g_gr->get_picture( PicMod_Game,  pic_list_worker )); 
    m_list_worker->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
    box->add(m_list_worker, UIBox::AlignLeft);
@@ -1320,7 +1320,7 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
    box->add(m_table, UIBox::AlignCenter);
    
 	// Add drop soldier button
-	UIButton* b = new UIButton (box, 0, 0, 360, 32, 2, 100);
+	UIButton* b = new UIButton (box, 0, 0, 360, 32, 4, 100);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_drop_soldier ));
 	b->clicked.set(this, &MilitarySite_Window::drop_button_clicked);
 	box->add_space(8);
@@ -1334,11 +1334,11 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 
 		new UITextarea (pan, 70, 11, _("Capacity"), Align_Left);
 	// Capacity buttons
-	b = new UIButton (pan, 140, 4, 24, 24, 0, 2);
+	b = new UIButton (pan, 140, 4, 24, 24, 4, 2);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 	b->clicked.set(this, &MilitarySite_Window::soldier_capacity_down);
 	b = 0;
-	b = new UIButton (pan, 188, 4, 24, 24, 1, 3);
+	b = new UIButton (pan, 188, 4, 24, 24, 4, 3);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 	b->clicked.set(this, &MilitarySite_Window::soldier_capacity_up);
 	b = 0;
@@ -1528,7 +1528,7 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	UIButton *btn;
 
 	// Add switch training mode button
-	btn = new UIButton (this, _cb, _bs, 105, _bs, 5, 1);
+	btn = new UIButton (this, _cb, _bs, 105, _bs, 4, 1);
 	btn->clicked.set(this, &TrainingSite_Options_Window::heros_clicked);
 	btn = 0;
 
@@ -1549,11 +1549,11 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	// Add priority buttons for every attribute
 	if (ps->get__descr()->get_train_hp()) {
 		// HP buttons
-		btn = new UIButton (this,  _cb, 2*(_bs+2), _bs, _bs, 0, 2);
+		btn = new UIButton (this,  _cb, 2*(_bs+2), _bs, _bs, 4, 2);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::down_hp_clicked);
 		btn = 0;
-		btn = new UIButton (this, _cb+2*_bs, 2*(_bs+2), _bs, _bs, 1, 3);
+		btn = new UIButton (this, _cb+2*_bs, 2*(_bs+2), _bs, _bs, 4, 3);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_hp_clicked);
 		btn = 0;
@@ -1562,11 +1562,11 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	}
 	if (ps->get__descr()->get_train_attack()) {
 		// Attack buttons
-		btn = new UIButton (this, _cb, 3*(_bs+2), _bs, _bs, 0, 2);
+		btn = new UIButton (this, _cb, 3*(_bs+2), _bs, _bs, 4, 2);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::down_attack_clicked);
 		btn = 0;
-		btn = new UIButton (this, _cb+2*_bs, 3*(_bs+2), _bs, _bs, 1, 3);
+		btn = new UIButton (this, _cb+2*_bs, 3*(_bs+2), _bs, _bs, 4, 3);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_attack_clicked);
 		btn = 0;
@@ -1575,11 +1575,11 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	}
 	if (ps->get__descr()->get_train_defense()) {
 		// Defense buttons
-		btn = new UIButton (this, _cb, 4*(_bs+2), _bs, _bs, 0, 2);
+		btn = new UIButton (this, _cb, 4*(_bs+2), _bs, _bs, 4, 2);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 		btn->clicked.set(this,&TrainingSite_Options_Window::down_defense_clicked);
 		btn = 0;
-		btn = new UIButton (this, _cb+2*_bs, 4*(_bs+2), _bs, _bs, 1, 3);
+		btn = new UIButton (this, _cb+2*_bs, 4*(_bs+2), _bs, _bs, 4, 3);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this,&TrainingSite_Options_Window::up_defense_clicked);
 		btn = 0;
@@ -1588,11 +1588,11 @@ TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* par
 	}
 	if (ps->get__descr()->get_train_evade()) {
 		// Evade buttons
-		btn = new UIButton (this, _cb, 5*(_bs+2), _bs, _bs, 0, 2);
+		btn = new UIButton (this, _cb, 5*(_bs+2), _bs, _bs, 4, 2);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_down_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::down_evade_clicked);
 		btn = 0;
-		btn = new UIButton (this, _cb+2*_bs, 5*(_bs+2), _bs, _bs, 1, 3);
+		btn = new UIButton (this, _cb+2*_bs, 5*(_bs+2), _bs, _bs, 4, 3);
 		btn->set_pic(g_gr->get_picture( PicMod_Game,  pic_up_train ));
 		btn->clicked.set(this, &TrainingSite_Options_Window::up_evade_clicked);
 		btn = 0;
@@ -1756,21 +1756,21 @@ UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
    sold_box->add (m_table, Align_Left);
 
       // Add drop soldier button
-   UIButton* b = new UIButton (sold_box, 0, 0, 360, 32, 2, 100);
+   UIButton* b = new UIButton (sold_box, 0, 0, 360, 32, 4, 100);
    b->set_pic (g_gr->get_picture( PicMod_Game,  pic_drop_soldier ));
    b->clicked.set (this, &TrainingSite_Window::drop_button_clicked);
    sold_box->add (b, Align_Left);
 
       // Add TrainingSite Options and Capacity  buttons
    UIBox* box = new UIBox (sold_box, 0, 0, UIBox::Horizontal);
-   b = new UIButton(box, 32, 0, 32,32, 2,100);
+   b = new UIButton(box, 32, 0, 32,32, 4,100);
    b->set_pic(g_gr->get_picture( PicMod_Game,  pic_train_options ));
    b->clicked.set(this, &TrainingSite_Window::options_button_clicked);
    box->add (b, Align_Top);
    
    box->add (new UITextarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
       // Capacity buttons
-   b = new UIButton (box, 70, 4, 24, 24, 0, 2);
+   b = new UIButton (box, 70, 4, 24, 24, 4, 2);
    b->set_pic (g_gr->get_picture( PicMod_Game,  pic_down_train ));
    b->clicked.set (this, &TrainingSite_Window::soldier_capacity_down);
    box->add (b, Align_Top);
@@ -1779,7 +1779,7 @@ UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
    m_capacity = new UITextarea (box, 0, 11, _("xx"), Align_Center);
    box->add (m_capacity, Align_Top);
    
-   b = new UIButton (box, 118, 4, 24, 24, 1, 3);
+   b = new UIButton (box, 118, 4, 24, 24, 4, 3);
    b->set_pic (g_gr->get_picture( PicMod_Game,  pic_up_train ));
    b->clicked.set (this, &TrainingSite_Window::soldier_capacity_up);
    box->add (b, Align_Top);

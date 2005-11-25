@@ -57,17 +57,17 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
    int posy = 35;
 
    
-   UIButton* b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 0, 1);
+   UIButton* b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 1);
    b->set_title(_("README"));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
    
-   b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 0, 2);
+   b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 2);
    b->set_title(_("License"));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
 
-   b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 0, 3);
+   b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 3);
    b->set_title(_("Authors"));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
@@ -85,16 +85,16 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
    posy += 25;
 
    int buttonw = (get_inner_w()-3*5) / 2;
-   b=new UIButton(this, 5, posy, buttonw, 35, 0, 4);
+   b=new UIButton(this, 5, posy, buttonw, 35, 4, 4);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_save_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    
-   b=new UIButton(this, 10+buttonw, posy, buttonw, 35, 0, 5);
+   b=new UIButton(this, 10+buttonw, posy, buttonw, 35, 4, 5);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_load_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 45;
    
-   b=new UIButton(this, 5, posy, get_inner_w()-10, 35, 0, 6);
+   b=new UIButton(this, 5, posy, get_inner_w()-10, 35, 4, 6);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_exit_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 40;

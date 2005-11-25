@@ -76,12 +76,12 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
    // Buttons
    posx=5;
    posy=get_inner_h()-30;
-   UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
+   UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 4, 1);
    but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
    but->set_title(_("OK"));
    but->set_enabled(false); 
    m_ok_btn=but;
-   but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
+   but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 4, 0);
    but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
    but->set_title(_("Cancel"));
 
