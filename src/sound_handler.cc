@@ -204,7 +204,14 @@ void Sound_Handler::init()
 	m_rng.seed(SDL_GetTicks());
 	//this RNG will still be somewhat predictable, but it's just to avoid identical playback patterns
 
-	if ((SDL_InitSubSystem(SDL_INIT_AUDIO)==-1) || (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 512) == -1)) {
+   // Windows Music has crickling inside if the buffer has another size than 4k,
+   // but other systems work fine with less, some crash with big buffers.
+#ifdef __WIN32__
+   const ushort bufsize = 4096;
+#else
+   const ushort busize = 1024;
+#endif
+	if ((SDL_InitSubSystem(SDL_INIT_AUDIO)==-1) || (Mix_OpenAudio(MIX_DEFAULT_FREQUENZY, MIX_DEFAULT_FORMAT, 2, bufsize) == -1)) {
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
 		m_disable_music = true;
