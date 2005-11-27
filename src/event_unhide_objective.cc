@@ -72,7 +72,7 @@ void Event_Unhide_Objective::Write(Section* s, Editor_Game_Base *egbase) {
 
    // Point
    s->set_string("objective", m_objective->get_name());
-   s->set_bool("setto", get_dounhide());
+   s->set_bool("dounhide", get_dounhide());
    // done
 }
 
