@@ -46,7 +46,7 @@ plrclr2_b=149
 plrclr3_r=255
 plrclr3_g=0
 plrclr3_b=255
-fps=8
+fps=12
 
 # Walking with a ware
 [walkload]
@@ -64,4 +64,4 @@ plrclr2_b=149
 plrclr3_r=255
 plrclr3_g=0
 plrclr3_b=255
-fps=8
+fps=12
