@@ -767,8 +767,15 @@ Also returns false if the pathname is invalid
 */
 bool RealFSImpl::IsDirectory(std::string path)
 {
+   // This is kludge to work around problems with windows.
+   // It seems windows fails to open "directory/..", therefore
+   // our directory check fails there always. Windows suckz! 
+   std::string filename = FS_Filename( path.c_str());
+   if( filename == "." || filename == ".." )
+	   return true;
+   
    if(!FileExists(path)) return false;
-
+   
    char canonical[256];
 	std::string fullname;
 	struct stat st;

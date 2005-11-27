@@ -87,7 +87,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
    SDL_Rect** modes = SDL_ListModes( fmt, SDL_SWSURFACE | SDL_FULLSCREEN );
    if( modes ) 
       for( uint i = 0; modes[i]; i++ ) {
-         res this_res = {
+         if(modes[i]->w < 640) continue;
+	 res this_res = {
             modes[i]->w,
             modes[i]->h,
             16
@@ -101,6 +102,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
    modes = SDL_ListModes( fmt, SDL_SWSURFACE | SDL_FULLSCREEN );
    if( modes )
       for( uint i = 0; modes[i]; i++ ) {
+         if(modes[i]->w < 640) continue;
          res this_res = {
             modes[i]->w,
             modes[i]->h,
