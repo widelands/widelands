@@ -13,6 +13,7 @@ import os
 import sys
 import confgettext 
 from glob import glob
+import string
 
 TRIBES = [ "barbarians" ]
 WORLDS = [ "greenland" ]  
@@ -23,8 +24,13 @@ def main( ):
 ###############################
 # here we go: Widelands binarys
 ###############################
-    os.system("xgettext -k_ -o widelands.pot ../src/*.cc ../src/*/*.cc ../src/*/*/*.cc" 
-            " ../src/*.h ../src/*/*.h ../src/*/*/*.h")
+    files = glob("../src/*.cc")
+    files += glob("../src/*/*.cc")
+    files += glob("../src/*/*/*.cc")
+    files += glob("../src/*.h")
+    files += glob("../src/*/*.h")
+    files += glob("../src/*/*/*.h")
+    os.system("xgettext -k_ -o widelands.pot %s" % string.join( files )) 
 
     for lang in LANGUAGES:
         # merge new strings with existing translations
