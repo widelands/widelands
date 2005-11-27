@@ -19,6 +19,19 @@ TRIBES = [ "barbarians" ]
 WORLDS = [ "greenland" ]  
 
 
+def do_rename( src, dst ):
+    try:
+        os.remove( dst )
+    except: 
+        "" # do nothing
+    os.rename( src, dst )
+
+def do_makedirs( dirs ):
+    try: 
+        os.makedirs( dirs )
+    except:
+        "" # nothing
+        
 def main( ):
     LANGUAGES = extract_languages()
 ###############################
@@ -35,10 +48,10 @@ def main( ):
     for lang in LANGUAGES:
         # merge new strings with existing translations
         if not os.system( "msgmerge widelands_%s.po widelands.pot > tmp" % lang ):
-            os.system("mv tmp widelands_%s.po" % lang )
+            do_rename("tmp", "widelands_%s.po" % lang )
         
         # compile message catalogs
-        os.system( "mkdir -p %s/LC_MESSAGES" % lang )
+        do_makedirs( "%s/LC_MESSAGES" % lang )
         os.system( "msgfmt -o %s/LC_MESSAGES/widelands.mo widelands_%s.po" % ( lang, lang ))
 
 ##############################
@@ -56,10 +69,10 @@ def main( ):
         for lang in LANGUAGES:
             # merge new strings with existing translations
             if not os.system( "msgmerge tribe_%s_%s.po tribe_%s.pot > tmp" % ( tribe, lang, tribe )):
-                os.system("mv tmp tribe_%s_%s.po" % (tribe, lang ) )
+                do_rename("tmp", "tribe_%s_%s.po" % (tribe, lang ) )
             
             # compile message catalogs
-            os.system( "mkdir -p %s/LC_MESSAGES" % lang )
+            do_makedirs( "%s/LC_MESSAGES" % lang )
             os.system( "msgfmt -o %s/LC_MESSAGES/tribe_%s.mo tribe_%s_%s.po" % ( lang, tribe, tribe, lang ))
 
 ##############################
@@ -77,10 +90,10 @@ def main( ):
         for lang in LANGUAGES:
             # merge new strings with existing translations
             if not os.system( "msgmerge world_%s_%s.po world_%s.pot > tmp" % ( world, lang, world )):
-                os.system("mv tmp world_%s_%s.po" % ( world, lang ) )
+                do_rename("tmp", "world_%s_%s.po" % ( world, lang ) )
 
             # compile message catalogs
-            os.system( "mkdir -p %s/LC_MESSAGES" % lang )
+            do_makedirs( "%s/LC_MESSAGES" % lang )
             os.system( "msgfmt -o %s/LC_MESSAGES/world_%s.mo world_%s_%s.po" % ( lang, world, world, lang ))
 
 ##############################
@@ -100,10 +113,10 @@ def main( ):
     for lang in LANGUAGES:
         # merge new strings with existing translations
         if not os.system( "msgmerge texts_%s.po texts.pot > tmp" % lang ):
-                os.system("mv tmp texts_%s.po" % ( lang ) )
+                do_rename("tmp", "texts_%s.po" % ( lang ) )
 
         # compile message catalogs
-        os.system( "mkdir -p %s/LC_MESSAGES" % lang )
+        do_makedirs( "%s/LC_MESSAGES" % lang )
         os.system( "msgfmt -o %s/LC_MESSAGES/texts.mo texts_%s.po" % ( lang, lang ))
  
 # 
@@ -126,6 +139,7 @@ def extract_languages(  ):
         ( long, abr ) = line.split(',');
         long = long.strip()
         abr = abr.strip();
+        abr = abr.strip('"')
         retval.append( abr )
     return retval
 
