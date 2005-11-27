@@ -102,8 +102,7 @@ Mix_Music *Songset::get_song()
 
 #ifdef __WIN32__
 #warning Mix_LoadMUS_RW is not available under windows!!!
-	m_m = NULL;
-   m_m = Mix_LoadMUS( filename.c_str()); // Hack for windows
+        m_m = Mix_LoadMUS( filename.c_str()); // Hack for windows
 #else
 #ifdef OLD_SDL_MIXER 
 #warning Please update your SDL_mixer library to at least version 1.2.6!!!
@@ -389,10 +388,10 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 	FileRead fr;
 	Mix_Chunk *m;
 
-	if(!fr.TryOpen(g_fs, filename))
+	if(!fr.TryOpen(g_fs, filename)) {
 		log("WARNING: Could not open %s for reading!", filename.c_str());
 		return;
-
+	}
 	m = RWopsify_MixLoadWAV(&fr);
 
 	if (m) {
@@ -554,7 +553,7 @@ void Sound_Handler::start_music(const string songset_name, int fadein_ms)
 		return;
 	if (fadein_ms == 0)
 		fadein_ms = 50;	//avoid clicks
-
+	
 	if (Mix_PlayingMusic())
 		change_music(songset_name, 0, fadein_ms);
 
@@ -568,6 +567,8 @@ void Sound_Handler::start_music(const string songset_name, int fadein_ms)
 		} else
 			log("Sound_Handler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
 	}
+
+	Mix_VolumeMusic(MIX_MAX_VOLUME/2);
 }
 
 /** Stop playing a songset.
