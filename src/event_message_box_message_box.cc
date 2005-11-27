@@ -69,10 +69,12 @@ UIWindow(egbase->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
 
    m_is_modal = event->get_is_modal();
 
-   if( gposx == -1 && gposy == -1 )
-      center_to_parent();
-   else 
-      set_pos( gposx, gposy );
+   center_to_parent();
+   
+   if( gposx != -1 )
+      set_pos( gposy, get_y());
+   if( gposy != -1 )
+      set_pos( get_x(), gposy); 
 }
 
 
