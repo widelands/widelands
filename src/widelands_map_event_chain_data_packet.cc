@@ -48,14 +48,13 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
    if( skip )
       return;
   
+   // Skip, if no triggers saved
+   FileRead fr;
+   if( !fr.TryOpen( fs, "event_chain" )) 
+      return;
+   
    Profile prof;
-
-   try {
-      prof.read( "event_chain", 0, fs );
-   } catch( ... ) {
-      // Skip, no events saved
-      return; 
-   }
+   prof.read( "event_chain", 0, fs );
    Section* s = prof.get_section( "global" );
 
    /*

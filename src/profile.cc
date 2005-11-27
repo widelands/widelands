@@ -815,6 +815,8 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
                tail = line;
             } else {
                tail = strchr(p, '=');
+               if(!tail) 
+                  throw wexception("line %i: invalid syntax: %s", linenr, line );
                *tail++ = 0;
                key = p;
 					if(*tail == '_' ) { 

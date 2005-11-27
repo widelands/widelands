@@ -46,14 +46,14 @@ void Widelands_Map_Event_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egb
    if( skip )
       return;
   
-   Profile prof;
+   
+   // Skip, if no events saved
+   FileRead fr;
+   if( !fr.TryOpen( fs, "event" )) 
+      return;
 
-   try {
-      prof.read( "event", 0, fs );
-   } catch( ... ) {
-      // Skip, no events saved
-      return; 
-   }
+   Profile prof;
+   prof.read( "event", 0, fs );
    Section* s = prof.get_section( "global" );
 
    // check packet version

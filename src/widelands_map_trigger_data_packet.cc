@@ -45,14 +45,13 @@ void Widelands_Map_Trigger_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
    if( skip )
       return;
   
+   // Skip, if no triggers saved
+   FileRead fr;
+   if( !fr.TryOpen( fs, "trigger" )) 
+      return;
+   
    Profile prof;
-
-   try {
-      prof.read( "trigger", 0, fs );
-   } catch( ... ) {
-      // Skip, no triggers saved
-      return; 
-   }
+   prof.read( "trigger", 0, fs );
 
    Section* s = prof.get_section( "global" );
 
