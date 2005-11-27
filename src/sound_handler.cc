@@ -209,7 +209,7 @@ void Sound_Handler::init()
 #ifdef __WIN32__
    const ushort bufsize = 4096;
 #else
-   const ushort busize = 1024;
+   const ushort bufsize = 1024;
 #endif
 	if ((SDL_InitSubSystem(SDL_INIT_AUDIO)==-1) || (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) == -1)) {
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
