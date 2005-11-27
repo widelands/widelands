@@ -32,44 +32,47 @@
 /*
  * The message box himself
  */
-Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* egbase, Event_Message_Box* event) :
-  UIWindow(egbase->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
+Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* egbase, Event_Message_Box* event,
+      int gposx, int gposy, int w, int h) :
+UIWindow(egbase->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
 
-     UIMultiline_Textarea* m_text=0;
-     int spacing=5;
-     int offsy=5;
-     int offsx=spacing;
-     int posx=offsx;
-     int posy=offsy;
+   UIMultiline_Textarea* m_text=0;
+   int spacing=5;
+   int offsy=5;
+   int offsx=spacing;
+   int posx=offsx;
+   int posy=offsy;
 
-     // No picture, so we can optimaly assign all things its place
-     set_inner_size(400,300);
-     m_text=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
+   set_inner_size(w,h);
+   m_text=new UIMultiline_Textarea(this, posx, posy, get_inner_w()-posx-spacing, get_inner_h()-posy-2*spacing-50, "", Align_Left);
 
-     if(m_text)
-        m_text->set_text( event->get_text());
+   if(m_text)
+      m_text->set_text( event->get_text());
 
-     // Buttons
-     int but_width=80;
-     int space=get_inner_w()-2*spacing;
-     space-=but_width*event->get_nr_buttons();
-     space/=event->get_nr_buttons()+1;
-     UIButton* b;
-     posx=spacing;
-     posy=get_inner_h()-30;
-     m_trigger.resize(event->get_nr_buttons());
-     for(int i=0; i<event->get_nr_buttons(); i++) {
-        posx+=space;
-        b=new UIButton(this, posx, posy, but_width, 20, 0, i);
-        posx+=but_width;
-        b->clickedid.set(this, &Message_Box_Event_Message_Box::clicked);
-        b->set_title( event->get_button_name(i) );
-        m_trigger[i]=event->get_button_trigger(i);
-     }
+   // Buttons
+   int but_width=80;
+   int space=get_inner_w()-2*spacing;
+   space-=but_width*event->get_nr_buttons();
+   space/=event->get_nr_buttons()+1;
+   UIButton* b;
+   posx=spacing;
+   posy=get_inner_h()-30;
+   m_trigger.resize(event->get_nr_buttons());
+   for(int i=0; i<event->get_nr_buttons(); i++) {
+      posx+=space;
+      b=new UIButton(this, posx, posy, but_width, 20, 0, i);
+      posx+=but_width;
+      b->clickedid.set(this, &Message_Box_Event_Message_Box::clicked);
+      b->set_title( event->get_button_name(i) );
+      m_trigger[i]=event->get_button_trigger(i);
+   }
 
-     m_is_modal = event->get_is_modal();
+   m_is_modal = event->get_is_modal();
 
-     center_to_parent();
+   if( gposx == -1 && gposy == -1 )
+      center_to_parent();
+   else 
+      set_pos( gposx, gposy );
 }
 
 

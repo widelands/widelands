@@ -27,13 +27,9 @@ class Trigger_Null;
 #include <vector>
 #include "ui_window.h"
 
-//
-// This is kept in this file, since only this file will
-// ever need to create one of those
-//
 class Message_Box_Event_Message_Box : public UIWindow {
    public:
-      Message_Box_Event_Message_Box(Editor_Game_Base*, Event_Message_Box*);
+      Message_Box_Event_Message_Box(Editor_Game_Base*, Event_Message_Box*, int, int, int, int);
       bool handle_mouseclick(uint btn, bool down, int mx, int my);
 
    private:

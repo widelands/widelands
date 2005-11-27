@@ -39,7 +39,9 @@ Event_Message_Box::Event_Message_Box(void) {
    set_text(_("No text defined"));
    set_window_title(_("Window Title"));
    set_is_modal(false);
-
+   set_dimensions( 400, 300 );
+   set_pos( -1, -1 );
+   
    set_nr_buttons(1);
    m_buttons[0].name=_("Continue");
    m_buttons[0].trigger=0;
@@ -111,6 +113,11 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
       set_window_title( s->get_safe_string( "window_title" ) );
       set_is_modal( s->get_safe_bool( "is_modal" ));
 
+      m_posx = s->get_int( "posx", -1 );
+      m_posy = s->get_int( "posy", -1 );
+      m_width = s->get_int( "width", 400 );
+      m_height = s->get_int( "height", 300 );
+      
       uint nr_buttons = s->get_safe_int( "number_of_buttons" );
       set_nr_buttons( nr_buttons );
       char buf[256];
@@ -149,7 +156,13 @@ void Event_Message_Box::Write(Section* fs, Editor_Game_Base *egbase) {
 
    // Number of buttons
    fs->set_int( "number_of_buttons", get_nr_buttons());
-   
+  
+   // Dimension, positions
+   fs->set_int("width", get_w() );
+   fs->set_int("height", get_h() );
+   fs->set_int("posx", get_posx());
+   fs->set_int("posy", get_posy());
+
    int i=0;
    char buf[256];
    for(i=0; i<get_nr_buttons(); i++) {
@@ -171,7 +184,7 @@ void Event_Message_Box::Write(Section* fs, Editor_Game_Base *egbase) {
  */
 Event::State Event_Message_Box::run(Game* game) {
 
-   Message_Box_Event_Message_Box* mb=new Message_Box_Event_Message_Box(game, this);
+   Message_Box_Event_Message_Box* mb=new Message_Box_Event_Message_Box(game, this, get_posx(), get_posy(), get_w(), get_h());
    if(get_is_modal()) {
       mb->run();
       delete mb;

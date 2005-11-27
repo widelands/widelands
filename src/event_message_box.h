@@ -57,6 +57,12 @@ class Event_Message_Box : public Event, public TriggerReferencer {
       inline const char* get_window_title(void) { return m_window_title.c_str(); }
       inline void set_is_modal(bool t) {  m_is_modal=t; }
       inline bool get_is_modal(void) { return m_is_modal; }
+      inline void set_pos( int posx, int posy ) { m_posx=posx; m_posy=posy; }
+      inline int get_posx( void ) { return m_posx; }
+      inline int get_posy( void ) { return m_posy; }
+      inline void set_dimensions( int w, int h ) { m_width = w; m_height = h; }
+      inline int get_w( void ) { return m_width; }
+      inline int get_h( void ) { return m_height; }
       void set_button_trigger(int i, Trigger_Null* t);
       Trigger_Null* get_button_trigger(int i);
       void set_button_name(int i, std::string);
@@ -85,6 +91,8 @@ class Event_Message_Box : public Event, public TriggerReferencer {
 
       std::vector<Button_Descr> m_buttons;
       UIPanel*      m_window;
+      int  m_posx, m_posy;
+      int  m_width, m_height;
 };
 
 
