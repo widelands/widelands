@@ -500,7 +500,7 @@ width=400
 height=300
 posx=-1
 posy=-1
-button_00_name=Order3
+button_00_name=_ Order3
 button_00_has_trigger=true
 button_00_trigger=Order3
 
@@ -539,7 +539,7 @@ width=400
 height=300
 posx=-1
 posy=-1
-button_00_name=Order5
+button_00_name=_ Order5
 button_00_has_trigger=true
 button_00_trigger=Order5
 
@@ -578,7 +578,7 @@ width=400
 height=300
 posx=-1
 posy=-1
-button_00_name=Order7
+button_00_name=_ Order7
 button_00_has_trigger=true
 button_00_trigger=Order7
 

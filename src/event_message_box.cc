@@ -134,7 +134,6 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
             set_button_trigger( i, static_cast<Trigger_Null*>(t));
          } else
             set_button_trigger( i, 0);
-         set_button_name( i, s->get_safe_string( buf ) );
       }
       return;
    }
