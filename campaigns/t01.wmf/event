@@ -1,0 +1,725 @@
+# Automatically created by Widelands build-9
+
+[global]
+packet_version=1
+
+[Briefing Msg 1]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>"
+_"Thron speaks..."
+"</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"It's been months and we are still hiding where the forests are old and dark. My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees."
+"</p>""
+window_title=The Story begins...
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Briefing Msg 2]
+type=message_box
+state=init
+version=1
+text=""<p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"We can see the raging flames that swallow Al'thunran, miles away, from here. The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares."
+"</p>""
+window_title=The Story begins...
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Briefing Msg 3]
+type=message_box
+state=init
+version=1
+text=""<p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br>Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well"
+"</p>""
+window_title=The Story begins...
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Briefing Msg 4]
+type=message_box
+state=init
+version=1
+text=""<p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait."
+"</p>""
+window_title=The Story begins...
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Disable Building 01]
+type=allow_building
+state=init
+version=1
+player=1
+building=axefactory
+allow=false
+
+[Disable Building 02]
+type=allow_building
+state=init
+version=1
+player=1
+building=bakery
+allow=false
+
+[Disable Building 03]
+type=allow_building
+state=init
+version=1
+player=1
+building=barrier
+allow=false
+
+[Disable Building 04]
+type=allow_building
+state=init
+version=1
+player=1
+building=battlearena
+allow=false
+
+[Disable Building 05]
+type=allow_building
+state=init
+version=1
+player=1
+building=big_inn
+allow=false
+
+[Disable Building 06]
+type=allow_building
+state=init
+version=1
+player=1
+building=brewery
+allow=false
+
+[Disable Building 07]
+type=allow_building
+state=init
+version=1
+player=1
+building=burner
+allow=false
+
+[Disable Building 08]
+type=allow_building
+state=init
+version=1
+player=1
+building=citadel
+allow=false
+
+[Disable Building 09]
+type=allow_building
+state=init
+version=1
+player=1
+building=coalmine
+allow=false
+
+[Disable Building 10]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_coalmine
+allow=false
+
+[Disable Building 11]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_goldmine
+allow=false
+
+[Disable Building 12]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_oremine
+allow=false
+
+[Disable Building 13]
+type=allow_building
+state=init
+version=1
+player=1
+building=deeper_coalmine
+allow=false
+
+[Disable Building 14]
+type=allow_building
+state=init
+version=1
+player=1
+building=deeper_goldmine
+allow=false
+
+[Disable Building 15]
+type=allow_building
+state=init
+version=1
+player=1
+building=deeper_oremine
+allow=false
+
+[Disable Building 16]
+type=allow_building
+state=init
+version=1
+player=1
+building=donjon
+allow=false
+
+[Disable Building 17]
+type=allow_building
+state=init
+version=1
+player=1
+building=farm
+allow=false
+
+[Disable Building 18]
+type=allow_building
+state=init
+version=1
+player=1
+building=fernery
+allow=false
+
+[Disable Building 19]
+type=allow_building
+state=init
+version=1
+player=1
+building=fisher
+allow=false
+
+[Disable Building 20]
+type=allow_building
+state=init
+version=1
+player=1
+building=fortress
+allow=false
+
+[Disable Building 21]
+type=allow_building
+state=init
+version=1
+player=1
+building=gamekeeper
+allow=false
+
+[Disable Building 22]
+type=allow_building
+state=init
+version=1
+player=1
+building=goldmine
+allow=false
+
+[Disable Building 23]
+type=allow_building
+state=init
+version=1
+player=1
+building=granitmine
+allow=false
+
+[Disable Building 24]
+type=allow_building
+state=init
+version=1
+player=1
+building=hardener
+allow=false
+
+[Disable Building 25]
+type=allow_building
+state=init
+version=1
+player=1
+building=helmsmith
+allow=false
+
+[Disable Building 26]
+type=allow_building
+state=init
+version=1
+player=1
+building=hunter
+allow=false
+
+[Disable Building 27]
+type=allow_building
+state=init
+version=1
+player=1
+building=inn
+allow=false
+
+[Disable Building 28]
+type=allow_building
+state=init
+version=1
+player=1
+building=metallworks
+allow=false
+
+[Disable Building 29]
+type=allow_building
+state=init
+version=1
+player=1
+building=micro-brewery
+allow=false
+
+[Disable Building 30]
+type=allow_building
+state=init
+version=1
+player=1
+building=oremine
+allow=false
+
+[Disable Building 31]
+type=allow_building
+state=init
+version=1
+player=1
+building=pressworks
+allow=false
+
+[Disable Building 32]
+type=allow_building
+state=init
+version=1
+player=1
+building=sentry
+allow=false
+
+[Disable Building 33]
+type=allow_building
+state=init
+version=1
+player=1
+building=smelting_works
+allow=false
+
+[Disable Building 34]
+type=allow_building
+state=init
+version=1
+player=1
+building=stonegrinder
+allow=false
+
+[Disable Building 35]
+type=allow_building
+state=init
+version=1
+player=1
+building=stronghold
+allow=false
+
+[Disable Building 36]
+type=allow_building
+state=init
+version=1
+player=1
+building=tavern
+allow=false
+
+[Disable Building 37]
+type=allow_building
+state=init
+version=1
+player=1
+building=trainingscamp
+allow=false
+
+[Disable Building 38]
+type=allow_building
+state=init
+version=1
+player=1
+building=warehouse
+allow=false
+
+[Disable Building 39]
+type=allow_building
+state=init
+version=1
+player=1
+building=warmill
+allow=false
+
+[Disable Building 40]
+type=allow_building
+state=init
+version=1
+player=1
+building=well
+allow=false
+
+[Disable Building 41]
+type=allow_building
+state=init
+version=1
+player=1
+building=ranger
+allow=false
+
+[Disable Building 42]
+type=allow_building
+state=init
+version=1
+player=1
+building=quarry
+allow=false
+
+[Enable Ranger]
+type=allow_building
+state=init
+version=1
+player=1
+building=ranger
+allow=true
+
+[Enable Quarry]
+type=allow_building
+state=init
+version=1
+player=1
+building=quarry
+allow=true
+
+[Goto Al'thunran]
+type=move_view
+state=init
+version=1
+point_x=53
+point_y=43
+
+[Goto Grave]
+type=move_view
+state=init
+version=1
+point_x=25
+point_y=22
+
+[Goto Home]
+type=move_view
+state=init
+version=1
+point_x=12
+point_y=10
+
+[Order Msg 1]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>"
+_"An old man approaches you..."
+"</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_""Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days." "
+"</p>""
+window_title=Advisor
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Order Msg 2]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>"
+_"Khantrukh continues..."
+"</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_""None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br>We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise some lumberjacks' huts."<br><br>--NEW OBJECTIVES--<br>- press SPACE to see where you can build. The red spots show you, where a small building - like a Lumberjack - may be built.<br>- built a Lumberjack at the red spot directly right of your headquarters by clicking at it and selecting a Lumberjack."
+"</p>""
+window_title=Advisor
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Order Msg 3]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>"
+_"The elder remarks..."
+"</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_""Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough."<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+"</p>""
+window_title=Advisor
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=Order3
+button_00_has_trigger=true
+button_00_trigger=Order3
+
+[Order Msg 4]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>"
+_"Khantrukh speaks..."
+"</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_""There is an old saying: 'A burden divided is easier to endure.' A crossroad on the way between our site and the lumberjack would ease the work of our carriers."<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road."
+"</p>""
+window_title=Advisor
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Order Msg 5]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>"
+_"The old man looks to the sky..."
+"</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_""The northern winds tell us, the coming winter will be a long and cruel one. One Lumberjack will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second Lumberjack there!"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+"</p>""
+window_title=Advisor
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=Order5
+button_00_has_trigger=true
+button_00_trigger=Order5
+
+[Order Msg 6]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>"
+_"Khantrukh nods..."
+"</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_""Of course, if we intended to build a bigger settlement much more Lumberjacks would be advisable, but this should do for now.<br>But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give again.<br>So, in order to replace the trees we chop down, we should build a Ranger's hut, preferably close to the Lumberjack."<br><br>--NEW OBJECTIVES--<br>- Build a Ranger's Hut to the east of the first Lumberjack."
+"</p>""
+window_title=Advisor
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Order Msg 7]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>"
+_"The elder speaks..."
+"</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_""I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations. I would advise that we store stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby..."<br><br>--NEW OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
+"</p>""
+window_title=Advisor
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=Order7
+button_00_has_trigger=true
+button_00_trigger=Order7
+
+[Show Al'thunran]
+type=unhide_area
+state=init
+version=1
+point_x=51
+point_y=46
+area=14
+player=1
+
+[Show Grave]
+type=unhide_area
+state=init
+version=1
+point_x=24
+point_y=29
+area=6
+player=1
+
+[Story Msg 1]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>"
+_"Thron speaks..."
+"</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br>They are a constant reminder why we had to hide here.<br>And a constant reminder why we must return in the end."
+"</p>""
+window_title=In the night...
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Story Msg 2]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>"
+_"Thron speaks..."
+"</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br>Somehow it felt like farewell. For the first time I wondered what the future might hold for me..."
+"</p>""
+window_title=At the grave
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Story Msg 3]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>"
+_"Thron speaks..."
+"</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br>But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side..."
+"</p>""
+window_title=The other day...
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Story Msg 4]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>"
+_"Thron speaks..."
+"</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br>I hereby renew my oath - I will stop this madness at any cost!"
+"</p>""
+window_title=Another evening...
+is_modal=true
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=_ OK
+button_00_has_trigger=false
+
+[Unhide Objective 1]
+type=unhide_objective
+state=init
+version=1
+objective=Build Lumberjack 1
+dounhide=true
+
+[Unhide Objective 2]
+type=unhide_objective
+state=init
+version=1
+objective=Build Lumberjack 2
+dounhide=true
+
+[Unhide Objective 3]
+type=unhide_objective
+state=init
+version=1
+objective=Build Ranger
+dounhide=true
+
+[Unhide Objective 4]
+type=unhide_objective
+state=init
+version=1
+objective=Build Quarries
+dounhide=true
+
+[Mission Complete]
+type=message_box
+state=init
+version=1
+text=""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>"
+_"Victory!"
+"</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may continue if you wish. Otherwise, move on to the next mission."
+"</p>""
+window_title=Mission Complete
+is_modal=false
+number_of_buttons=1
+width=400
+height=300
+posx=-1
+posy=-1
+button_00_name=_ OK
+button_00_has_trigger=false
+

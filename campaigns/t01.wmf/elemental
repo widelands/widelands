@@ -1,0 +1,12 @@
+# Automatically created by Widelands build-9
+
+[global]
+packet_version=1
+map_w=64
+map_h=64
+nr_players=1
+world=greenland
+name=t01 - Eyes in the Dark
+author=Winterwind
+descr=First Mission of the Barbarian Tutorial Campaign.
+

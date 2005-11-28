@@ -1,0 +1,113 @@
+# Automatically created by Widelands build-9
+
+[global]
+packet_version=1
+
+[Built Lumberjack 1]
+type=building
+set=false
+version=1
+point_x=15
+point_y=11
+area=2
+player=1
+count=1
+building=lumberjack
+
+[Built Lumberjack 2]
+type=building
+set=false
+version=1
+point_x=12
+point_y=13
+area=2
+player=1
+count=1
+building=lumberjack
+
+[Built Ranger]
+type=building
+set=false
+version=1
+point_x=17
+point_y=11
+area=2
+player=1
+count=1
+building=ranger
+
+[Built Quarries]
+type=building
+set=false
+version=1
+point_x=8
+point_y=13
+area=2
+player=1
+count=2
+building=quarry
+
+[The Story begins]
+type=time
+set=false
+version=1
+wait_time=2
+last_start_time=0
+
+[Game Started]
+type=time
+set=false
+version=1
+wait_time=1
+last_start_time=0
+
+[Order3]
+type=null
+set=false
+version=1
+
+[Order5]
+type=null
+set=false
+version=1
+
+[Order7]
+type=null
+set=false
+version=1
+
+[Story Timer 1]
+type=time
+set=false
+version=1
+wait_time=90
+last_start_time=0
+
+[Story Timer 2]
+type=time
+set=false
+version=1
+wait_time=165
+last_start_time=0
+
+[Story Timer 3]
+type=time
+set=false
+version=1
+wait_time=240
+last_start_time=0
+
+[Story Timer 4]
+type=time
+set=false
+version=1
+wait_time=380
+last_start_time=0
+
+[Wait]
+type=time
+set=false
+version=1
+wait_time=5
+last_start_time=0
+
