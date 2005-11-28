@@ -78,7 +78,7 @@ def parse_conf( files ):
             if multiline and  len(line) and line[0]=='_':
                 line = line[1:]
                 rindex = line.rfind('""') 
-                if rindex == -1:
+                if rindex == -1 or line[:2] == '""':
                     line = line.strip()
                     line = line.strip('"')
                     curstr = trans_string()
@@ -137,6 +137,7 @@ def parse_conf( files ):
 
         # escape the escapable characters 
         i.str = i.str.replace('\\', '\\\\')
+        i.str = i.str.replace('"', '\\"')
         if( i.str.find('\n') == -1 ):
             retval += 'msgid "%s"\n' % i.str
         else:

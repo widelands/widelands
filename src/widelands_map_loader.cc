@@ -108,11 +108,11 @@ int Widelands_Map_Loader::preload_map(bool scenario) {
  * Load the complete map and make sure that it runs without problems
  */
 int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scenario) {
-   
+
    // Load elemental data block (again)
    Widelands_Map_Elemental_Data_Packet mp;
    mp.Pre_Read(m_fs, m_map);
-   
+
    // now, load the world, load the rest infos from the map
    m_map->load_world();
    // Postload the world which provides all the immovables found on a map
@@ -122,7 +122,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    if(m_mol) 
       delete m_mol;
    m_mol=new Widelands_Map_Map_Object_Loader;
-   
+
    Widelands_Map_Data_Packet* dp;
 
    // MANDATORY PACKETS
@@ -148,7 +148,7 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    dp->Read(m_fs, egbase, !scenario, m_mol);
    delete dp;
    log("done!\n ");
-   
+
    // and terrains
    log("Reading Terrain Data ... ");
    dp=new Widelands_Map_Terrain_Data_Packet();
@@ -198,8 +198,15 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    dp->Read(m_fs, egbase, !scenario, m_mol);
    delete dp;
    log("done!\n ");
-   
-   // Events
+
+   // Objectives: Depend on triggers
+   log("Reading Objective Data ... ");
+   dp=new Widelands_Map_Objective_Data_Packet();
+   dp->Read(m_fs, egbase, !scenario, m_mol);
+   delete dp;
+   log("done!\n ");
+
+   // Events, depend on trigger, objectives
    log("Reading Event Data ... ");
    dp=new Widelands_Map_Event_Data_Packet();
    dp->Read(m_fs, egbase, !scenario, m_mol);
@@ -309,21 +316,14 @@ int Widelands_Map_Loader::load_map_complete(Editor_Game_Base* egbase, bool scena
    dp->Read(m_fs, egbase, !scenario, m_mol);
    delete dp;
    log("done!\n ");
-  
+
    log("Reading Variable Data ... ");
    dp=new Widelands_Map_Variable_Data_Packet();
    dp->Read(m_fs, egbase, !scenario, m_mol);
    delete dp;
    log("done!\n ");
 
-   log("Reading Objective Data ... ");
-   dp=new Widelands_Map_Objective_Data_Packet();
-   dp->Read(m_fs, egbase, !scenario, m_mol);
-   delete dp;
-   log("done!\n ");
-
- 
-  if(m_mol->get_nr_unloaded_objects())
+   if(m_mol->get_nr_unloaded_objects())
       log("WARNING: There are %i unloaded objects. This is a bug, please consider committing!\n", m_mol->get_nr_unloaded_objects());
 
    m_map->recalc_whole_map();

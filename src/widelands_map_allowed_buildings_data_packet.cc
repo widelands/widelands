@@ -46,7 +46,7 @@ void Widelands_Map_Allowed_Buildings_Data_Packet::Read(FileSystem* fs, Editor_Ga
    
    Profile prof;
    try {
-      prof.read("allow_building", 0, fs ); 
+      prof.read("allowed_buildings", 0, fs ); 
    } catch( ... ) {
       // Packet wasn't save. Same as skip
       return;

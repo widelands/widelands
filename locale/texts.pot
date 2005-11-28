@@ -159,11 +159,6 @@ msgstr ""
 msgid "an open source strategy game"
 msgstr ""
 
-#: ../txts/README:9
-#: ../txts/editor_readme:6
-msgid "Introduction"
-msgstr ""
-
 #: ../txts/README:13
 msgid "Widelands is a strategy game aiming for gameplay similar to Settlers II by BlueByte.<br>In this game, you start out on a small piece of land with nothing more thana few of useful resources. Using those, you can build yourself an empire with many thousands of inhabitants. On your way towards this goal, you will have to build up an economic infrastructure, explore the lands around you and face enemies who are trying to rule the world just like you do."
 msgstr ""
@@ -216,75 +211,87 @@ msgstr ""
 msgid "M               Toggle minimap"
 msgstr ""
 
-#: ../txts/README:66
+#: ../txts/README:65
+msgid "C               Toggle census"
+msgstr ""
+
+#: ../txts/README:67
+msgid "S               Toggle statistics"
+msgstr ""
+
+#: ../txts/README:69
+msgid "F               Toggle Fullscreen"
+msgstr ""
+
+#: ../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
 msgstr ""
 
-#: ../txts/README:68
+#: ../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
 msgstr ""
 
-#: ../txts/README:71
+#: ../txts/README:77
 msgid "F5           Reveals the entire map"
 msgstr ""
 
-#: ../txts/README:73
+#: ../txts/README:79
 msgid "F10         Quit the game immediately"
 msgstr ""
 
-#: ../txts/README:75
+#: ../txts/README:81
 msgid "F11         Take a screenshot"
 msgstr ""
 
-#: ../txts/README:80
+#: ../txts/README:86
 msgid "Reporting Bugs"
 msgstr ""
 
-#: ../txts/README:84
+#: ../txts/README:90
 msgid "If you want to report bugs, please send your report to the mailing list, <widelands-public@list.sourceforge.net><br>To subscribe, visit the following page:"
 msgstr ""
 
-#: ../txts/README:89
+#: ../txts/README:95
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../txts/README:92
+#: ../txts/README:98
 msgid "- what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from CVS)"
 msgstr ""
 
-#: ../txts/README:94
+#: ../txts/README:100
 msgid "- how to reproduce the bug"
 msgstr ""
 
-#: ../txts/README:96
+#: ../txts/README:102
 msgid "- which map you were playing"
 msgstr ""
 
-#: ../txts/README:98
+#: ../txts/README:104
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
 msgstr ""
 
-#: ../txts/README:103
+#: ../txts/README:109
 msgid "Creating a Session Record</p>"
 msgstr ""
 
-#: ../txts/README:106
+#: ../txts/README:112
 msgid "Widelands can record all your keypresses and mouse movements to a file. It can then replay an entire session from starting the game to exiting it. This is really helpful for debugging problems."
 msgstr ""
 
-#: ../txts/README:109
+#: ../txts/README:115
 msgid "To create a session record, start the game with the --record parameter. On Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
 
-#: ../txts/README:112
+#: ../txts/README:118
 msgid "On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like c:\\games\\widelands\\widelands.exe. Change this to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
 
-#: ../txts/README:115
+#: ../txts/README:121
 msgid "A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace --record with --playback."
 msgstr ""
 
-#: ../txts/README:118
+#: ../txts/README:124
 msgid "Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr ""
 
@@ -298,6 +305,11 @@ msgstr ""
 
 #: ../txts/editor_readme:3
 msgid "README for the Editor"
+msgstr ""
+
+#: ../txts/editor_readme:6
+#: ../txts/README:9
+msgid "Introduction"
 msgstr ""
 
 #: ../txts/editor_readme:9
@@ -321,38 +333,42 @@ msgid "E        Toggles event menu"
 msgstr ""
 
 #: ../txts/editor_readme:22
-msgid "H        Toggles main menu"
+msgid "F        Toggle Fullscreen"
 msgstr ""
 
 #: ../txts/editor_readme:24
-msgid "M        Toggles minimap"
+msgid "H        Toggles main menu"
 msgstr ""
 
 #: ../txts/editor_readme:26
-msgid "P        Toggles player menu"
+msgid "M        Toggles minimap"
 msgstr ""
 
 #: ../txts/editor_readme:28
-msgid "T        Toggles tools menu"
+msgid "P        Toggles player menu"
 msgstr ""
 
 #: ../txts/editor_readme:30
-msgid "CTRL+L   Load Map"
+msgid "T        Toggles tools menu"
 msgstr ""
 
 #: ../txts/editor_readme:32
-msgid "CTRL+S   Save Map"
+msgid "CTRL+L   Load Map"
 msgstr ""
 
 #: ../txts/editor_readme:34
-msgid "1-0      Changes tools size"
+msgid "CTRL+S   Save Map"
 msgstr ""
 
 #: ../txts/editor_readme:36
-msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
+msgid "1-0      Changes tools size"
 msgstr ""
 
 #: ../txts/editor_readme:38
+msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
+msgstr ""
+
+#: ../txts/editor_readme:40
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
 

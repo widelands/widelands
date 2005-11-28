@@ -122,6 +122,9 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
    FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
    m_maploader = new Widelands_Map_Loader(fs, map);
 
+   // TODO: Dirty hack for current campaigns
+   if( scenario )
+      Sys_GrabTextdomain("campaign_ank");
    m_maploader->preload_map(scenario);
    
    m_state = gs_running;
@@ -136,6 +139,9 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	m_maploader->load_map_complete(this, scenario); // if code==2 is a scenario
 	delete m_maploader;
 	m_maploader=0;
+
+   if( scenario )
+      Sys_ReleaseTextdomain();
 
 	return run();
 }

@@ -6,8 +6,6 @@ my shell scripting
 
 Usage: Edit the available languages to your need, run this script in the 'locale' directory"""
 
-# TODO: Scenarios and Campaigns
-
 
 import os
 import sys
@@ -17,7 +15,7 @@ import string
 
 TRIBES = [ "barbarians" ]
 WORLDS = [ "greenland" ]  
-
+CAMPAING_MISSIONS = glob("../campaigns/*.wmf")
 
 def do_rename( src, dst ):
     try:
@@ -97,6 +95,30 @@ def main( ):
             os.system( "msgfmt -o %s/LC_MESSAGES/world_%s.mo world_%s_%s.po" % ( lang, world, world, lang ))
 
 ##############################
+# tutorial campaign 
+##############################
+    files = []
+    for mission in CAMPAING_MISSIONS:
+        for file in glob("%s/*" % mission):
+            if( file[-3:] == "CVS" or file[-1] == '~' or file[-6:]=="binary" or file[-4:]=="pics"): 
+                continue
+            files.append( file )
+
+    catalog = confgettext.parse_conf( files )
+    file = open( "campaign_ank.pot", "w")
+    file.write(catalog)
+    file.close()
+
+    for lang in LANGUAGES:
+        # merge new strings with existing translations
+        if not os.system( "msgmerge campaign_ank_%s.po campaign_ank.pot > tmp" % lang ):
+                do_rename("tmp", "campaign_ank_%s.po" % ( lang ) )
+
+        # compile message catalogs
+        do_makedirs( "%s/LC_MESSAGES" % lang )
+        os.system( "msgfmt -o %s/LC_MESSAGES/campaign_ank.mo campaign_ank_%s.po" % ( lang, lang ))
+
+##############################
 # Texts (General help, Readme and so on) 
 ##############################
     files = [] 
@@ -118,7 +140,9 @@ def main( ):
         # compile message catalogs
         do_makedirs( "%s/LC_MESSAGES" % lang )
         os.system( "msgfmt -o %s/LC_MESSAGES/texts.mo texts_%s.po" % ( lang, lang ))
- 
+
+
+
 # 
 # This function extracts the available languages from the source files languages.h
 #

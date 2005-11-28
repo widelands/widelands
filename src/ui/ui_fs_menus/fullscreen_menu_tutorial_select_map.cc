@@ -24,8 +24,8 @@
 #include "constants.h"
 
 static const char* filenames[] = {
-   "campaigns/t01_eyes_in_the_darkness.wmf",
-   "campaigns/t02_a_place_to_call_home.wmf",
+   "campaigns/t01.wmf",
+   "campaigns/t02.wmf",
 };
 
 /*

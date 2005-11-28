@@ -439,7 +439,8 @@ const char *Section::get_next_int(const char *name, int *value)
 	if (!v)
 		return 0;
 
-	*value = v->get_int();
+   if( value )
+      *value = v->get_int();
 	return v->get_name();
 }
 
@@ -453,7 +454,8 @@ const char *Section::get_next_float(const char *name, float *value)
 	if (!v)
 		return 0;
 
-	*value = v->get_float();
+   if( value )
+      *value = v->get_float();
 	return v->get_name();
 }
 
@@ -472,7 +474,8 @@ const char *Section::get_next_bool(const char *name, bool *value)
 	if (!v)
 		return 0;
 
-	*value = v->get_bool();
+   if( value )
+      *value = v->get_bool();
 	return v->get_name();
 }
 
@@ -491,7 +494,8 @@ const char *Section::get_next_string(const char *name, const char **value)
 	if (!v)
 		return 0;
 
-	*value = v->get_string();
+   if( value )
+      *value = v->get_string();
 	return v->get_name();
 }
 

@@ -1,36 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2005-11-26 00:09+0100\n"
+"Last-Translator: holy_moly <holy_moly@gmx.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
-msgstr ""
+msgstr "Hase"
 
 #: ../worlds/greenland/bobs/bush1/conf:1 ../worlds/greenland/bobs/bush2/conf:1
 #: ../worlds/greenland/bobs/bush3/conf:1 ../worlds/greenland/bobs/bush4/conf:1
 #: ../worlds/greenland/bobs/bush5/conf:1
 msgid "Bush"
-msgstr ""
+msgstr "Busch"
 
 #: ../worlds/greenland/bobs/cactus1/conf:1
 #: ../worlds/greenland/bobs/cactus2/conf:1
 msgid "Cactus"
-msgstr ""
+msgstr "Kaktus"
 
 #: ../worlds/greenland/bobs/deadtree1/conf:1
 #: ../worlds/greenland/bobs/deadtree2/conf:1
 #: ../worlds/greenland/bobs/deadtree3/conf:1
 #: ../worlds/greenland/bobs/deadtree4/conf:1
 msgid "Dead Tree"
-msgstr ""
+msgstr "Toter Baum"
 
 #: ../worlds/greenland/bobs/deer/conf:1
 msgid "Deer"
-msgstr ""
+msgstr "Hirsch"
 
 #: ../worlds/greenland/bobs/duck/conf:1
 msgid "Duck"
-msgstr ""
+msgstr "Ente"
 
 #: ../worlds/greenland/bobs/fox/conf:1
 msgid "Fox"
-msgstr ""
+msgstr "Fuchs"
 
 #: ../worlds/greenland/bobs/grass1/conf:1
 #: ../worlds/greenland/bobs/grass2/conf:1
@@ -41,7 +53,7 @@ msgstr ""
 #: ../worlds/greenland/bobs/mushroom1/conf:1
 #: ../worlds/greenland/bobs/mushroom2/conf:1
 msgid "Mushroom"
-msgstr ""
+msgstr "Pilz"
 
 #: ../worlds/greenland/bobs/pebble1/conf:1
 #: ../worlds/greenland/bobs/pebble2/conf:1
@@ -58,13 +70,13 @@ msgstr ""
 
 #: ../worlds/greenland/bobs/sheep/conf:1
 msgid "Sheep"
-msgstr ""
+msgstr "Schaf"
 
 #: ../worlds/greenland/bobs/skeleton1/conf:1
 #: ../worlds/greenland/bobs/skeleton2/conf:1
 #: ../worlds/greenland/bobs/skeleton3/conf:1
 msgid "Skeleton"
-msgstr ""
+msgstr "Skelett"
 
 #: ../worlds/greenland/bobs/sstones1/conf:1
 #: ../worlds/greenland/bobs/sstones2/conf:1
@@ -83,14 +95,14 @@ msgstr ""
 #: ../worlds/greenland/bobs/stones5/conf:1
 #: ../worlds/greenland/bobs/stones6/conf:1
 msgid "Stones"
-msgstr ""
+msgstr "Steine"
 
 #: ../worlds/greenland/bobs/tree1/conf:4 ../worlds/greenland/bobs/tree2/conf:4
 #: ../worlds/greenland/bobs/tree3/conf:4 ../worlds/greenland/bobs/tree4/conf:4
 #: ../worlds/greenland/bobs/tree5/conf:4 ../worlds/greenland/bobs/tree6/conf:4
 #: ../worlds/greenland/bobs/tree7/conf:4 ../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
-msgstr ""
+msgstr "Baum"
 
 #: ../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -106,7 +118,7 @@ msgstr ""
 
 #: ../worlds/greenland/resconf:4
 msgid "Coal"
-msgstr ""
+msgstr "Kohle"
 
 #: ../worlds/greenland/resconf:12
 msgid "Gold"
@@ -114,7 +126,7 @@ msgstr ""
 
 #: ../worlds/greenland/resconf:20
 msgid "Iron"
-msgstr ""
+msgstr "Eisen"
 
 #: ../worlds/greenland/resconf:28
 msgid "Granit"
@@ -122,8 +134,8 @@ msgstr ""
 
 #: ../worlds/greenland/resconf:36
 msgid "Water"
-msgstr ""
+msgstr "Wasser"
 
 #: ../worlds/greenland/resconf:41
 msgid "Fish"
-msgstr ""
+msgstr "Fisch"
