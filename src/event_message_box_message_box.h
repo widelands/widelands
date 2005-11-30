@@ -21,7 +21,7 @@
 #define __S__EVENT_MESSAGE_BOX_MESSAGE_BOX_H
 
 class Event_Message_Box;
-class Editor_Game_Base;
+class Game;
 class Trigger_Null;
 
 #include <vector>
@@ -29,10 +29,11 @@ class Trigger_Null;
 
 class Message_Box_Event_Message_Box : public UIWindow {
    public:
-      Message_Box_Event_Message_Box(Editor_Game_Base*, Event_Message_Box*, int, int, int, int);
+      Message_Box_Event_Message_Box(Game*, Event_Message_Box*, int, int, int, int);
       bool handle_mouseclick(uint btn, bool down, int mx, int my);
 
    private:
+      Game* m_game;
       void clicked(int);
       bool m_is_modal;
       std::vector<Trigger_Null*> m_trigger;

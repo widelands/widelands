@@ -19,6 +19,7 @@
 
 #include "event_message_box_message_box.h"
 #include "event_message_box.h"
+#include "game.h"
 #include "graphic.h"
 #include "editorinteractive.h"
 #include "ui_multilinetextarea.h"
@@ -32,9 +33,11 @@
 /*
  * The message box himself
  */
-Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Editor_Game_Base* egbase, Event_Message_Box* event,
+Message_Box_Event_Message_Box::Message_Box_Event_Message_Box(Game* game, Event_Message_Box* event,
       int gposx, int gposy, int w, int h) :
-UIWindow(egbase->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
+UIWindow(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
+
+   m_game = game;
 
    UIMultiline_Textarea* m_text=0;
    int spacing=5;
@@ -110,8 +113,10 @@ void Message_Box_Event_Message_Box::clicked(int i) {
       // One of the buttons has been pressed
 //      NoLog("Button %i has been pressed, nr of buttons: %i!\n", i, event->get_nr_buttons());
       Trigger_Null* t=m_trigger[i];
-      if(t)
+      if(t) {
          t->set_trigger_manually(true);
+         t->check_set_conditions( m_game ); // forcefully update this trigger
+      }
       clicked(-1);
       return;
    }
