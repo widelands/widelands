@@ -1,0 +1,849 @@
+# Automatically created by Widelands build-9
+
+[global]
+packet_version=1
+
+[Briefing Msg 1]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>Thron speaks...</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_" "The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees. The stories they tell about the deeds of our kin are sad to hear. I've spent nights laying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart." "
+"</p>""
+window_title=_The Story goes on...
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Briefing Msg 2]
+type=message_box
+state=init
+version=1
+text=""<p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_" "Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me? Rise against whoever threatens our very existance may it even be one of your blood or mind?" "
+"</p>""
+window_title=_The Story continues...
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Briefing Msg 3]
+type=message_box
+state=init
+version=1
+text=""<p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_" "Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br>Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home..."</p>""
+window_title=_The Story continues...
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Disable Building 01]
+type=allow_building
+state=init
+version=1
+player=1
+building=axefactory
+allow=false
+
+[Disable Building 02]
+type=allow_building
+state=init
+version=1
+player=1
+building=bakery
+allow=false
+
+[Disable Building 03]
+type=allow_building
+state=init
+version=1
+player=1
+building=barrier
+allow=false
+
+[Disable Building 04]
+type=allow_building
+state=init
+version=1
+player=1
+building=battlearena
+allow=false
+
+[Disable Building 05]
+type=allow_building
+state=init
+version=1
+player=1
+building=big_inn
+allow=false
+
+[Disable Building 06]
+type=allow_building
+state=init
+version=1
+player=1
+building=brewery
+allow=false
+
+[Disable Building 07]
+type=allow_building
+state=init
+version=1
+player=1
+building=burner
+allow=false
+
+[Disable Building 08]
+type=allow_building
+state=init
+version=1
+player=1
+building=citadel
+allow=false
+
+[Disable Building 09]
+type=allow_building
+state=init
+version=1
+player=1
+building=coalmine
+allow=false
+
+[Disable Building 10]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_coalmine
+allow=false
+
+[Disable Building 11]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_goldmine
+allow=false
+
+[Disable Building 12]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_oremine
+allow=false
+
+[Disable Building 13]
+type=allow_building
+state=init
+version=1
+player=1
+building=deeper_coalmine
+allow=false
+
+[Disable Building 14]
+type=allow_building
+state=init
+version=1
+player=1
+building=deeper_goldmine
+allow=false
+
+[Disable Building 15]
+type=allow_building
+state=init
+version=1
+player=1
+building=deeper_oremine
+allow=false
+
+[Disable Building 16]
+type=allow_building
+state=init
+version=1
+player=1
+building=donjon
+allow=false
+
+[Disable Building 17]
+type=allow_building
+state=init
+version=1
+player=1
+building=farm
+allow=false
+
+[Disable Building 18]
+type=allow_building
+state=init
+version=1
+player=1
+building=fernery
+allow=false
+
+[Disable Building 19]
+type=allow_building
+state=init
+version=1
+player=1
+building=fisher
+allow=false
+
+[Disable Building 20]
+type=allow_building
+state=init
+version=1
+player=1
+building=fortress
+allow=false
+
+[Disable Building 21]
+type=allow_building
+state=init
+version=1
+player=1
+building=gamekeeper
+allow=false
+
+[Disable Building 22]
+type=allow_building
+state=init
+version=1
+player=1
+building=goldmine
+allow=false
+
+[Disable Building 23]
+type=allow_building
+state=init
+version=1
+player=1
+building=granitmine
+allow=false
+
+[Disable Building 24]
+type=allow_building
+state=init
+version=1
+player=1
+building=hardener
+allow=false
+
+[Disable Building 25]
+type=allow_building
+state=init
+version=1
+player=1
+building=helmsmith
+allow=false
+
+[Disable Building 26]
+type=allow_building
+state=init
+version=1
+player=1
+building=hunter
+allow=false
+
+[Disable Building 27]
+type=allow_building
+state=init
+version=1
+player=1
+building=inn
+allow=false
+
+[Disable Building 28]
+type=allow_building
+state=init
+version=1
+player=1
+building=metallworks
+allow=false
+
+[Disable Building 29]
+type=allow_building
+state=init
+version=1
+player=1
+building=micro-brewery
+allow=false
+
+[Disable Building 30]
+type=allow_building
+state=init
+version=1
+player=1
+building=oremine
+allow=false
+
+[Disable Building 31]
+type=allow_building
+state=init
+version=1
+player=1
+building=pressworks
+allow=false
+
+[Disable Building 32]
+type=allow_building
+state=init
+version=1
+player=1
+building=smelting_works
+allow=false
+
+[Disable Building 33]
+type=allow_building
+state=init
+version=1
+player=1
+building=stonegrinder
+allow=false
+
+[Disable Building 34]
+type=allow_building
+state=init
+version=1
+player=1
+building=tavern
+allow=false
+
+[Disable Building 35]
+type=allow_building
+state=init
+version=1
+player=1
+building=trainingscamp
+allow=false
+
+[Disable Building 36]
+type=allow_building
+state=init
+version=1
+player=1
+building=warehouse
+allow=false
+
+[Disable Building 37]
+type=allow_building
+state=init
+version=1
+player=1
+building=warmill
+allow=false
+
+[Disable Building 38]
+type=allow_building
+state=init
+version=1
+player=1
+building=well
+allow=false
+
+[Disable Building 38]
+type=allow_building
+state=init
+version=1
+player=1
+building=well
+allow=false
+
+[Enable Coal Mine]
+type=allow_building
+state=init
+version=1
+player=1
+building=coalmine
+allow=true
+
+[Enable Ore Mine]
+type=allow_building
+state=init
+version=1
+player=1
+building=oremine
+allow=true
+
+[Enable Gold Mine]
+type=allow_building
+state=init
+version=1
+player=1
+building=goldmine
+allow=true
+
+[Enable Granit Mine]
+type=allow_building
+state=init
+version=1
+player=1
+building=granitmine
+allow=true
+
+[Enable Hunter]
+type=allow_building
+state=init
+version=1
+player=1
+building=hunter
+allow=true
+
+[Enable Gamekeeper]
+type=allow_building
+state=init
+version=1
+player=1
+building=gamekeeper
+allow=true
+
+[Enable Tavern]
+type=allow_building
+state=init
+version=1
+player=1
+building=tavern
+allow=true
+
+[Enable Farm]
+type=allow_building
+state=init
+version=1
+player=1
+building=farm
+allow=true
+
+[Enable Well]
+type=allow_building
+state=init
+version=1
+player=1
+building=well
+allow=true
+
+[Enable Bakery]
+type=allow_building
+state=init
+version=1
+player=1
+building=bakery
+allow=true
+
+[Enable Smelter]
+type=allow_building
+state=init
+version=1
+player=1
+building=smelting_works
+allow=true
+
+[Enable Burner]
+type=allow_building
+state=init
+version=1
+player=1
+building=burner
+allow=true
+
+[Enable Inn]
+type=allow_building
+state=init
+version=1
+player=1
+building=inn
+allow=true
+
+[Enable Deep Coal Mine]
+type=allow_building
+state=init
+version=1
+player=1
+building=deep_coalmine
+allow=true
+
+[Enable Hardener]
+type=allow_building
+state=init
+version=1
+player=1
+building=hardener
+allow=true
+
+[Enable Grinder]
+type=allow_building
+state=init
+version=1
+player=1
+building=stonegrinder
+allow=true
+
+[Enable Fernery]
+type=allow_building
+state=init
+version=1
+player=1
+building=fernery
+allow=true
+
+[Order Msg 01]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=20 text-align=left font-face=Domestic_Manners font-color=FF0000>Brave Boldreth steps aside you...</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren fought on the battlefield, and our axes and swords have turned rusty over time."</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 02]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh joins the both of you</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "I beg your forgiveness, chieftain, but I have a grief concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools and it is only a matter of little time before they are all gone."</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 03]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=FF0000>Boldreth jumps up.</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?" <br><br>--NEW OBJECTIVES--<br>- build military buildings (like Sentries and Strongholds) to expand your territory. Get to the rocks north-east from you and build a Quarry there.</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 04]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh grumbles...</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "Old man? Disrespectful youth..."</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 05 Quarry]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh nods satisfied.</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "At least. These rocks should last for a while."</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=true
+button_00_trigger=Mission Quarry
+
+[Order Msg 06 Geologist]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=FF0000>Boldreth exclaims...</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granit<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 07 Mines Up]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=FF0000>Boldreth laughs...</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for! It might even be enough to -"</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=true
+button_00_trigger=Mission Mines
+
+[Order Msg 08 Mines Up]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh interrupts...</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not prove easy."</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 09 Hunter]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=FF0000>Boldreth nods...</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "I have to give it to you, you are right here, old man.<br>There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!"<br><br>"
+_"--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 10 Bread]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>The elder laughs...</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "Wisdom commands to seek variety. North of the great mountain is a big plane - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pittabread for a change..."<br><br>"
+_"--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source. Build a well, a farm and a bakery.</p>""
+window_title=Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 11 Hunt Began]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=FF0000>Boldreth cheers up...</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "Our hunters are out in the forests, Thron. I promise you, before the sun sets today you will have a feast as magnificent as is right for the chieftain of all clans!"</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=true
+button_00_trigger=Hunt Began
+
+[Order Msg 12 Farming Began]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh gazes over the plains...</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread for our chieftain alone!"</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=true
+button_00_trigger=Farming Began
+
+[Order Msg 13 Tavern]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>Thron speaks...</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_" "The new tavern opened yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs sounded until the deep night and they were in higher spirit the day after.<br>Maybe we actually are slowly creating a place here which we can... call home."</p>""
+window_title=_A beautiful morning...
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 14 Refine Ore]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=FF0000>Boldreth remarks...</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. We have the iron ore to be melt into steel ready to be forged into whatever we see fit and the coal to keep the smelter's ovens burning."<br><br>"
+_"--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the coalearth from your coalmines must be refined into coal - for that, build a Coal Burner.</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 15 Mines Exhausted]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh speaks...</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's roots, if we want more of its treasures!<br>Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them."<br><br>"
+_"--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns doesn't make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=true
+button_00_trigger=Refining Began
+
+[Order Msg 16 Blackwood]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=FF0000>Boldreth seems concerned...</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even more not so in times as dangerous as ours! We need a woodhardener, and we need one now!"<br><br>"
+_"--NEW OBJECTIVES--<br>- Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a Woodhardener first. Always remember to build a Woodhardener before you run out of blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 17 Grindstone]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=FF0000>Boldreth smiles...</p><p image=map:boldreth.png image-align=left line-spacing=3 font-size=12>"
+_" "Well, old friend, this should ensure that our fortifications do not break down with our foes first battle cry! Now we can expand safely!<br>Still, it could not hurt to assemble some grindstone for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!"<br><br>"
+_"--NEW OBJECTIVES--<br>- Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a Stonegrinder. You can obtain water by building a Well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu.<br>Build a Stonegrinder and a Well.</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Order Msg 18 Fernery]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh steps in...</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "Chieftain, this is a disgrace! It is well that we can produce grindstone for mighty fortifications and great buildings now - only, this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping onto my face! Now there is a problem we should do something about!"<br><br>"
+_"--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is fern, used to cover roofs. Fern is being planted by a fernery.<br>Build a Fernery.</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=true
+button_00_trigger=Mission Grindstone
+
+[Order Msg 19 All Material]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh seems reliefed...</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+_" "Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!"</p>""
+window_title=_Advisor
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=true
+button_00_trigger=Mission Fernery
+
+[Show Rocks]
+type=unhide_area
+state=init
+version=1
+point_x=27
+point_y=48
+area=6
+player=1
+
+[Story Msg 1]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>Thron speaks...</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_" "One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?"</p>""
+window_title=_One fullmoon night...
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Story Msg 2]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>Thron speaks...</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_" "The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore. I prayed it might get warmer again, as I prayed the war would finally come to an end.<br>So far, it does not seem either of my prayers was fulfilled."</p>""
+window_title=_Another cold day...
+is_modal=true
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=false
+
+[Unhide Claim Northeastern Rocks]
+type=unhide_objective
+state=init
+version=1
+objective=Claim Northeastern Rocks
+dounhide=true
+
+[Unhide Build Mines]
+type=unhide_objective
+state=init
+version=1
+objective=Build Mines
+dounhide=true
+
+[Unhide Begin the Hunt]
+type=unhide_objective
+state=init
+version=1
+objective=Begin the Hunt
+dounhide=true
+
+[Unhide Build a Tavern]
+type=unhide_objective
+state=init
+version=1
+objective=Build a Tavern
+dounhide=true
+
+[Unhide Begin Farming]
+type=unhide_objective
+state=init
+version=1
+objective=Begin Farming
+dounhide=true
+
+[Unhide Refine Ores]
+type=unhide_objective
+state=init
+version=1
+objective=Refine Ores
+dounhide=true
+
+[Unhide Enhance Buildings]
+type=unhide_objective
+state=init
+version=1
+objective=Enhance Buildings
+dounhide=true
+
+[Unhide Better Material I]
+type=unhide_objective
+state=init
+version=1
+objective=Better Material I
+dounhide=true
+
+[Unhide Better Material II]
+type=unhide_objective
+state=init
+version=1
+objective=Better Material II
+dounhide=true
+
+[Unhide Better Material III]
+type=unhide_objective
+state=init
+version=1
+objective=Better Material III
+dounhide=true
+
+[Mission Complete]
+type=message_box
+state=init
+version=1
+text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=2F9131>Victory!</p><p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
+_"Thron speaks: "The other day Boldreth talked me into accompanying him to the new inn. It would cheer me up, he said.<br>When I looked around I saw faithful faces, trusting I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br>The news he brought were to change everything..."<br><br>----------------------VICTORY!-----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.</p>""
+window_title=_Mission Complete!
+is_modal=false
+number_of_buttons=1
+button_00_name=_Continue
+button_00_has_trigger=true
+button_00_trigger=Enhance Buildings
+
