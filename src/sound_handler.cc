@@ -136,6 +136,13 @@ FXset::FXset(Uint8 prio)
 /** Delete all fxs to avoid memory leaks. This also frees the audio data.*/
 FXset::~FXset()
 {
+	vector<Mix_Chunk*>::iterator i = m_fxs.begin();
+	
+	while (i!=m_fxs.end()) {
+		Mix_FreeChunk(*i);
+		i++;
+	}
+	
 	m_fxs.clear();
 }
 
@@ -481,7 +488,7 @@ void Sound_Handler::play_fx(const string fx_name, int stereo_position)
 	log("-------------------------------------------------------------Trying to play %s\n", fx_name.c_str());
 
 	if (fx_name != "create_construction_site") {	//create_construction_site gets played every time
-		//TODO: play always should be configurabel in the/a conffile
+		//TODO: 'play always' should be configurabel in the/a conffile
 		//TODO: refine the decision whether to play or not
 		if (SDL_GetTicks() < m_fxs[fx_name]->m_last_used + 5000)
 			return;

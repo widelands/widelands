@@ -1,5 +1,6 @@
-This document described steps needed to compile widelands for different
-Systems using different compilers
+This document describes steps needed to compile widelands for different
+Systems using different compilers. If you have problems, please also have a
+look at our website http://www.widelands.org, especially the FAQ.
 
 Needed libraries
 ----------------
@@ -11,11 +12,12 @@ for widelands makes direct use of them:
    - SDL_image
    - SDL_net
    - SDL_ttf >= 2.0.0
-   - gettext
+   - gettext (look at FAQ if you have problems with -lintl)
    - libpng
    - zlib
 
 Make sure you have them all.
+If you encounter library versions that do not work, please tell us.
 
 Unix
 ----
