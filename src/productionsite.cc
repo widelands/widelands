@@ -1110,6 +1110,7 @@ void ProductionSite::program_start(Game* g, std::string name)
 	state.program = get_descr()->get_program(name);
 	state.ip = 0;
 	state.phase = 0;
+   state.flags = 0;
 
 	m_program.push_back(state);
 

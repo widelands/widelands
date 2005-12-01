@@ -59,6 +59,8 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
    m_fsd.fieldsel_freeze = false;
    m_egbase=g;
 
+   m_display_flags = 0;
+
 #ifdef DEBUG
    // Not in releases
 	m_display_flags = dfDebug;
