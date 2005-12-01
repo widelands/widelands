@@ -41,7 +41,7 @@ UIMultiline_Editbox::UIMultiline_Editbox(UIPanel *parent, int x, int y, uint w, 
 
    m_needs_update=false;
    m_cur_pos=get_text().size();
-
+   
    set_handle_mouse(true);
    set_can_focus(true);
 	set_think(false);
@@ -174,9 +174,9 @@ void UIMultiline_Editbox::draw(RenderTarget* dst)
    dst->brighten_rect(0,0,get_w(),get_h(),ms_darken_value);
    if (get_text().size()) {
       g_fh->draw_string(dst, m_fontname, m_fontsize, m_fcolor, RGBColor(107,87,55), UIMultiline_Editbox::get_halign(), 0 - m_textpos, get_text().c_str(), m_align, get_eff_w(), m_cache_mode, &m_cache_id, (has_focus() ? (int)m_cur_pos : -1)); //explicit cast is neccessary to avoid a compiler warning
+      m_cache_mode = Widget_Cache_Use;
    }
    UIMultiline_Textarea::draw_scrollbar();
-   m_cache_mode = Widget_Cache_Use;
 }
 
 /*
