@@ -21,7 +21,7 @@
 #define CONSTANTS_H
 
 // define current version
-#define VERSION "build-9"
+#define VERSION "build-9half"
 
 // locale path: This would be needed to be changed by a packager
 // The default search path for locales is in the locale directory

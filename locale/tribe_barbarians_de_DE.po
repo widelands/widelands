@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -18,8 +18,9 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 
 #: ../tribes/barbarians/bobs/deer/conf:1
+#, fuzzy
 msgid "Deer"
-msgstr ""
+msgstr "Bier"
 
 #: ../tribes/barbarians/bobs/wildboar/conf:1
 msgid "Wildboar"
@@ -34,12 +35,14 @@ msgid "Bakery"
 msgstr "Bäckerei"
 
 #: ../tribes/barbarians/buildings/barrier/conf:2
+#, fuzzy
 msgid "Barrier"
-msgstr ""
+msgstr "Träger"
 
 #: ../tribes/barbarians/buildings/battlearena/conf:2
+#, fuzzy
 msgid "Battle Arena"
-msgstr ""
+msgstr "Kriegsaxt"
 
 #: ../tribes/barbarians/buildings/big_inn/conf:2
 msgid "Big Inn"
@@ -98,8 +101,9 @@ msgid "Farm"
 msgstr "Bauernhof"
 
 #: ../tribes/barbarians/buildings/fernery/conf:2
+#, fuzzy
 msgid "Fernery"
-msgstr ""
+msgstr "Wachposten"
 
 #: ../tribes/barbarians/buildings/fisher/conf:2
 msgid "Fisher Hut"
@@ -131,8 +135,9 @@ msgstr "Hauptquartier"
 
 #: ../tribes/barbarians/buildings/helmsmith/conf:2
 #: ../tribes/barbarians/workers/helmsmith/conf:2
+#, fuzzy
 msgid "Helmsmith"
-msgstr ""
+msgstr "Schmied"
 
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
@@ -180,8 +185,9 @@ msgid "Smelting Works"
 msgstr ""
 
 #: ../tribes/barbarians/buildings/stonegrinder/conf:2
+#, fuzzy
 msgid "Stonegrinder"
-msgstr ""
+msgstr "Starkbier"
 
 #: ../tribes/barbarians/buildings/stronghold/conf:2
 msgid "Stronghold"
@@ -256,8 +262,9 @@ msgid "Coal"
 msgstr "Kohle"
 
 #: ../tribes/barbarians/wares/coalearth/conf:2
+#, fuzzy
 msgid "Coalearth"
-msgstr ""
+msgstr "Kohle"
 
 #: ../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
@@ -272,20 +279,23 @@ msgid "Fishing Rod"
 msgstr "Angel"
 
 #: ../tribes/barbarians/wares/gold/conf:2
+#, fuzzy
 msgid "Gold"
-msgstr ""
+msgstr "Goldmine"
 
 #: ../tribes/barbarians/wares/goldstone/conf:2
+#, fuzzy
 msgid "Goldstone"
-msgstr ""
+msgstr "Schleifstein"
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
 msgstr "Schleifstein"
 
 #: ../tribes/barbarians/wares/hammer/conf:2
+#, fuzzy
 msgid "Hammer"
-msgstr ""
+msgstr "Bauer"
 
 #: ../tribes/barbarians/wares/helm/conf:2
 msgid "Helm"
@@ -396,24 +406,27 @@ msgid "Builder"
 msgstr "Baumeister"
 
 #: ../tribes/barbarians/workers/burner/conf:2
+#, fuzzy
 msgid "Burner"
-msgstr ""
+msgstr "Brauer"
 
 #: ../tribes/barbarians/workers/carrier/conf:2
 msgid "Carrier"
 msgstr "Träger"
 
 #: ../tribes/barbarians/workers/chief-miner/conf:2
+#, fuzzy
 msgid "Chief Miner"
-msgstr ""
+msgstr "Bergmann"
 
 #: ../tribes/barbarians/workers/farmer/conf:2
 msgid "Farmer"
 msgstr "Bauer"
 
 #: ../tribes/barbarians/workers/ferner/conf:2
+#, fuzzy
 msgid "Ferner"
-msgstr ""
+msgstr "Bauer"
 
 #: ../tribes/barbarians/workers/fisher/conf:2
 msgid "Fisher"
@@ -432,36 +445,41 @@ msgid "Hunter"
 msgstr "Jäger"
 
 #: ../tribes/barbarians/workers/innkeeper/conf:2
+#, fuzzy
 msgid "Innkeeper"
-msgstr ""
+msgstr "Wildhüter"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
 msgstr "Meisterschmied"
 
 #: ../tribes/barbarians/workers/master-brewer/conf:2
+#, fuzzy
 msgid "Master Brewer"
-msgstr ""
+msgstr "Brauer"
 
 #: ../tribes/barbarians/workers/master-miner/conf:2
+#, fuzzy
 msgid "Master Miner"
-msgstr ""
+msgstr "Granitmine"
 
 #: ../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
 msgstr "Bergmann"
 
 #: ../tribes/barbarians/workers/presser/conf:2
+#, fuzzy
 msgid "Presser"
-msgstr ""
+msgstr "Förster"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
 msgstr "Förster"
 
 #: ../tribes/barbarians/workers/smelter/conf:2
+#, fuzzy
 msgid "Smelter"
-msgstr ""
+msgstr "Wachposten"
 
 #: ../tribes/barbarians/workers/soldier/conf:2
 msgid "Soldier"
@@ -472,5 +490,9 @@ msgid "Stonemason"
 msgstr "Steinmetz"
 
 #: ../tribes/barbarians/workers/trainer/conf:2
+#, fuzzy
 msgid "Trainer"
-msgstr ""
+msgstr "Bergmann"
+
+#~ msgid "barbarians"
+#~ msgstr "Barbaren"
