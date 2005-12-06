@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-12-05 14:35+0100\n"
+"PO-Revision-Date: 2005-12-05 21:37+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -213,7 +213,7 @@ msgstr "Warenlager"
 
 #: ../tribes/barbarians\buildings\warmill\conf:2
 msgid "War Mill"
-msgstr ""
+msgstr "Waffenschmiede"
 
 #: ../tribes/barbarians\buildings\well\conf:2
 msgid "Well"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands Mainlaguagepack 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-04 22:47+0100\n"
-"PO-Revision-Date: 2005-12-05 14:17+0100\n"
+"PO-Revision-Date: 2005-12-05 21:58+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Widelands translators\n"
 "MIME-Version: 1.0\n"
@@ -400,7 +400,7 @@ msgstr "Musik"
 
 #: ../src/game_options_menu.cc:84
 msgid "Sound FX"
-msgstr "Klangeffekte"
+msgstr "Sound"
 
 #: ../src/game_server_proto_packet_chatmessage.cc:68
 #, c-format
@@ -533,7 +533,7 @@ msgstr ""
 
 #: ../src/network.cc:850
 msgid "Waiting"
-msgstr ""
+msgstr "Warten"
 
 #: ../src/network.cc:861
 msgid "Ready"
@@ -585,7 +585,7 @@ msgstr "-"
 
 #: ../src/profile.cc:935
 msgid "Usage: "
-msgstr ""
+msgstr "Benutzung:"
 
 #: ../src/s2map.cc:247
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -625,7 +625,7 @@ msgstr ""
 
 #: ../src/trigger_factory.cc:35 ../src/trigger_time.cc:34
 msgid "Time Trigger"
-msgstr ""
+msgstr "Zeit Trigger"
 
 #: ../src/trigger_factory.cc:35
 msgid ""
@@ -655,7 +655,7 @@ msgstr "Och neeee! Jemand hat den Hilfstext vergessen!"
 
 #: ../src/ware_statistics_menu.cc:343 ../src/ware_statistics_menu.cc:391
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Waren Statistik"
 
 #: ../src/waresdisplay.cc:55
 msgid "Testtext"
@@ -672,6 +672,7 @@ msgstr "Karte nicht gespeichert"
 #: ../src/editor/editorinteractive.cc:192
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr ""
+"Die Karte ist nicht gespeichert! Willst du den Editor wirklich beenden?"
 
 #: ../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
@@ -689,7 +690,7 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:71
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:150
 msgid "Height"
-msgstr ""
+msgstr "Höhe"
 
 #: ../src/editor/tools/editor_info_tool.cc:55
 msgid " Caps: "
@@ -709,7 +710,7 @@ msgstr "groß"
 
 #: ../src/editor/tools/editor_info_tool.cc:62
 msgid " flag"
-msgstr ""
+msgstr "Flagge"
 
 #: ../src/editor/tools/editor_info_tool.cc:63
 msgid " mine"
@@ -721,11 +722,11 @@ msgstr ""
 
 #: ../src/editor/tools/editor_info_tool.cc:65
 msgid " walk"
-msgstr ""
+msgstr "gehen"
 
 #: ../src/editor/tools/editor_info_tool.cc:66
 msgid " swim"
-msgstr ""
+msgstr "schwimmen"
 
 #: ../src/editor/tools/editor_info_tool.cc:68
 msgid "Owned by"
@@ -776,11 +777,11 @@ msgstr ""
 
 #: ../src/editor/tools/editor_info_tool.cc:98
 msgid "4) Map Info"
-msgstr ""
+msgstr "4) Karten Info"
 
 #: ../src/editor/tools/editor_info_tool.cc:100
 msgid "Size"
-msgstr ""
+msgstr "Größe"
 
 #: ../src/editor/tools/editor_info_tool.cc:101
 #: ../src/editor/tools/editor_info_tool.cc:109
@@ -790,12 +791,12 @@ msgstr "Autor"
 #: ../src/editor/tools/editor_info_tool.cc:102
 #: ../src/editor/tools/editor_info_tool.cc:110
 msgid "Descr"
-msgstr ""
+msgstr "Beschr"
 
 #: ../src/editor/tools/editor_info_tool.cc:103
 #: ../src/editor/ui_menus/editor_player_menu.cc:79
 msgid "Number of Players"
-msgstr ""
+msgstr "Anzahl der Spieler"
 
 #: ../src/editor/tools/editor_info_tool.cc:104
 msgid " TODO: more information (number of resources, number of terrains...)"
@@ -803,7 +804,7 @@ msgstr ""
 
 #: ../src/editor/tools/editor_info_tool.cc:107
 msgid "5) World Info"
-msgstr ""
+msgstr "5) Welt Info"
 
 #: ../src/editor/tools/editor_info_tool.cc:111
 msgid " TODO -- More information (Number of bobs/number of wares...)\n"
@@ -812,11 +813,11 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_event_menu.cc:52
 #: ../src/editor/ui_menus/editor_event_menu.cc:57
 msgid "Event Menu"
-msgstr ""
+msgstr "Ereignis Menü"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:68
 msgid "Event Chains: "
-msgstr ""
+msgstr "Ereignis Ketten:"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:75
 msgid "Registered Events: "
@@ -828,7 +829,7 @@ msgstr ""
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:91
 msgid "New Event Chain"
-msgstr ""
+msgstr "Neue Ereigniskette"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:95
 #: ../src/editor/ui_menus/editor_event_menu.cc:110
@@ -876,7 +877,7 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:241
 #: ../src/editor/ui_menus/editor_variables_menu.cc:102
 msgid "Unnamed"
-msgstr ""
+msgstr "Namenlos"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:40
 msgid "Edit Event Chain"
@@ -909,7 +910,7 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:197
 #: ../src/editor/ui_menus/editor_variables_menu.cc:290
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:111
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:50
@@ -960,12 +961,12 @@ msgstr ""
 
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:40
 msgid "New Event Menu"
-msgstr ""
+msgstr "Neues Ereignis"
 
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:63
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:62
 msgid "Description: "
-msgstr ""
+msgstr "Beschreibung:"
 
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:40
 msgid "New Trigger Menu"
@@ -973,7 +974,7 @@ msgstr ""
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:45
 msgid "Editor Main Menu"
-msgstr ""
+msgstr "Editor Hauptmenü"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:57
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:43
@@ -1034,7 +1035,7 @@ msgstr "Beschr:"
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:42
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:48
 msgid "New Map Options"
-msgstr "Eigenschaften der Karte"
+msgstr "Karten-Eigenschaften"
 
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:52
 #: ../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:66
@@ -1067,7 +1068,7 @@ msgstr "Nichts definiert!"
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:61
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 msgid "Width"
-msgstr ""
+msgstr "Weite"
 
 #: ../src/editor/ui_menus/editor_main_menu_new_map.cc:93
 msgid "Create Map"
@@ -1178,19 +1179,19 @@ msgstr ""
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:36
 msgid "Allowed Buildings"
-msgstr ""
+msgstr "Erlaubte Gebäude"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:41
 msgid "Allowed Buildings Menu"
-msgstr ""
+msgstr "Erlaubte Gebäude - Menü"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:50
 msgid "Allowed Buildings: "
-msgstr ""
+msgstr "Erlaubte Gebäude:"
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Forbidden Buildings: "
-msgstr ""
+msgstr "Verbotene Gebäude"
 
 #: ../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 msgid "Height Tools Options"
@@ -1399,7 +1400,7 @@ msgstr "Knopf 2"
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:58
 msgid "Button 3"
-msgstr ""
+msgstr "Knopf "
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:69
 msgid "Is Modal: "

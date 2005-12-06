@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-12-05 12:46+0100\n"
+"PO-Revision-Date: 2005-12-05 21:36+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: ../campaigns\t01.wmf\event:627 ../campaigns\t01.wmf\event:646
 #: ../campaigns\t01.wmf\event:665
 msgid "Thron speaks..."
-msgstr "Der Thron sagt..."
+msgstr "Die Krone erzählt..."
 
 #: ../campaigns\t01.wmf\event:13
 msgid ""
@@ -87,12 +87,13 @@ msgid "An old man approaches you..."
 msgstr "Ein alter Mann erscheint bei dir..."
 
 #: ../campaigns\t01.wmf\event:456
+#, fuzzy
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my council through these darkened days.\" "
 msgstr ""
-"Ehre dir! Ich bin der alte und weise Khantrukh. Erlaube mir dir in diesen "
-"dunklen Tagen meine Hilfe anzubieten."
+"\"Ehre dir! Ich bin der alte und weise Khantrukh. Erlaube mir dir in diesen "
+"dunklen Tagen meine Hilfe anzubieten.\" "
 
 #: ../campaigns\t01.wmf\event:473
 msgid "Khantrukh continues..."
