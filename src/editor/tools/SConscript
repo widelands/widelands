@@ -1,0 +1,7 @@
+Import('*')
+
+SRC=Glob('*.cc')
+
+localenv=editorenv.Copy()
+
+lib=localenv.StaticLibrary(target='editortools', source=SRC)

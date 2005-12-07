@@ -1,0 +1,13 @@
+Import('*')
+
+SRC=Glob('*.cc')
+
+editorenv=srcenv.Copy()
+
+Export('editorenv', 'Glob')
+
+SConscript('ui_menus/SConscript')
+SConscript('tools/SConscript')
+
+lib=editorenv.StaticLibrary(target='editor', source=SRC)
+

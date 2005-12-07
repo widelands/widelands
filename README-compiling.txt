@@ -2,8 +2,8 @@ This document describes steps needed to compile widelands for different
 Systems using different compilers. If you have problems, please also have a
 look at our website http://www.widelands.org, especially the FAQ.
 
-Needed libraries
-----------------
+Dependencies
+------------
 
 These are the libraries you need. You also need the headers and link libraries,
 for widelands makes direct use of them:
@@ -18,6 +18,9 @@ for widelands makes direct use of them:
 
 Make sure you have them all.
 If you encounter library versions that do not work, please tell us.
+
+For compiling, you will also need
+   - Python >= 1.5.2
 
 Unix
 ----

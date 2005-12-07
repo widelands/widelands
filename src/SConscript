@@ -1,0 +1,36 @@
+Import('*')
+
+SRC=Glob('*.cc')
+
+srcenv=env.Copy()
+	
+srcenv.Append(CPPPATH=[
+		'#/src',
+		'#/src/ui/ui_basic',
+		'#/src/ui/ui_fs_menus',
+		'#/src/editor',
+		'#/src/editor/tools',
+		'#/src/editor/ui_menus',
+		])
+srcenv.Append(LIBS=[
+		'png',
+		'SDL_image',
+		'SDL_mixer',
+		'SDL_ttf',
+		'SDL_net',
+		])
+
+Export('srcenv', 'Glob')
+SConscript('editor/SConscript')
+SConscript('ui/ui_basic/SConscript')
+SConscript('ui/ui_fs_menus/SConscript')
+
+srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')
+srcenv.Append(LIBS='uifsmenus', LIBPATH='ui/ui_fs_menus')
+srcenv.Append(LIBS='editor', LIBPATH='editor')
+srcenv.Append(LIBS='editoruimenus', LIBPATH='editor/ui_menus')
+srcenv.Append(LIBS='editortools', LIBPATH='editor/tools')
+
+binary=srcenv.Program(target='widelands', source=SRC)
+Default(binary)
+

@@ -1,0 +1,8 @@
+*-debug*
+*-release
+*-profile
+config.log
+scons-config.py
+scons-signatures.dblite
+sconf_temp
+
