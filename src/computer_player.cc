@@ -22,6 +22,7 @@
 #include <algorithm>
 #include "error.h"
 #include "map.h"
+#include "world.h"
 #include "transport.h"
 #include "player.h"
 #include "tribe.h"
@@ -29,6 +30,9 @@
 #include "productionsite.h"
 #include "militarysite.h"
 #include "computer_player.h"
+#include "computer_player_hints.h"
+
+#define FIELD_UPDATE_INTERVAL	2000
 
 class CheckStepRoadAI : public CheckStep {
 public:
@@ -51,10 +55,20 @@ public:
 Computer_Player::Computer_Player (Game *g, uchar pid)
 {
 	game = g;
-	map = game->get_map();
-	
 	player_number = pid;
-	player = g->get_player(player_number);
+	
+	map=0;
+	world=0;
+}
+
+// when Computer_Player is constructed, some information is not yet available (e.g. world)
+void Computer_Player::late_initialization ()
+{
+	map = game->get_map();
+	world = map->get_world();
+	assert (world!=0);
+	
+	player = game->get_player(player_number);
 	tribe = player->get_tribe();
 	
 	log ("ComputerPlayer(%d): initializing\n", player_number);
@@ -82,6 +96,7 @@ Computer_Player::Computer_Player (Game *g, uchar pid)
 		bo.name=bld->get_name();
 		bo.id=i;
 		bo.desc=bld;
+		bo.hints=bld->get_hints();
 		bo.type=BuildingObserver::BORING;
 		bo.cnt_built=0;
 		bo.cnt_under_construction=0;
@@ -141,9 +156,10 @@ Computer_Player::~Computer_Player ()
 
 Computer_Player::BuildingObserver& Computer_Player::get_building_observer (const char* name)
 {
-	std::list<BuildingObserver>::iterator i;
-    
-	for (i=buildings.begin();i!=buildings.end();i++)
+	if (map==0)
+		late_initialization ();
+		
+	for (std::list<BuildingObserver>::iterator i=buildings.begin();i!=buildings.end();i++)
 		if (!strcmp(i->name, name))
 			return *i;
     
@@ -152,33 +168,67 @@ Computer_Player::BuildingObserver& Computer_Player::get_building_observer (const
 
 void Computer_Player::think ()
 {
-	// update our fields 
-	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end();) {
+	if (map==0)
+		late_initialization ();
+		
+	// update statistics about buildable fields
+	while (!buildable_fields.empty() && buildable_fields.front()->next_update_due<=game->get_gametime()) {
+		BuildableField* bf=buildable_fields.front();
+		
 		// check whether we lost ownership of the field
-		if (i->field->get_owned_by()!=player_number) {
-			log ("ComputerPlayer(%d): lost field (%d,%d)\n", player_number, i->x, i->y);
-			i=buildable_fields.erase(i);
+		if (bf->coords.field->get_owned_by()!=player_number) {
+			log ("ComputerPlayer(%d): lost field (%d,%d)\n", player_number, bf->coords.x, bf->coords.y);
+			
+			buildable_fields.pop_front();
 			continue;
 		}
 		
-		// check whether we can still build on the field
-		if ((player->get_buildcaps(*i) & BUILDCAPS_SIZEMASK)==0) {
-			log ("ComputerPlayer(%d): field (%d,%d) can no longer be built upon\n", player_number, i->x, i->y);
-			unusable_fields.push_back (*i);
-			i=buildable_fields.erase(i);
+		// check whether we can still construct regular buildings on the field
+		if ((player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK)==0) {
+			log ("ComputerPlayer(%d): field (%d,%d) can no longer be built upon\n", player_number, bf->coords.x, bf->coords.y);
+		
+			unusable_fields.push_back (bf->coords);
+			delete bf;
+			
+			buildable_fields.pop_front();
 			continue;
 		}
 		
-		i++;
-	}
-	
-	// update statistics about only one field at a time
-	if (!buildable_fields.empty() && buildable_fields.front().next_update_due<=game->get_gametime()) {
-		update_buildable_field (buildable_fields.front());
+		update_buildable_field (bf);
+		bf->next_update_due=game->get_gametime() + FIELD_UPDATE_INTERVAL;
 		
-		buildable_fields.front().next_update_due=game->get_gametime() + 750;
-		buildable_fields.push_back (buildable_fields.front());
+		buildable_fields.push_back (bf);
 		buildable_fields.pop_front ();
+	}
+
+	// do the same for mineable fields
+	while (!mineable_fields.empty() && mineable_fields.front()->next_update_due<=game->get_gametime()) {
+		MineableField* mf=mineable_fields.front();
+		
+		// check whether we lost ownership of the field
+		if (mf->coords.field->get_owned_by()!=player_number) {
+			log ("ComputerPlayer(%d): lost field (%d,%d)\n", player_number, mf->coords.x, mf->coords.y);
+			
+			mineable_fields.pop_front();
+			continue;
+		}
+		
+		// check whether we can still construct regular buildings on the field
+		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE)==0) {
+			log ("ComputerPlayer(%d): field (%d,%d) can no longer be mined upon\n", player_number, mf->coords.x, mf->coords.y);
+		
+			unusable_fields.push_back (mf->coords);
+			delete mf;
+			
+			mineable_fields.pop_front();
+			continue;
+		}
+		
+		update_mineable_field (mf);
+		mf->next_update_due=game->get_gametime() + FIELD_UPDATE_INTERVAL;
+		
+		mineable_fields.push_back (mf);
+		mineable_fields.pop_front ();
 	}
 
 	for (std::list<FCoords>::iterator i=unusable_fields.begin(); i!=unusable_fields.end();) {
@@ -192,10 +242,19 @@ void Computer_Player::think ()
 		// check whether building capabilities have improved
 		if ((player->get_buildcaps(*i) & BUILDCAPS_SIZEMASK) != 0) {
 			log ("ComputerPlayer(%d): field (%d,%d) can now be built upon\n", player_number, i->x, i->y);
-			buildable_fields.push_back (*i);
+			buildable_fields.push_back (new BuildableField(*i));
 			i=unusable_fields.erase(i);
 
 			update_buildable_field (buildable_fields.back());
+			continue;
+		}
+		
+		if ((player->get_buildcaps(*i) & BUILDCAPS_MINE) != 0) {
+			log ("ComputerPlayer(%d): field (%d,%d) can now be mined upon\n", player_number, i->x, i->y);
+			mineable_fields.push_back (new MineableField(*i));
+			i=unusable_fields.erase(i);
+
+			update_mineable_field (mineable_fields.back());
 			continue;
 		}
 		
@@ -204,7 +263,7 @@ void Computer_Player::think ()
 	
 	// wait a moment so that all fields are classified
 	if (next_construction_due==0)
-	    next_construction_due=game->get_gametime() + 3000;
+	    next_construction_due=game->get_gametime() + 1000;
 	
 	// now build something if possible
 	if (next_construction_due<=game->get_gametime()) {
@@ -321,8 +380,8 @@ bool Computer_Player::construct_building ()
 	for (int i=0;i<4;i++)
 		spots_avail[i]=0;
 	
-	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++)
-		spots_avail[i->field->get_caps() & BUILDCAPS_SIZEMASK]++;
+	for (std::list<BuildableField*>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++)
+		spots_avail[(*i)->coords.field->get_caps() & BUILDCAPS_SIZEMASK]++;
 	
 	int expand_factor=1;
 	
@@ -337,11 +396,14 @@ bool Computer_Player::construct_building ()
 	int proposed_priority=0;
 	Coords proposed_coords;
 	
-	for (std::list<BuildableField>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++) {
-		if (!i->reachable)
+	// first scan all buildable fields for regular buildings
+	for (std::list<BuildableField*>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++) {
+		BuildableField* bf=*i;
+		
+		if (!bf->reachable)
 			continue;
 		
-		int maxsize=i->field->get_caps() & BUILDCAPS_SIZEMASK;
+		int maxsize=bf->coords.field->get_caps() & BUILDCAPS_SIZEMASK;
 		int prio;
 		
 		std::list<BuildingObserver>::iterator j;
@@ -358,18 +420,18 @@ bool Computer_Player::construct_building ()
 		    prio=0;
 		    
 		    if (j->type==BuildingObserver::MILITARYSITE) {
-			    prio=(i->unowned_land_nearby - i->military_influence*2) * expand_factor / 4;
+			    prio=(bf->unowned_land_nearby - bf->military_influence*2) * expand_factor / 4;
 
-			    if (i->avoid_military)
+			    if (bf->avoid_military)
 				prio=prio/3 - 6;
 		    }
 
 		    if (j->type==BuildingObserver::PRODUCTIONSITE) {
 			    if (j->need_trees)
-				    prio+=i->trees_nearby - 6*i->tree_consumers_nearby - 2;
+				    prio+=bf->trees_nearby - 6*bf->tree_consumers_nearby - 2;
 
 			    if (j->need_stones)
-				    prio+=i->stones_nearby - 6*i->stone_consumers_nearby - 2;
+				    prio+=bf->stones_nearby - 6*bf->stone_consumers_nearby - 2;
 
 			    if ((j->need_trees || j->need_stones) && j->cnt_built==0 && j->cnt_under_construction==0)
 				    prio*=2;
@@ -400,7 +462,7 @@ bool Computer_Player::construct_building ()
 			    prio-=2*j->cnt_under_construction*(j->cnt_under_construction+1);
 		    }
 
-		    if (i->preferred)
+		    if (bf->preferred)
 			prio+=prio/2 + 1;
 		    else
 			prio--;
@@ -408,27 +470,56 @@ bool Computer_Player::construct_building ()
 		    // don't waste good land for small huts
 		    prio-=(maxsize - j->desc->get_size()) * 3;
 		    
-		    // don't have too many construction sites
-		    prio-=total_constructionsites*total_constructionsites;
-
 		    if (prio>proposed_priority) {
 			    proposed_building=j->id;
 			    proposed_priority=prio;
-			    proposed_coords=*i;
+			    proposed_coords=bf->coords;
 		    }
 		}
 	}
+
+	// then try all mines
+	for (std::list<BuildingObserver>::iterator i=buildings.begin();i!=buildings.end();i++) {
+		if (!i->is_buildable || i->type!=BuildingObserver::MINE)
+			continue;
+		
+		for (std::list<MineableField*>::iterator j=mineable_fields.begin(); j!=mineable_fields.end(); j++) {
+			MineableField* mf=*j;
+			int prio=0;
+			
+			if (i->hints->get_need_map_resource()!=0) {
+			    int res=world->get_resource(i->hints->get_need_map_resource());
+			    
+			    if (mf->coords.field->get_resources()!=res)
+				continue;
+			    
+			    prio+=mf->coords.field->get_resources_amount()*3;
+			}
+			
+			prio-=mf->mines_nearby * mf->mines_nearby;
+			prio-=i->cnt_built*3;
+			prio-=i->cnt_under_construction*5;
+			
+			if (prio>proposed_priority) {
+				proposed_building=i->id;
+				proposed_priority=prio;
+				proposed_coords=mf->coords;
+			}
+		}
+	}	
+
+	if (proposed_building<0)
+		return false;
+
+        // don't have too many construction sites
+        if (proposed_priority<total_constructionsites*total_constructionsites)
+		return false;
 	
 	// if we want to construct a new building, send the command now
-	if (proposed_building>=0) {
-		log ("ComputerPlayer(%d): want to construct building %d\n", player_number, proposed_building);
+	log ("ComputerPlayer(%d): want to construct building %d\n", player_number, proposed_building);
+	game->send_player_build (player_number, proposed_coords, proposed_building);
 		
-		game->send_player_build (player_number, proposed_coords, proposed_building);
-		
-		return true;
-	}
-	
-	return false;
+	return true;
 }
 
 void Computer_Player::check_productionsite (ProductionSiteObserver& site)
@@ -465,12 +556,12 @@ bool FindFieldUnowned::accept (const FCoords fc) const
 	return fc.field->get_owned_by()==0 && (fc.field->get_caps()&MOVECAPS_WALK);
 }
 
-void Computer_Player::update_buildable_field (BuildableField& field)
+void Computer_Player::update_buildable_field (BuildableField* field)
 {
 	// look if there is any unowned land nearby
 	FindFieldUnowned find_unowned;
 	
-	field.unowned_land_nearby=map->find_fields(field, 8, 0, find_unowned);
+	field->unowned_land_nearby=map->find_fields(field->coords, 8, 0, find_unowned);
 	
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
@@ -478,33 +569,33 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 	const int tree_attr=Map_Object_Descr::get_attribute_id("tree");
 	const int stone_attr=Map_Object_Descr::get_attribute_id("stone");
 	
-	map->find_immovables (field, 8, &immovables);
+	map->find_immovables (field->coords, 8, &immovables);
 	
-	field.reachable=false;	
-	field.preferred=false;
-	field.avoid_military=false;
+	field->reachable=false;
+	field->preferred=false;
+	field->avoid_military=false;
 	
-	field.military_influence=0;
-	field.trees_nearby=0;
-	field.stones_nearby=0;
-	field.tree_consumers_nearby=0;
-	field.stone_consumers_nearby=0;
+	field->military_influence=0;
+	field->trees_nearby=0;
+	field->stones_nearby=0;
+	field->tree_consumers_nearby=0;
+	field->stone_consumers_nearby=0;
 	
 	FCoords fse;
-	map->get_neighbour (field, Map_Object::WALK_SE, &fse);
+	map->get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
 	
 	BaseImmovable* imm=fse.field->get_immovable();
 	if (imm!=0) {
 	    if (imm->get_type()==BaseImmovable::FLAG)
-		field.preferred=true;
+		field->preferred=true;
 		
 	    if (imm->get_type()==BaseImmovable::ROAD && (fse.field->get_caps() & BUILDCAPS_FLAG))
-		field.preferred=true;
+		field->preferred=true;
 	}
 	
 	for (unsigned int i=0;i<immovables.size();i++) {
 		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
-			field.reachable=true;
+			field->reachable=true;
 
 		if (immovables[i].object->get_type()==BaseImmovable::BUILDING) {
 			Building* bld=static_cast<Building*>(immovables[i].object);
@@ -515,11 +606,11 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 			    if (typeid(*con)==typeid(MilitarySite_Descr)) {
 				MilitarySite_Descr* mil=static_cast<MilitarySite_Descr*>(con);
 				
-				int v=mil->get_conquers() - map->calc_distance(field, immovables[i].coords);
+				int v=mil->get_conquers() - map->calc_distance(field->coords, immovables[i].coords);
 				
 				if (v>0) {
-				    field.military_influence+=v*(v+2)*6;
-				    field.avoid_military=true;
+				    field->military_influence+=v*(v+2)*6;
+				    field->avoid_military=true;
 				}
 			    }
 			    
@@ -531,10 +622,10 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 			if (bld->get_building_type()==Building::MILITARYSITE) {
 			    MilitarySite* mil=static_cast<MilitarySite*>(bld);
 			    
-			    int v=mil->get_conquers() - map->calc_distance(field, immovables[i].coords);
+			    int v=mil->get_conquers() - map->calc_distance(field->coords, immovables[i].coords);
 			    
 			    if (v>0)
-				field.military_influence+=v*v*mil->get_capacity();
+				field->military_influence+=v*v*mil->get_capacity();
 			}
 			
 			if (bld->get_building_type()==Building::PRODUCTIONSITE)
@@ -545,20 +636,58 @@ void Computer_Player::update_buildable_field (BuildableField& field)
 		}
 		
 		if (immovables[i].object->has_attribute(tree_attr))
-			field.trees_nearby++;
+			field->trees_nearby++;
 
 		if (immovables[i].object->has_attribute(stone_attr))
-			field.stones_nearby++;
+			field->stones_nearby++;
 	}
 }
 
-void Computer_Player::consider_productionsite_influence (BuildableField& field, const Coords& coord, const BuildingObserver& bo)
+void Computer_Player::update_mineable_field (MineableField* field)
+{
+	// collect information about resources in the area
+	std::vector<ImmovableFound> immovables;
+
+	map->find_immovables (field->coords, 6, &immovables);
+	
+	field->reachable=false;
+	field->preferred=false;
+	field->mines_nearby=true;
+	
+	FCoords fse;
+	map->get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
+	
+	BaseImmovable* imm=fse.field->get_immovable();
+	if (imm!=0) {
+	    if (imm->get_type()==BaseImmovable::FLAG)
+		field->preferred=true;
+		
+	    if (imm->get_type()==BaseImmovable::ROAD && (fse.field->get_caps() & BUILDCAPS_FLAG))
+		field->preferred=true;
+	}
+	
+	for (unsigned int i=0;i<immovables.size();i++) {
+		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
+			field->reachable=true;
+
+		if (immovables[i].object->get_type()==BaseImmovable::BUILDING &&
+		    (player->get_buildcaps(immovables[i].coords)&BUILDCAPS_MINE)!=0) {
+			Building* bld=static_cast<Building*>(immovables[i].object);
+			
+			if (bld->get_building_type()==Building::CONSTRUCTIONSITE ||
+			    bld->get_building_type()==Building::PRODUCTIONSITE)
+				field->mines_nearby++;
+		}
+	}
+}
+
+void Computer_Player::consider_productionsite_influence (BuildableField* field, const Coords& coord, const BuildingObserver& bo)
 {
 	if (bo.need_trees)
-		field.tree_consumers_nearby++;
+		field->tree_consumers_nearby++;
 
 	if (bo.need_stones)
-		field.stone_consumers_nearby++;
+		field->stone_consumers_nearby++;
 }
 
 Computer_Player::EconomyObserver* Computer_Player::get_economy_observer (Economy* economy)

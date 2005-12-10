@@ -29,6 +29,7 @@ class PlayerImmovable;
 class Tribe_Descr;
 class Road;
 class ProductionSite;
+class World;
 
 class Computer_Player {
 	public:
@@ -56,7 +57,9 @@ class Computer_Player {
 		bool connect_flag_to_another_economy (Flag*);
 		bool improve_roads (Flag*);
 		
-		struct BuildableField:FCoords {
+		struct BuildableField {
+			FCoords			coords;
+			
 			long			next_update_due;
 			
 			bool			reachable;
@@ -72,8 +75,9 @@ class Computer_Player {
 			
 			short			military_influence;
 
-			BuildableField (const FCoords& fc):FCoords (fc)
+			BuildableField (const FCoords& fc)
 			{
+			    coords=fc;
 			    next_update_due=0;
 			    reachable=false;
 			    preferred=false;
@@ -83,8 +87,21 @@ class Computer_Player {
 			}
 		};
 		
-		struct MineableField:FCoords {
-			MineableField (const FCoords& fc):FCoords (fc) {}
+		struct MineableField {
+			FCoords		coords;
+
+			long		next_update_due;
+			
+			bool		reachable;
+			bool		preferred;
+			
+			int		mines_nearby;
+			
+			MineableField (const FCoords& fc)
+			{
+			    coords=fc;
+			    next_update_due=0;
+			}
 		};
 		
 		struct EconomyObserver {
@@ -97,7 +114,8 @@ class Computer_Player {
 		struct BuildingObserver {
 			const char*		name;
 			int			id;
-			Building_Descr*		desc;
+			const Building_Descr*	desc;
+			const BuildingHints*	hints;
 
 			enum {
 				BORING,
@@ -135,6 +153,7 @@ class Computer_Player {
 		};
 		
 		Game*				game;
+		World*				world;
 		Map*				map;
 		
 		uchar				player_number;
@@ -145,8 +164,8 @@ class Computer_Player {
 		int				total_constructionsites;
 		
 		std::list<FCoords>		unusable_fields;
-		std::list<BuildableField>	buildable_fields;
-		std::list<MineableField>	mineable_fields;
+		std::list<BuildableField*>	buildable_fields;
+		std::list<MineableField*>	mineable_fields;
 		std::list<Flag*>		new_flags;
 		std::list<Road*>		roads;
 		std::list<EconomyObserver*>	economies;
@@ -160,8 +179,11 @@ class Computer_Player {
 		long				next_productionsite_check_due;
 		long				inhibit_road_building;
 		
-		void update_buildable_field (BuildableField&);
-		void consider_productionsite_influence (BuildableField&, const Coords&, const BuildingObserver&);
+		void late_initialization ();
+		
+		void update_buildable_field (BuildableField*);
+		void update_mineable_field (MineableField*);
+		void consider_productionsite_influence (BuildableField*, const Coords&, const BuildingObserver&);
 		void check_productionsite (ProductionSiteObserver&);
 		
 		BuildingObserver& get_building_observer(const char*);

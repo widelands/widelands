@@ -35,6 +35,7 @@ class UIWindow;
 struct EncodeData;
 
 class Building;
+class BuildingHints;
 
 /*
  * Common to all buildings!
@@ -81,6 +82,8 @@ public:
 	
    inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
 	Workarea_Info m_workarea_info, m_recursive_workarea_info;
+	
+	const BuildingHints* get_hints() const { return m_hints; }
 
 protected:
 	virtual Building* create_object() = 0;
@@ -99,8 +102,9 @@ private:
 	char*        m_buildicon_fname; // filename for this icon
 	int          m_size;            // size of the building
 	bool         m_mine;
-   std::vector<char*> m_enhances_to;     // building to enhance to or 0
-   bool         m_enhanced_building; // if it is one, it is bulldozable
+	std::vector<char*> m_enhances_to;     // building to enhance to or 0
+	bool         m_enhanced_building; // if it is one, it is bulldozable
+	BuildingHints*	m_hints;	// hints (knowledge) for computer players
 
 public:
 	static Building_Descr* create_from_dir(Tribe_Descr* tribe,
