@@ -1,7 +1,6 @@
 import os
 import sys
 import fnmatch
-import subprocess
 import SCons
 from SCons.Script.SConscript import SConsEnvironment
 
@@ -82,8 +81,7 @@ def CheckSDLConfig(context):
 
 def CheckSDLVersionAtLeast(context, major, minor, micro):
 	context.Message( 'Checking SDL version >=%s ... ' % (repr(major)+'.'+repr(minor)+'.'+repr(micro)))
-	#TODO: this check will always return true!
-	version=subprocess.Popen([env['sdlconfig'], "--version"], stdout=subprocess.PIPE).communicate()[0]
+	version=os.popen(env['sdlconfig']+" --version", "r").read()
 	maj=version.split('.')[0]
 	min=version.split('.')[1]
 	mic=version.split('.')[2]
@@ -144,6 +142,7 @@ if env['build']=='profile':
 if env['build']=='release':
 	OPTIMIZE=1
 	env.Append(CCFLAGS=' -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations')
+	env.Append(LINKFLAGS=[' -s'])
 
 if DEBUG:
 	env.Append(CCFLAGS=' -g -DDEBUG -fmessage-length=0')
@@ -183,6 +182,15 @@ else:
 
 opts.Save('build/scons-config.py',env)
 	
+############################################################################ Configure - Tools
+
+CTAGS=env.WhereIs('ctags')
+if CTAGS==None:
+	print 'Could not find exuberant ctags binary. \'scons tags\' will not work.'
+else:
+	print 'Exuberant ctags found: ', CTAGS
+	env['BUILDERS']['CTagsBuilder']=Builder(action=CTAGS+' --recurse=yes src/', prefix='', suffix='')
+	
 ############################################################################ Configure - Autodetection
 
 if not conf.CheckLibWithHeader('intl', header='locale.h', language='C', autoadd=1):
@@ -211,24 +219,24 @@ if not conf.CheckLibWithHeader('png', header='png.h', language='C', autoadd=1):
 	print 'Could not find the png library! Is it installed?'
 	Exit(1)
 
-if not conf.CheckLibWithHeader('SDL_image', header='SDL/SDL_image.h', language='C', autoadd=1):
+if not conf.CheckLibWithHeader('SDL_image', header='SDL_image.h', language='C', autoadd=1):
 	print 'Could not find the SDL_image library! Is it installed?'
 	Exit(1)
 
-if not conf.CheckLibWithHeader('SDL_ttf', header='SDL/SDL_ttf.h', language='C', autoadd=1):
+if not conf.CheckLibWithHeader('SDL_ttf', header='SDL_ttf.h', language='C', autoadd=1):
 	print 'Could not find the SDL_ttf library! Is it installed?'
 	Exit(1)
 
-if not conf.CheckLibWithHeader('SDL_net', header='SDL/SDL_net.h', language='C', autoadd=1):
+if not conf.CheckLibWithHeader('SDL_net', header='SDL_net.h', language='C', autoadd=1):
 	print 'Could not find the SDL_net library! Is it installed?'
 	Exit(1)
 
-if not conf.CheckLibWithHeader('SDL_mixer', header='SDL/SDL_mixer.h', language='C', autoadd=1):
+if not conf.CheckLibWithHeader('SDL_mixer', header='SDL_mixer.h', language='C', autoadd=1):
 	print 'Could not find the SDL_mixer library! Is it installed?'
 	Exit(1)
 
-if not conf.TryLink(""" #include <SDL/SDL.h>
-			#include <SDL/SDL_mixer.h>
+if not conf.TryLink(""" #include <SDL.h>
+			#include <SDL_mixer.h>
 			main(){
 				Mix_LoadMUS("foo.ogg");
 			}
@@ -259,11 +267,10 @@ SConscript('src/SConscript', build_dir='#'+TARGETDIR, duplicate=0)
 
 env.Alias("copythebinary", Command('thephonyfile1', '', 'cp '+TARGETDIR+'/widelands .'))
 env.Depends('copythebinary', TARGETDIR+'/widelands')
-
-env.Alias("tags", Command('thephonyfile2', '', 'ctags --recurse=yes src/'))
-
-Default('tags')
 Default('copythebinary')
+
+env.Alias("tags", env.CTagsBuilder(target='thephonyfile2', source='') )
+Default('tags')
 
 ############################################################################ Install and Distribute
 
