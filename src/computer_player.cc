@@ -32,7 +32,7 @@
 #include "computer_player.h"
 #include "computer_player_hints.h"
 
-#define FIELD_UPDATE_INTERVAL	2000
+#define FIELD_UPDATE_INTERVAL	1000
 
 class CheckStepRoadAI : public CheckStep {
 public:
@@ -146,6 +146,7 @@ void Computer_Player::late_initialization ()
 	
 	total_constructionsites=0;
 	next_construction_due=0;
+	next_road_due=0;
 	next_productionsite_check_due=0;
 	inhibit_road_building=0;
 }
@@ -316,8 +317,14 @@ void Computer_Player::think ()
 		
 		i++;
 	}
+	
+	if (next_road_due<=game->get_gametime() && inhibit_road_building<=game->get_gametime()) {
+	    next_road_due=game->get_gametime() + 1000;
+	    
+	    construct_roads ();
+	}
 		
-	if (!economies.empty() && inhibit_road_building<=game->get_gametime()) {
+/*	if (!economies.empty() && inhibit_road_building<=game->get_gametime()) {
 		EconomyObserver* eco=economies.front();
 		
 		bool finish=false;
@@ -339,7 +346,7 @@ void Computer_Player::think ()
 		
 		if (finish)
 		    return;
-	}
+	}*/
 	
 	// force a split on roads that are extremely long
 	// note that having too many flags causes a loss of building capabilities
@@ -424,6 +431,10 @@ bool Computer_Player::construct_building ()
 
 			    if (bf->avoid_military)
 				prio=prio/3 - 6;
+			    
+			    prio-=spots_avail[BUILDCAPS_BIG]/2;
+			    prio-=spots_avail[BUILDCAPS_MEDIUM]/4;
+			    prio-=spots_avail[BUILDCAPS_SMALL]/8;
 		    }
 
 		    if (j->type==BuildingObserver::PRODUCTIONSITE) {
@@ -437,15 +448,18 @@ bool Computer_Player::construct_building ()
 				    prio*=2;
 
 			    if (!j->need_trees && !j->need_stones) {
+				if (j->cnt_built+j->cnt_under_construction==0)
+				    prio+=2;
+				    
 				for (unsigned int k=0; k<j->inputs.size(); k++) {
-				    prio+=6*wares[j->inputs[k]].producers;
+				    prio+=8*wares[j->inputs[k]].producers;
 				    prio-=4*wares[j->inputs[k]].consumers;
 				}
 
 				for (unsigned int k=0; k<j->outputs.size(); k++) {
-				    prio-=6*wares[j->outputs[k]].producers;
-				    prio+=4*wares[j->outputs[k]].consumers;
-				    prio+=2*wares[j->outputs[k]].preciousness;
+				    prio-=12*wares[j->outputs[k]].producers;
+				    prio+=8*wares[j->outputs[k]].consumers;
+				    prio+=4*wares[j->outputs[k]].preciousness;
 				    
 				    if (j->cnt_built+j->cnt_under_construction==0 &&
 					wares[j->outputs[k]].consumers>0)
@@ -485,20 +499,24 @@ bool Computer_Player::construct_building ()
 		
 		for (std::list<MineableField*>::iterator j=mineable_fields.begin(); j!=mineable_fields.end(); j++) {
 			MineableField* mf=*j;
-			int prio=0;
+			int prio=-1;
 			
 			if (i->hints->get_need_map_resource()!=0) {
-			    int res=world->get_resource(i->hints->get_need_map_resource());
+				int res=world->get_resource(i->hints->get_need_map_resource());
 			    
-			    if (mf->coords.field->get_resources()!=res)
-				continue;
+				if (mf->coords.field->get_resources()!=res)
+					continue;
 			    
-			    prio+=mf->coords.field->get_resources_amount()*3;
+				prio+=mf->coords.field->get_resources_amount();
 			}
 			
-			prio-=mf->mines_nearby * mf->mines_nearby;
+			WareObserver& output=wares[i->outputs[0]];
+			if (output.consumers>0)
+				prio*=2;
+			
+			prio-=2 * mf->mines_nearby * mf->mines_nearby;
 			prio-=i->cnt_built*3;
-			prio-=i->cnt_under_construction*5;
+			prio-=i->cnt_under_construction*8;
 			
 			if (prio>proposed_priority) {
 				proposed_building=i->id;
@@ -998,4 +1016,155 @@ bool CheckStepRoadAI::reachabledest(Map* map, FCoords dest) const
 	return true;
 }
 
+struct WalkableSpot {
+	Coords	coords;
+	bool	hasflag;
+
+	int	cost;
+	void*	eco;
+	
+	short	from;
+	short	neighbours[6];
+};
+
+void Computer_Player::construct_roads ()
+{
+	std::vector<WalkableSpot> spots;
+	std::queue<int> queue;
+	
+	for (std::list<EconomyObserver*>::iterator i=economies.begin(); i!=economies.end(); i++)
+	    for (std::list<Flag*>::iterator j=(*i)->flags.begin(); j!=(*i)->flags.end(); j++) {
+		queue.push (spots.size());
+		
+		spots.push_back(WalkableSpot());
+		spots.back().coords=(*j)->get_position();
+		spots.back().hasflag=true;
+		spots.back().cost=0;
+		spots.back().eco=(*i)->economy;
+		spots.back().from=-1;
+	    }
+	
+	for (std::list<BuildableField*>::iterator i=buildable_fields.begin(); i!=buildable_fields.end(); i++) {
+		spots.push_back(WalkableSpot());
+		spots.back().coords=(*i)->coords;
+		spots.back().hasflag=false;
+		spots.back().cost=-1;
+		spots.back().eco=0;
+		spots.back().from=-1;
+	}
+	
+	for (std::list<FCoords>::iterator i=unusable_fields.begin(); i!=unusable_fields.end(); i++) {
+		if ((player->get_buildcaps(*i)&MOVECAPS_WALK)==0)
+		    continue;
+
+		BaseImmovable *imm=map->get_immovable(*i);
+		if (imm && imm->get_type()==Map_Object::ROAD) {
+		    if ((player->get_buildcaps(*i)&BUILDCAPS_FLAG)==0)
+			continue;
+
+		    queue.push (spots.size());
+		    
+		    spots.push_back(WalkableSpot());
+		    spots.back().coords=*i;
+		    spots.back().hasflag=false;
+		    spots.back().cost=0;
+		    spots.back().eco=((Road*) imm)->get_flag(Road::FlagStart)->get_economy();
+		    spots.back().from=-1;
+		    
+		    continue;
+		}
+		
+		if (imm && imm->get_size()>=BaseImmovable::SMALL)
+		    continue;
+		
+		spots.push_back(WalkableSpot());
+		spots.back().coords=*i;
+		spots.back().hasflag=false;
+		spots.back().cost=-1;
+		spots.back().eco=0;
+		spots.back().from=-1;
+	}
+	
+	int i,j,k;
+	for (i=0;i<(int) spots.size();i++)
+	    for (j=0;j<6;j++) {
+		Coords nc;
+		
+		map->get_neighbour (spots[i].coords, j+1, &nc);
+		
+		for (k=0;k<(int) spots.size();k++)
+		    if (spots[k].coords==nc)
+			break;
+		
+		spots[i].neighbours[j]=(k<(int) spots.size()) ? k : -1;
+	    }
+	
+	log ("Computer_Player(%d): %d spots for road building\n", player_number, spots.size());
+	
+	while (!queue.empty()) {
+	    WalkableSpot &from=spots[queue.front()];
+	    queue.pop();
+	    
+	    for (i=0;i<6;i++)
+		if (from.neighbours[i]>=0) {
+		    WalkableSpot &to=spots[from.neighbours[i]];
+		    
+		    if (to.cost<0) {
+    			to.cost=from.cost+1;
+			to.eco=from.eco;
+			to.from=&from - &spots.front();
+			
+			queue.push (&to - &spots.front());
+			continue;
+		    }
+		    
+		    if (from.eco!=to.eco && to.cost>0) {
+			std::list<Coords> pc;
+			bool hasflag;
+			
+			pc.push_back (to.coords);
+			i=to.from;
+			hasflag=to.hasflag;
+			while (i>=0) {
+			    pc.push_back (spots[i].coords);
+			    hasflag=spots[i].hasflag;
+			    i=spots[i].from;
+			}
+			
+			if (!hasflag)
+			    game->send_player_build_flag (player_number, pc.back());
+			
+			pc.push_front (from.coords);
+			i=from.from;
+			hasflag=from.hasflag;
+			while (i>=0) {
+			    pc.push_front (spots[i].coords);
+			    hasflag=spots[i].hasflag;
+			    i=spots[i].from;
+			}
+			
+			if (!hasflag)
+			    game->send_player_build_flag (player_number, pc.front());
+			    
+			log ("Computer_Player(%d): New road has length %d\n", player_number, pc.size());
+			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++)
+			    log ("Computer_Player: (%d,%d)\n", c->x, c->y);
+			
+	    		Path* path=new Path(map, pc.front());
+			pc.pop_front();
+			
+			for (std::list<Coords>::iterator c=pc.begin(); c!=pc.end(); c++) {
+			    int n=map->is_neighbour(path->get_end(), *c);
+			    assert (n>=1 && n<=6);
+			    
+			    path->append (n);
+			    assert (path->get_end()==*c);
+			}
+
+			game->send_player_build_road (player_number, path);
+			return;
+		    }
+		}
+	}
+}
 

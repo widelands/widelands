@@ -53,6 +53,7 @@ class Computer_Player {
 		void lose_building (Building*);
 		
 		bool construct_building ();
+		void construct_roads ();
 		
 		bool connect_flag_to_another_economy (Flag*);
 		bool improve_roads (Flag*);
@@ -175,6 +176,7 @@ class Computer_Player {
 		
 		EconomyObserver* get_economy_observer (Economy*);
 		
+		long				next_road_due;
 		long				next_construction_due;
 		long				next_productionsite_check_due;
 		long				inhibit_road_building;
