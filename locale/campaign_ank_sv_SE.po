@@ -28,6 +28,11 @@ msgid ""
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
 
+#: ../campaigns\t01.wmf\event:15 ../campaigns\t01.wmf\event:32
+#: ../campaigns\t01.wmf\event:49 ../campaigns\t01.wmf\event:66
+msgid "The Story begins..."
+msgstr ""
+
 #: ../campaigns\t01.wmf\event:22 ../campaigns\t01.wmf\event:39
 #: ../campaigns\t01.wmf\event:56 ../campaigns\t01.wmf\event:73
 #: ../campaigns\t01.wmf\event:465 ../campaigns\t01.wmf\event:484
@@ -66,8 +71,23 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:456
 msgid ""
-"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
+" \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my council through these darkened days.\" "
+msgstr ""
+
+#: ../campaigns\t01.wmf\event:458 ../campaigns\t01.wmf\event:477
+#: ../campaigns\t01.wmf\event:496 ../campaigns\t01.wmf\event:516
+#: ../campaigns\t01.wmf\event:535 ../campaigns\t01.wmf\event:555
+#: ../campaigns\t01.wmf\event:574 ../campaigns\t02.wmf\event:498
+#: ../campaigns\t02.wmf\event:510 ../campaigns\t02.wmf\event:522
+#: ../campaigns\t02.wmf\event:534 ../campaigns\t02.wmf\event:546
+#: ../campaigns\t02.wmf\event:559 ../campaigns\t02.wmf\event:571
+#: ../campaigns\t02.wmf\event:584 ../campaigns\t02.wmf\event:597
+#: ../campaigns\t02.wmf\event:622 ../campaigns\t02.wmf\event:635
+#: ../campaigns\t02.wmf\event:661 ../campaigns\t02.wmf\event:674
+#: ../campaigns\t02.wmf\event:688 ../campaigns\t02.wmf\event:701
+#: ../campaigns\t02.wmf\event:714 ../campaigns\t02.wmf\event:727
+msgid "Advisor"
 msgstr ""
 
 #: ../campaigns\t01.wmf\event:473
@@ -76,9 +96,9 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:475
 msgid ""
-"None but the gods know how long we have to remain hidden here. The warriors "
-"hope we may march back gloriously any day now, but I strongly doubt that "
-"will happen soon. And the days are already getting shorter and colder..."
+" \"None but the gods know how long we have to remain hidden here. The "
+"warriors hope we may march back gloriously any day now, but I strongly doubt "
+"that will happen soon. And the days are already getting shorter and colder..."
 "<br>We should prepare, in case we have to face the winter in these harsh "
 "lands. I believe to the east of our campside are a few places where we could "
 "raise some lumberjacks' huts.\"<br><br>--NEW OBJECTIVES--<br>- press SPACE "
@@ -94,7 +114,7 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:494
 msgid ""
-"Obviously, it would be too draining for our people to walk all the way to "
+" \"Obviously, it would be too draining for our people to walk all the way to "
 "the Lumberjack through the wilderness. We will have to make a path between "
 "our hall and the Lumberjack. It's not a hard guess that the men would "
 "appreciate a possibly short and even way - the wood surely will be heavy "
@@ -118,15 +138,15 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:514
 msgid ""
-"There is an old saying: 'A burden divided is easier to endure.' A crossroad "
-"on the way between our site and the lumberjack would ease the work of our "
-"carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in the mid "
-"of the way you just built. By clicking it and, in the consecutively opening "
-"menu, clicking the flag-button, you place a flag there, thus splitting the "
-"work of carrying the wood between two carriers. When much wares are being "
-"transported between two points, additional flags in between make them get "
-"faster to their destination, thus improving your infrastructure. Place a "
-"flag in the mid of the road."
+" \"There is an old saying: 'A burden divided is easier to endure.' A "
+"crossroad on the way between our site and the lumberjack would ease the work "
+"of our carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in "
+"the mid of the way you just built. By clicking it and, in the consecutively "
+"opening menu, clicking the flag-button, you place a flag there, thus "
+"splitting the work of carrying the wood between two carriers. When much "
+"wares are being transported between two points, additional flags in between "
+"make them get faster to their destination, thus improving your "
+"infrastructure. Place a flag in the mid of the road."
 msgstr ""
 
 #: ../campaigns\t01.wmf\event:531
@@ -135,10 +155,10 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:533
 msgid ""
-"The northern winds tell us, the coming winter will be a long and cruel one. "
-"One Lumberjack will not be enough to still the needs of our people. More "
-"trees await our axes south of our new crossroads - let us raise a second "
-"Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack "
+" \"The northern winds tell us, the coming winter will be a long and cruel "
+"one. One Lumberjack will not be enough to still the needs of our people. "
+"More trees await our axes south of our new crossroads - let us raise a "
+"second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack "
 "directly south of the flag you are about to place on the road. Connect said "
 "flag with the new Lumberjack afterwards. Note that, instead of building a "
 "road step by step, you may also directly click at the destination to build "
@@ -155,13 +175,13 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:553
 msgid ""
-"Of course, if we intended to build a bigger settlement much more Lumberjacks "
-"would be advisable, but this should do for now.<br>But never forget - these "
-"forests are our legacy, entrusted to us by our ancestors. We must always "
-"respect and nourish them. What we take, we must give again.<br>So, in order "
-"to replace the trees we chop down, we should build a Ranger's hut, "
-"preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--<br>- Build a "
-"Ranger's Hut to the east of the first Lumberjack."
+" \"Of course, if we intended to build a bigger settlement much more "
+"Lumberjacks would be advisable, but this should do for now.<br>But never "
+"forget - these forests are our legacy, entrusted to us by our ancestors. We "
+"must always respect and nourish them. What we take, we must give again."
+"<br>So, in order to replace the trees we chop down, we should build a "
+"Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--"
+"<br>- Build a Ranger's Hut to the east of the first Lumberjack."
 msgstr ""
 
 #: ../campaigns\t01.wmf\event:570
@@ -170,7 +190,7 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:572
 msgid ""
-"I am well aware, chieftain, that neither you nor your warriors have the "
+" \"I am well aware, chieftain, that neither you nor your warriors have the "
 "desire to stay in this forsaken place for long. But even so, our war to "
 "conquer back our home might take a long time and it would seem wise to make "
 "preparations. I would advise that we store stones for the future - who knows "
@@ -191,6 +211,10 @@ msgid ""
 "reminder why we must return in the end."
 msgstr ""
 
+#: ../campaigns\t01.wmf\event:612
+msgid "In the night..."
+msgstr ""
+
 #: ../campaigns\t01.wmf\event:629
 msgid ""
 "Once again I went up to my father's tomb, in a sacred grove at the feet of "
@@ -198,6 +222,10 @@ msgid ""
 "the hours pass nor the cold rain pouring down from a darkened sky..."
 "<br>Somehow it felt like farewell. For the first time I wondered what the "
 "future might hold for me..."
+msgstr ""
+
+#: ../campaigns\t01.wmf\event:631
+msgid "At the grave"
 msgstr ""
 
 #: ../campaigns\t01.wmf\event:648
@@ -210,12 +238,20 @@ msgid ""
 "return would cause both on our and the other side..."
 msgstr ""
 
+#: ../campaigns\t01.wmf\event:650
+msgid "The other day..."
+msgstr ""
+
 #: ../campaigns\t01.wmf\event:667
 msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror when he told us of the atrocities "
 "taking place in Al'thunran.<br>I hereby renew my oath - I will stop this "
 "madness at any cost!"
+msgstr ""
+
+#: ../campaigns\t01.wmf\event:669
+msgid "Another evening..."
 msgstr ""
 
 #: ../campaigns\t01.wmf\event:712
@@ -227,6 +263,10 @@ msgid ""
 "Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may "
 "continue if you wish. Otherwise, move on to the next mission."
+msgstr ""
+
+#: ../campaigns\t01.wmf\event:716
+msgid "Mission Complete"
 msgstr ""
 
 #: ../campaigns\t01.wmf\objective:8
@@ -307,18 +347,6 @@ msgid ""
 "Well, I see the wisdom in doing so, yet my heart is yearning for a glorious "
 "return to Al'thunran. Too long have we waited while our brethren fought on "
 "the battlefield, and our axes and swords have turned rusty over time.\"</p>"
-msgstr ""
-
-#: ../campaigns\t02.wmf\event:498 ../campaigns\t02.wmf\event:510
-#: ../campaigns\t02.wmf\event:522 ../campaigns\t02.wmf\event:534
-#: ../campaigns\t02.wmf\event:546 ../campaigns\t02.wmf\event:559
-#: ../campaigns\t02.wmf\event:571 ../campaigns\t02.wmf\event:584
-#: ../campaigns\t02.wmf\event:597 ../campaigns\t02.wmf\event:622
-#: ../campaigns\t02.wmf\event:635 ../campaigns\t02.wmf\event:661
-#: ../campaigns\t02.wmf\event:674 ../campaigns\t02.wmf\event:688
-#: ../campaigns\t02.wmf\event:701 ../campaigns\t02.wmf\event:714
-#: ../campaigns\t02.wmf\event:727
-msgid "Advisor"
 msgstr ""
 
 #: ../campaigns\t02.wmf\event:509

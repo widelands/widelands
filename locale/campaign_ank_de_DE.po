@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-12-05 21:36+0100\n"
+"PO-Revision-Date: 2005-12-11 19:24+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,11 @@ msgstr ""
 "alten und dunklen Wäldern. Meine Krieger jagen des Tags und liegen des "
 "Nachts wach - sie hören die Geräusche der blutigen Schlacht, die von weit "
 "weg zwischen den alten Bäumen heraus hallen."
+
+#: ../campaigns\t01.wmf\event:15 ../campaigns\t01.wmf\event:32
+#: ../campaigns\t01.wmf\event:49 ../campaigns\t01.wmf\event:66
+msgid "The Story begins..."
+msgstr "Der Anfang der Geschichte..."
 
 #: ../campaigns\t01.wmf\event:22 ../campaigns\t01.wmf\event:39
 #: ../campaigns\t01.wmf\event:56 ../campaigns\t01.wmf\event:73
@@ -84,16 +89,30 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:454
 msgid "An old man approaches you..."
-msgstr "Ein alter Mann erscheint bei dir..."
+msgstr "Ein alter Mann erscheint..."
 
 #: ../campaigns\t01.wmf\event:456
-#, fuzzy
 msgid ""
-"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
+" \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my council through these darkened days.\" "
 msgstr ""
-"\"Ehre dir! Ich bin der alte und weise Khantrukh. Erlaube mir dir in diesen "
+" \"Ehre dir! Ich bin der alte und weise Khantrukh. Erlaube mir dir in diesen "
 "dunklen Tagen meine Hilfe anzubieten.\" "
+
+#: ../campaigns\t01.wmf\event:458 ../campaigns\t01.wmf\event:477
+#: ../campaigns\t01.wmf\event:496 ../campaigns\t01.wmf\event:516
+#: ../campaigns\t01.wmf\event:535 ../campaigns\t01.wmf\event:555
+#: ../campaigns\t01.wmf\event:574 ../campaigns\t02.wmf\event:498
+#: ../campaigns\t02.wmf\event:510 ../campaigns\t02.wmf\event:522
+#: ../campaigns\t02.wmf\event:534 ../campaigns\t02.wmf\event:546
+#: ../campaigns\t02.wmf\event:559 ../campaigns\t02.wmf\event:571
+#: ../campaigns\t02.wmf\event:584 ../campaigns\t02.wmf\event:597
+#: ../campaigns\t02.wmf\event:622 ../campaigns\t02.wmf\event:635
+#: ../campaigns\t02.wmf\event:661 ../campaigns\t02.wmf\event:674
+#: ../campaigns\t02.wmf\event:688 ../campaigns\t02.wmf\event:701
+#: ../campaigns\t02.wmf\event:714 ../campaigns\t02.wmf\event:727
+msgid "Advisor"
+msgstr "Ein Besuch"
 
 #: ../campaigns\t01.wmf\event:473
 msgid "Khantrukh continues..."
@@ -101,9 +120,9 @@ msgstr "Khantrukh fährt fort..."
 
 #: ../campaigns\t01.wmf\event:475
 msgid ""
-"None but the gods know how long we have to remain hidden here. The warriors "
-"hope we may march back gloriously any day now, but I strongly doubt that "
-"will happen soon. And the days are already getting shorter and colder..."
+" \"None but the gods know how long we have to remain hidden here. The "
+"warriors hope we may march back gloriously any day now, but I strongly doubt "
+"that will happen soon. And the days are already getting shorter and colder..."
 "<br>We should prepare, in case we have to face the winter in these harsh "
 "lands. I believe to the east of our campside are a few places where we could "
 "raise some lumberjacks' huts.\"<br><br>--NEW OBJECTIVES--<br>- press SPACE "
@@ -112,17 +131,17 @@ msgid ""
 "directly right of your headquarters by clicking at it and selecting a "
 "Lumberjack."
 msgstr ""
-"Niemand außer den Göttern weiß wie lange wir hier schon versteckt sind. Die "
-"Krieger hoffen, dass wir irgendwann gloreich heimwärts marschieren, doch ich "
-"bin absolut sicher, dass dies nicht in nächster Zeit geschehen wird. Doch "
-"die Tage werden längst schon kürzer und kälter...<br>Wir sollten uns besser "
-"schnell auf den Winter in diesen Landen vorbereiten. Ich denke im Osten "
-"unsres Quartiers gibt es einige Plätze auf denen wir einige Holzfällerhüten "
-"aufbauen könnten.\"<br><br>--NEUES ZIEL--<br>- drücke SPACE um zu sehen wo "
-"du bauen kannst. Die roten Punkte zeigen dir, wo du ein kleine Gebäude, wie "
-"zum Beispiel einen Holzfäller, bauen kannst. <br>-baue einen Holzfäller "
-"indem du auf den roten Punkt rechts deines Hauptquartiers klickst und den "
-"Holzfäller auswählst."
+" \"Niemand außer den Göttern weiß wie lange wir hier schon versteckt sind. "
+"Die Krieger hoffen, dass wir irgendwann gloreich heimwärts marschieren, doch "
+"ich bin absolut sicher, dass dies nicht in nächster Zeit geschehen wird. "
+"Doch die Tage werden längst schon kürzer und kälter...<br>Wir sollten uns "
+"besser schnell auf den Winter in diesen Landen vorbereiten. Ich denke im "
+"Osten unsres Quartiers gibt es einige Plätze auf denen wir einige "
+"Holzfällerhüten aufbauen könnten.\"<br><br>--NEUES ZIEL--<br>- drücke SPACE "
+"um zu sehen wo du bauen kannst. Die roten Punkte zeigen dir, wo du ein "
+"kleine Gebäude, wie zum Beispiel einen Holzfäller, bauen kannst. <br>-baue "
+"einen Holzfäller indem du auf den roten Punkt rechts deines Hauptquartiers "
+"klickst und den Holzfäller auswählst."
 
 #: ../campaigns\t01.wmf\event:492
 msgid "The elder remarks..."
@@ -130,7 +149,7 @@ msgstr "Der alte merkt an..."
 
 #: ../campaigns\t01.wmf\event:494
 msgid ""
-"Obviously, it would be too draining for our people to walk all the way to "
+" \"Obviously, it would be too draining for our people to walk all the way to "
 "the Lumberjack through the wilderness. We will have to make a path between "
 "our hall and the Lumberjack. It's not a hard guess that the men would "
 "appreciate a possibly short and even way - the wood surely will be heavy "
@@ -143,24 +162,24 @@ msgid ""
 "then. Build a road between the flags in front of the two buildings. Try to "
 "keep it short and even."
 msgstr ""
-"Es scheint offensichtlich, dass es zu schwer für unsere Leute ist, wenn sie "
-"die ganze Strecke bis zum Holzfäller durch die Wildnis laufen müssen. Wir "
-"sollten einen Pfad zwischen unsrem Hauptquartier und dem Holzfäller anlegen. "
-"Es scheint logisch, dass die Männer einen möglichst kurzen und ebenen Weg "
-"bevorzugen würden. Das Holz wird schon so schwer genug sein.\"<br><br>--"
-"NEUES ZIEL--<br>- Baue eine Straße zwischen deinem Hauptquartier und dem "
-"Holzfäller. Dies kannst du machen, indem du auf die Flagge irgendeines "
-"Gebäudes klickst und den Straßenknopf drückst. Um die Flagge sollten "
-"daraufhin Symbole erscheinen, die aufzeigen wie steil der Weg in diese "
-"Richtung wäre. Je steiler der Weg ist, desto schwerer wird es für deine "
-"Leute auf ihm zu laufen. Wenn du nun eines der Symbole anklickst baust du "
-"einen Teil der Straße und musst dann die nächste Richtung angeben. Baue eine "
-"Straße zwischen den beiden Flagge der beiden Gebäude und versuch sie "
+" \"Es scheint offensichtlich, dass es zu schwer für unsere Leute ist, wenn "
+"sie die ganze Strecke bis zum Holzfäller durch die Wildnis laufen müssen. "
+"Wir sollten einen Pfad zwischen unsrem Hauptquartier und dem Holzfäller "
+"anlegen. Es scheint logisch, dass die Männer einen möglichst kurzen und "
+"ebenen Weg bevorzugen würden. Das Holz wird schon so schwer genug sein."
+"\"<br><br>--NEUES ZIEL--<br>- Baue eine Straße zwischen deinem Hauptquartier "
+"und dem Holzfäller. Dies kannst du machen, indem du auf die Flagge "
+"irgendeines Gebäudes klickst und den Straßenknopf drückst. Um die Flagge "
+"sollten daraufhin Symbole erscheinen, die aufzeigen wie steil der Weg in "
+"diese Richtung wäre. Je steiler der Weg ist, desto schwerer wird es für "
+"deine Leute auf ihm zu laufen. Wenn du nun eines der Symbole anklickst baust "
+"du einen Teil der Straße und musst dann die nächste Richtung angeben. Baue "
+"eine Straße zwischen den beiden Flagge der beiden Gebäude und versuch sie "
 "möglichst eben zu halten."
 
 #: ../campaigns\t01.wmf\event:503
 msgid "Order3"
-msgstr "Auftrag 3"
+msgstr "Auftrag"
 
 #: ../campaigns\t01.wmf\event:512
 msgid "Khantrukh speaks..."
@@ -168,42 +187,43 @@ msgstr "Khantrukh sagt..."
 
 #: ../campaigns\t01.wmf\event:514
 msgid ""
-"There is an old saying: 'A burden divided is easier to endure.' A crossroad "
-"on the way between our site and the lumberjack would ease the work of our "
-"carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in the mid "
-"of the way you just built. By clicking it and, in the consecutively opening "
-"menu, clicking the flag-button, you place a flag there, thus splitting the "
-"work of carrying the wood between two carriers. When much wares are being "
-"transported between two points, additional flags in between make them get "
-"faster to their destination, thus improving your infrastructure. Place a "
-"flag in the mid of the road."
+" \"There is an old saying: 'A burden divided is easier to endure.' A "
+"crossroad on the way between our site and the lumberjack would ease the work "
+"of our carriers.\"<br><br>--NEW OBJECTIVES--<br>- There is a flag symbol in "
+"the mid of the way you just built. By clicking it and, in the consecutively "
+"opening menu, clicking the flag-button, you place a flag there, thus "
+"splitting the work of carrying the wood between two carriers. When much "
+"wares are being transported between two points, additional flags in between "
+"make them get faster to their destination, thus improving your "
+"infrastructure. Place a flag in the mid of the road."
 msgstr ""
-"Es gibt ein altes Sprichwort, dass besagt: 'Eine geteilte Last ist einfacher "
-"auszuhalten.' Ein Trägerwechsel zwischen dem Holzfäller und unserem Lager "
-"würde die Arbeit unserer Träger vereinfachen.\"<br><br>--NEUES ZIEL--<br>- "
-"Es gibt ein Flaggensymbol in der Mitte des Weges, den du eben gebaut hast. "
-"Wenn du es anklickst und im aufspringenden Menü das Flaggensymbol wählst, "
-"setzt du dort eine Flagge. Das teilt die Arbeit des Holztragens auf zwei "
-"Träger auf. Wenn viele Waren zwischen zwei Punkten transportiert werden, "
-"macht das hinzufügen von Flaggen Sinn, da der Transport so viel schneller "
-"voran geht. Setzte eine Flagge auf die Mitte der Straße"
+" \"Es gibt ein altes Sprichwort, dass besagt: 'Eine geteilte Last ist "
+"einfacher auszuhalten.' Ein Trägerwechsel zwischen dem Holzfäller und "
+"unserem Lager würde die Arbeit unserer Träger vereinfachen.\"<br><br>--NEUES "
+"ZIEL--<br>- Es gibt ein Flaggensymbol in der Mitte des Weges, den du eben "
+"gebaut hast. Wenn du es anklickst und im aufspringenden Menü das "
+"Flaggensymbol wählst, setzt du dort eine Flagge. Das teilt die Arbeit des "
+"Holztragens auf zwei Träger auf. Wenn viele Waren zwischen zwei Punkten "
+"transportiert werden, macht das hinzufügen von Flaggen Sinn, da der "
+"Transport so viel schneller voran geht. Setzte eine Flagge auf die Mitte der "
+"Straße"
 
 #: ../campaigns\t01.wmf\event:531
 msgid "The old man looks to the sky..."
-msgstr "Der alte Mann guckt zum Himmel..."
+msgstr "Khantrukh guckt zum Himmel..."
 
 #: ../campaigns\t01.wmf\event:533
 msgid ""
-"The northern winds tell us, the coming winter will be a long and cruel one. "
-"One Lumberjack will not be enough to still the needs of our people. More "
-"trees await our axes south of our new crossroads - let us raise a second "
-"Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack "
+" \"The northern winds tell us, the coming winter will be a long and cruel "
+"one. One Lumberjack will not be enough to still the needs of our people. "
+"More trees await our axes south of our new crossroads - let us raise a "
+"second Lumberjack there!\"<br><br>--NEW OBJECTIVES--<br>- Place a Lumberjack "
 "directly south of the flag you are about to place on the road. Connect said "
 "flag with the new Lumberjack afterwards. Note that, instead of building a "
 "road step by step, you may also directly click at the destination to build "
 "the entire road at once."
 msgstr ""
-"Die nördlichen Winde zeigen uns, dass der kommende Winter ein langer und "
+" \"Die nördlichen Winde zeigen uns, dass der kommende Winter ein langer und "
 "harter werden wird. Ein Holzfäller wird nicht genug sein um den Bedarf unser "
 "Leute zu decken. Südlich unsres neuen Straßenabschnitts warten noch so viele "
 "Bäume auf unsere Axthieb!\"<br><br>--NEUES ZIEL--<br>- Baue einen weiteren "
@@ -214,23 +234,23 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:542
 msgid "Order5"
-msgstr "Auftrag5"
+msgstr "Auftrag"
 
 #: ../campaigns\t01.wmf\event:551
 msgid "Khantrukh nods..."
-msgstr "Khantrukh deutet an..."
+msgstr "Khantrukh meint..."
 
 #: ../campaigns\t01.wmf\event:553
 msgid ""
-"Of course, if we intended to build a bigger settlement much more Lumberjacks "
-"would be advisable, but this should do for now.<br>But never forget - these "
-"forests are our legacy, entrusted to us by our ancestors. We must always "
-"respect and nourish them. What we take, we must give again.<br>So, in order "
-"to replace the trees we chop down, we should build a Ranger's hut, "
-"preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--<br>- Build a "
-"Ranger's Hut to the east of the first Lumberjack."
+" \"Of course, if we intended to build a bigger settlement much more "
+"Lumberjacks would be advisable, but this should do for now.<br>But never "
+"forget - these forests are our legacy, entrusted to us by our ancestors. We "
+"must always respect and nourish them. What we take, we must give again."
+"<br>So, in order to replace the trees we chop down, we should build a "
+"Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--"
+"<br>- Build a Ranger's Hut to the east of the first Lumberjack."
 msgstr ""
-"Natürlich sollten wir mehr Holzfäller bauen. Gerade dann, wenn wir "
+" \"Natürlich sollten wir mehr Holzfäller bauen. Gerade dann, wenn wir "
 "beabsichtigen eine größere Siedlung zu bauen, doch fürs erste sollten diese "
 "zwei reichen.<br>Viel wichtiger scheint mir zur Zeit,dass wir uns an unsre "
 "Wurzeln erinnern, denn diese Wälder wurden uns von unseren Urahnen "
@@ -245,7 +265,7 @@ msgstr "Der Alte sagt..."
 
 #: ../campaigns\t01.wmf\event:572
 msgid ""
-"I am well aware, chieftain, that neither you nor your warriors have the "
+" \"I am well aware, chieftain, that neither you nor your warriors have the "
 "desire to stay in this forsaken place for long. But even so, our war to "
 "conquer back our home might take a long time and it would seem wise to make "
 "preparations. I would advise that we store stones for the future - who knows "
@@ -253,9 +273,9 @@ msgid ""
 "of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW "
 "OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
 msgstr ""
-"Ich bin sicher, dass weder du noch deine Krieger den Wunsch haben lange an "
-"diesem üblen Ort zu verweilen. Doch auch unser Krieg um unsere Heimat zurück "
-"zu erobern, wird eine lange Zeit dauern und es scheint weise uns "
+" \"Ich bin sicher, dass weder du noch deine Krieger den Wunsch haben lange "
+"an diesem üblen Ort zu verweilen. Doch auch unser Krieg um unsere Heimat "
+"zurück zu erobern, wird eine lange Zeit dauern und es scheint weise uns "
 "vorzubereiten. Ich würde anweisen, dass wir bereits jetzt Steine für die "
 "Zukunft schlagen. Wer weiß schon genau, welche Festung wir schon bald bauen "
 "müssen? Und - wie ein Geschenk der Götter - gibt es tatsächlich große Felsen "
@@ -264,7 +284,7 @@ msgstr ""
 
 #: ../campaigns\t01.wmf\event:581
 msgid "Order7"
-msgstr "Auftrag 7"
+msgstr "Auftrag"
 
 #: ../campaigns\t01.wmf\event:610
 msgid ""
@@ -280,6 +300,10 @@ msgstr ""
 "<br>...Doch gleichzeitig auch, warum wir sobald wie möglich zurückkehren "
 "müssen."
 
+#: ../campaigns\t01.wmf\event:612
+msgid "In the night..."
+msgstr "In der Nacht..."
+
 #: ../campaigns\t01.wmf\event:629
 msgid ""
 "Once again I went up to my father's tomb, in a sacred grove at the feet of "
@@ -294,6 +318,10 @@ msgstr ""
 "rieselte...<br>Irgendwie fühlte es sich wie ein Abschied aus diesem Lande "
 "an. Es war das erste Mal, dass ich mich fragte, was wohl die Zukunft für "
 "mich bereit hält."
+
+#: ../campaigns\t01.wmf\event:631
+msgid "At the grave"
+msgstr "Am Grab"
 
 #: ../campaigns\t01.wmf\event:648
 msgid ""
@@ -312,6 +340,10 @@ msgstr ""
 "haben, doch Ich fürchte eine endlose Schlacht. Ein zu rascher Rückzug würde "
 "etliche Tote auf beiden Seiten bedeuten..."
 
+#: ../campaigns\t01.wmf\event:650
+msgid "The other day..."
+msgstr "Am nchsten Tag..."
+
 #: ../campaigns\t01.wmf\event:667
 msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
@@ -324,6 +356,10 @@ msgstr ""
 "erzählte was für dämonische Schandtaten in Al'thunran stattfinden."
 "<br>Hiermit erneuere ich mein Gelübde - Ich werde die Krankheit stoppen, was "
 "auch immer es kosten mag."
+
+#: ../campaigns\t01.wmf\event:669
+msgid "Another evening..."
+msgstr "Eines Abends..."
 
 #: ../campaigns\t01.wmf\event:712
 msgid "Victory!"
@@ -338,6 +374,10 @@ msgstr ""
 "Gut gemacht! Jetzt haben wir alles um sicher über den Winter zu kommen und "
 "können uns auf die zukünftigen Kämpfe vorbereiten.<br><br>SIEG!<br><br> "
 "Falls du willst kannst du fortfahren. Ansonsten beginne die nächste Mission."
+
+#: ../campaigns\t01.wmf\event:716
+msgid "Mission Complete"
+msgstr "Mission komplett"
 
 #: ../campaigns\t01.wmf\objective:8
 msgid ""
@@ -442,18 +482,6 @@ msgid ""
 "Well, I see the wisdom in doing so, yet my heart is yearning for a glorious "
 "return to Al'thunran. Too long have we waited while our brethren fought on "
 "the battlefield, and our axes and swords have turned rusty over time.\"</p>"
-msgstr ""
-
-#: ../campaigns\t02.wmf\event:498 ../campaigns\t02.wmf\event:510
-#: ../campaigns\t02.wmf\event:522 ../campaigns\t02.wmf\event:534
-#: ../campaigns\t02.wmf\event:546 ../campaigns\t02.wmf\event:559
-#: ../campaigns\t02.wmf\event:571 ../campaigns\t02.wmf\event:584
-#: ../campaigns\t02.wmf\event:597 ../campaigns\t02.wmf\event:622
-#: ../campaigns\t02.wmf\event:635 ../campaigns\t02.wmf\event:661
-#: ../campaigns\t02.wmf\event:674 ../campaigns\t02.wmf\event:688
-#: ../campaigns\t02.wmf\event:701 ../campaigns\t02.wmf\event:714
-#: ../campaigns\t02.wmf\event:727
-msgid "Advisor"
 msgstr ""
 
 #: ../campaigns\t02.wmf\event:509
@@ -572,7 +600,7 @@ msgstr ""
 
 #: ../campaigns\t02.wmf\event:648
 msgid "A beautiful morning..."
-msgstr ""
+msgstr "Eines schönen Morgens..."
 
 #: ../campaigns\t02.wmf\event:659
 msgid ""
