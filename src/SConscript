@@ -34,3 +34,4 @@ SConscript('ui/ui_fs_menus/SConscript')
 binary=srcenv.Program(target='widelands', source=SRC)
 Default(binary)
 
+Return("binary")

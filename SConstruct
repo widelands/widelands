@@ -2,6 +2,7 @@ import os
 import sys
 import fnmatch
 import SCons
+import time
 from SCons.Script.SConscript import SConsEnvironment
 
 #Speedup. If you have problems with inconsistent or wrong builds, look here first
@@ -40,6 +41,22 @@ def Glob(match):
 	
 	return filenames
 	
+########################################################################### Create a phony target (not (yet) a feature of scons)
+
+# taken from scons' wiki
+def PhonyTarget(alias, action):
+	"""Returns an alias to a command that performs the
+	   action.  This is implementated by a Command with a
+	   nonexistant file target.  This command will run on every
+	   build, and will never be considered 'up to date'. Acts
+	   like a 'phony' target in make."""
+	
+	from tempfile import mktemp
+	from os.path import normpath
+	
+	phony_file = normpath(mktemp(prefix="phony_%s_" % alias, dir="."))
+	return Alias(alias, Command(target=phony_file, source=None, action=action))
+
 ########################################################################### Functions for setting permissions when installing
 # don't forget to set umask
 try:
@@ -80,7 +97,7 @@ def CheckSDLConfig(context):
 	return ret
 
 def CheckSDLVersionAtLeast(context, major, minor, micro):
-	context.Message( 'Checking SDL version >=%s ... ' % (repr(major)+'.'+repr(minor)+'.'+repr(micro)))
+	context.Message( 'Checking SDL version >= %s ... ' % (repr(major)+'.'+repr(minor)+'.'+repr(micro)))
 	version=os.popen(env['sdlconfig']+" --version", "r").read()
 	maj=version.split('.')[0]
 	min=version.split('.')[1]
@@ -92,8 +109,9 @@ def CheckSDLVersionAtLeast(context, major, minor, micro):
 
 ############################################################################ Options
 
-opts=Options('SConstruct.local')
+opts=Options('build/scons-config.py', ARGUMENTS)
 opts.Add('build', 'debug-no-parachute / debug-slow / debug(default) / release / profile', 'debug')
+opts.Add('build_id', 'To get a default value(timestamp), leave this empty or set to \'date\'', '')
 opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 opts.Add('install_prefix', '', '.')
 opts.Add('bindir', '(relative to prefix)', 'bin')
@@ -168,7 +186,7 @@ if env['use_ggz']:
 	env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
 
 if env['cross']:
-	print 'Cross-compiling doe not work yet!'
+	print 'Cross-compiling does not work yet!'
 	Exit(1)
 	#TARGET='i586-mingw32msvc'
 	#PREFIX='/usr/local/cross-tools'
@@ -180,18 +198,40 @@ if env['cross']:
 else:
 	TARGET='native'
 
-opts.Save('build/scons-config.py',env)
+############################################################################ Configure - build number handling
+
+opts.Save('build/scons-config.py',env) #build_id must be saved before it might be set to a fixed date!
+
+#This is just a default, do not change it here. Use the option 'build_id' instead.
+if (env['build_id']=='') or (env['build_id']=='date'):
+	env['build_id']=time.strftime("%Y.%m.%d-%H%M%S", time.gmtime())
+
+print 'Build ID: '+env['build_id']
+build_id_file=open('src/build_id.h', "w")
+build_id_file.write("""#ifndef BUILD_ID
+#define BUILD_ID """+env['build_id']+"""
 	
-############################################################################ Configure - Tools
+const g_build_id="""+env['build_id']+"""
+	
+#endif
+
+""")
+build_id_file.close()
+	
+############################################################################ Configure - Tool autodetection
+
+def complain_ctags(target, source, env):
+	print 'WARNING: ctags binary not found (see above)! Tags have not been built'
 
 CTAGS=env.WhereIs('ctags')
 if CTAGS==None:
-	print 'Could not find exuberant ctags binary. \'scons tags\' will not work.'
+	print 'WARNING: Could not find exuberant ctags binary. \'scons tags\' will not work.'
+	env['BUILDERS']['CTagsBuilder']=Builder(action=complain_ctags, prefix='', suffix='')
 else:
 	print 'Exuberant ctags found: ', CTAGS
 	env['BUILDERS']['CTagsBuilder']=Builder(action=CTAGS+' --recurse=yes src/', prefix='', suffix='')
 	
-############################################################################ Configure - Autodetection
+############################################################################ Configure - Library autodetection
 
 if not conf.CheckLibWithHeader('intl', header='locale.h', language='C', autoadd=1):
 	if conf.CheckHeader('locale.h'):
@@ -261,21 +301,18 @@ env=conf.Finish()
 SConsignFile('build/scons-signatures')
 
 TARGETDIR='build/'+TARGET+'-'+env['build']
+DATADIR=env['install_prefix']+'/'+env['datadir']
 
 Export('env', 'Glob')
-SConscript('src/SConscript', build_dir='#'+TARGETDIR, duplicate=0)
+thebinary=SConscript('src/SConscript', build_dir=TARGETDIR, duplicate=0)
+env.AddPostAction(thebinary, Copy('.', TARGETDIR+'/widelands'))
 
-env.Alias("copythebinary", Command('thephonyfile1', '', 'cp '+TARGETDIR+'/widelands .'))
-env.Depends('copythebinary', TARGETDIR+'/widelands')
-Default('copythebinary')
-
-env.Alias("tags", env.CTagsBuilder(target='thephonyfile2', source='') )
+PhonyTarget("tags", CTAGS+' --recurse=yes src/' )
 Default('tags')
 
 ############################################################################ Install and Distribute
 
 env.Alias("install", env.Install(env['install_prefix']+'/'+env['bindir'], TARGETDIR+'/widelands'))
-DATADIR=env['install_prefix']+'/'+env['datadir']
 env.Alias("install", Command('thephonyfile3', '', [
 						Delete(DATADIR, must_exist=0),
 						Mkdir(DATADIR),
@@ -291,31 +328,44 @@ env.Alias("install", Command('thephonyfile3', '', [
 						"find "+DATADIR+" -name .cvsignore -exec rm -rf {} \;"
 						]))
 
-env.Alias("uninstall", Command('thephonyfile4', '', [
-						Delete(env['install_prefix']+'/'+env['bindir']+'/widelands', must_exist=0),
-						Delete(DATADIR)
-						]))
+PhonyTarget("uninstall", [
+			Delete(env['install_prefix']+'/'+env['bindir']+'/widelands', must_exist=0),
+			Delete(DATADIR, must_exist=0)
+			])
 
 env.Append(TARFLAGS=' -z')
-env.Alias("dist", Command('thephonyfile5', '', [
-						Delete('widelands-b9half', must_exist=0),
-						Mkdir('widelands-b9half'),
-						"cp -r ChangeLog fonts maps pics README-compiling.txt txts widelands-b9half",
-						"cp -r COPYING Makefile README.developers tribes worlds widelands-b9half",
-						"cp -r Doxyfile SConstruct widelands-b9half",
-						"cp -r src widelands-b9half"
-						]))
-env.Alias("dist", Command('thephonyfile6', '', [
-						"find widelands-b9half -name .cvsignore -exec rm -rf {} \;",
-						"find widelands-b9half -name .sconsign -exec rm -rf {} \;",
-						"find widelands-b9half -name CVS/ -exec rm -rf {} \;"
-						]))
-env.Alias("dist", env.Tar('widelands-b9half.tar.gz', 'widelands-b9half'))
-env.Alias("dist", Command('thephonyfile7', '', Delete('widelands-b9half')))
+PACKDIR='widelands-'+env['build_id']
+PACKFILE='widelands-'+env['build_id']+'.tar.gz'
+PhonyTarget("dist", [
+			Delete(PACKDIR, must_exist=0),
+			Mkdir(PACKDIR),
+			Copy(PACKDIR, 'COPYING'),
+			Copy(PACKDIR, 'README-compiling.txt'),
+			Copy(PACKDIR, 'README.developers'),
+			Copy(PACKDIR, 'SConstruct'),
+			Copy(PACKDIR, 'ChangeLog'),
+			Copy(PACKDIR, 'Doxyfile'),
+			Copy(PACKDIR, 'build-widelands.sh'),
+			Copy(PACKDIR+'/fonts', 'fonts'),
+			Copy(PACKDIR+'/maps', 'maps'),
+			Copy(PACKDIR+'/music', 'maps'),
+			Copy(PACKDIR+'/pics', 'pics'),
+			Copy(PACKDIR+'/src', 'src'),
+			Copy(PACKDIR+'/sound', 'src'),
+			Copy(PACKDIR+'/txts', 'txts'),
+			Copy(PACKDIR+'/tribes', 'tribes'),
+			Copy(PACKDIR+'/utils', 'utils'),
+			Copy(PACKDIR+'/worlds', 'worlds'),
+			"find "+PACKDIR+" -name .cvsignore -exec rm -rf {} \;",
+			"find "+PACKDIR+" -name CVS/ -exec rm -rf {} \;",
+			#Tar(target='dist.tar.gz', source=PACKDIR),    This does _not_ work as advertised. Or at all. Why?
+			'tar '+env['TARFLAGS']+' -f'+PACKFILE+PACKDIR,
+			Delete(PACKDIR, must_exist=0)
+			])
 
 ############################################################################ Extra targets
 
-env.Alias("up", Command('thephonyfile8', '', 'cvs -q up -APd'))
-env.Alias("update", Command('thephonyfile8', '', 'cvs -q up -APd'))
-env.Alias("doc", Command('thephonyfile9', '', 'doxygen Doxyfile'))
+PhonyTarget('up', 'cvs -q up -APd')
+PhonyTarget('update', 'cvs -q up -APd')
+PhonyTarget('doc', 'doxygen Doxyfile')
 
