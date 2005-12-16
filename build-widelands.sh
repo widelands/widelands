@@ -12,6 +12,7 @@ for i in $* ; do
 		echo
 		echo OPTIONS List - Use only absolute paths:
 		python utils/scons.py -Q -h && exit
+		exit 0
 	fi
 done
 

@@ -114,13 +114,13 @@ opts.Add('build', 'debug-no-parachute / debug-slow / debug(default) / release / 
 opts.Add('build_id', 'To get a default value(timestamp), leave this empty or set to \'date\'', '')
 opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
 opts.Add('install_prefix', '', '.')
-opts.Add('bindir', '(relative to prefix)', 'bin')
-opts.Add('datadir', '(relative to prefix)', 'share/widelands')
+opts.Add('bindir', '(relative to install_prefix)', 'bin')
+opts.Add('datadir', '(relative to install_prefix)', 'share/widelands')
 opts.Add('extra_include_path', '', '')
 opts.Add('extra_lib_path', '', '')
 opts.AddOptions(
-	BoolOption('use_ggz', 'Use the GGZ Gamingzone?', 'no'),
-	BoolOption('cross', 'Is this a cross compile? (developer use only)', 'no')
+	BoolOption('use_ggz', 'Use the GGZ Gamingzone?', 0),
+	BoolOption('cross', 'Is this a cross compile? (developer use only)', 0)
 	)
 	
 env=Environment(options=opts)
@@ -200,7 +200,7 @@ else:
 
 ############################################################################ Configure - build number handling
 
-opts.Save('build/scons-config.py',env) #build_id must be saved before it might be set to a fixed date!
+opts.Save('build/scons-config.py',env) #build_id must be saved *before* it might be set to a fixed date
 
 #This is just a default, do not change it here. Use the option 'build_id' instead.
 if (env['build_id']=='') or (env['build_id']=='date'):
@@ -220,16 +220,19 @@ build_id_file.close()
 	
 ############################################################################ Configure - Tool autodetection
 
-def complain_ctags(target, source, env):
-	print 'WARNING: ctags binary not found (see above)! Tags have not been built'
+def complain_ctags(target=None, source=None, env=None):
+	print 'WARNING: ctags binary was not found (see above). Tags have NOT been created.'
+	return 0
 
 CTAGS=env.WhereIs('ctags')
 if CTAGS==None:
-	print 'WARNING: Could not find exuberant ctags binary. \'scons tags\' will not work.'
-	env['BUILDERS']['CTagsBuilder']=Builder(action=complain_ctags, prefix='', suffix='')
+	print 'WARNING: Could not find exuberant ctags binary. \'scons tags\' will NOT work.'
+	PhonyTarget("tags", complain_ctags)
 else:
 	print 'Exuberant ctags found: ', CTAGS
-	env['BUILDERS']['CTagsBuilder']=Builder(action=CTAGS+' --recurse=yes src/', prefix='', suffix='')
+	PhonyTarget("tags", CTAGS+' --recurse=yes src/' )
+	Default('tags')
+
 	
 ############################################################################ Configure - Library autodetection
 
@@ -306,9 +309,6 @@ DATADIR=env['install_prefix']+'/'+env['datadir']
 Export('env', 'Glob')
 thebinary=SConscript('src/SConscript', build_dir=TARGETDIR, duplicate=0)
 env.AddPostAction(thebinary, Copy('.', TARGETDIR+'/widelands'))
-
-PhonyTarget("tags", CTAGS+' --recurse=yes src/' )
-Default('tags')
 
 ############################################################################ Install and Distribute
 
