@@ -228,7 +228,7 @@ Display whether we're occupied.
 std::string ProductionSite::get_statistics_string()
 {
    if (!m_workers.size())
-		return "(not occupied)";
+		return _("(not occupied)");
    else if(m_worker_requests.size()) {
       char buf[1000];
       sprintf(buf, "Waiting for %i workers!", (int)m_worker_requests.size());

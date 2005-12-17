@@ -510,6 +510,11 @@ msgstr ""
 msgid "%d soldiers"
 msgstr ""
 
+#: ../src/productionsite.cc:231
+#, c-format
+msgid "(not occupied)"
+msgstr ""
+
 #: ../src/minimap.cc:153 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
 msgid "Map"
 msgstr ""

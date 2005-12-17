@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands Mainlaguagepack 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-04 22:47+0100\n"
-"PO-Revision-Date: 2005-12-05 21:58+0100\n"
+"PO-Revision-Date: 2005-12-17 15:07+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Widelands translators\n"
 "MIME-Version: 1.0\n"
@@ -146,7 +146,7 @@ msgstr ""
 
 #: ../src/building_ui.cc:1639
 msgid "Make heroes"
-msgstr ""
+msgstr "Erstelle Helden"
 
 #: ../src/building_ui.cc:1641
 msgid "Balanced army"
@@ -182,7 +182,7 @@ msgstr ""
 
 #: ../src/event_allow_building.cc:36 ../src/event_factory.cc:48
 msgid "Allow Building"
-msgstr ""
+msgstr "Erlaube Gebäude"
 
 #: ../src/event_conquer_area.cc:34 ../src/event_factory.cc:47
 msgid "Conquer Area"
@@ -202,15 +202,16 @@ msgstr ""
 #: ../src/event_factory.cc:45 ../src/event_move_view.cc:34
 #: ../src/event_unhide_objective.cc:35
 msgid "Move View"
-msgstr ""
+msgstr "Bewege Blick"
 
 #: ../src/event_factory.cc:45
 msgid "This Event centers the Players View on a certain field"
 msgstr ""
+"Dieses Ereignis zentriert den Blick des Spieler auf ein bestimmtes Feld"
 
 #: ../src/event_factory.cc:46 ../src/event_unhide_area.cc:35
 msgid "Unhide Area"
-msgstr ""
+msgstr "Zeige Gebiet"
 
 #: ../src/event_factory.cc:46
 msgid ""
@@ -232,19 +233,20 @@ msgstr ""
 
 #: ../src/event_factory.cc:50 ../src/event_set_null_trigger.cc:36
 msgid "Set Null Trigger"
-msgstr ""
+msgstr "Setzte Null-Auslöser"
 
 #: ../src/event_factory.cc:50
 msgid "Manually set a Null Trigger to a given value"
-msgstr ""
+msgstr "Manuelle Null-Auslöser Eingabe für einen bestehenden Wert"
 
 #: ../src/event_factory.cc:51
 msgid "Unhide Objective"
-msgstr ""
+msgstr "Zeige Auftrag"
 
 #: ../src/event_factory.cc:51
 msgid "Hide or unhide an objective so that the player can see it"
 msgstr ""
+"Verstecke oder Zeige einen Auftrag, so dass der Spieler ihn sehen kann."
 
 #: ../src/event_message_box.cc:39
 msgid "No text defined"
@@ -335,10 +337,12 @@ msgid ""
 "Game Loading Error!\n"
 "Reason given:\n"
 msgstr ""
+"Spiel Lade Fehler!\n"
+"Grund ist:\n"
 
 #: ../src/game_main_menu_load_game.cc:222
 msgid "Load Game Error!!"
-msgstr ""
+msgstr "Ladefehler!!"
 
 #: ../src/game_main_menu_save_game.cc:42 ../src/game_main_menu_save_game.cc:46
 msgid "Save Game"
@@ -356,7 +360,7 @@ msgstr "existiert bereits - Überschreiben? "
 #: ../src/game_main_menu_save_game.cc:239
 #: ../src/game_main_menu_save_game.cc:263
 msgid "Save Game Error!!"
-msgstr ""
+msgstr "Speicherfehler!!"
 
 #: ../src/game_main_menu_save_game.cc:261
 msgid ""
@@ -419,7 +423,7 @@ msgstr ""
 #: ../src/game_server_proto_packet_connect.cc:77
 #, c-format
 msgid "Server is full!\n"
-msgstr ""
+msgstr "Server ist voll!\n"
 
 #: ../src/game_server_proto_packet_connect.cc:82
 #, c-format
@@ -490,7 +494,7 @@ msgstr "Keine Beschreibung definiert"
 
 #: ../src/map.cc:415 ../src/map_variable_manager.cc:31
 msgid "<undefined>"
-msgstr "<undefiniert>"
+msgstr ""
 
 #: ../src/map.cc:416 ../src/playerdescrgroup.cc:32
 #: ../src/playerdescrgroup.cc:61
@@ -499,7 +503,7 @@ msgstr "Spieler 1"
 
 #: ../src/map_variable_manager.cc:30
 msgid "Next scenario"
-msgstr "Nextes Scenario"
+msgstr "Nächstes Szenario"
 
 #: ../src/militarysite.cc:143
 #, c-format
@@ -511,6 +515,11 @@ msgstr "%d Soldaten (+%d)"
 msgid "%d soldiers"
 msgstr "%d Soldaten"
 
+#: ../src/productionsite.cc:231
+#, c-format
+msgid "(not occupied)"
+msgstr "(nicht besetzt)"
+
 #: ../src/minimap.cc:153 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
 msgid "Map"
 msgstr "Karte"
@@ -521,7 +530,7 @@ msgstr "Ich habe keinen Namen"
 
 #: ../src/network.cc:833
 msgid "Starting network game"
-msgstr ""
+msgstr "Starte Netzwerk Spiel"
 
 #: ../src/network.cc:836 ../src/network.cc:845
 msgid "Player"
@@ -605,7 +614,7 @@ msgstr "Winter"
 
 #: ../src/stock_menu.cc:35
 msgid "Stock"
-msgstr ""
+msgstr "Lager"
 
 #: ../src/trainingsite.cc:217
 msgid "Resting"
@@ -613,11 +622,11 @@ msgstr ""
 
 #: ../src/trainingsite.cc:219
 msgid "Not Working"
-msgstr ""
+msgstr "Arbeitet Nicht"
 
 #: ../src/trigger_building.cc:37 ../src/trigger_factory.cc:37
 msgid "Building Trigger"
-msgstr ""
+msgstr "Gebäude Auslöser"
 
 #: ../src/trigger_building.cc:44
 msgid "<unset>"
@@ -632,22 +641,29 @@ msgid ""
 "This Trigger waits a certain time before it is true. It can be configured to "
 "constantly restart itself when the wait time is over for repeating events"
 msgstr ""
+"Dieser Auslöser wartet eine bestimmte Zeit bevor er wahr wird. Er kann so "
+"eingestellt werden, dass er sich immer wieder neustartet nachdem die "
+"gewartete Zeit um ist. Ereignisse können wiederholt werden."
 
 #: ../src/trigger_factory.cc:36 ../src/trigger_null.cc:32
 msgid "Null Trigger"
-msgstr ""
+msgstr "Null Auslöser"
 
 #: ../src/trigger_factory.cc:36
 msgid ""
 "This Trigger never changes its state by itself. It is useful to pass it to "
 "some event which changes triggers"
 msgstr ""
+"Dieser Auslöser ändert seinen Status nie von selbst, was sinnvoll ist, wenn "
+"ein Ereignis erst nach einem anderen passieren soll."
 
 #: ../src/trigger_factory.cc:37
 msgid ""
 "This trigger gets set when a number of a building type of one player is "
 "available in an area."
 msgstr ""
+"Dieser Auslöser wird wahr, wenn ein bestimmter Gebäudetyp auf dem Land eines "
+"Spielers baubar wird."
 
 #: ../src/ware.cc:72 ../src/worker.cc:1516
 msgid "Doh... someone forgot the help text!"
@@ -676,7 +692,7 @@ msgstr ""
 
 #: ../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
-msgstr ""
+msgstr "Feld Informationen"
 
 #: ../src/editor/tools/editor_info_tool.cc:52
 msgid "1) Field Infos"
@@ -714,7 +730,7 @@ msgstr "Flagge"
 
 #: ../src/editor/tools/editor_info_tool.cc:63
 msgid " mine"
-msgstr ""
+msgstr " Mine"
 
 #: ../src/editor/tools/editor_info_tool.cc:64
 msgid " port"
@@ -821,15 +837,15 @@ msgstr "Ereignis Ketten:"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:75
 msgid "Registered Events: "
-msgstr ""
+msgstr "Ereignisse:"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:82
 msgid "Registered Triggers"
-msgstr ""
+msgstr "Auslöser:"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:91
 msgid "New Event Chain"
-msgstr "Neue Ereigniskette"
+msgstr "Neue Kette"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:95
 #: ../src/editor/ui_menus/editor_event_menu.cc:110
@@ -843,18 +859,18 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_event_menu.cc:115
 #: ../src/editor/ui_menus/editor_event_menu.cc:131
 msgid "Del"
-msgstr ""
+msgstr "Entf"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:106
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:82
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:36
 msgid "New Event"
-msgstr ""
+msgstr "Neues Ereig."
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:122
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:36
 msgid "New Trigger"
-msgstr ""
+msgstr "Neuer Ausl."
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:214
 msgid "Can't delete Event. It is in use by "
@@ -866,7 +882,7 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_player_menu.cc:256
 #: ../src/editor/ui_menus/editor_player_menu.cc:283
 msgid "Error!"
-msgstr ""
+msgstr "Fehler!"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:257
 msgid "Can't delete Trigger. It is in use by "
@@ -881,7 +897,7 @@ msgstr "Namenlos"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:40
 msgid "Edit Event Chain"
-msgstr ""
+msgstr "Editiere Ereigniskette"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:46
 msgid "Edit Event Chain Menu"
@@ -899,7 +915,7 @@ msgstr ""
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:70
 msgid "Events: "
-msgstr ""
+msgstr "Ereignisse:"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:78
 msgid "Conditional"
@@ -949,7 +965,7 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:111
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:50
 msgid "Available Triggers: "
-msgstr ""
+msgstr "Mögliche Auslöser:"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:201
 msgid "Syntax Error"
@@ -970,7 +986,7 @@ msgstr "Beschreibung:"
 
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:40
 msgid "New Trigger Menu"
-msgstr ""
+msgstr "Neuer Auslöser - Menü"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:45
 msgid "Editor Main Menu"
@@ -1001,7 +1017,7 @@ msgstr "Karten Optionen"
 #: ../src/editor/ui_menus/editor_main_menu.cc:79
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:58
 msgid "View Readme"
-msgstr "Zeige Readme"
+msgstr "Zeige Liesmich"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:85
 msgid "Exit Editor"
@@ -1091,7 +1107,7 @@ msgstr " existiert bereits. Überschreiben?"
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:337
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:362
 msgid "Save Map Error!!"
-msgstr ""
+msgstr "Speicherfehler!!"
 
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:360
 msgid ""
@@ -1149,7 +1165,7 @@ msgstr "Neu"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:203
 msgid "Trigger: "
-msgstr ""
+msgstr "Auslöser:"
 
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:281
 msgid "Can't delete Objective, because it's trigger is in use by "
@@ -1210,7 +1226,7 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:106
 #: ../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:76
 msgid "Set Value"
-msgstr ""
+msgstr "Wert setzen"
 
 #: ../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:51
 msgid "Resources Tools Options"
@@ -1267,7 +1283,7 @@ msgstr ""
 #: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:204
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:120
 msgid "Current: "
-msgstr ""
+msgstr "zur Zeit:"
 
 #: ../src/editor/ui_menus/editor_toolsize_menu.cc:35
 msgid "Toolsize Menu"
@@ -1325,7 +1341,7 @@ msgstr "Variable"
 #: ../src/editor/ui_menus/event_move_view_option_menu.cc:36
 #: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:36
 msgid "Event Option Menu"
-msgstr ""
+msgstr "Ereignis Optionsmenü"
 
 #: ../src/editor/ui_menus/event_allow_building_option_menu.cc:44
 msgid "Allow Building Event Options"
@@ -1362,7 +1378,7 @@ msgstr "Hauptquartier"
 
 #: ../src/editor/ui_menus/event_allow_building_option_menu.cc:101
 msgid "Allow Building: "
-msgstr ""
+msgstr "Erlaube Gebäude:"
 
 #: ../src/editor/ui_menus/event_allow_building_option_menu.cc:195
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:313
@@ -1378,17 +1394,17 @@ msgstr ""
 #: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:63
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:117
 msgid "Current position: "
-msgstr ""
+msgstr "Derzeitige Position"
 
 #: ../src/editor/ui_menus/event_conquer_area_option_menu.cc:125
 #: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:125
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:168
 msgid "Area: "
-msgstr ""
+msgstr "Gebiet:"
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:44
 msgid "Message Box Event Options"
-msgstr ""
+msgstr "Nachrichten Ereignis Optionen"
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:56
 msgid "Button 1"
@@ -1424,29 +1440,29 @@ msgstr "Knopf Name:"
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:110
 msgid "Select Trigger: "
-msgstr ""
+msgstr "Wähle Auslöser:"
 
 #: ../src/editor/ui_menus/event_message_box_option_menu.cc:121
 msgid "No trigger selected!"
-msgstr "Kein Trigger ausgewählt!"
+msgstr "Kein Auslöser ausgewählt!"
 
 #: ../src/editor/ui_menus/event_move_view_option_menu.cc:41
 msgid "Move View Event Options"
-msgstr ""
+msgstr "Blickbewegungs-Ereignis Optionen"
 
 #: ../src/editor/ui_menus/event_unhide_area_option_menu.cc:41
 msgid "Unhide Area Event Options"
-msgstr ""
+msgstr "Optionen für Aufdecken eines Gebietes"
 
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:39
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:33
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:33
 msgid "Trigger Option Menu"
-msgstr "Trigger Options Menü"
+msgstr "Auslöser Optionsmenü"
 
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:44
 msgid "Building Trigger Options"
-msgstr "Gebäude Trigger Optionen"
+msgstr "Gebäude-Auslöser - Optionen"
 
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:106
 msgid "How many: "
@@ -1454,11 +1470,11 @@ msgstr "Wie viele:"
 
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:37
 msgid "Null Trigger Options"
-msgstr "Null Trigger Optionen"
+msgstr "Null-Auslöser - Optionen"
 
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:37
 msgid "Time Trigger Options"
-msgstr "Zeit Trigger Optionen"
+msgstr "Zeit-Auslöser Optionen"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:58
 msgid "Close"
@@ -1684,11 +1700,3 @@ msgstr ""
 #: ../src/map_objective_manager.h:58
 msgid "no descr"
 msgstr "Keine Beschr."
-
-#, fuzzy
-#~ msgid "Caption"
-#~ msgstr "Optionen"
-
-#, fuzzy
-#~ msgid "Caption:"
-#~ msgstr "Optionen"
