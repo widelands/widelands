@@ -1,8 +1,9 @@
 import os
-import sys
+import shutil
 import fnmatch
 import SCons
 import time
+import glob
 from SCons.Script.SConscript import SConsEnvironment
 
 #Speedup. If you have problems with inconsistent or wrong builds, look here first
@@ -19,7 +20,8 @@ def Glob(match):
 	anything SCons knows about.  A key subtlety is that since this function
 	operates on generated nodes as well as source nodes on the filesystem,
 	it needs to be called after builders that generate files you want to
-	include."""
+	include.
+	"""
 	
 	def fn_filter(node):
 		fn = str(node)
@@ -40,6 +42,18 @@ def Glob(match):
 			 	filenames.append(os.path.basename(str(s)))
 	
 	return filenames
+
+########################################################################### find $ROOT -name $GLOB
+
+def find(root, glob):
+	files=[]
+	for file in os.listdir(root):
+		file=os.path.join(root, file)
+		if fnmatch.fnmatch(file, glob):
+			files.append(file)
+		if os.path.isdir(file):
+			files+=find(file, glob)
+	return files
 	
 ########################################################################### Create a phony target (not (yet) a feature of scons)
 
@@ -63,9 +77,6 @@ try:
 	os.umask(022)
 except OSError:     # ignore on systems that don't support umask
 	pass
-
-SConsEnvironment.Chmod = SCons.Action.ActionFactory(os.chmod,
-			lambda dest, mode: 'Chmod("%s", 0%o)' % (dest, mode))
 
 def InstallPerm(env, dest, files, perm):
 	obj = env.Install(dest, files)
@@ -198,7 +209,11 @@ if env['cross']:
 else:
 	TARGET='native'
 
-############################################################################ Configure - build number handling
+BINDIR= os.path.join(env['install_prefix'], env['bindir'])
+DATADIR=os.path.join(env['install_prefix'], env['datadir'])
+PACKDIR='widelands-'+env['build_id']
+
+############################################################################ Configure - build_id.h
 
 opts.Save('build/scons-config.py',env) #build_id must be saved *before* it might be set to a fixed date
 
@@ -208,31 +223,30 @@ if (env['build_id']=='') or (env['build_id']=='date'):
 
 print 'Build ID: '+env['build_id']
 build_id_file=open('src/build_id.h', "w")
-build_id_file.write("""#ifndef BUILD_ID
+
+build_id_file.write("""
+#ifndef BUILD_ID
 #define BUILD_ID """+env['build_id']+"""
-	
-const g_build_id="""+env['build_id']+"""
+
+const char *g_build_id=\""""+env['build_id']+"""\";
 	
 #endif
 
 """)
+
 build_id_file.close()
 	
+config_h_file=open('src/config.h', "w")
+config_h_file.write("""
+#ifndef CONFIG_H
+#define CONFIG_H
+
+""")
+
 ############################################################################ Configure - Tool autodetection
 
-def complain_ctags(target=None, source=None, env=None):
-	print 'WARNING: ctags binary was not found (see above). Tags have NOT been created.'
-	return 0
-
-CTAGS=env.WhereIs('ctags')
-if CTAGS==None:
-	print 'WARNING: Could not find exuberant ctags binary. \'scons tags\' will NOT work.'
-	PhonyTarget("tags", complain_ctags)
-else:
-	print 'Exuberant ctags found: ', CTAGS
-	PhonyTarget("tags", CTAGS+' --recurse=yes src/' )
-	Default('tags')
-
+env.Tool("ctags", toolpath=['build/scons-tools'])
+env.Tool("PNGShrink", toolpath=['build/scons-tools'])
 	
 ############################################################################ Configure - Library autodetection
 
@@ -278,13 +292,15 @@ if not conf.CheckLibWithHeader('SDL_mixer', header='SDL_mixer.h', language='C', 
 	print 'Could not find the SDL_mixer library! Is it installed?'
 	Exit(1)
 
-if not conf.TryLink(""" #include <SDL.h>
+if conf.TryLink(""" #include <SDL.h>
 			#include <SDL_mixer.h>
 			main(){
 				Mix_LoadMUS("foo.ogg");
 			}
 			""", '.c'):
-	env.Append(CCFLAGS=' -DOLD_SDL_MIXER')
+	config_h_file.write("#define NEW_SDL_MIXER");
+else:
+	config_h_file.write("#define OLD_SDL_MIXER");
 
 env.Append(CCFLAGS=' -pipe -Wall')
 
@@ -299,73 +315,162 @@ env=conf.Finish()
 #	env['ENV']['PATH'] = '/usr/lib/distcc/bin:'+env['ENV']['PATH']
 #	env['ENV']['HOME'] = os.environ['HOME']
 
+############################################################################ Configure - config.h
+
+config_h_file.write("""
+#define INSTALL_DATADIR \""""+DATADIR+"""\"
+
+#endif
+
+""")
+
+config_h_file.close()
+
 ############################################################################ Build things
+
+
+############### Build setup
 
 SConsignFile('build/scons-signatures')
 
 TARGETDIR='build/'+TARGET+'-'+env['build']
-DATADIR=env['install_prefix']+'/'+env['datadir']
 
-Export('env', 'Glob')
+Export('env', 'Glob', 'TARGETDIR')
+
+############### The binary
+
 thebinary=SConscript('src/SConscript', build_dir=TARGETDIR, duplicate=0)
-env.AddPostAction(thebinary, Copy('.', TARGETDIR+'/widelands'))
 
-############################################################################ Install and Distribute
+############### tags
 
-env.Alias("install", env.Install(env['install_prefix']+'/'+env['bindir'], TARGETDIR+'/widelands'))
-env.Alias("install", Command('thephonyfile3', '', [
-						Delete(DATADIR, must_exist=0),
-						Mkdir(DATADIR),
-						Copy(DATADIR+'/campaigns', 'campaigns'),
-						Copy(DATADIR+'/fonts', 'fonts'),
-						Copy(DATADIR+'/locale', 'locale'),
-						Copy(DATADIR+'/maps', 'maps'),
-						Copy(DATADIR+'/music', 'music'),
-						Copy(DATADIR+'/pics', 'pics'),
-						Copy(DATADIR+'/sound', 'sound'),
-						Copy(DATADIR+'/worlds', 'worlds'),
-						"find "+DATADIR+" -name CVS -exec rm -rf {} \;",
-						"find "+DATADIR+" -name .cvsignore -exec rm -rf {} \;"
-						]))
+#we'd only need the first directory component - but directories cannot be passed via source=
+S=find('src', '*.h')   
+S+=find('src', '*.cc') 
+S.remove('src/build_id.h')
+Alias('tags', env.ctags(source=S, target='tags'))
+Default('tags')
 
-PhonyTarget("uninstall", [
-			Delete(env['install_prefix']+'/'+env['bindir']+'/widelands', must_exist=0),
-			Delete(DATADIR, must_exist=0)
-			])
+############### PNG shrinking
 
-env.Append(TARFLAGS=' -z')
-PACKDIR='widelands-'+env['build_id']
-PACKFILE='widelands-'+env['build_id']+'.tar.gz'
-PhonyTarget("dist", [
-			Delete(PACKDIR, must_exist=0),
-			Mkdir(PACKDIR),
-			Copy(PACKDIR, 'COPYING'),
-			Copy(PACKDIR, 'README-compiling.txt'),
-			Copy(PACKDIR, 'README.developers'),
-			Copy(PACKDIR, 'SConstruct'),
-			Copy(PACKDIR, 'ChangeLog'),
-			Copy(PACKDIR, 'Doxyfile'),
-			Copy(PACKDIR, 'build-widelands.sh'),
-			Copy(PACKDIR+'/fonts', 'fonts'),
-			Copy(PACKDIR+'/maps', 'maps'),
-			Copy(PACKDIR+'/music', 'maps'),
-			Copy(PACKDIR+'/pics', 'pics'),
-			Copy(PACKDIR+'/src', 'src'),
-			Copy(PACKDIR+'/sound', 'src'),
-			Copy(PACKDIR+'/txts', 'txts'),
-			Copy(PACKDIR+'/tribes', 'tribes'),
-			Copy(PACKDIR+'/utils', 'utils'),
-			Copy(PACKDIR+'/worlds', 'worlds'),
-			"find "+PACKDIR+" -name .cvsignore -exec rm -rf {} \;",
-			"find "+PACKDIR+" -name CVS/ -exec rm -rf {} \;",
-			#Tar(target='dist.tar.gz', source=PACKDIR),    This does _not_ work as advertised. Or at all. Why?
-			'tar '+env['TARFLAGS']+' -f'+PACKFILE+PACKDIR,
-			Delete(PACKDIR, must_exist=0)
-			])
+# findfiles takes quite long, so don't execute it if it's unneccessary
+if ('shrink' in BUILD_TARGETS) or ('dist' in BUILD_TARGETS):
+	shrink=env.PNGShrink(find('.', '*.png'))
+	Alias("shrink", shrink)
 
-############################################################################ Extra targets
+############### Install and uninstall
 
-PhonyTarget('up', 'cvs -q up -APd')
-PhonyTarget('update', 'cvs -q up -APd')
+DISTDIRS=[
+	'campaigns',
+	'fonts',
+	'game-server',
+	'locale',
+	'maps',
+	'music',
+	'pics',
+	'sound',
+	'tribes',
+	'txts',
+	'worlds'
+	]
+
+#TODO: need to install stuff like licenses - where do they go?
+def do_inst(target, source, env):
+	if not os.path.exists(BINDIR):
+		os.makedirs(BINDIR, 0755)
+	print 'Installing ', os.path.join(BINDIR, 'widelands')
+	shutil.copy(os.path.join(TARGETDIR, 'widelands'), BINDIR)
+	
+	shutil.rmtree(DATADIR, ignore_errors=1)
+	os.makedirs(DATADIR, 0755)
+
+	for f in DISTDIRS:
+		if f=='build':
+			continue
+		print 'Installing ', os.path.join(DATADIR, f)
+		shutil.copytree(f, os.path.join(DATADIR, f))
+
+	RMFILES=find(DATADIR, '*/.cvsignore')
+	RMDIRS =find(DATADIR, '*/CVS')
+
+	print 'Removing superfluous files ...'
+	for f in RMFILES:
+		os.remove(f)
+	for f in RMDIRS:
+		shutil.rmtree(f)
+		
+def do_uninst(target, source, env):
+	print 'Removing ', DATADIR
+	shutil.rmtree(DATADIR, ignore_errors=1)
+
+	if os.path.exists(os.path.join(BINDIR, 'widelands')):
+		print 'Removing ', os.path.join(BINDIR, 'widelands')
+		os.remove(os.path.join(BINDIR, 'widelands'))
+
+install=PhonyTarget("install", do_inst)
+uninstall=PhonyTarget("uninstall", do_uninst)
+
+############### Distribute
+
+DISTFILES=[
+	'COPYING',
+	'README-compiling.txt',
+	'README.developers',
+	'SConstruct',
+	'ChangeLog',
+	'Doxyfile',
+	'build-widelands.sh',
+	]
+DISTDIRS=[
+	'build',
+	'fonts',
+	'maps',
+	'music',
+	'pics',
+	'src',
+	'sound',
+	'txts',
+	'tribes',
+	'utils',
+	'worlds'
+	]
+
+def do_dist(target, source, env):
+	shutil.rmtree(PACKDIR, ignore_errors=1)
+	os.mkdir(PACKDIR, 0755)
+	
+	for f in DISTFILES:
+		shutil.copy(f, PACKDIR)
+	for f in DISTDIRS:
+		shutil.copytree(f, os.path.join(PACKDIR, f))
+
+	RMFILES=find(PACKDIR, '*/.cvsignore')
+	RMFILES+=[PACKDIR+'/build/scons-config.py']
+	RMFILES+=[PACKDIR+'/build/scons-signatures.dblite']
+	
+	RMDIRS =find(PACKDIR, '*/CVS')
+	RMDIRS+=glob.glob(PACKDIR+'/build/*-debug*')
+	RMDIRS+=glob.glob(PACKDIR+'/build/*-release')
+	RMDIRS+=glob.glob(PACKDIR+'/build/*-profile')
+	RMDIRS+=[PACKDIR+'/build/sconf_temp']
+
+	for f in RMFILES:
+		os.remove(f)
+	for f in RMDIRS:
+		shutil.rmtree(f)
+
+	os.system('tar -czf %s %s' % (PACKDIR+'.tar.gz', PACKDIR))
+	shutil.rmtree(PACKDIR)
+		
+	return None
+
+dist=PhonyTarget("dist", do_dist)
+
+############### CVS
+
+cvsup=PhonyTarget('up', 'cvs -q up -APd')
+Alias('update', cvsup)
+
+############### Documentation
+
 PhonyTarget('doc', 'doxygen Doxyfile')
 

@@ -25,6 +25,7 @@
 #include <cstring>
 #include <string>
 
+#include "config.h"
 #include "filesystem.h"
 #include "setup.h"
 #include "error.h"
@@ -71,6 +72,10 @@ static std::string getexename()
  */
 void setup_searchpaths(int argc, char **argv)
 {
+	// first, try the install directory used in the last compile
+	//TODO: not good - won't work on at least Gentoo
+	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h for INSTALL_DATADIR
+
 	// if everything else fails, search it where the FHS forces us to put it (obviously UNIX-only)
 #ifndef WIN32
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/widelands"));

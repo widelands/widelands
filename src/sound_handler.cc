@@ -23,6 +23,7 @@
 #endif
 
 #include "sound_handler.h"
+#include "config.h"
 
 #include <assert.h>
 #include <errno.h>
@@ -104,7 +105,7 @@ Mix_Music *Songset::get_song()
 #warning Mix_LoadMUS_RW is not available under windows!!!
         m_m = Mix_LoadMUS( filename.c_str()); // Hack for windows
 #else
-#ifdef OLD_SDL_MIXER 
+#ifdef OLD_SDL_MIXER
 #warning Please update your SDL_mixer library to at least version 1.2.6!!!
 	m_m = Mix_LoadMUS(filename.c_str());
 	//TODO: this should use a RWopsified version!
