@@ -21,7 +21,7 @@
 #define CONSTANTS_H
 
 // define current version
-#define VERSION "build-9half"
+#define VERSION "cvs 24-12-2005 (inofficial)"
 
 // locale path: This would be needed to be changed by a packager
 // The default search path for locales is in the locale directory
@@ -34,14 +34,15 @@
 
 // The background colors are chosen to match the user interface 
 // backgrounds
-#define UI_FONT_BIG "Vera.ttf", 18
-#define UI_FONT_SMALL "Vera.ttf", 10
+#define UI_FONT_BIG "FreeSerif.ttf", 22
+#define UI_FONT_ULTRASMALL "FreeSans.ttf", 10
+#define UI_FONT_SMALL "FreeSerif.ttf", 14
 #define UI_FONT_CLR_FG  RGBColor(255,255,0)
 #define UI_FONT_BIG_CLR UI_FONT_CLR_FG, RGBColor(107,87,55)
 #define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, RGBColor(107,87,55)
 #define UI_FONT_TOOLTIP UI_FONT_SMALL
 #define UI_FONT_TOOLTIP_CLR RGBColor(100,100,255), RGBColor(230,200,50)
-#define PROSA_FONT       "Vera.ttf", 14
+#define PROSA_FONT       "FreeSerif.ttf", 18
 #define PROSA_FONT_CLR_FG   RGBColor(255,255,0)
 
 

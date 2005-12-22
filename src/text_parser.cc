@@ -83,7 +83,7 @@ void Text_Parser::parse(std::string text, std::vector<Text_Block> *blocks, Varib
       Text_Block new_block = {
          block_text,
          Align_Left,
-         "Vera.ttf",
+         "FreeSans.ttf",
          10,
          RGBColor(255,255,0),
          "normal",
