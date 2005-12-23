@@ -20,10 +20,8 @@
 #ifndef SOUND_HANDLER
 #define SOUND_HANDLER
 
-//needed to enable preliminary support for Mix_LoadMUS_RW in SDL_mixer-1.2.6 (see RWopsify_MixLoadWAV())
-//TODO: this should really be determined by autoconf or sth. similar
-#define USE_RWOPS 1
-
+//config.h *must* be included before SDL_mixer.h due to USE_RWOPS !!
+#include "config.h"
 #include <vector>
 #include <map>
 #include <SDL.h>
@@ -50,26 +48,30 @@ extern Sound_Handler g_sound_handler;
  * contains several different songs is hidden from the outside.\n
  * A songset does not contain the audio data itself, to not use huge amounts of memory.
  * Instead, each song is loaded on request and the data is free()d afterwards.*/
-class Songset {
-      public:
+
+class Songset
+{
+public:
 	Songset();
 	~Songset();
 
 	void add_song(string filename);
 	Mix_Music *get_song();
-	bool empty() {
+	bool empty()
+	{
 		return m_songs.empty();
 	}
-      protected:
+
+protected:
 	/** The filenames of all configured songs*/
-	 vector < string > m_songs;
+	vector < string > m_songs;
 	/** Pointer to the song that is currently playing (actually the one that was last started);
 	 * needed for linear playback*/
 	vector < string >::iterator m_current_song;
 
 	/** File reader object to fetch songs from disc when they start playing.
 	 * Do not create this for each load, it's a major hassle to code
-         * \sa m_rwops*/
+	        * \sa m_rwops*/
 	FileRead *m_fr;
 
 	/** The current song*/
@@ -87,20 +89,25 @@ class Songset {
  * all effects that might be played when a blacksmith is happily hammering away. It is
  * possible to access the effects on after another or in random order. The fact that an
  * FXset really contains several different effect is hidden from the outside.*/
-class FXset {
+
+class FXset
+{
+
 	friend class Sound_Handler;
-      public:
-	 FXset(Uint8 prio = 127);
+public:
+	FXset(Uint8 prio = 127);
 	~FXset();
 
 	void add_fx(Mix_Chunk * fx, Uint8 prio = 127);
 	Mix_Chunk *get_fx();
-	bool empty() {
+	bool empty()
+	{
 		return m_fxs.empty();
 	}
-      protected:
+
+protected:
 	/** The collection of sound effects*/
-	 vector < Mix_Chunk * >m_fxs;
+	vector < Mix_Chunk * >m_fxs;
 
 	/** When the effect was played the last time (milliseconds since sdl initialization). Set via SDL_GetTicks()*/
 	Uint32 m_last_used;
@@ -205,15 +212,19 @@ class FXset {
  * \todo FX should have a priority (e.g. fights are more important than fishermen)
  * \todo Sound_Handler must not play *all* FX but only a select few
  */
-class Sound_Handler {
+
+class Sound_Handler
+{
+
 	friend class Songset;
+
 	friend class FXset;
-      public:
-	#define NO_POSITION Coords(-1,-1)
-	#define INVALID_POSITION Coords(-2,-2)
+public:
+#define NO_POSITION Coords(-1,-1)
+#define INVALID_POSITION Coords(-2,-2)
 	enum { SOUND_HANDLER_CHANGE_MUSIC = 1 };
 
-	 Sound_Handler();
+	Sound_Handler();
 	~Sound_Handler();
 
 	void init();
@@ -221,7 +232,7 @@ class Sound_Handler {
 	void load_system_sounds();
 
 	void load_fx(const string dir, const string basename, const bool recursive = false);
-	void play_fx(const string fx_name, Coords map_position=INVALID_POSITION);
+	void play_fx(const string fx_name, Coords map_position = INVALID_POSITION);
 	void play_fx(const string fx_name, int stereo_position);
 
 	void register_song(const string dir, const string basename, const bool recursive = false);
@@ -238,14 +249,14 @@ class Sound_Handler {
 	void set_disable_fx(bool state);
 
 	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
-	Game *m_the_game; //TODO: can we please get rid of this member variable somehow?
+	Game *m_the_game;	//TODO: can we please get rid of this member variable somehow?
 
 	/** Only for buffering command line option --nosound until real intialization is done
 	 * \see Sound_Handler::Sound_Handler()
 	 * \see Sound_Handler::init() */
 	bool m_nosound;
 
-      protected:
+protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
 	void load_one_fx(const string filename, const string fx_name);
 	int stereo_position(const Coords position);
@@ -261,17 +272,17 @@ class Sound_Handler {
 	bool m_random_order;
 
 	/** A collection of songsets*/
-	 map < string, Songset * >m_songs;
+	map < string, Songset * >m_songs;
 
 	/** A collection of effect sets*/
-	 map < string, FXset * >m_fxs;
+	map < string, FXset * >m_fxs;
 
 	/** Which songset we are currently selecting songs from - not regarding if there actually is a song
 	 * playing \e right \e now*/
 	string m_current_songset;
 
 	/** The random number generator.
-         * \note The RNG here *must* not be the same as the one for the game logic! */
+	        * \note The RNG here *must* not be the same as the one for the game logic! */
 	RNG m_rng;
 };
 

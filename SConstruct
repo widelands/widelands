@@ -135,6 +135,7 @@ opts.AddOptions(
 	)
 	
 env=Environment(options=opts)
+print 'Platform:', env['PLATFORM']
 env.Help(opts.GenerateHelpText(env))
 env.Append(CPPPATH=env['extra_include_path'])
 env.Append(LIBPATH=env['extra_lib_path'])
@@ -252,7 +253,7 @@ env.Tool("PNGShrink", toolpath=['build/scons-tools'])
 
 if not conf.CheckLibWithHeader('intl', header='locale.h', language='C', autoadd=1):
 	if conf.CheckHeader('locale.h'):
-		print 'Looks like you do have the gettext library.'
+		print 'Looks like gettext is included in your libc.'
 	else:
 		print 'Could not find gettext library! Is it installed?' 
 		Exit(1)
@@ -293,15 +294,20 @@ if not conf.CheckLibWithHeader('SDL_mixer', header='SDL_mixer.h', language='C', 
 	Exit(1)
 
 if conf.TryLink(""" #include <SDL.h>
+			#define USE_RWOPS
 			#include <SDL_mixer.h>
 			main(){
-				Mix_LoadMUS("foo.ogg");
+				Mix_LoadMUS_RW("foo.ogg");
 			}
 			""", '.c'):
-	config_h_file.write("#define NEW_SDL_MIXER");
+	config_h_file.write("//second line is needed by SDL_mixer\n");
+	config_h_file.write("#define NEW_SDL_MIXER 1\n");
+	config_h_file.write("#define USE_RWOPS\n");
+	print 'SDL_mixer supports Mix_LoadMUS_RW(). Good'
 else:
-	config_h_file.write("#define OLD_SDL_MIXER");
-
+	config_h_file.write("#define NEW_SDL_MIXER 0");
+	print 'SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
+	
 env.Append(CCFLAGS=' -pipe -Wall')
 
 env=conf.Finish()
@@ -317,13 +323,9 @@ env=conf.Finish()
 
 ############################################################################ Configure - config.h
 
-config_h_file.write("""
-#define INSTALL_DATADIR \""""+DATADIR+"""\"
+config_h_file.write("\n#define INSTALL_DATADIR \""+DATADIR+"\"\n")
 
-#endif
-
-""")
-
+config_h_file.write("\n#endif\n")
 config_h_file.close()
 
 ############################################################################ Build things
