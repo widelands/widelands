@@ -22,13 +22,13 @@ def Glob(match):
 	it needs to be called after builders that generate files you want to
 	include.
 	"""
-	
+
 	def fn_filter(node):
 		fn = str(node)
 		return fnmatch.fnmatch(os.path.basename(fn), match)
 
 	here = Dir('.')
-	
+
 	children = here.all_children()
 	nodes = map(File, filter(fn_filter, children))
 	node_srcs = [n.srcnode() for n in nodes]
@@ -40,7 +40,7 @@ def Glob(match):
 		for s in src_children:
 			 if s not in node_srcs:
 			 	filenames.append(os.path.basename(str(s)))
-	
+
 	return filenames
 
 ########################################################################### find $ROOT -name $GLOB
@@ -54,7 +54,7 @@ def find(root, glob):
 		if os.path.isdir(file):
 			files+=find(file, glob)
 	return files
-	
+
 ########################################################################### Create a phony target (not (yet) a feature of scons)
 
 # taken from scons' wiki
@@ -64,10 +64,10 @@ def PhonyTarget(alias, action):
 	   nonexistant file target.  This command will run on every
 	   build, and will never be considered 'up to date'. Acts
 	   like a 'phony' target in make."""
-	
+
 	from tempfile import mktemp
 	from os.path import normpath
-	
+
 	phony_file = normpath(mktemp(prefix="phony_%s_" % alias, dir="."))
 	return Alias(alias, Command(target=phony_file, source=None, action=action))
 
@@ -133,7 +133,7 @@ opts.AddOptions(
 	BoolOption('use_ggz', 'Use the GGZ Gamingzone?', 0),
 	BoolOption('cross', 'Is this a cross compile? (developer use only)', 0)
 	)
-	
+
 env=Environment(options=opts)
 print 'Platform:', env['PLATFORM']
 env.Help(opts.GenerateHelpText(env))
@@ -230,13 +230,13 @@ build_id_file.write("""
 #define BUILD_ID """+env['build_id']+"""
 
 const char *g_build_id=\""""+env['build_id']+"""\";
-	
+
 #endif
 
 """)
 
 build_id_file.close()
-	
+
 config_h_file=open('src/config.h', "w")
 config_h_file.write("""
 #ifndef CONFIG_H
@@ -248,14 +248,15 @@ config_h_file.write("""
 
 env.Tool("ctags", toolpath=['build/scons-tools'])
 env.Tool("PNGShrink", toolpath=['build/scons-tools'])
-	
+env.Tool("astyle", toolpath=['build/scons-tools'])
+
 ############################################################################ Configure - Library autodetection
 
 if not conf.CheckLibWithHeader('intl', header='locale.h', language='C', autoadd=1):
 	if conf.CheckHeader('locale.h'):
 		print 'Looks like gettext is included in your libc.'
 	else:
-		print 'Could not find gettext library! Is it installed?' 
+		print 'Could not find gettext library! Is it installed?'
 		Exit(1)
 
 if not conf.CheckSDLConfig():
@@ -307,7 +308,7 @@ if conf.TryLink(""" #include <SDL.h>
 else:
 	config_h_file.write("#define NEW_SDL_MIXER 0");
 	print 'SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
-	
+
 env.Append(CCFLAGS=' -pipe -Wall')
 
 env=conf.Finish()
@@ -346,8 +347,8 @@ thebinary=SConscript('src/SConscript', build_dir=TARGETDIR, duplicate=0)
 ############### tags
 
 #we'd only need the first directory component - but directories cannot be passed via source=
-S=find('src', '*.h')   
-S+=find('src', '*.cc') 
+S=find('src', '*.h')
+S+=find('src', '*.cc')
 S.remove('src/build_id.h')
 Alias('tags', env.ctags(source=S, target='tags'))
 Default('tags')
@@ -381,7 +382,7 @@ def do_inst(target, source, env):
 		os.makedirs(BINDIR, 0755)
 	print 'Installing ', os.path.join(BINDIR, 'widelands')
 	shutil.copy(os.path.join(TARGETDIR, 'widelands'), BINDIR)
-	
+
 	shutil.rmtree(DATADIR, ignore_errors=1)
 	os.makedirs(DATADIR, 0755)
 
@@ -399,7 +400,7 @@ def do_inst(target, source, env):
 		os.remove(f)
 	for f in RMDIRS:
 		shutil.rmtree(f)
-		
+
 def do_uninst(target, source, env):
 	print 'Removing ', DATADIR
 	shutil.rmtree(DATADIR, ignore_errors=1)
@@ -439,7 +440,7 @@ DISTDIRS=[
 def do_dist(target, source, env):
 	shutil.rmtree(PACKDIR, ignore_errors=1)
 	os.mkdir(PACKDIR, 0755)
-	
+
 	for f in DISTFILES:
 		shutil.copy(f, PACKDIR)
 	for f in DISTDIRS:
@@ -448,7 +449,7 @@ def do_dist(target, source, env):
 	RMFILES=find(PACKDIR, '*/.cvsignore')
 	RMFILES+=[PACKDIR+'/build/scons-config.py']
 	RMFILES+=[PACKDIR+'/build/scons-signatures.dblite']
-	
+
 	RMDIRS =find(PACKDIR, '*/CVS')
 	RMDIRS+=glob.glob(PACKDIR+'/build/*-debug*')
 	RMDIRS+=glob.glob(PACKDIR+'/build/*-release')
@@ -462,7 +463,7 @@ def do_dist(target, source, env):
 
 	os.system('tar -czf %s %s' % (PACKDIR+'.tar.gz', PACKDIR))
 	shutil.rmtree(PACKDIR)
-		
+
 	return None
 
 dist=PhonyTarget("dist", do_dist)

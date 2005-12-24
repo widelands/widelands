@@ -3,7 +3,7 @@ Import('*')
 SRC=Glob('*.cc')
 
 srcenv=env.Copy()
-	
+
 srcenv.Append(CPPPATH=[
 		'#/src',
 		'#/src/ui/ui_basic',
@@ -30,6 +30,10 @@ srcenv.Append(LIBS='editortools', LIBPATH='editor/tools')
 SConscript('editor/SConscript')
 SConscript('ui/ui_basic/SConscript')
 SConscript('ui/ui_fs_menus/SConscript')
+
+INDENTLIST=Glob('sound_handler.*')
+indent=srcenv.astyle(source=INDENTLIST)
+env.Alias("indent", indent)
 
 binary=srcenv.Program(target='widelands', source=SRC)
 copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', TARGETDIR+'/widelands'))
