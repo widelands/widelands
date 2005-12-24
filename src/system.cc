@@ -254,10 +254,10 @@ void Sys_Init()
 			if (SDL_Init(SDL_INIT_VIDEO) < 0)
 				throw wexception("Failed to initialize SDL: %s", SDL_GetError());
 		}
-		
+
 		if (SDLNet_Init()<0)
 			throw wexception("Failed to initialize SDL_net: %s\n", SDLNet_GetError());
-		
+
 		sys.sdl_active = true;
 
 		SDL_ShowCursor(SDL_DISABLE);
@@ -274,6 +274,7 @@ void Sys_Init()
 			fclose(sys.fplayback);
 		sys.sdl_active = false;
 
+		throw;
 	}
 }
 
@@ -316,13 +317,13 @@ void Sys_Shutdown()
  * one is re-grabbed instead.
  *
  * So when a tribe loads, it grabs it's textdomain
- * loads all data and releases it -> we're back in 
+ * loads all data and releases it -> we're back in
  * widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
 void Sys_GrabTextdomain( const char* domain) {
-   bind_textdomain_codeset (domain, "UTF-8"); 
-   bindtextdomain( domain, LOCALE_PATH ); 
+   bind_textdomain_codeset (domain, "UTF-8");
+   bindtextdomain( domain, LOCALE_PATH );
    textdomain(domain);
 
    l_textdomains.push_back( domain );
@@ -332,8 +333,8 @@ void Sys_ReleaseTextdomain( void ) {
 
    if (l_textdomains.size()>0) { //don't try to get the previous TD when the very first one ('widelands') just got dropped
    	const char* domain = l_textdomains.back().c_str();
-   	bind_textdomain_codeset (domain, "UTF-8"); 
-   	bindtextdomain( domain, LOCALE_PATH ); 
+   	bind_textdomain_codeset (domain, "UTF-8");
+   	bindtextdomain( domain, LOCALE_PATH );
    	textdomain(domain);
    }
 }
@@ -343,12 +344,12 @@ void Sys_ReleaseTextdomain( void ) {
 void Sys_SetLocale( const char* str ) {
    if( !str )
       str = "";
-   
-   // Somehow setlocale doesn't behave same on 
+
+   // Somehow setlocale doesn't behave same on
    // some systems.
 #ifdef __BEOS__
-   setenv ("LANG", str, 1); 
-   setenv ("LC_ALL", str, 1); 
+   setenv ("LANG", str, 1);
+   setenv ("LC_ALL", str, 1);
 #endif
 #ifdef __APPLE__
    setenv ("LANGUAGE", str, 1);
@@ -359,7 +360,7 @@ void Sys_SetLocale( const char* str ) {
    const std::string env = std::string("LANG=") + str;
    putenv(env.c_str());
 #endif
-      
+
    setlocale(LC_ALL, str);
    if( l_textdomains.size() ) {
       const char* domain = l_textdomains.back().c_str();
@@ -585,8 +586,8 @@ restart:
 			case SDL_USEREVENT:
 				if (ev->user.code==Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC)
 					g_sound_handler.change_music();
-				
-				break;				
+
+				break;
 			}
 		}
 	}
@@ -967,7 +968,7 @@ void Sys_InitGraphics(int w, int h, int bpp, bool fullscreen)
 }
 
 
-#ifdef DEBUG 
+#ifdef DEBUG
 #ifndef __WIN32__
 #include <signal.h>
 
@@ -991,7 +992,7 @@ void yield_double_game ()
 {
 	if (pid_me==0)
 		return;
-	
+
 	if (may_run>0) {
 		may_run--;
 	        kill (pid_peer, SIGUSR1);
@@ -1008,21 +1009,21 @@ void init_double_game ()
 {
 	if (pid_me!=0)
 		return;
-	
+
 	pid_me=getpid();
 	pid_peer=fork();
-	
+
 	assert (pid_peer>=0);
-	
+
 	if (pid_peer==0) {
 	    pid_peer=pid_me;
 	    pid_me=getpid();
-	    
+
 	    may_run=1;
 	}
-	
+
 	signal (SIGUSR1, signal_handler);
-	
+
 	atexit (quit_handler);
 }
 #endif // WIN32
