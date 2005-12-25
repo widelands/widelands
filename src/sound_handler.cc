@@ -419,7 +419,7 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 	Mix_Chunk *m;
 
 	if (!fr.TryOpen(g_fs, filename)) {
-		log("WARNING: Could not open %s for reading!", filename.c_str());
+		log("WARNING: Could not open %s for reading!\n", filename.c_str());
 		return;
 	}
 

@@ -44,7 +44,7 @@ char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *f
 bool FS_CanonicalizeName(char *buf, int bufsize, const char *path);
 const char *FS_Filename(const char* buf);
 
-/*
+/**
 FileSystem is a base class representing certain filesystem operations.
 */
 class FileSystem {
@@ -67,7 +67,7 @@ public:
 	virtual void Write(std::string fname, void *data, int length) = 0;
    virtual void EnsureDirectoryExists(std::string dirname) = 0;
    virtual void MakeDirectory(std::string dirname) = 0;
-   
+
    virtual FileSystem*  MakeSubFileSystem( std::string dirname ) = 0;
    virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type ) = 0;
    virtual void Unlink( std::string ) = 0;
@@ -77,7 +77,7 @@ public:
 	static FileSystem *CreateFromZip(std::string file);
 };
 
-/*
+/**
 LayeredFileSystem is a file system which basically merges several layered
 real directory structures into a single one. The really funny thing is that
 those directories aren't represented as absolute paths, but as nested
@@ -86,7 +86,7 @@ Ultimately, this provides us with the necessary flexibility to allow file
 overrides on a per-user-basis, nested .zip files acting as Quake-like paks
 and so on.
 
-Note that only the top-most writable filesystem is written to. A typical
+\note Only the top-most writable filesystem is written to. A typical
 stack would look like this in real-life:
 
 ~/.widelands/
@@ -97,7 +97,7 @@ $CWD  <-- the current-working directory; this is useful for debugging, when the 
 class LayeredFileSystem : public FileSystem {
 public:
 	virtual void AddFileSystem(FileSystem *fs) = 0;
-   
+
 	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results) = 0;  // From FileSystem
 	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth) = 0;
 
@@ -106,7 +106,7 @@ public:
 };
 
 
-/*
+/**
 FileRead can be used to read a file.
 It works quite naively by reading the entire file into memory.
 Convenience functions are available for endian-safe access of common data types
@@ -129,7 +129,7 @@ public:
 	inline bool IsEOF() const { if(filepos>=length) return true; return false; }
    void SetFilePos(int pos);
    inline int GetFilePos(void) { return filepos; }
-   
+
 	inline char Signed8(int pos = -1) { return Deref8(Data(1, pos)); }
 	inline uchar Unsigned8(int pos = -1) { return (uchar)Deref8(Data(1, pos)); }
 	inline short Signed16(int pos = -1) { return Little16(Deref16(Data(2, pos))); }
@@ -157,8 +157,8 @@ public:
 	}
 };
 
-/*
-Mirror of FileRead: all writes are first stored in a block of memory and finally
+/**
+Mirror of \ref FileRead : all writes are first stored in a block of memory and finally
 written out when Write() is called.
 */
 class FileWrite {
@@ -168,7 +168,7 @@ public:
 	int	maxsize;
 	int	filepos;
    int   counter;
-   
+
 public:
 	FileWrite();
 	~FileWrite();
@@ -179,7 +179,7 @@ public:
 
    void ResetByteCounter(void);
    int  GetByteCounter(void);
-   int  GetFilePos(void); 
+   int  GetFilePos(void);
 	void SetFilePos(int pos);
 	void Data(const void *data, int size, int pos = -1);
 

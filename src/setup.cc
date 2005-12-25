@@ -116,7 +116,7 @@ void setup_searchpaths(int argc, char **argv)
 	// TODO: implement this for UIWindows (yes, NT-based ones are actually multi-user)
 #ifndef	WIN32
 	std::string path;
-	char *buf=getenv("HOME");
+	char *buf=getenv("HOME"); //do not use FS_GetHomedir() to not accidentally create ./.widelands
 
 	if (buf) { // who knows, maybe the user's homeless
 		path = std::string(buf) + "/.widelands";

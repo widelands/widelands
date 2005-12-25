@@ -218,6 +218,8 @@ void Sys_Init()
 			sys.frecord = fopen(sys_recordname, "wb");
 			if (!sys.frecord)
 				throw wexception("Failed to open record file %s", sys_recordname);
+			else
+				log("Recording into %s\n", sys_recordname);
 
 			write_record_int(RFC_MAGIC);
 		}
@@ -226,6 +228,8 @@ void Sys_Init()
 			sys.fplayback = fopen(sys_playbackname, "rb");
 			if (!sys.fplayback)
 				throw wexception("Failed to open playback file %s", sys_playbackname);
+			else
+				log("Playing back from %s\n", sys_recordname);
 
 			if (read_record_int() != RFC_MAGIC)
 				throw wexception("Playback file has wrong magic number");
@@ -383,12 +387,18 @@ I don't see why you would want to do that.
 */
 void Sys_SetRecordFile(const char *filename)
 {
-	snprintf(sys_recordname, sizeof(sys_recordname), "%s", filename);
+	char expanded_filename[1024];
+
+	FS_CanonicalizeName(expanded_filename, 1024, filename);
+	snprintf(sys_recordname, sizeof(sys_recordname), "%s", expanded_filename);
 }
 
 void Sys_SetPlaybackFile(const char *filename)
 {
-	snprintf(sys_playbackname, sizeof(sys_playbackname), "%s", filename);
+	char expanded_filename[1024];
+
+	FS_CanonicalizeName(expanded_filename, 1024, filename);
+	snprintf(sys_playbackname, sizeof(sys_playbackname), "%s", expanded_filename);
 }
 
 /*

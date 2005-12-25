@@ -47,7 +47,7 @@ LayeredFileSystem *g_fs;
 
 /** Reference to the global \ref Sound_Handler object
  * The sound handler is a static object because otherwise it'd be quite difficult to pass the --nosound
- * command line option 
+ * command line option
 */
 Sound_Handler g_sound_handler;
 
@@ -96,7 +96,7 @@ static void g_init(int argc, char **argv)
 		s->get_bool("workareapreview");
 		s->get_bool("nozip");
       // KLUDGE!
-   
+
       // Set Locale and grab default domain
       Sys_SetLocale( s->get_string( "language" ));
       Sys_GrabTextdomain("widelands");
@@ -163,7 +163,7 @@ void g_main(int argc, char** argv)
 			if(NetGGZ::ref()->connect())
 			{
 				NetGame *netgame;
-				
+
 				if(NetGGZ::ref()->host()) netgame = new NetHost();
 				else
 				{
@@ -224,7 +224,7 @@ void g_main(int argc, char** argv)
                                  }
                                  continue;
                               }
-                           
+
                            case Fullscreen_Menu_SinglePlayer::sp_tutorial:
                               {
                                  Fullscreen_Menu_TutorialSelectMap* sm = new Fullscreen_Menu_TutorialSelectMap;
@@ -232,17 +232,17 @@ void g_main(int argc, char** argv)
                                  if(code) {
                                     std::string mapname = sm->get_mapname( code );
                                     delete sm;
-                                    
+
                                     Game* g = new Game;
                                     bool run = g->run_splayer_map_direct( mapname.c_str(), true);
                                     delete g;
-                                    if(run) 
+                                    if(run)
                                        done = true;
                                     continue;
                                  }
                                  // Fallthrough if back was pressed
                               }
-                           
+
                            default:
                            case Fullscreen_Menu_SinglePlayer::sp_back:
                               done = true;
@@ -251,16 +251,16 @@ void g_main(int argc, char** argv)
                      }
                   }
                   break;
-	       
-	       
+
+
 	       case Fullscreen_Menu_Main::mm_multiplayer:
 		  {
 			Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
 			if(NetGGZ::ref()->tables().size() > 0) ns->fill(NetGGZ::ref()->tables());
 			int code=ns->run();
-			
+
 			NetGame* netgame = 0;
-			
+
 			if (code==Fullscreen_Menu_NetSetup::HOSTGAME)
 			    netgame=new NetHost();
 			else if (code==Fullscreen_Menu_NetSetup::JOINGAME) {
@@ -270,7 +270,7 @@ void g_main(int argc, char** argv)
 //				    throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
 			    ulong addr;
 			    ushort port;
-			    
+
 			    if (!ns->get_host_address(addr,port))
 				    throw wexception("Address of game server is no good");
 
@@ -282,12 +282,12 @@ void g_main(int argc, char** argv)
             delete ns;
             Fullscreen_Menu_InetServerOptions* igo = new Fullscreen_Menu_InetServerOptions();
             int code=igo->run();
-           
+
             // Get informations here
             std::string host = igo->get_server_name();
             std::string player = igo->get_player_name();
             delete igo;
-            
+
             if(code) {
                Game_Server_Connection csc(host, GAME_SERVER_PORT);
 
@@ -299,7 +299,7 @@ void g_main(int argc, char** argv)
                }
 
                csc.set_username(player.c_str());
-               
+
                // Wowi, we are connected. Let's start the lobby
                Fullscreen_Menu_InetLobby* il = new Fullscreen_Menu_InetLobby(&csc);
                il->run();
@@ -322,9 +322,9 @@ void g_main(int argc, char** argv)
 			}
 			else
 			    break;
-			
+
 			delete ns;
-			
+
 			netgame->run();
 			delete netgame;
 		  }
@@ -349,7 +349,7 @@ void g_main(int argc, char** argv)
 
                case Fullscreen_Menu_Main::mm_license:
                   {
-                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView( "txts/COPYING" ); 
+                     Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView( "txts/COPYING" );
                      ff->run();
                      delete ff;
                   }
@@ -404,7 +404,7 @@ int main(int argc, char** argv)
 #ifdef __MINGW__
 #undef main
 
-// This is a hack needed for mingw under windows 
+// This is a hack needed for mingw under windows
 int main(int argc, char** argv) {
 	g_main(argc,argv);
 return 0;

@@ -19,6 +19,7 @@
 // this originally comes from Return to the Shadows (http://www.rtts.org/)
 // files.cc: provides all the OS abstraction to access files
 
+#include "config.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -133,6 +134,26 @@ char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *f
 	return buf;
 }
 
+char *FS_GetHomedir()
+{
+	char *homedir;
+#ifdef HAS_GETENV
+	homedir=getenv("HOME");
+	if (homedir==NULL)
+		homedir="";
+#else
+	homedir="";
+#endif
+
+	if (strlen(homedir)==0) {
+		printf("\nWARNING: either I can not detect your home directory or you don't have one! Please contact the developers.\n");
+		printf("Instead of your home directory, '.' will be used.\n\n");
+		homedir=".";
+	}
+
+	return homedir;
+}
+
 /*
 ==============
 FS_CanonicalizeName
@@ -142,13 +163,14 @@ Turn the given path into a simpler one. Returns false for illegal paths.
 */
 bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 {
-	const char *tok;
-	int toklen;
-	char *p;
+   const char *tok;
+   int toklen;
+   char *p;
    bool skip_token;
-   
-   // clear the dst buffer
-   memset(buf, 0, bufsize);
+   char *homedir;
+
+   	// clear the dst buffer
+   	memset(buf, 0, bufsize);
 
 	p = buf;
 	while(*path) {
@@ -162,13 +184,32 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 		path += toklen;
 
 
-      skip_token=false;
-      
+      		skip_token=false;
+
+		// tilde expansion
+		if (toklen == 1 && !strncmp(tok, "~", 1)) {
+			homedir=FS_GetHomedir();
+			toklen=strlen(homedir);
+
+			if (p+toklen>=buf+bufsize)	// expanded path too long
+				return false;
+
+			if (toklen!=0) {
+				memcpy(p, homedir, toklen);
+				p+=toklen;
+				memcpy(p, tok+1, 1); //need path separator too
+				p+=1;
+			}
+
+			continue;
+		}
+
 		// check for '.', '..', ...
 		if (toklen == 1 && !strncmp(tok, ".", 1))
 			continue;
+
 		if (toklen == 2 && !strncmp(tok, "..", 2)) {
-         p--;
+         		p--;
 			while(p > buf) {
 				if (*(p-1) == '/')
 					break;
@@ -176,27 +217,26 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 			}
 			if (p < buf)
 				return false; // too many '..'s
-         skip_token=true;
-      }
+         		skip_token=true;
+      		}
 
 		// use the token
 		if (p + toklen >= buf + bufsize)
 			return false; // path is too long
 
-      if(!skip_token) {
-         memcpy(p, tok, toklen);
-         p += toklen;
-      }
+      		if(!skip_token) {
+			memcpy(p, tok, toklen);
+         		p += toklen;
+      		}
 		if (*path)
 			*p++ = '/';
 	}
-   *p = 0;
+
+   	*p = 0;
 	if(*(p-1)=='/' || *(p-1)=='\\')
-      *(p-1)=0;
+      		*(p-1)=0;
 
 	return true;
-
-   
 }
 
 /*
@@ -570,7 +610,7 @@ void FileWrite::Data(const void *buf, int size, int pos)
 		length = i+size;
 	}
 
-   counter += size; 
+   counter += size;
 
 	memcpy((char*)data + i, buf, size);
 }
@@ -631,7 +671,7 @@ public:
 
 	virtual void *Load(std::string fname, int *length);
 	virtual void Write(std::string fname, void *data, int length);
-   
+
    virtual FileSystem* MakeSubFileSystem( std::string dirname );
    virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
    virtual void Unlink(std::string file);
@@ -769,13 +809,13 @@ bool RealFSImpl::IsDirectory(std::string path)
 {
    // This is kludge to work around problems with windows.
    // It seems windows fails to open "directory/..", therefore
-   // our directory check fails there always. Windows suckz! 
+   // our directory check fails there always. Windows suckz!
    std::string filename = FS_Filename( path.c_str());
    if( filename == "." || filename == ".." )
 	   return true;
-   
+
    if(!FileExists(path)) return false;
-   
+
    char canonical[256];
 	std::string fullname;
 	struct stat st;
@@ -805,7 +845,7 @@ FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
    fullname = m_directory + '/' + canonical;
 
    if( IsDirectory( path )) {
-      return new RealFSImpl( fullname ); 
+      return new RealFSImpl( fullname );
    } else {
       FileSystem* s =  new ZipFilesystem( fullname );
       return s;
@@ -818,9 +858,9 @@ FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
-   if( FileExists( path )) 
-      throw wexception( "Path %s already exists. Can't create a filesystem from it!\n", path.c_str()); 
-   
+   if( FileExists( path ))
+      throw wexception( "Path %s already exists. Can't create a filesystem from it!\n", path.c_str());
+
    char canonical[256];
    std::string fullname;
 
@@ -831,7 +871,7 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
 
    if( fs == FileSystem::FS_DIR ) {
       EnsureDirectoryExists( path );
-      return new RealFSImpl( fullname ); 
+      return new RealFSImpl( fullname );
    } else {
       FileSystem* s =  new ZipFilesystem( fullname );
       return s;
@@ -839,7 +879,7 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
    // Never here
    return 0;
 }
-    
+
 /*
  * Remove a number of files
  */
@@ -859,7 +899,7 @@ void RealFSImpl::Unlink(std::string file) {
 void RealFSImpl::m_unlink_file( std::string file ) {
    assert( FileExists( file ));
    assert(!IsDirectory( file ));
-   
+
    char canonical[256];
 	std::string fullname;
 
@@ -880,9 +920,9 @@ void RealFSImpl::m_unlink_directory( std::string file ) {
    assert( IsDirectory( file ));
 
    filenameset_t files;
-   
+
    FindFiles( file, "*", &files );
-   
+
    for(filenameset_t::iterator pname = files.begin(); pname != files.end(); pname++) {
 	   std::string filename = FS_Filename( (*pname).c_str());
 	if( filename == "CVS" ) // HACK: ignore CVS directory for this might be a campaign directory or similar
@@ -927,14 +967,14 @@ void RealFSImpl::EnsureDirectoryExists(std::string dirname) {
 
 /*
  * Create this directory, throw an error if it already exists or
- * if a file is in the way or if the creation fails. 
+ * if a file is in the way or if the creation fails.
  *
- * Pleas note, this function does not honor parents, 
+ * Pleas note, this function does not honor parents,
  * MakeDirectory("onedir/otherdir/onemoredir") will fail
  * if either ondir or otherdir is missing
  */
 void RealFSImpl::MakeDirectory(std::string dirname) {
-   if(FileExists(dirname)) 
+   if(FileExists(dirname))
       throw wexception("A File with the name %s already exists\n", dirname.c_str());
 
    char canonical[256];
@@ -951,7 +991,7 @@ void RealFSImpl::MakeDirectory(std::string dirname) {
 #else
    retval=mkdir(fullname.c_str(), 0x1FF);
 #endif
-   if(retval==-1) 
+   if(retval==-1)
       throw wexception("Couldn't create directory %s: %s\n", dirname.c_str(), strerror(errno));
 }
 
@@ -1064,7 +1104,7 @@ FileSystem *FileSystem::CreateFromDirectory(std::string directory)
 ===============
 FileSystem::CreateFromZip [static]
 
-Create a filesystem from a zip file 
+Create a filesystem from a zip file
 ===============
 */
 FileSystem *FileSystem::CreateFromZip(std::string filename)
@@ -1100,7 +1140,7 @@ public:
 
 	virtual void *Load(std::string fname, int *length);
 	virtual void Write(std::string fname, void *data, int length);
-   
+
    virtual FileSystem* MakeSubFileSystem( std::string dirname );
    virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
    virtual void Unlink(std::string file);
@@ -1155,7 +1195,7 @@ void LayeredFSImpl::AddFileSystem(FileSystem *fs)
 LayeredFSImpl::FindFiles
 
 Find files in all sub-filesystems in the given path, with the given pattern.
-Store all found files in results. 
+Store all found files in results.
 
 If depth is not 0 only search this many subfilesystems.
 
@@ -1167,7 +1207,7 @@ int LayeredFSImpl::FindFiles(std::string path, std::string pattern, filenameset_
    int i=0;
    if(!depth)
       depth=10000; // Wow, if you have so many filesystem you're my hero
-   
+
 	for(FileSystem_rit it = m_filesystems.rbegin(); (it != m_filesystems.rend()) && (i<depth); it++, i++) {
 		filenameset_t files;
 		(*it)->FindFiles(path, pattern, &files);
@@ -1264,7 +1304,7 @@ void LayeredFSImpl::Write(std::string fname, void *data, int length)
 	throw wexception("LayeredFSImpl: No writable filesystem!");
 }
 
-/* 
+/*
  * MakeDir in first writable directory
  */
 void LayeredFSImpl::MakeDirectory(std::string dirname) {
@@ -1301,10 +1341,10 @@ FileSystem* LayeredFSImpl::MakeSubFileSystem(std::string dirname ) {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		if (!(*it)->IsWritable())
 			continue;
-      
-      if(! (*it)->FileExists(dirname)) 
+
+      if(! (*it)->FileExists(dirname))
          continue;
-      
+
       return (*it)->MakeSubFileSystem(dirname);
 	}
 
@@ -1312,26 +1352,26 @@ FileSystem* LayeredFSImpl::MakeSubFileSystem(std::string dirname ) {
 }
 
 /*
- * Create a new subfilesystem 
+ * Create a new subfilesystem
  */
 FileSystem* LayeredFSImpl::CreateSubFileSystem(std::string dirname, Type type ) {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		if (!(*it)->IsWritable())
 			continue;
-     
+
       return (*it)->CreateSubFileSystem( dirname, type );
 	}
 
 	throw wexception("LayeredFSImpl: Wasn't able to create sub filesystem!");
 }
-    
+
 /*
  * Remove this file or directory. If it is a directory, remove it recursivly
  */
-void LayeredFSImpl::Unlink( std::string file ) { 
+void LayeredFSImpl::Unlink( std::string file ) {
   if( !FileExists( file ))
      return;
-  
+
    for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
 		if (!(*it)->IsWritable())
 			continue;

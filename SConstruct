@@ -252,12 +252,24 @@ env.Tool("astyle", toolpath=['build/scons-tools'])
 
 ############################################################################ Configure - Library autodetection
 
-if not conf.CheckLibWithHeader('intl', header='locale.h', language='C', autoadd=1):
-	if conf.CheckHeader('locale.h'):
-		print 'Looks like gettext is included in your libc.'
-	else:
-		print 'Could not find gettext library! Is it installed?'
-		Exit(1)
+#if not conf.CheckLibWithHeader('intl', header='libintl.h', language='C', call='gettext("test");', autoadd=1):
+#	if conf.CheckHeader('locale.h'):
+#		print 'Looks like gettext is included in your libc.'
+#	else:
+#		print 'Could not find gettext library! Is it installed?'
+#		Exit(1)
+
+if conf.CheckFunc('setlocale') and conf.CheckFunc('textdomain'):
+	print '   NLS subsystem found.'
+else:
+	#TODO: use dummy replacements that just pass back the original string
+	print '   No usable NLS subsystem found. Please install gettext.'
+	Exit(1)
+
+if not conf.CheckFunc('getenv'):
+	print 'Your system does not support getenv(). Tilde epansion in filenames will not work.'
+else:
+	config_h_file.write("#define HAS_GETENV\n");
 
 if not conf.CheckSDLConfig():
 	print 'Could not find sdl-config! Is SDL installed?'
@@ -316,7 +328,6 @@ env=conf.Finish()
 ########################################################################### Use distcc if available
 
 # not finished yet
-
 #if os.path.exists('/usr/lib/distcc/bin'):
 #	env['ENV']['DISTCC_HOSTS'] = os.environ['DISTCC_HOSTS']
 #	env['ENV']['PATH'] = '/usr/lib/distcc/bin:'+env['ENV']['PATH']
