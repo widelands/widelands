@@ -333,7 +333,7 @@ env=conf.Finish()
 #	env['ENV']['PATH'] = '/usr/lib/distcc/bin:'+env['ENV']['PATH']
 #	env['ENV']['HOME'] = os.environ['HOME']
 
-############################################################################ Configure - config.h
+############################################################################ Configure - finish config.h
 
 config_h_file.write("\n#define INSTALL_DATADIR \""+DATADIR+"\"\n")
 
@@ -347,13 +347,13 @@ config_h_file.close()
 
 SConsignFile('build/scons-signatures')
 
-TARGETDIR='build/'+TARGET+'-'+env['build']
+BUILDDIR='build/'+TARGET+'-'+env['build']
 
-Export('env', 'Glob', 'TARGETDIR')
+Export('env', 'Glob', 'BUILDDIR')
 
 ############### The binary
 
-thebinary=SConscript('src/SConscript', build_dir=TARGETDIR, duplicate=0)
+thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
 
 ############### tags
 
@@ -392,7 +392,7 @@ def do_inst(target, source, env):
 	if not os.path.exists(BINDIR):
 		os.makedirs(BINDIR, 0755)
 	print 'Installing ', os.path.join(BINDIR, 'widelands')
-	shutil.copy(os.path.join(TARGETDIR, 'widelands'), BINDIR)
+	shutil.copy(os.path.join(BUILDDIR, 'widelands'), BINDIR)
 
 	shutil.rmtree(DATADIR, ignore_errors=1)
 	os.makedirs(DATADIR, 0755)

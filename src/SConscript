@@ -32,11 +32,12 @@ SConscript('ui/ui_basic/SConscript')
 SConscript('ui/ui_fs_menus/SConscript')
 
 INDENTLIST=Glob('sound_handler.*')
+print INDENTLIST
 indent=srcenv.astyle(source=INDENTLIST)
 env.Alias("indent", indent)
 
 binary=srcenv.Program(target='widelands', source=SRC)
-copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', TARGETDIR+'/widelands'))
+copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', BUILDDIR+'/widelands'))
 Default(copybinary)
 
 Return('copybinary')
