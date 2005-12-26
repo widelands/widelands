@@ -22,25 +22,15 @@
 #include "field.h"
 #include "geometry.h"
 
-/** class Field
- *
- * a field like it is represented in the game
- */
-// TODO: This is all one evil hack :(
-
 #define V3	(float)0.57735 // sqrt(1/3)
 #define LIGHT_FACTOR		75
 
-/*
-===============
-calc_brightness
-
-Calculate brightness based upon the slopes.
-===============
-*/
+/**
+ * Calculate brightness based upon the slopes.
+ */
 static float calc_brightness(int l, int r, int tl, int tr, int bl, int br)
 {
-	static Vector sun = Vector(V3, -V3, -V3);	// |sun| = 1
+	static Vector sun_vect = Vector(V3, -V3, -V3);	// |sun_vect| = 1
 
 	Vector normal;
 
@@ -71,20 +61,16 @@ static float calc_brightness(int l, int r, int tl, int tr, int bl, int br)
 #pragma warning(default:4244)
 #endif
 
-	float b = normal * sun;
+	float b = normal * sun_vect;
 	b *= -LIGHT_FACTOR;
 
 	return b;
 }
 
-/*
-===============
-Field::set_brightness
-
-Set the field's brightness based upon the slopes.
-Slopes are calulated as this field's height - neighbour's height.
-===============
-*/
+/**
+ * Set the field's brightness based upon the slopes.
+ * Slopes are calulated as this field's height - neighbour's height.
+ */
 void Field::set_brightness(int l, int r, int tl, int tr, int bl, int br)
 {
 	static float flatbrightness = 0; // HACK to normalize flat terrain to zero brightness

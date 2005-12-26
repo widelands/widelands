@@ -48,34 +48,34 @@
 // change much, it's just a question of style and code understanding)
 
 enum FieldCaps {
-	// can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary masking)
+	/** can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary masking)*/
 	BUILDCAPS_SMALL = 1,
 	BUILDCAPS_MEDIUM = 2,
 	BUILDCAPS_BIG = 3,
 	BUILDCAPS_SIZEMASK = 3,
 
-	// can we build a flag on this field?
+	/** can we build a flag on this field?*/
 	BUILDCAPS_FLAG = 4,
 
-	// can we build a mine on this field (completely independent from build size!)
+	/** can we build a mine on this field (completely independent from build size!)*/
 	BUILDCAPS_MINE = 8,
 
-	// (only if BUILDCAPS_BIG): can we build a harbour on this field?
-	// this should be automatically set for BUILDCAPS_BIG fields that have a swimmable second-order neighbour
+	/** (only if BUILDCAPS_BIG): can we build a harbour on this field?
+	 * this should be automatically set for BUILDCAPS_BIG fields that have a swimmable second-order neighbour*/
 	BUILDCAPS_PORT = 16,
 
-	// can we build any building on this field?
+	/** can we build any building on this field?*/
 	BUILDCAPS_BUILDINGMASK = BUILDCAPS_SIZEMASK|BUILDCAPS_MINE|BUILDCAPS_PORT,
 
-	// Can Map_Objects walk or swim here? Also used for Map_Object::get_movecaps()
-	// If MOVECAPS_WALK, any walking being can walk to this field
+	/** Can Map_Objects walk or swim here? Also used for Map_Object::get_movecaps()
+	 * If MOVECAPS_WALK, any walking being can walk to this field*/
 	MOVECAPS_WALK = 64,
 
-	// If MOVECAPS_SWIM, any swimming being (including ships) can go there
-	// Additionally, swimming beings can temporarily visit fields that are walkable
-	// but not swimmable if those fields are at the start or end of their path.
-	// Without this clause, harbours would be kind of impossible ;)
-	// This clause stops ducks from "swimwalking" along the coast
+	/** If MOVECAPS_SWIM, any swimming being (including ships) can go there
+	* Additionally, swimming beings can temporarily visit fields that are walkable
+	* but not swimmable if those fields are at the start or end of their path.
+	* Without this clause, harbours would be kind of impossible ;)
+	* This clause stops ducks from "swimwalking" along the coast*/
 	MOVECAPS_SWIM = 128,
 };
 
@@ -95,6 +95,10 @@ class Terrain_Descr;
 class Bob;
 class BaseImmovable;
 
+/**
+ * a field like it is represented in the game
+ * \todo This is all one evil hack :(
+ */
 class Field {
    friend class Map;
 	friend class Bob;
@@ -103,14 +107,24 @@ class Field {
 private:
    uchar height;
 	char   brightness;
-	uchar caps; // what can we build here, who can walk here [8 bits used]
-	uchar owned_by; // 0 = neutral; otherwise: player number
-	uchar roads; // are any roads on this field? [6 bits used]
+
+	/** what can we build here, who can walk here [8 bits used]*/
+	uchar caps;
+
+	/** 0 = neutral; otherwise: player number*/
+	uchar owned_by;
+
+	/** are any roads on this field? [6 bits used]*/
+	uchar roads;
 	uchar m_resources;
-   uchar m_starting_res_amount; // how much has there been
-   uchar m_res_amount;
+
+	/** how much has there been*/
+	uchar m_starting_res_amount;
+	uchar m_res_amount;
 	Terrain_Descr *terr, *terd;
-	Bob* bobs; // linked list, see Bob::m_linknext
+
+	/** linked list, \sa Bob::m_linknext*/
+	Bob* bobs;
 	BaseImmovable* immovable;
 
 public:
@@ -144,10 +158,10 @@ public:
    inline void set_starting_res_amount(int amount) { m_starting_res_amount=amount; }
    inline int get_starting_res_amount(void) { return m_starting_res_amount; }
 
-   // note: you must reset this field's + neighbor's brightness when you change the height
-   // Map's change_height does this
-   // This function is not private, because the loader and an empty map creator will use them directly
-   // But realize, most of the times you will need Map::set_field_height()
+   /** \note you must reset this field's + neighbor's brightness when you change the height
+    * Map's change_height does this
+    * This function is not private, because the loader and an empty map creator will use them directly
+    * But realize, most of the times you will need Map::set_field_height()*/
    inline void set_height(uchar h) { if((signed char)h<0) h=0; if(h>MAX_FIELD_HEIGHT) h=MAX_FIELD_HEIGHT; height = h; }
 };
 
