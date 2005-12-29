@@ -12,13 +12,6 @@ srcenv.Append(CPPPATH=[
 		'#/src/editor/tools',
 		'#/src/editor/ui_menus',
 		])
-srcenv.Append(LIBS=[
-		'png',
-		'SDL_image',
-		'SDL_mixer',
-		'SDL_ttf',
-		'SDL_net',
-		])
 
 Export('srcenv', 'Glob')
 srcenv.Append(LIBS='uibasic', LIBPATH='ui/ui_basic')

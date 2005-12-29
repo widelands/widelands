@@ -136,6 +136,13 @@ opts.AddOptions(
 
 env=Environment(options=opts)
 print 'Platform:', env['PLATFORM']
+
+if env['PLATFORM']=='darwin':
+	# this is where DarwinPorts puts stuff by default
+	env.Append(CPPPATH='/opt/local/include')
+	env.Append(LIBPATH='/opt/local/lib')
+	env.Append(PATH='/opt/local/bin')
+
 env.Help(opts.GenerateHelpText(env))
 env.Append(CPPPATH=env['extra_include_path'])
 env.Append(LIBPATH=env['extra_lib_path'])
@@ -290,19 +297,19 @@ if not conf.CheckLibWithHeader('png', header='png.h', language='C', autoadd=1):
 	print 'Could not find the png library! Is it installed?'
 	Exit(1)
 
-if not conf.CheckLibWithHeader('SDL_image', header='SDL_image.h', language='C', autoadd=1):
+if not conf.CheckLib(library='SDL_image', symbol='IMG_Load', autoadd=1):
 	print 'Could not find the SDL_image library! Is it installed?'
 	Exit(1)
 
-if not conf.CheckLibWithHeader('SDL_ttf', header='SDL_ttf.h', language='C', autoadd=1):
+if not conf.CheckLib(library='SDL_ttf', symbol='TTF_Init', autoadd=1):
 	print 'Could not find the SDL_ttf library! Is it installed?'
 	Exit(1)
 
-if not conf.CheckLibWithHeader('SDL_net', header='SDL_net.h', language='C', autoadd=1):
+if not conf.CheckLib(library='SDL_net', symbol='SDLNet_TCP_Open', autoadd=1):
 	print 'Could not find the SDL_net library! Is it installed?'
 	Exit(1)
 
-if not conf.CheckLibWithHeader('SDL_mixer', header='SDL_mixer.h', language='C', autoadd=1):
+if not conf.CheckLib(library='SDL_mixer', symbol='Mix_OpenAudio', autoadd=1):
 	print 'Could not find the SDL_mixer library! Is it installed?'
 	Exit(1)
 
