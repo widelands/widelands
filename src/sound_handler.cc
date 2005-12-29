@@ -351,7 +351,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 				szTempName);	// buffer for name
 		tempfile = szTempName;
 #else
-		tempfile = mktemp("/tmp/widelands-sfx.XXXXXXXX");	//manpage recommends a minimum suffix length of 6
+		tempfile = mktemp(strdup("/tmp/widelands-sfx.XXXXXXXX"));	//manpage recommends a minimum suffix length of 6
 #endif
 
 		if (tempfile == NULL) {
@@ -398,6 +398,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 
 #else
 		unlink(tempfile);
+		free(tempfile);
 
 #endif
 		return m;
