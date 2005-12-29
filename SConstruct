@@ -465,7 +465,7 @@ def do_dist(target, source, env):
 		shutil.copytree(f, os.path.join(PACKDIR, f))
 
 	RMFILES=find(PACKDIR, '*/.cvsignore')
-	#TODO: make sure scons-config.py entries are correct for distribution (install_prefix!!)
+	#TODO: do include a scons-config with suitable content, esp. build number
 	RMFILES+=[PACKDIR+'/build/scons-config.py']
 	RMFILES+=[PACKDIR+'/build/scons-signatures.dblite']
 

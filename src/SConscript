@@ -24,8 +24,11 @@ SConscript('editor/SConscript')
 SConscript('ui/ui_basic/SConscript')
 SConscript('ui/ui_fs_menus/SConscript')
 
-INDENTLIST=Glob('sound_handler.*')
-print INDENTLIST
+INDENTLIST=[
+	'sound_handler.h',
+	'sound_handler.cc'
+	]
+#print INDENTLIST
 indent=srcenv.astyle(source=INDENTLIST)
 env.Alias("indent", indent)
 

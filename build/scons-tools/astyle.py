@@ -14,7 +14,7 @@ def generate(env):
 		env['ASTYLECOM']='$ASTYLE $ASTYLEFLAGS $SOURCES'
 		env['BUILDERS']['astyle']=SCons.Builder.Builder(action=env['ASTYLECOM'])
 	else:
-		env['BUILDERS']['astyle']=env.Action(complain_astyle)
+		env['BUILDERS']['astyle']=SCons.Builder.Builder(action=env.Action(complain_astyle))
 
 def find_astyle(env):
 	b=env.WhereIs('astyle')
