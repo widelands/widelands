@@ -1,5 +1,3 @@
-import string
-import os
 import SCons.Builder
 import SCons.Action
 

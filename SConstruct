@@ -5,12 +5,55 @@ import SCons
 import time
 import glob
 from SCons.Script.SConscript import SConsEnvironment
+import string
 
 #Speedup. If you have problems with inconsistent or wrong builds, look here first
 SetOption('max_drift', 1)
 SetOption('implicit_cache', 1)
 
-##########################################################
+########################################################################### verbatim copy from env.ParseConfig for parsing `sdl-config`
+########################################################################### it's a nested function there, so we can't use it directly
+#TODO: this can be dropped once we use scons-0.97
+
+def parse_conf(env, output):
+            dict = {
+                'ASFLAGS'       : [],
+                'CCFLAGS'       : [],
+                'CPPFLAGS'      : [],
+                'CPPPATH'       : [],
+                'LIBPATH'       : [],
+                'LIBS'          : [],
+                'LINKFLAGS'     : [],
+            }
+            static_libs = []
+
+            params = string.split(output)
+            for arg in params:
+                if arg[0] != '-':
+                    static_libs.append(arg)
+                elif arg[:2] == '-L':
+                    dict['LIBPATH'].append(arg[2:])
+                elif arg[:2] == '-l':
+                    dict['LIBS'].append(arg[2:])
+                elif arg[:2] == '-I':
+                    dict['CPPPATH'].append(arg[2:])
+                elif arg[:4] == '-Wa,':
+                    dict['ASFLAGS'].append(arg)
+                elif arg[:4] == '-Wl,':
+                    dict['LINKFLAGS'].append(arg)
+                elif arg[:4] == '-Wp,':
+                    dict['CPPFLAGS'].append(arg)
+                elif arg == '-pthread':
+                    dict['CCFLAGS'].append(arg)
+                    dict['LINKFLAGS'].append(arg)
+                else:
+                    dict['CCFLAGS'].append(arg)
+            apply(env.Append, (), dict)
+            return static_libs
+
+
+
+########################################################################### Glob
 # glob.glob does not work with BuildDir(), so use the following replacement from
 # http://www.scons.org/cgi-bin/wiki/BuildDirGlob?highlight=%28glob%29
 # which I modified slightly to return a list of filenames instead of nodes
@@ -117,6 +160,31 @@ def CheckSDLVersionAtLeast(context, major, minor, micro):
 	else: ret=0
 	context.Result( ret )
 	return ret
+
+#TODO: this can be dropped once we use scons-0.97
+def ParseSDLConfig(env, confstring):
+	words=confstring.split()
+
+	print words
+	print env['LINKFLAGS']
+
+	for i, w in enumerate(words):
+		print i, w
+		if w=='-framework':
+			#remove implicitly causes the new element i to be the former i+1, so the next two lines remove two consecutive tokens
+			words.remove(w)
+			w2=words.pop(i)
+			env['LINKFLAGS']+=w+' '+w2
+
+	print words
+	print env['LINKFLAGS']
+
+	print string.join(words)
+
+	# problematic flags have been taken care of, call the standard parser
+	parse_conf(env, string.join(words))
+
+	return
 
 ############################################################################ Options
 
@@ -286,8 +354,7 @@ if not conf.CheckSDLVersionAtLeast(1, 2, 8):
 	print 'Could not find an SDL version >= 1.2.8!'
 	Exit(1)
 
-env.ParseConfig(env['sdlconfig']+' --libs')
-env.ParseConfig(env['sdlconfig']+' --cflags')
+env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
 
 if not conf.CheckLibWithHeader('z', header='zlib.h', language='C', autoadd=1):
 	print 'Could not find the zlib library! Is it installed?'
@@ -367,7 +434,6 @@ thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
 #we'd only need the first directory component - but directories cannot be passed via source=
 S=find('src', '*.h')
 S+=find('src', '*.cc')
-S.remove('src/build_id.h')
 Alias('tags', env.ctags(source=S, target='tags'))
 Default('tags')
 
