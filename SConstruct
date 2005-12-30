@@ -165,21 +165,12 @@ def CheckSDLVersionAtLeast(context, major, minor, micro):
 def ParseSDLConfig(env, confstring):
 	words=confstring.split()
 
-	print words
-	print env['LINKFLAGS']
-
 	for i, w in enumerate(words):
-		print i, w
 		if w=='-framework':
 			#remove implicitly causes the new element i to be the former i+1, so the next two lines remove two consecutive tokens
 			words.remove(w)
 			w2=words.pop(i)
 			env.Append(LINKFLAGS=w+' '+w2)
-
-	print words
-	print env['LINKFLAGS']
-
-	print string.join(words)
 
 	# problematic flags have been taken care of, call the standard parser
 	parse_conf(env, string.join(words))
