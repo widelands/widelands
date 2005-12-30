@@ -174,7 +174,7 @@ def ParseSDLConfig(env, confstring):
 			#remove implicitly causes the new element i to be the former i+1, so the next two lines remove two consecutive tokens
 			words.remove(w)
 			w2=words.pop(i)
-			env['LINKFLAGS']+=w+' '+w2
+			env.Append(LINKFLAGS=w+' '+w2)
 
 	print words
 	print env['LINKFLAGS']
@@ -247,7 +247,7 @@ if env['build']=='profile':
 if env['build']=='release':
 	OPTIMIZE=1
 	env.Append(CCFLAGS=' -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations')
-	env.Append(LINKFLAGS=[' -s'])
+	env.Append(LINKFLAGS=' -s')
 
 if DEBUG:
 	env.Append(CCFLAGS=' -g -DDEBUG -fmessage-length=0')
@@ -431,11 +431,11 @@ thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
 
 ############### tags
 
-#we'd only need the first directory component - but directories cannot be passed via source=
 S=find('src', '*.h')
 S+=find('src', '*.cc')
 Alias('tags', env.ctags(source=S, target='tags'))
-Default('tags')
+if env['build'] == 'release':
+	Default('tags')
 
 ############### PNG shrinking
 
