@@ -20,49 +20,80 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-// define current version
+/**
+ * \file constants.h
+ * \brief Global compile time configuration
+ *
+ * Changes have wide impact on recompile time.
+ * Lots more are scattered through header files
+ */
+
+/// Version mark for the build. Appears in title screen
 #define VERSION "cvs 24-12-2005 (inofficial)"
 
-// locale path: This would be needed to be changed by a packager
-// The default search path for locales is in the locale directory
-// but if widelands is installed, this changes to something like
-// /usr/locale/share/*. If so, change here
+/**
+ * locale path: This would be needed to be changed by a packager
+ *
+ * The default search path for locales is in the locale directory
+ * but if widelands is installed, this changes to something like
+ * /usr/locale/share/*. If so, change here
+ */
 #define LOCALE_PATH "locale"
 
-#define TEXTURE_W 64        // texture have a fixed size and are squares
-#define TEXTURE_H TEXTURE_W // TEXTURE_H is just defined for easier understandement of the code
+/* \name Textures
+ * textures have a fixed size and are squares
+ * TEXTURE_H is just defined for easier understandement of the code*/
+//@{
+#define TEXTURE_W 64
+#define TEXTURE_H TEXTURE_W
+//@}
 
-// The background colors are chosen to match the user interface 
-// backgrounds
+/// \name Fonts
+/// Font constants, defined including size
+//@{
 #define UI_FONT_BIG "FreeSerif.ttf", 22
-#define UI_FONT_ULTRASMALL "FreeSans.ttf", 10
 #define UI_FONT_SMALL "FreeSerif.ttf", 14
-#define UI_FONT_CLR_FG  RGBColor(255,255,0)
-#define UI_FONT_BIG_CLR UI_FONT_CLR_FG, RGBColor(107,87,55)
-#define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, RGBColor(107,87,55)
+#define UI_FONT_ULTRASMALL "FreeSans.ttf", 10
+
 #define UI_FONT_TOOLTIP UI_FONT_SMALL
-#define UI_FONT_TOOLTIP_CLR RGBColor(100,100,255), RGBColor(230,200,50)
 #define PROSA_FONT       "FreeSerif.ttf", 18
+
+//@}
+
+/// \name Font colors
+/// No background color
+//@{
+
+/// Global UI font color
+#define UI_FONT_CLR_FG  RGBColor(255,255,0)
+/// Prosa font color
 #define PROSA_FONT_CLR_FG   RGBColor(255,255,0)
 
+//@}
 
-/*
-================================================================================
+/** \name Text colors
+ * User interface text color constants
+ *
+ * Defined as "<fontcolor>, <background color>".
+ * The background colors are chosen to match the user interface
+ * backgrounds.
+ */
+//@{
+#define UI_FONT_BIG_CLR UI_FONT_CLR_FG, RGBColor(107,87,55)
+/// small is used for ultrasmall, too
+#define UI_FONT_SMALL_CLR UI_FONT_CLR_FG, RGBColor(107,87,55)
+#define UI_FONT_TOOLTIP_CLR RGBColor(100,100,255), RGBColor(230,200,50)
+//@}
 
-      COMPILE TIME CONFIGURATION
-
-================================================================================
-*/
-
-// the actual game logic doesn't know about frames (it works with millisecond-precise
-// timing)
-// FRAME_LENGTH is just the default animation speed
+/// the actual game logic doesn't know about frames
+/// (it works with millisecond-precise timing)
+/// FRAME_LENGTH is just the default animation speed
 #define FRAME_LENGTH 250
 
-// Maxi numbers of players in a game
+/// Maxi numbers of players in a game
 #define MAX_PLAYERS		8
 
-// How often are statistics to be sampled
+/// How often are statistics to be sampled
 #define STATISTICS_SAMPLE_TIME 30000
 
 #endif

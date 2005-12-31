@@ -133,7 +133,7 @@ Mix_Music *Songset::get_song()
 
 //--------------------------------------------------------------------------------------
 
-/** Create an FXset and set it's \ref priority
+/** Create an FXset and set it's \ref m_priority
  * \param[in] prio	The desired priority (optional)*/
 FXset::FXset(Uint8 prio)
 {
@@ -156,7 +156,7 @@ FXset::~FXset()
 
 /** Append a sound effect to the end of the fxset
  * \param[in] fx	The sound fx to append
- * \param[in] prio	Set previous \ref priority to new value (optional)*/
+ * \param[in] prio	Set previous \ref m_priority to new value (optional)*/
 void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
 {
 	assert(fx);

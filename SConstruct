@@ -386,7 +386,7 @@ else:
 	config_h_file.write("#define NEW_SDL_MIXER 0\n\n");
 	print 'SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
 
-env.Append(CCFLAGS=' -pipe -Wall')
+env.Append(CCFLAGS=' -pipe -Wall -Wno-comment')
 
 env=conf.Finish()
 
