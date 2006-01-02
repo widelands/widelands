@@ -500,6 +500,7 @@ DISTFILES=[
 	]
 DISTDIRS=[
 	'build',
+	'campaigns',
 	'fonts',
 	'maps',
 	'music',
