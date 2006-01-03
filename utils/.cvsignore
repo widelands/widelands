@@ -1,3 +1,4 @@
+*.pyc
 scons-LICENSE
 scons-README
 sconsign.py

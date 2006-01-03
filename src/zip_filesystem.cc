@@ -88,6 +88,8 @@ int ZipFilesystem::FindFiles(std::string path, std::string pattern, filenameset_
   
    if( path[path.size()-1] != '/' ) 
       path += '/';
+   if( path[0] != '/' )
+      path = '/'+path;
 
    unzCloseCurrentFile( m_unzipfile );
    unzGoToFirstFile( m_unzipfile );
@@ -101,7 +103,7 @@ int ZipFilesystem::FindFiles(std::string path, std::string pattern, filenameset_
       std::string filename = FS_Filename( complete_filename.c_str() );
       std::string filepath = complete_filename.substr( 0, complete_filename.size()-filename.size());
       
-      if( path == filepath ) 
+      if ( ( path == filepath ) && ( filename != "" ) )
          results->insert( complete_filename );
       
       if( unzGoToNextFile( m_unzipfile ) == UNZ_END_OF_LIST_OF_FILE ) 
