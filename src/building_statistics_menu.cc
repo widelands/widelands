@@ -95,7 +95,7 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
    m_btn[1] = b;
    posy += 25;
 
-   // build  
+   // build
    new UITextarea(this, posx, posy, get_inner_w()/4, 24, _("In Build: "), Align_CenterLeft);
    m_build = new UITextarea(this, posx+ta->get_w(), posy, 100, 24, "", Align_CenterLeft);
    b = new UIButton(this, get_inner_w()-58, posy, 24, 24, 4, 2);
@@ -124,7 +124,7 @@ Building_Statistics_Menu::Building_Statistics_Menu(Interactive_Player* parent, U
    b = new UIButton(this, spacing, get_inner_w()-37, 32, 32, 4, 100);
    b->clickedid.set(this, &Building_Statistics_Menu::clicked);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
- 
+
    m_lastupdate = m_parent->get_game()->get_gametime();
    m_anim = 0;
    update();
@@ -152,7 +152,7 @@ void Building_Statistics_Menu::think( void ) {
    int gs = m_parent->get_game()->get_speed();
 
    if(gs==0) gs = 1;
-   
+
    if((m_parent->get_game()->get_gametime() - m_lastupdate)/gs > UPDATE_TIME ) {
       update();
       m_lastupdate = m_parent->get_game()->get_gametime();
@@ -160,7 +160,7 @@ void Building_Statistics_Menu::think( void ) {
 }
 
 /*
- * draw() 
+ * draw()
  *
  * Draw this window
  */
@@ -177,9 +177,9 @@ void Building_Statistics_Menu::draw(RenderTarget* dst) {
  * validate if this pointer is ok
  */
 int Building_Statistics_Menu::validate_pointer(int* id, int size) {
-   if(*id < 0) 
+   if(*id < 0)
       *id = size-1;
-   if(*id >= size) 
+   if(*id >= size)
       *id = 0;
 
    return *id;
@@ -194,27 +194,27 @@ void Building_Statistics_Menu::clicked(int id) {
    if(id == 100) {
       log("TODO: help not implemented\n");
       return;
-   } 
+   }
 
-   
+
    const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(m_selected);
-  
-   bool found = true; // We think, we always find a proper building 
+
+   bool found = true; // We think, we always find a proper building
 
    switch(id) {
       case 0:
          /* jump prev building */
          m_last_building_index--;
          break;
-         
-      case 1: 
+
+      case 1:
          /* Jump next building */
          m_last_building_index++;
          break;
 
       case 2:
          /* Jump to prev constructionsite */
-         { 
+         {
             int curindex = m_last_building_index;
             while( validate_pointer(&(--m_last_building_index), vec.size()) != curindex )
                if( vec[m_last_building_index].is_constructionsite ) break;
@@ -223,7 +223,7 @@ void Building_Statistics_Menu::clicked(int id) {
 
       case 3:
          /* Jump to next constructionsite */
-         { 
+         {
             int curindex = m_last_building_index;
             while( validate_pointer(&(++m_last_building_index), vec.size()) != curindex )
                if( vec[m_last_building_index].is_constructionsite ) break;
@@ -232,7 +232,7 @@ void Building_Statistics_Menu::clicked(int id) {
 
       case 4:
          /* Jump to prev unproductive */
-         { 
+         {
             int curindex = m_last_building_index;
             found = false;
             while( validate_pointer(&(--m_last_building_index), vec.size()) != curindex )
@@ -247,8 +247,8 @@ void Building_Statistics_Menu::clicked(int id) {
                }
             if(!found) { // Now look at the old
                Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-               if( b->get_building_type() == Building::PRODUCTIONSITE) 
-                  if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD ) 
+               if( b->get_building_type() == Building::PRODUCTIONSITE)
+                  if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD )
                      found = true;
             }
          }
@@ -256,7 +256,7 @@ void Building_Statistics_Menu::clicked(int id) {
 
       case 5:
          /* Jump to prev unproductive */
-         { 
+         {
             int curindex = m_last_building_index;
             found = false;
             while( validate_pointer(&(++m_last_building_index), vec.size()) != curindex )
@@ -271,8 +271,8 @@ void Building_Statistics_Menu::clicked(int id) {
                }
             if(!found) { // Now look at the old
                Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[m_last_building_index].pos)->get_immovable());
-               if( b->get_building_type() == Building::PRODUCTIONSITE) 
-                     if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD ) 
+               if( b->get_building_type() == Building::PRODUCTIONSITE)
+                     if(((ProductionSite*)b)->get_statistics_percent() < LOW_PROD )
                         found = true;
                }
          }
@@ -281,9 +281,9 @@ void Building_Statistics_Menu::clicked(int id) {
 
 
    }
-   
+
    validate_pointer(&m_last_building_index, vec.size());
-  
+
    if(found)
       m_parent->move_view_to( vec[m_last_building_index].pos.x, vec[m_last_building_index].pos.y);
 }
@@ -303,38 +303,38 @@ void Building_Statistics_Menu::update( void ) {
    m_build->set_text("");
    m_progbar->set_state(0);
    m_selected = -1;
-   
+
    // List all buildings
    Tribe_Descr* tribe = m_parent->get_player()->get_tribe();
    for(long i = 0; i < tribe->get_nrbuildings(); i++) {
-      if(!strcmp(tribe->get_building_descr(i)->get_name(), _("constructionsite"))) continue;
-      if(!strcmp(tribe->get_building_descr(i)->get_name(), _("headquarters"))) continue;
-   
+      if(!strcmp(tribe->get_building_descr(i)->get_name(), "constructionsite")) continue;
+      if(!strcmp(tribe->get_building_descr(i)->get_name(), "headquarters")) continue;
+
       const std::vector< Interactive_Player::Building_Stats >& vec = m_parent->get_building_statistics(i);
-      
+
       // walk all entries, add new ones if needed
-      UITable_Entry* te = 0; 
+      UITable_Entry* te = 0;
       for( int l = 0; l< m_table->get_nr_entries(); l++) {
          UITable_Entry* entr = m_table->get_entry(l);
          if( (long)entr->get_user_data() == i) {
-            te = entr; 
+            te = entr;
             break;
          }
       }
 
-      // If not in list, add new one, as long as this building is 
+      // If not in list, add new one, as long as this building is
       // enabled
       if(!te) {
          if(! m_parent->get_player()->is_building_allowed(i) ) continue;
          te = new UITable_Entry(m_table, (void*)i, tribe->get_building_descr(i)->get_buildicon());
       }
-      
+
        int nr_owned=0;
           int nr_build=0;
           int total_prod=0;
           bool is_productionsite = 0;
           for(uint l = 0; l < vec.size(); l++) {
-             if( vec[l].is_constructionsite ) nr_build++; 
+             if( vec[l].is_constructionsite ) nr_build++;
              else {
                 nr_owned++;
                 Building* b = ((Building*)m_parent->get_game()->get_map()->get_field(vec[l].pos)->get_immovable());
@@ -355,7 +355,7 @@ void Building_Statistics_Menu::update( void ) {
              if(nr_owned)
                 for(uint i = 0; i < 2; i++)
                    m_btn[i]->set_enabled(true);
-             else 
+             else
                 for(uint i = 0; i < 2; i++)
                    m_btn[i]->set_enabled(false);
              if(nr_build)
@@ -369,41 +369,41 @@ void Building_Statistics_Menu::update( void ) {
           // Add new Table Entry
           char buffer[100];
           te->set_string(0, tribe->get_building_descr(i)->get_descname() );
-   
+
           // Product
-          if(is_productionsite && nr_owned) { 
+          if(is_productionsite && nr_owned) {
              int percent = (int)((float)total_prod / (float) nr_owned);
              snprintf(buffer, 100, "%i", percent );
-             if( is_selected ) { 
+             if( is_selected ) {
                 m_progbar->set_state ( percent );
                 for(uint i = 4; i < 6; i++)
                    m_btn[i]->set_enabled(true);
              }
-          } else { 
+          } else {
              snprintf(buffer, 100, "-");
-             if(is_selected) 
+             if(is_selected)
                 for(uint i = 4; i < 6; i++)
                    m_btn[i]->set_enabled(false);
           }
           te->set_string(1, buffer);
-         
+
           // Number of this buildings
           snprintf(buffer, 100, "%i", nr_owned);
           te->set_string(2, buffer);
-          if(is_selected) 
+          if(is_selected)
             m_owned->set_text(buffer);
 
           // Number of currently builds
           snprintf(buffer, 100, "%i", nr_build);
           te->set_string(3, buffer);
-          if(is_selected) 
+          if(is_selected)
             m_build->set_text(buffer);
 
 
    }
-   
+
    // Disable all buttons, if nothing to select
-   if(m_selected == -1) 
+   if(m_selected == -1)
       for(uint i = 0; i < 6; i++)
       m_btn[i]->set_enabled(false);
 }
