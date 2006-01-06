@@ -1,0 +1,6 @@
+Import('*')
+
+#will be executed from base dir!
+buildcat=PhonyTarget("buildcat", 'cd locale ; ../utils/buildcat.py ; cd -')
+
+Return('buildcat')

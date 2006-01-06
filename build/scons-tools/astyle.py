@@ -8,7 +8,7 @@ def generate(env):
 	env['ASTYLE']=find_astyle(env)
 
 	if env['ASTYLE']!=None:
-		env['ASTYLEFLAGS']='--mode=c --force-indent=tab=8 --indent-cases --indent-preprocessor --brackets=linux --break-blocks --one-line=keep-statements --one-line=keep-blocks'
+		env['ASTYLEFLAGS']='--mode=c --force-indent=tab --indent-cases --indent-preprocessor --brackets=linux --break-blocks --one-line=keep-statements --one-line=keep-blocks'
 		env['ASTYLECOM']='$ASTYLE $ASTYLEFLAGS $SOURCES'
 		env['BUILDERS']['astyle']=SCons.Builder.Builder(action=env['ASTYLECOM'])
 	else:

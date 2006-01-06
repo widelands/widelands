@@ -183,9 +183,9 @@ opts=Options('build/scons-config.py', ARGUMENTS)
 opts.Add('build', 'debug-no-parachute / debug-slow / debug(default) / release / profile', 'debug')
 opts.Add('build_id', 'To get a default value(timestamp), leave this empty or set to \'date\'', '')
 opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
-opts.Add('install_prefix', '', '.')
-opts.Add('bindir', '(relative to install_prefix)', 'bin')
-opts.Add('datadir', '(relative to install_prefix)', 'share/widelands')
+opts.Add('install_prefix', '', '/usr/local')
+opts.Add('bindir', '(either absolut or relative to install_prefix)', 'games')
+opts.Add('datadir', '(either absolute or relative to install_prefix)', 'games/share/widelands')
 opts.Add('extra_include_path', '', '')
 opts.Add('extra_lib_path', '', '')
 opts.AddOptions(
@@ -400,6 +400,8 @@ env=conf.Finish()
 
 ############################################################################ Configure - finish config.h
 
+config_h_file.write("#define INSTALL_PREFIX \""+env['install_prefix']+"\"\n\n")
+config_h_file.write("#define INSTALL_BINDIR \""+BINDIR+"\"\n\n")
 config_h_file.write("#define INSTALL_DATADIR \""+DATADIR+"\"\n\n")
 
 config_h_file.write("\n#endif\n")
@@ -411,10 +413,11 @@ config_h_file.close()
 ############### Build setup
 
 SConsignFile('build/scons-signatures')
-
 BUILDDIR='build/'+TARGET+'-'+env['build']
+Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
 
-Export('env', 'Glob', 'BUILDDIR')
+#read target buildcat
+buildcat=SConscript('locale/SConscript')
 
 ############### The binary
 
@@ -437,7 +440,7 @@ if ('shrink' in BUILD_TARGETS) or ('dist' in BUILD_TARGETS):
 
 ############### Install and uninstall
 
-DISTDIRS=[
+INSTDIRS=[
 	'campaigns',
 	'fonts',
 	'game-server',
@@ -450,6 +453,7 @@ DISTDIRS=[
 	'txts',
 	'worlds'
 	]
+INSTDIRS+=glob.glob("locale/??_??")
 
 #TODO: need to install stuff like licenses - where do they go?
 def do_inst(target, source, env):
@@ -461,9 +465,7 @@ def do_inst(target, source, env):
 	shutil.rmtree(DATADIR, ignore_errors=1)
 	os.makedirs(DATADIR, 0755)
 
-	for f in DISTDIRS:
-		if f=='build':
-			continue
+	for f in INSTDIRS:
 		print 'Installing ', os.path.join(DATADIR, f)
 		shutil.copytree(f, os.path.join(DATADIR, f))
 
@@ -523,7 +525,7 @@ def do_dist(target, source, env):
 		shutil.copytree(f, os.path.join(PACKDIR, f))
 
 	RMFILES=find(PACKDIR, '*/.cvsignore')
-	#TODO: do include a scons-config with suitable content, esp. build number
+	#TODO: do include a scons-config.py with suitable content, esp. build number
 	RMFILES+=[PACKDIR+'/build/scons-config.py']
 	RMFILES+=[PACKDIR+'/build/scons-signatures.dblite']
 
@@ -538,6 +540,7 @@ def do_dist(target, source, env):
 	for f in RMDIRS:
 		shutil.rmtree(f)
 
+	#TODO: use sth. else on systems where tar is not supported
 	os.system('tar -czf %s %s' % (PACKDIR+'.tar.gz', PACKDIR))
 	shutil.rmtree(PACKDIR)
 
@@ -549,6 +552,7 @@ dist=PhonyTarget("dist", do_dist)
 
 cvsup=PhonyTarget('up', 'cvs -q up -APd')
 Alias('update', cvsup)
+#TODO: call wiki2txt from here??
 
 ############### Documentation
 

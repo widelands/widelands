@@ -72,14 +72,14 @@ static std::string getexename()
  */
 void setup_searchpaths(int argc, char **argv)
 {
-	// first, try the install directory used in the last compile
-	//TODO: not good - won't work on at least Gentoo
-	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h for INSTALL_DATADIR
+	// first, try the data directory used in the last scons invocation
+	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h
 
 	// if everything else fails, search it where the FHS forces us to put it (obviously UNIX-only)
 #ifndef WIN32
-	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/widelands"));
+	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/games/widelands"));
 #endif
+	//TODO: is there a "default dir" for this on win32 ?
 
 	// absolute fallback directory is the CWD
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
@@ -87,6 +87,8 @@ void setup_searchpaths(int argc, char **argv)
 	// the directory the executable is in is the default game data directory
 	std::string exename;
 
+	//TODO: is exename still neccessary, now that BINDIR can be seen from config.h?
+	//same goes for slash/backslash detection, it's trivial with scons
 #ifdef __linux__
 	exename = getexename();
 	if (!exename.size())
@@ -122,6 +124,8 @@ void setup_searchpaths(int argc, char **argv)
 		path = std::string(buf) + "/.widelands";
 		mkdir(path.c_str(), 0x1FF);
 		g_fs->AddFileSystem(FileSystem::CreateFromDirectory(path.c_str()));
+	} else {
+		//TODO: complain
 	}
 #endif
 }
