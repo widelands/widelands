@@ -140,9 +140,9 @@ std::string MilitarySite::get_statistics_string()
 {
 	char str[255];
 	if (m_soldier_requests.size())
-		snprintf (str, 255, _("%d soldiers (+%d)"), (int)m_soldiers.size(), (int)m_soldier_requests.size());
+		snprintf (str, 255, ngettext("%d soldier (+%d)", "%d soldiers (+%d)", (int)m_soldiers.size()), (int)m_soldiers.size(), (int)m_soldier_requests.size());
 	else
-		snprintf (str, 255, _("%d soldiers"), (int)m_soldiers.size());
+		snprintf (str, 255, ngettext("%d soldier", "%d soldiers", (int)m_soldiers.size()), (int)m_soldiers.size());
 
 	return str;
 }
