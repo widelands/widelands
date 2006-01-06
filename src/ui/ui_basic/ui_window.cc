@@ -26,20 +26,28 @@
 #include "constants.h"
 #include "keycodes.h"
 
-/* class UIWindow
- *
- * The graphics (see pictures) are used in the following manner: (Example)
- *
- *  <--20leftmostpixel_of_top--><60Pixels as often as possible to reach window with from top><20rightmost pixel of top>
- *  ^
- *  20 topmost pixels of l_border                                      <--- > same for r_border
- *  as often as needed: 60 pixels of l_border								  <--- > same for r_border
- *  20 bottom pixels of l_border													  <--- > same for r_borde
- *  <--20leftmostpixel_of_bot--><60Pixels as often as possible to reach window with from bot><20rightmost pixel of bot>
- *
- * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
- * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
- */
+//  Widht the horizontal border grapichs must have.
+#define HZ_B_TOTAL_PIXMAP_LEN 100
+
+//  Height the top border must have
+#define TP_B_PIXMAP_THICKNESS 20
+
+//  Height the bottom border must have
+#define BT_B_PIXMAP_THICKNESS 20
+
+//  Width to use as the corner. This must be >= VT_B_PIXMAP_THICKNESS.
+#define HZ_B_CORNER_PIXMAP_LEN 20
+
+#define HZ_B_MIDDLE_PIXMAP_LEN (HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
+
+//  Width/height the vertical border grapichs must have.
+#define VT_B_PIXMAP_THICKNESS 20
+#define VT_B_TOTAL_PIXMAP_LEN 100
+
+//  Height to use as the thingy.
+#define VT_B_THINGY_PIXMAP_LEN 20
+
+#define VT_B_MIDDLE_PIXMAP_LEN (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
 
 
 /**
@@ -52,24 +60,24 @@
  *       h
  *       title	string to display in the window title
  */
-UIWindow::UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *title)
-	: UIPanel(parent, x, y, w+WINDOW_BORDER*2, h+WINDOW_BORDER*2)
+UIWindow::UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *title) :
+UIPanel(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2, TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
+_small(false), _dragging(false),
+_docked_left(false), _docked_right(false), _docked_bottom(false),
+_drag_start_win_x(0), _drag_start_win_y(0), _drag_start_mouse_x(0), _drag_start_mouse_y(0),
+m_pic_lborder   (g_gr->get_picture(PicMod_UI, "pics/win_l_border.png")),
+m_pic_rborder   (g_gr->get_picture(PicMod_UI, "pics/win_r_border.png")),
+m_pic_top       (g_gr->get_picture(PicMod_UI, "pics/win_top.png")),
+m_pic_bottom    (g_gr->get_picture(PicMod_UI, "pics/win_bot.png")),
+m_pic_background(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
 {
-	_dragging = false;
-   _small = false;
 
 	if (title)
 		set_title(title);
 
-	set_border(WINDOW_BORDER, WINDOW_BORDER, WINDOW_BORDER, WINDOW_BORDER);
+	set_border(VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_cache(true);
 	set_top_on_click(true);
-
-	m_pic_lborder = g_gr->get_picture( PicMod_UI,  "pics/win_l_border.png" );
-	m_pic_rborder = g_gr->get_picture( PicMod_UI,  "pics/win_r_border.png" );
-	m_pic_top = g_gr->get_picture( PicMod_UI,  "pics/win_top.png" );
-	m_pic_bottom = g_gr->get_picture( PicMod_UI,  "pics/win_bot.png" );
-	m_pic_background = g_gr->get_picture( PicMod_UI,  "pics/win_bg.png" );
 }
 
 /**
@@ -87,7 +95,7 @@ UIWindow::~UIWindow()
 void UIWindow::set_title(const char *text)
 {
 	m_title = text;
-	update(0, 0, get_w(), WINDOW_BORDER);
+	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
 }
 
 /**
@@ -136,63 +144,124 @@ Redraw the window frame and background
 */
 void UIWindow::draw_border(RenderTarget* dst)
 {
-   int px, py;
+	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
+	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
 
-   // background
-   dst->tile(CORNER, CORNER, get_w() - (2*CORNER), get_h() - (2*CORNER), m_pic_background, 0, 0);
+	const uint hidden_width_left  = _docked_left  ? VT_B_PIXMAP_THICKNESS : 0;
+	const uint hidden_width_right = _docked_right ? VT_B_PIXMAP_THICKNESS : 0;
+	const int hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN + hidden_width_right;
+	const int hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
 
-   // top left corner
-   dst->blitrect(0, 0, m_pic_top, 0, 0, CORNER, CORNER);
-   // top bar
-   for(px = CORNER; px < get_w()-CORNER-MIDDLE; px += MIDDLE) {
-      dst->blitrect(px, 0, m_pic_top, CORNER, 0, MIDDLE, CORNER);
-   }
-   // odd pixels of top bar
-   dst->blitrect(px, 0, m_pic_top, CORNER, 0, get_w()-px-CORNER, CORNER);
-   // top right corner
-   dst->blitrect(get_w()-CORNER, 0, m_pic_top, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
-   // left top thingy
-   dst->blitrect(0, CORNER, m_pic_lborder, 0, 0, CORNER, CORNER);
-   // right top thingy
-   dst->blitrect(get_w()-CORNER, CORNER, m_pic_rborder, 0, 0, CORNER, CORNER);
+	{//  Top border.
+		int pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
+
+		dst->blitrect //  top left corner
+			(0, 0,
+			 m_pic_top, hidden_width_left, 0,
+			 pos, TP_B_PIXMAP_THICKNESS);
+
+		//  top bar
+		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
+			dst->blitrect
+			(pos, 0,
+			 m_pic_top, HZ_B_CORNER_PIXMAP_LEN, 0,
+			 HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS);
+
+		// odd pixels of top bar and top right corner
+		const int width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
+		dst->blitrect
+			(pos, 0,
+			 m_pic_top, HZ_B_TOTAL_PIXMAP_LEN - width, 0,
+			 width - hidden_width_right, TP_B_PIXMAP_THICKNESS);
+	}
+
+	// draw the title if we have one
+	if (m_title.length()) g_fh->draw_string
+		(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+		 get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2,
+		 m_title.c_str(), Align_Center);
+
+	if (not _small) { // Only draw this, if we are not minimized.
+		const int vt_bar_end = get_h() - (_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
+		const int vt_bar_end_minus_middle = vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
+
+		if (not _docked_left) {
+
+			dst->blitrect // left top thingy
+				(0, TP_B_PIXMAP_THICKNESS,
+				 m_pic_lborder, 0, 0,
+				 VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN);
+
+			int pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
+
+			//  left bar
+			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
+				dst->blitrect
+				(0, pos,
+				 m_pic_lborder, 0, VT_B_THINGY_PIXMAP_LEN,
+				 VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN);
+
+			//  odd pixels of left bar and left bottom thingy
+			const int height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
+			dst->blitrect
+				(0, pos,
+				 m_pic_lborder, 0, VT_B_TOTAL_PIXMAP_LEN - height,
+				 VT_B_PIXMAP_THICKNESS, height);
+		}
 
 
-   if(!_small) { // Only draw this, if we are not minimized 
-      // bottom left corner
-      dst->blitrect(0, get_h()-CORNER, m_pic_bottom, 0, 0, CORNER, CORNER);
+		dst->tile //  background
+			(_docked_left ? 0 : VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS,
+			 get_inner_w(), get_inner_h(),
+			 m_pic_background, 0, 0);
 
-      // bottom bar
-      for(px = CORNER; px < get_w()-CORNER-MIDDLE; px += MIDDLE) {
-         dst->blitrect(px, get_h()-CORNER, m_pic_bottom, CORNER, 0, MIDDLE, CORNER);
-      }
-      // odd pixels of bottom bar
-      dst->blitrect(px, get_h()-CORNER, m_pic_bottom, CORNER, 0, get_w()-px-CORNER, CORNER);
+		if (not _docked_right) {
+			const int right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
 
-      // bottom right corner
-      dst->blitrect(get_w()-CORNER, get_h()-CORNER, m_pic_bottom, MUST_HAVE_NPIX-CORNER, 0, CORNER, CORNER);
+			dst->blitrect// right top thingy
+				(right_border_x, TP_B_PIXMAP_THICKNESS,
+				 m_pic_rborder, 0, 0,
+				 VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN);
 
+			int pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
-      // left & right bars
-      for(py = 2*CORNER; py < get_h()-2*CORNER-MIDDLE; py += MIDDLE) {
-         dst->blitrect(0, py, m_pic_lborder, 0, CORNER, CORNER, MIDDLE);
-         dst->blitrect(get_w()-CORNER, py, m_pic_rborder, 0, CORNER, CORNER, MIDDLE);
-      }
-      // odd pixels of left & right bars
-      dst->blitrect(0, py, m_pic_lborder, 0, CORNER, CORNER, get_h()-py-2*CORNER);
-      dst->blitrect(get_w()-CORNER, py, m_pic_rborder, 0, CORNER, CORNER, get_h()-py-2*CORNER);
+			//  rigt bar
+			for(; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
+				dst->blitrect
+				(right_border_x, pos,
+				 m_pic_rborder, 0, VT_B_THINGY_PIXMAP_LEN,
+				 VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN);
 
-      // left bottom thingy
-      dst->blitrect(0, get_h()-2*CORNER, m_pic_lborder, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
-      // right bottom thingy
-      dst->blitrect(get_w()-CORNER, get_h()-2*CORNER, m_pic_rborder, 0, MUST_HAVE_NPIX-CORNER, CORNER, CORNER);
-   }
+			// odd pixels of right bar and right bottom thingy
+			const int height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
+			dst->blitrect
+				(right_border_x, pos,
+				 m_pic_rborder, 0, VT_B_TOTAL_PIXMAP_LEN - height,
+				 VT_B_PIXMAP_THICKNESS, height);
+		}
+		if (not _docked_bottom) {
+			int pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
 
-   // draw the title if we have one
-   if (m_title.length()) {
-      px = get_w() >> 1;
-      py = CORNER>>1;
-      g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, px, py, m_title.c_str(), Align_Center);
-   }
+			dst->blitrect //  bottom left corner
+				(0, get_h() - BT_B_PIXMAP_THICKNESS,
+				 m_pic_bottom, hidden_width_left, 0,
+				 pos, BT_B_PIXMAP_THICKNESS);
+
+			//  bottom bar
+			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
+				dst->blitrect
+				(pos, get_h() - BT_B_PIXMAP_THICKNESS,
+				 m_pic_bottom, HZ_B_CORNER_PIXMAP_LEN, 0,
+				 HZ_B_MIDDLE_PIXMAP_LEN, BT_B_PIXMAP_THICKNESS);
+
+			// odd pixels of bottom bar and bottom right corner
+			const int width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
+			dst->blitrect
+				(pos, get_h() - BT_B_PIXMAP_THICKNESS,
+				 m_pic_bottom, HZ_B_TOTAL_PIXMAP_LEN - width, 0,
+				 width - hidden_width_right, BT_B_PIXMAP_THICKNESS);
+		}
+	}
 }
 
 /**
@@ -201,7 +270,7 @@ void UIWindow::draw_border(RenderTarget* dst)
  */
 bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
 {
-   bool should_minimize = 
+   bool should_minimize =
       ((( Sys_GetKeyState(KEY_LCTRL) | Sys_GetKeyState(KEY_RCTRL) ) && (btn == MOUSE_LEFT)) ||
       (btn == MOUSE_MIDDLE)) && down;
 
@@ -209,15 +278,19 @@ bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
    if(should_minimize) {
       minimize(!is_minimized());
    } else if (btn == MOUSE_LEFT) {
-		if (down) {
+	   if (down) {
 			_dragging = true;
+			_drag_start_win_x = get_x();
+			_drag_start_win_y = get_y();
+			_drag_start_mouse_x = get_x() + get_lborder() + mx;
+			_drag_start_mouse_y = get_y() + get_tborder() + my;
 			grab_mouse(true);
 		} else if (_dragging) {
 			grab_mouse(false);
 			_dragging = false;
 		}
-	} 
-	else if (btn == MOUSE_RIGHT && down) 
+	}
+	else if (btn == MOUSE_RIGHT && down)
 		delete this; // is this 100% safe?
 			    // no, at least provide a flag for making a
 			    // window unclosable and provide a callback
@@ -230,17 +303,61 @@ bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
  */
 void UIWindow::minimize(bool t) {
    if(t==_small) return;
-   
+
    if(_small) {
       set_inner_size(get_inner_w(), _oldh);
       _small=false;
    } else {
       _oldh=get_inner_h();
-      set_size(get_w(), WINDOW_BORDER);
+      set_size(get_w(), TP_B_PIXMAP_THICKNESS);
       set_pos(get_x(),get_y()); // If on border, this feels more natural
       _small=true;
    }
 }
+
+inline void UIWindow::dock_left() {
+	assert(not _docked_left);
+	_docked_left = true;
+	set_size(get_inner_w() + get_rborder(), get_h());
+	set_border(0, get_rborder(), get_tborder(), get_bborder());
+	assert(get_lborder() == 0);
+}
+
+inline void UIWindow::undock_left() {
+	assert(_docked_left);
+	_docked_left = false;
+	set_size(VT_B_PIXMAP_THICKNESS + get_inner_w() + get_rborder(), get_h());
+	set_border(VT_B_PIXMAP_THICKNESS, get_rborder(), get_tborder(), get_bborder());
+}
+
+inline void UIWindow::dock_right() {
+	assert(not _docked_right);
+	_docked_right = true;
+	set_size(get_lborder() + get_inner_w(), get_h());
+	set_border(get_lborder(), 0, get_tborder(), get_bborder());
+}
+
+inline void UIWindow::undock_right() {
+	assert(_docked_right);
+	_docked_right = false;
+	set_size(get_lborder() + get_inner_w() + VT_B_PIXMAP_THICKNESS, get_h());
+	set_border(get_lborder(), VT_B_PIXMAP_THICKNESS, get_tborder(), get_bborder());
+}
+
+inline void UIWindow::dock_bottom() {
+	assert(not _docked_bottom);
+	_docked_bottom = true;
+	set_size(get_w(), get_tborder() + get_inner_h());
+	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
+}
+
+inline void UIWindow::undock_bottom() {
+	assert(_docked_bottom);
+	_docked_bottom = false;
+	set_size(get_w(), get_tborder() + get_inner_h() + BT_B_PIXMAP_THICKNESS);
+	set_border(get_lborder(), get_rborder(), get_tborder(), BT_B_PIXMAP_THICKNESS);
+}
+
 
 /**
  * Drag the mouse if the left mouse button is clicked.
@@ -248,26 +365,150 @@ void UIWindow::minimize(bool t) {
  */
 void UIWindow::handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns)
 {
-	if (_dragging)
-	{
-		int nx = get_x() + xdiff;
-		int ny = get_y() + ydiff;
+	if (_dragging) {
+		const int mouse_x = get_x() + get_lborder() + mx;
+		const int mouse_y = get_y() + get_tborder() + my;
+		int left = std::max(0, _drag_start_win_x + mouse_x - _drag_start_mouse_x);
+		int top  = std::max(0, _drag_start_win_y + mouse_y - _drag_start_mouse_y);
+		int new_left = left, new_top = top;
+		const UIPanel * const parent = get_parent();
 
-		if (get_parent()) {
-			if (nx+(int)get_w() > get_parent()->get_inner_w())
-				nx = get_parent()->get_inner_w()-get_w();
-			if (nx < 0)
-				nx = 0;
+		if (parent) {
+			const int w = get_w();
+			const int h = get_h();
+			const int max_x = parent->get_inner_w();
+			const int max_y = parent->get_inner_h();
+			assert(w <= max_x);
+			assert(h <= max_y);
+			int max_x_minus_w = max_x - w;
+			int max_y_minus_h = max_y - h;
+			left = std::min(max_x_minus_w, left);
+			top  = std::min(max_y_minus_h, top);
+			const uchar psnap = parent->get_panel_snap_distance ();
+			const uchar bsnap = parent->get_border_snap_distance();
 
-			if (ny+(int)get_h() > get_parent()->get_inner_h())
-				ny = get_parent()->get_inner_h()-get_h();
-			if (ny < 0)
-				ny = 0;
+			//  These are needed to prefer snapping a shorter distance over a
+			//  longer distance, when there are several thing to snap to.
+			uchar nearest_snap_distance_x = bsnap;
+			uchar nearest_snap_distance_y = bsnap;
+
+			//  Snap to parent borders.
+			if (left < nearest_snap_distance_x) {
+				nearest_snap_distance_x = left;
+				assert(nearest_snap_distance_x < bsnap);
+				new_left = 0;
+			}
+			if (left + nearest_snap_distance_x > max_x_minus_w) {
+				nearest_snap_distance_x = max_x_minus_w - left;
+				assert(nearest_snap_distance_x < bsnap);
+				new_left = max_x_minus_w;
+			}
+			if (top < nearest_snap_distance_y) {
+				nearest_snap_distance_y = top;
+				assert(nearest_snap_distance_y < bsnap);
+				new_top = 0;
+			}
+			if (top + nearest_snap_distance_y > max_y_minus_h) {
+				nearest_snap_distance_y = max_y_minus_h - top;
+				assert(nearest_snap_distance_y < bsnap);
+				new_top = max_y_minus_h;
+			}
+
+			if (nearest_snap_distance_x == bsnap) nearest_snap_distance_x = psnap;
+			else {
+				assert(nearest_snap_distance_x < bsnap);
+				nearest_snap_distance_x = std::min(nearest_snap_distance_x, psnap);
+			}
+			if (nearest_snap_distance_y == bsnap) nearest_snap_distance_y = psnap;
+			else {
+				assert(nearest_snap_distance_y < bsnap);
+				nearest_snap_distance_y = std::min(nearest_snap_distance_y, psnap);
+			}
+
+			{//  Snap to other UIPanels.
+				const bool SOWO = parent->get_snap_windows_only_when_overlapping();
+				const int right = left + w, bot = top + h;
+
+				for
+					(const UIPanel * snap_target = parent->get_first_child();
+					 snap_target;
+					 snap_target = snap_target->get_next_sibling())
+				{
+					if (snap_target != this and snap_target->is_snap_target()) {
+						const int other_left  = snap_target->get_x();
+						const int other_top   = snap_target->get_y();
+						const int other_right = other_left + snap_target->get_w();
+						const int other_bot   = other_top  + snap_target->get_h();
+
+						if (other_top <= bot && other_bot >= top) {
+							if (not SOWO || left <= other_right) {
+								const int distance = std::abs(left - other_right);
+								if (distance < nearest_snap_distance_x) {
+									nearest_snap_distance_x = distance;
+									new_left = other_right;
+								}
+							}
+							if (not SOWO || right >= other_left) {
+								const int distance = std::abs(right - other_left);
+								if (distance < nearest_snap_distance_x) {
+									nearest_snap_distance_x = distance;
+									new_left = other_left - w;
+								}
+							}
+						}
+						if (other_left <= right && other_right >= left) {
+							if (not SOWO || top <= other_bot) {
+								const int distance = std::abs(top - other_bot);
+								if (distance < nearest_snap_distance_y) {
+									nearest_snap_distance_y = distance;
+									new_top = other_bot;
+								}
+							}
+							if (not SOWO || bot >= other_top) {
+								const int distance = std::abs(bot - other_top);
+								if (distance < nearest_snap_distance_y) {
+									nearest_snap_distance_y = distance;
+									new_top = other_top - h;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			if (new_left < 0)             new_left = 0;
+			if (new_top  < 0)             new_top  = 0;
+			if (new_left > max_x_minus_w) new_left = max_x_minus_w;
+			if (new_top  > max_y_minus_h) new_top  = max_y_minus_h;
+
+			if (parent->get_dock_windows_to_edges()) {
+				if (new_left == 0) {
+					if (not _docked_left) dock_left();
+				} else if (_docked_left) undock_left();
+				if (new_left == max_x_minus_w) {
+					if (not _docked_right) {
+						dock_right();
+						new_left += VT_B_PIXMAP_THICKNESS;
+						_drag_start_win_x += VT_B_PIXMAP_THICKNESS; //  avoid jumping
+					}
+				} else if (_docked_right) {
+					undock_right();
+					new_left -= VT_B_PIXMAP_THICKNESS;
+					_drag_start_win_x -= VT_B_PIXMAP_THICKNESS; //  avoid jumping
+				}
+				if (new_top == max_y_minus_h) {
+					if (not _docked_bottom) {
+						dock_bottom();
+						new_top += BT_B_PIXMAP_THICKNESS;
+						_drag_start_win_y += BT_B_PIXMAP_THICKNESS; //  avoid jumping
+					}
+				} else if (_docked_bottom) {
+					undock_bottom();
+					new_top -= BT_B_PIXMAP_THICKNESS;
+					_drag_start_win_y -= BT_B_PIXMAP_THICKNESS; //  avoid jumping
+				}
+			}
 		}
-
-		set_pos(nx, ny);
+		set_pos(new_left, new_top);
 	}
 }
-
-
-

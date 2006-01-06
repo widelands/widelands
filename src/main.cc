@@ -89,8 +89,12 @@ static void g_init(int argc, char **argv)
 		// Profile needs support for a Syntax definition to solve this in a sensible way
 		s->get_string("xres");
 		s->get_string("yres");
-		s->get_bool("workareapreview");
-		s->get_bool("nozip");
+      s->get_bool("workareapreview");
+      s->get_bool("nozip");
+      s->get_int("border_snap_distance");
+      s->get_int("panel_snap_distance");
+      s->get_bool("snap_windows_only_when_overlapping");
+      s->get_bool("dock_windows_to_edges");
       // KLUDGE!
 
       // Set Locale and grab default domain

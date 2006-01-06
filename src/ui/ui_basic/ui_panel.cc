@@ -47,11 +47,14 @@ uint UIPanel::s_default_cursor = 0;
 /**
  * Initialize a panel, link it into the parent's queue.
  */
-UIPanel::UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, const uint nh)
+UIPanel::UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, const uint nh) :
+_parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
+_flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
+_x(nx), _y(ny), _w(nw), _h(nh),
+_lborder(0), _rborder(0), _tborder(0), _bborder(0),
+_border_snap_distance(0), _panel_snap_distance(0),
+_use_tooltip(false)
 {
-	_parent = nparent;
-	_fchild = _lchild = 0;
-
 	if (_parent) {
 		_next = _parent->_fchild;
 		_prev = 0;
@@ -62,24 +65,7 @@ UIPanel::UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, co
 		_parent->_fchild = this;
 	} else
 		_prev = _next = 0;
-
-	_mousein = 0;
-	_focus = 0;
-
-	_x = nx;
-	_y = ny;
-	_w = nw;
-	_h = nh;
-
-	_lborder = _rborder = _tborder = _bborder = 0;
-
-	_cache = 0;
-	_needdraw = false;
-
-	_flags = pf_handle_mouse|pf_think|pf_visible;
 	update(0, 0, _w, _h);
-
-	_use_tooltip = false;
 }
 
 /**
@@ -790,7 +776,7 @@ bool UIPanel::do_mouseclick(uint btn, bool down, int x, int y)
 void UIPanel::do_mousemove(int x, int y, int xdiff, int ydiff, uint btns)
 {
 	x -= _lborder;
-	y -= _rborder;
+	y -= _tborder;
 
 	if (_g_mousegrab == this)
 		handle_mousemove(x, y, xdiff, ydiff, btns);
@@ -934,14 +920,14 @@ void UIPanel::unset_tooltip()
 void UIPanel::draw_tooltip(RenderTarget* dst, UIPanel *lowest)
 {
 	int tooltipX, tooltipY, tip_width, tip_height;
-	
+
 	tooltipX = Sys_GetMouseX() + 20;
 	tooltipY = Sys_GetMouseY() + 25;
 
 	g_fh->get_size(UI_FONT_TOOLTIP, lowest->get_tooltip(), &tip_width, &tip_height, 0);
 	tip_width += 4;
 	tip_height += 4;
-	
+
 	dst->fill_rect(tooltipX-2, tooltipY-2, tip_width, tip_height, RGBColor(230,200,50));
 	dst->draw_rect(tooltipX-2, tooltipY-2, tip_width, tip_height, RGBColor(0,0,0));
 	g_fh->draw_string(dst, UI_FONT_TOOLTIP, UI_FONT_TOOLTIP_CLR, tooltipX, tooltipY, lowest->get_tooltip(), Align_Left);

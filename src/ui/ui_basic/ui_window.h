@@ -40,17 +40,10 @@
  * So: the l_border and the r_border pics MUST have a height of 100, while the width must be  20
  * 	 and the top and bot pics MUST have a width of 100, while the height must be 20
  *
- * A click with the middle mouse button (or STRG+LClick) minimizes a window. Minimize means, that 
+ * A click with the middle mouse button (or STRG+LClick) minimizes a window. Minimize means, that
  * the window is only the caption bar, nothing inside. Another click on this bar resizes the window again
  */
 
-// widht/height the graphs above must have
-#define MUST_HAVE_NPIX	100
-// width/height to use as the corner
-#define CORNER			20
-#define MIDDLE			(MUST_HAVE_NPIX-(CORNER*2))
-
-#define WINDOW_BORDER	20
 class UIWindow : public UIPanel {
 public:
 	UIWindow(UIPanel *parent, int x, int y, uint w, uint h, const char *title);
@@ -63,6 +56,7 @@ public:
 
    inline bool is_minimized(void) { return _small; }
    void minimize(bool t);
+   bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
 	void draw_border(RenderTarget* dst);
@@ -71,9 +65,16 @@ public:
 	void handle_mousemove(int mx, int my, int xdiff, int ydiff, uint btns);
 
 private:
-   bool _small;       // Is this window "hidden"
+	void dock_left();
+	void undock_left();
+	void dock_right();
+	void undock_right();
+	void dock_bottom();
+	void undock_bottom();
+	bool _small;       // Is this window "hidden"
 	uint _oldw,_oldh;  // if it is, these are the old formats
-   bool _dragging;
+	bool _dragging, _docked_left, _docked_right, _docked_bottom;
+	int _drag_start_win_x, _drag_start_win_y, _drag_start_mouse_x, _drag_start_mouse_y;
 
 	std::string		m_title;
 

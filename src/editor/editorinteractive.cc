@@ -44,6 +44,7 @@
 #include "keycodes.h"
 #include "map.h"
 #include "mapview.h"
+#include "options.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "system.h"
@@ -67,14 +68,22 @@ construct editor sourroundings
 */
 Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    m_editor = e;
-   
+
+   {
+	   Section & s = *g_options.pull_section("global");
+	   set_border_snap_distance(s.get_int("border_snap_distance", 10));
+	   set_panel_snap_distance (s.get_int("panel_snap_distance",  10));
+	   set_snap_windows_only_when_overlapping(s.get_bool("snap_windows_only_when_overlapping", false));
+	   set_dock_windows_to_edges(s.get_bool("dock_windows_to_edges", false));
+   }
+
    // Disable debug. it is no use for editor
 #ifndef DEBUG
    set_display_flag(Interactive_Base::dfDebug, false);
 #else
    set_display_flag(Interactive_Base::dfDebug, true);
 #endif
-   
+
    // The mapview. watch the map!!!
    Map_View* mm;
    mm = new Map_View(this, 0, 0, get_w(), get_h(), this);
@@ -118,7 +127,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    b = new UIButton(this, x+238, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_variablesmenu);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_variables_menu.png" ));
-   
+
    b = new UIButton(this, x+272, y, 34, 34, 2);
    b->clicked.set(this, &Editor_Interactive::toggle_objectivesmenu);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_toggle_objectives_menu.png" ));
@@ -137,7 +146,7 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    tools.tools.push_back(new Editor_Place_Bob_Tool(new Editor_Delete_Bob_Tool()));
    tools.tools.push_back(new Editor_Increase_Resources_Tool(new Editor_Decrease_Resources_Tool(), new Editor_Set_Resources_Tool()));
    tools.tools.push_back(new Editor_Make_Infrastructure_Tool());
-  
+
    // Option menus
    m_options_menus.resize(tools.tools.size());
 
@@ -145,12 +154,12 @@ Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    std::vector<std::string> tribes;
    Tribe_Descr::get_all_tribes(&tribes);
    uint i=0;
-   for(i=0; i<tribes.size(); i++) 
+   for(i=0; i<tribes.size(); i++)
       e->manually_load_tribe(tribes[i].c_str());
 
    m_need_save=false;
    m_ctrl_down=false;
-   
+
    select_tool(1, 0);
 }
 
@@ -268,7 +277,7 @@ void Editor_Interactive::field_clicked() {
    Map* m=get_map();
    FCoords cords(get_fieldsel_pos(), m->get_field(get_fieldsel_pos()));
    tools.tools[tools.current_tool_index]->handle_click(tools.use_tool, cords, m, this);
-   get_mapview()->need_complete_redraw(); 
+   get_mapview()->need_complete_redraw();
    set_need_save(true);
 }
 
@@ -359,7 +368,7 @@ Handles a keyboard event
 */
 bool Editor_Interactive::handle_key(bool down, int code, char c) {
    if(code==KEY_LCTRL || code==KEY_RCTRL) m_ctrl_down=down;
-   
+
    if(down) {
       // only on down events
       switch(code) {
@@ -431,7 +440,7 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
          case KEY_h:
             toggle_mainmenu();
             return true;
-         
+
          case KEY_i:
             select_tool(0, 0);
             return true;
@@ -439,9 +448,9 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
          case KEY_m:
             toggle_minimap();
             return true;
-                 
+
          case KEY_l:
-            if(m_ctrl_down) 
+            if(m_ctrl_down)
                new Main_Menu_Load_Map(this);
             return true;
 
@@ -450,10 +459,10 @@ bool Editor_Interactive::handle_key(bool down, int code, char c) {
             return true;
 
          case KEY_s:
-            if(m_ctrl_down) 
+            if(m_ctrl_down)
                new Main_Menu_Save_Map(this);
             return true;
-            
+
          case KEY_t:
             tool_menu_btn();
             return true;
@@ -517,16 +526,16 @@ void Editor_Interactive::reference_player_tribe(int player, void *data) {
 }
 
 /*
- * unreference !once!, if referenced many times, this 
+ * unreference !once!, if referenced many times, this
  * will leace a reference
  */
 void Editor_Interactive::unreference_player_tribe(int player, void* data) {
    assert(player>=0 && player<=m_editor->get_map()->get_nrplayers());
    assert(data);
-   
+
    int i=0;
    if(player>0) {
-      for(i=0; i<static_cast<int>(m_player_tribe_references.size()); i++) 
+      for(i=0; i<static_cast<int>(m_player_tribe_references.size()); i++)
          if(m_player_tribe_references[i].player==player && m_player_tribe_references[i].object==data) break;
 
       m_player_tribe_references.erase(m_player_tribe_references.begin() + i);
@@ -534,7 +543,7 @@ void Editor_Interactive::unreference_player_tribe(int player, void* data) {
       // Player is invalid, remove all references from this object
       for(i=0; i<static_cast<int>(m_player_tribe_references.size()); i++) {
          if(m_player_tribe_references[i].object==data) {
-            m_player_tribe_references.erase(m_player_tribe_references.begin() + i); i=-1; 
+            m_player_tribe_references.erase(m_player_tribe_references.begin() + i); i=-1;
          }
       }
    }
@@ -544,7 +553,7 @@ bool Editor_Interactive::is_player_tribe_referenced(int player) {
    assert(player>0 && player<=m_editor->get_map()->get_nrplayers());
 
    uint i=0;
-   for(i=0; i<m_player_tribe_references.size(); i++) 
+   for(i=0; i<m_player_tribe_references.size(); i++)
          if(m_player_tribe_references[i].player==player) return true;
 
    return false;

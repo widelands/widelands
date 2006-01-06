@@ -41,6 +41,7 @@ public:
 	void set_title(const char* title);
    const char* get_title(void) { return m_title.c_str();  }
 	void set_enabled(bool on);
+	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget* dst);

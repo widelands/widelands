@@ -51,6 +51,8 @@ public:
 		pf_child_die = 16, ///< a child needs to die
 		pf_visible = 32, ///< render the panel
 		pf_can_focus = 64, ///< can receive the keyboard focus
+		pf_snap_windows_only_when_overlapping = 128, ///< children should snap from outside to other children
+		pf_dock_windows_to_edges = 256, ///< children should snap from outside to other children
 	};
 
 	UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, const uint nh);
@@ -76,6 +78,15 @@ public:
 	inline int get_w() const { return _w; }
 	inline int get_h() const { return _h; }
 
+	virtual bool is_snap_target() const {return false;}
+	ushort get_border_snap_distance() const {return _border_snap_distance;}
+	void set_border_snap_distance(uchar value) {_border_snap_distance = value;}
+	ushort get_panel_snap_distance () const {return _panel_snap_distance;}
+	void set_panel_snap_distance(uchar value) {_panel_snap_distance = value;}
+	bool get_snap_windows_only_when_overlapping() const {return _flags & pf_snap_windows_only_when_overlapping;}
+	void set_snap_windows_only_when_overlapping(const bool on = true);
+	bool get_dock_windows_to_edges() const {return _flags & pf_dock_windows_to_edges;}
+	void set_dock_windows_to_edges(const bool on = true);
 	void set_inner_size(uint nw, uint nh);
 	void fit_inner(UIPanel* inner);
 	void set_border(uint l, uint r, uint t, uint b);
@@ -87,6 +98,11 @@ public:
 
 	inline int get_inner_w() const { return _w-(_lborder+_rborder); }
 	inline int get_inner_h() const { return _h-(_tborder+_bborder); }
+
+	const UIPanel * get_next_sibling () const {return _next;}
+	const UIPanel * get_prev_sibling () const {return _prev;}
+	const UIPanel * get_first_child  () const {return _fchild;}
+	const UIPanel * get_last_child   () const {return _lchild;}
 
 	void move_to_top();
 
@@ -161,15 +177,16 @@ private:
 	int _x, _y;
 	uint _w, _h;
 	uint _lborder, _rborder, _tborder, _bborder;
+	uchar _border_snap_distance, _panel_snap_distance;
 
 	bool _running;
 	int _retcode;
 
 	bool _use_tooltip;
 	char _tooltip[255];
-	
+
 	void draw_tooltip(RenderTarget* dst, UIPanel *lowest);
-	
+
 public:
 	void set_tooltip(const char tooltip[255]);
 	void unset_tooltip();
@@ -188,5 +205,14 @@ private:
 	static UIPanel *_g_mousein;
 	static uint s_default_cursor;
 };
+
+inline void UIPanel::set_snap_windows_only_when_overlapping(const bool on) {
+	_flags &= ~pf_snap_windows_only_when_overlapping;
+	if (on) _flags |= pf_snap_windows_only_when_overlapping;
+}
+inline void UIPanel::set_dock_windows_to_edges(const bool on) {
+	_flags &= ~pf_dock_windows_to_edges;
+	if (on) _flags |= pf_dock_windows_to_edges;
+}
 
 #endif

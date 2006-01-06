@@ -42,11 +42,13 @@ class Options_Ctrl {
 			bool fullscreen;
 			bool single_watchwin;
 			bool show_warea;
+			bool snap_windows_only_when_overlapping;
+			bool dock_windows_to_edges;
          bool music;
          bool fx;
          std::string language;
 		};
-		
+
 		Options_Ctrl(Section *s);
 		~Options_Ctrl();
 		Options_Ctrl::Options_Struct options_struct(Section *s);
@@ -59,7 +61,7 @@ class Options_Ctrl {
 /**
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
- 
+
 class Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 public:
 	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
@@ -76,6 +78,8 @@ private:
 	UICheckbox*	m_fx;
 	UICheckbox* m_single_watchwin;
 	UICheckbox* m_show_workarea_preview;
+	UICheckbox* m_snap_windows_only_when_overlapping;
+	UICheckbox* m_dock_windows_to_edges;
 	UIListselect* m_reslist;
 	UIListselect* m_language_list;
 

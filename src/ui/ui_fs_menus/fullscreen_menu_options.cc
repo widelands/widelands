@@ -40,8 +40,9 @@ Fullscreen_Menu_Options
 
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt)
-	: Fullscreen_Menu_Base("optionsmenu.jpg") {
-	
+	: Fullscreen_Menu_Base("optionsmenu.jpg")
+{
+
 	// Menu title
 	UITextarea* title= new UITextarea(this, MENU_XRES/2, 30, _("General Options"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
@@ -67,7 +68,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 	m_inputgrab->set_state(opt.inputgrab);
 	new UITextarea(this, 285, 110, _("Grab Input"), Align_VCenter);
 
-   // Enable Sound 
+   // Enable Sound
 	m_music = new UICheckbox(this, 260, 130);
 	m_music->set_state(opt.music);
 	new UITextarea(this, 285, 140, _("Enable Music"), Align_VCenter);
@@ -80,12 +81,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 
 	// In-game resolution
 	new UITextarea(this, 70, 70, _("In-game resolution"), Align_VCenter);
-   
+
    // GRAPHIC_TODO: this shouldn't be here List all resolutions
    SDL_PixelFormat* fmt = SDL_GetVideoInfo()->vfmt;
    fmt->BitsPerPixel = 16;
    SDL_Rect** modes = SDL_ListModes( fmt, SDL_SWSURFACE | SDL_FULLSCREEN );
-   if( modes ) 
+   if( modes )
       for( uint i = 0; modes[i]; i++ ) {
          if(modes[i]->w < 640) continue;
 	 res this_res = {
@@ -93,7 +94,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
             modes[i]->h,
             16
          };
-         if( !m_resolutions.size() || 
+         if( !m_resolutions.size() ||
                this_res.xres != m_resolutions[m_resolutions.size()-1].xres ||
                this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
             m_resolutions.push_back(this_res);
@@ -108,7 +109,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
             modes[i]->h,
             32
          };
-         if( !m_resolutions.size() || 
+         if( !m_resolutions.size() ||
                this_res.xres != m_resolutions[m_resolutions.size()-1].xres ||
                this_res.yres != m_resolutions[m_resolutions.size()-1].yres)
             m_resolutions.push_back(this_res);
@@ -118,8 +119,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 	for(uint i = 0; i < m_resolutions.size(); i++) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", m_resolutions[i].xres, m_resolutions[i].yres, m_resolutions[i].depth);
-		bool selected = ((m_resolutions[i].xres == opt.xres 
-      && m_resolutions[i].yres == opt.yres 
+		bool selected = ((m_resolutions[i].xres == opt.xres
+      && m_resolutions[i].yres == opt.yres
       && m_resolutions[i].depth == opt.depth) ? true : false);
 		m_reslist->add_entry(buf,NULL,selected);
 	}
@@ -128,16 +129,16 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
   	// In-game resolution
 	new UITextarea(this, MENU_XRES/2+70, 70, _("Language"), Align_VCenter);
 	m_language_list = new UIListselect(this, MENU_XRES/2 + 60, 85, 170, 130,Align_Left,true);
-   available_languages[0].name = _( "System default language" ); 
+   available_languages[0].name = _( "System default language" );
    for(uint i = 0; i < NR_LANGUAGES; i++) {
 		bool selected = false;
 	   if(  available_languages[i].abbrev == opt.language )
          selected = true;
-      m_language_list->add_entry( available_languages[i].name.c_str(), 
+      m_language_list->add_entry( available_languages[i].name.c_str(),
             &available_languages[i].abbrev, selected);
 	}
 
- 
+
 	title= new UITextarea(this, MENU_XRES/2, 240, _("In-game Options"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
@@ -148,6 +149,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 	m_show_workarea_preview= new UICheckbox(this,60,305);
 	m_show_workarea_preview->set_state(opt.show_warea);
 	new UITextarea(this,85,315,_("Show buildings area preview"), Align_VCenter);
+	m_snap_windows_only_when_overlapping = new UICheckbox(this,60,330);
+	m_snap_windows_only_when_overlapping->set_state(opt.snap_windows_only_when_overlapping);
+	new UITextarea(this,85,340,_("Snap windows only when overlapping"), Align_VCenter);
+	m_dock_windows_to_edges = new UICheckbox(this,60,355);
+	m_dock_windows_to_edges->set_state(opt.dock_windows_to_edges);
+	new UITextarea(this,85,365,_("Dock windows to edges"), Align_VCenter);
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
@@ -160,6 +167,8 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	opt.inputgrab = m_inputgrab->get_state();
 	opt.single_watchwin = m_single_watchwin->get_state();
 	opt.show_warea = m_show_workarea_preview->get_state();
+	opt.snap_windows_only_when_overlapping = m_snap_windows_only_when_overlapping->get_state();
+	opt.dock_windows_to_edges = m_dock_windows_to_edges->get_state();
 	opt.language = ((std::string*)(m_language_list->get_selection()))->c_str();
    opt.music = m_music->get_state();
    opt.fx = m_fx->get_state();
@@ -174,7 +183,7 @@ Options_Ctrl::Options_Ctrl(Section* s) {
 	m_opt_section = s;
 	int code = m_opt_dialog->run();
 	if (code == Fullscreen_Menu_Options::om_ok)
-		save_options();                  
+		save_options();
 }
 
 Options_Ctrl::~Options_Ctrl() {
@@ -191,6 +200,8 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section* s) {
 	opt.fullscreen = s->get_bool("fullscreen", false);
 	opt.single_watchwin = s->get_bool("single_watchwin",false);
 	opt.show_warea= s->get_bool("workareapreview",false);
+	opt.snap_windows_only_when_overlapping= s->get_bool("snap_windows_only_when_overlapping", false);
+	opt.dock_windows_to_edges= s->get_bool("dock_windows_to_edges", false);
 	opt.language = s->get_string("language", "");
    opt.music = !s->get_bool("disable_music", false);
    opt.fx = !s->get_bool("disable_fx", false );
@@ -205,12 +216,14 @@ void Options_Ctrl::save_options(){
 	m_opt_section->set_bool("inputgrab", opt.inputgrab);
 	m_opt_section->set_bool("single_watchwin",opt.single_watchwin);
 	m_opt_section->set_bool("workareapreview",opt.show_warea);
+	m_opt_section->set_bool("snap_windows_only_when_overlapping", opt.snap_windows_only_when_overlapping);
+	m_opt_section->set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
 	m_opt_section->set_int("depth", opt.depth);
    m_opt_section->set_bool("disable_music", !opt.music);
    m_opt_section->set_bool("disable_fx", !opt.fx);
    m_opt_section->set_string("language", opt.language.c_str());
 	Sys_SetInputGrab(opt.inputgrab);
-   Sys_SetLocale( opt.language.c_str() ); 
+   Sys_SetLocale( opt.language.c_str() );
    g_sound_handler.set_disable_music( !opt.music );
    g_sound_handler.set_disable_fx( !opt.fx );
 }
