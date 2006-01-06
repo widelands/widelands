@@ -693,18 +693,22 @@ playFX <name>
 
 void ImmovableProgram::parse_playFX(ImmovableAction* act, const ProgramParser* parser, const std::vector<std::string>& cmd)
 {
-	if (cmd.size() != 2)
-		throw wexception("Syntax: playFX [fxname]");
+	if (cmd.size()<2 || cmd.size()>3)
+		throw wexception("Syntax: playFX <fxname> [priority]");
 
 	act->function = &Immovable::run_playFX;
 	act->sparam1 = cmd[1];
+	if (cmd.size()==2)
+		act->iparam1=127;
+	else
+		act->iparam1=atoi(cmd[2].c_str());
 }
 
 /** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
 bool Immovable::run_playFX(Game* g, bool killable, const ImmovableAction& action)
 {
-	g_sound_handler.play_fx(action.sparam1, get_position());
+	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
 
 	m_program_ptr = (m_program_ptr+1) % m_program->get_size();
 

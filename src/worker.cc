@@ -1161,18 +1161,22 @@ bool Worker::run_geologist_find(Game* g, State* state, const WorkerAction* act)
 
 void WorkerProgram::parse_playFX(Worker_Descr*, WorkerAction* act, Parser* parser, const std::vector<std::string>& cmd)
 {
-	if (cmd.size() != 2)
-		throw wexception("Usage: playFX <fx_name>");
+	if (cmd.size()<2 || cmd.size()>3)
+		throw wexception("Usage: playFX <fx_name> [priority]");
 	
 	act->sparam1=cmd[1];
 	act->function = &Worker::run_playFX;
+	if (cmd.size()==2)
+		act->iparam1=127;
+	else
+		act->iparam1=atoi(cmd[2].c_str());
 }
 
 /** Demand from the \ref g_sound_handler to play a certain sound effect. Whether the effect actually gets played
  * is decided only by the sound server*/
 bool Worker::run_playFX(Game* g, State* state, const WorkerAction* act)
 {
-	g_sound_handler.play_fx(act->sparam1, get_position());
+	g_sound_handler.play_fx(act->sparam1, get_position(), act->iparam1);
 	
 	state->ivar1++;
 	schedule_act(g, 10);

@@ -34,7 +34,7 @@
 #include "interactive_base.h"
 #include "mapview.h"
 
-/** Prepare infrastructure for reading song files from disk*/
+/// Prepare infrastructure for reading song files from disk
 Songset::Songset()
 {
 	m_fr = new FileRead();
@@ -42,7 +42,7 @@ Songset::Songset()
 	m_m = NULL;
 }
 
-/** Close and delete all songs to avoid memory leaks.*/
+/// Close and delete all songs to avoid memory leaks.
 Songset::~Songset()
 {
 	m_songs.clear();
@@ -61,7 +61,7 @@ Songset::~Songset()
  * \note The \ref current_song will unconditionally be set to the songset's first song.
  * If you do not want to disturb the (linear) playback order then \ref register_song all
  * songs before you start playing
- */
+*/
 void Songset::add_song(string filename)
 {
 	m_songs.push_back(filename);
@@ -71,7 +71,8 @@ void Songset::add_song(string filename)
 /** Get a song from the songset. Depending on \ref Sound_Handler::sound_random_order,
  * the selection will either be random or linear (after last song, will
  * start again with first.
- * \return	a pointer to the chosen song; NULL if none was found, music is disabled or an error occurred*/
+ * \return	a pointer to the chosen song; NULL if none was found, music is disabled or an error occurred
+*/
 Mix_Music *Songset::get_song()
 {
 	int songnumber;
@@ -134,14 +135,15 @@ Mix_Music *Songset::get_song()
 //--------------------------------------------------------------------------------------
 
 /** Create an FXset and set it's \ref m_priority
- * \param[in] prio	The desired priority (optional)*/
+ * \param[in] prio	The desired priority (optional)
+*/
 FXset::FXset(Uint8 prio)
 {
 	m_priority = prio;
 	m_last_used = 0;
 }
 
-/** Delete all fxs to avoid memory leaks. This also frees the audio data.*/
+/// Delete all fxs to avoid memory leaks. This also frees the audio data.
 FXset::~FXset()
 {
 	vector < Mix_Chunk * >::iterator i = m_fxs.begin();
@@ -156,7 +158,8 @@ FXset::~FXset()
 
 /** Append a sound effect to the end of the fxset
  * \param[in] fx	The sound fx to append
- * \param[in] prio	Set previous \ref m_priority to new value (optional)*/
+ * \param[in] prio	Set previous \ref m_priority to new value (optional)
+*/
 void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
 {
 	assert(fx);
@@ -168,7 +171,6 @@ void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
 /** Get a sound effect from the fxset. \e Which variant of the fx is actually given
  * out is determined at random
  * \return	a pointer to the chosen effect; NULL if sound effects are disabled or no fx is registered
- * \todo Implement priorities
 */
 Mix_Chunk *FXset::get_fx()
 {
@@ -200,7 +202,7 @@ Sound_Handler::Sound_Handler()
 	m_current_songset = "";
 }
 
-/** Housekeeping: unset hooks. Audio data will be freed automagically by the \ref Songset and \ref FXset destructors*/
+/// Housekeeping: unset hooks. Audio data will be freed automagically by the \ref Songset and \ref FXset destructors
 Sound_Handler::~Sound_Handler()
 {
 	Mix_ChannelFinished(NULL);
@@ -241,7 +243,7 @@ void Sound_Handler::init()
 	}
 }
 
-/** Read the main config file, load background music and systemwide sound effects*/
+/// Read the main config file, load background music and systemwide sound effects
 void Sound_Handler::read_config()
 {
 	Section *s;
@@ -288,7 +290,7 @@ void Sound_Handler::load_system_sounds()
  * 			also the name used with \ref play_fx
  * \internal
  * \param recursive	Whether to recurse into subdirectories
- */
+*/
 void Sound_Handler::load_fx(const string dir, const string basename, const bool recursive)
 {
 	filenameset_t files;
@@ -479,8 +481,9 @@ int Sound_Handler::stereo_position(const Coords position)
  * have been loaded before with \ref load_fx.
  * \param fx_name	The identifying name of the sound effect, see \ref load_fx
  * \param map_position  Map coordinates where the event takes place
+ * \param priority	How important is it that this FX actually gets played? (see \ref FXset::m_priority)
 */
-void Sound_Handler::play_fx(const string fx_name, Coords map_position)
+void Sound_Handler::play_fx(const string fx_name, Coords map_position, uint priority)
 {
 	if (map_position == INVALID_POSITION) {
 		log("WARNING: play_fx(\"%s\") called without coordinates\n", fx_name.c_str());
@@ -488,16 +491,18 @@ void Sound_Handler::play_fx(const string fx_name, Coords map_position)
 	}
 
 	if (map_position == NO_POSITION)
-		play_fx(fx_name, 128);
-
-	play_fx(fx_name, stereo_position(map_position));
+		play_fx(fx_name, 128, priority);
+	else
+		play_fx(fx_name, stereo_position(map_position), priority);
 }
 
 /** \overload
  * \param fx_name		The identifying name of the sound effect, see \ref load_fx
  * \param stereo_position	position in widelands' game window, see \ref stereo_position
+ * \param priority		How important is it that this FX actually gets played? (see \ref FXset::m_priority)
+ * \todo Do use FXset::m_priority for play-or-not decisions
 */
-void Sound_Handler::play_fx(const string fx_name, int stereo_position)
+void Sound_Handler::play_fx(const string fx_name, int stereo_position, uint priority)
 {
 	Mix_Chunk *m;
 	int chan;
@@ -512,8 +517,8 @@ void Sound_Handler::play_fx(const string fx_name, int stereo_position)
 		return;
 	}
 
-	if (fx_name != "create_construction_site") {	//create_construction_site gets played every time
-		//TODO: 'play always' should be configurabel in the/a conffile
+	//check if FX should be played
+	if (priority!=255) {
 		//TODO: refine the decision whether to play or not
 
 		if (SDL_GetTicks() < m_fxs[fx_name]->m_last_used + 5000)
@@ -547,7 +552,8 @@ void Sound_Handler::play_fx(const string fx_name, int stereo_position)
  * This just registers the song, actual loading takes place when \ref Songset::get_song()
  * is called, i.e. when the song is about to be played.\n Supported file formats are wav and ogg.
  * If BASENAME_XX (with any extension) is a directory, effects will be registered recursively.
- * Subdirectories of and files under BASENAME_XX can be named anything you want*/
+ * Subdirectories of and files under BASENAME_XX can be named anything you want
+*/
 void Sound_Handler::register_song(const string dir, const string basename, const bool recursive)
 {
 	filenameset_t files;
@@ -579,7 +585,8 @@ void Sound_Handler::register_song(const string dir, const string basename, const
  * \param fadein_ms	Song will fade from 0% to 100% during fadein_ms milliseconds
  * 			milliseconds starting from now
  * \note When calling start_music() while music is still fading out from \ref stop_music()
- * or \ref change_music() this function will block until the fadeout is complete*/
+ * or \ref change_music() this function will block until the fadeout is complete
+*/
 void Sound_Handler::start_music(const string songset_name, int fadein_ms)
 {
 	Mix_Music *m = NULL;
@@ -610,7 +617,8 @@ void Sound_Handler::start_music(const string songset_name, int fadein_ms)
 
 /** Stop playing a songset.
  * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms milliseconds
- * starting from now.*/
+ * starting from now.
+*/
 void Sound_Handler::stop_music(int fadeout_ms)
 {
 	if (m_disable_music)
@@ -629,7 +637,8 @@ void Sound_Handler::stop_music(int fadeout_ms)
  * 			milliseconds starting from now
  * \param fadein_ms	New song will fade from 0% to 100% during fadein_ms milliseconds
  * 			milliseconds starting from now
- * If songset_name is empty, another song from the currently active songset will be selected*/
+ * If songset_name is empty, another song from the currently active songset will be selected
+*/
 void Sound_Handler::change_music(const string songset_name, int fadeout_ms, int fadein_ms)
 {
 	string s;
@@ -647,14 +656,14 @@ void Sound_Handler::change_music(const string songset_name, int fadeout_ms, int 
 		start_music(s, fadein_ms);
 }
 
-/** Normal get_* function */
+/// Normal get_* function
 bool Sound_Handler::get_disable_music()
 {
 	return m_disable_music;
 
 }
 
-/** Normal get_* function */
+/// Normal get_* function
 bool Sound_Handler::get_disable_fx()
 {
 	return m_disable_fx;
@@ -677,7 +686,8 @@ void Sound_Handler::set_disable_music(bool state)
 }
 
 /** Normal set_* function
- * Also, the new value is written back to the config file right away. It might get lost otherwise.*/
+ * Also, the new value is written back to the config file right away. It might get lost otherwise.
+*/
 void Sound_Handler::set_disable_fx(bool state)
 {
 	m_disable_fx = state;
@@ -688,7 +698,8 @@ void Sound_Handler::set_disable_fx(bool state)
  * Usually, another song from the same songset will be started.\n
  * There is a special case for the intro screen's music: only one song will be
  * played. If the user has not clicked the mouse or pressed escape when the song finishes,
- * Widelands will automatically go on to the main menu.*/
+ * Widelands will automatically go on to the main menu.
+*/
 void Sound_Handler::music_finished_callback()
 {
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
@@ -711,7 +722,7 @@ void Sound_Handler::music_finished_callback()
 	}
 }
 
-/** Callback to notify \ref Sound_Handler that a sound effect has finished playing.*/
+/// Callback to notify \ref Sound_Handler that a sound effect has finished playing.
 void Sound_Handler::fx_finished_callback(int channel)
 {
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!

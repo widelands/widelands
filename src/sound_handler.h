@@ -33,7 +33,8 @@
 using namespace std;
 
 class Sound_Handler;
-/**\file*/
+///\file
+
 /** Reference to the global \ref Sound_Handler object
  * The sound handler is a static object because otherwise it'd be quite difficult to pass the --nosound
  * command line option 
@@ -47,8 +48,8 @@ extern Sound_Handler g_sound_handler;
  * access those songs on after another or in random order. The fact that a Songset really 
  * contains several different songs is hidden from the outside.\n
  * A songset does not contain the audio data itself, to not use huge amounts of memory.
- * Instead, each song is loaded on request and the data is free()d afterwards.*/
-
+ * Instead, each song is loaded on request and the data is free()d afterwards.
+*/
 class Songset
 {
 public:
@@ -63,23 +64,26 @@ public:
 	}
 
 protected:
-	/** The filenames of all configured songs*/
+	/// The filenames of all configured songs
 	vector < string > m_songs;
 	/** Pointer to the song that is currently playing (actually the one that was last started);
-	 * needed for linear playback*/
+	 *  needed for linear playback
+	*/
 	vector < string >::iterator m_current_song;
 
 	/** File reader object to fetch songs from disc when they start playing.
 	 * Do not create this for each load, it's a major hassle to code
-	        * \sa m_rwops*/
+	 * \sa m_rwops
+	*/
 	FileRead *m_fr;
 
-	/** The current song*/
+	/// The current song
 	Mix_Music *m_m;
 
 	/** File reader object to fetch songs from disc when they start playing.
 	 * Do not create this for each load, it's a major hassle to code
-	 * \sa m_fr*/
+	 * \sa m_fr
+	*/
 	SDL_RWops *m_rwops;
 };
 
@@ -88,8 +92,8 @@ protected:
  * An FXset encapsulates a number of interchangeable sound effects, e.g.
  * all effects that might be played when a blacksmith is happily hammering away. It is
  * possible to access the effects on after another or in random order. The fact that an
- * FXset really contains several different effect is hidden from the outside.*/
-
+ * FXset really contains several different effect is hidden from the outside.
+*/
 class FXset
 {
 
@@ -106,18 +110,19 @@ public:
 	}
 
 protected:
-	/** The collection of sound effects*/
+	/// The collection of sound effects
 	vector < Mix_Chunk * >m_fxs;
 
-	/** When the effect was played the last time (milliseconds since sdl initialization). Set via SDL_GetTicks()*/
+	/// When the effect was played the last time (milliseconds since sdl initialization). Set via SDL_GetTicks()
 	Uint32 m_last_used;
 
-	/** Minimum time in milliseconds until the effect may be played again */
+	/// Minimum time in milliseconds until the effect may be played again
 	Uint32 m_min_interval;
 
 	/** How important is it to play the effect even when others are running already?
 	 * Range from 0 (do not play at all if anything else is happening) to 255 (always play,
-	 * regardless of other considerations)*/
+	 * regardless of other considerations)
+	*/
 	Uint8 m_priority;
 };
 
@@ -163,6 +168,10 @@ protected:
  * for later access, similar to music stored in songsets. For effects, however, the selection 
  * is always random.
  * 
+ * The above sound effects are synchronized with a work program. It's also possible to have
+ * sound effects that are synchronized with a building/worker \e animation. For more information
+ * about this look at class \ref AnimationManager.
+ *
  * \par Usage of callbacks
  * 
  * SDL_mixer's way to notify the application of important sound events, e.g. that a song is
@@ -211,7 +220,7 @@ protected:
  * 
  * \todo FX should have a priority (e.g. fights are more important than fishermen)
  * \todo Sound_Handler must not play *all* FX but only a select few
- */
+*/
 
 class Sound_Handler
 {
@@ -232,8 +241,8 @@ public:
 	void load_system_sounds();
 
 	void load_fx(const string dir, const string basename, const bool recursive = false);
-	void play_fx(const string fx_name, Coords map_position = INVALID_POSITION);
-	void play_fx(const string fx_name, int stereo_position);
+	void play_fx(const string fx_name, Coords map_position = INVALID_POSITION, uint priority=127);
+	void play_fx(const string fx_name, int stereo_position, uint priority=127);
 
 	void register_song(const string dir, const string basename, const bool recursive = false);
 	void start_music(const string songset_name, int fadein_ms = 0);
@@ -248,12 +257,13 @@ public:
 	void set_disable_music(bool state);
 	void set_disable_fx(bool state);
 
-	/** The game logic where we can get a mapping from logical to screen coordinates and vice versa*/
-	Game *m_the_game;	//TODO: can we please get rid of this member variable somehow?
+	/// The game logic where we can get a mapping from logical to screen coordinates and vice versa
+	Game *m_the_game;
 
 	/** Only for buffering command line option --nosound until real intialization is done
 	 * \see Sound_Handler::Sound_Handler()
-	 * \see Sound_Handler::init() */
+	 * \see Sound_Handler::init()
+	*/
 	bool m_nosound;
 
 protected:
@@ -261,28 +271,31 @@ protected:
 	void load_one_fx(const string filename, const string fx_name);
 	int stereo_position(const Coords position);
 
-	/** Whether to disable background music*/
+	/// Whether to disable background music
 	bool m_disable_music;
 
-	/** Whether to disable sound effects*/
+	/// Whether to disable sound effects
 	bool m_disable_fx;
 
 	/** Whether to play music in random order
-	 * \note Sound effects will \e always be selected at random (inside their \ref FXset, of course)*/
+	 * \note Sound effects will \e always be selected at random (inside their \ref FXset, of course)
+	*/
 	bool m_random_order;
 
-	/** A collection of songsets*/
+	/// A collection of songsets
 	map < string, Songset * >m_songs;
 
-	/** A collection of effect sets*/
+	/// A collection of effect sets
 	map < string, FXset * >m_fxs;
 
 	/** Which songset we are currently selecting songs from - not regarding if there actually is a song
-	 * playing \e right \e now*/
+	 * playing \e right \e now
+	*/
 	string m_current_songset;
 
 	/** The random number generator.
-	        * \note The RNG here *must* not be the same as the one for the game logic! */
+	 * \note The RNG here *must* not be the same as the one for the game logic!
+	*/
 	RNG m_rng;
 };
 

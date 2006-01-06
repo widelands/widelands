@@ -45,7 +45,7 @@
 
 LayeredFileSystem *g_fs;
 
-/** Reference to the global \ref Sound_Handler object
+/** The global \ref Sound_Handler object
  * The sound handler is a static object because otherwise it'd be quite difficult to pass the --nosound
  * command line option
 */
@@ -53,12 +53,8 @@ Sound_Handler g_sound_handler;
 
 static void g_shutdown();
 
-/*
-===============
-g_init
-
-Initialize all subsystems
-===============
+/**
+ * Initialize all subsystems
 */
 static void g_init(int argc, char **argv)
 {
@@ -111,12 +107,8 @@ static void g_init(int argc, char **argv)
 
 }
 
-/*
-===============
-g_shutdown
-
-Shutdown all subsystems
-===============
+/**
+ * Shutdown all subsystems
 */
 static void g_shutdown()
 {
@@ -143,14 +135,10 @@ static void g_shutdown()
 	}
 }
 
-/*
-===============
-g_main
-
-This is the OS Independant main function.
-
-Control the life-cycle of the game
-===============
+/**
+ * This is the OS Independant main function.
+ *
+ * It controls the life-cycle of a game
 */
 void g_main(int argc, char** argv)
 {
@@ -388,12 +376,8 @@ void g_main(int argc, char** argv)
 }
 
 
-/*
-==============
-main
-
-Cross-platform entry point for SDL applications.
-==============
+/**
+ * Cross-platform entry point for SDL applications.
 */
 int main(int argc, char** argv)
 {
@@ -404,7 +388,7 @@ int main(int argc, char** argv)
 #ifdef __MINGW__
 #undef main
 
-// This is a hack needed for mingw under windows
+/// This is a hack needed for mingw under windows
 int main(int argc, char** argv) {
 	g_main(argc,argv);
 return 0;

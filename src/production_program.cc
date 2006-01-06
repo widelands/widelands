@@ -326,14 +326,17 @@ void ProductionProgram::parse(std::string directory, Profile* prof,
 			if (act.iparam1 >= act.iparam2)
 				throw wexception("current_level must be lesser than new_level");
 		} else if (cmd[0] == "playFX") {
-			if (cmd.size() != 2)
-				throw wexception("Usage: play <sound_fx_name>");
+			if (cmd.size()<2 || cmd.size()>3)
+				throw wexception("Usage: play <sound_fx_name> [priority]");
 			
 			act.type = ProductionAction::actPlayFX;
 			
 			act.sparam1=cmd[1];
-			
 			//TODO: check if fx exists, load fx, lots of other checks for aprameter correctness
+			if (cmd.size()==2)
+				act.iparam1=127;
+			else
+				act.iparam1=atoi(cmd[2].c_str());
 			
 			
 		} else
