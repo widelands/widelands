@@ -4222,7 +4222,7 @@ void Economy::start_request_timer(int delta)
    cq->enqueue (new Cmd_Call_Economy_Balance(m_request_timer_time, m_owner->get_player_number(), this));
 	
 //	cq->queue(m_request_timer_time, SENDER_MAPOBJECT, CMD_CALL,
-//					(int)(&Economy::request_timer_cb), m_trackserial, 0);
+//					(long)(&Economy::request_timer_cb), m_trackserial, 0);
 }
 
 
