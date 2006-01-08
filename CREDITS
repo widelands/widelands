@@ -1,0 +1,72 @@
+CREDITS
+=======
+
+Widelands uses a lot of librarys and files,
+which are distributed by other Open-Source Projects.
+And you hardly can believe, that widelands still 
+would be in stoneage, if not using these files :-).
+
+The Widelands Development Team wants to thank
+the following Projects:
+
+
+    libSDL
+    libSDL_mixer
+    libSDL_net
+    libSDL_image
+    libSDL_ttf
+    * All files from SDL-Project    
+    * Project can be found at http://www.libsdl.org/
+    
+    
+    Gettext
+    * By Free Software Foundation, Inc. 
+    * Project can be found at http://www.gnu.org/software/gettext/
+    
+    
+    libiconv
+    * By Free Software Foundation, Inc.
+    * Project can be found at http://www.gnu.org/software/libiconv/
+    
+    
+    libpng
+    * By Glenn Randers-Pehrson, Andreas Eric Dilger & Guy Eric Schalnat 
+    * Project can be found at http://www.libpng.org/
+    
+    
+    zlib
+    * By Jean-Loup Gailly and Mark Adler 
+    * Project can be found at http://www.gzip.org/zlib/
+    
+    
+    STLport
+    * By STLport Consulting, Inc. 
+    * Project can be found at http://www.stlport.com
+    
+    
+    Freefonts
+    * By The Free Software Foundation, Inc.
+    * Project can be found at http://savannah.gnu.org/projects/freefont/
+    
+    
+    Inno Setup
+    * By Jordan Russel
+    * Project can be found at http://www.innosetup.com
+    
+    
+    SCons
+    * By The SCons Foundation
+    * Project can be found at http://scons.sourceforge.net/
+    
+
+and last but not least:
+
+    http://www.Sourceforge.net 
+    * for their Portal
+    * cvs-server
+    * and many more services :-)
+    
+
+
+
+December 2005
