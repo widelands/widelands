@@ -444,7 +444,6 @@ INSTDIRS=[
 	'campaigns',
 	'fonts',
 	'game-server',
-	'locale',
 	'maps',
 	'music',
 	'pics',

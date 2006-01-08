@@ -116,14 +116,18 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
       }
 
 	m_reslist = new UIListselect(this, 60, 85, 150, 130,Align_Left,true);
+	bool did_select_a_res=false;
 	for(uint i = 0; i < m_resolutions.size(); i++) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", m_resolutions[i].xres, m_resolutions[i].yres, m_resolutions[i].depth);
 		bool selected = ((m_resolutions[i].xres == opt.xres
       && m_resolutions[i].yres == opt.yres
       && m_resolutions[i].depth == opt.depth) ? true : false);
+		did_select_a_res|=selected;
 		m_reslist->add_entry(buf,NULL,selected);
 	}
+	if (!did_select_a_res)
+		m_reslist->select(m_reslist->get_nr_entries()-1);
 
    // Available locales
   	// In-game resolution
