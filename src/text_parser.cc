@@ -33,13 +33,13 @@ Text_Parser::~Text_Parser(){
 void Text_Parser::parse(std::string text, std::vector<Text_Block> *blocks, Varibale_Callback vcb, void* vcdata) {  
    while (text.size()) {
       if (text.substr(0,2) != "<p") {
-         uint block_start = text.find("<p");
+			std::string::size_type block_start = text.find("<p");
          text.erase(0,block_start);
          continue;
       }
       text.erase(0,2);
       
-      uint format_end = text.find(">");
+		std::string::size_type format_end = text.find(">");
       if (format_end == std::string::npos) {
          log("WARNING: Formatdefinition of block '%s' not closed\n",(text.substr(0,30)+"...").c_str());
          return;
@@ -48,7 +48,7 @@ void Text_Parser::parse(std::string text, std::vector<Text_Block> *blocks, Varib
       std::string block_format = text.substr(0,format_end);
       text.erase(0,format_end+1);
             
-      uint block_end = text.find("</p>");
+		std::string::size_type block_end = text.find("</p>");
       if (block_end == std::string::npos) {
       
          log("WARNING: Block '%s' not closed!\n",(text.substr(0,30)+"...").c_str());
@@ -63,14 +63,14 @@ void Text_Parser::parse(std::string text, std::vector<Text_Block> *blocks, Varib
      
       // Replace <br> in text block through newlines. This is needed for 
       // Texts which may not contain newlines ( for example from conf files )
-      uint newline;
+		std::string::size_type newline;
       while( (newline = block_text.find("<br>")) != std::string::npos ) {
          block_text.replace( newline, 4, "\n" );
       }
       // Serch for map variables
-      uint offset;
+		std::string::size_type offset;
       while( (offset = block_text.find("<variable name=")) != std::string::npos) {
-         uint end = block_text.find(">");
+			std::string::size_type end = block_text.find(">");
          if( end == std::string::npos ) {
             log("WARNING: <variable> tag not closed!\n");
          } else {
@@ -106,13 +106,13 @@ void Text_Parser::parse_attributes(std::string format, Text_Block *element) {
       format.erase(0,1);
 
    while (format.size()) {
-      uint key_end = format.find("=");
+		std::string::size_type key_end = format.find("=");
       if (key_end == std::string::npos)
          return;
       else {
          std::string key = format.substr(0,key_end);
          format.erase(0,key_end+1);
-         uint val_end = format.find(" ");
+			std::string::size_type val_end = format.find(" ");
          if (val_end == std::string::npos)
             val_end = format.size();
          std::string val = format.substr(0,val_end);
