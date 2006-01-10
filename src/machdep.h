@@ -20,36 +20,17 @@
 #ifndef MACHDEP_H
 #define MACHDEP_H
 
+#include <SDL_endian.h>
 #include "types.h"
 
-// TODO: figure out a way to define these portably
-// Currently supported: i386, PowerPC, Sparc, AMD64
-#if defined (__ppc__) || defined(__powerpc64__) || defined(__powerpc__)
-#undef P_LITTLE_ENDIAN
-#define P_BIG_ENDIAN
-#undef P_ALIGNMENT
-#elif defined (__sparc__)
-#undef P_LITTLE_ENDIAN
-#define P_BIG_ENDIAN
-#define P_ALIGNMENT
-#elif defined (__i386__) || defined(__x86_64__)
-#undef P_BIG_ENDIAN
-#define P_LITTLE_ENDIAN
-#undef P_ALIGNMENT
-#else
-#error architecture not supported
-#endif
-
-#ifdef P_LITTLE_ENDIAN
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
 #define Little16(x)		(x)
 #define Little32(x)		(x)
 #define LittleFloat(x)		(x)
 #define Big16(x)		Swap16((x))
 #define Big32(x)		Swap32((x))
 #define BigFloat(x)		SwapFloat((x))
-#endif
-
-#ifdef P_BIG_ENDIAN
+#else
 #define Little16(x)		Swap16((x))
 #define Little32(x)		Swap32((x))
 #define LittleFloat(x)		SwapFloat((x))
@@ -89,7 +70,6 @@ inline char Deref8(const void* ptr)
 	return *reinterpret_cast<const char*>(ptr);
 }
 
-#ifdef P_ALIGNMENT
 inline short Deref16(const void* ptr)
 {
 	short r;
@@ -110,21 +90,5 @@ inline float DerefFloat(const void* ptr)
 	memcpy(&r, ptr, sizeof(r));
 	return r;
 }
-#else
-inline short Deref16(const void* ptr)
-{
-	return *reinterpret_cast<const short*>(ptr);
-}
-
-inline int Deref32(const void* ptr)
-{
-	return *reinterpret_cast<const int*>(ptr);
-}
-
-inline float DerefFloat(const void* ptr)
-{
-	return *reinterpret_cast<const float*>(ptr);
-}
-#endif
 
 #endif
