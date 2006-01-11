@@ -12,6 +12,7 @@ import sys
 import confgettext 
 from glob import glob
 import string
+import fileinput
 
 TRIBES = [ "barbarians" ]
 WORLDS = [ "greenland" ]  
@@ -141,6 +142,8 @@ def main( ):
         do_makedirs( "%s/LC_MESSAGES" % lang )
         os.system( "msgfmt -o %s/LC_MESSAGES/texts.mo texts_%s.po" % ( lang, lang ))
 
+    replace_backslashes_in_comments()
+
 
 
 # 
@@ -167,6 +170,21 @@ def extract_languages(  ):
         retval.append( abr )
     return retval
 
+#
+# In the generated .po[t] files, comments show filenames for easy orientation
+# (that's really all they're there for). These filenames are platform dependent
+# (slash/backslash), which screws up CVS handling of .po[t] files. Therefore,
+# all backslashes in these filenames always get converted to slashes.
+#
+def replace_backslashes_in_comments():
+    files =glob("*.po")
+    files+=glob("*.pot")
+
+    for line in fileinput.input(files, inplace=1):
+        if line[0]=='#':
+            print string.replace(line, '\\', '/'),
+        else:
+            print line,
 
 if __name__ == "__main__":
     main()
