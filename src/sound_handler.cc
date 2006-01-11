@@ -379,8 +379,8 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 #endif
 
 		if (tempfile == NULL) {
-			log("Could not create tempfile"
-			    "/tmp/widelands-sfx.XXXXXXXX! Cannot load"
+			log("Could not create tempfile "
+			    "/tmp/widelands-sfx.XXXXXXXX! Cannot load "
 			    "music.");
 			return NULL;
 		}
