@@ -96,4 +96,9 @@
 /// How often are statistics to be sampled
 #define STATISTICS_SAMPLE_TIME 30000
 
+/** Shorthand because the original is a lot to type *and* harder to read
+ * This is a #define instead of a typedef to avoid including constants.h
+ * in lots of files*/
+#define SSS_T std::string::size_type
+
 #endif
