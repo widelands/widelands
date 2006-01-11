@@ -15,42 +15,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../campaigns\t01.wmf\event:11 ../campaigns\t01.wmf\event:608
-#: ../campaigns\t01.wmf\event:627 ../campaigns\t01.wmf\event:646
-#: ../campaigns\t01.wmf\event:665
+#: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
+#: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
+#: ../campaigns/t01.wmf/event:665
 msgid "Thron speaks..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:13
+#: ../campaigns/t01.wmf/event:13
 msgid ""
 "It's been months and we are still hiding where the forests are old and dark. "
 "My warriors hunt at day and lay awake at night - listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:15 ../campaigns\t01.wmf\event:32
-#: ../campaigns\t01.wmf\event:49 ../campaigns\t01.wmf\event:66
+#: ../campaigns/t01.wmf/event:15 ../campaigns/t01.wmf/event:32
+#: ../campaigns/t01.wmf/event:49 ../campaigns/t01.wmf/event:66
 msgid "The Story begins..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:22 ../campaigns\t01.wmf\event:39
-#: ../campaigns\t01.wmf\event:56 ../campaigns\t01.wmf\event:73
-#: ../campaigns\t01.wmf\event:465 ../campaigns\t01.wmf\event:484
-#: ../campaigns\t01.wmf\event:523 ../campaigns\t01.wmf\event:562
-#: ../campaigns\t01.wmf\event:619 ../campaigns\t01.wmf\event:638
-#: ../campaigns\t01.wmf\event:657 ../campaigns\t01.wmf\event:676
-#: ../campaigns\t01.wmf\event:723
+#: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
+#: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
+#: ../campaigns/t01.wmf/event:465 ../campaigns/t01.wmf/event:484
+#: ../campaigns/t01.wmf/event:523 ../campaigns/t01.wmf/event:562
+#: ../campaigns/t01.wmf/event:619 ../campaigns/t01.wmf/event:638
+#: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
+#: ../campaigns/t01.wmf/event:723
 msgid "OK"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:30
+#: ../campaigns/t01.wmf/event:30
 msgid ""
 "We can see the raging flames that swallow Al'thunran, miles away, from here. "
 "The red lights flash in the darkness and dance to the rhythm of the wardrums "
 "that haunt me even in my nightmares."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:47
+#: ../campaigns/t01.wmf/event:47
 msgid ""
 "My father's bones lay peacefully in the grounds he cleared from the "
 "senseless bloodspilling that has once risen among us.<br>Boldreth, my loyal "
@@ -59,42 +59,42 @@ msgid ""
 "greed or despair destroy our bonds as well"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:64
+#: ../campaigns/t01.wmf/event:64
 msgid ""
 "As father told me, there will be times to fight and times to lay and wait, "
 "trying not to sleep or die before the right time comes. And so I do... wait."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:454
+#: ../campaigns/t01.wmf/event:454
 msgid "An old man approaches you..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:456
+#: ../campaigns/t01.wmf/event:456
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my council through these darkened days.\" "
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:458 ../campaigns\t01.wmf\event:477
-#: ../campaigns\t01.wmf\event:496 ../campaigns\t01.wmf\event:516
-#: ../campaigns\t01.wmf\event:535 ../campaigns\t01.wmf\event:555
-#: ../campaigns\t01.wmf\event:574 ../campaigns\t02.wmf\event:498
-#: ../campaigns\t02.wmf\event:510 ../campaigns\t02.wmf\event:522
-#: ../campaigns\t02.wmf\event:534 ../campaigns\t02.wmf\event:546
-#: ../campaigns\t02.wmf\event:559 ../campaigns\t02.wmf\event:571
-#: ../campaigns\t02.wmf\event:584 ../campaigns\t02.wmf\event:597
-#: ../campaigns\t02.wmf\event:622 ../campaigns\t02.wmf\event:635
-#: ../campaigns\t02.wmf\event:661 ../campaigns\t02.wmf\event:674
-#: ../campaigns\t02.wmf\event:688 ../campaigns\t02.wmf\event:701
-#: ../campaigns\t02.wmf\event:714 ../campaigns\t02.wmf\event:727
+#: ../campaigns/t01.wmf/event:458 ../campaigns/t01.wmf/event:477
+#: ../campaigns/t01.wmf/event:496 ../campaigns/t01.wmf/event:516
+#: ../campaigns/t01.wmf/event:535 ../campaigns/t01.wmf/event:555
+#: ../campaigns/t01.wmf/event:574 ../campaigns/t02.wmf/event:498
+#: ../campaigns/t02.wmf/event:510 ../campaigns/t02.wmf/event:522
+#: ../campaigns/t02.wmf/event:534 ../campaigns/t02.wmf/event:546
+#: ../campaigns/t02.wmf/event:559 ../campaigns/t02.wmf/event:571
+#: ../campaigns/t02.wmf/event:584 ../campaigns/t02.wmf/event:597
+#: ../campaigns/t02.wmf/event:622 ../campaigns/t02.wmf/event:635
+#: ../campaigns/t02.wmf/event:661 ../campaigns/t02.wmf/event:674
+#: ../campaigns/t02.wmf/event:688 ../campaigns/t02.wmf/event:701
+#: ../campaigns/t02.wmf/event:714 ../campaigns/t02.wmf/event:727
 msgid "Advisor"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:473
+#: ../campaigns/t01.wmf/event:473
 msgid "Khantrukh continues..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:475
+#: ../campaigns/t01.wmf/event:475
 msgid ""
 " \"None but the gods know how long we have to remain hidden here. The "
 "warriors hope we may march back gloriously any day now, but I strongly doubt "
@@ -108,11 +108,11 @@ msgid ""
 "Lumberjack."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:492
+#: ../campaigns/t01.wmf/event:492
 msgid "The elder remarks..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:494
+#: ../campaigns/t01.wmf/event:494
 msgid ""
 " \"Obviously, it would be too draining for our people to walk all the way to "
 "the Lumberjack through the wilderness. We will have to make a path between "
@@ -128,15 +128,15 @@ msgid ""
 "keep it short and even."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:503
+#: ../campaigns/t01.wmf/event:503
 msgid "Order3"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:512
+#: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:514
+#: ../campaigns/t01.wmf/event:514
 msgid ""
 " \"There is an old saying: 'A burden divided is easier to endure.' A "
 "crossroad on the way between our site and the lumberjack would ease the work "
@@ -149,11 +149,11 @@ msgid ""
 "infrastructure. Place a flag in the mid of the road."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:531
+#: ../campaigns/t01.wmf/event:531
 msgid "The old man looks to the sky..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:533
+#: ../campaigns/t01.wmf/event:533
 msgid ""
 " \"The northern winds tell us, the coming winter will be a long and cruel "
 "one. One Lumberjack will not be enough to still the needs of our people. "
@@ -165,15 +165,15 @@ msgid ""
 "the entire road at once."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:542
+#: ../campaigns/t01.wmf/event:542
 msgid "Order5"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:551
+#: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:553
+#: ../campaigns/t01.wmf/event:553
 msgid ""
 " \"Of course, if we intended to build a bigger settlement much more "
 "Lumberjacks would be advisable, but this should do for now.<br>But never "
@@ -184,11 +184,11 @@ msgid ""
 "<br>- Build a Ranger's Hut to the east of the first Lumberjack."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:570
+#: ../campaigns/t01.wmf/event:570
 msgid "The elder speaks..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:572
+#: ../campaigns/t01.wmf/event:572
 msgid ""
 " \"I am well aware, chieftain, that neither you nor your warriors have the "
 "desire to stay in this forsaken place for long. But even so, our war to "
@@ -199,11 +199,11 @@ msgid ""
 "OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:581
+#: ../campaigns/t01.wmf/event:581
 msgid "Order7"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:610
+#: ../campaigns/t01.wmf/event:610
 msgid ""
 "In another sleepless night I went up to the hill and gazed to the north. The "
 "fires are still burning, stilling their hunger upon my father's legacy."
@@ -211,11 +211,11 @@ msgid ""
 "reminder why we must return in the end."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:612
+#: ../campaigns/t01.wmf/event:612
 msgid "In the night..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:629
+#: ../campaigns/t01.wmf/event:629
 msgid ""
 "Once again I went up to my father's tomb, in a sacred grove at the feet of "
 "the great spire of Kal'mavrath. I just stood there and did not feel neither "
@@ -224,11 +224,11 @@ msgid ""
 "future might hold for me..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:631
+#: ../campaigns/t01.wmf/event:631
 msgid "At the grave"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:648
+#: ../campaigns/t01.wmf/event:648
 msgid ""
 "Some time ago, Boldreth came to me. His advise was to move to some place "
 "closer home - to strike at the first sign of my brothers forces wavering."
@@ -238,11 +238,11 @@ msgid ""
 "return would cause both on our and the other side..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:650
+#: ../campaigns/t01.wmf/event:650
 msgid "The other day..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:667
+#: ../campaigns/t01.wmf/event:667
 msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror when he told us of the atrocities "
@@ -250,26 +250,26 @@ msgid ""
 "madness at any cost!"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:669
+#: ../campaigns/t01.wmf/event:669
 msgid "Another evening..."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:712
+#: ../campaigns/t01.wmf/event:712
 msgid "Victory!"
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:714
+#: ../campaigns/t01.wmf/event:714
 msgid ""
 "Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead.<br><br>VICTORY!<br><br> You may "
 "continue if you wish. Otherwise, move on to the next mission."
 msgstr ""
 
-#: ../campaigns\t01.wmf\event:716
+#: ../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
 msgstr ""
 
-#: ../campaigns\t01.wmf\objective:8
+#: ../campaigns/t01.wmf/objective:8
 msgid ""
 "- press SPACE to see where you can build. The red spots show you, where a "
 "small building - like a Lumberjack - may be built.<br>- build a Lumberjack "
@@ -284,7 +284,7 @@ msgid ""
 "even."
 msgstr ""
 
-#: ../campaigns\t01.wmf\objective:16
+#: ../campaigns/t01.wmf/objective:16
 msgid ""
 "- There is a flag symbol in the mid of the way you just built. By clicking "
 "it and, in the consecutively opening menu, clicking the flag-button, you "
@@ -298,15 +298,15 @@ msgid ""
 "destination to build the entire road at once."
 msgstr ""
 
-#: ../campaigns\t01.wmf\objective:24
+#: ../campaigns/t01.wmf/objective:24
 msgid "- Build a Ranger's Hut to the east of the Lumberjack."
 msgstr ""
 
-#: ../campaigns\t01.wmf\objective:32
+#: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:11
+#: ../campaigns/t02.wmf/event:11
 msgid ""
 " \"The war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees. The stories they tell "
@@ -317,31 +317,31 @@ msgid ""
 "wedge that drives us apart.\" "
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:13
+#: ../campaigns/t02.wmf/event:13
 msgid "The Story goes on..."
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:16 ../campaigns\t02.wmf\event:29
-#: ../campaigns\t02.wmf\event:41 ../campaigns\t02.wmf\event:501
-#: ../campaigns\t02.wmf\event:513 ../campaigns\t02.wmf\event:525
-#: ../campaigns\t02.wmf\event:537 ../campaigns\t02.wmf\event:549
-#: ../campaigns\t02.wmf\event:562 ../campaigns\t02.wmf\event:574
-#: ../campaigns\t02.wmf\event:587 ../campaigns\t02.wmf\event:600
-#: ../campaigns\t02.wmf\event:613 ../campaigns\t02.wmf\event:625
-#: ../campaigns\t02.wmf\event:638 ../campaigns\t02.wmf\event:651
-#: ../campaigns\t02.wmf\event:664 ../campaigns\t02.wmf\event:677
-#: ../campaigns\t02.wmf\event:691 ../campaigns\t02.wmf\event:704
-#: ../campaigns\t02.wmf\event:717 ../campaigns\t02.wmf\event:730
-#: ../campaigns\t02.wmf\event:752 ../campaigns\t02.wmf\event:764
-#: ../campaigns\t02.wmf\event:846
+#: ../campaigns/t02.wmf/event:16 ../campaigns/t02.wmf/event:29
+#: ../campaigns/t02.wmf/event:41 ../campaigns/t02.wmf/event:501
+#: ../campaigns/t02.wmf/event:513 ../campaigns/t02.wmf/event:525
+#: ../campaigns/t02.wmf/event:537 ../campaigns/t02.wmf/event:549
+#: ../campaigns/t02.wmf/event:562 ../campaigns/t02.wmf/event:574
+#: ../campaigns/t02.wmf/event:587 ../campaigns/t02.wmf/event:600
+#: ../campaigns/t02.wmf/event:613 ../campaigns/t02.wmf/event:625
+#: ../campaigns/t02.wmf/event:638 ../campaigns/t02.wmf/event:651
+#: ../campaigns/t02.wmf/event:664 ../campaigns/t02.wmf/event:677
+#: ../campaigns/t02.wmf/event:691 ../campaigns/t02.wmf/event:704
+#: ../campaigns/t02.wmf/event:717 ../campaigns/t02.wmf/event:730
+#: ../campaigns/t02.wmf/event:752 ../campaigns/t02.wmf/event:764
+#: ../campaigns/t02.wmf/event:846
 msgid "Continue"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:26 ../campaigns\t02.wmf\event:38
+#: ../campaigns/t02.wmf/event:26 ../campaigns/t02.wmf/event:38
 msgid "The Story continues..."
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:497
+#: ../campaigns/t02.wmf/event:497
 msgid ""
 " \"So you want to prepare us for a longer stay in these forests, Thron? "
 "Well, I see the wisdom in doing so, yet my heart is yearning for a glorious "
@@ -349,14 +349,14 @@ msgid ""
 "the battlefield, and our axes and swords have turned rusty over time.\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:509
+#: ../campaigns/t02.wmf/event:509
 msgid ""
 " \"I beg your forgiveness, chieftain, but I have a grief concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers' "
 "tools and it is only a matter of little time before they are all gone.\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:521
+#: ../campaigns/t02.wmf/event:521
 msgid ""
 " \"While it is certainly no worthy task for a warrior, at least it is "
 "something to be done! Thron, what do you say about me taking a few of our "
@@ -367,15 +367,15 @@ msgid ""
 "east from you and build a Quarry there.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:533
+#: ../campaigns/t02.wmf/event:533
 msgid " \"Old man? Disrespectful youth...\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:545
+#: ../campaigns/t02.wmf/event:545
 msgid " \"At least. These rocks should last for a while.\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:558
+#: ../campaigns/t02.wmf/event:558
 msgid ""
 " \"Just look at that! The great mountain of Kal'mavrath! I wonder what "
 "treasures nature might have hidden beneath its majestic flanks!<br>Now "
@@ -392,13 +392,13 @@ msgid ""
 "mines are displayed with a light grey dot.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:570
+#: ../campaigns/t02.wmf/event:570
 msgid ""
 " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
 "this coal and iron ore for! It might even be enough to -\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:583
+#: ../campaigns/t02.wmf/event:583
 msgid ""
 " \"While this is true, we should consider it later, for now other obstacles "
 "are at hand. The miners will definately demand greater rations for working "
@@ -406,7 +406,7 @@ msgid ""
 "may not prove easy.\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:595
+#: ../campaigns/t02.wmf/event:595
 msgid ""
 " \"I have to give it to you, you are right here, old man.<br>There seem to "
 "be quite many animals in the forests here - we might just hunt down more of "
@@ -414,7 +414,7 @@ msgid ""
 "call it 'Thron's Pride' or so if you want!\"<br><br>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:596
+#: ../campaigns/t02.wmf/event:596
 msgid ""
 "--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter "
 "can hunt down animals, while a gamekeeper prevents them from becoming "
@@ -424,14 +424,14 @@ msgid ""
 "a gamekeeper and a tavern.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:608
+#: ../campaigns/t02.wmf/event:608
 msgid ""
 " \"Wisdom commands to seek variety. North of the great mountain is a big "
 "plane - why don't we use the space Mother Nature gave us and build a farm? I "
 "sure would enjoy a freshly baken pittabread for a change...\"<br><br>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:609
+#: ../campaigns/t02.wmf/event:609
 msgid ""
 "--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food "
 "though - are fishers and farms. The wheat of the latter has to be processed "
@@ -440,21 +440,21 @@ msgid ""
 "well, a farm and a bakery.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:621
+#: ../campaigns/t02.wmf/event:621
 msgid ""
 " \"Our hunters are out in the forests, Thron. I promise you, before the sun "
 "sets today you will have a feast as magnificent as is right for the "
 "chieftain of all clans!\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:634
+#: ../campaigns/t02.wmf/event:634
 msgid ""
 " \"Isn't it lovely, the view of golden fields, growing peacefully, dancing "
 "to the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread for our chieftain alone!\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:647
+#: ../campaigns/t02.wmf/event:647
 msgid ""
 " \"The new tavern opened yesterday. While I am hardly in the mood for "
 "celebration, I noticed how much this tiny bit of home meant to my people. "
@@ -463,11 +463,11 @@ msgid ""
 "can... call home.\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:648
+#: ../campaigns/t02.wmf/event:648
 msgid "A beautiful morning..."
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:659
+#: ../campaigns/t02.wmf/event:659
 msgid ""
 " \"So now that we have both the mines and the food to sustain them, we "
 "should bring what our brave miners gain for us into a more useful state. We "
@@ -475,7 +475,7 @@ msgid ""
 "see fit and the coal to keep the smelter's ovens burning.\"<br><br>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:660
+#: ../campaigns/t02.wmf/event:660
 msgid ""
 "--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it "
 "has to be melted into iron first. Build a Smelter. Likewise, the coalearth "
@@ -483,7 +483,7 @@ msgid ""
 "Burner.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:672
+#: ../campaigns/t02.wmf/event:672
 msgid ""
 " \"Our miners are digging up less and less by day! We have to go deeper, "
 "closer to the mountain's roots, if we want more of its treasures!<br>Of "
@@ -492,7 +492,7 @@ msgid ""
 "them.\"<br><br>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:673
+#: ../campaigns/t02.wmf/event:673
 msgid ""
 "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all "
 "ressources lying beneath. Then it must be enhanced to a deep mine in order "
@@ -512,14 +512,14 @@ msgid ""
 "the better versions of their buildings respectively.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:686
+#: ../campaigns/t02.wmf/event:686
 msgid ""
 " \"As I just discovered, we are running short on blackwood! We cannot put "
 "our warriors into some crumbling huts, and even more not so in times as "
 "dangerous as ours! We need a woodhardener, and we need one now!\"<br><br>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:687
+#: ../campaigns/t02.wmf/event:687
 msgid ""
 "--NEW OBJECTIVES--<br>- Bigger and better buildings - including all "
 "militarian ones - require better building materials. They cannot be built of "
@@ -528,7 +528,7 @@ msgid ""
 "blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:699
+#: ../campaigns/t02.wmf/event:699
 msgid ""
 " \"Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes first battle cry! Now we can expand safely!<br>Still, it "
@@ -537,7 +537,7 @@ msgid ""
 "\"<br><br>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:700
+#: ../campaigns/t02.wmf/event:700
 msgid ""
 "--NEW OBJECTIVES--<br>- Better buildings may require also other improved "
 "materials besides blackwood. One of those is grindstone, which is produced "
@@ -548,7 +548,7 @@ msgid ""
 "Stonegrinder and a Well.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:712
+#: ../campaigns/t02.wmf/event:712
 msgid ""
 " \"Chieftain, this is a disgrace! It is well that we can produce grindstone "
 "for mighty fortifications and great buildings now - only, this does not "
@@ -558,20 +558,20 @@ msgid ""
 "something about!\"<br><br>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:713
+#: ../campaigns/t02.wmf/event:713
 msgid ""
 "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings "
 "is fern, used to cover roofs. Fern is being planted by a fernery.<br>Build a "
 "Fernery.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:726
+#: ../campaigns/t02.wmf/event:726
 msgid ""
 " \"Wonderful! Our roofs are not dripping anymore, and we have all the "
 "material we need for, well, whichever monumental building we see fit!\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:748
+#: ../campaigns/t02.wmf/event:748
 msgid ""
 " \"One night, when the moon shone brightly, I climbed to the peak of "
 "Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker "
@@ -581,11 +581,11 @@ msgid ""
 "there?\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:749
+#: ../campaigns/t02.wmf/event:749
 msgid "One fullmoon night..."
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:760
+#: ../campaigns/t02.wmf/event:760
 msgid ""
 " \"The winter is upon us. Many of us are suffering from the cold, yet we "
 "must endure. The day we may return cannot be far anymore - it must not be "
@@ -594,11 +594,11 @@ msgid ""
 "fulfilled.\"</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:761
+#: ../campaigns/t02.wmf/event:761
 msgid "Another cold day..."
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:842
+#: ../campaigns/t02.wmf/event:842
 msgid ""
 "Thron speaks: \"The other day Boldreth talked me into accompanying him to "
 "the new inn. It would cheer me up, he said.<br>When I looked around I saw "
@@ -611,17 +611,17 @@ msgid ""
 "wish, otherwise move on to the next mission.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\event:843
+#: ../campaigns/t02.wmf/event:843
 msgid "Mission Complete!"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:7
+#: ../campaigns/t02.wmf/objective:7
 msgid ""
 "<p>Build military buildings (like Sentries and Strongholds) to expand your "
 "territory. Get to the rocks north-east from you and build a Quarry there.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:13
+#: ../campaigns/t02.wmf/objective:13
 msgid ""
 "<p>When you click at a flag you can send Geologists to said flag. If that "
 "flag is in mountains, the Geologists will search the mountain for ores; "
@@ -633,7 +633,7 @@ msgid ""
 "terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:19 ../campaigns\t02.wmf\objective:25
+#: ../campaigns/t02.wmf/objective:19 ../campaigns/t02.wmf/objective:25
 msgid ""
 "<p>In order to work, your miners need food. A hunter can hunt down animals, "
 "while a gamekeeper prevents them from becoming extinct. The meat is then "
@@ -643,7 +643,7 @@ msgid ""
 "a tavern.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:31
+#: ../campaigns/t02.wmf/objective:31
 msgid ""
 "<p>Other ways to produce food - different kinds of food though - are fishers "
 "and farms. The wheat of the latter has to be processed with water in a "
@@ -652,21 +652,21 @@ msgid ""
 "bakery.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:37
+#: ../campaigns/t02.wmf/objective:37
 msgid ""
 "<p>The ore your miners bring up is not usable yet - it has to be melted into "
 "iron first. Build a Smelter. Likewise, the coalearth from your coalmines "
 "must be refined into coal - for that, build a Coal Burner.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:43
+#: ../campaigns/t02.wmf/objective:43
 msgid ""
 "t make taverns obsolete - normal mines still require snacks instead of "
 "rations. You may of course enhance all mines to deep mines instantly - "
 "bigger mines work a bit faster, smaller mines need cheaper food. It"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:49
+#: ../campaigns/t02.wmf/objective:49
 msgid ""
 "<p>Bigger and better buildings - including all militarian ones - require "
 "better building materials. They cannot be built of simple trunks - the wood "
@@ -675,7 +675,7 @@ msgid ""
 "cannot expand.<br>Build a Woodhardener.</p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:55
+#: ../campaigns/t02.wmf/objective:55
 msgid ""
 "<p>Better buildings may require also other improved materials besides "
 "blackwood. One of those is grindstone, which is produced out of water and "
@@ -686,7 +686,7 @@ msgid ""
 "Well.</p></p>"
 msgstr ""
 
-#: ../campaigns\t02.wmf\objective:61
+#: ../campaigns/t02.wmf/objective:61
 msgid ""
 "<p>The third material necessary for improved buildings is fern, used to "
 "cover roofs. Fern is being planted by a fernery.<br>Build a Fernery.</p>"

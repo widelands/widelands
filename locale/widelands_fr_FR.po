@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-06 23:57+0100\n"
+"POT-Creation-Date: 2006-01-11 21:39+0100\n"
 "PO-Revision-Date: 2005-12-06 15:12+0100\n"
 "Last-Translator: me <anubisnotdead@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,14 +57,6 @@ msgstr "Contructions en cours:"
 #: ../src/building_statistics_menu.cc:112
 msgid "Jump to unproductive: "
 msgstr "Trouver les inactifs:"
-
-#: ../src/building_statistics_menu.cc:310
-msgid "constructionsite"
-msgstr "SiteDeContruction"
-
-#: ../src/building_statistics_menu.cc:311
-msgid "headquarters"
-msgstr "QuartierGénéral"
 
 #: ../src/building_ui.cc:150
 msgid "Destroy building?"
@@ -178,14 +170,6 @@ msgstr "Crash"
 msgid "Widelands"
 msgstr "Widelands"
 
-#: ../src/event_allow_building.cc:36 ../src/event_factory.cc:48
-msgid "Allow Building"
-msgstr "Autoriser la contructions"
-
-#: ../src/event_conquer_area.cc:34 ../src/event_factory.cc:47
-msgid "Conquer Area"
-msgstr "Conquérir la zone"
-
 #: ../src/event_factory.cc:44 ../src/event_message_box.cc:38
 msgid "Message Box"
 msgstr "Boite de dialogue"
@@ -222,6 +206,10 @@ msgstr ""
 "Cet événement permet de révéler une partie de la carte à un joueur "
 "seléctionné."
 
+#: ../src/event_factory.cc:47 ../src/event_conquer_area.cc:34
+msgid "Conquer Area"
+msgstr "Conquérir la zone"
+
 #: ../src/event_factory.cc:47
 msgid ""
 "This Event conquers a user definable part of the map for one player if there "
@@ -229,6 +217,10 @@ msgid ""
 msgstr ""
 "Cet événement conquiert une zone définie par l'utilisateur à un joueur pas "
 "encore présent."
+
+#: ../src/event_factory.cc:48 ../src/event_allow_building.cc:36
+msgid "Allow Building"
+msgstr "Autoriser la contructions"
 
 #: ../src/event_factory.cc:48
 msgid ""
@@ -332,7 +324,7 @@ msgstr "OK"
 #: ../src/editor/ui_menus/trigger_building_option_menu.cc:199
 #: ../src/editor/ui_menus/trigger_null_option_menu.cc:60
 #: ../src/editor/ui_menus/trigger_time_option_menu.cc:142
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:54
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:55
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -378,12 +370,6 @@ msgstr ""
 "\n"
 "Raison:\n"
 
-#: ../src/game_objectives_menu.cc:49 ../src/game_objectives_menu.cc:55
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:168
-#: ../src/editor/ui_menus/editor_objectives_menu.cc:173
-msgid "Objectives Menu"
-msgstr "Menu Objectifs"
-
 #: ../src/game_options_menu.cc:50
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:50
 msgid "Options"
@@ -413,44 +399,6 @@ msgstr "Musique"
 #: ../src/game_options_menu.cc:84
 msgid "Sound FX"
 msgstr "Effets Sonores"
-
-#: ../src/game_server_proto_packet_chatmessage.cc:68
-#, c-format
-msgid ""
-"Server replied illegally to ChatMessage package. Should have sent %i but "
-"sent %i. Ignored"
-msgstr "Le serveur a mal répondu. Aurait du envoyé %i mais a envoyé %i. Ignoré"
-
-#: ../src/game_server_proto_packet_connect.cc:71
-#, c-format
-msgid ""
-"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
-"Server runs %i.%02i\n"
-msgstr ""
-"Le serveur a rencontré une erreur de connexion. Votre protocole (%i.%02i) "
-"est trop ancien, le serveur exécute %i.%02i\n"
-
-#: ../src/game_server_proto_packet_connect.cc:77
-#, c-format
-msgid "Server is full!\n"
-msgstr "Serveur plein!\n"
-
-#: ../src/game_server_proto_packet_connect.cc:82
-#, c-format
-msgid "This server doesn't serve widelands!\n"
-msgstr "Ce serveur n'héberge pas Widelands!\n"
-
-#: ../src/game_server_proto_packet_getroominfo.cc:65
-#, c-format
-msgid "The Room %s is currently not logged in or unknown to the server.\n"
-msgstr ""
-"La pièce %s n'est actuellement pas logguée ou est inconnue du serveur.\n"
-
-#: ../src/game_server_proto_packet_getuserinfo.cc:65
-#, c-format
-msgid "The User %s is currently not logged in or unknown to the server.\n"
-msgstr ""
-"L'utilisateur %s n'est actuellement pas logguée ou est inconnue du serveur.\n"
 
 #: ../src/general_statistics_menu.cc:56 ../src/general_statistics_menu.cc:65
 msgid "General Statistics"
@@ -484,11 +432,11 @@ msgstr "8 h"
 msgid "16 h"
 msgstr "16 h"
 
-#: ../src/interactive_player.cc:265
+#: ../src/interactive_player.cc:274
 msgid "PAUSE"
 msgstr "PAUSE"
 
-#: ../src/interactive_player.cc:310
+#: ../src/interactive_player.cc:319
 msgid "Message: "
 msgstr "Message: "
 
@@ -518,14 +466,18 @@ msgid "Next scenario"
 msgstr "Scénarion suivant"
 
 #: ../src/militarysite.cc:143
-#, c-format
-msgid "%d soldiers (+%d)"
-msgstr "%d soldats (+%d)"
+#, fuzzy, c-format
+msgid "%d soldier (+%d)"
+msgid_plural "%d soldiers (+%d)"
+msgstr[0] "%d soldats (+%d)"
+msgstr[1] "%d soldats (+%d)"
 
 #: ../src/militarysite.cc:145
-#, c-format
-msgid "%d soldiers"
-msgstr "%d soldats"
+#, fuzzy, c-format
+msgid "%d soldier"
+msgid_plural "%d soldiers"
+msgstr[0] "%d soldats"
+msgstr[1] "%d soldats"
 
 #: ../src/minimap.cc:153 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
 msgid "Map"
@@ -590,6 +542,10 @@ msgstr "Humain"
 #: ../src/playerdescrgroup.cc:110 ../src/playerdescrgroup.cc:199
 msgid "Computer"
 msgstr "Ordinateur"
+
+#: ../src/productionsite.cc:231
+msgid "(not occupied)"
+msgstr ""
 
 #: ../src/productionsite.cc:271
 msgid "UP"
@@ -672,7 +628,7 @@ msgstr ""
 "Cette tâche se déclenche quand un certain nombre de batiments d'un joueur "
 "sont disponibles dans une zone."
 
-#: ../src/ware.cc:72 ../src/worker.cc:1516
+#: ../src/ware.cc:72 ../src/worker.cc:1520
 msgid "Doh... someone forgot the help text!"
 msgstr "Doh... quelqu'un a oublié les indications."
 
@@ -688,11 +644,55 @@ msgstr "Testtext"
 msgid "Watch"
 msgstr "Montre"
 
-#: ../src/editor/editorinteractive.cc:192
+#: ../src/game_server_proto_packet_chatmessage.cc:68
+#, c-format
+msgid ""
+"Server replied illegally to ChatMessage package. Should have sent %i but "
+"sent %i. Ignored"
+msgstr "Le serveur a mal répondu. Aurait du envoyé %i mais a envoyé %i. Ignoré"
+
+#: ../src/game_server_proto_packet_connect.cc:71
+#, c-format
+msgid ""
+"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
+"Server runs %i.%02i\n"
+msgstr ""
+"Le serveur a rencontré une erreur de connexion. Votre protocole (%i.%02i) "
+"est trop ancien, le serveur exécute %i.%02i\n"
+
+#: ../src/game_server_proto_packet_connect.cc:77
+#, c-format
+msgid "Server is full!\n"
+msgstr "Serveur plein!\n"
+
+#: ../src/game_server_proto_packet_connect.cc:82
+#, c-format
+msgid "This server doesn't serve widelands!\n"
+msgstr "Ce serveur n'héberge pas Widelands!\n"
+
+#: ../src/game_server_proto_packet_getroominfo.cc:65
+#, c-format
+msgid "The Room %s is currently not logged in or unknown to the server.\n"
+msgstr ""
+"La pièce %s n'est actuellement pas logguée ou est inconnue du serveur.\n"
+
+#: ../src/game_server_proto_packet_getuserinfo.cc:65
+#, c-format
+msgid "The User %s is currently not logged in or unknown to the server.\n"
+msgstr ""
+"L'utilisateur %s n'est actuellement pas logguée ou est inconnue du serveur.\n"
+
+#: ../src/game_objectives_menu.cc:49 ../src/game_objectives_menu.cc:55
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:168
+#: ../src/editor/ui_menus/editor_objectives_menu.cc:173
+msgid "Objectives Menu"
+msgstr "Menu Objectifs"
+
+#: ../src/editor/editorinteractive.cc:201
 msgid "Map unsaved"
 msgstr "Carte non sauvegardée"
 
-#: ../src/editor/editorinteractive.cc:192
+#: ../src/editor/editorinteractive.cc:201
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "La carte n'a pas été sauvegardée, voulez vous vraiment quitter?"
 
@@ -1643,53 +1643,61 @@ msgstr "Fermé"
 msgid "GGZ games"
 msgstr "GGZ games"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:46
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:47
 msgid "General Options"
 msgstr "Options générales"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:59
 msgid "Apply"
 msgstr "Appliquer"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:63
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:64
 msgid "Fullscreen"
 msgstr "Plein Ecran"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:68
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:69
 msgid "Grab Input"
 msgstr "Changer l'entrée"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:73
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
 msgid "Enable Music"
 msgstr "Musique"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:78
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:79
 msgid "Enable Sound"
 msgstr "Son"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:82
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:83
 msgid "In-game resolution"
 msgstr "Résolution"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:129
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:134
 msgid "Language"
 msgstr "Langue"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:131
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:136
 msgid "System default language"
 msgstr "Langue par défaut"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:141
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:146
 msgid "In-game Options"
 msgstr "Options de jeu"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:147
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:152
 msgid "Use single Watchwindow Mode"
 msgstr "Utiliser le mode simple fenêtre"
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:150
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:155
 msgid "Show buildings area preview"
 msgstr "Monter un aperçu des zones de contructions"
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:158
+msgid "Snap windows only when overlapping"
+msgstr ""
+
+#: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:161
+msgid "Dock windows to edges"
+msgstr ""
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:31
 msgid "Single Player Menu"
@@ -1720,3 +1728,9 @@ msgstr ""
 #: ../src/map_objective_manager.h:58
 msgid "no descr"
 msgstr "no descr"
+
+#~ msgid "constructionsite"
+#~ msgstr "SiteDeContruction"
+
+#~ msgid "headquarters"
+#~ msgstr "QuartierGénéral"
