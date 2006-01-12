@@ -19,6 +19,7 @@
 
 #include <vector>
 #include <string>
+#include "constants.h"
 #include "text_parser.h"
 #include "graphic.h"
 #include "error.h"
