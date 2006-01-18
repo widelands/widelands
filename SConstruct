@@ -146,16 +146,18 @@ def CheckPKG(context, name):
 
 def CheckSDLConfig(context):
 	context.Message( 'Checking for sdl-config... ' )
-	ret = context.TryAction(env['sdlconfig']+' --version')[0]
-	context.Result( ret )
+	for p in env['PATH'].split():
+		ret = context.TryAction(os.path.join(p, env['sdlconfig'])+' --version')[0]
+		if ret==1:
+			env['sdlconfig']=os.path.join(p, env['sdlconfig'])
+			context.Result( ret )
+			break			
 	return ret
 
 def CheckSDLVersionAtLeast(context, major, minor, micro):
 	context.Message( 'Checking SDL version >= %s ... ' % (repr(major)+'.'+repr(minor)+'.'+repr(micro)))
 	version=os.popen(env['sdlconfig']+" --version", "r").read()
-	maj=version.split('.')[0]
-	min=version.split('.')[1]
-	mic=version.split('.')[2]
+	(maj, min, mic)=version.split('.')
 	if int(maj)>=int(major) and int(min)>=int(minor) and int(mic)>=int(micro): ret=1
 	else: ret=0
 	context.Result( ret )
@@ -196,11 +198,14 @@ opts.AddOptions(
 env=Environment(options=opts)
 print 'Platform:', env['PLATFORM']
 
+if env['PLATFORM']!='win32':
+	env.Append(PATH='/usr/bin /usr/local/bin ')
+
 if env['PLATFORM']=='darwin':
 	# this is where DarwinPorts puts stuff by default
-	env.Append(CPPPATH='/opt/local/include')
-	env.Append(LIBPATH='/opt/local/lib')
-	env.Append(PATH='/opt/local/bin')
+	env.Append(CPPPATH='/opt/local/include ')
+	env.Append(LIBPATH='/opt/local/lib ')
+	env.Append(PATH='/opt/local/bin ')
 
 env.Help(opts.GenerateHelpText(env))
 env.Append(CPPPATH=env['extra_include_path'])
