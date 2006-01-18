@@ -51,8 +51,8 @@ public:
 		pf_child_die = 16, ///< a child needs to die
 		pf_visible = 32, ///< render the panel
 		pf_can_focus = 64, ///< can receive the keyboard focus
-		pf_snap_windows_only_when_overlapping = 128, ///< children should snap from outside to other children
-		pf_dock_windows_to_edges = 256, ///< children should snap from outside to other children
+		pf_snap_windows_only_when_overlapping = 128, ///< children should snap only when overlapping the snap target
+		pf_dock_windows_to_edges = 256, ///< children should snap to the edges of this panel
 	};
 
 	UIPanel(UIPanel *nparent, const int nx, const int ny, const uint nw, const uint nh);
@@ -80,9 +80,9 @@ public:
 
 	virtual bool is_snap_target() const {return false;}
 	ushort get_border_snap_distance() const {return _border_snap_distance;}
-	void set_border_snap_distance(uchar value) {_border_snap_distance = value;}
-	ushort get_panel_snap_distance () const {return _panel_snap_distance;}
-	void set_panel_snap_distance(uchar value) {_panel_snap_distance = value;}
+	void set_border_snap_distance(const uchar value) {_border_snap_distance = value;}
+	uchar get_panel_snap_distance () const {return _panel_snap_distance;}
+	void set_panel_snap_distance(const uchar value) {_panel_snap_distance = value;}
 	bool get_snap_windows_only_when_overlapping() const {return _flags & pf_snap_windows_only_when_overlapping;}
 	void set_snap_windows_only_when_overlapping(const bool on = true);
 	bool get_dock_windows_to_edges() const {return _flags & pf_dock_windows_to_edges;}
