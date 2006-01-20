@@ -68,5 +68,5 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 
 	// Text
 	new UITextarea(this, MENU_XRES-25, MENU_YRES-29, "Version " VERSION, Align_Right);
-	new UITextarea(this, 15, MENU_YRES-29, _("(C) 2002-2005 by the Widelands Development Team"), Align_TopLeft);
+	new UITextarea(this, 15, MENU_YRES-29, _("(C) 2002-2006 by the Widelands Development Team"), Align_TopLeft);
 }
