@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-12-05 13:58+0100\n"
+"PO-Revision-Date: 2006-01-10 17:31+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr "Fuchs"
 #: ../worlds/greenland/bobs/grass2/conf:1
 #: ../worlds/greenland/bobs/grass3/conf:1
 msgid "Grass"
-msgstr ""
+msgstr "Gras"
 
 #: ../worlds/greenland/bobs/mushroom1/conf:1
 #: ../worlds/greenland/bobs/mushroom2/conf:1
@@ -114,7 +114,7 @@ msgstr "Frühling"
 
 #: ../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "Dies sind die schönen lande der Barbaren"
+msgstr "Dies sind die schönen Lande der Barbaren"
 
 #: ../worlds/greenland/resconf:4
 msgid "Coal"
@@ -122,7 +122,7 @@ msgstr "Kohle"
 
 #: ../worlds/greenland/resconf:12
 msgid "Gold"
-msgstr ""
+msgstr "Gold"
 
 #: ../worlds/greenland/resconf:20
 msgid "Iron"
@@ -130,7 +130,7 @@ msgstr "Eisen"
 
 #: ../worlds/greenland/resconf:28
 msgid "Granit"
-msgstr ""
+msgstr "Granit"
 
 #: ../worlds/greenland/resconf:36
 msgid "Water"

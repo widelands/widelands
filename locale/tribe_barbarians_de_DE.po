@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-12-05 21:37+0100\n"
+"PO-Revision-Date: 2006-01-19 16:24+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
+
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "Das Widelands Entwicklungsteam"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbaren"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "Die mächtigen Stämme des Ostens"
 
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
@@ -91,7 +103,7 @@ msgstr "Tiefere Eisenmine"
 
 #: ../tribes/barbarians/buildings/donjon/conf:2
 msgid "Donjon"
-msgstr ""
+msgstr "Wachturm"
 
 #: ../tribes/barbarians/buildings/farm/conf:2
 msgid "Farm"
@@ -99,7 +111,7 @@ msgstr "Bauernhof"
 
 #: ../tribes/barbarians/buildings/fernery/conf:2
 msgid "Fernery"
-msgstr "Reet-Bauer"
+msgstr "Farnerei"
 
 #: ../tribes/barbarians/buildings/fisher/conf:2
 msgid "Fisher Hut"
@@ -161,7 +173,7 @@ msgstr "Eisenmine"
 
 #: ../tribes/barbarians/buildings/pressworks/conf:2
 msgid "Pressworks"
-msgstr "Weberrei"
+msgstr "Farnpresserei"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
@@ -206,18 +218,6 @@ msgstr "Waffenschmiede"
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Brunnen"
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "Das Widelands Entwicklungsteam"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbaren"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "Die mächtigen Stämme des Ostens"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
@@ -273,7 +273,7 @@ msgstr "Angel"
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
-msgstr ""
+msgstr "Gold"
 
 #: ../tribes/barbarians/wares/goldstone/conf:2
 msgid "Goldstone"
@@ -289,7 +289,7 @@ msgstr "Hammer"
 
 #: ../tribes/barbarians/wares/helm/conf:2
 msgid "Helm"
-msgstr ""
+msgstr "Helm"
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
@@ -329,7 +329,7 @@ msgstr "Fladenbrot"
 
 #: ../tribes/barbarians/wares/ration/conf:2
 msgid "Ration"
-msgstr ""
+msgstr "Ration"
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
@@ -349,7 +349,7 @@ msgstr "Schaufel"
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
-msgstr ""
+msgstr "Snack"
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"
@@ -357,7 +357,7 @@ msgstr "Starkbier"
 
 #: ../tribes/barbarians/wares/thatchfern/conf:2
 msgid "Thatch Fern"
-msgstr "Reet"
+msgstr "Dach Farn"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
@@ -413,7 +413,7 @@ msgstr "Bauer"
 
 #: ../tribes/barbarians/workers/ferner/conf:2
 msgid "Ferner"
-msgstr "Reet Bauer"
+msgstr "Farn Bauer"
 
 #: ../tribes/barbarians/workers/fisher/conf:2
 msgid "Fisher"
@@ -453,7 +453,7 @@ msgstr "Bergmann"
 
 #: ../tribes/barbarians/workers/presser/conf:2
 msgid "Presser"
-msgstr "Weber"
+msgstr "Presser"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
