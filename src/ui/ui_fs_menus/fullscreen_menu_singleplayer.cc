@@ -28,7 +28,7 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer()
 	: Fullscreen_Menu_Base("singleplmenu.jpg")
 {
 	// Text
-   UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, _("Single Player Menu"), Align_HCenter);
+   UITextarea* title= new UITextarea(this, MENU_XRES/2, 130, _("Single Player Menu"), Align_HCenter);
    title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons

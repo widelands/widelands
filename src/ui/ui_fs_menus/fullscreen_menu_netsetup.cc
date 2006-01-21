@@ -36,7 +36,7 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	discovery->set_callback (discovery_callback, this);
 	
 	// Text
-	UITextarea* title= new UITextarea(this, MENU_XRES/2, 140, _("Begin Network Game"), Align_HCenter);
+	UITextarea* title= new UITextarea(this, MENU_XRES/2, 120, _("Begin Network Game"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
 
 	// UIButtons

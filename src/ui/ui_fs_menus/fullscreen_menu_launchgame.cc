@@ -61,7 +61,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 	m_ok->set_visible(m_netgame==0 || m_netgame->is_host());
 
 	// Map selection fields
-	m_mapname = new UITextarea(this, 497, 184, "(no map)", Align_HCenter);
+	m_mapname = new UITextarea(this, 497, 175, "(no map)", Align_HCenter);
 	b = new UIButton(this, 410, 200, 174, 24, 1, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::select_map);
 	b->set_title(_("Select map"));
