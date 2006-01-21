@@ -1,6 +1,11 @@
+# Widelands World_greenland po-File -> German.
+# Copyright (C) 2005-2006 Widelands Development Team
+# This file is distributed under the same license as the Widelands package.
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Widelands Mainlanguagepack 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
 "PO-Revision-Date: 2006-01-10 17:31+0100\n"

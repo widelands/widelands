@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2005-2006 WIDELANDS
+# Widelands Widelands po-File -> German.
+# Copyright (C) 2005-2006 Widelands Development Team
 # This file is distributed under the same license as the Widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands Mainlanguagepack 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-11 21:39+0100\n"
-"PO-Revision-Date: 2006-01-20 20:55+0100\n"
+"PO-Revision-Date: 2006-01-21 15:03+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -104,7 +104,7 @@ msgstr "PA"
 #: ../src/building_ui.cc:1317
 #: ../src/building_ui.cc:1754
 msgid "EV"
-msgstr "EV"
+msgstr "AU"
 
 #: ../src/building_ui.cc:1318
 #: ../src/building_ui.cc:1755
@@ -174,7 +174,7 @@ msgstr "!! Ausführung fortsetzen !!"
 
 #: ../src/criterr.cc:81
 msgid "Crash"
-msgstr "Crash"
+msgstr "Absturz"
 
 #: ../src/criterr.cc:120
 msgid "Widelands"
@@ -767,7 +767,7 @@ msgstr "Hat eine feste Basis"
 
 #: ../src/editor/tools/editor_info_tool.cc:70
 msgid "Has bobs"
-msgstr "Hat Bobs"
+msgstr "Hat Natur"
 
 #: ../src/editor/tools/editor_info_tool.cc:74
 #, c-format
@@ -784,7 +784,7 @@ msgstr "Menge von"
 
 #: ../src/editor/tools/editor_info_tool.cc:80
 msgid "Start resources amount"
-msgstr "Start-Resoursen"
+msgstr "Start-Resourcen"
 
 #: ../src/editor/tools/editor_info_tool.cc:83
 #, c-format
@@ -837,7 +837,7 @@ msgstr "5) Welt Info"
 
 #: ../src/editor/tools/editor_info_tool.cc:111
 msgid " TODO -- More information (Number of bobs/number of wares...)\n"
-msgstr " TODO -- Mehr Informationen (Anzahl der Bobs/Anzahl der Waren...)\n"
+msgstr " TODO -- Mehr Informationen (Anzahl der Natur/Anzahl der Waren...)\n"
 
 #: ../src/editor/ui_menus/editor_event_menu.cc:52
 #: ../src/editor/ui_menus/editor_event_menu.cc:57
@@ -924,7 +924,7 @@ msgstr "Name: "
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:63
 msgid "Runs multiple times"
-msgstr "Läuft mehrere male"
+msgstr "Läuft mehrere Male"
 
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:70
 msgid "Events: "
@@ -999,7 +999,7 @@ msgstr "Beschreibung:"
 
 #: ../src/editor/ui_menus/editor_event_menu_new_trigger.cc:40
 msgid "New Trigger Menu"
-msgstr "Neuer Auslöser - Menü"
+msgstr "Neuer Auslöser Menü"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:45
 msgid "Editor Main Menu"
@@ -1200,11 +1200,11 @@ msgstr "Spieler"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:256
 msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend of this player and try again"
-msgstr "Kann Spieler nicht löschen. Der Spieler wird verwendet. Entferne alle Gebäude, Bobs, Auslöser und Ereignisse die mit diesem Spieler verknüpft sind und versuche es nochmal."
+msgstr "Kann Spieler nicht löschen. Der Spieler wird verwendet. Entferne alle Gebäude, Natur, Auslöser und Ereignisse die mit diesem Spieler verknüpft sind und versuche es nochmal."
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:283
 msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr "Kann Spieler-Stamm nicht ändern. Der Stamm wird verwendet. Entferne alle Gebäude, Bobs, Auslöser und Ereignisse die mit diesem Stamm verknüpft sind und versuche es nochmal."
+msgstr "Kann Spieler-Stamm nicht ändern. Der Stamm wird verwendet. Entferne alle Gebäude, Natur, Auslöser und Ereignisse die mit diesem Stamm verknüpft sind und versuche es nochmal."
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:36
 msgid "Allowed Buildings"
@@ -1278,11 +1278,11 @@ msgstr "Hügelwerkzeug Optionen"
 
 #: ../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:50
 msgid "Bobs Menu"
-msgstr "Bobs Menü"
+msgstr "Natur Menü"
 
 #: ../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:50
 msgid "Immovable Bobs Menu"
-msgstr "Entfernbare Bobs Menü"
+msgstr "Entfernbare Natur Menü"
 
 #: ../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:51
 msgid "Terrain Select"
@@ -1596,7 +1596,7 @@ msgstr "Beschr:"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
 msgid "Begin Network Game"
-msgstr "Begine ein Netzwerk Spiel"
+msgstr "Beginne ein Netzwerk Spiel"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:47
 msgid "Join a Game"
