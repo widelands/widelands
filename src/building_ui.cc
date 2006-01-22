@@ -323,7 +323,7 @@ WaresQueueDisplay::WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, W
 
 	waredescr = queue->get_owner()->get_tribe()->get_ware_descr(m_queue->get_ware());
 	
-	set_tooltip(waredescr->get_name());
+	set_tooltip(waredescr->get_descname());
 
 	m_pic_empty = waredescr->get_pic_queue_empty();
 	m_pic_full = waredescr->get_pic_queue_full();
@@ -496,7 +496,7 @@ Create the window, add it to the registry.
 ===============
 */
 Building_Window::Building_Window(Interactive_Player* parent, Building* building, UIWindow** registry)
-	: UIWindow(parent, 0, 0, Width, 0, building->get_name())
+	: UIWindow(parent, 0, 0, Width, 0, building->get_descname())
 {
 	m_registry = registry;
 	if (*m_registry)
@@ -1106,7 +1106,8 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
    uint i;
    for(i=0; i<workers->size(); i++) {
       Worker* worker=(*workers)[i];
-      m_ls->add_entry(worker->get_name().c_str(), worker, false, worker->get_menu_pic());
+      m_ls->add_entry(worker->get_descname().c_str(), worker, false,
+		                worker->get_menu_pic());
    }
    if(m_ls->get_nr_entries()>m_last_select) 
       m_ls->select(m_last_select);
@@ -1125,7 +1126,15 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
    Worker* worker=static_cast<Worker*>(m_ls->get_selection());
    if(worker) { 
 
-      sprintf(buffer, "%s", worker->get_name().c_str());
+      sprintf(
+            buffer,
+            "%s",
+            worker->get_tribe()->get_worker_descr(
+               worker->get_tribe()->get_worker_index(
+                  worker->get_name().c_str()
+                  )
+               )->get_descname().c_str()
+            ); // sprintf()
       m_type->set_text(buffer);
 
       if(worker->get_current_experience()!=-1 && worker->get_needed_experience()!=-1) {
@@ -1415,7 +1424,14 @@ void MilitarySite_Window::update(void) {
       if(!e) // add new
          e= new UITable_Entry(m_table, s);
       
-      e->set_string(0, s->get_name().c_str());
+      e->set_string(
+            0,
+            s->get_tribe()->get_worker_descr(
+               s->get_tribe()->get_worker_index(
+                  s->get_name().c_str()
+                  )
+               )->get_descname().c_str()
+            ); // set_string()
       sprintf(buf, "%i / %i", s->get_hp_level(), s->get_max_hp_level());
       e->set_string(1, buf); 
       sprintf(buf, "%i / %i", s->get_attack_level(), s->get_max_attack_level());

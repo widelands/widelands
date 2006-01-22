@@ -141,6 +141,7 @@ class Worker : public Bob {
    inline uint get_menu_pic() const { return get_descr()->get_menu_pic(); }
    const char* get_becomes(void) { return get_descr()->get_becomes(); }
    inline Tribe_Descr *get_tribe() { return get_descr()->get_tribe(); }
+	std::string get_descname() const { return get_descr()->get_descname(); }
 
    virtual uint get_movecaps();
 
