@@ -65,7 +65,7 @@ class Options_Ctrl {
 class Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 public:
 	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
-	Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values();
+	Options_Ctrl::Options_Struct get_values();
    enum {
       om_cancel = 0,
       om_ok = 1
