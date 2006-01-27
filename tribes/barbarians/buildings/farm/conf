@@ -1,5 +1,6 @@
 [global]
 descname=_ Farm		# nicer name to display in GUI
+soundfx=farm_animal
 
 type=production		# basic type (warehouse, production, military)
 size=big
@@ -16,6 +17,7 @@ program=harvest
 0=set +nostats	# ending this program has no effect on statistics
 1=call plant
 2=call harvest
+3=playFX farm_animal
 
 [plant]
 0=set +catch	# failure of this program will be caught

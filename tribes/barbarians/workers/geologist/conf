@@ -5,6 +5,7 @@ type=generic
 menu_pic=geologist_menu.png
 program=expedition
 program=search
+soundfx=geologist_hammer
 
 [buildcost]
 carrier=1
@@ -20,8 +21,9 @@ hammer=1
 [search]
 0=animation hacking 5000
 1=animation idle 2000
-2=animation hacking 3000
-3=geologist-find
+2=playFX geologist_hammer
+3=animation hacking 3000
+4=geologist-find
 
 # Here come the animations
 # For the walk animation, [walk] is a default for all walk animations.

@@ -8,7 +8,6 @@ buildicon=hardener_build.png
 worker=lumberjack    # like quary
 program=work
 output=blackwood
-soundfx=woodhammer
 
 [inputs]
 trunk=16
@@ -17,9 +16,8 @@ trunk=16
 0=sleep 43000
 1=check trunk 2     # two or more
 2=consume trunk 2
-3=playFX woodhammer
-4=animation working 24000
-5=produce blackwood 
+3=animation working 24000
+4=produce blackwood 
 
 
 [buildcost]

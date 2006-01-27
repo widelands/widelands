@@ -1,5 +1,6 @@
 [global]
 descname=_ Warehouse # nicer name to display in GUI
+soundfx=warehouse-bringitin
 
 type=warehouse	# basic type (warehouse, production, military)
 subtype=none
@@ -37,6 +38,8 @@ shadowclr_b=0
 
 [working]
 pics=warehouse_i_??.png  # ???
+sfx_frame=1
+sfx_name=warehouse-bringitin
 hot_spot_x=80
 hot_spot_y=94
 clrkey_r=0

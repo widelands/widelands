@@ -4,6 +4,7 @@ help=Fells trees.
 type=generic
 menu_pic=lumberjack_menu.png
 program=chop
+soundfx=timber
 
 [buildcost]
 carrier=1
@@ -18,10 +19,11 @@ axe=1
 0=findobject attrib:tree radius:8	# find an object matching the given criteria, put it into the object slot
 1=walk object								# walk to the object in the object slot
 2=animation hacking 10000				# play an animation 
-3=object fall								# cause the object to change its program (to 'fall')
-4=animation idle 2000					# wait for the tree to disappear
-5=createitem trunk						# create & carry the given item
-6=return										# return home
+3=playFX timber
+4=object fall								# cause the object to change its program (to 'fall')
+5=animation idle 2000					# wait for the tree to disappear
+6=createitem trunk						# create & carry the given item
+7=return										# return home
 
 [hacking]
 pics=hacking_??.png

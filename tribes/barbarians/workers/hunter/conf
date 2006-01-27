@@ -4,7 +4,6 @@ help=Kills animals.
 type=generic
 menu_pic=menu.png
 program=hunt
-soundfx=gunshot
 
 [buildcost]
 carrier=1
@@ -18,11 +17,10 @@ hunting_spear=1
 [hunt]
 0=findobject type:bob radius:13 attrib:eatable  # A hunter walks tremendous ways for food
 1=walk object                    # Walk to the target object (follows it)
-2=playFX gunshot
-3=animation idle 500						# Play a hunting animation
-4=object remove                     # Remove this object
-5=createitem meat                   # meat
-6=return										# Go back home
+2=animation idle 500						# Play a hunting animation
+3=object remove                     # Remove this object
+4=createitem meat                   # meat
+5=return										# Go back home
 
 # The normal idle animation (non-directional)
 [idle]
