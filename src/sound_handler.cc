@@ -413,9 +413,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		//remove the tempfile
 		SDL_RWclose(target);
 
-		SDL_FreeRW(target);
-
-		SDL_FreeRW(src);
+		//do *NOT* SDL_FreeRW() (see docs)
 
 		fclose(f);
 
@@ -492,10 +490,13 @@ int Sound_Handler::stereo_position(const Coords position)
 	int sx, sy;
 	//x,y resolutions of game window
 	int xres, yres;
+	FCoords fposition;
 	Point vp;
 	Interactive_Base *ia;
 
 	assert(m_the_game);
+	assert(position!=NO_POSITION);
+	assert(position!=INVALID_POSITION);
 
 	ia = m_the_game->get_iabase();
 	assert(ia);
@@ -504,7 +505,8 @@ int Sound_Handler::stereo_position(const Coords position)
 	xres = ia->get_xres();
 	yres = ia->get_yres();
 
-	m_the_game->get_map()->get_basepix(position, &sx, &sy);
+	fposition=ia->get_map()->get_fcoords(position);
+	m_the_game->get_map()->get_pix(fposition, &sx, &sy);
 	sx -= vp.x;
 	sy -= vp.y;
 

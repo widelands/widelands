@@ -1126,15 +1126,7 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
    Worker* worker=static_cast<Worker*>(m_ls->get_selection());
    if(worker) { 
 
-      sprintf(
-            buffer,
-            "%s",
-            worker->get_tribe()->get_worker_descr(
-               worker->get_tribe()->get_worker_index(
-                  worker->get_name().c_str()
-                  )
-               )->get_descname().c_str()
-            ); // sprintf()
+      sprintf(buffer, "%s", worker->get_descname().c_str());
       m_type->set_text(buffer);
 
       if(worker->get_current_experience()!=-1 && worker->get_needed_experience()!=-1) {
@@ -1424,14 +1416,7 @@ void MilitarySite_Window::update(void) {
       if(!e) // add new
          e= new UITable_Entry(m_table, s);
       
-      e->set_string(
-            0,
-            s->get_tribe()->get_worker_descr(
-               s->get_tribe()->get_worker_index(
-                  s->get_name().c_str()
-                  )
-               )->get_descname().c_str()
-            ); // set_string()
+		e->set_string(0, s->get_descname().c_str());
       sprintf(buf, "%i / %i", s->get_hp_level(), s->get_max_hp_level());
       e->set_string(1, buf); 
       sprintf(buf, "%i / %i", s->get_attack_level(), s->get_max_attack_level());
