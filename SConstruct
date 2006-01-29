@@ -206,6 +206,10 @@ if env['PLATFORM']=='darwin':
 	env.Append(CPPPATH='/opt/local/include ')
 	env.Append(LIBPATH='/opt/local/lib ')
 	env.Append(PATH='/opt/local/bin ')
+	# and here's for fink
+	env.Append(CPPPATH='/sw/include ')
+	env.Append(LIBPATH='/sw/lib ')
+	env.Append(PATH='/sw/bin ')
 
 env.Help(opts.GenerateHelpText(env))
 env.Append(CPPPATH=env['extra_include_path'])
@@ -330,7 +334,15 @@ env.Tool("astyle", toolpath=['build/scons-tools'])
 #		print 'Could not find gettext library! Is it installed?'
 #		Exit(1)
 
-if conf.CheckFunc('setlocale') and (conf.CheckFunc('textdomain') or conf.CheckLib(library='intl', symbol='textdomain', autoadd=1)):
+setlocalefound=0
+if (conf.CheckFunc('setlocale') or conf.CheckLibWithHeader('', 'locale.h', 'C', 'setlocale("LC_ALL", "C");', autoadd=0)):
+	setlocalefound=1
+
+textdomainfound=0
+if (conf.CheckFunc('textdomain') or conf.CheckLib(library='intl', symbol='textdomain', autoadd=1)):
+	textdomainfound=1
+	
+if setlocalefound and textdomainfound:
 	print '   NLS subsystem found.'
 else:
 	#TODO: use dummy replacements that just pass back the original string
