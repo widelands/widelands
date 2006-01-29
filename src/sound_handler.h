@@ -45,9 +45,9 @@ extern Sound_Handler g_sound_handler;
  *
  * A Songset encapsulates a number of interchangeable pieces of (background) 
  * music, e.g. all songs that might be played while the main menu is being
- * shown. It is possible to access those songs on after another or in random
- * order. The fact that a Songset really contains several different songs is
- * hidden from the outside.\n
+ * shown. It is possible to select access those songs one after another or in
+ * random order. The fact that a Songset really contains several different
+ * songs is hidden from the outside.\n
  * A songset does not contain the audio data itself, to not use huge amounts of
  * memory.
  * Instead, each song is loaded on request and the data is free()d afterwards.
@@ -94,14 +94,13 @@ protected:
  *
  * An FXset encapsulates a number of interchangeable sound effects, e.g.
  * all effects that might be played when a blacksmith is happily hammering away.
- * It is possible to access the effects on after another or in random order.
- * The fact that an FXset really contains several different effect is hidden
+ * It is possible to select the effects on after another or in random order.
+ * The fact that an FXset really contains several different effects is hidden
  * from the outside.
  */
 
 class FXset
 {
-
 	friend class Sound_Handler;
 public:
 	FXset(Uint8 prio = 127);

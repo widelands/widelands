@@ -412,6 +412,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 
 		//remove the tempfile
 		SDL_RWclose(target);
+		SDL_FreeRW(target);
 
 		//do *NOT* SDL_FreeRW() (see docs)
 
@@ -432,6 +433,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 	}
 
 	SDL_RWclose(src);
+	SDL_FreeRW(src);
 	return 0;
 }
 
@@ -581,8 +583,8 @@ void Sound_Handler::play_fx(const string fx_name, int stereo_position,
 		if (stereo_position != -1) {
 
 			chan = Mix_PlayChannel(-1, m, 0);
-			Mix_SetPanning(chan,stereo_position,
-			               254-stereo_position);
+			Mix_SetPanning(chan,254-stereo_position,
+			               stereo_position);
 			//TODO: use chan in the fx callback to absoutely ensure
 			// that an effect is playing only once. The
 			// "play-or-not" decision is not fit to make *that*
