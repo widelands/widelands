@@ -52,7 +52,8 @@ UIStatebox::UIStatebox(UIPanel *parent, int x, int y, uint picid)
 	else
 	{
 		m_custom_picture = false;
-		m_pic_graphics = g_gr->get_picture( PicMod_UI,  "pics/checkbox.png" );
+		m_pic_graphics = g_gr->get_picture( PicMod_UI,
+														"pics/checkbox_light.png" );
 	}
 
 	m_highlighted = false;
@@ -75,15 +76,25 @@ UIStatebox::~UIStatebox()
 
 
 /**
- * Set the enabled state of the checkbox. A disabled checkbox cannot be clicked.
- *
- * Args: enabled	true if the checkbox should be disabled
+ * Set the enabled state of the checkbox. A disabled checkbox cannot be clicked
+ * and is somewhat darker to tell it apart from enabled ones.
+ * 
+ * Args: enabled	true if the checkbox should be enabled, false otherwise
  */
 void UIStatebox::set_enabled(bool enabled)
 {
 	m_enabled = enabled;
-	if (!m_enabled)
-		m_highlighted = false;
+	
+	if (!m_custom_picture) {
+		if (m_enabled) {
+			m_pic_graphics = g_gr->get_picture(PicMod_UI,
+			                                   "pics/checkbox_light.png");
+		} else {
+			m_pic_graphics = g_gr->get_picture(PicMod_UI, "pics/checkbox.png");
+			m_highlighted = false;
+		}
+	}
+	
 	update(0, 0, get_w(), get_h());
 }
 
@@ -110,7 +121,7 @@ void UIStatebox::set_state(bool on)
 Redraw the entire checkbox
 */
 void UIStatebox::draw(RenderTarget* dst)
-{
+{	
 	if (m_custom_picture)
 	{
 		// center picture
