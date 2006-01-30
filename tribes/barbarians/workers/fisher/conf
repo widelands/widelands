@@ -19,7 +19,7 @@ fishing_rod=1
 [fish]
 0=findspace size:any radius:7 resource:fish
 1=walk coords								# Walk to the target coordinates
-2=playFX fisher_throw_net
+2=playFX fisher_throw_net 192
 3=mine fish 1                       # Search for fish here
 4=animation idle 3000					# Play a fishing animation
 5=playFX fisher_pull_net

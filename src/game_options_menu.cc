@@ -77,12 +77,18 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
    cb->changedto.set(this, &GameOptionsMenu::disable_music_clicked);
    UITextarea *t=new UITextarea(this, 30, posy+3, _("Ingame Music"));
    posy += 25;
+   if (g_sound_handler.m_lock_audio_disabling) {
+   	cb->set_enabled(false);
+   }
 
    cb=new UICheckbox(this, 5, posy);
    cb->set_state(!g_sound_handler.get_disable_fx());
    cb->changedto.set(this, &GameOptionsMenu::disable_fx_clicked);
    t=new UITextarea(this, 30, posy+3, _("Sound FX"));
    posy += 25;
+   if (g_sound_handler.m_lock_audio_disabling) {
+		cb->set_enabled(false);
+   }
 
    int buttonw = (get_inner_w()-3*5) / 2;
    b=new UIButton(this, 5, posy, buttonw, 35, 4, 4);

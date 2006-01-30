@@ -1167,7 +1167,7 @@ void WorkerProgram::parse_playFX(Worker_Descr*, WorkerAction* act, Parser* parse
 	act->sparam1=cmd[1];
 	act->function = &Worker::run_playFX;
 	if (cmd.size()==2)
-		act->iparam1=127;
+		act->iparam1=64;//50%chance to play, only one instance at a time
 	else
 		act->iparam1=atoi(cmd[2].c_str());
 }

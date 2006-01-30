@@ -59,7 +59,7 @@ public:
 	Songset();
 	~Songset();
 
-	void add_song(string filename);
+	void add_song(const string filename);
 	Mix_Music *get_song();
 	bool empty()
 	{
@@ -122,11 +122,17 @@ protected:
 	 */
 	Uint32 m_last_used;
 
-	/// Minimum time in milliseconds until the effect may be played again
-	Uint32 m_min_interval;
-
 	/** How important is it to play the effect even when others are running
 	 * already?
+	 * 
+	 * Value 0-127: probability between 0.0 and 1.0, only one instance can
+	 * be playing at any time
+	 * 
+	 * Value 128-254: probability between 0.0 and 1.0, many instances can
+	 * be playing at any time
+	 * 
+	 * Value 255: always play; unconditional
+	 * 
 	 * Range from 0 (do not play at all if anything else is happening) to
 	 * 255 (always play, regardless of other considerations)
 	 */
@@ -262,10 +268,12 @@ public:
 
 	void load_fx(const string dir, const string basename,
 	             const bool recursive = false);
+	bool play_or_not(const string fx_name,const int stereo_position,
+	                 const uint priority);
 	void play_fx(const string fx_name, Coords map_position=INVALID_POSITION,
-	             uint priority=127);
-	void play_fx(const string fx_name, int stereo_position,
-	             uint priority=127);
+	             const uint priority=127);
+	void play_fx(const string fx_name, const int stereo_position,
+	             const uint priority=127);
 
 	void register_song(const string dir, const string basename,
 	                   const bool recursive = false);
@@ -279,8 +287,8 @@ public:
 
 	bool get_disable_music();
 	bool get_disable_fx();
-	void set_disable_music(bool state);
-	void set_disable_fx(bool state);
+	void set_disable_music(bool disable);
+	void set_disable_fx(bool disable);
 
 	/** The game logic where we can get a mapping from logical to screen
 	 * coordinates and vice versa
@@ -293,6 +301,11 @@ public:
 	 * \see Sound_Handler::init()
 	 */
 	bool m_nosound;
+	
+	/** Can \ref m_disable_music and \ref m_disable_fx be changed?
+	 * true = they mustn't be changed (e.g. because hardware is missing)
+	 * false = can be changed at user request*/
+	bool m_lock_audio_disabling;
 
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
@@ -301,7 +314,6 @@ protected:
 
 	/// Whether to disable background music
 	bool m_disable_music;
-
 	/// Whether to disable sound effects
 	bool m_disable_fx;
 
@@ -316,6 +328,9 @@ protected:
 
 	/// A collection of effect sets
 	map < string, FXset * >m_fxs;
+	
+	/// List of currently playing effects, also the channel each one is on
+	map <string, int>m_active_fx;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now

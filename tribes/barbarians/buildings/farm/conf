@@ -17,7 +17,7 @@ program=harvest
 0=set +nostats	# ending this program has no effect on statistics
 1=call plant
 2=call harvest
-3=playFX farm_animal
+3=playFX farm_animal 192
 
 [plant]
 0=set +catch	# failure of this program will be caught

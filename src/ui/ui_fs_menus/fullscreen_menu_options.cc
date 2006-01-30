@@ -68,15 +68,23 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 	m_inputgrab->set_state(opt.inputgrab);
 	new UITextarea(this, 285, 110, _("Grab Input"), Align_VCenter);
 
-   // Enable Sound
+	// Music
 	m_music = new UICheckbox(this, 260, 130);
 	m_music->set_state(opt.music);
-	new UITextarea(this, 285, 140, _("Enable Music"), Align_VCenter);
+	new UITextarea(this, 285, 140, _("Enable Music"),
+	               Align_VCenter);
+	if (g_sound_handler.m_lock_audio_disabling) {
+		m_music->set_enabled(false);
+	}
 
-	// Enable FX
+	// Sound FX
 	m_fx = new UICheckbox(this, 260, 160);
 	m_fx->set_state(opt.fx);
-	new UITextarea(this, 285, 170, _("Enable Sound"), Align_VCenter);
+	new UITextarea(this, 285, 170, _("Enable Sound"),
+	               Align_VCenter);
+	if (g_sound_handler.m_lock_audio_disabling) {
+		m_fx->set_enabled(false);
+	}
 
 
 	// In-game resolution

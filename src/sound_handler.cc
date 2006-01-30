@@ -62,7 +62,7 @@ Songset::~Songset()
  * first song. If you do not want to disturb the (linear) playback order then
  * \ref register_song all songs before you start playing
  */
-void Songset::add_song(string filename)
+void Songset::add_song(const string filename)
 {
 	m_songs.push_back(filename);
 	m_current_song = m_songs.begin();
@@ -79,7 +79,7 @@ Mix_Music *Songset::get_song()
 	int songnumber;
 	string filename;
 
-	if (g_sound_handler.m_disable_music || m_songs.empty())
+	if (g_sound_handler.get_disable_music() || m_songs.empty())
 		return NULL;
 
 	if (g_sound_handler.m_random_order) {
@@ -179,7 +179,7 @@ Mix_Chunk *FXset::get_fx()
 {
 	int fxnumber;
 
-	if (g_sound_handler.m_disable_fx || m_fxs.empty())
+	if (g_sound_handler.get_disable_fx() || m_fxs.empty())
 		return NULL;
 
 	fxnumber = g_sound_handler.m_rng.rand() % m_fxs.size();
@@ -202,6 +202,7 @@ Sound_Handler::Sound_Handler()
 	m_nosound = false;
 	m_disable_music = false;
 	m_disable_fx = false;
+	m_lock_audio_disabling = false;
 	m_random_order = true;
 	m_current_songset = "";
 }
@@ -240,12 +241,15 @@ void Sound_Handler::init()
 	if ((SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) ||
 	      (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,
 	                     MIX_DEFAULT_FORMAT, 2,
-	                     bufsize) == -1)) {
+	                     bufsize) == -1))
+	{
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 		log("WARNING: Failed to initialize sound system: %s\n",
 		    Mix_GetError());
-		m_disable_music = true;
-		m_disable_fx = true;
+		
+		set_disable_music(true);
+		set_disable_fx(true);
+		m_lock_audio_disabling=true;
 		return;
 	} else {
 		Mix_HookMusicFinished(Sound_Handler::music_finished_callback);
@@ -254,7 +258,7 @@ void Sound_Handler::init()
 	}
 }
 
-/// Read the main config file, load background music and systemwide sound effects
+/// Read the main config file, load background music and systemwide sound fx
 void Sound_Handler::read_config()
 {
 	Section *s;
@@ -262,20 +266,20 @@ void Sound_Handler::read_config()
 	s = g_options.pull_section("global");
 
 	//if there is no config, just ignore future attempts to make us work
-
+	//TODO: really? shouldn't is just be the write-back that gets disabled?
 	if (!s) {
 		m_nosound = true;
-		m_disable_music = true;
-		m_disable_fx = true;
+		set_disable_music(true);
+		set_disable_fx(true);
 		return;
 	}
 
 	if (m_nosound) {
-		m_disable_music = true;
-		m_disable_fx = true;
+		set_disable_music(true);
+		set_disable_fx(true);
 	} else {
-		m_disable_music = s->get_bool("disable_music", false);
-		m_disable_fx = s->get_bool("disable_fx", false);
+		set_disable_music(s->get_bool("disable_music", false));
+		set_disable_fx(s->get_bool("disable_fx", false));
 	}
 
 	m_random_order = s->get_bool("sound_random_order", true);
@@ -285,8 +289,7 @@ void Sound_Handler::read_config()
 	register_song("music", "ingame");
 }
 
-/** Load systemwide sound fx into memory (per_object fx will be loaded by the
- * object)
+/** Load systemwide sound fx into memory.
  * \note This loads only systemwide fx. Worker/building fx will be loaded by 
  * their respective conf-file parsers
  */
@@ -520,16 +523,54 @@ int Sound_Handler::stereo_position(const Coords position)
 	return -1;
 }
 
+/** Find out whether to actually play a certain effect right now or rather not
+ * to avoid "sonic overload".
+ * \todo What is the selection algorithm?
+ * \todo Do use FXset::m_priority for play-or-not decisions
+ */
+bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
+                                const uint priority)
+{
+	bool allow_multiple=false; //convenience for easier code reading
+	uint weighted_priority=priority;
+	
+	if (priority==255) return true;
+	if (priority>=128) {
+		allow_multiple=true;
+		weighted_priority-=128;
+	}
+	
+	//TODO: what to do with fx that happen offscreen?
+	if (stereo_position == -1) {
+		weighted_priority=0;
+	}
+	
+	//if ! allow multiple and already running
+	//	return false;
+	
+	//if (SDL_GetTicks() < m_fxs[fx_name]->m_last_used + 5000)
+	//	return false;
+	
+	//weighted_priority is proportional to priority
+	//long time since last play increases weighted_priority
+	//high frequency reduces priority
+	//long time since any play increases weighted_priority
+	//high general frequency reduces weighted priority
+		
+	if ( m_rng.rand()%127 < weighted_priority )
+		return true;
+	else
+		return false;
+}
+
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s)
  * must have been loaded before with \ref load_fx.
- * \param fx_name	The identifying name of the sound effect, see 
- *			\ref load_fx
+ * \param fx_name	The identifying name of the sound effect, see \ref load_fx
  * \param map_position  Map coordinates where the event takes place
  * \param priority	How important is it that this FX actually gets played? 
- *			(see \ref FXset::m_priority)
- */
+ *			(see \ref FXset::m_priority) */
 void Sound_Handler::play_fx(const string fx_name, Coords map_position,
-                            uint priority)
+                            const uint priority)
 {
 	if (map_position == INVALID_POSITION) {
 		log("WARNING: play_fx(\"%s\") called without coordinates\n",
@@ -550,17 +591,16 @@ void Sound_Handler::play_fx(const string fx_name, Coords map_position,
  * 				\ref stereo_position
  * \param priority		How important is it that this FX actually gets 
  * 				played? (see \ref FXset::m_priority)
- * \todo Do use FXset::m_priority for play-or-not decisions
  */
-void Sound_Handler::play_fx(const string fx_name, int stereo_position,
-                            uint priority)
+void Sound_Handler::play_fx(const string fx_name, const int stereo_position,
+                            const uint priority)
 {
 	Mix_Chunk *m;
 	int chan;
 
 	assert(stereo_position >= -1 && stereo_position <= 254);
 
-	if (m_disable_fx)
+	if (get_disable_fx())
 		return;
 
 	if (m_fxs.count(fx_name) == 0) {
@@ -570,31 +610,23 @@ void Sound_Handler::play_fx(const string fx_name, int stereo_position,
 	}
 
 	//check if FX should be played
-	if (priority!=255) {
-		//TODO: refine the decision whether to play or not
+	if (!play_or_not(fx_name, stereo_position, priority))
+		return;
 
-		if (SDL_GetTicks() < m_fxs[fx_name]->m_last_used + 5000)
-			return;
-	}
-
+	//retrieve the fx
 	m = m_fxs[fx_name]->get_fx();
 
+	//and play it if it's valid
 	if (m) {
-		if (stereo_position != -1) {
-
-			chan = Mix_PlayChannel(-1, m, 0);
-			Mix_SetPanning(chan,254-stereo_position,
-			               stereo_position);
-			//TODO: use chan in the fx callback to absoutely ensure
-			// that an effect is playing only once. The
-			// "play-or-not" decision is not fit to make *that*
-			// choice
-			// Note that a very few effects *always* play, like
-			// "start of battle"
-		} else {
-			//TODO: what to do with fx that happen offscreen?
-		}
-
+		chan = Mix_PlayChannel(-1, m, 0);
+		Mix_SetPanning(chan,254-stereo_position,
+		               stereo_position);
+		//TODO: use chan in the fx callback to absoutely ensure
+		// that an effect is playing only once. The
+		// "play-or-not" decision is not fit to make *that*
+		// choice
+		// Note that a very few effects *always* play, like
+		// "start of battle"
 	} else
 		log("Sound_Handler: sound effect \"%s\" exists but contains no "
 		    "files!\n", fx_name.c_str());
@@ -650,9 +682,7 @@ void Sound_Handler::register_song(const string dir, const string basename,
  */
 void Sound_Handler::start_music(const string songset_name, int fadein_ms)
 {
-	Mix_Music *m = NULL;
-
-	if (m_disable_music)
+	if (get_disable_music())
 		return;
 
 	if (fadein_ms == 0)
@@ -665,7 +695,7 @@ void Sound_Handler::start_music(const string songset_name, int fadein_ms)
 		log("Sound_Handler: songset \"%s\" does not exist!\n",
 		    songset_name.c_str());
 	else {
-		m = m_songs[songset_name]->get_song();
+		Mix_Music *m = m_songs[songset_name]->get_song();
 
 		if (m) {
 			Mix_FadeInMusic(m, 1, fadein_ms);
@@ -684,7 +714,7 @@ void Sound_Handler::start_music(const string songset_name, int fadein_ms)
  */
 void Sound_Handler::stop_music(int fadeout_ms)
 {
-	if (m_disable_music)
+	if (get_disable_music())
 		return;
 
 	if (fadeout_ms == 0)
@@ -725,7 +755,6 @@ void Sound_Handler::change_music(const string songset_name, int fadeout_ms,
 bool Sound_Handler::get_disable_music()
 {
 	return m_disable_music;
-
 }
 
 /// Normal get_* function
@@ -738,9 +767,12 @@ bool Sound_Handler::get_disable_fx()
  * Also, the new value is written back to the config file right away. It might 
  * get lost otherwise.
  */
-void Sound_Handler::set_disable_music(bool state)
+void Sound_Handler::set_disable_music(bool disable)
 {
-	if (state) {
+	if (m_lock_audio_disabling)
+		return;
+	
+	if (disable==true) {
 		stop_music();
 		m_disable_music = true;
 	} else {
@@ -748,17 +780,23 @@ void Sound_Handler::set_disable_music(bool state)
 		start_music(m_current_songset);
 	}
 
-	g_options.pull_section("global")->set_bool("disable_music", state, false);
+	g_options.pull_section("global")->set_bool("disable_music", disable,
+	                                            false);
 }
 
 /** Normal set_* function
  * Also, the new value is written back to the config file right away. It might 
  * get lost otherwise.
  */
-void Sound_Handler::set_disable_fx(bool state)
+void Sound_Handler::set_disable_fx(bool disable)
 {
-	m_disable_fx = state;
-	g_options.pull_section("global")->set_bool("disable_fx", state, false);
+	if (m_lock_audio_disabling)
+		return;
+	
+	m_disable_fx = disable;
+	
+	g_options.pull_section("global")->set_bool("disable_fx", disable,
+	                                           false);
 }
 
 /** Callback to notify \ref Sound_Handler that a song has finished playing.

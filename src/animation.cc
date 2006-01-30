@@ -265,6 +265,8 @@ const AnimationData* AnimationManager::get_animation(uint id) const
 */
 void AnimationManager::trigger_soundfx(uint animation, uint framenumber, uint stereo_position)
 {
+	return;
+//temporarily disabled #fweber 30jan2006	
 	assert(animation>0 && animation<=m_animations.size()); //animation must not be zero!
 	
 	if ( m_animations[animation-1].sfx_cues.count(framenumber)!=0 ) {

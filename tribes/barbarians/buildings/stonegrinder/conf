@@ -19,7 +19,7 @@ water=4
 2=check water
 3=consume raw_stone
 4=consume water
-5=playFX stonegrinder
+5=playFX stonegrinder 192
 6=animation working 32000
 7=produce grindstone
 
