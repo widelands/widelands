@@ -1132,7 +1132,7 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
       if(worker->get_current_experience()!=-1 && worker->get_needed_experience()!=-1) {
          sprintf(buffer, "%i/%i", worker->get_current_experience(), worker->get_needed_experience());
          m_experience->set_text(buffer);
-         sprintf(buffer, "%s", worker->get_becomes());
+			sprintf(buffer, "%s", Sys_Translate(worker->get_becomes())); //don't use _() ! Would tag "worker->get_becomes" for translation !
          m_becomes->set_text(buffer);
       } else {
          m_experience->set_text("");
