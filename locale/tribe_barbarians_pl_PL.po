@@ -1,0 +1,478 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands - 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2005-12-13 15:54+0100\n"
+"Last-Translator: Janusz Skudrzyk <januzi@epf.pl>\n"
+"Language-Team: januzi@epf.pl <januzi@epf.pl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../tribes/barbarians/bobs/deer/conf:1
+msgid "Deer"
+msgstr "Jeleń"
+
+#: ../tribes/barbarians/bobs/wildboar/conf:1
+msgid "Wildboar"
+msgstr "Dzik"
+
+#: ../tribes/barbarians/buildings/axefactory/conf:2
+msgid "Axefactory"
+msgstr "Fabryka toporów"
+
+#: ../tribes/barbarians/buildings/bakery/conf:2
+msgid "Bakery"
+msgstr "Piekarnia"
+
+#: ../tribes/barbarians/buildings/barrier/conf:2
+msgid "Barrier"
+msgstr "Bariera"
+
+#: ../tribes/barbarians/buildings/battlearena/conf:2
+msgid "Battle Arena"
+msgstr "Arena"
+
+#: ../tribes/barbarians/buildings/big_inn/conf:2
+msgid "Big Inn"
+msgstr "Duży zajazd"
+
+#: ../tribes/barbarians/buildings/brewery/conf:2
+msgid "Brewery"
+msgstr "Piwiarnia"
+
+#: ../tribes/barbarians/buildings/burner/conf:2
+msgid "Charcoal Burner"
+msgstr "Wypalacz węgla drz."
+
+#: ../tribes/barbarians/buildings/citadel/conf:2
+msgid "Citadel"
+msgstr "Cytadela"
+
+#: ../tribes/barbarians/buildings/coalmine/conf:2
+msgid "Coal mine"
+msgstr "Kopalnia węgla"
+
+#: ../tribes/barbarians/buildings/constructionsite/conf:5
+msgid "Construction Site"
+msgstr "Miejsce budowy"
+
+#: ../tribes/barbarians/buildings/deep_coalmine/conf:2
+msgid "Deep Coal Mine"
+msgstr "Kopalnia węgla*"
+
+#: ../tribes/barbarians/buildings/deep_goldmine/conf:2
+msgid "Deep Gold Mine"
+msgstr "Kopalnia złota*"
+
+#: ../tribes/barbarians/buildings/deep_oremine/conf:2
+msgid "Deep Iron Ore Mine"
+msgstr "Kopalnia rudy*"
+
+#: ../tribes/barbarians/buildings/deeper_coalmine/conf:2
+msgid "Deeper Coal Mine"
+msgstr "Kopalnia węgla**"
+
+#: ../tribes/barbarians/buildings/deeper_goldmine/conf:2
+msgid "Deeper Gold Mine"
+msgstr "Kopalnia złota**"
+
+#: ../tribes/barbarians/buildings/deeper_oremine/conf:2
+msgid "Deeper Iron Ore Mine"
+msgstr "Kopalnia rudy**"
+
+#: ../tribes/barbarians/buildings/donjon/conf:2
+msgid "Donjon"
+msgstr "Donjon"
+
+#: ../tribes/barbarians/buildings/farm/conf:2
+msgid "Farm"
+msgstr "Farma"
+
+#: ../tribes/barbarians/buildings/fernery/conf:2
+msgid "Fernery"
+msgstr "Paprociarnia"
+
+#: ../tribes/barbarians/buildings/fisher/conf:2
+msgid "Fisher Hut"
+msgstr "Rybak"
+
+#: ../tribes/barbarians/buildings/fortress/conf:2
+msgid "Fortress"
+msgstr "Forteca"
+
+#: ../tribes/barbarians/buildings/gamekeeper/conf:2
+msgid "Gamekeeper Hut"
+msgstr "Dom hodowcy"
+
+#: ../tribes/barbarians/buildings/goldmine/conf:2
+msgid "Gold Mine"
+msgstr "Kopalnia złota"
+
+#: ../tribes/barbarians/buildings/granitmine/conf:2
+msgid "Granit Mine"
+msgstr "Kopalnia granitu"
+
+#: ../tribes/barbarians/buildings/hardener/conf:2
+msgid "Wood hardener"
+msgstr "Cieśla"
+
+#: ../tribes/barbarians/buildings/headquarters/conf:6
+msgid "Headquarters"
+msgstr "Baza"
+
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Helmsmith"
+
+#: ../tribes/barbarians/buildings/hunter/conf:2
+msgid "Hunters Hut"
+msgstr "Myśliczówka"
+
+#: ../tribes/barbarians/buildings/inn/conf:2
+msgid "Inn"
+msgstr "Zajazd"
+
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Drwal"
+
+#: ../tribes/barbarians/buildings/metallworks/conf:2
+msgid "Metallworks"
+msgstr "Metallworks"
+
+#: ../tribes/barbarians/buildings/micro-brewery/conf:2
+msgid "Micro brewery"
+msgstr "Mały browar"
+
+#: ../tribes/barbarians/buildings/oremine/conf:2
+msgid "Iron Ore Mine"
+msgstr "Kopalnia rudy"
+
+#: ../tribes/barbarians/buildings/pressworks/conf:2
+msgid "Pressworks"
+msgstr "Prasa"
+
+#: ../tribes/barbarians/buildings/quarry/conf:2
+msgid "Quarry"
+msgstr "Kamieniarz"
+
+#: ../tribes/barbarians/buildings/ranger/conf:2
+msgid "Ranger Hut"
+msgstr "Leśnik"
+
+#: ../tribes/barbarians/buildings/sentry/conf:2
+msgid "Sentry"
+msgstr "Strażnica"
+
+#: ../tribes/barbarians/buildings/smelting_works/conf:2
+msgid "Smelting Works"
+msgstr "Smelting Works"
+
+#: ../tribes/barbarians/buildings/stonegrinder/conf:2
+msgid "Stonegrinder"
+msgstr "Stonegrinder"
+
+#: ../tribes/barbarians/buildings/stronghold/conf:2
+msgid "Stronghold"
+msgstr "Stronghold"
+
+#: ../tribes/barbarians/buildings/tavern/conf:2
+msgid "Tavern"
+msgstr "Tawerna"
+
+#: ../tribes/barbarians/buildings/trainingscamp/conf:2
+msgid "Trainingscamp"
+msgstr "Obóz treningowy"
+
+#: ../tribes/barbarians/buildings/warehouse/conf:2
+msgid "Warehouse"
+msgstr "Magazyn"
+
+#: ../tribes/barbarians/buildings/warmill/conf:2
+msgid "War Mill"
+msgstr "War Mill"
+
+#: ../tribes/barbarians/buildings/well/conf:2
+msgid "Well"
+msgstr "Studnia"
+
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "The Widelands Development Team"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbarzyńcy"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "The mighty tribes of the east-lands!"
+
+#: ../tribes/barbarians/wares/axe/conf:2
+msgid "Axe"
+msgstr "Topór"
+
+#: ../tribes/barbarians/wares/bakingtray/conf:2
+msgid "Bakingtray"
+msgstr "Foremka"
+
+#: ../tribes/barbarians/wares/battleaxe/conf:2
+msgid "Battle Axe"
+msgstr "Topór wojenny"
+
+#: ../tribes/barbarians/wares/beer/conf:2
+msgid "Beer"
+msgstr "Piwo"
+
+#: ../tribes/barbarians/wares/blackwood/conf:2
+msgid "Blackwood"
+msgstr "Czarne drewno"
+
+#: ../tribes/barbarians/wares/broadaxe/conf:2
+msgid "Broad Axe"
+msgstr "Szeroki topór"
+
+#: ../tribes/barbarians/wares/bronzeaxe/conf:2
+msgid "Bronze Axe"
+msgstr "Topór z brązu"
+
+#: ../tribes/barbarians/wares/cloth/conf:2
+msgid "Cloth"
+msgstr "Ubrania"
+
+#: ../tribes/barbarians/wares/coal/conf:2
+msgid "Coal"
+msgstr "Węgiel"
+
+#: ../tribes/barbarians/wares/coalearth/conf:2
+msgid "Coalearth"
+msgstr "Coalearth"
+
+#: ../tribes/barbarians/wares/fire_tongs/conf:2
+msgid "Fire Tongs"
+msgstr "Szczypce"
+
+#: ../tribes/barbarians/wares/fish/conf:2
+msgid "Fish"
+msgstr "Ryba"
+
+#: ../tribes/barbarians/wares/fishing_rod/conf:2
+msgid "Fishing Rod"
+msgstr "Wędka"
+
+#: ../tribes/barbarians/wares/gold/conf:2
+msgid "Gold"
+msgstr "Złoto"
+
+#: ../tribes/barbarians/wares/goldstone/conf:2
+msgid "Goldstone"
+msgstr "Samorodek"
+
+#: ../tribes/barbarians/wares/grindstone/conf:2
+msgid "Grindstone"
+msgstr "Ociosany kamień"
+
+#: ../tribes/barbarians/wares/hammer/conf:2
+msgid "Hammer"
+msgstr "Młot"
+
+#: ../tribes/barbarians/wares/helm/conf:2
+msgid "Helm"
+msgstr "Hełm"
+
+#: ../tribes/barbarians/wares/hunting_spear/conf:2
+msgid "Hunting Spear"
+msgstr "Włócznia"
+
+#: ../tribes/barbarians/wares/iron/conf:2
+msgid "Iron"
+msgstr "Żelazo"
+
+#: ../tribes/barbarians/wares/ironore/conf:2
+msgid "Ironore"
+msgstr "Ruda żelaza"
+
+#: ../tribes/barbarians/wares/kitchen_tools/conf:2
+msgid "Kitchen Tools"
+msgstr "Narzędzia kuchenne"
+
+#: ../tribes/barbarians/wares/mask/conf:2
+msgid "Mask"
+msgstr "Maska"
+
+#: ../tribes/barbarians/wares/meal/conf:2
+msgid "Meal"
+msgstr "Posiłek"
+
+#: ../tribes/barbarians/wares/meat/conf:2
+msgid "Meat"
+msgstr "Mięso"
+
+#: ../tribes/barbarians/wares/pick/conf:2
+msgid "Pick"
+msgstr "Kilof"
+
+#: ../tribes/barbarians/wares/pittabread/conf:2
+msgid "Pittabread"
+msgstr "Pita"
+
+#: ../tribes/barbarians/wares/ration/conf:2
+msgid "Ration"
+msgstr "Racja"
+
+#: ../tribes/barbarians/wares/raw_stone/conf:2
+msgid "Raw Stone"
+msgstr "Kamień"
+
+#: ../tribes/barbarians/wares/scythe/conf:2
+msgid "Scythe"
+msgstr "Kosa"
+
+#: ../tribes/barbarians/wares/sharpaxe/conf:2
+msgid "Sharp Axe"
+msgstr "Ostry Topór"
+
+#: ../tribes/barbarians/wares/shovel/conf:2
+msgid "Shovel"
+msgstr "Łopata"
+
+#: ../tribes/barbarians/wares/snack/conf:2
+msgid "Snack"
+msgstr "Przekąska"
+
+#: ../tribes/barbarians/wares/strongbeer/conf:2
+msgid "Strong Beer"
+msgstr "Mocne piwo"
+
+#: ../tribes/barbarians/wares/thatchfern/conf:2
+msgid "Thatch Fern"
+msgstr "Thatch Fern"
+
+#: ../tribes/barbarians/wares/trunk/conf:2
+msgid "Trunk"
+msgstr "Kłoda"
+
+#: ../tribes/barbarians/wares/warhelmet/conf:2
+msgid "War Helmet"
+msgstr "Wojenny hełm"
+
+#: ../tribes/barbarians/wares/warriorsaxe/conf:2
+msgid "Warriors Axe"
+msgstr "Topór wojowników"
+
+#: ../tribes/barbarians/wares/water/conf:2
+msgid "Water"
+msgstr "Woda"
+
+#: ../tribes/barbarians/wares/wheat/conf:2
+msgid "Wheat"
+msgstr "Pszenica"
+
+#: ../tribes/barbarians/workers/baker/conf:2
+msgid "Baker"
+msgstr "Piekarz"
+
+#: ../tribes/barbarians/workers/blacksmith/conf:2
+msgid "Blacksmith"
+msgstr "Kowal"
+
+#: ../tribes/barbarians/workers/brewer/conf:2
+msgid "Brewer"
+msgstr "Piwowar"
+
+#: ../tribes/barbarians/workers/builder/conf:2
+msgid "Builder"
+msgstr "Budowniczy"
+
+#: ../tribes/barbarians/workers/burner/conf:2
+msgid "Burner"
+msgstr "Wypalacz"
+
+#: ../tribes/barbarians/workers/carrier/conf:2
+msgid "Carrier"
+msgstr "Transportowiec"
+
+#: ../tribes/barbarians/workers/chief-miner/conf:2
+msgid "Chief Miner"
+msgstr "Sztygar"
+
+#: ../tribes/barbarians/workers/farmer/conf:2
+msgid "Farmer"
+msgstr "Rolnik"
+
+#: ../tribes/barbarians/workers/ferner/conf:2
+msgid "Ferner"
+msgstr "Paprociarz"
+
+#: ../tribes/barbarians/workers/fisher/conf:2
+msgid "Fisher"
+msgstr "Rybak"
+
+#: ../tribes/barbarians/workers/gamekeeper/conf:2
+msgid "Gamekeeper"
+msgstr "Hodowca"
+
+#: ../tribes/barbarians/workers/geologist/conf:2
+msgid "Geologist"
+msgstr "Geolog"
+
+#: ../tribes/barbarians/workers/hunter/conf:2
+msgid "Hunter"
+msgstr "Myśliwy"
+
+#: ../tribes/barbarians/workers/innkeeper/conf:2
+msgid "Innkeeper"
+msgstr "Oberżysta"
+
+#: ../tribes/barbarians/workers/master-blacksmith/conf:2
+msgid "Master Blacksmith"
+msgstr "Mistrz kowalski"
+
+#: ../tribes/barbarians/workers/master-brewer/conf:2
+msgid "Master Brewer"
+msgstr "Mistrz browarnik"
+
+#: ../tribes/barbarians/workers/master-miner/conf:2
+msgid "Master Miner"
+msgstr "Nadsztygar"
+
+#: ../tribes/barbarians/workers/miner/conf:2
+msgid "Miner"
+msgstr "Górnik"
+
+#: ../tribes/barbarians/workers/presser/conf:2
+msgid "Presser"
+msgstr "Presser"
+
+#: ../tribes/barbarians/workers/ranger/conf:2
+msgid "Forester"
+msgstr "Leśnik"
+
+#: ../tribes/barbarians/workers/smelter/conf:2
+msgid "Smelter"
+msgstr "Hutnik"
+
+#: ../tribes/barbarians/workers/soldier/conf:2
+msgid "Soldier"
+msgstr "Rycerz"
+
+#: ../tribes/barbarians/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Kamieniarz"
+
+#: ../tribes/barbarians/workers/trainer/conf:2
+msgid "Trainer"
+msgstr "Trener"
+
