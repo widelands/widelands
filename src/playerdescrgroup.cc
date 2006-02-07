@@ -53,6 +53,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 	m_plnum = plnum;
 	m_allow_changes=CHANGE_EVERYTHING;
 	m_current_tribe=0;
+	m_playertype=Player::playerLocal; //just for initalization
 
 	m_enabled = false;
 	set_visible(false);
