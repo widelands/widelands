@@ -1,0 +1,475 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Czech translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2006-02-07 19:24+0100\n"
+"Last-Translator: Prometheus <mmatej@yahoo.com>\n"
+"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: czech\n"
+"X-Poedit-Country: Czech Republic\n"
+
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "Vývojový tým Widelands"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbaři"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "Mocné kmeny východních zemí!"
+
+#: ../tribes/barbarians/bobs/deer/conf:1
+msgid "Deer"
+msgstr "Jelen"
+
+#: ../tribes/barbarians/bobs/wildboar/conf:1
+msgid "Wildboar"
+msgstr "Divočák"
+
+#: ../tribes/barbarians/buildings/axefactory/conf:2
+msgid "Axefactory"
+msgstr "Továrna na sekery"
+
+#: ../tribes/barbarians/buildings/bakery/conf:2
+msgid "Bakery"
+msgstr "Pekárna"
+
+#: ../tribes/barbarians/buildings/barrier/conf:2
+msgid "Barrier"
+msgstr "Hradba"
+
+#: ../tribes/barbarians/buildings/battlearena/conf:2
+msgid "Battle Arena"
+msgstr "Bitevní aréna"
+
+#: ../tribes/barbarians/buildings/big_inn/conf:2
+msgid "Big Inn"
+msgstr "Hostinec"
+
+#: ../tribes/barbarians/buildings/brewery/conf:2
+msgid "Brewery"
+msgstr "Pivovar"
+
+#: ../tribes/barbarians/buildings/burner/conf:2
+msgid "Charcoal Burner"
+msgstr "Uhlíř"
+
+#: ../tribes/barbarians/buildings/citadel/conf:2
+msgid "Citadel"
+msgstr "Tvrz"
+
+#: ../tribes/barbarians/buildings/coalmine/conf:2
+msgid "Coal mine"
+msgstr "Uhelný důl"
+
+#: ../tribes/barbarians/buildings/constructionsite/conf:5
+msgid "Construction Site"
+msgstr "Staveniště"
+
+#: ../tribes/barbarians/buildings/deep_coalmine/conf:2
+msgid "Deep Coal Mine"
+msgstr "Hlubinný uhelný důl"
+
+#: ../tribes/barbarians/buildings/deep_goldmine/conf:2
+msgid "Deep Gold Mine"
+msgstr "Hlubinný zlatý důl"
+
+#: ../tribes/barbarians/buildings/deep_oremine/conf:2
+msgid "Deep Iron Ore Mine"
+msgstr "Hlubinný železorudný důl"
+
+#: ../tribes/barbarians/buildings/deeper_coalmine/conf:2
+msgid "Deeper Coal Mine"
+msgstr "Hlubší uhelný důl"
+
+#: ../tribes/barbarians/buildings/deeper_goldmine/conf:2
+msgid "Deeper Gold Mine"
+msgstr "Hlubší zlatý důl"
+
+#: ../tribes/barbarians/buildings/deeper_oremine/conf:2
+msgid "Deeper Iron Ore Mine"
+msgstr "Hlubší železorudný důl"
+
+#: ../tribes/barbarians/buildings/donjon/conf:2
+msgid "Donjon"
+msgstr "Donjon"
+
+#: ../tribes/barbarians/buildings/farm/conf:2
+msgid "Farm"
+msgstr "Statek"
+
+#: ../tribes/barbarians/buildings/fernery/conf:2
+msgid "Fernery"
+msgstr "Kapradiny"
+
+#: ../tribes/barbarians/buildings/fisher/conf:2
+msgid "Fisher Hut"
+msgstr "Rybář"
+
+#: ../tribes/barbarians/buildings/fortress/conf:2
+msgid "Fortress"
+msgstr "Pevnost"
+
+#: ../tribes/barbarians/buildings/gamekeeper/conf:2
+msgid "Gamekeeper Hut"
+msgstr "Hajný"
+
+#: ../tribes/barbarians/buildings/goldmine/conf:2
+msgid "Gold Mine"
+msgstr "Zlatý důl"
+
+#: ../tribes/barbarians/buildings/granitmine/conf:2
+msgid "Granit Mine"
+msgstr "Žulový důl"
+
+#: ../tribes/barbarians/buildings/hardener/conf:2
+msgid "Wood hardener"
+msgstr "Tesař"
+
+#: ../tribes/barbarians/buildings/headquarters/conf:6
+msgid "Headquarters"
+msgstr "Základna"
+
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Zbrojíř"
+
+#: ../tribes/barbarians/buildings/hunter/conf:2
+msgid "Hunters Hut"
+msgstr "Lovec"
+
+#: ../tribes/barbarians/buildings/inn/conf:2
+msgid "Inn"
+msgstr "Hospoda"
+
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Dřevorubec"
+
+#: ../tribes/barbarians/buildings/metallworks/conf:2
+msgid "Metallworks"
+msgstr "Vysoká pec"
+
+#: ../tribes/barbarians/buildings/micro-brewery/conf:2
+msgid "Micro brewery"
+msgstr "Minipivovar"
+
+#: ../tribes/barbarians/buildings/oremine/conf:2
+msgid "Iron Ore Mine"
+msgstr "Železorudný důl"
+
+#: ../tribes/barbarians/buildings/pressworks/conf:2
+msgid "Pressworks"
+msgstr "Lisovna"
+
+#: ../tribes/barbarians/buildings/quarry/conf:2
+msgid "Quarry"
+msgstr "Lom"
+
+#: ../tribes/barbarians/buildings/ranger/conf:2
+msgid "Ranger Hut"
+msgstr "Lesník"
+
+#: ../tribes/barbarians/buildings/sentry/conf:2
+msgid "Sentry"
+msgstr "Hláska"
+
+#: ../tribes/barbarians/buildings/smelting_works/conf:2
+msgid "Smelting Works"
+msgstr "Slévárna"
+
+#: ../tribes/barbarians/buildings/stonegrinder/conf:2
+msgid "Stonegrinder"
+msgstr "Kameník"
+
+#: ../tribes/barbarians/buildings/stronghold/conf:2
+msgid "Stronghold"
+msgstr "Opevnění"
+
+#: ../tribes/barbarians/buildings/tavern/conf:2
+msgid "Tavern"
+msgstr "Kuchyň"
+
+#: ../tribes/barbarians/buildings/trainingscamp/conf:2
+msgid "Trainingscamp"
+msgstr "Výcvikový tábor"
+
+#: ../tribes/barbarians/buildings/warehouse/conf:2
+msgid "Warehouse"
+msgstr "Sklad"
+
+#: ../tribes/barbarians/buildings/warmill/conf:2
+msgid "War Mill"
+msgstr "Válečná akademie"
+
+#: ../tribes/barbarians/buildings/well/conf:2
+msgid "Well"
+msgstr "Studna"
+
+#: ../tribes/barbarians/wares/axe/conf:2
+msgid "Axe"
+msgstr "Sekera"
+
+#: ../tribes/barbarians/wares/bakingtray/conf:2
+#, fuzzy
+msgid "Bakingtray"
+msgstr "Plech na pečení"
+
+#: ../tribes/barbarians/wares/battleaxe/conf:2
+msgid "Battle Axe"
+msgstr "Válečná sekera"
+
+#: ../tribes/barbarians/wares/beer/conf:2
+msgid "Beer"
+msgstr "Pivo"
+
+#: ../tribes/barbarians/wares/blackwood/conf:2
+msgid "Blackwood"
+msgstr "Tvrzené dřevo"
+
+#: ../tribes/barbarians/wares/broadaxe/conf:2
+msgid "Broad Axe"
+msgstr "Širočina"
+
+#: ../tribes/barbarians/wares/bronzeaxe/conf:2
+msgid "Bronze Axe"
+msgstr "Bronzová sekera"
+
+#: ../tribes/barbarians/wares/cloth/conf:2
+msgid "Cloth"
+msgstr "Sukno"
+
+#: ../tribes/barbarians/wares/coal/conf:2
+msgid "Coal"
+msgstr "Uhlí"
+
+#: ../tribes/barbarians/wares/coalearth/conf:2
+msgid "Coalearth"
+msgstr "Kamenné uhlí"
+
+#: ../tribes/barbarians/wares/fire_tongs/conf:2
+msgid "Fire Tongs"
+msgstr "Kleště na uhlí"
+
+#: ../tribes/barbarians/wares/fish/conf:2
+msgid "Fish"
+msgstr "Ryby"
+
+#: ../tribes/barbarians/wares/fishing_rod/conf:2
+msgid "Fishing Rod"
+msgstr "Prut"
+
+#: ../tribes/barbarians/wares/gold/conf:2
+msgid "Gold"
+msgstr "Zlato"
+
+#: ../tribes/barbarians/wares/goldstone/conf:2
+msgid "Goldstone"
+msgstr "Nuget"
+
+#: ../tribes/barbarians/wares/grindstone/conf:2
+msgid "Grindstone"
+msgstr "Opracovaný kámen"
+
+#: ../tribes/barbarians/wares/hammer/conf:2
+msgid "Hammer"
+msgstr "Kladivo"
+
+#: ../tribes/barbarians/wares/helm/conf:2
+msgid "Helm"
+msgstr "Helma"
+
+#: ../tribes/barbarians/wares/hunting_spear/conf:2
+msgid "Hunting Spear"
+msgstr "Lovecný oštěp"
+
+#: ../tribes/barbarians/wares/iron/conf:2
+msgid "Iron"
+msgstr "Železo"
+
+#: ../tribes/barbarians/wares/ironore/conf:2
+msgid "Ironore"
+msgstr "Železná ruda"
+
+#: ../tribes/barbarians/wares/kitchen_tools/conf:2
+msgid "Kitchen Tools"
+msgstr "Kuchyňské náčiní"
+
+#: ../tribes/barbarians/wares/mask/conf:2
+msgid "Mask"
+msgstr "Maska"
+
+#: ../tribes/barbarians/wares/meal/conf:2
+msgid "Meal"
+msgstr "Jídlo"
+
+#: ../tribes/barbarians/wares/meat/conf:2
+msgid "Meat"
+msgstr "Maso"
+
+#: ../tribes/barbarians/wares/pick/conf:2
+#, fuzzy
+msgid "Pick"
+msgstr "Klacek"
+
+#: ../tribes/barbarians/wares/pittabread/conf:2
+msgid "Pittabread"
+msgstr "Pita chléb"
+
+#: ../tribes/barbarians/wares/ration/conf:2
+msgid "Ration"
+msgstr "Porce"
+
+#: ../tribes/barbarians/wares/raw_stone/conf:2
+msgid "Raw Stone"
+msgstr "Hrubý kámen"
+
+#: ../tribes/barbarians/wares/scythe/conf:2
+msgid "Scythe"
+msgstr "Kosa"
+
+#: ../tribes/barbarians/wares/sharpaxe/conf:2
+msgid "Sharp Axe"
+msgstr "Kalená sekera"
+
+#: ../tribes/barbarians/wares/shovel/conf:2
+msgid "Shovel"
+msgstr "Lopata"
+
+#: ../tribes/barbarians/wares/snack/conf:2
+msgid "Snack"
+msgstr "Svačina"
+
+#: ../tribes/barbarians/wares/strongbeer/conf:2
+msgid "Strong Beer"
+msgstr "Silnější pivo"
+
+#: ../tribes/barbarians/wares/thatchfern/conf:2
+#, fuzzy
+msgid "Thatch Fern"
+msgstr "Kapradí na došky"
+
+#: ../tribes/barbarians/wares/trunk/conf:2
+msgid "Trunk"
+msgstr "Kláda"
+
+#: ../tribes/barbarians/wares/warhelmet/conf:2
+msgid "War Helmet"
+msgstr "Válečná helma"
+
+#: ../tribes/barbarians/wares/warriorsaxe/conf:2
+msgid "Warriors Axe"
+msgstr "Bojová sekera"
+
+#: ../tribes/barbarians/wares/water/conf:2
+msgid "Water"
+msgstr "Voda"
+
+#: ../tribes/barbarians/wares/wheat/conf:2
+msgid "Wheat"
+msgstr "Pšenice"
+
+#: ../tribes/barbarians/workers/baker/conf:2
+msgid "Baker"
+msgstr "Pekař"
+
+#: ../tribes/barbarians/workers/blacksmith/conf:2
+msgid "Blacksmith"
+msgstr "Kovář"
+
+#: ../tribes/barbarians/workers/brewer/conf:2
+msgid "Brewer"
+msgstr "Sládek"
+
+#: ../tribes/barbarians/workers/builder/conf:2
+msgid "Builder"
+msgstr "Stavař"
+
+#: ../tribes/barbarians/workers/burner/conf:2
+msgid "Burner"
+msgstr "Uhlíř"
+
+#: ../tribes/barbarians/workers/carrier/conf:2
+msgid "Carrier"
+msgstr "Nosič"
+
+#: ../tribes/barbarians/workers/chief-miner/conf:2
+msgid "Chief Miner"
+msgstr "Vrchní horník"
+
+#: ../tribes/barbarians/workers/farmer/conf:2
+msgid "Farmer"
+msgstr "Sedlák"
+
+#: ../tribes/barbarians/workers/ferner/conf:2
+#, fuzzy
+msgid "Ferner"
+msgstr "Kapradinář"
+
+#: ../tribes/barbarians/workers/fisher/conf:2
+msgid "Fisher"
+msgstr "Rybář"
+
+#: ../tribes/barbarians/workers/gamekeeper/conf:2
+msgid "Gamekeeper"
+msgstr "Hajný"
+
+#: ../tribes/barbarians/workers/geologist/conf:2
+msgid "Geologist"
+msgstr "Geolog"
+
+#: ../tribes/barbarians/workers/hunter/conf:2
+msgid "Hunter"
+msgstr "Lovec"
+
+#: ../tribes/barbarians/workers/innkeeper/conf:2
+msgid "Innkeeper"
+msgstr "Hospodský"
+
+#: ../tribes/barbarians/workers/master-blacksmith/conf:2
+msgid "Master Blacksmith"
+msgstr "Mistr kovář"
+
+#: ../tribes/barbarians/workers/master-brewer/conf:2
+msgid "Master Brewer"
+msgstr "Vrchní sládek"
+
+#: ../tribes/barbarians/workers/master-miner/conf:2
+msgid "Master Miner"
+msgstr "Mistr horník"
+
+#: ../tribes/barbarians/workers/miner/conf:2
+msgid "Miner"
+msgstr "Horník"
+
+#: ../tribes/barbarians/workers/presser/conf:2
+msgid "Presser"
+msgstr "Tiskař"
+
+#: ../tribes/barbarians/workers/ranger/conf:2
+msgid "Forester"
+msgstr "Lesník"
+
+#: ../tribes/barbarians/workers/smelter/conf:2
+msgid "Smelter"
+msgstr "Slévač"
+
+#: ../tribes/barbarians/workers/soldier/conf:2
+msgid "Soldier"
+msgstr "Voják"
+
+#: ../tribes/barbarians/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Kameník"
+
+#: ../tribes/barbarians/workers/trainer/conf:2
+msgid "Trainer"
+msgstr "Cvičitel"
