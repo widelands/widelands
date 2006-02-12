@@ -210,6 +210,6 @@ void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stoc
 	char buf[32];
 	snprintf(buf, sizeof(buf), "%i", stock);
 
-	g_fh->draw_string(dst, UI_FONT_ULTRASMALL, UI_FONT_SMALL_CLR,  x+WARE_MENU_PIC_W, y+WARE_MENU_PIC_H, buf, Align_Right);
+	g_fh->draw_string(dst, UI_FONT_ULTRASMALL, UI_FONT_SMALL_CLR,  x+WARE_MENU_PIC_W, y+WARE_MENU_PIC_H -4, buf, Align_Right);
 }
 
