@@ -413,10 +413,12 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		//load music from tempfile
 		Mix_Chunk *m = Mix_LoadWAV(tempfile);
 
-		//remove the tempfile
+		//remove the tempfile        
+
 		SDL_RWclose(target);
 		SDL_FreeRW(target);
 
+        
 		//do *NOT* SDL_FreeRW() (see docs)
 
 		fclose(f);
