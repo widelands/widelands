@@ -77,6 +77,7 @@ UIRadiobutton::~UIRadiobutton()
 void UIRadiobutton::clicked()
 {
    m_group->set_state(m_id);
+	play_click();
 }
 
 

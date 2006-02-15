@@ -618,6 +618,15 @@ void UIPanel::die()
 	}
 }
 
+/**
+ * Wrapper around Sound_Handler::play_fx() to prevent having to include
+ * sound_handler.h in every UI subclass just for playing a 'click'
+ */
+void UIPanel::play_click()
+{
+	g_sound_handler.play_fx("click", NO_POSITION, PRIO_ALWAYS_PLAY);
+}
+
 /** [private]
  *
  * Recursively walk the panel tree, killing panels that are marked for death

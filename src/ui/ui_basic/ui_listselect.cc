@@ -309,6 +309,7 @@ bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)
       
       m_last_selection=m_selection;
       m_last_click_time=time;
+		play_click();
 
       y = (y + m_scrollpos) / get_lineheight();
       if (y >= 0 && y < (int)m_entries.size())

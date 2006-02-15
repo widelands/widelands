@@ -219,6 +219,7 @@ bool UIButton::handle_mouseclick(uint btn, bool down, int x, int y)
       if (m_pressed) {
          grab_mouse(false);
          if (m_highlighted && m_enabled) {
+				play_click();
             clicked.call();
             clickedid.call(m_id);
          }

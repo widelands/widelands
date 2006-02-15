@@ -309,6 +309,7 @@ bool UIIcon_Grid::handle_mouseclick(uint btn, bool down, int x, int y)
 				if (is_persistant())
 					set_selection(hl);
 				clicked.call(hl);
+				play_click();
 			}
 
 			m_clicked = -1;

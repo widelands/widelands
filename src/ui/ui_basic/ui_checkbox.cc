@@ -196,4 +196,5 @@ Checkbox
 void UICheckbox::clicked()
 {
 	set_state(!get_state());
+	play_click();
 }
