@@ -256,6 +256,7 @@ else:
 
 if PROFILE:
 	env.Append(CCFLAGS=' -pg -fprofile-arcs')
+	env.Append(LINKFLAGS=' -pg -fprofile-arcs')
 
 if OPTIMIZE:
 	# heavy optimization
@@ -404,6 +405,7 @@ else:
 	print 'SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
 
 env.Append(CCFLAGS=' -pipe -Wall -Wno-comment')
+#env.Append(CCFLAGS=' -v') #TODO: remove me, I shouldn't be here
 
 env=conf.Finish()
 
