@@ -131,6 +131,7 @@ IMAGE_PATH             =
 INPUT_FILTER           = 
 FILTER_PATTERNS        = 
 FILTER_SOURCE_FILES    = NO
+BUILTIN_STL_SUPPORT    = YES
 #---------------------------------------------------------------------------
 # configuration options related to source browsing
 #---------------------------------------------------------------------------

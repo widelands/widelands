@@ -21,7 +21,6 @@
 #ifndef __S__PANEL_H
 #define __S__PANEL_H
 
-#include <string>
 #include "ui_object.h"
 #include "../../font_handler.h"
 #include "../../constants.h"

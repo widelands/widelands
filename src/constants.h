@@ -97,8 +97,9 @@
 #define STATISTICS_SAMPLE_TIME 30000
 
 /** Shorthand because the original is a lot to type *and* harder to read
- * This is a #define instead of a typedef to avoid including constants.h
- * in lots of files*/
+ * Use #define and not typedef so that we don't need to #include<string> here.
+ * This would cause <string> to included in every constants.h "user" !
+ */
 #define SSS_T std::string::size_type
 
 #endif

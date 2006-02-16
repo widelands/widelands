@@ -32,27 +32,35 @@
 
 using namespace std;
 
+/// Predefined priorities for easy reading
+/// \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
+//@{
+#define PRIO_ALWAYS_PLAY 255
+#define PRIO_ALLOW_MULTIPLE 128
+#define PRIO_MEDIUM 63
+//@}
+
 class Sound_Handler;
 ///\file
 
-/** Reference to the global \ref Sound_Handler object
+/** The global \ref Sound_Handler object
+ * 
  * The sound handler is a static object because otherwise it'd be quite
- * difficult to pass the --nosound command line option
- */
+ * difficult to pass the --nosound command line optio
+*/
 extern Sound_Handler g_sound_handler;
 
 /** A collection of several pieces of music meant for the same situation.
  *
  * A Songset encapsulates a number of interchangeable pieces of (background) 
  * music, e.g. all songs that might be played while the main menu is being
- * shown. It is possible to select access those songs one after another or in
+ * shown. It is possible to access those songs one after another or in
  * random order. The fact that a Songset really contains several different
  * songs is hidden from the outside.\n
  * A songset does not contain the audio data itself, to not use huge amounts of
- * memory.
- * Instead, each song is loaded on request and the data is free()d afterwards.
- */
-
+ * memory. Instead, each song is loaded on request and the data is free()d
+ * afterwards
+*/
 class Songset
 {
 public:
@@ -61,65 +69,61 @@ public:
 
 	void add_song(const string filename);
 	Mix_Music *get_song();
-	bool empty()
-	{
-		return m_songs.empty();
-	}
+	bool empty() {return m_songs.empty();}
 
 protected:
 	/// The filenames of all configured songs
 	vector < string > m_songs;
+
 	/** Pointer to the song that is currently playing (actually the one that
 	 * was last started); needed for linear playback
-	 */
+	*/
 	vector < string >::iterator m_current_song;
-
-	/** File reader object to fetch songs from disc when they start playing.
-	 * Do not create this for each load, it's a major hassle to code
-	 * \sa m_rwops
-	 */
-	FileRead *m_fr;
 
 	/// The current song
 	Mix_Music *m_m;
 
 	/** File reader object to fetch songs from disc when they start playing.
-	 * Do not create this for each load, it's a major hassle to code
-	 * \sa m_fr
-	 */
+	 * Do not create this for each load, it's a major hassle to code.
+	 * \sa m_rwops	
+	 * \sa get_song()
+	*/
+	FileRead *m_fr;
+
+	/** RWops object to fetch songs from disc when they start playing.
+	 * Do not create this for each load, it's a major hassle to code.
+	 * \sa m_fr 
+	 * \sa get_song()
+	*/
 	SDL_RWops *m_rwops;
 };
 
-/** A collection of several soundeffects meant for the same event.
+/** A collection of several sound effects meant for the same event.
  *
  * An FXset encapsulates a number of interchangeable sound effects, e.g.
  * all effects that might be played when a blacksmith is happily hammering away.
- * It is possible to select the effects on after another or in random order.
+ * It is possible to select the effects one after another or in random order.
  * The fact that an FXset really contains several different effects is hidden
- * from the outside.
- */
-
+ * from the outside
+*/
 class FXset
 {
 	friend class Sound_Handler;
 public:
-	FXset(Uint8 prio = 127);
+	FXset(Uint8 prio = PRIO_MEDIUM);
 	~FXset();
 
-	void add_fx(Mix_Chunk * fx, Uint8 prio = 127);
+	void add_fx(Mix_Chunk * fx, Uint8 prio = PRIO_MEDIUM);
 	Mix_Chunk *get_fx();
-	bool empty()
-	{
-		return m_fxs.empty();
-	}
+	bool empty() {return m_fxs.empty();}
 
 protected:
 	/// The collection of sound effects
 	vector < Mix_Chunk * >m_fxs;
 
-	/** When the effect was played the last time (milliseconds since sdl
+	/** When the effect was played the last time (milliseconds since SDL
 	 * initialization). Set via SDL_GetTicks()
-	 */
+	*/
 	Uint32 m_last_used;
 
 	/** How important is it to play the effect even when others are running
@@ -132,10 +136,7 @@ protected:
 	 * be playing at any time
 	 * 
 	 * Value 255: always play; unconditional
-	 * 
-	 * Range from 0 (do not play at all if anything else is happening) to
-	 * 255 (always play, regardless of other considerations)
-	 */
+	*/
 	Uint8 m_priority;
 };
 
@@ -147,7 +148,8 @@ protected:
  * forever), the only backend supported is SDL_mixer.
  *
  * The Sound_Handler is (obviously) a singleton object and is therefore stored
- * in a global variable to be easily accessible by other classes.
+ * in a global variable \ref g_sound_handler to be easily accessible by other
+ * classes.
  *
  * \par Music
  *
@@ -159,7 +161,7 @@ protected:
  *
  * Other classes can request to start or stop playing a certain songset,
  * changing the songset is provided as a convenience method. It is also
- * possible to switch to some other piece inside the same songset - but here
+ * possible to switch to some other piece inside the same songset - but there
  * is \e no control over \e which song out of a songset gets played. The
  * selection is either linear (the order in which the songs were loaded) or
  * completely random.
@@ -172,24 +174,32 @@ protected:
  * must reside directly in the directory 'sounds' and must be named 
  * SONGSET_XX.??? where XX is a number from 00 to 99 and ??? is a filename
  * extension. All subdirectories of 'sounds' will be considered to contain
- * ingame music. The subdirectories and the music found in them can be
- * arbitrarily named.
+ * ingame music. The the music and sub-subdirectories found in them can be
+ * arbitrarily named. This means: everything below sound/ingame_01 can have
+ * any name you want. All audio files below sound/ingame_01 will be played as
+ * ingame music.
+ * 
+ * \note You should only be using the ogg format for music.
  *
  * \par Sound effects
  *
  * Buildings and workers can use sound effects in their programs. To do so, use 
- * e.g. "playFX blacksmith_hammer" The conf file parser will then load one or
- * more audio files for 'hammering blacksmith' from the building's/worker's
- * configuration directory and store them in an \ref FXset for later access,
- * similar to music stored in songsets. For effects, however, the selection
- * is always random.
+ * e.g. "playFX blacksmith_hammer" in the appropriate conf file. The conf file
+ * parser will then load one or more audio files for 'hammering blacksmith'
+ * from the building's/worker's configuration directory and store them in an 
+ * \ref FXset for later access, similar to the way music is stored in songsets.
+ * For effects, however, the selection is always random. Sound effects are kept
+ * in memory at all times, to avoid delays from disk access.
  *
- * The above sound effects are synchronized with a work program. It's also 
- * possible to have sound effects that are synchronized with a building/worker
- * \e animation. For more information about this look at class
+ * The abovementioned sound effects are synchronized with a work program. It's
+ * also possible to have sound effects that are synchronized with a 
+ * building/worker \e animation. For more information about this look at class
  * \ref AnimationManager.
+ * 
+ * \note You should only be using the ogg format for sound effects.
  *
  * \par Usage of callbacks
+ * \anchor usage_of_callbacks
  *
  * SDL_mixer's way to notify the application of important sound events, e.g. 
  * that a song is finished, are callbacks. While callbacks in and of themselves
@@ -199,7 +209,8 @@ protected:
  * Problem 1:\n
  * Callbacks must use global(or static) functions \e but \e not normal member 
  * functions of a class. If you must know why: ask google. But how can a
- * static function share data with it's own class? Usually not at all. 
+ * static function share data with an instance of it's own class? Usually not at
+ * all.\n
  * Fortunately, \ref g_sound_handler already is a global variable,
  * and therefore accessible to global functions. So problem 1 disappears.
  *
@@ -216,8 +227,9 @@ protected:
  * locking.
  *
  * The only way around that resctriction is to send an SDL event(SDL_USEREVENT) 
- * from the callback (non-sound SDL functions \e can be used) and handle the
- * event inside the main loop (system.cc).
+ * from the callback (non-sound SDL functions \e can be used). Then, later,
+ * the main event loop (system.cc) will process this event \e but \e not in 
+ * SDL_mixer's context, so locking is no problem.
  *
  * Yes, that's just a tad ugly.
  *
@@ -229,34 +241,43 @@ protected:
  * Unfortunately, Mix_FadeOutMusic will return immediately - but, as the music
  * is not yet stopped, starting a new piece of background music will block. So
  * the choice is to block (directly) after ordering to fade out or indirectly
- * when starting the next piece. Now imagine a fadeout-time of 30 seconds
- * ......
+ * when starting the next piece. Now imagine a fadeout-time of 30 seconds ...
+ * and the user who is waiting for the next screen ......
  *
- * The solution is to work asynchronously which is doable, as we already use a 
+ * The solution is to work asynchronously, which is doable, as we already use a 
  * callback to tell us when the audio is \e completely finished. So in 
  * \ref stop_music (or \ref change_music ) we just start the fadeout. The
  * callback then tells us when the audio has actually stopped and we can start
- * the next music. To differentiate between the to states we can just take a
- * peek with Mix_MusicPlaying if there is music running. To make sure that
+ * the next music. To differentiate between the two states we can just take a
+ * peek with Mix_MusicPlaying() if there is music running. To make sure that
  * nothing bad happens, that check is not only required in \ref change_music
  * but also in \ref start_music, which causes the seemingly recursive call to
  * change_music from inside start_music. It really is not recursive, trust 
  * me :-)
- *
- * \todo FX should have a priority (e.g. fights are more important than 
- * fishermen)
- * \todo Sound_Handler must not play *all* FX but only a select few
- */
-
+ * 
+ * \todo Describe priorities
+ * \todo Describe play-or-not algo
+ * \todo Internationalized sound effects/music
+ * \todo Environmental sound effects (e.g. wind)
+*/
 class Sound_Handler
 {
-
 	friend class Songset;
-
 	friend class FXset;
 public:
+	/// How many milliseconds in the past to consider for \ref play_or_not()
+#define SLIDING_WINDOW_SIZE 300000
+
+	/// Non-existent 'positions'(=logical map coordinates) with special meaning
+	//@{
+	/// Explicit "no position given on purpose"
 #define NO_POSITION Coords(-1,-1)
+	/// No position given (by accident?); like a NULL pointer
 #define INVALID_POSITION Coords(-2,-2)
+	//@}
+
+	/// Constants for event loop interaction
+	/// \sa usage_of_callbacks
 	enum { SOUND_HANDLER_CHANGE_MUSIC = 1 };
 
 	Sound_Handler();
@@ -268,12 +289,10 @@ public:
 
 	void load_fx(const string dir, const string basename,
 	             const bool recursive = false);
-	bool play_or_not(const string fx_name,const int stereo_position,
-	                 const uint priority);
 	void play_fx(const string fx_name, Coords map_position=INVALID_POSITION,
-	             const uint priority=127);
+	             const uint priority=PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 	void play_fx(const string fx_name, const int stereo_position,
-	             const uint priority=127);
+	             const uint priority=PRIO_ALLOW_MULTIPLE+PRIO_MEDIUM);
 
 	void register_song(const string dir, const string basename,
 	                   const bool recursive = false);
@@ -284,6 +303,7 @@ public:
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int channel);
+	void handle_channel_finished(uint channel);
 
 	bool get_disable_music();
 	bool get_disable_fx();
@@ -291,26 +311,30 @@ public:
 	void set_disable_fx(bool disable);
 
 	/** The game logic where we can get a mapping from logical to screen
-	 * coordinates and vice versa
-	 */
+	 * coordinates and vice vers
+	*/
 	Game *m_the_game;
 
-	/** Only for buffering command line option --nosound until real
+	/** Only for buffering the command line option --nosound until real
 	 * intialization is done
 	 * \see Sound_Handler::Sound_Handler()
 	 * \see Sound_Handler::init()
-	 */
+	 * \todo This is ugly. Find a better way to do it
+	*/
 	bool m_nosound;
-	
+
 	/** Can \ref m_disable_music and \ref m_disable_fx be changed?
 	 * true = they mustn't be changed (e.g. because hardware is missing)
-	 * false = can be changed at user request*/
+	 * false = can be changed at user request
+	*/
 	bool m_lock_audio_disabling;
 
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
 	void load_one_fx(const string filename, const string fx_name);
 	int stereo_position(const Coords position);
+	bool play_or_not(const string fx_name,const int stereo_position,
+	                 const uint priority);
 
 	/// Whether to disable background music
 	bool m_disable_music;
@@ -319,8 +343,8 @@ protected:
 
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside 
-	 * their \ref FXset, of course)
-	 */
+	 * their \ref FXset, of course
+	*/
 	bool m_random_order;
 
 	/// A collection of songsets
@@ -328,19 +352,19 @@ protected:
 
 	/// A collection of effect sets
 	map < string, FXset * >m_fxs;
-	
-	/// List of currently playing effects, also the channel each one is on
-	map <string, int>m_active_fx;
+
+	/// List of currently playing effects, and the channel each one is on
+	map<uint, string>m_active_fx;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now
-	 */
+	*/
 	string m_current_songset;
 
 	/** The random number generator.
-	 * \note The RNG here *must* not be the same as the one for the game 
+	 * \note The RNG here \e must \e not be the same as the one for the game 
 	 * logic!
-	 */
+	*/
 	RNG m_rng;
 };
 

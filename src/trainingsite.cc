@@ -496,9 +496,10 @@ void TrainingSite::drop_unupgradable_soldiers(Game * g)
 
 /**
  * Advance the program state (if a program is running) or call the training program
- * The real training is done by a normal \ref ProdutionProgram that gets executed by \ref ProductionSite::program_act()
- * like all other production programs.
- */
+ * The real training is done by a normal \ref ProductionProgram that gets
+ * executed by \ref ProductionSite::program_act() like all other production
+ * programs.
+*/
 void TrainingSite::act(Game * g, uint data)
 {
 	assert(g);
@@ -779,7 +780,7 @@ void TrainingSite::sub_pri(tAttribute atr)
 
 /**
  * Change the soldier capacity at the trainingsite.
- * The site's minimum and maximum capacity will be observed, independent of \ref how.
+ * \post Minimum and maximum capacity will be observed.
  * \param how	number to add/subtract from the current capacity
  * \note Unlike the influence-defining military buildings, a training site can actually be empty of soldiers.
  * 
