@@ -199,7 +199,6 @@ protected:
  * \note You should only be using the ogg format for sound effects.
  *
  * \par Usage of callbacks
- * \anchor usage_of_callbacks
  *
  * SDL_mixer's way to notify the application of important sound events, e.g. 
  * that a song is finished, are callbacks. While callbacks in and of themselves
@@ -277,7 +276,7 @@ public:
 	//@}
 
 	/// Constants for event loop interaction
-	/// \sa usage_of_callbacks
+	//// \sa "Usage of callbacks" TODO: how do I get this link?
 	enum { SOUND_HANDLER_CHANGE_MUSIC = 1 };
 
 	Sound_Handler();

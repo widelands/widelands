@@ -196,7 +196,8 @@ opts.AddOptions(
 	)
 
 env=Environment(options=opts)
-print 'Platform:', env['PLATFORM']
+print 'Platform:  ', env['PLATFORM']
+print 'Build type:', env['build']
 
 if env['PLATFORM']!='win32':
 	env.Append(PATH='/usr/bin /usr/local/bin ')
