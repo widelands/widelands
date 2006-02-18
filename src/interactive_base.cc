@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,10 +51,21 @@ Initialize
 Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
   UIPanel(0, 0, 0, get_xres(), get_yres())
 {
-	// Switch to the new graphics system now, if necessary
-   Section *s = g_options.pull_section("global");
+	{
+		Section & s = *g_options.pull_section("global");
+		set_border_snap_distance(s.get_int("border_snap_distance", 0));
+		set_panel_snap_distance (s.get_int("panel_snap_distance",  0));
+		set_snap_windows_only_when_overlapping
+			(s.get_bool("snap_windows_only_when_overlapping", false));
+		set_dock_windows_to_edges(s.get_bool("dock_windows_to_edges", false));
 
-	Sys_InitGraphics(get_xres(), get_yres(), s->get_int("depth",16), s->get_bool("fullscreen", false));
+		// Switch to the new graphics system now, if necessary
+		Sys_InitGraphics
+			(get_xres(), get_yres(),
+			 s.get_int("depth", 16), s.get_bool("fullscreen", false));
+
+		m_show_workarea_preview = s.get_bool("workareapreview", false);
+	}
 
    m_fsd.fieldsel_freeze = false;
    m_egbase=g;
@@ -64,8 +75,8 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 #ifdef DEBUG
    // Not in releases
 	m_display_flags = dfDebug;
-#endif 
-   
+#endif
+
 	m_lastframe = Sys_GetTime();
 	m_frametime = 0;
 	m_avg_usframetime = 0;
@@ -78,12 +89,11 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
    m_fsd.fieldsel_jobid=0;
    m_fsd.fieldsel_pic=g_gr->get_picture( PicMod_Game,  "pics/fsel.png" );
    m_fsd.fieldsel_radius=0;
-   
+
    m_road_buildhelp_overlay_jobid=0;
    m_jobid=0;
 	m_buildroad = false;
    m_road_build_player=0;
-	 m_show_workarea_preview = s->get_bool("workareapreview", false);
 }
 
 /*
@@ -196,27 +206,27 @@ void Interactive_Base::think()
 	m_avg_usframetime = ((m_avg_usframetime * 15) + (m_frametime * 1000)) / 16;
 	m_lastframe = curframe;
 
-   // If one of the arrow keys is pressed, 
+   // If one of the arrow keys is pressed,
    // scroll here
    const uint scrollval = 10;
 
    if(keyboard_free()) {
-      if(Sys_GetKeyState(KEY_UP)) 		
+      if(Sys_GetKeyState(KEY_UP))
          get_mapview()->set_rel_viewpoint(Point(0, -scrollval));
-      if(Sys_GetKeyState(KEY_DOWN)) 		
+      if(Sys_GetKeyState(KEY_DOWN))
          get_mapview()->set_rel_viewpoint(Point(0, scrollval));
-      if(Sys_GetKeyState(KEY_LEFT)) 		
+      if(Sys_GetKeyState(KEY_LEFT))
          get_mapview()->set_rel_viewpoint(Point(-scrollval, 0));
-      if(Sys_GetKeyState(KEY_RIGHT)) 		
+      if(Sys_GetKeyState(KEY_RIGHT))
          get_mapview()->set_rel_viewpoint(Point(scrollval, 0));
    }
-  
+
    // Call game logic here
    // The game advances
 	m_egbase->think();
-   
+
    // Update everythink so and so many milliseconds, to make sure the whole
-   // screen is synced ( another user may have done something, and the screen was 
+   // screen is synced ( another user may have done something, and the screen was
    // not redrawn )
    if( curframe & 1023 ) // % 1024
       need_complete_redraw();
@@ -481,7 +491,7 @@ void Interactive_Base::finish_build_road()
 		// awkward... path changes ownership
 		Path *path = new Path(*m_buildroad);
       if(m_egbase->is_game()) {
-         // Build the path as requested 
+         // Build the path as requested
 	 static_cast<Game*>(m_egbase)->send_player_build_road (m_road_build_player, path);
       } else {
          get_egbase()->get_player(m_road_build_player)->build_road(path);
@@ -522,7 +532,11 @@ bool Interactive_Base::append_build_road(Coords field)
 	Path path;
 	CheckStepRoad cstep(m_egbase->get_player(m_road_build_player), MOVECAPS_WALK, &m_buildroad->get_coords());
 
-	if (map->findpath(m_buildroad->get_end(), field, 0, &path, &cstep, Map::fpBidiCost) < 0)
+	if
+		(map->findpath
+		 (m_buildroad->get_end(), field, 0, path, cstep, Map::fpBidiCost)
+		 <
+		 0)
 		return false; // couldn't find a path
 
 	roadb_remove_overlay();

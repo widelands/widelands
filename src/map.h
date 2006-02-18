@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -160,23 +160,28 @@ public:
 
    // For overlays
    inline Overlay_Manager* get_overlay_manager() { return m_overlay_manager; }
+	Overlay_Manager & get_overlay_manager() const {return *m_overlay_manager;}
 
    // For loading
    Map_Loader* get_correct_loader(const char*);
    void cleanup(void);
 
    // for editor
-   void create_empty_map(int w=64, int h=64, std::string worldname = std::string("greenland"));
+	void create_empty_map
+		(const uint w = 64,
+		 const uint h = 64,
+		 const std::string worldname = std::string("greenland"));
 
    void load_graphics();
    void recalc_whole_map();
    void recalc_for_field_area(Coords coords, int radius);
    void recalc_default_resources(void);
 
-	void set_nrplayers(uint nrplayers);
+	void set_nrplayers(const uint nrplayers);
 
-	void set_starting_pos(uint plnum, Coords c);
-	inline const Coords &get_starting_pos(uint plnum) { return m_starting_pos[plnum-1]; }
+	void set_starting_pos(const uint plnum, const Coords);
+	Coords get_starting_pos(const uint plnum) const
+	{return m_starting_pos[plnum - 1];}
 
 	void set_filename(const char *string);
 	void set_author(const char *string);
@@ -191,8 +196,8 @@ public:
 	inline const char* get_description(void) { return m_description; }
 	inline const char* get_world_name(void) { return m_worldname; }
 	inline ushort get_nrplayers(void) { return m_nrplayers; }
-	inline uint get_width(void) { return m_width; }
-	inline uint get_height(void) { return m_height; }
+	uint get_width() const {return m_width;}
+	uint get_height() const {return m_height;}
 	inline World* get_world(void) { return m_world; }
    // The next few functions are only valid
    // when the map is loaded as an scenario.
@@ -201,51 +206,73 @@ public:
    void set_scenario_player_tribe(uint i, std::string);
    void set_scenario_player_name(uint i, std::string);
 
-	BaseImmovable *get_immovable(Coords coord);
-	uint find_bobs(Coords coord, uint radius, std::vector<Bob*> *list,
-								const FindBob &functor = FindBobAlwaysTrue());
-	uint find_reachable_bobs(Coords coord, uint radius, std::vector<Bob*> *list,
-								const CheckStep* checkstep, const FindBob &functor = FindBobAlwaysTrue());
-	uint find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
-								const FindImmovable &functor = FindImmovableAlwaysTrue());
-	uint find_reachable_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
-								const CheckStep* checkstep, const FindImmovable &functor = FindImmovableAlwaysTrue());
-	uint find_fields(Coords coord, uint radius, std::vector<Coords>* list,
-								const FindField& functor);
-	uint find_reachable_fields(Coords coord, uint radius, std::vector<Coords>* list,
-								const CheckStep* checkstep, const FindField& functor);
+	BaseImmovable * get_immovable(const Coords) const;
+	uint find_bobs
+		(const Coords,
+		 const uint radius,
+		 std::vector<Bob *> * list,
+		 const FindBob & functor = FindBobAlwaysTrue());
+	uint find_reachable_bobs
+		(const Coords coord,
+		 const uint radius,
+		 std::vector<Bob *> * list,
+		 const CheckStep &,
+		 const FindBob & functor = FindBobAlwaysTrue());
+	uint find_immovables
+		(const Coords coord,
+		 const uint radius,
+		 std::vector<ImmovableFound> * list,
+		 const FindImmovable & = FindImmovableAlwaysTrue());
+	uint find_reachable_immovables
+		(const Coords,
+		 const uint radius,
+		 std::vector<ImmovableFound> * list,
+		 const CheckStep &,
+		 const FindImmovable & = FindImmovableAlwaysTrue());
+	uint find_fields
+		(const Coords coord,
+		 const uint radius,
+		 std::vector<Coords> * list,
+		 const FindField & functor);
+	uint find_reachable_fields
+		(const Coords coord,
+		 const uint radius,
+		 std::vector<Coords>* list,
+		 const CheckStep &,
+		 const FindField &);
 
 	// Field logic
-	inline Field* get_field(const Coords c);
-	inline FCoords get_fcoords(const Coords c);
-	inline void normalize_coords(Coords *c);
-	inline FCoords get_fcoords(Field * const f);
-	inline void get_coords(Field * const f, Coords *c) { *c=get_fcoords(f); }
+	Field * get_field(const Coords) const;
+	const Field & get_field(const uint x, const uint y) const;
+	FCoords get_fcoords(const Coords) const;
+	void normalize_coords(Coords *) const;
+	FCoords get_fcoords(Field &) const;
+	void get_coords(Field & f, Coords & c) const {c = get_fcoords(f);}
 
-	int calc_distance(Coords a, Coords b);
-	int is_neighbour(const Coords start, const Coords end);
+	int calc_distance(const Coords, const Coords) const;
+	int is_neighbour(const Coords, const Coords) const;
 
-	int calc_cost_estimate(Coords a, Coords b);
-	int calc_cost(int slope);
-	int calc_cost(Coords coords, int dir);
-	int calc_bidi_cost(Coords coords, int dir);
-	void calc_cost(const Path &path, int *forward, int *backward);
+	int calc_cost_estimate(const Coords, const Coords) const;
+	int calc_cost(const int slope) const;
+	int calc_cost(const Coords, const int dir) const;
+	int calc_bidi_cost(const Coords, const int dir) const;
+	void calc_cost(const Path &, int * forward, int * backward) const;
 
-	inline void get_ln(const Coords f, Coords * const o);
-	inline void get_ln(const FCoords f, FCoords * const o);
-	inline void get_rn(const Coords f, Coords * const o);
-	inline void get_rn(const FCoords f, FCoords * const o);
-	inline void get_tln(const Coords f, Coords * const o);
-	inline void get_tln(const FCoords f, FCoords * const o);
-	inline void get_trn(const Coords f, Coords * const o);
-	inline void get_trn(const FCoords f, FCoords * const o);
-	inline void get_bln(const Coords f, Coords * const o);
-	inline void get_bln(const FCoords f, FCoords * const o);
-	inline void get_brn(const Coords f, Coords * const o);
-	inline void get_brn(const FCoords f, FCoords * const o);
+	void get_ln (const  Coords,  Coords * const) const;
+	void get_ln (const FCoords, FCoords * const) const;
+	void get_rn (const  Coords,  Coords * const) const;
+	void get_rn (const FCoords, FCoords * const) const;
+	void get_tln(const  Coords,  Coords * const) const;
+	void get_tln(const FCoords, FCoords * const) const;
+	void get_trn(const  Coords,  Coords * const) const;
+	void get_trn(const FCoords, FCoords * const) const;
+	void get_bln(const  Coords,  Coords * const) const;
+	void get_bln(const FCoords, FCoords * const) const;
+	void get_brn(const  Coords,  Coords * const) const;
+	void get_brn(const FCoords, FCoords * const) const;
 
-	void get_neighbour(const Coords f, int dir, Coords * const o);
-	void get_neighbour(const FCoords f, int dir, FCoords * const o);
+	void get_neighbour(const  Coords, const int dir,  Coords * const) const;
+	void get_neighbour(const FCoords, const int dir, FCoords * const) const;
 
 	// Field/screen coordinates
 	FCoords calc_coords(Point pos);
@@ -257,21 +284,30 @@ public:
 	inline void get_save_pix(const Coords c, int *px, int *py);
 
 	// Pathfinding
-	int findpath(Coords start, Coords end, int persist, Path *path, const CheckStep* checkstep,
-						uint flags = 0);
+	int findpath
+		(Coords instart,
+		 Coords inend,
+		 const int persist,
+		 Path &,
+		 const CheckStep &,
+		 const uint flags = 0);
 
-	bool can_reach_by_water(Coords field);
+	/**
+	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
+	 * MOVECAPS_WALK and at least one of the neighbours has MOVECAPS_SWIM
+	 */
+	bool can_reach_by_water(const Coords) const;
 
    // change field heights
-   int change_field_height(Coords coords, int delta);
-   int set_field_height(Coords coords, int height);
+	int change_field_height(const Coords, const int delta);
+	int set_field_height(const Coords, const int height);
 
 	// change terrain of a field, recalculate buildcaps
    int change_field_terrain(Coords coords, int terrain, bool tdown, bool tright);
 
    /*
     * Get the a manager for registering or removing
-    * something 
+    * something
     */
    inline MapVariableManager* get_mvm( void ) { return m_mvm; }
    inline MapObjectiveManager* get_mom( void ) { return m_mom; }
@@ -281,7 +317,7 @@ public:
 
 
 private:
-	void set_size(uint w, uint h);
+	void set_size(const uint w, const uint h);
 	void load_world();
 
 	uint		m_nrplayers;		// # of players this map supports (!= Game's number of players)
@@ -306,10 +342,10 @@ private:
 
    MapVariableManager*       m_mvm;           // The mapvariable manager makes sure for handling all the variables
    MapObjectiveManager*      m_mom;           // The mapobjective manager lists all scenarios objectives.
-   MapEventChainManager*     m_mecm;           // The mapeventchain manager has a list of all event chains in this map 
-   MapTriggerManager*        m_mtm;            // The maptrigger manager 
-   MapEventManager*          m_mem;            // The mapevent manager 
-   
+   MapEventChainManager*     m_mecm;           // The mapeventchain manager has a list of all event chains in this map
+   MapTriggerManager*        m_mtm;            // The maptrigger manager
+   MapEventManager*          m_mem;            // The mapevent manager
+
    struct Extradata_Info {
       enum Type {
          PIC,
@@ -320,17 +356,18 @@ private:
    };
    std::vector<Extradata_Info> m_extradatainfos; // Only for caching of extradata for writing and reading
 
-	void recalc_brightness(FCoords coords);
-	void recalc_fieldcaps_pass1(FCoords coords);
-	void recalc_fieldcaps_pass2(FCoords coords);
-   void check_neighbour_heights(FCoords coords, int* area);
+	void recalc_brightness(FCoords);
+	void recalc_fieldcaps_pass1(FCoords);
+	void recalc_fieldcaps_pass2(FCoords);
+	void check_neighbour_heights(FCoords, int * area);
 	void increase_pathcycle();
 
 	template<typename functorT>
-	void find_reachable(Coords coord, uint radius, const CheckStep* checkstep, functorT& functor);
+		void find_reachable
+		(const Coords, const uint radius, const CheckStep &, functorT &);
 
 	template<typename functorT>
-	void find_radius(Coords coord, uint radius, functorT& functor);
+		void find_radius(const Coords, const uint radius, functorT &) const;
 };
 
 // FindImmovable functor
@@ -607,17 +644,20 @@ Field arithmetics
 ==============================================================================
 */
 
-inline Field* Map::get_field(const Coords c)
+inline Field * Map::get_field(const Coords c) const
 {
 	return &m_fields[c.y*m_width + c.x];
 }
 
-inline FCoords Map::get_fcoords(const Coords c)
+inline const Field & Map::get_field(const uint x, const uint y) const
+{return m_fields[y * m_width + x];}
+
+inline FCoords Map::get_fcoords(const Coords c) const
 {
 	return FCoords(c, get_field(c));
 }
 
-inline void Map::normalize_coords(Coords* c)
+inline void Map::normalize_coords(Coords * c) const
 {
 	if (c->x < 0) {
 		do { c->x += m_width; } while(c->x < 0);
@@ -633,20 +673,12 @@ inline void Map::normalize_coords(Coords* c)
 }
 
 
-/** get_coords
- *
+/**
  * Calculate the field coordates from the pointer
  */
-inline FCoords Map::get_fcoords(Field * const f)
-{
-	int i = f - m_fields;
-	FCoords fc;
-	
-	fc.x = i % m_width;
-	fc.y = i / m_width;
-	fc.field = f;
-	
-	return fc;
+inline FCoords Map::get_fcoords(Field & f) const {
+	const int i = &f - m_fields;
+	return FCoords(i % m_width, i / m_width, &f);
 }
 
 
@@ -658,14 +690,14 @@ inline FCoords Map::get_fcoords(Field * const f)
  * Note: Input coordinates are passed as value because we have to allow
  *       usage get_XXn(foo, &foo).
  */
-inline void Map::get_ln(const Coords f, Coords * const o)
+inline void Map::get_ln(const Coords f, Coords * const o) const
 {
 	o->y = f.y;
 	o->x = f.x-1;
 	if (o->x < 0) o->x += m_width;
 }
 
-inline void Map::get_ln(const FCoords f, FCoords * const o)
+inline void Map::get_ln(const FCoords f, FCoords * const o) const
 {
 	o->y = f.y;
 	o->x = f.x-1;
@@ -673,14 +705,14 @@ inline void Map::get_ln(const FCoords f, FCoords * const o)
 	if (o->x < 0) { o->x += m_width; o->field += m_width; }
 }
 
-inline void Map::get_rn(const Coords f, Coords * const o)
+inline void Map::get_rn(const Coords f, Coords * const o) const
 {
 	o->y = f.y;
 	o->x = f.x+1;
 	if (o->x >= (int)m_width) o->x = 0;
 }
 
-inline void Map::get_rn(const FCoords f, FCoords * const o)
+inline void Map::get_rn(const FCoords f, FCoords * const o) const
 {
 	o->y = f.y;
 	o->x = f.x+1;
@@ -689,7 +721,7 @@ inline void Map::get_rn(const FCoords f, FCoords * const o)
 }
 
 // top-left: even: -1/-1  odd: 0/-1
-inline void Map::get_tln(const Coords f, Coords * const o)
+inline void Map::get_tln(const Coords f, Coords * const o) const
 {
 	o->y = f.y-1;
 	o->x = f.x;
@@ -700,7 +732,7 @@ inline void Map::get_tln(const Coords f, Coords * const o)
 	}
 }
 
-inline void Map::get_tln(const FCoords f, FCoords * const o)
+inline void Map::get_tln(const FCoords f, FCoords * const o) const
 {
 	o->y = f.y-1;
 	o->x = f.x;
@@ -714,7 +746,7 @@ inline void Map::get_tln(const FCoords f, FCoords * const o)
 }
 
 // top-right: even: 0/-1  odd: +1/-1
-inline void Map::get_trn(const Coords f, Coords * const o)
+inline void Map::get_trn(const Coords f, Coords * const o) const
 {
 	o->x = f.x;
 	if (f.y & 1) {
@@ -725,7 +757,7 @@ inline void Map::get_trn(const Coords f, Coords * const o)
 	if (o->y < 0) { o->y += m_height; }
 }
 
-inline void Map::get_trn(const FCoords f, FCoords * const o)
+inline void Map::get_trn(const FCoords f, FCoords * const o) const
 {
 	o->x = f.x;
 	o->field = f.field - m_width;
@@ -739,7 +771,7 @@ inline void Map::get_trn(const FCoords f, FCoords * const o)
 }
 
 // bottom-left: even: -1/+1  odd: 0/+1
-inline void Map::get_bln(const Coords f, Coords * const o)
+inline void Map::get_bln(const Coords f, Coords * const o) const
 {
 	o->y = f.y+1;
 	o->x = f.x;
@@ -750,7 +782,7 @@ inline void Map::get_bln(const Coords f, Coords * const o)
 	}
 }
 
-inline void Map::get_bln(const FCoords f, FCoords * const o)
+inline void Map::get_bln(const FCoords f, FCoords * const o) const
 {
 	o->y = f.y + 1;
 	o->x = f.x;
@@ -764,7 +796,7 @@ inline void Map::get_bln(const FCoords f, FCoords * const o)
 }
 
 // bottom-right: even: 0/+1  odd: +1/+1
-inline void Map::get_brn(const Coords f, Coords * const o)
+inline void Map::get_brn(const Coords f, Coords * const o) const
 {
 	o->x = f.x;
 	if (f.y & 1) {
@@ -775,7 +807,7 @@ inline void Map::get_brn(const Coords f, Coords * const o)
 	if (o->y >= (int)m_height) { o->y = 0; }
 }
 
-inline void Map::get_brn(const FCoords f, FCoords * const o)
+inline void Map::get_brn(const FCoords f, FCoords * const o) const
 {
 	o->x = f.x;
 	o->field = f.field + m_width;
@@ -838,10 +870,10 @@ next() returns false when no more fields are to be traversed.
 class MapRegion {
 public:
 	MapRegion() { }
-	MapRegion(Map* map, Coords coords, uint radius) { init(map, coords, radius); }
+	MapRegion(const Map* map, Coords coords, uint radius) { init(map, coords, radius); }
 	~MapRegion() { }
 
-	void init(Map* map, Coords coords, uint radius);
+	void init(const Map* map, Coords coords, uint radius);
 	bool next(FCoords* fc);
 	bool next(Coords* c);
 	Field* next();
@@ -853,7 +885,7 @@ private:
 		phaseLower,		// lower half
 	};
 
-	Map*		m_map;
+	const Map*		m_map;
 	Phase		m_phase;
 	uint		m_radius;		// radius of area
 	uint		m_row;			// # of rows completed in this phase

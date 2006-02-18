@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -128,7 +128,7 @@ Editor_Game_Base::~Editor_Game_Base() {
 	m_tribes.resize(0);
 
    m_battle_serials.resize(0);
-      
+
    memset (m_conquer_map, 0, sizeof (m_conquer_map));
 }
 
@@ -190,7 +190,7 @@ void Editor_Game_Base::unconquer_area(uchar playernr, Coords coords) {
 // BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
    // step 3 and 4: Need to reconquer the full map, so it's easier and faster to do only one loop because
    // of the use of an influence map, where the sorting of the m_conquer_info isn't important
-   for(i=0; i<m_conquer_info.size(); i++) 
+   for(i=0; i<m_conquer_info.size(); i++)
    {
       do_conquer_area(m_conquer_info[i].player, m_conquer_info[i].middle_point, m_conquer_info[i].area, false);
       do_conquer_area(m_conquer_info[i].player, m_conquer_info[i].middle_point, m_conquer_info[i].area, true);
@@ -253,10 +253,10 @@ int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
        method = 0;
    uint minx = std::min (std::min(abs(a.x - b.x), abs(a.x - b.x + w)), abs(a.x - b.x - w));
    uint miny = std::min (std::min(abs(a.y - b.y), abs(a.y - b.y + h)), abs(a.y - b.y - h));
-    
+
     // Now "std::max (minx, miny)" is the distance between the points
    influence = std::max (minx, miny);
-   
+
    if (method == 0)
    {
          // This method makes a "parabola" like x^4, but the maxium radius is MAX_RADIUS,
@@ -267,13 +267,13 @@ int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
          influence = MAX_RADIUS;
       else
          influence = MAX_RADIUS - influence;
-   
+
       influence = influence * influence * influence * influence;
    }
    else if (method == 1)
    {
       //    The function used here to calculate the influence is (d*(d-1))/2 + 1 and this
-      // functions returns something like: 1, 2, 4, 7, 11, 15, 21, 27 ... 
+      // functions returns something like: 1, 2, 4, 7, 11, 15, 21, 27 ...
       // Works well, but lacks with the bug of cleaning immovables ...
       influence = radius - influence + 1;
 
@@ -282,7 +282,7 @@ int Editor_Game_Base::calc_influence (Coords a, Coords b, int radius)
       else
          influence = ((influence*(influence-1))>>1) + 1;
    }
-       
+
    return influence;
 }
 
@@ -299,23 +299,23 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
 	MapRegion mr(m_map, coords, radius);
 	Field* f;
 
-   while((f = mr.next())) 
+   while((f = mr.next()))
    {
       Coords c;
       int influence;
-      
-      c = (Coords) m_map->get_fcoords(f);
+
+      c = (Coords) m_map->get_fcoords(*f);
 
       influence = calc_influence(c, coords, radius);
-      
+
          // This is for put a weight to every field, its equal to the next array:
          // 1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56, 67, 79, 92, 106, 121, 137, 154, 172 ... 1+(x*(x-1)/2)
          // This method will make harder to conquer an area already owner by any other player.
          // This don't have conflict with changing radius of conquer of an specific building, the only
          // that is needed to do is first: unconquer the area with inital values, second: reconquer the area
-         // with new values. Will be usefull to save this values at the building. 
+         // with new values. Will be usefull to save this values at the building.
          // -- RFerriz
-      if(conquer) 
+      if(conquer)
       {
           // Adds the influence
          m_conquer_map[playernr][c.x][c.y] += influence;
@@ -323,38 +323,38 @@ void Editor_Game_Base::do_conquer_area(uchar playernr, Coords coords, int radius
             // Else, do the things that should be done
          if (f->get_owned_by() == playernr)
             continue;
-         
-         if (!f->get_owned_by() && m_conquer_map[0][c.x][c.y] == playernr) 
+
+         if (!f->get_owned_by() && m_conquer_map[0][c.x][c.y] == playernr)
          {
             f->set_owned_by(playernr);
             m_conquer_map[0][c.x][c.y] = playernr;
-            player_field_notification (m_map->get_fcoords(f), GAIN);
+            player_field_notification (m_map->get_fcoords(*f), GAIN);
             continue;
          }
-         
+
            // See if we can get the own
 // BEGIN : If you wanna to disable the dinamic conquer (by influences) , comment this block
          if (m_conquer_map[playernr][c.x][c.y] > m_conquer_map[f->get_owned_by()][c.x][c.y])
          {
-            player_field_notification (m_map->get_fcoords(f), LOSE);
+	         player_field_notification (m_map->get_fcoords(*f), LOSE);
             f->set_owned_by (playernr);
             m_conquer_map[0][c.x][c.y] = playernr;
-            player_field_notification (m_map->get_fcoords(f), GAIN);
+            player_field_notification (m_map->get_fcoords(*f), GAIN);
          }
 // END : If you wanna to disable the dinamic conquer (by influences) , comment this block
-      } 
+      }
       else
       {
          m_conquer_map[playernr][c.x][c.y] -= influence;
 
          if(f->get_owned_by() != playernr)
             continue;
-         
+
          m_conquer_map[0][c.x][c.y] = 0;
 
             // ALWAYS set to 0. So is needed to call do_conquer_area with TRUE if you want to have the real
             // map of incluence
-         player_field_notification (m_map->get_fcoords(f), LOSE);
+         player_field_notification (m_map->get_fcoords(*f), LOSE);
          f->set_owned_by(0);
       }
    }
@@ -453,7 +453,7 @@ void Editor_Game_Base::add_player(int plnum, int type, const char* tribe, const 
 }
 
 /*
- * Load the given tribe into structure 
+ * Load the given tribe into structure
  */
 void Editor_Game_Base::manually_load_tribe(const char* tribe) {
 	uint i;
@@ -462,7 +462,7 @@ void Editor_Game_Base::manually_load_tribe(const char* tribe) {
 		if (!strcmp(m_tribes[i]->get_name(), tribe))
 			break;
 
-	if (i == m_tribes.size()) 
+	if (i == m_tribes.size())
 		m_tribes.push_back(new Tribe_Descr(tribe));
 }
 
@@ -647,7 +647,7 @@ Immovable *Editor_Game_Base::create_immovable(Coords c, int idx, Tribe_Descr* tr
 {
 	Immovable_Descr *descr;
 
-   if(!tribe) 
+   if(!tribe)
       descr = m_map->get_world()->get_immovable_descr(idx);
    else
       descr = tribe->get_immovable_descr(idx);
@@ -659,10 +659,10 @@ Immovable *Editor_Game_Base::create_immovable(Coords c, int idx, Tribe_Descr* tr
 Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name, Tribe_Descr* tribe)
 {
 	int idx;
-   
+
    if(!tribe)
       idx = m_map->get_world()->get_immovable_index(name.c_str());
-   else { 
+   else {
       idx = tribe->get_immovable_index(name.c_str());
    }
 
@@ -672,7 +672,7 @@ Immovable* Editor_Game_Base::create_immovable(Coords c, std::string name, Tribe_
 
 	return create_immovable(c, idx, tribe);
 }
-      
+
 Battle* Editor_Game_Base::create_battle ()
 {
    Battle* b = new Battle ();
@@ -687,7 +687,7 @@ Editor_Game_Base::get_save_player()
 
 Returns the correct player, creates it
 with the scenario data when he is not yet created
-This should only happen in the editor. 
+This should only happen in the editor.
 In the game, this is the same as get_player(). If it returns
 zero it means that this player is disabled in the game.
 ================
@@ -697,14 +697,14 @@ Player* Editor_Game_Base::get_safe_player(int n) {
    if(plr || is_game()) return plr;
 
    if(!plr) {
-      // Create this player, but check that 
-      // we are in the editor. In the game, all 
+      // Create this player, but check that
+      // we are in the editor. In the game, all
       // players are known from the beginning. In the
       // case of savegames, players must be set up
       // before this is ever called. Only in the editor
-      // players are not always initialized 
-     
-      assert(!is_game()); 
+      // players are not always initialized
+
+      assert(!is_game());
       add_player(n, Player::playerLocal, get_map()->get_scenario_player_tribe(n).c_str(), get_map()->get_scenario_player_name(n).c_str());
       get_player(n)->init(this, false);
    }
@@ -775,7 +775,7 @@ void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animatio
    // We do not flush the animations in the editor since all tribes are loaded and
    // animations can not change a lot, or?
    // TODO: check this when another world is needed
-   if(flush_animations) 
+   if(flush_animations)
       g_anim.flush();
    if(flush_graphics)
       g_gr->flush(0);
@@ -807,12 +807,12 @@ void Editor_Game_Base::cleanup_for_load(bool flush_graphics, bool flush_animatio
  *    Returns all the positions of MilitarySites (buildings that can be attacked) of
  * a given player. If the player has no buildings that can be attacked, rare, then
  * returns 0
- */   
-std::vector<Coords>* 
+ */
+std::vector<Coords>*
 Editor_Game_Base::get_attack_points(uchar player)
 {
    std::vector<Coords>* tmp = 0;
-   
+
    for (uint i = 0; i < m_conquer_info.size(); ++i)
    {
       if (m_conquer_info[i].player == player)
@@ -820,7 +820,7 @@ Editor_Game_Base::get_attack_points(uchar player)
          // First initialization
          if (!tmp)
             tmp = new std::vector<Coords>;
-         
+
          tmp->push_back (m_conquer_info[i].middle_point);
 
       }
@@ -840,22 +840,22 @@ Editor_Game_Base::get_attack_points(uchar player)
 void Editor_Game_Base::make_influence_map ()
 {
    log("Making influence map\n");
-   
+
    Coords c;
    int influence;
-            
+
       // Clean influce maps
    memset (m_conquer_map, 0, sizeof (m_conquer_map));
-      
-   for(uint i=0; i<m_conquer_info.size(); i++) 
+
+   for(uint i=0; i<m_conquer_info.size(); i++)
    {
          // First, update influence map of the player
       MapRegion mr(m_map,  m_conquer_info[i].middle_point, m_conquer_info[i].area);
       Field* f;
-         
-      while((f = mr.next())) 
+
+      while((f = mr.next()))
       {
-         c = (Coords) m_map->get_fcoords(f);
+         c = (Coords) m_map->get_fcoords(*f);
          influence = calc_influence(c, m_conquer_info[i].middle_point, m_conquer_info[i].area);
          m_conquer_map[m_conquer_info[i].player][c.x][c.y] += influence;
       }

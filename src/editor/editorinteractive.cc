@@ -69,14 +69,6 @@ construct editor sourroundings
 Editor_Interactive::Editor_Interactive(Editor *e) : Interactive_Base(e) {
    m_editor = e;
 
-   {
-	   Section & s = *g_options.pull_section("global");
-	   set_border_snap_distance(s.get_int("border_snap_distance", 10));
-	   set_panel_snap_distance (s.get_int("panel_snap_distance",  10));
-	   set_snap_windows_only_when_overlapping(s.get_bool("snap_windows_only_when_overlapping", false));
-	   set_dock_windows_to_edges(s.get_bool("dock_windows_to_edges", false));
-   }
-
    // Disable debug. it is no use for editor
 #ifndef DEBUG
    set_display_flag(Interactive_Base::dfDebug, false);

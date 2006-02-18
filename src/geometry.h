@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Wide Lands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,8 +127,33 @@ struct FCoords : public Coords {
 	Field		*field;
 
 	inline FCoords() { }
+
+	/**
+	 * Used in RenderTargetImpl::rendermap where this is first called, then the
+	 * coordinates are normalized and after that field is set.
+	 */
+	FCoords(const int nx, const int ny) : Coords(nx, ny) {}
+
 	inline FCoords(Coords nc, Field *nf) : Coords(nc), field(nf) { }
 	inline FCoords(int nx, int ny, Field *nf) : Coords(nx, ny), field(nf) { }
 };
+
+struct TCoords : public Coords {
+	enum TriangleIndex {D, R, None} t;
+	TCoords() {}
+	TCoords(const Coords C, const TriangleIndex T = None) : Coords(C), t(T) {}
+};
+
+struct Node_and_Triangle {
+	Node_and_Triangle() {}
+	Node_and_Triangle(const Coords Node, const TCoords Triangle)
+		: node(Node), triangle(Triangle) {}
+	Coords node;
+	TCoords triangle;
+};
+inline bool operator==(Node_and_Triangle a, Node_and_Triangle b)
+{return a.node == b.node and a.triangle == b.triangle;}
+inline bool operator!=(Node_and_Triangle a, Node_and_Triangle b)
+{return a.node != b.node or  a.triangle != b.triangle;}
 
 #endif /* GEOMETRY_H */

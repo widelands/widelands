@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by The Widelands Development Team
+ * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,13 +25,9 @@
 #include "interactive_base.h"
 #include "network.h" // For chat
 
-class CoordPath;
-class MiniMap;
-class Map_View;
 class Player;
 class UIMultiline_Textarea;
 class UITextarea;
-class UIWindow;
 
 /** class Interactive_Player
  *
@@ -46,7 +42,7 @@ class Interactive_Player : public Interactive_Base {
    public:
       struct Building_Stats {
          bool is_constructionsite;
-         Coords pos; 
+         Coords pos;
       };
       typedef std::vector<std::vector< Building_Stats > > BuildingStats ;
       struct General_Stats {
@@ -100,15 +96,15 @@ class Interactive_Player : public Interactive_Base {
 
       // for savegames
       void set_player_number(uint plrn);
-      
+
       // Visibility for drawing
       std::vector<bool>* get_visibility(void);
-     
+
       // For ware production statistics (only needed for the interactive player)
       void ware_produced(uint id);
       void next_ware_production_period( void );
       const std::vector<uint>* get_ware_production_statistics( int ware );
-     
+
       // For statistics mainly, we keep track of buildings
       void gain_immovable(PlayerImmovable* );
       void lose_immovable(PlayerImmovable* );
@@ -117,7 +113,7 @@ class Interactive_Player : public Interactive_Base {
 
       // For load
       virtual void cleanup_for_load( void );
-     
+
       // Chat messages
       bool show_chat_overlay( void ) { return m_do_chat_overlays; }
       void set_show_chat_overlay( bool t ) { m_do_chat_overlays = t; }
@@ -143,7 +139,7 @@ class Interactive_Player : public Interactive_Base {
 
       std::vector<uint> m_current_statistics;
       std::vector< std::vector<uint> > m_ware_productions;
-      uint  m_last_stats_update;    
+      uint  m_last_stats_update;
 
       BuildingStats m_building_stats;
       std::vector< General_Stats > m_general_stats;

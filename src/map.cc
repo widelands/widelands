@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,13 +39,13 @@
  */
 std::string g_MapVariableCallback( std::string str, void* data ) {
    Map* map = (Map*)data;
-   if(!map) 
+   if(!map)
       return (std::string("UNKNOWN:") + str ).c_str();
-   
+
    MapVariable* var = map->get_mvm()->get_variable(str.c_str());
-   if(!var) 
+   if(!var)
       return (std::string("UNKNOWN:") + str ).c_str();
-   else 
+   else
       return var->get_string_representation();
 }
 
@@ -370,7 +370,7 @@ void Map::cleanup(void) {
 
    if(m_overlay_manager)
       m_overlay_manager->cleanup();
-   
+
    delete m_mom;
    m_mom = new MapObjectiveManager();
 
@@ -378,9 +378,9 @@ void Map::cleanup(void) {
       get_mecm()->delete_eventchain( get_mecm()->get_eventchain_by_nr( 0 )->get_name() );
    get_mem()->delete_unreferenced_events();
    get_mtm()->delete_unreferenced_triggers();
-   
+
    assert(!get_mtm()->get_nr_triggers() && !get_mem()->get_nr_events());
-   
+
    delete m_mvm;
    m_mvm = new MapVariableManager();
 
@@ -404,7 +404,9 @@ creates an empty map without name with
 the given data
 ===========
 */
-void Map::create_empty_map(int w, int h, std::string worldname) {
+void Map::create_empty_map
+(const uint w, const uint h, const std::string worldname)
+{
    set_world_name(worldname.c_str());
    load_world();
    set_size(w,h);
@@ -415,8 +417,8 @@ void Map::create_empty_map(int w, int h, std::string worldname) {
    set_scenario_player_tribe(1, _("<undefined>"));
    set_scenario_player_name(1, _("Player 1"));
 
-   for(int y=0; y<h; y++) {
-      for(int x=0; x<w; x++) {
+   for (uint y = 0; y < h; ++y) {
+      for (uint x = 0; x < w; ++x) {
 			FCoords coords = get_fcoords(Coords(x, y));
 
          coords.field->set_height(10);
@@ -434,7 +436,7 @@ Map::set_size [private]
 Set the size of the map. This should only happen once during initial load.
 ===============
 */
-void Map::set_size(uint w, uint h)
+void Map::set_size(const uint w, const uint h)
 {
    assert(!m_fields);
 	assert(!m_pathfields);
@@ -491,7 +493,7 @@ Change the number of players the map supports.
 Could happen multiple times in the map editor.
 ===============
 */
-void Map::set_nrplayers(uint nrplayers)
+void Map::set_nrplayers(const uint nrplayers)
 {
 	if (!nrplayers) {
 		if (m_starting_pos)
@@ -515,7 +517,7 @@ Map::set_starting_pos
 Set the starting coordinates of a player
 ===============
 */
-void Map::set_starting_pos(uint plnum, Coords c)
+void Map::set_starting_pos(const uint plnum, const Coords c)
 {
 	assert(plnum >= 1 && plnum <= m_nrplayers);
 
@@ -565,7 +567,7 @@ load the corresponding world. This should only happen
 once during initial load.
 ===============
 */
-void Map::load_world(void)
+void Map::load_world()
 {
    assert(!m_world);
 
@@ -592,11 +594,8 @@ Map::get_immovable
 Returns the immovable at the given coordinate
 ===============
 */
-BaseImmovable *Map::get_immovable(Coords coord)
-{
-	Field *f = get_field(coord);
-	return f->get_immovable();
-}
+BaseImmovable * Map::get_immovable(const Coords coord) const
+{return get_field(coord)->get_immovable();}
 
 
 /*
@@ -610,7 +609,11 @@ Functor is of the form: functor(Map*, FCoords)
 ===============
 */
 template<typename functorT>
-void Map::find_reachable(Coords coord, uint radius, const CheckStep* checkstep, functorT& functor)
+void Map::find_reachable
+(const Coords coord,
+ const uint radius,
+ const CheckStep & checkstep,
+ functorT & functor)
 {
 	std::vector<Field*> queue;
 
@@ -625,11 +628,11 @@ void Map::find_reachable(Coords coord, uint radius, const CheckStep* checkstep, 
 		// Pop the last item from the queue
 		cur.field = queue[queue.size() - 1];
 		curpf = m_pathfields + (cur.field-m_fields);
-		get_coords(cur.field, &cur);
+		get_coords(*cur.field, cur);
 		queue.pop_back();
 
 		// Handle this field
-		functor(this, cur);
+		functor(*this, cur);
 		curpf->cycle = m_pathcycle;
 
 		// Get neighbours
@@ -649,14 +652,14 @@ void Map::find_reachable(Coords coord, uint radius, const CheckStep* checkstep, 
 				continue;
 
 			// Are we allowed to move onto this field?
-			CheckStep::StepId id;
-
-			if (cur == coord)
-				id = CheckStep::stepFirst;
-			else
-				id = CheckStep::stepNormal;
-
-			if (!checkstep->allowed(this, cur, neighb, dir, id))
+			if
+				(not
+				 checkstep.allowed
+				 (this,
+				  cur,
+				  neighb,
+				  dir,
+				  cur == coord ? CheckStep::stepFirst : CheckStep::stepNormal))
 				continue;
 
 			// Queue this field
@@ -672,17 +675,18 @@ Map::find_radius
 
 Call the functor for every field within the given radius.
 
-Functor is of the form: functor(Map*, FCoords)
+Functor is of the form: functor(Map &, FCoords)
 ===============
 */
 template<typename functorT>
-void Map::find_radius(Coords coord, uint radius, functorT& functor)
+void Map::find_radius
+(const Coords coord, const uint radius, functorT & functor) const
 {
 	MapRegion mr(this, coord, radius);
 	FCoords c;
 
 	while(mr.next(&c))
-		functor(this, c);
+		functor(*this, c);
 }
 
 
@@ -697,7 +701,7 @@ struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob*>* list, const FindBob& functor)
 		: m_list(list), m_functor(functor), m_found(0) { }
 
-	void operator()(Map* map, FCoords cur)
+	void operator()(const Map & map, const FCoords cur)
 	{
 		Bob *bob;
 
@@ -731,7 +735,11 @@ If list is non-zero, pointers to the relevant objects will be stored in the list
 Returns the number of objects found.
 ===============
 */
-uint Map::find_bobs(Coords coord, uint radius, std::vector<Bob*>* list, const FindBob &functor)
+unsigned int Map::find_bobs
+(const Coords coord,
+ const uint radius,
+ std::vector<Bob*> * list,
+ const FindBob & functor)
 {
 	FindBobsCallback cb(list, functor);
 
@@ -754,8 +762,12 @@ If list is non-zero, pointers to the relevant objects will be stored in the list
 Returns the number of objects found.
 ===============
 */
-uint Map::find_reachable_bobs(Coords coord, uint radius, std::vector<Bob*>* list,
-										const CheckStep* checkstep, const FindBob &functor)
+unsigned int Map::find_reachable_bobs
+(const Coords coord,
+ const uint radius,
+ std::vector<Bob*> * list,
+ const CheckStep & checkstep,
+ const FindBob & functor)
 {
 	FindBobsCallback cb(list, functor);
 
@@ -776,7 +788,7 @@ struct FindImmovablesCallback {
 	FindImmovablesCallback(std::vector<ImmovableFound>* list, const FindImmovable& functor)
 		: m_list(list), m_functor(functor), m_found(0) { }
 
-	void operator()(Map* map, FCoords cur)
+	void operator()(const Map & map, const FCoords cur)
 	{
 		BaseImmovable *imm = cur.field->get_immovable();
 
@@ -811,8 +823,11 @@ Returns true if an immovable has been found.
 If list is not 0, found immovables are stored in list.
 ===============
 */
-uint Map::find_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
-								  const FindImmovable &functor)
+unsigned int Map::find_immovables
+(const Coords coord,
+ const uint radius,
+ std::vector<ImmovableFound> * list,
+ const FindImmovable & functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
@@ -834,8 +849,12 @@ If list is not 0, found immovables are stored in list.
 Returns the number of immovables we found.
 ===============
 */
-uint Map::find_reachable_immovables(Coords coord, uint radius, std::vector<ImmovableFound> *list,
-												const CheckStep* checkstep, const FindImmovable &functor)
+uint Map::find_reachable_immovables
+(const Coords coord,
+ const uint radius,
+ std::vector<ImmovableFound> * list,
+ const CheckStep & checkstep,
+ const FindImmovable & functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
@@ -855,7 +874,7 @@ struct FindFieldsCallback {
 	FindFieldsCallback(std::vector<Coords>* list, const FindField& functor)
 		: m_list(list), m_functor(functor), m_found(0) { }
 
-	void operator()(Map* map, FCoords cur)
+	void operator()(const Map & map, const FCoords cur)
 	{
 		if (m_functor.accept(cur))
 		{
@@ -883,7 +902,11 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint Map::find_fields(Coords coord, uint radius, std::vector<Coords>* list, const FindField& functor)
+unsigned int Map::find_fields
+(const Coords coord,
+ const uint radius,
+ std::vector<Coords> * list,
+ const FindField & functor)
 {
 	FindFieldsCallback cb(list, functor);
 
@@ -904,8 +927,12 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint Map::find_reachable_fields(Coords coord, uint radius, std::vector<Coords>* list,
-										  const CheckStep* checkstep, const FindField& functor)
+unsigned int Map::find_reachable_fields
+(const Coords coord,
+ const uint radius,
+ std::vector<Coords> * list,
+ const CheckStep & checkstep,
+ const FindField & functor)
 {
 	FindFieldsCallback cb(list, functor);
 
@@ -1489,12 +1516,11 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 }
 
 
-/** Map::calc_distance(Coords a, Coords b)
- *
+/**
  * Calculate the (Manhattan) distance from a to b
  * a and b are expected to be normalized!
  */
-int Map::calc_distance(Coords a, Coords b)
+int Map::calc_distance(const Coords a, const Coords b) const
 {
 	uint dist;
 	int dy;
@@ -1566,7 +1592,7 @@ If they aren't, the function returns 0. If they are the same, return -1.
 Otherwise, it returns the direction from start to end
 ===============
 */
-int Map::is_neighbour(const Coords start, const Coords end)
+int Map::is_neighbour(const Coords start, const Coords end) const
 {
 	int dx, dy;
 
@@ -1632,7 +1658,7 @@ Calculates the cost estimate between the two points.
 This function is used mainly for the path-finding estimate.
 ===============
 */
-int Map::calc_cost_estimate(Coords a, Coords b)
+int Map::calc_cost_estimate(const Coords a, const Coords b) const
 {
 	return calc_distance(a, b) * BASE_COST_PER_FIELD;
 }
@@ -1666,7 +1692,7 @@ static inline float calc_cost_d(int slope)
 	return CALC_COST_D(slope);
 }
 
-int Map::calc_cost(int slope)
+int Map::calc_cost(int slope) const
 {
 	return (int)(BASE_COST_PER_FIELD * (CALC_COST_BASE + calc_cost_d(slope)));
 }
@@ -1680,7 +1706,7 @@ Return the time it takes to walk the given step from coords in the given
 direction, in milliseconds.
 ===============
 */
-int Map::calc_cost(Coords coords, int dir)
+int Map::calc_cost(const Coords coords, const int dir) const
 {
 	FCoords f;
 	int startheight;
@@ -1704,7 +1730,7 @@ Map::calc_bidi_cost
 Calculate the average cost of walking the given step in both directions.
 ===============
 */
-int Map::calc_bidi_cost(Coords coords, int dir)
+int Map::calc_bidi_cost(const Coords coords, const int dir) const
 {
 	FCoords f;
 	int startheight;
@@ -1730,7 +1756,7 @@ If either of the forward or backward pointers is set, it will be filled in
 with the cost of walking in said direction.
 ===============
 */
-void Map::calc_cost(const Path &path, int *forward, int *backward)
+void Map::calc_cost(const Path & path, int *forward, int *backward) const
 {
 	Coords coords = path.get_start();
 
@@ -1757,7 +1783,7 @@ Map::get_neighbour
 Get a field's neighbour by direction
 ===============
 */
-void Map::get_neighbour(const Coords f, int dir, Coords * const o)
+void Map::get_neighbour(const Coords f, int dir, Coords * const o) const
 {
 	switch(dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
@@ -1769,7 +1795,7 @@ void Map::get_neighbour(const Coords f, int dir, Coords * const o)
 	}
 }
 
-void Map::get_neighbour(const FCoords f, int dir, FCoords * const o)
+void Map::get_neighbour(const FCoords f, int dir, FCoords * const o) const
 {
 	switch(dir) {
 	case Map_Object::WALK_NW: get_tln(f, o); break;
@@ -2009,8 +2035,13 @@ The function returns the cost of the path (in milliseconds of normal walking
 speed) or -1 if no path has been found.
 ===============
 */
-int Map::findpath(Coords instart, Coords inend, int persist, Path *path,
-                  const CheckStep* checkstep, uint flags)
+int Map::findpath
+(Coords instart,
+ Coords inend,
+ const int persist,
+ Path & path,
+ const CheckStep & checkstep,
+ const uint flags)
 {
 	FCoords start;
 	FCoords end;
@@ -2023,17 +2054,17 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path,
 	start = FCoords(instart, get_field(instart));
 	end =	FCoords(inend, get_field(inend));
 
-	path->m_path.clear();
+	path.m_path.clear();
 
 	// Some stupid cases...
 	if (start == end) {
-		path->m_map = this;
-		path->m_start = start;
-		path->m_end = end;
+		path.m_map = this;
+		path.m_start = start;
+		path.m_end = end;
 		return 0; // duh...
 	}
 
-	if (!checkstep->reachabledest(this, end))
+	if (not checkstep.reachabledest(this, end))
 		return -1;
 
 	// Increase the counter
@@ -2061,7 +2092,7 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path,
 	while((curpf = Open.pop()))
 	{
 		cur.field = m_fields + (curpf-m_pathfields);
-		get_coords(cur.field, &cur);
+		get_coords(*cur.field, cur);
 
 		if (upper_cost_limit && curpf->real_cost > upper_cost_limit)
 			break; // upper cost limit reached, give up
@@ -2094,16 +2125,18 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path,
 				continue;
 
 			// Check passability
-			CheckStep::StepId id;
-
-			if (neighb == end)
-				id = CheckStep::stepLast;
-			else if (cur == start)
-				id = CheckStep::stepFirst;
-			else
-				id = CheckStep::stepNormal;
-
-			if (!checkstep->allowed(this, cur, neighb, *direction, id))
+			if
+				(not
+				 checkstep.allowed
+				 (this,
+				  cur,
+				  neighb,
+				  *direction,
+				  neighb == end
+				  ?
+				  CheckStep::stepLast
+				  :
+				  cur == start ? CheckStep::stepFirst : CheckStep::stepNormal))
 				continue;
 
 			// Calculate cost
@@ -2139,14 +2172,14 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path,
 	else
 		retval = -1;
 
-	path->m_map = this;
-	path->m_start = start;
-	path->m_end = cur;
+	path.m_map = this;
+	path.m_start = start;
+	path.m_end = cur;
 
-	path->m_path.clear();
+	path.m_path.clear();
 
 	while(curpf->backlink != Map_Object::IDLE) {
-		path->m_path.push_back(curpf->backlink);
+		path.m_path.push_back(curpf->backlink);
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
 		get_neighbour(cur, get_reverse_dir(curpf->backlink), &cur);
@@ -2157,12 +2190,7 @@ int Map::findpath(Coords instart, Coords inend, int persist, Path *path,
 }
 
 
-/** Map::can_reach_by_water(Coords field)
- *
- * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
- * MOVECAPS_WALK and at least one of the neighbours has MOVECAPS_SWIM
- */
-bool Map::can_reach_by_water(Coords field)
+bool Map::can_reach_by_water(const Coords field) const
 {
 	FCoords fc = get_fcoords(field);
 
@@ -2196,8 +2224,6 @@ bool Map::can_reach_by_water(Coords field)
 
 /*
 ===========
-Map::change_field_terrain
-
 changes the given field terrain to another one.
 this happens in the editor and might happen in the game
 too if some kind of land increasement is implemented (like
@@ -2446,13 +2472,13 @@ bool FindFieldSize::accept(FCoords coord) const
 bool FindFieldSizeResource::accept(FCoords coord) const {
    bool base_ret=FindFieldSize::accept(coord);
 
-   if(!base_ret) 
+   if(!base_ret)
       return false;
 
-   if(coord.field->get_resources()==m_res && 
+   if(coord.field->get_resources()==m_res &&
          coord.field->get_resources_amount())
       return true;
-   
+
    return false;
 }
 
@@ -2860,7 +2886,7 @@ MapRegion::init
 Initialize the region.
 ===============
 */
-void MapRegion::init(Map* map, Coords coords, uint radius)
+void MapRegion::init(const Map* map, Coords coords, uint radius)
 {
 	m_map = map;
 	m_phase = phaseUpper;
@@ -3039,7 +3065,7 @@ bool MapHollowRegion::next(Coords & c) {
 				m_phase = None;
 				return true; // early out
 			}
-			else if (m_phase == Lower and m_row > m_hole_radius) m_phase = Bottom; 
+			else if (m_phase == Lower and m_row > m_hole_radius) m_phase = Bottom;
 
 			m_map.get_brn(m_left, &m_left);
 			--m_rowwidth;

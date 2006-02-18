@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,7 +75,7 @@ void Bob_Descr::parse(const char *directory, Profile *prof, const EncodeData *en
 	snprintf(buf, sizeof(buf), "%s_00.png", m_name);
 	snprintf(picname, sizeof(picname), "%s/%s", directory, global->get_string("picture", buf));
    m_picture = picname;
-         
+
    m_default_encodedata.parse(global);
 
 	snprintf(picname, sizeof(picname), "%s_??.png", m_name);
@@ -243,7 +243,7 @@ Initialize the object
 void Bob::init(Editor_Game_Base* gg)
 {
    Map_Object::init(gg);
-		
+
    m_sched_init_task = true;
 
    if (gg->is_game()) {
@@ -478,7 +478,7 @@ fill the state information with parameters for the task.
 void Bob::push_task(Game* g, Task* task)
 {
    State* state;
-		
+
    if (m_stack_dirty && m_stack.size())
       throw wexception("MO(%u): push_task(%s): stack already dirty", get_serial(), task->name);
 
@@ -511,8 +511,8 @@ to make it happen.
 void Bob::pop_task(Game* g)
 {
    State* state = get_state();
-   
-   if (m_stack_dirty) 
+
+   if (m_stack_dirty)
       throw wexception("MO(%u): pop_task(%s): stack already dirty", get_serial(), state->task->name);
 
    if (state->path)
@@ -521,7 +521,7 @@ void Bob::pop_task(Game* g)
 		delete state->route;
 	if (state->transfer)
 		state->transfer->has_failed();
-	
+
    m_stack.pop_back();
 
 
@@ -749,7 +749,7 @@ bool Bob::start_task_movepath(Game* g, Coords dest, int persist, DirAnimations *
 	else
 		cstep = &cstep_default;
 
-	if (g->get_map()->findpath(m_position, dest, persist, path, cstep) < 0) {
+	if (g->get_map()->findpath(m_position, dest, persist, *path, *cstep) < 0) {
 		delete path;
 		return false;
 	}
@@ -1132,7 +1132,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
  */
 void Bob::log_general_info(Editor_Game_Base* egbase) {
    molog("Owner: %p\n", m_owner);
-   
+
    molog("Postition: (%i,%i)\n", m_position.x, m_position.y);
    molog("ActID: %i\n", m_actid);
 
@@ -1152,7 +1152,7 @@ void Bob::log_general_info(Editor_Game_Base* egbase) {
       molog("Stack dump %i/%i\n", i+1, m_stack.size());
 
       molog("* task->name: %s\n", m_stack[i].task->name);
-      
+
       molog("* ivar1: %i\n", m_stack[i].ivar1);
       molog("* ivar2: %i\n", m_stack[i].ivar2);
       molog("* ivar3: %i\n", m_stack[i].ivar3);
@@ -1168,12 +1168,12 @@ void Bob::log_general_info(Editor_Game_Base* egbase) {
          molog("** Path length: %i\n", p->get_nsteps());
          molog("** Start: (%i,%i)\n", p->get_start().x, p->get_start().y);
          molog("** End: (%i,%i)\n", p->get_end().x, p->get_end().y);
-         for(int i=0; i<p->get_nsteps(); i++) 
+         for(int i=0; i<p->get_nsteps(); i++)
             molog("** Step %i/%i: %i\n", i+1, p->get_nsteps(), p->get_step(i));
       }
 		molog("* transfer: %p\n",  m_stack[i].transfer);
 		molog("* route: %p\n",  m_stack[i].route);
-		
+
       molog("* program: %p\n",  m_stack[i].route);
    }
 }

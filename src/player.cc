@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,16 +41,16 @@ Player::Player(Editor_Game_Base* g, int type, int plnum, Tribe_Descr* tribe, con
 	m_plnum = plnum;
 	m_tribe = tribe;
 	m_egbase = g;
-   
+
 	for(int i = 0; i < 4; i++)
 		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
 
    set_name(name);
-   
+
    // Allow all buildings per default
-   int i; 
+   int i;
    m_allowed_buildings.resize(m_tribe->get_nrbuildings());
-   for(i=0; i<m_tribe->get_nrbuildings(); i++) 
+   for(i=0; i<m_tribe->get_nrbuildings(); i++)
       m_allowed_buildings[i]=true;
 
    // Resize the visibility array, so that it is large enough
@@ -76,7 +76,7 @@ void Player::init(Editor_Game_Base* game, bool hq)
 {
 	Map *map = game->get_map();
 
-	seen_fields.resize(map->get_width()*map->get_height(), false); 
+	seen_fields.resize(map->get_width()*map->get_height(), false);
 
 	// place the HQ
    if(hq) {
@@ -344,17 +344,17 @@ void Player::enhance_building(PlayerImmovable* imm, int id) {
       int cur_id=get_tribe()->get_building_index(b->get_name());
       Coords c = b->get_position();
       assert(cur_id!=-1);
-      
+
       // Get workers and soldiers
       const std::vector<Worker*>& workers =  b->get_workers();
       std::vector<Worker*> m_workers = workers;
       std::vector<Soldier*> m_soldiers;
-      
+
       if( b->has_soldiers() ) {
          const std::vector<Soldier*>* soldier =  ((ProductionSite*)b)->get_soldiers();
          m_soldiers = *soldier;
       }
-      
+
       b->remove(get_game()); // No fire or stuff
 
       get_game()->warp_constructionsite(c, m_plnum, id, cur_id);
@@ -365,7 +365,7 @@ void Player::enhance_building(PlayerImmovable* imm, int id) {
          w->set_location( (Building*)(get_game()->get_map()->get_field(c)->get_immovable()));
          w->reset_tasks( static_cast<Game*>( get_game() ) );
       }
-      // Reassign the soldier 
+      // Reassign the soldier
       for( uint i = 0; i < m_soldiers.size(); i++) {
          Worker* w = m_soldiers[i];
          w->set_location( (Building*)(get_game()->get_map()->get_field(c)->get_immovable()));
@@ -437,7 +437,7 @@ void Player::add_economy(Economy* eco) {
 void Player::remove_economy(Economy* eco) {
    if(!has_economy(eco)) return;
    std::vector<Economy*>::iterator i = m_economies.begin();
-   while(i!=m_economies.end()) { 
+   while(i!=m_economies.end()) {
       if(*i == eco) {
          m_economies.erase(i);
          return;
@@ -533,13 +533,13 @@ void Player::enemyflagaction(Flag* flag, int action, int attacker, int num, int 
 
    if (attacker != get_player_number())
       throw wexception ("Player (%d) is not the sender of an attack (%d)", attacker, get_player_number());
-   
+
    if (!eg->is_game())
       return;
 
    assert (num >= 0);
 
-      
+
    Game* g = (Game*)eg;
    Map* map = g->get_map();
 
@@ -550,34 +550,36 @@ log("++Player::EnemyFlagAction()\n");
 log("--Player::EnemyFlagAction() Checkpoint!\n");
 
    switch(action) {
-      
+
       case ENEMYFLAGACTION_ATTACK:
          {
             int id = get_tribe()->get_worker_index("soldier");
             uint i;
 
-            if (id < 0) 
+            if (id < 0)
             {
                log("Tribe defines no soldier\n");
                return;
             }
-            int radius = 25;
             std::vector<ImmovableFound> list;
             std::vector<MilitarySite*> ms_list;
-            CheckStepWalkOn cstep(MOVECAPS_WALK, false);
-            
-            map->find_reachable_immovables(flag->get_position(), radius, &list, &cstep);
 
-            if (!list.size()) 
+	         map->find_reachable_immovables
+		         (flag->get_position(),
+		          25,
+		          &list,
+		          CheckStepWalkOn(MOVECAPS_WALK, false));
+
+            if (!list.size())
                return;
-            
+
             /* Find all friendly MS */
             for (i = 0; i < list.size(); i++)
             {
                BaseImmovable* imm = list[i].object;
 
                if (imm->get_type() == Building::BUILDING &&
-                  ((PlayerImmovable*)imm)->get_owner() == this && 
+                  ((PlayerImmovable*)imm)->get_owner() == this &&
                   ((Building*)imm)->get_building_type() == Building::MILITARYSITE)
                   {
 log("Player::EnemyFlagAction() MilitarySite %p found!\n", &list[i]);
@@ -585,13 +587,13 @@ log("Player::EnemyFlagAction() MilitarySite %p found!\n", &list[i]);
                      ms_list.push_back (ms);
                  }
             }
-            
+
             int launched = 0;
             for (i = 0; i < ms_list.size(); i++)
             {
                if (launched >= num)
                   break;
-                  
+
                if (ms_list[i]->can_launch_soldiers())
                {
                   launched += ms_list[i]->launch_attack(flag, type);
@@ -599,7 +601,7 @@ log("Player::EnemyFlagAction() MilitarySite %p found!\n", &list[i]);
             }
             break;
          }
-      
+
       default:
          log("Player sent bad enemyflagaction = %i\n", action);
    }

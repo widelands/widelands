@@ -76,13 +76,6 @@ Initialize
 */
 Interactive_Player::Interactive_Player(Game *g, uchar plyn) : Interactive_Base(g)
 {
-	{
-		Section & s = *g_options.pull_section("global");
-		set_border_snap_distance(s.get_int("border_snap_distance", 0));
-		set_panel_snap_distance (s.get_int("panel_snap_distance",  0));
-		set_snap_windows_only_when_overlapping(s.get_bool("snap_windows_only_when_overlapping", false));
-		set_dock_windows_to_edges(s.get_bool("dock_windows_to_edges", false));
-	}
 
    // Setup all screen elements
 	m_game = g;
