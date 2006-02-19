@@ -3077,3 +3077,132 @@ bool MapHollowRegion::next(Coords & c) {
 
 	return true;
 }
+
+
+MapTriangleRegion::MapTriangleRegion
+(const Map & map, TCoords first, const unsigned short radius) :
+m_map(map), m_radius_is_odd(radius & 1)
+{
+	assert(first.t == TCoords::R or first.t == TCoords::D);
+	const unsigned short radius_plus_1 = radius + 1;
+	const unsigned short half_radius_rounded_down = radius / 2;
+	m_row_length = radius_plus_1;
+	for (unsigned short i = 0; i < half_radius_rounded_down; ++i)
+		map.get_tln(first, &first);
+	if (first.t == TCoords::R) {
+		m_left = first;
+		if (radius) {
+			m_remaining_rows_in_upper_phase = half_radius_rounded_down + 1;
+			m_remaining_rows_in_lower_phase = (radius - 1) / 2;
+			if (m_radius_is_odd) {
+				map.get_trn(first, &first);
+				m_phase = Top;
+				m_row_length = radius + 2;
+				m_remaining_in_row = radius_plus_1 / 2;
+				m_next_triangle = TCoords::D;
+			} else {
+				m_phase = Upper;
+				m_remaining_in_row = m_row_length = radius_plus_1;
+				m_next_triangle = TCoords::R;
+			}
+		} else {
+			assert(radius == 0);
+			m_phase = Bottom;
+			m_remaining_in_row = 1;
+			m_next_triangle = TCoords::R;
+		}
+	} else {
+		m_remaining_rows_in_upper_phase = radius_plus_1 / 2;
+		m_remaining_rows_in_lower_phase = half_radius_rounded_down;
+		if (m_radius_is_odd) {
+			map.get_ln(first, &first);
+			m_left = first;
+			m_phase = Upper;
+			m_remaining_in_row = m_row_length = radius + 2;
+			m_next_triangle = TCoords::R;
+		} else {
+			map.get_bln(first, &m_left);
+			m_phase = Top;
+			m_row_length = radius + 3;
+			m_remaining_in_row = half_radius_rounded_down + 1;
+			m_next_triangle = TCoords::D;
+		}
+	}
+	m_next = first;
+}
+
+
+/**
+ * Traverse the region by row.
+ */
+bool MapTriangleRegion::next(TCoords & c) {
+	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)
+	c = TCoords(m_next, m_next_triangle);
+	if (m_remaining_in_row == 0) return false;
+	--m_remaining_in_row;
+	switch (m_phase) {
+	case Top:
+		if (m_remaining_in_row) m_map.get_rn(m_next, &m_next);
+		else if (m_remaining_rows_in_upper_phase) {
+			m_phase = Upper;
+			m_remaining_in_row = m_row_length;
+			assert(m_remaining_in_row);
+			m_next = m_left;
+		}
+		break;
+	case Upper:
+		if (m_remaining_in_row) {
+			if (m_next_triangle == TCoords::D) m_next_triangle = TCoords::R;
+			else {
+				m_next_triangle = TCoords::D;
+				m_map.get_rn(m_next, &m_next);
+			}
+		} else {
+			if (--m_remaining_rows_in_upper_phase) {
+				m_row_length += 2;
+				m_map.get_bln(m_left, &m_left);
+			} else {
+				if (m_remaining_rows_in_lower_phase) {
+					m_phase = Lower;
+					assert(m_row_length >= 2);
+					m_row_length -= 2;
+				} else if (m_next_triangle == TCoords::R) {
+					m_phase = Bottom;
+					m_row_length /= 2;
+				} else m_row_length = 0;
+				m_map.get_brn(m_left, &m_left);
+			}
+			m_remaining_in_row = m_row_length;
+			m_next = m_left;
+		}
+		break;
+	case Lower:
+		if (m_remaining_in_row) {
+			if (m_next_triangle == TCoords::D) m_next_triangle = TCoords::R;
+			else {
+				m_next_triangle = TCoords::D;
+				m_map.get_rn(m_next, &m_next);
+			}
+		} else {
+			if (--m_remaining_rows_in_lower_phase) {
+				assert(m_row_length >= 2);
+				m_remaining_in_row = m_row_length -= 2;
+				m_map.get_brn(m_left, &m_left);
+			}
+			else if (m_next_triangle == TCoords::R) {
+				m_phase = Bottom;
+				m_remaining_in_row = m_row_length / 2;
+				m_map.get_brn(m_left, &m_left);
+			}
+			m_next = m_left;
+		}
+		break;
+	case Bottom:
+		if (m_remaining_in_row) m_map.get_rn(m_next, &m_next);
+		break;
+	default:
+		assert(0);
+	}
+	assert(m_remaining_in_row < 10000); //  Catch wrapping (ingteger underflow)
+	return true;
+}

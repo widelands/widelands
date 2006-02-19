@@ -932,5 +932,34 @@ private:
 	Coords m_next; // next field to return
 };
 
+/**
+ * Producer/Coroutine struct that returns every triangle which can be reached by
+ * crossing at most <radius> edges.
+ *
+ * Each such location is returned exactly once via next(). But this does not
+ * guarantee that a location is returned at most once when the radius is so
+ * large that the area overlaps itself because of wrapping.
+ *
+ * Note that the order in which locations are returned is not guarantueed. (But
+ * in fact the triangles are returned row by row from top to bottom and from
+ * left to right in each row and I see no reason why that would ever change.)
+ *
+ * The initial coordinates must refer to a triangle (TCoords::D or TCoords::R).
+ * Use MapRegion instead for nodes (TCoords::None).
+ */
+struct MapTriangleRegion {
+	MapTriangleRegion(const Map &, TCoords, const unsigned short radius);
+	bool next(TCoords & c);
+private:
+	const Map & m_map;
+	const bool m_radius_is_odd;
+	enum {Top, Upper, Lower, Bottom} m_phase;
+	unsigned short m_remaining_rows_in_upper_phase;
+	unsigned short m_remaining_rows_in_lower_phase;
+	unsigned short m_row_length, m_remaining_in_row;
+	Coords m_left, m_next;
+	TCoords::TriangleIndex m_next_triangle;
+};
+
 std::string g_MapVariableCallback( std::string str, void* data );
 #endif // __S__MAP_H
