@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,9 @@ class Editor_Increase_Resources_Tool
 
 =============================
 */
-int Editor_Change_Resource_Tool_Callback(FCoords& f, void* data, int curres) {
-   Map* map=static_cast<Map*>(data);
+int Editor_Change_Resource_Tool_Callback(const TCoords c, void * data, int curres) {
+	Map & map = *static_cast<Map * const>(data);
+	FCoords f = FCoords(c, map.get_field(c));
 
    FCoords f1;
    Terrain_Descr* terr, *terd;
@@ -57,7 +58,7 @@ int Editor_Change_Resource_Tool_Callback(FCoords& f, void* data, int curres) {
 
    // If one of the neighbours is unpassable, count its resource stronger
    // top left neigbour
-   map->get_neighbour(f, Map_Object::WALK_NW, &f1);
+   map.get_neighbour(f, Map_Object::WALK_NW, &f1);
    terr=f1.field->get_terr();
    terd=f1.field->get_terd();
    is_valid_d = curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : 0;
@@ -72,7 +73,7 @@ int Editor_Change_Resource_Tool_Callback(FCoords& f, void* data, int curres) {
       count+= curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : -1;
 
    // top right neigbour
-   map->get_neighbour(f, Map_Object::WALK_NE, &f1);
+   map.get_neighbour(f, Map_Object::WALK_NE, &f1);
    terd=f1.field->get_terd();
    is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
    if(terd->get_is()&TERRAIN_UNPASSABLE && is_valid_r)
@@ -81,7 +82,7 @@ int Editor_Change_Resource_Tool_Callback(FCoords& f, void* data, int curres) {
       count+= curres==terd->get_default_resources() || terd->is_resource_valid(curres) ? 1 : -1;
 
    // left neighbour
-   map->get_neighbour(f, Map_Object::WALK_W, &f1);
+   map.get_neighbour(f, Map_Object::WALK_W, &f1);
    terr=f1.field->get_terr();
    is_valid_r = curres==terr->get_default_resources() || terr->is_resource_valid(curres) ? 1 : 0;
    if(terr->get_is()&TERRAIN_UNPASSABLE && is_valid_r)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,6 +54,6 @@ class Editor_Set_Starting_Pos_Tool : public Editor_Tool {
       std::string m_current_fieldsel_pic;
 };
 
-int Editor_Tool_Set_Starting_Pos_Callback(FCoords& c, void* data, int);
+int Editor_Tool_Set_Starting_Pos_Callback(const TCoords, void *, int);
 
 #endif

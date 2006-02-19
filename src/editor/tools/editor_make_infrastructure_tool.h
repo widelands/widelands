@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,11 +33,11 @@ this places immovables on the map
 class Editor_Make_Infrastructure_Tool : public Editor_Tool {
    public:
       Editor_Make_Infrastructure_Tool(void);
-      ~Editor_Make_Infrastructure_Tool(void); 
+      ~Editor_Make_Infrastructure_Tool(void);
 
       void set_player(int n) { m_player=n; }
       int  get_player(void)  { return m_player; }
-      
+
       virtual int handle_click_impl(FCoords&, Map*, Editor_Interactive*);
       virtual const char* get_fsel_impl(void) { return "pics/fsel.png"; } // Standart fsel icon, most complex tool of all
 
@@ -46,6 +46,6 @@ class Editor_Make_Infrastructure_Tool : public Editor_Tool {
       UIUniqueWindowRegistry m_registry;
 };
 
-int Editor_Make_Infrastructure_Tool_Callback(FCoords&, void*, int);
+int Editor_Make_Infrastructure_Tool_Callback(const TCoords, void *, int);
 
 #endif

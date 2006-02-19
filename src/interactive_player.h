@@ -90,9 +90,10 @@ class Interactive_Player : public Interactive_Base {
 
 		bool handle_key(bool down, int code, char c);
 
-		inline Game *get_game() { return m_game; }
-		inline uchar get_player_number(void) { return m_player_number; }
-		inline Player *get_player() { assert(m_game); return m_game->get_player(m_player_number) ; }
+		Game * get_game() const {return m_game;}
+		uchar get_player_number() const {return m_player_number;}
+		Player * get_player() const
+		{assert(m_game); return m_game->get_player(m_player_number);}
 
       // for savegames
       void set_player_number(uint plrn);

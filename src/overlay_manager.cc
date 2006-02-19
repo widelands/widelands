@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,42 +50,51 @@ Overlay_Manager::~Overlay_Manager(void) {
  * return the currently registered overlays
  * or the standart help.
  */
-int Overlay_Manager::get_overlays(FCoords& c, Overlay_Info* overlays) {
-   if(!m_are_graphics_loaded) load_graphics();
+unsigned char Overlay_Manager::get_overlays
+(const TCoords c, Overlay_Info * const overlays)
+{
+	//assert(m_are_graphics_loaded);
+	if (not m_are_graphics_loaded) load_graphics(); //  Should REALLY not have to check for this in every call!!! -Erik Sigra
 
-   long num_ret=0;
-   
-   // are there any below
-   long fieldindex= (c.y<<8) + c.x;
-   long nov=0;
-   if((nov=m_overlays.count(fieldindex))) {
-      // there are overlays registered
-      std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex);
-      // Protect overlays array access : Use MAX_OVERLAYS_PER_FIELD
-      while(i->first==fieldindex && i->second.level<=5 && num_ret < MAX_OVERLAYS_PER_FIELD) {
-         overlays[num_ret].picid=i->second.picid;
-         overlays[num_ret].hotspot_x=i->second.hotspot_x;
-         overlays[num_ret].hotspot_y=i->second.hotspot_y;
-         ++num_ret;
-         ++i;
-      }
+	unsigned char num_ret = 0;
 
-      // now overlays
-      num_ret+=get_build_overlay(c,overlays,num_ret);
-      // Protect overlays array access : Use MAX_OVERLAYS_PER_FIELD
-      while(i->first==fieldindex && num_ret < MAX_OVERLAYS_PER_FIELD) {
-        overlays[num_ret].picid=i->second.picid;
-        overlays[num_ret].hotspot_x=i->second.hotspot_x;
-        overlays[num_ret].hotspot_y=i->second.hotspot_y;
-        ++num_ret;
-        ++i;
-      }
-      return num_ret;
-   }
-
-   // no overlays, this will be most common
-   num_ret+=get_build_overlay(c,overlays,num_ret);
-   return num_ret;
+	const std::multimap<const unsigned int, Registered_Overlays> & overlay_map =
+		m_overlays[c.t];
+	const unsigned int fieldindex = (c.y << 8) + c.x;
+	std::map<const unsigned int, Registered_Overlays>::const_iterator it =
+		overlay_map.lower_bound(fieldindex);
+	while
+		(it != overlay_map.end()
+		 and
+		 it->first == fieldindex
+		 and
+		 it->second.level <= 5
+		 and
+		 num_ret < MAX_OVERLAYS_PER_FIELD) //  Protect overlays array access.
+	{
+		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].hotspot_x = it->second.hotspot_x;
+		overlays[num_ret].hotspot_y = it->second.hotspot_y;
+		++num_ret;
+		++it;
+	}
+	if (c.t == TCoords::None)
+		// now overlays
+		num_ret += get_build_overlay(c,overlays,num_ret);
+	while
+		(it != overlay_map.end()
+		 and
+		 it->first == fieldindex
+		 and
+		 num_ret < MAX_OVERLAYS_PER_FIELD) //  Protect overlays array access.
+	{
+		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].hotspot_x = it->second.hotspot_x;
+		overlays[num_ret].hotspot_y = it->second.hotspot_y;
+		++num_ret;
+		++it;
+	}
+	return num_ret;
 }
 
 /*
@@ -93,7 +102,9 @@ int Overlay_Manager::get_overlays(FCoords& c, Overlay_Info* overlays) {
  *
  * returns one if a overlay was set
  */
-inline int Overlay_Manager::get_build_overlay(FCoords& c, Overlay_Info* overlays, int i) {
+inline unsigned char Overlay_Manager::get_build_overlay
+(const Coords c, Overlay_Info * const overlays, const int i) const
+{
    uchar overlay_field = m_overlay_fields[c.y*m_w+c.x];
    if(m_showbuildhelp && overlay_field >= Overlay_Build_Min &&
          overlay_field <= Overlay_Build_Max) {
@@ -120,8 +131,14 @@ void Overlay_Manager::cleanup(void) {
       delete[] m_overlay_fields;
       m_overlay_fields=0;
    }
-   m_overlays.clear();
-   m_road_overlays.clear();
+	const std::multimap<const unsigned int, Registered_Overlays> * const
+		overlays_end = m_overlays + 3;
+	for
+		(std::multimap<const unsigned int, Registered_Overlays> * it = m_overlays;
+		 it != overlays_end;
+		 ++it)
+		it->clear();
+	m_road_overlays.clear();
 }
 
 /*
@@ -142,7 +159,9 @@ void Overlay_Manager::init(int w, int h) {
 /*
  * Recalculates all calculatable overlays for fields
  */
-void Overlay_Manager::recalc_field_overlays(FCoords& fc, FCoords* neighbours) {
+void Overlay_Manager::recalc_field_overlays
+(const FCoords fc, const FCoords * const neighbours)
+{
    assert(m_overlay_fields);
 
    uchar code = 0;
@@ -152,7 +171,7 @@ void Overlay_Manager::recalc_field_overlays(FCoords& fc, FCoords* neighbours) {
       // A border is on every field that is owned by a player and has
       // neighbouring fields that are not owned by that player
       for(int dir = 1; dir <= 6; dir++) {
-         FCoords neighb=neighbours[dir];
+         const FCoords & neighb = neighbours[dir];
 
          if (neighb.field->get_owned_by() != owner)
             code = Overlay_Frontier_Base + owner;
@@ -188,14 +207,24 @@ void Overlay_Manager::recalc_field_overlays(FCoords& fc, FCoords* neighbours) {
 /*
  * finally, register a new overlay
  */
-void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords hot_spot, int jobid) {
-   assert(static_cast<uint>(c.x)<=0xffff);
-   assert(static_cast<uint>(c.y)<=0xffff);
-   assert(level!=5); // level == 5 is undefined behavior
+void Overlay_Manager::register_overlay
+(const TCoords c,
+ const int picid,
+ const int level,
+ const Coords hot_spot,
+ const int jobid)
+{
+	assert(c.x >= 0);
+	assert(c.y >= 0);
+	assert(static_cast<const unsigned int>(c.x) <= 0xff);
+	assert(level!=5); // level == 5 is undefined behavior
 
-   int fieldindex=(c.y<<8)+c.x;
-   if(m_overlays.count(fieldindex)) {
-      std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex);
+	std::multimap<const unsigned int, Registered_Overlays> & overlay_map =
+		m_overlays[c.t];
+	const unsigned int fieldindex = (c.y << 8) + c.x;
+   if (overlay_map.count(fieldindex)) {
+	   std::map<const unsigned int, Registered_Overlays>::iterator i =
+		   overlay_map.lower_bound(fieldindex);
       do {
          if(i->second.picid==picid) return;
          ++i;
@@ -211,34 +240,33 @@ void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords ho
       hsy>>=1;
    }
 
-   Registered_Overlays info= {
-      jobid,
-      picid,
-      hsx, hsy,
-      level
-   };
-
-   m_overlays.insert(std::pair<int,Registered_Overlays>(fieldindex, info));
+	overlay_map.insert
+		(std::pair<const unsigned int, Registered_Overlays>
+		 (fieldindex, Registered_Overlays(jobid, picid, hsx, hsy, level)));
 
    // Now manually sort, so that they are ordered
    //  * first by fieldindex (done by std::multimap)
    //  * second by levels (done manually here)
-   std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex); // theres at least one registered
-   std::map<int, Registered_Overlays>::iterator j;
+
+	// there is at least one registered
+	std::map<const unsigned int, Registered_Overlays>::iterator i =
+				 overlay_map.lower_bound(fieldindex);
+
+	std::map<const unsigned int, Registered_Overlays>::iterator j;
    do {
       j=i;
       ++j;
 
-      if( j == m_overlays.end() ) {
+      if (j == overlay_map.end()) {
          // j is no longer a valid field, so sorting ends here
-         break;
+	      break;
       }
-      
+
       if(j->first==i->first) {
          // there are more elements registered
          if(j->second.level < i->second.level) {
             std::swap<Overlay_Manager::Registered_Overlays>(i->second,j->second);
-            i=m_overlays.lower_bound(fieldindex);
+            i = overlay_map.lower_bound(fieldindex);
          } else {
             ++i;
          }
@@ -250,40 +278,50 @@ void Overlay_Manager::register_overlay(Coords c, int picid, int level, Coords ho
 }
 
 /*
- * remove one (or many) overlays from a field
+ * remove one (or many) overlays from a node or triangle
  */
-void Overlay_Manager::remove_overlay(Coords c, int picid) {
-   assert(static_cast<uint>(c.x)<=0xffff);
-   assert(static_cast<uint>(c.y)<=0xffff);
+void Overlay_Manager::remove_overlay(const TCoords c, const int picid) {
+	assert(c.x >= 0);
+	assert(c.y >= 0);
+	assert(c.t <= 2);
+	assert(static_cast<const unsigned int>(c.x) <= 0xff);
 
-   int fieldindex=(c.y<<8)+c.x;
+	std::multimap<const unsigned int, Registered_Overlays> & overlay_map =
+		m_overlays[c.t];
+	const unsigned int fieldindex = (c.y << 8) + c.x;
 
-   if(m_overlays.count(fieldindex)) {
-      std::map<int, Registered_Overlays>::iterator i=m_overlays.lower_bound(fieldindex);
-      do {
-         if(i->second.picid==picid || picid == -1) {
-            m_overlays.erase(i);
-            i=m_overlays.lower_bound(fieldindex);
-         } else {
-            ++i;
-         }
-      } while(i->first==fieldindex);
-   }
+	if (overlay_map.count(fieldindex)) {
+		std::multimap<const unsigned int, Registered_Overlays>::iterator it =
+			overlay_map.lower_bound(fieldindex);
+		do {
+			if (it->second.picid == picid or picid == -1) {
+				overlay_map.erase(it);
+				it = overlay_map.lower_bound(fieldindex);
+			} else {
+				++it;
+			}
+		} while (it != overlay_map.end() and it->first == fieldindex);
+	}
 }
 
 /*
  * remove all overlays with this jobid
  */
 void Overlay_Manager::remove_overlay(int jobid) {
-   std::map<int, Registered_Overlays>::iterator i=m_overlays.begin();
-
-   while(i!=m_overlays.end()) {
-      if(i->second.jobid==jobid) {
-         m_overlays.erase(i++);
-      } else {
-         ++i;
-      }
-   }
+	const std::multimap<const unsigned int, Registered_Overlays> * const
+		overlays_end = m_overlays + 3;
+	for
+		(std::multimap<const unsigned int, Registered_Overlays> * j = m_overlays;
+		 j != overlays_end;
+		 ++j)
+		for
+			(std::multimap<const unsigned int, Registered_Overlays>::iterator it =
+			 j->begin();
+			 it != j->end();)
+		{
+			if (it->second.jobid == jobid) j->erase(it++); //  This is necessary!
+			else ++it;
+		}
 }
 
 /*
@@ -367,5 +405,3 @@ void Overlay_Manager::load_graphics(void) {
 
    m_are_graphics_loaded=true;
 }
-
-

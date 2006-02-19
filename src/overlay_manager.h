@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,7 @@ class Map;
  *     job are removed. This is usefull for interactive road building.
  */
 #define MAX_OVERLAYS_PER_FIELD 5    // this should be enough
-typedef int (*Overlay_Callback_Function)(FCoords&, void*, int);
+typedef int (*Overlay_Callback_Function)(const TCoords, void*, int);
 class Overlay_Manager {
    public:
       struct Overlay_Info {
@@ -79,17 +79,24 @@ class Overlay_Manager {
 
       inline int get_a_job_id(void) { ++m_cur_jobid; if(m_cur_jobid>=std::numeric_limits<int>::max()) m_cur_jobid=1000; return m_cur_jobid; }
 
-      void register_overlay(Coords c, int picid, int level, Coords hot_spot = Coords(-1,-1), int jobid=0);
+	void register_overlay
+		(const TCoords t,
+		 const int picid,
+		 const int level,
+		 const Coords hot_spot = Coords(-1,-1),
+		 const int jobid = 0);
 
-      void remove_overlay(Coords c, int picid=-1); // if picid == -1 remove all overlays
+	//  if picid == -1 remove all overlays
+	void remove_overlay(const TCoords, const int picid = -1);
+
       void remove_overlay(int jobid);              // remove by jobid
 
-      int get_overlays(FCoords& c, Overlay_Info* overlays);
+	unsigned char get_overlays(const TCoords, Overlay_Info * const overlays);
 
       void show_buildhelp(bool t) { m_showbuildhelp= t; }
       void toggle_buildhelp(void) { m_showbuildhelp=!m_showbuildhelp; }
 
-      void recalc_field_overlays(FCoords& f, FCoords* neighbours);
+	void recalc_field_overlays(const FCoords, const FCoords * const neighbours);
 
       // Road overlays are registered like normal overlays and removed like normal overlays
       // but they use are handled internally completly different. When a road overlay information is requested
@@ -136,13 +143,26 @@ class Overlay_Manager {
 
    private:
       // this is always sorted by (y<<8)+x. a unique coordinate which is sortable
-      struct Registered_Overlays {
-         int jobid;
-         int picid;
-         int hotspot_x;
-         int hotspot_y;
-         int level;
-      };
+	struct Registered_Overlays {
+		Registered_Overlays
+			(const int Jobid,
+			 const int Picid,
+			 const int Hotspot_x,
+			 const int Hotspot_y,
+			 const int Level)
+			:
+			jobid(Jobid),
+			picid(Picid),
+			hotspot_x(Hotspot_x),
+			hotspot_y(Hotspot_y),
+			level(Level)
+		{}
+		int jobid;
+		int picid;
+		int hotspot_x;
+		int hotspot_y;
+		int level;
+	};
 
       struct Registered_Road_Overlays {
          int jobid;
@@ -165,7 +185,10 @@ class Overlay_Manager {
 
       // data
       std::map<int, Registered_Road_Overlays> m_road_overlays;           // for road overlays
-      std::multimap<int, Registered_Overlays> m_overlays;
+
+	//  indexed by TCoords::TriangleIndex
+	std::multimap<const unsigned int, Registered_Overlays> m_overlays[3];
+
       Overlay_Info m_buildhelp_infos[5];              // flag, small, medium, big, mine
       bool m_are_graphics_loaded;
       bool m_showbuildhelp;
@@ -181,7 +204,8 @@ class Overlay_Manager {
 
       // functions
       void load_graphics();
-      inline int get_build_overlay(FCoords& c, Overlay_Info* overlays, int i);
+	unsigned char get_build_overlay
+		(const Coords c, Overlay_Info * const overlays, const int i) const;
 };
 
 

@@ -53,7 +53,8 @@ UIStatebox::UIStatebox(UIPanel *parent, int x, int y, uint picid)
 	{
 		m_custom_picture = false;
 		m_pic_graphics = g_gr->get_picture( PicMod_UI,
-														"pics/checkbox_light.png" );
+		                                    "pics/checkbox_light_new.png"
+		                                  );
 	}
 
 	m_highlighted = false;

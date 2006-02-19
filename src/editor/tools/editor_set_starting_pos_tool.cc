@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,21 +32,19 @@ static int m_current_player;
 /*
  * static callback function for overlay calculation
  */
-int Editor_Tool_Set_Starting_Pos_Callback(FCoords& c, void* data, int) {
-   // data is here an integer indentifying the current player
-   Map* map = static_cast<Map*>(data);
+int Editor_Tool_Set_Starting_Pos_Callback(const TCoords c, void * data, int) {
+	const Map & map = *static_cast<const Map * const>(data);
 
-   // Area around already placed players
-   int i=0;
-   for(i=1; i<=map->get_nrplayers(); i++) {
-      if(i==m_current_player) continue;
-      Coords sp=map->get_starting_pos(i);
-      if(sp.x==-1 && sp.y==-1) continue;
-      if(map->calc_distance(sp, c)<MIN_PLACE_AROUND_PLAYERS) 
-         return 0;
-   }
+	// Area around already placed players
+	const unsigned short nrplayers = map.get_nrplayers();
+	for (unsigned short i = 1; i <= nrplayers; ++i) {
+		if (i == m_current_player) continue;
+		const Coords sp = map.get_starting_pos(i);
+		if (sp.x == -1 and sp.y == -1) continue;
+		if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) return 0;
+	}
 
-   int caps=c.field->get_caps();
+	const int caps = map.get_field(c)->get_caps();
    if((caps&BUILDCAPS_SIZEMASK)==BUILDCAPS_BIG)
       return caps;
 
@@ -88,7 +86,7 @@ int Editor_Set_Starting_Pos_Tool::handle_click_impl(FCoords& fc, Map* map, Edito
             BaseImmovable* imm = ei->get_map()->get_field(ei->get_map()->get_starting_pos(m_current_player))->get_immovable();
             if(imm && imm->get_type() == Map_Object::BUILDING) return 1;
          }
-      } 
+      }
 
       std::string picsname="pics/editor_player_";
       picsname+=static_cast<char>((m_current_player/10) + 0x30);

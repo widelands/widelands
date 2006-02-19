@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,8 @@ place building, modify building are 3 tools)
 */
 class Editor_Tool {
    public:
-      Editor_Tool(Editor_Tool* second, Editor_Tool* third) { m_second=second; m_third=third; if(!m_second) m_second=this; if(!m_third) m_third=this; }
+	Editor_Tool(Editor_Tool * const second = 0, Editor_Tool * const third = 0) :
+	m_second(second ? second : this), m_third(third ? third : this) {}
       virtual ~Editor_Tool() {
          if(m_second==m_third) m_third=0;
          if(m_second && m_second!=this) { delete m_second; m_second=0; }

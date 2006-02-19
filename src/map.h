@@ -190,15 +190,15 @@ public:
 	void set_description(const char *string);
 
 	// informational functions
-	inline const char* get_filename(void) { return m_filename; }
-	inline const char* get_author(void) { return m_author; }
-	inline const char* get_name(void) { return m_name; }
-	inline const char* get_description(void) { return m_description; }
-	inline const char* get_world_name(void) { return m_worldname; }
-	inline ushort get_nrplayers(void) { return m_nrplayers; }
+	const char * get_filename() const {return m_filename;}
+	const char * get_author() const {return m_author;}
+	const char * get_name() const {return m_name;}
+	const char * get_description() const {return m_description;}
+	const char * get_world_name() const {return m_worldname;}
+	ushort get_nrplayers() const {return m_nrplayers;}
 	uint get_width() const {return m_width;}
 	uint get_height() const {return m_height;}
-	inline World* get_world(void) { return m_world; }
+	World * get_world() const {return m_world;}
    // The next few functions are only valid
    // when the map is loaded as an scenario.
    std::string get_scenario_player_tribe(uint i);

@@ -469,7 +469,7 @@ void Editor_Game_Base::manually_load_tribe(const char* tribe) {
 /*
  * Returns a tribe description from the internally loaded list
  */
-Tribe_Descr* Editor_Game_Base::get_tribe(const char* tribe) {
+Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const {
 	uint i;
    for(i = 0; i < m_tribes.size(); i++) {
 		if (!strcmp(m_tribes[i]->get_name(), tribe))

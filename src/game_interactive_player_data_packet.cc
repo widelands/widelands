@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
 #define CURRENT_PACKET_VERSION 1
 
 // Forward declaration. Defined in interactive_player.cc
-int Int_Player_overlay_callback_function(FCoords& fc, void* data, int);
+int Int_Player_overlay_callback_function(const TCoords, void *, int);
 
 /*
  * Destructor
@@ -47,7 +47,7 @@ void Game_Interactive_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widel
    // read packet version
    int packet_version=fr.Unsigned16();
 
-   // Resize the IPLs statistic stuff 
+   // Resize the IPLs statistic stuff
    game->get_ipl()->m_current_statistics.resize(0);
    game->get_ipl()->m_ware_productions.resize(0);
    game->get_ipl()->m_last_stats_update = 0;
@@ -97,7 +97,7 @@ void Game_Interactive_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widel
          plr->m_current_statistics[i] = fr.Unsigned32();
          plr->m_ware_productions[i].resize( nr_entries );
 
-         for( uint j = 0; j < plr->m_ware_productions[i].size(); j++) 
+         for( uint j = 0; j < plr->m_ware_productions[i].size(); j++)
             plr->m_ware_productions[i][j] = fr.Unsigned32();
       }
 
@@ -106,7 +106,7 @@ void Game_Interactive_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widel
       plr->m_general_stats.resize( game->get_map()->get_nrplayers() );
 
       for( uint i =0; i < game->get_map()->get_nrplayers(); i++)
-         if( game->get_player(i+1)) { 
+         if( game->get_player(i+1)) {
             plr->m_general_stats[i].land_size.resize(entries);
             plr->m_general_stats[i].nr_workers.resize(entries);
             plr->m_general_stats[i].nr_buildings.resize(entries);
@@ -133,7 +133,7 @@ void Game_Interactive_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widel
       return;
    } else
       throw wexception("Unknown version in Game_Interactive_Player_Data_Packet: %i\n", packet_version);
-   
+
    assert(0); // never here
 }
 
@@ -142,7 +142,7 @@ void Game_Interactive_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widel
  */
 void Game_Interactive_Player_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    FileWrite fw;
-   
+
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
@@ -164,20 +164,20 @@ void Game_Interactive_Player_Data_Packet::Write(FileSystem* fs, Game* game, Wide
    fw.Unsigned16( plr->m_ware_productions[0].size() );
    for( uint i = 0; i < plr->m_current_statistics.size(); i++) {
       fw.Unsigned32(plr->m_current_statistics[i]);
-      for( uint j = 0; j < plr->m_ware_productions[i].size(); j++) 
+      for( uint j = 0; j < plr->m_ware_productions[i].size(); j++)
          fw.Unsigned32(plr->m_ware_productions[i][j]);
    }
 
    // General statistics
    for( uint i =0; i < game->get_map()->get_nrplayers(); i++)
-      if( game->get_player(i+1)) { 
+      if( game->get_player(i+1)) {
          fw.Unsigned16(plr->m_general_stats[i].land_size.size());
          break;
       }
-   
+
    for( uint i =0; i < game->get_map()->get_nrplayers(); i++) {
       if( !game->get_player(i+1)) continue;
-   
+
       for( uint j = 0; j < plr->m_general_stats[i].land_size.size(); j++) {
          fw.Unsigned32(game->get_ipl()->m_general_stats[i].land_size[j]);
          fw.Unsigned32(game->get_ipl()->m_general_stats[i].nr_workers[j]);
@@ -188,6 +188,6 @@ void Game_Interactive_Player_Data_Packet::Write(FileSystem* fs, Game* game, Wide
          fw.Unsigned32(game->get_ipl()->m_general_stats[i].miltary_strength[j]);
       }
    }
-  
+
    fw.Write( fs, "binary/interactive_player" );
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,10 +60,10 @@ Interactive_Player IMPLEMENTATION
 */
 
 // This function is the callback for recalculation of field overlays
-int Int_Player_overlay_callback_function(FCoords& fc, void* data, int) {
-   Interactive_Player* plr=static_cast<Interactive_Player*>(data);
-
-   return plr->get_player()->get_buildcaps(fc);
+int Int_Player_overlay_callback_function(const TCoords c, void* data, int) {
+	return
+		static_cast<const Interactive_Player * const>(data)->get_player()->
+		get_buildcaps(c);
 }
 
 
