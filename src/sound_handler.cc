@@ -530,7 +530,7 @@ int Sound_Handler::stereo_position(const Coords position)
 
 /** Find out whether to actually play a certain effect right now or rather not
  * (to avoid "sonic overload").
- * \todo What is the selection algorithm?
+ * \todo What is the selection algorithm? cf class documentation
 */
 bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
                                 const uint priority)
@@ -549,8 +549,10 @@ bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
 		return false;
 	}
 
+	//TODO: check for a free channel
+
 	if (priority==PRIO_ALWAYS_PLAY) {
-		//TODO: check for a free channel. If there is none, kill another fx
+		//TODO: if there is no free channel, kill a running fx and complain
 		return true;
 	}
 

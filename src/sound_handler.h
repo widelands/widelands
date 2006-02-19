@@ -40,6 +40,17 @@ using namespace std;
 #define PRIO_MEDIUM 63
 //@}
 
+/// How many milliseconds in the past to consider for \ref Sound_Handler::play_or_not()
+#define SLIDING_WINDOW_SIZE 300000
+
+/// Non-existent 'positions'(=logical map coordinates) with special meaning
+//@{
+/// Explicit "no position given on purpose"
+#define NO_POSITION Coords(-1,-1)
+/// No position given (by accident?); like a NULL pointer
+#define INVALID_POSITION Coords(-2,-2)
+//@}
+
 class Sound_Handler;
 ///\file
 
@@ -258,23 +269,13 @@ protected:
  * \todo Describe play-or-not algo
  * \todo Internationalized sound effects/music
  * \todo Environmental sound effects (e.g. wind)
+ * \todo repair and reenable animation sound effects for 1-pic-animations
 */
 class Sound_Handler
 {
 	friend class Songset;
 	friend class FXset;
 public:
-	/// How many milliseconds in the past to consider for \ref play_or_not()
-#define SLIDING_WINDOW_SIZE 300000
-
-	/// Non-existent 'positions'(=logical map coordinates) with special meaning
-	//@{
-	/// Explicit "no position given on purpose"
-#define NO_POSITION Coords(-1,-1)
-	/// No position given (by accident?); like a NULL pointer
-#define INVALID_POSITION Coords(-2,-2)
-	//@}
-
 	/// Constants for event loop interaction
 	//// \sa "Usage of callbacks" TODO: how do I get this link?
 	enum { SOUND_HANDLER_CHANGE_MUSIC = 1 };
