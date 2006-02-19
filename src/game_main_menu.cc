@@ -47,20 +47,18 @@ Create all the buttons etc...
 ===============
 */
 GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *registry, Interactive_Player::Game_Main_Menu_Windows* windows)
-	: UIUniqueWindow(plr, registry, 170, 160, _("Main Menu"))
+	: UIUniqueWindow(plr, registry, 180, 160, _("Main Menu"))
 {
    m_player=plr;
    m_windows = windows;
   
 
    int spacing = 5;
-   int posy = 35;
-   int posx = spacing;
+   int posy = 2*spacing;
+   int posx = 2*spacing;
    
-   // Caption
-   new UITextarea(this, 0, spacing, get_inner_w(), 20, _("Main Menu"), Align_Center);
-   
-   int buttonw = (get_inner_w()-5*spacing) / 4;
+   // UIButtons
+   int buttonw = (get_inner_w()-7*spacing) / 4;
    UIButton* b=new UIButton(this, posx, posy, buttonw, 34, 4, 1);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_general_stats.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
@@ -79,10 +77,10 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    b=new UIButton(this, posx, posy, buttonw, 34, 4, 4);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_stock.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
-   posx = spacing;
-   posy += 39;
+   posx = 2*spacing;
+   posy += 45;
        
-   buttonw = (get_inner_w()-3*spacing) / 2;
+   buttonw = (get_inner_w()-5*spacing) / 2;
    b=new UIButton(this, posx, posy, buttonw, 34, 4, 25);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_objectives.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
@@ -91,14 +89,14 @@ GameMainMenu::GameMainMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
    b=new UIButton(this, posx, posy, buttonw, 34, 4, 30);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_chat.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
-   posx = spacing;
+   posx = 2*spacing;
    posy += 45;
    
-   buttonw = (get_inner_w()-2*spacing);
+   buttonw = (get_inner_w()-4*spacing);
    b=new UIButton(this, posx, posy, buttonw, 34, 4, 50);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_options_menu.png" ));
    b->clickedid.set(this, &GameMainMenu::clicked);
-   posx = spacing;
+   posx = 2*spacing;
    posy += 40;
    
    set_inner_size(get_inner_w(), posy+5);

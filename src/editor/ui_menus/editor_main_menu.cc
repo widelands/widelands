@@ -37,16 +37,13 @@ Create all the buttons etc...
 ===============
 */
 Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UIUniqueWindowRegistry *registry)
-	: UIUniqueWindow(parent, registry, 130, 200, _("Main Menu"))
+	: UIUniqueWindow(parent, registry, 150, 225, _("Main Menu"))
 {
    m_parent=parent;
 
-   // Caption
-   UITextarea* tt=new UITextarea(this, 0, 0, _("Editor Main Menu"), Align_Left);
-   tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
    // UIButtons
-   const int offsx=5;
-   const int offsy=30;
+   const int offsx=15;
+   const int offsy=15;
    const int spacing=5;
    const int width=get_inner_w()-offsx*2;
    const int height=20;
@@ -58,11 +55,13 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UIUniqueWindowReg
    b->clicked.set(this, &Editor_Main_Menu::new_map_btn);
    posy+=height+spacing;
 
+   posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 1);
    b->set_title(_("Load Map"));
    b->clicked.set(this, &Editor_Main_Menu::load_btn);
    posy+=height+spacing;
 
+   posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 1);
    b->set_title(_("Save Map"));
    b->clicked.set(this, &Editor_Main_Menu::save_btn);
@@ -80,7 +79,7 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UIUniqueWindowReg
    b->clicked.set(this, &Editor_Main_Menu::readme_btn);
    posy+=height+spacing;
 
-   posy+=spacing;
+   posy+=spacing+(height+spacing);
    b=new UIButton(this, posx, posy, width, height, 0);
    b->set_title(_("Exit Editor"));
    b->clicked.set(this, &Editor_Main_Menu::exit_btn);
