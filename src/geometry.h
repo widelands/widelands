@@ -22,138 +22,130 @@
 
 #include <cmath>
 
-struct Point
-{
-   int x;
-   int y;
+struct Point {
+	Point() {}
+	Point(const int px, const int py) : x(px), y(py) {}
 
-   Point() { }
-   Point(int px, int py) : x(px), y(py) { }
+	bool operator==(const Point other) const
+		{return x == other.x and y == other.y;}
+	bool operator!=(const Point other) const {return not (*this == other);}
+
+	Point operator+(const Point other) const
+		{return Point(x + other.x, y + other.y);}
+	Point operator-(const Point other) const
+		{return Point(x - other.x, y - other.y);}
+
+	int x, y;
 };
 
-inline bool operator==(Point a, Point b) { return (a.x == b.x) && (a.y == b.y); }
-inline bool operator!=(Point a, Point b) { return (a.x != b.x) || (a.y != b.y); }
-// TODO adding points doesn't make sense
-inline Point operator+(Point a, Point b) { return Point(a.x + b.x, a.y + b.y); }
-inline Point operator-(Point a, Point b) { return Point(a.x - b.x, a.y - b.y); }
 
 struct Rect : public Point {
-	int w;
-	int h;
+	Rect() {}
+	Rect(int px, int py, int pw, int ph) : Point(px, py), w(pw), h(ph) {}
 
-	Rect() { }
-	Rect(int px, int py, int pw, int ph) : Point(px, py), w(pw), h(ph) { }
+	int w, h;
 };
 
-/** class Point_with_bright
- * this class is like a point, but with additional bright factor
- * bright is an int to make it possible to directly save shifted values (8.8 fixed or so)
- */
-struct Point_with_bright : public Point {
-   int b;
-   Point_with_bright() : Point(0,0) { b=0; }
-   Point_with_bright(int px, int py, int pb) : Point(px, py) { b=pb; }
-};
 
 /** struct Vertex
  *
- * This replaces Point_with_bright for use with the new texture mapping renderer.
- *
- * This struct is like a point, but with an additional bright factor and texture coordinates.
+ * This struct is like a point, but with an additional bright factor and texture
+ * coordinates.
  */
 struct Vertex:public Point {
-	int b,tx,ty;
-	Vertex (): Point (0,0) { b=tx=ty=0; }
-	Vertex (int vx,int vy,int vb,int vtx,int vty): Point (vx,vy)
-	{ b=vb; tx=vtx; ty=vty; }
+	Vertex() : Point (0,0), b(0), tx(0), ty(0) {}
+	Vertex
+	(const int vx, const int vy, const int vb, const int vtx, const int vty) :
+	Point(vx,vy), b(vb), tx(vtx), ty(vty) {}
+
+	int b, tx, ty;
 };
+
 
 // hm, floats...
 // tried to be faster with fixed point arithmetics
 // it was, but i'll try to find other opts first
-class Vector
-{
-   public:
-      float x;
-      float y;
-      float z;
-      Vector()
-      {
-         x = y = z = 0;
-      }
-      Vector(float px, float py, float pz)
-      {
-         x = px; y = py; z = pz;
-      }
-      void normalize()
-      {
-         float f = (float)sqrt(x*x + y*y + z*z);
-         if (f == 0)
-            return;
-         x /= f;
-         y /= f;
-         z /= f;
-      }
+struct Vector {
+	Vector() : x(0), y(0), z(0) {}
+	Vector(const float X, const float Y, const float Z) : x(X), y(Y), z(Z){}
+
+	void normalize() {
+		const float f = static_cast<float>(sqrt(x * x + y * y + z * z));
+		if (f == 0) return;
+		x /= f;
+		y /= f;
+		z /= f;
+	}
+
+	// vector addition
+	Vector operator+(const Vector other) const
+	{return Vector(x + other.x, y + other.y, z + other.z);}
+
+	// inner product
+	float operator*(const Vector other) const
+		{return x * other.x + y * other.y + z * other.z;}
+
+	float x, y, z;
 };
 
-// vector addition
-inline Vector operator + (const Vector& a, const Vector& b)
-{
-   return Vector(a.x + b.x, a.y + b.y, a.z + b.z);
-}
-
-// inner product
-inline float operator * (const Vector& a, const Vector& b)
-{
-   return a.x * b.x + a.y * b.y + a.z * b.z;
-}
 
 
-// Structure used to store map coordinates
+/**
+ * Structure used to store map coordinates
+ */
 struct Coords {
-   int x;
-   int y;
+	Coords() { }
+	Coords(const int nx, const int ny) : x(nx), y(ny) { }
 
-	inline Coords() { }
-	inline Coords(int nx, int ny) : x(nx), y(ny) { }
+	bool operator==(const Coords other) const
+		{return x == other.x and y == other.y;}
+	bool operator!=(const Coords other) const {return not (*this == other);}
+
+	int x, y;
 };
 
-inline bool operator==(const Coords& c1, const Coords& c2) { return (c1.x == c2.x) && (c1.y == c2.y); }
-inline bool operator!=(const Coords& c1, const Coords& c2) { return !(c1 == c2); }
 
 class Field;
 
 struct FCoords : public Coords {
-	Field		*field;
-
-	inline FCoords() { }
+	FCoords() {}
+	FCoords(const Coords nc, Field * const nf) : Coords(nc), field(nf) {}
+	FCoords(const int nx, const int ny, Field * const nf) :
+	Coords(nx, ny), field(nf) {}
 
 	/**
-	 * Used in RenderTargetImpl::rendermap where this is first called, then the
-	 * coordinates are normalized and after that field is set.
+	 * Used in RenderTargetImpl::rendermap where this is first called, then
+	 * the coordinates are normalized and after that field is set.
 	 */
 	FCoords(const int nx, const int ny) : Coords(nx, ny) {}
 
-	inline FCoords(Coords nc, Field *nf) : Coords(nc), field(nf) { }
-	inline FCoords(int nx, int ny, Field *nf) : Coords(nx, ny), field(nf) { }
+	Field * field;
 };
 
+
 struct TCoords : public Coords {
-	enum TriangleIndex {D, R, None} t;
+	enum TriangleIndex {D, R, None};
+
 	TCoords() {}
-	TCoords(const Coords C, const TriangleIndex T = None) : Coords(C), t(T) {}
+	TCoords(const Coords C, const TriangleIndex T = None) : Coords(C), t(T)
+	{}
+
+	TriangleIndex t;
 };
+
 
 struct Node_and_Triangle {
 	Node_and_Triangle() {}
-	Node_and_Triangle(const Coords Node, const TCoords Triangle)
-		: node(Node), triangle(Triangle) {}
+	Node_and_Triangle(const Coords Node, const TCoords Triangle) :
+	node(Node), triangle(Triangle) {}
+
+	bool operator==(const Node_and_Triangle other) const
+		{return node == other.node and triangle == other.triangle;}
+	bool operator!=(const Node_and_Triangle other) const
+		{return not (*this == other);}
+
 	Coords node;
 	TCoords triangle;
 };
-inline bool operator==(Node_and_Triangle a, Node_and_Triangle b)
-{return a.node == b.node and a.triangle == b.triangle;}
-inline bool operator!=(Node_and_Triangle a, Node_and_Triangle b)
-{return a.node != b.node or  a.triangle != b.triangle;}
 
 #endif /* GEOMETRY_H */
