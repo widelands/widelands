@@ -436,7 +436,8 @@ SConsignFile('build/scons-signatures')
 BUILDDIR='build/'+TARGET+'-'+env['build']
 Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
 
-#read target buildcat
+############### buildcat
+
 buildcat=SConscript('locale/SConscript')
 
 ############### The binary
@@ -566,6 +567,11 @@ def do_dist(target, source, env):
 	return None
 
 dist=PhonyTarget("dist", do_dist)
+
+############### precommit
+
+Alias('precommit', 'indent')
+Alias('precommit', buildcat)
 
 ############### CVS
 
