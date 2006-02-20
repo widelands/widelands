@@ -290,11 +290,12 @@ bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
 			_dragging = false;
 		}
 	}
-	else if (btn == MOUSE_RIGHT && down)
+	else if (btn == MOUSE_RIGHT && down) {
 		play_click();
 		delete this; // is this 100% safe?
 			    // no, at least provide a flag for making a
 			    // window unclosable and provide a callback
+	}
 
 	return true;
 }
