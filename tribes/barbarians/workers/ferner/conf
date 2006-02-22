@@ -2,7 +2,7 @@
 descname=_Ferner
 help=Grows Fern
 type=generic
-menu_pic=ferner_menu.png
+menu_pic=menu.png
 program=plant
 program=harvest
 
