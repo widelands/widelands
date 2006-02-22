@@ -15,6 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "The Widelands Development Team"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbares"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "La puissante tribu des terres de l'est!"
+
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Cerf"
@@ -204,18 +216,6 @@ msgstr "Moulin de Guerre"
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Puit"
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "The Widelands Development Team"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbares"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "La puissante tribu des terres de l'est!"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"

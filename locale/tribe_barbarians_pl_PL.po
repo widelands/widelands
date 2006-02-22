@@ -18,6 +18,18 @@ msgstr ""
 "X-Poedit-Country: POLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "The Widelands Development Team"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbarzyńcy"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "The mighty tribes of the east-lands!"
+
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Jeleń"
@@ -207,18 +219,6 @@ msgstr "War Mill"
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Studnia"
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "The Widelands Development Team"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbarzyńcy"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "The mighty tribes of the east-lands!"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
@@ -475,4 +475,3 @@ msgstr "Kamieniarz"
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Trener"
-

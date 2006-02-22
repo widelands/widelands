@@ -1543,8 +1543,8 @@ msgid "Exit Game"
 msgstr ""
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:71
-msgid "(C) 2002-2005 by the Widelands Development Team"
-msgstr "(C) 2002-2005 צוות הפיתוח של ווידלנדס"
+msgid "(C) 2002-2006 by the Widelands Development Team"
+msgstr "(C) 2002-2006 צוות הפיתוח של ווידלנדס"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:54
 msgid "Choose your map!"

@@ -1,51 +1,61 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the Widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Widelands - Finnish language
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: $Id: tribe_barbarians_fi_FI.po,v 1.1 2005/11/12 17:57:35 "
+"sirver Exp $\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-01-19 16:13+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbaareja"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr ""
+
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
-msgstr ""
+msgstr "Peura"
 
 #: ../tribes/barbarians/bobs/wildboar/conf:1
 msgid "Wildboar"
-msgstr ""
+msgstr "Villisika"
 
 #: ../tribes/barbarians/buildings/axefactory/conf:2
 msgid "Axefactory"
-msgstr ""
+msgstr "Kirvestehdas"
 
 #: ../tribes/barbarians/buildings/bakery/conf:2
 msgid "Bakery"
-msgstr ""
+msgstr "Leipomo"
 
 #: ../tribes/barbarians/buildings/barrier/conf:2
 msgid "Barrier"
-msgstr ""
+msgstr "Este"
 
 #: ../tribes/barbarians/buildings/battlearena/conf:2
 msgid "Battle Arena"
-msgstr ""
+msgstr "Sota-alue"
 
 #: ../tribes/barbarians/buildings/big_inn/conf:2
 msgid "Big Inn"
-msgstr ""
+msgstr "Iso majatalo"
 
 #: ../tribes/barbarians/buildings/brewery/conf:2
 msgid "Brewery"
-msgstr ""
+msgstr "Panimotyöläinen"
 
 #: ../tribes/barbarians/buildings/burner/conf:2
 msgid "Charcoal Burner"
@@ -57,19 +67,19 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/coalmine/conf:2
 msgid "Coal mine"
-msgstr ""
+msgstr "Hiilikaivos"
 
 #: ../tribes/barbarians/buildings/constructionsite/conf:5
 msgid "Construction Site"
-msgstr ""
+msgstr "Rakennustyömaa"
 
 #: ../tribes/barbarians/buildings/deep_coalmine/conf:2
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "Syvä hiilikaivos"
 
 #: ../tribes/barbarians/buildings/deep_goldmine/conf:2
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "Syvä kultakaivos"
 
 #: ../tribes/barbarians/buildings/deep_oremine/conf:2
 msgid "Deep Iron Ore Mine"
@@ -89,11 +99,11 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/donjon/conf:2
 msgid "Donjon"
-msgstr ""
+msgstr "Lahjoittaa"
 
 #: ../tribes/barbarians/buildings/farm/conf:2
 msgid "Farm"
-msgstr ""
+msgstr "Maatila"
 
 #: ../tribes/barbarians/buildings/fernery/conf:2
 msgid "Fernery"
@@ -101,11 +111,11 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/fisher/conf:2
 msgid "Fisher Hut"
-msgstr ""
+msgstr "Kalastajan maja"
 
 #: ../tribes/barbarians/buildings/fortress/conf:2
 msgid "Fortress"
-msgstr ""
+msgstr "Linnoitus"
 
 #: ../tribes/barbarians/buildings/gamekeeper/conf:2
 msgid "Gamekeeper Hut"
@@ -113,57 +123,57 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/goldmine/conf:2
 msgid "Gold Mine"
-msgstr ""
+msgstr "Kultakaivos"
 
 #: ../tribes/barbarians/buildings/granitmine/conf:2
 msgid "Granit Mine"
-msgstr ""
+msgstr "Graniittikaivos"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2
 msgid "Wood hardener"
-msgstr ""
+msgstr "Puunkovettaja"
 
 #: ../tribes/barbarians/buildings/headquarters/conf:6
 msgid "Headquarters"
-msgstr ""
+msgstr "Päämaja"
 
 #: ../tribes/barbarians/buildings/helmsmith/conf:2
 #: ../tribes/barbarians/workers/helmsmith/conf:2
 msgid "Helmsmith"
-msgstr ""
+msgstr "Kypäräseppä"
 
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
-msgstr ""
+msgstr "Saalistajan maja"
 
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
-msgstr ""
+msgstr "Majatalo"
 
 #: ../tribes/barbarians/buildings/lumberjack/conf:2
 #: ../tribes/barbarians/workers/lumberjack/conf:2
 msgid "Lumberjack"
-msgstr ""
+msgstr "Puunhakkaaja"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
-msgstr ""
+msgstr "Metallipaja"
 
 #: ../tribes/barbarians/buildings/micro-brewery/conf:2
 msgid "Micro brewery"
-msgstr ""
+msgstr "minileipomo"
 
 #: ../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
-msgstr ""
+msgstr "Tautakaivos"
 
 #: ../tribes/barbarians/buildings/pressworks/conf:2
 msgid "Pressworks"
-msgstr ""
+msgstr "Paino"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
-msgstr ""
+msgstr "Kivilouhos"
 
 #: ../tribes/barbarians/buildings/ranger/conf:2
 msgid "Ranger Hut"
@@ -171,11 +181,11 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
-msgstr ""
+msgstr "Vartio"
 
 #: ../tribes/barbarians/buildings/smelting_works/conf:2
 msgid "Smelting Works"
-msgstr ""
+msgstr "Sulattamo"
 
 #: ../tribes/barbarians/buildings/stonegrinder/conf:2
 msgid "Stonegrinder"
@@ -183,11 +193,11 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/stronghold/conf:2
 msgid "Stronghold"
-msgstr ""
+msgstr "Linnake"
 
 #: ../tribes/barbarians/buildings/tavern/conf:2
 msgid "Tavern"
-msgstr ""
+msgstr "Taverna"
 
 #: ../tribes/barbarians/buildings/trainingscamp/conf:2
 msgid "Trainingscamp"
@@ -195,7 +205,7 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/warehouse/conf:2
 msgid "Warehouse"
-msgstr ""
+msgstr "Varasto"
 
 #: ../tribes/barbarians/buildings/warmill/conf:2
 msgid "War Mill"
@@ -203,23 +213,11 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
-msgstr ""
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr ""
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr ""
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr ""
+msgstr "Kaivo"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
-msgstr ""
+msgstr "Kirves"
 
 #: ../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Bakingtray"
@@ -227,11 +225,11 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
 msgid "Battle Axe"
-msgstr ""
+msgstr "Sotakirves"
 
 #: ../tribes/barbarians/wares/beer/conf:2
 msgid "Beer"
-msgstr ""
+msgstr "Kaljaa"
 
 #: ../tribes/barbarians/wares/blackwood/conf:2
 msgid "Blackwood"
@@ -247,15 +245,15 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/cloth/conf:2
 msgid "Cloth"
-msgstr ""
+msgstr "Vaate"
 
 #: ../tribes/barbarians/wares/coal/conf:2
 msgid "Coal"
-msgstr ""
+msgstr "Hiiltä"
 
 #: ../tribes/barbarians/wares/coalearth/conf:2
 msgid "Coalearth"
-msgstr ""
+msgstr "Kivihiili"
 
 #: ../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
@@ -263,15 +261,15 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/fish/conf:2
 msgid "Fish"
-msgstr ""
+msgstr "Kala"
 
 #: ../tribes/barbarians/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
-msgstr ""
+msgstr "Onki"
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
-msgstr ""
+msgstr "Kulta"
 
 #: ../tribes/barbarians/wares/goldstone/conf:2
 msgid "Goldstone"
@@ -283,67 +281,67 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
-msgstr ""
+msgstr "Vasara"
 
 #: ../tribes/barbarians/wares/helm/conf:2
 msgid "Helm"
-msgstr ""
+msgstr "Kypärä"
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
-msgstr ""
+msgstr "Metsästysseiväs"
 
 #: ../tribes/barbarians/wares/iron/conf:2
 msgid "Iron"
-msgstr ""
+msgstr "Rauta"
 
 #: ../tribes/barbarians/wares/ironore/conf:2
 msgid "Ironore"
-msgstr ""
+msgstr "Rautamalmi"
 
 #: ../tribes/barbarians/wares/kitchen_tools/conf:2
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "Keittiövälineet"
 
 #: ../tribes/barbarians/wares/mask/conf:2
 msgid "Mask"
-msgstr ""
+msgstr "Maski"
 
 #: ../tribes/barbarians/wares/meal/conf:2
 msgid "Meal"
-msgstr ""
+msgstr "Annos"
 
 #: ../tribes/barbarians/wares/meat/conf:2
 msgid "Meat"
-msgstr ""
+msgstr "Liha"
 
 #: ../tribes/barbarians/wares/pick/conf:2
 msgid "Pick"
-msgstr ""
+msgstr "Poimi"
 
 #: ../tribes/barbarians/wares/pittabread/conf:2
 msgid "Pittabread"
-msgstr ""
+msgstr "Pitaleipä"
 
 #: ../tribes/barbarians/wares/ration/conf:2
 msgid "Ration"
-msgstr ""
+msgstr "Annos"
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
-msgstr ""
+msgstr "Raakakivi"
 
 #: ../tribes/barbarians/wares/scythe/conf:2
 msgid "Scythe"
-msgstr ""
+msgstr "Viikate"
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
 msgid "Sharp Axe"
-msgstr ""
+msgstr "Terävä kirves"
 
 #: ../tribes/barbarians/wares/shovel/conf:2
 msgid "Shovel"
-msgstr ""
+msgstr "Lapio"
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
@@ -351,7 +349,7 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"
-msgstr ""
+msgstr "Vahvaa kaljaa"
 
 #: ../tribes/barbarians/wares/thatchfern/conf:2
 msgid "Thatch Fern"
@@ -359,63 +357,63 @@ msgstr ""
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
-msgstr ""
+msgstr "Tukki"
 
 #: ../tribes/barbarians/wares/warhelmet/conf:2
 msgid "War Helmet"
-msgstr ""
+msgstr "Sotakypärä"
 
 #: ../tribes/barbarians/wares/warriorsaxe/conf:2
 msgid "Warriors Axe"
-msgstr ""
+msgstr "Soturin kirves"
 
 #: ../tribes/barbarians/wares/water/conf:2
 msgid "Water"
-msgstr ""
+msgstr "Vettä"
 
 #: ../tribes/barbarians/wares/wheat/conf:2
 msgid "Wheat"
-msgstr ""
+msgstr "Viljaa"
 
 #: ../tribes/barbarians/workers/baker/conf:2
 msgid "Baker"
-msgstr ""
+msgstr "Leipomo"
 
 #: ../tribes/barbarians/workers/blacksmith/conf:2
 msgid "Blacksmith"
-msgstr ""
+msgstr "Seppä"
 
 #: ../tribes/barbarians/workers/brewer/conf:2
 msgid "Brewer"
-msgstr ""
+msgstr "Panimo"
 
 #: ../tribes/barbarians/workers/builder/conf:2
 msgid "Builder"
-msgstr ""
+msgstr "Rakentaja"
 
 #: ../tribes/barbarians/workers/burner/conf:2
 msgid "Burner"
-msgstr ""
+msgstr "Polttaja"
 
 #: ../tribes/barbarians/workers/carrier/conf:2
 msgid "Carrier"
-msgstr ""
+msgstr "Kantaja"
 
 #: ../tribes/barbarians/workers/chief-miner/conf:2
 msgid "Chief Miner"
-msgstr ""
+msgstr "Kaivospäällikkö"
 
 #: ../tribes/barbarians/workers/farmer/conf:2
 msgid "Farmer"
-msgstr ""
+msgstr "Farmari"
 
 #: ../tribes/barbarians/workers/ferner/conf:2
 msgid "Ferner"
-msgstr ""
+msgstr "Käydä"
 
 #: ../tribes/barbarians/workers/fisher/conf:2
 msgid "Fisher"
-msgstr ""
+msgstr "Kalastaja"
 
 #: ../tribes/barbarians/workers/gamekeeper/conf:2
 msgid "Gamekeeper"
@@ -423,15 +421,15 @@ msgstr ""
 
 #: ../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
-msgstr ""
+msgstr "Geologi"
 
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
-msgstr ""
+msgstr "Saalistaja"
 
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
-msgstr ""
+msgstr "Majatalonpitäjä"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
@@ -443,32 +441,32 @@ msgstr ""
 
 #: ../tribes/barbarians/workers/master-miner/conf:2
 msgid "Master Miner"
-msgstr ""
+msgstr "Mestarikaivostyöläinen"
 
 #: ../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
-msgstr ""
+msgstr "Kaivostyöläinen"
 
 #: ../tribes/barbarians/workers/presser/conf:2
 msgid "Presser"
-msgstr ""
+msgstr "Painaja"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
-msgstr ""
+msgstr "Puunistuttaja"
 
 #: ../tribes/barbarians/workers/smelter/conf:2
 msgid "Smelter"
-msgstr ""
+msgstr "Sulattaja"
 
 #: ../tribes/barbarians/workers/soldier/conf:2
 msgid "Soldier"
-msgstr ""
+msgstr "Sotilas"
 
 #: ../tribes/barbarians/workers/stonemason/conf:2
 msgid "Stonemason"
-msgstr ""
+msgstr "Kivenhakkaaja"
 
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
-msgstr ""
+msgstr "Valmentaja"

@@ -1,64 +1,62 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the Widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Widelands - Finnish language
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: $Id: world_greenland_fi_FI.po,v 1.1 2005/11/12 17:57:35 "
+"sirver Exp $\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2005-12-18 14:08+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
-msgstr ""
+msgstr "Jänis"
 
 #: ../worlds/greenland/bobs/bush1/conf:1 ../worlds/greenland/bobs/bush2/conf:1
 #: ../worlds/greenland/bobs/bush3/conf:1 ../worlds/greenland/bobs/bush4/conf:1
 #: ../worlds/greenland/bobs/bush5/conf:1
 msgid "Bush"
-msgstr ""
+msgstr "Puska"
 
 #: ../worlds/greenland/bobs/cactus1/conf:1
 #: ../worlds/greenland/bobs/cactus2/conf:1
 msgid "Cactus"
-msgstr ""
+msgstr "Kaktus"
 
 #: ../worlds/greenland/bobs/deadtree1/conf:1
 #: ../worlds/greenland/bobs/deadtree2/conf:1
 #: ../worlds/greenland/bobs/deadtree3/conf:1
 #: ../worlds/greenland/bobs/deadtree4/conf:1
 msgid "Dead Tree"
-msgstr ""
+msgstr "Kuollut puu"
 
 #: ../worlds/greenland/bobs/deer/conf:1
 msgid "Deer"
-msgstr ""
+msgstr "Peura"
 
 #: ../worlds/greenland/bobs/duck/conf:1
 msgid "Duck"
-msgstr ""
+msgstr "Ankka"
 
 #: ../worlds/greenland/bobs/fox/conf:1
 msgid "Fox"
-msgstr ""
+msgstr "Kettu"
 
 #: ../worlds/greenland/bobs/grass1/conf:1
 #: ../worlds/greenland/bobs/grass2/conf:1
 #: ../worlds/greenland/bobs/grass3/conf:1
 msgid "Grass"
-msgstr ""
+msgstr "Ruohoa"
 
 #: ../worlds/greenland/bobs/mushroom1/conf:1
 #: ../worlds/greenland/bobs/mushroom2/conf:1
 msgid "Mushroom"
-msgstr ""
+msgstr "Sieni"
 
 #: ../worlds/greenland/bobs/pebble1/conf:1
 #: ../worlds/greenland/bobs/pebble2/conf:1
@@ -67,21 +65,21 @@ msgstr ""
 #: ../worlds/greenland/bobs/pebble5/conf:1
 #: ../worlds/greenland/bobs/pebble6/conf:1
 msgid "Pebble"
-msgstr ""
+msgstr "Sora"
 
 #: ../worlds/greenland/bobs/reindeer/conf:1
 msgid "Reindeer"
-msgstr ""
+msgstr "Poro"
 
 #: ../worlds/greenland/bobs/sheep/conf:1
 msgid "Sheep"
-msgstr ""
+msgstr "Lammas"
 
 #: ../worlds/greenland/bobs/skeleton1/conf:1
 #: ../worlds/greenland/bobs/skeleton2/conf:1
 #: ../worlds/greenland/bobs/skeleton3/conf:1
 msgid "Skeleton"
-msgstr ""
+msgstr "Luuranko"
 
 #: ../worlds/greenland/bobs/sstones1/conf:1
 #: ../worlds/greenland/bobs/sstones2/conf:1
@@ -100,22 +98,22 @@ msgstr ""
 #: ../worlds/greenland/bobs/stones5/conf:1
 #: ../worlds/greenland/bobs/stones6/conf:1
 msgid "Stones"
-msgstr ""
+msgstr "Kiviä"
 
 #: ../worlds/greenland/bobs/tree1/conf:4 ../worlds/greenland/bobs/tree2/conf:4
 #: ../worlds/greenland/bobs/tree3/conf:4 ../worlds/greenland/bobs/tree4/conf:4
 #: ../worlds/greenland/bobs/tree5/conf:4 ../worlds/greenland/bobs/tree6/conf:4
 #: ../worlds/greenland/bobs/tree7/conf:4 ../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
-msgstr ""
+msgstr "Puu"
 
 #: ../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "Widelands-kehittäjätiimi"
 
 #: ../worlds/greenland/conf:3
 msgid "Greenland"
-msgstr ""
+msgstr "Ruohikko"
 
 #: ../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
@@ -123,24 +121,24 @@ msgstr ""
 
 #: ../worlds/greenland/resconf:4
 msgid "Coal"
-msgstr ""
+msgstr "Hiili"
 
 #: ../worlds/greenland/resconf:12
 msgid "Gold"
-msgstr ""
+msgstr "Kulta"
 
 #: ../worlds/greenland/resconf:20
 msgid "Iron"
-msgstr ""
+msgstr "Rauta"
 
 #: ../worlds/greenland/resconf:28
 msgid "Granit"
-msgstr ""
+msgstr "Graniitti"
 
 #: ../worlds/greenland/resconf:36
 msgid "Water"
-msgstr ""
+msgstr "Vesi"
 
 #: ../worlds/greenland/resconf:41
 msgid "Fish"
-msgstr ""
+msgstr "Kala"
