@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #include "game_computer_player_data_packet.h"
 #include "computer_player.h"
 #include "mapview.h"
-#include "overlay_manager.h"
 
 #define CURRENT_PACKET_VERSION 1
 
@@ -36,7 +35,7 @@ Game_Computer_Player_Data_Packet::~Game_Computer_Player_Data_Packet(void) {
  */
 void Game_Computer_Player_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    FileRead fr;
-   
+
    fr.Open( fs, "binary/computer_player");
    // read packet version
    int packet_version=fr.Unsigned16();
@@ -44,12 +43,12 @@ void Game_Computer_Player_Data_Packet::Read(FileSystem* fs, Game* game, Wideland
    if(packet_version==CURRENT_PACKET_VERSION) {
       // This packet currently does nothing at all. The AI doesn't has any saved data
       // if you add anything here, remember to increase the version count (for backwards compatibility)
-      
+
       // DONE
       return;
    } else
       throw wexception("Unknown version in Game_Computer_Player_Data_Packet: %i\n", packet_version);
-  
+
    assert(0); // never here
 }
 
@@ -58,10 +57,10 @@ void Game_Computer_Player_Data_Packet::Read(FileSystem* fs, Game* game, Wideland
  */
 void Game_Computer_Player_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    FileWrite fw;
-   
+
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
-   
+
    // Sorry, not anything more currently
    fw.Write( fs, "binary/computer_player");
 }
