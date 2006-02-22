@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@ Texture implementation and terrain rendering for the 16-bit software renderer.
 #include "field.h"
 #include "filesystem.h"
 #include "graphic_impl.h"
+#include "mapviewpixelfunctions.h"
 #include "world.h"
 #include "random.h"
 
@@ -49,11 +50,11 @@ Colormap::Colormap (const SDL_Color *pal, SDL_PixelFormat* fmt)
 
 	memcpy(palette, pal, sizeof(palette));
 
-   if( fmt->BytesPerPixel == 2) 
+   if( fmt->BytesPerPixel == 2)
       colormap=malloc(sizeof(ushort)*65536);
    else if( fmt->BytesPerPixel == 4)
       colormap=malloc(sizeof(ulong)*65536);
-      
+
 //    log ("Creating color map\n");
 	for (i=0;i<256;i++)
 		for (j=0;j<256;j++) {
@@ -68,7 +69,7 @@ Colormap::Colormap (const SDL_Color *pal, SDL_PixelFormat* fmt)
          if (g>255) g=255;
          if (b>255) b=255;
 
-         if( fmt->BytesPerPixel == 2) 
+         if( fmt->BytesPerPixel == 2)
             ((ushort*)colormap)[(j<<8) | i]= (ushort)SDL_MapRGB( fmt, r, g, b );
          else if( fmt->BytesPerPixel == 4)
             ((ulong*)colormap)[(j<<8) | i]= (ulong)SDL_MapRGB( fmt, r, g, b );
@@ -235,7 +236,7 @@ ulong Texture::get_minimap_color(char shade)
 	uchar clr = m_pixels[0]; // just use the top-left pixel
 	uint table = (uchar)shade;
 
-   if( is_32bit ) 
+   if( is_32bit )
       return ((ulong*)m_colormap->get_colormap())[clr | (table << 8)];
    else
       return ((ushort*)m_colormap->get_colormap())[clr | (table << 8)];
@@ -251,9 +252,9 @@ void Texture::animate(uint time)
 	int frame = (time / m_frametime) % m_nrframes;
 
    uchar* lastframe = m_curframe;
-   
+
 	m_curframe = &m_pixels[TEXTURE_W*TEXTURE_H*frame];
-   if( lastframe != m_curframe ) 
+   if( lastframe != m_curframe )
       m_was_animated = true;
 }
 
@@ -338,7 +339,7 @@ void render_top_triangle (Surface *dst,Texture *tex,Vertex *p1,Vertex *p2,Vertex
 			count=ix2-ix1;
 
 			T *scanline=(T*) ((uchar*)dst->get_pixels() + y*dst->get_pitch()) + ix1;
-			
+
 			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
 
@@ -385,7 +386,7 @@ void render_bottom_triangle (Surface* dst,Texture *tex,Vertex *p1,Vertex *p2,Ver
 	x1=x2=itofix(p3->x);
 	dx1=-(itofix(p1->x) - x1) / (p1->y - y2);
 	dx2=-(itofix(p2->x) - x1) / (p2->y - y2);
-	
+
 	// this may seem redundant but reduces rounding artifacts
 	x1=itofix(p1->x) + dx1*(p1->y-y2);
 	x2=itofix(p2->x) + dx2*(p2->y-y2);
@@ -422,7 +423,7 @@ void render_bottom_triangle (Surface* dst,Texture *tex,Vertex *p1,Vertex *p2,Ver
 
 			while (count-->0) {
 				int texel=((tx>>16) & (TEXTURE_W-1)) | ((ty>>10) & ((TEXTURE_H-1)<<6));
-            
+
             			*scanline++=texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
 
 				b+=db;
@@ -539,7 +540,7 @@ void dither_edge_horiz (Surface* dst, const Vertex& start, const Vertex& end, Te
 
 	for(int x = start.x; x < end.x; x++, centery += ydiff) {
 		rnd=SIMPLE_RAND(rnd);
-		
+
 		if (x>=0 && x<dstw) {
 			int y = fixtoi(centery) - DITHER_WIDTH;
 
@@ -613,7 +614,7 @@ static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& e
 
 	for(int y = start.y; y < end.y; y++, centerx += xdiff) {
 		rnd=SIMPLE_RAND(rnd);
-		
+
 		if (y>=0 && y<dsth) {
 			int x = fixtoi(centerx) - DITHER_WIDTH;
 
@@ -661,7 +662,7 @@ static void dither_edge_vert (Surface* dst, const Vertex& start, const Vertex& e
 render_road_horiz
 render_road_vert
 
-Render a road. 
+Render a road.
 ===============
 */
 template<typename T>
@@ -685,7 +686,7 @@ void render_road_horiz(Surface* dst, const Point& start, const Point& end, Surfa
 
         		T* dpix = (T*)((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
         		T* spix = (T*)((uchar*)src->get_pixels() + i*src->get_pitch()) + sx;
-        		*dpix = *spix; 
+        		*dpix = *spix;
 		}
 	}
 }
@@ -698,7 +699,7 @@ void render_road_vert(Surface* dst, const Point& start, const Point& end, Surfac
 
 	int xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int centerx = start.x << 16;
-			
+
 	for(int y = start.y, sy = 0; y < end.y; y++, centerx += xdiff, sy ++ ) {
 		if (y < 0 || y >= dsth)
 			continue;
@@ -712,7 +713,7 @@ void render_road_vert(Surface* dst, const Point& start, const Point& end, Surfac
 
         		T* dpix = (T*)((uchar*)dst->get_pixels() + y*dst->get_pitch()) + x;
         		T* spix = (T*)((uchar*)src->get_pixels() + sy*src->get_pitch()) + i;
-        		*dpix = *spix; 
+        		*dpix = *spix;
 		}
 	}
 }
@@ -727,10 +728,10 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 {
 	Vertex r, l, br, bl;
 
-	r = Vertex(rposx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(rf->get_height()), rf->get_brightness(), 0, 0);
-	l = Vertex(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f->get_height()), f->get_brightness(), 64, 0);
-	br = Vertex(rblposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(rfl->get_height()), rfl->get_brightness(), 0, 64);
-	bl = Vertex(blposx, blposy - MULTIPLY_WITH_HEIGHT_FACTOR(fl->get_height()), fl->get_brightness(), 64, 64);
+	r = Vertex(rposx, posy - rf->get_height() * HEIGHT_FACTOR, rf->get_brightness(), 0, 0);
+	l = Vertex(posx, posy - f->get_height() * HEIGHT_FACTOR, f->get_brightness(), 64, 0);
+	br = Vertex(rblposx, blposy - rfl->get_height() * HEIGHT_FACTOR, rfl->get_brightness(), 0, 64);
+	bl = Vertex(blposx, blposy - fl->get_height() * HEIGHT_FACTOR, fl->get_brightness(), 64, 64);
 
 	if (darken&1) l.b=-128;
 	if (darken&2) r.b=-128;
@@ -762,9 +763,9 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 	if ((darken&3)!=3) {
 		if (road) {
 			switch(road) {
-				case Road_Normal: 
+				case Road_Normal:
 					render_road_horiz<T> (dst, l, r, rt_normal);
-					break; 
+					break;
 				case Road_Busy:
 					render_road_horiz<T> (dst, l, r, rt_busy);
 					break;
@@ -773,7 +774,7 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 			}
 		}
 		else {
-			if( draw_all || rtex->was_animated() || ttex->was_animated()) 
+			if( draw_all || rtex->was_animated() || ttex->was_animated())
 				if (rtex!=0 && ttex!=0 && rtex!=ttex)
 					dither_edge_horiz<T> (dst, l, r, rtex, ttex);
 		}
@@ -785,7 +786,7 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 			switch(road) {
 				case Road_Normal:
 					render_road_vert<T> (dst, l, br, rt_normal);
-					break; 
+					break;
 				case Road_Busy:
 					render_road_vert<T> (dst, l, br, rt_busy);
 					break;
@@ -794,7 +795,7 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 			}
 		}
 		else {
-			if( draw_all || rtex->was_animated() || btex->was_animated()) 
+			if( draw_all || rtex->was_animated() || btex->was_animated())
 				if (rtex!=0 && btex!=0 && rtex!=btex)
 					dither_edge_vert<T> (dst, l, br, rtex, btex);
 		}
@@ -806,7 +807,7 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 			switch(road) {
 				case Road_Normal:
 					render_road_vert<T> (dst, l, bl, rt_normal);
-					break; 
+					break;
 				case Road_Busy:
 					render_road_vert<T> (dst, l, bl, rt_busy);
 					break;
@@ -815,7 +816,7 @@ void draw_field_int(Surface* dst, Field * const f, Field * const rf, Field * con
 			}
 		}
 		else {
-			if( draw_all || btex->was_animated() || ltex->was_animated()) 
+			if( draw_all || btex->was_animated() || ltex->was_animated())
 				if (ltex!=0 && btex!=0 && ltex!=btex)
 					dither_edge_vert<T>(dst, l, bl, btex, ltex);
 		}

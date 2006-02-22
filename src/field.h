@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,17 +23,6 @@
 #include <cassert>
 #include "types.h"
 
-// !!!!!!!!!!! remember to change the MULTIPLY_WITH_* macros below too !!!!!!!!!!!!!!!!
-//#define FIELD_WIDTH 58
-//#define FIELD_HEIGHT 58
-#define FIELD_WIDTH   64
-#define FIELD_HEIGHT  64
-#define HEIGHT_FACTOR 5
-// those are really just fast, if num is not a complex think, like
-// calling a function or so
-#define MULTIPLY_WITH_HEIGHT_FACTOR(num) ( ((num)<<2)+(num) )
-#define MULTIPLY_WITH_FIELD_WIDTH(num) ( ((num)<<6) )
-#define MULTIPLY_WITH_HALF_FIELD_HEIGHT(num) ( ((num)<<5) )  // it's nearly never needed to use FIELD_HEIGHT in multiplys, only FIELD_HEIGHT/2
 #define MAX_FIELD_HEIGHT 60
 #define MAX_FIELD_HEIGHT_DIFF 5
 

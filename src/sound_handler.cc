@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 
 #include <assert.h>
 #include <errno.h>
+#include "mapviewpixelfunctions.h"
 #include "profile.h"
 #include "options.h"
 #include "error.h"
@@ -57,7 +58,7 @@ Songset::~Songset()
 
 /** Append a song to the end of the songset
  * \param filename	The song to append
- * \note The \ref current_song will unconditionally be set to the songset's 
+ * \note The \ref current_song will unconditionally be set to the songset's
  * first song. If you do not want to disturb the (linear) playback order then
  * \ref register_song() all songs before you start playing
  */
@@ -173,7 +174,7 @@ void FXset::add_fx(Mix_Chunk * fx, Uint8 prio)
 
 /** Get a sound effect from the fxset. \e Which variant of the fx is actually
  * given out is determined at random
- * \return	a pointer to the chosen effect; NULL if sound effects are 
+ * \return	a pointer to the chosen effect; NULL if sound effects are
  * disabled or no fx is registered
 */
 Mix_Chunk *FXset::get_fx()
@@ -291,7 +292,7 @@ void Sound_Handler::read_config()
 }
 
 /** Load systemwide sound fx into memory.
- * \note This loads only systemwide fx. Worker/building fx will be loaded by 
+ * \note This loads only systemwide fx. Worker/building fx will be loaded by
  * their respective conf-file parsers
 */
 void Sound_Handler::load_system_sounds()
@@ -306,7 +307,7 @@ void Sound_Handler::load_system_sounds()
  * recursively.
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
  * \param dir        The directory where the audio files reside
- * \param basename	Name from which filenames will be formed 
+ * \param basename	Name from which filenames will be formed
  *                   (BASENAME_XX.wav);
  *                   also the name used with \ref play_fx
  * \internal
@@ -334,18 +335,18 @@ void Sound_Handler::load_fx(const string dir, const string basename,
 }
 
 /** A wrapper for Mix_LoadWAV that supports RWops
- * 
+ *
  * In short: always use this instead of Mix_LoadWAV_RW(), because the latter
  * does not work on many systems.
- * 
- * For Mix_LoadWAV, there is only preliminary RWops support even in (now 
+ *
+ * For Mix_LoadWAV, there is only preliminary RWops support even in (now
  * current) SDL_mixer-1.2.6 for Linux. In older SDL versions and on other OSes
  * there is no support at all. Widelands' layered filesystem, however, is
  * utterly dependant on RWops. That's the reason for this wrapper. If RWops
  * support is available in Mix_LoadWAV we use it, otherwise we use "normal"
  * RWops (that are available on every platform) to create a tempfile that
  * Mix_LoadWAV can read from.
- * 
+ *
  * \param fr	Pointer to a FileRead RWops with the
  * \return	a pointer to the loaded sample; NULL if any error ocurred
  * \note This should be phased out when RWops support in Mix_LoadWAV has been
@@ -448,9 +449,9 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 /** Add exactly one file to the given fxset.
  * \param filename	The effect to be loaded
  * \param fx_name	The fxset to add the file to
- * The file format must be ogg or wav. Otherwise this call will complain and 
+ * The file format must be ogg or wav. Otherwise this call will complain and
  * not load the file.
- * \note The complete audio file will be loaded into memory and stays there 
+ * \note The complete audio file will be loaded into memory and stays there
  * until the game is finished.
 */
 void Sound_Handler::load_one_fx(const string filename, const string fx_name)
@@ -489,7 +490,7 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 /** Calculate  the position of an effect in relation to the visible part of the
  * screen.
  * \param position	Where the event happened (map coordinates)
- * \return position in widelands' game window: left=0, right=254, not in 
+ * \return position in widelands' game window: left=0, right=254, not in
  * viewport = -1
  * \note This function can also be used to check whether a logical coordinate is
  * visible at all
@@ -515,8 +516,7 @@ int Sound_Handler::stereo_position(const Coords position)
 	xres = ia->get_xres();
 	yres = ia->get_yres();
 
-	fposition=ia->get_map()->get_fcoords(position);
-	m_the_game->get_map()->get_pix(fposition, &sx, &sy);
+	MapviewPixelFunctions::get_pix(*m_the_game->get_map(), position, sx, sy);
 	sx -= vp.x;
 	sy -= vp.y;
 
@@ -599,7 +599,7 @@ bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
  * must have been loaded before with \ref load_fx.
  * \param fx_name	The identifying name of the sound effect, see \ref load_fx
  * \param map_position  Map coordinates where the event takes place
- * \param priority	How important is it that this FX actually gets played? 
+ * \param priority	How important is it that this FX actually gets played?
  *			(see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx(const string fx_name, Coords map_position,
@@ -618,11 +618,11 @@ void Sound_Handler::play_fx(const string fx_name, Coords map_position,
 }
 
 /** \overload
- * \param fx_name		The identifying name of the sound effect, see 
+ * \param fx_name		The identifying name of the sound effect, see
  * 				\ref load_fx
- * \param stereo_position	position in widelands' game window, see 
+ * \param stereo_position	position in widelands' game window, see
  * 				\ref stereo_position
- * \param priority		How important is it that this FX actually gets 
+ * \param priority		How important is it that this FX actually gets
  * 				played? (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx(const string fx_name, const int stereo_position,
@@ -704,9 +704,9 @@ void Sound_Handler::register_song(const string dir, const string basename,
 
 /** Start playing a songset.
  * \param songset_name	The songset to play a song from
- * \param fadein_ms	Song will fade from 0% to 100% during fadein_ms 
+ * \param fadein_ms	Song will fade from 0% to 100% during fadein_ms
  * 			milliseconds starting from now
- * \note When calling start_music() while music is still fading out from 
+ * \note When calling start_music() while music is still fading out from
  * \ref stop_music()
  * or \ref change_music() this function will block until the fadeout is complete
 */
@@ -756,9 +756,9 @@ void Sound_Handler::stop_music(int fadeout_ms)
 /** Play an other piece of music.
  * This is a member function provided for convenience. It is a wrapper around
  * \ref start_music and \ref stop_music.
- * \param fadeout_ms	Old song will fade from 100% to 0% during fadeout_ms 
+ * \param fadeout_ms	Old song will fade from 100% to 0% during fadeout_ms
  * 			milliseconds starting from now
- * \param fadein_ms	New song will fade from 0% to 100% during fadein_ms 
+ * \param fadein_ms	New song will fade from 0% to 100% during fadein_ms
  * 			milliseconds starting from now
  * If songset_name is empty, another song from the currently active songset will
  * be selected
@@ -794,7 +794,7 @@ bool Sound_Handler::get_disable_fx()
 }
 
 /** Normal set_* function, but the music must be started/stopped accordingly
- * Also, the new value is written back to the config file right away. It might 
+ * Also, the new value is written back to the config file right away. It might
  * get lost otherwise.
 */
 void Sound_Handler::set_disable_music(bool disable)
@@ -815,7 +815,7 @@ void Sound_Handler::set_disable_music(bool disable)
 }
 
 /** Normal set_* function
- * Also, the new value is written back to the config file right away. It might 
+ * Also, the new value is written back to the config file right away. It might
  * get lost otherwise.
 */
 void Sound_Handler::set_disable_fx(bool disable)

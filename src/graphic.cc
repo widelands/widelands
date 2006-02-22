@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,8 @@ Management classes and functions of the 16-bit software renderer.
 #include "filesystem.h"
 #include "font_handler.h"
 #include "map.h"
+#include "mapviewpixelconstants.h"
+#include "mapviewpixelfunctions.h"
 #include "player.h"
 #include "graphic_impl.h"
 #include "tribe.h"
@@ -249,7 +251,7 @@ int RenderTargetImpl::get_h() const
 /*
  * Render Target: draw line
  *
- * This functions draws a (not horizontal or vertical) 
+ * This functions draws a (not horizontal or vertical)
  * line in the target, using Bresenham's algorithm
  *
  * This function is still quite slow, since it draws
@@ -262,7 +264,7 @@ void RenderTargetImpl::draw_line(int x1, int y1, int x2, int y2, RGBColor color)
    int dxabs=abs(dx);
    int dyabs=abs(dy);
    int sdx= dx < 0 ? -1 : 1;
-   int sdy= dy < 0 ? -1 : 1; 
+   int sdy= dy < 0 ? -1 : 1;
    int x=dyabs>>1;
    int y=dxabs>>1;
    int px=x1;
@@ -606,7 +608,7 @@ viewofs is the offset of the upper left corner of the window into the map,
 in pixels.
 
 the last parameter, draw all, is only to check if the whole ground texture tiles have
-to be redrawn or only the aniamted once. If no animation took place, the ground is not 
+to be redrawn or only the aniamted once. If no animation took place, the ground is not
 redrawn at all.
 ===============
 */
@@ -619,8 +621,8 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 	viewofs.x -= m_offset.x;
 	viewofs.y -= m_offset.y;
 
-	
-	// Completely clear the window ( this blinks ) 
+
+	// Completely clear the window ( this blinks )
 	// m_ground_surface->clear();
 
 	// Actually draw the map. Loop through fields row by row
@@ -632,10 +634,10 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 	int minfx, minfy;
 	int maxfx, maxfy;
 
-	minfx = (viewofs.x + (FIELD_WIDTH>>1)) / FIELD_WIDTH - 1; // hack to prevent negative numbers
-	minfy = viewofs.y / (FIELD_HEIGHT>>1);
-	maxfx = (viewofs.x + (FIELD_WIDTH>>1) + m_rect.w) / FIELD_WIDTH;
-	maxfy = (viewofs.y + m_rect.h) / (FIELD_HEIGHT>>1);
+	minfx = (viewofs.x + (TRIANGLE_WIDTH>>1)) / TRIANGLE_WIDTH - 1; // hack to prevent negative numbers
+	minfy = viewofs.y / TRIANGLE_HEIGHT;
+	maxfx = (viewofs.x + (TRIANGLE_WIDTH>>1) + m_rect.w) / TRIANGLE_WIDTH;
+	maxfy = (viewofs.y + m_rect.h) / TRIANGLE_HEIGHT;
 	maxfx += 1; // because of big buildings
 	maxfy += 10; // necessary because of heights
 
@@ -643,6 +645,7 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 	int dx = maxfx - minfx + 1;
 	int dy = maxfy - minfy + 1;
    int linear_fy = minfy;
+	bool row_is_forward = linear_fy & 1;
 
 	while(dy--) {
 		int linear_fx = minfx;
@@ -652,7 +655,8 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 		int tlposx, tposy;
 
 		// Use linear (non-wrapped) coordinates to calculate on-screen pos
-		map->get_basepix(Coords(linear_fx, linear_fy), &posx, &posy);
+		MapviewPixelFunctions::get_basepix
+			(Coords(linear_fx, linear_fy), posx, posy);
 		posx -= viewofs.x;
 		posy -= viewofs.y;
 
@@ -660,7 +664,7 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 		bl.y = linear_fy+1;
 		bl.x = linear_fx - (bl.y&1);
 
-		map->get_basepix(bl, &blposx, &bposy);
+		MapviewPixelFunctions::get_basepix(bl, blposx, bposy);
 		blposx -= viewofs.x;
 		bposy -= viewofs.y;
 
@@ -668,7 +672,7 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 		tl.y = linear_fy-1;
 		tl.x = linear_fx - (tl.y&1);
 
-		map->get_basepix(tl, &tlposx, &tposy);
+		MapviewPixelFunctions::get_basepix(tl, tlposx, tposy);
 		tlposx -= viewofs.x;
 		tposy -= viewofs.y;
 
@@ -690,16 +694,16 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 			uchar darken=0;
 
 			map->get_rn(f, &r);
-			rposx = posx + FIELD_WIDTH;
+			rposx = posx + TRIANGLE_WIDTH;
 
 			map->get_ln(f, &l);
-			lposx = posx - FIELD_WIDTH;
+			lposx = posx - TRIANGLE_WIDTH;
 
 			map->get_rn(bl, &br);
-			brposx = blposx + FIELD_WIDTH;
+			brposx = blposx + TRIANGLE_WIDTH;
 
 			map->get_rn(tl, &tr);
-			trposx = tlposx + FIELD_WIDTH;
+			trposx = tlposx + TRIANGLE_WIDTH;
 
 			if (visibility) {
 				if (!(*visibility)[f.y*mapwidth + f.x]) darken|=1;
@@ -715,7 +719,7 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 
 			m_ground_surface->draw_field(m_rect, f.field, r.field, bl.field, br.field, l.field, tr.field,
 				posx, rposx, posy, blposx, brposx, bposy, roads, darken, draw_all);
-      
+
 			// Advance to next field in row
 			bl = br;
 			blposx = brposx;
@@ -728,127 +732,308 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 		}
 
 		linear_fy++;
+		row_is_forward = not row_is_forward;
 	}
-   
+
    // Copy ground where it belongs: on the screen
-   
-   m_surface->blit(Point( m_rect.x, m_rect.y), m_ground_surface, m_rect); 
-   
-   dx = maxfx - minfx + 1;
-	dy = maxfy - minfy + 1;
-   linear_fy = minfy;
 
-	while(dy--) {
-		int linear_fx = minfx;
-		FCoords f, bl, tl;
-		int posx, posy;
-		int blposx, bposy;
-		int tlposx, tposy;
+   m_surface->blit(Point( m_rect.x, m_rect.y), m_ground_surface, m_rect);
 
-		// Use linear (non-wrapped) coordinates to calculate on-screen pos
-		map->get_basepix(Coords(linear_fx, linear_fy), &posx, &posy);
-		posx -= viewofs.x;
-		posy -= viewofs.y;
+	//  should be const, but see comment in Overlay_Manager::get_overlays
+	Overlay_Manager & overlay_manager = *map->get_overlay_manager();
 
-		// Get linear bottom-left coordinate
-		bl.y = linear_fy+1;
-		bl.x = linear_fx - (bl.y&1);
+	{
+		int dx = maxfx - minfx + 1;
+		int dy = maxfy - minfy + 1;
+		int linear_fy = minfy;
+		bool row_is_forward = linear_fy & 1;
 
-		map->get_basepix(bl, &blposx, &bposy);
-		blposx -= viewofs.x;
-		bposy -= viewofs.y;
+		while(dy--) {
+			{//  Draw things on the node.
 
-		// Get linear top-left coordinates
-		tl.y = linear_fy-1;
-		tl.x = linear_fx - (tl.y&1);
+				int linear_fx = minfx;
+				FCoords f, bl, tl;
+				int posx, posy;
+				int blposx, bposy;
+				int tlposx, tposy;
 
-		map->get_basepix(tl, &tlposx, &tposy);
-		tlposx -= viewofs.x;
-		tposy -= viewofs.y;
+				// Use linear (non-wrapped) coordinates to calculate on-screen pos
+				MapviewPixelFunctions::get_basepix
+					(Coords(linear_fx, linear_fy), posx, posy);
+				posx -= viewofs.x;
+				posy -= viewofs.y;
 
-		// Calculate safe (bounded) field coordinates and get field pointers
-		f.x = linear_fx;
-		f.y = linear_fy;
-		map->normalize_coords(&f);
-		map->normalize_coords(&bl);
-		map->normalize_coords(&tl);
+				// Get linear bottom-left coordinate
+				bl.y = linear_fy+1;
+				bl.x = linear_fx - (bl.y&1);
 
-		f.field = map->get_field(f);
-		bl.field = map->get_field(bl);
-		tl.field = map->get_field(tl);
+				MapviewPixelFunctions::get_basepix(bl, blposx, bposy);
+				blposx -= viewofs.x;
+				bposy -= viewofs.y;
 
-		int count = dx;
-		while(count--) {
-			FCoords br, r, l, tr;
-			int rposx, brposx, lposx, trposx;
-			uchar darken=0;
+				// Get linear top-left coordinates
+				tl.y = linear_fy-1;
+				tl.x = linear_fx - (tl.y&1);
 
-			map->get_rn(f, &r);
-			rposx = posx + FIELD_WIDTH;
+				MapviewPixelFunctions::get_basepix(tl, tlposx, tposy);
+				tlposx -= viewofs.x;
+				tposy -= viewofs.y;
 
-			map->get_ln(f, &l);
-			lposx = posx - FIELD_WIDTH;
+				// Calculate safe (bounded) field coordinates and get field pointers
+				f.x = linear_fx;
+				f.y = linear_fy;
+				map->normalize_coords(&f);
+				map->normalize_coords(&bl);
+				map->normalize_coords(&tl);
 
-			map->get_rn(bl, &br);
-			brposx = blposx + FIELD_WIDTH;
+				f.field = map->get_field(f);
+				bl.field = map->get_field(bl);
+				tl.field = map->get_field(tl);
 
-			map->get_rn(tl, &tr);
-			trposx = tlposx + FIELD_WIDTH;
+				int count = dx;
+				while (count--) {
+					FCoords br, r, l, tr;
+					int rposx, brposx, lposx, trposx;
+					uchar darken=0;
 
-			if (visibility) {
-				if (!(*visibility)[f.y*mapwidth + f.x]) darken|=1;
-				if (!(*visibility)[r.y*mapwidth + r.x]) darken|=2;
-				if (!(*visibility)[bl.y*mapwidth + bl.x]) darken|=4;
-				if (!(*visibility)[br.y*mapwidth + br.x]) darken|=8;
+					map->get_rn(f, &r);
+					rposx = posx + TRIANGLE_WIDTH;
+
+					map->get_ln(f, &l);
+					lposx = posx - TRIANGLE_WIDTH;
+
+					map->get_rn(bl, &br);
+					brposx = blposx + TRIANGLE_WIDTH;
+
+					map->get_rn(tl, &tr);
+					trposx = tlposx + TRIANGLE_WIDTH;
+
+					if (visibility) {
+						if (not (*visibility)[f.y * mapwidth + f.x]) darken |= 1;
+						if (not (*visibility)[r.y * mapwidth + r.x]) darken |= 2;
+						if (not (*visibility)[bl.y * mapwidth + bl.x]) darken |= 4;
+						if (not (*visibility)[br.y * mapwidth + br.x]) darken |= 8;
+					}
+
+
+					// Render stuff that belongs to the field node
+					if (not visibility or (*visibility)[f.y * mapwidth + f.x]) {
+						Point wh_pos
+							(posx, posy - f.field->get_height() * HEIGHT_FACTOR);
+
+						// Render bobs
+						// TODO - rendering order?
+						//  This must be defined somehow. Some bobs have a higher
+						//  priority than others. Maybe this priority is a moving
+						//  versus non-moving bobs thing? draw_ground implies that
+						//  this doesn't render map objects. Are there any overdraw
+						//  issues with the current rendering order?
+
+						// Draw Map_Objects hooked to this field
+						BaseImmovable *imm = f.field->get_immovable();
+
+						assert(egbase);
+
+						if (imm) imm->draw(egbase, this, f, wh_pos);
+
+						Bob *bob = f.field->get_first_bob();
+						while(bob) {
+							bob->draw(egbase, this, wh_pos);
+							bob = bob->get_next_bob();
+						}
+
+						// Draw buildhelp, road buildhelp
+						draw_overlays
+							(this,
+							 egbase,
+							 visibility,
+							 f,
+							 wh_pos,
+							 r,
+							 Point
+							 (rposx, posy - r.field->get_height() * HEIGHT_FACTOR),
+							 bl,
+							 Point
+							 (blposx, bposy - bl.field->get_height() * HEIGHT_FACTOR),
+							 br,
+							 Point
+							 (brposx, bposy - br.field->get_height() * HEIGHT_FACTOR));
+					}
+
+					// Advance to next field in row
+					bl = br;
+					blposx = brposx;
+
+					f = r;
+					posx = rposx;
+
+					tl = tr;
+					tlposx = trposx;
+				}
+				{//  Draw things on the R-triangle.
+					int linear_fx = minfx;
+					FCoords r(linear_fx, linear_fy);
+					FCoords b(linear_fx - (not row_is_forward), linear_fy + 1);
+					int posx =
+						(linear_fx - 1) * TRIANGLE_WIDTH
+						+
+						(row_is_forward + 1) * (TRIANGLE_WIDTH / 2)
+						-
+						viewofs.x;
+
+					//  Calculate safe (bounded) field coordinates.
+					map->normalize_coords(&r);
+					map->normalize_coords(&b);
+
+					//  Get field pointers.
+					r.field = map->get_field(r);
+					b.field = map->get_field(b);
+
+					int count = dx;
+
+					//  One less iteration than for nodes and D-triangles.
+					while (--count) {
+						uchar darken=0;
+
+						const FCoords f = r;
+						map->get_rn(r, &r);
+						map->get_rn(b, &b);
+						posx += TRIANGLE_WIDTH;
+
+						//  FIXME Implement visibility rules for objects on triangles
+						//  FIXME when they are used in the game. The only things that
+						//  FIXME are drawn on triangles now (except the ground) are
+						//  FIXME overlays for the editor terrain tool, and the editor
+						//  FIXME does not need visibility rules.
+#if 0
+						if (0 and visibility) {
+							if (!(*visibility)[f.y*mapwidth + f.x]) darken|=1;
+							if (!(*visibility)[r.y*mapwidth + r.x]) darken|=2;
+							if (!(*visibility)[bl.y*mapwidth + bl.x]) darken|=4;
+							if (!(*visibility)[br.y*mapwidth + br.x]) darken|=8;
+						}
+#endif
+
+						if (1 or !visibility || (*visibility)[f.y*mapwidth + f.x]) {
+							Overlay_Manager::Overlay_Info overlay_info
+								[MAX_OVERLAYS_PER_FIELD];
+							const Overlay_Manager::Overlay_Info * const
+								overlay_info_end =
+								overlay_info
+								+
+								overlay_manager.get_overlays
+								(TCoords(f, TCoords::R), overlay_info);
+							for
+								(const Overlay_Manager::Overlay_Info *
+								 it = overlay_info;
+								 it < overlay_info_end;
+								 ++it)
+							{
+								blit
+									(posx - it->hotspot_x,
+									 posy
+									 +
+									 (TRIANGLE_HEIGHT
+									  -
+									  (f.field->get_height()
+									   +
+									   r.field->get_height()
+									   +
+									   b.field->get_height())
+									  *
+									  HEIGHT_FACTOR)
+									 /
+									 3
+									 -
+									 it->hotspot_y,
+									 it->picid);
+							}
+						}
+					}
+				}
+				{//  Draw things on the D-triangle.
+					int linear_fx = minfx;
+					FCoords f(linear_fx - 1, linear_fy);
+					FCoords br(linear_fx - (not row_is_forward), linear_fy + 1);
+					int posx =
+						(linear_fx - 1) * TRIANGLE_WIDTH
+						+
+						row_is_forward * (TRIANGLE_WIDTH / 2)
+						-
+						viewofs.x;
+
+					//  Calculate safe (bounded) field coordinates.
+					map->normalize_coords(&f);
+					map->normalize_coords(&br);
+
+					//  Get field pointers.
+					f.field = map->get_field(f);
+					br.field = map->get_field(br);
+
+					int count = dx;
+					while (count--) {
+						uchar darken=0;
+
+						const FCoords bl = br;
+						map->get_rn(f, &f);
+						map->get_rn(br, &br);
+						posx += TRIANGLE_WIDTH;
+
+#if 0
+						if (0 and visibility) {
+							if (!(*visibility)[f.y*mapwidth + f.x]) darken|=1;
+							if (!(*visibility)[r.y*mapwidth + r.x]) darken|=2;
+							if (!(*visibility)[bl.y*mapwidth + bl.x]) darken|=4;
+							if (!(*visibility)[br.y*mapwidth + br.x]) darken|=8;
+						}
+#endif
+
+						// Render stuff that belongs to the field node
+						if (1 or !visibility || (*visibility)[f.y*mapwidth + f.x]) {
+							Overlay_Manager::Overlay_Info overlay_info
+								[MAX_OVERLAYS_PER_FIELD];
+							const Overlay_Manager::Overlay_Info * const
+								overlay_info_end =
+								overlay_info
+								+
+								overlay_manager.get_overlays
+								(TCoords(f, TCoords::D), overlay_info);
+							for
+								(const Overlay_Manager::Overlay_Info * it =
+								 overlay_info;
+								 it < overlay_info_end;
+								 ++it)
+							{
+								blit
+									(posx - it->hotspot_x,
+									 posy
+									 +
+									 ((TRIANGLE_HEIGHT * 2)
+									  -
+									  (f.field->get_height()
+									   +
+									   bl.field->get_height()
+									   +
+									   br.field->get_height())
+									  *
+									  HEIGHT_FACTOR)
+									 /
+									 3
+									 -
+									 it->hotspot_y,
+									 it->picid);
+							}
+						}
+					}
+				}
+
+				++linear_fy;
+				row_is_forward = not row_is_forward;
+				posy += TRIANGLE_HEIGHT;
 			}
-
-         
-         // Render stuff that belongs to the field node
-			if (!visibility || (*visibility)[f.y*mapwidth + f.x])
-         {
-            Point wh_pos(posx, posy - MULTIPLY_WITH_HEIGHT_FACTOR(f.field->get_height()));
-
-            // Render bobs
-            // TODO - rendering order?
-            // This must be defined somewho. some bobs have a higher priority than others
-            //  ^-- maybe this priority is a moving vs. non-moving bobs thing?
-            // draw_ground implies that this doesn't render map objects.
-            // are there any overdraw issues with the current rendering order?
-
-            // Draw Map_Objects hooked to this field
-            BaseImmovable *imm = f.field->get_immovable();
-
-            assert(egbase);
-
-            if (imm)
-               imm->draw(egbase, this, f, wh_pos);
-
-            Bob *bob = f.field->get_first_bob();
-            while(bob) {
-               bob->draw(egbase, this, wh_pos);
-               bob = bob->get_next_bob();
-            }
-
-            // Draw buildhelp, road buildhelp
-            draw_overlays(this, egbase, visibility, f, wh_pos,
-                  r, Point(rposx, posy-MULTIPLY_WITH_HEIGHT_FACTOR(r.field->get_height())),
-                  bl, Point(blposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(bl.field->get_height())),
-                  br, Point(brposx, bposy-MULTIPLY_WITH_HEIGHT_FACTOR(br.field->get_height())));
-         }
-
-			// Advance to next field in row
-			bl = br;
-			blposx = brposx;
-
-			f = r;
-			posx = rposx;
-
-			tl = tr;
-			tlposx = trposx;
 		}
+	}
 
-		linear_fy++;
-	} 
    g_gr->reset_texture_animation_reminder();
 }
 
@@ -908,7 +1093,7 @@ void RenderTargetImpl::drawanim(int dstx, int dsty, uint animation, uint time, c
 	// Get the frame and its data
 	Surface* frame;
 	int framenumber = (time / data->frametime) % gfx->get_nrframes();
-   if( player ) 
+   if( player )
       frame = gfx->get_frame(framenumber, player->get_player_number(), player);
    else
       frame = gfx->get_frame(framenumber, 0, 0);
@@ -1072,7 +1257,7 @@ GraphicImpl::GraphicImpl(int w, int h, int bpp, bool fullscreen)
 	SDL_Surface* sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 	if (!sdlsurface)
 		throw wexception("Couldn't set video mode: %s", SDL_GetError());
-   
+
 	assert( sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4 );
 
 	SDL_WM_SetCaption("Widelands " VERSION, "Widelands");
@@ -1096,7 +1281,7 @@ GraphicImpl::~GraphicImpl()
       delete m_roadtextures;
       m_roadtextures = 0;
    }
-   
+
 	delete m_rendertarget;
 }
 
@@ -1265,10 +1450,10 @@ void GraphicImpl::flush(int mod)
       m_animations.resize(0);
 
       if( m_roadtextures ) {
-         delete m_roadtextures; 
+         delete m_roadtextures;
          m_roadtextures = 0;
       }
-   } 
+   }
    if(!mod || mod & PicMod_UI) {
       // Flush the cached Fontdatas
       g_fh->flush_cache();
@@ -1322,7 +1507,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
       // Convert the surface accordingly
       SDL_Surface* use_surface = SDL_DisplayFormatAlpha( bmp );
 
-      if( !use_surface ) 
+      if( !use_surface )
          throw wexception("GraphicImpl::get_picture(): no success in converting loaded surface!\n");
 
       SDL_FreeSurface( bmp );
@@ -1340,7 +1525,7 @@ uint GraphicImpl::get_picture(int mod, const char* fname )
 	return id;
 }
 
-uint GraphicImpl::get_picture(int mod, Surface* surf, const char* fname ) 
+uint GraphicImpl::get_picture(int mod, Surface* surf, const char* fname )
 {
 	uint id = find_free_picture();
 	Picture* pic = &m_pictures[id];
@@ -1370,7 +1555,7 @@ void GraphicImpl::get_picture_size(uint pic, int* pw, int* ph)
 		throw wexception("get_picture_size(%i): picture doesn't exist", pic);
 
 	Surface* bmp = m_pictures[pic].surface;
-   
+
 
 	*pw = bmp->get_w();
 	*ph = bmp->get_h();
@@ -1392,14 +1577,14 @@ uint GraphicImpl::create_surface(int w, int h)
 {
 	uint id = find_free_picture();
 	Picture* pic = &m_pictures[id];
-      
-   SDL_Surface* surf = SDL_CreateRGBSurface( SDL_SWSURFACE, w, h, m_screen.get_format()->BitsPerPixel, 
-         m_screen.get_format()->Rmask, m_screen.get_format()->Gmask, m_screen.get_format()->Bmask, 
+
+   SDL_Surface* surf = SDL_CreateRGBSurface( SDL_SWSURFACE, w, h, m_screen.get_format()->BitsPerPixel,
+         m_screen.get_format()->Rmask, m_screen.get_format()->Gmask, m_screen.get_format()->Bmask,
          m_screen.get_format()->Amask);
 
 	pic->mod = -1; // mark as surface
 	pic->surface = new Surface();
-   pic->surface->set_sdl_surface( surf ); 
+   pic->surface->set_sdl_surface( surf );
 	pic->u.rendertarget = new RenderTargetImpl(pic->surface);
 
 	return id;
@@ -1538,21 +1723,21 @@ Texture* GraphicImpl::get_maptexture_data(uint id)
 ================
 GraphicImp::get_road_textures
 
-returns the road textures 
+returns the road textures
 ================
 */
 Surface* GraphicImpl::get_road_texture( int roadtex) {
    if(! m_roadtextures ) {
       // Load the road textures
       m_roadtextures = new Road_Textures();
-      m_roadtextures->pic_road_normal = get_picture(PicMod_Game, ROAD_NORMAL_PIC); 
-      m_roadtextures->pic_road_busy   = get_picture(PicMod_Game, ROAD_BUSY_PIC  ); 
+      m_roadtextures->pic_road_normal = get_picture(PicMod_Game, ROAD_NORMAL_PIC);
+      m_roadtextures->pic_road_busy   = get_picture(PicMod_Game, ROAD_BUSY_PIC  );
       get_picture_surface( m_roadtextures->pic_road_normal )->force_disable_alpha();
       get_picture_surface( m_roadtextures->pic_road_busy )->force_disable_alpha();
    }
    if(roadtex == Road_Normal)
       return get_picture_surface(m_roadtextures->pic_road_normal);
-   else 
+   else
       return get_picture_surface(m_roadtextures->pic_road_busy);
 }
 
@@ -1715,10 +1900,10 @@ void GraphicImpl::save_png(uint pic_index, FileWrite* fw) {
        0, 0);
    if (!png_ptr)
       throw wexception("GraphicImpl::save_png: Couldn't create png struct!\n");
-   
+
    // Set another write function
    png_set_write_fn( png_ptr, fw, &GraphicImpl::m_png_write_function, 0);
-   
+
    png_infop info_ptr = png_create_info_struct(png_ptr);
    if (!info_ptr)
    {
@@ -1732,14 +1917,14 @@ void GraphicImpl::save_png(uint pic_index, FileWrite* fw) {
       png_destroy_write_struct(&png_ptr, &info_ptr);
       throw wexception("GraphicImpl::save_png: Couldn't set png setjmp!\n");
    }
-   
+
    // Fill info struct
    png_set_IHDR(png_ptr, info_ptr, surf->get_w(), surf->get_h(),
          8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
          PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-   
+
    // png_set_strip_16(png_ptr) ;
-      
+
    // Start writing
    png_write_info(png_ptr, info_ptr);
 
@@ -1759,7 +1944,7 @@ void GraphicImpl::save_png(uint pic_index, FileWrite* fw) {
          row[i+2] = b;
          row[i+3] = a;
          i += 4;
-      }   
+      }
       png_write_row( png_ptr, row );
    }
    delete row;

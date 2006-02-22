@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,13 +54,15 @@ class Interactive_Base : public UIPanel {
 		virtual ~Interactive_Base(void);
 
       inline Map* get_map() { return m_egbase->get_map(); }
+	const Map & map() const {return *m_egbase->get_map();}
+	Map & map() {return *m_egbase->get_map();}
 		inline Editor_Game_Base* get_egbase() { return m_egbase; }
       void need_complete_redraw( void );
 
 		static int get_xres();
 		static int get_yres();
 	bool m_show_workarea_preview;
-      
+
       // get visibility, for drawing
       virtual std::vector<bool>* get_visibility(void) = 0;
 
@@ -103,7 +105,7 @@ class Interactive_Base : public UIPanel {
    private:
       void roadb_add_overlay();
       void roadb_remove_overlay();
-      
+
       Map_View* m_mapview;
       MiniMap* m_mm;
       Editor_Game_Base* m_egbase;
@@ -124,7 +126,7 @@ class Interactive_Base : public UIPanel {
       int      m_jobid;
       int      m_road_buildhelp_overlay_jobid;
       CoordPath		*m_buildroad; // path for the new road
-      int      m_road_build_player; 
+      int      m_road_build_player;
 
       UIUniqueWindowRegistry m_minimap;
 

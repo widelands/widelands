@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "interactive_player.h"
 #include "map.h"
 #include "mapview.h"
+#include "mapviewpixelfunctions.h"
 #include "player.h"
 #include "rendertarget.h"
 #include "system.h"
@@ -65,7 +66,7 @@ void Map_View::warp_mouse_to_field(Coords c)
 {
 	int x, y;
 
-	m_intbase->get_map()->get_save_pix(c, &x, &y);
+	MapviewPixelFunctions::get_save_pix(m_intbase->map(), c, x, y);
 	x -= m_viewpoint.x;
 	y -= m_viewpoint.y;
 
@@ -101,7 +102,7 @@ void Map_View::draw(RenderTarget* dst)
       if( viewchanged )
          m_complete_redraw_needed = true;
    }
-   
+
    dst->rendermap(m_intbase->get_egbase(), m_intbase->get_visibility(), m_viewpoint, m_complete_redraw_needed);
    m_complete_redraw_needed = false;
 }
@@ -119,11 +120,11 @@ void Map_View::set_viewpoint(Point vp)
 	if (vp == m_viewpoint)
 		return;
 
-	m_intbase->get_map()->normalize_pix(&vp);
+	MapviewPixelFunctions::normalize_pix(m_intbase->map(), vp);
 	m_viewpoint = vp;
 
 	warpview.call(m_viewpoint.x, m_viewpoint.y);
-   
+
    m_complete_redraw_needed = true;
 }
 
@@ -196,7 +197,9 @@ void Map_View::track_fsel(int mx, int my)
 {
 	FCoords fsel;
 
-	fsel = m_intbase->get_map()->calc_coords(Point(m_viewpoint.x + mx, m_viewpoint.y + my));
+	Coords c = MapviewPixelFunctions::calc_node_and_triangle
+		(*m_intbase->get_map(), m_viewpoint.x + mx, m_viewpoint.y + my).node;
+	fsel = FCoords(c, m_intbase->get_map()->get_field(c));
 
 	// Apply the new fieldsel
 	m_intbase->set_fieldsel_pos(fsel);

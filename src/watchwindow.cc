@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004 by The Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 #include "game.h"
 #include "map.h"
 #include "mapview.h"
+#include "mapviewpixelconstants.h"
+#include "mapviewpixelfunctions.h"
 #include "ui_button.h"
 #include "ui_signal.h"
 #include "ui_window.h"
@@ -50,14 +52,14 @@ class WatchWindow : public UIWindow {
 public:
 	WatchWindow(Interactive_Player *parent, int x, int y, int w, int h, Coords coords, bool single_window=false);
 	~WatchWindow();
-	
+
 	UISignal1<Point> warp_mainview;
    UISignal         closed;
 
 	void start_tracking(Point pos);
 	void toggle_tracking();
 	void act_mainview_goto();
-	
+
 	void add_view(Coords coords);
 	void next_view(bool first=false);
 	void show_view(bool first=false);
@@ -66,7 +68,7 @@ public:
 	void set_view(int index);
 	void close_cur_view();
 	void toggle_buttons();
-		
+
 protected:
 	virtual void think();
 	void stop_tracking_by_drag(int x, int y);
@@ -95,11 +97,11 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 	: UIWindow(parent, x, y, w, h, _("Watch"))
 {
 	UIButton* btn;
-	
+
 	m_game = parent->get_game();
 	last_visit = m_game->get_gametime();
 	m_single_window = single_window;
-	
+
 	// UIButtons
 	btn = new UIButton(this, 0, h - 34, 34, 34, 20);
 	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_watch_follow.png" ));
@@ -108,7 +110,7 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 	btn = new UIButton(this, 34, h - 34, 34, 34, 21);
 	btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_goto.png" ));
 	btn->clicked.set(this, &WatchWindow::act_mainview_goto);
-	
+
 	if (m_single_window) {
 		for (int i=0;i<NUM_VIEWS;i++) {
 			btn = new UIButton(this, 74 + (17 * i), 200 - 34, 17, 34, 0, i);
@@ -116,7 +118,7 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 			btn->clickedid.set(this, &WatchWindow::set_view);
 			m_view_btns[i] = btn;
 		}
-		
+
 		btn = new UIButton(this, w-34, h - 34, 34, 34, 22);
 		btn->set_pic(g_gr->get_picture( PicMod_UI,  "pics/menu_abort.png" ));
 		btn->clicked.set(this, &WatchWindow::close_cur_view);
@@ -125,7 +127,7 @@ WatchWindow::WatchWindow(Interactive_Player *parent, int x, int y, int w, int h,
 	m_mapview->fieldclicked.set(parent, &Interactive_Player::field_action);
 	m_mapview->warpview.set(this, &WatchWindow::stop_tracking_by_drag);
 	warp_mainview.set(parent, &Interactive_Base::move_view_to_point);
-	
+
 	add_view(coords);
 	next_view(true);
 	set_cache(false);
@@ -136,10 +138,10 @@ void WatchWindow::add_view(Coords coords) {
 	if (m_views.size() >= NUM_VIEWS)
 		return;
 	WatchWindowView view;
-	
+
 	view.tracking = 0;
 	view.view_point = calc_coords(coords);
-	
+
 	m_views.push_back(view);
 	if (m_single_window)
 		toggle_buttons();
@@ -148,14 +150,14 @@ void WatchWindow::add_view(Coords coords) {
 //Calc point on map from coords
 Point WatchWindow::calc_coords(Coords coords) {
 	// Initial positioning
-	int vx = MULTIPLY_WITH_FIELD_WIDTH(coords.x);
-	int vy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(coords.y);
-		
+	int vx = coords.x * TRIANGLE_WIDTH;
+	int vy = coords.y * TRIANGLE_HEIGHT;
+
 	Point p (vx - m_mapview->get_w()/2, vy - m_mapview->get_h()/2);
 	return p;
 }
 
-//Switch to next view 
+//Switch to next view
 void WatchWindow::next_view(bool first) {
 	if (!first && m_views.size() == 1)
 		return;
@@ -187,15 +189,15 @@ void WatchWindow::close_cur_view() {
 		delete this;
 		return;
 	}
-	
+
 	int old_index = m_cur_index;
 	next_view();
-	
+
 	std::vector<WatchWindowView>::iterator view_it = m_views.begin();
-	
+
 	for (int i=0;i<old_index;i++)
 		view_it++;
-	
+
 	m_view_btns[m_cur_index]->set_enabled(false);
 	m_views.erase(view_it);
 	toggle_buttons();
@@ -241,17 +243,17 @@ point is *not* a coordinate, but a map-global position in pixels.
 */
 void WatchWindow::start_tracking(Point pos)
 {
-	Map* map = m_game->get_map();
+	Map & map = *m_game->get_map();
 	std::vector<Bob*> bobs;
-	Coords center;
 	int radius;
 
-	map->normalize_pix(&pos);
-	center = map->calc_coords(pos);
+	MapviewPixelFunctions::normalize_pix(map, pos);
+	const Coords center =
+		MapviewPixelFunctions::calc_node_and_triangle(map, pos.x, pos.y).node;
 
 	// Scan progressively larger circles around the given position for suitable bobs
 	for(radius = 2; radius <= 32; radius <<= 1) {
-		if (map->find_bobs(center, radius, &bobs))
+		if (map.find_bobs(center, radius, &bobs))
 			break;
 	}
 
@@ -262,12 +264,11 @@ void WatchWindow::start_tracking(Point pos)
 	for(uint i = 0; i < bobs.size(); i++) {
 		Bob* bob = bobs[i];
 		Point p;
-		int dist;
 
-		map->get_pix(bob->get_position(), &p.x, &p.y);
+		MapviewPixelFunctions::get_pix(map, bob->get_position(), p.x, p.y);
 		bob->calc_drawpos(m_game, p, &p);
 
-		dist = map->calc_pix_distance(p, pos);
+		const int dist = MapviewPixelFunctions::calc_pix_distance(map, p, pos);
 
 		if (!closest || closest_dist > dist) {
 			closest = bob;
@@ -288,7 +289,7 @@ Otherwise, start tracking the nearest bob from our current position.
 */
 void WatchWindow::toggle_tracking()
 {
-	
+
 	Map_Object* obj = m_views[m_cur_index].tracking.get(m_game);
 
 	if (obj)
@@ -325,7 +326,7 @@ Update the mapview if we're tracking something.
 void WatchWindow::think()
 {
 	UIWindow::think();
-	
+
 	Map_Object* obj = m_views[m_cur_index].tracking.get(m_game);
 
 	if ((m_game->get_gametime() - last_visit) > REFRESH_TIME) {
@@ -333,21 +334,22 @@ void WatchWindow::think()
 		next_view();
 		return;
 	}
-	
+
 	if (obj) {
 		Bob* bob = (Bob*)obj;
 		Point pos;
 
 		assert(obj->get_type() == Map_Object::BOB);
 
-		m_game->get_map()->get_pix(bob->get_position(), &pos.x, &pos.y);
+		MapviewPixelFunctions::get_pix
+			(*m_game->get_map(), bob->get_position(), pos.x, pos.y);
 		bob->calc_drawpos(m_game, pos, &pos);
 
 		m_mapview->set_viewpoint(pos - Point(m_mapview->get_w()/2, m_mapview->get_h()/2));
 	}
 
    // make sure that the view gets updated
-   m_mapview->need_complete_redraw(); 
+   m_mapview->need_complete_redraw();
 }
 
 
@@ -386,8 +388,8 @@ void show_watch_window(Interactive_Player *parent, Coords coords)
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, coords,true);
       win = g_watch_window;
 	}
-	else 
+	else
 		win = new WatchWindow(parent, 250, 150, 200, 200, coords,false);
    win->closed.set( parent, &Interactive_Player::need_complete_redraw);
-   
+
 }

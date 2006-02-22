@@ -28,6 +28,8 @@
 #include "map.h"
 #include "mapview.h"
 #include "minimap.h"
+#include "mapviewpixelconstants.h"
+#include "mapviewpixelfunctions.h"
 #include "options.h"
 #include "overlay_manager.h"
 #include "player.h"
@@ -276,8 +278,8 @@ void Interactive_Base::draw_overlay(RenderTarget* dst)
 void Interactive_Base::mainview_move(int x, int y)
 {
    if (m_minimap.window) {
-      int maxx = MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
-      int maxy = MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
+	   const int maxx = MapviewPixelFunctions::get_map_end_screen_x(map());
+	   const int maxy = MapviewPixelFunctions::get_map_end_screen_y(map());
 
       x += get_mapview()->get_w()>>1;
       if (x >= maxx) x -= maxx;
@@ -301,9 +303,9 @@ Warps the main mapview position to the clicked location.
 void Interactive_Base::minimap_warp(int x, int y)
 {
 	x -= get_mapview()->get_w()>>1;
-	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
+	if (x < 0) x += m_egbase->get_map()->get_width() * TRIANGLE_WIDTH;
 	y -= get_mapview()->get_h()>>1;
-	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
+	if (y < 0) y += m_egbase->get_map()->get_height() * TRIANGLE_HEIGHT;
 	get_mapview()->set_viewpoint(Point(x, y));
 }
 
@@ -317,16 +319,16 @@ Move the mainview to the given position (in field coordinates)
 */
 void Interactive_Base::move_view_to(int fx, int fy)
 {
-	int x = MULTIPLY_WITH_FIELD_WIDTH(fx);
-	int y = MULTIPLY_WITH_HALF_FIELD_HEIGHT(fy);
+	int x = fx * TRIANGLE_WIDTH;
+	int y = fy * TRIANGLE_HEIGHT;
 
 	if (m_minimap.window)
 		m_mm->get_minimapview()->set_view_pos(x, y);
 
 	x -= get_mapview()->get_w()>>1;
-	if (x < 0) x += MULTIPLY_WITH_FIELD_WIDTH(m_egbase->get_map()->get_width());
+	if (x < 0) x += m_egbase->get_map()->get_width() * TRIANGLE_WIDTH;
 	y -= get_mapview()->get_h()>>1;
-	if (y < 0) y += MULTIPLY_WITH_HALF_FIELD_HEIGHT(m_egbase->get_map()->get_height());
+	if (y < 0) y += m_egbase->get_map()->get_height() * TRIANGLE_HEIGHT;
 	get_mapview()->set_viewpoint(Point(x, y));
 }
 

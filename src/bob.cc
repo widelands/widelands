@@ -23,6 +23,7 @@
 #include "critter_bob.h"
 #include "game.h"
 #include "map.h"
+#include "mapviewpixelconstants.h"
 #include "player.h"
 #include "profile.h"
 #include "rendertarget.h"
@@ -971,19 +972,41 @@ void Bob::calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos)
 	spos = epos;
 
 	switch(m_walking) {
-	case WALK_NW: map->get_brn(end, &start); spos.x += FIELD_WIDTH/2; spos.y += FIELD_HEIGHT/2; break;
-	case WALK_NE: map->get_bln(end, &start); spos.x -= FIELD_WIDTH/2; spos.y += FIELD_HEIGHT/2; break;
-	case WALK_W: map->get_rn(end, &start); spos.x += FIELD_WIDTH; break;
-	case WALK_E: map->get_ln(end, &start); spos.x -= FIELD_WIDTH; break;
-	case WALK_SW: map->get_trn(end, &start); spos.x += FIELD_WIDTH/2; spos.y -= FIELD_HEIGHT/2; break;
-	case WALK_SE: map->get_tln(end, &start); spos.x -= FIELD_WIDTH/2; spos.y -= FIELD_HEIGHT/2; break;
+	case WALK_NW:
+		map->get_brn(end, &start);
+		spos.x += TRIANGLE_WIDTH / 2;
+		spos.y += TRIANGLE_HEIGHT;
+		break;
+	case WALK_NE:
+		map->get_bln(end, &start);
+		spos.x -= TRIANGLE_WIDTH / 2;
+		spos.y += TRIANGLE_HEIGHT;
+		break;
+	case WALK_W:
+		map->get_rn(end, &start);
+		spos.x += TRIANGLE_WIDTH;
+		break;
+	case WALK_E:
+		map->get_ln(end, &start);
+		spos.x -= TRIANGLE_WIDTH;
+		break;
+	case WALK_SW:
+		map->get_trn(end, &start);
+		spos.x += TRIANGLE_WIDTH / 2;
+		spos.y -= TRIANGLE_HEIGHT;
+		break;
+	case WALK_SE:
+		map->get_tln(end, &start);
+		spos.x -= TRIANGLE_WIDTH / 2;
+		spos.y -= TRIANGLE_HEIGHT;
+		break;
 
 	case IDLE: start.field = 0; break;
 	}
 
 	if (start.field) {
-		spos.y += MULTIPLY_WITH_HEIGHT_FACTOR(end.field->get_height());
-		spos.y -= MULTIPLY_WITH_HEIGHT_FACTOR(start.field->get_height());
+		spos.y += end.field->get_height() * HEIGHT_FACTOR;
+		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
 		float f = (float)(game->get_gametime() - m_walkstart) / (m_walkend - m_walkstart);
 		if (f < 0) f = 0;

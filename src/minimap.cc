@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include "graphic.h"
 #include "interactive_base.h"
 #include "map.h"
+#include "mapviewpixelconstants.h"
 #include "minimap.h"
 #include "rendertarget.h"
 #include "ui_button.h"
@@ -69,8 +70,8 @@ MiniMapView::MiniMapView(UIPanel *parent, int x, int y, int w, int h, Interactiv
  */
 void MiniMapView::set_view_pos(int x, int y)
 {
-   m_viewx = x / FIELD_WIDTH;
-   m_viewy = y / (FIELD_HEIGHT>>1);
+	m_viewx = x / TRIANGLE_WIDTH;
+	m_viewy = y / TRIANGLE_HEIGHT;
 
    update(0, 0, get_w(), get_h());
 }
@@ -121,7 +122,7 @@ bool MiniMapView::handle_mouseclick(uint btn, bool down, int x, int y)
 
 		m_player->get_map()->normalize_coords(&c);
 
-		warpview.call(MULTIPLY_WITH_FIELD_WIDTH(c.x), MULTIPLY_WITH_HALF_FIELD_HEIGHT(c.y));
+		warpview.call(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
 	}
 
 	return true;
