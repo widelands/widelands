@@ -464,7 +464,7 @@ if ('shrink' in BUILD_TARGETS) or ('dist' in BUILD_TARGETS):
 INSTDIRS=[
 	'campaigns',
 	'fonts',
-	'game-server',
+	'game_server',
 	'maps',
 	'music',
 	'pics',
