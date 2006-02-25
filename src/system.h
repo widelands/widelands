@@ -34,9 +34,9 @@ SYSTEM ABSTRACTION
 */
 
 enum { // use 1<<MOUSE_xxx for bitmasks
-	MOUSE_LEFT = 0,
-	MOUSE_MIDDLE,
-	MOUSE_RIGHT
+   MOUSE_LEFT = 0,
+   MOUSE_MIDDLE,
+   MOUSE_RIGHT
 };
 
 /*
@@ -87,8 +87,9 @@ struct InputCallback {
 void Sys_GrabTextdomain( const char* );
 void Sys_ReleaseTextdomain( void );
 void Sys_SetLocale( const char* = 0);
+std::string Sys_GetLocale();
 inline const char* Sys_Translate( const char* str ) {
-   return gettext( str );
+	return gettext( str );
 }
 
 void Sys_HandleInput(InputCallback *cb);

@@ -82,6 +82,8 @@ static struct {
 	int		gfx_w;
 	int		gfx_h;
 	bool		gfx_fullscreen;
+
+	string		locale;
 } sys;
 
 static char sys_recordname[256] = "";
@@ -96,18 +98,18 @@ However, 64 bit platforms are currently not supported.
 #define RFC_MAGIC		0x0ACAD100 // change this and I will ensure your death will be a most unpleasant one
 
 enum {
-	RFC_GETTIME = 0x01,
-	RFC_EVENT = 0x02,
-	RFC_ENDEVENTS = 0x03,
+   RFC_GETTIME = 0x01,
+   RFC_EVENT = 0x02,
+   RFC_ENDEVENTS = 0x03,
 };
 
 enum {
-	RFC_KEYDOWN = 0x10,
-	RFC_KEYUP = 0x11,
-	RFC_MOUSEBUTTONDOWN = 0x12,
-	RFC_MOUSEBUTTONUP = 0x13,
-	RFC_MOUSEMOTION = 0x14,
-	RFC_QUIT = 0x15
+   RFC_KEYDOWN = 0x10,
+   RFC_KEYUP = 0x11,
+   RFC_MOUSEBUTTONDOWN = 0x12,
+   RFC_MOUSEBUTTONUP = 0x13,
+   RFC_MOUSEMOTION = 0x14,
+   RFC_QUIT = 0x15
 };
 
 
@@ -194,7 +196,7 @@ static void read_record_code(uchar code)
 
 	if (filecode != code)
 		throw wexception("%08X: Bad code %02X during playback (%02X expected). Mismatching executable versions?",
-						get_playback_offset()-1, filecode, code);
+		                 get_playback_offset()-1, filecode, code);
 }
 
 
@@ -292,10 +294,10 @@ Shutdown the system
 void Sys_Shutdown()
 {
 	if (g_gr)
-		{
+	{
 		log("Sys_Shutdown: graphics system not shut down\n");
 		Sys_InitGraphics(0, 0, 0, false);
-		}
+	}
 
 	SDL_Quit();
 	sys.sdl_active = false;
@@ -326,52 +328,64 @@ void Sys_Shutdown()
  * messages. Who cares?
  */
 void Sys_GrabTextdomain( const char* domain) {
-   bind_textdomain_codeset (domain, "UTF-8");
-   bindtextdomain( domain, LOCALE_PATH );
-   textdomain(domain);
+	bind_textdomain_codeset (domain, "UTF-8");
+	bindtextdomain( domain, LOCALE_PATH );
+	textdomain(domain);
 
-   l_textdomains.push_back( domain );
+	l_textdomains.push_back( domain );
 }
+
 void Sys_ReleaseTextdomain( void ) {
-   l_textdomains.pop_back();
+	l_textdomains.pop_back();
 
-   if (l_textdomains.size()>0) { //don't try to get the previous TD when the very first one ('widelands') just got dropped
-   	const char* domain = l_textdomains.back().c_str();
-   	bind_textdomain_codeset (domain, "UTF-8");
-   	bindtextdomain( domain, LOCALE_PATH );
-   	textdomain(domain);
-   }
+	if (l_textdomains.size()>0) { //don't try to get the previous TD when the very first one ('widelands') just got dropped
+		const char* domain = l_textdomains.back().c_str();
+		bind_textdomain_codeset (domain, "UTF-8");
+		bindtextdomain( domain, LOCALE_PATH );
+		textdomain(domain);
+	}
 }
+
 /*
  * Set The locale to the given string
  */
 void Sys_SetLocale( const char* str ) {
-   if( !str )
-      str = "";
+	if( !str )
+		str = "";
 
-   // Somehow setlocale doesn't behave same on
-   // some systems.
+	// Somehow setlocale doesn't behave same on
+	// some systems.
 #ifdef __BEOS__
-   setenv ("LANG", str, 1);
-   setenv ("LC_ALL", str, 1);
+	setenv ("LANG", str, 1);
+	setenv ("LC_ALL", str, 1);
 #endif
 #ifdef __APPLE__
-   setenv ("LANGUAGE", str, 1);
-   setenv ("LC_ALL", str, 1);
+	setenv ("LANGUAGE", str, 1);
+	setenv ("LC_ALL", str, 1);
 #endif
 
 #ifdef _WIN32
-   const std::string env = std::string("LANG=") + str;
-   putenv(env.c_str());
+	const std::string env = std::string("LANG=") + str;
+	putenv(env.c_str());
 #endif
 
-   setlocale(LC_ALL, str);
-   if( l_textdomains.size() ) {
-      const char* domain = l_textdomains.back().c_str();
-      bind_textdomain_codeset (domain, "UTF-8");
-      bindtextdomain( domain, LOCALE_PATH );
-      textdomain(domain);
-   }
+	setlocale(LC_ALL, str);
+	sys.locale=str;
+
+	if( l_textdomains.size() ) {
+		const char* domain = l_textdomains.back().c_str();
+		bind_textdomain_codeset (domain, "UTF-8");
+		bindtextdomain( domain, LOCALE_PATH );
+		textdomain(domain);
+	}
+}
+
+/*
+ * Get the current locale
+ */
+std::string Sys_GetLocale()
+{
+	return sys.locale;
 }
 
 /*
@@ -782,21 +796,21 @@ void Sys_HandleInput(InputCallback *cb)
 			break;
 
 		case SDL_MOUSEMOTION: {
-			// All the interesting stuff is now in Sys_PollEvent()
-			int xdiff = ev.motion.xrel;
-			int ydiff = ev.motion.yrel;
+				// All the interesting stuff is now in Sys_PollEvent()
+				int xdiff = ev.motion.xrel;
+				int ydiff = ev.motion.yrel;
 
-			sys.mouse_x = ev.motion.x;
-			sys.mouse_y = ev.motion.y;
+				sys.mouse_x = ev.motion.x;
+				sys.mouse_y = ev.motion.y;
 
-			if (!xdiff && !ydiff)
+				if (!xdiff && !ydiff)
+					break;
+
+				if (cb && cb->mouse_move)
+					cb->mouse_move(sys.mouse_buttons, sys.mouse_x, sys.mouse_y, xdiff, ydiff);
+
 				break;
-
-			if (cb && cb->mouse_move)
-				cb->mouse_move(sys.mouse_buttons, sys.mouse_x, sys.mouse_y, xdiff, ydiff);
-
-			break;
-		}
+			}
 
 		case SDL_QUIT:
 			sys.should_die = true;
@@ -838,7 +852,7 @@ warning: this function doesn't check for dumbness
 ===============
 */
 bool Sys_GetKeyState(uint key) {
-   return SDL_GetKeyState(0)[key];
+	return SDL_GetKeyState(0)[key];
 }
 
 /*
@@ -961,20 +975,20 @@ void Sys_InitGraphics(int w, int h, int bpp, bool fullscreen)
 		return;
 
 	if (g_gr)
-		{
+	{
 		delete g_gr;
 		g_gr = 0;
-		}
+	}
 
 	sys.gfx_w = w;
 	sys.gfx_h = h;
 	sys.gfx_fullscreen = fullscreen;
 
-   // If we are not to be shut down
-   if( w && h ) {
-      g_gr = SW16_CreateGraphics(w, h, bpp, fullscreen);
-      Sys_SetMaxMouseCoords(w, h);
-   }
+	// If we are not to be shut down
+	if( w && h ) {
+		g_gr = SW16_CreateGraphics(w, h, bpp, fullscreen);
+		Sys_SetMaxMouseCoords(w, h);
+	}
 }
 
 
@@ -1005,11 +1019,11 @@ void yield_double_game ()
 
 	if (may_run>0) {
 		may_run--;
-	        kill (pid_peer, SIGUSR1);
+		kill (pid_peer, SIGUSR1);
 	}
 
 	if (may_run==0)
-	        usleep (500000);
+		usleep (500000);
 
 	// using sleep instead of pause avoids a race condition
 	// and a deadlock during connect
@@ -1026,10 +1040,10 @@ void init_double_game ()
 	assert (pid_peer>=0);
 
 	if (pid_peer==0) {
-	    pid_peer=pid_me;
-	    pid_me=getpid();
+		pid_peer=pid_me;
+		pid_me=getpid();
 
-	    may_run=1;
+		may_run=1;
 	}
 
 	signal (SIGUSR1, signal_handler);

@@ -302,10 +302,16 @@ void Sound_Handler::load_system_sounds()
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
- * named EFFECT_XX.wav (ogg, wav), where XX is between 00 and 99. If
- * BASENAME_XX (with any or no extension) is a directory, effects will be loaded
+ * named EFFECT_XX.{ogg, wav}, where XX is between 00 and 99. If
+ * BASENAME_XX (without extension) is a directory, effects will be loaded
  * recursively.
+ * 
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
+ *
+ * If you want "internationalized" sound effects (e.g. the lumberjack calling
+ * "Timber") then append the locale to any file/directory name like this:
+ * lumberjack_timber_00.ogg.de_DE
+ * 
  * \param dir        The directory where the audio files reside
  * \param basename	Name from which filenames will be formed
  *                   (BASENAME_XX.wav);
@@ -313,24 +319,32 @@ void Sound_Handler::load_system_sounds()
  * \internal
  * \param recursive	Whether to recurse into subdirectories
 */
-void Sound_Handler::load_fx(const string dir, const string basename,
+void Sound_Handler::load_fx(const string dir, const string fxname,
                             const bool recursive)
 {
-	filenameset_t files;
+	filenameset_t dirs, files;
 	filenameset_t::const_iterator i;
 
 	assert(g_fs);
 
-	if (recursive)
-		g_fs->FindFiles(dir, "*", &files);
-	else
-		g_fs->FindFiles(dir, basename + "_??.*", &files);
+	g_fs->FindFiles(dir, fxname + "_??.???."+Sys_GetLocale(), &files);
+	if (files.empty())
+		g_fs->FindFiles(dir, fxname + "_??.???", &files);
 
 	for (i = files.begin(); i != files.end(); ++i) {
-		if (g_fs->IsDirectory(*i)) {
-			load_fx(*i, basename, true);
-		} else
-			load_one_fx(*i, basename);
+		assert(!g_fs->IsDirectory(*i));
+		load_one_fx(*i, fxname);
+	}
+
+	if (recursive) {
+		g_fs->FindFiles(dir, "*_??."+Sys_GetLocale(), &dirs);
+		if (dirs.empty())
+			g_fs->FindFiles(dir, "*_??", &dirs);
+
+		for (i = dirs.begin(); i != dirs.end(); ++i) {
+			assert(g_fs->IsDirectory(*i));
+			load_fx(*i, fxname, true);
+		}
 	}
 }
 

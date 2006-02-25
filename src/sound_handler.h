@@ -270,6 +270,8 @@ protected:
  * \todo Internationalized sound effects/music
  * \todo Environmental sound effects (e.g. wind)
  * \todo repair and reenable animation sound effects for 1-pic-animations
+ * \todo accomodate runtime changes of i18n language
+ * \todo ? accomodate sound activation if it was disabled at the beginning
 */
 class Sound_Handler
 {

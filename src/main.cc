@@ -72,9 +72,6 @@ static void g_init(int argc, char **argv)
 
 		g_fh = new Font_Handler();
 
-		// Start the audio subsystem
-		g_sound_handler.init();
-
 		// Initialize graphics
 		Section *s = g_options.pull_section("global");
 
@@ -109,6 +106,9 @@ static void g_init(int argc, char **argv)
 		exit(-1);
 	}
 
+	// Start the audio subsystem
+	// must know the locale before calling this!
+	g_sound_handler.init();
 }
 
 /**
