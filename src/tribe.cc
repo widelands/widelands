@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ Tribe_Descr::Tribe_Descr(const char* name)
       // Grab the localisation text domain
       sprintf( directory, "tribe_%s", name );
       Sys_GrabTextdomain( directory );
-      
+
 		snprintf(directory, sizeof(directory), "tribes/%s", name);
 
 		m_default_encdata.clear();
@@ -57,7 +57,7 @@ Tribe_Descr::Tribe_Descr(const char* name)
 		parse_buildings(directory);
       parse_bobs(directory);
       parse_root_conf(directory);
-      
+
       Sys_ReleaseTextdomain( );
 	}
 	catch(std::exception &e)
@@ -96,7 +96,7 @@ void Tribe_Descr::load_graphics()
 
 	for(i = 0; i < m_workers.get_nitems(); i++)
 		m_workers.get(i)->load_graphics();
-	
+
    for(i = 0; i < m_wares.get_nitems(); i++)
 		m_wares.get(i)->load_graphics();
 
@@ -178,7 +178,7 @@ void Tribe_Descr::parse_root_conf(const char *directory)
          std::string name=value->get_name();
          m_startworkers[name]=value->get_int();
       }
-   
+
       // default soldiers
       s = prof.get_safe_section("startsoldiers");
       while((value=s->get_next_val(0))) {
@@ -443,7 +443,7 @@ the conf files
 */
 void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Warehouse* wh) {
    std::map<std::string, int>::iterator cur;
-   
+
    for(cur=m_startwares.begin(); cur!=m_startwares.end(); cur++) {
       wh->insert_wares(get_safe_ware_index((*cur).first.c_str()), (*cur).second);
    }
@@ -454,7 +454,7 @@ void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Ware
       std::vector<std::string> list;
       split_string(cur->first, &list, "/");
 
-      if(list.size()!=4) 
+      if(list.size()!=4)
          throw wexception("Error in tribe (%s), startsoldier %s is not valid!", get_name(), cur->first.c_str());
 
       char* endp;
@@ -470,16 +470,16 @@ void Tribe_Descr::load_warehouse_with_start_wares(Editor_Game_Base* egbase, Ware
       int evadelvl=strtol(list[3].c_str(),&endp, 0);
       if(endp && *endp)
          throw wexception("Bad evade level '%s'", list[3].c_str());
-  
+
       int i=0;
       for(i=0;i<cur->second; i++) {
-         if(egbase->is_game()) { 
+         if(egbase->is_game()) {
             Game* game=static_cast<Game*>(egbase);
             Soldier_Descr* soldierd=static_cast<Soldier_Descr*>(get_worker_descr(get_worker_index("soldier")));
             Soldier* soldier=static_cast<Soldier*>(soldierd->create(game, wh->get_owner(), wh, wh->get_position()));
             soldier->set_level(hplvl,attacklvl,defenselvl,evadelvl);
             wh->incorporate_worker(game, soldier);
-         } 
+         }
       }
       //TODO: What to do in editor
    }
@@ -525,30 +525,30 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
 {
    if(!res || !amount) {
       int idx=get_immovable_index("resi_none");
-      if(idx==-1) 
+      if(idx==-1)
          throw wexception("Tribe %s doesn't declare a resource indicator resi_none!\n", get_name());
       return idx;
    }
-   
+
    char buffer[256];
 
    int i=1;
    int num_indicators=0;
    while(true) {
       sprintf(buffer, "resi_%s%i", res->get_name(), i);
-      if(get_immovable_index(buffer)==-1) 
+      if(get_immovable_index(buffer)==-1)
          break;
       ++i;
       ++num_indicators;
    }
-  
+
    if(!num_indicators) {
       // Upsy, no indicators for this resource
       throw wexception("Tribe %s doesn't declar a resource indicator for resource %s!\n", get_name(), res->get_name());
    }
-   
+
    uint bestmatch = (uint) (( static_cast<float>(amount)/res->get_max_amount() ) * num_indicators);
-   if(((int)amount)<res->get_max_amount()) 
+   if(((int)amount)<res->get_max_amount())
       bestmatch+=1; // Resi start with 1, not 0
 
    sprintf(buffer, "resi_%s%i", res->get_name(), bestmatch);
@@ -557,17 +557,17 @@ int Tribe_Descr::get_resource_indicator(Resource_Descr *res, uint amount)
 	//	res->get_name(), buffer, amount);
 
 
-   
+
 	return get_immovable_index(buffer);
 }
 
 /*
  * Return the given ware or die trying
  */
-int Tribe_Descr::get_safe_ware_index(const char *name) {
+int Tribe_Descr::get_safe_ware_index(const char * const name) const {
    int retval=get_ware_index(name);
 
-   if(retval==-1) 
+   if(retval==-1)
       throw wexception("Tribe_Descr::get_safe_ware_index: Unknown ware %s!", name);
    return retval;
 }
@@ -575,10 +575,10 @@ int Tribe_Descr::get_safe_ware_index(const char *name) {
 /*
  * Return the given worker or die trying
  */
-int Tribe_Descr::get_safe_worker_index(const char *name) {
+int Tribe_Descr::get_safe_worker_index(const char * const name) const {
    int retval=get_worker_index(name);
 
-   if(retval==-1) 
+   if(retval==-1)
       throw wexception("Tribe_Descr::get_safe_worker_index: Unknown worker %s!", name);
    return retval;
 }
@@ -589,7 +589,7 @@ int Tribe_Descr::get_safe_worker_index(const char *name) {
 int Tribe_Descr::get_safe_building_index(const char *name) {
    int retval=get_building_index(name);
 
-   if(retval==-1) 
+   if(retval==-1)
       throw wexception("Tribe_Descr::get_safe_building_index: Unknown building %s!", name);
    return retval;
 }

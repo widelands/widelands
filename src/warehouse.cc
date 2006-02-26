@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -213,7 +213,7 @@ void WarehouseSupply::remove_workers(int id, int count)
 	if (!m_workers.stock(id))
 		m_economy->remove_worker_supply(id, this);
 }
-   
+
 /*
 ===============
 WarehouseSupply::get_position
@@ -524,12 +524,12 @@ void Warehouse::act(Game* g, uint data)
 
 		m_next_carrier_spawn = schedule_act(g, tdelta);
 	}
-      
+
       // Military stuff: Kill the soldiers that are dead
    if (g->get_gametime() - m_next_military_act >= 0)
    {
       int ware = get_owner()->get_tribe()->get_safe_worker_index("soldier");
-      
+
       Worker_Descr* workerdescr;
       Soldier* soldier;
 
@@ -542,7 +542,7 @@ void Warehouse::act(Game* g, uint data)
          if(static_cast<Worker*>(i->get(g))->get_name()==name)
          {
             soldier = static_cast<Soldier*>(i->get(g));
-            
+
                // Soldier dead ...
             if (!soldier || (soldier->get_current_hitpoints() == 0))
             {
@@ -707,7 +707,7 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
 	Worker* worker;
 
 	workerdescr = get_owner()->get_tribe()->get_worker_descr(ware);
-   
+
    // Look if we got one in stock of those
    std::string name=workerdescr->get_name();
    std::vector<Object_Ptr>::iterator i;
@@ -722,12 +722,12 @@ Worker* Warehouse::launch_worker(Game* g, int ware)
       // one found, make him available
       worker = static_cast<Worker*>(i->get(g));
       worker->reset_tasks(g); // Forget everything you did
-      worker->set_location( this ); // Back in a economy 
+      worker->set_location( this ); // Back in a economy
       m_incorporated_workers.erase(i);
    }
-      
+
    m_supply->remove_workers(ware, 1);
-   
+
 
 	return worker;
 }
@@ -768,12 +768,12 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
 	}
 
 	soldier = 0;
-	if(i==m_incorporated_workers.end()) 
+	if(i==m_incorporated_workers.end())
 	{
       // None found, create a new one (if available)
 		soldier = (Soldier*)workerdescr->create(g, get_owner(), this, m_position);
-	} 
-	else 
+	}
+	else
 	{
       // one found, make him available
 		soldier = static_cast<Soldier*>(i->get(g));
@@ -782,7 +782,7 @@ Soldier* Warehouse::launch_soldier(Game* g, int ware, Requeriments* r)
       soldier->set_location( this );
 		m_incorporated_workers.erase(i);
 	}
-      
+
    m_supply->remove_workers(ware, 1);
 
 	return soldier;
@@ -830,7 +830,7 @@ void Warehouse::mark_as_used(Game* g, int ware, Requeriments* r)
 	soldier = 0;
 	if(i==m_incorporated_workers.end())
 	{
-	} 
+	}
 	else
 	{
       // one found
@@ -856,7 +856,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	WareInstance* item = w->fetch_carried_item(g); // rescue an item
 
    // We remove carrier, but we keep other workers around
-   if(w->get_worker_type()==Worker_Descr::CARRIER) 
+   if(w->get_worker_type()==Worker_Descr::CARRIER)
    {
       w->remove(g);
       w=0;
@@ -874,7 +874,7 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 
    m_supply->add_workers(index, 1);
 
-	if (item) 
+	if (item)
 		incorporate_item(g, item);
 }
 
@@ -882,19 +882,19 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
  * Sort the worker into the right position in m_incorporated_workers
  */
 void Warehouse::sort_worker_in(Editor_Game_Base* g, std::string name, Worker* w) {
-      // We insert this worker, but to keep some consistency in ordering, we tell him 
+      // We insert this worker, but to keep some consistency in ordering, we tell him
       // where to insert
-      
+
       std::vector<Object_Ptr>::iterator i=m_incorporated_workers.begin();
 
-      while(i!= m_incorporated_workers.end() && name <= static_cast<Worker*>(i->get(g))->get_name()) ++i; 
+      while(i!= m_incorporated_workers.end() && name <= static_cast<Worker*>(i->get(g))->get_name()) ++i;
       if(i==m_incorporated_workers.end()) {
          m_incorporated_workers.insert(i, w);
          return;
       }
 
       while(i!=m_incorporated_workers.end() && w->get_serial() <= static_cast<Worker*>(i->get(g))->get_serial()) ++i;
-         
+
       m_incorporated_workers.insert(i, w);
 }
 
@@ -1061,7 +1061,7 @@ Warehouse::can_create_worker
 bool Warehouse::can_create_worker(Game *g, int worker)
 {
 	Worker_Descr *w_desc = 0;
-	
+
 	if (worker >= m_supply->get_workers().get_nrwareids()) {
 		throw wexception ("Worker type %d doesn't exists! (max is %d)", worker,
             m_supply->get_workers().get_nrwareids());
@@ -1074,19 +1074,19 @@ bool Warehouse::can_create_worker(Game *g, int worker)
 		uint i;
 		bool enought_wares;
 		const Worker_Descr::BuildCost* bc = w_desc->get_buildcost();
-		
+
 		// First watch if we can build it
 		if (!w_desc->get_buildable())
 			return false;
 		enought_wares = true;
 
 		// Now see if we have the resources
-		for(i = 0; i < bc->size(); i++) 
+		for(i = 0; i < bc->size(); i++)
 		{
 			int id_w;
-			
-         
-			id_w = get_owner()->get_tribe()->get_ware_index((*bc)[i].name.c_str()); 
+
+
+			id_w = get_owner()->get_tribe()->get_ware_index((*bc)[i].name.c_str());
          if(id_w!=-1) {
             if (m_supply->stock_wares(id_w) < (*bc)[i].amount)
             {
@@ -1094,7 +1094,7 @@ bool Warehouse::can_create_worker(Game *g, int worker)
                enought_wares = false;
             }
          } else {
-            id_w = get_owner()->get_tribe()->get_safe_worker_index((*bc)[i].name.c_str()); 
+            id_w = get_owner()->get_tribe()->get_safe_worker_index((*bc)[i].name.c_str());
             if (m_supply->stock_workers(id_w) < (*bc)[i].amount) {
                molog (" %s: Need more %s for creation\n", w_desc->get_name(), (*bc)[i].name.c_str());
                enought_wares = false;
@@ -1115,7 +1115,7 @@ Warehouse::create_worker
 void Warehouse::create_worker(Game *g, int worker)
 {
 	Worker_Descr *w_desc = 0;
-	
+
 	if (!can_create_worker (g, worker))
 		throw wexception ("Warehouse::create_worker WE CANN'T CREATE A %d WORKER", worker);
 
@@ -1125,7 +1125,7 @@ void Warehouse::create_worker(Game *g, int worker)
 	{
 		uint i;
 		const Worker_Descr::BuildCost* bc = w_desc->get_buildcost();
-		
+
 		for(i = 0; i < bc->size(); i++) {
 			int id_w;
 			id_w = get_owner()->get_tribe()->get_ware_index((*bc)[i].name.c_str());
@@ -1150,31 +1150,23 @@ void Warehouse::create_worker(Game *g, int worker)
 	else
 		throw wexception("Can not create worker of desired type : %d", worker);
 
-	
+
 }
 
 /// Down here, only military methods !! ;)
 
 bool Warehouse::has_soldiers()
 {
-   Worker_Descr* workerdescr;
-   Soldier* soldier;
-
-   workerdescr = get_owner()->get_tribe()->get_worker_descr (
-                     get_owner()->get_tribe()->get_safe_worker_index ("soldier"));
-   
-   // Look if we got one in stock of soldiers
-   std::string name=workerdescr->get_name();
-   std::vector<Object_Ptr>::iterator i;
-   for(i=m_incorporated_workers.begin(); i!=m_incorporated_workers.end(); i++)
-   {
-      if(static_cast<Worker*>(i->get(get_owner()->get_game()))->get_name()==name)
-      {
-         soldier = static_cast<Soldier*>(i->get(get_owner()->get_game()));
-         break;
-      }
-   }
-   return (i!=m_incorporated_workers.end());
+	const Editor_Game_Base & game = *get_owner()->get_game();
+	const std::vector<Object_Ptr>::const_iterator end =
+		m_incorporated_workers.end();
+	for
+		(std::vector<Object_Ptr>::const_iterator it =
+		 m_incorporated_workers.begin();
+		 it != end;
+		 ++it)
+		if (dynamic_cast<const Soldier * const>(it->get(&game))) return true;
+	return false;
 }
 
 void Warehouse::defend (Game* g, Soldier* s)
@@ -1187,7 +1179,7 @@ void Warehouse::defend (Game* g, Soldier* s)
 
    workerdescr = get_owner()->get_tribe()->get_worker_descr (
                      get_owner()->get_tribe()->get_safe_worker_index ("soldier"));
-   
+
    // Look if we got one in stock of soldiers
    std::string name=workerdescr->get_name();
    std::vector<Object_Ptr>::iterator i;

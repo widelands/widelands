@@ -50,7 +50,7 @@ class Editor_Game_Base {
 
       void set_map(Map* map);
       inline Map *get_map() { return m_map; }
-      inline Object_Manager* get_objects() { return m_objects; }
+      Object_Manager * get_objects() const {return m_objects;}
 
       void unconquer_area(uchar playernr, Coords coords);
       void conquer_area(uchar playernr, Coords coords, Building_Descr*);

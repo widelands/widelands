@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,13 +62,16 @@ class Tribe_Descr {
       inline const char *get_name() const { return m_name; }
 
 		inline int get_nrworkers() { return m_workers.get_nitems(); }
-      inline Worker_Descr* get_worker_descr(uint idx) { return m_workers.get(idx); }
-      inline int get_worker_index(const char* name) { return m_workers.get_index(name); }
+		Worker_Descr * get_worker_descr(const uint idx) const
+		{return m_workers.get(idx);}
+		int get_worker_index(const char * const name) const
+		{return m_workers.get_index(name);}
 		inline int get_nrwares() { return m_wares.get_nitems(); }
-		int get_safe_ware_index(const char *name); 
-		inline int get_ware_index(const char *name) { return m_wares.get_index(name); }
+		int get_safe_ware_index(const char * const name) const;
+		int get_ware_index(const char * const name) const
+		{return m_wares.get_index(name);}
       inline Item_Ware_Descr* get_ware_descr(uint idx) { return m_wares.get(idx); }
-		int get_safe_worker_index(const char *name); 
+		int get_safe_worker_index(const char * const name) const;
       inline int get_nrbuildings() { return m_buildings.get_nitems(); }
 		int get_safe_building_index(const char *name);
 		inline int get_building_index(const char *name) { return m_buildings.get_index(name); }
@@ -114,7 +117,7 @@ class Tribe_Descr {
 		void parse_workers(const char *directory);
 		void parse_wares(const char *wares);
 		void parse_bobs(const char *directory);
-		
+
 
 };
 

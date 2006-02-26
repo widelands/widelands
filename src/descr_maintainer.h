@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2002, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ template <class T> class Descr_Maintainer {
       T* get_nitem(void) { n++; if(n<nitems) return items[n]; return NULL; }
       int add(T* item);
       ushort get_nitems(void) const { return nitems; }
-      int get_index(const char* name); // can return -1
+      int get_index(const char * const name) const; // can return -1
       void reserve(uint n) {
          if(!items) {
             items = (T**) malloc(sizeof(T*)*n);
@@ -47,7 +47,10 @@ template <class T> class Descr_Maintainer {
          place_for=n;
       }
 
-      inline T* get(int idx) { if (idx>=0 && idx<(int)nitems) return items[idx]; else return 0; }
+      T * get(const int idx) const {
+         if (idx >= 0 and idx < static_cast<int>(nitems)) return items[idx];
+         else return 0;
+      }
 
    private:
       uint place_for;
@@ -57,7 +60,7 @@ template <class T> class Descr_Maintainer {
 };
 
 template <class T>
-int Descr_Maintainer<T>::get_index(const char* name) {
+int Descr_Maintainer<T>::get_index(const char * const name) const {
 
    ushort i;
    for(i=0; i<nitems; i++) {

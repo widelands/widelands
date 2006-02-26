@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,13 +45,13 @@ void Cmd_Destroy_Map_Object::Read(FileRead* fr, Editor_Game_Base* egbase, Widela
    if(version==CMD_DESTROY_MAP_OBJECT_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr,egbase,mol);
-   
+
       // Serial
       int fileserial=fr->Unsigned32();
       if( fileserial ) {
          assert(mol->is_object_known(fileserial));
          obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
-      } else 
+      } else
          obj_serial = 0;
    } else
       throw wexception("Unknown version in Cmd_Destroy_Map_Object::Read: %i", version);
@@ -59,23 +59,23 @@ void Cmd_Destroy_Map_Object::Read(FileRead* fr, Editor_Game_Base* egbase, Widela
 void Cmd_Destroy_Map_Object::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
    // First, write version
    fw->Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
-   
+
    // Write base classes
    BaseCommand::BaseCmdWrite(fw, egbase, mos);
-   
+
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(obj_serial);
    if(obj) { // The object might have vanished
       assert(mos->is_object_known(obj));
-      fw->Unsigned32(mos->get_object_file_index(obj)); 
-   } else 
+      fw->Unsigned32(mos->get_object_file_index(obj));
+   } else
       fw->Unsigned32( 0 );
-   
+
 }
 
 Cmd_Act::Cmd_Act(int t, Map_Object* o, int a) : BaseCommand(t) {
-   obj_serial=o->get_serial(); 
-   arg=a; 
+   obj_serial=o->get_serial();
+   arg=a;
 }
 void Cmd_Act::execute(Game* g) {
    Map_Object* obj = g->get_objects()->get_object(obj_serial);
@@ -90,16 +90,16 @@ void Cmd_Act::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
    if(version==CMD_ACT_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr,egbase,mol);
-   
+
       // Serial
       int fileserial=fr->Unsigned32();
 
       if( fileserial ) {
          assert(mol->is_object_known(fileserial));
          obj_serial=mol->get_object_by_file_index(fileserial)->get_serial();
-      } else 
+      } else
          obj_serial = 0;
-         
+
       // arg
       arg=fr->Unsigned32();
 
@@ -109,17 +109,17 @@ void Cmd_Act::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
 void Cmd_Act::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
    // First, write version
    fw->Unsigned16(CMD_ACT_VERSION);
-   
+
    // Write base classes
    BaseCommand::BaseCmdWrite(fw, egbase, mos);
-   
+
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(obj_serial);
    if( obj ) { // Object might have dissappeared
       assert(mos->is_object_known(obj));
-      fw->Unsigned32(mos->get_object_file_index(obj)); 
-   } else 
-      fw->Unsigned32( 0 ); 
+      fw->Unsigned32(mos->get_object_file_index(obj));
+   } else
+      fw->Unsigned32( 0 );
 
    // And arg
    fw->Unsigned32(arg);
@@ -168,7 +168,7 @@ void Object_Manager::insert(Map_Object *obj)
 	m_lastserial++;
    assert(m_lastserial);
 	obj->m_serial = m_lastserial;
-   if(obj->m_file_serial==0) { 
+   if(obj->m_file_serial==0) {
       m_last_file_serial++;
       obj->m_file_serial = m_last_file_serial;
    }
@@ -177,7 +177,7 @@ void Object_Manager::insert(Map_Object *obj)
 
 /*
  * Overwrite the file serial for this object
- * The file serial number is a unique number 
+ * The file serial number is a unique number
  * for a file which is used in various sortings
  */
 void Object_Manager::overwrite_file_serial(Map_Object* obj, uint new_serial) {
@@ -202,7 +202,7 @@ void Object_Manager::remove(Map_Object *obj)
 Object_Ptr::get
 ===============
 */
-Map_Object* Object_Ptr::get(Editor_Game_Base* game)
+Map_Object * Object_Ptr::get(const Editor_Game_Base * const game)
 {
 	if (!m_serial) return 0;
 	Map_Object* obj = game->get_objects()->get_object(m_serial);
@@ -216,7 +216,7 @@ Map_Object* Object_Ptr::get(Editor_Game_Base* game)
 Object_Ptr::get
 ===============
 */
-const Map_Object* Object_Ptr::get(Editor_Game_Base* game) const
+const Map_Object * Object_Ptr::get(const Editor_Game_Base * const game) const
 {
 	if (!m_serial) return 0;
 	Map_Object* obj = game->get_objects()->get_object(m_serial);
@@ -245,7 +245,7 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
 bool Map_Object_Descr::is_animation_known(const char* name) {
    std::map<std::string,uint>::iterator i=m_anims.begin();
    while(i!=m_anims.end()) {
-      if(i->first==name) 
+      if(i->first==name)
          return true;
       ++i;
    }
@@ -266,7 +266,7 @@ void Map_Object_Descr::add_animation(const char* name, uint anim) {
 std::string Map_Object_Descr::get_animation_name(uint anim) {
    std::map<std::string,uint>::iterator i=m_anims.begin();
    while(i!=m_anims.end()) {
-      if(i->second==anim) 
+      if(i->second==anim)
          return i->first;
       ++i;
    }

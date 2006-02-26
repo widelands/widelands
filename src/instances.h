@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ class Map_Object;
 class Map_Object_Descr {
 public:
 	Map_Object_Descr(void) { }
-   virtual ~Map_Object_Descr(void) { 
+   virtual ~Map_Object_Descr(void) {
       m_anims.clear();
    }
 
@@ -56,12 +56,12 @@ public:
    }
 
 	bool has_attribute(uint attr);
-   
+
    std::string get_animation_name(uint anim); // This is needed for save games and debug
 
 protected:
 	void add_attribute(uint attr);
-   
+
    void add_animation(const char* name, uint anim);
    bool is_animation_known(const char* name);
 
@@ -69,7 +69,7 @@ protected:
 private:
 	std::vector<uint>	m_attributes;
    std::map<std::string,uint> m_anims;
-   
+
 
 public:
 	static uint get_attribute_id(std::string name);
@@ -160,7 +160,7 @@ public:
 
 	struct LogSink {
 		virtual void log(std::string str) = 0;
-	   virtual ~LogSink() {} 
+	   virtual ~LogSink() {}
    };
 
 protected:
@@ -259,12 +259,12 @@ public:
 	inline void set(Map_Object* obj) { if (obj) m_serial = obj->m_serial; else m_serial = 0; }
 	inline Object_Ptr& operator = (Map_Object* obj) { set(obj); return *this; }
 
-   inline bool is_set(void) { return m_serial; }
+	bool is_set() const {return m_serial;}
 
 	// dammit... without a Editor_Game_Base object, we can't implement a Map_Object* operator
 	// (would be _really_ nice)
-	Map_Object* get(Editor_Game_Base* g);
-	const Map_Object* get(Editor_Game_Base* g) const;
+	Map_Object * get(const Editor_Game_Base * const g);
+	const Map_Object * get(const Editor_Game_Base * const g) const;
 
 private:
 	uint m_serial;
@@ -277,9 +277,9 @@ class Cmd_Destroy_Map_Object:public BaseCommand {
 
 	public:
       Cmd_Destroy_Map_Object(void) : BaseCommand(0) { } // For savegame loading
-		Cmd_Destroy_Map_Object (int t, Map_Object* o);	
+		Cmd_Destroy_Map_Object (int t, Map_Object* o);
 		virtual void execute (Game* g);
-  
+
       // Write these commands to a file (for savegames)
       virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
       virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
@@ -294,10 +294,10 @@ class Cmd_Act:public BaseCommand {
 
 	public:
       Cmd_Act(void) : BaseCommand(0) { } // For savegame loading
-		Cmd_Act (int t, Map_Object* o, int a); 
-		
+		Cmd_Act (int t, Map_Object* o, int a);
+
 		virtual void execute (Game* g);
-      
+
       // Write these commands to a file (for savegames)
       virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
       virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
