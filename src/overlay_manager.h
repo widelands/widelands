@@ -186,8 +186,12 @@ class Overlay_Manager {
       // data
       std::map<int, Registered_Road_Overlays> m_road_overlays;           // for road overlays
 
+	typedef
+		std::multimap<const Coords, Registered_Overlays, Coords::ordering_functor>
+		Registered_Overlays_Map;
+
 	//  indexed by TCoords::TriangleIndex
-	std::multimap<const unsigned int, Registered_Overlays> m_overlays[3];
+	Registered_Overlays_Map m_overlays[3];
 
       Overlay_Info m_buildhelp_infos[5];              // flag, small, medium, big, mine
       bool m_are_graphics_loaded;

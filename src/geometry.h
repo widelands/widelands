@@ -21,6 +21,7 @@
 #define GEOMETRY_H
 
 #include <cmath>
+#include <sys/types.h>
 
 struct Point {
 	Point() {}
@@ -101,7 +102,19 @@ struct Coords {
 		{return x == other.x and y == other.y;}
 	bool operator!=(const Coords other) const {return not (*this == other);}
 
-	int x, y;
+	/**
+	 * For use with standard containers.
+	 */
+	struct ordering_functor {
+		bool operator()(const Coords a, const Coords b) const {
+			return
+				*reinterpret_cast<const u_int32_t * const>(&a)
+				<
+				*reinterpret_cast<const u_int32_t * const>(&b);
+		}
+	};
+
+	int x : 16, y : 16;
 };
 
 

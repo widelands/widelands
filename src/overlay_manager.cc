@@ -58,15 +58,12 @@ unsigned char Overlay_Manager::get_overlays
 
 	unsigned char num_ret = 0;
 
-	const std::multimap<const unsigned int, Registered_Overlays> & overlay_map =
-		m_overlays[c.t];
-	const unsigned int fieldindex = (c.y << 8) + c.x;
-	std::map<const unsigned int, Registered_Overlays>::const_iterator it =
-		overlay_map.lower_bound(fieldindex);
+	const Registered_Overlays_Map & overlay_map = m_overlays[c.t];
+	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
 	while
 		(it != overlay_map.end()
 		 and
-		 it->first == fieldindex
+		 it->first == c
 		 and
 		 it->second.level <= 5
 		 and
@@ -84,7 +81,7 @@ unsigned char Overlay_Manager::get_overlays
 	while
 		(it != overlay_map.end()
 		 and
-		 it->first == fieldindex
+		 it->first == c
 		 and
 		 num_ret < MAX_OVERLAYS_PER_FIELD) //  Protect overlays array access.
 	{
@@ -131,12 +128,8 @@ void Overlay_Manager::cleanup(void) {
       delete[] m_overlay_fields;
       m_overlay_fields=0;
    }
-	const std::multimap<const unsigned int, Registered_Overlays> * const
-		overlays_end = m_overlays + 3;
-	for
-		(std::multimap<const unsigned int, Registered_Overlays> * it = m_overlays;
-		 it != overlays_end;
-		 ++it)
+	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
+	for (Registered_Overlays_Map * it = m_overlays; it != overlays_end; ++it)
 		it->clear();
 	m_road_overlays.clear();
 }
@@ -216,20 +209,16 @@ void Overlay_Manager::register_overlay
 {
 	assert(c.x >= 0);
 	assert(c.y >= 0);
-	assert(static_cast<const unsigned int>(c.x) <= 0xff);
 	assert(level!=5); // level == 5 is undefined behavior
 
-	std::multimap<const unsigned int, Registered_Overlays> & overlay_map =
-		m_overlays[c.t];
-	const unsigned int fieldindex = (c.y << 8) + c.x;
-   if (overlay_map.count(fieldindex)) {
-	   std::map<const unsigned int, Registered_Overlays>::iterator i =
-		   overlay_map.lower_bound(fieldindex);
+	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
+   if (overlay_map.count(c)) {
+	   Registered_Overlays_Map::const_iterator i = overlay_map.lower_bound(c);
       do {
          if(i->second.picid==picid) return;
          ++i;
 
-      } while(i->first==fieldindex);
+      } while (i->first == c);
    }
    int hsx=hot_spot.x;
    int hsy=hot_spot.y;
@@ -241,40 +230,29 @@ void Overlay_Manager::register_overlay
    }
 
 	overlay_map.insert
-		(std::pair<const unsigned int, Registered_Overlays>
-		 (fieldindex, Registered_Overlays(jobid, picid, hsx, hsy, level)));
+		(std::pair<const Coords, Registered_Overlays>
+		 (c, Registered_Overlays(jobid, picid, hsx, hsy, level)));
 
    // Now manually sort, so that they are ordered
-   //  * first by fieldindex (done by std::multimap)
+   //  * first by c (done by std::multimap)
    //  * second by levels (done manually here)
 
 	// there is at least one registered
-	std::map<const unsigned int, Registered_Overlays>::iterator i =
-				 overlay_map.lower_bound(fieldindex);
+	Registered_Overlays_Map::iterator it = overlay_map.lower_bound(c), jt;
 
-	std::map<const unsigned int, Registered_Overlays>::iterator j;
-   do {
-      j=i;
-      ++j;
-
-      if (j == overlay_map.end()) {
-         // j is no longer a valid field, so sorting ends here
-	      break;
-      }
-
-      if(j->first==i->first) {
-         // there are more elements registered
-         if(j->second.level < i->second.level) {
-            std::swap<Overlay_Manager::Registered_Overlays>(i->second,j->second);
-            i = overlay_map.lower_bound(fieldindex);
-         } else {
-            ++i;
-         }
-      } else {
-         // i is the last element, break this loop
-         break;
-      }
-   } while(i->first==fieldindex);
+	do {
+		jt = it;
+		++jt;
+		if (jt == overlay_map.end()) break;
+		if (jt->first == it->first) {
+			// There are several overlays registered for this location.
+			if (jt->second.level < it->second.level) {
+				std::swap<Overlay_Manager::Registered_Overlays>
+					(it->second, jt->second);
+				it = overlay_map.lower_bound(c);
+			} else ++it;
+		} else break; // it is the last element, break this loop.
+	} while (it->first == c);
 }
 
 /*
@@ -284,23 +262,19 @@ void Overlay_Manager::remove_overlay(const TCoords c, const int picid) {
 	assert(c.x >= 0);
 	assert(c.y >= 0);
 	assert(c.t <= 2);
-	assert(static_cast<const unsigned int>(c.x) <= 0xff);
 
-	std::multimap<const unsigned int, Registered_Overlays> & overlay_map =
-		m_overlays[c.t];
-	const unsigned int fieldindex = (c.y << 8) + c.x;
+	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
 
-	if (overlay_map.count(fieldindex)) {
-		std::multimap<const unsigned int, Registered_Overlays>::iterator it =
-			overlay_map.lower_bound(fieldindex);
+	if (overlay_map.count(c)) {
+		Registered_Overlays_Map::iterator it = overlay_map.lower_bound(c);
 		do {
 			if (it->second.picid == picid or picid == -1) {
 				overlay_map.erase(it);
-				it = overlay_map.lower_bound(fieldindex);
+				it = overlay_map.lower_bound(c);
 			} else {
 				++it;
 			}
-		} while (it != overlay_map.end() and it->first == fieldindex);
+		} while (it != overlay_map.end() and it->first == c);
 	}
 }
 
@@ -308,16 +282,9 @@ void Overlay_Manager::remove_overlay(const TCoords c, const int picid) {
  * remove all overlays with this jobid
  */
 void Overlay_Manager::remove_overlay(int jobid) {
-	const std::multimap<const unsigned int, Registered_Overlays> * const
-		overlays_end = m_overlays + 3;
-	for
-		(std::multimap<const unsigned int, Registered_Overlays> * j = m_overlays;
-		 j != overlays_end;
-		 ++j)
-		for
-			(std::multimap<const unsigned int, Registered_Overlays>::iterator it =
-			 j->begin();
-			 it != j->end();)
+	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
+	for (Registered_Overlays_Map * j = m_overlays; j != overlays_end; ++j)
+		for (Registered_Overlays_Map::iterator it = j->begin(); it != j->end();)
 		{
 			if (it->second.jobid == jobid) j->erase(it++); //  This is necessary!
 			else ++it;
