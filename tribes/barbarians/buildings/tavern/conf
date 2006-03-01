@@ -27,7 +27,7 @@ meat=4
 [buildcost]
 trunk=5
 raw_stone=1         # expensive
-thatchfern=1
+thatchreed=1
 
 [idle]
 pics=tavern_i_??.png  # ???

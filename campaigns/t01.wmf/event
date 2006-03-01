@@ -318,7 +318,7 @@ type=allow_building
 state=init
 version=1
 player=1
-building=pressworks
+building=weaving-mill
 allow=false
 
 [Disable Building 32]

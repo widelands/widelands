@@ -27,7 +27,7 @@ wheat=8
 [buildcost]
 trunk=5
 raw_stone=3
-thatchfern=2
+thatchreed=2
 
 [idle]
 pics=micro-brewery_i_??.png  # ???

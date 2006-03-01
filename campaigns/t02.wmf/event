@@ -286,7 +286,7 @@ type=allow_building
 state=init
 version=1
 player=1
-building=pressworks
+building=weaving-mill
 allow=false
 
 [Disable Building 32]
@@ -710,7 +710,7 @@ state=init
 version=1
 text=_""<p font-size=24 text-align=left font-face=Domestic_Manners font-color=8080FF>Khantrukh steps in...</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
 _" "Chieftain, this is a disgrace! It is well that we can produce grindstone for mighty fortifications and great buildings now - only, this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping onto my face! Now there is a problem we should do something about!"<br><br>"
-_"--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is fern, used to cover roofs. Fern is being planted by a fernery.<br>Build a Fernery.</p>""
+_"--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>""
 window_title=_Advisor
 is_modal=true
 number_of_buttons=1

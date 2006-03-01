@@ -51,7 +51,7 @@ trunk=6
 raw_stone=4
 grindstone=6
 gold=4
-thatchfern=3
+thatchreed=3
 
 [idle]
 pics=battlearena_i_??.png  # ???

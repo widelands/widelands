@@ -6,26 +6,40 @@ size=medium
 buildable=yes
 buildicon=fernery_build.png
 worker=ferner  
-output=thatchfern
+stopable=yes
 
 program=work
-program=plant
-program=harvest
+program=plantflax
+program=plantreed
+program=harvestflax
+program=harvestreed
 
 [work]
-0=set +nostats # ending this program has no effect on statistics
-1=call plant
-2=call harvest
+0=set +nostats          # ending this program has no effect on statistics
+1=call plantflax
+2=call harvestflax
+3=call plantreed
+4=call harvestreed
 
-[plant]
-0=set +catch   # failure of this program will be caught
-1=sleep 20000  # sleep the given amount of time
-2=worker plant # cause the worker to run the 'plant' program
+[plantflax]
+0=set +catch            # failure of this program will be caught
+1=sleep 20000           # sleep the given amount of time
+2=worker plantflax      # cause the worker to run the 'plant' program
 
-[harvest]
+[plantreed]
+0=set +catch            # failure of this program will be caught
+1=sleep 20000           # sleep the given amount of time
+2=worker plantreed      # cause the worker to run the 'plant' program
+
+[harvestflax]
 0=set +catch
-1=sleep 5000      # sleep the given amount of time
-2=worker harvest  # cause the worker to run the 'harvest' program
+1=sleep 5000            # sleep the given amount of time
+2=worker harvestflax    # cause the worker to run the 'harvest' program
+
+[harvestreed]
+0=set +catch
+1=sleep 5000            # sleep the given amount of time
+2=worker harvestreed    # cause the worker to run the 'harvest' program
 
 [buildcost]
 trunk=5

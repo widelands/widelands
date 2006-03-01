@@ -1,31 +1,51 @@
 [global]
 descname=_Ferner
-help=Grows Fern
+help=Grows flax and thatchreed
 type=generic
 menu_pic=menu.png
-program=plant
-program=harvest
+program=plantflax
+program=plantreed
+program=harvestflax
+program=harvestreed
 
 [buildcost]
 carrier=1
 shovel=1
 
-[plant]
-0=setdescription tribe:fern0        # Set a random immovable description
-1=findspace size:any radius:1			# Find space for the description within the given radius
-2=walk coords								# Walk to the target coordinates
-3=animation idle 500						# Play a planting animation
-4=plant										# Place an immovable of the selected description
-5=animation idle 500						# Wait a while
+[plantflax]
+0=setdescription tribe:flax0                    # Set a random immovable description
+1=findspace size:any radius:1			        # Find space for the description within the given radius
+2=walk coords								    # Walk to the target coordinates
+3=animation idle 500						    # Play a planting animation
+4=plant										    # Place an immovable of the selected description
+5=animation idle 500						    # Wait a while
 6=return										# Go back home
 
-[harvest]
-0=findobject attrib:grown_fern radius:2	# find an object matching the given criteria, put it into the object slot
-1=walk object								# walk to the object in the object slot
-2=animation idle 10000				# play an animation 
+[plantreed]
+0=setdescription tribe:reed0                    # Set a random immovable description
+1=findspace size:any radius:1			        # Find space for the description within the given radius
+2=walk coords								    # Walk to the target coordinates
+3=animation idle 500						    # Play a planting animation
+4=plant										    # Place an immovable of the selected description
+5=animation idle 500						    # Wait a while
+6=return										# Go back home
+
+[harvestflax]
+0=findobject attrib:grown_flax radius:2	        # find an object matching the given criteria, put it into the object slot
+1=walk object								    # walk to the object in the object slot
+2=animation idle 10000				            # play an animation 
 3=object harvest								# cause the object to change its program (to 'fall')
-4=animation idle 2000					# wait for the tree to disappear
-5=createitem thatchfern             # create & carry the given item
+4=animation idle 2000					        # wait for the tree to disappear
+5=createitem flax                               # create & carry the given item
+6=return										# return home
+
+[harvestreed]
+0=findobject attrib:grown_reed radius:2	        # find an object matching the given criteria, put it into the object slot
+1=walk object								    # walk to the object in the object slot
+2=animation idle 10000				            # play an animation 
+3=object harvest								# cause the object to change its program (to 'fall')
+4=animation idle 2000					        # wait for the tree to disappear
+5=createitem thatchreed                         # create & carry the given item
 6=return										# return home
 
 # The normal idle animation (non-directional)

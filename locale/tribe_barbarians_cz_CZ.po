@@ -136,11 +136,6 @@ msgstr "Tesař"
 msgid "Headquarters"
 msgstr "Základna"
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Zbrojíř"
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Lovec"
@@ -148,11 +143,6 @@ msgstr "Lovec"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Hospoda"
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Dřevorubec"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -165,10 +155,6 @@ msgstr "Minipivovar"
 #: ../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
 msgstr "Železorudný důl"
-
-#: ../tribes/barbarians/buildings/pressworks/conf:2
-msgid "Pressworks"
-msgstr "Lisovna"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
@@ -209,6 +195,11 @@ msgstr "Sklad"
 #: ../tribes/barbarians/buildings/warmill/conf:2
 msgid "War Mill"
 msgstr "Válečná akademie"
+
+#: ../tribes/barbarians/buildings/weaving-mill/conf:2
+#, fuzzy
+msgid "Weaving-Mill"
+msgstr "Lisovna"
 
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
@@ -266,6 +257,10 @@ msgstr "Ryby"
 #: ../tribes/barbarians/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
 msgstr "Prut"
+
+#: ../tribes/barbarians/wares/flax/conf:2
+msgid "Flax"
+msgstr ""
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
@@ -352,9 +347,9 @@ msgstr "Svačina"
 msgid "Strong Beer"
 msgstr "Silnější pivo"
 
-#: ../tribes/barbarians/wares/thatchfern/conf:2
+#: ../tribes/barbarians/wares/thatchreed/conf:2
 #, fuzzy
-msgid "Thatch Fern"
+msgid "Thatch Reed"
 msgstr "Kapradí na došky"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
@@ -426,6 +421,11 @@ msgstr "Hajný"
 msgid "Geologist"
 msgstr "Geolog"
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Zbrojíř"
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Lovec"
@@ -433,6 +433,11 @@ msgstr "Lovec"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Hospodský"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Dřevorubec"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
@@ -449,10 +454,6 @@ msgstr "Mistr horník"
 #: ../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
 msgstr "Horník"
-
-#: ../tribes/barbarians/workers/presser/conf:2
-msgid "Presser"
-msgstr "Tiskař"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
@@ -473,3 +474,7 @@ msgstr "Kameník"
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Cvičitel"
+
+#: ../tribes/barbarians/workers/weaver/conf:2
+msgid "Weaver"
+msgstr "Tiskař"

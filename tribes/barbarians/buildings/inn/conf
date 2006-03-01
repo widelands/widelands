@@ -29,7 +29,7 @@ meat=4
 [buildcost]
 trunk=2
 grindstone=2
-thatchfern=1
+thatchreed=1
 
 [idle]
 pics=inn_i_??.png  # ???

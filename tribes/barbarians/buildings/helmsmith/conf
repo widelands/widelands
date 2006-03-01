@@ -63,7 +63,7 @@ coal=8
 trunk=4
 raw_stone=2
 grindstone=2
-thatchfern=3
+thatchreed=3
 
 [idle]
 pics=i_??.png  # ???

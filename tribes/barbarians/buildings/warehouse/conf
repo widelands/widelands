@@ -12,7 +12,7 @@ buildicon=warehouse_build.png
 trunk=5
 raw_stone=2
 grindstone=3
-thatchfern=1
+thatchreed=1
 
 [idle]
 pics=warehouse_i_??.png  # ???

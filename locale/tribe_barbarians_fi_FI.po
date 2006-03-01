@@ -137,11 +137,6 @@ msgstr "Puunkovettaja"
 msgid "Headquarters"
 msgstr "Päämaja"
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Kypäräseppä"
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Saalistajan maja"
@@ -149,11 +144,6 @@ msgstr "Saalistajan maja"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Majatalo"
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Puunhakkaaja"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -166,10 +156,6 @@ msgstr "minileipomo"
 #: ../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
 msgstr "Tautakaivos"
-
-#: ../tribes/barbarians/buildings/pressworks/conf:2
-msgid "Pressworks"
-msgstr "Paino"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
@@ -210,6 +196,10 @@ msgstr "Varasto"
 #: ../tribes/barbarians/buildings/warmill/conf:2
 msgid "War Mill"
 msgstr ""
+
+#: ../tribes/barbarians/buildings/weaving-mill/conf:2
+msgid "Weaving-Mill"
+msgstr "Paino"
 
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
@@ -266,6 +256,10 @@ msgstr "Kala"
 #: ../tribes/barbarians/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
 msgstr "Onki"
+
+#: ../tribes/barbarians/wares/flax/conf:2
+msgid "Flax"
+msgstr ""
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
@@ -351,8 +345,8 @@ msgstr ""
 msgid "Strong Beer"
 msgstr "Vahvaa kaljaa"
 
-#: ../tribes/barbarians/wares/thatchfern/conf:2
-msgid "Thatch Fern"
+#: ../tribes/barbarians/wares/thatchreed/conf:2
+msgid "Thatch Reed"
 msgstr ""
 
 #: ../tribes/barbarians/wares/trunk/conf:2
@@ -423,6 +417,11 @@ msgstr ""
 msgid "Geologist"
 msgstr "Geologi"
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Kypäräseppä"
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Saalistaja"
@@ -430,6 +429,11 @@ msgstr "Saalistaja"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Majatalonpitäjä"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Puunhakkaaja"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
@@ -446,10 +450,6 @@ msgstr "Mestarikaivostyöläinen"
 #: ../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
 msgstr "Kaivostyöläinen"
-
-#: ../tribes/barbarians/workers/presser/conf:2
-msgid "Presser"
-msgstr "Painaja"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
@@ -470,3 +470,11 @@ msgstr "Kivenhakkaaja"
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Valmentaja"
+
+#: ../tribes/barbarians/workers/weaver/conf:2
+#, fuzzy
+msgid "Weaver"
+msgstr "Vettä"
+
+#~ msgid "Presser"
+#~ msgstr "Painaja"

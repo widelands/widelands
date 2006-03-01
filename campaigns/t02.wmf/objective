@@ -58,7 +58,7 @@ optional=false
 trigger=Mission Grindstone
 
 [Better Material III]
-descr=_<p>The third material necessary for improved buildings is fern, used to cover roofs. Fern is being planted by a fernery.<br>Build a Fernery.</p>
+descr=_<p>The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>
 visible=false
 optional=false
 trigger=Mission Fernery

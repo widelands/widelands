@@ -85,7 +85,8 @@ sharpaxe=0
 shovel=6
 snack=3
 strongbeer=0
-thatchfern=24
+thatchreed=24
+flax=0
 trunk=80
 warhelmet=0
 warriorsaxe=0
@@ -113,11 +114,11 @@ master-blacksmith=0
 master-brewer=0
 master-miner=0
 miner=4
-presser=0
 ranger=0
 smelter=0
 stonemason=2
 trainer=0
+weaver=0
 
 [startsoldiers]
 0/0/0/0=45

@@ -26,7 +26,7 @@ water=6
 [buildcost]
 trunk=4
 raw_stone=2
-thatchfern=2
+thatchreed=2
 
 [idle]
 pics=bakery_i_??.png  # ???

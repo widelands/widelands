@@ -32,7 +32,7 @@ strongbeer=4
 [buildcost]
 trunk=1
 grindstone=3
-thatchfern=2
+thatchreed=2
 
 [idle]
 pics=big_inn_i_??.png  # ???

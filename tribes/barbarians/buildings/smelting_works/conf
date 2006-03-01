@@ -47,7 +47,7 @@ coal=8
 trunk=3
 raw_stone=1
 grindstone=1
-thatchfern=2
+thatchreed=2
 
 [idle]
 pics=smelting_works_i_??.png  # ???

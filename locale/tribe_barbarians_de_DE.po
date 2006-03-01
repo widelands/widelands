@@ -141,11 +141,6 @@ msgstr "Sägewerk"
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Helmschmied"
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Jägerhütte"
@@ -153,11 +148,6 @@ msgstr "Jägerhütte"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Wirtshaus"
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Holzfäller"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -170,10 +160,6 @@ msgstr "Kleinbrauerei"
 #: ../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
 msgstr "Eisenmine"
-
-#: ../tribes/barbarians/buildings/pressworks/conf:2
-msgid "Pressworks"
-msgstr "Farnpresserei"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
@@ -215,6 +201,10 @@ msgstr "Warenlager"
 msgid "War Mill"
 msgstr "Waffenschmiede"
 
+#: ../tribes/barbarians/buildings/weaving-mill/conf:2
+msgid "Weaving-Mill"
+msgstr "Weberei"
+
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Brunnen"
@@ -249,7 +239,7 @@ msgstr "Bronzeaxt"
 
 #: ../tribes/barbarians/wares/cloth/conf:2
 msgid "Cloth"
-msgstr "Kleidung"
+msgstr "Stoff"
 
 #: ../tribes/barbarians/wares/coal/conf:2
 msgid "Coal"
@@ -270,6 +260,10 @@ msgstr "Fisch"
 #: ../tribes/barbarians/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
 msgstr "Angel"
+
+#: ../tribes/barbarians/wares/flax/conf:2
+msgid "Flax"
+msgstr "Flachs"
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
@@ -355,9 +349,9 @@ msgstr "Snack"
 msgid "Strong Beer"
 msgstr "Starkbier"
 
-#: ../tribes/barbarians/wares/thatchfern/conf:2
-msgid "Thatch Fern"
-msgstr "Dach Farn"
+#: ../tribes/barbarians/wares/thatchreed/conf:2
+msgid "Thatch Reed"
+msgstr "Schilf"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
@@ -427,6 +421,11 @@ msgstr "Wildhüter"
 msgid "Geologist"
 msgstr "Geologe"
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Helmschmied"
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jäger"
@@ -434,6 +433,11 @@ msgstr "Jäger"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Wirt"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Holzfäller"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
@@ -450,10 +454,6 @@ msgstr "Bergwerksmeister"
 #: ../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
 msgstr "Bergmann"
-
-#: ../tribes/barbarians/workers/presser/conf:2
-msgid "Presser"
-msgstr "Presser"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
@@ -474,6 +474,10 @@ msgstr "Steinmetz"
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Trainer"
+
+#: ../tribes/barbarians/workers/weaver/conf:2
+msgid "Weaver"
+msgstr "Weber"
 
 #~ msgid "barbarians"
 #~ msgstr "Barbaren"

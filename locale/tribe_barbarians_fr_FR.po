@@ -139,11 +139,6 @@ msgstr "Garde Forestier"
 msgid "Headquarters"
 msgstr "Quartier Général"
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Ouvrier Naval"
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Hutte de Chasseur"
@@ -151,11 +146,6 @@ msgstr "Hutte de Chasseur"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Auberge"
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Bûcheron"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -168,10 +158,6 @@ msgstr "Petite Brasserie"
 #: ../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
 msgstr "Mine de Métal"
-
-#: ../tribes/barbarians/buildings/pressworks/conf:2
-msgid "Pressworks"
-msgstr "Presse"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
@@ -211,6 +197,11 @@ msgstr "Entrepôt"
 
 #: ../tribes/barbarians/buildings/warmill/conf:2
 msgid "War Mill"
+msgstr "Moulin de Guerre"
+
+#: ../tribes/barbarians/buildings/weaving-mill/conf:2
+#, fuzzy
+msgid "Weaving-Mill"
 msgstr "Moulin de Guerre"
 
 #: ../tribes/barbarians/buildings/well/conf:2
@@ -268,6 +259,10 @@ msgstr "Poisson"
 #: ../tribes/barbarians/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
 msgstr "Canne à pêche"
+
+#: ../tribes/barbarians/wares/flax/conf:2
+msgid "Flax"
+msgstr ""
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
@@ -353,8 +348,9 @@ msgstr "Casse-Croute"
 msgid "Strong Beer"
 msgstr "Bière Corsée"
 
-#: ../tribes/barbarians/wares/thatchfern/conf:2
-msgid "Thatch Fern"
+#: ../tribes/barbarians/wares/thatchreed/conf:2
+#, fuzzy
+msgid "Thatch Reed"
 msgstr "Chaume"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
@@ -425,6 +421,11 @@ msgstr "Garde Chasse"
 msgid "Geologist"
 msgstr "Géologue"
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Ouvrier Naval"
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Chasseur"
@@ -432,6 +433,11 @@ msgstr "Chasseur"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Aubergiste"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Bûcheron"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
@@ -448,10 +454,6 @@ msgstr "Maître Mineur"
 #: ../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
 msgstr "Mineur"
-
-#: ../tribes/barbarians/workers/presser/conf:2
-msgid "Presser"
-msgstr "Presseur"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
@@ -472,3 +474,11 @@ msgstr "Tailleur de Pierre"
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Entraîneur"
+
+#: ../tribes/barbarians/workers/weaver/conf:2
+#, fuzzy
+msgid "Weaver"
+msgstr "Eau"
+
+#~ msgid "Presser"
+#~ msgstr "Presseur"
