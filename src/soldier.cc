@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-4 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ IdleSoldierSupply IMPLEMENTATION
 
 class IdleSoldierSupply : public Supply {
 	public:
-		IdleSoldierSupply(Soldier* w);
+		IdleSoldierSupply(Soldier * const);
 		~IdleSoldierSupply();
 
 		void set_economy(Economy* e);
@@ -75,13 +75,9 @@ IdleSoldierSupply::IdleSoldierSupply
 Automatically register with the soldier's economy.
 ===============
 */
-IdleSoldierSupply::IdleSoldierSupply(Soldier* s)
-{
-	m_soldier = s;
-	m_economy = 0;
-
-	set_economy(s->get_economy());
-}
+IdleSoldierSupply::IdleSoldierSupply(Soldier * const s) :
+m_soldier(s), m_economy(0)
+{set_economy(s->get_economy());}
 
 
 /*
@@ -292,7 +288,7 @@ Soldier_Descr::Soldier_Descr
 Soldier_Descr::~Soldier_Descr
 ===============
 */
-Soldier_Descr::Soldier_Descr(Tribe_Descr *tribe, const char *name)
+Soldier_Descr::Soldier_Descr(Tribe_Descr * const tribe, const char * const name)
 	: Worker_Descr(tribe, name)
 {
 	add_attribute(Map_Object::SOLDIER);
@@ -317,12 +313,12 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 {
 	Worker_Descr::parse(directory, prof, encdata);
    Section* sglobal=prof->get_section("global");
-  
+
    // Parse hitpoints
    std::string hp=sglobal->get_safe_string("hp");
    std::vector<std::string> list;
    split_string(hp, &list, "-");
-   if(list.size()!=2) 
+   if(list.size()!=2)
       throw wexception("Parse error in hp string: \"%s\" (must be \"min-max\")", hp.c_str());
    uint i=0;
    for(i=0; i<list.size(); i++)
@@ -339,7 +335,7 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
    std::string attack=sglobal->get_safe_string("attack");
    list.resize(0);
    split_string(attack, &list, "-");
-   if(list.size()!=2) 
+   if(list.size()!=2)
       throw wexception("Parse error in attack string: \"%s\" (must be \"min-max\")", attack.c_str());
    for(i=0; i<list.size(); i++)
       remove_spaces(&list[i]);
@@ -352,7 +348,7 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
 
    // Parse defend
    m_defense=sglobal->get_safe_int("defense");
-   
+
    // Parse evade
    m_evade=sglobal->get_safe_int("evade");
 
@@ -367,7 +363,7 @@ void Soldier_Descr::parse(const char *directory, Profile *prof, const EncodeData
    m_max_attack_level=sglobal->get_safe_int("max_attack_level");
    m_max_defense_level=sglobal->get_safe_int("max_defense_level");
    m_max_evade_level=sglobal->get_safe_int("max_evade_level");
- 
+
    // Load the filenames
    m_hp_pics_fn.resize(m_max_hp_level+1);
    m_attack_pics_fn.resize(m_max_attack_level+1);
@@ -429,7 +425,7 @@ void Soldier_Descr::load_graphics(void) {
 uint Soldier_Descr::get_rand_anim(std::string name)
 {
    // Todo: This is thought to get a random animation like attack_1 attack_2 attack_3 ...
-   // Randimly trhought this method. By now only gets attack, but isn't very difficult 
+   // Randimly trhought this method. By now only gets attack, but isn't very difficult
    // to remake allowing the attack_1 and so.
    return get_animation(name.c_str());
 }
@@ -495,48 +491,50 @@ void Soldier::init(Editor_Game_Base* gg) {
 /*
  * Set this soldiers level. Automatically sets the new values
  */
-void Soldier::set_level(uint hp, uint attack, uint defense, uint evade) {
+void Soldier::set_level
+(const uint hp, const uint attack, const uint defense, const uint evade)
+{
    set_hp_level(hp);
    set_attack_level(attack);
    set_defense_level(defense);
    set_evade_level(evade);
 }
-void Soldier::set_hp_level(uint hp) {
+void Soldier::set_hp_level(const uint hp) {
    assert(hp>=m_hp_level && hp<=get_descr()->get_max_hp_level());
-   
+
    while(m_hp_level<hp) {
       ++m_hp_level;
       m_hp_max+=get_descr()->get_hp_incr_per_level();
       m_hp_current+=get_descr()->get_hp_incr_per_level();
    }
 }
-void Soldier::set_attack_level(uint attack) {
+void Soldier::set_attack_level(const uint attack) {
    assert(attack>=m_attack_level && attack<=get_descr()->get_max_attack_level());
-   
+
    while(m_attack_level<attack) {
       ++m_attack_level;
       m_min_attack+=get_descr()->get_attack_incr_per_level();
       m_max_attack+=get_descr()->get_attack_incr_per_level();
    }
 }
-void Soldier::set_defense_level(uint defense) {
+void Soldier::set_defense_level(const uint defense) {
    assert(defense>=m_defense_level && defense<=get_descr()->get_max_defense_level());
-   
+
    while(m_defense_level<defense) {
       ++m_defense_level;
       m_defense+=get_descr()->get_defense_incr_per_level();
    }
 }
-void Soldier::set_evade_level(uint evade) {
+void Soldier::set_evade_level(const uint evade) {
    assert(evade>=m_evade_level && evade<=get_descr()->get_max_evade_level());
-   
+
    while(m_evade_level<evade) {
       ++m_evade_level;
       m_evade+=get_descr()->get_evade_incr_per_level();
    }
 }
 
-uint Soldier::get_level(tAttribute at)
+uint Soldier::get_level(const tAttribute at)
 {
 	switch (at)
 	{
@@ -549,7 +547,7 @@ uint Soldier::get_level(tAttribute at)
 	throw wexception ("Soldier::get_level attribute not identified.)");
 }
 
-void Soldier::heal (uint hp)
+void Soldier::heal (const uint hp)
 {
 	// Ensures that we can only heal, don't hurt throught this method
 	assert (hp >= 0);
@@ -564,10 +562,10 @@ void Soldier::heal (uint hp)
 /**
  * This only subs the specified number of hitpoints, don't do anything more.
  */
-void Soldier::damage (uint value)
+void Soldier::damage (const uint value)
 {
    assert (m_hp_current > 0);
-   
+
    molog ("damage %d(-%d)/%d\n", m_hp_current, value, m_hp_max);
    if (m_hp_current < value)
       m_hp_current = 0;
@@ -589,13 +587,13 @@ void Soldier::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos) {
 
    int w, h;
    g_gr->get_animation_size(anim, g->get_gametime() - get_animstart(), &w, &h);
-   
+
    // Draw energy bar
    // first: draw white sourrounding
    const int frame_width=w<<1;  // width * 2
    const int frame_height=5;
    const int frame_beginning_x=drawpos.x-(frame_width>>1);  // TODO: these should be calculated from the hot spot, not assumed
-   const int frame_beginning_y=drawpos.y-h-7;     
+   const int frame_beginning_y=drawpos.y-h-7;
    dst->draw_rect(frame_beginning_x, frame_beginning_y, frame_width, frame_height, HP_FRAMECOLOR);
    // Draw energybar
    float percent = (float)m_hp_current/m_hp_max;
@@ -607,15 +605,15 @@ void Soldier::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos) {
 		color = RGBColor(255, 255, 0);
 	else
 		color = RGBColor(17,192,17);
-   dst->fill_rect(frame_beginning_x+1, frame_beginning_y+1, energy_width, frame_height-2, color); 
+   dst->fill_rect(frame_beginning_x+1, frame_beginning_y+1, energy_width, frame_height-2, color);
 
    // Draw information fields about levels
    // first, gather informations
-   uint hppic=get_hp_level_pic();
-   uint attackpic=get_attack_level_pic();
-   uint defensepic=get_defense_level_pic();
-   uint evadepic=get_evade_level_pic();
-   int hpw,hph,atw,ath,dew,deh,evw,evh; 
+	const uint hppic = get_hp_level_pic();
+	const uint attackpic = get_attack_level_pic();
+	const uint defensepic = get_defense_level_pic();
+	const uint evadepic = get_evade_level_pic();
+   int hpw,hph,atw,ath,dew,deh,evw,evh;
    g_gr->get_picture_size(hppic, &hpw, &hph);
    g_gr->get_picture_size(attackpic, &atw, &ath);
    g_gr->get_picture_size(defensepic, &dew, &deh);
@@ -625,7 +623,7 @@ void Soldier::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos) {
    dst->blit(frame_beginning_x+(frame_width>>1), frame_beginning_y-evh-deh, defensepic);
    dst->blit(frame_beginning_x, frame_beginning_y-hph, hppic);
    dst->blit(frame_beginning_x+(frame_width>>1), frame_beginning_y-evh, evadepic);
-   
+
 	Worker::draw(g,dst,pos);
 }
 
@@ -682,15 +680,15 @@ void Soldier::start_task_launchattack(Game* g, Flag* f)
 
    if (f->get_owner() == get_owner())
       return;
-   
-   
+
+
 log ("Soldier::start_task_launchattack\n");
    push_task(g, &taskLaunchAttack);
 
    State* s = get_state();
 
    // First step (we must exit from building), and set what is the target
-   s->ivar1 = 1; 
+   s->ivar1 = 1;
    s->ivar2 = 0;     // Not requested to attack (used by signal 'combat')
    s->objvar1 = get_location(g);   // objvar1 is the owner flag (where is attached the FRIEND military site)
    s->coords = f->get_position(); // Destination
@@ -705,7 +703,7 @@ void Soldier::launchattack_update (Game* g, State* state)
    std::string signal = get_signal();
 
 molog("[launchattack]: Task Updated %d\n", __LINE__);
-   
+
 /*   if (signal == "combat" || state->ivar2 == 1)
    {
       molog("[launchattack] Combat requested for '%s'\n", signal.c_str());
@@ -725,13 +723,13 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
       pop_task(g);
       return;
    }*/
-   
+
    // See if it's at building and drop of it
    if (state->ivar1 == 1)
    {
       BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
-      if (position && position->get_type() == BUILDING) 
+      if (position && position->get_type() == BUILDING)
       {
          // We are in our building, try to exit
          if (start_task_waitforcapacity(g, (Flag*)get_location(g)->get_base_flag()))
@@ -741,7 +739,7 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
          return;
       }
    }
-   
+
    // Ensures that the owner of this is the base flag of the militarysite that launchs the attack
    Map* map = g->get_map();
    PlayerImmovable* location = get_location(g);
@@ -756,15 +754,15 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
    {
       Flag* f_target;
       Coords c_target;
-      
+
       location = (PlayerImmovable*) map->get_immovable(state->coords);
-      
+
       assert (location);
       assert (location->get_type() == FLAG);
-      
+
       f_target = (Flag*) location;
       c_target = f_target->get_position();
-      
+
          // Time to return home (in future, time to enter enemu house)
       if (get_position() == c_target)
       {
@@ -772,7 +770,7 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
             // If there are enemy soldiers, time to kill they !!!
          if (start_task_waitforassault(g, bs))
             return;
-         
+
             // Now, this soldier will enter to the house!
          if (bs->get_owner() == get_owner())
          {
@@ -787,7 +785,7 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
          schedule_act(g, 50);    // Waits a little before trying to enter to the house
          return;
       }
-      
+
       // Move towards enemy flag
       if (!start_task_movepath(g, c_target, 0, get_descr()->get_right_walk_anims(does_carry_ware())))
       {
@@ -800,7 +798,7 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
       else
          return;
    }
-   
+
    // Return to friend owner flag
    if (get_position() == owner->get_position())
    {
@@ -809,7 +807,7 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
       pop_task(g);
       return;
    }
-   
+
    molog ("[launchattack]: Return home\n");
    if (!start_task_movepath(g, owner->get_position(), 0, get_descr()->get_right_walk_anims(does_carry_ware())))
    {
@@ -824,7 +822,7 @@ molog("[launchattack]: Task Updated %d\n", __LINE__);
 void Soldier::launchattack_signal (Game* g, State* state)
 {
    std::string signal = get_signal ();
-   
+
    molog ("[LaunchAttack] Interrupted by signal '%s'\n", signal.c_str());
    set_signal("");
    mark(false);   // Now can be healed
@@ -858,27 +856,27 @@ bool Soldier::start_task_waitforassault (Game* g, Building* b)
    if (!b)
       return false;
    assert (b);
-   
+
    if (!b->has_soldiers())
       return false;
 
    push_task(g, &taskWaitForAssault);
-   
+
    State* s = get_state();
 
-   s->objvar1 = b;   
+   s->objvar1 = b;
   return true;
 }
 
 void Soldier::waitforassault_update (Game* g, State* state)
 {
    Map_Object* imm = state->objvar1.get(g);
-   
+
    assert (imm);
    assert (imm->get_type() == BUILDING);
-   
+
    Building* b = (Building*) imm;
-   
+
    if (!b->has_soldiers())
    {
       MilitarySite* ms = (MilitarySite*) b;
@@ -921,7 +919,7 @@ void Soldier::waitforassault_update (Game* g, State* state)
       }
       return;
    }
-   
+
    schedule_act(g, 50);
    return;
 }
@@ -929,7 +927,7 @@ void Soldier::waitforassault_update (Game* g, State* state)
 void Soldier::waitforassault_signal (Game* g, State* state)
 {
    std::string signal = get_signal();
-   
+
    if (signal == "end_combat")
    {
       molog("[WaitForAssault] Caught signal '%s' (Waking up!)\n", signal.c_str());
@@ -971,14 +969,14 @@ void Soldier::start_task_defendbuilding (Game* g, Building* b, Bob* enemy)
    assert (b);
    assert (enemy);
    assert (((Building*) get_location(g)) == b);
-   
+
    push_task(g, &taskDefendBuilding);
    mark(true);             // This is for prevent to heal soldiers out of the building
    State* s = get_state();
    s->ivar1 = 1;
    s->ivar2 = b->get_serial();
    s->objvar1 =  enemy;
-   
+
 }
 
 void Soldier::defendbuilding_update (Game* g, State* state)
@@ -992,7 +990,7 @@ void Soldier::defendbuilding_update (Game* g, State* state)
       schedule_act(g, 100);
       return;
    }
-   
+
    if (state->ivar1 == 4)
    {
       pop_task(g);   // We finally finish this task
@@ -1005,7 +1003,7 @@ void Soldier::defendbuilding_update (Game* g, State* state)
    {
       BaseImmovable* position = g->get_map()->get_immovable(get_position());
 
-      if (position && position->get_type() == BUILDING) 
+      if (position && position->get_type() == BUILDING)
       {
          // We are in our building, try to exit
          if (start_task_waitforcapacity(g, (Flag*)get_location(g)->get_base_flag()))
@@ -1015,30 +1013,30 @@ void Soldier::defendbuilding_update (Game* g, State* state)
          return;
       }
    }
-   
+
    // 2-. Create a BattleField with this soldier and attach emeny soldier
    if (state->ivar1 == 2)
    {
       PlayerImmovable* imm = (PlayerImmovable*)state->objvar1.get(g);
       Soldier* s;
-   
+
       assert (imm);
       s = (Soldier*) imm;
-   
+
          // Starts real combat!!
       Battle* battle = g->create_battle();
       battle->soldiers (this, s);
       skip_act(g);
       return;
    }
-   
+
      // Here at least the soldier has ended of fighting (with this, the soldier will be healed)
    mark(false);
-   
+
    if (state->ivar1 == 3)
    {
       // Now return home building !
-      
+
       // Get the building
       Building* build = (Building*)g->get_objects()->get_object(state->ivar2);
       if (build)
@@ -1055,9 +1053,9 @@ void Soldier::defendbuilding_update (Game* g, State* state)
          pop_task(g);
          return;
       }
-      
+
    }
-   
+
    molog("[DefendBuilding] End of function reached\n");
    pop_task(g);
 }
@@ -1075,7 +1073,7 @@ void Soldier::defendbuilding_signal (Game* g, State* state)
    else if (signal == "die")
    {
       molog("[DefendBuilding] : Caught signal '%s'\n", signal.c_str());
-      
+
         // Better to add here a start_task_die (usefull too for use at fugitive task)
       state->ivar1 = 5;
       schedule_destroy(g);
@@ -1091,7 +1089,7 @@ void Soldier::defendbuilding_signal (Game* g, State* state)
 }
 
 
-void Soldier::log_general_info(Editor_Game_Base* egbase) 
+void Soldier::log_general_info(Editor_Game_Base* egbase)
 {
    Worker::log_general_info(egbase);
    molog("[Soldier]\n");
