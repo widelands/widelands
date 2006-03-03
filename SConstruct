@@ -247,7 +247,8 @@ if env['build']=='profile':
 
 if env['build']=='release':
 	OPTIMIZE=1
-	env.Append(CCFLAGS=' -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations')
+	# !!!! -fomit-frame-pointer breaks execeptions !!!!
+	env.Append(CCFLAGS=' -finline-functions -ffast-math -funroll-loops -fexpensive-optimizations')
 	env.Append(LINKFLAGS=' -s')
 
 if DEBUG:
@@ -261,7 +262,7 @@ if PROFILE:
 
 if OPTIMIZE:
 	# heavy optimization
-	#ADD_CCFLAGS:=$(ADD_CCFLAGS) -fomit-frame-pointer -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations
+	#ADD_CCFLAGS:=$(ADD_CCFLAGS) -fomit-frame-pointer -finline-functions -ffast-math -funroll-loops -fexpensive-optimizations
 	# !!!! -fomit-frame-pointer breaks execeptions !!!!
 	env.Append(CCFLAGS=' -O3')
 else:
