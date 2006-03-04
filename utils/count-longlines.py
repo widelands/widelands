@@ -1,9 +1,9 @@
 #!/usr/bin/python -tt
-"""./count-longlines.py TABWIDTH 
+"""./count-longlines.py 
 (called from main widelands directory)
 
-Count lines that are too long. One TAB (ASCII 0x09) character
-is assumed to expand to TABWIDTH spaces"""
+Count lines that are too long to fit on 80 character screens
+when using different tabwidths."""
 
 import fnmatch
 import os
@@ -28,24 +28,23 @@ lines=0
 shortlines=0
 longlines=0
 oversizelines=0
-tabwidth=int(sys.argv[1])
 
 for line in fileinput.input(files):
-	line=line.expandtabs(tabwidth).rstrip()
+	line3=line.expandtabs(3).rstrip()
+	line8=line.expandtabs(8).rstrip()
 
 	lines+=1
-	if len(line)<=80:
+	if len(line3)<=80:
 		shortlines+=1
 	else:
-		if len(line)=84:
+		if len(line8)<=80:
 			longlines+=1
 		else:
 			oversizelines+=1
 
-print "Total lines: %i" % (lines,)
+print "Total lines: %i\n" % (lines,)
 
-print "At %i characters tabwidth:\n" % (tabwidth,)
-print "Short lines    <=80 characters: %6i" % (shortlines,)
-print "Long lines     <=84 characters: %6i" % (longlines,)
-print "Oversize lines > 84 characters: %6i" % (oversizelines,)
+print "Short lines    =<80 @ tabwidth=8: %6i   %6.2f%%" % (shortlines, 100.0*shortlines/lines)
+print "Long lines     =<80 @ tabwidth=3: %6i   %6.2f%%" % (longlines, 100.0*longlines/lines)
+print "Oversize lines  >80 @ tabwidth=3: %6i   %6.2f%%" % (oversizelines, 100.0*oversizelines/lines)
 

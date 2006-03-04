@@ -569,10 +569,15 @@ def do_dist(target, source, env):
 
 dist=PhonyTarget("dist", do_dist)
 
+############### longlines
+
+buildcat=PhonyTarget("longlines", 'utils/count-longlines.py')
+
 ############### precommit
 
 Alias('precommit', 'indent')
 Alias('precommit', buildcat)
+Alias('precommit', 'longlines')
 
 ############### CVS
 
