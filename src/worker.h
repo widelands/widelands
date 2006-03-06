@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,7 +72,7 @@ class Worker_Descr : public Bob_Descr {
    public:
    enum Worker_Type {
       NORMAL = 0,
-      CARRIER, 
+      CARRIER,
       SOLDIER,
    };
 
@@ -152,6 +152,8 @@ class Worker : public Bob {
    void set_economy(Economy *economy);
 
    WareInstance* get_carried_item(Editor_Game_Base* g) { return (WareInstance*)m_carried_item.get(g); }
+   const WareInstance * get_carried_item(const Editor_Game_Base * game) const
+   {return reinterpret_cast<const WareInstance *>(m_carried_item.get(game));}
    void set_carried_item(Game* g, WareInstance* item);
    WareInstance* fetch_carried_item(Game* g);
 
@@ -169,15 +171,18 @@ class Worker : public Bob {
    void create_needed_experience(Game*);
    // For leveling
    void gain_experience(Game*);
-   int get_needed_experience(void) { return m_needed_exp; }
-   int get_current_experience(void) { return m_current_exp; }
+   int get_needed_experience() const {return m_needed_exp;}
+   int get_current_experience() const {return m_current_exp;}
 
    // debug
    void log_general_info(Editor_Game_Base*);
-   
+
    protected:
-   virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
-   virtual void init_auto_task(Game* g);
+	void draw_inner
+		(const Editor_Game_Base &, RenderTarget &, const Point) const;
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const Point) const;
+	virtual void init_auto_task(Game* g);
 
    inline bool does_carry_ware(void) { return m_carried_item.is_set(); }
 
@@ -201,7 +206,7 @@ class Worker : public Bob {
 
    void start_task_geologist(Game* g, int attempts, int radius, std::string subcommand);
 
-   
+
    private: // task details
    void transfer_update(Game* g, State* state);
    void transfer_signal(Game* g, State* state);
@@ -233,7 +238,7 @@ class Worker : public Bob {
    void fugitive_signal(Game* g, State* state);
 
    void geologist_update(Game* g, State* state);
-   
+
    protected:
    static Task taskTransfer;
    static Task taskBuildingwork;
@@ -333,11 +338,11 @@ class Carrier : public Worker {
 class Cmd_Incorporate:public BaseCommand {
     private:
 	    Worker* worker;
-	    
+
     public:
 	    Cmd_Incorporate(void) : BaseCommand(0) { } // For savegame loading
        Cmd_Incorporate (int t, Worker* w);
-       
+
 	    void execute (Game* g);
        // Write these commands to a file (for savegames)
        virtual void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);

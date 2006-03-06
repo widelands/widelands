@@ -838,7 +838,7 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 
 						Bob *bob = f.field->get_first_bob();
 						while(bob) {
-							bob->draw(egbase, this, wh_pos);
+							bob->draw(*egbase, *this, wh_pos);
 							bob = bob->get_next_bob();
 						}
 

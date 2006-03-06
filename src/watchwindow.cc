@@ -266,7 +266,7 @@ void WatchWindow::start_tracking(Point pos)
 		Point p;
 
 		MapviewPixelFunctions::get_pix(map, bob->get_position(), p.x, p.y);
-		bob->calc_drawpos(m_game, p, &p);
+		p = bob->calc_drawpos(*m_game, p);
 
 		const int dist = MapviewPixelFunctions::calc_pix_distance(map, p, pos);
 
@@ -343,7 +343,7 @@ void WatchWindow::think()
 
 		MapviewPixelFunctions::get_pix
 			(*m_game->get_map(), bob->get_position(), pos.x, pos.y);
-		bob->calc_drawpos(m_game, pos, &pos);
+		pos = bob->calc_drawpos(*m_game, pos);
 
 		m_mapview->set_viewpoint(pos - Point(m_mapview->get_w()/2, m_mapview->get_h()/2));
 	}

@@ -576,36 +576,44 @@ void Soldier::damage (const uint value)
 /*
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
-void Soldier::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos) {
-   uint anim = get_current_anim();
+void Soldier::draw
+(const Editor_Game_Base & game, RenderTarget & dst, const Point pos) const
+{
+	const uint anim = get_current_anim();
 
 	if (!anim)
 		return;
 
-	Point drawpos;
-	calc_drawpos(g, pos, &drawpos);
+	const Point drawpos = calc_drawpos(game, pos);
 
    int w, h;
-   g_gr->get_animation_size(anim, g->get_gametime() - get_animstart(), &w, &h);
+	g_gr->get_animation_size
+		(anim, game.get_gametime() - get_animstart(), &w, &h);
 
    // Draw energy bar
    // first: draw white sourrounding
-   const int frame_width=w<<1;  // width * 2
+   const int frame_width = w * 2;
    const int frame_height=5;
-   const int frame_beginning_x=drawpos.x-(frame_width>>1);  // TODO: these should be calculated from the hot spot, not assumed
+   const int frame_beginning_x = drawpos.x - w;  // TODO: these should be calculated from the hot spot, not assumed
    const int frame_beginning_y=drawpos.y-h-7;
-   dst->draw_rect(frame_beginning_x, frame_beginning_y, frame_width, frame_height, HP_FRAMECOLOR);
-   // Draw energybar
-   float percent = (float)m_hp_current/m_hp_max;
-   int energy_width=static_cast<int>(percent * (frame_width-2));
-   RGBColor color;
+   dst.draw_rect
+		(frame_beginning_x, frame_beginning_y,
+		 frame_width, frame_height,
+		 HP_FRAMECOLOR);
+	// Draw the actual bar
+	const float percent = static_cast<float>(m_hp_current) / m_hp_max;
+	const int energy_width = static_cast<int>(percent * (frame_width - 2));
+	RGBColor color;
    if (percent <= 0.15)
 		color = RGBColor(255, 0, 0);
 	else if (percent <= 0.5)
 		color = RGBColor(255, 255, 0);
 	else
 		color = RGBColor(17,192,17);
-   dst->fill_rect(frame_beginning_x+1, frame_beginning_y+1, energy_width, frame_height-2, color);
+	dst.fill_rect
+		(frame_beginning_x + 1, frame_beginning_y + 1,
+		 energy_width, frame_height - 2,
+		 color);
 
    // Draw information fields about levels
    // first, gather informations
@@ -619,12 +627,15 @@ void Soldier::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos) {
    g_gr->get_picture_size(defensepic, &dew, &deh);
    g_gr->get_picture_size(evadepic, &evw, &evh);
 
-   dst->blit(frame_beginning_x, frame_beginning_y-hph-ath, attackpic);
-   dst->blit(frame_beginning_x+(frame_width>>1), frame_beginning_y-evh-deh, defensepic);
-   dst->blit(frame_beginning_x, frame_beginning_y-hph, hppic);
-   dst->blit(frame_beginning_x+(frame_width>>1), frame_beginning_y-evh, evadepic);
+	dst.blit(frame_beginning_x, frame_beginning_y - hph - ath, attackpic);
+	dst.blit
+		(frame_beginning_x + frame_width / 2, frame_beginning_y - evh - deh,
+		 defensepic);
+	dst.blit(frame_beginning_x, frame_beginning_y - hph, hppic);
+	dst.blit
+		(frame_beginning_x + frame_width / 2, frame_beginning_y - evh, evadepic);
 
-	Worker::draw(g,dst,pos);
+	draw_inner(game, dst, drawpos);
 }
 
 /**

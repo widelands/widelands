@@ -3460,6 +3460,25 @@ void Worker::geologist_update(Game* g, State* state)
 }
 
 
+void Worker::draw_inner
+(const Editor_Game_Base & game, RenderTarget & dst, const Point drawpos) const
+{
+	dst.drawanim
+		(drawpos.x, drawpos.y,
+		 get_current_anim(),
+		 game.get_gametime() - get_animstart(),
+		 get_owner());
+
+	const WareInstance * const carried_item = get_carried_item(&game);
+	if (carried_item)
+		dst.drawanim
+		(drawpos.x, drawpos.y - 15,
+		 carried_item->get_ware_descr()->get_animation("idle"),
+		 0,
+		 get_owner());
+}
+
+
 /*
 ===============
 Worker::draw
@@ -3467,28 +3486,9 @@ Worker::draw
 Draw the worker, taking the carried item into account.
 ===============
 */
-void Worker::draw(Editor_Game_Base* g, RenderTarget* dst, Point pos)
-{
-	uint anim = get_current_anim();
-
-	if (!anim)
-		return;
-
-	Point drawpos;
-
-	calc_drawpos(g, pos, &drawpos);
-
-	dst->drawanim(drawpos.x, drawpos.y, anim, g->get_gametime() - get_animstart(), get_owner());
-
-	// Draw the currently carried item
-	WareInstance* item = get_carried_item(g);
-
-	if (item) {
-		uint itemanim = item->get_ware_descr()->get_animation("idle");
-
-		dst->drawanim(drawpos.x, drawpos.y - 15, itemanim, 0, get_owner());
-	}
-}
+void Worker::draw
+(const Editor_Game_Base & game, RenderTarget & dst, const Point pos) const
+{if (get_current_anim()) draw_inner(game, dst, calc_drawpos(game, pos));}
 
 
 /*

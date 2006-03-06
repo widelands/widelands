@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,14 +36,14 @@ class Transfer;
 class Tribe_Descr;
 
 /*
- * BobProgramBase is only used that 
+ * BobProgramBase is only used that
  * get_name always works
  */
 class BobProgramBase {
    public:
       BobProgramBase(void) { }
       virtual~ BobProgramBase(void) { }
-      
+
       virtual std::string get_name(void) const =0;
 };
 
@@ -63,9 +63,9 @@ public:
    Bob *create(Editor_Game_Base *g, Player *owner, Coords coords);
    inline const char* get_picture(void) const { return m_picture.c_str(); }
    inline const EncodeData& get_default_encodedata() const { return m_default_encodedata; }
-   
-   inline Tribe_Descr* get_owner_tribe(void) { return m_owner_tribe; }
-   bool is_world_bob(void) { return !m_owner_tribe; }
+
+	Tribe_Descr * get_owner_tribe() const {return m_owner_tribe;}
+	bool is_world_bob() const {return not m_owner_tribe;}
 
 protected:
 	virtual Bob *create_object() = 0;
@@ -75,7 +75,7 @@ protected:
    std::string m_picture;
    EncodeData  m_default_encodedata;
    Tribe_Descr* m_owner_tribe;
-   
+
 public:
 	static Bob_Descr *create_from_dir(const char *name, const char *directory, Profile *prof, Tribe_Descr* tribe);
 };
@@ -91,7 +91,7 @@ public:
       CRITTER,
       WORKER
    };
-   
+
 	struct State;
 
 	typedef void (Bob::*Ptr)(Game*, State*);
@@ -142,16 +142,17 @@ public:
 	void skip_act(Game* g);
 	void force_skip_act(Game* g);
 
-	void calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos);
-	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, Point pos);
+	Point calc_drawpos(const Editor_Game_Base &, const Point) const;
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const Point) const;
 
 	inline void set_owner(Player *player) { m_owner = player; }
-	inline Player *get_owner() { return m_owner; }
+	Player * get_owner() const {return m_owner;}
 
 	void set_position(Editor_Game_Base* g, Coords f);
 	inline const FCoords& get_position() const { return m_position; }
 	inline Bob* get_next_bob(void) { return m_linknext; }
-   
+
    bool is_world_bob(void) { return get_descr()->is_world_bob(); }
 
    // For debug

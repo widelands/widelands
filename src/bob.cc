@@ -959,44 +959,38 @@ taken into account).
 drawpos will be filled with the location of the bob.
 ===============
 */
-void Bob::calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos)
-{
-	Map *map = game->get_map();
-	FCoords end;
+Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const {
+	const Map & map = game.get_map();
+	const FCoords end = m_position;
 	FCoords start;
-	Point spos;
-	Point epos;
-
-	end = m_position;
-	epos = pos;
-	spos = epos;
+	Point spos = pos, epos = pos;
 
 	switch(m_walking) {
 	case WALK_NW:
-		map->get_brn(end, &start);
+		map.get_brn(end, &start);
 		spos.x += TRIANGLE_WIDTH / 2;
 		spos.y += TRIANGLE_HEIGHT;
 		break;
 	case WALK_NE:
-		map->get_bln(end, &start);
+		map.get_bln(end, &start);
 		spos.x -= TRIANGLE_WIDTH / 2;
 		spos.y += TRIANGLE_HEIGHT;
 		break;
 	case WALK_W:
-		map->get_rn(end, &start);
+		map.get_rn(end, &start);
 		spos.x += TRIANGLE_WIDTH;
 		break;
 	case WALK_E:
-		map->get_ln(end, &start);
+		map.get_ln(end, &start);
 		spos.x -= TRIANGLE_WIDTH;
 		break;
 	case WALK_SW:
-		map->get_trn(end, &start);
+		map.get_trn(end, &start);
 		spos.x += TRIANGLE_WIDTH / 2;
 		spos.y -= TRIANGLE_HEIGHT;
 		break;
 	case WALK_SE:
-		map->get_tln(end, &start);
+		map.get_tln(end, &start);
 		spos.x -= TRIANGLE_WIDTH / 2;
 		spos.y -= TRIANGLE_HEIGHT;
 		break;
@@ -1008,15 +1002,18 @@ void Bob::calc_drawpos(Editor_Game_Base* game, Point pos, Point* drawpos)
 		spos.y += end.field->get_height() * HEIGHT_FACTOR;
 		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
-		float f = (float)(game->get_gametime() - m_walkstart) / (m_walkend - m_walkstart);
+		float f =
+			static_cast<float>(game.get_gametime() - m_walkstart)
+			/
+			(m_walkend - m_walkstart);
 		if (f < 0) f = 0;
 		else if (f > 1) f = 1;
 
-		epos.x = (int)(f*epos.x + (1-f)*spos.x);
-		epos.y = (int)(f*epos.y + (1-f)*spos.y);
+		epos.x = static_cast<int>(f * epos.x + (1 - f) * spos.x);
+		epos.y = static_cast<int>(f * epos.y + (1 - f) * spos.y);
 	}
 
-	*drawpos = epos;
+	return epos;
 }
 
 
@@ -1032,16 +1029,19 @@ Note that the current field is actually the field we're walking to, not
 the one we start from.
 ===============
 */
-void Bob::draw(Editor_Game_Base *game, RenderTarget* dst, Point pos)
+void Bob::draw
+(const Editor_Game_Base & game, RenderTarget & dst, const Point pos) const
 {
 	if (!m_anim)
 		return;
 
-	Point drawpos;
+	const Point drawpos = calc_drawpos(game, pos);
 
-	calc_drawpos(game, pos, &drawpos);
-
-	dst->drawanim(drawpos.x, drawpos.y, m_anim, game->get_gametime() - m_animstart, get_owner());
+	dst.drawanim
+		(drawpos.x, drawpos.y,
+		 m_anim,
+		 game.get_gametime() - m_animstart,
+		 get_owner());
 }
 
 

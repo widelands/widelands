@@ -127,7 +127,8 @@ public:
    virtual Worker_Descr::Worker_Type get_worker_type(void) const { return get_descr()->get_worker_type(); }
 
    /// Draw this soldier
-   void draw(Editor_Game_Base* g, RenderTarget* dst, Point pos);
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const Point) const;
 
    // Information function from description
 	uint get_max_hp_level     () const {return get_descr()->get_max_hp_level();}

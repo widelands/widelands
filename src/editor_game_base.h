@@ -50,6 +50,7 @@ class Editor_Game_Base {
 
       void set_map(Map* map);
       inline Map *get_map() { return m_map; }
+      Map & get_map() const {return *m_map;}
       Object_Manager * get_objects() const {return m_objects;}
 
       void unconquer_area(uchar playernr, Coords coords);
@@ -81,9 +82,9 @@ class Editor_Game_Base {
 		Immovable* create_immovable(Coords c, std::string name, Tribe_Descr*);
       Battle*    create_battle ();
 
-      std::vector<int> get_battle_serials() { return m_battle_serials; }
-      inline int get_gametime(void) { return m_gametime; }
-		Interactive_Base* get_iabase() { return m_iabase; }
+	std::vector<int> get_battle_serials() const {return m_battle_serials;}
+	int get_gametime() const {return m_gametime;}
+	Interactive_Base * get_iabase() const {return m_iabase;}
 
 		// safe system for storing pointers to non-Map_Object C++ objects
 		// unlike objects in the Object_Manager, these pointers need not be
