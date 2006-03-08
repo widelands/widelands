@@ -41,7 +41,7 @@ struct Languages {
  * NONE as first entry. Also increase the NR_LANGUAGES variable by one
  */
 #ifdef DEFINE_LANGUAGES  // defined in fullscreen_menu_options.cc
-#define NR_LANGUAGES10
+#define NR_LANGUAGES 10
 static Languages available_languages[NR_LANGUAGES] = {
    { "Default system language", "" },
 // EXTRACT BEGIN (leaves this line untouched)
