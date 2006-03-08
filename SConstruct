@@ -11,6 +11,9 @@ import string
 SetOption('max_drift', 1)
 SetOption('implicit_cache', 1)
 
+# Pretty output
+print
+
 ########################################################################### verbatim copy from env.ParseConfig for parsing `sdl-config`
 ########################################################################### it's a nested function there, so we can't use it directly
 #TODO: this can be dropped once we use scons-0.97
@@ -151,7 +154,7 @@ def CheckSDLConfig(context):
 		if ret==1:
 			env['sdlconfig']=os.path.join(p, env['sdlconfig'])
 			context.Result( ret )
-			break			
+			break
 	return ret
 
 def CheckSDLVersionAtLeast(context, major, minor, micro):
@@ -196,8 +199,8 @@ opts.AddOptions(
 	)
 
 env=Environment(options=opts)
-print 'Platform:  ', env['PLATFORM']
-print 'Build type:', env['build']
+print 'Platform:         ', env['PLATFORM']
+print 'Build type:       ', env['build']
 
 if env['PLATFORM']!='win32':
 	env.Append(PATH='/usr/bin /usr/local/bin ')
@@ -300,7 +303,7 @@ opts.Save('build/scons-config.py',env) #build_id must be saved *before* it might
 if (env['build_id']=='') or (env['build_id']=='date'):
 	env['build_id']=time.strftime("%Y.%m.%d-%H%M%S", time.gmtime())
 
-print 'Build ID: '+env['build_id']
+print 'Build ID:          '+env['build_id']
 build_id_file=open('src/build_id.h', "w")
 
 build_id_file.write("""
@@ -330,12 +333,8 @@ env.Tool("astyle", toolpath=['build/scons-tools'])
 
 ############################################################################ Configure - Library autodetection
 
-#if not conf.CheckLibWithHeader('intl', header='libintl.h', language='C', call='gettext("test");', autoadd=1):
-#	if conf.CheckHeader('locale.h'):
-#		print 'Looks like gettext is included in your libc.'
-#	else:
-#		print 'Could not find gettext library! Is it installed?'
-#		Exit(1)
+# Pretty output
+print
 
 setlocalefound=0
 if (conf.CheckFunc('setlocale') or conf.CheckLibWithHeader('', 'locale.h', 'C', 'setlocale("LC_ALL", "C");', autoadd=0)):
@@ -344,7 +343,7 @@ if (conf.CheckFunc('setlocale') or conf.CheckLibWithHeader('', 'locale.h', 'C', 
 textdomainfound=0
 if (conf.CheckFunc('textdomain') or conf.CheckLib(library='intl', symbol='textdomain', autoadd=1)):
 	textdomainfound=1
-	
+
 if setlocalefound and textdomainfound:
 	print '   NLS subsystem found.'
 else:
@@ -430,6 +429,8 @@ config_h_file.close()
 
 ############################################################################ Build things
 
+# Pretty output
+print
 
 ############### Build setup
 

@@ -52,7 +52,7 @@ def find_optipng(env):
 	if b==None:
 		print 'WARNING: Could not find optipng. PNG compatification disabled.'
 	else:
-		print 'Found optipng: ', b
+		print 'Found optipng:    ', b
 	return b
 
 def exists(env):

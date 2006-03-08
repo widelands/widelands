@@ -19,7 +19,7 @@ def find_astyle(env):
 	if b==None:
 		print 'WARNING: Could not find astyle. Source indenting will not be performed.'
 	else:
-		print 'Found astyle: ', b
+		print 'Found astyle:     ', b
 	return b
 
 def exists(env):
