@@ -21,7 +21,7 @@
 #define GEOMETRY_H
 
 #include <cmath>
-#include <sys/types.h>
+#include <SDL_types.h>
 
 struct Point {
 	Point() {}
@@ -108,9 +108,9 @@ struct Coords {
 	struct ordering_functor {
 		bool operator()(const Coords a, const Coords b) const {
 			return
-				*reinterpret_cast<const u_int32_t * const>(&a)
+				*reinterpret_cast<const Uint32 * const>(&a)
 				<
-				*reinterpret_cast<const u_int32_t * const>(&b);
+				*reinterpret_cast<const Uint32 * const>(&b);
 		}
 	};
 
