@@ -57,48 +57,22 @@ def parse_conf(env, output):
 
 
 ########################################################################### Glob
-# glob.glob does not work with BuildDir(), so use the following replacement from
-# http://www.scons.org/cgi-bin/wiki/BuildDirGlob?highlight=%28glob%29
-# which I modified slightly to return a list of filenames instead of nodes
 def Glob(match):
-	"""Similar to glob.glob, except globs SCons nodes, and thus sees
-	generated files and files from build directories.  Basically, it sees
-	anything SCons knows about.  A key subtlety is that since this function
-	operates on generated nodes as well as source nodes on the filesystem,
-	it needs to be called after builders that generate files you want to
-	include.
-	"""
+	src = str(Dir('.').srcnode())
 
-	def fn_filter(node):
-		fn = str(node)
-		return fnmatch.fnmatch(os.path.basename(fn), match)
-
-	here = Dir('.')
-
-	children = here.all_children()
-	nodes = map(File, filter(fn_filter, children))
-	node_srcs = [n.srcnode() for n in nodes]
-	filenames=[]
-
-	src = here.srcnode()
-	if src is not here:
-		src_children = map(File, filter(fn_filter, src.all_children()))
-		for s in src_children:
-			 if s not in node_srcs:
-			 	filenames.append(os.path.basename(str(s)))
-
-	return filenames
+	return find(src, match, False)
 
 ########################################################################### find $ROOT -name $GLOB
 
-def find(root, glob):
+def find(root, glob, recurse=True):
 	files=[]
 	for file in os.listdir(root):
 		file=os.path.join(root, file)
 		if fnmatch.fnmatch(file, glob):
 			files.append(file)
-		if os.path.isdir(file):
-			files+=find(file, glob)
+		if os.path.isdir(file) and recurse==True:
+			files+=find(file, glob, recurse)
+
 	return files
 
 ########################################################################### Create a phony target (not (yet) a feature of scons)
@@ -281,15 +255,15 @@ if env['use_ggz']:
 if env['cross']:
 	print 'Cross-compiling does not work yet!'
 	Exit(1)
-	#TARGET='i586-mingw32msvc'
+	#TARGETPLATFORM='i586-mingw32msvc'
 	#PREFIX='/usr/local/cross-tools'
-	#env['ENV']['PATH']=PREFIX+'/'+TARGET+'/bin:'+PREFIX+'/bin'+env['ENV']['PATH']
-	#env['CXX']=TARGET+'-g++'
+	#env['ENV']['PATH']=PREFIX+'/'+TARGETPLATFORM+'/bin:'+PREFIX+'/bin'+env['ENV']['PATH']
+	#env['CXX']=TARGETPLATFORM+'-g++'
 	### manually overwrite
-	###env['sdlconfig']=PREFIX+'/bin/'+TARGET+'-sdl_config'
-	#env['sdlconfig']=PREFIX+'/'+TARGET+'/bin/'+TARGET+'-sdl-config'
+	###env['sdlconfig']=PREFIX+'/bin/'+TARGETPLATFORM+'-sdl_config'
+	#env['sdlconfig']=PREFIX+'/'+TARGETPLATFORM+'/bin/'+TARGETPLATFORM+'-sdl-config'
 else:
-	TARGET='native'
+	TARGETPLATFORM='native'
 
 BINDIR= os.path.join(env['install_prefix'], env['bindir'])
 DATADIR=os.path.join(env['install_prefix'], env['datadir'])
@@ -406,7 +380,6 @@ else:
 	print 'SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
 
 env.Append(CCFLAGS=' -pipe -Wall -Wno-comment')
-#env.Append(CCFLAGS=' -v') #TODO: remove me, I shouldn't be here
 
 env=conf.Finish()
 
@@ -435,8 +408,8 @@ print
 ############### Build setup
 
 SConsignFile('build/scons-signatures')
-BUILDDIR='build/'+TARGET+'-'+env['build']
-Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
+BUILDDIR='build/'+TARGETPLATFORM+'-'+env['build']
+Export('env', 'Glob', 'find', 'BUILDDIR', 'PhonyTarget')
 
 ############### buildcat
 
@@ -445,6 +418,7 @@ buildcat=SConscript('locale/SConscript')
 ############### The binary
 
 thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
+Default(thebinary)
 
 ############### tags
 
@@ -576,9 +550,7 @@ buildcat=PhonyTarget("longlines", 'utils/count-longlines.py')
 
 ############### precommit
 
-Alias('precommit', 'indent')
-Alias('precommit', buildcat)
-Alias('precommit', 'longlines')
+Alias('precommit', ['indent', 'buildcat', 'longlines'])
 
 ############### CVS
 

@@ -31,12 +31,10 @@ INDENTLIST=[
 	'system.h',
 	'system.cc',
 	]
-#print INDENTLIST
 indent=srcenv.astyle(source=INDENTLIST)
 env.Alias("indent", indent)
 
 binary=srcenv.Program(target='widelands', source=SRC)
 copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', BUILDDIR+'/widelands'))
-Default(copybinary)
 
 Return('copybinary')
