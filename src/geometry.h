@@ -108,13 +108,13 @@ struct Coords {
 	struct ordering_functor {
 		bool operator()(const Coords a, const Coords b) const {
 			return
-				*reinterpret_cast<const Uint32 * const>(&a)
-				<
-				*reinterpret_cast<const Uint32 * const>(&b);
+			   *reinterpret_cast<const Uint32 * const>(&a)
+			   <
+			   *reinterpret_cast<const Uint32 * const>(&b);
 		}
 	};
 
-	int x : 16, y : 16;
+int x : 16, y : 16;
 };
 
 

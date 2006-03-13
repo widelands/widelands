@@ -121,42 +121,47 @@ Node_and_Triangle MapviewPixelFunctions::calc_node_and_triangle
 	//  between them goes in the direction of the '/' character. When slash is
 	//  false, the edge goes in the direction of the '\' character.
 	unsigned short screen_y_base = row_number * TRIANGLE_HEIGHT;
+	int upper_screen_dy, lower_screen_dy =
+		screen_y_base
+		-
+		map.get_field(slash ? right_col : left_col, row_number).get_height()
+		*
+		HEIGHT_FACTOR
+		-
+		y;
 	for (;;) {
 		screen_y_base += TRIANGLE_HEIGHT;
 		next_row_number = row_number + 1;
 		if (next_row_number == mapheight) next_row_number = 0;
-		if
-			(static_cast<const int>(y)
-			 >
-			 screen_y_base
-			 -
-			 map.get_field(slash ? left_col : right_col, next_row_number)
-			 .get_height()
-			 *
-			 HEIGHT_FACTOR)
-		{
+		upper_screen_dy = lower_screen_dy;
+		lower_screen_dy =
+			screen_y_base
+			-
+			map.get_field(slash ? left_col : right_col, next_row_number)
+			.get_height()
+			*
+			HEIGHT_FACTOR
+			-
+			y;
+		if (lower_screen_dy < 0) {
 			row_number = next_row_number;
 			slash = not slash;
 		} else break;
 	}
 
 	{//  Calculate which of the 2 nodes (x, y) is closest to.
-		unsigned short upper_x, lower_x;
+		unsigned short upper_x, lower_x, upper_screen_dx, lower_screen_dx;
 		if (slash) {
 			upper_x = right_col;
 			lower_x = left_col;
+			lower_screen_dx = x - col_number * (TRIANGLE_WIDTH / 2);
+			upper_screen_dx = (TRIANGLE_WIDTH / 2) - lower_screen_dx;
 		} else {
 			upper_x = left_col;
 			lower_x = right_col;
+			upper_screen_dx = x - col_number * (TRIANGLE_WIDTH / 2);
+			lower_screen_dx = (TRIANGLE_WIDTH / 2) - upper_screen_dx;
 		}
-		int upper_screen_x, upper_screen_y, lower_screen_x, lower_screen_y;
-		get_pix(map, Coords(upper_x, row_number), upper_screen_x, upper_screen_y);
-		get_pix
-			(map, Coords(lower_x, next_row_number), lower_screen_x, lower_screen_y);
-		const int upper_screen_dx = x - upper_screen_x;
-		const int upper_screen_dy = y - upper_screen_y;
-		const int lower_screen_dx = x - lower_screen_x;
-		const int lower_screen_dy = y - lower_screen_y;
 		if
 			(upper_screen_dx * upper_screen_dx + upper_screen_dy * upper_screen_dy
 			 <
