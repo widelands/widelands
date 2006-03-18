@@ -7,6 +7,10 @@ import glob
 from SCons.Script.SConscript import SConsEnvironment
 import string
 
+import sys
+sys.path.append("build/scons-tools")
+from scons_configure import *
+
 #Speedup. If you have problems with inconsistent or wrong builds, look here first
 SetOption('max_drift', 1)
 SetOption('implicit_cache', 1)
@@ -14,65 +18,49 @@ SetOption('implicit_cache', 1)
 # Pretty output
 print
 
-########################################################################### verbatim copy from env.ParseConfig for parsing `sdl-config`
-########################################################################### it's a nested function there, so we can't use it directly
-#TODO: this can be dropped once we use scons-0.97
-
-def parse_conf(env, output):
-            dict = {
-                'ASFLAGS'       : [],
-                'CCFLAGS'       : [],
-                'CPPFLAGS'      : [],
-                'CPPPATH'       : [],
-                'LIBPATH'       : [],
-                'LIBS'          : [],
-                'LINKFLAGS'     : [],
-            }
-            static_libs = []
-
-            params = string.split(output)
-            for arg in params:
-                if arg[0] != '-':
-                    static_libs.append(arg)
-                elif arg[:2] == '-L':
-                    dict['LIBPATH'].append(arg[2:])
-                elif arg[:2] == '-l':
-                    dict['LIBS'].append(arg[2:])
-                elif arg[:2] == '-I':
-                    dict['CPPPATH'].append(arg[2:])
-                elif arg[:4] == '-Wa,':
-                    dict['ASFLAGS'].append(arg)
-                elif arg[:4] == '-Wl,':
-                    dict['LINKFLAGS'].append(arg)
-                elif arg[:4] == '-Wp,':
-                    dict['CPPFLAGS'].append(arg)
-                elif arg == '-pthread':
-                    dict['CCFLAGS'].append(arg)
-                    dict['LINKFLAGS'].append(arg)
-                else:
-                    dict['CCFLAGS'].append(arg)
-            apply(env.Append, (), dict)
-            return static_libs
-
-
-
 ########################################################################### Glob
+# glob.glob does not work with BuildDir(), so use the following replacement from
+# http://www.scons.org/cgi-bin/wiki/BuildDirGlob?highlight=%28glob%29
+# which I modified slightly to return a list of filenames instead of nodes
 def Glob(match):
-	src = str(Dir('.').srcnode())
+	"""Similar to glob.glob, except globs SCons nodes, and thus sees
+	generated files and files from build directories.  Basically, it sees
+	anything SCons knows about.  A key subtlety is that since this function
+	operates on generated nodes as well as source nodes on the filesystem,
+	it needs to be called after builders that generate files you want to
+	include.
+	"""
 
-	return find(src, match, False)
+	def fn_filter(node):
+		fn = str(node)
+		return fnmatch.fnmatch(os.path.basename(fn), match)
+
+	here = Dir('.')
+
+	children = here.all_children()
+	nodes = map(File, filter(fn_filter, children))
+	node_srcs = [n.srcnode() for n in nodes]
+	filenames=[]
+
+	src = here.srcnode()
+	if src is not here:
+		src_children = map(File, filter(fn_filter, src.all_children()))
+		for s in src_children:
+			 if s not in node_srcs:
+			 	filenames.append(os.path.basename(str(s)))
+
+	return filenames
 
 ########################################################################### find $ROOT -name $GLOB
 
-def find(root, glob, recurse=True):
+def find(root, glob):
 	files=[]
 	for file in os.listdir(root):
 		file=os.path.join(root, file)
 		if fnmatch.fnmatch(file, glob):
 			files.append(file)
-		if os.path.isdir(file) and recurse==True:
-			files+=find(file, glob, recurse)
-
+		if os.path.isdir(file):
+			files+=find(file, glob)
 	return files
 
 ########################################################################### Create a phony target (not (yet) a feature of scons)
@@ -107,72 +95,58 @@ SConsEnvironment.InstallPerm = InstallPerm
 SConsEnvironment.InstallProgram = lambda env, dest, files: InstallPerm(env, dest, files, 0755)
 SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, files, 0644)
 
-########################################################################### Configure functions
+################################################################################
+# CLI options setup
 
-def CheckPKGConfig(context, version):
-	context.Message( 'Checking for pkg-config... ' )
-	ret = context.TryAction('pkg-config --atleast-pkgconfig-version=%s' % version)[0]
-	context.Result( ret )
-	return ret
+def cli_options():
+	opts=Options('build/scons-config.py', ARGUMENTS)
+	opts.Add('build', 'debug-no-parachute / debug-slow / debug(default) / release / profile', 'debug')
+	opts.Add('build_id', 'To get a default value(timestamp), leave this empty or set to \'date\'', '')
+	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
+	opts.Add('install_prefix', '', '/usr/local')
+	opts.Add('bindir', '(either absolut or relative to install_prefix)', 'games')
+	opts.Add('datadir', '(either absolute or relative to install_prefix)', 'games/share/widelands')
+	opts.Add('extra_include_path', '', '')
+	opts.Add('extra_lib_path', '', '')
+	opts.AddOptions(
+		BoolOption('use_ggz', 'Use the GGZ Gamingzone?', 0),
+		BoolOption('cross', 'Is this a cross compile? (developer use only)', 0)
+		)
+	return opts
 
-def CheckPKG(context, name):
-	context.Message( 'Checking for %s... ' % name )
-	ret = context.TryAction('pkg-config --exists \'%s\'' % name)[0]
-	context.Result( ret )
-	return ret
+################################################################################
+# Environment setup
+#
+# Create configuration objects
 
-def CheckSDLConfig(context):
-	context.Message( 'Checking for sdl-config... ' )
-	for p in env['PATH'].split():
-		ret = context.TryAction(os.path.join(p, env['sdlconfig'])+' --version')[0]
-		if ret==1:
-			env['sdlconfig']=os.path.join(p, env['sdlconfig'])
-			context.Result( ret )
-			break
-	return ret
-
-def CheckSDLVersionAtLeast(context, major, minor, micro):
-	context.Message( 'Checking SDL version >= %s ... ' % (repr(major)+'.'+repr(minor)+'.'+repr(micro)))
-	version=os.popen(env['sdlconfig']+" --version", "r").read()
-	(maj, min, mic)=version.split('.')
-	if int(maj)>=int(major) and int(min)>=int(minor) and int(mic)>=int(micro): ret=1
-	else: ret=0
-	context.Result( ret )
-	return ret
-
-#TODO: this can be dropped once we use scons-0.97
-def ParseSDLConfig(env, confstring):
-	words=confstring.split()
-
-	for i, w in enumerate(words):
-		if w=='-framework':
-			#remove implicitly causes the new element i to be the former i+1, so the next two lines remove two consecutive tokens
-			words.remove(w)
-			w2=words.pop(i)
-			env.Append(LINKFLAGS=w+' '+w2)
-
-	# problematic flags have been taken care of, call the standard parser
-	parse_conf(env, string.join(words))
-
-	return
-
-############################################################################ Options
-
-opts=Options('build/scons-config.py', ARGUMENTS)
-opts.Add('build', 'debug-no-parachute / debug-slow / debug(default) / release / profile', 'debug')
-opts.Add('build_id', 'To get a default value(timestamp), leave this empty or set to \'date\'', '')
-opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
-opts.Add('install_prefix', '', '/usr/local')
-opts.Add('bindir', '(either absolut or relative to install_prefix)', 'games')
-opts.Add('datadir', '(either absolute or relative to install_prefix)', 'games/share/widelands')
-opts.Add('extra_include_path', '', '')
-opts.Add('extra_lib_path', '', '')
-opts.AddOptions(
-	BoolOption('use_ggz', 'Use the GGZ Gamingzone?', 0),
-	BoolOption('cross', 'Is this a cross compile? (developer use only)', 0)
-	)
+opts=cli_options()
 
 env=Environment(options=opts)
+env.Help(opts.GenerateHelpText(env))
+
+conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
+		   custom_tests={
+				'CheckPKGConfig' : CheckPKGConfig,
+				'CheckPKG': CheckPKG,
+				'CheckSDLConfig': CheckSDLConfig,
+				'CheckSDLVersionAtLeast': CheckSDLVersionAtLeast
+		   }
+)
+
+################################################################################
+# Environment setup
+#
+# Register tools
+
+env.Tool("ctags", toolpath=['build/scons-tools'])
+env.Tool("PNGShrink", toolpath=['build/scons-tools'])
+env.Tool("astyle", toolpath=['build/scons-tools'])
+
+################################################################################
+# Environment setup
+#
+# Initial debug info
+
 print 'Platform:         ', env['PLATFORM']
 print 'Build type:       ', env['build']
 
@@ -189,18 +163,11 @@ if env['PLATFORM']=='darwin':
 	env.Append(LIBPATH='/sw/lib ')
 	env.Append(PATH='/sw/bin ')
 
-env.Help(opts.GenerateHelpText(env))
-env.Append(CPPPATH=env['extra_include_path'])
-env.Append(LIBPATH=env['extra_lib_path'])
+################################################################################
+# Autoconfiguration
+#
+# Parse build type
 
-############################################################################ Configure - Command Line Options
-
-conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',custom_tests={
-				'CheckPKGConfig' : CheckPKGConfig,
-				'CheckPKG': CheckPKG,
-				'CheckSDLConfig': CheckSDLConfig,
-				'CheckSDLVersionAtLeast': CheckSDLVersionAtLeast
-				})
 DEBUG=0
 PROFILE=0
 OPTIMIZE=0
@@ -225,7 +192,8 @@ if env['build']=='profile':
 if env['build']=='release':
 	OPTIMIZE=1
 	# !!!! -fomit-frame-pointer breaks execeptions !!!!
-	env.Append(CCFLAGS=' -finline-functions -ffast-math -funroll-loops -fexpensive-optimizations')
+	env.Append(CCFLAGS=' -finline-functions -ffast-math -funroll-loops')
+	env.Append(CCFLAGS=' -fexpensive-optimizations')
 	env.Append(LINKFLAGS=' -s')
 
 if DEBUG:
@@ -239,7 +207,8 @@ if PROFILE:
 
 if OPTIMIZE:
 	# heavy optimization
-	#ADD_CCFLAGS:=$(ADD_CCFLAGS) -fomit-frame-pointer -finline-functions -ffast-math -funroll-loops -fexpensive-optimizations
+	#ADD_CCFLAGS:=$(ADD_CCFLAGS) -fomit-frame-pointer -finline-functions
+	#                -ffast-math -funroll-loops -fexpensive-optimizations
 	# !!!! -fomit-frame-pointer breaks execeptions !!!!
 	env.Append(CCFLAGS=' -O3')
 else:
@@ -248,140 +217,40 @@ else:
 if not SDL_PARACHUTE:
 	env.Append(CCFLAGS=' -DNOPARACHUTE')
 
-if env['use_ggz']:
-	env.Append(CCFLAGS=' -DGGZ')
-	env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
+################################################################################
 
-if env['cross']:
-	print 'Cross-compiling does not work yet!'
-	Exit(1)
-	#TARGETPLATFORM='i586-mingw32msvc'
-	#PREFIX='/usr/local/cross-tools'
-	#env['ENV']['PATH']=PREFIX+'/'+TARGETPLATFORM+'/bin:'+PREFIX+'/bin'+env['ENV']['PATH']
-	#env['CXX']=TARGETPLATFORM+'-g++'
-	### manually overwrite
-	###env['sdlconfig']=PREFIX+'/bin/'+TARGETPLATFORM+'-sdl_config'
-	#env['sdlconfig']=PREFIX+'/'+TARGETPLATFORM+'/bin/'+TARGETPLATFORM+'-sdl-config'
-else:
-	TARGETPLATFORM='native'
+TARGET=parse_cli(env)
+
+env.Append(CPPPATH=env['extra_include_path'])
+env.Append(LIBPATH=env['extra_lib_path'])
 
 BINDIR= os.path.join(env['install_prefix'], env['bindir'])
 DATADIR=os.path.join(env['install_prefix'], env['datadir'])
 PACKDIR='widelands-'+env['build_id']
 
-############################################################################ Configure - build_id.h
+#TODO: make sure that build type is valid !!!
+
+################################################################################
 
 opts.Save('build/scons-config.py',env) #build_id must be saved *before* it might be set to a fixed date
 
 #This is just a default, do not change it here. Use the option 'build_id' instead.
 if (env['build_id']=='') or (env['build_id']=='date'):
 	env['build_id']=time.strftime("%Y.%m.%d-%H%M%S", time.gmtime())
-
 print 'Build ID:          '+env['build_id']
-build_id_file=open('src/build_id.h', "w")
 
-build_id_file.write("""
-#ifndef BUILD_ID
-#define BUILD_ID """+env['build_id']+"""
+config_h=write_configh_header()
+do_configure(config_h, conf, env)
+write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR)
+#load_configuration(conf)
 
-const char *g_build_id=\""""+env['build_id']+"""\";
+env.Append(CCFLAGS=' -pipe -Wall -Wno-comment')
+#env.Append(LINKFLAGS=' -lasprintf') #TODO: *check* for this instead of assuming it's there
 
-#endif
-
-""")
-
-build_id_file.close()
-
-config_h_file=open('src/config.h', "w")
-config_h_file.write("""
-#ifndef CONFIG_H
-#define CONFIG_H
-
-""")
-
-############################################################################ Configure - Tool autodetection
-
-env.Tool("ctags", toolpath=['build/scons-tools'])
-env.Tool("PNGShrink", toolpath=['build/scons-tools'])
-env.Tool("astyle", toolpath=['build/scons-tools'])
-
-############################################################################ Configure - Library autodetection
+env=conf.Finish()
 
 # Pretty output
 print
-
-setlocalefound=0
-if (conf.CheckFunc('setlocale') or conf.CheckLibWithHeader('', 'locale.h', 'C', 'setlocale("LC_ALL", "C");', autoadd=0)):
-	setlocalefound=1
-
-textdomainfound=0
-if (conf.CheckFunc('textdomain') or conf.CheckLib(library='intl', symbol='textdomain', autoadd=1)):
-	textdomainfound=1
-
-if setlocalefound and textdomainfound:
-	print '   NLS subsystem found.'
-else:
-	#TODO: use dummy replacements that just pass back the original string
-	print '   No usable NLS subsystem found. Please install gettext.'
-	Exit(1)
-
-if not conf.CheckFunc('getenv'):
-	print 'Your system does not support getenv(). Tilde epansion in filenames will not work.'
-else:
-	config_h_file.write("#define HAS_GETENV\n\n");
-
-if not conf.CheckSDLConfig():
-	print 'Could not find sdl-config! Is SDL installed?'
-	Exit(1)
-
-if not conf.CheckSDLVersionAtLeast(1, 2, 8):
-	print 'Could not find an SDL version >= 1.2.8!'
-	Exit(1)
-
-env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
-
-if not conf.CheckLibWithHeader('z', header='zlib.h', language='C', autoadd=1):
-	print 'Could not find the zlib library! Is it installed?'
-	Exit(1)
-
-if not conf.CheckLibWithHeader('png', header='png.h', language='C', autoadd=1):
-	print 'Could not find the png library! Is it installed?'
-	Exit(1)
-
-if not conf.CheckLib(library='SDL_image', symbol='IMG_Load', autoadd=1):
-	print 'Could not find the SDL_image library! Is it installed?'
-	Exit(1)
-
-if not conf.CheckLib(library='SDL_ttf', symbol='TTF_Init', autoadd=1):
-	print 'Could not find the SDL_ttf library! Is it installed?'
-	Exit(1)
-
-if not conf.CheckLib(library='SDL_net', symbol='SDLNet_TCP_Open', autoadd=1):
-	print 'Could not find the SDL_net library! Is it installed?'
-	Exit(1)
-
-if not conf.CheckLib(library='SDL_mixer', symbol='Mix_OpenAudio', autoadd=1):
-	print 'Could not find the SDL_mixer library! Is it installed?'
-	Exit(1)
-
-if conf.TryLink(""" #include <SDL.h>
-			#define USE_RWOPS
-			#include <SDL_mixer.h>
-			main(){
-				Mix_LoadMUS_RW("foo.ogg");
-			}
-			""", '.c'):
-	config_h_file.write("//second line is needed by SDL_mixer\n");
-	config_h_file.write("#define NEW_SDL_MIXER 1\n");
-	config_h_file.write("#define USE_RWOPS\n\n");
-	print 'SDL_mixer supports Mix_LoadMUS_RW(). Good'
-else:
-	config_h_file.write("#define NEW_SDL_MIXER 0\n\n");
-	print 'SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
-
-env.Append(CCFLAGS=' -pipe -Wall -Wno-comment')
-
-env=conf.Finish()
 
 ########################################################################### Use distcc if available
 
@@ -391,25 +260,13 @@ env=conf.Finish()
 #	env['ENV']['PATH'] = '/usr/lib/distcc/bin:'+env['ENV']['PATH']
 #	env['ENV']['HOME'] = os.environ['HOME']
 
-############################################################################ Configure - finish config.h
-
-config_h_file.write("#define INSTALL_PREFIX \""+env['install_prefix']+"\"\n\n")
-config_h_file.write("#define INSTALL_BINDIR \""+BINDIR+"\"\n\n")
-config_h_file.write("#define INSTALL_DATADIR \""+DATADIR+"\"\n\n")
-
-config_h_file.write("\n#endif\n")
-config_h_file.close()
-
 ############################################################################ Build things
-
-# Pretty output
-print
 
 ############### Build setup
 
 SConsignFile('build/scons-signatures')
-BUILDDIR='build/'+TARGETPLATFORM+'-'+env['build']
-Export('env', 'Glob', 'find', 'BUILDDIR', 'PhonyTarget')
+BUILDDIR='build/'+TARGET+'-'+env['build']
+Export('env', 'Glob', 'BUILDDIR', 'PhonyTarget')
 
 ############### buildcat
 
@@ -418,7 +275,6 @@ buildcat=SConscript('locale/SConscript')
 ############### The binary
 
 thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
-Default(thebinary)
 
 ############### tags
 
@@ -550,13 +406,9 @@ buildcat=PhonyTarget("longlines", 'utils/count-longlines.py')
 
 ############### precommit
 
-Alias('precommit', ['indent', 'buildcat', 'longlines'])
-
-############### CVS
-
-cvsup=PhonyTarget('up', 'cvs -q up -APd')
-Alias('update', cvsup)
-#TODO: call wiki2txt from here??
+Alias('precommit', 'indent')
+Alias('precommit', buildcat)
+Alias('precommit', 'longlines')
 
 ############### Documentation
 
