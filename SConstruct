@@ -275,6 +275,7 @@ buildcat=SConscript('locale/SConscript')
 ############### The binary
 
 thebinary=SConscript('src/SConscript', build_dir=BUILDDIR, duplicate=0)
+Default(thebinary)
 
 ############### tags
 
@@ -402,7 +403,7 @@ dist=PhonyTarget("dist", do_dist)
 
 ############### longlines
 
-buildcat=PhonyTarget("longlines", 'utils/count-longlines.py')
+longlines=PhonyTarget("longlines", 'utils/count-longlines.py')
 
 ############### precommit
 
