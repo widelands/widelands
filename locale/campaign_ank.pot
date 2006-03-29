@@ -335,7 +335,7 @@ msgid " \"Our miners are digging up less and less by day! We have to go deeper, 
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:673
-msgid "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns doesn't make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
+msgid "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:686
@@ -359,7 +359,7 @@ msgid " \"Chieftain, this is a disgrace! It is well that we can produce grindsto
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:713
-msgid "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is fern, used to cover roofs. Fern is being planted by a fernery.<br>Build a Fernery.</p>"
+msgid "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
 msgstr ""
 
 #: ../campaigns/t02.wmf/event:726
@@ -412,7 +412,7 @@ msgid "<p>The ore your miners bring up is not usable yet - it has to be melted i
 msgstr ""
 
 #: ../campaigns/t02.wmf/objective:43
-msgid "t make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It"
+msgid "<p>A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It is up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
 msgstr ""
 
 #: ../campaigns/t02.wmf/objective:49
@@ -424,6 +424,6 @@ msgid "<p>Better buildings may require also other improved materials besides bla
 msgstr ""
 
 #: ../campaigns/t02.wmf/objective:61
-msgid "<p>The third material necessary for improved buildings is fern, used to cover roofs. Fern is being planted by a fernery.<br>Build a Fernery.</p>"
+msgid "<p>The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
 msgstr ""
 
