@@ -1,22 +1,25 @@
+# translation of tribe_barbarians_sv_SE.po to Swedish
 # Swedish translation of widelands.
-# Copyright (C) 2005 THE widelands'S COPYRIGHT HOLDER
+# Copyright (C) 2006 THE widelands'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the widelands package.
 # Daniel Nylander <po@danielnylander.se>, 2005.
+# Fredrik Pettersson <luno@iaofredde.net>, 2006.
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands tribe barbarians\n"
+"Project-Id-Version: tribe_barbarians_sv_SE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-11-09 17:22+0100\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"PO-Revision-Date: 2006-03-29 22:08+0200\n"
+"Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: swe\n"
 "X-Poedit-Country: swe\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../tribes/barbarians/conf:24
 msgid "The Widelands Development Team"
@@ -28,7 +31,7 @@ msgstr "Barbarer"
 
 #: ../tribes/barbarians/conf:26
 msgid "The mighty tribes of the east-lands!"
-msgstr "De mäktiga stammarna från östländerna!"
+msgstr "De mäktiga stammarna från öst!"
 
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
@@ -43,9 +46,8 @@ msgid "Axefactory"
 msgstr "Yxfabrik"
 
 #: ../tribes/barbarians/buildings/bakery/conf:2
-#, fuzzy
 msgid "Bakery"
-msgstr "Bagare"
+msgstr "Bageri"
 
 #: ../tribes/barbarians/buildings/barrier/conf:2
 msgid "Barrier"
@@ -53,11 +55,11 @@ msgstr "Barriär"
 
 #: ../tribes/barbarians/buildings/battlearena/conf:2
 msgid "Battle Arena"
-msgstr "Krigsarena"
+msgstr "Krigs arena"
 
 #: ../tribes/barbarians/buildings/big_inn/conf:2
 msgid "Big Inn"
-msgstr ""
+msgstr "Stort Värdshus"
 
 #: ../tribes/barbarians/buildings/brewery/conf:2
 msgid "Brewery"
@@ -65,11 +67,11 @@ msgstr "Bryggeri"
 
 #: ../tribes/barbarians/buildings/burner/conf:2
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Träkol Brännare"
 
 #: ../tribes/barbarians/buildings/citadel/conf:2
 msgid "Citadel"
-msgstr ""
+msgstr "Citadell"
 
 #: ../tribes/barbarians/buildings/coalmine/conf:2
 msgid "Coal mine"
@@ -105,7 +107,7 @@ msgstr "Djupare järnmalmsgruva"
 
 #: ../tribes/barbarians/buildings/donjon/conf:2
 msgid "Donjon"
-msgstr ""
+msgstr "Donjon"
 
 #: ../tribes/barbarians/buildings/farm/conf:2
 msgid "Farm"
@@ -113,11 +115,11 @@ msgstr "Bondgård"
 
 #: ../tribes/barbarians/buildings/fernery/conf:2
 msgid "Fernery"
-msgstr ""
+msgstr "Ormbunke odlare"
 
 #: ../tribes/barbarians/buildings/fisher/conf:2
 msgid "Fisher Hut"
-msgstr ""
+msgstr "Fiske stuga"
 
 #: ../tribes/barbarians/buildings/fortress/conf:2
 msgid "Fortress"
@@ -125,7 +127,7 @@ msgstr "Fästning"
 
 #: ../tribes/barbarians/buildings/gamekeeper/conf:2
 msgid "Gamekeeper Hut"
-msgstr ""
+msgstr "Djuruppfödar stuga"
 
 #: ../tribes/barbarians/buildings/goldmine/conf:2
 msgid "Gold Mine"
@@ -133,11 +135,11 @@ msgstr "Guldgruva"
 
 #: ../tribes/barbarians/buildings/granitmine/conf:2
 msgid "Granit Mine"
-msgstr "Granitgruva"
+msgstr "Stengruva"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2
 msgid "Wood hardener"
-msgstr ""
+msgstr "Trä härdare"
 
 #: ../tribes/barbarians/buildings/headquarters/conf:6
 msgid "Headquarters"
@@ -145,7 +147,7 @@ msgstr "Huvudkvarter"
 
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
-msgstr ""
+msgstr "Jakt stuga"
 
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
@@ -153,11 +155,11 @@ msgstr "Värdshus"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
-msgstr ""
+msgstr "Industri"
 
 #: ../tribes/barbarians/buildings/micro-brewery/conf:2
 msgid "Micro brewery"
-msgstr "Mikrobryggeri"
+msgstr "Litet bryggeri"
 
 #: ../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
@@ -165,31 +167,31 @@ msgstr "Järnmalmsgruva"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
-msgstr ""
+msgstr "Stenhuggare"
 
 #: ../tribes/barbarians/buildings/ranger/conf:2
 msgid "Ranger Hut"
-msgstr ""
+msgstr "Skogsplanterare"
 
 #: ../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
-msgstr ""
+msgstr "Vaktpost"
 
 #: ../tribes/barbarians/buildings/smelting_works/conf:2
 msgid "Smelting Works"
-msgstr "Smältverk"
+msgstr "Metall Förädling"
 
 #: ../tribes/barbarians/buildings/stonegrinder/conf:2
 msgid "Stonegrinder"
-msgstr ""
+msgstr "Stenkross"
 
 #: ../tribes/barbarians/buildings/stronghold/conf:2
 msgid "Stronghold"
-msgstr ""
+msgstr "Litet fort"
 
 #: ../tribes/barbarians/buildings/tavern/conf:2
 msgid "Tavern"
-msgstr "Taverna"
+msgstr "Pub"
 
 #: ../tribes/barbarians/buildings/trainingscamp/conf:2
 msgid "Trainingscamp"
@@ -197,15 +199,15 @@ msgstr "Träningsläger"
 
 #: ../tribes/barbarians/buildings/warehouse/conf:2
 msgid "Warehouse"
-msgstr "Lagerhus"
+msgstr "Lagerlokal"
 
 #: ../tribes/barbarians/buildings/warmill/conf:2
 msgid "War Mill"
-msgstr ""
+msgstr "Vapenindustri"
 
 #: ../tribes/barbarians/buildings/weaving-mill/conf:2
 msgid "Weaving-Mill"
-msgstr ""
+msgstr "Klädesfabrik"
 
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
@@ -217,7 +219,7 @@ msgstr "Yxa"
 
 #: ../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Bakingtray"
-msgstr "Bakplåt"
+msgstr "Bakspade"
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
 msgid "Battle Axe"
@@ -229,7 +231,7 @@ msgstr "Öl"
 
 #: ../tribes/barbarians/wares/blackwood/conf:2
 msgid "Blackwood"
-msgstr ""
+msgstr "Härdat trä"
 
 #: ../tribes/barbarians/wares/broadaxe/conf:2
 msgid "Broad Axe"
@@ -241,7 +243,7 @@ msgstr "Bronsyxa"
 
 #: ../tribes/barbarians/wares/cloth/conf:2
 msgid "Cloth"
-msgstr "Tyg"
+msgstr "Kläder"
 
 #: ../tribes/barbarians/wares/coal/conf:2
 msgid "Coal"
@@ -249,11 +251,11 @@ msgstr "Kol"
 
 #: ../tribes/barbarians/wares/coalearth/conf:2
 msgid "Coalearth"
-msgstr ""
+msgstr "Kolmalm"
 
 #: ../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Eldtänger"
 
 #: ../tribes/barbarians/wares/fish/conf:2
 msgid "Fish"
@@ -261,11 +263,11 @@ msgstr "Fisk"
 
 #: ../tribes/barbarians/wares/fishing_rod/conf:2
 msgid "Fishing Rod"
-msgstr ""
+msgstr "Fiskespö"
 
 #: ../tribes/barbarians/wares/flax/conf:2
 msgid "Flax"
-msgstr ""
+msgstr "Lin"
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
@@ -273,11 +275,11 @@ msgstr "Guld"
 
 #: ../tribes/barbarians/wares/goldstone/conf:2
 msgid "Goldstone"
-msgstr ""
+msgstr "Guldmalm"
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
-msgstr ""
+msgstr "Cement"
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -289,7 +291,7 @@ msgstr "Hjälm"
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
-msgstr ""
+msgstr "Jaktspjut"
 
 #: ../tribes/barbarians/wares/iron/conf:2
 msgid "Iron"
@@ -301,7 +303,7 @@ msgstr "Järnmalm"
 
 #: ../tribes/barbarians/wares/kitchen_tools/conf:2
 msgid "Kitchen Tools"
-msgstr "Köksverktyg"
+msgstr "Köksredskap"
 
 #: ../tribes/barbarians/wares/mask/conf:2
 msgid "Mask"
@@ -317,7 +319,7 @@ msgstr "Kött"
 
 #: ../tribes/barbarians/wares/pick/conf:2
 msgid "Pick"
-msgstr ""
+msgstr "Korpyxa"
 
 #: ../tribes/barbarians/wares/pittabread/conf:2
 msgid "Pittabread"
@@ -329,19 +331,19 @@ msgstr "Portion"
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
-msgstr ""
+msgstr "Sten"
 
 #: ../tribes/barbarians/wares/scythe/conf:2
 msgid "Scythe"
-msgstr ""
+msgstr "Lie"
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
 msgid "Sharp Axe"
-msgstr ""
+msgstr "Vass yxa"
 
 #: ../tribes/barbarians/wares/shovel/conf:2
 msgid "Shovel"
-msgstr "Skyffel"
+msgstr "Spade"
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
@@ -353,19 +355,19 @@ msgstr "Starköl"
 
 #: ../tribes/barbarians/wares/thatchreed/conf:2
 msgid "Thatch Reed"
-msgstr ""
+msgstr "Vassrör"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
-msgstr ""
+msgstr "Stock"
 
 #: ../tribes/barbarians/wares/warhelmet/conf:2
 msgid "War Helmet"
-msgstr "Krigshjälm"
+msgstr "Stridshjälm"
 
 #: ../tribes/barbarians/wares/warriorsaxe/conf:2
 msgid "Warriors Axe"
-msgstr ""
+msgstr "Stridsyxa"
 
 #: ../tribes/barbarians/wares/water/conf:2
 msgid "Water"
@@ -393,15 +395,15 @@ msgstr "Byggare"
 
 #: ../tribes/barbarians/workers/burner/conf:2
 msgid "Burner"
-msgstr ""
+msgstr "Brännare"
 
 #: ../tribes/barbarians/workers/carrier/conf:2
 msgid "Carrier"
-msgstr ""
+msgstr "Transportör"
 
 #: ../tribes/barbarians/workers/chief-miner/conf:2
 msgid "Chief Miner"
-msgstr ""
+msgstr "Gruvledare"
 
 #: ../tribes/barbarians/workers/farmer/conf:2
 msgid "Farmer"
@@ -409,7 +411,7 @@ msgstr "Bonde"
 
 #: ../tribes/barbarians/workers/ferner/conf:2
 msgid "Ferner"
-msgstr ""
+msgstr "Ormbunke bonde"
 
 #: ../tribes/barbarians/workers/fisher/conf:2
 msgid "Fisher"
@@ -417,7 +419,7 @@ msgstr "Fiskare"
 
 #: ../tribes/barbarians/workers/gamekeeper/conf:2
 msgid "Gamekeeper"
-msgstr ""
+msgstr "Uppfödare"
 
 #: ../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
@@ -434,7 +436,7 @@ msgstr "Jägare"
 
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
-msgstr ""
+msgstr "Servitör"
 
 #: ../tribes/barbarians/workers/lumberjack/conf:2
 #: ../tribes/barbarians/buildings/lumberjack/conf:2
@@ -443,27 +445,27 @@ msgstr "Skogshuggare"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
-msgstr ""
+msgstr "Storsmed"
 
 #: ../tribes/barbarians/workers/master-brewer/conf:2
 msgid "Master Brewer"
-msgstr "Mästerbryggare"
+msgstr "Storbryggare"
 
 #: ../tribes/barbarians/workers/master-miner/conf:2
 msgid "Master Miner"
-msgstr ""
+msgstr "Gruvchef"
 
 #: ../tribes/barbarians/workers/miner/conf:2
 msgid "Miner"
-msgstr ""
+msgstr "Gruvarbetare"
 
 #: ../tribes/barbarians/workers/ranger/conf:2
 msgid "Forester"
-msgstr ""
+msgstr "Planterare"
 
 #: ../tribes/barbarians/workers/smelter/conf:2
 msgid "Smelter"
-msgstr ""
+msgstr "Förädlare"
 
 #: ../tribes/barbarians/workers/soldier/conf:2
 msgid "Soldier"
@@ -471,13 +473,13 @@ msgstr "Soldat"
 
 #: ../tribes/barbarians/workers/stonemason/conf:2
 msgid "Stonemason"
-msgstr ""
+msgstr "Stenhuggare"
 
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Tränare"
 
 #: ../tribes/barbarians/workers/weaver/conf:2
-#, fuzzy
 msgid "Weaver"
-msgstr "Vatten"
+msgstr "Skräddare"
+

@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Czech translation\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-01-11 21:39+0100\n"
 "PO-Revision-Date: 2006-03-03 14:09+0100\n"
 "Last-Translator: Ike <ike@zoznam.sk>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -11,15 +12,12 @@ msgstr ""
 "X-Poedit-Language: czech\n"
 "X-Poedit-Country: czech republic\n"
 
-#: ../src/building_statistics_menu.cc:51
-#: ../src/building_statistics_menu.cc:62
+#: ../src/building_statistics_menu.cc:51 ../src/building_statistics_menu.cc:62
 msgid "Building Statistics"
 msgstr "Štatistika stavby"
 
-#: ../src/building_statistics_menu.cc:67
-#: ../src/building_ui.cc:1313
-#: ../src/building_ui.cc:1750
-#: ../src/editor/tools/editor_info_tool.cc:88
+#: ../src/building_statistics_menu.cc:67 ../src/building_ui.cc:1313
+#: ../src/building_ui.cc:1750 ../src/editor/tools/editor_info_tool.cc:88
 #: ../src/editor/tools/editor_info_tool.cc:94
 #: ../src/editor/tools/editor_info_tool.cc:99
 #: ../src/editor/tools/editor_info_tool.cc:108
@@ -65,8 +63,7 @@ msgstr "Zničiť budovu?"
 msgid "Do you really want to destroy this "
 msgstr "Chceš naozaj zničiť túto"
 
-#: ../src/building_ui.cc:1035
-#: ../src/building_ui.cc:1041
+#: ../src/building_ui.cc:1035 ../src/building_ui.cc:1041
 msgid "Worker Listing"
 msgstr "Zoznam pracovníkov"
 
@@ -82,33 +79,27 @@ msgstr "Skúsenosti:"
 msgid "Trying to become: "
 msgstr "Môže sa stať:"
 
-#: ../src/building_ui.cc:1314
-#: ../src/building_ui.cc:1751
+#: ../src/building_ui.cc:1314 ../src/building_ui.cc:1751
 msgid "HP"
 msgstr "HP"
 
-#: ../src/building_ui.cc:1315
-#: ../src/building_ui.cc:1752
+#: ../src/building_ui.cc:1315 ../src/building_ui.cc:1752
 msgid "AT"
 msgstr "AT"
 
-#: ../src/building_ui.cc:1316
-#: ../src/building_ui.cc:1753
+#: ../src/building_ui.cc:1316 ../src/building_ui.cc:1753
 msgid "DE"
 msgstr "DE"
 
-#: ../src/building_ui.cc:1317
-#: ../src/building_ui.cc:1754
+#: ../src/building_ui.cc:1317 ../src/building_ui.cc:1754
 msgid "EV"
 msgstr "EV"
 
-#: ../src/building_ui.cc:1318
-#: ../src/building_ui.cc:1755
+#: ../src/building_ui.cc:1318 ../src/building_ui.cc:1755
 msgid "Level"
 msgstr "Úroveň"
 
-#: ../src/building_ui.cc:1335
-#: ../src/building_ui.cc:1771
+#: ../src/building_ui.cc:1335 ../src/building_ui.cc:1771
 msgid "Capacity"
 msgstr "Kapacita"
 
@@ -176,17 +167,21 @@ msgstr "Havária"
 msgid "Widelands"
 msgstr "Widelands"
 
-#: ../src/event_factory.cc:44
-#: ../src/event_message_box.cc:38
+#: ../src/event_factory.cc:44 ../src/event_message_box.cc:38
 msgid "Message Box"
 msgstr "Správa"
 
 #: ../src/event_factory.cc:44
-msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
-msgstr "Táto udalosť (Event) ukáže okno (Message Box). Uživateľ môže zvoliť, či má byť modálne alebo nemodálne a pridať obrázok. Udalosti môžu byť spojené s každým tlačítkom, aby bolo možné ich použiť ako voliaci dialóg pre uživateľa."
+msgid ""
+"This Event shows a messagebox. The user can choose to make it modal/non-"
+"modal and to add a picture. Events can be assigned to each button to use "
+"this as a Choose Dialog for the user"
+msgstr ""
+"Táto udalosť (Event) ukáže okno (Message Box). Uživateľ môže zvoliť, či má "
+"byť modálne alebo nemodálne a pridať obrázok. Udalosti môžu byť spojené s "
+"každým tlačítkom, aby bolo možné ich použiť ako voliaci dialóg pre uživateľa."
 
-#: ../src/event_factory.cc:45
-#: ../src/event_move_view.cc:34
+#: ../src/event_factory.cc:45 ../src/event_move_view.cc:34
 #: ../src/event_unhide_objective.cc:35
 msgid "Move View"
 msgstr "Posuň pohlad"
@@ -195,35 +190,43 @@ msgstr "Posuň pohlad"
 msgid "This Event centers the Players View on a certain field"
 msgstr "Tato udalosť sústredí hráčov pohľad na určité políčko"
 
-#: ../src/event_factory.cc:46
-#: ../src/event_unhide_area.cc:35
+#: ../src/event_factory.cc:46 ../src/event_unhide_area.cc:35
 msgid "Unhide Area"
 msgstr "Odkry oblasť"
 
 #: ../src/event_factory.cc:46
-msgid "This Event makes a user definable part of the map visible for a selectable user"
-msgstr "Táto udalosť odkryje uživateľovi definovateľnú časť mapy viditeľnú vybranému uživateľovi"
+msgid ""
+"This Event makes a user definable part of the map visible for a selectable "
+"user"
+msgstr ""
+"Táto udalosť odkryje uživateľovi definovateľnú časť mapy viditeľnú vybranému "
+"uživateľovi"
 
-#: ../src/event_factory.cc:47
-#: ../src/event_conquer_area.cc:34
+#: ../src/event_factory.cc:47 ../src/event_conquer_area.cc:34
 msgid "Conquer Area"
 msgstr "Oblasť výbojov"
 
 #: ../src/event_factory.cc:47
-msgid "This Event conquers a user definable part of the map for one player if there isn't a player already there"
-msgstr "Táto udalosť zaberie uživateľovi definovateľnú časť mapy pre jedného hráča, pokiaľ v tom mieste ešte žiadny hráč nie je."
+msgid ""
+"This Event conquers a user definable part of the map for one player if there "
+"isn't a player already there"
+msgstr ""
+"Táto udalosť zaberie uživateľovi definovateľnú časť mapy pre jedného hráča, "
+"pokiaľ v tom mieste ešte žiadny hráč nie je."
 
-#: ../src/event_factory.cc:48
-#: ../src/event_allow_building.cc:36
+#: ../src/event_factory.cc:48 ../src/event_allow_building.cc:36
 msgid "Allow Building"
 msgstr "Povol stavbu"
 
 #: ../src/event_factory.cc:48
-msgid "Allows/Disables a certain building for a player so that it can be build or it can't any longer"
-msgstr "Povoluje/zakazuje určitú stavbu hráčovi tak, aby ju mohol stavať alebo už stavať nemohol."
+msgid ""
+"Allows/Disables a certain building for a player so that it can be build or "
+"it can't any longer"
+msgstr ""
+"Povoluje/zakazuje určitú stavbu hráčovi tak, aby ju mohol stavať alebo už "
+"stavať nemohol."
 
-#: ../src/event_factory.cc:50
-#: ../src/event_set_null_trigger.cc:36
+#: ../src/event_factory.cc:50 ../src/event_set_null_trigger.cc:36
 #, fuzzy
 msgid "Set Null Trigger"
 msgstr "Nastav Nul Trigger"
@@ -257,8 +260,7 @@ msgstr "Pokračuj"
 msgid "Action"
 msgstr "Akcia"
 
-#: ../src/game_chat_menu.cc:53
-#: ../src/game_chat_menu.cc:62
+#: ../src/game_chat_menu.cc:53 ../src/game_chat_menu.cc:62
 msgid "Chat Menu"
 msgstr "Chat menu"
 
@@ -278,30 +280,25 @@ msgstr "Opravné políčko"
 msgid "height:"
 msgstr "výška:"
 
-#: ../src/game_main_menu.cc:50
-#: ../src/game_main_menu.cc:61
+#: ../src/game_main_menu.cc:50 ../src/game_main_menu.cc:61
 #: ../src/editor/ui_menus/editor_main_menu.cc:40
 msgid "Main Menu"
 msgstr "Hlavné menu"
 
-#: ../src/game_main_menu_load_game.cc:39
-#: ../src/game_main_menu_load_game.cc:43
+#: ../src/game_main_menu_load_game.cc:39 ../src/game_main_menu_load_game.cc:43
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:47
 msgid "Load Game"
 msgstr "Nahraj hru"
 
-#: ../src/game_main_menu_load_game.cc:61
-#: ../src/game_main_menu_save_game.cc:67
+#: ../src/game_main_menu_load_game.cc:61 ../src/game_main_menu_save_game.cc:67
 msgid "Map Name: "
 msgstr "Meno many:"
 
-#: ../src/game_main_menu_load_game.cc:66
-#: ../src/game_main_menu_save_game.cc:72
+#: ../src/game_main_menu_load_game.cc:66 ../src/game_main_menu_save_game.cc:72
 msgid "Game Time: "
 msgstr "Herný čas:"
 
-#: ../src/game_main_menu_load_game.cc:75
-#: ../src/game_main_menu_save_game.cc:81
+#: ../src/game_main_menu_load_game.cc:75 ../src/game_main_menu_save_game.cc:81
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:105
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:110
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:57
@@ -310,8 +307,7 @@ msgstr "Herný čas:"
 msgid "OK"
 msgstr "OK"
 
-#: ../src/game_main_menu_load_game.cc:80
-#: ../src/game_main_menu_save_game.cc:86
+#: ../src/game_main_menu_load_game.cc:80 ../src/game_main_menu_save_game.cc:86
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:128
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:128
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:74
@@ -343,8 +339,7 @@ msgstr ""
 msgid "Load Game Error!!"
 msgstr "Chyba otváranie hry!!"
 
-#: ../src/game_main_menu_save_game.cc:42
-#: ../src/game_main_menu_save_game.cc:46
+#: ../src/game_main_menu_save_game.cc:42 ../src/game_main_menu_save_game.cc:46
 msgid "Save Game"
 msgstr "Uložiť hru"
 
@@ -404,43 +399,35 @@ msgstr "Hudba"
 msgid "Sound FX"
 msgstr "Zvuk"
 
-#: ../src/general_statistics_menu.cc:56
-#: ../src/general_statistics_menu.cc:65
+#: ../src/general_statistics_menu.cc:56 ../src/general_statistics_menu.cc:65
 msgid "General Statistics"
 msgstr "Všeobecná štatistika"
 
-#: ../src/general_statistics_menu.cc:156
-#: ../src/ware_statistics_menu.cc:401
+#: ../src/general_statistics_menu.cc:156 ../src/ware_statistics_menu.cc:401
 msgid "15 m"
 msgstr "15 m"
 
-#: ../src/general_statistics_menu.cc:160
-#: ../src/ware_statistics_menu.cc:405
+#: ../src/general_statistics_menu.cc:160 ../src/ware_statistics_menu.cc:405
 msgid "30 m"
 msgstr "30 m"
 
-#: ../src/general_statistics_menu.cc:164
-#: ../src/ware_statistics_menu.cc:409
+#: ../src/general_statistics_menu.cc:164 ../src/ware_statistics_menu.cc:409
 msgid "1 h"
 msgstr "1 h"
 
-#: ../src/general_statistics_menu.cc:168
-#: ../src/ware_statistics_menu.cc:413
+#: ../src/general_statistics_menu.cc:168 ../src/ware_statistics_menu.cc:413
 msgid "2 h"
 msgstr "2 h"
 
-#: ../src/general_statistics_menu.cc:178
-#: ../src/ware_statistics_menu.cc:423
+#: ../src/general_statistics_menu.cc:178 ../src/ware_statistics_menu.cc:423
 msgid "4 h"
 msgstr "4 h"
 
-#: ../src/general_statistics_menu.cc:182
-#: ../src/ware_statistics_menu.cc:427
+#: ../src/general_statistics_menu.cc:182 ../src/ware_statistics_menu.cc:427
 msgid "8 h"
 msgstr "8 h"
 
-#: ../src/general_statistics_menu.cc:186
-#: ../src/ware_statistics_menu.cc:431
+#: ../src/general_statistics_menu.cc:186 ../src/ware_statistics_menu.cc:431
 msgid "16 h"
 msgstr "16 h"
 
@@ -456,8 +443,7 @@ msgstr "Správa:"
 msgid "No Name"
 msgstr "Bez mena"
 
-#: ../src/map.cc:412
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:144
+#: ../src/map.cc:412 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:144
 msgid "Unknown"
 msgstr "neznámy"
 
@@ -465,13 +451,11 @@ msgstr "neznámy"
 msgid "no description defined"
 msgstr "nepopísaný"
 
-#: ../src/map.cc:415
-#: ../src/map_variable_manager.cc:31
+#: ../src/map.cc:415 ../src/map_variable_manager.cc:31
 msgid "<undefined>"
 msgstr "<nedefinovaný>"
 
-#: ../src/map.cc:416
-#: ../src/playerdescrgroup.cc:32
+#: ../src/map.cc:416 ../src/playerdescrgroup.cc:32
 #: ../src/playerdescrgroup.cc:61
 msgid "Player 1"
 msgstr "Hráč 1"
@@ -494,8 +478,7 @@ msgid_plural "%d soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/minimap.cc:153
-#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
+#: ../src/minimap.cc:153 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
 msgid "Map"
 msgstr "Mapa"
 
@@ -507,8 +490,7 @@ msgstr "Nemám meno"
 msgid "Starting network game"
 msgstr "Začína sieťová hra"
 
-#: ../src/network.cc:836
-#: ../src/network.cc:845
+#: ../src/network.cc:836 ../src/network.cc:845
 msgid "Player"
 msgstr "Hráč"
 
@@ -552,13 +534,11 @@ msgstr "Hráč 7"
 msgid "Player 8"
 msgstr "Hráč 8"
 
-#: ../src/playerdescrgroup.cc:109
-#: ../src/playerdescrgroup.cc:199
+#: ../src/playerdescrgroup.cc:109 ../src/playerdescrgroup.cc:199
 msgid "Human"
 msgstr "Človek"
 
-#: ../src/playerdescrgroup.cc:110
-#: ../src/playerdescrgroup.cc:199
+#: ../src/playerdescrgroup.cc:110 ../src/playerdescrgroup.cc:199
 msgid "Computer"
 msgstr "Počítač"
 
@@ -606,8 +586,7 @@ msgstr "Odpočíva"
 msgid "Not Working"
 msgstr "Nepracuje"
 
-#: ../src/trigger_building.cc:37
-#: ../src/trigger_factory.cc:37
+#: ../src/trigger_building.cc:37 ../src/trigger_factory.cc:37
 msgid "Building Trigger"
 msgstr "Stavebná spúšť"
 
@@ -615,35 +594,42 @@ msgstr "Stavebná spúšť"
 msgid "<unset>"
 msgstr "<nenastavené>"
 
-#: ../src/trigger_factory.cc:35
-#: ../src/trigger_time.cc:34
+#: ../src/trigger_factory.cc:35 ../src/trigger_time.cc:34
 msgid "Time Trigger"
 msgstr "Časová spúšť"
 
 #: ../src/trigger_factory.cc:35
-msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
-msgstr "Spúšť čaká určitú dobu pred aktiváciou. Dá sa nastaviť neustále opakovanie po čakacej dobe pri opakujúcich sa akciách."
+msgid ""
+"This Trigger waits a certain time before it is true. It can be configured to "
+"constantly restart itself when the wait time is over for repeating events"
+msgstr ""
+"Spúšť čaká určitú dobu pred aktiváciou. Dá sa nastaviť neustále opakovanie "
+"po čakacej dobe pri opakujúcich sa akciách."
 
-#: ../src/trigger_factory.cc:36
-#: ../src/trigger_null.cc:32
+#: ../src/trigger_factory.cc:36 ../src/trigger_null.cc:32
 msgid "Null Trigger"
 msgstr "Nulová spúšť"
 
 #: ../src/trigger_factory.cc:36
-msgid "This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers"
-msgstr "Tato spúšť sa nikdy nezmení sama od seba. Použije sa pre niektoré udalosti, ktoré menia stav spúští."
+msgid ""
+"This Trigger never changes its state by itself. It is useful to pass it to "
+"some event which changes triggers"
+msgstr ""
+"Tato spúšť sa nikdy nezmení sama od seba. Použije sa pre niektoré udalosti, "
+"ktoré menia stav spúští."
 
 #: ../src/trigger_factory.cc:37
-msgid "This trigger gets set when a number of a building type of one player is available in an area."
-msgstr "Tato spúšť je nastavená pokiaľ je v oblasti určený počet budov jedného hráča."
+msgid ""
+"This trigger gets set when a number of a building type of one player is "
+"available in an area."
+msgstr ""
+"Tato spúšť je nastavená pokiaľ je v oblasti určený počet budov jedného hráča."
 
-#: ../src/ware.cc:72
-#: ../src/worker.cc:1520
+#: ../src/ware.cc:72 ../src/worker.cc:1520
 msgid "Doh... someone forgot the help text!"
 msgstr "Ups... niekto tu zabudol na help!"
 
-#: ../src/ware_statistics_menu.cc:343
-#: ../src/ware_statistics_menu.cc:391
+#: ../src/ware_statistics_menu.cc:343 ../src/ware_statistics_menu.cc:391
 msgid "Ware Statistics"
 msgstr "Bojová štatistika"
 
@@ -657,13 +643,21 @@ msgstr "Sledovanie"
 
 #: ../src/game_server_proto_packet_chatmessage.cc:68
 #, c-format
-msgid "Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"
-msgstr "Server odpovedal nesprávne na packet správy. Mal poslať %i ale poslal %i. Ignorujem to."
+msgid ""
+"Server replied illegally to ChatMessage package. Should have sent %i but "
+"sent %i. Ignored"
+msgstr ""
+"Server odpovedal nesprávne na packet správy. Mal poslať %i ale poslal %i. "
+"Ignorujem to."
 
 #: ../src/game_server_proto_packet_connect.cc:71
 #, c-format
-msgid "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"
-msgstr "Server spôsobil chybu pripojenia. Váš protokol (%i.%02i) je zastaralý, Server používa %i.%02i\n"
+msgid ""
+"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
+"Server runs %i.%02i\n"
+msgstr ""
+"Server spôsobil chybu pripojenia. Váš protokol (%i.%02i) je zastaralý, "
+"Server používa %i.%02i\n"
 
 #: ../src/game_server_proto_packet_connect.cc:77
 #, c-format
@@ -678,15 +672,16 @@ msgstr "Tento server neposkytuje Widelands!\n"
 #: ../src/game_server_proto_packet_getroominfo.cc:65
 #, c-format
 msgid "The Room %s is currently not logged in or unknown to the server.\n"
-msgstr "Miestnosť %s nie je v súčasnosti zaznamenaná alebo ju server nenašiel.\n"
+msgstr ""
+"Miestnosť %s nie je v súčasnosti zaznamenaná alebo ju server nenašiel.\n"
 
 #: ../src/game_server_proto_packet_getuserinfo.cc:65
 #, c-format
 msgid "The User %s is currently not logged in or unknown to the server.\n"
-msgstr "Uživateľ %s nie je v súčasnosti zaznamenaný alebo ho server nenašiell.\n"
+msgstr ""
+"Uživateľ %s nie je v súčasnosti zaznamenaný alebo ho server nenašiell.\n"
 
-#: ../src/game_objectives_menu.cc:49
-#: ../src/game_objectives_menu.cc:55
+#: ../src/game_objectives_menu.cc:49 ../src/game_objectives_menu.cc:55
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:168
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:173
 msgid "Objectives Menu"
@@ -1197,12 +1192,20 @@ msgid "Player "
 msgstr "Hráč"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:256
-msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend of this player and try again"
-msgstr "Nejde odstrániť hráč - je niekde viazaný. Odstráň všetky budovy, boby, spúšte a udalosti, ktoré s ním súvisia a akciu opakuj."
+msgid ""
+"Can't remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend of this player and try again"
+msgstr ""
+"Nejde odstrániť hráč - je niekde viazaný. Odstráň všetky budovy, boby, "
+"spúšte a udalosti, ktoré s ním súvisia a akciu opakuj."
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:283
-msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr "Nejde zmeniť klan hráča - je niekde viazaný. Odstráň všetky budovy, boby, spúšte a udalosti, ktoré súvisia s klanom a skús akciu zopakovať."
+msgid ""
+"Can't change player tribe. It is referenced in some place. Remove all "
+"buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr ""
+"Nejde zmeniť klan hráča - je niekde viazaný. Odstráň všetky budovy, boby, "
+"spúšte a udalosti, ktoré súvisia s klanom a skús akciu zopakovať."
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:36
 msgid "Allowed Buildings"
@@ -1711,10 +1714,10 @@ msgid "Mission 1: Eyes in the Darkness - Game Basics"
 msgstr "Misia 1: Oči v temnotách - Základy hry"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:50
-msgid "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
+msgid ""
+"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
 msgstr "Misia 2: Miesto pre domov - bane, výboje, pokročilá výroba"
 
 #: ../src/map_objective_manager.h:58
 msgid "no descr"
 msgstr "bez popisu"
-
