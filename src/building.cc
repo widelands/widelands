@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,7 +89,7 @@ Building_Descr::~Building_Descr(void)
       free(m_buildicon_fname);
    for(uint i=0; i<m_enhances_to.size(); i++)
       free(m_enhances_to[i]);
-      
+
 	delete m_hints;
 }
 
@@ -174,8 +174,8 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 
       if(!s)
          throw wexception("Missing build animation");
-      
-      if(!is_animation_known("build")) 
+
+      if(!is_animation_known("build"))
          add_animation("build", g_anim.get(directory, s, 0, encdata));
 
 		// Get costs
@@ -209,7 +209,7 @@ void Building_Descr::parse(const char* directory, Profile* prof,
 	s = prof->get_section("idle");
 	if (!s)
 		throw wexception("Missing idle animation");
-   if(!is_animation_known("idle")) 
+   if(!is_animation_known("idle"))
       add_animation("idle", g_anim.get(directory, s, 0, encdata));
 
 	while (global->get_next_string("soundfx", &string)) {
@@ -564,7 +564,7 @@ Default is the descriptive name of the building, but e.g. construction
 sites may want to override this.
 ===============
 */
-std::string Building::get_census_string()
+std::string Building::get_census_string() const
 {
 	return get_descname();
 }
@@ -716,14 +716,17 @@ Building::draw
 Draw the building.
 ===============
 */
-void Building::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords,
-	Point pos)
+void Building::draw
+(const Editor_Game_Base & game,
+ RenderTarget & dst,
+ const FCoords coords,
+ const Point pos)
 {
 	if (coords != m_position)
 		return; // draw big buildings only once
 
-	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart,
-		get_owner());
+	dst.drawanim
+		(pos.x, pos.y, m_anim, game.get_gametime() - m_animstart, get_owner());
 
 	// door animation?
 
@@ -739,24 +742,35 @@ Building::draw_help
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_help(Editor_Game_Base* game, RenderTarget* dst,
-	FCoords coords, Point pos)
+void Building::draw_help
+(const Editor_Game_Base & game,
+ RenderTarget & dst,
+ const FCoords coords,
+ const Point pos)
 {
-	uint dpyflags = game->get_iabase()->get_display_flags();
+	const uint dpyflags = game.get_iabase()->get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus)
 	{
-		std::string txt = get_census_string();
-
       // TODO: Make more here
-		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, pos.x, pos.y - 45, txt.c_str(), Align_Center);
+		g_fh->draw_string
+			(&dst,
+			 UI_FONT_SMALL,
+			 UI_FONT_SMALL_CLR,
+			 pos.x, pos.y - 45,
+			 get_census_string().c_str(),
+			 Align_Center);
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics)
 	{
-		std::string txt = get_statistics_string();
-
-		g_fh->draw_string(dst, UI_FONT_SMALL, UI_FONT_SMALL_CLR, pos.x, pos.y - 35, txt.c_str(), Align_Center);
+		g_fh->draw_string
+			(&dst,
+			 UI_FONT_SMALL,
+			 UI_FONT_SMALL_CLR,
+			 pos.x, pos.y - 35,
+			 get_statistics_string().c_str(),
+			 Align_Center);
 	}
 }
 
@@ -774,7 +788,7 @@ void Building::conquered_by (Player* pl)
  * Log basic infos
  */
 void Building::log_general_info(Editor_Game_Base* egbase) {
-   PlayerImmovable::log_general_info(egbase);      
+   PlayerImmovable::log_general_info(egbase);
 
    molog("m_position: (%i,%i)\n", m_position.x, m_position.y);
    molog("m_flag: %p\n", m_flag);
@@ -785,7 +799,7 @@ void Building::log_general_info(Editor_Game_Base* egbase) {
 
 	molog("m_leave_time: %i\n", m_leave_time);
    molog("m_stop: %i\n", m_stop);
-  
+
    molog("m_leave_queue.size(): %i\n", m_leave_queue.size());
    molog("m_leave_allow.get(): %p\n", m_leave_allow.get(egbase));
 }

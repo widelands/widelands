@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002, 2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,19 +66,18 @@ class Player {
 		inline int get_player_number() const { return m_plnum; }
 		inline const RGBColor* get_playercolor() const { return m_playercolor; }
 		inline Tribe_Descr *get_tribe() const { return m_tribe; }
-      
+
       const char* get_name(void) { return m_name.c_str(); }
       void set_name(const char* str) { m_name=str; }
 
 		void init(Editor_Game_Base*, bool);
 
-		bool is_field_owned(Coords coords);
-		int get_buildcaps(Coords coords);
+		FieldCaps get_buildcaps(const Coords coords) const;
 
       // For cheating
       void set_see_all(bool t) { m_see_all=t; m_view_changed = true; }
       bool get_see_all(void) { return m_see_all; }
-      
+
 		// See area
 		inline bool is_field_seen(int i) { if(m_see_all) return true; return seen_fields[i]; }
 		inline bool is_field_seen(Coords c) { if(m_see_all) return true; return seen_fields[c.y*m_egbase->get_map()->get_width() + c.x]; }
@@ -108,7 +107,7 @@ class Player {
       bool has_economy(Economy*);
       int get_economy_number(Economy*); // for savegames
       inline Economy* get_economy_by_number(int i) { return m_economies[i]; } // for loading
-      inline uint get_nr_economies( void ) { return m_economies.size(); } 
+      inline uint get_nr_economies( void ) { return m_economies.size(); }
 
       // Military stuff
       void drop_soldier(PlayerImmovable* imm, Soldier* worker);
@@ -118,7 +117,7 @@ class Player {
       void enemyflagaction(Flag* flag, int action, int param, int param2, int param3);
 	private:
 		bool m_see_all;
-      
+
       // set functions
 		inline void set_field_seen(int i, bool t) { seen_fields[i]=t; }
 		inline void set_field_seen(Coords c, bool t) {

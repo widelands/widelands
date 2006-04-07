@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ void BaseImmovable::set_position(Editor_Game_Base *g, Coords c)
    if (f->immovable && f->immovable!=this) {
       BaseImmovable *other = f->immovable;
 
-      assert(other->get_size() == NONE);
+	   assert(other->get_size() == NONE);
 
       other->cleanup(g);
       delete other;
@@ -437,7 +437,7 @@ uint Immovable_Descr::parse_animation(std::string directory, Profile* s, std::st
    if(!is_animation_known(name.c_str())) {
       animid = g_anim.get(directory.c_str(), anim, picname, &m_default_encodedata);
       add_animation(name.c_str(), animid);
-   } else 
+   } else
       animid = get_animation(name.c_str());
 
 	return animid;
@@ -632,12 +632,16 @@ Draw the immovable at the given position.
 coords is the field that draw() was called for.
 ===============
 */
-void Immovable::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
+void Immovable::draw
+(const Editor_Game_Base & game,
+ RenderTarget & dst,
+ const FCoords coords,
+ const Point pos)
 {
 	if (!m_anim)
 		return;
 
-	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart, 0);
+	dst.drawanim(pos.x, pos.y, m_anim, game.get_gametime() - m_animstart, 0);
 }
 
 
@@ -730,7 +734,7 @@ void ImmovableProgram::parse_transform(ImmovableAction* act, const ProgramParser
 		throw wexception("Syntax: transform [bob name]");
 
    std::vector<std::string> list;
-   
+
    split_string(cmd[1], &list, ":");
    if(list.size()==1) {
       act->sparam1 = cmd[1];
@@ -739,7 +743,7 @@ void ImmovableProgram::parse_transform(ImmovableAction* act, const ProgramParser
       act->sparam1 = list[1];
       act->sparam2 = list[0];
    }
-      
+
 	act->function = &Immovable::run_transform;
 }
 
@@ -747,18 +751,18 @@ bool Immovable::run_transform(Game* g, bool killable, const ImmovableAction& act
 {
 	Coords c = m_position;
 
-   if(!get_descr()->get_owner_tribe() && (action.sparam2 != "world")) 
+   if(!get_descr()->get_owner_tribe() && (action.sparam2 != "world"))
       throw wexception("Should create tribe-immovable %s, but we are no tribe immovable!\n", action.sparam1.c_str());
-   
+
 	if (!killable) { // we need to reschedule and remove self from act()
 		m_program_step = schedule_act(g, 1);
 		return true;
 	}
 
-   
+
    Tribe_Descr* tribe=0;
-   
-   if(action.sparam2 != "world") 
+
+   if(action.sparam2 != "world")
       tribe=get_descr()->get_owner_tribe(); // Not a world bob?
 
 	remove(g);
@@ -899,12 +903,12 @@ void PlayerImmovable::set_owner(Player *owner)
 {
 	// Change these asserts once you've made really sure that changing owners
 	// works (necessary for military building)
-/*	   THIS IS A TEST 
+/*	   THIS IS A TEST
    assert(!m_owner);
 	assert(owner);*/
 
 	m_owner = owner;
-	
+
 	m_owner->get_game()->player_immovable_notification (this, Editor_Game_Base::GAIN);
 }
 
@@ -929,13 +933,13 @@ Release workers
 */
 void PlayerImmovable::cleanup(Editor_Game_Base *g)
 {
-	while(m_workers.size()) 
+	while(m_workers.size())
       if(g->get_objects()->object_still_available(m_workers[0]))
             m_workers[0]->set_location(0);
-	
+
 	if (m_owner!=0)
 		m_owner->get_game()->player_immovable_notification (this, Editor_Game_Base::LOSE);
-	
+
 	BaseImmovable::cleanup(g);
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -424,8 +424,8 @@ void WareInstance::update(Game* g)
 	Map_Object* loc = m_location.get(g);
 
    if(!m_ware_descr) // Upsy, we're not even intialized. Happens on load
-      return; 
-   
+      return;
+
 	// Reset our state if we're not on location or outside an economy
 	if (!loc || !get_economy()) {
 		cancel_moving(g);
@@ -1356,7 +1356,11 @@ Flag::draw
 Draw the flag.
 ===============
 */
-void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
+void Flag::draw
+(const Editor_Game_Base & game,
+ RenderTarget & dst,
+ const FCoords coords,
+ const Point pos)
 {
 	static struct { int x, y; } ware_offsets[8] = {
 		{ -5,  1 },
@@ -1371,8 +1375,8 @@ void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point
 
 	int i;
 
-	dst->drawanim(pos.x, pos.y, m_anim, game->get_gametime() - m_animstart,
-	              get_owner());
+	dst.drawanim
+		(pos.x, pos.y, m_anim, game.get_gametime() - m_animstart, get_owner());
 
 	// Draw wares
 	for(i = 0; i < m_item_filled; i++) {
@@ -1385,8 +1389,11 @@ void Flag::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point
 		} else
 			warepos.y -= 6 + (i - 8) * 3;
 
-		dst->drawanim(warepos.x, warepos.y, item->get_ware_descr()->get_animation("idle"), 0,
-		              get_owner());
+		dst.drawanim
+			(warepos.x, warepos.y,
+			 item->get_ware_descr()->get_animation("idle"),
+			 0,
+			 get_owner());
 	}
 }
 
@@ -1612,7 +1619,7 @@ Initialize the road.
 void Road::init(Editor_Game_Base *gg)
 {
    PlayerImmovable::init(gg);
-	
+
    if(m_path.get_nsteps() >=2 ) {
       link_into_flags(gg);
    }
@@ -1620,8 +1627,8 @@ void Road::init(Editor_Game_Base *gg)
 }
 
 /*
- * This links into the flags, calls a carrier 
- * and so on. This was formerly done in init (and 
+ * This links into the flags, calls a carrier
+ * and so on. This was formerly done in init (and
  * still is for normal games). But for save game loading
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
@@ -1892,7 +1899,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
       }
 
       // Cause a worker update in any case
-      if(g->is_game()) 
+      if(g->is_game())
          w->send_signal(static_cast<Game*>(g), "road");
    }
 
@@ -1946,7 +1953,8 @@ Road::draw
 The road is drawn by the terrain renderer via marked fields.
 ===============
 */
-void Road::draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos)
+void Road::draw
+(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
 {
 }
 
@@ -2173,7 +2181,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
 	Flag* destflag;
 
 	// Catch the simplest cases
-	if (location->get_economy() != 
+	if (location->get_economy() !=
          destination->get_economy()) {
 		tlog("Economy mismatch -> fail\n");
 
@@ -2322,7 +2330,7 @@ Requeriments::Requeriments ()
 	m_defense.min = -1;
 	m_evade.min = -1;
    m_total.min = -1;
-   
+
 	m_hp.max = 100;
 	m_attack.max = 100;
 	m_defense.max = 100;
@@ -2493,7 +2501,7 @@ Request::~Request()
 /**
  * Read this request from a file
  *
- * it is most probably created by some init function, 
+ * it is most probably created by some init function,
  * so ad least target/economy is correct. Some Transports
  * might have been initialized. We have to kill them and replace
  * them through the data in the file
@@ -2542,7 +2550,7 @@ void Request::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Obj
          }
       }
 
-      if(!is_open() && m_economy) 
+      if(!is_open() && m_economy)
          m_economy->remove_request(this);
 
       // DONE
@@ -2558,15 +2566,15 @@ void Request::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Map_O
    // First, write version
    fw->Unsigned16(REQUEST_VERSION);
 
-   // target and econmy should be set, 
+   // target and econmy should be set,
    // same is true for callback stuff
-   
+
    // Write type
    fw->Unsigned8(m_type);
 
    // Write ware
    fw->Unsigned32(m_index);
-  
+
    // Write idle
    fw->Unsigned8(m_idle);
 
@@ -2845,7 +2853,7 @@ void Request::transfer_finish(Game *g, Transfer* t)
 {
 	Worker* w = 0;
 	Soldier* s = 0;
-	
+
 	if (t->m_worker)
 		w = t->m_worker;
 	else
@@ -2864,13 +2872,13 @@ void Request::transfer_finish(Game *g, Transfer* t)
 		set_required_time(get_base_required_time(g, 1));
 		m_count--;
 	}
-	
+
    if (m_requeriments)
 		delete m_requeriments;
 	m_requeriments = 0;
-	
+
    // the callback functions are likely to delete us,
-   // therefore we musn't access member variables behind this 
+   // therefore we musn't access member variables behind this
    // point
 	if (w)
 		(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
@@ -2901,7 +2909,7 @@ void Request::transfer_fail(Game *g, Transfer* t)
 	t->m_item = 0;
 
    remove_transfer(find_transfer(t));
-   
+
    if (!wasopen)
 		m_economy->add_request(this);
 
@@ -3194,7 +3202,7 @@ Remove the wares in this queue from the given economy (used in accounting).
 */
 void WaresQueue::remove_from_economy(Economy* e)
 {
-   if(m_ware==-1) return; 
+   if(m_ware==-1) return;
 
 	e->remove_wares(m_ware, m_filled);
 	if (m_request)
@@ -3274,7 +3282,7 @@ void WaresQueue::Write(FileWrite* fw, Editor_Game_Base* egbase, Widelands_Map_Ma
    if(m_request) {
       fw->Unsigned8(1);
       m_request->Write(fw,egbase,os);
-   } else 
+   } else
       fw->Unsigned8(0);
 }
 void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol) {
@@ -3294,7 +3302,7 @@ void WaresQueue::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_
       } else {
          m_request=0;
       }
-     
+
       // Now Economy stuff. We have to add our filled items to the economy
       add_to_economy(m_owner->get_economy());
       return;
@@ -3322,12 +3330,12 @@ Economy::Economy(Player *player)
 	m_rebuilding = false;
 	m_request_timer = false;
 	mpf_cycle = 0;
-   
+
    m_worker_supplies.resize( player->get_tribe()->get_nrworkers() );
    m_workers.set_nrwares( player->get_tribe()->get_nrworkers() );
    m_ware_supplies.resize( player->get_tribe()->get_nrwares() );
    m_wares.set_nrwares( player->get_tribe()->get_nrwares() );
-   
+
    player->add_economy(this);
 }
 
@@ -3518,7 +3526,7 @@ public:
 
 #if defined(DEBUG) && defined(__i386__)
       /* This is here temporarilly till the bugs are fixed
-       * which trigger the asserts below 
+       * which trigger the asserts below
        */
       log("DBG: slot: %i, m_data.size(): %i\n", slot, m_data.size());
       if(slot >= m_data.size()) asm("int $3");
@@ -3646,7 +3654,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, int cost_cutoff)
 				// found a better path to a field that's already Open
 				neighbour->mpf_realcost = cost;
 				neighbour->mpf_backlink = current;
-            if( neighbour->mpf_heapindex != -1 ) // This neighbour is already 'popped', skip it 
+            if( neighbour->mpf_heapindex != -1 ) // This neighbour is already 'popped', skip it
                Open.boost(neighbour);
 			}
 		}
@@ -3809,9 +3817,9 @@ a split of the Economy.
 void Economy::remove_wares(int id, int count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
-	
+
 	m_wares.remove(id, count);
-   
+
 
 	// TODO: remove from global player inventory?
 }
@@ -3863,9 +3871,9 @@ void Economy::remove_warehouse(Warehouse *wh)
     * themselves from their own economy,
     * though they weren't added (since they weren't
     * initialized)
-    * 
+    *
     */
-   assert(i != m_warehouses.size() || !m_warehouses.size()); 
+   assert(i != m_warehouses.size() || !m_warehouses.size());
    if(m_warehouses.size())
       m_warehouses.pop_back();
 }
@@ -3886,7 +3894,7 @@ void Economy::add_request(Request* req)
 
    if(!get_owner()) // our owner is deleted, we are cleaning up. So ignore this
       return;
-   
+
    if(req->get_type()==Request::WORKER) {
       log("%p: add_request(%p) for worker %s, target is %u\n", this, req,
             get_owner()->get_tribe()->get_worker_descr(req->get_index())->get_descname().c_str(),
@@ -4105,7 +4113,7 @@ Remove a ware_supply from our list of supplies.
 */
 void Economy::remove_ware_supply(int ware, Supply* supp)
 {
-   assert(ware>=0); 
+   assert(ware>=0);
    //log("remove_ware_supply(%i, %p)\n", ware, supp);
 
 	m_ware_supplies[ware].remove_supply(supp);
@@ -4220,7 +4228,7 @@ void Economy::start_request_timer(int delta)
 	m_request_timer = true;
 	m_request_timer_time = game->get_gametime() + delta;
    cq->enqueue (new Cmd_Call_Economy_Balance(m_request_timer_time, m_owner->get_player_number(), this));
-	
+
 //	cq->queue(m_request_timer_time, SENDER_MAPOBJECT, CMD_CALL,
 //					(long)(&Economy::request_timer_cb), m_trackserial, 0);
 }
@@ -4376,12 +4384,12 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		if (req->get_type() == Request::SOLDIER)
 		{
 			// This is to prevent a soldier to try to supply more than one Request.
-			// With this also ensures that you have enought soldiers 
+			// With this also ensures that you have enought soldiers
 			if (supp->get_passing_requeriments(g, req->get_index(), req->get_requeriments()) > 0)
 			{
 				supp->mark_as_used (g, req->get_index(), req->get_requeriments());
 			}
-			else 
+			else
 				continue;
 		}
 
@@ -4436,7 +4444,7 @@ void Economy::create_requested_workers(Game* g)
 				int index = req->get_index();
 				int num_wares = 0;
             Worker_Descr* w_desc=get_owner()->get_tribe()->get_worker_descr(index);
-            
+
 				// Ignore it if is a worker that cann't be buildable
 				if (!w_desc->get_buildable())
 					continue;
@@ -4471,7 +4479,7 @@ log("Economy::process_request-- Created a '%s' needed\n", w_desc->get_name());
 						} // if (m_warehouses[n_wh]
 						n_wh++;
 					} // while (n_wh < get_nr_warehouses())
-				} // if (num_wares == 0)			
+				} // if (num_wares == 0)
 			} // if (req->is_open())
 		} // for (RequestList::iterator
 	} // if (get_nr_warehouses())
@@ -4550,12 +4558,12 @@ Call economy functions to balance supply and request.
 void Cmd_Call_Economy_Balance::execute(Game* g) {
    Player* plr=g->get_player(m_player);
 
-   // If this economy has vanished, drop this 
+   // If this economy has vanished, drop this
    // call silently
    if(!plr->has_economy(m_economy))
       return;
 
-   if(!m_economy->should_run_balance_check(g->get_gametime()) && !m_force_balance)   
+   if(!m_economy->should_run_balance_check(g->get_gametime()) && !m_force_balance)
       return;
 
    m_force_balance = false;
@@ -4572,10 +4580,10 @@ void Cmd_Call_Economy_Balance::Read(FileRead* fr, Editor_Game_Base* egbase, Wide
    if(version==CURRENT_CMD_CALL_ECONOMY_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr,egbase,mol);
-      
+
       m_player= fr->Unsigned8();
       bool exists=fr->Unsigned8();
-      if(!exists) 
+      if(!exists)
          m_economy=((Economy*) 0xffffffff);
       else
          m_economy=egbase->get_player(m_player)->get_economy_by_number(fr->Unsigned16());
@@ -4589,16 +4597,16 @@ void Cmd_Call_Economy_Balance::Write(FileWrite* fw, Editor_Game_Base* egbase, Wi
 
    // Write Base Commands
    BaseCommand::BaseCmdWrite(fw,egbase,mos);
-   
+
    fw->Unsigned8(m_player);
-   
+
    // Economy
    Player* plr = egbase->get_player(m_player);
    bool has_eco=plr->has_economy(m_economy);
-   
+
    fw->Unsigned8(has_eco);
-   
-   if(has_eco) 
+
+   if(has_eco)
       fw->Unsigned16(plr->get_economy_number(m_economy));
 }
 

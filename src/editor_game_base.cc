@@ -388,7 +388,10 @@ void Editor_Game_Base::cleanup_playerimmovables_area(Coords coords, int radius)
 		PlayerImmovable* imm = (PlayerImmovable*)immovables[i].object;
 		Coords f = immovables[i].coords;
 
-		if (!imm->get_owner()->is_field_owned(f))
+		if
+			(imm->get_owner()->get_player_number()
+			 !=
+			 m_map->get_field(f)->get_owner_info().all)
 			burnset.insert(imm);
 	}
 

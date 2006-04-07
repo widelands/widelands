@@ -22,6 +22,7 @@
 #include "map.h"
 #include "mapview.h"
 #include "mapviewpixelfunctions.h"
+#include "overlay_manager.h"
 #include "player.h"
 #include "rendertarget.h"
 #include "system.h"
@@ -103,7 +104,12 @@ void Map_View::draw(RenderTarget* dst)
          m_complete_redraw_needed = true;
    }
 
-   dst->rendermap(m_intbase->get_egbase(), m_intbase->get_visibility(), m_viewpoint, m_complete_redraw_needed);
+	m_intbase->get_map()->get_overlay_manager()->load_graphics();
+   dst->rendermap
+		(*m_intbase->get_egbase(),
+		 m_intbase->get_visibility(),
+		 m_viewpoint,
+		 m_complete_redraw_needed);
    m_complete_redraw_needed = false;
 }
 
@@ -200,7 +206,6 @@ void Map_View::track_fsel(int mx, int my)
 	Coords c = MapviewPixelFunctions::calc_node_and_triangle
 		(*m_intbase->get_map(), m_viewpoint.x + mx, m_viewpoint.y + my).node;
 	fsel = FCoords(c, m_intbase->get_map()->get_field(c));
-
 	// Apply the new fieldsel
 	m_intbase->set_fieldsel_pos(fsel);
 }

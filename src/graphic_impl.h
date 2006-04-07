@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Wide Lands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,20 +53,20 @@ public:
 	AnimationGfx(const AnimationData* data);
 	~AnimationGfx();
 
-   inline const Point& get_hotspot( void ) { return m_hotspot; } 
+   inline const Point& get_hotspot( void ) { return m_hotspot; }
 	inline int get_nrframes() const { assert((*m_plrframes)[0]); return m_plrframes[0].size(); }
-	inline Surface* get_frame(int i, uchar plyr, const Player* player) 
-	{ 
+	inline Surface* get_frame(int i, uchar plyr, const Player* player)
+	{
       assert(i>=0 && i<get_nrframes() && plyr <= MAX_PLAYERS);
-      if( !m_encodedata.hasplrclrs ) 
+      if( !m_encodedata.hasplrclrs )
          return m_plrframes[0][i];
-  
+
       assert( player );
 
       // Encode for this player
       if( !m_plrframes[plyr].size() )
          encode( plyr, player->get_playercolor() );
-      return m_plrframes[plyr][i]; 
+      return m_plrframes[plyr][i];
    }
 
 private:
@@ -76,16 +76,16 @@ private:
 
 /*
 class Surface
-const 
+const
 This was formerly called struct Bitmap. But now it manages an SDL Surface as it's
-core. 
+core.
 
 Represents a simple bitmap without managing its memory.
 The rendering functions do NOT perform any clipping; this is up to the caller.
 */
 class Surface {
    friend class AnimationGfx;
-   friend class Font_Handler; // Needs m_surface for SDL_Blitting 
+   friend class Font_Handler; // Needs m_surface for SDL_Blitting
 
    SDL_Surface* m_surface;
    int m_offsx;
@@ -105,7 +105,7 @@ class Surface {
       inline uint get_w( void ) { return m_w; }
       inline uint get_h( void ) { return m_h; }
       void update( void );
-     
+
       // Save a bitmap of this to a file
       void save_bmp( const char* fname );
 
@@ -114,7 +114,7 @@ class Surface {
       inline SDL_PixelFormat* get_format() { assert(m_surface); return m_surface->format; }
       inline ushort get_pitch( void ) { assert(m_surface); return m_surface->pitch; }
       inline void* get_pixels( void ) { assert(m_surface); return (uchar*)m_surface->pixels + m_offsy*m_surface->pitch + m_offsx*m_surface->format->BytesPerPixel; }
-      
+
       // Lock
       inline void lock( void ) { if( SDL_MUSTLOCK( m_surface )) SDL_LockSurface( m_surface ); }
       inline void unlock( void ) { if( SDL_MUSTLOCK( m_surface )) SDL_UnlockSurface( m_surface ); }
@@ -130,7 +130,7 @@ class Surface {
          switch( m_surface->format->BytesPerPixel ) {
             case 1: return (*pix);
             case 2: return *((ushort*)(pix));
-            case 3: 
+            case 3:
             case 4: return *((ulong*)(pix));
          }
          assert(0);
@@ -152,7 +152,7 @@ class Surface {
          if( SDL_MUSTLOCK( m_surface ))
             SDL_UnlockSurface( m_surface );
       }
-      
+
       void clear();
       void draw_rect(Rect rc, RGBColor clr);
       void fill_rect(Rect rc, RGBColor clr);
@@ -170,7 +170,7 @@ class Surface {
             const int posx, const int rposx, const int posy,
             const int blposx, const int rblposx, const int blposy,
             uchar roads, uchar darken, bool);
-      
+
 
    private:
       inline void set_subwin( Rect r ) { m_offsx = r.x; m_offsy = r.y; m_w =r.w; m_h = r.h; }
@@ -219,7 +219,7 @@ private:
 	uint					m_frametime;
 	unsigned char*		m_curframe;
    std::string			m_texture_picture;
-   bool              is_32bit; 
+   bool              is_32bit;
    bool              m_was_animated;
 
 public:
@@ -284,7 +284,11 @@ public:
 	                      int srcx, int srcy, int w, int h);
 	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy);
 
-	virtual void rendermap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Point viewofs, bool);
+	virtual void rendermap
+		(const Editor_Game_Base &,
+		 const std::vector<bool> * const visibility,
+		 Point viewofs,
+		 const bool draw_all);
 	virtual void renderminimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Coords viewpt, uint flags);
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plrclrs = 0);
@@ -336,7 +340,7 @@ public:
 
    // Road textures
    Surface* get_road_texture( int );
-      
+
 	// Animations
 	virtual void load_animations();
 	AnimationGfx* get_animation(uint anim);
@@ -351,8 +355,8 @@ public:
 
 private:
    // Static function for png writing
-   static void m_png_write_function( png_structp, png_bytep, png_size_t ); 
-      
+   static void m_png_write_function( png_structp, png_bytep, png_size_t );
+
 	uint find_free_picture();
 
 	struct Picture {

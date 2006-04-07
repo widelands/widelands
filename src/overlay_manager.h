@@ -25,8 +25,7 @@
 #include <limits>
 #include "types.h"
 #include "geometry.h"
-
-class Map;
+#include "map.h"
 
 
 /*
@@ -55,7 +54,8 @@ class Map;
  *     with the jobid can be called and all overlays created in the
  *     job are removed. This is usefull for interactive road building.
  */
-#define MAX_OVERLAYS_PER_FIELD 5    // this should be enough
+#define MAX_OVERLAYS_PER_NODE 5
+#define MAX_OVERLAYS_PER_TRIANGLE 3
 typedef int (*Overlay_Callback_Function)(const TCoords, void*, int);
 class Overlay_Manager {
    public:
@@ -66,18 +66,22 @@ class Overlay_Manager {
       };
 
    public:
-      Overlay_Manager(int w,int h);
-      ~Overlay_Manager();
+      Overlay_Manager();
 
-      void cleanup();
-      void init(int w, int h);
+	void reset();
 
       // register callback function (see data below for description)
       void register_overlay_callback_function(Overlay_Callback_Function func, void* data, int iparam1 = 0) {
          m_callback=func; m_callback_data=data;  m_callback_data_i=iparam1;
       }
 
-      inline int get_a_job_id(void) { ++m_cur_jobid; if(m_cur_jobid>=std::numeric_limits<int>::max()) m_cur_jobid=1000; return m_cur_jobid; }
+	int get_a_job_id() {
+		if (++m_current_job_id >= std::numeric_limits<int>::max())
+			m_current_job_id = 1000;
+		return m_current_job_id;
+	}
+
+	void load_graphics();
 
 	void register_overlay
 		(const TCoords t,
@@ -89,57 +93,30 @@ class Overlay_Manager {
 	//  if picid == -1 remove all overlays
 	void remove_overlay(const TCoords, const int picid = -1);
 
-      void remove_overlay(int jobid);              // remove by jobid
+	void remove_overlay(const int jobid); //  remove by jobid
 
-	unsigned char get_overlays(const TCoords, Overlay_Info * const overlays);
+	unsigned char get_overlays(const FCoords c, Overlay_Info * const) const;
+	unsigned char get_overlays
+		(const TCoords, Overlay_Info * const overlays) const;
 
       void show_buildhelp(bool t) { m_showbuildhelp= t; }
       void toggle_buildhelp(void) { m_showbuildhelp=!m_showbuildhelp; }
 
 	void recalc_field_overlays(const FCoords, const FCoords * const neighbours);
 
-      // Road overlays are registered like normal overlays and removed like normal overlays
-      // but they use are handled internally completly different. When a road overlay information is requested
-      // the same data as for a field is returned (a uchar which needs to be ANDed)
-      void register_road_overlay(Coords c, uchar where, int jobid = -1);
-      void remove_road_overlay(Coords c);
-      void remove_road_overlay(int jobid);
-      inline uchar get_road_overlay(Coords& c) {
-         std::map<int, Registered_Road_Overlays>::iterator i=m_road_overlays.find((c.y<<8)+c.x);
-         if(i!=m_road_overlays.end()) return i->second.where;
-         return 0;
-      }
-
-      // functions for border. This could be generalized with "in between overlays"
-      // but there do not exist any more (yet?). For now, handling borders for themself
-      // is ok. this functions are inlined for speed and must be called in a row.
-      // calling them in a different order results in undefined behaviour
-      inline int is_frontier_field(Coords& fc) {
-         // index pointer and m_overlay_basic are invalid
-         m_index_pointer=fc.y*m_w + fc.x;
-         m_overlay_basic = m_overlay_fields[m_index_pointer];
-         if (m_overlay_basic > Overlay_Frontier_Base && m_overlay_basic <= Overlay_Frontier_Max)
-            return (m_overlay_basic - Overlay_Frontier_Base);
-         return 0;
-      }
-      inline uchar draw_border_to_right(Coords& fc) {
-         // index pointer points to field, m_overlay_basic should be valid
-         int index=m_index_pointer;
-         if(fc.x==m_w-1) { index-=fc.x; } else { ++index; } // right neighbour
-         if(m_overlay_fields[index] == m_overlay_basic) return true;
-         return false;
-      }
-      inline uchar draw_border_to_bottom_left(Coords& fc) {
-         // index pointer points to field, m_overlay_basic should be valid
-         m_index_pointer+=m_w; // increase by one row
-         if(fc.y == m_h-1) m_index_pointer=fc.x;
-         if(!(fc.y & 1)) {
-            m_index_pointer-=1;
-            if(fc.x==0) m_index_pointer+=m_w;
-         }
-         if(m_overlay_fields[m_index_pointer] == m_overlay_basic) return true;
-         return false;
-      }
+	//  Road overlays are registered like normal overlays and removed like normal
+	//  overlays but they use are handled internally completly different. When a
+	//  road overlay information is requested the same data as for a field is
+	//  returned (a uchar which needs to be ANDed).
+	void register_road_overlay
+		(const Coords, const uchar where, const int jobid = -1);
+	void remove_road_overlay(const Coords);
+	void remove_road_overlay(const int jobid);
+	uchar get_road_overlay(const Coords c) const {
+		Registered_Road_Overlays_Map::const_iterator it = m_road_overlays.find(c);
+		if (it != m_road_overlays.end()) return it->second.where;
+		return 0;
+	}
 
    private:
       // this is always sorted by (y<<8)+x. a unique coordinate which is sortable
@@ -169,22 +146,11 @@ class Overlay_Manager {
          uchar where;
       };
 
-      enum {
-         Overlay_Frontier_Base = 0,	// add the player number to mark a border field
-         Overlay_Frontier_Max = 15,
+	typedef
+		std::map<const Coords, Registered_Road_Overlays, Coords::ordering_functor>
+		Registered_Road_Overlays_Map;
 
-         Overlay_Build_Flag = 16,
-         Overlay_Build_Small,
-         Overlay_Build_Medium,
-         Overlay_Build_Big,
-         Overlay_Build_Mine,
-
-         Overlay_Build_Min = Overlay_Build_Flag,
-         Overlay_Build_Max = Overlay_Build_Mine,
-      };
-
-      // data
-      std::map<int, Registered_Road_Overlays> m_road_overlays;           // for road overlays
+	Registered_Road_Overlays_Map m_road_overlays;
 
 	typedef
 		std::multimap<const Coords, Registered_Overlays, Coords::ordering_functor>
@@ -193,23 +159,14 @@ class Overlay_Manager {
 	//  indexed by TCoords::TriangleIndex
 	Registered_Overlays_Map m_overlays[3];
 
-      Overlay_Info m_buildhelp_infos[5];              // flag, small, medium, big, mine
+	Overlay_Info m_buildhelp_infos[Field::Buildhelp_None];
       bool m_are_graphics_loaded;
       bool m_showbuildhelp;
-      uchar*	m_overlay_fields;                      // build help
-      int m_w, m_h;
       Overlay_Callback_Function m_callback;           // this callback is used to define we're overlays are set and were not
       // since we only care for map stuff, not for player stuff or editor issues
       void *m_callback_data;
       int m_callback_data_i;
-      int m_cur_jobid;                                // current job id
-      int m_index_pointer;                            // used for frontier drawing
-      uchar m_overlay_basic;                          // used for frontier drawing too
-
-      // functions
-      void load_graphics();
-	unsigned char get_build_overlay
-		(const Coords c, Overlay_Info * const overlays, const int i) const;
+	int m_current_job_id;
 };
 
 

@@ -93,60 +93,31 @@ void Player::init(Editor_Game_Base* game, bool hq)
 
 /*
 ===============
-Player::is_field_owned
-
-Returns true if the field is completely owned by us and _inside_ the player's
-country. This function returns false for border fields.
-===============
-*/
-bool Player::is_field_owned(Coords coords)
-{
-	Map* map = m_egbase->get_map();
-	FCoords fc = map->get_fcoords(coords);
-
-	if (fc.field->get_owned_by() != get_player_number())
-		return 0;
-
-	// Check the neighbours
-	for(int dir = 1; dir <= 6; ++dir) {
-		FCoords neighb;
-
-		map->get_neighbour(fc, dir, &neighb);
-
-		if (neighb.field->get_owned_by() != get_player_number())
-			return false;
-	}
-
-	return true;
-}
-
-
-/*
-===============
 Player::get_buildcaps
 
 Return filtered buildcaps that take the player's territory into account.
 ===============
 */
-int Player::get_buildcaps(Coords coords)
-{
-	FCoords fc = m_egbase->get_map()->get_fcoords(coords);
-	int buildcaps = fc.field->get_caps();
+FieldCaps Player::get_buildcaps(const Coords coords) const {
+	const Map & map = *m_egbase->get_map();
+	const FCoords fc = map.get_fcoords(coords);
+	uchar buildcaps = fc.field->get_caps();
+	const uchar player_number = m_plnum;
 
-	if (!is_field_owned(coords))
-		return 0;
+	if (fc.field->get_owner_info().all != player_number) buildcaps = 0;
 
 	// Check if a building's flag can't be build due to ownership
-	if (buildcaps & BUILDCAPS_BUILDINGMASK) {
-		Coords flagcoords;
-
-		m_egbase->get_map()->get_brn(coords, &flagcoords);
-
-		if (!is_field_owned(flagcoords))
+	else if (buildcaps & BUILDCAPS_BUILDINGMASK) {
+		FCoords flagcoords;
+		map.get_brn(fc, &flagcoords);
+		if (flagcoords.field->get_owner_info().all != player_number)
 			buildcaps &= ~BUILDCAPS_BUILDINGMASK;
 	}
 
-	return buildcaps;
+	if (coords.x == 17 and coords.y == 17) log
+		("Player::get_buildcaps: (%i, %i): buildcaps = %i\n",
+		 coords.x, coords.y, buildcaps);
+	return static_cast<const FieldCaps>(buildcaps);
 }
 
 

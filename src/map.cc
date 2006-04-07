@@ -150,6 +150,23 @@ Map::~Map()
    }
 }
 
+void Map::recalc_border(const FCoords fc) {
+	const uchar owner = fc.field->get_owned_by();
+	if (owner) {
+		//  A node that is owned by a player and has a neighbour that is not owned
+		//  by that player is a border node.
+		for (uchar i = 1; i <= 6; ++i) {
+			FCoords neighbour;
+			get_neighbour(fc, i, &neighbour);
+			if (neighbour.field->get_owned_by() != owner) {
+				fc.field->set_border(true);
+				return; //  Do not calculate further if there is a border.
+			}
+		}
+	}
+	fc.field->set_border(false);
+}
+
 /*
 ===============
 Map::recalc_for_field_area
@@ -174,6 +191,7 @@ void Map::recalc_for_field_area(Coords coords, int radius)
 
    while(mr.next(&c)) {
       recalc_brightness(c);
+      recalc_border(c);
       recalc_fieldcaps_pass1(c);
    }
 
@@ -223,6 +241,7 @@ void Map::recalc_whole_map(void)
          f = get_fcoords(Coords(x, y));
          check_neighbour_heights(f,&area);
          recalc_brightness(f);
+         recalc_border(f);
          recalc_fieldcaps_pass1(f);
       }
    }
@@ -369,7 +388,7 @@ void Map::cleanup(void) {
    m_scenario_names.clear();
 
    if(m_overlay_manager)
-      m_overlay_manager->cleanup();
+      m_overlay_manager->reset();
 
    delete m_mom;
    m_mom = new MapObjectiveManager();
@@ -451,12 +470,7 @@ void Map::set_size(const uint w, const uint h)
 	m_pathfields = (Pathfield*)malloc(sizeof(Pathfield)*w*h);
 	memset(m_pathfields, 0, sizeof(Pathfield)*w*h);
 
-   if(!m_overlay_manager) {
-      m_overlay_manager=new Overlay_Manager(w,h);
-   } else {
-      m_overlay_manager->init(w,h);
-   }
-
+	if (not m_overlay_manager) m_overlay_manager = new Overlay_Manager();
 }
 
 /*
@@ -1026,7 +1040,7 @@ above recalc_brightness.
 */
 void Map::recalc_fieldcaps_pass1(FCoords f)
 {
-   f.field->caps = 0;
+   uchar caps = CAPS_NONE;
 
 
    // 1a) Get all the neighbours to make life easier
@@ -1040,9 +1054,9 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
    get_brn(f, &brn);
 
    // 1b) Collect some information about the neighbours
-   int cnt_unpassable = 0;
-   int cnt_water = 0;
-   int cnt_acid = 0;
+	uchar cnt_unpassable = 0;
+	uchar cnt_water = 0;
+	uchar cnt_acid = 0;
 
    if (f.field->get_terr()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
    if (f.field->get_terd()->get_is() & TERRAIN_UNPASSABLE) cnt_unpassable++;
@@ -1071,17 +1085,17 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
    // 2a) If any of the neigbouring triangles is walkable this field is
    //     walkable.
    if (cnt_unpassable < 6)
-      f.field->caps |= MOVECAPS_WALK;
+      caps |= MOVECAPS_WALK;
 
    // 2b) If all neighbouring triangles are water, the field is swimable
    if (cnt_water == 6)
-      f.field->caps |= MOVECAPS_SWIM;
+      caps |= MOVECAPS_SWIM;
 
 
    // 2c) [OVERRIDE] If any of the neighbouring triangles is really
    //     "bad" (such as lava), we can neither walk nor swim to this field.
    if (cnt_acid)
-      f.field->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+      caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 
    // === everything below is used to check buildability ===
 
@@ -1094,21 +1108,23 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
    {
       // 3b) [OVERRIDE] check for "unpassable" Map_Objects
       if (!imm->get_passable())
-         f.field->caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
-      return;
+         caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+      goto end;
    }
 
    // 4) Flags
    //    We can build flags on anything that's walkable and buildable, with some
    //    restrictions
-   if (f.field->caps & MOVECAPS_WALK)
+   if (caps & MOVECAPS_WALK)
    {
       // 4b) Flags must be at least 1 field apart
       if (find_immovables(f, 1, 0, FindImmovableType(Map_Object::FLAG))) {
-         return;
+         goto end;
       }
-      f.field->caps |= BUILDCAPS_FLAG;
+      caps |= BUILDCAPS_FLAG;
    }
+end:
+	f.field->caps = static_cast<const FieldCaps>(caps);
 }
 
 
@@ -1181,25 +1197,32 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	if (tln.field->get_terr()->get_is() & TERRAIN_DRY) cnt_dry++;
 	if (trn.field->get_terd()->get_is() & TERRAIN_DRY) cnt_dry++;
 
+	uchar caps = f.field->caps;
+
 	// 2) We can only build something on fields that are
 	//     - walkable
 	//     - have no water triangles next to them
 	//     - are not blocked by "robust" Map_Objects
 	BaseImmovable *immovable = get_immovable(f);
 
-	if (!(f.field->caps & MOVECAPS_WALK) ||
-	    cnt_water ||
-	    (immovable && immovable->get_size() >= BaseImmovable::SMALL))
-		return;
+	if
+		(not (caps & MOVECAPS_WALK)
+		 or
+	    cnt_water
+		 or
+	    (immovable and immovable->get_size() >= BaseImmovable::SMALL))
+		goto end;
 
 	// 3) We can only build something if there is a flag on the bottom-right neighbour
 	//    (or if we could build a flag on the bottom-right neighbour)
 	//
 	// NOTE: This dependency on the bottom-right neighbour is the reason why the caps
 	// calculation is split into two passes
-	if (!(brn.field->caps & BUILDCAPS_FLAG) &&
-	    !find_immovables(brn, 0, 0, FindImmovableType(Map_Object::FLAG)))
-		return;
+	if
+		(not (brn.field->caps & BUILDCAPS_FLAG)
+		 and
+	    not find_immovables(brn, 0, 0, FindImmovableType(Map_Object::FLAG)))
+		goto end;
 
 	// === passability and flags allow us to build something beyond this point ===
 
@@ -1212,6 +1235,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	// Small buildings: same as small objects
 	// Medium buildings: allow only medium second-order neighbours
 	// Big buildings:  same as big objects
+	{
 	uchar building = BUILDCAPS_BIG;
 	std::vector<ImmovableFound> objectlist;
 
@@ -1251,7 +1275,7 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 			if (dist == 2)
 				building = BUILDCAPS_SMALL;
 			else
-				return; // can't build buildings next to big objects
+				goto end; // can't build buildings next to big objects
 		}
 	}
 
@@ -1260,13 +1284,13 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	{
 		// 4b) Check the mountain slope
 		if ((int)brn.field->get_height() - f.field->get_height() < 4)
-			f.field->caps |= BUILDCAPS_MINE;
-		return;
+			caps |= BUILDCAPS_MINE;
+		goto end;
 	}
 
 	// 6) Can't build anything if there are mountain or desert triangles next to the field
 	if (cnt_mountain || cnt_dry)
-		return;
+		goto end;
 
 	// 7) Reduce building size based on slope of direct neighbours:
 	//    - slope >= 4: can't build anything here -> return
@@ -1274,29 +1298,29 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	int slope;
 
 	slope = abs((int)tln.field->get_height() - f.field->get_height());
-	if (slope >= 4) return;
+	if (slope >= 4) goto end;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
 
 	slope = abs((int)trn.field->get_height() - f.field->get_height());
-	if (slope >= 4) return;
+	if (slope >= 4) goto end;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
 
 	slope = abs((int)rn.field->get_height() - f.field->get_height());
-	if (slope >= 4) return;
+	if (slope >= 4) goto end;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
 
 	// Special case for bottom-right neighbour (where our flag is)
 	// Is this correct?
    // Yep, it is - Holger
 	slope = abs((int)brn.field->get_height() - f.field->get_height());
-	if (slope >= 2) return;
+	if (slope >= 2) goto end;
 
 	slope = abs((int)bln.field->get_height() - f.field->get_height());
-	if (slope >= 4) return;
+	if (slope >= 4) goto end;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
 
 	slope = abs((int)ln.field->get_height() - f.field->get_height());
-	if (slope >= 4) return;
+	if (slope >= 4) goto end;
 	if (slope >= 3) building = BUILDCAPS_SMALL;
 
 	// 8) Reduce building size based on height diff. of second order neighbours
@@ -1351,8 +1375,10 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	get_rn(trn, &sec);
 	if (abs((int)sec.field->get_height() - f.field->get_height()) >= 3) building = BUILDCAPS_SMALL;
 
-	// 9) That's it, store the collected information
-	f.field->caps |= building;
+	caps |= building;
+	}
+end: //  9) That's it, store the collected information.
+	f.field->caps = static_cast<const FieldCaps>(caps);
 }
 
 

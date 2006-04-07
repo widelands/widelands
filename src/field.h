@@ -37,6 +37,7 @@
 // change much, it's just a question of style and code understanding)
 
 enum FieldCaps {
+	CAPS_NONE = 0,
 	/** can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary masking)*/
 	BUILDCAPS_SMALL = 1,
 	BUILDCAPS_MEDIUM = 2,
@@ -58,14 +59,14 @@ enum FieldCaps {
 
 	/** Can Map_Objects walk or swim here? Also used for Map_Object::get_movecaps()
 	 * If MOVECAPS_WALK, any walking being can walk to this field*/
-	MOVECAPS_WALK = 64,
+	MOVECAPS_WALK = 32,
 
 	/** If MOVECAPS_SWIM, any swimming being (including ships) can go there
 	* Additionally, swimming beings can temporarily visit fields that are walkable
 	* but not swimmable if those fields are at the start or end of their path.
 	* Without this clause, harbours would be kind of impossible ;)
 	* This clause stops ducks from "swimwalking" along the coast*/
-	MOVECAPS_SWIM = 128,
+	MOVECAPS_SWIM = 64,
 };
 
 enum Roads {
@@ -93,18 +94,35 @@ class Field {
 	friend class Bob;
 	friend class BaseImmovable;
 
+public:
+	union Owner_Info {
+		uchar all;
+		struct {
+			uchar owner_number : 7; /** 0 = neutral; otherwise: player number*/
+			bool  is_border    : 1;
+		} parts;
+		bool operator==(const Owner_Info other) const {return all == other.all;}
+	};
+
+	enum Buildhelp_Index {
+		Buildhelp_Flag   = 0,
+		Buildhelp_Small  = 1,
+		Buildhelp_Medium = 2,
+		Buildhelp_Big    = 3,
+		Buildhelp_Mine   = 4,
+		Buildhelp_None   = 5
+	};
+
 private:
    uchar height;
 	char   brightness;
 
-	/** what can we build here, who can walk here [8 bits used]*/
-	uchar caps;
+	FieldCaps       caps                    : 7;
+	Buildhelp_Index buildhelp_overlay_index : 3;
+	uchar           roads                   : 6;
 
-	/** 0 = neutral; otherwise: player number*/
-	uchar owned_by;
+	Owner_Info owner_info;
 
-	/** are any roads on this field? [6 bits used]*/
-	uchar roads;
 	uchar m_resources;
 
 	/** how much has there been*/
@@ -118,7 +136,7 @@ private:
 
 public:
    inline uchar get_height() const { return height; }
-	inline uchar get_caps() const { return caps; }
+	FieldCaps get_caps() const {return caps;}
 
    inline Terrain_Descr *get_terr() const { return terr; }
    inline Terrain_Descr *get_terd() const { return terd; }
@@ -131,8 +149,15 @@ public:
 	void set_brightness(int l, int r, int tl, int tr, int bl, int br);
    inline char get_brightness() const { return brightness; }
 
-   inline void set_owned_by(uint pln) { owned_by = pln; }
-   inline uchar get_owned_by(void) { return owned_by; }
+	void set_owned_by(const uchar n) {owner_info.parts.owner_number = n;}
+	uchar get_owned_by() const {return owner_info.parts.owner_number;}
+	Owner_Info get_owner_info() const {return owner_info;}
+	bool is_border() const {return owner_info.parts.is_border;}
+	void set_border(const bool b) {owner_info.parts.is_border = b;}
+
+	uchar get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
+	void set_buildhelp_overlay_index(const Buildhelp_Index i)
+	{buildhelp_overlay_index = i;}
 
 	inline int get_roads() const { return roads; }
 	inline int get_road(int dir) const { return (roads >> dir) & Road_Mask; }

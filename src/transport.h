@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,7 +72,7 @@ typedef std::vector<Neighbour> Neighbour_list;
  */
 class WareInstance : public Map_Object {
    friend class Widelands_Map_Waredata_Data_Packet;
-   
+
 public:
 	WareInstance(int, Item_Ware_Descr*);
 	~WareInstance();
@@ -134,8 +134,8 @@ class Flag : public PlayerImmovable {
 	friend class Economy;
 	friend class FlagQueue;
    friend class Widelands_Map_Ware_Data_Packet; // has to look at pending items
-   friend class Widelands_Map_Waredata_Data_Packet; // has to look at pending items 
-   friend class Widelands_Map_Flagdata_Data_Packet; // has to read/write this to a file 
+   friend class Widelands_Map_Waredata_Data_Packet; // has to look at pending items
+   friend class Widelands_Map_Flagdata_Data_Packet; // has to read/write this to a file
 
 private:
 	struct PendingItem {
@@ -196,7 +196,8 @@ protected:
 	virtual void cleanup(Editor_Game_Base*);
 	virtual void destroy(Editor_Game_Base*);
 
-	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 	void wake_up_capacity_queue(Game* g);
 
@@ -248,8 +249,8 @@ private:
  * PlayerImmovable.
  */
 class Road : public PlayerImmovable {
-   friend class Widelands_Map_Roaddata_Data_Packet; // For saving 
-   friend class Widelands_Map_Road_Data_Packet; // For init() 
+   friend class Widelands_Map_Roaddata_Data_Packet; // For saving
+   friend class Widelands_Map_Road_Data_Packet; // For init()
 
 public:
 	enum FlagId {
@@ -297,7 +298,8 @@ protected:
 	void request_carrier(Game* g);
 	static void request_carrier_callback(Game* g, Request* rq, int ware, Worker* w, void* data);
 
-	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords, Point pos);
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 private:
 	int		m_type;			// use Field::Road_XXX
@@ -321,7 +323,7 @@ class Route {
 	friend class Economy;
    friend class Request;
    friend class Widelands_Map_Bobdata_Data_Packet; // This is in the state structure
-   
+
 public:
 	Route();
 
@@ -366,7 +368,7 @@ public:
 	bool is_idle() const { return m_idle; }
 
 	void set_idle(bool idle);
-      
+
 public: // called by the controlled ware or worker
 	PlayerImmovable* get_next_step(PlayerImmovable* location, bool* psuccess);
 	void has_finished();
@@ -411,13 +413,13 @@ private:
 /**
  * A Supply is a virtual base class representing something that can offer
  * wares of any type for any purpose.
- * 
+ *
  * Subsequent calls to get_position() can return different results.
  * If a Supply is "active", it should be transferred to a possible Request
  * quickly. Basically, supplies in warehouses (or unused supplies that are
  * being carried into a warehouse) are inactive, and supplies that are just
  * sitting on a flag are active.
- * 
+ *
  * Important note: The implementation of Supply is responsible for adding
  * and removing itself from Economies. This rule holds true for Economy
  * changes.
@@ -460,11 +462,11 @@ private:
 
 /**
  * A Request is issued whenever some object (road or building) needs a ware.
- * 
+ *
  * Requests are always created and destroyed by their owner, i.e. the target
  * player immovable. The owner is also responsible for calling set_economy()
  * when its economy changes.
- * 
+ *
  * Idle Requests need not be fulfilled; however, when there's a matching Supply
  * left, a transfer may be initiated.
  * The required time has no meaning for idle requests.
@@ -504,7 +506,7 @@ public:
 	void set_required_interval(int interval);
 
 	void start_transfer(Game *g, Supply* supp);
-   
+
 
    // For savegames
    void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
@@ -586,7 +588,7 @@ public:
 	void set_consume_interval(int time);
 
    Player* get_owner(void) { return m_owner->get_owner(); }
-   
+
    // For savegames
    void Write(FileWrite*, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
    void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);
@@ -634,7 +636,7 @@ public:
 
 	void add_wares(int id, int count = 1);
 	void remove_wares(int id, int count = 1);
-	
+
    void add_workers(int id, int count = 1);
 	void remove_workers(int id, int count = 1);
 
@@ -649,7 +651,7 @@ public:
 	void add_ware_supply(int ware, Supply* supp);
 	bool have_ware_supply(int ware, Supply* supp);
 	void remove_ware_supply(int ware, Supply* supp);
-	
+
 	void add_worker_supply(int worker, Supply* supp);
 	bool have_worker_supply(int worker, Supply* supp);
 	void remove_worker_supply(int worker, Supply* supp);
@@ -709,19 +711,19 @@ private:
 
 class Cmd_Call_Economy_Balance : public BaseCommand {
    public:
-      Cmd_Call_Economy_Balance (void) : BaseCommand (0) { } // For load and save 
+      Cmd_Call_Economy_Balance (void) : BaseCommand (0) { } // For load and save
 
       Cmd_Call_Economy_Balance (int starttime, int player, Economy* economy) :
          BaseCommand(starttime)
-      {  
+      {
          m_player=player;
          m_economy=economy;
          m_force_balance = false;
-      }     
+      }
 
       void execute (Game* g);
 
-      virtual int get_id(void) { return QUEUE_CMD_CALL_ECONOMY_BALANCE; } 
+      virtual int get_id(void) { return QUEUE_CMD_CALL_ECONOMY_BALANCE; }
 
       virtual void Write(FileWrite* fw, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*);
       virtual void Read(FileRead*, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*);

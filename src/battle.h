@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by The Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
  */
 #ifndef __S__WIDELANDS_BATTLE__H__
 #define __S__WIDELANDS_BATTLE__H__
- 
+
 #include "immovable.h"
 #include "soldier.h"
 
@@ -33,14 +33,16 @@ class Battle : public BaseImmovable
       virtual int get_type () { return BATTLE; }
       virtual int get_size () { return SMALL; }
       virtual bool get_passable () { return false; }
-      virtual void draw (Editor_Game_Base* eg, RenderTarget* rt, FCoords f, Point p) { }
-      
+      virtual void draw
+         (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
+      {}
+
       void init (Editor_Game_Base*);
       void init (Editor_Game_Base*, Soldier*, Soldier*);
       void soldiers (Soldier*, Soldier*);
       virtual void cleanup (Editor_Game_Base*);
       virtual void act (Game*, uint);
-      
+
    private:
       Soldier* m_first;
       Soldier* m_second;

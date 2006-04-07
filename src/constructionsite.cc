@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ etc...
 void ConstructionSite_Descr::parse(const char* directory, Profile* prof, const EncodeData* encdata)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
-	
+
    Building_Descr::parse(directory, prof, encdata);
 
 	// TODO
@@ -144,9 +144,9 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 
    molog("m_building: %p\n", m_building);
    molog("* m_building (name): %s\n", m_building->get_name());
-   molog("m_prev_building: %p\n", m_prev_building); 
+   molog("m_prev_building: %p\n", m_prev_building);
    if(m_prev_building)
-      molog("* m_prev_building (name): %s\n", m_prev_building->get_name()); 
+      molog("* m_prev_building (name): %s\n", m_prev_building->get_name());
 
    molog("m_builder_request: %p\n", m_builder_request);
    molog("m_builder: %p\n", m_builder);
@@ -157,7 +157,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
 	molog("m_work_steptime: %i\n", m_work_steptime);
 	molog("m_work_completed: %i\n", m_work_completed);
 	molog("m_work_steps: %i\n", m_work_steps);
-	
+
    molog("WaresQueue size: %i\n", m_wares.size());
    for(uint i=0; i<m_wares.size(); i++) {
       molog("Dumping WaresQueue %i/%i\n", i+1, m_wares.size());
@@ -208,7 +208,7 @@ ConstructionSite::get_census_string
 Print the name of the building we build.
 ===============
 */
-std::string ConstructionSite::get_census_string()
+std::string ConstructionSite::get_census_string() const
 {
 	return get_building()->get_descname();
 }
@@ -346,7 +346,7 @@ void ConstructionSite::init(Editor_Game_Base* g)
 		}
 
 		request_builder((Game*)g);
-		
+
 		//TODO: should this fx be played for AI players too?
 		if ( get_owner()->get_type()==Player::playerLocal)
 			g_sound_handler.play_fx("create_construction_site", m_position, 255);
@@ -385,7 +385,7 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		Building* bld = m_building->create(g, get_owner(), m_position, false);
 		bld->set_stop(get_stop());
 		// Walk the builder home safely
-      if(g->get_objects()->object_still_available(m_builder)) { 
+      if(g->get_objects()->object_still_available(m_builder)) {
          m_builder->reset_tasks((Game*)g);
          m_builder->set_location(bld);
          m_builder->start_task_gowarehouse((Game*)g);
@@ -555,15 +555,20 @@ ConstructionSite::draw
 Draw the construction site.
 ===============
 */
-void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coords, Point pos)
+void ConstructionSite::draw
+(const Editor_Game_Base & game,
+ RenderTarget & dst,
+ const FCoords coords,
+ const Point pos)
 {
-   uint tanim = g->get_gametime() - m_animstart;
+	const int gametime = game.get_gametime();
+	uint tanim = gametime - m_animstart;
 
 	if (coords != m_position)
 		return; // draw big buildings only once
 
 	// Draw the construction site marker
-	dst->drawanim(pos.x, pos.y, m_anim, tanim, get_owner());
+	dst.drawanim(pos.x, pos.y, m_anim, tanim, get_owner());
 
 	// Draw the partially finished building
 	int totaltime;
@@ -576,7 +581,7 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 	completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
 
 	if (m_working)
-		completedtime += CONSTRUCTIONSITE_STEP_TIME + g->get_gametime() - m_work_steptime;
+		completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 
 	anim = get_building()->get_animation("build");
    int nr_pics=g_gr->get_animation_nr_frames(anim);
@@ -591,7 +596,8 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
 
    // NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
    if(anim_pic) // not the first pic
-      dst->drawanim(pos.x, pos.y, anim, tanim-FRAME_LENGTH, get_owner()); // draw the prev pic completly
+      // draw the prev pic completly
+      dst.drawanim(pos.x, pos.y, anim, tanim - FRAME_LENGTH, get_owner());
 
    if(!anim_pic && m_prev_building) {
       // Is the first building, but there was another building here before,
@@ -601,11 +607,12 @@ void ConstructionSite::draw(Editor_Game_Base* g, RenderTarget* dst, FCoords coor
       int nr_pics=g_gr->get_animation_nr_frames(anim);
       g_gr->get_animation_size(anim, tanim, &w, &h);
       int tanim = (nr_pics-1)*FRAME_LENGTH;
-      dst->drawanim(pos.x, pos.y, anim, tanim, get_owner());
+      dst.drawanim(pos.x, pos.y, anim, tanim, get_owner());
    }
 
-	dst->drawanimrect(pos.x, pos.y, anim, tanim, get_owner(), 0, h-lines, w, lines);
+	dst.drawanimrect
+		(pos.x, pos.y, anim, tanim, get_owner(), 0, h - lines, w, lines);
 
 	// Draw help strings
-	draw_help(g, dst, coords, pos);
+	draw_help(game, dst, coords, pos);
 }

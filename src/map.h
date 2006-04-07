@@ -242,6 +242,10 @@ public:
 		 const FindField &);
 
 	// Field logic
+	typedef uint Index;
+	static Index get_index(const Coords c, const uint width);
+	Index get_index(const FCoords c) {return c.field - m_fields;}
+	Field * get_field(const Index) const;
 	Field * get_field(const Coords) const;
 	const Field & get_field(const uint x, const uint y) const;
 	FCoords get_fcoords(const Coords) const;
@@ -319,6 +323,7 @@ public:
 private:
 	void set_size(const uint w, const uint h);
 	void load_world();
+	void recalc_border(const FCoords);
 
 	uint		m_nrplayers;		// # of players this map supports (!= Game's number of players)
 	uint		m_width;
@@ -644,10 +649,13 @@ Field arithmetics
 ==============================================================================
 */
 
+inline Map::Index Map::get_index(const Coords c, const uint width)
+{return c.y * width + c.x;}
+
+inline Field * Map::get_field(const Index i) const {return &m_fields[i];}
+
 inline Field * Map::get_field(const Coords c) const
-{
-	return &m_fields[c.y*m_width + c.x];
-}
+{return get_field(get_index(c, m_width));}
 
 inline const Field & Map::get_field(const uint x, const uint y) const
 {return m_fields[y * m_width + x];}

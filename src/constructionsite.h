@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,7 @@ public:
 	virtual int get_size();
 	virtual uint get_playercaps();
 	virtual uint get_ui_anim();
-   virtual std::string get_census_string();
+	virtual std::string get_census_string() const;
 	virtual std::string get_statistics_string();
 	uint get_built_per64k();
 
@@ -90,7 +90,7 @@ public:
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
    void log_general_info(Editor_Game_Base* egbase);
-      
+
 protected:
 	virtual UIWindow* create_options_window(Interactive_Player* plr,
 		UIWindow** registry);
@@ -101,8 +101,8 @@ protected:
 	static void wares_queue_callback(Game* g, WaresQueue* wq, int ware,
 		void* data);
 
-	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords,
-		Point pos);
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 private:
 	Building_Descr* m_building; // type of building that is being built

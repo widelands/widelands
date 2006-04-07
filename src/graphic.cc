@@ -556,46 +556,19 @@ void RenderTargetImpl::tile(int x, int y, int w, int h, uint picture, int ofsx, 
 		}
 }
 
-/*
-===============
-draw_overlays
 
-Draw build help, frontier and registered overlays
-===============
-*/
-static void draw_overlays(RenderTargetImpl* dst, Editor_Game_Base* egbase, const std::vector<bool>* visibility, FCoords fc, Point pos,
-                 FCoords fcr, Point posr, FCoords fcbl, Point posbl, FCoords fcbr, Point posbr)
-{
-	// Render frontier
-   uchar player;
-   if((player=egbase->get_map()->get_overlay_manager()->is_frontier_field(fc))) {
-      Player *ownerplayer = egbase->get_player(player);
-      uint anim = ownerplayer->get_tribe()->get_frontier_anim();
+inline void move_r(const uint mapwidth, FCoords & f) {
+	++f.x;
+	++f.field;
+	if (static_cast<uint>(f.x) == mapwidth) {f.x = 0; f.field -= mapwidth;}
+}
 
-      dst->drawanim(pos.x, pos.y, anim, 0, ownerplayer);
-
-      // check to the right
-      if(egbase->get_map()->get_overlay_manager()->draw_border_to_right(fc))
-         dst->drawanim((pos.x+posr.x)/2, (pos.y+posr.y)/2, anim, 0, ownerplayer);
-      // check to the bottom left
-      if(egbase->get_map()->get_overlay_manager()->draw_border_to_bottom_left(fc))
-         dst->drawanim((pos.x+posbl.x)/2, (pos.y+posbl.y)/2, anim, 0, ownerplayer);
-      // check to the bottom right
-      if(egbase->get_map()->get_overlay_manager()->draw_border_to_right(fcbl))
-         dst->drawanim((pos.x+posbr.x)/2, (pos.y+posbr.y)/2, anim, 0, ownerplayer);
-   }
-
-	// Draw normal buildhelp
-   Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_FIELD];
-   int num_overlays=egbase->get_map()->get_overlay_manager()->get_overlays(fc, overlay_info);
-
-   int i;
-   for(i=0; i<num_overlays; i++) {
-      int x = pos.x - overlay_info[i].hotspot_x;
-      int y = pos.y - overlay_info[i].hotspot_y;
-
-      dst->blit(x,y,overlay_info[i].picid);
-   }
+inline void move_r(const uint mapwidth, FCoords & f, Map::Index & i) {
+	++f.x;
+	++f.field;
+	++i;
+	if (static_cast<uint>(f.x) == mapwidth)
+	{f.x = 0; f.field -= mapwidth; i -= mapwidth;}
 }
 
 
@@ -612,7 +585,11 @@ to be redrawn or only the aniamted once. If no animation took place, the ground 
 redrawn at all.
 ===============
 */
-void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Point viewofs, bool draw_all)
+void RenderTargetImpl::rendermap
+(const Editor_Game_Base & egbase,
+ const std::vector<bool> * const visibility,
+ Point viewofs,
+ const bool draw_all)
 {
    // Check if we have the ground surface set up
    if( !m_ground_surface ) {
@@ -628,9 +605,10 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 	// Actually draw the map. Loop through fields row by row
 	// For each field, draw ground textures, then roads, then immovables
 	// (and borders), then bobs, then overlay stuff (build icons etc...)
-	//Player *player = m_player->get_player();
-	Map* map = egbase->get_map();
-	int mapwidth = map->get_width();
+
+	const Map & map = egbase.get_map();
+	const Overlay_Manager & overlay_manager = map.get_overlay_manager();
+	const uint mapwidth = map.get_width();
 	int minfx, minfy;
 	int maxfx, maxfy;
 
@@ -646,180 +624,188 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 	int dy = maxfy - minfy + 1;
    int linear_fy = minfy;
 	bool row_is_forward = linear_fy & 1;
+	int b_posy = linear_fy * TRIANGLE_HEIGHT - viewofs.y;
 
 	while(dy--) {
-		int linear_fx = minfx;
-		FCoords f, bl, tl;
-		int posx, posy;
-		int blposx, bposy;
-		int tlposx, tposy;
-
-		// Use linear (non-wrapped) coordinates to calculate on-screen pos
-		MapviewPixelFunctions::get_basepix
-			(Coords(linear_fx, linear_fy), posx, posy);
-		posx -= viewofs.x;
-		posy -= viewofs.y;
-
-		// Get linear bottom-left coordinate
-		bl.y = linear_fy+1;
-		bl.x = linear_fx - (bl.y&1);
-
-		MapviewPixelFunctions::get_basepix(bl, blposx, bposy);
-		blposx -= viewofs.x;
-		bposy -= viewofs.y;
-
-		// Get linear top-left coordinates
-		tl.y = linear_fy-1;
-		tl.x = linear_fx - (tl.y&1);
-
-		MapviewPixelFunctions::get_basepix(tl, tlposx, tposy);
-		tlposx -= viewofs.x;
-		tposy -= viewofs.y;
+		const int posy = b_posy;
+		b_posy += TRIANGLE_HEIGHT;
+		const int linear_fx = minfx;
+		FCoords r(linear_fx, linear_fy);
+		FCoords br(linear_fx - (not row_is_forward), linear_fy + 1);
+		int r_posx =
+			r.x * TRIANGLE_WIDTH
+			+
+			row_is_forward * (TRIANGLE_WIDTH / 2)
+			-
+			viewofs.x;
+		int br_posx = r_posx - TRIANGLE_WIDTH / 2;
 
 		// Calculate safe (bounded) field coordinates and get field pointers
-		f.x = linear_fx;
-		f.y = linear_fy;
-		map->normalize_coords(&f);
-		map->normalize_coords(&bl);
-		map->normalize_coords(&tl);
+		map.normalize_coords(&r);
+		map.normalize_coords(&br);
+		Map::Index r_index = Map::get_index(r, mapwidth);
+		r.field = map.get_field(r_index);
+		Map::Index br_index = Map::get_index(br, mapwidth);
+		br.field = map.get_field(br_index);
+		FCoords tr, f;
+		map.get_tln(r, &tr);
+		map.get_ln(r, &f);
 
-		f.field = map->get_field(f);
-		bl.field = map->get_field(bl);
-		tl.field = map->get_field(tl);
-
-		int count = dx;
-		while(count--) {
-			FCoords br, r, l, tr;
-			int rposx, brposx, lposx, trposx;
-			uchar darken=0;
-
-			map->get_rn(f, &r);
-			rposx = posx + TRIANGLE_WIDTH;
-
-			map->get_ln(f, &l);
-			lposx = posx - TRIANGLE_WIDTH;
-
-			map->get_rn(bl, &br);
-			brposx = blposx + TRIANGLE_WIDTH;
-
-			map->get_rn(tl, &tr);
-			trposx = tlposx + TRIANGLE_WIDTH;
-
-			if (visibility) {
-				if (!(*visibility)[f.y*mapwidth + f.x]) darken|=1;
-				if (!(*visibility)[r.y*mapwidth + r.x]) darken|=2;
-				if (!(*visibility)[bl.y*mapwidth + bl.x]) darken|=4;
-				if (!(*visibility)[br.y*mapwidth + br.x]) darken|=8;
-			}
-
-			// Render ground
-			uchar roads = f.field->get_roads();
-
-			roads |= egbase->get_map()->get_overlay_manager()->get_road_overlay(f);
-
-			m_ground_surface->draw_field(m_rect, f.field, r.field, bl.field, br.field, l.field, tr.field,
-				posx, rposx, posy, blposx, brposx, bposy, roads, darken, draw_all);
-
-			// Advance to next field in row
-			bl = br;
-			blposx = brposx;
-
+		uint count = dx;
+		while (count--) {
+			const Map::Index f_index = r_index, bl_index = br_index;
+			const FCoords l = f, bl = br;
 			f = r;
-			posx = rposx;
+			const int f_posx = r_posx, bl_posx = br_posx;
+			move_r(mapwidth, tr);
+			move_r(mapwidth,  r,  r_index);
+			move_r(mapwidth, br, br_index);
+			r_posx  += TRIANGLE_WIDTH;
+			br_posx += TRIANGLE_WIDTH;
 
-			tl = tr;
-			tlposx = trposx;
+			uchar darken = 0;
+			if (visibility) {
+				if (not (*visibility) [f_index]) darken |= 1;
+				if (not (*visibility) [r_index]) darken |= 2;
+				if (not (*visibility)[bl_index]) darken |= 4;
+				if (not (*visibility)[br_index]) darken |= 8;
+			}
+			const uchar roads =
+				f.field->get_roads() | overlay_manager.get_road_overlay(f);
+
+			m_ground_surface->draw_field //  Render ground
+				(m_rect, f.field, r.field, bl.field, br.field, l.field, tr.field,
+				 f_posx, r_posx, posy, bl_posx, br_posx, b_posy,
+				 roads, darken, draw_all);
 		}
 
-		linear_fy++;
+		++linear_fy;
 		row_is_forward = not row_is_forward;
 	}
 
    // Copy ground where it belongs: on the screen
-
    m_surface->blit(Point( m_rect.x, m_rect.y), m_ground_surface, m_rect);
 
-	//  should be const, but see comment in Overlay_Manager::get_overlays
-	Overlay_Manager & overlay_manager = *map->get_overlay_manager();
-
 	{
-		int dx = maxfx - minfx + 1;
+		const int dx = maxfx - minfx + 1;
 		int dy = maxfy - minfy + 1;
 		int linear_fy = minfy;
 		bool row_is_forward = linear_fy & 1;
+		int b_posy = linear_fy * TRIANGLE_HEIGHT - viewofs.y;
 
 		while(dy--) {
+			const int posy = b_posy;
+			b_posy += TRIANGLE_HEIGHT;
+
 			{//  Draw things on the node.
-
-				int linear_fx = minfx;
-				FCoords f, bl, tl;
-				int posx, posy;
-				int blposx, bposy;
-				int tlposx, tposy;
-
-				// Use linear (non-wrapped) coordinates to calculate on-screen pos
-				MapviewPixelFunctions::get_basepix
-					(Coords(linear_fx, linear_fy), posx, posy);
-				posx -= viewofs.x;
-				posy -= viewofs.y;
-
-				// Get linear bottom-left coordinate
-				bl.y = linear_fy+1;
-				bl.x = linear_fx - (bl.y&1);
-
-				MapviewPixelFunctions::get_basepix(bl, blposx, bposy);
-				blposx -= viewofs.x;
-				bposy -= viewofs.y;
-
-				// Get linear top-left coordinates
-				tl.y = linear_fy-1;
-				tl.x = linear_fx - (tl.y&1);
-
-				MapviewPixelFunctions::get_basepix(tl, tlposx, tposy);
-				tlposx -= viewofs.x;
-				tposy -= viewofs.y;
+				const int linear_fx = minfx;
+				FCoords r(linear_fx, linear_fy);
+				FCoords br(linear_fx - (not row_is_forward), linear_fy + 1);
 
 				// Calculate safe (bounded) field coordinates and get field pointers
-				f.x = linear_fx;
-				f.y = linear_fy;
-				map->normalize_coords(&f);
-				map->normalize_coords(&bl);
-				map->normalize_coords(&tl);
-
-				f.field = map->get_field(f);
-				bl.field = map->get_field(bl);
-				tl.field = map->get_field(tl);
+				map.normalize_coords(&r);
+				map.normalize_coords(&br);
+				Map::Index r_index = Map::get_index(r, mapwidth);
+				r.field = map.get_field(r_index);
+				Map::Index br_index = Map::get_index(br, mapwidth);
+				br.field = map.get_field(br_index);
+				FCoords tr, f;
+				map.get_tln(r, &tr);
+				map.get_ln(r, &f);
+				bool r_is_border;
+				uchar f_owner_number = f.field->get_owner_info().parts.owner_number;
+				uchar r_owner_number;
+				{
+					const Field::Owner_Info r_owner_info = r.field->get_owner_info();
+					r_is_border = r_owner_info.parts.is_border;
+					r_owner_number = r_owner_info.parts.owner_number;
+				}
+				uchar br_owner_number =
+					br.field->get_owner_info().parts.owner_number;
+				bool  r_is_visible = not visibility or (*visibility) [r_index];
+				bool br_is_visible = not visibility or (*visibility)[br_index];
+				Point r_pos
+					(linear_fx * TRIANGLE_WIDTH
+					 +
+					 row_is_forward * (TRIANGLE_WIDTH / 2)
+					 -
+					 viewofs.x,
+					 posy - r.field->get_height() * HEIGHT_FACTOR);
+				Point br_pos
+					(r_pos.x - TRIANGLE_WIDTH / 2,
+					 b_posy - br.field->get_height() * HEIGHT_FACTOR);
 
 				int count = dx;
 				while (count--) {
-					FCoords br, r, l, tr;
-					int rposx, brposx, lposx, trposx;
-					uchar darken=0;
+					const FCoords l = f, bl = br;
+					f = r;
+					move_r(mapwidth, tr);
+					move_r(mapwidth,  r,  r_index);
+					move_r(mapwidth, br, br_index);
+					const uchar tr_owner_number =
+						tr.field->get_owner_info().parts.owner_number;
+					const bool f_is_border = r_is_border;
+					const uchar l_owner_number = f_owner_number;
+					const uchar bl_owner_number = br_owner_number;
+					f_owner_number = r_owner_number;
+					{
+						const Field::Owner_Info r_owner_info =
+							r.field->get_owner_info();
+						r_is_border = r_owner_info.parts.is_border;
+						r_owner_number = r_owner_info.parts.owner_number;
+					}
+					br_owner_number = br.field->get_owner_info().parts.owner_number;
+					const bool f_is_visible = r_is_visible;
+					const bool bl_is_visible = br_is_visible;
+					r_is_visible = not visibility or (*visibility) [r_index];
+					br_is_visible = not visibility or (*visibility)[br_index];
+					const Point f_pos = r_pos, bl_pos = br_pos;
+					r_pos = Point
+						(r_pos.x + TRIANGLE_WIDTH,
+						 posy - r.field->get_height() * HEIGHT_FACTOR);
+					br_pos = Point
+						(br_pos.x + TRIANGLE_WIDTH,
+						 b_posy - br.field->get_height() * HEIGHT_FACTOR);
 
-					map->get_rn(f, &r);
-					rposx = posx + TRIANGLE_WIDTH;
-
-					map->get_ln(f, &l);
-					lposx = posx - TRIANGLE_WIDTH;
-
-					map->get_rn(bl, &br);
-					brposx = blposx + TRIANGLE_WIDTH;
-
-					map->get_rn(tl, &tr);
-					trposx = tlposx + TRIANGLE_WIDTH;
-
-					if (visibility) {
-						if (not (*visibility)[f.y * mapwidth + f.x]) darken |= 1;
-						if (not (*visibility)[r.y * mapwidth + r.x]) darken |= 2;
-						if (not (*visibility)[bl.y * mapwidth + bl.x]) darken |= 4;
-						if (not (*visibility)[br.y * mapwidth + br.x]) darken |= 8;
+					//  Render border markes on and halfway between border nodes.
+					if (f_is_border) {
+						const Player & player = *egbase.get_player(f_owner_number);
+						const uint anim = player.get_tribe()->get_frontier_anim();
+						if (f_is_visible)
+							drawanim(f_pos.x, f_pos.y, anim, 0, &player);
+						if
+							((f_is_visible or r_is_visible)
+							 and
+							 r_owner_number == f_owner_number
+							 and
+							 (tr_owner_number != f_owner_number
+							  or
+							  br_owner_number != f_owner_number))
+							drawanim
+							((f_pos.x +  r_pos.x) / 2, (f_pos.y +  r_pos.y) / 2, anim, 0, &player);
+						if
+							((f_is_visible or bl_is_visible)
+							 and
+							 bl_owner_number == f_owner_number
+							 and
+							 (l_owner_number != f_owner_number
+							  or
+							  br_owner_number != f_owner_number))
+							drawanim
+							((f_pos.x + bl_pos.x) / 2, (f_pos.y + bl_pos.y) / 2, anim, 0, &player);
+						if
+							((f_is_visible or br_is_visible)
+							 and
+							 br_owner_number == f_owner_number
+							 and
+							 (r_owner_number != f_owner_number
+							  or
+							  bl_owner_number != f_owner_number))
+							drawanim
+							((f_pos.x + br_pos.x) / 2, (f_pos.y + br_pos.y) / 2, anim, 0, &player);
 					}
 
-
-					// Render stuff that belongs to the field node
-					if (not visibility or (*visibility)[f.y * mapwidth + f.x]) {
-						Point wh_pos
-							(posx, posy - f.field->get_height() * HEIGHT_FACTOR);
+					if (f_is_visible) { // Render stuff that belongs to the node
 
 						// Render bobs
 						// TODO - rendering order?
@@ -830,207 +816,165 @@ void RenderTargetImpl::rendermap(Editor_Game_Base* egbase, const std::vector<boo
 						//  issues with the current rendering order?
 
 						// Draw Map_Objects hooked to this field
-						BaseImmovable *imm = f.field->get_immovable();
+						BaseImmovable * const imm = f.field->get_immovable();
 
-						assert(egbase);
-
-						if (imm) imm->draw(egbase, this, f, wh_pos);
+						if (imm) imm->draw(egbase, *this, f, f_pos);
 
 						Bob *bob = f.field->get_first_bob();
 						while(bob) {
-							bob->draw(*egbase, *this, wh_pos);
+							bob->draw(egbase, *this, f_pos);
 							bob = bob->get_next_bob();
 						}
 
-						// Draw buildhelp, road buildhelp
-						draw_overlays
-							(this,
-							 egbase,
-							 visibility,
-							 f,
-							 wh_pos,
-							 r,
-							 Point
-							 (rposx, posy - r.field->get_height() * HEIGHT_FACTOR),
-							 bl,
-							 Point
-							 (blposx, bposy - bl.field->get_height() * HEIGHT_FACTOR),
-							 br,
-							 Point
-							 (brposx, bposy - br.field->get_height() * HEIGHT_FACTOR));
-					}
-
-					// Advance to next field in row
-					bl = br;
-					blposx = brposx;
-
-					f = r;
-					posx = rposx;
-
-					tl = tr;
-					tlposx = trposx;
-				}
-				{//  Draw things on the R-triangle.
-					int linear_fx = minfx;
-					FCoords r(linear_fx, linear_fy);
-					FCoords b(linear_fx - (not row_is_forward), linear_fy + 1);
-					int posx =
-						(linear_fx - 1) * TRIANGLE_WIDTH
-						+
-						(row_is_forward + 1) * (TRIANGLE_WIDTH / 2)
-						-
-						viewofs.x;
-
-					//  Calculate safe (bounded) field coordinates.
-					map->normalize_coords(&r);
-					map->normalize_coords(&b);
-
-					//  Get field pointers.
-					r.field = map->get_field(r);
-					b.field = map->get_field(b);
-
-					int count = dx;
-
-					//  One less iteration than for nodes and D-triangles.
-					while (--count) {
-						uchar darken=0;
-
-						const FCoords f = r;
-						map->get_rn(r, &r);
-						map->get_rn(b, &b);
-						posx += TRIANGLE_WIDTH;
-
-						//  FIXME Implement visibility rules for objects on triangles
-						//  FIXME when they are used in the game. The only things that
-						//  FIXME are drawn on triangles now (except the ground) are
-						//  FIXME overlays for the editor terrain tool, and the editor
-						//  FIXME does not need visibility rules.
-#if 0
-						if (0 and visibility) {
-							if (!(*visibility)[f.y*mapwidth + f.x]) darken|=1;
-							if (!(*visibility)[r.y*mapwidth + r.x]) darken|=2;
-							if (!(*visibility)[bl.y*mapwidth + bl.x]) darken|=4;
-							if (!(*visibility)[br.y*mapwidth + br.x]) darken|=8;
-						}
-#endif
-
-						if (1 or !visibility || (*visibility)[f.y*mapwidth + f.x]) {
-							Overlay_Manager::Overlay_Info overlay_info
-								[MAX_OVERLAYS_PER_FIELD];
-							const Overlay_Manager::Overlay_Info * const
-								overlay_info_end =
-								overlay_info
-								+
-								overlay_manager.get_overlays
-								(TCoords(f, TCoords::R), overlay_info);
-							for
-								(const Overlay_Manager::Overlay_Info *
-								 it = overlay_info;
-								 it < overlay_info_end;
-								 ++it)
-							{
-								blit
-									(posx - it->hotspot_x,
-									 posy
-									 +
-									 (TRIANGLE_HEIGHT
-									  -
-									  (f.field->get_height()
-									   +
-									   r.field->get_height()
-									   +
-									   b.field->get_height())
-									  *
-									  HEIGHT_FACTOR)
-									 /
-									 3
-									 -
-									 it->hotspot_y,
-									 it->picid);
-							}
-						}
+						//  Render overlays on nodes.
+						Overlay_Manager::Overlay_Info
+							overlay_info[MAX_OVERLAYS_PER_NODE];
+						const Overlay_Manager::Overlay_Info * const end =
+							overlay_info
+							+
+							overlay_manager.get_overlays(f, overlay_info);
+						for
+							(const Overlay_Manager::Overlay_Info * it = overlay_info;
+							 it < end;
+							 ++it)
+							blit
+							(f_pos.x - it->hotspot_x, f_pos.y - it->hotspot_y,
+							 it->picid);
 					}
 				}
-				{//  Draw things on the D-triangle.
-					int linear_fx = minfx;
-					FCoords f(linear_fx - 1, linear_fy);
-					FCoords br(linear_fx - (not row_is_forward), linear_fy + 1);
-					int posx =
-						(linear_fx - 1) * TRIANGLE_WIDTH
-						+
-						row_is_forward * (TRIANGLE_WIDTH / 2)
-						-
-						viewofs.x;
-
-					//  Calculate safe (bounded) field coordinates.
-					map->normalize_coords(&f);
-					map->normalize_coords(&br);
-
-					//  Get field pointers.
-					f.field = map->get_field(f);
-					br.field = map->get_field(br);
-
-					int count = dx;
-					while (count--) {
-						uchar darken=0;
-
-						const FCoords bl = br;
-						map->get_rn(f, &f);
-						map->get_rn(br, &br);
-						posx += TRIANGLE_WIDTH;
-
-#if 0
-						if (0 and visibility) {
-							if (!(*visibility)[f.y*mapwidth + f.x]) darken|=1;
-							if (!(*visibility)[r.y*mapwidth + r.x]) darken|=2;
-							if (!(*visibility)[bl.y*mapwidth + bl.x]) darken|=4;
-							if (!(*visibility)[br.y*mapwidth + br.x]) darken|=8;
-						}
-#endif
-
-						// Render stuff that belongs to the field node
-						if (1 or !visibility || (*visibility)[f.y*mapwidth + f.x]) {
-							Overlay_Manager::Overlay_Info overlay_info
-								[MAX_OVERLAYS_PER_FIELD];
-							const Overlay_Manager::Overlay_Info * const
-								overlay_info_end =
-								overlay_info
-								+
-								overlay_manager.get_overlays
-								(TCoords(f, TCoords::D), overlay_info);
-							for
-								(const Overlay_Manager::Overlay_Info * it =
-								 overlay_info;
-								 it < overlay_info_end;
-								 ++it)
-							{
-								blit
-									(posx - it->hotspot_x,
-									 posy
-									 +
-									 ((TRIANGLE_HEIGHT * 2)
-									  -
-									  (f.field->get_height()
-									   +
-									   bl.field->get_height()
-									   +
-									   br.field->get_height())
-									  *
-									  HEIGHT_FACTOR)
-									 /
-									 3
-									 -
-									 it->hotspot_y,
-									 it->picid);
-							}
-						}
-					}
-				}
-
-				++linear_fy;
-				row_is_forward = not row_is_forward;
-				posy += TRIANGLE_HEIGHT;
 			}
+			{//  Draw things on the R-triangle.
+				const int linear_fx = minfx;
+				FCoords r(linear_fx, linear_fy);
+				FCoords b(linear_fx - (not row_is_forward), linear_fy + 1);
+				int posx =
+					(linear_fx - 1) * TRIANGLE_WIDTH
+					+
+					(row_is_forward + 1) * (TRIANGLE_WIDTH / 2)
+					-
+					viewofs.x;
+
+				//  Calculate safe (bounded) field coordinates.
+				map.normalize_coords(&r);
+				map.normalize_coords(&b);
+
+				;//  Get field pointers.
+				r.field = map.get_field(r);
+				b.field = map.get_field(b);
+
+				int count = dx;
+
+				;//  One less iteration than for nodes and D-triangles.
+				while (--count) {
+					const FCoords f = r;
+					map.get_rn(r, &r);
+					map.get_rn(b, &b);
+					posx += TRIANGLE_WIDTH;
+
+					//  FIXME Implement visibility rules for objects on triangles
+					//  FIXME when they are used in the game. The only things that
+					//  FIXME are drawn on triangles now (except the ground) are
+					//  FIXME overlays for the editor terrain tool, and the editor
+					//  FIXME does not need visibility rules.
+					{ //  FIXME Visibility check here.
+						Overlay_Manager::Overlay_Info overlay_info
+							[MAX_OVERLAYS_PER_TRIANGLE];
+						const Overlay_Manager::Overlay_Info * const overlay_info_end =
+							overlay_info
+							+
+							overlay_manager.get_overlays
+							(TCoords(f, TCoords::R), overlay_info);
+						for
+							(const Overlay_Manager::Overlay_Info * it = overlay_info;
+							 it < overlay_info_end;
+							 ++it)
+						{
+							blit
+								(posx - it->hotspot_x,
+								 posy
+								 +
+								 (TRIANGLE_HEIGHT
+								  -
+								  (f.field->get_height()
+								   +
+								   r.field->get_height()
+								   +
+								   b.field->get_height())
+								  *
+								  HEIGHT_FACTOR)
+								 /
+								 3
+								 -
+								 it->hotspot_y,
+								 it->picid);
+						}
+					}
+				}
+			}
+			{//  Draw things on the D-triangle.
+				const int linear_fx = minfx;
+				FCoords f(linear_fx - 1, linear_fy);
+				FCoords br(linear_fx - (not row_is_forward), linear_fy + 1);
+				int posx =
+					(linear_fx - 1) * TRIANGLE_WIDTH
+					+
+					row_is_forward * (TRIANGLE_WIDTH / 2)
+					-
+					viewofs.x;
+
+				//  Calculate safe (bounded) field coordinates.
+				map.normalize_coords(&f);
+				map.normalize_coords(&br);
+
+				//  Get field pointers.
+				f.field = map.get_field(f);
+				br.field = map.get_field(br);
+
+				int count = dx;
+				while (count--) {
+					const FCoords bl = br;
+					map.get_rn(f, &f);
+					map.get_rn(br, &br);
+					posx += TRIANGLE_WIDTH;
+
+					{ //  FIXME Visibility check here.
+						Overlay_Manager::Overlay_Info overlay_info
+								[MAX_OVERLAYS_PER_TRIANGLE];
+						const Overlay_Manager::Overlay_Info * const overlay_info_end =
+							overlay_info
+							+
+							overlay_manager.get_overlays
+							(TCoords(f, TCoords::D), overlay_info);
+						for
+							(const Overlay_Manager::Overlay_Info * it = overlay_info;
+							 it < overlay_info_end;
+							 ++it)
+						{
+							blit
+								(posx - it->hotspot_x,
+								 posy
+								 +
+								 ((TRIANGLE_HEIGHT * 2)
+								  -
+								  (f.field->get_height()
+								   +
+								   bl.field->get_height()
+								   +
+								   br.field->get_height())
+								  *
+								  HEIGHT_FACTOR)
+								 /
+								 3
+								 -
+								 it->hotspot_y,
+								 it->picid);
+						}
+					}
+				}
+			}
+
+			++linear_fy;
+			row_is_forward = not row_is_forward;
 		}
 	}
 

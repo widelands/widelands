@@ -79,10 +79,10 @@ public:
 	virtual void load_graphics();
 
 	virtual int get_conquers(void) const { return 0; }
-	
+
    inline Tribe_Descr* get_tribe(void) const { return m_tribe; }
 	Workarea_Info m_workarea_info, m_recursive_workarea_info;
-	
+
 	const BuildingHints* get_hints() const { return m_hints; }
 
 protected:
@@ -134,7 +134,7 @@ public:
       WAREHOUSE,
 		TRAININGSITE
    };
-   
+
 	Building(Building_Descr* descr);
 	virtual ~Building();
 
@@ -150,9 +150,9 @@ public:
 	virtual Coords get_position() const { return m_position; }
 
 	inline const char* get_name() { return get_descr()->get_name(); }
-	inline const char* get_descname() { return get_descr()->get_descname(); }
+	const char * get_descname() const {return get_descr()->get_descname();}
 
-	virtual std::string get_census_string();
+	virtual std::string get_census_string() const;
 	virtual std::string get_statistics_string();
 
 	virtual bool burn_on_destroy();
@@ -173,7 +173,7 @@ public:
 	virtual void set_stop(bool stop);
 
    inline const std::vector<char*>* get_enhances_to() const { return get_descr()->get_enhances_to(); }
-   
+
    void log_general_info(Editor_Game_Base* egbase);
 
     // Use on military and training sites
@@ -195,10 +195,10 @@ protected:
 	virtual void cleanup(Editor_Game_Base* g);
 	virtual void act(Game* g, uint data);
 
-	virtual void draw(Editor_Game_Base* game, RenderTarget* dst, FCoords coords,
-		Point pos);
-	void draw_help(Editor_Game_Base* game, RenderTarget* dst, FCoords coords,
-		Point pos);
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
+	void draw_help
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 	virtual UIWindow* create_options_window(Interactive_Player* plr,
 		UIWindow** registry) = 0;

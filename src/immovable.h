@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,9 @@ public:
 
 	virtual int get_size() = 0;
 	virtual bool get_passable() = 0;
-	virtual void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos) = 0;
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
+		= 0;
 
 protected:
 	void set_position(Editor_Game_Base *g, Coords c);
@@ -125,10 +127,11 @@ public:
 	void cleanup(Editor_Game_Base *g);
 	void act(Game *g, uint data);
 
-	void draw(Editor_Game_Base*, RenderTarget* dst, FCoords coords, Point pos);
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 	void switch_program(Game* g, std::string name);
-   
+
    inline Tribe_Descr* get_owner_tribe(void) { return get_descr()->get_owner_tribe(); }
 
 protected:

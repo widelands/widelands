@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004 by the Wide Lands Development Team
+ * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ and doesn't change the window state at all.
 */
 class RenderTarget {
 public:
-   virtual ~RenderTarget() {} 
+   virtual ~RenderTarget() {}
    virtual void get_window(Rect* rc, Point* ofs) const = 0;
 	virtual void set_window(const Rect& rc, const Point& ofs) = 0;
 	virtual bool enter_window(const Rect& rc, Rect* previous, Point* prevofs) = 0;
@@ -66,7 +66,12 @@ public:
 	                      int srcx, int srcy, int w, int h) = 0;
 	virtual void tile(int x, int y, int w, int h, uint picture, int ofsx, int ofsy) = 0;
 
-	virtual void rendermap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Point viewofs, bool) = 0;
+	virtual void rendermap
+		(const Editor_Game_Base &,
+		 const std::vector<bool> * const visibility,
+		 Point viewofs,
+		 const bool draw_all)
+		= 0;
 	virtual void renderminimap(Editor_Game_Base* egbase, const std::vector<bool>* visibility, Coords viewpoint, uint flags) = 0;
 
 	virtual void drawanim(int dstx, int dsty, uint animation, uint time, const Player* plr) = 0;

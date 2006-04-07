@@ -956,7 +956,6 @@ This function takes walking etc. into account.
 
 pos is the location, in pixels, of the field m_position (height is already
 taken into account).
-drawpos will be filled with the location of the bob.
 ===============
 */
 Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const {

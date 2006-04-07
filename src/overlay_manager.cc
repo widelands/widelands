@@ -27,34 +27,61 @@
 /*
  * Constructor
  */
-Overlay_Manager::Overlay_Manager(int w, int h) {
-   m_showbuildhelp=false;
-   m_are_graphics_loaded=false;
-   m_w=0;
-   m_h=0;
-   m_callback=0;
-   m_overlay_fields=0;
-   m_cur_jobid=1000; // don't start with 0
+Overlay_Manager::Overlay_Manager() :
+m_are_graphics_loaded(false),
+m_showbuildhelp(false),
+m_callback(0),
+m_current_job_id(1000) // don't start with 0
+{}
 
-   init(w,h);
-}
 
-/*
- * Destructor
- */
-Overlay_Manager::~Overlay_Manager(void) {
-   cleanup();
-}
-
-/*
- * return the currently registered overlays
- * or the standart help.
+/**
+ * Returns the currently registered overlays and the buildhelp for a node.
  */
 unsigned char Overlay_Manager::get_overlays
-(const TCoords c, Overlay_Info * const overlays)
+(const FCoords c, Overlay_Info * const overlays) const
 {
-	//assert(m_are_graphics_loaded);
-	if (not m_are_graphics_loaded) load_graphics(); //  Should REALLY not have to check for this in every call!!! -Erik Sigra
+	assert(m_are_graphics_loaded);
+
+	unsigned char num_ret = 0;
+
+	const Registered_Overlays_Map & overlay_map = m_overlays[TCoords::None];
+	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
+	while (it != overlay_map.end() and it->first == c and it->second.level <= 5)
+	{
+		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].hotspot_x = it->second.hotspot_x;
+		overlays[num_ret].hotspot_y = it->second.hotspot_y;
+		if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
+		++it;
+	}
+	if (m_showbuildhelp) {
+		const uchar buildhelp_overlay_index =
+			c.field->get_buildhelp_overlay_index();
+		if (buildhelp_overlay_index < Field::Buildhelp_None) {
+			overlays[num_ret] = m_buildhelp_infos[buildhelp_overlay_index];
+			if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
+		}
+	}
+	while (it != overlay_map.end() and it->first == c) {
+		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].hotspot_x = it->second.hotspot_x;
+		overlays[num_ret].hotspot_y = it->second.hotspot_y;
+		if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
+		++it;
+	}
+end:
+	return num_ret;
+}
+
+/**
+ * Returns the currently registered overlays for a triangle.
+ */
+unsigned char Overlay_Manager::get_overlays
+(const TCoords c, Overlay_Info * const overlays) const
+{
+	assert(m_are_graphics_loaded);
+	assert(c.t == TCoords::D or c.t == TCoords::R);
 
 	unsigned char num_ret = 0;
 
@@ -65,25 +92,7 @@ unsigned char Overlay_Manager::get_overlays
 		 and
 		 it->first == c
 		 and
-		 it->second.level <= 5
-		 and
-		 num_ret < MAX_OVERLAYS_PER_FIELD) //  Protect overlays array access.
-	{
-		overlays[num_ret].picid = it->second.picid;
-		overlays[num_ret].hotspot_x = it->second.hotspot_x;
-		overlays[num_ret].hotspot_y = it->second.hotspot_y;
-		++num_ret;
-		++it;
-	}
-	if (c.t == TCoords::None)
-		// now overlays
-		num_ret += get_build_overlay(c,overlays,num_ret);
-	while
-		(it != overlay_map.end()
-		 and
-		 it->first == c
-		 and
-		 num_ret < MAX_OVERLAYS_PER_FIELD) //  Protect overlays array access.
+		 num_ret < MAX_OVERLAYS_PER_TRIANGLE)
 	{
 		overlays[num_ret].picid = it->second.picid;
 		overlays[num_ret].hotspot_x = it->second.hotspot_x;
@@ -94,60 +103,21 @@ unsigned char Overlay_Manager::get_overlays
 	return num_ret;
 }
 
-/*
- * get the build overlays
- *
- * returns one if a overlay was set
- */
-inline unsigned char Overlay_Manager::get_build_overlay
-(const Coords c, Overlay_Info * const overlays, const int i) const
-{
-   uchar overlay_field = m_overlay_fields[c.y*m_w+c.x];
-   if(m_showbuildhelp && overlay_field >= Overlay_Build_Min &&
-         overlay_field <= Overlay_Build_Max) {
-      int build_overlay = overlay_field - Overlay_Build_Min;
-
-      overlays[i]=m_buildhelp_infos[build_overlay];
-      return 1;
-   }
-   return 0;
-}
-
 
 /*
  * remove all registered overlays. The Overlay_Manager
  * can than be reused without needing to be delete()ed
  */
-void Overlay_Manager::cleanup(void) {
-   m_w=0;
-   m_h=0;
+void Overlay_Manager::reset() {
    m_are_graphics_loaded=false;
    m_callback=0;
 
-   if(m_overlay_fields) {
-      delete[] m_overlay_fields;
-      m_overlay_fields=0;
-   }
 	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
 	for (Registered_Overlays_Map * it = m_overlays; it != overlays_end; ++it)
 		it->clear();
 	m_road_overlays.clear();
 }
 
-/*
- * called when the map changes size
- * everything should already be invalid
- */
-void Overlay_Manager::init(int w, int h) {
-   assert(!m_w);
-   assert(!m_h);
-   assert(!m_overlay_fields);
-
-   m_w=w;
-   m_h=h;
-
-   m_overlay_fields = new uchar[w*h];
-}
 
 /*
  * Recalculates all calculatable overlays for fields
@@ -155,46 +125,30 @@ void Overlay_Manager::init(int w, int h) {
 void Overlay_Manager::recalc_field_overlays
 (const FCoords fc, const FCoords * const neighbours)
 {
-   assert(m_overlay_fields);
+	Field::Buildhelp_Index index = Field::Buildhelp_None;
 
-   uchar code = 0;
-   int owner = fc.field->get_owned_by();
+	if (not fc.field->is_border()) {// Determine the buildhelp icon.
+		const FieldCaps caps =
+			m_callback
+			?
+			static_cast<FieldCaps>
+			(m_callback(fc, m_callback_data, m_callback_data_i))
+			:
+			fc.field->get_caps();
 
-   if (owner) {
-      // A border is on every field that is owned by a player and has
-      // neighbouring fields that are not owned by that player
-      for(int dir = 1; dir <= 6; dir++) {
-         const FCoords & neighb = neighbours[dir];
-
-         if (neighb.field->get_owned_by() != owner)
-            code = Overlay_Frontier_Base + owner;
-      }
+		if (caps & BUILDCAPS_MINE)
+			index = Field::Buildhelp_Mine;
+		else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
+			index = Field::Buildhelp_Big;
+		else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
+			index = Field::Buildhelp_Medium;
+		else if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
+			index = Field::Buildhelp_Small;
+		else if (caps & BUILDCAPS_FLAG)
+			index = Field::Buildhelp_Flag;
    }
 
-
-   if(!code) { // do not calculate further if there is a border
-      // Determine the buildhelp icon for that field
-      int buildcaps=0;
-      if(m_callback) {
-         buildcaps = m_callback(fc, m_callback_data, m_callback_data_i);
-      } else {
-         buildcaps = fc.field->get_caps();
-      }
-
-      if (buildcaps & BUILDCAPS_MINE)
-         code = Overlay_Build_Mine;
-      else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG)
-         code = Overlay_Build_Big;
-      else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_MEDIUM)
-         code = Overlay_Build_Medium;
-      else if ((buildcaps & BUILDCAPS_SIZEMASK) == BUILDCAPS_SMALL)
-         code = Overlay_Build_Small;
-      else if (buildcaps & BUILDCAPS_FLAG)
-         code = Overlay_Build_Flag;
-   }
-
-	m_overlay_fields[fc.y*m_w + fc.x] = code;
-
+	fc.field->set_buildhelp_overlay_index(index);
 }
 
 /*
@@ -207,8 +161,7 @@ void Overlay_Manager::register_overlay
  const Coords hot_spot,
  const int jobid)
 {
-	assert(c.x >= 0);
-	assert(c.y >= 0);
+	assert(c.t <= 2);
 	assert(level!=5); // level == 5 is undefined behavior
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
@@ -259,8 +212,6 @@ void Overlay_Manager::register_overlay
  * remove one (or many) overlays from a node or triangle
  */
 void Overlay_Manager::remove_overlay(const TCoords c, const int picid) {
-	assert(c.x >= 0);
-	assert(c.y >= 0);
 	assert(c.t <= 2);
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
@@ -281,11 +232,10 @@ void Overlay_Manager::remove_overlay(const TCoords c, const int picid) {
 /*
  * remove all overlays with this jobid
  */
-void Overlay_Manager::remove_overlay(int jobid) {
+void Overlay_Manager::remove_overlay(const int jobid) {
 	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
 	for (Registered_Overlays_Map * j = m_overlays; j != overlays_end; ++j)
-		for (Registered_Overlays_Map::iterator it = j->begin(); it != j->end();)
-		{
+		for (Registered_Overlays_Map::iterator it = j->begin(); it != j->end();) {
 			if (it->second.jobid == jobid) j->erase(it++); //  This is necessary!
 			else ++it;
 		}
@@ -294,81 +244,79 @@ void Overlay_Manager::remove_overlay(int jobid) {
 /*
  * Register road overlays
  */
-void Overlay_Manager::register_road_overlay(Coords c, uchar where, int jobid) {
-   assert(c.x<0xffff);
-   assert(c.y<0xffff);
-
-   Registered_Road_Overlays overlay = { jobid, where };
-
-   int index=(c.y<<8) + c.x;
-
-   std::map<int,Registered_Road_Overlays>::iterator i;
-   i=m_road_overlays.find(index);
-   if(i==m_road_overlays.end()) {
-      m_road_overlays.insert(std::pair<int,Registered_Road_Overlays>(index,overlay));
-   } else {
-      i->second=overlay;
-   }
+void Overlay_Manager::register_road_overlay
+(const Coords c, const uchar where, const int jobid)
+{
+	const Registered_Road_Overlays overlay = {jobid, where};
+	Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
+	if (it == m_road_overlays.end())
+		m_road_overlays.insert
+		(std::pair<const Coords, Registered_Road_Overlays>(c, overlay));
+	else it->second = overlay;
 }
 
 /*
  * Remove road overlay
  */
-void Overlay_Manager::remove_road_overlay(Coords c) {
-   assert(static_cast<uint>(c.x)<=0xffff);
-   assert(static_cast<uint>(c.y)<=0xffff);
-
-   int fieldindex=(c.y<<8)+c.x;
-
-   std::map<int,Registered_Road_Overlays>::iterator i;
-   i=m_road_overlays.find(fieldindex);
-   if(i!=m_road_overlays.end()) {
-      m_road_overlays.erase(i);
-   }
+void Overlay_Manager::remove_road_overlay(const Coords c) {
+	const Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
+	if (it != m_road_overlays.end()) m_road_overlays.erase(it);
 }
 
 /*
  * remove all overlays with this jobid
  */
 void Overlay_Manager::remove_road_overlay(int jobid) {
-   std::map<int, Registered_Road_Overlays>::iterator i=m_road_overlays.begin();
-
-   while(i!=m_road_overlays.end()) {
-      if(i->second.jobid==jobid) {
-         m_road_overlays.erase(i++);
-      } else {
-         ++i;
-      }
-   }
+	Registered_Road_Overlays_Map::iterator it = m_road_overlays.begin();
+	const Registered_Road_Overlays_Map::const_iterator end =
+		m_road_overlays.end();
+	while (it != end) {
+		if (it->second.jobid == jobid) m_road_overlays.erase(it++); //  Necessary!
+		else ++it;
+	}
 }
 
 /*
- * [ private function ]
- *
  * call cleanup and then, when graphic is reloaded
  * overlay_manager calls this for himself and everything should be fine
+ *
+ * Load all the needed graphics
  */
-void Overlay_Manager::load_graphics(void) {
-   // Load all the needed graphics
-   m_buildhelp_infos[0].picid=g_gr->get_picture( PicMod_Game,  "pics/set_flag.png" );
-   g_gr->get_picture_size(m_buildhelp_infos[0].picid, &m_buildhelp_infos[0].hotspot_x, &m_buildhelp_infos[0].hotspot_y);
-   m_buildhelp_infos[0].hotspot_x/=2; m_buildhelp_infos[0].hotspot_y-=1;
+void Overlay_Manager::load_graphics() {
+	if (m_are_graphics_loaded) return;
 
-   m_buildhelp_infos[1].picid=g_gr->get_picture( PicMod_Game,  "pics/small.png" );
-   g_gr->get_picture_size(m_buildhelp_infos[1].picid, &m_buildhelp_infos[1].hotspot_x, &m_buildhelp_infos[1].hotspot_y);
-   m_buildhelp_infos[1].hotspot_x/=2; m_buildhelp_infos[1].hotspot_y/=2;
+	Overlay_Info * buildhelp_info = m_buildhelp_infos;
+	static const char * filenames[] = {
+		"pics/set_flag.png",
+		"pics/small.png",
+		"pics/medium.png",
+		"pics/big.png",
+		"pics/mine.png"
+	};
+	const char * const * filename = filenames;
 
-   m_buildhelp_infos[2].picid=g_gr->get_picture( PicMod_Game,  "pics/medium.png" );
-   g_gr->get_picture_size(m_buildhelp_infos[2].picid, &m_buildhelp_infos[2].hotspot_x, &m_buildhelp_infos[2].hotspot_y);
-   m_buildhelp_infos[2].hotspot_x/=2; m_buildhelp_infos[2].hotspot_y/=2;
+	//  Special case for flag, which has a different formula for hotspot_y.
+	buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
+	{
+		int hotspot_x, hotspot_y;
+		g_gr->get_picture_size(buildhelp_info->picid, &hotspot_x, &hotspot_y);
+		hotspot_x /= 2; hotspot_y -= 1;
+		buildhelp_info->hotspot_x = hotspot_x;
+		buildhelp_info->hotspot_y = hotspot_y;
+	}
 
-   m_buildhelp_infos[3].picid=g_gr->get_picture( PicMod_Game,  "pics/big.png" );
-   g_gr->get_picture_size(m_buildhelp_infos[3].picid, &m_buildhelp_infos[3].hotspot_x, &m_buildhelp_infos[3].hotspot_y);
-   m_buildhelp_infos[3].hotspot_x/=2; m_buildhelp_infos[3].hotspot_y/=2;
-
-   m_buildhelp_infos[4].picid=g_gr->get_picture( PicMod_Game,  "pics/mine.png" );
-   g_gr->get_picture_size(m_buildhelp_infos[4].picid, &m_buildhelp_infos[4].hotspot_x, &m_buildhelp_infos[4].hotspot_y);
-   m_buildhelp_infos[4].hotspot_x/=2; m_buildhelp_infos[4].hotspot_y/=2;
+	const Overlay_Info * const buildhelp_infos_end =
+		buildhelp_info + Field::Buildhelp_None;
+	for (;;) { // The other buildhelp overlays.
+		++buildhelp_info, ++filename;
+		if (buildhelp_info == buildhelp_infos_end) break;
+		buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
+		int hotspot_x, hotspot_y;
+		g_gr->get_picture_size(buildhelp_info->picid, &hotspot_x, &hotspot_y);
+		hotspot_x /= 2; hotspot_y /= 2;
+		buildhelp_info->hotspot_x = hotspot_x;
+		buildhelp_info->hotspot_y = hotspot_y;
+	}
 
    m_are_graphics_loaded=true;
 }
