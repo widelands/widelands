@@ -1,25 +1,27 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of campaign_ank_sv_SE.po to Swedish
+# translation of campaign_ank_sv_SE.po to
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER, 2006.
+# Fredrik Pettersson <luno@iaofredde.net>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: campaign_ank_sv_SE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-04-06 19:32+0200\n"
+"Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
+"Language-Team: Swedish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../campaigns/t01.wmf/event:11 ../campaigns/t01.wmf/event:608
 #: ../campaigns/t01.wmf/event:627 ../campaigns/t01.wmf/event:646
 #: ../campaigns/t01.wmf/event:665
 msgid "Thron speaks..."
-msgstr ""
+msgstr "Thron talar..."
 
 #: ../campaigns/t01.wmf/event:13
 msgid ""
@@ -27,11 +29,14 @@ msgid ""
 "My warriors hunt at day and lay awake at night - listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
+"Det har gått flera månader och vi gömmer oss fortfarande i den gamla mörka skogen. "
+"Mina krigare jagar på dagen och ligger vakna på natten - och lyssnar på den "
+"grymma slakten som ekar bortom den urtida skogen."
 
 #: ../campaigns/t01.wmf/event:15 ../campaigns/t01.wmf/event:32
 #: ../campaigns/t01.wmf/event:49 ../campaigns/t01.wmf/event:66
 msgid "The Story begins..."
-msgstr ""
+msgstr "Sagan börjar..."
 
 #: ../campaigns/t01.wmf/event:22 ../campaigns/t01.wmf/event:39
 #: ../campaigns/t01.wmf/event:56 ../campaigns/t01.wmf/event:73
@@ -41,7 +46,7 @@ msgstr ""
 #: ../campaigns/t01.wmf/event:657 ../campaigns/t01.wmf/event:676
 #: ../campaigns/t01.wmf/event:723
 msgid "OK"
-msgstr ""
+msgstr "Nästa"
 
 #: ../campaigns/t01.wmf/event:30
 msgid ""
@@ -49,6 +54,9 @@ msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the wardrums "
 "that haunt me even in my nightmares."
 msgstr ""
+"Vi kan se rasande flammor som äter upp Al'thunran, långt härifrån. "
+"Det röda ljuset glimmar i mörkret och dansar till rytmen av krigstrummor "
+"som jagar mig i mina mardrömmar."
 
 #: ../campaigns/t01.wmf/event:47
 msgid ""
@@ -57,23 +65,27 @@ msgid ""
 "companion and friend is a source of peace and comfort to me in these dark "
 "times. He keeps my spirits high and those of my warriors awake, not to let "
 "greed or despair destroy our bonds as well"
-msgstr ""
+msgstr "Min fars skelett vilar lugnt och stilla i marken som han befriade från den känslolösa blodspillan som en gång har uppstått runt omkring oss.<br>Boldreth, min lojale kompanjon och vän är en källa av trygghet och fred för mig i dessa mörka tider. Han håller mitt humör uppe och mina krigare medvetna, att inte låta girighet eller misströstan förstöra våra band i mellan oss."
 
 #: ../campaigns/t01.wmf/event:64
 msgid ""
 "As father told me, there will be times to fight and times to lay and wait, "
 "trying not to sleep or die before the right time comes. And so I do... wait."
 msgstr ""
+"Min far berättade för mig, det kommer tider för krig och tider att sitta och vänta, "
+"försök inte att sova eller dö innan tiden är inne. Och det gjorde jag... väntade."
 
 #: ../campaigns/t01.wmf/event:454
 msgid "An old man approaches you..."
-msgstr ""
+msgstr "En gammal man närmar sig..."
 
 #: ../campaigns/t01.wmf/event:456
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my council through these darkened days.\" "
 msgstr ""
+"\"Var hälsad, hövding. Jag är Khantrukh och jag har sett många vintrar flyga förbi. "
+"Tillåt mig att hjälpa dig med mina råd i dessa mörka stunder.\""
 
 #: ../campaigns/t01.wmf/event:458 ../campaigns/t01.wmf/event:477
 #: ../campaigns/t01.wmf/event:496 ../campaigns/t01.wmf/event:516
@@ -88,11 +100,11 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:688 ../campaigns/t02.wmf/event:701
 #: ../campaigns/t02.wmf/event:714 ../campaigns/t02.wmf/event:727
 msgid "Advisor"
-msgstr ""
+msgstr "Rådgivare"
 
 #: ../campaigns/t01.wmf/event:473
 msgid "Khantrukh continues..."
-msgstr ""
+msgstr "Khantrukh fortsätter..."
 
 #: ../campaigns/t01.wmf/event:475
 msgid ""
@@ -107,10 +119,21 @@ msgid ""
 "directly right of your headquarters by clicking at it and selecting a "
 "Lumberjack."
 msgstr ""
+" \"Ingen förutom gudarna vet hur länge vi måste hålla oss gömda här. "
+"Krigarna hoppas på att vi ska kunna marchera tillbaka vilken dag som hälst nu, men "
+"jag tvivlar starkt på att det kommer hända inom en snar framtid. Och dagarna börjar "
+"redan bli kallare och mörkare..."
+"<br>Vi borde förbereda oss, i fall att vi måste stanna över vintern i detta ogästvänliga landet. "
+"Jag tror att det finns lite plats öster om vårt läger där vi kan sätta upp några skogshuggare. \" "
+"<br><br>--NYA MÅL--<br>- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna "
+"visar var små byggnader - som en skogshuggare - kan byggas.<br>- bygg en skogshuggare "
+"vid den närmaste högra röda pricken om ditt huvudkvarter genom att trycka på den och välja "
+"skogshuggare."
 
 #: ../campaigns/t01.wmf/event:492
+#, fuzzy
 msgid "The elder remarks..."
-msgstr ""
+msgstr "Den vise påpekar..."
 
 #: ../campaigns/t01.wmf/event:494
 msgid ""
@@ -127,14 +150,25 @@ msgid ""
 "then. Build a road between the flags in front of the two buildings. Try to "
 "keep it short and even."
 msgstr ""
+" \"Självklart, skulle det vara för jobbigt för vårt folk att gå hela vägen genom "
+"vildmarken till skogshuggaren. Vi måste bygga en stig mellan vårt läger och "
+"skogshuggaren. Det är inte svårt att gissa att folket skulle uppkatta en så kort "
+"och jämn väg som möjligt - virket kommer vara tungt nog ändå.\"<br><br> "
+"--NYA MÅL--<br>- Bygg en väg mellan ditt huvudkvarter och skogshuggaren. "
+"Du gör det genom att klicka på flaggan vid ena byggnaden och sen väg-knappen. "
+"Runt flaggan kommer det upp symboler som visar hur brant lutning vägen har i en "
+"riktning. Desto brantare väg, desto svårare kommer det att bli för ditt folk att vandra "
+"på den. När du klickar på en symbol så bygger du en del av vägen och väljer "
+"sedan nästa riktning. Bygg en väg mellan flaggorna framför bägge byggnaderna. "
+"Försök att få en så kort och jämn väg som möjligt."
 
 #: ../campaigns/t01.wmf/event:503
 msgid "Order3"
-msgstr ""
+msgstr "Uppdrag3"
 
 #: ../campaigns/t01.wmf/event:512
 msgid "Khantrukh speaks..."
-msgstr ""
+msgstr "Khantrukh talar..."
 
 #: ../campaigns/t01.wmf/event:514
 msgid ""
@@ -148,10 +182,19 @@ msgid ""
 "make them get faster to their destination, thus improving your "
 "infrastructure. Place a flag in the mid of the road."
 msgstr ""
+" \"Det finns ett gammalt talesätt: 'Delad börda är lättare att bära.' En "
+"vägkorsning mellan vårt huvudkvarter och skogshuggaren skulle underlätta "
+"arbetet för våra Transportörer.\"<br><br>--NYA MÅL--<BR>Där är en flagg-symbol "
+"i mitten på vägen du nyss byggde. Genom att klicka på den och i den rutan som kom fram "
+"klickar du på flagg-knappen, så har du placerat en flagga där, och där igenom har du "
+"delat upp arbetet med att transportera stockar på två transportörer. När mycket varor "
+"transporteras mellan två punkter, så gör flera flaggor mellan dem så att det går fortare "
+"att nå fram till deras slutpunkt och där igenom förbättras din infrastruktur. Placera en flagga "
+"mitt på vägen."
 
 #: ../campaigns/t01.wmf/event:531
 msgid "The old man looks to the sky..."
-msgstr ""
+msgstr "Den gamle mannen ser upp i skyn..."
 
 #: ../campaigns/t01.wmf/event:533
 msgid ""
@@ -164,14 +207,21 @@ msgid ""
 "road step by step, you may also directly click at the destination to build "
 "the entire road at once."
 msgstr ""
+" \"Nordanvinden berättar, att den kommande vinter kommer vara lång "
+"och elendig. En skogshuggare kommer inte vara tillräckligt för vårt folks "
+"behov. Fler träd väntar på oss söder om vår nya korsning - låt oss bygga "
+"en andra skogshuggare där!\"<br><br>--NYA MÅL--<br>- Placera en skogshuggare "
+"söder om den flaggan som du ska sätta på vägen. Efteråt förbinder du flaggan med den "
+"nya skogshuggaren. Notera att, istället för att bygga en väg steg för steg, kan du "
+"klicka direkt på destinationen så byggs hela vägen på en gång."
 
 #: ../campaigns/t01.wmf/event:542
 msgid "Order5"
-msgstr ""
+msgstr "Uppdrag5"
 
 #: ../campaigns/t01.wmf/event:551
 msgid "Khantrukh nods..."
-msgstr ""
+msgstr "Khantrukh nickar..."
 
 #: ../campaigns/t01.wmf/event:553
 msgid ""
@@ -182,11 +232,11 @@ msgid ""
 "<br>So, in order to replace the trees we chop down, we should build a "
 "Ranger's hut, preferably close to the Lumberjack.\"<br><br>--NEW OBJECTIVES--"
 "<br>- Build a Ranger's Hut to the east of the first Lumberjack."
-msgstr ""
+msgstr " \"Självklart, om vi vill bygga ett större rike behöver vi fler skogshuggare, men det borde räcka för tillfället.<br>Men glöm aldrig - skogarna är vårt arv, anförtrodda till oss av våra förfäder. Vi måste alltid respektera och sköta om dem. Det vi tar måste vi ge tillbaka igen.<br>Så, för att ersätta träden vi hugger ner, borde vi bygga en Skogsplanterare, helst nära Skogshuggaren.\"<br><br>-- NYA MÅL--<br>- Bygg en Skogsplanterare öster om den första Skogshuggaren."
 
 #: ../campaigns/t01.wmf/event:570
 msgid "The elder speaks..."
-msgstr ""
+msgstr "Den vise talar..."
 
 #: ../campaigns/t01.wmf/event:572
 msgid ""
@@ -197,11 +247,11 @@ msgid ""
 "what fortifications we might be forced to build very soon? And - like a gift "
 "of destiny - there are indeed great rocks just nearby...\"<br><br>--NEW "
 "OBJECTIVES--<br>- Build two Quarries south-west of your headquarters."
-msgstr ""
+msgstr " \"Jag är mycket medveten, hövding, att varken du eller dina krigare vill stanna länge i detta övergivna landet. Men ändå, vårt krig för att ta tillbaka vårt hemland kan ta lång tid och det verkar klokt att förbereda sig. Jag skulle råda att vi lagrar sten för framtida bruk - vem vet vilka befästningar vi snart kan bli tvingade att bygga? Och - som en gåva av ödet - där är förträfliga stenblock i närheten...\"<br><br>-- NYTT MÅL--<br> - Bygg två Stenhuggare sydväst om ditt huvudkvarter."
 
 #: ../campaigns/t01.wmf/event:581
 msgid "Order7"
-msgstr ""
+msgstr "Uppdrag7"
 
 #: ../campaigns/t01.wmf/event:610
 msgid ""
@@ -210,10 +260,14 @@ msgid ""
 "<br>They are a constant reminder why we had to hide here.<br>And a constant "
 "reminder why we must return in the end."
 msgstr ""
+"Under an annan sömnlös natt gick jag upp på kullen och blickade åt norr. "
+"Eldarna brinner fortfarande, stillar sin hunger på min fars arv. "
+"<br>De är en konstant påminnelse om varför vi måste gömma oss här. "
+"<br>Och en påminnelse om varför vi tillslut måste återvända."
 
 #: ../campaigns/t01.wmf/event:612
 msgid "In the night..."
-msgstr ""
+msgstr "Under natten..."
 
 #: ../campaigns/t01.wmf/event:629
 msgid ""
@@ -223,10 +277,15 @@ msgid ""
 "<br>Somehow it felt like farewell. For the first time I wondered what the "
 "future might hold for me..."
 msgstr ""
+"Ännu en gång gick jag upp till min fars grav, i en helig lund nedanför "
+"Kal'mavraths stora spira. Jag bara stod där utan en tanke på tiden "
+"eller regnet som öste ner från den mörknande himmeln... "
+"<br>>På något vis kändes det som jag tog farväl. För första gången "
+"undrade jag vad framtiden hade för planer för mig..."
 
 #: ../campaigns/t01.wmf/event:631
 msgid "At the grave"
-msgstr ""
+msgstr "Vid graven"
 
 #: ../campaigns/t01.wmf/event:648
 msgid ""
@@ -237,10 +296,17 @@ msgid ""
 "any time soon. He might still be right, but I fear the bloodshed a too rash "
 "return would cause both on our and the other side..."
 msgstr ""
+"För en tid sedan kom Boldreth till mig. Han rådde mig att flytta till ett ställe "
+"närmare mitt hem - för att kunna slå till vid första antydan från mina bröders "
+"arméer.<br>Men jag tittade över skogen och jag såg fortfarande svart rök "
+"som steg mot skyn och jag visste - det är ännu för tidigt och det han hoppas "
+"på kommer inte att hända inom en snar framtid. Han kan ha rätt, men jag är "
+"rädd för att om vi flyttar tillbaka för tidigt kommer det spillas för mycket blod "
+"både på deras sida och våran..."
 
 #: ../campaigns/t01.wmf/event:650
 msgid "The other day..."
-msgstr ""
+msgstr "Här om dagen..."
 
 #: ../campaigns/t01.wmf/event:667
 msgid ""
@@ -249,14 +315,18 @@ msgid ""
 "taking place in Al'thunran.<br>I hereby renew my oath - I will stop this "
 "madness at any cost!"
 msgstr ""
+"Idag plockade mina krigare upp en gammal man, som vandrade sjuk och skadad "
+"genom den mörka skogen. Vi lyssnade med fasa när han berättade för oss om "
+"'atrocities taking place in Al'thunran.'<br>Härmed förnyar jag min ed - jag ska "
+"stoppa dessa galenskaper till vilket pris som helst!"
 
 #: ../campaigns/t01.wmf/event:669
 msgid "Another evening..."
-msgstr ""
+msgstr "En annan kväll..."
 
 #: ../campaigns/t01.wmf/event:712
 msgid "Victory!"
-msgstr ""
+msgstr "Seger!"
 
 #: ../campaigns/t01.wmf/event:714
 msgid ""
@@ -267,7 +337,7 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/event:716
 msgid "Mission Complete"
-msgstr ""
+msgstr "Uppdrag Slutfört"
 
 #: ../campaigns/t01.wmf/objective:8
 msgid ""
@@ -300,11 +370,11 @@ msgstr ""
 
 #: ../campaigns/t01.wmf/objective:24
 msgid "- Build a Ranger's Hut to the east of the Lumberjack."
-msgstr ""
+msgstr "- Bygg en Skogsplanterare öster om Skogshuggaren."
 
 #: ../campaigns/t01.wmf/objective:32
 msgid "- Build two Quarries south-west of your headquarters."
-msgstr ""
+msgstr "- Bygg två Stenhuggare sydväst om ditt Huvudkvarter."
 
 #: ../campaigns/t02.wmf/event:11
 msgid ""
@@ -319,7 +389,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:13
 msgid "The Story goes on..."
-msgstr ""
+msgstr "Sagan går vidare..."
 
 #: ../campaigns/t02.wmf/event:16 ../campaigns/t02.wmf/event:29
 #: ../campaigns/t02.wmf/event:41 ../campaigns/t02.wmf/event:501
@@ -335,11 +405,11 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:752 ../campaigns/t02.wmf/event:764
 #: ../campaigns/t02.wmf/event:846
 msgid "Continue"
-msgstr ""
+msgstr "Fortsätt"
 
 #: ../campaigns/t02.wmf/event:26 ../campaigns/t02.wmf/event:38
 msgid "The Story continues..."
-msgstr ""
+msgstr "Sagan fortsätter..."
 
 #: ../campaigns/t02.wmf/event:497
 msgid ""
@@ -369,7 +439,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:533
 msgid " \"Old man? Disrespectful youth...\"</p>"
-msgstr ""
+msgstr " \"Gamla gubbe? Dagens respektlösa ungdom...\"</p>"
 
 #: ../campaigns/t02.wmf/event:545
 msgid " \"At least. These rocks should last for a while.\"</p>"
@@ -505,7 +575,7 @@ msgid ""
 "building - for instance, deep mines need rations instead of snacks. You will "
 "have to enhance your tavern to an inn in order to produce rations out of "
 "pittabread AND a second kind of food (meat or fish). Note that the existance "
-"of inns does not make taverns obsolete - normal mines still require snacks "
+"of inns doesn't make taverns obsolete - normal mines still require snacks "
 "instead of rations. You may of course enhance all mines to deep mines "
 "instantly - bigger mines work a bit faster, smaller mines need cheaper food. "
 "It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to "
@@ -561,7 +631,7 @@ msgstr ""
 #: ../campaigns/t02.wmf/event:713
 msgid ""
 "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings "
-"is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a "
+"is fern, used to cover roofs. Fern is being planted by a fernery.<br>Build a "
 "Fernery.</p>"
 msgstr ""
 
@@ -583,7 +653,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:749
 msgid "One fullmoon night..."
-msgstr ""
+msgstr "En natt under fullmånen..."
 
 #: ../campaigns/t02.wmf/event:760
 msgid ""
@@ -596,7 +666,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:761
 msgid "Another cold day..."
-msgstr ""
+msgstr "En annan kall dag..."
 
 #: ../campaigns/t02.wmf/event:842
 msgid ""
@@ -613,7 +683,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:843
 msgid "Mission Complete!"
-msgstr ""
+msgstr "Uppdrag slutfört!"
 
 #: ../campaigns/t02.wmf/objective:7
 msgid ""
@@ -661,22 +731,9 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/objective:43
 msgid ""
-"<p>A normal mine can only dig up about one third of all ressources lying "
-"beneath. Then it must be enhanced to a deep mine in order to keep it working "
-"properly. To enhance a building, click it and then the appropriate button in "
-"the appearing menu.<br>Workers gain experience by successful work. With "
-"enough experience they become more advanced workers, who are necessary to "
-"operate enhanced buildings. Do not enhance a building before you have enough "
-"advanced workers to operate the advanced building! Such buildings usually "
-"have greater demands than the basic kind of that building - for instance, "
-"deep mines need rations instead of snacks. You will have to enhance your "
-"tavern to an inn in order to produce rations out of pittabread AND a second "
-"kind of food (meat or fish). Note that the existance of inns does not make "
-"taverns obsolete - normal mines still require snacks instead of rations. You "
-"may of course enhance all mines to deep mines instantly - bigger mines work "
-"a bit faster, smaller mines need cheaper food. It is up to you which you "
-"prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of "
-"their buildings respectively.</p>"
+"t make taverns obsolete - normal mines still require snacks instead of "
+"rations. You may of course enhance all mines to deep mines instantly - "
+"bigger mines work a bit faster, smaller mines need cheaper food. It"
 msgstr ""
 
 #: ../campaigns/t02.wmf/objective:49
@@ -701,6 +758,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/objective:61
 msgid ""
-"<p>The third material necessary for improved buildings is reed, used to "
-"cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
+"<p>The third material necessary for improved buildings is fern, used to "
+"cover roofs. Fern is being planted by a fernery.<br>Build a Fernery.</p>"
 msgstr ""
+

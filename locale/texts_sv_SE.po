@@ -1,23 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of texts_sv_SE.po to Swedish
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Fredrik Pettersson <luno@iaofredde.net>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: texts_sv_SE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-04-08 09:07+0200\n"
+"Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
+"Language-Team: Swedish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../txts/COPYING:1
 msgid "License"
-msgstr ""
+msgstr "Licens"
 
 #: ../txts/COPYING:3
 msgid "GNU general public licence"
@@ -415,15 +416,15 @@ msgstr ""
 
 #: ../txts/README:1
 msgid "README"
-msgstr ""
+msgstr "LÄS MIG"
 
 #: ../txts/README:5
 msgid "an open source strategy game"
-msgstr ""
+msgstr "ett strategi spel med öppen källkod"
 
 #: ../txts/README:9 ../txts/editor_readme:6
 msgid "Introduction"
-msgstr ""
+msgstr "Introduktion"
 
 #: ../txts/README:13
 msgid ""
@@ -435,10 +436,16 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you do."
 msgstr ""
+"Widelands är ett strategi spel vars mål är att ha ett liknande spelsätt som Settlers II "
+"från Bluebyte.<br>I det här spelet, börjar du med en liten yta land som inte har "
+"mer än några få användbara resurser. Med dessa kan du bygga ett imperium med "
+"flera tusen invånare. På din resa mot ditt mål, så måste du bygga upp en ekonomisk "
+"infrastruktur, utforska markerna runt omkring dig och möta fiender som försöker att "
+"härska över världen precis som du."
 
 #: ../txts/README:16
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Kolla in Widelands projekts hemsida:"
 
 #: ../txts/README:22
 msgid ""
@@ -446,10 +453,13 @@ msgid ""
 "information, see the file 'COPYING' or select the License button from the "
 "main menu."
 msgstr ""
+"Widelands är licensierat under GNU General Public License (GPL). För mer "
+"information (engelska), se filen 'COPYING' eller klicka på knappen Licens i "
+"huvudmenyn."
 
 #: ../txts/README:27
 msgid "Running the game"
-msgstr ""
+msgstr "Spela spelet"
 
 #: ../txts/README:31
 msgid ""
@@ -461,12 +471,20 @@ msgid ""
 "can be obtained from http://www.libsdl.org/, SDL_image can be obtained from "
 "http://www.libsdl.org/projects/SDL_image/"
 msgstr ""
+"Widelands kräver SDL och SDL_image biblioteken för att köras. Windows versioner av "
+"dessa bibliotek följer med i den binära releasen. De flesta Linux distributioner erbjuder "
+"förkompilerade paket för båda biblioteken; var vänlig se din distributions dokumentation "
+"för att ta reda på hur man installerar dem om det är nödvändigt. Om inget fungerar, så "
+"kan du i alla fall kompilera dem från källkod. SDL kan hämtas från http://www.libsdl.org/, "
+"SDL_image kan hämtas från http://www.libsdl.org/projects/SDL_image/"
 
 #: ../txts/README:34
 msgid ""
 "Once everything is set up, just start the Widelands executable in order to "
 "run the game."
 msgstr ""
+"När allt är färdigt, är det bara att starta Widelands exekutiva fil för att "
+"spela spelet."
 
 #: ../txts/README:37
 msgid ""
@@ -475,16 +493,22 @@ msgid ""
 "working directory is set to the directory the Widelands executable resides "
 "in. On Linux, this is best done by launching Widelands through a shell: "
 msgstr ""
+"Om spelet inte startar direkt även om både Widelands och de biblioteken som "
+"krävs är korrekt installerade, var vänlig och kolla så att programmets "
+"arbetskatalog är inställt på samma katalog som Widelands binära fil finns i. "
+"I Linux, är det bäst att starta Widelands via en terminal: "
 
 #: ../txts/README:43
 msgid ""
 "On Windows, you will have to check the shortcut settings if you start "
 "Widelands via a shortcut."
 msgstr ""
+"I Windows, får du kolla genvägs inställningarna om du startar Widelands "
+"via en genväg."
 
 #: ../txts/README:48
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../txts/README:52
 msgid ""
@@ -493,54 +517,57 @@ msgid ""
 "required, especially in the area of graphics, to make Widelands a better "
 "game."
 msgstr ""
+"Widelands är nu i ett stadie där det är spelbart, men för att bli bättre behövs "
+"frivilliga. Ditt bidrag (ja, jag talar om dig) behövs, speciellt inom det grafiska, "
+"för att göra Widelands till ett bättre spel."
 
 #: ../txts/README:57
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Tangentbords genvägar (i spelet)"
 
 #: ../txts/README:61
 msgid "SPACE       Toggles build-help"
-msgstr ""
+msgstr "MELLANSLAG       Visar/döljer bygghjälp"
 
 #: ../txts/README:63
 msgid "M               Toggle minimap"
-msgstr ""
+msgstr "M               Visar/döljer minikarta"
 
 #: ../txts/README:65
 msgid "C               Toggle census"
-msgstr ""
+msgstr "C               Visar/döljer folkräkning"
 
 #: ../txts/README:67
 msgid "S               Toggle statistics"
-msgstr ""
+msgstr "S               Visar/Döljer statistik"
 
 #: ../txts/README:69
 msgid "F               Toggle Fullscreen"
-msgstr ""
+msgstr "F               Ändrar till/från fullskärm"
 
 #: ../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
-msgstr ""
+msgstr "PAGEUP         Ökar hastigheten i spelet"
 
 #: ../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
+msgstr "PAGEDOWN    Minskar hastigheten i spelet"
 
 #: ../txts/README:77
 msgid "F5           Reveals the entire map"
-msgstr ""
+msgstr "F5           Avslöjar hela kartan"
 
 #: ../txts/README:79
 msgid "F10         Quit the game immediately"
-msgstr ""
+msgstr "F10         Stänger spelet direkt"
 
 #: ../txts/README:81
 msgid "F11         Take a screenshot"
-msgstr ""
+msgstr "F11         Tar en skärmdump"
 
 #: ../txts/README:86
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Rapportera Buggar"
 
 #: ../txts/README:90
 msgid ""
@@ -548,24 +575,28 @@ msgid ""
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
 "page:"
 msgstr ""
+"Om du vill rapportera buggar, var vänlig skicka din rapport till mail listan(på engelska), "
+"<widelands-public@list.sourceforge.net><br>För att prenumerera, gå in på följande sida:"
 
 #: ../txts/README:95
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Var vänlig att bidra med tillräckligt med bakgrunds information. Berätta:"
 
 #: ../txts/README:98
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from CVS)"
 msgstr ""
+"- vilken version av Widelands använde du (m.a.o. vilken build, eller om det "
+"var<br>en egen kompilerad från CVS)"
 
 #: ../txts/README:100
 msgid "- how to reproduce the bug"
-msgstr ""
+msgstr "- hur man kan återskapa buggen"
 
 #: ../txts/README:102
 msgid "- which map you were playing"
-msgstr ""
+msgstr "- vilken karta du spelade"
 
 #: ../txts/README:104
 msgid ""
@@ -574,10 +605,13 @@ msgid ""
 "record<br>your sessions in case a bug surfaces. For more explanation, see "
 "below."
 msgstr ""
+"- skicka, om möjligt, en komprimerad (zip, gzip, bzip2) sessions inspelning till oss, "
+"om inte<br>buggen är ointressant att återskapa. I alla fall, det är en god idé att "
+"alltid spela in<br>dina sessioner om det dyker upp en bugg. För mer förklaringar, se nedan."
 
 #: ../txts/README:109
 msgid "Creating a Session Record</p>"
-msgstr ""
+msgstr "Skapa en inspelad session</p>"
 
 #: ../txts/README:112
 msgid ""
@@ -585,12 +619,17 @@ msgid ""
 "can then replay an entire session from starting the game to exiting it. This "
 "is really helpful for debugging problems."
 msgstr ""
+"Widelands kan spela in allt du trycker på tangentbordet och alla rörelser med musen "
+"till en fil. Den kan sen spela om en hel session från de att du startade spelet tills du "
+"avslutade det. Detta är till stor hjälp när man debuggar problem."
 
 #: ../txts/README:115
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
+"För att skapa en inspelning av en session, starta spelet med --record parametern. "
+"I linux, starta helt enkelt Widelands så här: $ ./widelands --record=filename.rec"
 
 #: ../txts/README:118
 msgid ""
@@ -600,12 +639,19 @@ msgid ""
 "should read something like c:\\games\\widelands\\widelands.exe. Change this "
 "to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
+"I Windows, skapa en genväg till widelands.exe (högerklicka på widelands.exe "
+"och välj Skapa genväg). Redigera sen genvägen (högerklicka på den nya "
+"genvägen och välj egenskaper). Mål fältet borde vara något liknande: "
+"c:\\games\\widelands\\widelands.exe. Ändra den till: "
+"c:\\games\\widelands\\widelands.exe --record=filename.rec"
 
 #: ../txts/README:121
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
 msgstr ""
+"En binär fil som heter filename.rec kommer att skapas. För att spela upp "
+"den, gör samma steg som beskrivs lite högre upp, men ersätt --record med --playback."
 
 #: ../txts/README:124
 msgid ""
@@ -642,7 +688,7 @@ msgstr ""
 
 #: ../txts/editor_readme:16
 msgid "SPACE    Toggles build help"
-msgstr ""
+msgstr "MELLANSLAG    Visar byggplatser"
 
 #: ../txts/editor_readme:18
 msgid "C        Toggles census on/off"
@@ -674,11 +720,11 @@ msgstr ""
 
 #: ../txts/editor_readme:32
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "CTRL+L   Ladda Karta"
 
 #: ../txts/editor_readme:34
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "CTRL+S   Spara Karta"
 
 #: ../txts/editor_readme:36
 msgid "1-0      Changes tools size"
@@ -691,3 +737,4 @@ msgstr ""
 #: ../txts/editor_readme:40
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
+
