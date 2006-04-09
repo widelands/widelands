@@ -16,7 +16,8 @@ import fileinput
 
 TRIBES = [ "barbarians" ]
 WORLDS = [ "greenland" ]  
-CAMPAING_MISSIONS = glob("../campaigns/*.wmf")
+CAMPAING_MISSION1 = glob("../campaigns/t01.wmf")
+CAMPAING_MISSION2 = glob("../campaigns/t02.wmf")
 
 def do_rename( src, dst ):
     try:
@@ -96,28 +97,53 @@ def main( ):
             os.system( "msgfmt -o %s/LC_MESSAGES/world_%s.mo world_%s_%s.po" % ( lang, world, world, lang ))
 
 ##############################
-# tutorial campaign 
+# tutorial campaign 1
 ##############################
     files = []
-    for mission in CAMPAING_MISSIONS:
+    for mission in CAMPAING_MISSION1:
         for file in glob("%s/*" % mission):
             if( file[-3:] == "CVS" or file[-1] == '~' or file[-6:]=="binary" or file[-4:]=="pics"): 
                 continue
             files.append( file )
 
     catalog = confgettext.parse_conf( files )
-    file = open( "campaign_ank.pot", "w")
+    file = open( "campaign_t01.pot", "w")
     file.write(catalog)
     file.close()
 
     for lang in LANGUAGES:
         # merge new strings with existing translations
-        if not os.system( "msgmerge campaign_ank_%s.po campaign_ank.pot > tmp" % lang ):
-                do_rename("tmp", "campaign_ank_%s.po" % ( lang ) )
+        if not os.system( "msgmerge campaign_t01_%s.po campaign_t01.pot > tmp" % lang ):
+                do_rename("tmp", "campaign_t01_%s.po" % ( lang ) )
 
         # compile message catalogs
-        do_makedirs( "%s/LC_MESSAGES" % lang )
-        os.system( "msgfmt -o %s/LC_MESSAGES/campaign_ank.mo campaign_ank_%s.po" % ( lang, lang ))
+        do_makedirs( "%s/LC_MESSAGES/campaigns" % lang )
+        os.system( "msgfmt -o %s/LC_MESSAGES/campaigns/t01.wmf.mo campaign_t01_%s.po" % ( lang, lang ))
+        
+##############################
+# tutorial campaign 2
+##############################
+    files = []
+    for mission in CAMPAING_MISSION2:
+        for file in glob("%s/*" % mission):
+            if( file[-3:] == "CVS" or file[-1] == '~' or file[-6:]=="binary" or file[-4:]=="pics"): 
+                continue
+            files.append( file )
+
+    catalog = confgettext.parse_conf( files )
+    file = open( "campaign_t02.pot", "w")
+    file.write(catalog)
+    file.close()
+
+    for lang in LANGUAGES:
+        # merge new strings with existing translations
+        if not os.system( "msgmerge campaign_t02_%s.po campaign_t02.pot > tmp" % lang ):
+                do_rename("tmp", "campaign_t02_%s.po" % ( lang ) )
+
+        # compile message catalogs
+        do_makedirs( "%s/LC_MESSAGES/campaigns" % lang )
+        os.system( "msgfmt -o %s/LC_MESSAGES/campaigns/t02.wmf.mo campaign_t02_%s.po" % ( lang, lang ))
+
 
 ##############################
 # Texts (General help, Readme and so on) 

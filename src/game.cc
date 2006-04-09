@@ -36,7 +36,7 @@
 #include "tribe.h"
 #include "widelands_map_loader.h"
 #include "sound_handler.h"
-
+#include <string>
 
 
 /** Game::Game(void)
@@ -122,14 +122,19 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
    FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
    m_maploader = new Widelands_Map_Loader(fs, map);
 
-   // TODO: Dirty hack for current campaigns
-   if( scenario )
-      Sys_GrabTextdomain("campaign_ank");
-   m_maploader->preload_map(scenario);
-   
-   m_state = gs_running;
+    // Loading the locals for the campaign
+        if( scenario )
+            {
+            std::string textdomain("");
+            textdomain.append(mapname);
+            Sys_GrabTextdomain(textdomain.c_str());
+            m_maploader->preload_map(scenario);
+            log("Loading the locals for scenario. file: %s.mo\n", mapname);
+            }
+        
+        m_state = gs_running;
 
-   // We have to create the players here
+    // We have to create the players here
    for( uint i = 1; i <= map->get_nrplayers(); i++) 
       add_player(i, i==1 ? Player::playerLocal : Player::playerAI, 
             map->get_scenario_player_tribe(i).c_str(), map->get_scenario_player_name(i).c_str());

@@ -21,7 +21,7 @@ type=message_box
 state=init
 version=1
 text=""<p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
-_" "Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me? Rise against whoever threatens our very existance may it even be one of your blood or mind?""
+_" "Today my hunters brought men, women and little children who had hidden out there in the forests, trying to escape war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me? Rise against whoever threatens our very existance may it even be one of your blood or mind?" "
 "</p>""
 window_title=_The Story continues...
 is_modal=true
@@ -34,7 +34,8 @@ type=message_box
 state=init
 version=1
 text=""<p image=map:chieftain.png image-align=left line-spacing=3 font-size=12>"
-_" "Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br>Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home..."</p>""
+_" "Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long.<br>Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home..." "
+"</p>""
 window_title=_The Story continues...
 is_modal=true
 number_of_buttons=1
