@@ -482,4 +482,3 @@ msgstr "Tränare"
 #: ../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Skräddare"
-

@@ -150,4 +150,3 @@ msgstr "Vatten"
 #: ../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Fisk"
-
