@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 by the Widelands Development Team
+ * Copyright (C) 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,9 +17,17 @@
  *
  */
 
-#ifndef __S__SETUP_H
-#define __S__SETUP_H
+#ifndef WLAPPLICATION_H
+#define WLAPPLICATION_H
 
-void setup_searchpaths(int argc, char **argv);
+class WLApplication {
+public:
+	void init(int argc, char **argv);
+	void run();
+	void shutdown();
+
+protected:
+
+};
 
 #endif

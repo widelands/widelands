@@ -44,6 +44,8 @@ char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *f
 bool FS_CanonicalizeName(char *buf, int bufsize, const char *path);
 const char *FS_Filename(const char* buf);
 
+void setup_searchpaths(int argc, char **argv);
+
 /**
 FileSystem is a base class representing certain filesystem operations.
 */
@@ -197,5 +199,7 @@ public:
 
 // Access all game data files etc.. through this FileSystem
 extern LayeredFileSystem *g_fs;
+
+
 
 #endif

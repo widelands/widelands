@@ -20,7 +20,6 @@
 #include <SDL.h>
 #include "editor.h"
 #include "error.h"
-#include "filesystem.h"
 #include "font_handler.h"
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
@@ -38,10 +37,10 @@
 #include "network.h"
 #include "network_ggz.h"
 #include "options.h"
-#include "setup.h"
 #include "system.h"
 #include "util.h"
 #include "sound_handler.h"
+#include "wlapplication.h"
 
 LayeredFileSystem *g_fs;
 
@@ -60,10 +59,6 @@ static void g_init(int argc, char **argv)
 {
 	try
 	{
-		// Create filesystem
-		g_fs = LayeredFileSystem::Create();
-		setup_searchpaths(argc, argv);
-
 		// Handle options
 		options_init(argc, argv);
 
@@ -379,13 +374,22 @@ void g_main(int argc, char** argv)
 	}
 }
 
+WLApplication *g_app;
 
 /**
  * Cross-platform entry point for SDL applications.
 */
 int main(int argc, char** argv)
 {
+	g_app=new WLApplication();
+
+	g_app->init(argc, argv);
+	g_app->run();
 	g_main(argc, argv);
+	g_app->shutdown();
+
+	delete g_app;
+
 	return 0;
 }
 
@@ -393,8 +397,17 @@ int main(int argc, char** argv)
 #undef main
 
 /// This is a hack needed for mingw under windows
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
+	g_app=new WLApplication();
+
+	g_app->init(argc, argv);
+	g_app->run();
 	g_main(argc,argv);
-return 0;
+	g_app->shutdown();
+
+	delete g_app;
+
+	return 0;
 }
 #endif

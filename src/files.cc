@@ -32,12 +32,19 @@
 #include "filesystem.h"
 #include "zip_filesystem.h"
 
+#ifdef USE_DATAFILE
+#include "datafile.h"
+#endif
+
 #ifdef _WIN32
   #include <windows.h>
   #include <io.h>
   #define stat _stat
 #else
   #include <glob.h>
+  #include <sys/stat.h>
+  #include <sys/types.h>
+  #include <unistd.h>
 #endif
 
 /*
@@ -1393,3 +1400,83 @@ LayeredFileSystem *LayeredFileSystem::Create()
 	return new LayeredFSImpl;
 }
 
+/**
+ * Read the actual name of the executable from /proc
+ *
+ * \todo is exename still neccessary, now that BINDIR can be seen from config.h?
+ *       same question for slash/backslash detection, it's trivial with scons
+*/
+static std::string getexename(char **argv)
+{
+	static const char* const s_selfptr = "/proc/self/exe";
+	char buf[PATH_MAX]="";
+	int ret=0;
+
+#ifdef __linux__
+	ret = readlink(s_selfptr, buf, sizeof(buf));
+	if (ret == -1) {
+		log("readlink(%s) failed: %s\n", s_selfptr, strerror(errno));
+		return "";
+	}
+#endif
+
+	if (ret>0)
+		return std::string(buf, ret);
+	else
+		return argv[0];
+
+	return std::string(buf, ret);
+}
+
+/** void setup_searchpaths(int argc, char **argv)
+ *
+ * Sets the filelocators default searchpaths (partly OS specific)
+ */
+void setup_searchpaths(int argc, char **argv)
+{
+	// first, try the data directory used in the last scons invocation
+	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h
+
+	// if everything else fails, search it where the FHS forces us to put it (obviously UNIX-only)
+#ifndef WIN32
+	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/games/widelands"));
+#endif
+	//TODO: is there a "default dir" for this on win32 ?
+
+	// absolute fallback directory is the CWD
+	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
+
+	// the directory the executable is in is the default game data directory
+	std::string exename = getexename(argv);
+	std::string::size_type slash = exename.rfind('/');
+	std::string::size_type backslash = exename.rfind('\\');
+
+	if (backslash != std::string::npos && (slash == std::string::npos || backslash > slash))
+		slash = backslash;
+
+	if (slash != std::string::npos) {
+		exename.erase(slash);
+		if (exename != ".") {
+			g_fs->AddFileSystem(FileSystem::CreateFromDirectory(exename));
+#ifdef USE_DATAFILE
+			exename.append ("/widelands.dat");
+			g_fs->AddFileSystem(new Datafile(exename.c_str()));
+#endif
+		}
+	}
+
+	// finally, the user's config directory
+	// TODO: implement this for UIWindows (yes, NT-based ones are actually multi-user)
+#ifndef	WIN32
+	std::string path;
+	char *buf=getenv("HOME"); //do not use FS_GetHomedir() to not accidentally create ./.widelands
+
+	if (buf) { // who knows, maybe the user's homeless
+		path = std::string(buf) + "/.widelands";
+		mkdir(path.c_str(), 0x1FF);
+		g_fs->AddFileSystem(FileSystem::CreateFromDirectory(path.c_str()));
+	} else {
+		//TODO: complain
+	}
+#endif
+}
