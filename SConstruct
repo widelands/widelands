@@ -147,21 +147,26 @@ env.Tool("astyle", toolpath=['build/scons-tools'])
 #
 # Initial debug info
 
+#This makes LIBPATH work correctly - I just don't know why :-(
+#Obviously, env.LIBPATH must be forced to be a list instead of a string. Is this
+#a scons problem? Or rather our problem???
+env.Append(LIBPATH=[])
+
 print 'Platform:         ', env['PLATFORM']
 print 'Build type:       ', env['build']
 
 if env['PLATFORM']!='win32':
-	env.Append(PATH='/usr/bin /usr/local/bin ')
+	env.Append(PATH=' /usr/bin /usr/local/bin')
 
 if env['PLATFORM']=='darwin':
 	# this is where DarwinPorts puts stuff by default
-	env.Append(CPPPATH='/opt/local/include ')
-	env.Append(LIBPATH='/opt/local/lib ')
-	env.Append(PATH='/opt/local/bin ')
+	env.Append(CPPPATH=' /opt/local/include')
+	env.Append(LIBPATH=' /opt/local/lib')
+	env.Append(PATH=' /opt/local/bin')
 	# and here's for fink
-	env.Append(CPPPATH='/sw/include ')
-	env.Append(LIBPATH='/sw/lib ')
-	env.Append(PATH='/sw/bin ')
+	env.Append(CPPPATH=' /sw/include')
+	env.Append(LIBPATH=' /sw/lib')
+	env.Append(PATH=' /sw/bin')
 
 ################################################################################
 # Autoconfiguration
