@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-03-19 20:10+0100\n"
+"PO-Revision-Date: 2006-04-16 13:36+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -275,7 +275,7 @@ msgstr "Golderz"
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
-msgstr "Mauerstein"
+msgstr "Steinblöcke"
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -327,7 +327,7 @@ msgstr "Ration"
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
-msgstr "Stein"
+msgstr "Felsen"
 
 #: ../tribes/barbarians/wares/scythe/conf:2
 msgid "Scythe"
