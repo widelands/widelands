@@ -38,7 +38,6 @@
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
-#include "options.h"
 #include "overlay_manager.h"
 #include "soldier.h"
 #include "stock_menu.h"

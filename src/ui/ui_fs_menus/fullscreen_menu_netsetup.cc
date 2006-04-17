@@ -26,7 +26,7 @@
 #include "network.h"
 #include "network_lan_promotion.h"
 #include "network_ggz.h"
-#include "options.h"
+#include "profile.h"
 
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
@@ -34,7 +34,7 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 {
 	discovery=new LAN_Game_Finder();
 	discovery->set_callback (discovery_callback, this);
-	
+
 	// Text
 	UITextarea* title= new UITextarea(this, MENU_XRES/2, 120, _("Begin Network Game"), Align_HCenter);
 	title->set_font(UI_FONT_BIG, UI_FONT_CLR_FG);
@@ -61,9 +61,9 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	// Hostname
 	hostname=new UIEdit_Box(this, 288, 170, 174, 24, 2, 0);
 	hostname->changed.set(this, &Fullscreen_Menu_NetSetup::toggle_hostname);
-	hostname->set_text("localhost");	
+	hostname->set_text("localhost");
 
-	// Player 
+	// Player
 	playername=new UIEdit_Box(this, 288, 210, 174, 24, 2, 0);
 	playername->set_text(_("nobody"));
 
@@ -72,7 +72,7 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	networktype->clickedid.set(this, &Fullscreen_Menu_NetSetup::toggle_networktype);
 	networktype->set_title(_("LAN games"));
 	internetgame = false;
-	
+
 	// List of open games in local network
 	opengames=new UITable(this, 288, 250, 320, 128);
 	opengames->add_column (_("Host"), UITable::STRING, 128);
@@ -89,7 +89,7 @@ Fullscreen_Menu_NetSetup::~Fullscreen_Menu_NetSetup ()
 void Fullscreen_Menu_NetSetup::think ()
 {
 	Fullscreen_Menu_Base::think ();
-	
+
 	if(!NetGGZ::ref()->usedcore())
 	{
 		discovery->run ();
@@ -99,32 +99,32 @@ void Fullscreen_Menu_NetSetup::think ()
 bool Fullscreen_Menu_NetSetup::get_host_address (ulong& addr, ushort& port)
 {
 	const char* host=hostname->get_text();
-	
+
 	int i;
 	for (i=0;i<opengames->get_nr_entries();i++) {
 	    LAN_Open_Game* game=(LAN_Open_Game*) (opengames->get_entry(i)->get_user_data());
-	    
+
 	    if (!strcmp(game->info.hostname, host)) {
 		addr=game->address;
 		port=game->port;
 		return true;
 	    }
 	}
-	
+
 	hostent* he=gethostbyname(host);
 	if (he==0)
 	    return false;
-	
+
 	addr=((in_addr*) (he->h_addr_list[0]))->s_addr;
 	port=htons(WIDELANDS_PORT);
-	
+
 	return true;
 }
 
 void Fullscreen_Menu_NetSetup::game_selected (int sel)
 {
 	LAN_Open_Game* game=(LAN_Open_Game*) (opengames->get_selection());
-	
+
 	if(game) hostname->set_text (game->info.hostname);
 }
 
@@ -132,7 +132,7 @@ void Fullscreen_Menu_NetSetup::update_game_info (UITable_Entry* entry, const LAN
 {
 	entry->set_string (0, info.hostname);
 	entry->set_string (1, info.map);
-	
+
 	switch (info.state) {
 	    case LAN_GAME_OPEN:
 		entry->set_string (2, _("Open"));
@@ -158,7 +158,7 @@ void Fullscreen_Menu_NetSetup::game_closed (const LAN_Open_Game* game)
 void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game* game)
 {
 	UITable_Entry* entry=opengames->find_entry(game);
-	
+
 	if (entry!=0)
 	    update_game_info (entry, game->info);
 }

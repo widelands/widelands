@@ -17,13 +17,14 @@
  *
  */
 
-#include "event_move_view.h"
+#include "editor_game_base.h"
 #include "error.h"
+#include "event_move_view.h"
 #include "filesystem.h"
 #include "game.h"
-#include "editor_game_base.h"
-#include "map.h"
 #include "interactive_base.h"
+#include "map.h"
+#include "profile.h"
 
 static const int EVENT_VERSION = 1;
 
@@ -48,7 +49,7 @@ void Event_Move_View::reinitialize(Game* g) {
  * File Read, File Write
  */
 void Event_Move_View::Read(Section* s, Editor_Game_Base* egbase) {
-   int version=s->get_safe_int("version"); 
+   int version=s->get_safe_int("version");
    if(version == EVENT_VERSION) {
       m_pt.x=s->get_safe_int("point_x");
       m_pt.y=s->get_safe_int("point_y");

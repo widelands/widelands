@@ -51,19 +51,14 @@ using namespace std;
 #define INVALID_POSITION Coords(-2,-2)
 //@}
 
+extern class Sound_Handler g_sound_handler;
+
 class Sound_Handler;
 ///\file
 
-/** The global \ref Sound_Handler object
- * 
- * The sound handler is a static object because otherwise it'd be quite
- * difficult to pass the --nosound command line optio
-*/
-extern Sound_Handler g_sound_handler;
-
 /** A collection of several pieces of music meant for the same situation.
  *
- * A Songset encapsulates a number of interchangeable pieces of (background) 
+ * A Songset encapsulates a number of interchangeable pieces of (background)
  * music, e.g. all songs that might be played while the main menu is being
  * shown. It is possible to access those songs one after another or in
  * random order. The fact that a Songset really contains several different
@@ -96,14 +91,14 @@ protected:
 
 	/** File reader object to fetch songs from disc when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
-	 * \sa m_rwops	
+	 * \sa m_rwops
 	 * \sa get_song()
 	*/
 	FileRead *m_fr;
 
 	/** RWops object to fetch songs from disc when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
-	 * \sa m_fr 
+	 * \sa m_fr
 	 * \sa get_song()
 	*/
 	SDL_RWops *m_rwops;
@@ -139,13 +134,13 @@ protected:
 
 	/** How important is it to play the effect even when others are running
 	 * already?
-	 * 
+	 *
 	 * Value 0-127: probability between 0.0 and 1.0, only one instance can
 	 * be playing at any time
-	 * 
+	 *
 	 * Value 128-254: probability between 0.0 and 1.0, many instances can
 	 * be playing at any time
-	 * 
+	 *
 	 * Value 255: always play; unconditional
 	*/
 	Uint8 m_priority;
@@ -155,7 +150,7 @@ protected:
  *
  * Sound_Handler collects all functions for dealing with music and sound effects
  * in one class. It is similar in task - though not in scope - to well known
- * sound servers like gstreamer, EsounD or aRts. For the moment (and probably 
+ * sound servers like gstreamer, EsounD or aRts. For the moment (and probably
  * forever), the only backend supported is SDL_mixer.
  *
  * The Sound_Handler is (obviously) a singleton object and is therefore stored
@@ -164,7 +159,7 @@ protected:
  *
  * \par Music
  *
- * Background music for different situations (e.g. 'Menu', 'Gameplay') is 
+ * Background music for different situations (e.g. 'Menu', 'Gameplay') is
  * collected in songsets. Each \ref Songset contains references to one or more
  * songs in any format understood by SDL_mixer (e.g mp3, ogg, wav). The only
  * ordering inside a soundset is from the order in which the songs were
@@ -182,42 +177,42 @@ protected:
  * \li \c menu
  * \li \c ingame
  *
- * must reside directly in the directory 'sounds' and must be named 
+ * must reside directly in the directory 'sounds' and must be named
  * SONGSET_XX.??? where XX is a number from 00 to 99 and ??? is a filename
  * extension. All subdirectories of 'sounds' will be considered to contain
  * ingame music. The the music and sub-subdirectories found in them can be
  * arbitrarily named. This means: everything below sound/ingame_01 can have
  * any name you want. All audio files below sound/ingame_01 will be played as
  * ingame music.
- * 
+ *
  * \note You should only be using the ogg format for music.
  *
  * \par Sound effects
  *
- * Buildings and workers can use sound effects in their programs. To do so, use 
+ * Buildings and workers can use sound effects in their programs. To do so, use
  * e.g. "playFX blacksmith_hammer" in the appropriate conf file. The conf file
  * parser will then load one or more audio files for 'hammering blacksmith'
- * from the building's/worker's configuration directory and store them in an 
+ * from the building's/worker's configuration directory and store them in an
  * \ref FXset for later access, similar to the way music is stored in songsets.
  * For effects, however, the selection is always random. Sound effects are kept
  * in memory at all times, to avoid delays from disk access.
  *
  * The abovementioned sound effects are synchronized with a work program. It's
- * also possible to have sound effects that are synchronized with a 
+ * also possible to have sound effects that are synchronized with a
  * building/worker \e animation. For more information about this look at class
  * \ref AnimationManager.
- * 
+ *
  * \note You should only be using the ogg format for sound effects.
  *
  * \par Usage of callbacks
  *
- * SDL_mixer's way to notify the application of important sound events, e.g. 
+ * SDL_mixer's way to notify the application of important sound events, e.g.
  * that a song is finished, are callbacks. While callbacks in and of themselves
  * are a fine thing, they can also be a pain in the body part with which we
  * usually touch our chairs.
  *
  * Problem 1:\n
- * Callbacks must use global(or static) functions \e but \e not normal member 
+ * Callbacks must use global(or static) functions \e but \e not normal member
  * functions of a class. If you must know why: ask google. But how can a
  * static function share data with an instance of it's own class? Usually not at
  * all.\n
@@ -225,7 +220,7 @@ protected:
  * and therefore accessible to global functions. So problem 1 disappears.
  *
  * Problem 2:\n
- * Callbacks run in the caller's context. This means that when 
+ * Callbacks run in the caller's context. This means that when
  * \ref music_finished_callback() is called, SDL_mixer and SDL_audio <b>will
  * be holding all of their locks!!</b> "So what?", you ask. The above means
  * that one \e must \e not call \b any SDL_mixer functions from inside the
@@ -236,9 +231,9 @@ protected:
  * two seperate threads, so you \e really don't want to play around with
  * locking.
  *
- * The only way around that resctriction is to send an SDL event(SDL_USEREVENT) 
+ * The only way around that resctriction is to send an SDL event(SDL_USEREVENT)
  * from the callback (non-sound SDL functions \e can be used). Then, later,
- * the main event loop (system.cc) will process this event \e but \e not in 
+ * the main event loop (system.cc) will process this event \e but \e not in
  * SDL_mixer's context, so locking is no problem.
  *
  * Yes, that's just a tad ugly.
@@ -247,24 +242,24 @@ protected:
  *
  * \par Stopping music without blocking
  *
- * When playing background music with SDL_mixer, we can fade the audio in/out. 
+ * When playing background music with SDL_mixer, we can fade the audio in/out.
  * Unfortunately, Mix_FadeOutMusic will return immediately - but, as the music
  * is not yet stopped, starting a new piece of background music will block. So
  * the choice is to block (directly) after ordering to fade out or indirectly
  * when starting the next piece. Now imagine a fadeout-time of 30 seconds ...
  * and the user who is waiting for the next screen ......
  *
- * The solution is to work asynchronously, which is doable, as we already use a 
- * callback to tell us when the audio is \e completely finished. So in 
+ * The solution is to work asynchronously, which is doable, as we already use a
+ * callback to tell us when the audio is \e completely finished. So in
  * \ref stop_music (or \ref change_music ) we just start the fadeout. The
  * callback then tells us when the audio has actually stopped and we can start
  * the next music. To differentiate between the two states we can just take a
  * peek with Mix_MusicPlaying() if there is music running. To make sure that
  * nothing bad happens, that check is not only required in \ref change_music
  * but also in \ref start_music, which causes the seemingly recursive call to
- * change_music from inside start_music. It really is not recursive, trust 
+ * change_music from inside start_music. It really is not recursive, trust
  * me :-)
- * 
+ *
  * \todo Describe priorities
  * \todo Describe play-or-not algo
  * \todo Internationalized sound effects/music
@@ -344,7 +339,7 @@ protected:
 	bool m_disable_fx;
 
 	/** Whether to play music in random order
-	 * \note Sound effects will \e always be selected at random (inside 
+	 * \note Sound effects will \e always be selected at random (inside
 	 * their \ref FXset, of course
 	*/
 	bool m_random_order;
@@ -364,7 +359,7 @@ protected:
 	string m_current_songset;
 
 	/** The random number generator.
-	 * \note The RNG here \e must \e not be the same as the one for the game 
+	 * \note The RNG here \e must \e not be the same as the one for the game
 	 * logic!
 	*/
 	RNG m_rng;

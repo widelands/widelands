@@ -22,11 +22,11 @@
 #include <stdlib.h>
 #include "error.h"
 #include "graphic.h"
+#include "profile.h"
 #include "rendertarget.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_panel.h"
-#include "options.h"
 
 #ifdef WIN32
 #include <windows.h>

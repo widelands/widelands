@@ -48,6 +48,8 @@ const char* falseWords[FALSE_WORDS] =
 	"0"
 };
 
+Profile g_options(Profile::err_log);
+
 /*
 ==============================================================================
 
@@ -763,9 +765,9 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 	{
 		FileRead fr;
 
-      if( !fs ) 
+      if( !fs )
          fr.Open(g_fs, filename);
-      else 
+      else
          fr.Open(fs, filename);
 
       // line can become quite big. But this should be enough
@@ -782,8 +784,8 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
       while(fr.ReadLine(line, LINESIZE))
 		{
 			linenr++;
-			
-         if( !reading_multiline ) 
+
+         if( !reading_multiline )
             p = line;
 
 			p = skipwhite(p);
@@ -806,10 +808,10 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
                }
                if(!strlen(line))
                   throw wexception("line %i: runaway multiline string", linenr);
-              
+
                // skip " or '
                line++;
-               
+
                char *eot = line+strlen(line)-1;
                while( *eot != '"' && *eot != '\'') {
                   *eot = 0;
@@ -819,11 +821,11 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
                tail = line;
             } else {
                tail = strchr(p, '=');
-               if(!tail) 
+               if(!tail)
                   throw wexception("line %i: invalid syntax: %s", linenr, line );
                *tail++ = 0;
                key = p;
-					if(*tail == '_' ) { 
+					if(*tail == '_' ) {
                   tail+= 1; // skip =_, which is only used for translations
                   translate_line = true;
                }
@@ -831,15 +833,15 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 					killcomments(tail);
 					rtrim(tail);
 					rtrim(p);
-            
+
                // first, check for multiline string
-					if ( strlen(tail) >= 2 && 
-                    ((tail[0] == '\'' || tail[0] == '\"') && 
+					if ( strlen(tail) >= 2 &&
+                    ((tail[0] == '\'' || tail[0] == '\"') &&
                     (tail[1] == '\'' || tail[1] == '\"'))) {
                   reading_multiline = true;
                   tail += 2;
 					}
-               
+
                // then remove surrounding '' or ""
                if( tail[0] == '\'' || tail[0] == '\"') {
                   tail++;
@@ -857,7 +859,7 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
                      }
                   }
                }
-					
+
                // ready to insert
 					if (!s) {
 						if (global_section)
@@ -865,8 +867,8 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 						else
 							throw wexception("line %i: key %s outside section", linenr, p);
 					}
-          
-               if( translate_line && strlen( tail )) 
+
+               if( translate_line && strlen( tail ))
                   data += Sys_Translate( tail );
                else
                   data += tail;
@@ -905,7 +907,7 @@ void Profile::write(const char *filename, bool used_only, FileSystem* fs)
 		for(Section::Value_list::iterator v = s->m_values.begin(); v != s->m_values.end(); v++) {
 			if (used_only && !v->is_used())
 				continue;
-         
+
          const char* str = v->get_string();
          bool multiline = false;
          for( uint i = 0; i < strlen( str ); i++)
@@ -921,9 +923,9 @@ void Profile::write(const char *filename, bool used_only, FileSystem* fs)
 		fw.Printf("\n");
 	}
 
-   if( !fs ) 
+   if( !fs )
       fw.Write(g_fs, filename);
-   else 
+   else
       fw.Write(fs, filename);
 }
 

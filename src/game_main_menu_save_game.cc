@@ -24,12 +24,12 @@
 #include "game_preload_data_packet.h"
 #include "game_saver.h"
 #include "interactive_player.h"
+#include "profile.h"
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
-#include "options.h"
 
 /*
 ===============
@@ -56,7 +56,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
    m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
    m_ls->selected.set(this, &Game_Main_Menu_Save_Game::selected);
    m_ls->double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
-   // Filename editbox 
+   // Filename editbox
    m_editbox=new UIEdit_Box(this, posx, posy+get_inner_h()-spacing-offsy-60+3, get_inner_w()/2-spacing, 20, 1, 0);
    m_editbox->changed.set(this, &Game_Main_Menu_Save_Game::edit_box_changed);
 
@@ -79,7 +79,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game(Interactive_Player* parent, U
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 4, 1);
    but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
    but->set_title(_("OK"));
-   but->set_enabled(false); 
+   but->set_enabled(false);
    m_ok_btn=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 4, 0);
    but->clickedid.set(this, &Game_Main_Menu_Save_Game::clicked);
@@ -114,13 +114,13 @@ void Game_Main_Menu_Save_Game::clicked(int id) {
    if(id==1) {
       // Ok
       std::string filename=m_editbox->get_text();
-   
-      if(save_game(filename, ! g_options.pull_section("global")->get_bool("nozip", false))) 
+
+      if(save_game(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
          die();
    } else if(id==0) {
       // Cancel
       die();
-   } 
+   }
 }
 
 /*
@@ -129,7 +129,7 @@ void Game_Main_Menu_Save_Game::clicked(int id) {
 void Game_Main_Menu_Save_Game::selected(int i) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
-   
+
    FileSystem* fs = g_fs->MakeSubFileSystem( name );
    Game_Loader gl(fs, m_parent->get_game());
    Game_Preload_Data_Packet gpdp;
@@ -152,7 +152,7 @@ void Game_Main_Menu_Save_Game::selected(int i) {
 
    sprintf(buf, "%02i:%02i", hours, minutes);
    m_gametime->set_text(buf);
-   
+
    delete fs;
 }
 
@@ -167,14 +167,14 @@ void Game_Main_Menu_Save_Game::double_clicked(int) {
  * fill the file list
  */
 void Game_Main_Menu_Save_Game::fill_list(void) {
-   // Fill it with all files we find. 
+   // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
-  
+
    Game_Preload_Data_Packet gpdp;
-   
+
    for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
-      
+
       FileSystem* fs = 0;
       Game_Loader* gl = 0;
       try {
@@ -193,7 +193,7 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
       if( fs )
          delete fs;
    }
-   
+
    if(m_ls->get_nr_entries())
       m_ls->select(0);
 }
@@ -225,7 +225,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    }
    if(assign_extension)
       filename+=WLGF_SUFFIX;
-   
+
    // Now append directory name
    std::string complete_filename=m_curdir;
    complete_filename+="/";
@@ -239,9 +239,9 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
       UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Game Error!!"), s, UIModal_Message_Box::YESNO);
       bool retval=mbox->run();
       delete mbox;
-      if(!retval) 
+      if(!retval)
          return false;
-      
+
       // Delete this
       g_fs->Unlink( complete_filename );
    }
@@ -253,7 +253,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    } else {
       fs = g_fs->CreateSubFileSystem( complete_filename, FileSystem::FS_ZIP );
    }
-   
+
    Game_Saver* gs=new Game_Saver(fs, m_parent->get_game());
    try {
       gs->save();
@@ -267,7 +267,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    delete gs;
    delete fs;
    die();
-   
+
    return true;
 }
 

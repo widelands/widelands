@@ -23,7 +23,6 @@
 #include <string>
 #include <map>
 #include "error.h"
-#include "options.h"
 
 class Game;
 class Section;
@@ -39,7 +38,7 @@ class Trigger {
    friend class Widelands_Map_Trigger_Data_Packet;
 
    public:
-      Trigger(void) { } 
+      Trigger(void) { }
       virtual ~Trigger(void) { }
 
       // virtual functions, implemented by the real triggers

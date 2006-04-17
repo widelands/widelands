@@ -23,6 +23,8 @@
 #include "types.h"
 #include <vector>
 
+extern class Profile g_options;
+
 class Profile;
 class FileSystem;
 

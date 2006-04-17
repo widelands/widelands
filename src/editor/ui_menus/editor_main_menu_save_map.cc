@@ -26,7 +26,7 @@
 #include "editor_main_menu_save_map_make_directory.h"
 #include "error.h"
 #include "filesystem.h"
-#include "options.h"
+#include "profile.h"
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_listselect.h"
@@ -64,7 +64,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    m_ls=new UIListselect(this, posx, posy, get_inner_w()/2-spacing, get_inner_h()-spacing-offsy-60);
    m_ls->selected.set(this, &Main_Menu_Save_Map::selected);
    m_ls->double_clicked.set(this, &Main_Menu_Save_Map::double_clicked);
-   // Filename editbox 
+   // Filename editbox
    m_editbox=new UIEdit_Box(this, posx, posy+get_inner_h()-spacing-offsy-60+3, get_inner_w()/2-spacing, 20, 1, 0);
    m_editbox->changed.set(this, &Main_Menu_Save_Map::edit_box_changed);
 
@@ -100,15 +100,15 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    // Description
    new UITextarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
    m_descr=new UIMultiline_Textarea(this, posx+70, posy, get_inner_w()-posx-spacing-70, get_inner_h()-posy-spacing-40, "---", Align_CenterLeft);
-   
-   
+
+
    // Buttons
    posx=5;
    posy=get_inner_h()-30;
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
    but->set_title(_("OK"));
-   but->set_enabled(false); 
+   but->set_enabled(false);
    m_ok_btn=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
@@ -116,7 +116,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    but= new UIButton(this, spacing, posy, 120, 20, 1, 2);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
    but->set_title(_("Make Directory"));
-   
+
 
    m_basedir="maps";
    m_curdir="maps";
@@ -147,7 +147,7 @@ void Main_Menu_Save_Map::clicked(int id) {
    if(id==1) {
       // Ok
       std::string filename=m_editbox->get_text();
-      
+
       if(filename=="") {
          // Maybe a dir is selected
          filename=static_cast<const char*>(m_ls->get_selection());
@@ -162,7 +162,7 @@ void Main_Menu_Save_Map::clicked(int id) {
          fill_list();
       } else {
          // Ok, save this map
-         if(save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false))) 
+         if(save_map(filename, ! g_options.pull_section("global")->get_bool("nozip", false)))
             die();
       }
    } else if(id==0) {
@@ -198,8 +198,8 @@ void Main_Menu_Save_Map::selected(int i) {
       Map_Loader* m_ml = map->get_correct_loader(name);
       m_ml->preload_map(true); // This has worked before, no problem
       delete m_ml;
-     
-      
+
+
       m_editbox->set_text(FS_Filename(name));
       m_ok_btn->set_enabled(true);
 
@@ -214,7 +214,7 @@ void Main_Menu_Save_Map::selected(int i) {
 
       sprintf(buf, "%ix%i", map->get_width(), map->get_height());
       m_size->set_text(buf);
-      
+
       delete map;
    } else {
       m_name->set_text("");
@@ -239,9 +239,9 @@ void Main_Menu_Save_Map::double_clicked(int) {
  * fill the file list
  */
 void Main_Menu_Save_Map::fill_list(void) {
-   // Fill it with all files we find. 
+   // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
-  
+
    // First, we add all directorys
    // We manually add the parent directory
    if(m_curdir!=m_basedir) {
@@ -262,17 +262,17 @@ void Main_Menu_Save_Map::fill_list(void) {
       if(!strcmp(FS_Filename(name),"CVS")) continue;
       if(!g_fs->IsDirectory(name)) continue;
       if(Widelands_Map_Loader::is_widelands_map(name)) continue;
-   
+
       m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
-  
+
    Map* map=new Map();
 
    for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
       const char *name = pname->c_str();
-     
+
       Map_Loader* m_ml = map->get_correct_loader(name);
-      if(!m_ml) continue; 
+      if(!m_ml) continue;
       if(m_ml->get_type()==Map_Loader::S2ML) continue; // we do not list s2 files since we only write wlmf
 
       try {
@@ -290,7 +290,7 @@ void Main_Menu_Save_Map::fill_list(void) {
 
    }
    delete map;
-   
+
    if(m_ls->get_nr_entries())
       m_ls->select(0);
 }
@@ -303,7 +303,7 @@ void Main_Menu_Save_Map::edit_box_changed(void) {
 }
 
 /*
- * Save the map in the current directory with 
+ * Save the map in the current directory with
  * the current filename
  *
  * returns true if dialog should close, false if it
@@ -323,7 +323,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
    }
    if(assign_extension)
       filename+=WLMF_SUFFIX;
-   
+
    // Now append directory name
    std::string complete_filename=m_curdir;
    complete_filename+="/";
@@ -337,7 +337,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
       UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Map Error!!"), s, UIModal_Message_Box::YESNO);
       bool retval=mbox->run();
       delete mbox;
-      if(!retval) 
+      if(!retval)
          return false;
 
       // Delete this

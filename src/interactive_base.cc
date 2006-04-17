@@ -30,9 +30,9 @@
 #include "minimap.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
-#include "options.h"
 #include "overlay_manager.h"
 #include "player.h"
+#include "profile.h"
 #include "system.h"
 
 /*

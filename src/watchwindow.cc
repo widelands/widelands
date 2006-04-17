@@ -24,11 +24,11 @@
 #include "mapview.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
+#include "profile.h"
 #include "ui_button.h"
 #include "ui_signal.h"
 #include "ui_window.h"
 #include "watchwindow.h"
-#include "options.h"
 #include <vector>
 
 #define NUM_VIEWS 5

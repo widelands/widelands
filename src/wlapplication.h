@@ -22,11 +22,13 @@
 
 class WLApplication {
 public:
-	void init(int argc, char **argv);
+	bool init(int argc, char **argv);
 	void run();
 	void shutdown();
 
 protected:
+	void show_usage();
+	bool parse_command_line(int argc, char** argv);
 
 };
 

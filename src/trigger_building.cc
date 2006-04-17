@@ -25,6 +25,7 @@
 #include "game.h"
 #include "map.h"
 #include "map_variable_manager.h"
+#include "profile.h"
 #include "trigger_building.h"
 #include "util.h"
 
@@ -59,7 +60,7 @@ void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
       set_area( s->get_safe_int( "area" ));
       int player = s->get_safe_int( "player" );
       set_player(player);
-      if(!egbase->is_game()) 
+      if(!egbase->is_game())
          static_cast<Editor_Interactive*>(egbase->get_iabase())->reference_player_tribe(player, this);
       set_building_count( s->get_int( "count" ));
       set_building( s->get_safe_string( "building" ));
@@ -71,7 +72,7 @@ void Trigger_Building::Read(Section* s, Editor_Game_Base* egbase) {
 void Trigger_Building::Write(Section* s) {
    // the version
    s->set_int("version", TRIGGER_VERSION );
-   
+
    // Point
    s->set_int("point_x", m_pt.x);
    s->set_int("point_y", m_pt.y);
@@ -94,13 +95,13 @@ void Trigger_Building::Write(Section* s) {
  * check if trigger conditions are done
  */
 void Trigger_Building::check_set_conditions(Game* game) {
-   if(m_pt.x<0 || 
-         m_pt.y<0 || 
-         m_pt.x>=static_cast<int>(game->get_map()->get_width()) || 
+   if(m_pt.x<0 ||
+         m_pt.y<0 ||
+         m_pt.x>=static_cast<int>(game->get_map()->get_width()) ||
          m_pt.y>=static_cast<int>(game->get_map()->get_height()))
       return;
    if(m_player<=0 || m_player>MAX_PLAYERS) return;
-  
+
    MapRegion mrc(game->get_map(), m_pt, m_area);
 
    int count=0;
@@ -109,12 +110,12 @@ void Trigger_Building::check_set_conditions(Game* game) {
       BaseImmovable* imm=f.field->get_immovable();
       if(!imm) continue;
       if(imm->get_type()!=Map_Object::BUILDING) continue;
-     
+
       Building* b=static_cast<Building*>(imm);
       if(b->get_owner()!=game->get_player(m_player)) continue;
       std::string name=b->get_name();
       if(name != m_building) continue;
-      ++count; 
+      ++count;
    }
 
    if(count>=m_count) set_trigger(true);

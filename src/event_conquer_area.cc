@@ -18,11 +18,12 @@
  */
 
 #include "event_conquer_area.h"
+#include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
-#include "editor_game_base.h"
 #include "map.h"
+#include "profile.h"
 #include "system.h"
 
 static const int EVENT_VERSION = 1;
@@ -55,12 +56,12 @@ void Event_Conquer_Area::Read(Section* s, Editor_Game_Base* egbase) {
    if(version == EVENT_VERSION) {
       m_pt.x=s->get_safe_int("point_x");
       m_pt.y=s->get_safe_int("point_y");
-      
+
       set_area( s->get_safe_int("area"));
 
       int player= s->get_safe_int("player");
       set_player(player);
-      
+
       if(m_pt.x<0 || m_pt.y<0 || m_pt.x>=((int)egbase->get_map()->get_width()) || m_pt.y>=((int)egbase->get_map()->get_height()) || player<=0 || player>egbase->get_map()->get_nrplayers()) {
          // give a warning
          log("Conquer Area Event with illegal coordinates or player: (%i,%i) (Player: %i) deleted!\n", m_pt.x, m_pt.y, player);

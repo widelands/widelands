@@ -63,6 +63,8 @@ Mouse: Some mouse functions deal with button mask bits. Bits are simply obtained
 as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right are pressed"
 */
 
+void init_double_game ();
+
 // basic initialization etc..
 void Sys_Init();
 void Sys_Shutdown();

@@ -44,7 +44,6 @@
 #include "keycodes.h"
 #include "map.h"
 #include "mapview.h"
-#include "options.h"
 #include "overlay_manager.h"
 #include "player.h"
 #include "system.h"

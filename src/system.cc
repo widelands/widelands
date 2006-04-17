@@ -25,7 +25,6 @@
 #include "filesystem.h"
 #include "graphic.h"
 #include "machdep.h"
-#include "options.h"
 #include "profile.h"
 #include "system.h"
 #include "wexception.h"

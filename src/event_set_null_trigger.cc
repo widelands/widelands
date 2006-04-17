@@ -25,6 +25,7 @@
 #include "interactive_base.h"
 #include "map.h"
 #include "map_trigger_manager.h"
+#include "profile.h"
 #include "trigger_null.h"
 
 static const int EVENT_VERSION = 1;
@@ -54,7 +55,7 @@ void Event_Set_Null_Trigger::reinitialize(Game* g) {
  * File Read, File Write
  */
 void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
-   int version=s->get_safe_int("version"); 
+   int version=s->get_safe_int("version");
    if(version == EVENT_VERSION) {
       std::string name = s->get_safe_string("trigger");
       Trigger_Null* trig = (Trigger_Null*)egbase->get_map()->get_mtm()->get_trigger( name.c_str() ); // Bit Hackish, hopefully the user paid attention
@@ -70,7 +71,7 @@ void Event_Set_Null_Trigger::Read(Section* s, Editor_Game_Base* egbase) {
 
 void Event_Set_Null_Trigger::Write(Section* s, Editor_Game_Base *egbase) {
    assert( m_trigger );
-   
+
    // the version
    s->set_int("version", EVENT_VERSION);
 
@@ -81,7 +82,7 @@ void Event_Set_Null_Trigger::Write(Section* s, Editor_Game_Base *egbase) {
 }
 
 /*
- * Run this trigger 
+ * Run this trigger
  */
 Event::State Event_Set_Null_Trigger::run(Game* game) {
    assert( m_trigger );

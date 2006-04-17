@@ -36,19 +36,13 @@
 #include "graphic.h"
 #include "network.h"
 #include "network_ggz.h"
-#include "options.h"
+#include "profile.h"
 #include "system.h"
 #include "util.h"
 #include "sound_handler.h"
 #include "wlapplication.h"
 
 LayeredFileSystem *g_fs;
-
-/** The global \ref Sound_Handler object
- * The sound handler is a static object because otherwise it'd be quite difficult to pass the --nosound
- * command line option
-*/
-Sound_Handler g_sound_handler;
 
 static void g_shutdown();
 
@@ -59,9 +53,6 @@ static void g_init(int argc, char **argv)
 {
 	try
 	{
-		// Handle options
-		options_init(argc, argv);
-
 		// Create all subsystems after config has been read
 		Sys_Init();
 
@@ -123,15 +114,6 @@ static void g_shutdown()
    Sys_ReleaseTextdomain();
 
 	Sys_Shutdown();
-
-	// Save options
-	options_shutdown();
-
-	// Destroy filesystem
-	if (g_fs) {
-		delete g_fs;
-		g_fs = 0;
-	}
 }
 
 /**
@@ -383,10 +365,11 @@ int main(int argc, char** argv)
 {
 	g_app=new WLApplication();
 
-	g_app->init(argc, argv);
-	g_app->run();
-	g_main(argc, argv);
-	g_app->shutdown();
+	if (g_app->init(argc, argv)) {
+		g_app->run();
+		g_main(argc, argv);
+		g_app->shutdown();
+	}
 
 	delete g_app;
 
@@ -401,10 +384,11 @@ int main(int argc, char** argv)
 {
 	g_app=new WLApplication();
 
-	g_app->init(argc, argv);
-	g_app->run();
-	g_main(argc,argv);
-	g_app->shutdown();
+	if (g_app->init(argc, argv)) {
+		g_app->run();
+		g_main(argc,argv);
+		g_app->shutdown();
+	}
 
 	delete g_app;
 

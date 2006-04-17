@@ -27,7 +27,6 @@
 #include <errno.h>
 #include "mapviewpixelfunctions.h"
 #include "profile.h"
-#include "options.h"
 #include "error.h"
 #include "filesystem.h"
 #include "map.h"
@@ -193,6 +192,12 @@ Mix_Chunk *FXset::get_fx()
 
 //-----------------------------------------------------------------------------
 
+/** The global \ref Sound_Handler object
+ * The sound handler is a static object because otherwise it'd be quite difficult to pass the --nosound
+ * command line option
+ */
+Sound_Handler g_sound_handler;
+
 /** This is just a basic constructor. The \ref Sound_Handler must already exist
  * during command line parsing because --nosound needs to be known. At this
  * time, however, all other information is still unknown, so a real
@@ -305,13 +310,13 @@ void Sound_Handler::load_system_sounds()
  * named EFFECT_XX.{ogg, wav}, where XX is between 00 and 99. If
  * BASENAME_XX (without extension) is a directory, effects will be loaded
  * recursively.
- * 
+ *
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
  *
  * If you want "internationalized" sound effects (e.g. the lumberjack calling
  * "Timber") then append the locale to any file/directory name like this:
  * lumberjack_timber_00.ogg.de_DE
- * 
+ *
  * \param dir        The directory where the audio files reside
  * \param basename	Name from which filenames will be formed
  *                   (BASENAME_XX.wav);

@@ -25,6 +25,7 @@
 #include "interactive_base.h"
 #include "map.h"
 #include "map_objective_manager.h"
+#include "profile.h"
 
 static const int EVENT_VERSION = 1;
 
@@ -50,7 +51,7 @@ void Event_Unhide_Objective::reinitialize(Game* g) {
  * File Read, File Write
  */
 void Event_Unhide_Objective::Read(Section* s, Editor_Game_Base* egbase) {
-   int version=s->get_safe_int("version"); 
+   int version=s->get_safe_int("version");
    if(version == EVENT_VERSION) {
       std::string name = s->get_safe_string("objective");
       MapObjective* obj = egbase->get_map()->get_mom()->get_objective( name.c_str() );

@@ -24,7 +24,6 @@
 #include <map>
 #include "error.h"
 #include "trigger.h"
-#include "options.h"
 
 class Game;
 class Section;
@@ -44,9 +43,9 @@ class Event {
          RUNNING,
          DONE
       };
-      
+
    public:
-      Event(void) { 
+      Event(void) {
          m_state = INIT;
       };
       virtual ~Event(void) { };
@@ -73,7 +72,7 @@ class Event {
 
    protected:
       State        m_state;
-      
+
    private:
       std::string                m_name;
       std::map<EventReferencer*,uint> m_referencers;

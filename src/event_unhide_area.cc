@@ -17,13 +17,14 @@
  *
  */
 
+#include "editor_game_base.h"
 #include "event_unhide_area.h"
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
-#include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
+#include "profile.h"
 #include "system.h"
 
 static const int EVENT_VERSION = 1;
@@ -56,12 +57,12 @@ void Event_Unhide_Area::Read(Section* s, Editor_Game_Base* egbase) {
    if(version == EVENT_VERSION) {
       m_pt.x=s->get_safe_int("point_x");
       m_pt.y=s->get_safe_int("point_y");
-      
+
       set_area( s->get_safe_int("area"));
 
       int player= s->get_safe_int("player");
       set_player(player);
-      
+
       if(m_pt.x<0 || m_pt.y<0 || m_pt.x>=((int)egbase->get_map()->get_width()) || m_pt.y>=((int)egbase->get_map()->get_height()) || player<=0 || player>egbase->get_map()->get_nrplayers()) {
          // give a warning
          log("Unhide Area Event with illegal coordinates or player: (%i,%i) (Player: %i) deleted!\n", m_pt.x, m_pt.y, player);
@@ -97,7 +98,7 @@ Event::State Event_Unhide_Area::run(Game* game) {
    player->set_area_seen(Coords(m_pt.x,m_pt.y),get_area(), true);
 
    m_state = DONE;
-   return m_state; 
+   return m_state;
 }
 
 

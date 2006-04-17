@@ -17,15 +17,16 @@
  *
  */
 
-#include "event_message_box.h"
+#include "editor_game_base.h"
 #include "error.h"
+#include "event_message_box.h"
+#include "event_message_box_message_box.h"
 #include "filesystem.h"
 #include "game.h"
-#include "editor_game_base.h"
-#include "event_message_box_message_box.h"
+#include "graphic.h"
 #include "map.h"
 #include "map_trigger_manager.h"
-#include "graphic.h"
+#include "profile.h"
 #include "trigger_null.h"
 #include "util.h"
 
@@ -41,11 +42,11 @@ Event_Message_Box::Event_Message_Box(void) {
    set_is_modal(false);
    set_dimensions( 400, 300 );
    set_pos( -1, -1 );
-   
+
    set_nr_buttons(1);
    m_buttons[0].name=_("Continue");
    m_buttons[0].trigger=0;
-   
+
    m_window = 0;
 }
 
@@ -117,7 +118,7 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
       m_posy = s->get_int( "posy", -1 );
       m_width = s->get_int( "width", 400 );
       m_height = s->get_int( "height", 300 );
-      
+
       uint nr_buttons = s->get_safe_int( "number_of_buttons" );
       set_nr_buttons( nr_buttons );
       char buf[256];
@@ -128,7 +129,7 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
          sprintf( buf, "button_%02i_has_trigger", i );
          bool trigger = s->get_safe_bool( buf );
 
-         if( trigger ) { 
+         if( trigger ) {
             sprintf( buf, "button_%02i_trigger", i );
             Trigger* t =  egbase->get_map()->get_mtm()->get_trigger( s->get_safe_string( buf ) ); // Hopefully it is a null trigger
             set_button_trigger( i, static_cast<Trigger_Null*>(t));
@@ -143,19 +144,19 @@ void Event_Message_Box::Read(Section* s, Editor_Game_Base* egbase) {
 void Event_Message_Box::Write(Section* fs, Editor_Game_Base *egbase) {
     // Set Version
     fs->set_int( "version", EVENT_VERSION );
-    
+
     // Set Text
     fs->set_string( "text", m_text.c_str() );
 
     // Window Title
     fs->set_string( "window_title", m_window_title.c_str() );
-    
+
     // is modal
     fs->set_bool( "is_modal", get_is_modal());
 
    // Number of buttons
    fs->set_int( "number_of_buttons", get_nr_buttons());
-  
+
    // Dimension, positions
    fs->set_int("width", get_w() );
    fs->set_int("height", get_h() );
@@ -167,7 +168,7 @@ void Event_Message_Box::Write(Section* fs, Editor_Game_Base *egbase) {
    for(i=0; i<get_nr_buttons(); i++) {
       sprintf( buf, "button_%02i_name", i );
       fs->set_string( buf, m_buttons[i].name.c_str() );
-   
+
 
       sprintf( buf, "button_%02i_has_trigger", i );
       fs->set_bool( buf, m_buttons[i].trigger == 0 ? 0 : 1  );

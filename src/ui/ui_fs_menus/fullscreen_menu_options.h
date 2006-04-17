@@ -28,7 +28,6 @@
 #include "ui_checkbox.h"
 #include "ui_radiobutton.h"
 #include "ui_listselect.h"
-#include "options.h"
 
 class Fullscreen_Menu_Options;
 

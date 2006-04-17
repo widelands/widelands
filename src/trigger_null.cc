@@ -21,6 +21,7 @@
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
+#include "profile.h"
 #include "system.h"
 
 static const int TRIGGER_VERSION = 1;
@@ -43,7 +44,7 @@ Trigger_Null::~Trigger_Null(void) {
  */
 void Trigger_Null::Read(Section* s, Editor_Game_Base*) {
    int version= s->get_safe_int( "version" );
-   
+
    if(version == TRIGGER_VERSION) {
       return;
    }
