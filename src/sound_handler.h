@@ -281,6 +281,7 @@ public:
 	~Sound_Handler();
 
 	void init();
+	void shutdown();
 	void read_config();
 	void load_system_sounds();
 

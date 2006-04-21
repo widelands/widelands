@@ -53,41 +53,6 @@ work.
 When GrabInput mode is off
 */
 
-static struct {
-	bool		sdl_active;
-	bool		should_die;
-
-	FILE		*frecord;
-	FILE		*fplayback;
-
-	// Input
-	bool		input_grab;		// config options
-	bool		mouse_swapped;
-	float		mouse_speed;
-
-	uint		mouse_buttons;
-	int		mouse_x;			// mouse position seen by the outside
-	int		mouse_y;
-	int		mouse_maxx;
-	int		mouse_maxy;
-	bool		mouse_locked;
-
-	float		mouse_internal_x;		// internal state (only used in non-playback)
-	float		mouse_internal_y;
-	int		mouse_internal_compx;
-	int		mouse_internal_compy;
-
-	// Graphics
-	int		gfx_w;
-	int		gfx_h;
-	bool		gfx_fullscreen;
-
-	string		locale;
-} sys;
-
-static char sys_recordname[256] = "";
-static char sys_playbackname[256] = "";
-
 /*
 Record file codes
 
@@ -215,22 +180,22 @@ void Sys_Init()
 	try
 	{
 		// Open record file if necessary
-		if (sys_recordname[0]) {
-			sys.frecord = fopen(sys_recordname, "wb");
+		if (sys.recordname[0]) {
+			sys.frecord = fopen(sys.recordname, "wb");
 			if (!sys.frecord)
-				throw wexception("Failed to open record file %s", sys_recordname);
+				throw wexception("Failed to open record file %s", sys.recordname);
 			else
-				log("Recording into %s\n", sys_recordname);
+				log("Recording into %s\n", sys.recordname);
 
 			write_record_int(RFC_MAGIC);
 		}
 
-		if (sys_playbackname[0]) {
-			sys.fplayback = fopen(sys_playbackname, "rb");
+		if (sys.playbackname[0]) {
+			sys.fplayback = fopen(sys.playbackname, "rb");
 			if (!sys.fplayback)
-				throw wexception("Failed to open playback file %s", sys_playbackname);
+				throw wexception("Failed to open playback file %s", sys.playbackname);
 			else
-				log("Playing back from %s\n", sys_recordname);
+				log("Playing back from %s\n", sys.recordname);
 
 			if (read_record_int() != RFC_MAGIC)
 				throw wexception("Playback file has wrong magic number");
@@ -249,26 +214,9 @@ void Sys_Init()
 
 		Section *s = g_options.pull_section("global");
 
+		Sys_SetInputGrab(s->get_bool("inputgrab", false));
 		Sys_SetMouseSwap(s->get_bool("swapmouse", false));
 		Sys_SetMouseSpeed(s->get_float("mousespeed", 1.0));
-
-		if(s->get_bool("coredump", false)) {
-			if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE) < 0)
-				throw wexception("Failed to initialize SDL: %s", SDL_GetError());
-		} else {
-			if (SDL_Init(SDL_INIT_VIDEO) < 0)
-				throw wexception("Failed to initialize SDL: %s", SDL_GetError());
-		}
-
-		if (SDLNet_Init()<0)
-			throw wexception("Failed to initialize SDL_net: %s\n", SDLNet_GetError());
-
-		sys.sdl_active = true;
-
-		SDL_ShowCursor(SDL_DISABLE);
-		Sys_SetInputGrab(s->get_bool("inputgrab", false));
-		SDL_EnableUNICODE(1); // useful for e.g. chat messages
-		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 	}
 	catch(...) {
 		if (sys.sdl_active)
@@ -295,11 +243,7 @@ void Sys_Shutdown()
 	if (g_gr)
 	{
 		log("Sys_Shutdown: graphics system not shut down\n");
-		Sys_InitGraphics(0, 0, 0, false);
 	}
-
-	SDL_Quit();
-	sys.sdl_active = false;
 
 	if (sys.frecord) {
 		fclose(sys.frecord);
@@ -385,33 +329,6 @@ void Sys_SetLocale( const char* str ) {
 std::string Sys_GetLocale()
 {
 	return sys.locale;
-}
-
-/*
-===============
-Sys_SetRecordFile
-Sys_SetPlaybackFile
-
-Set the file to record to or playback from. Must be called before Sys_Init().
-The files do not go through FileSystem but are accessed through stdio functions.
-In theory it should be possible to record and playback at the same time, though
-I don't see why you would want to do that.
-===============
-*/
-void Sys_SetRecordFile(const char *filename)
-{
-	char expanded_filename[1024];
-
-	FS_CanonicalizeName(expanded_filename, 1024, filename);
-	snprintf(sys_recordname, sizeof(sys_recordname), "%s", expanded_filename);
-}
-
-void Sys_SetPlaybackFile(const char *filename)
-{
-	char expanded_filename[1024];
-
-	FS_CanonicalizeName(expanded_filename, 1024, filename);
-	snprintf(sys_playbackname, sizeof(sys_playbackname), "%s", expanded_filename);
 }
 
 /*

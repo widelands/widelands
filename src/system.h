@@ -110,4 +110,38 @@ void Sys_MouseLock(bool locked);
 // graphics
 void Sys_InitGraphics(int w, int h, int bpp, bool fullscreen);
 
+static struct {
+	bool		sdl_active;
+	bool		should_die;
+
+	char            recordname[256];
+	char            playbackname[256];
+	FILE		*frecord;
+	FILE		*fplayback;
+
+	// Input
+	bool		input_grab;		// config options
+	bool		mouse_swapped;
+	float		mouse_speed;
+
+	uint		mouse_buttons;
+	int		mouse_x;			// mouse position seen by the outside
+	int		mouse_y;
+	int		mouse_maxx;
+	int		mouse_maxy;
+	bool		mouse_locked;
+
+	float		mouse_internal_x;		// internal state (only used in non-playback)
+	float		mouse_internal_y;
+	int		mouse_internal_compx;
+	int		mouse_internal_compy;
+
+	// Graphics
+	int		gfx_w;
+	int		gfx_h;
+	bool		gfx_fullscreen;
+
+	std::string		locale;
+} sys;
+
 #endif

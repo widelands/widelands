@@ -219,11 +219,6 @@ Sound_Handler::Sound_Handler()
 */
 Sound_Handler::~Sound_Handler()
 {
-	Mix_ChannelFinished(NULL);
-	Mix_HookMusicFinished(NULL);
-
-	Mix_CloseAudio();
-	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
 /** The real intialization for Sound_Handler.
@@ -263,6 +258,14 @@ void Sound_Handler::init()
 		Mix_ChannelFinished(Sound_Handler::fx_finished_callback);
 		load_system_sounds();
 	}
+}
+
+void Sound_Handler::shutdown()
+{
+	Mix_ChannelFinished(NULL);
+	Mix_HookMusicFinished(NULL);
+
+	Mix_CloseAudio();
 }
 
 /// Read the main config file, load background music and systemwide sound fx

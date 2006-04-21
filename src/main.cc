@@ -61,8 +61,6 @@ static void g_init(int argc, char **argv)
 		// Initialize graphics
 		Section *s = g_options.pull_section("global");
 
-      Sys_InitGraphics(640, 480, s->get_int("depth",16), s->get_bool("fullscreen", false));
-
 		// complain about unknown options in the configuration file and on the
 		// command line
 
@@ -80,10 +78,6 @@ static void g_init(int argc, char **argv)
       s->get_bool("dock_windows_to_edges");
       // KLUDGE!
 
-      // Set Locale and grab default domain
-      Sys_SetLocale( s->get_string( "language" ));
-      Sys_GrabTextdomain("widelands");
-
 		g_options.check_used();
 	}
 	catch(std::exception &e) {
@@ -91,10 +85,6 @@ static void g_init(int argc, char **argv)
 		g_shutdown();
 		exit(-1);
 	}
-
-	// Start the audio subsystem
-	// must know the locale before calling this!
-	g_sound_handler.init();
 }
 
 /**
@@ -102,16 +92,11 @@ static void g_init(int argc, char **argv)
 */
 static void g_shutdown()
 {
-	// Shutdown subsystems
-	Sys_InitGraphics(0, 0, 0, false);
 
 	if (g_fh) {
 		delete g_fh;
       g_fh = 0;
 	}
-
-   // To be proper, release our textdomain
-   Sys_ReleaseTextdomain();
 
 	Sys_Shutdown();
 }
@@ -366,7 +351,7 @@ int main(int argc, char** argv)
 	g_app=new WLApplication();
 
 	if (g_app->init(argc, argv)) {
-		g_app->run();
+		//g_app->run();
 		g_main(argc, argv);
 		g_app->shutdown();
 	}
@@ -385,7 +370,7 @@ int main(int argc, char** argv)
 	g_app=new WLApplication();
 
 	if (g_app->init(argc, argv)) {
-		g_app->run();
+		//g_app->run();
 		g_main(argc,argv);
 		g_app->shutdown();
 	}

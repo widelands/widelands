@@ -28,6 +28,16 @@
 #include "wlapplication.h"
 
 /**
+ * The main loop. Plain and Simple.
+ *
+ * Push the first event on the event queue, then keep dispatching events until
+ * it is time to quit.
+ */
+void WLApplication::run()
+{
+}
+
+/**
  * Initialize everything that needs to be set up before starting the main loop
  * (and consequently, as the loop's starting point, the main menu)
  *
@@ -50,15 +60,31 @@ bool WLApplication::init(int argc, char **argv)
 		return false;
 	}
 
+	Section *s = g_options.pull_section("global");
+	// Set Locale and grab default domain
+	Sys_SetLocale( s->get_string( "language" ));
+	Sys_GrabTextdomain("widelands");
+
+	//TODO: open record or playback file
+
+	init_hardware();
+
 	return true;
 }
 
 /**
- * If anything is not shut down yet, do so in an orderly manner
+ * Shut down all subsystems in an orderly manner
  */
 void WLApplication::shutdown()
 {
 	//Use the opposite order of WLApplication::init()
+
+	shutdown_hardware();
+
+	//TODO: close record or playback file
+
+	// To be proper, release our textdomain
+	Sys_ReleaseTextdomain();
 
 	// overwrite the old config file
 	g_options.write("config", true);
@@ -177,38 +203,52 @@ bool WLApplication::parse_command_line(int argc, char** argv)
 		//Extract the option name
 		opt.erase(pos, opt.size()-pos);
 
-		//Note: value might be an empty string!
-		//This is valid because conffile params can be overridden to be
-		//empty
+		//Note: value might still be an empty string!
+		//This is valid because conffile params might be overridden to
+		//be empty
 
+		//Note: it should be possible to record and playback at the same time,
+		//but why would you?
 		if (opt=="record") {
 			if (value.empty()) {
 				std::cout<<std::endl
-				<<"ERROR: invalid option: --"<<opt<<std::endl<<std::endl;
+				<<"ERROR: --record needs a filename!"<<std::endl<<std::endl;
 				show_usage();
 				return false;
 			}
 
-			Sys_SetRecordFile(value.c_str());
+			char expanded_filename[1024];
+
+			//this bypasses the layered filesystem on purpose!
+			FS_CanonicalizeName(expanded_filename, 1024, value.c_str());
+			snprintf(sys.recordname, sizeof(sys.recordname), "%s", expanded_filename);
 			return false;
 		}
+
+		//Note: it should be possible to record and playback at the same time,
+		//but why would you?
 		if (opt=="playback") {
 			if (value.empty()) {
 				std::cout<<std::endl
-				<<"ERROR: invalid option: --"<<opt<<std::endl<<std::endl;
+				<<"ERROR: --playback needs a filename!"<<std::endl<<std::endl;
 				show_usage();
 				return false;
 			}
 
-			Sys_SetPlaybackFile(value.c_str());
+			char expanded_filename[1024];
+
+			//this bypasses the layered filesystem on purpose!
+			FS_CanonicalizeName(expanded_filename, 1024, value.c_str());
+			snprintf(sys.playbackname, sizeof(sys.playbackname), "%s", expanded_filename);
 			continue;
 		}
+
+		//TODO: barf here on unkown option
 
 		//If it hasn't been handled yet it's probably an attempt to
 		//override a conffile setting
 		//With typos, this will create invalid config settings. They
 		//will be taken care of (==ignored) when saving the options
-		//TODO: barf here on unkown option
 		g_options.pull_section("global")->create_val(opt.c_str(),
 		                                             value.c_str());
 
@@ -218,11 +258,51 @@ bool WLApplication::parse_command_line(int argc, char** argv)
 }
 
 /**
- * The main loop. Plain and Simple.
+ * Start the hardware: switch to graphics mode, start sound handler
  *
- * Push the first event on the event queue, then keep dispatching events until
- * it is time to quit.
+ * \return true if there were no fatal errors that prevent the game from running,
+ *         false otherwise
  */
-void WLApplication::run()
+bool WLApplication::init_hardware()
 {
+	Uint32 sdl_flags=0;
+	Section *s = g_options.pull_section("global");
+
+	//Start the SDL core
+	if(s->get_bool("coredump", false))
+		sdl_flags=SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE;
+	else
+		sdl_flags=SDL_INIT_VIDEO;
+
+	if (SDL_Init(sdl_flags) == -1) {
+		//TODO: that's not handled yet!
+		throw wexception("Failed to initialize SDL: %s", SDL_GetError());
+	} else
+		sys.sdl_active=true;
+
+	SDL_ShowCursor(SDL_DISABLE);
+	SDL_EnableUNICODE(1); // useful for e.g. chat messages
+	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+
+	Sys_InitGraphics(640, 480, s->get_int("depth",16), s->get_bool("fullscreen", false));
+
+	// Start the audio subsystem
+	// must know the locale before calling this!
+	g_sound_handler.init();
+
+	return true;
+}
+
+/**
+ * Shut the hardware down: switch graphics mode, stop sound handler
+ */
+void WLApplication::shutdown_hardware()
+{
+	g_sound_handler.shutdown();
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
+
+	Sys_InitGraphics(0, 0, 0, false);
+
+	SDL_Quit();
+	sys.sdl_active = false;
 }
