@@ -20,10 +20,34 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include "graphic.h"
 #include <libintl.h>
 #include <locale.h>
 #include <string>
 #include "types.h"
+
+/*
+Record file codes
+
+It should be possible to use record files across different platforms.
+However, 64 bit platforms are currently not supported.
+*/
+#define RFC_MAGIC		0x0ACAD100 // change this and I will ensure your death will be a most unpleasant one
+
+enum {
+   RFC_GETTIME = 0x01,
+   RFC_EVENT = 0x02,
+   RFC_ENDEVENTS = 0x03,
+};
+
+enum {
+   RFC_KEYDOWN = 0x10,
+   RFC_KEYUP = 0x11,
+   RFC_MOUSEBUTTONDOWN = 0x12,
+   RFC_MOUSEBUTTONUP = 0x13,
+   RFC_MOUSEMOTION = 0x14,
+   RFC_QUIT = 0x15
+};
 
 /*
 ==============================================================================
@@ -32,6 +56,8 @@ SYSTEM ABSTRACTION
 
 ==============================================================================
 */
+
+extern Graphic *g_gr;
 
 enum { // use 1<<MOUSE_xxx for bitmasks
    MOUSE_LEFT = 0,
@@ -110,14 +136,9 @@ void Sys_MouseLock(bool locked);
 // graphics
 void Sys_InitGraphics(int w, int h, int bpp, bool fullscreen);
 
-static struct {
+struct SYS {
 	bool		sdl_active;
 	bool		should_die;
-
-	char            recordname[256];
-	char            playbackname[256];
-	FILE		*frecord;
-	FILE		*fplayback;
 
 	// Input
 	bool		input_grab;		// config options
@@ -142,6 +163,8 @@ static struct {
 	bool		gfx_fullscreen;
 
 	std::string		locale;
-} sys;
+};
+
+extern struct SYS sys;
 
 #endif

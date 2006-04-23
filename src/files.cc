@@ -47,6 +47,8 @@
   #include <unistd.h>
 #endif
 
+LayeredFileSystem *g_fs;
+
 /*
 ==============
 FS_AutoExtension

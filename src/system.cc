@@ -23,7 +23,6 @@
 #include <vector>
 #include "error.h"
 #include "filesystem.h"
-#include "graphic.h"
 #include "machdep.h"
 #include "profile.h"
 #include "system.h"
@@ -34,226 +33,21 @@
 #include "constants.h"
 #include "network_ggz.h"
 
-Graphic *g_gr = 0;
+#include "wlapplication.h"
 
 static std::vector<std::string> l_textdomains;
 
-/*
-Notes on the implementation
----------------------------
+Graphic *g_gr;
 
-Mouse:
-When in GrabInput mode (default), the system and SDL mouse cursor is not
-connected to the internal mouse position. We rely on SDL to provide the correct
-relative movement information even when the mouse cursor is close to the window
-border. We don't not use the absolute mouse position provided by SDL at all.
-The internal mouse position is kept with sub-pixel accuracy to make mouse speed
-work.
+extern int get_playback_offset();
+extern void write_record_char(char v);
+extern char read_record_char();
+extern void write_record_int(int v);
+extern int read_record_int();
+extern void write_record_code(uchar code);
+extern void read_record_code(uchar code);
 
-When GrabInput mode is off
-*/
-
-/*
-Record file codes
-
-It should be possible to use record files across different platforms.
-However, 64 bit platforms are currently not supported.
-*/
-#define RFC_MAGIC		0x0ACAD100 // change this and I will ensure your death will be a most unpleasant one
-
-enum {
-   RFC_GETTIME = 0x01,
-   RFC_EVENT = 0x02,
-   RFC_ENDEVENTS = 0x03,
-};
-
-enum {
-   RFC_KEYDOWN = 0x10,
-   RFC_KEYUP = 0x11,
-   RFC_MOUSEBUTTONDOWN = 0x12,
-   RFC_MOUSEBUTTONUP = 0x13,
-   RFC_MOUSEMOTION = 0x14,
-   RFC_QUIT = 0x15
-};
-
-
-/*
-===============
-get_playback_offset
-
-Returns the position in the playback file
-===============
-*/
-static int get_playback_offset()
-{
-	assert(sys.fplayback);
-
-	return ftell(sys.fplayback);
-}
-
-
-/*
-===============
-write_record_char
-read_record_char
-write_record_int
-read_record_int
-write_record_code
-read_record_code
-
-Simple wrapper functions to make stdio file access less painful
-===============
-*/
-static void write_record_char(char v)
-{
-	assert(sys.frecord);
-
-	if (fwrite(&v, sizeof(v), 1, sys.frecord) != 1)
-		throw wexception("Write of 1 byte to record failed.");
-	fflush(sys.frecord);
-}
-
-static char read_record_char()
-{
-	char v;
-
-	assert(sys.fplayback);
-
-	if (fread(&v, sizeof(v), 1, sys.fplayback) != 1)
-		throw wexception("Read of 1 byte from record failed.");
-
-	return v;
-}
-
-static void write_record_int(int v)
-{
-	assert(sys.frecord);
-
-	v = Little32(v);
-	if (fwrite(&v, sizeof(v), 1, sys.frecord) != 1)
-		throw wexception("Write of 4 bytes to record failed.");
-	fflush(sys.frecord);
-}
-
-static int read_record_int()
-{
-	int v;
-
-	assert(sys.fplayback);
-
-	if (fread(&v, sizeof(v), 1, sys.fplayback) != 1)
-		throw wexception("Read of 4 bytes from record failed.");
-
-	return Little32(v);
-}
-
-static void write_record_code(uchar code)
-{
-	write_record_char(code);
-}
-
-static void read_record_code(uchar code)
-{
-	uchar filecode;
-
-	filecode = read_record_char();
-
-	if (filecode != code)
-		throw wexception("%08X: Bad code %02X during playback (%02X expected). Mismatching executable versions?",
-		                 get_playback_offset()-1, filecode, code);
-}
-
-
-/*
-===============
-Sys_Init
-
-Initialize lower level libraries (i.e. SDL)
-===============
-*/
-void Sys_Init()
-{
-	sys.should_die = false;
-	sys.frecord = 0;
-	sys.fplayback = 0;
-
-	try
-	{
-		// Open record file if necessary
-		if (sys.recordname[0]) {
-			sys.frecord = fopen(sys.recordname, "wb");
-			if (!sys.frecord)
-				throw wexception("Failed to open record file %s", sys.recordname);
-			else
-				log("Recording into %s\n", sys.recordname);
-
-			write_record_int(RFC_MAGIC);
-		}
-
-		if (sys.playbackname[0]) {
-			sys.fplayback = fopen(sys.playbackname, "rb");
-			if (!sys.fplayback)
-				throw wexception("Failed to open playback file %s", sys.playbackname);
-			else
-				log("Playing back from %s\n", sys.recordname);
-
-			if (read_record_int() != RFC_MAGIC)
-				throw wexception("Playback file has wrong magic number");
-		}
-
-		// Input
-		sys.input_grab = false;
-		sys.mouse_swapped = false;
-		sys.mouse_locked = false;
-		sys.mouse_speed = 1.0;
-		sys.mouse_buttons = 0;
-		sys.mouse_x = sys.mouse_y = 0;
-		sys.mouse_maxx = sys.mouse_maxy = 0;
-		sys.mouse_internal_x = sys.mouse_internal_y = 0;
-		sys.mouse_internal_compx = sys.mouse_internal_compy = 0;
-
-		Section *s = g_options.pull_section("global");
-
-		Sys_SetInputGrab(s->get_bool("inputgrab", false));
-		Sys_SetMouseSwap(s->get_bool("swapmouse", false));
-		Sys_SetMouseSpeed(s->get_float("mousespeed", 1.0));
-	}
-	catch(...) {
-		if (sys.sdl_active)
-			SDL_Quit();
-		if (sys.frecord)
-			fclose(sys.frecord);
-		if (sys.fplayback)
-			fclose(sys.fplayback);
-		sys.sdl_active = false;
-
-		throw;
-	}
-}
-
-/*
-===============
-Sys_Shutdown
-
-Shutdown the system
-===============
-*/
-void Sys_Shutdown()
-{
-	if (g_gr)
-	{
-		log("Sys_Shutdown: graphics system not shut down\n");
-	}
-
-	if (sys.frecord) {
-		fclose(sys.frecord);
-		sys.frecord = 0;
-	}
-	if (sys.fplayback) {
-		fclose(sys.fplayback);
-		sys.fplayback = 0;
-	}
-}
+struct SYS sys;
 
 /*
  * Localisation functions
@@ -354,15 +148,16 @@ int Sys_GetTime()
 {
 	int time;
 
-	if (sys.fplayback) {
+	if (g_app->get_playback()) {
 		read_record_code(RFC_GETTIME);
 		time = read_record_int();
 	} else
 		time = SDL_GetTicks();
 
-	if (sys.frecord) {
+	if (g_app->get_record()) {
 		write_record_code(RFC_GETTIME);
 		write_record_int(time);
+
 	}
 
 	return time;
@@ -382,7 +177,7 @@ static void Sys_DoWarpMouse(int x, int y)
 {
 	int curx, cury;
 
-	if (sys.fplayback) // don't warp anything during playback
+	if (g_app->get_playback()) // don't warp anything during playback
 		return;
 
 	SDL_GetMouseState(&curx, &cury);
@@ -415,7 +210,7 @@ bool Sys_PollEvent(SDL_Event *ev, bool throttle)
 	bool haveevent;
 
 restart:
-	if (sys.fplayback)
+	if (g_app->get_playback())
 	{
 		uchar code = read_record_char();
 
@@ -532,7 +327,7 @@ restart:
 		}
 	}
 
-	if (sys.frecord)
+	if (g_app->get_record())
 	{
 		if (haveevent)
 		{
@@ -574,7 +369,7 @@ restart:
 		{
 			// Implement the throttle to avoid very quick inner mainloops when
 			// recoding a session
-			if (throttle && !sys.fplayback)
+			if (throttle && !g_app->get_playback())
 			{
 				static int lastthrottle = 0;
 				int time = SDL_GetTicks();
@@ -631,7 +426,7 @@ void Sys_HandleInput(InputCallback *cb)
 
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
-	if (sys.fplayback) {
+	if (g_app->get_playback()) {
 		while(SDL_PollEvent(&ev)) {
 			switch(ev.type) {
 			case SDL_KEYDOWN:
@@ -800,7 +595,7 @@ Changes input grab mode.
 */
 void Sys_SetInputGrab(bool grab)
 {
-	if (sys.fplayback)
+	if (g_app->get_playback())
 		return; // ignore in playback mode
 
 	sys.input_grab = grab;

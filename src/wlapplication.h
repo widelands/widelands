@@ -20,19 +20,41 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
+extern class WLApplication* g_app;
+
 class WLApplication {
 public:
+	WLApplication(int argc, char **argv);
+
 	void run();
 
-	bool init(int argc, char **argv);
+	bool init();
 	void shutdown();
 
+	bool get_playback() {return m_playback;}
+	bool get_record() {return m_record;}
+	FILE *get_rec_file() {return m_frecord;}
+	FILE *get_play_file() {return m_fplayback;}
+
 protected:
-	void show_usage();
-	bool parse_command_line(int argc, char** argv);
+	bool m_playback, m_record;
+	char m_recordname[256], m_playbackname[256];
+	FILE *m_frecord, *m_fplayback;
+
+	int argc;
+	char **argv;
+
+	bool init_settings();
+	void shutdown_settings();
 
 	bool init_hardware();
 	void shutdown_hardware();
+
+	bool init_recordplaybackfile();
+	void shutdown_recordplaybackfile();
+
+	bool parse_command_line();
+	void show_usage();
 };
 
 #endif

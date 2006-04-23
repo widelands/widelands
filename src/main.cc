@@ -20,7 +20,6 @@
 #include <SDL.h>
 #include "editor.h"
 #include "error.h"
-#include "font_handler.h"
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
 #include "fullscreen_menu_main.h"
@@ -42,65 +41,6 @@
 #include "sound_handler.h"
 #include "wlapplication.h"
 
-LayeredFileSystem *g_fs;
-
-static void g_shutdown();
-
-/**
- * Initialize all subsystems
-*/
-static void g_init(int argc, char **argv)
-{
-	try
-	{
-		// Create all subsystems after config has been read
-		Sys_Init();
-
-		g_fh = new Font_Handler();
-
-		// Initialize graphics
-		Section *s = g_options.pull_section("global");
-
-		// complain about unknown options in the configuration file and on the
-		// command line
-
-		// KLUDGE!
-		// Without this, xres, yres and workareapreview get dropped by
-		// check_used().
-		// Profile needs support for a Syntax definition to solve this in a sensible way
-		s->get_string("xres");
-		s->get_string("yres");
-      s->get_bool("workareapreview");
-      s->get_bool("nozip");
-      s->get_int("border_snap_distance");
-      s->get_int("panel_snap_distance");
-      s->get_bool("snap_windows_only_when_overlapping");
-      s->get_bool("dock_windows_to_edges");
-      // KLUDGE!
-
-		g_options.check_used();
-	}
-	catch(std::exception &e) {
-		critical_error("Initialization error: %s", e.what());
-		g_shutdown();
-		exit(-1);
-	}
-}
-
-/**
- * Shutdown all subsystems
-*/
-static void g_shutdown()
-{
-
-	if (g_fh) {
-		delete g_fh;
-      g_fh = 0;
-	}
-
-	Sys_Shutdown();
-}
-
 /**
  * This is the OS Independant main function.
  *
@@ -110,8 +50,6 @@ void g_main(int argc, char** argv)
 {
 	try
 	{
-		g_init(argc, argv);
-
 		if(NetGGZ::ref()->used())
 		{
 			if(NetGGZ::ref()->connect())
@@ -329,7 +267,6 @@ void g_main(int argc, char** argv)
          critical_error("Unhandled exception: %s", e.what());
       }
 
-		g_shutdown();
 	}
 	catch(std::exception &e) {
 		g_gr = 0; // paranoia
@@ -348,9 +285,9 @@ WLApplication *g_app;
 */
 int main(int argc, char** argv)
 {
-	g_app=new WLApplication();
+	g_app=new WLApplication(argc, argv);
 
-	if (g_app->init(argc, argv)) {
+	if (g_app->init()) {
 		//g_app->run();
 		g_main(argc, argv);
 		g_app->shutdown();
@@ -367,9 +304,9 @@ int main(int argc, char** argv)
 /// This is a hack needed for mingw under windows
 int main(int argc, char** argv)
 {
-	g_app=new WLApplication();
+	g_app=new WLApplication(argc, argv);
 
-	if (g_app->init(argc, argv)) {
+	if (g_app->init()) {
 		//g_app->run();
 		g_main(argc,argv);
 		g_app->shutdown();
