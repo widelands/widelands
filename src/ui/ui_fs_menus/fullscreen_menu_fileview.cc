@@ -25,7 +25,6 @@
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
-#include "system.h"
 #include "wlapplication.h"
 
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)

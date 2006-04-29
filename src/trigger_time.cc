@@ -22,7 +22,6 @@
 #include "filesystem.h"
 #include "game.h"
 #include "profile.h"
-#include "system.h"
 #include "wlapplication.h"
 
 static const int TRIGGER_VERSION = 1;

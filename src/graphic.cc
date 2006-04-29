@@ -34,7 +34,6 @@ Management classes and functions of the 16-bit software renderer.
 #include "tribe.h"
 #include "overlay_manager.h"
 #include "filesystem.h"
-#include "system.h"
 
 /*
  * Names of road terrains
@@ -1899,13 +1898,10 @@ void GraphicImpl::save_png(uint pic_index, FileWrite* fw) {
    png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
-/*
-===============
-SW16_CreateGraphics
-
-Factory function called by System code
-===============
-*/
+/**
+ * Factory function
+ * \todo const-ify
+ */
 Graphic* SW16_CreateGraphics(int w, int h, int bpp, bool fullscreen)
 {
 	return new GraphicImpl(w, h, bpp, fullscreen);

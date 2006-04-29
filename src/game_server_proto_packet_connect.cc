@@ -24,7 +24,6 @@
 #include "game_server_proto_packet_connect.h"
 #include "util.h"
 #include "wexception.h"
-#include "system.h"
 #include "wlapplication.h"
 
 /*

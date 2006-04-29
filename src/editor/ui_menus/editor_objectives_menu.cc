@@ -24,7 +24,6 @@
 #include "map.h"
 #include "map_objective_manager.h"
 #include "map_trigger_manager.h"
-#include "system.h"
 #include "trigger.h"
 #include "trigger_null.h"
 #include "trigger_referencer.h"

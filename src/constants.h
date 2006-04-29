@@ -128,4 +128,11 @@ enum {
 };
 //@}
 
+/// Networking
+//@
+#define WIDELANDS_LAN_DISCOVERY_PORT	7394
+#define WIDELANDS_LAN_PROMOTION_PORT	7395
+#define WIDELANDS_PORT			7396
+//@}
+
 #endif

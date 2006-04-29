@@ -24,7 +24,6 @@
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "editorinteractive.h"
-#include "system.h"
 #include "event.h"
 #include "event_factory.h"
 #include "map.h"

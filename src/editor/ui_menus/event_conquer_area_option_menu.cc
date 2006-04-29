@@ -26,7 +26,6 @@
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
 #include "editorinteractive.h"
-#include "system.h"
 #include "error.h"
 #include "map.h"
 #include "graphic.h"

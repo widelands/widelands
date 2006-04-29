@@ -25,7 +25,6 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "rendertarget.h"
-#include "system.h"
 #include "wlapplication.h"
 
 /*

@@ -24,7 +24,6 @@
 #include "keycodes.h"
 #include "map.h"
 #include "rendertarget.h"
-#include "system.h"
 #include "ui_button.h"
 #include "ui_panel.h"
 #include "ui_textarea.h"

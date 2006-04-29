@@ -26,9 +26,7 @@
 #include "error.h"
 #include "filesystem.h"
 #include "profile.h"
-#include "system.h"
 #include "wexception.h"
-#include "system.h"
 #include "wlapplication.h"
 
 #define TRUE_WORDS 4

@@ -22,7 +22,6 @@
 #include "error.h"
 #include "map.h"
 #include "map_variable_manager.h"
-#include "system.h"
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_modal_messagebox.h"

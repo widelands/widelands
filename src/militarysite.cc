@@ -28,7 +28,6 @@
 #include "transport.h"
 #include "tribe.h"
 #include "worker.h"
-#include "system.h"
 
 /**
 =============================

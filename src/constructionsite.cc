@@ -27,7 +27,6 @@
 #include "player.h"
 #include "rendertarget.h"
 #include "sound_handler.h"
-#include "system.h"
 #include "transport.h"
 #include "tribe.h"
 #include "wexception.h"

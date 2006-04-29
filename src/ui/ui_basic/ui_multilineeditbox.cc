@@ -23,7 +23,6 @@
 #include "ui_multilinetextarea.h"
 #include "ui_scrollbar.h"
 #include "constants.h"
-#include "system.h"
 #include "font_handler.h"
 #include "keycodes.h"
 #include "rendertarget.h"

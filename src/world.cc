@@ -28,7 +28,6 @@
 #include "worlddata.h"
 #include "util.h"
 #include "error.h"
-#include "system.h"
 #include "wlapplication.h"
 
 using std::cerr;

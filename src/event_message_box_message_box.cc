@@ -25,7 +25,6 @@
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
-#include "system.h"
 #include "constants.h"
 #include "trigger_null.h"
 #include "util.h"

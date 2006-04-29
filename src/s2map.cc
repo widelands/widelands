@@ -25,7 +25,6 @@
 #include "s2map.h"
 #include "types.h"
 #include "world.h"
-#include "system.h"
 #include "wlapplication.h"
 
 using std::cerr;

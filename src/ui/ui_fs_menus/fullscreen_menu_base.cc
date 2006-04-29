@@ -22,7 +22,6 @@
 #include "graphic.h"
 #include "profile.h"
 #include "rendertarget.h"
-#include "system.h"
 #include "wlapplication.h"
 
 /*

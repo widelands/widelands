@@ -18,33 +18,57 @@
  */
 
 #include "constants.h"
+#include "editor.h"
 #include "error.h"
-	#include "filesystem.h"
+#include "filesystem.h"
 #include "font_handler.h"
+#include "fullscreen_menu_fileview.h"
+#include "fullscreen_menu_intro.h"
+#include "fullscreen_menu_inet_lobby.h"
+#include "fullscreen_menu_inet_server_options.h"
+#include "fullscreen_menu_main.h"
+#include "fullscreen_menu_netsetup.h"
+#include "fullscreen_menu_options.h"
+#include "fullscreen_menu_singleplayer.h"
+#include "fullscreen_menu_tutorial_select_map.h"
+#include "game_server_connection.h"
+#include "game_server_proto.h"
 #include <iostream>
+#include "network.h"
 #include "network_ggz.h"
 #include "profile.h"
 #include "sound_handler.h"
 #include <string>
-#include "system.h" //only for init_double_game
 #include "wlapplication.h"
 
-WLApplication *WLApplication::the_singleton=0;
+#ifdef DEBUG
+#ifndef __WIN32__
+#include <signal.h>
+#endif // WIN32
+#endif // DEBUG
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Always specifying namespaces is good, but let's not go too far ;-)
+using std::cout;
+using std::endl;
+
+//Initialize the class variables
+int WLApplication::pid_me=0;
+int WLApplication::pid_peer=0;
+volatile int WLApplication::may_run=0;
+WLApplication *WLApplication::the_singleton=0;
 
 /**
  * Simple wrapper functions to make stdio file access less painful
  *
  * These will vanish when IO handling gets moved to C++ streams
-*/
+ */
 //@{
 void write_record_char(char v)
 {
 	assert(WLApplication::get()->get_rec_file());
 
 	if (fwrite(&v, sizeof(v), 1, WLApplication::get()->get_rec_file()) != 1)
-		throw wexception("Write of 1 byte to record failed.");
+			throw wexception("Write of 1 byte to record failed.");
 	fflush(WLApplication::get()->get_rec_file());
 }
 
@@ -55,7 +79,7 @@ char read_record_char()
 	assert(WLApplication::get()->get_play_file());
 
 	if (fread(&v, sizeof(v), 1, WLApplication::get()->get_play_file()) != 1)
-		throw wexception("Read of 1 byte from record failed.");
+			throw wexception("Read of 1 byte from record failed.");
 
 	return v;
 }
@@ -66,7 +90,7 @@ void write_record_int(int v)
 
 	v = Little32(v);
 	if (fwrite(&v, sizeof(v), 1, WLApplication::get()->get_rec_file()) != 1)
-		throw wexception("Write of 4 bytes to record failed.");
+			throw wexception("Write of 4 bytes to record failed.");
 	fflush(WLApplication::get()->get_rec_file());
 }
 
@@ -77,7 +101,7 @@ int read_record_int()
 	assert(WLApplication::get()->get_play_file());
 
 	if (fread(&v, sizeof(v), 1, WLApplication::get()->get_play_file()) != 1)
-		throw wexception("Read of 4 bytes from record failed.");
+			throw wexception("Read of 4 bytes from record failed.");
 
 	return Little32(v);
 }
@@ -94,8 +118,8 @@ void read_record_code(uchar code)
 	filecode = read_record_char();
 
 	if (filecode != code)
-		throw wexception("%08X: Bad code %02X during playback (%02X expected). Mismatching executable versions?",
-				 WLApplication::get()->get_playback_offset()-1, filecode, code);
+		throw wexception("%08lX: Bad code %02X during playback (%02X expected). Mismatching executable versions?",
+		                 WLApplication::get()->get_playback_offset()-1, filecode, code);
 }
 //@}
 
@@ -121,14 +145,14 @@ When GrabInput mode is off
  * WLApplication object when called. If neccessary, a new WLApplication instance
  * is created.
  *
- * While you \e can do the first call without parameters, but it does not make
+ * While you \e can do the first call without parameters, it does not make
  * much sense.
  *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  * \return An (always valid!) pointer to the WLApplication singleton
  */
-WLApplication *WLApplication::get(int argc, char **argv)
+WLApplication * const WLApplication::get(const int argc, const char **argv)
 {
 	if (the_singleton==0) {
 		the_singleton=new WLApplication(argc, argv);
@@ -146,7 +170,8 @@ WLApplication *WLApplication::get(int argc, char **argv)
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-WLApplication::WLApplication(int argc, char **argv):m_argc(argc),m_argv(argv)
+WLApplication::WLApplication(const int argc, const char **argv)
+		:m_argc(argc),m_argv(argv)
 {}
 
 
@@ -158,23 +183,60 @@ WLApplication::WLApplication(int argc, char **argv):m_argc(argc),m_argv(argv)
  */
 void WLApplication::run()
 {
+	g_sound_handler.start_music("intro");
+
+	Fullscreen_Menu_Intro *intro=new Fullscreen_Menu_Intro;
+	intro->run();
+	delete intro;
+
+	//TODO: ??? #fweber
+	if(NetGGZ::ref()->used())
+	{
+		if(NetGGZ::ref()->connect())
+		{
+			NetGame *netgame;
+
+			if(NetGGZ::ref()->host()) netgame = new NetHost();
+			else
+			{
+				while(!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
+
+				IPaddress peer;
+				SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(), WIDELANDS_PORT);
+				netgame = new NetClient(&peer);
+			}
+			netgame->run();
+			delete netgame;
+		}
+	}
+
+	g_sound_handler.change_music("menu", 1000);
+
+	mainmenu();
+
+	g_sound_handler.stop_music(500);
 }
 
 /**
  * Get an event from the SDL queue, just like SDL_PollEvent.
  * Perform the meat of playback/record stuff when needed.
  *
- * throttle is a hack to stop record files from getting extremely huge.
+ * Throttle is a hack to stop record files from getting extremely huge.
  * If it is set to true, we will idle loop if we can't get an SDL_Event
  * returned immediately if we're recording. If there is no user input,
  * the actual mainloop will be throttled to 100fps.
+ *
+ * \param ev the retrieved event will be put here
+ * \param throttle Limit event loop to 100fps max
+ * \return
  */
-bool WLApplication::poll_event(SDL_Event *ev, bool throttle)
+const bool WLApplication::poll_event(SDL_Event *ev, const bool throttle)
 {
 	bool haveevent;
 
 restart:
-		if (WLApplication::get()->get_playback())
+	//inject synthesized events into the event queue when playing back
+	if (WLApplication::get()->get_playback())
 		{
 			uchar code = read_record_char();
 
@@ -183,33 +245,34 @@ restart:
 				code = read_record_char();
 
 				switch(code) {
-					case RFC_KEYDOWN:
-					case RFC_KEYUP:
-						ev->type = (code == RFC_KEYUP) ? SDL_KEYUP : SDL_KEYDOWN;
-						ev->key.keysym.sym = (SDLKey)read_record_int();
-						ev->key.keysym.unicode = read_record_int();
-						break;
+				case RFC_KEYDOWN:
+				case RFC_KEYUP:
+					ev->type = (code == RFC_KEYUP) ? SDL_KEYUP : SDL_KEYDOWN;
+					ev->key.keysym.sym = (SDLKey)read_record_int();
+					ev->key.keysym.unicode = read_record_int();
+					break;
 
-					case RFC_MOUSEBUTTONDOWN:
-					case RFC_MOUSEBUTTONUP:
-						ev->type = (code == RFC_MOUSEBUTTONUP) ? SDL_MOUSEBUTTONUP : SDL_MOUSEBUTTONDOWN;
-						ev->button.button = read_record_char();
-						break;
+				case RFC_MOUSEBUTTONDOWN:
+				case RFC_MOUSEBUTTONUP:
+					ev->type = (code == RFC_MOUSEBUTTONUP) ? SDL_MOUSEBUTTONUP : SDL_MOUSEBUTTONDOWN;
+					ev->button.button = read_record_char();
+					break;
 
-					case RFC_MOUSEMOTION:
-						ev->type = SDL_MOUSEMOTION;
-						ev->motion.x = read_record_int();
-						ev->motion.y = read_record_int();
-						ev->motion.xrel = read_record_int();
-						ev->motion.yrel = read_record_int();
-						break;
+				case RFC_MOUSEMOTION:
+					ev->type = SDL_MOUSEMOTION;
+					ev->motion.x = read_record_int();
+					ev->motion.y = read_record_int();
+					ev->motion.xrel = read_record_int();
+					ev->motion.yrel = read_record_int();
+					break;
 
-					case RFC_QUIT:
-						ev->type = SDL_QUIT;
-						break;
+				case RFC_QUIT:
+					ev->type = SDL_QUIT;
+					break;
 
-					default:
-						throw wexception("%08X: Unknown event type %02X in playback.", WLApplication::get()->get_playback_offset()-1, code);
+				default:
+					throw wexception("%08lX: Unknown event type %02X in playback.",
+					                 WLApplication::get()->get_playback_offset()-1, code);
 				}
 
 				haveevent = true;
@@ -219,114 +282,116 @@ restart:
 				haveevent = false;
 			}
 			else
-				throw wexception("%08X: Bad code %02X in event playback.", WLApplication::get()->get_playback_offset()-1, code);
+				throw wexception("%08lX: Bad code %02X in event playback.",
+				                 WLApplication::get()->get_playback_offset()-1, code);
 		}
-		else
-		{
-			haveevent = SDL_PollEvent(ev);
+	else
+	{ //not playing back
+		haveevent = SDL_PollEvent(ev);
 
-			if (haveevent)
-			{
+		if (haveevent)
+		{
 			// We edit mouse motion events in here, so that differences caused by
 			// GrabInput or mouse speed settings are invisible to the rest of the code
-				switch(ev->type) {
-					case SDL_MOUSEMOTION:
-						ev->motion.xrel += m_mouse_internal_compx;
-						ev->motion.yrel += m_mouse_internal_compy;
-						m_mouse_internal_compx = m_mouse_internal_compy = 0;
+			switch(ev->type) {
+			case SDL_MOUSEMOTION:
+				ev->motion.xrel += m_mouse_internal_compx;
+				ev->motion.yrel += m_mouse_internal_compy;
+				m_mouse_internal_compx = m_mouse_internal_compy = 0;
 
-						if (m_input_grab)
-						{
-							float xlast = m_mouse_internal_x;
-							float ylast = m_mouse_internal_y;
+				if (m_input_grab)
+				{
+					float xlast = m_mouse_internal_x;
+					float ylast = m_mouse_internal_y;
 
-							m_mouse_internal_x += ev->motion.xrel * m_mouse_speed;
-							m_mouse_internal_y += ev->motion.yrel * m_mouse_speed;
+					m_mouse_internal_x += ev->motion.xrel * m_mouse_speed;
+					m_mouse_internal_y += ev->motion.yrel * m_mouse_speed;
 
-							ev->motion.xrel = (int)m_mouse_internal_x - (int)xlast;
-							ev->motion.yrel = (int)m_mouse_internal_y - (int)ylast;
+					ev->motion.xrel = (int)m_mouse_internal_x - (int)xlast;
+					ev->motion.yrel = (int)m_mouse_internal_y - (int)ylast;
 
-							if (m_mouse_locked)
-							{
+					if (m_mouse_locked)
+					{
 						// mouse is locked; so don't move the cursor
-								m_mouse_internal_x = xlast;
-								m_mouse_internal_y = ylast;
-							}
-							else
-							{
-								if (m_mouse_internal_x < 0)
-									m_mouse_internal_x = 0;
-								else if (m_mouse_internal_x >= m_mouse_maxx-1)
-									m_mouse_internal_x = m_mouse_maxx-1;
-								if (m_mouse_internal_y < 0)
-									m_mouse_internal_y = 0;
-								else if (m_mouse_internal_y >= m_mouse_maxy-1)
-									m_mouse_internal_y = m_mouse_maxy-1;
-							}
+						m_mouse_internal_x = xlast;
+						m_mouse_internal_y = ylast;
+					}
+					else
+					{
+						if (m_mouse_internal_x < 0)
+							m_mouse_internal_x = 0;
+						else if (m_mouse_internal_x >= m_mouse_maxx-1)
+							m_mouse_internal_x = m_mouse_maxx-1;
+						if (m_mouse_internal_y < 0)
+							m_mouse_internal_y = 0;
+						else if (m_mouse_internal_y >= m_mouse_maxy-1)
+							m_mouse_internal_y = m_mouse_maxy-1;
+					}
 
-							ev->motion.x = (int)m_mouse_internal_x;
-							ev->motion.y = (int)m_mouse_internal_y;
-						}
-						else
-						{
-							int xlast = m_mouse_x;
-							int ylast = m_mouse_y;
-
-							if (m_mouse_locked)
-							{
-								set_mouse_pos(xlast, ylast);
-
-								ev->motion.x = xlast;
-								ev->motion.y = ylast;
-							}
-						}
-
-						break;
-					case SDL_USEREVENT:
-						if (ev->user.code==Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC)
-							g_sound_handler.change_music();
-
-						break;
+					ev->motion.x = (int)m_mouse_internal_x;
+					ev->motion.y = (int)m_mouse_internal_y;
 				}
+				else
+				{
+					int xlast = m_mouse_x;
+					int ylast = m_mouse_y;
+
+					if (m_mouse_locked)
+					{
+						set_mouse_pos(xlast, ylast);
+
+						ev->motion.x = xlast;
+						ev->motion.y = ylast;
+					}
+				}
+
+				break;
+			case SDL_USEREVENT:
+				if (ev->user.code==Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC)
+					g_sound_handler.change_music();
+
+				break;
 			}
 		}
+	}
 
-		if (WLApplication::get()->get_record())
+	// log all events into the journal file
+	if (WLApplication::get()->get_record())
 		{
 			if (haveevent)
 			{
 				switch(ev->type) {
-					case SDL_KEYDOWN:
-					case SDL_KEYUP:
-						write_record_char(RFC_EVENT);
-						write_record_char((ev->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
-						write_record_int(ev->key.keysym.sym);
-						write_record_int(ev->key.keysym.unicode);
-						break;
+				case SDL_KEYDOWN:
+				case SDL_KEYUP:
+					write_record_char(RFC_EVENT);
+					write_record_char((ev->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
+					write_record_int(ev->key.keysym.sym);
+					write_record_int(ev->key.keysym.unicode);
+					break;
 
-					case SDL_MOUSEBUTTONDOWN:
-					case SDL_MOUSEBUTTONUP:
-						write_record_char(RFC_EVENT);
-						write_record_char((ev->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
-						write_record_char(ev->button.button);
-						break;
+				case SDL_MOUSEBUTTONDOWN:
+				case SDL_MOUSEBUTTONUP:
+					write_record_char(RFC_EVENT);
+					write_record_char((ev->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
+					write_record_char(ev->button.button);
+					break;
 
-					case SDL_MOUSEMOTION:
-						write_record_char(RFC_EVENT);
-						write_record_char(RFC_MOUSEMOTION);
-						write_record_int(ev->motion.x);
-						write_record_int(ev->motion.y);
-						write_record_int(ev->motion.xrel);
-						write_record_int(ev->motion.yrel);
-						break;
+				case SDL_MOUSEMOTION:
+					write_record_char(RFC_EVENT);
+					write_record_char(RFC_MOUSEMOTION);
+					write_record_int(ev->motion.x);
+					write_record_int(ev->motion.y);
+					write_record_int(ev->motion.xrel);
+					write_record_int(ev->motion.yrel);
+					break;
 
-					case SDL_QUIT:
-						write_record_char(RFC_EVENT);
-						write_record_char(RFC_QUIT);
-						break;
+				case SDL_QUIT:
+					write_record_char(RFC_EVENT);
+					write_record_char(RFC_QUIT);
+					break;
 
-					default:
-						goto restart; // can't really do anything useful with this command
+				default:
+					goto restart; // can't really do anything useful with this command
 				}
 			}
 			else
@@ -334,49 +399,49 @@ restart:
 				// Implement the throttle to avoid very quick inner mainloops when
 				// recoding a session
 				if (throttle && !WLApplication::get()->get_playback())
-				{
-					static int lastthrottle = 0;
-					int time = SDL_GetTicks();
+					{
+						static int lastthrottle = 0;
+						int time = SDL_GetTicks();
 
-					if (time - lastthrottle < 10)
-						goto restart;
+						if (time - lastthrottle < 10)
+							goto restart;
 
-					lastthrottle = time;
-				}
+						lastthrottle = time;
+					}
 
 				write_record_char(RFC_ENDEVENTS);
 			}
 		}
-		else
+	else
+	{ //not recording
+		if (haveevent)
 		{
-			if (haveevent)
-			{
 			// Eliminate any unhandled events to make sure record and playback are
 			// _really_ the same.
 			// Yes I know, it's overly paranoid but hey...
-				switch(ev->type) {
-					case SDL_KEYDOWN:
-					case SDL_KEYUP:
-					case SDL_MOUSEBUTTONDOWN:
-					case SDL_MOUSEBUTTONUP:
-					case SDL_MOUSEMOTION:
-					case SDL_QUIT:
-						break;
+			switch(ev->type) {
+			case SDL_KEYDOWN:
+			case SDL_KEYUP:
+			case SDL_MOUSEBUTTONDOWN:
+			case SDL_MOUSEBUTTONUP:
+			case SDL_MOUSEMOTION:
+			case SDL_QUIT:
+				break;
 
-					default:
-						goto restart;
-				}
+			default:
+				goto restart;
 			}
 		}
+	}
 
-		return haveevent;
+	return haveevent;
 }
 
 
 /**
- * Run the event queue, get packets from the network, etc...
+ * Pump the event queue, get packets from the network, etc...
  */
-void WLApplication::handle_input(InputCallback *cb)
+void WLApplication::handle_input(const InputCallback *cb)
 {
 	bool gotevents = false;
 	SDL_Event ev;
@@ -387,8 +452,8 @@ void WLApplication::handle_input(InputCallback *cb)
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
 	if (WLApplication::get()->get_playback()) {
-		while(SDL_PollEvent(&ev)) {
-			switch(ev.type) {
+			while(SDL_PollEvent(&ev)) {
+				switch(ev.type) {
 				case SDL_KEYDOWN:
 					if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
 						m_should_die = true;
@@ -397,9 +462,9 @@ void WLApplication::handle_input(InputCallback *cb)
 				case SDL_QUIT:
 					m_should_die = true;
 					break;
+				}
 			}
 		}
-	}
 
 	// Usual event queue
 	while(poll_event(&ev, !gotevents)) {
@@ -413,84 +478,84 @@ void WLApplication::handle_input(InputCallback *cb)
 		// please also take a look at Sys_PollEvent()
 
 		switch(ev.type) {
-			case SDL_KEYDOWN:
-			case SDL_KEYUP:
-				if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
-				{
-					if (ev.type == SDL_KEYDOWN)
-						m_should_die = true;
-					break;
-				}
-				if (ev.key.keysym.sym == SDLK_F11) // take screenshot
-				{
-					if (ev.type == SDL_KEYDOWN) {
-						char buf[256];
-						int nr;
-
-						for(nr = 0; nr < 10000; nr++) {
-							snprintf(buf, sizeof(buf), "shot%04i.bmp", nr);
-							if (g_fs->FileExists(buf))
-								continue;
-							g_gr->screenshot(buf);
-							break;
-						}
-					}
-					break;
-				}
-				if (cb && cb->key) {
-					int c;
-
-					c = ev.key.keysym.unicode;
-					if (c < 32 || c >= 128)
-						c = 0;
-
-					cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, (char)c);
-				}
+		case SDL_KEYDOWN:
+		case SDL_KEYUP:
+			if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
+			{
+				if (ev.type == SDL_KEYDOWN)
+					m_should_die = true;
 				break;
+			}
+			if (ev.key.keysym.sym == SDLK_F11) // take screenshot
+			{
+				if (ev.type == SDL_KEYDOWN) {
+					char buf[256];
+					int nr;
 
-			case SDL_MOUSEBUTTONDOWN:
-			case SDL_MOUSEBUTTONUP:
-				button = ev.button.button-1;
-				if (m_mouse_swapped) {
-					if (button == MOUSE_LEFT) button = MOUSE_RIGHT;
-					else if (button == MOUSE_RIGHT) button = MOUSE_LEFT;
-				}
-
-				if (ev.type == SDL_MOUSEBUTTONDOWN)
-					//TODO: no bitshifting
-					m_mouse_buttons |= 1 << button;
-				else
-					//TODO: no bitshifting
-					m_mouse_buttons &= ~(1 << button);
-
-				if (cb && cb->mouse_click)
-					cb->mouse_click(ev.type == SDL_MOUSEBUTTONDOWN, button, m_mouse_buttons,
-						(int)m_mouse_x, (int)m_mouse_y);
-				break;
-
-				case SDL_MOUSEMOTION: {
-				// All the interesting stuff is now in Sys_PollEvent()
-					int xdiff = ev.motion.xrel;
-					int ydiff = ev.motion.yrel;
-
-					m_mouse_x = ev.motion.x;
-					m_mouse_y = ev.motion.y;
-
-					if (!xdiff && !ydiff)
+					for(nr = 0; nr < 10000; nr++) {
+						snprintf(buf, sizeof(buf), "shot%04i.bmp", nr);
+						if (g_fs->FileExists(buf))
+							continue;
+						g_gr->screenshot(buf);
 						break;
-
-					if (cb && cb->mouse_move)
-						cb->mouse_move(m_mouse_buttons, m_mouse_x, m_mouse_y, xdiff, ydiff);
-
-					break;
+					}
 				}
-
-			case SDL_QUIT:
-				m_should_die = true;
 				break;
+			}
+			if (cb && cb->key) {
+				int c;
 
-			default:
+				c = ev.key.keysym.unicode;
+				if (c < 32 || c >= 128)
+					c = 0;
+
+				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, (char)c);
+			}
+			break;
+
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP:
+			button = ev.button.button-1;
+			if (m_mouse_swapped) {
+				if (button == MOUSE_LEFT) button = MOUSE_RIGHT;
+				else if (button == MOUSE_RIGHT) button = MOUSE_LEFT;
+			}
+
+			if (ev.type == SDL_MOUSEBUTTONDOWN)
+				//TODO: no bitshifting
+				m_mouse_buttons |= 1 << button;
+			else
+				//TODO: no bitshifting
+				m_mouse_buttons &= ~(1 << button);
+
+			if (cb && cb->mouse_click)
+				cb->mouse_click(ev.type == SDL_MOUSEBUTTONDOWN, button, m_mouse_buttons,
+				                (int)m_mouse_x, (int)m_mouse_y);
+			break;
+
+		case SDL_MOUSEMOTION: {
+				// All the interesting stuff is now in Sys_PollEvent()
+				int xdiff = ev.motion.xrel;
+				int ydiff = ev.motion.yrel;
+
+				m_mouse_x = ev.motion.x;
+				m_mouse_y = ev.motion.y;
+
+				if (!xdiff && !ydiff)
+					break;
+
+				if (cb && cb->mouse_move)
+					cb->mouse_move(m_mouse_buttons, m_mouse_x, m_mouse_y, xdiff, ydiff);
+
 				break;
+			}
+
+		case SDL_QUIT:
+			m_should_die = true;
+			break;
+
+		default:
+			break;
 		}
 	}
 }
@@ -501,7 +566,7 @@ void WLApplication::handle_input(InputCallback *cb)
  *
  * \return Whether the initalization was successful
  */
-bool WLApplication::init()
+const bool WLApplication::init()
 {
 	//create the filesystem abstraction
 	//must be first - we wouldn't even find the config file
@@ -575,7 +640,7 @@ void WLApplication::release_textdomain()
 }
 
 /**
- * Set The locale to the given string
+ * Set the locale to the given string
  */
 void WLApplication::set_locale( const char* str ) {
 	if( !str )
@@ -611,7 +676,7 @@ void WLApplication::set_locale( const char* str ) {
 /**
  * Returns the position in the playback file
  */
-int WLApplication::get_playback_offset()
+const long int WLApplication::get_playback_offset()
 {
 	assert(get_playback());
 
@@ -620,8 +685,9 @@ int WLApplication::get_playback_offset()
 
 /**
  * Return the current time, in milliseconds
+ * \todo Convert from int to Uint32
  */
-int WLApplication::get_time()
+const int WLApplication::get_time()
 {
 	int time;
 
@@ -687,7 +753,7 @@ void WLApplication::set_mouse_speed(float speed)
  * Set the mouse boundary after a change of resolution
  * This is manually imported by graphic.cc
  */
-void WLApplication::set_max_mouse_coords(int x, int y)
+void WLApplication::set_max_mouse_coords(const int x, const int y)
 {
 	m_mouse_maxx = x;
 	m_mouse_maxy = y;
@@ -698,7 +764,7 @@ void WLApplication::set_max_mouse_coords(int x, int y)
  * Store the delta mouse_internal_compx/y, so that the resulting motion
  * event can be eliminated.
  */
-void WLApplication::do_warp_mouse(int x, int y)
+void WLApplication::do_warp_mouse(const int x, const int y)
 {
 	int curx, cury;
 
@@ -725,7 +791,8 @@ void WLApplication::do_warp_mouse(int x, int y)
  * called while UI elements are active.
  */
 Graphic* SW16_CreateGraphics(int w, int h, int bpp, bool fullscreen);
-void WLApplication::init_graphics(int w, int h, int bpp, bool fullscreen)
+void WLApplication::init_graphics(const int w, const int h,
+                                  const int bpp, const bool fullscreen)
 {
 	if (w == m_gfx_w && h == m_gfx_h && fullscreen == m_gfx_fullscreen)
 		return;
@@ -747,7 +814,11 @@ void WLApplication::init_graphics(int w, int h, int bpp, bool fullscreen)
 	}
 }
 
-bool WLApplication::init_settings()
+/**
+ * Read the config file, parse the commandline and give all other internal
+ * parameters sensible default values
+ */
+const bool WLApplication::init_settings()
 {
 	Section *s=0;
 
@@ -800,6 +871,9 @@ bool WLApplication::init_settings()
 	return true;
 }
 
+/**
+ * Remember the last settings: writ them into the config file
+ */
 void WLApplication::shutdown_settings()
 {
 	// To be proper, release our textdomain
@@ -815,7 +889,7 @@ void WLApplication::shutdown_settings()
  * \return true if there were no fatal errors that prevent the game from running,
  *         false otherwise
  */
-bool WLApplication::init_hardware()
+const bool WLApplication::init_hardware()
 {
 	Uint32 sdl_flags=0;
 	Section *s = g_options.pull_section("global");
@@ -846,7 +920,7 @@ bool WLApplication::init_hardware()
 }
 
 /**
- * Shut the hardware down: switch graphics mode, stop sound handler
+ * Shut the hardware down: stop graphics mode, stop sound handler
  */
 void WLApplication::shutdown_hardware()
 {
@@ -855,7 +929,7 @@ void WLApplication::shutdown_hardware()
 
 	if (g_gr) {
 		cout<<"WARNING: Hardware shutting down although graphics system"
-		<<" ist still alive!"<<std::endl;
+		<<" ist still alive!"<<endl;
 	}
 	init_graphics(0, 0, 0, false);
 
@@ -863,7 +937,10 @@ void WLApplication::shutdown_hardware()
 	m_sdl_active = false;
 }
 
-bool WLApplication::init_recordplaybackfile()
+/**
+ * Open record and/or playback file for writing/reading.
+ */
+const bool WLApplication::init_recordplaybackfile()
 {
 	m_frecord = 0;
 	m_fplayback = 0;
@@ -914,11 +991,11 @@ void WLApplication::shutdown_recordplaybackfile()
 }
 
 /**
- * Parse the standard cmd line of the program
+ * Parse the command line given in \ref m_argc and \ref m_argv
  *
  * \return true if no errors, otherwise false
 */
-bool WLApplication::parse_command_line()
+const bool WLApplication::parse_command_line()
 {
 	for(int i = 1; i < m_argc; i++) {
 		std::string opt=m_argv[i];
@@ -926,8 +1003,8 @@ bool WLApplication::parse_command_line()
 
 		//special case for help because it allows single-dash-options
 		if ((opt=="-h" || opt=="-help") ||
-				   (opt=="help" || opt=="usage") ||
-				   (opt=="-V" || opt=="--version"))
+		      (opt=="help" || opt=="usage") ||
+		      (opt=="-V" || opt=="--version"))
 		{
 			show_usage();
 			return false;
@@ -959,8 +1036,8 @@ bool WLApplication::parse_command_line()
 #ifdef DEBUG
 #ifndef __WIN32__
 		if (opt=="double") {
-	init_double_game();
-	continue;
+			init_double_game();
+			continue;
 		}
 #endif // __WIN32__
 #endif // DEBUG
@@ -971,8 +1048,8 @@ bool WLApplication::parse_command_line()
 		//command line (or an unhandled param-less option)
 		SSS_T pos=opt.find("=");
 		if (pos==std::string::npos) {
-			std::cout<<std::endl
-			<<"ERROR: invalid option: --"<<opt<<std::endl<<std::endl;
+			cout<<endl
+			<<"ERROR: invalid option: --"<<opt<<endl<<endl;
 
 			show_usage();
 			return false;
@@ -992,8 +1069,8 @@ bool WLApplication::parse_command_line()
 		//but why would you?
 		if (opt=="record") {
 			if (value.empty()) {
-				std::cout<<std::endl
-				<<"ERROR: --record needs a filename!"<<std::endl<<std::endl;
+				cout<<endl
+				<<"ERROR: --record needs a filename!"<<endl<<endl;
 				show_usage();
 				return false;
 			}
@@ -1010,8 +1087,8 @@ bool WLApplication::parse_command_line()
 		//but why would you?
 		if (opt=="playback") {
 			if (value.empty()) {
-				std::cout<<std::endl
-				<<"ERROR: --playback needs a filename!"<<std::endl<<std::endl;
+				cout<<endl
+				<<"ERROR: --playback needs a filename!"<<endl<<endl;
 				show_usage();
 				return false;
 			}
@@ -1031,7 +1108,7 @@ bool WLApplication::parse_command_line()
 		//With typos, this will create invalid config settings. They
 		//will be taken care of (==ignored) when saving the options
 		g_options.pull_section("global")->create_val(opt.c_str(),
-		value.c_str());
+		      value.c_str());
 
 	}
 
@@ -1044,31 +1121,288 @@ bool WLApplication::parse_command_line()
 void WLApplication::show_usage()
 {
 	//TODO: i18n this whole block
-	std::cout<<"This is Widelands-"<<VERSION<<std::endl<<std::endl
-			<<"Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"<<std::endl
-			<<std::endl
-			<<"Options:"<<std::endl
-			<<std::endl
-			<<" --<config-entry-name>=value overwrites any config file setting"<<std::endl
-			<<std::endl
-			<<" --record=FILENAME         Record all events to the given filename for later playback"<<std::endl
-			<<" --playback=FILENAME       Playback given filename (see --record)"<<std::endl
-			<<std::endl
-			<<" --coredump=[yes|no]       Generates a core dump on segfaults instead of using the SDL"<<std::endl
-			<<std::endl
-			<<" --ggz                     Starts game as GGZ Gaming Zone client (don't use!)"<<std::endl
-			<<" --nosound                 Starts the game with sound disabled"<<std::endl
-			<<" --nozip                   Do not save files as binary zip archives."<<std::endl
-			<<std::endl
+	cout<<"This is Widelands-"<<VERSION<<endl<<endl
+	<<"Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"<<endl
+	<<endl
+	<<"Options:"<<endl
+	<<endl
+	<<" --<config-entry-name>=value overwrites any config file setting"<<endl
+	<<endl
+	<<" --record=FILENAME         Record all events to the given filename for later playback"<<endl
+	<<" --playback=FILENAME       Playback given filename (see --record)"<<endl
+	<<endl
+	<<" --coredump=[yes|no]       Generates a core dump on segfaults instead of using the SDL"<<endl
+	<<endl
+	<<" --ggz                     Starts game as GGZ Gaming Zone client (don't use!)"<<endl
+	<<" --nosound                 Starts the game with sound disabled"<<endl
+	<<" --nozip                   Do not save files as binary zip archives."<<endl
+	<<endl
 #ifdef DEBUG
 #ifndef __WIN32__
-			<<" --double                  Start the game twice (for localhost network testing)"<<std::endl
-			<<std::endl
+	<<" --double                  Start the game twice (for localhost network testing)"<<endl
+	<<endl
 #endif
 #endif
-			<<" --help                    Show this help"<<std::endl
-			<<std::endl
-			<<"Bug reports? Suggestions? Check out the project website:"<<std::endl
-			<<"  http://www.sourceforge.net/projects/widelands"<<std::endl
-			<<"Hope you enjoy this game!"<<std::endl;
+	<<" --help                    Show this help"<<endl
+	<<endl
+	<<"Bug reports? Suggestions? Check out the project website:"<<endl
+	<<"  http://www.sourceforge.net/projects/widelands"<<endl
+	<<"Hope you enjoy this game!"<<endl;
 }
+
+/**
+ * Fork off a second game to test network gaming
+ *
+ * \warning You must call this \e before any hardware initialization - most
+ * notably before \ref SDL_Init()
+ */
+void WLApplication::init_double_game ()
+{
+	if (pid_me!=0)
+		return;
+
+	pid_me=getpid();
+	pid_peer=fork();
+	//TODO: handle fork errors
+
+	assert (pid_peer>=0);
+
+	if (pid_peer==0) {
+		pid_peer=pid_me;
+		pid_me=getpid();
+
+		may_run=1;
+	}
+
+	signal (SIGUSR1, signal_handler);
+
+	atexit (quit_handler);
+}
+
+void WLApplication::signal_handler (int sig)
+{
+	may_run++;
+}
+
+void WLApplication::quit_handler()
+{
+	kill (pid_peer, SIGTERM);
+	sleep (2);
+	kill (pid_peer, SIGKILL);
+}
+
+void WLApplication::yield_double_game()
+{
+	if (pid_me==0)
+		return;
+
+	if (may_run>0) {
+		may_run--;
+		kill (pid_peer, SIGUSR1);
+	}
+
+	if (may_run==0)
+		usleep (500000);
+
+	// using sleep instead of pause avoids a race condition
+	// and a deadlock during connect
+}
+
+/**
+ * Menus
+ */
+//@{
+void WLApplication::mainmenu()
+{
+	bool done=false;
+
+	while(!done) {
+		unsigned char code;
+
+		Fullscreen_Menu_Main *mm = new Fullscreen_Menu_Main;
+		code = mm->run();
+		delete mm;
+
+		switch(code) {
+		case Fullscreen_Menu_Main::mm_singleplayer:
+			mainmenu_singleplayer();
+			break;
+
+		case Fullscreen_Menu_Main::mm_multiplayer:
+			mainmenu_multiplayer();
+			break;
+
+		case Fullscreen_Menu_Main::mm_options:
+			{
+				Section *s = g_options.pull_section("global");
+				Options_Ctrl *om = new Options_Ctrl(s);
+				delete om;
+			}
+			break;
+
+		case Fullscreen_Menu_Main::mm_readme:
+			{
+				Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView( "txts/README" );
+				ff->run();
+				delete ff;
+			}
+			break;
+
+		case Fullscreen_Menu_Main::mm_license:
+			{
+				Fullscreen_Menu_FileView* ff=new Fullscreen_Menu_FileView( "txts/COPYING" );
+				ff->run();
+				delete ff;
+			}
+			break;
+
+		case Fullscreen_Menu_Main::mm_editor:
+			{
+				Editor* e=new Editor();
+				e->run();
+				delete e;
+				break;
+			}
+
+		default:
+		case Fullscreen_Menu_Main::mm_exit:
+			done=true;
+			break;
+		}
+	}
+}
+
+void WLApplication::mainmenu_singleplayer()
+{
+	bool done=false;
+	while(!done) {
+		Fullscreen_Menu_SinglePlayer *sp = new Fullscreen_Menu_SinglePlayer;
+		int code = sp->run();
+		delete sp;
+
+		switch(code) {
+		case Fullscreen_Menu_SinglePlayer::sp_skirmish:
+			{
+				Game *g = new Game;
+				bool ran = g->run_single_player();
+				delete g;
+				if (ran) {
+					// game is over. everything's good. restart Main Menu
+					done=true;
+				}
+				continue;
+			}
+
+		case Fullscreen_Menu_SinglePlayer::sp_loadgame:
+			{
+				Game* g = new Game;
+				bool ran = g->run_load_game(true);
+				delete g;
+				if (ran) {
+					done=true;
+				}
+				continue;
+			}
+
+		case Fullscreen_Menu_SinglePlayer::sp_tutorial:
+			{
+				Fullscreen_Menu_TutorialSelectMap* sm = new Fullscreen_Menu_TutorialSelectMap;
+				int code = sm->run();
+				if(code) {
+					std::string mapname = sm->get_mapname( code );
+					delete sm;
+
+					Game* g = new Game;
+					bool run = g->run_splayer_map_direct( mapname.c_str(), true);
+					delete g;
+					if(run)
+						done = true;
+					continue;
+				}
+				// Fallthrough if back was pressed
+			}
+
+		default:
+		case Fullscreen_Menu_SinglePlayer::sp_back:
+			done = true;
+			break;
+		}
+	}
+}
+
+void WLApplication::mainmenu_multiplayer()
+{
+	Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
+	if(NetGGZ::ref()->tables().size() > 0) ns->fill(NetGGZ::ref()->tables());
+	int code=ns->run();
+
+	NetGame* netgame = 0;
+
+	if (code==Fullscreen_Menu_NetSetup::HOSTGAME)
+		netgame=new NetHost();
+	else if (code==Fullscreen_Menu_NetSetup::JOINGAME) {
+		IPaddress peer;
+
+		//			    if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
+		//				    throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
+		ulong addr;
+		ushort port;
+
+		if (!ns->get_host_address(addr,port))
+			throw wexception("Address of game server is no good");
+
+		peer.host=addr;
+		peer.port=port;
+
+		netgame=new NetClient(&peer);
+	} else if(code==Fullscreen_Menu_NetSetup::INTERNETGAME) {
+		delete ns;
+		Fullscreen_Menu_InetServerOptions* igo = new Fullscreen_Menu_InetServerOptions();
+		int code=igo->run();
+
+		// Get informations here
+		std::string host = igo->get_server_name();
+		std::string player = igo->get_player_name();
+		delete igo;
+
+		if(code) {
+			Game_Server_Connection csc(host, GAME_SERVER_PORT);
+
+			try {
+				csc.connect();
+			} catch(...) {
+				// TODO: error handling here
+				throw;
+			}
+
+			csc.set_username(player.c_str());
+
+			// Wowi, we are connected. Let's start the lobby
+			Fullscreen_Menu_InetLobby* il = new Fullscreen_Menu_InetLobby(&csc);
+			il->run();
+			delete il;
+		}
+		//break;
+	}
+	else if((code == Fullscreen_Menu_NetSetup::JOINGGZGAME)
+	        || (code == Fullscreen_Menu_NetSetup::HOSTGGZGAME)) {
+		if(code == Fullscreen_Menu_NetSetup::HOSTGGZGAME) NetGGZ::ref()->launch();
+		if(NetGGZ::ref()->host()) netgame = new NetHost();
+		else
+		{
+			while(!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
+
+			IPaddress peer;
+			SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(), WIDELANDS_PORT);
+			netgame = new NetClient(&peer);
+		}
+	}
+	else;
+	//break;
+
+	delete ns;
+
+	netgame->run();
+	delete netgame;
+}
+//@}

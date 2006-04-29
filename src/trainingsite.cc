@@ -29,7 +29,6 @@
 #include "transport.h"
 #include "util.h"
 #include "worker.h"
-#include "system.h"
 #include "wlapplication.h"
 
 TrainingSite_Descr::TrainingSite_Descr(Tribe_Descr * tribe, const char *name)

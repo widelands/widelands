@@ -26,7 +26,6 @@
 #include "languages.h"
 #include "profile.h"
 #include "sound_handler.h"
-#include "system.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_listselect.h"

@@ -1,5 +1,8 @@
 Import('*')
 
+#TODO: find a way to remove the .orig files astyle leaves around. Probably in
+#      scons-tools/astyle.py
+
 SRC=Glob('*.cc')
 
 srcenv=env.Copy()
@@ -26,10 +29,11 @@ SConscript('ui/ui_fs_menus/SConscript')
 
 INDENTLIST=[
 	'geometry.h',
+	'main.cc',
 	'sound_handler.h',
 	'sound_handler.cc',
-	'system.h',
-	'system.cc',
+	'wlapplication.h',
+	'wlapplication.cc',
 	]
 indent=srcenv.astyle(source=INDENTLIST)
 env.Alias("indent", indent)

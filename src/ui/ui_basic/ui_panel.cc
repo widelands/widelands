@@ -20,16 +20,9 @@
 #include <cassert>
 #include "graphic.h"
 #include "rendertarget.h"
-#include "system.h"
 #include "types.h"
 #include "ui_panel.h"
 #include "wlapplication.h"
-
-#ifdef DEBUG
-#ifndef __WIN32__
-void yield_double_game ();
-#endif
-#endif
 
 /*
 ==============================================================================
@@ -177,7 +170,7 @@ int UIPanel::run()
 
 #ifdef DEBUG
 #ifndef __WIN32__
-		yield_double_game ();
+		WLApplication::yield_double_game ();
 #endif
 #endif
 	}

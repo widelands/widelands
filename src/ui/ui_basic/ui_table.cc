@@ -20,7 +20,6 @@
 #include "constants.h"
 #include "graphic.h"
 #include "rendertarget.h"
-#include "system.h"
 #include "types.h"
 #include "ui_button.h"
 #include "ui_scrollbar.h"

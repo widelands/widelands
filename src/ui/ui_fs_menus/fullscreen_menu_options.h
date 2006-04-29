@@ -23,7 +23,6 @@
 #define NUM_RESOLUTIONS		6
 
 #include "fullscreen_menu_base.h"
-#include "system.h"
 #include "types.h"
 #include "ui_checkbox.h"
 #include "ui_radiobutton.h"

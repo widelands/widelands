@@ -21,14 +21,13 @@
 #ifndef __S__PANEL_H
 #define __S__PANEL_H
 
-#include "ui_object.h"
-#include "../../font_handler.h"
-#include "../../constants.h"
-#include "../../system.h"  // This is basically needed for translations
-#include "rendertarget.h"
-#include "types.h"
+#include "constants.h"
 #include "error.h"
-#include "../../sound_handler.h"
+#include "font_handler.h"
+#include "rendertarget.h"
+#include "sound_handler.h"
+#include "types.h"
+#include "ui_object.h"
 
 class RenderTarget;
 

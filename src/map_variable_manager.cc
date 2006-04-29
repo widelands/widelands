@@ -19,7 +19,6 @@
 
 #include <vector>
 #include "map_variable_manager.h"
-#include "system.h"
 #include "wlapplication.h"
 
 /*

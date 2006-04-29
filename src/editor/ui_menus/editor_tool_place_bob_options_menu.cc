@@ -22,7 +22,6 @@
 #include "editor_tool_place_bob_options_menu.h"
 #include "keycodes.h"
 #include "map.h"
-#include "system.h"
 #include "ui_box.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"

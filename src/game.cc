@@ -33,7 +33,6 @@
 #include "playercommand.h"
 #include "soldier.h"
 #include "sound_handler.h"
-#include "system.h"
 #include "tribe.h"
 #include "widelands_map_loader.h"
 #include "wlapplication.h"

@@ -46,7 +46,6 @@
 #include "mapview.h"
 #include "overlay_manager.h"
 #include "player.h"
-#include "system.h"
 #include "tribe.h"
 #include "ui_button.h"
 #include "ui_modal_messagebox.h"

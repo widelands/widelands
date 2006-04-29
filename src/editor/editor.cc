@@ -21,7 +21,6 @@
 #include "editorinteractive.h"
 #include "graphic.h"
 #include "map.h"
-#include "system.h"
 #include "world.h"
 #include "wlapplication.h"
 

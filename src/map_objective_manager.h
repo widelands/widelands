@@ -22,7 +22,6 @@
 
 #include "error.h"
 #include <string>
-#include "system.h"
 #include "trigger_null.h"
 #include "trigger_referencer.h"
 #include "wlapplication.h"

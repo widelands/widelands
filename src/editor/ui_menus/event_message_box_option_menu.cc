@@ -27,7 +27,6 @@
 #include "ui_multilineeditbox.h"
 #include "ui_listselect.h"
 #include "editorinteractive.h"
-#include "system.h"
 #include "error.h"
 #include "map.h"
 #include "map_trigger_manager.h"

@@ -27,7 +27,6 @@
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
-#include "system.h"
 #include "trigger.h"
 #include "trigger_conditional.h"
 #include "util.h"

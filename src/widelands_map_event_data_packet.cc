@@ -29,7 +29,6 @@
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_event_data_packet.h"
 #include "world.h"
-#include "system.h"
 
 #define CURRENT_PACKET_VERSION 1
 

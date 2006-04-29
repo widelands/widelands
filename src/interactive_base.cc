@@ -33,7 +33,6 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "profile.h"
-#include "system.h"
 #include "wlapplication.h"
 
 /*

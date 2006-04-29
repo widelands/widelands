@@ -25,7 +25,6 @@
 #include "ui_checkbox.h"
 #include "ui_editbox.h"
 #include "editorinteractive.h"
-#include "system.h"
 #include "error.h"
 #include "util.h"
 #include "wlapplication.h"

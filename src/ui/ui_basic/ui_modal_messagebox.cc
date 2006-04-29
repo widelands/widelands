@@ -21,7 +21,6 @@
 #include "ui_modal_messagebox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_button.h"
-#include "system.h"
 #include "graphic.h"
 #include "wlapplication.h"
 

@@ -26,7 +26,6 @@
 #include "graphic.h"
 #include "map.h"
 #include "player.h"
-#include "system.h"
 #include "tribe.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"

@@ -20,14 +20,13 @@
 #ifndef __NETWORK_H__
 #define __NETWORK_H__
 
-#include <vector>
-#include <queue>
+#include "constants.h"
 #include <list>
+#include <queue>
 #include <SDL_net.h>
-#include "wexception.h"
 #include "types.h"
-
-#define WIDELANDS_PORT		7396
+#include <vector>
+#include "wexception.h"
 
 class Game;
 class PlayerCommand;
@@ -47,33 +46,33 @@ class NetGame {
 		uint plrnum;
 		std::string msg;
 	};
-	
+
 	NetGame ();
 	virtual ~NetGame ();
 
 	int get_playernum () { return playernum; }
-	
+
 	bool get_players_changed ()
 	{
 		bool ch=players_changed;
 		players_changed=false;
 		return ch;
 	}
-	
+
 	void set_player_description_group (int plnum, PlayerDescriptionGroup* pdg)
 	{
 		playerdescr[plnum-1]=pdg;
 	}
-	
+
 	void set_launch_menu (Fullscreen_Menu_LaunchGame* lgm)
 	{
 		launch_menu=lgm;
 	}
-	
+
 	void run ();
-	
+
 	uint get_max_frametime();
-	
+
 	virtual bool is_host ()=0;
 	virtual void begin_game ();
 
@@ -81,37 +80,37 @@ class NetGame {
 
 	virtual void send_player_command (PlayerCommand*)=0;
 	virtual void send_chat_message (Chat_Message)=0;
-	
+
 	bool have_chat_message();
 	Chat_Message get_chat_message();
-	
+
 	virtual void syncreport (uint)=0;
 
     protected:
 	void disconnect_player (int);
-	
+
 	enum {
 		PH_SETUP,
 		PH_PREGAME,
 		PH_INGAME
 	}		phase;
-	
+
 	Game*		game;
-	
+
 	int		playernum;
 	ulong    net_game_time;
-	
+
 	uint		common_rand_seed;
-	
+
 	bool		players_changed;
-	
+
 	uchar		player_enabled;
 	uchar		player_human;
 	uchar		player_ready;
-	
+
 	PlayerDescriptionGroup*	playerdescr[MAX_PLAYERS];
 	Fullscreen_Menu_LaunchGame*	launch_menu;
-	
+
 	NetStatusWindow*		statuswnd;
 
 	std::queue<Chat_Message>	chat_msg_queue;
@@ -121,17 +120,17 @@ class NetHost:public NetGame {
     public:
 	NetHost ();
 	virtual ~NetHost ();
-	
+
 	void update_map ();
 
 	virtual bool is_host () { return true; }
 	virtual void begin_game ();
-	
+
 	virtual void handle_network ();
-	
+
 	virtual void send_player_command (PlayerCommand*);
 	virtual void send_chat_message (Chat_Message);
-	
+
 	virtual void syncreport (uint);
 
     private:
@@ -147,22 +146,22 @@ class NetHost:public NetGame {
 		std::queue<uint>	syncreports;
 		ulong			lag;
 	};
-	
+
 	LAN_Game_Promoter*		promoter;
-	
+
 	TCPsocket			svsock;
 	SDLNet_SocketSet		sockset;
 
 	std::queue<PlayerCommand*>	cmds;
 	std::vector<Client>		clients;
-	
+
 	Serializer*			serializer;
-	
+
 	std::queue<uint>		mysyncreports;
-	
+
 	ulong				net_delay;
 	ulong				net_delay_history[8];
-	
+
 	ulong				next_ping_due;
 	ulong				last_ping_sent;
 	uint				pongs_received;
@@ -175,17 +174,17 @@ class NetClient:public NetGame {
 
 	virtual bool is_host () { return false; }
 	virtual void begin_game ();
-	
+
 	virtual void handle_network ();
-	
+
 	virtual void send_player_command (PlayerCommand*);
 	virtual void send_chat_message (Chat_Message);
-    
+
 	virtual void syncreport (uint);
 
     private:
 	void disconnect ();
-	
+
 	TCPsocket			sock;
 	SDLNet_SocketSet		sockset;
 
@@ -197,23 +196,23 @@ class Serializer {
     public:
 	Serializer ();
 	~Serializer ();
-	
+
 	void begin_packet ();
 	void end_packet ();
-	
+
 	void send (TCPsocket);
-	
+
 	void putchar (char v)
 	{
 		buffer.push_back (v);
 	}
-    
+
 	void putshort (short v)
 	{
 		buffer.push_back (v >> 8);
 		buffer.push_back (v & 0xFF);
 	}
-    
+
 	void putlong (long v)
 	{
 		buffer.push_back (v >> 24);
@@ -221,9 +220,9 @@ class Serializer {
 		buffer.push_back ((v>>8) & 0xFF);
 		buffer.push_back (v & 0xFF);
 	}
-	
+
 	void putstr (const char*);
-    
+
     private:
 	std::vector<unsigned char>	buffer;
 };
@@ -232,26 +231,26 @@ class Deserializer {
     public:
 	Deserializer ();
 	~Deserializer ();
-	
+
 	int read_packet (TCPsocket);
-	
+
 	bool avail ()
 	{ return !queue.empty(); }
-	
+
 	char getchar ()
 	{
 		assert (avail());
-		
+
 		char v=queue.front();
 		queue.pop();
 		return v;
 	}
-	
+
 	short getshort ();
 	long getlong ();
-	
+
 	void getstr (char*, int);
-    
+
     private:
 	std::queue<unsigned char>	queue;
 };

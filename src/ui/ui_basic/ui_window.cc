@@ -21,7 +21,6 @@
 #include "font_handler.h"
 #include "graphic.h"
 #include "rendertarget.h"
-#include "system.h"
 #include "ui_window.h"
 #include "constants.h"
 #include "keycodes.h"

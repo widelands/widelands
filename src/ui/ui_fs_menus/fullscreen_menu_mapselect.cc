@@ -28,7 +28,6 @@
 #include "ui_multilinetextarea.h"
 #include "ui_checkbox.h"
 #include "map_loader.h"
-#include "system.h"
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
 

@@ -1408,7 +1408,7 @@ LayeredFileSystem *LayeredFileSystem::Create()
  * \todo is exename still neccessary, now that BINDIR can be seen from config.h?
  *       same question for slash/backslash detection, it's trivial with scons
 */
-static std::string getexename(char **argv)
+static std::string getexename(const char **argv)
 {
 	static const char* const s_selfptr = "/proc/self/exe";
 	char buf[PATH_MAX]="";
@@ -1434,7 +1434,7 @@ static std::string getexename(char **argv)
  *
  * Sets the filelocators default searchpaths (partly OS specific)
  */
-void setup_searchpaths(int argc, char **argv)
+void setup_searchpaths(const int argc, const char **argv)
 {
 	// first, try the data directory used in the last scons invocation
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h

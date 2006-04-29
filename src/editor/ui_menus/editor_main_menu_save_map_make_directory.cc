@@ -22,7 +22,6 @@
 #include "ui_editbox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
-#include "system.h"
 #include "wlapplication.h"
 
 /*

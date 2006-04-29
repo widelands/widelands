@@ -41,7 +41,6 @@
 #include "overlay_manager.h"
 #include "soldier.h"
 #include "stock_menu.h"
-#include "system.h"
 #include "transport.h"
 #include "tribe.h"
 #include "util.h"
