@@ -20,11 +20,9 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
-extern class WLApplication* g_app;
-
 class WLApplication {
 public:
-	WLApplication(int argc, char **argv);
+	static WLApplication *get(int argc=0, char **argv=0);
 
 	void run();
 
@@ -37,12 +35,7 @@ public:
 	FILE *get_play_file() {return m_fplayback;}
 
 protected:
-	bool m_playback, m_record;
-	char m_recordname[256], m_playbackname[256];
-	FILE *m_frecord, *m_fplayback;
-
-	int argc;
-	char **argv;
+	WLApplication(int argc, char **argv);
 
 	bool init_settings();
 	void shutdown_settings();
@@ -55,6 +48,16 @@ protected:
 
 	bool parse_command_line();
 	void show_usage();
+
+	bool m_playback, m_record;
+	char m_recordname[256], m_playbackname[256];
+	FILE *m_frecord, *m_fplayback;
+
+	int argc;
+	char **argv;
+
+private:
+	static WLApplication *the_singleton;
 };
 
 #endif

@@ -278,22 +278,18 @@ void g_main(int argc, char** argv)
 	}
 }
 
-WLApplication *g_app;
-
 /**
  * Cross-platform entry point for SDL applications.
 */
 int main(int argc, char** argv)
 {
-	g_app=new WLApplication(argc, argv);
+	WLApplication *g_app=WLApplication::get(argc, argv);
 
 	if (g_app->init()) {
 		//g_app->run();
 		g_main(argc, argv);
 		g_app->shutdown();
 	}
-
-	delete g_app;
 
 	return 0;
 }
@@ -304,15 +300,13 @@ int main(int argc, char** argv)
 /// This is a hack needed for mingw under windows
 int main(int argc, char** argv)
 {
-	g_app=new WLApplication(argc, argv);
+	WLApplication *g_app=WLApplication::get(argc, argv);
 
 	if (g_app->init()) {
 		//g_app->run();
 		g_main(argc,argv);
 		g_app->shutdown();
 	}
-
-	delete g_app;
 
 	return 0;
 }

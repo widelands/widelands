@@ -29,6 +29,8 @@
 #include "system.h" //only for init_double_game
 #include "wlapplication.h"
 
+WLApplication *WLApplication::the_singleton=0;
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
@@ -40,9 +42,9 @@ Returns the position in the playback file
 */
 int get_playback_offset()
 {
-	assert(g_app->get_playback());
+	assert(WLApplication::get()->get_playback());
 
-	return ftell(g_app->get_play_file());
+	return ftell(WLApplication::get()->get_play_file());
 }
 
 /*
@@ -59,20 +61,20 @@ Simple wrapper functions to make stdio file access less painful
 */
 void write_record_char(char v)
 {
-	assert(g_app->get_rec_file());
+	assert(WLApplication::get()->get_rec_file());
 
-	if (fwrite(&v, sizeof(v), 1, g_app->get_rec_file()) != 1)
+	if (fwrite(&v, sizeof(v), 1, WLApplication::get()->get_rec_file()) != 1)
 		throw wexception("Write of 1 byte to record failed.");
-	fflush(g_app->get_rec_file());
+	fflush(WLApplication::get()->get_rec_file());
 }
 
 char read_record_char()
 {
 	char v;
 
-	assert(g_app->get_play_file());
+	assert(WLApplication::get()->get_play_file());
 
-	if (fread(&v, sizeof(v), 1, g_app->get_play_file()) != 1)
+	if (fread(&v, sizeof(v), 1, WLApplication::get()->get_play_file()) != 1)
 		throw wexception("Read of 1 byte from record failed.");
 
 	return v;
@@ -80,21 +82,21 @@ char read_record_char()
 
 void write_record_int(int v)
 {
-	assert(g_app->get_rec_file());
+	assert(WLApplication::get()->get_rec_file());
 
 	v = Little32(v);
-	if (fwrite(&v, sizeof(v), 1, g_app->get_rec_file()) != 1)
+	if (fwrite(&v, sizeof(v), 1, WLApplication::get()->get_rec_file()) != 1)
 		throw wexception("Write of 4 bytes to record failed.");
-	fflush(g_app->get_rec_file());
+	fflush(WLApplication::get()->get_rec_file());
 }
 
 int read_record_int()
 {
 	int v;
 
-	assert(g_app->get_play_file());
+	assert(WLApplication::get()->get_play_file());
 
-	if (fread(&v, sizeof(v), 1, g_app->get_play_file()) != 1)
+	if (fread(&v, sizeof(v), 1, WLApplication::get()->get_play_file()) != 1)
 		throw wexception("Read of 4 bytes from record failed.");
 
 	return Little32(v);
@@ -132,12 +134,39 @@ When GrabInput mode is off
 */
 
 /**
+ * The main entry point for the WLApplication singleton.
+ *
+ * Regardless of circumstances, this will return the one and only valid
+ * WLApplication object when called. If neccessary, a new WLApplication instance
+ * is created.
+ *
+ * While you \e can do the first call without parameters, but it does not make
+ * much sense.
+ *
+ * \param argc The number of command line arguments
+ * \param argv Array of command line arguments
+ * \return An (always valid!) pointer to the WLApplication singleton
+ */
+WLApplication *WLApplication::get(int argc, char **argv)
+{
+	if (the_singleton==0) {
+		the_singleton=new WLApplication(argc, argv);
+	}
+
+	return the_singleton;
+}
+
+/**
+ * Initialize an instance of WLApplication.
+ *
+ * This constructor is protected \e on \e purpose !
+ * Use \ref WLApplication::get() instead.
+ *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(int argc, char **argv):argc(argc),argv(argv)
-{
-}
+{}
 
 
 /**

@@ -29,11 +29,10 @@
 #include "wexception.h"
 #include "font_handler.h"
 #include "sound_handler.h"
+#include "wlapplication.h"
 
 #include "constants.h"
 #include "network_ggz.h"
-
-#include "wlapplication.h"
 
 static std::vector<std::string> l_textdomains;
 
@@ -148,17 +147,17 @@ int Sys_GetTime()
 {
 	int time;
 
-	if (g_app->get_playback()) {
-		read_record_code(RFC_GETTIME);
-		time = read_record_int();
-	} else
+	if (WLApplication::get()->get_playback()) {
+			read_record_code(RFC_GETTIME);
+			time = read_record_int();
+		} else
 		time = SDL_GetTicks();
 
-	if (g_app->get_record()) {
-		write_record_code(RFC_GETTIME);
-		write_record_int(time);
+	if (WLApplication::get()->get_record()) {
+			write_record_code(RFC_GETTIME);
+			write_record_int(time);
 
-	}
+		}
 
 	return time;
 }
@@ -177,8 +176,8 @@ static void Sys_DoWarpMouse(int x, int y)
 {
 	int curx, cury;
 
-	if (g_app->get_playback()) // don't warp anything during playback
-		return;
+	if (WLApplication::get()->get_playback()) // don't warp anything during playback
+			return;
 
 	SDL_GetMouseState(&curx, &cury);
 
@@ -210,53 +209,53 @@ bool Sys_PollEvent(SDL_Event *ev, bool throttle)
 	bool haveevent;
 
 restart:
-	if (g_app->get_playback())
-	{
-		uchar code = read_record_char();
-
-		if (code == RFC_EVENT)
+	if (WLApplication::get()->get_playback())
 		{
-			code = read_record_char();
+			uchar code = read_record_char();
 
-			switch(code) {
-			case RFC_KEYDOWN:
-			case RFC_KEYUP:
-				ev->type = (code == RFC_KEYUP) ? SDL_KEYUP : SDL_KEYDOWN;
-				ev->key.keysym.sym = (SDLKey)read_record_int();
-				ev->key.keysym.unicode = read_record_int();
-				break;
+			if (code == RFC_EVENT)
+			{
+				code = read_record_char();
 
-			case RFC_MOUSEBUTTONDOWN:
-			case RFC_MOUSEBUTTONUP:
-				ev->type = (code == RFC_MOUSEBUTTONUP) ? SDL_MOUSEBUTTONUP : SDL_MOUSEBUTTONDOWN;
-				ev->button.button = read_record_char();
-				break;
+				switch(code) {
+				case RFC_KEYDOWN:
+				case RFC_KEYUP:
+					ev->type = (code == RFC_KEYUP) ? SDL_KEYUP : SDL_KEYDOWN;
+					ev->key.keysym.sym = (SDLKey)read_record_int();
+					ev->key.keysym.unicode = read_record_int();
+					break;
 
-			case RFC_MOUSEMOTION:
-				ev->type = SDL_MOUSEMOTION;
-				ev->motion.x = read_record_int();
-				ev->motion.y = read_record_int();
-				ev->motion.xrel = read_record_int();
-				ev->motion.yrel = read_record_int();
-				break;
+				case RFC_MOUSEBUTTONDOWN:
+				case RFC_MOUSEBUTTONUP:
+					ev->type = (code == RFC_MOUSEBUTTONUP) ? SDL_MOUSEBUTTONUP : SDL_MOUSEBUTTONDOWN;
+					ev->button.button = read_record_char();
+					break;
 
-			case RFC_QUIT:
-				ev->type = SDL_QUIT;
-				break;
+				case RFC_MOUSEMOTION:
+					ev->type = SDL_MOUSEMOTION;
+					ev->motion.x = read_record_int();
+					ev->motion.y = read_record_int();
+					ev->motion.xrel = read_record_int();
+					ev->motion.yrel = read_record_int();
+					break;
 
-			default:
-				throw wexception("%08X: Unknown event type %02X in playback.", get_playback_offset()-1, code);
+				case RFC_QUIT:
+					ev->type = SDL_QUIT;
+					break;
+
+				default:
+					throw wexception("%08X: Unknown event type %02X in playback.", get_playback_offset()-1, code);
+				}
+
+				haveevent = true;
 			}
-
-			haveevent = true;
+			else if (code == RFC_ENDEVENTS)
+			{
+				haveevent = false;
+			}
+			else
+				throw wexception("%08X: Bad code %02X in event playback.", get_playback_offset()-1, code);
 		}
-		else if (code == RFC_ENDEVENTS)
-		{
-			haveevent = false;
-		}
-		else
-			throw wexception("%08X: Bad code %02X in event playback.", get_playback_offset()-1, code);
-	}
 	else
 	{
 		haveevent = SDL_PollEvent(ev);
@@ -327,62 +326,62 @@ restart:
 		}
 	}
 
-	if (g_app->get_record())
-	{
-		if (haveevent)
+	if (WLApplication::get()->get_record())
 		{
-			switch(ev->type) {
-			case SDL_KEYDOWN:
-			case SDL_KEYUP:
-				write_record_char(RFC_EVENT);
-				write_record_char((ev->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
-				write_record_int(ev->key.keysym.sym);
-				write_record_int(ev->key.keysym.unicode);
-				break;
-
-			case SDL_MOUSEBUTTONDOWN:
-			case SDL_MOUSEBUTTONUP:
-				write_record_char(RFC_EVENT);
-				write_record_char((ev->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
-				write_record_char(ev->button.button);
-				break;
-
-			case SDL_MOUSEMOTION:
-				write_record_char(RFC_EVENT);
-				write_record_char(RFC_MOUSEMOTION);
-				write_record_int(ev->motion.x);
-				write_record_int(ev->motion.y);
-				write_record_int(ev->motion.xrel);
-				write_record_int(ev->motion.yrel);
-				break;
-
-			case SDL_QUIT:
-				write_record_char(RFC_EVENT);
-				write_record_char(RFC_QUIT);
-				break;
-
-			default:
-				goto restart; // can't really do anything useful with this command
-			}
-		}
-		else
-		{
-			// Implement the throttle to avoid very quick inner mainloops when
-			// recoding a session
-			if (throttle && !g_app->get_playback())
+			if (haveevent)
 			{
-				static int lastthrottle = 0;
-				int time = SDL_GetTicks();
+				switch(ev->type) {
+				case SDL_KEYDOWN:
+				case SDL_KEYUP:
+					write_record_char(RFC_EVENT);
+					write_record_char((ev->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
+					write_record_int(ev->key.keysym.sym);
+					write_record_int(ev->key.keysym.unicode);
+					break;
 
-				if (time - lastthrottle < 10)
-					goto restart;
+				case SDL_MOUSEBUTTONDOWN:
+				case SDL_MOUSEBUTTONUP:
+					write_record_char(RFC_EVENT);
+					write_record_char((ev->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
+					write_record_char(ev->button.button);
+					break;
 
-				lastthrottle = time;
+				case SDL_MOUSEMOTION:
+					write_record_char(RFC_EVENT);
+					write_record_char(RFC_MOUSEMOTION);
+					write_record_int(ev->motion.x);
+					write_record_int(ev->motion.y);
+					write_record_int(ev->motion.xrel);
+					write_record_int(ev->motion.yrel);
+					break;
+
+				case SDL_QUIT:
+					write_record_char(RFC_EVENT);
+					write_record_char(RFC_QUIT);
+					break;
+
+				default:
+					goto restart; // can't really do anything useful with this command
+				}
 			}
+			else
+			{
+				// Implement the throttle to avoid very quick inner mainloops when
+				// recoding a session
+				if (throttle && !WLApplication::get()->get_playback())
+					{
+						static int lastthrottle = 0;
+						int time = SDL_GetTicks();
 
-			write_record_char(RFC_ENDEVENTS);
+						if (time - lastthrottle < 10)
+							goto restart;
+
+						lastthrottle = time;
+					}
+
+				write_record_char(RFC_ENDEVENTS);
+			}
 		}
-	}
 	else
 	{
 		if (haveevent)
@@ -426,20 +425,20 @@ void Sys_HandleInput(InputCallback *cb)
 
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
-	if (g_app->get_playback()) {
-		while(SDL_PollEvent(&ev)) {
-			switch(ev.type) {
-			case SDL_KEYDOWN:
-				if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
-					sys.should_die = true;
-				break;
+	if (WLApplication::get()->get_playback()) {
+			while(SDL_PollEvent(&ev)) {
+				switch(ev.type) {
+				case SDL_KEYDOWN:
+					if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
+						sys.should_die = true;
+					break;
 
-			case SDL_QUIT:
-				sys.should_die = true;
-				break;
+				case SDL_QUIT:
+					sys.should_die = true;
+					break;
+				}
 			}
 		}
-	}
 
 	// Usual event queue
 	while(Sys_PollEvent(&ev, !gotevents)) {
@@ -595,8 +594,8 @@ Changes input grab mode.
 */
 void Sys_SetInputGrab(bool grab)
 {
-	if (g_app->get_playback())
-		return; // ignore in playback mode
+	if (WLApplication::get()->get_playback())
+			return; // ignore in playback mode
 
 	sys.input_grab = grab;
 
