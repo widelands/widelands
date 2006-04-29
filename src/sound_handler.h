@@ -153,10 +153,6 @@ protected:
  * sound servers like gstreamer, EsounD or aRts. For the moment (and probably
  * forever), the only backend supported is SDL_mixer.
  *
- * The Sound_Handler is (obviously) a singleton object and is therefore stored
- * in a global variable \ref g_sound_handler to be easily accessible by other
- * classes.
- *
  * \par Music
  *
  * Background music for different situations (e.g. 'Menu', 'Gameplay') is
@@ -185,7 +181,9 @@ protected:
  * any name you want. All audio files below sound/ingame_01 will be played as
  * ingame music.
  *
- * \note You should only be using the ogg format for music.
+ * For more information about the naming scheme, see \ref load_fx()
+ *
+ * You should be using the ogg format for music.
  *
  * \par Sound effects
  *
@@ -201,8 +199,6 @@ protected:
  * also possible to have sound effects that are synchronized with a
  * building/worker \e animation. For more information about this look at class
  * \ref AnimationManager.
- *
- * \note You should only be using the ogg format for sound effects.
  *
  * \par Usage of callbacks
  *
@@ -233,7 +229,7 @@ protected:
  *
  * The only way around that resctriction is to send an SDL event(SDL_USEREVENT)
  * from the callback (non-sound SDL functions \e can be used). Then, later,
- * the main event loop (system.cc) will process this event \e but \e not in
+ * the main event loop will process this event \e but \e not in
  * SDL_mixer's context, so locking is no problem.
  *
  * Yes, that's just a tad ugly.
@@ -262,7 +258,6 @@ protected:
  *
  * \todo Describe priorities
  * \todo Describe play-or-not algo
- * \todo Internationalized sound effects/music
  * \todo Environmental sound effects (e.g. wind)
  * \todo repair and reenable animation sound effects for 1-pic-animations
  * \todo accomodate runtime changes of i18n language

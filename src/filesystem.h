@@ -44,7 +44,7 @@ char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *f
 bool FS_CanonicalizeName(char *buf, int bufsize, const char *path);
 const char *FS_Filename(const char* buf);
 
-void setup_searchpaths(int argc, const char **argv);
+void setup_searchpaths(const int argc, const char **argv);
 
 /**
 FileSystem is a base class representing certain filesystem operations.
