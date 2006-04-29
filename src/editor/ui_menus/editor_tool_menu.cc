@@ -35,6 +35,7 @@
 #include "editor_tool_change_resources_options_menu.h"
 #include "editor_increase_resources_tool.h"
 #include "editor_decrease_resources_tool.h"
+#include "wlapplication.h"
 
 /*
 ===============
@@ -121,17 +122,17 @@ void Editor_Tool_Menu::changed_to(void) {
       case 5: index=7; break;
       default: break;
    }
-   assert(index!=-1); 
-   
+   assert(index!=-1);
+
    // Select tool
    m_parent->select_tool(index, 0);
-   
+
    UIWindow* w=(*m_options_menus)[index].window;
    bool create_window=false;
    if(w) {
-      // There is already a window. If it is small, 
+      // There is already a window. If it is small,
       // make it big.
-      if(w->is_minimized()) { 
+      if(w->is_minimized()) {
          w->minimize(false);
       } else {
          delete w;
@@ -139,7 +140,7 @@ void Editor_Tool_Menu::changed_to(void) {
    } else {
       create_window=true;
    }
-   
+
    if(create_window) {
       // Create window
       switch(n) {
@@ -162,7 +163,7 @@ void Editor_Tool_Menu::changed_to(void) {
             break;
 
          case 3:
-            new Editor_Tool_Place_Immovable_Options_Menu(m_parent, index, 
+            new Editor_Tool_Place_Immovable_Options_Menu(m_parent, index,
                   static_cast<Editor_Place_Immovable_Tool*>(m_tools->tools[index]),
                   &((*m_options_menus)[index]));
             break;
@@ -174,7 +175,7 @@ void Editor_Tool_Menu::changed_to(void) {
             break;
 
          case 5:
-            new Editor_Tool_Change_Resources_Options_Menu(m_parent, index, 
+            new Editor_Tool_Change_Resources_Options_Menu(m_parent, index,
                   static_cast<Editor_Increase_Resources_Tool*>(m_tools->tools[index]),
                   &((*m_options_menus)[index]));
             break;

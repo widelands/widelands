@@ -50,6 +50,7 @@
 #include "tribe.h"
 #include "ui_button.h"
 #include "ui_modal_messagebox.h"
+#include "wlapplication.h"
 
 
 /**********************************************

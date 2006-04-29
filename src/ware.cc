@@ -27,6 +27,7 @@
 #include "wexception.h"
 #include "worker.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================

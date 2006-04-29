@@ -24,6 +24,7 @@
 #include "ui_button.h"
 #include "editor_increase_height_tool.h"
 #include "editor_set_height_tool.h"
+#include "wlapplication.h"
 
 /*
 =================================================

@@ -23,6 +23,7 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
  * Create this
@@ -42,8 +43,8 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* pa
    // Command
    new UITextarea(this, spacing, posy, _("Enter Directory Name: "), Align_Left);
    posy+=20+spacing;
-   
-   // Filename editbox 
+
+   // Filename editbox
    m_edit=new UIEdit_Box(this, spacing, posy, get_inner_w()-2*spacing, 20, 1, 0);
    m_edit->set_text(dirname);
    m_dirname=dirname;
@@ -55,13 +56,13 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* pa
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Save_Map_Make_Directory::clicked);
    but->set_title(_("OK"));
-   if(!m_dirname.size()) 
-      but->set_enabled(false); 
+   if(!m_dirname.size())
+      but->set_enabled(false);
    m_ok_button=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Save_Map_Make_Directory::clicked);
    but->set_title(_("Cancel"));
-   
+
    center_to_parent();
 }
 

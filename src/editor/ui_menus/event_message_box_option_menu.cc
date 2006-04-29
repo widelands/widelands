@@ -34,6 +34,7 @@
 #include "graphic.h"
 #include "trigger_null.h"
 #include "util.h"
+#include "wlapplication.h"
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive* parent, Event_Message_Box* event) :
    UIWindow(parent, 0, 0, 430, 400, _("Event Option Menu")) {
@@ -144,9 +145,9 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
       for(int j=0; j<((int)m_null_triggers.size()); j++) {
          // Get this triggers index
          int foundidx = -1;
-         for(int trigidx=0; trigidx < m_parent->get_map()->get_mtm()->get_nr_triggers(); trigidx++) 
+         for(int trigidx=0; trigidx < m_parent->get_map()->get_mtm()->get_nr_triggers(); trigidx++)
             if(m_parent->get_map()->get_mtm()->get_trigger_by_nr(trigidx) == m_event->get_button_trigger(i)) {
-               foundidx = trigidx; 
+               foundidx = trigidx;
                break;
             }
 

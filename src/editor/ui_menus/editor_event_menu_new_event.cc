@@ -30,7 +30,7 @@
 #include "map.h"
 #include "map_event_manager.h"
 #include "error.h"
-
+#include "wlapplication.h"
 
 Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* parent) :
    UIWindow(parent, 0, 0, 400, 240, _("New Event")) {
@@ -51,7 +51,7 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* par
    m_event_list=new UIListselect(this, spacing, offsy+20, (get_inner_w()/2)-2*spacing, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu_New_Event::selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu_New_Event::double_clicked);
-   
+
    uint i=0;
    for(i=0; i<Event_Factory::get_nr_of_available_events(); i++) {
       Event_Descr* d=Event_Factory::get_event_descr(i);

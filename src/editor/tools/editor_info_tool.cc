@@ -24,6 +24,7 @@
 #include "editorinteractive.h"
 #include "world.h"
 #include "map.h"
+#include "wlapplication.h"
 
 /*
 =============================
@@ -76,7 +77,7 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
       sprintf(buf1, " %s, %i %s '%s'\n", _("Has resources: Yes"), amount, _("amount of"), map->get_world()->get_resource(res)->get_name());
    }
    buf+=buf1;
-   
+
    sprintf(buf1, " %s: %i\n", _("Start resources amount"), f->get_starting_res_amount());
    buf+=buf1;
 
@@ -89,7 +90,7 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
    sprintf(buf1, " %s: %i\n", _("Texture Number"), ter->get_texture()); buf+=buf1;
 
    buf += "\n";
-   ter=f->get_terd();  
+   ter=f->get_terd();
    sprintf(buf1, "%s\n", _("3) Down Terrain Info\n")); buf+=buf1;
    sprintf(buf1, " %s: %s\n", _("Name"), ter->get_name()); buf+=buf1;
    sprintf(buf1, " %s: %i\n", _("Texture Number"), ter->get_texture()); buf+=buf1;

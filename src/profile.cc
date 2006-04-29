@@ -29,6 +29,7 @@
 #include "system.h"
 #include "wexception.h"
 #include "system.h"
+#include "wlapplication.h"
 
 #define TRUE_WORDS 4
 const char* trueWords[TRUE_WORDS] =
@@ -869,7 +870,7 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 					}
 
                if( translate_line && strlen( tail ))
-                  data += Sys_Translate( tail );
+		       data += WLApplication::get()->translate( tail ); //do not use _() here! it would tag "tail" for translation
                else
                   data += tail;
                if (s && ! reading_multiline) { // error() may or may not throw

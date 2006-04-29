@@ -52,6 +52,7 @@ class.
 #include "player.h"
 #include "soldier.h"
 #include "tribe.h"
+#include "wlapplication.h"
 
 static const char* pic_ok = "pics/menu_okay.png";
 static const char* pic_cancel = "pics/menu_abort.png";
@@ -322,7 +323,7 @@ WaresQueueDisplay::WaresQueueDisplay(UIPanel* parent, int x, int y, uint maxw, W
 	m_max_width = maxw;
 
 	waredescr = queue->get_owner()->get_tribe()->get_ware_descr(m_queue->get_ware());
-	
+
 	set_tooltip(waredescr->get_descname());
 
 	m_pic_empty = waredescr->get_pic_queue_empty();
@@ -622,7 +623,7 @@ void Building_Window::setup_capsbuttons()
             throw wexception("Should enhance to unknown building: %s\n", (*buildings)[i]);
 
          if(!m_player->get_player()->is_building_allowed(id)) {
-            // This buildings is disabled for this scenario, sorry. 
+            // This buildings is disabled for this scenario, sorry.
             // Try again later!!
             continue;
          }
@@ -858,7 +859,7 @@ public:
 private:
    void clicked(int);
    void switch_page( void );
-   
+
 private:
 	WaresDisplay*			m_waresdisplay;
    Interactive_Player*  m_parent;
@@ -880,9 +881,9 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 	// Add wares display
 	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->get_game(), parent->get_player());
 	m_waresdisplay->add_warelist(&get_warehouse()->get_wares(), WaresDisplay::WARE);
-   
+
    set_inner_size(m_waresdisplay->get_w(), 0);
-   
+
    int spacing = 5;
    int nr_buttons = 4; // one more, turn page button is bigger
    int button_w = (get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
@@ -909,9 +910,9 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
    posx = 0;
    UIPanel* caps = create_capsbuttons(this);
    caps->set_pos(spacing, posy);
-   if( caps->get_h() ) 
+   if( caps->get_h() )
       posy += caps->get_h() + spacing;
-   
+
    set_inner_size(get_inner_w(), posy);
 }
 
@@ -951,13 +952,13 @@ void Warehouse_Window::clicked( int id ) {
          // Switch page
          switch_page();
       }
-      
+
    }
-   
+
 }
 
 /*
- * Switch to the next page, that is, show 
+ * Switch to the next page, that is, show
  * wares -> workers -> soldier
  */
 void Warehouse_Window::switch_page(void) {
@@ -1014,13 +1015,13 @@ class ProductionSite_Window_ListWorkerWindow : public UIWindow{
    public:
       ProductionSite_Window_ListWorkerWindow(Interactive_Player*, ProductionSite* ps);
       virtual ~ProductionSite_Window_ListWorkerWindow();
-     
+
       virtual void think();
-   
+
    private:
       void update(void);
       void fill_list(void);
-     
+
       Coords          m_ps_location;
       ProductionSite* m_ps;
       Interactive_Player* m_parent;
@@ -1031,12 +1032,12 @@ class ProductionSite_Window_ListWorkerWindow : public UIWindow{
 /*
  * Constructor
  */
-ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)  
+ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)
    : UIWindow(parent, 0, 0, 320, 125, _("Worker Listing")) {
    m_ps=ps;
    m_ps_location=ps->get_position();
    m_parent=parent;
-   
+
    // Caption
    UITextarea* tt=new UITextarea(this, 0, 0, _("Worker Listing"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
@@ -1057,12 +1058,12 @@ ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(I
    m_type=new UITextarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
-   // Experience 
+   // Experience
    new UITextarea(this, posx, posy, 150, 20, _("Experience: "), Align_CenterLeft);
    m_experience=new UITextarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
    posy+=20+spacing;
 
-   // is working to become 
+   // is working to become
    new UITextarea(this, posx, posy, 70, 20, _("Trying to become: "), Align_CenterLeft);
    posy+=20;
    m_becomes=new UITextarea(this, posx+25, posy, 200, 20, "---", Align_CenterLeft);
@@ -1083,7 +1084,7 @@ ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow(
  */
 void ProductionSite_Window_ListWorkerWindow::think(void) {
    BaseImmovable* imm=m_parent->get_map()->get_field(m_ps_location)->get_immovable();
-   if(imm->get_type()!=Map_Object::BUILDING 
+   if(imm->get_type()!=Map_Object::BUILDING
          || static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
       // The Productionsite has been removed. Die quickly.
       die();
@@ -1102,14 +1103,14 @@ void ProductionSite_Window_ListWorkerWindow::fill_list(void) {
    if(m_last_select==-1) m_last_select=0;
    m_ls->clear();
    std::vector<Worker*>* workers=m_ps->get_workers();
-   
+
    uint i;
    for(i=0; i<workers->size(); i++) {
       Worker* worker=(*workers)[i];
       m_ls->add_entry(worker->get_descname().c_str(), worker, false,
 		                worker->get_menu_pic());
    }
-   if(m_ls->get_nr_entries()>m_last_select) 
+   if(m_ls->get_nr_entries()>m_last_select)
       m_ls->select(m_last_select);
    else if(m_ls->get_nr_entries())
       m_ls->select(m_ls->get_nr_entries()-1);
@@ -1124,7 +1125,7 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
    char buffer[250];
 
    Worker* worker=static_cast<Worker*>(m_ls->get_selection());
-   if(worker) { 
+   if(worker) {
 
       sprintf(buffer, "%s", worker->get_descname().c_str());
       m_type->set_text(buffer);
@@ -1132,12 +1133,12 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
       if(worker->get_current_experience()!=-1 && worker->get_needed_experience()!=-1) {
          sprintf(buffer, "%i/%i", worker->get_current_experience(), worker->get_needed_experience());
          m_experience->set_text(buffer);
-			sprintf(buffer, "%s", Sys_Translate(worker->get_becomes())); //don't use _() ! Would tag "worker->get_becomes" for translation !
+	 sprintf(buffer, "%s", WLApplication::get()->translate(worker->get_becomes())); //don't use _() ! Would tag "worker->get_becomes" for translation !
          m_becomes->set_text(buffer);
       } else {
          m_experience->set_text("");
          m_becomes->set_text("");
-      }   
+      }
    } else {
       m_experience->set_text("");
       m_becomes->set_text("");
@@ -1187,11 +1188,11 @@ ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, Product
    }
 }
 
-UIBox* 
+UIBox*
 ProductionSite_Window::create_production_box (UIPanel* parent, ProductionSite* ps)
 {
    UIBox* box = new UIBox (parent, 0, 0, UIBox::Vertical);
-   
+
    // Add the wares queue
    std::vector<WaresQueue*>* warequeues=ps->get_warequeues();
    for(uint i = 0; i < warequeues->size(); i++)
@@ -1209,7 +1210,7 @@ ProductionSite_Window::create_production_box (UIPanel* parent, ProductionSite* p
 
       // Add list worker button
    m_list_worker=new UIButton(box, 0,0,32,32,4,100);
-   m_list_worker->set_pic(g_gr->get_picture( PicMod_Game,  pic_list_worker )); 
+   m_list_worker->set_pic(g_gr->get_picture( PicMod_Game,  pic_list_worker ));
    m_list_worker->clicked.set(this, &ProductionSite_Window::list_worker_clicked);
    box->add(m_list_worker, UIBox::AlignLeft);
 
@@ -1232,7 +1233,7 @@ ProductionSite_Window::~ProductionSite_Window()
  */
 void ProductionSite_Window::list_worker_clicked(void) {
    assert(*m_reg==this);
-  
+
    *m_reg=new ProductionSite_Window_ListWorkerWindow(m_parent, get_productionsite());
    die();
 }
@@ -1284,7 +1285,7 @@ private:
 	void drop_button_clicked ();
 	void soldier_capacity_up () { act_change_soldier_capacity (1); }
 	void soldier_capacity_down() { act_change_soldier_capacity(-1); }
-   
+
    Coords          m_ms_location;
    Interactive_Player* m_parent;
    UIWindow** m_reg;
@@ -1301,12 +1302,12 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySite* ps, UIWindow** registry)
-	: Building_Window(parent, ps, registry)  
+	: Building_Window(parent, ps, registry)
 {
    m_parent=parent;
    m_reg=registry;
    m_ms_location=ps->get_position();
-   
+
 	UIBox* box = new UIBox(this, 0, 0, UIBox::Vertical);
 
    // Soldiers view
@@ -1319,7 +1320,7 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 	m_table->add_column(_("Level"), UITable::STRING, 100); // enough space for scrollbar
 
    box->add(m_table, UIBox::AlignCenter);
-   
+
 	// Add drop soldier button
 	UIButton* b = new UIButton (box, 0, 0, 360, 32, 4, 100);
 	b->set_pic(g_gr->get_picture( PicMod_Game,  pic_drop_soldier ));
@@ -1376,7 +1377,7 @@ void MilitarySite_Window::think()
 	Building_Window::think();
 
    BaseImmovable* imm=m_parent->get_map()->get_field(m_ms_location)->get_immovable();
-   if(imm->get_type()!=Map_Object::BUILDING 
+   if(imm->get_type()!=Map_Object::BUILDING
          || static_cast<Building*>(imm)->has_attribute(Map_Object::CONSTRUCTIONSITE) ) {
       // The Site has been removed. Die quickly.
       die();
@@ -1411,23 +1412,23 @@ void MilitarySite_Window::update(void) {
             // Soldier already in list
             e=m_table->get_entry(sel);
             break;
-         } 
+         }
       }
       if(!e) // add new
          e= new UITable_Entry(m_table, s);
-      
+
 		e->set_string(0, s->get_descname().c_str());
       sprintf(buf, "%i / %i", s->get_hp_level(), s->get_max_hp_level());
-      e->set_string(1, buf); 
+      e->set_string(1, buf);
       sprintf(buf, "%i / %i", s->get_attack_level(), s->get_max_attack_level());
-      e->set_string(2, buf); 
+      e->set_string(2, buf);
       sprintf(buf, "%i / %i", s->get_defense_level(), s->get_max_defense_level());
-      e->set_string(3, buf); 
+      e->set_string(3, buf);
       sprintf(buf, "%i / %i", s->get_evade_level(), s->get_max_evade_level());
-      e->set_string(4, buf); 
+      e->set_string(4, buf);
       sprintf(buf, "%i / %i", s->get_evade_level()+s->get_attack_level()+ s->get_defense_level()+s->get_hp_level(),
             s->get_max_evade_level()+s->get_max_defense_level()+s->get_max_attack_level()+s->get_max_hp_level());
-      e->set_string(5, buf); 
+      e->set_string(5, buf);
    }
    m_table->sort();
 
@@ -1682,7 +1683,7 @@ public:
    UIBox* create_military_box (UIPanel*);
 private:
 	void update();
-   
+
    void add_tab(const char* picname, UIPanel* panel);
 //   void add_button(UIBox* box, const char* picname, void (FieldActionWindow::*fn)());
 
@@ -1692,9 +1693,9 @@ private:
    UITable*            m_table;
    UIButton*           m_drop_button;
    UITextarea*         m_capacity;
-   
+
    UITab_Panel*         m_tabpanel;
- 
+
 };
 
 
@@ -1719,13 +1720,13 @@ TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSit
    UIBox* prod_box = create_production_box (m_tabpanel, ms);
    prod_box->resize();
    add_tab(pic_tab_training, prod_box);
-   
+
       // Military Box (Soldiers and buttons related to they)
       // Training Box (wares and buttons related to they)
    UIBox* train_box = create_military_box (m_tabpanel);
    train_box->resize();
    add_tab(pic_tab_military, train_box);
-   
+
    m_tabpanel->resize();
    fit_inner (m_tabpanel);
 }
@@ -1768,7 +1769,7 @@ UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
    b->set_pic(g_gr->get_picture( PicMod_Game,  pic_train_options ));
    b->clicked.set(this, &TrainingSite_Window::options_button_clicked);
    box->add (b, Align_Top);
-   
+
    box->add (new UITextarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
       // Capacity buttons
    b = new UIButton (box, 70, 4, 24, 24, 4, 2);
@@ -1776,10 +1777,10 @@ UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
    b->clicked.set (this, &TrainingSite_Window::soldier_capacity_down);
    box->add (b, Align_Top);
    b = 0;
-   
+
    m_capacity = new UITextarea (box, 0, 11, _("xx"), Align_Center);
    box->add (m_capacity, Align_Top);
-   
+
    b = new UIButton (box, 118, 4, 24, 24, 4, 3);
    b->set_pic (g_gr->get_picture( PicMod_Game,  pic_up_train ));
    b->clicked.set (this, &TrainingSite_Window::soldier_capacity_up);

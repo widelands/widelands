@@ -26,6 +26,7 @@
 #include "map.h"
 #include "map_objective_manager.h"
 #include "profile.h"
+#include "wlapplication.h"
 
 static const int EVENT_VERSION = 1;
 

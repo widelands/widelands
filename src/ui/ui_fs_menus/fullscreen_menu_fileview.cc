@@ -25,21 +25,22 @@
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
-#include "../../system.h"
+#include "system.h"
+#include "wlapplication.h"
 
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
 	: Fullscreen_Menu_Base("fileviewmenu.jpg")
 {
 
 
-   Sys_GrabTextdomain( "texts" );
-   
+	WLApplication::get()->grab_textdomain( "texts" );
+
    Profile prof(filename.c_str(), "global"); // section-less file
    Section* s = prof.get_section("global");
-   
+
    std::string title = s->get_safe_string("title");
    std::string text = s->get_safe_string("text");
-   Sys_ReleaseTextdomain();
+   WLApplication::get()->release_textdomain();
 
    // Text view
 	mlta=new UIMultiline_Textarea(this, 30, 150, 560, 240, text.c_str());
@@ -82,15 +83,15 @@ public:
 FileViewWindow::FileViewWindow(UIPanel* parent, UIUniqueWindowRegistry* reg, std::string filename)
 	: UIUniqueWindow(parent, reg, 0, 0, "")
 {
-   Sys_GrabTextdomain( "texts" );
+	WLApplication::get()->grab_textdomain( "texts" );
 
    Profile prof(filename.c_str(), "global"); // section-less file
    Section* s = prof.get_section("global");
-   Sys_ReleaseTextdomain();
+   WLApplication::get()->release_textdomain();
 
    std::string title = s->get_safe_string("title");
    std::string text = s->get_safe_string("text");
-   
+
    set_title(title.c_str());
 
 	UIMultiline_Textarea* mlta=new UIMultiline_Textarea(this, 0, 0, 560, 240, text.c_str());

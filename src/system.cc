@@ -34,8 +34,6 @@
 #include "constants.h"
 #include "network_ggz.h"
 
-static std::vector<std::string> l_textdomains;
-
 Graphic *g_gr;
 
 extern int get_playback_offset();
@@ -47,82 +45,6 @@ extern void write_record_code(uchar code);
 extern void read_record_code(uchar code);
 
 struct SYS sys;
-
-/*
- * Localisation functions
- */
-
-/*
- * Grab a given TextDomain. We keep a stack
- * if a new one is grabbed, it is pushed on the stack
- * on releasing it is dropped and the previous
- * one is re-grabbed instead.
- *
- * So when a tribe loads, it grabs it's textdomain
- * loads all data and releases it -> we're back in
- * widelands domain. Negative: We can't translate error
- * messages. Who cares?
- */
-void Sys_GrabTextdomain( const char* domain) {
-	bind_textdomain_codeset (domain, "UTF-8");
-	bindtextdomain( domain, LOCALE_PATH );
-	textdomain(domain);
-
-	l_textdomains.push_back( domain );
-}
-
-void Sys_ReleaseTextdomain( void ) {
-	l_textdomains.pop_back();
-
-	if (l_textdomains.size()>0) { //don't try to get the previous TD when the very first one ('widelands') just got dropped
-		const char* domain = l_textdomains.back().c_str();
-		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain( domain, LOCALE_PATH );
-		textdomain(domain);
-	}
-}
-
-/*
- * Set The locale to the given string
- */
-void Sys_SetLocale( const char* str ) {
-	if( !str )
-		str = "";
-
-	// Somehow setlocale doesn't behave same on
-	// some systems.
-#ifdef __BEOS__
-	setenv ("LANG", str, 1);
-	setenv ("LC_ALL", str, 1);
-#endif
-#ifdef __APPLE__
-	setenv ("LANGUAGE", str, 1);
-	setenv ("LC_ALL", str, 1);
-#endif
-
-#ifdef _WIN32
-	const std::string env = std::string("LANG=") + str;
-	putenv(env.c_str());
-#endif
-
-	setlocale(LC_ALL, str);
-	sys.locale=str;
-
-	if( l_textdomains.size() ) {
-		const char* domain = l_textdomains.back().c_str();
-		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain( domain, LOCALE_PATH );
-		textdomain(domain);
-	}
-}
-
-/*
- * Get the current locale
- */
-std::string Sys_GetLocale()
-{
-	return sys.locale;
-}
 
 /*
 ===============
@@ -244,7 +166,7 @@ restart:
 					break;
 
 				default:
-					throw wexception("%08X: Unknown event type %02X in playback.", get_playback_offset()-1, code);
+					throw wexception("%08X: Unknown event type %02X in playback.", WLApplication::get()->get_playback_offset()-1, code);
 				}
 
 				haveevent = true;
@@ -254,7 +176,7 @@ restart:
 				haveevent = false;
 			}
 			else
-				throw wexception("%08X: Bad code %02X in event playback.", get_playback_offset()-1, code);
+				throw wexception("%08X: Bad code %02X in event playback.", WLApplication::get()->get_playback_offset()-1, code);
 		}
 	else
 	{

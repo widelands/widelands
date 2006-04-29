@@ -22,6 +22,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "constants.h"
+#include "wlapplication.h"
 
 static const char* filenames[] = {
    "campaigns/t01.wmf",

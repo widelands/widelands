@@ -32,6 +32,7 @@
 #include "map.h"
 #include "interactive_base.h"
 #include "mapview.h"
+#include "wlapplication.h"
 
 /// Prepare infrastructure for reading song files from disk
 Songset::Songset()
@@ -335,7 +336,8 @@ void Sound_Handler::load_fx(const string dir, const string fxname,
 
 	assert(g_fs);
 
-	g_fs->FindFiles(dir, fxname + "_??.???."+Sys_GetLocale(), &files);
+	g_fs->FindFiles(dir, fxname + "_??.???." + WLApplication::get()->get_locale(),
+		                &files);
 	if (files.empty())
 		g_fs->FindFiles(dir, fxname + "_??.???", &files);
 
@@ -345,7 +347,8 @@ void Sound_Handler::load_fx(const string dir, const string fxname,
 	}
 
 	if (recursive) {
-		g_fs->FindFiles(dir, "*_??."+Sys_GetLocale(), &dirs);
+		g_fs->FindFiles(dir, "*_??." + WLApplication::get()->get_locale(),
+			                &dirs);
 		if (dirs.empty())
 			g_fs->FindFiles(dir, "*_??", &dirs);
 

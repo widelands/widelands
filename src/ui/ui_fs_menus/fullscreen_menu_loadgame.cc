@@ -28,7 +28,7 @@
 #include "ui_checkbox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
-
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -67,7 +67,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer
 	tamapname = new UITextarea(this, 460, 180, "");
 	new UITextarea(this, 450, 200, _("Gametime:"), Align_Right);
 	tagametime = new UITextarea(this, 460, 200, "");
-   
+
    fill_list();
 }
 
@@ -128,22 +128,22 @@ void Fullscreen_Menu_LoadGame::double_clicked(int i) {
  * fill the file list
  */
 void Fullscreen_Menu_LoadGame::fill_list(void) {
-   // Fill it with all files we find. 
+   // Fill it with all files we find.
    g_fs->FindFiles("ssave", "*", &m_gamefiles, 1);
-  
+
    Game_Preload_Data_Packet gpdp;
-   
+
    for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
 
-      Game_Loader* gl = 0;  
+      Game_Loader* gl = 0;
       FileSystem* fs = 0;
 
       try {
          fs = g_fs->MakeSubFileSystem( name );
          gl = new Game_Loader(fs, game);
          gl->preload_game(&gpdp);
-         
+
          char* fname = strdup(FS_Filename(name));
          FS_StripExtension(fname);
          list->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
@@ -152,12 +152,12 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
       } catch(wexception& ) {
          // we simply skip illegal entries
       }
-      if( gl ) 
+      if( gl )
          delete gl;
-      if( fs ) 
+      if( fs )
          delete fs;
    }
-   
+
    if(list->get_nr_entries())
       list->select(0);
 }

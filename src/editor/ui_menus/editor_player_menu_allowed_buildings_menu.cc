@@ -24,6 +24,7 @@
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "player.h"
+#include "wlapplication.h"
 
 /*
 ===============
@@ -45,7 +46,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
    const int offsy=30;
    const int spacing=3;
    int posy=offsy;
-   
+
    // Allowed List
    new UITextarea(this, spacing, posy, get_inner_w()/2, 20, _("Allowed Buildings: "), Align_CenterLeft);
    m_allowed=new UIListselect(this, spacing, posy+23, get_inner_w()/2-2*spacing-20, get_inner_h()-posy-spacing-23);
@@ -64,7 +65,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
    b->set_title("->");
    b->set_enabled(false);
    m_ltr_button=b;
-   
+
    // Right to left button
    b=new UIButton(this, get_inner_w()/2-20, posy+55, 40, 20, 1, 1);
    b->clickedid.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::clicked);
@@ -72,15 +73,15 @@ Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_
    b->set_enabled(false);
    m_rtl_button=b;
 
-   // Fill the lists 
+   // Fill the lists
    Tribe_Descr* t=player->get_tribe();
    int i;
    for(i=0; i<t->get_nrbuildings(); i++) {
       Building_Descr* b=t->get_building_descr(i);
       if(!b->get_enhanced_building() && !b->get_buildable()) continue;
-      if(m_player->is_building_allowed(i))  
+      if(m_player->is_building_allowed(i))
          m_allowed->add_entry(b->get_descname(), ((void*)(i)), false, b->get_buildicon());
-      else 
+      else
          m_forbidden->add_entry(b->get_descname(), ((void*)(i)), false, b->get_buildicon());
    }
    m_forbidden->sort();
@@ -111,13 +112,13 @@ Editor_Player_Menu_Allowed_Buildings_Menu::~Editor_Player_Menu_Allowed_Buildings
 }
 
 
-/* 
+/*
  * UI Action callback functions
  */
 void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(int i) {
    UIListselect* source, *target;
    bool set_to;
-   
+
    if(i==0) {
       // Left to right button
       source=m_allowed;
@@ -129,18 +130,18 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(int i) {
       target=m_allowed;
       set_to=true;
    }
-   
-   
+
+
    // Remove from one list
    long index=((long)source->get_selection());
    source->remove_entry(source->get_selection_index());
    source->sort();
-   
+
    // Add to another
    Building_Descr* b=m_player->get_tribe()->get_building_descr(index);
    target->add_entry(b->get_descname(), ((void*)(index)), false, b->get_buildicon());
    target->sort();
-   
+
    // Enable/Disable for player
    m_player->allow_building(index, set_to);
 }

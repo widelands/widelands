@@ -36,6 +36,7 @@
 #include "wexception.h"
 #include "widelands_map_loader.h"
 #include "widelands_map_saver.h"
+#include "wlapplication.h"
 #include "zip_filesystem.h"
 
 /*

@@ -30,6 +30,7 @@
 #include "map_loader.h"
 #include "system.h"
 #include "widelands_map_loader.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -90,7 +91,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 	tanplayers = new UITextarea(this, 460, 240, "");
 	new UITextarea(this, 450, 260, _("Descr:"), Align_Right);
 	tadescr = new UIMultiline_Textarea(this, 460, 260, 160, 80, "");
-   
+
    m_basedir="maps";
    m_curdir="maps";
 
@@ -206,9 +207,9 @@ void Fullscreen_Menu_MapSelect::double_clicked(int i) {
  * fill the file list
  */
 void Fullscreen_Menu_MapSelect::fill_list(void) {
-   // Fill it with all files we find in all directorys 
+   // Fill it with all files we find in all directorys
    g_fs->FindFiles(m_curdir, "*", &m_mapfiles);
- 
+
    int ndirs=0;
    // First, we add all directorys
    // We manually add the parent directory
@@ -235,13 +236,13 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
       list->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
       ++ndirs;
    }
-  
+
    Map* map=new Map();
    for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
       const char *name = pname->c_str();
-      
+
       Map_Loader* m_ml = map->get_correct_loader(name);
-      if(!m_ml) continue; 
+      if(!m_ml) continue;
 
       try {
          m_ml->preload_map(true);
@@ -258,7 +259,7 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
 
    }
    delete map;
-  
+
    list->sort(0, ndirs);
    list->sort(ndirs);
 

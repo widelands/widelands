@@ -28,7 +28,7 @@
 #include "ware.h"
 #include "ware_statistics_menu.h"
 #include "wui_plot_area.h"
-
+#include "wlapplication.h"
 
 #define WARES_DISPLAY_BG "pics/ware_list_bg.png"
 
@@ -38,7 +38,7 @@
 
 #define PLOT_HEIGHT 100
 
-#define COLOR_BOX_HEIGHT 7 
+#define COLOR_BOX_HEIGHT 7
 
 static const RGBColor colors[] = {
    RGBColor(   0, 210, 264),
@@ -282,7 +282,7 @@ static const RGBColor colors[] = {
    RGBColor( 102, 102, 102),
    RGBColor( 153, 153, 153),
    RGBColor( 204, 204, 204),
-   RGBColor( 255, 255, 255),   
+   RGBColor( 255, 255, 255),
 };
 
 /*
@@ -299,37 +299,37 @@ class WSM_Checkbox : public UICheckbox {
       WSM_Checkbox(UIPanel* parent, int x, int y, int id, uint picid, RGBColor color);
 
       virtual void draw(RenderTarget* dst);
-   
+
    private:
       int      m_pic;
-      RGBColor m_color;   
+      RGBColor m_color;
 };
 
-/* 
+/*
  * Constructor
  */
 WSM_Checkbox::WSM_Checkbox(UIPanel* parent, int x, int y, int id, uint picid, RGBColor color) :
    UICheckbox(parent, x, y, g_gr->get_picture( PicMod_Game,  WARES_DISPLAY_BG )) {
-   
+
    m_pic = picid;
    set_id(id);
    m_color = color;
 }
 
 /*
- * draw 
+ * draw
  */
 void WSM_Checkbox::draw(RenderTarget* dst) {
    // First, draw normal
    UICheckbox::draw(dst);
-   
+
    // Now, draw a small box with the color
    dst->fill_rect(1, 1, get_inner_w()-1, COLOR_BOX_HEIGHT-2, m_color);
 
    // and the item
    int posx = (get_inner_w()-WARE_MENU_PIC_W)/2;
    dst->blit(posx, COLOR_BOX_HEIGHT, m_pic);
-   
+
 }
 
 /*
@@ -342,26 +342,26 @@ Create all the buttons etc...
 Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
   : UIUniqueWindow(parent,registry,400,270,_("Ware Statistics")) {
    m_parent = parent;
-     
+
    // First, we must decide about the size
    int nr_wares = parent->get_player()->get_tribe()->get_nrwares();
    int wares_per_row = MIN_WARES_PER_LINE;
    while(nr_wares % wares_per_row && (wares_per_row <= MAX_WARES_PER_LINE)) wares_per_row++;
    int nr_rows = nr_wares % wares_per_row ?  ( nr_wares / wares_per_row ) + 1 : ( nr_wares / wares_per_row );
 
-   
+
    int spacing=5;
    int offsx=spacing;
    int offsy=30;
    int posx=offsx;
    int posy=offsy;
 
-   
+
    set_inner_size(
-         10, 
+         10,
          offsy+spacing+ PLOT_HEIGHT + spacing + nr_rows * (WARE_MENU_PIC_H + spacing ) + 100 );
-   
-   
+
+
    // Plotter
    m_plot = new WUIPlot_Area(this, spacing, offsy+spacing, get_inner_w()-2*spacing, PLOT_HEIGHT);
    m_plot->set_sample_rate(STATISTICS_SAMPLE_TIME);
@@ -371,20 +371,20 @@ Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueW
    int cur_ware = 0;
    int dposy = 0;
    posy += PLOT_HEIGHT+ 2*spacing;
-   for(int y = 0; y < nr_rows; y++) { 
+   for(int y = 0; y < nr_rows; y++) {
       posx = spacing;
       for(int x = 0; x < wares_per_row && cur_ware < nr_wares; x++, cur_ware++) {
-         WSM_Checkbox* cb = new WSM_Checkbox(this, posx, posy, cur_ware, 
-               parent->get_player()->get_tribe()->get_ware_descr(cur_ware)->get_menu_pic(), colors[cur_ware]); 
+         WSM_Checkbox* cb = new WSM_Checkbox(this, posx, posy, cur_ware,
+               parent->get_player()->get_tribe()->get_ware_descr(cur_ware)->get_menu_pic(), colors[cur_ware]);
          cb->changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
          posx += cb->get_w() + spacing;
          dposy = cb->get_h() + spacing;
          set_inner_size(spacing + (cb->get_w() + spacing) *wares_per_row, get_inner_h());
          m_plot->register_plot_data(cur_ware, parent->get_ware_production_statistics(cur_ware), colors[cur_ware]);
       }
-      posy += dposy; 
+      posy += dposy;
    }
-   
+
    m_plot->set_size(get_inner_w()-2*spacing, PLOT_HEIGHT);
 
    // Caption
@@ -413,7 +413,7 @@ Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueW
    b->set_title(_("2 h"));
 
    posy += 25 + spacing;
-   posx = spacing; 
+   posx = spacing;
    b = new UIButton(this, posx, posy, 32, 32, 4, 100);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
@@ -454,7 +454,7 @@ called when the ok button has been clicked
 void Ware_Statistics_Menu::clicked(int id) {
    if(id == 100) {
       log("TODO: help not implemented\n");
-   } else 
+   } else
       m_plot->set_time(id);
 
 }

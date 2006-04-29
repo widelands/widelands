@@ -35,10 +35,11 @@
 #include "system.h"
 #include "trigger_conditional.h"
 #include "util.h"
+#include "wlapplication.h"
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Interactive* parent, EventChain* chain) :
    UIWindow(parent, 0, 0, 505, 340, _("Edit Event Chain")) {
-   
+
    m_parent=parent;
    m_event_chain = chain;
 
@@ -54,11 +55,11 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    const int ls_width = 200;
 
    // Name
-   new UITextarea( this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft); 
+   new UITextarea( this, posx, posy, 60, 20, _("Name: "), Align_CenterLeft);
    m_name = new UIEdit_Box( this, posx + 60, posy, get_inner_w()-2*spacing-60, 20, 0, 0);
-   m_name->set_text( m_event_chain->get_name() ); 
+   m_name->set_text( m_event_chain->get_name() );
    posy += 20 + spacing;
-   
+
    // More then once
    new UITextarea( this, posx + STATEBOX_WIDTH + spacing, posy, 120, STATEBOX_HEIGHT, _("Runs multiple times"), Align_CenterLeft);
    m_morethanonce = new UICheckbox( this, posx, posy );
@@ -71,7 +72,7 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    m_events= new UIListselect(this, spacing, lsoffsy+20, ls_width, get_inner_h()-lsoffsy-55);
    m_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::cs_selected);
    m_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::cs_double_clicked);
-   posx += ls_width + spacing; 
+   posx += ls_width + spacing;
 
    posy = 75;
    UIButton* b = new UIButton(this, posx, posy, 80, 20, 0, 10);
@@ -105,7 +106,7 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    b->set_enabled( false );
    m_mvdown_btn = b;
-   posy += 24 + spacing + spacing; 
+   posy += 24 + spacing + spacing;
 
    posx += 80 + spacing;
    new UITextarea(this, posx, lsoffsy, _("Available Events: "), Align_Left);
@@ -132,7 +133,7 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
       Event* ev = m_event_chain->get_event( i );
       m_events->add_entry( ev->get_name(), ev );
    }
-      
+
    m_edit_trigcond = m_event_chain->get_trigcond() ? false : true;
 
    center_to_parent();
@@ -162,10 +163,10 @@ bool Editor_Event_Menu_Edit_EventChain::handle_mouseclick(uint btn, bool down, i
 /*
  * Think.
  *
- * Maybe we have to simulate a click 
+ * Maybe we have to simulate a click
  */
 void Editor_Event_Menu_Edit_EventChain::think( void ) {
-   if( m_edit_trigcond ) 
+   if( m_edit_trigcond )
       clicked( 10 );
 }
 
@@ -178,7 +179,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
       end_modal(0);
       return;
    }
-      
+
    // ok
    if(i == 1) {
       // Name
@@ -191,7 +192,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
       for( int i = 0; i < m_events->get_nr_entries(); i++) {
          m_event_chain->add_event( static_cast<Event*>(m_events->get_entry( i )));
       }
-      end_modal(1); 
+      end_modal(1);
    }
 
    // new event
@@ -212,14 +213,14 @@ void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
       }
       delete menu;
    }
-   
-   // Insert event 
+
+   // Insert event
    if( i == 20 ) {
       Event* ev = static_cast<Event*>(m_available_events->get_selection());
       m_events->add_entry( ev->get_name(), ev, true);
    }
 
-   // Delete a event 
+   // Delete a event
    if( i == 21 ) {
       m_events->remove_entry( m_events->get_selection_index() );
       m_mvup_btn->set_enabled( false );
@@ -230,12 +231,12 @@ void Editor_Event_Menu_Edit_EventChain::clicked(int i) {
    // Move up
    if( i == 30) {
       int n = m_events->get_selection_index();
-      if( n != 0) 
+      if( n != 0)
          m_events->switch_entries( n, n - 1);
    }
    if( i == 31) {
       int n = m_events->get_selection_index();
-      if( n != (m_events->get_nr_entries() - 1) ) 
+      if( n != (m_events->get_nr_entries() - 1) )
          m_events->switch_entries( n, n + 1);
    }
    return;

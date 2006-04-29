@@ -25,19 +25,20 @@
 #include "system.h"
 #include "trigger_null.h"
 #include "trigger_referencer.h"
+#include "wlapplication.h"
 
 /*
  * The Map Objective manager keeps all objectives
- * in Order. 
+ * in Order.
  *
  * A Map (or scenario) objective is a objectives that has to be
  * fullfilled to end a scenario successfull.
  * Optional objectives are available, which usually do not need to be fullfilled.
  * Each objectives has a NULL trigger assigned to it, which is used to check
  * the objectives condition.
- * But note, the objectives itself doesn't check it's conditions, 
+ * But note, the objectives itself doesn't check it's conditions,
  * the map designer is responsible of checking it and setting it's trigger up.
- * 
+ *
  * Usually, the win trigger is only set, when all of the objectives triggers are
  * going up.
  *
@@ -51,14 +52,14 @@
  */
 class MapObjective : public TriggerReferencer {
    public:
-      MapObjective( ) { 
+      MapObjective( ) {
          m_trigger = 0;
          m_is_visible = true;
          m_is_optional = false;
          m_descr = _("no descr");
          m_name  = "";
-      } 
-      virtual ~MapObjective( void ) { 
+      }
+      virtual ~MapObjective( void ) {
          if( m_trigger )
             unreference_trigger( m_trigger );
       }
@@ -70,26 +71,26 @@ class MapObjective : public TriggerReferencer {
       inline void set_descr( const char* descr ) { m_descr = descr; }
       inline bool get_is_visible( void ) { return m_is_visible; }
       inline void set_is_visible( bool t ) { m_is_visible = t; }
-      inline bool get_is_optional( void ) { return m_is_optional; } 
-   
+      inline bool get_is_optional( void ) { return m_is_optional; }
+
       // For trigger referncer
       const char* get_type( void ) { return "Map Objective"; }
 
       // Get the trigger that is attached to this
       // Trigger is created by Editor or on load
       inline Trigger_Null* get_trigger( void ) { return m_trigger; }
-      
+
       // Setting the values below is only a good idea in editor
-      inline void set_trigger(Trigger_Null* tr) { 
+      inline void set_trigger(Trigger_Null* tr) {
          assert(!m_trigger);
          if( m_trigger )
             unreference_trigger( m_trigger );
          if( tr )
             reference_trigger( tr );
-         m_trigger = tr; 
+         m_trigger = tr;
       }
       inline void set_is_optional( bool t ) { m_is_optional = t; }
-      
+
    private:
       std::string   m_name;
       std::string   m_descr;
@@ -99,7 +100,7 @@ class MapObjective : public TriggerReferencer {
 };
 
 /*
- * The manager himself. 
+ * The manager himself.
  * This is mainly a wrapper, the function
  * could have also been implemented directly in the map.
  *
@@ -125,7 +126,7 @@ class MapObjectiveManager {
       inline MapObjective* get_objective_by_nr( int i ) { assert(i < (int)m_objectives.size()); return m_objectives[i]; }
 
    private:
-      std::vector<MapObjective*>      m_objectives; 
+      std::vector<MapObjective*>      m_objectives;
 };
 
 #endif

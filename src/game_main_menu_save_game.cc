@@ -30,6 +30,7 @@
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
+#include "wlapplication.h"
 
 /*
 ===============

@@ -31,6 +31,7 @@
 #include "map.h"
 #include "graphic.h"
 #include "util.h"
+#include "wlapplication.h"
 
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* parent, Event_Move_View* event) :
    UIWindow(parent, 0, 0, 180, 200, _("Event Option Menu")) {

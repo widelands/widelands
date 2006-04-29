@@ -46,7 +46,7 @@
 #include "tribe.h"
 #include "util.h"
 #include "ware_statistics_menu.h"
-
+#include "wlapplication.h"
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
 

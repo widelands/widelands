@@ -31,6 +31,7 @@
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
 #include "util.h"
+#include "wlapplication.h"
 
 /*
  * Static callback functions for various packets
@@ -142,11 +143,11 @@ void Fullscreen_Menu_InetLobby::clicked( int n ) {
 /*
  * a server message has reached us. This is text for the user
  * but not written by any other user, but send by the
- * server (as response to a packet mostly) 
+ * server (as response to a packet mostly)
  */
 void Fullscreen_Menu_InetLobby::server_message(std::string str) {
-   std::string buf = str; 
-   
+   std::string buf = str;
+
    m_chatarea->set_text( (m_chatarea->get_text() + buf).c_str() );
 }
 
@@ -173,8 +174,8 @@ void Fullscreen_Menu_InetLobby::room_info( std::vector<std::string > users ) {
  */
 void Fullscreen_Menu_InetLobby::user_info( std::string user, std::string game, std::string room ) {
    char buffer[1024];
-  
-   snprintf(buffer, 1024, _("User %s is using \"%s\" in room \"%s\"\n"), user.c_str(), game.c_str(), room.c_str()); 
+
+   snprintf(buffer, 1024, _("User %s is using \"%s\" in room \"%s\"\n"), user.c_str(), game.c_str(), room.c_str());
    server_message( buffer );
 }
 
@@ -188,8 +189,8 @@ void Fullscreen_Menu_InetLobby::chat_message( std::string user, std::string msg,
       snprintf(buffer, msg.size()+user.size()+100, "** %s %s\n", user.c_str(), msg.c_str());
       server_message( buffer );
       return;
-   } 
-      
+   }
+
    char buffer[msg.size()+user.size()+100];
 
    snprintf(buffer, msg.size()+user.size()+100, "%s: %s\n", user.c_str(), msg.c_str());
@@ -198,17 +199,17 @@ void Fullscreen_Menu_InetLobby::chat_message( std::string user, std::string msg,
 }
 
 
-/* 
- * A User entered the room 
+/*
+ * A User entered the room
  */
 void Fullscreen_Menu_InetLobby::user_entered(std::string gname, std::string groom, bool enters ) {
-   std::string name = gname; 
-  
-   if( enters && groom == m_gsc->get_room() ) 
+   std::string name = gname;
+
+   if( enters && groom == m_gsc->get_room() )
       m_userlist->add_entry(name.c_str(), 0);
    if( !enters && groom == m_gsc->get_room() )
       m_userlist->remove_entry(name.c_str());
-   
+
    m_userlist->sort();
 
    std::string str = enters ? _("User %s has entered the room %s !\n") : _("User %s has left the room %s !\n");
@@ -244,4 +245,4 @@ void Fullscreen_Menu_InetLobby::disconnect( void ) {
    end_modal(0);
    return;
 }
-   
+

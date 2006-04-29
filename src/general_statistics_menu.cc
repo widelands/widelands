@@ -30,7 +30,7 @@
 #include "ui_textarea.h"
 #include "ware.h"
 #include "wui_plot_area.h"
-
+#include "wlapplication.h"
 
 #define PLOT_HEIGHT 100
 #define NR_DIFFERENT_DATASETS 7
@@ -55,7 +55,7 @@ Create all the buttons etc...
 General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIUniqueWindowRegistry* registry)
   : UIUniqueWindow(parent,registry,400,400,_("General Statistics")) {
    m_parent = parent;
-   
+
    uint offsy = 35;
    uint spacing = 5;
    uint posx = spacing;
@@ -72,25 +72,25 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    posy+=PLOT_HEIGHT+spacing+spacing;
 
    for(uint i = 0; i < parent->get_general_statistics().size(); i++) {
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 0, 
+      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 0,
             &(parent->get_general_statistics()[i].land_size)
             , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 1, 
+      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 1,
             &(parent->get_general_statistics()[i].nr_workers)
             , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 2, 
+      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 2,
             &(parent->get_general_statistics()[i].nr_buildings)
             , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 3, 
+      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 3,
             &(parent->get_general_statistics()[i].nr_wares)
             , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 4, 
+      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 4,
             &(parent->get_general_statistics()[i].productivity)
             , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 5, 
+      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 5,
             &(parent->get_general_statistics()[i].nr_kills)
             , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
-      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 6, 
+      m_plot->register_plot_data(i*NR_DIFFERENT_DATASETS + 6,
             &(parent->get_general_statistics()[i].miltary_strength)
             , RGBColor(g_playercolors[i][9], g_playercolors[i][10], g_playercolors[i][11]));
       // Show area plot
@@ -98,19 +98,19 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
          m_plot->show_plot(i*NR_DIFFERENT_DATASETS, 1);
    }
 
-   
+
    // Buttons
    uint plr_in_game = 0;
-   for(uint i = 1; i <= parent->get_game()->get_map()->get_nrplayers(); i++) 
+   for(uint i = 1; i <= parent->get_game()->get_map()->get_nrplayers(); i++)
       if( parent->get_game()->get_player(i))
          plr_in_game++;
-   
+
    posx = spacing;
    int button_size = ( get_inner_w()- ( spacing* (plr_in_game+1) ) ) / plr_in_game;
    for(uint i = 1; i <= parent->get_game()->get_map()->get_nrplayers(); i++) {
       m_cbs[i] = 0;
-      if( !parent->get_game()->get_player(i) ) continue; 
-      
+      if( !parent->get_game()->get_player(i) ) continue;
+
       char buffer[1024];
       sprintf(buffer, "pics/genstats_enable_plr_%02i.png", i);
       UICheckbox* cb = new UICheckbox(this, posx, posy, g_gr->get_picture( PicMod_Game,  buffer ));
@@ -121,10 +121,10 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
       m_cbs[i-1] = cb;
       posx+= button_size + spacing;
    }
-   
+
    posx = spacing;
    posy += 25+spacing+spacing;
-  
+
    // Below, Radiobuttons for what to display
    m_radiogroup = new UIRadiogroup();
    button_size = ( get_inner_w()-(spacing*8) ) / 7;
@@ -146,7 +146,7 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    m_radiogroup->changedto.set(this, &General_Statistics_Menu::radiogroup_changed);
    posy += 25;
 
-   
+
    // Below, time buttons
    button_size = ( get_inner_w()-(spacing*5) ) / 4;
    posx = spacing;
@@ -168,7 +168,7 @@ General_Statistics_Menu::General_Statistics_Menu(Interactive_Player* parent, UIU
    b->set_title(_("2 h"));
 
    posy += 25 + spacing;
-   posx = spacing; 
+   posx = spacing;
    b = new UIButton(this, posx, posy, 32, 32, 4, 100);
    b->clickedid.set(this, &General_Statistics_Menu::clicked);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_help.png" ));
@@ -204,13 +204,13 @@ General_Statistics_Menu::~General_Statistics_Menu()
 
 /*
 ===========
-called when the help button was clicked 
+called when the help button was clicked
 ===========
 */
 void General_Statistics_Menu::clicked(int id) {
    if(id == 100) {
       log("TODO: help not implemented\n");
-   } else 
+   } else
       m_plot->set_time(id);
 
 }

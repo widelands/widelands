@@ -25,11 +25,12 @@
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
 #include "interactive_player.h"
+#include "sound_handler.h"
 #include "stock_menu.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ware_statistics_menu.h"
-#include "sound_handler.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -51,17 +52,17 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
 {
    m_player=plr;
    m_windows = windows;
-  
+
    // Caption
    new UITextarea(this, 0, 5, get_inner_w(), 25, _("Options Menu"), Align_Center);
    int posy = 35;
 
-   
+
    UIButton* b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 1);
    b->set_title(_("README"));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
-   
+
    b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 2);
    b->set_title(_("License"));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
@@ -94,17 +95,17 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
    b=new UIButton(this, 5, posy, buttonw, 35, 4, 4);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_save_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
-   
+
    b=new UIButton(this, 10+buttonw, posy, buttonw, 35, 4, 5);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_load_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 45;
-   
+
    b=new UIButton(this, 5, posy, get_inner_w()-10, 35, 4, 6);
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/menu_exit_game.png" ));
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 40;
-    
+
    set_inner_size(get_inner_w(), posy+5);
 
 	if (get_usedefaultpos())
@@ -115,7 +116,7 @@ void GameOptionsMenu::clicked(int n) {
    switch(n) {
       case 1:
          // Readme
-         fileview_window(m_player, &m_windows->readme, "txts/README"); 
+         fileview_window(m_player, &m_windows->readme, "txts/README");
          break;
 
       case 2:
@@ -123,7 +124,7 @@ void GameOptionsMenu::clicked(int n) {
          fileview_window(m_player, &m_windows->licence, "txts/COPYING");
          break;
 
-      case 3: 
+      case 3:
          // Authors
          fileview_window(m_player, &m_windows->authors, "txts/developers");
          break;
@@ -131,9 +132,9 @@ void GameOptionsMenu::clicked(int n) {
       case 4:
          // Save
          new Game_Main_Menu_Save_Game(m_player, &m_windows->savegame);
-         die(); 
+         die();
          break;
-         
+
       case 5:
          // Load
          new Game_Main_Menu_Load_Game(m_player, &m_windows->loadgame);
@@ -147,7 +148,7 @@ void GameOptionsMenu::clicked(int n) {
          break;
    }
 }
-   
+
 /*
  * One of the checkboxes have been toggled
  */

@@ -30,6 +30,7 @@
 #include "util.h"
 #include "worker.h"
 #include "system.h"
+#include "wlapplication.h"
 
 TrainingSite_Descr::TrainingSite_Descr(Tribe_Descr * tribe, const char *name)
 :ProductionSite_Descr(tribe, name)
@@ -783,7 +784,7 @@ void TrainingSite::sub_pri(tAttribute atr)
  * \post Minimum and maximum capacity will be observed.
  * \param how	number to add/subtract from the current capacity
  * \note Unlike the influence-defining military buildings, a training site can actually be empty of soldiers.
- * 
+ *
  */
 void TrainingSite::change_soldier_capacity(int how)
 {

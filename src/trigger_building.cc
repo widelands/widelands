@@ -28,6 +28,7 @@
 #include "profile.h"
 #include "trigger_building.h"
 #include "util.h"
+#include "wlapplication.h"
 
 static const int TRIGGER_VERSION = 1;
 

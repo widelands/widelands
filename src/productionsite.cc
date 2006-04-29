@@ -35,6 +35,7 @@
 #include "ware.h"
 #include "world.h"
 #include "sound_handler.h"
+#include "wlapplication.h"
 
 static const size_t STATISTICS_VECTOR_LENGTH = 10;
 
@@ -118,7 +119,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
       remove_spaces(&workers[i]);
       split_string(workers[i],&amounts,"*");
       uint j;
-      for(j=0; j<amounts.size(); j++) 
+      for(j=0; j<amounts.size(); j++)
          remove_spaces(&amounts[j]);
 
       int amount=1;
@@ -131,7 +132,7 @@ void ProductionSite_Descr::parse(const char* directory, Profile* prof,
       Worker_Info m= { amounts[0], amount };
       m_workers.push_back(m);
    }
-   
+
 	// Get programs
 	while(sglobal->get_next_string("program", &string)) {
 		ProductionProgram* program = 0;
@@ -234,10 +235,10 @@ std::string ProductionSite::get_statistics_string()
       sprintf(buf, "Waiting for %i workers!", (int)m_worker_requests.size());
       return buf;
    }
-	
+
 	if (m_statistics_changed)
 		calc_statistics();
-   
+
    if (m_stop)
 		return "(stopped)";
 	return m_statistics_buf;
@@ -319,8 +320,8 @@ void ProductionSite::init(Editor_Game_Base* g)
          std::vector<ProductionSite_Descr::Worker_Info>* info=get_descr()->get_workers();
          uint i;
          int j;
-         for(i=0; i<info->size(); i++) 
-            for(j=0; j< ((*info)[i]).how_many; j++) 
+         for(i=0; i<info->size(); i++)
+            for(j=0; j< ((*info)[i]).how_many; j++)
                request_worker((Game*)g, ((*info)[i]).name.c_str());
       }
 
@@ -365,7 +366,7 @@ void ProductionSite::set_economy(Economy* e)
          if(m_worker_requests[i])
             m_worker_requests[i]->set_economy(e);
    }
-	
+
    if (e) {
 		for(i = 0; i < m_input_queues.size(); i++)
 			m_input_queues[i]->add_to_economy(e);
@@ -397,7 +398,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
          Worker* w = m_workers[i];
 
          m_workers[i] = 0;
-         if(g->get_objects()->object_still_available(w)) 
+         if(g->get_objects()->object_still_available(w))
             w->set_location(0);
       }
       m_workers.resize(0);
@@ -442,7 +443,7 @@ void ProductionSite::remove_worker(Worker* w)
 ===============
 ProductionSite::request_worker
 
-Issue the worker requests  
+Issue the worker requests
 ===============
 */
 void ProductionSite::request_worker(Game* g, const char* worker)
@@ -471,15 +472,15 @@ void ProductionSite::request_worker_callback(Game* g, Request* rq, int ware,
 	assert(w->get_location(g) == psite);
 
    uint i=0;
-   for(i=0; i<psite->m_worker_requests.size(); i++) 
-      if(rq==psite->m_worker_requests[i]) break; 
-  
+   for(i=0; i<psite->m_worker_requests.size(); i++)
+      if(rq==psite->m_worker_requests[i]) break;
+
    psite->m_worker_requests.erase(psite->m_worker_requests.begin() + i);
 
 	psite->m_workers.push_back(w);
 
 	delete rq;
-     
+
    bool set_worker_idle=true;
    if(psite->can_start_working() && w==psite->m_workers[0])
       set_worker_idle=false;
@@ -625,7 +626,7 @@ void ProductionSite::program_act(Game* g)
          {
             std::vector<std::string> wares;
             split_string(action->sparam1, &wares, ",");
-            
+
             uint j=0;
             bool found=false;
             for(j=0; j<wares.size(); j++) {
@@ -658,7 +659,7 @@ void ProductionSite::program_act(Game* g)
             m_program_time = schedule_act(g, 10);
             return;
          }
-		
+
       case ProductionAction::actProduce:
 		{
 			molog("  Produce(%s)\n", action->sparam1.c_str());
@@ -671,9 +672,9 @@ void ProductionSite::program_act(Game* g)
          // For statistics, inform the user that a ware was produced
          // Ware statistics are only cached for the interactive user
          // since other tribes would have other types of wares
-         if(g->get_ipl()->get_player_number()==get_owner()->get_player_number()) 
-            g->get_ipl()->ware_produced(wareid); 
-         
+         if(g->get_ipl()->get_player_number()==get_owner()->get_player_number())
+            g->get_ipl()->ware_produced(wareid);
+
 			m_workers[0]->set_carried_item(g,item);
 
 			// get the worker to drop the item off
@@ -735,9 +736,9 @@ void ProductionSite::program_act(Game* g)
 
          // how much is digged
          int digged_percentage=100;
-         if(totalstart) 
-            digged_percentage = 100 - (totalres*100 / totalstart); 
-         if(!totalres) 
+         if(totalstart)
+            digged_percentage = 100 - (totalres*100 / totalstart);
+         if(!totalres)
             digged_percentage=100;
          molog("  Mine has already digged %i percent (%i/%i)!\n", digged_percentage, totalres, totalstart);
 
@@ -957,7 +958,7 @@ void ProductionSite::program_act(Game* g)
 		case ProductionAction::actPlayFX:
 		{
 			g_sound_handler.play_fx(action->sparam1, m_position, action->iparam1);
-			
+
 			program_step();
 			m_program_timer = true;
 			m_program_time = schedule_act(g, 10);
@@ -986,13 +987,13 @@ bool ProductionSite::fetch_from_flag(Game* g)
 
 /*
  * returns true if this production site could
- * theoretically start working (if all workers 
+ * theoretically start working (if all workers
  * are present)
  */
 bool ProductionSite::can_start_working(void) {
-   if(m_worker_requests.size()) 
+   if(m_worker_requests.size())
       return false;
-   
+
    return true;
 }
 
@@ -1154,12 +1155,12 @@ void ProductionSite::program_end(Game* g, bool success)
 		add_statistics_value(success);
 
    // if succesfull, the workers gain experience
-   if(success) { 
+   if(success) {
       uint i=0;
-      for(i=0; i<m_workers.size(); i++) 
+      for(i=0; i<m_workers.size(); i++)
          m_workers[i]->gain_experience(g);
    }
-	
+
    m_program_timer = true;
 	m_program_time = schedule_act(g, m_post_timer);
 }

@@ -27,29 +27,6 @@
 #include "types.h"
 
 /*
-Record file codes
-
-It should be possible to use record files across different platforms.
-However, 64 bit platforms are currently not supported.
-*/
-#define RFC_MAGIC		0x0ACAD100 // change this and I will ensure your death will be a most unpleasant one
-
-enum {
-   RFC_GETTIME = 0x01,
-   RFC_EVENT = 0x02,
-   RFC_ENDEVENTS = 0x03,
-};
-
-enum {
-   RFC_KEYDOWN = 0x10,
-   RFC_KEYUP = 0x11,
-   RFC_MOUSEBUTTONDOWN = 0x12,
-   RFC_MOUSEBUTTONUP = 0x13,
-   RFC_MOUSEMOTION = 0x14,
-   RFC_QUIT = 0x15
-};
-
-/*
 ==============================================================================
 
 SYSTEM ABSTRACTION
@@ -110,15 +87,7 @@ struct InputCallback {
 	void (*key)(bool down, int code, char c);
 };
 
-// locale
-#define _( str ) Sys_Translate( str )
-void Sys_GrabTextdomain( const char* );
-void Sys_ReleaseTextdomain( void );
-void Sys_SetLocale( const char* = 0);
-std::string Sys_GetLocale();
-inline const char* Sys_Translate( const char* str ) {
-	return gettext( str );
-}
+
 
 void Sys_HandleInput(InputCallback *cb);
 uint Sys_GetMouseButtons();

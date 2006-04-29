@@ -30,6 +30,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ui_listselect.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -236,7 +237,7 @@ void Options_Ctrl::save_options(){
    m_opt_section->set_bool("disable_fx", !opt.fx);
    m_opt_section->set_string("language", opt.language.c_str());
 	Sys_SetInputGrab(opt.inputgrab);
-   Sys_SetLocale( opt.language.c_str() );
+	WLApplication::get()->set_locale( opt.language.c_str() );
    g_sound_handler.set_disable_music( !opt.music );
    g_sound_handler.set_disable_fx( !opt.fx );
 }

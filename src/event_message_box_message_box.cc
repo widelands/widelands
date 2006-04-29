@@ -73,11 +73,11 @@ UIWindow(game->get_iabase(), 0, 0, 600, 400, event->get_window_title() ) {
    m_is_modal = event->get_is_modal();
 
    center_to_parent();
-   
+
    if( gposx != -1 )
       set_pos( gposy, get_y());
    if( gposy != -1 )
-      set_pos( get_x(), gposy); 
+      set_pos( get_x(), gposy);
 }
 
 

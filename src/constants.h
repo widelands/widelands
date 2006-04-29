@@ -22,7 +22,7 @@
 
 /**
  * \file constants.h
- * \brief Global compile time configuration
+ * \brief Global compile time configuration and important constants
  *
  * Changes have wide impact on recompile time.
  * Lots more are scattered through header files
@@ -56,8 +56,7 @@
 #define UI_FONT_ULTRASMALL "FreeSans.ttf", 10
 
 #define UI_FONT_TOOLTIP UI_FONT_SMALL
-#define PROSA_FONT       "FreeSerif.ttf", 18
-
+#define PROSA_FONT "FreeSerif.ttf", 18
 //@}
 
 /// \name Font colors
@@ -65,9 +64,9 @@
 //@{
 
 /// Global UI font color
-#define UI_FONT_CLR_FG  RGBColor(255,255,0)
+#define UI_FONT_CLR_FG RGBColor(255,255,0)
 /// Prosa font color
-#define PROSA_FONT_CLR_FG   RGBColor(255,255,0)
+#define PROSA_FONT_CLR_FG RGBColor(255,255,0)
 
 //@}
 
@@ -90,16 +89,43 @@
 /// FRAME_LENGTH is just the default animation speed
 #define FRAME_LENGTH 250
 
-/// Maxi numbers of players in a game
-#define MAX_PLAYERS		8
+/// Maximum numbers of players in a game
+#define MAX_PLAYERS 8
 
 /// How often are statistics to be sampled
 #define STATISTICS_SAMPLE_TIME 30000
 
-/** Shorthand because the original is a lot to type *and* harder to read
+/** Shorthand because the original is a lot to type \e and harder to read.
  * Use #define and not typedef so that we don't need to #include<string> here.
- * This would cause <string> to included in every constants.h "user" !
+ * This would cause <string> to included in every constants.h "user" - instead
+ * of every SSS_T user.
  */
 #define SSS_T std::string::size_type
+
+/**
+ * Record file codes
+ *
+ * It should be possible to use record files across different platforms.
+ * However, 64 bit platforms are currently not supported.
+ */
+//@{
+/// change this and I will ensure your death will be a most unpleasant one
+#define RFC_MAGIC 0x0ACAD100
+
+enum {
+	RFC_GETTIME = 0x01,
+	RFC_EVENT = 0x02,
+	RFC_ENDEVENTS = 0x03,
+};
+
+enum {
+	RFC_KEYDOWN = 0x10,
+	RFC_KEYUP = 0x11,
+	RFC_MOUSEBUTTONDOWN = 0x12,
+	RFC_MOUSEBUTTONUP = 0x13,
+	RFC_MOUSEMOTION = 0x14,
+	RFC_QUIT = 0x15
+};
+//@}
 
 #endif

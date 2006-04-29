@@ -27,6 +27,7 @@
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
+#include "wlapplication.h"
 
 /*
 ===============
@@ -73,7 +74,7 @@ Game_Main_Menu_Load_Game::Game_Main_Menu_Load_Game(Interactive_Player* parent, U
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 4, 1);
    but->clickedid.set(this, &Game_Main_Menu_Load_Game::clicked);
    but->set_title(_("OK"));
-   but->set_enabled(false); 
+   but->set_enabled(false);
    m_ok_btn=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 4, 0);
    but->clickedid.set(this, &Game_Main_Menu_Load_Game::clicked);
@@ -110,12 +111,12 @@ void Game_Main_Menu_Load_Game::clicked(int id) {
       std::string filename=static_cast<const char*>(m_ls->get_selection());
 
       // Ok, load this map
-      if(load_game(filename)) 
+      if(load_game(filename))
          die();
    } else if(id==0) {
       // Cancel
       die();
-   } 
+   }
 }
 
 /*
@@ -125,7 +126,7 @@ void Game_Main_Menu_Load_Game::selected(int i) {
    const char* name=static_cast<const char*>(m_ls->get_selection());
 
    FileSystem* fs = g_fs->MakeSubFileSystem( name );
-   
+
    Game_Loader gl(fs, m_parent->get_game());
    Game_Preload_Data_Packet gpdp;
    gl.preload_game(&gpdp); // This has worked before, no problem
@@ -158,22 +159,22 @@ void Game_Main_Menu_Load_Game::double_clicked(int) {
  * fill the file list
  */
 void Game_Main_Menu_Load_Game::fill_list(void) {
-   // Fill it with all files we find. 
+   // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
-  
+
    Game_Preload_Data_Packet gpdp;
-   
+
    for(filenameset_t::iterator pname = m_gamefiles.begin(); pname != m_gamefiles.end(); pname++) {
       const char *name = pname->c_str();
 
-      
+
       Game_Loader* gl = 0;
       FileSystem* fs = 0;
       try {
-         fs = g_fs->MakeSubFileSystem( name ); 
+         fs = g_fs->MakeSubFileSystem( name );
          gl = new Game_Loader(fs,m_parent->get_game());
          gl->preload_game(&gpdp);
-         
+
          char* fname = strdup(FS_Filename(name));
          FS_StripExtension(fname);
          m_ls->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
@@ -182,12 +183,12 @@ void Game_Main_Menu_Load_Game::fill_list(void) {
       } catch(wexception& ) {
          // we simply skip illegal entries
       }
-      if( gl ) 
+      if( gl )
          delete gl;
-      if( fs ) 
+      if( fs )
          delete fs;
    }
-   
+
    if(m_ls->get_nr_entries())
       m_ls->select(0);
 }
@@ -206,7 +207,7 @@ void Game_Main_Menu_Load_Game::edit_box_changed(void) {
  * should stay open
  */
 bool Game_Main_Menu_Load_Game::load_game(std::string filename) {
-  
+
    Game_Loader* gl = 0;
    FileSystem* fs = 0;
    try {
@@ -225,7 +226,7 @@ bool Game_Main_Menu_Load_Game::load_game(std::string filename) {
    }
    if( gl )
       delete gl;
-   if( fs ) 
+   if( fs )
       delete fs;
    die();
 

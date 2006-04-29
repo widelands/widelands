@@ -29,6 +29,7 @@
 #include "util.h"
 #include "error.h"
 #include "system.h"
+#include "wlapplication.h"
 
 using std::cerr;
 using std::endl;
@@ -163,8 +164,8 @@ World::World(const char* name)
 	{
       // Grab the localisation text domain
       sprintf( directory, "world_%s", name );
-      Sys_GrabTextdomain( directory );
-		
+      WLApplication::get()->grab_textdomain( directory );
+
       snprintf(directory, sizeof(directory), "worlds/%s", name);
 		m_basedir = directory;
 
@@ -173,7 +174,7 @@ World::World(const char* name)
 		parse_terrains();
 		parse_bobs();
 
-      Sys_ReleaseTextdomain();
+		WLApplication::get()->release_textdomain();
 	}
 	catch(std::exception &e)
 	{

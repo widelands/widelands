@@ -34,6 +34,7 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 #include "util.h"
+#include "wlapplication.h"
 
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :
    UIWindow(parent, 0, 0, 200, 280, _("Event Option Menu")) {
@@ -56,7 +57,7 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Intera
 
    // Fill the building infos
    Tribe_Descr* tribe = m_parent->get_editor()->get_tribe(m_parent->get_map()->get_scenario_player_tribe(m_player).c_str());
-   int i=0; 
+   int i=0;
    if(tribe) {
       for(i=0; i<tribe->get_nrbuildings(); i++) {
          Building_Descr* b=tribe->get_building_descr(i);
@@ -159,9 +160,9 @@ void Event_Allow_Building_Option_Menu::clicked(int i) {
             // ok button
             if(m_name->get_text())
                m_event->set_name( m_name->get_text() );
-            if(m_event->get_player()!=m_player && m_event->get_player()!=-1) 
+            if(m_event->get_player()!=m_player && m_event->get_player()!=-1)
                m_parent->unreference_player_tribe(m_event->get_player(), m_event);
-            if(m_event->get_player()!=m_player) { 
+            if(m_event->get_player()!=m_player) {
                m_event->set_player(m_player);
                m_parent->reference_player_tribe(m_player, m_event);
             }

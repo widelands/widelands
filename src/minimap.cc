@@ -26,6 +26,7 @@
 #include "minimap.h"
 #include "rendertarget.h"
 #include "ui_button.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================

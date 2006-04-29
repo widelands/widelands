@@ -31,10 +31,11 @@
 #include "trigger.h"
 #include "trigger_conditional.h"
 #include "util.h"
+#include "wlapplication.h"
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain) :
    UIWindow(parent, 0, 0, 465, 340, _("Edit Trigger Conditional")) {
-   
+
    m_parent=parent;
    m_given_cond = cond;
    m_event_chain = chain;
@@ -55,7 +56,7 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    m_construction= new UIListselect(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_construction->selected.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_selected);
    m_construction->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked);
-   posx += ls_width + spacing; 
+   posx += ls_width + spacing;
 
    posy = 35;
    UIButton* b = new UIButton(this, posx, posy, 80, 20, 0, 10);
@@ -105,7 +106,7 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    b->set_enabled( false );
    m_mvdown_btn = b;
-   posy += 24 + spacing + spacing; 
+   posy += 24 + spacing + spacing;
 
    posx += 80 + spacing;
    new UITextarea(this, posx, offsy, _("Available Triggers: "), Align_Left);
@@ -129,7 +130,7 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
 
    // Add conditional
-   if( cond ) { 
+   if( cond ) {
       std::vector< TriggerConditional_Factory::Token >* tokens = cond->get_infix_tokenlist( );
       for( uint i = 0; i < tokens->size(); i++) {
          TriggerConditional_Factory::Token* t = new TriggerConditional_Factory::Token( (*tokens)[i] );
@@ -181,13 +182,13 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
       end_modal(0);
       return;
    }
-      
+
    // ok
    if(i == 1) {
       // construct token list
       std::vector<TriggerConditional_Factory::Token> tok;
 
-      for( int i = 0; i < m_construction->get_nr_entries(); i++) 
+      for( int i = 0; i < m_construction->get_nr_entries(); i++)
          tok.push_back(  *( static_cast<TriggerConditional_Factory::Token*>
                   (m_construction->get_entry( i ) )));
 
@@ -198,7 +199,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
          m_given_cond = cond;
          end_modal( 1 );
       } catch(  TriggerConditional_Factory::SyntaxError err ) {
-         UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, _("Syntax Error"), _("Your conditional contains at least one syntax error. Please correct!\n"), 
+         UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, _("Syntax Error"), _("Your conditional contains at least one syntax error. Please correct!\n"),
                UIModal_Message_Box::OK);
          mb->run();
          delete mb;
@@ -221,7 +222,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
       }
       m_construction->add_entry(str.c_str(), t, true);
    }
- 
+
    // Insert trigger
    if( i == 20 ) {
       Trigger* trig = static_cast<Trigger*>(m_trigger_list->get_selection());
@@ -234,10 +235,10 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
    // Delete a trigger
    if( i == 21 ) {
       TriggerConditional_Factory::Token* t = static_cast<TriggerConditional_Factory::Token*>
-         (m_construction->get_selection()); 
+         (m_construction->get_selection());
 
       delete t;
-      
+
       m_construction->remove_entry( m_construction->get_selection_index());
       m_mvup_btn->set_enabled( false );
       m_mvdown_btn->set_enabled( false );
@@ -247,12 +248,12 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked(int i) {
    // Move up
    if( i == 30) {
       int n = m_construction->get_selection_index();
-      if( n != 0) 
+      if( n != 0)
          m_construction->switch_entries( n, n - 1);
    }
    if( i == 31) {
       int n = m_construction->get_selection_index();
-      if( n != (m_construction->get_nr_entries() - 1) ) 
+      if( n != (m_construction->get_nr_entries() - 1) )
          m_construction->switch_entries( n, n + 1);
    }
    return;

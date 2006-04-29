@@ -20,6 +20,7 @@
 #include "interactive_player.h"
 #include "cmd_queue.h"
 #include "editorinteractive.h"
+#include "error.h"
 #include "fieldaction.h"
 #include "game_debug_ui.h"
 #include "map.h"
@@ -35,7 +36,7 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "watchwindow.h"
-#include "error.h"
+#include "wlapplication.h"
 
 class Building_Descr;
 
@@ -210,7 +211,7 @@ private:
 	bool			m_fastclick; // if true, put the mouse over first button in first tab
 	int m_workarea_preview_job_id;
 	unsigned int workarea_cumulative_picid[number_of_workarea_pics + 1];
-   
+
    /// Variables to use with attack dialog
    UITextarea* m_text_attackers;
    uint     m_attackers;      // 0 - Number of available soldiers.
@@ -351,7 +352,7 @@ void FieldActionWindow::add_buttons_auto()
 
 	// Add road-building actions
 	if (m_field.field->get_owned_by() == m_plr->get_player_number()) {
-	
+
 		BaseImmovable *imm = m_map->get_immovable(m_field);
 
 		// The box with road-building buttons
@@ -402,7 +403,7 @@ void FieldActionWindow::add_buttons_auto()
          Flag *flag = (Flag*)imm;
 
          Building *building = flag->get_building();
-         if (building && 
+         if (building &&
                m_iabase->get_egbase()->is_game() &&
                ((building->get_building_type() == Building::MILITARYSITE) ||
                 (building->get_building_type() == Building::WAREHOUSE))
@@ -438,11 +439,11 @@ void FieldActionWindow::add_buttons_attack ()
    UIBox* attackbox = 0;
 
       // Add attack button
-   if (m_field.field->get_owned_by() != m_plr->get_player_number()) 
+   if (m_field.field->get_owned_by() != m_plr->get_player_number())
    {
-      
+
       BaseImmovable *imm = m_map->get_immovable(m_field);
-      
+
          // The box with attack buttons
       attackbox = new UIBox(m_tabpanel, 0, 0, UIBox::Horizontal);
 
@@ -452,7 +453,7 @@ void FieldActionWindow::add_buttons_attack ()
          Flag *flag = (Flag*)((Building*)imm)->get_base_flag();
 
          Building *building = flag->get_building();
-         if (building && 
+         if (building &&
                m_iabase->get_egbase()->is_game() &&
                ((building->get_building_type() == Building::MILITARYSITE) ||
                 (building->get_building_type() == Building::WAREHOUSE))
@@ -461,15 +462,15 @@ void FieldActionWindow::add_buttons_attack ()
             m_attackers = 0;
             m_attackers_type = STRONGEST;
             add_button(attackbox, pic_attack_less, &FieldActionWindow::act_attack_less);
-            
+
             m_text_attackers = new UITextarea(attackbox, 90, 0, "000/000", Align_Center);
             attackbox->add(m_text_attackers, UIBox::AlignTop);
-            
+
             add_button(attackbox, pic_attack_more, &FieldActionWindow::act_attack_more);
-            
+
             add_button(attackbox, pic_attack_strong, &FieldActionWindow::act_attack_strong);
             add_button(attackbox, pic_attack_weak,   &FieldActionWindow::act_attack_weak);
-            
+
             add_button(attackbox, pic_attack, &FieldActionWindow::act_attack);
             act_attack_more();
          }
@@ -629,7 +630,7 @@ Open a watch window for the given field and delete self.
 void FieldActionWindow::act_watch()
 {
 	assert(m_iabase->get_egbase()->is_game());
-   
+
    show_watch_window(static_cast<Interactive_Player*>(m_iabase), m_field);
 	okdialog();
 }
@@ -682,9 +683,9 @@ void FieldActionWindow::act_buildflag()
 {
 	Editor_Game_Base* egbase=m_iabase->get_egbase();
 
-   if(egbase->is_game()) { 
+   if(egbase->is_game()) {
       // Game: send command
-      Game *g = static_cast<Game*>(egbase); 
+      Game *g = static_cast<Game*>(egbase);
       g->send_player_build_flag (m_plr->get_player_number(), m_field);
    } else {
       // Editor: Just plain build this flag
@@ -727,7 +728,7 @@ void FieldActionWindow::act_ripflag()
    {
       if(m_iabase->get_egbase()->is_game()) {
          // Game
-         Game *g = static_cast<Game*>(m_iabase->get_egbase()); 
+         Game *g = static_cast<Game*>(m_iabase->get_egbase());
          m_iabase->need_complete_redraw();
 	 g->send_player_bulldoze (flag);
       } else {
@@ -782,7 +783,7 @@ void FieldActionWindow::act_removeroad()
    if (imm && imm->get_type() == Map_Object::ROAD)
       if(m_iabase->get_egbase()->is_game()) {
          // Game
-         Game *g = static_cast<Game*>(m_iabase->get_egbase()); 
+         Game *g = static_cast<Game*>(m_iabase->get_egbase());
          g->send_player_bulldoze (static_cast<PlayerImmovable*>(imm));
       } else {
          Road* road=static_cast<Road*>(imm);
@@ -852,7 +853,7 @@ void FieldActionWindow::building_icon_mouse_in(long idx) {
 			 i > 0; --i, ++it) {
 			const unsigned int radius = it->first;
 			hole_radius = radius;
-			MapHollowRegion workarea 
+			MapHollowRegion workarea
 				= MapHollowRegion(*m_map, m_field, radius, 0);
 			Coords c;
 			const Coords invalid(-1, -1);
@@ -924,8 +925,8 @@ void FieldActionWindow::act_attack ()
 
       if (imm && imm->get_type() == Map_Object::FLAG && m_attackers > 0)
          g->send_player_enemyflagaction (
-               static_cast<Flag*>(imm), 
-               ENEMYFLAGACTION_ATTACK, 
+               static_cast<Flag*>(imm),
+               ENEMYFLAGACTION_ATTACK,
                m_player->get_player_number(),
                m_attackers,  // Number of soldiers
                m_attackers_type); // Type of soldiers
@@ -933,13 +934,13 @@ void FieldActionWindow::act_attack ()
 
    okdialog();
 }
-   
+
 void FieldActionWindow::act_attack_more()
 {
    // TODO: Recalculate the number of available soldiers
    char buf[20];
    uint available = 99;
-   
+
    if (m_attackers < available)
       m_attackers ++;
    else
@@ -954,12 +955,12 @@ void FieldActionWindow::act_attack_less()
    // TODO: Recalculate the number of available soldiers
    char buf[20];
    uint available = 99;
-   
+
    if (m_attackers > 0)
       m_attackers --;
    else
       m_attackers = 0;
-            
+
    sprintf(buf, "%d/%d", m_attackers, available);
    m_text_attackers->set_text (buf);
 }

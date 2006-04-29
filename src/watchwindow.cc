@@ -29,6 +29,7 @@
 #include "ui_signal.h"
 #include "ui_window.h"
 #include "watchwindow.h"
+#include "wlapplication.h"
 #include <vector>
 
 #define NUM_VIEWS 5

@@ -31,6 +31,7 @@
 #include "ui_panel.h"
 #include "ui_tabpanel.h"
 #include "ui_window.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================

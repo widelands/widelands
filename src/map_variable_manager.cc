@@ -20,6 +20,7 @@
 #include <vector>
 #include "map_variable_manager.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
  * Map Variable Manager implementation
@@ -33,7 +34,7 @@ MapVariableManager::MapVariableManager( void ) {
 }
 
 MapVariableManager::~MapVariableManager( void ) {
-   for( uint i = 0; i < m_variables.size(); i++) 
+   for( uint i = 0; i < m_variables.size(); i++)
       delete m_variables[i];
    m_variables.resize( 0 );
 }
@@ -43,7 +44,7 @@ MapVariableManager::~MapVariableManager( void ) {
  */
 bool MapVariableManager::register_new_variable( MapVariable* mv ) {
    // check if this variable is already known
-   if( get_variable( mv->get_name() ) ) 
+   if( get_variable( mv->get_name() ) )
          return 0;
 
    m_variables.push_back( mv );
@@ -57,7 +58,7 @@ Int_MapVariable* MapVariableManager::get_int_variable( const char* name ) {
    MapVariable* v = get_variable( name );
    if( v && v->get_type() != MapVariable::MVT_INT)
       return 0;
-   
+
    return static_cast<Int_MapVariable*>(v);
 }
 String_MapVariable* MapVariableManager::get_string_variable( const char* name ) {
@@ -76,12 +77,12 @@ MapVariable* MapVariableManager::get_variable( const char* name ) {
          break;
       }
    }
-   
+
    return retval;
 }
 
 /*
- * Remove a variable 
+ * Remove a variable
  */
 void MapVariableManager::delete_variable( const char* name ) {
    for( uint i = 0; i < m_variables.size(); i++) {

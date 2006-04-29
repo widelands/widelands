@@ -25,6 +25,7 @@
 #include "util.h"
 #include "wexception.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
  * Constructor
@@ -67,13 +68,13 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
       gsc->server_message( buffer );
       return;
    }
-   
+
    assert(flags == RI_ACK) ;
 
    ushort nrusers = buf->get_16();
 
    std::vector< std::string > users;
-   
+
    for(uint i = 0; i < nrusers; i++) {
       users.push_back( buf->get_string() );
    }

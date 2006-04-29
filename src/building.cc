@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 #include "building.h"
+#include "computer_player_hints.h"
 #include "constructionsite.h"
 #include "editor_game_base.h"
 #include "error.h"
@@ -40,8 +41,7 @@
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker.h"
-#include "constants.h"
-#include "computer_player_hints.h"
+#include "wlapplication.h"
 
 static const int BUILDING_LEAVE_INTERVAL = 1000;
 

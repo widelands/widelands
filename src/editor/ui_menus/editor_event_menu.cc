@@ -40,6 +40,7 @@
 #include "map_trigger_manager.h"
 #include "trigger_factory.h"
 #include "util.h"
+#include "wlapplication.h"
 
 /*
 ===============
@@ -63,21 +64,21 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    int posx=offsx;
    int posy=offsy;
    const int ls_width = 180;
-   
+
    // EventChain List
    new UITextarea(this, posx, offsy, _("Event Chains: "), Align_Left);
    m_eventchain_list=new UIListselect(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_eventchain_list->selected.set(this, &Editor_Event_Menu::eventchain_list_selected);
    m_eventchain_list->double_clicked.set(this, &Editor_Event_Menu::eventchain_double_clicked);
    posx += ls_width + spacing;
-   
+
    // Event List
    new UITextarea(this, posx, offsy, _("Registered Events: "), Align_Left);
    m_event_list=new UIListselect(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
    m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
    m_event_list->double_clicked.set(this, &Editor_Event_Menu::event_double_clicked);
    posx += ls_width + spacing;
-   
+
    // Trigger List
    new UITextarea(this, posx, offsy, _("Registered Triggers"), Align_Left);
    m_trigger_list=new UIListselect(this, posx, offsy+20, ls_width, get_inner_h()-offsy-55);
@@ -86,7 +87,7 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    posx += ls_width + spacing;
 
    posy=get_inner_h()-30;
-   posx=spacing; 
+   posx=spacing;
    UIButton* b=new UIButton(this, posx, posy, 80, 20, 4, 6);
    b->set_title(_("New Event Chain"));
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
@@ -224,10 +225,10 @@ void Editor_Event_Menu::clicked(int id) {
          mmb->run();
          delete mmb;
          return;
-      } 
-      
+      }
+
       m_parent->get_map()->get_mem()->delete_event( event->get_name() );
-      m_parent->unreference_player_tribe(0, event);  // Remove all references done by this event 
+      m_parent->unreference_player_tribe(0, event);  // Remove all references done by this event
       m_parent->set_need_save(true);
       update();
    } else if(id==2) {
@@ -273,13 +274,13 @@ void Editor_Event_Menu::clicked(int id) {
       m_parent->set_need_save(true);
       update();
    } else if( id == 6) {
-      // First, create new TriggerConditional 
+      // First, create new TriggerConditional
       EventChain* ev = new EventChain();
       Editor_Event_Menu_Edit_TriggerConditional* menu = new Editor_Event_Menu_Edit_TriggerConditional( m_parent, 0, ev );
       int code = menu->run();
       if( code ) { // TriggerConditional has been accepted
          ev->set_trigcond( menu->get_trigcond());
-         
+
          // Get the a name
          char buffer[256];
 
@@ -290,7 +291,7 @@ void Editor_Event_Menu::clicked(int id) {
                break;
             ++n;
          }
-         
+
          ev->set_name( buffer );
          m_parent->get_egbase()->get_map()->get_mecm()->register_new_eventchain( ev );
          m_eventchain_list->add_entry( _("Unnamed"), ev, true);
@@ -301,7 +302,7 @@ void Editor_Event_Menu::clicked(int id) {
          delete ev;
       }
       delete menu;
-      if( code ) 
+      if( code )
          clicked(8); // Simulate click on edit
    } else if( id == 7) {
       // Delete event chain

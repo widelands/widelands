@@ -39,7 +39,7 @@
 #include "worker_program.h"
 #include "world.h"
 #include "sound_handler.h"
-
+#include "wlapplication.h"
 
 Cmd_Incorporate::Cmd_Incorporate(int t, Worker* w) :
        BaseCommand(t) {

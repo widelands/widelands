@@ -25,6 +25,7 @@
 #include "ui_editbox.h"
 #include "editor_main_menu_map_options.h"
 #include "editorinteractive.h"
+#include "wlapplication.h"
 
 /*
 ===============

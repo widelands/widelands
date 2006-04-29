@@ -26,17 +26,18 @@
 #include "ui_checkbox.h"
 #include "tribe.h"
 #include "wexception.h"
+#include "wlapplication.h"
 
 static const char* default_names[MAX_PLAYERS+1] = {
-   "", 
+   "",
    _("Player 1"),
-   _("Player 2"), 
-   _("Player 3"), 
-   _("Player 4"), 
-   _("Player 5"), 
-   _("Player 6"), 
-   _("Player 7"), 
-   _("Player 8"), 
+   _("Player 2"),
+   _("Player 3"),
+   _("Player 4"),
+   _("Player 5"),
+   _("Player 6"),
+   _("Player 7"),
+   _("Player 8"),
    };
 
 void PlayerDescriptionGroup::allow_changes(changemode_t t) {
@@ -73,7 +74,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 
 	Tribe_Descr::get_all_tribes(&m_tribes);
 	m_btnPlayerTribe->set_title(m_tribes[m_current_tribe].c_str());
-	
+
 	set_player_type (Player::playerAI);
 }
 
@@ -85,7 +86,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UIPanel* parent, int x, int y, Ga
 void PlayerDescriptionGroup::set_enabled(bool enable)
 {
 	if(!m_allow_changes) return;
-	
+
 	if (enable == m_enabled)
 		return;
 
@@ -103,7 +104,7 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
 			m_game->add_player(m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
          m_game->get_player(m_plnum)->init(m_game,0); // Small initializes
       }
-      
+
       const char* string = 0;
 		switch(m_playertype) {
 		case Player::playerLocal:
@@ -195,10 +196,10 @@ void PlayerDescriptionGroup::set_player_type(int type)
 		return;
 
 	m_playertype=type;
-	
+
 	if (m_enabled) {
 		m_btnPlayerType->set_title((type!=Player::playerAI)?_("Human"):_("Computer"));
-		
+
 		m_game->remove_player (m_plnum);
 		m_game->add_player (m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);
       m_game->get_player(m_plnum)->init(m_game,0); // Small initializes

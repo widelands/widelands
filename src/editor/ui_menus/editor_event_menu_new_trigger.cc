@@ -30,7 +30,7 @@
 #include "trigger_factory.h"
 #include "map.h"
 #include "error.h"
-
+#include "wlapplication.h"
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
    UIWindow(parent, 0, 0, 400, 240, _("New Trigger")) {

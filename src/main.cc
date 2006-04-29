@@ -280,7 +280,7 @@ void g_main(int argc, char** argv)
 
 /**
  * Cross-platform entry point for SDL applications.
-*/
+ */
 int main(int argc, char** argv)
 {
 	WLApplication *g_app=WLApplication::get(argc, argv);

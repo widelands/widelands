@@ -25,11 +25,11 @@
 #include "profile.h"
 #include "world.h"
 #include "soldier.h"
-#include "system.h"
 #include "tribe.h"
 #include "util.h"
 #include "warehouse.h"
 #include "wexception.h"
+#include "wlapplication.h"
 #include "worker.h"
 
 using namespace std;
@@ -47,7 +47,7 @@ Tribe_Descr::Tribe_Descr(const char* name)
 
       // Grab the localisation text domain
       sprintf( directory, "tribe_%s", name );
-      Sys_GrabTextdomain( directory );
+      WLApplication::get()->grab_textdomain( directory );
 
 		snprintf(directory, sizeof(directory), "tribes/%s", name);
 
@@ -58,7 +58,7 @@ Tribe_Descr::Tribe_Descr(const char* name)
       parse_bobs(directory);
       parse_root_conf(directory);
 
-      Sys_ReleaseTextdomain( );
+      WLApplication::get()->release_textdomain( );
 	}
 	catch(std::exception &e)
 	{

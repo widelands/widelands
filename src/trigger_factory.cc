@@ -28,6 +28,7 @@
 #include "trigger_time_option_menu.h"
 #include "trigger_null_option_menu.h"
 #include "trigger_building_option_menu.h"
+#include "wlapplication.h"
 
 static const int nr_of_triggers=3;
 
@@ -44,13 +45,13 @@ Trigger_Descr TRIGGER_DESCRIPTIONS[nr_of_triggers] = {
  */
 Trigger* Trigger_Factory::get_correct_trigger(const char* id) {
    std::string str = id;
-   
+
    if( str == "time" ) return new Trigger_Time();
    else if( str == "null" ) return new Trigger_Null();
    else if( str == "building" ) return new Trigger_Building();
    else
       throw wexception("Trigger_Factory::get_correct_trigger: Unknown trigger id found: %s\n", id);
-   
+
    // never here
    return 0;
 }
@@ -68,10 +69,10 @@ Trigger* Trigger_Factory::make_trigger_with_option_dialog(const char* id, Editor
 
    int retval=-100;
    std::string str = id;
-   if( str == "time" ) { Trigger_Time_Option_Menu* t=new Trigger_Time_Option_Menu(m_parent, static_cast<Trigger_Time*>(trig)); retval=t->run(); delete t; } 
-   else if( str == "null" ) { Trigger_Null_Option_Menu* t=new Trigger_Null_Option_Menu(m_parent, static_cast<Trigger_Null*>(trig)); retval=t->run(); delete t; } 
-   else if( str == "building") { Trigger_Building_Option_Menu* t=new Trigger_Building_Option_Menu(m_parent, static_cast<Trigger_Building*>(trig)); retval=t->run(); delete t; } 
-   
+   if( str == "time" ) { Trigger_Time_Option_Menu* t=new Trigger_Time_Option_Menu(m_parent, static_cast<Trigger_Time*>(trig)); retval=t->run(); delete t; }
+   else if( str == "null" ) { Trigger_Null_Option_Menu* t=new Trigger_Null_Option_Menu(m_parent, static_cast<Trigger_Null*>(trig)); retval=t->run(); delete t; }
+   else if( str == "building") { Trigger_Building_Option_Menu* t=new Trigger_Building_Option_Menu(m_parent, static_cast<Trigger_Building*>(trig)); retval=t->run(); delete t; }
+
    if(retval==-100)
       throw wexception("Trigger_Factory::make_trigger_with_option_dialog: Unknown trigger id found: %s\n", id);
    if(retval)
@@ -92,7 +93,7 @@ Trigger_Descr* Trigger_Factory::get_correct_trigger_descr( const char* id ) {
    for( uint i = 0; i < Trigger_Factory::get_nr_of_available_triggers(); i++)
       if( TRIGGER_DESCRIPTIONS[i].id == str )
          return &TRIGGER_DESCRIPTIONS[i];
-   
+
    assert(0); // never here
    return 0;
 }

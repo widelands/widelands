@@ -27,6 +27,7 @@
 #include "ui_textarea.h"
 #include "waresdisplay.h"
 #include "worker.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -81,7 +82,7 @@ void WaresDisplay::handle_mousemove(int x, int y, int xdiff, int ydiff, uint btn
 
    if(index > (m_warelists[0]->get_nrwareids())) {
       m_curware->set_text("");
-   } 
+   }
    else {
       if(m_type == WORKER) {
          index--;
@@ -106,7 +107,7 @@ void WaresDisplay::add_warelist(const WareList* wares, wdType type)
 {
    // If you register something twice, it is counted twice. Not my problem
 	m_warelists.push_back(wares);
-	
+
    int rows, height;
 
    rows = (wares->get_nrwareids() + WaresPerRow - 1) / WaresPerRow;
@@ -115,7 +116,7 @@ void WaresDisplay::add_warelist(const WareList* wares, wdType type)
 	set_size(get_inner_w(), height+30);
    m_curware->set_pos(0, get_inner_h()-25);
    m_curware->set_size(get_inner_w(), 20);
-   
+
    m_type = type;
 
 
@@ -146,7 +147,7 @@ void WaresDisplay::draw(RenderTarget* dst)
    int number = m_player->get_tribe()->get_nrwares();
    bool is_worker = false;
 
-   if( m_type == WORKER ) { 
+   if( m_type == WORKER ) {
       number = m_player->get_tribe()->get_nrworkers();
       is_worker = true;
    }
@@ -198,9 +199,9 @@ void WaresDisplay::draw_ware(RenderTarget* dst, int x, int y, uint id, uint stoc
    int picid = g_gr->get_picture( PicMod_Game,  "pics/ware_list_bg.png" );
    int w, h;
    g_gr->get_picture_size(picid, &w, &h);
-   
-   dst->blit(x, y, picid); 
-   
+
+   dst->blit(x, y, picid);
+
    int posx = x + (w - WARE_MENU_PIC_W)/2;
    int posy = y + 1;
 	// Draw it

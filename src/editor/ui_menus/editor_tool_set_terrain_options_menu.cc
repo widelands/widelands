@@ -29,6 +29,7 @@
 #include "ui_panel.h"
 #include "ui_textarea.h"
 #include "ui_checkbox.h"
+#include "wlapplication.h"
 #include "world.h"
 
 /*

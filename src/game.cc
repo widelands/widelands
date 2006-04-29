@@ -32,12 +32,12 @@
 #include "player.h"
 #include "playercommand.h"
 #include "soldier.h"
+#include "sound_handler.h"
 #include "system.h"
 #include "tribe.h"
 #include "widelands_map_loader.h"
-#include "sound_handler.h"
+#include "wlapplication.h"
 #include <string>
-
 
 /** Game::Game(void)
  *
@@ -47,7 +47,7 @@ Game::Game(void)
 {
 	m_state = gs_none;
 	m_speed = 1;
-	
+
 	rng = new RNG();
 
 	cmdqueue = new Cmd_Queue(this);
@@ -55,7 +55,7 @@ Game::Game(void)
 	m_realtime = Sys_GetTime();
 
 	ipl = 0;
-	
+
 	g_sound_handler.m_the_game=this;
 }
 
@@ -66,7 +66,7 @@ Game::Game(void)
 Game::~Game(void)
 {
 	g_sound_handler.m_the_game=NULL;
-	
+
 	delete cmdqueue;
 	delete rng;
 }
@@ -127,7 +127,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
             {
             std::string textdomain("");
             textdomain.append(mapname);
-            Sys_GrabTextdomain(textdomain.c_str());
+	    WLApplication::get()->grab_textdomain(textdomain.c_str());
             m_maploader->preload_map(scenario);
             log("Loading the locals for scenario. file: %s.mo\n", mapname);
             }
@@ -146,7 +146,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	m_maploader=0;
 
    if( scenario )
-      Sys_ReleaseTextdomain();
+	   WLApplication::get()->release_textdomain();
 
 	return run();
 }
@@ -161,7 +161,7 @@ bool Game::run_single_player ()
 	Fullscreen_Menu_LaunchGame *lgm = new Fullscreen_Menu_LaunchGame(this, 0, &m_maploader);
 	int code = lgm->run();
 	delete lgm;
-	
+
 	if (code==0 || get_map()==0)
 	    return false;
 
@@ -181,12 +181,12 @@ bool Game::run_single_player ()
 
 /**
  * Load a game
- * argument defines if this is a single player game (true) 
+ * argument defines if this is a single player game (true)
  * or networked (false)
  */
 bool Game::run_load_game(bool is_splayer) {
    assert(is_splayer); // TODO: net game saving not supported
-   
+
    Fullscreen_Menu_LoadGame* ssg = new Fullscreen_Menu_LoadGame(this, true);
    int code = ssg->run();
 
@@ -196,22 +196,22 @@ bool Game::run_load_game(bool is_splayer) {
       set_map(map);
 
       FileSystem* fs = g_fs->MakeSubFileSystem( ssg->get_gamename());
-      
+
       Game_Loader* gl=new Game_Loader( fs, this);
       gl->load_game();
       delete fs;
       delete gl;
    }
-   
+
    delete ssg;
 
-   if(code==0) 
+   if(code==0)
       return false;
 
    m_state = gs_running;
 
    make_influence_map ();  // This is needed to call after load a map :)
-   
+
    return run(true);
 }
 
@@ -227,14 +227,14 @@ bool Game::run_multi_player (NetGame* ng)
 	int code = lgm->run();
 	m_netgame->set_launch_menu (0);
 	delete lgm;
-	
+
 	if (code==0 || get_map()==0)
 	    return false;
-	    
+
 	g_gr->flush(PicMod_Menu);
 
 	m_state = gs_running;
-	
+
 	init_player_controllers ();
 
 	// Now first, completly load the map
@@ -266,7 +266,7 @@ void Game::init_player_controllers ()
 		    ipl = new Interactive_Player(this, i);
 		    break;
 		}
-	
+
 	assert (ipl!=0);
 
 	// inform base, that we have something interactive
@@ -299,7 +299,7 @@ void Game::init_player_controllers ()
 bool Game::run(bool is_savegame)
 {
    postload();
-   
+
    if(!is_savegame) {
       // Prepare the players (i.e. place HQs)
       for (int i = 1; i <= get_map()->get_nrplayers(); i++) {
@@ -325,9 +325,9 @@ bool Game::run(bool is_savegame)
       for(curplr=1; curplr <= get_map()->get_nrplayers(); curplr++) {
          Player* plr=get_player(curplr);
 
-         if(plr) { 
+         if(plr) {
             get_map()->set_scenario_player_tribe(curplr, plr->get_tribe()->get_name());
-            get_map()->set_scenario_player_name(curplr, plr->get_name()); 
+            get_map()->set_scenario_player_name(curplr, plr->get_name());
          } else {
             get_map()->set_scenario_player_tribe(curplr, "");
             get_map()->set_scenario_player_name(curplr, "");
@@ -339,14 +339,14 @@ bool Game::run(bool is_savegame)
       // Everything prepared, send the first trigger event
       // We lie about the sender here. Hey, what is one lie in a lifetime?
       enqueue_command (new Cmd_CheckEventChain(get_gametime(), -1));
-   } 
-   
+   }
+
    load_graphics();
 
    g_sound_handler.change_music("ingame", 1000, 0);
 
 	ipl->run();
-	
+
 	g_sound_handler.change_music("menu", 1000, 0);
 
 	get_objects()->cleanup(this);
@@ -379,14 +379,14 @@ void Game::think(void)
 	if (m_state == gs_running) {
 		for (unsigned int i=0;i<cpl.size();i++)
 			cpl[i]->think();
-	
+
 		int frametime = -m_realtime;
 		m_realtime = Sys_GetTime();
 		frametime += m_realtime;
-		
+
 		if (m_netgame!=0) {
 			int max_frametime=m_netgame->get_max_frametime();
-			
+
 			if (frametime>max_frametime)
 			    frametime=max_frametime;	// wait for the next server message
 			else if (max_frametime-frametime>500)
@@ -394,7 +394,7 @@ void Game::think(void)
 		}
 		else
 			frametime *= get_speed();
-		    
+
 		// maybe we are too fast...
 		if (frametime==0)
 			return;
@@ -429,7 +429,7 @@ void Game::player_immovable_notification (PlayerImmovable* pi, losegain_t lg)
             cpl[i]->gain_immovable (pi);
          else
             cpl[i]->lose_immovable (pi);
-      
+
    if(get_ipl()->get_player_number()==pi->get_owner()->get_player_number())
       if (lg==GAIN)
          get_ipl()->gain_immovable (pi);

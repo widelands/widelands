@@ -29,8 +29,7 @@
 #include "world.h"
 #include "error.h"
 #include "editor.h"
-
-#include "ui/ui_basic/ui_object.h" //just for i18n
+#include "wlapplication.h"
 
 /*
 ===============

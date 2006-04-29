@@ -25,6 +25,7 @@
 #include "util.h"
 #include "wexception.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
  * Constructor
@@ -68,7 +69,7 @@ void Game_Server_Protocol_Packet_GetUserInfo::handle_reply(Game_Server_Connectio
       return;
    }
 
-   assert(flags == UI_ACK); 
+   assert(flags == UI_ACK);
 
    std::string game = buf->get_string();
    std::string room = buf->get_string();

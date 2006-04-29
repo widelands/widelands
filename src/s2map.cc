@@ -26,6 +26,7 @@
 #include "types.h"
 #include "world.h"
 #include "system.h"
+#include "wlapplication.h"
 
 using std::cerr;
 using std::ios;
@@ -560,7 +561,7 @@ void S2_Map_Loader::load_s2mf(Editor_Game_Base *game)
             }
             int real_amount=((int)(2.86*(float)amount));
             f->set_resources(nres,real_amount);
-            f->set_starting_res_amount(real_amount); 
+            f->set_starting_res_amount(real_amount);
 			}
 		}
 

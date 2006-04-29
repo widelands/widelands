@@ -34,6 +34,7 @@
 #include "player.h"
 #include "tribe.h"
 #include "util.h"
+#include "wlapplication.h"
 
 Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* parent, Trigger_Building* trigger) :
    UIWindow(parent, 0, 0, 180, 280, _("Trigger Option Menu")) {
@@ -61,7 +62,7 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
 
    // Fill the building infos
    Tribe_Descr* tribe = m_parent->get_editor()->get_tribe(m_parent->get_map()->get_scenario_player_tribe(m_player).c_str());
-   int i=0; 
+   int i=0;
    if(tribe) {
       for(i=0; i<tribe->get_nrbuildings(); i++) {
          Building_Descr* b=tribe->get_building_descr(i);
@@ -112,7 +113,7 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu(Editor_Interactive* p
    b->set_pic(g_gr->get_picture( PicMod_Game,  "pics/scrollbar_down.png" ));
    b->clickedid.set(this, &Trigger_Building_Option_Menu::clicked);
    posy+=20+spacing;
- 
+
    // Set Field Buttons
    new UITextarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
    posy+=20+spacing;
@@ -245,9 +246,9 @@ void Trigger_Building_Option_Menu::clicked(int i) {
             if(m_name->get_text())
                m_trigger->set_name( m_name->get_text() );
             m_trigger->set_coords(Coords(m_x,m_y));
-            if(m_trigger->get_player()!=m_player && m_trigger->get_player()!=-1) 
+            if(m_trigger->get_player()!=m_player && m_trigger->get_player()!=-1)
                m_parent->unreference_player_tribe(m_trigger->get_player(), m_trigger);
-            if(m_trigger->get_player()!=m_player) { 
+            if(m_trigger->get_player()!=m_player) {
                m_trigger->set_player(m_player);
                m_parent->reference_player_tribe(m_player, m_trigger);
             }

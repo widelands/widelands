@@ -27,7 +27,7 @@
 #include "network_lan_promotion.h"
 #include "network_ggz.h"
 #include "profile.h"
-
+#include "wlapplication.h"
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this

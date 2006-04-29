@@ -31,6 +31,7 @@
 #include "map.h"
 #include "graphic.h"
 #include "util.h"
+#include "wlapplication.h"
 
 Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive* parent, Event_Unhide_Area* event) :
    UIWindow(parent, 0, 0, 180, 280, _("Event Option Menu")) {

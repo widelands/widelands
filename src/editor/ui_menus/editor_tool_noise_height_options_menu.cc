@@ -25,6 +25,7 @@
 #include "editor_increase_height_tool.h"
 #include "editor_decrease_height_tool.h"
 #include "editor_noise_height_tool.h"
+#include "wlapplication.h"
 
 /*
 =================================================
@@ -109,7 +110,7 @@ void Editor_Tool_Noise_Height_Options_Menu::update(void) {
 
    sprintf(buf, "%i", m_nht->get_sht()->get_set_to());
    m_set->set_text(buf);
-   
+
    select_correct_tool();
 
 }

@@ -26,6 +26,7 @@
 #include "playerdescrgroup.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -78,11 +79,11 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 
 		m_players[i-1] = pdg;
 		y += 30;
-		
+
 		if (m_netgame!=0)
 		    m_netgame->set_player_description_group (i, pdg);
 	}
-	
+
 	if (m_netgame==0)
 		m_players[0]->set_player_type (Player::playerLocal);
 
@@ -145,16 +146,16 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			m_players[i]->set_player_name(name);
 			m_players[i]->allow_changes(PlayerDescriptionGroup::CHANGE_EVERYTHING);
 		}
-		
+
 		if (m_netgame!=0) {
 			int allow=PlayerDescriptionGroup::CHANGE_NOTHING;
-			
+
 			if (m_netgame->is_host() && i>0)
 				allow|=PlayerDescriptionGroup::CHANGE_ENABLED;
-			
+
 			if (m_netgame->get_playernum()==i+1)
 				allow|=PlayerDescriptionGroup::CHANGE_TRIBE;
-			
+
 			m_players[i]->allow_changes ((PlayerDescriptionGroup::changemode_t) allow);
 		}
 	}
@@ -171,10 +172,10 @@ void Fullscreen_Menu_LaunchGame::select_map()
 		m_is_scenario=false;
 
 	delete msm;
-	
+
 	if (m_netgame)
 		static_cast<NetHost*>(m_netgame)->update_map();
-	
+
 	refresh();
 }
 

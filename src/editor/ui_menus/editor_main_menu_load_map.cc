@@ -36,6 +36,7 @@
 #include "overlay_manager.h"
 #include "world.h"
 #include "map_loader.h"
+#include "wlapplication.h"
 
 /*
 ===============
@@ -205,9 +206,9 @@ void Main_Menu_Load_Map::double_clicked(int) {
  * fill the file list
  */
 void Main_Menu_Load_Map::fill_list(void) {
-   // Fill it with all files we find. 
+   // Fill it with all files we find.
    g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
-  
+
    // First, we add all directorys
    // We manually add the parent directory
    if(m_curdir!=m_basedir) {
@@ -231,14 +232,14 @@ void Main_Menu_Load_Map::fill_list(void) {
 
       m_ls->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
-  
+
    Map* map=new Map();
 
    for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
       const char *name = pname->c_str();
-      
+
       Map_Loader* m_ml = map->get_correct_loader(name);
-      if(!m_ml) continue; 
+      if(!m_ml) continue;
 
       try {
          m_ml->preload_map(true);
@@ -255,7 +256,7 @@ void Main_Menu_Load_Map::fill_list(void) {
 
    }
    delete map;
-   
+
    if(m_ls->get_nr_entries())
       m_ls->select(0);
 }
@@ -311,7 +312,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
          // only register, when theres no building there
          BaseImmovable* imm = m_parent->get_map()->get_field(fc)->get_immovable();
          if(imm && imm->get_type() == Map_Object::BUILDING) continue;
-         
+
          // no building, place overlay
          m_parent->get_map()->get_overlay_manager()->register_overlay(fc,picid,8, Coords(w/2,STARTING_POS_HOTSPOT_Y));
       }
@@ -336,7 +337,7 @@ void Main_Menu_Load_Map::load_map(std::string filename) {
 
       // Tell the interactive that the map is saved and all
       m_parent->set_need_save(false);
-      
+
       // Redraw everything
       m_parent->need_complete_redraw();
 

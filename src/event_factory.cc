@@ -36,6 +36,7 @@
 #include "event_unhide_objective.h"
 #include "error.h"
 #include "wexception.h"
+#include "wlapplication.h"
 
 
 static const int nr_of_events=7;
@@ -57,13 +58,13 @@ Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
 Event* Event_Factory::get_correct_event(const char* id) {
    std::string str = id;
    if( str == "message_box" ) return new Event_Message_Box();
-   else if( str == "move_view" ) return new Event_Move_View(); 
-   else if( str == "unhide_area" ) return new Event_Unhide_Area(); 
-   else if( str == "conquer_area" ) return new Event_Conquer_Area(); 
-   else if( str == "allow_building" ) return new Event_Allow_Building(); 
-   else if( str == "set_null_trigger" ) return new Event_Set_Null_Trigger(); 
-   else if( str == "unhide_objective" ) return new Event_Unhide_Objective(); 
-   else 
+   else if( str == "move_view" ) return new Event_Move_View();
+   else if( str == "unhide_area" ) return new Event_Unhide_Area();
+   else if( str == "conquer_area" ) return new Event_Conquer_Area();
+   else if( str == "allow_building" ) return new Event_Allow_Building();
+   else if( str == "set_null_trigger" ) return new Event_Set_Null_Trigger();
+   else if( str == "unhide_objective" ) return new Event_Unhide_Objective();
+   else
       throw wexception("Event_Factory::get_correct_event: Unknown event id found: %s\n", id);
    // never here
    return 0;
@@ -82,12 +83,12 @@ Event* Event_Factory::make_event_with_option_dialog(const char* id, Editor_Inter
 
    int retval=-100;
    std::string str = id;
-   if( str == "message_box" ) { Event_Message_Box_Option_Menu* t=new Event_Message_Box_Option_Menu(m_parent, static_cast<Event_Message_Box*>(event)); retval=t->run(); delete t; } 
-   else if( str == "move_view" ) { Event_Move_View_Option_Menu* t=new Event_Move_View_Option_Menu(m_parent, static_cast<Event_Move_View*>(event)); retval=t->run(); delete t; } 
-   else if( str == "unhide_area" ) { Event_Unhide_Area_Option_Menu* t=new Event_Unhide_Area_Option_Menu(m_parent, static_cast<Event_Unhide_Area*>(event)); retval=t->run(); delete t; } 
-   else if( str == "conquer_area" ) { Event_Conquer_Area_Option_Menu* t=new Event_Conquer_Area_Option_Menu(m_parent, static_cast<Event_Conquer_Area*>(event)); retval=t->run(); delete t; } 
-   else if( str == "allow_building" ) { Event_Allow_Building_Option_Menu* t=new Event_Allow_Building_Option_Menu(m_parent, static_cast<Event_Allow_Building*>(event)); retval=t->run(); delete t; } 
-   
+   if( str == "message_box" ) { Event_Message_Box_Option_Menu* t=new Event_Message_Box_Option_Menu(m_parent, static_cast<Event_Message_Box*>(event)); retval=t->run(); delete t; }
+   else if( str == "move_view" ) { Event_Move_View_Option_Menu* t=new Event_Move_View_Option_Menu(m_parent, static_cast<Event_Move_View*>(event)); retval=t->run(); delete t; }
+   else if( str == "unhide_area" ) { Event_Unhide_Area_Option_Menu* t=new Event_Unhide_Area_Option_Menu(m_parent, static_cast<Event_Unhide_Area*>(event)); retval=t->run(); delete t; }
+   else if( str == "conquer_area" ) { Event_Conquer_Area_Option_Menu* t=new Event_Conquer_Area_Option_Menu(m_parent, static_cast<Event_Conquer_Area*>(event)); retval=t->run(); delete t; }
+   else if( str == "allow_building" ) { Event_Allow_Building_Option_Menu* t=new Event_Allow_Building_Option_Menu(m_parent, static_cast<Event_Allow_Building*>(event)); retval=t->run(); delete t; }
+
    if(retval==-100)
       throw wexception("Event_Factory::make_event_with_option_dialog: Unknown event id found: %s\n", id);
    if(retval)
@@ -108,7 +109,7 @@ Event_Descr* Event_Factory::get_correct_event_descr( const char* id ) {
    for( uint i = 0; i < Event_Factory::get_nr_of_available_events(); i++)
       if( EVENT_DESCRIPTIONS[i].id == str )
          return &EVENT_DESCRIPTIONS[i];
-   
+
    assert(0); // never here
    return 0;
 }

@@ -21,6 +21,7 @@
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "constants.h"
+#include "wlapplication.h"
 
 Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this
@@ -39,13 +40,13 @@ Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 	b = new UIButton(this, 60, 250, 174, 24, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_InetServerOptions::end_modal);
 	b->set_title(_("Back"));
-	
+
 	// Hostname
 	hostname=new UIEdit_Box(this, 288, 210, 174, 24, 2, 0);
-	hostname->set_text("localhost");	
-	// Player 
+	hostname->set_text("localhost");
+	// Player
 	playername=new UIEdit_Box(this, 288, 240, 174, 24, 2, 0);
-	playername->set_text(_("nobody"));	
+	playername->set_text(_("nobody"));
 }
 
 Fullscreen_Menu_InetServerOptions::~Fullscreen_Menu_InetServerOptions ()

@@ -31,6 +31,7 @@
 #include "ui_unique_window.h"
 #include "ui_listselect.h"
 #include "util.h"
+#include "wlapplication.h"
 
 /*
  * This is a modal box - The user must end this first
@@ -43,7 +44,7 @@ class New_Variable_Window : public UIWindow {
       bool handle_mouseclick(uint btn, bool down, int mx, int my);
 
       MapVariable* get_variable( void ) { return m_variable; }
-   
+
    private:
       Editor_Interactive* m_parent;
       MapVariable* m_variable;
@@ -54,11 +55,11 @@ class New_Variable_Window : public UIWindow {
 
 New_Variable_Window::New_Variable_Window(Editor_Interactive* parent) :
    UIWindow(parent, 0, 0, 135, 55, _("New Variable")) {
-  
+
    m_parent = parent;
    m_variable = 0;
-   
-   // What type 
+
+   // What type
    UIButton* b = new UIButton( this, 5, 5, 60, 20, 0, 0);
    b->set_title(_("Integer"));
    b->clickedid.set(this, &New_Variable_Window::clicked);
@@ -115,7 +116,7 @@ void New_Variable_Window::clicked(int i) {
          end_modal(1);
          break;
 
-      case 1: 
+      case 1:
          // String
          m_variable = new String_MapVariable( 0 );
          m_variable->set_name( buffer);
@@ -123,7 +124,7 @@ void New_Variable_Window::clicked(int i) {
          end_modal(1);
          break;
 
-      case 2: 
+      case 2:
          // back
          end_modal(0);
          break;
@@ -154,7 +155,7 @@ class Edit_Variable_Window : public UIWindow {
 
 Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UITable_Entry* te)
    : UIWindow(parent, 0, 0, 250, 85, _("Edit Variable")) {
-  
+
    m_parent=parent;
    m_te = te;
 
@@ -164,11 +165,11 @@ Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UITable_E
    new UITextarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
    m_name = new UIEdit_Box( this, 120, 5, 120, 20, 0, 0);
    m_name->set_text(m_te->get_string(0));
-   
+
    new UITextarea(this, 5, 30, 120, 20, _("Value"), Align_CenterLeft);
    m_val = new UIEdit_Box( this, 120, 35, 120, 20, 0, 0);
    m_val->set_text(m_te->get_string(1));
-  
+
    // back button
    UIButton* b = new UIButton( this, get_inner_w()/2-80-spacing, 60, 80, 20, 1, 0);
    b->set_title(_("Ok"));
@@ -206,15 +207,15 @@ void Edit_Variable_Window::clicked(int i) {
       // Back
       end_modal(0);
       return;
-   } 
+   }
 
    // Ok
-   
+
    // Extract value
    MapVariable* var = static_cast<MapVariable*>(m_te->get_user_data());
 
    switch( var->get_type() ) {
-      case MapVariable::MVT_INT: 
+      case MapVariable::MVT_INT:
       {
          char* endp;
          long ivar = strtol(m_val->get_text(), &endp, 0);
@@ -222,15 +223,15 @@ void Edit_Variable_Window::clicked(int i) {
          if (endp && *endp) {
             char buffer[1024];
             snprintf(buffer, sizeof(buffer), "%s %s", m_val->get_text(), _("is not a valid integer!"));
-            UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, _("Parse error!"), buffer, UIModal_Message_Box::OK); 
+            UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, _("Parse error!"), buffer, UIModal_Message_Box::OK);
             mb->run();
             delete mb;
             return;
          }
          char buffer[256];
-         snprintf(buffer, sizeof(buffer), "%li", ivar); 
-         
-         static_cast<Int_MapVariable*>(var)->set_value( ivar ); 
+         snprintf(buffer, sizeof(buffer), "%li", ivar);
+
+         static_cast<Int_MapVariable*>(var)->set_value( ivar );
          m_te->set_string(1, buffer );
       }
       break;
@@ -242,11 +243,11 @@ void Edit_Variable_Window::clicked(int i) {
       }
       break;
    }
-      
+
    var->set_name( m_name->get_text() );
    m_te->set_string(0, var->get_name() );
-   
-   end_modal(1); 
+
+   end_modal(1);
 }
 
 
@@ -296,7 +297,7 @@ Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UIUniqu
    for(int i = 0; i < mvm->get_nr_variables(); i++) {
       insert_variable( mvm->get_variable_by_nr( i ));
    }
-   
+
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -312,17 +313,17 @@ Unregister from the registry pointer
 Editor_Variables_Menu::~Editor_Variables_Menu()
 {
 }
-      
+
 /*
  * A Button has been clicked
  */
-void Editor_Variables_Menu::clicked( int n ) { 
+void Editor_Variables_Menu::clicked( int n ) {
    switch( n ) {
-      case 0: 
+      case 0:
       {
          // Create a new variable
          New_Variable_Window* nvw = new New_Variable_Window( m_parent );
-         if( nvw->run() ) { 
+         if( nvw->run() ) {
             insert_variable( nvw->get_variable() );
             clicked(1);
          }
@@ -334,18 +335,18 @@ void Editor_Variables_Menu::clicked( int n ) {
       {
          // Edit selected variable
          Edit_Variable_Window* evw = new Edit_Variable_Window( m_parent, m_table->get_entry(m_table->get_selection_index()) );
-         if( evw->run() ) 
+         if( evw->run() )
             m_table->sort();
          delete evw;
       }
       break;
 
-      case 2: 
+      case 2:
       {
          // Delete selected variable
          int n =  m_table->get_selection_index();
          MapVariable* mv = static_cast<MapVariable*>( m_table->get_entry( n )->get_user_data() );
-         
+
          // Otherwise, delete button should be disabled
          assert( !mv->is_delete_protected());
 
@@ -357,7 +358,7 @@ void Editor_Variables_Menu::clicked( int n ) {
          m_delete_button->set_enabled( false );
       }
       break;
-      
+
    }
 }
 
@@ -386,39 +387,39 @@ void Editor_Variables_Menu::table_dblclicked( int ) {
  */
 void Editor_Variables_Menu::insert_variable( MapVariable* var ) {
    const char* pic = 0;
-   
+
    switch( var->get_type() ) {
       case MapVariable::MVT_INT: pic = "pics/map_variable_int.png"; break;
       case MapVariable::MVT_STRING: pic = "pics/map_variable_string.png"; break;
       default: pic = "nothing";
    };
-   
+
    UITable_Entry* t = new UITable_Entry(m_table, var, g_gr->get_picture( PicMod_UI, pic ), true );
    t->set_string(0, var->get_name());
 
    std::string val;
 
    switch( var->get_type() ) {
-      case MapVariable::MVT_INT: 
+      case MapVariable::MVT_INT:
       {
          char buffer[256];
          snprintf(buffer, sizeof(buffer), "%li", static_cast<Int_MapVariable*>(var)->get_value());
-         val = buffer; 
+         val = buffer;
       }
       break;
-      
-      case MapVariable::MVT_STRING: 
+
+      case MapVariable::MVT_STRING:
       val = static_cast<String_MapVariable*>(var)->get_value();
       break;
 
       default: val = "";
    }
-   t->set_string(0, var->get_name()); 
-   t->set_string(1, val.c_str()); 
+   t->set_string(0, var->get_name());
+   t->set_string(1, val.c_str());
 
-   if( var->is_delete_protected()) 
+   if( var->is_delete_protected())
       t->set_color(RGBColor(255,0,0));
-   
+
    m_table->sort();
 }
 

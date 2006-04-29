@@ -33,32 +33,12 @@ WLApplication *WLApplication::the_singleton=0;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
-===============
-get_playback_offset
-
-Returns the position in the playback file
-===============
+/**
+ * Simple wrapper functions to make stdio file access less painful
+ *
+ * These will vanish when IO handling gets moved to C++ streams
 */
-int get_playback_offset()
-{
-	assert(WLApplication::get()->get_playback());
-
-	return ftell(WLApplication::get()->get_play_file());
-}
-
-/*
-===============
-write_record_char
-read_record_char
-write_record_int
-read_record_int
-write_record_code
-read_record_code
-
-Simple wrapper functions to make stdio file access less painful
-===============
-*/
+//@{
 void write_record_char(char v)
 {
 	assert(WLApplication::get()->get_rec_file());
@@ -115,8 +95,9 @@ void read_record_code(uchar code)
 
 	if (filecode != code)
 		throw wexception("%08X: Bad code %02X during playback (%02X expected). Mismatching executable versions?",
-				 get_playback_offset()-1, filecode, code);
+				 WLApplication::get()->get_playback_offset()-1, filecode, code);
 }
+//@}
 
 /*
 Notes on the implementation
@@ -165,7 +146,7 @@ WLApplication *WLApplication::get(int argc, char **argv)
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-WLApplication::WLApplication(int argc, char **argv):argc(argc),argv(argv)
+WLApplication::WLApplication(int argc, char **argv):m_argc(argc),m_argv(argv)
 {}
 
 
@@ -190,7 +171,7 @@ bool WLApplication::init()
 	//create the filesystem abstraction
 	//must be first - we wouldn't even find the config file
 	g_fs = LayeredFileSystem::Create();
-	setup_searchpaths(argc, argv);
+	setup_searchpaths(m_argc, m_argv);
 
 	g_fh = new Font_Handler();
 
@@ -222,6 +203,86 @@ void WLApplication::shutdown()
 	g_fs = 0;
 }
 
+/**
+ * Grab a given TextDomain. We keep a stack
+ * if a new one is grabbed, it is pushed on the stack.
+ * On release, it is dropped and the previous
+ * one is re-grabbed instead.
+ *
+ * So when a tribe loads, it grabs it's textdomain
+ * loads all data and releases it -> we're back in
+ * widelands domain. Negative: We can't translate error
+ * messages. Who cares?
+ */
+void WLApplication::grab_textdomain( const char* domain)
+{
+	bind_textdomain_codeset (domain, "UTF-8");
+	bindtextdomain( domain, LOCALE_PATH );
+	textdomain(domain);
+
+	m_textdomains.push_back( domain );
+}
+
+/**
+ * See \ref grab_textdomain()
+ */
+void WLApplication::release_textdomain()
+{
+	m_textdomains.pop_back();
+
+	//don't try to get the previous TD when the very first one ('widelands') just got dropped
+	if (m_textdomains.size()>0) {
+		const char* domain = m_textdomains.back().c_str();
+		bind_textdomain_codeset (domain, "UTF-8");
+		bindtextdomain( domain, LOCALE_PATH );
+		textdomain(domain);
+	}
+}
+
+/**
+ * Set The locale to the given string
+ */
+void WLApplication::set_locale( const char* str ) {
+	if( !str )
+		str = "";
+
+	// Somehow setlocale doesn't behave same on
+	// some systems.
+#ifdef __BEOS__
+	setenv ("LANG", str, 1);
+	setenv ("LC_ALL", str, 1);
+#endif
+#ifdef __APPLE__
+	setenv ("LANGUAGE", str, 1);
+	setenv ("LC_ALL", str, 1);
+#endif
+
+#ifdef _WIN32
+	const std::string env = std::string("LANG=") + str;
+	putenv(env.c_str());
+#endif
+
+	setlocale(LC_ALL, str); //call to libintl
+	m_locale=str;
+
+	if( m_textdomains.size() ) {
+		const char* domain = m_textdomains.back().c_str();
+		bind_textdomain_codeset (domain, "UTF-8");
+		bindtextdomain( domain, LOCALE_PATH );
+		textdomain(domain);
+	}
+}
+
+/**
+ * Returns the position in the playback file
+ */
+int WLApplication::get_playback_offset()
+{
+	assert(get_playback());
+
+	return ftell(get_play_file());
+}
+
 bool WLApplication::init_settings()
 {
 	Section *s=0;
@@ -236,8 +297,8 @@ bool WLApplication::init_settings()
 	}
 
 	// Set Locale and grab default domain
-	Sys_SetLocale( s->get_string( "language" ));
-	Sys_GrabTextdomain("widelands");
+	set_locale( s->get_string( "language" ));
+	grab_textdomain("widelands");
 
 	// Input
 	sys.should_die = false;
@@ -278,7 +339,7 @@ bool WLApplication::init_settings()
 void WLApplication::shutdown_settings()
 {
 	// To be proper, release our textdomain
-	Sys_ReleaseTextdomain();
+	release_textdomain();
 
 	// overwrite the old config file
 	g_options.write("config", true);
@@ -373,6 +434,9 @@ bool WLApplication::init_recordplaybackfile()
 	return true;
 }
 
+/**
+ * Close any open journal file
+ */
 void WLApplication::shutdown_recordplaybackfile()
 {
 	if (m_record) {
@@ -392,8 +456,8 @@ void WLApplication::shutdown_recordplaybackfile()
 */
 bool WLApplication::parse_command_line()
 {
-	for(int i = 1; i < argc; i++) {
-		std::string opt=argv[i];
+	for(int i = 1; i < m_argc; i++) {
+		std::string opt=m_argv[i];
 		std::string value="";
 
 		//special case for help because it allows single-dash-options

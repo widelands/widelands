@@ -25,6 +25,7 @@
 #include "util.h"
 #include "wexception.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
  * Constructor
@@ -66,13 +67,13 @@ void Game_Server_Protocol_Packet_ChatMessage::handle_reply(Game_Server_Connectio
       char buffer[1024];
 
       snprintf(buffer, 1024, _("Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"), CM_ACK, answer);
-   
+
       gsc->server_message( buffer );
    }
 }
 
 /*
- * Read from network 
+ * Read from network
  */
 void Game_Server_Protocol_Packet_ChatMessage::recv(Game_Server_Connection* gsc, Network_Buffer* buffer) {
    m_flags = buffer->get_8();

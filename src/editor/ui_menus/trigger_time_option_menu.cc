@@ -28,6 +28,7 @@
 #include "system.h"
 #include "error.h"
 #include "util.h"
+#include "wlapplication.h"
 
 Trigger_Time_Option_Menu::Trigger_Time_Option_Menu(Editor_Interactive* parent, Trigger_Time* trigger) :
    UIWindow(parent, 0, 0, 164, 180, _("Trigger Option Menu")) {

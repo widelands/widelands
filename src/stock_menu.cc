@@ -23,6 +23,7 @@
 #include "transport.h"
 #include "ui_button.h"
 #include "waresdisplay.h"
+#include "wlapplication.h"
 
 /*
 ===============
@@ -40,9 +41,9 @@ Stock_Menu::Stock_Menu(Interactive_Player *parent, UIUniqueWindowRegistry *regis
    m_waresdisplay = new WaresDisplay(this, 0, 0, parent->get_game(), parent->get_player());
    // Add with wares
    fill_waredisplay_with_wares();
-  
+
    set_inner_size(m_waresdisplay->get_w(), 0);
-   
+
    int spacing = 5;
    int nr_buttons = 4; // one more, turn page button is bigger
    int button_w = (get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
@@ -60,7 +61,7 @@ Stock_Menu::Stock_Menu(Interactive_Player *parent, UIUniqueWindowRegistry *regis
    b->clickedid.set(this, &Stock_Menu::clicked);
    posx += button_w*2 + 2*spacing;
    posy += 25 + spacing;
-   
+
    set_inner_size(get_inner_w(), posy);
 }
 
@@ -93,13 +94,13 @@ void Stock_Menu::clicked( int id ) {
          // Switch page
          switch_page();
       }
-      
+
    }
-   
+
 }
 
 /*
- * Switch to the next page, that is, show 
+ * Switch to the next page, that is, show
  * wares -> workers -> soldier
  */
 void Stock_Menu::switch_page(void) {
@@ -121,7 +122,7 @@ Push the current wares status to the WaresDisplay.
 */
 void Stock_Menu::think()
 {
-      if(m_curpage == 0) 
+      if(m_curpage == 0)
          fill_waredisplay_with_wares();
       else if(m_curpage == 1)
          fill_waredisplay_with_workers();

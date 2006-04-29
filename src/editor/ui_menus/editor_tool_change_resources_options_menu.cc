@@ -30,6 +30,7 @@
 #include "graphic.h"
 #include "error.h"
 #include "overlay_manager.h"
+#include "wlapplication.h"
 
 /*
 =================================================

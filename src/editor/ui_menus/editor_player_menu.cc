@@ -34,6 +34,7 @@
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
 #include "wexception.h"
+#include "wlapplication.h"
 
 /*
 =================================================
@@ -52,7 +53,7 @@ Create all the buttons etc...
 ===============
 */
 Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
-      Editor_Interactive::Editor_Tools* tools, int spt_tool_index, int make_infrs_tindex, UIUniqueWindowRegistry* registry) 
+      Editor_Interactive::Editor_Tools* tools, int spt_tool_index, int make_infrs_tindex, UIUniqueWindowRegistry* registry)
    : UIUniqueWindow(parent, registry, 340, 400, _("Player Options"))
 {
    // Initialisation
@@ -69,7 +70,7 @@ Editor_Player_Menu::Editor_Player_Menu(Editor_Interactive *parent,
    int width=20;
    int posx=offsx;
    int posy=offsy;
-      
+
    Tribe_Descr::get_all_tribes(&m_tribes);
 
    set_inner_size(375, 135);
@@ -157,15 +158,15 @@ void Editor_Player_Menu::update(void) {
    int spacing=5;
    int size=20;
    int posx=spacing;
-   
+
 
    // And recreate the needed
    for(i=0; i<nr_players; i++) {
       // Check if starting position is valid
       bool start_pos_valid=true;
       Coords start_pos=m_parent->get_map()->get_starting_pos(i+1);
-      if(start_pos.x==-1 && start_pos.y==-1) start_pos_valid=false; 
-      
+      if(start_pos.x==-1 && start_pos.y==-1) start_pos_valid=false;
+
       if(!m_plr_names[i]) {
           m_plr_names[i]=new UIEdit_Box(this, posx, posy, 140, size, 0, i);
           m_plr_names[i]->changedid.set(this, &Editor_Player_Menu::name_changed);
@@ -180,12 +181,12 @@ void Editor_Player_Menu::update(void) {
       }
       if(m_parent->get_map()->get_scenario_player_tribe(i+1)!="<undefined>")
          m_plr_set_tribes_buts[i]->set_title(m_parent->get_map()->get_scenario_player_tribe(i+1).c_str());
-      else { 
+      else {
          m_plr_set_tribes_buts[i]->set_title(m_tribes[0].c_str());
          m_parent->get_map()->set_scenario_player_tribe(i+1,m_tribes[0]);
       }
 
-      // Set Starting pos button 
+      // Set Starting pos button
       if(!m_plr_set_pos_buts[i]) {
           m_plr_set_pos_buts[i]=new UIButton(this, posx, posy, size, size, 0, i+1);
           m_plr_set_pos_buts[i]->clickedid.set(this, &Editor_Player_Menu::set_starting_pos_clicked);
@@ -212,7 +213,7 @@ void Editor_Player_Menu::update(void) {
       }
       m_plr_allowed_buildings[i]->set_enabled(0); // TODO enable this again: ->set_enabled(start_pos_valid)
       m_plr_allowed_buildings[i]->set_title("B"); // TODO: come up with a picture for this
-  
+
       posx=spacing;
       posy+=size+spacing;
    }
@@ -242,10 +243,10 @@ void Editor_Player_Menu::button_clicked(int n) {
       name.append(1,c2);
       m_parent->get_map()->set_nrplayers(nr_players);
       m_parent->get_map()->set_scenario_player_name(nr_players, name);
-      m_parent->get_map()->set_scenario_player_tribe(nr_players, m_tribes[0]); 
+      m_parent->get_map()->set_scenario_player_tribe(nr_players, m_tribes[0]);
       m_parent->set_need_save(true);
    } else {
-      if(!m_parent->is_player_tribe_referenced(nr_players)) { 
+      if(!m_parent->is_player_tribe_referenced(nr_players)) {
          std::string name= m_parent->get_map()->get_scenario_player_name(nr_players);
          std::string tribe=  m_parent->get_map()->get_scenario_player_tribe(nr_players);
          m_parent->get_map()->set_nrplayers(nr_players);
@@ -267,7 +268,7 @@ void Editor_Player_Menu::button_clicked(int n) {
  */
 void Editor_Player_Menu::player_tribe_clicked(int n) {
    // Tribe button has been clicked
-   if(!m_parent->is_player_tribe_referenced(n+1)) { 
+   if(!m_parent->is_player_tribe_referenced(n+1)) {
       UIButton* but=m_plr_set_tribes_buts[n];
       std::string t= but->get_title();
       if(!Tribe_Descr::exists_tribe(t))
@@ -306,7 +307,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(int n) {
          if(imm && imm->get_type() == Map_Object::BUILDING) return;
       }
    }
-   
+
    // Select tool set mplayer
    m_parent->select_tool(m_spt_index,0);
    static_cast<Editor_Set_Starting_Pos_Tool*>(m_tools->tools[m_spt_index])->set_current_player(n);
@@ -342,8 +343,8 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
    // Check if starting position is valid (was checked before
    // so must be true)
    Coords start_pos=m_parent->get_map()->get_starting_pos(n);
-   assert(start_pos.x!=-1 && start_pos.y!=-1); 
-   
+   assert(start_pos.x!=-1 && start_pos.y!=-1);
+
    Editor* editor=m_parent->get_editor();
 
    Player* p=editor->get_player(n);
@@ -391,14 +392,14 @@ void Editor_Player_Menu::make_infrastructure_clicked(int n) {
  * Allowed building button clicked
  */
 void Editor_Player_Menu::allowed_buildings_clicked(int n) {
-   
+
    Editor* editor=m_parent->get_editor();
-   
+
    if(!editor->get_player(n)) {
       // The player is not yet really on the map, call make infrastructure button first
       make_infrastructure_clicked(n);
    }
-   
+
    // Create the menu
    if (m_allow_buildings_menu.window) {
       delete m_allow_buildings_menu.window;

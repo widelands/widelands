@@ -25,6 +25,7 @@
 #include "map.h"
 #include "profile.h"
 #include "system.h"
+#include "wlapplication.h"
 
 static const int EVENT_VERSION = 1;
 

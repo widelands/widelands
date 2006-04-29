@@ -23,6 +23,7 @@
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "editor_tool.h"
+#include "wlapplication.h"
 
 /*
 ===============

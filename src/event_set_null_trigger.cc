@@ -27,6 +27,7 @@
 #include "map_trigger_manager.h"
 #include "profile.h"
 #include "trigger_null.h"
+#include "wlapplication.h"
 
 static const int EVENT_VERSION = 1;
 
