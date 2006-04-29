@@ -21,6 +21,7 @@
 #define WLAPPLICATION_H
 
 #include "graphic.h"
+#include <map>
 #include <string>
 #include <vector>
 
@@ -34,45 +35,19 @@ struct InputCallback {
 	void (*key)(bool down, int code, char c);
 };
 
-//TODO: rework this. bitshifting is not beautiful in cross platform systems
+/**
+ * \todo use SDL constants instead
+ * \todo bitshifting is not beautiful in cross platform code, use macro
+ * SDL_BUTTON instead
+*/
 enum { // use 1<<MOUSE_xxx for bitmasks
    MOUSE_LEFT = 0,
    MOUSE_MIDDLE,
    MOUSE_RIGHT
 };
 
-/*
-Notes on the implementation
----------------------------
-
-Mouse:
-When in GrabInput mode (default), the system and SDL mouse cursor is not
-connected to the internal mouse position. We rely on SDL to provide the correct
-relative movement information even when the mouse cursor is close to the window
-border. We don't not use the absolute mouse position provided by SDL at all.
-The internal mouse position is kept with sub-pixel accuracy to make mouse speed
-work.
-
-When GrabInput mode is off
-*/
-
-/*
-System will be the one place for complete session playback technology.
-Using a command line option, all input etc.. that passes through System can be
-saved in a file and played back later for intensive and slow profiling and
-testing (valgrind comes to mind).
-(This is completely independent from recorded games; recorded games consist of
-saved player commands and can be recorded and played back from the GUI)
-
-Note/TODO: Graphics are currently not handled by System, and it is non-essential
-for playback anyway. Additionally, we'll want several rendering backends
-(software and OpenGL).
-Maybe the graphics backend loader code should be in System, while the actual
-graphics work is done elsewhere.
-
-Mouse: Some mouse functions deal with button mask bits. Bits are simply obtained
-as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right are pressed"
-*/
+///the Graphic "singleton". \todo make into a real singleton
+extern Graphic *g_gr;
 
 /**
  * You know main functions, of course. This is the main class.
@@ -84,38 +59,85 @@ as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right are pressed
  * i18n, input handling, timing, low level networking and graphics setup (the
  * actual graphics work is done by \ref class Graphic).
  *
- * Equally important, the main event loop is chugging along in this class.
+ * Equally important, the main event loop is chugging along in this class. [not
+ * yet but soon #fweber4mar2006]
  *
  * \par WLApplication is a singleton
  *
  * Because of it's special purpose, having more than one WLApplication is
  * useless. So we implement singleton semantics:
- * \li A private(!) class variable (--> unique for the whole program)
- *     \ref the_singleton holds the only instance of WLApplication. It's private
- *     to make sure that \e nobody messes around with this very important thing.
+ * \li A private(!) static class variable (--> unique for the whole program,
+ *     although nobody can get at it) \ref the_singleton holds a pointer to the
+ *     only instance of WLApplication. It's private to make sure that \e nobody
+ *     messes around with this very important variable.
  * \li There is no public constructor. If there was, you'd be able to create
- *     more WLApplications.
+ *     more WLApplications. So constructor access must be encapsulated too.
  * \li The only way to get at the WLApplication object is to call
  *     \ref WLApplication::get(), which is static as well. Because of this,
  *     \ref get() can access \ref the_singleton even if no WLApplication object
  *     has been instantiated yet.
- *     \ref get() will \e always give you a valid WLApplication. If it doesn't
- *     exist, it will create one.
- * \li There is no need for a destructor. Just make sure you call
- *     \ref shutdown() when you're done.
+ *     \ref get() will \e always give you a valid WLApplication. If one doesn't
+ *     exist yet, it will be created.
+ * \li A destructor does not make sense. Just make sure you call \ref shutdown()
+ *     when you're done - in a sense, it's a destructor without the destruction
+ *     part ;-)
+ *
+ * These measures \e guarantee that there are no stray WLApplication objects
+ * floating around by accident.
  *
  * For testing purposes, we can spawn a second thread with widelands running in
  * it (see \ref init_double_game() ). The fact that WLApplication is a singleton
  * is not touched by this: threads start out as a byte exact memory copy, so
  * the two instances can't know (except for fork()'s return value) that they are
  * (or are not) a primary thread. Each WLApplication singleton really *is* a
- * singleton - inside it's process.
+ * singleton - inside it's own process.
  *
  * \par Session recording and playback
  *
- * For debugging purposes, the WLApplication can record (and of course play
- * back) a complete game session. Recording/Playback does \e not work with
- * --double !
+ * For debugging, e.g. profiling a real game without incurring the speed dis-
+ * advantage while playing, the WLApplication can record (and of course play
+ * back) a complete game session. To do so with guaranteed repeatability, every
+ * single event - including low level stuff like mouse movement - gets recorded
+ * or played back.
+ *
+ * During playback, external events are ignored to avoid interference with the
+ * playback (exception: F10 will cancel the playback immediately)
+ *
+ * Recording/Playback does not work with --double. It could be made possible
+ * but that feature wouldn't be very useful.
+ *
+ * \par The mouse cursor
+ *
+ * SDL can handle a mouse cursor on it's own, but only in black'n'white. That's
+ * not sufficient for a game.
+ *
+ * So Widelands must paint it's own cursor (even more so, as we have \e two
+ * cursors: the freefloating hand and the cross that moves on nodes) and hide
+ * the system cursor. Ordinarily, relative coordinates break down when the
+ * cursor leaves the window. This means we have to grab the mouse, then realtive
+ * coords are always available.
+ *
+ * Mouse: Some mouse functions deal with button mask bits. Bits are simply
+ * obtained as (1 << btnnr), so bitmask 5 = (1<<0)|(1<<2) means: "left and right
+ * are pressed"
+ *
+ * We also implement different mouse speed settings. To make this work, internal
+ * mouse position is kept at subpixel resolution.
+ *
+ * \todo What happens if a playback is canceled? Does the game continue or quit?
+ * \todo Can recording be canceled?
+ * \todo Should we allow to trigger recording ingame, starting with a snapshot
+ * savegame? Preferrably, the log would be stored inside the savegame. A new
+ * user interface for starting / stopping playback may bue useful with this.
+ * \todo How about a "pause" button during playback to examine the current game
+ * state?
+ * \todo Graphics are currently not handled by WLApplication, and it is non-
+ * essential for playback anyway. Additionally, we'll want several rendering
+ * backends (software and OpenGL). Maybe the graphics backend loader code should
+ * be in System, while the actual graphics work is done elsewhere.
+ * \todo Mouse handling is not documented yet
+ * \todo Refactor the mainloop
+ * \todo Sensible use of exceptions (goes for whole game)
  */
 class WLApplication {
 public:
@@ -125,7 +147,6 @@ public:
 	const bool init();
 	void shutdown();
 
-	// i18n
 	//@{
 static const char* translate( const char* str ){return gettext( str );}
 	void grab_textdomain( const char* );
@@ -134,47 +155,56 @@ static const char* translate( const char* str ){return gettext( str );}
 	const std::string get_locale() {return m_locale;}
 	//@}
 
-	// Record/Playback file handling
 	//@{
-	const bool get_playback() {return m_playback;}
-	const long int get_playback_offset();
+	///\return true if the game is being recorded
 	const bool get_record() {return m_record;}
+
+	///\return true if the currently running game is a playback
+	const bool get_playback() {return m_playback;}
+
+	///\return byte offset into the playback file, used with file reading
+	const long int get_playback_offset();
+
+	///\return a handle to the recording file
 	FILE *get_rec_file() {return m_frecord;}
+
+	///\return a handle to the playback file
 	FILE *get_play_file() {return m_fplayback;}
 	//@}
 
-	/**
-	 * Returns true if an external entity wants us to quit
-	 */
+	///\return true if an external entity wants us to quit
 	const bool should_die() {return m_should_die;}
+
 	const int get_time();
 
-	/**
-	 * Get the state of the current KeyBoard Button
-	 * \warning This function doesn't check for dumbness
-	 */
+	/// Get the state of the current KeyBoard Button
+	/// \warning This function doesn't check for dumbness
 	const bool get_key_state(const int key) {return SDL_GetKeyState(0)[key];}
 
-	// Mouse related properties
 	//@{
 	void set_mouse_pos(const int x, const int y);
+
 	/// Which mouse buttons are or are not pressed?
 	const uint get_mouse_buttons() {return m_mouse_buttons;}
-	/// The current X coordinate
+
+	/// The mouse's current X coordinate
 	const int get_mouse_x() {return m_mouse_x;}
-	/// The current Y coordinate
+
+	/// The mouse's current Y coordinate
 	const int get_mouse_y() {return m_mouse_y;}
 
 	void set_input_grab(const bool grab);
+
 	/// Swap left and right mouse key?
 	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}
+
 	void set_mouse_speed(const float speed);
 
-	/**
-	 * Lock the mouse cursor into place (e.g., for scrolling the map)
-	 */
+	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
+
 	void set_max_mouse_coords(const int x, const int y);
+
 	void do_warp_mouse(const int x, const int y);
 	//@}
 
@@ -183,24 +213,34 @@ static const char* translate( const char* str ){return gettext( str );}
 
 	void handle_input(const InputCallback *cb);
 
-	/**
-	 * Menus
-	 */
+	//@{
 	void mainmenu();
 	void mainmenu_singleplayer();
 	void mainmenu_multiplayer();
+	//@}
+
+	//not all of these need to be public, but I consider signal handling
+	//a public interface
+	//@{
+	void init_double_game();
+	static void signal_handler (int sig);
+	static void quit_handler();
+	static void yield_double_game();
+	//@}
 
 	//to be removed
 	//@{
-	void WLApplication::init_double_game();
-	static void WLApplication::signal_handler (int sig);
-	static void WLApplication::quit_handler();
-	static void WLApplication::yield_double_game();
+	//void WLApplication::init_double_game();
+	//static void WLApplication::signal_handler (int sig);
+	//static void WLApplication::quit_handler();
+	//static void WLApplication::yield_double_game();
 	//@}
 
+	// Used for --double
 	//@{
 	static int pid_me;
 	static int pid_peer;
+	///\todo Explain me
 	static volatile int may_run;
 	//@}
 
@@ -221,54 +261,99 @@ protected:
 	const bool parse_command_line();
 	void show_usage();
 
-	/// The commandline, conveniently repackaged
-	///\todo make this a vector<string>
-	//@{
-	const int m_argc;
-	const char **m_argv;
-	//@}
+	///The commandline, conveniently repackaged
+	std::map<std::string, std::string> m_commandline;
 
-	/// i18n
 	//@{
+	///The current locale
 	std::string m_locale;
+	///A stack of textdomains. On entering a new textdomain, the old one gets
+	///pushed on the stack. On leaving the domain again it is popped back.
+	///\see grab_texdomain()
 	std::vector<std::string> m_textdomains;
 	//@}
 
-	/// Journal files
 	//@{
-	bool m_playback, m_record;
-	char m_recordname[256], m_playbackname[256];
-	FILE *m_frecord, *m_fplayback;
+	///Whether we are recording
+	bool m_playback;
+
+	///Whether we are playing back
+	bool m_record;
+
+	///The recording file's name.
+	///\note This does \e not go through the layered filesystem!
+	char m_recordname[256];
+
+	///The playback file's name.
+	///\note This does \e not go through the layered filesystem!
+	char m_playbackname[256];
+
+	///The recording file (or NULL)
+	FILE *m_frecord;
+
+	///The playback file (or NULL)
+	FILE *m_fplayback;
 	//@}
 
 	/// Mouse handling
 	//@{
 	bool		m_input_grab;		// config options
+
+	///True if left and right mouse button should be swapped
 	bool		m_mouse_swapped;
+
+	///The (internal) mouse speed
 	float		m_mouse_speed;
 
+	///Current state of the mouse buttons
+	///\todo Replace by direct calls to SDL functions???
 	uint		m_mouse_buttons;
-	int		m_mouse_x;			// mouse position seen by the outside
+	int             m_mouse_x;              // mouse position seen by the outside
 	int		m_mouse_y;
+
+	///Boundary for the internal mouse's movement - identical to m_gfx_w
+	///\todo Remove this in favour of m_gfx_w?
 	int		m_mouse_maxx;
+
+	///Boundary for the internal mouse's movement - identical to m_gfx_y
+	///\todo Remove this in favour of m_gfx_y?
 	int		m_mouse_maxy;
 	bool		m_mouse_locked;
 
-	float		m_mouse_internal_x;		// internal state (only used in non-playback)
+	///the internal mouse position (sub-pixel accuracy for use with mouse
+	///speed)
+	float           m_mouse_internal_x;
+
+	///the internal mouse position (sub-pixel accuracy for use with mouse
+	///speed)
 	float		m_mouse_internal_y;
+
 	int		m_mouse_internal_compx;
+
 	int		m_mouse_internal_compy;
 	//@}
 
+	///Whether the SDL has been activated successfully
+	///\todo Replace with \ref SDL_WasInit()
 	bool		m_sdl_active;
+
+	///true if an external entity wants us to quit
 	bool		m_should_die;
 
-	// Graphics
+	///The Widelands window's width in pixels
 	int		m_gfx_w;
+
+	///The Widelands window's height in pixels
 	int		m_gfx_h;
+
+	///If true Widelands is (should be, we never know ;-) running
+	///in a fullscreen window
 	bool		m_gfx_fullscreen;
 
 private:
+	///Holds this process' one and only instance of WLApplication, if it was
+	///created already. NULL otherwise.
+	///\note This is private on purpose. Read the class documentation.
 	static WLApplication *the_singleton;
 };
 

@@ -35,14 +35,15 @@ int main(const int argc, const char** argv)
 	return 0;
 }
 
-//TODO: can this hack be folded into the above function? #fweber
+//TODO: can't this hack be folded into the above function? #fweber
 #ifdef __MINGW__
 #undef main
 
 /// This is a hack needed for mingw under windows
 int main(int argc, char** argv)
 {
-	WLApplication *g_app=WLApplication::get(argc, argv);
+	WLApplication * const g_app=
+	   WLApplication::get(argc, const_cast<const char**>(argv));
 
 	if (g_app->init()) {
 		g_app->run();

@@ -58,11 +58,13 @@ volatile int WLApplication::may_run=0;
 WLApplication *WLApplication::the_singleton=0;
 
 /**
- * Simple wrapper functions to make stdio file access less painful
+ * Write a char value to the recording file.
  *
- * These will vanish when IO handling gets moved to C++ streams
+ * \param v The character to be written
+ *
+ * \note Simple wrapper function to make stdio file access less painful
+ * Will vanish when IO handling gets moved to C++ streams
  */
-//@{
 void write_record_char(char v)
 {
 	assert(WLApplication::get()->get_rec_file());
@@ -72,6 +74,14 @@ void write_record_char(char v)
 	fflush(WLApplication::get()->get_rec_file());
 }
 
+/**
+ * Read a char value from the playback file
+ *
+ * \return The char that was read
+ *
+ *\note Simple wrapper function to make stdio file access less painful
+ * Will vanish when IO handling gets moved to C++ streams
+ */
 char read_record_char()
 {
 	char v;
@@ -84,6 +94,15 @@ char read_record_char()
 	return v;
 }
 
+/**
+ * Write an int value to the recording file.
+ *
+ * \param v The int to be written
+ *
+ * \note Not 64bit-safe!
+ * \note Simple wrapper function to make stdio file access less painful
+ * Will vanish when IO handling gets moved to C++ streams
+ */
 void write_record_int(int v)
 {
 	assert(WLApplication::get()->get_rec_file());
@@ -94,6 +113,13 @@ void write_record_int(int v)
 	fflush(WLApplication::get()->get_rec_file());
 }
 
+/**
+ * Read an int value from the playback file.
+ *
+ * \return The int that was read
+ * Simple wrapper function to make stdio file access less painful
+ * Will vanish when IO handling gets moved to C++ streams
+ */
 int read_record_int()
 {
 	int v;
@@ -106,11 +132,19 @@ int read_record_int()
 	return Little32(v);
 }
 
+/**
+ * \note Simple wrapper function to make stdio file access less painful
+ * Will vanish when IO handling gets moved to C++ streams
+ */
 void write_record_code(uchar code)
 {
 	write_record_char(code);
 }
 
+/**
+ * \note Simple wrapper function to make stdio file access less painful
+ * Will vanish when IO handling gets moved to C++ streams
+ */
 void read_record_code(uchar code)
 {
 	uchar filecode;
@@ -118,25 +152,11 @@ void read_record_code(uchar code)
 	filecode = read_record_char();
 
 	if (filecode != code)
-		throw wexception("%08lX: Bad code %02X during playback (%02X expected). Mismatching executable versions?",
-		                 WLApplication::get()->get_playback_offset()-1, filecode, code);
+		throw wexception("%08lX: Bad code %02X during playback (%02X "
+		                 "expected). Mismatching executable versions?",
+		                 WLApplication::get()->get_playback_offset()-1,
+			                 filecode, code);
 }
-//@}
-
-/*
-Notes on the implementation
----------------------------
-
-Mouse:
-When in GrabInput mode (default), the system and SDL mouse cursor is not
-connected to the internal mouse position. We rely on SDL to provide the correct
-relative movement information even when the mouse cursor is close to the window
-border. We don't not use the absolute mouse position provided by SDL at all.
-The internal mouse position is kept with sub-pixel accuracy to make mouse speed
-work.
-
-When GrabInput mode is off
-*/
 
 /**
  * The main entry point for the WLApplication singleton.
@@ -145,12 +165,14 @@ When GrabInput mode is off
  * WLApplication object when called. If neccessary, a new WLApplication instance
  * is created.
  *
- * While you \e can do the first call without parameters, it does not make
- * much sense.
+ * While you \e can do the first call to this method without parameters, it does
+ * not make much sense.
  *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  * \return An (always valid!) pointer to the WLApplication singleton
+ *
+ * \todo Return a reference - the return value is always valid anyway
  */
 WLApplication * const WLApplication::get(const int argc, const char **argv)
 {
@@ -165,21 +187,58 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * Initialize an instance of WLApplication.
  *
  * This constructor is protected \e on \e purpose !
- * Use \ref WLApplication::get() instead.
+ * Use \ref WLApplication::get() instead and look at the class description.
+ *
+ * For easier access, repackage argc/argv into an STL map. If you specify
+ * the same option more than once, only the last occurrence is effective.
  *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(const int argc, const char **argv)
-		:m_argc(argc),m_argv(argv)
-{}
+{
+	m_commandline["EXENAME"]=argv[0];
+
+	for (int i=1; i<argc; ++i) {
+		std::string opt=argv[i];
+		std::string value;
+		SSS_T pos;
+
+		//are we looking at an option at all?
+		if (opt.substr(0,2)=="--") {
+			//yes. remove the leading "--", just for cosmetics
+			opt.erase(0,2);
+		} else {
+			//no. mark the commandline as faulty
+			m_commandline.clear();
+			cout<<"Malformed option: "<<opt<<endl<<endl;
+			break;
+		}
+
+		//look if this option has a value
+		pos=opt.find("=");
+
+		if (pos==std::string::npos) { //if no equals sign found
+			value="";
+		} else {
+			//extract option value
+			value=opt.substr(pos+1, opt.size()-pos);
+
+			//remove value from option name
+			opt.erase(pos, opt.size()-pos);
+		}
+
+		m_commandline[opt]=value;
+	}
+}
 
 
 /**
  * The main loop. Plain and Simple.
  *
- * Push the first event on the event queue, then keep dispatching events until
- * it is time to quit.
+ * \todo Refactor the whole mainloop out of  class \ref UIPanel into here.
+ * In the future: push the first event on the event queue, then keep
+ * dispatching events until it is time to quit.
  */
 void WLApplication::run()
 {
@@ -189,7 +248,7 @@ void WLApplication::run()
 	intro->run();
 	delete intro;
 
-	//TODO: ??? #fweber
+	//TODO: what does this do? where does it belong? read up on GGZ! #fweber
 	if(NetGGZ::ref()->used())
 	{
 		if(NetGGZ::ref()->connect())
@@ -199,10 +258,12 @@ void WLApplication::run()
 			if(NetGGZ::ref()->host()) netgame = new NetHost();
 			else
 			{
-				while(!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
+				while(!NetGGZ::ref()->ip())
+					NetGGZ::ref()->data();
 
 				IPaddress peer;
-				SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(), WIDELANDS_PORT);
+				SDLNet_ResolveHost (&peer, NetGGZ::ref()->ip(),
+				                    WIDELANDS_PORT);
 				netgame = new NetClient(&peer);
 			}
 			netgame->run();
@@ -227,12 +288,12 @@ void WLApplication::run()
  * the actual mainloop will be throttled to 100fps.
  *
  * \param ev the retrieved event will be put here
- * \param throttle Limit event loop to 100fps max
- * \return
+ * \param throttle Limit recording to 100fps max (not the event loop itself!)
+ * \return true if an event was returned inside \ref ev, false otherwise
  */
 const bool WLApplication::poll_event(SDL_Event *ev, const bool throttle)
 {
-	bool haveevent;
+	bool haveevent=false;
 
 restart:
 	//inject synthesized events into the event queue when playing back
@@ -247,14 +308,19 @@ restart:
 				switch(code) {
 				case RFC_KEYDOWN:
 				case RFC_KEYUP:
-					ev->type = (code == RFC_KEYUP) ? SDL_KEYUP : SDL_KEYDOWN;
-					ev->key.keysym.sym = (SDLKey)read_record_int();
-					ev->key.keysym.unicode = read_record_int();
+					ev->type = (code == RFC_KEYUP) ?
+					           SDL_KEYUP : SDL_KEYDOWN;
+					ev->key.keysym.sym=
+					   (SDLKey)read_record_int();
+					ev->key.keysym.unicode=
+					   read_record_int();
 					break;
 
 				case RFC_MOUSEBUTTONDOWN:
 				case RFC_MOUSEBUTTONUP:
-					ev->type = (code == RFC_MOUSEBUTTONUP) ? SDL_MOUSEBUTTONUP : SDL_MOUSEBUTTONDOWN;
+					ev->type = (code == RFC_MOUSEBUTTONUP) ?
+					           SDL_MOUSEBUTTONUP :
+					           SDL_MOUSEBUTTONDOWN;
 					ev->button.button = read_record_char();
 					break;
 
@@ -272,7 +338,8 @@ restart:
 
 				default:
 					throw wexception("%08lX: Unknown event type %02X in playback.",
-					                 WLApplication::get()->get_playback_offset()-1, code);
+					                 WLApplication::get()->get_playback_offset()-1,
+						                 code);
 				}
 
 				haveevent = true;
@@ -283,7 +350,8 @@ restart:
 			}
 			else
 				throw wexception("%08lX: Bad code %02X in event playback.",
-				                 WLApplication::get()->get_playback_offset()-1, code);
+				                 WLApplication::get()->get_playback_offset()-1,
+					                 code);
 		}
 	else
 	{ //not playing back
@@ -291,21 +359,24 @@ restart:
 
 		if (haveevent)
 		{
-			// We edit mouse motion events in here, so that differences caused by
-			// GrabInput or mouse speed settings are invisible to the rest of the code
+			// We edit mouse motion events in here, so that
+			// differences caused by GrabInput or mouse speed
+			// settings are invisible to the rest of the code
 			switch(ev->type) {
 			case SDL_MOUSEMOTION:
 				ev->motion.xrel += m_mouse_internal_compx;
 				ev->motion.yrel += m_mouse_internal_compy;
-				m_mouse_internal_compx = m_mouse_internal_compy = 0;
+				m_mouse_internal_compx=m_mouse_internal_compy=0;
 
 				if (m_input_grab)
 				{
 					float xlast = m_mouse_internal_x;
 					float ylast = m_mouse_internal_y;
 
-					m_mouse_internal_x += ev->motion.xrel * m_mouse_speed;
-					m_mouse_internal_y += ev->motion.yrel * m_mouse_speed;
+					m_mouse_internal_x += ev->motion.xrel *
+					                      m_mouse_speed;
+					m_mouse_internal_y += ev->motion.yrel *
+					                      m_mouse_speed;
 
 					ev->motion.xrel = (int)m_mouse_internal_x - (int)xlast;
 					ev->motion.yrel = (int)m_mouse_internal_y - (int)ylast;
@@ -416,8 +487,8 @@ restart:
 	{ //not recording
 		if (haveevent)
 		{
-			// Eliminate any unhandled events to make sure record and playback are
-			// _really_ the same.
+			// Eliminate any unhandled events to make sure record
+			// and playback are _really_ the same.
 			// Yes I know, it's overly paranoid but hey...
 			switch(ev->type) {
 			case SDL_KEYDOWN:
@@ -568,16 +639,23 @@ void WLApplication::handle_input(const InputCallback *cb)
  */
 const bool WLApplication::init()
 {
+	//empty commandline means syntax errors in commandline
+	//user has already been informed (see constructor), so just quit
+	if (m_commandline.empty())
+		return false;
+
 	//create the filesystem abstraction
 	//must be first - we wouldn't even find the config file
 	g_fs = LayeredFileSystem::Create();
-	setup_searchpaths(m_argc, m_argv);
+	setup_searchpaths(m_commandline["EXENAME"]);
 
 	g_fh = new Font_Handler();
 
 	//load config file and parse command line settings
 	init_settings();
+
 	init_hardware();
+
 	init_recordplaybackfile();
 
 	return true;
@@ -588,10 +666,12 @@ const bool WLApplication::init()
  */
 void WLApplication::shutdown()
 {
-	//Use the opposite order of WLApplication::init()
+	//Do use the opposite order of WLApplication::init()
 
 	shutdown_recordplaybackfile();
+
 	shutdown_hardware();
+
 	shutdown_settings();
 
 	assert(g_fh);
@@ -604,14 +684,11 @@ void WLApplication::shutdown()
 }
 
 /**
- * Grab a given TextDomain. We keep a stack
- * if a new one is grabbed, it is pushed on the stack.
- * On release, it is dropped and the previous
- * one is re-grabbed instead.
+ * Grab a given TextDomain. If a new one is grabbed, it is pushed on the stack.
+ * On release, it is dropped and the previous one is re-grabbed instead.
  *
- * So when a tribe loads, it grabs it's textdomain
- * loads all data and releases it -> we're back in
- * widelands domain. Negative: We can't translate error
+ * So when a tribe loads, it grabs it's textdomain, loads all data and releases
+ * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
 void WLApplication::grab_textdomain( const char* domain)
@@ -630,7 +707,8 @@ void WLApplication::release_textdomain()
 {
 	m_textdomains.pop_back();
 
-	//don't try to get the previous TD when the very first one ('widelands') just got dropped
+	//don't try to get the previous TD when the very first one ('widelands')
+	//just got dropped
 	if (m_textdomains.size()>0) {
 		const char* domain = m_textdomains.back().c_str();
 		bind_textdomain_codeset (domain, "UTF-8");
@@ -685,7 +763,7 @@ const long int WLApplication::get_playback_offset()
 
 /**
  * Return the current time, in milliseconds
- * \todo Convert from int to Uint32
+ * \todo Convert from int to Uint32m SDL's native time resolution
  */
 const int WLApplication::get_time()
 {
@@ -732,16 +810,17 @@ void WLApplication::set_input_grab(bool grab)
 
 	if (grab) {
 		SDL_WM_GrabInput(SDL_GRAB_ON);
-
 		m_mouse_internal_x = m_mouse_x;
 		m_mouse_internal_y = m_mouse_y;
 	} else {
 		SDL_WM_GrabInput(SDL_GRAB_OFF);
-
 		do_warp_mouse(m_mouse_x, m_mouse_y);
 	}
 }
 
+/**
+ * Set a new mouse speed
+ */
 void WLApplication::set_mouse_speed(float speed)
 {
 	if (speed <= 0.1 || speed >= 10.0)
@@ -749,7 +828,7 @@ void WLApplication::set_mouse_speed(float speed)
 	m_mouse_speed = speed;
 }
 
-/** [kludge]
+/**
  * Set the mouse boundary after a change of resolution
  * This is manually imported by graphic.cc
  */
@@ -783,12 +862,15 @@ void WLApplication::do_warp_mouse(const int x, const int y)
 }
 
 /**
- * Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE) with
- * the given resolution.
+ * Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE)
+ * with the given resolution.
  * Throws an exception on failure.
  *
  * \note Because of the way pictures are handled now, this function must not be
  * called while UI elements are active.
+ *
+ * \todo Ensure that calling this with active UI elements does barf
+ * \todo Document parameters
  */
 Graphic* SW16_CreateGraphics(int w, int h, int bpp, bool fullscreen);
 void WLApplication::init_graphics(const int w, const int h,
@@ -854,7 +936,8 @@ const bool WLApplication::init_settings()
 	// KLUDGE!
 	// Without this, xres, yres and workareapreview get dropped by
 	// check_used().
-	// Profile needs support for a Syntax definition to solve this in a sensible way
+	// Profile needs support for a Syntax definition to solve this in a
+	// sensible way
 	s->get_string("xres");
 	s->get_string("yres");
 	s->get_bool("workareapreview");
@@ -872,7 +955,7 @@ const bool WLApplication::init_settings()
 }
 
 /**
- * Remember the last settings: writ them into the config file
+ * Remember the last settings: write them into the config file
  */
 void WLApplication::shutdown_settings()
 {
@@ -886,8 +969,7 @@ void WLApplication::shutdown_settings()
 /**
  * Start the hardware: switch to graphics mode, start sound handler
  *
- * \return true if there were no fatal errors that prevent the game from running,
- *         false otherwise
+ * \return true if there were no fatal errors that prevent the game from running
  */
 const bool WLApplication::init_hardware()
 {
@@ -939,6 +1021,8 @@ void WLApplication::shutdown_hardware()
 
 /**
  * Open record and/or playback file for writing/reading.
+ *
+ * \return bool if the setup was successful
  */
 const bool WLApplication::init_recordplaybackfile()
 {
@@ -991,125 +1075,106 @@ void WLApplication::shutdown_recordplaybackfile()
 }
 
 /**
- * Parse the command line given in \ref m_argc and \ref m_argv
+ * Parse the command line given in \ref m_commandline
  *
- * \return true if no errors, otherwise false
+ * \return false if there were errors during parsing \e or if "--help" was given,
+ * true otherwise.
 */
 const bool WLApplication::parse_command_line()
 {
-	for(int i = 1; i < m_argc; i++) {
-		std::string opt=m_argv[i];
-		std::string value="";
+	if(m_commandline.count("help")>0 || m_commandline.count("version")>0) {
+		show_usage();
+		m_commandline.erase("help");
+		m_commandline.erase("version");
+		return false;
+	}
 
-		//special case for help because it allows single-dash-options
-		if ((opt=="-h" || opt=="-help") ||
-		      (opt=="help" || opt=="usage") ||
-		      (opt=="-V" || opt=="--version"))
-		{
-			show_usage();
-			return false;
-		}
+	if(m_commandline.count("ggz")>0) {
+		NetGGZ::ref()->init();
+		m_commandline.erase("ggz");
+	}
 
-		//Are we looking at an option at all?
-		if (opt.substr(0,2)!="--") {
-			show_usage();
-			return false;
-		}
+	if(m_commandline.count("nosound")>0) {
+		g_sound_handler.m_nosound=true;
+		m_commandline.erase("nosound");
+	}
 
-		//Yes, it is an option. Remove the leading "--"
-		opt.erase(0,2);
+	if(m_commandline.count("nozip")>0) {
+		g_options.pull_section("global")->create_val("nozip","true");
+		m_commandline.erase("nozip");
+	}
 
-		//Handle parameter-less options first
-		if (opt=="ggz") {
-			NetGGZ::ref()->init();
-			continue;
-		}
-		if (opt=="nosound") {
-			g_sound_handler.m_nosound=true;
-			continue;
-		}
-		if (opt=="nozip") {
-			g_options.pull_section("global")->create_val("nozip","true");
-			continue;
-		}
 
-#ifdef DEBUG
-#ifndef __WIN32__
-		if (opt=="double") {
-			init_double_game();
-			continue;
-		}
-#endif // __WIN32__
-#endif // DEBUG
+	if(m_commandline.count("double")>0) {
+		#ifdef DEBUG
+		#ifndef __WIN32__
+		init_double_game();
+		#else
+		cout<<endl
+		<<"Sorry, no double-instance debugging on WIN32."<<endl
+		<<endl;
+		#endif
+		#else
+		cout<<"--double is disabled. This is not a debug build!"
+		<<endl;
+		#endif
 
-		//OK, we're done with simple options
+		m_commandline.erase("nozip");
+	}
 
-		//if opt doesn't contain "=" then we're looking at broken
-		//command line (or an unhandled param-less option)
-		SSS_T pos=opt.find("=");
-		if (pos==std::string::npos) {
+	//Note: it should be possible to record and playback at the same time,
+	//but why would you?
+	if(m_commandline.count("record")>0) {
+		if (m_commandline["record"].empty()) {
 			cout<<endl
-			<<"ERROR: invalid option: --"<<opt<<endl<<endl;
-
+			<<"ERROR: --record needs a filename!"<<endl<<endl;
 			show_usage();
 			return false;
 		}
 
-		//Extract the option value
-		value=opt.substr(pos+1, opt.size()-pos);
+		char expanded_filename[1024];
 
-		//Extract the option name
-		opt.erase(pos, opt.size()-pos);
+		//this bypasses the layered filesystem on purpose!
+		FS_CanonicalizeName(expanded_filename, 1024,
+		                    m_commandline["record"].c_str());
+		snprintf(m_recordname, sizeof(m_recordname), "%s",
+		         expanded_filename);
 
-		//Note: value might still be an empty string!
-		//This is valid because conffile params might be overridden to
-		//be empty
+		m_commandline.erase("record");
+	}
 
-		//Note: it should be possible to record and playback at the same time,
-		//but why would you?
-		if (opt=="record") {
-			if (value.empty()) {
-				cout<<endl
-				<<"ERROR: --record needs a filename!"<<endl<<endl;
-				show_usage();
-				return false;
-			}
-
-			char expanded_filename[1024];
-
-			//this bypasses the layered filesystem on purpose!
-			FS_CanonicalizeName(expanded_filename, 1024, value.c_str());
-			snprintf(m_recordname, sizeof(m_recordname), "%s", expanded_filename);
-			continue;
+	if(m_commandline.count("playback")>0) {
+		if (m_commandline["playback"].empty()) {
+			cout<<endl
+			<<"ERROR: --playback needs a filename!"<<endl<<endl;
+			show_usage();
+			return false;
 		}
 
-		//Note: it should be possible to record and playback at the same time,
-		//but why would you?
-		if (opt=="playback") {
-			if (value.empty()) {
-				cout<<endl
-				<<"ERROR: --playback needs a filename!"<<endl<<endl;
-				show_usage();
-				return false;
-			}
+		char expanded_filename[1024];
 
-			char expanded_filename[1024];
+		//this bypasses the layered filesystem on purpose!
+		FS_CanonicalizeName(expanded_filename, 1024,
+		                    m_commandline["playback"].c_str());
+		snprintf(m_playbackname, sizeof(m_playbackname), "%s",
+		         expanded_filename);
 
-			//this bypasses the layered filesystem on purpose!
-			FS_CanonicalizeName(expanded_filename, 1024, value.c_str());
-			snprintf(m_playbackname, sizeof(m_playbackname), "%s", expanded_filename);
-			continue;
-		}
+		m_commandline.erase("playback");
+	}
 
-		//TODO: barf here on unkown option
+	//If it hasn't been handled yet it's probably an attempt to
+	//override a conffile setting
+	//With typos, this will create invalid config settings. They
+	//will be taken care of (==ignored) when saving the options
 
-		//If it hasn't been handled yet it's probably an attempt to
-		//override a conffile setting
-		//With typos, this will create invalid config settings. They
-		//will be taken care of (==ignored) when saving the options
-		g_options.pull_section("global")->create_val(opt.c_str(),
-		      value.c_str());
+	map<std::string, std::string>::const_iterator it;
 
+	for(it=m_commandline.begin();it!=m_commandline.end();++it) {
+		//TODO: barf here on unkown option the list of known options
+		//TODO: needs to be centralized
+
+		g_options.pull_section("global")->create_val(it->first.c_str(),
+		      it->second.c_str());
 	}
 
 	return true;
@@ -1120,7 +1185,6 @@ const bool WLApplication::parse_command_line()
  */
 void WLApplication::show_usage()
 {
-	//TODO: i18n this whole block
 	cout<<"This is Widelands-"<<VERSION<<endl<<endl
 	<<"Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"<<endl
 	<<endl
@@ -1128,26 +1192,27 @@ void WLApplication::show_usage()
 	<<endl
 	<<" --<config-entry-name>=value overwrites any config file setting"<<endl
 	<<endl
-	<<" --record=FILENAME         Record all events to the given filename for later playback"<<endl
-	<<" --playback=FILENAME       Playback given filename (see --record)"<<endl
+	<<" --record=FILENAME    Record all events to the given filename for later playback"<<endl
+	<<" --playback=FILENAME  Playback given filename (see --record)"<<endl
 	<<endl
-	<<" --coredump=[yes|no]       Generates a core dump on segfaults instead of using the SDL"<<endl
+	<<" --coredump=[yes|no]  Generates a core dump on segfaults instead of using the SDL"<<endl
 	<<endl
-	<<" --ggz                     Starts game as GGZ Gaming Zone client (don't use!)"<<endl
-	<<" --nosound                 Starts the game with sound disabled"<<endl
-	<<" --nozip                   Do not save files as binary zip archives."<<endl
+	<<" --ggz                Starts game as GGZ Gaming Zone client (don't use!)"<<endl
+	<<" --nosound            Starts the game with sound disabled"<<endl
+	<<" --nozip              Do not save files as binary zip archives."<<endl
 	<<endl
 #ifdef DEBUG
 #ifndef __WIN32__
-	<<" --double                  Start the game twice (for localhost network testing)"<<endl
+	<<" --double             Start the game twice (for localhost network testing)"<<endl
 	<<endl
 #endif
 #endif
-	<<" --help                    Show this help"<<endl
+	<<" --help               Show this help"<<endl
 	<<endl
 	<<"Bug reports? Suggestions? Check out the project website:"<<endl
-	<<"  http://www.sourceforge.net/projects/widelands"<<endl
-	<<"Hope you enjoy this game!"<<endl;
+	<<"        http://www.sourceforge.net/projects/widelands"<<endl
+	<<endl
+	<<"Hope you enjoy this game!"<<endl<<endl;
 }
 
 /**
@@ -1179,11 +1244,19 @@ void WLApplication::init_double_game ()
 	atexit (quit_handler);
 }
 
+/**
+ * On SIGUSR1, allow ourselves to continue running
+ */
 void WLApplication::signal_handler (int sig)
 {
 	may_run++;
 }
 
+/**
+ * Kill the other instance when exiting
+ *
+ * \todo This works but is not very clean (each process killing each other)
+ */
 void WLApplication::quit_handler()
 {
 	kill (pid_peer, SIGTERM);
@@ -1191,6 +1264,12 @@ void WLApplication::quit_handler()
 	kill (pid_peer, SIGKILL);
 }
 
+/**
+ * Voluntarily yield to the second Widelands process. This was implemented
+ * because some machines got horrible responsiveness when using --double, so we
+ * forced good reponsiveness by using cooperative multitasking (between the two
+ * Widelands instances, that is)
+ */
 void WLApplication::yield_double_game()
 {
 	if (pid_me==0)
@@ -1209,9 +1288,8 @@ void WLApplication::yield_double_game()
 }
 
 /**
- * Menus
+ * Run te main menu
  */
-//@{
 void WLApplication::mainmenu()
 {
 	bool done=false;
@@ -1272,6 +1350,9 @@ void WLApplication::mainmenu()
 	}
 }
 
+/**
+ * Run the singleplayer menu
+ */
 void WLApplication::mainmenu_singleplayer()
 {
 	bool done=false;
@@ -1330,21 +1411,24 @@ void WLApplication::mainmenu_singleplayer()
 	}
 }
 
+/**
+ * Run the multiplayer menu
+ */
 void WLApplication::mainmenu_multiplayer()
 {
+	NetGame* netgame = 0;
 	Fullscreen_Menu_NetSetup* ns = new Fullscreen_Menu_NetSetup();
+
 	if(NetGGZ::ref()->tables().size() > 0) ns->fill(NetGGZ::ref()->tables());
 	int code=ns->run();
-
-	NetGame* netgame = 0;
 
 	if (code==Fullscreen_Menu_NetSetup::HOSTGAME)
 		netgame=new NetHost();
 	else if (code==Fullscreen_Menu_NetSetup::JOINGAME) {
 		IPaddress peer;
 
-		//			    if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
-		//				    throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
+		//if (SDLNet_ResolveHost (&peer, ns->get_host_address(), WIDELANDS_PORT) < 0)
+		//throw wexception("Error resolving hostname %s: %s\n", ns->get_host_address(), SDLNet_GetError());
 		ulong addr;
 		ushort port;
 
@@ -1356,7 +1440,6 @@ void WLApplication::mainmenu_multiplayer()
 
 		netgame=new NetClient(&peer);
 	} else if(code==Fullscreen_Menu_NetSetup::INTERNETGAME) {
-		delete ns;
 		Fullscreen_Menu_InetServerOptions* igo = new Fullscreen_Menu_InetServerOptions();
 		int code=igo->run();
 
@@ -1382,14 +1465,14 @@ void WLApplication::mainmenu_multiplayer()
 			il->run();
 			delete il;
 		}
-		//break;
 	}
 	else if((code == Fullscreen_Menu_NetSetup::JOINGGZGAME)
-	        || (code == Fullscreen_Menu_NetSetup::HOSTGGZGAME)) {
+	        || (code == Fullscreen_Menu_NetSetup::HOSTGGZGAME))
+	{
 		if(code == Fullscreen_Menu_NetSetup::HOSTGGZGAME) NetGGZ::ref()->launch();
 		if(NetGGZ::ref()->host()) netgame = new NetHost();
-		else
-		{
+
+		else {
 			while(!NetGGZ::ref()->ip()) NetGGZ::ref()->data();
 
 			IPaddress peer;
@@ -1397,12 +1480,11 @@ void WLApplication::mainmenu_multiplayer()
 			netgame = new NetClient(&peer);
 		}
 	}
-	else;
-	//break;
+
+	if (netgame!=0) {
+		netgame->run();
+		delete netgame;
+	}
 
 	delete ns;
-
-	netgame->run();
-	delete netgame;
 }
-//@}
