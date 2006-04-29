@@ -182,7 +182,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu::selected()
 ===========
 */
 void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int n, bool t) {
-   bool multiselect = Sys_GetKeyState(KEY_LCTRL) | Sys_GetKeyState(KEY_RCTRL);
+	bool multiselect = WLApplication::get()->get_key_state(KEY_LCTRL) | WLApplication::get()->get_key_state(KEY_RCTRL);
    if(t==false && (!multiselect || m_sbt->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
 
    if(!multiselect) {

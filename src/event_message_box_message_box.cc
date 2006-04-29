@@ -29,6 +29,7 @@
 #include "constants.h"
 #include "trigger_null.h"
 #include "util.h"
+#include "wlapplication.h"
 
 /*
  * The message box himself

@@ -25,6 +25,7 @@
 #include "ui_window.h"
 #include "constants.h"
 #include "keycodes.h"
+#include "wlapplication.h"
 
 //  Widht the horizontal border grapichs must have.
 #define HZ_B_TOTAL_PIXMAP_LEN 100
@@ -271,8 +272,11 @@ void UIWindow::draw_border(RenderTarget* dst)
 bool UIWindow::handle_mouseclick(uint btn, bool down, int mx, int my)
 {
    bool should_minimize =
-      ((( Sys_GetKeyState(KEY_LCTRL) | Sys_GetKeyState(KEY_RCTRL) ) && (btn == MOUSE_LEFT)) ||
-      (btn == MOUSE_MIDDLE)) && down;
+		   ((( WLApplication::get()->get_key_state(KEY_LCTRL) |
+		       WLApplication::get()->get_key_state(KEY_RCTRL) ) &&
+		     (btn == MOUSE_LEFT)) ||
+		    (btn == MOUSE_MIDDLE))
+		   && down;
 
 
    if(should_minimize) {

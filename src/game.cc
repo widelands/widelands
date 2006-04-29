@@ -52,7 +52,7 @@ Game::Game(void)
 
 	cmdqueue = new Cmd_Queue(this);
 
-	m_realtime = Sys_GetTime();
+	m_realtime = WLApplication::get()->get_time();
 
 	ipl = 0;
 
@@ -381,7 +381,7 @@ void Game::think(void)
 			cpl[i]->think();
 
 		int frametime = -m_realtime;
-		m_realtime = Sys_GetTime();
+		m_realtime =  WLApplication::get()->get_time();
 		frametime += m_realtime;
 
 		if (m_netgame!=0) {

@@ -34,6 +34,7 @@
 #include "player.h"
 #include "profile.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -62,7 +63,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 		set_dock_windows_to_edges(s.get_bool("dock_windows_to_edges", false));
 
 		// Switch to the new graphics system now, if necessary
-		Sys_InitGraphics
+		WLApplication::get()->init_graphics
 			(get_xres(), get_yres(),
 			 s.get_int("depth", 16), s.get_bool("fullscreen", false));
 
@@ -79,7 +80,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base* g) :
 	m_display_flags = dfDebug;
 #endif
 
-	m_lastframe = Sys_GetTime();
+	m_lastframe = WLApplication::get()->get_time();
 	m_frametime = 0;
 	m_avg_usframetime = 0;
 
@@ -202,7 +203,7 @@ Called once per frame by the UI code
 void Interactive_Base::think()
 {
 	// Timing
-	uint curframe = Sys_GetTime();
+	uint curframe = WLApplication::get()->get_time();
 
 	m_frametime = curframe - m_lastframe;
 	m_avg_usframetime = ((m_avg_usframetime * 15) + (m_frametime * 1000)) / 16;
@@ -212,14 +213,16 @@ void Interactive_Base::think()
    // scroll here
    const uint scrollval = 10;
 
+   WLApplication *app=WLApplication::get();
+
    if(keyboard_free()) {
-      if(Sys_GetKeyState(KEY_UP))
+      if(app->get_key_state(KEY_UP))
          get_mapview()->set_rel_viewpoint(Point(0, -scrollval));
-      if(Sys_GetKeyState(KEY_DOWN))
+      if(app->get_key_state(KEY_DOWN))
          get_mapview()->set_rel_viewpoint(Point(0, scrollval));
-      if(Sys_GetKeyState(KEY_LEFT))
+      if(app->get_key_state(KEY_LEFT))
          get_mapview()->set_rel_viewpoint(Point(-scrollval, 0));
-      if(Sys_GetKeyState(KEY_RIGHT))
+      if(app->get_key_state(KEY_RIGHT))
          get_mapview()->set_rel_viewpoint(Point(scrollval, 0));
    }
 

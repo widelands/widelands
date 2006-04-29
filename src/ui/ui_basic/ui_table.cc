@@ -25,6 +25,7 @@
 #include "ui_button.h"
 #include "ui_scrollbar.h"
 #include "ui_table.h"
+#include "wlapplication.h"
 
 /**
 Initialize a panel
@@ -48,7 +49,7 @@ UITable::UITable(UIPanel *parent, int x, int y, uint w, uint h, Align align, Dir
 
 	m_scrollbar = 0;
 
-   m_lineheight=g_fh->get_fontheight(UI_FONT_SMALL); 
+   m_lineheight=g_fh->get_fontheight(UI_FONT_SMALL);
 
    m_max_pic_width=0;
    m_last_click_time=-10000;
@@ -71,7 +72,7 @@ UITable::~UITable()
 }
 
 /*
- * Add a new colum to this table 
+ * Add a new colum to this table
  */
 void UITable::add_column(const char* name, Type type, int w) {
    uint i=0;
@@ -99,7 +100,7 @@ void UITable::add_column(const char* name, Type type, int w) {
 UITable_Entry* UITable::find_entry (const void* userdata)
 {
     unsigned int i;
-    
+
     for (i=0; i<m_entries.size(); i++)
 	if (m_entries[i]->get_user_data()==userdata)
 	    return m_entries[i];
@@ -113,14 +114,14 @@ UITable_Entry* UITable::find_entry (const void* userdata)
 void UITable::header_button_clicked(int n) {
    if(get_sort_colum()==n) {
       // Change sort direction
-      if(get_sort_direction()==UP) 
+      if(get_sort_direction()==UP)
          set_sort_direction(DOWN);
-      else 
+      else
          set_sort_direction(UP);
       sort();
       return;
-   } 
-   
+   }
+
    set_sort_column(n);
    set_sort_direction(m_default_sort_dir);
    sort();
@@ -140,12 +141,12 @@ void UITable::clear()
 		m_scrollbar->set_steps(1);
 	m_scrollpos = 0;
 	m_selection = -1;
-	m_last_click_time = -10000; 
+	m_last_click_time = -10000;
    m_last_selection = -1;
 }
 
 /**
-Redraw the table 
+Redraw the table
 */
 void UITable::draw(RenderTarget* dst)
 {
@@ -176,14 +177,14 @@ void UITable::draw(RenderTarget* dst)
       }
 
       RGBColor col = UI_FONT_CLR_FG;
-      if( e->use_color() ) 
+      if( e->use_color() )
          col = e->get_color();
-      
+
       int i=0;
       int curx=0;
       int curw;
       for(i=0; i<get_nr_columns(); i++) {
-         curw=m_columns[i].btn->get_w(); 
+         curw=m_columns[i].btn->get_w();
          int x;
          if (m_align & Align_Right)
             x = curx + (curw - 1);
@@ -193,14 +194,14 @@ void UITable::draw(RenderTarget* dst)
             // Pictures are always left aligned, leave some space here
             if(m_max_pic_width && i==0)
                x= curx + m_max_pic_width + 10;
-            else 
+            else
                x= curx + 1;
          }
 
          // Horizontal center the string
          g_fh->draw_string(dst, UI_FONT_SMALL, col, RGBColor(107,87,55), x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->get_string(i), m_align, -1);
-         
-         curx+=curw; 
+
+         curx+=curw;
       }
 
       y += lineheight;
@@ -217,22 +218,22 @@ bool UITable::handle_mouseclick(uint btn, bool down, int x, int y)
 		return false;
 
    if (down) {
-      int time=Sys_GetTime();
+	   int time=WLApplication::get()->get_time();
 
-      // This hick hack is needed if any of the 
+      // This hick hack is needed if any of the
       // callback functions calls clear to forget the last
       // clicked time.
-      int real_last_click_time=m_last_click_time; 
-      
+      int real_last_click_time=m_last_click_time;
+
       m_last_selection=m_selection;
       m_last_click_time=time;
 
       y = (y + m_scrollpos - m_columns[0].btn->get_h()) / get_lineheight();
       if (y >= 0 && y < (int)m_entries.size())
          select(y);
-     
+
       // check if doubleclicked
-      if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1) 
+      if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1)
          double_clicked.call(m_selection);
 
    }
@@ -259,7 +260,7 @@ void UITable::select(int i)
 /**
 Add a new entry to the table.
 */
-void UITable::add_entry(UITable_Entry* e, bool do_select) { 
+void UITable::add_entry(UITable_Entry* e, bool do_select) {
    int entry_height=0;
    int picid=e->get_picid();
    if(picid==-1) {
@@ -267,18 +268,18 @@ void UITable::add_entry(UITable_Entry* e, bool do_select) {
    } else {
       int w,h;
       g_gr->get_picture_size(picid, &w, &h);
-      entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);  
+      entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);
       if(m_max_pic_width<w) m_max_pic_width=w;
    }
    if(entry_height>m_lineheight) m_lineheight=entry_height;
 
    m_entries.push_back(e);
 
-	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2 )); 
+	m_scrollbar->set_steps(m_entries.size() * get_lineheight() - (get_h() - m_columns[0].btn->get_h() - 2 ));
 
    if( do_select )
       select( m_entries.size() - 1 );
-	
+
    update(0, 0, get_eff_w(), get_h());
 }
 
@@ -306,7 +307,7 @@ Return the total height (text + spacing) occupied by a single line
 */
 int UITable::get_lineheight()
 {
-	return m_lineheight+2; 
+	return m_lineheight+2;
 }
 
 /*
@@ -323,18 +324,18 @@ void UITable::remove_entry(int i) {
 
 /*
  * Sort the listbox alphabetically. make sure that the current selection stays
- * valid (though it might scroll out of visibility). 
- * start and end defines the beginning and the end of a subarea to 
+ * valid (though it might scroll out of visibility).
+ * start and end defines the beginning and the end of a subarea to
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
 void UITable::sort(void) {
-         
-   assert(m_columns[m_sort_column].type==STRING); 
-  
+
+   assert(m_columns[m_sort_column].type==STRING);
+
    int start, stop, it;
    if(get_sort_direction()==DOWN) {
-      start=0; 
+      start=0;
       stop=m_entries.size();
       it=1;
    } else {

@@ -236,7 +236,7 @@ void Options_Ctrl::save_options(){
    m_opt_section->set_bool("disable_music", !opt.music);
    m_opt_section->set_bool("disable_fx", !opt.fx);
    m_opt_section->set_string("language", opt.language.c_str());
-	Sys_SetInputGrab(opt.inputgrab);
+   WLApplication::get()->set_input_grab(opt.inputgrab);
 	WLApplication::get()->set_locale( opt.language.c_str() );
    g_sound_handler.set_disable_music( !opt.music );
    g_sound_handler.set_disable_fx( !opt.fx );

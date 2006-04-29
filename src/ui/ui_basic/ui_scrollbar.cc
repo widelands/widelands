@@ -23,6 +23,7 @@
 #include "system.h"
 #include "types.h"
 #include "ui_scrollbar.h"
+#include "wlapplication.h"
 
 #define SCROLLBAR_AUTOREPEAT_DELAY	200
 #define SCROLLBAR_AUTOREPEAT_TICK	50
@@ -323,15 +324,15 @@ void UIScrollbar::think()
 	if (m_pressed == None || m_pressed == Knob)
 		return;
 
-	if (Sys_GetTime() - m_time_nextact < 0)
+	if (WLApplication::get()->get_time() - m_time_nextact < 0)
 		return;
 
 	action(m_pressed);
 
 	// Schedule next tick
 	m_time_nextact += SCROLLBAR_AUTOREPEAT_TICK;
-	if (Sys_GetTime() - m_time_nextact >= 0)
-		m_time_nextact = Sys_GetTime();
+	if (WLApplication::get()->get_time() - m_time_nextact >= 0)
+		m_time_nextact = WLApplication::get()->get_time();
 }
 
 
@@ -349,7 +350,7 @@ bool UIScrollbar::handle_mouseclick(uint btn, bool down, int x, int y)
 			if (m_pressed != Knob)
 			{
 				action(m_pressed);
-				m_time_nextact = Sys_GetTime() + SCROLLBAR_AUTOREPEAT_DELAY;
+				m_time_nextact = WLApplication::get()->get_time() + SCROLLBAR_AUTOREPEAT_DELAY;
 			}
 			else
 			{

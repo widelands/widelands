@@ -23,6 +23,7 @@
 #include "map.h"
 #include "system.h"
 #include "world.h"
+#include "wlapplication.h"
 
 /*
 ===========
@@ -35,7 +36,7 @@ inits
 Editor::Editor() {
    m_eia=0;
 
-   m_realtime=Sys_GetTime();
+   m_realtime=WLApplication::get()->get_time();
 }
 
 
@@ -96,7 +97,7 @@ logic function for editor. advances timecounter
 void Editor::think() {
 	int lasttime = m_realtime;
 	int frametime;
-	m_realtime = Sys_GetTime();
+	m_realtime = WLApplication::get()->get_time();
 	frametime = m_realtime - lasttime;
 
    *get_game_time_pointer()+=frametime;

@@ -281,7 +281,7 @@ void Interactive_Player::think()
 
       Overlay_Chat_Messages ov;
       ov.msg =  t;
-      ov.starttime = Sys_GetTime();
+      ov.starttime = WLApplication::get()->get_time();
       m_show_chatmsg.push_back( ov );
    }
 
@@ -296,7 +296,7 @@ void Interactive_Player::think()
          str += t.msg;
          str += "\n";
 
-         if( Sys_GetTime() - m_show_chatmsg[i].starttime > CHAT_DISPLAY_TIME ) {
+	 if( WLApplication::get()->get_time() - m_show_chatmsg[i].starttime > CHAT_DISPLAY_TIME ) {
             m_show_chatmsg.erase( m_show_chatmsg.begin() + i);
             i--;
          }

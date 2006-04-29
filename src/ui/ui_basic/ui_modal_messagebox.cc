@@ -23,6 +23,7 @@
 #include "ui_button.h"
 #include "system.h"
 #include "graphic.h"
+#include "wlapplication.h"
 
 UIModal_Message_Box::UIModal_Message_Box(UIPanel* parent, std::string caption, std::string text, MB_Type type) :
    UIWindow(parent, 0, 0, 20, 20, caption.c_str()) {

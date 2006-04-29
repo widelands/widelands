@@ -23,6 +23,7 @@
 #include "profile.h"
 #include "rendertarget.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -44,7 +45,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 	// Switch graphics mode if necessary
 	Section *s = g_options.pull_section("global");
 
-	Sys_InitGraphics(MENU_XRES, MENU_YRES, s->get_int("depth", 16), s->get_bool("fullscreen", false));
+	WLApplication::get()->init_graphics(MENU_XRES, MENU_YRES, s->get_int("depth", 16), s->get_bool("fullscreen", false));
 
 	// Load background graphics
 	char buf[256];

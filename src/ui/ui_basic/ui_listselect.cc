@@ -24,6 +24,7 @@
 #include "types.h"
 #include "ui_listselect.h"
 #include "ui_scrollbar.h"
+#include "wlapplication.h"
 
 /**
 Initialize a list select panel
@@ -51,11 +52,11 @@ UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align 
 	m_scrollbar->set_pagesize(h - 2*g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar->set_steps(1);
 
-   m_lineheight=g_fh->get_fontheight(UI_FONT_SMALL); 
+   m_lineheight=g_fh->get_fontheight(UI_FONT_SMALL);
 
    m_last_click_time=-10000;
    m_last_selection=-1;
-	
+
 	m_show_check = show_check;
 	if (show_check) {
 		int pic_h;
@@ -67,7 +68,7 @@ UIListselect::UIListselect(UIPanel *parent, int x, int y, uint w, uint h, Align 
 	else {
 		m_max_pic_width=0;
 	}
-		
+
 }
 
 
@@ -94,7 +95,7 @@ void UIListselect::clear()
 		m_scrollbar->set_steps(1);
 	m_scrollpos = 0;
 	m_selection = -1;
-	m_last_click_time = -10000; 
+	m_last_click_time = -10000;
    m_last_selection = -1;
 }
 
@@ -121,7 +122,7 @@ void UIListselect::add_entry(const char *name, void* value, bool select, int pic
    } else {
       int w,h;
       g_gr->get_picture_size(picid, &w, &h);
-      entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);  
+      entry_height= (h >= g_fh->get_fontheight(UI_FONT_SMALL)) ? h : g_fh->get_fontheight(UI_FONT_SMALL);
       if(m_max_pic_width<w) m_max_pic_width=w;
    }
    if(entry_height>m_lineheight) m_lineheight=entry_height;
@@ -137,17 +138,17 @@ void UIListselect::add_entry(const char *name, void* value, bool select, int pic
 }
 
 /*
- * Switch two entries 
+ * Switch two entries
  */
 void UIListselect::switch_entries( int n, int m ) {
    if( n < 0 || m < 0) return;
    if( n >= get_nr_entries() || m >= get_nr_entries()) return;
-   
+
    Entry* temp = m_entries[n];
    m_entries[n] = m_entries[m];
    m_entries[m] = temp;
 
-   if( m_selection == n ) 
+   if( m_selection == n )
       m_selection = m;
    else if ( m_selection == m )
       m_selection = n;
@@ -155,17 +156,17 @@ void UIListselect::switch_entries( int n, int m ) {
 
 /*
  * Sort the listbox alphabetically. make sure that the current selection stays
- * valid (though it might scroll out of visibility). 
- * start and end defines the beginning and the end of a subarea to 
+ * valid (though it might scroll out of visibility).
+ * start and end defines the beginning and the end of a subarea to
  * sort, for example you might want to sort directorys for themselves at the
  * top of list and files at the bottom.
  */
 void UIListselect::sort(int gstart, int gend) {
-   uint start=gstart; 
+   uint start=gstart;
    uint stop=gend;
    if(gstart==-1) start=0;
    if(gend==-1) stop=m_entries.size();
-   
+
    Entry *ei, *ej;
    for(uint i=start; i<stop; i++)
       for(uint j=i; j<stop; j++) {
@@ -212,7 +213,7 @@ void UIListselect::select(int i)
 {
 	if (m_selection == i)
 		return;
-	
+
 	if (m_show_check) {
 		if (m_selection != -1)
 			m_entries[m_selection]->picid = -1;
@@ -230,7 +231,7 @@ Return the total height (text + spacing) occupied by a single line
 */
 int UIListselect::get_lineheight()
 {
-	return m_lineheight+2; 
+	return m_lineheight+2;
 }
 
 
@@ -267,14 +268,14 @@ void UIListselect::draw(RenderTarget* dst)
          // Pictures are always left aligned, leave some space here
 			if(m_max_pic_width)
             x= m_max_pic_width + 10;
-         else 
+         else
             x=1;
       }
 
       RGBColor col = UI_FONT_CLR_FG;
-      if( e->use_clr ) 
+      if( e->use_clr )
          col = e->clr;
-  
+
       // Horizontal center the string
 		g_fh->draw_string(dst, UI_FONT_SMALL, col, RGBColor(107,87,55), x, y + (get_lineheight()-g_fh->get_fontheight(UI_FONT_SMALL))/2, e->name, m_align, -1);
 
@@ -295,18 +296,18 @@ void UIListselect::draw(RenderTarget* dst)
  */
 bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)
 {
-   
+
 	if (btn != 0) // only left-click
 		return false;
 
    if (down) {
-      int time=Sys_GetTime();
+	   int time=WLApplication::get()->get_time();
 
-      // This hick hack is needed if any of the 
+      // This hick hack is needed if any of the
       // callback functions calls clear to forget the last
       // clicked time.
-      int real_last_click_time=m_last_click_time; 
-      
+      int real_last_click_time=m_last_click_time;
+
       m_last_selection=m_selection;
       m_last_click_time=time;
 		play_click();
@@ -314,9 +315,9 @@ bool UIListselect::handle_mouseclick(uint btn, bool down, int x, int y)
       y = (y + m_scrollpos) / get_lineheight();
       if (y >= 0 && y < (int)m_entries.size())
          select(y);
-     
+
       // check if doubleclicked
-      if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1) 
+      if(time-real_last_click_time < DOUBLE_CLICK_INTERVAL && m_last_selection==m_selection && m_selection!=-1)
          double_clicked.call(m_selection);
 
    }

@@ -42,6 +42,7 @@ Management classes and functions of the 16-bit software renderer.
 #define ROAD_NORMAL_PIC "pics/roadt_normal.png"
 #define ROAD_BUSY_PIC   "pics/roadt_busy.png"
 
+Graphic *g_gr;
 
 /*
 ===============

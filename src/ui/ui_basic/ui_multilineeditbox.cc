@@ -28,6 +28,7 @@
 #include "keycodes.h"
 #include "rendertarget.h"
 #include "error.h"
+#include "wlapplication.h"
 
 /**
 Initialize a edibox that supports multiline strings.
@@ -41,7 +42,7 @@ UIMultiline_Editbox::UIMultiline_Editbox(UIPanel *parent, int x, int y, uint w, 
 
    m_needs_update=false;
    m_cur_pos=get_text().size();
-   
+
    set_handle_mouse(true);
    set_can_focus(true);
 	set_think(false);

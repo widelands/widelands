@@ -279,7 +279,7 @@ void Editor_Interactive::field_clicked() {
  * click this field
  */
 void Editor_Interactive::set_fieldsel_pos(Coords c) {
-   uint btns = Sys_GetMouseButtons();
+	uint btns = WLApplication::get()->get_mouse_buttons();
    bool should_click= (c!=get_fieldsel_pos()) && (btns & ( 1 << MOUSE_LEFT ));
    Interactive_Base::set_fieldsel_pos(c);
    if(should_click)

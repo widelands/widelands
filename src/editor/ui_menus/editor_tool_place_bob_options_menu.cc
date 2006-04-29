@@ -133,7 +133,7 @@ this is called when one of the state boxes is toggled
 ===========
 */
 void Editor_Tool_Place_Bob_Options_Menu::clicked(int n, bool t) {
-   bool multiselect = Sys_GetKeyState(KEY_LCTRL) | Sys_GetKeyState(KEY_RCTRL);
+	bool multiselect = WLApplication::get()->get_key_state(KEY_LCTRL) | WLApplication::get()->get_key_state(KEY_RCTRL);
    if(t==false && (!multiselect || m_pit->get_nr_enabled()==1)) { m_checkboxes[n]->set_state(true); return; }
 
    if(!multiselect) {

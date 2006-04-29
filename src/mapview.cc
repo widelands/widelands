@@ -26,6 +26,7 @@
 #include "player.h"
 #include "rendertarget.h"
 #include "system.h"
+#include "wlapplication.h"
 
 /*
 ===============
@@ -40,7 +41,7 @@ Map_View::Map_View(UIPanel *parent, int x, int y, uint w, uint h, Interactive_Ba
 	m_intbase = player;
 	m_viewpoint.x = m_viewpoint.y = 0;
 	m_dragging = false;
-   m_complete_redraw_needed = true;
+   	m_complete_redraw_needed = true;
 }
 
 
@@ -155,9 +156,9 @@ bool Map_View::handle_mouseclick(uint btn, bool down, int x, int y)
 		if (down) {
 			m_dragging = true;
 			grab_mouse(true);
-			Sys_MouseLock(true);
+			WLApplication::get()->set_mouse_lock(true);
 		} else if (m_dragging) {
-			Sys_MouseLock(false);
+			WLApplication::get()->set_mouse_lock(false);
 			grab_mouse(false);
 			m_dragging = false;
 		}

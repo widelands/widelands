@@ -18,18 +18,6 @@ msgstr ""
 "X-Poedit-Country: POLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "The Widelands Development Team"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbarzyńcy"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "The mighty tribes of the east-lands!"
-
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Jeleń"
@@ -142,6 +130,11 @@ msgstr "Cieśla"
 msgid "Headquarters"
 msgstr "Baza"
 
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Helmsmith"
+
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Myśliczówka"
@@ -149,6 +142,11 @@ msgstr "Myśliczówka"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Zajazd"
+
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Drwal"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -210,6 +208,18 @@ msgstr "War Mill"
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Studnia"
+
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "The Widelands Development Team"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbarzyńcy"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "The mighty tribes of the east-lands!"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
@@ -424,11 +434,6 @@ msgstr "Hodowca"
 msgid "Geologist"
 msgstr "Geolog"
 
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Helmsmith"
-
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Myśliwy"
@@ -436,11 +441,6 @@ msgstr "Myśliwy"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Oberżysta"
-
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Drwal"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"

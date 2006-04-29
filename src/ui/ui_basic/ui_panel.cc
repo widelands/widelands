@@ -23,6 +23,7 @@
 #include "system.h"
 #include "types.h"
 #include "ui_panel.h"
+#include "wlapplication.h"
 
 #ifdef DEBUG
 #ifndef __WIN32__
@@ -122,10 +123,11 @@ Returns the return code passed to end_modal
 */
 int UIPanel::run()
 {
+	WLApplication *app=WLApplication::get();
 	UIPanel *prevmodal = _modal;
 	_modal = this;
 	_g_mousegrab = 0; // good ol' paranoia
-	Sys_MouseLock(false); // more paranoia :-)
+	app->set_mouse_lock(false); // more paranoia :-)
 
 	UIPanel *forefather = this;
 	while(forefather->_parent)
@@ -145,8 +147,8 @@ int UIPanel::run()
 			UIPanel::ui_key
 		};
 
-		Sys_HandleInput(&icb);
-		if (Sys_ShouldDie())
+		app->handle_input(&icb);
+		if (app->should_die())
 			end_modal(-1);
 
 		if (_flags & pf_think)
@@ -157,7 +159,7 @@ int UIPanel::run()
 
 			forefather->do_draw(rt);
 
-			rt->blit(Sys_GetMouseX(), Sys_GetMouseY(), s_default_cursor);
+			rt->blit(app->get_mouse_x(), app->get_mouse_y(), s_default_cursor);
 
 			if (UIPanel *lowest = _mousein)
 			{
@@ -441,7 +443,7 @@ void UIPanel::think()
 int UIPanel::get_mouse_x()
 {
 	if (!_parent)
-		return Sys_GetMouseX() - get_x()-get_lborder();
+		return WLApplication::get()->get_mouse_x() - get_x()-get_lborder();
 	else
 		return _parent->get_mouse_x() - get_x()-get_lborder();
 }
@@ -449,7 +451,7 @@ int UIPanel::get_mouse_x()
 int UIPanel::get_mouse_y()
 {
 	if (!_parent)
-		return Sys_GetMouseY() - get_y()-get_tborder();
+		return WLApplication::get()->get_mouse_y() - get_y()-get_tborder();
 	else
 		return _parent->get_mouse_y() - get_y()-get_tborder();
 }
@@ -461,7 +463,7 @@ int UIPanel::get_mouse_y()
 void UIPanel::set_mouse_pos(int x, int y)
 {
 	if (!_parent)
-		Sys_SetMousePos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
+		WLApplication::get()->set_mouse_pos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
 	else
 		_parent->set_mouse_pos(x + get_x()+get_lborder(), y + get_y()+get_tborder());
 }
@@ -930,8 +932,8 @@ void UIPanel::draw_tooltip(RenderTarget* dst, UIPanel *lowest)
 {
 	int tooltipX, tooltipY, tip_width, tip_height;
 
-	tooltipX = Sys_GetMouseX() + 20;
-	tooltipY = Sys_GetMouseY() + 25;
+	tooltipX = WLApplication::get()->get_mouse_y() + 20;
+	tooltipY = WLApplication::get()->get_mouse_y() + 25;
 
 	g_fh->get_size(UI_FONT_TOOLTIP, lowest->get_tooltip(), &tip_width, &tip_height, 0);
 	tip_width += 4;
