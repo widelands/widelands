@@ -23,12 +23,12 @@
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
+#include "i18n.h"
 #include "map.h"
 #include "map_variable_manager.h"
 #include "profile.h"
 #include "trigger_building.h"
 #include "util.h"
-#include "wlapplication.h"
 
 static const int TRIGGER_VERSION = 1;
 

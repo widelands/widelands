@@ -23,6 +23,7 @@
 #include "fullscreen_menu_options.h"
 #include "constants.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "languages.h"
 #include "profile.h"
 #include "sound_handler.h"
@@ -236,7 +237,7 @@ void Options_Ctrl::save_options(){
    m_opt_section->set_bool("disable_fx", !opt.fx);
    m_opt_section->set_string("language", opt.language.c_str());
    WLApplication::get()->set_input_grab(opt.inputgrab);
-	WLApplication::get()->set_locale( opt.language.c_str() );
+   i18n::set_locale( opt.language.c_str() );
    g_sound_handler.set_disable_music( !opt.music );
    g_sound_handler.set_disable_fx( !opt.fx );
 }

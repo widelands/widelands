@@ -26,6 +26,7 @@
 #include "game.h"
 #include "game_loader.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "map_event_manager.h"
 #include "map_trigger_manager.h"
 #include "network.h"
@@ -126,7 +127,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
             {
             std::string textdomain("");
             textdomain.append(mapname);
-	    WLApplication::get()->grab_textdomain(textdomain.c_str());
+	    i18n::grab_textdomain(textdomain.c_str());
             m_maploader->preload_map(scenario);
             log("Loading the locals for scenario. file: %s.mo\n", mapname);
             }
@@ -145,7 +146,7 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
 	m_maploader=0;
 
    if( scenario )
-	   WLApplication::get()->release_textdomain();
+	   i18n::release_textdomain();
 
 	return run();
 }

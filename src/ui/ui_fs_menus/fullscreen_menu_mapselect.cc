@@ -22,6 +22,7 @@
 #include "error.h"
 #include "fullscreen_menu_mapselect.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "map.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
@@ -29,7 +30,6 @@
 #include "ui_checkbox.h"
 #include "map_loader.h"
 #include "widelands_map_loader.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

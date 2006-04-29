@@ -21,13 +21,13 @@
 #include "editor_game_base.h"
 #include "font_handler.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "player.h"
 #include "rendertarget.h"
 #include "tribe.h"
 #include "ui_textarea.h"
 #include "waresdisplay.h"
 #include "worker.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

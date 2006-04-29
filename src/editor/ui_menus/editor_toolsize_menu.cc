@@ -20,10 +20,10 @@
 #include <stdio.h>
 #include "editor_toolsize_menu.h"
 #include "editorinteractive.h"
+#include "i18n.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "editor_tool.h"
-#include "wlapplication.h"
 
 /*
 ===============

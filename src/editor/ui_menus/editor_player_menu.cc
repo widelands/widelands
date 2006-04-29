@@ -25,6 +25,7 @@
 #include "editor_set_starting_pos_tool.h"
 #include "error.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"
@@ -34,7 +35,6 @@
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
 #include "wexception.h"
-#include "wlapplication.h"
 
 /*
 =================================================

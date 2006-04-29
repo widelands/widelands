@@ -17,6 +17,7 @@
  *
  */
 
+#include "i18n.h"
 #include "trigger_null_option_menu.h"
 #include "trigger_null.h"
 #include "ui_window.h"
@@ -27,7 +28,6 @@
 #include "editorinteractive.h"
 #include "error.h"
 #include "util.h"
-#include "wlapplication.h"
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, Trigger_Null* trigger) :
    UIWindow(parent, 0, 0, 164, 100, _("Trigger Option Menu")) {

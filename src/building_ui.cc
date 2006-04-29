@@ -25,18 +25,22 @@ buildings directly. Instead, they must send a player command through the Game
 class.
 */
 
-#include "interactive_player.h"
 #include "building.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
 #include "error.h"
 #include "font_handler.h"
 #include "game_debug_ui.h"
+#include "i18n.h"
+#include "interactive_player.h"
 #include "militarysite.h"
+#include "player.h"
 #include "productionsite.h"
 #include "rendertarget.h"
+#include "soldier.h"
 #include "trainingsite.h"
 #include "transport.h"
+#include "tribe.h"
 #include "ui_box.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
@@ -49,10 +53,6 @@ class.
 #include "waresdisplay.h"
 #include "wexception.h"
 #include "worker.h"
-#include "player.h"
-#include "soldier.h"
-#include "tribe.h"
-#include "wlapplication.h"
 
 static const char* pic_ok = "pics/menu_okay.png";
 static const char* pic_cancel = "pics/menu_abort.png";
@@ -1133,7 +1133,7 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
       if(worker->get_current_experience()!=-1 && worker->get_needed_experience()!=-1) {
          sprintf(buffer, "%i/%i", worker->get_current_experience(), worker->get_needed_experience());
          m_experience->set_text(buffer);
-	 sprintf(buffer, "%s", WLApplication::get()->translate(worker->get_becomes())); //don't use _() ! Would tag "worker->get_becomes" for translation !
+	 sprintf(buffer, "%s", i18n::translate(worker->get_becomes())); //don't use _() ! Would tag "worker->get_becomes" for translation !
          m_becomes->set_text(buffer);
       } else {
          m_experience->set_text("");

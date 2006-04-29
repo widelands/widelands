@@ -22,6 +22,7 @@
 #include "event_factory.h"
 #include "editor_event_menu.h"
 #include "editorinteractive.h"
+#include "i18n.h"
 #include "ui_unique_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
@@ -40,7 +41,6 @@
 #include "map_trigger_manager.h"
 #include "trigger_factory.h"
 #include "util.h"
-#include "wlapplication.h"
 
 /*
 ===============

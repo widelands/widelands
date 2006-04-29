@@ -24,13 +24,13 @@
 #include "game_main_menu_load_game.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
+#include "i18n.h"
 #include "interactive_player.h"
 #include "sound_handler.h"
 #include "stock_menu.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "ware_statistics_menu.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

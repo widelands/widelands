@@ -18,13 +18,13 @@
  */
 
 #include "editor_player_menu_allowed_buildings_menu.h"
+#include "i18n.h"
 #include "map.h"
 #include "tribe.h"
 #include "ui_listselect.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "player.h"
-#include "wlapplication.h"
 
 /*
 ===============

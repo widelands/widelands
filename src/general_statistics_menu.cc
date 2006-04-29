@@ -19,6 +19,7 @@
 
 #include "editor_game_base.h"
 #include "general_statistics_menu.h"
+#include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
 #include "rendertarget.h"
@@ -30,7 +31,6 @@
 #include "ui_textarea.h"
 #include "ware.h"
 #include "wui_plot_area.h"
-#include "wlapplication.h"
 
 #define PLOT_HEIGHT 100
 #define NR_DIFFERENT_DATASETS 7

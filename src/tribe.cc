@@ -22,8 +22,8 @@
 #include "error.h"
 #include "filesystem.h"
 #include "game.h"
+#include "i18n.h"
 #include "profile.h"
-#include "world.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "util.h"
@@ -31,6 +31,7 @@
 #include "wexception.h"
 #include "wlapplication.h"
 #include "worker.h"
+#include "world.h"
 
 using namespace std;
 
@@ -47,7 +48,7 @@ Tribe_Descr::Tribe_Descr(const char* name)
 
       // Grab the localisation text domain
       sprintf( directory, "tribe_%s", name );
-      WLApplication::get()->grab_textdomain( directory );
+      i18n::grab_textdomain( directory );
 
 		snprintf(directory, sizeof(directory), "tribes/%s", name);
 
@@ -58,7 +59,7 @@ Tribe_Descr::Tribe_Descr(const char* name)
       parse_bobs(directory);
       parse_root_conf(directory);
 
-      WLApplication::get()->release_textdomain( );
+      i18n::release_textdomain( );
 	}
 	catch(std::exception &e)
 	{

@@ -20,9 +20,9 @@
 #include "constants.h"
 #include "error.h"
 #include "fullscreen_menu_main.h"
+#include "i18n.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

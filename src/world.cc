@@ -20,15 +20,15 @@
 #include <iostream>
 #include <sstream>
 #include "constants.h"
+#include "error.h"
 #include "filesystem.h"
+#include "i18n.h"
 #include "graphic.h"
 #include "profile.h"
+#include "util.h"
 #include "wexception.h"
 #include "world.h"
 #include "worlddata.h"
-#include "util.h"
-#include "error.h"
-#include "wlapplication.h"
 
 using std::cerr;
 using std::endl;
@@ -163,7 +163,7 @@ World::World(const char* name)
 	{
       // Grab the localisation text domain
       sprintf( directory, "world_%s", name );
-      WLApplication::get()->grab_textdomain( directory );
+      i18n::grab_textdomain( directory );
 
       snprintf(directory, sizeof(directory), "worlds/%s", name);
 		m_basedir = directory;
@@ -173,7 +173,7 @@ World::World(const char* name)
 		parse_terrains();
 		parse_bobs();
 
-		WLApplication::get()->release_textdomain();
+		i18n::release_textdomain();
 	}
 	catch(std::exception &e)
 	{

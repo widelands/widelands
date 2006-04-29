@@ -23,11 +23,11 @@
 #include "ui_editbox.h"
 #include "ui_table.h"
 #include "constants.h"
+#include "i18n.h"
 #include "network.h"
 #include "network_lan_promotion.h"
 #include "network_ggz.h"
 #include "profile.h"
-#include "wlapplication.h"
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this

@@ -18,11 +18,11 @@
  */
 
 #include "editor_main_menu_save_map_make_directory.h"
+#include "i18n.h"
 #include "ui_button.h"
 #include "ui_editbox.h"
 #include "ui_textarea.h"
 #include "ui_window.h"
-#include "wlapplication.h"
 
 /*
  * Create this

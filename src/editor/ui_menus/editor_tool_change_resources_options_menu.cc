@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include "editor_tool_change_resources_options_menu.h"
 #include "editorinteractive.h"
+#include "i18n.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
 #include "ui_radiobutton.h"
@@ -30,7 +31,6 @@
 #include "graphic.h"
 #include "error.h"
 #include "overlay_manager.h"
-#include "wlapplication.h"
 
 /*
 =================================================

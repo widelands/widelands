@@ -40,6 +40,7 @@
 #include "editor_set_starting_pos_tool.h"
 #include "editor_tool_menu.h"
 #include "editor_toolsize_menu.h"
+#include "i18n.h"
 #include "interactive_base.h"
 #include "keycodes.h"
 #include "map.h"

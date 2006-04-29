@@ -26,6 +26,7 @@
 #include "editor_main_menu_save_map_make_directory.h"
 #include "error.h"
 #include "filesystem.h"
+#include "i18n.h"
 #include "profile.h"
 #include "ui_button.h"
 #include "ui_editbox.h"
@@ -36,7 +37,6 @@
 #include "wexception.h"
 #include "widelands_map_loader.h"
 #include "widelands_map_saver.h"
-#include "wlapplication.h"
 #include "zip_filesystem.h"
 
 /*

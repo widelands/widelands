@@ -22,12 +22,12 @@
 #include "event_set_null_trigger.h"
 #include "filesystem.h"
 #include "game.h"
+#include "i18n.h"
 #include "interactive_base.h"
 #include "map.h"
 #include "map_trigger_manager.h"
 #include "profile.h"
 #include "trigger_null.h"
-#include "wlapplication.h"
 
 static const int EVENT_VERSION = 1;
 

@@ -18,6 +18,7 @@
  */
 
 #include <stdio.h>
+#include "i18n.h"
 #include "event_unhide_area_option_menu.h"
 #include "event_unhide_area.h"
 #include "ui_window.h"
@@ -30,7 +31,6 @@
 #include "map.h"
 #include "graphic.h"
 #include "util.h"
-#include "wlapplication.h"
 
 Event_Unhide_Area_Option_Menu::Event_Unhide_Area_Option_Menu(Editor_Interactive* parent, Event_Unhide_Area* event) :
    UIWindow(parent, 0, 0, 180, 280, _("Event Option Menu")) {

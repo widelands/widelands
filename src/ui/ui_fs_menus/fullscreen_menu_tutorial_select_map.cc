@@ -19,10 +19,10 @@
 
 #include "error.h"
 #include "fullscreen_menu_tutorial_select_map.h"
+#include "i18n.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
 #include "constants.h"
-#include "wlapplication.h"
 
 static const char* filenames[] = {
    "campaigns/t01.wmf",

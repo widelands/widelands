@@ -21,10 +21,10 @@
 #define __S__OBJECTIVE_MANAGER_H
 
 #include "error.h"
+#include "i18n.h"
 #include <string>
 #include "trigger_null.h"
 #include "trigger_referencer.h"
-#include "wlapplication.h"
 
 /*
  * The Map Objective manager keeps all objectives

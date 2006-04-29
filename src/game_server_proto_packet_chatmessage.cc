@@ -22,9 +22,9 @@
 #include "game_server_connection.h"
 #include "game_server_proto.h"
 #include "game_server_proto_packet_chatmessage.h"
+#include "i18n.h"
 #include "util.h"
 #include "wexception.h"
-#include "wlapplication.h"
 
 /*
  * Constructor

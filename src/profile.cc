@@ -25,6 +25,7 @@
 #include "constants.h"
 #include "error.h"
 #include "filesystem.h"
+#include "i18n.h"
 #include "profile.h"
 #include "wexception.h"
 #include "wlapplication.h"
@@ -868,7 +869,7 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 					}
 
                if( translate_line && strlen( tail ))
-		       data += WLApplication::get()->translate( tail ); //do not use _() here! it would tag "tail" for translation
+		       data += i18n::translate( tail ); //do not use _() here! it would tag "tail" for translation
                else
                   data += tail;
                if (s && ! reading_multiline) { // error() may or may not throw

@@ -17,6 +17,7 @@
  *
  */
 
+#include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
 #include "rendertarget.h"
@@ -28,7 +29,6 @@
 #include "ware.h"
 #include "ware_statistics_menu.h"
 #include "wui_plot_area.h"
-#include "wlapplication.h"
 
 #define WARES_DISPLAY_BG "pics/ware_list_bg.png"
 

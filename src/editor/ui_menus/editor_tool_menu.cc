@@ -19,6 +19,7 @@
 
 #include "editor_tool_menu.h"
 #include "editorinteractive.h"
+#include "i18n.h"
 #include "ui_radiobutton.h"
 #include "ui_textarea.h"
 #include "editor_tool_change_height_options_menu.h"
@@ -35,7 +36,6 @@
 #include "editor_tool_change_resources_options_menu.h"
 #include "editor_increase_resources_tool.h"
 #include "editor_decrease_resources_tool.h"
-#include "wlapplication.h"
 
 /*
 ===============

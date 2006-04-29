@@ -19,12 +19,12 @@
 
 #include <stdio.h>
 #include "editor_info_tool.h"
+#include "i18n.h"
 #include "ui_multilinetextarea.h"
 #include "ui_window.h"
 #include "editorinteractive.h"
 #include "world.h"
 #include "map.h"
-#include "wlapplication.h"
 
 /*
 =============================

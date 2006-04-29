@@ -20,6 +20,7 @@
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
+#include "i18n.h"
 #include "interactive_player.h"
 #include "map.h"
 #include "player.h"
@@ -35,7 +36,6 @@
 #include "ware.h"
 #include "world.h"
 #include "sound_handler.h"
-#include "wlapplication.h"
 
 static const size_t STATISTICS_VECTOR_LENGTH = 10;
 

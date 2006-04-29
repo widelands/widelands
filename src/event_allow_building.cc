@@ -23,11 +23,11 @@
 #include "event_allow_building.h"
 #include "filesystem.h"
 #include "game.h"
+#include "i18n.h"
 #include "map.h"
 #include "player.h"
 #include "profile.h"
 #include "tribe.h"
-#include "wlapplication.h"
 
 static const int EVENT_VERSION = 1;
 

@@ -19,16 +19,16 @@
 
 
 #include "editorinteractive.h"
+#include "error.h"
+#include "i18n.h"
 #include "trigger_time.h"
 #include "trigger_null.h"
 #include "trigger_building.h"
 #include "trigger_factory.h"
-#include "error.h"
-#include "wexception.h"
 #include "trigger_time_option_menu.h"
 #include "trigger_null_option_menu.h"
 #include "trigger_building_option_menu.h"
-#include "wlapplication.h"
+#include "wexception.h"
 
 static const int nr_of_triggers=3;
 

@@ -20,6 +20,7 @@
 #include <vector>
 #include "building.h"
 #include "building_statistics_menu.h"
+#include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
 #include "productionsite.h"
@@ -31,7 +32,6 @@
 #include "ui_textarea.h"
 #include "tribe.h"
 #include "wui_plot_area.h"
-#include "wlapplication.h"
 
 #define BUILDING_LIST_HEIGHT 220
 #define BUILDING_LIST_WIDTH  320

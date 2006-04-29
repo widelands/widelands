@@ -20,13 +20,13 @@
 #include "fullscreen_menu_launchgame.h"
 #include "fullscreen_menu_mapselect.h"
 #include "game.h"
+#include "i18n.h"
 #include "player.h"
 #include "network.h"
 #include "map.h"
 #include "playerdescrgroup.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

@@ -24,6 +24,7 @@
 #include "event_allow_building.h"
 #include "event_allow_building_option_menu.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "map.h"
 #include "player.h"
 #include "tribe.h"
@@ -33,7 +34,6 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 #include "util.h"
-#include "wlapplication.h"
 
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu(Editor_Interactive* parent, Event_Allow_Building* event) :
    UIWindow(parent, 0, 0, 200, 280, _("Event Option Menu")) {

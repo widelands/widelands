@@ -24,21 +24,21 @@
 */
 
 #include <algorithm>
-#include "network_system.h"
+#include "fullscreen_menu_launchgame.h"
 #include "game.h"
-#include "player.h"
+#include "i18n.h"
 #include "interactive_player.h"
-#include "playercommand.h"
-#include "playerdescrgroup.h"
-#include "tribe.h"
 #include "network.h"
 #include "network_ggz.h"
 #include "network_lan_promotion.h"
-#include "wexception.h"
-#include "fullscreen_menu_launchgame.h"
-#include "ui_window.h"
+#include "network_system.h"
+#include "player.h"
+#include "playercommand.h"
+#include "playerdescrgroup.h"
+#include "tribe.h"
 #include "ui_table.h"
-#include "wlapplication.h"
+#include "ui_window.h"
+#include "wexception.h"
 
 #define CHECK_SYNC_INTERVAL	2000
 #define	DELAY_PROBE_INTERVAL	10000

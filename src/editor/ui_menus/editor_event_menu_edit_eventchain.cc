@@ -17,12 +17,14 @@
  *
  */
 
+#include "constants.h"
 #include "editorinteractive.h"
 #include "editor_event_menu_edit_eventchain.h"
 #include "editor_event_menu_edit_trigger_conditional.h"
 #include "error.h"
 #include "event.h"
 #include "event_chain.h"
+#include "i18n.h"
 #include "map.h"
 #include "map_event_manager.h"
 #include "ui_button.h"
@@ -34,7 +36,6 @@
 #include "ui_window.h"
 #include "trigger_conditional.h"
 #include "util.h"
-#include "wlapplication.h"
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Interactive* parent, EventChain* chain) :
    UIWindow(parent, 0, 0, 505, 340, _("Edit Event Chain")) {

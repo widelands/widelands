@@ -21,6 +21,7 @@
 #include "editor_set_both_terrain_tool.h"
 #include "editor_tool_set_terrain_options_menu.h"
 #include "editorinteractive.h"
+#include "i18n.h"
 #include "keycodes.h"
 #include "map.h"
 #include "rendertarget.h"

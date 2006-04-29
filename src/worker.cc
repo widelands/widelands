@@ -22,6 +22,7 @@
 #include "filesystem.h"
 #include "game.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
 #include "profile.h"
@@ -39,7 +40,6 @@
 #include "worker_program.h"
 #include "world.h"
 #include "sound_handler.h"
-#include "wlapplication.h"
 
 Cmd_Incorporate::Cmd_Incorporate(int t, Worker* w) :
        BaseCommand(t) {

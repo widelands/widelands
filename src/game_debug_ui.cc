@@ -22,6 +22,7 @@
 #include "bob.h"
 #include "field.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "instances.h"
 #include "interactive_base.h"
 #include "map.h"
@@ -31,7 +32,6 @@
 #include "ui_panel.h"
 #include "ui_tabpanel.h"
 #include "ui_window.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

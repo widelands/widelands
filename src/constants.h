@@ -28,7 +28,8 @@
  * Lots more are scattered through header files
  */
 
-/// Version mark for the build. Appears in title screen
+///Version mark for the build. Appears in title screen
+///\todo Tie this into build_id (which, in turn, should be tied into CVS numbering)
 #define VERSION "cvs 24-12-2005 (inofficial)"
 
 /**
@@ -101,6 +102,17 @@
  * of every SSS_T user.
  */
 #define SSS_T std::string::size_type
+
+/**
+ * \todo use SDL constants instead
+ * \todo bitshifting is not beautiful in cross platform code, use macro
+ * SDL_BUTTON instead
+ */
+enum { // use 1<<MOUSE_xxx for bitmasks
+   MOUSE_LEFT = 0,
+   MOUSE_MIDDLE,
+   MOUSE_RIGHT
+};
 
 /**
  * Record file codes

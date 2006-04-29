@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 #include "editor_game_base.h"
+#include "i18n.h"
 #include "game.h"
 #include "trainingsite.h"
 #include "tribe.h"
@@ -29,7 +30,6 @@
 #include "transport.h"
 #include "util.h"
 #include "worker.h"
-#include "wlapplication.h"
 
 TrainingSite_Descr::TrainingSite_Descr(Tribe_Descr * tribe, const char *name)
 :ProductionSite_Descr(tribe, name)

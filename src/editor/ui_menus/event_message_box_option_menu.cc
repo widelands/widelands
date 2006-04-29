@@ -19,6 +19,7 @@
 
 #include "event_message_box_option_menu.h"
 #include "event_message_box.h"
+#include "i18n.h"
 #include "ui_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
@@ -33,7 +34,6 @@
 #include "graphic.h"
 #include "trigger_null.h"
 #include "util.h"
-#include "wlapplication.h"
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive* parent, Event_Message_Box* event) :
    UIWindow(parent, 0, 0, 430, 400, _("Event Option Menu")) {

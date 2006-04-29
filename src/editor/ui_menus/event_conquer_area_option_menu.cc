@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include "event_conquer_area_option_menu.h"
 #include "event_conquer_area.h"
+#include "i18n.h"
 #include "ui_window.h"
 #include "ui_textarea.h"
 #include "ui_button.h"
@@ -30,7 +31,6 @@
 #include "map.h"
 #include "graphic.h"
 #include "util.h"
-#include "wlapplication.h"
 
 Event_Conquer_Area_Option_Menu::Event_Conquer_Area_Option_Menu(Editor_Interactive* parent, Event_Conquer_Area* event) :
    UIWindow(parent, 0, 0, 180, 280, _("Event Option Menu")) {

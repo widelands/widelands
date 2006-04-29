@@ -22,12 +22,12 @@
 #include "game_main_menu_load_game.h"
 #include "game_preload_data_packet.h"
 #include "game_loader.h"
+#include "i18n.h"
 #include "interactive_player.h"
 #include "ui_button.h"
 #include "ui_listselect.h"
 #include "ui_modal_messagebox.h"
 #include "ui_textarea.h"
-#include "wlapplication.h"
 
 /*
 ===============

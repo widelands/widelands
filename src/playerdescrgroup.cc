@@ -19,6 +19,7 @@
 
 #include "constants.h"
 #include "game.h"
+#include "i18n.h"
 #include "player.h"
 #include "playerdescrgroup.h"
 #include "types.h"
@@ -26,7 +27,6 @@
 #include "ui_checkbox.h"
 #include "tribe.h"
 #include "wexception.h"
-#include "wlapplication.h"
 
 static const char* default_names[MAX_PLAYERS+1] = {
    "",

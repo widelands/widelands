@@ -18,6 +18,7 @@
  */
 
 #include <stdio.h>
+#include "i18n.h"
 #include "map.h"
 #include "ui_textarea.h"
 #include "ui_multilinetextarea.h"
@@ -25,7 +26,6 @@
 #include "ui_editbox.h"
 #include "editor_main_menu_map_options.h"
 #include "editorinteractive.h"
-#include "wlapplication.h"
 
 /*
 ===============

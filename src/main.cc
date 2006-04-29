@@ -17,22 +17,35 @@
  *
  */
 
+#include <iostream>
+#include <stdexcept>
 #include "wlapplication.h"
+
+using std::cerr;
+using std::endl;
+using std::flush;
 
 /**
  * Cross-platform entry point for SDL applications.
  */
 int main(const int argc, const char** argv)
 {
-	WLApplication * const g_app=
-	   WLApplication::get(argc, const_cast<const char**>(argv));
+	try {
+		WLApplication * const g_app=WLApplication::get(argc, argv);
 
-	if (g_app->init()) {
-		g_app->run();
-		g_app->shutdown();
+		if (g_app->init()) {
+			g_app->run();
+			g_app->shutdown();
+		}
+
+		return 0;
 	}
-
-	return 0;
+	catch(...) {
+		cerr<<"Caught unknown exception in outermost handler!"<<endl<<
+		"This should not happen"<<endl<<endl<<
+		"Please file a bug report."<<endl<<
+		flush;
+	}
 }
 
 //TODO: can't this hack be folded into the above function? #fweber
@@ -42,14 +55,21 @@ int main(const int argc, const char** argv)
 /// This is a hack needed for mingw under windows
 int main(int argc, char** argv)
 {
-	WLApplication * const g_app=
-	   WLApplication::get(argc, const_cast<const char**>(argv));
+	try {
+		WLApplication * const g_app=WLApplication::get(argc, argv);
 
-	if (g_app->init()) {
-		g_app->run();
-		g_app->shutdown();
+		if (g_app->init()) {
+			g_app->run();
+			g_app->shutdown();
+		}
+
+		return 0;
 	}
-
-	return 0;
+	catch(...) {
+		cerr<<"Caught unknown exception in outermost handler!"<<endl<<
+		"This should not happen"<<endl<<endl<<
+		"Please file a bug report."<<endl<<
+		flush;
+	}
 }
 #endif

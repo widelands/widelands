@@ -20,13 +20,13 @@
  // just testing - philipp
 
 #include "graphic.h"
+#include "i18n.h"
 #include "interactive_base.h"
 #include "map.h"
 #include "mapviewpixelconstants.h"
 #include "minimap.h"
 #include "rendertarget.h"
 #include "ui_button.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

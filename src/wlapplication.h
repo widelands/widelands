@@ -22,28 +22,15 @@
 
 #include "graphic.h"
 #include <map>
+#include <stdexcept>
 #include <string>
 #include <vector>
-
-/// A macro to make i18n more readable
-#define _( str ) WLApplication::translate( str )
 
 // input
 struct InputCallback {
 	void (*mouse_click)(bool down, int btn, uint btns, int x, int y);
 	void (*mouse_move)(uint btns, int x, int y, int xdiff, int ydiff);
 	void (*key)(bool down, int code, char c);
-};
-
-/**
- * \todo use SDL constants instead
- * \todo bitshifting is not beautiful in cross platform code, use macro
- * SDL_BUTTON instead
-*/
-enum { // use 1<<MOUSE_xxx for bitmasks
-   MOUSE_LEFT = 0,
-   MOUSE_MIDDLE,
-   MOUSE_RIGHT
 };
 
 ///the Graphic "singleton". \todo make into a real singleton
@@ -68,8 +55,8 @@ extern Graphic *g_gr;
  * useless. So we implement singleton semantics:
  * \li A private(!) static class variable (--> unique for the whole program,
  *     although nobody can get at it) \ref the_singleton holds a pointer to the
- *     only instance of WLApplication. It's private to make sure that \e nobody
- *     messes around with this very important variable.
+ *     only instance of WLApplication. It's private because it wouldn't be a
+ *     class variable otherwise.
  * \li There is no public constructor. If there was, you'd be able to create
  *     more WLApplications. So constructor access must be encapsulated too.
  * \li The only way to get at the WLApplication object is to call
@@ -148,16 +135,8 @@ public:
 	void shutdown();
 
 	//@{
-static const char* translate( const char* str ){return gettext( str );}
-	void grab_textdomain( const char* );
-	void release_textdomain();
-	void set_locale( const char* = 0);
-	const std::string get_locale() {return m_locale;}
-	//@}
-
-	//@{
 	///\return true if the game is being recorded
-	const bool get_record() {return m_record;}
+const bool get_record() {return m_record;}
 
 	///\return true if the currently running game is a playback
 	const bool get_playback() {return m_playback;}
@@ -263,15 +242,6 @@ protected:
 
 	///The commandline, conveniently repackaged
 	std::map<std::string, std::string> m_commandline;
-
-	//@{
-	///The current locale
-	std::string m_locale;
-	///A stack of textdomains. On entering a new textdomain, the old one gets
-	///pushed on the stack. On leaving the domain again it is popped back.
-	///\see grab_texdomain()
-	std::vector<std::string> m_textdomains;
-	//@}
 
 	//@{
 	///Whether we are recording

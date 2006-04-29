@@ -17,7 +17,9 @@
  *
  */
 
+#include "constants.h"
 #include "editor_event_menu_new_event.h"
+#include "i18n.h"
 #include "ui_window.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
@@ -29,7 +31,6 @@
 #include "map.h"
 #include "map_event_manager.h"
 #include "error.h"
-#include "wlapplication.h"
 
 Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event(Editor_Interactive* parent) :
    UIWindow(parent, 0, 0, 400, 240, _("New Event")) {

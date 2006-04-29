@@ -17,9 +17,10 @@
  *
  */
 
-#include "interactive_player.h"
 #include "bob.h"
 #include "game.h"
+#include "i18n.h"
+#include "interactive_player.h"
 #include "map.h"
 #include "mapview.h"
 #include "mapviewpixelconstants.h"
@@ -29,7 +30,6 @@
 #include "ui_signal.h"
 #include "ui_window.h"
 #include "watchwindow.h"
-#include "wlapplication.h"
 #include <vector>
 
 #define NUM_VIEWS 5

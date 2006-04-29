@@ -21,6 +21,7 @@
 #include "game_chat_menu.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
+#include "i18n.h"
 #include "interactive_player.h"
 #include "network.h"
 #include "player.h"
@@ -31,7 +32,6 @@
 #include "ui_multilineeditbox.h"
 #include "ui_textarea.h"
 #include "util.h"
-#include "wlapplication.h"
 
 #define CHAT_MSG_WAIT_TIME 1000
 

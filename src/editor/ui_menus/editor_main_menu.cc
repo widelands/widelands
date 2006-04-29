@@ -18,6 +18,7 @@
  */
 
 #include "editor_main_menu.h"
+#include "i18n.h"
 #include "ui_unique_window.h"
 #include "ui_textarea.h"
 #include "editorinteractive.h"
@@ -28,7 +29,6 @@
 #include "editor_main_menu_load_map.h"
 #include "error.h"
 #include "fullscreen_menu_fileview.h"
-#include "wlapplication.h"
 
 /*
 ===============

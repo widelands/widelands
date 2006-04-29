@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-5 by the Widelands Development Team
+ * Copyright (C) 2002-2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,9 +17,9 @@
  *
  */
 
-#include <vector>
+#include "i18n.h"
 #include "map_variable_manager.h"
-#include "wlapplication.h"
+#include <vector>
 
 /*
  * Map Variable Manager implementation

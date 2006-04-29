@@ -21,12 +21,12 @@
 #include "animation.h"
 #include "error.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "profile.h"
 #include "tribe.h"
 #include "ware.h"
 #include "wexception.h"
 #include "worker.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

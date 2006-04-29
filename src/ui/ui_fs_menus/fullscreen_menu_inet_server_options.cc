@@ -20,8 +20,8 @@
 #include "fullscreen_menu_inet_server_options.h"
 #include "ui_button.h"
 #include "ui_textarea.h"
+#include "i18n.h"
 #include "constants.h"
-#include "wlapplication.h"
 
 Fullscreen_Menu_InetServerOptions::Fullscreen_Menu_InetServerOptions ()
 	:Fullscreen_Menu_Base("singleplmenu.jpg") // change this

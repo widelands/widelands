@@ -17,22 +17,21 @@
  *
  */
 
+#include <assert.h>
+#include <errno.h>
+#include "error.h"
+#include "filesystem.h"
+#include "i18n.h"
+#include "interactive_base.h"
+#include "map.h"
+#include "mapview.h"
+#include "mapviewpixelfunctions.h"
+#include "profile.h"
+#include "sound_handler.h"
+
 #ifdef _WIN32
 #include <windows.h>
 #endif
-
-#include "sound_handler.h"
-
-#include <assert.h>
-#include <errno.h>
-#include "mapviewpixelfunctions.h"
-#include "profile.h"
-#include "error.h"
-#include "filesystem.h"
-#include "map.h"
-#include "interactive_base.h"
-#include "mapview.h"
-#include "wlapplication.h"
 
 /// Prepare infrastructure for reading song files from disk
 Songset::Songset()
@@ -336,8 +335,8 @@ void Sound_Handler::load_fx(const string dir, const string fxname,
 
 	assert(g_fs);
 
-	g_fs->FindFiles(dir, fxname + "_??.???." + WLApplication::get()->get_locale(),
-		                &files);
+	g_fs->FindFiles(dir, fxname + "_??.???." + i18n::get_locale(),
+	                &files);
 	if (files.empty())
 		g_fs->FindFiles(dir, fxname + "_??.???", &files);
 
@@ -347,8 +346,7 @@ void Sound_Handler::load_fx(const string dir, const string fxname,
 	}
 
 	if (recursive) {
-		g_fs->FindFiles(dir, "*_??." + WLApplication::get()->get_locale(),
-			                &dirs);
+		g_fs->FindFiles(dir, "*_??." + i18n::get_locale(), &dirs);
 		if (dirs.empty())
 			g_fs->FindFiles(dir, "*_??", &dirs);
 

@@ -17,13 +17,13 @@
  *
  */
 
+#include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
 #include "stock_menu.h"
 #include "transport.h"
 #include "ui_button.h"
 #include "waresdisplay.h"
-#include "wlapplication.h"
 
 /*
 ===============

@@ -17,7 +17,7 @@
  *
  */
 
-#include "constants.h"
+//#include "constants.h"
 #include "editor.h"
 #include "error.h"
 #include "filesystem.h"
@@ -33,11 +33,13 @@
 #include "fullscreen_menu_tutorial_select_map.h"
 #include "game_server_connection.h"
 #include "game_server_proto.h"
+#include "i18n.h"
 #include <iostream>
 #include "network.h"
 #include "network_ggz.h"
 #include "profile.h"
 #include "sound_handler.h"
+#include <stdexcept>
 #include <string>
 #include "wlapplication.h"
 
@@ -684,74 +686,6 @@ void WLApplication::shutdown()
 }
 
 /**
- * Grab a given TextDomain. If a new one is grabbed, it is pushed on the stack.
- * On release, it is dropped and the previous one is re-grabbed instead.
- *
- * So when a tribe loads, it grabs it's textdomain, loads all data and releases
- * it -> we're back in widelands domain. Negative: We can't translate error
- * messages. Who cares?
- */
-void WLApplication::grab_textdomain( const char* domain)
-{
-	bind_textdomain_codeset (domain, "UTF-8");
-	bindtextdomain( domain, LOCALE_PATH );
-	textdomain(domain);
-
-	m_textdomains.push_back( domain );
-}
-
-/**
- * See \ref grab_textdomain()
- */
-void WLApplication::release_textdomain()
-{
-	m_textdomains.pop_back();
-
-	//don't try to get the previous TD when the very first one ('widelands')
-	//just got dropped
-	if (m_textdomains.size()>0) {
-		const char* domain = m_textdomains.back().c_str();
-		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain( domain, LOCALE_PATH );
-		textdomain(domain);
-	}
-}
-
-/**
- * Set the locale to the given string
- */
-void WLApplication::set_locale( const char* str ) {
-	if( !str )
-		str = "";
-
-	// Somehow setlocale doesn't behave same on
-	// some systems.
-#ifdef __BEOS__
-	setenv ("LANG", str, 1);
-	setenv ("LC_ALL", str, 1);
-#endif
-#ifdef __APPLE__
-	setenv ("LANGUAGE", str, 1);
-	setenv ("LC_ALL", str, 1);
-#endif
-
-#ifdef _WIN32
-	const std::string env = std::string("LANG=") + str;
-	putenv(env.c_str());
-#endif
-
-	setlocale(LC_ALL, str); //call to libintl
-	m_locale=str;
-
-	if( m_textdomains.size() ) {
-		const char* domain = m_textdomains.back().c_str();
-		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain( domain, LOCALE_PATH );
-		textdomain(domain);
-	}
-}
-
-/**
  * Returns the position in the playback file
  */
 const long int WLApplication::get_playback_offset()
@@ -914,8 +848,8 @@ const bool WLApplication::init_settings()
 	}
 
 	// Set Locale and grab default domain
-	set_locale( s->get_string( "language" ));
-	grab_textdomain("widelands");
+	i18n::set_locale( s->get_string( "language" ));
+	i18n::grab_textdomain("widelands");
 
 	// Input
 	m_should_die = false;
@@ -960,7 +894,7 @@ const bool WLApplication::init_settings()
 void WLApplication::shutdown_settings()
 {
 	// To be proper, release our textdomain
-	release_textdomain();
+	i18n::release_textdomain();
 
 	// overwrite the old config file
 	g_options.write("config", true);

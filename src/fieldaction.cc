@@ -23,6 +23,7 @@
 #include "error.h"
 #include "fieldaction.h"
 #include "game_debug_ui.h"
+#include "i18n.h"
 #include "map.h"
 #include "overlay_manager.h"
 #include "player.h"
@@ -36,7 +37,6 @@
 #include "ui_textarea.h"
 #include "ui_unique_window.h"
 #include "watchwindow.h"
-#include "wlapplication.h"
 
 class Building_Descr;
 

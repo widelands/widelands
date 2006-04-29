@@ -20,6 +20,7 @@
 #include "editorinteractive.h"
 #include "editor_variables_menu.h"
 #include "error.h"
+#include "i18n.h"
 #include "map.h"
 #include "map_variable_manager.h"
 #include "ui_button.h"
@@ -30,7 +31,6 @@
 #include "ui_unique_window.h"
 #include "ui_listselect.h"
 #include "util.h"
-#include "wlapplication.h"
 
 /*
  * This is a modal box - The user must end this first

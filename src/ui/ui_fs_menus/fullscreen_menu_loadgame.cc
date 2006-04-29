@@ -24,11 +24,11 @@
 #include "game_loader.h"
 #include "game_preload_data_packet.h"
 #include "graphic.h"
+#include "i18n.h"
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_multilinetextarea.h"
 #include "ui_textarea.h"
-#include "wlapplication.h"
 
 /*
 ==============================================================================

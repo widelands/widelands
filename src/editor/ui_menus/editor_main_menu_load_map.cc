@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 #include <string>
+#include "i18n.h"
 #include "ui_textarea.h"
 #include "ui_editbox.h"
 #include "ui_button.h"
@@ -36,7 +37,6 @@
 #include "overlay_manager.h"
 #include "world.h"
 #include "map_loader.h"
-#include "wlapplication.h"
 
 /*
 ===============

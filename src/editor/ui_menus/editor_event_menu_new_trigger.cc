@@ -17,7 +17,9 @@
  *
  */
 
+#include "constants.h"
 #include "editor_event_menu_new_trigger.h"
+#include "i18n.h"
 #include "map_trigger_manager.h"
 #include "ui_window.h"
 #include "ui_multilinetextarea.h"
@@ -29,7 +31,6 @@
 #include "trigger_factory.h"
 #include "map.h"
 #include "error.h"
-#include "wlapplication.h"
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
    UIWindow(parent, 0, 0, 400, 240, _("New Trigger")) {
