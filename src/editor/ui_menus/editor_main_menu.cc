@@ -52,37 +52,37 @@ Editor_Main_Menu::Editor_Main_Menu(Editor_Interactive *parent, UIUniqueWindowReg
    int posy=offsy;
 
    UIButton* b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title(_("New Map"));
+   b->set_title(_("New Map").c_str());
    b->clicked.set(this, &Editor_Main_Menu::new_map_btn);
    posy+=height+spacing;
 
    posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title(_("Load Map"));
+   b->set_title(_("Load Map").c_str());
    b->clicked.set(this, &Editor_Main_Menu::load_btn);
    posy+=height+spacing;
 
    posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title(_("Save Map"));
+   b->set_title(_("Save Map").c_str());
    b->clicked.set(this, &Editor_Main_Menu::save_btn);
    posy+=height+spacing;
 
    posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title(_("Map Options"));
+   b->set_title(_("Map Options").c_str());
    b->clicked.set(this, &Editor_Main_Menu::map_options_btn);
    posy+=height+spacing;
 
    posy+=spacing;
    b=new UIButton(this, posx, posy, width, height, 1);
-   b->set_title(_("View Readme"));
+   b->set_title(_("View Readme").c_str());
    b->clicked.set(this, &Editor_Main_Menu::readme_btn);
    posy+=height+spacing;
 
    posy+=spacing+(height+spacing);
    b=new UIButton(this, posx, posy, width, height, 0);
-   b->set_title(_("Exit Editor"));
+   b->set_title(_("Exit Editor").c_str());
    b->clicked.set(this, &Editor_Main_Menu::exit_btn);
    posy+=height+spacing;
 

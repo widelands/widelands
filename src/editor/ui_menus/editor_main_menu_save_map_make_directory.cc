@@ -28,7 +28,7 @@
  * Create this
  */
 Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* parent, const char* dirname) :
-  UIWindow(parent, 0, 0, 230, 120, _("Make Directory")) {
+  UIWindow(parent, 0, 0, 230, 120, _("Make Directory").c_str()) {
      // Caption
    UITextarea* tt=new UITextarea(this, 0, 0, _("Make Directory"), Align_Left);
    tt->set_pos((get_inner_w()-tt->get_w())/2, 5);
@@ -54,13 +54,13 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UIPanel* pa
    posy=get_inner_h()-30;
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Save_Map_Make_Directory::clicked);
-   but->set_title(_("OK"));
+   but->set_title(_("OK").c_str());
    if(!m_dirname.size())
       but->set_enabled(false);
    m_ok_button=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Save_Map_Make_Directory::clicked);
-   but->set_title(_("Cancel"));
+   but->set_title(_("Cancel").c_str());
 
    center_to_parent();
 }

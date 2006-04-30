@@ -36,7 +36,7 @@
 #include "util.h"
 
 Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive* parent, Event_Message_Box* event) :
-   UIWindow(parent, 0, 0, 430, 400, _("Event Option Menu")) {
+   UIWindow(parent, 0, 0, 430, 400, _("Event Option Menu").c_str()) {
    m_parent=parent;
    m_event=event;
 
@@ -124,11 +124,11 @@ Event_Message_Box_Option_Menu::Event_Message_Box_Option_Menu(Editor_Interactive*
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-30;
    b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title(_("Ok"));
+   b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title(_("Cancel"));
+   b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Event_Message_Box_Option_Menu::clicked);
 
    int i=0;

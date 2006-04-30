@@ -30,14 +30,14 @@
 
 static const char* default_names[MAX_PLAYERS+1] = {
    "",
-   _("Player 1"),
-   _("Player 2"),
-   _("Player 3"),
-   _("Player 4"),
-   _("Player 5"),
-   _("Player 6"),
-   _("Player 7"),
-   _("Player 8"),
+   _("Player 1").c_str(),
+   _("Player 2").c_str(),
+   _("Player 3").c_str(),
+   _("Player 4").c_str(),
+   _("Player 5").c_str(),
+   _("Player 6").c_str(),
+   _("Player 7").c_str(),
+   _("Player 8").c_str(),
    };
 
 void PlayerDescriptionGroup::allow_changes(changemode_t t) {
@@ -108,8 +108,8 @@ void PlayerDescriptionGroup::set_enabled(bool enable)
       const char* string = 0;
 		switch(m_playertype) {
 		case Player::playerLocal:
-		case Player::playerRemote: string = _("Human"); break;
-		case Player::playerAI: string = _("Computer"); break;
+			case Player::playerRemote: string = _("Human").c_str(); break;
+			case Player::playerAI: string = _("Computer").c_str(); break;
 		}
 		m_btnPlayerType->set_title(string);
 		m_btnPlayerType->set_visible(m_btnEnablePlayer->get_state());
@@ -198,7 +198,7 @@ void PlayerDescriptionGroup::set_player_type(int type)
 	m_playertype=type;
 
 	if (m_enabled) {
-		m_btnPlayerType->set_title((type!=Player::playerAI)?_("Human"):_("Computer"));
+		m_btnPlayerType->set_title((type!=Player::playerAI)?_("Human").c_str():_("Computer").c_str());
 
 		m_game->remove_player (m_plnum);
 		m_game->add_player (m_plnum, m_playertype, m_tribes[m_current_tribe].c_str(), default_names[m_plnum]);

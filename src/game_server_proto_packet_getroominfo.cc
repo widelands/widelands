@@ -62,7 +62,7 @@ void Game_Server_Protocol_Packet_GetRoomInfo::handle_reply(Game_Server_Connectio
    if(flags == RI_NONEXISTANT) {
       char buffer[1024];
 
-      snprintf(buffer, 1024, _("The Room %s is currently not logged in or unknown to the server.\n"), m_roomname.c_str());
+      snprintf(buffer, 1024, _("The Room %s is currently not logged in or unknown to the server.\n").c_str(), m_roomname.c_str());
 
       gsc->server_message( buffer );
       return;

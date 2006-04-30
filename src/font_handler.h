@@ -26,6 +26,7 @@
 #include "font_loader.h"
 
 class RenderTarget;
+class Text_Block;
 
 enum Align {
    Align_Left = 0,
@@ -67,8 +68,7 @@ class Font_Handler {
 public:
    Font_Handler();
    ~Font_Handler();
-   void draw_string(RenderTarget* dst, const std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty, std::string text,
-         Align align = Align_CenterLeft, int wrap = -1, Widget_Cache widget_cache = Widget_Cache_None, uint *widget_cache_id = 0, int caret = -1) ;
+	void draw_string(RenderTarget* dst, const std::string font, int size, RGBColor fg, RGBColor bg, int dstx, int dsty, std::string text,Align align = Align_CenterLeft, int wrap = -1, Widget_Cache widget_cache = Widget_Cache_None, uint *widget_cache_id = 0, int caret = -1) ;
    void get_size(std::string font, int size, std::string text, int *w, int *h, int wrap = -1);
    int calc_linewidth(TTF_Font* f, std::string &text);
    int get_fontheight(std::string font, int size);
@@ -106,7 +106,6 @@ private:
       }
    };
 
- 
 private:
    static const uint CACHE_ARRAY_SIZE = 500;
 
@@ -123,8 +122,9 @@ private:
    SDL_Surface* create_static_long_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int wrap, int line_spacing = 0, int caret = -1);
    SDL_Surface* create_single_line_text_surface( TTF_Font* f, RGBColor fg, RGBColor bg, std::string text, Align align, int caret = -1);
    SDL_Surface* create_empty_sdl_surface(uint w, uint h, SDL_Surface *mask);
-   SDL_Surface* join_sdl_surfaces(uint w, uint h, std::vector<SDL_Surface*> surfaces, RGBColor bg, Align align = Align_Left, int line_spacing = 0);
+	SDL_Surface* join_sdl_surfaces(uint w, uint h, std::vector<SDL_Surface*> surfaces, RGBColor bg, Align align = Align_Left, int spacing = 0, bool vertical = false, bool keep_surfaces = false);
    SDL_Surface* load_image(std::string file);
+	SDL_Surface* render_space(Text_Block &block, RGBColor bg, int style = TTF_STYLE_NORMAL);
    void render_caret(TTF_Font *f, SDL_Surface *line, const std::string &text_caret_pos);
 };
 

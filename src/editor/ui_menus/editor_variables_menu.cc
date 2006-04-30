@@ -53,22 +53,22 @@ class New_Variable_Window : public UIWindow {
 };
 
 New_Variable_Window::New_Variable_Window(Editor_Interactive* parent) :
-   UIWindow(parent, 0, 0, 135, 55, _("New Variable")) {
+		UIWindow(parent, 0, 0, 135, 55, _("New Variable").c_str()) {
 
    m_parent = parent;
    m_variable = 0;
 
    // What type
    UIButton* b = new UIButton( this, 5, 5, 60, 20, 0, 0);
-   b->set_title(_("Integer"));
+   b->set_title(_("Integer").c_str());
    b->clickedid.set(this, &New_Variable_Window::clicked);
    b = new UIButton( this, 70, 5, 60, 20, 0, 1);
-   b->set_title(_("String"));
+   b->set_title(_("String").c_str());
    b->clickedid.set(this, &New_Variable_Window::clicked);
 
    // back button
    b = new UIButton( this, (get_inner_w()-80)/2, 30, 80, 20, 1, 2);
-   b->set_title(_("Back"));
+   b->set_title(_("Back").c_str());
    b->clickedid.set(this, &New_Variable_Window::clicked);
 
    center_to_parent();
@@ -99,7 +99,7 @@ void New_Variable_Window::clicked(int i) {
 
    int n = 1;
    while( 1 ) {
-      snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed"), n);
+	   snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
       if( !m_parent->get_egbase()->get_map()->get_mvm()->get_variable( buffer ))
          break;
       ++n;
@@ -153,7 +153,7 @@ class Edit_Variable_Window : public UIWindow {
 };
 
 Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UITable_Entry* te)
-   : UIWindow(parent, 0, 0, 250, 85, _("Edit Variable")) {
+	: UIWindow(parent, 0, 0, 250, 85, _("Edit Variable").c_str()) {
 
    m_parent=parent;
    m_te = te;
@@ -171,10 +171,10 @@ Edit_Variable_Window::Edit_Variable_Window(Editor_Interactive* parent, UITable_E
 
    // back button
    UIButton* b = new UIButton( this, get_inner_w()/2-80-spacing, 60, 80, 20, 1, 0);
-   b->set_title(_("Ok"));
+   b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Edit_Variable_Window::clicked);
    b = new UIButton( this, get_inner_w()/2 + spacing, 60, 80, 20, 1, 1);
-   b->set_title(_("Back"));
+   b->set_title(_("Back").c_str());
    b->clickedid.set(this, &Edit_Variable_Window::clicked);
 
 
@@ -221,7 +221,7 @@ void Edit_Variable_Window::clicked(int i) {
 
          if (endp && *endp) {
             char buffer[1024];
-            snprintf(buffer, sizeof(buffer), "%s %s", m_val->get_text(), _("is not a valid integer!"));
+	    snprintf(buffer, sizeof(buffer), "%s %s", m_val->get_text(), _("is not a valid integer!").c_str());
             UIModal_Message_Box* mb = new UIModal_Message_Box(m_parent, _("Parse error!"), buffer, UIModal_Message_Box::OK);
             mb->run();
             delete mb;
@@ -273,21 +273,21 @@ Editor_Variables_Menu::Editor_Variables_Menu(Editor_Interactive *parent, UIUniqu
    int posy=offsy;
 
    m_table = new UITable(this, posx, posy, get_inner_w()-2*spacing, get_inner_h() - 60);
-   m_table->add_column(_("Variable"), UITable::STRING, 300);
-   m_table->add_column(_("Value"), UITable::STRING, 100);
+   m_table->add_column(_("Variable").c_str(), UITable::STRING, 300);
+   m_table->add_column(_("Value").c_str(), UITable::STRING, 100);
    m_table->selected.set(this, &Editor_Variables_Menu::table_selected);
    m_table->double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
 
    // Buttons
    UIButton* nbutton = new UIButton( this, get_inner_w()/2 - 180 - spacing, get_inner_h() - 30, 120, 20, 0, 0);
-   nbutton->set_title(_("New"));
+   nbutton->set_title(_("New").c_str());
    nbutton->clickedid.set(this, &Editor_Variables_Menu::clicked);
    m_edit_button = new UIButton( this, get_inner_w()/2 - 60, get_inner_h() - 30, 120, 20, 0, 1);
-   m_edit_button->set_title(_("Edit"));
+   m_edit_button->set_title(_("Edit").c_str());
    m_edit_button->set_enabled(false);
    m_edit_button->clickedid.set(this, &Editor_Variables_Menu::clicked);
    m_delete_button = new UIButton( this, get_inner_w()/2 + 60 + spacing, get_inner_h() - 30, 120, 20, 0, 2);
-   m_delete_button->set_title(_("Delete"));
+   m_delete_button->set_title(_("Delete").c_str());
    m_delete_button->set_enabled(false);
    m_delete_button->clickedid.set(this, &Editor_Variables_Menu::clicked);
 

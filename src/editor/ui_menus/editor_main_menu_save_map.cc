@@ -47,7 +47,7 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
-	: UIWindow(parent, 0, 0, 500, 330, _("Save Map"))
+	: UIWindow(parent, 0, 0, 500, 330, _("Save Map").c_str())
 {
    m_parent=parent;
 
@@ -108,15 +108,15 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
    posy=get_inner_h()-30;
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title(_("OK"));
+   but->set_title(_("OK").c_str());
    but->set_enabled(false);
    m_ok_btn=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title(_("Cancel"));
+   but->set_title(_("Cancel").c_str());
    but= new UIButton(this, spacing, posy, 120, 20, 1, 2);
    but->clickedid.set(this, &Main_Menu_Save_Map::clicked);
-   but->set_title(_("Make Directory"));
+   but->set_title(_("Make Directory").c_str());
 
 
    m_basedir="maps";
@@ -171,7 +171,7 @@ void Main_Menu_Save_Map::clicked(int id) {
       die();
    } else if(id==2) {
       // Make directory
-      Main_Menu_Save_Map_Make_Directory* md=new Main_Menu_Save_Map_Make_Directory(this, _("unnamed"));
+	   Main_Menu_Save_Map_Make_Directory* md=new Main_Menu_Save_Map_Make_Directory(this, _("unnamed").c_str());
       if(md->run()) {
          g_fs->EnsureDirectoryExists(m_basedir);
          // Create directory

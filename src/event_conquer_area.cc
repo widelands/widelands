@@ -32,7 +32,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Conquer_Area::Event_Conquer_Area(void) {
-   set_name(_("Conquer Area"));
+	set_name(_("Conquer Area").c_str());
    set_coords(Coords(0,0));
    set_player(0);
    set_area(5);

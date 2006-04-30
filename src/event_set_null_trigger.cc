@@ -35,7 +35,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Set_Null_Trigger::Event_Set_Null_Trigger(void) {
-   set_name(_("Set Null Trigger"));
+   set_name(_("Set Null Trigger").c_str());
    m_trigger = 0;
    set_setto( true );
 }

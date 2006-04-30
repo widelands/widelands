@@ -33,7 +33,7 @@
 #include "util.h"
 
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* parent, Event_Move_View* event) :
-   UIWindow(parent, 0, 0, 180, 200, _("Event Option Menu")) {
+   UIWindow(parent, 0, 0, 180, 200, _("Event Option Menu").c_str()) {
    m_parent=parent;
    m_event=event;
 
@@ -110,11 +110,11 @@ Event_Move_View_Option_Menu::Event_Move_View_Option_Menu(Editor_Interactive* par
    posx=(get_inner_w()/2)-60-spacing;
    posy=get_inner_h()-20-spacing;
    b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title(_("Ok"));
+   b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Event_Move_View_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title(_("Cancel"));
+   b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Event_Move_View_Option_Menu::clicked);
 
    center_to_parent();

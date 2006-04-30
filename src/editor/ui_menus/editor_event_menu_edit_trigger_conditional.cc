@@ -33,7 +33,7 @@
 #include "util.h"
 
 Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional(Editor_Interactive* parent, TriggerConditional* cond, EventChain* chain) :
-   UIWindow(parent, 0, 0, 465, 340, _("Edit Trigger Conditional")) {
+   UIWindow(parent, 0, 0, 465, 340, _("Edit Trigger Conditional").c_str()) {
 
    m_parent=parent;
    m_given_cond = cond;
@@ -89,7 +89,7 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    b->set_enabled( false );
    m_insert_btn = b;
    b = new UIButton(this, posx, posy, 80, 20, 0, 21);
-   b->set_title(_("Delete"));
+   b->set_title(_("Delete").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    b->set_enabled( false );
    m_delete_btn = b;
@@ -121,11 +121,11 @@ Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditi
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
    b=new UIButton(this, posx, posy, 80, 20, 0, 1);
-   b->set_title(_("Ok"));
+   b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 80, 20, 1, 0);
-   b->set_title(_("Cancel"));
+   b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_Edit_TriggerConditional::clicked);
 
    // Add conditional

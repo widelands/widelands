@@ -90,7 +90,7 @@ Fullscreen_Menu_InetLobby::Fullscreen_Menu_InetLobby(Game_Server_Connection* gsc
 
    // Buttons
    UIButton* b = new UIButton(this, (int)(get_inner_w()-get_inner_w()*0.25+5), get_inner_h()-45, 50, 25, 0, 0);
-   b->set_title(_("Back"));
+   b->set_title(_("Back").c_str());
    b->clickedid.set(this, &Fullscreen_Menu_InetLobby::clicked);
 
    m_gsc = gsc;
@@ -175,7 +175,7 @@ void Fullscreen_Menu_InetLobby::room_info( std::vector<std::string > users ) {
 void Fullscreen_Menu_InetLobby::user_info( std::string user, std::string game, std::string room ) {
    char buffer[1024];
 
-   snprintf(buffer, 1024, _("User %s is using \"%s\" in room \"%s\"\n"), user.c_str(), game.c_str(), room.c_str());
+   snprintf(buffer, 1024, _("User %s is using \"%s\" in room \"%s\"\n").c_str(), user.c_str(), game.c_str(), room.c_str());
    server_message( buffer );
 }
 

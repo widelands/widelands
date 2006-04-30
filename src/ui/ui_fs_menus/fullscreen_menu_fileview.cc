@@ -55,7 +55,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
 
 	b = new UIButton(this, 233, 420, 174, 24, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_TextView::end_modal);
-	b->set_title(_("Close"));
+	b->set_title(_("Close").c_str());
 }
 
 void Fullscreen_Menu_TextView::set_text(std::string text) {

@@ -59,17 +59,17 @@ GameOptionsMenu::GameOptionsMenu(Interactive_Player *plr, UIUniqueWindowRegistry
 
 
    UIButton* b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 1);
-   b->set_title(_("README"));
+   b->set_title(_("README").c_str());
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
 
    b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 2);
-   b->set_title(_("License"));
+   b->set_title(_("License").c_str());
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
 
    b=new UIButton(this, 5, posy, get_inner_w()-10, 20, 4, 3);
-   b->set_title(_("Authors"));
+   b->set_title(_("Authors").c_str());
    b->clickedid.set(this, &GameOptionsMenu::clicked);
    posy += 25;
 

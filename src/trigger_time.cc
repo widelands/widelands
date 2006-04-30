@@ -32,7 +32,7 @@ static const int TRIGGER_VERSION = 1;
 Trigger_Time::Trigger_Time(void) {
    m_last_start_time=0;
    m_wait_time=60; // defaults to one minute
-   set_name(_("Time Trigger"));
+   set_name(_("Time Trigger").c_str());
    set_trigger(false);
 }
 

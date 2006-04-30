@@ -330,7 +330,7 @@ void NetHost::handle_network ()
 		const char* tribe=pl->get_tribe()->get_name();
 
 		game->remove_player (i);
-		game->add_player (i, Player::playerRemote, tribe, _("I have no name"));
+		game->add_player (i, Player::playerRemote, tribe, _("I have no name").c_str());
 
 		Client peer;
 		peer.sock=sock;
@@ -830,11 +830,11 @@ void NetClient::disconnect ()
 /*** class NetStatusWindow ***/
 
 NetStatusWindow::NetStatusWindow (UIPanel* parent)
-	:UIWindow(parent, 0, 0, 256, 192, _("Starting network game"))
+	:UIWindow(parent, 0, 0, 256, 192, _("Starting network game").c_str())
 {
     table=new UITable(this, 0, 0, 256, 192);
-    table->add_column (_("Player"), UITable::STRING, 192);
-    table->add_column (_("Status"), UITable::STRING, 64);
+    table->add_column (_("Player").c_str(), UITable::STRING, 192);
+    table->add_column (_("Status").c_str(), UITable::STRING, 64);
 }
 
 void NetStatusWindow::add_player (int num)
@@ -842,12 +842,12 @@ void NetStatusWindow::add_player (int num)
     char buffer[64];
     Entry entry;
 
-    snprintf (buffer, 64, "%s %d", _("Player"), num);
+    snprintf (buffer, 64, "%s %d", _("Player").c_str(), num);
 
     entry.plnum=num;
     entry.entry=new UITable_Entry(table, 0);
     entry.entry->set_string (0, buffer);
-    entry.entry->set_string (1, _("Waiting"));
+    entry.entry->set_string (1, _("Waiting").c_str());
 
     entries.push_back (entry);
 }
@@ -858,7 +858,7 @@ void NetStatusWindow::set_ready (int num)
 
     for (i=0;i<entries.size();i++)
 	if (entries[i].plnum==num)
-	    entries[i].entry->set_string (1, _("Ready"));
+		    entries[i].entry->set_string (1, _("Ready").c_str());
 }
 
 /*** class Serializer ***/

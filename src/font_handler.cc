@@ -165,7 +165,7 @@ SDL_Surface* Font_Handler::create_single_line_text_surface(TTF_Font* f, RGBColor
 
    if (!(surface = TTF_RenderUTF8_Shaded(f, text.c_str(), sdl_fg, sdl_bg))) {
       log("Font_Handler::create_single_line_text_surface, an error : %s\n", TTF_GetError());
-      log("Text was: %s\n", text.c_str());
+      log("Text was: '%s'\n", text.c_str());
       return 0; // This will skip this line hopefully
    }
 
@@ -195,22 +195,7 @@ SDL_Surface* Font_Handler::create_static_long_text_surface(TTF_Font* f, RGBColor
    std::vector<std::string> lines;
    
    text = word_wrap_text(f,text,wrap);
-
-   //split_string( text, &lines, "\n" ); 
-   // We split the string now, but we do not use split_string, since
-   // split string would handle a '\n\n' as only one newline
-   std::string textbak = text;
-   std::string::size_type pos = 0;
-   while( pos != std::string::npos ) {
-      pos = textbak.find( '\n' );
-      if( pos == std::string::npos )
-         break;
-
-      std::string line = textbak.substr(0,pos);
-      textbak.erase(0,pos+1); // also remove newline
-      lines.push_back( line );
-   }
-   lines.push_back( textbak );
+   split_string(text, &lines, "\n");
    
    SDL_Color sdl_fg = { fg.r(), fg.g(), fg.b(),0 };
    SDL_Color sdl_bg = { bg.r(), bg.g(), bg.b(),0 };
@@ -295,96 +280,208 @@ SDL_Surface* Font_Handler::create_sdl_text_surface(TTF_Font* f, RGBColor fg, RGB
 //draws richtext, specified by blocks
 void Font_Handler::draw_richtext(RenderTarget* dst, RGBColor bg,int dstx, int dsty, std::string text, int wrap, Widget_Cache widget_cache, uint *widget_cache_id) {
    uint picid;
-   int w,h;
-   //Widget gave us an explicit 
    if (widget_cache == Widget_Cache_Use) {
-      g_gr->get_picture_size(*widget_cache_id,&w,&h);
+      //g_gr->get_picture_size(*widget_cache_id,&w,&h);
       picid = *widget_cache_id;
    }
-   //We need to (re)create the picid for the widget
    else {
-      if (widget_cache == Widget_Cache_Update)
+		if (widget_cache == Widget_Cache_Update) {
          g_gr->free_surface(*widget_cache_id);
-   
-      std::vector<Text_Block> blocks;
+		}
+		std::vector<Richtext_Block> blocks;
       Text_Parser p;
-      p.parse(text,&blocks,m_varcallback,m_cbdata);
+		p.parse(&text,&blocks,m_varcallback,m_cbdata);
       
-      int global_height = 0;
-      int h_space = 4;
+		std::vector<SDL_Surface*> rend_blocks;
+		int global_h = 0;
       
-      std::vector<SDL_Surface*> rendered_blocks;
+		//Iterate over richtext blocks
+		//Seems to be a problem with loading images, and freeing them 
+		//Refactor to using datastructure
+		for (std::vector<Richtext_Block>::iterator richtext_it = blocks.begin();richtext_it != blocks.end();richtext_it++) {
+			int cur_line_w = 0;
+			int cur_line_h = 0;
+			int block_h = 0;   
       
-      for(std::vector<Text_Block>::iterator cur = blocks.begin(); cur != blocks.end(); cur++) { 
-         int start_x = 0;
-         int max_x = wrap;
-         int surf_h = 0;
+			std::vector<Text_Block> cur_text_blocks = richtext_it->get_text_blocks();
+			std::vector<std::string> cur_block_images = richtext_it->get_images();
          
-         bool got_text = false;
-         bool got_img = false;
+			std::vector<SDL_Surface*> rend_lines;
+			std::vector<SDL_Surface*> rend_cur_words;
+			std::vector<SDL_Surface*> rend_cur_images;
         
-         Surface* image = 0;
-         SDL_Surface *text = 0;
-         SDL_Rect img_pos,text_pos;
+			SDL_Surface *block_images = 0;
+			int img_surf_h = 0;
+			int img_surf_w = 0;
             
-         if (cur->image.size()) {
-            img_pos.x = start_x;
+			//First render all images of this richtext block			  		          
+			for (std::vector<std::string>::iterator img_it = cur_block_images.begin(); img_it != cur_block_images.end(); img_it++) {
+				SDL_Rect img_pos;
+				img_pos.x = img_surf_w;
             img_pos.y = 0;
            
-            image = ((GraphicImpl*)(g_gr))->get_picture_surface( g_gr->get_picture( PicMod_Game, cur->image.c_str() )); // Not Font, but game. 
+				Surface* image = ((GraphicImpl*)(g_gr))->get_picture_surface( g_gr->get_picture( PicMod_Game, img_it->c_str() )); // Not Font, but game.
             
-            if (cur->image_align == Align_Right) {
-               img_pos.x = max_x - image->get_w();
-               max_x-=(image->get_h() + h_space);
+				img_surf_h = (img_surf_h < (int)image->get_h() ? image->get_h() : img_surf_h);
+				img_surf_w = img_surf_w + image->get_w();
+				rend_cur_images.push_back(image->m_surface);
             }
-            else if (cur->image_align == Align_HCenter) {
-               img_pos.x = (max_x - image->get_w()) / 2;
-            	start_x+= img_pos.x + image->get_w() + h_space;
-            }
-            else 
-               start_x+=image->get_w() + h_space;
-            surf_h = image->get_h();
-            got_img = true;
+			if (rend_cur_images.size()) {
+				block_images = join_sdl_surfaces(img_surf_w,img_surf_h,rend_cur_images,bg,Align_Left,0,true,true);
          }
-         if (cur->text.size()) {
-            text_pos.y = 0;
-            text_pos.x = start_x;
+			
+			//Width that's left for text in this richtext block
+			int h_space = 3;
+			int text_width_left = (wrap - img_surf_w) - h_space;
+			
+			//Iterate over text blocks of current richtext block
+			for(std::vector<Text_Block>::iterator text_it = cur_text_blocks.begin(); text_it != cur_text_blocks.end(); text_it++) {
+					std::vector<std::string> words = text_it->get_words();
+					std::vector<uint> line_breaks = text_it->get_line_breaks();
+					
+					//Iterate over words of current text block
+					int word_cnt = 0;
+					for (std::vector<std::string>::iterator word_it = words.begin(); word_it != words.end(); word_it++) {
+						std::string str_word = *word_it;
+
             int font_style = TTF_STYLE_NORMAL;
-            if (cur->font_weight == "bold")
+						if (text_it->get_font_weight() == "bold")
                font_style |= TTF_STYLE_BOLD;
-            if (cur->font_style == "italic")
+						if (text_it->get_font_style() == "italic")
                font_style |= TTF_STYLE_ITALIC;
-            if (cur->font_decoration == "underline")
+						if (text_it->get_font_decoration() == "underline")
                font_style |= TTF_STYLE_UNDERLINE;
-            text = draw_string_sdl_surface(cur->font_face,cur->font_size,cur->font_color,bg,cur->text,cur->text_align,(max_x-start_x),font_style,cur->line_spacing);
-            if (text->h > surf_h)
-               surf_h = text->h;
-            got_text = true;
+
+						SDL_Surface *rend_word = draw_string_sdl_surface(text_it->get_font_face(),text_it->get_font_size(),text_it->get_font_color(),bg,
+		   												str_word,Align_Left,-1,font_style,text_it->get_line_spacing());
+						
+						//is there a break before this word
+						//TODO: comparison between signed and unsigned !
+						bool break_before = (line_breaks.size() && (line_breaks[0] == word_cnt) ? true : false);
+						
+						//Word doesn't fit into current line, or a break was inserted before
+						if (((cur_line_w + rend_word->w) > text_width_left) || break_before) {
+		   				SDL_Surface *rend_line = join_sdl_surfaces(cur_line_w,cur_line_h,rend_cur_words,bg,Align_Left,0,true);
+							rend_lines.push_back(rend_line);
+							block_h+=cur_line_h;
+							rend_cur_words.clear();
+							
+							//Ignore spaces on begin of the line, if another word follows
+							if (str_word != " ") {
+								rend_cur_words.push_back(rend_word);
          }
-         // blit all this together in one Surface
-         SDL_Surface *block_surface = create_empty_sdl_surface(wrap,surf_h,text);
-         SDL_FillRect( block_surface, 0, SDL_MapRGB( block_surface->format,  107,87,55  )); // Set background to colorkey
          
-         if (got_text) {
-            SDL_BlitSurface(text,0,block_surface,&text_pos);
-            SDL_FreeSurface(text);
+							//Setting line height and width of new word = first in new line
+							cur_line_h = rend_word->h;
+							cur_line_w = rend_word->w;
+	   					
+							if (break_before) {
+								line_breaks.erase(line_breaks.begin());
+								//Look for another break at before this word
+								while (line_breaks.size()) {
+									//TODO: comparison between signed and unsigned !
+									if (line_breaks[0] != word_cnt) {
+										break;
          }
-         //blit image after text, so it can possibly cover an empty line
-         if (got_img) {
-            //log("img pos x: %i y: %i global_width: %i\n",img_pos.x,img_pos.y,max_x);
-            SDL_Surface* sdlimage = image->m_surface;
-            SDL_BlitSurface(sdlimage,0,block_surface,&img_pos);
+									else {
+										SDL_Surface *space = render_space(*text_it,bg);
+										rend_lines.push_back(space);
+										block_h+=space->h;
+										line_breaks.erase(line_breaks.begin());
          }
-         if (!got_img && !got_text)
-            throw wexception("Got empty block in draw_richtext!");
-         rendered_blocks.push_back(block_surface);
-         global_height+=surf_h;
       }
-      SDL_Surface* global_surface = join_sdl_surfaces(wrap, global_height, rendered_blocks, bg);
+							}
+						}
+						//Word fits regularly in this line
+						else {
+							rend_cur_words.push_back(rend_word);	   			   			
+							cur_line_w+= rend_word->w;
+							cur_line_h = (cur_line_h < rend_word->h ? rend_word->h : cur_line_h);
+						}
+						//Are there no more words but line breaks left
+						bool block_end_breaks = ((word_it + 1) == words.end() && line_breaks.size() ? true : false);
+						if (block_end_breaks) {
+							if (rend_cur_words.size()) {
+								SDL_Surface *rend_line = join_sdl_surfaces(cur_line_w,cur_line_h,rend_cur_words,bg,richtext_it->get_text_align(),0,true);
+								rend_lines.push_back(rend_line);
+								block_h+=cur_line_h;
+							
+								rend_cur_words.clear();
+								cur_line_h = 0;
+								cur_line_w = 0;
+								line_breaks.erase(line_breaks.begin());
+							}
+							while (line_breaks.size()) {
+								SDL_Surface *space = render_space(*text_it,bg);
+								rend_lines.push_back(space);
+								block_h+=space->h;
+								line_breaks.erase(line_breaks.begin());
+							}					
+						}
+					word_cnt++;
+				}
+			}
+			//If there are some words left to blit
+			if (rend_cur_words.size()) {
+					SDL_Surface *rend_line = join_sdl_surfaces(cur_line_w,cur_line_h,rend_cur_words,bg,Align_Left,0,true);
+					rend_lines.push_back(rend_line);
+					rend_cur_words.clear();
+					block_h+=cur_line_h;
+			}
+			if (!rend_lines.size() && rend_cur_images.size()) {
+				rend_lines.push_back(create_empty_sdl_surface(1,1,0));
+			}
+			if (rend_lines.size()) {
+				int max_x = wrap;
+			
+				SDL_Rect img_pos;
+				img_pos.x = 0;
+				img_pos.y = 0;
+				
+				SDL_Rect text_pos;
+				text_pos.x = 0;
+				text_pos.y = 0;
+				
+				
+				if (richtext_it->get_image_align() == Align_Right) {
+					img_pos.x = wrap - img_surf_w;
+					text_pos.x = 0;
+				}
+				else if (richtext_it->get_image_align() == Align_HCenter) {
+					img_pos.x = (max_x - img_surf_w) / 2;
+					text_pos.x = img_pos.x + img_surf_w + h_space;
+				}
+				else
+					text_pos.x = img_surf_w + h_space;
+				SDL_Surface* block_lines = join_sdl_surfaces(text_width_left, block_h, rend_lines, bg, richtext_it->get_text_align());
+
+				SDL_Surface* block_surface = create_empty_sdl_surface(wrap,(block_h > img_surf_h ? block_h : img_surf_h),block_lines);
+				SDL_FillRect( block_surface, 0, SDL_MapRGB( block_surface->format,  107,87,55  )); // Set background to colorkey
+				SDL_BlitSurface(block_images,0,block_surface,&img_pos);
+            
+				SDL_BlitSurface(block_lines,0,block_surface,&text_pos);
+				rend_blocks.push_back(block_surface);
+				
+				//If image is higher than text, set block height to image height
+				block_h = (block_h < img_surf_h ? img_surf_h : block_h);
+				
+				global_h+=block_h;
+		   	
+				rend_lines.clear();
+			}
+		}
+		SDL_Surface* global_surface = join_sdl_surfaces(wrap, global_h, rend_blocks, bg);
       picid = convert_sdl_surface(global_surface);
       *widget_cache_id = picid;
    }  
    dst->blit(dstx, dsty, picid);
+}
+
+SDL_Surface* Font_Handler::render_space(Text_Block &block, RGBColor bg, int style) {
+	SDL_Surface *rend_space = 0;
+	rend_space = draw_string_sdl_surface(block.get_font_face(),block.get_font_size(),block.get_font_color(),
+						bg," ",Align_Left,-1,style,block.get_line_spacing());
+	return rend_space;
 }
 
 //gets size of picid
@@ -394,43 +491,62 @@ void Font_Handler::get_size_from_cache(uint widget_cache_id, int *w, int *h) {
 
 //creates an empty sdl surface of given size
 SDL_Surface* Font_Handler::create_empty_sdl_surface(uint w, uint h, SDL_Surface *mask) {
-   SDL_Surface* s = SDL_CreateRGBSurface( SDL_SWSURFACE, w, h,
+	//This works on my linux machine, also an mac/win?
+	SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 16, 0, 0, 0, 0);
+	return surface;
+   
+   //doesn't work whem mask surface is an image surface, resulting surface is always empty
+   /*SDL_Surface* s = SDL_CreateRGBSurface( SDL_SWSURFACE, w, h,
             16, 
             mask->format->Rmask,
             mask->format->Gmask,
             mask->format->Bmask,
             mask->format->Amask);
-   return s;
+   return s;*/
 }
 
 //joins a vectror of surfaces in one big surface
-SDL_Surface* Font_Handler::join_sdl_surfaces(uint w, uint h, std::vector<SDL_Surface*> surfaces, RGBColor bg, Align align, int line_spacing) {
-   SDL_Surface* global_surface = create_empty_sdl_surface(w,h,surfaces[0]);
+SDL_Surface* Font_Handler::join_sdl_surfaces(uint w, uint h, std::vector<SDL_Surface*> surfaces, RGBColor bg, Align align, int spacing, bool vertical, bool keep_surfaces) {
+	std::cout<<"surfaces.size()="<<surfaces.size()<<std::endl<<std::flush;
+	int global_height = h + spacing * surfaces.size();
+   
+	std::cout<<"global_height="<<global_height<<std::endl<<std::flush;
+	if (w == 0 || h == 0 || surfaces.size() == 0) {
+		        return create_empty_sdl_surface(100,100,NULL);
+	}
+	SDL_Surface* global_surface = create_empty_sdl_surface(w,global_height,surfaces[0]);
    assert(global_surface);
    
    SDL_FillRect( global_surface, 0, SDL_MapRGB( global_surface->format, bg.r(), bg.g(), bg.b()));
+	
    int y = 0;
+	int x = 0;
    
    for( uint i = 0; i < surfaces.size(); i++) {
       SDL_Surface* s = surfaces[i];
       SDL_Rect r;
       
-      //Alignment for this line - vertical alignment is ignored
+		if (vertical) {
+			r.x = x;
+			r.y = 0;
+		}
+		else {
       int alignedX = 0;
-      if (align & Align_HCenter)
+			if (align & Align_HCenter) {
          alignedX = (w - s->w) / 2;
+			}
       else if (align & Align_Right)
          alignedX += (w - s->w);
       
       r.x = alignedX;
       r.y = y;
-      
+		}
       SDL_BlitSurface(s, 0, global_surface, &r);
-      y += s->h + line_spacing;
-      
+			y += s->h + spacing;
+			x += s->w + (vertical ? spacing : 0);
+			if (!keep_surfaces)
       SDL_FreeSurface( s );
    }
-   
    return global_surface;
 }
 
@@ -443,7 +559,6 @@ uint Font_Handler::convert_sdl_surface( SDL_Surface* surface ) {
    surf->set_sdl_surface( surface );
    
    uint picid = g_gr->get_picture(PicMod_Font, surf );
-   
    return picid;
 }
 
@@ -594,7 +709,7 @@ void Font_Handler::get_size(std::string font, int size, std::string text, int *w
 //calcultes linewidth of a given text
 int Font_Handler::calc_linewidth(TTF_Font* f, std::string &text) {
    int w,h;
-   TTF_SizeUTF8(f, text.c_str(), &w, &h);
+   TTF_SizeText(f, text.c_str(), &w, &h);
    return w;
 }
 

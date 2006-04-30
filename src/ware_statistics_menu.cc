@@ -398,19 +398,19 @@ Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueW
    posy +=spacing+spacing;
    UIButton *b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_15_MINS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_title(_("15 m"));
+   b->set_title(_("15 m").c_str());
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_30_MINS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_title(_("30 m"));
+   b->set_title(_("30 m").c_str());
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_ONE_HOUR);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_title(_("1 h"));
+   b->set_title(_("1 h").c_str());
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_TWO_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_title(_("2 h"));
+   b->set_title(_("2 h").c_str());
 
    posy += 25 + spacing;
    posx = spacing;
@@ -420,15 +420,15 @@ Ware_Statistics_Menu::Ware_Statistics_Menu(Interactive_Player* parent, UIUniqueW
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_FOUR_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_title(_("4 h"));
+   b->set_title(_("4 h").c_str());
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_EIGHT_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_title(_("8 h"));
+   b->set_title(_("8 h").c_str());
    posx += button_size+spacing;
    b = new UIButton(this, posx, posy, button_size, 25, 4, WUIPlot_Area::TIME_16_HOURS);
    b->clickedid.set(this, &Ware_Statistics_Menu::clicked);
-   b->set_title(_("16 h"));
+   b->set_title(_("16 h").c_str());
    posx += button_size+spacing;
    posy += 32+spacing;
 

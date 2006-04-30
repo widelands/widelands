@@ -73,12 +73,12 @@ Game_Main_Menu_Load_Game::Game_Main_Menu_Load_Game(Interactive_Player* parent, U
    posy=get_inner_h()-30;
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 4, 1);
    but->clickedid.set(this, &Game_Main_Menu_Load_Game::clicked);
-   but->set_title(_("OK"));
+   but->set_title(_("OK").c_str());
    but->set_enabled(false);
    m_ok_btn=but;
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 4, 0);
    but->clickedid.set(this, &Game_Main_Menu_Load_Game::clicked);
-   but->set_title(_("Cancel"));
+   but->set_title(_("Cancel").c_str());
 
    m_basedir="ssave";
    m_curdir="ssave";

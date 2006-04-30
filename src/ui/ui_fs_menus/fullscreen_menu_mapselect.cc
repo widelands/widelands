@@ -65,11 +65,11 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect(Editor_Game_Base *g, Map_Lo
 
 	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_MapSelect::end_modal);
-	b->set_title( _("Back") );
+	b->set_title(_("Back").c_str());
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_MapSelect::ok);
-	m_ok->set_title(_("OK"));
+	m_ok->set_title(_("OK").c_str());
 	m_ok->set_enabled(false);
 
 	// Create the list area

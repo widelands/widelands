@@ -35,7 +35,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Allow_Building::Event_Allow_Building(void) {
-   set_name(_("Allow Building"));
+	set_name(_("Allow Building").c_str());
    set_player(0);
    set_building("<undefined>");
    set_allow(true);

@@ -1517,7 +1517,7 @@ void Worker_Descr::parse(const char *directory, Profile *prof, const EncodeData 
 	sglobal = prof->get_safe_section("global");
 
 	m_descname = sglobal->get_string("descname", get_name());
-	m_helptext = sglobal->get_string("help", _("Doh... someone forgot the help text!"));
+	m_helptext = sglobal->get_string("help", _("Doh... someone forgot the help text!").c_str());
 
 	snprintf(buf, sizeof(buf),	"%s_menu.png", get_name());
 	string = sglobal->get_string("menu_pic", buf);

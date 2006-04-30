@@ -42,7 +42,7 @@ show a simple info dialog with infos about this field
 ===========
 */
 int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive* parent) {
-   UIWindow* w = new UIWindow(parent, 30, 30, 400, 200, _("Field Information"));
+   UIWindow* w = new UIWindow(parent, 30, 30, 400, 200, _("Field Information").c_str());
    UIMultiline_Textarea* multiline_textarea = new UIMultiline_Textarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), 0);
 
    Field* f=fc.field;
@@ -50,9 +50,9 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
    std::string buf;
    char buf1[1024];
 
-   sprintf(buf1, "%s\n", _("1) Field Infos")); buf+=buf1;
-   sprintf(buf1, " %s (%i/%i)\n", _("Coordinates"), fc.x, fc.y); buf+=buf1;
-   sprintf(buf1, " %s %i\n", _("Height"), f->get_height()); buf+=buf1;
+   sprintf(buf1, "%s\n", _("1) Field Infos").c_str()); buf+=buf1;
+   sprintf(buf1, " %s (%i/%i)\n", _("Coordinates").c_str(), fc.x, fc.y); buf+=buf1;
+   sprintf(buf1, " %s %i\n", _("Height").c_str(), f->get_height()); buf+=buf1;
    buf+=_(" Caps: ");
    switch((f->get_caps() & BUILDCAPS_SIZEMASK)) {
       case BUILDCAPS_SMALL: buf+=_("small"); break;
@@ -66,50 +66,50 @@ int Editor_Info_Tool::handle_click_impl(FCoords& fc,Map* map, Editor_Interactive
    if(f->get_caps() & MOVECAPS_WALK) buf+=_(" walk");
    if(f->get_caps() & MOVECAPS_SWIM) buf+=_(" swim");
    buf+="\n";
-   sprintf(buf1, " %s: %i\n", _("Owned by"), f->get_owned_by()); buf+=buf1;
-   sprintf(buf1, " %s: %s (TODO! more info)\n", _("Has base immovable"), f->get_immovable() ? "Yes" : "No"); buf+=buf1;
-   sprintf(buf1, " %s: %s (TODO: more informations)\n", _("Has bobs"), f->get_first_bob() ? "Yes" : "No"); buf+=buf1;
+   sprintf(buf1, " %s: %i\n", _("Owned by").c_str(), f->get_owned_by()); buf+=buf1;
+   sprintf(buf1, " %s: %s (TODO! more info)\n", _("Has base immovable").c_str(), f->get_immovable() ? "Yes" : "No"); buf+=buf1;
+   sprintf(buf1, " %s: %s (TODO: more informations)\n", _("Has bobs").c_str(), f->get_first_bob() ? "Yes" : "No"); buf+=buf1;
    int res=f->get_resources();
    int amount=f->get_resources_amount();
    if(res==0 && amount==0) {
-      sprintf(buf1, _(" Has resources: No\n"));
+	   sprintf(buf1, _(" Has resources: No\n").c_str());
    } else {
-      sprintf(buf1, " %s, %i %s '%s'\n", _("Has resources: Yes"), amount, _("amount of"), map->get_world()->get_resource(res)->get_name());
+	   sprintf(buf1, " %s, %i %s '%s'\n", _("Has resources: Yes").c_str(), amount, _("amount of").c_str(), map->get_world()->get_resource(res)->get_name());
    }
    buf+=buf1;
 
-   sprintf(buf1, " %s: %i\n", _("Start resources amount"), f->get_starting_res_amount());
+   sprintf(buf1, " %s: %i\n", _("Start resources amount").c_str(), f->get_starting_res_amount());
    buf+=buf1;
 
-   sprintf(buf1, _(" Roads: TODO!\n")); buf+=buf1;
+   sprintf(buf1, _(" Roads: TODO!\n").c_str()); buf+=buf1;
 
    buf += "\n";
    Terrain_Descr* ter=f->get_terr();
-   sprintf(buf1, "%s\n", _("2) Right Terrain Info\n")); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Name"), ter->get_name()); buf+=buf1;
-   sprintf(buf1, " %s: %i\n", _("Texture Number"), ter->get_texture()); buf+=buf1;
+   sprintf(buf1, "%s\n", _("2) Right Terrain Info\n").c_str()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Name").c_str(), ter->get_name()); buf+=buf1;
+   sprintf(buf1, " %s: %i\n", _("Texture Number").c_str(), ter->get_texture()); buf+=buf1;
 
    buf += "\n";
    ter=f->get_terd();
-   sprintf(buf1, "%s\n", _("3) Down Terrain Info\n")); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Name"), ter->get_name()); buf+=buf1;
-   sprintf(buf1, " %s: %i\n", _("Texture Number"), ter->get_texture()); buf+=buf1;
+   sprintf(buf1, "%s\n", _("3) Down Terrain Info\n").c_str()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Name").c_str(), ter->get_name()); buf+=buf1;
+   sprintf(buf1, " %s: %i\n", _("Texture Number").c_str(), ter->get_texture()); buf+=buf1;
 
    buf += "\n";
-   sprintf(buf1, "%s\n", _("4) Map Info")); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Name"), map->get_name()); buf+=buf1;
-   sprintf(buf1, " %s: %ix%i\n", _("Size"), map->get_width(), map->get_height()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Author"), map->get_author()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Descr"), map->get_description()); buf+=buf1;
-   sprintf(buf1, " %s: %i\n", _("Number of Players"), map->get_nrplayers()); buf+=buf1;
-   sprintf(buf1, " %s\n", _(" TODO: more information (number of resources, number of terrains...)")); buf+=buf1;
+   sprintf(buf1, "%s\n", _("4) Map Info").c_str()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Name").c_str(), map->get_name()); buf+=buf1;
+   sprintf(buf1, " %s: %ix%i\n", _("Size").c_str(), map->get_width(), map->get_height()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Author").c_str(), map->get_author()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Descr").c_str(), map->get_description()); buf+=buf1;
+   sprintf(buf1, " %s: %i\n", _("Number of Players").c_str(), map->get_nrplayers()); buf+=buf1;
+   sprintf(buf1, " %s\n", _(" TODO: more information (number of resources, number of terrains...)").c_str()); buf+=buf1;
 
    buf += "\n";
-   sprintf(buf1, "%s\n", _("5) World Info")); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Name"), map->get_world()->get_name()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Author"), map->get_world()->get_author()); buf+=buf1;
-   sprintf(buf1, " %s: %s\n", _("Descr"), map->get_world()->get_descr()); buf+=buf1;
-   sprintf(buf1, " %s\n", _(" TODO -- More information (Number of bobs/number of wares...)\n")); buf+=buf1;
+   sprintf(buf1, "%s\n", _("5) World Info").c_str()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Name").c_str(), map->get_world()->get_name()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Author").c_str(), map->get_world()->get_author()); buf+=buf1;
+   sprintf(buf1, " %s: %s\n", _("Descr").c_str(), map->get_world()->get_descr()); buf+=buf1;
+   sprintf(buf1, " %s\n", _(" TODO -- More information (Number of bobs/number of wares...)\n").c_str()); buf+=buf1;
 
    buf += "\n";
    buf += "\n";

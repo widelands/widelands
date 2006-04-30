@@ -148,7 +148,7 @@ confirm building destruction when the building's base flag is removed.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, PlayerImmovable* todestroy)
-	: UIWindow(parent, 0, 0, 160, 90, _("Destroy building?"))
+	: UIWindow(parent, 0, 0, 160, 90, _("Destroy building?").c_str())
 {
 	UIButton* btn;
 	std::string text;
@@ -1033,7 +1033,7 @@ class ProductionSite_Window_ListWorkerWindow : public UIWindow{
  * Constructor
  */
 ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)
-   : UIWindow(parent, 0, 0, 320, 125, _("Worker Listing")) {
+	: UIWindow(parent, 0, 0, 320, 125, _("Worker Listing").c_str()) {
    m_ps=ps;
    m_ps_location=ps->get_position();
    m_parent=parent;
@@ -1133,7 +1133,7 @@ void ProductionSite_Window_ListWorkerWindow::update(void) {
       if(worker->get_current_experience()!=-1 && worker->get_needed_experience()!=-1) {
          sprintf(buffer, "%i/%i", worker->get_current_experience(), worker->get_needed_experience());
          m_experience->set_text(buffer);
-	 sprintf(buffer, "%s", i18n::translate(worker->get_becomes())); //don't use _() ! Would tag "worker->get_becomes" for translation !
+	 sprintf(buffer, "%s", i18n::translate(worker->get_becomes()).c_str()); //don't use _() ! Would tag "worker->get_becomes" for translation !
          m_becomes->set_text(buffer);
       } else {
          m_experience->set_text("");
@@ -1312,12 +1312,12 @@ MilitarySite_Window::MilitarySite_Window(Interactive_Player* parent, MilitarySit
 
    // Soldiers view
 	m_table=new UITable(box, 0, 0, 360, 200, Align_Left, UITable::UP);
-	m_table->add_column(_("Name"), UITable::STRING, 100);
-	m_table->add_column(_("HP"), UITable::STRING, 40);
-	m_table->add_column(_("AT"), UITable::STRING, 40);
-	m_table->add_column(_("DE"), UITable::STRING, 40);
-	m_table->add_column(_("EV"), UITable::STRING, 40);
-	m_table->add_column(_("Level"), UITable::STRING, 100); // enough space for scrollbar
+	m_table->add_column(_("Name").c_str(), UITable::STRING, 100);
+	m_table->add_column(_("HP").c_str(), UITable::STRING, 40);
+	m_table->add_column(_("AT").c_str(), UITable::STRING, 40);
+	m_table->add_column(_("DE").c_str(), UITable::STRING, 40);
+	m_table->add_column(_("EV").c_str(), UITable::STRING, 40);
+	m_table->add_column(_("Level").c_str(), UITable::STRING, 100); // enough space for scrollbar
 
    box->add(m_table, UIBox::AlignCenter);
 
@@ -1509,7 +1509,7 @@ private:
 };
 
 TrainingSite_Options_Window::TrainingSite_Options_Window(Interactive_Player* parent, TrainingSite* ps)
-		: UIWindow(parent, 0, 0, 320, 125, _("Training Options")) {
+	: UIWindow(parent, 0, 0, 320, 125, _("Training Options").c_str()) {
 
 	int _bs = 22;
 	int _cn = 20;
@@ -1749,12 +1749,12 @@ UIBox* TrainingSite_Window::create_military_box (UIPanel* panel)
 
       // Soldiers view
    m_table=new UITable(sold_box, 0, 0, 360, 200, Align_Left, UITable::UP);
-   m_table->add_column(_("Name"), UITable::STRING, 100);
-   m_table->add_column(_("HP"), UITable::STRING, 40);
-   m_table->add_column(_("AT"), UITable::STRING, 40);
-   m_table->add_column(_("DE"), UITable::STRING, 40);
-   m_table->add_column(_("EV"), UITable::STRING, 40);
-   m_table->add_column(_("Level"), UITable::STRING, 100); // enough space for scrollbar
+   m_table->add_column(_("Name").c_str(), UITable::STRING, 100);
+   m_table->add_column(_("HP").c_str(), UITable::STRING, 40);
+   m_table->add_column(_("AT").c_str(), UITable::STRING, 40);
+   m_table->add_column(_("DE").c_str(), UITable::STRING, 40);
+   m_table->add_column(_("EV").c_str(), UITable::STRING, 40);
+   m_table->add_column(_("Level").c_str(), UITable::STRING, 100); // enough space for scrollbar
    sold_box->add (m_table, Align_Left);
 
       // Add drop soldier button

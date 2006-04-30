@@ -263,7 +263,7 @@ void Interactive_Player::think()
    char buf[32] = "";
 
    if (!speed)
-      strcpy(buf, _("PAUSE"));
+	   strcpy(buf, _("PAUSE").c_str());
    else if (speed > 1)
       snprintf(buf, sizeof(buf), "%ix", speed);
 

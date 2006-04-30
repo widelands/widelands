@@ -54,7 +54,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_LoadGame::ok);
-	m_ok->set_title(_("OK"));
+	m_ok->set_title(_("OK").c_str());
 	m_ok->set_enabled(false);
 
 	// Create the list area

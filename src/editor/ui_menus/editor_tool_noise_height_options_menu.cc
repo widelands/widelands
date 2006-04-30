@@ -44,12 +44,12 @@ Create all the buttons etc...
 */
 Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu(Editor_Interactive *parent, int index,
 				Editor_Noise_Height_Tool* nht, UIUniqueWindowRegistry* registry)
-   : Editor_Tool_Options_Menu(parent, index, registry, _("Noise Height Options"))
+	: Editor_Tool_Options_Menu(parent, index, registry, _("Noise Height Options").c_str())
 {
    char buf[250];
-   sprintf(buf, "%s: %i", _("Minimum"), 10);
+   sprintf(buf, "%s: %i", _("Minimum").c_str(), 10);
    m_textarea_lower=new UITextarea(this, 10, 25, buf);
-   sprintf(buf, "%s: %i", _("Maximum"), 10);
+   sprintf(buf, "%s: %i", _("Maximum").c_str(), 10);
    m_textarea_upper=new UITextarea(this, 105, 25, buf);
 
    UIButton* b = new UIButton(this, 30, 40, 20, 20, 0, 0);
@@ -103,9 +103,9 @@ void Editor_Tool_Noise_Height_Options_Menu::update(void) {
    char buf[200];
    int up, low;
    m_nht->get_values(&low, &up);
-   sprintf(buf, "%s: %i", _("Minimum"), low);
+   sprintf(buf, "%s: %i", _("Minimum").c_str(), low);
    m_textarea_lower->set_text(buf);
-   sprintf(buf, "%s: %i", _("Maximum"), up);
+   sprintf(buf, "%s: %i", _("Maximum").c_str(), up);
    m_textarea_upper->set_text(buf);
 
    sprintf(buf, "%i", m_nht->get_sht()->get_set_to());

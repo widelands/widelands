@@ -27,8 +27,8 @@
 MapVariableManager::MapVariableManager( void ) {
    // Create a default variable
    String_MapVariable* smv = new String_MapVariable( 1 );
-   smv->set_name(_("Next scenario"));
-   smv->set_value(_("<undefined>"));
+   smv->set_name(_("Next scenario").c_str());
+   smv->set_value(_("<undefined>").c_str());
    register_new_variable( smv );
 }
 

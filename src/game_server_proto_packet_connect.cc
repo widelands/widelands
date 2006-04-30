@@ -68,18 +68,18 @@ void Game_Server_Protocol_Packet_Connect::handle_reply(Game_Server_Connection* g
          break;
 
       case PROTOCOL_TO_OLD:
-         snprintf(buffer, 1024, _("Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"),
+	      snprintf(buffer, 1024, _("Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n").c_str(),
 			 GSP_MAJOR_VERSION, GSP_MINOR_VERSION, version &0xff00 , version &0x00ff );
          gsc->critical_error(buffer);
          break;
 
       case SERVER_FULL:
-         snprintf(buffer, 1024, _("Server is full!\n"));
+	      snprintf(buffer, 1024, _("Server is full!\n").c_str());
          gsc->critical_error(buffer);
          break;
 
       case GAME_NOT_SERVED:
-         snprintf(buffer, 1024, _("This server doesn't serve widelands!\n"));
+	      snprintf(buffer, 1024, _("This server doesn't serve widelands!\n").c_str());
          gsc->critical_error(buffer);
          break;
 

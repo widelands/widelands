@@ -244,12 +244,12 @@ void S2_Map_Loader::load_s2mf_header()
 	m_map->set_author(header.author);
 	m_map->set_name(header.name);
 	m_map->set_nrplayers(header.nplayers);
-	m_map->set_description(_("Bluebyte Settlers II Map. No comment defined!"));
+	m_map->set_description(_("Bluebyte Settlers II Map. No comment defined!").c_str());
 
 	switch(header.uses_world) {
-	case 0: m_map->set_world_name(_("greenland")); break;
-	case 1: m_map->set_world_name(_("blackland")); break;
-	case 2: m_map->set_world_name(_("winterland")); break;
+		case 0: m_map->set_world_name(_("greenland").c_str()); break;
+		case 1: m_map->set_world_name(_("blackland").c_str()); break;
+		case 2: m_map->set_world_name(_("winterland").c_str()); break;
 	}
 }
 

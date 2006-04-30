@@ -46,7 +46,7 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
-	: UIWindow(parent, 0, 0, 500, 300, _("Load Map"))
+	: UIWindow(parent, 0, 0, 500, 300, _("Load Map").c_str())
 {
    m_parent=parent;
 
@@ -103,12 +103,12 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 
    UIButton* but= new UIButton(this, get_inner_w()/2-spacing-80, posy, 80, 20, 0, 1);
    but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
-   but->set_title(_("OK"));
+   but->set_title(_("OK").c_str());
    m_ok_btn=but;
    but->set_enabled(false);
    but= new UIButton(this, get_inner_w()/2+spacing, posy, 80, 20, 1, 0);
    but->clickedid.set(this, &Main_Menu_Load_Map::clicked);
-   but->set_title(_("Cancel"));
+   but->set_title(_("Cancel").c_str());
 
 
    m_basedir="maps";

@@ -30,7 +30,7 @@ static const int TRIGGER_VERSION = 1;
  * Init and cleanup
  */
 Trigger_Null::Trigger_Null(void) {
-   set_name(_("Null Trigger"));
+	set_name(_("Null Trigger").c_str());
    set_trigger(false);
 
    m_value=m_should_toggle=false;

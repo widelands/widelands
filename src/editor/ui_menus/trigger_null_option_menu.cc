@@ -30,7 +30,7 @@
 #include "util.h"
 
 Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, Trigger_Null* trigger) :
-   UIWindow(parent, 0, 0, 164, 100, _("Trigger Option Menu")) {
+   UIWindow(parent, 0, 0, 164, 100, _("Trigger Option Menu").c_str()) {
    m_parent=parent;
 
    // Caption
@@ -53,11 +53,11 @@ Trigger_Null_Option_Menu::Trigger_Null_Option_Menu(Editor_Interactive* parent, T
    posx=(get_inner_w()/2)-60-spacing;
    posy+=20+spacing;
    UIButton* b=new UIButton(this, posx, posy, 60, 20, 0, 1);
-   b->set_title(_("Ok"));
+   b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Trigger_Null_Option_Menu::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 60, 20, 1, 0);
-   b->set_title(_("Cancel"));
+   b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Trigger_Null_Option_Menu::clicked);
 
    set_inner_size(get_inner_w(), posy+20+spacing);

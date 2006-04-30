@@ -89,47 +89,47 @@ Editor_Event_Menu::Editor_Event_Menu(Editor_Interactive *parent, UIUniqueWindowR
    posy=get_inner_h()-30;
    posx=spacing;
    UIButton* b=new UIButton(this, posx, posy, 80, 20, 4, 6);
-   b->set_title(_("New Event Chain"));
+   b->set_title(_("New Event Chain").c_str());
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
    posx+=80+spacing;
    m_btn_edit_eventchain=new UIButton(this, posx, posy, 45, 20, 0, 8);
-   m_btn_edit_eventchain->set_title(_("Edit"));
+   m_btn_edit_eventchain->set_title(_("Edit").c_str());
    m_btn_edit_eventchain->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_edit_eventchain->set_enabled(false);
    posx+=45+spacing;
    m_btn_del_eventchain=new UIButton(this, posx, posy, 45, 20, 0, 7);
-   m_btn_del_eventchain->set_title(_("Del"));
+   m_btn_del_eventchain->set_title(_("Del").c_str());
    m_btn_del_eventchain->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_del_eventchain->set_enabled(false);
 
    posx=spacing + ls_width + spacing;
    b=new UIButton(this, posx, posy, 80, 20, 4, 0);
-   b->set_title(_("New Event"));
+   b->set_title(_("New Event").c_str());
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
    posx+=80+spacing;
    m_btn_edit_event=new UIButton(this, posx, posy, 45, 20, 0, 2);
-   m_btn_edit_event->set_title(_("Edit"));
+   m_btn_edit_event->set_title(_("Edit").c_str());
    m_btn_edit_event->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_edit_event->set_enabled(false);
    posx+=45+spacing;
    m_btn_del_event=new UIButton(this, posx, posy, 45, 20, 0, 1);
-   m_btn_del_event->set_title(_("Del"));
+   m_btn_del_event->set_title(_("Del").c_str());
    m_btn_del_event->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_del_event->set_enabled(false);
 
 
    posx= 3* spacing + 2*ls_width;
    b=new UIButton(this, posx, posy, 80, 20, 4, 3);
-   b->set_title(_("New Trigger"));
+   b->set_title(_("New Trigger").c_str());
    b->clickedid.set(this, &Editor_Event_Menu::clicked);
    posx+=80+spacing;
    m_btn_edit_trigger=new UIButton(this, posx, posy, 45, 20, 0, 4);
-   m_btn_edit_trigger->set_title(_("Edit"));
+   m_btn_edit_trigger->set_title(_("Edit").c_str());
    m_btn_edit_trigger->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_edit_trigger->set_enabled(false);
    posx+=45+spacing;
    m_btn_del_trigger=new UIButton(this, posx, posy, 45, 20, 0, 5);
-   m_btn_del_trigger->set_title(_("Del"));
+   m_btn_del_trigger->set_title(_("Del").c_str());
    m_btn_del_trigger->clickedid.set(this, &Editor_Event_Menu::clicked);
    m_btn_del_trigger->set_enabled(false);
 
@@ -286,7 +286,7 @@ void Editor_Event_Menu::clicked(int id) {
 
          int n = 1;
          while( 1 ) {
-            snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed"), n);
+		 snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
             if( !m_parent->get_egbase()->get_map()->get_mecm()->get_eventchain( buffer ))
                break;
             ++n;
@@ -294,7 +294,7 @@ void Editor_Event_Menu::clicked(int id) {
 
          ev->set_name( buffer );
          m_parent->get_egbase()->get_map()->get_mecm()->register_new_eventchain( ev );
-         m_eventchain_list->add_entry( _("Unnamed"), ev, true);
+	 m_eventchain_list->add_entry( _("Unnamed").c_str(), ev, true);
          m_eventchain_list->sort();
       } else {
          // TriggerConditional was not accepted. Remove this EventChain straithly.

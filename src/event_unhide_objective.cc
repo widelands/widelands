@@ -34,7 +34,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Unhide_Objective::Event_Unhide_Objective(void) {
-   set_name(_("Move View"));
+	set_name(_("Move View").c_str());
    set_dounhide(true);
    set_objective(0);
 }

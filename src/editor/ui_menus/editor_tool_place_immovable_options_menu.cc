@@ -48,7 +48,7 @@ constructor
 */
 Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive* parent, int index,
 		Editor_Place_Immovable_Tool* pit, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, index, registry, _("Immovable Bobs Menu")) {
+   Editor_Tool_Options_Menu(parent, index, registry, _("Immovable Bobs Menu").c_str()) {
    const int max_items_in_tab=6;
 
    m_pit=pit;

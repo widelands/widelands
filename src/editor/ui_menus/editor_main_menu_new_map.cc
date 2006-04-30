@@ -39,7 +39,7 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
-	: UIWindow(parent, (parent->get_w()-140)/2, (parent->get_h()-150)/2, 140, 150, _("New Map"))
+	: UIWindow(parent, (parent->get_w()-140)/2, (parent->get_h()-150)/2, 140, 150, _("New Map").c_str())
 {
    m_parent=parent;
 
@@ -57,7 +57,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    int posx=offsx;
    int posy=offsy;
    m_w=0; m_h=0;
-   sprintf(buf, "%s: %i", _("Width"), MAP_DIMENSIONS[m_w]);
+   sprintf(buf, "%s: %i", _("Width").c_str(), MAP_DIMENSIONS[m_w]);
    m_width=new UITextarea(this, posx+spacing+20, posy+7, buf, Align_Left);
    UIButton* b = new UIButton(this, posx, posy, 20, 20, 1, 0);
    b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
@@ -67,7 +67,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=20+spacing+spacing;
 
-   sprintf(buf, "%s: %i", _("Height"), MAP_DIMENSIONS[m_h]);
+   sprintf(buf, "%s: %i", _("Height").c_str(), MAP_DIMENSIONS[m_h]);
    m_height=new UITextarea(this, posx+spacing+20, posy+7, buf, Align_Left);
    b = new UIButton(this, posx, posy, 20, 20, 1, 2);
    b->set_pic(g_gr->get_picture( PicMod_UI,  "pics/scrollbar_up.png" ));
@@ -89,7 +89,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
    posy+=height+spacing+spacing+spacing;
 
    b=new UIButton(this, posx, posy, width, height, 0, 5);
-   b->set_title(_("Create Map"));
+   b->set_title(_("Create Map").c_str());
    b->clickedid.set(this, &Main_Menu_New_Map::button_clicked);
    posy+=height+spacing;
 
@@ -144,9 +144,9 @@ void Main_Menu_New_Map::button_clicked(int n) {
    if(m_w>=NUMBER_OF_MAP_DIMENSIONS) m_w=NUMBER_OF_MAP_DIMENSIONS-1;
    if(m_h<0) m_h=0;
    if(m_h>=NUMBER_OF_MAP_DIMENSIONS) m_h=NUMBER_OF_MAP_DIMENSIONS-1;
-   sprintf(buf, "%s: %i", _("Width"), MAP_DIMENSIONS[m_w]);
+   sprintf(buf, "%s: %i", _("Width").c_str(), MAP_DIMENSIONS[m_w]);
    m_width->set_text(buf);
-   sprintf(buf, "%s: %i", _("Height"), MAP_DIMENSIONS[m_h]);
+   sprintf(buf, "%s: %i", _("Height").c_str(), MAP_DIMENSIONS[m_h]);
    m_height->set_text(buf);
 }
 

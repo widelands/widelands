@@ -38,7 +38,7 @@
 #include "util.h"
 
 Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Interactive* parent, EventChain* chain) :
-   UIWindow(parent, 0, 0, 505, 340, _("Edit Event Chain")) {
+   UIWindow(parent, 0, 0, 505, 340, _("Edit Event Chain").c_str()) {
 
    m_parent=parent;
    m_event_chain = chain;
@@ -76,11 +76,11 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
 
    posy = 75;
    UIButton* b = new UIButton(this, posx, posy, 80, 20, 0, 10);
-   b->set_title(_("Conditional"));
+   b->set_title(_("Conditional").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    posy += 20 + spacing + spacing;
    b = new UIButton(this, posx, posy, 80, 20, 0, 11);
-   b->set_title(_("New Event"));
+   b->set_title(_("New Event").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    posy += 20 + spacing + spacing;
    b = new UIButton(this, posx, posy, 80, 20, 0, 20);
@@ -90,7 +90,7 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    b->set_enabled( false );
    m_insert_btn = b;
    b = new UIButton(this, posx, posy, 80, 20, 0, 21);
-   b->set_title(_("Delete"));
+   b->set_title(_("Delete").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    b->set_enabled( false );
    m_delete_btn = b;
@@ -122,11 +122,11 @@ Editor_Event_Menu_Edit_EventChain::Editor_Event_Menu_Edit_EventChain(Editor_Inte
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
    b=new UIButton(this, posx, posy, 80, 20, 0, 1);
-   b->set_title(_("Ok"));
+   b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
    posx=(get_inner_w()/2)+spacing;
    b=new UIButton(this, posx, posy, 80, 20, 1, 0);
-   b->set_title(_("Cancel"));
+   b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_Edit_EventChain::clicked);
 
    for( uint i = 0; i < m_event_chain->get_nr_events(); i++ ) {

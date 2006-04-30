@@ -49,7 +49,7 @@ Create all the buttons etc...
 */
 Editor_Tool_Set_Terrain_Tool_Options_Menu::Editor_Tool_Set_Terrain_Tool_Options_Menu(Editor_Interactive *parent, int index,
 						Editor_Set_Both_Terrain_Tool* sbt, UIUniqueWindowRegistry *registry)
-	: Editor_Tool_Options_Menu(parent, index, registry, _("Terrain Select"))
+	: Editor_Tool_Options_Menu(parent, index, registry, _("Terrain Select").c_str())
 {
    m_sbt=sbt;
 

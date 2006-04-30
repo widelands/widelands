@@ -33,7 +33,7 @@
 #include "error.h"
 
 Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive* parent) :
-   UIWindow(parent, 0, 0, 400, 240, _("New Trigger")) {
+   UIWindow(parent, 0, 0, 400, 240, _("New Trigger").c_str()) {
   m_parent=parent;
 
    // Caption
@@ -65,12 +65,12 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger(Editor_Interactive*
    posy=get_inner_h()-30;
    posx=(get_inner_w()/2)-80-spacing;
    m_ok_button=new UIButton(this, posx, posy, 80, 20, 0, 1);
-   m_ok_button->set_title(_("Ok"));
+   m_ok_button->set_title(_("Ok").c_str());
    m_ok_button->clickedid.set(this, &Editor_Event_Menu_New_Trigger::clicked);
    m_ok_button->set_enabled(0);
    posx=(get_inner_w()/2)+spacing;
    UIButton* b=new UIButton(this, posx, posy, 80, 20, 1, 0);
-   b->set_title(_("Cancel"));
+   b->set_title(_("Cancel").c_str());
    b->clickedid.set(this, &Editor_Event_Menu_New_Trigger::clicked);
 
    center_to_parent();

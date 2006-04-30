@@ -43,7 +43,7 @@ constructor
 */
 Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu(Editor_Interactive* parent, int index,
       Editor_Increase_Height_Tool* iht, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, index, registry, _("Height Tools Options")) {
+   Editor_Tool_Options_Menu(parent, index, registry, _("Height Tools Options").c_str()) {
 
    m_iht=iht;
    m_dht=iht->get_dht();

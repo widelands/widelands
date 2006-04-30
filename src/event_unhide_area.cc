@@ -33,7 +33,7 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Unhide_Area::Event_Unhide_Area(void) {
-   set_name(_("Unhide Area"));
+	set_name(_("Unhide Area").c_str());
    set_coords(Coords(0,0));
    set_player(1);
    set_area(5);

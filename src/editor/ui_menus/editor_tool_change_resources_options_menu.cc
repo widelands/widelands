@@ -49,7 +49,7 @@ constructor
 */
 Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_Menu(Editor_Interactive* parent, int index,
       Editor_Increase_Resources_Tool* iht, UIUniqueWindowRegistry* registry) :
-   Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options")) {
+   Editor_Tool_Options_Menu(parent, index, registry, _("Resources Tools Options").c_str()) {
 
    m_parent=parent;
    m_irt=iht;

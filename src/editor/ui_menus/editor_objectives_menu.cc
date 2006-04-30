@@ -62,7 +62,7 @@ class Edit_Objective_Window : public UIWindow {
 };
 
 Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UITable_Entry* te)
-   : UIWindow(parent, 0, 0, 250, 85, _("Edit Objective")) {
+	: UIWindow(parent, 0, 0, 250, 85, _("Edit Objective").c_str()) {
 
    m_parent=parent;
    m_te = te;
@@ -98,10 +98,10 @@ Edit_Objective_Window::Edit_Objective_Window(Editor_Interactive* parent, UITable
 
    // back button
    UIButton* b = new UIButton( this, get_inner_w()/2-80-spacing, posy, 80, 20, 1, 0);
-   b->set_title(_("Ok"));
+   b->set_title(_("Ok").c_str());
    b->clickedid.set(this, &Edit_Objective_Window::clicked);
    b = new UIButton( this, get_inner_w()/2 + spacing, posy, 80, 20, 1, 1);
-   b->set_title(_("Back"));
+   b->set_title(_("Back").c_str());
    b->clickedid.set(this, &Edit_Objective_Window::clicked);
    posy += 20 + spacing;
 
@@ -175,9 +175,9 @@ Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UIUni
 
    const int spacing=5;
    m_table = new UITable(this, 5, 25, get_inner_w()-2*spacing, get_inner_h() - 60);
-   m_table->add_column(_("Name"), UITable::STRING, 270);
-   m_table->add_column(_("Optional"), UITable::STRING, 70);
-   m_table->add_column(_("Visible"), UITable::STRING, 60);
+   m_table->add_column(_("Name").c_str(), UITable::STRING, 270);
+   m_table->add_column(_("Optional").c_str(), UITable::STRING, 70);
+   m_table->add_column(_("Visible").c_str(), UITable::STRING, 60);
    m_table->selected.set(this, &Editor_Objectives_Menu::table_selected);
    m_table->double_clicked.set(this, &Editor_Objectives_Menu::table_dblclicked);
 
@@ -185,16 +185,16 @@ Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UIUni
    int posx=spacing;
 
    UIButton* nbutton = new UIButton( this, spacing, get_inner_h() - 30, 60, 20, 0, 0);
-   nbutton->set_title(_("New"));
+   nbutton->set_title(_("New").c_str());
    nbutton->clickedid.set(this, &Editor_Objectives_Menu::clicked);
    posx += 60 + spacing;
    m_edit_button = new UIButton( this, posx, get_inner_h() - 30, 60, 20, 0, 1);
-   m_edit_button->set_title(_("Edit"));
+   m_edit_button->set_title(_("Edit").c_str());
    m_edit_button->set_enabled(false);
    m_edit_button->clickedid.set(this, &Editor_Objectives_Menu::clicked);
    posx += 60 + spacing;
    m_delete_button = new UIButton( this, posx, get_inner_h() - 30, 60, 20, 0, 2);
-   m_delete_button->set_title(_("Delete"));
+   m_delete_button->set_title(_("Delete").c_str());
    m_delete_button->set_enabled(false);
    m_delete_button->clickedid.set(this, &Editor_Objectives_Menu::clicked);
    posx += 60 + spacing;
@@ -238,7 +238,7 @@ void Editor_Objectives_Menu::clicked( int n ) {
 
          int n = 1;
          while( 1 ) {
-            snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed"), n);
+		 snprintf(buffer, sizeof(buffer), "%s%i", _("Unnamed").c_str(), n);
             if( !m_parent->get_egbase()->get_map()->get_mom()->get_objective( buffer ))
                break;
             ++n;

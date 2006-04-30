@@ -35,7 +35,7 @@ Create all the buttons etc...
 ===============
 */
 Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
-	: UIWindow(parent, (parent->get_w()-200)/2, (parent->get_h()-300)/2, 200, 300, _("Map Options"))
+	: UIWindow(parent, (parent->get_w()-200)/2, (parent->get_h()-300)/2, 200, 300, _("Map Options").c_str())
 {
    m_parent=parent;
 
@@ -67,7 +67,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
    m_author=new UIEdit_Box(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 1);
    m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
    posy+=height+spacing;
-   m_descr=new UIMultiline_Editbox(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, _("Nothing defined!"));
+   m_descr=new UIMultiline_Editbox(this, posx, posy, get_inner_w()-spacing-posx, get_inner_h()-spacing-posy, _("Nothing defined!").c_str());
    m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
    update();
 }

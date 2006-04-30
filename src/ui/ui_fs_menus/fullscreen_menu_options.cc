@@ -54,11 +54,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct op
 
 	b = new UIButton(this, 330, 420, 174, 24, 0, om_cancel);
 	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
-	b->set_title(_("Cancel"));
+	b->set_title(_("Cancel").c_str());
 
 	b = new UIButton(this, 136, 420, 174, 24, 2, om_ok);
 	b->clickedid.set(this, &Fullscreen_Menu_Options::end_modal);
-	b->set_title(_("Apply"));
+	b->set_title(_("Apply").c_str());
 
 	// Fullscreen mode
 	m_fullscreen = new UICheckbox(this, 260, 70);

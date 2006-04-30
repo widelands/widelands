@@ -429,9 +429,9 @@ void Map::create_empty_map
    set_world_name(worldname.c_str());
    load_world();
    set_size(w,h);
-   set_name(_("No Name"));
-   set_author(_("Unknown"));
-   set_description(_("no description defined"));
+   set_name(_("No Name").c_str());
+   set_author(_("Unknown").c_str());
+   set_description(_("no description defined").c_str());
    set_nrplayers(1);
    set_scenario_player_tribe(1, _("<undefined>"));
    set_scenario_player_name(1, _("Player 1"));

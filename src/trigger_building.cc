@@ -36,7 +36,7 @@ static const int TRIGGER_VERSION = 1;
  * Init and cleanup
  */
 Trigger_Building::Trigger_Building(void) {
-   set_name(_("Building Trigger"));
+	set_name(_("Building Trigger").c_str());
    set_trigger(false);
    m_count=-1;
    m_area=-1;

@@ -225,7 +225,7 @@ std::string ConstructionSite::get_statistics_string()
 {
 	char buf[40];
 
-	snprintf(buf, sizeof(buf), "%u%% %s", (get_built_per64k() * 100) >> 16, _("built"));
+	snprintf(buf, sizeof(buf), "%u%% %s", (get_built_per64k() * 100) >> 16, _("built").c_str());
 
 	return std::string(buf);
 }

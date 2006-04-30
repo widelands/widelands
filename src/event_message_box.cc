@@ -37,9 +37,9 @@ static const int EVENT_VERSION = 1;
  * Init and cleanup
  */
 Event_Message_Box::Event_Message_Box(void) {
-   set_name(_("Message Box"));
-   set_text(_("No text defined"));
-   set_window_title(_("Window Title"));
+	set_name(_("Message Box").c_str());
+	set_text(_("No text defined").c_str());
+	set_window_title(_("Window Title").c_str());
    set_is_modal(false);
    set_dimensions( 400, 300 );
    set_pos( -1, -1 );

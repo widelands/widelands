@@ -53,11 +53,11 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 
 	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::back_clicked);
-	b->set_title(_("Back"));
+	b->set_title(_("Back").c_str());
 
 	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 1);
 	m_ok->clicked.set(this, &Fullscreen_Menu_LaunchGame::start_clicked);
-	m_ok->set_title(_("Start game"));
+	m_ok->set_title(_("Start game").c_str());
 	m_ok->set_enabled(false);
 	m_ok->set_visible(m_netgame==0 || m_netgame->is_host());
 
@@ -65,7 +65,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame(Game *g, NetGame* ng, Map
 	m_mapname = new UITextarea(this, 497, 175, "(no map)", Align_HCenter);
 	b = new UIButton(this, 410, 200, 174, 24, 1, 0);
 	b->clicked.set(this, &Fullscreen_Menu_LaunchGame::select_map);
-	b->set_title(_("Select map"));
+	b->set_title(_("Select map").c_str());
 	b->set_enabled (m_netgame==0 || m_netgame->is_host());
 
 	// Player settings

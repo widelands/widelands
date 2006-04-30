@@ -42,14 +42,14 @@
 static const int nr_of_events=7;
 
 Event_Descr EVENT_DESCRIPTIONS[nr_of_events] = {
-   { "message_box", _("Message Box"), _("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user") },
-   { "move_view", _("Move View"), _("This Event centers the Players View on a certain field") },
-   { "unhide_area", _("Unhide Area"), _("This Event makes a user definable part of the map visible for a selectable user") },
-   { "conquer_area", _("Conquer Area"), _("This Event conquers a user definable part of the map for one player if there isn't a player already there") },
-   { "allow_building", _("Allow Building"), _("Allows/Disables a certain building for a player so that it can be build or it can't any longer") },
+	{ "message_box", _("Message Box").c_str(), _("This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user").c_str() },
+	{ "move_view", _("Move View").c_str(), _("This Event centers the Players View on a certain field").c_str() },
+	{ "unhide_area", _("Unhide Area").c_str(), _("This Event makes a user definable part of the map visible for a selectable user").c_str() },
+	{ "conquer_area", _("Conquer Area").c_str(), _("This Event conquers a user definable part of the map for one player if there isn't a player already there").c_str() },
+	{ "allow_building", _("Allow Building").c_str(), _("Allows/Disables a certain building for a player so that it can be build or it can't any longer").c_str() },
 // TODO: Events below are not creatable in the editor. Make UI Windows for them
-   { "set_null_trigger", _("Set Null Trigger"), _("Manually set a Null Trigger to a given value") },
-   { "unhide_objective", _("Unhide Objective"), _("Hide or unhide an objective so that the player can see it") },
+	{ "set_null_trigger", _("Set Null Trigger").c_str(), _("Manually set a Null Trigger to a given value").c_str() },
+// 	{ "unhide_objective", _("Unhide Objective").c_str(), _("Hide or unhide an objective so that the player can see it").c_str() },
 };
 
 /*

@@ -71,7 +71,7 @@ GameChatMenu::GameChatMenu(Interactive_Player *plr, UIUniqueWindowRegistry *regi
 
    // Send button
    UIButton* b = new UIButton(this, spacing, posy, 80, STATEBOX_HEIGHT, 4, 0);
-   b->set_title(_("Send"));
+   b->set_title(_("Send").c_str());
    b->clickedid.set(this, &GameChatMenu::clicked);
 
    // Textbox
