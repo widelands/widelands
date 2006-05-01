@@ -145,6 +145,8 @@ const bool get_record() {return m_record;}
 	///\return byte offset into the playback file, used with file reading
 	const long int get_playback_offset();
 
+	void record_event(SDL_Event *e);
+
 	///\return a handle to the recording file
 	FILE *get_rec_file() {return m_frecord;}
 

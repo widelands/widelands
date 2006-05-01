@@ -104,14 +104,16 @@ char read_record_char()
  * \note Simple wrapper function to make stdio file access less painful
  * Will vanish when IO handling gets moved to C++ streams
  */
-void write_record_int(int v)
+void write_record_int(int v, FILE *f=0)
 {
-	assert(WLApplication::get()->get_rec_file());
+	if(f==0)
+		f=WLApplication::get()->get_rec_file();
+	assert(f);
 
 	v = Little32(v);
-	if (fwrite(&v, sizeof(v), 1, WLApplication::get()->get_rec_file()) != 1)
+	if (fwrite(&v, sizeof(v), 1, f) != 1)
 			throw wexception("Write of 4 bytes to record failed.");
-	fflush(WLApplication::get()->get_rec_file());
+	fflush(f);
 }
 
 /**
@@ -121,13 +123,15 @@ void write_record_int(int v)
  * Simple wrapper function to make stdio file access less painful
  * Will vanish when IO handling gets moved to C++ streams
  */
-int read_record_int()
+int read_record_int(FILE *f=0)
 {
 	int v;
 
-	assert(WLApplication::get()->get_play_file());
+	if(f==0)
+		f=WLApplication::get()->get_play_file();
+	assert(f);
 
-	if (fread(&v, sizeof(v), 1, WLApplication::get()->get_play_file()) != 1)
+	if (fread(&v, sizeof(v), 1, f) != 1)
 			throw wexception("Read of 4 bytes from record failed.");
 
 	return Little32(v);
@@ -211,7 +215,7 @@ WLApplication::WLApplication(const int argc, const char **argv):
 			//yes. remove the leading "--", just for cosmetics
 			opt.erase(0,2);
 		} else {
-			//no. mark the commandline as faulty
+			//no. mark the commandline as faulty and stop parsing
 			m_commandline.clear();
 			cout<<"Malformed option: "<<opt<<endl<<endl;
 			break;
@@ -327,6 +331,43 @@ void WLApplication::run()
 
 	//----------------------------------------------------------------------
 	//everything below here is unfinished work. please don't modify #fweber
+
+	while(!m_should_die) {
+		SDL_Event e;
+
+		//get an event from the queue; on empty queue, create an idle event
+		if (SDL_PollEvent(&e)==0) {
+			e.type=SDL_USEREVENT;
+			e.user.code=19;
+			SDL_PushEvent(&e);
+			//TODO: handle error
+		}
+
+		if(m_record)
+			record_event(&e);
+
+		switch(e.type) {
+		case SDL_MOUSEMOTION:
+			break;
+		case SDL_KEYDOWN:
+			break;
+		case SDL_SYSWMEVENT:
+			break;
+		case SDL_QUIT:
+			m_should_die=true;
+			break;
+		case SDL_USEREVENT:
+			switch(e.user.code) {
+			case /*WLEVENT_IDLE*/19:
+				break;
+			case Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC:
+				g_sound_handler.change_music();
+				break;
+			}
+			break;
+		}
+		break;
+	}
 }
 
 /**
@@ -480,44 +521,9 @@ restart:
 	// log all events into the journal file
 	if (WLApplication::get()->get_record())
 		{
-			if (haveevent)
-			{
-				switch(ev->type) {
-				case SDL_KEYDOWN:
-				case SDL_KEYUP:
-					write_record_char(RFC_EVENT);
-					write_record_char((ev->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
-					write_record_int(ev->key.keysym.sym);
-					write_record_int(ev->key.keysym.unicode);
-					break;
-
-				case SDL_MOUSEBUTTONDOWN:
-				case SDL_MOUSEBUTTONUP:
-					write_record_char(RFC_EVENT);
-					write_record_char((ev->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
-					write_record_char(ev->button.button);
-					break;
-
-				case SDL_MOUSEMOTION:
-					write_record_char(RFC_EVENT);
-					write_record_char(RFC_MOUSEMOTION);
-					write_record_int(ev->motion.x);
-					write_record_int(ev->motion.y);
-					write_record_int(ev->motion.xrel);
-					write_record_int(ev->motion.yrel);
-					break;
-
-				case SDL_QUIT:
-					write_record_char(RFC_EVENT);
-					write_record_char(RFC_QUIT);
-					break;
-
-				default:
-					goto restart; // can't really do anything useful with this command
-				}
-			}
-			else
-			{
+			if (haveevent) {
+				record_event(ev);
+			} else {
 				// Implement the throttle to avoid very quick inner mainloops when
 				// recoding a session
 				if (throttle && !WLApplication::get()->get_playback())
@@ -688,8 +694,47 @@ void WLApplication::handle_input(const InputCallback *cb)
 const long int WLApplication::get_playback_offset()
 {
 	assert(get_playback());
-
 	return ftell(get_play_file());
+}
+
+/**
+ * Record an event into the playback file
+ */
+void WLApplication::record_event(SDL_Event *e)
+{
+	switch(e->type) {
+		case SDL_KEYDOWN:
+		case SDL_KEYUP:
+			write_record_char(RFC_EVENT);
+			write_record_char((e->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
+			write_record_int(e->key.keysym.sym);
+			write_record_int(e->key.keysym.unicode);
+			break;
+
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP:
+			write_record_char(RFC_EVENT);
+			write_record_char((e->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
+			write_record_char(e->button.button);
+			break;
+
+		case SDL_MOUSEMOTION:
+			write_record_char(RFC_EVENT);
+			write_record_char(RFC_MOUSEMOTION);
+			write_record_int(e->motion.x);
+			write_record_int(e->motion.y);
+			write_record_int(e->motion.xrel);
+			write_record_int(e->motion.yrel);
+			break;
+
+		case SDL_QUIT:
+			write_record_char(RFC_EVENT);
+			write_record_char(RFC_QUIT);
+			break;
+		default:
+			// can't really do anything useful with this event
+			break;
+	}
 }
 
 /**
@@ -967,10 +1012,8 @@ const bool WLApplication::init_recordplaybackfile()
 			throw wexception("Failed to open record file %s", m_recordname);
 		else
 			log("Recording into %s\n", m_recordname);
-
-		write_record_int(RFC_MAGIC);
-
-		m_record=true;
+			m_record=true;
+			write_record_int(RFC_MAGIC, m_frecord);
 	}
 
 	// Open playback file if necessary
@@ -980,11 +1023,10 @@ const bool WLApplication::init_recordplaybackfile()
 			throw wexception("Failed to open playback file %s", m_playbackname);
 		else
 			log("Playing back from %s\n", m_playbackname);
+			m_playback=true;
+			if (read_record_int(m_fplayback) != RFC_MAGIC)
+				throw wexception("Playback file has wrong magic number");
 
-		if (read_record_int() != RFC_MAGIC)
-			throw wexception("Playback file has wrong magic number");
-
-		m_playback=true;
 	}
 
 	return true;
