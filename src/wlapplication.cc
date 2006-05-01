@@ -17,7 +17,6 @@
  *
  */
 
-//#include "constants.h"
 #include "editor.h"
 #include "error.h"
 #include "filesystem.h"
@@ -197,7 +196,8 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-WLApplication::WLApplication(const int argc, const char **argv)
+WLApplication::WLApplication(const int argc, const char **argv):
+		m_game(0)
 {
 	m_commandline["EXENAME"]=argv[0];
 
@@ -232,13 +232,59 @@ WLApplication::WLApplication(const int argc, const char **argv)
 
 		m_commandline[opt]=value;
 	}
+
+	//empty commandline means there were _unhandled_ syntax errors
+	//in the commandline. They should've been handled though.
+	//TODO: bail out gracefully instead
+	assert(!m_commandline.empty());
+
+	//Now that we now what the user wants, initialize the application
+
+	//create the filesystem abstraction
+	//must be first - we wouldn't even find the config file without this
+	g_fs = LayeredFileSystem::Create();
+	setup_searchpaths(m_commandline["EXENAME"]);
+
+	g_fh = new Font_Handler();
+
+	init_settings();
+	init_hardware();
+	init_recordplaybackfile();
+}
+
+/**
+ * Shut down all subsystems in an orderly manner
+ * \todo Handle errors that happen here!
+ */
+WLApplication::~WLApplication()
+{
+	//make sure there are no memory leaks
+	//don't just delete a still existing game, it's a bug if it's still here
+	//TODO: bail out gracefully instead
+	assert(m_game==0);
+
+	//Do use the opposite order of WLApplication::init()
+
+	shutdown_recordplaybackfile();
+
+	shutdown_hardware();
+
+	shutdown_settings();
+
+	assert(g_fh);
+	delete g_fh;
+	g_fh = 0;
+
+	assert(g_fs!=0);
+	delete g_fs;
+	g_fs = 0;
 }
 
 
 /**
  * The main loop. Plain and Simple.
  *
- * \todo Refactor the whole mainloop out of  class \ref UIPanel into here.
+ * \todo Refactor the whole mainloop out of class \ref UIPanel into here.
  * In the future: push the first event on the event queue, then keep
  * dispatching events until it is time to quit.
  */
@@ -274,10 +320,13 @@ void WLApplication::run()
 	}
 
 	g_sound_handler.change_music("menu", 1000);
-
 	mainmenu();
-
 	g_sound_handler.stop_music(500);
+
+	return;
+
+	//----------------------------------------------------------------------
+	//everything below here is unfinished work. please don't modify #fweber
 }
 
 /**
@@ -631,58 +680,6 @@ void WLApplication::handle_input(const InputCallback *cb)
 			break;
 		}
 	}
-}
-
-/**
- * Initialize everything that needs to be set up before starting the main loop
- * (and consequently, as the loop's starting point, the main menu)
- *
- * \return Whether the initalization was successful
- */
-const bool WLApplication::init()
-{
-	//empty commandline means syntax errors in commandline
-	//user has already been informed (see constructor), so just quit
-	if (m_commandline.empty())
-		return false;
-
-	//create the filesystem abstraction
-	//must be first - we wouldn't even find the config file
-	g_fs = LayeredFileSystem::Create();
-	setup_searchpaths(m_commandline["EXENAME"]);
-
-	g_fh = new Font_Handler();
-
-	//load config file and parse command line settings
-	init_settings();
-
-	init_hardware();
-
-	init_recordplaybackfile();
-
-	return true;
-}
-
-/**
- * Shut down all subsystems in an orderly manner
- */
-void WLApplication::shutdown()
-{
-	//Do use the opposite order of WLApplication::init()
-
-	shutdown_recordplaybackfile();
-
-	shutdown_hardware();
-
-	shutdown_settings();
-
-	assert(g_fh);
-	delete g_fh;
-	g_fh = 0;
-
-	assert(g_fs!=0);
-	delete g_fs;
-	g_fs = 0;
 }
 
 /**
@@ -1222,7 +1219,7 @@ void WLApplication::yield_double_game()
 }
 
 /**
- * Run te main menu
+ * Run the main menu
  */
 void WLApplication::mainmenu()
 {
@@ -1289,6 +1286,8 @@ void WLApplication::mainmenu()
  */
 void WLApplication::mainmenu_singleplayer()
 {
+	m_game = new Game;
+
 	bool done=false;
 	while(!done) {
 		Fullscreen_Menu_SinglePlayer *sp = new Fullscreen_Menu_SinglePlayer;
@@ -1297,27 +1296,14 @@ void WLApplication::mainmenu_singleplayer()
 
 		switch(code) {
 		case Fullscreen_Menu_SinglePlayer::sp_skirmish:
-			{
-				Game *g = new Game;
-				bool ran = g->run_single_player();
-				delete g;
-				if (ran) {
-					// game is over. everything's good. restart Main Menu
-					done=true;
-				}
-				continue;
-			}
+			if (m_game->run_single_player())
+				done=true;
+			break;
 
 		case Fullscreen_Menu_SinglePlayer::sp_loadgame:
-			{
-				Game* g = new Game;
-				bool ran = g->run_load_game(true);
-				delete g;
-				if (ran) {
-					done=true;
-				}
-				continue;
-			}
+			if (m_game->run_load_game(true))
+				done=true;
+			break;
 
 		case Fullscreen_Menu_SinglePlayer::sp_tutorial:
 			{
@@ -1327,9 +1313,7 @@ void WLApplication::mainmenu_singleplayer()
 					std::string mapname = sm->get_mapname( code );
 					delete sm;
 
-					Game* g = new Game;
-					bool run = g->run_splayer_map_direct( mapname.c_str(), true);
-					delete g;
+					bool run = m_game->run_splayer_map_direct( mapname.c_str(), true);
 					if(run)
 						done = true;
 					continue;
@@ -1337,12 +1321,14 @@ void WLApplication::mainmenu_singleplayer()
 				// Fallthrough if back was pressed
 			}
 
-		default:
 		case Fullscreen_Menu_SinglePlayer::sp_back:
 			done = true;
 			break;
 		}
 	}
+
+	delete m_game;
+	m_game=0;
 }
 
 /**

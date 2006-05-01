@@ -103,6 +103,7 @@ def cli_options():
 	opts.Add('build', 'debug-no-parachute / debug-slow / debug(default) / release / profile', 'debug')
 	opts.Add('build_id', 'To get a default value(timestamp), leave this empty or set to \'date\'', '')
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
+	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
 	opts.Add('bindir', '(either absolut or relative to install_prefix)', 'games')
 	opts.Add('datadir', '(either absolute or relative to install_prefix)', 'games/share/widelands')
@@ -129,7 +130,8 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 				'CheckPKGConfig' : CheckPKGConfig,
 				'CheckPKG': CheckPKG,
 				'CheckSDLConfig': CheckSDLConfig,
-				'CheckSDLVersionAtLeast': CheckSDLVersionAtLeast
+				'CheckSDLVersionAtLeast': CheckSDLVersionAtLeast,
+				'CheckParaguiConfig': CheckParaguiConfig
 		   }
 )
 

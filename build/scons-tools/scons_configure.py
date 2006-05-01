@@ -127,6 +127,16 @@ def CheckSDLConfig(context, env):
 			break
 	return ret
 
+def CheckParaguiConfig(context, env):
+	context.Message( 'Checking for paragui-config... ' )
+	for p in env['PATH'].split():
+		ret = context.TryAction(os.path.join(p, env['paraguiconfig'])+' --version')[0]
+		if ret==1:
+			env['paraguiconfig']=os.path.join(p, env['paraguiconfig'])
+			context.Result( ret )
+			break
+	return ret
+
 def CheckSDLVersionAtLeast(context, major, minor, micro, env):
 	context.Message( 'Checking SDL version >= %s ... ' % (repr(major)+'.'+repr(minor)+'.'+repr(micro)))
 	version=os.popen(env['sdlconfig']+" --version", "r").read()
@@ -172,7 +182,7 @@ def do_configure(config_h_file, conf, env):
 	if setlocalefound and textdomainfound:
 		print '   NLS subsystem found.'
 	else:
-#TODO: use dummy replacements that just pass back the original string
+		#TODO: use dummy replacements that just pass back the original string
 		print '   No usable NLS subsystem found. Please install gettext.'
 		Exit(1)
 
@@ -188,8 +198,16 @@ def do_configure(config_h_file, conf, env):
 	if not conf.CheckSDLVersionAtLeast(1, 2, 8, env):
 		print 'Could not find an SDL version >= 1.2.8!'
 		Exit(1)
+	else:		
+		env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
 
-	env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
+	if not conf.CheckParaguiConfig(env):
+		print 'Could not find paragui. That\'s no problem unless you\'re developer working on this.'
+		#print 'Could not find paragui-config! Is paragui installed?'
+		#Exit(1)
+	else:
+		env.ParseConfig(env['paraguiconfig']+' --libs --cflags')
+		config_h_file.write("#define HAS_PARAGUI\n\n");
 
 	if not conf.CheckLibWithHeader('z', header='zlib.h', language='C', autoadd=1):
 		print 'Could not find the zlib library! Is it installed?'

@@ -20,6 +20,7 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
+#include "game.h"
 #include "graphic.h"
 #include <map>
 #include <stdexcept>
@@ -126,13 +127,13 @@ extern Graphic *g_gr;
  * \todo Refactor the mainloop
  * \todo Sensible use of exceptions (goes for whole game)
  */
+
 class WLApplication {
 public:
 	static WLApplication * const get(const int argc=0, const char **argv=0);
+	~WLApplication();
 
 	void run();
-	const bool init();
-	void shutdown();
 
 	//@{
 	///\return true if the game is being recorded
@@ -205,14 +206,6 @@ const bool get_record() {return m_record;}
 	static void signal_handler (int sig);
 	static void quit_handler();
 	static void yield_double_game();
-	//@}
-
-	//to be removed
-	//@{
-	//void WLApplication::init_double_game();
-	//static void WLApplication::signal_handler (int sig);
-	//static void WLApplication::quit_handler();
-	//static void WLApplication::yield_double_game();
 	//@}
 
 	// Used for --double
@@ -319,6 +312,9 @@ protected:
 	///If true Widelands is (should be, we never know ;-) running
 	///in a fullscreen window
 	bool		m_gfx_fullscreen;
+
+	///The game that is currently being played (or NULL, if in main menu)
+	Game *m_game;
 
 private:
 	///Holds this process' one and only instance of WLApplication, if it was

@@ -32,11 +32,9 @@ int main(const int argc, const char** argv)
 {
 	try {
 		WLApplication * const g_app=WLApplication::get(argc, argv);
+		//TODO: handle exceptions from the constructor
 
-		if (g_app->init()) {
-			g_app->run();
-			g_app->shutdown();
-		}
+		g_app->run();
 
 		return 0;
 	}
@@ -57,11 +55,9 @@ int main(int argc, char** argv)
 {
 	try {
 		WLApplication * const g_app=WLApplication::get(argc, argv);
+		//TODO: handle exceptions from the constructor
 
-		if (g_app->init()) {
-			g_app->run();
-			g_app->shutdown();
-		}
+		g_app->run();
 
 		return 0;
 	}
