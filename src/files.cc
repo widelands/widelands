@@ -248,6 +248,18 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 	return true;
 }
 
+///Just a quick ugly hack until file handling is moved to C++
+///\todo Throw exception on illegal path
+std::string FS_CanonicalizeName2(std::string path)
+{
+	char buffer1[1024];
+	const char *buffer2=path.c_str();
+
+	FS_CanonicalizeName(buffer1, 1024, buffer2);
+
+	return std::string(buffer1);
+}
+
 /*
  * Returns the filename of this path, everything after the last
  * / or \  (or the whole string)

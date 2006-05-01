@@ -27,6 +27,8 @@
 #include <string>
 #include <vector>
 
+class Journal;
+
 // input
 struct InputCallback {
 	void (*mouse_click)(bool down, int btn, uint btns, int x, int y);
@@ -135,25 +137,6 @@ public:
 
 	void run();
 
-	//@{
-	///\return true if the game is being recorded
-const bool get_record() {return m_record;}
-
-	///\return true if the currently running game is a playback
-	const bool get_playback() {return m_playback;}
-
-	///\return byte offset into the playback file, used with file reading
-	const long int get_playback_offset();
-
-	void record_event(SDL_Event *e);
-
-	///\return a handle to the recording file
-	FILE *get_rec_file() {return m_frecord;}
-
-	///\return a handle to the playback file
-	FILE *get_play_file() {return m_fplayback;}
-	//@}
-
 	///\return true if an external entity wants us to quit
 	const bool should_die() {return m_should_die;}
 
@@ -229,9 +212,6 @@ protected:
 	const bool init_hardware();
 	void shutdown_hardware();
 
-	const bool init_recordplaybackfile();
-	void shutdown_recordplaybackfile();
-
 	const bool parse_command_line();
 	void show_usage();
 
@@ -239,25 +219,14 @@ protected:
 	std::map<std::string, std::string> m_commandline;
 
 	//@{
+	///the event recorder object
+	Journal *journal;
+
 	///Whether we are recording
 	bool m_playback;
 
 	///Whether we are playing back
 	bool m_record;
-
-	///The recording file's name.
-	///\note This does \e not go through the layered filesystem!
-	char m_recordname[256];
-
-	///The playback file's name.
-	///\note This does \e not go through the layered filesystem!
-	char m_playbackname[256];
-
-	///The recording file (or NULL)
-	FILE *m_frecord;
-
-	///The playback file (or NULL)
-	FILE *m_fplayback;
 	//@}
 
 	/// Mouse handling

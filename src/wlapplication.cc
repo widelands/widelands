@@ -19,7 +19,6 @@
 
 #include "editor.h"
 #include "error.h"
-#include "filesystem.h"
 #include "font_handler.h"
 #include "fullscreen_menu_fileview.h"
 #include "fullscreen_menu_intro.h"
@@ -34,6 +33,7 @@
 #include "game_server_proto.h"
 #include "i18n.h"
 #include <iostream>
+#include "journal.h"
 #include "network.h"
 #include "network_ggz.h"
 #include "profile.h"
@@ -57,111 +57,6 @@ int WLApplication::pid_me=0;
 int WLApplication::pid_peer=0;
 volatile int WLApplication::may_run=0;
 WLApplication *WLApplication::the_singleton=0;
-
-/**
- * Write a char value to the recording file.
- *
- * \param v The character to be written
- *
- * \note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
- */
-void write_record_char(char v)
-{
-	assert(WLApplication::get()->get_rec_file());
-
-	if (fwrite(&v, sizeof(v), 1, WLApplication::get()->get_rec_file()) != 1)
-			throw wexception("Write of 1 byte to record failed.");
-	fflush(WLApplication::get()->get_rec_file());
-}
-
-/**
- * Read a char value from the playback file
- *
- * \return The char that was read
- *
- *\note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
- */
-char read_record_char()
-{
-	char v;
-
-	assert(WLApplication::get()->get_play_file());
-
-	if (fread(&v, sizeof(v), 1, WLApplication::get()->get_play_file()) != 1)
-			throw wexception("Read of 1 byte from record failed.");
-
-	return v;
-}
-
-/**
- * Write an int value to the recording file.
- *
- * \param v The int to be written
- *
- * \note Not 64bit-safe!
- * \note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
- */
-void write_record_int(int v, FILE *f=0)
-{
-	if(f==0)
-		f=WLApplication::get()->get_rec_file();
-	assert(f);
-
-	v = Little32(v);
-	if (fwrite(&v, sizeof(v), 1, f) != 1)
-			throw wexception("Write of 4 bytes to record failed.");
-	fflush(f);
-}
-
-/**
- * Read an int value from the playback file.
- *
- * \return The int that was read
- * Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
- */
-int read_record_int(FILE *f=0)
-{
-	int v;
-
-	if(f==0)
-		f=WLApplication::get()->get_play_file();
-	assert(f);
-
-	if (fread(&v, sizeof(v), 1, f) != 1)
-			throw wexception("Read of 4 bytes from record failed.");
-
-	return Little32(v);
-}
-
-/**
- * \note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
- */
-void write_record_code(uchar code)
-{
-	write_record_char(code);
-}
-
-/**
- * \note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
- */
-void read_record_code(uchar code)
-{
-	uchar filecode;
-
-	filecode = read_record_char();
-
-	if (filecode != code)
-		throw wexception("%08lX: Bad code %02X during playback (%02X "
-		                 "expected). Mismatching executable versions?",
-		                 WLApplication::get()->get_playback_offset()-1,
-			                 filecode, code);
-}
 
 /**
  * The main entry point for the WLApplication singleton.
@@ -244,16 +139,15 @@ WLApplication::WLApplication(const int argc, const char **argv):
 
 	//Now that we now what the user wants, initialize the application
 
-	//create the filesystem abstraction
-	//must be first - we wouldn't even find the config file without this
+	//create the filesystem abstraction first - we wouldn't even find the
+	//config file without this
 	g_fs = LayeredFileSystem::Create();
 	setup_searchpaths(m_commandline["EXENAME"]);
 
-	g_fh = new Font_Handler();
-
 	init_settings();
 	init_hardware();
-	init_recordplaybackfile();
+
+	g_fh = new Font_Handler();
 }
 
 /**
@@ -269,10 +163,7 @@ WLApplication::~WLApplication()
 
 	//Do use the opposite order of WLApplication::init()
 
-	shutdown_recordplaybackfile();
-
 	shutdown_hardware();
-
 	shutdown_settings();
 
 	assert(g_fh);
@@ -343,8 +234,8 @@ void WLApplication::run()
 			//TODO: handle error
 		}
 
-		if(m_record)
-			record_event(&e);
+		if(m_record) journal->record_event(&e);
+		//TODO: playback
 
 		switch(e.type) {
 		case SDL_MOUSEMOTION:
@@ -359,6 +250,7 @@ void WLApplication::run()
 		case SDL_USEREVENT:
 			switch(e.user.code) {
 			case /*WLEVENT_IDLE*/19:
+				//perhaps sleep a little?
 				break;
 			case Sound_Handler::SOUND_HANDLER_CHANGE_MUSIC:
 				g_sound_handler.change_music();
@@ -389,65 +281,10 @@ const bool WLApplication::poll_event(SDL_Event *ev, const bool throttle)
 
 restart:
 	//inject synthesized events into the event queue when playing back
-	if (WLApplication::get()->get_playback())
-		{
-			uchar code = read_record_char();
-
-			if (code == RFC_EVENT)
-			{
-				code = read_record_char();
-
-				switch(code) {
-				case RFC_KEYDOWN:
-				case RFC_KEYUP:
-					ev->type = (code == RFC_KEYUP) ?
-					           SDL_KEYUP : SDL_KEYDOWN;
-					ev->key.keysym.sym=
-					   (SDLKey)read_record_int();
-					ev->key.keysym.unicode=
-					   read_record_int();
-					break;
-
-				case RFC_MOUSEBUTTONDOWN:
-				case RFC_MOUSEBUTTONUP:
-					ev->type = (code == RFC_MOUSEBUTTONUP) ?
-					           SDL_MOUSEBUTTONUP :
-					           SDL_MOUSEBUTTONDOWN;
-					ev->button.button = read_record_char();
-					break;
-
-				case RFC_MOUSEMOTION:
-					ev->type = SDL_MOUSEMOTION;
-					ev->motion.x = read_record_int();
-					ev->motion.y = read_record_int();
-					ev->motion.xrel = read_record_int();
-					ev->motion.yrel = read_record_int();
-					break;
-
-				case RFC_QUIT:
-					ev->type = SDL_QUIT;
-					break;
-
-				default:
-					throw wexception("%08lX: Unknown event type %02X in playback.",
-					                 WLApplication::get()->get_playback_offset()-1,
-						                 code);
-				}
-
-				haveevent = true;
-			}
-			else if (code == RFC_ENDEVENTS)
-			{
-				haveevent = false;
-			}
-			else
-				throw wexception("%08lX: Bad code %02X in event playback.",
-				                 WLApplication::get()->get_playback_offset()-1,
-					                 code);
-		}
-	else
-	{ //not playing back
-		haveevent = SDL_PollEvent(ev);
+	if (m_playback)
+		haveevent=journal->read_event(ev);
+	else {
+		haveevent=SDL_PollEvent(ev);
 
 		if (haveevent)
 		{
@@ -519,27 +356,25 @@ restart:
 	}
 
 	// log all events into the journal file
-	if (WLApplication::get()->get_record())
-		{
-			if (haveevent) {
-				record_event(ev);
-			} else {
-				// Implement the throttle to avoid very quick inner mainloops when
-				// recoding a session
-				if (throttle && !WLApplication::get()->get_playback())
-					{
-						static int lastthrottle = 0;
-						int time = SDL_GetTicks();
+	if (m_record) {
+		if (haveevent)
+			journal->record_event(ev);
+		else {
+			// Implement the throttle to avoid very quick inner mainloops when
+			// recoding a session
+			if (throttle && m_playback) {
+				static int lastthrottle = 0;
+				int time = SDL_GetTicks();
 
-						if (time - lastthrottle < 10)
-							goto restart;
+				if (time - lastthrottle < 10)
+					goto restart;
 
-						lastthrottle = time;
-					}
-
-				write_record_char(RFC_ENDEVENTS);
+				lastthrottle = time;
 			}
+
+			journal->set_idle_mark();
 		}
+	}
 	else
 	{ //not recording
 		if (haveevent)
@@ -579,7 +414,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
-	if (WLApplication::get()->get_playback()) {
+	if (m_playback) {
 			while(SDL_PollEvent(&ev)) {
 				switch(ev.type) {
 				case SDL_KEYDOWN:
@@ -681,80 +516,20 @@ void WLApplication::handle_input(const InputCallback *cb)
 		case SDL_QUIT:
 			m_should_die = true;
 			break;
-
-		default:
-			break;
 		}
 	}
 }
 
 /**
- * Returns the position in the playback file
- */
-const long int WLApplication::get_playback_offset()
-{
-	assert(get_playback());
-	return ftell(get_play_file());
-}
-
-/**
- * Record an event into the playback file
- */
-void WLApplication::record_event(SDL_Event *e)
-{
-	switch(e->type) {
-		case SDL_KEYDOWN:
-		case SDL_KEYUP:
-			write_record_char(RFC_EVENT);
-			write_record_char((e->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
-			write_record_int(e->key.keysym.sym);
-			write_record_int(e->key.keysym.unicode);
-			break;
-
-		case SDL_MOUSEBUTTONDOWN:
-		case SDL_MOUSEBUTTONUP:
-			write_record_char(RFC_EVENT);
-			write_record_char((e->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
-			write_record_char(e->button.button);
-			break;
-
-		case SDL_MOUSEMOTION:
-			write_record_char(RFC_EVENT);
-			write_record_char(RFC_MOUSEMOTION);
-			write_record_int(e->motion.x);
-			write_record_int(e->motion.y);
-			write_record_int(e->motion.xrel);
-			write_record_int(e->motion.yrel);
-			break;
-
-		case SDL_QUIT:
-			write_record_char(RFC_EVENT);
-			write_record_char(RFC_QUIT);
-			break;
-		default:
-			// can't really do anything useful with this event
-			break;
-	}
-}
-
-/**
  * Return the current time, in milliseconds
- * \todo Convert from int to Uint32m SDL's native time resolution
+ * \todo Convert return value from int to Uint32, SDL's native time resolution
  */
 const int WLApplication::get_time()
 {
-	int time;
+	Uint32 time;
 
-	if (get_playback()) {
-		read_record_code(RFC_GETTIME);
-		time = read_record_int();
-	} else
-		time = SDL_GetTicks();
-
-	if (get_record()) {
-		write_record_code(RFC_GETTIME);
-		write_record_int(time);
-	}
+	time=SDL_GetTicks();
+	journal->timestamp_handler(&time); //might change the time when playing back!
 
 	return time;
 }
@@ -762,7 +537,7 @@ const int WLApplication::get_time()
 /**
  * Move the mouse cursor.
  * No mouse moved event will be issued.
-*/
+ */
 void WLApplication::set_mouse_pos(int x, int y)
 {
 	m_mouse_x = x;
@@ -779,7 +554,7 @@ void WLApplication::set_mouse_pos(int x, int y)
  */
 void WLApplication::set_input_grab(bool grab)
 {
-	if (get_playback())
+	if (m_playback)
 		return; // ignore in playback mode
 
 	m_input_grab = grab;
@@ -823,7 +598,7 @@ void WLApplication::do_warp_mouse(const int x, const int y)
 {
 	int curx, cury;
 
-	if (get_playback()) // don't warp anything during playback
+	if (m_playback) // don't warp anything during playback
 		return;
 
 	SDL_GetMouseState(&curx, &cury);
@@ -879,6 +654,9 @@ void WLApplication::init_graphics(const int w, const int h,
 const bool WLApplication::init_settings()
 {
 	Section *s=0;
+
+	//create a journal so that parse_command_line can open the journal files
+	journal=new Journal();
 
 	//read in the configuration file
 	g_options.read("config", "global");
@@ -940,6 +718,10 @@ void WLApplication::shutdown_settings()
 
 	// overwrite the old config file
 	g_options.write("config", true);
+
+	assert(journal);
+	delete journal;
+	journal=0;
 }
 
 /**
@@ -993,58 +775,6 @@ void WLApplication::shutdown_hardware()
 
 	SDL_Quit();
 	m_sdl_active = false;
-}
-
-/**
- * Open record and/or playback file for writing/reading.
- *
- * \return bool if the setup was successful
- */
-const bool WLApplication::init_recordplaybackfile()
-{
-	m_frecord = 0;
-	m_fplayback = 0;
-
-	// Open record file if necessary
-	if (m_recordname[0]) {
-		m_frecord = fopen(m_recordname, "wb");
-		if (!m_frecord)
-			throw wexception("Failed to open record file %s", m_recordname);
-		else
-			log("Recording into %s\n", m_recordname);
-			m_record=true;
-			write_record_int(RFC_MAGIC, m_frecord);
-	}
-
-	// Open playback file if necessary
-	if (m_playbackname[0]) {
-		m_fplayback = fopen(m_playbackname, "rb");
-		if (!m_fplayback)
-			throw wexception("Failed to open playback file %s", m_playbackname);
-		else
-			log("Playing back from %s\n", m_playbackname);
-			m_playback=true;
-			if (read_record_int(m_fplayback) != RFC_MAGIC)
-				throw wexception("Playback file has wrong magic number");
-
-	}
-
-	return true;
-}
-
-/**
- * Close any open journal file
- */
-void WLApplication::shutdown_recordplaybackfile()
-{
-	if (m_record) {
-		fclose(m_frecord);
-		m_record = 0;
-	}
-	if (m_playback) {
-		fclose(m_fplayback);
-		m_playback = 0;
-	}
 }
 
 /**
@@ -1105,13 +835,8 @@ const bool WLApplication::parse_command_line()
 			return false;
 		}
 
-		char expanded_filename[1024];
-
-		//this bypasses the layered filesystem on purpose!
-		FS_CanonicalizeName(expanded_filename, 1024,
-		                    m_commandline["record"].c_str());
-		snprintf(m_recordname, sizeof(m_recordname), "%s",
-		         expanded_filename);
+		journal->start_recording(m_commandline["record"]);
+		m_record=true;
 
 		m_commandline.erase("record");
 	}
@@ -1124,13 +849,8 @@ const bool WLApplication::parse_command_line()
 			return false;
 		}
 
-		char expanded_filename[1024];
-
-		//this bypasses the layered filesystem on purpose!
-		FS_CanonicalizeName(expanded_filename, 1024,
-		                    m_commandline["playback"].c_str());
-		snprintf(m_playbackname, sizeof(m_playbackname), "%s",
-		         expanded_filename);
+		journal->start_playback(m_commandline["playback"]);
+		m_playback=true;
 
 		m_commandline.erase("playback");
 	}

@@ -29,6 +29,8 @@ SConscript('ui/ui_fs_menus/SConscript')
 
 INDENTLIST=[
 	'geometry.h',
+	'journal.h',
+	'journal.cc',
 	'main.cc',
 	'sound_handler.h',
 	'sound_handler.cc',
