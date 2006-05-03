@@ -30,14 +30,14 @@
 
 ///Version mark for the build. Appears in title screen
 ///\todo Tie this into build_id (which, in turn, should be tied into CVS numbering)
-#define VERSION "cvs 24-12-2005 (inofficial)"
+#define VERSION "cvsbuild"
 
 /**
  * locale path: This would be needed to be changed by a packager
  *
  * The default search path for locales is in the locale directory
  * but if widelands is installed, this changes to something like
- * /usr/locale/share/*. If so, change here
+ * /usr/locale/share/... If so, change here
  */
 #define LOCALE_PATH "locale"
 
