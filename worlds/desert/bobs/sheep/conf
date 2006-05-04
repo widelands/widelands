@@ -1,0 +1,20 @@
+descname=_ Sheep
+type="critter"
+swimming=0  # defaults to 0, is only in the water?
+attrib=eatable
+program=remove
+soundfx=sheep
+
+[remove]
+0=remove
+
+[idle]
+pics=sheep_??.png
+sfx_frame=0
+sfx_name=sheep
+hot_spot_x=5
+hot_spot_y=9
+
+[walk]
+hot_spot_x=5
+hot_spot_y=9

@@ -1,0 +1,60 @@
+##### This is the list of terrains, which can be used in world 'desert'
+##### Most of them are from greenland. I just changed few colors, brightness and contrasts.
+
+[desert1]
+is=dry
+
+[desert2]
+is=dry
+
+[desert3]
+is=dry
+
+[desert4]
+def_resources=water 2
+is=green
+
+[drysoil]
+def_resources=water 4
+is=green
+
+[beach]
+is=dry
+
+[steppe]
+def_resources=water 5
+is=green
+
+[meadow]
+def_resources=water 10
+is=green
+
+[mountainmeadow]
+is=green
+
+[mountain1]
+resources=coal, iron, gold, granit 
+is=mountain
+
+[mountain2]
+resources=coal, iron, gold, granit
+is=mountain
+
+[mountain3]
+resources=coal, iron, gold, granit
+is=mountain
+
+[mountain4]
+resources=coal, iron, gold, granit
+is=mountain
+
+
+##### Here are few imported textures of greenland
+
+[wasser]
+def_resources=fish 4
+is=water
+fps=5
+
+[lava]
+is=acid

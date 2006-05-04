@@ -1,0 +1,14 @@
+descname =_Stones
+type="diminishing"
+ends_in="stones5"
+
+size=big
+attrib=stone
+program=shrink
+
+hot_spot_x=25
+hot_spot_y=73
+picture=stones6_00.png
+
+[shrink]
+0=transform stones5 
