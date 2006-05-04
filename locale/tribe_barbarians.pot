@@ -15,6 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr ""
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr ""
+
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
 msgstr ""
@@ -127,22 +139,12 @@ msgstr ""
 msgid "Headquarters"
 msgstr ""
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr ""
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr ""
 
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
-msgstr ""
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
 msgstr ""
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
@@ -203,18 +205,6 @@ msgstr ""
 
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
-msgstr ""
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr ""
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr ""
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
 msgstr ""
 
 #: ../tribes/barbarians/wares/axe/conf:2
@@ -429,12 +419,22 @@ msgstr ""
 msgid "Geologist"
 msgstr ""
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr ""
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr ""
 
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
+msgstr ""
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
 msgstr ""
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2

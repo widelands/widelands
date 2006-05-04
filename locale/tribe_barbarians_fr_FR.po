@@ -15,6 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "The Widelands Development Team"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbares"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "La puissante tribu des terres de l'est!"
+
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Cerf"
@@ -127,11 +139,6 @@ msgstr "Garde Forestier"
 msgid "Headquarters"
 msgstr "Quartier Général"
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Ouvrier Naval"
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Hutte de Chasseur"
@@ -139,11 +146,6 @@ msgstr "Hutte de Chasseur"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Auberge"
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Bûcheron"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -205,18 +207,6 @@ msgstr "Moulin de Guerre"
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Puit"
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "The Widelands Development Team"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbares"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "La puissante tribu des terres de l'est!"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
@@ -431,6 +421,11 @@ msgstr "Garde Chasse"
 msgid "Geologist"
 msgstr "Géologue"
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Ouvrier Naval"
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Chasseur"
@@ -438,6 +433,11 @@ msgstr "Chasseur"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Aubergiste"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Bûcheron"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"

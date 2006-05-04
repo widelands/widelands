@@ -12,6 +12,18 @@ msgstr ""
 "X-Poedit-Language: czech\n"
 "X-Poedit-Country: Czech Republic\n"
 
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "Vývojový tým Widelands"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbaři"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "Mocné kmeny východních zemí!"
+
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Jelen"
@@ -124,11 +136,6 @@ msgstr "Tesař"
 msgid "Headquarters"
 msgstr "Základna"
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Zbrojíř"
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Lovec"
@@ -136,11 +143,6 @@ msgstr "Lovec"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Hospoda"
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Dřevorubec"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -202,18 +204,6 @@ msgstr "Lisovna"
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Studna"
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "Vývojový tým Widelands"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbaři"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "Mocné kmeny východních zemí!"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
@@ -431,6 +421,11 @@ msgstr "Hajný"
 msgid "Geologist"
 msgstr "Geolog"
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Zbrojíř"
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Lovec"
@@ -438,6 +433,11 @@ msgstr "Lovec"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Hospodský"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Dřevorubec"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"

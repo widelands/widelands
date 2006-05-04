@@ -21,6 +21,18 @@ msgstr ""
 "X-Poedit-Country: swe\n"
 "X-Generator: KBabel 1.10.2\n"
 
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "Widelands utvecklingslag"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbarer"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "De mäktiga stammarna från öst!"
+
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
 msgstr "Hjort"
@@ -133,11 +145,6 @@ msgstr "Trä härdare"
 msgid "Headquarters"
 msgstr "Huvudkvarter"
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Hjälmsmed"
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Jakt stuga"
@@ -145,11 +152,6 @@ msgstr "Jakt stuga"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Värdshus"
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Skogshuggare"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -210,18 +212,6 @@ msgstr "Klädesfabrik"
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Brunn"
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "Widelands utvecklingslag"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbarer"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "De mäktiga stammarna från öst!"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
@@ -435,6 +425,11 @@ msgstr "Uppfödare"
 msgid "Geologist"
 msgstr "Geolog"
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Hjälmsmed"
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jägare"
@@ -442,6 +437,11 @@ msgstr "Jägare"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Servitör"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Skogshuggare"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"

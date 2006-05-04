@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-04-16 13:36+0100\n"
+"PO-Revision-Date: 2006-04-19 15:34+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
+
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr "Das Widelands Entwicklungsteam"
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbaren"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "Die mächtigen Stämme des Ostens"
 
 #: ../tribes/barbarians/bobs/deer/conf:1
 msgid "Deer"
@@ -129,11 +141,6 @@ msgstr "Sägewerk"
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr "Helmschmied"
-
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Jägerhütte"
@@ -141,11 +148,6 @@ msgstr "Jägerhütte"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Wirtshaus"
-
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Holzfäller"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -206,18 +208,6 @@ msgstr "Weberei"
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
 msgstr "Brunnen"
-
-#: ../tribes/barbarians/conf:24
-msgid "The Widelands Development Team"
-msgstr "Das Widelands Entwicklungsteam"
-
-#: ../tribes/barbarians/conf:25
-msgid "Barbarians"
-msgstr "Barbaren"
-
-#: ../tribes/barbarians/conf:26
-msgid "The mighty tribes of the east-lands!"
-msgstr "Die mächtigen Stämme des Ostens"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
@@ -409,7 +399,7 @@ msgstr "Träger"
 
 #: ../tribes/barbarians/workers/chief-miner/conf:2
 msgid "Chief Miner"
-msgstr "Bergmanns Chef"
+msgstr "Bergwerkschef"
 
 #: ../tribes/barbarians/workers/farmer/conf:2
 msgid "Farmer"
@@ -431,6 +421,11 @@ msgstr "Wildhüter"
 msgid "Geologist"
 msgstr "Geologe"
 
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Helmschmied"
+
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
 msgstr "Jäger"
@@ -438,6 +433,11 @@ msgstr "Jäger"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Wirt"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Holzfäller"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
