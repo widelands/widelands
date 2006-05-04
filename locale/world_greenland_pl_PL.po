@@ -1,22 +1,23 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of world_greenland_pl_PL.po to Polish
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
+# Endrju <endrjux@gmail.com>, 2005.
+# Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands - 0.1\n"
+"Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-12-13 15:33+0100\n"
-"Last-Translator: Janusz Skudrzyk <januzi@epf.pl>\n"
-"Language-Team: januzi@epf.pl <januzi@epf.pl>\n"
+"PO-Revision-Date: 2006-05-04 19:25+0200\n"
+"Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
+"Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Polish\n"
-"X-Poedit-Country: POLAND\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
+"100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../worlds/greenland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -26,7 +27,7 @@ msgstr "Królik"
 #: ../worlds/greenland/bobs/bush3/conf:1 ../worlds/greenland/bobs/bush4/conf:1
 #: ../worlds/greenland/bobs/bush5/conf:1
 msgid "Bush"
-msgstr "Busz"
+msgstr "Krzak"
 
 #: ../worlds/greenland/bobs/cactus1/conf:1
 #: ../worlds/greenland/bobs/cactus2/conf:1
@@ -42,7 +43,7 @@ msgstr "Martwe drzewo"
 
 #: ../worlds/greenland/bobs/deer/conf:1
 msgid "Deer"
-msgstr "Jeleń"
+msgstr "jeleń"
 
 #: ../worlds/greenland/bobs/duck/conf:1
 msgid "Duck"
@@ -70,7 +71,7 @@ msgstr "Grzyb"
 #: ../worlds/greenland/bobs/pebble5/conf:1
 #: ../worlds/greenland/bobs/pebble6/conf:1
 msgid "Pebble"
-msgstr "Kamienie"
+msgstr "Kamyk"
 
 #: ../worlds/greenland/bobs/reindeer/conf:1
 msgid "Reindeer"
@@ -94,7 +95,7 @@ msgstr "Szkielet"
 #: ../worlds/greenland/bobs/sstones6/conf:1
 #: ../worlds/greenland/bobs/sstones7/conf:1
 msgid "Standing Stones"
-msgstr "Stojące kamienie"
+msgstr "Stojące Kamienie"
 
 #: ../worlds/greenland/bobs/stones1/conf:1
 #: ../worlds/greenland/bobs/stones2/conf:1
@@ -114,15 +115,15 @@ msgstr "Drzewo"
 
 #: ../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
-msgstr "Deweloperzy Widelands"
+msgstr "Zespól rozwojowy Widelands"
 
 #: ../worlds/greenland/conf:3
 msgid "Greenland"
-msgstr "Wallhalla"
+msgstr "Tereny trawiaste"
 
 #: ../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "These are the beauty and bountifull countries of the barbarians"
+msgstr "Oto piękne krainy barbarzyńców"
 
 #: ../worlds/greenland/resconf:4
 msgid "Coal"
@@ -146,4 +147,4 @@ msgstr "Woda"
 
 #: ../worlds/greenland/resconf:41
 msgid "Fish"
-msgstr "Ryba"
+msgstr "Ryby"

@@ -1,31 +1,38 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of texts_pl_PL.po to polish
+# translation of texts_pl_PL.po to Polish
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: texts_pl_PL\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2005-12-19 21:14+0100\n"
+"Last-Translator: Andrzej 'Endrju' Krentosz <endrjux@gmail.com>\n"
+"Language-Team: polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
+"Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%"
+"100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../txts/COPYING:1
 msgid "License"
-msgstr ""
+msgstr "Licencja"
 
 #: ../txts/COPYING:3
 msgid "GNU general public licence"
-msgstr ""
+msgstr "Powszechna Licencja Publiczna GNU"
 
 #: ../txts/COPYING:6
 msgid "Version 2, June 1991</p>"
 msgstr ""
+"Wersja 2, czerwiec 1991<br>TŁUMACZENIE NIEOFICJALNE! Właściwy tekst w pliku "
+"COPYING<br></p>"
 
 #: ../txts/COPYING:9
 msgid ""
@@ -34,10 +41,14 @@ msgid ""
 "distribute verbatim copies of this license document, but changing it is not "
 "allowed.<br>"
 msgstr ""
+"Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>675 Mass Ave,"
+"Cambridge, MA 02139 USA.<br>Zezwala się na kopiowanie i rozpowszechnianie "
+"wiernych kopii niniejszegodokumentu licencyjnego, jednak bez prawa "
+"wprowadzania zmian.<br>"
 
 #: ../txts/COPYING:12
 msgid "Preamble"
-msgstr ""
+msgstr "Preambuła"
 
 #: ../txts/COPYING:16
 msgid ""
@@ -76,12 +87,58 @@ msgid ""
 "licensed for everyone's free use or not licensed at all.<br>The precise "
 "terms and conditions for copying, distribution and modification follow.<br>"
 msgstr ""
+"Większość licencji na oprogramowanie pomyślana jest po to, aby odebrać "
+"użytkownikowi możliwość swobodnego udostępniania innym i zmieniania danego "
+"software'u. Natomiast w wypadku Powszechnej Licencji Publicznej GNU (GNU "
+"General Public License, GPL) celem jest zagwarantowanie użytkownikowi "
+"swobody udostępniania i zmieniania tego wolnego oprogramowania, a więc danie "
+"pewności, iż oprogramowanie jest wolno dostępne dla wszystkich użytkowników. "
+"Niniejsza Powszechna Licencja Publiczna dotyczy większości oprogramowania "
+"wydawanego przez Fundację Wolnego Oprogramowania (Free Software Foundation) "
+"oraz wszelkich innych programów, których autorzy zobowiązują się do jej "
+"stosowania. (Niektóre rodzaje oprogramowania wydawanego przez Fundację "
+"objęte są Powszechną Licencją Publiczną GNU dla Bibliotek, GNU Library "
+"General Public License). Użytkownik może stosować ją również do swoich "
+"programów.<br>Mówiąc o wolnym oprogramowaniu mamy na myśli swobodę, a nie "
+"cenę. Nasze Powszechne Licencje Publiczne wprowadzono po to, aby zapewnić "
+"Państwu swobodę rozpowszechniania kopii tego oprogramowania (i - jeśli ktoś "
+"chce - pobierania za tę usługę opłaty), jak również aby udostępnić kod "
+"źródłowy oraz umożliwić dokonywanie zmian tego oprogramowania lub "
+"wykorzystywania jego fragmentów w nowych, wolnych programach. Nie bez "
+"znaczenia jest też sama możliwość dotarcia do Państwa z informacją o "
+"wszystkich tych udogodnieniach.<br>W celu ochrony praw użytkownika jesteśmy "
+"zmuszeni wprowadzać ograniczenia zabraniające komukolwiek kwestionowanie "
+"jego praw albo sugerowanie rezygnacji z tych praw. Ograniczenia te "
+"sprowadzają się do pewnych dla Państwa obowiązków w przypadku "
+"rozpowszechniania przez Was kopii naszego oprogramowania bądź dokonywania w "
+"nim zmian.<br>Na przykład, jeśli rozprowadzacie Państwo kopie takiego "
+"programu, niezależnie czy gratisowo, czy za opłatą, musicie Państwo odbiorcy "
+"udzielić wszelkich tych praw, jakie mieliście sami. Musicie zapewnić mu "
+"również otrzymanie kodu źródłowego (lub możliwość otrzymania) oraz "
+"przedstawić niniejsze Warunki, aby mógł on poznać swoje prawa.<br>Ochrona "
+"Państwa praw przebiega w dwóch etapach:<br>   1. zastrzegamy prawo własności "
+"autorskiej do oprogramowania,<br>   2. oferujemy Państwu niniejszą licencję, "
+"która daje Wam sankcjonowane prawem zezwolenie na kopiowanie, "
+"rozpowszechnianie i/lub modyfikowanie tego oprogramowania.<br>Ponadto dla "
+"ochrony tak autora, jak i naszej, pragniemy mieć pewność, że każdy zrozumie, "
+"iż na niniejsze wolne oprogramowanie nie udziela się gwarancji. W razie "
+"dokonania w nim przez kogoś modyfikacji i puszczenia dalej do obrotu, "
+"pragniemy, aby dalsi odbiorcy zdawali sobie sprawę z tego, że problemy "
+"wprowadzone przez inne osoby nie są wyrazem oryginalnych działań twórców."
+"<br>I rzecz ostatnia: każdemu wolnemu programowi stale zagrażają patenty na "
+"oprogramowanie. Naszym pragnieniem jest unikanie takiego niebezpieczeństwa, "
+"kiedy redystrybutorzy wolnego programu indywidualnie uzyskują prawa "
+"patentowe, nadając tym samym programowi charakter prawnie zastrzeżony. W "
+"celu zapobieżenia takim zjawiskom jednoznacznie wyjaśniliśmy, że każdy "
+"patent musi być wydawany albo dla swobodnego użytku przez wszystkich, albo "
+"nie wydawany wcale.<br>Poniżej podajemy dokładne zasady i warunki "
+"kopiowania, rozpowszechniania i modyfikowania. "
 
 #: ../txts/COPYING:19
 msgid ""
 "GNU general public license terms and conditions for copying, distribution "
 "and modification"
-msgstr ""
+msgstr "Zasady i warunki kopiowania, rozpowszechniania i modyfikowania"
 
 #: ../txts/COPYING:22
 msgid ""
@@ -112,6 +169,15 @@ msgid ""
 "a fee for the physical act of transferring a copy, and you may at your "
 "option offer warranty protection in exchange for a fee.<br>"
 msgstr ""
+"1. Możesz kopiować i rozprowadzać w dowolnych mediach wierne kopie kodu "
+"źródłowego Programu w otrzymanej formie pod warunkiem, że w widoczny sposób "
+"i  odpowiednio podasz na każdej kopii właściwą informację o prawie autorskim "
+"i zrzeczenie się uprawnień z tytułu gwarancji; wszelkie napisy informacyjne "
+"na temat Licencji i faktu nieudzielania gwarancji musisz chronić przed "
+"uszkodzeniem, zaś wszystkim innym odbiorcom Programu musisz wraz z Programem "
+"wręczać egzemplarz niniejszej Licencji.<br>Możesz pobierać opłatę za "
+"fizyczną czynność przekazania kopii i według własnej decyzji możesz za "
+"opłatą proponować ochronę gwarancyjną.<br>"
 
 #: ../txts/COPYING:26
 msgid ""
@@ -134,6 +200,26 @@ msgid ""
 "such an announcement, your work based on the Program is not required to "
 "print an announcement.)"
 msgstr ""
+"2. Możesz modyfikować swoją kopię czy kopie Programu oraz dowolne jego "
+"części, tworząc przez to pracę opartą na Programie, jak również kopiować i "
+"rozprowadzać takie modyfikacje i pracę na warunkach podanych w pkt.1 powyżej "
+"- pod warunkiem przestrzegania całości poniższych wymogów:<br><br>a) Musisz "
+"spowodować umieszczenie na zmodyfikowanych plikach widocznej informacji o "
+"tym, że dane pliki zostały przez ciebie zmienione, wraz z datą dokonania "
+"zmian.<br><br>b) Musisz doprowadzić do tego, aby każda rozpowszechniana lub "
+"publikowana przez ciebie praca, która w całości lub części zawiera Program, "
+"albo pochodzi od niego lub jego części, była w całości i bezpłatnie "
+"licencjonowana dla wszelkich stron trzecich na warunkach niniejszej Licencji."
+"<br><br>c) Jeżeli zmodyfikowany program podczas korzystania z niego w "
+"normalnym trybie odczytuje polecenia interaktywnie, musisz spowodować, aby "
+"po uruchomieniu (użyty w interaktywny sposób w najzwyklejszym trybie), "
+"wydrukowywał on lub wyświetlał powiadomienie o odnośnym prawie autorskim i "
+"braku gwarancji (ewentualnie o zapewnianiu gwarancji przez ciebie), oraz o "
+"tym, że użytkownicy mogą redystrybuować ten program na niniejszych warunkach "
+"wraz z informacją, jak użytkownik może zapoznać się z treścią niniejszej "
+"Licencji. (Wyjątek: jeśli sam Program jest interaktywny, ale normalnie nie "
+"drukuje takiego powiadomienia, twoja praca oparta na nim też nie musi "
+"wydrukowywać takiego powiadomienia)."
 
 #: ../txts/COPYING:29
 msgid ""
@@ -153,6 +239,23 @@ msgid ""
 "with a work based on the Program) on a volume of a storage or distribution "
 "medium does not bring the other work under the scope of this License."
 msgstr ""
+"Niniejsze wymogi odnoszą się do zmodyfikowanej pracy jako całości. Jeśli "
+"dające się ustalić sekcje danej pracy nie pochodzą od Programu i mogą być "
+"racjonalnie uważane za samodzielne i odrębne same w sobie, to niniejsza "
+"Licencja i jej warunki nie mają zastosowania do takich sekcji przy "
+"rozprowadzaniu ich przez ciebie jako odrębne prace. Jeśli jednak "
+"rozprowadzasz je jako część całości, będącej pracą opartą na Programie, "
+"rozpowszechnianie tej całości musi być dokonywane na warunkach niniejszej "
+"Licencji, której zezwolenia dla innych licencjobiorców rozciągają się w  "
+"całej szerokości na tę całość, a tym samym i na każdą indywidualną jej "
+"część, niezależnie od jej autorstwa.<br>Dlatego też intencją tego fragmentu "
+"nie jest roszczenie sobie praw albo podważanie twych praw do pracy napisanej "
+"w całości przez ciebie. Chodzi nam raczej o korzystanie z prawa "
+"kontrolowania dystrybucji pochodnych i zbiorowych prac opartych na Programie."
+"<br>I jeszcze jedno: samo tylko połączenie z Programem (lub z pracą opartą "
+"na Programie) innej pracy - nie opartej na Programie, w ramach wolumenu "
+"nośnika przechowywania lub dystrybucji, nie powoduje objęcia takiej pracy "
+"zakresem niniejszej Licencji. "
 
 #: ../txts/COPYING:32
 msgid ""
@@ -173,6 +276,23 @@ msgid ""
 "code or executable form with such an offer, in accord with Subsection b "
 "above.)"
 msgstr ""
+"3. Możesz kopiować i rozprowadzać Program (lub opartą na nim pracę - zgodnie "
+"z pkt.2 w kodzie wynikowym lub w formie wykonywalnej w myśl postanowień "
+"pkt.1 i 2 powyżej, pod warunkiem zrealizowania również poniższych wymogów:"
+"<br><br>a) Musisz dołączyć do niego odpowiadający mu, kompletny i możliwy do "
+"odczytania przez urządzenia cyfrowe kod źródłowy, który musi być "
+"rozpowszechniany na warunkach pkt.1 i 2 powyżej i na nośniku zwyczajowo "
+"używanym dla wzajemnej wymiany oprogramowania; lub<br>b) dołączyć do niego "
+"pisemną ofertę, ważną co najmniej 3 lata, przyznającą każdej stronie "
+"trzeciej - za opłatą nie przekraczającą twego kosztu fizycznego wykonywania "
+"dystrybucji źródła - kompletną, odczytywalną przez urządzenia cyfrowe kopię "
+"odpowiadającego mu kodu źródłowego, rozprowadzaną na warunkach pkt.1 i 2 "
+"powyżej, na nośniku zwyczajowo używanym do wzajemnej wymiany oprogramowania; "
+"lub<br>c) dołączyć do niego informację, jaką otrzymałeś na temat oferty "
+"rozprowadzania odpowiedniego kodu źródłowego. (Ta możliwość dozwolona jest "
+"tylko dla dystrybucji niehandlowej i jedynie wtedy, gdy otrzymałeś dany "
+"program w kodzie wynikowym lub formie wykonywalnej wraz z wymienioną ofertą "
+"- zgodnie z podpunktem b powyżej)."
 
 #: ../txts/COPYING:35
 msgid ""
@@ -195,6 +315,20 @@ msgid ""
 "even though third parties are notcompelled to copy the source along with the "
 "object code."
 msgstr ""
+"Określenie kod źródłowy dla pracy oznacza formę pracy preferowaną dla "
+"wprowadzania do niej modyfikacji. Dla wykonanej pracy, kompletny kod "
+"źródłowy oznacza cały kod źródłowy wszystkich modułów, wszelkie sprzężone z "
+"nią pośredniczące pliki opisujące oraz zbiory komend stosowane do sterowania "
+"kompilacją i instalowaniem programów. Niemniej jednak, jako wyjątek "
+"specjalny, dystrybuowany (w formie źródłowej albo binarnej) kod źródłowy nie "
+"musi obejmować niczego, co jest normalnie rozprowadzane przy pomocy głównych "
+"komponentów (kompilator, jądro itd.) systemu operacyjnego, na którym pracuje "
+"część wykonywalna, o ile sam taki komponent towarzyszy tej części.<br>Jeśli "
+"dystrybucja części wykonywalnej albo kodu wynikowego realizowana jest "
+"poprzez oferowanie dostępu do kopii z wyznaczonego miejsca, to oferowanie "
+"równoważnego dostępu dla kopiowania kodu źródłowego z tego samego miejsca "
+"liczy się jako rozpowszechnianie kodu źródłowego, nawet gdy strony trzecie "
+"nie są zmuszone do kopiowania źródła wraz z kodem wynikowym. "
 
 #: ../txts/COPYING:41
 msgid ""
@@ -205,6 +339,14 @@ msgid ""
 "copies, or rights, from you under this License will not have their licenses "
 "terminated so long as such parties remain in full compliance."
 msgstr ""
+"4. Poza przypadkami jednoznacznie dozwolonymi w niniejszej Licencji, nie "
+"możesz kopiować, modyfikować, sublicencjonować ani rozpowszechniać Programu. "
+"We wszystkich pozostałych wypadkach, każda próba skopiowania, "
+"sublicencjonowania lub rozpowszechnienia Programu jest nieważna i powoduje "
+"automatyczne wygaśnięcie twoich praw z tytułu Licencji. Niemniej jednak, "
+"stronom, które już otrzymały od ciebie kopie albo prawa w ramach niniejszej "
+"Licencji, licencje nie wygasają tak długo, jak długo strony te w pełni "
+"stosują się do nich."
 
 #: ../txts/COPYING:44
 msgid ""
@@ -216,6 +358,14 @@ msgid ""
 "this License to do so, and all its terms and conditions for copying, "
 "distributing or modifying the Program or works based on it."
 msgstr ""
+"5. Nie musisz akceptować niniejszej Licencji, jeżeli jej nie podpisałeś. "
+"Niemniej jednak, nic innego nie zapewni ci zezwolenia na modyfikowanie lub "
+"rozprowadzanie Programu i pochodzących od niego prac. Działania takie są "
+"prawnie zabronione, jeżeli nie przyjmujesz niniejszej Licencji. Dlatego też, "
+"poprzez modyfikowanie bądź rozpowszechnianie Programu (lub pracy na nim "
+"opartej) dajesz wyraz swojej akceptacji dla Licencji i wszelkich jej "
+"postanowień i warunków dotyczących kopiowania, rozprowadzania i "
+"modyfikowania Programu lub opartych na nim prac."
 
 #: ../txts/COPYING:47
 msgid ""
@@ -226,6 +376,13 @@ msgid ""
 "recipients' exercise of the rights granted herein. You are not responsible "
 "for enforcing compliance by third parties to this License."
 msgstr ""
+"6. W każdym przypadku redystrybucji przez ciebie Programu (albo opartej na "
+"nim pracy), odbiorca automatycznie otrzymuje od pierwotnego licencjodawcy "
+"licencję na kopiowanie, rozpowszechnianie i modyfikowanie Programu na "
+"niniejszych zasadach i warunkach. Na korzystanie przez odbiorcę z "
+"udzielonych w niniejszej Licencji praw nie możesz narzucać już dalszych "
+"ograniczeń. Nie jesteś stroną odpowiedzialną za kontrolę przestrzegania "
+"Licencji przez osoby trzecie."
 
 #: ../txts/COPYING:50
 msgid ""
@@ -242,6 +399,19 @@ msgid ""
 "it and this License would be to refrain entirely from distribution of the "
 "Program."
 msgstr ""
+"Jeśli na skutek wyroku sądowego lub zarzutu naruszenia patentu, jak też z "
+"każdej innej przyczyny (nie ograniczonej do kwestii patentowych) zostaną "
+"narzucone na ciebie (niezależnie czy to mocą wyroku sądowego, umowy, czy w "
+"inny sposób) warunki sprzeczne z warunkami niniejszej Licencji, to nie "
+"zwalniają one ciebie z warunków Licencji. Jeśli nie możesz prowadzić "
+"dystrybucji tak, aby wypełniać jednocześnie swoje obowiązki z tytułu "
+"niniejszej Licencji i inne odnośne obowiązki, to w rezultacie nie możesz "
+"wcale rozprowadzać Programu. Na przykład, gdyby licencja patentowa nie "
+"zezwalała na wolną od opłat licencyjnych redystrybucję Programu przez "
+"wszystkie osoby, które otrzymały kopie bezpośrednio lub pośrednio od ciebie, "
+"to jedynym sposobem pozwalającym ci na przestrzeganie i licencji patentowej, "
+"i Licencji niniejszej, byłoby całkowite powstrzymanie się od jakiejkolwiek "
+"dystrybucji Programu."
 
 #: ../txts/COPYING:53
 msgid ""
@@ -249,6 +419,10 @@ msgid ""
 "particular circumstance, the balance of the section is intended to apply and "
 "the section as a whole is intended to apply in other circumstances."
 msgstr ""
+"Jeżeli w jakichś szczególnych okolicznościach któryś fragment niniejszego "
+"punktu stałby się nieważny lub niewykonywalny, to intencją jest, aby "
+"znajdowała zastosowanie pozostała część punktu, a treść całego punktu była "
+"stosowana w pozostałych okolicznościach."
 
 #: ../txts/COPYING:56
 msgid ""
@@ -262,12 +436,23 @@ msgid ""
 "she is willing to distribute software through any other system and a "
 "licensee cannot impose that choice."
 msgstr ""
+"Celem niniejszego punktu nie jest zachęcanie do naruszania patentów czy "
+"innych praw własności, albo też do podważania ich ważności; niniejszy punkt "
+"za swój jedyny cel ma ochronę integralności systemu rozpowszechniania "
+"wolnego oprogramowania, realizowanego za pomocą publicznych licencji. Wielu "
+"ludzi bezinteresownie wniosło swój wkład do stworzenia szerokiego zakresu "
+"oprogramowania upowszechnianego w tym systemie, mając zaufanie do "
+"konsekwentnego jego stosowania; wyłącznie do autora/ofiarodawcy należy "
+"decyzja, czy życzy on sobie rozprowadzania oprogramowania za pośrednictwem "
+"innego systemu i licencjobiorca nie może tego prawa wyboru ograniczać."
 
 #: ../txts/COPYING:59
 msgid ""
 "This section is intended to make thoroughly clear what is believed to be a "
 "consequence of the rest of this License."
 msgstr ""
+"Intencją niniejszego punktu jest jasne i wyraźne przedstawienie tego, co "
+"uważa się za skutki, jakie rodzi pozostała część niniejszej Licencji."
 
 #: ../txts/COPYING:62
 msgid ""
@@ -279,6 +464,14 @@ msgid ""
 "excluded.  In such case, this License incorporates the limitation as if "
 "written in the body of this License."
 msgstr ""
+"8. W przypadku, gdy dystrybucja i/lub używanie Programu w niektórych krajach "
+"poddane jest ograniczeniom patentowym lub zastrzeżeniom prawami autorskimi, "
+"początkowy posiadacz praw autorskich, który poddaje Program pod "
+"oddziaływanie niniejszej Licencji, może dodać wyraźnie zakreślone "
+"geograficzne ograniczenie rozpowszechniania wyłączające te kraje, dzięki "
+"czemu dystrybucja dozwolona będzie wyłącznie w krajach czy wśród krajów nie "
+"objętych takim wyłączeniem. W przypadku takim, niniejsza Licencja obejmuje "
+"dane ograniczenie tak, jakby było ono wpisane w jej treść."
 
 #: ../txts/COPYING:65
 msgid ""
@@ -293,6 +486,16 @@ msgid ""
 "a version number of this License, you may choose any version ever published "
 "by the Free Software Foundation."
 msgstr ""
+"9. W miarę potrzeby Fundacja Wolnego Oprogramowania może publikować "
+"poprawione i/lub nowe wersje Powszechnej Licencji Publicznej. Takie nowe "
+"wersje będą napisane w duchu podobnym do obecnej wersji, ale mogą różnić się "
+"w szczegółach poruszających nowe problemy czy zagadnienia.<br>Każdej wersji "
+"nadaje się wyróżniający ją numer. Jeżeli Program podaje numer wersji "
+"niniejszej Licencji, odnoszący się do tej wersji i \"wszelkich wersji "
+"następnych\", masz do wyboru albo stosować się do postanowień i warunków tej "
+"wersji, albo którejkolwiek wersji późniejszej wydanej przez Fundację Wolnego "
+"Oprogramowania. O ile Program nie podaje numeru wersji niniejszej Licencji, "
+"możesz wybrać dowolną wersję kiedykolwiek opublikowaną przez Fundację. "
 
 #: ../txts/COPYING:68
 msgid ""
@@ -304,10 +507,17 @@ msgid ""
 "preserving the free status of all derivatives of our free software and of "
 "promoting the sharing and reuse of software generally."
 msgstr ""
+"10. Jeśli chcesz włączyć części Programu do innych wolnych programów, "
+"których warunki rozpowszechniania są inne, zwróć się pisemnie do autora z "
+"prośbą o pozwolenie. W przypadku oprogramowania objętego przez Fundację "
+"prawem autorskim, napisz do Fundacji; czasami czynimy od tego odstępstwa. W "
+"naszej decyzji kierujemy się dwoma celami: utrzymania wolnego statusu "
+"wszystkich pochodnych naszego wolnego oprogramowania oraz - generalnie - "
+"promowania współudziału i wielokrotnego stosowania oprogramowania."
 
 #: ../txts/COPYING:72
 msgid "No warranty"
-msgstr ""
+msgstr "WYRÓB BEZ GWARANCJI"
 
 #: ../txts/COPYING:75
 msgid ""
@@ -321,6 +531,15 @@ msgid ""
 "PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR "
 "CORRECTION."
 msgstr ""
+"11. PONIEWAŻ PROGRAM JEST LICENCJONOWANY BEZPŁATNIE, NIE JEST OBJĘTY "
+"GWARANCJĄ W ZAKRESIE DOZWOLONYM PRZEZ OBOWIĄZUJĄCE PRZEPISY. O ILE NA PIŚMIE "
+"NIE STANOWI SIĘ INACZEJ, POSIADACZE PRAW AUTORSKICH I/LUB INNE STRONY "
+"ZAPEWNIAJĄ PROGRAM W STANIE, W JAKIM JEST (\"JAK WIDAĆ\") BEZ JAKIEJKOLWIEK "
+"GWARANCJI, ANI WYRAŹNEJ, ANI DOMYŚLNEJ, W TYM MIĘDZY INNYMI DOMYŚLNYCH "
+"GWARANCJI CO DO PRZYDATNOŚCI HANDLOWEJ I PRZYDATNOŚCI DO OKREŚLONYCH "
+"ZASTOSOWAŃ. CAŁOŚĆ RYZYKA W ZAKRESIE JAKOŚCI I SKUTECZNOŚCI DZIAŁANIA "
+"PROGRAMU PONOSISZ SAM. W RAZIE GDYBY PROGRAM OKAZAŁ SIĘ WADLIWY, PONOSISZ "
+"KOSZT CAŁEGO NIEZBĘDNEGO SERWISU, NAPRAWY I KORYGOWANIA."
 
 #: ../txts/COPYING:78
 msgid ""
@@ -334,14 +553,24 @@ msgid ""
 "PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE "
 "POSSIBILITY OF SUCH DAMAGES."
 msgstr ""
+"12. O ILE OBOWIĄZUJĄCE PRAWO NIE STANOWI INACZEJ ALBO CZEGOŚ INNEGO NIE "
+"UZGODNIONO W FORMIE PISEMNEJ, ŻADEN POSIADACZ PRAW AUTORSKICH ANI INNA "
+"STRONA MODYFIKUJĄCA I/LUB REDYSTRYBUJĄCA PROGRAM ZGODNIE Z POWYŻSZYMI "
+"ZEZWOLENIAMI, W ŻADNYM WYPADKU NIE JEST ODPOWIEDZIALNA WOBEC CIEBIE ZA "
+"SZKODY, W TYM SZKODY OGÓLNE, SPECJALNE, UBOCZNE LUB SKUTKOWE, WYNIKŁE Z "
+"UŻYCIA BĄDŹ NIEMOŻLIWOŚCI UŻYCIA PROGRAMU (W TYM, MIĘDZY INNYMI, ZA UTRATĘ "
+"DANYCH LUB POWSTANIE DANYCH NIEDOKŁADNYCH, ALBO ZA STRATY PONIESIONE PRZEZ "
+"CIEBIE LUB STRONY TRZECIE, JAK TEŻ NIEDZIAŁANIE PROGRAMU Z INNYMI "
+"PROGRAMAMI), NAWET JEŚLI DANY POSIADACZ BĄDŹ INNA STRONA ZOSTALI "
+"POWIADOMIENI O MOŻLIWOŚCI POWSTANIA TAKICH SZKÓD."
 
 #: ../txts/COPYING:83
 msgid "End of Terms and Conditions"
-msgstr ""
+msgstr "KONIEC ZASAD I WARUNKÓW"
 
 #: ../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
-msgstr ""
+msgstr "Jak stosować niniejsze Warunki do Twoich nowych programów"
 
 #: ../txts/COPYING:89
 msgid ""
@@ -349,6 +578,10 @@ msgid ""
 "use to the public, the best way to achieve this is to make it free software "
 "which everyone can redistribute and change under these terms."
 msgstr ""
+"Jeśli opracowujesz nowy program i chciałbyś, aby stał się on przydatny dla "
+"szerokiego ogółu, najlepszą drogą do osiągnięcia tego będzie nadanie twemu "
+"programowi charakteru wolnego oprogramowania, które każdy może "
+"redystrybuować i zmieniać na niniejszych warunkach."
 
 #: ../txts/COPYING:92
 msgid ""
@@ -357,6 +590,11 @@ msgid ""
 "exclusion of warranty; and each file should have at least the copyright line "
 "and a pointer to where the full notice is found."
 msgstr ""
+"W tym celu do programu dołącz poniższe informacje. Bezpieczniej jest "
+"dołączyć je na początku każdego pliku źródłowego, dzięki czemu "
+"najskuteczniej można przekazać fakt nieistnienia gwarancji; każdy plik "
+"powinien przy tym nosić uwagę \"copyright\" i odnośnik, gdzie można znaleźć "
+"pełną informację."
 
 #: ../txts/COPYING:95
 msgid ""
@@ -374,6 +612,20 @@ msgid ""
 "Boston, MA  02111-1307  USA<br><br><br>Also add information on how to "
 "contact you by electronic and paper mail."
 msgstr ""
+"nazwa programu i informacja, do czego on służy.<br>Copyright (C) 19../20.. "
+"nazwisko autora<br><br>Niniejszy program jest wolnym oprogramowaniem; możesz "
+"go rozprowadzać dalej i/lub modyfikować na warunkach PowszechnejLicencji "
+"Publicznej GNU, wydanej przez Fundację WolnegoOprogramowania - według wersji "
+"2-giej tej Licencji lub którejś z późniejszych wersji. <br>Niniejszy program "
+"rozpowszechniany jest z nadzieją, iż będzie on użyteczny - jednak BEZ "
+"JAKIEJKOLWIEK GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI HANDLOWEJ "
+"albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ. W celu uzyskania bliższych "
+"informacji - Powszechna Licencja Publiczna GNU. <br><br>Z pewnością wraz z "
+"niniejszym programem otrzymałeś też egzemplarz <br>Powszechnej Licencji "
+"Publicznej GNU (GNU General Public License);jeśli nie - napisz do Free "
+"Software Foundation, Inc., 675 Mass Ave,Cambridge, MA 02139, USA. "
+"<br><br>Podaj też informacje o sposobie kontaktowania się z tobą pocztą "
+"elektroniczną lub zwykłą."
 
 #: ../txts/COPYING:97
 msgid ""
@@ -384,6 +636,13 @@ msgid ""
 "are welcome to redistribute it<br>under certain conditions; type `show c' "
 "for details."
 msgstr ""
+"Jeśli dany program jest interaktywny, spraw, aby w momencie wchodzenia w "
+"tryb interaktywny wyświetlał on komunikat jak w poniższym przykładzie:"
+"<br>Gnomovision wersja 69, Copyright C 19.. nazwisko autora <br>Gnomovision "
+"wydawany jest ABSOLUTNIE BEZ ŻADNEJ GWARANCJI -w celu uzyskania dalszych "
+"szczegółów wpisz \"show w\".<br>To jest wolne oprogramowanie i mile widziane "
+"jest dalsze rozpowszechnianie go przez ciebie na określonych warunkach - w "
+"celu uzyskania bliższych szczegółów wpisz \"show c\"."
 
 #: ../txts/COPYING:99
 msgid ""
@@ -395,6 +654,14 @@ msgid ""
 "sign a copyright disclaimer for the program, if necessary.  Here is a "
 "sample; alter the names:"
 msgstr ""
+"Powyższe hipotetyczne polecenia \"show w\" i \"show c\" winny powodować "
+"wyświetlenie odpowiednich części Powszechnej Licencji Publicznej. Oczywiście "
+"możesz używać innych poleceń niż \"show w\" i \"show c\"; mogą to być nawet "
+"kliknięcia myszą lub pozycje menu - co tylko sobie uznasz za stosowne."
+"<br>Powinieneś też poprosić swego pracodawcę (jeśli pracujesz jako "
+"programista) czy też swoją szkołę (jeśli jesteś uczniem), o podpisanie, w "
+"razie potrzeby, \"Rezygnacji z praw autorskich\" do programu. Poniżej "
+"podajemy przykład (zmień nazwy/nazwiska): "
 
 #: ../txts/COPYING:101
 msgid ""
@@ -403,6 +670,11 @@ msgid ""
 "Hacker.<br><br><signature of Ty Coon>, 1 April 1989<br>Ty Coon, President of "
 "Vice"
 msgstr ""
+"My, firma Jojodyne Sp. z o.o. niniejszym zrzekamy się i rezygnujemy z "
+"wszelkich interesów prawnych w zakresiepraw autorskich do programu "
+"\"Gnomovision\" (który realizuje następujące funkcje...), napisanego przez p."
+"Jana Kowalskiego.<br>Podpis: /-/ Gniewosław Wielkoważny<br>Gniewosław "
+"Wielkoważny, Prezes...itp"
 
 #: ../txts/COPYING:103
 msgid ""
@@ -412,18 +684,26 @@ msgid ""
 "library.  If this is what you want to do, use the GNU Library General Public "
 "License instead of this License."
 msgstr ""
+"4.    Poza przypadkami jednoznacznie dozwolonymi w niniejszej Licencji, nie "
+"możesz kopiować, modyfikować, sublicencjonować ani rozpowszechniać Programu. "
+"We wszystkich pozostałych wypadkach, każda próba skopiowania, "
+"sublicencjonowania lub rozpowszechnienia Programu jest nieważna i powoduje "
+"automatyczne wygaśnięcie twoich praw z tytułu Licencji. Niemniej jednak, "
+"stronom, które już otrzymały od ciebie kopie albo prawa w ramach niniejszej "
+"Licencji, licencje nie wygasają tak długo, jak długo strony te w pełni "
+"stosują się do nich."
 
 #: ../txts/README:1
 msgid "README"
-msgstr ""
+msgstr "CZYTAJ-TO"
 
 #: ../txts/README:5
 msgid "an open source strategy game"
-msgstr ""
+msgstr "strategiczna gra open-source"
 
 #: ../txts/README:9 ../txts/editor_readme:6
 msgid "Introduction"
-msgstr ""
+msgstr "Wstęp"
 
 #: ../txts/README:13
 msgid ""
@@ -435,10 +715,16 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you do."
 msgstr ""
+"Widelands to gra strategiczna podobna do gry Settlers II wydanej przez firmę "
+"BlueByte<br>W tej grze, zaczynasz na małym kawałku ziemi z niczym więcej jak "
+"paroma przydatnymi surowcami. Używając ich możesz zbudować wielkie imperium "
+"z wieloma tysiącami mieszkańców. Aby to osiągnąć będziesz musiał rozwijać "
+"infrastrukturę, odkrywać okoliczne ziemię i pokonywać wrogów którzy chcą "
+"władać światem - tak jak Ty."
 
 #: ../txts/README:16
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Odwiedź stronę projektu Widelands:"
 
 #: ../txts/README:22
 msgid ""
@@ -446,10 +732,13 @@ msgid ""
 "information, see the file 'COPYING' or select the License button from the "
 "main menu."
 msgstr ""
+"Widelands jest na licencji GNU General Public License (GPL - Generalna "
+"Publiczna Licencja GNU). Aby dowiedzieć się więcej zajrzyj do pliku COPYING "
+"lub wybierz opcję \"Licencja\" z menu głównego."
 
 #: ../txts/README:27
 msgid "Running the game"
-msgstr ""
+msgstr "Uruchamianie gry"
 
 #: ../txts/README:31
 msgid ""
@@ -461,12 +750,20 @@ msgid ""
 "can be obtained from http://www.libsdl.org/, SDL_image can be obtained from "
 "http://www.libsdl.org/projects/SDL_image/"
 msgstr ""
+"Widelands wymaga bibliotek SDL oraz SDL_image aby działać. Windowsowe wersje "
+"są dołączone do pliku instalacyjnego. Większość dystrybucji Linuksa oferuje "
+"prekompilowane paczki obu bibliotek. Proszę, sprawdź w dokumentacji swojej "
+"dystrybucji jak je zainstalować (o ile to potrzebne). Kiedy wszystko inne "
+"zawiedzie możesz je skompilować ze źródeł. SDL można pobrać ze strony http://"
+"www.libsdl.org/ a SDL_image z http://www.libsdl.org/projects/SDL_image/"
 
 #: ../txts/README:34
 msgid ""
 "Once everything is set up, just start the Widelands executable in order to "
 "run the game."
 msgstr ""
+"Kiedy wszystko jest gotowe po prostu uruchom plik wykonywalny Widelands aby "
+"rozpocząć grę."
 
 #: ../txts/README:37
 msgid ""
@@ -475,16 +772,22 @@ msgid ""
 "working directory is set to the directory the Widelands executable resides "
 "in. On Linux, this is best done by launching Widelands through a shell: "
 msgstr ""
+"Jeżeli gra się nie uruchomi, nawet jeżeli pliki Widelands i wymagane "
+"biblioteki są poprawnie zainstalowane, proszę sprawdź, czy \"katalog roboczy"
+"\" pliku wykonywalnego jest ustawiony na katalog w którym znajdują się pliki "
+"gry. W Linuksie najlepiej zrobić to uruchamiając program z poziomu powłoki."
 
 #: ../txts/README:43
 msgid ""
 "On Windows, you will have to check the shortcut settings if you start "
 "Widelands via a shortcut."
 msgstr ""
+"W Windowsie będziesz musiał sprawdzić ustawienia skrótu (jeżeli oczywiście "
+"go używasz)."
 
 #: ../txts/README:48
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../txts/README:52
 msgid ""
@@ -493,54 +796,58 @@ msgid ""
 "required, especially in the area of graphics, to make Widelands a better "
 "game."
 msgstr ""
+"Widelands jest obecnie w początkowych etapach \"bycia grywalnym\", żeby "
+"posunąć się naprzód potrzeba większej liczby ochotników. Twój wkład (tak, "
+"mówię do Ciebie) jest wymagany, szczególnie na polu grafiki, aby uczynić "
+"Widelands lepszą grą."
 
 #: ../txts/README:57
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Skróty klawiaturowe (w grze)"
 
 #: ../txts/README:61
 msgid "SPACE       Toggles build-help"
-msgstr ""
+msgstr "SPACJA       Otwiera okno pomocy budowania"
 
 #: ../txts/README:63
 msgid "M               Toggle minimap"
-msgstr ""
+msgstr "M               otwiera minimapę"
 
 #: ../txts/README:65
 msgid "C               Toggle census"
-msgstr ""
+msgstr "C              otwiera okno spisu ludności"
 
 #: ../txts/README:67
 msgid "S               Toggle statistics"
-msgstr ""
+msgstr "S               otwiera okno statystyk"
 
 #: ../txts/README:69
 msgid "F               Toggle Fullscreen"
-msgstr ""
+msgstr "F               przełącza tryb pełnoekranowy"
 
 #: ../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
-msgstr ""
+msgstr "PAGEUP         zwiększa szybkość gry"
 
 #: ../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
+msgstr "PAGEDOWN    zmniejsza szybkość gry"
 
 #: ../txts/README:77
 msgid "F5           Reveals the entire map"
-msgstr ""
+msgstr "F5           pokazuje całą mapę"
 
 #: ../txts/README:79
 msgid "F10         Quit the game immediately"
-msgstr ""
+msgstr "F10         natychmiastowo kończy grę"
 
 #: ../txts/README:81
 msgid "F11         Take a screenshot"
-msgstr ""
+msgstr "F11         zapisuje zrzut ekranu"
 
 #: ../txts/README:86
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Zgłaszanie błędów"
 
 #: ../txts/README:90
 msgid ""
@@ -548,24 +855,28 @@ msgid ""
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
 "page:"
 msgstr ""
+"Jeżeli chcesz zgłosić błąd, proszę wyślij swój raport na listę mailingową "
+"<widelands-public@list.sourceforge.net><br>Aby się zapisać odwiedź ta stronę:"
 
 #: ../txts/README:95
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Proszę podaj nam jak najwięcej informacji. Napisz:"
 
 #: ../txts/README:98
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from CVS)"
 msgstr ""
+"- jakiej używasz wersji Widelands (np. numer buildu lub coś "
+"takiego<br>jeżeli to własna kompilacja z CVS)"
 
 #: ../txts/README:100
 msgid "- how to reproduce the bug"
-msgstr ""
+msgstr "- jak powstaje błąd"
 
 #: ../txts/README:102
 msgid "- which map you were playing"
-msgstr ""
+msgstr "- na jakiej grałeś mapie"
 
 #: ../txts/README:104
 msgid ""
@@ -574,10 +885,14 @@ msgid ""
 "record<br>your sessions in case a bug surfaces. For more explanation, see "
 "below."
 msgstr ""
+"- wyślij nam skompresowany (zip, gzip, bzip2) plik sesji jeżeli to możliwe, "
+"chyba że błąd jest prosty do odtworzenia. W zasadzie, to dobry pomysł, żeby "
+"zawsze<br>zapisywać sesję w przypadku wystąpienia błędu. Więcej informacji "
+"poniżej:"
 
 #: ../txts/README:109
 msgid "Creating a Session Record</p>"
-msgstr ""
+msgstr "Zapisywanie sesji</p>"
 
 #: ../txts/README:112
 msgid ""
@@ -585,12 +900,18 @@ msgid ""
 "can then replay an entire session from starting the game to exiting it. This "
 "is really helpful for debugging problems."
 msgstr ""
+"Widelands może zapisać wszystkie klawisze jakie nacisnąłeś, oraz wszystkie "
+"ruchy myszki do pliku. Można wtedy odtworzyć cały przebieg gry, od jej "
+"początku do końca. Pliki takie są przydatne przy usuwaniu błędów."
 
 #: ../txts/README:115
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
+"Aby zapiać taki plik sesji należy uruchomić grę z parametrem \"--record\". "
+"Na Linuksie wystarczy dodać to do linii komend, np. \"$ ./widelands --"
+"record=nazwapliku.rec\""
 
 #: ../txts/README:118
 msgid ""
@@ -600,12 +921,20 @@ msgid ""
 "should read something like c:\\games\\widelands\\widelands.exe. Change this "
 "to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
+"Na Windowsie powinieneś stworzyć skrót do widelands.exe (prawy klik na pliku "
+"\"widelands.exe\" i \"Utwórz skrót\") Następnie zmodyfikuj skrót (prawy "
+"klika na skrócie i \"Właściwości\"): pole polecenie może wyglądać mniej np "
+"tak: \"c:\\games\\widelands\\widelands.exe.\", zmień je na: \"\\games"
+"\\widelands\\widelands.exe --record=nazwapliku.rec\"."
 
 #: ../txts/README:121
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
 msgstr ""
+"Zostanie stworzony binarny plik \"nazwapliku.rec\". Aby go odtworzyć "
+"postępuj zgodnie z powyższymi instrukcjami ale zamiast parametru \"--record"
+"\" użyć \"--playback\"."
 
 #: ../txts/README:124
 msgid ""
@@ -615,18 +944,22 @@ msgid ""
 "change between versions. Session records are not intended to serve as demo "
 "files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr ""
+"Warto wspomnieć, że pliki z zapisem sesji są niezależne od platformy, ale "
+"ściśle powiązane z wersją programu. Sposób zapisywania i funkcje są "
+"zmieniane radykalnie z wersji na wersję. Pliki sesji nie są \"demami\" gry, "
+"ich celem jest ułatwienie wykrywania błędów."
 
 #: ../txts/developers:3
 msgid "Devlopment"
-msgstr ""
+msgstr "Rozwój"
 
 #: ../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "CZYTAJ-TO dla Edytora Widelands"
 
 #: ../txts/editor_readme:3
 msgid "README for the Editor"
-msgstr ""
+msgstr "CZYTAJ-TO dla Edytora"
 
 #: ../txts/editor_readme:9
 msgid ""
@@ -635,59 +968,67 @@ msgid ""
 "and as the Editor becomes better and better this text  will also get longer "
 "and more complete. Probably it will also contain a little tutorial in a while"
 msgstr ""
+"Edytor jest przeznaczony dla graczy, którzy chcą stworzyć własne mapy do gry."
+"<br>Jak widać, Edytor jest we wczesnej fazie rozwoju, wraz ze jego "
+"polepszeniem, polepszy się też ta dokumentacja. Planowane jest też wydanie "
+"krótkiego samouczka."
 
 #: ../txts/editor_readme:13
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Skróty klawiaturowe"
 
 #: ../txts/editor_readme:16
 msgid "SPACE    Toggles build help"
-msgstr ""
+msgstr "SPACE    otwiera okno pomocy budowania"
 
 #: ../txts/editor_readme:18
 msgid "C        Toggles census on/off"
-msgstr ""
+msgstr "C        przełącza okno spisu ludności"
 
 #: ../txts/editor_readme:20
 msgid "E        Toggles event menu"
-msgstr ""
+msgstr "E        otwiera okno wydarzeń"
 
 #: ../txts/editor_readme:22
 msgid "F        Toggle Fullscreen"
-msgstr ""
+msgstr "F        przełącza tryb pełnoekranowy"
 
 #: ../txts/editor_readme:24
 msgid "H        Toggles main menu"
-msgstr ""
+msgstr "H        pokazuje główne menu"
 
 #: ../txts/editor_readme:26
 msgid "M        Toggles minimap"
-msgstr ""
+msgstr "M        otwiera okno minimapy"
 
 #: ../txts/editor_readme:28
 msgid "P        Toggles player menu"
-msgstr ""
+msgstr "P        otwiera menu graczy"
 
 #: ../txts/editor_readme:30
 msgid "T        Toggles tools menu"
-msgstr ""
+msgstr "T        otwiera okno narzędzi"
 
 #: ../txts/editor_readme:32
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "CTRL+L   ładuje mapę"
 
 #: ../txts/editor_readme:34
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "CTRL+S   zapisuje mapę"
 
 #: ../txts/editor_readme:36
 msgid "1-0      Changes tools size"
-msgstr ""
+msgstr "1-0      zmienia rozmiar narzędzi"
 
 #: ../txts/editor_readme:38
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr ""
+"SHIFT    (przytrzymany) wybiera pierwsze alternatywne narzędzie dopóki jest "
+"trzymany"
 
 #: ../txts/editor_readme:40
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
+"ALT      (przytrzymany) wybiera drugie alternatywne narzędzie dopóki jest "
+"trzymany"
