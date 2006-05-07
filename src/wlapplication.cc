@@ -44,6 +44,9 @@
 
 #ifdef DEBUG
 #ifndef __WIN32__
+int WLApplication::pid_me=0;
+int WLApplication::pid_peer=0;
+volatile int WLApplication::may_run=0;
 #include <signal.h>
 #endif // WIN32
 #endif // DEBUG
@@ -52,10 +55,6 @@
 using std::cout;
 using std::endl;
 
-//Initialize the class variables
-int WLApplication::pid_me=0;
-int WLApplication::pid_peer=0;
-volatile int WLApplication::may_run=0;
 WLApplication *WLApplication::the_singleton=0;
 
 /**
