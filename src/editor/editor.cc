@@ -64,7 +64,6 @@ void Editor::run() {
 
 
    set_map(map);
-   set_map(map);
 
    g_gr->flush(PicMod_Menu);
 

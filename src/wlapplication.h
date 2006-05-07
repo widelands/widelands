@@ -194,8 +194,6 @@ public:
 	static void quit_handler();
 	static void yield_double_game();
 	//@}
-#endif
-#endif
 
 	// Used for --double
 	//@{
@@ -204,6 +202,8 @@ public:
 	///\todo Explain me
 	static volatile int may_run;
 	//@}
+#endif
+#endif
 
 protected:
 	WLApplication(const int argc, const char **argv);

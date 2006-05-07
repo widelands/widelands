@@ -89,15 +89,23 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * This constructor is protected \e on \e purpose !
  * Use \ref WLApplication::get() instead and look at the class description.
  *
- * For easier access, repackage argc/argv into an STL map. If you specify
+ * For easier access, we repackage argc/argv into an STL map here. If you specify
  * the same option more than once, only the last occurrence is effective.
  *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(const int argc, const char **argv):
-      m_playback(false),
-      m_record(false),
+		m_commandline(std::map<std::string, std::string>()),
+		journal(0),
+		m_playback(false), m_record(false),
+		m_input_grab(false), m_mouse_swapped(false), m_mouse_speed(0.0),
+		m_mouse_buttons(0), m_mouse_x(0), m_mouse_y(0),
+		m_mouse_maxx(0), m_mouse_maxy(0), m_mouse_locked(0),
+		m_mouse_internal_x(0), m_mouse_internal_y(0),
+		m_mouse_internal_compx(0), m_mouse_internal_compy(0),
+		m_sdl_active(false), m_should_die(false),
+		m_gfx_w(0), m_gfx_h(0), m_gfx_fullscreen(false),
 		m_game(0)
 {
 	m_commandline["EXENAME"]=argv[0];
@@ -135,7 +143,7 @@ WLApplication::WLApplication(const int argc, const char **argv):
 	}
 
 	//empty commandline means there were _unhandled_ syntax errors
-	//(commandline should at least contain argv[0]=="widelands" ! )
+	//(commandline should at least contain "EXENAME"=="widelands" ! )
 	//in the commandline. They should've been handled though.
 	//TODO: bail out gracefully instead
 	assert(!m_commandline.empty());
@@ -984,7 +992,6 @@ void WLApplication::yield_double_game()
 	// using sleep instead of pause avoids a race condition
 	// and a deadlock during connect
 }
-
 #endif
 #endif
 
