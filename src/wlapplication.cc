@@ -96,6 +96,8 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(const int argc, const char **argv):
+      m_playback(false),
+      m_record(false),
 		m_game(0)
 {
 	m_commandline["EXENAME"]=argv[0];

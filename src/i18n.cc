@@ -17,6 +17,7 @@
  *
  */
 
+#include <libintl.h>
 #include "constants.h" //for LOCALE_PATH
 #include "i18n.h"
 #include <libintl.h>

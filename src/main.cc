@@ -28,10 +28,11 @@ using std::flush;
 /**
  * Cross-platform entry point for SDL applications.
  */
-int main(const int argc, const char** argv)
+extern "C" 
+int main(int argc, char* argv[])
 {
 	try {
-		WLApplication * const g_app=WLApplication::get(argc, argv);
+		WLApplication * const g_app=WLApplication::get(argc, const_cast<const char**>(argv));
 		//TODO: handle exceptions from the constructor
 
 		g_app->run();

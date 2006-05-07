@@ -64,6 +64,7 @@ void Editor::run() {
 
 
    set_map(map);
+   set_map(map);
 
    g_gr->flush(PicMod_Menu);
 
@@ -84,6 +85,7 @@ void Editor::run() {
 
    g_gr->flush(PicMod_Game);
    g_anim.flush();
+
 }
 
 /*
