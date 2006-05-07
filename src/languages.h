@@ -41,7 +41,7 @@ struct Languages {
  * NONE as first entry. Also increase the NR_LANGUAGES variable by one
  */
 #ifdef DEFINE_LANGUAGES  // defined in fullscreen_menu_options.cc
-#define NR_LANGUAGES 10
+#define NR_LANGUAGES 11
 static Languages available_languages[NR_LANGUAGES] = {
    { "Default system language", "" },
 // EXTRACT BEGIN (leaves this line untouched)
@@ -51,8 +51,9 @@ static Languages available_languages[NR_LANGUAGES] = {
    { "Français", "fr_FR" },
    { "עברית", "he_HE" },
    { "Polski", "pl_PL" },
+   { "Русский", "ru_RU" },
    { "Suomi", "fi_FI" },
-   { "Slovak", "sk_SK" },
+   { "Slovensky", "sk_SK" },
    { "Svenska", "sv_SE" },
 // EXTRACT END (leave this line untouched)
 }; 
