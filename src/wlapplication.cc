@@ -941,8 +941,6 @@ void WLApplication::init_double_game ()
 
 	atexit (quit_handler);
 }
-#endif
-#endif
 
 /**
  * On SIGUSR1, allow ourselves to continue running
@@ -986,6 +984,9 @@ void WLApplication::yield_double_game()
 	// using sleep instead of pause avoids a race condition
 	// and a deadlock during connect
 }
+
+#endif
+#endif
 
 /**
  * Run the main menu
