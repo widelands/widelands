@@ -187,7 +187,11 @@ public:
 	//not all of these need to be public, but I consider signal handling
 	//a public interface
 	//@{
+#ifdef DEBUG
+#ifndef __WIN32__
 	void init_double_game();
+#endif
+#endif
 	static void signal_handler (int sig);
 	static void quit_handler();
 	static void yield_double_game();

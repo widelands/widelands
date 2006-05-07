@@ -21,6 +21,7 @@
 #include "editor_game_base.h"
 #include "error.h"
 #include "game.h"
+#include <libintl.h>
 #include "militarysite.h"
 #include "player.h"
 #include "profile.h"
@@ -122,7 +123,7 @@ MilitarySite::~MilitarySite()
 {
    if (m_soldier_requests.size())
       log ("[MilitarySite] Ouch! Still have soldier requests!\n");
-   
+
    if (m_soldiers.size())
       log ("[MilitarySite] Ouch! Still have soldiers!\n");
 }
@@ -159,11 +160,11 @@ void MilitarySite::init(Editor_Game_Base* g)
 log (">>MilitarySite::init()\n");
    ProductionSite::init(g);
 
-   if (g->is_game()) 
+   if (g->is_game())
    {
       // Request soldiers
       call_soldiers((Game *) g);
-      
+
       //    Should schedule because all stuff related to healing and removing own
       // soldiers should be scheduled.
       schedule_act((Game*)g, 1000);
@@ -239,7 +240,7 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
    }
 
    uint i;
-   for(i=0; i < m_soldiers.size(); i++) 
+   for(i=0; i < m_soldiers.size(); i++)
    {
       Soldier* s = m_soldiers[i];
 
@@ -310,7 +311,7 @@ void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware,
 
    MilitarySite* msite = (MilitarySite*)data;
    Soldier* s=static_cast<Soldier*>(w);
-   
+
    assert(s);
    assert(s->get_location(g) == msite);
 
@@ -318,7 +319,7 @@ void MilitarySite::request_soldier_callback(Game* g, Request* rq, int ware,
       g->conquer_area(msite->get_owner()->get_player_number(),
    msite->get_position(), msite->get_descr());
    msite->m_didconquer = true;
-   
+
    uint i=0;
    for(i=0; i<msite->m_soldier_requests.size(); i++)
       if(rq==msite->m_soldier_requests[i]) break;
@@ -358,7 +359,7 @@ void MilitarySite::act(Game* g, uint data)
 
       for (i=0; i < m_soldiers.size(); i++) {
          s = m_soldiers[i];
-            
+
             // This is for clean up the soldier killed out of the building
          if (!s ||(s->get_current_hitpoints() == 0))
          {
@@ -367,13 +368,13 @@ void MilitarySite::act(Game* g, uint data)
             i--;
             continue;
          }
-            
+
             // Fighting soldiers couldn't be healed !
          if (s->is_marked())
             continue;
 
             // Heal action
-            
+
             // I don't like this 'healing' method, but I don't have any idea to do differently ...
          if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
             s->heal (total_heal);
@@ -382,7 +383,7 @@ void MilitarySite::act(Game* g, uint data)
       }
    }
    call_soldiers(g);
-   
+
       // Schedule the next wakeup at 1 second
    schedule_act (g, 1000);
 }
@@ -394,10 +395,10 @@ MilitarySite::call_soldiers
 Send the request for more soldiers if there are not full
 ===============
  */
-void MilitarySite::call_soldiers(Game *g) 
+void MilitarySite::call_soldiers(Game *g)
 {
-   if (g->is_game()) 
-      while(m_capacity > m_soldiers.size() + m_soldier_requests.size()) 
+   if (g->is_game())
+      while(m_capacity > m_soldiers.size() + m_soldier_requests.size())
          request_soldier(g);
 }
 
@@ -408,18 +409,18 @@ MilitarySite::drop_soldier
 Get out specied soldier from house.
 ===============
  */
-void MilitarySite::drop_soldier (uint serial) 
+void MilitarySite::drop_soldier (uint serial)
 {
    Game* g = (Game *)get_owner()->get_game();
 
 molog ("**Dropping soldier (%d)\n", serial);
 
-   if (g->is_game() && m_soldiers.size()) 
+   if (g->is_game() && m_soldiers.size())
    {
       int i = 0;
       Soldier* s = m_soldiers[i];
-      
-      while ((s) && (s->get_serial() != serial) && (i < (int)m_soldiers.size())) 
+
+      while ((s) && (s->get_serial() != serial) && (i < (int)m_soldiers.size()))
       {
          molog ("Serial: %d -- \n!", s->get_serial());
          i++;
@@ -428,7 +429,7 @@ molog ("**Dropping soldier (%d)\n", serial);
       if (s)
          molog ("Serial: %d -- \n!", s->get_serial());
 
-      if ((s) && (s->get_serial() == serial)) 
+      if ((s) && (s->get_serial() == serial))
       {
 molog ("**--Sodier localized!\n");
          drop_soldier(g, i);
@@ -447,9 +448,9 @@ Use throught drop_soldier(int)
 ===============
  */
 
-void MilitarySite::drop_soldier (Game *g, int nr) 
+void MilitarySite::drop_soldier (Game *g, int nr)
 {
-   if (g->is_game()) 
+   if (g->is_game())
    {
       Soldier *s;
 
@@ -458,7 +459,7 @@ void MilitarySite::drop_soldier (Game *g, int nr)
          return;
 
       s = m_soldiers[nr];
-      
+
       assert (s);
       s->set_location(0);
 
@@ -485,11 +486,11 @@ MilitarySite::change_soldier_capacity
 Changes the soldiers capacity.
 ===========
 */
-void MilitarySite::change_soldier_capacity(int how) 
+void MilitarySite::change_soldier_capacity(int how)
 {
-   if (how) 
+   if (how)
    {
-      if (how > 0) 
+      if (how > 0)
       {
          m_capacity += how;
 
@@ -497,18 +498,18 @@ void MilitarySite::change_soldier_capacity(int how)
             m_capacity = (uint) get_descr()->get_max_number_of_soldiers();
          call_soldiers((Game*)get_owner()->get_game());
       }
-      else 
+      else
       {
          how = -how;
-         
+
          if (how >= (int) m_capacity)
             m_capacity = 1;
          else
             m_capacity -= how;
-         
+
          while (m_capacity < m_soldiers.size() + m_soldier_requests.size())
          {
-            if (m_soldier_requests.size()) 
+            if (m_soldier_requests.size())
             {
 	       std::vector<Request*>::iterator it = m_soldier_requests.begin();
 	       for ( ; it != m_soldier_requests.end() && !(*it)->is_open(); ++it);
@@ -520,7 +521,7 @@ void MilitarySite::change_soldier_capacity(int how)
 
 	       m_soldier_requests.erase(it, it+1);
             }
-            else if (m_soldiers.size()) 
+            else if (m_soldiers.size())
             {
                Soldier *s = m_soldiers[m_soldiers.size()-1];
                drop_soldier (s->get_serial());
@@ -536,11 +537,11 @@ int MilitarySite::launch_attack(PlayerImmovable* p_imm, int type)
    uint launched = 0;
    int i = 0;
    Soldier* s = 0;
-   
+
    assert (p_imm->get_type() == FLAG);
    Flag* flag = (Flag*) p_imm;
    Game* g = (Game*) get_owner()->get_game();
-   
+
    if (!m_soldiers.size())
       return 0;
 
@@ -561,14 +562,14 @@ int MilitarySite::launch_attack(PlayerImmovable* p_imm, int type)
       default:
          throw wexception ("Unkown type of attack (%d)", type);
    }
-   
+
    s = m_soldiers[i];
-   
+
    if (s)
    {
       if (s->is_marked())
          return 0;
-      
+
 molog("Launching soldier %d\n", s->get_serial());
       s->mark(true);
       s->reset_tasks(g);
@@ -593,7 +594,7 @@ void MilitarySite::defend (Game* g, Soldier* s)
    for (i = 0; i < m_soldiers.size(); ++i)
    {
       Soldier* so = m_soldiers[i];
-      
+
       if (!so)
          continue;
 
@@ -609,7 +610,7 @@ void MilitarySite::defend (Game* g, Soldier* s)
    }
    if (J == 9999)
       s->send_signal(g, "fail");
-   else    
+   else
       call_soldiers(g);
 }
 
@@ -622,7 +623,7 @@ void MilitarySite::conquered_by (Player* who)
 
       // Getting game
    Game* g = (Game*)get_owner()->get_game();
-   
+
    // Release worker
    molog("[Conquered MilitarySite]: Releasing Workers\n");
    if (m_soldier_requests.size())
@@ -637,7 +638,7 @@ void MilitarySite::conquered_by (Player* who)
 
    Flag* f = get_base_flag();
    assert (f);
-   
+
       //  Destroy roads
    molog ("[Donquered - MilitarySite] : Destroying roads\n");
    if (f->get_road(WALK_NE)) f->detach_road(WALK_NE);
@@ -649,7 +650,7 @@ void MilitarySite::conquered_by (Player* who)
      // Destroying (at future will be )
    //f->schedule_destroy(g);
    schedule_destroy(g);
-   
+
 
 /*
    // unconquer land
@@ -661,32 +662,32 @@ molog("%s %d\n", __FILE__, __LINE__);
 
       //  Become the new owner
    set_owner (who);
-   
+
    Become the owner of the fields
    Field* fi = get_owner()->get_game()->get_map()->get_field(get_position());
    assert (fi);
    fi->set_owned_by (get_owner()->get_player_number());
-   
+
    fi = get_owner()->get_game()->get_map()->get_field(f->get_position());
    assert(fi);
    fi->set_owned_by (get_owner()->get_player_number());
-   
-   Become the owner of the  base flag   
+
+   Become the owner of the  base flag
    f->conquered_by (who);
-   
+
    Reconquer land (crash arround here)
    if (m_didconquer)
       g->conquer_area(who->get_player_number(), get_position(), get_descr());
 molog("%s %d\n", __FILE__, __LINE__);
    g->player_immovable_notification(this, Game::GAIN);
 molog("%s %d\n", __FILE__, __LINE__);*/
-  
+
 }
 
 
 /*
    MilitarySite::set_requeriments
-   
+
    Easy to use, overwrite with given requeriments, pointer to faster running, so
    in releases can avoid the assert
 */
@@ -698,7 +699,7 @@ void MilitarySite::set_requeriments (Requeriments* R)
 
 /*
    MilitarySite::clear_requeriments
-   
+
    This should cancel any requeriment pushed at this house
 */
 void MilitarySite::clear_requeriments ()

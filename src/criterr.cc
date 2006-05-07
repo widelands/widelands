@@ -118,7 +118,7 @@ void critical_error(const char* str, ...)
 	if (in_criterr || !g_gr)
 	{
 #ifdef WIN32
-		MessageBox(NULL, buf, _("Widelands"), MB_ICONINFORMATION);
+		MessageBox(NULL, buf, _("Widelands").c_str(), MB_ICONINFORMATION);
 #endif
 
 		if (in_criterr <= 1)

@@ -19,6 +19,7 @@
 
 #include "constants.h" //for LOCALE_PATH
 #include "i18n.h"
+#include <libintl.h>
 
 std::string i18n::m_locale="";
 std::vector<std::string> i18n::m_textdomains=std::vector<std::string>();

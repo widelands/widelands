@@ -133,6 +133,7 @@ WLApplication::WLApplication(const int argc, const char **argv):
 	}
 
 	//empty commandline means there were _unhandled_ syntax errors
+	//(commandline should at least contain argv[0]=="widelands" ! )
 	//in the commandline. They should've been handled though.
 	//TODO: bail out gracefully instead
 	assert(!m_commandline.empty());
@@ -908,6 +909,8 @@ void WLApplication::show_usage()
 	<<"Hope you enjoy this game!"<<endl<<endl;
 }
 
+#ifdef DEBUG
+#ifndef __WIN32__
 /**
  * Fork off a second game to test network gaming
  *
@@ -936,6 +939,8 @@ void WLApplication::init_double_game ()
 
 	atexit (quit_handler);
 }
+#endif
+#endif
 
 /**
  * On SIGUSR1, allow ourselves to continue running
