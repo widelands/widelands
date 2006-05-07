@@ -46,27 +46,3 @@ int main(int argc, char* argv[])
 		flush;
 	}
 }
-
-//TODO: can't this hack be folded into the above function? #fweber
-#ifdef __MINGW__
-#undef main
-
-/// This is a hack needed for mingw under windows
-int main(int argc, char** argv)
-{
-	try {
-		WLApplication * const g_app=WLApplication::get(argc, argv);
-		//TODO: handle exceptions from the constructor
-
-		g_app->run();
-
-		return 0;
-	}
-	catch(...) {
-		cerr<<"Caught unknown exception in outermost handler!"<<endl<<
-		"This should not happen"<<endl<<endl<<
-		"Please file a bug report."<<endl<<
-		flush;
-	}
-}
-#endif
