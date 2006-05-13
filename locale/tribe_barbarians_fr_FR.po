@@ -1,23 +1,25 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# French translation of WIDELANDS.
+# Copyright (C) 2006 THE WIDELANDS'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the WIDELANDS package.
+# Emmanuel Andry <eandry@free.fr>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: WIDELANDS VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2005-12-06 16:45+0100\n"
-"Last-Translator: me <anubisnotdead@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-05-13 08:09+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
 
 #: ../tribes/barbarians/conf:24
 msgid "The Widelands Development Team"
-msgstr "The Widelands Development Team"
+msgstr "L'équipe de développement de Widelands"
 
 #: ../tribes/barbarians/conf:25
 msgid "Barbarians"
@@ -37,7 +39,7 @@ msgstr "Sanglier"
 
 #: ../tribes/barbarians/buildings/axefactory/conf:2
 msgid "Axefactory"
-msgstr "Armurerie"
+msgstr "Fabrique de Haches"
 
 #: ../tribes/barbarians/buildings/bakery/conf:2
 msgid "Bakery"
@@ -57,11 +59,11 @@ msgstr "Grande Auberge"
 
 #: ../tribes/barbarians/buildings/brewery/conf:2
 msgid "Brewery"
-msgstr "Brassserie"
+msgstr "Brasserie"
 
 #: ../tribes/barbarians/buildings/burner/conf:2
 msgid "Charcoal Burner"
-msgstr "Fonderie"
+msgstr "Charbonnier"
 
 #: ../tribes/barbarians/buildings/citadel/conf:2
 msgid "Citadel"
@@ -73,7 +75,7 @@ msgstr "Mine de Charbon"
 
 #: ../tribes/barbarians/buildings/constructionsite/conf:5
 msgid "Construction Site"
-msgstr "Site de Constructions"
+msgstr "Site de Construction"
 
 #: ../tribes/barbarians/buildings/deep_coalmine/conf:2
 msgid "Deep Coal Mine"
@@ -81,11 +83,11 @@ msgstr "Mine de Charbon Profonde"
 
 #: ../tribes/barbarians/buildings/deep_goldmine/conf:2
 msgid "Deep Gold Mine"
-msgstr "Mine d'or Profonde"
+msgstr "Mine d'Or Profonde"
 
 #: ../tribes/barbarians/buildings/deep_oremine/conf:2
 msgid "Deep Iron Ore Mine"
-msgstr "Mine de métal Profonde"
+msgstr "Mine de Fer Profonde"
 
 #: ../tribes/barbarians/buildings/deeper_coalmine/conf:2
 msgid "Deeper Coal Mine"
@@ -93,11 +95,11 @@ msgstr "Mine de Charbon Très Profonde"
 
 #: ../tribes/barbarians/buildings/deeper_goldmine/conf:2
 msgid "Deeper Gold Mine"
-msgstr "Mine d'or Très Profonde"
+msgstr "Mine d'Or Très Profonde"
 
 #: ../tribes/barbarians/buildings/deeper_oremine/conf:2
 msgid "Deeper Iron Ore Mine"
-msgstr "Mine de Métal Très Profonde"
+msgstr "Mine de Fer Très Profonde"
 
 #: ../tribes/barbarians/buildings/donjon/conf:2
 msgid "Donjon"
@@ -133,7 +135,7 @@ msgstr "Mine de Granit"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2
 msgid "Wood hardener"
-msgstr "Garde Forestier"
+msgstr "Durcisseur de Bois"
 
 #: ../tribes/barbarians/buildings/headquarters/conf:6
 msgid "Headquarters"
@@ -149,7 +151,7 @@ msgstr "Auberge"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
-msgstr "Forge"
+msgstr "Ferronerie"
 
 #: ../tribes/barbarians/buildings/micro-brewery/conf:2
 msgid "Micro brewery"
@@ -157,7 +159,7 @@ msgstr "Petite Brasserie"
 
 #: ../tribes/barbarians/buildings/oremine/conf:2
 msgid "Iron Ore Mine"
-msgstr "Mine de Métal"
+msgstr "Mine de Fer"
 
 #: ../tribes/barbarians/buildings/quarry/conf:2
 msgid "Quarry"
@@ -169,7 +171,7 @@ msgstr "Hutte de garde Forestier"
 
 #: ../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
-msgstr "Sentinnelle"
+msgstr "Sentinelle"
 
 #: ../tribes/barbarians/buildings/smelting_works/conf:2
 msgid "Smelting Works"
@@ -177,7 +179,7 @@ msgstr "Fonderie"
 
 #: ../tribes/barbarians/buildings/stonegrinder/conf:2
 msgid "Stonegrinder"
-msgstr "Tailleur de Pierre"
+msgstr "Taille de Pierre"
 
 #: ../tribes/barbarians/buildings/stronghold/conf:2
 msgid "Stronghold"
@@ -200,9 +202,8 @@ msgid "War Mill"
 msgstr "Moulin de Guerre"
 
 #: ../tribes/barbarians/buildings/weaving-mill/conf:2
-#, fuzzy
 msgid "Weaving-Mill"
-msgstr "Moulin de Guerre"
+msgstr "Atelier de Tissage"
 
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
@@ -210,15 +211,15 @@ msgstr "Puit"
 
 #: ../tribes/barbarians/wares/axe/conf:2
 msgid "Axe"
-msgstr "Axe"
+msgstr "Hache"
 
 #: ../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Bakingtray"
-msgstr "Boulangerie Industrielle"
+msgstr "Plaque de Four"
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
 msgid "Battle Axe"
-msgstr "Hâche de Guerre"
+msgstr "Hache de Guerre"
 
 #: ../tribes/barbarians/wares/beer/conf:2
 msgid "Beer"
@@ -230,11 +231,11 @@ msgstr "Ebene"
 
 #: ../tribes/barbarians/wares/broadaxe/conf:2
 msgid "Broad Axe"
-msgstr "Grande Hâche"
+msgstr "Grande Hache"
 
 #: ../tribes/barbarians/wares/bronzeaxe/conf:2
 msgid "Bronze Axe"
-msgstr "Hâche de Bronze"
+msgstr "Hache de Bronze"
 
 #: ../tribes/barbarians/wares/cloth/conf:2
 msgid "Cloth"
@@ -246,7 +247,7 @@ msgstr "Charbon"
 
 #: ../tribes/barbarians/wares/coalearth/conf:2
 msgid "Coalearth"
-msgstr "Terre riche en Charbon"
+msgstr "Charbon minier"
 
 #: ../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
@@ -262,7 +263,7 @@ msgstr "Canne à pêche"
 
 #: ../tribes/barbarians/wares/flax/conf:2
 msgid "Flax"
-msgstr ""
+msgstr "Lin"
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
@@ -274,7 +275,7 @@ msgstr "Pépite d'or"
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
-msgstr "Meule"
+msgstr "Pierre de Taille"
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -290,11 +291,11 @@ msgstr "Lance de Chasseur"
 
 #: ../tribes/barbarians/wares/iron/conf:2
 msgid "Iron"
-msgstr "Métal"
+msgstr "Fer"
 
 #: ../tribes/barbarians/wares/ironore/conf:2
 msgid "Ironore"
-msgstr "Minerai de Métal"
+msgstr "Minerai de Fer"
 
 #: ../tribes/barbarians/wares/kitchen_tools/conf:2
 msgid "Kitchen Tools"
@@ -330,7 +331,7 @@ msgstr "Pierre Brute"
 
 #: ../tribes/barbarians/wares/scythe/conf:2
 msgid "Scythe"
-msgstr "Faucille"
+msgstr "Faux"
 
 #: ../tribes/barbarians/wares/sharpaxe/conf:2
 msgid "Sharp Axe"
@@ -342,16 +343,15 @@ msgstr "Pelle"
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
-msgstr "Casse-Croute"
+msgstr "Casse-Croûte"
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"
 msgstr "Bière Corsée"
 
 #: ../tribes/barbarians/wares/thatchreed/conf:2
-#, fuzzy
 msgid "Thatch Reed"
-msgstr "Chaume"
+msgstr "Roseau de Chaume"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
@@ -359,11 +359,11 @@ msgstr "Tronc"
 
 #: ../tribes/barbarians/wares/warhelmet/conf:2
 msgid "War Helmet"
-msgstr "Haume"
+msgstr "Heaume"
 
 #: ../tribes/barbarians/wares/warriorsaxe/conf:2
 msgid "Warriors Axe"
-msgstr "Hâche de Guerrier"
+msgstr "Hache de Guerrier"
 
 #: ../tribes/barbarians/wares/water/conf:2
 msgid "Water"
@@ -387,11 +387,11 @@ msgstr "Brasseur"
 
 #: ../tribes/barbarians/workers/builder/conf:2
 msgid "Builder"
-msgstr "Ouvrier"
+msgstr "Constructeur"
 
 #: ../tribes/barbarians/workers/burner/conf:2
 msgid "Burner"
-msgstr "Fondeur"
+msgstr "Brûleur"
 
 #: ../tribes/barbarians/workers/carrier/conf:2
 msgid "Carrier"
@@ -461,7 +461,7 @@ msgstr "Sylviculteur"
 
 #: ../tribes/barbarians/workers/smelter/conf:2
 msgid "Smelter"
-msgstr "Fondeur"
+msgstr "Haut Fourneau"
 
 #: ../tribes/barbarians/workers/soldier/conf:2
 msgid "Soldier"
@@ -469,16 +469,15 @@ msgstr "Soldat"
 
 #: ../tribes/barbarians/workers/stonemason/conf:2
 msgid "Stonemason"
-msgstr "Tailleur de Pierre"
+msgstr "Tailleur de Pierres"
 
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
 msgstr "Entraîneur"
 
 #: ../tribes/barbarians/workers/weaver/conf:2
-#, fuzzy
 msgid "Weaver"
-msgstr "Eau"
+msgstr "Tisserand"
 
 #~ msgid "Presser"
 #~ msgstr "Presseur"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-06 14:32+0600\n"
+"PO-Revision-Date: 2006-05-13 21:08+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "Глубинная Угольная шахта"
 
 #: ../tribes/barbarians/buildings/deeper_goldmine/conf:2
 msgid "Deeper Gold Mine"
-msgstr "Глубинный Золотоносная шахта"
+msgstr "Глубинная Золотоносная шахта"
 
 #: ../tribes/barbarians/buildings/deeper_oremine/conf:2
 msgid "Deeper Iron Ore Mine"
@@ -122,7 +122,7 @@ msgstr "Укрепление"
 
 #: ../tribes/barbarians/buildings/gamekeeper/conf:2
 msgid "Gamekeeper Hut"
-msgstr "Хижина лесника"
+msgstr "Хижина егеря"
 
 #: ../tribes/barbarians/buildings/goldmine/conf:2
 msgid "Gold Mine"
@@ -140,6 +140,11 @@ msgstr "Лесопилка"
 msgid "Headquarters"
 msgstr "Штаб"
 
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr "Тяжелый шлем"
+
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
 msgstr "Хижина охотника"
@@ -147,6 +152,11 @@ msgstr "Хижина охотника"
 #: ../tribes/barbarians/buildings/inn/conf:2
 msgid "Inn"
 msgstr "Постоялый двор"
+
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Дровосек"
 
 #: ../tribes/barbarians/buildings/metallworks/conf:2
 msgid "Metallworks"
@@ -166,7 +176,7 @@ msgstr "Каменоломня"
 
 #: ../tribes/barbarians/buildings/ranger/conf:2
 msgid "Ranger Hut"
-msgstr "Хижина разведчика"
+msgstr "Хижина лесника"
 
 #: ../tribes/barbarians/buildings/sentry/conf:2
 msgid "Sentry"
@@ -226,7 +236,7 @@ msgstr "Пиво"
 
 #: ../tribes/barbarians/wares/blackwood/conf:2
 msgid "Blackwood"
-msgstr ""
+msgstr "Доски"
 
 #: ../tribes/barbarians/wares/broadaxe/conf:2
 msgid "Broad Axe"
@@ -270,7 +280,7 @@ msgstr "Золото"
 
 #: ../tribes/barbarians/wares/goldstone/conf:2
 msgid "Goldstone"
-msgstr "Авантюрин"
+msgstr "Слиток золота"
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
@@ -282,7 +292,7 @@ msgstr "Молот"
 
 #: ../tribes/barbarians/wares/helm/conf:2
 msgid "Helm"
-msgstr "Штурвал"
+msgstr "Шлем"
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
@@ -318,7 +328,7 @@ msgstr "Кирка"
 
 #: ../tribes/barbarians/wares/pittabread/conf:2
 msgid "Pittabread"
-msgstr ""
+msgstr "Хлеб"
 
 #: ../tribes/barbarians/wares/ration/conf:2
 msgid "Ration"
@@ -326,7 +336,7 @@ msgstr "Паек"
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
-msgstr "Необработанный камень"
+msgstr "Грубый камень"
 
 #: ../tribes/barbarians/wares/scythe/conf:2
 msgid "Scythe"
@@ -406,7 +416,7 @@ msgstr "Фермер"
 
 #: ../tribes/barbarians/workers/ferner/conf:2
 msgid "Ferner"
-msgstr "Папоротник"
+msgstr "Оранжерейщик"
 
 #: ../tribes/barbarians/workers/fisher/conf:2
 msgid "Fisher"
@@ -414,16 +424,11 @@ msgstr "Рыбак"
 
 #: ../tribes/barbarians/workers/gamekeeper/conf:2
 msgid "Gamekeeper"
-msgstr "Лесник"
+msgstr "Егерь"
 
 #: ../tribes/barbarians/workers/geologist/conf:2
 msgid "Geologist"
 msgstr "Геолог"
-
-#: ../tribes/barbarians/workers/helmsmith/conf:2
-#: ../tribes/barbarians/buildings/helmsmith/conf:2
-msgid "Helmsmith"
-msgstr ""
 
 #: ../tribes/barbarians/workers/hunter/conf:2
 msgid "Hunter"
@@ -432,11 +437,6 @@ msgstr "Охотник"
 #: ../tribes/barbarians/workers/innkeeper/conf:2
 msgid "Innkeeper"
 msgstr "Трактирщик"
-
-#: ../tribes/barbarians/workers/lumberjack/conf:2
-#: ../tribes/barbarians/buildings/lumberjack/conf:2
-msgid "Lumberjack"
-msgstr "Дровосек"
 
 #: ../tribes/barbarians/workers/master-blacksmith/conf:2
 msgid "Master Blacksmith"
