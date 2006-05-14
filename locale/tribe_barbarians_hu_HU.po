@@ -1,0 +1,489 @@
+# translation of tribe_barbarians.po to Hungarian
+# translation of tribe_barbarians_hu_HU.po to Hungarian
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2006-05-14 15:08+0000\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"Language-Team: Hungarian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
+
+#: ../tribes/barbarians/conf:24
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../tribes/barbarians/conf:25
+msgid "Barbarians"
+msgstr "Barbárok"
+
+#: ../tribes/barbarians/conf:26
+msgid "The mighty tribes of the east-lands!"
+msgstr "A legendás törzs a déli területekről!"
+
+#: ../tribes/barbarians/bobs/deer/conf:1
+msgid "Deer"
+msgstr "Szarvas"
+
+#: ../tribes/barbarians/bobs/wildboar/conf:1
+msgid "Wildboar"
+msgstr "Vaddisznó"
+
+#: ../tribes/barbarians/buildings/axefactory/conf:2
+msgid "Axefactory"
+msgstr "Fejszekészítő"
+
+#: ../tribes/barbarians/buildings/bakery/conf:2
+msgid "Bakery"
+msgstr "Pékség"
+
+#: ../tribes/barbarians/buildings/barrier/conf:2
+msgid "Barrier"
+msgstr "Akadály"
+
+#: ../tribes/barbarians/buildings/battlearena/conf:2
+msgid "Battle Arena"
+msgstr "Harci terület"
+
+#: ../tribes/barbarians/buildings/big_inn/conf:2
+msgid "Big Inn"
+msgstr "Nagy kocsma"
+
+#: ../tribes/barbarians/buildings/brewery/conf:2
+msgid "Brewery"
+msgstr "Sörfőzde"
+
+#: ../tribes/barbarians/buildings/burner/conf:2
+msgid "Charcoal Burner"
+msgstr "Faszéngyártó"
+
+#: ../tribes/barbarians/buildings/citadel/conf:2
+msgid "Citadel"
+msgstr "Fellegvár"
+
+#: ../tribes/barbarians/buildings/coalmine/conf:2
+msgid "Coal mine"
+msgstr "Szénbánya"
+
+#: ../tribes/barbarians/buildings/constructionsite/conf:5
+msgid "Construction Site"
+msgstr "Építési terület"
+
+#: ../tribes/barbarians/buildings/deep_coalmine/conf:2
+msgid "Deep Coal Mine"
+msgstr "Mély szénbánya"
+
+#: ../tribes/barbarians/buildings/deep_goldmine/conf:2
+msgid "Deep Gold Mine"
+msgstr "Mély aranybánya"
+
+#: ../tribes/barbarians/buildings/deep_oremine/conf:2
+msgid "Deep Iron Ore Mine"
+msgstr "Mély vasércbánya"
+
+#: ../tribes/barbarians/buildings/deeper_coalmine/conf:2
+#, fuzzy
+msgid "Deeper Coal Mine"
+msgstr "Mélyebb szénbánya"
+
+#: ../tribes/barbarians/buildings/deeper_goldmine/conf:2
+#, fuzzy
+msgid "Deeper Gold Mine"
+msgstr "Mélyebb aranybánya"
+
+#: ../tribes/barbarians/buildings/deeper_oremine/conf:2
+#, fuzzy
+msgid "Deeper Iron Ore Mine"
+msgstr "Mélyebb vasércbánya"
+
+#: ../tribes/barbarians/buildings/donjon/conf:2
+msgid "Donjon"
+msgstr "Torony"
+
+#: ../tribes/barbarians/buildings/farm/conf:2
+msgid "Farm"
+msgstr "Farm"
+
+# fern - ruha alapanyag
+#: ../tribes/barbarians/buildings/fernery/conf:2
+msgid "Fernery"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/fisher/conf:2
+msgid "Fisher Hut"
+msgstr "Halászkunyhó"
+
+#: ../tribes/barbarians/buildings/fortress/conf:2
+msgid "Fortress"
+msgstr "Erőd"
+
+#: ../tribes/barbarians/buildings/gamekeeper/conf:2
+msgid "Gamekeeper Hut"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/goldmine/conf:2
+msgid "Gold Mine"
+msgstr "Aranybánya"
+
+#: ../tribes/barbarians/buildings/granitmine/conf:2
+msgid "Granit Mine"
+msgstr "Gránitbánya"
+
+#: ../tribes/barbarians/buildings/hardener/conf:2
+msgid "Wood hardener"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/headquarters/conf:6
+msgid "Headquarters"
+msgstr "Főhadiszállás"
+
+#: ../tribes/barbarians/buildings/hunter/conf:2
+msgid "Hunters Hut"
+msgstr "Vadászkonyhó"
+
+#: ../tribes/barbarians/buildings/inn/conf:2
+msgid "Inn"
+msgstr "Kocsma"
+
+#: ../tribes/barbarians/buildings/metallworks/conf:2
+msgid "Metallworks"
+msgstr "Vasolvasztó"
+
+#: ../tribes/barbarians/buildings/micro-brewery/conf:2
+msgid "Micro brewery"
+msgstr "Kis sörfőzde"
+
+#: ../tribes/barbarians/buildings/oremine/conf:2
+msgid "Iron Ore Mine"
+msgstr "Vasércbánya"
+
+#: ../tribes/barbarians/buildings/quarry/conf:2
+msgid "Quarry"
+msgstr "Kőbánya"
+
+#: ../tribes/barbarians/buildings/ranger/conf:2
+msgid "Ranger Hut"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/sentry/conf:2
+msgid "Sentry"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/smelting_works/conf:2
+msgid "Smelting Works"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/stonegrinder/conf:2
+msgid "Stonegrinder"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/stronghold/conf:2
+msgid "Stronghold"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/tavern/conf:2
+msgid "Tavern"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/trainingscamp/conf:2
+msgid "Trainingscamp"
+msgstr "Edzőtábor"
+
+#: ../tribes/barbarians/buildings/warehouse/conf:2
+msgid "Warehouse"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/warmill/conf:2
+msgid "War Mill"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/weaving-mill/conf:2
+msgid "Weaving-Mill"
+msgstr ""
+
+#: ../tribes/barbarians/buildings/well/conf:2
+msgid "Well"
+msgstr "Kút"
+
+#: ../tribes/barbarians/wares/axe/conf:2
+msgid "Axe"
+msgstr "Fejsze"
+
+#: ../tribes/barbarians/wares/bakingtray/conf:2
+msgid "Bakingtray"
+msgstr "Kenyérsütőlapát"
+
+#: ../tribes/barbarians/wares/battleaxe/conf:2
+msgid "Battle Axe"
+msgstr "Harci fejsze"
+
+#: ../tribes/barbarians/wares/beer/conf:2
+msgid "Beer"
+msgstr "Sör"
+
+#: ../tribes/barbarians/wares/blackwood/conf:2
+msgid "Blackwood"
+msgstr "Gerenda"
+
+#: ../tribes/barbarians/wares/broadaxe/conf:2
+msgid "Broad Axe"
+msgstr "Fejsze"
+
+#: ../tribes/barbarians/wares/bronzeaxe/conf:2
+msgid "Bronze Axe"
+msgstr "Bronz fejsze"
+
+#: ../tribes/barbarians/wares/cloth/conf:2
+msgid "Cloth"
+msgstr "Ruha"
+
+#: ../tribes/barbarians/wares/coal/conf:2
+msgid "Coal"
+msgstr "Szén"
+
+#: ../tribes/barbarians/wares/coalearth/conf:2
+msgid "Coalearth"
+msgstr ""
+
+#: ../tribes/barbarians/wares/fire_tongs/conf:2
+msgid "Fire Tongs"
+msgstr "Fogó"
+
+#: ../tribes/barbarians/wares/fish/conf:2
+msgid "Fish"
+msgstr "Hal"
+
+#: ../tribes/barbarians/wares/fishing_rod/conf:2
+msgid "Fishing Rod"
+msgstr "Horgászbot"
+
+#: ../tribes/barbarians/wares/flax/conf:2
+msgid "Flax"
+msgstr ""
+
+#: ../tribes/barbarians/wares/gold/conf:2
+msgid "Gold"
+msgstr "Arany"
+
+#: ../tribes/barbarians/wares/goldstone/conf:2
+msgid "Goldstone"
+msgstr "Aranyérc"
+
+#: ../tribes/barbarians/wares/grindstone/conf:2
+msgid "Grindstone"
+msgstr "Cement"
+
+#: ../tribes/barbarians/wares/hammer/conf:2
+msgid "Hammer"
+msgstr "Kalapács"
+
+#: ../tribes/barbarians/wares/helm/conf:2
+msgid "Helm"
+msgstr "Sisak"
+
+#: ../tribes/barbarians/wares/hunting_spear/conf:2
+msgid "Hunting Spear"
+msgstr "Vadász ládzsa"
+
+#: ../tribes/barbarians/wares/iron/conf:2
+msgid "Iron"
+msgstr "Vas"
+
+#: ../tribes/barbarians/wares/ironore/conf:2
+msgid "Ironore"
+msgstr "Vasérc"
+
+#: ../tribes/barbarians/wares/kitchen_tools/conf:2
+msgid "Kitchen Tools"
+msgstr "Konyha eszközök"
+
+#: ../tribes/barbarians/wares/mask/conf:2
+msgid "Mask"
+msgstr "Maszk"
+
+#: ../tribes/barbarians/wares/meal/conf:2
+msgid "Meal"
+msgstr "Ebéd"
+
+#: ../tribes/barbarians/wares/meat/conf:2
+msgid "Meat"
+msgstr "Hús"
+
+#: ../tribes/barbarians/wares/pick/conf:2
+msgid "Pick"
+msgstr "Csákány"
+
+#: ../tribes/barbarians/wares/pittabread/conf:2
+msgid "Pittabread"
+msgstr "Pita kenyér"
+
+#: ../tribes/barbarians/wares/ration/conf:2
+msgid "Ration"
+msgstr "Szendvics"
+
+#: ../tribes/barbarians/wares/raw_stone/conf:2
+msgid "Raw Stone"
+msgstr "Nyers kő"
+
+#: ../tribes/barbarians/wares/scythe/conf:2
+msgid "Scythe"
+msgstr "Kasza"
+
+#: ../tribes/barbarians/wares/sharpaxe/conf:2
+msgid "Sharp Axe"
+msgstr "Éles fejsze"
+
+#: ../tribes/barbarians/wares/shovel/conf:2
+msgid "Shovel"
+msgstr "Lapát"
+
+#: ../tribes/barbarians/wares/snack/conf:2
+msgid "Snack"
+msgstr "Étel"
+
+#: ../tribes/barbarians/wares/strongbeer/conf:2
+msgid "Strong Beer"
+msgstr "Erős sör"
+
+#: ../tribes/barbarians/wares/thatchreed/conf:2
+#, fuzzy
+msgid "Thatch Reed"
+msgstr "Nád"
+
+#: ../tribes/barbarians/wares/trunk/conf:2
+msgid "Trunk"
+msgstr "Döngölőfa (építéshez)"
+
+#: ../tribes/barbarians/wares/warhelmet/conf:2
+msgid "War Helmet"
+msgstr "Harci sisak"
+
+#: ../tribes/barbarians/wares/warriorsaxe/conf:2
+msgid "Warriors Axe"
+msgstr "Harci fejsze"
+
+#: ../tribes/barbarians/wares/water/conf:2
+msgid "Water"
+msgstr "Víz"
+
+#: ../tribes/barbarians/wares/wheat/conf:2
+msgid "Wheat"
+msgstr "Búza"
+
+#: ../tribes/barbarians/workers/baker/conf:2
+msgid "Baker"
+msgstr "Pék"
+
+#: ../tribes/barbarians/workers/blacksmith/conf:2
+msgid "Blacksmith"
+msgstr "Kovácsműhely"
+
+#: ../tribes/barbarians/workers/brewer/conf:2
+msgid "Brewer"
+msgstr "Sörfőző"
+
+#: ../tribes/barbarians/workers/builder/conf:2
+msgid "Builder"
+msgstr "Építész"
+
+#: ../tribes/barbarians/workers/burner/conf:2
+msgid "Burner"
+msgstr ""
+
+#: ../tribes/barbarians/workers/carrier/conf:2
+msgid "Carrier"
+msgstr "Munkás"
+
+#: ../tribes/barbarians/workers/chief-miner/conf:2
+msgid "Chief Miner"
+msgstr "Fő bányász"
+
+#: ../tribes/barbarians/workers/farmer/conf:2
+msgid "Farmer"
+msgstr "Földmőves"
+
+#: ../tribes/barbarians/workers/ferner/conf:2
+msgid "Ferner"
+msgstr ""
+
+#: ../tribes/barbarians/workers/fisher/conf:2
+msgid "Fisher"
+msgstr "Halász"
+
+#: ../tribes/barbarians/workers/gamekeeper/conf:2
+msgid "Gamekeeper"
+msgstr ""
+
+#: ../tribes/barbarians/workers/geologist/conf:2
+msgid "Geologist"
+msgstr "Geológus"
+
+#: ../tribes/barbarians/workers/helmsmith/conf:2
+#: ../tribes/barbarians/buildings/helmsmith/conf:2
+msgid "Helmsmith"
+msgstr ""
+
+#: ../tribes/barbarians/workers/hunter/conf:2
+msgid "Hunter"
+msgstr "Vadász"
+
+#: ../tribes/barbarians/workers/innkeeper/conf:2
+msgid "Innkeeper"
+msgstr "Kocsmáros"
+
+#: ../tribes/barbarians/workers/lumberjack/conf:2
+#: ../tribes/barbarians/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Favágó"
+
+#: ../tribes/barbarians/workers/master-blacksmith/conf:2
+msgid "Master Blacksmith"
+msgstr "Mester kovács"
+
+#: ../tribes/barbarians/workers/master-brewer/conf:2
+msgid "Master Brewer"
+msgstr "Mester sörfőző"
+
+#: ../tribes/barbarians/workers/master-miner/conf:2
+msgid "Master Miner"
+msgstr "Mester bányász"
+
+#: ../tribes/barbarians/workers/miner/conf:2
+msgid "Miner"
+msgstr "Bányász"
+
+#: ../tribes/barbarians/workers/ranger/conf:2
+msgid "Forester"
+msgstr "Erdész"
+
+#: ../tribes/barbarians/workers/smelter/conf:2
+msgid "Smelter"
+msgstr "Olvasztómunkás"
+
+#: ../tribes/barbarians/workers/soldier/conf:2
+msgid "Soldier"
+msgstr "Harcos"
+
+#: ../tribes/barbarians/workers/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Kőfaragó"
+
+#: ../tribes/barbarians/workers/trainer/conf:2
+msgid "Trainer"
+msgstr ""
+
+#: ../tribes/barbarians/workers/weaver/conf:2
+#, fuzzy
+msgid "Weaver"
+msgstr "Víz"
+
+#~ msgid "Pressworks"
+#~ msgstr "Nyomda"
