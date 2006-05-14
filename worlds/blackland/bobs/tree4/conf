@@ -1,0 +1,15 @@
+[global]
+type="diminishing"
+stock=1
+descname =_Tree
+
+size=normal
+attrib=tree
+program=fall
+
+hot_spot_x=24
+hot_spot_y=60
+
+# This program is executed when the lumberjack kills the tree
+[fall]
+0=remove

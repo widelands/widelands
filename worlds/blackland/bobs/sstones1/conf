@@ -1,0 +1,9 @@
+descname =_Standing Stones
+type=boring
+size=small
+
+[idle]
+pics=sstones1_??.bmp
+hot_spot_x=4
+hot_spot_y=4
+

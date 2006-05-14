@@ -1,0 +1,16 @@
+descname=_Bunny
+type="critter"
+swimming=0  # defaults to 0, is only in the water?
+attrib=eatable
+program=remove
+
+[remove]
+0=remove
+
+[idle]
+hot_spot_x=5
+hot_spot_y=9
+
+[walk]
+hot_spot_x=5
+hot_spot_y=9
