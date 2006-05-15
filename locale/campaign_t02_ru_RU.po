@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: campaign_t02_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-14 01:07+0600\n"
+"PO-Revision-Date: 2006-05-14 17:29+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,6 @@ msgid "Thron speaks..."
 msgstr "Трон говорит..."
 
 #: ../campaigns/t02.wmf/event:13
-#, fuzzy
 msgid ""
 " \"The war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees. The stories they tell "
@@ -32,7 +31,13 @@ msgid ""
 "eyes I see the fortress my father built consumed by flames. The throne "
 "between the trees, the symbol of unity and peace among our kin became the "
 "wedge that drives us apart.\" "
-msgstr "построено "
+msgstr ""
+" \"Война продолжается. Все больше наших братьев и сестер бегут из нашей "
+"столицы, охваченной жестокой войной. Печально слышать то, что они "
+"рассказывают о смерти нашей семьи. Ночами я не могу заснуть и к утру стаю "
+"так, как никто другой. Когда я закрываю глаза, я вижу укрепеления "
+"построенные моим отцом, пожираемые огнем. Трон среди деревьев, символ "
+"единства и мира в нашей семье стал клином, разделившим нас.\" "
 
 #: ../campaigns/t02.wmf/event:15
 msgid "The Story goes on..."
@@ -65,6 +70,14 @@ msgid ""
 "slaughtering, unless... is this it? As father told me? Rise against whoever "
 "threatens our very existance may it even be one of your blood or mind?\" "
 msgstr ""
+" \"Сегодня мои охотники привели мужчину, женщину и маленьких детей, "
+"прятавшихся в лесу, пытаясь спастись от войны, не понимающих и не "
+"принимающих ту ярость с которой племена воюют друг с дргугом, как в старые "
+"времена, когда не было законов, а только дикие инстинкты. Ни один из моих "
+"братьев никогда не завоюет и не получит деревянный трон, ни одно племя не "
+"сильно настолько, чтобы раздавить все остальные. Этому безумству не будет "
+"конца, пока ... как там? Как говорил отец? Поднимись против того, кто "
+"угрожает твоему существованию, пусть даже он одной с тобой крови?\" "
 
 #: ../campaigns/t02.wmf/event:30 ../campaigns/t02.wmf/event:45
 msgid "The Story continues..."
@@ -81,19 +94,29 @@ msgid ""
 "live and think united a new home, replacing what is now lost to us? Until we "
 "can return to the place we once called our home...\" "
 msgstr ""
+" \"Болдреф с каждым днем становится все более и более потерянным. Дух моего "
+"воинства уменьшается по мере приближения холодного сезона, а мы все еще "
+"живем в хижинах и бараках. Я не намеревался оставаться в этой глуши так "
+"долго - но я также не думал, что мои братья могут биться друг с другом столь "
+"долго.<br>Возможно пришло время получше устроиться здесь. Возможно пришло "
+"время дать тем кто все еще жив и верит в единство новый дом взамен "
+"потерянного? Пока мы не вернемся будем называть это место нашим домом...\" "
 
 #: ../campaigns/t02.wmf/event:504
 msgid "Brave Boldreth steps aside you..."
 msgstr "Бравый Болдреф подошел к вам..."
 
 #: ../campaigns/t02.wmf/event:506
-#, fuzzy
 msgid ""
 " \"So you want to prepare us for a longer stay in these forests, Thron? "
 "Well, I see the wisdom in doing so, yet my heart is yearning for a glorious "
 "return to Al'thunran. Too long have we waited while our brethren fought on "
 "the battlefield, and our axes and swords have turned rusty over time.\"</p>"
-msgstr "Колодец</p>"
+msgstr ""
+" \"Итак, ты хочешь подготовить нас к более длительному пребыванию здесь, "
+"Трон? Что ж, я думаю, что это мудро, хотя мое сердце все еще жаждет "
+"возвращения в прекрасный Алфуран. Слишком долго мы ждали завершения битвы "
+"между братьями, и наши топоры и мечи покрылись ржавчиной.\"</p>"
 
 #: ../campaigns/t02.wmf/event:507 ../campaigns/t02.wmf/event:521
 #: ../campaigns/t02.wmf/event:535 ../campaigns/t02.wmf/event:549
@@ -117,13 +140,15 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers' "
 "tools and it is only a matter of little time before they are all gone.\"</p>"
 msgstr ""
+" \"Я молю о прощении, вождь, но у меня плохи вести для тебя. Камни около "
+"твоего лагеря быстро тают под кирками рабочих, и не далек тот час, когда они "
+"закончатся.\"</p>"
 
 #: ../campaigns/t02.wmf/event:532
 msgid "Boldreth jumps up."
 msgstr "Болдреф вскочил."
 
 #: ../campaigns/t02.wmf/event:534
-#, fuzzy
 msgid ""
 " \"While it is certainly no worthy task for a warrior, at least it is "
 "something to be done! Thron, what do you say about me taking a few of our "
@@ -132,7 +157,13 @@ msgid ""
 "man?\" <br><br>--NEW OBJECTIVES--<br>- build military buildings (like "
 "Sentries and Strongholds) to expand your territory. Get to the rocks north-"
 "east from you and build a Quarry there.</p>"
-msgstr "большой<br><br><br> Каменоломня</p>"
+msgstr ""
+" \"Пока что это не наиважнейшая задача для воина, нужно еще кое-что сделать! "
+"Трон, что ты скажешь, если я возьму самых крепких воинов и рискнем "
+"обследовать подножие горы Kалмаврат - может быть найдем больше камня, для "
+"этого старика?\" <br><br>--НОВОЕ ЗАДАНИЕ--<br>- постройте военные сооружения "
+"(типа Караульной и Крепости) чтобы расширить вашу территорию. Найдите на "
+"северо-востоке камни и постройте там каменоломню.</p>"
 
 #: ../campaigns/t02.wmf/event:546
 msgid "Khantrukh grumbles..."
@@ -148,14 +179,13 @@ msgstr "Хантрух кивнул подтверждая."
 
 #: ../campaigns/t02.wmf/event:562
 msgid " \"At least. These rocks should last for a while.\"</p>"
-msgstr ""
+msgstr " \"Ну наконец. Камнем мы пока что обеспеченыю\"</p>"
 
 #: ../campaigns/t02.wmf/event:575
 msgid "Boldreth exclaims..."
 msgstr "Бодреф воскликнул..."
 
 #: ../campaigns/t02.wmf/event:577
-#, fuzzy
 msgid ""
 " \"Just look at that! The great mountain of Kal'mavrath! I wonder what "
 "treasures nature might have hidden beneath its majestic flanks!<br>Now "
@@ -170,7 +200,7 @@ msgid ""
 "appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - "
 "granit<br>Mines may only be built on mountain terrain. Suitable places for "
 "mines are displayed with a light grey dot.</p>"
-msgstr "<br><br><br><br> Строить построено<br><br><br><br><br> построено</p>"
+msgstr ""
 
 #: ../campaigns/t02.wmf/event:589
 msgid "Boldreth laughs..."
@@ -181,6 +211,8 @@ msgid ""
 " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
 "this coal and iron ore for! It might even be enough to -\"</p>"
 msgstr ""
+" \"Это страшно как борода ЧатКаруфа! Только представьте что мы можем сделать "
+"с этим углем и железной рудой! Этого хаватит даже для -\"</p>"
 
 #: ../campaigns/t02.wmf/event:604
 msgid "Khantrukh interrupts..."
@@ -219,7 +251,7 @@ msgstr "<br><br><br> Строить</p>"
 
 #: ../campaigns/t02.wmf/event:633
 msgid "The elder laughs..."
-msgstr ""
+msgstr "Старик рассмеялся..."
 
 #: ../campaigns/t02.wmf/event:635
 #, fuzzy
@@ -249,6 +281,8 @@ msgid ""
 "sets today you will have a feast as magnificent as is right for the "
 "chieftain of all clans!\"</p>"
 msgstr ""
+" \"Наши охотники скрылись в лесу, Трон. Я обещаю, что до захода солнца у нас "
+"будет пир, достойный вождя клана!\"</p>"
 
 #: ../campaigns/t02.wmf/event:663
 msgid "Khantrukh gazes over the plains..."
@@ -331,7 +365,7 @@ msgstr "<br><br><br> Уголь Таверна</p>"
 
 #: ../campaigns/t02.wmf/event:723
 msgid "Boldreth seems concerned..."
-msgstr ""
+msgstr "Казалось Болдреф заинтересовался..."
 
 #: ../campaigns/t02.wmf/event:725
 msgid ""
@@ -379,7 +413,7 @@ msgstr ""
 
 #: ../campaigns/t02.wmf/event:753
 msgid "Khantrukh steps in..."
-msgstr ""
+msgstr "Подошел Хантрух..."
 
 #: ../campaigns/t02.wmf/event:755
 msgid ""
@@ -401,13 +435,15 @@ msgstr "<br><br> Строить Оранжерея</p>"
 
 #: ../campaigns/t02.wmf/event:769
 msgid "Khantrukh seems reliefed..."
-msgstr ""
+msgstr "Казалось Хантруху полегчало..."
 
 #: ../campaigns/t02.wmf/event:771
 msgid ""
 " \"Wonderful! Our roofs are not dripping anymore, and we have all the "
 "material we need for, well, whichever monumental building we see fit!\"</p>"
 msgstr ""
+" \"Превосходно! Наши крыши больше не текут и у нас есть все для "
+"строительства, ну, более величественных зданий чем раньше!\"</p>"
 
 #: ../campaigns/t02.wmf/event:795
 #, fuzzy
