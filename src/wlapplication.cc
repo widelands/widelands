@@ -158,6 +158,9 @@ WLApplication::WLApplication(const int argc, const char **argv):
 	init_hardware();
 
 	g_fh = new Font_Handler();
+
+	//make sure we didn't forget to read any global option
+	g_options.check_used();
 }
 
 /**
@@ -697,6 +700,8 @@ const bool WLApplication::init_settings()
 	set_mouse_swap(s->get_bool("swapmouse", false));
 	set_mouse_speed(s->get_float("mousespeed", 1.0));
 
+	m_gfx_fullscreen=s->get_bool("fullscreen", false);
+
 	// KLUDGE!
 	// Without this, xres, yres and workareapreview get dropped by
 	// check_used().
@@ -705,15 +710,10 @@ const bool WLApplication::init_settings()
 	s->get_string("xres");
 	s->get_string("yres");
 	s->get_bool("workareapreview");
-	s->get_bool("nozip");
-	s->get_int("border_snap_distance");
-	s->get_int("panel_snap_distance");
 	s->get_bool("snap_windows_only_when_overlapping");
 	s->get_bool("dock_windows_to_edges");
+	s->get_string("EXENAME");
 	// KLUDGE!
-
-	//make sure we didn't forget to read any global option
-	g_options.check_used();
 
 	return true;
 }
@@ -760,7 +760,7 @@ const bool WLApplication::init_hardware()
 	SDL_EnableUNICODE(1); // useful for e.g. chat messages
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	init_graphics(640, 480, s->get_int("depth",16), s->get_bool("fullscreen", false));
+	init_graphics(640, 480, s->get_int("depth",16), m_gfx_fullscreen);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -873,7 +873,7 @@ const bool WLApplication::parse_command_line()
 	map<std::string, std::string>::const_iterator it;
 
 	for(it=m_commandline.begin();it!=m_commandline.end();++it) {
-		//TODO: barf here on unkown option the list of known options
+		//TODO: barf here on unkown option; the list of known options
 		//TODO: needs to be centralized
 
 		g_options.pull_section("global")->create_val(it->first.c_str(),
