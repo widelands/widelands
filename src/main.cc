@@ -28,7 +28,7 @@ using std::flush;
 /**
  * Cross-platform entry point for SDL applications.
  */
-extern "C" 
+extern "C"
 int main(int argc, char* argv[])
 {
 	try {
@@ -36,6 +36,8 @@ int main(int argc, char* argv[])
 		//TODO: handle exceptions from the constructor
 
 		g_app->run();
+
+		delete g_app;
 
 		return 0;
 	}
