@@ -34,6 +34,7 @@ using namespace std;
 
 /// Predefined priorities for easy reading
 /// \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
+/// \todo These values should not have any meaning beyond just being numbers.
 //@{
 #define PRIO_ALWAYS_PLAY 255
 #define PRIO_ALLOW_MULTIPLE 128
@@ -157,9 +158,8 @@ protected:
  *
  * Background music for different situations (e.g. 'Menu', 'Gameplay') is
  * collected in songsets. Each \ref Songset contains references to one or more
- * songs in any format understood by SDL_mixer (e.g mp3, ogg, wav). The only
- * ordering inside a soundset is from the order in which the songs were
- * loaded.
+ * songs in ogg format. The only ordering inside a soundset is from the order
+ * in which the songs were loaded.
  *
  * Other classes can request to start or stop playing a certain songset,
  * changing the songset is provided as a convenience method. It is also

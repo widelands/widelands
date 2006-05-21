@@ -310,7 +310,7 @@ void Sound_Handler::load_system_sounds()
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
- * named EFFECT_XX.{ogg, wav}, where XX is between 00 and 99. If
+ * named EFFECT_XX.ogg, where XX is between 00 and 99. If
  * BASENAME_XX (without extension) is a directory, effects will be loaded
  * recursively.
  *
@@ -322,7 +322,7 @@ void Sound_Handler::load_system_sounds()
  *
  * \param dir        The directory where the audio files reside
  * \param basename	Name from which filenames will be formed
- *                   (BASENAME_XX.wav);
+ *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
  * \internal
  * \param recursive	Whether to recurse into subdirectories
@@ -335,10 +335,9 @@ void Sound_Handler::load_fx(const string dir, const string fxname,
 
 	assert(g_fs);
 
-	g_fs->FindFiles(dir, fxname + "_??.???." + i18n::get_locale(),
-	                &files);
+	g_fs->FindFiles(dir, fxname + "_??.ogg." + i18n::get_locale(), &files);
 	if (files.empty())
-		g_fs->FindFiles(dir, fxname + "_??.???", &files);
+		g_fs->FindFiles(dir, fxname + "_??.ogg", &files);
 
 	for (i = files.begin(); i != files.end(); ++i) {
 		assert(!g_fs->IsDirectory(*i));
@@ -472,7 +471,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 /** Add exactly one file to the given fxset.
  * \param filename	The effect to be loaded
  * \param fx_name	The fxset to add the file to
- * The file format must be ogg or wav. Otherwise this call will complain and
+ * The file format must be ogg. Otherwise this call will complain and
  * not load the file.
  * \note The complete audio file will be loaded into memory and stays there
  * until the game is finished.
@@ -503,7 +502,7 @@ void Sound_Handler::load_one_fx(const string filename, const string fx_name)
 	} else {
 		char *msg = (char *) malloc(1024);
 		snprintf(msg, 1024, "Sound_Handler: loading sound effect \"%s\""
-		         "for FXset \"%s\" failed: %s\n",
+		         " for FXset \"%s\" failed: %s\n",
 		         filename.c_str(), fx_name.c_str(), strerror(errno));
 		log(msg);
 		free(msg);
@@ -560,7 +559,7 @@ bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
 {
 	bool allow_multiple=false; //convenience for easier code reading
 	float evaluation; //grade (non-)performance of an fx, can be 0...1
-	//this is only an amount, not "good/bad"
+	                  //this is only an amount, not "good/bad"
 	float probability; //used for the final decision
 
 	//probability that this fx gets played; initially set according to priority
@@ -684,16 +683,16 @@ void Sound_Handler::play_fx(const string fx_name, const int stereo_position,
 }
 
 /** Load a background song. One "song" can consist of several audio files named
- * FILE_XX.wav (ogg, wav), where XX is between 00 and 99.
+ * FILE_XX.ogg, where XX is between 00 and 99.
  * \param dir		The directory where the audio files reside
  * \param basename	Name from which filenames will be formed
- * 			(BASENAME_XX.wav); also the name used with \ref play_fx
+ * 			(BASENAME_XX.ogg); also the name used with \ref play_fx
  * \param recursive	\internal Used for traversing subdirectories
  * This just registers the song, actual loading takes place when
  * \ref Songset::get_song() is called, i.e. when the song is about to be
  * played. The song will automatically be removed from memory when it has
  * finished playing.\n
- * Supported file formats are wav and ogg. If BASENAME_XX
+ * Supported file formats are ogg. If BASENAME_XX
  * (with any extension) is a directory, effects will be registered recursively.
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
 */
