@@ -48,8 +48,8 @@ const char *FS_Filename(const char* buf);
 void setup_searchpaths(const std::string argv0);
 
 /**
-FileSystem is a base class representing certain filesystem operations.
-*/
+ * FileSystem is a base class representing certain filesystem operations.
+ */
 class FileSystem {
 public:
    enum Type {
@@ -81,21 +81,21 @@ public:
 };
 
 /**
-LayeredFileSystem is a file system which basically merges several layered
-real directory structures into a single one. The really funny thing is that
-those directories aren't represented as absolute paths, but as nested
-FileSystems. Are you confused yet?
-Ultimately, this provides us with the necessary flexibility to allow file
-overrides on a per-user-basis, nested .zip files acting as Quake-like paks
-and so on.
-
-\note Only the top-most writable filesystem is written to. A typical
-stack would look like this in real-life:
-
-~/.widelands/
-/where/they/installed/widelands/  <-- this is the directory that the executable is in
-$CWD  <-- the current-working directory; this is useful for debugging, when the executable
-          isn't in the root of the game-data directory
+ * LayeredFileSystem is a file system which basically merges several layered
+ * real directory structures into a single one. The really funny thing is that
+ * those directories aren't represented as absolute paths, but as nested
+ * FileSystems. Are you confused yet?
+ * Ultimately, this provides us with the necessary flexibility to allow file
+ * overrides on a per-user-basis, nested .zip files acting as Quake-like paks
+ * and so on.
+ *
+ * \note Only the top-most writable filesystem is written to. A typical
+ * stack would look like this in real-life:
+ *
+ * ~/.widelands/
+ * /where/they/installed/widelands/  <-- this is the directory that the executable is in
+ * $CWD  <-- the current-working directory; this is useful for debugging, when the executable
+ * isn't in the root of the game-data directory
 */
 class LayeredFileSystem : public FileSystem {
 public:
@@ -110,10 +110,10 @@ public:
 
 
 /**
-FileRead can be used to read a file.
-It works quite naively by reading the entire file into memory.
-Convenience functions are available for endian-safe access of common data types
-*/
+ * FileRead can be used to read a file.
+ * It works quite naively by reading the entire file into memory.
+ * Convenience functions are available for endian-safe access of common data types
+ */
 class FileRead {
 public:
 	void	*data;
@@ -161,9 +161,9 @@ public:
 };
 
 /**
-Mirror of \ref FileRead : all writes are first stored in a block of memory and finally
-written out when Write() is called.
-*/
+ * Mirror of \ref FileRead : all writes are first stored in a block of memory and finally
+ * written out when Write() is called.
+ */
 class FileWrite {
 public:
 	void	*data;

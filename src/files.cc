@@ -143,32 +143,28 @@ char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *f
 	return buf;
 }
 
-char *FS_GetHomedir()
+/// \todo Write homedir detection for non-getenv-systems
+const char *FS_GetHomedir()
 {
-	char *homedir;
+	std::string homedir("");
+
 #ifdef HAS_GETENV
 	homedir=getenv("HOME");
-	if (homedir==NULL)
-		homedir="";
-#else
-	homedir="";
 #endif
 
-	if (strlen(homedir)==0) {
-		printf("\nWARNING: either I can not detect your home directory or you don't have one! Please contact the developers.\n");
+	if (homedir.empty()) {
+		printf("\nWARNING: either I can not detect your home directory "
+		       "or you don't have one! Please contact the developers.\n");
 		printf("Instead of your home directory, '.' will be used.\n\n");
 		homedir=".";
 	}
 
-	return homedir;
+	return homedir.c_str();
 }
 
-/*
-==============
-FS_CanonicalizeName
-
-Turn the given path into a simpler one. Returns false for illegal paths.
-==============
+/**
+ * Turn the given path into a simpler one. Returns false for illegal paths.
+ * \todo throw an exception instead of using return value for illegal path
 */
 bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 {
@@ -176,7 +172,7 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
    int toklen;
    char *p;
    bool skip_token;
-   char *homedir;
+   const char *homedir;
 
    	// clear the dst buffer
    	memset(buf, 0, bufsize);
@@ -248,8 +244,10 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 	return true;
 }
 
-///Just a quick ugly hack until file handling is moved to C++
-///\todo Throw exception on illegal path
+/**
+ * Just a quick ugly hack until file handling is moved to C++
+ * \todo Throw exception on illegal path
+ */
 std::string FS_CanonicalizeName2(std::string path)
 {
 	char buffer1[1024];
@@ -260,7 +258,7 @@ std::string FS_CanonicalizeName2(std::string path)
 	return std::string(buffer1);
 }
 
-/*
+/**
  * Returns the filename of this path, everything after the last
  * / or \  (or the whole string)
  */
@@ -282,41 +280,29 @@ FileRead IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-==============
-FileRead::FileRead
-
-Create the object with nothing to read
-==============
-*/
+/**
+ * Create the object with nothing to read
+ */
 FileRead::FileRead()
 {
 	data = 0;
 }
 
-/*
-==============
-FileRead::~FileRead
-
-Close the file if open
-==============
-*/
+/**
+ * Close the file if open
+ */
 FileRead::~FileRead()
 {
 	if (data)
 		Close();
 }
 
-/*
-==============
-FileRead::Open
-
-Loads a file into memory.
-Reserves one additional byte which is zeroed, so that text files can
-be handled like a normal C string.
-Throws an exception if the file couldn't be loaded for whatever reason.
-==============
-*/
+/**
+ * Loads a file into memory.
+ * Reserves one additional byte which is zeroed, so that text files can
+ * be handled like a normal C string.
+ * Throws an exception if the file couldn't be loaded for whatever reason.
+ */
 void FileRead::Open(FileSystem *fs, std::string fname)
 {
 	assert(!data);
@@ -325,13 +311,9 @@ void FileRead::Open(FileSystem *fs, std::string fname)
 	filepos = 0;
 }
 
-/*
-==============
-FileRead::TryOpen
-
-Works just like Open, but returns false when the load fails.
-==============
-*/
+/**
+ * Works just like Open, but returns false when the load fails.
+ */
 bool FileRead::TryOpen(FileSystem *fs, std::string fname)
 {
 	assert(!data);
@@ -347,13 +329,9 @@ bool FileRead::TryOpen(FileSystem *fs, std::string fname)
 	return true;
 }
 
-/*
-==============
-FileRead::Close
-
-Frees allocated memory
-==============
-*/
+/**
+ * Frees allocated memory
+ */
 void FileRead::Close()
 {
 	assert(data);
@@ -362,14 +340,10 @@ void FileRead::Close()
 	data = 0;
 }
 
-/*
-==============
-FileRead::SetFilePos
-
-Set the file pointer to the given location.
-Raises an exception when the pointer is out of bound
-==============
-*/
+/**
+ * Set the file pointer to the given location.
+ * Raises an exception when the pointer is out of bound
+ */
 void FileRead::SetFilePos(int pos)
 {
 	assert(data);
@@ -380,13 +354,9 @@ void FileRead::SetFilePos(int pos)
 	filepos = pos;
 }
 
-/*
-==============
-FileRead::CString
-
-Read a zero-terminated string from the file
-==============
-*/
+/**
+ * Read a zero-terminated string from the file
+ */
 char *FileRead::CString(int pos)
 {
 	char *string, *p;
@@ -461,13 +431,9 @@ FileWrite IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-==============
-FileWrite::FileWrite
-
-Set the buffer to empty
-==============
-*/
+/**
+ * Set the buffer to empty
+ */
 FileWrite::FileWrite()
 {
 	data = 0;
@@ -477,26 +443,18 @@ FileWrite::FileWrite()
    counter = 0;
 }
 
-/*
-==============
-FileWrite::~FileWrite
-
-Clear any remaining allocated data
-==============
-*/
+/**
+ * Clear any remaining allocated data
+ */
 FileWrite::~FileWrite()
 {
 	if (data)
 		Clear();
 }
 
-/*
-==============
-FileWrite::Clear
-
-Clears the object's buffer
-==============
-*/
+/**
+ * Clears the object's buffer
+ */
 void FileWrite::Clear()
 {
 	if (data)
@@ -509,41 +467,27 @@ void FileWrite::Clear()
    counter = 0;
 }
 
-/*
-==============
-FileWrite::ResetByteCounter
-
-Reset the byte counter to zero.
-All bytes written then are added
-to the byte counter
-==============
-*/
+/**
+ * Reset the byte counter to zero.
+ * All bytes written then are added to the byte counter
+ */
 void FileWrite::ResetByteCounter(void) {
    counter = 0;
 }
 
-/*
-==============
-FileWrite::GetByteCounter
-
-Returns the number of bytes written since
-last ResetByteCounter
-==============
-*/
+/**
+ * Returns the number of bytes written since last ResetByteCounter
+ */
 int FileWrite::GetByteCounter(void) {
    return counter;
 }
 
-/*
-==============
-FileWrite::Write
-
-Actually write the file out to disk.
-If successful, this clears the buffers. Otherwise, an exception
-is raised but the buffer remains intact (don't worry, it will be
-cleared by the destructor).
-==============
-*/
+/**
+ * Actually write the file out to disk.
+ * If successful, this clears the buffers. Otherwise, an exception
+ * is raised but the buffer remains intact (don't worry, it will be
+ * cleared by the destructor).
+ */
 void FileWrite::Write(FileSystem *fs, std::string filename)
 {
 	fs->Write(filename, data, length);
@@ -551,13 +495,9 @@ void FileWrite::Write(FileSystem *fs, std::string filename)
 	Clear();
 }
 
-/*
-==============
-FileWrite::TryWrite
-
-Same as Write, but returns falls if the write fails
-==============
-*/
+/**
+ * Same as Write, but returns falls if the write fails
+ */
 bool FileWrite::TryWrite(FileSystem *fs, std::string filename)
 {
 	try {
@@ -571,42 +511,30 @@ bool FileWrite::TryWrite(FileSystem *fs, std::string filename)
 	return true;
 }
 
-/*
-==============
-FileWrite::SetFilePos
-
-Set the file pointer to a new location. The position can be beyond
-the current end of file.
-==============
-*/
+/**
+ * Set the file pointer to a new location. The position can be beyond
+ * the current end of file.
+ */
 void FileWrite::SetFilePos(int pos)
 {
 	assert(pos >= 0);
 	filepos = pos;
 }
 
-/*
-==============
-FileWrite::GetFilePos
-
-Set the file pointer to a new location. The position can be beyond
-the current end of file.
-==============
-*/
+/**
+ * Set the file pointer to a new location. The position can be beyond
+ * the current end of file.
+ */
 int FileWrite::GetFilePos(void)
 {
 	return filepos;
 }
 
 
-/*
-==============
-FileWrite::Data
-
-Write data at the given location. If pos is -1, write at the
-file pointer and advance the file pointer.
-==============
-*/
+/**
+ * Write data at the given location. If pos is -1, write at the
+ * file pointer and advance the file pointer.
+ */
 void FileWrite::Data(const void *buf, int size, int pos)
 {
 	int i;
@@ -636,14 +564,10 @@ void FileWrite::Data(const void *buf, int size, int pos)
 	memcpy((char*)data + i, buf, size);
 }
 
-/*
-==============
-FileWrite::Printf
-
-This is a perfectly normal printf (actually it isn't because it's limited
-to a maximum string size)
-==============
-*/
+/**
+ * This is a perfectly normal printf (actually it isn't because it's limited
+ * to a maximum string size)
+ */
 void FileWrite::Printf(const char *fmt, ...)
 {
 	char buf[2048];
@@ -725,15 +649,11 @@ bool RealFSImpl::IsWritable()
 	return true; // should be checked in constructor
 }
 
-/*
-===============
-RealFSImpl::FindFiles
-
-Returns the number of files found, and stores the filenames (without the pathname) in the results.
-There doesn't seem to be an even remotely cross-platform way of
-doing this
-===============
-*/
+/**
+ * Returns the number of files found, and stores the filenames (without the
+ * pathname) in the results. There doesn't seem to be an even remotely
+ * cross-platform way of doing this
+ */
 #ifdef _WIN32
 // note: the Win32 version may be broken, feel free to fix it
 int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results)
@@ -793,14 +713,10 @@ int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *
 }
 #endif
 
-/*
-===============
-RealFSImpl::FileExists
-
-Returns true if the given file exists, and false if it doesn't.
-Also returns false if the pathname is invalid
-===============
-*/
+/**
+ * Returns true if the given file exists, and false if it doesn't.
+ * Also returns false if the pathname is invalid
+ */
 bool RealFSImpl::FileExists(std::string path)
 {
 	char canonical[256]; // erm...
@@ -818,14 +734,10 @@ bool RealFSImpl::FileExists(std::string path)
 	return true;
 }
 
-/*
-===============
-RealFSImpl::IsDirectory
-
-Returns true if the given file is a directory, and false if it doesn't.
-Also returns false if the pathname is invalid
-===============
-*/
+/**
+ * Returns true if the given file is a directory, and false if it doesn't.
+ * Also returns false if the pathname is invalid
+ */
 bool RealFSImpl::IsDirectory(std::string path)
 {
    // This is kludge to work around problems with windows.
@@ -852,7 +764,7 @@ bool RealFSImpl::IsDirectory(std::string path)
 	return S_ISDIR(st.st_mode);
 }
 
-/*
+/**
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
@@ -875,7 +787,7 @@ FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
    return 0;
 }
 
-/*
+/**
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
@@ -901,7 +813,7 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
    return 0;
 }
 
-/*
+/**
  * Remove a number of files
  */
 void RealFSImpl::Unlink(std::string file) {
@@ -914,7 +826,7 @@ void RealFSImpl::Unlink(std::string file) {
       m_unlink_file( file );
 }
 
-/*
+/**
  * remove directory or file
  */
 void RealFSImpl::m_unlink_file( std::string file ) {
@@ -975,7 +887,7 @@ void RealFSImpl::m_unlink_directory( std::string file ) {
 #endif
 }
 
-/*
+/**
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
@@ -986,7 +898,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string dirname) {
    MakeDirectory(dirname);
 }
 
-/*
+/**
  * Create this directory, throw an error if it already exists or
  * if a file is in the way or if the creation fails.
  *
@@ -1016,14 +928,10 @@ void RealFSImpl::MakeDirectory(std::string dirname) {
       throw wexception("Couldn't create directory %s: %s\n", dirname.c_str(), strerror(errno));
 }
 
-/*
-===============
-RealFSImpl::Load
-
-Read the given file into alloced memory; called by FileRead::Open.
-Throws an exception if the file couldn't be opened.
-===============
-*/
+/**
+ * Read the given file into alloced memory; called by FileRead::Open.
+ * Throws an exception if the file couldn't be opened.
+ */
 void *RealFSImpl::Load(std::string fname, int *length)
 {
 	char canonical[256];
@@ -1078,13 +986,9 @@ void *RealFSImpl::Load(std::string fname, int *length)
 	return data;
 }
 
-/*
-===============
-RealFSImpl::Write
-
-Write the given block of memory to the repository.
-Throws an exception if it fails.
-===============
+/**
+ * Write the given block of memory to the repository.
+ * Throws an exception if it fails.
 */
 void RealFSImpl::Write(std::string fname, void *data, int length)
 {
@@ -1109,25 +1013,17 @@ void RealFSImpl::Write(std::string fname, void *data, int length)
 		throw wexception("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 }
 
-/*
-===============
-FileSystem::CreateFromDirectory [static]
-
-Create a filesystem to access the given directory as served by the OS
-===============
-*/
+/**
+ * Create a filesystem to access the given directory as served by the OS
+ */
 FileSystem *FileSystem::CreateFromDirectory(std::string directory)
 {
 	return new RealFSImpl(directory);
 }
 
-/*
-===============
-FileSystem::CreateFromZip [static]
-
-Create a filesystem from a zip file
-===============
-*/
+/**
+ * Create a filesystem from a zip file
+ */
 FileSystem *FileSystem::CreateFromZip(std::string filename)
 {
 	return new ZipFilesystem( filename );
@@ -1172,16 +1068,14 @@ private:
 	std::vector<FileSystem*> m_filesystems;
 };
 
-/** LayeredFSImpl::LayeredFSImpl()
- *
+/**
  * Initialize
  */
 LayeredFSImpl::LayeredFSImpl()
 {
 }
 
-/** LayeredFSImpl::~LayeredFSImpl
- *
+/**
  * Free all sub-filesystems
  */
 LayeredFSImpl::~LayeredFSImpl()
@@ -1193,8 +1087,7 @@ LayeredFSImpl::~LayeredFSImpl()
 	}
 }
 
-/** LayeredFSImpl::IsWritable()
- *
+/**
  * Just assume that at least one of our child FSs is writable
  */
 bool LayeredFSImpl::IsWritable()
@@ -1202,8 +1095,7 @@ bool LayeredFSImpl::IsWritable()
 	return true;
 }
 
-/** LayeredFSImpl::AddFileSystem(FileSystem *fs)
- *
+/**
  * Add a new filesystem to the top of the stack
  */
 void LayeredFSImpl::AddFileSystem(FileSystem *fs)
@@ -1211,18 +1103,14 @@ void LayeredFSImpl::AddFileSystem(FileSystem *fs)
 	m_filesystems.push_back(fs);
 }
 
-/*
-===============
-LayeredFSImpl::FindFiles
-
-Find files in all sub-filesystems in the given path, with the given pattern.
-Store all found files in results.
-
-If depth is not 0 only search this many subfilesystems.
-
-Returns the number of files found.
-===============
-*/
+/**
+ * Find files in all sub-filesystems in the given path, with the given pattern.
+ * Store all found files in results.
+ *
+ * If depth is not 0 only search this many subfilesystems.
+ *
+ * Returns the number of files found.
+ */
 int LayeredFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth)
 {
    int i=0;
@@ -1246,13 +1134,9 @@ int LayeredFSImpl::FindFiles(std::string path, std::string pattern, filenameset_
    return FindFiles(path,pattern,results,0);
 }
 
-/*
-===============
-LayeredFSImpl::FileExists
-
-Returns true if the file can be found in at least one of the sub-filesystems
-===============
-*/
+/**
+ * Returns true if the file can be found in at least one of the sub-filesystems
+ */
 bool LayeredFSImpl::FileExists(std::string path)
 {
    for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
@@ -1263,13 +1147,9 @@ bool LayeredFSImpl::FileExists(std::string path)
 	return false;
 }
 
-/*
-===============
-LayeredFSImpl::IsDirectory
-
-Returns true if the file can be found in at least one of the sub-filesystems
-===============
-*/
+/**
+ * Returns true if the file can be found in at least one of the sub-filesystems
+ */
 bool LayeredFSImpl::IsDirectory(std::string path)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
@@ -1279,18 +1159,15 @@ bool LayeredFSImpl::IsDirectory(std::string path)
 
 	return false;
 }
-/*
-===============
-LayeredFSImpl::Load
 
-Read the given file into alloced memory; called by FileRead::Open.
-Throws an exception if the file couldn't be opened.
-
-Note: We first query the sub-filesystem whether the file exists. Otherwise,
-we'd have problems differentiating the errors returned by the sub-FS.
-Let's just avoid any possible hassles with that.
-===============
-*/
+/**
+ * Read the given file into alloced memory; called by FileRead::Open.
+ * Throws an exception if the file couldn't be opened.
+ *
+ * Note: We first query the sub-filesystem whether the file exists. Otherwise,
+ * we'd have problems differentiating the errors returned by the sub-FS.
+ * Let's just avoid any possible hassles with that.
+ */
 void *LayeredFSImpl::Load(std::string fname, int *length)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
@@ -1304,14 +1181,10 @@ void *LayeredFSImpl::Load(std::string fname, int *length)
 }
 
 
-/*
-===============
-LayeredFSImpl::Write
-
-Write the given block of memory out as a file to the first writable sub-FS.
-Throws an exception if it fails.
-===============
-*/
+/**
+ * Write the given block of memory out as a file to the first writable sub-FS.
+ * Throws an exception if it fails.
+ */
 void LayeredFSImpl::Write(std::string fname, void *data, int length)
 {
 	for(FileSystem_rit it = m_filesystems.rbegin(); it != m_filesystems.rend(); it++) {
@@ -1325,7 +1198,7 @@ void LayeredFSImpl::Write(std::string fname, void *data, int length)
 	throw wexception("LayeredFSImpl: No writable filesystem!");
 }
 
-/*
+/**
  * MakeDir in first writable directory
  */
 void LayeredFSImpl::MakeDirectory(std::string dirname) {
@@ -1340,7 +1213,7 @@ void LayeredFSImpl::MakeDirectory(std::string dirname) {
 	throw wexception("LayeredFSImpl: No writable filesystem!");
 }
 
-/*
+/**
  * EnsureDirectoryExists in first writable directory
  */
 void LayeredFSImpl::EnsureDirectoryExists(std::string dirname) {
@@ -1355,7 +1228,7 @@ void LayeredFSImpl::EnsureDirectoryExists(std::string dirname) {
 	throw wexception("LayeredFSImpl: No writable filesystem!");
 }
 
-/*
+/**
  * Create a subfilesystem from this directory
  */
 FileSystem* LayeredFSImpl::MakeSubFileSystem(std::string dirname ) {
@@ -1372,7 +1245,7 @@ FileSystem* LayeredFSImpl::MakeSubFileSystem(std::string dirname ) {
 	throw wexception("LayeredFSImpl: Wasn't able to create sub filesystem!");
 }
 
-/*
+/**
  * Create a new subfilesystem
  */
 FileSystem* LayeredFSImpl::CreateSubFileSystem(std::string dirname, Type type ) {
@@ -1386,7 +1259,7 @@ FileSystem* LayeredFSImpl::CreateSubFileSystem(std::string dirname, Type type ) 
 	throw wexception("LayeredFSImpl: Wasn't able to create sub filesystem!");
 }
 
-/*
+/**
  * Remove this file or directory. If it is a directory, remove it recursivly
  */
 void LayeredFSImpl::Unlink( std::string file ) {
@@ -1404,8 +1277,7 @@ void LayeredFSImpl::Unlink( std::string file ) {
 	}
 }
 
-/** LayeredFileSystem::Create
- *
+/**
  * Create a LayeredFileSystem. This is mainly to hide the implementation details
  * from the rest of the world
  */

@@ -35,7 +35,7 @@ class Request;
 class Transfer;
 class Tribe_Descr;
 
-/*
+/**
  * BobProgramBase is only used that
  * get_name always works
  */
@@ -47,8 +47,8 @@ class BobProgramBase {
       virtual std::string get_name(void) const =0;
 };
 
-/*
-Bobs are moving map objects: Animals, humans, ships...
+/**
+ * Bobs are moving map objects: Animals, humans, ships...
 */
 class Bob_Descr : public Map_Object_Descr {
 	friend class DirAnimations; // To add the various direction bobs

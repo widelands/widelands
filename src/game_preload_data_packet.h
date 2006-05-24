@@ -27,7 +27,7 @@ class FileRead;
 class FileWrite;
 class Editor_Game_Base;
 
-/*
+/**
  * This contains all the preload data needed to identify
  * a game for a user (for example in a listbox)
  */
@@ -40,7 +40,7 @@ class Game_Preload_Data_Packet : public Game_Data_Packet {
 
       const char* get_mapname(void) { return m_mapname.c_str(); }
       uint get_gametime(void) { return m_gametime; }
-      
+
    private:
       std::string m_mapname;
       uint m_gametime;

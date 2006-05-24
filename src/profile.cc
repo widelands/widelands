@@ -887,8 +887,7 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 	}
 }
 
-/** Profile::write(const char *filename, bool used_only = true)
- *
+/**
  * Writes all sections out to the given file.
  * If used_only is true, only used sections and keys are written to the file.
  */

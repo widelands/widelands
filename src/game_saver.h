@@ -26,7 +26,7 @@
 class Game;
 class FileSystem;
 
-/*
+/**
  * This class writes a complete state
  * of a game out to a file. The world in ONE file
  *
@@ -41,7 +41,7 @@ class Game_Saver {
       ~Game_Saver(void);
 
       void save(void) throw(wexception);
-   
+
    private:
       FileSystem* m_fs;
       Game* m_game;
