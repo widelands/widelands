@@ -85,7 +85,7 @@ def parse_conf(env, output):
 
 def parse_cli(env):
 	if env['use_ggz']:
-		env.Append(CCFLAGS=' -DGGZ')
+		env.Append(CCFLAGS='-DGGZ')
 		env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
 
 	if env['cross']:
@@ -119,7 +119,7 @@ def CheckPKGConfig(context, version):
 
 def CheckSDLConfig(context, env):
 	context.Message( 'Checking for sdl-config... ' )
-	for p in env['PATH'].split():
+	for p in env['PATH']:
 		ret = context.TryAction(os.path.join(p, env['sdlconfig'])+' --version')[0]
 		if ret==1:
 			env['sdlconfig']=os.path.join(p, env['sdlconfig'])
@@ -129,7 +129,7 @@ def CheckSDLConfig(context, env):
 
 def CheckParaguiConfig(context, env):
 	context.Message( 'Checking for paragui-config... ' )
-	for p in env['PATH'].split():
+	for p in env['PATH']:
 		ret = context.TryAction(os.path.join(p, env['paraguiconfig'])+' --version')[0]
 		if ret==1:
 			env['paraguiconfig']=os.path.join(p, env['paraguiconfig'])

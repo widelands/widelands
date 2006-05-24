@@ -153,22 +153,24 @@ env.Tool("astyle", toolpath=['build/scons-tools'])
 #Obviously, env.LIBPATH must be forced to be a list instead of a string. Is this
 #a scons problem? Or rather our problem???
 env.Append(LIBPATH=[])
+env.Append(CPPPATH=[])
+env.Append(PATH=[])
 
 print 'Platform:         ', env['PLATFORM']
 print 'Build type:       ', env['build']
 
 if env['PLATFORM']!='win32':
-	env.Append(PATH=' /usr/bin /usr/local/bin')
+	env.Append(PATH=['/usr/bin', '/usr/local/bin'])
 
 if env['PLATFORM']=='darwin':
 	# this is where DarwinPorts puts stuff by default
-	env.Append(CPPPATH=' /opt/local/include')
-	env.Append(LIBPATH=' /opt/local/lib')
-	env.Append(PATH=' /opt/local/bin')
+	env.Append(CPPPATH='/opt/local/include')
+	env.Append(LIBPATH='/opt/local/lib')
+	env.Append(PATH='/opt/local/bin')
 	# and here's for fink
-	env.Append(CPPPATH=' /sw/include')
-	env.Append(LIBPATH=' /sw/lib')
-	env.Append(PATH=' /sw/bin')
+	env.Append(CPPPATH='/sw/include')
+	env.Append(LIBPATH='/sw/lib')
+	env.Append(PATH='/sw/bin')
 
 ################################################################################
 # Autoconfiguration
@@ -199,30 +201,30 @@ if env['build']=='profile':
 if env['build']=='release':
 	OPTIMIZE=1
 	# !!!! -fomit-frame-pointer breaks execeptions !!!!
-	env.Append(CCFLAGS=' -finline-functions -ffast-math -funroll-loops')
-	env.Append(CCFLAGS=' -fexpensive-optimizations')
-	env.Append(LINKFLAGS=' -s')
+	env.Append(CCFLAGS=['-finline-functions', '-ffast-math', '-funroll-loops'])
+	env.Append(CCFLAGS='-fexpensive-optimizations')
+	env.Append(LINKFLAGS='-s')
 
 if DEBUG:
-	env.Append(CCFLAGS=' -g -DDEBUG -fmessage-length=0')
+	env.Append(CCFLAGS=['-g', '-DDEBUG', '-fmessage-length=0'])
 else:
-	env.Append(CCFLAGS=' -DNDEBUG')
+	env.Append(CCFLAGS='-DNDEBUG')
 
 if PROFILE:
-	env.Append(CCFLAGS=' -pg -fprofile-arcs')
-	env.Append(LINKFLAGS=' -pg -fprofile-arcs')
+	env.Append(CCFLAGS=['-pg', '-fprofile-arcs'])
+	env.Append(LINKFLAGS=['-pg', '-fprofile-arcs'])
 
 if OPTIMIZE:
 	# heavy optimization
 	#ADD_CCFLAGS:=$(ADD_CCFLAGS) -fomit-frame-pointer -finline-functions
 	#                -ffast-math -funroll-loops -fexpensive-optimizations
 	# !!!! -fomit-frame-pointer breaks execeptions !!!!
-	env.Append(CCFLAGS=' -O3')
+	env.Append(CCFLAGS='-O3')
 else:
-	env.Append(CCFLAGS=' -O0')
+	env.Append(CCFLAGS='-O0')
 
 if not SDL_PARACHUTE:
-	env.Append(CCFLAGS=' -DNOPARACHUTE')
+	env.Append(CCFLAGS='-DNOPARACHUTE')
 
 ################################################################################
 
@@ -251,8 +253,8 @@ do_configure(config_h, conf, env)
 write_configh_footer(config_h, env['install_prefix'], BINDIR, DATADIR)
 #load_configuration(conf)
 
-env.Append(CCFLAGS=' -pipe -Wall -Wno-comment')
-#env.Append(LINKFLAGS=' -lasprintf') #TODO: *check* for this instead of assuming it's there
+env.Append(CCFLAGS=['-pipe', '-Wall', '-Wno-comment'])
+#env.Append(LINKFLAGS='-lasprintf') #TODO: *check* for this instead of assuming it's there
 
 env=conf.Finish()
 
@@ -372,7 +374,7 @@ DISTDIRS=[
 	'txts',
 	'tribes',
 	'utils',
-	'worlds'
+	'worlds',
 	]
 
 def do_dist(target, source, env):
