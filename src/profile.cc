@@ -752,8 +752,7 @@ inline char *setEndAt(char *str, char c)
 	return str;
 }
 
-/** Profile::read(const char *filename, const char *global_section = 0)
- *
+/**
  * Parses an ini-style file into sections and key values. If a section or
  * key name occurs multiple times, an additional entry is created.
  *
@@ -765,10 +764,10 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 	{
 		FileRead fr;
 
-      if( !fs )
-         fr.Open(g_fs, filename);
-      else
-         fr.Open(fs, filename);
+		if( !fs )
+			fr.Open(g_fs, filename);
+		else
+			fr.Open(fs, filename);
 
       // line can become quite big. But this should be enough
       const ushort LINESIZE = 1024*30;
@@ -881,6 +880,11 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 				}
 			}
 		}
+	}
+	catch(FileNotFound_error &e) {
+		//It's no problem if the config file does not exist. (It'll get
+		//written on exit anyway)
+		log("There's no configuration file, using default values.\n");
 	}
 	catch(std::exception &e) {
 		error("%s: %s", filename, e.what());

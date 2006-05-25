@@ -1177,7 +1177,7 @@ void *LayeredFSImpl::Load(std::string fname, int *length)
 		return (*it)->Load(fname, length);
 	}
 
-	throw wexception("Couldn't find file %s", fname.c_str());
+	throw FileNotFound_error(fname);
 }
 
 

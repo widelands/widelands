@@ -681,7 +681,7 @@ const bool WLApplication::init_settings()
 	}
 
 	// Set Locale and grab default domain
-	i18n::set_locale( s->get_string( "language" ));
+	i18n::set_locale( s->get_string("language", "en"));
 	i18n::grab_textdomain("widelands");
 
 	// Input

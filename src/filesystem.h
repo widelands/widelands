@@ -24,6 +24,7 @@
 #include <set>
 #include <string>
 #include "machdep.h"
+#include <stdexcept>
 #include "types.h"
 #include "wexception.h"
 
@@ -201,6 +202,9 @@ public:
 // Access all game data files etc.. through this FileSystem
 extern LayeredFileSystem *g_fs;
 
-
+class FileNotFound_error : public std::runtime_error {
+public:
+	FileNotFound_error(std::string s) : std::runtime_error(s) {};
+};
 
 #endif
