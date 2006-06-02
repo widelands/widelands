@@ -184,7 +184,16 @@ def do_configure(config_h_file, conf, env):
 	else:
 		#TODO: use dummy replacements that just pass back the original string
 		print '   No usable NLS subsystem found. Please install gettext.'
-		Exit(1)
+		env.Exit(1)
+
+	if not conf.CheckLibWithHeader('asprintf', header='autosprintf.h', language='C++', autoadd=1):
+		print
+		print 'Could not find the autosprintf library, which is part of gettext!'
+		print
+		print 'Some distributions seem to not include libasprintf in their'
+		print 'gettext package(s). So either your system is damaged or, more'
+		print 'likely, you just found a bug in your distribution.'
+		env.Exit(1)
 
 	if not conf.CheckFunc('getenv'):
 		print 'Your system does not support getenv(). Tilde epansion in filenames will not work.'
@@ -193,45 +202,45 @@ def do_configure(config_h_file, conf, env):
 
 	if not conf.CheckSDLConfig(env):
 		print 'Could not find sdl-config! Is SDL installed?'
-		Exit(1)
+		env.Exit(1)
 
 	if not conf.CheckSDLVersionAtLeast(1, 2, 8, env):
 		print 'Could not find an SDL version >= 1.2.8!'
-		Exit(1)
+		env.Exit(1)
 	else:
 		env.ParseConfig(env['sdlconfig']+' --libs --cflags', ParseSDLConfig)
 
 	if not conf.CheckParaguiConfig(env):
 		print 'Could not find paragui. That\'s no problem unless you\'re developer working on this.'
 		#print 'Could not find paragui-config! Is paragui installed?'
-		#Exit(1)
+		#env.Exit(1)
 	else:
 		env.ParseConfig(env['paraguiconfig']+' --libs --cflags')
 		config_h_file.write("#define HAS_PARAGUI\n\n");
 
 	if not conf.CheckLibWithHeader('z', header='zlib.h', language='C', autoadd=1):
 		print 'Could not find the zlib library! Is it installed?'
-		Exit(1)
+		env.Exit(1)
 
 	if not conf.CheckLibWithHeader('png', header='png.h', language='C', autoadd=1):
 		print 'Could not find the png library! Is it installed?'
-		Exit(1)
+		env.Exit(1)
 
 	if not conf.CheckLib(library='SDL_image', symbol='IMG_Load', autoadd=1):
 		print 'Could not find the SDL_image library! Is it installed?'
-		Exit(1)
+		env.Exit(1)
 
 	if not conf.CheckLib(library='SDL_ttf', symbol='TTF_Init', autoadd=1):
 		print 'Could not find the SDL_ttf library! Is it installed?'
-		Exit(1)
+		env.Exit(1)
 
 	if not conf.CheckLib(library='SDL_net', symbol='SDLNet_TCP_Open', autoadd=1):
 		print 'Could not find the SDL_net library! Is it installed?'
-		Exit(1)
+		env.Exit(1)
 
 	if not conf.CheckLib(library='SDL_mixer', symbol='Mix_OpenAudio', autoadd=1):
 		print 'Could not find the SDL_mixer library! Is it installed?'
-		Exit(1)
+		env.Exit(1)
 
 	if conf.TryLink(""" #include <SDL.h>
 			#define USE_RWOPS
