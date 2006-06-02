@@ -29,6 +29,14 @@
 
 class Journal;
 
+///Thrown if a commandline parameter is faulty
+class Parameter_error : public std::runtime_error {
+public:
+	explicit Parameter_error() throw() : std::runtime_error("") {}
+	explicit Parameter_error(std::string text) throw() : std::runtime_error(text) {}
+	virtual ~Parameter_error() throw() {}
+};
+
 // input
 struct InputCallback {
 	void (*mouse_click)(bool down, int btn, uint btns, int x, int y);
@@ -128,6 +136,7 @@ extern Graphic *g_gr;
  * \todo Mouse handling is not documented yet
  * \todo Refactor the mainloop
  * \todo Sensible use of exceptions (goes for whole game)
+ * \todo Default filenames for recording and playback
  */
 
 class WLApplication {
@@ -138,7 +147,7 @@ public:
 	void run();
 
 	/// \warning true if an external entity wants us to quit
-	const bool should_die() {return m_should_die;}
+const bool should_die() {return m_should_die;}
 
 	const int get_time();
 
@@ -203,6 +212,8 @@ public:
 #endif
 #endif
 
+	static void show_usage();
+
 protected:
 	WLApplication(const int argc, const char **argv);
 
@@ -214,8 +225,7 @@ protected:
 	const bool init_hardware();
 	void shutdown_hardware();
 
-	const bool parse_command_line();
-	void show_usage();
+	void parse_command_line() throw(Parameter_error);
 
 	///The commandline, conveniently repackaged
 	std::map<std::string, std::string> m_commandline;

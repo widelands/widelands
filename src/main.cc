@@ -31,31 +31,56 @@ using std::flush;
 extern "C"
 	int main(int argc, char* argv[])
 {
+	WLApplication *g_app=0;
 	try {
-		WLApplication * const g_app=WLApplication::get(argc, const_cast<const char**>(argv));
+		g_app=WLApplication::get(argc, const_cast<const char**>(argv));
 		//TODO: handle exceptions from the constructor
-
 		g_app->run();
 
 		delete g_app;
 
 		return 0;
 	}
-	catch(wexception e) {
-		cerr<<"Caught unknown exception in outermost handler!"<<endl<<
-		"The exception said: "<<e.what()<<endl<<endl<<
-		"This should not happen. Please file a bug report."<<endl<<
-		flush;
+	catch(Parameter_error &e) {
+		cerr<<endl<<e.what()<<endl<<endl;
+		WLApplication::show_usage();
+		if(g_app)
+			delete g_app;
+
+		return 0;
 	}
-	catch(std::exception e) {
-		cerr<<"Caught unknown exception in outermost handler!"<<endl<<
+	catch(wexception &e) {
+		cerr<<endl<<
+		"Caught exception (of type '"<<typeid(e).name()<<
+		"') in outermost handler!"<<endl<<
 		"The exception said: "<<e.what()<<endl<<endl<<
-		"This should not happen. Please file a bug report."<<endl<<
+		"This should not happen. Please file a bug report."<<endl<<endl<<
 		flush;
+		if(g_app)
+			delete g_app;
+
+		return 1;
+	}
+	catch(std::exception &e) {
+		cerr<<endl<<
+		"Caught exception (of type '"<<typeid(e).name()<<
+		"') in outermost handler!"<<endl<<
+		"The exception said: "<<e.what()<<endl<<endl<<
+		"This should not happen. Please file a bug report."<<endl<<endl<<
+		flush;
+		if(g_app)
+			delete g_app;
+
+		return 1;
 	}
 	catch(...) {
-		cerr<<"Caught unknown exception in outermost handler!"<<endl<<endl<<
-		"This should not happen. Please file a bug report."<<endl<<
+		cerr<<endl<<
+		"Caught unknown exception in outermost handler!"<<endl<<endl<<
+		"This should not happen. Please file a bug report."<<endl<<endl<<
 		flush;
+		if(g_app)
+			delete g_app;
+
+		return 1;
 	}
 }

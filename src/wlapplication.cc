@@ -187,7 +187,6 @@ WLApplication::~WLApplication()
 	g_fs = 0;
 }
 
-
 /**
  * The main loop. Plain and Simple.
  *
@@ -673,9 +672,7 @@ const bool WLApplication::init_settings()
 	s=g_options.pull_section("global");
 
 	//then parse the commandline - overwrites conffile settings
-	if (!parse_command_line()) {
-		return false;
-	}
+	parse_command_line();
 
 	// Set Locale and grab default domain
 	i18n::set_locale( s->get_string("language", "en"));
@@ -790,13 +787,10 @@ void WLApplication::shutdown_hardware()
  * \return false if there were errors during parsing \e or if "--help" was given,
  * true otherwise.
 */
-const bool WLApplication::parse_command_line()
+void WLApplication::parse_command_line() throw(Parameter_error)
 {
 	if(m_commandline.count("help")>0 || m_commandline.count("version")>0) {
-		show_usage();
-		m_commandline.erase("help");
-		m_commandline.erase("version");
-		return false;
+		throw Parameter_error(); //no message on purpose
 	}
 
 	if(m_commandline.count("ggz")>0) {
@@ -835,12 +829,8 @@ const bool WLApplication::parse_command_line()
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
 	if(m_commandline.count("record")>0) {
-		if (m_commandline["record"].empty()) {
-			cout<<endl
-			<<"ERROR: --record needs a filename!"<<endl<<endl;
-			show_usage();
-			return false;
-		}
+		if (m_commandline["record"].empty())
+			throw Parameter_error("ERROR: --record needs a filename!");
 
 		try {
 			journal->start_recording(m_commandline["record"]);
@@ -853,12 +843,8 @@ const bool WLApplication::parse_command_line()
 	}
 
 	if(m_commandline.count("playback")>0) {
-		if (m_commandline["playback"].empty()) {
-			cout<<endl
-			<<"ERROR: --playback needs a filename!"<<endl<<endl;
-			show_usage();
-			return false;
-		}
+		if (m_commandline["playback"].empty())
+			throw Parameter_error("ERROR: --playback needs a filename!");
 
 		try {
 			journal->start_playback(m_commandline["playback"]);
@@ -884,8 +870,6 @@ const bool WLApplication::parse_command_line()
 		g_options.pull_section("global")->create_val(it->first.c_str(),
 		      it->second.c_str());
 	}
-
-	return true;
 }
 
 /**
