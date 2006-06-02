@@ -37,6 +37,9 @@ public:
 	explicit Journalfile_error(const std::string filename) throw();
 	virtual ~Journalfile_error() throw() {}
 
+	virtual const char *what() const throw();
+
+	const char *text;
 	std::string filename;
 };
 
@@ -48,8 +51,6 @@ class BadMagic_error : public Journalfile_error {
 public:
 	explicit BadMagic_error(const std::string filename) throw();
 	virtual ~BadMagic_error() throw() {}
-
-	std::string filename;
 };
 
 /**
@@ -58,10 +59,10 @@ public:
  */
 class BadRecord_error : public Journalfile_error {
 public:
-	explicit BadRecord_error(const std::string filename, const unsigned char code, const unsigned char expectedcode) throw();
+	explicit BadRecord_error(const std::string filename, const unsigned char code,
+	                         const unsigned char expectedcode) throw();
 	virtual ~BadRecord_error() throw() {}
 
-	std::string filename;
 	std::streamoff offset;
 	unsigned char code;
 	unsigned char expectedcode;
@@ -73,10 +74,10 @@ public:
  */
 class BadEvent_error : public Journalfile_error {
 public:
-	explicit BadEvent_error(const std::string filename, const unsigned char type) throw();
+	explicit BadEvent_error(const std::string filename,
+	                        const unsigned char type) throw();
 	virtual ~BadEvent_error() throw() {}
 
-	std::string filename;
 	std::streamoff offset;
 	unsigned char type;
 };

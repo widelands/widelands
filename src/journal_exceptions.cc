@@ -17,27 +17,46 @@
  *
  */
 
+#include <autosprintf.h>
 #include "journal_exceptions.h"
 
+using namespace gnu;
+
 Journalfile_error::Journalfile_error(const std::string filename) throw():
-		std::runtime_error("Problem with journal file \""+filename+"\"!"),
+		std::runtime_error("Problem with journal file."),
 		filename(filename)
-{}
+{
+	text=autosprintf("Problem with journal file '%s'.", filename.c_str());
+}
 
+const char *Journalfile_error::what() const throw()
+{
+	return text;
+}
+
+///\todo Say _which_ magic number was found and which was expected
 BadMagic_error::BadMagic_error(const std::string filename) throw():
-		Journalfile_error("Journal file \""+filename+"\" starts with "
-		                  "bad magic number!"),
-		filename(filename)
-{}
+		Journalfile_error(filename)
+{
+	text=autosprintf("Journal file '%s' starts with bad magic number.",
+	                 filename.c_str());
+}
 
-BadRecord_error::BadRecord_error(const std::string filename, const unsigned char code, const unsigned char expectedcode) throw():
-		Journalfile_error("Journal file \""+filename+"\" contains "
-		                  "record with unknown type "),
-		filename(filename), code(code), expectedcode(expectedcode)
-{}
+BadRecord_error::BadRecord_error(const std::string filename,
+                                 const unsigned char code,
+                                 const unsigned char expectedcode) throw():
+		Journalfile_error(filename),
+		code(code), expectedcode(expectedcode)
+{
+	text=autosprintf("Journal file '%s' contains record with type %i "
+	                 "instead of the expected type %i.",
+	                 filename.c_str(), code, expectedcode);
+}
 
 BadEvent_error::BadEvent_error(const std::string filename, const unsigned char type) throw():
-		filename(filename), type(type),
-		Journalfile_error("Journal file \""+filename+"\" contains "
-		                  "record with unknown event type ")
-{}
+		Journalfile_error(filename),
+		type(type)
+{
+	text=autosprintf("Journal file '%s' contains record with unknown "
+	                 "event type %i.", filename.c_str(), type);
+}
