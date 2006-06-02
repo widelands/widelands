@@ -558,9 +558,8 @@ bool Sound_Handler::play_or_not(const string fx_name,const int stereo_position,
                                 const uint priority)
 {
 	bool allow_multiple=false; //convenience for easier code reading
-	float evaluation; //grade (non-)performance of an fx, can be 0...1
-	                  //this is only an amount, not "good/bad"
-	float probability; //used for the final decision
+	float evaluation; //temporary to calculate single influences
+	float probability; //weighted total of all influences
 
 	//probability that this fx gets played; initially set according to priority
 	probability=(priority%PRIO_ALLOW_MULTIPLE)/128.0; //float division! not integer

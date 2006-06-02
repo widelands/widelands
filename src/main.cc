@@ -29,7 +29,7 @@ using std::flush;
  * Cross-platform entry point for SDL applications.
  */
 extern "C"
-int main(int argc, char* argv[])
+	int main(int argc, char* argv[])
 {
 	try {
 		WLApplication * const g_app=WLApplication::get(argc, const_cast<const char**>(argv));
@@ -41,10 +41,21 @@ int main(int argc, char* argv[])
 
 		return 0;
 	}
-	catch(...) {
+	catch(wexception e) {
 		cerr<<"Caught unknown exception in outermost handler!"<<endl<<
-		"This should not happen"<<endl<<endl<<
-		"Please file a bug report."<<endl<<
+		"The exception said: "<<e.what()<<endl<<endl<<
+		"This should not happen. Please file a bug report."<<endl<<
+		flush;
+	}
+	catch(std::exception e) {
+		cerr<<"Caught unknown exception in outermost handler!"<<endl<<
+		"The exception said: "<<e.what()<<endl<<endl<<
+		"This should not happen. Please file a bug report."<<endl<<
+		flush;
+	}
+	catch(...) {
+		cerr<<"Caught unknown exception in outermost handler!"<<endl<<endl<<
+		"This should not happen. Please file a bug report."<<endl<<
 		flush;
 	}
 }

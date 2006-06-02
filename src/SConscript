@@ -31,6 +31,8 @@ INDENTLIST=[
 	'geometry.h',
 	'journal.h',
 	'journal.cc',
+	'journal_exceptions.h',
+	'journal_exceptions.cc',
 	'main.cc',
 	'sound_handler.h',
 	'sound_handler.cc',

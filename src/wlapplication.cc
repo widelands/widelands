@@ -97,7 +97,6 @@ WLApplication * const WLApplication::get(const int argc, const char **argv)
 WLApplication::WLApplication(const int argc, const char **argv):
 		m_commandline(std::map<std::string, std::string>()),
 		journal(0),
-		m_playback(false), m_record(false),
 		m_input_grab(false), m_mouse_swapped(false), m_mouse_speed(0.0),
 		m_mouse_buttons(0), m_mouse_x(0), m_mouse_y(0),
 		m_mouse_maxx(0), m_mouse_maxy(0), m_mouse_locked(0),
@@ -247,7 +246,7 @@ void WLApplication::run()
 			//TODO: handle error
 		}
 
-		if(m_record) journal->record_event(&e);
+		if(journal->is_recording()) journal->record_event(&e);
 		//TODO: playback
 
 		switch(e.type) {
@@ -287,6 +286,7 @@ void WLApplication::run()
  * \param ev the retrieved event will be put here
  * \param throttle Limit recording to 100fps max (not the event loop itself!)
  * \return true if an event was returned inside \ref ev, false otherwise
+ * \todo Catch Journalfile_error
  */
 const bool WLApplication::poll_event(SDL_Event *ev, const bool throttle)
 {
@@ -294,7 +294,7 @@ const bool WLApplication::poll_event(SDL_Event *ev, const bool throttle)
 
 restart:
 	//inject synthesized events into the event queue when playing back
-	if (m_playback)
+	if (journal->is_playingback())
 		haveevent=journal->read_event(ev);
 	else {
 		haveevent=SDL_PollEvent(ev);
@@ -369,13 +369,13 @@ restart:
 	}
 
 	// log all events into the journal file
-	if (m_record) {
+	if (journal->is_recording()) {
 		if (haveevent)
 			journal->record_event(ev);
 		else {
 			// Implement the throttle to avoid very quick inner mainloops when
 			// recoding a session
-			if (throttle && m_playback) {
+			if (throttle && journal->is_playingback()) {
 				static int lastthrottle = 0;
 				int time = SDL_GetTicks();
 
@@ -403,7 +403,6 @@ restart:
 			case SDL_MOUSEMOTION:
 			case SDL_QUIT:
 				break;
-
 			default:
 				goto restart;
 			}
@@ -427,20 +426,19 @@ void WLApplication::handle_input(const InputCallback *cb)
 
 	// We need to empty the SDL message queue always, even in playback mode
 	// In playback mode, only F10 for premature exiting works
-	if (m_playback) {
-			while(SDL_PollEvent(&ev)) {
-				switch(ev.type) {
-				case SDL_KEYDOWN:
-					if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
-						m_should_die = true;
-					break;
-
-				case SDL_QUIT:
+	if (journal->is_playingback()) {
+		while(SDL_PollEvent(&ev)) {
+			switch(ev.type) {
+			case SDL_KEYDOWN:
+				if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
 					m_should_die = true;
-					break;
-				}
+				break;
+			case SDL_QUIT:
+				m_should_die = true;
+				break;
 			}
 		}
+	}
 
 	// Usual event queue
 	while(poll_event(&ev, !gotevents)) {
@@ -488,7 +486,6 @@ void WLApplication::handle_input(const InputCallback *cb)
 				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, (char)c);
 			}
 			break;
-
 		case SDL_MOUSEBUTTONDOWN:
 		case SDL_MOUSEBUTTONUP:
 			button = ev.button.button-1;
@@ -567,7 +564,7 @@ void WLApplication::set_mouse_pos(int x, int y)
  */
 void WLApplication::set_input_grab(bool grab)
 {
-	if (m_playback)
+	if (journal->is_playingback())
 		return; // ignore in playback mode
 
 	m_input_grab = grab;
@@ -611,7 +608,7 @@ void WLApplication::do_warp_mouse(const int x, const int y)
 {
 	int curx, cury;
 
-	if (m_playback) // don't warp anything during playback
+	if (journal->is_playingback()) // don't warp anything during playback
 		return;
 
 	SDL_GetMouseState(&curx, &cury);
@@ -845,8 +842,12 @@ const bool WLApplication::parse_command_line()
 			return false;
 		}
 
-		journal->start_recording(m_commandline["record"]);
-		m_record=true;
+		try {
+			journal->start_recording(m_commandline["record"]);
+		}
+		catch (Journalfile_error e) {
+			//TODO: tell the user
+		}
 
 		m_commandline.erase("record");
 	}
@@ -859,8 +860,12 @@ const bool WLApplication::parse_command_line()
 			return false;
 		}
 
-		journal->start_playback(m_commandline["playback"]);
-		m_playback=true;
+		try {
+			journal->start_playback(m_commandline["playback"]);
+		}
+		catch (Journalfile_error e) {
+			//TODO: tell the user
+		}
 
 		m_commandline.erase("playback");
 	}

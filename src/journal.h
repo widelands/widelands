@@ -20,6 +20,8 @@
 #ifndef JOURNAL_H
 #define JOURNAL_H
 
+#include <fstream>
+#include "journal_exceptions.h"
 #include <SDL_events.h>
 #include <string>
 
@@ -28,37 +30,85 @@
  * playing back a session. On it's interface, it deals with SDL_Events that
  * might (or might not) be recorded/played back. Whether a recording / playback
  * is actually being performed is internal to Journal.
+ *
+ * \note If you are hacking this class, throw a \ref Journalfile_exception only
+ * and always if there is a nonrecoverable error and you have already dealt with
+ * it.
+ *
+ * \todo The idea of writing enums into a file is bad: enums are int and int varies
+ * in size (typ. 32/64bit). Our own codes only need 8bit, so we force IO down to
+ * this value. The same happens with keyboard events at 32bits. Cutting off bits
+ * is not a good solution, but in this case it'll do until a better way comes along.
  */
 class Journal {
+public:
+	/// change this and I will ensure your death will be a most unpleasant one
+	static const Uint32 RFC_MAGIC = 0x0ACAD100;
+
+	/**
+	 * Record file codes
+	 * It should be possible to use record files across different platforms.
+	 * However, 64 bit platforms are currently not supported.
+	 */
+	enum rfccode {
+	   RFC_GETTIME = 0x01,
+	   RFC_EVENT = 0x02,
+	   RFC_ENDEVENTS = 0x03,
+
+	   RFC_KEYDOWN = 0x10,
+	   RFC_KEYUP = 0x11,
+	   RFC_MOUSEBUTTONDOWN = 0x12,
+	   RFC_MOUSEBUTTONUP = 0x13,
+	   RFC_MOUSEMOTION = 0x14,
+	   RFC_QUIT = 0x15,
+	   RFC_INVALID = 0xff
+	};
+
 public:
 	Journal();
 	~Journal();
 
-	void start_recording(std::string filename="");
+	void start_recording(std::string filename="widelands.jnl") throw(Journalfile_error, BadMagic_error);
 	void stop_recording();
+	///True if events are being recorded
+	bool is_recording() {return m_record;}
 
-	void start_playback(std::string filename="");
+	void start_playback(std::string filename="widelands.jnl") throw(Journalfile_error, BadMagic_error);
 	void stop_playback();
+	///True if events are being played back
+	bool is_playingback() {return m_playback;}
 
 	void record_event(SDL_Event *e);
 	bool read_event(SDL_Event *e);
 
-	void timestamp_handler(Uint32 *stamp);
-	void set_idle_mark();
+	void timestamp_handler(Uint32 *stamp) throw(Journalfile_error);
+	void set_idle_mark() throw(Journalfile_error);
 
 protected:
 	/**
 	 * Returns the position in the playback file
 	 * \return byte offset into the playback file, used with file reading
 	 */
-	const long get_playback_offset() {return ftell(m_playbackfile);}
+	const long get_playback_offset() {return m_playbackstream.tellg();}
 
-	void write_record_char(char v);
-	char read_record_char();
-	void write_record_int(int v);
-	int read_record_int();
-	void write_record_code(uchar code);
-	void read_record_code(uchar code);
+	void write(char  v) throw();
+	void write(unsigned char v) throw();
+	void write(Sint16 v) throw();
+	void write(Uint16 v) throw();
+	void write(Sint32 v) throw();
+	void write(Uint32 v) throw();
+	void write(SDLKey v) throw();
+	void write(SDLMod v) throw();
+
+	void read(char  &v) throw();
+	void read(unsigned char &v) throw();
+	void read(Sint16 &v) throw();
+	void read(Uint16 &v) throw();
+	void read(Sint32 &v) throw();
+	void read(Uint32 &v) throw();
+	void read(SDLKey &v) throw();
+	void read(SDLMod &v) throw();
+	void ensure_code(unsigned char code) throw(BadRecord_error);
 
 	///The recording file's name.
 	///\note This does \e not go through the layered filesystem on purpose!
@@ -68,11 +118,11 @@ protected:
 	///\note This does \e not go through the layered filesystem on purpose!
 	std::string m_playbackname;
 
-	///The file events are being recorded to (or NULL)
-	FILE *m_recordfile;
+	///The file events are being recorded to
+	std::ofstream m_recordstream;
 
-	///The file events are being played back from (or NULL)
-	FILE *m_playbackfile;
+	///The file events are being played back from
+	std::ifstream m_playbackstream;
 
 	///True if events are being recorded
 	bool m_record;

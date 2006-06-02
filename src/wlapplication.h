@@ -137,7 +137,7 @@ public:
 
 	void run();
 
-	///\return true if an external entity wants us to quit
+	/// \warning true if an external entity wants us to quit
 	const bool should_die() {return m_should_die;}
 
 	const int get_time();
@@ -178,11 +178,9 @@ public:
 
 	void handle_input(const InputCallback *cb);
 
-	//@{
 	void mainmenu();
 	void mainmenu_singleplayer();
 	void mainmenu_multiplayer();
-	//@}
 
 #ifdef DEBUG
 #ifndef __WIN32__
@@ -222,16 +220,8 @@ protected:
 	///The commandline, conveniently repackaged
 	std::map<std::string, std::string> m_commandline;
 
-	//@{
 	///the event recorder object
 	Journal *journal;
-
-	///Whether we are recording
-	bool m_playback;
-
-	///Whether we are playing back
-	bool m_record;
-	//@}
 
 	/// Mouse handling
 	//@{

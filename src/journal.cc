@@ -17,114 +17,188 @@
  *
  */
 
-#include "constants.h"
 #include "error.h"
 #include "filesystem.h"
 #include "journal.h"
 #include "machdep.h"
-#include "wexception.h"
 
 /**
- * Write a char value to the recording file.
- *
+ * Write a signed char value to the recording file.
  * \param v The character to be written
- *
- * \note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
  */
-void Journal::write_record_char(char v)
+void Journal::write(char v) throw()
 {
-	if (fwrite(&v, sizeof(v), 1, m_recordfile) != 1)
-		throw wexception("Write of 1 byte to record failed.");
-	fflush(m_recordfile);
+	m_recordstream.write(&v,sizeof(v));
 }
 
-/**
- * Read a char value from the playback file
- *
- * \return The char that was read
- *
- *\note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
- */
-char Journal::read_record_char()
+/// \overload
+void Journal::write(unsigned char v) throw()
 {
-	char v;
-
-	if (fread(&v, sizeof(v), 1, m_playbackfile) != 1)
-		throw wexception("Read of 1 byte from record failed.");
-
-	return v;
+	m_recordstream.write((char*)&v,sizeof(v));
 }
 
-/**
- * Write an int value to the recording file.
- *
- * \param v The int to be written
- *
- * \note Not 64bit-safe!
- * \note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
- */
-void Journal::write_record_int(int v)
+/// \overload
+void Journal::write(Sint16 v) throw()
 {
-	assert(m_recordfile);
+	v = Little16(v);
+	m_recordstream.write((char*)&v,sizeof(v));
+}
+/// \overload
+void Journal::write(Uint16 v) throw()
+{
+	v = Little16(v);
+	m_recordstream.write((char*)&v,sizeof(v));
+}
 
+/// \overload
+void Journal::write(Sint32 v) throw()
+{
 	v = Little32(v);
-	if (fwrite(&v, sizeof(v), 1, m_recordfile) != 1)
-		throw wexception("Write of 4 bytes to record failed.");
-	fflush(m_recordfile);
+	m_recordstream.write((char*)&v,sizeof(v));
+}
+
+/// \overload
+void Journal::write(Uint32 v) throw()
+{
+	v = Little32(v);
+	m_recordstream.write((char*)&v,sizeof(v));
 }
 
 /**
- * Read an int value from the playback file.
+ * \overload
+ * SDLKey is an enum, and enums are implemented as int. Consequently, SDLKey
+ * changes size on 64bit machines :-(
+ * So we force it to be 32bit, discarding the higher 32 bits (hopefully noone
+ * will have so man keys)
  *
- * \return The int that was read
- * Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
+ * On 32bit systems, it does not matter whether this method or \ref write(Uint32 v)
+ * actually gets used.
+ *
+ * \sa write(SDLMod v)
+ * \sa read(SDLMod &v)
  */
-int Journal::read_record_int()
+void Journal::write(SDLKey v) throw()
 {
-	int v;
-	assert(m_playbackfile);
+	Uint32 vv;
 
-	if (fread(&v, sizeof(v), 1, m_playbackfile) != 1)
-		throw wexception("Read of 4 bytes from record failed.");
-
-	return Little32(v);
+	vv = Little32((Uint32)v);
+	m_recordstream.write((char*)&v,sizeof(v));
 }
 
 /**
- * \note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
+ * \overload
+ * \sa write(SDLKey v)
  */
-void Journal::write_record_code(uchar code)
+void Journal::write(SDLMod v) throw()
 {
-	write_record_char(code);
+	Uint32 vv;
+
+	vv = Little32((Uint32)v);
+	m_recordstream.write((char*)&v,sizeof(v));
 }
 
 /**
- * \note Simple wrapper function to make stdio file access less painful
- * Will vanish when IO handling gets moved to C++ streams
+ * Write a signed char value to the recording file.
+ * \param v Reference where the read character will be stored.
  */
-void Journal::read_record_code(uchar code)
+void Journal::read(char &v) throw()
 {
-	uchar filecode;
-
-	filecode = read_record_char();
-
-	if (filecode != code)
-		throw wexception("%08lX: Bad code %02X during playback (%02X "
-				"expected). Mismatching executable versions?",
-				get_playback_offset()-1, filecode, code);
+	m_recordstream.write((char*)&v,sizeof(char));
 }
 
-///Standard ctor
+/**
+ * \overload
+ */
+void Journal::read(unsigned char &v) throw()
+{
+	m_recordstream.write((char*)&v,sizeof(unsigned char));
+}
+
+/**
+ * \overload
+ */
+void Journal::read(Sint16 &v) throw()
+{
+	m_recordstream.write((char*)&v,sizeof(Sint16));
+	v=Little16(v);
+}
+
+/**
+ * \overload
+ */
+void Journal::read(Uint16 &v) throw()
+{
+	m_recordstream.write((char*)&v,sizeof(Uint16));
+	v=Little16(v);
+}
+
+/**
+ * \overload
+ */
+void Journal::read(Sint32 &v) throw()
+{
+	m_recordstream.write((char*)&v,sizeof(Sint32));
+	v=Little32(v);
+}
+
+/**
+ * \overload
+ */
+void Journal::read(Uint32 &v) throw()
+{
+	m_recordstream.write((char*)&v,sizeof(Uint32));
+	v=Little32(v);
+}
+
+/**
+ * \overload
+ * \sa write(SDLKey v)
+ */
+void Journal::read(SDLKey &v) throw()
+{
+	//Look at write(SDLKey v) before changing code here!
+	m_recordstream.write((char*)&v,sizeof(Uint32));
+	v=Little32(v);
+}
+
+/**
+ * \overload
+ * \sa write(SDLKey v)
+ */
+void Journal::read(SDLMod &v) throw()
+{
+	//Look at write(SDLKey v) before changing code here!
+	m_recordstream.write((char*)&v,sizeof(Uint32));
+	v=Little32(v);
+}
+
+/**
+ * \todo Document me
+ */
+void Journal::ensure_code(unsigned char code) throw(BadRecord_error)
+{
+	unsigned char filecode;
+
+	read(filecode);
+	if (filecode != code) {
+		throw BadRecord_error(m_playbackname, filecode, code);
+	}
+}
+
+/**
+ * Standard ctor
+ */
 Journal::Journal():
 		m_recordname(""), m_playbackname(""),
-		m_recordfile(0), m_playbackfile(0),
 		m_record(false), m_playback(false)
 {
+	m_recordstream.exceptions(std::ifstream::eofbit|
+	                          std::ifstream::failbit|
+	                          std::ifstream::badbit);
+
+	m_playbackstream.exceptions(std::ifstream::eofbit|
+	                            std::ifstream::failbit|
+	                            std::ifstream::badbit);
 }
 
 /**
@@ -139,124 +213,166 @@ Journal::~Journal()
 /**
  * Start recording events handed to us
  * \param filename File the events should be written to
- * \todo Error handling
+ * \todo set the filename somewhere else
  */
-void Journal::start_recording(std::string filename)
+void Journal::start_recording(std::string filename) throw(Journalfile_error, BadMagic_error)
 {
-	if (m_recordfile)
-		assert(1==0);//TODO: barf
-
-	if(filename.empty()) {
-		assert(1==0); //TODO: barf
-	}
+	assert(!m_recordstream.is_open());
 
 	m_recordname=std::string(FS_CanonicalizeName2(filename));
-	m_recordfile = fopen(m_recordname.c_str(), "wb");
-	if (m_recordfile) {
-		log("Recording into %s\n", m_recordname.c_str());
-		write_record_int(RFC_MAGIC);
+	if(m_recordname.empty())
+		assert(1==0); //TODO: barf in a controlled way
+
+	try{
+		m_recordstream.open(m_recordname.c_str(), std::ios::binary|std::ios::trunc);
+		write(RFC_MAGIC);
+		m_recordstream<<std::flush;
 		m_record=true;
-	} else {
-		throw wexception("Failed to open record file %s",
-		                 m_recordname.c_str());
+		log("Recording into %s\n", m_recordname.c_str());
+	}
+	catch(std::ofstream::failure e){
+		//TODO: use exception mask to find out what happened
+		//TODO: there should be a messagebox to tell the user.
+		log("Problem while opening record file %s for writing.\n",
+		    m_recordname.c_str());
+		stop_recording();
+		throw Journalfile_error(m_recordname);
 	}
 }
 
 /**
- * Stop recording events
- * \todo error handling
+ * Stop recording events.
+ * It's safe to call this even if recording has not been
+ * started yet.
  */
 void Journal::stop_recording()
 {
-	if (m_record) {
-		fclose(m_recordfile);
-		m_recordfile=0;
-		m_record=false;
+	m_record=false;
+
+	if (m_recordstream.is_open()) {
+		m_recordstream<<std::flush;
+		m_recordstream.close();
 	}
 }
 
 /**
  * Start playing back events
  * \param filename File to get events from
- * \todo Error handling
+ * \todo set the filename somewhere else
  */
-void Journal::start_playback(std::string filename)
+void Journal::start_playback(std::string filename) throw(Journalfile_error, BadMagic_error)
 {
-	if (m_playbackfile)
-		assert(1==0);//TODO: barf
-
-	if(filename.empty()) {
-		assert(1==0); //TODO: barf
-	}
+	assert(!m_playbackstream.is_open());
 
 	m_playbackname=std::string(FS_CanonicalizeName2(filename));
-	m_playbackfile = fopen(m_playbackname.c_str(), "rb");
-	if (m_playbackfile) {
-		log("Playing back from %s\n", m_playbackname.c_str());
-		if (read_record_int() != RFC_MAGIC)
-			throw wexception("Playback file has wrong magic number");
+	if(m_playbackname.empty())
+		assert(1==0); //TODO: barf in a controlled way
+
+	try{
+		Uint32 magic;
+
+		m_playbackstream.open(m_playbackname.c_str(), std::ios::binary);
+		read(magic);
+		if (magic != RFC_MAGIC)
+			throw BadMagic_error(m_playbackname);
 		m_playback=true;
-	} else {
-		throw wexception("Failed to open playback file %s",
-		                 m_playbackname.c_str());
+		log("Playing back from %s\n", m_playbackname.c_str());
+	}
+	catch(std::ifstream::failure e){
+		//TODO: use exception mask to find out what happened
+		//TODO: there should be a messagebox to tell the user.
+		log("ERROR: problem while opening playback file for writing. "
+		    "Playback deactivated.\n");
+		stop_playback();
+		throw Journalfile_error(m_recordname);
 	}
 }
 
 /**
- * Stop recording events
- * \todo error handling
+ * Stop playing back events.
+ * It's safe to call this even if playback has not been
+ * started yet.
  */
 void Journal::stop_playback()
 {
-	if (m_playback) {
-		fclose(m_playbackfile);
-		m_playbackfile=0;
-		m_playback=false;
+	m_playback=false;
+
+	if(m_playbackstream.is_open()) {
+		m_playbackstream.close();
 	}
 }
 
 /**
- * Record an event into the playback file. This entails serializing the event
+ * Record an event into the playback file. This entails serializing the event and
  * writing it out.
  *
  * \param e The event to be recorded
- * \todo do this only if recording is enabled
- * \todo error handling
  */
 void Journal::record_event(SDL_Event *e)
 {
-	switch(e->type) {
-	case SDL_KEYDOWN:
-	case SDL_KEYUP:
-		write_record_char(RFC_EVENT);
-		write_record_char((e->type == SDL_KEYUP) ? RFC_KEYUP : RFC_KEYDOWN);
-		write_record_int(e->key.keysym.sym);
-		write_record_int(e->key.keysym.unicode);
-		break;
+	if (!m_record)
+		return;
 
-	case SDL_MOUSEBUTTONDOWN:
-	case SDL_MOUSEBUTTONUP:
-		write_record_char(RFC_EVENT);
-		write_record_char((e->type == SDL_MOUSEBUTTONUP) ? RFC_MOUSEBUTTONUP : RFC_MOUSEBUTTONDOWN);
-		write_record_char(e->button.button);
-		break;
-
-	case SDL_MOUSEMOTION:
-		write_record_char(RFC_EVENT);
-		write_record_char(RFC_MOUSEMOTION);
-		write_record_int(e->motion.x);
-		write_record_int(e->motion.y);
-		write_record_int(e->motion.xrel);
-		write_record_int(e->motion.yrel);
-		break;
-
-	case SDL_QUIT:
-		write_record_char(RFC_EVENT);
-		write_record_char(RFC_QUIT);
-		break;
-	default:
-		// can't really do anything useful with this event
-		break;
+	try {
+		//Note: the following lines are *inside* the switch on purpose:
+		//   write(RFC_EVENT);
+		//   m_recordstream<<std::flush;
+		//If they were outside, they'd get executed on every mainloop
+		//iteration, which would yield a) huge files and b) lots of
+		//completely unneccessary overhad.
+		switch(e->type) {
+		case SDL_KEYDOWN:
+			write(RFC_EVENT);
+			write(RFC_KEYDOWN);
+			write(e->key.keysym.sym);
+			write(e->key.keysym.unicode);
+			write(e->key.keysym.mod);
+			m_recordstream<<std::flush;
+			break;
+		case SDL_KEYUP:
+			write(RFC_EVENT);
+			write(RFC_KEYUP);
+			write(e->key.keysym.mod);
+			write(e->key.keysym.sym);
+			write(e->key.keysym.unicode);
+			m_recordstream<<std::flush;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			write(RFC_EVENT);
+			write(RFC_MOUSEBUTTONDOWN);
+			write(e->button.button);
+			m_recordstream<<std::flush;
+		case SDL_MOUSEBUTTONUP:
+			write(RFC_EVENT);
+			write(RFC_MOUSEBUTTONUP);
+			write(e->button.button);
+			m_recordstream<<std::flush;
+			break;
+		case SDL_MOUSEMOTION:
+			write(RFC_EVENT);
+			write(RFC_MOUSEMOTION);
+			write(e->motion.x);
+			write(e->motion.y);
+			write(e->motion.xrel);
+			write(e->motion.yrel);
+			m_recordstream<<std::flush;
+			break;
+		case SDL_QUIT:
+			write(RFC_EVENT);
+			write(RFC_QUIT);
+			m_recordstream<<std::flush;
+			break;
+		default:
+			// can't really do anything useful with this event
+			break;
+		}
+	}
+	catch(std::ofstream::failure e){
+		//TODO: use exception mask to find out what happened
+		//TODO: there should be a messagebox to tell the user.
+		log("Failed to write to record file. Recording deactivated.\n");
+		stop_recording();
+		throw Journalfile_error(m_recordname);
 	}
 }
 
@@ -266,65 +382,76 @@ void Journal::record_event(SDL_Event *e)
  * the event record.
  *
  * \param e The event being returned
- * \todo do this only if playback is enabled
- * \todo error handling
  */
 bool Journal::read_event(SDL_Event *e)
 {
-	uchar code = read_record_char();
+	unsigned char recordtype, eventtype;
 	bool haveevent=false;
 
-	if (code == RFC_EVENT)
-	{
-		code = read_record_char();
+	if (!m_playback)
+		return false;
 
-		switch(code) {
+	try {
+		read(recordtype);
+
+		switch(recordtype) {
+		case RFC_EVENT:
+			read(eventtype);
+
+			switch(eventtype) {
 			case RFC_KEYDOWN:
+				e->type=SDL_KEYDOWN;
+				read(e->key.keysym.mod);
+				read(e->key.keysym.sym);
+				read(e->key.keysym.unicode);
+				break;
 			case RFC_KEYUP:
-				e->type = (code == RFC_KEYUP) ?
-						SDL_KEYUP : SDL_KEYDOWN;
-				e->key.keysym.sym=
-						(SDLKey)read_record_int();
-				e->key.keysym.unicode=
-						read_record_int();
+				e->type=SDL_KEYUP;
+				read(e->key.keysym.mod);
+				read(e->key.keysym.sym);
+				read(e->key.keysym.unicode);
 				break;
-
 			case RFC_MOUSEBUTTONDOWN:
-			case RFC_MOUSEBUTTONUP:
-				e->type = (code == RFC_MOUSEBUTTONUP) ?
-				           SDL_MOUSEBUTTONUP :
-					SDL_MOUSEBUTTONDOWN;
-				e->button.button = read_record_char();
+				e->type=SDL_MOUSEBUTTONDOWN;
+				read(e->button.button);
 				break;
-
+			case RFC_MOUSEBUTTONUP:
+				e->type=SDL_MOUSEBUTTONUP;
+				read(e->button.button);
+				break;
 			case RFC_MOUSEMOTION:
 				e->type = SDL_MOUSEMOTION;
-				e->motion.x = read_record_int();
-				e->motion.y = read_record_int();
-				e->motion.xrel = read_record_int();
-				e->motion.yrel = read_record_int();
+				read(e->motion.x);
+				read(e->motion.y);
+				read(e->motion.xrel);
+				read(e->motion.yrel);
 				break;
-
 			case RFC_QUIT:
 				e->type = SDL_QUIT;
 				break;
-
 			default:
-				throw wexception("%08lX: Unknown eent type %02X in playback.",
-						get_playback_offset()-1, code);
+				throw BadEvent_error(m_playbackname, eventtype);
+			}
+
+			haveevent = true;
+			break;
+		case RFC_ENDEVENTS:
+			//Do nothing
+			break;
+		default:
+			throw BadRecord_error(m_playbackname, recordtype, RFC_INVALID);
+			break;
 		}
 
-		haveevent = true;
+		return haveevent;
 	}
-	else if (code == RFC_ENDEVENTS)
-	{
-		haveevent = false;
+	catch(std::ifstream::failure e){
+		//TODO: use exception mask to find out what happened
+		//TODO: there should be a messagebox to tell the user.
+		log("Failed to read from journal file. Playback deactivated.\n");
+		stop_recording();
+		throw Journalfile_error(m_playbackname);
 	}
-	else
-		throw wexception("%08lX: Bad code %02X in eent playback.",
-				 get_playback_offset()-1, code);
-
-	return haveevent;
 }
 
 /**
@@ -333,23 +460,23 @@ bool Journal::read_event(SDL_Event *e)
  * If necessary, they will be recorded. On playback, they will be modified to
  * show the recorded time instead of the current time.
  */
-void Journal::timestamp_handler(Uint32 *stamp)
+void Journal::timestamp_handler(Uint32 *stamp) throw(Journalfile_error)
 {
 	if (m_record) {
-		write_record_code(RFC_GETTIME);
-		write_record_int(*stamp);
+		write(RFC_GETTIME);
+		write(*stamp);
 	}
 
 	if (m_playback) {
-		read_record_code(RFC_GETTIME);
-		*stamp=read_record_int();
+		ensure_code(RFC_GETTIME);
+		read(*stamp);
 	}
 }
 
 /**
  * \todo document me
  */
-void Journal::set_idle_mark()
+void Journal::set_idle_mark() throw(Journalfile_error)
 {
-	write_record_char(RFC_ENDEVENTS);
+	write(RFC_ENDEVENTS);
 }
