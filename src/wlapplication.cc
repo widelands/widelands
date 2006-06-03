@@ -754,7 +754,7 @@ const bool WLApplication::init_hardware()
 	SDL_EnableUNICODE(1); // useful for e.g. chat messages
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	init_graphics(640, 480, s->get_int("depth",16), m_gfx_fullscreen);
+	init_graphics(800, 600, s->get_int("depth",16), m_gfx_fullscreen);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
