@@ -20,16 +20,17 @@
 // files.cc: provides all the OS abstraction to access files
 
 #include "config.h"
+#include "constants.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
-#include <string>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <vector>
 #include "errno.h"
 #include "error.h"
 #include "filesystem.h"
+#include <unistd.h>
+#include <string>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "zip_filesystem.h"
 
 #ifdef USE_DATAFILE
@@ -49,13 +50,9 @@
 
 LayeredFileSystem *g_fs;
 
-/*
-==============
-FS_AutoExtension
-
-Append extension (e.g. ".foo") to the filename if it doesn't already have an extension
-==============
-*/
+/**
+ * Append extension (e.g. ".foo") to the filename if it doesn't already have an extension
+ */
 char *FS_AutoExtension(char *buf, int bufsize, const char *ext)
 {
 	char *dot;
@@ -81,13 +78,9 @@ char *FS_AutoExtension(char *buf, int bufsize, const char *ext)
 	return buf;
 }
 
-/*
-==============
-FS_StripExtension
-
-Strip the extension (if any) from the filename
-==============
-*/
+/**
+ * Strip the extension (if any) from the filename
+ */
 char *FS_StripExtension(char *fname)
 {
 	char *p;
@@ -106,15 +99,11 @@ char *FS_StripExtension(char *fname)
 	return fname;
 }
 
-/*
-==============
-FS_RelativePath
-
-Translate filename so that it is relative to basefile.
-Basically concatenates the two strings, but removes the filename part
-of basefile (if any)
-==============
-*/
+/**
+ * Translate filename so that it is relative to basefile.
+ * Basically concatenates the two strings, but removes the filename part
+ * of basefile (if any)
+ */
 char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename)
 {
 	const char *p;
@@ -166,7 +155,7 @@ const char *FS_GetHomedir()
  * Turn the given path into a simpler one. Returns false for illegal paths.
  * \todo throw an exception instead of using return value for illegal path
 */
-bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
+/*bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
 {
    const char *tok;
    int toklen;
@@ -242,20 +231,106 @@ bool FS_CanonicalizeName(char *buf, int bufsize, const char *path)
       		*(p-1)=0;
 
 	return true;
+}*/
+
+/**
+ * Split a string into components seperated by a certain character
+ *
+ * \param path The path to parse
+ * \param pathsep A character seperating the components
+ * \return a list of path components
+ */
+std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep)
+{
+	std::vector<std::string> components;
+	SSS_T pos;  //start of token
+	SSS_T pos2; //next pathsep character
+
+	//extract the first path component
+	if (path.find(pathsep)==0) //is this an absolute path?
+		pos=1;
+	else //relative path
+		pos=0;
+	pos2=path.find(pathsep, pos);
+	//'current' token is now between pos and pos2
+
+	//split path into it's components
+	while (pos2!=std::string::npos) {
+		components.push_back(path.substr(pos, pos2-pos));
+		pos=pos2+1;
+		pos2=path.find(pathsep, pos);
+	}
+
+	//extract the last component (most probably a filename)
+	components.push_back(path.substr(pos));
+
+	return components;
 }
 
 /**
- * Just a quick ugly hack until file handling is moved to C++
- * \todo Throw exception on illegal path
+ * Transform any valid, unique pathname into a well-formed absolute path
+ *
+ * \todo Enable non-Unix paths
  */
-std::string FS_CanonicalizeName2(std::string path)
+std::string FS_CanonicalizeName(std::string path)
 {
-	char buffer1[1024];
-	const char *buffer2=path.c_str();
+	std::vector<std::string> components;
+	std::vector<std::string>::iterator i;
+	bool absolute=false;
 
-	FS_CanonicalizeName(buffer1, 1024, buffer2);
+	components=FS_Tokenize(path, '/');
+	if (path[0]=='/')
+		absolute=true;
 
-	return std::string(buffer1);
+	//tilde expansion
+	if(*components.begin()=="~") {
+		components.erase(components.begin());
+
+		std::vector<std::string> homecomponents;
+		homecomponents=FS_Tokenize(FS_GetHomedir());
+		components.insert(components.begin(),
+				  homecomponents.begin(), homecomponents.end());
+
+		absolute=true;
+	}
+
+	//make relative paths absolute (so that "../../foo" can work)
+	if (!absolute) {
+		std::vector<std::string> cwdcomponents;
+		cwdcomponents=FS_Tokenize(get_current_dir_name());
+
+		components.insert(components.begin(),
+				  cwdcomponents.begin(), cwdcomponents.end());
+		absolute=true;
+	}
+
+	//clean up the path
+	for(i=components.begin(); i!=components.end(); i++) {
+		//remove empty components ("foo/bar//baz/")
+		if (i->empty()) components.erase(i);
+
+		//remove single dot
+		if (*i==".") components.erase(i);
+
+		//remove double dot and the preceding component (if any)
+		if (*i=="..") {
+			if(i!=components.begin()) {
+				i--;
+				components.erase(i);
+			}
+			components.erase(i);
+		}
+	}
+
+	//reassemble path
+	std::string canonpath="";
+	if (absolute)
+		canonpath="/";
+	for(i=components.begin(); i!=components.end(); i++)
+		canonpath+=*i+"/";
+	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
+
+	return canonpath;
 }
 
 /**
@@ -715,50 +790,31 @@ int RealFSImpl::FindFiles(std::string path, std::string pattern, filenameset_t *
 
 /**
  * Returns true if the given file exists, and false if it doesn't.
- * Also returns false if the pathname is invalid
+ * Also returns false if the pathname is invalid (obviously, because the file
+ * \e can't exist then)
  */
 bool RealFSImpl::FileExists(std::string path)
 {
-	char canonical[256]; // erm...
-	std::string fullname;
 	struct stat st;
 
-   if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
-		return false;
-
-	fullname = m_directory + '/' + canonical;
-
-	if (stat(fullname.c_str(), &st) == -1)
+   	if (stat(FS_CanonicalizeName(path).c_str(), &st) == -1)
 		return false;
 
 	return true;
 }
 
 /**
- * Returns true if the given file is a directory, and false if it doesn't.
- * Also returns false if the pathname is invalid
+ * Returns true if the given file is a directory, and false if it isn't.
+ * Also returns false if the pathname is invalid (obviously, because the file
+ * \e can't exist then)
  */
 bool RealFSImpl::IsDirectory(std::string path)
 {
-   // This is kludge to work around problems with windows.
-   // It seems windows fails to open "directory/..", therefore
-   // our directory check fails there always. Windows suckz!
-   std::string filename = FS_Filename( path.c_str());
-   if( filename == "." || filename == ".." )
-	   return true;
-
-   if(!FileExists(path)) return false;
-
-   char canonical[256];
-	std::string fullname;
 	struct stat st;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
+	if(!FileExists(path))
 		return false;
-
-	fullname = m_directory + '/' + canonical;
-
-	if (stat(fullname.c_str(), &st) == -1)
+	if (stat(FS_CanonicalizeName(path).c_str(), &st) == -1)
 		return false;
 
 	return S_ISDIR(st.st_mode);
@@ -768,23 +824,17 @@ bool RealFSImpl::IsDirectory(std::string path)
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
-   assert( FileExists( path ));
-   char canonical[256];
-   std::string fullname;
+	assert( FileExists( path )); //TODO: throw an exception instead
+	std::string fullname;
 
-   if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
-      return false;
+	fullname=FS_CanonicalizeName(path);
 
-   fullname = m_directory + '/' + canonical;
-
-   if( IsDirectory( path )) {
-      return new RealFSImpl( fullname );
-   } else {
-      FileSystem* s =  new ZipFilesystem( fullname );
-      return s;
-   }
-   // Never here
-   return 0;
+	if( IsDirectory( path )) {
+		return new RealFSImpl( fullname );
+	} else {
+		FileSystem* s =  new ZipFilesystem( fullname );
+		return s;
+	}
 }
 
 /**
@@ -794,13 +844,9 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
    if( FileExists( path ))
       throw wexception( "Path %s already exists. Can't create a filesystem from it!\n", path.c_str());
 
-   char canonical[256];
    std::string fullname;
 
-   if (!FS_CanonicalizeName(canonical, sizeof(canonical), path.c_str()))
-      return false;
-
-   fullname = m_directory + '/' + canonical;
+   fullname=FS_CanonicalizeName(path);
 
    if( fs == FileSystem::FS_DIR ) {
       EnsureDirectoryExists( path );
@@ -809,8 +855,6 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
       FileSystem* s =  new ZipFilesystem( fullname );
       return s;
    }
-   // Never here
-   return 0;
 }
 
 /**
@@ -830,16 +874,12 @@ void RealFSImpl::Unlink(std::string file) {
  * remove directory or file
  */
 void RealFSImpl::m_unlink_file( std::string file ) {
-   assert( FileExists( file ));
-   assert(!IsDirectory( file ));
+   assert( FileExists( file ));  //TODO: throw an exception instead
+   assert(!IsDirectory( file )); //TODO: throw an exception instead
 
-   char canonical[256];
 	std::string fullname;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), file.c_str()))
-		return;
-
-	fullname = m_directory + '/' + canonical;
+	fullname=FS_CanonicalizeName(file);
 
 #ifndef __WIN32__
    unlink( fullname.c_str());
@@ -873,13 +913,9 @@ void RealFSImpl::m_unlink_directory( std::string file ) {
 
    // NOTE: this might fail if this directory contains CVS dir,
    // so no error checking here
-   char canonical[256];
 	std::string fullname;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), file.c_str()))
-		return;
-
-	fullname = m_directory + '/' + canonical;
+	fullname=FS_CanonicalizeName(file);
 #ifndef __WIN32__
    rmdir( fullname.c_str() );
 #else
@@ -910,13 +946,9 @@ void RealFSImpl::MakeDirectory(std::string dirname) {
    if(FileExists(dirname))
       throw wexception("A File with the name %s already exists\n", dirname.c_str());
 
-   char canonical[256];
 	std::string fullname;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), dirname.c_str()))
-		return;
-
-	fullname = m_directory + '/' + canonical;
+	fullname=FS_CanonicalizeName(dirname);
 
    int retval=0;
 #ifdef WIN32
@@ -934,16 +966,12 @@ void RealFSImpl::MakeDirectory(std::string dirname) {
  */
 void *RealFSImpl::Load(std::string fname, int *length)
 {
-	char canonical[256];
 	std::string fullname;
 	FILE *file=0;
 	void *data=0;
 	int size;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), fname.c_str()))
-		throw wexception("Bad filename: %s", fname.c_str());
-
-	fullname = m_directory + '/' + canonical;
+	fullname =FS_CanonicalizeName(fname);
 
 	file = 0;
 	data = 0;
@@ -992,15 +1020,11 @@ void *RealFSImpl::Load(std::string fname, int *length)
 */
 void RealFSImpl::Write(std::string fname, void *data, int length)
 {
-	char canonical[256];
 	std::string fullname;
 	FILE *f;
 	int c;
 
-	if (!FS_CanonicalizeName(canonical, sizeof(canonical), fname.c_str()))
-		throw wexception("Bad filename: %s", fname.c_str());
-
-	fullname = m_directory + '/' + canonical;
+	fullname=FS_CanonicalizeName(fname);
 
 	f = fopen(fullname.c_str(), "wb");
 	if (!f)

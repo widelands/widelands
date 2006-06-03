@@ -39,7 +39,7 @@ public:
 
 	virtual const char *what() const throw();
 
-	const char *text;
+	char *text;
 	std::string filename;
 };
 

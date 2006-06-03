@@ -26,6 +26,7 @@
 #include "machdep.h"
 #include <stdexcept>
 #include "types.h"
+#include <vector>
 #include "wexception.h"
 
 /*
@@ -42,8 +43,8 @@ typedef std::set<std::string> filenameset_t;
 char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
 char *FS_StripExtension(char *fname);
 char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
-bool FS_CanonicalizeName(char *buf, int bufsize, const char *path);
-std::string FS_CanonicalizeName2(std::string path);
+std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep='/');
+std::string FS_CanonicalizeName(std::string path);
 const char *FS_Filename(const char* buf);
 
 void setup_searchpaths(const std::string argv0);

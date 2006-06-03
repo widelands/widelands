@@ -219,7 +219,7 @@ void Journal::start_recording(std::string filename) throw(Journalfile_error, Bad
 {
 	assert(!m_recordstream.is_open());
 
-	m_recordname=std::string(FS_CanonicalizeName2(filename));
+	m_recordname=FS_CanonicalizeName(filename);
 	if(m_recordname.empty())
 		assert(1==0); //TODO: barf in a controlled way
 
@@ -264,7 +264,7 @@ void Journal::start_playback(std::string filename) throw(Journalfile_error, BadM
 {
 	assert(!m_playbackstream.is_open());
 
-	m_playbackname=std::string(FS_CanonicalizeName2(filename));
+	m_playbackname=FS_CanonicalizeName(filename);
 	if(m_playbackname.empty())
 		assert(1==0); //TODO: barf in a controlled way
 
@@ -281,7 +281,7 @@ void Journal::start_playback(std::string filename) throw(Journalfile_error, BadM
 	catch(std::ifstream::failure e){
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
-		log("ERROR: problem while opening playback file for writing. "
+		log("ERROR: problem while opening playback file for reading. "
 		    "Playback deactivated.\n");
 		stop_playback();
 		throw Journalfile_error(m_recordname);

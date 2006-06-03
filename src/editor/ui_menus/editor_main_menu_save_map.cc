@@ -155,9 +155,7 @@ void Main_Menu_Save_Map::clicked(int id) {
       }
 
       if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map(filename)) {
-         char buffer[256];
-         FS_CanonicalizeName(buffer, sizeof(buffer), filename.c_str());
-         m_curdir=buffer;
+         m_curdir=FS_CanonicalizeName(filename);
          m_ls->clear();
          m_mapfiles.clear();
          fill_list();
@@ -246,13 +244,7 @@ void Main_Menu_Save_Map::fill_list(void) {
    // First, we add all directorys
    // We manually add the parent directory
    if(m_curdir!=m_basedir) {
-      char buffer[256];
-      char buffer1[256];
-      strcpy(buffer, m_curdir.c_str());
-      strcat(buffer, "/..");
-      strcpy(buffer1,buffer);
-      FS_CanonicalizeName(buffer1, sizeof(buffer1), buffer);
-      m_parentdir=buffer1;
+      m_parentdir=FS_CanonicalizeName(m_curdir+"/..");
       m_ls->add_entry("<parent>", reinterpret_cast<void*>(const_cast<char*>(m_parentdir.c_str())), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
    }
 
