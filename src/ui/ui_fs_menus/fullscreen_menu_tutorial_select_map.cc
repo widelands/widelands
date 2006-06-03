@@ -42,15 +42,15 @@ Fullscreen_Menu_TutorialSelectMap::Fullscreen_Menu_TutorialSelectMap()
 	// UIButtons
 	UIButton* b;
 
-	b = new UIButton(this, 30, 85, 580, 24, 1, 1);
+	b = new UIButton(this, 80, 100, 640, 26, 1, 1);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
 	b->set_title(_("Mission 1: Eyes in the Darkness - Game Basics").c_str());
 
-	b = new UIButton(this, 30, 115, 580, 24, 1, 2);
+	b = new UIButton(this, 80, 130, 640, 26, 1, 2);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
 	b->set_title(_("Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions").c_str());
 
-	b = new UIButton(this, (get_inner_w()-120)/2, get_inner_h()-80, 120, 24, 0, 0);
+	b = new UIButton(this, (get_inner_w()-160)/2, get_inner_h()-80, 160, 26, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_TutorialSelectMap::end_modal);
 	b->set_title(_("Back").c_str());
 }

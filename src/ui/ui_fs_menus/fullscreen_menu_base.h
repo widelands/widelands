@@ -23,8 +23,8 @@
 #include "types.h"
 #include "ui_panel.h"
 
-#define MENU_XRES	640   ///< Fullscreen Menu Width
-#define MENU_YRES	480   ///< Fullscreen Menu Height
+#define MENU_XRES	800   ///< Fullscreen Menu Width
+#define MENU_YRES	600   ///< Fullscreen Menu Height
 
 /// Base class for all Fullscreen menus
 /**

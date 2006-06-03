@@ -48,25 +48,25 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Game *g, bool is_singleplayer
 	// UIButtons
 	UIButton* b;
 
-	b = new UIButton(this, 410, 356, 174, 24, 0, 0);
+	b = new UIButton(this, 570, 505, 200, 26, 0, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_LoadGame::end_modal);
 	b->set_title("Back");
 
-	m_ok = new UIButton(this, 410, 386, 174, 24, 2, 0);
+	m_ok = new UIButton(this, 570, 535, 200, 26, 2, 0);
 	m_ok->clicked.set(this, &Fullscreen_Menu_LoadGame::ok);
 	m_ok->set_title(_("OK").c_str());
 	m_ok->set_enabled(false);
 
 	// Create the list area
-	list = new UIListselect(this, 12, 163, 363, 297);
+	list = new UIListselect(this, 15, 205, 455, 365);
 	list->selected.set(this, &Fullscreen_Menu_LoadGame::map_selected);
    list->double_clicked.set(this, &Fullscreen_Menu_LoadGame::double_clicked);
 
 	// Info fields
-	new UITextarea(this, 450, 180, _("Map Name:"), Align_Right);
-	tamapname = new UITextarea(this, 460, 180, "");
-	new UITextarea(this, 450, 200, _("Gametime:"), Align_Right);
-	tagametime = new UITextarea(this, 460, 200, "");
+	new UITextarea(this, 560, 205, _("Map Name:"), Align_Right);
+	tamapname = new UITextarea(this, 570, 205, "");
+	new UITextarea(this, 560, 225, _("Gametime:"), Align_Right);
+	tagametime = new UITextarea(this, 570, 225, "");
 
    fill_list();
 }

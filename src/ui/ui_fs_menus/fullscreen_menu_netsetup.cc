@@ -42,42 +42,42 @@ Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 	// UIButtons
 	UIButton* b;
 
-	b = new UIButton(this, 60, 170, 174, 24, 1, JOINGAME);
+	b = new UIButton(this, 90, 220, 200, 26, 1, JOINGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::joingame);
 	b->set_title(_("Join a Game").c_str());
 
-	b = new UIButton(this, 60, 210, 174, 24, 1, HOSTGAME);
+	b = new UIButton(this, 90, 260, 200, 26, 1, HOSTGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::hostgame);
 	b->set_title(_("Host a New Game").c_str());
 
-	b = new UIButton(this, 60, 250, 174, 24, 1, INTERNETGAME);
+	b = new UIButton(this, 90, 300, 200, 26, 1, INTERNETGAME);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title(_("Play in Internet").c_str());
 
-	b = new UIButton(this, 60, 290, 174, 24, 0, CANCEL);
+	b = new UIButton(this, 90, 340, 200, 26, 0, CANCEL);
 	b->clickedid.set(this, &Fullscreen_Menu_NetSetup::end_modal);
 	b->set_title(_("Back").c_str());
 
 	// Hostname
-	hostname=new UIEdit_Box(this, 288, 170, 174, 24, 2, 0);
+	hostname=new UIEdit_Box(this, 310, 220, 200, 26, 2, 0);
 	hostname->changed.set(this, &Fullscreen_Menu_NetSetup::toggle_hostname);
 	hostname->set_text("localhost");
 
 	// Player
-	playername=new UIEdit_Box(this, 288, 210, 174, 24, 2, 0);
+	playername=new UIEdit_Box(this, 310, 260, 200, 26, 2, 0);
 	playername->set_text(_("nobody").c_str());
 
 	// LAN or GGZ game
-	networktype = new UIButton(this, 482, 170, 124, 24, 0, -1);
+	networktype = new UIButton(this, 550, 220, 150, 26, 0, -1);
 	networktype->clickedid.set(this, &Fullscreen_Menu_NetSetup::toggle_networktype);
 	networktype->set_title(_("LAN games").c_str());
 	internetgame = false;
 
 	// List of open games in local network
-	opengames=new UITable(this, 288, 250, 320, 128);
-	opengames->add_column (_("Host").c_str(), UITable::STRING, 128);
-	opengames->add_column (_("Map").c_str(), UITable::STRING, 128);
-	opengames->add_column (_("State").c_str(), UITable::STRING, 64);
+	opengames=new UITable(this, 310, 300, 390, 180);
+	opengames->add_column (_("Host").c_str(), UITable::STRING, 150);
+	opengames->add_column (_("Map").c_str(), UITable::STRING, 150);
+	opengames->add_column (_("State").c_str(), UITable::STRING, 90);
 	opengames->selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
 }
 

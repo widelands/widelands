@@ -42,7 +42,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
    i18n::release_textdomain();
 
    // Text view
-	mlta=new UIMultiline_Textarea(this, 30, 150, 560, 240, text.c_str());
+	mlta=new UIMultiline_Textarea(this, 30, 170, 735, 330, text.c_str());
    mlta->set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
    // Menu title
@@ -53,7 +53,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(std::string filename)
 	// Close button
 	UIButton *b;
 
-	b = new UIButton(this, 233, 420, 174, 24, 0);
+	b = new UIButton(this, 300, 545, 200, 26, 0);
 	b->clickedid.set(this, &Fullscreen_Menu_TextView::end_modal);
 	b->set_title(_("Close").c_str());
 }

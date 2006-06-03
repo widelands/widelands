@@ -37,32 +37,32 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main()
 	// UIButtons
 	UIButton *b;
 
-	b = new UIButton(this, 60, 100, 174, 24, 3, mm_singleplayer);
+	b = new UIButton(this, 100, 140, 220, 26, 3, mm_singleplayer);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title(_("Single Player").c_str());
 
-	b = new UIButton(this, 60, 140, 174, 24, 3, mm_multiplayer);
+	b = new UIButton(this, 100, 180, 220, 26, 3, mm_multiplayer);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title(_("Multi Player").c_str());
 
-	b = new UIButton(this, 60, 180, 174, 24, 3, mm_options);
+	b = new UIButton(this, 100, 220, 220, 26, 3, mm_options);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title(_("Options").c_str());
 
-	b = new UIButton(this, 60, 220, 174, 24, 3, mm_editor);
+	b = new UIButton(this, 100, 260, 220, 26, 3, mm_editor);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title(_("Editor").c_str());
 
-	b = new UIButton(this, 60, 260, 174, 24, 3, mm_readme);
+	b = new UIButton(this, 100, 300, 220, 26, 3, mm_readme);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title(_("View Readme").c_str());
 
-	b = new UIButton(this, 60, 300, 174, 24, 3, mm_license);
+	b = new UIButton(this, 100, 340, 220, 26, 3, mm_license);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title(_("License").c_str());
 
 
-	b = new UIButton(this, 60, 370, 174, 24, 0, mm_exit);
+	b = new UIButton(this, 100, 400, 220, 26, 3, mm_exit);
 	b->clickedid.set(this, &Fullscreen_Menu_Main::end_modal);
 	b->set_title(_("Exit Game").c_str());
 
