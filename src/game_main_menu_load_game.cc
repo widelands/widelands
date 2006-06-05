@@ -156,7 +156,7 @@ void Game_Main_Menu_Load_Game::double_clicked(int) {
    clicked(1);
 }
 
-/*
+/**
  * fill the file list
  */
 void Game_Main_Menu_Load_Game::fill_list(void) {

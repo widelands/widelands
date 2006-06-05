@@ -760,10 +760,8 @@ inline char *setEndAt(char *str, char c)
  *
  * Args: filename	name of the source file
  */
-void Profile::read(const char *filename, const char *global_section, FileSystem* fs)
-{
-	try
-	{
+void Profile::read(const char *filename, const char *global_section, FileSystem* fs) {
+	try {
 		FileRead fr;
 
 		if( !fs )
@@ -771,23 +769,22 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 		else
 			fr.Open(fs, filename);
 
-      // line can become quite big. But this should be enough
-      const ushort LINESIZE = 1024*30;
-      char* line = new char[LINESIZE];
+		// line can become quite big. But this should be enough
+		const ushort LINESIZE = 1024*30;
+		char* line = new char[LINESIZE];
 		char *p = 0;
 		uint linenr = 0;
 		Section *s = 0;
 
-      bool reading_multiline = 0;
-      std::string data;
-      std::string key;
-      bool translate_line = false;
-      while(fr.ReadLine(line, LINESIZE))
-		{
+		bool reading_multiline = 0;
+		std::string data;
+		std::string key;
+		bool translate_line = false;
+		while(fr.ReadLine(line, LINESIZE)) {
 			linenr++;
 
-         if( !reading_multiline )
-            p = line;
+			if( !reading_multiline )
+				p = line;
 
 			p = skipwhite(p);
 			if (!p[0] || p[0] == '#' || (p[0] == '/' && p[1] == '/'))
@@ -798,70 +795,71 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 				setEndAt(p, ']');
 				s = create_section(p, true); // may create duplicate
 			} else {
-            char* tail = 0;
-            translate_line = false;
-            if( reading_multiline ) {
-               // Note: comments are killed by walking backwards into the string
-               rtrim(p);
-               while( *line != '\'' && *line != '"' && strlen( line )) {
-                  if( *line == '_') translate_line = true;
-                  line++;
-               }
-               if(!strlen(line))
-                  throw wexception("line %i: runaway multiline string", linenr);
+				char* tail = 0;
+				translate_line = false;
+				if( reading_multiline ) {
+					// Note: comments are killed by walking backwards into the string
+					rtrim(p);
+					while( *line != '\'' && *line != '"' && strlen( line )) {
+						if( *line == '_')
+							translate_line = true;
+						line++;
+					}
+					if(!strlen(line))
+						throw wexception("line %i: runaway multiline string", linenr);
 
-               // skip " or '
-               line++;
+					// skip " or '
+					line++;
 
-               char *eot = line+strlen(line)-1;
-               while( *eot != '"' && *eot != '\'') {
-                  *eot = 0;
-                  eot = line+strlen(line)-1;
-               }
-               // NOTE: we leave the last '"' and do not remove them
-               tail = line;
-            } else {
-               tail = strchr(p, '=');
-               if(!tail)
-                  throw wexception("line %i: invalid syntax: %s", linenr, line );
-               *tail++ = 0;
-               key = p;
+					char *eot = line+strlen(line)-1;
+					while( *eot != '"' && *eot != '\'') {
+						*eot = 0;
+						eot = line+strlen(line)-1;
+					}
+					// NOTE: we leave the last '"' and do not remove them
+					tail = line;
+				} else {
+					tail = strchr(p, '=');
+					if(!tail)
+						throw wexception("line %i: invalid syntax: %s", linenr, line );
+					*tail++ = 0;
+					key = p;
 					if(*tail == '_' ) {
-                  tail+= 1; // skip =_, which is only used for translations
-                  translate_line = true;
-               }
-               tail = skipwhite(tail);
+						tail+= 1; // skip =_, which is only used for translations
+						translate_line = true;
+					}
+					tail = skipwhite(tail);
 					killcomments(tail);
 					rtrim(tail);
 					rtrim(p);
 
-               // first, check for multiline string
+					// first, check for multiline string
 					if ( strlen(tail) >= 2 &&
-                    ((tail[0] == '\'' || tail[0] == '\"') &&
-                    (tail[1] == '\'' || tail[1] == '\"'))) {
-                  reading_multiline = true;
-                  tail += 2;
+					        ((tail[0] == '\'' || tail[0] == '\"') &&
+					         (tail[1] == '\'' || tail[1] == '\"'))) {
+						reading_multiline = true;
+						tail += 2;
 					}
 
-               // then remove surrounding '' or ""
-               if( tail[0] == '\'' || tail[0] == '\"') {
-                  tail++;
-               }
-            }
-            if (tail) {
-               char *eot = tail+strlen(tail)-1;
-               if (*eot == '\'' || *eot == '\"') {
-                  *eot = 0;
-                  if( strlen( tail )) {
-                     char *eot = tail+strlen(tail)-1;
-                     if (*eot == '\'' || *eot == '\"') {
-                        reading_multiline = false;
-                        *eot = 0;
-                     }
-                  }
-               }
+					// then remove surrounding '' or ""
+					if( tail[0] == '\'' || tail[0] == '\"') {
+						tail++;
+					}
+				}
+				if (tail) {
+					char *eot = tail+strlen(tail)-1;
+					if (*eot == '\'' || *eot == '\"') {
+						*eot = 0;
+						if( strlen( tail )) {
+							char *eot = tail+strlen(tail)-1;
+							if (*eot == '\'' || *eot == '\"') {
+								reading_multiline = false;
+								*eot = 0;
+							}
+						}
+					}
 
-               // ready to insert
+					// ready to insert
 					if (!s) {
 						if (global_section)
 							s = create_section(global_section, true);
@@ -869,15 +867,15 @@ void Profile::read(const char *filename, const char *global_section, FileSystem*
 							throw wexception("line %i: key %s outside section", linenr, p);
 					}
 
-               if( translate_line && strlen( tail ))
-		       data += i18n::translate( tail ); //do not use _() here! it would tag "tail" for translation
-               else
-                  data += tail;
-               if (s && ! reading_multiline) { // error() may or may not throw
+					if( translate_line && strlen( tail ))
+						data += i18n::translate( tail ); //do not use _() here! it would tag "tail" for translation
+					else
+						data += tail;
+					if (s && ! reading_multiline) { // error() may or may not throw
 						s->create_val(key.c_str(), data.c_str(), true); // may create duplicate
-                  data = "";
-               }
-            } else {
+						data = "";
+					}
+				} else {
 					throw wexception("line %i: syntax error", linenr);
 				}
 			}

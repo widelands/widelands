@@ -103,7 +103,7 @@ void Journal::write(SDLMod v) throw()
  */
 void Journal::read(char &v) throw()
 {
-	m_recordstream.write((char*)&v,sizeof(char));
+	m_playbackstream.read((char*)&v,sizeof(char));
 }
 
 /**
@@ -111,7 +111,7 @@ void Journal::read(char &v) throw()
  */
 void Journal::read(unsigned char &v) throw()
 {
-	m_recordstream.write((char*)&v,sizeof(unsigned char));
+	m_playbackstream.read((char*)&v,sizeof(unsigned char));
 }
 
 /**
@@ -119,7 +119,7 @@ void Journal::read(unsigned char &v) throw()
  */
 void Journal::read(Sint16 &v) throw()
 {
-	m_recordstream.write((char*)&v,sizeof(Sint16));
+	m_playbackstream.read((char*)&v,sizeof(Sint16));
 	v=Little16(v);
 }
 
@@ -128,7 +128,7 @@ void Journal::read(Sint16 &v) throw()
  */
 void Journal::read(Uint16 &v) throw()
 {
-	m_recordstream.write((char*)&v,sizeof(Uint16));
+	m_playbackstream.read((char*)&v,sizeof(Uint16));
 	v=Little16(v);
 }
 
@@ -137,7 +137,7 @@ void Journal::read(Uint16 &v) throw()
  */
 void Journal::read(Sint32 &v) throw()
 {
-	m_recordstream.write((char*)&v,sizeof(Sint32));
+	m_playbackstream.read((char*)&v,sizeof(Sint32));
 	v=Little32(v);
 }
 
@@ -146,29 +146,29 @@ void Journal::read(Sint32 &v) throw()
  */
 void Journal::read(Uint32 &v) throw()
 {
-	m_recordstream.write((char*)&v,sizeof(Uint32));
+	m_playbackstream.read((char*)&v,sizeof(Uint32));
 	v=Little32(v);
 }
 
 /**
  * \overload
- * \sa write(SDLKey v)
+ * \sa read(SDLKey v)
  */
 void Journal::read(SDLKey &v) throw()
 {
-	//Look at write(SDLKey v) before changing code here!
-	m_recordstream.write((char*)&v,sizeof(Uint32));
+	//Look at read(SDLKey v) before changing code here!
+	m_playbackstream.read((char*)&v,sizeof(Uint32));
 	v=Little32(v);
 }
 
 /**
  * \overload
- * \sa write(SDLKey v)
+ * \sa read(SDLKey v)
  */
 void Journal::read(SDLMod &v) throw()
 {
-	//Look at write(SDLKey v) before changing code here!
-	m_recordstream.write((char*)&v,sizeof(Uint32));
+	//Look at read(SDLKey v) before changing code here!
+	m_playbackstream.read((char*)&v,sizeof(Uint32));
 	v=Little32(v);
 }
 

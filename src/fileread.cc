@@ -42,6 +42,8 @@ FileRead::~FileRead()
  * Reserves one additional byte which is zeroed, so that text files can
  * be handled like a normal C string.
  * Throws an exception if the file couldn't be loaded for whatever reason.
+ *
+ * \todo error handling
  */
 void FileRead::Open(FileSystem *fs, std::string fname)
 {

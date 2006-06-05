@@ -41,15 +41,34 @@
  */
 class LayeredFileSystem : public FileSystem {
 	public:
-		virtual void AddFileSystem(FileSystem *fs) = 0;
+		LayeredFileSystem();
+		virtual ~LayeredFileSystem();
 
-		virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results) = 0;  // From FileSystem
-		virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth) = 0;
+		virtual void AddFileSystem(FileSystem *fs);
 
-	public:
-		static LayeredFileSystem *Create();
+		virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth); // Overwritten from LayeredFileSystem
+		virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results); // overwritten from FileSystem
 
-		virtual void listSubdirs()=0;
+		virtual bool IsWritable();
+
+		virtual bool FileExists(std::string path);
+		virtual bool IsDirectory(std::string path);
+		virtual void EnsureDirectoryExists(std::string dirname);
+		virtual void MakeDirectory(std::string dirname);
+
+		virtual void *Load(std::string fname, int *length);
+		virtual void Write(std::string fname, void *data, int length);
+
+		virtual FileSystem* MakeSubFileSystem( std::string dirname );
+		virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
+		virtual void Unlink(std::string file);
+
+		virtual void listSubdirs();
+
+	private:
+		typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;
+
+		std::vector<FileSystem*> m_filesystems;
 };
 
 /// Access all game data files etc.. through this FileSystem

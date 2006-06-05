@@ -24,34 +24,33 @@
 #include <string>
 
 class RealFSImpl : public FileSystem {
-	private:
-		std::string m_directory;
+public:
+	RealFSImpl(std::string Directory);
+	~RealFSImpl();
 
-	private:
-		void m_unlink_directory( std::string file );
-		void m_unlink_file( std::string file );
+	virtual bool IsWritable();
 
-	public:
-		RealFSImpl(std::string sDirectory);
-		~RealFSImpl();
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results);
 
-		virtual bool IsWritable();
+	virtual bool FileExists(std::string path);
+	virtual bool IsDirectory(std::string path);
+	virtual void EnsureDirectoryExists(std::string dirname);
+	virtual void MakeDirectory(std::string dirname);
 
-		virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results);
+	virtual void *Load(std::string fname, int *length);
+	virtual void Write(std::string fname, void *data, int length);
 
-		virtual bool FileExists(std::string path);
-		virtual bool IsDirectory(std::string path);
-		virtual void EnsureDirectoryExists(std::string dirname);
-		virtual void MakeDirectory(std::string dirname);
+	virtual FileSystem* MakeSubFileSystem( std::string dirname );
+	virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
+	virtual void Unlink(std::string file);
 
-		virtual void *Load(std::string fname, int *length);
-		virtual void Write(std::string fname, void *data, int length);
+	virtual void listSubdirs();
 
-		virtual FileSystem* MakeSubFileSystem( std::string dirname );
-		virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
-		virtual void Unlink(std::string file);
+private:
+	void m_unlink_directory( std::string file );
+	void m_unlink_file( std::string file );
 
-		virtual void listSubdirs();
+	std::string m_directory;
 };
 
 #endif

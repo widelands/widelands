@@ -40,7 +40,7 @@ char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
 char *FS_StripExtension(char *fname);
 char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
 std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep='/');
-std::string FS_CanonicalizeName(std::string path);
+std::string FS_CanonicalizeName(std::string path, std::string root="");
 const char *FS_Filename(const char* buf);
 
 void setup_searchpaths(const std::string argv0);
@@ -50,10 +50,10 @@ void setup_searchpaths(const std::string argv0);
  */
 class FileSystem {
 public:
-   enum Type {
-      FS_DIR,
-      FS_ZIP
-   };
+	enum Type {
+	   FS_DIR,
+	   FS_ZIP
+	};
 
 	virtual ~FileSystem() { }
 
@@ -61,19 +61,18 @@ public:
 
 	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results) = 0;
 
-   virtual bool IsDirectory(std::string path) = 0;
+	virtual bool IsDirectory(std::string path) = 0;
 	virtual bool FileExists(std::string path) = 0;
 
 	virtual void *Load(std::string fname, int *length) = 0;
 	virtual void Write(std::string fname, void *data, int length) = 0;
-   virtual void EnsureDirectoryExists(std::string dirname) = 0;
-   virtual void MakeDirectory(std::string dirname) = 0;
+	virtual void EnsureDirectoryExists(std::string dirname) = 0;
+	virtual void MakeDirectory(std::string dirname) = 0;
 
-   virtual FileSystem*  MakeSubFileSystem( std::string dirname ) = 0;
-   virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type ) = 0;
-   virtual void Unlink( std::string ) = 0;
+	virtual FileSystem*  MakeSubFileSystem( std::string dirname ) = 0;
+	virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type ) = 0;
+	virtual void Unlink( std::string ) = 0;
 
-public:
 	static FileSystem *CreateFromDirectory(std::string directory);
 	static FileSystem *CreateFromZip(std::string file);
 
@@ -82,7 +81,7 @@ public:
 
 class FileNotFound_error : public std::runtime_error {
 public:
-	FileNotFound_error(std::string s) : std::runtime_error(s) {};
+	FileNotFound_error(std::string s) : std::runtime_error(s) {}
 };
 
 #endif

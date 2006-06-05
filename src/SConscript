@@ -28,6 +28,8 @@ SConscript('ui/ui_basic/SConscript')
 SConscript('ui/ui_fs_menus/SConscript')
 
 INDENTLIST=[
+	'filesystem.h',
+	'filesystem.cc',
 	'fxset.h',
 	'fxset.cc',
 	'geometry.h',
@@ -35,7 +37,11 @@ INDENTLIST=[
 	'journal.cc',
 	'journal_exceptions.h',
 	'journal_exceptions.cc',
+	'layeredfilesystem.h',
+	'layeredfilesystem.cc',
 	'main.cc',
+	'realfsimpl.h',
+	'realfsimpl.cc',
 	'songset.h',
 	'songset.cc',
 	'sound_handler.h',

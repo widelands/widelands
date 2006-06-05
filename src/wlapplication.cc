@@ -151,7 +151,7 @@ WLApplication::WLApplication(const int argc, const char **argv):
 
 	//create the filesystem abstraction first - we wouldn't even find the
 	//config file without this
-	g_fs = LayeredFileSystem::Create();
+	g_fs=new LayeredFileSystem();
 	setup_searchpaths(m_commandline["EXENAME"]);
 
 	init_settings();

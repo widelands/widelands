@@ -139,6 +139,9 @@ const char *FS_GetHomedir()
 	if (homedir.empty()) {
 		printf("\nWARNING: either I can not detect your home directory "
 		       "or you don't have one! Please contact the developers.\n");
+
+		//TODO: is it really a good idea to set homedir to "." then ??
+
 		printf("Instead of your home directory, '.' will be used.\n\n");
 		homedir=".";
 	}
@@ -152,6 +155,8 @@ const char *FS_GetHomedir()
  * \param path The path to parse
  * \param pathsep A character seperating the components
  * \return a list of path components
+ *
+ * \todo This does not really belong into a filesystem class
  */
 std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep)
 {
@@ -185,7 +190,7 @@ std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep)
  *
  * \todo Enable non-Unix paths
  */
-std::string FS_CanonicalizeName(std::string path)
+std::string FS_CanonicalizeName(std::string path, std::string root)
 {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
@@ -202,7 +207,7 @@ std::string FS_CanonicalizeName(std::string path)
 		std::vector<std::string> homecomponents;
 		homecomponents=FS_Tokenize(FS_GetHomedir());
 		components.insert(components.begin(),
-				  homecomponents.begin(), homecomponents.end());
+		                  homecomponents.begin(), homecomponents.end());
 
 		absolute=true;
 	}
@@ -213,10 +218,14 @@ std::string FS_CanonicalizeName(std::string path)
 		getcwd(cwd, PATH_MAX);
 
 		std::vector<std::string> cwdcomponents;
-		cwdcomponents=FS_Tokenize(cwd);
+
+		if (root.empty())
+			cwdcomponents=FS_Tokenize(cwd);
+		else
+			cwdcomponents=FS_Tokenize(root);
 
 		components.insert(components.begin(),
-				  cwdcomponents.begin(), cwdcomponents.end());
+		                  cwdcomponents.begin(), cwdcomponents.end());
 		absolute=true;
 	}
 
@@ -254,12 +263,12 @@ std::string FS_CanonicalizeName(std::string path)
  * / or \  (or the whole string)
  */
 const char *FS_Filename(const char* buf) {
-   int i=strlen(buf)-1;
-   while(i>=0) {
-      if(buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
-      --i;
-   }
-   return buf;
+	int i=strlen(buf)-1;
+	while(i>=0) {
+		if(buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
+		--i;
+	}
+	return buf;
 }
 
 /**
@@ -306,6 +315,7 @@ static const std::string getexename(const std::string argv0)
 
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
+ * \todo This belongs into WLApplication
  */
 void setup_searchpaths(const std::string argv0)
 {
