@@ -296,8 +296,11 @@ std::string FS_CanonicalizeName(std::string path)
 
 	//make relative paths absolute (so that "../../foo" can work)
 	if (!absolute) {
+		char cwd[PATH_MAX+1];
+		getcwd(cwd, PATH_MAX);
+
 		std::vector<std::string> cwdcomponents;
-		cwdcomponents=FS_Tokenize(get_current_dir_name());
+		cwdcomponents=FS_Tokenize(cwd);
 
 		components.insert(components.begin(),
 				  cwdcomponents.begin(), cwdcomponents.end());
