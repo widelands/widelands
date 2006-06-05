@@ -24,16 +24,17 @@ Management classes and functions of the 16-bit software renderer.
 #include "bob.h"
 #include "editor_game_base.h"
 #include "error.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "font_handler.h"
+#include "graphic_impl.h"
 #include "map.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
-#include "player.h"
-#include "graphic_impl.h"
-#include "tribe.h"
+#include "layeredfilesystem.h"
 #include "overlay_manager.h"
-#include "filesystem.h"
+#include "player.h"
+#include "tribe.h"
 
 /*
  * Names of road terrains

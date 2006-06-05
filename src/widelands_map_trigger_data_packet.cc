@@ -19,7 +19,7 @@
 
 #include "editor_game_base.h"
 #include "error.h"
-#include "filesystem.h"
+#include "fileread.h"
 #include "map.h"
 #include "map_trigger_manager.h"
 #include "trigger.h"
@@ -44,12 +44,12 @@ Widelands_Map_Trigger_Data_Packet::~Widelands_Map_Trigger_Data_Packet(void) {
 void Widelands_Map_Trigger_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    if( skip )
       return;
-  
+
    // Skip, if no triggers saved
    FileRead fr;
-   if( !fr.TryOpen( fs, "trigger" )) 
+   if( !fr.TryOpen( fs, "trigger" ))
       return;
-   
+
    Profile prof;
    prof.read( "trigger", 0, fs );
 
@@ -93,7 +93,7 @@ void Widelands_Map_Trigger_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
       s->set_bool("set", t->is_set());
       t->Write(s);
    }
-   
+
    prof.write("trigger", false, fs );
 
    // done

@@ -19,6 +19,8 @@
 
 #include "event.h"
 #include "event_chain.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "map.h"
 #include "map_event_manager.h"
 #include "map_eventchain_manager.h"
@@ -33,15 +35,15 @@
 EventChain::State EventChain::run( Game* g ) {
    m_state = RUNNING;
 
-   while( m_curevent < m_events.size() ) { 
+   while( m_curevent < m_events.size() ) {
       Event* ev = m_events[m_curevent];
       Event::State retval = ev->run( g );
 
-      if( retval == Event::DONE ) 
+      if( retval == Event::DONE )
          m_curevent++;
       else break;
    }
-   
+
    if( m_curevent == m_events.size()) {
       // Last event has been run. This is finished
       if( get_repeating() ) {
@@ -56,7 +58,7 @@ EventChain::State EventChain::run( Game* g ) {
    } else {
       assert( m_events[m_curevent]->get_state() == Event::RUNNING );
    }
-   
+
    return m_state;
 }
 
@@ -64,9 +66,9 @@ EventChain::State EventChain::run( Game* g ) {
  * Clear all events, events are not delted.
  */
 void EventChain::clear_events( void ) {
-   for( uint i = 0; i < m_events.size(); i++) 
+   for( uint i = 0; i < m_events.size(); i++)
       m_events[i]->unreference( this );
-   
+
    m_events.resize(0);
 }
 
@@ -91,9 +93,9 @@ void Cmd_CheckEventChain::execute (Game* g)
 	m_eventchain_id++;
 
 	log("Event Chain: looking if check is needed for eventchain %i\n", m_eventchain_id);
-	
+
    if(m_eventchain_id >= g->get_map()->get_mecm()->get_nr_eventchains()) {
-      // either we wrapped around the end of all eventchains 
+      // either we wrapped around the end of all eventchains
       // if so, restart. if there are no eventchains at all,
       // requeue in about 30 seconds to check if this state has changed
       // (a new trigger could be registered) (this should only happen at the beginning
@@ -108,10 +110,10 @@ void Cmd_CheckEventChain::execute (Game* g)
          return;
       }
    }
-	
+
 	EventChain* evchain=g->get_map()->get_mecm()->get_eventchain_by_nr(m_eventchain_id);
 	assert( evchain );
-	
+
    log("Eventchain %s is going to get checked!\n", evchain->get_name());
 
    switch( evchain->get_state() ) {
@@ -124,14 +126,14 @@ void Cmd_CheckEventChain::execute (Game* g)
          }
       }
       break;
-      
+
       case EventChain::RUNNING:
       {
          // This chain is currently running. Continue to run it
          evchain->run( g );
       }
       break;
-      
+
       case EventChain::DONE:
       {
          // This shouldn't happen!
@@ -145,7 +147,7 @@ void Cmd_CheckEventChain::execute (Game* g)
       g->get_map()->get_mem()->delete_unreferenced_events();
       g->get_map()->get_mtm()->delete_unreferenced_triggers();
    }
-   
+
 	// recheck next in the time that all eventchains get checked at least once ever 10 seconds
 	int delay=g->get_map()->get_mecm()->get_nr_eventchains() ? 1000/g->get_map()->get_mecm()->get_nr_eventchains() : 30000;
    log("Queueing recheck in %i milli-seconds\n", delay);
@@ -159,7 +161,7 @@ void Cmd_CheckEventChain::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands
    if(version==CMD_CHECK_EVENTCHAIN_VERSION) {
       // Read Base Commands
       BaseCommand::BaseCmdRead(fr,egbase,mol);
-   
+
       // eventchain id
       m_eventchain_id=fr->Unsigned16();
    } else

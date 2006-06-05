@@ -18,7 +18,8 @@
  */
 
 #include "error.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "network.h"
@@ -94,7 +95,7 @@ PlayerCommand* PlayerCommand::deserialize (Deserializer* des)
 void PlayerCommand::PlayerCmdWrite(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) {
    // First, write version
    fw->Unsigned16(PLAYER_COMMAND_VERSION);
-      
+
    BaseCommand::BaseCmdWrite(fw,egbase,mos);
    // Now sender
    fw->Unsigned8(sender);
@@ -150,7 +151,7 @@ void Cmd_Bulldoze::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(serial);
    assert(mos->is_object_known(obj));
-   fw->Unsigned32(mos->get_object_file_index(obj)); 
+   fw->Unsigned32(mos->get_object_file_index(obj));
 }
 
 /*** class Cmd_Build ***/
@@ -195,8 +196,8 @@ void Cmd_Build::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Map_Map
    fw->Unsigned16(PLAYER_CMD_BUILD_VERSION);
    // Write base classes
    PlayerCommand::PlayerCmdWrite(fw, egbase, mos);
-   // Now id 
-   fw->Unsigned16(id); 
+   // Now id
+   fw->Unsigned16(id);
    // Now Coords
    fw->Unsigned16(coords.x);
    fw->Unsigned16(coords.y);
@@ -254,19 +255,19 @@ Cmd_BuildRoad::Cmd_BuildRoad (int t, int p, Path* pa):PlayerCommand(t,p)
 	nsteps=path->get_nsteps();
 	steps=0;
 }
-	
+
 Cmd_BuildRoad::Cmd_BuildRoad (Deserializer* des):PlayerCommand (0, des->getchar())
 {
 	int i;
-	
+
 	start.x=des->getshort();
 	start.y=des->getshort();
 	nsteps=des->getshort();
-	
+
 	// we cannot completely deserialize the path here because we don't have a Map
 	path=0;
 	steps=new char[nsteps];
-	
+
 	for (i=0;i<nsteps;i++)
 	    steps[i]=des->getchar();
 }
@@ -275,7 +276,7 @@ Cmd_BuildRoad::~Cmd_BuildRoad ()
 {
 	if (path!=0)
 		delete path;
-	
+
 	if (steps!=0)
 		delete[] steps;
 }
@@ -284,12 +285,12 @@ void Cmd_BuildRoad::execute (Game* g)
 {
 	if (path==0) {
 		assert (steps!=0);
-		
+
 		path=new Path(g->get_map(), start);
 		for (int i=0; i<nsteps; i++)
 			path->append (steps[i]);
 	}
-	
+
 	Player *player = g->get_player(get_sender());
 	player->build_road(path);
 }
@@ -301,9 +302,9 @@ void Cmd_BuildRoad::serialize (Serializer* ser)
 	ser->putshort (start.x);
 	ser->putshort (start.y);
 	ser->putshort (nsteps);
-	
+
 	assert (path!=0 || steps!=0);
-	
+
 	for (int i=0;i<nsteps;i++)
 		ser->putchar (path ? path->get_step(i) : steps[i]);
 }
@@ -319,7 +320,7 @@ void Cmd_BuildRoad::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_M
       // Now read nsteps
       nsteps=fr->Unsigned16();
       steps= new char[nsteps];
-      
+
       for (int i=0;i<nsteps;i++)
          steps[i]=fr->Unsigned8();
    } else
@@ -369,7 +370,7 @@ void Cmd_FlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_
    if(version==PLAYER_CMD_FLAGACTION_VERSION) {
       // Read Player Command
       PlayerCommand::PlayerCmdRead(fr,egbase,mol);
-   
+
       // action
       action=fr->Unsigned8();
 
@@ -391,7 +392,7 @@ void Cmd_FlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_Ma
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(serial);
    assert(mos->is_object_known(obj));
-   fw->Unsigned32(mos->get_object_file_index(obj)); 
+   fw->Unsigned32(mos->get_object_file_index(obj));
 }
 
 /*** Cmd_StartStopBuilding ***/
@@ -422,7 +423,7 @@ void Cmd_StartStopBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelan
    if(version==PLAYER_CMD_STOPBUILDING_VERSION) {
       // Read Player Command
       PlayerCommand::PlayerCmdRead(fr,egbase,mol);
-   
+
       // Serial
       int fileserial=fr->Unsigned32();
       assert(mol->is_object_known(fileserial));
@@ -439,7 +440,7 @@ void Cmd_StartStopBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widel
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(serial);
    assert(mos->is_object_known(obj));
-   fw->Unsigned32(mos->get_object_file_index(obj)); 
+   fw->Unsigned32(mos->get_object_file_index(obj));
 }
 
 
@@ -473,7 +474,7 @@ void Cmd_EnhanceBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands
    if(version==PLAYER_CMD_ENHANCEBUILDING_VERSION) {
       // Read Player Command
       PlayerCommand::PlayerCmdRead(fr,egbase,mol);
-   
+
       // Serial
       int fileserial=fr->Unsigned32();
       assert(mol->is_object_known(fileserial));
@@ -481,7 +482,7 @@ void Cmd_EnhanceBuilding::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands
 
       // id
       id=fr->Unsigned16();
-      
+
    } else
       throw wexception("Unknown version in Cmd_EnhanceBuilding::Read: %i", version);
 }
@@ -494,7 +495,7 @@ void Cmd_EnhanceBuilding::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(serial);
    assert(mos->is_object_known(obj));
-   fw->Unsigned32(mos->get_object_file_index(obj)); 
+   fw->Unsigned32(mos->get_object_file_index(obj));
 
    // Now id
 	fw->Unsigned16(id);
@@ -544,7 +545,7 @@ void Cmd_ChangeTrainingOptions::Read(FileRead* fr, Editor_Game_Base* egbase, Wid
 
       // Attibute
 		attribute=fr->Unsigned16();
-      
+
 		// Attibute
 		value=fr->Unsigned16();
 	} else
@@ -561,7 +562,7 @@ void Cmd_ChangeTrainingOptions::Write(FileWrite *fw, Editor_Game_Base* egbase, W
 	// Now serial
 	Map_Object* obj=egbase->get_objects()->get_object(serial);
 	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj)); 
+	fw->Unsigned32(mos->get_object_file_index(obj));
 
 	// Now attribute
 	fw->Unsigned16(attribute);
@@ -629,7 +630,7 @@ void Cmd_DropSoldier::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelands_M
 	// Now serial
 	Map_Object* obj=egbase->get_objects()->get_object(serial);
 	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj)); 
+	fw->Unsigned32(mos->get_object_file_index(obj));
 
 	// Now soldier serial
 	obj=egbase->get_objects()->get_object(serial);
@@ -691,7 +692,7 @@ void Cmd_ChangeSoldierCapacity::Write(FileWrite *fw, Editor_Game_Base* egbase, W
 	// Now serial
 	Map_Object* obj=egbase->get_objects()->get_object(serial);
 	assert(mos->is_object_known(obj));
-	fw->Unsigned32(mos->get_object_file_index(obj)); 
+	fw->Unsigned32(mos->get_object_file_index(obj));
 
 	// Now capacity
 	fw->Unsigned16(val);
@@ -715,16 +716,16 @@ void Cmd_EnemyFlagAction::execute (Game* g)
 	Player* player = g->get_player(get_sender());
 	Map_Object* obj = g->get_objects()->get_object(serial);
    PlayerImmovable* imm = static_cast<PlayerImmovable*>(obj);
-   
+
    Player* real_player = g->get_player(attacker);
 
-   log("player(%d)    imm->get_owner (%d)   real_player (%d)\n", 
+   log("player(%d)    imm->get_owner (%d)   real_player (%d)\n",
       player->get_player_number(),
       imm->get_owner()->get_player_number(),
       real_player->get_player_number());
-   
+
 	if (obj &&
-       obj->get_type() == Map_Object::FLAG && 
+       obj->get_type() == Map_Object::FLAG &&
        imm->get_owner() != real_player)
 		real_player->enemyflagaction (static_cast<Flag*>(obj), action, attacker, number, type);
    else
@@ -747,15 +748,15 @@ void Cmd_EnemyFlagAction::Read(FileRead* fr, Editor_Game_Base* egbase, Widelands
    if(version==PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
       // Read Player Command
       PlayerCommand::PlayerCmdRead(fr,egbase,mol);
-   
+
       // action
       action=fr->Unsigned8();
-      
+
       // Serial
       int fileserial=fr->Unsigned32();
       assert(mol->is_object_known(fileserial));
       serial=mol->get_object_by_file_index(fileserial)->get_serial();
-      
+
       // param
       attacker=fr->Unsigned8();
       number=fr->Unsigned8();
@@ -774,8 +775,8 @@ void Cmd_EnemyFlagAction::Write(FileWrite *fw, Editor_Game_Base* egbase, Widelan
    // Now serial
    Map_Object* obj=egbase->get_objects()->get_object(serial);
    assert(mos->is_object_known(obj));
-   fw->Unsigned32(mos->get_object_file_index(obj)); 
-   
+   fw->Unsigned32(mos->get_object_file_index(obj));
+
    // Now param
    fw->Unsigned8(attacker);
    fw->Unsigned8(number);

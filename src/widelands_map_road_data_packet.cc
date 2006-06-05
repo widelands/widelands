@@ -18,7 +18,8 @@
  */
 
 #include <map>
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
@@ -41,7 +42,7 @@ Widelands_Map_Road_Data_Packet::~Widelands_Map_Road_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Road_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -77,9 +78,9 @@ void Widelands_Map_Road_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egba
  * Write Function
  */
 void Widelands_Map_Road_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   
-   FileWrite fw; 
-   
+
+   FileWrite fw;
+
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
@@ -89,7 +90,7 @@ void Widelands_Map_Road_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egb
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
-         // We only write Roads 
+         // We only write Roads
          if(immovable && immovable->get_type()==Map_Object::ROAD) {
             Road* road=static_cast<Road*>(immovable);
 
@@ -102,7 +103,7 @@ void Widelands_Map_Road_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egb
             fw.Unsigned32(serial);
 
             log("ROAD: writing at (%i,%i): %i\n", x, y, serial);
-         } 
+         }
       }
    }
    fw.Unsigned32(0xffffffff);

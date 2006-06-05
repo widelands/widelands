@@ -34,6 +34,7 @@
 #include "i18n.h"
 #include <iostream>
 #include "journal.h"
+#include "layeredfilesystem.h"
 #include "network.h"
 #include "network_ggz.h"
 #include "profile.h"

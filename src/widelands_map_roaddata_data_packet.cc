@@ -21,7 +21,8 @@
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "map.h"
 #include "player.h"
@@ -43,7 +44,7 @@ Widelands_Map_Roaddata_Data_Packet::~Widelands_Map_Roaddata_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Roaddata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -70,8 +71,8 @@ void Widelands_Map_Roaddata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
          assert(!ol->is_object_loaded(r));
 
          Player* plr = egbase->get_safe_player(fr.Unsigned8());
-         assert(plr); 
-         
+         assert(plr);
+
          r->set_owner(plr);
          r->m_type=fr.Unsigned32();
          ser=fr.Unsigned32();
@@ -104,13 +105,13 @@ void Widelands_Map_Roaddata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
          if(carrierid) {
             assert(ol->is_object_known(carrierid));
             r->m_carrier=ol->get_object_by_file_index(carrierid);
-         } else 
+         } else
             r->m_carrier=0;
 
          if(r->m_carrier_request) {
             delete r->m_carrier_request;
             r->m_carrier_request=0;
-         } 
+         }
 
          bool request_exists=fr.Unsigned8();
          if(request_exists) {
@@ -131,7 +132,7 @@ void Widelands_Map_Roaddata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Roaddata_Data_Packet!\n", packet_version);
-   
+
    assert( 0 );
 }
 
@@ -141,7 +142,7 @@ void Widelands_Map_Roaddata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
  */
 void Widelands_Map_Roaddata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
    FileWrite fw;
-   
+
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
@@ -152,17 +153,17 @@ void Widelands_Map_Roaddata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
          Field* f=map->get_field(Coords(x,y));
          BaseImmovable* imm=f->get_immovable();
          if(!imm) continue;
-         
+
          if(imm->get_type()==Map_Object::ROAD) {
             Road* r=static_cast<Road*>(imm);
             assert(os->is_object_known(r));
-            if(os->is_object_saved(r)) 
+            if(os->is_object_saved(r))
                continue;
             uint ser=os->get_object_file_index(r);
-           
+
             // First, write serial
             fw.Unsigned32(ser);
-            
+
             // First, write PlayerImmovable Stuff
             // Theres only the owner
             fw.Unsigned8(r->get_owner()->get_player_number());
@@ -187,7 +188,7 @@ void Widelands_Map_Roaddata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
             // Path
             fw.Unsigned16(r->m_path.get_nsteps());
             int i=0;
-            for(i=0; i<r->m_path.get_nsteps(); i++) 
+            for(i=0; i<r->m_path.get_nsteps(); i++)
                fw.Unsigned8(r->m_path.get_step(i));
 
             // Idle index
@@ -200,22 +201,22 @@ void Widelands_Map_Roaddata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
             if(r->m_carrier.get(egbase)) {
                assert(os->is_object_known(r->m_carrier.get(egbase)));
                fw.Unsigned32(os->get_object_file_index(r->m_carrier.get(egbase)));
-            } else { 
+            } else {
                fw.Unsigned32(0);
             }
 
-            // Request 
-            if(r->m_carrier_request) { 
+            // Request
+            if(r->m_carrier_request) {
                fw.Unsigned8(1);
                r->m_carrier_request->Write(&fw, egbase, os);
-            } else 
+            } else
                fw.Unsigned8(0);
 
             os->mark_object_as_saved(r);
          }
       }
    }
-  
+
    fw.Unsigned32(0xFFFFFFFF); // End of roads
    // DONE
 

@@ -28,6 +28,7 @@
 #include "game.h"
 #include "graphic.h"
 #include "interactive_base.h"
+#include "layeredfilesystem.h"
 #include "map.h"
 #include "militarysite.h"
 #include "player.h"
@@ -44,7 +45,6 @@
 #include "wlapplication.h"
 
 static const int BUILDING_LEAVE_INTERVAL = 1000;
-
 
 /*
 ==============================================================================

@@ -21,7 +21,7 @@
 #include "error.h"
 #include "event.h"
 #include "event_factory.h"
-#include "filesystem.h"
+#include "fileread.h"
 #include "map.h"
 #include "map_event_manager.h"
 #include "profile.h"
@@ -44,11 +44,11 @@ Widelands_Map_Event_Data_Packet::~Widelands_Map_Event_Data_Packet(void) {
 void Widelands_Map_Event_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    if( skip )
       return;
-  
-   
+
+
    // Skip, if no events saved
    FileRead fr;
-   if( !fr.TryOpen( fs, "event" )) 
+   if( !fr.TryOpen( fs, "event" ))
       return;
 
    Profile prof;
@@ -67,7 +67,7 @@ void Widelands_Map_Event_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egb
          if( state == "init") e->m_state = Event::INIT;
          else if( state == "running") e->m_state = Event::RUNNING;
          else if( state == "done") e->m_state = Event::DONE;
-         
+
          e->Read( s, egbase );
          egbase->get_map()->get_mem()->register_new_event( e );
       }
@@ -98,7 +98,7 @@ void Widelands_Map_Event_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* eg
       }
       e->Write(s, egbase);
    }
-   
+
    prof.write("event", false, fs );
 
    // done

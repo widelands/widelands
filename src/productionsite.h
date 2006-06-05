@@ -20,12 +20,13 @@
 #ifndef PRODUCTIONSITE_H
 #define PRODUCTIONSITE_H
 
+#include "building.h"
 #include <map>
 #include <set>
 #include <string>
-#include <vector>
-#include "building.h"
 #include "types.h"
+#include <vector>
+#include "wexception.h"
 
 class Input;
 class ProductionProgram;
@@ -36,7 +37,7 @@ class WaresQueue;
 
 /**
  * Every building that is part of the economics system is a production site.
- * 
+ *
  * A production site has a worker.
  * A production site can have one (or more) output wares types (in theory it
  * should be possible to burn wares for some virtual result such as "mana", or
@@ -53,7 +54,7 @@ public:
       std::string name;
       int how_many;
    };
-	
+
    ProductionSite_Descr(Tribe_Descr* tribe, const char* name);
 	virtual ~ProductionSite_Descr();
 
@@ -89,7 +90,7 @@ public:
 
 	virtual std::string get_statistics_string();
    char get_statistics_percent( void ) { return m_last_stat_percent; }
-   
+
    virtual int get_building_type(void) { return Building::PRODUCTIONSITE; }
 	virtual void init(Editor_Game_Base* g);
 	virtual void cleanup(Editor_Game_Base* g);
@@ -137,7 +138,7 @@ protected:
 
 	void calc_statistics();
 	bool can_start_working(void);
-	void set_post_timer (int t) { m_post_timer = t; }	
+	void set_post_timer (int t) { m_post_timer = t; }
 
 protected:  // TrainingSite must have access to this stuff
    std::vector<Request*> m_worker_requests;

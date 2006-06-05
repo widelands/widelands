@@ -18,7 +18,8 @@
  */
 
 #include <map>
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
@@ -28,7 +29,7 @@
 #include "widelands_map_bob_data_packet.h"
 #include "error.h"
 
-// VERSION 1: 
+// VERSION 1:
 //   - workers are also handled here, registering through Map_Object_Loader/Saver
 #define CURRENT_PACKET_VERSION 1
 
@@ -43,7 +44,7 @@ Widelands_Map_Bob_Data_Packet::~Widelands_Map_Bob_Data_Packet(void) {
  */
 void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception) {
 
-   FileRead fr; 
+   FileRead fr;
    fr.Open( fs, "binary/bob" );
 
    Map* map=egbase->get_map();
@@ -56,39 +57,39 @@ void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbas
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
             uint nr_bobs=fr.Unsigned32();
-      
+
             uint i=0;
 
             assert(!egbase->get_map()->get_field(Coords(x,y))->get_first_bob());
-            
+
             for(i=0;i<nr_bobs;i++) {
                std::string owner=fr.CString();
                std::string name=fr.CString();
                uchar subtype=fr.Unsigned8();
-               
+
                uint reg=fr.Unsigned32();
                assert(!mol->is_object_known(reg));
 
                Bob* bob=0;
-               if(subtype != Bob::CRITTER && subtype != Bob::WORKER) 
+               if(subtype != Bob::CRITTER && subtype != Bob::WORKER)
                   throw wexception("Unknown bob type %i in Widelands_Map_Bob_Data_Packet!\n", subtype);
 
                if(owner=="world") {
                   if(subtype!=Bob::CRITTER)
                      throw wexception("world bob is not a critter!\n");
                   int idx=egbase->get_map()->get_world()->get_bob(name.c_str());
-                  if(idx==-1) 
+                  if(idx==-1)
                      throw wexception("Map defines Bob %s, but world doesn't deliver!\n", name.c_str());
                   bob=egbase->create_bob(Coords(x,y),idx);
                } else {
-                  if(skip) continue; // We do no load player bobs when no scenario 
-                  egbase->manually_load_tribe(owner.c_str()); // Make sure that the correct tribe is known and loaded 
+                  if(skip) continue; // We do no load player bobs when no scenario
+                  egbase->manually_load_tribe(owner.c_str()); // Make sure that the correct tribe is known and loaded
                   Tribe_Descr* tribe=egbase->get_tribe(owner.c_str());
-                  if(!tribe) 
+                  if(!tribe)
                      throw wexception("Map asks for Tribe %s, but world doesn't deliver!\n", owner.c_str());
                   if(subtype==Bob::WORKER) {
                      int idx=tribe->get_worker_index(name.c_str());
-                     if(idx==-1) 
+                     if(idx==-1)
                         throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
                      Worker_Descr* descr=tribe->get_worker_descr(idx);
                      bob=descr->create_object();
@@ -96,12 +97,12 @@ void Widelands_Map_Bob_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbas
                      bob->init(egbase);
                   } else if(subtype==Bob::CRITTER) {
                      int idx=tribe->get_bob(name.c_str());
-                     if(idx==-1) 
+                     if(idx==-1)
                         throw wexception("Map defines Bob %s, but tribe %s doesn't deliver!\n", name.c_str(), owner.c_str());
-                     bob=egbase->create_bob(Coords(x,y),idx,tribe); 
+                     bob=egbase->create_bob(Coords(x,y),idx,tribe);
                   }
                }
-            
+
                assert(bob);
 
                // Register the bob for further loading
@@ -128,7 +129,7 @@ void Widelands_Map_Bob_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egba
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-   // Now, all bob id and registerd it 
+   // Now, all bob id and registerd it
    // A Field can have more
    // than one bob, we have to take this into account
    //  uchar   numbers of bob for field
@@ -140,7 +141,7 @@ void Widelands_Map_Bob_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egba
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
             std::vector<Bob*> bobarr;
-         
+
             egbase->get_map()->find_bobs(Coords(x,y), 0, &bobarr);
             fw.Unsigned32(bobarr.size());
 
@@ -155,7 +156,7 @@ void Widelands_Map_Bob_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egba
                   }
                }
             }
- 
+
             for(uint i=0;i<bobarr.size(); i++) {
                // write serial number
                assert(!mos->is_object_known(bobarr[i])); // a bob can't be owned by two fields

@@ -21,7 +21,8 @@
 #include "bob.h"
 #include "critter_bob.h"
 #include "critter_bob_program.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "map.h"
 #include "player.h"
@@ -54,7 +55,7 @@ Widelands_Map_Bobdata_Data_Packet::~Widelands_Map_Bobdata_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -64,7 +65,7 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
       // not there, so skip
       return ;
    }
- 
+
    // First packet version
    int packet_version=fr.Unsigned16();
 
@@ -78,11 +79,11 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
 
          uchar read_owner=fr.Unsigned8();
          Player* plr_owner=0;
-         if(read_owner) { 
+         if(read_owner) {
             plr_owner=egbase->get_safe_player(read_owner);
             assert(plr_owner); // He must be there
          }
-         
+
          Coords pos;
          pos.x=fr.Unsigned16();
          pos.y=fr.Unsigned16();
@@ -102,17 +103,17 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
 
          //         if(!have_transfer)
          //           bob->reset_tasks(static_cast<Game*>(egbase));
-         //           
+         //
          bob->m_actid=fr.Unsigned32();
 
          // Animation
-         if(fr.Unsigned8()) { 
+         if(fr.Unsigned8()) {
             bob->m_anim=bob->get_descr()->get_animation(fr.CString());
-         } else 
+         } else
             bob->m_anim=0;
          bob->m_animstart=fr.Signed32();
 
-         // walking 
+         // walking
          bob->m_walking=(Map_Object::WalkingDir)fr.Signed32();
          bob->m_walkstart=fr.Signed32();
          bob->m_walkend=fr.Signed32();
@@ -125,32 +126,32 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
 
             // Task
             std::string taskname=fr.CString();
-            if(taskname=="idle") task=&Bob::taskIdle; 
-            else if(taskname=="movepath") task=&Bob::taskMovepath;  
-            else if(taskname=="forcemove") task=&Bob::taskForcemove; 
-            else if(taskname=="roam") task=&Critter_Bob::taskRoam; 
+            if(taskname=="idle") task=&Bob::taskIdle;
+            else if(taskname=="movepath") task=&Bob::taskMovepath;
+            else if(taskname=="forcemove") task=&Bob::taskForcemove;
+            else if(taskname=="roam") task=&Critter_Bob::taskRoam;
             else if(taskname=="program") {
-               if(bob->get_bob_type()==Bob::WORKER) 
-                  task=&Worker::taskProgram; 
+               if(bob->get_bob_type()==Bob::WORKER)
+                  task=&Worker::taskProgram;
                else
-                  task=&Critter_Bob::taskProgram; 
-            } else if(taskname=="transfer") task=&Worker::taskTransfer; 
-            else if(taskname=="buildingwork") task=&Worker::taskBuildingwork; 
-            else if(taskname=="return") task=&Worker::taskReturn; 
-            else if(taskname=="gowarehouse") task=&Worker::taskGowarehouse; 
-            else if(taskname=="dropoff") task=&Worker::taskDropoff; 
-            else if(taskname=="fetchfromflag") task=&Worker::taskFetchfromflag; 
-            else if(taskname=="waitforcapacity") task=&Worker::taskWaitforcapacity; 
-            else if(taskname=="leavebuilding") task=&Worker::taskLeavebuilding; 
-            else if(taskname=="fugitive") task=&Worker::taskFugitive; 
-            else if(taskname=="geologist") task=&Worker::taskGeologist; 
-            else if(taskname=="road") task=&Carrier::taskRoad; 
+                  task=&Critter_Bob::taskProgram;
+            } else if(taskname=="transfer") task=&Worker::taskTransfer;
+            else if(taskname=="buildingwork") task=&Worker::taskBuildingwork;
+            else if(taskname=="return") task=&Worker::taskReturn;
+            else if(taskname=="gowarehouse") task=&Worker::taskGowarehouse;
+            else if(taskname=="dropoff") task=&Worker::taskDropoff;
+            else if(taskname=="fetchfromflag") task=&Worker::taskFetchfromflag;
+            else if(taskname=="waitforcapacity") task=&Worker::taskWaitforcapacity;
+            else if(taskname=="leavebuilding") task=&Worker::taskLeavebuilding;
+            else if(taskname=="fugitive") task=&Worker::taskFugitive;
+            else if(taskname=="geologist") task=&Worker::taskGeologist;
+            else if(taskname=="road") task=&Carrier::taskRoad;
             else if(taskname=="transport") task=&Carrier::taskTransport;
-            else if(taskname=="launchattack") task=&Soldier::taskLaunchAttack; 
-            else if(taskname=="defendbuilding") task=&Soldier::taskDefendBuilding; 
-            else if(taskname=="waitforassault") task=&Soldier::taskWaitForAssault; 
+            else if(taskname=="launchattack") task=&Soldier::taskLaunchAttack;
+            else if(taskname=="defendbuilding") task=&Soldier::taskDefendBuilding;
+            else if(taskname=="waitforassault") task=&Soldier::taskWaitForAssault;
             else if(taskname=="") continue; // Skip task
-            else 
+            else
                throw wexception("Unknown task %s in file!\n", taskname.c_str());
 
             s->task=task;
@@ -200,14 +201,14 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
             if(s->transfer && i<oldstacksize && !trans)
                delete s->transfer;
 
-            if(s->task==&Worker::taskGowarehouse || s->task==&Worker::taskTransfer) 
+            if(s->task==&Worker::taskGowarehouse || s->task==&Worker::taskTransfer)
                s->transfer=trans;
             else
                s->transfer=0;
 
             bool route=fr.Unsigned8();
             if(s->route && i<oldstacksize)
-               if(!route) 
+               if(!route)
                   delete s->route;
                else
                   s->route->clear();
@@ -216,7 +217,7 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
                Route* route;
                if(!s->route)
                   route=new Route();
-               else 
+               else
                   route=s->route;
                route->m_totalcost=fr.Signed32();
                int nsteps=fr.Unsigned16();
@@ -228,18 +229,18 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
                }
                s->route=route;
                route->verify(static_cast<Game*>(egbase));
-            } else 
+            } else
                s->route=0;
 
             // Now programm
             bool program=fr.Unsigned8();
             if(program) {
                std::string progname=fr.CString();
-               if(bob->get_bob_type()==Bob::WORKER) 
+               if(bob->get_bob_type()==Bob::WORKER)
                   s->program=static_cast<Worker*>(bob)->get_descr()->get_program(progname);
                else
                   s->program=static_cast<Critter_Bob*>(bob)->get_descr()->get_program(progname);
-            } else 
+            } else
                s->program=0;
          }
 
@@ -260,7 +261,7 @@ void Widelands_Map_Bobdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Bobdata_Data_Packet!\n", packet_version);
-   
+
    assert(0); // Never here
 }
 
@@ -269,8 +270,8 @@ void Widelands_Map_Bobdata_Data_Packet::read_critter_bob(FileRead* fr, Editor_Ga
 
    if(version==CRITTER_BOB_PACKET_VERSION) {
       // No data for critter bob currently
-   } else 
-      throw wexception("Unknown version %i in Critter Bob Subpacket!\n", version); 
+   } else
+      throw wexception("Unknown version %i in Critter Bob Subpacket!\n", version);
 }
 
 void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Loader* ol, Worker* worker) {
@@ -279,7 +280,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
    if(version==WORKER_BOB_PACKET_VERSION) {
       switch(worker->get_worker_type()) {
          case Worker_Descr::NORMAL: break;
-         case Worker_Descr::SOLDIER: 
+         case Worker_Descr::SOLDIER:
          {
             int soldierversion=fr->Unsigned16();
             if(soldierversion==SOLDIER_WORKER_BOB_PACKET_VERSION) {
@@ -306,12 +307,12 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
             int carrierversion=fr->Unsigned16();
             if(carrierversion==CARRIER_WORKER_BOB_PACKET_VERSION) {
                Carrier* c=static_cast<Carrier*>(worker);
-               c->m_acked_ware=fr->Signed32();         
+               c->m_acked_ware=fr->Signed32();
             }
          }
          break;
          default: throw wexception("Unknown Worker %i in Widelands_Map_Bobdata_Data_Packet::read_worker_bob()\n", worker->get_worker_type());
-      } 
+      }
 
       // location
       uint reg=fr->Unsigned32();
@@ -322,7 +323,7 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
       } else
          worker->m_location=0;
 
-      
+
       // Carried item
       reg=fr->Unsigned32();
       if(reg) {
@@ -337,16 +338,16 @@ void Widelands_Map_Bobdata_Data_Packet::read_worker_bob(FileRead* fr, Editor_Gam
       worker->m_current_exp=fr->Signed32();
 
       Economy* eco=0;
-      if(worker->m_location.get(egbase)) 
+      if(worker->m_location.get(egbase))
          eco=static_cast<PlayerImmovable*>(worker->m_location.get(egbase))->get_economy();
-      
+
       worker->set_economy(eco);
       if(worker->m_carried_item.get(egbase))
          static_cast<WareInstance*>(worker->m_carried_item.get(egbase))->set_economy(eco);
 
 
-   } else 
-      throw wexception("Unknown version %i in Worker Bob Subpacket!\n", version); 
+   } else
+      throw wexception("Unknown version %i in Worker Bob Subpacket!\n", version);
 }
 
 /*
@@ -374,7 +375,7 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
                   bobarr[i] = jbob;
                   bobarr[j] = ibob;
                   ibob=jbob;
-               } 
+               }
             }
          }
 
@@ -386,9 +387,9 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
             fw.Unsigned32(reg);
             // BOB STUFF
 
-            if(bob->m_owner) 
+            if(bob->m_owner)
                fw.Unsigned8(bob->m_owner->get_player_number());
-            else 
+            else
                fw.Unsigned8(0);
 
             // m_position
@@ -399,7 +400,7 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
             // m_linknext, linkpprev are handled automatically
 
             // Are we currently transfering?
-            if(bob->m_stack.size() && bob->m_stack[0].transfer) 
+            if(bob->m_stack.size() && bob->m_stack[0].transfer)
                fw.Unsigned8(1);
             else
                fw.Unsigned8(0);
@@ -410,7 +411,7 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
             if(bob->m_anim) {
                fw.Unsigned8(1);
                fw.CString(bob->get_descr()->get_animation_name(bob->m_anim).c_str());
-            } else 
+            } else
                fw.Unsigned8(0);
             fw.Signed32(bob->m_animstart);
 
@@ -440,7 +441,7 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
                if(obj) {
                   assert(os->is_object_known(obj));
                   fw.Unsigned32(os->get_object_file_index(obj));
-               } else 
+               } else
                   fw.Unsigned32(0);
 
                fw.CString(s->svar1.c_str());
@@ -457,7 +458,7 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
                   fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(4)).c_str());
                   fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(5)).c_str());
                   fw.CString(bob->get_descr()->get_animation_name(s->diranims->get_animation(6)).c_str());
-               } else 
+               } else
                   fw.Unsigned8(0);
 
                // Path
@@ -466,7 +467,7 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
                   Coords pstart=s->path->get_start();
                   fw.Unsigned16(pstart.x);
                   fw.Unsigned16(pstart.y);
-                  for(int i=0; i<s->path->get_nsteps(); i++) 
+                  for(int i=0; i<s->path->get_nsteps(); i++)
                      fw.Unsigned8(s->path->get_step(i));
                } else
                   fw.Unsigned16(0);
@@ -481,14 +482,14 @@ void Widelands_Map_Bobdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
                      assert(os->is_object_known(f));
                      fw.Unsigned32(os->get_object_file_index(f));
                   }
-               } else 
+               } else
                   fw.Unsigned8(0);
 
                // Programm
                if(s->program) {
                   fw.Unsigned8(1);
                   fw.CString(s->program->get_name().c_str());
-               } else 
+               } else
                   fw.Unsigned8(0);
 
 
@@ -524,7 +525,7 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
    fw->Unsigned16(WORKER_BOB_PACKET_VERSION);
 
    switch(worker->get_worker_type()) {
-      case Worker_Descr::NORMAL: break; 
+      case Worker_Descr::NORMAL: break;
       case Worker_Descr::SOLDIER:
       {
          fw->Unsigned16(SOLDIER_WORKER_BOB_PACKET_VERSION);
@@ -553,14 +554,14 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
       }
       break;
       default: throw wexception("Unknown Worker %i in Widelands_Map_Bobdata_Data_Packet::write_worker_bob()\n", worker->get_worker_type());
-   }                     
+   }
 
    // location
    Map_Object* loca=worker->m_location.get(egbase);
    if(loca) {
       assert(os->is_object_known(loca));
       fw->Unsigned32(os->get_object_file_index(loca));
-   } else 
+   } else
       fw->Unsigned32(0);
 
    // Economy is not our beer
@@ -575,11 +576,11 @@ void Widelands_Map_Bobdata_Data_Packet::write_worker_bob(FileWrite* fw, Editor_G
 
    //This is not needed
    // Write if a idle supply is to be created
-   //if(worker->m_supply) 
+   //if(worker->m_supply)
    //   fw->Unsigned8(1);
    //else
    //   fw->Unsigned8(0);
-   //   
+   //
 
    fw->Signed32(worker->m_needed_exp);
    fw->Signed32(worker->m_current_exp);

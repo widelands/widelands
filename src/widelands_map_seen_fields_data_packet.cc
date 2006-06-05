@@ -18,7 +18,8 @@
  */
 
 #include "widelands_map_seen_fields_data_packet.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
@@ -38,7 +39,7 @@ Widelands_Map_Seen_Fields_Data_Packet::~Widelands_Map_Seen_Fields_Data_Packet(vo
  * Read Function
  */
 void Widelands_Map_Seen_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -72,7 +73,7 @@ void Widelands_Map_Seen_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Bas
       return;
    }
    throw wexception("Unknown version in Widelands_Map_Seen_Fields_Data_Packet: %i\n", packet_version);
-   
+
    assert(0); // never here
 }
 
@@ -80,17 +81,17 @@ void Widelands_Map_Seen_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Bas
  * Write Function
  */
 void Widelands_Map_Seen_Fields_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   FileWrite fw; 
+   FileWrite fw;
 
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    /*
     * Seen fields are written as followed. The map
-    * is passed, for each field it is checked if it 
+    * is passed, for each field it is checked if it
     * is seen for every player. If it is, the players
     * corresponding bit it set to true. The corresponding
-    * bit is  (1 << (PLAYER_NUMBER-1)). This is written 
+    * bit is  (1 << (PLAYER_NUMBER-1)). This is written
     * out as Unsigned16 value, so if the allowed player
     * number is sometime bigger than 16, this packet needs
     * reworking
@@ -100,10 +101,10 @@ void Widelands_Map_Seen_Fields_Data_Packet::Write(FileSystem* fs, Editor_Game_Ba
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
          ushort data=0;
-         for(uint i=0; i<egbase->get_map()->get_nrplayers(); i++) { 
+         for(uint i=0; i<egbase->get_map()->get_nrplayers(); i++) {
             Player* plr=egbase->get_player(i+1);
-            if(plr && plr->is_field_seen(Coords(x,y))) 
-               data |= ( 1 << i ); 
+            if(plr && plr->is_field_seen(Coords(x,y)))
+               data |= ( 1 << i );
          }
 
          fw.Unsigned16(data);

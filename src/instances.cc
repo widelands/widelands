@@ -22,7 +22,8 @@
 #include <string>
 #include "cmd_queue.h"
 #include "error.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "queue_cmd_ids.h"

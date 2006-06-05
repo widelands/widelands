@@ -17,6 +17,8 @@
  *
  */
 
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "game_player_economies_data_packet.h"
 #include "player.h"
@@ -61,7 +63,7 @@ void Game_Player_Economies_Data_Packet::Read(FileSystem* fs, Game* game, Widelan
             assert(flag);
             ecos[j]=flag->get_economy();
          }
-         for(uint i=0; i<ecos.size(); i++) { 
+         for(uint i=0; i<ecos.size(); i++) {
             plr->m_economies[i]=ecos[i];
             ecos[i]->balance_requestsupply(); // Issue first balance
          }
@@ -70,7 +72,7 @@ void Game_Player_Economies_Data_Packet::Read(FileSystem* fs, Game* game, Widelan
       return;
    } else
       throw wexception("Unknown version in Game_Player_Economies_Data_Packet: %i\n", packet_version);
-   
+
    assert(0); // never here
 }
 
@@ -79,14 +81,14 @@ void Game_Player_Economies_Data_Packet::Read(FileSystem* fs, Game* game, Widelan
  */
 void Game_Player_Economies_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    FileWrite fw;
-   
+
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    bool done=false;
    for(uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
       Player* plr=game->get_player(i);
-      if(!plr) continue; 
+      if(!plr) continue;
       fw.Unsigned16(plr->m_economies.size());
       for(uint j=0; j<plr->m_economies.size(); j++) {
          done=false;

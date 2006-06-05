@@ -17,16 +17,17 @@
  *
  */
 
-#include <string>
-#include <iostream>
-#include <SDL_ttf.h>
+#include "error.h"
+#include "fileread.h"
 #include "font_handler.h"
 #include "font_loader.h"
-#include "wexception.h"
-#include "rgbcolor.h"
 #include "graphic.h"
-#include "error.h"
-#include "filesystem.h"
+#include <iostream>
+#include "layeredfilesystem.h"
+#include "rgbcolor.h"
+#include <SDL_ttf.h>
+#include <string>
+#include "wexception.h"
 
 Font_Handler* g_fh = 0; // the font handler
 
@@ -48,20 +49,20 @@ TTF_Font* Font_Loader::open_font(const std::string& name, int size) {
    std::string filename="fonts/";
    filename+=name;
 
-   // we must keep this File Read open, otherwise the 
+   // we must keep this File Read open, otherwise the
    // following calls are crashing. do not know why...
 	FileRead* fr=new FileRead();
    fr->Open(g_fs, filename);
-  
+
    m_freads.push_back( fr );
-   
+
    SDL_RWops* ops = SDL_RWFromMem(fr->Data(0), fr->GetSize());
-   if( !ops ) 
+   if( !ops )
       throw wexception("Couldn't load font!: RWops Pointer invalid\n");
-      
+
    TTF_Font* font = TTF_OpenFontIndexRW(ops, 1, size, 0);
 
-   if(!font) 
+   if(!font)
       throw wexception("Couldn't load font!: %s\n", TTF_GetError());
 	return font;
 }
@@ -73,7 +74,7 @@ TTF_Font* Font_Loader::open_font(const std::string& name, int size) {
 TTF_Font* Font_Loader::get_font(std::string name, int size) {
 	char buf[5];
 	snprintf(buf,sizeof(buf),"%i",size);
-	
+
 	std::string key_name = name+"-"+buf;
 	const std::map<std::string,TTF_Font*>::iterator it = m_font_table.find(key_name);
 	if(it != m_font_table.end()) {
@@ -87,9 +88,9 @@ TTF_Font* Font_Loader::get_font(std::string name, int size) {
 		return NULL;
 
 	TTF_SetFontStyle(font,TTF_STYLE_BOLD);
-	
+
 	m_font_table.insert(std::pair<std::string,TTF_Font*>(key_name,font));
-	
+
    return font;
 }
 
@@ -101,7 +102,7 @@ void Font_Loader::clear_fonts() {
 		TTF_CloseFont(i->second);
 	}
 	m_font_table.clear();
-   
+
    for( uint i = 0; i < m_freads.size(); i++)
       delete m_freads[i];
    m_freads.resize(0);

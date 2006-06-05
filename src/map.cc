@@ -18,21 +18,21 @@
  */
 
 #include <algorithm>
-#include <stdio.h>
-#include "overlay_manager.h"
-#include "filesystem.h"
+#include "error.h"
+#include "layeredfilesystem.h"
 #include "map.h"
 #include "map_event_manager.h"
 #include "map_eventchain_manager.h"
 #include "map_variable_manager.h"
 #include "map_objective_manager.h"
 #include "map_trigger_manager.h"
+#include "overlay_manager.h"
 #include "player.h"
+#include "s2map.h"
+#include <stdio.h>
+#include "widelands_map_loader.h"
 #include "world.h"
 #include "worlddata.h"
-#include "widelands_map_loader.h"
-#include "s2map.h"
-#include "error.h"
 
 /**
  * Callback function for font renderer.

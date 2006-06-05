@@ -18,7 +18,8 @@
  */
 
 #include <map>
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
@@ -43,7 +44,7 @@ Widelands_Map_Immovabledata_Data_Packet::~Widelands_Map_Immovabledata_Data_Packe
  * Read Function
  */
 void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -53,13 +54,13 @@ void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_B
       // not there, so skip
       return ;
    }
-   
+
    // First packet version
    int packet_version=fr.Unsigned16();
 
    if(packet_version==CURRENT_PACKET_VERSION) {
       while(1) {
-         uint reg=fr.Unsigned32();      
+         uint reg=fr.Unsigned32();
          if(reg==0xffffffff) break; // Last immovable
 
          assert(ol->is_object_known(reg));
@@ -70,7 +71,7 @@ void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_B
          imm->m_animstart=fr.Signed32();
 
          // Programm
-         if(fr.Unsigned8()) 
+         if(fr.Unsigned8())
             imm->m_program=imm->get_descr()->get_program(fr.CString());
          else
             imm->m_program=0;
@@ -83,7 +84,7 @@ void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_B
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Immovabledata_Data_Packet!\n", packet_version);
-   
+
    assert( 0 );
 }
 
@@ -92,7 +93,7 @@ void Widelands_Map_Immovabledata_Data_Packet::Read(FileSystem* fs, Editor_Game_B
  * Write Function
  */
 void Widelands_Map_Immovabledata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   FileWrite fw; 
+   FileWrite fw;
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
@@ -101,8 +102,8 @@ void Widelands_Map_Immovabledata_Data_Packet::Write(FileSystem* fs, Editor_Game_
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
-        
-         // We do not write player immovables 
+
+         // We do not write player immovables
          if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
             assert(os->is_object_known(immovable));
             Immovable* imm=static_cast<Immovable*>(immovable);
@@ -110,7 +111,7 @@ void Widelands_Map_Immovabledata_Data_Packet::Write(FileSystem* fs, Editor_Game_
             fw.Unsigned32(os->get_object_file_index(imm));
 
             // My position is not needed, set on creation
-             
+
             // Animations
             fw.CString(imm->get_descr()->get_animation_name(imm->m_anim).c_str());
             fw.Signed32(imm->m_animstart);
@@ -123,14 +124,14 @@ void Widelands_Map_Immovabledata_Data_Packet::Write(FileSystem* fs, Editor_Game_
                fw.Unsigned8(0);
             fw.Unsigned32(imm->m_program_ptr);
             fw.Signed32(imm->m_program_step);
-         
+
             os->mark_object_as_saved(imm);
          }
       }
    }
 
    fw.Unsigned32(0xffffffff);
-   
+
    fw.Write( fs, "binary/immovable_data" );
    // DONE
 }

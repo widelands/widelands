@@ -18,11 +18,12 @@
  */
 
 #include "cmd_queue.h"
+#include "error.h"
 #include "game.h"
 #include "game_cmd_queue_data_packet.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "queue_cmd_factory.h"
-#include "error.h"
-
 
 #define CURRENT_PACKET_VERSION 1
 
@@ -36,7 +37,7 @@ Game_Cmd_Queue_Data_Packet::~Game_Cmd_Queue_Data_Packet(void) {
  * Read Function
  */
 void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader* mol) throw(wexception) {
-   FileRead fr; 
+   FileRead fr;
    fr.Open( fs, "binary/cmd_queue" );
 
    // read packet version
@@ -77,7 +78,7 @@ void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_
       return;
    } else
       throw wexception("Unknown version in Game_Cmd_Queue_Data_Packet: %i\n", packet_version);
-   
+
    assert(0); // never here
 }
 
@@ -86,14 +87,14 @@ void Game_Cmd_Queue_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_
  */
 void Game_Cmd_Queue_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver* mos) throw(wexception) {
    FileWrite fw;
-   
+
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    Cmd_Queue* cmdq=game->get_cmdqueue();
 
    // nothing to be done for m_game
-   
+
    // Next serial
    fw.Unsigned32(cmdq->nextserial);
 
@@ -102,17 +103,17 @@ void Game_Cmd_Queue_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map
 
    // Write all commands
    std::priority_queue<Cmd_Queue::cmditem> p;
-   
+
    // Make a copy, so we can pop stuff
    p=cmdq->m_cmds;
-   
+
    assert(p.top().serial==cmdq->m_cmds.top().serial);
    assert(p.top().cmd==cmdq->m_cmds.top().cmd);
 
    while(p.size()) {
       // Serial number
       fw.Unsigned32(p.top().serial);
-     
+
       // Now the id
       fw.Unsigned16(p.top().cmd->get_id());
 

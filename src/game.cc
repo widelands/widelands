@@ -27,6 +27,7 @@
 #include "game_loader.h"
 #include "graphic.h"
 #include "i18n.h"
+#include "layeredfilesystem.h"
 #include "map_event_manager.h"
 #include "map_trigger_manager.h"
 #include "network.h"
@@ -34,10 +35,10 @@
 #include "playercommand.h"
 #include "soldier.h"
 #include "sound_handler.h"
+#include <string>
 #include "tribe.h"
 #include "widelands_map_loader.h"
 #include "wlapplication.h"
-#include <string>
 
 /** Game::Game(void)
  *
@@ -113,12 +114,12 @@ bool Game::can_start()
 
 bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
    m_netgame = 0;
-   
+
    assert(!get_map());
 
    Map *map = new Map();
    set_map(map);
-  
+
    FileSystem* fs = g_fs->MakeSubFileSystem( mapname );
    m_maploader = new Widelands_Map_Loader(fs, map);
 
@@ -131,12 +132,12 @@ bool Game::run_splayer_map_direct(const char* mapname, bool scenario) {
             m_maploader->preload_map(scenario);
             log("Loading the locals for scenario. file: %s.mo\n", mapname);
             }
-        
+
         m_state = gs_running;
 
     // We have to create the players here
-   for( uint i = 1; i <= map->get_nrplayers(); i++) 
-      add_player(i, i==1 ? Player::playerLocal : Player::playerAI, 
+   for( uint i = 1; i <= map->get_nrplayers(); i++)
+      add_player(i, i==1 ? Player::playerLocal : Player::playerAI,
             map->get_scenario_player_tribe(i).c_str(), map->get_scenario_player_name(i).c_str());
 
    init_player_controllers ();

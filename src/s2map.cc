@@ -17,14 +17,17 @@
  *
  */
 
-#include <iostream>
 #include "editor_game_base.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "i18n.h"
+#include <iostream>
+#include "layeredfilesystem.h"
 #include "map.h"
 #include "map_loader.h"
 #include "s2map.h"
 #include "types.h"
+#include "wexception.h"
 #include "world.h"
 
 using std::cerr;

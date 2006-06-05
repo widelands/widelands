@@ -18,10 +18,11 @@
  */
 
 #include <map>
-#include "filesystem.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "map.h"
 #include "player.h"
 #include "transport.h"
@@ -41,7 +42,7 @@ Widelands_Map_Flagdata_Data_Packet::~Widelands_Map_Flagdata_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -64,10 +65,10 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
          assert(ol->get_object_by_file_index(ser)->get_type()==Map_Object::FLAG);
 
          Flag* flag=static_cast<Flag*>(ol->get_object_by_file_index(ser));
-       
-         // The owner is already set, nothing to do from 
+
+         // The owner is already set, nothing to do from
          // PlayerImmovable
-         
+
          flag->m_position.x=fr.Unsigned16();
          flag->m_position.y=fr.Unsigned16();
          flag->m_animstart=fr.Unsigned16();
@@ -75,13 +76,13 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
          if(building) {
             assert(ol->is_object_known(building));
             flag->m_building=static_cast<Building*>(ol->get_object_by_file_index(building));
-         } else 
+         } else
             flag->m_building=0;
 
-         
+
          // Roads are set somewhere else
-         
-         for(uint i=0; i<6; i++) 
+
+         for(uint i=0; i<6; i++)
             flag->m_items_pending[i]=fr.Unsigned32();
          flag->m_item_capacity=fr.Unsigned32();
          flag->m_item_filled=fr.Unsigned32();
@@ -101,7 +102,7 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
                flag->m_items[i].nextstep=0;
             }
          }
-         
+
          // always call
          uint always_call=fr.Unsigned32();
          if(always_call) {
@@ -109,7 +110,7 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
             flag->m_always_call_for_flag=static_cast<Flag*>(ol->get_object_by_file_index(always_call));
          } else
             flag->m_always_call_for_flag=0;
-     
+
          // Workers waiting
          uint nr_workers=fr.Unsigned16();
          flag->m_capacity_wait.resize(nr_workers);
@@ -125,7 +126,7 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
          for(uint i=0; i<nr_jobs; i++) {
             Flag::FlagJob f;
             bool request=fr.Unsigned8();
-            if(!request) 
+            if(!request)
                f.request=0;
             else {
                f.request = new Request(flag, 1,
@@ -135,7 +136,7 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
             f.program=fr.CString();
             flag->m_flag_jobs.push_back(f);
          }
-                    
+
          // Path finding variables are not saved
 //
 //         flag->mpf_cycle=fr.Unsigned32();
@@ -145,10 +146,10 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
 //         if(backlink) {
 //            assert(ol->is_object_known(backlink));
 //            flag->mpf_backlink=static_cast<Flag*>(ol->get_object_by_file_index(backlink));
-//         } else 
+//         } else
 //             flag->mpf_backlink=0;
-//         flag->mpf_estimate=fr.Signed32(); 
-   
+//         flag->mpf_estimate=fr.Signed32();
+
          ol->mark_object_as_loaded(flag);
       }
 
@@ -157,7 +158,7 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Flagdata_Data_Packet!\n", packet_version);
-   
+
    assert( 0 );
 }
 
@@ -167,10 +168,10 @@ void Widelands_Map_Flagdata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
  */
 void Widelands_Map_Flagdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
    FileWrite fw;
-   
+
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
-  
+
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
@@ -183,12 +184,12 @@ void Widelands_Map_Flagdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
 
             assert(os->is_object_known(flag));
             assert(!os->is_object_saved(flag));
-             
+
             // Write serial
             fw.Unsigned32(os->get_object_file_index(flag));
 
             // Owner is already written in the existanz packet
-            
+
             // Write position
             fw.Unsigned16(flag->m_position.x);
             fw.Unsigned16(flag->m_position.y);
@@ -206,9 +207,9 @@ void Widelands_Map_Flagdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
             }
 
             // Roads are not saved, they are set on load
-            
+
             // Pending items
-            for(uint i=0; i<6; i++) 
+            for(uint i=0; i<6; i++)
                   fw.Unsigned32(flag->m_items_pending[i]);
 
             // Capacity
@@ -235,7 +236,7 @@ void Widelands_Map_Flagdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
             } else {
                fw.Unsigned32(0);
             }
-               
+
             // Worker waiting for capacity
             fw.Unsigned16(flag->m_capacity_wait.size());
             for(uint i=0; i<flag->m_capacity_wait.size(); i++) {
@@ -248,7 +249,7 @@ void Widelands_Map_Flagdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
             fw.Unsigned16(flag->m_flag_jobs.size());
             for(std::list<Flag::FlagJob>::iterator i=flag->m_flag_jobs.begin();
                   i!=flag->m_flag_jobs.end(); i++) {
-               if(i->request) {  
+               if(i->request) {
                   fw.Unsigned8(1);
                   i->request->Write(&fw,egbase,os);
                } else fw.Unsigned8(0);
@@ -266,15 +267,15 @@ void Widelands_Map_Flagdata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
             //if(flag->mpf_backlink) {
             //   assert(os->is_object_known(flag->mpf_backlink));
             //   fw.Unsigned32(os->get_object_file_index(flag->mpf_backlink));
-            //} else 
+            //} else
             //   fw.Unsigned32(0);
             //fw.Signed32(flag->mpf_estimate);
          }
       }
    }
-  
+
    fw.Unsigned32(0xffffffff); // End of flags
-   
+
    fw.Write( fs, "binary/flag_data" );
    // DONE
 }

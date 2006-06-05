@@ -19,10 +19,11 @@
 
 #include <map>
 #include "constructionsite.h"
-#include "filesystem.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "map.h"
 #include "militarysite.h"

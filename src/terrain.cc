@@ -25,9 +25,10 @@ Texture implementation and terrain rendering for the 16-bit software renderer.
 #include "field.h"
 #include "filesystem.h"
 #include "graphic_impl.h"
+#include "layeredfilesystem.h"
 #include "mapviewpixelfunctions.h"
-#include "world.h"
 #include "random.h"
+#include "world.h"
 
 using namespace std;
 

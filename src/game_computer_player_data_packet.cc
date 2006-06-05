@@ -17,9 +17,11 @@
  *
  */
 
+#include "computer_player.h"
 #include "game.h"
 #include "game_computer_player_data_packet.h"
-#include "computer_player.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "mapview.h"
 
 #define CURRENT_PACKET_VERSION 1

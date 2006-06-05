@@ -17,6 +17,8 @@
  *
  */
 
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "game_game_class_data_packet.h"
 
@@ -33,7 +35,7 @@ Game_Game_Class_Data_Packet::~Game_Game_Class_Data_Packet(void) {
  */
 void Game_Game_Class_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    FileRead fr;
-   
+
    fr.Open( fs, "binary/game_class" );
 
    // read packet version
@@ -47,7 +49,7 @@ void Game_Game_Class_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map
       game->m_speed=fr.Signed16();
 
       game->m_gametime=fr.Unsigned32();
-      
+
       game->m_conquer_info.resize(fr.Unsigned16());
       for(uint i=0; i<game->m_conquer_info.size(); i++) {
          game->m_conquer_info[i].player = fr.Unsigned8();
@@ -59,7 +61,7 @@ void Game_Game_Class_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Map
       return;
    } else
       throw wexception("Unknown version in Game_Game_Class_Data_Packet: %i\n", packet_version);
-   
+
    assert(0); // never here
 }
 
@@ -80,21 +82,21 @@ void Game_Game_Class_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Ma
    fw.Signed16(game->m_speed);
 
    // From the interactive player, is saved somewhere else
-   // Computer players are saved somewhere else 
- 	
+   // Computer players are saved somewhere else
+
    // CMD Queue is saved later
-   // We do not care for real time. 
+   // We do not care for real time.
 
    // EDITOR GAME CLASS
    // Write gametime
    fw.Unsigned32(game->m_gametime);
-   
+
    // We do not care for players, since they were set
    // on game initialization to match Map::scenario_player_[names|tribes]
    // or vice versa, so this is handled by map loader
-   
+
    // Objects are loaded and saved by map
-   
+
    // Tribes and wares are handled by map
    // Interactive_Base doesn't need saving
 
@@ -110,6 +112,6 @@ void Game_Game_Class_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Ma
       fw.Unsigned16(game->m_conquer_info[i].middle_point.y);
       fw.Unsigned16(game->m_conquer_info[i].area);
    }
-   
+
    fw.Write( fs, "binary/game_class" );
 }

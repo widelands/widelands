@@ -18,7 +18,8 @@
  */
 
 #include "widelands_map_heights_data_packet.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "world.h"
@@ -38,7 +39,7 @@ Widelands_Map_Heights_Data_Packet::~Widelands_Map_Heights_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Heights_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
-  
+
    FileRead fr;
    fr.Open( fs, "binary/heights");
 
@@ -59,7 +60,7 @@ void Widelands_Map_Heights_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
       return;
    }
    throw wexception("Unknown version in Widelands_Map_Heights_Data_Packet: %i\n", packet_version);
-   
+
    assert(0); // never here
 }
 
@@ -69,7 +70,7 @@ void Widelands_Map_Heights_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
  */
 void Widelands_Map_Heights_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    FileWrite fw;
-   
+
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
@@ -80,6 +81,6 @@ void Widelands_Map_Heights_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* 
          fw.Unsigned8(map->get_field(Coords(x,y))->get_height());
       }
    }
-   
+
    fw.Write(fs,  "binary/heights");
 }

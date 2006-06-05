@@ -18,7 +18,8 @@
  */
 
 #include <map>
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor_game_base.h"
 #include "immovable.h"
 #include "map.h"
@@ -49,7 +50,7 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
 
    FileRead fr;
    fr.Open( fs, "binary/immovable" );
-   
+
    Map* map=egbase->get_map();
    World* world=map->get_world();
 
@@ -72,26 +73,26 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
                // It is a tribe immovable
                egbase->manually_load_tribe(owner.c_str());
                Tribe_Descr* tribe=egbase->get_tribe(owner.c_str());
-               if(!tribe) 
+               if(!tribe)
                   throw wexception("Unknown tribe %s in map!\n", owner.c_str());
                int idx=tribe->get_immovable_index(name.c_str());
-               if(idx==-1) 
+               if(idx==-1)
                   throw wexception("Unknown tribe-immovable %s in map, asked for tribe: %s!\n", name.c_str(), owner.c_str());
-               Immovable* imm=egbase->create_immovable(Coords(x, y), idx, tribe); 
+               Immovable* imm=egbase->create_immovable(Coords(x, y), idx, tribe);
                mol->register_object(egbase, reg, imm);
             }
          } else {
             // World immovable
             int idx=world->get_immovable_index(name.c_str());
-            if(idx==-1) 
+            if(idx==-1)
                throw wexception("Unknown world immovable %s in map!\n", name.c_str());
-            Immovable* imm=egbase->create_immovable(Coords(x, y), idx, 0); 
+            Immovable* imm=egbase->create_immovable(Coords(x, y), idx, 0);
             if(!skip)
                mol->register_object(egbase, reg, imm);
          }
       }
       return ;
-   } 
+   }
    assert(0); // never here
 }
 
@@ -99,8 +100,8 @@ void Widelands_Map_Immovable_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
  * Write Function
  */
 void Widelands_Map_Immovable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception) {
-   FileWrite fw; 
-   
+   FileWrite fw;
+
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
@@ -108,19 +109,19 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
-        
-         // We do not write player immovables 
+
+         // We do not write player immovables
          if(immovable && immovable->get_type()==Map_Object::IMMOVABLE) {
             Immovable* imm=static_cast<Immovable*>(immovable);
             Tribe_Descr* tribe=imm->get_owner_tribe();
 
             assert(!mos->is_object_known(imm));
             uint reg=mos->register_object(imm);
-            
-            fw.Unsigned32(reg); 
-            if(!tribe) 
+
+            fw.Unsigned32(reg);
+            if(!tribe)
                fw.CString("world");
-            else 
+            else
                fw.CString(tribe->get_name());
 
             fw.CString(imm->get_name().c_str());
@@ -131,7 +132,7 @@ void Widelands_Map_Immovable_Data_Packet::Write(FileSystem* fs, Editor_Game_Base
    }
 
    fw.Unsigned32(0xffffffff);
-  
+
    fw.Write( fs, "binary/immovable");
    // DONE
 }

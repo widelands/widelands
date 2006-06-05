@@ -18,7 +18,8 @@
  */
 
 #include <map>
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "world.h"
@@ -86,8 +87,8 @@ void Widelands_Map_Terrain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* e
  */
 void Widelands_Map_Terrain_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
 
-   FileWrite fw; 
-  
+   FileWrite fw;
+
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 

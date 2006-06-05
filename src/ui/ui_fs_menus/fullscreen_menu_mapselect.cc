@@ -23,6 +23,7 @@
 #include "fullscreen_menu_mapselect.h"
 #include "graphic.h"
 #include "i18n.h"
+#include "layeredfilesystem.h"
 #include "map.h"
 #include "ui_button.h"
 #include "ui_textarea.h"

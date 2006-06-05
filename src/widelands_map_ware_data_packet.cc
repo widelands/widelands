@@ -18,7 +18,8 @@
  */
 
 #include <map>
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
@@ -43,7 +44,7 @@ Widelands_Map_Ware_Data_Packet::~Widelands_Map_Ware_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Ware_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -71,7 +72,7 @@ void Widelands_Map_Ware_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egba
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Ware_Data_Packet!\n", packet_version);
-   
+
    assert( 0 );
 }
 
@@ -80,19 +81,19 @@ void Widelands_Map_Ware_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egba
  * Write Function
  */
 void Widelands_Map_Ware_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   
+
    FileWrite fw;
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
- 
+
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
    Map* map=egbase->get_map();
    std::vector<uint> ids;
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
          Field* f=map->get_field(Coords(x,y));
-         
+
          // First, check for Flags
          BaseImmovable* imm=f->get_immovable();
          if(imm && imm->get_type()==Map_Object::FLAG) {
@@ -102,7 +103,7 @@ void Widelands_Map_Ware_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egb
                ids.push_back(os->register_object(f->m_items[i].item));
             }
          }
-      
+
          // Now, check for workers
          Bob* b=f->get_first_bob();
          while(b) {
@@ -121,9 +122,9 @@ void Widelands_Map_Ware_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egb
 
    // All checked, we only need to save those stuff to disk
    fw.Unsigned32(ids.size());
-   for(uint i=0; i<ids.size(); i++) 
+   for(uint i=0; i<ids.size(); i++)
       fw.Unsigned32(ids[i]);
-  
+
    fw.Write( fs, "binary/ware" );
    // DONE
 }

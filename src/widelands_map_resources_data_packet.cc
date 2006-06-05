@@ -18,7 +18,8 @@
  */
 
 #include "widelands_map_resources_data_packet.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "world.h"
@@ -48,7 +49,7 @@ void Widelands_Map_Resources_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
    Map* map=egbase->get_map();
    World* world=egbase->get_map()->get_world();
 
-   if(packet_version==CURRENT_PACKET_VERSION) { 
+   if(packet_version==CURRENT_PACKET_VERSION) {
       int nr_res=fr.Unsigned16();
       if(nr_res>world->get_nr_resources()) log("WARNING: Number of resources in map (%i) is bigger than in world (%i)",
             nr_res, world->get_nr_resources());
@@ -87,7 +88,7 @@ void Widelands_Map_Resources_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
             }
 
             // NoLog("[Map Loader] Setting resource of (%i,%i) to '%s'\n", x, y, smap[id]->get_name());
-            if(set_id==-1) 
+            if(set_id==-1)
                throw("Unkown resource in map file. It is not in world!\n");
             egbase->get_map()->get_field(Coords(x,y))->set_resources(set_id,set_amount);
             egbase->get_map()->get_field(Coords(x,y))->set_starting_res_amount(set_start_amount);
@@ -109,9 +110,9 @@ void Widelands_Map_Resources_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
  * in nearly all cases.
  */
 void Widelands_Map_Resources_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver*) throw(wexception) {
-   
-   FileWrite fw; 
-   
+
+   FileWrite fw;
+
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 

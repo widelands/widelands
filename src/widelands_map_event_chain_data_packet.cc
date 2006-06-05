@@ -21,7 +21,8 @@
 #include "error.h"
 #include "event.h"
 #include "event_chain.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "map.h"
 #include "map_event_manager.h"
 #include "map_eventchain_manager.h"
@@ -47,18 +48,18 @@ Widelands_Map_EventChain_Data_Packet::~Widelands_Map_EventChain_Data_Packet(void
 void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
    if( skip )
       return;
-  
+
    // Skip, if no triggers saved
    FileRead fr;
-   if( !fr.TryOpen( fs, "event_chain" )) 
+   if( !fr.TryOpen( fs, "event_chain" ))
       return;
-   
+
    Profile prof;
    prof.read( "event_chain", 0, fs );
    Section* s = prof.get_section( "global" );
 
    /*
-   
+
    std::string        m_name;
       bool                m_repeating;
       TriggerConditional* m_trigconditional;
@@ -74,17 +75,17 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
       while(( s = prof.get_next_section(0)) ) {
          std::string name = s->get_name();
          EventChain* e = new EventChain();
-         
+
          // Name
          e->set_name( name.c_str() );
-         
+
          // Repeating
          e->m_repeating = s->get_safe_bool( "repeating" );
-         
-         // TriggerConditional 
+
+         // TriggerConditional
          std::vector< TriggerConditional_Factory::Token > toklist;
          uint nr_tokens = s->get_safe_int( "nr_conditional_element" );
-      
+
          char buf[256];
          for( uint i = 0; i < nr_tokens; i++) {
             sprintf(buf, "conditional_element_%02i", i);
@@ -96,7 +97,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
                sprintf(buf, "conditional_element_%02i_data", i);
                std::string trigname = s->get_safe_string( buf );
                Trigger* trig = egbase->get_map()->get_mtm()->get_trigger( trigname.c_str() );
-               if( !trig ) 
+               if( !trig )
                   throw wexception( "Trigger Conditional of Event Chain %s references unknown trigger %s!\n", name.c_str(), trigname.c_str());
                tok.data = trig;
             } else if ( type == ")" ) {
@@ -114,7 +115,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
             }
             toklist.push_back( tok );
          }
-         e->set_trigcond( TriggerConditional_Factory::create_from_infix( e, toklist )); 
+         e->set_trigcond( TriggerConditional_Factory::create_from_infix( e, toklist ));
 
          // Events
          uint nr_events = s->get_safe_int( "nr_events" );
@@ -122,11 +123,11 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
             sprintf(buf, "event_%02i", i);
             std::string evname = s->get_safe_string( buf );
             Event* event = egbase->get_map()->get_mem()->get_event( evname.c_str() );
-            if( !event ) 
+            if( !event )
                throw wexception( "Event Chain %s references unknown event %s!\n", name.c_str(), evname.c_str());
             e->add_event( event );
          }
-        
+
          // Current event
          e->m_curevent = s->get_safe_int( "current_event" );
 
@@ -135,7 +136,7 @@ void Widelands_Map_EventChain_Data_Packet::Read(FileSystem* fs, Editor_Game_Base
          if( state == "init") e->m_state = EventChain::INIT;
          else if( state == "running") e->m_state = EventChain::RUNNING;
          else if( state == "done") e->m_state = EventChain::DONE;
-          
+
          egbase->get_map()->get_mecm()->register_new_eventchain( e );
       }
       return;
@@ -159,7 +160,7 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
       s = prof.create_section( e->get_name());
 
       s->set_bool( "repeating", e->m_repeating );
-      
+
       std::vector< TriggerConditional_Factory::Token >* toklist =  e->m_trigconditional->get_infix_tokenlist();
       s->set_int("nr_conditional_element", toklist->size());
       char buf[256];
@@ -170,8 +171,8 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
             case TriggerConditional_Factory::OPERATOR:
                assert(0); // In a good world, this can't happen
                break;
-               
-            case TriggerConditional_Factory::TRIGGER: 
+
+            case TriggerConditional_Factory::TRIGGER:
                s->set_string( buf, "trigger");
                sprintf(buf, "conditional_element_%02i_data", i);
                s->set_string( buf, static_cast<Trigger*>(tok.data)->get_name());
@@ -180,31 +181,31 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
             case TriggerConditional_Factory::RPAREN:
                s->set_string( buf, ")");
                break;
-               
-            case TriggerConditional_Factory::LPAREN: 
+
+            case TriggerConditional_Factory::LPAREN:
                s->set_string( buf, "(");
                break;
-               
-            case TriggerConditional_Factory::XOR: 
+
+            case TriggerConditional_Factory::XOR:
                s->set_string( buf, "XOR");
                break;
-               
+
             case TriggerConditional_Factory::OR:
                s->set_string( buf, "OR");
                break;
-               
-            case TriggerConditional_Factory::AND: 
+
+            case TriggerConditional_Factory::AND:
                s->set_string( buf, "AND");
                break;
-               
-            case TriggerConditional_Factory::NOT: 
+
+            case TriggerConditional_Factory::NOT:
                s->set_string( buf, "NOT");
                break;
          }
       }
       delete toklist;
-      
-         
+
+
       // Events
       s->set_int( "nr_events", e->m_events.size());
       for( uint i = 0; i < e->m_events.size(); i++) {
@@ -222,7 +223,7 @@ void Widelands_Map_EventChain_Data_Packet::Write(FileSystem* fs, Editor_Game_Bas
          case EventChain::DONE: s->set_string("state", "done"); break;
       }
    }
-  
+
 
    prof.write("event_chain", false, fs );
 

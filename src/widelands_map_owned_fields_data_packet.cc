@@ -18,7 +18,8 @@
  */
 
 #include "widelands_map_owned_fields_data_packet.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "world.h"
@@ -38,7 +39,7 @@ Widelands_Map_Owned_Fields_Data_Packet::~Widelands_Map_Owned_Fields_Data_Packet(
  * Read Function
  */
 void Widelands_Map_Owned_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader*) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -59,14 +60,14 @@ void Widelands_Map_Owned_Fields_Data_Packet::Read(FileSystem* fs, Editor_Game_Ba
       for(ushort y=0; y<map->get_height(); y++) {
          for(ushort x=0; x<map->get_width(); x++) {
             uchar h=fr.Unsigned8();
-            if(!skip) // On Skip, we ignore this 
+            if(!skip) // On Skip, we ignore this
                map->get_field(Coords(x,y))->set_owned_by(h);
          }
       }
       return;
    }
    throw wexception("Unknown version in Widelands_Map_Owned_Fields_Data_Packet: %i\n", packet_version);
-   
+
    assert(0); // never here
 }
 

@@ -41,13 +41,15 @@ public:
 	virtual void Write(std::string fname, void *data, int length) ;
    virtual void EnsureDirectoryExists(std::string dirname) ;
    virtual void MakeDirectory(std::string dirname) ;
-   
+
    virtual FileSystem*  MakeSubFileSystem( std::string dirname );
    virtual FileSystem*  CreateSubFileSystem( std::string dirname, Type );
    virtual void Unlink( std::string ) ;
 
 public:
 	static FileSystem *CreateFromDirectory(std::string directory);
+
+	void listSubdirs() {printf("%s\n", m_basename.c_str());}
 
 private:
    void m_OpenUnzip( void );
@@ -60,7 +62,7 @@ private:
       STATE_ZIPPING,
       STATE_UNZIPPPING
    };
-  
+
    State       m_state;
    zipFile     m_zipfile;
    unzFile     m_unzipfile;

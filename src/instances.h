@@ -20,6 +20,7 @@
 #ifndef __S__INSTANCE_H
 #define __S__INSTANCE_H
 
+#include <assert.h>
 #include <map>
 #include <string>
 #include <vector>

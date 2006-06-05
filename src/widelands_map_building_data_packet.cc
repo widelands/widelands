@@ -19,7 +19,8 @@
 
 #include <map>
 #include "constructionsite.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
@@ -42,7 +43,7 @@ Widelands_Map_Building_Data_Packet::~Widelands_Map_Building_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Building_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -52,7 +53,7 @@ void Widelands_Map_Building_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
       // not there, so skip
       return ;
    }
-   
+
    Map* map=egbase->get_map();
 
    // First packet version
@@ -75,8 +76,8 @@ void Widelands_Map_Building_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
                Player* plr=egbase->get_safe_player(owner);
                assert(plr); // He must be there
                int index=plr->get_tribe()->get_building_index(name.c_str());
-               if(index==-1) 
-                  throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n", 
+               if(index==-1)
+                  throw wexception("Widelands_Map_Building_Data_Packet::Read(): Should create building %s in tribe %s, but building is unknown!\n",
                         name.c_str(), plr->get_tribe()->get_name());
 
                // Now, create this Building, take extra special care for constructionsites
@@ -116,32 +117,32 @@ void Widelands_Map_Building_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
 
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
-  
+
    // Write buildings and owner, register this with the map_object_saver so that
    // it's data can be saved later.
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
-         // We only write Buildings 
+         // We only write Buildings
          if(immovable && immovable->get_type()==Map_Object::BUILDING) {
             Building* building=static_cast<Building*>(immovable);
-          
+
             if(building->get_position()!=Coords(x,y)) {
-               // This is not this buildings main position 
+               // This is not this buildings main position
                fw.Unsigned8('\0');
-               continue; 
+               continue;
             }
 
             // Buildings can life on only one main position
             assert(!os->is_object_known(building));
             uint serial=os->register_object(building);
- 
+
             fw.Unsigned8(1);
             fw.Unsigned8(building->get_owner()->get_player_number());
             // write id
             fw.Unsigned32(serial);
-            
+
             bool constructionsite=building->get_building_type()==Building::CONSTRUCTIONSITE;
 
             if(constructionsite) {
@@ -154,14 +155,14 @@ void Widelands_Map_Building_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
             fw.CString(name.c_str());
             fw.Unsigned8(0);
             }
-            
+
          } else {
             // No existance, no owner
             fw.Unsigned8(0);
          }
       }
    }
-   
+
    fw.Write( fs, "binary/building" );
    // DONE
 }

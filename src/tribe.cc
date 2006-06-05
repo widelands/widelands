@@ -20,9 +20,10 @@
 #include <iostream>
 #include "editor_game_base.h"
 #include "error.h"
-#include "filesystem.h"
+#include "fileread.h"
 #include "game.h"
 #include "i18n.h"
+#include "layeredfilesystem.h"
 #include "profile.h"
 #include "soldier.h"
 #include "tribe.h"

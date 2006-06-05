@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include "wexception.h"
 #include "wlapplication.h"
 
 using std::cerr;

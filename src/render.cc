@@ -24,6 +24,7 @@ Rendering functions of the 16-bit software renderer.
 #include "editor_game_base.h"
 #include "error.h"
 #include "filesystem.h"
+#include "layeredfilesystem.h"
 #include "map.h"
 #include "minimap.h"
 #include "player.h"
@@ -53,7 +54,7 @@ Surface::Surface( const Surface& surf ) {
 /*
  * Updating the whole Surface
  */
-void Surface::update( void ) { 
+void Surface::update( void ) {
    SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 }
 
@@ -141,14 +142,14 @@ void Surface::brighten_rect(Rect rc, int factor)
          short r, g, b;
          ulong clr = get_pixel(x,y);
          SDL_GetRGB( clr, m_surface->format, &gr, &gg, &gb );
-         r = gr + factor; 
+         r = gr + factor;
          g = gg + factor;
          b = gb + factor;
          if (b & 0xFF00) b = (~b) >> 24;
          if (g & 0xFF00) g = (~g) >> 24;
          if (r & 0xFF00) r = (~r) >> 24;
          clr = SDL_MapRGB( m_surface->format, r, g, b );
-         set_pixel( x, y, clr ); 
+         set_pixel( x, y, clr );
       }
    }
 }
@@ -176,7 +177,7 @@ void Surface::blit(Point dst, Surface* src, Rect srcrc)
 {
    SDL_Rect srcrect = { srcrc.x, srcrc.y, srcrc.w, srcrc.h };
    SDL_Rect dstrect = { dst.x, dst.y, 0, 0 };
-   
+
    SDL_BlitSurface( src->m_surface, &srcrect, m_surface, &dstrect );
 }
 
@@ -194,7 +195,7 @@ static inline ulong blend_color( SDL_PixelFormat* fmt, ulong clr1, uchar r2, uch
   uchar r1, g1, b1;
 
   SDL_GetRGB( clr1, fmt, &r1, &g1, &b1);
-  
+
   return SDL_MapRGB( fmt, (r1 + r2) >> 1, ( g1 + g2 ) >> 1, ( b1 + b2 ) >> 1 );
 }
 
@@ -233,7 +234,7 @@ static inline ulong calc_minimap_color(SDL_PixelFormat* fmt, Editor_Game_Base* e
 	if (flags & Minimap_Roads) {
 		// show roads
 		if (map->find_immovables(f, 0, 0, FindImmovableType(Map_Object::ROAD)))
-			pixelcolor = blend_color(fmt, pixelcolor, 255, 255, 255 ); 
+			pixelcolor = blend_color(fmt, pixelcolor, 255, 255, 255 );
 	}
 
 	if (flags & Minimap_Flags) {
@@ -329,7 +330,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
 
    m_hotspot = data->hotspot;
    m_plrframes = new std::vector<Surface*>[MAX_PLAYERS+1];
-      
+
    std::vector<Surface*> frames;
    for(;;) {
       char fname[256];
@@ -339,7 +340,7 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
       bool done=false;
       bool alldone=false;
       bool cycling=false;
-      
+
       for(int i=0; i<nextensions; i++) {
          if(done) continue;
 
@@ -384,14 +385,14 @@ AnimationGfx::AnimationGfx(const AnimationData* data)
          Surface* frame = new Surface();
          frames.push_back( frame );
          frame->set_sdl_surface( bmp );
-         
+
          done=true;
          if(!cycling) alldone=true;
       }
-   
+
       if(alldone==true) break;
    }
-      
+
    m_plrframes[0] = frames;
 
 	if (!frames.size())
@@ -430,11 +431,11 @@ void AnimationGfx::encode( uchar plr, const RGBColor* plrclrs )
 {
    assert( m_encodedata.hasplrclrs );
    std::vector<Surface*>& frames = m_plrframes[plr];
-      
+
    for( uint i = 0; i < m_plrframes[0].size(); i++ ) {
       // Copy the old surface
       Surface* origsurface = m_plrframes[0][i];
-      SDL_Surface* tempsurface =  SDL_ConvertSurface(origsurface->m_surface, 
+      SDL_Surface* tempsurface =  SDL_ConvertSurface(origsurface->m_surface,
          origsurface->get_format(), SDL_HWSURFACE | SDL_SRCALPHA );
       Surface* newsurface = new Surface();
       newsurface->set_sdl_surface( tempsurface );
@@ -448,7 +449,7 @@ void AnimationGfx::encode( uchar plr, const RGBColor* plrclrs )
       ulong new_plrclr2 = plrclrs[1].map( newsurface->get_format());
       ulong new_plrclr3 = plrclrs[2].map( newsurface->get_format());
       ulong new_plrclr4 = plrclrs[3].map( newsurface->get_format());
-      
+
       // Walk the surface, replace all playercolors
       for( uint y = 0; y < newsurface->get_h(); y++) {
          for( uint x = 0; x < newsurface->get_w(); x++) {

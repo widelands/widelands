@@ -18,6 +18,8 @@
  */
 
 #include "computer_player.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "game_player_info_data_packet.h"
 #include "interactive_player.h"
@@ -53,23 +55,23 @@ void Game_Player_Info_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Ma
             std::string tribe = fr.CString();
 
             RGBColor rgb[4];
-         
+
             for(uint i=0; i<4; i++) {
                uchar r = fr.Unsigned8();
                uchar g = fr.Unsigned8();
                uchar b = fr.Unsigned8();
                rgb[i].set(r,g,b);
             }
-   
+
             std::string name = fr.CString();
-            
+
             game->add_player(plnum, type, tribe.c_str(), name.c_str());
             Player* plr = game->get_player(plnum);
             plr->set_see_all(see_all);
-            
-            for(uint i=0; i<4; i++) 
+
+            for(uint i=0; i<4; i++)
                plr->m_playercolor[i] = rgb[i];
-         
+
             if(type == Player::playerLocal) {
                // The interactive player might still be in existance
                // we do not delete it then, we reuse it
@@ -86,7 +88,7 @@ void Game_Player_Info_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Ma
       return;
    } else
       throw wexception("Unknown version in Game_Player_Info_Data_Packet: %i\n", packet_version);
-   
+
    assert(0); // never here
 }
 
@@ -95,7 +97,7 @@ void Game_Player_Info_Data_Packet::Read(FileSystem* fs, Game* game, Widelands_Ma
  */
 void Game_Player_Info_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_Map_Map_Object_Saver*) throw(wexception) {
    FileWrite fw;
-   
+
    // Now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
@@ -103,7 +105,7 @@ void Game_Player_Info_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_M
    fw.Unsigned16(game->get_map()->get_nrplayers());
    for(uint i=1; i<=game->get_map()->get_nrplayers(); i++) {
       Player* plr = game->get_player(i);
-      
+
       if(!plr) {
          fw.Unsigned8(0);
          continue;
@@ -111,7 +113,7 @@ void Game_Player_Info_Data_Packet::Write(FileSystem* fs, Game* game, Widelands_M
 
       // Player is in game
       fw.Unsigned8(1);
-      
+
       fw.Unsigned8(plr->m_see_all);
 
 

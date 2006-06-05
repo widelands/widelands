@@ -18,13 +18,15 @@
  */
 
 #include "cmd_queue.h"
-#include "filesystem.h"
+#include "error.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "game.h"
 #include "instances.h"
+#include "machdep.h"
 #include "player.h"
-#include "worker.h"
 #include "trigger.h"
-#include "error.h"
+#include "worker.h"
 
 //
 // class Cmd_Queue
@@ -61,10 +63,10 @@ Insert a new command into the queue; it will be executed at the given time
 void Cmd_Queue::enqueue (BaseCommand* cmd)
 {
 	cmditem ci;
-	
+
 	ci.cmd=cmd;
 	ci.serial=nextserial++;
-	
+
 	m_cmds.push(ci);
 }
 
@@ -90,14 +92,14 @@ int Cmd_Queue::run_queue(int interval, int* game_time_var)
 		m_cmds.pop();
 
 		*game_time_var = c->get_duetime();
-		
+
 		// Modify RNG state depending on the command. This
 		// will make detecting loss of synchronization easier
 		// and adds some entropy to the state.
 		m_game->logic_rand_seed (*game_time_var);
-		
+
 		c->execute (m_game);
-		
+
 		delete c;
 	}
 
@@ -120,9 +122,9 @@ BaseCommand::~BaseCommand ()
 void BaseCommand::BaseCmdWrite(FileWrite* fw, Editor_Game_Base*, Widelands_Map_Map_Object_Saver*) {
    // First version
    fw->Unsigned16(BASE_CMD_VERSION);
-   
+
    // Write duetime
-   fw->Unsigned32(duetime); 
+   fw->Unsigned32(duetime);
 }
 
 void BaseCommand::BaseCmdRead(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map_Object_Loader*)  {
@@ -130,7 +132,7 @@ void BaseCommand::BaseCmdRead(FileRead* fr, Editor_Game_Base*, Widelands_Map_Map
    if(version==BASE_CMD_VERSION) {
    // Read duetime
       duetime=fr->Unsigned32();
-   } else 
+   } else
       throw wexception("BaseCommand::BaseCmdRead: unknown version %i\n", version);
 }
 

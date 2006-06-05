@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003 by the Widelands Development Team
+ * Copyright (C) 2005, 2006 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,24 +22,16 @@
 
 //config.h *must* be included before SDL_mixer.h due to USE_RWOPS !!
 #include "config.h"
-#include <vector>
-#include <map>
-#include <SDL.h>
-#include <SDL_mixer.h>
-#include "random.h"
-#include "geometry.h"
+
+#include "fxset.h"
 #include "game.h"
+#include "geometry.h"
+#include <map>
+#include "random.h"
+#include "songset.h"
+#include <vector>
 
 using namespace std;
-
-/// Predefined priorities for easy reading
-/// \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
-/// \todo These values should not have any meaning beyond just being numbers.
-//@{
-#define PRIO_ALWAYS_PLAY 255
-#define PRIO_ALLOW_MULTIPLE 128
-#define PRIO_MEDIUM 63
-//@}
 
 /// How many milliseconds in the past to consider for \ref Sound_Handler::play_or_not()
 #define SLIDING_WINDOW_SIZE 300000
@@ -53,99 +45,6 @@ using namespace std;
 //@}
 
 extern class Sound_Handler g_sound_handler;
-
-class Sound_Handler;
-///\file
-
-/** A collection of several pieces of music meant for the same situation.
- *
- * A Songset encapsulates a number of interchangeable pieces of (background)
- * music, e.g. all songs that might be played while the main menu is being
- * shown. It is possible to access those songs one after another or in
- * random order. The fact that a Songset really contains several different
- * songs is hidden from the outside.\n
- * A songset does not contain the audio data itself, to not use huge amounts of
- * memory. Instead, each song is loaded on request and the data is free()d
- * afterwards
-*/
-class Songset
-{
-public:
-	Songset();
-	~Songset();
-
-	void add_song(const string filename);
-	Mix_Music *get_song();
-	bool empty() {return m_songs.empty();}
-
-protected:
-	/// The filenames of all configured songs
-	vector < string > m_songs;
-
-	/** Pointer to the song that is currently playing (actually the one that
-	 * was last started); needed for linear playback
-	*/
-	vector < string >::iterator m_current_song;
-
-	/// The current song
-	Mix_Music *m_m;
-
-	/** File reader object to fetch songs from disc when they start playing.
-	 * Do not create this for each load, it's a major hassle to code.
-	 * \sa m_rwops
-	 * \sa get_song()
-	*/
-	FileRead *m_fr;
-
-	/** RWops object to fetch songs from disc when they start playing.
-	 * Do not create this for each load, it's a major hassle to code.
-	 * \sa m_fr
-	 * \sa get_song()
-	*/
-	SDL_RWops *m_rwops;
-};
-
-/** A collection of several sound effects meant for the same event.
- *
- * An FXset encapsulates a number of interchangeable sound effects, e.g.
- * all effects that might be played when a blacksmith is happily hammering away.
- * It is possible to select the effects one after another or in random order.
- * The fact that an FXset really contains several different effects is hidden
- * from the outside
-*/
-class FXset
-{
-	friend class Sound_Handler;
-public:
-	FXset(Uint8 prio = PRIO_MEDIUM);
-	~FXset();
-
-	void add_fx(Mix_Chunk * fx, Uint8 prio = PRIO_MEDIUM);
-	Mix_Chunk *get_fx();
-	bool empty() {return m_fxs.empty();}
-
-protected:
-	/// The collection of sound effects
-	vector < Mix_Chunk * >m_fxs;
-
-	/** When the effect was played the last time (milliseconds since SDL
-	 * initialization). Set via SDL_GetTicks()
-	*/
-	Uint32 m_last_used;
-
-	/** How important is it to play the effect even when others are running
-	 * already?
-	 *
-	 * Value 0-127: probability between 0.0 and 1.0, only one instance can
-	 * be playing at any time
-	 *
-	 * Value 128-254: probability between 0.0 and 1.0, many instances can
-	 * be playing at any time
-	 *
-	 * Value 255: always play; unconditional
-	*/
-	Uint8 m_priority;
-};
 
 /** The 'sound server' for Widelands.
  *

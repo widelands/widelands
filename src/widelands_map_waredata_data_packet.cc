@@ -18,7 +18,8 @@
  */
 
 #include "bob.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
@@ -44,7 +45,7 @@ Widelands_Map_Waredata_Data_Packet::~Widelands_Map_Waredata_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Waredata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -76,11 +77,11 @@ void Widelands_Map_Waredata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
 
          ware->m_ware=fr.Signed32();
          switch(location->get_type()) {
-            case Map_Object::BUILDING: // Fallthrough 
-            case Map_Object::FLAG: 
+            case Map_Object::BUILDING: // Fallthrough
+            case Map_Object::FLAG:
                log("Adding ware with id %i from %s\n", ware->m_ware, location->get_type() == Map_Object::FLAG ?  "Flag" : "Building");
                ware->m_economy=0; // We didn't know what kind of ware we were till now, so no economy might have a clue of us
-               ware->m_ware_descr=static_cast<PlayerImmovable*>(location)->get_owner()->get_tribe()->get_ware_descr(ware->m_ware); 
+               ware->m_ware_descr=static_cast<PlayerImmovable*>(location)->get_owner()->get_tribe()->get_ware_descr(ware->m_ware);
                ware->set_economy(static_cast<PlayerImmovable*>(location)->get_economy());
                break;
 
@@ -97,7 +98,7 @@ void Widelands_Map_Waredata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
 
          // Do not touch supply or transfer
 
-         // m_transfer_nextstep 
+         // m_transfer_nextstep
          reg=fr.Unsigned32();
          if(reg) {
             assert(ol->is_object_known(reg));
@@ -117,7 +118,7 @@ void Widelands_Map_Waredata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Waredata_Data_Packet!\n", packet_version);
-   
+
    assert( 0 );
 }
 
@@ -126,18 +127,18 @@ void Widelands_Map_Waredata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* 
  * Write Function
  */
 void Widelands_Map_Waredata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   FileWrite fw; 
-   
+   FileWrite fw;
+
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
-  
+
    // We transverse the map and whenever we find a suitable object, we check if it has wares of some kind
    Map* map=egbase->get_map();
    std::vector<uint> ids;
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
          Field* f=map->get_field(Coords(x,y));
-         
+
          // First, check for Flags
          BaseImmovable* imm=f->get_immovable();
          if(imm && imm->get_type()==Map_Object::FLAG) {
@@ -147,7 +148,7 @@ void Widelands_Map_Waredata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
                write_ware(&fw,egbase,os,f->m_items[i].item);
             }
          }
-      
+
          // Now, check for workers
          Bob* b=f->get_first_bob();
          while(b) {
@@ -164,7 +165,7 @@ void Widelands_Map_Waredata_Data_Packet::Write(FileSystem* fs, Editor_Game_Base*
       }
    }
    fw.Unsigned32(0xffffffff); // End of wares
-   
+
    fw.Write( fs, "binary/ware_data" );
    // DONE
 }
@@ -181,16 +182,16 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
    if(obj) {
       assert(os->is_object_known(obj));
       fw->Unsigned32(os->get_object_file_index(obj));
-   } else 
+   } else
       fw->Unsigned32(0);
-	
+
    // Economy is set by set_location()
 
    fw->Signed32(ware->m_ware);
    // Description is set manually
 
    // Skip Supply
-   
+
    // Transfer is handled automatically
 //   if(ware->m_transfer)
 //      fw->Unsigned8(1);
@@ -202,7 +203,7 @@ void Widelands_Map_Waredata_Data_Packet::write_ware(FileWrite* fw, Editor_Game_B
    if(obj) {
       assert(os->is_object_known(obj));
       fw->Unsigned32(os->get_object_file_index(obj));
-   } else 
+   } else
       fw->Unsigned32(0);
 
    os->mark_object_as_saved(ware);

@@ -19,7 +19,8 @@
 
 #include <map>
 #include "battle.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "editor_game_base.h"
 #include "immovable.h"
 #include "map.h"
@@ -37,16 +38,16 @@
 /*
  * Destructor
  */
-Widelands_Map_Battle_Data_Packet::~Widelands_Map_Battle_Data_Packet(void) 
+Widelands_Map_Battle_Data_Packet::~Widelands_Map_Battle_Data_Packet(void)
 {
 }
 
 /*
  * Read Function
  */
-void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception) 
+void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* mol) throw(wexception)
 {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -72,15 +73,15 @@ void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* eg
          int last = fr.Unsigned32();
          int sol1 = fr.Unsigned32();
          int sol2 = fr.Unsigned32();
-         
+
          battle = egbase->create_battle ();
-               
+
          log("Set battle %p (%d)\n", battle, serial);
          assert(battle);
-         
+
          battle->m_next_assault = next;
          battle->m_last_try = last;
-         
+
             // This may crash
          Map_Object* s1 = mol->get_object_by_file_index (sol1);
          Map_Object* s2 = mol->get_object_by_file_index (sol2);
@@ -107,26 +108,26 @@ void Widelands_Map_Battle_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* eg
  * Write Function.
  * This writes ALL the information about battles !
  */
-void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception) 
+void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* mos) throw(wexception)
 {
-   FileWrite fw; 
-   
+   FileWrite fw;
+
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
 
    std::vector<int> serials = egbase->get_battle_serials();
-   
-   // Here we will insert skip data (number of battles) 
+
+   // Here we will insert skip data (number of battles)
    // later, write a dummy for know
    int filepos = fw.GetFilePos();
    int battles = 0;
    fw.Unsigned32(0x00000000);
-  
-   
+
+
    for (uint i = 0; i < serials.size(); i++)
    {
       Map_Object* obj = egbase->get_objects()->get_object(serials[i]);
-      
+
       if (!obj || (obj->get_type() != Map_Object::BATTLE))
          continue;
 
@@ -134,15 +135,15 @@ void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* e
 
       assert (!mos->is_object_known(b));
       uint reg = mos->register_object(b);
-      
+
       fw.Unsigned32(reg);  // Something like serial ..
-      
+
          // Write time to next assault
       fw.Unsigned32(b->m_next_assault);
-         
+
          // Write the last try
       fw.Unsigned32(b->m_last_try);
-      
+
          // And now, the serials of the soldiers !
       if (b->m_first)
       {
@@ -151,7 +152,7 @@ void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* e
       }
       else
          fw.Unsigned32 (0);
-            
+
       if (b->m_second)
       {
          assert(mos->is_object_known(b->m_second));
@@ -161,7 +162,7 @@ void Widelands_Map_Battle_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* e
          fw.Unsigned32 (0);
       battles++;
    }
-   
+
    // Now, write the number of battles
    fw.Unsigned32(0xffffffff);
    fw.Unsigned32(battles, filepos);

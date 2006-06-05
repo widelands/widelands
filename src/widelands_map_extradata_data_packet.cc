@@ -20,7 +20,8 @@
 #include <SDL_image.h>
 #include "editor_game_base.h"
 #include "error.h"
-#include "filesystem.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "graphic_impl.h" // Since we are laying about the path of the pictures
 #include "map.h"
 #include "profile.h"

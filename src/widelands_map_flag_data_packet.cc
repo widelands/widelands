@@ -18,8 +18,9 @@
  */
 
 #include <map>
-#include "filesystem.h"
 #include "editor_game_base.h"
+#include "fileread.h"
+#include "filewrite.h"
 #include "map.h"
 #include "player.h"
 #include "transport.h"
@@ -39,7 +40,7 @@ Widelands_Map_Flag_Data_Packet::~Widelands_Map_Flag_Data_Packet(void) {
  * Read Function
  */
 void Widelands_Map_Flag_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egbase, bool skip, Widelands_Map_Map_Object_Loader* ol) throw(wexception) {
-   if( skip ) 
+   if( skip )
       return;
 
    FileRead fr;
@@ -69,8 +70,8 @@ void Widelands_Map_Flag_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egba
 
                // Now, create this Flag. Directly
                // create it, do not call the player class since
-               // we recreate the data in another packet. We always 
-               // create this, no matter what skip is since we have 
+               // we recreate the data in another packet. We always
+               // create this, no matter what skip is since we have
                // to read the data packets. We delete this object
                // later again, if it isn't wanted
                Player* plr = egbase->get_safe_player(owner);
@@ -87,7 +88,7 @@ void Widelands_Map_Flag_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egba
       return;
    }
    throw wexception("Unknown version %i in Widelands_Map_Flag_Data_Packet!\n", packet_version);
-   
+
    assert( 0 );
 }
 
@@ -96,18 +97,18 @@ void Widelands_Map_Flag_Data_Packet::Read(FileSystem* fs, Editor_Game_Base* egba
  * Write Function
  */
 void Widelands_Map_Flag_Data_Packet::Write(FileSystem* fs, Editor_Game_Base* egbase, Widelands_Map_Map_Object_Saver* os) throw(wexception) {
-   FileWrite fw; 
-   
+   FileWrite fw;
+
    // now packet version
    fw.Unsigned16(CURRENT_PACKET_VERSION);
-  
+
    // Write flags and owner, register this with the map_object_saver so that
    // it's data can be saved later.
    Map* map=egbase->get_map();
    for(ushort y=0; y<map->get_height(); y++) {
       for(ushort x=0; x<map->get_width(); x++) {
          BaseImmovable* immovable=map->get_field(Coords(x,y))->get_immovable();
-         // We only write flags 
+         // We only write flags
          if(immovable && immovable->get_type()==Map_Object::FLAG) {
             Flag* flag=static_cast<Flag*>(immovable);
 

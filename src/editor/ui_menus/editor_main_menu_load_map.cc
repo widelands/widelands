@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <string>
 #include "i18n.h"
+#include "layeredfilesystem.h"
 #include "ui_textarea.h"
 #include "ui_editbox.h"
 #include "ui_button.h"
