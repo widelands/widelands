@@ -551,7 +551,7 @@ text=_ ""<rt image=map:khantrukh.png image-align=left><p font-size=24 text-align
 _"Khantrukh nods..."
 "</p><p line-spacing=3 font-size=12><br>"
 _" "Of course, if we intended to build a bigger settlement much more Lumberjacks would be advisable, but this should do for now.<br>But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give again.<br>So, in order to replace the trees we chop down, we should build a Ranger's hut, preferably close to the Lumberjack."<br><br>--NEW OBJECTIVES--<br>- Build a Ranger's Hut to the east of the first Lumberjack."
-"</p>""
+"</p></rt>""
 window_title=_ Advisor
 is_modal=true
 number_of_buttons=1
