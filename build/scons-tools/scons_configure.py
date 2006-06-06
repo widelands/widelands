@@ -186,15 +186,6 @@ def do_configure(config_h_file, conf, env):
 		print '   No usable NLS subsystem found. Please install gettext.'
 		env.Exit(1)
 
-	if not conf.CheckLibWithHeader('asprintf', header='autosprintf.h', language='C++', autoadd=1):
-		print
-		print 'Could not find the autosprintf library, which is part of gettext!'
-		print
-		print 'Some distributions seem to not include libasprintf in their'
-		print 'gettext package(s). So either your system is damaged or, more'
-		print 'likely, you just found a bug in your distribution.'
-		env.Exit(1)
-
 	if not conf.CheckFunc('getenv'):
 		print 'Your system does not support getenv(). Tilde epansion in filenames will not work.'
 	else:
