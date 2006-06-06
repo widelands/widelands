@@ -20,6 +20,7 @@
 #include <string>
 #include "error.h"
 #include "zip_filesystem.h"
+#include "wexception.h"
 
 /*
  * These are defined in files.cc and helpfull here

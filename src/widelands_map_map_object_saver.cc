@@ -21,6 +21,7 @@
 #include "error.h"
 #include "instances.h"
 #include "widelands_map_map_object_saver.h"
+#include "wexception.h"
 
 /*
  * constructor, destructor

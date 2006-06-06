@@ -212,7 +212,7 @@ void RealFSImpl::m_unlink_file( std::string file ) {
 
 	fullname=FS_CanonicalizeName(file, m_directory);
 
-#ifndef __WIN32__
+#ifdef __WIN32__
 	unlink( fullname.c_str());
 #else
 	DeleteFile( fullname.c_str() );
@@ -247,7 +247,7 @@ void RealFSImpl::m_unlink_directory( std::string file ) {
 	std::string fullname;
 
 	fullname=FS_CanonicalizeName(file, m_directory);
-#ifndef __WIN32__
+#ifdef __WIN32__
 	rmdir( fullname.c_str() );
 #else
 	RemoveDirectory( fullname.c_str());

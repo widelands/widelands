@@ -23,6 +23,7 @@
 #include "game.h"
 #include "i18n.h"
 #include "profile.h"
+#include "wexception.h"
 
 static const int TRIGGER_VERSION = 1;
 

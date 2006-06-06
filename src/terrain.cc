@@ -29,6 +29,7 @@ Texture implementation and terrain rendering for the 16-bit software renderer.
 #include "mapviewpixelfunctions.h"
 #include "random.h"
 #include "world.h"
+#include "wexception.h"
 
 using namespace std;
 
