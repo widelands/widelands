@@ -20,6 +20,7 @@
 #include "error.h"
 #include "filewrite.h"
 #include <stdarg.h>
+#include "wexception.h"
 
 /**
  * Set the buffer to empty

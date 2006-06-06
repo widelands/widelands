@@ -33,6 +33,7 @@
 #include "widelands_map_loader.h"
 #include "world.h"
 #include "worlddata.h"
+#include "wexception.h"
 
 /**
  * Callback function for font renderer.

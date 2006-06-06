@@ -24,6 +24,8 @@
 #include "instances.h"
 #include "worker.h"
 #include "transport.h"
+#include "wexception.h"
+
 
 BaseCommand* Queue_Cmd_Factory::create_correct_queue_command(uint id) {
    switch(id) {

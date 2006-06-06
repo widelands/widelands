@@ -25,6 +25,7 @@
 #include "i18n.h"
 #include "map.h"
 #include "profile.h"
+#include "wexception.h"
 
 static const int EVENT_VERSION = 1;
 
@@ -68,7 +69,7 @@ void Event_Conquer_Area::Read(Section* s, Editor_Game_Base* egbase) {
       }
       return;
    }
-   throw wexception("Conquer Area Event with unknown/unhandled version %i in map!\n", version);
+   throw wexception("Conquer Area Event with unknown/unhandled version %i in map!\n", version); 
 }
 
 
