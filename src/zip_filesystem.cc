@@ -1,4 +1,4 @@
-/*
+	/*
  * Copyright (C) 2002-5 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
@@ -22,13 +22,8 @@
 #include "zip_filesystem.h"
 #include "wexception.h"
 
-/*
- * These are defined in files.cc and helpfull here
- */
-char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
-char *FS_StripExtension(char *fname);
-char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
-bool FS_CanonicalizeName(char *buf, int bufsize, const char *path);
+/// defined in files.cc and helpful here
+/// \todo Inherit this from class Filesystem
 const char *FS_Filename(const char* buf);
 
 /*
@@ -39,8 +34,7 @@ ZipFilesystem IMPLEMENTATION
 ==============================================================================
 */
 
-/** ZipFilesystem::ZipFilesystem(const char *pszDirectory)
- *
+/**
  * Initialize the real file-system
  */
 ZipFilesystem::ZipFilesystem(std::string zipfile)
@@ -54,8 +48,7 @@ ZipFilesystem::ZipFilesystem(std::string zipfile)
    // TODO: check OS permissions on whether the file is writable
 }
 
-/** ZipFilesystem::~ZipFilesystem()
- *
+/**
  * Cleanup code
  */
 ZipFilesystem::~ZipFilesystem()
@@ -63,8 +56,7 @@ ZipFilesystem::~ZipFilesystem()
    m_Close();
 }
 
-/** ZipFilesystem::IsWritable()
- *
+/**
  * Return true if this directory is writable.
  */
 bool ZipFilesystem::IsWritable()
@@ -100,8 +92,9 @@ int ZipFilesystem::FindFiles(std::string path, std::string pattern, filenameset_
       std::string filename = FS_Filename( complete_filename.c_str() );
       std::string filepath = complete_filename.substr( 0, complete_filename.size()-filename.size());
 
-      //TODO: sth. strange is going on wrt the leading slash!
-      if ( ( '/'+path == filepath ) && ( filename != "" ) ) {
+      //TODO: sth. strange is going on wrt the leading slash! This is just an ugly
+      //workaround and does not solve the real problem (which remains undiscovered)
+      if ( (( '/'+path==filepath ) || (path==filepath))&& ( filename != "" ) ) {
          results->insert( complete_filename );
       }
 
@@ -112,14 +105,10 @@ int ZipFilesystem::FindFiles(std::string path, std::string pattern, filenameset_
    return results->size();
 }
 
-/*
-===============
-ZipFilesystem::FileExists
-
-Returns true if the given file exists, and false if it doesn't.
-Also returns false if the pathname is invalid
-===============
-*/
+/**
+ * Returns true if the given file exists, and false if it doesn't.
+ * Also returns false if the pathname is invalid
+ */
 bool ZipFilesystem::FileExists(std::string path)
 {
    try {
@@ -153,14 +142,10 @@ bool ZipFilesystem::FileExists(std::string path)
    return false;
 }
 
-/*
-===============
-ZipFilesystem::IsDirectory
-
-Returns true if the given file is a directory, and false if it doesn't.
-Also returns false if the pathname is invalid
-===============
-*/
+/**
+ * Returns true if the given file is a directory, and false if it doesn't.
+ * Also returns false if the pathname is invalid
+ */
 bool ZipFilesystem::IsDirectory(std::string path)
 {
 
@@ -180,7 +165,7 @@ bool ZipFilesystem::IsDirectory(std::string path)
    return false;
 }
 
-/*
+/**
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path ) {
@@ -197,7 +182,7 @@ FileSystem* ZipFilesystem::MakeSubFileSystem( std::string path ) {
    return newfs;
 }
 
-/*
+/**
  * Make a new Subfilesystem in this
  */
 FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type ) {
@@ -215,14 +200,14 @@ FileSystem* ZipFilesystem::CreateSubFileSystem( std::string path, Type type ) {
 
    return newfs;
 }
-/*
+/**
  * Remove a number of files
  */
 void ZipFilesystem::Unlink(std::string file) {
    throw wexception("Unlinking doesn't work in a zip file!\n");
 }
 
-/*
+/**
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
@@ -233,7 +218,7 @@ void ZipFilesystem::EnsureDirectoryExists(std::string dirname) {
    MakeDirectory( dirname );
 }
 
-/*
+/**
  * Create this directory, throw an error if it already exists or
  * if a file is in the way or if the creation fails.
  *
@@ -268,14 +253,10 @@ void ZipFilesystem::MakeDirectory(std::string dirname) {
    zipCloseFileInZip( m_zipfile );
 }
 
-/*
-===============
-ZipFilesystem::Load
-
-Read the given file into alloced memory; called by FileRead::Open.
-Throws an exception if the file couldn't be opened.
-===============
-*/
+/**
+ * Read the given file into alloced memory; called by FileRead::Open.
+ * Throws an exception if the file couldn't be opened.
+ */
 void *ZipFilesystem::Load(std::string fname, int *length)
 {
    if( !FileExists( fname.c_str()) || IsDirectory( fname.c_str()))
@@ -299,14 +280,10 @@ void *ZipFilesystem::Load(std::string fname, int *length)
    return retdata;
 }
 
-/*
-===============
-ZipFilesystem::Write
-
-Write the given block of memory to the repository.
-Throws an exception if it fails.
-===============
-*/
+/**
+ * Write the given block of memory to the repository.
+ * Throws an exception if it fails.
+ */
 void ZipFilesystem::Write(std::string fname, void *data, int length)
 {
    m_OpenZip();
@@ -337,7 +314,7 @@ void ZipFilesystem::Write(std::string fname, void *data, int length)
    zipCloseFileInZip( m_zipfile );
 }
 
-/*
+/**
  * Private Functions below
  */
 void ZipFilesystem::m_Close( void ) {
@@ -350,7 +327,7 @@ void ZipFilesystem::m_Close( void ) {
    m_state = STATE_IDLE;
 }
 
-/*
+/**
  * Open a zipfile for compressing
  */
 void ZipFilesystem::m_OpenZip( void ) {
@@ -368,7 +345,7 @@ void ZipFilesystem::m_OpenZip( void ) {
    m_state = STATE_ZIPPING;
 }
 
-/*
+/**
  * Open a zipfile for extraction
  */
 void ZipFilesystem::m_OpenUnzip( void ) {
