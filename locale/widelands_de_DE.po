@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands Mainlanguagepack 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-29 17:08+0200\n"
-"PO-Revision-Date: 2006-05-07 23:22+0100\n"
+"PO-Revision-Date: 2006-05-20 01:08+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../src/building_statistics_menu.cc:51 ../src/building_statistics_menu.cc:62
+#: ../src/building_statistics_menu.cc:51
+#: ../src/building_statistics_menu.cc:62
 msgid "Building Statistics"
 msgstr "Gebäude Statistik"
 
-#: ../src/building_statistics_menu.cc:67 ../src/building_ui.cc:1315
-#: ../src/building_ui.cc:1752 ../src/editor/tools/editor_info_tool.cc:89
+#: ../src/building_statistics_menu.cc:67
+#: ../src/building_ui.cc:1315
+#: ../src/building_ui.cc:1752
+#: ../src/editor/tools/editor_info_tool.cc:89
 #: ../src/editor/tools/editor_info_tool.cc:95
 #: ../src/editor/tools/editor_info_tool.cc:100
 #: ../src/editor/tools/editor_info_tool.cc:109
@@ -67,7 +70,8 @@ msgstr "Gebäude zerstören?"
 msgid "Do you really want to destroy this "
 msgstr "Wollen sie das wirklich zerstören?"
 
-#: ../src/building_ui.cc:1036 ../src/building_ui.cc:1042
+#: ../src/building_ui.cc:1036
+#: ../src/building_ui.cc:1042
 msgid "Worker Listing"
 msgstr "Arbeiterliste"
 
@@ -83,27 +87,33 @@ msgstr "Erfahrung:"
 msgid "Trying to become: "
 msgstr "Wird gerade:"
 
-#: ../src/building_ui.cc:1316 ../src/building_ui.cc:1753
+#: ../src/building_ui.cc:1316
+#: ../src/building_ui.cc:1753
 msgid "HP"
 msgstr "LP"
 
-#: ../src/building_ui.cc:1317 ../src/building_ui.cc:1754
+#: ../src/building_ui.cc:1317
+#: ../src/building_ui.cc:1754
 msgid "AT"
 msgstr "AT"
 
-#: ../src/building_ui.cc:1318 ../src/building_ui.cc:1755
+#: ../src/building_ui.cc:1318
+#: ../src/building_ui.cc:1755
 msgid "DE"
 msgstr "PA"
 
-#: ../src/building_ui.cc:1319 ../src/building_ui.cc:1756
+#: ../src/building_ui.cc:1319
+#: ../src/building_ui.cc:1756
 msgid "EV"
 msgstr "AU"
 
-#: ../src/building_ui.cc:1320 ../src/building_ui.cc:1757
+#: ../src/building_ui.cc:1320
+#: ../src/building_ui.cc:1757
 msgid "Level"
 msgstr "Level"
 
-#: ../src/building_ui.cc:1337 ../src/building_ui.cc:1773
+#: ../src/building_ui.cc:1337
+#: ../src/building_ui.cc:1773
 msgid "Capacity"
 msgstr "Kapazität"
 
@@ -171,67 +181,54 @@ msgstr "Absturz"
 msgid "Widelands"
 msgstr "Widelands"
 
-#: ../src/event_factory.cc:45 ../src/event_message_box.cc:40
+#: ../src/event_factory.cc:45
+#: ../src/event_message_box.cc:40
 msgid "Message Box"
 msgstr "Nachrichten Box"
 
 #: ../src/event_factory.cc:45
-msgid ""
-"This Event shows a messagebox. The user can choose to make it modal/non-"
-"modal and to add a picture. Events can be assigned to each button to use "
-"this as a Choose Dialog for the user"
-msgstr ""
-"Dieses Ereignis zeigt ein Nachrichtenfenster, welches fest oder veränderbar "
-"sein kann. Das Fenster kann aus Text, Bildern und Knöpfen zusammengesetzt "
-"werden, wobei jedem Knopf ein bestimmtes Ereignis zugewiesen werden kann."
+msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
+msgstr "Dieses Ereignis zeigt ein Nachrichtenfenster, welches fest oder veränderbar sein kann. Das Fenster kann aus Text, Bildern und Knöpfen zusammengesetzt werden, wobei jedem Knopf ein bestimmtes Ereignis zugewiesen werden kann."
 
-#: ../src/event_factory.cc:46 ../src/event_move_view.cc:36
+#: ../src/event_factory.cc:46
+#: ../src/event_move_view.cc:36
 #: ../src/event_unhide_objective.cc:37
 msgid "Move View"
 msgstr "Bewege Blick"
 
 #: ../src/event_factory.cc:46
 msgid "This Event centers the Players View on a certain field"
-msgstr ""
-"Dieses Ereignis zentriert den Blick des Spieler auf ein bestimmtes Feld"
+msgstr "Dieses Ereignis zentriert den Blick des Spieler auf ein bestimmtes Feld"
 
-#: ../src/event_factory.cc:47 ../src/event_unhide_area.cc:37
+#: ../src/event_factory.cc:47
+#: ../src/event_unhide_area.cc:37
 msgid "Unhide Area"
 msgstr "Zeige Gebiet"
 
 #: ../src/event_factory.cc:47
-msgid ""
-"This Event makes a user definable part of the map visible for a selectable "
-"user"
-msgstr ""
-"Dieses Ereignis macht einen auswählbaren Platz der Karte für einen "
-"bestimmten Spieler sichtbar."
+msgid "This Event makes a user definable part of the map visible for a selectable user"
+msgstr "Dieses Ereignis macht einen auswählbaren Platz der Karte für einen bestimmten Spieler sichtbar."
 
-#: ../src/event_factory.cc:48 ../src/event_conquer_area.cc:36
+#: ../src/event_factory.cc:48
+#: ../src/event_conquer_area.cc:36
 msgid "Conquer Area"
 msgstr "Eroberungsgebiet"
 
 #: ../src/event_factory.cc:48
-msgid ""
-"This Event conquers a user definable part of the map for one player if there "
-"isn't a player already there"
-msgstr ""
-"Dieses Ereignis erobert für einen bestimmten Spieler einen auswählbaren Teil "
-"der Karte, solange dort noch kein anderer Spieler herrscht."
+msgid "This Event conquers a user definable part of the map for one player if there isn't a player already there"
+msgstr "Dieses Ereignis erobert für einen bestimmten Spieler einen auswählbaren Teil der Karte, solange dort noch kein anderer Spieler herrscht."
 
-#: ../src/event_factory.cc:49 ../src/event_allow_building.cc:38
+#: ../src/event_factory.cc:49
+#: ../src/event_allow_building.cc:38
 msgid "Allow Building"
 msgstr "Erlaube Gebäude"
 
 #: ../src/event_factory.cc:49
-msgid ""
-"Allows/Disables a certain building for a player so that it can be build or "
-"it can't any longer"
-msgstr ""
-"Erlaube/Verbiete ein bestimmtes Gebäude für einen Spieler, so dass es gebaut "
-"bzw nicht mehr gebaut werden kann."
+msgid "Allows/Disables a certain building for a player so that it can be build or it can't any longer"
+msgstr "Erlaube/Verbiete ein bestimmtes Gebäude für einen Spieler, so dass es gebaut bzw nicht mehr gebaut werden kann."
 
-#: ../src/event_factory.cc:51 ../src/event_set_null_trigger.cc:38
+#: ../src/event_factory.cc:51
+#: ../src/event_set_null_trigger.cc:38
 msgid "Set Null Trigger"
 msgstr "Setzte Null-Auslöser"
 
@@ -245,8 +242,7 @@ msgstr "Zeige Auftrag"
 
 #: ../src/event_factory.cc:52
 msgid "Hide or unhide an objective so that the player can see it"
-msgstr ""
-"Verstecke oder Zeige einen Auftrag, so dass der Spieler ihn sehen kann."
+msgstr "Verstecke oder Zeige einen Auftrag, so dass der Spieler ihn sehen kann."
 
 #: ../src/event_message_box.cc:41
 msgid "No text defined"
@@ -265,7 +261,8 @@ msgstr "Weiter"
 msgid "Action"
 msgstr "Aktion"
 
-#: ../src/game_chat_menu.cc:54 ../src/game_chat_menu.cc:63
+#: ../src/game_chat_menu.cc:54
+#: ../src/game_chat_menu.cc:63
 msgid "Chat Menu"
 msgstr "Chat Menü"
 
@@ -285,24 +282,29 @@ msgstr "Debug Feld"
 msgid "height:"
 msgstr "Höhe:"
 
-#: ../src/game_main_menu.cc:51 ../src/editor/ui_menus/editor_main_menu.cc:41
+#: ../src/game_main_menu.cc:51
+#: ../src/editor/ui_menus/editor_main_menu.cc:41
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: ../src/game_main_menu_load_game.cc:40 ../src/game_main_menu_load_game.cc:44
+#: ../src/game_main_menu_load_game.cc:40
+#: ../src/game_main_menu_load_game.cc:44
 #: ../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:48
 msgid "Load Game"
 msgstr "Spielstand laden"
 
-#: ../src/game_main_menu_load_game.cc:62 ../src/game_main_menu_save_game.cc:68
+#: ../src/game_main_menu_load_game.cc:62
+#: ../src/game_main_menu_save_game.cc:68
 msgid "Map Name: "
 msgstr "Karten Name:"
 
-#: ../src/game_main_menu_load_game.cc:67 ../src/game_main_menu_save_game.cc:73
+#: ../src/game_main_menu_load_game.cc:67
+#: ../src/game_main_menu_save_game.cc:73
 msgid "Game Time: "
 msgstr "Spiel Zeit:"
 
-#: ../src/game_main_menu_load_game.cc:76 ../src/game_main_menu_save_game.cc:82
+#: ../src/game_main_menu_load_game.cc:76
+#: ../src/game_main_menu_save_game.cc:82
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:106
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:111
 #: ../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:58
@@ -311,7 +313,8 @@ msgstr "Spiel Zeit:"
 msgid "OK"
 msgstr "OK"
 
-#: ../src/game_main_menu_load_game.cc:81 ../src/game_main_menu_save_game.cc:87
+#: ../src/game_main_menu_load_game.cc:81
+#: ../src/game_main_menu_save_game.cc:87
 #: ../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:129
 #: ../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:129
 #: ../src/editor/ui_menus/editor_event_menu_new_event.cc:74
@@ -343,7 +346,8 @@ msgstr ""
 msgid "Load Game Error!!"
 msgstr "Ladefehler!!"
 
-#: ../src/game_main_menu_save_game.cc:43 ../src/game_main_menu_save_game.cc:47
+#: ../src/game_main_menu_save_game.cc:43
+#: ../src/game_main_menu_save_game.cc:47
 msgid "Save Game"
 msgstr "Spiel speichern"
 
@@ -407,7 +411,8 @@ msgstr "Sound"
 msgid "No Name"
 msgstr "Kein Name"
 
-#: ../src/map.cc:433 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:144
+#: ../src/map.cc:433
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:144
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -415,44 +420,54 @@ msgstr "Unbekannt"
 msgid "no description defined"
 msgstr "Keine Beschreibung definiert"
 
-#: ../src/map.cc:436 ../src/map_variable_manager.cc:32
+#: ../src/map.cc:436
+#: ../src/map_variable_manager.cc:32
 msgid "<undefined>"
 msgstr "<undefined>"
 
-#: ../src/map.cc:437 ../src/playerdescrgroup.cc:33
+#: ../src/map.cc:437
+#: ../src/playerdescrgroup.cc:33
 #: ../src/playerdescrgroup.cc:63
 msgid "Player 1"
 msgstr "Spieler 1"
 
-#: ../src/general_statistics_menu.cc:56 ../src/general_statistics_menu.cc:65
+#: ../src/general_statistics_menu.cc:56
+#: ../src/general_statistics_menu.cc:65
 msgid "General Statistics"
 msgstr "Generelle Statistiken"
 
-#: ../src/general_statistics_menu.cc:156 ../src/ware_statistics_menu.cc:401
+#: ../src/general_statistics_menu.cc:156
+#: ../src/ware_statistics_menu.cc:401
 msgid "15 m"
 msgstr "15 m"
 
-#: ../src/general_statistics_menu.cc:160 ../src/ware_statistics_menu.cc:405
+#: ../src/general_statistics_menu.cc:160
+#: ../src/ware_statistics_menu.cc:405
 msgid "30 m"
 msgstr "30 m"
 
-#: ../src/general_statistics_menu.cc:164 ../src/ware_statistics_menu.cc:409
+#: ../src/general_statistics_menu.cc:164
+#: ../src/ware_statistics_menu.cc:409
 msgid "1 h"
 msgstr "1 Std"
 
-#: ../src/general_statistics_menu.cc:168 ../src/ware_statistics_menu.cc:413
+#: ../src/general_statistics_menu.cc:168
+#: ../src/ware_statistics_menu.cc:413
 msgid "2 h"
 msgstr "2 Std"
 
-#: ../src/general_statistics_menu.cc:178 ../src/ware_statistics_menu.cc:423
+#: ../src/general_statistics_menu.cc:178
+#: ../src/ware_statistics_menu.cc:423
 msgid "4 h"
 msgstr "4 Std"
 
-#: ../src/general_statistics_menu.cc:182 ../src/ware_statistics_menu.cc:427
+#: ../src/general_statistics_menu.cc:182
+#: ../src/ware_statistics_menu.cc:427
 msgid "8 h"
 msgstr "8 Std"
 
-#: ../src/general_statistics_menu.cc:186 ../src/ware_statistics_menu.cc:431
+#: ../src/general_statistics_menu.cc:186
+#: ../src/ware_statistics_menu.cc:431
 msgid "16 h"
 msgstr "16 Std"
 
@@ -484,7 +499,8 @@ msgstr[0] "%d Soldat"
 msgstr[1] "%d Soldaten"
 msgstr[2] "%d Soldaten"
 
-#: ../src/minimap.cc:155 ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
+#: ../src/minimap.cc:155
+#: ../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:79
 msgid "Map"
 msgstr "Karte"
 
@@ -496,7 +512,8 @@ msgstr "Ich habe keinen Namen"
 msgid "Starting network game"
 msgstr "Starte Netzwerk Spiel"
 
-#: ../src/network.cc:836 ../src/network.cc:845
+#: ../src/network.cc:836
+#: ../src/network.cc:845
 msgid "Player"
 msgstr "Spieler"
 
@@ -540,11 +557,13 @@ msgstr "Spieler 7"
 msgid "Player 8"
 msgstr "Spieler 8"
 
-#: ../src/playerdescrgroup.cc:111 ../src/playerdescrgroup.cc:201
+#: ../src/playerdescrgroup.cc:111
+#: ../src/playerdescrgroup.cc:201
 msgid "Human"
 msgstr "Mensch"
 
-#: ../src/playerdescrgroup.cc:112 ../src/playerdescrgroup.cc:201
+#: ../src/playerdescrgroup.cc:112
+#: ../src/playerdescrgroup.cc:201
 msgid "Computer"
 msgstr "Computer"
 
@@ -580,7 +599,8 @@ msgstr ""
 msgid "winterland"
 msgstr ""
 
-#: ../src/worker.cc:1520 ../src/ware.cc:73
+#: ../src/worker.cc:1520
+#: ../src/ware.cc:73
 msgid "Doh... someone forgot the help text!"
 msgstr "Och neeee! Jemand hat den Hilfstext vergessen!"
 
@@ -596,7 +616,8 @@ msgstr "Warten"
 msgid "Not Working"
 msgstr "Arbeitet Nicht"
 
-#: ../src/trigger_building.cc:39 ../src/trigger_factory.cc:38
+#: ../src/trigger_building.cc:39
+#: ../src/trigger_factory.cc:38
 msgid "Building Trigger"
 msgstr "Gebäude Auslöser"
 
@@ -604,40 +625,30 @@ msgstr "Gebäude Auslöser"
 msgid "<unset>"
 msgstr ""
 
-#: ../src/trigger_factory.cc:36 ../src/trigger_time.cc:36
+#: ../src/trigger_factory.cc:36
+#: ../src/trigger_time.cc:36
 msgid "Time Trigger"
 msgstr "Zeit Trigger"
 
 #: ../src/trigger_factory.cc:36
-msgid ""
-"This Trigger waits a certain time before it is true. It can be configured to "
-"constantly restart itself when the wait time is over for repeating events"
-msgstr ""
-"Dieser Auslöser wartet eine bestimmte Zeit bevor er wahr wird. Er kann so "
-"eingestellt werden, dass er sich immer wieder neustartet nachdem die "
-"gewartete Zeit um ist. Ereignisse können wiederholt werden."
+msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
+msgstr "Dieser Auslöser wartet eine bestimmte Zeit bevor er wahr wird. Er kann so eingestellt werden, dass er sich immer wieder neustartet nachdem die gewartete Zeit um ist. Ereignisse können wiederholt werden."
 
-#: ../src/trigger_factory.cc:37 ../src/trigger_null.cc:34
+#: ../src/trigger_factory.cc:37
+#: ../src/trigger_null.cc:34
 msgid "Null Trigger"
 msgstr "Null Auslöser"
 
 #: ../src/trigger_factory.cc:37
-msgid ""
-"This Trigger never changes its state by itself. It is useful to pass it to "
-"some event which changes triggers"
-msgstr ""
-"Dieser Auslöser ändert seinen Status nie von selbst, was sinnvoll ist, wenn "
-"ein Ereignis erst nach einem anderen passieren soll."
+msgid "This Trigger never changes its state by itself. It is useful to pass it to some event which changes triggers"
+msgstr "Dieser Auslöser ändert seinen Status nie von selbst, was sinnvoll ist, wenn ein Ereignis erst nach einem anderen passieren soll."
 
 #: ../src/trigger_factory.cc:38
-msgid ""
-"This trigger gets set when a number of a building type of one player is "
-"available in an area."
-msgstr ""
-"Dieser Auslöser wird wahr, wenn ein bestimmter Gebäudetyp auf dem Land eines "
-"Spielers baubar wird."
+msgid "This trigger gets set when a number of a building type of one player is available in an area."
+msgstr "Dieser Auslöser wird wahr, wenn ein bestimmter Gebäudetyp auf dem Land eines Spielers baubar wird."
 
-#: ../src/ware_statistics_menu.cc:343 ../src/ware_statistics_menu.cc:391
+#: ../src/ware_statistics_menu.cc:343
+#: ../src/ware_statistics_menu.cc:391
 msgid "Ware Statistics"
 msgstr "Waren Statistik"
 
@@ -651,21 +662,13 @@ msgstr "Beobachten"
 
 #: ../src/game_server_proto_packet_chatmessage.cc:69
 #, c-format
-msgid ""
-"Server replied illegally to ChatMessage package. Should have sent %i but "
-"sent %i. Ignored"
-msgstr ""
-"Server bezog sich fälschlich auf ein Chat-Nachricht-Paket. Er hätte %i "
-"senden sollen sendete aber %i. Daher wurde er ignoriert."
+msgid "Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"
+msgstr "Server bezog sich fälschlich auf ein Chat-Nachricht-Paket. Er hätte %i senden sollen sendete aber %i. Daher wurde er ignoriert."
 
 #: ../src/game_server_proto_packet_connect.cc:72
 #, c-format
-msgid ""
-"Server delivers a connection Error. Your Protocol (%i.%02i) is too old, "
-"Server runs %i.%02i\n"
-msgstr ""
-"Server gab einen Verbindungsfehler zurück. Dein Protokoll (%i.%02i) ist zu "
-"alt,der Server benutzt %i.%02i\n"
+msgid "Server delivers a connection Error. Your Protocol (%i.%02i) is too old, Server runs %i.%02i\n"
+msgstr "Server gab einen Verbindungsfehler zurück. Dein Protokoll (%i.%02i) ist zu alt,der Server benutzt %i.%02i\n"
 
 #: ../src/game_server_proto_packet_connect.cc:78
 #, c-format
@@ -687,7 +690,8 @@ msgstr "Der Raum %s ist zur Zeit nicht online oder dem Server unbekannt.\n"
 msgid "The User %s is currently not logged in or unknown to the server.\n"
 msgstr "Der Benutzer %s ist zur Zeit nicht online oder dem Server unbekannt.\n"
 
-#: ../src/game_objectives_menu.cc:49 ../src/game_objectives_menu.cc:55
+#: ../src/game_objectives_menu.cc:49
+#: ../src/game_objectives_menu.cc:55
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:168
 #: ../src/editor/ui_menus/editor_objectives_menu.cc:173
 msgid "Objectives Menu"
@@ -699,8 +703,7 @@ msgstr "Karte nicht gespeichert"
 
 #: ../src/editor/editorinteractive.cc:193
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr ""
-"Die Karte ist nicht gespeichert! Willst du den Editor wirklich beenden?"
+msgstr "Die Karte ist nicht gespeichert! Willst du den Editor wirklich beenden?"
 
 #: ../src/editor/tools/editor_info_tool.cc:45
 msgid "Field Information"
@@ -1034,7 +1037,7 @@ msgstr "Beenden"
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:77
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:81
 msgid "Author: "
-msgstr "Autor"
+msgstr "Autor:"
 
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:82
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:86
@@ -1194,22 +1197,12 @@ msgid "Player "
 msgstr "Spieler"
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:257
-msgid ""
-"Can't remove player. It is referenced in some place. Remove all buildings, "
-"bobs, triggers and events that depend of this player and try again"
-msgstr ""
-"Kann Spieler nicht löschen. Der Spieler wird verwendet. Entferne alle "
-"Gebäude, Natur, Auslöser und Ereignisse die mit diesem Spieler verknüpft "
-"sind und versuche es nochmal."
+msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend of this player and try again"
+msgstr "Kann Spieler nicht löschen. Der Spieler wird verwendet. Entferne alle Gebäude, Natur, Auslöser und Ereignisse die mit diesem Spieler verknüpft sind und versuche es nochmal."
 
 #: ../src/editor/ui_menus/editor_player_menu.cc:284
-msgid ""
-"Can't change player tribe. It is referenced in some place. Remove all "
-"buildings, bobs, triggers and events that depend on this tribe and try again"
-msgstr ""
-"Kann Spieler-Stamm nicht ändern. Der Stamm wird verwendet. Entferne alle "
-"Gebäude, Natur, Auslöser und Ereignisse die mit diesem Stamm verknüpft sind "
-"und versuche es nochmal."
+msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again"
+msgstr "Kann Spieler-Stamm nicht ändern. Der Stamm wird verwendet. Entferne alle Gebäude, Natur, Auslöser und Ereignisse die mit diesem Stamm verknüpft sind und versuche es nochmal."
 
 #: ../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:37
 msgid "Allowed Buildings"
@@ -1718,10 +1711,8 @@ msgid "Mission 1: Eyes in the Darkness - Game Basics"
 msgstr "Mission 1: Augen in der Dunkelheit - Spiel Basis"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_tutorial_select_map.cc:51
-msgid ""
-"Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
-msgstr ""
-"Mission 2: Ein Ort wie zuhause - Bergbau, Expansion, Erweiterte Produktion"
+msgid "Mission 2: A Place to call Home - Mining, Expanding, Advanced Productions"
+msgstr "Mission 2: Ein Ort wie zuhause - Bergbau, Expansion, Erweiterte Produktion"
 
 #: ../src/map_objective_manager.h:59
 msgid "no descr"
@@ -1729,9 +1720,8 @@ msgstr "Keine Beschr."
 
 #~ msgid "Editor Main Menu"
 #~ msgstr "Editor Hauptmenü"
-
 #~ msgid "constructionsite"
 #~ msgstr "Bauplatz"
-
 #~ msgid "headquarters"
 #~ msgstr "Hauptquartier"
+

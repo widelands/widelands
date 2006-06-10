@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-29 17:08+0200\n"
-"PO-Revision-Date: 2006-05-09 01:46+0600\n"
+"PO-Revision-Date: 2006-06-09 00:13+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -379,7 +379,7 @@ msgstr "Настройка"
 
 #: ../src/game_options_menu.cc:57
 msgid "Options Menu"
-msgstr "Меню Настройки"
+msgstr "Настройки"
 
 #: ../src/game_options_menu.cc:62
 msgid "README"
@@ -583,7 +583,7 @@ msgstr "Ох... кто-то забыл текстовую справку!"
 
 #: ../src/stock_menu.cc:36
 msgid "Stock"
-msgstr "Ствол"
+msgstr "Бревно"
 
 #: ../src/trainingsite.cc:218
 msgid "Resting"
@@ -1015,21 +1015,21 @@ msgstr "Загрузить Карту"
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:50
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:55
 msgid "Save Map"
-msgstr "Сохранить Карту"
+msgstr "Записать Карту"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../src/editor/ui_menus/editor_main_menu_map_options.cc:38
 msgid "Map Options"
-msgstr "Настройки карты"
+msgstr "Опции карты"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:79
 #: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:59
 msgid "View Readme"
-msgstr "Прочитать Памятку"
+msgstr "Прочти меня!"
 
 #: ../src/editor/ui_menus/editor_main_menu.cc:85
 msgid "Exit Editor"
-msgstr "Выход из редактора"
+msgstr "Выход"
 
 #: ../src/editor/ui_menus/editor_main_menu_load_map.cc:77
 #: ../src/editor/ui_menus/editor_main_menu_save_map.cc:81
@@ -1657,11 +1657,11 @@ msgstr "Захват ввода"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:76
 msgid "Enable Music"
-msgstr "Включить музыку"
+msgstr "Музыка"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:85
 msgid "Enable Sound"
-msgstr "Включить звук"
+msgstr "Звук"
 
 #: ../src/ui/ui_fs_menus/fullscreen_menu_options.cc:93
 msgid "In-game resolution"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-13 21:08+0600\n"
+"PO-Revision-Date: 2006-06-09 00:16+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -143,7 +143,7 @@ msgstr "Штаб"
 #: ../tribes/barbarians/buildings/helmsmith/conf:2
 #: ../tribes/barbarians/workers/helmsmith/conf:2
 msgid "Helmsmith"
-msgstr "Тяжелый шлем"
+msgstr "Оружейник"
 
 #: ../tribes/barbarians/buildings/hunter/conf:2
 msgid "Hunters Hut"
@@ -224,7 +224,7 @@ msgstr "Топор"
 
 #: ../tribes/barbarians/wares/bakingtray/conf:2
 msgid "Bakingtray"
-msgstr "Противень"
+msgstr "Лопата Пекаря"
 
 #: ../tribes/barbarians/wares/battleaxe/conf:2
 msgid "Battle Axe"
@@ -256,7 +256,7 @@ msgstr "Уголь"
 
 #: ../tribes/barbarians/wares/coalearth/conf:2
 msgid "Coalearth"
-msgstr "Угольный разрез"
+msgstr "Кусочек угля"
 
 #: ../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
@@ -296,7 +296,7 @@ msgstr "Шлем"
 
 #: ../tribes/barbarians/wares/hunting_spear/conf:2
 msgid "Hunting Spear"
-msgstr "Охотничье копье"
+msgstr "Копье охотника"
 
 #: ../tribes/barbarians/wares/iron/conf:2
 msgid "Iron"
@@ -364,7 +364,7 @@ msgstr "Сноп"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
-msgstr "Ствол"
+msgstr "Бревно"
 
 #: ../tribes/barbarians/wares/warhelmet/conf:2
 msgid "War Helmet"
@@ -472,7 +472,7 @@ msgstr "Каменщик"
 
 #: ../tribes/barbarians/workers/trainer/conf:2
 msgid "Trainer"
-msgstr "Тренер"
+msgstr "Пастух"
 
 #: ../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
