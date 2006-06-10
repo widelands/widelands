@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tribe_barbarians_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-06-09 00:16+0600\n"
+"PO-Revision-Date: 2006-06-11 01:15+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -256,7 +256,7 @@ msgstr "Уголь"
 
 #: ../tribes/barbarians/wares/coalearth/conf:2
 msgid "Coalearth"
-msgstr "Кусочек угля"
+msgstr "Каменный уголь"
 
 #: ../tribes/barbarians/wares/fire_tongs/conf:2
 msgid "Fire Tongs"
@@ -284,7 +284,7 @@ msgstr "Слиток золота"
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
-msgstr "Жернов"
+msgstr "Бетонный блок"
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -332,7 +332,7 @@ msgstr "Хлеб"
 
 #: ../tribes/barbarians/wares/ration/conf:2
 msgid "Ration"
-msgstr "Паек"
+msgstr "Большой Паек"
 
 #: ../tribes/barbarians/wares/raw_stone/conf:2
 msgid "Raw Stone"
@@ -352,7 +352,7 @@ msgstr "Лопата"
 
 #: ../tribes/barbarians/wares/snack/conf:2
 msgid "Snack"
-msgstr "Еда"
+msgstr "Паек"
 
 #: ../tribes/barbarians/wares/strongbeer/conf:2
 msgid "Strong Beer"
@@ -416,7 +416,7 @@ msgstr "Фермер"
 
 #: ../tribes/barbarians/workers/ferner/conf:2
 msgid "Ferner"
-msgstr "Оранжерейщик"
+msgstr "Садовник"
 
 #: ../tribes/barbarians/workers/fisher/conf:2
 msgid "Fisher"
