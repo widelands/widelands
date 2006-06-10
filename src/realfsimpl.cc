@@ -19,7 +19,6 @@
 
 #include <assert.h>
 #include <errno.h>
-#include "glob.h"
 #include "realfsimpl.h"
 #include <sys/stat.h>
 #include "wexception.h"
@@ -27,6 +26,8 @@
 
 #ifdef __WIN32__
 #include "windows.h"
+#else
+#include <glob.h>
 #endif
 
 /**
