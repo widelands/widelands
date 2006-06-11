@@ -107,6 +107,7 @@ WLApplication::WLApplication(const int argc, const char **argv):
 		m_gfx_w(0), m_gfx_h(0), m_gfx_fullscreen(false),
 		m_game(0)
 {
+	//TODO: EXENAME gets written out on windows!
 	m_commandline["EXENAME"]=argv[0];
 
 	for (int i=1; i<argc; ++i) {
@@ -676,7 +677,7 @@ const bool WLApplication::init_settings()
 	parse_command_line();
 
 	// Set Locale and grab default domain
-	i18n::set_locale( s->get_string("language", "en"));
+	i18n::set_locale( s->get_string("language", "en_EN"));
 	i18n::grab_textdomain("widelands");
 
 	// Input
