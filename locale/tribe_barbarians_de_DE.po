@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-04-19 15:34+0100\n"
+"PO-Revision-Date: 2006-06-13 21:30+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgstr "Granitmine"
 
 #: ../tribes/barbarians/buildings/hardener/conf:2
 msgid "Wood hardener"
-msgstr "Sägewerk"
+msgstr "Holzhärter"
 
 #: ../tribes/barbarians/buildings/headquarters/conf:6
 msgid "Headquarters"
@@ -227,7 +227,7 @@ msgstr "Bier"
 
 #: ../tribes/barbarians/wares/blackwood/conf:2
 msgid "Blackwood"
-msgstr "Bretter"
+msgstr "Hartholz"
 
 #: ../tribes/barbarians/wares/broadaxe/conf:2
 msgid "Broad Axe"
@@ -275,7 +275,7 @@ msgstr "Golderz"
 
 #: ../tribes/barbarians/wares/grindstone/conf:2
 msgid "Grindstone"
-msgstr "Steinblöcke"
+msgstr "Mörtel"
 
 #: ../tribes/barbarians/wares/hammer/conf:2
 msgid "Hammer"
@@ -481,3 +481,4 @@ msgstr "Weber"
 
 #~ msgid "barbarians"
 #~ msgstr "Barbaren"
+
