@@ -1,0 +1,64 @@
+##### Order does matter here, since this file should stay compatible with S2
+
+[tundra]
+def_resources=water 5
+is=green
+
+[mountain1]
+resources=coal, iron, gold, granit 
+is=mountain
+
+[ice_flows]
+is=water
+fps=8
+
+[ice_flows2]
+is=water
+fps=8
+
+[strand]
+is=dry
+
+[water]
+def_resources=fish 4
+is=water
+fps=8
+
+[tundra_taiga]
+def_resources=water 10
+is=green
+
+[tundra2]
+def_resources=water 10
+is=green
+
+[tundra3]
+def_resources=water 10
+is=green
+
+[mountain2]
+resources=coal, iron, gold, granit
+is=mountain
+
+[mountain3]
+resources=coal, iron, gold, granit
+is=mountain
+
+[mountain4]
+resources=coal, iron, gold, granit
+is=mountain
+
+[ice]
+def_resources=water 30
+is=green
+
+[taiga]
+def_resources=water 10
+is=green
+
+[lava]
+is=acid
+
+[snow]
+is=dry
+#### of course snow is not dry, but this disallows the users, to build on snow. only flags are allowed.
