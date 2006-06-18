@@ -195,8 +195,9 @@ std::string FS_CanonicalizeName(std::string path, std::string root)
 {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
+#ifndef __WIN32__    
 	bool absolute=false;
-#ifndef __WIN32__
+ 
 	components=FS_Tokenize(path, '/');
 	if (path[0]=='/')
 		absolute=true;
@@ -248,48 +249,52 @@ std::string FS_CanonicalizeName(std::string path, std::string root)
 		}
 	}
 
-	//reassemble path
-	std::string canonpath="";
-	if (absolute)
-		canonpath="/";
-    else
-        canonpath="./";
-    
+    std::string canonpath="";
+    if (absolute)
+        canonpath="/";
+        else
+            canonpath="./";
+        
     for(i=components.begin(); i!=components.end(); i++)
         canonpath+=*i+"/";
 	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
 
 	return canonpath;
     
-#else // #ifdef __WIN32__
+#else
+   
+    /*===============================================
+     Windows-filesystems work different than Unix-FS
+     so here is a solution, to get it run.
     
-    /*======================================
-    Windows doesn't make the paths absolute. 
-    who cares? it works anyway.
-    Here is a bit strange but working solution.
-    ======================================*/
+     Every path will be absolute afterwards.    
     
-    //Is a double-point in path? If yes, the path is allready absolute.
-	components=FS_Tokenize(path, ':'); 
-	if (path[0]==':')
-		absolute=true;
-
-    //Which signs have to be added to make the path working?
-	std::string canonpath="";
-	if (absolute)
+     Only problem:
+     Widelands will be started in the directory, the 
+     the executable is in, even if you run it from
+     different directory. (Real problem???)
+    ===============================================*/
+    
+	bool absolutewin32=false;
+    components=FS_Tokenize(path, '\\');
+	if (path[0]=='\\') //Is a backslash in path? If yes, the path is allready absolute.
+		absolutewin32=true;
+    
+    std::string canonpath="";
+	if (absolutewin32==true)
 		canonpath=""; //if the path is allready absolute, nothing has to be added.
-    else
-        canonpath=".\\"; //it's still relative but it works fine.
+    else   {
+        canonpath=root.c_str();   //We simply add the root folder
+        canonpath=canonpath+"\\"; //and of course an ending backslash
+            }
     
-    //completing the path-string
-	for(i=components.begin(); i!=components.end(); i++)
-		canonpath+=*i+"\\";
+    for(i=components.begin(); i!=components.end(); i++)
+        canonpath+=*i+"\\";
 	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
 
-	return canonpath;
+    return canonpath;
     
-#endif // #ifdef __WIN32__
-    
+#endif     
 }
 
 /**
