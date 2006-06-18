@@ -163,7 +163,7 @@ std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep)
 	std::vector<std::string> components;
 	SSS_T pos;  //start of token
 	SSS_T pos2; //next pathsep character
-
+    
 	//extract the first path component
 	if (path.find(pathsep)==0) //is this an absolute path?
 		pos=1;
@@ -183,6 +183,7 @@ std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep)
 	components.push_back(path.substr(pos));
 
 	return components;
+    
 }
 
 /**
@@ -195,7 +196,7 @@ std::string FS_CanonicalizeName(std::string path, std::string root)
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
 	bool absolute=false;
-
+#ifndef __WIN32__
 	components=FS_Tokenize(path, '/');
 	if (path[0]=='/')
 		absolute=true;
@@ -251,11 +252,44 @@ std::string FS_CanonicalizeName(std::string path, std::string root)
 	std::string canonpath="";
 	if (absolute)
 		canonpath="/";
-	for(i=components.begin(); i!=components.end(); i++)
-		canonpath+=*i+"/";
+    else
+        canonpath="./";
+    
+    for(i=components.begin(); i!=components.end(); i++)
+        canonpath+=*i+"/";
 	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
 
 	return canonpath;
+    
+#else // #ifdef __WIN32__
+    
+    /*======================================
+    Windows doesn't make the paths absolute. 
+    who cares? it works anyway.
+    Here is a bit strange but working solution.
+    ======================================*/
+    
+    //Is a double-point in path? If yes, the path is allready absolute.
+	components=FS_Tokenize(path, ':'); 
+	if (path[0]==':')
+		absolute=true;
+
+    //Which signs have to be added to make the path working?
+	std::string canonpath="";
+	if (absolute)
+		canonpath=""; //if the path is allready absolute, nothing has to be added.
+    else
+        canonpath=".\\"; //it's still relative but it works fine.
+    
+    //completing the path-string
+	for(i=components.begin(); i!=components.end(); i++)
+		canonpath+=*i+"\\";
+	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
+
+	return canonpath;
+    
+#endif // #ifdef __WIN32__
+    
 }
 
 /**
@@ -323,7 +357,7 @@ void setup_searchpaths(const std::string argv0)
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h
 
 	// if everything else fails, search it where the FHS forces us to put it (obviously UNIX-only)
-#ifndef WIN32
+#ifndef __WIN32__
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/games/widelands"));
 #endif
 	//TODO: is there a "default dir" for this on win32 ?
