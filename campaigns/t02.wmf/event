@@ -573,7 +573,7 @@ state=init
 version=1
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth exclaims..."
-"</p><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
 _" "Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granit<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 "</rt>""
 window_title=_Advisor
@@ -588,7 +588,7 @@ state=init
 version=1
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth laughs..."
-"</p><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
 _" "By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for! It might even be enough to -"</p>"
 "</rt>""
 window_title=_Advisor
@@ -602,9 +602,9 @@ button_00_trigger=Mission Mines
 type=message_box
 state=init
 version=1
-text=_""<p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
+text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"Khantrukh interrupts..."
-"</p><p image=map:khantrukh.png image-align=left line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:khantrukh.png image-align=left><p line-spacing=3 font-size=12>"
 _" "While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not prove easy."</p>"
 "</rt>""
 window_title=_Advisor
@@ -619,7 +619,7 @@ state=init
 version=1
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth nods..."
-"</p><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
 _" "I have to give it to you, you are right here, old man.<br>There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!"<br><br>"
 _"--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>"
 "</rt>""
@@ -635,7 +635,7 @@ state=init
 version=1
 text=_""<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=8080FF>"
 _"The elder laughs..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:khantrukh.png><p image-align=left line-spacing=3 font-size=12>"
 _" "Wisdom commands to seek variety. North of the great mountain is a big plane - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pittabread for a change..."<br><br>"
 _"--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source. Build a well, a farm and a bakery.</p>"
 "</rt>""
@@ -731,10 +731,10 @@ state=init
 version=1
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
 _"Boldreth seems concerned..."
-"</p></rt><rt image=map:boldreth.png><p image-align=left line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:boldreth.png image-align=left><p line-spacing=3 font-size=12>"
 _" "As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even more not so in times as dangerous as ours! We need a woodhardener, and we need one now!"<br><br>"
 _"--NEW OBJECTIVES--<br>- Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a Woodhardener first. Always remember to build a Woodhardener before you run out of blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
-"<rt>""
+"</rt>""
 window_title=_Advisor
 is_modal=true
 number_of_buttons=1
@@ -805,7 +805,7 @@ state=init
 version=1
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
-"</p></rt><rt  image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
 _" "One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath. When I gazed to the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?"</p>"
 "</rt>""
 window_title=_One fullmoon night...
@@ -820,7 +820,7 @@ state=init
 version=1
 text=_""<rt text-align=left><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron speaks..."
-"</p><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
+"</p></rt><rt image=map:chieftain.png image-align=left><p line-spacing=3 font-size=12>"
 _" "The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore. I prayed it might get warmer again, as I prayed the war would finally come to an end.<br>So far, it does not seem either of my prayers was fulfilled."</p>"
 "</rt>""
 window_title=_Another cold day...
