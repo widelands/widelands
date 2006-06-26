@@ -1,0 +1,36 @@
+[global]
+descname=_Weaponsmith
+help=
+type=generic
+menu_pic=menu.png
+
+[buildcost]
+carrier=1
+hammer=1
+
+# The normal idle animation (non-directional)
+[idle]
+pics=idle_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13
+
+# Walking empty-handed
+[walk]
+dirpics=walk_!!_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13
+
+# Walking with a ware
+[walkload]
+dirpics=walkload_!!_??.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13
