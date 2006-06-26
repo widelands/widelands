@@ -22,10 +22,6 @@
 #include "zip_filesystem.h"
 #include "wexception.h"
 
-/// defined in files.cc and helpful here
-/// \todo Inherit this from class Filesystem
-const char *FS_Filename(const char* buf);
-
 /*
 ==============================================================================
 
