@@ -25,23 +25,7 @@
 #include <stdexcept>
 #include <vector>
 
-/*
-==============================================================================
-
-FILESYSTEM ACCESS
-
-==============================================================================
-*/
-
 typedef std::set<std::string> filenameset_t;
-
-// basic path/filename manipulation
-char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
-char *FS_StripExtension(char *fname);
-char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
-std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep='/');
-std::string FS_CanonicalizeName(std::string path, std::string root="");
-const char *FS_Filename(const char* buf);
 
 void setup_searchpaths(const std::string argv0);
 
@@ -77,6 +61,15 @@ public:
 	static FileSystem *CreateFromZip(std::string file);
 
 	virtual void listSubdirs()=0;
+
+	// basic path/filename manipulation
+	static std::string FS_CanonicalizeName(std::string path, std::string root="");
+	static char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
+	static char *FS_StripExtension(char *fname);
+	static char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
+	static std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep='/');
+	static const char *FS_Filename(const char* buf);
+	static const char *FS_GetHomedir();
 };
 
 class FileNotFound_error : public std::runtime_error {

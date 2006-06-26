@@ -48,7 +48,7 @@
 /**
  * Append extension (e.g. ".foo") to the filename if it doesn't already have an extension
  */
-char *FS_AutoExtension(char *buf, int bufsize, const char *ext)
+char *FileSystem::FS_AutoExtension(char *buf, int bufsize, const char *ext)
 {
 	char *dot;
 	char *p;
@@ -76,7 +76,7 @@ char *FS_AutoExtension(char *buf, int bufsize, const char *ext)
 /**
  * Strip the extension (if any) from the filename
  */
-char *FS_StripExtension(char *fname)
+char *FileSystem::FS_StripExtension(char *fname)
 {
 	char *p;
 	char *dot = 0;
@@ -99,7 +99,7 @@ char *FS_StripExtension(char *fname)
  * Basically concatenates the two strings, but removes the filename part
  * of basefile (if any)
  */
-char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename)
+char *FileSystem::FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename)
 {
 	const char *p;
 	int endbase;
@@ -128,7 +128,7 @@ char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *f
 }
 
 /// \todo Write homedir detection for non-getenv-systems
-const char *FS_GetHomedir()
+const char *FileSystem::FS_GetHomedir()
 {
 	std::string homedir("");
 
@@ -137,8 +137,8 @@ const char *FS_GetHomedir()
 #endif
 
 	if (homedir.empty()) {
-		printf("\nWARNING: either I can not detect your home directory "
-		       "or you don't have one! Please contact the developers.\n");
+		printf("\nWARNING: either we can not detect your home directory "
+		       "or you don't have one! Please contact the developers.\n\n");
 
 		//TODO: is it really a good idea to set homedir to "." then ??
 
@@ -158,7 +158,7 @@ const char *FS_GetHomedir()
  *
  * \todo This does not really belong into a filesystem class
  */
-std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep)
+std::vector<std::string> FileSystem::FS_Tokenize(std::string path, unsigned char pathsep)
 {
 	std::vector<std::string> components;
 	SSS_T pos;  //start of token
@@ -191,7 +191,7 @@ std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep)
  *
  * \todo Enable non-Unix paths
  */
-std::string FS_CanonicalizeName(std::string path, std::string root)
+std::string FileSystem::FS_CanonicalizeName(std::string path, std::string root)
 {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
@@ -301,7 +301,7 @@ std::string FS_CanonicalizeName(std::string path, std::string root)
  * Returns the filename of this path, everything after the last
  * / or \  (or the whole string)
  */
-const char *FS_Filename(const char* buf) {
+const char *FileSystem::FS_Filename(const char* buf) {
 	int i=strlen(buf)-1;
 	while(i>=0) {
 		if(buf[i]=='/' || buf[i]=='\\') return &buf[i+1];
@@ -361,11 +361,12 @@ void setup_searchpaths(const std::string argv0)
 	// first, try the data directory used in the last scons invocation
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory(INSTALL_DATADIR)); //see config.h
 
-	// if everything else fails, search it where the FHS forces us to put it (obviously UNIX-only)
 #ifndef __WIN32__
+	// if that fails, search it where the FHS forces us to put it (obviously UNIX-only)
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("/usr/share/games/widelands"));
-#endif
+#else
 	//TODO: is there a "default dir" for this on win32 ?
+#endif
 
 	// absolute fallback directory is the CWD
 	g_fs->AddFileSystem(FileSystem::CreateFromDirectory("."));
@@ -391,7 +392,7 @@ void setup_searchpaths(const std::string argv0)
 
 	// finally, the user's config directory
 	// TODO: implement this for UIWindows (yes, NT-based ones are actually multi-user)
-#ifndef	WIN32
+#ifndef	__WIN32__
 	std::string path;
 	char *buf=getenv("HOME"); //do not use FS_GetHomedir() to not accidentally create ./.widelands
 

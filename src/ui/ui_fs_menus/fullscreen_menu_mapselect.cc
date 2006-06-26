@@ -119,7 +119,7 @@ void Fullscreen_Menu_MapSelect::ok()
    std::string filename=static_cast<const char*>(list->get_selection());
 
    if(g_fs->IsDirectory(filename.c_str()) && !Widelands_Map_Loader::is_widelands_map( filename )) {
-      m_curdir=FS_CanonicalizeName(filename);
+	   m_curdir=FileSystem::FS_CanonicalizeName(filename);
       list->clear();
       m_mapfiles.clear();
       fill_list();
@@ -212,20 +212,20 @@ void Fullscreen_Menu_MapSelect::fill_list(void) {
    // First, we add all directorys
    // We manually add the parent directory
    if(m_curdir!=m_basedir) {
-      m_parentdir=FS_CanonicalizeName(m_curdir+"/..");
+	   m_parentdir=FileSystem::FS_CanonicalizeName(m_curdir+"/..");
       list->add_entry("<parent>", reinterpret_cast<void*>(const_cast<char*>(m_parentdir.c_str())), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
       ++ndirs;
    }
 
    for(filenameset_t::iterator pname = m_mapfiles.begin(); pname != m_mapfiles.end(); pname++) {
       const char *name = pname->c_str();
-      if(!strcmp(FS_Filename(name),".")) continue;
-      if(!strcmp(FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
-      if(!strcmp(FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
+      if(!strcmp(FileSystem::FS_Filename(name),".")) continue;
+      if(!strcmp(FileSystem::FS_Filename(name),"..")) continue; // Upsy, appeared again. ignore
+      if(!strcmp(FileSystem::FS_Filename(name),"CVS")) continue; // HACK: we skip CVS dir (which is in normal checkout present) for aesthetic reasons
       if(!g_fs->IsDirectory(name)) continue;
       if(Widelands_Map_Loader::is_widelands_map( name )) continue;
 
-      list->add_entry(FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
+      list->add_entry(FileSystem::FS_Filename(name), reinterpret_cast<void*>(const_cast<char*>(name)), false, g_gr->get_picture( PicMod_Game,  "pics/ls_dir.png" ));
       ++ndirs;
    }
 

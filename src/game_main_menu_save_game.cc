@@ -137,8 +137,8 @@ void Game_Main_Menu_Save_Game::selected(int i) {
    Game_Preload_Data_Packet gpdp;
    gl.preload_game(&gpdp); // This has worked before, no problem
 
-   char* fname = strdup(FS_Filename(name));
-   FS_StripExtension(fname);
+   char* fname = strdup(FileSystem::FS_Filename(name));
+   FileSystem::FS_StripExtension(fname);
    m_editbox->set_text(fname);
    free(fname);
    m_ok_btn->set_enabled(true);
@@ -183,8 +183,8 @@ void Game_Main_Menu_Save_Game::fill_list(void) {
          fs = g_fs->MakeSubFileSystem( name );
          gl = new Game_Loader( fs,m_parent->get_game());
          gl->preload_game(&gpdp);
-         char* fname = strdup(FS_Filename(name));
-         FS_StripExtension(fname);
+	 char* fname = strdup(FileSystem::FS_Filename(name));
+	 FileSystem::FS_StripExtension(fname);
          m_ls->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
          free(fname);
       } catch(wexception& ) {
@@ -236,7 +236,7 @@ bool Game_Main_Menu_Save_Game::save_game(std::string filename, bool binary) {
    // Check if file exists, if it does, show a warning
    if(g_fs->FileExists(complete_filename)) {
       std::string s=_("A File with the name ");
-      s+=FS_Filename(filename.c_str());
+      s+=FileSystem::FS_Filename(filename.c_str());
       s+=_(" already exists. Overwrite?");
       UIModal_Message_Box* mbox= new UIModal_Message_Box(m_parent, _("Save Game Error!!"), s, UIModal_Message_Box::YESNO);
       bool retval=mbox->run();

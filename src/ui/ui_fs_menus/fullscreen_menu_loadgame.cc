@@ -145,8 +145,8 @@ void Fullscreen_Menu_LoadGame::fill_list(void) {
          gl = new Game_Loader(fs, game);
          gl->preload_game(&gpdp);
 
-         char* fname = strdup(FS_Filename(name));
-         FS_StripExtension(fname);
+	 char* fname = strdup(FileSystem::FS_Filename(name));
+	 FileSystem::FS_StripExtension(fname);
          list->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
          free(fname);
 

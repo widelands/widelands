@@ -176,8 +176,8 @@ void Game_Main_Menu_Load_Game::fill_list(void) {
          gl = new Game_Loader(fs,m_parent->get_game());
          gl->preload_game(&gpdp);
 
-         char* fname = strdup(FS_Filename(name));
-         FS_StripExtension(fname);
+	 char* fname = strdup(FileSystem::FS_Filename(name));
+	 FileSystem::FS_StripExtension(fname);
          m_ls->add_entry(fname, reinterpret_cast<void*>(const_cast<char*>(name)));
          free(fname);
 

@@ -70,7 +70,7 @@ void Widelands_Map_Extradata_Data_Packet::Read(FileSystem* fs, Editor_Game_Base*
             Surface* picsurf = new Surface( );
             picsurf->set_sdl_surface( surf );
 
-            std::string picname = FS_Filename( (*pname).c_str() );
+	    std::string picname = FileSystem::FS_Filename( (*pname).c_str() );
             picname = "map:" + picname;
 
             uint data = g_gr->get_picture( PicMod_Game, picsurf, picname.c_str());

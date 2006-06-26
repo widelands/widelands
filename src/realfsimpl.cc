@@ -314,6 +314,14 @@ void *RealFSImpl::Load(std::string fname, int *length)
 
 	try
 	{
+		//debug info
+		//printf("------------------------------------------\n");
+		//printf("RealFSImpl::Load():\n");
+		//printf("     fname       = %s\n", fname.c_str());
+		//printf("     m_directory = %s\n", m_directory.c_str());
+		//printf("     fullname    = %s\n", fullname.c_str());
+		//printf("------------------------------------------\n");
+
 		file = fopen(fullname.c_str(), "rb");
 		if (!file)
 			throw wexception("Couldn't open %s (%s)", fname.c_str(), fullname.c_str());
