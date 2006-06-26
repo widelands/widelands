@@ -157,8 +157,12 @@ void Journal::read(Uint32 &v) throw()
 void Journal::read(SDLKey &v) throw()
 {
 	//Look at read(SDLKey v) before changing code here!
-	m_playbackstream.read((char*)&v,sizeof(Uint32));
-	v=Little32(v);
+	//Additional reminder: SDLKey is an enum which are signed int !
+
+	Uint32 vv;
+
+	m_playbackstream.read((char*)&vv,sizeof(Uint32));
+	v=Little32(vv);
 }
 
 /**
@@ -167,9 +171,13 @@ void Journal::read(SDLKey &v) throw()
  */
 void Journal::read(SDLMod &v) throw()
 {
-	//Look at read(SDLKey v) before changing code here!
-	m_playbackstream.read((char*)&v,sizeof(Uint32));
-	v=Little32(v);
+	//Look at read(SDLMod v) before changing code here!
+	//Additional reminder: SDLKey is an enum which are signed int !
+
+	Uint32 vv;
+
+	m_playbackstream.read((char*)&vv,sizeof(Uint32));
+	v=Little32(vv);
 }
 
 /**
