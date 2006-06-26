@@ -1,20 +1,20 @@
-# translation of world_greenland_ru_RU.po to russian
+# translation of world_blackland_ru_RU.po to russian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
 #
+# Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: world_greenland_ru_RU\n"
+"Project-Id-Version: world_blackland_ru_RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-05-05 21:23+0600\n"
+"PO-Revision-Date: 2006-06-26 01:02+0600\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
-"Language-Team: russian <ru@li.org>\n"
+"Language-Team: russian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: ../worlds/blackland/bobs/bunny/conf:1
 msgid "Bunny"
@@ -116,11 +116,11 @@ msgstr "Команда разработчиков Widelands"
 
 #: ../worlds/blackland/conf:3
 msgid "Blackland"
-msgstr ""
+msgstr "Черные земли"
 
 #: ../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr ""
+msgstr "Это мрачные, ужасные и опасные черные земли."
 
 #: ../worlds/blackland/resconf:4
 msgid "Coal"
@@ -145,3 +145,4 @@ msgstr "Вода"
 #: ../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Рыба"
+
