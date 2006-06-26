@@ -227,7 +227,8 @@ void Journal::start_recording(std::string filename) throw(Journalfile_error, Bad
 {
 	assert(!m_recordstream.is_open());
 
-	m_recordname=FileSystem::FS_CanonicalizeName(filename);
+	//TODO: m_recordname=FileSystem::FS_CanonicalizeName(filename);
+	m_recordname=filename;
 	if(m_recordname.empty())
 		assert(1==0); //TODO: barf in a controlled way
 
@@ -272,7 +273,8 @@ void Journal::start_playback(std::string filename) throw(Journalfile_error, BadM
 {
 	assert(!m_playbackstream.is_open());
 
-	m_playbackname=FileSystem::FS_CanonicalizeName(filename);
+	//TODO: m_playbackname=FileSystem::FS_CanonicalizeName(filename);
+	m_playbackname=filename;
 	if(m_playbackname.empty())
 		assert(1==0); //TODO: barf in a controlled way
 

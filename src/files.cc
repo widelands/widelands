@@ -45,6 +45,11 @@
   #include <unistd.h>
 #endif
 
+FileSystem::FileSystem():
+	root("/"), filesep('/')
+{
+}
+
 /**
  * Append extension (e.g. ".foo") to the filename if it doesn't already have an extension
  */
@@ -128,7 +133,7 @@ char *FileSystem::FS_RelativePath(char *buf, int buflen, const char *basefile, c
 }
 
 /// \todo Write homedir detection for non-getenv-systems
-const char *FileSystem::FS_GetHomedir()
+std::string FileSystem::GetHomedir()
 {
 	std::string homedir("");
 
@@ -146,44 +151,43 @@ const char *FileSystem::FS_GetHomedir()
 		homedir=".";
 	}
 
-	return homedir.c_str();
+	return homedir;
 }
 
 /**
  * Split a string into components seperated by a certain character
  *
  * \param path The path to parse
- * \param pathsep A character seperating the components
+ * \param filesep A character seperating the components
  * \return a list of path components
  *
  * \todo This does not really belong into a filesystem class
  */
-std::vector<std::string> FileSystem::FS_Tokenize(std::string path, unsigned char pathsep)
+std::vector<std::string> FileSystem::FS_Tokenize(std::string path)
 {
 	std::vector<std::string> components;
 	SSS_T pos;  //start of token
-	SSS_T pos2; //next pathsep character
-    
+	SSS_T pos2; //next filesep character
+
 	//extract the first path component
-	if (path.find(pathsep)==0) //is this an absolute path?
+	if (path.find(filesep)==0) //is this an absolute path?
 		pos=1;
 	else //relative path
 		pos=0;
-	pos2=path.find(pathsep, pos);
+	pos2=path.find(filesep, pos);
 	//'current' token is now between pos and pos2
 
 	//split path into it's components
 	while (pos2!=std::string::npos) {
 		components.push_back(path.substr(pos, pos2-pos));
 		pos=pos2+1;
-		pos2=path.find(pathsep, pos);
+		pos2=path.find(filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
 	components.push_back(path.substr(pos));
 
 	return components;
-    
 }
 
 /**
@@ -195,10 +199,10 @@ std::string FileSystem::FS_CanonicalizeName(std::string path, std::string root)
 {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
-#ifndef __WIN32__    
+#ifndef __WIN32__
 	bool absolute=false;
- 
-	components=FS_Tokenize(path, '/');
+
+	components=FS_Tokenize(path);
 	if (path[0]=='/')
 		absolute=true;
 
@@ -207,7 +211,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string path, std::string root)
 		components.erase(components.begin());
 
 		std::vector<std::string> homecomponents;
-		homecomponents=FS_Tokenize(FS_GetHomedir());
+		homecomponents=FS_Tokenize(GetHomedir());
 		components.insert(components.begin(),
 		                  homecomponents.begin(), homecomponents.end());
 
@@ -254,32 +258,32 @@ std::string FileSystem::FS_CanonicalizeName(std::string path, std::string root)
         canonpath="/";
         else
             canonpath="./";
-        
+
     for(i=components.begin(); i!=components.end(); i++)
         canonpath+=*i+"/";
 	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
 
 	return canonpath;
-    
+
 #else
-   
+
     /*===============================================
      Windows-filesystems work different than Unix-FS
      so here is a solution, to get it run.
-    
-     Every path will be absolute afterwards.    
-    
+
+     Every path will be absolute afterwards.
+
      Only problem:
-     Widelands will be started in the directory, the 
+     Widelands will be started in the directory, the
      the executable is in, even if you run it from
      different directory. (Real problem???)
     ===============================================*/
-    
+
 	bool absolutewin32=false;
     components=FS_Tokenize(path, '\\');
 	if (path[0]=='\\') //Is a backslash in path? If yes, the path is allready absolute.
 		absolutewin32=true;
-    
+
     std::string canonpath="";
 	if (absolutewin32==true)
 		canonpath=""; //if the path is allready absolute, nothing has to be added.
@@ -287,14 +291,14 @@ std::string FileSystem::FS_CanonicalizeName(std::string path, std::string root)
         canonpath=root.c_str();   //We simply add the root folder
         canonpath=canonpath+"\\"; //and of course an ending backslash
             }
-    
+
     for(i=components.begin(); i!=components.end(); i++)
         canonpath+=*i+"\\";
 	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
 
     return canonpath;
-    
-#endif     
+
+#endif
 }
 
 /**
@@ -394,7 +398,7 @@ void setup_searchpaths(const std::string argv0)
 	// TODO: implement this for UIWindows (yes, NT-based ones are actually multi-user)
 #ifndef	__WIN32__
 	std::string path;
-	char *buf=getenv("HOME"); //do not use FS_GetHomedir() to not accidentally create ./.widelands
+	char *buf=getenv("HOME"); //do not use GetHomedir() to not accidentally create ./.widelands
 
 	if (buf) { // who knows, maybe the user's homeless
 		path = std::string(buf) + "/.widelands";

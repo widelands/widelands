@@ -39,6 +39,7 @@ public:
 	   FS_ZIP
 	};
 
+	FileSystem();
 	virtual ~FileSystem() { }
 
 	virtual bool IsWritable() = 0;
@@ -63,13 +64,21 @@ public:
 	virtual void listSubdirs()=0;
 
 	// basic path/filename manipulation
-	static std::string FS_CanonicalizeName(std::string path, std::string root="");
+	std::string FS_CanonicalizeName(std::string path, std::string root="");
 	static char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
 	static char *FS_StripExtension(char *fname);
 	static char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
-	static std::vector<std::string> FS_Tokenize(std::string path, unsigned char pathsep='/');
+	std::vector<std::string> FS_Tokenize(std::string path);
 	static const char *FS_Filename(const char* buf);
-	static const char *FS_GetHomedir();
+	static std::string GetHomedir();
+
+	///How to address the fs' topmost component (e.g. "/", "D:\")
+	///\todo make protected
+	std::string root;
+
+	///Which character is used to separate filename components
+	///\todo make protected
+	unsigned char filesep;
 };
 
 class FileNotFound_error : public std::runtime_error {
