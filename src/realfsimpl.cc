@@ -37,6 +37,9 @@ RealFSImpl::RealFSImpl(std::string Directory)
 		: m_directory(Directory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
+
+	//TODO:
+	m_root=Directory;
 }
 
 /**
@@ -133,7 +136,7 @@ bool RealFSImpl::FileExists(std::string path)
 {
 	struct stat st;
 
-	if (stat(FS_CanonicalizeName(path, m_directory).c_str(), &st) == -1)
+	if (stat(FS_CanonicalizeName(path).c_str(), &st) == -1)
 		return false;
 
 	return true;
@@ -150,7 +153,7 @@ bool RealFSImpl::IsDirectory(std::string path)
 
 	if(!FileExists(path))
 		return false;
-	if (stat(FS_CanonicalizeName(path, m_directory).c_str(), &st) == -1)
+	if (stat(FS_CanonicalizeName(path).c_str(), &st) == -1)
 		return false;
 
 	return S_ISDIR(st.st_mode);
@@ -163,7 +166,7 @@ FileSystem* RealFSImpl::MakeSubFileSystem( std::string path ) {
 	assert( FileExists( path )); //TODO: throw an exception instead
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(path, m_directory);
+	fullname=FS_CanonicalizeName(path);
 
 	if( IsDirectory( path )) {
 		return new RealFSImpl( fullname );
@@ -182,7 +185,7 @@ FileSystem* RealFSImpl::CreateSubFileSystem( std::string path, Type fs ) {
 
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(path, m_directory);
+	fullname=FS_CanonicalizeName(path);
 
 	if( fs == FileSystem::FS_DIR ) {
 		EnsureDirectoryExists( path );
@@ -215,7 +218,7 @@ void RealFSImpl::m_unlink_file( std::string file ) {
 
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(file, m_directory);
+	fullname=FS_CanonicalizeName(file);
 
 #ifndef __WIN32__
 	unlink( fullname.c_str());
@@ -251,7 +254,7 @@ void RealFSImpl::m_unlink_directory( std::string file ) {
 	// so no error checking here
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(file, m_directory);
+	fullname=FS_CanonicalizeName(file);
 #ifndef __WIN32__
 	rmdir( fullname.c_str() );
 #else
@@ -284,7 +287,7 @@ void RealFSImpl::MakeDirectory(std::string dirname) {
 
 	std::string fullname;
 
-	fullname=FS_CanonicalizeName(dirname, m_directory);
+	fullname=FS_CanonicalizeName(dirname);
 
 	int retval=0;
 #ifdef WIN32
@@ -307,7 +310,7 @@ void *RealFSImpl::Load(std::string fname, int *length)
 	void *data=0;
 	int size;
 
-	fullname =FS_CanonicalizeName(fname, m_directory);
+	fullname =FS_CanonicalizeName(fname);
 
 	file = 0;
 	data = 0;
@@ -368,7 +371,7 @@ void RealFSImpl::Write(std::string fname, void *data, int length)
 	FILE *f;
 	int c;
 
-	fullname=FS_CanonicalizeName(fname, m_directory);
+	fullname=FS_CanonicalizeName(fname);
 
 	f = fopen(fullname.c_str(), "wb");
 	if (!f)

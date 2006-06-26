@@ -45,9 +45,16 @@
   #include <unistd.h>
 #endif
 
-FileSystem::FileSystem():
-	root("/"), filesep('/')
+FileSystem::FileSystem()
 {
+#ifdef __WIN32__
+	//TODO: this probably needs to be overwritten later
+	m_root="C:\\";
+	m_filesep='\\';
+#else
+	m_root="/";
+	m_filesep='/';
+#endif
 }
 
 /**
@@ -132,6 +139,69 @@ char *FileSystem::FS_RelativePath(char *buf, int buflen, const char *basefile, c
 	return buf;
 }
 
+/**
+ * \param path A file or directory name
+ * \return True if ref path is absolute
+ */
+const bool FileSystem::pathIsAbsolute(const std::string path)
+{
+	if (path.substr(0,m_root.size())!=m_root)
+		return false;
+
+	if (path[m_root.size()]!=m_filesep)
+		return false;
+
+	return true;
+}
+
+/**
+ * Prepend FS root and/or working directory (if neccessary) to make path absolute.
+ * \param path A path that might or might not be absolute
+ * \return An absolute path
+ */
+const std::string FileSystem::AbsolutePath(const std::string path)
+{
+	if (pathIsAbsolute(path))
+		return path;
+
+#ifdef __WIN32__
+	//For "nearly" absoute paths, just append drive letter
+	if (path[0]==m_filesep)
+		return m_root+path;
+#endif
+
+	return getWorkingDirectory()+m_filesep+path;
+}
+
+/**
+ * \return The process' current working directory
+ */
+const std::string FileSystem::getWorkingDirectory()
+{
+#ifdef __WIN32__
+	Please implement me!
+#else
+	char cwd[PATH_MAX+1];
+	getcwd(cwd, PATH_MAX);
+
+	return std::string(cwd);
+#endif
+}
+
+/**
+ * \return An existing directory where temporary files can be put
+ * \todo win32 ?
+ * \todo Make sure the directory exists
+ */
+const std::string FileSystem::getTempDirectory()
+{
+#ifdef __WIN32__
+	return ".";
+#else
+	return "/tmp";
+#endif
+}
+
 /// \todo Write homedir detection for non-getenv-systems
 std::string FileSystem::GetHomedir()
 {
@@ -170,18 +240,18 @@ std::vector<std::string> FileSystem::FS_Tokenize(std::string path)
 	SSS_T pos2; //next filesep character
 
 	//extract the first path component
-	if (path.find(filesep)==0) //is this an absolute path?
+	if (path.find(m_filesep)==0) //is this an absolute path?
 		pos=1;
 	else //relative path
 		pos=0;
-	pos2=path.find(filesep, pos);
+	pos2=path.find(m_filesep, pos);
 	//'current' token is now between pos and pos2
 
 	//split path into it's components
 	while (pos2!=std::string::npos) {
 		components.push_back(path.substr(pos, pos2-pos));
 		pos=pos2+1;
-		pos2=path.find(filesep, pos);
+		pos2=path.find(m_filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
@@ -195,16 +265,14 @@ std::vector<std::string> FileSystem::FS_Tokenize(std::string path)
  *
  * \todo Enable non-Unix paths
  */
-std::string FileSystem::FS_CanonicalizeName(std::string path, std::string root)
+std::string FileSystem::FS_CanonicalizeName(std::string path)
 {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
 #ifndef __WIN32__
-	bool absolute=false;
+	bool absolute=pathIsAbsolute(path);
 
 	components=FS_Tokenize(path);
-	if (path[0]=='/')
-		absolute=true;
 
 	//tilde expansion
 	if(*components.begin()=="~") {
@@ -220,15 +288,12 @@ std::string FileSystem::FS_CanonicalizeName(std::string path, std::string root)
 
 	//make relative paths absolute (so that "../../foo" can work)
 	if (!absolute) {
-		char cwd[PATH_MAX+1];
-		getcwd(cwd, PATH_MAX);
-
 		std::vector<std::string> cwdcomponents;
 
-		if (root.empty())
-			cwdcomponents=FS_Tokenize(cwd);
+		if (m_root.empty())
+			cwdcomponents=FS_Tokenize(getWorkingDirectory());
 		else
-			cwdcomponents=FS_Tokenize(root);
+			cwdcomponents=FS_Tokenize(m_root);
 
 		components.insert(components.begin(),
 		                  cwdcomponents.begin(), cwdcomponents.end());
@@ -253,50 +318,50 @@ std::string FileSystem::FS_CanonicalizeName(std::string path, std::string root)
 		}
 	}
 
-    std::string canonpath="";
-    if (absolute)
-        canonpath="/";
-        else
-            canonpath="./";
+	std::string canonpath="";
+	if (absolute)
+		canonpath="/";
+	else
+		canonpath="./";
 
-    for(i=components.begin(); i!=components.end(); i++)
-        canonpath+=*i+"/";
+	for(i=components.begin(); i!=components.end(); i++)
+		canonpath+=*i+"/";
 	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
 
 	return canonpath;
 
 #else
 
-    /*===============================================
-     Windows-filesystems work different than Unix-FS
-     so here is a solution, to get it run.
+	/*===============================================
+	Windows-filesystems work different than Unix-FS
+	so here is a solution, to get it run.
 
-     Every path will be absolute afterwards.
+	Every path will be absolute afterwards.
 
-     Only problem:
-     Widelands will be started in the directory, the
-     the executable is in, even if you run it from
-     different directory. (Real problem???)
-    ===============================================*/
+	Only problem:
+	Widelands will be started in the directory, the
+	the executable is in, even if you run it from
+	different directory. (Real problem???)
+	===============================================*/
 
 	bool absolutewin32=false;
-    components=FS_Tokenize(path, '\\');
+	components=FS_Tokenize(path, '\\');
 	if (path[0]=='\\') //Is a backslash in path? If yes, the path is allready absolute.
 		absolutewin32=true;
 
-    std::string canonpath="";
+	std::string canonpath="";
 	if (absolutewin32==true)
 		canonpath=""; //if the path is allready absolute, nothing has to be added.
-    else   {
-        canonpath=root.c_str();   //We simply add the root folder
-        canonpath=canonpath+"\\"; //and of course an ending backslash
-            }
+	else   {
+		canonpath=m_root.c_str();   //We simply add the root folder
+		canonpath=canonpath+"\\"; //and of course an ending backslash
+	}
 
-    for(i=components.begin(); i!=components.end(); i++)
-        canonpath+=*i+"\\";
+	for(i=components.begin(); i!=components.end(); i++)
+		canonpath+=*i+"\\";
 	canonpath=canonpath.substr(0, canonpath.size()-1); //remove trailing slash
 
-    return canonpath;
+	return canonpath;
 
 #endif
 }

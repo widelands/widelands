@@ -40,35 +40,35 @@
  * isn't in the root of the game-data directory
  */
 class LayeredFileSystem : public FileSystem {
-	public:
-		LayeredFileSystem();
-		virtual ~LayeredFileSystem();
+public:
+	LayeredFileSystem();
+	virtual ~LayeredFileSystem();
 
-		virtual void AddFileSystem(FileSystem *fs);
+	virtual void AddFileSystem(FileSystem *fs);
 
-		virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth); // Overwritten from LayeredFileSystem
-		virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results); // overwritten from FileSystem
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results, int depth); // Overwritten from LayeredFileSystem
+	virtual int FindFiles(std::string path, std::string pattern, filenameset_t *results); // overwritten from FileSystem
 
-		virtual bool IsWritable();
+	virtual bool IsWritable();
 
-		virtual bool FileExists(std::string path);
-		virtual bool IsDirectory(std::string path);
-		virtual void EnsureDirectoryExists(std::string dirname);
-		virtual void MakeDirectory(std::string dirname);
+	virtual bool FileExists(std::string path);
+	virtual bool IsDirectory(std::string path);
+	virtual void EnsureDirectoryExists(std::string dirname);
+	virtual void MakeDirectory(std::string dirname);
 
-		virtual void *Load(std::string fname, int *length);
-		virtual void Write(std::string fname, void *data, int length);
+	virtual void *Load(std::string fname, int *length);
+	virtual void Write(std::string fname, void *data, int length);
 
-		virtual FileSystem* MakeSubFileSystem( std::string dirname );
-		virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
-		virtual void Unlink(std::string file);
+	virtual FileSystem* MakeSubFileSystem( std::string dirname );
+	virtual FileSystem* CreateSubFileSystem( std::string dirname, Type );
+	virtual void Unlink(std::string file);
 
-		virtual void listSubdirs();
+	virtual void listSubdirs();
 
-	private:
-		typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;
+private:
+	typedef std::vector<FileSystem*>::reverse_iterator FileSystem_rit;
 
-		std::vector<FileSystem*> m_filesystems;
+	std::vector<FileSystem*> m_filesystems;
 };
 
 /// Access all game data files etc.. through this FileSystem

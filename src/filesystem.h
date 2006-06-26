@@ -39,7 +39,6 @@ public:
 	   FS_ZIP
 	};
 
-	FileSystem();
 	virtual ~FileSystem() { }
 
 	virtual bool IsWritable() = 0;
@@ -64,21 +63,30 @@ public:
 	virtual void listSubdirs()=0;
 
 	// basic path/filename manipulation
-	std::string FS_CanonicalizeName(std::string path, std::string root="");
+	const std::string getWorkingDirectory();
+	const std::string getTempDirectory();
+	std::string FS_CanonicalizeName(std::string path);
 	static char *FS_AutoExtension(char *buf, int bufsize, const char *ext);
 	static char *FS_StripExtension(char *fname);
 	static char *FS_RelativePath(char *buf, int buflen, const char *basefile, const char *filename);
+	const bool pathIsAbsolute(const std::string path);
+	const std::string AbsolutePath(const std::string path);
 	std::vector<std::string> FS_Tokenize(std::string path);
 	static const char *FS_Filename(const char* buf);
 	static std::string GetHomedir();
 
-	///How to address the fs' topmost component (e.g. "/", "D:\")
-	///\todo make protected
-	std::string root;
+protected:
+	///To get a filesystem, use the Create methods
+	FileSystem();
 
-	///Which character is used to separate filename components
+	/**How to address the fs' topmost component (e.g. "" on Unix, "D:" on win32)
+	 * \warning This is should \e not contain filesep!
+	 * \todo make protected */
+	std::string m_root;
+
+	///Character used to separate filename components
 	///\todo make protected
-	unsigned char filesep;
+	char m_filesep;
 };
 
 class FileNotFound_error : public std::runtime_error {

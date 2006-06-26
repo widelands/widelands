@@ -29,7 +29,7 @@ SConscript('ui/ui_fs_menus/SConscript')
 
 INDENTLIST=[
 	'filesystem.h',
-	'filesystem.cc',
+	'files.cc',
 	'fxset.h',
 	'fxset.cc',
 	'geometry.h',
