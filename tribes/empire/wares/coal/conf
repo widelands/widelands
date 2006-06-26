@@ -1,0 +1,16 @@
+[global]
+descname=_Coal
+help=The fires of the barbarians are usually fed with wood, but sometimes, wood just doesn't burn hot enough. Then, coal is used.
+menu_pic=menu.png
+queue_full_pic=queue_full.png
+queue_empty_pic=queue_empty.png
+
+# The "animation" used when the item rests on a flag
+[idle]
+pics=idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=8
+hot_spot_y=15
+

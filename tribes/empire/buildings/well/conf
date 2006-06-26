@@ -1,0 +1,40 @@
+[global]
+descname=_ Well		# nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=small
+buildable=yes
+buildicon=well_build.png
+worker=carrier
+stopable=yes
+program=work
+output=water
+
+[inputs]
+
+[work]
+0=sleep 20000
+1=animation working 20000
+2=mine water 1 100 25
+3=produce water
+
+[buildcost]
+trunk=2
+stone=1
+marble=1
+
+[idle]
+pics=well_i_??.png  # ???
+hot_spot_x=50
+hot_spot_y=50
+
+[working]
+pics=well_w_??.png  # ???
+hot_spot_x=50
+hot_spot_y=50
+
+[build]
+pics=well_i_??.png  # ???
+hot_spot_x=50
+hot_spot_y=50
+

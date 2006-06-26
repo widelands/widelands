@@ -1,0 +1,27 @@
+[global]
+descname=_ Tower
+
+type=military		# basic type (warehouse, production, military)
+size=medium
+buildable=yes
+buildicon=build.png
+max_soldiers=5
+heal_per_second=5
+conquers=9
+max_medics=2
+heal_increase_per_medic=3
+
+[buildcost]
+wood=3
+stone=4
+marblecolumn=2
+
+[idle]
+pics=i_??.png  
+hot_spot_x=66
+hot_spot_y=72
+
+[build]
+pics=i_??.png  
+hot_spot_x=66
+hot_spot_y=72

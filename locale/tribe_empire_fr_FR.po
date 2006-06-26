@@ -1,0 +1,495 @@
+# French translation of WIDELANDS.
+# Copyright (C) 2006 THE WIDELANDS'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the WIDELANDS package.
+# Emmanuel Andry <eandry@free.fr>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WIDELANDS VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-05 22:37+0100\n"
+"PO-Revision-Date: 2006-05-13 08:09+0100\n"
+"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+
+#: ../tribes/empire/conf:28
+msgid "The Widelands Development Team"
+msgstr "L'équipe de développement de Widelands"
+
+#: ../tribes/empire/conf:29
+msgid "The Empire"
+msgstr ""
+
+#: ../tribes/empire/conf:30
+msgid "This is the culture of the roman Empire."
+msgstr ""
+
+#: ../tribes/empire/buildings/arena/conf:2
+msgid "Arena"
+msgstr ""
+
+#: ../tribes/empire/buildings/bakery/conf:2
+msgid "Bakery"
+msgstr "Boulangerie"
+
+#: ../tribes/empire/buildings/barracks/conf:2
+#, fuzzy
+msgid "Barracks"
+msgstr "Barbares"
+
+#: ../tribes/empire/buildings/barrier/conf:2
+msgid "Barrier"
+msgstr "Barrière"
+
+#: ../tribes/empire/buildings/brewery/conf:2
+msgid "Brewery"
+msgstr "Brasserie"
+
+#: ../tribes/empire/buildings/burner/conf:2
+msgid "Charcoal Burner"
+msgstr "Charbonnier"
+
+#: ../tribes/empire/buildings/carpenter/conf:2
+#, fuzzy
+msgid "Carpenter's workshop"
+msgstr "Porteur"
+
+#: ../tribes/empire/buildings/castle/conf:2
+#, fuzzy
+msgid "Castle"
+msgstr "Charbon"
+
+#: ../tribes/empire/buildings/coalmine/conf:2
+msgid "Coal mine"
+msgstr "Mine de Charbon"
+
+#: ../tribes/empire/buildings/colosseum/conf:2
+msgid "Colosseum"
+msgstr ""
+
+#: ../tribes/empire/buildings/constructionsite/conf:5
+msgid "Construction Site"
+msgstr "Site de Construction"
+
+#: ../tribes/empire/buildings/deep_coalmine/conf:2
+msgid "Deep Coal Mine"
+msgstr "Mine de Charbon Profonde"
+
+#: ../tribes/empire/buildings/deep_goldmine/conf:2
+msgid "Deep Gold Mine"
+msgstr "Mine d'Or Profonde"
+
+#: ../tribes/empire/buildings/deep_marblemine/conf:2
+#, fuzzy
+msgid "Deep Marble Mine"
+msgstr "Mine de Charbon Profonde"
+
+#: ../tribes/empire/buildings/deep_oremine/conf:2
+msgid "Deep Iron Ore Mine"
+msgstr "Mine de Fer Profonde"
+
+#: ../tribes/empire/buildings/farm/conf:2
+msgid "Farm"
+msgstr "Ferme"
+
+#: ../tribes/empire/buildings/fisher/conf:2
+msgid "Fisher Hut"
+msgstr "Hutte de Pêcheur"
+
+#: ../tribes/empire/buildings/forester/conf:2
+#, fuzzy
+msgid "Forester Hut"
+msgstr "Sylviculteur"
+
+#: ../tribes/empire/buildings/fortress/conf:2
+msgid "Fortress"
+msgstr "Forteresse"
+
+#: ../tribes/empire/buildings/goldmine/conf:2
+msgid "Gold Mine"
+msgstr "Mine d'or"
+
+#: ../tribes/empire/buildings/headquarters/conf:6
+msgid "Headquarters"
+msgstr "Quartier Général"
+
+#: ../tribes/empire/buildings/hunter/conf:2
+msgid "Hunters Hut"
+msgstr "Hutte de Chasseur"
+
+#: ../tribes/empire/buildings/inn/conf:2
+msgid "Inn"
+msgstr "Auberge"
+
+#: ../tribes/empire/buildings/marblemine/conf:2
+#, fuzzy
+msgid "Marble Mine"
+msgstr "Maître Mineur"
+
+#: ../tribes/empire/buildings/mill/conf:2
+#, fuzzy
+msgid "Mill"
+msgstr "Moulin de Guerre"
+
+#: ../tribes/empire/buildings/oremine/conf:2
+msgid "Iron Ore Mine"
+msgstr "Mine de Fer"
+
+#: ../tribes/empire/buildings/outpost/conf:2
+msgid "Outpost"
+msgstr ""
+
+#: ../tribes/empire/buildings/piggery/conf:2
+msgid "Piggery"
+msgstr ""
+
+#: ../tribes/empire/buildings/quarry/conf:2
+msgid "Quarry"
+msgstr "Carrière"
+
+#: ../tribes/empire/buildings/sawmill/conf:2
+msgid "Sawmill"
+msgstr ""
+
+#: ../tribes/empire/buildings/sentry/conf:2
+msgid "Sentry"
+msgstr "Sentinelle"
+
+#: ../tribes/empire/buildings/sheepfarm/conf:2
+msgid "Sheepfarm"
+msgstr ""
+
+#: ../tribes/empire/buildings/smelting_works/conf:2
+msgid "Smelting Works"
+msgstr "Fonderie"
+
+#: ../tribes/empire/buildings/tavern/conf:2
+msgid "Tavern"
+msgstr "Taverne"
+
+#: ../tribes/empire/buildings/tower/conf:2
+msgid "Tower"
+msgstr ""
+
+#: ../tribes/empire/buildings/trainingscamp/conf:2
+msgid "Trainingscamp"
+msgstr "Camp d'entraînement"
+
+#: ../tribes/empire/buildings/vintagery/conf:2
+msgid "Vintagery"
+msgstr ""
+
+#: ../tribes/empire/buildings/warehouse/conf:2
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#: ../tribes/empire/buildings/weaving-mill/conf:2
+msgid "Weaving-Mill"
+msgstr "Atelier de Tissage"
+
+#: ../tribes/empire/buildings/well/conf:2
+msgid "Well"
+msgstr "Puit"
+
+#: ../tribes/empire/wares/advanced_lance/conf:2
+msgid "Advanced Lance"
+msgstr ""
+
+#: ../tribes/empire/wares/armour/conf:2
+msgid "Armour"
+msgstr ""
+
+#: ../tribes/empire/wares/axe/conf:2
+msgid "Axe"
+msgstr "Hache"
+
+#: ../tribes/empire/wares/bakingtray/conf:2
+msgid "Bakingtray"
+msgstr "Plaque de Four"
+
+#: ../tribes/empire/wares/basket/conf:2
+#, fuzzy
+msgid "Basket"
+msgstr "Boulanger"
+
+#: ../tribes/empire/wares/beer/conf:2
+msgid "Beer"
+msgstr "Bière"
+
+#: ../tribes/empire/wares/bread/conf:2
+msgid "Bread"
+msgstr ""
+
+#: ../tribes/empire/wares/chain_armour/conf:2
+msgid "Chain-Armour"
+msgstr ""
+
+#: ../tribes/empire/wares/cloth/conf:2
+msgid "Cloth"
+msgstr "Vêtements"
+
+#: ../tribes/empire/wares/coal/conf:2
+msgid "Coal"
+msgstr "Charbon"
+
+#: ../tribes/empire/wares/coalearth/conf:2
+msgid "Coalearth"
+msgstr "Charbon minier"
+
+#: ../tribes/empire/wares/fire_tongs/conf:2
+msgid "Fire Tongs"
+msgstr "Pinces"
+
+#: ../tribes/empire/wares/fish/conf:2
+msgid "Fish"
+msgstr "Poisson"
+
+#: ../tribes/empire/wares/fishing_rod/conf:2
+msgid "Fishing Rod"
+msgstr "Canne à pêche"
+
+#: ../tribes/empire/wares/flour/conf:2
+msgid "Flour"
+msgstr ""
+
+#: ../tribes/empire/wares/gold/conf:2
+msgid "Gold"
+msgstr "Or"
+
+#: ../tribes/empire/wares/goldstone/conf:2
+msgid "Goldstone"
+msgstr "Pépite d'or"
+
+#: ../tribes/empire/wares/grape/conf:2
+msgid "Grape"
+msgstr ""
+
+#: ../tribes/empire/wares/hammer/conf:2
+msgid "Hammer"
+msgstr "Marteau"
+
+#: ../tribes/empire/wares/heavy_lance/conf:2
+msgid "Heavy Lance"
+msgstr ""
+
+#: ../tribes/empire/wares/helm/conf:2
+msgid "Helm"
+msgstr "Gouvernail"
+
+#: ../tribes/empire/wares/hunting_spear/conf:2
+msgid "Hunting Spear"
+msgstr "Lance de Chasseur"
+
+#: ../tribes/empire/wares/iron/conf:2
+msgid "Iron"
+msgstr "Fer"
+
+#: ../tribes/empire/wares/ironore/conf:2
+msgid "Ironore"
+msgstr "Minerai de Fer"
+
+#: ../tribes/empire/wares/kitchen_tools/conf:2
+msgid "Kitchen Tools"
+msgstr "Ustensiles de Cuisine"
+
+#: ../tribes/empire/wares/lance/conf:2
+msgid "Lance"
+msgstr ""
+
+#: ../tribes/empire/wares/marble/conf:2
+#, fuzzy
+msgid "Marble"
+msgstr "Repas"
+
+#: ../tribes/empire/wares/marblecolumn/conf:2
+msgid "Marblecolumn"
+msgstr ""
+
+#: ../tribes/empire/wares/meal/conf:2
+msgid "Meal"
+msgstr "Repas"
+
+#: ../tribes/empire/wares/meat/conf:2
+msgid "Meat"
+msgstr "Viande"
+
+#: ../tribes/empire/wares/pick/conf:2
+msgid "Pick"
+msgstr "Pioche"
+
+#: ../tribes/empire/wares/plate_armour/conf:2
+msgid "Plate-Armour"
+msgstr ""
+
+#: ../tribes/empire/wares/ration/conf:2
+msgid "Ration"
+msgstr "Ration"
+
+#: ../tribes/empire/wares/saw/conf:2
+msgid "Saw"
+msgstr ""
+
+#: ../tribes/empire/wares/scythe/conf:2
+msgid "Scythe"
+msgstr "Faux"
+
+#: ../tribes/empire/wares/shovel/conf:2
+msgid "Shovel"
+msgstr "Pelle"
+
+#: ../tribes/empire/wares/stone/conf:2
+#, fuzzy
+msgid "Stones"
+msgstr "Tailleur de Pierres"
+
+#: ../tribes/empire/wares/trunk/conf:2
+msgid "Trunk"
+msgstr "Tronc"
+
+#: ../tribes/empire/wares/war_lance/conf:2
+msgid "War-Lance"
+msgstr ""
+
+#: ../tribes/empire/wares/water/conf:2
+msgid "Water"
+msgstr "Eau"
+
+#: ../tribes/empire/wares/wheat/conf:2
+msgid "Wheat"
+msgstr "Blé"
+
+#: ../tribes/empire/wares/wine/conf:2
+#, fuzzy
+msgid "Wine"
+msgstr "Mineur"
+
+#: ../tribes/empire/wares/wood/conf:2
+msgid "Wood"
+msgstr ""
+
+#: ../tribes/empire/wares/wood_lance/conf:2
+#, fuzzy
+msgid "Wood Lance"
+msgstr "Durcisseur de Bois"
+
+#: ../tribes/empire/wares/wool/conf:2
+msgid "Wool"
+msgstr ""
+
+#: ../tribes/empire/workers/armoursmith/conf:2
+#: ../tribes/empire/buildings/armoursmith/conf:2
+#, fuzzy
+msgid "Armoursmith"
+msgstr "Ouvrier Naval"
+
+#: ../tribes/empire/workers/baker/conf:2
+msgid "Baker"
+msgstr "Boulanger"
+
+#: ../tribes/empire/workers/brewer/conf:2
+msgid "Brewer"
+msgstr "Brasseur"
+
+#: ../tribes/empire/workers/builder/conf:2
+msgid "Builder"
+msgstr "Constructeur"
+
+#: ../tribes/empire/workers/burner/conf:2
+msgid "Burner"
+msgstr "Brûleur"
+
+#: ../tribes/empire/workers/carpenter/conf:2
+#, fuzzy
+msgid "Carpenter"
+msgstr "Porteur"
+
+#: ../tribes/empire/workers/carrier/conf:2
+msgid "Carrier"
+msgstr "Porteur"
+
+#: ../tribes/empire/workers/farmer/conf:2
+msgid "Farmer"
+msgstr "Fermier"
+
+#: ../tribes/empire/workers/fisher/conf:2
+msgid "Fisher"
+msgstr "Pêcheur"
+
+#: ../tribes/empire/workers/forester/conf:2
+msgid "Forester"
+msgstr "Sylviculteur"
+
+#: ../tribes/empire/workers/geologist/conf:2
+msgid "Geologist"
+msgstr "Géologue"
+
+#: ../tribes/empire/workers/herdsman/conf:2
+msgid "Herdsman"
+msgstr ""
+
+#: ../tribes/empire/workers/hunter/conf:2
+msgid "Hunter"
+msgstr "Chasseur"
+
+#: ../tribes/empire/workers/innkeeper/conf:2
+msgid "Innkeeper"
+msgstr "Aubergiste"
+
+#: ../tribes/empire/workers/lumberjack/conf:2
+#: ../tribes/empire/buildings/lumberjack/conf:2
+msgid "Lumberjack"
+msgstr "Bûcheron"
+
+#: ../tribes/empire/workers/master-miner/conf:2
+msgid "Master Miner"
+msgstr "Maître Mineur"
+
+#: ../tribes/empire/workers/miller/conf:2
+#, fuzzy
+msgid "Miller"
+msgstr "Mineur"
+
+#: ../tribes/empire/workers/miner/conf:2
+msgid "Miner"
+msgstr "Mineur"
+
+#: ../tribes/empire/workers/pig-breeder/conf:2
+msgid "Pig-breeder"
+msgstr ""
+
+#: ../tribes/empire/workers/smelter/conf:2
+msgid "Smelter"
+msgstr "Haut Fourneau"
+
+#: ../tribes/empire/workers/soldier/conf:2
+msgid "Soldier"
+msgstr "Soldat"
+
+#: ../tribes/empire/workers/stonemason/conf:2
+#: ../tribes/empire/buildings/stonemason/conf:2
+msgid "Stonemason"
+msgstr "Tailleur de Pierres"
+
+#: ../tribes/empire/workers/trainer/conf:2
+msgid "Trainer"
+msgstr "Entraîneur"
+
+#: ../tribes/empire/workers/weaponsmith/conf:2
+#: ../tribes/empire/buildings/weaponsmith/conf:2
+#, fuzzy
+msgid "Weaponsmith"
+msgstr "Ouvrier Naval"
+
+#: ../tribes/empire/workers/weaver/conf:2
+msgid "Weaver"
+msgstr "Tisserand"
+
+#: ../tribes/empire/workers/wine-grower/conf:2
+#: ../tribes/empire/buildings/wine-grower/conf:2
+msgid "Wine-Grower"
+msgstr ""

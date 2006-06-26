@@ -1,0 +1,63 @@
+[global]
+descname=_ Brewery
+
+type=production		# basic type (warehouse, production, military)
+size=medium
+buildable=yes
+buildicon=brewery_build.png
+worker=brewer    
+program=work
+output=beer
+
+[inputs]
+water=7
+wheat=7
+
+[work]
+0=sleep 30000
+1=check water 
+2=check wheat
+3=consume water
+4=consume wheat
+5=animation working 30000
+6=produce beer
+
+
+[buildcost]
+trunk=1
+wood=2
+stone=2
+
+[idle]
+pics=brewery_i_??.png  # ???
+hot_spot_x=47
+hot_spot_y=65
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=brewery_i_??.png  # ???
+hot_spot_x=47
+hot_spot_y=65
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=brewery_i_??.png  # ???
+hot_spot_x=47
+hot_spot_y=65
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+

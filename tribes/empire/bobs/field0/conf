@@ -1,0 +1,36 @@
+[global]
+type=immovable
+size=big
+program=program
+picture=field0t_00.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=0
+shadowclr_g=0
+shadowclr_b=0
+
+# This program grows the field
+[program]
+0=animation tiny 30000
+1=animation small 45000
+2=animation midd 50000
+3=transform tribe:field1
+
+[tiny]
+pics=field0t_??.png
+ftp=5
+hot_spot_x=15
+hot_spot_y=18
+
+[small]
+pics=field0s_??.png
+ftp=5
+hot_spot_x=15
+hot_spot_y=18
+
+[midd]
+pics=field0m_??.png
+ftp=5
+hot_spot_x=15
+hot_spot_y=18

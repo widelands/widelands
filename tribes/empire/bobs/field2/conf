@@ -1,0 +1,20 @@
+[global]
+type="diminishing"
+size=none
+program=disappear
+
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=0
+shadowclr_g=0
+shadowclr_b=0
+
+[disappear]
+0=animation idle 50000
+1=remove
+
+[idle]
+pics=field2_??.png
+hot_spot_x=15
+hot_spot_y=18

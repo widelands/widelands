@@ -1,0 +1,62 @@
+[global]
+descname=_ Piggery   # nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=big
+buildable=yes
+buildicon=piggery_build.png
+worker=herdsman # same as sheepfarm
+program=work
+output=meat
+
+[inputs]
+wheat=7
+water=7
+
+
+[work]
+0=sleep 25000
+1=check wheat
+2=check water
+3=consume wheat
+4=consume water
+5=animation working 30000
+6=produce meat
+
+[buildcost]
+trunk=2
+stone=2
+marblecolumn=2
+
+[idle]
+pics=piggery_i_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=piggery_b_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=piggery_w_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0

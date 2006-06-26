@@ -1,0 +1,61 @@
+[global]
+descname=_ Vintagery
+
+type=production		# basic type (warehouse, production, military)
+size=medium
+buildable=yes
+buildicon=vintagery_build.png
+worker=brewer    # same as brewery
+program=work
+output=wine
+
+[inputs]
+grape=8
+
+[work]
+0=sleep 30000
+1=check grape 2
+2=consume grape 2
+3=animation working 30000
+4=produce wine
+
+
+[buildcost]
+wood=1
+stone=1
+marble=2
+marblecolumn=1
+
+[idle]
+pics=vintagery_i_??.png  # ???
+hot_spot_x=47
+hot_spot_y=65
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=vintagery_i_??.png  # ???
+hot_spot_x=47
+hot_spot_y=65
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=vintagery_i_??.png  # ???
+hot_spot_x=47
+hot_spot_y=65
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+

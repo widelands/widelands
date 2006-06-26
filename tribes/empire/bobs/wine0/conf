@@ -1,0 +1,36 @@
+[global]
+type=immovable
+size=normal
+program=program
+picture=wine0t_00.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=0
+shadowclr_g=0
+shadowclr_b=0
+
+# This program grows the wine
+[program]
+0=animation tiny 22000
+1=animation small 28000
+2=animation midd 40000
+3=transform tribe:wine1
+
+[tiny]
+pics=wine0t_??.png
+ftp=5
+hot_spot_x=15
+hot_spot_y=18
+
+[small]
+pics=wine0s_??.png
+ftp=5
+hot_spot_x=15
+hot_spot_y=18
+
+[midd]
+pics=wine0m_??.png
+ftp=5
+hot_spot_x=15
+hot_spot_y=18

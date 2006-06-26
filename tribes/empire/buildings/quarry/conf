@@ -1,0 +1,57 @@
+[global]
+descname=_ Quarry		# nicer name to display in GUI
+type=production		# basic type (warehouse, production, military)
+size=small
+buildable=yes
+buildicon=quarry_build.png
+output=stone
+output=marble
+program=work
+program=stone
+program=marble
+worker=stonemason
+
+[work]
+0=set +nostats
+1=call stone
+2=call stone
+3=call stone
+4=call marble     # every fourth stone is marble
+
+[stone]
+0=set +catch
+1=sleep 25000
+2=worker cut_stone
+
+[marble]
+0=set +catch
+1=sleep 25000
+2=worker cut_marble
+
+[buildcost]
+wood=2
+stone=1
+
+[idle]
+pics=quarry_i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=0
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=quarry_b_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+

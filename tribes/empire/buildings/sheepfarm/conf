@@ -1,0 +1,62 @@
+[global]
+descname=_ Sheepfarm   # nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=big
+buildable=yes
+buildicon=sheepfarm_build.png
+worker=herdsman
+program=work
+output=wool
+
+[inputs]
+wheat=7
+water=7
+
+
+[work]
+0=sleep 25000
+1=check wheat
+2=check water
+3=consume wheat
+4=consume water
+5=animation working 30000
+6=produce wool
+
+[buildcost]
+trunk=2
+stone=2
+wood=2
+
+[idle]
+pics=sheepfarm_i_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=sheepfarm_b_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=sheepfarm_w_??.png  # ???
+hot_spot_x=48
+hot_spot_y=58
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0

@@ -1,0 +1,40 @@
+[global]
+descname=_ Baker
+help=Baker
+type=generic
+menu_pic=baker_menu.png
+
+# Here come the animations
+# For the walk animation, [walk] is a default for all walk animations.
+# You can, however, create [walk_nw] etc.. sections for sub-animations in a
+# given direction
+
+[buildcost] 
+bakingtray=1
+carrier=1
+
+# The normal idle animation (non-directional)
+[idle]
+pics=idle_??.png
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
+hot_spot_x=5
+hot_spot_y=13
+
+# Walking empty-handed
+[walk]
+hot_spot_x=5
+hot_spot_y=13
+clrkey_r=255
+clrkey_g=249
+clrkey_b=137
+fps=20
+
+# Walking with a ware
+[walkload]
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=5
+hot_spot_y=13

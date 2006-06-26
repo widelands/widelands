@@ -1,0 +1,16 @@
+[global]
+descname=_Water
+help=Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to grind stones.
+menu_pic=water_menu.png
+queue_full_pic=water_queue_full.png
+queue_empty_pic=water_queue_empty.png
+
+# The "animation" used when the item rests on a flag
+[idle]
+pics=water_idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=4
+hot_spot_y=8
+

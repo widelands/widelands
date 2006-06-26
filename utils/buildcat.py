@@ -14,8 +14,8 @@ from glob import glob
 import string
 import fileinput
 
-TRIBES = [ "barbarians" ]
-WORLDS = [ "greenland", "blackland", "desert" ]  
+TRIBES = [ "barbarians", "empire" ]
+WORLDS = [ "blackland", "desert", "greenland", "winterland" ]  
 CAMPAING_MISSION1 = glob("../campaigns/t01.wmf")
 CAMPAING_MISSION2 = glob("../campaigns/t02.wmf")
 

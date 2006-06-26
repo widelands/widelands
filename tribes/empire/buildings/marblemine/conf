@@ -1,0 +1,48 @@
+[global]
+descname=_ Marble Mine		# nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=mine
+buildable=yes
+buildicon=build.png
+worker=miner
+program=work
+output=marble
+stopable=yes
+enhances_to=deep_marblemine
+
+[inputs]
+ration=6
+wine=6
+
+[work]
+0=sleep 20000
+1=consume ration
+2=animation working 20000
+3=mine granit 2 50 5       
+4=produce marble
+5=consume wine
+6=animation working 20000
+7=mine granit 2 50 5       
+8=produce marble
+
+[buildcost]
+trunk=4
+wood=2
+
+[idle]
+pics=i_??.png
+hot_spot_x=53
+hot_spot_y=64
+
+[working]
+pics=w_??.png
+hot_spot_x=53
+hot_spot_y=64
+
+[build]
+pics=i_??.png
+hot_spot_x=53
+hot_spot_y=64
+
+

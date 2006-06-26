@@ -1,0 +1,119 @@
+[global]
+descname=_ Armoursmith 
+
+type=production		# basic type (warehouse, production, military)
+size=medium
+buildable=yes 
+buildicon=build.png
+worker=armoursmith 
+output=helm
+output=armour
+output=chain_armour
+output=plate_armour
+
+program=work
+program=produce_helm
+program=produce_armour
+program=produce_chain_armour
+program=produce_plate_armour
+
+[buildcost]
+trunk=2
+stone=2
+marble=2
+marblecolumn=3
+
+[inputs]
+iron=8
+gold=8
+coal=8
+cloth=8
+
+[work]
+0=set +nostats
+1=call produce_helm 
+2=call produce_armour
+3=call produce_chain_armour
+4=call produce_plate_armour
+
+[produce_helm]
+0=set +catch
+1=sleep 32000
+2=check iron
+3=check coal
+4=consume iron
+5=consume coal
+6=animation working 35000
+7=produce helm
+
+[produce_armour]
+0=set +catch
+1=sleep 32000
+2=check iron
+3=check coal
+4=check cloth
+5=consume iron
+6=consume coal
+7=consume cloth
+8=animation working 45000
+9=produce armour
+
+[produce_chain_armour]
+0=set +catch
+1=sleep 32000
+2=check iron 2
+3=check coal
+4=check cloth
+5=consume iron 2
+6=consume coal
+7=consume cloth
+8=animation working 45000
+9=produce chain_armour
+
+[produce_plate_armour]
+0=set +catch
+1=sleep 32000
+2=check iron 2
+3=check coal 2
+4=check cloth
+5=check gold
+6=consume iron 2
+7=consume coal 2
+8=consume cloth
+9=consume gold
+10=animation working 45000
+11=produce plate_armour
+
+[idle]
+pics=i_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=b_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=w_??.png  # ???
+hot_spot_x=40
+hot_spot_y=40
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+

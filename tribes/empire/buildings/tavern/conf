@@ -1,0 +1,65 @@
+[global]
+descname=_ Tavern      # nicer name to display in GUI
+
+type=production		# basic type (warehouse, production, military)
+size=medium
+buildable=yes
+buildicon=tavern_build.png
+worker=innkeeper
+program=work
+output=ration
+enhances_to=inn
+
+[inputs]
+fish=5
+bread=5
+meat=5
+
+
+[work]
+0=sleep 14000
+1=check fish,bread,meat 
+2=consume fish,bread,meat 
+3=animation working 19000
+4=produce ration 
+
+
+[buildcost]
+wood=2
+stone=2         # expensive
+marble=1
+
+[idle]
+pics=tavern_i_??.png  # ???
+hot_spot_x=36
+hot_spot_y=60
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[build]
+pics=tavern_i_??.png  # ???
+hot_spot_x=36
+hot_spot_y=60
+clrkey_r=255
+clrkey_g=255
+clrkey_b=0
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[working]
+pics=tavern_i_??.png  # ???
+hot_spot_x=36
+hot_spot_y=60
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+shadowclr_r=255
+shadowclr_g=0
+shadowclr_b=0
+
+[

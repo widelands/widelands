@@ -1,0 +1,16 @@
+[global]
+descname=_Wheat
+help=Wheat is essential for surviving, good bread and strong ales can be made of this wheat.
+menu_pic=wheat_menu.png
+queue_full_pic=wheat_queue_full.png
+queue_empty_pic=wheat_queue_empty.png
+
+# The "animation" used when the item rests on a flag
+[idle]
+pics=wheat_idle.png
+clrkey_r=0
+clrkey_g=0
+clrkey_b=255
+hot_spot_x=4
+hot_spot_y=12
+
