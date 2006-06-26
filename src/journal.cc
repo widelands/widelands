@@ -162,7 +162,7 @@ void Journal::read(SDLKey &v) throw()
 	Uint32 vv;
 
 	m_playbackstream.read((char*)&vv,sizeof(Uint32));
-	v=Little32(vv);
+	v=(SDLKey)Little32(vv);
 }
 
 /**
@@ -177,7 +177,7 @@ void Journal::read(SDLMod &v) throw()
 	Uint32 vv;
 
 	m_playbackstream.read((char*)&vv,sizeof(Uint32));
-	v=Little32(vv);
+	v=(SDLMod)Little32(vv);
 }
 
 /**
