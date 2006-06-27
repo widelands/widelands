@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Czech translation\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-02-07 12:23+0100\n"
+"PO-Revision-Date: 2006-06-27 13:54+0100\n"
 "Last-Translator: Prometheus <mmatej@yahoo.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,10 @@ msgstr ""
 msgid "Bunny"
 msgstr "Zajíc"
 
-#: ../worlds/greenland/bobs/bush1/conf:1 ../worlds/greenland/bobs/bush2/conf:1
-#: ../worlds/greenland/bobs/bush3/conf:1 ../worlds/greenland/bobs/bush4/conf:1
+#: ../worlds/greenland/bobs/bush1/conf:1
+#: ../worlds/greenland/bobs/bush2/conf:1
+#: ../worlds/greenland/bobs/bush3/conf:1
+#: ../worlds/greenland/bobs/bush4/conf:1
 #: ../worlds/greenland/bobs/bush5/conf:1
 msgid "Bush"
 msgstr "Keř"
@@ -99,10 +101,14 @@ msgstr "Menhiry"
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../worlds/greenland/bobs/tree1/conf:4 ../worlds/greenland/bobs/tree2/conf:4
-#: ../worlds/greenland/bobs/tree3/conf:4 ../worlds/greenland/bobs/tree4/conf:4
-#: ../worlds/greenland/bobs/tree5/conf:4 ../worlds/greenland/bobs/tree6/conf:4
-#: ../worlds/greenland/bobs/tree7/conf:4 ../worlds/greenland/bobs/tree8/conf:4
+#: ../worlds/greenland/bobs/tree1/conf:4
+#: ../worlds/greenland/bobs/tree2/conf:4
+#: ../worlds/greenland/bobs/tree3/conf:4
+#: ../worlds/greenland/bobs/tree4/conf:4
+#: ../worlds/greenland/bobs/tree5/conf:4
+#: ../worlds/greenland/bobs/tree6/conf:4
+#: ../worlds/greenland/bobs/tree7/conf:4
+#: ../worlds/greenland/bobs/tree8/conf:4
 msgid "Tree"
 msgstr "Stromy"
 
@@ -116,7 +122,7 @@ msgstr "Zelená země"
 
 #: ../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "Tohle jsou nádherné a kvetoucí země barbarů"
+msgstr "Toto jsou nádherné a kvetoucí země barbarů"
 
 #: ../worlds/greenland/resconf:4
 msgid "Coal"
@@ -141,3 +147,4 @@ msgstr "Voda"
 #: ../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Ryba"
+

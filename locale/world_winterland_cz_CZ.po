@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Czech translation\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-02-07 12:23+0100\n"
+"PO-Revision-Date: 2006-06-27 13:50+0100\n"
 "Last-Translator: Prometheus <mmatej@yahoo.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -113,13 +113,11 @@ msgstr "Vývojový tým Widelands"
 
 #: ../worlds/winterland/conf:3
 msgid "Winterland"
-msgstr ""
+msgstr "Země věčné zimy"
 
 #: ../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
-msgstr ""
+msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
+msgstr "Tohle jsou bílé, šíroké a mrazivé pláně zemí věčné zimi, ve kterých žijí seveřané."
 
 #: ../worlds/winterland/resconf:4
 msgid "Coal"
@@ -144,3 +142,4 @@ msgstr "Voda"
 #: ../worlds/winterland/resconf:41
 msgid "Fish"
 msgstr "Ryba"
+

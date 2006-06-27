@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Czech translation\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-05 22:37+0100\n"
-"PO-Revision-Date: 2006-02-07 19:24+0100\n"
+"PO-Revision-Date: 2006-06-27 13:36+0100\n"
 "Last-Translator: Prometheus <mmatej@yahoo.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -197,9 +197,8 @@ msgid "War Mill"
 msgstr "Válečná akademie"
 
 #: ../tribes/barbarians/buildings/weaving-mill/conf:2
-#, fuzzy
 msgid "Weaving-Mill"
-msgstr "Lisovna"
+msgstr "Tkalcovna"
 
 #: ../tribes/barbarians/buildings/well/conf:2
 msgid "Well"
@@ -260,7 +259,7 @@ msgstr "Prut"
 
 #: ../tribes/barbarians/wares/flax/conf:2
 msgid "Flax"
-msgstr ""
+msgstr "Len"
 
 #: ../tribes/barbarians/wares/gold/conf:2
 msgid "Gold"
@@ -348,9 +347,8 @@ msgid "Strong Beer"
 msgstr "Silnější pivo"
 
 #: ../tribes/barbarians/wares/thatchreed/conf:2
-#, fuzzy
 msgid "Thatch Reed"
-msgstr "Kapradí na došky"
+msgstr "Rákos na došky"
 
 #: ../tribes/barbarians/wares/trunk/conf:2
 msgid "Trunk"
@@ -478,3 +476,4 @@ msgstr "Cvičitel"
 #: ../tribes/barbarians/workers/weaver/conf:2
 msgid "Weaver"
 msgstr "Tiskař"
+
